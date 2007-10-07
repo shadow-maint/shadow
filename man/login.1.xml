@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.27 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.29 2007/02/01 20:49:25 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -35,9 +35,9 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>login</command> is used to establish a new session with the
-      system. It is normally invoked automatically by responding to the
-      <emphasis remap='I'>login:</emphasis> prompt on the user's
+      The <command>login</command> program is used to establish a new session
+      with the system. It is normally invoked automatically by responding to
+      the <emphasis remap='I'>login:</emphasis> prompt on the user's
       terminal. <command>login</command> may be special to the shell and may
       not be invoked as a sub-process. Typically, <command>login</command>
       is treated by the shell as <emphasis remap='B'>exec login</emphasis>
@@ -184,11 +184,11 @@
     </para>
 
     <para>
-      As any program, <command>login</command> appearance could be faked. 
-      If non-trusted users have a physical access to the machine, an
+      As with any program, <command>login</command>'s appearance can be faked. 
+      If non-trusted users have physical access to a machine, an
       attacker could use this to obtain the password of the next person
-      sitting in front of the machine. Under Linux, the SAK mecanism can be
-      used by users to initiate of a trusted path and prevent this kind of
+      coming to sit in front of the machine. Under Linux, the SAK mechanism can be
+      used by users to initiate a trusted path and prevent this kind of
       attack.
     </para>
 

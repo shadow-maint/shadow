@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <refentry id='newgrp.1'>
-  <!-- $Id: newgrp.1.xml,v 1.15 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id: newgrp.1.xml,v 1.16 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>newgrp</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -21,11 +21,11 @@
   <refsect1 id='description'>
   <title>DESCRIPTION</title>
     <para>
-      <command>newgrp</command> is used to change the current group ID
-      during a login session. If the optional <option>-</option> flag is
-      given, the user's environment will be reinitialized as though the user
-      had logged in, otherwise the current environment, including current
-      working directory, remains unchanged.
+      The <command>newgrp</command> command is used to change the current
+      group ID during a login session. If the optional <option>-</option>
+      flag is given, the user's environment will be reinitialized as though
+      the user had logged in, otherwise the current environment, including
+      current working directory, remains unchanged.
     </para>
 
     <para>

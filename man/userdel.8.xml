@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.25 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.26 2007/02/01 20:49:25 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>userdel</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -24,8 +24,8 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>userdel</command> command modifies the system account
-      files, deleting all entries that refer to <emphasis
-      remap='I'>login_name</emphasis>. The named user must exist.
+      files, deleting all entries that refer to the user name <emphasis
+      remap='I'>LOGIN</emphasis>. The named user must exist.
     </para>
   </refsect1>
 
@@ -41,9 +41,10 @@
 	</term>
 	<listitem>
 	  <para>
-	    This option forces the removal of the user, even if she is still
+	    This option forces the removal of the user account, even if the
+	    user is still
 	    logged in. It also forces <command>userdel</command> to remove
-	    the user's home directory or her mail spool, even if another
+	    the user's home directory and mail spool, even if another
 	    user uses the same home directory or if the mail spool is not
 	    owned by the specified user.  If
 	    <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis

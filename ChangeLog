@@ -1,3 +1,136 @@
+2007-02-01  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, man/groupadd.8.xml, man/groupmod.8.xml, man/login.1.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml:
+	groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
+	mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>).
+
+2007-01-16  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, src/usermod.c:
+	fixed handle -a option in usermod (by Benno Schulenberg <bensberg@justemail.net>).
+
+2006-12-15  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/sv/sv.po:
+	more UTF8 fixe (by Mikael Magnusson <mikma@users.sourceforge.net>).
+
+	* man/sv/sv.po:
+	UTF8 fixes (by Mikael Magnusson <mikma@users.sourceforge.net>).
+
+2006-11-19  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/Makefile.am, man/pl/chgpassw.8, man/pl/chpasswd.8, man/pl/pl.po:
+	translation chpasswd.8 and chgpassw.8 finished.
+
+2006-11-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/pl.po: resolve fuzzy entries.
+
+	* contrib/adduser.c, contrib/groupmems.shar, po/it.po, src/groupmems.c, src/usermod.c, man/chfn.1.xml, man/chsh.1.xml, man/de/de.po, man/fr/fr.po, man/groupmems.8.xml, man/passwd.1.xml, man/pl/pl.po, man/ru/ru.po, man/shadow.3.xml, man/su.1.xml, man/sv/sv.po:
+	spelling fixes 's/super user/superuser/' (by Benno Schulenberg <bensberg@justemail.net>).
+
+	* man/sv/sv.po, man/de/de.po, man/fr/fr.po, man/pl/pl.po, man/ru/ru.po:
+	run "make update-po".
+
+	* man/newusers.8.xml, man/su.1.xml:
+	fixed wrong word, a few typos, some grammar mistakes, and puts in a comma here
+	and there for clarity (by Benno Schulenberg <bensberg@justemail.net>).
+
+	* man/pl/groupmod.8, man/pl/chage.1, man/pl/chsh.1, man/pl/lastlog.8, man/pl/vipw.8:
+	regenerated.
+
+	* man/de/de.po: run "make update-po".
+
+	* man/Makefile.am:
+	added de to LINGUAS but man/de/de.po still need many work.
+
+2006-11-04  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/useradd.c: indent code.
+
+	* NEWS, src/useradd.c:
+	improved auditing support (https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=211659).
+
+2006-11-03  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
+	run "make update-po".
+
+	* NEWS, po/nl.po:
+	updated (by cobaco (aka Bart Cornelis) <cobaco@skolelinux.no>).
+
+	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po:
+	"make update-po".
+
+2006-11-02  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/su.1.xml:
+	added sg(1) to the SEE ALSO section (Debian Bug#396690).
+
+2006-10-30  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/newusers.8.xml: clarify pw_gid fileld content description.
+
+	* man/it/Makefile.am, man/sv/Makefile.am:
+	s/man_nonpam/man_nopam/ (merged 498_man_nonpam_undefined Debian patch).
+
+	* po/nl.po:
+	fixed https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=212892
+
+2006-10-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/newusers.8.xml: there is no pw_age fileld in passwd.
+
+	* man/fr/fr.po:
+	Fix an error in the passwd.1 French translation (fixed Debian bug #395537).
+
+	* man/chfn.1.xml, man/chgpasswd.8.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/fr/fr.po, man/gpasswd.1.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/id.1.xml, man/login.1.xml, man/newgrp.1.xml, man/newusers.8.xml, man/nologin.8.xml, man/passwd.1.xml, man/pl/pl.po, man/pwck.8.xml, man/pwconv.8.xml, man/su.1.xml, man/sulogin.8.xml, man/sv/sv.po, man/vipw.8.xml:
+	cleanups on begin DESCRIPTION section.
+
+	* man/pl/pl.po: typos.
+
+2006-10-13  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/pl.po: cleanups.
+
+2006-10-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/pl.po: more translations.
+
+	* NEWS:
+	UTF-8 corrections (by Benno Schulenberg <bensberg@justemail.net>).
+
+2006-10-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/groupdel.8.xml: added description for exit code 6.
+
+2006-08-16  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/de/de.po: copy & paste some msgid to msgstr.
+
+	* man/de/de.po:
+	kill some fuzzy (by Nicolas Fran蔞is <nicolas.francois@centraliens.net>).
+
+2006-08-15  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po, man/passwd.1.xml:
+	s/change password/password change/ in passwd(1) (by Simon Brandmair <sbrandmair@gmx.net>).
+
+	* man/de/de.po:
+	initial version based on partial translations only for passwd(1) by
+	Simon Brandmair <sbrandmair@gmx.net>.
+
+	* NEWS, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/useradd.c, src/userdel.c, src/usermod.c:
+	flush nscd cashes after close /etc/{group,passwd} files.
+
+2006-08-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/tl.po: updated (by Eric Pareja <xenos@upm.edu.ph>).
+
+2006-08-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/ja.po: updated (by Takeo Nakano <nakano@webmasters.gr.jp>).
+
 2006-08-03  Tomasz K這czko  <kloczek@pld.org.pl>
 
 	* man/fr/Makefile.am:

@@ -1,0 +1,99 @@
+.\"
+.\"	Copyright 1993 Sebastian Hetze und der/die in der Sektion
+.\"	AUTOR genannten Autor/Autoren
+.\"
+.\"	Dieser Text steht unter der GNU General Public License.
+.\"	Er darf kopiert und verändert, korrigiert und verbessert werden.
+.\"	Die Copyright und Lizenzbestimmung müssen allerdings erhalten
+.\"	bleiben. Die Hinweise auf das LunetIX Linuxhandbuch, aus dem
+.\"	dieser Text stammt, dürfen nicht entfernt werden.
+.\"
+.TH SU 1 "1. Juli 1993" "LunetIX Linuxhandbuch" "Dienstprogramme für Benutzer"
+.SH BEZEICHNUNG 
+su \- (superuser) ändert User und Gruppen ID
+.SH SYNTAX 
+.B su
+.RB [ \-flmp ] 
+.RB [ \-c 
+.IR Befehl ] 
+.RB [ \-s 
+.IR Shell ]
+.RB [ \-\-login ] 
+.RB [ \-\-fast ] 
+.RB [ \-\-preserve\-environment ]
+.RB [ \-\-command=
+.IR \fIBefehl\fP ]
+.RB [ \-\-shell=
+.IR \fIShell\fP ] 
+.RB [ \- ] 
+.RI [  Name  
+.RI [ Argument  ...]]
+.SH BESCHREIBUNG
+.B su
+startet eine neue Shell unter einer neuen Benutzerkennung
+.RB ( UID )
+und Gruppenkennung
+.RB ( GID ). 
+Wie bei einem neuen Login wird das Paßwort des Benutzers abgefragt. 
+Wenn kein Name angegeben wird, ist das Standardargument
+.BR root ,
+man ändert die ID also in die des ``Superusers''.  Allein der
+Superuser kann mit dem
+.B su
+Kommando die Identität jedes beliebigen Users annehmen, ohne nach
+einem Paßwort gefragt zu werden.  Damit (und nur damit) ist es möglich
+auch unter den Verwaltungsnamen wie {\it bin, news\/} oder
+.I daemon
+zu arbeiten, die normalerweise durch ein Sperrpaßwort gesichert werden.
+.PP
+Das
+.B su
+Kommando setzt die Umgebungsvariablen
+.BR HOME ", " SHELL ", " USER " und " LOGNAME
+entsprechend der Eintragungen in der Datei /etc/passwd.
+.PP
+Wenn außer dem Namen weitere Argumente in der Kommandozeile angegeben
+sind, werden sie der Shell übergeben.
+.SH OPTIONEN
+.TP
+.BI \-c " Befehl" [ Argument ]
+führt nur den
+.I Befehl
+mit dem
+.I Argument
+aus
+.TP
+.B \-f
+(fast) startet die Shell mit der Option
+.BR \-f ,
+die bei der (t)csh das Lesen der Initialisierungsdatei unterdrückt; bei der
+.B bash
+wird die Pfadnamenerweiterung unterdrückt, was nicht unbedingt das
+gewünschte Verhalten ist
+.TP
+.B \-l
+(login) die Shell wird aufgerufen wie bei einem
+.B login
+als
+.I Name
+.TP
+.BR \-p " und " \-m
+(preserve environment) erhält die alte Systemumgebung, das heißt die
+Umgebungsvariablen
+.BR HOME ", " SHELL ", " USER " und " LOGNAME
+werden nicht ver\-än"\-dert; es wird die in der Umgebungsvariablen
+.B SHELL
+bestimmte Shell gestartet, wenn nicht mit der
+.B \-s
+Option eine andere Shell angegeben ist
+.TP
+.BI \-s " Shell"
+startet die
+.I Shell
+anstelle der in der Paßwortdatei festgelegten Shell (bzw. /bin/sh)
+.SH SIEHE AUCH
+.BR newgrp (1)
+und das LunetIX Linuxhandbuch
+.SH AUTOR
+David MacKenzie
+

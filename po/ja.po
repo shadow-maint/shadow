@@ -1,14 +1,15 @@
 # Shadow utils japanese message catalog
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # Yasuyuki Furukawa <furukawa@vinelinux.org>, 2000.
+# revised by NAKANO Takeo <nakano@webmasters.gr.jp> since 2004-09-05
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 1990827\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
 "POT-Creation-Date: 2006-07-26 22:30+0200\n"
-"PO-Revision-Date: 2000-06-18 120:22+0900\n"
-"Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
+"PO-Revision-Date: 2006-08-07 23:22+0900\n"
+"Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,15 +18,15 @@ msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
-msgstr "設定情報用の空き容量が確保できませんでした.\n"
+msgstr "設定情報用の空き容量が確保できませんでした。\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "設定エラー - 不明なアイテム '%s'です  (notify administrator)\n"
+msgstr "設定エラー: 不明な項目 '%s' (管理者に連絡してください)\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "警告: 不明なグループ %sです\n"
+msgstr "警告: 不明なグループ %s\n"
 
 #, c-format
 msgid "Warning: too many groups\n"
@@ -33,134 +34,139 @@ msgstr "警告: グループが多すぎます\n"
 
 #, c-format
 msgid "Your password has expired."
-msgstr "あなたのパスワードは期限が切れました."
+msgstr "あなたのパスワードは期限が切れています。"
 
 #, c-format
 msgid "Your password is inactive."
-msgstr "あなたのパスワードはinactiveです."
+msgstr "あなたのパスワードは現在使えません。"
 
 #, c-format
 msgid "Your login has expired."
-msgstr "あなたのログインは期限が切れました."
+msgstr "あなたのアカウントは期限が切れました。"
 
 msgid "  Contact the system administrator.\n"
-msgstr "  システム管理者と相談してください.\n"
+msgstr "  システム管理者と相談してください。\n"
 
 msgid "  Choose a new password.\n"
-msgstr "  新しいパスワードを選択してください.\n"
+msgstr "  新しいパスワードを選択してください。\n"
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "あなたのパスワードは%ld日中に期限が切れます.\n"
+msgstr "あなたのパスワードはあと %ld 日で期限が切れます。\n"
 
 #, c-format
 msgid "Your password will expire tomorrow.\n"
-msgstr "あなたのパスワードは明日に期限が切れます.\n"
+msgstr "あなたのパスワードは明日で期限が切れます。\n"
 
 #, c-format
 msgid "Your password will expire today.\n"
-msgstr "あなたのパスワードは本日期限切れです.\n"
+msgstr "あなたのパスワードは本日で期限が切れます。\n"
 
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "TTY %sを変更できません"
+msgstr "端末 %s に変更できません"
 
 #, c-format
 msgid "Environment overflow\n"
-msgstr "環境オーバーフローです\n"
+msgstr "環境変数領域のオーバーフロー\n"
 
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "$%sを変更できません\n"
+msgstr "$%s を変更できません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
 msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
-msgstr[0] "最後のログインから %d %s.  最後のログインは %s, マシン %s.\n"
+msgstr[0] ""
+"最後のログインから %d 回失敗。\n"
+"最後のログインは %s (マシン %s)。\n"
+msgstr[1] ""
+"最後のログインから %d 回失敗。\n"
+"最後のログインは %s (マシン %s)。\n"
 
 #, c-format
 msgid "Too many logins.\n"
-msgstr "ログインが多すぎます.\n"
+msgstr "ログイン試行数が制限を越えました。\n"
 
 msgid "You have new mail."
-msgstr "新しいメールが来ています."
+msgstr "新しいメールが来ています。"
 
 msgid "No mail."
-msgstr "メールはありません."
+msgstr "メールはありません。"
 
 msgid "You have mail."
-msgstr "メールがあります."
+msgstr "メールがあります。"
 
-#, fuzzy
 msgid "no change"
-msgstr "%s: 変更はありません\n"
+msgstr "変更されていません"
 
 msgid "a palindrome"
-msgstr ""
+msgstr "回文になっています"
 
 msgid "case changes only"
-msgstr ""
+msgstr "大文字小文字しか変更されていません"
 
 msgid "too similar"
-msgstr ""
+msgstr "似すぎています"
 
 msgid "too simple"
-msgstr ""
+msgstr "単純すぎます"
 
 msgid "rotated"
-msgstr ""
+msgstr "循環になっています"
 
 msgid "too short"
-msgstr ""
+msgstr "短かすぎます"
 
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "不正なパスワードです: %s."
+msgstr "不正なパスワードです: %s "
 
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "passwd: pam_start: エラー %d\n"
+msgstr "passwd: pam_start() にエラー %d で失敗しました\n"
 
 #, c-format
 msgid "passwd: %s\n"
 msgstr "パスワード: %s\n"
 
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: パスワードは正しく更新されました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Incorrect password for %s.\n"
-msgstr "%sのパスワードの変更\n"
+msgstr "%s のパスワードが正しくありません。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to cd to '%s'\n"
-msgstr "\"%s\"へディレクトリ変更できません\n"
+msgstr "'%s' へディレクトリを変更できません\n"
 
 msgid "No directory, logging in with HOME=/"
-msgstr "ディレクトリがありません. HOME=/ としてログインします"
+msgstr "ディレクトリがありません。HOME=/ としてログインします"
 
 #, c-format
 msgid "Cannot execute %s"
-msgstr "%sを実行できません"
+msgstr "%s を実行できません"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root directory '%s'\n"
-msgstr "不正なルートディレクトリ  \"%s\" です\n"
+msgstr "ルートディレクトリ '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't change root directory to '%s'\n"
-msgstr "ルートディレクトリを \"%s\"へ変更できません\n"
+msgstr "ルートディレクトリを '%s' へ変更できません\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
+"utmp にエントリがありません。\"login\" を \"sh\" の最低レベルから行う必要があ"
+"ります"
 
-#, fuzzy
 msgid "Unable to determine your tty name."
-msgstr "%s: あなたのユーザ名を判定できません.\n"
+msgstr "あなたの端末 (tty) 名を決定できません。"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -171,7 +177,7 @@ msgstr "パスワード: "
 
 #, c-format
 msgid "%s's Password: "
-msgstr "%sのパスワード: "
+msgstr "%s のパスワード: "
 
 #, c-format
 msgid ""
@@ -191,21 +197,35 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
+"使い方: chage [オプション] [ログイン名]\n"
+"\n"
+"オプション\n"
+"  -d, --lastday LAST_DAY\tパスワードの最終変更日を LAST_DAY にする\n"
+"  -E, --expiredate EXPIRE_DATE\tアカウント期限切れの日を EXPIRE_DATE にする\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -I, --inactive INACTIVE\tパスワードを期限切れ後に無効化する日数を\n"
+"\t\t\t\tINACTIVEにする\n"
+"  -l, --list\t\t\tアカウントの経時情報を表示する\n"
+"  -m, --mindays MIN_DAYS\tパスワードが変更できるまでの最短日数を\n"
+"\t\t\t\tMIN_DAYS に変更する\n"
+"  -M, --maxdays MAX_DAYS\tパスワードが変更できる期間の最長日数を\n"
+"\t\t\t\tMAX_DAYS に変更する\n"
+"  -W, --warndays WARN_DAYS\t期限切れ警告の日数を WARN_DAYS にする\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
-"新しい値を入力してください, 標準設定値を利用するには リターンを押してくださ"
-"い.\n"
+"新しい値を入力してください。標準設定値を使うならリターンを押してください\n"
 
 msgid "Minimum Password Age"
-msgstr "最小パスワード変更不可能日数"
+msgstr "パスワード変更可能までの最短日数"
 
 msgid "Maximum Password Age"
-msgstr "最大パスワード変更可能日数"
+msgstr "パスワード変更可能期間の最長日数"
 
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "最後パスワード変更日付 (YYYY-MM-DD)"
+msgstr "最後にパスワード変更した日付 (YYYY-MM-DD)"
 
 msgid "Password Expiration Warning"
 msgstr "パスワード期限切れ警告日数"
@@ -216,53 +236,53 @@ msgstr "パスワード無効日数"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "アカウント期限切れ日付 (YYYY-MM-DD)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "最後パスワード変更日付 (YYYY-MM-DD)"
+msgstr "最終パスワード変更日\t\t\t\t:"
 
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
-msgstr "なし:\n"
+msgstr "なし\n"
 
 #, c-format
 msgid "password must be changed\n"
-msgstr "パスワードは変更されました.\n"
+msgstr "パスワードは変更しなければなりません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "パスワード期限:\t"
+msgstr "パスワード期限:\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "パスワード無効:\t"
+msgstr "パスワード無効化中\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "アカウント期限切れ:\t"
+msgstr "アカウント期限切れ\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "パスワードが変更できるまでの最短日数\t\t: %ld\n"
 
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "パスワードを変更しなくてよい最長日数\t\t: %ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "パスワード期限が切れる前に警告される日数\t\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: 他のフラグのため \"l\" オプションは含ませることができません\n"
+msgstr "%s: \"l\" オプションは他のフラグと同時には指定できません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: 権限がありません\n"
+msgstr "%s: 権限がありません。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "バイバスによってパスワードを認証します.\n"
+msgstr "%s: PAM 認証に失敗しました\n"
 
 #, c-format
 msgid "%s: can't open password file\n"
@@ -270,59 +290,59 @@ msgstr "%s: パスワードファイルが開けません\n"
 
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: 不明なユーザ %s です\n"
+msgstr "%s: ユーザ %s は不明です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: シャドウ・パスワード・ファイルを開けません\n"
+msgstr "%s: シャドウパスワードファイルがありません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock shadow password file\n"
-msgstr "シャドウ・パスワード・ファイルをロックできません\n"
+msgstr "%s: シャドウパスワードファイルをロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't open shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを開けません\n"
+msgstr "%s: シャドウパスワードファイルを開けません\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgstr "%s: 特権を落とせませんでした (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "%sの期限情報を変更中\n"
+msgstr "%s の期限情報を変更中\n"
 
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: 項目変更でエラーが起こりました\n"
+msgstr "%s: フィールド変更の際にエラーが起きました\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "%s: パスワード・ファイルを更新しません\n"
+msgstr "%s: パスワードファイルを更新できません\n"
 
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを更新しません\n"
+msgstr "%s: シャドウパスワードファイルを更新できません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを削除できません\n"
+msgstr "%s: シャドウパスワードファイルを書換えできません\n"
 
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s: パスワード・ファイルを上書きできません\n"
+msgstr "%s: パスワードファイルを書換えできません\n"
 
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"使用法: %s [-f フルネーム] [-r ルームNo] [-w 職場TEL]\n"
+"使用法: %s [-f フルネーム] [-r 部屋番号] [-w 職場TEL]\n"
 "\t[-h 自宅TEL] [-o その他] [ユーザ]\n"
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "使用法: %s [-f フルネーム] [-r ルームNo] [-w 職場TEL] [-h 自宅TEL]\n"
+msgstr "使用法: %s [-f フルネーム] [-r 部屋番号] [-w 職場TEL] [-h 自宅TEL]\n"
 
 msgid "Full Name"
 msgstr "フルネーム"
@@ -334,62 +354,62 @@ msgstr "\tフルネーム: %s\n"
 msgid "Room Number"
 msgstr "部屋番号"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "部屋番号"
+msgstr "\t部屋番号: %s\n"
 
 msgid "Work Phone"
 msgstr "職場電話番号"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "職場電話番号"
+msgstr "\t職場電話番号: %s\n"
 
 msgid "Home Phone"
 msgstr "自宅電話番号"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "自宅電話番号"
+msgstr "\t自宅電話番号: %s\n"
 
 msgid "Other"
 msgstr "その他"
 
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: あなたのユーザ名を判定できません.\n"
+msgstr "%s: あなたのユーザ名を判定できません。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: NISクライアント上でユーザ`%s'は変更できません.\n"
+msgstr "%s: NIS クライアントではユーザ '%s' を変更できません。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: `%s'がこのクライアント用のNISマスターです.\n"
+msgstr "%s: '%s' がこのクライアントの NIS マスターです。\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "%sのユーザ情報変更中\n"
+msgstr "%s のユーザ情報を変更中\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid name: '%s'\n"
-msgstr "%s: ユーザ名が不正です: \"%s\"\n"
+msgstr "%s: ユーザ名が不正です: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid room number: '%s'\n"
-msgstr "%s: 部屋番号が不正です: \"%s\"\n"
+msgstr "%s: 部屋番号が不正です: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid work phone: '%s'\n"
-msgstr "%s: 職場電話番号が不正です: \"%s\"\n"
+msgstr "%s: 職場電話番号が不正です: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home phone: '%s'\n"
-msgstr "%s: 自宅電話番号が不正です: \"%s\"\n"
+msgstr "%s: 自宅電話番号が不正です: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: \"%s\" は不正な文字を含んでいます\n"
+msgstr "%s: '%s' には利用できない文字が含まれています\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -397,31 +417,31 @@ msgstr "%s: 入力内容が長過ぎます\n"
 
 #, c-format
 msgid "Cannot change ID to root.\n"
-msgstr "IDをrootへ変更できません.\n"
+msgstr "ID を root へ変更できません。\n"
 
 #, c-format
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "パスワード・ファイルをロックできません; 後でもう一度試してください.\n"
+msgstr "パスワードファイルをロックできません; 後でもう一度試してください。\n"
 
 #, c-format
 msgid "Cannot open the password file.\n"
-msgstr "パスワード・ファイルを開けません.\n"
+msgstr "パスワードファイルを開けません。\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %sは /etc/passwd中に見付かりません\n"
+msgstr "%s: %s が /etc/passwd 中に見付かりません\n"
 
 #, c-format
 msgid "Error updating the password entry.\n"
-msgstr "パスワード入力の更新のエラーです.\n"
+msgstr "パスワードエントリの更新がエラーになりました。\n"
 
 #, c-format
 msgid "Cannot commit password file changes.\n"
-msgstr "パスワード・ファイルの変更を確定(commit)できません.\n"
+msgstr "パスワードファイルの変更を書き込めません。\n"
 
 #, c-format
 msgid "Cannot unlock the password file.\n"
-msgstr "パスワード・ファイルをロック解除できません.\n"
+msgstr "パスワードファイルのロックを解除できません。\n"
 
 #, c-format
 msgid ""
@@ -434,50 +454,58 @@ msgid ""
 "\t\t\tpasswords are not encrypted\n"
 "\n"
 msgstr ""
+"使い方: chgpasswd [オプション]\n"
+"\n"
+"オプション:\n"
+"  -e, --encrypted\t与えたパスワードは暗号化済みである\n"
+"  -h, --help\t\tこのヘルプを表示して終了する\n"
+"  -m, --md5\t\t与えたパスワードが暗号化されていないとき、\n"
+"\t\t\tDES の代わりに MD5 を用いる\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
+msgstr "%s: グループファイルをロックできません\n"
 
 #, c-format
 msgid "%s: can't open group file\n"
 msgstr "%s: グループファイルを開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock gshadow file\n"
-msgstr "%s: シャドウ・ファイルをロックできません\n"
+msgstr "%s: gshadow ファイルをロックできません\n"
 
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: シャドウ・ファイルを開けません\n"
+msgstr "%s: shadow ファイルを開けません\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: %d 行: 1行が長過ぎます\n"
+msgstr "%s: %d 行: 行が長過ぎます\n"
 
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: %d 行: 新規パスワードがありません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: %d 行: 不明なユーザ %s です\n"
+msgstr "%s: %d 行: グループ %s は不明です\n"
 
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: %d 行: パスワード入力を更新できません\n"
+msgstr "%s: %d 行: パスワードエントリを更新できません\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: エラーが検出されました, 変更は無効になりました\n"
+msgstr "%s: エラーが検出されました。変更は行いません\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: シャドウ・ファイルの更新にエラーです\n"
+msgstr "%s: シャドウファイル更新の際にエラーが起きました\n"
 
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: パスワード・ファイルの更新のエラーです\n"
+msgstr "%s: パスワードファイル更新の際にエラーが起きました\n"
 
 #, c-format
 msgid ""
@@ -490,6 +518,14 @@ msgid ""
 "\t\t\tpasswords are not encrypted\n"
 "\n"
 msgstr ""
+"使い方: chpasswd [オプション]\n"
+"\n"
+"オプション:\n"
+"  -e, --encrypted\tパスワードを暗号化した状態で渡す\n"
+"  -h, --help\t\tこのヘルプメッセージを表示して終了する\n"
+"  -m, --md5\t\t与えたパスワードが暗号化されていない場合、\n"
+"\t\t\tDES の代わりに MD5 を用いる\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -497,11 +533,11 @@ msgstr "%s: パスワードファイルをロックできません\n"
 
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: シャドウ・ファイルをロックできません\n"
+msgstr "%s: シャドウファイルをロックできません\n"
 
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: %d 行: 不明なユーザ %s です\n"
+msgstr "%s: %d 行: ユーザ %s は不明です\n"
 
 #, c-format
 msgid ""
@@ -512,17 +548,23 @@ msgid ""
 "  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
 "\n"
 msgstr ""
+"使い方: chsh [オプション]\n"
+"\n"
+"オプション:\n"
+"  -h, --help\t\tこのヘルプメッセージを表示して終了する\n"
+"  -s, --shell SHELL\tユーザのシェルを新たに SHELL にする\n"
+"\n"
 
 msgid "Login Shell"
-msgstr "ログイン・シェル"
+msgstr "ログインシェル"
 
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "あなたが %sのシェルを変更することはできません.\n"
+msgstr "あなたが %s のシェルを変更することはできません。\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "%sのログインシェルを変更中\n"
+msgstr "%s のログインシェルを変更中\n"
 
 #, c-format
 msgid "%s: Invalid entry: %s\n"
@@ -530,7 +572,7 @@ msgstr "%s: 不正な入力: %s\n"
 
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "%sは不正なシェルです.\n"
+msgstr "%s は不正なシェルです。\n"
 
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
@@ -556,18 +598,31 @@ msgid ""
 "\t\t\t\tfor user with LOGIN\n"
 "\n"
 msgstr ""
+"使い方: faillog [オプション]\n"
+"\n"
+"オプション:\n"
+"  -a, --all\t\t全ユーザの faillog 記録を表示する\n"
+"  -h, --help\t\tこのヘルプメッセージを表示して終了する\n"
+"  -l, --lock-time SEC\tログイン失敗後 SEC 秒アカウントをロックする\n"
+"  -m, --maximum MAX\tログインの失敗が許される回数を MAX にする\n"
+"  -r, --reset\t\tログイン失敗のカウンタをリセットする\n"
+"  -t, --time DAYS\t最近 DAYS 日分の faillog 記録を表示する\n"
+"  -u, --user LOGIN\tユーザ LOGIN の faillog 記録を表示する。\n"
+"\t\t\tあるいは -r, -m, -l が同時に指定された場合は\n"
+"\t\t\tこのユーザの失敗カウンタを操作する\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr ""
+msgstr "ログイン名  失敗     最大    最新                     場所\n"
 
 #, c-format
 msgid " [%lds left]"
-msgstr ""
+msgstr "[残り %ld 秒]"
 
 #, c-format
 msgid " [%lds lock]"
-msgstr ""
+msgstr "[ロック %ld 秒]"
 
 #, c-format
 msgid "Unknown User: %s\n"
@@ -579,7 +634,7 @@ msgstr "使用法: %s [-r|-R] グループ\n"
 
 #, c-format
 msgid "       %s [-a user] group\n"
-msgstr "       %s [-d ユーザ] グループ\n"
+msgstr "       %s [-a ユーザ] グループ\n"
 
 #, c-format
 msgid "       %s [-d user] group\n"
@@ -595,7 +650,7 @@ msgstr "       %s [-M ユーザ,...] グループ\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: シャドウ・グループ・パスワードが -Aに対して必要です\n"
+msgstr "%s: -A にはシャドウグループパスワードが必要です\n"
 
 #, c-format
 msgid "Who are you?\n"
@@ -607,7 +662,7 @@ msgstr "不明なグループです: %s\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "ユーザ %s をグループ %s から追加\n"
+msgstr "ユーザ %s をグループ %s に追加\n"
 
 #, c-format
 msgid "Removing user %s from group %s\n"
@@ -615,15 +670,15 @@ msgstr "ユーザ %s をグループ %s から削除\n"
 
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: 不明な番号 %sです\n"
+msgstr "%s: メンバー %s は不明です\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: TTYではありません\n"
+msgstr "%s: 端末ではありません\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "%sグループのパスワードを変更\n"
+msgstr "グループ %s のパスワードを変更中\n"
 
 msgid "New Password: "
 msgstr "新規パスワード: "
@@ -656,19 +711,19 @@ msgstr "%s: エントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s: シャドウ・エントリを更新できません\n"
+msgstr "%s: シャドウエントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: ファイルを上書きできません\n"
+msgstr "%s: ファイルを書換えできません\n"
 
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: シャドウ・ファイルを上書きできません\n"
+msgstr "%s: シャドウファイルを書換えできません\n"
 
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s: ファイルをロックできません\n"
+msgstr "%s: ファイルのロックを解除できません\n"
 
 #, c-format
 msgid ""
@@ -684,130 +739,142 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
+"使い方: groupadd [オプション] グループ名\n"
+"\n"
+"オプション:\n"
+"  -f, --force\t\t\t指定グループが存在していた場合、終了ステータス\n"
+"\t\t\t\tsuccess で強制的に終了する\n"
+"  -g, --gid GID\t\t\t新グループの GID\n"
+"  -h, --help\t\t\tこのヘルプメッセージを表示して終了する\n"
+"  -K, --key KEY=VALUE\t\t/etc/login.defs のデフォルトを変更する\n"
+"  -o, --non-unique\t\t一意でないグループ (GID の重なるグループ) の\n"
+"\t\t\t\t作成を許可する\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: 新規グループエントリへ追加のエラーです\n"
+msgstr "%s: 新規グループエントリ追加の際にエラーが起きました\n"
 
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: 名前 %s は重複しています\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID %u is not unique\n"
-msgstr "%s: ユーザID %u が重複しています\n"
+msgstr "%s: グループ ID %u が重複しています\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique GID\n"
-msgstr "%s: 一意のグループIDを取得できません\n"
+msgstr "%s: 他と重ならないグループ ID を取得できません\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
-msgstr "%s: %s は名前が重複しています\n"
+msgstr "%s: %s はグループ名として正しくありません\n"
 
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "%s: グループファイルを書換えできません\n"
 
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
+msgstr "%s: シャドウグループファイルを書換えできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
+msgstr "%s: グループファイルをロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to open group file\n"
 msgstr "%s: グループファイルを開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
+msgstr "%s: シャドウグループファイルをロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
+msgstr "%s: シャドウグループファイルを開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: コメント `%s' は不正です\n"
+msgstr "%s: 数値引数 '%s' が正しくありません\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr ""
+msgstr "%s: -K には KEY=VALUE が必要です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: ユーザ %s は存在します\n"
+msgstr "%s: グループ %s は既に存在します\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupdel group\n"
 msgstr "使用法: groupdel グループ\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s: グループ・エントリの更新のエラーです\n"
+msgstr "%s: グループエントリ削除の際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s: シャドウ・パスワード・エントリ削除のエラーです\n"
+msgstr "%s: シャドウグループエントリ削除の際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: DBMグループ・エントリを更新できません\n"
+msgstr "%s: ユーザのプライマリグループは削除できません。\n"
 
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: %sグループ は存在しません\n"
+msgstr "%s: グループ %s は存在しません\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s: %sグループは NIS のグループです\n"
+msgstr "%s: グループ %s は NIS のグループです\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s は NIS マスターです\n"
+msgstr "%s: %s が NIS マスターです\n"
 
 #, c-format
 msgid "Member already exists\n"
-msgstr ""
+msgstr "メンバーは既に存在します\n"
 
 #, c-format
 msgid "Member to remove could not be found\n"
-msgstr ""
+msgstr "削除すべきメンバーが見付かりません\n"
 
 #, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
+"使用法: groupmems -a ユーザ名 | -d ユーザ名 | -D | -l [-g グループ名]\n"
 
 #, c-format
 msgid "Only root can add members to different groups\n"
-msgstr ""
+msgstr "メンバーを別のグループに追加できるのは root だけです\n"
 
 #, c-format
 msgid "Group access is required\n"
-msgstr ""
+msgstr "グループアクセス権が必要です\n"
 
 #, c-format
 msgid "Not primary owner of current group\n"
-msgstr ""
+msgstr "現グループのプライマリな所有者ではありません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "PAM authentication failed for\n"
-msgstr "バイバスによってパスワードを認証します.\n"
+msgstr "PAM 認証に失敗しました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to lock group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
+msgstr "グループファイルをロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open group file\n"
-msgstr "%s: グループファイルを開けません\n"
+msgstr "グループファイルを開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot close group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "グループファイルをクローズできません\n"
 
 #, c-format
 msgid ""
@@ -820,34 +887,43 @@ msgid ""
 "  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
 "\n"
 msgstr ""
+"使い方: groupmod [オプション] グループ名\n"
+"\n"
+"オプション:\n"
+"  -g, --gid GID\t\t\tグループの新 GID を設定する\n"
+"  -h, --help\t\t\tこのヘルプメッセージを表示して終了する\n"
+"  -n, --new-name NEW_GROUP\tグループの新グループ名を設定する\n"
+"  -o, --non-unique\t\t一意でないグループ (GID の重なるグループ) の\n"
+"\t\t\t\t使用を許可する\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: /etc/groupに %s が見付かりません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u はグループIDが重複しています\n"
+msgstr "%s: グループ ID %u は重複しています\n"
 
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s は名前が重複しています\n"
+msgstr "%s: 名前 %s は重複しています\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "使用法: %s [-r] [-s] [グループ [グループシャドウ]]\n"
+msgstr "使用法: %s [-r] [-s] [group [gshadow]]\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "使用法: %s [-r] [-s] [グループ]\n"
+msgstr "使用法: %s [-r] [-s] [group]\n"
 
 #, c-format
 msgid "No\n"
-msgstr ""
+msgstr "No\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
-msgstr ""
+msgstr "%s: -s と -r は同時に指定できません\n"
 
 #, c-format
 msgid "%s: cannot lock file %s\n"
@@ -859,39 +935,39 @@ msgstr "%s: ファイル %s を開けません\n"
 
 #, c-format
 msgid "invalid group file entry\n"
-msgstr "不正なグループ・ファイルのエントリです\n"
+msgstr "不正なグループファイルエントリです\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete line '%s'? "
-msgstr "`%s'行を削除しますか? "
+msgstr "行 '%s' を削除しますか? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "グループエントリが重複しています\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid group name '%s'\n"
-msgstr "不正なグループ名 `%s' です\n"
+msgstr "'%s' はグループ名として正しくありません\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "グループ %s: ユーザ %s はいません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete member '%s'? "
-msgstr "メンバー `%s' を削除しますか? "
+msgstr "メンバー '%s' を削除しますか? "
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "グループファイルエントリと一致しません\n"
+msgstr "%s には一致するグループファイルエントリがありません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add group '%s' in %s ?"
-msgstr "グループ %s: ユーザ %s はいません\n"
+msgstr "グループ %s を %s に追加しますか?"
 
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: %s のシャドウ・エントリを更新できません\n"
+msgstr "%s: %s のシャドウエントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't update entry for group %s\n"
@@ -899,27 +975,27 @@ msgstr "%s: グループ %s のエントリを更新できません\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
-msgstr "シャドウ・グループ・ファイル・エントリが不正です\n"
+msgstr "シャドウグループファイルのエントリが正しくありません\n"
 
 #, c-format
 msgid "duplicate shadow group entry\n"
-msgstr "グループエントリが重複しています\n"
+msgstr "シャドウグループエントリが重複しています\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "グループ %s: ユーザ %s はいません\n"
+msgstr "シャドウグループ %s: 管理ユーザ %s は存在しません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete administrative member '%s'? "
-msgstr "メンバー `%s' を削除しますか? "
+msgstr "管理ユーザ '%s' を削除しますか?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "グループ %s: ユーザ %s はいません\n"
+msgstr "シャドウグループ %s: ユーザ %s は存在しません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s: ファイル %s を開けません\n"
+msgstr "%s: ファイル %s を更新できません\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -931,27 +1007,27 @@ msgstr "%s: 変更はありません\n"
 
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
+msgstr "%s: シャドウグループファイルをロックできません\n"
 
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
+msgstr "%s: シャドウグループファイルを開けません\n"
 
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: シャドウ・グループ %s を削除できません\n"
+msgstr "%s: シャドウグループ %s を削除できません\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルを更新できません\n"
+msgstr "%s: シャドウグループファイルを更新できません\n"
 
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: グループ・ファイルを更新できません\n"
+msgstr "%s: グループファイルを更新できません\n"
 
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: グループ・ファイルを削除できません\n"
+msgstr "%s: シャドウグループファイルを削除できません\n"
 
 #, c-format
 msgid "Usage: id [-a]\n"
@@ -976,6 +1052,14 @@ msgid ""
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "\n"
 msgstr ""
+"使い方: lastlog [オプション]\n"
+"\n"
+"オプション:\n"
+"  -b, --before DAYS\tDAYS 日より以前の lastlog 記録だけを表示する\n"
+"  -h, --help\t\tこのヘルプメッセージを表示して終了する\n"
+"  -t, --time DAYS\tDAYS 日前以降の lastlog 記録だけを表示する\n"
+"  -u, --user LOGIN\t指定ユーザ LOGIN の lastlog 記録を表示する\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -986,15 +1070,15 @@ msgid "Username                Port     Latest\n"
 msgstr "ユーザ名                ポート   最近のログイン\n"
 
 msgid "**Never logged in**"
-msgstr "**一度もログインはありません**"
+msgstr "**一度もログインしていません**"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
-msgstr ""
+msgstr "lastlog: この引き数は不正です: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
-msgstr "使用法:  %s [-p] [ユーザ名]\n"
+msgstr "使用法: %s [-p] [ユーザ名]\n"
 
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
@@ -1014,51 +1098,51 @@ msgid ""
 "System closed for routine maintenance\n"
 msgstr ""
 "\n"
-"システムはメンテナンスルーチンに対して閉じました\n"
+"システムは定期メンテナンスのため利用できません\n"
 
 #, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
 msgstr ""
+"\n"
+"[切断を迂回 -- root ログインが可能です。]\n"
 
 #, c-format
 msgid ""
 "\n"
 "Login timed out after %d seconds.\n"
 msgstr ""
+"\n"
+"あと %d 秒でログインはタイムアウトします。\n"
 
 #, c-format
 msgid " on '%.100s' from '%.200s'"
-msgstr ""
+msgstr " on `%s.100s' from `%.200s'"
 
 #, c-format
 msgid " on '%.100s'"
-msgstr ""
+msgstr " on `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr ""
+msgstr "login: PAM が失敗しました、終了します: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s login: "
-msgstr ""
-"\n"
-"%s ログイン: "
+msgstr "%s login: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "login: "
-msgstr ""
-"\n"
-"%s ログイン: "
+msgstr "login: "
 
 #, c-format
 msgid "Maximum number of tries exceeded (%d)\n"
-msgstr ""
+msgstr "最大試行回数 (%d) を越えました\n"
 
 #, c-format
 msgid "login: abort requested by PAM\n"
-msgstr ""
+msgstr "login: PAM から中断要請がありました\n"
 
 #, c-format
 msgid ""
@@ -1066,17 +1150,18 @@ msgid ""
 "%s login: "
 msgstr ""
 "\n"
-"%s ログイン: "
+"%s login: "
 
 msgid "Login incorrect"
 msgstr "ログインが違います"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr ""
+msgstr "%s: fork に失敗しました: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr ""
+"警告: 一時的にロックアウトします。しばらく経ってからやり直してください。\n"
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1088,12 +1173,14 @@ msgstr "最近のログイン: %.19s on %s"
 
 #, c-format
 msgid " from %.*s"
-msgstr " 場所 %.*s"
+msgstr " from %.*s"
 
 msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
+"ログイン時間切れ\n"
+"\n"
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1103,16 +1190,16 @@ msgstr "使用法: newgrp [-] [グループ]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "使用法: sg グループ [[-c] コマンド]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unknown UID: %u\n"
-msgstr "不明なグループIDです: %lu\n"
+msgstr "不明なユーザ ID: %u\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unknown GID: %lu\n"
-msgstr "不明なグループIDです: %lu\n"
+msgstr "不明なグループ ID: %lu\n"
 
 msgid "Sorry.\n"
-msgstr "申し訳ございません.\n"
+msgstr "ごめんなさい。\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1124,47 +1211,47 @@ msgstr "使用法: %s [入力]\n"
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: /etc/passwd をロックできません.\n"
+msgstr "%s: /etc/passwd をロックできません。\n"
 
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: ファイルをロックできません, 後でもう一度試してください\n"
+msgstr "%s: ファイルをロックできません。後でもう一度試してください\n"
 
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: ファイルを開きます\n"
+msgstr "%s: ファイルを開けません\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
-msgstr "%s: %d行: 不正行です\n"
+msgstr "%s: %d 行: 不正な行です\n"
 
 #, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s: %d行: グループIDが作成できません\n"
+msgstr "%s: %d 行: グループ ID を作成できません\n"
 
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s: %d行: ユーザIDが作成できません\n"
+msgstr "%s: %d 行: ユーザ ID を作成できません\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: %d行: ユーザ %s が見付かりません\n"
+msgstr "%s: %d 行: ユーザ %s が見付かりません\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: %d行: パスワードを更新できません\n"
+msgstr "%s: %d 行: パスワードを更新できません\n"
 
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: %d行: mkdir に失敗しました\n"
+msgstr "%s: %d 行: mkdir に失敗しました\n"
 
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: %d行: chown に失敗しました\n"
+msgstr "%s: %d 行: chown に失敗しました\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: %d行: エントリを更新できません\n"
+msgstr "%s: %d 行: エントリを更新できません\n"
 
 #, c-format
 msgid "%s: error updating files\n"
@@ -1194,6 +1281,27 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
+"使い方: passwd [オプション] [ログイン名]\n"
+"\n"
+"オプション:\n"
+"  -a, --all\t\t\t全アカウントのパスワード状態をレポートする\n"
+"  -d, --delete\t\t\t指定アカウントのパスワードを削除する\n"
+"  -e, --expire\t\t\t指定アカウントのパスワードを期限切れにする\n"
+"  -h, --help\t\t\tこのヘルプメッセージを表示して終了する\n"
+"  -k, --keep-tokens\t\t期限切れの場合にのみパスワードを変更する\n"
+"  -i, --inactive INACTIVE\t期限切れ後のパスワード無効化日数を\n"
+"\t\t\t\tINACTIVE にする\n"
+"  -l, --lock\t\t\t指定アカウントをロックする\n"
+"  -n, --mindays MIN_DAYS\tパスワードが変更できるまでの最短日数を\n"
+"\t\t\t\tMIN_DAYS に変更する\n"
+"  -q, --quiet\t\t\t表示抑制モード\n"
+"  -r, --repository REPOSITORY\tリポジトリ REPOSITORY のパスワードを変更する\n"
+"  -S, --status\t\t\t指定アカウントのパスワードの状態を報告する\n"
+"  -u, --unlock\t\t\t指定アカウントのロックを解除する\n"
+"  -w, --warndays WARN_DAYS\t期限切れ警告の日数を WARN_DAYS にする\n"
+"  -x, --maxdays MAX_DAYS\tパスワードが変更できる期間の最長日数を\n"
+"\t\t\t\tMAX_DAYS に変更する\n"
+"\n"
 
 msgid "Old password: "
 msgstr "古いパスワード: "
@@ -1203,13 +1311,15 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
+"新しいパスワードを入れてください (最低 %d 文字、最高 %d 文字)\n"
+"大文字・小文字・数字を混ぜて使うようにしてください。\n"
 
 msgid "New password: "
 msgstr "新しいパスワード: "
 
 #, c-format
 msgid "Try again.\n"
-msgstr "もう一度お願いします.\n"
+msgstr "もう一度お願いします。\n"
 
 #, c-format
 msgid ""
@@ -1217,56 +1327,55 @@ msgid ""
 "Warning: weak password (enter it again to use it anyway).\n"
 msgstr ""
 "\n"
-"警告: 脆いパスワードです (どうしても使う場合, もう一度これを入力してくださ"
-"い).\n"
+"警告: 弱いパスワードです (どうしてもこれを使いたければもう一度入力)。\n"
 
 #, c-format
 msgid "They don't match; try again.\n"
-msgstr "一致しません: もう一度お願いします.\n"
+msgstr "一致しません。もう一度お願いします。\n"
 
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "%s のパスワードは変更できません.\n"
+msgstr "%s のパスワードは変更できません。\n"
 
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "申し訳ありませんが, %s のパスワードはまだ変更することはできません.\n"
+msgstr "申し訳ありませんが、%s のパスワードはまだ変更できません。\n"
 
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: メモリがたりません\n"
+msgstr "%s: メモリが足りません\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: レポジトリ %s はサポートしていません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "あなたは %s のパスワードを変更することはできません.\n"
+msgstr "%s: あなたは %s のパスワード情報を閲覧ないし変更できません。\n"
 
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "%sのパスワードの変更\n"
+msgstr "%s のパスワードを変更しています\n"
 
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "%sのパスワードは変更されません.\n"
+msgstr "%s のパスワードは変更されません。\n"
 
 #, c-format
 msgid "Password changed.\n"
-msgstr "パスワードは変更されました.\n"
+msgstr "パスワードは変更されました。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password set to expire.\n"
-msgstr "あなたのパスワードは期限が切れました."
+msgstr "パスワードは期限付きになりました。\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "使用: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
+msgstr "使用法: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
 
 #, c-format
 msgid "invalid password file entry\n"
-msgstr "パスワード・ファイル・エントリが不正です\n"
+msgstr "パスワードファイルのエントリが不正です\n"
 
 #, c-format
 msgid "duplicate password entry\n"
@@ -1274,7 +1383,7 @@ msgstr "パスワードエントリが重複しています\n"
 
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "不正なユーザ名'%s' です\n"
+msgstr "ユーザ名 '%s' は不正です\n"
 
 #, c-format
 msgid "user %s: no group %u\n"
@@ -1288,29 +1397,29 @@ msgstr "ユーザ %s: ディレクトリ %s が存在しません\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "ユーザ %s: プログラム %s は存在しません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "パスワード・ファイル・エントリと一致しません\n"
+msgstr "一致するパスワードファイルエントリが %s にありません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add user '%s' in %s? "
-msgstr "グループ %s: ユーザ %s はいません\n"
+msgstr "ユーザ '%s' を '%s' に追加しますか?"
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: %sのパスワードエントリを更新できません\n"
+msgstr "%s: %s のパスワードエントリを更新できません\n"
 
 #, c-format
 msgid "invalid shadow password file entry\n"
-msgstr "不正なシャドウ・パスワード・エントリです\n"
+msgstr "不正なシャドウパスワードのエントリです\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
-msgstr "シャドウ・パスワード・エントリが重複しています\n"
+msgstr "シャドウパスワードエントリが重複しています\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "ユーザ %s: 最後のパスワード変更が未来にあります\n"
+msgstr "ユーザ %s: 最後のパスワード変更が未来になっています\n"
 
 #, c-format
 msgid "%s: can't lock passwd file\n"
@@ -1322,7 +1431,7 @@ msgstr "%s: パスワードファイルを開けません\n"
 
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: %sのシャドウ・エントリを削除できません\n"
+msgstr "%s: %s のシャドウエントリを削除できません\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1338,26 +1447,26 @@ msgstr "%s: ユーザ %s のエントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを削除できません\n"
+msgstr "%s: シャドウパスワードファイルを削除できません\n"
 
 #, c-format
 msgid "Access to su to that account DENIED.\n"
-msgstr "suでこのアカウントへアクセスすることを拒否されました.\n"
+msgstr "このアカウントへの su アクセスは禁止されています。\n"
 
 #, c-format
 msgid "Password authentication bypassed.\n"
-msgstr "バイバスによってパスワードを認証します.\n"
+msgstr "パスワード認証を迂回します。\n"
 
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "認証として, あなた所有のパスワードを入力してください.\n"
+msgstr "「あなた自身のパスワード」を入力して認証してください。\n"
 
 msgid "Sorry."
-msgstr "申し訳ございません."
+msgstr "ごめんなさい。"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s\n"
-msgstr "パスワード: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
@@ -1373,10 +1482,20 @@ msgid ""
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 "\n"
 msgstr ""
+"使用法: su [オプション] [ユーザ名]\n"
+"\n"
+"オプション:\n"
+"  -c, --command COMMAND\t\t起動したシェルにコマンド COMMAND を渡す\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -, -l, --login\t\tそのシェルをログインシェルにする\n"
+"  -m, -p,\n"
+"  --preserve-environment\t環境変数をリセットせず、シェルも同じものを使う\n"
+"  -s, --shell SHELL\t\tpasswd にあるデフォルト値でなくシェル SHELL を使う\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: 端末上から実行してください\n"
+msgstr "%s: 端末から実行してください\n"
 
 #, c-format
 msgid "%s: pam_start: error %d\n"
@@ -1384,14 +1503,14 @@ msgstr "%s: pam_start: エラー %d\n"
 
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "不明な IDです: %s\n"
+msgstr "不明な ID です: %s\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "あなたは su %s に認証できませんでした\n"
+msgstr "あなたには su %s する権限がありません\n"
 
 msgid "(Enter your own password)"
-msgstr "(あなた自身のパスワードを入力してください)"
+msgstr "(あなたのパスワードを入力してください)"
 
 #, c-format
 msgid ""
@@ -1399,7 +1518,7 @@ msgid ""
 "(Ignored)\n"
 msgstr ""
 "%s: %s\n"
-"(無効)\n"
+"(無視)\n"
 
 #, c-format
 msgid "No shell\n"
@@ -1411,44 +1530,47 @@ msgstr "パスワードファイルがありません\n"
 
 #, c-format
 msgid "No password entry for 'root'\n"
-msgstr "'root'のパスワードエントリがありません\n"
+msgstr "'root' のパスワードエントリがありません\n"
 
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"
 msgstr ""
+"\n"
+"通常の起動を継続するには Ctrl-D を押してください。\n"
+"(システムメンテナンスをするには root のパスワードを入力):"
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "システムメンテナンスモードへ入ります\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unknown GID %s\n"
-msgstr "%s: 不明なグループID %s\n"
+msgstr "%s: グループ ID %s は不明です\n"
 
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: 不明なグループ %s\n"
+msgstr "%s: グループ %s は不明です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "%s: 新しいデフォルトファイルを作れません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "%s: 新しいデフォルトファイルを開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: rename: %s"
-msgstr "%s: %sを作成できません"
+msgstr "%s: ファイル名変更: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: %sグループは NIS のグループです\n"
+msgstr "%s: グループ '%s' は NIS グループです。\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr ""
+msgstr "%s: 指定したグループ数が多すぎます (最大 %d 個)。\n"
 
 #, c-format
 msgid ""
@@ -1480,113 +1602,142 @@ msgid ""
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 "\n"
 msgstr ""
+"使い方: useradd [オプション] ログイン名\n"
+"\n"
+"オプション:\n"
+"  -b, --base-dir BASE_DIR\t新ユーザアカウントのホームディレクトリの\n"
+"\t\t\t\tベースディレクトリを指定する\n"
+"  -c, --comment COMMENT\t\t新ユーザアカウントの GECOS フィールド\n"
+"  -d, --home-dir HOME_DIR\t新ユーザアカウントのホームディレクトリ\n"
+"  -D, --defaults\t\t変更された useradd のデフォルト設定を\n"
+"\t\t\t\t保存または表示する\n"
+"  -e, --expiredate EXPIRE_DATE\tアカウント期限切れの日を EXPIRE_DATE にする\n"
+"  -f, --inactive INACTIVE\tパスワードを期限切れ後に無効化する日数を\n"
+"\t\t\t\tINACTIVEにする\n"
+"  -g, --gid GROUP\t\t新ユーザアカウントのグループを GROUP にする\n"
+"  -G, --groups GROUPS\t\t新ユーザアカウントの補助グループの\n"
+"\t\t\t\tリストを与える\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -k, --skel SKEL_DIR\t\tskel ディレクトリを指定する\n"
+"  -K, --key KEY=VALUE\t\t/etc/login.defs のデフォルトを変更する\n"
+"  -m, --create-home\t\t新ユーザアカウントのホームディレクトリを\n"
+"\t\t\t\t作成する\n"
+"  -o, --non-unique\t\t一意でないユーザ (UID の重なるユーザ) の\n"
+"\t\t\t\t作成を許可する\n"
+"  -p, --password PASSWORD\t新ユーザアカウントの暗号化済みパスワードを\n"
+"\t\t\t\t与える\n"
+"  -s, --shell SHELL\t\t新ユーザアカウントのログインシェル\n"
+"  -u, --uid UID\t\t\t新ユーザアカウントのユーザ ID を指定する\n"
+"\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: ユーザID %u が重複しています\n"
+msgstr "%s: ユーザ ID %u は重複しています\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique UID\n"
-msgstr "%s: 一意のグループIDを取得できません\n"
+msgstr "%s: 他と重ならないユーザ ID を取得できません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid base directory '%s'\n"
-msgstr "%s: ベースディレクトリ `%s' は不正です\n"
+msgstr "%s: ベースディレクトリ '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s: コメント `%s' は不正です\n"
+msgstr "%s: コメント '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr "%s: ホームディレクトリ `%s' は不正です\n"
+msgstr "%s: ホームディレクトリ '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid date '%s'\n"
-msgstr "%s: 日付 `%s' は不正です\n"
+msgstr "%s: 日付 '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: シャドウ・パスワードには -e および -e が必要です\n"
+msgstr "%s: シャドウパスワードには -e が必要です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: シャドウ・パスワードには -e および -e が必要です\n"
+msgstr "%s: シャドウパスワードには -f が必要です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s: シェル `%s' は不正です\n"
+msgstr "%s: フィールド '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s: シェル `%s' は不正です\n"
+msgstr "%s: シェル '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "不正なユーザ名'%s' です\n"
+msgstr "%s: ユーザ名 '%s' は不正です\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: パスワード・ファイルを上書きできません\n"
+msgstr "%s: パスワードファイルの書換えができません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを削除できません\n"
+msgstr "%s: シャドウパスワードファイルの書換えができません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: パスワードファイルをロックできません\n"
+msgstr "%s: パスワードファイルがロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: パスワードファイルが開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "シャドウ・パスワード・ファイルをロックできません\n"
+msgstr "%s: シャドウパスワードファイルがロックできません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: シャドウ・パスワード・ファイルを開けません\n"
+msgstr "%s: シャドウパスワードファイルが開けません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
+msgstr "%s: グループファイルのロックでエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "%s: グループファイルを開く際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
+msgstr "%s: シャドウグループファイルのロックでエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
+msgstr "%s: シャドウグループファイルを開く際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: パスワードDBMエントリ追加のエラーです\n"
+msgstr "%s: 新しいパスワードエントリの追加の際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: シャドウ・パスワード・エントリ削除のエラーです\n"
+msgstr "%s: 新しいシャドウパスワードエントリ追加の際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: ディレクトリ%sを %sへ名前変更できません\n"
+msgstr "%s: ディレクトリ %s を作成できません\n"
 
 msgid "Creating mailbox file"
-msgstr ""
+msgstr "メールボックスファイルを作成します"
 
 #, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
+"グループ 'mail' が見付かりません。ユーザのメールボックスファイルを\n"
+"モード 0600 で作成します\n"
 
 msgid "Setting mailbox file permissions"
-msgstr ""
+msgstr "メールボックスファイルの許可属性を設定します"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1596,18 +1747,21 @@ msgstr "%s: ユーザ %s は存在します\n"
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: グループ %s は存在します − もしこのユーザをそのグループへ追加するには, -"
-"g を利用してください.\n"
+"%s: グループ %s は存在します。このユーザをそのグループへ追加するには -g を用"
+"いてください。\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
+"%s: 警告: ホームディレクトリが既に存在します。\n"
+"skel ディレクトリからのコピーは行いません。\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
+"%s: 警告: CREATE_HOME はサポートされていません。-m を用いてください。\n"
 
 #, c-format
 msgid ""
@@ -1619,30 +1773,38 @@ msgid ""
 "  -r, --remove\t\t\tremove home directory and mail spool\n"
 "\n"
 msgstr ""
+"使い方: userdel [オプション] ログイン名\n"
+"\n"
+"オプション:\n"
+"  -f, --force\t\t\t当該ユーザの所有でないファイルも削除する\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -r, --remove\t\t\tホームディレクトリとメールスプールを削除する\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
-msgstr "%s: グループ・エントリの更新のエラーです\n"
+msgstr "%s: グループエントリ更新の際にエラーが起きました\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: DBMグループ・エントリを更新できません\n"
+msgstr ""
+"%s: グループ %s は他のユーザのプライマリグループなので削除できません。\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "%s: グループファイルを開けません\n"
 
 #, c-format
 msgid "%s: cannot open shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
+msgstr "%s: シャドウグループファイルを開けません\n"
 
 #, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: パスワード・エントリ削除のエラーです\n"
+msgstr "%s: パスワードエントリの削除でエラーが起きました\n"
 
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: シャドウ・パスワード・エントリ削除のエラーです\n"
+msgstr "%s: シャドウパスワードエントリの削除でエラーが起きました\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -1650,11 +1812,11 @@ msgstr "%s: ユーザ %s は現在ログイン中です\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %sは %sの所有ではありません, 削除は行いません\n"
+msgstr "%s: %s は %s の所有ではありません。削除は行いません\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: 警告: %s は%sの所有ではありません\n"
+msgstr "%s: 警告: 削除できません"
 
 #, c-format
 msgid "%s: user %s does not exist\n"
@@ -1666,11 +1828,12 @@ msgstr "%s: ユーザ %s は NIS ユーザです\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: ディレクトリ%s の削除は行いません (would remove home of user %s)\n"
+msgstr ""
+"%s: ディレクトリ %s の削除は行いません (ユーザ %s のホームディレクトリです)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: ディレクトリ %s の削除のエラーです\n"
+msgstr "%s: ディレクトリ %s の削除でエラーが起きました\n"
 
 #, c-format
 msgid ""
@@ -1698,6 +1861,31 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
+"使い方: usermod [オプション] ログイン名\n"
+"\n"
+"オプション:\n"
+"  -a, --append\t\t\tユーザを補助グループ GROUPS に追加する\n"
+"\t\t\t\t(-G が指定された場合のみ)\n"
+"  -c, --comment COMMENT\t\tGECOS フィールドの値を再設定する\n"
+"  -d, --home HOME_DIR\t\tユーザアカウントのホームディレクトリを\n"
+"\t\t\t\t再設定する\n"
+"  -e, --expiredate EXPIRE_DATE\tアカウント期限切れの日を EXPIRE_DATE にする\n"
+"  -f, --inactive INACTIVE\tパスワードを期限切れ後に無効化する日数を\n"
+"\t\t\t\tINACTIVEにする\n"
+"  -g, --gid GROUP\t\t主グループを GROUP に変更する\n"
+"  -G, --groups GROUPS\t\t新たな補助グループのリストを与える\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -l, --login NEW_LOGIN\t\tログイン名を変更する\n"
+"  -L, --lock\t\t\tこのユーザアカウントをロックする\n"
+"  -m, --move-home\t\t現ホームディレクトリの内容を新たな場所に\n"
+"\t\t\t\t移動する (-d が指定された場合のみ)\n"
+"  -o, --non-unique\t\t一意でないユーザ (UID の重なるユーザ) を\n"
+"\t\t\t\t許可する\n"
+"  -p, --password PASSWORD\t新たな暗号化済みパスワードを与える\n"
+"  -s, --shell SHELL\t\tこのユーザのログインシェルを変更する\n"
+"  -u, --uid UID\t\t\tこのユーザの UID を変更する\n"
+"  -U, --unlock\t\t\tこのユーザアカウントのロックを解除する\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1705,7 +1893,7 @@ msgstr "%s: update_group 中にメモリが不足しました\n"
 
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: update_shdow 中にメモリが不足しました\n"
+msgstr "%s: update_gshadow 中にメモリが不足しました\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1713,57 +1901,57 @@ msgstr "%s: ひとつもフラグが指定されていません\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: シャドウ・パスワードには -e および -e が必要です\n"
+msgstr "%s: -e および -f にはシャドウパスワードが必要です\n"
 
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr ""
+msgstr "%s: -a フラグは -G フラグと共に指定する必要があります\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: ユーザID %lu が重複しています\n"
+msgstr "%s: ユーザ ID %lu が重複しています\n"
 
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: パスワード・エントリ変更のエラーです\n"
+msgstr "%s: パスワードエントリの変更でエラーが起きました\n"
 
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: パスワード・エントリ削除のエラーです\n"
+msgstr "%s: パスワードエントリの削除でエラーが起きました\n"
 
 #, c-format
 msgid "%s: error removing shadow password entry\n"
-msgstr "%s: シャドウ・パスワード・エントリ削除のエラーです\n"
+msgstr "%s: シャドウパスワードエントリの削除でエラーが起きました\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: ディレクトリ %sは存在します\n"
+msgstr "%s: ディレクトリ %s は存在します\n"
 
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: %sを 作成できません\n"
+msgstr "%s: %s を作成できません\n"
 
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: %sをchownできません\n"
+msgstr "%s: %s を chown できません\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr ""
+msgstr "%s: 警告: 古いホームディレクトリ %s を完全削除できませんでした"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: ディレクトリ%sを %sへ名前変更できません\n"
+msgstr "%s: ディレクトリ %s の名前を %s に変更できません\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: 警告: %s は%sの所有ではありません\n"
+msgstr "%s: 警告: %s は %s の所有ではありません\n"
 
 msgid "failed to change mailbox owner"
-msgstr "mailboxの所有者の変更に失敗しました"
+msgstr "mailbox 所有者の変更に失敗しました"
 
 msgid "failed to rename mailbox"
-msgstr "mailboxの名前変更に失敗しました"
+msgstr "mailbox の名前変更に失敗しました"
 
 #, c-format
 msgid ""
@@ -1777,6 +1965,15 @@ msgid ""
 "  -s, --shadow\t\t\tedit shadow or gshadow database\n"
 "\n"
 msgstr ""
+"使い方: vipw [オプション]\n"
+"\n"
+"オプション:\n"
+"  -g, --group\t\t\tgroup データベースを編集する\n"
+"  -h, --help\t\t\tこのヘルプを表示して終了する\n"
+"  -p, --passwd\t\t\tpasswd データベースを編集する\n"
+"  -q, --quiet\t\t\t表示抑制モード\n"
+"  -s, --shadow\t\t\tshadow ないし gshadow データベースを編集する\n"
+"\n"
 
 #, c-format
 msgid ""
@@ -1784,7 +1981,7 @@ msgid ""
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: %s の変更は行われません\n"
+"%s: %s は変更されません\n"
 
 msgid "Couldn't lock file"
 msgstr "ファイルをロックできません"
@@ -1794,4 +1991,4 @@ msgstr "バックアップを作成できません"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: %sを復旧できませんでした: %s (あなたの変更は%sにあります)\n"
+msgstr "%s: %s を復旧できませんでした: %s (あなたの変更は %s にあります)\n"

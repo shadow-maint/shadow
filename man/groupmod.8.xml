@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groupmod.8'>
-  <!-- $Id: groupmod.8.xml,v 1.18 2006/07/12 15:52:48 kloczek Exp $ -->
+  <!-- $Id: groupmod.8.xml,v 1.20 2007/02/01 20:49:25 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -24,9 +24,9 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>groupmod</command> modifies the definition of the specified
-      <replaceable>GROUP</replaceable> by modifying the appropriate entry in
-      the group database.
+      The <command>groupmod</command> command modifies the definition of the
+      specified <replaceable>GROUP</replaceable> by modifying the appropriate
+      entry in the group database.
     </para>
   </refsect1>
 
@@ -43,13 +43,16 @@
 	</term>
 	<listitem>
 	  <para>
-	    Specify the new group ID for the <replaceable>GROUP</replaceable>.
-	    The numerical value of the <replaceable>GID</replaceable> must be
-	    a non-negative decimal integer. This value must be unique, unless
-	    the <option>-o</option> option is used. Values between 0 and 999
-	    are typically reserved for system groups. Any files which the old
-	    group ID is the file group ID must have the file group ID changed
-	    manually.
+	    The group ID of the given <replaceable>GROUP</replaceable> will
+	    be changed to <replaceable>GID</replaceable>.  The value of
+	    <replaceable>GID</replaceable> must be a non-negative decimal
+	    integer. This value must be unique, unless the
+	    <option>-o</option> option is used. Values between 0 and 999 are
+	    typically reserved for system groups. Any files that have the
+	    old group ID and must continue to belong to
+	    <replaceable>GROUP</replaceable>, must have their group ID
+	    changed manually.
+
 	  </para>
 	</listitem>
       </varlistentry>
@@ -77,8 +80,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    When used with the <option>-g</option> option allow to change the
-	    group <replaceable>GID</replaceable> to non-unique value.
+	    When used with the <option>-g</option> option, allow to change the
+	    group <replaceable>GID</replaceable> to a non-unique value.
 	  </para>
 	</listitem>
       </varlistentry>

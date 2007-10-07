@@ -1,11 +1,11 @@
 .\"     Title: chage
 .\"    Author: 
-.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 14/07/2006
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 10/30/2006
 .\"    Manual: Polecenia użytkowników
 .\"    Source: Polecenia użytkowników
 .\"
-.TH "CHAGE" "1" "14/07/2006" "Polecenia użytkowników" "Polecenia użytkowników"
+.TH "CHAGE" "1" "10/30/2006" "Polecenia użytkowników" "Polecenia użytkowników"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -25,11 +25,14 @@ zmienia liczbę dni pomiędzy zmianami hasła i datę ostatniej zmiany hasła. I
 Polecenie
 \fBchage\fR
 posiada następujące opcje:
-.TP 3n
+.PP
 \fB\-d\fR, \fB\-\-lastday\fR\fIOSTATNI\fR
+.RS 3n
 Ustawia ilość dni od 1 stycznia 1970 kiedy hało było ostani raz zmieniane. Data ważności może być takze prezekazana w formacie RRRR\-MM\-DD (lub formacie używanym lokalnie).
-.TP 3n
+.RE
+.PP
 \fB\-E\fR, \fB\-\-expiredate\fR\fIDATA_WAŻN\fR
+.RS 3n
 Ustawia datę, począwszy od której konto użytkownika nie będzie już dostępne.
 \fIDATA_WAŻN\fR
 jest liczbą dni od 1 stycznia 1970, od której konto jest blokowane. Data może być też wyrażona w formacie RRRR\-MM\-DD (lub innej, powszechniej używanej w danym regionie). Użytkownik, którego konto jest zablokowane musi skontaktować się z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
@@ -39,11 +42,15 @@ Przekazanie
 jako
 \fIDATA_WAŻN\fR
 usuwa ograniczenie ważności konta użytkownika.
-.TP 3n
+.RE
+.PP
 \fB\-h\fR, \fB\-\-help\fR
+.RS 3n
 Wyświetlenie komunikatu pomocy i zakończenie działania.
-.TP 3n
+.RE
+.PP
 \fB\-I\fR, \fB\-\-inactive\fR\fINIEAKTYWNE\fR
+.RS 3n
 Opcja ta służy do ustawiania czasu nieaktywności konta po wygaśnięciu ważności hasła, po którym to czasie konto jest blokowane. Parametr
 \fINIEAKTYWNE\fR
 jest liczbą dni nieaktywności. Użytkownik, którego konto jest zablokowane musi skontaktować się z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
@@ -53,15 +60,21 @@ Przekazanie
 jako
 \fINIEAKTYWNE\fR
 usuwa ograniczenie nieaktywniści konta użytkownika.
-.TP 3n
+.RE
+.PP
 \fB\-l\fR, \fB\-\-list\fR
+.RS 3n
 Wyświetlenie informacji o terminach ważności konta i hasła.
-.TP 3n
+.RE
+.PP
 \fB\-m\fR, \fB\-\-mindays\fR\fIMIN_DNI\fR
+.RS 3n
 Utawia minimalną liczbę dni pomiędzy zmianami hasła na
 \fIMIN_DAYS\fR. Wartość zerowa oznacza, że użytkownik może je zmieniać w dowolnym czasie.
-.TP 3n
+.RE
+.PP
 \fB\-M\fR, \fB\-\-maxdays\fR\fIMAX_DNI\fR
+.RS 3n
 Ustawia maksymalną liczbę dni, przez jakie hasło jest ważne. Gdy
 \fIMAX_DNI\fR
 plus
@@ -74,11 +87,14 @@ Przekazanie
 jako
 \fIMAX_DAYS\fR
 usuwa sprawdzanie wazności hasła.
-.TP 3n
+.RE
+.PP
 \fB\-W\fR, \fB\-\-warndays\fR\fIDNI_OSTRZ\fR
+.RS 3n
 Ustawia na
 \fIDNI_OSTRZ\fR
 liczbę dni przed upływem ważności hasła. Od tego dnia użytkownik będzie ostrzegany o nadchodzącym terminie zmiany hasła.
+.RE
 .PP
 Jeśli nie podano żadnej opcji, to
 \fBchage\fR
@@ -93,29 +109,41 @@ wymaga do działania chronionego pliku haseł użytkowników (shadow).
 Polecenia chage może użyć tylko użytkownik root, za wyjątkiem opcji
 \fB\-l\fR. Może się nią posłużyć się użytkownik nieuprzywilejowany do stwierdzenia, kiedy wygasa jego własne hasło lub konto.
 .SH "PLIKI"
-.TP 3n
+.PP
 \fI/etc/passwd\fR
+.RS 3n
 Informacja o kontach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/shadow\fR
+.RS 3n
 Informacje chronione o użytkownikach.
+.RE
 .SH "KOD ZAKOŃCZENIA"
 .PP
 Polecenie
 \fBchage\fR
 kończy działanie z następującymi wartościami kodów zakończenia:
-.TP 3n
+.PP
 \fI0\fR
+.RS 3n
 poprawne zakończenie działania programu
-.TP 3n
+.RE
+.PP
 \fI1\fR
+.RS 3n
 brak dostępu
-.TP 3n
+.RE
+.PP
 \fI2\fR
+.RS 3n
 niepoprawna składnia polecenia
-.TP 3n
+.RE
+.PP
 \fI15\fR
+.RS 3n
 nie można znaleźć pliku shadow
+.RE
 .SH "ZOBACZ TAKŻE"
 .PP
 \fBpasswd\fR(5),

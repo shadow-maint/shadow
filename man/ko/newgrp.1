@@ -1,0 +1,29 @@
+.\" Original author unknown.  This man page is in the public domain.
+.\" Modified Sat Oct  9 17:46:48 1993 by faith@cs.unc.edu
+.TH NEWGRP 1 "9 October 1993" "Linux 1.2" "Linux Programmer's Manual"
+.SH NAME
+newgrp \- 자신이 소속된 그룹을 새 그룹으로 바꾼다.
+.SH SYNOPSIS
+.BI "newgrp [ " group " ]"
+.SH DESCRIPTION
+.B Newgrp
+명령은 
+changes the group identification of its caller, analogously to
+.BR login (1).
+명령으로 로그인 할 때 식별되는 그룹을 바꾼다. 
+\fIgroup\fR으로 사용될 수 있는 값은 /etc/group 파일안에 
+있는 그룹의 이름이나, GID 값이여야 하며, 
+명령행 인자에서 이 값을 특별히 지정하지 않으면, 현재 자신의 
+그룹으로 바꾼다. 
+.LP
+.SH FILES
+.I /etc/group
+.br
+.I /etc/passwd
+
+.SH "SEE ALSO"
+.BR login "(1), " group (5)
+
+.SH AUTHOR
+Originally by Michael Haardt. Currently maintained by 
+Peter Orbaek (poe@daimi.aau.dk).

@@ -1,0 +1,75 @@
+.\"
+.\"  chfn.1 \-\- change your finger information
+.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
+.\"
+.\"  this program is free software.  you can redistribute it and
+.\"  modify it under the terms of the gnu general public license.
+.\"  there is no warranty.
+.\"
+.\"  $Author: kloczek $
+.\"  $Revision: 1.4 $
+.\"  $Date: 2005/12/01 20:38:25 $
+.\"
+.TH CHFN 1 "October 13 1994" "chfn" "Linux Reference Manual"
+.SH NÉV
+chfn \- finger információk módosítása
+.SH VÁZLAT
+.B chfn
+[\ \-f\ teljes név\ ] [\ \-o\ iroda\ ] [\ \-p\ irodai telefon\ ]
+[\ \-h\ otthoni telefon\ ] [\ \-u\ ] [\ \-v\ ] [\ felhasználó\ ]
+.SH LEÍRÁS
+A
+.B chfn
+segítségével megváltoztathatók a finger információk. Ezeket a
+.I /etc/passwd
+fájl tartalmazza, és a
+.B finger
+programmal jeleníthetőek meg. A linuxos
+.B finger
+négy adatot ír ki: valódi (polgári) nevet, munkahelyi
+szoba\- és telefonszámot és otthoni telefonszámot.
+.SS PARANCSSOR
+A négy érték bármelyike megadható parancssorból. Ha paraméterek nélkül
+indítjuk, a
+.B chfn
+interaktív módba lép.
+.SS INTERAKTÍV MÓD
+Ilyenkor a
+.B chfn
+minden mezőt billentyűzetről kér be. A promptnál az új értékeket kell
+megadni. Az adatok az Enter lenyomásával változatlanul hagyhatók, a "none" szó
+beírásával a mező tartalma kiürül.
+.SH OPCIÓK
+.TP
+.I "\-f, \-\-full\-name"
+Teljes valódi név megadása.
+.TP
+.I "\-h, \-\-home\-phone"
+Otthoni telefonszám.
+.TP
+.I "\-o, \-\-office"
+Az irodai szobaszám módosítása.
+.TP
+.I "\-p, \-\-office\-phone"
+Irodai telefonszám megadása.
+.TP
+.I "\-u, \-\-help"
+Segítség kiíratása.
+.TP
+.I "\-v, \-\-version"
+Verzióinformáció megjelenítése.
+.SH LÁSD MÉG
+.BR finger (1),
+.BR passwd (5)
+.SH SZERZŐ
+Salvatore Valente <svalente@mit.edu>
+.SH MEGJEGYZÉS
+Ford. megj.: A hosszú, valamint az \-u és \-v paraméterek a
+.B chfn
+Julianne
+Frances Haugh által írt változatában nem érvényesek (pl. SuSE).
+Az irodai telefon itt a \-w, a szobaszám az \-r opcióval adható meg.
+Az \-o egy nem definiált tartalmú mezőt tölt ki; ezt egyébként csak a root
+módosíthatja.
+.SH MAGYAR FORDÍTÁS
+Gál Gyuri <gyuri@lamer.hu>

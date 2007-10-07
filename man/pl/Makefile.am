@@ -4,6 +4,7 @@ mandir = @mandir@/pl
 man_MANS = \
 	chage.1 \
 	chfn.1 \
+	chgpassw.8 \
 	chpasswd.8 \
 	chsh.1 \
 	expiry.1 \

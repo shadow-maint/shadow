@@ -1,0 +1,61 @@
+.\" Traduction 09/01/1997 par Christophe Blaess (ccb@club\-internet.fr)
+.\"
+.TH ID 1L "9 Janvier 1997" FSF "Manuel de l'utilisateur Linux"
+.SH NOM
+id \- Afficher les UIDs et GIDs effectifs et réels.
+.SH SYNOPSIS
+.B id
+[\-gnruG] [\-\-group] [\-\-name] [\-\-real] [\-\-user] [\-\-groups]
+[\-\-help] [\-\-version] [utilisateur]
+.SH DESCRIPTION
+Cette page de manuel documente la version GNU de
+.BR id .
+
+.B id
+affiche des informations concernant l'utilisateur indiqué, ou le processus
+appelant si aucun utilisateur n'est mentionné.
+
+Par défaut, il affiche l'U\-ID réel, le G\-ID réel, l'U\-ID effectif s'il
+diffère de l'U\-ID réel, le G\-ID effectif s'il diffère du G\-ID réel,
+et les G\-IDs des groupes supplémentaires. Chaque valeur est affichée précédée
+d'un libellé l'identifiant, et suivie entre parenthèses des noms de groupe ou
+d'utilisateur.
+.PP
+Les options permettent à
+.B id
+de n'afficher qu'une partie de ces informations.
+.SS OPTIONS
+.TP
+.I "\-g, \-\-group"
+Afficher uniquement le Group\-ID.
+.TP
+.I "\-G, \-\-groups"
+Afficher uniquement les groupes supplémentaires.
+.TP
+.I "\-\-help"
+Afficher un message d'aide sur la sortie standard et terminer normalement.
+.TP
+.I "\-n, \-\-name"
+Afficher les noms de groupe ou d'utilisateur à la place du numéro d'ID.
+Nécéssite
+.IR \-u ,
+.IR \-g ,
+ou
+.IR \-G .
+.TP
+.I "\-r, \-\-real"
+Afficher les U\-ID et G\-ID réels plutot que ceux effectifs.
+Nécéssite
+.IR \-u ,
+.IR \-g ,
+ou
+.IR \-G .
+.TP
+.I "\-u, \-\-user"
+N'afficher que l'User\-ID.
+.TP
+.I "\-\-version"
+Afficher un numéro de version sur la sortie standard et terminer normalement.
+
+.SH TRADUCTION
+Christophe Blaess, 1997.

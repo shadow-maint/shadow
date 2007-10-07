@@ -1,11 +1,11 @@
 .\"     Title: lastlog
 .\"    Author: 
-.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 19/06/2006
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 10/30/2006
 .\"    Manual: Polecenia Zarządzania Systemem
 .\"    Source: Polecenia Zarządzania Systemem
 .\"
-.TH "LASTLOG" "8" "19/06/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.TH "LASTLOG" "8" "10/30/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -32,23 +32,33 @@ ostatniego logowania. Domyślnie (bez flag) pozycje wyświetlane są w kolejnoś
 Polecenie
 \fBlastlog\fR
 posiada następujące opcje:
-.TP 3n
+.PP
 \fB\-b\fR, \fB\-\-before\fR\fIDNI\fR
+.RS 3n
 Wyświetlenie rekordów lastlog starszych niż zadana
 \fIDNI\fR.
-.TP 3n
+.RE
+.PP
 \fB\-h\fR, \fB\-\-help\fR
+.RS 3n
 Wyświetlenie komunikatu pomocy i zakończenie działania.
-.TP 3n
+.RE
+.PP
 \fB\-t\fR, \fB\-\-time\fR\fIDNI\fR
+.RS 3n
 Wyświetlenie rekordów lastlog nie starszych niż zadana ilość
 \fIDNI\fR.
-.TP 3n
+.RE
+.PP
 \fB\-u\fR, \fB\-\-user\fR\fILOGIN\fR
+.RS 3n
 Wyświetlenie informacji o ostanim logowaniu dla użytkownika
 \fILOGIN\fR.
-.TP 3n
+.RE
+.PP
 Opcja \fB\-t\fR przesłania użycie opcji \fB\-u\fR.
+.RS 3n
+.RE
 .PP
 Jeżeli użytkownik nigdy się nie logował to zamiast portu i czasu logowania wyświetlany jest komunikat
 \fI**Nigdy nie zalogowany**\fR
@@ -61,9 +71,11 @@ jest plikiem zawierajacym informacje o ostanim logowaniu każdego użytkowanika.
 \fIpasswd\fR
 użytkowaników z wysokimi wartościami UID). Mozesz wyświetlić rzeczywisty rozmiar tego pliku używając polecenia "\fBls \-s\fR".
 .SH "PLIKI"
-.TP 3n
+.PP
 \fI/var/log/lastlog\fR
+.RS 3n
 Baza danych ostatnich logowań użytkowników.
+.RE
 .SH "OSTRZEŻENIA"
 .PP
 Duże luki w numeracji UID powodują, że program będzie pracował dłużej, nie wyświetlając wyników (np. jeśli w bazie lastlog nie ma wpisów dla o UID pomiedzy 170, a 800, to program będzie sprawiał wrażenie zawieszonego w trakcie przetwarzania wpisów dla użytkowanikół o UID 171\-799).

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='expiry.1'>
-  <!-- $Id: expiry.1.xml,v 1.15 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: expiry.1.xml,v 1.16 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>expiry</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -22,9 +22,9 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>expiry</command> checks (<option>-c</option>) the current
-      password expiration and forces (<option>-f</option>) changes when
-      required. It is callable as a normal user command.
+      The <command>expiry</command> command checks (<option>-c</option>)
+      the current password expiration and forces (<option>-f</option>)
+      changes when required. It is callable as a normal user command.
     </para>
   </refsect1>
 

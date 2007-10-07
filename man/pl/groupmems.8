@@ -1,0 +1,59 @@
+.\"$Id: groupmems.8,v 1.9 2005/12/01 20:38:27 kloczek Exp $
+.\" Copyright 2000, International Business Machines
+.\" George Kraft IV, gk4@us.ibm.com, 3/23/2000
+.TH GROUPMEMS 8
+.SH NAZWA
+groupmems \- administrowanie członkami podstawowej grupy użytkownika
+.SH SKŁADNIA
+.TP 10
+\fBgroupmems\fR \fB\-a\fR \fInazwa_użytkownika\fR | \fB\-d\fR \fInazwa_użytkownika\fR |
+\fB\-l\fR | \fB\-D\fR | [\fB\-g\fR \fInazwa_grupy\fR]
+.SH OPIS
+Program narzędziowy \fBgroupmems\fR umożliwia użytkownikowi administrowanie
+listą członków jego/jej własnej grupy bez konieczności posiadania uprawnień
+superużytkownika. Program ten jest przeznaczony dla systemów, których
+użytkownicy posiadają swoje własne grupy podstawowe (np. guest / guest).
+.P
+Jedynie superużytkownik, jako administrator, może za pomocą \fBgroupmems\fR
+zmieniać przynależność do innych grup.
+.SH OPCJE
+Polecenie \fBgroupmems\fR posiada następujące opcje: 
+.IP "\fB\-a\fR \fInazwa_użytkownika\fR"
+Dodaje nowego użytkownika do listy członków grupy.
+.IP "\fB\-d\fR \fInazwa_użytkownika\fR"
+Usuwa użytkownika z listy członków grupy.
+.IP "\fB\-D\fR"
+Usuwa wszystkich użytkowników z listy członków grupy.
+.IP "\fB\-g\fR \fInazwa_grupy\fR"
+Superużytkownik może podać grupę, której lista członków ma zostać zmieniona.
+.IP "\fB\-l\fR"
+Wypisuje listę członków grupy.
+.SH USTAWIENIA
+Program \fBgroupmems\fR powinien posiadać uprawnienia \fB2770\fR oraz należeć
+do użytkownika \fBroot\fR i grupy \fBgroups\fR. Administrator systemu może
+za dodając użytkowników do grupy groups zabronić im lub pozwolić na
+korzystanie z programu \fBgroupmems\fR w celu zarządzania listami członków
+ich własnych grup.
+.P
+     $ groupadd \-r groups
+.br
+     $ chmod 2770 groupmems
+.br
+     $ chown root.groups groupmems
+.br
+     $ groupmems \-g groups \-a gk4
+.SH PLIKI
+\fI/etc/group\fR
+.br
+\fI/etc/gshadow\fR
+.SH "ZOBACZ TAKŻE"
+.BR chfn (1),
+.BR chsh (1),
+.BR passwd (1),
+.BR groupadd (8),
+.BR groupdel (8)
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.SH AUTOR
+George Kraft IV (gk4@us.ibm.com)

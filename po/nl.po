@@ -1,11 +1,13 @@
+# Translation of shadow to Dutch.
 # Copyright (C) 2004 Free Software Foundation, Inc.
+# Bart Cornelis <cobaco@linux.be>, 2004, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-07-26 22:30+0200\n"
-"PO-Revision-Date: 2006-06-23 09:21+0100\n"
+"POT-Creation-Date: 2006-11-03 16:17+0100\n"
+"PO-Revision-Date: 2006-11-03 12:21+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@skolelinux.no>\n"
 "Language-Team: debian-l10n-dutch <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +31,7 @@ msgstr "Waarschuwing: onbekende groep %s\n"
 
 #, c-format
 msgid "Warning: too many groups\n"
-msgstr "Waarschuwing: teveel groepen\n"
+msgstr "Waarschuwing: te veel groepen\n"
 
 #, c-format
 msgid "Your password has expired."
@@ -41,13 +43,13 @@ msgstr "Uw wachtwoord is niet actief."
 
 #, c-format
 msgid "Your login has expired."
-msgstr "Uw aanmelding is vervallen."
+msgstr "Uw gebruikersnaam is vervallen."
 
 msgid "  Contact the system administrator.\n"
 msgstr "  U dient contact op te nemen met de systeembeheerder.\n"
 
 msgid "  Choose a new password.\n"
-msgstr " U dient een nieuw wachtwoord te kiezen.\n"
+msgstr "  U dient een nieuw wachtwoord te kiezen.\n"
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
@@ -81,21 +83,21 @@ msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
 msgstr[0] ""
-"%d mislukte poging sinds u de laatste keer aangemeld heeft.\n"
-"Deze mislukte poging %s was op %s.\n"
+"%d mislukte poging sinds u zich de laatste keer aanmeldde.\n"
+"Die mislukte poging %s was op %s.\n"
 msgstr[1] ""
-"%d mislukte pogingen sinds u de laatste keer aangemeld heeft.\n"
+"%d mislukte pogingen sinds u zich de laatste keer aanmeldde.\n"
 "De laatste mislukte poging %s was op %s.\n"
 
 #, c-format
 msgid "Too many logins.\n"
-msgstr "Teveel aanmeldingen.\n"
+msgstr "Te veel aanmeldingen.\n"
 
 msgid "You have new mail."
-msgstr "U heeft nieuwe e-mails ontvangen"
+msgstr "U heeft nieuwe e-mails ontvangen."
 
 msgid "No mail."
-msgstr "Geen e-mails"
+msgstr "Geen e-mails."
 
 msgid "You have mail."
 msgstr "U heeft e-mail."
@@ -176,9 +178,9 @@ msgstr "Wachtwoord: "
 
 #, c-format
 msgid "%s's Password: "
-msgstr "Wachtwoord van %s:"
+msgstr "Wachtwoord van %s: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -196,20 +198,19 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Gebruik: chage [opties] gebruiker\n"
+"Gebruik: chage [opties] [GEBRUIKERSNAAM]\n"
 "\n"
 "Opties:\n"
-"  -d, --lastday LAASTE_DAG\tstel 'laatste wachtwoordaanpassing' in op\n"
-"\t\t\t\tLAASTE_DAG\n"
-"  -E, --expiredate VERVAL_DATUM\tstel 'account vervaldatum' in op\n"
-"\t\t\t\tVERVAL_DATUM\n"
+"  -d, --lastday LAATSTE_DAG\tstel 'laatste wachtwoordaanpassing' in op\n"
+"\t\t\t\tLAATSTE_DAG\n"
+"  -E, --expiredate VERVALDATUM\tstel account-vervaldatum in op VERVALDATUM\n"
 "  -h, --help\t\t\tgeef deze boodschap weer en sluit af\n"
 "  -I, --inactive INACTIEF\tstel 'wachtwoord inactief na vervaldatum' in op\n"
 "\t\t\t\tINACTIEF\n"
 "  -l, --list\t\t\tgeef account-verouderingsinformatie weer\n"
 "  -m, --mindays MIN_DAGEN\tstel minimum aantal dagen tussen\n"
 "\t\t\t\twachtwoordaanpassingen in op MIN_DAGEN\n"
-"  -M, --maxdays MAX_DAGEN\tstel maximim aantal dagen tussen\n"
+"  -M, --maxdays MAX_DAGEN\tstel maximum aantal dagen tussen\n"
 "\t\t\t\twachtwoordaanpassingen in op MAX_DAGEN\n"
 "  -W, --warndays WAARSCH_DAGEN\tstel aantal dagen met waarschuwing voor\n"
 "\t\t\t\tvervallen account in op WAARSCH_DAGEN\n"
@@ -217,8 +218,7 @@ msgstr ""
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"U dient de nieuwe waarde in te voeren, druk 'enter' voor de standaardwaarde\n"
+msgstr "Voer een nieuwe waarde in of druk op Enter voor de standaardwaarde\n"
 
 msgid "Minimum Password Age"
 msgstr "Minimumleeftijd voor wachtwoord"
@@ -240,7 +240,7 @@ msgstr "Vervaldatum van account (JJJJ-MM-DD)"
 
 #, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Laatste wachtwoord-verandering\t\t\t\t\t: "
+msgstr "Laatste wachtwoordverandering\t\t\t\t: "
 
 #, c-format
 msgid "never\n"
@@ -252,33 +252,31 @@ msgstr "Wachtwoord veranderd\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Wachtwoord vervalt\t\t\t\t\t:"
+msgstr "Wachtwoord vervalt\t\t\t\t\t: "
 
 #, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Wachtwoord niet actief\t\t\t\t\t:"
+msgstr "Wachtwoord niet actief\t\t\t\t\t: "
 
 #, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Account vervalt\t\t\t\t\t\t:"
+msgstr "Account vervalt\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr "Minimaal aantal dagen tussen wachtwoord-wijzigingen\t\t: %ld\n"
+msgstr "Minimum aantal dagen tussen wachtwoordwijzigingen\t: %ld\n"
 
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Maximale aantal dagen tussen wachtwoordwijzigingen\t\t: %ld\n"
+msgstr "Maximum aantal dagen tussen wachtwoordwijzigingen\t: %ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
-"Aantal dagen voor gewaarschuwd wordt dat het wachtwoord dreigt te vervallen"
-"\t: %ld\n"
+msgstr "Aantal waarschuwingsdagen voor wachtwoordverval\t\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: gebruik 'l' niet samen met andere vlaggen\n"
+msgstr "%s: gebruik '-l' niet samen met andere opties\n"
 
 #, c-format
 msgid "%s: Permission denied.\n"
@@ -298,19 +296,19 @@ msgstr "%s: onbekende gebruiker %s\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: het schaduw-wachtwoordenbestand is afwezig\n"
+msgstr "%s: het schaduwwachtwoordenbestand is afwezig\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
-msgstr "%s: kan schaduw-wachtwoordenbestand niet vergrendelen\n"
+msgstr "%s: kan schaduwwachtwoordenbestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: can't open shadow password file\n"
-msgstr "%s: kan schaduw-wachtwoordenbestand niet openen\n"
+msgstr "%s: kan schaduwwachtwoordenbestand niet openen\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: afgeven rechten is mislukt (%s)\n"
+msgstr "%s: afgeven van rechten is mislukt (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -342,7 +340,7 @@ msgid ""
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
 "Gebruik: %s [-f volledige_naam] [-r kamer_nr] [-w tel_werk]\n"
-"\t[-h tel_thuis] [-o varia] [gebruiker]\n"
+"         [-h tel_thuis] [-o varia] [gebruiker]\n"
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
@@ -350,7 +348,7 @@ msgstr ""
 "Gebruik: %s [-f volledige_naam] [-r kamer_nr] [-w tel_werk] [-h tel_thuis]\n"
 
 msgid "Full Name"
-msgstr "Volledig naam"
+msgstr "Volledige naam"
 
 #, c-format
 msgid "\tFull Name: %s\n"
@@ -414,7 +412,7 @@ msgstr "%s: '%s' voor 'telefoon thuis' is ongeldig\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: '%s' bevat illegale karakters\n"
+msgstr "%s: '%s' bevat ongeldige tekens\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -427,8 +425,7 @@ msgstr "Kan ID niet veranderen naar root.\n"
 #, c-format
 msgid "Cannot lock the password file; try again later.\n"
 msgstr ""
-"Kan het wachtwoordbestand niet vergrendelen; u kunt best later nog eens "
-"proberen.\n"
+"Kan het wachtwoordbestand niet vergrendelen; probeer het later nog eens.\n"
 
 #, c-format
 msgid "Cannot open the password file.\n"
@@ -464,10 +461,10 @@ msgstr ""
 "Gebruik: chpasswd [opties]\n"
 "\n"
 "Opties:\n"
-"  -e, --encrypted\tvoorziene wachtwoorden zijn versleutelt\n"
+"  -e, --encrypted\topgegeven wachtwoorden zijn versleuteld\n"
 "  -h, --help\t\ttoon dit bericht en sluit af\n"
-"  -m, --md5\t\tmaak gebruik van MD5-versleuteling  wanneer\n"
-"\t\t\tdde opgegeven wachtwoorden niet versleutelt zijn\n"
+"  -m, --md5\t\tmaak gebruik van MD5-versleuteling wanneer\n"
+"\t\t\tde opgegeven wachtwoorden niet versleuteld zijn\n"
 "\n"
 
 #, c-format
@@ -480,7 +477,7 @@ msgstr "%s: kan groepbestand niet openen\n"
 
 #, c-format
 msgid "%s: can't lock gshadow file\n"
-msgstr "%s: kan het 'gschadow'-bestand niet vergrendelen\n"
+msgstr "%s: kan het 'gshadow'-bestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: can't open shadow file\n"
@@ -488,7 +485,7 @@ msgstr "%s: kan het schaduwbestand niet openen\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: op regel %d: regel is te lang\n"
+msgstr "%s: regel %d: regel is te lang\n"
 
 #, c-format
 msgid "%s: line %d: missing new password\n"
@@ -496,7 +493,7 @@ msgstr "%s: regel %d: nieuw wachtwoord ontbreekt\n"
 
 #, c-format
 msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: regel %d: onbekende groepr %s\n"
+msgstr "%s: regel %d: onbekende groep %s\n"
 
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
@@ -508,11 +505,11 @@ msgstr "%s: fouten gedetecteerd, aanpassingen genegeerd\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: fout tijdens bijwerken schaduwbestand\n"
+msgstr "%s: fout tijdens bijwerken van schaduwbestand\n"
 
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: fout tijdens bijwerken van het wachtwoordbestand\n"
+msgstr "%s: fout tijdens bijwerken van wachtwoordbestand\n"
 
 #, c-format
 msgid ""
@@ -528,10 +525,10 @@ msgstr ""
 "Gebruik: chpasswd [opties]\n"
 "\n"
 "Opties:\n"
-"  -e, --encrypted\tvoorziene wachtwoorden zijn versleutelt\n"
+"  -e, --encrypted\topgegeven wachtwoorden zijn versleuteld\n"
 "  -h, --help\t\ttoon dit bericht en sluit af\n"
 "  -m, --md5\t\tmaak gebruik van MD5-versleuteling i.p.v. DES wanneer\n"
-"\t\t\topgegeven wachtwoorden niet versleutelt zijn\n"
+"\t\t\topgegeven wachtwoorden niet versleuteld zijn\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -539,13 +536,13 @@ msgstr "%s: kan wachtwoordbestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: kan het 'schadow'-bestand niet vergrendelen\n"
+msgstr "%s: kan het 'shadow'-bestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: regel %d: onbekende gebruiker %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -554,17 +551,15 @@ msgid ""
 "  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
 "\n"
 msgstr ""
-"Gebruik: userdel [opties] GEBRUIKERSNAAM\n"
+"Gebruik: chsh [opties] GEBRUIKERSNAAM\n"
 "\n"
 "Opties:\n"
-"  -f, --force\t\t\tdwing verwijderen van bestanden af,\n"
-"                 \t\t\took wanneer de gebruiker niet de eigenaar is\n"
-"  -h, --help\t\t\ttoon deze helbboodschap en sluit af\n"
-"  -r, --remove\t\t\tverwijder de thuismap en het mailbox-bestand\n"
+"  -h, --help\t\t\t\ttoon deze boodschap en sluit af\n"
+"  -r, --shell SHELL\t\t\tnieuwe aanmeld-shell voor gebruikersaccount\n"
 "\n"
 
 msgid "Login Shell"
-msgstr "Aanmeldshell"
+msgstr "Aanmeld-shell"
 
 #, c-format
 msgid "You may not change the shell for %s.\n"
@@ -572,7 +567,7 @@ msgstr "U mag de shell voor %s niet aanpassen.\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "De aanmeldshell voor %s wordt aangepast\n"
+msgstr "De aanmeld-shell voor %s wordt aangepast\n"
 
 #, c-format
 msgid "%s: Invalid entry: %s\n"
@@ -697,7 +692,7 @@ msgid "Re-enter new password: "
 msgstr "Nieuw wachtwoord bevestigen:"
 
 msgid "They don't match; try again"
-msgstr "Wachtwoorden komen niet overeen, probeer het nog eens"
+msgstr "Wachtwoorden komen niet overeen; probeer het nog eens"
 
 #, c-format
 msgid "%s: Try again later\n"
@@ -735,7 +730,7 @@ msgstr "%s: kan schaduwbestand niet herschrijven\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: kan bestand niet ontgrendelen\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -749,16 +744,16 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
-"Gebruik: groupadd [opties] groep\n"
+"Gebruik: groupadd [opties] GROEP\n"
 "\n"
 "Opties:\n"
-"  -f, --force\t\tdwing afsluiten met status successvol als de\n"
+"  -f, --force\t\t\tsuccesvolle afsluitstatus afdwingen ook als de\n"
 "\t\t\t\topgegeven groep reeds bestaat\n"
-"  -g, --gid GID\t\tnieuwe groep krijgt de opgegeven GID\n"
+"  -g, --gid GID\t\t\tnieuwe groep krijgt de opgegeven GID\n"
 "  -h, --help\t\t\tgeef deze boodschap weer en sluit af\n"
-"  -K, --key SLEUTEL=WAARDE\t\toverstijgt standaardwaarden\n"
+"  -K, --key SLEUTEL=WAARDE\toverstijgt standaardwaarden\n"
 "\t\t\t\tuit /etc/login.defs\n"
-"  -o, --non-unique\t\tlaat aanmaken van groep met dubbelle\n"
+"  -o, --non-unique\t\tlaat aanmaken van groep met dubbele\n"
 "\t\t\t\t(niet-unieke) GID toe\n"
 "\n"
 
@@ -848,45 +843,47 @@ msgstr "%s: %s is de NIS-master\n"
 
 #, c-format
 msgid "Member already exists\n"
-msgstr ""
+msgstr "Lid bestaat reeds\n"
 
 #, c-format
 msgid "Member to remove could not be found\n"
-msgstr ""
+msgstr "Te verwijderen lid kon niet gevonden worden\n"
 
 #, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
+"Gebruik: groupmems -a GEBRUIKERSNAAM | -d GEBRUIKERSNAAM | -D | -l [-g "
+"GROEPNAAM]\n"
 
 #, c-format
 msgid "Only root can add members to different groups\n"
-msgstr ""
+msgstr "Alleen root kan gebruikers toevoegen aan verschillende groepen\n"
 
 #, c-format
 msgid "Group access is required\n"
-msgstr ""
+msgstr "Groeptoegang is vereist\n"
 
 #, c-format
 msgid "Not primary owner of current group\n"
-msgstr ""
+msgstr "Niet de primaire eigenaar van de huidige groep\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "PAM authentication failed for\n"
-msgstr "%s: PAM-authentificatie is mislukt\n"
+msgstr "PAM-authentificatie is mislukt\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to lock group file\n"
-msgstr "%s: kan groepbestand niet vergrendelen\n"
+msgstr "Kan groepbestand niet vergrendelen\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open group file\n"
-msgstr "%s: kan groepbestand niet openen\n"
+msgstr "Kan groepbestand niet openen\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot close group file\n"
-msgstr "%s: kan groepbestand niet openen\n"
+msgstr "Kan groepbestand niet sluiten\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -897,16 +894,13 @@ msgid ""
 "  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
 "\n"
 msgstr ""
-"Gebruik: groupadd [opties] groep\n"
+"Gebruik: groupmod [opties] GROEP\n"
 "\n"
 "Opties:\n"
-"  -f, --force\t\tdwing afsluiten met status successvol als de\n"
-"\t\t\t\topgegeven groep reeds bestaat\n"
-"  -g, --gid GID\t\tnieuwe groep krijgt de opgegeven GID\n"
+"  -g, --gid GID\t\t\tgroep krijgt deze nieuwe GID\n"
 "  -h, --help\t\t\tgeef deze boodschap weer en sluit af\n"
-"  -K, --key SLEUTEL=WAARDE\t\toverstijgt standaardwaarden\n"
-"\t\t\t\tuit /etc/login.defs\n"
-"  -o, --non-unique\t\tlaat aanmaken van groep met dubbelle\n"
+"  -n, --new-name NIEUWE_NAAM\tgroep krijgt deze nieuwe naam\n"
+"  -o, --non-unique\t\tlaat aanmaken van groep met dubbele\n"
 "\t\t\t\t(niet-unieke) GID toe\n"
 "\n"
 
@@ -1020,7 +1014,7 @@ msgstr "%s: geen aanpassingen\n"
 
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: kan schaduwgroepbestand niet openen\n"
+msgstr "%s: kan schaduwgroepbestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: can't open shadow group file\n"
@@ -1068,7 +1062,7 @@ msgstr ""
 "Gebruik: lastlog [opties]\n"
 "\n"
 "Opties:\n"
-"  -b, --before DAGEN\ttoon enkel de laslog-ingangen die ouder zijn dan\n"
+"  -b, --before DAGEN\ttoon enkel de lastlog-ingangen die ouder zijn dan\n"
 "\t\t\t\tDAGEN\n"
 "  -h, --help\t\ttoon dit bericht en sluit af\n"
 "  -t, --time DAGEN\tprint enkel lastlog-records van de laatste DAGEN dagen\n"
@@ -1077,11 +1071,11 @@ msgstr ""
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
-msgstr "Gebruikersnaam  Poort    Vanaf            Laatste\n"
+msgstr "Gebruikersnaam   Poort    Vanaf            Laatste\n"
 
 #, c-format
 msgid "Username                Port     Latest\n"
-msgstr "Gebruikersnaam         Poort    Laatste\n"
+msgstr "Gebruikersnaam          Poort    Laatste\n"
 
 msgid "**Never logged in**"
 msgstr "**Heeft zich nog nooit aangemeld**"
@@ -1156,7 +1150,7 @@ msgstr "Maximaal aantal pogingen overschreden (%d)\n"
 
 #, c-format
 msgid "login: abort requested by PAM\n"
-msgstr "login: PAM vraagt om af te breken\n"
+msgstr "login: afgebroken op verzoek van PAM\n"
 
 #, c-format
 msgid ""
@@ -1167,14 +1161,15 @@ msgstr ""
 "%s gebruikersnaam: "
 
 msgid "Login incorrect"
-msgstr "Gebruikersnaam onjuist"
+msgstr "Gebruikersnaam is onjuist"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr "%s: afsplisten process is mislukt: %s"
+msgstr "%s: afsplisten van proces is mislukt: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Waarschuwing: aanmelden gereactiveerd na tijdelijke buitensluiting.\n"
+msgstr ""
+"Waarschuwing: aanmelden is geheractiveerd na tijdelijke buitensluiting.\n"
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1216,7 +1211,7 @@ msgstr "Sorry.\n"
 
 #, c-format
 msgid "too many groups\n"
-msgstr "teveel groepen\n"
+msgstr "te veel groepen\n"
 
 #, c-format
 msgid "Usage: %s [input]\n"
@@ -1228,7 +1223,7 @@ msgstr "%s: kan /etc/passwd niet vergrendelen.\n"
 
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: kan bestanden niet vergrendelen, probeer dit later nog eens\n"
+msgstr "%s: kan bestanden niet vergrendelen; probeer het later nog eens\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1270,7 +1265,7 @@ msgstr "%s: regel %d: kan ingang niet bijwerken\n"
 msgid "%s: error updating files\n"
 msgstr "%s: fout tijdens bijwerken bestanden\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1294,7 +1289,7 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
-"Gebruik: passwd [opties] [gebruikersnaam]\n"
+"Gebruik: passwd [opties] [GEBRUIKERSNAAM]\n"
 "\n"
 "Opties:\n"
 "  -a, --all\t\t\tgeef wachtwoordstatus van alle accounts weer\n"
@@ -1305,11 +1300,12 @@ msgstr ""
 "  -i, --inactive INACTIEF\tmaak wachtwoord inactief als INACTIEF wanneer\n"
 "\t\t\t\thet vervalt\n"
 "  -l, --lock\t\t\tvergrendel de genoemde account\n"
-"  -n, --mindays MIN_DAGEN\tstel het minumum aantal dagen voor\n"
-"\t\t\t\tveranderen van het wachtwoor in op MIN_DAGEN\n"
+"  -n, --mindays MIN_DAGEN\tstel het minimum aantal dagen voor\n"
+"\t\t\t\tveranderen van het wachtwoord in op MIN_DAGEN\n"
 "  -q, --quiet\t\t\tstille modus\n"
-"  -r, --repository REPOSITORYerander wachtwoord in REPOSITORY repository\n"
-"  -S, --status\t\t\tgeef de wachtwoordstatus van de genoemde account mee\n"
+"  -r, --repository REPOSITORY\tverander wachtwoord in REPOSITORY "
+"opslagplaats\n"
+"  -S, --status\t\t\tgeef de wachtwoordstatus van de genoemde account weer\n"
 "  -u, --unlock\t\t\tontgrendel de genoemde account\n"
 "  -w, --warndays WAARSCH_DAGEN\tstel het aantal dagen met waarschuwing in\n"
 "\t\t\t\top WAARSCH_DAGEN\n"
@@ -1325,12 +1321,12 @@ msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Wat is het nieuwe wachtwoord (minumum %d en maximum %d karakters)?\n"
+"Wat is het nieuwe wachtwoord (minimaal %d en maximaal %d tekens)?\n"
 "Dit dient te bestaan uit een combinatie van grote letters, kleine letters en "
 "cijfers.\n"
 
 msgid "New password: "
-msgstr "Nieuw wachtwoord:"
+msgstr "Nieuw wachtwoord: "
 
 #, c-format
 msgid "Try again.\n"
@@ -1359,7 +1355,7 @@ msgstr "Sorry, het wachtwoord voor %s kan nog niet veranderd worden.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: geen geheugen over\n"
+msgstr "%s: onvoldoende geheugen\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1367,7 +1363,7 @@ msgstr "%s: opslagplaats %s wordt niet ondersteund\n"
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s: U mag het wachtwoord van %s niet aanpassen.\n"
+msgstr "%s: U mag wachtwoordinformatie van %s niet bekijken of aanpassen.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1379,7 +1375,7 @@ msgstr "Het wachtwoord voor %s is niet veranderd.\n"
 
 #, c-format
 msgid "Password changed.\n"
-msgstr "Wachtwoord veranderd\n"
+msgstr "Wachtwoord is veranderd.\n"
 
 #, c-format
 msgid "Password set to expire.\n"
@@ -1467,7 +1463,7 @@ msgstr "%s: kan schaduwwachtwoordbestand niet verwijderen\n"
 
 #, c-format
 msgid "Access to su to that account DENIED.\n"
-msgstr "Toegang tot su naar die account is GEWEIGERD.\n"
+msgstr "Toegang van 'su' tot die account is GEWEIGERD.\n"
 
 #, c-format
 msgid "Password authentication bypassed.\n"
@@ -1484,7 +1480,7 @@ msgstr "Sorry."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1501,14 +1497,14 @@ msgstr ""
 "Gebruik: su [opties] [gebruikersnaam]\n"
 "\n"
 "Opties:\n"
-"  -c, --command COMMANDO\t\tgeef COMMANDO mee aan de aangeroepen shell\n"
+"  -c, --command COMMANDO\tgeef COMMANDO mee aan de aangeroepen shell\n"
 "  -h, --help\t\t\ttoon deze boodschap en sluit af\n"
-"  -, -l, --login\t\tmaak de shell een aanmeldshell\n"
+"  -, -l, --login\t\tmaak de shell een aanmeld-shell\n"
 "  -m, -p,\n"
 "  --preserve-environment\tstel de omgevingsvariabelen niet opnieuw in, en\n"
 "\t\t\t\tbehoud dezelfde shell\n"
 "  -s, --shell SHELL\t\tgebruik SHELL i.p.v. de standaardshell opgegeven in\n"
-"\t\t\t\tpasswd\n"
+"\t\t\t\t/etc/passwd\n"
 "\n"
 
 #, c-format
@@ -1521,11 +1517,11 @@ msgstr "%s: pam_start: fout %d\n"
 
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "Onbekende id: %s\n"
+msgstr "Onbekend ID: %s\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "U heeft geen authorisatie om su %s uit te voeren\n"
+msgstr "U bent niet gerechtigd om 'su %s' uit te voeren\n"
 
 msgid "(Enter your own password)"
 msgstr "(U dient uw eigen wachtwoord in te voeren)"
@@ -1588,7 +1584,7 @@ msgstr "%s: groep '%s' is een NIS-groep.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: teveel groepen gespecificeerd (max %d).\n"
+msgstr "%s: te veel groepen gespecificeerd (max %d).\n"
 
 #, c-format
 msgid ""
@@ -1623,14 +1619,14 @@ msgstr ""
 "Gebruik: useradd [opties] GEBRUIKERSNAAM\n"
 "\n"
 "Opties:\n"
-"  -b, --base-dir BASIS_MAP\tbasismap vor de thuismap van de nieuwe\n"
+"  -b, --base-dir BASIS_MAP\tbasismap voor de thuismap van de nieuwe\n"
 "\t\t\t\tgebruikersaccount\n"
-"  -c, --comment OPMERKING\t\tstel het GECOS-veld voor de nieuwe\n"
+"  -c, --comment OPMERKING\tstel het GECOS-veld voor de nieuwe\n"
 "\t\t\t\tgebruikersaccount in\n"
 "  -d, --home-dir THUIS_MAP\tthuismap voor de nieuwe gebruikersaccount\n"
 "  -D, --defaults\t\tprint de aangepaste useradd-configuratie, of sla\n"
 "\t\t\t\tdeze op\n"
-"  -e, --expiredate VERVAL_DATUM\tstel de vervaldatum in op VERVAL_DATUM\n"
+"  -e, --expiredate VERVALDATUM\tstel de vervaldatum in op VERVALDATUM\n"
 "  -f, --inactive INACTIVE\tstel het 'wachtwoord inactief na verval' in op\n"
 "\t\t\t\tINACTIEF\n"
 "  -g, --gid GROEP\t\tdwing gebruik van GROEP voor de nieuwe\n"
@@ -1639,16 +1635,16 @@ msgstr ""
 "\t\t\t\tgebruikersaccount\n"
 "  -h, --help\t\t\tgeef deze boodschap weer en sluit af\n"
 "  -k, --skel SKEL_MAP\t\tgebruik een alternatief map-skelet\n"
-"  -K, --key SLEUTEL=WAARDE\t\toverstijg de standaardwaarden uit\n"
+"  -K, --key SLEUTEL=WAARDE\toverstijg de standaardwaarden uit\n"
 "\t\t\t\t/etc/login.defs\n"
 "  -m, --create-home\t\tmaak een thuismap aan voor de nieuwe\n"
 "\t\t\t\tgebruikersaccount\n"
 "  -o, --non-unique\t\tlaat het aanmaken van gebruikersaccounts met een\n"
-"\t\t\t\tdubbelle (niet-unieke) UID toe\n"
+"\t\t\t\tdubbele (niet-unieke) UID toe\n"
 "  -p, --password WACHTWOORD\tgebruik versleuteld wachtwoord voor de nieuwe\n"
 "\t\t\t\tgebruikersaccount\n"
-"  -s, --shell SHELL\t\tgebruik gegeven shell als aanmeld-shell voor de "
-"gebruikersaccount\n"
+"  -s, --shell SHELL\t\tgebruik gegeven shell als aanmeld-shell voor de\n"
+"\t\t\t\tgebruikersaccount\n"
 "  -u, --uid UID\t\t\tgebruik UID voor de nieuwe gebruikersaccount\n"
 
 #, c-format
@@ -1665,7 +1661,7 @@ msgstr "%s: ongeldige basismap '%s'\n"
 
 #, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s: ongeldige commentaar '%s'\n"
+msgstr "%s: ongeldig commentaar '%s'\n"
 
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
@@ -1685,7 +1681,7 @@ msgstr "%s: schaduwwachtwoorden zijn vereist voor -f\n"
 
 #, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s: ongeldig veld `%s'\n"
+msgstr "%s: ongeldig veld '%s'\n"
 
 #, c-format
 msgid "%s: invalid shell '%s'\n"
@@ -1709,7 +1705,7 @@ msgstr "%s: kan wachtwoordbestand niet vergrendelen\n"
 
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s; kan wachtwoordbestand niet openen\n"
+msgstr "%s: kan wachtwoordbestand niet openen\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1762,29 +1758,28 @@ msgstr "Bestandsrechten van mailbox-bestand worden ingesteld"
 
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: gebruiker %s bestaat\n"
+msgstr "%s: gebruiker %s bestaat al\n"
 
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: groep %s bestaat - om deze gebruiker aan die groep toe te voegen dient u "
-"-g te gebruiken.\n"
+"%s: groep %s bestaat al -- om deze gebruiker aan die groep toe te voegen "
+"dient u -g te gebruiken.\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
-"%s: waarschuwing: the thuismap bestaad reeds.\n"
-"Er worden geen bestanden van de skelet-map\n"
-"overgekopieert.\n"
+"%s: waarschuwing: de thuismap bestaat reeds.\n"
+"Er worden geen bestanden uit de skelet-map overgekopieerd.\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
-"%s: waarschuwing: CREATE_HOME is niet ondersteund, u dient in plaats hiervan "
-"-m te gebruiken.\n"
+"%s: waarschuwing: CREATE_HOME wordt niet ondersteund, u dient in plaats "
+"hiervan -m te gebruiken.\n"
 
 #, c-format
 msgid ""
@@ -1854,14 +1849,14 @@ msgstr "%s: gebruiker %s is een NIS-gebruiker\n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: map %s wordt niet verwijderd (zou thuismap van gebruiker %s "
+"%s: map %s wordt niet verwijderd (het zou de thuismap van gebruiker %s "
 "verwijderen)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: fout tijdens verwijderen van map %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1893,17 +1888,17 @@ msgstr ""
 "  -a, --append GROEP\t\tvoeg gebruiker toe aan de extra groep GROEP\n"
 "  -c, --comment OPMERKING\tde nieuwe waarde voor het GECOS-veld\n"
 "  -d, --home-dir THUIS_MAP\tnieuwe thuismap voor de gebruikersaccount\n"
-"  -e, --expiredate VERVAL_DATUM\tstel de vervaldatum in op VERVAL_DATUM\n"
+"  -e, --expiredate VERVALDATUM\tstel de vervaldatum in op VERVALDATUM\n"
 "  -f, --inactive INACTIEF\tstel het 'wachtwoord inactief na verval' in op\n"
 "\t\t\t\tINACTIEF\n"
-"  -g, --gid GROEP\t\tdwing gebruik van GROEP af als de nieuwe logingroep\n"
+"  -g, --gid GROEP\t\tdwing gebruik van GROEP af als de nieuwe aanmeldgroep\n"
 "  -G, --groups GROEPEN\t\tlijst met aanvullende groepen\n"
 "  -h, --help\t\t\tgeef deze boodschap weer en sluit af\n"
 "  -l, --login GEBRUIKERSNAAM\tnieuwe gebruikersnaam\n"
 "  -L, --lock\t\t\tvergrendel de gebruikersaccount\n"
-"  -m, --move-home\t\tverplaats de thuismapnaar de nieuwe locatie\n"
-"\t\t\t\t(enkel gebruiken in combinatie met -d optie)\n"
-"  -o, --non-unique\t\tlaat dubbelle (=niet-unieke) UID toe\n"
+"  -m, --move-home\t\tverplaats de thuismap naar een nieuwe locatie\n"
+"\t\t\t\t(enkel gebruiken in combinatie met optie -d)\n"
+"  -o, --non-unique\t\tlaat dubbele (niet-unieke) UID toe\n"
 "  -p, --password WACHTWOORD\tgebruik versleuteld wachtwoord als het nieuwe\n"
 "\t\t\t\twachtwoord\n"
 "  -s, --shell SHELL\t\tgebruik gegeven shell als aanmeld-shell voor de\n"
@@ -1914,27 +1909,27 @@ msgstr ""
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
-msgstr "%s: geheugen is op in update_group\n"
+msgstr "%s: onvoldoende geheugen in update_group()\n"
 
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: geheugen is op in update_gshadow\n"
+msgstr "%s: onvoldoende geheugen in update_gshadow()\n"
 
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: geen vlaggen gegeven\n"
+msgstr "%s: geen opties gegeven\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: schaduwwachtwoorden zijn vereist voor -e en -f\n"
+msgstr "%s: schaduwwachtwoorden zijn vereist voor opties -e en -f\n"
 
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a vlag is ENKEL toegelaten in combinatie met de -G vlag\n"
+msgstr "%s: optie -a is ENKEL toegestaan in combinatie met optie -G\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %lu is niet uniek\n"
+msgstr "%s: UID %lu is niet uniek\n"
 
 #, c-format
 msgid "%s: error changing password entry\n"
@@ -1950,7 +1945,7 @@ msgstr "%s: fout tijdens verwijderen schaduwwachtwoordingang\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: map %s bestaat\n"
+msgstr "%s: map %s bestaat al\n"
 
 #, c-format
 msgid "%s: can't create %s\n"
@@ -2016,4 +2011,4 @@ msgstr "Kon geen reservekopie maken"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: kan %s niet herstellen: %s (uw aanpassingen zijn in %s)\n"
+msgstr "%s: kan %s niet herstellen: %s (uw aanpassingen staan in %s)\n"

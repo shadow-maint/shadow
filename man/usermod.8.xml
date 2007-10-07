@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.28 2006/07/12 14:23:14 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.29 2007/02/01 20:49:25 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -127,8 +127,8 @@
 	    restrictions as the group given with the <option>-g</option>
 	    option. If the user is currently a member of a group which is
 	    not listed, the user will be removed from the group. This
-	    behaviour can be changed via <option>-a</option> option, which
-	    appends user to the current supplementary group list.
+	    behaviour can be changed via the <option>-a</option> option, which
+	    appends the user to the current supplementary group list.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -143,7 +143,7 @@
 	    remap='I'>LOGIN</emphasis> to <emphasis
 	    remap='I'>NEW_LOGIN</emphasis>. Nothing else is changed. In
 	    particular, the user's home directory name should probably be
-	    changed to reflect the new login name.
+	    changed manually to reflect the new login name.
 	  </para>
 	</listitem>
       </varlistentry>

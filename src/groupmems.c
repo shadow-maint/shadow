@@ -47,8 +47,8 @@
 #define EXIT_SUCCESS		0	/* success */
 #define EXIT_USAGE		1	/* invalid command syntax */
 #define EXIT_GROUP_FILE		2	/* group file access problems */
-#define EXIT_NOT_ROOT		3	/* not super user  */
-#define EXIT_NOT_EROOT		4	/* not effective super user  */
+#define EXIT_NOT_ROOT		3	/* not superuser  */
+#define EXIT_NOT_EROOT		4	/* not effective superuser  */
 #define EXIT_NOT_PRIMARY	5	/* not primary owner of group  */
 #define EXIT_NOT_MEMBER		6	/* member of group does not exist */
 #define EXIT_MEMBER_EXISTS	7	/* member of group already exists */

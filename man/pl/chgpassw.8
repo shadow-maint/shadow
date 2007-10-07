@@ -1,0 +1,55 @@
+.\"     Title: chgpassw
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 11/19/2006
+.\"    Manual: Polecenia Zarządzania Systemem
+.\"    Source: Polecenia Zarządzania Systemem
+.\"
+.TH "CHGPASSW" "8" "11/19/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAZWA"
+chgpassw \- wsadowa aktualizacja haseł grup
+.SH "SKŁADNIA"
+.HP 9
+\fBchgpassw\fR [\fIopcje\fR]
+.SH "OPIS"
+.PP
+Polecenie
+\fBchgpasswd\fR
+czyta pary danych (grupa i hasło) ze standardowego wejścia. Odczytane informacje wykorzystywane są do aktualizacji danych o grupach istniejących użytkowników. Każdy wiersz przekazywanych danych ma postać:
+.PP
+\fInazwa_grupy\fR:\fIhasło\fR
+.PP
+Domyślnie dostarczane hasła muszą być w postaci jawnej. Podczas kodowania haseł używany jest domyślnie algorytm DES.
+.PP
+Polecenie to przeznaczone jest do użytku w dużych systemach, gdzie aktualizuje się wiele kont naraz.
+.SH "OPCJE"
+.PP
+Polecenie
+\fBchgpasswd\fR
+posiada następujące opcje:
+.PP
+\fB\-e\fR, \fB\-\-encrypted\fR
+.RS 3n
+Dostarczone na standardowe wejście hasła są traktowane jako już zakodowane.
+.RE
+.PP
+\fB\-h\fR, \fB\-\-help\fR
+.RS 3n
+Wyświetlenie komunikatu pomocy i zakończenie działania.
+.RE
+.PP
+\fB\-m\fR, \fB\-\-md5\fR
+.RS 3n
+Jeżeli dpostarczane hasła są w postaci jawnej użyj kodowania MD5 zamiast domyślnego DES.
+.RE
+.SH "OSTRZEŻENIA"
+.PP
+Pamiętaj żeby zabezpieczyć przed odczytem plik przekazywany na standardowe wejście polecenia.
+.SH "ZOBACZ TAKŻE"
+.PP
+\fBgpasswd\fR(1),
+\fBgroupadd\fR(8).

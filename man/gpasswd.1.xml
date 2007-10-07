@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='gpasswd.1'>
-  <!-- $Id: gpasswd.1.xml,v 1.20 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id: gpasswd.1.xml,v 1.21 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gpasswd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -47,7 +47,7 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>gpasswd</command> is used to administer the
+      The <command>gpasswd</command> command is used to administer the
       <filename>/etc/group</filename> file (and
       <filename>/etc/gshadow</filename> file if compiled with SHADOWGRP
       defined). Every group can have administrators, members and a password. 

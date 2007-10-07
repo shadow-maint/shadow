@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.36 2006/07/17 15:04:14 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.37 2007/02/01 20:49:25 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -36,8 +36,9 @@
       <para>
 	When invoked without the <option>-D</option> option, the
 	<command>useradd</command> command creates a new user account using
-	the values specified on the command line and the default values from
-	the system. Depending on command line options, the useradd command
+	the values specified on the command line plus the default values from
+	the system. Depending on command line options, the
+	<command>useradd</command> command
 	will update system files and may also create the new user's home
 	directory and copy initial files.
       </para>
@@ -73,6 +74,16 @@
 	    concatenated with the account name to define the home directory. 
 	    If the <option>-m</option> option is not used,
 	    <replaceable>BASE_DIR</replaceable> must exist.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-D</option>
+	</term>
+	<listitem>
+	  <para>
+	    See below, the subsection "Changing the default values".
 	  </para>
 	</listitem>
       </varlistentry>
@@ -256,10 +267,11 @@
     <refsect2 id='changing_the_default_values'>
       <title>Changing the default values</title>
       <para>
-	When invoked with the <option>-D</option> option,
-	<command>useradd</command> will either display the current default
-	values, or update the default values from the command line. The
-	valid options are
+	When invoked with only the <option>-D</option> option,
+	<command>useradd</command> will display the current default values.
+	When invoked with <option>-D</option> plus other options,
+	<command>useradd</command> will update the default values for the
+	specified options. Valid default-changing options are:
       </para>
       <variablelist remap='IP'>
 	<varlistentry>
@@ -269,10 +281,10 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The initial path prefix for a new user's home directory. The
+	      The path prefix for a new user's home directory. The
 	      user's name will be affixed to the end of
-	      <replaceable>HOME_DIR</replaceable> to create the new
-	      directory name if the <option>-d</option> option is not used
+	      <replaceable>BASE_DIR</replaceable> to form the new user's
+	      home directory name, if the <option>-d</option> option is not used
 	      when creating a new account.
 	    </para>
 	  </listitem>
@@ -318,17 +330,12 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The name of the new user's login shell. The named program will
-	      be used for all future new user accounts.
+	      The name of a new user's login shell.
 	    </para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
 
-      <para>
-	If no options are specified, <command>useradd</command> displays the
-	current default values.
-      </para>
     </refsect2>
   </refsect1>
 

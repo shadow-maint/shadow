@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.71 2006/07/28 17:42:48 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.74 2007/01/16 12:51:50 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -166,11 +166,8 @@ static struct group *getgr_nam_gid (const char *grname)
 	char *errptr;
 
 	val = strtol (grname, &errptr, 10);
-	if (*errptr || errno == ERANGE || val < 0) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 grname);
-		exit (E_BAD_ARG);
-	}
+	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && val >= 0)
+		return getgrgid (val);
 	return getgrnam (grname);
 }
 
@@ -908,7 +905,7 @@ static void process_flags (int argc, char **argv)
 		 */
 		int c;
 		static struct option long_options[] = {
-			{"append", required_argument, NULL, 'a'},
+			{"append", no_argument, NULL, 'a'},
 			{"comment", required_argument, NULL, 'c'},
 			{"home", required_argument, NULL, 'd'},
 			{"expiredate", required_argument, NULL, 'e'},
@@ -1528,12 +1525,11 @@ int main (int argc, char **argv)
 	 * change the home directory, then close and update the files.
 	 */
 	open_files ();
-
 	usr_update ();
+	close_files ();
+
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-
-	close_files ();
 
 	if (Gflg || lflg)
 		grp_err = grp_update ();

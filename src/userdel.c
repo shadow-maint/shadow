@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: userdel.c,v 1.66 2006/07/10 04:11:32 kloczek Exp $"
+#ident "$Id: userdel.c,v 1.67 2006/08/15 17:25:58 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -727,9 +727,6 @@ int main (int argc, char **argv)
 	update_user ();
 	update_groups ();
 
-	nscd_flush_cache ("passwd");
-	nscd_flush_cache ("group");
-
 	if (rflg)
 		remove_mailbox ();
 	if (rflg && !fflg && !is_owner (user_id, user_home)) {
@@ -739,6 +736,7 @@ int main (int argc, char **argv)
 		rflg = 0;
 		errors++;
 	}
+
 #ifdef EXTRA_CHECK_HOME_DIR
 	/* This may be slow, the above should be good enough. */
 	if (rflg && !fflg) {
@@ -792,6 +790,10 @@ int main (int argc, char **argv)
 	 */
 	user_cancel (user_name);
 	close_files ();
+
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);

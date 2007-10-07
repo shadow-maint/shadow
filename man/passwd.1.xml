@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='passwd.1'>
-  <!--  $Id: passwd.1.xml,v 1.33 2006/07/11 13:34:47 kloczek Exp $ -->
+  <!--  $Id: passwd.1.xml,v 1.36 2006/11/12 19:20:34 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -26,9 +26,9 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>passwd</command> changes passwords for user accounts.  A
-      normal user may only change the password for his/her own account, while 
-      the super user may change the password for any account.
+      The <command>passwd</command> command changes passwords for user accounts.
+      A normal user may only change the password for his/her own account, while
+      the superuser may change the password for any account.
       <command>passwd</command> also changes account information, such as
       the full name of the user, the user's login shell, or his/her password
       expiry date and interval.
@@ -40,7 +40,7 @@
 	The user is first prompted for his/her old password, if one is
 	present. This password is then encrypted and compared against the
 	stored password. The user has only one chance to enter the correct
-	password. The super user is permitted to bypass this step so that
+	password. The superuser is permitted to bypass this step so that
 	forgotten passwords may be changed.
       </para>
 
@@ -201,7 +201,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Indicate change password should be performed only for expired
+	    Indicate password change should be performed only for expired
 	    authentication tokens (passwords). The user wishes to keep their
 	    non-expired tokens as before.
 	  </para>

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.100 2006/07/28 17:42:48 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.103 2006/11/04 00:55:00 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -206,7 +206,8 @@ static struct group *getgr_nam_gid (const char *grname)
 	gid = strtol (grname, &errptr, 10);
 	if (*errptr || errno == ERANGE || gid < 0) {
 		fprintf (stderr,
-			 _("%s: invalid numeric argument '%s'\n"), Prog, grname);
+			 _("%s: invalid numeric argument '%s'\n"), Prog,
+			 grname);
 		exit (E_BAD_ARG);
 	}
 	return getgrnam (grname);
@@ -1574,6 +1575,11 @@ static void create_home (void)
 				 _
 				 ("%s: cannot create directory %s\n"),
 				 Prog, user_home);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "adding home directory", user_name,
+				      user_id, 0);
+#endif
 			fail_exit (E_HOMEDIR);
 		}
 		chown (user_home, user_id, user_gid);
@@ -1809,10 +1815,10 @@ int main (int argc, char **argv)
 
 	create_mail ();
 
+	close_files ();
+
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-
-	close_files ();
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)

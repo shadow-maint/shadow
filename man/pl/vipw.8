@@ -1,11 +1,11 @@
 .\"     Title: vipw
 .\"    Author: 
-.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 19/06/2006
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 10/30/2006
 .\"    Manual: Polecenia Zarządzania Systemem
 .\"    Source: Polecenia Zarządzania Systemem
 .\"
-.TH "VIPW" "8" "19/06/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.TH "VIPW" "8" "10/30/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,11 +14,12 @@
 vipw, vigr \- edytuj plik haseł, grup lub ich wersji chronionych
 .SH "SKŁADNIA"
 .HP 5
-\fBvipw\fR [opcje]
+\fBvipw\fR [\fIopcje\fR]
 .HP 5
-\fBvigr\fR [opcje]
+\fBvigr\fR [\fIopcje\fR]
 .SH "OPIS"
 .PP
+Polecenia
 \fBvipw\fR
 i
 \fBvigr\fR
@@ -40,35 +41,57 @@ Polecenia
 \fBvipw\fR
 i
 \fBvigr\fR
+posiadają następujące opcje:Polecenia
+\fBvipw\fR
+i
+\fBvigr\fR
 posiadają następujące opcje:
-.TP 3n
+.PP
 \fB\-g\fR, \fB\-\-group\fR
+.RS 3n
 Edycja bazy grup.
-.TP 3n
+.RE
+.PP
 \fB\-h\fR, \fB\-\-help\fR
+.RS 3n
 Wyświetlenie komunikatu pomocy i zakończenie działania.
-.TP 3n
+.RE
+.PP
 \fB\-p\fR, \fB\-\-passwd\fR
+.RS 3n
 Edycja bazy passwd.
-.TP 3n
+.RE
+.PP
 \fB\-q\fR, \fB\-\-quiet\fR
+.RS 3n
 Cichy tryb pracy.
-.TP 3n
+.RE
+.PP
 \fB\-s\fR, \fB\-\-shadow\fR
+.RS 3n
 Edycja bazy shadow lub gshadow.
+.RE
 .SH "PLIKI"
-.TP 3n
+.PP
 \fI/etc/group\fR
+.RS 3n
 Informacje o grupach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/gshadow\fR
+.RS 3n
 Informacje chronione o grupach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/passwd\fR
+.RS 3n
 Informacja o kontach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/shadow\fR
+.RS 3n
 Informacje chronione o użytkownikach.
+.RE
 .SH "ZOBACZ TAKŻE"
 .PP
 \fBvi\fR(1),

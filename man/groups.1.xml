@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groups.1'>
-  <!-- $Id: groups.1.xml,v 1.16 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: groups.1.xml,v 1.17 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groups</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -23,8 +23,8 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>groups</command> displays the current group names or ID
-      values. If the value does not have a corresponding entry in
+      The <command>groups</command> command displays the current group names
+      or ID values. If the value does not have a corresponding entry in
       <filename>/etc/group</filename>, the value will be displayed as the
       numerical group value. The optional <emphasis
       remap='I'>user</emphasis> parameter will display the groups for the

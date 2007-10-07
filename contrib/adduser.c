@@ -169,7 +169,7 @@ main (void)
   if (geteuid () != 0)
     {
       printf ("It seems you don't have access to add a new user.  Try\n");
-      printf ("logging in as root or su root to gain super-user access.\n");
+      printf ("logging in as root or su root to gain superuser access.\n");
       exit (1);
     }
 

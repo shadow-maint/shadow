@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='pwconv.8'>
-  <!-- $Id: pwconv.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: pwconv.8.xml,v 1.18 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwconv</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -32,26 +32,26 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>pwconv</command> creates <emphasis
+      The <command>pwconv</command> command creates <emphasis
       remap='I'>shadow</emphasis> from <emphasis remap='I'>passwd</emphasis>
       and an optionally existing <emphasis remap='I'>shadow</emphasis>.
     </para>
 
     <para>
-      <command>pwunconv</command> creates <emphasis
+      The <command>pwunconv</command> command creates <emphasis
       remap='I'>passwd</emphasis> from <emphasis remap='I'>passwd</emphasis>
       and <emphasis remap='I'>shadow</emphasis> and then removes <emphasis
       remap='I'>shadow</emphasis>.
     </para>
 
     <para>
-      <command>grpconv</command> creates <emphasis
+      The <command>grpconv</command> command creates <emphasis
       remap='I'>gshadow</emphasis> from <emphasis remap='I'>group</emphasis>
       and an optionally existing <emphasis remap='I'>gshadow</emphasis>.
     </para>
 
     <para>
-      <command>grpunconv</command> creates <emphasis
+      The <command>grpunconv</command> command creates <emphasis
       remap='I'>group</emphasis> from <emphasis remap='I'>group</emphasis>
       and <emphasis remap='I'>gshadow</emphasis> and then removes <emphasis
       remap='I'>gshadow</emphasis>.

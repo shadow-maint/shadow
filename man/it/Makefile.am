@@ -46,5 +46,5 @@ endif
                         
 EXTRA_DIST = \
 	$(man_MANS) \
-	$(man_nonpam) \
+	$(man_nopam) \
 	id.1

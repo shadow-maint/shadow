@@ -1,0 +1,63 @@
+.TH ID 1 "GNU Shell Utilities" "FSF" \" \-*\- nroff \-*\-
+.SH NÉV
+id \- kiírja a valóságos és effektív UID\-eket és GID\-eket
+.SH ÁTTEKINTÉS
+.B id
+[\-gnruG] [\-\-group] [\-\-name] [\-\-real] [\-\-user] [\-\-groups]
+[\-\-help] [\-\-version] [username]
+.SH LEÍRÁS
+Ezt a dokumentációt a továbbiakban nem tartjuk karban, így
+pontatlan vagy hiányos lehet. A Texinfo dokumentáció a hiteles forrás.
+.PP
+Ez a kézikönyv lap az
+.BR id
+GNU  változatát írja le. Az
+.B id
+információt szolgáltat az adott felhasználóról, vagy  arról aki a 
+programot futtatja, ha felhasználó nincs megadva. 
+Alapértelmezésben a valódi felhasználói ID\-t írja ki,
+a valódi csoport ID\-t, az effektív felhasználói ID\-t, ha az különbözik a 
+valódi felhasználói ID\-től, az effektív csoport ID\-t, ha az különbözik a
+valódi csoport ID\-től, és a kiegészítő csoportok ID\-it.
+A parancs ezeket a paramétereket egy sorban, egymás után 
+irja ki, zárójelben megadva a felhasználó, illetve a csoport nevét.
+.PP
+Az alábbi opciókkal az
+.B id
+képes a fenti információk egy részének a megjelenítésére is.
+.SS OPCIÓK
+.TP
+.I "\-g, \-\-group"
+Csak a csoport ID\-jét írja ki.
+.TP
+.I "\-G, \-\-groups"
+Csak a kiegészítő csoportok ID\-it írja ki.
+.TP
+.I "\-\-help"
+Használati útmutatót ír a standard kimenetre és kilép.
+.TP
+.I "\-n, \-\-name"
+A nevet jeleníti meg az ID helyet.
+Szükséges az
+.IR \-u ,
+.IR \-g ,
+vagy
+.IR \-G 
+paraméter.
+.TP
+.I "\-r, \-\-real"
+A valódi felhasználói vagy csoport ID\-t jeleníti meg az effektív helyett.
+Szükséges
+.IR \-u ,
+.IR \-g ,
+vagy
+.IR \-G 
+paraméter.
+.TP
+.I "\-u, \-\-user"
+Csak a felhasználó ID\-jét jeleníti meg.
+.TP
+.I "\-\-version"  
+A program verziójáról ír ki információt a standard kimenetre és kilép.
+.SH MAGYAR FORDÍTÁS
+Ámon Tamás <sajt@erba.hu>

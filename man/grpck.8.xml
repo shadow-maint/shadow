@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='grpck.8'>
-  <!-- $Id: grpck.8.xml,v 1.18 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: grpck.8.xml,v 1.19 2006/10/28 12:29:04 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>grpck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -24,8 +24,8 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>grpck</command> verifies the integrity of the system
-      authentication information. All entries in the
+      The <command>grpck</command> command verifies the integrity of the
+      system authentication information. All entries in the
       <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
       are checked to see that the entry has the proper format and valid data
       in each field. The user is prompted to delete entries that are

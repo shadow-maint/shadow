@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='shadow.3'>
-  <!--  $Id: shadow.3.xml,v 1.21 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!--  $Id: shadow.3.xml,v 1.22 2006/11/12 19:20:34 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>shadow</refentrytitle>
     <manvolnum>3</manvolnum>
@@ -163,7 +163,7 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      These routines may only be used by the super user as access to the
+      These routines may only be used by the superuser as access to the
       shadow password file is restricted.
     </para>
   </refsect1>

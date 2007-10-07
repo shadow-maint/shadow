@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupdel.c,v 1.31 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: groupdel.c,v 1.32 2006/08/15 17:25:58 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -330,9 +330,9 @@ int main (int argc, char **argv)
 	open_files ();
 
 	grp_update ();
-	nscd_flush_cache ("group");
-
 	close_files ();
+
+	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)

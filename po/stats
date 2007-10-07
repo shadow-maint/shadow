@@ -1,0 +1,20 @@
+#!/bin/sh
+export LANG=C
+echo "language  translated  fuzzy  untranslated"
+echo "-----------------------------------------"
+for i in $(cat LINGUAS | xargs); do
+	echo -n "  $i	"
+	msgfmt -c --statistics -o $i.gmo $i.po 2>&1 |
+		awk -v LNG="$1" '{
+		    gsub(/ untranslated/, "");
+		    gsub(/ translated/, "");
+		    gsub(/ messages/, "");
+		    gsub(/ message/, "");
+		    gsub(/ translations/, "");
+		    gsub(/ translation/, "");
+		    gsub(/ fuzzy/, "");
+		    gsub(/[.,]/, "");
+		    {printf "%8s %8s %8s\n", $1, $2, $3}
+		    }'
+done
+echo "-----------------------------------------"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groupadd.8'>
-  <!-- $Id: groupadd.8.xml,v 1.28 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id: groupadd.8.xml,v 1.29 2007/02/01 20:49:25 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupadd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -29,7 +29,7 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>The <command>groupadd</command> command creates a new group
-      account using the values specified on the command line and the default
+      account using the values specified on the command line plus the default
       values from the system. The new group will be entered into the system
       files as needed.
     </para>
@@ -47,10 +47,12 @@
 	  <option>-f</option>
 	</term>
 	<listitem>
-	  <para>This option causes to just exit with success status if the
-	    specified group already exists. With <option>-g</option>, if
-	    specified GID already exists, other (unique) GID is chosen (i.e.
-	    <option>-g</option> is turned off).
+	  <para>
+	    This option causes the command to simply exit with success
+	    status if the specified group already exists. When used with
+	    <option>-g</option>, and the specified GID already exists,
+	    another (unique) GID is chosen (i.e. <option>-g</option> is
+	    turned off).
 	  </para>
 	</listitem>
       </varlistentry>
@@ -101,7 +103,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    This option permits to add group with non-unique GID.
+	    This option permits to add a group with a non-unique GID.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -138,16 +140,12 @@
        only lower case letters, underscores, dashes, and dollar signs may 
        follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
      </para>
-     <para>Groupnames may only be up to 16 characters long.</para>
-
      <para>
        If the groupname already exists in an external group database
        such as NIS, <command>groupadd</command> will deny the group
        creation request.
      </para>
-
      <para>Groupnames may only be up to 16 characters long.</para>
-
    </refsect1>
 
   <refsect1 id='exit_values'>

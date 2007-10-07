@@ -1,11 +1,11 @@
 .\"     Title: groupmod
 .\"    Author: 
-.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 12/07/2006
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 10/30/2006
 .\"    Manual: Polecenia Zarządzania Systemem
 .\"    Source: Polecenia Zarządzania Systemem
 .\"
-.TH "GROUPMOD" "8" "12/07/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.TH "GROUPMOD" "8" "10/30/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -19,69 +19,96 @@ groupmod \- modyfikuj definicję grupy systemowej
 .PP
 Polcenie
 \fBgroupmod\fR
-modifikuje definicję grupy\fIGRUPA\fR
+modifikuje definicję grupy
+\fIGRUPA\fR
 poprzez modifikację stosownego wpisu w bazie grup.
 .SH "OPCJE"
 .PP
 Polecenie
 \fBgroupmod\fR
 posiada następujące opcje:
-.TP 3n
+.PP
 \fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+.RS 3n
 Nowa wartość ID grupy
 \fIGRUPA\fR. Numeryczna wartość
 \fIGID\fR
 musi mieć nieujemną wartość całkowitą. Wartość ta musi być unikalna chyba że użyto opcji
 \fB\-o\fR. Wartości pomiędzy 0 a 999 są zwykle zarezerwowane dla grup systemowych. Pliki, dla których stary identyfikator jest identyfikatorem grupy pliku, wymagają ręcznej zmiany ID grupy.
-.TP 3n
+.RE
+.PP
 \fB\-h\fR, \fB\-\-help\fR
+.RS 3n
 Wyświetlenie komunikatu pomocy i zakończenie działania.
-.TP 3n
+.RE
+.PP
 \fB\-a\fR, \fB\-\-append\fR\fINOWA_GRUPA\fR
+.RS 3n
 Nazwa grupy zostanie zmieniona z
 \fIGRUPA\fR
 na nazwę
 \fINOWA_GRUPA\fR.
-.TP 3n
+.RE
+.PP
 \fB\-o\fR, \fB\-\-non\-unique\fR
+.RS 3n
 Użyte z opcją
 \fB\-g\fR
 umożliwia zmiane
 \fIGID\fR
 grupy na wartość nieunikalną.
+.RE
 .SH "PLIKI"
-.TP 3n
+.PP
 \fI/etc/group\fR
+.RS 3n
 Informacje o grupach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/gshadow\fR
+.RS 3n
 Informacje chronione o grupach użytkowników.
+.RE
 .SH "KOD ZAKOŃCZENIA"
 .PP
 Polecenie
 \fBgroupmod\fR
 kończy działanie z następującymi wartościami kodów zakończenia:
-.TP 3n
+.PP
 \fI0\fR
+.RS 3n
 poprawne zakończenie działania programu
-.TP 3n
+.RE
+.PP
 \fI2\fR
+.RS 3n
 niepoprawna składnia polecenia
-.TP 3n
+.RE
+.PP
 \fI3\fR
+.RS 3n
 nieprawidłowy argument opcji
-.TP 3n
+.RE
+.PP
 \fI4\fR
+.RS 3n
 specified group doesn't exist
-.TP 3n
+.RE
+.PP
 \fI6\fR
+.RS 3n
 specified group doesn't exist
-.TP 3n
+.RE
+.PP
 \fI9\fR
+.RS 3n
 nazwa grupy już jest w użyciu
-.TP 3n
+.RE
+.PP
 \fI10\fR
+.RS 3n
 nie można zaktualizować pliku z grupami
+.RE
 .SH "ZOBACZ TAKŻE"
 .PP
 \fBchfn\fR(1),

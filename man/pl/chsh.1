@@ -1,11 +1,11 @@
 .\"     Title: chsh
 .\"    Author: 
-.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 16/07/2006
+.\" Generator: DocBook XSL Stylesheets v1.71.0 <http://docbook.sf.net/>
+.\"      Date: 10/30/2006
 .\"    Manual: Polecenia użytkowników
 .\"    Source: Polecenia użytkowników
 .\"
-.TH "CHSH" "1" "16/07/2006" "Polecenia użytkowników" "Polecenia użytkowników"
+.TH "CHSH" "1" "10/30/2006" "Polecenia użytkowników" "Polecenia użytkowników"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -17,7 +17,7 @@ chsh \- zmiana powłoki zgłoszeniowej
 \fBchsh\fR [\fIopcje\fR] [\fILOGIN\fR]
 .SH "OPIS"
 .PP
-Poleceni
+Polecenie
 \fBchsh\fR
 zmienia powłokę zgłoszeniową użytkownika. Określa nazwę początkowego polecenia zgłoszeniowego użytkownika. Zwykły użytkownik może zmienić wyłącznie powłokę zgłoszeniową własnego konta, superużytkownik może zmienić powłokę zgłoszeniową dla dowolnego konta.
 .SH "OPCJE"
@@ -25,12 +25,16 @@ zmienia powłokę zgłoszeniową użytkownika. Określa nazwę początkowego pol
 Polecenie
 \fBchsh\fR
 posiada następujące opcje:
-.TP 3n
+.PP
 \fB\-h\fR, \fB\-\-help\fR
+.RS 3n
 Wyświetlenie komunikatu pomocy i zakończenie działania.
-.TP 3n
+.RE
+.PP
 \fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+.RS 3n
 Nazwa nowej powłoki (shell) użytkownika. Ustawienie tego pola na puste powoduje, że system wybierze domyślną powłokę logowania.
+.RE
 .PP
 Jeżeli nie podano opcji
 \fB\-s\fR, to polecenie
@@ -45,15 +49,21 @@ Jedynym ograniczeniem nałożonym na powłokę zgłoszeniową jest to, że jej n
 w pliku
 \fI/etc/shells\fR, gdyż przypadkowa zmiana na powłokę ograniczoną uniemożliwi użytkownikowi jakąkolwiek zmianę powłoki logowania, nawet z powrotem na dotychczasową.
 .SH "PLIKI"
-.TP 3n
+.PP
 \fI/etc/passwd\fR
+.RS 3n
 Informacja o kontach użytkowników.
-.TP 3n
+.RE
+.PP
 \fI/etc/shells\fR
+.RS 3n
 Lista dozwolonych powłok zgłoszeniowych.
-.TP 3n
+.RE
+.PP
 \fI/etc/login.defs\fR
+.RS 3n
 Konfiguracja pakietu shadow.
+.RE
 .SH "ZOBACZ TAKŻE"
 .PP
 \fBchfn\fR(1),

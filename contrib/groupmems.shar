@@ -211,8 +211,8 @@ X
 #define EXIT_SUCCESS		0	/* success */
 #define EXIT_USAGE		1	/* invalid command syntax */
 #define EXIT_GROUP_FILE		2	/* group file access problems */
-#define EXIT_NOT_ROOT		3	/* not super user  */
-#define EXIT_NOT_EROOT		4	/* not effective super user  */
+#define EXIT_NOT_ROOT		3	/* not superuser  */
+#define EXIT_NOT_EROOT		4	/* not effective superuser  */
 #define EXIT_NOT_PRIMARY	5	/* not primary owner of group  */
 #define EXIT_NOT_MEMBER		6	/* member of group does not exist */
 #define EXIT_MEMBER_EXISTS	7	/* member of group already exists */
@@ -467,7 +467,7 @@ X.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 X.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 X.\" SUCH DAMAGE.
 X.\"
-X.\" $Id: groupmems.shar,v 1.1 2000/08/26 18:37:32 marekm Exp $
+X.\" $Id: groupmems.shar,v 1.2 2006/11/12 19:20:35 kloczek Exp $
 X.\"
 X.TH GROUPMEMS 8
 X.SH NAME
@@ -481,11 +481,11 @@ X.B groupmems
 [\fB-g\fI group_name \fR]
 X.SH DESCRIPTION
 The \fBgroupmems\fR utility allows a user to administer his/her own
-group membership list without the requirement of super user privileges.
+group membership list without the requirement of superuser privileges.
 The \fBgroupmems\fR utility is for systems that configure its users to
 be in their own name sake primary group (i.e., guest / guest).
 X.P
-Only the super user, as administrator, can use \fBgroupmems\fR to alter
+Only the superuser, as administrator, can use \fBgroupmems\fR to alter
 the memberships of other groups.
 X.IP "\fB-a \fIuser_name\fR"
 Add a new user to the group membership list.
@@ -496,7 +496,7 @@ List the group membership list.
 X.IP "\fB-D\fR"
 Delete all users from the group membership list.
 X.IP "\fB-g \fIgroup_name\fR"
-The super user can specify which group membership list to modify.
+The superuser can specify which group membership list to modify.
 X.SH SETUP
 The \fBgroupmems\fR executable should be in mode \fB2770\fR as user \fBroot\fR
 and in group \fBgroups\fR.   The system administrator can add users to

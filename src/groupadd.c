@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupadd.c,v 1.55 2006/07/28 17:38:52 kloczek Exp $"
+#ident "$Id: groupadd.c,v 1.56 2006/08/15 17:25:58 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -548,9 +548,9 @@ int main (int argc, char **argv)
 		find_new_gid ();
 
 	grp_update ();
-	nscd_flush_cache ("group");
-
 	close_files ();
+
+	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)

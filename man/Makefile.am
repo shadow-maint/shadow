@@ -1,5 +1,5 @@
 
-LINGUAS = fr pl ru sv
+LINGUAS = de fr pl ru sv
 
 # subdirectories for translated manual pages
 DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru sv tr zh_CN zh_TW

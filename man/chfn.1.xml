@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='chfn.1'>
-  <!-- $Id: chfn.1.xml,v 1.21 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id: chfn.1.xml,v 1.23 2006/11/12 19:20:34 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chfn</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -25,15 +25,16 @@
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>chfn</command> changes user fullname, office number,
-      office extension, and home phone number information for a user's
-      account. This information is typically printed by <citerefentry>
-      <refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      The <command>chfn</command> command changes user fullname,
+      office number, office extension, and home phone number information
+      for a user's account. This information is typically printed by
+      <citerefentry><refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> and similar programs. A normal user may only change
       the fields for her own account, subject to the restrictions in
       <filename>/etc/login.defs</filename>. (The default configuration is to
-      prevent users from changing their fullname.) The super user may change
-      any field for any account. Additionally, only the super user may use
+      prevent users from changing their fullname.) The superuser may change
+      any field for any account. Additionally, only the superuser may use
       the <option>-o</option> option to change the undefined portions of the
       GECOS field.
     </para>

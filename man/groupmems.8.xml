@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml,v 1.20 2006/07/18 16:55:09 kloczek Exp $ -->
+  <!-- $Id: groupmems.8.xml,v 1.22 2006/11/12 19:20:34 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -26,14 +26,14 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>groupmems</command> utility allows a user to administer
-      his/her own group membership list without the requirement of super
-      user privileges. The <command>groupmems</command> utility is for
+      The <command>groupmems</command> command allows a user to administer
+      his/her own group membership list without the requirement of
+      superuser privileges. The <command>groupmems</command> utility is for
       systems that configure its users to be in their own name sake primary
       group (i.e., guest / guest).
     </para>
 
-    <para>Only the super user, as administrator, can use
+    <para>Only the superuser, as administrator, can use
       <command>groupmems</command> to alter the memberships of other groups.
     </para>
   </refsect1>
@@ -66,7 +66,7 @@
       <varlistentry>
 	<term><option>-g</option> <replaceable>group_name</replaceable></term>
 	<listitem>
-	  <para>The super user can specify which group membership
+	  <para>The superuser can specify which group membership
 	    list to modify.
 	  </para>
 	</listitem>
