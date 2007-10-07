@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.14 1999/03/07 19:14:34 marekm Exp $ */
+/* $Id: defines.h,v 1.15 1999/08/27 19:02:50 marekm Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -203,19 +203,13 @@ char *strchr(), *strrchr(), *strtok();
 # define GTTY(fd, termio) tcgetattr(fd, termio)
 # define TERMIO struct termios
 # define USE_TERMIOS
-#elif HAVE_TERMIO_H
+#else  /* assumed HAVE_TERMIO_H */
 # include <sys/ioctl.h>
 # include <termio.h>
 # define STTY(fd, termio) ioctl(fd, TCSETA, termio)
 # define GTTY(fd, termio) ioctl(fd, TCGETA, termio)
 # define TEMRIO struct termio
 # define USE_TERMIO
-#elif HAVE_SGTTY_H
-# include <sgtty.h>
-# define STTY(fd, termio) stty(fd, termio)
-# define GTTY(fd, termio) gtty(fd, termio)
-# define TERMIO struct sgttyb
-# define USE_SGTTY
 #endif
 
 /*

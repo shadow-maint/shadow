@@ -161,23 +161,14 @@
 /* Define to support the MD5-based password hashing algorithm.  */
 #undef MD5_CRYPT
 
-/* Define to enable the new readpass() that echoes asterisks.  */
-#undef NEW_READPASS
-
 /* Define to support OPIE one-time password logins.  */
 #undef OPIE
 
-/* Package name.  */
-#undef PACKAGE
-
-/* Define if pam_strerror() needs two arguments (Linux-PAM 0.59).  */
+/* Define if pam_strerror() needs two arguments (Linux-PAM 0.59+).  */
 #undef PAM_STRERROR_NEEDS_TWO_ARGS
 
 /* Path to passwd program.  */
 #undef PASSWD_PROGRAM
-
-/* Define if the compiler understands function prototypes.  */
-#undef PROTOTYPES
 
 /* Define if login should support the -r flag for rlogind.  */
 #undef RLOGIN
@@ -214,9 +205,6 @@
 
 /* Define to ut_name if struct utmp has ut_name (not ut_user).  */
 #undef ut_user
-
-/* Version.  */
-#undef VERSION
 
 /* Path for wtmp file.  */
 #undef _WTMP_FILE
@@ -454,3 +442,13 @@
 
 /* Define if you have the socket library (-lsocket).  */
 #undef HAVE_LIBSOCKET
+
+/* Name of package */
+#undef PACKAGE
+
+/* Version number of package */
+#undef VERSION
+
+/* Define if compiler has function prototypes */
+#undef PROTOTYPES
+

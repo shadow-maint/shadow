@@ -1,1 +1,3 @@
+/etc/cron.daily/passwd
+/etc/init.d/passwd
 /etc/shells

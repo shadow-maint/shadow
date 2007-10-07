@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: sulogin.c,v 1.9 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: sulogin.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -94,12 +94,6 @@ main(int argc, char **argv)
 	char	**envp = environ;
 	TERMIO	termio;
 
-#ifdef	USE_SGTTY
-	ioctl (0, TIOCGETP, &termio);
-	termio.sg_flags |= (ECHO|CRMOD);
-	termio.sg_flags &= ~(RAW|CBREAK);
-	ioctl (0, TIOCSETN, &termio);
-#endif
 #ifdef	USE_TERMIO
 	ioctl (0, TCGETA, &termio);
 	termio.c_iflag |= (ICRNL|IXON);

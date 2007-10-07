@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the login package.
 #
-#	$Id: login.defs.linux,v 1.10 1999/03/07 19:14:33 marekm Exp $
+#	$Id: login.defs.linux,v 1.11 1999/08/27 19:02:50 marekm Exp $
 #
 # Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
 # If unspecified, some arbitrary (and possibly incorrect) value will
@@ -334,7 +334,35 @@ ENVIRON_FILE	/etc/environment
 #
 # If defined, either full pathname of a file containing device names or
 # a ":" delimited list of device names.  No password is required to log in
-# on these devices.
+# as a non-root user on these devices.
 #
 #NO_PASSWORD_CONSOLE tty1:tty2:tty3:tty4:tty5:tty6
+
+#
+# When prompting for password without echo, getpass() can optionally
+# display a random number (in the range 1 to GETPASS_ASTERISKS) of '*'
+# characters for each character typed.  This feature is designed to
+# confuse people looking over your shoulder when you enter a password :-).
+# Also, the new getpass() accepts both Backspace (8) and Delete (127)
+# keys to delete previous character (to cope with different terminal
+# types), Control-U to delete all characters, and beeps when there are
+# no more characters to delete, or too many characters entered.
+#
+# Setting GETPASS_ASTERISKS to 1 results in more traditional behaviour -
+# exactly one '*' displayed for each character typed.
+#
+# Setting GETPASS_ASTERISKS to 0 disables the '*' characters (Backspace,
+# Delete, Control-U and beep continue to work as described above).
+#
+# Setting GETPASS_ASTERISKS to -1 reverts to the traditional getpass()
+# without any new features.  This is the default.
+#
+#GETPASS_ASTERISKS 1
+
+#
+# Enable setting of the umask group bits to be the same as owner bits
+# (examples: 022 -> 002, 077 -> 007) for non-root users, if the uid is
+# the same as gid, and username is the same as the primary group name.
+#
+USERGROUPS_ENAB yes
 

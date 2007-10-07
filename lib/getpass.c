@@ -31,12 +31,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getpass.c,v 1.9 1999/06/07 16:40:44 marekm Exp $")
+RCSID("$Id: getpass.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
 
 #include "defines.h"
 
 #include <signal.h>
 #include <stdio.h>
+
+#include "getdef.h"
 
 /* new code, #undef if there are any problems...  */
 #define USE_SETJMP 1
@@ -64,26 +66,33 @@ sig_catch(int sig)
 
 #define MAXLEN 127
 
-#ifndef NEW_READPASS  /* ./configure --enable-readpass */
-#define OLD_READPASS 1
-#endif
 
-#ifndef OLD_READPASS
 static char *
-readpass(FILE *fp)
+readpass(FILE *ifp, FILE *ofp, int with_echo, int max_asterisks)
 {
 	static char input[MAXLEN + 1], asterix[MAXLEN + 1];
 	static char once;
 	char *cp, *ap, c;
 	int i;
 
+	if (max_asterisks < 0) {
+		/* traditional code using fgets() */
+		if (fgets(input, sizeof input, ifp) != input)
+			return NULL;
+		cp = strrchr(input, '\n');
+		if (cp)
+			*cp = '\0';
+		else
+			input[sizeof input - 1] = '\0';
+		return input;
+	}
 	if (!once) {
 		srandom(time(0)*getpid());
 		once = 1;
 	}
 	cp = input;
 	ap = asterix;
-	while (read(fileno(fp), &c, 1)) {
+	while (read(fileno(ifp), &c, 1)) {
 		switch (c) {
 		case '\n':
 		case '\r':
@@ -91,67 +100,70 @@ readpass(FILE *fp)
 		case '\b':
 		case 127:
 			if (cp > input) {
-				cp--; ap--;
-				for (i = 0; i < (*ap); i++) {
-					putc('\b', stdout);
-					putc(' ', stdout);
-					putc('\b', stdout);
-				}
-			} else
-				putc('\a', stdout);  /* BEL */
+				cp--;
+				ap--;
+				for (i = *ap; i > 0; i--)
+					fputs("\b \b", ofp);
+				*cp = '\0';
+				*ap = 0;
+			} else {
+				putc('\a', ofp);  /* BEL */
+			}
+			break;
+		case '\025':  /* Ctrl-U = erase everything typed so far */
+			if (cp == input) {
+				putc('\a', ofp);  /* BEL */
+			} else while (cp > input) {
+				cp--;
+				ap--;
+				for (i = *ap; i > 0; i--)
+					fputs("\b \b", ofp);
+				*cp = '\0';
+				*ap = 0;
+			}
 			break;
 		default:
 			*cp++ = c;
-			*ap++ = (random() % 4)+1;
-			for (i = 0; i < (*(ap-1)); i++)
-				putc('*', stdout);
+			if (with_echo) {
+				*ap = 1;
+				putc(c, ofp);
+			} else if (max_asterisks > 0) {
+				*ap = (random() % max_asterisks) + 1;
+				for (i = *ap; i > 0; i--)
+					putc('*', ofp);
+			} else {
+				*ap = 0;
+			}
+			ap++;
 			break;
 		}
-		fflush(stdout);
-		if (cp == input + MAXLEN)
+		fflush(ofp);
+		if (cp >= input + MAXLEN) {
+			putc('\a', ofp);  /* BEL */
 			break;
+		}
 	}
 endwhile:
-	*cp = 0;
-	putc('\n', stdout);
+	*cp = '\0';
+	putc('\n', ofp);
 	return input;
 }
-#else
+
 static char *
-readpass(FILE *fp)
-{
-	static char input[MAXLEN + 1];
-	char *cp;
-
-	if (fgets(input, sizeof input, fp) == input) {
-		if ((cp = strrchr(input, '\n')))
-			*cp = '\0';
-		else
-			input[sizeof input - 1] = '\0';
-#ifdef USE_SGTTY
-		putc('\n', stdout);
-#endif
-		return input;
-	}
-	return NULL;
-}
-#endif
-
-char *
-libshadow_getpass(const char *prompt)
+prompt_password(const char *prompt, int with_echo)
 {
 	static char nostring[1] = "";
 	static char *return_value;
 	volatile int tty_opened;
-	static FILE *fp;
+	static FILE *ifp, *ofp;
 	volatile int is_tty;
 #ifdef HAVE_SIGACTION
 	struct sigaction old_sigact;
 #else
 	RETSIGTYPE (*old_signal)();
 #endif
-	TERMIO new_modes;
 	TERMIO old_modes;
+	int max_asterisks = getdef_num("GETPASS_ASTERISKS", -1);
 
 	/*
 	 * set a flag so the SIGINT signal can be re-sent if it
@@ -164,24 +176,26 @@ libshadow_getpass(const char *prompt)
 
 	/*
 	 * if /dev/tty can't be opened, getpass() needs to read
-	 * from stdin instead.
+	 * from stdin and write to stderr instead.
 	 */
 
-	if ((fp = fopen ("/dev/tty", "r")) == 0) {
-		fp = stdin;
-		setbuf (fp, (char *) 0);
+	if (!(ifp = fopen("/dev/tty", "r+"))) {
+		ifp = stdin;
+		ofp = stderr;
 	} else {
+		ofp = ifp;
 		tty_opened = 1;
 	}
+	setbuf(ifp, (char *) 0);
 
 	/*
 	 * the current tty modes must be saved so they can be
 	 * restored later on.  echo will be turned off, except
-	 * for the newline character (BSD has to punt on this)
+	 * for the newline character
 	 */
 
 	is_tty = 1;
-	if (GTTY(fileno(fp), &old_modes)) {
+	if (GTTY(fileno(ifp), &old_modes)) {
 		is_tty = 0;
 #if 0  /* to make getpass work with redirected stdin */
 		return_value = NULL;
@@ -204,24 +218,25 @@ libshadow_getpass(const char *prompt)
 	sigact.sa_flags = 0;
 	sigaction(SIGINT, &sigact, &old_sigact);
 #else
-	old_signal = signal (SIGINT, sig_catch);
-#endif
-
-	new_modes = old_modes;
-
-#ifdef USE_SGTTY
-	new_modes.sg_flags &= ~ECHO ;
-#else
-#ifdef OLD_READPASS
-	new_modes.c_lflag &= ~(ECHO|ECHOE|ECHOK);
-#else
-	new_modes.c_lflag &= ~(ECHO|ECHOE|ECHOK|ICANON);
-#endif
-	new_modes.c_lflag |= ECHONL;
+	old_signal = signal(SIGINT, sig_catch);
 #endif
 
 	if (is_tty) {
-		if (STTY(fileno(fp), &new_modes))
+		TERMIO new_modes = old_modes;
+
+		if (max_asterisks < 0)
+			new_modes.c_lflag |= ICANON;
+		else
+			new_modes.c_lflag &= ~(ICANON);
+
+		if (with_echo)
+			new_modes.c_lflag |= (ECHO | ECHOE | ECHOK);
+		else
+			new_modes.c_lflag &= ~(ECHO | ECHOE | ECHOK);
+
+		new_modes.c_lflag |= ECHONL;
+
+		if (STTY(fileno(ifp), &new_modes))
 			goto out;
 	}
 
@@ -232,8 +247,8 @@ libshadow_getpass(const char *prompt)
 	 * returned.
 	 */
 
-	if ((fputs(prompt, stdout) != EOF) && (fflush(stdout) != EOF))
-		return_value = readpass(fp);
+	if ((fputs(prompt, ofp) != EOF) && (fflush(ofp) != EOF))
+		return_value = readpass(ifp, ofp, with_echo, max_asterisks);
 out:
 	/*
 	 * the old SIGINT handler is restored after the tty
@@ -243,7 +258,7 @@ out:
 	 */
 
 	if (is_tty) {
-		if (STTY(fileno(fp), &old_modes))
+		if (STTY(fileno(ifp), &old_modes))
 			return_value = NULL;
 	}
 
@@ -254,7 +269,7 @@ out:
 #endif
 out2:
 	if (tty_opened)
-		(void) fclose (fp);
+		(void) fclose(ifp);
 
 	if (sig_caught) {
 		kill(getpid(), SIGINT);
@@ -266,3 +281,16 @@ out2:
 	}
 	return return_value;
 }
+
+char *
+libshadow_getpass(const char *prompt)
+{
+	return prompt_password(prompt, 0);
+}
+
+char *
+getpass_with_echo(const char *prompt)
+{
+	return prompt_password(prompt, 1);
+}
+

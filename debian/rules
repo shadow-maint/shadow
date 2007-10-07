@@ -2,8 +2,29 @@
 
 package = shadow
 
+# see dpkg-architecture(8)
+DEB_BUILD_ARCH := $(shell dpkg --print-installation-architecture)
+DEB_BUILD_GNU_CPU := $(patsubst hurd-%,%,$(DEB_BUILD_ARCH))
+ifeq ($(filter-out hurd-%,$(DEB_BUILD_ARCH)),)
+  DEB_BUILD_GNU_SYSTEM := gnu
+else
+  DEB_BUILD_GNU_SYSTEM := linux
+endif
+DEB_BUILD_GNU_TYPE=$(DEB_BUILD_GNU_CPU)-$(DEB_BUILD_GNU_SYSTEM)
+
+DEB_HOST_GNU_SYSTEM=$(DEB_BUILD_GNU_SYSTEM)
+DEB_HOST_GNU_TYPE=$(DEB_BUILD_GNU_TYPE)
+
+ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
+package-list = binary-login binary-passwd binary-su
+else
+package-list = binary-passwd
+endif
+
 # set up environment so that dpkg --build runs our tar wrapper
-TAR_WRAPPER_SETUP = REAL_TAR=`command -p -v tar` PATH=`cd debian && pwd`:$$PATH
+# (XXX this is no longer needed, and will be removed soon - install
+# libtricks and use "dpkg-buildpackage -rfakeroot" instead)
+#TAR_WRAPPER_SETUP = REAL_TAR=`command -p -v tar` PATH=`cd debian && pwd`:$$PATH
 
 # for "exec login" to work for ordinary users, /bin/login needs to be setuid
 # but very few people use this feature, so we make it non-setuid by default
@@ -11,10 +32,14 @@ LOGIN_PERM = 0755
 
 build:
 	$(checkdir)
+	cp -a debian/control.$(DEB_HOST_GNU_SYSTEM) debian/control
 	# shared lib support is untested, so...
-	./configure --disable-shared --disable-desrpc # --without-libcrack
+	./configure --disable-shared --disable-desrpc \
+	  --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 	$(MAKE)
-	gcc -O2 -Wall -o debian/tar debian/tar.c
+	if [ -n "$(TAR_WRAPPER_SETUP)" ] ; then \
+	  gcc -O2 -Wall -o debian/tar debian/tar.c ; \
+	fi
 	touch build
 
 clean:
@@ -23,12 +48,13 @@ clean:
 	-$(MAKE) -i distclean
 	rm -rf {libmisc,lib,src}/.deps
 	rm -rf debian/tmp{-l,-p,-s} debian/{files*,substvars}
+	cp -a debian/control.linux debian/control
 	find . -name '*~' -print0 | xargs -0 rm -f
 
 binary-indep:	checkroot build
 	$(checkdir)
 
-binary-arch:	binary-login binary-passwd binary-su
+binary-arch:	$(package-list)
 
 binary-login:	checkroot build
 	$(checkdir)
@@ -45,7 +71,7 @@ binary-login:	checkroot build
 	ln -s newgrp.1.gz debian/tmp-l/usr/man/man1/sg.1.gz
 	install -m600 etc/login.defs.linux debian/tmp-l/etc/login.defs
 	install -m600 etc/{login.access,limits} debian/{securetty,porttime} debian/tmp-l/etc/
-	install debian/logoutd debian/tmp-l/etc/init.d/
+	install debian/logoutd.init debian/tmp-l/etc/init.d/logoutd
 	install -m644 debian/changelog debian/tmp-l/usr/doc/login/changelog.Debian
 	install -m644 doc/CHANGES debian/tmp-l/usr/doc/login/changelog
 	find debian/tmp-l/usr/{doc,man} -type f | xargs gzip -9
@@ -63,8 +89,10 @@ binary-login:	checkroot build
 binary-passwd:	checkroot build
 	$(checkdir)
 	-rm -rf debian/tmp-p
-	install -d debian/tmp-p/{DEBIAN,etc,usr/{sbin,bin,man/{man1,man5,man8},doc/passwd}}
+	install -d debian/tmp-p/{DEBIAN,etc/{cron.daily,init.d},usr/{sbin,bin,man/{man1,man5,man8},doc/passwd}}
 	install -m644 etc/shells debian/tmp-p/etc/
+	install debian/passwd.cron debian/tmp-p/etc/cron.daily/passwd
+	install debian/passwd.init debian/tmp-p/etc/init.d/passwd
 	install -s -m4755 src/{chage,chfn,chsh,expiry,gpasswd,passwd} debian/tmp-p/usr/bin/
 	install -s src/{chpasswd,groupadd,groupdel,groupmod,grpck,grpconv,grpunconv} \
 	  src/{newusers,pwck,pwconv,pwunconv,useradd,userdel} \
@@ -87,10 +115,15 @@ binary-passwd:	checkroot build
 	install -m644 debian/passwd.copyright debian/tmp-p/usr/doc/passwd/copyright
 	install debian/login.preinst debian/tmp-p/DEBIAN/preinst
 	install debian/passwd.postinst debian/tmp-p/DEBIAN/postinst
+	install debian/passwd.postrm debian/tmp-p/DEBIAN/postrm
 	install -m644 debian/passwd.conffiles debian/tmp-p/DEBIAN/conffiles
 	dpkg-shlibdeps debian/tmp-p/usr/{bin/*,sbin/*}
 	# dpkg-shlibdeps fails on scripts, so install them now...
 	install src/shadowconfig.sh debian/tmp-p/usr/sbin/shadowconfig
+ifeq ($(DEB_HOST_GNU_SYSTEM),gnu)
+	install etc/login.defs.hurd debian/tmp-p/etc/login.defs
+	echo "/etc/login.defs" >> debian/tmp-p/DEBIAN/conffiles
+endif
 	dpkg-gencontrol -isp -ppasswd -Pdebian/tmp-p
 	./debian/checksums debian/tmp-p
 	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-p ..

@@ -1,4 +1,4 @@
-/* $Id: acconfig.h,v 1.12 1999/06/07 16:40:43 marekm Exp $ */
+/* $Id: acconfig.h,v 1.13 1999/08/27 19:02:50 marekm Exp $ */
 
 
 
@@ -89,16 +89,13 @@
 /* Define to use ndbm.  */
 #undef NDBM
 
-/* Define to enable the new readpass() that echoes asterisks.  */
-#undef NEW_READPASS
-
 /* Define to support OPIE one-time password logins.  */
 #undef OPIE
 
 /* Package name.  */
 #undef PACKAGE
 
-/* Define if pam_strerror() needs two arguments (Linux-PAM 0.59).  */
+/* Define if pam_strerror() needs two arguments (Linux-PAM 0.59+).  */
 #undef PAM_STRERROR_NEEDS_TWO_ARGS
 
 /* Path to passwd program.  */

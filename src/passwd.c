@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: passwd.c,v 1.17 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: passwd.c,v 1.18 1999/08/27 19:02:51 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -353,7 +353,7 @@ new_password(const struct passwd *pw)
 	if (! amroot && crypt_passwd[0]) {
 #endif
 
-		if (!(clear = getpass(_("Old password:"))))
+		if (!(clear = getpass(_("Old password: "))))
 			return -1;
 
 		cipher = pw_encrypt(clear, crypt_passwd);
@@ -398,7 +398,7 @@ Please use a combination of upper and lower case letters and numbers.\n"),
 
 	warned = 0;
 	for (i = getdef_num("PASS_CHANGE_TRIES", 5); i > 0; i--) {
-		if (!(cp = getpass(_("New password:")))) {
+		if (!(cp = getpass(_("New password: ")))) {
 			memzero(orig, sizeof orig);
 			return -1;
 		}
@@ -421,7 +421,7 @@ Please use a combination of upper and lower case letters and numbers.\n"),
 			warned++;
 			continue;
 		}
-		if (!(cp = getpass(_("Re-enter new password:")))) {
+		if (!(cp = getpass(_("Re-enter new password: ")))) {
 			memzero(orig, sizeof orig);
 			return -1;
 		}

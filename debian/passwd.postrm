@@ -2,5 +2,5 @@
 set -e
 
 if [ "$1" = "purge" ] ; then
-	update-rc.d logoutd remove >/dev/null
+	update-rc.d passwd remove >/dev/null
 fi

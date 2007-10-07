@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newgrp.c,v 1.13 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: newgrp.c,v 1.14 1999/08/27 19:02:51 marekm Exp $")
 
 #include <stdio.h>
 #include <errno.h>
@@ -66,7 +66,7 @@ usage(void)
 	if (is_newgrp)
 		fprintf (stderr, _("usage: newgrp [ - ] [ group ]\n"));
 	else
-		fprintf (stderr, _("usage: sg group [ command ]\n"));
+		fprintf (stderr, _("usage: sg group [[-c] command ]\n"));
 }
 
 /*
@@ -163,7 +163,15 @@ main(int argc, char **argv)
 			exit (1);
 		}
 		if (argc > 0) {
-			command = argv[1];
+
+			/* skip -c if specified so both forms work:
+			   "sg group -c command" (as in the man page) or
+			   "sg group command" (as in the usage message).  */
+
+			if (argc > 1 && strcmp(argv[0], "-c") == 0)
+				command = argv[1];
+			else
+				command = argv[0];
 			cflag++;
 		}
 	} else {
@@ -209,8 +217,6 @@ main(int argc, char **argv)
 	for (;;) {
 		grouplist = (GETGROUPS_T *) xmalloc(i * sizeof(GETGROUPS_T));
 		ngroups = getgroups(i, grouplist);
-		/* XXX Bug#38672
-		   login: newgrp/sg fails with user in 17 groups */
 		if (i > ngroups && !(ngroups == -1 && errno == EINVAL))
 			break;
 		/* not enough room, so try allocating a larger buffer */
@@ -288,7 +294,7 @@ main(int argc, char **argv)
 		 * the decryption from the group file.
 		 */
 
-		if (! (cp = getpass (_("Password:"))))
+		if (! (cp = getpass (_("Password: "))))
 			goto failure;
 
 		/*
@@ -442,6 +448,12 @@ okay:
 		while (*envp)
 			addenv(*envp++, NULL);
 	}
+
+	/* sanitize_env() removes $HOME from the environment (maybe it
+	   shouldn't - please tell me if you are sure that $HOME can't
+	   cause security problems) - add it from user's passwd entry.
+	*/
+	addenv("HOME", pwd->pw_dir);
 
 	/*
 	 * exec the login shell and go away.  we are trying to get

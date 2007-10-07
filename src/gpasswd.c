@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: gpasswd.c,v 1.14 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: gpasswd.c,v 1.15 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -537,12 +537,12 @@ main(int argc, char **argv)
 	printf(_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
-		if (! (cp = getpass(_("New Password:"))))
+		if (! (cp = getpass(_("New Password: "))))
 			exit (1);
 
 		STRFCPY(pass, cp);
 		strzero(cp);
-		if (! (cp = getpass (_("Re-enter new password:"))))
+		if (! (cp = getpass (_("Re-enter new password: "))))
 			exit (1);
 
 		if (strcmp(pass, cp) == 0) {

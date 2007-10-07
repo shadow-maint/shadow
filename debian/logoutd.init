@@ -21,20 +21,14 @@ case "$1" in
 	start-stop-daemon --stop --quiet --exec $DAEMON
 	echo "."
 	;;
-    restart)
+    force-reload|restart)
 	$0 stop
 	$0 start
 	;;
     reload)
-	echo -n "Reloading logoutd configuration..."
-	start-stop-daemon --stop --signal 1 --quiet --exec $DAEMON
-	echo "done."
-	;;
-    force-reload)
-	$0 reload
 	;;
     *)
-	echo "Usage: /etc/init.d/logoutd start|stop"
+	echo "Usage: /etc/init.d/logoutd start|stop|restart"
 	exit 1
 	;;
 esac

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwauth.c,v 1.9 1998/12/28 20:34:38 marekm Exp $")
+RCSID("$Id: pwauth.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <signal.h>
@@ -53,10 +53,11 @@ RCSID("$Id: pwauth.c,v 1.9 1998/12/28 20:34:38 marekm Exp $")
 #ifdef __linux__  /* standard password prompt by default */
 static const char *PROMPT = gettext_noop("Password: ");
 #else
-static const char *PROMPT = gettext_noop("%s's Password:");
+static const char *PROMPT = gettext_noop("%s's Password: ");
 #endif
 
-extern	char	*getpass();
+extern char *getpass();
+extern char *getpass_with_echo();
 
 #ifdef AUTH_METHODS
 /*
@@ -207,7 +208,7 @@ _old_auth(const char *cipher, const char *user, int reason, const char *input)
 
 	if (reason != PW_FTP && reason != PW_REXEC && !input) {
 		if (! (cp = getdef_str ("LOGIN_STRING")))
-			cp = PROMPT;
+			cp = _(PROMPT);
 #ifdef	SKEY
 		if (use_skey)
 			printf ("[%s]\n", challenge_info);
@@ -219,7 +220,7 @@ _old_auth(const char *cipher, const char *user, int reason, const char *input)
 #endif
 
 		snprintf(prompt, sizeof prompt, cp, user);
-		clear = getpass(_(prompt));
+		clear = getpass(prompt);
 		if (!clear) {
 			static char c[1];
 			c[0] = '\0';
@@ -247,6 +248,35 @@ _old_auth(const char *cipher, const char *user, int reason, const char *input)
 
 	if ((retval == 0) && use_opie)
 		opieverify(&opie, (char *)NULL);
+#endif
+
+#if (defined(SKEY) || defined(OPIE))
+	/*
+	 * If (1) The password fails to match, and
+	 * (2) The password is empty and
+	 * (3) We are using OPIE or S/Key, then
+	 * ...Re-prompt, with echo on.
+	 * -- AR 8/22/1999
+	 */
+	if (retval && !input[0] &&
+	    (0
+#ifdef SKEY
+	     || use_skey
+#endif
+#ifdef OPIE
+	     || use_opie
+#endif
+	     )) {
+		strncat(prompt, _("(Echo on) "),
+			(sizeof(prompt) - strlen(prompt)));
+		clear = getpass_with_echo(prompt);
+		if (!clear) {
+			static char c[1];
+			c[0] = '\0';
+			clear = c;
+		}
+		input = clear;
+	}
 #endif
 
 #ifdef	SKEY
@@ -520,7 +550,7 @@ pw_auth(const char *command, const char *user, int reason, const char *input)
 	if (strlen (command) >= sizeof buf)
 		return -1;
 
-	strcpy (buf, command); /* safe (because of the above check) --marekm */
+	strcpy(buf, command); /* safe (because of the above check) --marekm */
 
 	/*
 	 * Find each command and make sure it is NUL-terminated.  Then

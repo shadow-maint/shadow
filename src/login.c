@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: login.c,v 1.15 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: login.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -218,7 +218,6 @@ setup_tty(void)
 	 * Add your favorite terminal modes here ...
 	 */
 
-#ifndef	USE_SGTTY
 	termio.c_lflag |= ISIG|ICANON|ECHO|ECHOE;
 	termio.c_iflag |= ICRNL;
 
@@ -261,8 +260,6 @@ setup_tty(void)
 	 * effect after the first username login 
 	 */
 
-#else
-#endif	/* !BSD */
 	STTY(0, &termio);
 }
 

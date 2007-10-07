@@ -15,6 +15,9 @@ permfix () {
 permfix /sbin/sulogin
 permfix /usr/X11R6/bin/xdm-shadow
 
+# check password and group files at boot time
+update-rc.d passwd start 60 S . >/dev/null
+
 grep -q '^shadow:[^:]*:42' /etc/group && exit 0
 groupadd -g 42 shadow || (
     cat <<EOF

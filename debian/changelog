@@ -1,4 +1,4 @@
-shadow (19990709) unstable; urgency=low
+shadow (19990827) unstable; urgency=low
 
   * upstream upgrade, see CHANGES for more details.  Note: this is
     not the official Debian changelog entry - it is here only for
@@ -8,7 +8,7 @@ shadow (19990709) unstable; urgency=low
     mine) in the debian/control Maintainer field.  Thanks, and keep
     up the good work!
 
- -- Marek Michalkiewicz <marekm@linux.org.pl>  Fri,  9 Jul 1999 19:40:00 +0200
+ -- Marek Michalkiewicz <marekm@linux.org.pl>  Fri, 27 Aug 1999 21:00:00 +0200
 
 shadow (980403-0.3.2) unstable; urgency=low
 

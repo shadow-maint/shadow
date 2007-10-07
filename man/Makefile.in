@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.3 from Makefile.am
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
 
-# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -11,7 +11,7 @@
 # PARTICULAR PURPOSE.
 
 
-SHELL = /bin/sh
+SHELL = @SHELL@
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -32,7 +32,7 @@ mandir = @mandir@
 includedir = @includedir@
 oldincludedir = /usr/include
 
-DISTDIR =
+DESTDIR =
 
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
@@ -46,7 +46,7 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
 transform = @program_transform_name@
@@ -59,11 +59,13 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+AS = @AS@
 CATALOGS = @CATALOGS@
 CATOBJEXT = @CATOBJEXT@
 CC = @CC@
 CPP = @CPP@
 DATADIRNAME = @DATADIRNAME@
+DLLTOOL = @DLLTOOL@
 GENCAT = @GENCAT@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -87,6 +89,7 @@ MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 NM = @NM@
+OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
 POSUB = @POSUB@
@@ -100,16 +103,8 @@ l = @l@
 
 AUTOMAKE_OPTIONS = 1.0 foreign
 
-man_MANS = chage.1 chfn.1 chsh.1 gpasswd.1 \
- login.1 newgrp.1 passwd.1 su.1 \
- shadow.3 \
- faillog.5 limits.5 login.access.5 login.defs.5 \
- passwd.5 porttime.5 shadow.5 suauth.5 \
- chpasswd.8 dpasswd.8 faillog.8 \
- groupadd.8 groupdel.8 groupmod.8 \
- grpck.8 lastlog.8 logoutd.8 mkpasswd.8 newusers.8 \
- pwck.8 pwconv.8 shadowconfig.8 \
- useradd.8 userdel.8 usermod.8 vipw.8
+man_MANS = chage.1 chfn.1 chsh.1 gpasswd.1  login.1 newgrp.1 passwd.1 su.1  shadow.3  faillog.5 limits.5 login.access.5 login.defs.5  passwd.5 porttime.5 shadow.5 suauth.5  chpasswd.8 dpasswd.8 faillog.8  groupadd.8 groupdel.8 groupmod.8  grpck.8 lastlog.8 logoutd.8 mkpasswd.8 newusers.8  pwck.8 pwconv.8 shadowconfig.8  useradd.8 userdel.8 usermod.8 vipw.8
+
 
 # XXX - for some reason "make dist" no longer distributes man_MANS
 # automatically after upgrade to automake-1.2 (it worked with 1.0).
@@ -117,17 +112,8 @@ man_MANS = chage.1 chfn.1 chsh.1 gpasswd.1 \
 #
 #EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8
 
-EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8 \
- chage.1 chfn.1 chsh.1 gpasswd.1 \
- login.1 newgrp.1 passwd.1 su.1 \
- shadow.3 \
- faillog.5 limits.5 login.access.5 login.defs.5 \
- passwd.5 porttime.5 shadow.5 suauth.5 \
- chpasswd.8 dpasswd.8 faillog.8 \
- groupadd.8 groupdel.8 groupmod.8 \
- grpck.8 lastlog.8 logoutd.8 mkpasswd.8 newusers.8 \
- pwck.8 pwconv.8 shadowconfig.8 \
- useradd.8 userdel.8 usermod.8 vipw.8
+EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8  chage.1 chfn.1 chsh.1 gpasswd.1  login.1 newgrp.1 passwd.1 su.1  shadow.3  faillog.5 limits.5 login.access.5 login.defs.5  passwd.5 porttime.5 shadow.5 suauth.5  chpasswd.8 dpasswd.8 faillog.8  groupadd.8 groupdel.8 groupmod.8  grpck.8 lastlog.8 logoutd.8 mkpasswd.8 newusers.8  pwck.8 pwconv.8 shadowconfig.8  useradd.8 userdel.8 usermod.8 vipw.8
+
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -144,11 +130,10 @@ DIST_COMMON =  Makefile.am Makefile.in
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
-GZIP = --best
-all: Makefile $(MANS)
-
+GZIP_ENV = --best
+all: all-redirect
 .SUFFIXES:
-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
 	cd $(top_srcdir) && $(AUTOMAKE) --foreign --include-deps man/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
@@ -289,10 +274,12 @@ uninstall-man8:
 	done
 install-man: $(MANS)
 	@$(NORMAL_INSTALL)
-	$(MAKE) install-man1 install-man3 install-man5 install-man8
+	$(MAKE) $(AM_MAKEFLAGS) install-man1 install-man3 install-man5 \
+	 install-man8
 uninstall-man:
 	@$(NORMAL_UNINSTALL)
-	$(MAKE) uninstall-man1 uninstall-man3 uninstall-man5 uninstall-man8
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-man1 uninstall-man3 uninstall-man5 \
+	 uninstall-man8
 tags: TAGS
 TAGS:
 
@@ -304,63 +291,76 @@ subdir = man
 distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
-	  test -f $(distdir)/$$file \
-	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
-	  || cp -p $$d/$$file $(distdir)/$$file; \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
 	done
-info:
-dvi:
-check: all
-	$(MAKE)
-installcheck:
-install-exec: 
-	@$(NORMAL_INSTALL)
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
+install-exec: install-exec-am
 
-install-data: install-man
-	@$(NORMAL_INSTALL)
+install-data-am: install-man
+install-data: install-data-am
 
-install: install-exec install-data all
-	@:
-
-uninstall: uninstall-man
-
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-man
+uninstall: uninstall-am
+all-am: Makefile $(MANS)
+all-redirect: all-am
 install-strip:
-	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
 installdirs:
 	$(mkinstalldirs)  $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man3 \
 		$(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8
 
 
 mostlyclean-generic:
-	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
-	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
 	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
-	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 
 maintainer-clean-generic:
-	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
-	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
-mostlyclean:  mostlyclean-generic
+mostlyclean-am:  mostlyclean-generic
 
-clean:  clean-generic mostlyclean
+mostlyclean: mostlyclean-am
 
-distclean:  distclean-generic clean
-	-rm -f config.status
+clean-am:  clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-generic clean-am
 	-rm -f libtool
 
-maintainer-clean:  maintainer-clean-generic distclean
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-generic distclean-am
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 
+maintainer-clean: maintainer-clean-am
+
 .PHONY: install-man1 uninstall-man1 install-man3 uninstall-man3 \
 install-man5 uninstall-man5 install-man8 uninstall-man8 install-man \
-uninstall-man tags distdir info dvi installcheck install-exec \
-install-data install uninstall all installdirs mostlyclean-generic \
+uninstall-man tags distdir info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
 distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
 

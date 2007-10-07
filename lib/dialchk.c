@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: dialchk.c,v 1.5 1998/12/28 20:34:34 marekm Exp $")
+RCSID("$Id: dialchk.c,v 1.6 1999/08/27 19:02:51 marekm Exp $")
 
 #include <stdio.h>
 #include "defines.h"
@@ -68,7 +68,7 @@ dialcheck(const char *tty, const char *sh)
 	if (dialup->du_passwd[0] == '\0')
 		return (1);
 
-	if (! (pass = getpass(_("Dialup Password:"))))
+	if (! (pass = getpass(_("Dialup Password: "))))
 		return (0);
 
 	cp = pw_encrypt (pass, dialup->du_passwd);

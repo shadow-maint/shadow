@@ -50,7 +50,8 @@ Romania:
 
 United States:
 
- none?
+ ftp://ftp.cqc.com/pub/mirrors/linux-shadow/
+  pacman@cqc.com
 
 Thanks,
 Marek Michalkiewicz <marekm@linux.org.pl>

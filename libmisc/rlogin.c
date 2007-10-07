@@ -32,7 +32,7 @@
 #ifdef RLOGIN
 
 #include "rcsid.h"
-RCSID("$Id: rlogin.c,v 1.4 1997/12/14 20:07:20 marekm Exp $")
+RCSID("$Id: rlogin.c,v 1.5 1999/08/27 19:02:51 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -140,15 +140,16 @@ do_rlogin(const char *remote_host, char *name, int namelen, char *term, int term
 	 * Put the terminal in cooked mode with echo turned on.
 	 */
 
-	GTTY (0, &termio);
-#ifndef	USE_SGTTY
+	GTTY(0, &termio);
 	termio.c_iflag |= ICRNL|IXON;
 	termio.c_oflag |= OPOST|ONLCR;
 	termio.c_lflag |= ICANON|ECHO|ECHOE;
+#ifdef CBAUD
 	termio.c_cflag = (termio.c_cflag & ~CBAUD) | speed_name;
 #else
+	termio.c_cflag = (termio.c_cflag) | speed_name;
 #endif
-	STTY (0, &termio);
+	STTY(0, &termio);
 
 	if (! (pwd = getpwnam (name)))
 		return 0;

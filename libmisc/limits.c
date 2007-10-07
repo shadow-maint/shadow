@@ -35,7 +35,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: limits.c,v 1.9 1999/03/07 19:14:39 marekm Exp $")
+RCSID("$Id: limits.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -102,6 +102,20 @@ set_prio(const char *value)
 }
 
 
+static int
+set_umask(const char *value)
+{
+	mode_t mask;
+	char **endptr = (char **) &value;
+
+	mask = strtol(value, endptr, 8) & 0777;
+	if ((mask == 0) && (value == *endptr))
+		return 0;
+	umask(mask);
+	return 0;
+}
+
+
 /* Counts the number of user logins and check against the limit */
 static int
 check_logins(const char *name, const char *maxlogins)
@@ -158,15 +172,16 @@ check_logins(const char *name, const char *maxlogins)
  * [Aa]: a = RLIMIT_AS		max address space (KB)
  * [Cc]: c = RLIMIT_CORE	max core file size (KB)
  * [Dd]: d = RLIMIT_DATA	max data size (KB)
- * [Ff]: f = RLIMIT_FSIZE	Maximum filesize (KB)
+ * [Ff]: f = RLIMIT_FSIZE	max file size (KB)
  * [Mm]: m = RLIMIT_MEMLOCK	max locked-in-memory address space (KB)
  * [Nn]: n = RLIMIT_NOFILE	max number of open files
  * [Rr]: r = RLIMIT_RSS		max resident set size (KB)
  * [Ss]: s = RLIMIT_STACK	max stack size (KB)
  * [Tt]: t = RLIMIT_CPU		max CPU time (MIN)
  * [Uu]: u = RLIMIT_NPROC	max number of processes
+ * [Kk]: k = file creation masK (umask)
  * [Ll]: l = max number of logins for this user
- * [Pp]: p = process priority -20..20 (negative = high priority)
+ * [Pp]: p = process priority -20..20 (negative = high, positive = low)
  *
  * Return value:
  *		0 = okay, of course
@@ -254,6 +269,10 @@ do_user_limits(const char *buf, const char *name)
 			retval |= setrlimit_value(RLIMIT_STACK, pp, 1024);
 			break;
 #endif
+		case 'k':
+		case 'K':
+			retval |= set_umask(pp);
+			break;
 		case 'l':
 		case 'L':
 			/* LIMIT the number of concurent logins */
@@ -330,6 +349,27 @@ setup_user_limits(const char *uname)
 }
 #endif  /* LIMITS */
 
+
+static void
+setup_usergroups(const struct passwd *info)
+{
+	const struct group *grp;
+	mode_t oldmask;
+
+/*
+ *	if not root, and uid == gid, and username is the same as primary
+ *	group name, set umask group bits to be the same as owner bits
+ *	(examples: 022 -> 002, 077 -> 007).
+ */
+	if (info->pw_uid != 0 && info->pw_uid == info->pw_gid) {
+		grp = getgrgid(info->pw_gid);
+		if (grp && (strcmp(info->pw_name, grp->gr_name) == 0)) {
+			oldmask = umask(0777);
+			umask((oldmask & ~070) | ((oldmask >> 3) & 070));
+		}
+	}
+}
+
 /*
  *	set the process nice, ulimit, and umask from the password file entry
  */
@@ -341,16 +381,8 @@ setup_limits(const struct passwd *info)
 	int	i;
 	long	l;
 
-#ifdef USERGROUPS
-	if (info->pw_uid != 0 && info->pw_uid == info->pw_gid) {
-		const struct group *grp;
-
-		grp = getgrgid(info->pw_gid);
-		if (grp && !strcmp(info->pw_name, grp->gr_name)) {
-			umask(umask(0) & ~070);
-		}
-	}
-#endif
+	if (getdef_bool("USERGROUPS_ENAB"))
+		setup_usergroups(info);
 
 	/*
 	 * See if the GECOS field contains values for NICE, UMASK or ULIMIT.
@@ -358,9 +390,9 @@ setup_limits(const struct passwd *info)
 	 * values the defaults for this login session.
 	 */
 
-	if ( getdef_bool("QUOTAS_ENAB") ) {
+	if (getdef_bool("QUOTAS_ENAB")) {
 #ifdef LIMITS
-		if (info->pw_uid)
+		if (info->pw_uid != 0)
 		if (setup_user_limits(info->pw_name) & LOGIN_ERROR_LOGIN) {
 			fprintf(stderr, _("Too many logins.\n"));
 			sleep(2);

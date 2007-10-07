@@ -1,4 +1,33 @@
-$Id: CHANGES,v 1.27 1999/07/09 18:02:43 marekm Exp $
+$Id: CHANGES,v 1.28 1999/08/27 19:02:50 marekm Exp $
+
+shadow-19990709 => shadow-19990827
+
+- upgrade to autoconf-2.13, automake-1.4, libtool-1.3.3
+- i18n: added French translation by Vincent Renardias <vincent@ldsol.com>
+- i18n: added Swedish translation by Kristoffer Brånemyr <ztion@swipnet.se>
+- logoutd no longer reads /etc/logoutd.mesg at startup - instead, read
+  it when sending to luser's tty (no need to reload with SIGHUP)
+- added support for "usergroups" feature often found in Linux distributions
+  (if USERGROUPS_ENAB in login.defs set to "yes", uid != 0, uid == gid, and
+  username == groupname, then set umask to 002 instead of 022)
+- Debian: pwck and grpck are now run from a daily cron job (root will
+  receive an e-mail if something is wrong), and at system startup
+- added support for setting umask in /etc/limits
+- when using OPIE, re-prompt with echo on after empty password was entered
+- GETPASS_ASTERISKS now run time configurable (login.defs)
+- getpass() now uses stdin and stderr (not stdout) if it can't open /dev/tty
+- getpass() allows all input to be erased using Control-U, and beeps when
+  too many characters are entered
+- removed obsolete sgtty support, in 1999 everyone should have termios :)
+- Debian: tar wrapper no longer needed to build packages as non-root user
+  (install libtricks, and use "dpkg-buildpackage -rfakeroot" instead)
+- Debian: changes for GNU Hurd by Marcus Brinkmann <brinkmd@debian.org>:
+  dpkg-architecture, cross compilation, only build passwd, add
+  etc/login.defs.hurd conffile, conditionalize CBAUD
+- newgrp sets $HOME before running the new shell
+- both "sg group command" (usage message) and "sg group -c command"
+  (man page) work, updated both the usage message and the man page :)
+- i18n: added missing _() for some translatable strings
 
 shadow-19990607 => shadow-19990709
 

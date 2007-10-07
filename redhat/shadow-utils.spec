@@ -2,11 +2,11 @@
 # $Id: shadow-utils.spec.in,v 1.2 1999/06/07 16:40:45 marekm Exp $
 Summary: Shadow password file utilities for Linux
 Name: shadow-utils
-Version: 19990709
+Version: 19990827
 Release: 1
 Copyright: Free
 Group: Utilities/System
-Source: ftp://ftp.ists.pwr.wroc.pl/pub/linux/shadow/shadow-19990709.tar.gz
+Source: ftp://ftp.ists.pwr.wroc.pl/pub/linux/shadow/shadow-19990827.tar.gz
 BuildRoot: /var/tmp/shadow-utils
 Packager: Timo Karjalainen <timok@iki.fi>
 # Obsoletes: adduser
@@ -38,7 +38,7 @@ and shadow passwords in general.
 %prep
 # This is just a few of the core utilities from the shadow suite...
 # packaged up for use w/PAM
-%setup -n shadow-19990709
+%setup -n shadow-19990827
 
 %build
 # shared lib support is untested, so...

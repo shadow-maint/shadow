@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chage.c,v 1.15 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: chage.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -306,10 +306,10 @@ list_fields(void)
 	 * is when the active will be disabled.
 	 */
 
-	printf ("Password Inactive:\t");
+	printf(_("Password Inactive:\t"));
 	if (lastday <= 0 || inactdays <= 0 ||
 			maxdays >= 10000*(DAY/SCALE) || maxdays <= 0) {
-		printf ("Never\n");
+		printf (_("Never\n"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
 		print_date(expires);
@@ -320,9 +320,9 @@ list_fields(void)
 	 * password expiring or not.
 	 */
 
-	printf ("Account Expires:\t");
+	printf(_("Account Expires:\t"));
 	if (expdays <= 0) {
-		printf ("Never\n");
+		printf (_("Never\n"));
 	} else {
 		expires = expdays * SCALE;
 		print_date(expires);

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: logoutd.c,v 1.13 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: logoutd.c,v 1.14 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -51,59 +51,18 @@ RCSID(PKG_VER "$Id: logoutd.c,v 1.13 1999/06/07 16:40:45 marekm Exp $")
 
 static char	*Prog;
 
-static char	*mesg_buf = "login time exceeded\r\n";  /* XXX warning: const */
-static int	mesg_len = 21;
-static int	mesg_size;
+#ifndef DEFAULT_HUP_MESG
+#define DEFAULT_HUP_MESG "login time exceeded\r\n"
+#endif
 
 #ifndef HUP_MESG_FILE
 #define HUP_MESG_FILE "/etc/logoutd.mesg"
 #endif
 
 /* local function prototypes */
-static RETSIGTYPE reload_mesg P_((int));
 static int check_login P_((const struct utmp *));
 int main P_((int, char **));
 
-/*
- * reload_mesg - reload the message that is output when killing a process
- */
-
-static RETSIGTYPE
-reload_mesg(int sig)
-{
-	int	fd;
-	struct	stat	sb;
-
-	signal (sig, reload_mesg);
-
-	if (stat (HUP_MESG_FILE, &sb))
-		return;
-
-	if ((sb.st_mode & S_IFMT) != S_IFREG)
-		return;
-
-	if ((fd = open (HUP_MESG_FILE, O_RDONLY)) != -1) {
-		if (sb.st_size + 1 > mesg_size) {
-			if (mesg_buf && mesg_size)
-				free (mesg_buf);
-
-			mesg_len = sb.st_size;
-			mesg_size = mesg_len + 1;
-			if (! (mesg_buf = (char *) malloc (mesg_len + 1)))
-				goto end;
-		} else
-			mesg_len = sb.st_size;
-
-		if (read (fd, mesg_buf, mesg_len) != mesg_len) {
-			mesg_len = 0;
-			goto end;
-		}
-	} else
-		return;
-
-end:
-	close (fd);
-}
 
 /*
  * check_login - check if user (struct utmp) allowed to stay logged in
@@ -140,6 +99,47 @@ check_login(const struct utmp *ut)
 	return 1;
 }
 
+
+static void
+send_mesg_to_tty(int tty_fd)
+{
+	TERMIO oldt, newt;
+	FILE *mesg_file, *tty_file;
+	int c, is_tty;
+
+	tty_file = fdopen(tty_fd, "w");
+	if (!tty_file)
+		return;
+
+	is_tty = (GTTY(tty_fd, &oldt) == 0);
+	if (is_tty) {
+		/* Suggested by Ivan Nejgebauar <ian@unsux.ns.ac.yu>:
+		   set OPOST before writing the message.  */
+		newt = oldt;
+		newt.c_oflag |= OPOST;
+		STTY(tty_fd, &newt);
+	}
+
+	mesg_file = fopen(HUP_MESG_FILE, "r");
+	if (mesg_file) {
+		while ((c = getc(mesg_file)) != EOF) {
+			if (c == '\n')
+				putc('\r', tty_file);
+			putc(c, tty_file);
+		}
+		fclose(mesg_file);
+	} else {
+		fputs(DEFAULT_HUP_MESG, tty_file);
+	}
+	fflush(tty_file);
+	fclose(tty_file);
+
+	if (is_tty) {
+		STTY(tty_fd, &oldt);
+	}
+}
+
+
 /*
  * logoutd - logout daemon to enforce /etc/porttime file policy
  *
@@ -154,6 +154,7 @@ main(int argc, char **argv)
 {
 	int i;
 	int status;
+	pid_t pid;
 	struct utmp *ut;
 	char user[sizeof(ut->ut_user) + 1];  /* terminating NUL */
 	char tty_name[sizeof(ut->ut_line) + 6];  /* /dev/ + NUL */
@@ -177,14 +178,19 @@ main(int argc, char **argv)
 	setpgid(getpid(), getpid());  /* BSD || SUN || SUN4 */
 #endif /* !HAVE_SETPGRP */
 
-	reload_mesg (SIGHUP);
-
 	/*
 	 * Put this process in the background.
 	 */
 
-	if ((i = fork ()))
-		exit (i < 0 ? 1:0);
+	pid = fork();
+	if (pid > 0) {
+		/* parent */
+		exit(0);
+	} else if (pid < 0) {
+		/* error */
+		perror("fork");
+		exit(1);
+	}
 #endif /* !DEBUG */
 
 	/*
@@ -201,9 +207,6 @@ main(int argc, char **argv)
 	 */
 
 	while (1) {
-#ifndef DEBUG
-		sleep(60);
-#endif
 
 		/* 
 		 * Attempt to re-open the utmp file.  The file is only
@@ -233,8 +236,15 @@ main(int argc, char **argv)
 			 * keeps the scan from waiting on other ports to die.
 			 */
 
-			if (fork() != 0)
+			pid = fork();
+			if (pid > 0) {
+				/* parent */
 				continue;
+			} else if (pid < 0) {
+				/* failed - give up until the next scan */
+				break;
+			}
+			/* child */
 
 			if (strncmp(ut->ut_line, "/dev/", 5) != 0)
 				strcpy(tty_name, "/dev/");
@@ -245,22 +255,10 @@ main(int argc, char **argv)
 #ifndef O_NOCTTY
 #define O_NOCTTY 0
 #endif
-			if ((tty_fd = open (tty_name,
-					O_WRONLY|O_NDELAY|O_NOCTTY)) != -1) {
-/* Suggested by Ivan Nejgebauar <ian@unsux.ns.ac.yu>: set OPOST
-   before writing the message.  --marekm */
-				TERMIO oldt, newt;
-
-				GTTY(tty_fd, &oldt);
-				newt = oldt;
-#ifdef OPOST
-				newt.c_oflag |= OPOST;
-#else  /* XXX - I'm too young to know bsd sgtty, sorry :).  --marekm */
-#endif
-				STTY(tty_fd, &newt);
-				write (tty_fd, mesg_buf, mesg_len);
-				STTY(tty_fd, &oldt);
-				close (tty_fd);
+			tty_fd = open(tty_name, O_WRONLY|O_NDELAY|O_NOCTTY);
+			if (tty_fd != -1) {
+				send_mesg_to_tty(tty_fd);
+				close(tty_fd);
 				sleep(10);
 			}
 #ifdef USER_PROCESS  /* USG_UTMP */
@@ -282,19 +280,11 @@ main(int argc, char **argv)
 			close (tty_fd);
 #endif  /* BSD || SUN || SUN4 */
 
-#if 0
-			SYSLOG((LOG_NOTICE,
-				"logged off user `%.*s' on `%.*s'\n",
-				(int) sizeof(ut->ut_user), ut->ut_user,
-				(int) sizeof(ut->ut_line), ut->ut_line));
-#else
-			/* avoid gcc warnings about %.*s in syslog() */
 			strncpy(user, ut->ut_line, sizeof(user) - 1);
 			user[sizeof(user) - 1] = '\0';
 
 			SYSLOG((LOG_NOTICE, "logged off user `%s' on `%s'\n",
 				user, tty_name));
-#endif
 
 			/*
 			 * This child has done all it can, drop dead.
@@ -305,6 +295,9 @@ main(int argc, char **argv)
 
 		endutent();
 
+#ifndef DEBUG
+		sleep(60);
+#endif
 		/*
 		 * Reap any dead babies ...
 		 */

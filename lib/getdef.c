@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.12 1999/03/07 19:14:36 marekm Exp $")
+RCSID("$Id: getdef.c,v 1.13 1999/08/27 19:02:51 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -71,6 +71,7 @@ static struct itemdef def_table[] = {
 	{ "FAIL_DELAY",			NULL },
 	{ "FAKE_SHELL",			NULL },
 	{ "FTMP_FILE",			NULL },
+	{ "GETPASS_ASTERISKS",		NULL },
 	{ "GID_MAX",			NULL },
 	{ "GID_MIN",			NULL },
 	{ "HUSHLOGIN_FILE",		NULL },
@@ -116,6 +117,7 @@ static struct itemdef def_table[] = {
 	{ "ULIMIT",			NULL },
 	{ "UMASK",			NULL },
 	{ "USERDEL_CMD",		NULL },
+	{ "USERGROUPS_ENAB",		NULL }
 };
 
 #ifndef LOGINDEFS

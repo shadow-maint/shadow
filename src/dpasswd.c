@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: dpasswd.c,v 1.9 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: dpasswd.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -133,13 +133,13 @@ main(int argc, char **argv)
 		dent.du_passwd = "";  /* XXX warning: const */
 
 again:
-		if (! (cp = getpass(_("Shell password:"))))
+		if (! (cp = getpass(_("Shell password: "))))
 			exit (1);
 
 		STRFCPY(pass, cp);
 		strzero(cp);
 
-		if (! (cp = getpass(_("re-enter Shell password:"))))
+		if (! (cp = getpass(_("re-enter Shell password: "))))
 			exit (1);
 
 		if (strcmp (pass, cp)) {
