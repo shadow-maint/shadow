@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -45,9 +45,10 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
 transform = @program_transform_name@
 
 NORMAL_INSTALL = :
@@ -75,7 +76,6 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
-LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBMD = @LIBMD@
@@ -88,7 +88,6 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NM = @NM@
 OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
@@ -112,7 +111,7 @@ localedir = $(datadir)/locale
 INCLUDES = -I$(top_srcdir)/libmisc -I$(top_srcdir)/lib
 DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
 
-libmisc_a_SOURCES = addgrps.c age.c basename.c chkname.c chkshell.c  chowndir.c chowntty.c console.c copydir.c entry.c env.c failure.c  fields.c getdate.y hushed.c isexpired.c limits.c list.c log.c  login_access.c login_desrpc.c login_krb.c loginprompt.c mail.c motd.c  myname.c obscure.c pam_pass.c pwd2spwd.c pwdcheck.c pwd_init.c rlogin.c  salt.c setugid.c setup.c setupenv.c shell.c strtoday.c suauth.c sub.c  sulog.c ttytype.c tz.c ulimit.c utmp.c valid.c xmalloc.c
+libmisc_a_SOURCES =  	addgrps.c 	age.c 	basename.c 	chkname.c 	chkshell.c 	chowndir.c 	chowntty.c 	console.c 	copydir.c 	entry.c 	env.c 	failure.c 	fields.c 	getdate.y 	hushed.c 	isexpired.c 	limits.c 	list.c log.c 	login_access.c 	login_desrpc.c 	login_krb.c 	loginprompt.c 	mail.c 	motd.c 	myname.c 	obscure.c 	pam_pass.c 	pwd2spwd.c 	pwd_init.c 	rlogin.c 	salt.c 	setugid.c 	setup.c 	setupenv.c 	shell.c 	strtoday.c 	suauth.c 	sub.c 	sulog.c 	ttytype.c 	tz.c 	ulimit.c 	utmp.c 	valid.c 	xmalloc.c
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -127,9 +126,9 @@ libmisc_a_OBJECTS =  addgrps.o age.o basename.o chkname.o chkshell.o \
 chowndir.o chowntty.o console.o copydir.o entry.o env.o failure.o \
 fields.o getdate.o hushed.o isexpired.o limits.o list.o log.o \
 login_access.o login_desrpc.o login_krb.o loginprompt.o mail.o motd.o \
-myname.o obscure.o pam_pass.o pwd2spwd.o pwdcheck.o pwd_init.o rlogin.o \
-salt.o setugid.o setup.o setupenv.o shell.o strtoday.o suauth.o sub.o \
-sulog.o ttytype.o tz.o ulimit.o utmp.o valid.o xmalloc.o
+myname.o obscure.o pam_pass.o pwd2spwd.o pwd_init.o rlogin.o salt.o \
+setugid.o setup.o setupenv.o shell.o strtoday.o suauth.o sub.o sulog.o \
+ttytype.o tz.o ulimit.o utmp.o valid.o xmalloc.o
 AR = ar
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -143,7 +142,7 @@ DIST_COMMON =  Makefile.am Makefile.in getdate.c
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 SOURCES = $(libmisc_a_SOURCES)
 OBJECTS = $(libmisc_a_OBJECTS)
@@ -255,104 +254,13 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
 	  fi; \
 	done
-addgrps.o: addgrps.c ../config.h ../lib/prototypes.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/rcsid.h
-age.o: age.c ../config.h ../lib/prototypes.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/rcsid.h
-basename.o: basename.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h
-chkname.o: chkname.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h chkname.h
-chkshell.o: chkshell.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-chowndir.o: chowndir.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-chowntty.o: chowntty.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-console.o: console.c ../config.h ../lib/defines.h ../lib/gshadow_.h \
-	../lib/getdef.h ../lib/rcsid.h
-copydir.o: copydir.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-entry.o: entry.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-env.o: env.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-failure.o: failure.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/faillog.h ../lib/getdef.h failure.h
-fields.o: fields.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-getdate.o: getdate.c ../config.h getdate.h ../lib/defines.h \
-	../lib/gshadow_.h
-hushed.o: hushed.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h ../lib/getdef.h
-isexpired.o: isexpired.c ../config.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/rcsid.h
-limits.o: limits.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-list.o: list.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-login_access.o: login_access.c ../config.h ../lib/rcsid.h \
-	../lib/prototypes.h ../lib/defines.h ../lib/gshadow_.h
-login_desrpc.o: login_desrpc.c ../config.h
-login_krb.o: login_krb.c ../config.h
-loginprompt.o: loginprompt.c ../config.h ../lib/rcsid.h \
-	../lib/prototypes.h ../lib/defines.h ../lib/gshadow_.h \
-	../lib/getdef.h
-log.o: log.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h
-mail.o: mail.c ../config.h ../lib/prototypes.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/getdef.h ../lib/rcsid.h
-motd.o: motd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-myname.o: myname.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h
-obscure.o: obscure.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-pam_pass.o: pam_pass.c ../config.h
-pwd2spwd.o: pwd2spwd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-pwdcheck.o: pwdcheck.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwauth.h
-pwd_init.o: pwd_init.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h
-rlogin.o: rlogin.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-salt.o: salt.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-setugid.o: setugid.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-setupenv.o: setupenv.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-setup.o: setup.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-shell.o: shell.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-strtoday.o: strtoday.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h getdate.h
-suauth.o: suauth.c ../config.h ../lib/prototypes.h ../lib/defines.h \
-	../lib/gshadow_.h
-sub.o: sub.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-sulog.o: sulog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-ttytype.o: ttytype.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-tz.o: tz.c ../config.h ../lib/rcsid.h ../lib/defines.h ../lib/gshadow_.h \
-	../lib/getdef.h
-ulimit.o: ulimit.c ../config.h ../lib/rcsid.h
-utmp.o: utmp.c ../config.h ../lib/defines.h ../lib/gshadow_.h \
-	../lib/rcsid.h
-valid.o: valid.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-xmalloc.o: xmalloc.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h
 
 info-am:
 info: info-am
@@ -376,7 +284,7 @@ uninstall: uninstall-am
 all-am: Makefile $(LIBRARIES) $(HEADERS)
 all-redirect: all-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs:
 
 

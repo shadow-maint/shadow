@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -43,9 +43,10 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
 transform = @program_transform_name@
 
 NORMAL_INSTALL = :
@@ -73,7 +74,6 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
-LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBMD = @LIBMD@
@@ -86,7 +86,6 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NM = @NM@
 OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
@@ -125,11 +124,9 @@ DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS = login  su
-
-ubin_PROGRAMS = faillog lastlog  chage chfn chsh expiry gpasswd newgrp passwd
-
-usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod  logoutd mkpasswd newusers  useradd userdel usermod grpck pwck vipw  grpconv grpunconv pwconv pwunconv
+bin_PROGRAMS = login su
+ubin_PROGRAMS = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod 	logoutd mkpasswd newusers useradd userdel usermod grpck 	pwck vipw grpconv grpunconv pwconv pwunconv
 
 
 EXTRA_DIST = shadowconfig.sh
@@ -168,11 +165,20 @@ shlibs = ../lib/libshadow.la
 LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@ @LIBMD@
 INCLUDES = -I${top_srcdir}/lib -I$(top_srcdir)/libmisc
 
-chfn_LDADD = ${LDADD} @LIBPAM@
-chsh_LDADD = ${LDADD} @LIBPAM@
-login_LDADD = ${LDADD} @LIBPAM@
-passwd_LDADD = ${LDADD} @LIBCRACK@ @LIBPAM@
-su_LDADD = ${LDADD} @LIBPAM@
+chfn_LDADD = $(LDADD) @LIBPAM@
+chsh_LDADD = $(LDADD) @LIBPAM@
+login_LDADD = $(LDADD) @LIBPAM@
+passwd_LDADD = $(LDADD) @LIBCRACK@ @LIBPAM@
+su_LDADD = $(LDADD) @LIBPAM@
+chage_LDADD = $(LDADD) @LIBPAM@
+chpasswd_LDADD = $(LDADD) @LIBPAM@
+groupadd_LDADD = $(LDADD) @LIBPAM@
+groupdel_LDADD = $(LDADD) @LIBPAM@
+groupmod_LDADD = $(LDADD) @LIBPAM@
+newusers_LDADD = $(LDADD) @LIBPAM@
+useradd_LDADD = $(LDADD) @LIBPAM@
+userdel_LDADD = $(LDADD) @LIBPAM@
+usermod_LDADD = $(LDADD) @LIBPAM@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -224,7 +230,6 @@ lastlog_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 lastlog_LDFLAGS = 
 chage_SOURCES = chage.c
 chage_OBJECTS =  chage.o
-chage_LDADD = $(LDADD)
 chage_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 chage_LDFLAGS = 
@@ -263,7 +268,6 @@ passwd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 passwd_LDFLAGS = 
 chpasswd_SOURCES = chpasswd.c
 chpasswd_OBJECTS =  chpasswd.o
-chpasswd_LDADD = $(LDADD)
 chpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 chpasswd_LDFLAGS = 
@@ -275,19 +279,16 @@ dpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 dpasswd_LDFLAGS = 
 groupadd_SOURCES = groupadd.c
 groupadd_OBJECTS =  groupadd.o
-groupadd_LDADD = $(LDADD)
 groupadd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 groupadd_LDFLAGS = 
 groupdel_SOURCES = groupdel.c
 groupdel_OBJECTS =  groupdel.o
-groupdel_LDADD = $(LDADD)
 groupdel_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 groupdel_LDFLAGS = 
 groupmod_SOURCES = groupmod.c
 groupmod_OBJECTS =  groupmod.o
-groupmod_LDADD = $(LDADD)
 groupmod_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 groupmod_LDFLAGS = 
@@ -305,25 +306,21 @@ mkpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 mkpasswd_LDFLAGS = 
 newusers_SOURCES = newusers.c
 newusers_OBJECTS =  newusers.o
-newusers_LDADD = $(LDADD)
 newusers_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 newusers_LDFLAGS = 
 useradd_SOURCES = useradd.c
 useradd_OBJECTS =  useradd.o
-useradd_LDADD = $(LDADD)
 useradd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 useradd_LDFLAGS = 
 userdel_SOURCES = userdel.c
 userdel_OBJECTS =  userdel.o
-userdel_LDADD = $(LDADD)
 userdel_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 userdel_LDFLAGS = 
 usermod_SOURCES = usermod.c
 usermod_OBJECTS =  usermod.o
-usermod_LDADD = $(LDADD)
 usermod_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
 ../lib/libshadow.a
 usermod_LDFLAGS = 
@@ -381,7 +378,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 SOURCES = login.c su.c groups.c id.c sulogin.c faillog.c lastlog.c chage.c chfn.c chsh.c expiry.c gpasswd.c newgrp.c passwd.c chpasswd.c dpasswd.c groupadd.c groupdel.c groupmod.c logoutd.c mkpasswd.c newusers.c useradd.c userdel.c usermod.c grpck.c pwck.c vipw.c grpconv.c grpunconv.c pwconv.c pwunconv.c
 OBJECTS = login.o su.o groups.o id.o sulogin.o faillog.o lastlog.o chage.o chfn.o chsh.o expiry.o gpasswd.o newgrp.o passwd.o chpasswd.o dpasswd.o groupadd.o groupdel.o groupmod.o logoutd.o mkpasswd.o newusers.o useradd.o userdel.o usermod.o grpck.o pwck.o vipw.o grpconv.o grpunconv.o pwconv.o pwunconv.o
@@ -411,8 +408,8 @@ install-binPROGRAMS: $(bin_PROGRAMS)
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	@list='$(bin_PROGRAMS)'; for p in $$list; do \
 	  if test -f $$p; then \
-	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
-	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
 	  else :; fi; \
 	done
 
@@ -445,8 +442,8 @@ install-ubinPROGRAMS: $(ubin_PROGRAMS)
 	$(mkinstalldirs) $(DESTDIR)$(ubindir)
 	@list='$(ubin_PROGRAMS)'; for p in $$list; do \
 	  if test -f $$p; then \
-	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
-	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
 	  else :; fi; \
 	done
 
@@ -470,8 +467,8 @@ install-usbinPROGRAMS: $(usbin_PROGRAMS)
 	$(mkinstalldirs) $(DESTDIR)$(usbindir)
 	@list='$(usbin_PROGRAMS)'; for p in $$list; do \
 	  if test -f $$p; then \
-	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
-	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
 	  else :; fi; \
 	done
 
@@ -684,105 +681,13 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
 	  fi; \
 	done
-chage.o: chage.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
-	../lib/shadowio.h
-chfn.o: chfn.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
-	../lib/getdef.h ../lib/pwauth.h
-chpasswd.o: chpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
-	../lib/shadowio.h
-chsh.o: chsh.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
-	../lib/getdef.h ../lib/pwauth.h
-dpasswd.o: dpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/dialup.h
-expiry.o: expiry.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-faillog.o: faillog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/faillog.h
-gpasswd.o: gpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
-	../lib/sgroupio.h
-groupadd.o: groupadd.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h ../libmisc/chkname.h \
-	../lib/getdef.h ../lib/groupio.h ../lib/sgroupio.h
-groupdel.o: groupdel.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
-	../lib/sgroupio.h
-groupmod.o: groupmod.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
-	../lib/groupio.h ../lib/sgroupio.h
-groups.o: groups.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-grpck.o: grpck.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
-	../lib/commonio.h ../lib/groupio.h ../lib/sgroupio.h
-grpconv.o: grpconv.c ../config.h ../lib/prototypes.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/groupio.h ../lib/sgroupio.h \
-	../lib/rcsid.h
-grpunconv.o: grpunconv.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
-	../lib/sgroupio.h
-id.o: id.c ../config.h ../lib/rcsid.h ../lib/defines.h ../lib/gshadow_.h
-lastlog.o: lastlog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-login.o: login.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/faillog.h \
-	../libmisc/failure.h ../lib/pwauth.h ../lib/getdef.h \
-	../lib/dialchk.h
-logoutd.o: logoutd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-mkpasswd.o: mkpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h
-newgrp.o: newgrp.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
-newusers.o: newusers.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
-	../lib/pwio.h ../lib/groupio.h ../lib/shadowio.h
-passwd.o: passwd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwauth.h \
-	../lib/shadowio.h ../lib/pwio.h ../lib/getdef.h
-pwck.o: pwck.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
-	../lib/commonio.h ../lib/pwio.h ../lib/shadowio.h
-pwconv.o: pwconv.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
-	../lib/shadowio.h ../lib/getdef.h
-pwunconv.o: pwunconv.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h ../lib/pwio.h \
-	../lib/shadowio.h
-sulogin.o: sulogin.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
-	../lib/pwauth.h
-su.o: su.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/pwauth.h \
-	../lib/getdef.h
-useradd.o: useradd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
-	../lib/pwauth.h ../lib/faillog.h ../lib/groupio.h \
-	../lib/sgroupio.h ../lib/pwio.h ../lib/shadowio.h \
-	../lib/getdef.h
-userdel.o: userdel.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
-	../lib/pwauth.h ../lib/groupio.h ../lib/pwio.h \
-	../lib/shadowio.h ../lib/sgroupio.h
-usermod.o: usermod.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
-	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
-	../lib/faillog.h ../lib/pwauth.h ../lib/getdef.h \
-	../lib/groupio.h ../lib/sgroupio.h ../lib/pwio.h \
-	../lib/shadowio.h
-vipw.o: vipw.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/prototypes.h ../lib/pwio.h \
-	../lib/shadowio.h ../lib/groupio.h ../lib/sgroupio.h
 
 info-am:
 info: info-am
@@ -811,7 +716,7 @@ uninstall: uninstall-am
 all-am: Makefile $(PROGRAMS) $(HEADERS)
 all-redirect: all-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs:
 	$(mkinstalldirs)  $(DESTDIR)$(bindir) $(DESTDIR)$(ubindir) \
 		$(DESTDIR)$(usbindir)

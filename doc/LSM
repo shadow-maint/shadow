@@ -11,9 +11,9 @@ Keywords:       login passwd security shadow
 Author:         jfh@austin.ibm.com (Julianne F. Haugh)
 Maintained-by:  kloczek@rudy.mif.pg.gda.pl (Tomasz Kloczko)
                 marekm@linux.org.pl (Marek Michalkiewicz) - previous maintainer
-Primary-site:   piast.t19.ds.pwr.wroc.pl /pub/linux/shadow/
+Primary-site:   ftp://ftp.pld.org.pl/software/shadow/
                 718K shadow-20000902.tar.gz
-Alternate-site: ftp.ists.pwr.wroc.pl /pub/linux/shadow/
+Alternate-site: ftp://ftp.pld.org.pl/software/shadow/
 Original-site:  ftp.uu.net ?
 Platforms:      Linux, SunOS, ...
 Copying-policy: FRS

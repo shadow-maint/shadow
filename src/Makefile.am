@@ -25,14 +25,11 @@ DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS = login \
- su
-ubin_PROGRAMS = faillog lastlog \
- chage chfn chsh expiry gpasswd newgrp passwd
+bin_PROGRAMS = login su
+ubin_PROGRAMS = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
 usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod \
- logoutd mkpasswd newusers \
- useradd userdel usermod grpck pwck vipw \
- grpconv grpunconv pwconv pwunconv
+	logoutd mkpasswd newusers useradd userdel usermod grpck \
+	pwck vipw grpconv grpunconv pwconv pwunconv
 
 EXTRA_DIST = shadowconfig.sh
 
@@ -82,9 +79,17 @@ shlibs = ../lib/libshadow.la
 LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@ @LIBMD@
 INCLUDES = -I${top_srcdir}/lib -I$(top_srcdir)/libmisc
 
-chfn_LDADD = ${LDADD} @LIBPAM@
-chsh_LDADD = ${LDADD} @LIBPAM@
-login_LDADD = ${LDADD} @LIBPAM@
-passwd_LDADD = ${LDADD} @LIBCRACK@ @LIBPAM@
-su_LDADD = ${LDADD} @LIBPAM@
-
+chfn_LDADD = $(LDADD) @LIBPAM@
+chsh_LDADD = $(LDADD) @LIBPAM@
+login_LDADD = $(LDADD) @LIBPAM@
+passwd_LDADD = $(LDADD) @LIBCRACK@ @LIBPAM@
+su_LDADD = $(LDADD) @LIBPAM@
+chage_LDADD = $(LDADD) @LIBPAM@
+chpasswd_LDADD = $(LDADD) @LIBPAM@
+groupadd_LDADD = $(LDADD) @LIBPAM@
+groupdel_LDADD = $(LDADD) @LIBPAM@
+groupmod_LDADD = $(LDADD) @LIBPAM@
+newusers_LDADD = $(LDADD) @LIBPAM@
+useradd_LDADD = $(LDADD) @LIBPAM@
+userdel_LDADD = $(LDADD) @LIBPAM@
+usermod_LDADD = $(LDADD) @LIBPAM@

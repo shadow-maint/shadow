@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -28,7 +28,6 @@ sharedstatedir = @sharedstatedir@
 localstatedir = @localstatedir@
 libdir = @libdir@
 infodir = @infodir@
-mandir = @mandir@
 includedir = @includedir@
 oldincludedir = /usr/include
 
@@ -46,9 +45,10 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
 transform = @program_transform_name@
 
 NORMAL_INSTALL = :
@@ -76,7 +76,6 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
-LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBMD = @LIBMD@
@@ -89,7 +88,6 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NM = @NM@
 OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
@@ -102,124 +100,176 @@ VERSION = @VERSION@
 YACC = @YACC@
 l = @l@
 
-AUTOMAKE_OPTIONS = 1.0 foreign
+mandir = @mandir@/pl
 
-manpldir = $(mandir)/pl
-manpl1dir = $(manpldir)/man1
-manpl3dir = $(manpldir)/man3
-manpl5dir = $(manpldir)/man5
-manpl8dir = $(manpldir)/man8
+man_MANS =  	chage.1 	chfn.1 	chsh.1 	groups.1 	gpasswd.1 	id.1 	login.1 	newgrp.1 	passwd.1 	su.1 	pw_auth.3 	shadow.3 	d_passwd.5 	dialups.5 	faillog.5 	limits.5 	login.access.5 	login.defs.5 	passwd.5 	porttime.5 	shadow.5 	suauth.5 	adduser.8         chpasswd.8         dpasswd.8 	faillog.8 	groupadd.8 	groupdel.8 	groupmod.8 	grpconv.8 	grpunconv.8 	grpck.8 	lastlog.8 	logoutd.8 	mkpasswd.8 	newusers.8 	pwauth.8 	pwck.8 	pwconv.8 	pwunconv.8 	shadowconfig.8 	sulogin.8 	useradd.8 	userdel.8 	usermod.8 	vipw.8
 
-manpl1_DATA =  	chage.1 	chfn.1 	chsh.1 	groups.1 	gpasswd.1 	id.1 	login.1 	newgrp.1 	passwd.1 	su.1 
-
-
-manpl3_DATA =  	pw_auth.3 	shadow.3
-
-
-manpl5_DATA =  	d_passwd.5 	dialups.5 	faillog.5 	limits.5 	login.access.5 	login.defs.5 	passwd.5 	porttime.5 	shadow.5 	suauth.5
-
-
-manpl8_DATA =          chpasswd.8         dpasswd.8 	faillog.8 	groupadd.8 	groupdel.8 	groupmod.8 	grpck.8 	lastlog.8 	logoutd.8 	mkpasswd.8 	newusers.8 	pwauth.8 	pwck.8 	pwconv.8 	shadowconfig.8 	sulogin.8
-
-
-EXTRA_DIST = $(manpl1_DATA) $(manpl3_DATA) $(manpl5_DATA) $(manpl8_DATA)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../../config.h
 CONFIG_CLEAN_FILES = 
-DATA =  $(manpl1_DATA) $(manpl3_DATA) $(manpl5_DATA) $(manpl8_DATA)
+man1dir = $(mandir)/man1
+man3dir = $(mandir)/man3
+man5dir = $(mandir)/man5
+man8dir = $(mandir)/man8
+MANS = $(man_MANS)
 
+NROFF = nroff
 DIST_COMMON =  Makefile.am Makefile.in
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --foreign --include-deps man/pl/Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps man/pl/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
 	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 
-install-manpl1DATA: $(manpl1_DATA)
+install-man1:
+	$(mkinstalldirs) $(DESTDIR)$(man1dir)
+	@list='$(man1_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.1*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man1dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man1dir)/$$inst; \
+	done
+
+uninstall-man1:
+	@list='$(man1_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.1*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man1dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man1dir)/$$inst; \
+	done
+
+install-man3:
+	$(mkinstalldirs) $(DESTDIR)$(man3dir)
+	@list='$(man3_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst; \
+	done
+
+uninstall-man3:
+	@list='$(man3_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man3dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man3dir)/$$inst; \
+	done
+
+install-man5:
+	$(mkinstalldirs) $(DESTDIR)$(man5dir)
+	@list='$(man5_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.5*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man5dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man5dir)/$$inst; \
+	done
+
+uninstall-man5:
+	@list='$(man5_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.5*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man5dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man5dir)/$$inst; \
+	done
+
+install-man8:
+	$(mkinstalldirs) $(DESTDIR)$(man8dir)
+	@list='$(man8_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.8*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man8dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man8dir)/$$inst; \
+	done
+
+uninstall-man8:
+	@list='$(man8_MANS)'; \
+	l2='$(man_MANS)'; for i in $$l2; do \
+	  case "$$i" in \
+	    *.8*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man8dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man8dir)/$$inst; \
+	done
+install-man: $(MANS)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(manpl1dir)
-	@list='$(manpl1_DATA)'; for p in $$list; do \
-	  if test -f $(srcdir)/$$p; then \
-	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl1dir)/$$p"; \
-	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl1dir)/$$p; \
-	  else if test -f $$p; then \
-	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(manpl1dir)/$$p"; \
-	    $(INSTALL_DATA) $$p $(DESTDIR)$(manpl1dir)/$$p; \
-	  fi; fi; \
-	done
-
-uninstall-manpl1DATA:
+	$(MAKE) $(AM_MAKEFLAGS) install-man1 install-man3 install-man5 \
+	 install-man8
+uninstall-man:
 	@$(NORMAL_UNINSTALL)
-	list='$(manpl1_DATA)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(manpl1dir)/$$p; \
-	done
-
-install-manpl3DATA: $(manpl3_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(manpl3dir)
-	@list='$(manpl3_DATA)'; for p in $$list; do \
-	  if test -f $(srcdir)/$$p; then \
-	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl3dir)/$$p"; \
-	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl3dir)/$$p; \
-	  else if test -f $$p; then \
-	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(manpl3dir)/$$p"; \
-	    $(INSTALL_DATA) $$p $(DESTDIR)$(manpl3dir)/$$p; \
-	  fi; fi; \
-	done
-
-uninstall-manpl3DATA:
-	@$(NORMAL_UNINSTALL)
-	list='$(manpl3_DATA)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(manpl3dir)/$$p; \
-	done
-
-install-manpl5DATA: $(manpl5_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(manpl5dir)
-	@list='$(manpl5_DATA)'; for p in $$list; do \
-	  if test -f $(srcdir)/$$p; then \
-	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl5dir)/$$p"; \
-	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl5dir)/$$p; \
-	  else if test -f $$p; then \
-	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(manpl5dir)/$$p"; \
-	    $(INSTALL_DATA) $$p $(DESTDIR)$(manpl5dir)/$$p; \
-	  fi; fi; \
-	done
-
-uninstall-manpl5DATA:
-	@$(NORMAL_UNINSTALL)
-	list='$(manpl5_DATA)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(manpl5dir)/$$p; \
-	done
-
-install-manpl8DATA: $(manpl8_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(manpl8dir)
-	@list='$(manpl8_DATA)'; for p in $$list; do \
-	  if test -f $(srcdir)/$$p; then \
-	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl8dir)/$$p"; \
-	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(manpl8dir)/$$p; \
-	  else if test -f $$p; then \
-	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(manpl8dir)/$$p"; \
-	    $(INSTALL_DATA) $$p $(DESTDIR)$(manpl8dir)/$$p; \
-	  fi; fi; \
-	done
-
-uninstall-manpl8DATA:
-	@$(NORMAL_UNINSTALL)
-	list='$(manpl8_DATA)'; for p in $$list; do \
-	  rm -f $(DESTDIR)$(manpl8dir)/$$p; \
-	done
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-man1 uninstall-man3 uninstall-man5 \
+	 uninstall-man8
 tags: TAGS
 TAGS:
 
@@ -232,7 +282,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -250,23 +300,21 @@ installcheck: installcheck-am
 install-exec-am:
 install-exec: install-exec-am
 
-install-data-am: install-manpl1DATA install-manpl3DATA \
-		install-manpl5DATA install-manpl8DATA
+install-data-am: install-man
 install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 install: install-am
-uninstall-am: uninstall-manpl1DATA uninstall-manpl3DATA \
-		uninstall-manpl5DATA uninstall-manpl8DATA
+uninstall-am: uninstall-man
 uninstall: uninstall-am
-all-am: Makefile $(DATA)
+all-am: Makefile $(MANS)
 all-redirect: all-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs:
-	$(mkinstalldirs)  $(DESTDIR)$(manpl1dir) $(DESTDIR)$(manpl3dir) \
-		$(DESTDIR)$(manpl5dir) $(DESTDIR)$(manpl8dir)
+	$(mkinstalldirs)  $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man3 \
+		$(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8
 
 
 mostlyclean-generic:
@@ -297,19 +345,15 @@ maintainer-clean-am:  maintainer-clean-generic distclean-am
 
 maintainer-clean: maintainer-clean-am
 
-.PHONY: uninstall-manpl1DATA install-manpl1DATA uninstall-manpl3DATA \
-install-manpl3DATA uninstall-manpl5DATA install-manpl5DATA \
-uninstall-manpl8DATA install-manpl8DATA tags distdir info-am info \
-dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
-install-exec install-data-am install-data install-am install \
-uninstall-am uninstall all-redirect all-am all installdirs \
-mostlyclean-generic distclean-generic clean-generic \
-maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+.PHONY: install-man1 uninstall-man1 install-man3 uninstall-man3 \
+install-man5 uninstall-man5 install-man8 uninstall-man8 install-man \
+uninstall-man tags distdir info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
 
-	useradd.8 \
-	userdel.8 \
-	usermod.8 \
-	vipw.8
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -45,9 +45,10 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
 transform = @program_transform_name@
 
 NORMAL_INSTALL = :
@@ -75,7 +76,6 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
-LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBMD = @LIBMD@
@@ -88,7 +88,6 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NM = @NM@
 OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
@@ -177,7 +176,7 @@ strstr.c
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 SOURCES = $(libshadow_a_SOURCES) $(libshadow_la_SOURCES)
 OBJECTS = $(libshadow_a_OBJECTS) $(libshadow_la_OBJECTS)
@@ -310,50 +309,13 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
 	  fi; \
 	done
-commonio.lo commonio.o : commonio.c ../config.h rcsid.h defines.h \
-	gshadow_.h commonio.h
-dialchk.lo dialchk.o : dialchk.c ../config.h rcsid.h defines.h \
-	gshadow_.h prototypes.h dialup.h dialchk.h
-dialup.lo dialup.o : dialup.c ../config.h rcsid.h prototypes.h defines.h \
-	gshadow_.h dialup.h
-encrypt.lo encrypt.o : encrypt.c ../config.h rcsid.h prototypes.h \
-	defines.h gshadow_.h
-fputsx.lo fputsx.o : fputsx.c ../config.h defines.h gshadow_.h rcsid.h
-getdef.lo getdef.o : getdef.c ../config.h rcsid.h prototypes.h defines.h \
-	gshadow_.h getdef.h
-getpass.lo getpass.o : getpass.c ../config.h rcsid.h defines.h \
-	gshadow_.h getdef.h
-groupio.lo groupio.o : groupio.c ../config.h rcsid.h prototypes.h \
-	defines.h gshadow_.h commonio.h groupio.h
-gshadow.lo gshadow.o : gshadow.c ../config.h rcsid.h prototypes.h \
-	defines.h gshadow_.h
-lockpw.lo lockpw.o : lockpw.c ../config.h
-port.lo port.o : port.c ../config.h rcsid.h defines.h gshadow_.h port.h
-putgrent.lo putgrent.o : putgrent.c ../config.h prototypes.h defines.h \
-	gshadow_.h
-pwauth.lo pwauth.o : pwauth.c ../config.h rcsid.h prototypes.h defines.h \
-	gshadow_.h pwauth.h getdef.h
-pwio.lo pwio.o : pwio.c ../config.h rcsid.h prototypes.h defines.h \
-	gshadow_.h commonio.h pwio.h
-rad64.lo rad64.o : rad64.c ../config.h rcsid.h
-sgetgrent.lo sgetgrent.o : sgetgrent.c ../config.h rcsid.h defines.h \
-	gshadow_.h
-sgetpwent.lo sgetpwent.o : sgetpwent.c ../config.h rcsid.h defines.h \
-	gshadow_.h
-sgroupio.lo sgroupio.o : sgroupio.c ../config.h rcsid.h prototypes.h \
-	defines.h gshadow_.h commonio.h sgroupio.h
-shadowio.lo shadowio.o : shadowio.c ../config.h rcsid.h prototypes.h \
-	defines.h gshadow_.h commonio.h shadowio.h
-shadow.lo shadow.o : shadow.c ../config.h
-tcfsio.lo tcfsio.o : tcfsio.c ../config.h
-utent.lo utent.o : utent.c ../config.h
 
 info-am:
 info: info-am
@@ -379,7 +341,7 @@ uninstall: uninstall-am
 all-am: Makefile $(LIBRARIES) $(LTLIBRARIES) $(HEADERS)
 all-redirect: all-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs:
 	$(mkinstalldirs)  $(DESTDIR)$(libdir)
 

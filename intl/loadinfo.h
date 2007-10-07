@@ -50,7 +50,7 @@ struct loaded_l10nfile
 };
 
 
-extern const char *_nl_normalize_codeset PARAMS ((const char *codeset,
+extern const char *_nl_normalize_codeset PARAMS ((const unsigned char *codeset,
 						  size_t name_len));
 
 extern struct loaded_l10nfile *
@@ -74,5 +74,3 @@ extern int _nl_explode_name PARAMS ((char *name, const char **language,
 				     const char **special,
 				     const char **sponsor,
 				     const char **revision));
-
-extern char *_nl_find_language PARAMS ((const char *name));

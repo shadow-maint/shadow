@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: useradd.c,v 1.18 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: useradd.c,v 1.21 2000/10/09 20:03:12 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -44,6 +44,12 @@ RCSID(PKG_VER "$Id: useradd.c,v 1.18 2000/09/02 18:40:44 marekm Exp $")
 #include <ctype.h>
 #include <fcntl.h>
 #include <time.h>
+
+#ifdef USE_PAM
+#include <security/pam_appl.h>
+#include <security/pam_misc.h>
+#include <pwd.h>
+#endif /* USE_PAM */
 
 #include "pwauth.h"
 #if HAVE_LASTLOG_H
@@ -1642,6 +1648,13 @@ create_home(void)
 	}
 }
 
+#ifdef USE_PAM
+static struct pam_conv conv = {
+    misc_conv,
+    NULL
+};
+#endif /* USE_PAM */
+
 /*
  * main - useradd command
  */
@@ -1649,6 +1662,11 @@ create_home(void)
 int
 main(int argc, char **argv)
 {
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
+	int retval;
+#endif
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1658,6 +1676,38 @@ main(int argc, char **argv)
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
+
+#ifdef USE_PAM
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid(getuid());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start("shadow", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (1);
+	}
+#endif /* USE_PAM */
 
 	OPENLOG(Prog);
 
@@ -1710,6 +1760,19 @@ main(int argc, char **argv)
 	}
 
 	/*
+	 * Don't blindly overwrite a group when a user is added...
+	 * If you already have a group username, and want to add the user
+	 * to that group, use useradd -g username username.
+	 * --bero
+	 */
+	if (! (nflg || gflg)) {
+	    if (getgrnam(user_name)) {
+                fprintf(stderr, _("%s: group %s exists - if you want to add this user to that group, use -g.\n"), Prog, user_name);
+		exit(E_NAME_IN_USE);
+	    }
+	}
+
+	/*
 	 * Do the hard stuff - open the files, create the user entries,
 	 * create the home directory, then close and update the files.
 	 */
@@ -1740,6 +1803,23 @@ main(int argc, char **argv)
 	}
 
 	close_files ();
+
+#ifdef USE_PAM
+	if (retval == PAM_SUCCESS) {
+		retval = pam_chauthtok(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
+		exit (1);
+	}
+
+	if (retval == PAM_SUCCESS)
+		pam_end(pamh, PAM_SUCCESS);
+#endif /* USE_PAM */
 
 	exit(E_SUCCESS);
 	/*NOTREACHED*/

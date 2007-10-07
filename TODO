@@ -1,0 +1,7 @@
+- fix nscd flushing databases on change (I'm still not shure where it will
+  be bether add this on shadow or on PAM level),
+
+- add more translations (maintainners for man pages and gettext files
+  welcome),
+
+- move all doc to docbook (maybe also man pages).

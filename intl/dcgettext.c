@@ -21,11 +21,11 @@
 
 #include <sys/types.h>
 
-#if defined __GNUC__ && !defined C_ALLOCA
+#ifdef __GNUC__
 # define alloca __builtin_alloca
 # define HAVE_ALLOCA 1
 #else
-# if (defined HAVE_ALLOCA_H || defined _LIBC) && !defined C_ALLOCA
+# if defined HAVE_ALLOCA_H || defined _LIBC
 #  include <alloca.h>
 # else
 #  ifdef _AIX
@@ -217,24 +217,6 @@ struct block_list
 # define DCGETTEXT dcgettext__
 #endif
 
-/* Checking whether the binaries runs SUID must be done and glibc provides
-   easier methods therefore we make a difference here.  */
-#ifdef _LIBC
-# define ENABLE_SECURE __libc_enable_secure
-# define DETERMINE_SECURE
-#else
-static int enable_secure;
-# define ENABLE_SECURE (enable_secure == 1)
-# define DETERMINE_SECURE \
-  if (enable_secure == 0)						      \
-    {									      \
-      if (getuid () != geteuid () || getgid () != getegid ())		      \
-	enable_secure = 1;						      \
-      else								      \
-	enable_secure = -1;						      \
-    }
-#endif
-
 /* Look up MSGID in the DOMAINNAME message catalog for the current CATEGORY
    locale.  */
 char *
@@ -259,12 +241,9 @@ DCGETTEXT (domainname, msgid, category)
   if (msgid == NULL)
     return NULL;
 
-  /* See whether this is a SUID binary or not.  */
-  DETERMINE_SECURE;
-
   /* If DOMAINNAME is NULL, we are interested in the default domain.  If
      CATEGORY is not LC_MESSAGES this might not make much sense but the
-     definition left this undefined.  */
+     defintion left this undefined.  */
   if (domainname == NULL)
     domainname = _nl_current_default_domain;
 
@@ -294,7 +273,7 @@ DCGETTEXT (domainname, msgid, category)
       size_t path_max;
       char *ret;
 
-      path_max = (unsigned int) PATH_MAX;
+      path_max = (unsigned) PATH_MAX;
       path_max += 2;		/* The getcwd docs say to do this.  */
 
       dirname = (char *) alloca (path_max + dirname_len);
@@ -339,7 +318,7 @@ DCGETTEXT (domainname, msgid, category)
 
 
   /* Search for the given string.  This is a loop because we perhaps
-     got an ordered list of languages to consider for the translation.  */
+     got an ordered list of languages to consider for th translation.  */
   while (1)
     {
       /* Make CATEGORYVALUE point to the next element of the list.  */
@@ -360,15 +339,6 @@ DCGETTEXT (domainname, msgid, category)
 	  while (categoryvalue[0] != '\0' && categoryvalue[0] != ':')
 	    *cp++ = *categoryvalue++;
 	  *cp = '\0';
-
-	  /* When this is a SUID binary we must not allow accessing files
-	     outside the dedicated directories.  */
-	  if (ENABLE_SECURE
-	      && (memchr (single_locale, '/',
-			  _nl_find_language (single_locale) - single_locale)
-		  != NULL))
-	    /* Ingore this entry.  */
-	    continue;
 	}
 
       /* If the current locale value is C (or POSIX) we don't load a
@@ -426,8 +396,7 @@ find_msg (domain_file, msgid)
      struct loaded_l10nfile *domain_file;
      const char *msgid;
 {
-  size_t act = 0;
-  size_t top, bottom;
+  size_t top, act, bottom;
   struct loaded_domain *domain;
 
   if (domain_file->decided == 0)

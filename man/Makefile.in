@@ -1,4 +1,4 @@
-# Makefile.in generated automatically by automake 1.4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
@@ -46,9 +46,10 @@ AUTOMAKE = @AUTOMAKE@
 AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
-INSTALL_PROGRAM = @INSTALL_PROGRAM@ $(AM_INSTALL_PROGRAM_FLAGS)
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
 transform = @program_transform_name@
 
 NORMAL_INSTALL = :
@@ -76,7 +77,6 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLDEPS = @INTLDEPS@
 INTLLIBS = @INTLLIBS@
 INTLOBJS = @INTLOBJS@
-LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBMD = @LIBMD@
@@ -89,7 +89,6 @@ LTLIBOBJS = @LTLIBOBJS@
 MAKEINFO = @MAKEINFO@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
-NM = @NM@
 OBJDUMP = @OBJDUMP@
 PACKAGE = @PACKAGE@
 POFILES = @POFILES@
@@ -107,10 +106,10 @@ AUTOMAKE_OPTIONS = 1.0 foreign
 # subdirectories for translated manual pages
 SUBDIRS = pl
 
-man_MANS = chage.1 chfn.1 chsh.1 gpasswd.1  login.1 newgrp.1 passwd.1 su.1  shadow.3  dialups.5 faillog.5 limits.5 login.access.5 login.defs.5  passwd.5 porttime.5 shadow.5 suauth.5  chpasswd.8 dpasswd.8 faillog.8  groupadd.8 groupdel.8 groupmod.8  grpck.8 lastlog.8 logoutd.8 mkpasswd.8 newusers.8  pwck.8 pwconv.8 shadowconfig.8  useradd.8 userdel.8 usermod.8 vipw.8
+man_MANS =  	chage.1 	chfn.1 	chsh.1 	gpasswd.1 	login.1 	newgrp.1 	passwd.1 	su.1 	shadow.3 	dialups.5 	faillog.5 	limits.5 	login.access.5 	login.defs.5 	passwd.5 	porttime.5 	shadow.5 	suauth.5 	adduser.8 	chpasswd.8 	dpasswd.8 	faillog.8 	groupadd.8 	groupdel.8 	groupmod.8 	grpconv.8 	grpunconv.8 	grpck.8 	lastlog.8 	logoutd.8 	mkpasswd.8 	newusers.8 	pwck.8 	pwunconv.8
 
 
-EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8 ${man_MANS}
+EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -126,7 +125,7 @@ DIST_COMMON =  Makefile.am Makefile.in
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
-TAR = tar
+TAR = gtar
 GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
@@ -375,7 +374,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -414,7 +413,7 @@ uninstall: uninstall-recursive
 all-am: Makefile $(MANS)
 all-redirect: all-recursive
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs: installdirs-recursive
 installdirs-am:
 	$(mkinstalldirs)  $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man3 \
@@ -465,6 +464,12 @@ uninstall-am uninstall all-redirect all-am all installdirs-am \
 installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
+	pwconv.8 \
+	shadowconfig.8 \
+	useradd.8 \
+	userdel.8 \
+	usermod.8 \
+	vipw.8
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

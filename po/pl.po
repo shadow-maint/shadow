@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-981228\n"
-"POT-Creation-Date: 2000-09-02 20:40+0200\n"
+"POT-Creation-Date: 2000-10-12 06:20+0200\n"
 "PO-Revision-Date: 1999-03-02 22:29+01:00\n"
 "Last-Translator: Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>\n"
 "Language-Team: PL <pl@li.org>\n"
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Unknown error %d"
 msgstr "Nieznany b³±d %d"
 
-#: src/chage.c:156
+#: src/chage.c:162
 #, c-format
 msgid ""
 "Usage: %s [ -l ] [ -m min_days ] [ -M max_days ] [ -W warn ]\n"
@@ -234,14 +234,14 @@ msgstr ""
 "U¿ycie: %s [ -l ] [ -m min_dni ] [ -M maks_dni ] [ -W ostrze¿ ]\n"
 "  [ -I nieaktywne ] [ -E utrata_wa¿no¶ci ] [ -d ostatni_dzieñ ] u¿ytkownik\n"
 
-#: src/chage.c:158
+#: src/chage.c:164
 #, c-format
 msgid "Usage: %s [ -l ] [ -m min_days ] [ -M max_days ] [ -d last_day ] user\n"
 msgstr ""
 "U¿ycie: %s [ -l ] [ -m min_dni ] [ -M maks_dni ] [ -d ostatni_dzieñ ] "
 "u¿ytkownik\n"
 
-#: src/chage.c:193
+#: src/chage.c:199
 msgid ""
 "Enter the new value, or press return for the default\n"
 "\n"
@@ -249,27 +249,27 @@ msgstr ""
 "Wpisz now± warto¶æ lub wci¶nij return by przyj±c warto¶æ domy¶ln±\n"
 "\n"
 
-#: src/chage.c:196
+#: src/chage.c:202
 msgid "Minimum Password Age"
 msgstr "Minimalny wiek has³a"
 
-#: src/chage.c:201
+#: src/chage.c:207
 msgid "Maximum Password Age"
 msgstr "Maksymalny wiek has³a"
 
-#: src/chage.c:207
+#: src/chage.c:213
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Ostatnia zmiana has³a (RRRR-MM-DD)"
 
-#: src/chage.c:216
+#: src/chage.c:222
 msgid "Password Expiration Warning"
 msgstr "Ostrze¿enie o utracie wa¿no¶ci has³a"
 
-#: src/chage.c:221
+#: src/chage.c:227
 msgid "Password Inactive"
 msgstr "Has³o nieaktywne"
 
-#: src/chage.c:227
+#: src/chage.c:233
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Data utraty wa¿no¶ci konta (RRRR-MM-DD)"
 
@@ -281,22 +281,22 @@ msgstr "Data utraty wa¿no¶ci konta (RRRR-MM-DD)"
 #. * days after the password expires that the account becomes
 #. * unusable.
 #.
-#: src/chage.c:281
+#: src/chage.c:287
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum:\t%ld\n"
 
-#: src/chage.c:282
+#: src/chage.c:288
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maksimim:\t%ld\n"
 
-#: src/chage.c:284
+#: src/chage.c:290
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Ostrze¿enie:\t%ld\n"
 
-#: src/chage.c:285
+#: src/chage.c:291
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Nieaktywne:\t%ld\n"
@@ -306,11 +306,11 @@ msgstr "Nieaktywne:\t%ld\n"
 #. * password was last modified.  The date is the number of
 #. * days since 1/1/1970.
 #.
-#: src/chage.c:294
+#: src/chage.c:300
 msgid "Last Change:\t\t"
 msgstr "Ostatnia zmiana:\t\t"
 
-#: src/chage.c:296 src/chage.c:310 src/chage.c:327 src/chage.c:340
+#: src/chage.c:302 src/chage.c:316 src/chage.c:333 src/chage.c:346
 msgid "Never\n"
 msgstr "Nigdy\n"
 
@@ -319,7 +319,7 @@ msgstr "Nigdy\n"
 #. * change date plus the number of days the password is valid
 #. * for.
 #.
-#: src/chage.c:308
+#: src/chage.c:314
 msgid "Password Expires:\t"
 msgstr "Has³o traci wa¿no¶æ:\t"
 
@@ -329,7 +329,7 @@ msgstr "Has³o traci wa¿no¶æ:\t"
 #. * and the number of inactive days is added.  The resulting date
 #. * is when the active will be disabled.
 #.
-#: src/chage.c:324
+#: src/chage.c:330
 #, fuzzy
 msgid "Password Inactive:\t"
 msgstr "Has³o nieaktywne:\t"
@@ -338,82 +338,96 @@ msgstr "Has³o nieaktywne:\t"
 #. * The account will expire on the given date regardless of the
 #. * password expiring or not.
 #.
-#: src/chage.c:338
+#: src/chage.c:344
 #, fuzzy
 msgid "Account Expires:\t"
 msgstr "Has³o traci wa¿no¶æ:\t"
 
-#: src/chage.c:486
+#: src/chage.c:453 src/chpasswd.c:152 src/groupadd.c:536 src/groupdel.c:322
+#: src/groupmod.c:522 src/newusers.c:389 src/useradd.c:1707 src/userdel.c:738
+#: src/usermod.c:1684
+#, fuzzy, c-format
+msgid "%s: PAM authentication failed\n"
+msgstr "%s: b³±d podczas dodawania metody uwierzytelniania\n"
+
+#: src/chage.c:536
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: nie ³±cz \"l\" z innymi flagami\n"
 
-#: src/chage.c:498 src/chage.c:610 src/login.c:529
+#: src/chage.c:548 src/chage.c:660 src/login.c:529
 #, c-format
 msgid "%s: permission denied\n"
 msgstr "%s: odmowa dostêpu\n"
 
-#: src/chage.c:510 src/chpasswd.c:120
+#: src/chage.c:560 src/chpasswd.c:170
 #, c-format
 msgid "%s: can't lock password file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z has³ami\n"
 
-#: src/chage.c:516 src/chpasswd.c:124
+#: src/chage.c:566 src/chpasswd.c:174
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: nie mogê otworzyæ pliku z has³ami\n"
 
-#: src/chage.c:523
+#: src/chage.c:573
 #, c-format
 msgid "%s: unknown user: %s\n"
 msgstr "%s: nieznany u¿ytkownik: %s\n"
 
-#: src/chage.c:542
+#: src/chage.c:592
 #, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z ukrytymi has³ami\n"
 
-#: src/chage.c:549
+#: src/chage.c:599
 #, c-format
 msgid "%s: can't open shadow password file\n"
 msgstr "%s: nie mogê otworzyæ pliku z ukrytymi has³ami\n"
 
-#: src/chage.c:631
+#: src/chage.c:681
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "Zmieniam informacjê o u¿ytkowniku %s\n"
 
-#: src/chage.c:633
+#: src/chage.c:683
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: b³±d podczas zmieniania pól\n"
 
-#: src/chage.c:660 src/chage.c:723 src/pwunconv.c:183
+#: src/chage.c:710 src/chage.c:773 src/pwunconv.c:183
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s: nie mogê zaktualizowaæ pliku z has³ami\n"
 
-#: src/chage.c:690 src/pwunconv.c:178
+#: src/chage.c:740 src/pwunconv.c:178
 #, c-format
 msgid "%s: can't update shadow password file\n"
 msgstr "%s: nie mogê zaktualizowaæ pliku z ukrytymi has³ami\n"
 
-#: src/chage.c:739 src/chage.c:754 src/chfn.c:570 src/chsh.c:409
+#: src/chage.c:789 src/chage.c:804 src/chfn.c:570 src/chsh.c:409
 #: src/passwd.c:825 src/passwd.c:926
 msgid "Error updating the DBM password entry.\n"
 msgstr "B³±d podczas aktualizacki bazy hase³ DBM.\n"
 
-#: src/chage.c:771
+#: src/chage.c:821
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
 msgstr "%s: nie mogê przepisaæ pliku z ukrytymi has³ami\n"
 
-#: src/chage.c:785
+#: src/chage.c:835
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: nie mogê przepisaæ pliku z has³ami\n"
 
-#: src/chage.c:836
+#: src/chage.c:853 src/chpasswd.c:346 src/groupadd.c:595 src/groupdel.c:409
+#: src/groupmod.c:606 src/newusers.c:625 src/useradd.c:1816 src/userdel.c:903
+#: src/usermod.c:1762
+#, fuzzy, c-format
+msgid "%s: PAM chauthtok failed\n"
+msgstr "%s: nie mogê usun±c blokady z pliku\n"
+
+#: src/chage.c:905
 #, c-format
 msgid "%s: no aging information present\n"
 msgstr "%s: brak informacji\n"
@@ -552,7 +566,7 @@ msgstr "Nie mogê zablokowaæ pliku z has³ami; spróbuj pó¼niej.\n"
 msgid "Cannot open the password file.\n"
 msgstr "Nie mogê otworzyæ pliku z has³ami.\n"
 
-#: src/chfn.c:545 src/chsh.c:382 src/passwd.c:746 src/usermod.c:1313
+#: src/chfn.c:545 src/chsh.c:382 src/passwd.c:746 src/usermod.c:1319
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s: %s nie znaleziony w /etc/passwd\n"
@@ -570,53 +584,53 @@ msgstr "Wprowadzenie zmian do pliku passwd jest niemo¿liwe.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Nie mogê usun±c blokady z pliku z has³ami.\n"
 
-#: src/chpasswd.c:76
+#: src/chpasswd.c:82
 #, c-format
 msgid "usage: %s [-e]\n"
 msgstr "u¿ycie: %s [-e]\n"
 
-#: src/chpasswd.c:132 src/pwconv.c:104
+#: src/chpasswd.c:182 src/pwconv.c:104
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z ukrytymi has³ami\n"
 
-#: src/chpasswd.c:137 src/gpasswd.c:608 src/pwconv.c:109 src/pwunconv.c:118
+#: src/chpasswd.c:187 src/gpasswd.c:608 src/pwconv.c:109 src/pwunconv.c:118
 #: src/pwunconv.c:123
 #, c-format
 msgid "%s: can't open shadow file\n"
 msgstr "%s: nie mogê otworzyæ pliku z ukrytymi has³ami\n"
 
-#: src/chpasswd.c:159 src/newusers.c:415
+#: src/chpasswd.c:209 src/newusers.c:465
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: linia %d: linia zbyt d³uga\n"
 
-#: src/chpasswd.c:179
+#: src/chpasswd.c:229
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: linia %d: brakuje nowego has³a\n"
 
-#: src/chpasswd.c:195
+#: src/chpasswd.c:245
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linia %d: nieznany u¿ytkownik %s\n"
 
-#: src/chpasswd.c:247
+#: src/chpasswd.c:297
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: linia %d: nie mogê zaktualizowaæ wpisu do bazy hase³\n"
 
-#: src/chpasswd.c:263 src/newusers.c:535
+#: src/chpasswd.c:313 src/newusers.c:585
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: wykryto b³±d, zignorowano modyfikacje\n"
 
-#: src/chpasswd.c:274
+#: src/chpasswd.c:324
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: b³±d podczas aktualizacji pliku z ukrytymi has³ami\n"
 
-#: src/chpasswd.c:282
+#: src/chpasswd.c:332
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: b³±d podczas aktualizacji pliku z has³ami\n"
@@ -873,33 +887,33 @@ msgstr "%s: nie mogê zaktualizwoaæ plików DBM\n"
 msgid "%s: can't update DBM shadow files\n"
 msgstr "%s: nie mogê zaktualizowaæ pliku DBM z ukrytymi has³ami\n"
 
-#: src/groupadd.c:105
+#: src/groupadd.c:111
 msgid "usage: groupadd [-g gid [-o]] group\n"
 msgstr "u¿ycie: groupadd [-g gid [-o]] grupa\n"
 
-#: src/groupadd.c:173 src/groupadd.c:196 src/groupmod.c:183 src/groupmod.c:230
-#: src/useradd.c:931 src/usermod.c:539 src/usermod.c:675
+#: src/groupadd.c:179 src/groupadd.c:202 src/groupmod.c:189 src/groupmod.c:236
+#: src/useradd.c:937 src/usermod.c:545 src/usermod.c:681
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: b³±d podczas dodawania nowej grupy\n"
 
-#: src/groupadd.c:183 src/groupadd.c:206 src/groupmod.c:199 src/useradd.c:942
-#: src/usermod.c:551 src/usermod.c:687
+#: src/groupadd.c:189 src/groupadd.c:212 src/groupmod.c:205 src/useradd.c:948
+#: src/usermod.c:557 src/usermod.c:693
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
 msgstr "%s: nie mogê dodaæ nowego wpisu do bazy dbm grup\n"
 
-#: src/groupadd.c:258 src/useradd.c:996
+#: src/groupadd.c:264 src/useradd.c:1002
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: nazwa %s nie jest niepowtarzalny\n"
 
-#: src/groupadd.c:273
+#: src/groupadd.c:279
 #, c-format
 msgid "%s: gid %ld is not unique\n"
 msgstr "%s: gid %ld nie jest niepowtarzalny\n"
 
-#: src/groupadd.c:297
+#: src/groupadd.c:303
 #, c-format
 msgid "%s: can't get unique gid\n"
 msgstr "%s: nie mogê uzyskaæ niepowtarzalnego gid\n"
@@ -907,78 +921,78 @@ msgstr "%s: nie mogê uzyskaæ niepowtarzalnego gid\n"
 #.
 #. * All invalid group names land here.
 #.
-#: src/groupadd.c:321 src/groupmod.c:341
+#: src/groupadd.c:327 src/groupmod.c:347
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
 msgstr "%s: %s: nie jest prawid³ow± nazw± grupy\n"
 
-#: src/groupadd.c:350 src/groupmod.c:367
+#: src/groupadd.c:356 src/groupmod.c:373
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s: nieprawid³owa grupa %s\n"
 
-#: src/groupadd.c:367 src/useradd.c:1272
+#: src/groupadd.c:373 src/useradd.c:1278
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
 msgstr "%s: -O wymaga ZMIENNA=WARTO¦Æ\n"
 
-#: src/groupadd.c:412 src/groupdel.c:167 src/groupmod.c:403 src/useradd.c:1381
-#: src/userdel.c:303 src/usermod.c:563
+#: src/groupadd.c:418 src/groupdel.c:173 src/groupmod.c:409 src/useradd.c:1387
+#: src/userdel.c:309 src/usermod.c:569
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: nie mogê przepisaæ pliku z grupami\n"
 
-#: src/groupadd.c:418 src/groupdel.c:173 src/groupmod.c:409 src/useradd.c:1389
-#: src/userdel.c:309 src/usermod.c:700
+#: src/groupadd.c:424 src/groupdel.c:179 src/groupmod.c:415 src/useradd.c:1395
+#: src/userdel.c:315 src/usermod.c:706
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
 msgstr "%s: nie mogê przepisaæ pliku z ukrytymi grupami\n"
 
-#: src/groupadd.c:437 src/groupdel.c:192 src/groupmod.c:428 src/userdel.c:389
+#: src/groupadd.c:443 src/groupdel.c:198 src/groupmod.c:434 src/userdel.c:395
 #, c-format
 msgid "%s: unable to lock group file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z grupami\n"
 
-#: src/groupadd.c:441 src/groupdel.c:196 src/groupmod.c:432
+#: src/groupadd.c:447 src/groupdel.c:202 src/groupmod.c:438
 #, c-format
 msgid "%s: unable to open group file\n"
 msgstr "%s: nie mogê otworzyæ pliku z grupami\n"
 
-#: src/groupadd.c:446 src/groupdel.c:201 src/groupmod.c:437 src/userdel.c:398
+#: src/groupadd.c:452 src/groupdel.c:207 src/groupmod.c:443 src/userdel.c:404
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z ukrytymi grupami\n"
 
-#: src/groupadd.c:451 src/groupdel.c:206 src/groupmod.c:442
+#: src/groupadd.c:457 src/groupdel.c:212 src/groupmod.c:448
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: nie mogê otworzyæ pliku z ukrytymi grupami\n"
 
-#: src/groupadd.c:518
+#: src/groupadd.c:568
 #, c-format
 msgid "%s: group %s exists\n"
 msgstr "%s: grupa %s istnieje\n"
 
-#: src/groupdel.c:86
+#: src/groupdel.c:92
 msgid "usage: groupdel group\n"
 msgstr "u¿ycie: groupdel grupa\n"
 
-#: src/groupdel.c:104 src/groupmod.c:187 src/groupmod.c:234
+#: src/groupdel.c:110 src/groupmod.c:193 src/groupmod.c:240
 #, c-format
 msgid "%s: error removing group entry\n"
 msgstr "%s: b³±d podczas usuwania grupy\n"
 
-#: src/groupdel.c:116 src/groupmod.c:206
+#: src/groupdel.c:122 src/groupmod.c:212
 #, c-format
 msgid "%s: error removing group dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu dbm o grupie\n"
 
-#: src/groupdel.c:131
+#: src/groupdel.c:137
 #, c-format
 msgid "%s: error removing shadow group entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu o ukrytej grupie\n"
 
-#: src/groupdel.c:144 src/groupmod.c:252
+#: src/groupdel.c:150 src/groupmod.c:258
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu dbm z pliku ukrytych grup\n"
@@ -986,46 +1000,46 @@ msgstr "%s: b³±d podczas usuwania wpisu dbm z pliku ukrytych grup\n"
 #.
 #. * Can't remove the group.
 #.
-#: src/groupdel.c:248
+#: src/groupdel.c:254
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
 msgstr "%s: nie mogê usun±æ podstawowej grupy u¿ytkowników.\n"
 
-#: src/groupdel.c:305 src/groupmod.c:501
+#: src/groupdel.c:355 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
 msgstr "%s: grupa %s nie isnieje\n"
 
-#: src/groupdel.c:319 src/groupmod.c:517
+#: src/groupdel.c:369 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s: grupa %s jest grup± NIS\n"
 
-#: src/groupdel.c:325 src/groupmod.c:523 src/userdel.c:761 src/usermod.c:1016
+#: src/groupdel.c:375 src/groupmod.c:573 src/userdel.c:811 src/usermod.c:1022
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s jest g³ównym serwerem NIS\n"
 
-#: src/groupmod.c:105
+#: src/groupmod.c:111
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
 msgstr "u¿ycie: groupmod [-g gid [-o]] [-n nazwa] grupa\n"
 
-#: src/groupmod.c:165
+#: src/groupmod.c:171
 #, fuzzy, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s nie znaleziony w /etc/passwd\n"
 
-#: src/groupmod.c:246
+#: src/groupmod.c:252
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: nie mogê dodaæ nowego wpisu dbm do pliku z ukrytymi grupami\n"
 
-#: src/groupmod.c:299
+#: src/groupmod.c:305
 #, c-format
 msgid "%s: %ld is not a unique gid\n"
 msgstr "%s: %ld nie jest niepowtarzalnym gid\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:336
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s nie jest niepowtarzaln± nazw±\n"
@@ -1469,67 +1483,67 @@ msgstr "Wybacz.\n"
 msgid "too many groups\n"
 msgstr "zbyt wiele grup\n"
 
-#: src/newusers.c:76
+#: src/newusers.c:82
 #, c-format
 msgid "Usage: %s [ input ]\n"
 msgstr "U¿ycie: %s [ wej¶cie ]\n"
 
-#: src/newusers.c:364
+#: src/newusers.c:414
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: nie mogê zablokowaæ /etc/passwd.\n"
 
-#: src/newusers.c:375
+#: src/newusers.c:425
 #, c-format
 msgid "%s: can't lock files, try again later\n"
 msgstr "%s: nie mogê zablokowaæ plików, spróbuj pó¼niej\n"
 
-#: src/newusers.c:390
+#: src/newusers.c:440
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: nie mogê otworzyæ plików\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:485
 #, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: linia %d: nieprawid³owa linia\n"
 
-#: src/newusers.c:453
+#: src/newusers.c:503
 #, c-format
 msgid "%s: line %d: can't create GID\n"
 msgstr "%s: linia %d: nie mogê utworzyæ GID\n"
 
-#: src/newusers.c:469
+#: src/newusers.c:519
 #, c-format
 msgid "%s: line %d: can't create UID\n"
 msgstr "%s: linia %d: nie mogê utworzyæ UID\n"
 
-#: src/newusers.c:481
+#: src/newusers.c:531
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
 msgstr "%s: linia %d: nie mogê znale¶æ u¿ytkownika %s\n"
 
-#: src/newusers.c:489
+#: src/newusers.c:539
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: linia %d: nie mogê zaktualizowaæ pliku z has³ami\n"
 
-#: src/newusers.c:506
+#: src/newusers.c:556
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
 msgstr "%s: linia %d: mkdir nie powiod³o siê\n"
 
-#: src/newusers.c:510
+#: src/newusers.c:560
 #, c-format
 msgid "%s: line %d: chown failed\n"
 msgstr "%s: linia %d: chown nie powiod³o siê\n"
 
-#: src/newusers.c:519
+#: src/newusers.c:569
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linia %d: nie mogê zaktualizowaæ wpisu\n"
 
-#: src/newusers.c:550
+#: src/newusers.c:600
 #, c-format
 msgid "%s: error updating files\n"
 msgstr "%s: b³±d podczas aktualizowania plików\n"
@@ -1880,497 +1894,503 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Wchodzê w tryb utrzymania systemu\n"
 
-#: src/useradd.c:243
+#: src/useradd.c:249
 #, c-format
 msgid "%s: rebuild the group database\n"
 msgstr "%s: przebuduj bazê grup\n"
 
-#: src/useradd.c:250
+#: src/useradd.c:256
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
 msgstr "%s: przebuduj bazê przes³oniêtych hase³\n"
 
-#: src/useradd.c:287 src/usermod.c:967
+#: src/useradd.c:293 src/usermod.c:973
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: nieprawid³owy argument numeryczny `%s'\n"
 
-#: src/useradd.c:343
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
 msgstr "%s: nieznany gid %s\n"
 
-#: src/useradd.c:350 src/useradd.c:642 src/useradd.c:1228 src/usermod.c:254
-#: src/usermod.c:1098
+#: src/useradd.c:356 src/useradd.c:648 src/useradd.c:1234 src/usermod.c:260
+#: src/usermod.c:1104
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: nieznana grupa %s\n"
 
-#: src/useradd.c:418
+#: src/useradd.c:424
 #, c-format
 msgid "group=%s,%ld  basedir=%s  skel=%s\n"
 msgstr "grupa=%s,%ld kat_baz=%s  skel=%s\n"
 
-#: src/useradd.c:421
+#: src/useradd.c:427
 #, c-format
 msgid "shell=%s  "
 msgstr "pow³oka=%s  "
 
-#: src/useradd.c:423
+#: src/useradd.c:429
 #, c-format
 msgid "inactive=%ld  expire=%s"
 msgstr "nieaktywne=%ld  wyga¶niêcie=%s"
 
-#: src/useradd.c:427
+#: src/useradd.c:433
 #, c-format
 msgid "GROUP=%ld\n"
 msgstr "GRUPA=%ld\n"
 
-#: src/useradd.c:428
+#: src/useradd.c:434
 #, c-format
 msgid "HOME=%s\n"
 msgstr "KAT_DOM=%s\n"
 
-#: src/useradd.c:430
+#: src/useradd.c:436
 #, c-format
 msgid "INACTIVE=%ld\n"
 msgstr "NIEAKTYWNE=%ld\n"
 
-#: src/useradd.c:431
+#: src/useradd.c:437
 #, c-format
 msgid "EXPIRE=%s\n"
 msgstr "WYGA¦NIÊCIE=%s\n"
 
-#: src/useradd.c:433
+#: src/useradd.c:439
 #, c-format
 msgid "SHELL=%s\n"
 msgstr "POW£OKA=%s\n"
 
-#: src/useradd.c:434
+#: src/useradd.c:440
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:470
+#: src/useradd.c:476
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: nie mogê utworzyæ nowego pliku ze standardowymi ustawieniami\n"
 
-#: src/useradd.c:564 src/useradd.c:575
+#: src/useradd.c:570 src/useradd.c:581
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: zmiana nazwy: %s"
 
-#: src/useradd.c:662 src/usermod.c:274
+#: src/useradd.c:668 src/usermod.c:280
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: grupa `%s' jest grup± NIS.\n"
 
-#: src/useradd.c:670 src/usermod.c:282
+#: src/useradd.c:676 src/usermod.c:288
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: podano zbyt wiele grup (maks %d).\n"
 
-#: src/useradd.c:702 src/usermod.c:314
+#: src/useradd.c:708 src/usermod.c:320
 #, c-format
 msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
 msgstr "u¿ycie: %s\t[-u uid [-o]] [-g grupa] [-G grupa,...] \n"
 
-#: src/useradd.c:705
+#: src/useradd.c:711
 msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr "\t\t[-d kat_dom] [-s pow³oka] [-c komentarz] [-m [-k wzór]]\n"
 
-#: src/useradd.c:708 src/usermod.c:320
+#: src/useradd.c:714 src/usermod.c:326
 msgid "[-f inactive] [-e expire ] "
 msgstr "[-f nieaktywne] [-e utrata_wa¿no¶ci ]"
 
-#: src/useradd.c:711
+#: src/useradd.c:717
 msgid "[-A program] "
 msgstr "[-A program] "
 
-#: src/useradd.c:713
+#: src/useradd.c:719
 msgid "[-p passwd] name\n"
 msgstr "[-p has³o] nazwa\n"
 
-#: src/useradd.c:715
+#: src/useradd.c:721
 #, c-format
 msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
 msgstr "       %s\t-D [-g grupa] [-b baza] [-s pow³oka]\n"
 
-#: src/useradd.c:718
+#: src/useradd.c:724
 msgid "\t\t[-f inactive] [-e expire ]\n"
 msgstr "\t\t[-f nieaktywne] [-e utrata_wa¿no¶ci ]\n"
 
-#: src/useradd.c:815 src/usermod.c:472
+#: src/useradd.c:821 src/usermod.c:478
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: b³±d podczas blokowania pliku z grupami\n"
 
-#: src/useradd.c:819 src/usermod.c:477
+#: src/useradd.c:825 src/usermod.c:483
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: b³±d podczas otwierania pliku z grupami\n"
 
-#: src/useradd.c:824 src/usermod.c:584
+#: src/useradd.c:830 src/usermod.c:590
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: b³±d podczas blokowania pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:829 src/usermod.c:590
+#: src/useradd.c:835 src/usermod.c:596
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: b³±d podczas otwierania pliku z ukrytymi grupami\n"
 
-#: src/useradd.c:1001
+#: src/useradd.c:1007
 #, c-format
 msgid "%s: uid %d is not unique\n"
 msgstr "%s: uid %d nie jest niepowtarzalny\n"
 
-#: src/useradd.c:1031
+#: src/useradd.c:1037
 #, c-format
 msgid "%s: can't get unique uid\n"
 msgstr "%s: nie mogê uzyskaæ niepowtarzalnego uid\n"
 
-#: src/useradd.c:1139 src/useradd.c:1283 src/usermod.c:1046 src/usermod.c:1057
-#: src/usermod.c:1067 src/usermod.c:1113 src/usermod.c:1157
+#: src/useradd.c:1145 src/useradd.c:1289 src/usermod.c:1052 src/usermod.c:1063
+#: src/usermod.c:1073 src/usermod.c:1119 src/usermod.c:1163
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: nieprawid³owe pole `%s'\n"
 
-#: src/useradd.c:1153
+#: src/useradd.c:1159
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: nieprawid³owy katalog bazowy `%s'\n"
 
-#: src/useradd.c:1163
+#: src/useradd.c:1169
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: nieprawid³owy komentarz `%s'\n"
 
-#: src/useradd.c:1173
+#: src/useradd.c:1179
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: nieprawid³owy katalog domowy `%s'\n"
 
-#: src/useradd.c:1191 src/usermod.c:1080
+#: src/useradd.c:1197 src/usermod.c:1086
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: nieprawid³owa data `%s'\n"
 
-#: src/useradd.c:1203
+#: src/useradd.c:1209
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: ukryte has³a wymagane dla -e\n"
 
-#: src/useradd.c:1218
+#: src/useradd.c:1224
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: ukryte has³a wymagane dla -f\n"
 
-#: src/useradd.c:1292
+#: src/useradd.c:1298
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: nieprawid³owa pow³oka `%s'\n"
 
-#: src/useradd.c:1333
+#: src/useradd.c:1339
 #, c-format
 msgid "%s: invalid user name `%s'\n"
 msgstr "%s: nieprawid³owa nazwa u¿ytkownika `%s'\n"
 
-#: src/useradd.c:1369 src/userdel.c:292 src/usermod.c:1225
+#: src/useradd.c:1375 src/userdel.c:298 src/usermod.c:1231
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: nie mogê przepisaæ pliku z has³ami\n"
 
-#: src/useradd.c:1374 src/userdel.c:295 src/usermod.c:1230
+#: src/useradd.c:1380 src/userdel.c:301 src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: nie mogê przepisaæ pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:1414 src/userdel.c:359 src/usermod.c:1265
+#: src/useradd.c:1420 src/userdel.c:365 src/usermod.c:1271
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z has³ami\n"
 
-#: src/useradd.c:1418 src/userdel.c:363 src/usermod.c:1269
+#: src/useradd.c:1424 src/userdel.c:369 src/usermod.c:1275
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: nie mogê otworzyæ pliku z has³ami\n"
 
-#: src/useradd.c:1424 src/userdel.c:368 src/usermod.c:1274
+#: src/useradd.c:1430 src/userdel.c:374 src/usermod.c:1280
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: nie mogê zablokowaæ pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:1430 src/userdel.c:373 src/usermod.c:1279
+#: src/useradd.c:1436 src/userdel.c:379 src/usermod.c:1285
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: nie mogê otworzyæ pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:1529 src/usermod.c:1366
+#: src/useradd.c:1535 src/usermod.c:1372
 #, c-format
 msgid "%s: error adding authentication method\n"
 msgstr "%s: b³±d podczas dodawania metody uwierzytelniania\n"
 
-#: src/useradd.c:1552
+#: src/useradd.c:1558
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: b³±d podczas dodawania nowego wpisu do pliku z has³ami\n"
 
-#: src/useradd.c:1567
+#: src/useradd.c:1573
 #, c-format
 msgid "%s: error updating password dbm entry\n"
 msgstr "%s: b³±d podczas aktualizacji wpisu dbm do pliku z has³ami\n"
 
-#: src/useradd.c:1583 src/usermod.c:1425
+#: src/useradd.c:1589 src/usermod.c:1431
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s: b³±d podczas dodawania nowego wpisu do pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:1599 src/usermod.c:1440
+#: src/useradd.c:1605 src/usermod.c:1446
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
 msgstr "%s: b³±d podczas aktualizacji wpisu dbm do pliku z ukrytymi has³ami\n"
 
-#: src/useradd.c:1631
+#: src/useradd.c:1637
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: nie mogê utworzyæ katalogu %s\n"
 
-#: src/useradd.c:1708 src/usermod.c:1203
+#: src/useradd.c:1758 src/usermod.c:1209
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: u¿ytkownik %s istnieje\n"
 
-#: src/useradd.c:1738
+#: src/useradd.c:1770
+#, c-format
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr ""
+
+#: src/useradd.c:1801
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
 
-#: src/userdel.c:127
+#: src/userdel.c:133
 #, c-format
 msgid "usage: %s [-r] name\n"
 msgstr "u¿ycie: %s [-r] nazwa\n"
 
-#: src/userdel.c:178 src/userdel.c:260
+#: src/userdel.c:184 src/userdel.c:266
 #, c-format
 msgid "%s: error updating group entry\n"
 msgstr "%s: b³±d podczas aktualizacji wpisu grupy\n"
 
-#: src/userdel.c:188 src/userdel.c:269
+#: src/userdel.c:194 src/userdel.c:275
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
 msgstr "%s: nie mogê zaktualizowaæ wpisu dbm do pliku z grupami\n"
 
-#: src/userdel.c:215
+#: src/userdel.c:221
 #, fuzzy, c-format
 msgid "%s: cannot remove dbm group entry\n"
 msgstr "%s: nie mogê zaktualizowaæ wpisu dbm do pliku z grupami\n"
 
-#: src/userdel.c:300
+#: src/userdel.c:306
 #, c-format
 msgid "%s: cannot rewrite TCFS key file\n"
 msgstr "%s: nie mogê przepisaæ pliku klucza TCFS\n"
 
-#: src/userdel.c:380
+#: src/userdel.c:386
 #, c-format
 msgid "%s: cannot lock TCFS key file\n"
 msgstr "%s: nie mogê zablokowaæ pliku klucza TCFS\n"
 
-#: src/userdel.c:384
+#: src/userdel.c:390
 #, c-format
 msgid "%s: cannot open TCFS key file\n"
 msgstr "%s: nie mogê otworzyæ pliku klucza TCFS\n"
 
-#: src/userdel.c:393
+#: src/userdel.c:399
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: nie mogê otworzyæ pliku z grupami\n"
 
-#: src/userdel.c:403
+#: src/userdel.c:409
 #, c-format
 msgid "%s: cannot open shadow group file\n"
 msgstr "%s: nie mogê otworzyæ pliku z przes³oniêtymi grupami\n"
 
-#: src/userdel.c:434 src/userdel.c:449
+#: src/userdel.c:440 src/userdel.c:455
 #, c-format
 msgid "%s: error deleting authentication\n"
 msgstr "%s: b³±d podczas usuwania informacji uwierzytelniaj±cej\n"
 
-#: src/userdel.c:458
+#: src/userdel.c:464
 #, c-format
 msgid "%s: error deleting password entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu do pliku z has³ami\n"
 
-#: src/userdel.c:461
+#: src/userdel.c:467
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu do pliku z ukrytymi has³ami\n"
 
-#: src/userdel.c:470
+#: src/userdel.c:476
 #, c-format
 msgid "%s: error deleting TCFS entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu TCFS\n"
 
-#: src/userdel.c:483
+#: src/userdel.c:489
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu dbm do pliku z has³ami\n"
 
-#: src/userdel.c:502
+#: src/userdel.c:508
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisy dbm z pliku z ukrytymi has³ami\n"
 
-#: src/userdel.c:543
+#: src/userdel.c:549
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: u¿ytkownik %s jest aktualnie zalogowany\n"
 
-#: src/userdel.c:660
+#: src/userdel.c:666
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
 msgstr "%s: ostrze¿enie: w³a¶cicielem %s nie jest %s, nie usuwam\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:672
 #, c-format
 msgid "%s: warning: can't remove "
 msgstr "%s: ostrze¿enie: nie mogê usun±æ "
 
-#: src/userdel.c:741 src/usermod.c:994
+#: src/userdel.c:791 src/usermod.c:1000
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s: u¿ytkownik %s nie istnieje\n"
 
-#: src/userdel.c:755 src/usermod.c:1010
+#: src/userdel.c:805 src/usermod.c:1016
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: u¿ytkownik %s jest u¿ytkownikiem NIS\n"
 
-#: src/userdel.c:792
+#: src/userdel.c:842
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: w³a¶cicielem %s nie jest %s, nie usuwam\n"
 
-#: src/userdel.c:815
+#: src/userdel.c:865
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr "%s: nie usuwam katalogu %s (would remove home of user %s)\n"
 
-#: src/userdel.c:828
+#: src/userdel.c:878
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: b³±d podczas usuwania katalogu %s\n"
 
-#: src/usermod.c:317
+#: src/usermod.c:323
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d kat_dom [-m]] [-s pow³oka] [-c komentarz] [-l nowa_nazwa]\n"
 
-#: src/usermod.c:323
+#: src/usermod.c:329
 msgid "[-A {DEFAULT|program},... ] "
 msgstr "[-A {DEFAULT|program},... ] "
 
-#: src/usermod.c:325
+#: src/usermod.c:331
 #, fuzzy
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p has³o] nazwa\n"
 
-#: src/usermod.c:504
+#: src/usermod.c:510
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s: zabrak³o pamiêci w pdate_group\n"
 
-#: src/usermod.c:627
+#: src/usermod.c:633
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s: zabrak³o pamiêci w update_gshadow\n"
 
-#: src/usermod.c:1180
+#: src/usermod.c:1186
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s: nie podano flag\n"
 
-#: src/usermod.c:1187
+#: src/usermod.c:1193
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: ukryte has³a wymagane dla -e i -f\n"
 
-#: src/usermod.c:1208
+#: src/usermod.c:1214
 #, c-format
 msgid "%s: uid %ld is not unique\n"
 msgstr "%s: uid %ld nie jest niepowtarzalny\n"
 
-#: src/usermod.c:1356
+#: src/usermod.c:1362
 #, c-format
 msgid "%s: error deleting authentication method\n"
 msgstr "%s: b³±d podczas usuwania metody uwierzytelniania\n"
 
-#: src/usermod.c:1376
+#: src/usermod.c:1382
 #, c-format
 msgid "%s: error changing authentication method\n"
 msgstr "%s: b³±d podczas zmiany metody uwierzytelniania\n"
 
-#: src/usermod.c:1393
+#: src/usermod.c:1399
 #, c-format
 msgid "%s: error changing password entry\n"
 msgstr "%s: b³±d podczas zmiany wpisu w pliku z has³ami\n"
 
-#: src/usermod.c:1399
+#: src/usermod.c:1405
 #, c-format
 msgid "%s: error removing password entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu z pliku z has³ami\n"
 
-#: src/usermod.c:1407
+#: src/usermod.c:1413
 #, c-format
 msgid "%s: error adding password dbm entry\n"
 msgstr "%s: b³±d podczas dodawania wpisu dbm do pliku z has³ami\n"
 
-#: src/usermod.c:1414
+#: src/usermod.c:1420
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu dbm z pliku z has³ami\n"
 
-#: src/usermod.c:1431
+#: src/usermod.c:1437
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu z pliku z ukrytymi has³ami\n"
 
-#: src/usermod.c:1446
+#: src/usermod.c:1452
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
 msgstr "%s: b³±d podczas usuwania wpisu dbm z pliku z ukrytymi has³ami\n"
 
-#: src/usermod.c:1477
+#: src/usermod.c:1483
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: katalog %s isnieje\n"
 
-#: src/usermod.c:1484
+#: src/usermod.c:1490
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s: nie mogê utworzyæ %s\n"
 
-#: src/usermod.c:1490
+#: src/usermod.c:1496
 #, c-format
 msgid "%s: can't chown %s\n"
 msgstr "%s: nie mogê zmieniæ w³a¶ciciela %s\n"
 
-#: src/usermod.c:1506
+#: src/usermod.c:1512
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: nie mogê zmieniæ nazwy katalogu z %s na %s\n"
 
 #. better leave it alone
-#: src/usermod.c:1603
+#: src/usermod.c:1609
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: ostrze¿enie: w³a¶cicielem %s nie jest %s\n"
 
-#: src/usermod.c:1609
+#: src/usermod.c:1615
 msgid "failed to change mailbox owner"
 msgstr "nie powiod³a siê zmiana w³a¶ciciela skrzynki pocztowej"
 
-#: src/usermod.c:1616
+#: src/usermod.c:1622
 msgid "failed to rename mailbox"
 msgstr "zmiana nazwy skrzynki pocztowej nie powiod³a siê"
 

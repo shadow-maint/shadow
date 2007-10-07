@@ -1,4 +1,19 @@
-$Id: CHANGES,v 1.30 2000/09/02 18:40:42 marekm Exp $
+$Id: NEWS,v 1.2 2000/10/12 03:19:03 kloczek Exp $
+
+shadow-20000902 => shadow-20001012
+
+- removed /redhat directory with obsoleted files (partialy rewrited spec
+  file is now in root directory),
+- aplayed shadow-19990827-group.patch patch from RH wich prevents adduser
+  overwrite previously existing groups in adduser,
+- added PAM support for chage (bind to "chage" PAM config file) also
+  added PAM support for all other small tools like chpasswd, groupadd,
+  groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common 
+  "shadow" PAM config file) - this modificaytions mainly based on
+  modifications prepared by Janek Rêkojarski <baggins@pld.org.pl>,
+- many small fixes and improvments in automake (mow "make dist"
+  works correctly),
+- added cs translation (Jiri Pavlovsky <Jiri.Pavlovsky@ff.cuni.cz>).
 
 shadow-20000826 => shadow-20000902
 
@@ -691,4 +706,3 @@ shadow-3.3.2 => shadow-3.3.2-951106
 shadow-3.3.2
 
 Original version, received directly from the author.
-

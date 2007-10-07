@@ -80,9 +80,7 @@ void free ();
    file and the name space must not be polluted.  */
 # define strcasecmp __strcasecmp
 
-# ifndef mempcpy
-#  define mempcpy __mempcpy
-# endif
+# define mempcpy __mempcpy
 # define HAVE_MEMPCPY	1
 
 /* We need locking here since we can be called from different places.  */
@@ -91,9 +89,6 @@ void free ();
 __libc_lock_define_initialized (static, lock);
 #endif
 
-#ifndef internal_function
-# define internal_function
-#endif
 
 /* For those loosing systems which don't have `alloca' we have to add
    some additional code emulating it.  */
@@ -129,15 +124,6 @@ struct block_list
 # undef alloca
 # define alloca(size) (malloc (size))
 #endif	/* have alloca */
-
-#if defined _LIBC_REENTRANT || defined HAVE_FGETS_UNLOCKED
-# undef fgets
-# define fgets(buf, len, s) fgets_unlocked (buf, len, s)
-#endif
-#if defined _LIBC_REENTRANT || defined HAVE_FEOF_UNLOCKED
-# undef feof
-# define feof(s) feof_unlocked (s)
-#endif
 
 
 struct alias_map
@@ -264,10 +250,10 @@ read_alias_file (fname, fname_len)
 	 b) these fields must be usable as file names and so must not
 	    be that long
        */
-      char buf[BUFSIZ];
-      char *alias;
-      char *value;
-      char *cp;
+      unsigned char buf[BUFSIZ];
+      unsigned char *alias;
+      unsigned char *value;
+      unsigned char *cp;
 
       if (fgets (buf, sizeof buf, fp) == NULL)
 	/* EOF reached.  */

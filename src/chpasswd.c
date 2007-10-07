@@ -43,7 +43,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chpasswd.c,v 1.10 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: chpasswd.c,v 1.12 2000/10/09 19:02:20 kloczek Exp $")
 
 #include <stdio.h>
 #include "prototypes.h"
@@ -54,6 +54,12 @@ RCSID(PKG_VER "$Id: chpasswd.c,v 1.10 2000/08/26 18:27:18 marekm Exp $")
 #ifdef	SHADOWPWD
 #include "shadowio.h"
 #endif
+
+#ifdef USE_PAM
+#include <security/pam_appl.h>
+#include <security/pam_misc.h>
+#include <pwd.h>
+#endif /* USE_PAM */
 
 static char *Prog;
 static int eflg = 0;
@@ -77,6 +83,13 @@ usage(void)
 	exit(1);
 }
 
+#ifdef USE_PAM
+static struct pam_conv conv = {
+    misc_conv,
+    NULL
+};
+#endif /* USE_PAM */
+
 int
 main(int argc, char **argv)
 {
@@ -97,12 +110,49 @@ main(int argc, char **argv)
 	int	line = 0;
 	long	now = time ((long *) 0) / (24L*3600L);
 	int ok;
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
+	int retval;
+#endif
 
 	Prog = Basename(argv[0]);
 
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
+
+#ifdef USE_PAM
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid(getuid());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start("shadow", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (1);
+	}
+#endif /* USE_PAM */
 
 	/* XXX - use getopt() */
 	if (!(argc == 1 || (argc == 2 && !strcmp(argv[1], "-e"))))
@@ -283,6 +333,23 @@ main(int argc, char **argv)
 		exit(1);
 	}
 	pw_unlock();
+
+#ifdef USE_PAM
+	if (retval == PAM_SUCCESS) {
+		retval = pam_chauthtok(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
+		exit (1);
+	}
+
+	if (retval == PAM_SUCCESS)
+		pam_end(pamh, PAM_SUCCESS);
+#endif /* USE_PAM */
 
 	return (0);
 }
