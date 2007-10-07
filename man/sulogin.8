@@ -1,0 +1,88 @@
+.\" Copyright 1989 - 1992, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: sulogin.8,v 1.4 1998/12/28 20:35:27 marekm Exp $
+.\"
+.TH SULOGIN 8
+.SH NAME
+sulogin \- Single-user login
+.SH SYNTAX
+\fBsulogin\fR [\fItty-device\fR]
+.SH DESCRIPTION
+.B sulogin
+is invoked by \fBinit\fR prior to allowing the user
+access to the system when in single user mode.
+This feature may only be available on certain systems where
+\fBinit\fR has been modified accordingly, or where the
+\fB/etc/inittab\fR has an entry for a single user login.
+.PP
+The user is prompted
+.IP "" .5i
+Type control-d to proceed with normal startup,
+.br
+(or give root password for system maintenance):
+.PP
+Input and output will be performed with the standard file
+descriptors unless the optional device name argument is provided.
+.PP
+If the user enters the correct root password, a login session
+is initiated.
+When \fBEOF\fR is pressed instead, the system enters multi-user
+mode.
+.PP
+After the user exits the single-user shell, or presses \fBEOF\fR,
+the system begins the initialization process required to enter
+multi-user mode.
+.SH CAVEATS
+.PP
+This command can only be used if \fBinit\fR has been modified to call
+\fBsulogin\fR instead of \fB/bin/sh\fR,
+or if the user has set the \fIinittab\fR to support a single user
+login.
+For example, the line
+.br
+.sp 1
+co:s:respawn:/etc/sulogin /dev/console
+.br
+.sp 1
+should execute the sulogin command in single user mode.
+.PP
+As complete an environment as possible is created.
+However, various devices may be unmounted or uninitialized and many 
+of the user commands may be unavailable or nonfunctional as a result.
+.SH FILES
+/etc/passwd \- user account information
+.br
+/etc/shadow \- encrypted passwords and age information
+.br
+/.profile \- initialization script for single user shell
+.SH SEE ALSO
+.BR login (1),
+.BR init (8),
+.BR sh (1)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@bga.com)

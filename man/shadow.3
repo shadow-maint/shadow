@@ -1,0 +1,148 @@
+.\" Copyright 1989 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: shadow.3,v 1.4 1998/12/28 20:35:24 marekm Exp $
+.\"
+.TH SHADOW 3
+.SH NAME
+shadow \- encrypted password file routines
+.SH SYNTAX
+.B #include <shadow.h>
+.PP
+.B struct spwd *getspent();
+.PP
+.B struct spwd *getspnam(char
+.IB *name );
+.PP
+.B void setspent();
+.PP
+.B void endspent();
+.PP
+.B struct spwd *fgetspent(FILE
+.IB *fp );
+.PP
+.B struct spwd *sgetspent(char
+.IB *cp );
+.PP
+.B int putspent(struct spwd
+.I *p,
+.B FILE
+.IB *fp );
+.PP
+.B int lckpwdf();
+.PP
+.B int ulckpwdf();
+.SH DESCRIPTION
+.I shadow
+manipulates the contents of the shadow password file,
+\fI/etc/shadow\fR.
+The structure in the \fI#include\fR file is
+.sp
+struct spwd {
+.in +.5i
+.br
+	char	*sp_namp; /* user login name */
+.br
+	char	*sp_pwdp; /* encrypted password */
+.br
+	long	sp_lstchg; /* last password change */
+.br
+	int	sp_min; /* days until change allowed. */
+.br
+	int	sp_max; /* days before change required */
+.br
+	int	sp_warn; /* days warning for expiration */
+.br
+	int	sp_inact; /* days before account inactive */
+.br
+	int	sp_expire; /* date when account expires */
+.br
+	int	sp_flag; /* reserved for future use */
+.br
+.in -.5i
+}
+.PP
+The meanings of each field are
+.sp
+sp_namp \- pointer to null-terminated user name.
+.br
+sp_pwdp \- pointer to null-terminated password.
+.br
+sp_lstchg \- days since Jan 1, 1970 password was last changed.
+.br
+sp_min \- days before which password may not be changed.
+.br
+sp_max \- days after which password must be changed.
+.br
+sp_warn \- days before password is to expire that user is warned
+of pending password expiration.
+.br
+sp_inact \- days after password expires that account is considered
+inactive and disabled.
+.br
+sp_expire \- days since Jan 1, 1970 when account will be disabled.
+.br
+sp_flag \- reserved for future use.
+.SH DESCRIPTION
+\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, and \fBsgetspent\fR
+each return a pointer to a \fBstruct spwd\fR.
+\fBgetspent\fR returns the
+next entry from the file, and \fBfgetspent\fR returns the next
+entry from the given stream, which is assumed to be a file of
+the proper format.
+\fBsgetspent\fR returns a pointer to a \fBstruct spwd\fR using the
+provided string as input.
+\fBgetspnam\fR searches from the current position in the file for
+an entry matching \fBname\fR.
+.PP
+\fBsetspent\fR and \fBendspent\fR may be used to begin and end,
+respectively, access to the shadow password file.
+.PP
+The \fBlckpwdf\fR and \fBulckpwdf\fR routines should be used to
+insure exclusive access to the \fI/etc/shadow\fR file.
+\fBlckpwdf\fR attempts to acquire a lock using \fBpw_lock\fR for
+up to 15 seconds.
+It continues by attempting to acquire a second lock using \fBspw_lock\fR
+for the remainder of the initial 15 seconds.
+Should either attempt fail after a total of 15 seconds, \fBlckpwdf\fR
+returns -1.
+When both locks are acquired 0 is returned.
+.SH DIAGNOSTICS
+Routines return NULL if no more entries are available or if an
+error occurs during processing.
+Routines which have \fBint\fR as the return value return 0 for
+success and -1 for failure.
+.SH CAVEATS
+These routines may only be used by the super user as access to
+the shadow password file is restricted.
+.SH FILES
+/etc/shadow \- encrypted user passwords
+.SH SEE ALSO
+.BR getpwent (3),
+.BR shadow (5)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@bga.com)

@@ -1,0 +1,454 @@
+/*
+ * Copyright 1989 - 1994, Julianne Frances Haugh
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+/*
+ * Configuration file for login.
+ *
+ *	$Id: config.h.linux,v 1.2 1997/05/01 23:11:57 marekm Exp $
+ */
+
+#ifndef _CONFIG_H
+#define _CONFIG_H
+
+#ifdef	__linux__
+#include <sys/types.h>
+#include <sys/param.h>
+#include <stdio.h>
+#endif
+
+/*
+ * Pathname to the run-time configuration definitions file.
+ */
+
+#define LOGINDEFS "/etc/login.defs"
+
+/*
+ * Define SHADOWPWD to use shadow [ unreadable ] password file.
+ * Release 3 has a requirement that SHADOWPWD always be defined.
+ */
+
+#define	SHADOWPWD
+
+/*
+ * Define AUTOSHADOW to have root always copy sp_pwdp to pw_passwd
+ * for getpwuid() and getpwnam().  This provides compatibility for
+ * privileged applications which are shadow-ignorant.  YOU ARE
+ * ENCOURAGED TO NOT USE THIS OPTION UNLESS ABSOLUTELY NECESSARY.
+ */
+/*
+ * Yes, don't do it (and don't build libc with the SHADOW_COMPAT=true
+ * option) unless you REALLY know what you're doing.  It might work,
+ * but can lead to unshadowing your passwords.  This is not the right
+ * way to support shadow passwords!  You have been warned.  --marekm
+ */
+
+#undef	AUTOSHADOW
+
+/*
+ * Define SHADOWGRP to user shadowed group files.  This feature adds
+ * the concept of a group administrator.  You MUST NOT define this
+ * if you disable SHADOWPWD.
+ */
+
+#define	SHADOWGRP /**/
+
+/*
+ * Define these if you have shadow password/group support functions in
+ * your version of libc.  This removes these functions from libshadow.a
+ * (the ones from libc will be used instead).
+ *
+ * Finally upgraded to ELF, so...
+ */
+#define HAVE_SHADOWPWD
+#define HAVE_SHADOWGRP
+
+/*
+ * Define MD5_CRYPT to support the MD5-based password hashing algorithm
+ * compatible with FreeBSD.  All programs using pw_encrypt() instead of
+ * crypt() will understand both styles: old (standard, DES-based), and
+ * new (MD5-based).
+ *
+ * This means that it is possible to copy encrypted passwords from FreeBSD.
+ * Programs to change passwords (like passwd) will still use the old style
+ * crypt() for compatibility.
+ *
+ * To enable the use of the new crypt() for new passwords (if you don't
+ * need to copy them to other systems, except FreeBSD and Linux), set the
+ * MD5_CRYPT option in /etc/login.defs to "yes".
+ *
+ * This algorithm supports passwords of any length (the getpass() limit
+ * is 127 on Linux) and salt strings up to 8 (instead of 2) characters.
+ *
+ * This is experimental, and currently requires that all programs use
+ * pw_encrypt() from libshadow.a instead of crypt() from libc.  This is
+ * problematic especially on ELF systems (libc5 has getspnam() so there
+ * is otherwise no need to link with the static libshadow.a).  On most
+ * a.out systems you have to link with libshadow.a anyway, no problem.
+ */
+
+#define MD5_CRYPT
+
+/*
+ * Define DOUBLESIZE to use 16 character passwords.  Define SW_CRYPT
+ * to use 80 character passwords with SecureWare[tm]'s method of
+ * generating ciphertext.
+ * Not recommended because of some potential weaknesses.  --marekm
+ */
+
+#undef DOUBLESIZE
+#undef SW_CRYPT
+
+/*
+ * Define SKEY to allow dual-mode SKEY/normal logins
+ */
+
+#undef	SKEY
+
+/*
+ * Define AGING if you want the password aging checks made.
+ * Release 3 has a requirement that AGING always be defined.
+ */
+
+#define	AGING
+
+/*
+ * Pick your version of DBM.  If you define either DBM or NDBM, you must
+ * define GETPWENT.  If you define NDBM you must define GETGRENT as well.
+ */
+
+/*
+ * DBM support is untested, not recommended yet.  It might make more
+ * sense if someone could add it to getpwnam() etc. in libc so that all
+ * programs (such as ls) can benefit from it.  Any volunteers?
+ *
+ * The old DBM (as opposed to NDBM) support may be removed in a future
+ * release if no one complains.  It's too braindamaged for the number
+ * of #ifdefs it adds (only one database per process at a time).
+ *
+ * On Linux, NDBM is actually implemented using GDBM, which is licensed
+ * under the GPL (not LGPL!) - I'm not sure if it is legal to link it
+ * with non-GPL code (such as the shadow suite).  Consult your lawyers,
+ * or just modify the code to use db instead.  Welcome to the wonderful
+ * world of copyrights.  Yuck!
+ *
+ * The current DBM support code has a subtle design flaw.  See my
+ * comment in pwdbm.c for details...
+ *
+ * Unless you have 2000 users or so, DBM probably doesn't make things
+ * much faster, and it does make things more complicated (= possibly
+ * more buggy).  Do it only if you know what you're doing!  --marekm
+ */
+
+#undef	DBM
+#undef	NDBM
+
+/*
+ * Define USE_SYSLOG if you want to have SYSLOG functions included in your code.
+ */
+
+#define	USE_SYSLOG
+
+/*
+ * Enable RLOGIN to support the "-r" and "-h" options.
+ * Also enable UT_HOST if your /etc/utmp provides for a host name.
+ */
+
+#define RLOGIN
+#define UT_HOST
+
+/*
+ * Define NO_RFLG to remove support for login -r flag if your system has
+ * a new-style rlogind which doesn't need it.  --marekm
+ */
+
+#define NO_RFLG
+
+/*
+ * Define the "success" code from ruserok().  Most modern systems use 0
+ * for success and -1 for failure, while certain older versions use 1
+ * for success and 0 for failure.  Please check your manpage to be sure.
+ */
+
+#define	RUSEROK	0
+
+/*
+ * Select one of the following
+ */
+
+#undef DIR_XENIX	/* include <sys/ndir.h>, use (struct direct)	*/
+#undef DIR_BSD		/* include <ndir.h>, use (struct direct)	*/
+#define DIR_SYSV	/* include <dirent.h>, use (struct dirent)	*/
+
+/*
+ * Various system environment definitions.
+ */
+
+/*
+ * Define if you have sgetgrent() in libc, to remove this function from
+ * libshadow.a (some versions of libc5 reportedly have it, most reports
+ * so far are from Red Hat 2.1 users, more information is welcome).
+ */
+#undef HAVE_SGETGRENT
+
+/*
+ * Only important if you compile with GETGRENT defined (use my getgr*()
+ * but still use fgetgrent() from libc if HAVE_FGETGRENT defined).
+ */
+#undef HAVE_FGETGRENT
+
+#define HAVE_SIGACTION
+#define HAVE_GETUSERSHELL /* Define if your UNIX supports getusershell() */
+#define HAVE_LL_HOST	/* Define if "struct lastlog" contains ll_host */
+#define	HAVE_ULIMIT	/* Define if your UNIX supports ulimit()	*/
+#define	HAVE_RLIMIT	/* Define if your UNIX supports setrlimit()     */
+#undef	GETPWENT	/* Define if you want my GETPWENT(3) routines	*/
+#undef	GETGRENT	/* Define if you want my GETGRENT(3) routines	*/
+#define	NEED_AL64	/* Define if library does not include a64l()	*/
+#undef	NEED_MKDIR	/* Define if system does not have mkdir()	*/
+#undef	NEED_RMDIR	/* Define if system does not have rmdir()	*/
+#undef	NEED_RENAME	/* Define if system does not have rename()	*/
+#undef	NEED_STRSTR	/* Define if library does not include strstr()	*/
+#undef	NEED_PUTPWENT	/* Define if library does not include putpwent()*/
+#define	SIGTYPE	void	/* Type returned by signal()                    */
+
+/*
+ * These definitions MUST agree with the values defined in <pwd.h>.
+ */
+
+#undef	BSD_QUOTA	/* the pw_quota field exists */
+#undef	ATT_AGE		/* the pw_age field exists */
+#undef	ATT_COMMENT	/* the pw_comment field exists */
+
+#define	UID_T	uid_t	/* set to be the type of UID's */
+#define	GID_T	gid_t	/* set to be the type of GID's */
+
+#ifndef	UID_T
+#if defined(SVR4) || defined(_POSIX_SOURCE)
+#define	UID_T	uid_t
+#else
+#define	UID_T	int
+#endif
+#endif
+
+#ifndef	GID_T
+#if defined(SVR4) || defined(_POSIX_SOURCE)
+#define	GID_T	gid_t
+#else
+#define	GID_T	int
+#endif
+#endif
+
+/*
+ * Define NDEBUG for production versions
+ */
+
+#define	NDEBUG
+
+/*
+ * Define PWDFILE and GRPFILE to the names of the password and
+ * group files. //jiivee
+ */
+
+#define	PASSWD_FILE	"/etc/passwd"
+#define	PASSWD_PAG_FILE	"/etc/passwd.pag"
+#define	GROUP_FILE	"/etc/group"
+#define	GROUP_PAG_FILE	"/etc/group.pag"
+
+#ifdef SHADOWPWD
+#define SHADOW_FILE	"/etc/shadow"
+#define SHADOW_PAG_FILE	"/etc/shadow.pag"
+#ifdef SHADOWGRP
+#define SGROUP_FILE	"/etc/gshadow"
+#define SGROUP_PAG_FILE	"/etc/gshadow.pag"
+#endif
+#endif
+
+/*
+ * The structure of the utmp file.  There are two kinds of UTMP files,
+ * "BSD" and "USG".  "BSD" has no PID or type information, "USG" does.
+ * If you define neither of these, the type will be defaulted by using
+ * BSD, SUN, SYS3 and USG defines.
+ */
+
+#define _UTMP_FILE "/var/run/utmp"
+#define _WTMP_FILE "/var/log/wtmp"
+
+#define USG_UTMP	/**/
+/* #define BSD_UTMP	*/
+
+#if !defined(USG_UTMP) && !defined(BSD_UTMP)
+#if defined(BSD) || defined(SYS3) || defined(SUN)
+#define	BSD_UTMP
+#else
+#define USG_UTMP
+#endif	/* BSD || SYS3 || SUN */
+#endif /* !USG_UTMP || !BSD_UTMP */
+
+/*
+ * From where to look for legal user shells
+ */
+
+#ifndef SHELLS_FILE
+#define SHELLS_FILE "/etc/shells"
+#endif
+
+/*
+ * Default issue file location
+ */
+
+#ifndef ISSUE_FILE
+#define ISSUE_FILE "/etc/issue"
+#endif
+
+/*
+ * Logoutd message file
+ */
+
+#define	HUP_MESG_FILE	"/etc/logoutd.mesg"
+
+/*
+ * Mail spool directory. This is used if mailspool cannot be located otherwise
+ */
+
+#ifndef MAIL_SPOOL_DIR
+#define MAIL_SPOOL_DIR "/var/spool/mail"
+#endif
+
+/*
+ * Where are new user default setup files kept
+ */
+
+#define SKEL_DIR "/etc/skel"
+
+/*
+ * New user defaults. The NEW_USER_FILE must have 6 X's in the end of name
+ */
+
+#define USER_DEFAULTS_FILE	"/etc/default/useradd"
+#define NEW_USER_FILE		"/etc/default/nuaddXXXXXX"
+
+/*
+ * Telinit program.  If your system uses /etc/telinit to change run
+ * level, define TELINIT and then define the RUNLEVEL macro to be the
+ * run-level to switch INIT to.  This is used by sulogin to change
+ * from single user to multi-user mode.
+ *
+ * From bluca@www.polimi.it: instead, set up /etc/inittab properly
+ * ~0:S:wait:/sbin/sulogin
+ * ~9:S:wait:/sbin/telinit -t0 2
+ */
+
+#undef	TELINIT
+#undef PATH_TELINIT	"/sbin/telinit"
+#undef	RUNLEVEL	"2"
+
+/*
+ * Crontab and atrm.  Used in userdel.c - see user_cancel().  Verify
+ * that these are correct for your distribution.  --marekm
+ */
+
+#if 0  /* old Slackware */
+#define CRONTAB_COMMAND "/usr/bin/crontab -d -u %s"
+#define CRONTAB_FILE "/var/cron/tabs/%s"
+#else
+/* Debian 0.93R6 (marekm): */
+#define	CRONTAB_COMMAND "/usr/bin/crontab -r -u %s"
+#define CRONTAB_FILE "/var/spool/cron/crontabs/%s"
+/* Red Hat 2.1 (jiivee@iki.fi): */
+/* #define CRONTAB_FILE "/var/spool/cron/%s" */
+#endif
+
+/*
+ * Hmmm, had to #undef this since at-2.8a on Linux doesn't have an option
+ * to remove all jobs owned by some user.
+ *
+ * Fortunately, atrun will not run any at jobs for users not listed in
+ * /etc/passwd.  Unfortunately, if you remove a user and add a new user
+ * with the same UID before it is time to run the old at job, atrun will
+ * not notice this and run the old job.  Not good.  The best fix right
+ * now is to remove any at jobs left over by hand, and not reuse any
+ * previously used UID values.
+ *
+ * We probably should discuss this with the at maintainer...  It might
+ * be better to store at jobs by user names, not UIDs.  --marekm
+ */
+
+#undef ATRM_COMMAND
+
+/*
+ * Login times log file location.
+ */
+
+#define LASTLOG_FILE "/var/log/lastlog"
+
+/*
+ * Linux FSSTND recommends that the chfn, chsh, gpasswd, passwd commands
+ * are in /usr/bin, not /bin (not needed before mounting /usr).  --marekm
+ */
+
+#define CHFN_PROGRAM "/usr/bin/chfn"
+#define CHSH_PROGRAM "/usr/bin/chsh"
+#define GPASSWD_PROGRAM "/usr/bin/gpasswd"
+#define PASSWD_PROGRAM "/usr/bin/passwd"
+
+/*
+ * On most Linux systems, the login prompt is "hostname login: ".  Some
+ * automatic login scripts depend on it.  If not defined, the default is
+ * just "login: ".  %s is replaced by the hostname.  --marekm
+ */
+
+#define LOGIN_PROMPT "%s login: "
+
+/*
+ * Define to enable (warning: completely unsupported by me) administrator
+ * defined authentication methods.  Most programs are not aware of them,
+ * so we can remove some code and possibly some bugs :-).  PAM (when done)
+ * will replace much of this anyway...  --marekm
+ */
+
+/* #define AUTH_METHODS */
+
+/*
+ * Define to enable detailed login access control (a la logdaemon/FreeBSD)
+ * and su access control (much more powerful/fascist than the traditional
+ * BSD-style "wheel group" feature).  Any volunteers to convince the GNU
+ * folks that they should add access control to their version of su?
+ * Call me a fascist, but then I'll have to call you a communist :-).
+ */
+
+#define LOGIN_ACCESS
+#define SU_ACCESS
+
+/* see faillog.h for more info what it is */
+#define FAILLOG_LOCKTIME
+
+/* see lmain.c and login.defs.linux */
+#define CONSOLE_GROUPS
+
+#endif /* _CONFIG_H */

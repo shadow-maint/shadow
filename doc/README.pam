@@ -1,0 +1,36 @@
+
+About PAM support in the Shadow Password Suite
+
+Warning: this code is still considered ALPHA.  It is still incomplete,
+and needs more testing.  Please let me know if it works, or if something
+doesn't work.
+
+Use "./configure --with-libpam" to enable PAM support.  Right now it only
+works for the passwd and su applications.  PAM support still needs to be
+implemented in login.
+
+When compiled with PAM support enabled, the following traditional features
+of the shadow suite are not implemented directly in the applications -
+instead, they should be implemented in the PAM modules.
+
+passwd:
+ - administrator defined authentication methods
+ - TCFS support
+ - password expiration
+ - password strength checks
+
+su:
+ - wheel group
+ - console groups
+ - su access control (/etc/suauth)
+ - password expiration
+ - time restrictions
+ - resource limits
+
+Known problems:
+ - the pam_limits module doesn't work with su - it should be changed
+   to set the limits in pam_setcred() instead of pam_open_session()
+   (this version of su doesn't open any new sessions, like Solaris su
+   and unlike SimplePAMApps su)
+ - PAM support still needs to be implemented in login
+

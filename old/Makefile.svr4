@@ -1,0 +1,681 @@
+#
+# Copyright 1988 - 1994, Julianne Frances Haugh
+# All rights reserved.
+#
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions
+#  are met:
+#  1. Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#  2. Redistributions in binary form must reproduce the above copyright
+#     notice, this list of conditions and the following disclaimer in the
+#     documentation and/or other materials provided with the distribution.
+#  3. Neither the name of Julianne F. Haugh nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+# 
+#  THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+#  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+#  ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+#  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+#  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+#  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+#  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+#  SUCH DAMAGE.
+#
+#	%W%	%U%  - Shadow password system (SVR4)
+#
+#	$Id: Makefile.svr4,v 1.2 1997/05/01 23:11:55 marekm Exp $
+#
+SHELL = /sbin/sh
+
+#
+# Set this flag to decide what level of code "get" returns.
+# The base USENET release was release 1.  It is no longer supported.
+# The version with the utilities added was release 2.
+# The version with database-like file access is release 3.
+RELEASE = 3
+VERSION = ver3.3.2
+GFLAGS = -n $(VERSION)
+GET = get_file
+
+# Define the directory login is copied to.  SVr4 uses /usr/bin.
+LOGINDIR = /usr/bin
+SBIN=/usr/sbin
+# system (admin) commands
+UBIN=/usr/bin
+# user commands
+
+# SVr4 doesn't need extra libraries
+NDIR =
+
+# Define some stuff for Cracklib.  This assumes that libcracklib.a is
+# in a system directory.
+CRACKDEF='-DUSE_CRACKLIB'
+CRACKLIB=-lcrack
+
+# Pick your favorite C compiler and tags command
+CC = cc
+TAGS = ctags
+
+# OS.  This is SVr4
+OS = -DUSG -DSVR4 -DUSE_NIS
+
+# SVr4 doesn't use ranlib
+RANLIB = echo
+
+# Configuration Flags
+#
+#	DEST_INCLUDE_DIR - local include files
+#	LIBS - system libraries
+#		-lsocket - needed for TCP/IP and possibly SYSLOG
+#		-ldbm or -lndbm - needed for DBM support
+#		-lcrypt - needed for SCO crypt() functions
+#		-lucb if -ldbm is defined
+#		-lsocket and -lnsl if RLOGIN is defined
+#	CFLAGS - C compiler flags
+#		-DLAI_TCP - needed for SCO Xenix Lachman TCP/IP
+
+DEST_INCLUDE_DIR = /usr/include
+
+# Flags for SVr4
+CFLAGS = -O -g $(OS) -I$(DEST_INCLUDE_DIR) $(CRACKDEF)
+LIBS = -lsocket -lnsl -ldbm -lucb
+LDFLAGS = -g
+
+# Library is libsec.a
+LIBSEC = libsec.a
+
+# Names for root user and group, and bin user and group.
+RUID = root
+RGID = root
+BUID = bin
+BGID = bin
+
+# Where the login.defs file will be copied.  Must agree with config.h
+DEST_LOGIN_DEFS = /etc/login.defs
+
+# Macros for files in SVR4 that aren't to be changed
+PWD = /usr/include/pwd.h
+SHADOW = /usr/include/shadow.h
+
+# Rules for .L (lint) files.
+.SUFFIXES: .L
+LINT = lint
+LINTFLAGS = $(OS) -Dlint
+
+.c.L:
+	$(LINT) -pxu $(LINTFLAGS) $*.c > $*.L
+
+LOBJS = lmain.o login.o env.o valid.o setup.o shell.o age.o \
+	utmp.o sub.o mail.o motd.o log.o ttytype.o failure.o \
+	tz.o console.o hushed.o
+
+LSRCS = lmain.c login.c env.c valid.c setup.c shell.c age.c \
+	utmp.c sub.c mail.c motd.c log.c ttytype.c failure.c \
+	tz.c console.c hushed.c
+
+SOBJS = smain.o env.o entry.o susetup.o shell.o \
+	sub.o mail.o motd.o sulog.o age.o tz.o hushed.o
+
+SSRCS = smain.c env.c entry.c setup.c shell.c \
+	pwent.c sub.c mail.c motd.c sulog.c shadow.c age.c pwpack.c rad64.c \
+	tz.c hushed.c
+
+POBJS = passwd.o obscure.o
+PSRCS = passwd.c obscure.c
+
+GPSRCS = gpmain.c
+
+GPOBJS = gpmain.o
+
+PWOBJS = pwconv.o
+
+PWSRCS = pwconv.c pwent.c shadow.c pwpack.c rad64.c
+
+PWUNOBJS = pwunconv.o
+
+PWUNSRCS = pwunconv.c pwent.c shadow.c pwpack.c rad64.c
+
+SULOGOBJS = sulogin.o entry.o env.o age.o setup.o \
+	valid.o shell.o tz.o
+
+SULOGSRCS = sulogin.c entry.c env.c age.c pwent.c setup.c \
+	shadow.c shell.c valid.c pwpack.c tz.c
+
+MKPWDOBJS = mkpasswd.o
+
+MKPWDSRCS = mkpasswd.c
+
+NGSRCS = newgrp.c env.c shell.c
+
+NGOBJS = newgrp.o env.o shell.o
+
+CHFNSRCS = chfn.c fields.c
+CHFNOBJS = chfn.o fields.o
+CHSHSRCS = chsh.c fields.c
+CHSHOBJS = chsh.o fields.o
+CHAGEOBJS = chage.o fields.o
+CHAGESRCS = chage.c fields.c
+CHPASSOBJS = chpasswd.o
+CHPASSSRCS = chpasswd.c
+DPSRCS = dpmain.c
+DPOBJS = dpmain.o
+
+ALLSRCS = age.c dialchk.c dialup.c entry.c env.c lmain.c log.c login.c mail.c \
+	motd.c obscure.c passwd.c pwconv.c pwent.c pwunconv.c getpass.c \
+	setup.c shadow.c shell.c smain.c sub.c sulog.c sulogin.c ttytype.c \
+	utmp.c valid.c port.c newgrp.c gpmain.c grent.c mkpasswd.c pwpack.c \
+	chfn.c chsh.c chage.c rad64.c encrypt.c chpasswd.c shadowio.c pwio.c \
+	newusers.c groupio.c fields.c pwdbm.c grpack.c grdbm.c sppack.c \
+	spdbm.c dpmain.c gshadow.c gsdbm.c gspack.c sgroupio.c useradd.c \
+	userdel.c patchlevel.h usermod.c copydir.c mkrmdir.c groupadd.c \
+	groupdel.c groupmod.c tz.c console.c hushed.c getdef.c \
+	logoutd.c groups.c pwauth.c lockpw.c chowndir.c
+
+FILES1 = LICENSE README patchlevel.h newgrp.c Makefile config.h pwunconv.c obscure.c \
+	age.c id.c
+
+FILES2 = passwd.c port.c lmain.c sulogin.c pwpack.c dialup.c expiry.c \
+	gshadow.h
+
+FILES3 = chfn.c chsh.c smain.c faillog.c pwconv.c shadow.c pwck.c
+
+FILES4 = gpmain.c chage.c pwent.c valid.c setup.c entry.c ttytype.c port.h
+
+FILES5 = pwio.c encrypt.c chpasswd.c newusers.c rad64.c dialchk.c faillog.h \
+	pwdbm.c grdbm.c gshadow.c sppack.c grpck.c
+
+FILES6 = gspack.c spdbm.c lastlog.h shell.c login.c sub.c dpmain.c mail.c \
+	env.c pwd.h.m4 grpack.c shadow.h log.c grent.c motd.c dialup.h \
+	fields.c gsdbm.c utmp.c failure.c
+
+FILES7 = groupio.c shadowio.c sgroupio.c groups.c copydir.c mkrmdir.c \
+	mkpasswd.c pwauth.c pwauth.h lastlog.c
+
+FILES8 = useradd.c usermod.c login.defs
+
+FILES9 = groupadd.c groupdel.c groupmod.c tz.c console.c hushed.c getdef.c \
+	scologin.c logoutd.c sulog.c getpass.c userdel.c lockpw.c chowndir.c
+
+FILES_SUN4 = Makefile.sun4 README.sun4 config.h.sun4
+FILES_SVR4 = Makefile.svr4 config.h.svr4
+FILES_LINUX = Makefile.linux config.h.linux
+
+MAN_1 = chage.1 chfn.1 chsh.1 id.1 login.1 newgrp.1 passwd.1 su.1 \
+	useradd.1 userdel.1 usermod.1 groupadd.1 groupdel.1 groupmod.1 \
+	groups.1 pwck.1 grpck.1
+MAN_3 = shadow.3 pwauth.3
+MAN_4 = faillog.4 passwd.4 porttime.4 shadow.4
+MAN_5 = login.5
+MAN_8 = chpasswd.8 dpasswd.8 faillog.8 newusers.8 pwconv.8 pwunconv.8 \
+	sulogin.8 mkpasswd.8 logoutd.8 pwauth.8 lastlog.8
+
+DOCS1 = $(MAN_1) $(MAN_3) $(MAN_4)
+DOCS2 = $(MAN_5) $(MAN_8)
+DOCS = $(DOCS1) $(DOCS2)
+
+BINS = su login pwconv pwunconv passwd sulogin faillog newgrp sg gpasswd \
+	mkpasswd chfn chsh chage chpasswd newusers dpasswd id useradd \
+	userdel usermod groupadd groupdel groupmod $(SCOLOGIN) logoutd \
+	groups pwck grpck lastlog expiry
+
+all:	$(BINS) $(DOCS)
+
+.PRECIOUS: libshadow.a
+
+libshadow.a: \
+	libshadow.a(dialchk.o) \
+	libshadow.a(dialup.o) \
+	libshadow.a(encrypt.o) \
+	libshadow.a(getdef.o) \
+	libshadow.a(getpass.o) \
+	libshadow.a(grdbm.o) \
+	libshadow.a(grent.o) \
+	libshadow.a(groupio.o) \
+	libshadow.a(grpack.o) \
+	libshadow.a(gshadow.o) \
+	libshadow.a(gsdbm.o) \
+	libshadow.a(gspack.o) \
+	libshadow.a(sgroupio.o) \
+	libshadow.a(port.o) \
+	libshadow.a(pwdbm.o) \
+	libshadow.a(pwent.o) \
+	libshadow.a(pwio.o) \
+	libshadow.a(pwpack.o) \
+	libshadow.a(pwauth.o) \
+	libshadow.a(rad64.o) \
+	libshadow.a(spdbm.o) \
+	libshadow.a(shadow.o) \
+	libshadow.a(shadowio.o) \
+	libshadow.a(sppack.o) \
+	libshadow.a(lockpw.o) \
+	libshadow.a(utent.o) \
+	libshadow.a(list.o) \
+	libshadow.a(strtoday.o) \
+	libshadow.a(basename.o) \
+	libshadow.a(isexpired.o) \
+	libshadow.a(xmalloc.o)
+	$(RANLIB) libshadow.a
+
+libsec: $(LIBSEC)(shadow.o)
+	$(RANLIB) $(LIBSEC)
+
+save:
+	[ ! -d save ] && mkdir save
+	-cp $(LOGINDIR)/login save
+	-cp $(SBIN)/mkpasswd $(SBIN)/pwconv $(SBIN)/pwunconv $(SBIN)/sulogin \
+		$(SBIN)/chpasswd $(SBIN)/newusers $(SBIN)/useradd \
+		$(SBIN)/userdel $(SBIN)/usermod $(SBIN)/groupadd \
+		$(SBIN)/groupdel $(SBIN)/groupmod $(SBIN)/logoutd \
+		$(SBIN)/login.defs $(SBIN)/pwck $(SBIN)/grpck save
+	-cp $(UBIN)/su $(UBIN)/passwd $(UBIN)/gpasswd $(UBIN)/dpasswd \
+		$(UBIN)/faillog $(UBIN)/newgrp $(UBIN)/chfn \
+		$(UBIN)/chsh $(UBIN)/chage $(UBIN)/id $(UBIN)/expiry save
+	-cp $(DEST_INCLUDE_DIR)/dialup.h $(DEST_INCLUDE_DIR)/gshadow.h save
+
+restore:
+	[ -d save ]
+	-(cd save ; cp login $(LOGINDIR) )
+	-(cd save ; -cp mkpasswd pwconv pwunconv sulogin chpasswd \
+		newusers useradd userdel usermod groupadd groupdel groupmod \
+		logoutd login.defs pwck grpck $(SBIN) )
+	-(cd save ; cp su passwd gpasswd dpasswd faillog newgrp chfn chsh \
+		chage id expiry $(UBIN) )
+	-(cd save ; cp dialup.h gshadow.h $(DEST_INCLUDE_DIR) )
+
+install: all
+	strip $(BINS)
+	mcs -da '@(#)shadow 3.3.3' $(BINS)
+	cp login $(LOGINDIR)/login
+	cp mkpasswd pwconv pwunconv sulogin chpasswd newusers \
+		useradd userdel usermod groupadd groupdel groupmod logoutd \
+		pwck grpck lastlog $(SBIN)
+	cp su passwd gpasswd dpasswd faillog newgrp chfn chsh chage id $(UBIN)
+	cp dialup.h gshadow.h /usr/include
+	chown $(RUID) $(LOGINDIR)/login $(SBIN)/pwconv $(SBIN)/pwunconv \
+		$(SBIN)/sulogin $(UBIN)/su $(UBIN)/passwd $(UBIN)/gpasswd \
+		$(UBIN)/newgrp $(SBIN)/mkpasswd $(UBIN)/dpasswd $(UBIN)/chsh \
+		$(UBIN)/chfn $(UBIN)/chage $(SBIN)/useradd $(SBIN)/userdel \
+		$(SBIN)/usermod $(SBIN)/groupadd $(SBIN)/groupdel \
+		$(SBIN)/groupmod $(SBIN)/logoutd $(SBIN)/pwck $(SBIN)/grpck \
+		$(UBIN)/expiry
+	chgrp $(RGID) $(LOGINDIR)/login $(SBIN)/pwconv $(SBIN)/pwunconv \
+		$(SBIN)/sulogin $(UBIN)/su $(UBIN)/passwd $(UBIN)/gpasswd \
+		$(UBIN)/newgrp $(SBIN)/mkpasswd $(UBIN)/dpasswd $(UBIN)/chsh \
+		$(UBIN)/chfn $(UBIN)/chage $(SBIN)/useradd $(SBIN)/userdel \
+		$(SBIN)/usermod $(SBIN)/groupadd $(SBIN)/groupdel \
+		$(SBIN)/groupmod $(SBIN)/logoutd $(SBIN)/pwck $(SBIN)/grpck \
+		$(UBIN)/expiry
+	chown $(BUID) $(UBIN)/faillog $(UBIN)/id /usr/include/gshadow.h \
+		/usr/include/dialup.h
+	chgrp $(BGID) $(UBIN)/faillog $(UBIN)/id /usr/include/gshadow.h \
+		/usr/include/dialup.h
+	chmod 700 $(SBIN)/pwconv $(SBIN)/pwunconv $(SBIN)/sulogin \
+		$(SBIN)/mkpasswd $(SBIN)/chpasswd $(SBIN)/newusers \
+		$(UBIN)/dpasswd $(UBIN)/chage $(SBIN)/useradd $(SBIN)/userdel \
+		$(SBIN)/usermod $(SBIN)/groupadd $(SBIN)/groupdel \
+		$(SBIN)/groupmod $(SBIN)/logoutd $(SBIN)/pwck $(SBIN)/grpck
+	chmod 4711 $(LOGINDIR)/login $(UBIN)/su $(UBIN)/passwd $(UBIN)/gpasswd \
+		$(UBIN)/newgrp $(UBIN)/chfn $(UBIN)/chsh $(UBIN)/expiry
+	chmod 711 $(UBIN)/faillog $(UBIN)/id
+	chmod 444 /usr/include/gshadow.h /usr/include/dialup.h
+	rm -f $(UBIN)/sg
+	ln $(UBIN)/newgrp $(UBIN)/sg
+	[ -f /etc/login.defs ] || (cp login.defs /etc ; \
+		chown $(RUID) /etc/login.defs ; \
+		chgrp $(RGID) /etc/login.defs ; \
+		chmod 600 /etc/login.defs )
+
+lint:	su.lint login.lint pwconv.lint pwunconv.lint passwd.lint sulogin.lint \
+	faillog.lint newgrp.lint gpasswd.lint mkpasswd.lint chfn.lint \
+	chsh.lint chage.lint dpasswd.lint id.lint useradd.lint userdel.lint \
+	usermod.lint groupadd.lint groupdel.lint groupmod.lint logoutd.lint \
+	pwck.lint grpck.lint expiry.lint \
+	$(ALLSRCS:.c=.L)
+
+tags:	$(ALLSRCS)
+	$(TAGS) $(ALLSRCS)
+
+README:
+	[ -f s.README ] && get -t -r$(RELEASE) s.README
+	
+$(DOCS):
+	[ -f s.$@ ] && get -t -r$(RELEASE) s.$@
+
+login.defs:
+	[ -f s.login.defs ] && get -t -r$(RELEASE) s.login.defs
+
+Makefile.sun4:
+	[ -f s.Makefile.sun4 ] && get -t -r$(RELEASE) s.Makefile.sun4
+
+Makefile.svr4:
+	[ -f s.Makefile.svr4 ] && get -t -r$(RELEASE) s.Makefile.svr4
+
+README.sun4:
+	[ -f s.README.sun4 ] && get -t -r$(RELEASE) s.README.sun4
+
+config.h.sun4:
+	[ -f s.config.h.sun4 ] && get -t -r$(RELEASE) s.config.h.sun4
+
+config.h.svr4:
+	[ -f s.config.h.svr4 ] && get -t -r$(RELEASE) s.config.h.svr4
+
+login:	$(LOBJS) libshadow.a
+	$(CC) -o login $(LDFLAGS) $(LOBJS) libshadow.a $(LIBS)
+
+login.lint: $(LSRCS)
+	$(LINT) $(LINTFLAGS) $(LSRCS) > login.lint
+
+su:	$(SOBJS) libshadow.a
+	$(CC) -o su $(LDFLAGS) $(SOBJS) libshadow.a $(LIBS)
+
+su.lint:	$(SSRCS)
+	$(LINT) $(LINTFLAGS) -DSU $(SSRCS) > su.lint
+
+passwd:	$(POBJS) libshadow.a
+	$(CC) -o passwd $(LDFLAGS) $(POBJS) libshadow.a $(LIBS) $(CRACKLIB)
+
+passwd.lint: $(PSRCS)
+	$(LINT) $(LINTFLAGS) -DPASSWD $(PSRCS) > passwd.lint
+
+gpasswd: $(GPOBJS) libshadow.a
+	$(CC) -o gpasswd $(LDFLAGS) $(GPOBJS) libshadow.a $(LIBS)
+
+gpasswd.lint: $(GPSRCS)
+	$(LINT) $(LINTFLAGS) $(GPSRCS) > gpasswd.lint
+
+dpasswd: $(DPOBJS) libshadow.a
+	$(CC) -o dpasswd $(LDFLAGS) $(DPOBJS) libshadow.a $(LIBS)
+
+dpasswd.lint: $(DPSRCS)
+	$(LINT) $(LINTFLAGS) $(DPSRCS) > dpasswd.lint
+
+pwconv:	$(PWOBJS) libshadow.a config.h
+	$(CC) -o pwconv $(LDFLAGS) $(PWOBJS) libshadow.a $(LIBS)
+
+pwconv.lint: $(PWSRCS) config.h
+	$(LINT) $(LINTFLAGS) -DPASSWD $(PWSRCS) > pwconv.lint
+
+pwunconv: $(PWUNOBJS) libshadow.a config.h
+	$(CC) -o pwunconv $(LDFLAGS) $(PWUNOBJS) libshadow.a $(LIBS)
+
+pwunconv.lint: $(PWUNSRCS)
+	$(LINT) $(LINTFLAGS) -DPASSWD $(PWUNSRCS) > pwunconv.lint
+
+sulogin: $(SULOGOBJS) libshadow.a
+	$(CC) -o sulogin $(LDFLAGS) $(SULOGOBJS) libshadow.a $(LIBS)
+
+sulogin.lint: $(SULOGSRCS)
+	$(LINT) $(LINTFLAGS) $(SULOGSRCS) > sulogin.lint
+
+faillog: faillog.o
+	$(CC) -o faillog $(LDFLAGS) faillog.o $(LIBS)
+
+faillog.lint: faillog.c faillog.h config.h
+	$(LINT) $(LINTFLAGS) faillog.c > faillog.lint
+
+lastlog: lastlog.o
+	$(CC) -o lastlog $(LDFLAGS) lastlog.o $(LIBS)
+
+lastlog.lint: lastlog.c config.h lastlog.h
+	$(LINT) $(LINTFLAGS) $(MKPWDSRCS) > lastlog.lint
+
+mkpasswd: $(MKPWDOBJS) libshadow.a
+	$(CC) -o mkpasswd $(LDFLAGS) $(MKPWDOBJS) libshadow.a $(LIBS)
+
+mkpasswd.lint: $(MKPWDSRCS)
+	$(LINT) $(LINTFLAGS) $(MKPWDSRCS) > mkpasswd.lint
+
+newgrp: $(NGOBJS) libshadow.a
+	$(CC) -o newgrp $(LDFLAGS) $(NGOBJS) libshadow.a $(LIBS)
+
+newgrp.lint: $(NGSRCS)
+	$(LINT) $(LINTFLAGS) $(NGSRCS) > newgrp.lint
+
+sg:	newgrp
+	/bin/rm -f sg
+	ln newgrp sg
+
+sg.lint: newgrp.lint
+	ln newgrp.lint sg.lint
+
+chfn:	$(CHFNOBJS) libshadow.a
+	$(CC) -o chfn $(LDFLAGS) $(CHFNOBJS) libshadow.a $(LIBS)
+
+chfn.lint:	$(CHFNSRCS)
+	$(LINT) $(LINTFLAGS) $(CHFNSRCS) > chfn.lint
+
+chsh:	$(CHSHOBJS) libshadow.a
+	$(CC) -o chsh $(LDFLAGS) $(CHSHOBJS) libshadow.a $(LIBS)
+
+chsh.lint: $(CHSHSRCS)
+	$(LINT) $(LINTFLAGS) $(CHSHSRCS) > chsh.lint
+
+chage:	$(CHAGEOBJS) libshadow.a
+	$(CC) -o chage $(LDFLAGS) $(CHAGEOBJS) libshadow.a $(LIBS)
+
+chage.lint: $(CHAGESRCS)
+	$(LINT) $(LINTFLAGS) -DPASSWD $(CHAGESRCS) > chage.lint
+
+chpasswd: $(CHPASSOBJS) libshadow.a
+	$(CC) -o chpasswd $(LDFLAGS) $(CHPASSOBJS) libshadow.a $(LIBS)
+
+chpasswd.lint: $(CHPASSSRCS)
+	$(LINT) $(LINTFLAGS) $(CHPASSSRCS) > chpasswd.lint
+
+newusers: newusers.o libshadow.a
+	$(CC) -o newusers $(LDFLAGS) newusers.o libshadow.a $(LIBS)
+
+newusers.lint: newusers.c
+	$(LINT) $(LINTFLAGS) newusers.c > newusers.lint
+	
+id: id.o libshadow.a
+	$(CC) -o id $(LDFLAGS) id.o libshadow.a $(LIBS)
+
+id.lint: id.c
+	$(LINT) $(LINTFLAGS) id.c > id.lint
+
+groups: groups.o libshadow.a
+	$(CC) -o groups $(LDFLAGS) groups.o libshadow.a $(LIBS)
+
+groups.lint: groups.c
+	$(LINT) $(LINTFLAGS) groups.c > groups.lint
+
+useradd: useradd.o copydir.o mkrmdir.o libshadow.a
+	$(CC) -o useradd $(LDFLAGS) useradd.o copydir.o mkrmdir.o \
+		libshadow.a $(LIBS) $(NDIR)
+
+useradd.lint: useradd.c copydir.c mkrmdir.c
+	$(LINT) $(LINTFLAGS) useradd.c copydir.c mkrmdir.c > useradd.lint
+
+userdel: userdel.o copydir.o mkrmdir.o libshadow.a
+	$(CC) -o userdel $(LDFLAGS) userdel.o copydir.o mkrmdir.o \
+		libshadow.a $(LIBS) $(NDIR)
+
+userdel.lint: userdel.c copydir.c mkrmdir.c
+	$(LINT) $(LINTFLAGS) userdel.c copydir.c mkrmdir.c > userdel.lint
+
+usermod: usermod.o copydir.o mkrmdir.o chowndir.o libshadow.a
+	$(CC) -o usermod $(LDFLAGS) usermod.o copydir.o mkrmdir.o \
+		chowndir.o libshadow.a $(LIBS) $(NDIR)
+
+usermod.lint: usermod.c copydir.c mkrmdir.c chowndir.c
+	$(LINT) $(LINTFLAGS) usermod.c copydir.c mkrmdir.c \
+		chowndir.c > usermod.lint
+
+groupadd: groupadd.o libshadow.a
+	$(CC) -o groupadd $(LDFLAGS) groupadd.o libshadow.a $(LIBS)
+
+groupadd.lint: groupadd.c
+	$(LINT) $(LINTFLAGS) groupadd.c > groupadd.lint
+
+groupdel: groupdel.o libshadow.a
+	$(CC) -o groupdel $(LDFLAGS) groupdel.o libshadow.a $(LIBS)
+
+groupdel.lint: groupdel.c
+	$(LINT) $(LINTFLAGS) groupdel.c > groupdel.lint
+
+groupmod: groupmod.o libshadow.a
+	$(CC) -o groupmod $(LDFLAGS) groupmod.o libshadow.a $(LIBS)
+
+groupmod.lint: groupmod.c
+	$(LINT) $(LINTFLAGS) groupmod.c > groupmod.lint
+
+logoutd: logoutd.o libshadow.a
+	$(CC) -o logoutd $(LDFLAGS) logoutd.o libshadow.a
+
+logoutd.lint: logoutd.c
+	$(LINT) $(LINTFLAGS) logoutd.c > logoutd.lint
+
+pwck: pwck.o libshadow.a
+	$(CC) -o pwck $(LDFLAGS) pwck.o libshadow.a $(LIBS)
+
+pwck.lint: pwck.c
+	$(LINT) $(LINTFLAGS) pwck.c > pwck.lint
+
+grpck: grpck.o libshadow.a
+	$(CC) -o grpck $(LDFLAGS) grpck.o libshadow.a $(LIBS)
+
+grpck.lint: grpck.c
+	$(LINT) $(LINTFLAGS) grpck.c > grpck.lint
+
+expiry: expiry.o age.o libshadow.a
+	$(CC) -o expiry $(LDFLAGS) expiry.o age.o libshadow.a $(LIBS)
+
+expiry.lint: expiry.c
+	$(LINT) $(LINTFLAGS) expiry.c > expiry.lint
+
+sulog.o: config.h
+
+susetup.c: setup.c
+	cp setup.c susetup.c
+
+susetup.o: config.h susetup.c $(PWD)
+	$(CC) -c $(CFLAGS) -DSU susetup.c
+
+passwd.o: config.h $(SHADOW) $(PWD) pwauth.h
+lmain.o: config.h lastlog.h faillog.h $(PWD) pwauth.h
+smain.o: config.h lastlog.h $(PWD) $(SHADOW) pwauth.h
+sub.o: $(PWD)
+setup.o: config.h $(PWD)
+mkrmdir.o: config.h
+utmp.o: config.h
+mail.o: config.h
+motd.o: config.h
+age.o: config.h gshadow.h $(PWD)
+log.o: config.h lastlog.h $(PWD)
+lastlog.o: lastlog.h
+shell.o: config.h
+entry.o: config.h $(SHADOW) $(PWD)
+hushed.o: config.h $(PWD)
+valid.o: config.h $(PWD)
+failure.o: faillog.h config.h
+faillog.o: faillog.h config.h $(PWD)
+newgrp.o: config.h $(SHADOW) $(PWD)
+mkpasswd.o: config.h $(SHADOW) $(PWD)
+gpmain.o: config.h $(PWD)
+chfn.o: config.h $(PWD)
+chsh.o: config.h $(PWD)
+chage.o: config.h $(SHADOW) $(PWD)
+pwconv.o: config.h $(SHADOW)
+pwunconv.o: config.h $(SHADOW) $(PWD)
+chpasswd.o: config.h $(SHADOW) $(PWD)
+id.o: $(PWD)
+newusers.o: config.h $(SHADOW) $(PWD)
+dpmain.o: config.h dialup.h
+useradd.o: config.h $(SHADOW) $(PWD) pwauth.h gshadow.h
+userdel.o: config.h $(SHADOW) $(PWD) pwauth.h gshadow.h
+usermod.o: config.h $(SHADOW) $(PWD) pwauth.h gshadow.h
+groupadd.o: config.h gshadow.h
+groupdel.o: config.h gshadow.h
+groupmod.o: config.h gshadow.h
+logoutd.o: config.h
+sulogin.o: config.h pwauth.h
+copydir.o: config.h
+chowndir.o: config.h
+pwck.o: config.h $(SHADOW) $(PWD)
+grpck.o: config.h gshadow.h $(PWD)
+
+libshadow.a(shadow.o): $(SHADOW) config.h
+libshadow.a(shadowio.o): $(SHADOW) config.h
+libshadow.a(grent.o): config.h gshadow.h
+libshadow.a(sgroupio.o): config.h gshadow.h
+libshadow.a(dialup.o): dialup.h
+libshadow.a(dialchk.o): dialup.h config.h
+libshadow.a(getdef.o): config.h
+libshadow.a(pwdbm.o): config.h $(PWD)
+libshadow.a(spdbm.o): config.h $(SHADOW)
+libshadow.a(grdbm.o): config.h
+libshadow.a(gsdbm.o): config.h gshadow.h
+libshadow.a(pwauth.o): config.h pwauth.h
+libshadow.a(pwpack.o): config.h $(PWD)
+libshadow.a(pwent.o): config.h $(PWD)
+libshadow.a(pwio.o): $(PWD)
+libshadow.a(getpass.o): config.h
+libshadow.a(encrypt.o): config.h
+libshadow.a(port.o): port.h
+libshadow.a(rad64.o): config.h
+libshadow.a(lockpw.o):
+libshadow.a(gspack.o): config.h gshadow.h
+libshadow.a(list.o):
+libshadow.a(strtoday.o): config.h
+libshadow.a(xmalloc.o):
+libshadow.a(basename.o):
+libshadow.a(isexpired.o): config.h $(SHADOW)
+
+clean:
+	-rm -f susetup.c *.o a.out core npasswd nshadow *.pag *.dir
+
+clobber: clean
+	-rm -f $(BINS) *.lint *.L libshadow.a
+
+nuke:	clobber
+	-for file in * ; do \
+		if [ -f s.$$file -a ! -f p.$$file ] ; then \
+			rm -f $$file ;\
+		fi ;\
+	done
+
+shar:	login.sh.01 login.sh.02 login.sh.03 login.sh.04 login.sh.05 \
+	login.sh.06 login.sh.07 login.sh.08 login.sh.09 login.sh.10 \
+	login.sh.11 login.sh.12
+
+login.sh.01: $(FILES1) Makefile
+	shar -a $(FILES1) > login.sh.01
+
+login.sh.02: $(FILES2) Makefile
+	shar -a $(FILES2) > login.sh.02
+
+login.sh.03: $(FILES3) Makefile
+	shar -a $(FILES3) > login.sh.03
+
+login.sh.04: $(FILES4) Makefile
+	shar -a $(FILES4) > login.sh.04
+
+login.sh.05: $(FILES5) Makefile
+	shar -a $(FILES5) > login.sh.05
+
+login.sh.06: $(FILES6) Makefile
+	shar -a $(FILES6) > login.sh.06
+
+login.sh.07: $(FILES7) Makefile
+	shar -a $(FILES7) > login.sh.07
+
+login.sh.08: $(FILES8) Makefile
+	shar -a $(FILES8) > login.sh.08
+
+login.sh.09: $(FILES9) Makefile
+	shar -a $(FILES9) > login.sh.09
+
+login.sh.10: $(DOCS1) Makefile
+	shar -a $(DOCS1) > login.sh.10
+
+login.sh.11: $(DOCS2) Makefile
+	shar -a $(DOCS2) > login.sh.11
+
+login.sh.12: $(FILES_SUN4) $(FILES_SVR4) $(FILES_LINUX) Makefile
+	shar -a $(FILES_SUN4) $(FILES_SVR4) $(FILES_LINUX) > login.sh.12

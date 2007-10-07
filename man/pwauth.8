@@ -1,0 +1,67 @@
+.\" Copyright 1992, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: pwauth.8,v 1.4 1998/12/28 20:35:22 marekm Exp $
+.\"
+.TH PWAUTH 8
+.SH NAME
+pwauth \- administrator defined password authentication
+.SH DESCRIPTION
+The system administrator is able to define a list of programs which
+are used to validate a user's identity.
+These programs are given in place of the encrypted password
+information which is present in either the \fI/etc/passwd\fR or
+\fI/etc/shadow\fR files.
+The utilities which administer user accounts examine the encrypted
+password field and determine if the user has an administrator defined
+authentication program.
+The \fBpw_auth\fR function will be invoked whenever one of these
+administration programs determines that a user which is being altered
+has authentication programs defined.
+.PP
+The initial entry is created with the \fBuseradd\fR command.
+Alterations, such as changing authentication information or deleting
+the user account, will cause the \fBpw_auth\fR function to be invoked.
+This keeps the authentication information up to date for each user
+account.
+.PP
+The authentication programs do not create the actual login or network
+sessions. 
+The exit code from the authentication program is taken as an
+indication that the action is to be permitted.
+The calling process must have the appropriate priviledges to create
+the login or network session itself.
+.SH SEE ALSO
+.BR login (1),
+.BR passwd (1),
+.BR su (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.BR pw_auth (3)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@bga.com)

@@ -1,0 +1,189 @@
+/*
+ * Copyright 1989 - 1994, Julianne Frances Haugh
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+/*
+ * Configuration file for login.
+ *
+ *	$Id: config.h.sun4,v 1.2 1997/05/01 23:11:58 marekm Exp $
+ *	(SunOS 4.1.1)
+ */
+
+
+/*
+ * Pathname to the run-time configuration definitions file.
+ */
+
+#define LOGINDEFS "/etc/login.defs"
+
+/*
+ * Define SHADOWPWD to use shadow [ unreadable ] password file.
+ * Release 3 has a requirement that SHADOWPWD always be defined.
+ */
+
+#define	SHADOWPWD
+
+/*
+ * Define AUTOSHADOW to have root always copy sp_pwdp to pw_passwd
+ * for getpwuid() and getpwnam().  This provides compatibility for
+ * privileged applications which are shadow-ignorant.  YOU ARE
+ * ENCOURAGED TO NOT USE THIS OPTION UNLESS ABSOLUTELY NECESSARY.
+ */
+
+#undef	AUTOSHADOW
+
+/*
+ * Define SHADOWGRP to user shadowed group files.  This feature adds
+ * the concept of a group administrator.
+ */
+
+#define	SHADOWGRP /**/
+
+/*
+ * Define DOUBLESIZE to use 16 character passwords.  Define SW_CRYPT
+ * to use 80 character passwords with SecureWare[tm]'s method of
+ * generating ciphertext.
+ */
+
+#define DOUBLESIZE
+#undef	SW_CRYPT
+
+/*
+ * Define SKEY to allow dual-mode SKEY/normal logins
+ */
+
+#undef	SKEY
+
+/*
+ * Define AGING if you want the password aging checks made.
+ * Release 3 has a requirement that AGING always be defined.
+ */
+
+#define	AGING
+
+/*
+ * Pick your version of DBM.  If you define either DBM or NDBM, you must
+ * define GETPWENT.  If you define NDBM you must define GETGRENT as well.
+ */
+
+/* #define	DBM	/**/
+#define	NDBM	/**/
+
+/*
+ * Define USE_SYSLOG if you want to have SYSLOG functions included in your code.
+ */
+
+#define	USE_SYSLOG
+
+/*
+ * Enable RLOGIN to support the "-r" and "-h" options.
+ * Also enable UT_HOST if your /etc/utmp provides for a host name.
+ */
+
+#define RLOGIN
+#define UT_HOST
+
+/*
+ * Define the "success" code from ruserok().  Most modern systems use 0
+ * for success and -1 for failure, while certain older versions use 1
+ * for success and 0 for failure.  Please check your manpage to be sure.
+ */
+
+#define       RUSEROK 0
+
+/*
+ * Select one of the following
+ */
+
+/* #define DIR_XENIX	/* include <sys/ndir.h>, use (struct direct)	*/
+/* #define DIR_BSD	/* include <ndir.h>, use (struct direct)	*/
+#define DIR_SYSV	/* include <dirent.h>, use (struct dirent)	*/
+
+/*
+ * Various system environment definitions.
+ */
+
+#define HAVE_LL_HOST	/* Define if "struct lastlog" contains ll_host */
+#define	HAVE_ULIMIT	/* Define if your UNIX supports ulimit()	*/
+#define	GETPWENT	/* Define if you want my GETPWENT(3) routines	*/
+#define	GETGRENT	/* Define if you want my GETGRENT(3) routines	*/
+#undef	NEED_AL64	/* Define if library does not include a64l()	*/
+#undef	NEED_MKDIR	/* Define if system does not have mkdir()	*/
+#undef	NEED_RMDIR	/* Define if system does not have rmdir()	*/
+#undef	NEED_RENAME	/* Define if system does not have rename()	*/
+#define	NEED_STRSTR	/* Define if library does not include strstr()	*/
+#undef	NEED_PUTPWENT	/* Define if library does not include putpwent()*/
+#define	NEED_UTENT	/* Define if library does not include utent fncs*/
+#define	SIGTYPE	void	/* Type returned by signal()                    */
+
+/*
+ * These definitions MUST agree with the values defined in <pwd.h>.
+ */
+
+#undef	BSD_QUOTA	/* the pw_quota field exists */
+#define	ATT_AGE		/* the pw_age field exists */
+#define	ATT_COMMENT	/* the pw_comment field exists */
+
+#define	UID_T	uid_t	/* set to be the type of UID's */
+#define	GID_T	gid_t	/* set to be the type of GID's */
+
+#ifndef	UID_T
+#if defined(SVR4) || defined(_POSIX_SOURCE)
+#define	UID_T	uid_t
+#else
+#define	UID_T	int
+#endif
+#endif
+
+#ifndef	GID_T
+#if defined(SVR4) || defined(_POSIX_SOURCE)
+#define	GID_T	gid_t
+#else
+#define	GID_T	int
+#endif
+#endif
+
+/*
+ * Define NDEBUG for production versions
+ */
+
+#define	NDEBUG
+
+/*
+ * Define PWDFILE and GRPFILE to the names of the password and
+ * group files.
+ */
+
+#define	PWDFILE	"/etc/passwd"
+#define	GRPFILE	"/etc/group"
+
+/*
+ * Login times log file.
+ */
+
+#define LASTFILE        "/var/adm/lastlog"

@@ -1,0 +1,13 @@
+extern struct sgrp *__sgr_dup P_((const struct sgrp *));
+extern void __sgr_set_changed P_((void));
+extern int sgr_close P_((void));
+extern int sgr_file_present P_((void));
+extern const struct sgrp *sgr_locate P_((const char *));
+extern int sgr_lock P_((void));
+extern int sgr_name P_((const char *));
+extern const struct sgrp *sgr_next P_((void));
+extern int sgr_open P_((int));
+extern int sgr_remove P_((const char *));
+extern int sgr_rewind P_((void));
+extern int sgr_unlock P_((void));
+extern int sgr_update P_((const struct sgrp *));

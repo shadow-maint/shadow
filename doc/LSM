@@ -1,0 +1,19 @@
+Begin3
+Title:          Shadow Password Suite
+Version:        19990709
+Entered-date:   09JUL99
+Description:    Shadow password file utilities.  This package includes
+                the programs necessary to convert traditional V7 UNIX
+                password files to the SVR4 shadow password format, and
+                additional tools to maintain password and group files
+                (that work with both shadow and non-shadow passwords).
+Keywords:       login passwd security shadow
+Author:         jfh@bga.com (Julianne F. Haugh)
+Maintained-by:  marekm@linux.org.pl (Marek Michalkiewicz)
+Primary-site:   piast.t19.ds.pwr.wroc.pl /pub/linux/shadow/
+                624K shadow-19990709.tar.gz
+Alternate-site: ftp.ists.pwr.wroc.pl /pub/linux/shadow/
+Original-site:  ftp.uu.net ?
+Platforms:      Linux, SunOS, ...
+Copying-policy: FRS
+End

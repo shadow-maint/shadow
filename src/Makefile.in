@@ -1,0 +1,873 @@
+# Makefile.in generated automatically by automake 1.3 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996, 1997, 1998 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DISTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
+CATALOGS = @CATALOGS@
+CATOBJEXT = @CATOBJEXT@
+CC = @CC@
+CPP = @CPP@
+DATADIRNAME = @DATADIRNAME@
+GENCAT = @GENCAT@
+GMOFILES = @GMOFILES@
+GMSGFMT = @GMSGFMT@
+GT_NO = @GT_NO@
+GT_YES = @GT_YES@
+INCLUDE_LOCALE_H = @INCLUDE_LOCALE_H@
+INSTOBJEXT = @INSTOBJEXT@
+INTLDEPS = @INTLDEPS@
+INTLLIBS = @INTLLIBS@
+INTLOBJS = @INTLOBJS@
+LD = @LD@
+LIBCRACK = @LIBCRACK@
+LIBCRYPT = @LIBCRYPT@
+LIBPAM = @LIBPAM@
+LIBSKEY = @LIBSKEY@
+LIBTCFS = @LIBTCFS@
+LIBTOOL = @LIBTOOL@
+LN_S = @LN_S@
+LTLIBOBJS = @LTLIBOBJS@
+MAKEINFO = @MAKEINFO@
+MKINSTALLDIRS = @MKINSTALLDIRS@
+MSGFMT = @MSGFMT@
+NM = @NM@
+PACKAGE = @PACKAGE@
+POFILES = @POFILES@
+POSUB = @POSUB@
+RANLIB = @RANLIB@
+U = @U@
+USE_INCLUDED_LIBINTL = @USE_INCLUDED_LIBINTL@
+USE_NLS = @USE_NLS@
+VERSION = @VERSION@
+YACC = @YACC@
+l = @l@
+
+AUTOMAKE_OPTIONS = 1.0 foreign
+
+# Watch out; note the difference between prefix & exec_prefix.
+# Normally configure sets exec_prefix to root when prefix is /usr.
+
+bindir = ${exec_prefix}/bin
+sbindir = ${exec_prefix}/sbin
+ubindir = ${prefix}/bin
+usbindir = ${prefix}/sbin
+localedir = $(datadir)/locale
+
+noinst_HEADERS = patchlevel.h
+
+DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
+
+# XXX why are login and su in /bin anyway (other than for
+# historical reasons)?
+#
+# if the system is screwed so badly that it can't mount /usr,
+# you can (hopefully) boot single user, and then you're root
+# so you don't need these programs for recovery.
+#
+# also /lib/libshadow.so.x.xx (if any) could be moved to /usr/lib
+# and installation would be much simpler (just two directories,
+# $prefix/bin and $prefix/sbin, no install-data hacks...)
+
+bin_PROGRAMS = login \
+ su
+ubin_PROGRAMS = faillog lastlog \
+ chage chfn chsh expiry gpasswd newgrp passwd
+usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod \
+ logoutd mkpasswd newusers \
+ useradd userdel usermod grpck pwck vipw \
+ grpconv grpunconv pwconv pwunconv
+
+EXTRA_DIST = shadowconfig.sh
+
+# id and groups are from gnu, sulogin from sysvinit,
+# also suid programs are installed by hand.
+# XXX installation by hand breaks libtool shared lib support
+# (the wrapper scripts get installed instead of binaries),
+# so we now chmod the programs by hand after normal installation.
+
+suidbins = su
+suidubins = chage chfn chsh expiry gpasswd newgrp passwd
+
+noinst_PROGRAMS = groups id sulogin
+
+#install-exec-local:
+#	$(mkinstalldirs) $(bindir)
+#	for i in $(suidbins); do \
+#	  $(INSTALL) -m 4755 $$i $(bindir); \
+#	done
+#	$(mkinstalldirs) $(ubindir)
+#	for i in $(suidubins); do \
+#	  $(INSTALL) -m 4755 $$i $(ubindir); \
+#	done
+#	rm -f $(bindir)/sg
+#	ln -s $(ubindir)/newgrp $(bindir)/sg
+#
+#noinst_PROGRAMS = id groups \
+# su \
+# chage chfn chsh expiry gpasswd newgrp passwd \
+# sulogin
+
+shlibs = ../lib/libshadow.la
+# With glibc2, almost all programs need libcrypt for some reason,
+# even those that don't actually use crypt().
+LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@
+INCLUDES = -I${top_srcdir}/lib -I$(top_srcdir)/libmisc
+
+chfn_LDADD = ${LDADD} @LIBPAM@
+chsh_LDADD = ${LDADD} @LIBPAM@
+login_LDADD = ${LDADD} @LIBPAM@
+passwd_LDADD = ${LDADD} @LIBCRACK@ @LIBPAM@
+su_LDADD = ${LDADD} @LIBPAM@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+PROGRAMS =  $(bin_PROGRAMS) $(noinst_PROGRAMS) $(ubin_PROGRAMS) \
+$(usbin_PROGRAMS)
+
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+login_SOURCES = login.c
+login_OBJECTS =  login.o
+login_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+login_LDFLAGS = 
+su_SOURCES = su.c
+su_OBJECTS =  su.o
+su_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+su_LDFLAGS = 
+groups_SOURCES = groups.c
+groups_OBJECTS =  groups.o
+groups_LDADD = $(LDADD)
+groups_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+groups_LDFLAGS = 
+id_SOURCES = id.c
+id_OBJECTS =  id.o
+id_LDADD = $(LDADD)
+id_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+id_LDFLAGS = 
+sulogin_SOURCES = sulogin.c
+sulogin_OBJECTS =  sulogin.o
+sulogin_LDADD = $(LDADD)
+sulogin_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+sulogin_LDFLAGS = 
+faillog_SOURCES = faillog.c
+faillog_OBJECTS =  faillog.o
+faillog_LDADD = $(LDADD)
+faillog_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+faillog_LDFLAGS = 
+lastlog_SOURCES = lastlog.c
+lastlog_OBJECTS =  lastlog.o
+lastlog_LDADD = $(LDADD)
+lastlog_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+lastlog_LDFLAGS = 
+chage_SOURCES = chage.c
+chage_OBJECTS =  chage.o
+chage_LDADD = $(LDADD)
+chage_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+chage_LDFLAGS = 
+chfn_SOURCES = chfn.c
+chfn_OBJECTS =  chfn.o
+chfn_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+chfn_LDFLAGS = 
+chsh_SOURCES = chsh.c
+chsh_OBJECTS =  chsh.o
+chsh_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+chsh_LDFLAGS = 
+expiry_SOURCES = expiry.c
+expiry_OBJECTS =  expiry.o
+expiry_LDADD = $(LDADD)
+expiry_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+expiry_LDFLAGS = 
+gpasswd_SOURCES = gpasswd.c
+gpasswd_OBJECTS =  gpasswd.o
+gpasswd_LDADD = $(LDADD)
+gpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+gpasswd_LDFLAGS = 
+newgrp_SOURCES = newgrp.c
+newgrp_OBJECTS =  newgrp.o
+newgrp_LDADD = $(LDADD)
+newgrp_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+newgrp_LDFLAGS = 
+passwd_SOURCES = passwd.c
+passwd_OBJECTS =  passwd.o
+passwd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+passwd_LDFLAGS = 
+chpasswd_SOURCES = chpasswd.c
+chpasswd_OBJECTS =  chpasswd.o
+chpasswd_LDADD = $(LDADD)
+chpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+chpasswd_LDFLAGS = 
+dpasswd_SOURCES = dpasswd.c
+dpasswd_OBJECTS =  dpasswd.o
+dpasswd_LDADD = $(LDADD)
+dpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+dpasswd_LDFLAGS = 
+groupadd_SOURCES = groupadd.c
+groupadd_OBJECTS =  groupadd.o
+groupadd_LDADD = $(LDADD)
+groupadd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+groupadd_LDFLAGS = 
+groupdel_SOURCES = groupdel.c
+groupdel_OBJECTS =  groupdel.o
+groupdel_LDADD = $(LDADD)
+groupdel_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+groupdel_LDFLAGS = 
+groupmod_SOURCES = groupmod.c
+groupmod_OBJECTS =  groupmod.o
+groupmod_LDADD = $(LDADD)
+groupmod_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+groupmod_LDFLAGS = 
+logoutd_SOURCES = logoutd.c
+logoutd_OBJECTS =  logoutd.o
+logoutd_LDADD = $(LDADD)
+logoutd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+logoutd_LDFLAGS = 
+mkpasswd_SOURCES = mkpasswd.c
+mkpasswd_OBJECTS =  mkpasswd.o
+mkpasswd_LDADD = $(LDADD)
+mkpasswd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+mkpasswd_LDFLAGS = 
+newusers_SOURCES = newusers.c
+newusers_OBJECTS =  newusers.o
+newusers_LDADD = $(LDADD)
+newusers_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+newusers_LDFLAGS = 
+useradd_SOURCES = useradd.c
+useradd_OBJECTS =  useradd.o
+useradd_LDADD = $(LDADD)
+useradd_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+useradd_LDFLAGS = 
+userdel_SOURCES = userdel.c
+userdel_OBJECTS =  userdel.o
+userdel_LDADD = $(LDADD)
+userdel_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+userdel_LDFLAGS = 
+usermod_SOURCES = usermod.c
+usermod_OBJECTS =  usermod.o
+usermod_LDADD = $(LDADD)
+usermod_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+usermod_LDFLAGS = 
+grpck_SOURCES = grpck.c
+grpck_OBJECTS =  grpck.o
+grpck_LDADD = $(LDADD)
+grpck_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+grpck_LDFLAGS = 
+pwck_SOURCES = pwck.c
+pwck_OBJECTS =  pwck.o
+pwck_LDADD = $(LDADD)
+pwck_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+pwck_LDFLAGS = 
+vipw_SOURCES = vipw.c
+vipw_OBJECTS =  vipw.o
+vipw_LDADD = $(LDADD)
+vipw_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+vipw_LDFLAGS = 
+grpconv_SOURCES = grpconv.c
+grpconv_OBJECTS =  grpconv.o
+grpconv_LDADD = $(LDADD)
+grpconv_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+grpconv_LDFLAGS = 
+grpunconv_SOURCES = grpunconv.c
+grpunconv_OBJECTS =  grpunconv.o
+grpunconv_LDADD = $(LDADD)
+grpunconv_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+grpunconv_LDFLAGS = 
+pwconv_SOURCES = pwconv.c
+pwconv_OBJECTS =  pwconv.o
+pwconv_LDADD = $(LDADD)
+pwconv_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+pwconv_LDFLAGS = 
+pwunconv_SOURCES = pwunconv.c
+pwunconv_OBJECTS =  pwunconv.o
+pwunconv_LDADD = $(LDADD)
+pwunconv_DEPENDENCIES =  ../lib/libshadow.la ../libmisc/libmisc.a \
+../lib/libshadow.a
+pwunconv_LDFLAGS = 
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(LIBTOOL) --mode=link $(CC) $(CFLAGS) $(LDFLAGS) -o $@
+HEADERS =  $(noinst_HEADERS)
+
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = tar
+GZIP = --best
+SOURCES = login.c su.c groups.c id.c sulogin.c faillog.c lastlog.c chage.c chfn.c chsh.c expiry.c gpasswd.c newgrp.c passwd.c chpasswd.c dpasswd.c groupadd.c groupdel.c groupmod.c logoutd.c mkpasswd.c newusers.c useradd.c userdel.c usermod.c grpck.c pwck.c vipw.c grpconv.c grpunconv.c pwconv.c pwunconv.c
+OBJECTS = login.o su.o groups.o id.o sulogin.o faillog.o lastlog.o chage.o chfn.o chsh.o expiry.o gpasswd.o newgrp.o passwd.o chpasswd.o dpasswd.o groupadd.o groupdel.o groupmod.o logoutd.o mkpasswd.o newusers.o useradd.o userdel.o usermod.o grpck.o pwck.o vipw.o grpconv.o grpunconv.o pwconv.o pwunconv.o
+
+all: Makefile $(PROGRAMS) $(HEADERS)
+
+.SUFFIXES:
+.SUFFIXES: .S .c .lo .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && $(AUTOMAKE) --foreign --include-deps src/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+mostlyclean-noinstPROGRAMS:
+
+clean-noinstPROGRAMS:
+	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
+
+distclean-noinstPROGRAMS:
+
+maintainer-clean-noinstPROGRAMS:
+
+mostlyclean-ubinPROGRAMS:
+
+clean-ubinPROGRAMS:
+	-test -z "$(ubin_PROGRAMS)" || rm -f $(ubin_PROGRAMS)
+
+distclean-ubinPROGRAMS:
+
+maintainer-clean-ubinPROGRAMS:
+
+install-ubinPROGRAMS: $(ubin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(ubindir)
+	@list='$(ubin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed '$(transform)'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(ubindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-ubinPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(ubin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(ubindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+mostlyclean-usbinPROGRAMS:
+
+clean-usbinPROGRAMS:
+	-test -z "$(usbin_PROGRAMS)" || rm -f $(usbin_PROGRAMS)
+
+distclean-usbinPROGRAMS:
+
+maintainer-clean-usbinPROGRAMS:
+
+install-usbinPROGRAMS: $(usbin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(usbindir)
+	@list='$(usbin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo " $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed '$(transform)'`"; \
+	    $(LIBTOOL)  --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(usbindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-usbinPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(usbin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(usbindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+.c.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.s.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+.S.lo:
+	$(LIBTOOL) --mode=compile $(COMPILE) -c $<
+
+mostlyclean-libtool:
+	-rm -f *.lo
+
+clean-libtool:
+	-rm -rf .libs _libs
+
+distclean-libtool:
+
+maintainer-clean-libtool:
+
+login: $(login_OBJECTS) $(login_DEPENDENCIES)
+	@rm -f login
+	$(LINK) $(login_LDFLAGS) $(login_OBJECTS) $(login_LDADD) $(LIBS)
+
+su: $(su_OBJECTS) $(su_DEPENDENCIES)
+	@rm -f su
+	$(LINK) $(su_LDFLAGS) $(su_OBJECTS) $(su_LDADD) $(LIBS)
+
+groups: $(groups_OBJECTS) $(groups_DEPENDENCIES)
+	@rm -f groups
+	$(LINK) $(groups_LDFLAGS) $(groups_OBJECTS) $(groups_LDADD) $(LIBS)
+
+id: $(id_OBJECTS) $(id_DEPENDENCIES)
+	@rm -f id
+	$(LINK) $(id_LDFLAGS) $(id_OBJECTS) $(id_LDADD) $(LIBS)
+
+sulogin: $(sulogin_OBJECTS) $(sulogin_DEPENDENCIES)
+	@rm -f sulogin
+	$(LINK) $(sulogin_LDFLAGS) $(sulogin_OBJECTS) $(sulogin_LDADD) $(LIBS)
+
+faillog: $(faillog_OBJECTS) $(faillog_DEPENDENCIES)
+	@rm -f faillog
+	$(LINK) $(faillog_LDFLAGS) $(faillog_OBJECTS) $(faillog_LDADD) $(LIBS)
+
+lastlog: $(lastlog_OBJECTS) $(lastlog_DEPENDENCIES)
+	@rm -f lastlog
+	$(LINK) $(lastlog_LDFLAGS) $(lastlog_OBJECTS) $(lastlog_LDADD) $(LIBS)
+
+chage: $(chage_OBJECTS) $(chage_DEPENDENCIES)
+	@rm -f chage
+	$(LINK) $(chage_LDFLAGS) $(chage_OBJECTS) $(chage_LDADD) $(LIBS)
+
+chfn: $(chfn_OBJECTS) $(chfn_DEPENDENCIES)
+	@rm -f chfn
+	$(LINK) $(chfn_LDFLAGS) $(chfn_OBJECTS) $(chfn_LDADD) $(LIBS)
+
+chsh: $(chsh_OBJECTS) $(chsh_DEPENDENCIES)
+	@rm -f chsh
+	$(LINK) $(chsh_LDFLAGS) $(chsh_OBJECTS) $(chsh_LDADD) $(LIBS)
+
+expiry: $(expiry_OBJECTS) $(expiry_DEPENDENCIES)
+	@rm -f expiry
+	$(LINK) $(expiry_LDFLAGS) $(expiry_OBJECTS) $(expiry_LDADD) $(LIBS)
+
+gpasswd: $(gpasswd_OBJECTS) $(gpasswd_DEPENDENCIES)
+	@rm -f gpasswd
+	$(LINK) $(gpasswd_LDFLAGS) $(gpasswd_OBJECTS) $(gpasswd_LDADD) $(LIBS)
+
+newgrp: $(newgrp_OBJECTS) $(newgrp_DEPENDENCIES)
+	@rm -f newgrp
+	$(LINK) $(newgrp_LDFLAGS) $(newgrp_OBJECTS) $(newgrp_LDADD) $(LIBS)
+
+passwd: $(passwd_OBJECTS) $(passwd_DEPENDENCIES)
+	@rm -f passwd
+	$(LINK) $(passwd_LDFLAGS) $(passwd_OBJECTS) $(passwd_LDADD) $(LIBS)
+
+chpasswd: $(chpasswd_OBJECTS) $(chpasswd_DEPENDENCIES)
+	@rm -f chpasswd
+	$(LINK) $(chpasswd_LDFLAGS) $(chpasswd_OBJECTS) $(chpasswd_LDADD) $(LIBS)
+
+dpasswd: $(dpasswd_OBJECTS) $(dpasswd_DEPENDENCIES)
+	@rm -f dpasswd
+	$(LINK) $(dpasswd_LDFLAGS) $(dpasswd_OBJECTS) $(dpasswd_LDADD) $(LIBS)
+
+groupadd: $(groupadd_OBJECTS) $(groupadd_DEPENDENCIES)
+	@rm -f groupadd
+	$(LINK) $(groupadd_LDFLAGS) $(groupadd_OBJECTS) $(groupadd_LDADD) $(LIBS)
+
+groupdel: $(groupdel_OBJECTS) $(groupdel_DEPENDENCIES)
+	@rm -f groupdel
+	$(LINK) $(groupdel_LDFLAGS) $(groupdel_OBJECTS) $(groupdel_LDADD) $(LIBS)
+
+groupmod: $(groupmod_OBJECTS) $(groupmod_DEPENDENCIES)
+	@rm -f groupmod
+	$(LINK) $(groupmod_LDFLAGS) $(groupmod_OBJECTS) $(groupmod_LDADD) $(LIBS)
+
+logoutd: $(logoutd_OBJECTS) $(logoutd_DEPENDENCIES)
+	@rm -f logoutd
+	$(LINK) $(logoutd_LDFLAGS) $(logoutd_OBJECTS) $(logoutd_LDADD) $(LIBS)
+
+mkpasswd: $(mkpasswd_OBJECTS) $(mkpasswd_DEPENDENCIES)
+	@rm -f mkpasswd
+	$(LINK) $(mkpasswd_LDFLAGS) $(mkpasswd_OBJECTS) $(mkpasswd_LDADD) $(LIBS)
+
+newusers: $(newusers_OBJECTS) $(newusers_DEPENDENCIES)
+	@rm -f newusers
+	$(LINK) $(newusers_LDFLAGS) $(newusers_OBJECTS) $(newusers_LDADD) $(LIBS)
+
+useradd: $(useradd_OBJECTS) $(useradd_DEPENDENCIES)
+	@rm -f useradd
+	$(LINK) $(useradd_LDFLAGS) $(useradd_OBJECTS) $(useradd_LDADD) $(LIBS)
+
+userdel: $(userdel_OBJECTS) $(userdel_DEPENDENCIES)
+	@rm -f userdel
+	$(LINK) $(userdel_LDFLAGS) $(userdel_OBJECTS) $(userdel_LDADD) $(LIBS)
+
+usermod: $(usermod_OBJECTS) $(usermod_DEPENDENCIES)
+	@rm -f usermod
+	$(LINK) $(usermod_LDFLAGS) $(usermod_OBJECTS) $(usermod_LDADD) $(LIBS)
+
+grpck: $(grpck_OBJECTS) $(grpck_DEPENDENCIES)
+	@rm -f grpck
+	$(LINK) $(grpck_LDFLAGS) $(grpck_OBJECTS) $(grpck_LDADD) $(LIBS)
+
+pwck: $(pwck_OBJECTS) $(pwck_DEPENDENCIES)
+	@rm -f pwck
+	$(LINK) $(pwck_LDFLAGS) $(pwck_OBJECTS) $(pwck_LDADD) $(LIBS)
+
+vipw: $(vipw_OBJECTS) $(vipw_DEPENDENCIES)
+	@rm -f vipw
+	$(LINK) $(vipw_LDFLAGS) $(vipw_OBJECTS) $(vipw_LDADD) $(LIBS)
+
+grpconv: $(grpconv_OBJECTS) $(grpconv_DEPENDENCIES)
+	@rm -f grpconv
+	$(LINK) $(grpconv_LDFLAGS) $(grpconv_OBJECTS) $(grpconv_LDADD) $(LIBS)
+
+grpunconv: $(grpunconv_OBJECTS) $(grpunconv_DEPENDENCIES)
+	@rm -f grpunconv
+	$(LINK) $(grpunconv_LDFLAGS) $(grpunconv_OBJECTS) $(grpunconv_LDADD) $(LIBS)
+
+pwconv: $(pwconv_OBJECTS) $(pwconv_DEPENDENCIES)
+	@rm -f pwconv
+	$(LINK) $(pwconv_LDFLAGS) $(pwconv_OBJECTS) $(pwconv_LDADD) $(LIBS)
+
+pwunconv: $(pwunconv_OBJECTS) $(pwunconv_DEPENDENCIES)
+	@rm -f pwunconv
+	$(LINK) $(pwunconv_LDFLAGS) $(pwunconv_OBJECTS) $(pwunconv_LDADD) $(LIBS)
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $(SOURCES) $(HEADERS) $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = src
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  test -f $(distdir)/$$file \
+	  || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $$d/$$file $(distdir)/$$file; \
+	done
+chage.o: chage.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
+	../lib/shadowio.h
+chfn.o: chfn.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
+	../lib/getdef.h ../lib/pwauth.h
+chpasswd.o: chpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
+	../lib/shadowio.h
+chsh.o: chsh.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
+	../lib/getdef.h ../lib/pwauth.h
+dpasswd.o: dpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/dialup.h
+expiry.o: expiry.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h
+faillog.o: faillog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/faillog.h
+gpasswd.o: gpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
+	../lib/sgroupio.h
+groupadd.o: groupadd.c ../config.h ../lib/rcsid.h ../lib/defines.h \
+	../lib/gshadow_.h ../lib/prototypes.h ../libmisc/chkname.h \
+	../lib/getdef.h ../lib/groupio.h ../lib/sgroupio.h
+groupdel.o: groupdel.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
+	../lib/sgroupio.h
+groupmod.o: groupmod.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
+	../lib/groupio.h ../lib/sgroupio.h
+groups.o: groups.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h
+grpck.o: grpck.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
+	../lib/commonio.h ../lib/groupio.h ../lib/sgroupio.h
+grpconv.o: grpconv.c ../config.h ../lib/prototypes.h ../lib/defines.h \
+	../lib/gshadow_.h ../lib/groupio.h ../lib/sgroupio.h \
+	../lib/rcsid.h
+grpunconv.o: grpunconv.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/groupio.h \
+	../lib/sgroupio.h
+id.o: id.c ../config.h ../lib/rcsid.h ../lib/defines.h ../lib/gshadow_.h
+lastlog.o: lastlog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h
+login.o: login.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/faillog.h \
+	../libmisc/failure.h ../lib/pwauth.h ../lib/getdef.h \
+	../lib/dialchk.h
+logoutd.o: logoutd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h
+mkpasswd.o: mkpasswd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h
+newgrp.o: newgrp.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
+newusers.o: newusers.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
+	../lib/pwio.h ../lib/groupio.h ../lib/shadowio.h
+passwd.o: passwd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwauth.h \
+	../lib/shadowio.h ../lib/pwio.h ../lib/getdef.h
+pwck.o: pwck.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
+	../lib/commonio.h ../lib/pwio.h ../lib/shadowio.h
+pwconv.o: pwconv.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwio.h \
+	../lib/shadowio.h ../lib/getdef.h
+pwunconv.o: pwunconv.c ../config.h ../lib/rcsid.h ../lib/defines.h \
+	../lib/gshadow_.h ../lib/prototypes.h ../lib/pwio.h \
+	../lib/shadowio.h
+sulogin.o: sulogin.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
+	../lib/pwauth.h
+su.o: su.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/pwauth.h \
+	../lib/getdef.h
+useradd.o: useradd.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
+	../lib/pwauth.h ../lib/faillog.h ../lib/groupio.h \
+	../lib/sgroupio.h ../lib/pwio.h ../lib/shadowio.h \
+	../lib/getdef.h
+userdel.o: userdel.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h \
+	../lib/pwauth.h ../lib/groupio.h ../lib/pwio.h \
+	../lib/shadowio.h ../lib/sgroupio.h
+usermod.o: usermod.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../libmisc/chkname.h \
+	../lib/faillog.h ../lib/pwauth.h ../lib/getdef.h \
+	../lib/groupio.h ../lib/sgroupio.h ../lib/pwio.h \
+	../lib/shadowio.h
+vipw.o: vipw.c ../config.h ../lib/rcsid.h ../lib/defines.h \
+	../lib/gshadow_.h ../lib/prototypes.h ../lib/pwio.h \
+	../lib/shadowio.h ../lib/groupio.h ../lib/sgroupio.h
+
+info:
+dvi:
+check: all
+	$(MAKE)
+installcheck:
+install-exec: install-binPROGRAMS
+	@$(NORMAL_INSTALL)
+	$(MAKE) install-exec-hook
+
+install-data: install-ubinPROGRAMS install-usbinPROGRAMS
+	@$(NORMAL_INSTALL)
+	$(MAKE) install-data-hook
+
+install: install-exec install-data all
+	@:
+
+uninstall: uninstall-binPROGRAMS uninstall-ubinPROGRAMS uninstall-usbinPROGRAMS
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' INSTALL_SCRIPT='$(INSTALL_PROGRAM)' install
+installdirs:
+	$(mkinstalldirs)  $(DATADIR)$(bindir) $(DATADIR)$(ubindir) \
+		$(DATADIR)$(usbindir)
+
+
+mostlyclean-generic:
+	-test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(DISTCLEANFILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+
+maintainer-clean-generic:
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-binPROGRAMS mostlyclean-noinstPROGRAMS \
+		mostlyclean-ubinPROGRAMS mostlyclean-usbinPROGRAMS \
+		mostlyclean-compile mostlyclean-libtool \
+		mostlyclean-tags mostlyclean-generic
+
+clean:  clean-binPROGRAMS clean-noinstPROGRAMS clean-ubinPROGRAMS \
+		clean-usbinPROGRAMS clean-compile clean-libtool \
+		clean-tags clean-generic mostlyclean
+
+distclean:  distclean-binPROGRAMS distclean-noinstPROGRAMS \
+		distclean-ubinPROGRAMS distclean-usbinPROGRAMS \
+		distclean-compile distclean-libtool distclean-tags \
+		distclean-generic clean
+	-rm -f config.status
+	-rm -f libtool
+
+maintainer-clean:  maintainer-clean-binPROGRAMS \
+		maintainer-clean-noinstPROGRAMS \
+		maintainer-clean-ubinPROGRAMS \
+		maintainer-clean-usbinPROGRAMS maintainer-clean-compile \
+		maintainer-clean-libtool maintainer-clean-tags \
+		maintainer-clean-generic distclean
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: mostlyclean-binPROGRAMS distclean-binPROGRAMS clean-binPROGRAMS \
+maintainer-clean-binPROGRAMS uninstall-binPROGRAMS install-binPROGRAMS \
+mostlyclean-noinstPROGRAMS distclean-noinstPROGRAMS \
+clean-noinstPROGRAMS maintainer-clean-noinstPROGRAMS \
+mostlyclean-ubinPROGRAMS distclean-ubinPROGRAMS clean-ubinPROGRAMS \
+maintainer-clean-ubinPROGRAMS uninstall-ubinPROGRAMS \
+install-ubinPROGRAMS mostlyclean-usbinPROGRAMS distclean-usbinPROGRAMS \
+clean-usbinPROGRAMS maintainer-clean-usbinPROGRAMS \
+uninstall-usbinPROGRAMS install-usbinPROGRAMS mostlyclean-compile \
+distclean-compile clean-compile maintainer-clean-compile \
+mostlyclean-libtool distclean-libtool clean-libtool \
+maintainer-clean-libtool tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir info dvi installcheck \
+install-exec install-data install uninstall all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
+install-exec-hook:
+	for i in $(suidbins); do \
+		chmod 4755 $(bindir)/$$i; \
+	done
+
+install-data-hook:
+	for i in $(suidubins); do \
+		chmod 4755 $(ubindir)/$$i; \
+	done
+	rm -f $(ubindir)/sg
+	ln -s newgrp $(ubindir)/sg
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,61 @@
+$Id: WISHLIST,v 1.22 1999/07/09 18:02:43 marekm Exp $
+
+This is my wishlist for the shadow suite, in no particular order.  Feel
+free to do anything from this list and mail me the diffs :-).
+
+Patches in diff -u format, against the latest version (sometimes in the
+"beta" directory) are preferred and make my job easier.  Please, no
+MIME, base64, quoted-printable, or HTML.  For very big patches, or if
+your mailer can corrupt them, please use gzip and uuencode.  Thanks!
+
+New ideas to add to this list are welcome, too.  --marekm
+
+- fix all the bugs, of course
+- implement "su only" accounts (no logins, only su from other account)
+- rewrite getdef.c to be more general? (no hardcoded names)
+- update man pages to reflect all the changes (real programmers ... :-)
+- patch for rlogind/telnetd to create utmp entry and fill in ut_addr
+- fix the usermod -l bug properly [for now it's OK - #undef AUTH_METHODS]
+- IMPORTANT: finish PAM support (passwd, su - done, untested; login - started)
+- option to specify encrypted password in passwd (for yppasswdd, so it
+  doesn't need to know about shadow/non-shadow); should probably use a pipe
+  (less insecure than command line arguments)
+- add support for changing NIS passwords
+- clean up NDBM support, do it in the library and not in all programs
+- add option to check passwords by piping them to external programs
+- add functionality of the contrib/rpasswd.c wrapper to passwd
+- option to generate pronounceable passwords (like on SCO), external program?
+- poppassd (remote password change for eudora etc.)
+- add support for passwd/shadow db files (glibc)
+- better documentation
+- su -l, -m, -p, -s options (as in GNU su)
+- vipw: check password files for errors after editing
+- clean up login utmp(x) handling code
+- add "maximum time users allowed to stay logged in" limit option to logoutd
+- "make" infinite loop on some systems? (Slackware 3.1, possibly others)
+- handle quotes in /etc/environment like the shell does (but sshd doesn't...)
+- write man pages: dialups.5, d_passwd.5
+- better utmpx support (logoutd, ...)
+- better OPIE support (check access file, prompt for one-time password
+  with echo on, report number of logins left, etc.)
+- init sometimes fails to remove the utmp entry on logout, why?
+  (init 2.74 - can't reproduce with 2.71 on Debian 1.3, works fine)
+- new option for /etc/suauth: don't load user's environment (force "su -")
+  suggested by Ulisses Alonso Camaro
+- clean up error messages - "program_name: text of error message\n"
+  (maybe some common code for common messages about failing to lock/open
+  something)
+- don't use putgrent() even if available (glibc-2.0.100 bug)
+- find out why recent releases won't compile on Solaris
+- change logoutd to simply cat the contents of /etc/logoutd.mesg to the
+  luser's tty (no need to reload with SIGHUP)
+- make the new getpass() replacement optional configurable at run time
+  (some people don't like the asterisks)
+- newusers UID/GID selection algorithm should be the same as useradd
+  (and use UID_MIN, UID_MAX from login.defs)
+- newusers should be able to copy /etc/skel to the new home directory
+  (like useradd)
+- change makefiles to work with the latest automake
+- include i18n files in Debian packages
+- integrate the latest upstream version into the Debian distribution
+  (they still have shadow-980403, many bugs have been fixed since then)

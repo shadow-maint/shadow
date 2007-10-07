@@ -1,0 +1,214 @@
+#
+# /etc/login.defs - Configuration control definitions for the login package.
+#
+#	$Id: login.defs,v 1.2 1997/05/01 23:14:35 marekm Exp $
+#
+# Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
+# If unspecified, some arbitrary (and possibly incorrect) value will
+# be assumed.  All other items are optional - if not specified then
+# the described action or option will be inhibited.
+#
+# Comment lines (lines beginning with "#") and blank lines are ignored.
+#
+
+#
+# Delay in seconds before being allowed another attempt after a login failure
+#
+FAIL_DELAY		5
+
+#
+# Enable additional passwords upon dialup lines specified in /etc/dialups.
+#
+DIALUPS_CHECK_ENAB	yes
+
+#
+# Enable logging and display of /usr/adm/faillog login failure info.
+#
+FAILLOG_ENAB		yes
+
+#
+# Enable display of unknown usernames when login failures are recorded.
+#
+LOG_UNKFAIL_ENAB	yes
+
+#
+# Enable logging and display of /usr/adm/lastlog login time info.
+#
+LASTLOG_ENAB		yes
+
+#
+# Enable checking and display of mailbox status upon login.
+#
+MAIL_CHECK_ENAB		yes
+
+#
+# Enable additional checks upon password changes.
+#
+OBSCURE_CHECKS_ENAB	yes
+
+#
+# Enable checking of time restrictions specified in /etc/porttime.
+#
+PORTTIME_CHECKS_ENAB	yes
+
+#
+# Enable setting of ulimit, umask, and niceness from passwd gecos field.
+#
+QUOTAS_ENAB		yes
+
+#
+# Enable "syslog" logging of su activity - in addition to sulog file logging.
+# SYSLOG_SG_ENAB does the same for newgrp and sg.
+#
+SYSLOG_SU_ENAB		no
+SYSLOG_SG_ENAB		no
+
+#
+# If defined, either full pathname of a file containing device names or
+# a ":" delimited list of device names.  Root logins will be allowed only
+# upon these devices.
+#
+CONSOLE		/etc/consoles
+#CONSOLE	console:tty01:tty02:tty03:tty04
+
+#
+# If defined, all su activity is logged to this file.
+#
+SULOG_FILE	/usr/adm/sulog
+
+#
+# If defined, ":" delimited list of "message of the day" files to
+# be displayed upon login.
+#
+MOTD_FILE	/etc/motd
+#MOTD_FILE	/etc/motd:/usr/lib/news/news-motd
+
+#
+# If defined, this file will be output before each login prompt.
+#
+#ISSUE_FILE	/etc/issue
+
+#
+# If defined, file which maps tty line to TERM environment parameter.
+# Each line of the file is in a format something like "vt100  tty01".
+#
+TTYTYPE_FILE	/etc/ttytype
+
+#
+# If defined, login failures will be logged here in a utmp format.
+#
+FTMP_FILE	/etc/ftmp
+
+#
+# If defined, name of file whose presence which will inhibit non-root
+# logins.  The contents of this file should be a message indicating
+# why logins are inhibited.
+#
+NOLOGINS_FILE	/etc/nologins
+
+#
+# If defined, the command name to display when running "su -".  For
+# example, if this is defined as "su" then a "ps" will display the
+# command is "-su".  If not defined, then "ps" would display the
+# name of the shell actually being run, e.g. something like "-sh".
+#
+SU_NAME		su
+
+#
+# *REQUIRED*
+#   Directory where mailboxes reside, _or_ name of file, relative to the
+#   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
+#   MAILDIR is for Qmail
+#
+#MAILDIR	Maildir
+MAIL_DIR	/usr/spool/mail
+#MAIL_FILE	.mail
+
+#
+# If defined, file which inhibits all the usual chatter during the login
+# sequence.  If a full pathname, then hushed mode will be enabled if the
+# user's name or shell are found in the file.  If not a full pathname, then
+# hushed mode will be enabled if the file exists in the user's home directory.
+#
+#HUSHLOGIN_FILE	.hushlogin
+HUSHLOGIN_FILE	/etc/hushlogins
+
+#
+# If defined, the presence of this value in an /etc/passwd "shell" field will
+# disable logins for that user, although "su" will still be allowed.
+#
+NOLOGIN_STR	NOLOGIN
+
+#
+# If defined, either a TZ environment parameter spec or the
+# fully-rooted pathname of a file containing such a spec.
+#
+ENV_TZ		TZ=CST6CDT
+#ENV_TZ		/etc/tzname
+
+#
+# If defined, an HZ environment parameter spec.
+#
+ENV_HZ		HZ=50
+
+#
+# *REQUIRED*  The default PATH settings, for superuser and normal users.
+#
+ENV_SUPATH	PATH=/etc/local:/etc:/local/bin:/usr/bin:/bin
+ENV_PATH	PATH=/local/bin:/usr/bin:/bin
+
+#
+# Terminal permissions
+#
+#	TTYGROUP	Login tty will be assigned this group ownership.
+#	TTYPERM		Login tty will be set to this permission.
+#
+# If you have a "write" program which is "setgid" to a special group
+# which owns the terminals, define TTYGROUP to the group number and
+# TTYPERM to 0620.  Otherwise leave TTYGROUP commented out and assign
+# TTYPERM to either 622 or 600.
+#
+#TTYGROUP	7
+#TTYPERM	0620
+TTYPERM		0622
+
+#
+# Login configuration initializations:
+#
+#	ERASECHAR	Terminal ERASE character ('\010' = backspace).
+#	KILLCHAR	Terminal KILL character ('\025' = CTRL/U).
+#	UMASK		Default "umask" value.
+#	ULIMIT		Default "ulimit" value.
+#
+# The ERASECHAR and KILLCHAR are used only on System V machines.
+# The ULIMIT is used only if the system supports it.
+#
+# Prefix these values with "0" to get octal, "0x" to get hexadecimal.
+#
+ERASECHAR	010
+KILLCHAR	025
+UMASK		022
+ULIMIT		2097152
+
+#
+# Password aging controls:
+#
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+#
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_MIN_LEN	5
+PASS_WARN_AGE	7
+
+#
+# Only allow group 0 members to "su" to root.
+#
+SU_WHEEL_ONLY	no
+
+#
+# If compiled with cracklib support, where are the dictionaries
+#
+#CRACKLIB_DICTPATH	/usr/share/lib/pw_dict

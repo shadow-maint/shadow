@@ -1,0 +1,81 @@
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: mkpasswd.8,v 1.4 1998/12/28 20:35:15 marekm Exp $
+.\"
+.TH MKPASSWD 1
+.SH NAME
+mkpasswd \- Update passwd and group database files
+.SH SYNOPSIS
+\fBmkpasswd\fR [\fB-fvgps\fR] \fIfile\fR
+.SH DESCRIPTION
+.B mkpasswd
+reads the file in the format given by the flags and converts it to the
+corresponding database file format.
+These database files are used to improve access performance on systems
+with large numbers of users.
+The output files will be named \fIfile\fR.dir and \fIfile\fR.pag.
+.PP
+The \fB-f\fR option causes \fBmkpasswd\fR to ignore any existing output
+files and overwrite them.
+Normally \fBmkpasswd\fR complains about existing output files and quits.
+.PP
+The \fB-v\fR option causes \fBmkpasswd\fR to output information about
+each record as it is converted, with a final message at the very end.
+.PP
+The \fB-g\fR option treats the input file as though it were in
+\fI/etc/group\fR file format.
+When combined with the \fB-s\fR option, the \fI/etc/gshadow\fR file
+format is used instead.
+.PP
+The \fB-p\fR option treats the input file as though it were in
+\fI/etc/passwd\fR file format.
+This is the default.
+When combined with the \fB-s\fR option, the \fI/etc/shadow\fR file
+format is used instead.
+.SH CAVEATS
+The use of more than one database file is limited to systems which
+include the NDBM database library and therefore may not be available
+on every system.
+.SH NOTE
+Since most commands are capable of updating the database files as
+changes are made, this command need only be used when re-creating a
+deleted or corrupted database file.
+.SH FILES
+/etc/passwd \- user account information
+.br
+/etc/shadow \- shadow user information
+.br
+/etc/group \- group information
+.br
+/etc/gshadow \- shadow group information
+.SH SEE ALSO
+.BR passwd (5),
+.BR group (5),
+.BR shadow (5)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@bga.com)

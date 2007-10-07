@@ -1,0 +1,100 @@
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: faillog.8,v 1.6 1999/07/09 18:02:43 marekm Exp $
+.\"
+.TH FAILLOG 8
+.SH NAME
+faillog \- examine faillog and set login failure limits
+.SH SYNOPSIS
+.TP 8
+.B faillog
+.RB [ -u
+.IR login-name ]
+.RB [ -a ]
+.RB [ -t
+.IR days ]
+.RB [ -m
+.IR max ]
+.RB [ -pr ] 
+.SH DESCRIPTION
+\fBfaillog\fR formats the contents of the failure log,
+\fI/var/log/faillog\fR, and maintains failure counts and
+limits.
+The order of the arguments to \fBfaillog\fR is significant.
+Each argument is processed immediately in the order given.
+.PP
+The \fB-p\fR flag causes failure entries to be printed in UID
+order.
+Entering \fB-u \fIlogin-name\fR flag will
+cause the failure record for \fIlogin-name\fR only to be printed.
+Entering \fB-t \fIdays\fR will cause only the
+failures more recent than \fIdays\fR to be printed.
+The \fB-t\fR flag overrides the use of \fB-u\fR.
+The \fB-a\fR flag causes all users to be selected.
+When used with the \fB-p\fR flag, this option selects all users
+who have ever had a login failure.
+It is meaningless with the \fB-r\fR flag.
+.PP
+The \fB-r\fR flag is used to reset the count of login failures.
+Write access to \fI/var/log/faillog\fR is required for
+this option.
+Entering \fB-u \fIlogin-name\fR will cause only the failure count
+for \fIlogin-name\fR to be reset.
+.PP
+The \fB-m\fR flag is used to set the maximum number of login
+failures before the account is disabled.
+Write access to \fI/var/log/faillog\fR is required for this
+option.
+Entering \fB-m \fImax\fR will cause all accounts to be disabled
+after \fImax\fR failed logins occur.
+This may be modified with \fB-u \fIlogin-name\fR to limit this
+function to \fIlogin-name\fR only.
+Selecting a \fImax\fR value of 0 has the effect of not placing
+a limit on the number of failed logins.
+The maximum failure count
+should always be 0 for \fBroot\fR to prevent
+a denial of services attack against the system.
+.PP
+Options may be combined in virtually any fashion.
+Each \fB-p\fR, \fB-r\fR, and \fB-m\fR option will cause
+immediate execution using any \fB-u\fR or \fB-t\fR modifier.
+.SH CAVEATS
+\fBfaillog\fR only prints out users with no successful login since
+the last failure.
+To print out a user who has had a successful login since their last
+failure, you must explicitly request the user with the \fB-u\fR flag,
+or print out all users with the \fB-a\fR flag.
+.PP
+Some systems may replace /var/log with /var/adm or /usr/adm.
+.SH FILES
+/var/log/faillog \- failure logging file
+.SH SEE ALSO
+.BR login (1),
+.BR faillog (5)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@bga.com)

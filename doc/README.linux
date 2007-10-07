@@ -1,0 +1,162 @@
+$Id: README.linux,v 1.19 1999/06/07 16:40:44 marekm Exp $
+
+This is the shadow suite hacked a bit for Linux.  See CHANGES for
+short description of changes.  See also WISHLIST if you have too
+much time on your hands :-).  Now that copyright issues have been
+resolved, the most important thing is testing.  Please test this
+code as much as you can, and report any problems.  At this point,
+I made so many changes that any bugs are probably mine.
+
+This package uses GNU autoconf, so it should be quite portable
+- but it hasn't been tested much on anything but Linux/x86.
+Long time ago, it has been reported to work on SunOS 4.1.x,
+and recently there has been some success on Solaris 2.x and Irix.
+I'd like to compile a current list of platforms this package is
+known to work on - if you get it to work on some new OS (non-x86
+Linux, or non-Linux), please let me know.  Please specify: host
+type guessed by autoconf, libc version, distribution, changes
+you needed to make (if any), etc.  Please see README.platforms
+for the current (incomplete - I know there are more...) list of
+platforms this package is known to work on.
+
+There is a developers mailing list.  It has moved again, and is
+now hosted by SuSE - thanks to Thorsten Kukuk <kukuk@suse.de>.
+Send the command "subscribe shadow" to majordomo@suse.com to
+subscribe if you are interested.  To send mail to everyone on
+the list, send it to shadow@suse.com.
+
+Before reporting bugs, please check if they still exist in my latest
+development snapshot.  Every few weeks I make a new version available
+at the following URLs:
+ftp://piast.t19.ds.pwr.wroc.pl/pub/linux/shadow/
+ftp://ftp.ists.pwr.wroc.pl/pub/linux/shadow/
+http://www.itnet.pl/amelektr/linux/shadow/
+(there are also mirror sites, see README.mirrors).
+
+After installation, please remember to remove any old binaries like
+/bin/passwd (this version installs /usr/bin/passwd).  If your passwd
+program doesn't like the new /etc/login.defs settings, and complains
+about "configuration error", this is most likely the problem.
+
+Current versions of the Linux C library (both libc 5.x and glibc 2.x)
+have the shadow support, including MD5-based crypt(), built in.
+Because of this, libshadow.a will build without these functions,
+and the ones from libc will be used instead.  Currently, libshadow.a
+is for internal use only, so if you see -lshadow in a Makefile of
+some other package, it is safe to remove it.
+
+Remember that shadow passwords will not make your system more secure
+if your distribution has gaping holes which let any user become root.
+Some distributions, especially the older ones, are much like SunOS 4.1
+without any security patches installed :-).  Read the linux-security
+mailing list archives, and plug all holes before attempting to install
+the shadow suite.
+
+Very old versions of this package (shadow-3.3.x, shadow-mk) had a few
+nasty security holes, too.  Please use the latest version if possible.
+
+Encrypted passwords are not readable, but it is highly recommended
+to use cracklib with a big dictionary to prevent users from choosing
+weak passwords.  This way if someone ever gets access to /etc/shadow
+(for example, because of some not yet discovered bug), they will not
+get half of the passwords using Crack...  There is a configure option
+to use cracklib, I haven't tested it myself but I'm told it works.
+
+The code feels like stabilizing now - while still BETA, it should
+work quite well.  Many bugs have been fixed, but there may be still
+a few lurking.  Again, please test it and report any problems.
+
+Thanks to Julianne Frances Haugh <jfh@bga.com> who wrote the thing
+in the first place, sent me the latest version, and released it under
+a "free" BSD-style license, so that it can be included in Linux
+distributions (at least Debian 1.3 and Slackware 3.2 are already
+doing that; Debian and Red Hat packaging standards are supported in
+the standard source tree).  David Frey <David.Frey@lugs.ch>, Michael
+Meskes <meskes@topsystem.de> and Guy Maor <maor@debian.org> have
+done a lot of work to integrate shadow passwords into Debian Linux.
+
+Thanks to Bradley Glonka <bradley@123.net> of Linux System Labs
+(http://www.lsl.com/) for sending me a free Red Hat 4.2 CD-ROM,
+making it possible to test this package on this distribution.
+
+Special thanks to Michael H. Jackson <mhjack@tscnet.com> who wrote
+the Linux Shadow Password HOWTO.  Special thanks to Greg Gallagher
+<ggallag@orion.it.luc.edu> and Jon Lewis for maintaining the
+developers mailing list for a long time.
+
+Thanks to Maciej 'Tycoon' Majchrowski <tycoon@piast.t19.ds.pwr.wroc.pl>
+for ftp server space on piast.t19.ds.pwr.wroc.pl, and to Pawel Wiecek
+<coven@pwr.wroc.pl> for keeping bach.ists.pwr.wroc.pl up and running.
+
+Ian Jackson <iwj10@cus.cam.ac.uk> criticized the current shadow password
+system (see the linux-security mailing list archives).  We disagree on
+some points, but this started a discussion on possible better solutions.
+Theodore Ts'o <tytso@mit.edu> has started a new project to implement
+Pluggable Authentication Modules - a relatively new standard API which
+makes it easier to add new authentication mechanisms (it's more than
+just shadow passwords).  See http://parc.power.net/morgan/Linux-PAM/ for
+more information.  (XXX - this URL has changed, I have to check where
+PAM is now...  -MM)
+
+Thanks to at least the following people for sending me patches, bug
+reports and various comments.  This list may be incomplete, I received
+a lot of mail...
+
+John Adelsberger <jja@umr.edu>
+Martin Bene <mb@sime.com>
+Luca Berra <bluca@www.polimi.it>
+Darcy Boese <possum@chardonnay.niagara.com>
+Judd Bourgeois <shagboy@bluesky.net>
+Ulisses Alonso Camaro <ulisses@pusa.eleinf.uv.es>
+Ed Carp <ecarp@netcom.com>
+Rani Chouha <ranibey@smartec.com>
+Joshua Cowan <jcowan@hermit.reslife.okstate.edu>
+Alan Curry <pacman@tardis.mars.net>
+Frank Denis <j@4u.net>
+Hrvoje Dogan <hdogan@bjesomar.srce.hr>
+Chris Evans <lady0110@sable.ox.ac.uk>
+Marc Ewing <marc@redhat.com>
+Janos Farkas <chexum@bankinf.banki.hu>
+Werner Fink <werner@suse.de>
+Floody <flood@evcom.net>
+David Frey <David.Frey@lugs.ch>
+Brian R. Gaeke <brg@dgate.org>
+Cristian Gafton <gafton@sorosis.ro>
+Anton Gluck <gluc@midway.uchicago.edu>
+Dave Hagewood <admin@arrowweb.com>
+Jonathan Hankins <jhankins@mailserv.homewood.k12.al.us>
+Juergen Heinzl <unicorn@noris.net>
+Joey Hess <joey@kite.ml.org>
+Tim Hockin <thockin@eagle.ais.net>
+David A. Holland <dholland@hcs.harvard.edu>
+Andreas Jaeger <aj@arthur.rhein-neckar.de>
+Timo Karjalainen <timok@iki.fi>
+Calle Karlsson <ckn@kash.se>
+Sami Kerola <kerolasa@rocketmail.com>
+Thorsten Kukuk <kukuk@suse.de>
+Jon Lewis <jlewis@lewis.org>
+Pavel Machek <pavel@bug.ucw.cz>
+Guy Maor <maor@debian.org>
+Martin Mares <mj@gts.cz>
+Rafal Maszkowski <rzm@torun.pdi.net>
+Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>
+Michael Meskes <meskes@topsystem.de>
+Arkadiusz Miskiewicz <misiek@pld.org.pl>
+Greg Mortensen <loki@world.std.com>
+Mike Pakovic <mpakovic@users.southeast.net>
+Steve M. Robbins <steve@nyongwa.montreal.qc.ca>
+Adam Rudnicki <adam@v-lo.krakow.pl>
+Algis Rudys <arudys@rice.edu>
+Lutz Schwalowsky <schwalow@mineralogie.uni-hamburg.de>
+Jay Soffian <jay@lw.net>
+Aniello Del Sorbo <anidel@edu-gw.dia.unisa.it>
+Juha Virtanen <jiivee@iki.fi>
+Michael Talbot-Wilson <mike@calypso.bns.com.au>
+Jesse Thilo <Jesse.Thilo@pobox.com>
+Shane Watts <shane@nexus.mlckew.edu.au>
+Alexander O. Yuriev <alex@bach.cis.temple.edu>
+Leonard N. Zubkoff <lnz@dandelion.com>
+
+If you want to be added here, or your e-mail address changes,
+please let me know.  Thanks.
+-- Marek Michalkiewicz <marekm@linux.org.pl>
