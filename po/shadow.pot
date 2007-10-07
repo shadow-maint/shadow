@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,7 +139,7 @@ msgid "Incorrect password for %s.\n"
 msgstr ""
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
 msgstr ""
 
 msgid "No directory, logging in with HOME=/"
@@ -150,11 +150,11 @@ msgid "Cannot execute %s"
 msgstr ""
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
 msgstr ""
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -356,11 +356,11 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr ""
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr ""
 
 #, c-format
@@ -368,23 +368,23 @@ msgid "Changing the user information for %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+msgid "%s: '%s' contains illegal characters\n"
 msgstr ""
 
 #, c-format
@@ -800,7 +800,7 @@ msgid "invalid group file entry\n"
 msgstr ""
 
 #, c-format
-msgid "delete line `%s'? "
+msgid "delete line '%s'? "
 msgstr ""
 
 #, c-format
@@ -808,7 +808,7 @@ msgid "duplicate group entry\n"
 msgstr ""
 
 #, c-format
-msgid "invalid group name `%s'\n"
+msgid "invalid group name '%s'\n"
 msgstr ""
 
 #, c-format
@@ -816,7 +816,23 @@ msgid "group %s: no user %s\n"
 msgstr ""
 
 #, c-format
-msgid "delete member `%s'? "
+msgid "delete member '%s'? "
+msgstr ""
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr ""
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr ""
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
 msgstr ""
 
 #, c-format
@@ -828,15 +844,11 @@ msgid "duplicate shadow group entry\n"
 msgstr ""
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr ""
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr ""
 
 #, c-format
-msgid "delete administrative member `%s'? "
+msgid "delete administrative member '%s'? "
 msgstr ""
 
 #, c-format
@@ -865,14 +877,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
 msgstr ""
 
 #, c-format
@@ -960,11 +964,11 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
+msgid " on '%.100s' from '%.200s'"
 msgstr ""
 
 #, c-format
-msgid " on `%.100s'"
+msgid " on '%.100s'"
 msgstr ""
 
 #, c-format
@@ -1210,15 +1214,23 @@ msgid "user %s: program %s does not exist\n"
 msgstr ""
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr ""
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr ""
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr ""
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr ""
 
 #, c-format
 msgid "duplicate shadow password entry\n"
-msgstr ""
-
-#, c-format
-msgid "no matching password file entry\n"
 msgstr ""
 
 #, c-format
@@ -1235,10 +1247,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
 msgstr ""
 
 #, c-format
@@ -1337,7 +1345,7 @@ msgid "Entering System Maintenance Mode\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1361,7 +1369,7 @@ msgid "%s: rename: %s"
 msgstr ""
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr ""
 
 #, c-format
@@ -1407,19 +1415,19 @@ msgid "%s: can't get unique UID\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
+msgid "%s: invalid comment '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
+msgid "%s: invalid date '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1431,11 +1439,11 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
+msgid "%s: invalid field '%s'\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
+msgid "%s: invalid shell '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1494,12 +1502,15 @@ msgstr ""
 msgid "%s: cannot create directory %s\n"
 msgstr ""
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
 msgstr ""
 
 #, c-format
@@ -1522,7 +1533,13 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
 msgstr ""
 
 #, c-format

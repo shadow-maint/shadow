@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='limits.5'>
-  <!-- $Id: limits.5.xml,v 1.18 2006/02/07 04:03:45 kloczek Exp $ -->
+  <!-- $Id: limits.5.xml,v 1.21 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>limits</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -10,17 +8,18 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>limits</refname>
-    <refpurpose>Resource limits definition</refpurpose>
+    <refpurpose>resource limits definition</refpurpose>
   </refnamediv>
   <!-- body begins here -->
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <emphasis remap='I'>limits</emphasis> file (/etc/limits by default
-      or LIMITS_FILE defined config.h) describes the resource limits you
-      wish to impose. It should be owned by root and readable by root
-      account only.
+      The <emphasis remap='I'>limits</emphasis> file 
+      (<filename>/etc/limits</filename> by default
+      or LIMITS_FILE defined <filename>config.h</filename>) describes 
+      the resource limits you wish to impose. It should be owned by 
+      root and readable by root account only.
     </para>
 
     <para>
@@ -36,10 +35,9 @@
     </para>
 
     <para>
-      The <emphasis>LIMITS_STRING</emphasis> is a string of a
-      concatenated list of resource limits.
-      Each limit consists of a letter identifier followed by a numerical
-      limit.
+      The <emphasis>LIMITS_STRING</emphasis> is a string of a concatenated
+      list of resource limits. Each limit consists of a letter identifier
+      followed by a numerical limit.
     </para>
 
     <para>The valid identifiers are:</para>
@@ -83,7 +81,7 @@
       Be aware that after <emphasis remap='I'>username</emphasis> the rest
       of the line is considered a limit string, thus comments are not
       allowed. A invalid limits string will be rejected (not considered) by
-      the login program.
+      the <command>login</command> program.
     </para>
 
     <para>
@@ -95,7 +93,9 @@
 
     <para>
       To completely disable limits for a user, a single dash
-      "<emphasis>-</emphasis> "will do.  </para>
+      "<emphasis>-</emphasis>" will do.
+    </para>
+
     <para>
       Also, please note that all limit settings are set PER LOGIN. They are
       not global, nor are they permanent. Perhaps global limits will come,

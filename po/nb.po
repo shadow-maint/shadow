@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2006-03-12 21:08+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -145,8 +145,8 @@ msgstr "passwd: passorder ble oppdatert\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Feil passord for «%s».\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "Klare ikke endre katalog til \"%s\"\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -156,12 +156,12 @@ msgstr "Ingen hjemmemappe, logger inn med HOME=/"
 msgid "Cannot execute %s"
 msgstr "Kan ikke utføre %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "Ugyldig rot mappe \"%s\"\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "Kan ikke endre rot mappa til \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -379,36 +379,36 @@ msgstr "Annet"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan ikke avgjøre ditt brukernavn.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: kan ikke endre bruker «%s» på NIS-klienten.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: «%s» er NIS-sjefen for denne klienten.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Endrer brukerinformasjon for %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: ugyldig navn: «%s»\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: ugyldig romnummer: «%s»\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: ugyldig jobbtelefon: «%s»\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: ugyldig hjemtelefon: «%s»\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: «%s» inneholder ugyldige tegn\n"
 
 #, c-format
@@ -860,25 +860,41 @@ msgstr "%s: kan ikke åpne fila %s\n"
 msgid "invalid group file entry\n"
 msgstr "ugyldig oppføring i gruppefila\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "slett linje `%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "duplisert gruppeoppføring\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "ugyldig gruppenavn `%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "gruppe %s: ingen bruker %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "slett medlem `%s'? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "fant ingen tilsvarende oppføring i gruppefila\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "shadow gruppe %s: ingen bruker %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: kan ikke oppdatere shadow-oppføringen for %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: kan ikke oppdatere oppføringen for gruppa %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -889,15 +905,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "duplisert shadow-gruppeoppføring\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "fant ingen tilsvarende oppføring i gruppefila\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "shadow-gruppe %s: ingen administrativ bruker %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "slett administrativt medlem «%s» ?"
 
 #, c-format
@@ -927,14 +939,6 @@ msgstr "%s: kan ikke åpne shadow-gruppefila\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: kan ikke fjerne shadow-gruppe %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: kan ikke oppdatere shadow-oppføringen for %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: kan ikke oppdatere oppføringen for gruppa %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1033,12 +1037,12 @@ msgstr ""
 "\n"
 "Innlogging avbrutt på tid etter %d sekunder.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " på `%.100s' fra `%.200s'"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " på `%.100s'"
 
 #, c-format
@@ -1309,6 +1313,18 @@ msgstr "bruker %s: mappe %s finnes ikke\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "bruker %s: programmet %s finnes ikke\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "fant ingen tilsvarende oppføring i passordfila\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "shadow gruppe %s: ingen bruker %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: klarer ikke å endre passord-oppføringen for %s\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "ugyldig oppføring i shadow-passordfila\n"
@@ -1316,10 +1332,6 @@ msgstr "ugyldig oppføring i shadow-passordfila\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "duplisert oppføring i shadow-passordfila\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "fant ingen tilsvarende oppføring i passordfila\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1336,10 +1348,6 @@ msgstr "%s: klarte ikke å åpne passordfila\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: klarte ikke å fjerne shadow-oppføring for %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: klarer ikke å endre passord-oppføringen for %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1452,8 +1460,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Starter systemvedlikeholds-modus\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: ugyldig numerisk argument `%s'\n"
 
 #, c-format
@@ -1476,8 +1484,8 @@ msgstr "%s: klarer ikke å åpne ny «defaults»-fil\n"
 msgid "%s: rename: %s"
 msgstr "%s: gi nytt navn: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: gruppe `%s' er en NIS gruppe.\n"
 
 #, c-format
@@ -1543,20 +1551,20 @@ msgstr "%s: UID %u er ikke entydig\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: klarer ikke å få entydig UID\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ugyldig basismappe `%s'\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: ugyldig kommentar `%s'\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: ugyldig hjemmemappe `%s'\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: ugyldig dato `%s'\n"
 
 #, c-format
@@ -1567,12 +1575,12 @@ msgstr "%s: shadow-passord kreves for -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: shadow-passord kreves for -f\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: ugyldig felt `%s'\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: ugyldig skall `%s'\n"
 
 #, c-format
@@ -1631,14 +1639,16 @@ msgstr "%s: feil ved innlegging av ny shadow passord-oppføring\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: kan ikke opprette mappa %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Gruppe «mail» finnes ikke, oppretter e-postmappe med rettigheter 0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Kan ikke opprette e-postmappe for bruker %s\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1664,8 +1674,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: advarsel: CREATE_HOME ikke støttet, bruk -m istedenfor.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Bruk: %s [-r] navn\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1858,3 +1874,11 @@ msgstr "Kunne ikke lage backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "Gruppe «mail» finnes ikke, oppretter e-postmappe med rettigheter 0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Kan ikke opprette e-postmappe for bruker %s\n"

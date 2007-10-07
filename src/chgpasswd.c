@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chgpasswd.c,v 1.1 2006/03/05 22:12:38 kloczek Exp $"
+#ident "$Id: chgpasswd.c,v 1.4 2006/05/19 23:47:11 kloczek Exp $"
 
 #include <fcntl.h>
 #include <getopt.h>
@@ -43,7 +43,9 @@
 #include "nscd.h"
 #include "prototypes.h"
 #include "groupio.h"
+#ifdef	SHADOWGRP
 #include "sgroupio.h"
+#endif
 /*
  * Global variables
  */
@@ -51,7 +53,9 @@ static char *Prog;
 static int eflg = 0;
 static int md5flg = 0;
 
-static int is_shadow_pwd;
+#ifdef SHADOWGRP
+static int is_shadow_grp;
+#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -78,20 +82,23 @@ int main (int argc, char **argv)
 	char *newpwd;
 	char *cp;
 
+#ifdef	SHADOWGRP
 	const struct sgrp *sg;
 	struct sgrp newsg;
+#endif
 
 	const struct group *gr;
-	struct group newgr;
 	int errors = 0;
 	int line = 0;
-	long now = time ((long *) 0) / (24L * 3600L);
 	int ok;
 
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	struct passwd *pampw;
 	int retval;
+#endif
+#ifndef SHADOWGRP
+	struct group newgr;
 #endif
 
 	Prog = Basename (argv[0]);
@@ -178,9 +185,9 @@ int main (int argc, char **argv)
 		gr_unlock ();
 		exit (1);
 	}
-
-	is_shadow_pwd = sgr_file_present ();
-	if (is_shadow_pwd) {
+#ifdef SHADOWGRP
+	is_shadow_grp = sgr_file_present ();
+	if (is_shadow_grp) {
 		if (!sgr_lock ()) {
 			fprintf (stderr, _("%s: can't lock gshadow file\n"),
 				 Prog);
@@ -195,6 +202,7 @@ int main (int argc, char **argv)
 			exit (1);
 		}
 	}
+#endif
 
 	/*
 	 * Read each line, separating the group name from the password. The
@@ -254,33 +262,33 @@ int main (int argc, char **argv)
 			errors++;
 			continue;
 		}
-		if (is_shadow_pwd)
-			sg = sgr_locate (name);
-		else
-			sg = NULL;
+#ifdef SHADOWGRP
+		sg = sgr_locate (name);
+#endif
 
 		/*
 		 * The freshly encrypted new password is merged into the
 		 * user's password file entry and the last password change
 		 * date is set to the current date.
 		 */
-		if (sg) {
-			newsg = *sg;
-			newsg.sg_passwd = cp;
-		} else {
-			newgr = *gr;
-			newgr.gr_passwd = cp;
-		}
+#ifdef SHADOWGRP
+		newsg = *sg;
+		newsg.sg_passwd = cp;
+#else
+		newgr = *gr;
+		newgr.gr_passwd = cp;
+#endif
 
 		/* 
 		 * The updated password file entry is then put back and will
 		 * be written to the password file later, after all the
 		 * other entries have been updated as well.
 		 */
-		if (sg)
-			ok = sgr_update (&newsg);
-		else
-			ok = gr_update (&newgr);
+#ifdef SHADOWGRP
+		ok = sgr_update (&newsg);
+#else
+		ok = gr_update (&newgr);
+#endif
 
 		if (!ok) {
 			fprintf (stderr,
@@ -302,12 +310,15 @@ int main (int argc, char **argv)
 	if (errors) {
 		fprintf (stderr,
 			 _("%s: error detected, changes ignored\n"), Prog);
-		if (is_shadow_pwd)
+#ifdef SHADOWGRP
+		if (is_shadow_grp)
 			sgr_unlock ();
+#endif
 		gr_unlock ();
 		exit (1);
 	}
-	if (is_shadow_pwd) {
+#ifdef SHADOWGRP
+	if (is_shadow_grp) {
 		if (!sgr_close ()) {
 			fprintf (stderr,
 				 _("%s: error updating shadow file\n"), Prog);
@@ -316,6 +327,7 @@ int main (int argc, char **argv)
 		}
 		sgr_unlock ();
 	}
+#endif
 	if (!gr_close ()) {
 		fprintf (stderr, _("%s: error updating password file\n"), Prog);
 		exit (1);

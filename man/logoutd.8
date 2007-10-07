@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGOUTD" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: logoutd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "LOGOUTD" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,6 +17,7 @@ logoutd \- Enforce login time restrictions
 \fBlogoutd\fR
 .SH "DESCRIPTION"
 .PP
+
 \fBlogoutd\fR
 enforces the login time and port restrictions specified in
 \fI/etc/porttime\fR.
@@ -25,9 +29,9 @@ file is scanned periodically and each user name is checked to see if the named u
 \fI/etc/porttime\fR
 is terminated.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/porttime\fR
-login and port permissions
-.TP
+File containing port access.
+.TP 3n
 \fI/var/run/utmp\fR
-list of current login sessions
+List of current login sessions.

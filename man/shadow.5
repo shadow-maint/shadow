@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SHADOW" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: shadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "SHADOW" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,35 +14,38 @@
 shadow \- encrypted password file
 .SH "DESCRIPTION"
 .PP
+
 \fIshadow\fR
 contains the encrypted password information for user's accounts and optional the password aging information. Included is:
-.TP 3
+.TP 3n
 \(bu
 login name
-.TP
+.TP 3n
 \(bu
 encrypted password
-.TP
+.TP 3n
 \(bu
 days since Jan 1, 1970 that password was last changed
-.TP
+.TP 3n
 \(bu
 days before password may be changed
-.TP
+.TP 3n
 \(bu
 days after which password must be changed
-.TP
+.TP 3n
 \(bu
 days before password is to expire that user is warned
-.TP
+.TP 3n
 \(bu
 days after password expires that account is disabled
-.TP
+.TP 3n
 \(bu
 days since Jan 1, 1970 that account is disabled
-.TP
+.TP 3n
 \(bu
 a reserved field
+.sp
+.RE
 .PP
 The password field must be filled. The encrypted password consists of 13 to 24 characters from the 64 characters alphabet a thru z, A thru Z, 0 thru 9, \\. and /. Optionally it can start with a "$" character. This means the encrypted password was generated using another (not DES) algorithm. For example if it starts with "$1$" it means the MD5\-based algorithm was used.
 .PP
@@ -60,12 +66,12 @@ This information supersedes any password or password age information present in
 .PP
 This file must not be readable by regular users if password security is to be maintained.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
 \fBchage\fR(1),

@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGIN.ACCESS" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: login.access
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "LOGIN.ACCESS" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-login.access \- Login access control table
+login.access \- login access control table
 .SH "DESCRIPTION"
 .PP
 The
@@ -21,6 +24,7 @@ is scanned for the first entry that matches the (user, host) combination, or, in
 .PP
 Each line of the login access control table has three fields separated by a ":" character:
 .PP
+
 \fIpermission\fR:\fIusers\fR:\fIorigins\fR
 .PP
 The first field should be a "\fI+\fR" (access granted) or "\fI\-\fR" (access denied) character. The second field should be a list of one or more login names, group names, or
@@ -37,9 +41,10 @@ operator makes it possible to write very compact rules.
 .PP
 The group file is searched only when a name does not match that of the logged\-in user. Only groups are matched in which users are explicitly listed: the program does not look at a user's primary group id value.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/login.defs\fR
-shadow password suite configuration
+Shadow password suite configuration.
 .SH "SEE ALSO"
 .PP
+
 \fBlogin\fR(1).

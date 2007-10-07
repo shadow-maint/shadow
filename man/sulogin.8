@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SULOGIN" "8" "12/07/2005" "System Management Commands" "System Management Commands"
+.\"     Title: sulogin
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "SULOGIN" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -15,6 +18,7 @@ sulogin \- Single\-user login
 [\fItty\-device\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBsulogin\fR
 is invoked by
 \fBinit\fR
@@ -26,7 +30,8 @@ has an entry for a single user login.
 .PP
 The user is prompted
 .PP
-Type control\-d to proceed with normal startup,(or give root password for system maintenance):
+Type control\-d to proceed with normal startup,
+(or give root password for system maintenance):
 .PP
 Input and output will be performed with the standard file descriptors unless the optional device name argument is provided.
 .PP
@@ -53,14 +58,15 @@ should execute the sulogin command in single user mode.
 .PP
 As complete an environment as possible is created. However, various devices may be unmounted or uninitialized and many of the user commands may be unavailable or nonfunctional as a result.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
+
 \fBlogin\fR(1),
 \fBsh\fR(1),
 \fBinit\fR(8).

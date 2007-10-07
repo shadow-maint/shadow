@@ -29,26 +29,26 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chsh.1,v 1.5 2005/12/01 20:38:25 kloczek Exp $
+.\"	$Id: chsh.1,v 1.6 2006/04/24 18:43:40 kloczek Exp $
 .\"
 .TH CHSH 1
 .SH NÉV
-chsh \- bejelentkezési parancsértelmező (héjj) állítása
+chsh \- bejelentkezési parancsértelmező (héj) állítása
 .SH ÁTTEKINTÉS
 .TP 5
 \fBchsh\fR
-[\fB\-s\fR \fIhéjjprogram\fR] [\fIfelhasználó\fR]
+[\fB\-s\fR \fIhéjprogram\fR] [\fIfelhasználó\fR]
 .SH LEÍRÁS
 A \fBchsh\fR parancs a felhasználó bejelentkezési parancsértelmezőjét változtatja meg.
 Normál felhasználó csak a saját parancsértelmezőjét állíthatja, a 
 rendszergazda bárkiét.
 .PP
-A héjjprogrammal (shell) szemben támasztott követelmény, hogy szerepeljen
+A héjprogrammal (shell) szemben támasztott követelmény, hogy szerepeljen
 a \fI/etc/shells\fR fájlban, kivéve ha a rendszergazdáé mert
 neki minden beállítás elfogadott.
 Korlátozott parancsértelmezőt nem lehet másikra átállítani.
 Ezért nem tanácsos a \fB/bin/rsh\fR\-nak a \fI/etc/shells\fR\-ben
-való felsorolása, mert ha a felhasználó átvált erre a héjj\-ra
+való felsorolása, mert ha a felhasználó átvált erre a héj\-ra
 nem válthat másikra.
 .PP
 A \fB\-s\fR opció nélkül a \fBchsh\fR interaktív módon
@@ -62,4 +62,4 @@ az éppen aktuális beállítás maradjon, ami \fB[ ]\fR jelek között láthat�
 .BR chfn (1),
 .BR passwd (5)
 .SH MAGYAR FORDÍTÁS
-Szekely Krisztian <szekelyk@edasz.hu>
+Székely Krisztián <szekelyk@edasz.hu>

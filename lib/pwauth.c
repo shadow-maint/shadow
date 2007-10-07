@@ -30,13 +30,14 @@
 #include <config.h>
 
 #ifndef USE_PAM
-#ident "$Id: pwauth.c,v 1.20 2006/03/11 21:15:55 kloczek Exp $"
+#ident "$Id: pwauth.c,v 1.22 2006/05/12 22:54:22 kloczek Exp $"
 
-#include <sys/types.h>
-#include <signal.h>
-#include <fcntl.h>
-#include <stdio.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "pwauth.h"
@@ -50,8 +51,9 @@ static const char *PROMPT = gettext_noop ("Password: ");
 static const char *PROMPT = gettext_noop ("%s's Password: ");
 #endif
 
-extern char *getpass ();
+#ifdef  SKEY
 extern char *getpass_with_echo ();
+#endif
 
 int wipe_clear_pass = 1;
 char *clear_pass = NULL;

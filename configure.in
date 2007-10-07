@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.15)
+AM_INIT_AUTOMAKE(shadow, 4.0.16)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -195,12 +195,6 @@ AC_DEFINE(USE_SYSLOG, 1, [Define to use syslog().])
 AC_DEFINE(RLOGIN, 1, [Define if login should support the -r flag for rlogind.])
 AC_DEFINE(RUSEROK, 0, [Define to the ruserok() "success" return value (0 or 1).])
 
-dnl Use our own version of getpass(), which handles long passwords
-dnl (unlike many systems which have a limit of 8 characters), and can
-dnl be interrupted with Ctrl-C (unlike Linux libc).
-AC_DEFINE(getpass, libshadow_getpass,
-	[Define to libshadow_getpass to use our own version of getpass().])
-
 AC_ARG_ENABLE(shadowgrp,
 	[AC_HELP_STRING([--enable-shadowgrp], [enable shadow group support @<:@default=yes@:>@])],
 	[case "${enableval}" in
@@ -258,8 +252,8 @@ if test "$enable_man" = "yes"; then
 	dnl check for DocBook DTD and stylesheets in the local catalog.
 	JH_CHECK_XML_CATALOG([-//OASIS//DTD DocBook XML V4.1.2//EN],
 		[DocBook XML DTD V4.1.2], [], enable_man=no)
-	JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl],
-		[DocBook XSL Stylesheets], [], enable_man=no)
+	JH_CHECK_XML_CATALOG([http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl],
+		[DocBook XSL Stylesheets >= 1.70.1], [], enable_man=no)
 fi
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
 
@@ -293,7 +287,8 @@ if test "$with_selinux" = "yes"; then
 		[LIBSELINUX="-lselinux"],
 		[AC_MSG_ERROR([libselinux not found])])
 	AC_SUBST(LIBSELINUX)
-	AC_CHECK_HEADERS(selinux/selinux.h, [], [selinux/selinux.h is missing])
+	AC_CHECK_HEADERS(selinux/selinux.h, [],
+		[AC_MSG_ERROR([selinux/selinux.h is missing])])
 	AC_DEFINE(WITH_SELINUX, 1, [Build shadow with SELinux support])
 fi
 
@@ -301,12 +296,14 @@ AC_SUBST(LIBPAM)
 if test "$with_libpam" = "yes"; then
 	AC_CHECK_LIB(pam, pam_start,
 		[AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
+		AM_CONDITIONAL(USE_PAM, [true])
 		LIBPAM="-lpam"
 		AC_CHECK_LIB(pam_misc, main,
 			[LIBPAM="$LIBPAM -lpam_misc"],
 			AC_MSG_ERROR(libpam_misc is missing for enable PAM support)
 		)],
 		[AC_MSG_CHECKING(use login access checking if PAM not used)
+		AM_CONDITIONAL(USE_PAM, [false])
 		AC_MSG_RESULT(yes)]
 	)
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
@@ -315,6 +312,7 @@ else
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_DEFINE(SU_ACCESS, 1, [Define to support /etc/suauth su access control.])
 	AC_MSG_RESULT(yes)
+	AM_CONDITIONAL(USE_PAM, [false])
 fi
 
 AC_SUBST(LIBSKEY)
@@ -330,6 +328,9 @@ if test "$with_skey" = "yes"; then
 	],[
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
 	],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])])
+	dnl libshadow_getpass() handles password prompt with enabled echo
+	AC_DEFINE(getpass, libshadow_getpass,
+		[Define to libshadow_getpass to use our own version of getpass().])
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)

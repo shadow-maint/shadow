@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GSHADOW" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: gshadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "GSHADOW" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,20 +14,23 @@
 gshadow \- shadowed group file
 .SH "DESCRIPTION"
 .PP
+
 \fI/etc/gshadow\fR
 contains the shadowed information for group accounts. It contains lines with the following colon\-separated fields:
-.TP 3
+.TP 3n
 \(bu
 group name
-.TP
+.TP 3n
 \(bu
 encrypted password
-.TP
+.TP 3n
 \(bu
 comma\-separated list of group administrators
-.TP
+.TP 3n
 \(bu
 comma\-separated list of group members
+.sp
+.RE
 .PP
 The group name and password fields must be filled. The encrypted password consists of characters from the 64\-character alphabet a thru z, A thru Z, 0 thru 9, \\. and /. Refer to
 \fBcrypt\fR(3)
@@ -37,14 +43,15 @@ This information supersedes any password present in
 .PP
 This file must not be readable by regular users if password security is to be maintained.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/gshadow\fR
-secure group account information
+Secure group account information.
 .SH "SEE ALSO"
 .PP
+
 \fBgroup\fR(5),
 \fBgpasswd\fR(5),
 \fBnewgrp\fR(5).

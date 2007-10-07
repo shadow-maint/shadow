@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chsh.1'>
-  <!-- $Id: chsh.1.xml,v 1.19 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: chsh.1.xml,v 1.21 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chsh</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -60,19 +58,19 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shells</filename></term>
 	<listitem>
-	  <para>list of valid login shells</para>
+	  <para>List of valid login shells.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
-	  <para>shadow password suite configuration</para>
+	  <para>Shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

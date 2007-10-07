@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chfn.c,v 1.39 2006/02/21 22:44:35 kloczek Exp $"
+#ident "$Id: chfn.c,v 1.41 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -344,14 +344,14 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: cannot change user `%s' on NIS client.\n"),
+			 _("%s: cannot change user '%s' on NIS client.\n"),
 			 Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _
-				 ("%s: `%s' is the NIS master for this client.\n"),
+				 ("%s: '%s' is the NIS master for this client.\n"),
 				 Prog, nis_master);
 		}
 		exit (E_NOPERM);
@@ -472,31 +472,31 @@ int main (int argc, char **argv)
 	 * Check all of the fields for valid information
 	 */
 	if (valid_field (fullnm, ":,=")) {
-		fprintf (stderr, _("%s: invalid name: \"%s\"\n"), Prog, fullnm);
+		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (roomno, ":,=")) {
-		fprintf (stderr, _("%s: invalid room number: \"%s\"\n"),
+		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
 			 Prog, roomno);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (workph, ":,=")) {
-		fprintf (stderr, _("%s: invalid work phone: \"%s\"\n"),
+		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
 			 Prog, workph);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (homeph, ":,=")) {
-		fprintf (stderr, _("%s: invalid home phone: \"%s\"\n"),
+		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
 			 Prog, homeph);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (slop, ":")) {
 		fprintf (stderr,
-			 _("%s: \"%s\" contains illegal characters\n"),
+			 _("%s: '%s' contains illegal characters\n"),
 			 Prog, slop);
 		closelog ();
 		exit (E_NOPERM);

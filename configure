@@ -462,7 +462,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE LN_S YACC CPP EGREP U ANSI2KNR build build_cpu build_vendor build_os host host_cpu host_vendor host_os ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL LIBOBJS XSLTPROC XML_CATALOG_FILE XMLCATALOG ENABLE_REGENERATE_MAN_TRUE ENABLE_REGENERATE_MAN_FALSE LIBCRYPT LIBAUDIT LIBCRACK LIBSELINUX LIBPAM LIBSKEY LIBMD MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE INTL_MACOSX_LIBS LIBICONV LTLIBICONV INTLLIBS LIBINTL LTLIBINTL POSUB USE_NLS_TRUE USE_NLS_FALSE LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE LN_S YACC CPP EGREP U ANSI2KNR build build_cpu build_vendor build_os host host_cpu host_vendor host_os ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL LIBOBJS XSLTPROC XML_CATALOG_FILE XMLCATALOG ENABLE_REGENERATE_MAN_TRUE ENABLE_REGENERATE_MAN_FALSE LIBCRYPT LIBAUDIT LIBCRACK LIBSELINUX LIBPAM USE_PAM_TRUE USE_PAM_FALSE LIBSKEY LIBMD MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE INTL_MACOSX_LIBS LIBICONV LTLIBICONV INTLLIBS LIBINTL LTLIBINTL POSUB USE_NLS_TRUE USE_NLS_FALSE LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1822,7 +1822,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.15
+ VERSION=4.0.16
 
 
 cat >>confdefs.h <<_ACEOF
@@ -22149,12 +22149,6 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 
-
-cat >>confdefs.h <<\_ACEOF
-#define getpass libshadow_getpass
-_ACEOF
-
-
 # Check whether --enable-shadowgrp or --disable-shadowgrp was given.
 if test "${enable_shadowgrp+set}" = set; then
   enableval="$enable_shadowgrp"
@@ -22745,11 +22739,11 @@ echo "${ECHO_T}not found" >&6
   fi
 
 
-    echo "$as_me:$LINENO: checking for DocBook XSL Stylesheets in XML catalog" >&5
-echo $ECHO_N "checking for DocBook XSL Stylesheets in XML catalog... $ECHO_C" >&6
+    echo "$as_me:$LINENO: checking for DocBook XSL Stylesheets >= 1.70.1 in XML catalog" >&5
+echo $ECHO_N "checking for DocBook XSL Stylesheets >= 1.70.1 in XML catalog... $ECHO_C" >&6
   if $jh_found_xmlcatalog && \
-     { (echo "$as_me:$LINENO: \$XMLCATALOG --noout \"\$XML_CATALOG_FILE\" \"http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl\" >&2") >&5
-  ($XMLCATALOG --noout "$XML_CATALOG_FILE" "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl" >&2) 2>&5
+     { (echo "$as_me:$LINENO: \$XMLCATALOG --noout \"\$XML_CATALOG_FILE\" \"http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl\" >&2") >&5
+  ($XMLCATALOG --noout "$XML_CATALOG_FILE" "http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl" >&2) 2>&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; then
@@ -23512,7 +23506,9 @@ if test `eval echo '${'$as_ac_Header'}'` = yes; then
 _ACEOF
 
 else
-  selinux/selinux.h is missing
+  { { echo "$as_me:$LINENO: error: selinux/selinux.h is missing" >&5
+echo "$as_me: error: selinux/selinux.h is missing" >&2;}
+   { (exit 1); exit 1; }; }
 fi
 
 done
@@ -23596,6 +23592,16 @@ cat >>confdefs.h <<\_ACEOF
 #define USE_PAM 1
 _ACEOF
 
+
+
+if true; then
+  USE_PAM_TRUE=
+  USE_PAM_FALSE='#'
+else
+  USE_PAM_TRUE='#'
+  USE_PAM_FALSE=
+fi
+
 		LIBPAM="-lpam"
 		echo "$as_me:$LINENO: checking for main in -lpam_misc" >&5
 echo $ECHO_N "checking for main in -lpam_misc... $ECHO_C" >&6
@@ -23667,6 +23673,16 @@ fi
 else
   echo "$as_me:$LINENO: checking use login access checking if PAM not used" >&5
 echo $ECHO_N "checking use login access checking if PAM not used... $ECHO_C" >&6
+
+
+if false; then
+  USE_PAM_TRUE=
+  USE_PAM_FALSE='#'
+else
+  USE_PAM_TRUE='#'
+  USE_PAM_FALSE=
+fi
+
 		echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
 
@@ -23686,6 +23702,16 @@ _ACEOF
 
 	echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
+
+
+if false; then
+  USE_PAM_TRUE=
+  USE_PAM_FALSE='#'
+else
+  USE_PAM_TRUE='#'
+  USE_PAM_FALSE=
+fi
+
 fi
 
 
@@ -23889,6 +23915,11 @@ sed 's/^/| /' conftest.$ac_ext >&5
 
 fi
 rm -f conftest.err conftest.$ac_objext conftest.$ac_ext
+
+cat >>confdefs.h <<\_ACEOF
+#define getpass libshadow_getpass
+_ACEOF
+
 fi
 
 
@@ -25912,6 +25943,27 @@ echo "$as_me: error: conditional \"ENABLE_REGENERATE_MAN\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
+if test -z "${USE_PAM_TRUE}" && test -z "${USE_PAM_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${USE_PAM_TRUE}" && test -z "${USE_PAM_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${USE_PAM_TRUE}" && test -z "${USE_PAM_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"USE_PAM\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
 if test -z "${USE_NLS_TRUE}" && test -z "${USE_NLS_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"USE_NLS\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -26567,6 +26619,8 @@ s,@LIBAUDIT@,$LIBAUDIT,;t t
 s,@LIBCRACK@,$LIBCRACK,;t t
 s,@LIBSELINUX@,$LIBSELINUX,;t t
 s,@LIBPAM@,$LIBPAM,;t t
+s,@USE_PAM_TRUE@,$USE_PAM_TRUE,;t t
+s,@USE_PAM_FALSE@,$USE_PAM_FALSE,;t t
 s,@LIBSKEY@,$LIBSKEY,;t t
 s,@LIBMD@,$LIBMD,;t t
 s,@MKINSTALLDIRS@,$MKINSTALLDIRS,;t t

@@ -1,14 +1,14 @@
 # Swedish translation of shadow.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2006 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the shadow package.
-# Daniel Nylander <po@danielnylander.se>, 2005.
+# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-07 20:06+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-05-08 14:02+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgid "Incorrect password for %s.\n"
 msgstr "Felaktigt lösenord för %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
 msgstr "Kunde inte byta katalog till \"%s\"\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -153,12 +153,12 @@ msgid "Cannot execute %s"
 msgstr "Kunde inte starta %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
 msgstr "Felaktig rotkatalog \"%s\"\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Kan inte ändra rot-katalog till \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Kan inte ändra rotkatalog till \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr "Ingen utmp post.  Du måste köra \"login\" från den lägsta nivån \"sh\""
@@ -302,7 +302,7 @@ msgstr "%s: kan inte öppna skugglösenordsfilen\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: misslyckades att kasta rättigheterna (%s)\n"
+msgstr "%s: misslyckades med att kasta rättigheterna (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -377,35 +377,35 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan inte fastställa ditt användarnamn.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: kan inte ändra användare `%s' på en NIS-klient.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: kan inte ändra användare \"%s\" på en NIS-klient.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' är NIS-master för denna klient.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: \"%s\" är NIS-master för denna klient.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Ändrar användarinformationen för %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: ogiltigt namn: \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: ogiltigt rumsnummer: \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: ogiltigt telefonummer (arbete): \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: ogiltigt telefonnummer (arbete): \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: ogiltigt telefonnummer (hem): \"%s\"\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\" innehåller ogiltiga tecken\n"
 
 #, c-format
@@ -860,24 +860,40 @@ msgid "invalid group file entry\n"
 msgstr "ogiltig post i gruppfil\n"
 
 #, c-format
-msgid "delete line `%s'? "
-msgstr "ta bort rad '%s'? "
+msgid "delete line '%s'? "
+msgstr "ta bort rad \"%s\"? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "dubblerade grupposter\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
-msgstr "ogiltigt gruppnamn `%s'\n"
+msgid "invalid group name '%s'\n"
+msgstr "ogiltigt gruppnamn \"%s\"\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupp %s: ingen användare %s\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "ta bort medlemmen `%s'? "
+msgid "delete member '%s'? "
+msgstr "ta bort medlem \"%s\"? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "ingen matchande gruppfilspost i %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "lägg till grupp \"%s\" i %s ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: kan inte uppdatera skuggpost för %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: kan inte uppdatera post för gruppen %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -888,16 +904,12 @@ msgid "duplicate shadow group entry\n"
 msgstr "duplikata poster i skuggrupp\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "ingen matchande post i gruppfil\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "skuggrupp %s: ingen administrativ användare %s\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
-msgstr "ta bort den administrative medlemmen `%s'? "
+msgid "delete administrative member '%s'? "
+msgstr "ta bort administrativ medlem \"%s\"? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -926,14 +938,6 @@ msgstr "%s: kan inte öppna filen för skuggrupper\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: kan inte ta bort skuggruppen %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: kan inte uppdatera skuggpost för %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: kan inte uppdatera post för gruppen %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1034,12 +1038,12 @@ msgstr ""
 "Inloggning tog slut efter %d sekunder.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " den `%.100s' från `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " den \"%.100s\" från \"%.200s\""
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " den `%.100s'"
+msgid " on '%.100s'"
+msgstr " den \"%.100s\""
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1297,7 +1301,7 @@ msgstr "duplikata lösenordsposter\n"
 
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "ogiltigt användarnamn '%s'\n"
+msgstr "ogiltigt användarnamn \"%s\"\n"
 
 #, c-format
 msgid "user %s: no group %u\n"
@@ -1312,16 +1316,24 @@ msgid "user %s: program %s does not exist\n"
 msgstr "användare %s: programmet %s finns inte\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "ingen matchande lösenordfilpost i %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "lägg till grupp \"%s\" i %s? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: kan inte uppdatera lösenordspost för %s\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "ogiltig post i skugglösenordsfil\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "duplikat post för skugglösenord\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "ingen matchande post i lösenordfilen\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1338,10 +1350,6 @@ msgstr "%s: kan inte öppna lösenordsfilen\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: kan inte ta bort skuggposten för %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: kan inte uppdatera lösenordspost för %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1439,7 +1447,7 @@ msgstr "Ingen lösenordsfil\n"
 
 #, c-format
 msgid "No password entry for 'root'\n"
-msgstr "Ingen lösenordspost för 'root'\n"
+msgstr "Ingen lösenordspost för \"root\"\n"
 
 msgid ""
 "\n"
@@ -1454,8 +1462,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Går över till läge för systemunderhåll\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: ogiltigt numeriskt argument `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ogiltigt numeriskt argument \"%s\"\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1478,8 +1486,8 @@ msgid "%s: rename: %s"
 msgstr "%s: byt namn: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: gruppen `%s' är en NIS-grupp.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: gruppen \"%s\" är en NIS-grupp.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1542,27 +1550,27 @@ msgstr ""
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: UID %u är inte unik\n"
+msgstr "%s: UID %u är inte unikt\n"
 
 #, c-format
 msgid "%s: can't get unique UID\n"
 msgstr "%s: kan inte få tag i unikt UID\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ogiltig baskatalog \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
-msgstr "%s: ogiltig kommentar `%s'\n"
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s: ogiltig kommentar \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: ogiltig hem-katalog `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s: ogiltig hemkatalog \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
-msgstr "%s: ogiltigt datum `%s'\n"
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: ogiltigt datum \"%s\"\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1573,16 +1581,16 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: skugglösenord krävs för -f\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: ogiltigt fält `%s'\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: ogiltigt fält \"%s\"\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
-msgstr "%s: ogiltigt skal `%s'\n"
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s: ogiltigt skal \"%s\"\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: ogiltigt användarnamn '%s'\n"
+msgstr "%s: ogiltigt användarnamn \"%s\"\n"
 
 #, c-format
 msgid "%s: cannot rewrite password file\n"
@@ -1636,15 +1644,16 @@ msgstr "%s: fel vid tilläggning av ny skugglösenordspost\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: kan inte skapa katalog %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Ingen grupp kallad \"mail\" finns, skapar mail spool med rättigheterna "
-"0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Kan inte skapa mail spool för användaren %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1670,8 +1679,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: varning: CREATE_HOME stöds inte, vänligen använd -m istället.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Användning: %s [-r] namn\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1826,7 +1841,8 @@ msgstr "%s: kan inte chown %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr "%s: varning: misslyckades att komplett ta bort gamla hem-katalogen %s"
+msgstr ""
+"%s: varning: misslyckades med att ta bort hela den gamla hemkatalogen %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -1837,10 +1853,10 @@ msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: varning: %s ägs inte av %s\n"
 
 msgid "failed to change mailbox owner"
-msgstr "misslyckades att byta ägare på postlåda"
+msgstr "misslyckades med att byta ägare på postlåda"
 
 msgid "failed to rename mailbox"
-msgstr "misslyckades att byta namn på postlåda"
+msgstr "misslyckades med att byta namn på postlåda"
 
 #, c-format
 msgid ""
@@ -1881,8 +1897,10 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kan inte återställa %s: %s (dina ändringar finns i %s)\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Felaktigt inloggningsförsök\n"
+#~ "Ingen grupp kallad \"mail\" finns, skapar mail spool med rättigheterna "
+#~ "0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Kan inte skapa mail spool för användaren %s.\n"

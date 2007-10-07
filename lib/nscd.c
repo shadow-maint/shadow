@@ -87,7 +87,7 @@ int nscd_flush_cache (char *service)
 
 	req.version = NSCD_VERSION;
 	req.type = INVALIDATE;
-	req.key_len = strlen (service);
+	req.key_len = strlen (service) + 1;
 
 	iov[0].iov_base = &req;
 	iov[0].iov_len = sizeof (req);

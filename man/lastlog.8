@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LASTLOG" "8" "01/02/2006" "System Management Commands" "System Management Commands"
+.\"     Title: lastlog
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "LASTLOG" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,6 +17,7 @@ lastlog \- examine lastlog file
 \fBlastlog\fR [\fIoptions\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBlastlog\fR
 formats and prints the contents of the last login log
 \fI/var/log/lastlog\fR
@@ -28,23 +32,23 @@ will be printed. The default (no flags) causes lastlog entries to be printed, so
 The options which apply to the
 \fBlastlog\fR
 command are:
-.TP
+.TP 3n
 \fB\-b\fR, \fB\-\-before\fR \fIDAYS\fR
 Print only lastlog records older than
 \fIDAYS\fR.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
 Display help message and exit.
-.TP
+.TP 3n
 \fB\-t\fR, \fB\-\-time\fR \fIDAYS\fR
 Print the lastlog records more recent than
 \fIDAYS\fR.
-.TP
+.TP 3n
 \fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR
 Print the lastlog record for user with specified
 \fILOGIN\fR
 only.
-.TP
+.TP 3n
 The \fB\-t\fR flag overrides the use of \fB\-u\fR.
 .PP
 If the user has never logged in the message
@@ -56,9 +60,9 @@ The
 \fIlastlog\fR
 file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is much smaller than the one shown by "\fBls \-l\fR" (which can indicate a really big file if you have a high UID). You can display its real size with "\fBls \-s\fR".
 .SH "FILES"
-.TP
+.TP 3n
 \fI/var/log/lastlog\fR
-lastlog logging file
+Database times of previous user logins.
 .SH "CAVEATS"
 .PP
 Large gaps in UID numbers will cause the lastlog program to run longer with no output to the screen (i.e. if mmdf=800 and last UID=170, program will appear to hang as it processes UID 171\-799).

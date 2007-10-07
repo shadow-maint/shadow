@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: setupenv.c,v 1.21 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: setupenv.c,v 1.24 2006/05/12 23:11:13 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -186,8 +186,8 @@ void setup_env (struct passwd *info)
 {
 #ifndef USE_PAM
 	char *envf;
-#endif
 	char *cp;
+#endif
 
 	/*
 	 * Change the current working directory to be the home directory
@@ -204,7 +204,7 @@ void setup_env (struct passwd *info)
 		static char temp_pw_dir[] = "/";
 
 		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
-			fprintf (stderr, _("Unable to cd to \"%s\"\n"),
+			fprintf (stderr, _("Unable to cd to '%s'\n"),
 				 info->pw_dir);
 			SYSLOG ((LOG_WARN,
 				 "unable to cd to `%s' for user `%s'\n",
@@ -265,16 +265,18 @@ void setup_env (struct passwd *info)
 	 * knows the prefix.
 	 */
 
-	if ((cp = getdef_str ("MAIL_DIR")))
-		addenv_path ("MAIL", cp, info->pw_name);
-	else if ((cp = getdef_str ("MAIL_FILE")))
-		addenv_path ("MAIL", info->pw_dir, cp);
-	else {
+	if (getdef_bool ("MAIL_CHECK_ENAB")) {
+		if ((cp = getdef_str ("MAIL_DIR")))
+			addenv_path ("MAIL", cp, info->pw_name);
+		else if ((cp = getdef_str ("MAIL_FILE")))
+			addenv_path ("MAIL", info->pw_dir, cp);
+		else {
 #if defined(MAIL_SPOOL_FILE)
-		addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
+			addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
 #elif defined(MAIL_SPOOL_DIR)
-		addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
+			addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
 #endif
+		}
 	}
 
 	/*

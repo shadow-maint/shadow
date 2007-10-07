@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2005-09-05 13:05+0200\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -147,8 +147,8 @@ msgid "Incorrect password for %s.\n"
 msgstr "Nieprawidłowe hasło %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
-msgstr "Nie można zmienić katalogu na \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
+msgstr "Nie można zmienić katalogu na '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Brak katalogu, loguję z HOME=/"
@@ -158,12 +158,12 @@ msgid "Cannot execute %s"
 msgstr "Nie można uruchomić %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
-msgstr "Nieprawidłowy katalog główny \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
+msgstr "Nieprawidłowy katalog główny '%s'\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Nie można zmienić głównego katalogu na \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Nie można zmienić głównego katalogu na '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -205,7 +205,7 @@ msgstr ""
 "Opcje:\n"
 "  -d, --lastday OSTATNI\t\tustawia date ostatniej zmiany hasła na OSTATNI\n"
 "  -E, --expiredate DATA_WAŻN\tustawia datę ważności konta na DATA_WAŻN\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -I, --inactive NIEAKTYWNE\tustwia liczbę dni nieaktywności konta po\n"
 "\t\t\t\tktórych konta jest blokowane na NIEAKTYWNE\n"
 "  -l, --list\t\t\twyświetlenie informacji o terminach ważności konta i "
@@ -213,7 +213,7 @@ msgstr ""
 "  -m, --mindays MIN_DNI\t\tustawia minimalną liczbę dni pomiędzy zmianami "
 "hasła\n"
 "\t\t\t\tna wartość MIN_DNI\n"
-"  -M, --maxdays MAX_DAYS\tustawia maksymalną liczbę dni, przez jakie hasło\n"
+"  -M, --maxdays MAX_DNI\tustawia maksymalną liczbę dni, przez jakie hasło\n"
 "\t\t\t\tjest ważne na wartość MAX_DNI\n"
 "  -W, --warndays DNI_OSTRZ\tustawia na DNI_OSTRZ liczbę dni przed\n"
 "\t\t\t\tupływem ważności hasła\n"
@@ -385,36 +385,36 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Nie można ustalić twojej nazwy użytkownika.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: nie można zmienić użytkownika `%s' na kliencie NIS.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: nie można zmienić użytkownika '%s' na kliencie NIS.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' jest nadrzędnym serwerem NIS dla tego klienta.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' jest nadrzędnym serwerem NIS dla tego klienta.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Zmieniam informację o użytkowniku %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: nieprawidłowa nazwa: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s: nieprawidłowa nazwa: '%s'\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: nieprawidłowy numer pokoju: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s: nieprawidłowy numer pokoju: '%s'\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: nieprawidłowy numer telefonu do pracy: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: nieprawidłowy numer telefonu do pracy: '%s'\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: nieprawidłowy numer telefonu domowego: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s: nieprawidłowy numer telefonu domowego: '%s'\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" zawiera nieprawidłowe znaki\n"
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s: '%s' zawiera nieprawidłowe znaki\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -462,7 +462,7 @@ msgstr ""
 "\n"
 "Opcje:\n"
 "  -e, --encrypted\tprzekazywane hasła są w postaci zakodowane\n"
-"  -h, --help\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy "
 "przekazywane\n"
 "\t\t\thasła nie są zakodowane\n"
@@ -525,7 +525,7 @@ msgstr ""
 "\n"
 "Opcje:\n"
 "  -e, --encrypted\tprzekazywane hasła są w postaci zakodowane\n"
-"  -h, --help\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy "
 "przekazywane\n"
 "\t\t\thasła nie są zakodowane\n"
@@ -592,7 +592,7 @@ msgstr ""
 "\n"
 "Opcje:\n"
 "  -a, --all\t\t\twyświetlaj rekordy failloga dla wszystkich użytkowników\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -l, --lock-time SEC\t\tustaw na SEC sekund blokadę konta po nieudanym "
 "logowaniu\n"
 "  -m, --maximum MAX\t\tustaw maksymalną ilość niepoprawnych logowań na MAX\n"
@@ -734,9 +734,9 @@ msgstr ""
 "  -f, --force\t\twymyś zakończenie programu z poprawnym statusem\n"
 "\t\t\t\tjeżeli grupa już istnieje\n"
 "  -g, --gid GID\t\tużyj GID dla tworzonej grupy\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -K, --key KEY=VALUE\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
-"  -o, --non-unique\t\tpozwól na utwożenie grupy z nieunikalnym GID\n"
+"  -o, --non-unique\t\tpozwól na utworzenie grupy z nieunikalnym GID\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -867,24 +867,40 @@ msgid "invalid group file entry\n"
 msgstr "nieprawidłowy wpis do pliku grup\n"
 
 #, c-format
-msgid "delete line `%s'? "
-msgstr "usunąć linię `%s'? "
+msgid "delete line '%s'? "
+msgstr "usunąć linię '%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "powtórzony wpis w pliku grup\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
-msgstr "nieprawidłowa nazwa grupy `%s'\n"
+msgid "invalid group name '%s'\n"
+msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupa %s: nie ma użytkownika %s\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "skasować członka `%s'? "
+msgid "delete member '%s'? "
+msgstr "skasować członka '%s'? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "brak pasującego wpisu w pliku group %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "dodać grupę '%s' w %s ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: nie można zaktualizować wpisu w pliku z ukrytymi hasłami dla %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: nie można zaktualizować wpisu dla grupy %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -895,18 +911,14 @@ msgid "duplicate shadow group entry\n"
 msgstr "powtórzony wpis w pliku z ukrytymi hasłami grup\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "brak pasującego wpisu w pliku grup\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr ""
 "grupa %s: użytkownik administracyjny %s z pliku ukrytych haseł grup nie "
 "istnieje\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
-msgstr "usunąć członka administracyjnego `%s'? "
+msgid "delete administrative member '%s'? "
+msgstr "usunąć członka administracyjnego '%s'? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -935,14 +947,6 @@ msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami grup\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: nie można usunąć grupy %s z pliku ukrytych haseł grup\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: nie można zaktualizować wpisu w pliku z ukrytymi hasłami dla %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: nie można zaktualizować wpisu dla grupy %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -981,11 +985,11 @@ msgstr ""
 "Użycie: lastlog [opcje]\n"
 "\n"
 "Opcje:\n"
-"  -b, --before DNI\twyświetl tylko rekordy lastlog starsze niż DNI\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -b, --before DNI\t\t\twyświetl tylko rekordy lastlog starsze niż DNI\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -t, --time DNI\t\twyświetl tylko rekordy lastlog nie starsze niż\n"
 "\t\t\t\tDNI\n"
-"  -u, --user LOGIN\twyświetl rekord lastlog tylko dla użytkownika\n"
+"  -u, --user LOGIN\t\twyświetl rekord lastlog tylko dla użytkownika\n"
 "\t\t\t\to loginie LOGIN\n"
 
 #, c-format
@@ -1044,12 +1048,12 @@ msgstr ""
 "Limit czasu logowania przekroczony po %d sekundach.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " na `%.100s' z `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " na '%.100s' z '%.200s'"
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " na `%.100s'"
+msgid " on '%.100s'"
+msgstr " na '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1212,23 +1216,23 @@ msgstr ""
 "  -a, --all\t\t\traportuj status hasła dla wszystkich kont\n"
 "  -d, --delete\t\t\tkasuje hasło użytkowanika\n"
 "  -e, --expire\t\t\twymuś przeterminowanie hasła\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -k, --keep-tokens\t\tzmiana hasła tylko w przypadku kiedy\n"
 "\t\t\t\tjest przeterminowane\n"
 "  -i, --inactive NIEAKTYWNE\tkonto przeterminowane po upływie NIEAKTYWNE\n"
 "\t\t\t\tdni po wygaśnięciu hasła\n"
 "  -l, --lock\t\t\tzablokuj konto\n"
-"  -n, --mindays MIN_DNI\tustaw minimalną ilość dni prezed kolejną zmianą\n"
+"  -n, --mindays MIN_DNI\t\tustaw minimalną ilość dni prezed kolejną zmianą\n"
 "\t\t\t\thasła na MIN_DNI\n"
 "  -n, --mindays MIN_DNI\t\tustawia minimalną liczbę dni pomiędzy zmianami\n"
-"\t\t\t\thasła na MIN_DAYS\n"
+"\t\t\t\thasła na MIN_DNI\n"
 "  -q, --quiet\t\t\tcichy tryb pracy\n"
 "  -r, --repository REPOZYTORIUM\tzmień hasło w repozytorium REPOZYTORIUM\n"
 "  -S, --status\t\t\traportuj status hasła\n"
 "  -u, --unlock\t\t\todblokuj konto\n"
 "  -w, --warndays DNI_OSTRZ\tustawia na DNI_OSTRZ liczbę dni przed\n"
 "\t\t\t\tupływem ważności hasła\n"
-"  -x, --maxdays MAX_DNI\tustawia maksymalną liczbę dni, przez jakie hasło\n"
+"  -x, --maxdays MAX_DNI\t\tustawia maksymalną liczbę dni, przez jakie hasło\n"
 "\t\t\t\tjest ważne na wartość MAX_DNI\n"
 
 msgid "Old password: "
@@ -1326,16 +1330,24 @@ msgid "user %s: program %s does not exist\n"
 msgstr "użytkownik %s: program %s nie istnieje\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "brak pasującego wpisu w pliku z hasłami %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "dodać grupę '%s' w %s ?"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: nie można zaktualizować wpisu w pliku z hasłami dla %s\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "nieprawidłowy wpis w pliku z hasłami\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "powtórzony wpis w pliku z ukrytymi hasłami\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "brak pasującego wpisu w pliku z hasłami\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1352,10 +1364,6 @@ msgstr "%s: nie można otworzyć pliku z hasłami\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: nie można usunąć wpisu z pliku z ukrytymi hasłami dla %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: nie można zaktualizować wpisu w pliku z hasłami dla %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1407,9 +1415,9 @@ msgid ""
 msgstr ""
 "Użycie: su [opcje] [LOGIN]\n"
 "\n"
-"Options:\n"
+"Opcje:\n"
 "  -c, --command POLECENIE\t\turuchom POLECENIE w to wywoływanym shellu\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -, -l, --login\turuchom z  powłoką z powłoką zgłoszeniową\n"
 "  -m, -p,\n"
 "  --preserve-environment\turuchomienie z zachowaniem zmiennych środowiska\n"
@@ -1467,8 +1475,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Wchodzę w tryb konserwacji systemu\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: nieprawidłowy argument numeryczny `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: nieprawidłowy argument numeryczny '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1491,8 +1499,8 @@ msgid "%s: rename: %s"
 msgstr "%s: zmiana nazwy: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: grupa `%s' jest grupą NIS.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: grupa '%s' jest grupą NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1537,18 +1545,20 @@ msgstr ""
 "  -d, --home-dir HOME_DIR\tkatalog domowy dla nowo tworzonego konta\n"
 "  -D, --defaults\t\twypisz lub zapisz domyślną konfigurację programu "
 "useradd\n"
-"  -e, --expiredate DATA_WAŻNOSCI\tustawia datę wazności dla nowo tworzonego\n"
-"\t\t\t\tkonta na DATA_WAŻNOSCI\n"
-"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni nieaktywności konta po\n"
-"\t\t\t\tktórych konta jest blokowane na NIEAKTYWNE\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -e, --expiredate DATA_WAŻN.\tustawia datę wazności dla nowo tworzonego "
+"konta\n"
+"\t\t\t\tna DATA_WAŻN.\n"
+"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni po których konto jest "
+"blokowane\n"
+"\t\t\t\tna NIEAKTYWNE\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -g, --gid GROUP\t\twymuś użycie konkretnej grupy dla nowo tworzonego "
 "konta\n"
 "  -G, --groups GROUPS\t\tlista dodatkowych grup dla nowo tworzonego konta\n"
 "  -k, --skel SKEL_DIR\t\tpodaj alternatywną ścieżkę do katalogu skel\n"
 "  -K, --key KEY=VALUE\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
 "  -m, --create-home\t\ttwóż katalog domowy dla nowego użytkownika\n"
-"  -o, --non-unique\t\tpozwól na utwożenie konta z nieunikalnym UID\n"
+"  -o, --non-unique\t\tpozwól na utworzenie konta z nieunikalnym UID\n"
 "  -p, --password PASSWORD\tużyj zakodowane hasło dla nowego tworzonego "
 "konta\n"
 "  -s, --shell SHELL\t\ttshell dla nowo tworzonego konta\n"
@@ -1563,20 +1573,20 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: nieprawidłowy katalog bazowy `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
+msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
-msgstr "%s: nieprawidłowy komentarz `%s'\n"
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s: nieprawidłowy komentarz '%s'\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: nieprawidłowy katalog domowy `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s: nieprawidłowy katalog domowy '%s'\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
-msgstr "%s: nieprawidłowa data `%s'\n"
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: nieprawidłowa data '%s'\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1587,12 +1597,12 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: ukryte hasła wymagane dla -f\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: nieprawidłowe pole `%s'\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: nieprawidłowe pole '%s'\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
-msgstr "%s: nieprawidłowa powłoka `%s'\n"
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s: nieprawidłowa powłoka '%s'\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1650,14 +1660,18 @@ msgstr "%s: błąd podczas dodawania nowego wpisu do pliku z ukrytymi hasłami\n
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: nie można utworzyć katalogu %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr ""
-"Nie istnieje grupa \"mail\", tworzenie skrzynki z uprawnieniami 0600.\n"
+msgid "Creating mailbox file"
+msgstr "Tworzenie pliku mailbox"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Nie można utworzyć skrzynki pocztowej dla użytkownika %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+"Nie znaleziono grupy 'mail'. Tworzenie pliku mailbox użytkownika z prawami "
+"dostępu 600.\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "Ustawianie praw dostępu do pliku mailbox"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1682,8 +1696,21 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: uwaga: CREATE_HOME nie jest obsługiwane, użyj opcji -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Użycie: %s [-r] nazwa\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Użycie: userdel [opcje] LOGIN\n"
+"\n"
+"Opcje:\n"
+"  -f, --force\t\t\twymuś usunięcie plików nawet jeżeli nie należą\n"
+"\t\t\t\tdo usuwanego użytkownika\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
+"  -r, --remove\t\t\tusuń katalog domowy i spool pocztowy\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1764,31 +1791,30 @@ msgid ""
 "  -u, --uid UID\t\t\tnew UID for the user account\n"
 "  -U, --unlock\t\t\tunlock the user account\n"
 msgstr ""
-"Użycie: useradd [opcje] login\n"
+"Użycie: usermod [opcje] login\n"
 "\n"
 "Opcje:\n"
-"  -b, --base-dir KAT_BAZOWY\tkatalog bazowy dla katalogu domowego nowo\n"
-"\t\t\t\ttworzonego konta\n"
-"  -c, --comment COMMENT\t\tustaw pole komentarza (GECOS) dla nowo\n"
-"\t\t\t\ttworzonego konta\n"
-"  -d, --home-dir HOME_DIR\tkatalog domowy dla nowo tworzonego konta\n"
-"  -D, --defaults\t\twypisz lub zapisz domyślną konfigurację programu "
-"useradd\n"
-"  -e, --expiredate DATA_WAŻNOSCI\tustawia datę wazności dla nowo tworzonego\n"
-"\t\t\t\tkonta na DATA_WAŻNOSCI\n"
-"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni nieaktywności konta po\n"
-"\t\t\t\tktórych konta jest blokowane na NIEAKTYWNE\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
-"  -g, --gid GROUP\t\twymuś użycie konkretnej grupy dla nowo tworzonego "
+"  -a, --append GRUPA\t\tdołącz użytkownika do do dodatkowej GRUPY\n"
+"  -c, --comment KOMENTARZ\tustaw pole komentarza (GECOS) dla tworzonego "
 "konta\n"
-"  -G, --groups GROUPS\t\tlista dodatkowych grup dla nowo tworzonego konta\n"
+"  -d, --home-dir HOME_DIR\tkatalog domowy dla nowo tworzonego konta\n"
+"  -e, --expiredate DATA_WAŻN.\tustawia datę wazności dla nowo tworzonego "
+"konta\n"
+"\t\t\t\tna DATA_WAŻN.\n"
+"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni po których konto jest "
+"blokowane\n"
+"\t\t\t\tna NIEAKTYWNE\n"
+"  -g, --gid GRUPA\t\twymuś użycie konkretnej grupy dla nowo tworzonego "
+"konta\n"
+"  -G, --groups GRUPY\t\tlista dodatkowych grup dla nowo tworzonego konta\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -k, --skel SKEL_DIR\t\tpodaj alternatywną ścieżkę do katalogu skel\n"
 "  -K, --key KEY=VALUE\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
 "  -m, --create-home\t\ttwóż katalog domowy dla nowego użytkownika\n"
-"  -o, --non-unique\t\tpozwól na utwożenie konta z nieunikalnym UID\n"
+"  -o, --non-unique\t\tpozwól na utworzenie konta z nieunikalnym UID\n"
 "  -p, --password PASSWORD\tużyj zakodowane hasło dla nowego tworzonego "
 "konta\n"
-"  -s, --shell SHELL\t\ttshell dla nowo tworzonego konta\n"
+"  -s, --shell SHELL\t\tSHELL dla nowo tworzonego konta\n"
 "  -u, --uid UID\t\t\twymuś użycie konkretnego UID dla nowo tworzonego konta\n"
 
 #, c-format
@@ -1873,7 +1899,7 @@ msgstr ""
 "\n"
 "Opcje:\n"
 "  -g, --group\t\t\tedycja bazy group\n"
-"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -p, --passwd\t\t\tedycja bazy passwd\n"
 "  -q, --quiet\t\t\tcichy tryb pracy\n"
 "  -s, --shadow\t\t\tedycja bazy shadow lub gshadow\n"

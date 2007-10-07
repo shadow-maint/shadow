@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='logoutd.8'>
-  <!-- $Id: logoutd.8.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: logoutd.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>logoutd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -39,13 +37,13 @@
       <varlistentry>
 	<term><filename>/etc/porttime</filename></term>
 	<listitem>
-	  <para>login and port permissions</para>
+	  <para>File containing port access.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/var/run/utmp</filename></term>
 	<listitem>
-	  <para>list of current login sessions</para>
+	  <para>List of current login sessions.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

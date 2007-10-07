@@ -1,10 +1,12 @@
 
 #include <config.h>
 
-#ident "$Id: commonio.c,v 1.31 2005/10/19 11:34:21 kloczek Exp $"
+#ident "$Id: commonio.c,v 1.32 2006/05/07 18:32:51 kloczek Exp $"
 
 #include "defines.h"
 #include <sys/stat.h>
+#include <stdlib.h>
+#include <limits.h>
 #include <utime.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -22,6 +24,7 @@ static security_context_t old_context = NULL;
 #include "commonio.h"
 
 /* local function prototypes */
+static int lrename (const char *, const char *);
 static int check_link_count (const char *);
 static int do_lock_file (const char *, const char *);
 static FILE *fopen_set_perms (const char *, const char *, const struct stat *);
@@ -35,6 +38,30 @@ static struct commonio_entry *find_entry_by_name (struct commonio_db *,
 
 static int lock_count = 0;
 static int nscd_need_reload = 0;
+
+/*
+ * Simple rename(P) alternative that attempts to rename to symlink
+ * target.
+ */
+int lrename (const char *old, const char *new)
+{
+
+	char resolved_path[PATH_MAX];
+	int res;
+
+#if defined(S_ISLNK)
+	struct stat sb = { 0 };
+	if (lstat (new, &sb) == 0 && S_ISLNK (sb.st_mode)) {
+		if (realpath (new, resolved_path) == NULL) {
+			perror ("realpath in lrename()");
+		} else {
+			new = resolved_path;
+		}
+	}
+#endif
+	res = rename (old, new);
+	return res;
+}
 
 static int check_link_count (const char *file)
 {
@@ -563,7 +590,7 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
 	struct commonio_entry *head = NULL, *pw_ptr, *spw_ptr;
 	const char *name;
 
-	if(!shadow || !shadow->head)
+	if (!shadow || !shadow->head)
 		return 0;
 
 	for (pw_ptr = passwd->head; pw_ptr; pw_ptr = pw_ptr->next) {
@@ -708,7 +735,7 @@ int commonio_close (struct commonio_db *db)
 		goto fail;
 	}
 
-	if (rename (buf, db->filename))
+	if (lrename (buf, db->filename))
 		goto fail;
 
 	nscd_need_reload = 1;

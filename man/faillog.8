@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "FAILLOG" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: faillog
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "FAILLOG" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,6 +17,7 @@ faillog \- display faillog records or set login failure limits
 \fBfaillog\fR [\fIoptions\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBfaillog\fR
 formats the contents of the failure log from
 \fI/var/log/faillog\fR
@@ -25,18 +29,18 @@ without arguments display only list of user faillog records who have ever had a 
 The options which apply to the
 \fBfaillog\fR
 command are:
-.TP
+.TP 3n
 \fB\-a\fR, \fB\-\-all\fR
 Display faillog records for all users.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
 Display help message and exit.
-.TP
+.TP 3n
 \fB\-l\fR, \fB\-\-lock\-time\fR \fISEC\fR
 Lock account to
 \fISEC\fR
 seconds after failed login.
-.TP
+.TP 3n
 \fB\-m\fR, \fB\-\-maximum\fR \fIMAX\fR
 Set maximum number of login failures after the account is disabled to
 \fIMAX\fR. Selecting
@@ -44,21 +48,22 @@ Set maximum number of login failures after the account is disabled to
 value of 0 has the effect of not placing a limit on the number of failed logins. The maximum failure count should always be 0 for
 \fIroot\fR
 to prevent a denial of services attack against the system.
-.TP
+.TP 3n
 \fB\-r\fR, \fB\-\-reset\fR
-Reset the counters of login failures or one record if used with the \-u
+Reset the counters of login failures or one record if used with the
+\fB\-u\fR
 \fILOGIN\fR
 option. Write access to
 \fI/var/log/faillog\fR
 is required for this option.
-.TP
+.TP 3n
 \fB\-t\fR, \fB\-\-time\fR \fIDAYS\fR
 Display faillog records more recent than
 \fIDAYS\fR. The
 \fB\-t\fR
 flag overrides the use of
 \fB\-u\fR.
-.TP
+.TP 3n
 \fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR
 Display faillog record or maintains failure counters and limits (if used with
 \fB\-l\fR,
@@ -69,6 +74,7 @@ options) only for user with
 \fILOGIN\fR.
 .SH "CAVEATS"
 .PP
+
 \fBfaillog\fR
 only prints out users with no successful login since the last failure. To print out a user who has had a successful login since their last failure, you must explicitly request the user with the
 \fB\-u\fR
@@ -76,10 +82,11 @@ flag, or print out all users with the
 \fB\-a\fR
 flag.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/var/log/faillog\fR
-failure logging file
+Failure logging file.
 .SH "SEE ALSO"
 .PP
+
 \fBlogin\fR(1),
 \fBfaillog\fR(5).

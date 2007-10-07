@@ -1,17 +1,20 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERDEL" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: userdel
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "USERDEL" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-userdel \- Delete a user account and related files
+userdel \- delete a user account and related files
 .SH "SYNOPSIS"
 .HP 8
-\fBuserdel\fR [\-f] [\-r] \fIlogin_name\fR
+\fBuserdel\fR [options] \fILOGIN\fR
 .SH "DESCRIPTION"
 .PP
 The
@@ -23,8 +26,8 @@ command modifies the system account files, deleting all entries that refer to
 The options which apply to the
 \fBuserdel\fR
 command are:
-.TP
-\fB\-f\fR
+.TP 3n
+\fB\-f\fR, \fB\-\-force\fR
 This option forces the removal of the user, even if she is still logged in. It also forces
 \fBuserdel\fR
 to remove the user's home directory or her mail spool, even if another user uses the same home directory or if the mail spool is not owned by the specified user. If
@@ -35,10 +38,14 @@ in
 \fI/etc/login.defs\fR
 and if a group exists with the same name as the deleted user, then this group will be removed, even if it is still the primary group of another user.
 .sp
+
 \fINote:\fR
-This option is dangerous and may let your system in an inconsistent state.
-.TP
-\fB\-r\fR
+This option is dangerous and may leave your system in an inconsistent state.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP 3n
+\fB\-r\fR, \fB\-\-remove\fR
 Files in the user's home directory will be removed along with the home directory itself and the user's mail spool. Files located in other file systems will have to be searched for and deleted manually.
 .sp
 The mail spool is defined by the
@@ -47,46 +54,47 @@ variable in the
 \fIlogin.defs\fR
 file.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/login.defs\fR
-shadow password suite configuration
-.TP
+Shadow password suite configuration.
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "EXIT VALUES"
 .PP
 The
 \fBuserdel\fR
 command exits with the following values:
-.TP
+.TP 3n
 \fI0\fR
 success
-.TP
+.TP 3n
 \fI1\fR
 can't update password file
-.TP
+.TP 3n
 \fI2\fR
 invalid command syntax
-.TP
+.TP 3n
 \fI6\fR
 specified user doesn't exist
-.TP
+.TP 3n
 \fI8\fR
 user currently logged in
-.TP
+.TP 3n
 \fI10\fR
 can't update group file
-.TP
+.TP 3n
 \fI12\fR
 can't remove home directory
 .SH "CAVEATS"
 .PP
+
 \fBuserdel\fR
 will not allow you to remove an account if the user is currently logged in. You must kill any running processes which belong to an account that you are deleting.
 .PP

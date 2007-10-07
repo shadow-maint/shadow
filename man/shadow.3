@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SHADOW" "3" "12/07/2005" "Library Calls" "Library Calls"
+.\"     Title: shadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: Library Calls
+.\"    Source: Library Calls
+.\"
+.TH "SHADOW" "3" "06/06/2006" "Library Calls" "Library Calls"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,33 +14,51 @@
 shadow, getspnam \- encrypted password file routines
 .SH "SYNTAX"
 .PP
+
 \fI#include <shadow.h>\fR
 .PP
+
 \fIstruct spwd *getspent();\fR
 .PP
-\fIstruct spwd *getspnam(char\fR\fI*name\fR\fI);\fR
+
+\fIstruct spwd *getspnam(char\fR
+\fI*name\fR\fI);\fR
 .PP
+
 \fIvoid setspent();\fR
 .PP
+
 \fIvoid endspent();\fR
 .PP
-\fIstruct spwd *fgetspent(FILE\fR\fI*fp\fR\fI);\fR
+
+\fIstruct spwd *fgetspent(FILE\fR
+\fI*fp\fR\fI);\fR
 .PP
-\fIstruct spwd *sgetspent(char\fR\fI*cp\fR\fI);\fR
+
+\fIstruct spwd *sgetspent(char\fR
+\fI*cp\fR\fI);\fR
 .PP
-\fIint putspent(struct spwd\fR\fI*p,\fR\fIFILE\fR\fI*fp\fR\fI);\fR
+
+\fIint putspent(struct spwd\fR
+\fI*p,\fR
+\fIFILE\fR
+\fI*fp\fR\fI);\fR
 .PP
+
 \fIint lckpwdf();\fR
 .PP
+
 \fIint ulckpwdf();\fR
 .SH "DESCRIPTION"
 .PP
+
 \fIshadow\fR
 manipulates the contents of the shadow password file,
 \fI/etc/shadow\fR. The structure in the
 \fI#include\fR
 file is:
 .sp
+.RS 3n
 .nf
 struct spwd {
       char		*sp_namp; /* user login name */
@@ -52,37 +73,39 @@ struct spwd {
 }
     
 .fi
+.RE
 .PP
 The meanings of each field are:
-.TP 3
+.TP 3n
 \(bu
 sp_namp \- pointer to null\-terminated user name
-.TP
+.TP 3n
 \(bu
 sp_pwdp \- pointer to null\-terminated password
-.TP
+.TP 3n
 \(bu
 sp_lstchg \- days since Jan 1, 1970 password was last changed
-.TP
+.TP 3n
 \(bu
 sp_min \- days before which password may not be changed
-.TP
+.TP 3n
 \(bu
 sp_max \- days after which password must be changed
-.TP
+.TP 3n
 \(bu
 sp_warn \- days before password is to expire that user is warned of pending password expiration
-.TP
+.TP 3n
 \(bu
 sp_inact \- days after password expires that account is considered inactive and disabled
-.TP
+.TP 3n
 \(bu
 sp_expire \- days since Jan 1, 1970 when account will be disabled
-.TP
+.TP 3n
 \(bu
 sp_flag \- reserved for future use
 .SH "DESCRIPTION"
 .PP
+
 \fIgetspent\fR,
 \fIgetspname\fR,
 \fIfgetspent\fR, and
@@ -101,6 +124,7 @@ using the provided string as input.
 searches from the current position in the file for an entry matching
 \fIname\fR.
 .PP
+
 \fIsetspent\fR
 and
 \fIendspent\fR
@@ -130,10 +154,11 @@ as the return value return 0 for success and \-1 for failure.
 .PP
 These routines may only be used by the super user as access to the shadow password file is restricted.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
+
 \fBgetpwent\fR(3),
 \fBshadow\fR(5).

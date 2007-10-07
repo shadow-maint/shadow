@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='grpck.8'>
-  <!-- $Id: grpck.8.xml,v 1.16 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: grpck.8.xml,v 1.18 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>grpck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -91,19 +89,19 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>secure group account information</para>
+	  <para>Secure group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.defs.5'>
-  <!--  $Id: login.defs.5.xml,v 1.16 2006/03/07 15:47:32 kloczek Exp $ -->
+  <!--  $Id: login.defs.5.xml,v 1.19 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login.defs</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -26,19 +24,18 @@
       This file is a readable text file, each line of the file describing
       one configuration parameter. The lines consist of a configuration name
       and value, separated by whitespace. Blank lines and comment lines are
-      ignored. Comments are introduced with a `#' pound sign and the pound
+      ignored. Comments are introduced with a "#" pound sign and the pound
       sign must be the first non-white character of the line.
     </para>
 
     <para>
       Parameter values may be of four types: strings, booleans, numbers, and
       long numbers. A string is comprised of any printable characters. A
-      boolean should be either the value &ldquo;yes&rdquo; or
-      &ldquo;no&rdquo;. An undefined boolean parameter or one with a value
-      other than these will be given a &ldquo;no&rdquo; value. Numbers (both
-      regular and long) may be either decimal values, octal values (precede
-      the value with &ldquo;0&rdquo;) or hexadecimal values (precede the
-      value with &ldquo;0x&rdquo;). The maximum value of the regular and
+      boolean should be either the value "yes" or "no". An undefined boolean
+      parameter or one with a value other than these will be given a "no"
+      value. Numbers (both regular and long) may be either decimal values,
+      octal values (precede the value with "0") or hexadecimal values
+      (precede the value with "0x"). The maximum value of the regular and
       long numeric parameters is machine-dependent.
     </para>
 
@@ -71,17 +68,7 @@
 	    compatibility, "yes" is equivalent to "rwh" and "no" is
 	    equivalent to "frwh". If not specified, only the superuser can
 	    make any changes. The most restrictive setting is better
-	    achieved by not installing chfn SUID.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>CREATE_HOME (boolean)</term>
-	<listitem>
-	  <para>
-	    This defines whether useradd should create home directories for
-	    users by default. This option is OR'ed with the
-	    <option>-m</option> flag on useradd command line.
+	    achieved by not installing <filename>chfn</filename> SUID.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -222,7 +209,7 @@
       <varlistentry>
 	<term>useradd</term>
 	<listitem>
-	  <para>CREATE_HOME
+	  <para>
 	    GID_MAX GID_MIN
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    UID_MAX UID_MIN

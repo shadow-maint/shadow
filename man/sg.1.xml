@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-		"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id='sg.1'>
-  <!-- $Id: sg.1.xml,v 1.9 2006/02/20 01:05:45 kloczek Exp $ -->
+  <!-- $Id: sg.1.xml,v 1.11 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>sg</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -47,25 +45,25 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	 </listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>shadow group file</para>
+	  <para>Secure group account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

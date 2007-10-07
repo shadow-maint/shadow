@@ -3,11 +3,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2005-12-26 02:12+0700\n"
-"Last-Translator: Parlin Imanuel Toh <pt@samip-online.com>\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-04-07 11:45+0700\n"
+"Last-Translator: Parlin Imanuel Toh <parlin_i@yahoo.com>\n"
 "Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +82,7 @@ msgid_plural ""
 "Last was %s on %s.\n"
 msgstr[0] ""
 "%d sejak login terakhir.\n"
-"Terakhir di %s pada %s.\n"
+"Terakhir %s pada %s.\n"
 
 #, c-format
 msgid "Too many logins.\n"
@@ -137,8 +137,8 @@ msgstr "passwd: kata sandi diperbaharui dengan sukses\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Kata sandi tidak tepat untuk %s\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "Tidak dapat cd ke \"%s\"\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -148,12 +148,12 @@ msgstr "Tidak terdapat direktori, masuk dengan HOME=/"
 msgid "Cannot execute %s"
 msgstr "Tidak dapat menjalankan %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "Direktori root tidak sah \"%s\"\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "Tidak dapat mengubah direktori root ke \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -374,36 +374,36 @@ msgstr "Lain-lain"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Tidak dapat menentukan nama pengguna anda.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: tidak dapat mengubah pengguna '%s' pada klien NIS.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: `%s' merupakan master NIS untuk klien ini.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Mengubah informasi pengguna dari %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: nama tidak sah: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: nomor ruang tidak sah: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: telepon kantor tidak sah: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: telepon rumah tidak sah: \"%s\"\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\" berisi karakter-karakter ilegal\n"
 
 #, c-format
@@ -438,7 +438,7 @@ msgstr "Tidak dapat menyimpan perubahan berkas kata sandi.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Tidak dapat membuka kunci berkas kata sandi.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: chgpasswd [options]\n"
 "\n"
@@ -448,7 +448,7 @@ msgid ""
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
 msgstr ""
-"Penggunaan: chpasswd [pilihan-pilihan]\n"
+"Penggunaan: chgpasswd [pilihan-pilihan]\n"
 "\n"
 "Pilihan-pilihan:\n"
 "  -e, --encrypted\tkata sandi yang diberikan telah terenkripsi\n"
@@ -464,9 +464,9 @@ msgstr "%s: tidak dapat mengunci berkas grup\n"
 msgid "%s: can't open group file\n"
 msgstr "%s: tidak dapat membuka berkas grup\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock gshadow file\n"
-msgstr "%s: tidak dapat mengunci berkas kata sandi bayangan\n"
+msgstr "%s: tidak dapat mengunci berkas gshadow\n"
 
 #, c-format
 msgid "%s: can't open shadow file\n"
@@ -480,9 +480,9 @@ msgstr "%s: baris %d: baris terlalu panjang\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: baris %d: kata sandi baru hilang\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: baris %d: pengguna %s tak dikenal\n"
+msgstr "%s: baris %d: grup %s tak dikenal\n"
 
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
@@ -854,25 +854,41 @@ msgstr "%s: tidak dapat membuka berkas %s\n"
 msgid "invalid group file entry\n"
 msgstr "entri berkas grup tidak sah\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "hapus baris `%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "entri grup berulang\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "nama grup `%s' tidak sah\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grup %s: tak ada pengguna %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "hapus anggota `%s'? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "entri tidak ditemukan pada berkas grup\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "grup bayangan %s: tak ada pengguna %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: tidak dapat memperbaharui entri bayangan untuk %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: tidak dapat memperbaharui entri untuk grup %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -883,15 +899,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "entri grup bayangan berulang\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "entri tidak ditemukan pada berkas grup\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "grup bayangan %s: tak ada pengguna administratif %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "hapus anggota administratif `%s'? "
 
 #, c-format
@@ -921,14 +933,6 @@ msgstr "%s: tidak dapat membuka berkas grup banyangan\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: tidak dapat menghapus grup bayangan %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: tidak dapat memperbaharui entri bayangan untuk %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: tidak dapat memperbaharui entri untuk grup %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -985,7 +989,7 @@ msgstr "**Tak pernah log in**"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
-msgstr ""
+msgstr "lastlog: argumen tak terduga: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1027,37 +1031,33 @@ msgstr ""
 "\n"
 "Login time out setelah %d detik.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " pada `%.100s' dari `%.200s'"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " pada `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: Kegagalan PAM, berhenti: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s login: "
-msgstr ""
-"\n"
-"%s login: "
+msgstr "%s login: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "login: "
-msgstr ""
-"\n"
-"%s login: "
+msgstr "login: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of tries exceeded (%d)\n"
-msgstr "Jumlah hari maksimum antara penggantian password\t\t: %ld\n"
+msgstr "Jumlah pengulangan maksimum terlampaui (%d)\n"
 
 #, c-format
 msgid "login: abort requested by PAM\n"
-msgstr ""
+msgstr "login: penghentian diminta oleh PAM\n"
 
 #, c-format
 msgid ""
@@ -1309,6 +1309,18 @@ msgstr "pengguna %s: tak terdapat direktori %s\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "pengguna %s: tak terdapat program %s\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "tak terdapat entri kata sandi yang cocok\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "grup bayangan %s: tak ada pengguna %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: tak dapat menghapus entri passwd untuk %s\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "entri kata sandi bayangan tak sah\n"
@@ -1316,10 +1328,6 @@ msgstr "entri kata sandi bayangan tak sah\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "entri kata sandi bayangan terduplikasi\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "tak terdapat entri kata sandi yang cocok\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1336,10 +1344,6 @@ msgstr "%s: tak dapat membuka berkas passwd\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: tak dapat menghapus entri bayangan untuk %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: tak dapat menghapus entri passwd untuk %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1376,7 +1380,7 @@ msgstr "Maaf."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: su [options] [login]\n"
 "\n"
@@ -1389,9 +1393,10 @@ msgid ""
 "\t\t\t\tthe same shell\n"
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 msgstr ""
-"Penggunaan: su [pilihan-pilihan] [nama-pengguna]\n"
+"Penggunaan: su [pilihan-pilihan] [login]\n"
 "\n"
 "Pilihan-pilihan:\n"
+"  -c, --command PERINTAH\t\tberikan PERINTAH yang akan diberikan pada shell\n"
 "  -h, --help\t\t\ttampilkan pesan bantuan ini dan keluar\n"
 "  -, -l, --login\t\tbuat shell menjadi shell login\n"
 "  -m, -p,\n"
@@ -1451,8 +1456,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Memasuki Mode Pengelolaan Sistem\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: argumen numerik tak sah `%s'\n"
 
 #, c-format
@@ -1475,8 +1480,8 @@ msgstr "%s: tak dapat membuka berkas-berkas bawaan yang baru\n"
 msgid "%s: rename: %s"
 msgstr "%s: ubah nama: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: grup `%s' merupakan grup NIS.\n"
 
 #, c-format
@@ -1545,20 +1550,20 @@ msgstr "%s: UID %u tidak unik\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: tidak bisa mendapatkan UID yang unik\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: direktori awal `%s' tak sah\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: komentar `%s' tak sah\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: direktori rumah `%s' tak sah\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: tanggal `%s' tak sah\n"
 
 #, c-format
@@ -1569,12 +1574,12 @@ msgstr "%s: kata sandi bayangan dibutuhkan untuk -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: kata sandi banyangan diperlukan untuk -f\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: ruas `%s' tak sah\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: shell `%s' tak sah\n"
 
 #, c-format
@@ -1633,13 +1638,16 @@ msgstr "%s: kesalahan saat menambah entri baru kata sandi bayangan\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: tak dapat membuat direktori %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr "Grup bernama \"mail\" tak ada, membuat spul surat dengan mode 0600.\n"
+msgid "Creating mailbox file"
+msgstr ""
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Tak dapat membuat spul surat untuk pengguna %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1664,8 +1672,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: perhatian: CREATE_HOME tak didukung, sebaiknya gunakan -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Penggunaan: %s [-r] nama\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1871,8 +1885,9 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: tidak dapat mengembalikan %s: %s (perubahan ada dalam %s)\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Login tidak tepat\n"
+#~ "Grup bernama \"mail\" tak ada, membuat spul surat dengan mode 0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Tak dapat membuat spul surat untuk pengguna %s.\n"

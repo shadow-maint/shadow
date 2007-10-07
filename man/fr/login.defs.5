@@ -45,14 +45,6 @@ et
 \fBchfn\fR
 avec le drapeau SUID.
 .TP
-CREATE_HOME (booléen)
-Ce paramètre indique si
-\fBuseradd\fR
-doit par défaut créer le répertoire personnel des utilisateurs. Un OU est réalisé avec l'option
-\fB\-m\fR
-de la ligne de commande de
-\fBuseradd\fR.
-.TP
 GID_MAX (nombre), GID_MIN (nombre)
 Domaine des identifiants de groupe que les commandes
 \fBuseradd\fR
@@ -104,7 +96,7 @@ pwconv
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 .TP
 useradd
-CREATE_HOME GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN UMASK
+GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN UMASK
 .TP
 userdel
 MAIL_DIR USERDEL_CMD

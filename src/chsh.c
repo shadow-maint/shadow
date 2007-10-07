@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chsh.c,v 1.39 2006/02/21 22:44:35 kloczek Exp $"
+#ident "$Id: chsh.c,v 1.40 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -256,14 +256,14 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: cannot change user `%s' on NIS client.\n"),
+			 _("%s: cannot change user '%s' on NIS client.\n"),
 			 Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _
-				 ("%s: `%s' is the NIS master for this client.\n"),
+				 ("%s: '%s' is the NIS master for this client.\n"),
 				 Prog, nis_master);
 		}
 		exit (1);

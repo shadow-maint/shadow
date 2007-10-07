@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: login.c,v 1.83 2006/03/07 15:47:32 kloczek Exp $"
+#ident "$Id: login.c,v 1.85 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -558,10 +558,10 @@ int main (int argc, char **argv)
 
 		if (*cp)
 			snprintf (fromhost, sizeof fromhost,
-				  _(" on `%.100s' from `%.200s'"), tty, cp);
+				  _(" on '%.100s' from '%.200s'"), tty, cp);
 		else
 			snprintf (fromhost, sizeof fromhost,
-				  _(" on `%.100s'"), tty);
+				  _(" on '%.100s'"), tty);
 
 	      top:
 		/* only allow ALARM sec. for login */
@@ -720,6 +720,7 @@ int main (int argc, char **argv)
 			}
 
 			/* We don't get here unless they were authenticated above */
+			alarm (0);
 			retcode = pam_acct_mgmt (pamh, 0);
 
 			if (retcode == PAM_NEW_AUTHTOK_REQD) {

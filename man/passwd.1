@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "1" "02/28/2006" "User Commands" "User Commands"
+.\"     Title: passwd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: User Commands
+.\"    Source: User Commands
+.\"
+.TH "PASSWD" "1" "06/06/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,6 +17,7 @@ passwd \- change user password
 \fBpasswd\fR [\fIoptions\fR] \fIlogin\fR
 .SH "DESCRIPTION"
 .PP
+
 \fBpasswd\fR
 changes passwords for user accounts. A normal user may only change the password for his/her own account, while the super user may change the password for any account.
 \fBpasswd\fR
@@ -26,24 +30,25 @@ After the password has been entered, password aging information is checked to se
 \fBpasswd\fR
 refuses to change the password and exits.
 .PP
-The user is then prompted for a replacement password. This password is tested for complexity. As a general guideline, passwords should consist of 6 to 8 characters including one or more from each of following sets:
-.TP 3
+The user is then prompted twice for a replacement password. The second entry is compared against the first and both are required to match in order for the password to be changed.
+.PP
+Then, the password is tested for complexity. As a general guideline, passwords should consist of 6 to 8 characters including one or more characters from each of the following sets:
+.TP 3n
 \(bu
 lower case alphabetics
-.TP
+.TP 3n
 \(bu
 digits 0 thru 9
-.TP
+.TP 3n
 \(bu
 punctuation marks
+.sp
+.RE
 .PP
 Care must be taken not to include the system default erase or kill characters.
 \fBpasswd\fR
 will reject any password which is not suitably complex.
-.PP
-If the password is accepted,
-\fBpasswd\fR
-will prompt again and compare the second entry against the first. Both entries are required to match in order for the password to be changed.
+.\" end of SS subsection "Password Changes"
 .SS "Hints for user passwords"
 .PP
 The security of a password depends upon the strength of the encryption algorithm and the size of the key space. The
@@ -55,72 +60,76 @@ Compromises in password security normally result from careless password selectio
 Your password must be easily remembered so that you will not be forced to write it on a piece of paper. This can be accomplished by appending two small words together and separating each with a special character or digit. For example, Pass%word.
 .PP
 Other methods of construction involve selecting an easily remembered phrase from literature and selecting the first or last letter from each word. An example of this is:
-.TP 3
+.TP 3n
 \(bu
 Ask not for whom the bell tolls
-.TP
+.TP 3n
 \(bu
 which produces
-.TP
+.TP 3n
 \(bu
 An4wtbt
+.sp
+.RE
 .PP
 You may be reasonably sure few crackers will have included this in their dictionaries. You should, however, select your own methods for constructing passwords and not rely exclusively on the methods given here.
+.\" end of SS subsection "Hints for user passwords"
 .SH "OPTIONS"
 .PP
 The options which apply to the
 \fBpasswd\fR
 command are:
-.TP
+.TP 3n
 \fB\-a\fR, \fB\-\-all\fR
 This option can be used only with
 \fB\-S\fR
 and causes show status for all users.
-.TP
+.TP 3n
 \fB\-d\fR, \fB\-\-delete\fR
 Delete a user's password (make it empty). This is a quick way to disable a password for an account. It will set the named account passwordless.
-.TP
+.TP 3n
 \fB\-e\fR, \fB\-\-expire\fR
 Immediately expire an account's password. This in effect can force a user to change his/her password at the user's next login.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
 Display help message and exit.
-.TP
+.TP 3n
 \fB\-i\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
 This option is used to disable an account after the password has been expired for a number of days. After a user account has had an expired password for
 \fIINACTIVE\fR
 days, the user may no longer sign on to the account.
-.TP
+.TP 3n
 \fB\-k\fR, \fB\-\-keep\-tokens\fR
 Indicate change password should be performed only for expired authentication tokens (passwords). The user wishes to keep their non\-expired tokens as before.
-.TP
+.TP 3n
 \fB\-l\fR, \fB\-\-lock\fR
 Lock the named account. This option disables an account by changing the password to a value which matches no possible encrypted value.
-.TP
-\fB\-n\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
-Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change his/her password at any time.
-.TP
+.TP 3n
+\fB\-m\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
+Set the minimum number of days between password changes to
+\fIMIN_DAYS\fR. A value of zero for this field indicates that the user may change his/her password at any time.
+.TP 3n
 \fB\-q\fR, \fB\-\-quiet\fR
 Quiet mode.
-.TP
+.TP 3n
 \fB\-r\fR, \fB\-\-repository\fR \fIREPOSITORY\fR
 change password in
 \fIREPOSITORY\fR
 repository
-.TP
+.TP 3n
 \fB\-S\fR, \fB\-\-status\fR
 Display account status information. The status information consists of 7 fields. The first field is the user's login name. The second field indicates if the user account is locked (L), has no password (NP), or has a usable password (P). The third field gives the date of the last password change. The next four fields are the minimum age, maximum age, warning period, and inactivity period for the password. These ages are expressed in days.
-.TP
+.TP 3n
 \fB\-u\fR, \fB\-\-unlock\fR
 Unlock the named account. This option re\-enables an account by changing the password back to its previous value (to value before using
 \fB\-l\fR
 option).
-.TP
+.TP 3n
 \fB\-w\fR, \fB\-\-warndays\fR \fIWARN_DAYS\fR
 Set the number of days of warning before a password change is required. The
 \fIWARN_DAYS\fR
 option is the number of days prior to the password expiring that a user will be warned that his/her password is about to expire.
-.TP
+.TP 3n
 \fB\-x\fR, \fB\-\-maxdays\fR \fIMAX_DAYS\fR
 Set the maximum number of days a password remains valid. After
 \fIMAX_DAYS\fR, the password is required to be changed.
@@ -128,40 +137,44 @@ Set the maximum number of days a password remains valid. After
 .PP
 Not all options may be supported. Password complexity checking may vary from site to site. The user is urged to select a password as complex as he or she feels comfortable with. Users may not be able to change their password on a system if NIS is enabled and they are not logged into the NIS server.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "EXIT VALUES"
 .PP
 The
 \fBpasswd\fR
 command exits with the following values:
-.TP
+.TP 3n
 \fI0\fR
 success
-.TP
+.TP 3n
 \fI1\fR
 permission denied
-.TP
+.TP 3n
 \fI2\fR
 invalid combination of options
-.TP
+.TP 3n
 \fI3\fR
 unexpected failure, nothing done
-.TP
+.TP 3n
 \fI4\fR
-unexpected failure, passwd file missing
-.TP
+unexpected failure,
+\fIpasswd\fR
+file missing
+.TP 3n
 \fI5\fR
-passwd file busy, try again
-.TP
+\fIpasswd\fR
+file busy, try again
+.TP 3n
 \fI6\fR
 invalid argument to option
 .SH "SEE ALSO"
 .PP
+
 \fBgroup\fR(5),
 \fBpasswd\fR(5),
 \fBshadow\fR(5).

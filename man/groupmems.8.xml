@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: groupmems.8.xml,v 1.19 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -10,7 +8,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>groupmems</refname>
-    <refpurpose>Administer members of a user's primary group</refpurpose>
+    <refpurpose>administer members of a user's primary group</refpurpose>
   </refnamediv>
 
   <refsynopsisdiv id='synopsis'>
@@ -88,7 +86,7 @@
       The <command>groupmems</command> executable should be in mode
       <literal>2770</literal> as user <emphasis>root</emphasis> and in group
       <emphasis>groups</emphasis>. The system administrator can add users to
-      group groups to allow or disallow them using the
+      group <emphasis>groups</emphasis> to allow or disallow them using the
       <command>groupmems</command> utility to manage their own group
       membership list.
     </para>
@@ -107,7 +105,7 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

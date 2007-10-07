@@ -1,10 +1,24 @@
 # This is a dummy Makefile.am to get automake work flawlessly,
 # and also cooperate to make a distribution for `make dist'
 
-EXTRA_DIST = \
-	limits \
-	login.access \
-	login.defs \
+sysconf_DATA = login.defs
+
+defaultdir = $(sysconfdir)/default
+default_DATA = \
 	useradd
+
+nonpam_files = \
+	limits \
+	login.access
+
+if !USE_PAM
+nonpamdir = $(sysconfdir)
+nonpam_DATA = $(nonpam_files)
+endif
+
+EXTRA_DIST = \
+	$(nonpam_files) \
+	$(sysconf_DATA) \
+	$(default_DATA)
 
 SUBDIRS = pam.d

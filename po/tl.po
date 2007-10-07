@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2006-03-08 17:13+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -146,8 +146,8 @@ msgstr "passwd: tagumpay sa pagpalit ng password\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Maling password para kay %s.\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "Hindi makalipat sa \"%s\"\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -157,12 +157,12 @@ msgstr "Walang directory, pumapasok na ang HOME=/"
 msgid "Cannot execute %s"
 msgstr "Hindi mapatakbo ang %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "Hindi tanggap na root directory \"%s\"\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "Hindi mapalitan ang root directory sa \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -388,36 +388,36 @@ msgstr "Iba pa"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Hindi makilala ang inyong pangalan.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: hindi mapalitan ang gumagamit `%s' sa NIS client.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: `%s' ay ang NIS master ng klienteng ito.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Pinapalitan ang impormasyon tungkol sa gumagamit na si %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: hindi tanggap na pangalan: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: hindi tanggap na bilang ng silid: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: hindi tanggap na telepono sa trabaho: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: hindi tanggap na telepono sa bahay: \"%s\"\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\" ay may hindi tanggap na mga karakter\n"
 
 #, c-format
@@ -871,25 +871,41 @@ msgstr "%s: hindi mabuksan ang talaksang %s\n"
 msgid "invalid group file entry\n"
 msgstr "hindi tanggap na entry ng talaksang grupo\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "burahin ang linyang `%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "pangalawang entry ng grupo\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "hindi tanggap na pangalan ng grupo `%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupong %s: walang gumagamit %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "tanggalin ang miyembrong `%s'? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "walang tumbas na entry sa talaksang grupo\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "grupong shadow %s: walang gumagamit na %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: hindi ma-apdeyt ang ipinasok sa shadow para kay %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: hindi ma-apdeyt ang ipinasok para sa grupong %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -900,15 +916,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "dalawahan ang shadow group entry\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "walang tumbas na entry sa talaksang grupo\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "grupong shadow %s: walang tagapamahalang %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "tanggaling ang miyembrong tagapamahala `%s'? "
 
 #, c-format
@@ -938,14 +950,6 @@ msgstr "%s: hindi mabuksan ang talaksang grupo na shadow\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: hindi matanggal ang grupong shadow %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: hindi ma-apdeyt ang ipinasok sa shadow para kay %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: hindi ma-apdeyt ang ipinasok para sa grupong %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1044,12 +1048,12 @@ msgstr ""
 "\n"
 "Lumipas ang taning ng pagpasok ng %d segundo.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " ng `%.100s' mula `%.200s'"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " ng `%.100s'"
 
 #, c-format
@@ -1315,6 +1319,18 @@ msgstr "gumagamit %s: walang directory na %s\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "gumagamit %s: walang programang %s\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "walang kaparehas na ipinasok sa talaksang password\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "grupong shadow %s: walang gumagamit na %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: hindi maapdeyt ang ipinasok sa passwd para kay %s\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "hindi tanggap na ipinasok sa talaksang password na shadow\n"
@@ -1322,10 +1338,6 @@ msgstr "hindi tanggap na ipinasok sa talaksang password na shadow\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "nadobleng ipinasok sa talaksang password ng shadow\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "walang kaparehas na ipinasok sa talaksang password\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1342,10 +1354,6 @@ msgstr "%s: hindi mabuksan ang talaksang passwd\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: hindi matanggal ang ipinasok sa shadow para kay %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: hindi maapdeyt ang ipinasok sa passwd para kay %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1459,8 +1467,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Pumapasok sa Modang Pagtataguyod ng Sistema\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: hindi tanggap na argumentong numero `%s'\n"
 
 #, c-format
@@ -1483,8 +1491,8 @@ msgstr "%s: hindi mabuksan ang bagong talaksan ng mga default\n"
 msgid "%s: rename: %s"
 msgstr "%s: baguhin ang pangalan: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: ang grupong `%s' ay grupong NIS.\n"
 
 #, c-format
@@ -1556,20 +1564,20 @@ msgstr "%s: hindi kakaiba ang UID %u\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: hindi makakuha ng kakaibang UID\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: hindi tanggap na batayang directory `%s'\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: hindi tanggap na komento `%s'\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: hindi tanggap na bahay directory `%s'\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: hindi tanggap na petsa `%s'\n"
 
 #, c-format
@@ -1580,12 +1588,12 @@ msgstr "%s: kailangan ng shadow password para sa -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: kailangan ng shadow password para sa -f\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: hindi tanggap na field `%s'\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: hindi tanggap na shell `%s'\n"
 
 #, c-format
@@ -1644,14 +1652,16 @@ msgstr "%s: error sa pagdagdag ng bagong ipinasok na password sa shadow\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: hindi malikha ang directory %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Walang grupong \"mail\", nililikha ang mail spool na may modong 0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Hindi makalikha ng mail spool para kay %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1677,8 +1687,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: babala: CREATE_HOME hindi suportado, gamitin na lamang ang -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Pag-gamit: %s [-r] pangalan\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1888,3 +1904,11 @@ msgstr "Hindi makagawa ng backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "Walang grupong \"mail\", nililikha ang mail spool na may modong 0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Hindi makalikha ng mail spool para kay %s.\n"

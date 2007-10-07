@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2005-04-19 16:02+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -140,8 +140,8 @@ msgstr "passwd: 열쇠글을 성공적으로 업데이트했습니다\n"
 msgid "Incorrect password for %s.\n"
 msgstr "`%s'에 대하여 열쇠글이 맞지 않습니다\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "\"%s\" 디렉토리로 이동할 수 없습니다\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -151,12 +151,12 @@ msgstr "디렉토리가 없음, 루트 디렉토리(/)로 로그인합니다"
 msgid "Cannot execute %s"
 msgstr "%s을(를) 실행할 수 없습니다"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "루트 디렉토리 \"%s\"이(가) 잘못되었습니다\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "루트 디렉토리를 \"%s\"(으)로 바꿀 수 없습니다\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -361,36 +361,36 @@ msgstr "기타"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: NIS 클라이언트에서 '%s'의 사용자 이름을 바꿀 수 없습니다.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: 현재의 클라이언트에 대하여 '%s'이(가) NIS 마스터입니다.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "%s에 대하여 사용자의 정보를 바꿉니다\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: 유효하지 않는 이름: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: 유효하지 않는 방 번호: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: 유효하지 않는 직장 전화번호: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: 유효하지 않는 집 전화번호: \"%s\"\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\"에 쓸 수 없는 글자가 들어 있습니다\n"
 
 #, c-format
@@ -832,25 +832,41 @@ msgstr "%s: %s 파일을 열 수 없습니다\n"
 msgid "invalid group file entry\n"
 msgstr "유효하지 않은 그룹파일  입력값\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "'%s' 줄을 지울까요?"
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "그룹 입력값 복제\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "유효하지 않은 그룹명 '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "그룹 %s: %s 사용자가 없습니다\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "'%s' 멤버를 지울까요? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "그룹 파일 입력값이 일치하지 않습니다\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "셰도우 그룹 %s: %s 란 사용자가 없습니다\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: %s에 대한 셰도우 입력값을 업데이트 할 수 없습니다\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: %s 그룹에 대한 입력값을 업데이트 할 수 없습니다\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -861,15 +877,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "셰도우 그룹 입력값 복제\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "그룹 파일 입력값이 일치하지 않습니다\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "셰도우 그룹 %s: 관리용 사용자 %s이(가) 없습니다\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "관리용 멤버 '%s'을(를) 지울까요? "
 
 #, c-format
@@ -899,14 +911,6 @@ msgstr "%s: 셰도우 그룹 파일을 열 수 없습니다\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: 셰도우 그룹 %s을(를) 지울 수 없습니다\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: %s에 대한 셰도우 입력값을 업데이트 할 수 없습니다\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: %s 그룹에 대한 입력값을 업데이트 할 수 없습니다\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1004,12 +1008,12 @@ msgstr ""
 "\n"
 "%d 초 후에 로그인 시간이 완료됩니다.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " on `%.100s' from `%.200s'"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " on `%.100s'"
 
 #, c-format
@@ -1264,6 +1268,18 @@ msgstr "사용자 %s: %s 디렉토리는 없습니다\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "사용자 %s: %s 프로그램은 없습니다\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "열쇠글 파일 입력값이 일치하지 않습니다\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "셰도우 그룹 %s: %s 란 사용자가 없습니다\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: %s에 대한 열쇠글 입력값을 업데이트 할 수 없습니다\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "유효하지 않은 셰도우 열쇠글 파일 입력값\n"
@@ -1271,10 +1287,6 @@ msgstr "유효하지 않은 셰도우 열쇠글 파일 입력값\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "셰도우 열쇠글 입력값 복제\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "열쇠글 파일 입력값이 일치하지 않습니다\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1291,10 +1303,6 @@ msgstr "%s: 열쇠글 파일을 열 수 없습니다\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: %s에 대한 셰도우 입력값을 지울 수 없습니다\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: %s에 대한 열쇠글 입력값을 업데이트 할 수 없습니다\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1396,8 +1404,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "시스템 정비 모드로 들어가고 있습니다\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: 유효하지 않은 숫자 입력값 `%s'\n"
 
 #, c-format
@@ -1420,8 +1428,8 @@ msgstr "%s: 새로운 디폴트 파일을 만들 수 없습니다\n"
 msgid "%s: rename: %s"
 msgstr "%s: 이름 재 설정: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: `%s' 그룹은 NIS 그룹입니다.\n"
 
 #, c-format
@@ -1466,20 +1474,20 @@ msgstr "%s: GID %u은(는) 유일한 아이디가 아닙니다\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: 유일한 GID를 얻을 수 없습니다\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: 기본 디렉토리 `%s'은(는) 잘못되었습니다\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: 주석 `%s'이(가) 틀렸습니다\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: 홈 디렉토리 `%s'은(는) 잘못되었습니다\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: 날짜 `%s'은(는) 잘못되었습니다\n"
 
 #, c-format
@@ -1490,12 +1498,12 @@ msgstr "%s: 셰도우 열쇠글이 -e 옵션을 요구합니다\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: 셰도우 열쇠글이 -f 옵션을 요구합니다\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: `%s' 부분은 유효하지 않습니다\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: 유효하지 않은 쉘 `%s'\n"
 
 #, c-format
@@ -1554,14 +1562,16 @@ msgstr "%s: 새로운 셰도우 열쇠글 입력값을 더하는 데 오류가 �
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: 디렉토리 %s을(를) 만들 수 없습니다\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"\"mail\"이라는 이름의 그룹이 있습니다. 메일 스풀을 모드 0600으로 만듭니다.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "사용자 %s의 메일 스풀을 만들 수 없습니다.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1585,8 +1595,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s:경고: CREATE_HOME은 지원되지 않습니다, -m 옵션을 대신 사용하세요.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "사용법: %s [-r] 이름\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1763,39 +1779,11 @@ msgstr "백업을 만들 수 없습니다"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s을(를) 복구시킬 수 없습니다: %s (바뀐 사항은 %s에 있습니다)\n"
 
-#, fuzzy
 #~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
-#~ msgstr "로그인이 맞지 않습니다"
-
-#, fuzzy
-#~ msgid ""
-#~ "Usage:\n"
-#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 #~ msgstr ""
-#~ "사용법:\n"
-#~ "                                    \n"
-#~ "`vipw'는 /etc/passwd를 편집합니다   `vipw -s'는 /etc/shadow를 편집합니다\n"
-#~ "`vigr'은 /etc/group을 편집합니다    `vigr -s'는 /etc/gshadow를 편집합니"
-#~ "다\n"
+#~ "\"mail\"이라는 이름의 그룹이 있습니다. 메일 스풀을 모드 0600으로 만듭니"
+#~ "다.\n"
 
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: PAM chauthtok가 실패했습니다\n"
-
-#~ msgid "%s: Cannot execute %s"
-#~ msgstr "%s: %s을(를) 실행할 수 없습니다"
-
-#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-#~ msgstr "사용법: %s\t[-u UID [-o]] [-g 그룹이름][-G 그룹,...]\n"
-
-#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-#~ msgstr "\t\t[-d 홈 디렉토리 [-m]] [-s 쉘] [-c 주석] [-l 새_이름]\n"
-
-#~ msgid "[-f inactive] [-e expire] "
-#~ msgstr "[-f 비활성화] [-e 만기] "
-
-#~ msgid "[-p passwd] [-L|-U] name\n"
-#~ msgstr "[-p 열쇠글] [-L|-U] 이름\n"
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "사용자 %s의 메일 스풀을 만들 수 없습니다.\n"

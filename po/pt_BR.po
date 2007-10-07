@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2006-03-12 12:33-0300\n"
 "Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -141,8 +141,8 @@ msgstr "passwd: senha atualizada com sucesso\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Senha incorreta para %s.\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "Não foi possível entrar em \"%s\"\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -152,12 +152,12 @@ msgstr "Sem diretório pessoal, logando com HOME=/"
 msgid "Cannot execute %s"
 msgstr "Não foi possível executar %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "Diretório raíz \"%s\" inválido\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "Não foi possível mudar o diretório raíz para \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -380,36 +380,36 @@ msgstr "Outro"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s : Não foi possível determinar seu nome de usuário.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s : não foi possível mudar o usuário `%s' no cliente NIS.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s : `%s' é o mestre NIS para este cliente.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Modificando as informações de usuário para %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s : nome inválido : \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s : número de sala inválido : \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s : fone de trabalho inválido : \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s : fone doméstico inválido : \"%s\"\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s : \"%s\" contém caracteres ilegais\n"
 
 #, c-format
@@ -862,25 +862,41 @@ msgstr "%s : não foi possível abrir arquivo %s\n"
 msgid "invalid group file entry\n"
 msgstr "entrada inválida no arquivo de grupo\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "remover a linha `%s' ? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "entrada de grupo duplicada\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "nome de grupo `%s' inválido\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupo %s : nenhum usuário %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "remover membro `%s' ? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "entrada no arquivo de grupo não casa\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "grupo shadow %s : nenhum usuário %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s : não foi possível atualizar entrada shadow para %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s : não foi possível atualizar entrada para grupo %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -891,15 +907,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "entrada de grupo shadow duplicada\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "entrada no arquivo de grupo não casa\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "grupo shadow %s : nenhum usuário administrativo %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "remover membro administrativo `%s' ? "
 
 #, c-format
@@ -929,14 +941,6 @@ msgstr "%s : não foi possível abrir arquivo de grupo shadow\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s : não foi possível remover grupo shadow %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s : não foi possível atualizar entrada shadow para %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s : não foi possível atualizar entrada para grupo %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1037,12 +1041,12 @@ msgstr ""
 "\n"
 "Login falhou após %d segundos de espera.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " em `%.100s' de `%.200s'"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " em `%.100s'"
 
 #, c-format
@@ -1319,6 +1323,18 @@ msgstr "usuário %s : diretório %s não existe\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "usuário %s : programa %s não existe\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "entrada de arquivo de senha não casa\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "grupo shadow %s : nenhum usuário %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s : não foi possível atualizar entrada passwd para %s\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "entrada de arquivos de senhas shadow inválida\n"
@@ -1326,10 +1342,6 @@ msgstr "entrada de arquivos de senhas shadow inválida\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "entrada de senha shadow inválida\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "entrada de arquivo de senha não casa\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1346,10 +1358,6 @@ msgstr "%s : não foi possível abrir arquivo passwd.\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s : não foi possível remover entrada shadow para %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s : não foi possível atualizar entrada passwd para %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1461,8 +1469,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Entrando em Modo de Manutenção do Sistema\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s : argumento numérico `%s' inválido\n"
 
 #, c-format
@@ -1485,8 +1493,8 @@ msgstr "%s : não foi possível abrir novo arquivo de padrões\n"
 msgid "%s: rename: %s"
 msgstr "%s : rename : %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s : grupo `%s' é um grupo NIS.\n"
 
 #, c-format
@@ -1560,20 +1568,20 @@ msgstr "%s : UID %u não é único\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s : não foi possível obter UID único\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s : diretório base `%s'inválido\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s : comentário `%s' inválido\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s : diretório home `%s' inválido\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s : data `%s' inválida\n"
 
 #, c-format
@@ -1584,12 +1592,12 @@ msgstr "%s : senhas shadow necessárias para -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s : senhas shadow necessárias para -f\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s : campo `%s' inválido\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s : shell `%s' inválida\n"
 
 #, c-format
@@ -1648,15 +1656,16 @@ msgstr "%s : erro adicionando nova entrada de senha shadow\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s : não foi possível criar diretório %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Nenhum grupo com o nome \"mail\" existe, criando o spool de mensagenscom o "
-"modo 0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Não foi possível criar spool de mensagens para o usuário %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1682,8 +1691,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s : aviso CREATE_HOME não é suportado, por favor, utilize -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Uso : %s [-r] nome\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1890,3 +1905,12 @@ msgstr "Não foi possível fazer backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s : não foi possível restaurar %s : %s (suas mudanças estão em %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "Nenhum grupo com o nome \"mail\" existe, criando o spool de mensagenscom "
+#~ "o modo 0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Não foi possível criar spool de mensagens para o usuário %s.\n"

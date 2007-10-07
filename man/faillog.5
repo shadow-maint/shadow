@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "FAILLOG" "5" "11/05/2005" "" ""
+.\"     Title: faillog
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: 
+.\"    Source: 
+.\"
+.TH "FAILLOG" "5" "06/06/2006" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-faillog \- Login failure logging file
+faillog \- login failure logging file
 .SH "DESCRIPTION"
 .PP
 \fI/var/log/faillog\fR
@@ -16,6 +19,7 @@ maintains a count of login failures and the limits for each account. The file is
 .PP
 The structure of the file is:
 .sp
+.RS 3n
 .nf
 struct	faillog {
 	short   fail_cnt;
@@ -24,10 +28,12 @@ struct	faillog {
 	time_t  fail_time;
 };
 .fi
+.RE
 .SH "FILES"
-.TP
+.TP 3n
 \fI/var/log/faillog\fR
-login failure log
+Failure logging file.
 .SH "SEE ALSO"
 .PP
+
 \fBfaillog\fR(8)

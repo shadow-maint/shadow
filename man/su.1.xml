@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.22 2006/01/22 10:14:51 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.25 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -34,7 +32,8 @@
     <title>DESCRIPTION</title>
     <para>
       <command>su</command> is used to become another user during a login
-      session. Invoked without a username, <command>su</command> defaults to
+      session. Invoked without a <option>username</option>, 
+      <command>su</command> defaults to
       becoming the super user. The optional argument <option>-</option> may
       be used to provide an environment similar to what the user would
       expect had the user logged in directly.
@@ -131,13 +130,14 @@
 	      </listitem>
 	      <listitem>
 		<para>
-		  The shell indicated in the /etc/passwd entry for the target
-		  user.
+		  The shell indicated in the <filename>/etc/passwd</filename>
+		  entry for the target user.
 		</para>
 	      </listitem>
 	      <listitem>
 		<para>
-		  /bin/sh if a shell could not be found by any above method.
+		  <filename>/bin/sh</filename> if a shell could not be
+		  found by any above method.
 		</para>
 	      </listitem>
 	    </itemizedlist>
@@ -182,13 +182,13 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

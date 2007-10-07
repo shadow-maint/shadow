@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='shadow.3'>
-  <!--  $Id: shadow.3.xml,v 1.19 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!--  $Id: shadow.3.xml,v 1.21 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>shadow</refentrytitle>
     <manvolnum>3</manvolnum>
@@ -176,7 +174,7 @@
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

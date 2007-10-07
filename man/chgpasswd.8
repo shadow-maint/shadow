@@ -1,0 +1,51 @@
+.\"     Title: chgpasswd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "CHGPASSWD" "8" "06/06/2006" "System Management Commands" "System Management Commands"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+chgpasswd \- update group passwords in batch mode
+.SH "SYNOPSIS"
+.HP 10
+\fBchgpasswd\fR [\fIoptions\fR]
+.SH "DESCRIPTION"
+.PP
+
+\fBchgpasswd\fR
+reads a list of group name and password pairs from standard input and uses this information to update a set of existing groups. Each line is of the format:
+.PP
+
+\fIgroup_name\fR:\fIpassword\fR
+.PP
+By default the supplied password must be in clear\-text. Default encryption algorithm is DES.
+.PP
+This command is intended to be used in a large system environment where many accounts are created at a single time.
+.SH "OPTIONS"
+.PP
+The options which apply to the
+\fBchgpasswd\fR
+command are:
+.TP 3n
+\fB\-e\fR, \fB\-\-encrypted\fR
+Supplied passwords are in encrypted form.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP 3n
+\fB\-m\fR, \fB\-\-md5\fR
+Use MD5 encryption instead DES when the supplied passwords are not encrypted.
+.SH "CAVEATS"
+.PP
+Remember to set permissions or umask to prevent readability of unencrypted files by other users.
+.SH "SEE ALSO"
+.PP
+
+\fBgpasswd\fR(1),
+\fBgroupadd\fR(8).

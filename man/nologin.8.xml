@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='newusers.8'>
-  <!-- $Id: nologin.8.xml,v 1.1 2006/01/07 19:02:31 kloczek Exp $ -->
+  <!-- $Id: nologin.8.xml,v 1.2 2006/03/31 19:12:56 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>nologin</refentrytitle>
     <manvolnum>8</manvolnum>

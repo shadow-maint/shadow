@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c,v 1.37 2005/12/02 22:16:11 kloczek Exp $"
+#ident "$Id: getdef.c,v 1.39 2006/05/12 22:59:06 kloczek Exp $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -57,7 +57,6 @@ static struct itemdef def_table[] = {
 	{"ERASECHAR", NULL},
 	{"FAIL_DELAY", NULL},
 	{"FAKE_SHELL", NULL},
-	{"GETPASS_ASTERISKS", NULL},
 	{"GID_MAX", NULL},
 	{"GID_MIN", NULL},
 	{"HUSHLOGIN_FILE", NULL},
@@ -68,7 +67,6 @@ static struct itemdef def_table[] = {
 	{"LOG_UNKFAIL_ENAB", NULL},
 	{"MAIL_DIR", NULL},
 	{"MAIL_FILE", NULL},
-	{"MD5_CRYPT_ENAB", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},
 	{"PASS_WARN_AGE", NULL},
@@ -87,14 +85,15 @@ static struct itemdef def_table[] = {
 	{"CHSH_AUTH", NULL},
 	{"CRACKLIB_DICTPATH", NULL},
 	{"ENV_HZ", NULL},
-	{"ENV_TZ", NULL},
 	{"ENVIRON_FILE", NULL},
+	{"ENV_TZ", NULL},
 	{"FAILLOG_ENAB", NULL},
 	{"FTMP_FILE", NULL},
 	{"ISSUE_FILE", NULL},
 	{"LASTLOG_ENAB", NULL},
 	{"LOGIN_STRING", NULL},
 	{"MAIL_CHECK_ENAB", NULL},
+	{"MD5_CRYPT_ENAB", NULL},
 	{"MOTD_FILE", NULL},
 	{"NOLOGINS_FILE", NULL},
 	{"OBSCURE_CHECKS_ENAB", NULL},
@@ -103,13 +102,16 @@ static struct itemdef def_table[] = {
 	{"PASS_MAX_LEN", NULL},
 	{"PASS_MIN_LEN", NULL},
 	{"PORTTIME_CHECKS_ENAB", NULL},
-	{"SU_WHEEL_ONLY", NULL},
 	{"QUOTAS_ENAB", NULL},
+	{"SU_WHEEL_ONLY", NULL},
 	{"ULIMIT", NULL},
 #endif
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
+#endif
+#ifdef SKEY
+	{"GETPASS_ASTERISKS", NULL},
 #endif
 	{NULL, NULL}
 };

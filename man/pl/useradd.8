@@ -1,4 +1,4 @@
-.\" $Id: useradd.8,v 1.21 2005/12/01 20:38:27 kloczek Exp $
+.\" $Id: useradd.8,v 1.22 2006/03/31 09:26:54 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -82,11 +82,6 @@ Każda grupa oddzielona jest od następnej przecinkiem, bez wtrąconej spacji.
 Do grup odnoszą się te same ograniczenia, które obowiązują przy grupie podanej
 w opcji \fB\-g\fR.
 Domyślnie użytkownik należy tylko do grupy początkowej.
-.IP \fB\-M\fR
-RedHat dodał opcję CREATE_HOME w pliku login.defs w swojej wersji shadow\-utils,
-która powodowała domyślne użycie \fB\-m\fR \- ta opcja wyłącza to. Używanie jej 
-znajduje zastosowanie np. w skryptach, lecz może być powodem niezgodności
-z innymi wersjami shadow\-utils.
 .IP \fB\-m\fR
 Jeśli nie istnieje katalog domowy użytkownika, to zostanie on utworzony.
 Jeśli posłużono się opcją \fB\-k\fR, to będą do niego przekopiowane wzorcowe

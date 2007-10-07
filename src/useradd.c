@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.92 2006/03/07 15:47:33 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.96 2006/05/30 18:28:45 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -219,7 +219,7 @@ static long get_number (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
+	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -232,7 +232,7 @@ static uid_t get_uid (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
+	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -572,7 +572,7 @@ static int get_groups (char *list)
 		 */
 		if (__isgrNIS ()) {
 			fprintf (stderr,
-				 _("%s: group `%s' is a NIS group.\n"),
+				 _("%s: group '%s' is a NIS group.\n"),
 				 Prog, grp->gr_name);
 			continue;
 		}
@@ -1027,7 +1027,7 @@ static void process_flags (int argc, char **argv)
 				    || optarg[0] != '/') {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid base directory `%s'\n"),
+						 ("%s: invalid base directory '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1038,7 +1038,7 @@ static void process_flags (int argc, char **argv)
 				if (!VALID (optarg)) {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid comment `%s'\n"),
+						 ("%s: invalid comment '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1050,7 +1050,7 @@ static void process_flags (int argc, char **argv)
 				    || optarg[0] != '/') {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid home directory `%s'\n"),
+						 ("%s: invalid home directory '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1068,7 +1068,7 @@ static void process_flags (int argc, char **argv)
 					if (user_expire == -1) {
 						fprintf (stderr,
 							 _
-							 ("%s: invalid date `%s'\n"),
+							 ("%s: invalid date '%s'\n"),
 							 Prog, optarg);
 						exit (E_BAD_ARG);
 					}
@@ -1163,7 +1163,7 @@ static void process_flags (int argc, char **argv)
 				if (!VALID (optarg)) {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid field `%s'\n"),
+						 ("%s: invalid field '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1176,7 +1176,7 @@ static void process_flags (int argc, char **argv)
 					    && optarg[0] != '*'))) {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid shell `%s'\n"),
+						 ("%s: invalid shell '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1585,46 +1585,38 @@ static void create_home (void)
  */
 static void create_mail (void)
 {
-	char *ms;
+	char *spool, *file;
 	int fd;
-	struct group *mail;
-	gid_t mail_gid;
+	struct group *gr;
+	gid_t gid;
 	mode_t mode;
 
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
-		mail = getgrnam ("mail");
-		if (mail == NULL) {
-			fprintf (stderr,
-				 _
-				 ("No group named \"mail\" exists, creating mail spool with mode 0600.\n"));
-			mode = 0600;
-			mail_gid = user_gid;
-		} else {
-			mode = 0660;
-			mail_gid = mail->gr_gid;
-		}
+		spool = getdef_str ("MAIL_DIR") ? : "/var/mail";
+		file = alloca (strlen (spool) + strlen (user_name) + 2);
+		sprintf (file, "%s/%s", spool, user_name);
+		fd = open (file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);
+		if (fd < 0) {
+			perror (_("Creating mailbox file"));
+			return;
 
-		ms = malloc (strlen (user_name) + 11);
-		if (ms != NULL) {
-			sprintf (ms, "/var/mail/%s", user_name);
-			if (access (ms, R_OK) != 0) {
-				fd = open (ms,
-					   O_CREAT | O_EXCL |
-					   O_WRONLY | O_TRUNC, 0);
-				if (fd != -1) {
-					fchown (fd, user_id, mail_gid);
-					fchmod (fd, mode);
-					close (fd);
-				}
-			} else {
+			gr = getgrnam ("mail");
+			if (!gr) {
 				fprintf (stderr,
 					 _
-					 ("Can't create mail spool for user %s.\n"),
-					 user_name);
-				fail_exit (E_MAIL_SPOOL);
+					 ("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"));
+				gid = user_gid;
+				mode = 0600;
+			} else {
+				gid = gr->gr_gid;
+				mode = 0660;
 			}
+
+			if (fchown (fd, user_id, gid) || fchmod (fd, mode))
+				perror (_("Setting mailbox file permissions"));
+
+			close (fd);
 		}
-		free (ms);
 	}
 }
 

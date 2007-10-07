@@ -8,8 +8,10 @@ man_MANS = \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
+	groupmod.8 \
 	groups.1 \
-	id.1 \
+	grpck.8 \
+	gshadow.5 \
 	lastlog.8 \
 	nologin.8 \
 	passwd.5 \
@@ -18,4 +20,6 @@ man_MANS = \
 	vipw.8
 
 EXTRA_DIST = $(man_MANS) \
+	id.1 \
+	groupmems.8 \
 	logoutd.8

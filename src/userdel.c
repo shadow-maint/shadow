@@ -29,10 +29,11 @@
 
 #include <config.h>
 
-#ident "$Id: userdel.c,v 1.61 2006/02/07 20:19:46 kloczek Exp $"
+#ident "$Id: userdel.c,v 1.64 2006/05/12 23:37:33 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <stdio.h>
@@ -98,7 +99,12 @@ static void remove_mailbox (void);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-r] name\n"), Prog);
+	fprintf (stderr, _("Usage: userdel [options] LOGIN\n"
+			   "\n"
+			   "Options:\n"
+			   "  -f, --force			force removal of files, even if not owned by user\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -r, --remove			remove home directory and mail spool\n"));
 	exit (E_USAGE);
 }
 
@@ -591,7 +597,6 @@ static void remove_mailbox (void)
 int main (int argc, char **argv)
 {
 	struct passwd *pwd;
-	int arg;
 	int errors = 0;
 
 #ifdef USE_PAM
@@ -612,16 +617,30 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	while ((arg = getopt (argc, argv, "fr")) != EOF) {
-		switch (arg) {
-		case 'f':	/* force remove even if not owned by user */
-			fflg++;
-			break;
-		case 'r':	/* remove home dir and mailbox */
-			rflg++;
-			break;
-		default:
-			usage ();
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int c;
+		static struct option long_options[] = {
+			{"force", no_argument, NULL, 'f'},
+			{"help", no_argument, NULL, 'h'},
+			{"remove", no_argument, NULL, 'r'},
+			{NULL, 0, NULL, '\0'}
+		};
+		while ((c =
+			getopt_long (argc, argv, "fhr",
+				     long_options, NULL)) != -1) {
+			switch (c) {
+			case 'f':	/* force remove even if not owned by user */
+				fflg++;
+				break;
+			case 'r':	/* remove home dir and mailbox */
+				rflg++;
+				break;
+			default:
+				usage ();
+			}
 		}
 	}
 

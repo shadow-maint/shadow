@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='faillog.5'>
-  <!-- $Id: faillog.5.xml,v 1.13 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: faillog.5.xml,v 1.16 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>5</manvolnum>
   </refmeta>
   <refnamediv id='name'>
     <refname>faillog</refname>
-    <refpurpose>Login failure logging file</refpurpose>
+    <refpurpose>login failure logging file</refpurpose>
   </refnamediv>
 
   <refsect1 id='description'>
@@ -38,7 +36,7 @@ struct	faillog {
       <varlistentry>
 	<term><filename>/var/log/faillog</filename></term>
 	<listitem>
-	  <para>login failure log</para>
+	  <para>Failure logging file.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

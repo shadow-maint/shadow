@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupdel.8'>
-  <!-- $Id: groupdel.8.xml,v 1.14 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: groupdel.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupdel</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -10,7 +8,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>groupdel</refname>
-    <refpurpose>Delete a group</refpurpose>
+    <refpurpose>delete a group</refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
@@ -47,13 +45,13 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>secure group account information</para>
+	  <para>Secure group account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

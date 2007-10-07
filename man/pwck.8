@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PWCK" "8" "12/02/2005" "System Management Commands" "System Management Commands"
+.\"     Title: pwck
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "PWCK" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -16,6 +19,7 @@ pwck \- verify integrity of password files
 \fBpwck\fR [\-q] [\-r] [\fIpasswd\fR\ \fIshadow\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBpwck\fR
 verifies the integrity of the system authentication information. All entries in the
 \fI/etc/passwd\fR
@@ -24,24 +28,26 @@ and
 are checked to see that the entry has the proper format and valid data in each field. The user is prompted to delete entries that are improperly formatted or which have other uncorrectable errors.
 .PP
 Checks are made to verify that each entry has:
-.TP 3
+.TP 3n
 \(bu
 the correct number of fields
-.TP
+.TP 3n
 \(bu
 a unique user name
-.TP
+.TP 3n
 \(bu
 a valid user and group identifier
-.TP
+.TP 3n
 \(bu
 a valid primary group
-.TP
+.TP 3n
 \(bu
 a valid home directory
-.TP
+.TP 3n
 \(bu
 a valid login shell
+.sp
+.RE
 .PP
 The checks for correct number of fields and unique user name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated user name is prompted for deletion, but the remaining checks will still be made. All other errors are warning and the user is encouraged to run the
 \fBusermod\fR
@@ -57,15 +63,15 @@ should be used in those circumstances to remove the offending entry.
 The options which apply to the
 \fBpwck\fR
 command are:
-.TP
+.TP 3n
 \fB\-q\fR
 Report errors only. The warnings which do not require any action from the user won't be displayed.
-.TP
+.TP 3n
 \fB\-r\fR
 Execute the
 \fBpwck\fR
 command in read\-only mode.
-.TP
+.TP 3n
 \fB\-s\fR
 Sort entries in
 \fI/etc/passwd\fR
@@ -84,15 +90,15 @@ and
 \fIshadow\fR
 parameters.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
 \fBgroup\fR(5),
@@ -104,22 +110,22 @@ secure user account information
 The
 \fBpwck\fR
 command exits with the following values:
-.TP
+.TP 3n
 \fI0\fR
 success
-.TP
+.TP 3n
 \fI1\fR
 invalid command syntax
-.TP
+.TP 3n
 \fI2\fR
 one or more bad password entries
-.TP
+.TP 3n
 \fI3\fR
 can't open password files
-.TP
+.TP 3n
 \fI4\fR
 can't lock password files
-.TP
+.TP 3n
 \fI5\fR
 can't update password files
 

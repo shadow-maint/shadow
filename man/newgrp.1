@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "NEWGRP" "1" "11/05/2005" "User Commands" "User Commands"
+.\"     Title: newgrp
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: User Commands
+.\"    Source: User Commands
+.\"
+.TH "NEWGRP" "1" "06/06/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,11 +17,13 @@ newgrp \- log in to a new group
 \fBnewgrp\fR [\-] [\fIgroup\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBnewgrp\fR
 is used to change the current group ID during a login session. If the optional
 \fB\-\fR
 flag is given, the user's environment will be reinitialized as though the user had logged in, otherwise the current environment, including current working directory, remains unchanged.
 .PP
+
 \fBnewgrp\fR
 changes the current real group ID to the named group, or to the default group listed in
 \fI/etc/passwd\fR
@@ -26,27 +31,30 @@ if no group name is given.
 \fBnewgrp\fR
 also tries to add the group to the user groupset. If not root, the user will be prompted for a password if she does not have a password (in
 \fI/etc/shadow\fR
-if this user has an entry in the shadowed password file, or in /etc/passwd otherwise) and the group does, or if the user is not listed as a member and the group has a password. The user will be denied access if the group password is empty and the user is not listed as a member.
+if this user has an entry in the shadowed password file, or in
+\fI/etc/passwd\fR
+otherwise) and the group does, or if the user is not listed as a member and the group has a password. The user will be denied access if the group password is empty and the user is not listed as a member.
 .PP
 If there is an entry for this group in
 \fI/etc/gshadow\fR, then the list of members and the password of this group will be taken from this file, otherwise, the entry in
 \fI/etc/group\fR
 is considered.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
-.TP
+Secure user account information.
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/gshadow\fR
-shadow group file
+Secure group account information.
 .SH "SEE ALSO"
 .PP
+
 \fBid\fR(1),
 \fBlogin\fR(1),
 \fBsu\fR(1),

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.57 2006/02/21 22:44:35 kloczek Exp $"
+#ident "$Id: passwd.c,v 1.58 2006/03/26 19:15:27 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -50,15 +50,6 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
-#ifndef GPASSWD_PROGRAM
-#define GPASSWD_PROGRAM "gpasswd"
-#endif
-#ifndef CHFN_PROGRAM
-#define CHFN_PROGRAM "chfn"
-#endif
-#ifndef CHSH_PROGRAM
-#define CHSH_PROGRAM "chsh"
-#endif
 /*
  * exit status values
  */

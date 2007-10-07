@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwconv.8'>
-  <!-- $Id: pwconv.8.xml,v 1.14 2005/10/12 21:10:31 kloczek Exp $ -->
+  <!-- $Id: pwconv.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwconv</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -13,7 +11,7 @@
     <refname>pwunconv</refname>
     <refname>grpconv</refname>
     <refname>grpunconv</refname>
-    <refpurpose>convert to and from shadow passwords and groups.</refpurpose>
+    <refpurpose>convert to and from shadow passwords and groups</refpurpose>
   </refnamediv>
 
   <refsynopsisdiv id='synopsis'>
@@ -113,7 +111,7 @@
       <varlistentry>
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
-	  <para>shadow password suite configuration</para>
+	  <para>Shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

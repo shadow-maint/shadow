@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "NEWUSERS" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: newusers
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "NEWUSERS" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,19 +17,20 @@ newusers \- update and create new users in batch
 \fBnewusers\fR [\fInew_users\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBnewusers\fR
 reads a file of user name and clear\-text password pairs and uses this information to update a group of existing users or to create new users. Each line is in the same format as the standard password file (see
 \fBpasswd\fR(5)) with the following exceptions:
-.TP
+.TP 3n
 \fIpw_passwd\fR
 This field will be encrypted and used as the new value of the encrypted password.
-.TP
+.TP 3n
 \fIpw_age\fR
 This field will be ignored for shadow passwords if the user already exists.
-.TP
+.TP 3n
 \fIpw_gid\fR
 This field may be the name of an existing group, in which case the named user will be added as a member. If a non\-existent numerical group is given, a new group will be created having this number.
-.TP
+.TP 3n
 \fIpw_dir\fR
 This field will be checked for existence as a directory and a new directory with the same name will be created if it does not already exist. The ownership of the directory will be set to be that of the user being created or updated.
 .PP
@@ -35,11 +39,12 @@ This command is intended to be used in a large system environment where many acc
 .PP
 The input file must be protected since it contains unencrypted passwords.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/login.defs\fR
-shadow password suite configuration
+Shadow password suite configuration.
 .SH "SEE ALSO"
 .PP
+
 \fBlogin.defs\fR(5),
 \fBpasswd\fR(1),
 \fBuseradd\fR(8).

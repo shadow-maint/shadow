@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sulogin.c,v 1.25 2006/02/08 10:53:16 kloczek Exp $"
+#ident "$Id: sulogin.c,v 1.26 2006/05/12 22:32:14 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -179,7 +179,9 @@ static RETSIGTYPE catch_signals (int sig)
 
 		/* get a password for root */
 		cp = getpass (_
-			      ("\nType control-d to proceed with normal startup,\n(or give root password for system maintenance):"));
+			      ("\n"
+			       "Type control-d to proceed with normal startup,\n"
+			       "(or give root password for system maintenance):"));
 		/*
 		 * XXX - can't enter single user mode if root password is
 		 * empty.  I think this doesn't happen very often :-). But

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.66 2006/02/08 10:52:49 kloczek Exp $"
+#ident "$Id: su.c,v 1.70 2006/05/07 17:26:59 kloczek Exp $"
 
 #include <getopt.h>
 #include <grp.h>
@@ -241,7 +241,9 @@ static void run_shell (const char *shellstr, char *args[], int doshell,
 		exit (-1);
 	}
 
-	exit (WEXITSTATUS (status));
+	exit (WIFEXITED (status)
+	      ? WEXITSTATUS (status)
+	      : WTERMSIG (status) + 128);
 }
 #endif
 
@@ -761,7 +763,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "pam_open_session: %s",
 			 pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
-		pam_setcred(pamh, PAM_DELETE_CRED);
+		pam_setcred (pamh, PAM_DELETE_CRED);
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -785,7 +787,7 @@ int main (int argc, char **argv)
 
 	/* become the new user */
 	if (change_uid (&pwent)) {
-		pam_close_session(pamh, 0);
+		pam_close_session (pamh, 0);
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		pam_end (pamh, PAM_ABORT);
 		exit (1);

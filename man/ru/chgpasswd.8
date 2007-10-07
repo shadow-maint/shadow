@@ -1,0 +1,45 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "chgpasswd" "8" "05/14/2006" "Команды управления системой" "Команды управления системой"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+chgpasswd \- обновляет пароли групп в пакетном режиме
+.SH "СИНТАКСИС"
+.HP 10
+\fBchgpasswd\fR [\fIпараметры\fR]
+.SH "ОПИСАНИЕ"
+.PP
+\fBchgpasswd\fR
+читает список пар "группа пароль" из стандартного входного потока и обновляет информацию о существующих группах. Каждая строка имеет вид:
+.PP
+\fIимя_группы\fR:\fIпароль\fR
+.PP
+По умолчанию, передаваемый пароль должен быть в виде обычного текста. Алгоритмом шифрования по умолчанию является DES.
+.PP
+Данная команда предназначена для работы в крупных системных средах, где за один раз заводится несколько учётных записей.
+.SH "ПАРАМЕТРЫ"
+.PP
+Возможные параметры команды
+\fBchgpasswd\fR
+:
+.TP
+\fB\-e\fR, \fB\-\-encrypted\fR
+Передаваемые пароли заданы в шифрованном виде.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Показать краткую справку и закончить работу.
+.TP
+\fB\-m\fR, \fB\-\-md5\fR
+Использовать алгоритм шифрования MD5 вместо DES, если пароли передаются не шифрованными.
+.SH "ПРЕДОСТЕРЕЖЕНИЯ"
+.PP
+Не забудьте установить права или umask, чтобы не позволить чтение нешифрованных файлов другими пользователями.
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBgpasswd\fR(1),
+\fBgroupadd\fR(8).

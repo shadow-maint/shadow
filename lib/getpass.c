@@ -30,7 +30,9 @@
 
 #include <config.h>
 
-#ident "$Id: getpass.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+#ifdef  SKEY
+
+#ident "$Id: getpass.c,v 1.15 2006/05/12 22:54:22 kloczek Exp $"
 
 #include "defines.h"
 #include <signal.h>
@@ -277,3 +279,4 @@ char *getpass_with_echo (const char *prompt)
 {
 	return prompt_password (prompt, 1);
 }
+#endif				/* SKEY */

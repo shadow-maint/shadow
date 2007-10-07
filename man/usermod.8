@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERMOD" "8" "11/12/2005" "System Management Commands" "System Management Commands"
+.\"     Title: usermod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "USERMOD" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-usermod \- Modify a user account
+usermod \- modify a user account
 .SH "SYNOPSIS"
 .HP 8
 \fBusermod\fR [\fIoptions\fR] \fILOGIN\fR
@@ -22,63 +25,66 @@ command modifies the system account files to reflect the changes that are specif
 The options which apply to the
 \fBusermod\fR
 command are:
-.TP
+.TP 3n
+\fB\-a\fR, \fB\-\-append\fR \fIGROUP\fR
+Add the user to the supplemental group.
+.TP 3n
 \fB\-c\fR, \fB\-\-comment\fR \fICOMMENT\fR
 The new value of the user's password file comment field. It is normally modified using the
 \fBchfn\fR(1)
 utility.
-.TP
+.TP 3n
 \fB\-d\fR, \fB\-\-home\fR \fIHOME_DIR\fR
 The user's new login directory. If the
 \fB\-m\fR
 option is given the contents of the current home directory will be moved to the new home directory, which is created if it does not already exist.
-.TP
+.TP 3n
 \fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
 The date on which the user account will be disabled. The date is specified in the format
 \fIYYYY\-MM\-DD\fR.
-.TP
+.TP 3n
 \fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
 The number of days after a password expires until the account is permanently disabled. A value of 0 disables the account as soon as the password has expired, and a value of \-1 disables the feature. The default value is \-1.
-.TP
+.TP 3n
 \fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
 The group name or number of the user's new initial login group. The group name must exist. A group number must refer to an already existing group. The default group number is 1.
-.TP
+.TP 3n
 \fB\-G\fR, \fB\-\-groups\fR \fIGROUP1\fR[\fI,GROUP2,...\fR[\fI,GROUPN\fR]]]
 A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups are subject to the same restrictions as the group given with the
 \fB\-g\fR
 option. If the user is currently a member of a group which is not listed, the user will be removed from the group. This behaviour can be changed via
 \fB\-a\fR
 option, which appends user to the current supplementary group list.
-.TP
+.TP 3n
 \fB\-l\fR, \fB\-\-login\fR \fINEW_LOGIN\fR
 The name of the user will be changed from
 \fILOGIN\fR
 to
 \fINEW_LOGIN\fR. Nothing else is changed. In particular, the user's home directory name should probably be changed to reflect the new login name.
-.TP
+.TP 3n
 \fB\-L\fR, \fB\-\-lock\fR
 Lock a user's password. This puts a '!' in front of the encrypted password, effectively disabling the password. You can't use this option with
 \fB\-p\fR
 or
 \fB\-U\fR.
-.TP
+.TP 3n
 \fB\-o\fR, \fB\-\-non\-unique\fR
 When used with the
 \fB\-u\fR
 option, this option allows to change the user ID to a non\-unique value.
-.TP
+.TP 3n
 \fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
 The encrypted password, as returned by
 \fBcrypt\fR(3).
-.TP
+.TP 3n
 \fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The name of the user's new login shell. Setting this field to blank causes the system to select the default login shell.
-.TP
+.TP 3n
 \fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
 The numerical value of the user's ID. This value must be unique, unless the
 \fB\-o\fR
 option is used. The value must be non\-negative. Values between 0 and 999 are typically reserved for system accounts. Any files which the user owns and which are located in the directory tree rooted at the user's home directory will have the file user ID changed automatically. Files outside of the user's home directory must be altered manually.
-.TP
+.TP 3n
 \fB\-U\fR, \fB\-\-unlock\fR
 Unlock a user's password. This removes the '!' in front of the encrypted password. You can't use this option with
 \fB\-p\fR
@@ -86,23 +92,25 @@ or
 \fB\-L\fR.
 .SH "CAVEATS"
 .PP
+
 \fBusermod\fR
 will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any crontab files manually. You must change the owner of any at jobs manually. You must make any changes involving NIS on the NIS server.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/login.defs\fR
-shadow password suite configuration
-.TP
+Shadow password suite configuration.
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
+
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),

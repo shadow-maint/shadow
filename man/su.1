@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SU" "1" "01/22/2006" "User Commands" "User Commands"
+.\"     Title: su
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: User Commands
+.\"    Source: User Commands
+.\"
+.TH "SU" "1" "06/06/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,8 +17,10 @@ su \- change user ID or become super\-user
 \fBsu\fR [\fIoptions\fR] [\-] [\fIusername\fR\ [\ \fIargs\fR\ ]]
 .SH "DESCRIPTION"
 .PP
+
 \fBsu\fR
-is used to become another user during a login session. Invoked without a username,
+is used to become another user during a login session. Invoked without a
+\fBusername\fR,
 \fBsu\fR
 defaults to becoming the super user. The optional argument
 \fB\-\fR
@@ -54,11 +59,11 @@ A subsystem login is indicated by the presence of a "*" as the first character o
 The options which apply to the
 \fBsu\fR
 command are:
-.TP
+.TP 3n
 \fB\-c\fR, \fB\-\-command\fR \fISHELL\fR
 Specify a command that will be invoked by the shell using its
 \fB\-c\fR.
-.TP
+.TP 3n
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 Provide an environment similar to what the user would expect had the user logged in directly.
 .sp
@@ -69,30 +74,34 @@ is used, it must be specified as the last
 option. The other forms (\fB\-l\fR
 and
 \fB\-\-login\fR) do not have this restriction.
-.TP
+.TP 3n
 \fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The shell that will be invoked.
 .sp
 The invoked shell is choosen among (higest priority first):
-.RS
-.TP 3
+.RS 3n
+.TP 3n
 \(bu
 The shell specified with \-\-shell
-.TP
+.TP 3n
 \(bu
 If
 \fB\-\-preserve\-environment\fR
 is used, the shell specified by the
 \fB$SHELL\fR
 environment variable.
-.TP
+.TP 3n
 \(bu
-The shell indicated in the /etc/passwd entry for the target user.
-.TP
+The shell indicated in the
+\fI/etc/passwd\fR
+entry for the target user.
+.TP 3n
 \(bu
-/bin/sh if a shell could not be found by any above method.
+
+\fI/bin/sh\fR
+if a shell could not be found by any above method.
 .RE
-.IP
+.IP "" 3n
 .sp
 If the target user has a restricted shell (i.e. the shell field of this user's entry in
 \fI/etc/passwd\fR
@@ -104,7 +113,7 @@ option or the
 environment variable won't be taken into account unless
 \fBsu\fR
 is called by the root.
-.TP
+.TP 3n
 \fB\-m\fR, \fB\-p\fR, \fB\-\-preserve\-environment\fR
 Preserve the current environment.
 .sp
@@ -117,12 +126,12 @@ This version of
 \fBsu\fR
 has many compilation options, only some of which may be in use at any particular site.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
-secure user account information
+Secure user account information.
 .SH "SEE ALSO"
 .PP
 \fBlogin\fR(1),

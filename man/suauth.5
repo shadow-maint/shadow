@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SUAUTH" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: suauth
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "SUAUTH" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-suauth \- Detailed su control file
+suauth \- detailed su control file
 .SH "SYNOPSIS"
 .HP 12
 \fB/etc/suauth\fR
@@ -18,20 +21,24 @@ The file
 \fI/etc/suauth\fR
 is referenced whenever the su command is called. It can change the behaviour of the su command, based upon:
 .sp
+.RS 3n
 .nf
       1) the user su is targetting
     
 .fi
+.RE
 .sp
 .PP
 2) the user executing the su command (or any groups he might be a member of)
 .PP
 The file is formatted like this, with lines starting with a # being treated as comment lines and ignored;
 .sp
+.RS 3n
 .nf
       to\-id:from\-id:ACTION
     
 .fi
+.RE
 .PP
 Where to\-id is either the word
 \fIALL\fR, a list of usernames delimited by "," or the words
@@ -49,19 +56,20 @@ appears one or more group names, delimited by ",". It is not sufficient to have 
 is neccessary.
 .PP
 Action can be one only of the following currently supported options.
-.TP
+.TP 3n
 \fIDENY\fR
 The attempt to su is stopped before a password is even asked for.
-.TP
+.TP 3n
 \fINOPASS\fR
 The attempt to su is automatically successful; no password is asked for.
-.TP
+.TP 3n
 \fIOWNPASS\fR
 For the su command to be successful, the user must enter his or her own password. They are told this.
 .PP
 Note there are three separate fields delimited by a colon. No whitespace must surround this colon. Also note that the file is examined sequentially line by line, and the first applicable rule is used without examining the file further. This makes it possible for a system administrator to exercise as fine control as he or she wishes.
 .SH "EXAMPLE"
 .sp
+.RS 3n
 .nf
       # sample /etc/suauth file
       #
@@ -85,9 +93,10 @@ Note there are three separate fields delimited by a colon. No whitespace must su
       #
     
 .fi
+.RE
 .sp
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/suauth\fR
 .SH "BUGS"
 .PP
@@ -99,4 +108,5 @@ An error parsing the file is reported using
 as level ERR on facility AUTH.
 .SH "SEE ALSO"
 .PP
+
 \fBsu\fR(1).

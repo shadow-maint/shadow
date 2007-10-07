@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groups.1'>
-  <!-- $Id: groups.1.xml,v 1.14 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: groups.1.xml,v 1.16 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groups</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -50,7 +48,7 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

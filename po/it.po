@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2006-03-06 21:13+0100\n"
 "Last-Translator: Danilo Piazzalunga <danilopiazza@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -162,8 +162,8 @@ msgstr "passwd: password aggiornata correttamente\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Password sbagliata per %s\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "Impossibile spostarsi nella directory «%s»\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -173,12 +173,12 @@ msgstr "Directory non presente, accesso con HOME=/"
 msgid "Cannot execute %s"
 msgstr "Impossibile eseguire %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "Directory root «%s» non valida\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "Impossibile cambiare la directory root in «%s»\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -400,36 +400,36 @@ msgstr "Altro"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: impossibile determinare il proprio nome utente.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: impossibile modificare l'utente «%s» sul client NIS.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: «%s» è il NIS master per questo client.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Modifica delle informazioni relative all'utente %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: nome «%s» non valido\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: numero di stanza «%s» non valido\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: telefono di lavoro «%s» non valido\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: telefono di casa «%s» non valido\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: «%s» contiene caratteri non ammessi\n"
 
 #, c-format
@@ -891,25 +891,41 @@ msgstr "%s: impossibile aprire il file %s\n"
 msgid "invalid group file entry\n"
 msgstr "voce non valida nel file dei gruppi\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "eliminare la riga «%s»? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "voce duplicata nel file dei gruppi\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "nome di gruppo «%s» non valido\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "gruppo %s: nessun utente %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "eliminare il membro «%s»? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "nessuna voce corrispondente nel file dei gruppi\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "gruppo shadow %s: nessun utente %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: impossibile aggiornare la voce relativa a %s nel file shadow\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: impossibile aggiornare la voce del gruppo %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -920,15 +936,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "voce duplicata nel file dei gruppi shadow\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "nessuna voce corrispondente nel file dei gruppi\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "gruppo shadow %s: nessun utente amministrativo %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "eliminare il membro amministrativo «%s»? "
 
 #, c-format
@@ -958,14 +970,6 @@ msgstr "%s: impossibile aprire il file dei gruppi shadow\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: impossibile rimuovere il gruppo shadow %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: impossibile aggiornare la voce relativa a %s nel file shadow\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: impossibile aggiornare la voce del gruppo %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1068,12 +1072,12 @@ msgstr ""
 "\n"
 "Login scaduto dopo %d secondi.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " su «%.100s» da «%.200s»"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " su «%.100s»"
 
 #, c-format
@@ -1354,6 +1358,18 @@ msgstr "utente %s: la directory %s non esiste\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "utente %s: il programma %s non esiste\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "nessuna voce corrispondente nel file delle password\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "gruppo shadow %s: nessun utente %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: impossibile aggiornare la voce relativa a %s nel file passwd\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "voce non valida nel file delle shadow password\n"
@@ -1361,10 +1377,6 @@ msgstr "voce non valida nel file delle shadow password\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "voce duplicata nel file delle shadow password\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "nessuna voce corrispondente nel file delle password\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1381,10 +1393,6 @@ msgstr "%s: impossibile aprire il file passwd\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: impossibile rimuovere la voce relativa a %s dal file shadow\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: impossibile aggiornare la voce relativa a %s nel file passwd\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1497,8 +1505,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Avvio modalità manutenzione del sistema\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: argomento numerico «%s» non valido\n"
 
 #, c-format
@@ -1521,8 +1529,8 @@ msgstr "%s: impossibile aprire il nuovo file dei valori predefiniti\n"
 msgid "%s: rename: %s"
 msgstr "%s: rename: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: il gruppo «%s» è un gruppo NIS.\n"
 
 #, c-format
@@ -1593,20 +1601,20 @@ msgstr "%s: UID %u non univoco\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: impossibile ottenere un UID univoco\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: directory di base «%s» non valida\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: commento «%s» non valido\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: directory home «%s» non valida\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: data «%s» non valida\n"
 
 #, c-format
@@ -1617,12 +1625,12 @@ msgstr "%s: le shadow password sono necessarie per -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: le shadow password sono necessarie per -f\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: campo «%s» non valido\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: shell «%s» non valida\n"
 
 #, c-format
@@ -1682,14 +1690,16 @@ msgstr ""
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: impossibile creare la directory %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Il gruppo «mail» non esiste; lo spool di posta verrà creato con modo 0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Impossibile creare lo spool di posta dell'utente %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1715,8 +1725,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: attenzione: CREATE_HOME non è supportata; usare -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Uso: %s [-r] NOME\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1927,3 +1943,12 @@ msgstr "Impossibile effettuare il backup"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
 "%s: impossibile ripristinare %s: %s (le modifiche effettuate sono in %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "Il gruppo «mail» non esiste; lo spool di posta verrà creato con modo "
+#~ "0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Impossibile creare lo spool di posta dell'utente %s.\n"

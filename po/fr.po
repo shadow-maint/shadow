@@ -7,11 +7,11 @@
 # Christian Perrier <bubulle@debian.org>, 2005, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.15\n"
+"Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-12 14:46+0100\n"
-"Last-Translator: Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-05-30 15:16+0200\n"
+"Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -147,7 +147,7 @@ msgid "Incorrect password for %s.\n"
 msgstr "Mot de passe incorrect pour %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
 msgstr "Impossible d'aller dans le répertoire « %s »\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -158,11 +158,11 @@ msgid "Cannot execute %s"
 msgstr "Impossible d'exécuter %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
 msgstr "Répertoire racine « %s » incorrect\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
 msgstr "Impossible de changer le répertoire racine en « %s »\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -201,17 +201,16 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 msgstr ""
-"Utilisation : chage [options] utilisateur\n"
+"Syntaxe : chage [options] utilisateur\n"
 "\n"
 "Options :\n"
 "  -d, --lastday DERNIER_JOUR     fixer la dernière modification du mot de\n"
 "                                 passe à DERNIER_JOUR\n"
 "  -E, --expiredate FIN_VALIDITÉ  fixer la date de fin de validité du compte\n"
-"                                 FIN_VALIDITÉ\n"
+"                                 à FIN_VALIDITÉ\n"
 "  -h, --help                     afficher ce message d'aide et quitter\n"
-"  -I, --inactive INACTIF         fixer la durée d'inactivité du mot de "
-"masse\n"
-"                                 après sa fin de validité à INACTIF\n"
+"  -I, --inactive INACTIF         fixer la durée d'inactivité du mot de\n"
+"                                 passe après sa fin de validité à INACTIF\n"
 "  -l, --list                     afficher les informations concernant la\n"
 "                                 validité du compte au cours du temps\n"
 "  -m, --mindays JOURS_MIN        fixer le nombre minimum de jours avant la\n"
@@ -246,7 +245,7 @@ msgstr "Date de fin de validité du compte (AAAA-MM-JJ)"
 
 #, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Dernier changement de mot de passe\t\t\t\t\t: "
+msgstr "Dernier changement de mot de passe\t\t\t\t\t\t: "
 
 #, c-format
 msgid "never\n"
@@ -258,25 +257,25 @@ msgstr "Le mot de passe doit être changé\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Fin de validité du mot de passe\t\t\t\t\t: "
+msgstr "Fin de validité du mot de passe\t\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Mot de passe désactivé\t\t\t\t\t: "
+msgstr "Mot de passe désactivé\t\t\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Fin de validité du compte\t\t\t\t\t: "
+msgstr "Fin de validité du compte\t\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr ""
-"Nombre minimum de jours entre les changements de mot de passe\t\t: %ld\n"
+"Nombre minimum de jours entre les changements de mot de passe\t\t\t: %ld\n"
 
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr ""
-"Nombre maximum de jours entre les changements de mot de passe\t\t: %ld\n"
+"Nombre maximum de jours entre les changements de mot de passe\t\t\t: %ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
@@ -356,13 +355,13 @@ msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Utilisation : %s [-f nom_complet] [-r num_bureau] [-w tel_bureau]\n"
+"Syntaxe : %s [-f nom_complet] [-r num_bureau] [-w tel_bureau]\n"
 "\t[-h tel_perso] [-o autre] [utilisateur]\n"
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"Utilisation : %s [-f nom_complet] [-r num_bureau] [-w tel_bureau] [-h "
+"Syntaxe : %s [-f nom_complet] [-r num_bureau] [-w tel_bureau] [-h "
 "tel_maison]\n"
 
 msgid "Full Name"
@@ -401,11 +400,11 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s : Impossible de déterminer votre nom d'utilisateur.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s : impossible de changer l'utilisateur « %s » sur le client NIS.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s : « %s » est le maître NIS pour ce client.\n"
 
 #, c-format
@@ -413,23 +412,23 @@ msgid "Changing the user information for %s\n"
 msgstr "Modification des informations relatives à l'utilisateur %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s : nom incorrect : « %s »\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s : numéro de bureau non valable : « %s »\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s : téléphone professionnel non valable : « %s »\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s : téléphone personnel non valable : « %s »\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s : « %s » contient des caractères incorrects\n"
 
 #, c-format
@@ -478,7 +477,7 @@ msgid ""
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
 msgstr ""
-"Utilisation : chgpasswd [options]\n"
+"Syntaxe : chgpasswd [options]\n"
 "\n"
 "Options :\n"
 "  -e, --encrypted    les mots de passe fournis sont chiffrés\n"
@@ -547,7 +546,7 @@ msgid ""
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
 msgstr ""
-"Utilisation : chpasswd [options]\n"
+"Syntaxe : chpasswd [options]\n"
 "\n"
 "Options :\n"
 "  -e, --encrypted    les mots de passe fournis sont chiffrés\n"
@@ -573,7 +572,7 @@ msgstr "%s : ligne %d : utilisateur %s inconnu\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Utilisation : %s [-s shell] [nom]\n"
+msgstr "Syntaxe : %s [-s shell] [nom]\n"
 
 msgid "Login Shell"
 msgstr "Interpréteur de commandes initial"
@@ -596,7 +595,7 @@ msgstr "%s n'est pas un interpréteur de commandes valable.\n"
 
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Utilisation : expiry {-f|-c}\n"
+msgstr "Syntaxe : expiry {-f|-c}\n"
 
 #, c-format
 msgid "%s: unknown user\n"
@@ -617,7 +616,7 @@ msgid ""
 "\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
 "\t\t\t\tfor user with LOGIN\n"
 msgstr ""
-"Utilisation : faillog [options]\n"
+"Syntaxe : faillog [options]\n"
 "\n"
 "Options :\n"
 "  -a, --all          afficher les enregistrements « faillog » pour tous\n"
@@ -654,7 +653,7 @@ msgstr "Utilisateur %s inconnu\n"
 
 #, c-format
 msgid "Usage: %s [-r|-R] group\n"
-msgstr "Utilisation : %s [-r|-R] groupe\n"
+msgstr "Syntaxe : %s [-r|-R] groupe\n"
 
 #, c-format
 msgid "       %s [-a user] group\n"
@@ -767,10 +766,10 @@ msgid ""
 "  -o, --non-unique\t\tallow create group with duplicate\n"
 "\t\t\t\t(non-unique) GID\n"
 msgstr ""
-"Utilisation : groupadd [option] group\n"
+"Syntaxe : groupadd [option] group\n"
 "\n"
 "Options :\n"
-"  -f, --force          forcer la sortie avec un code de retour de succès\n"
+"  -f, --force           forcer la sortie avec un code de retour de succès\n"
 "                        si le groupe existe déjà\n"
 "  -g, --gif GID         utiliser GID pour le nouveau groupe\n"
 "  -h, --help            afficher ce message d'aide et quitter\n"
@@ -842,7 +841,7 @@ msgstr "%s : le groupe %s existe\n"
 
 #, c-format
 msgid "Usage: groupdel group\n"
-msgstr "Utilisation : groupdel groupe\n"
+msgstr "Syntaxe : groupdel groupe\n"
 
 #, c-format
 msgid "%s: error removing group entry\n"
@@ -870,7 +869,7 @@ msgstr "%s : %s est le maître NIS\n"
 
 #, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Utilisation : groupmod [-g gid [-o]] [-n nom] groupe\n"
+msgstr "Syntaxe : groupmod [-g gid [-o]] [-n nom] groupe\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -886,11 +885,11 @@ msgstr "%s : %s n'est pas un nom unique\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Utilisation : %s [-r] [-s] [groupe [gshadow]]\n"
+msgstr "Syntaxe : %s [-r] [-s] [groupe [gshadow]]\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Utilisation : %s [-r] [-s] [groupe]\n"
+msgstr "Syntaxe : %s [-r] [-s] [groupe]\n"
 
 #, c-format
 msgid "No\n"
@@ -913,7 +912,7 @@ msgid "invalid group file entry\n"
 msgstr "entrée non valable dans le fichier /etc/group\n"
 
 #, c-format
-msgid "delete line `%s'? "
+msgid "delete line '%s'? "
 msgstr "effacer la ligne « %s » ? "
 
 #, c-format
@@ -921,7 +920,7 @@ msgid "duplicate group entry\n"
 msgstr "entrée de groupe dupliquée\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
+msgid "invalid group name '%s'\n"
 msgstr "nom de groupe « %s » non valable\n"
 
 #, c-format
@@ -929,8 +928,24 @@ msgid "group %s: no user %s\n"
 msgstr "groupe %s : pas d'utilisateur %s\n"
 
 #, c-format
-msgid "delete member `%s'? "
+msgid "delete member '%s'? "
 msgstr "effacer le membre « %s » ? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "aucune entrée correspondante dans le fichier de groupe %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "ajouter le groupe « %s » dans %s "
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/group\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -943,16 +958,11 @@ msgstr ""
 "entrée dupliquée dans le fichier des mots de passe cachés /etc/gshadow\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr ""
-"aucune entrée correspondante dans le fichier des mots de passe /etc/group\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "%s dans /etc/gshadow : aucun administrateur %s\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
+msgid "delete administrative member '%s'? "
 msgstr "effacer le membre administrateur « %s » ? "
 
 #, c-format
@@ -987,14 +997,6 @@ msgid "%s: can't remove shadow group %s\n"
 msgstr "%s : impossible de supprimer %s dans /etc/gshadow\n"
 
 #, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/group\n"
-
-#, c-format
 msgid "%s: can't update shadow group file\n"
 msgstr ""
 "%s : impossible de mettre à jour le fichier des mots de passe cachés /etc/"
@@ -1013,11 +1015,11 @@ msgstr ""
 
 #, c-format
 msgid "Usage: id [-a]\n"
-msgstr "Utilisation : id [-a]\n"
+msgstr "Syntaxe : id [-a]\n"
 
 #, c-format
 msgid "Usage: id\n"
-msgstr "Utilisation : id\n"
+msgstr "Syntaxe : id\n"
 
 #, c-format
 msgid " groups="
@@ -1033,7 +1035,7 @@ msgid ""
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
-"Utilisation : lastlog [options]\n"
+"Syntaxe : lastlog [options]\n"
 "\n"
 "Options :\n"
 "   b, --before JOURS   n'afficher que les enregistrements de « lastlog »\n"
@@ -1062,7 +1064,7 @@ msgstr "lastlog : paramètre inattendu : %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
-msgstr "Utilisation : %s [-p] [nom]\n"
+msgstr "Syntaxe : %s [-p] [nom]\n"
 
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
@@ -1101,11 +1103,11 @@ msgstr ""
 "Tentative de connexion : délai de %d secondes dépassé.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
+msgid " on '%.100s' from '%.200s'"
 msgstr " sur « %.100s » à partir de « %.200s »"
 
 #, c-format
-msgid " on `%.100s'"
+msgid " on '%.100s'"
 msgstr " sur « %.100s »"
 
 #, c-format
@@ -1169,11 +1171,11 @@ msgstr ""
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
-msgstr "Utilisation : newgrp [-] [groupe]\n"
+msgstr "Syntaxe : newgrp [-] [groupe]\n"
 
 #, c-format
 msgid "Usage: sg group [[-c] command]\n"
-msgstr "Utilisation : sg groupe [[-c] commande]\n"
+msgstr "Syntaxe : sg groupe [[-c] commande]\n"
 
 #, c-format
 msgid "unknown UID: %u\n"
@@ -1192,7 +1194,7 @@ msgstr "trop de groupes\n"
 
 #, c-format
 msgid "Usage: %s [input]\n"
-msgstr "Utilisation : %s [entrée]\n"
+msgstr "Syntaxe : %s [entrée]\n"
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1266,12 +1268,12 @@ msgid ""
 "  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
 "\t\t\t\tchange to MAX_DAYS\n"
 msgstr ""
-"Utilisation : passwd [options] [login]\n"
+"Syntaxe : passwd [options] [login]\n"
 "\n"
 "Options :\n"
-"  -a, --all                afficher l'état des mots de passe de tous les\n"
+"  -a, --all                  afficher l'état des mots de passe de tous les\n"
 "                             comptes\n"
-"  -d, --delete              supprimer le mot de passe du compte indiqué\n"
+"  -d, --delete               supprimer le mot de passe du compte indiqué\n"
 "  -e, --expire               forcer la fin de validité du compte indiqué\n"
 "  -h, --help                 afficher ce message d'aide et quitter\n"
 "  -k, --keep-tokens          ne changer le mot de passe que d'il est arrivé\n"
@@ -1364,7 +1366,7 @@ msgstr "Le mot de passe est configuré pour une validité limitée.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Utilisation : %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "Syntaxe : %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #, c-format
 msgid "invalid password file entry\n"
@@ -1391,6 +1393,18 @@ msgid "user %s: program %s does not exist\n"
 msgstr "utilisateur %s : le programme %s n'existe pas\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "aucune entrée correspondante dans le fichier des mots de passe %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "ajouter l'utilisateur « %s » dans %s ? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr ""
 "entrée non valable dans le fichier des mots de passe cachés /etc/shadow\n"
@@ -1399,11 +1413,6 @@ msgstr ""
 msgid "duplicate shadow password entry\n"
 msgstr ""
 "entrée dupliquée dans le fichier des mots de passe cachés /etc/shadow\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr ""
-"aucune entrée correspondante dans le fichier des mots de passe /etc/passwd\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1421,10 +1430,6 @@ msgstr "%s : impossible d'ouvrir le fichier des mots de passe /etc/passwd\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s : impossible d'enlever l'entrée %s dans /etc/shadow\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1478,16 +1483,16 @@ msgid ""
 "\t\t\t\tthe same shell\n"
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 msgstr ""
-"Utilisation : su [options] [login]\n"
+"Syntaxe : su [options] [login]\n"
 "\n"
 "Options :\n"
 "  -c, --command COMMANDE  passer la commande COMMANDE à\n"
 "                          l'interpréteur de commande appelé ;\n"
 "  -h, --help              afficher ce message d'aide et quitter ;\n"
 "  -, -l, --login          utiliser un interpréteur de commandes\n"
-"                          initial (« login shell ») ;\n"
+"                          initial (« login shell ») ;\n"
 "  -m, -p,\n"
-"  --preserve-environment  ne pas réinitialisee les variables\n"
+"  --preserve-environment  ne pas réinitialiser les variables\n"
 "                          d'environnement et conserver le même\n"
 "                          interpréteur de commandes ;\n"
 "  -s, --shell SHELL       utiliser SHELL comme interpréteur de\n"
@@ -1547,7 +1552,7 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Entrée dans le mode de maintenance du système\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s : argument numérique « %s » incorrect\n"
 
 #, c-format
@@ -1571,7 +1576,7 @@ msgid "%s: rename: %s"
 msgstr "%s : renomme : %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s : le groupe « %s » est un groupe NIS.\n"
 
 #, c-format
@@ -1607,7 +1612,7 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-"Utilisation : useradd [options] LOGIN\n"
+"Syntaxe : useradd [options] LOGIN\n"
 "\n"
 "Options :\n"
 "  -b, --base-dir REP_BASE     répertoire de base pour le répertoire\n"
@@ -1651,19 +1656,19 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s : impossible d'obtenir un identifiant d'utilisateur (UID) unique\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s : répertoire de base non valable « %s »\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s : commentaire « %s » non valable\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s : répertoire personnel « %s » non valable\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
+msgid "%s: invalid date '%s'\n"
 msgstr "%s : date « %s » non valable\n"
 
 #, c-format
@@ -1675,11 +1680,11 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s : mots de passe cachés nécessaires avec -f\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
+msgid "%s: invalid field '%s'\n"
 msgstr "%s : champ « %s » non valable\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s : interpréteur de commandes « %s » non valable\n"
 
 #, c-format
@@ -1747,17 +1752,18 @@ msgstr "%s : erreur lors de l'ajout de la nouvelle entrée dans /etc/shadow\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s : impossible de créer le répertoire %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr ""
-"Il n'y a pas de groupe dont le nom est « mail », création du répertoire de "
-"dépôt de courrier avec le mode 0600.\n"
+msgid "Creating mailbox file"
+msgstr "Création de la boîte à lettres"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
-"Impossible de créer le répertoire de dépôt de courrier pour l'utilisateur %"
-"s.\n"
+"Le groupe « mail » est introuvable. Création de la boîte à lettre avec le "
+"mode 0600.\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "Définition des permissions de la boîte à lettres"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1785,8 +1791,21 @@ msgstr ""
 "m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Utilisation : %s [-r] nom\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Syntaxe : userdel [options] IDENTIFIANT\n"
+"\n"
+"Options :\n"
+"  -f, --force  forcer la suppression des fichiers, même s'ils\n"
+"               n'appartiennent pas à l'utilisateur\n"
+"  -h, --help   afficher cette page d'aide et quitter\n"
+"  -r, --remove supprimer le répertoire personnel et le spool du courrier\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1869,7 +1888,7 @@ msgid ""
 "  -u, --uid UID\t\t\tnew UID for the user account\n"
 "  -U, --unlock\t\t\tunlock the user account\n"
 msgstr ""
-"Utilisation : usermod [options] LOGIN\n"
+"Syntaxe : usermod [options] LOGIN\n"
 "\n"
 "Options :\n"
 "  -a, --append GROUPE         ajouter l'utilisateur au groupe GROUPE\n"
@@ -1979,17 +1998,17 @@ msgid ""
 "  -q, --quiet\t\t\tquiet mode\n"
 "  -s, --shadow\t\t\tedit shadow or gshadow database\n"
 msgstr ""
-"Utilisation : vipw [options]\n"
+"Syntaxe : vipw [options]\n"
 "\n"
 "Options :\n"
-"  -g, --group\t\t\tmodifier la base de données des groupes\n"
-"             \t\t\t(/etc/group)\n"
-"  -h, --help\t\t\tafficher ce message d'aide et quitter\n"
-"  -p, --passwd\t\t\tmodifier la base de données des comptes\n"
-"              \t\t\t(/etc/passwd)\n"
-"  -p, --quiet\t\t\tmode silencieux\n"
-"  -s, --shadow\t\t\tmodifier la base de données des mots de passe\n"
-"              \t\t\tcachés (« shadow passwords ») : shadow ou gshadow\n"
+"  -g, --group     modifier la base de données des groupes\n"
+"                  (/etc/group)\n"
+"  -h, --help      tafficher ce message d'aide et quitter\n"
+"  -p, --passwd    tmodifier la base de données des comptes\n"
+"                  (/etc/passwd)\n"
+"  -p, --quiet     mode silencieux\n"
+"  -s, --shadow    modifier la base de données des mots de passe\n"
+"                  cachés (« shadow passwords ») : shadow ou gshadow\n"
 
 #, c-format
 msgid ""

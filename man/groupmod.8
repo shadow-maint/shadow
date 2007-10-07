@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPMOD" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: groupmod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "GROUPMOD" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -22,52 +25,53 @@ command modifies the system account files to reflect the changes that are specif
 The options which apply to the
 \fBgroupmod\fR
 command are:
-.TP
+.TP 3n
 \fB\-g\fR \fIgid\fR
 The numerical value of the group's ID. This value must be unique, unless the
 \fB\-o\fR
 option is used. The value must be non\-negative. Values between 0 and 999 are typically reserved for system groups. Any files which the old group ID is the file group ID must have the file group ID changed manually.
-.TP
+.TP 3n
 \fB\-n\fR \fInew_group_name\fR
 The name of the group will be changed from
 \fIgroup\fR
 to
 \fInew_group_name\fR.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/gshadow\fR
-secure group account information
+Secure group account information.
 .SH "EXIT VALUES"
 .PP
 The
 \fBgroupmod\fR
 command exits with the following values:
-.TP
+.TP 3n
 \fI0\fR
 success
-.TP
+.TP 3n
 \fI2\fR
 invalid command syntax
-.TP
+.TP 3n
 \fI3\fR
 invalid argument to option
-.TP
+.TP 3n
 \fI4\fR
 specified group doesn't exist
-.TP
+.TP 3n
 \fI6\fR
 specified group doesn't exist
-.TP
+.TP 3n
 \fI9\fR
 group name already in use
-.TP
+.TP 3n
 \fI10\fR
 can't update group file
 .SH "SEE ALSO"
 .PP
+
 \fBchfn\fR(1),
 \fBchsh\fR(1),
 \fBpasswd\fR(1),

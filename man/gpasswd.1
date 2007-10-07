@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GPASSWD" "1" "11/05/2005" "User Commands" "User Commands"
+.\"     Title: gpasswd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: User Commands
+.\"    Source: User Commands
+.\"
+.TH "GPASSWD" "1" "06/06/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -24,6 +27,7 @@ gpasswd \- administer the /etc/group file
 \fBgpasswd\fR [\-A\ \fIuser,\fR...] [\-M\ \fIuser,\fR...] \fIgroup\fR
 .SH "DESCRIPTION"
 .PP
+
 \fBgpasswd\fR
 is used to administer the
 \fI/etc/group\fR
@@ -37,6 +41,7 @@ option to define members and has all rights of group administrators and members.
 .SS "Notes about group passwords"
 .PP
 Group passwords are an inherent security problem since more than one person is permitted to know the password. However, groups are a useful tool for permitting co\-operation between different users.
+.\" end of SS subsection "Notes about group passwords"
 .SH "OPTIONS"
 .PP
 Group administrator can add and delete users using
@@ -53,19 +58,21 @@ disables access via a password to the group through
 \fBnewgrp\fR
 command (however members will still be able to switch to this group).
 .PP
+
 \fBgpasswd\fR
 called by a group administrator with group name only prompts for the group password. If password is set the members can still
 \fBnewgrp\fR(1)
 without a password, non\-members must supply the password.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/gshadow\fR
-secure group account information
+Secure group account information.
 .SH "SEE ALSO"
 .PP
+
 \fBnewgrp\fR(1),
 \fBgshadow\fR(5),
 \fBgroupadd\fR(8),

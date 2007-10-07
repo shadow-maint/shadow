@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.20 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.25 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>userdel</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -10,15 +8,14 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>userdel</refname>
-    <refpurpose>Delete a user account and related files</refpurpose>
+    <refpurpose>delete a user account and related files</refpurpose>
   </refnamediv>
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>userdel</command>
-      <arg choice='opt'>-f </arg>
-      <arg choice='opt'>-r </arg>
+      <arg choice='opt'>options</arg>
       <arg choice='plain'>
-	<replaceable>login_name</replaceable>
+	<replaceable>LOGIN</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -40,7 +37,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-f</option>
+	  <option>-f</option>, <option>--force</option>
 	</term>
 	<listitem>
 	  <para>
@@ -56,14 +53,20 @@
 	    group of another user.
 	  </para>
 	  <para>
-	    <emphasis>Note:</emphasis> This option is dangerous and may let
+	    <emphasis>Note:</emphasis> This option is dangerous and may leave
 	    your system in an inconsistent state.
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
+        <term><option>-h</option>, <option>--help</option></term>
+          <listitem>
+    	    <para>Display help message and exit.</para>
+    	  </listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>
-	  <option>-r</option>
+	  <option>-r</option>, <option>--remove</option>
 	</term>
 	<listitem>
 	  <para>
@@ -87,25 +90,25 @@
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/login.defs</filename></term>
 	<listitem>
-	  <para>shadow password suite configuration</para>
+	  <para>Shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

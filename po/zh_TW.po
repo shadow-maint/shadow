@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -142,8 +142,8 @@ msgstr "passwd：密碼已成功地變更\n"
 msgid "Incorrect password for %s.\n"
 msgstr "“%s”的密碼不正確\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "無法進入“%s”目錄\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -153,12 +153,12 @@ msgstr "沒有目錄，將以 HOME=/ 登入"
 msgid "Cannot execute %s"
 msgstr "無法執行 %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "無效的根目錄“%s”\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "無法將根目錄改變為“%s”\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -373,36 +373,36 @@ msgstr "其它"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s：無法確定您的使用者名稱。\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s：不能在 NIS 用戶端上修改使用者“%s”。\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s：“%s”是用戶端的 NIS 管理員。\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "正在改變 %s 的使用者訊息\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s：無效的名稱：“%s”\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s：無效的房間號碼：“%s”\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s：無效的工作電話：“%s”\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s：無效的住家電話：“%s”\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s：“%s”包含無效字元\n"
 
 #, c-format
@@ -842,25 +842,41 @@ msgstr "%s：無法打開檔案 %s\n"
 msgid "invalid group file entry\n"
 msgstr "無效的群組檔案項目\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "刪除“%s”行？\""
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "複製群組項目\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "無效的群組名“%s”\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "%s 群組：無使用者 %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "刪除使用者成員“%s”嗎？"
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "沒有找到匹配的群組檔案項目\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "%s shadow群組：無使用者 %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s：無法為 %s 更新shadow項目\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s：無法更新 %s 群組的項目\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -871,15 +887,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "複製shadow群組項目\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "沒有找到匹配的群組檔案項目\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "%s shadow群組：無系統管理者 %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "刪除系統管理者“%s”嗎？"
 
 #, c-format
@@ -909,14 +921,6 @@ msgstr "%s：無法打開shadow群組檔案\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s：無法移除shadow群組 %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s：無法為 %s 更新shadow項目\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s：無法更新 %s 群組的項目\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1014,12 +1018,12 @@ msgstr ""
 "\n"
 "登入逾時 %d 秒\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " 在“%.100s”上，來自“%.200s”"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr "在“%.100s”上"
 
 #, c-format
@@ -1274,6 +1278,18 @@ msgstr "使用者 %s：目錄 %s 不存在\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "使用者 %s：程式 %s 不存在\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "無匹配的密碼檔案項目\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "%s shadow群組：無使用者 %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s：無法為 %s 更新密碼項目\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "無效的shadow密碼檔案項目\n"
@@ -1281,10 +1297,6 @@ msgstr "無效的shadow密碼檔案項目\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "重復的shadow密碼項目\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "無匹配的密碼檔案項目\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1301,10 +1313,6 @@ msgstr "%s：無法打開密碼檔案\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s：無法為 %s 刪除shadow項目\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s：無法為 %s 更新密碼項目\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1406,8 +1414,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "正在進入系統維護模式\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s：無效的數字參數“%s”\n"
 
 #, c-format
@@ -1430,8 +1438,8 @@ msgstr "%s：無法打開新的預設檔案\n"
 msgid "%s: rename: %s"
 msgstr "%s：更名：%s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s：“%s”群組是一個 NIS 群組。\n"
 
 #, c-format
@@ -1476,20 +1484,20 @@ msgstr "%s：gid %u 並不唯一\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s：無效的主目錄“%s”\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s：無效注釋“%s”\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s：無效的主目錄“%s”\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s：無效日期“%s”\n"
 
 #, c-format
@@ -1500,12 +1508,12 @@ msgstr "%s：-e 參數需要有shadow密碼\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s：-f 參數需要有shadow密碼\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s：無效字段 “%s”\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s：無效 shell“%s”\n"
 
 #, c-format
@@ -1564,13 +1572,16 @@ msgstr "%s：加入新shadow密碼項時出錯\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s：無法建立目錄 %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr "找不到名為 \"mail\" 的群組，以 0600 模式來建立郵件暫存檔。\n"
+msgid "Creating mailbox file"
+msgstr ""
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "無法替使用者 %s 建立郵件暫存檔。\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1593,8 +1604,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s：警告：CREATE_HOME 不支援，請使用 -m 參數。\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "用法：%s [-r] 名稱\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1769,37 +1786,9 @@ msgstr "無法備份"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 
-#, fuzzy
 #~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
-#~ msgstr "登入錯誤"
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr "找不到名為 \"mail\" 的群組，以 0600 模式來建立郵件暫存檔。\n"
 
-#, fuzzy
-#~ msgid ""
-#~ "Usage:\n"
-#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-#~ "`{vipw|vigr} -q' quiet mode\n"
-#~ msgstr ""
-#~ "用法：\n"
-#~ "“vipw” 編輯 /etc/passwd      “vipw -s” 編輯 /etc/shadow\n"
-#~ "“vigr” 編輯 /etc/group       “vigr -s” 編輯 /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s：PAM chauthtok 失敗\n"
-
-#~ msgid "%s: Cannot execute %s"
-#~ msgstr "%s：無法執行 %s"
-
-#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-#~ msgstr "用法：%s\t[-u uid [-o]] [-g 群組] [-G 群組,...] \n"
-
-#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-#~ msgstr "\t\t[-d 家目錄 [-m]] [-s shell] [-c 注釋] [-l 新名稱]\n"
-
-#~ msgid "[-f inactive] [-e expire] "
-#~ msgstr "[-f 失效日] [-e 過期日 ] "
-
-#~ msgid "[-p passwd] [-L|-U] name\n"
-#~ msgstr "[-p 密碼] [-L|-U] 名稱\n"
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "無法替使用者 %s 建立郵件暫存檔。\n"

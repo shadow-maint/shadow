@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='passwd.1'>
-  <!--  $Id: passwd.1.xml,v 1.27 2006/02/28 19:23:59 kloczek Exp $ -->
+  <!--  $Id: passwd.1.xml,v 1.32 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -52,10 +50,15 @@
       </para>
 
       <para>
-	The user is then prompted for a replacement password. This password
-	is tested for complexity. As a general guideline, passwords should
-	consist of 6 to 8 characters including one or more from each of
-	following sets:
+	The user is then prompted twice for a replacement password. The
+	second entry is compared against the first and both are required to
+	match in order for the password to be changed.
+      </para>
+
+      <para>
+	Then, the password is tested for complexity. As a general guideline,
+	passwords should consist of 6 to 8 characters including one or more
+	characters from each of the following sets:
       </para>
 
       <itemizedlist mark='bullet'>
@@ -76,11 +79,6 @@
 	is not suitably complex.
       </para>
 
-      <para>
-	If the password is accepted, <command>passwd</command> will prompt
-	again and compare the second entry against the first. Both entries
-	are required to match in order for the password to be changed.
-      </para>
     </refsect2>
 
     <refsect2 id='hints_for_user_passwords'>
@@ -220,13 +218,13 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-n</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
+	  <option>-m</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    Set the minimum number of days between password changes. A value
-	    of zero for this field indicates that the user may change his/her
-	    password at any time.
+	    Set the minimum number of days between password changes to
+	    <replaceable>MIN_DAYS</replaceable>. A value of zero for this field
+	    indicates that the user may change his/her password at any time.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -324,13 +322,13 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -368,13 +366,13 @@
 	<varlistentry>
 	  <term><replaceable>4</replaceable></term>
 	  <listitem>
-	    <para>unexpected failure, passwd file missing</para>
+	    <para>unexpected failure, <filename>passwd</filename> file missing</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
 	  <term><replaceable>5</replaceable></term>
 	  <listitem>
-	    <para>passwd file busy, try again</para>
+	    <para><filename>passwd</filename> file busy, try again</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>

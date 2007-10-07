@@ -1,4 +1,69 @@
-$Id: NEWS,v 1.382 2006/03/12 22:35:35 kloczek Exp $
+$Id: NEWS,v 1.430 2006/06/04 19:32:56 kloczek Exp $
+
+shadow-4.0.15 -> shadow-4.0.16						05-06-2006
+
+*** general:
+- userdel: better fix for old CERT VU#312962 (which was fixed in shadow 4.0.8):
+  fixed forgoten checking of the return value from fchown() before
+  proceeding with the fchmod() (based on Owl patch prepared by
+  Rafal Wojtczuk <nergal@owl.openwall.com>),
+- userdel: use login.defs::MAIL_DIR instead hardcoded /var/mail in created
+  mailbox path (based on Owl fixes submited
+  by Solar Designer <solar@openwall.com>),
+- by default do not use libshadow_getpass() as getpass() replacemement.
+  Use libshadow_getpass() only when S/KEY support is enabled.
+  Current glibc getpass() handles correctly longer than 8 characters
+  passwords and libshadow_getpass() is used only because libc getpass()
+  do not handles password prompting with echo enabled,
+- move login.defs::MD5_CRYPT_ENAB to non-PAM part,
+- userdel: rewrited for use getopt_log(),
+- install default/template configuration files:
+-- if shadow is configured with use PAM install /etc/pam.d/* files,
+-- if shadow do not uses PAM install /etc/{limits,login.acces} files,
+-- install /etc/login.defs and /etc/default/useradd files,
+- fixed handle relative symlinks too in lib/commonio.c
+  (merge patch from Fedora),
+- properly notify nscd to flush its cache
+  (https://bugzilla.redhat.com/bugzilla/186803),
+- useradd, usermod: fixes for verify return values mkdir() and chown()
+  on copy files (merge 482_libmisc_copydir_check_return_values Debian
+  patch),
+- login, su (non-PAM variant): export MAIL only when MAIL_CHECK_ENAB
+  is enabled (Mike Frysinger <vapier@gentoo.org>),
+- pgck, grpck: warn when the members of a group differ in /etc/groups
+  and /etc/gshadow (fixed http://bugs.debian.org/75181),
+- su: fixed exit with a status 0 when the invoked command is terminated
+  by a signal which was not catched
+  (fixed by Eero Häkkinen <eero17@bigfoot.com>),
+- login: cancel login timeout after authentication so that patient people
+  timing out on network directory services can log in with local
+  accounts (http://bugs.debian.org/107148),
+- chgpasswd: fixes for build correctly with --disable-shadowgrp
+  (patch by Johannes Winkelmann <jw@tks6.net>).
+- updated translations: cs, da, es, eu, fi, fr, gl, hu, id, pt, ru, sk, sv, vi.
+- new translations: hu.
+*** documentation:
+- new cs man pages: groupmems(8), groupmod(8), grpck(8), gshadow(5)
+  (by Miroslav Kure <kurem@upcase.inf.upol.cz>),
+- regenerate roff man pages using docbook-style-xsl-1.70.1,
+- bunch of cleanups in chfn(1), faillog(8), gpasswd(1), groupadd(8),
+  groupmems(8), limits(5), login(1), login.defs(5), newgrp(1), passwd(1),
+  passwd(5) and su(1) (by Yuri Kozlov <kozlov.y@gmail.com>),
+- update pl vipw(8) man page,
+- added chgpasswd(8) ru man page,
+- updated ru login.defs(5), passwd(1), userdel(8), usermod(8) man pages,
+- pw_auth(3) man page removed (outdated),
+- install limits(5), login.access(5) and porttime(5) man pages only when
+  shadow is builded with PAM support disabled,
+- passwd(1): better document how password strength is checked
+  (fixed http://bugs.debian.org/115380),
+- usermod(8): added missing -a option description
+  (by Christian Perrier <bubulle@debian.org>),
+- hu chsh(1), lugin(1), newgrp(1): fixed typos
+  (by Koblinger Egmont <egmont@uhulinux.hu>),
+- login.defs(5): remove information about CREATE_HOME (patch by
+  Mike Frysinger <vapier@gentoo.org>),
+- chgpasswd(8): new man page.
 
 shadow-4.0.14 -> shadow-4.0.15						13-03-2006
 
@@ -476,7 +541,7 @@ shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
 - applied 036_pam_access_with_preauth.patch Debian patch submited by Bjorn
   Torkelsson <Bjorn.Torkelsson@hpc2n.umu.se>: add support for PAM account
   management to restrict access using pam_access when login is invoked with -f.
-- applied OWL patches by Solar Designer <solar@openwall.com>:
+- applied Owl patches by Solar Designer <solar@openwall.com>:
   shadow-4.0.4.1-owl-pam-auth.diff:
     Moved the PAM authentication in user management commands after
     command-line parsing, made it use separate service names for each command.

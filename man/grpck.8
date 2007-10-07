@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GRPCK" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.\"     Title: grpck
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "GRPCK" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,6 +17,7 @@ grpck \- verify integrity of group files
 \fBgrpck\fR [\-r] [\fIgroup\fR\ \fIshadow\fR]
 .SH "DESCRIPTION"
 .PP
+
 \fBgrpck\fR
 verifies the integrity of the system authentication information. All entries in the
 \fI/etc/group\fR
@@ -22,15 +26,17 @@ and
 are checked to see that the entry has the proper format and valid data in each field. The user is prompted to delete entries that are improperly formatted or which have other uncorrectable errors.
 .PP
 Checks are made to verify that each entry has:
-.TP 3
+.TP 3n
 \(bu
 the correct number of fields
-.TP
+.TP 3n
 \(bu
 a unique group name
-.TP
+.TP 3n
 \(bu
 a valid list of members and administrators
+.sp
+.RE
 .PP
 The checks for correct number of fields and unique group name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated group name is prompted for deletion, but the remaining checks will still be made. All other errors are warnings and the user is encouraged to run the
 \fBgroupmod\fR
@@ -66,17 +72,18 @@ by GID. To run it in sort mode pass it
 \fB\-s\fR
 flag. No checks are performed then, it just sorts.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/group\fR
-group account information
-.TP
+Group account information.
+.TP 3n
 \fI/etc/gshadow\fR
-secure group account information
-.TP
+Secure group account information.
+.TP 3n
 \fI/etc/passwd\fR
-user account information
+User account information.
 .SH "SEE ALSO"
 .PP
+
 \fBgroup\fR(5),
 \fBpasswd\fR(5),
 \fBshadow\fR(5),
@@ -86,22 +93,22 @@ user account information
 The
 \fBgrpck\fR
 command exits with the following values:
-.TP
+.TP 3n
 \fI0\fR
 success
-.TP
+.TP 3n
 \fI1\fR
 invalid command syntax
-.TP
+.TP 3n
 \fI2\fR
 one or more bad group entries
-.TP
+.TP 3n
 \fI3\fR
 can't open group files
-.TP
+.TP 3n
 \fI4\fR
 can't lock group files
-.TP
+.TP 3n
 \fI5\fR
 can't update group files
 

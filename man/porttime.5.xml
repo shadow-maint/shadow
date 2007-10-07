@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='porttime.5'>
-  <!--  $Id: porttime.5.xml,v 1.15 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!--  $Id: porttime.5.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>porttime</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -80,7 +78,7 @@
       <varlistentry>
 	<term><filename>/etc/porttime</filename></term>
 	<listitem>
-	  <para>file containing port access</para>
+	  <para>File containing port access.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

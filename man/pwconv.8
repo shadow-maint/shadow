@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PWCONV" "8" "12/07/2005" "System Management Commands" "System Management Commands"
+.\"     Title: pwconv
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: System Management Commands
+.\"    Source: System Management Commands
+.\"
+.TH "PWCONV" "8" "06/06/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and groups.
+pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and groups
 .SH "SYNOPSIS"
 .HP 7
 \fBpwconv\fR
@@ -20,6 +23,7 @@ pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and
 \fBgrpunconv\fR
 .SH "DESCRIPTION"
 .PP
+
 \fBpwconv\fR
 creates
 \fIshadow\fR
@@ -28,6 +32,7 @@ from
 and an optionally existing
 \fIshadow\fR.
 .PP
+
 \fBpwunconv\fR
 creates
 \fIpasswd\fR
@@ -38,6 +43,7 @@ and
 and then removes
 \fIshadow\fR.
 .PP
+
 \fBgrpconv\fR
 creates
 \fIgshadow\fR
@@ -46,6 +52,7 @@ from
 and an optionally existing
 \fIgshadow\fR.
 .PP
+
 \fBgrpunconv\fR
 creates
 \fIgroup\fR
@@ -68,6 +75,7 @@ and
 \fBgrpconv\fR
 are similar. First, entries in the shadowed file which don't exist in the main file are removed. Then, shadowed entries which don't have `x' as the password in the main file are updated. Any missing shadowed entries are added. Finally, passwords in the main file are replaced with `x'. These programs can be used for initial conversion as well to update the shadowed file if the main file is edited by hand.
 .PP
+
 \fBpwconv\fR
 will use the values of
 \fIPASS_MIN_DAYS\fR,
@@ -92,11 +100,12 @@ and
 \fBgrpck\fR
 to correct any such errors before converting to or from shadow passwords or groups.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/login.defs\fR
-shadow password suite configuration
+Shadow password suite configuration.
 .SH "SEE ALSO"
 .PP
+
 \fBgrpck\fR(8),
 \fBlogin.defs\fR(5),
 \fBpwck\fR(8).

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sub.c,v 1.9 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id: sub.c,v 1.10 2006/05/07 16:12:16 kloczek Exp $"
 
 #include <pwd.h>
 #include <stdio.h>
@@ -53,7 +53,7 @@ void subsystem (const struct passwd *pw)
 	 */
 
 	if (pw->pw_dir[0] != '/') {
-		printf (_("Invalid root directory \"%s\"\n"), pw->pw_dir);
+		printf (_("Invalid root directory '%s'\n"), pw->pw_dir);
 		SYSLOG ((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();
 		exit (1);
@@ -65,7 +65,7 @@ void subsystem (const struct passwd *pw)
 	 */
 
 	if (chdir (pw->pw_dir) || chroot (pw->pw_dir)) {
-		printf (_("Can't change root directory to \"%s\"\n"),
+		printf (_("Can't change root directory to '%s'\n"),
 			pw->pw_dir);
 		SYSLOG ((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
 		closelog ();

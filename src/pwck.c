@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwck.c,v 1.33 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: pwck.c,v 1.35 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <fcntl.h>
 #include <grp.h>
@@ -41,6 +41,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "getdef.h"
 #include "nscd.h"
 extern void __pw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__pw_get_head (void);
@@ -116,7 +117,7 @@ int main (int argc, char **argv)
 {
 	int arg;
 	int errors = 0;
-	int deleted = 0;
+	int changed = 0;
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
 	int sort_mode = 0;
@@ -254,7 +255,7 @@ int main (int argc, char **argv)
 			 * them to delete it.
 			 */
 			printf (_("invalid password file entry\n"));
-			printf (_("delete line `%s'? "), pfe->line);
+			printf (_("delete line '%s'? "), pfe->line);
 			errors++;
 
 			/*
@@ -272,7 +273,7 @@ int main (int argc, char **argv)
 		      delete_pw:
 			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
 				 pfe->line));
-			deleted++;
+			changed++;
 
 			__pw_del_entry (pfe);
 			continue;
@@ -309,7 +310,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 			printf (_("duplicate password entry\n"));
-			printf (_("delete line `%s'? "), pfe->line);
+			printf (_("delete line '%s'? "), pfe->line);
 			errors++;
 
 			/*
@@ -367,6 +368,60 @@ int main (int argc, char **argv)
 				pwd->pw_name, pwd->pw_shell);
 			errors++;
 		}
+#ifdef SHADOWPWD
+		/*
+		 * Make sure this entry exists in the /etc/gshadow file.
+		 */
+
+		if (is_shadow) {
+			spw = (struct spwd *) spw_locate (pwd->pw_name);
+			if (spw == NULL) {
+				printf (_
+					("no matching password file entry in %s\n"),
+					spw_file);
+				printf (_("add user '%s' in %s? "),
+					pwd->pw_name, spw_file);
+				errors++;
+				if (yes_or_no ()) {
+					struct spwd sp;
+					struct passwd pw;
+
+					sp.sp_namp = pwd->pw_name;
+					sp.sp_pwdp = pwd->pw_passwd;
+					sp.sp_min =
+					    getdef_num ("PASS_MIN_DAYS", -1);
+					sp.sp_max =
+					    getdef_num ("PASS_MAX_DAYS", -1);
+					sp.sp_warn =
+					    getdef_num ("PASS_WARN_AGE", -1);
+					sp.sp_inact = -1;
+					sp.sp_expire = -1;
+					sp.sp_flag = -1;
+					sp.sp_lstchg =
+					    time ((time_t *) 0) / (24L * 3600L);
+					changed++;
+
+					if (!spw_update (&sp)) {
+						fprintf (stderr,
+							 _
+							 ("%s: can't update shadow entry for %s\n"),
+							 Prog, sp.sp_namp);
+						exit (E_CANTUPDATE);
+					}
+					/* remove password from /etc/passwd */
+					pw = *pwd;
+					pw.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+					if (!pw_update (&pw)) {
+						fprintf (stderr,
+							 _
+							 ("%s: can't update passwd entry for %s\n"),
+							 Prog, pw.pw_name);
+						exit (E_CANTUPDATE);
+					}
+				}
+			}
+		}
+#endif
 	}
 
 	if (!is_shadow)
@@ -376,6 +431,13 @@ int main (int argc, char **argv)
 	 * Loop through the entire shadow password file.
 	 */
 	for (spe = __spw_get_head (); spe; spe = spe->next) {
+		/*
+		 * Do not treat lines which were missing in gshadow
+		 * and were added earlier.
+		 */
+		if (spe->line == NULL)
+			continue;
+
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
@@ -394,7 +456,7 @@ int main (int argc, char **argv)
 			 * them to delete it.
 			 */
 			printf (_("invalid shadow password file entry\n"));
-			printf (_("delete line `%s'? "), spe->line);
+			printf (_("delete line '%s'? "), spe->line);
 			errors++;
 
 			/*
@@ -412,7 +474,7 @@ int main (int argc, char **argv)
 		      delete_spw:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 spe->line));
-			deleted++;
+			changed++;
 
 			__spw_del_entry (spe);
 			continue;
@@ -449,7 +511,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 			printf (_("duplicate shadow password entry\n"));
-			printf (_("delete line `%s'? "), spe->line);
+			printf (_("delete line '%s'? "), spe->line);
 			errors++;
 
 			/*
@@ -468,8 +530,9 @@ int main (int argc, char **argv)
 			 * Tell the user this entry has no matching
 			 * /etc/passwd entry and ask them to delete it.
 			 */
-			printf (_("no matching password file entry\n"));
-			printf (_("delete line `%s'? "), spe->line);
+			printf (_("no matching password file entry in %s\n"),
+				pwd_file);
+			printf (_("delete line '%s'? "), spe->line);
 			errors++;
 
 			/*
@@ -493,10 +556,10 @@ int main (int argc, char **argv)
       shadow_done:
 
 	/*
-	 * All done. If there were no deletions we can just abandon any
+	 * All done. If there were no change we can just abandon any
 	 * changes to the files.
 	 */
-	if (deleted) {
+	if (changed) {
 	      write_and_bye:
 		if (!pw_close ()) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
@@ -527,7 +590,7 @@ int main (int argc, char **argv)
 	 * Tell the user what we did and exit.
 	 */
 	if (errors)
-		printf (deleted ?
+		printf (changed ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
 

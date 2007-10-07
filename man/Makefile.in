@@ -143,6 +143,8 @@ U = @U@
 USE_NLS = @USE_NLS@
 USE_NLS_FALSE = @USE_NLS_FALSE@
 USE_NLS_TRUE = @USE_NLS_TRUE@
+USE_PAM_FALSE = @USE_PAM_FALSE@
+USE_PAM_TRUE = @USE_PAM_TRUE@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -192,6 +194,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+LINGUAS = fr pl ru
 
 # subdirectories for translated manual pages
 DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
@@ -200,6 +203,7 @@ DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
 man_XMANS = \
 	chage.1.xml \
 	chfn.1.xml \
+	chgpasswd.8.xml \
 	chpasswd.8.xml \
 	chsh.1.xml \
 	expiry.1.xml \
@@ -237,9 +241,17 @@ man_XMANS = \
 	usermod.8.xml \
 	vipw.8.xml
 
+@USE_PAM_FALSE@man_nonpam = \
+@USE_PAM_FALSE@	limits.5 \
+@USE_PAM_FALSE@	login.access.5 \
+@USE_PAM_FALSE@	porttime.5
+
+@USE_PAM_TRUE@man_nonpam = 
 man_MANS = \
+	$(man_nonpam) \
 	chage.1 \
 	chfn.1 \
+	chgpasswd.8 \
 	chpasswd.8 \
 	chsh.1 \
 	expiry.1 \
@@ -256,9 +268,7 @@ man_MANS = \
 	grpunconv.8 \
 	gshadow.5 \
 	lastlog.8 \
-	limits.5 \
 	login.1 \
-	login.access.5 \
 	login.defs.5 \
 	logoutd.8 \
 	newgrp.1 \
@@ -266,7 +276,6 @@ man_MANS = \
 	nologin.8 \
 	passwd.1 \
 	passwd.5 \
-	porttime.5 \
 	pwck.8 \
 	pwconv.8 \
 	pwunconv.8 \
@@ -281,17 +290,18 @@ man_MANS = \
 	vigr.8 \
 	vipw.8
 
-EXTRA_DIST = $(man_MANS) \
+EXTRA_DIST = \
+	$(man_MANS) \
 	$(man_XMANS) \
+	$(man_nonpam) \
 	id.1 \
 	id.1.xml \
-	pw_auth.3 \
-	pw_auth.3.xml \
 	sulogin.8 \
-	sulogin.8.xml \
 	sulogin.8.xml
 
 @ENABLE_REGENERATE_MAN_TRUE@CLEANFILES = $(man_MANS)
+POFILES = $(foreach lang, $(LINGUAS), $(lang)/$(lang).po)
+ALL_TRANSLATED_XMLS = $(foreach dir, $(LINGUAS), $(foreach xmlfile, $(man_XMANS), $(dir)/$(xmlfile)))
 all: all-recursive
 
 .SUFFIXES:
@@ -689,6 +699,9 @@ distdir: $(DISTFILES)
 	      || exit 1; \
 	  fi; \
 	done
+	$(MAKE) $(AM_MAKEFLAGS) \
+	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
+	  dist-hook
 check-am: all-am
 check: check-recursive
 all-am: Makefile $(MANS)
@@ -776,149 +789,181 @@ uninstall-man: uninstall-man1 uninstall-man3 uninstall-man5 \
 
 .PHONY: $(RECURSIVE_TARGETS) CTAGS GTAGS all all-am check check-am \
 	clean clean-generic clean-libtool clean-recursive ctags \
-	ctags-recursive distclean distclean-generic distclean-libtool \
-	distclean-recursive distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-man1 install-man3 \
-	install-man5 install-man8 install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic maintainer-clean-recursive \
-	mostlyclean mostlyclean-generic mostlyclean-libtool \
-	mostlyclean-recursive pdf pdf-am ps ps-am tags tags-recursive \
-	uninstall uninstall-am uninstall-info-am uninstall-man \
-	uninstall-man1 uninstall-man3 uninstall-man5 uninstall-man8
+	ctags-recursive dist-hook distclean distclean-generic \
+	distclean-libtool distclean-recursive distclean-tags distdir \
+	dvi dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-exec install-exec-am \
+	install-info install-info-am install-man install-man1 \
+	install-man3 install-man5 install-man8 install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
+	maintainer-clean maintainer-clean-generic \
+	maintainer-clean-recursive mostlyclean mostlyclean-generic \
+	mostlyclean-libtool mostlyclean-recursive pdf pdf-am ps ps-am \
+	tags tags-recursive uninstall uninstall-am uninstall-info-am \
+	uninstall-man uninstall-man1 uninstall-man3 uninstall-man5 \
+	uninstall-man8
 
 
 all:
 
+@ENABLE_REGENERATE_MAN_TRUE@chage.1: chage.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@chfn.1: chfn.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@chgpasswd.8: chgpasswd.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@chpasswd.8: chpasswd.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@chsh.1: chsh.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@expiry.1: expiry.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@faillog.5: faillog.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@faillog.8: faillog.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@gpasswd.1: gpasswd.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@groupadd.8: groupadd.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@groupdel.8: groupdel.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@groupmems.8: groupmems.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@groupmod.8: groupmod.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@groups.1: groups.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@grpck.8: grpck.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@gshadow.5: gshadow.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@id.1: id.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@lastlog.8: lastlog.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@limits.5: limits.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@login.1: login.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@login.access.5: login.access.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@login.defs.5: login.defs.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@logoutd.8: logoutd.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@newgrp.1: newgrp.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@newusers.8: newusers.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@nologin.8: nologin.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@passwd.1: passwd.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@passwd.5: passwd.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@porttime.5: porttime.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@pwck.8: pwck.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@grpconv.8 grpunconv.8 pwconv.8 pwunconv.8: pwconv.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@shadow.3 getspnam.3: shadow.3.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@shadow.5: shadow.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@sg.1: sg.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@su.1: su.1.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@sulogin.8: sulogin.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@suauth.5: suauth.5.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@useradd.8: useradd.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@userdel.8: userdel.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@usermod.8: usermod.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@vigr.8 vipw.8: vipw.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+
+all: $(POFILES)
+
+gen-xmls: $(ALL_TRANSLATED_XMLS)
+
+$(ALL_TRANSLATED_XMLS):
+	xml2po -l $(strip $(subst /,, $(dir $@))) -p $(strip $(subst /,, $(dir $@)))/$(strip $(subst /,, $(dir $@))).po -o $@ $(notdir $@)
+
+$(foreach lang, $(LINGUAS), $(lang)/$(lang).po): shadow-man-pages.pot
+
+shadow-man-pages.pot: $(man_XMANS)
+
+dist-hook: dist-po-files
+
+.PHONY: dist-po-files
+dist-po-files: $(POFILES) shadow-man-pages.pot
+	@for lang in $(LINGUAS); do \
+	  echo " $(mkinstalldirs) $(distdir)/$$lang"; \
+	  $(mkinstalldirs) "$(distdir)/$$lang"; \
+	done
+	@for file in $(POFILES); do \
+	  echo "$(INSTALL_DATA) $(srcdir)/$$file $(distdir)/$$file"; \
+	  $(INSTALL_DATA) "$(srcdir)/$$file" "$(distdir)/$$file"; \
+	done
+	$(INSTALL_DATA) "$(srcdir)/shadow-man-pages.pot" "$(distdir)/shadow-man-pages.pot"
+
 shadow-man-pages.pot: $(man_XMANS)
 	xml2po -o $@ $(man_XMANS)
 
+.PHONY: update-po
 update-po: shadow-man-pages.pot
-
-@ENABLE_REGENERATE_MAN_TRUE@chage.1: chage.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@chfn.1: chfn.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@chpasswd.8: chpasswd.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@chsh.1: chsh.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@expiry.1: expiry.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@faillog.5: faillog.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@faillog.8: faillog.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@gpasswd.1: gpasswd.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@groupadd.8: groupadd.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@groupdel.8: groupdel.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@groupmems.8: groupmems.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@groupmod.8: groupmod.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@groups.1: groups.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@grpck.8: grpck.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@gshadow.5: gshadow.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@id.1: id.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@lastlog.8: lastlog.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@limits.5: limits.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@login.1: login.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@login.access.5: login.access.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@login.defs.5: login.defs.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@logoutd.8: logoutd.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@newgrp.1: newgrp.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@newusers.8: newusers.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@nologin.8: nologin.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@passwd.1: passwd.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@passwd.5: passwd.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@porttime.5: porttime.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@pw_auth.3: pw_auth.3.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@pwck.8: pwck.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@grpconv.8 grpunconv.8 pwconv.8 pwunconv.8: pwconv.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@shadow.3 getspnam.3: shadow.3.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@shadow.5: shadow.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@sg.1: sg.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@su.1: su.1.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@sulogin.8: sulogin.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@suauth.5: suauth.5.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@useradd.8: useradd.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@userdel.8: userdel.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@usermod.8: usermod.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-@ENABLE_REGENERATE_MAN_TRUE@vigr.8 vipw.8: vipw.8.xml
-@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+	@for lang in $(LINGUAS); do \
+	  echo "$$lang:"; \
+	  echo "$(MSGMERGE) -o $$lang/$$lang.po $$lang/$$lang.po shadow-man-pages.pot"; \
+	  $(MSGMERGE) -o $$lang/$$lang.po $$lang/$$lang.po shadow-man-pages.pot; \
+	done
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

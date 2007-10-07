@@ -23,12 +23,12 @@ Mailing lists archives:
 	shadow-commit@pld.org.pl - http://mail.pld.org.pl/mailman/pipermail/shadow-commit/
 
 S/Key support:
-	Shadow can be builded with S/Key support using S/Key support from:
+	Shadow can be built with S/Key support using the S/Key package from:
 
 	http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libskey/
-	and
-	http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2
-	
+	or
+	http://gentoo.osuosl.org/distfiles/skey-1.1.5.tar.bz2
+
 Authors and contributors
 ========================
 

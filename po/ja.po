@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1990827\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2000-06-18 120:22+0900\n"
 "Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
 "Language-Team: Japanese\n"
@@ -136,8 +136,8 @@ msgstr ""
 msgid "Incorrect password for %s.\n"
 msgstr "%sのパスワードの変更\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "\"%s\"へディレクトリ変更できません\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -147,12 +147,12 @@ msgstr "ディレクトリがありません. HOME=/ としてログインしま
 msgid "Cannot execute %s"
 msgstr "%sを実行できません"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "不正なルートディレクトリ  \"%s\" です \n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "ルートディレクトリを \"%s\"へ変更できません\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -358,36 +358,36 @@ msgstr "その他"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: あなたのユーザ名を判定できません.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: NISクライアント上でユーザ`%s'は変更できません.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: `%s'がこのクライアント用のNISマスターです.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "%sのユーザ情報変更中\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: ユーザ名が不正です: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: 部屋番号が不正です: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: 職場電話番号が不正です: \"%s\"\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: 自宅電話番号が不正です: \"%s\"\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\" は不正な文字を含んでいます\n"
 
 #, c-format
@@ -802,25 +802,41 @@ msgstr "%s: ファイル %s を開けません\n"
 msgid "invalid group file entry\n"
 msgstr "不正なグループ・ファイルのエントリです\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "`%s'行を削除しますか? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "グループエントリが重複しています\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "不正なグループ名 `%s' です\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "グループ %s: ユーザ %s はいません\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "メンバー `%s' を削除しますか? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "グループファイルエントリと一致しません\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "グループ %s: ユーザ %s はいません\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: %s のシャドウ・エントリを更新できません\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: グループ %s のエントリを更新できません\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -830,16 +846,12 @@ msgstr "シャドウ・グループ・ファイル・エントリが不正です
 msgid "duplicate shadow group entry\n"
 msgstr "グループエントリが重複しています\n"
 
-#, c-format
-msgid "no matching group file entry\n"
-msgstr "グループファイルエントリと一致しません\n"
-
 #, fuzzy, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "グループ %s: ユーザ %s はいません\n"
 
 #, fuzzy, c-format
-msgid "delete administrative member `%s'? "
+msgid "delete administrative member '%s'? "
 msgstr "メンバー `%s' を削除しますか? "
 
 #, fuzzy, c-format
@@ -869,14 +881,6 @@ msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: シャドウ・グループ %s を削除できません\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: %s のシャドウ・エントリを更新できません\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: グループ %s のエントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -965,11 +969,11 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
+msgid " on '%.100s' from '%.200s'"
 msgstr ""
 
 #, c-format
-msgid " on `%.100s'"
+msgid " on '%.100s'"
 msgstr ""
 
 #, c-format
@@ -1223,6 +1227,18 @@ msgstr "ユーザ %s: ディレクトリ %s が存在しません\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "ユーザ %s: プログラム %s は存在しません\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "パスワード・ファイル・エントリと一致しません\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "グループ %s: ユーザ %s はいません\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: %sのパスワードエントリを更新できません\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "不正なシャドウ・パスワード・エントリです\n"
@@ -1230,10 +1246,6 @@ msgstr "不正なシャドウ・パスワード・エントリです\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "シャドウ・パスワード・エントリが重複しています\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "パスワード・ファイル・エントリと一致しません\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1250,10 +1262,6 @@ msgstr "%s: パスワードファイルを開けません\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: %sのシャドウ・エントリを削除できません\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: %sのパスワードエントリを更新できません\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1353,7 +1361,7 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "システムメンテナンスモードへ入ります\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: コメント `%s' は不正です\n"
 
 #, fuzzy, c-format
@@ -1377,7 +1385,7 @@ msgid "%s: rename: %s"
 msgstr "%s: %sを作成できません"
 
 #, fuzzy, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: %sグループは NIS のグループです\n"
 
 #, c-format
@@ -1422,20 +1430,20 @@ msgstr "%s: ユーザID %u が重複しています\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: 一意のグループIDを取得できません\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ベースディレクトリ `%s' は不正です\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: コメント `%s' は不正です\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: ホームディレクトリ `%s' は不正です\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: 日付 `%s' は不正です\n"
 
 #, fuzzy, c-format
@@ -1447,11 +1455,11 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: シャドウ・パスワードには -e および -e が必要です\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid field `%s'\n"
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: シェル `%s' は不正です\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: シェル `%s' は不正です\n"
 
 #, fuzzy, c-format
@@ -1510,13 +1518,16 @@ msgstr "%s: シャドウ・パスワード・エントリ削除のエラーで�
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: ディレクトリ%sを %sへ名前変更できません\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: ユーザ %s のエントリを更新できません\n"
+#, c-format
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1540,8 +1551,14 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "使用法: %s [-r] ユーザ名\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1717,37 +1734,5 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %sを復旧できませんでした: %s (あなたの変更は%sにあります)\n"
 
 #, fuzzy
-#~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
-#~ msgstr "ログインが違います"
-
-#, fuzzy
-#~ msgid ""
-#~ "Usage:\n"
-#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-#~ "`{vipw|vigr} -q' quiet mode\n"
-#~ msgstr ""
-#~ "使用法:\n"
-#~ "`vipw' /etc/passwd を編集       `vipw -s' /etc/shadowを編集\n"
-#~ "`vigr' /etc/groupを編集         `vigr -s' /etc/gshadowを編集\n"
-
-#, fuzzy
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: ファイルをロックできません\n"
-
-#~ msgid "%s: Cannot execute %s"
-#~ msgstr "%s: %sを実行できません"
-
-#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-#~ msgstr "使用法: %s\t[-u ユーザID [-o]] [-g グループ] [-G グループ,...] \n"
-
-#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-#~ msgstr "\t\t[-d ホーム [-m]] [-s シェル] [-c コメント] [-l 新規ユーザ名]\n"
-
-#~ msgid "[-f inactive] [-e expire] "
-#~ msgstr "[-f 無効日数] [-e 期限切れ日] "
-
-#~ msgid "[-p passwd] [-L|-U] name\n"
-#~ msgstr "[-p パスワード] [-L|-U] ユーザ名\n"
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: ユーザ %s のエントリを更新できません\n"

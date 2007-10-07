@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-12 21:00+0000\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-05-13 23:00+0000\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -138,8 +138,8 @@ msgid "Incorrect password for %s.\n"
 msgstr "Password incorrecta para %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
-msgstr "Não foi possível mudar para o directório \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
+msgstr "Não foi possível mudar para o directório '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Directório não encontrado, a entrar para HOME=/"
@@ -149,12 +149,12 @@ msgid "Cannot execute %s"
 msgstr "Não foi possível executar %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
-msgstr "Directório raiz inválido \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
+msgstr "Directório raiz inválido '%s'\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Não é possível mudar o directório raiz para \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Não é possível mudar o directório raiz para '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -378,36 +378,36 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Não é possível determinar o seu nome de utilizador.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: não é possível alterar o utilizador `%s' no cliente NIS.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: não é possível alterar o utilizador '%s' no cliente NIS.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' é o NIS master para este cliente.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' é o NIS master para este cliente.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "A alterar a informação de utilizador de %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: nome inválido: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s: nome inválido: '%s'\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: número de sala inválido: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s: número de sala inválido: '%s'\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: telefone do emprego inválido: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: telefone do emprego inválido: '%s'\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: telefone de casa inválido: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s: telefone de casa inválido: '%s'\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" contém caracteres não permitidos.\n"
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s: '%s' contém caracteres não permitidos.\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -861,24 +861,40 @@ msgid "invalid group file entry\n"
 msgstr "um registo no ficheiro dos grupos é inválido\n"
 
 #, c-format
-msgid "delete line `%s'? "
-msgstr "apagar a linha `%s'? "
+msgid "delete line '%s'? "
+msgstr "apagar a linha '%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "registo de grupo duplicado\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
-msgstr "o nome de grupo `%s' é inválido\n"
+msgid "invalid group name '%s'\n"
+msgstr "o nome de grupo '%s' é inválido\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupo %s: não existe o utilizador %s\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "apagar o membro `%s'? "
+msgid "delete member '%s'? "
+msgstr "apagar o membro '%s'? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "nenhum registo coincidente de ficheiro de grupo em %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "adicionar o grupo '%s' em %s ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: não é possível actualizar o registo de shadow de %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: não é possível actualizar o registo do grupo %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -889,16 +905,12 @@ msgid "duplicate shadow group entry\n"
 msgstr "registo de grupo em shadow duplicado\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "o registo coincidente para esse grupo não foi encontrado\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "grupo shadow %s: nenhum utilizador administrador %s\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
-msgstr "apagar o membro administrador `%s'? "
+msgid "delete administrative member '%s'? "
+msgstr "apagar o membro administrativo '%s'? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -928,14 +940,6 @@ msgstr "%s: não é possível abrir o ficheiro de shadow dos grupos\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: não é possível remover o grupo shadow %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: não é possível actualizar o registo de shadow de %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: não é possível actualizar o registo do grupo %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1037,12 +1041,12 @@ msgstr ""
 "Tempo de login caducou após %d segundos de inactividade.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " em `%.100s' de `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " em '%.100s' de '%.200s'"
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " em `%.100s'"
+msgid " on '%.100s'"
+msgstr " em '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1311,11 +1315,23 @@ msgstr "utilizador %s: o grupo %u não existe\n"
 
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "utilizador %s: a directoria %s não existe\n"
+msgstr "utilizador %s: o directório %s não existe\n"
 
 #, c-format
 msgid "user %s: program %s does not exist\n"
 msgstr "utilizador %s: o programa %s não existe\n"
+
+#, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "nenhum registo de ficheiro de password coincidente em %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "acrescentar utilizador '%s' em %s?"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: não é possível actualizar o registo em passwd de %s\n"
 
 #, c-format
 msgid "invalid shadow password file entry\n"
@@ -1324,10 +1340,6 @@ msgstr "registo no ficheiro de shadow de passwords inválido\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "registo de shadow da password duplicado\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "registo no ficheiro de passwords não coincidente\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1344,10 +1356,6 @@ msgstr "%s: não é possível abrir o ficheiro passwd\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: não é possível remover o registo shadow de %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: não é possível actualizar o registo em passwd de %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1460,8 +1468,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "A Entrar no Modo de Manutenção do Sistema\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: argumento numérico inválido `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: argumento numérico inválido '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1484,8 +1492,8 @@ msgid "%s: rename: %s"
 msgstr "%s: renomear: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: o grupo `%s' é um grupo NIS.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: o grupo '%s' é um grupo NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1560,20 +1568,20 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s: não é possível obter um UID único\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: a directoria base `%s' é inválida\n"
+msgid "%s: invalid base directory '%s'\n"
+msgstr "%s: directório base inválido '%s'\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
-msgstr "%s: o comentário `%s' é inválido\n"
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s: o comentário '%s' é inválido\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: a directoria home `%s' é inválida\n"
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s: o directório home '%s' é inválida\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
-msgstr "%s: a data `%s' é inválida\n"
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: a data '%s' é inválida\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1584,12 +1592,12 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: é necessário shadow passwords para -f\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: o campo `%s' é inválido\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: o campo '%s' é inválido\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
-msgstr "%s: a shell `%s' é inválida\n"
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s: a shell '%s' é inválida\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1648,17 +1656,18 @@ msgstr "%s: erro ao adicionar o registo da nova password de shadow\n"
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: não é possível criar a directoria %s\n"
+msgstr "%s: não é possível criar o directório %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"Não existe nenhum grupo chamado \"mail\", criando spool de mail com modo "
-"0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Não foi possível criar spool de mail para o utilizador %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1685,8 +1694,21 @@ msgstr ""
 "%s: aviso: CREATE_HOME não é suportado, por favor em vez disso utilize -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Utilização: %s [-r] nome\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Utilização: userdel [opções] LOGIN\n"
+"\n"
+"Opções:\n"
+"  -f, --force\t\t\tforçar a remoção de ficheiros, mesmo que não pertençam ao "
+"utilizador\n"
+"  -h, --help\t\t\tmostrar esta mensagem de ajuda e sair\n"
+"  -r, --remove\t\t\tremover o directório home e o spool de mail\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1736,12 +1758,12 @@ msgstr "%s: o utilizador %s é um utilizador NIS\n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: a directoria %s não será removida (iria remover a home do utilizador %"
+"%s: o directório %s não será removido (iria remover a home do utilizador %"
 "s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: erro ao remover a directoria %s\n"
+msgstr "%s: erro ao remover o directório %s\n"
 
 #, c-format
 msgid ""
@@ -1832,7 +1854,7 @@ msgstr "%s: erro ao remover o registo de password de shadow\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: a directoria %s existe\n"
+msgstr "%s: o directório %s existe\n"
 
 #, c-format
 msgid "%s: can't create %s\n"
@@ -1849,7 +1871,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: não é possível renomear a directoria %s para %s\n"
+msgstr "%s: não é possível renomear o directório %s para %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
@@ -1898,8 +1920,10 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: não é possível restaurar %s: %s (a suas alterações estão em %s)\n"
 
 #~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 #~ msgstr ""
-#~ "\n"
-#~ "Login incorrecto\n"
+#~ "Não existe nenhum grupo chamado \"mail\", criando spool de mail com modo "
+#~ "0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Não foi possível criar spool de mail para o utilizador %s.\n"

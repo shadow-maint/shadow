@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='suauth.5'>
-  <!-- $Id: suauth.5.xml,v 1.15 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!-- $Id: suauth.5.xml,v 1.17 2006/05/20 07:19:28 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>suauth</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -10,7 +8,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>suauth</refname>
-    <refpurpose>Detailed su control file</refpurpose>
+    <refpurpose>detailed su control file</refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>

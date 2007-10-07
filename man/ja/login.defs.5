@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.defs.5,v 1.7 2005/12/01 20:38:26 kloczek Exp $
+.\"	$Id: login.defs.5,v 1.8 2006/03/31 09:26:54 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -97,11 +97,6 @@
 最も制限をきつくしたい場合は、
 chfn を SUID ではインストールしなければよい。
 .\"
-.IP "CREATE_HOME (ブール値)"
-useradd が、デフォルトでユーザのホームディレクトリを
-作成するかどうかを定義する。
-このオプションは useradd のコマンドラインの \-m フラグと OR される。
-.\"
 .IP "GID_MAX (数値)"
 .IP "GID_MIN (数値)"
 .B useradd
@@ -164,7 +159,6 @@ UMASK
 .IP pwconv 12
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 .IP useradd 12
-CREATE_HOME
 GID_MAX GID_MIN
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 UID_MAX UID_MIN

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.65 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.66 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -237,7 +237,7 @@ static int get_groups (char *list)
 		 */
 		if (__isgrNIS ()) {
 			fprintf (stderr,
-				 _("%s: group `%s' is a NIS group.\n"),
+				 _("%s: group '%s' is a NIS group.\n"),
 				 Prog, grp->gr_name);
 			continue;
 		}
@@ -811,7 +811,7 @@ static long get_number (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
+	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -824,7 +824,7 @@ static uid_t get_id (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
+	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -930,7 +930,7 @@ static void process_flags (int argc, char **argv)
 			case 'c':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field `%s'\n"),
+						 _("%s: invalid field '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -944,7 +944,7 @@ static void process_flags (int argc, char **argv)
 			case 'd':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field `%s'\n"),
+						 _("%s: invalid field '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -962,7 +962,7 @@ static void process_flags (int argc, char **argv)
 #endif
 						fprintf (stderr,
 							 _
-							 ("%s: invalid date `%s'\n"),
+							 ("%s: invalid date '%s'\n"),
 							 Prog, optarg);
 						exit (E_BAD_ARG);
 					}
@@ -1006,7 +1006,7 @@ static void process_flags (int argc, char **argv)
 			case 'l':
 				if (!check_user_name (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field `%s'\n"),
+						 _("%s: invalid field '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -1049,7 +1049,7 @@ static void process_flags (int argc, char **argv)
 			case 's':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field `%s'\n"),
+						 _("%s: invalid field '%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}

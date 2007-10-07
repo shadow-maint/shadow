@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpck.c,v 1.29 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: grpck.c,v 1.32 2006/05/07 17:44:39 kloczek Exp $"
 
 #include <fcntl.h>
 #include <grp.h>
@@ -137,7 +137,7 @@ int main (int argc, char **argv)
 {
 	int arg;
 	int errors = 0;
-	int deleted = 0;
+	int changed = 0;
 	int i;
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
@@ -290,7 +290,7 @@ int main (int argc, char **argv)
 			 * them to delete it.
 			 */
 			printf (_("invalid group file entry\n"));
-			printf (_("delete line `%s'? "), gre->line);
+			printf (_("delete line '%s'? "), gre->line);
 			errors++;
 
 			/*
@@ -308,7 +308,7 @@ int main (int argc, char **argv)
 		      delete_gr:
 			SYSLOG ((LOG_INFO, "delete group line `%s'",
 				 gre->line));
-			deleted++;
+			changed++;
 
 			__gr_del_entry (gre);
 			continue;
@@ -346,7 +346,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 			printf (_("duplicate group entry\n"));
-			printf (_("delete line `%s'? "), gre->line);
+			printf (_("delete line '%s'? "), gre->line);
 			errors++;
 
 			/*
@@ -361,7 +361,7 @@ int main (int argc, char **argv)
 		 */
 		if (!check_group_name (grp->gr_name)) {
 			errors++;
-			printf (_("invalid group name `%s'\n"), grp->gr_name);
+			printf (_("invalid group name '%s'\n"), grp->gr_name);
 		}
 
 		/*
@@ -386,18 +386,91 @@ int main (int argc, char **argv)
 			errors++;
 			printf (_("group %s: no user %s\n"),
 				grp->gr_name, grp->gr_mem[i]);
-			printf (_("delete member `%s'? "), grp->gr_mem[i]);
+			printf (_("delete member '%s'? "), grp->gr_mem[i]);
 
 			if (!yes_or_no ())
 				continue;
 
-			SYSLOG ((LOG_INFO, "delete member `%s' group `%s'",
+			SYSLOG ((LOG_INFO, "delete member '%s' group '%s'",
 				 grp->gr_mem[i], grp->gr_name));
-			deleted++;
+			changed++;
 			delete_member (grp->gr_mem, grp->gr_mem[i]);
 			gre->changed = 1;
 			__gr_set_changed ();
 		}
+
+#ifdef	SHADOWGRP
+		/*
+		 * Make sure this entry exists in the /etc/gshadow file.
+		 */
+
+		if (is_shadow) {
+			sgr = (struct sgrp *) sgr_locate (grp->gr_name);
+			if (sgr == NULL) {
+				printf (_
+					("no matching group file entry in %s\n"),
+					sgr_file);
+				printf (_("add group '%s' in %s ?"),
+					grp->gr_name, sgr_file);
+				errors++;
+				if (yes_or_no ()) {
+					struct sgrp sg;
+					struct group gr;
+					static char *empty = NULL;
+
+					sg.sg_name = grp->gr_name;
+					sg.sg_passwd = grp->gr_passwd;
+					sg.sg_adm = &empty;
+					sg.sg_mem = grp->gr_mem;
+					SYSLOG ((LOG_INFO,
+						 "add group `%s' to `%s'",
+						 grp->gr_name, sgr_file));
+					changed++;
+
+					if (!sgr_update (&sg)) {
+						fprintf (stderr,
+							 _
+							 ("%s: can't update shadow entry for %s\n"),
+							 Prog, sg.sg_name);
+						exit (E_CANT_UPDATE);
+					}
+					/* remove password from /etc/group */
+					gr = *grp;
+					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+					if (!gr_update (&gr)) {
+						fprintf (stderr,
+							 _
+							 ("%s: can't update entry for group %s\n"),
+							 Prog, gr.gr_name);
+						exit (E_CANT_UPDATE);
+					}
+				}
+			} else {
+				/**
+				 * Verify that the all members defined in /etc/group are also
+				 * present in /etc/gshadow.
+				 */
+				char **pgrp_mem, **psgr_mem;
+
+				for (pgrp_mem = grp->gr_mem; *pgrp_mem;
+				     pgrp_mem++) {
+					for (psgr_mem = sgr->sg_mem; *psgr_mem;
+					     psgr_mem++) {
+						if (strcmp
+						    (*pgrp_mem, *psgr_mem) == 0)
+							break;
+					}
+					if (*psgr_mem == NULL) {
+						printf
+						    ("'%s' is a member of the '%s' group in %s but not in %s\n",
+						     *pgrp_mem, sgr->sg_name,
+						     grp_file, sgr_file);
+					}
+				}
+			}
+		}
+#endif
+
 	}
 
 #ifdef	SHADOWGRP
@@ -421,7 +494,7 @@ int main (int argc, char **argv)
 			 * them to delete it.
 			 */
 			printf (_("invalid shadow group file entry\n"));
-			printf (_("delete line `%s'? "), sge->line);
+			printf (_("delete line '%s'? "), sge->line);
 			errors++;
 
 			/*
@@ -439,7 +512,7 @@ int main (int argc, char **argv)
 		      delete_sg:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 sge->line));
-			deleted++;
+			changed++;
 
 			__sgr_del_entry (sge);
 			continue;
@@ -477,7 +550,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 			printf (_("duplicate shadow group entry\n"));
-			printf (_("delete line `%s'? "), sge->line);
+			printf (_("delete line '%s'? "), sge->line);
 			errors++;
 
 			/*
@@ -490,12 +563,34 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure this entry exists in the /etc/group file.
 		 */
-		if (!gr_locate (sgr->sg_name)) {
-			printf (_("no matching group file entry\n"));
-			printf (_("delete line `%s'? "), sge->line);
+		grp = (struct group *) gr_locate (sgr->sg_name);
+		if (grp == NULL) {
+			printf (_("no matching group file entry in %s\n"),
+				grp_file);
+			printf (_("delete line '%s'? "), sge->line);
 			errors++;
 			if (yes_or_no ())
 				goto delete_sg;
+		} else {
+			/**
+			 * Verify that the all members defined in /etc/gshadow are also
+			 * present in /etc/group.
+			 */
+			char **pgrp_mem, **psgr_mem;
+
+			for (psgr_mem = sgr->sg_mem; *psgr_mem; psgr_mem++) {
+				for (pgrp_mem = grp->gr_mem; *pgrp_mem;
+				     pgrp_mem++) {
+					if (strcmp (*pgrp_mem, *psgr_mem) == 0)
+						break;
+				}
+				if (*pgrp_mem == NULL) {
+					printf
+					    ("'%s' is a member of the '%s' group in %s but not in %s\n",
+					     *psgr_mem, sgr->sg_name, sgr_file,
+					     grp_file);
+				}
+			}
 		}
 
 		/*
@@ -512,7 +607,7 @@ int main (int argc, char **argv)
 			printf (_
 				("shadow group %s: no administrative user %s\n"),
 				sgr->sg_name, sgr->sg_adm[i]);
-			printf (_("delete administrative member `%s'? "),
+			printf (_("delete administrative member '%s'? "),
 				sgr->sg_adm[i]);
 
 			if (!yes_or_no ())
@@ -521,7 +616,7 @@ int main (int argc, char **argv)
 			SYSLOG ((LOG_INFO,
 				 "delete admin `%s' from shadow group `%s'",
 				 sgr->sg_adm[i], sgr->sg_name));
-			deleted++;
+			changed++;
 			delete_member (sgr->sg_adm, sgr->sg_adm[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
@@ -540,7 +635,7 @@ int main (int argc, char **argv)
 			errors++;
 			printf (_("shadow group %s: no user %s\n"),
 				sgr->sg_name, sgr->sg_mem[i]);
-			printf (_("delete member `%s'? "), sgr->sg_mem[i]);
+			printf (_("delete member '%s'? "), sgr->sg_mem[i]);
 
 			if (!yes_or_no ())
 				continue;
@@ -548,7 +643,7 @@ int main (int argc, char **argv)
 			SYSLOG ((LOG_INFO,
 				 "delete member `%s' from shadow group `%s'",
 				 sgr->sg_mem[i], sgr->sg_name));
-			deleted++;
+			changed++;
 			delete_member (sgr->sg_mem, sgr->sg_mem[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
@@ -559,10 +654,10 @@ int main (int argc, char **argv)
 #endif				/* SHADOWGRP */
 
 	/*
-	 * All done. If there were no deletions we can just abandon any
+	 * All done. If there were no change we can just abandon any
 	 * changes to the files.
 	 */
-	if (deleted) {
+	if (changed) {
 	      write_and_bye:
 		if (!gr_close ()) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
@@ -593,7 +688,7 @@ int main (int argc, char **argv)
 	 * Tell the user what we did and exit.
 	 */
 	if (errors)
-		printf (deleted ?
+		printf (changed ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
 

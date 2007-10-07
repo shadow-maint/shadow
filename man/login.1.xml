@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.24 2006/01/07 19:30:45 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.27 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -71,7 +69,7 @@
       zero-length file <filename>.hushlogin</filename> in your login directory. 
       The mail message will be one of "<emphasis>You have new
       mail.</emphasis>", "<emphasis>You have mail.</emphasis>", or
-      "<emphasis>No Mail.</emphasis> "according to the condition of your
+      "<emphasis>No Mail.</emphasis>" according to the condition of your
       mailbox.
     </para>
 
@@ -202,49 +200,49 @@
       <varlistentry>
 	<term><filename>/var/run/utmp</filename></term>
 	<listitem>
-	  <para>list of current login sessions</para>
+	  <para>List of current login sessions.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/var/log/wtmp</filename></term>
 	<listitem>
-	  <para>list of previous login sessions</para>
+	  <para>List of previous login sessions.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/motd</filename></term>
 	<listitem>
-	  <para>system message of the day file</para>
+	  <para>System message of the day file.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/nologin</filename></term>
 	<listitem>
-	  <para>prevent non-root users from logging in</para>
+	  <para>Prevent non-root users from logging in.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/ttytype</filename></term>
 	<listitem>
-	  <para>list of terminal types</para>
+	  <para>List of terminal types.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>$HOME/.hushlogin</filename></term>
 	<listitem>
-	  <para>suppress printing of system messages</para>
+	  <para>Suppress printing of system messages.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

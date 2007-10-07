@@ -6,12 +6,12 @@
 # Claus Hindsgaul <claus.hindsgaul@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.15\n"
+"Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-07 22:36+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-05-31 18:22+0200\n"
 "Last-Translator: Claus Hindsgaul <claus.hindsgaul@gmail.com>\n"
-"Language-Team: Danish\n"
+"Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,8 +144,8 @@ msgid "Incorrect password for %s.\n"
 msgstr "Ugyldig adgangskode for %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
-msgstr "Kunne ikke skifte mappe til \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
+msgstr "Kunne ikke skifte mappe til '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Ingen mappe, logger på med HOME=/"
@@ -155,12 +155,12 @@ msgid "Cannot execute %s"
 msgstr "Kan ikke udføre %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
-msgstr "Ugyldig rodmappe \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
+msgstr "Ugyldig rodmappe '%s'\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Kan ikke ændre rodmappen til \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Kan ikke ændre rodmappen til '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr "Ingen utmp-post.  Du skal køre \"login\" fra det laveste\"sh\"-niveau"
@@ -379,36 +379,36 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: kan ikke ændre brugeren`%s' på NIS-klienten.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: kan ikke ændre brugeren'%s' på NIS-klienten.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' er NIS-masteren for denne klient.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' er NIS-masteren for denne klient.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Ændrer brugeroplysninger for %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: ugyldigt navn: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s: ugyldigt navn: '%s'\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: ugyldigt rum-nummer: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s: ugyldigt rum-nummer: '%s'\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: ugyldig arbejdstelefon: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: ugyldig arbejdstelefon: '%s'\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: ugyldig hjemmetelefon: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s: ugyldig hjemmetelefon: '%s'\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" indeholder ugyldige tegn\n"
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s: '%s' indeholder ugyldige tegn\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -860,7 +860,7 @@ msgid "invalid group file entry\n"
 msgstr "ugyldig gruppefils-linje\n"
 
 #, c-format
-msgid "delete line `%s'? "
+msgid "delete line '%s'? "
 msgstr "slet linjen '%s'? "
 
 #, c-format
@@ -868,7 +868,7 @@ msgid "duplicate group entry\n"
 msgstr "gruppelinjen er en dublet\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
+msgid "invalid group name '%s'\n"
 msgstr "ugyldigt gruppenavn '%s'\n"
 
 #, c-format
@@ -876,8 +876,24 @@ msgid "group %s: no user %s\n"
 msgstr "gruppe %s: ingen bruger %s\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "slet medlemmet`%s'? "
+msgid "delete member '%s'? "
+msgstr "slet medlemmet '%s'? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "ingen tilsvarende gruppefilslinje i %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "tilføj gruppen %s i %s?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: kan ikke opdatere skygge-linjen for %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: kan ikke opdatere linjen for gruppen %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -888,15 +904,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "skyggegruppelinjen er en dublet\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "ingen tilsvarende gruppefilslinje\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "skyggegruppen %s: ingen administrator-bruger %s\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
+msgid "delete administrative member '%s'? "
 msgstr "slet administrator-medlemmet '%s'? "
 
 #, c-format
@@ -926,14 +938,6 @@ msgstr "%s: kan ikke åbne skyggegruppefilen\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: kan ikke fjerne skyggegruppen %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: kan ikke opdatere skygge-linjen for %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: kan ikke opdatere linjen for gruppen %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1034,12 +1038,12 @@ msgstr ""
 "Login udløb efter %d sekunder.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " på `%.100s' fra `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " på '%.100s' fra '%.200s'"
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " på `%.100s'"
+msgid " on '%.100s'"
+msgstr " på '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1313,16 +1317,24 @@ msgid "user %s: program %s does not exist\n"
 msgstr "bruger %s: programmet %s eksisterer ikke\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "ingen tilsvarende adgangskoder i %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "tilføj brugeren '%s' i %s? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: kan ikke opdatere adgangskodelinjen for  %s\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "ugyldig linje i skyggeadgangskodefil\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "skyggeadgangskodelinjen er en dublet\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "fandt ingen tilsvarende linje i adgangskodefilen\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1339,10 +1351,6 @@ msgstr "%s: kan ikke åbne adgangskodefil\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: kan ikke fjerne skyggelinjen for %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: kan ikke opdatere adgangskodelinjen for  %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1455,8 +1463,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Går i systemvedligeholdelses-tilstand\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: ugyldigt numerisk parameter`%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ugyldigt numerisk parameter '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1479,8 +1487,8 @@ msgid "%s: rename: %s"
 msgstr "%s: omdøb: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: gruppen`%s' er en NIS-gruppe.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: gruppen '%s' er en NIS-gruppe.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1548,19 +1556,19 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s: kan ikke få unik UID\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ugyldig grundmappe '%s'\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: ugyldig kommentar '%s'\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: ugyldig hjemmemappe '%s'\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: ugyldig dato '%s'\n"
 
 #, c-format
@@ -1572,11 +1580,11 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: der kræves skyggeadgangskoder for -f\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: ugyldigt felt ''%s'\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: ugyldigt felt '%s'\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: ugyldig skal '%s'\n"
 
 #, c-format
@@ -1635,15 +1643,18 @@ msgstr "%s: fejl under tilføjelse af ny skyggeadgangskode-linje\n"
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: kan ikke oprette mappen %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr ""
-"Der er ingen gruppe med navnet \"mail\", opretter postkø med "
-"filrettighederne 0600.\n"
+msgid "Creating mailbox file"
+msgstr "Opretter postboks-fil"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Kan ikke oprette postkø for brugeren %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+"Gruppen 'mail' blev ikke fundet. Opretter brugerens postboks-fil med "
+"filrettighederne 0600.\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "Indstiller postboks-filens rettigheder"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1669,8 +1680,21 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: advarsel: CREATE_HOME understøttes ikke, brug i stedet -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Brug: %s [-r] navn\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Brug: userdel [tilvalg] LOGIND\n"
+"\n"
+"Tilvalg:\n"
+"  -f, --force\t\t\tgennemtving fjernelse af filer, selvom de ikke ejers af "
+"brugeren\n"
+"  -h, --help\t\t\tvis denne hjælpebesked og afslut\n"
+"  -r, --remove\t\t\tfjern home-mappen og postkøen\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1876,10 +1900,3 @@ msgstr "kunne ikke lave sikkerhedskopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kunne ikke genskabe %s: %s (dine ændringer er i %s)\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Login incorrect\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Forkert logind\n"

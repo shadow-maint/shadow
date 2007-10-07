@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "5" "01/22/2006" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: passwd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "PASSWD" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,29 +14,32 @@
 passwd \- the password file
 .SH "DESCRIPTION"
 .PP
+
 \fI/etc/passwd\fR
 contains one line for each user account, with seven fields delimited by colons (\(lq:\(rq). These fields are:
-.TP 3
+.TP 3n
 \(bu
 login name
-.TP
+.TP 3n
 \(bu
 optional encrypted password
-.TP
+.TP 3n
 \(bu
 numerical user ID
-.TP
+.TP 3n
 \(bu
 numerical group ID
-.TP
+.TP 3n
 \(bu
 user name or comment field
-.TP
+.TP 3n
 \(bu
 user home directory
-.TP
+.TP 3n
 \(bu
 optional user command interpreter
+.sp
+.RE
 .PP
 The encrypted password field may be blank, in which case no password is required to authenticate as the specified login name. However, some applications which read the
 \fI/etc/passwd\fR
@@ -49,7 +55,7 @@ field is a lower\-case
 file instead; there
 \fImust\fR
 be a corresponding line in the
-\fIshadow\fR
+\fI/etc/shadow\fR
 file, or else the user account is invalid. If the
 \fIpassword\fR
 field is any other string, then it will be treated as an encrypted password, as specified by
@@ -71,14 +77,15 @@ program uses this information to set the value of the
 environmental variable. If this field is empty, it defaults to the value
 \fI/bin/sh\fR.
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-user account information
-.TP
+User account information.
+.TP 3n
 \fI/etc/shadow\fR
 optional encrypted password file
 .SH "SEE ALSO"
 .PP
+
 \fBgetent\fR(1),
 \fBlogin\fR(1),
 \fBpasswd\fR(1),

@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PORTTIME" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
+.\"     Title: porttime
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/06/2006
+.\"    Manual: File Formats and Conversions
+.\"    Source: File Formats and Conversions
+.\"
+.TH "PORTTIME" "5" "06/06/2006" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,6 +14,7 @@
 porttime \- port access time file
 .SH "DESCRIPTION"
 .PP
+
 \fIporttime\fR
 contains a list of tty devices, user names, and permitted login times.
 .PP
@@ -33,7 +37,7 @@ is assumed.
 .SH "EXAMPLES"
 .PP
 The following entry allows access to user
-\fIjfh\fR
+\fBjfh\fR
 on every port during weekdays from 9am to 5pm.
 .PP
 *:jfh:Wk0900\-1700
@@ -48,11 +52,13 @@ at any time. This illustrates how the
 \fI/etc/porttime\fR
 file is an ordered list of access times. Any other user would match the second entry which does not permit access at any time.
 .sp
+.RS 3n
 .nf
       console:root,oper:Al0000\-2400
       console:*:
     
 .fi
+.RE
 .PP
 The following entry allows access for the user
 \fIgames\fR
@@ -60,9 +66,10 @@ on any port during non\-working hours.
 .PP
 *:games:Wk1700\-0900,SaSu0000\-2400
 .SH "FILES"
-.TP
+.TP 3n
 \fI/etc/porttime\fR
-file containing port access
+File containing port access.
 .SH "SEE ALSO"
 .PP
+
 \fBlogin\fR(1).

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='newgrp.1'>
-  <!-- $Id: newgrp.1.xml,v 1.12 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: newgrp.1.xml,v 1.15 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>newgrp</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -33,15 +31,15 @@
     <para>
       <command>newgrp</command> changes the current real group ID to the
       named group, or to the default group listed in
-      <filename>/etc/passwd</filename> if no group name is given.
+      <filename>/etc/passwd</filename> if no group name is given. 
       <command>newgrp</command> also tries to add the group to the user
       groupset. If not root, the user will be prompted for a password if she
       does not have a password (in <filename>/etc/shadow</filename> if this
       user has an entry in the shadowed password file, or in
-      /etc/passwd otherwise) and the group does, or if the user is not
-      listed as a member and the group has a password. The user will
-      be denied access if the group password is empty and the user is
-      not listed as a member. 
+      <filename>/etc/passwd</filename> otherwise) and the group does, or if
+      the user is not listed as a member and the group has a password. The
+      user will be denied access if the group password is empty and the user
+      is not listed as a member.
     </para>
 
     <para>
@@ -58,25 +56,25 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/group</filename></term>
 	<listitem>
-	  <para>group account information</para>
+	  <para>Group account information.</para>
 	 </listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
-	  <para>shadow group file</para>
+	  <para>Secure group account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

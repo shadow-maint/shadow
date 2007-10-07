@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.14\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
 "PO-Revision-Date: 2006-02-21 20:37+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -141,8 +141,8 @@ msgstr "passwd: s'ha actualitzat la contrasenya satisfactòriament\n"
 msgid "Incorrect password for %s.\n"
 msgstr "La contrasenya és incorrecta per a «%s».\n"
 
-#, c-format
-msgid "Unable to cd to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Unable to cd to '%s'\n"
 msgstr "No es pot canviar el directori actual a «%s»\n"
 
 msgid "No directory, logging in with HOME=/"
@@ -152,12 +152,12 @@ msgstr "No hi ha directori, entrant amb HOME=/"
 msgid "Cannot execute %s"
 msgstr "No es pot executar %s"
 
-#, c-format
-msgid "Invalid root directory \"%s\"\n"
+#, fuzzy, c-format
+msgid "Invalid root directory '%s'\n"
 msgstr "El directori arrel «%s» no és vàlid\n"
 
-#, c-format
-msgid "Can't change root directory to \"%s\"\n"
+#, fuzzy, c-format
+msgid "Can't change root directory to '%s'\n"
 msgstr "No s'ha pogut canviar el directori arrel a «%s»\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -380,36 +380,36 @@ msgstr "Altre"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: No s'ha pogut determinar el seu nom d'usuari.\n"
 
-#, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: no s'ha pogut canviar l'usuari «%s» al client NIS.\n"
 
-#, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: «%s» és el mestre NIS per a aquest client.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "S'està canviant la informació d'usuari per a %s\n"
 
-#, c-format
-msgid "%s: invalid name: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid name: '%s'\n"
 msgstr "%s: el nom no és vàlid: «%s»\n"
 
-#, c-format
-msgid "%s: invalid room number: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid room number: '%s'\n"
 msgstr "%s: el número d'habitació no és vàlid: «%s»\n"
 
-#, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s: el telèfon de casa no és vàlid: «%s»\n"
 
-#, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
+#, fuzzy, c-format
+msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: el telèfon de la feina no és vàlid: «%s»\n"
 
-#, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
+#, fuzzy, c-format
+msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: «%s» conté caràcters il·legals\n"
 
 #, c-format
@@ -864,25 +864,41 @@ msgstr "%s: no es pot obrir el fitxer %s\n"
 msgid "invalid group file entry\n"
 msgstr "l'entrada del fitxer de grup no és vàlida\n"
 
-#, c-format
-msgid "delete line `%s'? "
+#, fuzzy, c-format
+msgid "delete line '%s'? "
 msgstr "voleu eliminar la línia «%s»? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "l'entrada de grup està duplicada\n"
 
-#, c-format
-msgid "invalid group name `%s'\n"
+#, fuzzy, c-format
+msgid "invalid group name '%s'\n"
 msgstr "el nom de grup «%s» no és vàlid\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grup %s: no existeix l'usuari %s\n"
 
-#, c-format
-msgid "delete member `%s'? "
+#, fuzzy, c-format
+msgid "delete member '%s'? "
 msgstr "voleu eliminar el membre «%s»? "
+
+#, fuzzy, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "no hi ha entrades coincidents al fitxer de grup\n"
+
+#, fuzzy, c-format
+msgid "add group '%s' in %s ?"
+msgstr "grup ombra %s: no existeix l'usuari %s\n"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: no es pot actualitzar l'entrada ombra per a %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: no es pot actualitzar l'entrada per al grup %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -893,15 +909,11 @@ msgid "duplicate shadow group entry\n"
 msgstr "l'entrada de grup ombra està duplicada\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "no hi ha entrades coincidents al fitxer de grup\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "grup ombra %s: no existeix l'usuari administratiu %s\n"
 
-#, c-format
-msgid "delete administrative member `%s'? "
+#, fuzzy, c-format
+msgid "delete administrative member '%s'? "
 msgstr "voleu eliminar el membre administratiu «%s»? "
 
 #, c-format
@@ -931,14 +943,6 @@ msgstr "%s: no es pot obrir el fitxer de grups ombra\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: no es pot eliminar el grup ombra %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: no es pot actualitzar l'entrada ombra per a %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: no es pot actualitzar l'entrada per al grup %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1040,12 +1044,12 @@ msgstr ""
 "\n"
 "L'accés ha caducat després de %d segons.\n"
 
-#, c-format
-msgid " on `%.100s' from `%.200s'"
+#, fuzzy, c-format
+msgid " on '%.100s' from '%.200s'"
 msgstr " a «%.100s» des de «%.200s»"
 
-#, c-format
-msgid " on `%.100s'"
+#, fuzzy, c-format
+msgid " on '%.100s'"
 msgstr " a «%.100s»"
 
 #, c-format
@@ -1323,6 +1327,18 @@ msgstr "usuari %s: el directori %s no existeix\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "usuari %s: el programa %s no existeix\n"
 
+#, fuzzy, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "cap entrada del fitxer de contrasenyes coincideix\n"
+
+#, fuzzy, c-format
+msgid "add user '%s' in %s? "
+msgstr "grup ombra %s: no existeix l'usuari %s\n"
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: no es pot actualitzar l'entrada de la contrasenya per a %s\n"
+
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "l'entrada del fitxer de contrasenyes ombra no és vàlida\n"
@@ -1330,10 +1346,6 @@ msgstr "l'entrada del fitxer de contrasenyes ombra no és vàlida\n"
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "entrada de contrasenya ombra duplicada\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "cap entrada del fitxer de contrasenyes coincideix\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1350,10 +1362,6 @@ msgstr "%s: no es pot obrir el fitxer de contrasenyes\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: no es pot eliminar l'entrada ombra per a %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: no es pot actualitzar l'entrada de la contrasenya per a %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1466,8 +1474,8 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "S'està entrant en mode de manteniment del sistema\n"
 
-#, c-format
-msgid "%s: invalid numeric argument `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: l'argument numèric «%s» no és vàlid\n"
 
 #, c-format
@@ -1490,8 +1498,8 @@ msgstr "%s: no es pot obrir un fitxer nou de preferències predeterminades\n"
 msgid "%s: rename: %s"
 msgstr "%s: renomena: %s"
 
-#, c-format
-msgid "%s: group `%s' is a NIS group.\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s: el grup «%s» és un grup NIS.\n"
 
 #, c-format
@@ -1565,20 +1573,20 @@ msgstr "%s: el UID %u no és únic\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: no es pot obtenir un UID únic\n"
 
-#, c-format
-msgid "%s: invalid base directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: el directori base «%s» no és vàlid\n"
 
-#, c-format
-msgid "%s: invalid comment `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid comment '%s'\n"
 msgstr "%s: el comentari «%s» no és vàlid\n"
 
-#, c-format
-msgid "%s: invalid home directory `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: el directori home «%s» no és vàlid\n"
 
-#, c-format
-msgid "%s: invalid date `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
 msgstr "%s: la data «%s» no és vàlida\n"
 
 #, c-format
@@ -1589,12 +1597,12 @@ msgstr "%s: les contrasenyes ombra són requerides per a «-e»\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: les contrasenyes ombra són requerides per a «-f»\n"
 
-#, c-format
-msgid "%s: invalid field `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid field '%s'\n"
 msgstr "%s: el camp «%s» no és vàlid\n"
 
-#, c-format
-msgid "%s: invalid shell `%s'\n"
+#, fuzzy, c-format
+msgid "%s: invalid shell '%s'\n"
 msgstr "%s: l'intèrpret «%s» no és vàlid\n"
 
 #, c-format
@@ -1654,14 +1662,16 @@ msgstr ""
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: no es pot crear el directori %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgid "Creating mailbox file"
 msgstr ""
-"No existeix el grup «mail», s'està creant la cua de correu amb mode 0600.\n"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "No es pot crear la cua de correu per a l'usuari %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+
+msgid "Setting mailbox file permissions"
+msgstr ""
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1689,8 +1699,14 @@ msgstr ""
 "lloc.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Forma d'ús: %s [-r] nom\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1898,3 +1914,12 @@ msgstr "No s'ha pogut fer una còpia de seguretat"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "No existeix el grup «mail», s'està creant la cua de correu amb mode "
+#~ "0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "No es pot crear la cua de correu per a l'usuari %s.\n"

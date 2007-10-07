@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-11 19:31+0100\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-06-04 20:47+0200\n"
 "Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -143,8 +143,8 @@ msgid "Incorrect password for %s.\n"
 msgstr "Chybné heslo pre %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
-msgstr "Aktuálny adresár sa nedá nastaviť na \"%s\".\n"
+msgid "Unable to cd to '%s'\n"
+msgstr "Aktuálny adresár sa nedá nastaviť na '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Žiadny adresár, nastavujem HOME na /"
@@ -154,12 +154,12 @@ msgid "Cannot execute %s"
 msgstr "%s sa nedá spustiť."
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
-msgstr "Chybný koreňový adresár \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
+msgstr "Chybný koreňový adresár '%s'\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Koreňový adresár sa nedá zmeniť na \"%s\".\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Koreňový adresár sa nedá zmeniť na '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -384,36 +384,36 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: na NIC klientovi sa nedá zmeniť používateľ `%s'.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: na NIC klientovi sa nedá zmeniť používateľ '%s'.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' je hlavným NIS serverom pre tohto klienta\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' je hlavným NIS serverom pre tohto klienta.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Mením informácie o používateľovi %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: chybné meno: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s: chybné meno: '%s'\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: chybné číslo miestnosti: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s: chybné číslo miestnosti: '%s'\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: telefónne číslo do zamestnania (\"%s\") je chybné\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: chybné telefónne číslo do zamestnania: '%s'\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: telefónne číslo domov (\"%s\") je chybné\n"
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s: chybné telefónne číslo domov: '%s'\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" obsahuje chybné znaky\n"
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s: '%s' obsahuje chybné znaky\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -866,24 +866,40 @@ msgid "invalid group file entry\n"
 msgstr "chybná položka v súbore so skupinami\n"
 
 #, c-format
-msgid "delete line `%s'? "
-msgstr "zmazať riadok `%s'?"
+msgid "delete line '%s'? "
+msgstr "zmazať riadok '%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "v súbore so skupinami sa vyskytuje zdvojená položka\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
-msgstr "meno skupiny `%s' je chybné\n"
+msgid "invalid group name '%s'\n"
+msgstr "chybné pomenovanie skupiny '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "skupina %s: používateľ %s neexistuje\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "zmazať člena `%s'? "
+msgid "delete member '%s'? "
+msgstr "zmazať člena '%s'? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "neexistuje zodpovedajúca položka skupiny v súbore %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "pridať skupinu '%s' do %s ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: položka %s súboru s tieňovými heslami sa nedá aktualizovať\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: položka skupiny %s sa nedá odstrániť\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -894,16 +910,12 @@ msgid "duplicate shadow group entry\n"
 msgstr "v súbore s tieňovými skupinami sa vyskytuje zdvojená položka\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "v súbore so skupinami neexistuje zodpovedajúca položka\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "tieňová skupina %s: administrátor %s neexistuje\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
-msgstr "zmazať administrátora `%s'? "
+msgid "delete administrative member '%s'? "
+msgstr "zmazať administrátora '%s'? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -932,14 +944,6 @@ msgstr "%s: súbor s tieňovými skupinami sa nedá otvoriť\n"
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: položka tieňovej skupiny %s sa nedá odstrániť\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: položka %s súboru s tieňovými heslami sa nedá aktualizovať\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: položka skupiny %s sa nedá odstrániť\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1040,12 +1044,12 @@ msgstr ""
 "Uplynul časový limit (%d sekúnd) na prihlásenie.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " na `%.100s' z `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " na '%.100s' z '%.200s'"
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " na `%.100s'"
+msgid " on '%.100s'"
+msgstr " na '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1322,16 +1326,24 @@ msgid "user %s: program %s does not exist\n"
 msgstr "používateľ %s: program %s neexistuje\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "neexistuje zodpovedajúca položka hesla v súbore %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "pridať používateľa '%s' do %s? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: položka súboru s heslami pre používateľe %s sa nedá aktualizovať\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "chybná položka v súbore s tieňovými heslami\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "duplikovaná položka v súbore s tieňovými heslami\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "chýba položka v súbore s heslami\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1348,10 +1360,6 @@ msgstr "%s: súbor s heslami sa nedá otvoriť\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: položka súboru s heslami pre používateľe %s sa nedá odstrániť\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: položka súboru s heslami pre používateľe %s sa nedá aktualizovať\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1464,8 +1472,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Vstupujem do režimu údržby systému\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: chybný číselný argument `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: chybný číselný parameter '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1488,8 +1496,8 @@ msgid "%s: rename: %s"
 msgstr "%s: premenovať: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: skupina `%s' je NIS skupinou.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: skupina '%s' je NIS skupinou.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1527,10 +1535,10 @@ msgstr ""
 "Použitie: useradd [voľby] účet\n"
 "\n"
 "Voľby:\n"
-"  -b, --base-dir ZÁKL_ADR\tzákladný adresár domáceho adresára nového\n"
+"  -b, --base-dir ZÁKL_ADR\tzákladný adresár domovského adresára nového\n"
 "\t\t\t\tpoužívateľského účtu\n"
 "  -c, --comment KOMENTÁR\tnastaví pole GECOS nového účtu\n"
-"  -d, --home-dir DOM_ADR\tdomáci adresár nového účtu\n"
+"  -d, --home-dir DOM_ADR\tdomovský adresár nového účtu\n"
 "  -D, --defaults\t\tvypíše alebo nastaví predvolené nastavenia\n"
 "\t\t\t\tprogramu useradd\n"
 "  -e, --expiredate EXP_DATUM\tnastaví čas vypršania platnosti účtu na "
@@ -1543,7 +1551,7 @@ msgstr ""
 "  -h, --help\t\t\tzobrazí túto nápovedu a skončí\n"
 "  -k, --skel VZOR_ADR\t\tzadá alternatívny vzorový adresár\n"
 "  -K, --key KĽÚČ=HODNOTA\tnahradí predvolené nastavenia /etc/login.defs\n"
-"  -m, --create-home\t\tvytvorí domáci adresár pre nový\n"
+"  -m, --create-home\t\tvytvorí domovský adresár pre nový\n"
 "\t\t\t\tpoužívateľský účet\n"
 "  -o, --non-unique\t\tpovolí vytvorenie používateľa s duplicitným\n"
 "\t\t\t\t(nejedinečným) UID\n"
@@ -1561,20 +1569,20 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s: nedá sa vytvoriť jedinečný UID\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: chybný základný adresár `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
+msgstr "%s: chybný základný adresár '%s'\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
-msgstr "%s: chybný komentár `%s'\n"
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s: chybný komentár '%s'\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: chybný domáci adresár `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s: chybný domovský adresár '%s'\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
-msgstr "%s: chybný dátum `%s'\n"
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: chybný dátum '%s'\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1585,12 +1593,12 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: prepínač -f vyžaduje tieňové heslá\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: chybná položka `%s'\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: chybná položka '%s'\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
-msgstr "%s: chybný shell `%s'\n"
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s: chybný shell '%s'\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1648,13 +1656,18 @@ msgstr "%s: chyba pri vytváraní novej položky v súbore s tieňovými heslami
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: nedá sa vytvoriť adresár %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr "Skupina \"mail\" nejestvuje, vytvára sa mail spool s právami 0600.\n"
+msgid "Creating mailbox file"
+msgstr "Vytvára sa mailbox súbor"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Nedá sa vytvoriť mail spool pre používateľa %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+"Nebola nájdená skupina 'mail'. Používateľský mailbox súbor sa vytvára s "
+"módom 0600.\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "Nastavujú sa prístupové práva mailbox súboru"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1672,7 +1685,7 @@ msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
-"%s: upozornenie: domáci adresár už existuje.\n"
+"%s: upozornenie: domovský adresár už existuje.\n"
 "Zo skel adresára sa tam neskopíruje žiaden súbor.\n"
 
 #, c-format
@@ -1680,8 +1693,21 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: varovanie: CREATE_HOME nie je podporované, použijte prepínač -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Použitie: %s [-r] meno\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Použitie: userdel [voľby] LOGIN\n"
+"\n"
+"Voľby:\n"
+"  -f, --force\t\t\tvynúti odstránenie súborov, aj keď používateľ nie je ich "
+"vlastníkom\n"
+"  -h, --help\t\t\tzobrazí túto nápovedu a ukončí sa\n"
+"  -r, --remove\t\t\todstráni domovský adresár a súbor s poštami\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1731,7 +1757,7 @@ msgstr "%s: používateľ %s je NIS používateľom\n"
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: adresár %s nebudem mazať (je to domáci adresár používateľa %s)\n"
+msgstr "%s: adresár %s nebudem mazať (je to domovský adresár používateľa %s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
@@ -1766,7 +1792,8 @@ msgstr ""
 "Voľby:\n"
 "  -a, --append SKUPINA\t\tpridá používateľa do prídavnej skupiny\n"
 "  -c, --comment KOMENTÁR\t\tnová hodnota poľa GECOS\n"
-"  -d, --home DOMACI_ADR\t\tnový domáci adresár pre nový používateľský účet\n"
+"  -d, --home DOMACI_ADR\t\tnový domovský adresár pre nový používateľský "
+"účet\n"
 "  -e, --expiredate EXP_DATUM\tnastaví čas vypršania platnosti účtu na "
 "EXP_DATUM\n"
 "  -f, --inactive NEAKTIV\tzablokuje platnosť hesla po NEAKTIV dňoch \t\t\t"
@@ -1777,7 +1804,7 @@ msgstr ""
 "  -h, --help\t\t\tzobrazí túto nápovedu a ukončí sa\n"
 "  -l, --login LOGIN\t\tnová hodnota prihlasovacieho mena\n"
 "  -L, --lock\t\t\tzablokuje používateľský účet\n"
-"  -m, --move-home\t\tpresunie obsah domáceho adresára do nového\n"
+"  -m, --move-home\t\tpresunie obsah domovského adresára do nového\n"
 "\t\t\t\tumiestnenia (používať iba s -d)\n"
 "  -o, --non-unique\t\tdovolí použitie duplicitného (nejedinečného) UID\n"
 "  -p, --password HESLO\tako nové heslo použije zadané zašifrované HESLO\n"
@@ -1836,7 +1863,7 @@ msgstr "%s: volanie chown pre %s zlyhalo\n"
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
-"%s: varovanie: chyba pri úplnom odstraňovaní starého domáceho adresára %s"
+"%s: varovanie: chyba pri úplnom odstraňovaní starého domovského adresára %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -1889,3 +1916,11 @@ msgstr "Nedá sa vytvoriť záloha"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr ""
+#~ "Skupina \"mail\" nejestvuje, vytvára sa mail spool s právami 0600.\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "Nedá sa vytvoriť mail spool pre používateľa %s.\n"

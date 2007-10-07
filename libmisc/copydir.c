@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: copydir.c,v 1.13 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id: copydir.c,v 1.14 2006/05/07 18:10:10 kloczek Exp $"
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -225,12 +225,12 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 #ifdef WITH_SELINUX
 			selinux_file_context (dst_name);
 #endif
-			mkdir (dst_name, sb.st_mode & 0777);
-			chown (dst_name,
-			       uid == (uid_t) - 1 ? sb.st_uid : uid,
-			       gid == (gid_t) - 1 ? sb.st_gid : gid);
-
-			if (copy_tree (src_name, dst_name, uid, gid)) {
+			if (mkdir (dst_name, sb.st_mode)
+			    || chown (dst_name,
+				      uid == (uid_t) - 1 ? sb.st_uid : uid,
+				      gid == (gid_t) - 1 ? sb.st_gid : gid)
+			    || chmod (dst_name, sb.st_mode)
+			    || copy_tree (src_name, dst_name, uid, gid)) {
 				err++;
 				break;
 			}

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='passwd.5'>
-  <!-- $Id: passwd.5.xml,v 1.16 2006/02/20 01:05:45 kloczek Exp $ -->
+  <!-- $Id: passwd.5.xml,v 1.19 2006/05/28 16:17:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -56,7 +54,7 @@
       <citerefentry><refentrytitle>shadow</refentrytitle>
       <manvolnum>5</manvolnum></citerefentry> file instead; there
       <emphasis>must</emphasis> be a corresponding line in the
-      <filename>shadow</filename> file, or else the user account is invalid. 
+      <filename>/etc/shadow</filename> file, or else the user account is invalid. 
       If the <emphasis>password</emphasis> field is any other string, then
       it will be treated as an encrypted password, as specified by
       <citerefentry><refentrytitle>crypt</refentrytitle>
@@ -91,7 +89,7 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

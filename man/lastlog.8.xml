@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='lastlog.8'>
-  <!-- $Id: lastlog.8.xml,v 1.21 2006/01/02 13:59:01 kloczek Exp $ -->
+  <!-- $Id: lastlog.8.xml,v 1.23 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>lastlog</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -117,7 +115,7 @@
       <varlistentry>
 	<term><filename>/var/log/lastlog</filename></term>
 	<listitem>
-	  <para>lastlog logging file</para>
+	  <para>Database times of previous user logins.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

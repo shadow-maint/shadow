@@ -1,31 +1,74 @@
-.\" $Id: vipw.8,v 1.7 2005/12/01 20:38:27 kloczek Exp $
-.TH VIPW 8 "26 września 1997"
-.SH NAZWA
-vipw, vigr \- edycja plików haseł, grup i ich wersji dodatkowych (shadow)
-.SH SKŁADNIA
-\fBvipw\fR [\fB\-s\fR]
-.br
-\fBvigr\fR [\fB\-s\fR]
-.SH OPIS
-.BR vipw " i " vigr
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "VIPW" "8" "05/20/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+vipw, vigr \- edytuj plik haseł, grup lub ich wersji chronionych
+.SH "SKŁADNIA"
+.HP 5
+\fBvipw\fR [opcje]
+.HP 5
+\fBvigr\fR [opcje]
+.SH "OPIS"
+.PP
+\fBvipw\fR
+i
+\fBvigr\fR
 umożliwiają modyfikację plików odpowiednio
-.IR /etc/passwd " i " /etc/group .
-Przy zastosowaniu flagi
-.BR \-s,
-modyfikują także dodatkowe wersje chronione (shadow) tych plików \- odpowiednio
-.IR /etc/shadow " i " /etc/gshadow " .
-Dla ochrony przed uszkodzeniem plików programy te ustawiają odpowiednie
-blokady.
-
-Szukając edytora, programy
-.BR vipw " i " vigr
-używają w pierwszej kolejności zmiennej środowiskowej
-.BR VISUAL ,
-następnie zmiennej
-.BR EDITOR ,
-a na końcu domyślnego edytora,
-.BR vi .
-.SH ZOBACZ TAKŻE
-.BR passwd (5),
-.BR group (5),
-.BR shadow (5)
+\fI/etc/passwd\fR
+i
+\fI/etc/group\fR. Przy zastosowaniu flagi
+\fB\-s\fR
+modyfikują także dodatkowe wersje chronione tych plików \- odpowiednio
+\fI/etc/shadow\fR
+i
+\fI/etc/gshadow\fR. Dla ochrony przed uszkodzeniem w trakcie modyfikacji tych plików programy te ustawiają odpowiednie blokady. Szukając edytora programy te używają w pierwszej kolejności zmiennej środowiska
+\fB$VISUAL\fR, a następnie
+\fB$EDITOR\fR, a na końcu a na końcu domyślnego edytora
+\fBvi\fR(1).
+.SH "OPCJE"
+.PP
+Polecenia
+\fBvipw\fR
+i
+\fBvigr\fR
+posiadają następujące opcje:
+.TP
+\fB\-g\fR, \fB\-\-group\fR
+Edycja bazy grup.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Wyświetlenie komunikatu pomocy i zakończenie działania.
+.TP
+\fB\-p\fR, \fB\-\-passwd\fR
+Edycja bazy passwd.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Cichy tryb pracy.
+.TP
+\fB\-s\fR, \fB\-\-shadow\fR
+Edycja bazy shadow lub gshadow.
+.SH "PLIKI"
+.TP
+\fI/etc/group\fR
+Informacje o grupach użytkowników.
+.TP
+\fI/etc/gshadow\fR
+Informacje chronione o grupach użytkowników.
+.TP
+\fI/etc/passwd\fR
+Informacja o kontach użytkowników.
+.TP
+\fI/etc/shadow\fR
+Informacje chronione o użytkownikach.
+.SH "ZOBACZ TAKŻE"
+.PP
+\fBvi\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)\fBpasswd\fR(5),
+\fBshadow\fR(5).

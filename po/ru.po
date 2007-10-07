@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.15\n"
+"Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-03-05 23:11+0100\n"
-"PO-Revision-Date: 2006-03-09 21:23+0300\n"
+"POT-Creation-Date: 2006-05-20 05:11+0200\n"
+"PO-Revision-Date: 2006-05-27 22:04+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -148,8 +148,8 @@ msgid "Incorrect password for %s.\n"
 msgstr "Неверный пароль для %s.\n"
 
 #, c-format
-msgid "Unable to cd to \"%s\"\n"
-msgstr "Невозможно перейти в каталог \"%s\"\n"
+msgid "Unable to cd to '%s'\n"
+msgstr "Невозможно перейти в каталог '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr ""
@@ -160,12 +160,12 @@ msgid "Cannot execute %s"
 msgstr "Не удалось выполнить %s"
 
 #, c-format
-msgid "Invalid root directory \"%s\"\n"
-msgstr "Неверный корневой каталог \"%s\"\n"
+msgid "Invalid root directory '%s'\n"
+msgstr "Неверный корневой каталог '%s'\n"
 
 #, c-format
-msgid "Can't change root directory to \"%s\"\n"
-msgstr "Не удалось изменить корневой каталог на \"%s\"\n"
+msgid "Can't change root directory to '%s'\n"
+msgstr "Не удалось изменить корневой каталог на '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -391,36 +391,36 @@ msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Не удалось определить имя пользователя.\n"
 
 #, c-format
-msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: невозможно изменить пользователя `%s' на клиенте NIS.\n"
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: невозможно изменить пользователя '%s' на клиенте NIS.\n"
 
 #, c-format
-msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' -- сервер NIS для этого клиента.\n"
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' -- сервер NIS для этого клиента.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Изменение информации о пользователе %s\n"
 
 #, c-format
-msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: неверное имя: \"%s\"\n"
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s: неверное имя: '%s'\n"
 
 #, c-format
-msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: неверный номер комнаты: \"%s\"\n"
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s: неверный номер комнаты: '%s'\n"
 
 #, c-format
-msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: неверный рабочий телефон: \"%s\"\n"
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s: неверный рабочий телефон: '%s'\n"
 
 #, c-format
-msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: неверный домашний телефон: \"%s\"\n"
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s: неверный домашний телефон: '%s'\n"
 
 #, c-format
-msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" содержит недопустимые символы\n"
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s: '%s' содержит недопустимые символы\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -603,9 +603,9 @@ msgstr ""
 "\t\t\t\tвхода равным MAX\n"
 "  -r, --reset\t\t\tобнулить счётчики неудачных попыток входа\n"
 "  -t, --time DAYS\t\tпоказать записи faillog за последние DAYS дней\n"
-"  -u, --user LOGIN\t\tпоказать запись faillog или настроить счётчики\n"
+"  -u, --user ИМЯ\t\tпоказать запись faillog или настроить счётчики\n"
 "\t\t\t\tнеудачных попыток и ограничения (с помощью -r, -m или -l) только\n"
-"\t\t\t\tдля учётной записи LOGIN\n"
+"\t\t\t\tдля учётной записи с заданным ИМЕНЕМ\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -875,24 +875,40 @@ msgid "invalid group file entry\n"
 msgstr "неверная запись в файле групп\n"
 
 #, c-format
-msgid "delete line `%s'? "
-msgstr "удалить строку `%s'? "
+msgid "delete line '%s'? "
+msgstr "удалить строку '%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "повторяющаяся запись в файле групп\n"
 
 #, c-format
-msgid "invalid group name `%s'\n"
-msgstr "неверное имя группы `%s'\n"
+msgid "invalid group name '%s'\n"
+msgstr "неверное имя группы '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "группа %s: пользователь %s не существует\n"
 
 #, c-format
-msgid "delete member `%s'? "
-msgstr "удалить члена группы `%s'? "
+msgid "delete member '%s'? "
+msgstr "удалить члена группы '%s'? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "отсутствует соответствующая группа в файле %s\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "добавить группу '%s' в %s ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: не удалось обновить запись в теневом файле паролей для %s\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: не удалось обновить запись для группы %s\n"
 
 #, c-format
 msgid "invalid shadow group file entry\n"
@@ -903,16 +919,12 @@ msgid "duplicate shadow group entry\n"
 msgstr "повторяющаяся запись в теневом файле групп\n"
 
 #, c-format
-msgid "no matching group file entry\n"
-msgstr "отсутствует соответствующая группа в файле групп\n"
-
-#, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "теневая группа %s: административный пользователь %s не существует\n"
 
 #, c-format
-msgid "delete administrative member `%s'? "
-msgstr "удалить административного члена группы `%s'? "
+msgid "delete administrative member '%s'? "
+msgstr "удалить административного члена '%s'? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -941,14 +953,6 @@ msgstr "%s: не удалось открыть теневой файл груп�
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: не удалось удалить теневую группу %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: не удалось обновить запись в теневом файле паролей для %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: не удалось обновить запись для группы %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -990,7 +994,7 @@ msgstr ""
 "  -b, --before DAYS\tпоказать записи lastlog за последние DAYS дней\n"
 "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
 "  -t, --time DAYS\tпоказать записи lastlog за последние DAYS дней\n"
-"  -u, --user LOGIN\tпоказать запись lastlog для учётной записи LOGIN\n"
+"  -u, --user ИМЯ\tпоказать запись lastlog для учётной записи ИМЯ\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1048,12 +1052,12 @@ msgstr ""
 "Время на выполнение входа в систему истекло после %d секунд.\n"
 
 #, c-format
-msgid " on `%.100s' from `%.200s'"
-msgstr " на `%.100s' с `%.200s'"
+msgid " on '%.100s' from '%.200s'"
+msgstr " на `%.100s' с '%.200s'"
 
 #, c-format
-msgid " on `%.100s'"
-msgstr " на `%.100s'"
+msgid " on '%.100s'"
+msgstr " на '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1330,16 +1334,24 @@ msgid "user %s: program %s does not exist\n"
 msgstr "пользователь %s: командная оболочка %s не существует\n"
 
 #, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "отсутствует соответствующая запись в файле %s\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "добавить пользователя '%s' в %s ? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: не удалось обновить запись в файле паролей для %s\n"
+
+#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "неверная запись в теневом файле паролей\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "повторяющаяся запись в теневом файле паролей\n"
-
-#, c-format
-msgid "no matching password file entry\n"
-msgstr "отсутствует соответствующая запись в файле паролей\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1356,10 +1368,6 @@ msgstr "%s: не удалось открыть файл паролей\n"
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: не удалось удалить запись в теневом файле паролей для %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: не удалось обновить запись в файле паролей для %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1474,8 +1482,8 @@ msgid "Entering System Maintenance Mode\n"
 msgstr "Вход в режим системного обслуживания\n"
 
 #, c-format
-msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: неверный числовой параметр `%s'\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: неверный числовой параметр '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1498,8 +1506,8 @@ msgid "%s: rename: %s"
 msgstr "%s: переименовать: %s"
 
 #, c-format
-msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: группа `%s' является группой NIS.\n"
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s: группа '%s' является группой NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1534,7 +1542,7 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-"Использование: useradd [параметры] LOGIN\n"
+"Использование: useradd [параметры] ИМЯ\n"
 "\n"
 "Параметры:\n"
 "  -b, --base-dir BASE_DIR\tбазовый каталог для домашнего каталога\n"
@@ -1574,20 +1582,20 @@ msgid "%s: can't get unique UID\n"
 msgstr "%s: не удалось найти уникальный UID\n"
 
 #, c-format
-msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: неверный базовый каталог `%s'\n"
+msgid "%s: invalid base directory '%s'\n"
+msgstr "%s: неверный базовый каталог '%s'\n"
 
 #, c-format
-msgid "%s: invalid comment `%s'\n"
-msgstr "%s: неверный комментарий `%s'\n"
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s: неверный комментарий '%s'\n"
 
 #, c-format
-msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: неверный домашний каталог `%s'\n"
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s: неверный домашний каталог '%s'\n"
 
 #, c-format
-msgid "%s: invalid date `%s'\n"
-msgstr "%s: неверная дата `%s'\n"
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: неверная дата '%s'\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1598,12 +1606,12 @@ msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: для -f необходима поддержка теневых паролей\n"
 
 #, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: неверное поле `%s'\n"
+msgid "%s: invalid field '%s'\n"
+msgstr "%s: неверное поле '%s'\n"
 
 #, c-format
-msgid "%s: invalid shell `%s'\n"
-msgstr "%s: неверная командная оболочка `%s'\n"
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s: неверная командная оболочка '%s'\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1661,14 +1669,18 @@ msgstr "%s: не удалось добавить запись в теневой 
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: не удалось создать каталог %s\n"
 
-#, c-format
-msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-msgstr ""
-"Группа \"mail\" не существует, создаётся хранилище почты с правами 0600.\n"
+msgid "Creating mailbox file"
+msgstr "Создание почтового ящика"
 
 #, c-format
-msgid "Can't create mail spool for user %s.\n"
-msgstr "Не удалось создать хранилище почты для пользователя %s.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr ""
+"Не найдена группа 'mail'. Создаётся пользовательский почтовый ящик с правами "
+"0600.\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "Установка прав на файл почтового ящика"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1694,8 +1706,20 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: внимание: CREATE_HOME не поддерживается, используйте -m.\n"
 
 #, c-format
-msgid "Usage: %s [-r] name\n"
-msgstr "Использование: %s [-r] имя пользователя\n"
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+msgstr ""
+"Использование: userdel [параметры] ИМЯ\n"
+"\n"
+"Параметры:\n"
+"  -f, --force\t\t\tудалять файлы, даже если они не принадлежат пользователю\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -r, --remove\t\t\tудалить домашний каталог и почтовый ящик\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"

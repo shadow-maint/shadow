@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='sulogin.8'>
-  <!--  $Id: sulogin.8.xml,v 1.15 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!--  $Id: sulogin.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>sulogin</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -82,13 +80,13 @@
       <varlistentry>
 	<term><filename>/etc/passwd</filename></term>
 	<listitem>
-	  <para>user account information</para>
+	  <para>User account information.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><filename>/etc/shadow</filename></term>
 	<listitem>
-	  <para>secure user account information</para>
+	  <para>Secure user account information.</para>
 	</listitem>
       </varlistentry>
     </variablelist>

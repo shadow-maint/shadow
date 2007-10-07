@@ -1,7 +1,17 @@
 
 mandir = @mandir@/fr
 
+if USE_PAM
+man_nonpam =
+else
+man_nonpam = \
+	limits.5 \
+	login.access.5 \
+	porttime.5
+endif
+                        
 man_MANS = \
+	$(man_nonpam) \
 	chage.1 \
 	chfn.1 \
 	chpasswd.8 \
@@ -20,16 +30,13 @@ man_MANS = \
 	grpunconv.8 \
 	gshadow.5 \
 	lastlog.8 \
-	limits.5 \
 	login.1 \
-	login.access.5 \
 	login.defs.5 \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
 	passwd.1 \
 	passwd.5 \
-	porttime.5 \
 	pwck.8 \
 	pwconv.8 \
 	pwunconv.8 \
@@ -44,4 +51,7 @@ man_MANS = \
 	vigr.8 \
 	vipw.8
 
-EXTRA_DIST = $(man_MANS)
+EXTRA_DIST = \
+	$(man_MANS) \
+	$(man_nonpam)
+
