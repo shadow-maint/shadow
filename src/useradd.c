@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.49 2004/10/24 14:17:21 ankry Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.50 2004/11/09 02:45:43 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -431,15 +431,15 @@ static void get_defaults (void)
 
 static void show_defaults (void)
 {
-	printf (_("GROUP=%u\n"), (unsigned int) def_group);
-	printf (_("HOME=%s\n"), def_home);
+	printf ("GROUP=%u\n", (unsigned int) def_group);
+	printf ("HOME=%s\n", def_home);
 #ifdef SHADOWPWD
-	printf (_("INACTIVE=%ld\n"), def_inactive);
-	printf (_("EXPIRE=%s\n"), def_expire);
+	printf ("INACTIVE=%ld\n", def_inactive);
+	printf ("EXPIRE=%s\n", def_expire);
 #endif
-	printf (_("SHELL=%s\n"), def_shell);
-	printf (_("SKEL=%s\n"), def_template);
-	printf (_("CREATE_MAIL_SPOOL=%s\n"), def_create_mail_spool);
+	printf ("SHELL=%s\n", def_shell);
+	printf ("SKEL=%s\n", def_template);
+	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
 }
 
 /*

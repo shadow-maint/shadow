@@ -26,7 +26,7 @@
 .\"
 .\"
 .\"
-.\"	$Id: groupmod.8,v 1.3 2003/04/26 13:24:16 kloczek Exp $
+.\"	$Id: groupmod.8,v 1.5 2004/11/04 03:06:32 kloczek Exp $
 .\"
 .TH GROUPMOD 8
 .SH NOME
@@ -39,7 +39,7 @@ groupmod \- Modifica um grupo
 .SH DESCRIÇÃO
 O comando \fBgroupmod\fR modifica os arquivos de contas do sistema para as novas configurações informadas na linha de comando. As opções que aplicam-se ao comando \fIgroupmod\fR são:
 .IP "\fB-g \fIgid\fR"
-O valor numérico de identificação do grupo é denominada GID. Este valor deve ser único, a menos que a opção \fB-o\fR seja usada. O valor dever ser não negativo. Valores entre 0 e 99 são tipicamente reservados para grupos do sistema. Quaisquer arquivos com uma identificação antiga de grupo devem ter o ID mudado manualmente. 
+O valor numérico de identificação do grupo é denominada GID. Este valor deve ser único, a menos que a opção \fB-o\fR seja usada. O valor dever ser não negativo. Valores entre 0 e 999 são tipicamente reservados para grupos do sistema. Quaisquer arquivos com uma identificação antiga de grupo devem ter o ID mudado manualmente. 
 .IP "\fB-n \fInome_grupo\fR"
 O nome do grupo irá ser alterado de \fIgroup\fR para
 \fInome_grupo\fR.

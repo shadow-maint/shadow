@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-04-09 00:12+0700\n"
 "Last-Translator: Parlin Imanuel Toh <parlin@ui.edu>\n"
 "Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
@@ -1756,41 +1756,6 @@ msgstr ""
 msgid "%s: unknown group %s\n"
 msgstr ""
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr ""
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr ""
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr ""
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr ""
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr ""
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr ""
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr ""
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2229,92 +2194,3 @@ msgstr ""
 "Penggunaan:\n"
 "`vipw' mengedit /etc/passwd     `vipw -s' mengedit /etc/shadow\n"
 "`vigr' mengedit /etc/group      `vigr -s' mengedit /etc/gshadow\n"
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "Minimal:\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "Maksimal:\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "Peringatan:\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "Tidak aktif:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "Penggantian Terakhir:\t\t"
-
-#~ msgid "Dialup Password: "
-#~ msgstr "Kata sandi dialup:"
-
-#~ msgid "error - lookup '%s' failed\n"
-#~ msgstr "kesalahan - pencarian '%s' gagal\n"
-
-#~ msgid "%s not found\n"
-#~ msgstr "%s tidak ditemukan\n"
-
-#, fuzzy
-#~ msgid "Incorrect password for %s.\n"
-#~ msgstr "Kata sandi tidak tepat untuk `%s'\n"
-
-#~ msgid "Executing shell %s\n"
-#~ msgstr "Menjalankan shell %s\n"
-
-#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-#~ msgstr ""
-#~ "Penggunaan: %s [-l] [-m hari_min] [-M hari_maks] [-d hari_akhir] "
-#~ "pengguna\n"
-
-#~ msgid "Usage: %s [-(a|d)] shell\n"
-#~ msgstr "Penggunaan: %s [-(a|d)] shell\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "Kata sandi shell: "
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "masukkan lagi kata sandi shell:"
-
-#~ msgid "%s: Passwords do not match, try again.\n"
-#~ msgstr "%s: Kedua kata sandi tidak identik, coba lagi.\n"
-
-#~ msgid "%s: can't create %s"
-#~ msgstr "%s: tidak dapat membuat %s"
-
-#~ msgid "%s: can't open %s"
-#~ msgstr "%s: tidak dapat membuka %s"
-
-#~ msgid "%s: Shell %s not found.\n"
-#~ msgstr "%s: Shell %s tidak ditemukan.\n"
-
-#~ msgid "%s: not configured for shadow group support.\n"
-#~ msgstr "%s: tidak dikonfigurasikan untuk dukungan grup bayangan.\n"
-
-#~ msgid "User %s has a TCFS key, his old password is required.\n"
-#~ msgstr "Pengguna %s memiliki kunci TCFS, kata sandi lamanya diperlukan.\n"
-
-#~ msgid "You can use -t option to force the change.\n"
-#~ msgstr "Anda dapat menggunakan -t untuk memaksakan perubahan.\n"
-
-#~ msgid "Warning: user %s has a TCFS key.\n"
-#~ msgstr "Perhatian: pengguna %s memiliki kunci TCFS.\n"
-
-#~ msgid "Cannot lock the TCFS key database; try again later\n"
-#~ msgstr "Tidak dapat mengunci basis data kunci TCFS; coba lagi nanti\n"
-
-#~ msgid "Cannot open the TCFS key database.\n"
-#~ msgstr "Tidak dapat membukan basis data kunci TCFS.\n"
-
-#~ msgid "Error updating the TCFS key database.\n"
-#~ msgstr "Kesalahan saat memperbaharui basis data kunci TCFS.\n"
-
-#~ msgid "Cannot commit TCFS changes.\n"
-#~ msgstr "Tidak dapat melakukan commit perubahan TCFS.\n"
-
-#, fuzzy
-#~ msgid "%s: You may not view or modify password information for %s.\n"
-#~ msgstr "Anda tidak dapat menganti kata sandi untuk %s.\n"
-
-#, fuzzy
-#~ msgid "Command line args too long\n"
-#~ msgstr " terlalu panjang\n"

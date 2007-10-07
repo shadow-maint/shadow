@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.25 2004/10/11 04:40:29 kloczek Exp $")
+RCSID("$Id: commonio.c,v 1.27 2004/11/02 19:01:12 kloczek Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>

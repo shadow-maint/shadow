@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -1757,41 +1757,6 @@ msgstr "%s: ukjent gid %s\n"
 msgid "%s: unknown group %s\n"
 msgstr "%s: ukjent gruppe %s\n"
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr "GRUPPE=%u\n"
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr "HEIM=%s\n"
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr "INAKTIV=%ld\n"
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr "UTGÅR=%s\n"
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr "SKAL=%s\n"
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr "SKEL=%s\n"
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr ""
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2232,134 +2197,3 @@ msgstr ""
 "Bruk:\n"
 "«vipw» redigerer /etc/passwd        «vipw -s» redigerer /etc/shadow\n"
 "«vigr» redigerer /etc/group         «vigr -s» redigerer /etc/gshadow\n"
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "Minimum:\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "Maksimum:\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "Åtvaring:\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "Inaktiv:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "Siste endring:\t\t"
-
-#~ msgid "Dialup Password: "
-#~ msgstr "Passord for oppringing: "
-
-#~ msgid "error - lookup '%s' failed\n"
-#~ msgstr "feil - oppslat «%s» feila\n"
-
-#~ msgid "%s not found\n"
-#~ msgstr "%s ikkje funne\n"
-
-#, fuzzy
-#~ msgid "Incorrect password for %s.\n"
-#~ msgstr "Feil passord for «%s»\n"
-
-#~ msgid "Executing shell %s\n"
-#~ msgstr "Køyrer skal %s\n"
-
-#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-#~ msgstr ""
-#~ "Bruk: %s [-l] [-m min_dagar] [-M maks_dagar] [-d siste_dag] brukar\n"
-
-#~ msgid "Usage: %s [-(a|d)] shell\n"
-#~ msgstr "Bruk: %s [-(a|d)] skal\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "Skalpassord: "
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "Gjenta skalpassordet: "
-
-#~ msgid "%s: Passwords do not match, try again.\n"
-#~ msgstr "%s: Passorda var ikkje like, prøv igjen.\n"
-
-#~ msgid "%s: can't create %s"
-#~ msgstr "%s: klarer ikke oppretta %s"
-
-#~ msgid "%s: can't open %s"
-#~ msgstr "%s: klarer ikkje opna %s"
-
-#~ msgid "%s: Shell %s not found.\n"
-#~ msgstr "%s: Skal %s ikkje funne.\n"
-
-#~ msgid "%s: not configured for shadow group support.\n"
-#~ msgstr "%s: ikkje sett opp med støtte for skuggegruppe.\n"
-
-#~ msgid "User %s has a TCFS key, his old password is required.\n"
-#~ msgstr ""
-#~ "Brukar %s har ein TCFS-nøkkel, treng det gamle passordet til brukaren.\n"
-
-#~ msgid "You can use -t option to force the change.\n"
-#~ msgstr "Du kan bruka argumentet -t for å tvinga fram ei endring.\n"
-
-#~ msgid "Warning: user %s has a TCFS key.\n"
-#~ msgstr "Åtvaring: brukar %s har ein TCFS-nøkkel.\n"
-
-#~ msgid "Cannot lock the TCFS key database; try again later\n"
-#~ msgstr "Klarer ikkje låsa TCFS-nøkkeldatabasen, prøv igjen seinare\n"
-
-#~ msgid "Cannot open the TCFS key database.\n"
-#~ msgstr "Klarer ikkje opna TCFS-nøkkeldatabasen.\n"
-
-#~ msgid "Error updating the TCFS key database.\n"
-#~ msgstr "Feil ved oppdatering av TCFS-nøkkeldatabasen.\n"
-
-#~ msgid "Cannot commit TCFS changes.\n"
-#~ msgstr "Klarer ikkje utføra TCFS-endringar.\n"
-
-#, fuzzy
-#~ msgid "%s: You may not view or modify password information for %s.\n"
-#~ msgstr "Du kan ikkje endra passord for %s.\n"
-
-#~ msgid "%s: Shadow passwords are not configured.\n"
-#~ msgstr "%s: Skuggepassord er ikkje sett opp.\n"
-
-#, fuzzy
-#~ msgid "Command line args too long\n"
-#~ msgstr " er for lang\n"
-
-#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
-#~ msgstr "gruppe=%s,%u  startmappe=%s  skel=%s\n"
-
-#~ msgid "shell=%s  "
-#~ msgstr "skal=%s  "
-
-#~ msgid "inactive=%ld  expire=%s"
-#~ msgstr "inaktiv=%ld  utgår=%s"
-
-#~ msgid "[-A program] "
-#~ msgstr "[-A program] "
-
-#~ msgid "%s: error adding authentication method\n"
-#~ msgstr "%s: feil når autentiseringsmetode blei lagt til\n"
-
-#~ msgid "%s: cannot rewrite TCFS key file\n"
-#~ msgstr "%s: klarer ikkje skriva TCFS nøkkelfil på nytt\n"
-
-#~ msgid "%s: cannot lock TCFS key file\n"
-#~ msgstr "%s: klarer ikkje låsa TFCS nøkkelfil\n"
-
-#~ msgid "%s: cannot open TCFS key file\n"
-#~ msgstr "%s: klarer ikkje opna TCFS nøkkelfil\n"
-
-#~ msgid "%s: error deleting authentication\n"
-#~ msgstr "%s: feil ved sletting av autentisering\n"
-
-#~ msgid "%s: error deleting TCFS entry\n"
-#~ msgstr "%s: feil ved sletting av TCFS-oppføring\n"
-
-#~ msgid "[-A {DEFAULT|program},... ] "
-#~ msgstr "[-A {DEFAULT|program},... ] "
-
-#~ msgid "%s: error deleting authentication method\n"
-#~ msgstr "%s: feil ved sletting av autentiseringsmetode\n"
-
-#~ msgid "%s: error changing authentication method\n"
-#~ msgstr "%s: feil ved endring av autentiseringsmetode\n"

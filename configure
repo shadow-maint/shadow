@@ -1819,7 +1819,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.5
+ VERSION=4.0.6
 
 
 cat >>confdefs.h <<_ACEOF
@@ -22286,25 +22286,27 @@ echo $ECHO_N "checking location of shared mail directory... $ECHO_C" >&6
 if test "${shadow_cv_maildir+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  for maildir in /var/mail /var/spool/mail /usr/spool/mail /usr/mail none; do
-	if test -d $maildir; then
+  for shadow_cv_maildir in /var/mail /var/spool/mail /usr/spool/mail /usr/mail none; do
+	if test -d $shadow_cv_maildir; then
 		break
 	fi
 done
 fi
 echo "$as_me:$LINENO: result: $shadow_cv_maildir" >&5
 echo "${ECHO_T}$shadow_cv_maildir" >&6
-cat >>confdefs.h <<_ACEOF
+if test $shadow_cv_maildir != none; then
+	cat >>confdefs.h <<_ACEOF
 #define MAIL_SPOOL_DIR "$shadow_cv_maildir"
 _ACEOF
 
+fi
 
 echo "$as_me:$LINENO: checking location of user mail file" >&5
 echo $ECHO_N "checking location of user mail file... $ECHO_C" >&6
 if test "${shadow_cv_mailfile+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  for mailfile in Mailbox mailbox Mail mail .mail none; do
+  for shadow_cv_mailfile in Mailbox mailbox Mail mail .mail none; do
 	if test -f $HOME/$shadow_cv_mailfile; then
 		break
 	fi
@@ -22312,10 +22314,12 @@ done
 fi
 echo "$as_me:$LINENO: result: $shadow_cv_mailfile" >&5
 echo "${ECHO_T}$shadow_cv_mailfile" >&6
-cat >>confdefs.h <<_ACEOF
+if test $shadow_cv_mailfile != none; then
+	cat >>confdefs.h <<_ACEOF
 #define MAIL_SPOOL_FILE "$shadow_cv_mailfile"
 _ACEOF
 
+fi
 
 echo "$as_me:$LINENO: checking location of utmp" >&5
 echo $ECHO_N "checking location of utmp... $ECHO_C" >&6

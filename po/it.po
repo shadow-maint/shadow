@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-05-28 01:06+0200\n"
 "Last-Translator: Danilo Piazzalunga <danilopiazza@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -1787,41 +1787,6 @@ msgstr "%s: gid «%s» sconosciuto\n"
 msgid "%s: unknown group %s\n"
 msgstr "%s: gruppo «%s» sconosciuto\n"
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr "GROUP=%u\n"
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr "HOME=%s\n"
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr "INACTIVE=%ld\n"
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr "EXPIRE=%s\n"
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr "SHELL=%s\n"
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr "SKEL=%s\n"
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr "CREATE_MAIL_SPOOL=%s\n"
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2268,18 +2233,3 @@ msgstr ""
 "Uso:\n"
 "«vipw» per modificare /etc/passwd    «vipw -s» per modificare /etc/shadow\n"
 "«vigr» per modificare /etc/group     «vigr -s» per modificare /etc/gshadow\n"
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "Minimo:\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "Massimo:\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "Avviso:\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "Inattività:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "Ultimo cambio:\t\t"

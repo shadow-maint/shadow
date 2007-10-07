@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.27 2004/10/23 23:19:07 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.28 2004/11/09 03:57:36 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -684,7 +684,7 @@ int main (int argc, char **argv)
 	envcp = pam_getenvlist (pamh);
 	if (envcp) {
 		while (*envcp) {
-			putenv (*envcp);
+			addenv (*envcp, NULL);
 			envcp++;
 		}
 	}

@@ -1,4 +1,4 @@
-.\" $Id: usermod.8,v 1.9 2003/04/28 17:55:22 kloczek Exp $
+.\" $Id: usermod.8,v 1.12 2004/11/04 03:06:32 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -61,7 +61,9 @@ usermod \- zmiana danych konta u¿ytkownika
 .I login
 .SH OPIS
 Polecenie \fBusermod\fR zmienia systemowe pliki kont, odzwierciedlaj±c zmiany
-podane w wierszu poleceñ. Posiada ono nastêpuj±ce opcje:
+podane w wierszu poleceñ.
+.SH OPCJE
+Posiada ono nastêpuj±ce opcje:
 .\" .IP "\fB-A \fImetoda\fR|\fBDEFAULT\fR"
 .\" Nowa warto¶æ metody autentykacji u¿ytkownika. Metoda autentykacji jest
 .\" nazw± programu odpowiedzialnego za weryfikacjê to¿samo¶ci u¿ytkownika.
@@ -105,7 +107,7 @@ powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
 .IP "\fB-u \fIuid\fR"
 Numeryczna warto¶æ identyfikatora u¿ytkownika (user's ID). Warto¶æ ta musi
 byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
-Warto¶ci od 0 do 99 s± zwykle zarezerwowane dla kont systemowych.
+Warto¶ci od 0 do 999 s± zwykle zarezerwowane dla kont systemowych.
 Wszystkim plikom posiadanym przez u¿ytkownika, a po³o¿onym w drzewie katalogowym
 rozpoczynaj±cym siê od jego katalogu domowego zostanie automatycznie zmieniony
 identyfikator u¿ytkownika pliku.

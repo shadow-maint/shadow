@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupadd.8,v 1.3 2004/01/05 01:08:36 kloczek Exp $
+.\"	$Id: groupadd.8,v 1.4 2004/11/04 03:06:33 kloczek Exp $
 .\"
 .TH GROUPADD 8
 .SH 名称
@@ -42,7 +42,7 @@ groupadd \- 建 立 新 群 组
 group's ID 值 。
 除  非 使 用 \fB-o\fR 参 数 不 然 该 值 必 须 是 唯 一 ， 不 可 相 同 。
 数 值 不 可 为 负 。
-预 设 为 最 小  不  得 小 于 500 而 逐 次 增 加 。 0~499 传 统 上
+预 设 为 最 小  不  得 小 于 500 而 逐 次 增 加 。 0~999 传 统 上
 是 保 留 给 \fI系统帐号\fR 使 用 。
 .IP \fB-r\fR
 
@@ -55,7 +55,7 @@ group's ID 值 。
 果  你 想 要 有 使 用 者 目 录 须 额 外 指 定 -m 参
 数 来 建 立 系 统 帐 号 。 这 是 RED HAT 额  外  增
 设 的 选 项 。
-它 会 自 动 帮 你 选 定 一 个 小 于 499 的 \fIgif\fR
+它 会 自 动 帮 你 选 定 一 个 小 于 999 的 \fIgif\fR
 不 需 要 再 加 上 \fB-g\fR 参 数 。
 .br
 这 是 RED HAT 额  外  增 设 的 选 项 。

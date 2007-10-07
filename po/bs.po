@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -1731,41 +1731,6 @@ msgstr ""
 msgid "%s: unknown group %s\n"
 msgstr ""
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr ""
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr ""
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr ""
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr ""
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr ""
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr ""
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr ""
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2198,19 +2163,3 @@ msgid ""
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "Upozorenje:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "Zadnja promjena:\t\t"
-
-#, fuzzy
-#~ msgid "Incorrect password for %s.\n"
-#~ msgstr "Mijenjam šifru za grupu %s\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "Shell šifra: "
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "ponovo unesite Shell šifru: "

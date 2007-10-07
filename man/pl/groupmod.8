@@ -1,4 +1,4 @@
-.\" $Id: groupmod.8,v 1.7 2003/04/28 17:52:15 kloczek Exp $
+.\" $Id: groupmod.8,v 1.10 2004/11/04 03:06:32 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -34,13 +34,14 @@ groupmod - zmieñ dane grupy
 \fIgrupa\fR
 .SH OPIS
 Polecenie \fBgroupmod\fR modyfikuje systemowe pliki kont tak, by
-odzwierciedliæ w nich zmiany grup podane w wierszu poleceñ. Obs³uguje ono
-nastêpuj±ce opcje:
+odzwierciedliæ w nich zmiany grup podane w wierszu poleceñ.
+.SH OPCJE
+Obs³uguje ono nastêpuj±ce opcje:
 .TP
 .BI -g " gid"
 Numeryczna warto¶æ identyfikatora grupy (group ID).
 Warto¶æ ta musi byæ niepowtarzalna, chyba ¿e u¿yto opcji \fB-o\fR.
-Nie mo¿e byæ ujemna. Warto¶ci pomiêdzy 0 a 99 s± zwykle zarezerwowane
+Nie mo¿e byæ ujemna. Warto¶ci pomiêdzy 0 a 999 s± zwykle zarezerwowane
 dla grup systemowych. 
 Pliki, dla których stary identyfikator jest identyfikatorem
 grupy pliku, wymagaj± rêcznej zmiany ID grupy.

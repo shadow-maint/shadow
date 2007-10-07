@@ -1,4 +1,16 @@
-$Id: NEWS,v 1.80 2004/10/26 01:34:15 kloczek Exp $
+$Id: NEWS,v 1.85 2004/11/09 03:57:36 kloczek Exp $
+
+shadow-4.0.5 -> shadow-4.0.6
+
+- su: fix adding of pam_env env variables to enviroment
+  (Martin Schlemmer <azarah@nosferatu.za.org>),
+- autoconf: fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables
+  which was allways empty (Gregorio Guidi <g.guidi@sns.it>),
+- realuy closse security bug in libmisc/pwdcheck.c,
+- added missing template/example PAM service config files for chfn, chsh and
+  userdel,
+- do not translate variable names from /etc/default/useradd during
+  "useradd -D".
 
 shadow-4.0.4.1 -> shadow-4.0.5
 

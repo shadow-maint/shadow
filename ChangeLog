@@ -1,3 +1,16 @@
+2004-10-27  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* etc/pam.d/useradd: - added header
+
+	* etc/pam.d/chfn, etc/pam.d/chsh, etc/pam.d/userdel: - fixed header
+
+2004-10-27  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* etc/pam.d/chfn, etc/pam.d/chsh, etc/pam.d/userdel:
+	added missing template/example PAM service config files for chfn, chsh, userdel.
+
+	* NEWS, configure.in: start 4.0.6.
+
 2004-10-26  Tomasz K³oczko  <kloczek@pld.org.pl>
 
 	* man/pl/Attic/adduser.8, man/pl/Makefile.am, man/Attic/adduser.8, man/Makefile.am, man/fr/Attic/adduser.8, man/fr/Makefile.am, man/id/Attic/adduser.8, man/id/Makefile.am, man/it/Attic/adduser.8, man/it/Makefile.am, man/ja/Attic/adduser.8, man/ja/Makefile.am, NEWS:

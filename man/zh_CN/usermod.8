@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: usermod.8,v 1.2 2003/04/26 13:24:16 kloczek Exp $
+.\"	$Id: usermod.8,v 1.4 2004/11/04 03:06:33 kloczek Exp $
 .\"
 .TH USERMOD 8
 .SH 名称
@@ -100,8 +100,8 @@ usermod \- 修 改 使 用 者 帐 号
 指 定 新 登 入 shell 。 如 此 栏 留 白 ， 系 统 将 选 用 系 统 预 设 shell 。
 .IP "\fB-u \fIuid\fR"
 使 用 者 ID 值 。必 须 为 唯 一 的 ID 值 ， 除 非 用 \fI-o\fR 选 项 。 数 
-字 不 可 为 负 值。预 设 为 最 小  不  得 小 于 99 而 逐 次 
-增 加 。 0~99 传 统 上 是 保 留 给 系 统 帐 号 使 用 。
+字 不 可 为 负 值。预 设 为 最 小  不  得 小 于 999 而 逐 次 
+增 加 。 0~ 999 传 统 上 是 保 留 给 系 统 帐 号 使 用 。
 使 用 者 目 录 树 下 所 有 的 档 案 目 录 其 user ID 会 自 动 改 变 。
 放 在 使 用 者 目 录 外 的 档 案 则 要 自 行 手 动 更 动 。
 .SH 警告

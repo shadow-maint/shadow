@@ -25,7 +25,7 @@
 .\"
 .\"
 .\"
-.\"	$Id: groupadd.8,v 1.5 2004/08/04 13:02:25 kloczek Exp $
+.\"	$Id: groupadd.8,v 1.6 2004/11/04 03:06:32 kloczek Exp $
 .\"
 .TH GROUPADD 8
 .SH NOME
@@ -46,11 +46,11 @@ adicionado novamente).
 A identificação numérica do grupo é denominada ID. Este valor deve ser
 único, a menos que a opção \fB-o\fR seja usada. O valor deve ser não
 negativo, e o padrão é o menor valor maior que 500 e o maior que qualquer
-outro grupo. Valores entre 0 e 499 são tipicamente reservados para \fIcontas
+outro grupo. Valores entre 0 e 999 são tipicamente reservados para \fIcontas
 do sistema\fR.
 .IP \fB-r\fR
 Este indicador instrui \fBgroupadd\fR a adicionar uma  \fIconta do sistema
-\fR. A primeira identificação de grupo \fI(gid)\fR menor que 499 será
+\fR. A primeira identificação de grupo \fI(gid)\fR menor que 999 será
 automaticamente selecionada a menos que a opção \fB-g\fR seja informada
 também.
 .BR

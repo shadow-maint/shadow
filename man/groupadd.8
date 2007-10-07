@@ -1,4 +1,4 @@
-.\"$Id: groupadd.8,v 1.18 2004/08/04 13:02:23 kloczek Exp $
+.\"$Id: groupadd.8,v 1.21 2004/11/04 03:06:31 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -34,8 +34,9 @@ groupadd \- Create a new group
 .SH DESCRIPTION
 The \fBgroupadd\fR command creates a new group account using the values
 specified on the command line and the default values from the system. The
-new group will be entered into the system files as needed. The options which
-apply to the \fBgroupadd\fR command are:
+new group will be entered into the system files as needed.
+.SH OPTIONS
+The options which apply to the \fBgroupadd\fR command are:
 .IP "\fB-f\fR"
 This option causes to just exit with success status if the specified
 group already exists. With \fB-g\fR, if specified gid already exists,
@@ -43,8 +44,8 @@ other (unique) gid is chosen (i.e. \fB-g\fR is turned off).
 .IP "\fB-g\fR \fIgid\fR"
 The numerical value of the group's ID. This value must be unique, unless the
 \fB-o\fR option is used. The value must be non-negative. The default is to
-use the smallest ID value greater than 99 and greater than every other
-group. Values between 0 and 99 are typically reserved for system accounts.
+use the smallest ID value greater than 999 and greater than every other
+group. Values between 0 and 999 are typically reserved for system accounts.
 .SH FILES
 \fI/etc/group\fR	\- group account information
 .br

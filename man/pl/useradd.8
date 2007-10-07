@@ -1,4 +1,4 @@
-.\" $Id: useradd.8,v 1.15 2004/01/13 00:34:16 kloczek Exp $
+.\" $Id: useradd.8,v 1.18 2004/11/04 03:06:32 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -57,6 +57,7 @@ warto¶ciami z systemu.
 W zale¿no¶ci od potrzeb i opcji wiersza poleceñ, do plików systemowych
 zostanie wprowadzone nowe konto u¿ytkownika, utworzony bêdzie jego katalog
 domowy, do którego przekopiowane zostan± pliki startowe.
+.SH OPCJE
 Polecenie \fBuseradd\fR posiada nastêpuj±ce opcje:
 .\" .IP "\fB-A {\fImetoda\fR|\fBDEFAULT\fR},..."
 .\" Okre¶la metodê autentykacji u¿ytkownika.
@@ -123,9 +124,9 @@ powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
 .IP "\fB-u \fIuid\fR"
 Numeryczna warto¶æ identyfikatora u¿ytkownika (user's ID). Warto¶æ ta musi
 byæ niepowtarzalna, chyba ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
-Domy¶lnie u¿ywana jest tu najmniejsza warto¶æ identyfikatora wiêksza od 99
+Domy¶lnie u¿ywana jest tu najmniejsza warto¶æ identyfikatora wiêksza od 999
 i wiêksza od identyfikatorów pozosta³ych u¿ytkowników.
-Warto¶ci od 0 do 99 s± zwykle zarezerwowane dla kont systemowych.
+Warto¶ci od 0 do 999 s± zwykle zarezerwowane dla kont systemowych.
 .SS Zmiana warto¶ci domy¶lnych
 Wywo³ane z opcj± \fB-D\fR, polecenie \fBuseradd\fR albo wy¶wietli bie¿±ce
 warto¶ci domy¶lne, albo zaktualizuje domy¶lne warto¶ci z wiersza poleceñ.

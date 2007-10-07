@@ -1,7 +1,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: pwdcheck.c,v 1.3 2004/06/02 23:50:10 kloczek Exp $")
+RCSID ("$Id: pwdcheck.c,v 1.4 2004/11/02 18:46:30 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -34,7 +34,7 @@ passwd_check (const char *user, const char *passwd, const char *progname)
 	retcode = pam_acct_mgmt (pamh, 0);
 	if (retcode == PAM_NEW_AUTHTOK_REQD)
 		retcode = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
-	else if (retcode)
+	if (retcode)
 		goto bailout;
 
 	if (pam_setcred (pamh, 0))

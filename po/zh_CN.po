@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-05-14 10:26+1200\n"
 "Last-Translator: Carlos Z.F. Liu <carlos_liu@yahoo.com>\n"
 "Language-Team: Chinese (simplified) <i18n-translation@lists.linux.net.cn>\n"
@@ -1752,41 +1752,6 @@ msgstr "%s：未知的 gid %s\n"
 msgid "%s: unknown group %s\n"
 msgstr "%s：未知的组 %s\n"
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr "组=%u\n"
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr "主目录=%s\n"
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr "失效日=%ld\n"
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr "过期=%s\n"
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr "SHELL=%s\n"
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr "配置模板=%s\n"
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr ""
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2224,132 +2189,3 @@ msgstr ""
 "用法：\n"
 "“vipw” 编辑 /etc/passwd      “vipw -s” 编辑 /etc/shadow\n"
 "“vigr” 编辑 /etc/group       “vigr -s” 编辑 /etc/gshadow\n"
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "最小：\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "最大：\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "警告日：\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "失效日：\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "最后修改：\t\t"
-
-#~ msgid "Dialup Password: "
-#~ msgstr "拔号密码："
-
-#~ msgid "error - lookup '%s' failed\n"
-#~ msgstr "错误 - 查询“%s”失败\n"
-
-#~ msgid "%s not found\n"
-#~ msgstr "未找到 %s\n"
-
-#, fuzzy
-#~ msgid "Incorrect password for %s.\n"
-#~ msgstr "“%s”的密码不正确\n"
-
-#~ msgid "Executing shell %s\n"
-#~ msgstr "正在执行 shell %s\n"
-
-#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-#~ msgstr "用法：%s [-l] [-m 最小天数] [-M 最大天数] [-d 最后日] 用户\n"
-
-#~ msgid "Usage: %s [-(a|d)] shell\n"
-#~ msgstr "用法：%s [-(a|d)] shell\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "Shell 密码："
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "请重新输入 Shell 密码："
-
-#~ msgid "%s: Passwords do not match, try again.\n"
-#~ msgstr "%s：密码不匹配，请重试。\n"
-
-#~ msgid "%s: can't create %s"
-#~ msgstr "%s：无法创建 %s"
-
-#~ msgid "%s: can't open %s"
-#~ msgstr "%s：无法打开 %s"
-
-#~ msgid "%s: Shell %s not found.\n"
-#~ msgstr "%s：没有找到 %s shell。\n"
-
-#~ msgid "%s: not configured for shadow group support.\n"
-#~ msgstr "%s：配置并不支持影子组。\n"
-
-#~ msgid "User %s has a TCFS key, his old password is required.\n"
-#~ msgstr "用户 %s 有一个 TCFS 密钥，需要他的旧密码。\n"
-
-#~ msgid "You can use -t option to force the change.\n"
-#~ msgstr "您可以用 -t 选项来强迫改变。\n"
-
-#~ msgid "Warning: user %s has a TCFS key.\n"
-#~ msgstr "警告：用户 %s 有一个 TCFS 密钥。\n"
-
-#~ msgid "Cannot lock the TCFS key database; try again later\n"
-#~ msgstr "无法锁定 TCFS 密钥数据库；请稍后再试\n"
-
-#~ msgid "Cannot open the TCFS key database.\n"
-#~ msgstr "无法打开 TCFS 密钥数据库。\n"
-
-#~ msgid "Error updating the TCFS key database.\n"
-#~ msgstr "更新 TCFS 密钥数据库时出错\n"
-
-#~ msgid "Cannot commit TCFS changes.\n"
-#~ msgstr "无法提交 TCFS 修改。\n"
-
-#, fuzzy
-#~ msgid "%s: You may not view or modify password information for %s.\n"
-#~ msgstr "您不应更改 %s 的密码。\n"
-
-#~ msgid "%s: Shadow passwords are not configured.\n"
-#~ msgstr "%s：未配置影子密码。\n"
-
-#, fuzzy
-#~ msgid "Command line args too long\n"
-#~ msgstr " 过长\n"
-
-#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
-#~ msgstr "组=%s,%u  主目录=%s  配置模板=%s\n"
-
-#~ msgid "shell=%s  "
-#~ msgstr "shell=%s  "
-
-#~ msgid "inactive=%ld  expire=%s"
-#~ msgstr "失效日=%ld  过期=%s"
-
-#~ msgid "[-A program] "
-#~ msgstr "[-A 程序] "
-
-#~ msgid "%s: error adding authentication method\n"
-#~ msgstr "%s：加入认证方法时出错\n"
-
-#~ msgid "%s: cannot rewrite TCFS key file\n"
-#~ msgstr "%s：无法重写 TCFS 密钥文件\n"
-
-#~ msgid "%s: cannot lock TCFS key file\n"
-#~ msgstr "%s：无法锁定 TCFS 密钥文件\n"
-
-#~ msgid "%s: cannot open TCFS key file\n"
-#~ msgstr "%s：无法打开 TCFS 密钥文件\n"
-
-#~ msgid "%s: error deleting authentication\n"
-#~ msgstr "%s：删除认证时出错\n"
-
-#~ msgid "%s: error deleting TCFS entry\n"
-#~ msgstr "%s：删除 TCFS 条目时出错\n"
-
-#~ msgid "[-A {DEFAULT|program},... ] "
-#~ msgstr "[-A {DEFAULT|程序},... ] "
-
-#~ msgid "%s: error deleting authentication method\n"
-#~ msgstr "%s：删除认证方法时出错\n"
-
-#~ msgid "%s: error changing authentication method\n"
-#~ msgstr "%s：改变认证方法时出错\n"

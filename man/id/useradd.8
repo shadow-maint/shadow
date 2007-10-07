@@ -25,7 +25,7 @@
 .\" KARENA KESALAHAN DALAM MENGGUNAKAN SOFTWARE INI, BAHKAN JIKA TELAH
 .\" DIPERINGATKAN SEBELUMNYA TENTANG KEMUNGKINAN AKAN KERUSAKAN TERSEBUT.
 .\"
-.\"	$Id: useradd.8,v 1.1 2002/03/13 09:30:55 kloczek Exp $
+.\"	$Id: useradd.8,v 1.3 2004/11/04 03:06:31 kloczek Exp $
 .\"
 .TH USERADD 8
 .SH NAME
@@ -151,9 +151,9 @@ system untuk memilih login shell yang default.
 Nilai user ID secara numerik.
 Nilai ini harus unique, kecuali jika option \fI-o\fR digunakan.
 Nilai tersebut tidak boleh negatif.
-Default-nya adalah menggunakan nilai ID yang lebih besar dari 99
+Default-nya adalah menggunakan nilai ID yang lebih besar dari 999
 dan lebih besar dari semua user lain.
-Nilai di antara 0 dan 99 biasanya disiapkan untuk system aacount.
+Nilai di antara 0 dan 999 biasanya disiapkan untuk system aacount.
 .SS Mengubah nilai-nilai default.
 Ketika digunakan dengan option \fB-D\fR, \fBuseradd\fR akan
 menampilkan nilai default, atau memperbarui nilai default baru

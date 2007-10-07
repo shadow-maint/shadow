@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupadd.8,v 1.4 2004/08/04 13:02:26 kloczek Exp $
+.\"	$Id: groupadd.8,v 1.5 2004/11/04 03:06:33 kloczek Exp $
 .\"
 .TH GROUPADD 8
 .SH 名稱
@@ -55,7 +55,7 @@ specified).
 group's ID 值 。
 除  非 使 用 \fB-o\fR 參 數 不 然 該 值 必 須 是 唯 一 ， 不 可 相 同 。
 數 值 不 可 為 負 。
-預 設 為 最 小  不  得 小 於 500 而 逐 次 增 加 。 0~499 傳 統 上
+預 設 為 最 小  不  得 小 於 500 而 逐 次 增 加 。 0~999 傳 統 上
 是 保 留 給 \fI系統帳號\fR 使 用 。
 .IP \fB-r\fR
 此 參 數 是 用 來 建 立 \fI系統帳號\fR 。
@@ -66,7 +66,7 @@ group's ID 值 。
 果  你 想 要 有 使 用 者 目 錄 須 額 外 指 定 -m 參
 數 來 建 立 系 統 帳 號 。 這 是 RED HAT 額  外  增
 設 的 選 項 。
-它 會 自 動 幫 你 選 定 一 個 小 於 499 的 \fIgif\fR
+它 會 自 動 幫 你 選 定 一 個 小 於 999 的 \fIgif\fR
 不 需 要 再 加 上 \fB-g\fR 參 數 。
 .br
 這 是 RED HAT 額  外  增 設 的 選 項 。

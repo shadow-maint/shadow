@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: useradd.8,v 1.2 2003/04/26 13:24:16 kloczek Exp $
+.\"	$Id: useradd.8,v 1.4 2004/11/04 03:06:33 kloczek Exp $
 .\"
 .TH USERADD 8
 .SH 名 称
@@ -140,8 +140,8 @@ The \fB-k\fR 同 \fB-m\fR
 预 设 为 不 填 写 ， 这 样 系 统 会 帮 你 指 定 预 设 的 登 入 shell 。
 .IP "\fB-u \fIuid\fR"
 使 用 者 的 ID 值 。 必 须 为 唯 一 的 ID 值 ， 除 非 用 \fI-o\fR 选 项 。
-数 字 不 可 为 负 值。预 设 为 最 小 不 得 小 于 99 而 逐 次 增 加 。
-0~99 传 统 上 是 保 留 给 系 统 帐 号 使 用 。
+数 字 不 可 为 负 值。预 设 为 最 小 不 得 小 于 999 而 逐 次 增 加 。
+0~ 999 传 统 上 是 保 留 给 系 统 帐 号 使 用 。
 
 .SS 改 变 预 设 值
 当 \fB-D\fR 选 项 出 现 时 ， \fBuseradd\fR 秀 出 现 在 的 预 设 值 ， 或 是 藉 

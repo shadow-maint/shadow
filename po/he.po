@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -1736,41 +1736,6 @@ msgstr ""
 msgid "%s: unknown group %s\n"
 msgstr ""
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr ""
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr ""
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr ""
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr ""
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr ""
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr ""
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr ""
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2203,54 +2168,3 @@ msgid ""
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "מינימום:\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "מקסימום:\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "אזהרה:\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "לא פעיל:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "שינוי אחרון:\t\t"
-
-#~ msgid "Dialup Password: "
-#~ msgstr "סיסמת חיוג:"
-
-#~ msgid "error - lookup '%s' failed\n"
-#~ msgstr "שגיאה - חיפוש אחר '%s' נכשל\n"
-
-#~ msgid "%s not found\n"
-#~ msgstr "%s לא נמצא\n"
-
-#~ msgid "Incorrect password for %s.\n"
-#~ msgstr "סיסמה לא נכונה עבור %s.\n"
-
-#~ msgid "Executing shell %s\n"
-#~ msgstr "מריץ את המעטפת %s\n"
-
-#~ msgid "Usage: %s [-(a|d)] shell\n"
-#~ msgstr "שימוש: %s [-(a|d)] shell\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "סיסמת מעטפת: "
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "הכנס מחדש סיסמת מעטפת: "
-
-#~ msgid "%s: Passwords do not match, try again.\n"
-#~ msgstr "%s: הסיסמאות אינן תואמות, נסה מחדש.\n"
-
-#~ msgid "%s: can't create %s"
-#~ msgstr "%s: לא יכול ליצור את %s"
-
-#~ msgid "%s: can't open %s"
-#~ msgstr "%s: לא יכול לפתוח את %s"
-
-#~ msgid "%s: Shell %s not found.\n"
-#~ msgstr "%s: המעטפת %s לא נמצאה.\n"

@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: useradd.8,v 1.1 2002/03/10 07:41:04 kloczek Exp $
+.\"	$Id: useradd.8,v 1.3 2004/11/04 03:06:31 kloczek Exp $
 .\"
 .\" Traduction 26/09/00 par Frédéric Delanoy (fdelanoy@info.fundp.ac.be)
 .\"
@@ -112,7 +112,7 @@ Le mot de passe crypté, comme renvoyé par \fBcrypt\fR(3).  Le comportement par d
 .IP "\fB-s \fIshell\fR"
 Le nom du shell de connexion de l'utilisateur.  Le comportement par défaut est de laisser ce compte vide, ce qui fait sélectionner au système le shell de connexion par défaut.
 .IP "\fB-u \fIuid\fR"
-La valeur numérique de l'ID de l'utilisateur.  Cette valeur doit être unique, à moins que l'option \fI-o\fR ne soit utilisée.  La valeur doit être non négative.  Le comportement par défaut est d'utiliser la plus petite valeur d'ID plus grande que 99, et plus grande que celle de n'importe quel autre utilisateur.  Les valeurs comprises entre 0 et 99 sont typiquement réservées pour les comptes systèmes.
+La valeur numérique de l'ID de l'utilisateur.  Cette valeur doit être unique, à moins que l'option \fI-o\fR ne soit utilisée.  La valeur doit être non négative.  Le comportement par défaut est d'utiliser la plus petite valeur d'ID plus grande que 999, et plus grande que celle de n'importe quel autre utilisateur.  Les valeurs comprises entre 0 et 499 sont typiquement réservées pour les comptes systèmes.
 .SS Modifier les valeurs par défaut.
 Quand il est invoqué avec l'option \fB-D\fR, \fBuseradd\fR soit affichera les valeurs actuelles par défaut, soit mettra à jour les valeurs par défaut via la ligne de commandes.  Les options valides sont
 .IP "\fB-b \fIrép_perso\fR"

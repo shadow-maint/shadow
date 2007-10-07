@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.4.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"POT-Creation-Date: 2004-11-09 04:44+0100\n"
 "PO-Revision-Date: 2004-04-23 09:31+0200\n"
 "Last-Translator:  Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -1769,41 +1769,6 @@ msgstr "%s: gid %s desconocido\n"
 msgid "%s: unknown group %s\n"
 msgstr "%s: grupo %s desconocido\n"
 
-#: src/useradd.c:434
-#, c-format
-msgid "GROUP=%u\n"
-msgstr "GRUPO=%u\n"
-
-#: src/useradd.c:435
-#, c-format
-msgid "HOME=%s\n"
-msgstr "HOME=%s\n"
-
-#: src/useradd.c:437
-#, c-format
-msgid "INACTIVE=%ld\n"
-msgstr "INACTIVO=%ld\n"
-
-#: src/useradd.c:438
-#, c-format
-msgid "EXPIRE=%s\n"
-msgstr "EXPIRA=%s\n"
-
-#: src/useradd.c:440
-#, c-format
-msgid "SHELL=%s\n"
-msgstr "SHELL=%s\n"
-
-#: src/useradd.c:441
-#, c-format
-msgid "SKEL=%s\n"
-msgstr "SKEL=%s\n"
-
-#: src/useradd.c:442
-#, c-format
-msgid "CREATE_MAIL_SPOOL=%s\n"
-msgstr "CREA_COLA_CORREO=%s\n"
-
 #: src/useradd.c:475
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -2252,124 +2217,3 @@ msgstr ""
 "Modo de uso\n"
 "`vipw' edita /etc/passwd        `vipw -s' edita /etc/shadow\n"
 "`vigr' edita /etc/group         `vigr -s' edita /etc/gshadow\n"
-
-#~ msgid "Minimum:\t%ld\n"
-#~ msgstr "Mínimo:\t%ld\n"
-
-#~ msgid "Maximum:\t%ld\n"
-#~ msgstr "Máximo:\t%ld\n"
-
-#~ msgid "Warning:\t%ld\n"
-#~ msgstr "Aviso:\t%ld\n"
-
-#~ msgid "Inactive:\t%ld\n"
-#~ msgstr "Inactivo:\t%ld\n"
-
-#~ msgid "Last Change:\t\t"
-#~ msgstr "Último cambio:\t\t"
-
-#~ msgid "Executing shell %s\n"
-#~ msgstr "Ejecutando la shell %s\n"
-
-#~ msgid "Dialup Password: "
-#~ msgstr "Contraseña para red telefónica: "
-
-#~ msgid "error - lookup '%s' failed\n"
-#~ msgstr "error - consulta '%s' fallida\n"
-
-#~ msgid "%s not found\n"
-#~ msgstr "no se encontró %s\n"
-
-#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-#~ msgstr ""
-#~ "Modo de uso: %s [-l] [-m mín_días] [-M máx_días] [-d último_día] usuario\n"
-
-#~ msgid "Usage: %s [-(a|d)] shell\n"
-#~ msgstr "Modo de uso: %s [-(a|d)] shell\n"
-
-#~ msgid "Shell password: "
-#~ msgstr "Contraseña de la shell: "
-
-#~ msgid "re-enter Shell password: "
-#~ msgstr "Re-introduzca la contraseña de la shell: "
-
-#~ msgid "%s: Passwords do not match, try again.\n"
-#~ msgstr "%s: Las contraseñas no concuerdan, vuelva a intentarlo.\n"
-
-#~ msgid "%s: can't create %s"
-#~ msgstr "%s: no se puede crear %s"
-
-#~ msgid "%s: can't open %s"
-#~ msgstr "%s: no se puede abrir %s"
-
-#~ msgid "%s: Shell %s not found.\n"
-#~ msgstr "%s: Shell %s no encontrada.\n"
-
-#~ msgid "%s: not configured for shadow group support.\n"
-#~ msgstr "%s: no configurado para soporte de grupos ocultos (shadow).\n"
-
-#~ msgid "User %s has a TCFS key, his old password is required.\n"
-#~ msgstr ""
-#~ "El usuario %s tiene una llave TCFS, se necesita su antigua contraseña.\n"
-
-#~ msgid "You can use -t option to force the change.\n"
-#~ msgstr "Puede usar la opción -t para forzar el cambio.\n"
-
-#~ msgid "Warning: user %s has a TCFS key.\n"
-#~ msgstr "Aviso: el usuario %s tiene una llave TCFS.\n"
-
-#~ msgid "Cannot lock the TCFS key database; try again later\n"
-#~ msgstr ""
-#~ "No se puede bloquear la base de datos de llaves TCFS, inténtelo más "
-#~ "tarde\n"
-
-#~ msgid "Cannot open the TCFS key database.\n"
-#~ msgstr "No se puede abrir la base de datos de llaves TCFS.\n"
-
-#~ msgid "Error updating the TCFS key database.\n"
-#~ msgstr "Error actualizando la base de datos de llaves TCFS.\n"
-
-#~ msgid "Cannot commit TCFS changes.\n"
-#~ msgstr "No se pueden actualizar los cambios TCFS.\n"
-
-#~ msgid "%s: Shadow passwords are not configured.\n"
-#~ msgstr "%s: las contraseñas ocultas (shadow) no están configuradas.\n"
-
-#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
-#~ msgstr "grupo=%s,%u  dirbase=%s  skel=%s\n"
-
-#~ msgid "shell=%s  "
-#~ msgstr "shell=%s  "
-
-#~ msgid "inactive=%ld  expire=%s"
-#~ msgstr "inactivo=%ld  caduca=%s"
-
-#~ msgid "[-A program] "
-#~ msgstr "[-A programa] "
-
-#~ msgid "%s: error adding authentication method\n"
-#~ msgstr "%s: error añadiendo método de autenticación\n"
-
-#~ msgid "%s: cannot rewrite TCFS key file\n"
-#~ msgstr "%s: no se puede reescribir el fichero de llaves TCFS\n"
-
-#~ msgid "%s: cannot lock TCFS key file\n"
-#~ msgstr "%s: no se puede bloquear el fichero de llaves TCFS\n"
-
-#~ msgid "%s: cannot open TCFS key file\n"
-#~ msgstr "%s: no se puede abrir el fichero de llaves TCFS\n"
-
-#~ msgid "%s: error deleting authentication\n"
-#~ msgstr "%s: error eliminando autenticación\n"
-
-#~ msgid "%s: error deleting TCFS entry\n"
-#~ msgstr "%s: error eliminando entrada TCFS\n"
-
-#~ msgid "[-A {DEFAULT|program},... ] "
-#~ msgstr "[-A {PREDETERMINADO|programa},... ] "
-
-#~ msgid "%s: error deleting authentication method\n"
-#~ msgstr "%s: error eliminando método de autenticación\n"
-
-#~ msgid "%s: error changing authentication method\n"
-#~ msgstr "%s: error cambiando método de autenticación\n"
