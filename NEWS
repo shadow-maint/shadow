@@ -1,5 +1,44 @@
-$Id: NEWS,v 1.12 2001/09/07 15:35:54 kloczek Exp $
+$Id: NEWS,v 1.24 2002/01/06 15:00:05 kloczek Exp $
 
+shadow-4.0.0 => shadow-4.0.1
+
+- added ability to log session closes in newgrp
+  (Joseph Parmelee <jparmele@wildbear.com>),
+- add -pcs to .indent.pro file and reindent all code in src/,
+- remove "\n" from all SYSLOG() messages,
+- finish integrate AGING code into SHADOWPW,
+- remove handle old HAVE_USERSEC_H code,
+- updated ja and added hu man pages,
+- applied patches by Solar Designer <solar@openwall.com>:
+  shadow-4.0.0-owl-chage-drop-priv.diffd
+  shadow-4.0.0-owl-chage-ro-no-lock.diff:
+    Added locks which are needed when doing r/w accesses, not when running
+    as root.  If root does read-only, there's no lock needed. Added missing
+    "#include <errno.h>" for above (me).
+  shadow-4.0.0-owl-warnings.diff
+    Olny one fix from this patch was aplayd because other was fixed few days
+    before :)
+  shadow-4.0.0-owl-check_names.diff
+    Merge only prat this patch with checking login name matching; checking
+    is login string isn't longer than possible it will be good prepare using
+    probably _POSIX_LOGIN_NAME_MAX from <bits/posix1_lim.h>,
+  shadow-4.0.0-owl-chage-drop-priv.diff
+  shadow-4.0.0-owl-pam-auth.diff
+    Merge part with reorder initialize PAM and checkin is chage is runed by
+    root or not - now chage can be runed from non-root account for checking
+    by user own accout information (if PAM enabled).
+- fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>),
+- implemented functions for better reloading the nscd cache (per NSS map)
+  (Thorsten Kukuk <kukuk@suse.de>),
+- fixed warnings "not used but defined" on compile using gcc 3.0.x 
+  (bulletpr00ph <bullet@users.sourceforge.net>),
+- added ja, ko translations found in SuSE,
+- added symlinks: newgrp -> sg, vipw -> vigr,
+- added vigr(1) man page as roff .so link to vipw(1),
+- added sg(1) man page as roff .so link to newgrp(1),
+- installed fix for SEGV when using pwck -s on /etc/passwd file with
+  empty lines in it.
+  
 shadow-20001016 => shadow-4.0.0
 
 - fix bug discovered and fixed by Marcel Ritter
@@ -7,8 +46,7 @@ shadow-20001016 => shadow-4.0.0
   Due to a big buffer size in lib/commonio.c this error does only appear
   if a line gets longer than 4096 bytes (there are probably very few people
   stumbling across this).
-  Ths bug can be exposed by trashing /etc/groups file with using useradd
-  with script:
+  Ths bug can be exposed by trashing /etc/groups file using useradd with script:
 	#!/bin/sh
 	typeset -i NUM
 	NUM=0

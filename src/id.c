@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,62 +30,58 @@
 /*
  * id - print current process user identification information
  *
- *	Print the current process identifiers.  This includes the
- *	UID, GID, effective-UID and effective-GID.  Optionally print
+ *	Print the current process identifiers. This includes the
+ *	UID, GID, effective-UID and effective-GID. Optionally print
  *	the concurrent group set if the current system supports it.
  */
 
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: id.c,v 1.7 2001/09/01 04:19:16 kloczek Exp $")
-
+RCSID (PKG_VER "$Id: id.c,v 1.10 2002/01/05 15:41:43 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
 #include <pwd.h>
 #include "defines.h"
-
 /* local function prototypes */
-static void usage(void);
+static void usage (void);
 
-static void
-usage(void)
+static void usage (void)
 {
 #ifdef HAVE_GETGROUPS
-	fprintf(stderr, _("usage: id [ -a ]\n"));
+	fprintf (stderr, _("usage: id [-a]\n"));
 #else
-	fprintf(stderr, _("usage: id\n"));
+	fprintf (stderr, _("usage: id\n"));
 #endif
-	exit(1);
+	exit (1);
 }
 
-/*ARGSUSED*/
-int
-main(int argc, char **argv)
+ /*ARGSUSED*/ int main (int argc, char **argv)
 {
 	uid_t ruid, euid;
 	gid_t rgid, egid;
 	int i;
 	long sys_ngroups;
+
 /*
  * This block of declarations is particularly strained because of several
- * different ways of doing concurrent groups.  Old BSD systems used int
- * for gid's, but short for the type passed to getgroups().  Newer systems
- * use gid_t for everything.  Some systems have a small and fixed NGROUPS,
- * usually about 16 or 32.  Others use bigger values.
+ * different ways of doing concurrent groups. Old BSD systems used int for
+ * gid's, but short for the type passed to getgroups(). Newer systems use
+ * gid_t for everything. Some systems have a small and fixed NGROUPS,
+ * usually about 16 or 32. Others use bigger values.
  */
 #ifdef HAVE_GETGROUPS
 	GETGROUPS_T *groups;
-	int	ngroups;
-	int	aflg = 0;
+	int ngroups;
+	int aflg = 0;
 #endif
-	struct	passwd	*pw;
-	struct	group	*gr;
+	struct passwd *pw;
+	struct group *gr;
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
 	/*
 	 * Dynamically get the maximum number of groups from system, instead
@@ -93,46 +89,46 @@ main(int argc, char **argv)
 	 * group limit is not hard coded into the binary, so it will still
 	 * work if the system library is recompiled.
 	 */
-	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
+	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups=malloc(sys_ngroups*sizeof(GETGROUPS_T));
+	groups = malloc (sys_ngroups * sizeof (GETGROUPS_T));
 	/*
-	 * See if the -a flag has been given to print out the
-	 * concurrent group set.
+	 * See if the -a flag has been given to print out the concurrent
+	 * group set.
 	 */
 
 	if (argc > 1) {
 		if (argc > 2 || strcmp (argv[1], "-a"))
-			usage();
+			usage ();
 		else
 			aflg = 1;
 	}
 #else
 	if (argc > 1)
-		usage();
+		usage ();
 #endif
 
-	ruid = getuid();
-	euid = geteuid();
-	rgid = getgid();
-	egid = getegid();
+	ruid = getuid ();
+	euid = geteuid ();
+	rgid = getgid ();
+	egid = getegid ();
 
 	/*
-	 * Print out the real user ID and group ID.  If the user or
-	 * group does not exist, just give the numerical value.
+	 * Print out the real user ID and group ID. If the user or group
+	 * does not exist, just give the numerical value.
 	 */
 
-	pw = getpwuid(ruid);
+	pw = getpwuid (ruid);
 	if (pw)
-		printf(_("uid=%d(%s)"), (int) ruid, pw->pw_name);
+		printf (_("uid=%u(%s)"), ruid, pw->pw_name);
 	else
-		printf(_("uid=%d"), (int) ruid);
+		printf (_("uid=%u"), ruid);
 
-	gr = getgrgid(rgid);
+	gr = getgrgid (rgid);
 	if (gr)
-		printf(_(" gid=%d(%s)"), (int) rgid, gr->gr_name);
+		printf (_(" gid=%u(%s)"), rgid, gr->gr_name);
 	else
-		printf(_(" gid=%d"), (int) rgid);
+		printf (_(" gid=%u"), rgid);
 
 	/*
 	 * Print out the effective user ID and group ID if they are
@@ -140,58 +136,55 @@ main(int argc, char **argv)
 	 */
 
 	if (ruid != euid) {
-		pw = getpwuid(euid);
+		pw = getpwuid (euid);
 		if (pw)
-			printf(_(" euid=%d(%s)"), (int) euid, pw->pw_name);
+			printf (_(" euid=%u(%s)"), euid, pw->pw_name);
 		else
-			printf(_(" euid=%d"), (int) euid);
+			printf (_(" euid=%u"), euid);
 	}
 	if (rgid != egid) {
-		gr = getgrgid(egid);
+		gr = getgrgid (egid);
 		if (gr)
-			printf(_(" egid=%d(%s)"), (int) egid, gr->gr_name);
+			printf (_(" egid=%u(%s)"), egid, gr->gr_name);
 		else
-			printf(_(" egid=%d"), (int) egid);
+			printf (_(" egid=%u"), egid);
 	}
-
 #ifdef HAVE_GETGROUPS
 	/*
-	 * Print out the concurrent group set if the user has requested
-	 * it.  The group numbers will be printed followed by their
-	 * names.
+	 * Print out the concurrent group set if the user has requested it.
+	 * The group numbers will be printed followed by their names.
 	 */
 
 	if (aflg && (ngroups = getgroups (sys_ngroups, groups)) != -1) {
 
 		/*
-		 * Start off the group message.  It will be of the format
+		 * Start off the group message. It will be of the format
 		 *
-		 *	groups=###(aaa),###(aaa),###(aaa)
+		 *      groups=###(aaa),###(aaa),###(aaa)
 		 *
 		 * where "###" is a numerical value and "aaa" is the
 		 * corresponding name for each respective numerical value.
 		 */
 
-		printf(_(" groups="));
+		printf (_(" groups="));
 		for (i = 0; i < ngroups; i++) {
 			if (i)
-				putchar(',');
+				putchar (',');
 
-			gr = getgrgid(groups[i]);
+			gr = getgrgid (groups[i]);
 			if (gr)
-				printf("%d(%s)", (int) groups[i], gr->gr_name);
+				printf ("%u(%s)", groups[i], gr->gr_name);
 			else
-				printf("%d", (int) groups[i]);
+				printf ("%u", groups[i]);
 		}
 	}
-	free(groups);
+	free (groups);
 #endif
 
 	/*
 	 * Finish off the line.
 	 */
 
-	putchar('\n');
-	exit(0);
-	/*NOTREACHED*/
-}
+	putchar ('\n');
+	exit (0);
+ /*NOTREACHED*/}

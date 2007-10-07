@@ -37,26 +37,11 @@
 #include "defines.h"
 #include <pwd.h>
 #include <grp.h>
-#ifdef HAVE_USERSEC_H
-#include <userpw.h>
-#include <usersec.h>
-#include <userconf.h>
-#endif
 
-#ifndef	AGING
-#if defined(SHADOWPWD) || defined(HAVE_USERSEC_H)
-#define AGING	1
-#endif
-#else
-#if !defined(SHADOWPWD) && !defined(HAVE_USERSEC_H) && !defined(ATT_AGE)
-#undef AGING
-#endif
-#endif
-
-#if defined(SHADOWPWD) || defined(AGING) /*{*/
+#if defined(SHADOWPWD)
 
 #include "rcsid.h"
-RCSID("$Id: age.c,v 1.6 1998/12/28 20:34:42 marekm Exp $")
+RCSID("$Id: age.c,v 1.7 2001/12/22 06:59:30 kloczek Exp $")
 
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
@@ -69,34 +54,22 @@ RCSID("$Id: age.c,v 1.6 1998/12/28 20:34:42 marekm Exp $")
  *	if it has expired.
  */
 
-#ifdef	SHADOWPWD
 int
 expire(const struct passwd *pw, const struct spwd *sp)
 {
-#else
-int
-expire(const struct passwd *pw)
-{
-#endif
 	int	status;
 	int	child;
 	int	pid;
 
-#ifdef	SHADOWPWD
 	if (! sp)
 		sp = pwd_to_spwd (pw);
-#endif
 
 	/*
 	 * See if the user's password has expired, and if so
 	 * force them to change their password.
 	 */
 
-#ifdef	SHADOWPWD
 	switch (status = isexpired (pw, sp))
-#else
-	switch (status = isexpired (pw))
-#endif
 	{
 		case 0:
 			return 0;
@@ -118,11 +91,7 @@ expire(const struct passwd *pw)
 	 * change that password.
 	 */
 
-#ifdef	SHADOWPWD
 	if (status > 1 || sp->sp_max < sp->sp_min)
-#else
-	if (status > 1 || c64i (pw->pw_age[0]) < c64i (pw->pw_age[1]))
-#endif
 	{
 		puts(_("  Contact the system administrator.\n"));
 		exit(1);
@@ -136,13 +105,9 @@ expire(const struct passwd *pw)
 	 * might become stale after "passwd" is executed.
 	 */
 
-#ifdef	SHADOWPWD
 	endspent ();
-#endif
 	endpwent ();
-#ifdef	SHADOWGRP
 	endsgent ();
-#endif
 	endgrent ();
 
 	/*
@@ -188,19 +153,12 @@ expire(const struct passwd *pw)
  *	to expire and warns the user of the pending password expiration.
  */
 
-#ifdef	SHADOWPWD
 void
 agecheck(const struct passwd *pw, const struct spwd *sp)
 {
-#else
-void
-agecheck(const struct passwd *pw)
-{
-#endif
 	long	now = time ((long *) 0) / SCALE;
 	long	remain;
 
-#ifdef	SHADOWPWD
 	if (! sp)
 		sp = pwd_to_spwd (pw);
 
@@ -211,17 +169,7 @@ agecheck(const struct passwd *pw)
 
 	if (sp->sp_lstchg == -1 || sp->sp_max == -1 || sp->sp_warn == -1)
 		return;
-#else
-	if (pw->pw_age[0] == '\0')
-		return;
-#endif
-
-#ifdef	SHADOWPWD
 	if ((remain = (sp->sp_lstchg + sp->sp_max) - now) <= sp->sp_warn)
-#else
-	if ((remain = (a64l (pw->pw_age + 2) + c64i (pw->pw_age[0])) * 7
-			- now) <= getdef_num ("PASS_WARN_AGE", 7))
-#endif
 	{
 		remain /= DAY/SCALE;
 		if (remain > 1)
@@ -232,4 +180,4 @@ agecheck(const struct passwd *pw)
 			printf(_("Your password will expire today.\n"));
 	}
 }
-#endif /*}*/
+#endif /* SHADOWPWD */

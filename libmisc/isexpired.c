@@ -39,27 +39,9 @@
 #include "defines.h"
 #include <pwd.h>
 #include <time.h>
-
-#ifdef  HAVE_USERSEC_H
-#include <userpw.h>
-#include <usersec.h>
-#include <userconf.h>
-#endif
-
-#ifndef	AGING
-#if defined(SHADOWPWD) || defined(HAVE_USERSEC_H)
-#define AGING	1
-#endif
-#else
-#if !defined(SHADOWPWD) && !defined(HAVE_USERSEC_H) && !defined(ATT_AGE)
-#undef AGING
-#endif
-#endif
-
-#if defined(SHADOWPWD) || defined(AGING) /*{*/
-
 #include "rcsid.h"
-RCSID("$Id: isexpired.c,v 1.7 1997/12/07 23:27:05 marekm Exp $")
+
+RCSID("$Id: isexpired.c,v 1.9 2002/01/06 14:02:39 kloczek Exp $")
 
 /*
  * isexpired - determine if account is expired yet
@@ -74,22 +56,8 @@ RCSID("$Id: isexpired.c,v 1.7 1997/12/07 23:27:05 marekm Exp $")
 int
 isexpired(const struct passwd *pw, const struct spwd *sp)
 {
-#else
-int
-isexpired(const struct passwd *pw)
-{
-#endif
 	long	now;
-#ifdef	HAVE_USERSEC_H
-	int	minage = 0;
-	int	maxage = 10000;
-	int	curage = 0;
-	struct	userpw	*pu;
-#endif
-
 	now = time ((time_t *) 0) / SCALE;
-
-#ifdef	SHADOWPWD
 
 	if (!sp)
 		sp = pwd_to_spwd(pw);
@@ -117,25 +85,6 @@ isexpired(const struct passwd *pw)
 	if (sp->sp_lstchg > 0 && sp->sp_max >= 0 && sp->sp_inact >= 0 &&
 			now >= sp->sp_lstchg + sp->sp_max + sp->sp_inact)
 		return 2;
-#endif
-#ifdef	HAVE_USERSEC_H	/*{*/
-        /*
-         * The aging information lives someplace else.  Get it from the
-         * login.cfg file
-         */
-
-        if (getconfattr (SC_SYS_PASSWD, SC_MINAGE, &minage, SEC_INT))
-                minage = -1;
-
-        if (getconfattr (SC_SYS_PASSWD, SC_MAXAGE, &maxage, SEC_INT))
-                maxage = -1;
-
-        pu = getuserpw (pw->pw_name);
-        curage = (time (0) - pu->upw_lastupdate) / (7*86400L);
-
-	if (maxage != -1 && curage > maxage)
-		return 1;
-#else	/*} !HAVE_USERSEC_H */
 
 	/*
 	 * The last and max fields must be present for an account
@@ -143,11 +92,9 @@ isexpired(const struct passwd *pw)
 	 * is considered to be infinite.
 	 */
 
-#ifdef	SHADOWPWD
 	if (sp->sp_lstchg == -1 ||
 			sp->sp_max == -1 || sp->sp_max >= (10000L*DAY/SCALE))
 		return 0;
-#endif
 #ifdef	ATT_AGE
 	if (pw->pw_age[0] == '\0' || pw->pw_age[0] == '/')
 		return 0;
@@ -159,15 +106,12 @@ isexpired(const struct passwd *pw)
 	 * the password has expired.
 	 */
 
-#ifdef	SHADOWPWD
 	if (now >= sp->sp_lstchg + sp->sp_max)
 		return 1;
-#endif
 #ifdef	ATT_AGE
 	if (a64l (pw->pw_age + 2) + c64i (pw->pw_age[1]) < now / 7)
 		return 1;
 #endif
-#endif	/*} HAVE_USERSEC_H */
 	return 0;
 }
-#endif /*}*/
+#endif /* SHADOWPWD */

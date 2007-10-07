@@ -26,13 +26,14 @@
 .\" SUCH DAMAGE.
 .\"
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"	$Id: lastlog.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: lastlog.8,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
 .\" Updated & Modified Thu Oct 14 1997 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
+.\" Updated Fri Jan 12 2001 by Kentaro Shirakata <argrath@ub32.org>
 .\"
 .TH LASTLOG 8
 .SH 名前
@@ -40,15 +41,15 @@ lastlog \- lastlog ファイルを調べる
 .SH 書式
 .B lastlog
 .RB [ \-u
-.IR uid ]
+.IR login-name ]
 .RB [ \-t
 .IR days ]
 .SH 説明
 \fBlastlog\fR は最終ログインの記録ファイル
-\fI/usr/adm/lastlog\fR の内容を整形して表示する。
+\fI/var/log/lastlog\fR の内容を整形して表示する。
 \fBlogin-name\fR, \fBport\fR, \fBlast login time\fR が表示される。
 デフォルトでは (フラグを指定しなかった場合は) lastlog エントリを
-UID 順に表示する。
+UID の数値でソートして表示する。
 \fB\-u \fIlogin-name\fR フラグを指定すると
 \fIlogin-name\fR の記録だけが表示される。
 \fB\-t \fIdays\fR と入力すると最近
@@ -60,15 +61,16 @@ UID 順に表示する。
 \fB"**Never logged in**"\fR
 というメッセージが表示される。
 .SH ファイル
-/usr/adm/lastlog \- lastlog 記録ファイル
+/var/log/lastlog \- lastlog 記録ファイル
 .SH 警告
-uid 番号に大きなとびがあると、
+uid 番号に大きな飛びがあると、
 lastlog プログラムは長時間スクリーンに何も出力しないまま
 実行を続ける (つまり mmdf=800 で最後の uid=170の場合、
 uid 171-799 の間プログラムは何も出力しないので、
 ハングしたように見える)。
 .SH 著者
-Julianne Frances Haugh (jfh@tab.com)
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
 .br
 Phillip Street
+
 

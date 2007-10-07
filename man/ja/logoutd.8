@@ -1,4 +1,4 @@
-.\" Copyright 1991, John F. Haugh II
+.\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: logoutd.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: logoutd.8,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -40,21 +36,23 @@
 .SH 名前
 logoutd \- ログイン時間の制限を科す
 .SH 書式
-.B /etc/logoutd
+.B logoutd
 .SH 説明
-.I logoutd
-は/etc/porttimeに記されているログイン時間及びポートに対する
+.B logoutd
+は
+.I /etc/porttime
+に記されているログイン時間及びポートに対する
 制限事項を実施する。
-.I logoutd
-は\fB/etc/rc\fRによって起動されなくてはならない。
+.B logoutd
+は\fI/etc/rc\fRによって起動されなくてはならない。
 .\" at the current time.
-\fB/etc/utmp\fRファイルを定期的に走査し、ログインしている各ユーザが
-\fB/etc/porttime\fR中で指定されたログイン可能ユーザ名、ポート及び時刻に
+\fI/etc/utmp\fRファイルを定期的に走査し、ログインしている各ユーザが
+\fI/etc/porttime\fR中で指定されたログイン可能ユーザ名、ポート及び時刻に
 反していないかを検査する。
-\fB/etc/porttime\fRの制限に反するログインセッションは終了させられる。
+\fI/etc/porttime\fRの制限に反するログインセッションは終了させられる。
 .SH ファイル
 /etc/porttime \- ログイン及びポートに対する許可
 .br
 /etc/utmp \- 現在のログインセッション
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

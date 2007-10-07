@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,8 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: dpasswd.c,v 1.12 2000/09/02 18:40:43 marekm Exp $")
-
+RCSID (PKG_VER "$Id: dpasswd.c,v 1.15 2002/01/05 15:41:43 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -40,76 +39,59 @@ RCSID(PKG_VER "$Id: dpasswd.c,v 1.12 2000/09/02 18:40:43 marekm Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "dialup.h"
-
 #define	DTMP	"/etc/d_passwd.tmp"
-
-/*
- * Prompts and messages go here.
- */
-
-#define	DIALCHG		"changed password for %s\n"
-#define	DIALADD		"added password for %s\n"
-#define	DIALREM		"removed password for %s\n"
-
 static int aflg = 0;
 static int dflg = 0;
 static char *Prog;
 
-extern int optind;
-extern char *optarg;
-
-extern char *getpass();
-
 /* local function prototypes */
-static void usage(void);
+static void usage (void);
 
-static void
-usage(void)
+static void usage (void)
 {
-	fprintf(stderr, _("Usage: %s [ -(a|d) ] shell\n"), Prog);
-	exit(1);
+	fprintf (stderr, _("Usage: %s [-(a|d)] shell\n"), Prog);
+	exit (1);
 }
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	struct	dialup	*dial;
-	struct	dialup	dent;
-	struct	stat	sb;
-	FILE	*fp;
-	char	*sh = 0;
-	char	*cp;
-	char	pass[BUFSIZ];
-	int	fd;
-	int	found = 0;
-	int	opt;
+	struct dialup *dial;
+	struct dialup dent;
+	struct stat sb;
+	FILE *fp;
+	char *sh = 0;
+	char *cp;
+	char pass[BUFSIZ];
+	int fd;
+	int found = 0;
+	int opt;
 
-	Prog = Basename(argv[0]);
+	Prog = Basename (argv[0]);
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
-	OPENLOG(Prog);
+	OPENLOG (Prog);
 
 	while ((opt = getopt (argc, argv, "a:d:")) != EOF) {
 		switch (opt) {
-			case 'a':
-				aflg++;
-				sh = optarg;
-				break;
-			case 'd':
-				dflg++;
-				sh = optarg;
-				break;
-			default:
-				usage ();
+		case 'a':
+			aflg++;
+			sh = optarg;
+			break;
+		case 'd':
+			dflg++;
+			sh = optarg;
+			break;
+		default:
+			usage ();
 		}
 	}
-	if (! aflg && ! dflg)
+	if (!aflg && !dflg)
 		aflg++;
 
-	if (! sh) {
+	if (!sh) {
 		if (optind >= argc)
 			usage ();
 		else
@@ -120,65 +102,67 @@ main(int argc, char **argv)
 
 	/*
 	 * Add a new shell to the password file, or update an existing
-	 * entry.  Begin by getting an encrypted password for this
-	 * shell.
+	 * entry. Begin by getting an encrypted password for this shell.
 	 */
 
 	if (aflg) {
-		int	tries = 3;
+		int tries = 3;
 
 		dent.du_shell = sh;
-		dent.du_passwd = "";  /* XXX warning: const */
+		dent.du_passwd = "";	/* XXX warning: const */
 
-again:
-		if (! (cp = getpass(_("Shell password: "))))
+	      again:
+		if (!(cp = getpass (_("Shell password: "))))
 			exit (1);
 
-		STRFCPY(pass, cp);
-		strzero(cp);
+		STRFCPY (pass, cp);
+		strzero (cp);
 
-		if (! (cp = getpass(_("re-enter Shell password: "))))
+		if (!(cp = getpass (_("re-enter Shell password: "))))
 			exit (1);
 
 		if (strcmp (pass, cp)) {
-			strzero(pass);
-			strzero(cp);
-			fprintf(stderr,
-				_("%s: Passwords do not match, try again.\n"),
-				Prog);
+			strzero (pass);
+			strzero (cp);
+			fprintf (stderr,
+				 _
+				 ("%s: Passwords do not match, try again.\n"),
+				 Prog);
 
 			if (--tries)
 				goto again;
 
-			exit(1);
+			exit (1);
 		}
-		strzero(cp);
-		dent.du_passwd = pw_encrypt(pass, crypt_make_salt());
-		strzero(pass);
+		strzero (cp);
+		dent.du_passwd = pw_encrypt (pass, crypt_make_salt ());
+		strzero (pass);
 	}
 
 	/*
 	 * Create the temporary file for the updated dialup password
-	 * information to be placed into.  Turn it into a (FILE *)
-	 * for use by putduent().
+	 * information to be placed into. Turn it into a (FILE *) for use by
+	 * putduent().
 	 */
 
-	if ((fd = open (DTMP, O_CREAT|O_EXCL|O_RDWR, 0600)) < 0) {
-		snprintf(pass, sizeof pass, _("%s: can't create %s"), Prog, DTMP);
+	if ((fd = open (DTMP, O_CREAT | O_EXCL | O_RDWR, 0600)) < 0) {
+		snprintf (pass, sizeof pass, _("%s: can't create %s"),
+			  Prog, DTMP);
 		perror (pass);
 		exit (1);
 	}
-	if (! (fp = fdopen (fd, "r+"))) {
-		snprintf(pass, sizeof pass, _("%s: can't open %s"), Prog, DTMP);
+	if (!(fp = fdopen (fd, "r+"))) {
+		snprintf (pass, sizeof pass, _("%s: can't open %s"), Prog,
+			  DTMP);
 		perror (pass);
 		unlink (DTMP);
 		exit (1);
 	}
 
 	/*
-	 * Scan the dialup password file for the named entry,
-	 * copying out other entries along the way.  Copying
-	 * stops when a match is found or the file runs out.
+	 * Scan the dialup password file for the named entry, copying out
+	 * other entries along the way. Copying stops when a match is found
+	 * or the file runs out.
 	 */
 
 	while ((dial = getduent ())) {
@@ -191,13 +175,12 @@ again:
 	}
 
 	/*
-	 * To delete the entry, just don't copy it.  To update
-	 * the entry, output the modified version - works with
-	 * new entries as well.
+	 * To delete the entry, just don't copy it. To update the entry,
+	 * output the modified version - works with new entries as well.
 	 */
 
-	if (dflg && ! found) {
-		fprintf(stderr, _("%s: Shell %s not found.\n"), Prog, sh);
+	if (dflg && !found) {
+		fprintf (stderr, _("%s: Shell %s not found.\n"), Prog, sh);
 		goto failure;
 	}
 	if (aflg)
@@ -205,9 +188,8 @@ again:
 			goto failure;
 
 	/*
-	 * Now copy out the remaining entries.  Flush and close the
-	 * new file before doing anything nasty to the existing
-	 * file.
+	 * Now copy out the remaining entries. Flush and close the new file
+	 * before doing anything nasty to the existing file.
 	 */
 
 
@@ -221,16 +203,16 @@ again:
 	fclose (fp);
 
 	/*
-	 * If the original file did not exist, we must create a new
-	 * file with owner "root" and mode 400.  Otherwise we copy
-	 * the modes from the existing file to the new file.
+	 * If the original file did not exist, we must create a new file
+	 * with owner "root" and mode 400. Otherwise we copy the modes from
+	 * the existing file to the new file.
 	 *
 	 * After this is done the new file will replace the old file.
 	 */
 
-	pwd_init();
+	pwd_init ();
 
-	if (! stat (DIALPWD, &sb)) {
+	if (!stat (DIALPWD, &sb)) {
 		chown (DTMP, sb.st_uid, sb.st_gid);
 		chmod (DTMP, sb.st_mode);
 		unlink (DIALPWD);
@@ -238,22 +220,22 @@ again:
 		chown (DTMP, 0, 0);
 		chmod (DTMP, 0400);
 	}
-	if (! link (DTMP, DIALPWD))
+	if (!link (DTMP, DIALPWD))
 		unlink (DTMP);
 
-	if (aflg && ! found)
-		SYSLOG((LOG_INFO, DIALADD, sh));
+	if (aflg && !found)
+		SYSLOG ((LOG_INFO, "added password for %s", sh));
 	else if (aflg && found)
-		SYSLOG((LOG_INFO, DIALCHG, sh));
+		SYSLOG ((LOG_INFO, "changed password for %s", sh));
 	else if (dflg)
-		SYSLOG((LOG_INFO, DIALREM, sh));
+		SYSLOG ((LOG_INFO, "removed password for %s", sh));
 
-	closelog();
+	closelog ();
 	sync ();
 	exit (0);
 
-failure:
+      failure:
 	unlink (DTMP);
-	closelog();
+	closelog ();
 	exit (1);
 }

@@ -41,7 +41,7 @@
 #include <stdio.h>
 
 #include "rcsid.h"
-RCSID("$Id: utmp.c,v 1.8 1999/06/07 16:40:44 marekm Exp $")
+RCSID("$Id: utmp.c,v 1.9 2001/11/06 16:18:08 kloczek Exp $")
 
 #if HAVE_UTMPX_H
 extern	struct	utmpx	utxent;
@@ -52,9 +52,6 @@ extern	struct	utmp	*getutent();
 extern	struct	utmp	*getutline();
 extern	void	setutent();
 extern	void	endutent();
-extern	time_t	time();
-extern	char	*ttyname();
-extern	long	lseek();
 
 #define	NO_UTENT \
 	"No utmp entry.  You must exec \"login\" from the lowest level \"sh\""

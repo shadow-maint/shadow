@@ -1,4 +1,4 @@
-.\" Copyright 1992 - 1993, John F. Haugh II
+.\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,21 +25,21 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: grpck.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: grpck.8,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
 .\"
-.TH GRPCK 8
+.TH GRPCK 1
 .SH 名前
 grpck \- グループファイルの完全性を検証する
 .SH 書式
-\fBgrpck\fR [ \fB-r\fR ] [ \fIgroup\fR \fIshadow\fR ]
-.SH DESCRIPTION
+\fBgrpck\fR [\fB-r\fR] [\fIgroup\fR \fIshadow\fR]
+.SH 説明
 \fBgrpck\fRコマンドはシステムの認証情報が完全なものかどうかの検証を行う。
-\fB/etc/group\fR及び\fB/etc/gshadow\fRファイル中の全てのエントリーに対して、
+\fI/etc/group\fR及び\fI/etc/gshadow\fRファイル中の全てのエントリーに対して、
 書式が正しいか、及び各欄に記されているデータは有効なものかどうかの検証が
 行なわれる。
 書式が正しくなかったり訂正不能な誤りを含むエントリーは削除を促される。
@@ -68,13 +64,13 @@ grpck \- グループファイルの完全性を検証する
 他の全てのエラーに対しては警告がなされるのみであり、その場合は
 誤りを訂正するために\fBgroupmod\fRコマンドを実行するよう勧められる。
 .P
-\fB/etc/group\fRファイルに作用するコマンドは、壊れたもしくは
+\fI/etc/group\fRファイルに作用するコマンドは、壊れたもしくは
 重複したエントリーを変更することは出来ない。
 そのような際に誤りのあるエントリーを削除するためには
 \fBgrpck\fRを用いなくてはならない。
 .SH オプション
-ディフォルトでは、\fBgrpck\fRは\fB/etc/group\fRファイル及び
-\fB/etc/gshadow\fRに作用する。
+ディフォルトでは、\fBgrpck\fRは\fI/etc/group\fRファイル及び
+\fI/etc/gshadow\fRに作用する。
 \fIgroup\fR及び\fIshadow\fRパラメータを用いて別のファイルを選択する
 事もできる。
 加えて、\fB-r\fRフラッグを指定することにより、
@@ -88,9 +84,12 @@ grpck \- グループファイルの完全性を検証する
 .br
 /etc/passwd \- ユーザに関する情報
 .SH 関連項目
-groupmod(1), group(4), passwd(4), shadow(4)
+.BR groupmod (8),
+.BR group (5),
+.BR passwd (5),
+.BR shadow (5)
 .SH 返り値
-\fIgrpck\fRコマンドは以下の戻り値を返して終了する:
+\fBgrpck\fRコマンドは以下の戻り値を返して終了する:
 .IP 0 5
 成功
 .IP 1 5
@@ -103,6 +102,5 @@ groupmod(1), group(4), passwd(4), shadow(4)
 グループファイルをロックできない
 .IP 5 5
 グループファイルを更新できない
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
-
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

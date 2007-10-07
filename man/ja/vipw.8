@@ -1,0 +1,37 @@
+.\" $Id: vipw.8,v 1.1 2001/11/16 17:00:34 ankry Exp $
+.\"
+.\"
+.\" Japanese Version Copyright (c) 2001 Maki KURODA
+.\"     all right reserved,
+.\" Translated Tue Oct 30 11:55:56 JST 2001
+.\" by Maki KURODA <mkuroda@aisys-jp.com>
+.\"
+.\"
+.TH VIPW 8 "26 Sep 1997"
+.SH 名前
+vipw, vigr \- password、 group、 shadow-password、shadow-group ファイルを編集する。
+.SH 書式
+.BR vipw " [-s]"
+.br
+.BR vigr " [-s]"
+.SH 説明
+.BR vipw " と " vigr
+は
+.IR /etc/passwd と /etc/group
+をそれぞれ編集する。
+.B -s
+フラグが指定されている場合、それらのファイルの shadow バージョンである
+.IR /etc/shadow と /etc/gshadow
+をそれぞれ編集する。
+プログラムはファイルの改変を防ぐための適切なロックを設定する。
+使われるエディタは、環境変数
+.BR VISUAL 、
+環境変数
+.BR EDITOR 、
+デフォルトのエディタ
+.BR vi 
+の順である。
+.SH 関連項目
+.BR passwd (5),
+.BR group (5),
+.BR shadow (5)

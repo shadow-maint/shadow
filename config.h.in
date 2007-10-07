@@ -187,6 +187,9 @@
 /* Define if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
+/* Define if you have the <errno.h> header file. */
+#undef HAVE_ERRNO_H
+
 /* Define if you have the `fchmod' function. */
 #undef HAVE_FCHMOD
 
@@ -472,9 +475,6 @@
 
 /* Define if you have the `updwtmpx' function. */
 #undef HAVE_UPDWTMPX
-
-/* Define if you have the <usersec.h> header file. */
-#undef HAVE_USERSEC_H
 
 /* Define if you have the <utime.h> header file. */
 #undef HAVE_UTIME_H

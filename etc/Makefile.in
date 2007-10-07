@@ -115,7 +115,8 @@ EXTRA_DIST = \
 	login.access \
 	login.defs \
 	login.defs.hurd \
-	login.defs.linux
+	login.defs.linux \
+	useradd
 
 
 SUBDIRS = pam.d
@@ -361,7 +362,6 @@ uninstall-info: uninstall-info-recursive
 	tags tags-recursive uninstall uninstall-am uninstall-info-am \
 	uninstall-info-recursive uninstall-recursive
 
-	useradd
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.18 2001/06/28 20:47:05 kloczek Exp $ */
+/* $Id: defines.h,v 1.20 2001/11/19 09:23:52 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -42,6 +42,10 @@ char *strchr(), *strrchr(), *strtok();
 #  define memcpy(d, s, n) bcopy((s), (d), (n))
 # endif
 #endif /* not STDC_HEADERS */
+
+#if HAVE_ERRNO_H
+# include <errno.h>
+#endif
 
 /* Solaris 2.4 defines __SVR4, but not SVR4 -j. */
 

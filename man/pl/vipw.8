@@ -1,4 +1,4 @@
-.\" $Id: vipw.8,v 1.4 2001/01/27 02:55:54 kloczek Exp $
+.\" $Id: vipw.8,v 1.5 2001/12/22 03:28:52 kloczek Exp $
 .\" {PTM\WK\1999-09-14}
 .TH VIPW 8 "26 wrze¶nia 1997"
 .SH NAZWA
@@ -31,34 +31,3 @@ a na koñcu domy¶lnego edytora,
 .BR group (5),
 .BR shadow (5)
 .\" {PTM\WK\1999-09-14}
-.\" $Id: vipw.8,v 1.4 2001/01/27 02:55:54 kloczek Exp $
-.TH VIPW 8 "26 wrze¶nia 1997"
-.SH NAZWA
-vipw, vigr - edycja plików hase³, grup i ich wersji dodatkowych (shadow)
-.SH SK£ADNIA
-.BR vipw " [-s]"
-.br
-.BR vigr " [-s]"
-.SH OPIS
-.BR vipw " i " vigr
-umo¿liwiaj± modyfikacjê plików odpowiednio
-.IR /etc/passwd " i " /etc/group .
-Przy zastosowaniu flagi
-.BR -s,
-modyfikuj± tak¿e dodatkowe wersje chronione (shadow) tych plików - odpowiednio
-.IR /etc/shadow " i " /etc/gshadow " .
-Dla ochrony przed uszkodzeniem plików programy te ustawiaj± odpowiednie
-blokady.
-
-Szukaj±c edytora, programy
-.BR vipw " i " vigr
-u¿ywaj± w pierwszej kolejno¶ci zmiennej ¶rodowiskowej
-.BR VISUAL ,
-nastêpnie zmiennej
-.BR EDITOR ,
-a na koñcu domy¶lnego edytora,
-.BR vi .
-.SH ZOBACZ TAK¯E
-.BR passwd (5),
-.BR group (5),
-.BR shadow (5)

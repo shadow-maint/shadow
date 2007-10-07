@@ -115,7 +115,7 @@ EXTRA_DIST = changelog checksums control control.gnu control.linux \
 	login.prerm logoutd.init passwd.conffiles passwd.copyright \
 	passwd.cron passwd.init passwd.postinst passwd.postrm porttime rules \
 	secure-su.README secure-su.conffiles secure-su.copyright secure-su.postrm \
-	secure-su.preinst securetty shadowconfig.sh tar.c
+	secure-su.preinst securetty shadowconfig.sh
 
 subdir = debian
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

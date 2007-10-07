@@ -1,4 +1,4 @@
-.\" Copyright 1989 - 1990, John F. Haugh II
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: passwd.5,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: passwd.5,v 1.2 2001/11/16 17:01:33 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -60,10 +56,10 @@ passwd \- パスワードファイル
 .PP
 パスワードがshadowされている場合、パスワード欄を埋めてはならない。
 shadowパスワードを用いている場合、暗号化されたパスワードは
-\fB/etc/shadow\fRに書かれている。
+\fI/etc/shadow\fRに書かれている。
 暗号化されたパスワードは、アルファベットaからz、AからZ、0から9
 及び\.と/.の64文字から作られた13文字からなる。
-この文字列がどのように解釈されるかの詳細は、\fIcrypt(3)\fRを
+この文字列がどのように解釈されるかの詳細は、\fBcrypt\fR(3)を
 参照のこと。
 .PP
 オプションで、パスワードに続いてパスワード有効期限が、
@@ -76,7 +72,7 @@ shadowパスワードを用いている場合、暗号化されたパスワードは
 パスワードの有効期限が過ぎた時は、ユーザは新しいパスワードを設定
 しなくてはならない。
 .PP
-コメント欄は、\fIfinger(1)\fR等の様々なシステムユーティリティに利用される。
+コメント欄は、\fBfinger\fR(1)等の様々なシステムユーティリティに利用される。
 コメント欄には更に3つの数値が記入されていても良い。
 それらは、
 .IP "" .5i
@@ -90,22 +86,22 @@ ulimit= \- ulimitの初期設定値
 区別されている。
 .PP
 ホームディレクトリ欄にはログイン時の作業ディレクトリ名が記されている。
-\fILogin\fRはこの情報を用いて環境変数\fBHOME\fRの内容を設定する。
+\fBlogin\fRはこの情報を用いて環境変数\fBHOME\fRの内容を設定する。
 .PP
 コマンドインタプリタ欄にはユーザのコマンド言語インタプリタもしくは
 最初に実行するプログラムの名前を記す。
-\fILogin\fRはこの情報を用いて環境変数\fBSHELL\fRの内容を設定する。
+\fBlogin\fRはこの情報を用いて環境変数\fBSHELL\fRの内容を設定する。
 この欄に何も記されていない場合は、ディフォルト値として\fB/bin/sh\fRを
 使用する。
 .SH ファイル
 /etc/passwd \- ユーザのアカウント情報
 .SH 関連項目
-login(1),
-passwd(1),
-su(1),
-sulogin(1M),
-shadow(5),
-pwconv(8),
-pwunconv(8)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR login (1),
+.BR passwd (1),
+.BR su (1),
+.BR sulogin (8),
+.BR shadow (5),
+.BR pwconv (8),
+.BR pwunconv (8)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

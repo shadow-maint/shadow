@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,40 +30,37 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groups.c,v 1.7 2001/09/01 04:19:16 kloczek Exp $")
-
+RCSID (PKG_VER "$Id: groups.c,v 1.8 2002/01/05 15:41:43 kloczek Exp $")
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
 #include "prototypes.h"
 #include "defines.h"
-
 /* local function prototypes */
-static void print_groups(const char *);
+static void print_groups (const char *);
 
 /*
  * print_groups - print the groups which the named user is a member of
  *
- *	print_groups() scans the groups file for the list of groups
- *	which the user is listed as being a member of.
+ *	print_groups() scans the groups file for the list of groups which
+ *	the user is listed as being a member of.
  */
 
-static void
-print_groups(const char *member)
+static void print_groups (const char *member)
 {
-	int	groups = 0;
-	struct	group	*grp;
-	struct	passwd	*pwd;
-	int	flag = 0;
+	int groups = 0;
+	struct group *grp;
+	struct passwd *pwd;
+	int flag = 0;
 
 	setgrent ();
 
-	if ((pwd = getpwnam(member)) == 0) {
-		fprintf(stderr, _("unknown user %s\n"), member);
-		exit(1);
+	if ((pwd = getpwnam (member)) == 0) {
+		fprintf (stderr, _("unknown user %s\n"), member);
+		exit (1);
 	}
 	while ((grp = getgrent ())) {
-		if (is_on_list(grp->gr_mem, member)) {
+		if (is_on_list (grp->gr_mem, member)) {
 			if (groups++)
 				putchar (' ');
 
@@ -72,7 +69,7 @@ print_groups(const char *member)
 				flag = 1;
 		}
 	}
-	if (! flag && (grp = getgrgid (pwd->pw_gid))) {
+	if (!flag && (grp = getgrgid (pwd->pw_gid))) {
 		if (groups++)
 			putchar (' ');
 
@@ -86,47 +83,47 @@ print_groups(const char *member)
  * groups - print out the groups a process is a member of
  */
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
 	long sys_ngroups;
+
 #ifdef HAVE_GETGROUPS
-	int	ngroups;
+	int ngroups;
 	GETGROUPS_T *groups;
-	int	pri_grp;
-	int	i;
-	struct	group	*gr;
+	int pri_grp;
+	int i;
+	struct group *gr;
 #else
-	char	*logname;
-	char	*getlogin();
+	char *logname;
+	char *getlogin ();
 #endif
 
-	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
+	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups=malloc(sys_ngroups*sizeof(GETGROUPS_T));
+	groups = malloc (sys_ngroups * sizeof (GETGROUPS_T));
 #endif
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
 	if (argc == 1) {
 
 		/*
-		 * Called with no arguments - give the group set
-		 * for the current user.
+		 * Called with no arguments - give the group set for the
+		 * current user.
 		 */
 
 #ifdef HAVE_GETGROUPS
 		/*
-		 * This system supports concurrent group sets, so
-		 * I can ask the system to tell me which groups are
-		 * currently set for this process.
+		 * This system supports concurrent group sets, so I can ask
+		 * the system to tell me which groups are currently set for
+		 * this process.
 		 */
 
-		ngroups = getgroups(sys_ngroups, groups);
+		ngroups = getgroups (sys_ngroups, groups);
 		if (ngroups < 0) {
-			perror("getgroups");
-			exit(1);
+			perror ("getgroups");
+			exit (1);
 		}
 
 		/*
@@ -134,7 +131,7 @@ main(int argc, char **argv)
 		 */
 
 		pri_grp = getegid ();
-		for (i = 0;i < ngroups;i++)
+		for (i = 0; i < ngroups; i++)
 			if (pri_grp == (int) groups[i])
 				break;
 
@@ -142,9 +139,9 @@ main(int argc, char **argv)
 			pri_grp = -1;
 
 		/*
-		 * Print out the name of every group in the current
-		 * group set.  Unknown groups are printed as their
-		 * decimal group ID values.
+		 * Print out the name of every group in the current group
+		 * set. Unknown groups are printed as their decimal group ID
+		 * values.
 		 */
 
 		if (pri_grp != -1) {
@@ -154,7 +151,7 @@ main(int argc, char **argv)
 				printf ("%d", pri_grp);
 		}
 
-		for (i = 0;i < ngroups;i++) {
+		for (i = 0; i < ngroups; i++) {
 			if (i || pri_grp != -1)
 				putchar (' ');
 
@@ -166,8 +163,8 @@ main(int argc, char **argv)
 		putchar ('\n');
 #else
 		/*
-		 * This system does not have the getgroups() system
-		 * call, so I must check the groups file directly.
+		 * This system does not have the getgroups() system call, so
+		 * I must check the groups file directly.
 		 */
 
 		if ((logname = getlogin ()))
@@ -178,8 +175,8 @@ main(int argc, char **argv)
 	} else {
 
 		/*
-		 * The invoker wanted to know about some other
-		 * user.  Use that name to look up the groups instead.
+		 * The invoker wanted to know about some other user. Use
+		 * that name to look up the groups instead.
 		 */
 
 		print_groups (argv[1]);

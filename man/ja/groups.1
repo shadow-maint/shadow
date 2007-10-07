@@ -1,0 +1,60 @@
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\" $Id: groups.1,v 1.1 2001/11/16 17:00:58 ankry Exp $
+.\"
+.\" Japanese Version Copyright (c) 2001 Maki KURODA
+.\"     all right reserved,
+.\" Translated Tue Oct 30 11:58:18 JST 2001
+.\" by Maki KURODA <mkuroda@aisys-jp.com>
+.\"
+.TH GROUPS 1
+.SH 名前
+groups \- 現在のグループ ID 名の表示
+.SH 書式
+.B groups
+.RI [ user ]
+.SH 説明
+.B groups
+は現在のグループ ID 名または値を表示する。
+その値が \fI/etc/group\fR に登録されていなければ、
+その値は数値グループ ID として表示される。
+\fIuser\fR オプションパラメタは \fIuser\fR が所属するグループ名を表示する。
+.SH 注意
+共同グループがサポートされていないシステムは \fI/etc/group\fR に
+報告されている情報を設定する。
+ユーザは現在の real や effective グループ ID を変更するために \fBnewgrp\fR または \fBsg\fR を
+使用しなければならない。
+.SH ファイル
+/etc/group \- グループ情報
+.SH 関連項目
+.BR newgrp (1),
+.BR getuid (2),
+.BR getgid (2),
+.BR getgroups (2)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

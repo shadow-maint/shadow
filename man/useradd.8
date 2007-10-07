@@ -1,4 +1,4 @@
-.\"$Id: useradd.8,v 1.10 2001/01/27 02:55:52 kloczek Exp $
+.\"$Id: useradd.8,v 1.12 2001/12/22 08:03:36 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,13 +36,13 @@ useradd \- Create a new user or update default new user information
 .br
 [\fB-g\fR \fIinitial_group\fR] [\fB-G\fR \fIgroup\fR[,...]]
 .br
-[\fB-m\fR [\fB-k\fR \fIskeleton_dir\fR]] [\fB-p\fR \fIpasswd\fR]
+[\fB-m\fR [\fB-k\fR \fIskeleton_dir\fR]] [\fB-o\fR] [\fB-p\fR \fIpasswd\fR]
 .br
-[\fB-s\fR \fIshell\fR] [\fB-u\fR \fIuid\fR [\fB-o\fR]] \fIlogin\fR
+[\fB-s\fR \fIshell\fR] [\fB-u\fR \fIuid\fR] \fIlogin\fR
 .TP 8
 \fBuseradd\fR \fB-D\fR [\fB-g\fI default_group\fR] [\fB-b\fI default_home\fR]
 .br
-[\fB-f\fI default_inactive\fR] [\fB-e\fI default_expire_date\fR]
+[\fB-e\fI default_expire_date\fR] [\fB-f\fI default_inactive\fR]
 .br
 [\fB-s\fI default_shell\fR]
 .SH DESCRIPTION
@@ -94,6 +94,8 @@ The \fB-k\fR option is only valid in conjunction with the \fB-m\fR
 option.
 The default is to not create the directory and to not copy any
 files.
+.IP "\fB-o\fR"
+Allow create user with duplicate (non-unique) UID.
 .IP "\fB-p \fIpasswd\fR"
 The encrypted password, as returned by \fBcrypt\fR(3).
 The default is to disable the account.

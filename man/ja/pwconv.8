@@ -1,73 +1,85 @@
-.\" Copyright 1989 - 1993, John F. Haugh II
-.\" All rights reserved.
 .\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: pwconv.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
-.\"
-.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\" Japanese Version Copyright (c) 2001 Yuichi SATO
 .\"         all rights reserved.
-.\" Translated Fri Feb 14 23:06:00 JST 1997
-.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Translated Sat Dec  1 20:09:17 JST 2001
+.\"         by Yuichi SATO <ysato@h4.dion.ne.jp>
 .\"
-.TH PWCONV 8
+.\" $Id: pwconv.8,v 1.2 2001/12/20 14:02:38 ankry Exp $
+.TH PWCONV 8 "26 Sep 1997"
 .SH 名前
-pwconv \- shadowパスワードファイルを変換・更新する
+pwconv, pwunconv, grpconv, grpunconv \- shadow パスワードと shadow グループへの変換、および通常のファイルへの逆変換
 .SH 書式
-pwconv
+.B pwconv
+.br
+.B pwunconv
+.br
+.B grpconv
+.br
+.B grpunconv
 .SH 説明
-\fIPwconv\fRは古いパスワードファイル情報を新たなshadowパスワードファイルに
-コピーし、またオプションの既存のshadowファイルからエントリを付加する。
-新しいパスワードファイルは\fBnpasswd\fR、新しいshadowファイルは\fBnshadow\fR
-という名前で保存される。
-生成される両ファイルの許可モードはともに、所有者のみがreadアクセスを
-出来る様に設定される。
-既存のshadowファイルのエントリはそのままコピーされる。
-System V Release 3.2フォーマットのshadowファイルエントリは
-何も言わずSystem V Release 4フォーマットに変換され出力される。
-エントリに空白欄がある時は(適当ならば)ディフォルト値が挿入される。
-パスワードの期限情報が既に設定されていない場合は、
-新たなエントリのパスワード有効期限は10000日後と設定され、
-最終更新日はこのプログラムを起動した日付となる。
-パスワード欄が空白のエントリはshadowファイルに全くコピーされない。
-.SH ファイル
-/etc/passwd \- 古い暗号化されたパスワード及びその有効期限
-.br
-/etc/shadow \- 以前に変換されたshadowパスワードファイル
-.br
-./npasswd \- 新規作成されるパスワードファイル
-.br
-./nshadow \- 新規作成されるshadowパスワードファイル
+これら 4 つのプログラムは、通常のパスワード・グループファイル
+および shadow パスワード・グループファイル
+.IR /etc/passwd ", " /etc/group ", " /etc/shadow ", " /etc/gshadow
+を操作する。
+
+\fBpwconv\fR は \fIpasswd\fR と \fIshadow\fR (既に存在する場合) から
+\fIshadow\fR を作成する。
+\fBpwunconv\fR は \fIpasswd\fR と \fIshadow\fR から \fIpasswd\fR を作成し、
+\fIshadow\fR を削除する。
+\fBgrpconv\fR は \fIgroup\fR と \fIgshadow\fR (既に存在する場合) から
+\fIgshadow\fR を作成する。
+\fBgrpunconv\fR は \fIgroup\fR と \fIgshadow\fR から \fIgroup\fR を作成し、
+\fIgshadow\fR を削除する。
+
+各プログラムは必要とされるロックを変換の前に取得する。
+
+.B pwconv 
+と
+.B grpconv
+は類似している。
+1 つ目は、通常のファイルにエントリがない場合、
+そのエントリは shadow 化されたファイルでは削除されるという点である。
+2 つ目は、通常のファイルでパスワードが `x' になっていない場合、
+shadow 化されたファイルにおいて、
+それに対応するエントリが更新されるという点である。
+3 つ目は、通常のファイルに書かれたパスワードが `x' に置き換えられる点である。
+これらのプログラムは、初めて変換を行うときに使える。
+また、通常のファイルを手動で編集した場合に
+shadow 化されたファイルを更新するのに使うこともできる。
+
+.I /etc/shadow
+に新しいエントリを追加する場合、
+.B pwconv
+は
+.I /etc/login.defs
+にある
+.BR PASS_MIN_DAYS ", " PASS_MAX_DAYS ", " PASS_WARN_AGE
+の値を使う。
+
+同様に、
+.B pwunconv
+と
+.B grpunconv
+は類似している。
+通常のファイルのパスワードは、
+shadow 化されたファイルを使って更新される。
+エントリが通常のファイルには存在するが
+shadow 化されたファイルには存在しないという場合、
+そのエントリはそのままにされる。
+最終的に shadow 化されたファイルは削除される。
+
+.B pwunconv 
+は期限の切れたパスワードを破棄し、変換できるもののみを変換する。
+
+.SH バグ
+(不正なエントリや重複したエントリといった) エラーが
+パスワードファイルやグループファイルにあると、
+プログラムは永遠にループして、おかしな形で失敗する。
+shadow パスワード・グループへの変換や
+shadow 化ファイルからの逆変換を行う前に、
+\fBpwck\fR と \fBgrpck\fR を実行してエラーを修正すること。
 .SH 関連項目
-passwd(1),
-passwd(4),
-shadow(4),
-pwunconv(8)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR login.defs (5),
+.BR pwck (8),
+.BR grpck (8),
+.BR shadowconfig (8)

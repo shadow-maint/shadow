@@ -31,7 +31,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getpass.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
+RCSID("$Id: getpass.c,v 1.11 2001/11/16 14:53:48 kloczek Exp $")
 
 #include "defines.h"
 
@@ -267,7 +267,9 @@ out:
 #else
 	(void) signal (SIGINT, old_signal);
 #endif
+#if 0
 out2:
+#endif
 	if (tty_opened)
 		(void) fclose(ifp);
 

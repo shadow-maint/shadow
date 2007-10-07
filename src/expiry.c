@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,46 +30,22 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: expiry.c,v 1.9 2000/08/26 18:27:18 marekm Exp $")
-
+RCSID (PKG_VER "$Id: expiry.c,v 1.12 2002/01/05 15:41:43 kloczek Exp $")
 #include <sys/types.h>
 #include <signal.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-
-#ifndef	AGING
-#if defined(HAVE_USERSEC_H) || defined(SHADOWPWD)
-#define	AGING	1
-#endif
-#endif
-
-
-#if !defined(SHADOWPWD) && !defined(AGING) /*{*/
-
-/*
- * Not much to do here ...
- */
-
-int
-main(int argc, char **argv)
-{
-	exit (0);
-}
-
-#else	/*} AGING || SHADOWPWD {*/
-
 /* local function prototypes */
-static RETSIGTYPE catch(int);
-static void usage(void);
+static RETSIGTYPE catch (int);
+static void usage (void);
 
 /*
  * catch - signal catcher
  */
 
-static RETSIGTYPE
-catch(int sig)
+static RETSIGTYPE catch (int sig)
 {
 	exit (10);
 }
@@ -78,31 +54,29 @@ catch(int sig)
  * usage - print syntax message and exit
  */
 
-static void
-usage(void)
+static void usage (void)
 {
-	fprintf(stderr, _("Usage: expiry { -f | -c }\n"));
-	exit(10);
+	fprintf (stderr, _("Usage: expiry {-f|-c}\n"));
+	exit (10);
 }
 
 /* 
  * expiry - check and enforce password expiration policy
  *
- *	expiry checks (-c) the current password expiraction and
- *	forces (-f) changes when required.  It is callable as a
- *	normal user command.
+ *	expiry checks (-c) the current password expiraction and forces (-f)
+ *	changes when required. It is callable as a normal user command.
  */
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	struct	passwd	*pwd;
+	struct passwd *pwd;
+
 #ifdef	SHADOWPWD
-	struct	spwd	*spwd;
+	struct spwd *spwd;
 #endif
 	char *Prog = argv[0];
 
-	sanitize_env();
+	sanitize_env ();
 
 	/* 
 	 * Start by disabling all of the keyboard signals.
@@ -116,27 +90,29 @@ main(int argc, char **argv)
 #endif
 
 	/*
-	 * expiry takes one of two arguments.  The default action
-	 * is to give the usage message.
+	 * expiry takes one of two arguments. The default action is to give
+	 * the usage message.
 	 */
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
-	if (argc != 2 || (strcmp (argv[1], "-f")  && strcmp (argv[1], "-c")))
+	if (argc != 2
+	    || (strcmp (argv[1], "-f") && strcmp (argv[1], "-c")))
 		usage ();
 
-#if 0  /* could be setgid shadow with /etc/shadow mode 0640 */
+#if 0				/* could be setgid shadow with /etc/shadow mode 0640 */
 	/*
-	 * Make sure I am root.  Can't open /etc/shadow without root
+	 * Make sure I am root. Can't open /etc/shadow without root
 	 * authority.
 	 */
 
 	if (geteuid () != 0) {
-		fprintf(stderr, _("%s: WARNING!  Must be set-UID root!\n"),
-			argv[0]);
-		exit(10);
+		fprintf (stderr,
+			 _("%s: WARNING!  Must be set-UID root!\n"),
+			 argv[0]);
+		exit (10);
 	}
 #endif
 
@@ -144,12 +120,12 @@ main(int argc, char **argv)
 	 * Get user entries for /etc/passwd and /etc/shadow
 	 */
 
-	if (!(pwd = get_my_pwent())) {
-		fprintf(stderr, _("%s: unknown user\n"), Prog);
-		exit(10);
+	if (!(pwd = get_my_pwent ())) {
+		fprintf (stderr, _("%s: unknown user\n"), Prog);
+		exit (10);
 	}
 #ifdef	SHADOWPWD
-	spwd = getspnam(pwd->pw_name);
+	spwd = getspnam (pwd->pw_name);
 #endif
 
 	/*
@@ -169,7 +145,7 @@ main(int argc, char **argv)
 #endif
 
 		/*
-		 * Exit with status indicating state of account --
+		 * Exit with status indicating state of account.
 		 */
 
 #ifdef	SHADOWPWD
@@ -186,10 +162,9 @@ main(int argc, char **argv)
 	if (strcmp (argv[1], "-f") == 0) {
 
 		/*
-		 * Just call expire().  It will force the change
-		 * or give a message indicating what to do.  And
-		 * it doesn't return at all unless the account
-		 * is unexpired.
+		 * Just call expire(). It will force the change or give a
+		 * message indicating what to do. And it doesn't return at
+		 * all unless the account is unexpired.
 		 */
 
 #ifdef	SHADOWPWD
@@ -207,4 +182,3 @@ main(int argc, char **argv)
 	usage ();
 	exit (1);
 }
-#endif	/*}*/

@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: setupenv.c,v 1.10 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: setupenv.c,v 1.11 2001/11/06 15:50:25 kloczek Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -59,6 +59,7 @@ addenv_path(const char *varname, const char *dirname, const char *filename)
 }
 
 
+#ifndef USE_PAM
 static void
 read_env_file(const char *filename)
 {
@@ -176,6 +177,8 @@ finished:
 	}
 	fclose(fp);
 }
+#endif /* USE_PAM */
+
 
 /*
  *	change to the user's home directory
@@ -186,7 +189,10 @@ finished:
 void
 setup_env(struct passwd *info)
 {
-	char *cp, *envf;
+#ifndef USE_PAM
+	char *envf;
+#endif
+	char *cp;
 
 	/*
 	 * Change the current working directory to be the home directory

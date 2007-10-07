@@ -1,4 +1,4 @@
-.\" Copyright 1991 - 1994, John F. Haugh II
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,28 +25,29 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: userdel.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: userdel.8,v 1.2 2001/11/16 17:01:33 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated Fri Jan 12 03:27:30 JST 2000
+.\"         by Kentaro Shirakata <argrath@ub32.org>
 .\"
 .TH USERDEL 8
 .SH 名前
-userdel \- ユーザのアカウント及び関連するファイルを削除する。
+userdel \- ユーザのアカウント及び関連するファイルを削除する
 .SH 書式
 .B userdel
-.\"[ \fB-r\fI ]
-[ \fB-r\fR ]
+[\fB-r\fR]
 .I login
 .SH 説明
-\fIuserdel\fRコマンドはシステムのアカウントファイルに変更を施し、
+\fBuserdel\fRコマンドはシステムのアカウントファイルに変更を施し、
 ユーザ\fIlogin\fRに属する全てのエントリーを削除する。
 削除されるユーザは存在していなければならない。
 .IP \fB-r\fR
 ユーザのホームディレクトリ中のファイルをホームディレクトリ自体とともに
-消去する。
+消去する。またユーザのメールスプールも消去する。
 他のファイルシステム上にあるファイルは手作業で探し出して除去しなくては
 ならない。
 .SH ファイル
@@ -67,8 +64,15 @@ killしなくてはならない。
 NISのクライアントからはいかなるNIS所有のアカウントも消去する事は出来ない。
 消去する場合にはNISのサーバから行わなくてはならない。
 .SH 関連項目
-\fBchfn(1), chsh(1), groupadd(1M), groupdel(1M), groupmod(1M),
-passwd(1), useradd(1M), usermod(1M)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR chfn (1),
+.BR chsh (1),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR passwd (1),
+.BR useradd (8),
+.BR usermod (8)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+
 

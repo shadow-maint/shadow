@@ -1,4 +1,4 @@
-.\" Copyright 1990, John F. Haugh II
+.\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chsh.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: chsh.1,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -40,23 +36,25 @@
 .SH 名前
 chsh \- ログインシェルを変更する。
 .SH 書式
-\fBchsh\fR [ \fB-s \fIlogin_shell\fR ] [ \fIuser\fR ]
+.TP 5
+\fBchsh\fR
+[\fB-s \fIlogin_shell\fR] [\fIuser\fR]
 .SH 説明
-\fIchsh\fRはユーザのログインシェルを変更する。
+\fBchsh\fRはユーザのログインシェルを変更する。
 これによって、ユーザがログインして最初に実行されるコマンドが決まる。
 一般ユーザは自分のアカウントのログインシェルのみを変更できる。
 スーパーユーザは全てのアカウントのログインシェルを変更することが出来る。
 .PP
-ログインシェルは、コマンド名が\fB/etc/shells\fRに記載されていればなんでも良い。
+ログインシェルは、コマンド名が\fI/etc/shells\fRに記載されていればなんでも良い。
 スーパーユーザの場合はこの制限はなく、いかなる値でも指定できる。
 機能を制限されたログインシェルを用いているアカウントからは、
 ログインシェルを変更出来ない。
-この理由から、\fB/bin/rsh\fRを\fB/etc/shells\fRに書くことは勧められない。
+この理由から、\fB/bin/rsh\fRを\fI/etc/shells\fRに書くことは勧められない。
 機能が制限されたシェルに誤って変更してしまった場合、どうやっても
 ログインシェルを元のものに戻すことが出来なくなってしまうからである。
 .PP
 \fB-s\fRオプションを指定しなかった場合は、
-\fIchsh\fRは対話的に動作し、各欄に対して現在の設定値を表示し、
+\fBchsh\fRは対話的に動作し、各欄に対して現在の設定値を表示し、
 新しい値の入力を促す。
 設定値を変更するなら新しい値を入力し、
 又は現在の値を使うなら空行のままリターンキーを押せばよい。
@@ -66,8 +64,7 @@ chsh \- ログインシェルを変更する。
 .br
 /etc/shells \- 指定できるログインシェルのリスト
 .SH 関連項目
-chfn(1),
-passwd(5)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
-
+.BR chfn (1),
+.BR passwd (5)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

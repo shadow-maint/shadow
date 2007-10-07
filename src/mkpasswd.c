@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,125 +30,111 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: mkpasswd.c,v 1.7 2000/08/26 18:27:18 marekm Exp $")
-
+RCSID (PKG_VER "$Id: mkpasswd.c,v 1.9 2002/01/05 15:41:43 kloczek Exp $")
 #include <sys/stat.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
-
-#if !defined(NDBM) /*{*/
-int
-main(int argc, char **argv)
+#if !defined(NDBM)		/*{ */
+int main (int argc, char **argv)
 {
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
-	fprintf(stderr,
-		_("%s: no DBM database on system - no action performed\n"),
-		argv[0]);
+	fprintf (stderr,
+		 _
+		 ("%s: no DBM database on system - no action performed\n"),
+		 argv[0]);
 	return 0;
 }
 
-#else /*} defined(NDBM) {*/
-
+#else				/*} defined(NDBM) { */
 #include <fcntl.h>
 #include <pwd.h>
-
 #include <ndbm.h>
 #include <grp.h>
+extern DBM *pw_dbm;
+extern DBM *gr_dbm;
 
-extern	DBM	*pw_dbm;
-extern	DBM	*gr_dbm;
 #ifdef	SHADOWPWD
-extern	DBM	*sp_dbm;
+extern DBM *sp_dbm;
 #endif
 #ifdef	SHADOWGRP
-extern	DBM	*sg_dbm;
+extern DBM *sg_dbm;
 #endif
-char	*fgetsx();
+char *fgetsx ();
+
+char *Progname;
+int vflg = 0;
+int fflg = 0;
+int gflg = 0;
+int sflg = 0;			/* -s flag -- leave in, makes code nicer */
+int pflg = 0;
+
+extern struct passwd *sgetpwent ();
+extern int pw_dbm_update ();
+
+extern struct group *sgetgrent ();
+extern int gr_dbm_update ();
 
 #ifdef	SHADOWPWD
-#ifdef	SHADOWGRP
-#define USAGE		_("Usage: %s [ -vf ] [ -p|g|sp|sg ] file\n")
-#else	/* !SHADOWGRP */
-#define USAGE		_("Usage: %s [ -vf ] [ -p|g|sp ] file\n")
-#endif	/* SHADOWGRP */
-#else	/* !SHADOWPWD */
-#define USAGE		_("Usage: %s [ -vf ] [ -p|g ] file\n")
-#endif	/* SHADOWPWD */
-
-char	*Progname;
-int	vflg = 0;
-int	fflg = 0;
-int	gflg = 0;
-int	sflg = 0;		/* -s flag -- leave in, makes code nicer */
-int	pflg = 0;
-
-extern	struct	passwd	*sgetpwent();
-extern	int	pw_dbm_update();
-
-extern	struct	group	*sgetgrent();
-extern	int	gr_dbm_update();
-
-#ifdef	SHADOWPWD
-extern	struct	spwd	*sgetspent();
-extern	int	sp_dbm_update();
+extern struct spwd *sgetspent ();
+extern int sp_dbm_update ();
 #endif
 
 #ifdef	SHADOWGRP
-extern	struct	sgrp	*sgetsgent();
-extern	int	sg_dbm_update();
+extern struct sgrp *sgetsgent ();
+extern int sg_dbm_update ();
 #endif
 
 /* local function prototypes */
-static void usage(void);
+static void usage (void);
 
 /*
  * mkpasswd - create DBM files for /etc/passwd-like input file
  *
  * mkpasswd takes an an argument the name of a file in /etc/passwd format
- * and creates a DBM file keyed by user ID and name.  The output files have
+ * and creates a DBM file keyed by user ID and name. The output files have
  * the same name as the input file, with .dir and .pag appended.
  *
  * this command will also create look-aside files for
  * /etc/group, /etc/shadow, and /etc/gshadow.
  */
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	extern	int	optind;
-	extern	char	*optarg;
-	FILE	*fp;			/* File pointer for input file       */
-	char	*file;			/* Name of input file                */
-	char	*dir;			/* Name of .dir file                 */
-	char	*pag;			/* Name of .pag file                 */
-	char	*cp;			/* Temporary character pointer       */
-	int	flag;			/* Flag for command line option      */
-	int	cnt = 0;		/* Number of entries in database     */
-	int	longest = 0;		/* Longest entry in database         */
-	int	len;			/* Length of input line              */
-	int	errors = 0;		/* Count of errors processing file   */
-	char	buf[BUFSIZ*8];		/* Input line from file              */
-	struct	passwd	*passwd=NULL;	/* Pointer to password file entry    */
+	extern int optind;
+	extern char *optarg;
+	FILE *fp;		/* File pointer for input file       */
+	char *file;		/* Name of input file                */
+	char *dir;		/* Name of .dir file                 */
+	char *pag;		/* Name of .pag file                 */
+	char *cp;		/* Temporary character pointer       */
+	int flag;		/* Flag for command line option      */
+	int cnt = 0;		/* Number of entries in database     */
+	int longest = 0;	/* Longest entry in database         */
+	int len;		/* Length of input line              */
+	int errors = 0;		/* Count of errors processing file   */
+	char buf[BUFSIZ * 8];	/* Input line from file              */
+	struct passwd *passwd = NULL;	/* Pointer to password file entry    */
 
-	struct	group	*group=NULL;   	/* Pointer to group file entry       */
+	struct group *group = NULL;	/* Pointer to group file entry       */
+
 #ifdef	SHADOWPWD
-	struct	spwd	*shadow=NULL;	/* Pointer to shadow passwd entry    */
+	struct spwd *shadow = NULL;	/* Pointer to shadow passwd entry    */
 #endif
 #ifdef	SHADOWGRP
-	struct	sgrp	*gshadow=NULL;	/* Pointer to shadow group entry     */
+	struct sgrp *gshadow = NULL;	/* Pointer to shadow group entry     */
 #endif
-	DBM	*dbm;			/* Pointer to new NDBM files         */
-	DBM	*dbm_open();		/* Function to open NDBM files       */
+	DBM *dbm;		/* Pointer to new NDBM files         */
+	DBM *dbm_open ();	/* Function to open NDBM files       */
 
 	/*
-	 * Figure out what my name is.  I will use this later ...
+	 * Figure out what my name is. I will use this later ...
 	 */
 
-	Progname = Basename(argv[0]);
+	Progname = Basename (argv[0]);
 
 	/*
 	 * Figure out what the flags might be ...
@@ -156,39 +142,39 @@ main(int argc, char **argv)
 
 	while ((flag = getopt (argc, argv, "fvpgs")) != EOF) {
 		switch (flag) {
-			case 'v':
-				vflg++;
-				break;
-			case 'f':
-				fflg++;
-				break;
-			case 'g':
-				gflg++;
+		case 'v':
+			vflg++;
+			break;
+		case 'f':
+			fflg++;
+			break;
+		case 'g':
+			gflg++;
 #ifndef	SHADOWGRP
-				if (sflg)
-					usage ();
+			if (sflg)
+				usage ();
 #endif
-				if (pflg)
-					usage ();
+			if (pflg)
+				usage ();
 
-				break;
+			break;
 #if defined(SHADOWPWD) || defined(SHADOWGRP)
-			case 's':
-				sflg++;
+		case 's':
+			sflg++;
 #ifndef	SHADOWGRP
-				if (gflg)
-					usage ();
+			if (gflg)
+				usage ();
 #endif
-				break;
+			break;
 #endif
-			case 'p':
-				pflg++;
-				if (gflg)
-					usage ();
+		case 'p':
+			pflg++;
+			if (gflg)
+				usage ();
 
-				break;
-			default:
-				usage();
+			break;
+		default:
+			usage ();
 		}
 	}
 
@@ -197,9 +183,9 @@ main(int argc, char **argv)
 	 */
 
 #ifdef SHADOWPWD
-	if (! sflg && ! gflg)
+	if (!sflg && !gflg)
 #else
-	if (! gflg)
+	if (!gflg)
 #endif
 		pflg++;
 
@@ -212,8 +198,9 @@ main(int argc, char **argv)
 
 	file = argv[optind];
 
-	if (! (fp = fopen (file, "r"))) {
-		fprintf (stderr, _("%s: cannot open file %s\n"), Progname, file);
+	if (!(fp = fopen (file, "r"))) {
+		fprintf (stderr, _("%s: cannot open file %s\n"), Progname,
+			 file);
 		exit (1);
 	}
 
@@ -241,26 +228,29 @@ main(int argc, char **argv)
 	 * to have existed already.
 	 */
 
-	if (access(dir, F_OK) == 0) {
-		fprintf (stderr, _("%s: cannot overwrite file %s\n"), Progname, dir);
+	if (access (dir, F_OK) == 0) {
+		fprintf (stderr, _("%s: cannot overwrite file %s\n"),
+			 Progname, dir);
 		exit (1);
 	}
-	if (access(pag, F_OK) == 0) {
-		fprintf (stderr, _("%s: cannot overwrite file %s\n"), Progname, pag);
+	if (access (pag, F_OK) == 0) {
+		fprintf (stderr, _("%s: cannot overwrite file %s\n"),
+			 Progname, pag);
 		exit (1);
 	}
 
 	if (sflg)
-		umask(077);
+		umask (077);
 	else
-		umask(022);
+		umask (022);
 
 	/*
 	 * Now the DBM database gets initialized
 	 */
 
-	if (! (dbm = dbm_open (file, O_RDWR|O_CREAT, 0644))) {
-		fprintf (stderr, _("%s: cannot open DBM files for %s\n"), Progname, file);
+	if (!(dbm = dbm_open (file, O_RDWR | O_CREAT, 0644))) {
+		fprintf (stderr, _("%s: cannot open DBM files for %s\n"),
+			 Progname, file);
 		exit (1);
 	}
 	if (gflg) {
@@ -280,8 +270,8 @@ main(int argc, char **argv)
 	}
 
 	/*
-	 * Read every line in the password file and convert it into a
-	 * data structure to be put in the DBM database files.
+	 * Read every line in the password file and convert it into a data
+	 * structure to be put in the DBM database files.
 	 */
 
 	while (fgetsx (buf, BUFSIZ, fp) != NULL) {
@@ -292,8 +282,11 @@ main(int argc, char **argv)
 		 */
 
 		buf[sizeof buf - 1] = '\0';
-		if (! (cp = strchr (buf, '\n'))) {
-			fprintf (stderr, _("%s: the beginning with "%.16s ..." is too long\n"), Progname, buf);
+		if (!(cp = strchr (buf, '\n'))) {
+			fprintf (stderr,
+				 _("%s: the beginning with " %
+				   .16 s..." is too long\n"), Progname,
+				 buf);
 			exit (1);
 		}
 		*cp = '\0';
@@ -301,54 +294,72 @@ main(int argc, char **argv)
 
 #ifdef	USE_NIS
 		/*
-		 * Parse the password file line into a (struct passwd).
-		 * Erroneous lines cause error messages, but that's
-		 * all.  YP lines are ignored completely.
+		 * Parse the password file line into a (struct passwd). 
+		 * Erroneous lines cause error messages, but that's all. YP
+		 * lines are ignored completely.
 		 */
 
 		if (buf[0] == '-' || buf[0] == '+')
 			continue;
 #endif
-		if (! (((! sflg && pflg) && (passwd = sgetpwent (buf)))
+		if (!(((!sflg && pflg) && (passwd = sgetpwent (buf)))
 #ifdef	SHADOWPWD
-			|| ((sflg && pflg) && (shadow = sgetspent (buf)))
+		      || ((sflg && pflg) && (shadow = sgetspent (buf)))
 #endif
-			|| ((! sflg && gflg) && (group = sgetgrent (buf)))
+		      || ((!sflg && gflg) && (group = sgetgrent (buf)))
 #ifdef	SHADOWGRP
-			|| ((sflg && gflg) && (gshadow = sgetsgent (buf)))
+		      || ((sflg && gflg) && (gshadow = sgetsgent (buf)))
 #endif
-		)) {
-			fprintf (stderr, _("%s: error parsing line \"%s\"\n"), Progname, buf);
+		    )) {
+			fprintf (stderr,
+				 _("%s: error parsing line \"%s\"\n"),
+				 Progname, buf);
 			errors++;
 			continue;
 		}
 		if (vflg) {
-			if (!sflg && pflg) printf (_("adding record for name "%s"\n"), passwd->pw_name);
+			if (!sflg && pflg)
+				printf (_
+					("adding record for name " %
+					 s "\n"), passwd->pw_name);
 #ifdef	SHADOWPWD
-			if (sflg && pflg) printf (_("adding record for name "%s"\n"), shadow->sp_namp);
+			if (sflg && pflg)
+				printf (_
+					("adding record for name " %
+					 s "\n"), shadow->sp_namp);
 #endif
-			if (!sflg && gflg) printf (_("adding record for name "%s"\n"), group->gr_name);
+			if (!sflg && gflg)
+				printf (_
+					("adding record for name " %
+					 s "\n"), group->gr_name);
 #ifdef	SHADOWGRP
-			if (sflg && gflg) printf (_("adding record for name "%s"\n"), gshadow->sg_name);
+			if (sflg && gflg)
+				printf (_
+					("adding record for name " %
+					 s "\n"), gshadow->sg_name);
 #endif
 		}
-		if (! sflg && pflg && ! pw_dbm_update (passwd))
-			fprintf (stderr, _("%s: error adding record for "%s"\n"),
-				Progname, passwd->pw_name);
+		if (!sflg && pflg && !pw_dbm_update (passwd))
+			fprintf (stderr,
+				 _("%s: error adding record for " %
+				   s "\n"), Progname, passwd->pw_name);
 
 #ifdef	SHADOWPWD
-		if (sflg && pflg && ! sp_dbm_update (shadow))
-			fprintf (stderr, _("%s: error adding record for "%s"\n"),
-				Progname, shadow->sp_namp);
+		if (sflg && pflg && !sp_dbm_update (shadow))
+			fprintf (stderr,
+				 _("%s: error adding record for " %
+				   s "\n"), Progname, shadow->sp_namp);
 #endif
-		if (! sflg && gflg && ! gr_dbm_update (group))
-			fprintf (stderr, _("%s: error adding record for "%s"\n"),
-				Progname, group->gr_name);
+		if (!sflg && gflg && !gr_dbm_update (group))
+			fprintf (stderr,
+				 _("%s: error adding record for " %
+				   s "\n"), Progname, group->gr_name);
 #ifdef	SHADOWGRP
-		if (sflg && gflg && ! sg_dbm_update (gshadow))
-			fprintf (stderr, _("%s: error adding record for "%s"\n"),
-				Progname, gshadow->sg_name);
-#endif	/* SHADOWGRP */
+		if (sflg && gflg && !sg_dbm_update (gshadow))
+			fprintf (stderr,
+				 _("%s: error adding record for " %
+				   s "\n"), Progname, gshadow->sg_name);
+#endif				/* SHADOWGRP */
 
 		/*
 		 * Update the longest record and record count
@@ -364,31 +375,29 @@ main(int argc, char **argv)
 	 */
 
 	if (vflg)
-		printf (_("added %d entries, longest was %d\n"), cnt, longest);
+		printf (_("added %d entries, longest was %d\n"), cnt,
+			longest);
 
 	exit (errors);
-	/*NOTREACHED*/
-}
+ /*NOTREACHED*/}
 
 /*
  * usage - print error message and exit
  */
 
-static void
-usage(void)
+static void usage (void)
 {
 #ifdef	SHADOWPWD
 #ifdef	SHADOWGRP
-	fprintf (stderr, _("Usage: %s [ -vf ] [ -p|g|sp|sg ] file\n"), Progname);
-#else	/* !SHADOWGRP */
-	fprintf (stderr, _("Usage: %s [ -vf ] [ -p|g|sp ] file\n"), Progname);
-#endif	/* SHADOWGRP */
-#else	/* !SHADOWPWD */
-	fprintf (stderr, _("Usage: %s [ -vf ] [ -p|g ] file\n"), Progname);
-#endif	/* SHADOWPWD */
-
+	fprintf (stderr, _("Usage: %s [-vf] [-p|g|sp|sg] file\n"),
+		 Progname);
+#else				/* !SHADOWGRP */
+	fprintf (stderr, _("Usage: %s [-vf] [-p|g|sp] file\n"), Progname);
+#endif				/* SHADOWGRP */
+#else				/* !SHADOWPWD */
+	fprintf (stderr, _("Usage: %s [-vf] [-p|g] file\n"), Progname);
+#endif				/* SHADOWPWD */
 
 	exit (1);
-	/*NOTREACHED*/
-}
-#endif /*} defined(NDBM) */
+ /*NOTREACHED*/}
+#endif				/*} defined(NDBM) */

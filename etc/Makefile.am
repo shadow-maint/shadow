@@ -6,7 +6,7 @@ EXTRA_DIST = \
 	login.access \
 	login.defs \
 	login.defs.hurd \
-	login.defs.linux
+	login.defs.linux \
 	useradd
 
 SUBDIRS = pam.d

@@ -1,4 +1,4 @@
-.\" Copyright 1989 - 1994, John F. Haugh II
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: passwd.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: passwd.1,v 1.3 2001/12/22 05:40:04 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -40,20 +36,20 @@
 .SH 名前
 passwd \- ユーザパスワードを変更する
 .SH 書式
-\fBpasswd\fR [ \fB-f \fR|\fB -s \fR ] [ \fIname\fR ]
+\fBpasswd\fR [\fB-f\fR|\fB-s\fR] [\fIname\fR]
 .br
-\fBpasswd\fR [ \fB-g\fR ] [ \fB-r\fR|\fBR\fR ] \fIgroup\fR
+\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIgroup\fR
 .br
-\fBpasswd\fR [ \fB-x\fR \fImax\fR ] [ \fB-n\fR \fImin\fR ]
-[ \fB-w\fR \fIwarn\fR ] [ \fB-i\fR \fIinact\fR ] \fIname\fR
+\fBpasswd\fR [\fB-x\fR \fImax\fR] [\fB-n\fR \fImin\fR]
+[\fB-w\fR \fIwarn\fR] [\fB-i\fR \fIinact\fR] \fIname\fR
 .br
-\fBpasswd\fR { \fB-l\fR | \fB-u\fR | \fB-d\fR | \fB-S\fR } \fIname\fR
+\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR} \fIname\fR
 .SH 説明
-\fIpasswd\fRはユーザ及びグループアカウントのパスワードを変更する。
+\fBpasswd\fRはユーザ及びグループアカウントのパスワードを変更する。
 一般ユーザは自分のアカウントのパスワードしか変更できない。
 スーパーユーザはいかなるアカウントのパスワードも変更することが出来る。
 グループの管理者はグループのパスワードを変更することが出来る。
-\fIpasswd\fRによって、ユーザのフルネーム、ログインシェル、パスワードの
+\fBpasswd\fRによって、ユーザのフルネーム、ログインシェル、パスワードの
 期限切れの日付及び有効期間等のアカウント情報を変更することもできる。
 .SS パスワードの変更
 パスワードが既にある場合は、先ず古いパスワードを入力するよう促される。
@@ -64,7 +60,7 @@ passwd \- ユーザパスワードを変更する
 .PP
 パスワードが入力された後、パスワード有効期限の情報を調べ、
 現在パスワードの変更が許されているか検査する。
-もし許可されていない場合は、\fIpasswd\fRは変更を拒否して終了する。
+もし許可されていない場合は、\fBpasswd\fRは変更を拒否して終了する。
 .PP
 次いで、代わりのパスワードを入力するよう促される。
 入力されたパスワードは複雑さを検査される。
@@ -81,10 +77,10 @@ passwd \- ユーザパスワードを変更する
 .PP
 システムのディフォルトの消去文字やkill文字を含めない様に
 注意しなくてはならない。
-\fIpasswd\fRはあまりに単純なパスワードへの変更は拒否する。
+\fBpasswd\fRはあまりに単純なパスワードへの変更は拒否する。
 .PP
 入力したパスワードが受け入れられた場合、
-\fIpasswd\fRはもう一度入力を促し、二番目に入力したものを最初の
+\fBpasswd\fRはもう一度入力を促し、二番目に入力したものを最初の
 ものと比較する。
 パスワード変更が受け入れられるためには、両方の入力が符合なくてはならない。
 .SS グループパスワード
@@ -182,12 +178,9 @@ NISが動作しておりしかもNISサーバ以外にログインしている場合は
 .br
 /etc/shadow \- ユーザの暗号化されたパスワード
 .SH 関連項目
-passwd(3),
-shadow(3),
-group(5),
-passwd(5)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
-
-
-
+.BR passwd (3),
+.\" .BR shadow (3),
+.BR group (5),
+.BR passwd (5)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

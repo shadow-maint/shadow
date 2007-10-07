@@ -29,8 +29,7 @@ usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod \
 
 noinst_PROGRAMS = id sulogin
 
-# id and groups are from gnu, sulogin from sysvinit,
-# also suid programs are installed by hand.
+# id and groups are from gnu, sulogin from sysvinit
 
 suidbins = su
 suidubins = chage chfn chsh expiry gpasswd newgrp passwd
@@ -54,6 +53,8 @@ userdel_LDADD  = $(LDADD) $(LIBPAM)
 usermod_LDADD  = $(LDADD) $(LIBPAM)
 
 install-exec-hook:
+	$(LN_S) newgrp	$(DESTDIR)$(bindir)/sg
+	$(LN_S) vigr	$(DESTDIR)$(bindir)/vipw
 	for i in $(suidbins); do \
 		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
 	done
@@ -62,5 +63,3 @@ install-data-hook:
 	for i in $(suidubins); do \
 		chmod 4755 $(DESTDIR)$(ubindir)/$$i; \
 	done
-	rm -f $(DESTDIR)$(ubindir)/sg
-	ln -s newgrp $(DESTDIR)$(ubindir)/sg

@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,27 +30,23 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: pwck.c,v 1.16 2001/08/14 21:10:58 malekith Exp $")
-
+RCSID (PKG_VER "$Id: pwck.c,v 1.22 2002/01/05 15:41:44 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
-
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
 #include <pwd.h>
-
 #include "commonio.h"
-
 #include "pwio.h"
-extern void __pw_del_entry(const struct commonio_entry *);
-extern struct commonio_entry *__pw_get_head(void);
+extern void __pw_del_entry (const struct commonio_entry *);
+extern struct commonio_entry *__pw_get_head (void);
 
 #ifdef SHADOWPWD
 #include "shadowio.h"
-extern void __spw_del_entry(const struct commonio_entry *);
-extern struct commonio_entry *__spw_get_head(void);
+extern void __spw_del_entry (const struct commonio_entry *);
+extern struct commonio_entry *__spw_get_head (void);
 #endif
 
 /*
@@ -65,49 +61,42 @@ extern struct commonio_entry *__spw_get_head(void);
 #define	E_CANTUPDATE	5
 
 /*
- * Global variables
- */
-
-extern	int	optind;
-extern	char	*optarg;
-
-/*
  * Local variables
  */
 
 static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
+
 #ifdef	SHADOWPWD
 static const char *spw_file = SHADOW_FILE;
 #endif
 static int read_only = 0;
-static int quiet = 0;  /* don't report warnings, only errors */
+static int quiet = 0;		/* don't report warnings, only errors */
 
 /* local function prototypes */
-static void usage(void);
-static int yes_or_no(void);
+static void usage (void);
+static int yes_or_no (void);
 
 /*
  * usage - print syntax message and exit
  */
 
-static void
-usage(void)
+static void usage (void)
 {
 #ifdef SHADOWPWD
-	fprintf(stderr, _("Usage: %s [ -sqr ] [ passwd [ shadow ] ]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
+		 Prog);
 #else
-	fprintf(stderr, _("Usage: %s [ -sqr ] [ passwd ]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd]\n"), Prog);
 #endif
-	exit(E_USAGE);
+	exit (E_USAGE);
 }
 
 /*
  * yes_or_no - get answer to question from the user
  */
 
-static int
-yes_or_no(void)
+static int yes_or_no (void)
 {
 	char buf[80];
 
@@ -116,7 +105,7 @@ yes_or_no(void)
 	 */
 
 	if (read_only) {
-		puts(_("No"));
+		puts (_("No"));
 		return 0;
 	}
 
@@ -124,7 +113,7 @@ yes_or_no(void)
 	 * Get a line and see what the first character is.
 	 */
 
-	if (fgets(buf, sizeof buf, stdin))
+	if (fgets (buf, sizeof buf, stdin))
 		return buf[0] == 'y' || buf[0] == 'Y';
 
 	return 0;
@@ -134,40 +123,40 @@ yes_or_no(void)
  * pwck - verify password file integrity
  */
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	int	arg;
-	int	errors = 0;
-	int	deleted = 0;
-	struct	commonio_entry	*pfe, *tpfe;
-	struct	passwd	*pwd;
-	int	sort_mode = 0;
+	int arg;
+	int errors = 0;
+	int deleted = 0;
+	struct commonio_entry *pfe, *tpfe;
+	struct passwd *pwd;
+	int sort_mode = 0;
+
 #ifdef	SHADOWPWD
-	struct	commonio_entry	*spe, *tspe;
-	struct	spwd	*spw;
-	int	is_shadow = 0;
+	struct commonio_entry *spe, *tspe;
+	struct spwd *spw;
+	int is_shadow = 0;
 #endif
 
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
 
-	Prog = Basename(argv[0]);
+	Prog = Basename (argv[0]);
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
-	OPENLOG(Prog);
+	OPENLOG (Prog);
 
 	/*
 	 * Parse the command line arguments
 	 */
 
-	while ((arg = getopt(argc, argv, "eqrs")) != EOF) {
+	while ((arg = getopt (argc, argv, "eqrs")) != EOF) {
 		switch (arg) {
-		case 'e': /* added for Debian shadow-961025-2 compatibility */
+		case 'e':	/* added for Debian shadow-961025-2 compatibility */
 		case 'q':
 			quiet = 1;
 			break;
@@ -178,16 +167,16 @@ main(int argc, char **argv)
 			sort_mode = 1;
 			break;
 		default:
-			usage();
+			usage ();
 		}
 	}
 
 	if (sort_mode && read_only) {
-		fprintf(stderr, _("%s: -s and -r are incompatibile\n"),
-			Prog);
-		exit(E_USAGE);
+		fprintf (stderr, _("%s: -s and -r are incompatibile\n"),
+			 Prog);
+		exit (E_USAGE);
 	}
-	
+
 	/*
 	 * Make certain we have the right number of arguments
 	 */
@@ -197,24 +186,24 @@ main(int argc, char **argv)
 #else
 	if (optind != argc && optind + 1 != argc)
 #endif
-		usage();
+		usage ();
 
 	/*
-	 * If there are two left over filenames, use those as the
-	 * password and shadow password filenames.
+	 * If there are two left over filenames, use those as the password
+	 * and shadow password filenames.
 	 */
 
 	if (optind != argc) {
 		pwd_file = argv[optind];
-		pw_name(pwd_file);
+		pw_name (pwd_file);
 	}
 #ifdef SHADOWPWD
 	if (optind + 2 == argc) {
 		spw_file = argv[optind + 1];
-		spw_name(spw_file);
+		spw_name (spw_file);
 		is_shadow = 1;
 	} else if (optind == argc)
-		is_shadow = spw_file_present();
+		is_shadow = spw_file_present ();
 #endif
 
 	/*
@@ -222,109 +211,111 @@ main(int argc, char **argv)
 	 */
 
 	if (!read_only) {
-		if (!pw_lock()) {
-			fprintf(stderr, _("%s: cannot lock file %s\n"),
-				Prog, pwd_file);
+		if (!pw_lock ()) {
+			fprintf (stderr, _("%s: cannot lock file %s\n"),
+				 Prog, pwd_file);
 			if (optind == argc)
-				SYSLOG((LOG_WARN,"cannot lock %s\n",pwd_file));
-			closelog();
-			exit(E_CANTLOCK);
+				SYSLOG ((LOG_WARN, "cannot lock %s",
+					 pwd_file));
+			closelog ();
+			exit (E_CANTLOCK);
 		}
 #ifdef	SHADOWPWD
-		if (is_shadow && !spw_lock()) {
-			fprintf(stderr, _("%s: cannot lock file %s\n"),
-				Prog, spw_file);
+		if (is_shadow && !spw_lock ()) {
+			fprintf (stderr, _("%s: cannot lock file %s\n"),
+				 Prog, spw_file);
 			if (optind == argc)
-				SYSLOG((LOG_WARN,"cannot lock %s\n",spw_file));
-			closelog();
-			exit(E_CANTLOCK);
+				SYSLOG ((LOG_WARN, "cannot lock %s",
+					 spw_file));
+			closelog ();
+			exit (E_CANTLOCK);
 		}
 #endif
 	}
 
 	/*
-	 * Open the files.  Use O_RDONLY if we are in read_only mode,
-	 * O_RDWR otherwise.
+	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
+	 * otherwise.
 	 */
 
-	if (!pw_open(read_only ? O_RDONLY:O_RDWR)) {
-		fprintf(stderr, _("%s: cannot open file %s\n"),
-			Prog, pwd_file);
+	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
+		fprintf (stderr, _("%s: cannot open file %s\n"),
+			 Prog, pwd_file);
 		if (optind == argc)
-			SYSLOG((LOG_WARN, "cannot open %s\n", pwd_file));
-		closelog();
-		exit(E_CANTOPEN);
+			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
+		closelog ();
+		exit (E_CANTOPEN);
 	}
 #ifdef	SHADOWPWD
-	if (is_shadow && !spw_open(read_only ? O_RDONLY : O_RDWR)) {
-		fprintf(stderr, _("%s: cannot open file %s\n"),
-			Prog, spw_file);
+	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
+		fprintf (stderr, _("%s: cannot open file %s\n"),
+			 Prog, spw_file);
 		if (optind == argc)
-			SYSLOG((LOG_WARN, "cannot open %s\n", spw_file));
-		closelog();
-		exit(E_CANTOPEN);
+			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
+		closelog ();
+		exit (E_CANTOPEN);
 	}
 #endif
 
 	if (sort_mode) {
-		pw_sort();
+		pw_sort ();
 #ifdef	SHADOWPWD
 		if (is_shadow)
-			spw_sort();
+			spw_sort ();
 #endif
 		goto write_and_bye;
 	}
-	
+
 	/*
 	 * Loop through the entire password file.
 	 */
 
-	for (pfe = __pw_get_head(); pfe; pfe = pfe->next) {
+	for (pfe = __pw_get_head (); pfe; pfe = pfe->next) {
 		/*
-		 * If this is a NIS line, skip it.  You can't "know" what
-		 * NIS is going to do without directly asking NIS ...
+		 * If this is a NIS line, skip it. You can't "know" what NIS
+		 * is going to do without directly asking NIS ...
 		 */
 
 		if (pfe->line[0] == '+' || pfe->line[0] == '-')
 			continue;
 
 		/*
-		 * Start with the entries that are completely corrupt.
-		 * They have no (struct passwd) entry because they couldn't
-		 * be parsed properly.
+		 * Start with the entries that are completely corrupt.  They
+		 * have no (struct passwd) entry because they couldn't be
+		 * parsed properly.
 		 */
 
 		if (!pfe->eptr) {
 
 			/*
-			 * Tell the user this entire line is bogus and
-			 * ask them to delete it.
+			 * Tell the user this entire line is bogus and ask
+			 * them to delete it.
 			 */
 
-			printf(_("invalid password file entry\n"));
-			printf(_("delete line `%s'? "), pfe->line);
+			printf (_("invalid password file entry\n"));
+			printf (_("delete line `%s'? "), pfe->line);
 			errors++;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
 
-			if (!yes_or_no())
+			if (!yes_or_no ())
 				continue;
 
 			/*
-			 * All password file deletions wind up here.  This
+			 * All password file deletions wind up here. This
 			 * code removes the current entry from the linked
-			 * list.  When done, it skips back to the top of
-			 * the loop to try out the next list element.
+			 * list. When done, it skips back to the top of the
+			 * loop to try out the next list element.
 			 */
 
-delete_pw:
-			SYSLOG((LOG_INFO, "delete passwd line `%s'\n",
-				pfe->line));
+		      delete_pw:
+			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
+				 pfe->line));
 			deleted++;
 
-			__pw_del_entry(pfe);
+			__pw_del_entry (pfe);
 			continue;
 		}
 
@@ -338,7 +329,7 @@ delete_pw:
 		 * Make sure this entry has a unique name.
 		 */
 
-		for (tpfe = __pw_get_head(); tpfe; tpfe = tpfe->next) {
+		for (tpfe = __pw_get_head (); tpfe; tpfe = tpfe->next) {
 			const struct passwd *ent = tpfe->eptr;
 
 			/*
@@ -355,7 +346,7 @@ delete_pw:
 			if (!ent)
 				continue;
 
-			if (strcmp(pwd->pw_name, ent->pw_name) != 0)
+			if (strcmp (pwd->pw_name, ent->pw_name) != 0)
 				continue;
 
 			/*
@@ -363,34 +354,24 @@ delete_pw:
 			 * another and ask them to delete it.
 			 */
 
-			puts(_("duplicate password entry\n"));
-			printf(_("delete line `%s'? "), pfe->line);
+			puts (_("duplicate password entry\n"));
+			printf (_("delete line `%s'? "), pfe->line);
 			errors++;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
 
-			if (yes_or_no())
+			if (yes_or_no ())
 				goto delete_pw;
 		}
 
 		/*
 		 * Check for invalid usernames.  --marekm
 		 */
-		if (!check_user_name(pwd->pw_name)) {
-			printf(_("invalid user name `%s'\n"), pwd->pw_name);
-			errors++;
-		}
-
-		/*
-		 * Check for a Slackware bug.  Make sure UID is not -1
-		 * (it has special meaning for some syscalls).  --marekm
-		 */
-
-		if (pwd->pw_uid == (uid_t) -1) {
-			printf(_("user %s: bad UID (%d)\n"),
-				pwd->pw_name, (int) pwd->pw_uid);
+		if (!check_user_name (pwd->pw_name)) {
+			printf (_("invalid user name `%s'\n"),
+				pwd->pw_name);
 			errors++;
 		}
 
@@ -398,14 +379,14 @@ delete_pw:
 		 * Make sure the primary group exists
 		 */
 
-		if (!quiet && !getgrgid(pwd->pw_gid)) {
+		if (!quiet && !getgrgid (pwd->pw_gid)) {
 
 			/*
 			 * No primary group, just give a warning
 			 */
 
-			printf(_("user %s: no group %d\n"),
-				pwd->pw_name, (int) pwd->pw_gid);
+			printf (_("user %s: no group %u\n"),
+				pwd->pw_name, pwd->pw_gid);
 			errors++;
 		}
 
@@ -413,13 +394,14 @@ delete_pw:
 		 * Make sure the home directory exists
 		 */
 
-		if (!quiet && access(pwd->pw_dir, F_OK)) {
+		if (!quiet && access (pwd->pw_dir, F_OK)) {
 
 			/*
 			 * Home directory doesn't exist, give a warning
 			 */
 
-			printf(_("user %s: directory %s does not exist\n"),
+			printf (_
+				("user %s: directory %s does not exist\n"),
 				pwd->pw_name, pwd->pw_dir);
 			errors++;
 		}
@@ -428,13 +410,14 @@ delete_pw:
 		 * Make sure the login shell is executable
 		 */
 
-		if (!quiet && pwd->pw_shell[0] && access(pwd->pw_shell, F_OK)) {
+		if (!quiet && pwd->pw_shell[0]
+		    && access (pwd->pw_shell, F_OK)) {
 
 			/*
 			 * Login shell doesn't exist, give a warning
 			 */
-			
-			printf(_("user %s: program %s does not exist\n"),
+
+			printf (_("user %s: program %s does not exist\n"),
 				pwd->pw_name, pwd->pw_shell);
 			errors++;
 		}
@@ -448,52 +431,52 @@ delete_pw:
 	 * Loop through the entire shadow password file.
 	 */
 
-	for (spe = __spw_get_head(); spe; spe = spe->next) {
+	for (spe = __spw_get_head (); spe; spe = spe->next) {
 		/*
-		 * If this is a NIS line, skip it.  You can't "know" what
-		 * NIS is going to do without directly asking NIS ...
+		 * If this is a NIS line, skip it. You can't "know" what NIS
+		 * is going to do without directly asking NIS ...
 		 */
 
 		if (spe->line[0] == '+' || spe->line[0] == '-')
 			continue;
 
 		/*
-		 * Start with the entries that are completely corrupt.
-		 * They have no (struct spwd) entry because they couldn't
-		 * be parsed properly.
+		 * Start with the entries that are completely corrupt. They
+		 * have no (struct spwd) entry because they couldn't be
+		 * parsed properly.
 		 */
 
 		if (!spe->eptr) {
 
 			/*
-			 * Tell the user this entire line is bogus and
-			 * ask them to delete it.
+			 * Tell the user this entire line is bogus and ask
+			 * them to delete it.
 			 */
 
-			printf(_("invalid shadow password file entry\n"));
-			printf(_("delete line `%s'? "), spe->line);
+			printf (_("invalid shadow password file entry\n"));
+			printf (_("delete line `%s'? "), spe->line);
 			errors++;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
 
-			if (!yes_or_no())
+			if (!yes_or_no ())
 				continue;
 
 			/*
-			 * All shadow file deletions wind up here.  This
-			 * code removes the current entry from the linked
-			 * list.  When done, it skips back to the top of
-			 * the loop to try out the next list element.
+			 * All shadow file deletions wind up here. This code
+			 * removes the current entry from the linked list.
+			 * When done, it skips back to the top of the loop
+			 * to try out the next list element.
 			 */
 
-delete_spw:
-			SYSLOG((LOG_INFO, "delete shadow line `%s'\n",
-				spe->line));
+		      delete_spw:
+			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
+				 spe->line));
 			deleted++;
 
-			__spw_del_entry(spe);
+			__spw_del_entry (spe);
 			continue;
 		}
 
@@ -507,7 +490,7 @@ delete_spw:
 		 * Make sure this entry has a unique name.
 		 */
 
-		for (tspe = __spw_get_head(); tspe; tspe = tspe->next) {
+		for (tspe = __spw_get_head (); tspe; tspe = tspe->next) {
 			const struct spwd *ent = tspe->eptr;
 
 			/*
@@ -524,7 +507,7 @@ delete_spw:
 			if (!ent)
 				continue;
 
-			if (strcmp(spw->sp_namp, ent->sp_namp) != 0)
+			if (strcmp (spw->sp_namp, ent->sp_namp) != 0)
 				continue;
 
 			/*
@@ -532,15 +515,15 @@ delete_spw:
 			 * another and ask them to delete it.
 			 */
 
-			puts(_("duplicate shadow password entry\n"));
-			printf(_("delete line `%s'? "), spe->line);
+			puts (_("duplicate shadow password entry\n"));
+			printf (_("delete line `%s'? "), spe->line);
 			errors++;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
 
-			if (yes_or_no())
+			if (yes_or_no ())
 				goto delete_spw;
 		}
 
@@ -549,22 +532,22 @@ delete_spw:
 		 * file.
 		 */
 
-		if (!pw_locate(spw->sp_namp)) {
+		if (!pw_locate (spw->sp_namp)) {
 
 			/*
 			 * Tell the user this entry has no matching
 			 * /etc/passwd entry and ask them to delete it.
 			 */
 
-			puts(_("no matching password file entry\n"));
-			printf(_("delete line `%s'? "), spe->line);
+			puts (_("no matching password file entry\n"));
+			printf (_("delete line `%s'? "), spe->line);
 			errors++;
 
 			/*
 			 * prompt the user to delete the entry or not
 			 */
 
-			if (yes_or_no())
+			if (yes_or_no ())
 				goto delete_spw;
 		}
 
@@ -572,36 +555,38 @@ delete_spw:
 		 * Warn if last password change in the future.  --marekm
 		 */
 
-		if (!quiet && spw->sp_lstchg > time((time_t *)0) / SCALE) {
-			printf(_("user %s: last password change in the future\n"), spw->sp_namp);
+		if (!quiet && spw->sp_lstchg > time ((time_t *) 0) / SCALE) {
+			printf (_
+				("user %s: last password change in the future\n"),
+				spw->sp_namp);
 			errors++;
 		}
 	}
 
-shadow_done:
+      shadow_done:
 #endif
 
 	/*
-	 * All done.  If there were no deletions we can just abandon any
+	 * All done. If there were no deletions we can just abandon any
 	 * changes to the files.
 	 */
 
 	if (deleted) {
-write_and_bye:
-		if (!pw_close()) {
-			fprintf(stderr, _("%s: cannot update file %s\n"),
-				Prog, pwd_file);
-			SYSLOG((LOG_WARN, "cannot update %s\n", pwd_file));
-			closelog();
-			exit(E_CANTUPDATE);
+	      write_and_bye:
+		if (!pw_close ()) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, pwd_file);
+			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
+			closelog ();
+			exit (E_CANTUPDATE);
 		}
 #ifdef	SHADOWPWD
-		if (is_shadow && !spw_close()) {
-			fprintf(stderr, _("%s: cannot update file %s\n"),
-				Prog, spw_file);
-			SYSLOG((LOG_WARN, "cannot update %s\n", spw_file));
-			closelog();
-			exit(E_CANTUPDATE);
+		if (is_shadow && !spw_close ()) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, spw_file);
+			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
+			closelog ();
+			exit (E_CANTUPDATE);
 		}
 #endif
 	}
@@ -612,9 +597,9 @@ write_and_bye:
 
 #ifdef	SHADOWPWD
 	if (is_shadow)
-		spw_unlock();
+		spw_unlock ();
 #endif
-	(void) pw_unlock();
+	(void) pw_unlock ();
 
 	/*
 	 * Tell the user what we did and exit.
@@ -622,15 +607,16 @@ write_and_bye:
 
 	if (errors)
 #ifdef NDBM
-		printf(deleted ?
-			_("%s: the files have been updated; run mkpasswd\n") :
-			_("%s: no changes\n"), Prog);
+		printf (deleted ?
+			_
+			("%s: the files have been updated; run mkpasswd\n")
+			: _("%s: no changes\n"), Prog);
 #else
-		printf(deleted ?
+		printf (deleted ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
 #endif
 
-	closelog();
-	exit(errors ? E_BADENTRY : E_OKAY);
+	closelog ();
+	exit (errors ? E_BADENTRY : E_OKAY);
 }

@@ -1,4 +1,4 @@
-.\" Copyright 1991 - 1994, John F. Haugh II
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,41 +25,63 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: usermod.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: usermod.8,v 1.2 2001/11/16 17:01:33 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated Tue Jan 23 17:21:08 JST 2001
+.\"         by Kentaro Shirakata <argrath@ub32.org>
 .\"
 .TH USERMOD 8
 .SH 名前
 usermod \- ユーザアカウントを変更する
 .SH 書式
+.TP 8
 .B usermod
-[ \fB-A\fI method\fR | \fBDEFAULT\fR ]
-[ \fB-c\fI comment\fR ]
-[ \fB-d\fI home_dir \fR[ \fB-m\fR ] ]
-[ \fB-e\fI expire_date\fR ]
-[ \fB-f\fI inactive_time\fR ]
-[ \fB-g\fI initial_group\fR ]
-[ \fB-G\fI group[,...]\fR ]
-[ \fB-l\fI login_name \fR ]
-[ \fB-s\fI shell\fR ]
-[ \fB-u\fI uid \fR[ \fB-o\fR ]
+.\" .RB [ -A
+.\" .RI { method | \fBDEFAULT\fR "},... ]"
+.RB [ -c
+.IR comment ]
+.RB [ -d
+.IR home_dir " ["
+.BR -m ]]
+.br
+.RB [ -e
+.IR expire_date ]
+.RB [ -f
+.IR inactive_time ]
+.br
+.RB [ -g
+.IR initial_group ]
+.RB [ -G
+.IR group [,...]]
+.br
+.RB [ -l
+.IR login_name ]
+.RB [ -p
+.IR passwd ]
+.br
+.RB [ -s
+.IR shell ]
+.RB [ -u
+.IR uid " ["
+.BR -o ]]
+.RB [ -L | -U ]
 .I login
 .SH 説明
-\fIusermod\fRコマンドはコマンドライン上での指示にしたがって
+\fBusermod\fRコマンドはコマンドライン上での指示にしたがって
 システムのアカウントファイルを変更する。
-\fIusermod\fRコマンドで使えるオプションは
-.IP "\fB-A \fImethod\fR|\fBDEFAULT\fR"
-ユーザの新しい認証方法。
-ユーザの認証方法とは、ユーザが本人である事を確認する為のプログラム名である。
-文字列\fBDEFAULT\fRを用いてユーザの認証方法をシステム標準のパスワード方式に
-変更する事も出来る。
+\fBusermod\fRコマンドで使えるオプションは
+.\" .IP "\fB-A \fImethod\fR|\fBDEFAULT\fR"
+.\" ユーザの新しい認証方法。
+.\" ユーザの認証方法とは、ユーザが本人である事を確認する為のプログラム名である。
+.\" 文字列\fBDEFAULT\fRを用いてユーザの認証方法をシステム標準のパスワード方式に
+.\" 変更する事も出来る。
 .IP "\fB-c \fIcomment\fR"
 パスワードファイルの新しいコメント欄の内容
-通常は\fBchfn(1)\fRユーティリティを用いて変更される。
+通常は\fBchfn\fR(1)ユーティリティを用いて変更される。
 .IP "\fB-d \fIhome_dir\fR"
 新しいログインディレクトリ。
 \fB-m\fRオプションを用いた場合は現在のホームディレクトリの中身が
@@ -71,21 +89,21 @@ usermod \- ユーザアカウントを変更する
 作られる。
 .IP "\fB-e \fIexpire_date\fR"
 アカウントが使用不能になる日付。
-日付は\fIMM/DD/YY\fRという書式で指定する(MM,DD,YYはそれぞれ
-月、日、年を表す二桁の数字)。
+日付は\fIYYYY-MM-DD\fRという書式で指定する
+(YYYY, MM, DD はそれぞれ年、月、日を表す数字)。
 .IP "\fB-f \fIinactive_days\fR"
 パスワードの使用期限が切れてからアカウントが永久に使用不能になる
 までの日数。
 0とすると、パスワードの期限が切れると同時にこのアカウントは使用不可能
 になる。-1とするとこの機能が働かなくなる。
-ディフォルト値は-1。
+デフォルト値は-1。
 .IP "\fB-g \fIinitial_group\fR"
 ログイン時の新しいグループ名またはID。
 このグループ名は既に存在していなくてはならない。
-また，グループ番号は既存のグループを参照していなくてはならない。
-ディフォルトのグループ番号は1である。
+また、グループ番号は既存のグループを参照していなくてはならない。
+デフォルトのグループ番号は1である。
 .IP "\fB-G \fIgroup,[...]\fR"
-ユーザが属す，副グループのリスト。
+ユーザが属す、副グループのリスト。
 グループはコンマを用いて区切り、間に空白文字を入れては
 ならない。
 指定できるグループには\fB-g\fRオプションを用いる場合と
@@ -97,9 +115,11 @@ usermod \- ユーザアカウントを変更する
 他は何も変更しない。
 特に、新しいログイン名に合わせてホームディレクトリ名を変更しなくては
 ならないだろう。
+.IP "\fB-p \fIpasswd\fR"                                                
+\fBcrypt\fR(3)の返り値である暗号化されたパスワード。
 .IP "\fB-s \fIshell\fR"
 新しいログインシェルの名前。
-この欄を空白にした場合はシステムがディフォルトのログインシェルを
+この欄を空白にした場合はシステムがデフォルトのログインシェルを
 選択する。
 .IP "\fB-u \fIuid\fR"
 ユーザのID番号。
@@ -110,6 +130,15 @@ usermod \- ユーザアカウントを変更する
 ホームディレクトリ以下の、そのユーザ所有の全てのファイルのユーザIDは、
 自動的に新しい値に変更される。
 ホームディレクトリ以下にないファイルは手作業で変更しなくてはならない。
+.IP "\fB-L\fR"
+ユーザのパスワードをロックする。
+これは暗号化されたパスワードの先頭に '!' を追加し、
+事実上パスワードを無効にする。
+このオプションは \fI-p\fR または \fI-U\fR と同時に用いることはできない。
+.IP "\fB-U\fR"
+ユーザのパスワードをアンロックする。
+これは暗号化されたパスワードの先頭の '!' を取り除く。
+このオプションは \fI-p\fR または \fI-L\fR と同時に用いることはできない。
 .SH 警告
 \fBusermod\fRは現在ログインしているユーザの名前を変更する事は出来ない。
 このコマンドを使用してユーザのID番号を変更する際は、
@@ -125,8 +154,16 @@ NISに関する作業はNISサーバ上で行なわなくてはならない。
 .br
 /etc/group \- グループ情報
 .SH 関連項目
-\fBchfn(1), chsh(1), groupadd(1M), groupdel(1M), groupmod(1M),
-passwd(1), useradd(1M), userdel(1M)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR chfn (1),
+.BR chsh (1),
+.BR crypt (3),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR passwd (1),
+.BR useradd (8),
+.BR userdel (8)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+
 

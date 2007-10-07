@@ -31,8 +31,8 @@ Documentation:
   look at http://refentry2man.pld.org.pl/ for fast refentry xml/docbook to
   roff converter,
 
-- document {pw,grp}ck -s option in pt_BR, ja man pages,
-
 - documment in pt_BR, ja man pages -s {pw,grp}ck option,
+
+- document -o option in ja man page,
 
 - pl man page for login(1) - documment -f -h -p -r options.

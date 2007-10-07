@@ -36,6 +36,7 @@ libmisc_la_SOURCES = \
 	mail.c \
 	motd.c \
 	myname.c \
+	nscd.c \
 	obscure.c \
 	pam_pass.c \
 	pwd2spwd.c \
@@ -57,3 +58,5 @@ libmisc_la_SOURCES = \
 	utmp.c \
 	valid.c \
 	xmalloc.c
+
+libmisc_la_LIBADD = $(LIBCRACK)

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.14 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: getdef.c,v 1.15 2002/01/06 14:08:00 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -198,6 +198,29 @@ getdef_num(const char *item, int dflt)
 		return dflt;
 
 	return (int) strtol(d->value, (char **)NULL, 0);
+}
+
+
+/*
+ * getdef_unum - get unsigned numerical value from table of definitions
+ *
+ * Returns numeric value of specified item, else the "dflt" value if
+ * the item is not defined.  Octal (leading "0") and hex (leading "0x")
+ * values are handled.
+ */
+
+unsigned int
+getdef_unum(const char *item, unsigned int dflt)
+{
+	struct itemdef *d;
+
+	if (!def_loaded)
+		def_load();
+
+	if ((d = def_find(item)) == NULL || d->value == NULL)
+		return dflt;
+
+	return (unsigned int) strtoul(d->value, (char **)NULL, 0);
 }
 
 

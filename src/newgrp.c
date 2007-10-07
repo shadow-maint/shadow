@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -30,18 +30,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newgrp.c,v 1.17 2001/09/01 04:19:16 kloczek Exp $")
-
+RCSID (PKG_VER "$Id: newgrp.c,v 1.21 2002/01/06 15:00:07 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
 #include <pwd.h>
-
 #include "prototypes.h"
 #include "defines.h"
-
 #include "getdef.h"
-
 extern char **environ;
 
 #ifdef HAVE_SETGROUPS
@@ -53,41 +49,39 @@ static char *Prog;
 static int is_newgrp;
 
 /* local function prototypes */
-static void usage(void);
+static void usage (void);
 
 /*
  * usage - print command usage message
  */
 
-static void
-usage(void)
+static void usage (void)
 {
 	if (is_newgrp)
-		fprintf (stderr, _("usage: newgrp [ - ] [ group ]\n"));
+		fprintf (stderr, _("usage: newgrp [-] [group]\n"));
 	else
-		fprintf (stderr, _("usage: sg group [[-c] command ]\n"));
+		fprintf (stderr, _("usage: sg group [[-c] command]\n"));
 }
 
 /*
  * newgrp - change the invokers current real and effective group id
  */
 
-int
-main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-	int	initflag = 0;
-	int	needspasswd = 0;
-	int	i;
-	int their_grp = 0;
+	int initflag = 0;
+	int needspasswd = 0;
+	int i;
 	int cflag = 0;
 	gid_t gid;
 	char *cp;
 	const char *cpasswd, *name, *prog;
 	char *group = NULL;
-	char	*command=NULL;
-	char	**envp = environ;
+	char *command = NULL;
+	char **envp = environ;
 	struct passwd *pwd;
 	struct group *grp;
+
 #ifdef SHADOWPWD
 	struct spwd *spwd;
 #endif
@@ -97,58 +91,77 @@ main(int argc, char **argv)
 
 #if ENABLE_NLS
 	/* XXX - remove when gettext is safe to use in setuid programs */
-	sanitize_env();
+	sanitize_env ();
 #endif
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
-                  
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
 	/*
-	 * save my name for error messages and save my real gid incase
-	 * of errors.  if there is an error i have to exec a new login
-	 * shell for the user since her old shell won't have fork'd to
-	 * create the process.  skip over the program name to the next
-	 * command line argument.
+	 * Save my name for error messages and save my real gid incase of
+	 * errors. If there is an error i have to exec a new login shell for
+	 * the user since her old shell won't have fork'd to create the
+	 * process. Skip over the program name to the next command line
+	 * argument.
+	 *
+	 * This historical comment, and the code itself, suggest that the
+	 * behavior of the system/shell on which it was written differed
+	 * significantly from the one I am using. If this process was
+	 * started from a shell (including the login shell), it was fork'ed
+	 * and exec'ed as a child by that shell. In order to get the user
+	 * back to that shell, it is only necessary to exit from this
+	 * process which terminates the child of the fork. The parent shell,
+	 * which is blocked waiting for a signal, will then receive a
+	 * SIGCHLD and will continue; any changes made to the process
+	 * persona or the environment after the fork never occurred in the
+	 * parent process.
+	 *
+	 * Bottom line: we want to save the name and real gid for messages,
+	 * but we do not need to restore the previous process persona and we
+	 * don't need to re-exec anything.  -- JWP
 	 */
 
-	Prog = Basename(argv[0]);
-	is_newgrp = (strcmp(Prog, "newgrp") == 0);
-	OPENLOG(is_newgrp ? "newgrp" : "sg");
-	gid = getgid();
-	argc--; argv++;
+	Prog = Basename (argv[0]);
+	is_newgrp = (strcmp (Prog, "newgrp") == 0);
+	OPENLOG (is_newgrp ? "newgrp" : "sg");
+	gid = getgid ();
+	argc--;
+	argv++;
 
-	initenv();
+	initenv ();
 
-	pwd = get_my_pwent();
+	pwd = get_my_pwent ();
 	if (!pwd) {
-		fprintf (stderr, _("unknown uid: %d\n"), (int) getuid());
-		SYSLOG((LOG_WARN, "unknown uid %d\n", (int) getuid()));
-		closelog();
-		exit(1);
+		fprintf (stderr, _("unknown uid: %u\n"), getuid ());
+		SYSLOG ((LOG_WARN, "unknown uid %u", getuid ()));
+		closelog ();
+		exit (1);
 	}
 	name = pwd->pw_name;
 
 	/*
-	 * Parse the command line.  There are two accepted flags.  The
-	 * first is "-", which for newgrp means to re-create the entire
-	 * environment as though a login had been performed, and "-c",
-	 * which for sg causes a command string to be executed.
+	 * Parse the command line. There are two accepted flags. The first
+	 * is "-", which for newgrp means to re-create the entire
+	 * environment as though a login had been performed, and "-c", which
+	 * for sg causes a command string to be executed.
 	 *
-	 * The next argument, if present, must be the new group name.
-	 * Any remaining remaining arguments will be used to execute a
-	 * command as the named group.  If the group name isn't present,
-	 * I just use the login group ID of the current user.
+	 * The next argument, if present, must be the new group name. Any
+	 * remaining remaining arguments will be used to execute a command
+	 * as the named group. If the group name isn't present, I just use
+	 * the login group ID of the current user.
 	 *
 	 * The valid syntax are
-	 *	newgrp [ - ] [ groupid ]
-	 *	newgrp [ -l ] [ groupid ]
-	 *	sg [ - ]
-	 *	sg [ - ] groupid [ command ]
+	 *      newgrp [ - ] [ groupid ]
+	 *      newgrp [ -l ] [ groupid ]
+	 *      sg [ - ]
+	 *      sg [ - ] groupid [ command ]
 	 */
 
-	if (argc > 0 && (!strcmp(argv[0], "-") || !strcmp(argv[0], "-l"))) {
-		argc--; argv++;
+	if (argc > 0
+	    && (!strcmp (argv[0], "-") || !strcmp (argv[0], "-l"))) {
+		argc--;
+		argv++;
 		initflag = 1;
 	}
 	if (!is_newgrp) {
@@ -159,19 +172,22 @@ main(int argc, char **argv)
 
 		if (argc > 0 && argv[0][0] != '-') {
 			group = argv[0];
-			argc--; argv++;
+			argc--;
+			argv++;
 		} else {
 			usage ();
-			closelog();
+			closelog ();
 			exit (1);
 		}
 		if (argc > 0) {
 
-			/* skip -c if specified so both forms work:
-			   "sg group -c command" (as in the man page) or
-			   "sg group command" (as in the usage message).  */
+			/*
+			 * skip -c if specified so both forms work:
+			 * "sg group -c command" (as in the man page) or
+			 * "sg group command" (as in the usage message).
+			 */
 
-			if (argc > 1 && strcmp(argv[0], "-c") == 0)
+			if (argc > 1 && strcmp (argv[0], "-c") == 0)
 				command = argv[1];
 			else
 				command = argv[0];
@@ -180,9 +196,8 @@ main(int argc, char **argv)
 	} else {
 
 		/*
-		 * Do the command line for "newgrp".  It's just
-		 * making sure there aren't any flags and getting
-		 * the new group name.
+		 * Do the command line for "newgrp". It's just making sure
+		 * there aren't any flags and getting the new group name.
 		 */
 
 		if (argc > 0 && argv[0][0] == '-') {
@@ -193,61 +208,92 @@ main(int argc, char **argv)
 		} else {
 
 			/*
-			 * get the group file entry for her login group id.
+			 * get the group file entry for her login group id. 
 			 * the entry must exist, simply to be annoying.
+			 *
+			 * Perhaps in the past, but the default behavior now depends on the
+			 * group entry, so it had better exist.  -- JWP
 			 */
 
-			if (! (grp = getgrgid (pwd->pw_gid))) {
-				fprintf(stderr, _("unknown gid: %ld\n"),
-					(long) pwd->pw_gid);
-				SYSLOG((LOG_CRIT, "unknown gid: %ld\n",
-					(long) pwd->pw_gid));
+			if (!(grp = getgrgid (pwd->pw_gid))) {
+				fprintf (stderr, _("unknown gid: %lu\n"),
+					 (unsigned long) pwd->pw_gid);
+				SYSLOG ((LOG_CRIT, "unknown gid: %lu",
+					 (unsigned long) pwd->pw_gid));
 				goto failure;
-			}
+			} else
+				group = grp->gr_name;
 		}
 	}
 
 #ifdef HAVE_SETGROUPS
 	/*
-	 * get the current users groupset.  the new group will be
-	 * added to the concurrent groupset if there is room, otherwise
-	 * you get a nasty message but at least your real and effective
-	 * group id's are set.
+	 * get the current users groupset. The new group will be added to
+	 * the concurrent groupset if there is room, otherwise you get a
+	 * nasty message but at least your real and effective group id's are
+	 * set.
 	 */
 
 	/* don't use getgroups(0, 0) - it doesn't work on some systems */
 	i = 16;
 	for (;;) {
-		grouplist = (GETGROUPS_T *) xmalloc(i * sizeof(GETGROUPS_T));
-		ngroups = getgroups(i, grouplist);
+		grouplist =
+		    (GETGROUPS_T *) xmalloc (i * sizeof (GETGROUPS_T));
+		ngroups = getgroups (i, grouplist);
 		if (i > ngroups && !(ngroups == -1 && errno == EINVAL))
 			break;
 		/* not enough room, so try allocating a larger buffer */
-		free(grouplist);
+		free (grouplist);
 		i *= 2;
 	}
 	if (ngroups < 0) {
-		perror("getgroups");
-		exit(1);
+		perror ("getgroups");
+		exit (1);
 	}
-#endif /* HAVE_SETGROUPS */
+#endif				/* HAVE_SETGROUPS */
 
 	/*
-	 * now we put her in the new group.  the password file entry for
-	 * her current user id has been gotten.  if there was no optional
-	 * group argument she will have her real and effective group id
-	 * set to the value from her password file entry.  otherwise
-	 * we validate her access to the specified group.
+	 * now we put her in the new group. The password file entry for her
+	 * current user id has been gotten. If there was no optional group
+	 * argument she will have her real and effective group id set to the
+	 * set to the value from her password file entry.  
+	 *
+	 * If run as newgrp, or as sg with no command, this process exec's
+	 * an interactive subshell with the effective gid of the new group. 
+	 * If run as sg with a command, that command is exec'ed in this
+	 * subshell. When this process terminates, either because the user
+	 * exits, or the command completes, the parent of this process
+	 * resumes with the current gid.
+	 *
+	 * If a group is explicitly specified on the command line, the
+	 * interactive shell or command is run with that effective gid. 
+	 * Access will be denied if no entry for that group can be found in
+	 * /etc/group. If the current user name appears in the members list
+	 * for that group, access will be granted immediately; if not, the
+	 * user will be challenged for that group's password. If the
+	 * password response is incorrect, if the specified group does not
+	 * have a password, or if that group has been locked by gpasswd -R,
+	 * access will be denied. This is true even if the group specified
+	 * has the user's login gid (as shown in /etc/passwd). If no group
+	 * is explicitly specified on the command line, the effect is
+	 * exactly the same as if a group name matching the user's login gid
+	 * had been explicitly specified. Root, however, is never
+	 * challenged for passwords, and is always allowed access.
+	 *
+	 * The previous behavior was to allow access to the login group if
+	 * no explicit group was specified, irrespective of the group
+	 * control file(s). This behavior is usually not desirable. A user
+	 * wishing to return to the login group has only to exit back to the
+	 * login shell. Generating yet more shell levels in order to
+	 * provide a convenient "return" to the default group has the
+	 * undesirable side effects of confusing the user, scrambling the
+	 * history file, and consuming system resources. The default now is
+	 * to lock out such behavior. A sys admin can allow it by explicitly
+	 * including the user's name in the member list of the user's login
+	 * group.  -- JWP
 	 */
 
-	if (group == (char *) 0) {
-		if (! (grp = getgrgid (pwd->pw_gid))) {
-			fprintf (stderr, _("unknown gid: %d\n"), pwd->pw_gid);
-			goto failure;
-		}
-		group = grp->gr_name;
-		their_grp = 1;
-	} else if (! (grp = getgrnam (group))) {
+	if (!(grp = getgrnam (group))) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 		goto failure;
 	}
@@ -259,23 +305,19 @@ main(int argc, char **argv)
 #endif
 
 	/*
-	 * see if she is a member of this group.
-	 * if she isn't a member, she needs to provide the
-	 * group password.  if there is no group password, she
-	 * will be denied access anyway.
+	 * see if she is a member of this group. If she isn't a member, she
+	 * needs to provide the group password. If there is no group
+	 * password, she will be denied access anyway.
 	 *
-	 * we also check if this is the users default group, eg.
-	 * they aren't a member, but this is the group listed as
-	 * the one they belong to in their pwd entry.
 	 */
 
-	if (!is_on_list(grp->gr_mem, name) && !their_grp)
+	if (!is_on_list (grp->gr_mem, name))
 		needspasswd = 1;
 
 	/*
-	 * if she does not have either a shadowed password,
-	 * or a regular password, and the group has a password,
-	 * she needs to give the group password.
+	 * If she does not have either a shadowed password, or a regular
+	 * password, and the group has a password, she needs to give the
+	 * group password.
 	 */
 
 #ifdef	SHADOWPWD
@@ -287,12 +329,13 @@ main(int argc, char **argv)
 		needspasswd = 1;
 
 	/*
-	 * now i see about letting her into the group she requested.
-	 * if she is the root user, i'll let her in without having to
-	 * prompt for the password.  otherwise i ask for a password
-	 * if she flunked one of the tests above.  note that she
-	 * won't have to provide the password to her login group even
-	 * if she isn't listed as a member.
+	 * Now i see about letting her into the group she requested. If she
+	 * is the root user, i'll let her in without having to prompt for
+	 * the password. Otherwise i ask for a password if she flunked one
+	 * of the tests above.
+	 *
+	 * Note that she now has to provide the password to her own group,
+	 * unless she is listed as a member.  -- JWP
 	 */
 
 	if (getuid () != 0 && needspasswd) {
@@ -302,116 +345,190 @@ main(int argc, char **argv)
 		 * the decryption from the group file.
 		 */
 
-		if (! (cp = getpass (_("Password: "))))
+		if (!(cp = getpass (_("Password: "))))
 			goto failure;
 
 		/*
-		 * encrypt the key she gave us using the salt from
-		 * the password in the group file.  the result of
-		 * this encryption must match the previously
-		 * encrypted value in the file.
+		 * encrypt the key she gave us using the salt from the
+		 * password in the group file. The result of this encryption
+		 * must match the previously encrypted value in the file.
 		 */
 
 		cpasswd = pw_encrypt (cp, grp->gr_passwd);
-		strzero(cp);
+		strzero (cp);
 
 		if (grp->gr_passwd[0] == '\0') {
-		/*
-		 * there is no password, print out "Sorry" and give up
-		 */
-			sleep(1);
+			/*
+			 * there is no password, print out "Sorry" and give up
+			 */
+			sleep (1);
 			fputs (_("Sorry.\n"), stderr);
 			goto failure;
 		}
 
 		if (strcmp (cpasswd, grp->gr_passwd) != 0) {
-			SYSLOG((LOG_INFO,
-				"Invalid password for group `%s' from `%s'\n",
-				group, name));
-			sleep(1);
+			SYSLOG ((LOG_INFO,
+				 "Invalid password for group `%s' from `%s'",
+				 group, name));
+			sleep (1);
 			fputs (_("Sorry.\n"), stderr);
 			goto failure;
 		}
 	}
 
 	/*
-	 * all successful validations pass through this point.  the
-	 * group id will be set, and the group added to the concurrent
-	 * groupset.
+	 * all successful validations pass through this point. The group id
+	 * will be set, and the group added to the concurrent groupset.
 	 */
 
 #ifdef	USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SG_ENAB"))
-		SYSLOG((LOG_INFO, "user `%s' switched to group `%s'\n",
-			name, group));
-#endif
+		SYSLOG ((LOG_INFO, "user `%s' switched to group `%s'",
+			 name, group));
+	if (getdef_bool ("SYSLOG_SG_ENAB")) {
+		char *loginname = xstrdup (getlogin ());
+		char *tty = xstrdup (ttyname (0));
+
+		if (loginname == NULL)
+			loginname = "???";
+		if (tty == NULL)
+			tty = "???";
+		else if (strncmp (tty, "/dev/", 5) == 0)
+			tty += 5;
+		SYSLOG ((LOG_INFO,
+			 "user `%s' (login `%s' on %s) switched to group `%s'",
+			 name, loginname, tty, group));
+		if (getdef_bool ("CLOSE_SESSIONS")) {
+			/*
+			 * We want to fork and exec the new shell in the child, leaving the
+			 * parent waiting to log the session close.
+			 *
+			 * The parent must ignore signals generated from the console
+			 * (SIGINT, SIGQUIT, SIGHUP) which might make the parent terminate
+			 * before its child. When bash is exec'ed as the subshell, it
+			 * generates a new process group id for itself, and consequently
+			 * only SIGHUP, which is sent to all process groups in the session,
+			 * can reach the parent. However, since arbitrary programs can be
+			 * specified as login shells, there is no such guarantee in general.
+			 * For the same reason, we must also ignore stop signals generated
+			 * from the console (SIGTSTP, SIGTTIN, and SIGTTOU) in order to
+			 * avoid any possibility of the parent being stopped when it
+			 * receives SIGCHLD from the terminating subshell.  -- JWP
+			 */
+			pid_t child, pid;
+
+			signal (SIGINT, SIG_IGN);
+			signal (SIGQUIT, SIG_IGN);
+			signal (SIGHUP, SIG_IGN);
+			signal (SIGTSTP, SIG_IGN);
+			signal (SIGTTIN, SIG_IGN);
+			signal (SIGTTOU, SIG_IGN);
+			child = fork ();
+			if (child < 0) {
+				/* error in fork() */
+				fprintf (stderr, "%s: failure forking: %s",
+					 is_newgrp ? "newgrp" : "sg",
+					 strerror (errno));
+				exit (1);
+			} else if (child) {
+				/* parent - wait for child to finish, then log session close */
+				do {
+					pid = waitpid (child, NULL, 0);
+				} while (pid != child);
+				SYSLOG ((LOG_INFO,
+					 "user `%s' (login `%s' on %s) returned to group `%s'",
+					 name, loginname, tty,
+					 getgrgid (gid)->gr_name));
+				closelog ();
+				exit (0);
+			}
+			/* child - restore signals to their default state */
+			signal (SIGINT, SIG_DFL);
+			signal (SIGQUIT, SIG_DFL);
+			signal (SIGHUP, SIG_DFL);
+			signal (SIGTSTP, SIG_DFL);
+			signal (SIGTTIN, SIG_DFL);
+			signal (SIGTTOU, SIG_DFL);
+		}
+	}
+#endif				/* USE_SYSLOG */
+
 	gid = grp->gr_gid;
 
 #ifdef HAVE_SETGROUPS
 	/*
-	 * i am going to try to add her new group id to her concurrent
-	 * group set.  if the group id is already present i'll just
-	 * skip this part.  if the group doesn't fit, i'll complain
-	 * loudly and skip this part ...
+	 * I am going to try to add her new group id to her concurrent group
+	 * set. If the group id is already present i'll just skip this part. 
+	 * If the group doesn't fit, i'll complain loudly and skip this
+	 * part.
 	 */
 
-	for (i = 0;i < ngroups;i++) {
+	for (i = 0; i < ngroups; i++) {
 		if (gid == grouplist[i])
 			break;
 	}
 	if (i == ngroups) {
-		if (ngroups >= sysconf(_SC_NGROUPS_MAX)) {
+		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
 			fprintf (stderr, _("too many groups\n"));
 		} else {
 			grouplist[ngroups++] = gid;
-			if (setgroups(ngroups, grouplist)) {
-				perror("setgroups");
+			if (setgroups (ngroups, grouplist)) {
+				perror ("setgroups");
 			}
 		}
 	}
 #endif
 
-okay:
 	/*
-	 * i set her group id either to the value she requested, or
-	 * to the original value if the newgrp failed.
+	 * Set the effective gid to the new group id and the effective uid
+	 * to the real uid. For root, this also sets the real gid to the
+	 * new group id.
 	 */
 
-	if (setgid(gid))
-		perror("setgid");
+	if (setgid (gid))
+		perror ("setgid");
 
-	if (setuid(getuid())) {
-		perror("setuid");
-		exit(1);
+	if (setuid (getuid ())) {
+		perror ("setuid");
+		exit (1);
 	}
 
 	/*
-	 * see if the "-c" flag was used.  if it was, i just create a
-	 * shell command for her using the argument that followed the
-	 * "-c" flag.
+	 * See if the "-c" flag was used. If it was, i just create a shell
+	 * command for her using the argument that followed the "-c" flag.
 	 */
 
 	if (cflag) {
-		closelog();
-		execl("/bin/sh", "sh", "-c", command, (char *) 0);
+		closelog ();
+		execl ("/bin/sh", "sh", "-c", command, (char *) 0);
 		if (errno == ENOENT) {
-			perror("/bin/sh");
-			exit(127);
+			perror ("/bin/sh");
+			exit (127);
 		} else {
-			perror("/bin/sh");
-			exit(126);
+			perror ("/bin/sh");
+			exit (126);
 		}
 	}
 
 	/*
-	 * i have to get the pathname of her login shell.  as a favor,
-	 * i'll try her environment for a $SHELL value first, and
-	 * then try the password file entry.  obviously this shouldn't
-	 * be in the restricted command directory since it could be
-	 * used to leave the restricted environment.
+	 * I have to get the pathname of her login shell. As a favor, i'll
+	 * try her environment for a $SHELL value first, and then try the
+	 * password file entry. Obviously this shouldn't be in the
+	 * restricted command directory since it could be used to leave the
+	 * restricted environment.
+	 *
+	 * Note that the following assumes this user's entry in /etc/passwd
+	 * does not have a chroot * prefix. If it does, the * will be copied
+	 * verbatim into the exec path. This is probably not an issue
+	 * because if this user is operating in a chroot jail, her entry in
+	 * the version of /etc/passwd that is accessible here should
+	 * probably never have a chroot shell entry (but entries for other
+	 * users might). If I have missed something, and this causes you a
+	 * problem, try using $SHELL as a workaround; also please notify me
+	 * at jparmele@wildbear.com -- JWP
 	 */
 
-	if (! initflag && (cp = getenv ("SHELL")))
+	if (!initflag && (cp = getenv ("SHELL")))
 		prog = cp;
 	else if (pwd->pw_shell && pwd->pw_shell[0])
 		prog = pwd->pw_shell;
@@ -419,11 +536,11 @@ okay:
 		prog = "/bin/sh";
 
 	/*
-	 * now i try to find the basename of the login shell.  this
-	 * will become argv[0] of the spawned command.
+	 * Now i try to find the basename of the login shell. This will
+	 * become argv[0] of the spawned command.
 	 */
 
-	cp = Basename((char *) prog);
+	cp = Basename ((char *) prog);
 
 #ifdef	SHADOWPWD
 	endspent ();
@@ -435,65 +552,54 @@ okay:
 	endgrent ();
 
 	/*
-	 * switch back to her home directory if i am doing login
+	 * Switch back to her home directory if i am doing login
 	 * initialization.
 	 */
 
 	if (initflag) {
 		if (chdir (pwd->pw_dir))
-			perror("chdir");
+			perror ("chdir");
 
 		while (*envp) {
 			if (strncmp (*envp, "PATH=", 5) == 0 ||
-					strncmp (*envp, "HOME=", 5) == 0 ||
-					strncmp (*envp, "SHELL=", 6) == 0 ||
-					strncmp (*envp, "TERM=", 5) == 0)
-				addenv(*envp, NULL);
+			    strncmp (*envp, "HOME=", 5) == 0 ||
+			    strncmp (*envp, "SHELL=", 6) == 0 ||
+			    strncmp (*envp, "TERM=", 5) == 0)
+				addenv (*envp, NULL);
 
 			envp++;
 		}
 	} else {
 		while (*envp)
-			addenv(*envp++, NULL);
+			addenv (*envp++, NULL);
 	}
 
-	/* sanitize_env() removes $HOME from the environment (maybe it
-	   shouldn't - please tell me if you are sure that $HOME can't
-	   cause security problems) - add it from user's passwd entry.
-	*/
-	addenv("HOME", pwd->pw_dir);
+	/*
+	 * Sanitize_env() removes $HOME from the environment (maybe it
+	 * shouldn't - please tell me if you are sure that $HOME can't cause
+	 * security problems) - add it from user's passwd entry.
+	 */
+	addenv ("HOME", pwd->pw_dir);
 
 	/*
-	 * exec the login shell and go away.  we are trying to get
-	 * back to the previous environment which should be the
-	 * user's login shell.
+	 * Exec the login shell and go away. We are trying to get back to
+	 * the previous environment which should be the user's login shell.
 	 */
 
-	shell(prog, initflag ? (char *)0 : cp);
-	/*NOTREACHED*/
-
-failure:
-	/*
-	 * this is where all failures land.  the group id will not
-	 * have been set, so the setgid() below will set me to the
-	 * original group id i had when i was invoked.
-	 */
+	shell (prog, initflag ? (char *) 0 : cp);
+       /*NOTREACHED*/ failure:
 
 	/*
-	 * only newgrp needs to re-exec the user's shell.  that is
-	 * because the shell doesn't recognize "sg", so it doesn't
-	 * "exec" this command.
+	 * The previous code, when run as newgrp, re-exec'ed the shell in
+	 * the current process with the original gid on error conditions. 
+	 * See the comment above. This historical behavior now has the
+	 * effect of creating unlogged extraneous shell layers when the
+	 * command line has an error or there is an authentication failure.
+	 * We now just want to exit with error status back to the parent
+	 * process. The closelog is probably unnecessary, but it does no
+	 * harm.  -- JWP
 	 */
 
-	if (!is_newgrp) {
-		closelog();
-		exit (1);
-	}
-	
-	/*
-	 * The GID is still set to the old value, so now I can
-	 * give the user back her shell.
-	 */
-
-	goto okay;
+	closelog ();
+	exit (1);
 }

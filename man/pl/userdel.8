@@ -1,4 +1,4 @@
-.\" $Id: userdel.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
+.\" $Id: userdel.8,v 1.7 2001/12/22 07:18:47 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -65,83 +65,7 @@ Musi to zostaæ wykonane na serwerze NIS.
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
 .SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
-shadow-password.
-Istnieje wiele programów i skryptów do zarz±dzania kontami
-u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
-siê, ¿e korzystasz z w³a¶ciwej dokumentacji.
-.\" {PTM/WK/0.1/VIII-1999}
-.\" Copyright 1991 - 1994, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: userdel.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
-.\"
-.TH USERDEL 8
-.SH NAZWA
-userdel \- usuñ konto u¿ytkownika i powi±zane pliki
-.SH SK£ADNIA
-.B userdel
-.RB [ -r ]
-.I login
-.SH OPIS
-Polecenie \fBuserdel\fR zmienia systemowe pliki kont, usuwaj±c wszystkie
-zapisy odnosz±ce siê do \fIlogin\fR.
-Podany u¿ytkownik musi istnieæ.
-.TP
-.B -r
-Zostan± usuniête zarówno pliki w katalogu domowym u¿ytkownika jak
-i sam ten katalog.
-Pliki po³o¿one w innym systemie plików musz± byæ odszukane i usuniête rêcznie.
-.SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
-.br
-.IR /etc/shadow " - bezpieczna informacja o kontach u¿ytkowników"
-.br
-.IR /etc/group "  - informacja o grupach"
-.SH PRZESTROGI
-\fBuserdel\fR nie pozwoli na usuniêcie konta aktualnie zalogowanego
-u¿ytkownika. Musisz usun±æ wszystkie uruchomione procesy nale¿±ce
-do usuwanego konta. 
-Nie mo¿esz usun±æ ¿adnych atrybutów NIS klienta NIS.
-Musi to zostaæ wykonane na serwerze NIS.
-.SH ZOBACZ TAK¯E
-.BR chfn (1),
-.BR chsh (1),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR useradd (8),
-.BR usermod (8).
-.SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
-shadow-password.
-Istnieje wiele programów i skryptów do zarz±dzania kontami
-u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
-siê, ¿e korzystasz z w³a¶ciwej dokumentacji.
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
+Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
+grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

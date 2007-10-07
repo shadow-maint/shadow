@@ -109,39 +109,55 @@ install_sh = @install_sh@
 mandir = @mandir@/ja
 
 man_MANS = \
+	adduser.8 \
 	chage.1 \
 	chfn.1 \
+	chpasswd.8 \
 	chsh.1 \
-	gpasswd.1 \
-	login.1 \
-	newgrp.1 \
-	passwd.1 \
-	su.1 \
-	shadow.3 \
 	faillog.5 \
-	login.access.5 \
-	login.defs.5 \
-	passwd.5 \
-	porttime.5 \
-	shadow.5 \
-	suauth.5 \
-        chpasswd.8 \
 	faillog.8 \
+	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
 	groupmod.8 \
 	grpck.8 \
+	grpconv.8 \
+	grpunconv.8 \
 	lastlog.8 \
+	limits.5 \
+	login.1 \
+	login.access.5 \
+	login.defs.5 \
 	logoutd.8 \
 	mkpasswd.8 \
+	newgrp.1 \
+	newusers.8 \
+	passwd.1 \
+	passwd.5 \
+	porttime.5 \
 	pwck.8 \
 	pwconv.8 \
+	pwunconv.8 \
+	sg.1 \
+	shadow.5 \
+	su.1 \
+	suauth.5 \
+	useradd.8 \
 	userdel.8 \
-	usermod.8
+	usermod.8 \
+	vigr.8 \
+	vipw.8
 
 
 EXTRA_DIST = $(man_MANS) \
-	pw_auth.3 pwauth.8 sulogin.8 dpasswd.8
+	dpasswd.8 \
+	groups.1 \
+	id.1 \
+	pw_auth.3 \
+	pwauth.8 \
+	shadow.3 \
+	shadowconfig.8 \
+	sulogin.8
 
 subdir = man/ja
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -210,45 +226,6 @@ uninstall-man1:
 	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
 	  echo " rm -f $(DESTDIR)$(man1dir)/$$inst"; \
 	  rm -f $(DESTDIR)$(man1dir)/$$inst; \
-	done
-
-man3dir = $(mandir)/man3
-install-man3: $(man3_MANS) $(man_MANS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(man3dir)
-	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
-	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
-	for i in $$l2; do \
-	  case "$$i" in \
-	    *.3*) list="$$list $$i" ;; \
-	  esac; \
-	done; \
-	for i in $$list; do \
-	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
-	  else file=$$i; fi; \
-	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
-	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
-	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
-	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
-	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst"; \
-	  $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst; \
-	done
-uninstall-man3:
-	@$(NORMAL_UNINSTALL)
-	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
-	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
-	for i in $$l2; do \
-	  case "$$i" in \
-	    *.3*) list="$$list $$i" ;; \
-	  esac; \
-	done; \
-	for i in $$list; do \
-	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
-	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
-	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
-	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
-	  echo " rm -f $(DESTDIR)$(man3dir)/$$inst"; \
-	  rm -f $(DESTDIR)$(man3dir)/$$inst; \
 	done
 
 man5dir = $(mandir)/man5
@@ -358,7 +335,7 @@ check: check-am
 all-am: Makefile $(MANS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(man1dir) $(DESTDIR)$(man3dir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir)
+	$(mkinstalldirs) $(DESTDIR)$(man1dir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir)
 
 install: install-am
 install-exec: install-exec-am
@@ -405,7 +382,7 @@ install-exec-am:
 
 install-info: install-info-am
 
-install-man: install-man1 install-man3 install-man5 install-man8
+install-man: install-man1 install-man5 install-man8
 
 installcheck-am:
 
@@ -419,20 +396,18 @@ mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
 uninstall-am: uninstall-info-am uninstall-man
 
-uninstall-man: uninstall-man1 uninstall-man3 uninstall-man5 \
-	uninstall-man8
+uninstall-man: uninstall-man1 uninstall-man5 uninstall-man8
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am info info-am install install-am install-data \
 	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-man1 install-man3 \
-	install-man5 install-man8 install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool uninstall uninstall-am uninstall-info-am \
-	uninstall-man uninstall-man1 uninstall-man3 uninstall-man5 \
-	uninstall-man8
+	install-info-am install-man install-man1 install-man5 \
+	install-man8 install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic mostlyclean-libtool uninstall \
+	uninstall-am uninstall-info-am uninstall-man uninstall-man1 \
+	uninstall-man5 uninstall-man8
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

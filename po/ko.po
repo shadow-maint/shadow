@@ -1,0 +1,2477 @@
+# shadow korean translations
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# Hwang, SangJin <accel@accellinux.org>, 1999.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: shadow\n"
+"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"PO-Revision-Date: 2001-02-03 15:09+0900\n"
+"Last-Translator: Hwang, Sang-Jin <violiet@suse.de>\n"
+"Language-Team: Korean <ko@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=euc-kr\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libmisc/addgrps.c:60
+#, c-format
+msgid "Warning: unknown group %s\n"
+msgstr "경고: 알 수 없는 그룹(%s)\n"
+
+#: libmisc/addgrps.c:71
+msgid "Warning: too many groups\n"
+msgstr "경고: 그룹수가 너무 많음\n"
+
+#: libmisc/age.c:77
+msgid "Your password has expired."
+msgstr "패스워드 사용기한이 지났습니다."
+
+#: libmisc/age.c:80
+msgid "Your password is inactive."
+msgstr "패스워드 사용기간 초과로 사용할 수 없습니다."
+
+#: libmisc/age.c:83
+msgid "Your login has expired."
+msgstr "로그인 사용기한이 지났습니다"
+
+#: libmisc/age.c:96
+msgid "  Contact the system administrator.\n"
+msgstr "  시스템 관리자와 상담하십시오.\n"
+
+#: libmisc/age.c:99
+msgid "  Choose a new password.\n"
+msgstr "  새로운 패스워드를 선택하세요.\n"
+
+#: libmisc/age.c:176
+#, c-format
+msgid "Your password will expire in %ld days.\n"
+msgstr "패스워드 사용기한이 %ld일에 끝납니다.\n"
+
+#: libmisc/age.c:178
+msgid "Your password will expire tomorrow.\n"
+msgstr "패스워드 사용기한이 내일 끝납니다.\n"
+
+#: libmisc/age.c:180
+msgid "Your password will expire today.\n"
+msgstr "패스워드 사용기한이 오늘 끝납니다.\n"
+
+#: libmisc/chowntty.c:113
+#, c-format
+msgid "Unable to change tty %s"
+msgstr "tty(단말터미널) %s로 변경할 수 없음"
+
+#: libmisc/env.c:160
+msgid "Environment overflow\n"
+msgstr ""
+
+#: libmisc/env.c:200
+#, c-format
+msgid "You may not change $%s\n"
+msgstr "$%s는 변경되어 있지 않은것 같습니다\n"
+
+#: libmisc/failure.c:238
+#, c-format
+msgid "%d %s since last login.  Last was %s on %s.\n"
+msgstr "마지막 로그인으로부터 %d회의 %s입니다. 마지막 로그인은 %s 장소 %s.\n"
+
+#: libmisc/failure.c:239
+msgid "failures"
+msgstr "실패"
+
+#: libmisc/failure.c:239
+msgid "failure"
+msgstr "실패"
+
+#: libmisc/limits.c:397
+msgid "Too many logins.\n"
+msgstr "로그인수가 많습니다.\n"
+
+#: libmisc/login_desrpc.c:63
+#, c-format
+msgid "Password does not decrypt secret key for %s.\n"
+msgstr "패스워드가 %s의 비밀키를 해석할 수 없음.\n"
+
+#: libmisc/login_desrpc.c:69
+#, c-format
+msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
+msgstr "%s의 비밀열쇠를 설정할 수 없습니다: keyserv데몬이 현재 실행중입니까?\n"
+
+#: libmisc/mail.c:62 libmisc/mail.c:77
+msgid "You have new mail."
+msgstr "새로운 메일이 도착하였습니다."
+
+#: libmisc/mail.c:73
+msgid "No mail."
+msgstr "메일 없음."
+
+#: libmisc/mail.c:75
+msgid "You have mail."
+msgstr "메일이 있습니다."
+
+#: libmisc/obscure.c:281 src/passwd.c:244
+#, c-format
+msgid "Bad password: %s.  "
+msgstr "잘못된 패스워드: %s.  "
+
+#: libmisc/pam_pass.c:42
+#, c-format
+msgid "passwd: pam_start() failed, error %d\n"
+msgstr "패스워드: pam_start()에 실패했습니다, 오류 %d\n"
+
+#: libmisc/pam_pass.c:49
+#, c-format
+msgid "passwd: %s\n"
+msgstr "패스워드: %s\n"
+
+#: libmisc/setupenv.c:211
+#, c-format
+msgid "Unable to cd to \"%s\"\n"
+msgstr "디렉토리를 \"%s\"로 이동할 수 없습니다\n"
+
+#: libmisc/setupenv.c:219
+msgid "No directory, logging in with HOME=/"
+msgstr "디렉토리가 없음, 루트 디렉토리(/)로 로그인합니다"
+
+#: libmisc/shell.c:78
+#, c-format
+msgid "Executing shell %s\n"
+msgstr "%s 쉘을 실행합니다\n"
+
+#.
+#. * Obviously something is really wrong - I can't figure out
+#. * how to execute this stupid shell, so I might as well give
+#. * up in disgust ...
+#.
+#: libmisc/shell.c:122
+#, c-format
+msgid "Cannot execute %s"
+msgstr "%s를 실행할 수 없음"
+
+#: libmisc/suauth.c:99
+msgid "Access to su to that account DENIED.\n"
+msgstr "이 어카운트로 su로 접근제어하는 허가가 없음.\n"
+
+#: libmisc/suauth.c:106
+msgid "Password authentication bypassed.\n"
+msgstr "패스워드 인증이 무시되었습니다.\n"
+
+#: libmisc/suauth.c:113
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "사용자 자신의 패스워드를 인증으로써 입력을 하십시오.\n"
+
+#: libmisc/sub.c:61
+#, c-format
+msgid "Invalid root directory \"%s\"\n"
+msgstr "홈 디렉토리 \"%s\"가 잘못되었습니다\n"
+
+#: libmisc/sub.c:73
+#, c-format
+msgid "Can't change root directory to \"%s\"\n"
+msgstr "루트 디렉토리를 \"%s\"로 변경할 수 없음\n"
+
+#: libmisc/xmalloc.c:28
+#, c-format
+msgid "malloc(%d) failed\n"
+msgstr "malloc(%d)에 실패했음\n"
+
+#: lib/dialchk.c:71
+msgid "Dialup Password: "
+msgstr "다이얼업 패스워드: "
+
+#: lib/getdef.c:276
+msgid "Could not allocate space for config info.\n"
+msgstr "설정 정보를 위한 공간 확보를 할 수 없습니다.\n"
+
+#.
+#. * Item was never found.
+#.
+#: lib/getdef.c:330
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "설정 오류 - 알 수 없는키 '%s'가 있음 (관리자에게 연락바람)\n"
+
+#: lib/getdef.c:417
+#, c-format
+msgid "error - lookup '%s' failed\n"
+msgstr "오류 - '%s'의 검색에 실패\n"
+
+#: lib/getdef.c:425
+#, c-format
+msgid "%s not found\n"
+msgstr "%s가 발견되지 않음\n"
+
+#.
+#. * get the password from her, and set the salt for
+#. * the decryption from the group file.
+#.
+#: lib/pwauth.c:54 src/newgrp.c:348
+msgid "Password: "
+msgstr "패스워드: "
+
+#: lib/pwauth.c:56
+#, c-format
+msgid "%s's Password: "
+msgstr "%s의 패스워드: "
+
+#: lib/pwauth.c:270
+msgid "(Echo on) "
+msgstr ""
+
+#: lib/strerror.c:20
+#, c-format
+msgid "Unknown error %d"
+msgstr "알 수 없는 오류 %d"
+
+#: src/chage.c:116
+#, c-format
+msgid ""
+"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"\t[-I inactive] [-E expire] [-d last_day] user\n"
+msgstr ""
+"사용법: %s [-l] [-m 최소일수] [-M 최대일수] [-W 경고일수]\n"
+"\t[-I 무효일수] [-E 만료일수] [-d 새 패스워드 변경일] 사용자명\n"
+
+#: src/chage.c:122
+#, c-format
+msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+msgstr "사용법: %s [-l] [-m 최소일수] [-M 최대일수] [-W 경고일수] 사용자\n"
+
+#: src/chage.c:157
+#, fuzzy
+msgid ""
+"Enter the new value, or press ENTER for the default\n"
+"\n"
+msgstr "새로운 값을 넣거나, 디폴트 값을 원한다면 ENTER키를 치세요.\n"
+
+#: src/chage.c:160
+msgid "Minimum Password Age"
+msgstr "최소 패스워드 연령"
+
+#: src/chage.c:166
+msgid "Maximum Password Age"
+msgstr "최대 패스워드 연령"
+
+#: src/chage.c:174
+msgid "Last Password Change (YYYY-MM-DD)"
+msgstr "마지막 패스워드 변경 (YYYY-MM-DD)"
+
+#: src/chage.c:183
+msgid "Password Expiration Warning"
+msgstr "패스워드 사용만기일 초과 경고"
+
+#: src/chage.c:189
+msgid "Password Inactive"
+msgstr "패스워드가 유효하지 않음"
+
+#: src/chage.c:197
+msgid "Account Expiration Date (YYYY-MM-DD)"
+msgstr "계정 사용일 만기 일(YYYY-MM-DD)"
+
+#.
+#. * Start with the easy numbers - the number of days before the
+#. * password can be changed, the number of days after which the
+#. * password must be chaged, the number of days before the password
+#. * expires that the user is told, and the number of days after the
+#. * password expires that the account becomes unusable.
+#.
+#: src/chage.c:248
+#, c-format
+msgid "Minimum:\t%ld\n"
+msgstr "최소:\t%ld\n"
+
+#: src/chage.c:249
+#, c-format
+msgid "Maximum:\t%ld\n"
+msgstr "최대:\t%ld\n"
+
+#: src/chage.c:251
+#, c-format
+msgid "Warning:\t%ld\n"
+msgstr "경고:\t%ld\n"
+
+#: src/chage.c:252
+#, c-format
+msgid "Inactive:\t%ld\n"
+msgstr "유효하지 않음:\t%ld\n"
+
+#.
+#. * The "last change" date is either "Never" or the date the password
+#. * was last modified. The date is the number of days since 1/1/1970.
+#.
+#: src/chage.c:260
+msgid "Last Change:\t\t"
+msgstr "마지막 변경:\t\t"
+
+#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+msgid "Never\n"
+msgstr "불가\n"
+
+#.
+#. * The password expiration date is determined from the last change
+#. * date plus the number of days the password is valid for.
+#.
+#: src/chage.c:273
+msgid "Password Expires:\t"
+msgstr "패스워드 만기:\t"
+
+#.
+#. * The account becomes inactive if the password is expired for more
+#. * than "inactdays". The expiration date is calculated and the
+#. * number of inactive days is added. The resulting date is when the
+#. * active will be disabled.
+#.
+#: src/chage.c:290
+msgid "Password Inactive:\t"
+msgstr "패스워드가 유효하지 않음:\t"
+
+#.
+#. * The account will expire on the given date regardless of the
+#. * password expiring or not.
+#.
+#: src/chage.c:304
+msgid "Account Expires:\t"
+msgstr "계정 만기:\t"
+
+#: src/chage.c:468
+#, c-format
+msgid "%s: do not include \"l\" with other flags\n"
+msgstr "%s: \"l\" 와 함께 다른 flags를 포함하지 말것\n"
+
+#: src/chage.c:481 src/chage.c:652 src/login.c:516
+#, c-format
+msgid "%s: permission denied\n"
+msgstr "%s: 접근권한 없음\n"
+
+#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
+#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
+#: src/usermod.c:1732
+#, fuzzy, c-format
+msgid "%s: PAM authentication failed\n"
+msgstr "%s: 인증방법 추가하는데 오류\n"
+
+#: src/chage.c:533 src/chpasswd.c:157
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: 패스워드 파일을 lock할 수 없습니다\n"
+
+#: src/chage.c:544 src/chpasswd.c:162
+#, c-format
+msgid "%s: can't open password file\n"
+msgstr "패스워드 파일을 열수가 없습니다\n"
+
+#: src/chage.c:552
+#, c-format
+msgid "%s: unknown user: %s\n"
+msgstr "알수없는 사용자: %s\n"
+
+#: src/chage.c:571
+#, fuzzy, c-format
+msgid "%s: can't lock shadow password file"
+msgstr "쉐도우 패스워드 파일을 lock할 수 없습니다\n"
+
+#: src/chage.c:579
+#, fuzzy, c-format
+msgid "%s: can't open shadow password file"
+msgstr "쉐도우 패스워드 파일을 열수가 없습니다\n"
+
+#: src/chage.c:674
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "%s의 연령에 대한 정보를 갱신합니다 %s\n"
+
+#: src/chage.c:677
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: 항목을 바꾸는 도중 오류가 발생했습니다\n"
+
+#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#, c-format
+msgid "%s: can't update password file\n"
+msgstr "패스워드 파일을 업데이트 할 수 없습니다\n"
+
+#: src/chage.c:737 src/pwunconv.c:168
+#, c-format
+msgid "%s: can't update shadow password file\n"
+msgstr "쉐도우 패스워드 파일을 업데이트 할 수 없습니다\n"
+
+#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
+#: src/passwd.c:747 src/passwd.c:859
+msgid "Error updating the DBM password entry.\n"
+msgstr "DBM 페스워드 입력부분을 업데이트 하는데 오류가 발생했습니다.\n"
+
+#: src/chage.c:823
+#, c-format
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "쉐도우 패스워드 파일을 다시 작성할 수 없습니다\n"
+
+#: src/chage.c:838
+#, c-format
+msgid "%s: can't rewrite password file\n"
+msgstr "패스워드 파일을 다시 작성할 수 없습니다\n"
+
+#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
+#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
+#: src/usermod.c:1811
+#, fuzzy, c-format
+msgid "%s: PAM chauthtok failed\n"
+msgstr "%s: 파일 잠금을 풀 수 없습니다\n"
+
+#: src/chfn.c:83
+#, c-format
+msgid ""
+"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+"\t[-h home_ph] [-o other] [user]\n"
+msgstr ""
+"사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호]\n"
+"\t[-h 집_전화번호] [-o 기타] [사용자]\n"
+
+#: src/chfn.c:88
+#, c-format
+msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgstr ""
+"사용법: %s [-f 이름] [-r 방_번호] [-w 직장_전화번호] [-h 집_전화번호]\n"
+
+#: src/chfn.c:139
+msgid "Enter the new value, or press ENTER for the default\n"
+msgstr "새로운 값을 넣거나, 디폴트를 원하면 엔터를 치세요\n"
+
+#: src/chfn.c:142
+msgid "Full Name"
+msgstr "이름"
+
+#: src/chfn.c:144
+#, c-format
+msgid "\tFull Name: %s\n"
+msgstr "\t이름: %s\n"
+
+#: src/chfn.c:147
+msgid "Room Number"
+msgstr "방 번호"
+
+#: src/chfn.c:149
+#, c-format
+msgid "\tRoom Number: %s\n"
+msgstr "\t방 번호: %s\n"
+
+#: src/chfn.c:152
+msgid "Work Phone"
+msgstr "직장 번화번호"
+
+#: src/chfn.c:154
+#, c-format
+msgid "\tWork Phone: %s\n"
+msgstr "\t직장 전화번호: %s\n"
+
+#: src/chfn.c:157
+msgid "Home Phone"
+msgstr "집 전화번호"
+
+#: src/chfn.c:159
+#, c-format
+msgid "\tHome Phone: %s\n"
+msgstr "\t집 전화번호: %s\n"
+
+#: src/chfn.c:162
+msgid "Other"
+msgstr "기타"
+
+#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
+#: src/chfn.c:379 src/passwd.c:1115
+#, c-format
+msgid "%s: Permission denied.\n"
+msgstr "접근권한 없음.\n"
+
+#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#, c-format
+msgid "%s: Unknown user %s\n"
+msgstr "알수없는 사용자 %s\n"
+
+#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: 사용자 이름을 인식할 수 없습니다.\n"
+
+#: src/chfn.c:358 src/chsh.c:215
+#, c-format
+msgid "%s: cannot change user `%s' on NIS client.\n"
+msgstr "NIS 클라이언트에서 '%s'의 사용자 이름을 변경할 수 없습니다.\n"
+
+#: src/chfn.c:366 src/chsh.c:223
+#, c-format
+msgid "%s: `%s' is the NIS master for this client.\n"
+msgstr "%s: 현재의 클라이언트에 대하여 '%s'가 NIS 마스터입니다.\n"
+
+#: src/chfn.c:441
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "%s에 대하여 사용자의 정보를 바꿉니다\n"
+
+#: src/chfn.c:450
+#, c-format
+msgid "%s: invalid name: \"%s\"\n"
+msgstr "%s: 유효하지 않는 이름: \"%s\"\n"
+
+#: src/chfn.c:456
+#, c-format
+msgid "%s: invalid room number: \"%s\"\n"
+msgstr "유효하지 않는 방 번호: \"%s\"\n"
+
+#: src/chfn.c:462
+#, c-format
+msgid "%s: invalid work phone: \"%s\"\n"
+msgstr "유효하지 않는 직장 전화번호: \"%s\"\n"
+
+#: src/chfn.c:468
+#, c-format
+msgid "%s: invalid home phone: \"%s\"\n"
+msgstr "%s: 유효하지 않는 집 전화번호: \"%s\"\n"
+
+#: src/chfn.c:475
+#, c-format
+msgid "%s: \"%s\" contains illegal characters\n"
+msgstr "%s: \"%s\"은 적절하지 않는 글자를 포함하고 있습니다\n"
+
+#: src/chfn.c:488
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: 입력범위가 너무 깁니다\n"
+
+#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+msgid "Cannot change ID to root.\n"
+msgstr "루트로 아이디 변경이 불가능 합니다.\n"
+
+#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "패스워드 파일을 lock할 수 없습니다;  나중에 다시 시도하십시오.\n"
+
+#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+msgid "Cannot open the password file.\n"
+msgstr "패스워드 파일을 열수가 없습니다.\n"
+
+#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#, c-format
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s가 /etc/passwd에서 발견되지 않습니다\n"
+
+#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+msgid "Error updating the password entry.\n"
+msgstr "패스워드 입력을 업데이트하는데 오류발생.\n"
+
+#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+msgid "Cannot commit password file changes.\n"
+msgstr "패스워드 파일 변경을 처리할 수 없습니다.\n"
+
+#: src/chfn.c:592 src/chsh.c:404
+msgid "Cannot unlock the password file.\n"
+msgstr "패스워드 파일을 lock할 수 없습니다.\n"
+
+#: src/chpasswd.c:66
+#, c-format
+msgid "usage: %s [-e]\n"
+msgstr "사용법: %s [-e]\n"
+
+#: src/chpasswd.c:171 src/pwconv.c:94
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: 쉐도우 파일을 lock할 수 없습니다\n"
+
+#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
+#: src/pwunconv.c:108
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: 쉐도우 파일을 열 수 없습니다\n"
+
+#: src/chpasswd.c:200 src/newusers.c:460
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: line %d: 너무 깁니다\n"
+
+#: src/chpasswd.c:220
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: line %d: 새로운 패스워드가 없습니다\n"
+
+#: src/chpasswd.c:237
+#, c-format
+msgid "%s: line %d: unknown user %s\n"
+msgstr "%s: line %d: 알 수 없는 사용자 %s\n"
+
+#: src/chpasswd.c:290
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: line %d: 패스워드 입력을 업데이트 할 수 없습니다\n"
+
+#: src/chpasswd.c:307 src/newusers.c:588
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: 오류발생, 변경이 처리되지 않았습니다\n"
+
+#: src/chpasswd.c:319
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: 쉐도우 파일을 업데이트 하는데 오류발생\n"
+
+#: src/chpasswd.c:328
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: 패스워드 파일을 업데이트 하는데 오류발생\n"
+
+#: src/chsh.c:75
+#, c-format
+msgid "Usage: %s [-s shell] [name]\n"
+msgstr "사용법: %s [-s 쉘] [이름]\n"
+
+#: src/chsh.c:89
+#, fuzzy
+msgid "Enter the new value, or press return for the default\n"
+msgstr "새로운 값을 넣거나, 디폴트를 원하면 엔터를 치세요\n"
+
+#: src/chsh.c:90
+msgid "Login Shell"
+msgstr "로긴 쉘"
+
+#: src/chsh.c:239 src/chsh.c:253
+#, c-format
+msgid "You may not change the shell for %s.\n"
+msgstr "사용자는 %s에 대한 쉘을 변경할 수 없습니다.\n"
+
+#: src/chsh.c:282
+#, c-format
+msgid "Changing the login shell for %s\n"
+msgstr "%s에 대한 로긴 쉘을 변경하고 있습니다\n"
+
+#: src/chsh.c:294
+#, c-format
+msgid "%s: Invalid entry: %s\n"
+msgstr "%s: 부적절한 입력: %s\n"
+
+#: src/chsh.c:301
+#, c-format
+msgid "%s is an invalid shell.\n"
+msgstr "%s는 부적절한 쉘입니다.\n"
+
+#: src/dpasswd.c:52
+#, c-format
+msgid "Usage: %s [-(a|d)] shell\n"
+msgstr "사용법: %s [-(a|d)] 쉘\n"
+
+#: src/dpasswd.c:115
+msgid "Shell password: "
+msgstr "쉘 패스워드: "
+
+#: src/dpasswd.c:121
+msgid "re-enter Shell password: "
+msgstr "쉘 패스워드를 다시 입력: "
+
+#: src/dpasswd.c:129
+#, c-format
+msgid "%s: Passwords do not match, try again.\n"
+msgstr "%s: 패스워드가 맞지 않습니다. 다시 시도하세요. \n"
+
+#: src/dpasswd.c:149
+#, c-format
+msgid "%s: can't create %s"
+msgstr "%s: %s를 만들 수 없습니다"
+
+#: src/dpasswd.c:155
+#, c-format
+msgid "%s: can't open %s"
+msgstr "%s: %s를 열수가 없습니다"
+
+#: src/dpasswd.c:183
+#, c-format
+msgid "%s: Shell %s not found.\n"
+msgstr "%s: %s의 쉘이 발견되지 없습니다.\n"
+
+#: src/expiry.c:59
+#, fuzzy
+msgid "Usage: expiry {-f|-c}\n"
+msgstr "사용법: 만기 { -f | -c }\n"
+
+#: src/expiry.c:113
+#, c-format
+msgid "%s: WARNING!  Must be set-UID root!\n"
+msgstr "%s: 경고! 반드시 루트의 UID를 맞출것!\n"
+
+#: src/expiry.c:124
+#, c-format
+msgid "%s: unknown user\n"
+msgstr "%s: 알수없는 사용자\n"
+
+#: src/faillog.c:77
+#, c-format
+msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgstr "사용법: %s [-a|-u 사용자] [-m 최대] [-r] [-t 날짜] [-l locksecs]\n"
+
+#: src/faillog.c:131 src/lastlog.c:96
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "알수없는 사용자: %s\n"
+
+#: src/faillog.c:212
+msgid "Username   Failures  Maximum  Latest\n"
+msgstr "최대 입력시 까지 사용자 이름 인증 실패\n"
+
+#: src/faillog.c:229
+#, c-format
+msgid "  %s on %s"
+msgstr "%s 의 %s"
+
+#: src/faillog.c:233
+#, c-format
+msgid " [%lds left]"
+msgstr " [%lds left]"
+
+#: src/faillog.c:237
+#, c-format
+msgid " [%lds lock]"
+msgstr " [%lds lock]"
+
+#: src/gpasswd.c:78
+#, c-format
+msgid "usage: %s [-r|-R] group\n"
+msgstr "사용법: %s [-r|-R] 그룹\n"
+
+#: src/gpasswd.c:79
+#, c-format
+msgid "       %s [-a user] group\n"
+msgstr "       %s [-a 사용자] 그룹\n"
+
+#: src/gpasswd.c:80
+#, c-format
+msgid "       %s [-d user] group\n"
+msgstr "       %s [-d 사용자] 그룹\n"
+
+#: src/gpasswd.c:83
+#, c-format
+msgid "       %s [-A user,...] [-M user,...] group\n"
+msgstr "       %s [-A 사용자,...] [-M 사용자,...] 그룹\n"
+
+#: src/gpasswd.c:85
+#, c-format
+msgid "       %s [-M user,...] group\n"
+msgstr "       %s [-M 사용자,...] 그룹\n"
+
+#: src/gpasswd.c:146 src/gpasswd.c:230
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: 알 수 없는 사용자 %s\n"
+
+#: src/gpasswd.c:157
+msgid "Permission denied.\n"
+msgstr "접근권한 없음.\n"
+
+#: src/gpasswd.c:243
+#, c-format
+msgid "%s: shadow group passwords required for -A\n"
+msgstr "%s: -A에 대하여 쉐도우 그룹 패스워드가 필요합니다\n"
+
+#: src/gpasswd.c:294
+msgid "Who are you?\n"
+msgstr "당신은 누구십니까?\n"
+
+#: src/gpasswd.c:313 src/newgrp.c:297
+#, c-format
+msgid "unknown group: %s\n"
+msgstr "알 수 없는 그룹: %s\n"
+
+#: src/gpasswd.c:422
+#, c-format
+msgid "Adding user %s to group %s\n"
+msgstr "%s 그룹에 %s 사용자 등록중\n"
+
+#: src/gpasswd.c:440
+#, c-format
+msgid "Removing user %s from group %s\n"
+msgstr "%s 그룹 으로부터 %s 사용자 삭제중\n"
+
+#: src/gpasswd.c:454
+#, c-format
+msgid "%s: unknown member %s\n"
+msgstr "%s: 알 수 없는 그룹멤버 %s\n"
+
+#: src/gpasswd.c:501
+#, c-format
+msgid "%s: Not a tty\n"
+msgstr "%s: tty 가 아님\n"
+
+#.
+#. * A new password is to be entered and it must be encrypted, etc.
+#. * The password will be prompted for twice, and both entries must be
+#. * identical. There is no need to validate the old password since
+#. * the invoker is either the group owner, or root.
+#.
+#: src/gpasswd.c:522
+#, c-format
+msgid "Changing the password for group %s\n"
+msgstr "%s 그룹에 대하여 패스워드를 변경중\n"
+
+#: src/gpasswd.c:525
+msgid "New Password: "
+msgstr "새로운 패스워드: "
+
+#: src/gpasswd.c:530 src/passwd.c:365
+msgid "Re-enter new password: "
+msgstr "새 패스워드를 다시 입력하세요: "
+
+#: src/gpasswd.c:542
+msgid "They don't match; try again"
+msgstr "입력값이 일치하지 않습니다; 다시 시도하세요"
+
+#: src/gpasswd.c:546
+#, c-format
+msgid "%s: Try again later\n"
+msgstr "%s: 나중에 다시 시도하세요\n"
+
+#: src/gpasswd.c:578
+#, c-format
+msgid "%s: can't get lock\n"
+msgstr "%s: 잠금을 할 수 없습니다\n"
+
+#: src/gpasswd.c:584
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: 쉐도우 잠금을 할 수 없습니다\n"
+
+#: src/gpasswd.c:590
+#, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: 파일을 열 수 없습니다\n"
+
+#: src/gpasswd.c:602
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/gpasswd.c:608
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: 쉐도우 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/gpasswd.c:615
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: 파일을 다시 쓸 수 없습니다\n"
+
+#: src/gpasswd.c:621
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: 쉐도우 파일을 다시 쓸 수 없습니다\n"
+
+#: src/gpasswd.c:630
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: 파일 잠금을 풀 수 없습니다\n"
+
+#: src/gpasswd.c:635
+#, c-format
+msgid "%s: can't update DBM files\n"
+msgstr "%s: DBM 파일을 업데이트 할 수 없습니다\n"
+
+#: src/gpasswd.c:642
+#, c-format
+msgid "%s: can't update DBM shadow files\n"
+msgstr "%s: DBM 쉐도우 파일을 업데이트 할 수 없습니다\n"
+
+#: src/groupadd.c:101
+msgid "usage: groupadd [-g gid [-o]] group\n"
+msgstr "사용법: groupadd [-g gid(그룹 아이디) [-o]] 그룹명\n"
+
+#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
+#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#, c-format
+msgid "%s: error adding new group entry\n"
+msgstr "%s: 새로운 그룹을 추가하는데 오류\n"
+
+#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
+#: src/usermod.c:564 src/usermod.c:708
+#, c-format
+msgid "%s: cannot add new dbm group entry\n"
+msgstr "%s: 새로운 dbm 그룹 입력값을 추가하는데 오류\n"
+
+#: src/groupadd.c:255 src/useradd.c:1034
+#, c-format
+msgid "%s: name %s is not unique\n"
+msgstr "%s: %s 란 이름은 적절하지 않습니다\n"
+
+#: src/groupadd.c:270
+#, fuzzy, c-format
+msgid "%s: gid %u is not unique\n"
+msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+
+#: src/groupadd.c:294
+#, c-format
+msgid "%s: can't get unique gid\n"
+msgstr "%s: 적절한 gid(그룹 아이디)를 얻을 수 없습니다\n"
+
+#.
+#. * All invalid group names land here.
+#.
+#: src/groupadd.c:317 src/groupmod.c:341
+#, c-format
+msgid "%s: %s is a not a valid group name\n"
+msgstr "%s: %s 는 유효한 그룹명이 아닙니다\n"
+
+#: src/groupadd.c:346 src/groupmod.c:366
+#, c-format
+msgid "%s: invalid group %s\n"
+msgstr "%s: 유효하지 않은 그룹 %s\n"
+
+#: src/groupadd.c:363 src/useradd.c:1313
+#, c-format
+msgid "%s: -O requires NAME=VALUE\n"
+msgstr "%s: NAME=VALUE 를 위해서는 -O 옵션이 필요합니다\n"
+
+#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
+#: src/userdel.c:312 src/usermod.c:576
+#, c-format
+msgid "%s: cannot rewrite group file\n"
+msgstr "%s: 그룹파일을 다시 쓸 수 없습니다\n"
+
+#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
+#: src/userdel.c:319 src/usermod.c:722
+#, c-format
+msgid "%s: cannot rewrite shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 다시 쓸 수 없습니다\n"
+
+#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#, c-format
+msgid "%s: unable to lock group file\n"
+msgstr "%s: 그룹 파일 잠금을 할 수 없습니다\n"
+
+#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#, c-format
+msgid "%s: unable to open group file\n"
+msgstr "%s: 그룹 파일을 열수가 없습니다\n"
+
+#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#, c-format
+msgid "%s: unable to lock shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일 잠금을 할 수 없습니다\n"
+
+#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#, c-format
+msgid "%s: unable to open shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 열 수 없습니다\n"
+
+#: src/groupadd.c:562
+#, c-format
+msgid "%s: group %s exists\n"
+msgstr "%s: 그룹 %s 는 존재합니다\n"
+
+#: src/groupdel.c:92
+msgid "usage: groupdel group\n"
+msgstr "사용법: groupdel 그룹명\n"
+
+#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#, c-format
+msgid "%s: error removing group entry\n"
+msgstr "%s: 그룹 입력값을 제거하는데 오류\n"
+
+#: src/groupdel.c:122 src/groupmod.c:204
+#, c-format
+msgid "%s: error removing group dbm entry\n"
+msgstr "%s: 그룹 dbm 입력값을 제거하는데 오류\n"
+
+#: src/groupdel.c:137
+#, c-format
+msgid "%s: error removing shadow group entry\n"
+msgstr "%s: 쉐도우 그룹 입력값을 제거하는데 오류\n"
+
+#: src/groupdel.c:150 src/groupmod.c:254
+#, c-format
+msgid "%s: error removing shadow group dbm entry\n"
+msgstr "%s: 쉐도우 그룹 dbm 입력값을 제거하는데 오류\n"
+
+#.
+#. * Can't remove the group.
+#.
+#: src/groupdel.c:254
+#, c-format
+msgid "%s: cannot remove user's primary group.\n"
+msgstr "%s: 사용자의 primary 그룹을 제거할 수 없습니다.\n"
+
+#: src/groupdel.c:355 src/groupmod.c:550
+#, c-format
+msgid "%s: group %s does not exist\n"
+msgstr "%s: 그룹 %s 는 존재하지 않습니다\n"
+
+#: src/groupdel.c:369 src/groupmod.c:566
+#, c-format
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s: 그룹 %s 는 NIS 그룹입니다\n"
+
+#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#, c-format
+msgid "%s: %s is the NIS master\n"
+msgstr "%s: %s 는 NIS 마스터(master)입니다\n"
+
+#: src/groupmems.c:95
+msgid "Member already exists\n"
+msgstr ""
+
+#: src/groupmems.c:125
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#: src/groupmems.c:158
+msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#: src/groupmems.c:201
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#: src/groupmems.c:206
+msgid "Group access is required\n"
+msgstr ""
+
+#: src/groupmems.c:210
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#: src/groupmems.c:215
+#, fuzzy
+msgid "Unable to lock group file\n"
+msgstr "%s: 그룹 파일 잠금을 할 수 없습니다\n"
+
+#: src/groupmems.c:220
+#, fuzzy
+msgid "Unable to open group file\n"
+msgstr "%s: 그룹 파일을 열수가 없습니다\n"
+
+#: src/groupmems.c:240
+#, fuzzy
+msgid "Cannot close group file\n"
+msgstr "%s: 그룹 파일을 열 수 없습니다\n"
+
+#: src/groupmod.c:103
+msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "사용법: groupmod [-g gid(그룹 아이디) [-o]] [-n 이름] 그룹명\n"
+
+#: src/groupmod.c:161
+#, c-format
+msgid "%s: %s not found in /etc/group\n"
+msgstr "%s: %s 는 /etc/group 에서 발견이 되지 않았습니다\n"
+
+#: src/groupmod.c:247
+#, c-format
+msgid "%s: cannot add new dbm shadow group entry\n"
+msgstr "%s: 새로운 dbm 쉐도우 그룹 입력값을 추가할 수 없습니다\n"
+
+#: src/groupmod.c:300
+#, fuzzy, c-format
+msgid "%s: %u is not a unique gid\n"
+msgstr "%s: %ld 는 적절한 gid(그룹 아이디)가 아닙니다\n"
+
+#: src/groupmod.c:330
+#, c-format
+msgid "%s: %s is not a unique name\n"
+msgstr "%s: %s 는 적절한 이름이 아닙니다\n"
+
+#: src/groups.c:59
+#, c-format
+msgid "unknown user %s\n"
+msgstr "알수없는 사용자 %s\n"
+
+#: src/grpck.c:87
+#, fuzzy, c-format
+msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+msgstr "사용법: %s [-s][-r] [group [gshadow]]\n"
+
+#: src/grpck.c:90
+#, fuzzy, c-format
+msgid "Usage: %s [-r] [-s] [group]\n"
+msgstr "사용법: %s [-s] [-r] [group]\n"
+
+#: src/grpck.c:108 src/pwck.c:108
+msgid "No"
+msgstr "아니오"
+
+#: src/grpck.c:192 src/pwck.c:175
+#, c-format
+msgid "%s: -s and -r are incompatibile\n"
+msgstr ""
+
+#: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
+#, c-format
+msgid "%s: cannot lock file %s\n"
+msgstr "%s: 파일 %s 잠금을 할 수 없습니다\n"
+
+#: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:202 src/pwck.c:242
+#: src/pwck.c:251
+#, c-format
+msgid "%s: cannot open file %s\n"
+msgstr "%s: 파일 %s 를 열 수 없습니다\n"
+
+#.
+#. * Tell the user this entire line is bogus and ask
+#. * them to delete it.
+#.
+#: src/grpck.c:311
+msgid "invalid group file entry\n"
+msgstr "유효하지 않은 그룹파일  입력값\n"
+
+#: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
+#: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
+#: src/pwck.c:543
+#, c-format
+msgid "delete line `%s'? "
+msgstr "라인 '%s'를 지울까요? "
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/grpck.c:374
+msgid "duplicate group entry\n"
+msgstr "그룹 입력값 복제\n"
+
+#: src/grpck.c:391
+#, c-format
+msgid "invalid group name `%s'\n"
+msgstr "유효하지 않은 그룹명 '%s'\n"
+
+#: src/grpck.c:418
+#, c-format
+msgid "group %s: no user %s\n"
+msgstr "그룹 %s: 사용자 %s 가 없습니다\n"
+
+#: src/grpck.c:420 src/grpck.c:590
+#, c-format
+msgid "delete member `%s'? "
+msgstr "멤버 '%s'를 지울까요? "
+
+#.
+#. * Tell the user this entire line is bogus and ask
+#. * them to delete it.
+#.
+#: src/grpck.c:457
+msgid "invalid shadow group file entry\n"
+msgstr "유효하지 않은 쉐도우 그룹파일 입력값\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/grpck.c:520
+msgid "duplicate shadow group entry\n"
+msgstr "쉐도우 그룹 입력값 복제\n"
+
+#: src/grpck.c:537
+msgid "no matching group file entry\n"
+msgstr "그룹 파일 입력값이 일치하지 않습니다\n"
+
+#: src/grpck.c:558
+#, c-format
+msgid "shadow group %s: no administrative user %s\n"
+msgstr "쉐도우 그룹 %s: 관리권한이 있는 사용자 %s 가 없습니다\n"
+
+#: src/grpck.c:560
+#, c-format
+msgid "delete administrative member `%s'? "
+msgstr "관리 권한이 있는 멤버 '%s' 를 지울까요? "
+
+#: src/grpck.c:588
+#, c-format
+msgid "shadow group %s: no user %s\n"
+msgstr "쉐도우 그룹 %s: %s 란 사용자가 없습니다\n"
+
+#: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
+#, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: 파일 %s 를 업데이트 할 수 없습니다\n"
+
+#: src/grpck.c:647 src/pwck.c:612
+#, c-format
+msgid "%s: the files have been updated; run mkpasswd\n"
+msgstr "%s: 파일이 업데이트 되었습니다; mkpasswd 를 실행하십시오\n"
+
+#: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
+#, c-format
+msgid "%s: no changes\n"
+msgstr "%s: 변경이 안 되었습니다\n"
+
+#: src/grpck.c:651 src/pwck.c:616
+#, c-format
+msgid "%s: the files have been updated\n"
+msgstr "%s: 파일이 업데이트 되었습니다\n"
+
+#: src/grpconv.c:60 src/grpunconv.c:56
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: 그룹 파일 잠금을 할 수 없습니다\n"
+
+#: src/grpconv.c:65 src/grpunconv.c:61
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: 그룹 파일을 열 수 없습니다\n"
+
+#: src/grpconv.c:70 src/grpunconv.c:66
+#, c-format
+msgid "%s: can't lock shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일 잠금을 할 수 없습니다\n"
+
+#: src/grpconv.c:76 src/grpunconv.c:72
+#, c-format
+msgid "%s: can't open shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 열 수 없습니다\n"
+
+#: src/grpconv.c:94
+#, c-format
+msgid "%s: can't remove shadow group %s\n"
+msgstr "%s: 쉐도우 그룹 %s 를 제거할 수 없습니다\n"
+
+#: src/grpconv.c:138 src/pwconv.c:153
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: %s 에 대한 쉐도우 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/grpconv.c:148 src/grpunconv.c:91
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: %s 그룹에 대한 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/grpconv.c:155 src/grpunconv.c:99
+#, c-format
+msgid "%s: can't update shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 업데이트 할 수 없습니다\n"
+
+#: src/grpconv.c:160 src/grpunconv.c:105
+#, c-format
+msgid "%s: can't update group file\n"
+msgstr "%s: 그룹 파일을 업데이트 할 수 없습니다\n"
+
+#: src/grpconv.c:175 src/grpunconv.c:127
+#, c-format
+msgid "%s: not configured for shadow group support.\n"
+msgstr "%s: 쉐도우 그룹 지원에 대하여 형성이 되지 않았습니다.\n"
+
+#: src/grpunconv.c:110
+#, c-format
+msgid "%s: can't delete shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 지울수 없습니다\n"
+
+#: src/id.c:53
+msgid "usage: id [-a]\n"
+msgstr "사용법: id [-a]\n"
+
+#: src/id.c:55
+msgid "usage: id\n"
+msgstr "사용법: id\n"
+
+#: src/id.c:123
+#, fuzzy, c-format
+msgid "uid=%u(%s)"
+msgstr "uid(사용자 아이디)=%d(%s)"
+
+#: src/id.c:125
+#, fuzzy, c-format
+msgid "uid=%u"
+msgstr "uid(사용자 아이디)=%d"
+
+#: src/id.c:129
+#, fuzzy, c-format
+msgid " gid=%u(%s)"
+msgstr " gid(그룹 아이디)=%d(%s)"
+
+#: src/id.c:131
+#, fuzzy, c-format
+msgid " gid=%u"
+msgstr " gid(그룹 아이디)=%d"
+
+#: src/id.c:141
+#, fuzzy, c-format
+msgid " euid=%u(%s)"
+msgstr " euid=%d(%s)"
+
+#: src/id.c:143
+#, fuzzy, c-format
+msgid " euid=%u"
+msgstr " euid=%d"
+
+#: src/id.c:148
+#, fuzzy, c-format
+msgid " egid=%u(%s)"
+msgstr " egid=%d(%s)"
+
+#: src/id.c:150
+#, fuzzy, c-format
+msgid " egid=%u"
+msgstr " egid=%d"
+
+#.
+#. * Start off the group message. It will be of the format
+#. *
+#. *      groups=###(aaa),###(aaa),###(aaa)
+#. *
+#. * where "###" is a numerical value and "aaa" is the
+#. * corresponding name for each respective numerical value.
+#.
+#: src/id.c:169
+msgid " groups="
+msgstr " 그룹들="
+
+#: src/lastlog.c:110 src/lastlog.c:116
+#, c-format
+msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
+msgstr ""
+
+#: src/lastlog.c:181
+msgid "Username         Port     From             Latest\n"
+msgstr "사용자명\t포트\t~로부터\t\t최근정보\n"
+
+#: src/lastlog.c:183
+msgid "Username                Port     Latest\n"
+msgstr "사용자명\t\t포트\t최근정보\n"
+
+#: src/lastlog.c:197
+msgid "**Never logged in**"
+msgstr "**한번도 로긴한적이 없습니다**"
+
+#: src/login.c:183
+#, c-format
+msgid "usage: %s [-p] [name]\n"
+msgstr "사용법: %s [-p] [이름]\n"
+
+#: src/login.c:186
+#, c-format
+msgid "       %s [-p] [-h host] [-f name]\n"
+msgstr "\t%s [-p][-h 호스트명][-f 이름]\n"
+
+#: src/login.c:188
+#, c-format
+msgid "       %s [-p] -r host\n"
+msgstr "\t%s [-p] -r 호스트\n"
+
+#: src/login.c:272
+msgid "Invalid login time\n"
+msgstr "유효하지 않은 로긴 시간(현재시간은 로긴권한 없음)\n"
+
+#: src/login.c:327
+msgid ""
+"\n"
+"System closed for routine maintenance\n"
+msgstr ""
+"\n"
+"근원지의 정비를 위해 시스템이 종료되었습니다\n"
+
+#: src/login.c:338
+msgid ""
+"\n"
+"[Disconnect bypassed -- root login allowed.]\n"
+msgstr ""
+"\n"
+"[접속해제가 무시되었습니다 -- 루트만 로긴을 할 수 있습니다]\n"
+
+#: src/login.c:375
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %d seconds.\n"
+msgstr ""
+"\n"
+"%d 초후에 로긴 시간이 완료됩니다.\n"
+
+#: src/login.c:687
+#, c-format
+msgid " on `%.100s' from `%.200s'"
+msgstr " on `%.100s' from `%.200s'"
+
+#: src/login.c:691
+#, c-format
+msgid " on `%.100s'"
+msgstr " on `%.100s'"
+
+#: src/login.c:850
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s 로긴: "
+
+#: src/login.c:853
+msgid "login: "
+msgstr "로긴: "
+
+#: src/login.c:1069 src/sulogin.c:233
+msgid "Login incorrect"
+msgstr "로긴명이 맞지 않습니다"
+
+#: src/login.c:1263
+msgid "Warning: login re-enabled after temporary lockout.\n"
+msgstr "경고: 일시적으로 페쇄된뒤 다시 로긴할 수 있습니다.\n"
+
+#: src/login.c:1276
+#, c-format
+msgid "Last login: %s on %s"
+msgstr "마지막 로긴: %s on %s"
+
+#: src/login.c:1279
+#, c-format
+msgid "Last login: %.19s on %s"
+msgstr "마지막 로긴: %.19s on %s"
+
+#: src/login.c:1285
+#, c-format
+msgid " from %.*s"
+msgstr " from %.*s"
+
+#: src/login.c:1362
+msgid "Starting rad_login\n"
+msgstr "rad_login 을 시작하고 있습니다\n"
+
+#: src/mkpasswd.c:47
+#, c-format
+msgid "%s: no DBM database on system - no action performed\n"
+msgstr ""
+"%s: 시스템에 DBM 데이터베이스가 없습니다 - 따라서 어떻한 것도 실행되지 않았습"
+"니다\n"
+
+#: src/mkpasswd.c:232 src/mkpasswd.c:237
+#, c-format
+msgid "%s: cannot overwrite file %s\n"
+msgstr "%s: 파일 %s 를 겹쳐쓸 수 없습니다\n"
+
+#: src/mkpasswd.c:252
+#, c-format
+msgid "%s: cannot open DBM files for %s\n"
+msgstr "%s: %s 에 대한 DBM 파일을 열 수 없습니다\n"
+
+#: src/mkpasswd.c:287
+#, c-format
+msgid "%s: the beginning with "
+msgstr "%s: ~와 함께 시작 "
+
+#: src/mkpasswd.c:288
+#, fuzzy
+msgid " is too long\n"
+msgstr "%s: 입력범위가 너무 깁니다\n"
+
+#: src/mkpasswd.c:315
+#, c-format
+msgid "%s: error parsing line \"%s\"\n"
+msgstr "%s: 라인 \"%s\" 을 분석하는데 오류\n"
+
+#: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
+msgid "adding record for name "
+msgstr "이름에 대한 기록을 추가하고 있습니다 "
+
+#: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
+#: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
+msgid "\n"
+msgstr ""
+
+#: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
+#, c-format
+msgid "%s: error adding record for "
+msgstr "%s: 에 대한 기록을 추가하는데 오류 "
+
+#: src/mkpasswd.c:378
+#, c-format
+msgid "added %d entries, longest was %d\n"
+msgstr "%d 입력값이 추가 되었습니다, 가장긴것은 %d 입니다\n"
+
+#: src/mkpasswd.c:392
+#, c-format
+msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
+msgstr "사용법: %s [-vf] [-p|sp|sg] 파일명\n"
+
+#: src/mkpasswd.c:395
+#, c-format
+msgid "Usage: %s [-vf] [-p|g|sp] file\n"
+msgstr "사용법: %s [-vf][-p|g|sp] 파일명\n"
+
+#: src/mkpasswd.c:398
+#, c-format
+msgid "Usage: %s [-vf] [-p|g] file\n"
+msgstr "사용법: %s [-vf][-p|g] 파일명\n"
+
+#: src/newgrp.c:61
+msgid "usage: newgrp [-] [group]\n"
+msgstr "사용법: newgrp [-] [그룹]\n"
+
+#: src/newgrp.c:63
+msgid "usage: sg group [[-c] command]\n"
+msgstr "사용법: sg group [[-c] 명령]\n"
+
+#: src/newgrp.c:136
+#, fuzzy, c-format
+msgid "unknown uid: %u\n"
+msgstr "알수없는 uid(사용자 아이디): %d\n"
+
+#: src/newgrp.c:219
+#, fuzzy, c-format
+msgid "unknown gid: %lu\n"
+msgstr "알수없는 gid(그룹 아이디): %ld\n"
+
+#: src/newgrp.c:365 src/newgrp.c:374
+msgid "Sorry.\n"
+msgstr "죄송합니다.\n"
+
+#: src/newgrp.c:472
+msgid "too many groups\n"
+msgstr "그룹들이 너무나 많습니다\n"
+
+#: src/newusers.c:78
+#, c-format
+msgid "Usage: %s [input]\n"
+msgstr "사용법:%s [입력값]\n"
+
+#: src/newusers.c:407
+#, c-format
+msgid "%s: can't lock /etc/passwd.\n"
+msgstr "%s: /etc/passwd 잠금을 할 수 없습니다.\n"
+
+#: src/newusers.c:419
+#, c-format
+msgid "%s: can't lock files, try again later\n"
+msgstr "%s: 파일 잠금을 할 수 없습니다, 나중에 다시 시도하세요\n"
+
+#: src/newusers.c:435
+#, c-format
+msgid "%s: can't open files\n"
+msgstr "%s: 파일을 열수가 없습니다\n"
+
+#: src/newusers.c:480
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: 라인 %d: 유효하지 않은 라인\n"
+
+#: src/newusers.c:499
+#, c-format
+msgid "%s: line %d: can't create GID\n"
+msgstr "%s: 라인 %d: GID(그룹 아이디)를 만들수 없습니다\n"
+
+#: src/newusers.c:515
+#, c-format
+msgid "%s: line %d: can't create UID\n"
+msgstr "%s: 라인 %d: UID(사용자 아이디)를 만들수 없습니다\n"
+
+#: src/newusers.c:528
+#, c-format
+msgid "%s: line %d: cannot find user %s\n"
+msgstr "%s: 라인 %d: 사용자 %s 를 발견할 수 없습니다\n"
+
+#: src/newusers.c:537
+#, c-format
+msgid "%s: line %d: can't update password\n"
+msgstr "%s: 라인 %d: 패스워드를 업데이트 할 수 없습니다\n"
+
+#: src/newusers.c:555
+#, c-format
+msgid "%s: line %d: mkdir failed\n"
+msgstr "%s: 라인 %d: 디렉토리 만들기를 실패했습니다\n"
+
+#: src/newusers.c:561
+#, c-format
+msgid "%s: line %d: chown failed\n"
+msgstr "%s: 라인 %d: chown 을 실패했습니다\n"
+
+#: src/newusers.c:571
+#, c-format
+msgid "%s: line %d: can't update entry\n"
+msgstr "%s: 라인 %d: 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/newusers.c:603
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: 파일을 업데이트 하는데 오류\n"
+
+#: src/passwd.c:174
+#, c-format
+msgid "usage: %s [-f|-s] [name]\n"
+msgstr "사용법: %s [-f|-s][이름]\n"
+
+#: src/passwd.c:178
+#, c-format
+msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
+msgstr "\t%s [-x 최대][-n 최소][-w 경고][-i 비활성화] 이름\n"
+
+#: src/passwd.c:180
+#, fuzzy, c-format
+msgid "       %s {-l|-u|-d|-S|-e} name\n"
+msgstr "\t%s { -l | -u | -d | -S | -e } 이름\n"
+
+#: src/passwd.c:283
+#, c-format
+msgid "User %s has a TCFS key, his old password is required.\n"
+msgstr ""
+"사용자 %s 는 TCFS 키를 가지고 있습니다, 그의 예전 패스워드가 요구됩니다.\n"
+
+#: src/passwd.c:286
+msgid "You can use -t option to force the change.\n"
+msgstr "강제로 변경을 하기 위해서는 -t 옵션을 사용할 수 있습니다.\n"
+
+#: src/passwd.c:292
+msgid "Old password: "
+msgstr "예전 패스워드: "
+
+#: src/passwd.c:301
+#, c-format
+msgid "Incorrect password for `%s'\n"
+msgstr "`%s' 에 대하여 패스워드가 맞지 않습니다\n"
+
+#: src/passwd.c:314
+#, c-format
+msgid "Warning: user %s has a TCFS key.\n"
+msgstr "경고: 사용자 %s 는 TCFS 키를 가지고 있습니다.\n"
+
+#: src/passwd.c:333
+#, c-format
+msgid ""
+"Enter the new password (minimum of %d, maximum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"새로운 패스워드를 입력하세요 (최소 %d, 최대 %d 글자)\n"
+"상하위 글자와 숫자를 조합하여 사용하세요.\n"
+
+#: src/passwd.c:339
+msgid "New password: "
+msgstr "새로운 패스워드: "
+
+#: src/passwd.c:350
+msgid "Try again.\n"
+msgstr "다시 시도하세요.\n"
+
+#: src/passwd.c:361
+msgid ""
+"\n"
+"Warning: weak password (enter it again to use it anyway).\n"
+msgstr ""
+"\n"
+"경고: 보안성이 없는 패스워드 (그래도 사용하길 원한다면 다시 입력하세요).\n"
+
+#: src/passwd.c:371
+msgid "They don't match; try again.\n"
+msgstr "입력값이 일치하지 않습니다; 다시 시도하세요.\n"
+
+#: src/passwd.c:451 src/passwd.c:469
+#, c-format
+msgid "The password for %s cannot be changed.\n"
+msgstr "%s 에 대한 패스워드는 변경될 수 없습니다.\n"
+
+#: src/passwd.c:494
+#, c-format
+msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgstr "죄송합니다, %s 에 대한 패스워드가 아직 변경이 될 수 없습니다.\n"
+
+#: src/passwd.c:614
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: 메모리 부족\n"
+
+#: src/passwd.c:769
+msgid "Cannot lock the TCFS key database; try again later\n"
+msgstr "TCFS 키 데이터베이스 잠금을 할 수 없습니다; 나중에 다시 시도하세요\n"
+
+#: src/passwd.c:777
+msgid "Cannot open the TCFS key database.\n"
+msgstr "TCFS 키 데이터베이스를 열수가 없습니다.\n"
+
+#: src/passwd.c:785
+msgid "Error updating the TCFS key database.\n"
+msgstr "TCFs 키 데이터베이스 업데이트 중 오류.\n"
+
+#: src/passwd.c:792
+msgid "Cannot commit TCFS changes.\n"
+msgstr "TCFS 변경을 실행할 수 없습니다.\n"
+
+#: src/passwd.c:975
+#, c-format
+msgid "%s: Cannot execute %s"
+msgstr "%s: %s 를 실행할 수 없습니다"
+
+#: src/passwd.c:1077
+#, c-format
+msgid "%s: repository %s not supported\n"
+msgstr "%s: 저장소 %s 는 지원이 되지 않습니다\n"
+
+#: src/passwd.c:1152
+#, c-format
+msgid "%s: Permission denied\n"
+msgstr "%s: 접근권한 없음\n"
+
+#: src/passwd.c:1176
+#, c-format
+msgid "You may not change the password for %s.\n"
+msgstr "%s 에 대한 패스워드를 당신은 변경할 수 없습니다.\n"
+
+#: src/passwd.c:1242
+#, c-format
+msgid "Changing password for %s\n"
+msgstr "%s 에 대한 패스워드를 변경중\n"
+
+#: src/passwd.c:1246
+#, c-format
+msgid "The password for %s is unchanged.\n"
+msgstr "%s 에 대한 패스워드가 변경되지 않았습니다.\n"
+
+#: src/passwd.c:1297
+msgid "Password changed.\n"
+msgstr "패스워드가 변경되었습니다.\n"
+
+#: src/pwck.c:87
+#, fuzzy, c-format
+msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "사용법: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#: src/pwck.c:90
+#, fuzzy, c-format
+msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
+msgstr "사용법: %s [-q] [-r] [-s] [패스워드]\n"
+
+#.
+#. * Tell the user this entire line is bogus and ask
+#. * them to delete it.
+#.
+#: src/pwck.c:295
+msgid "invalid password file entry\n"
+msgstr "유효하지 않은 패스워드 파일 입력\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/pwck.c:357
+msgid "duplicate password entry\n"
+msgstr "패스워드 입력값 복제\n"
+
+#: src/pwck.c:373
+#, c-format
+msgid "invalid user name `%s'\n"
+msgstr "유효하지 않은 사용자명 `%s'\n"
+
+#.
+#. * No primary group, just give a warning
+#.
+#: src/pwck.c:388
+#, fuzzy, c-format
+msgid "user %s: no group %u\n"
+msgstr "사용자 %s: 그룹이 없습니다 %d\n"
+
+#: src/pwck.c:404
+#, c-format
+msgid "user %s: directory %s does not exist\n"
+msgstr "사용자 %s: 디렉토리 %s 는 존재하지 않습니다\n"
+
+#.
+#. * Login shell doesn't exist, give a warning
+#.
+#: src/pwck.c:420
+#, c-format
+msgid "user %s: program %s does not exist\n"
+msgstr "사용자 %s: 프로그램 %s 는 존재하지 않습니다\n"
+
+#.
+#. * Tell the user this entire line is bogus and ask
+#. * them to delete it.
+#.
+#: src/pwck.c:456
+msgid "invalid shadow password file entry\n"
+msgstr "유효하지 않은 쉐도우 패스워드 파일 입력값\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/pwck.c:518
+msgid "duplicate shadow password entry\n"
+msgstr "쉐도우 패스워드 입력값 복제\n"
+
+#.
+#. * Tell the user this entry has no matching
+#. * /etc/passwd entry and ask them to delete it.
+#.
+#: src/pwck.c:542
+msgid "no matching password file entry\n"
+msgstr "패스워드 파일 입력값이 일치하지 않습니다\n"
+
+#: src/pwck.c:560
+#, c-format
+msgid "user %s: last password change in the future\n"
+msgstr "사용자 %s: 마지막 패스워드는 나중에 변경\n"
+
+#: src/pwconv.c:84 src/pwunconv.c:93
+#, c-format
+msgid "%s: can't lock passwd file\n"
+msgstr "%s: 패스워드 파일 잠금을 할 수 없습니다\n"
+
+#: src/pwconv.c:89 src/pwunconv.c:98
+#, c-format
+msgid "%s: can't open passwd file\n"
+msgstr "%s: 패스워드 파일을 열 수 없습니다\n"
+
+#: src/pwconv.c:117
+#, c-format
+msgid "%s: can't remove shadow entry for %s\n"
+msgstr "%s: %s 에 대한 쉐도우 입력값을 제거할 수 없습니다\n"
+
+#: src/pwconv.c:163
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: %s 에 대한 패스워드 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/pwconv.c:170
+#, c-format
+msgid "%s: can't update shadow file\n"
+msgstr "%s: 쉐도우 파일을 업데이트 할 수 없습니다\n"
+
+#: src/pwconv.c:175
+#, c-format
+msgid "%s: can't update passwd file\n"
+msgstr "%s: 패스워드 파일을 업데이트 할 수 없습니다\n"
+
+#: src/pwunconv.c:50
+#, c-format
+msgid "%s: Shadow passwords are not configured.\n"
+msgstr "%s: 쉐도우 패스워드가 형성되지 않았습니다.\n"
+
+#: src/pwunconv.c:160
+#, c-format
+msgid "%s: can't update entry for user %s\n"
+msgstr "%s: 사용자 %s 에 대한 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/pwunconv.c:181
+#, c-format
+msgid "%s: can't delete shadow password file\n"
+msgstr "%s: 쉐도우 패스워드 파일을 지울 수 없습니다\n"
+
+#: src/su.c:133
+msgid "Sorry."
+msgstr "죄송합니다."
+
+#: src/su.c:216
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: 터미널에서 받드시 실행이 되어져야 합니다\n"
+
+#: src/su.c:306
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: 오류 %d\n"
+
+#: src/su.c:336
+#, c-format
+msgid "Unknown id: %s\n"
+msgstr "알수없는 아이디: %s\n"
+
+#: src/su.c:373 src/su.c:390
+#, c-format
+msgid "You are not authorized to su %s\n"
+msgstr "당신은 su %s 에게 인증이 되지 않았습니다\n"
+
+#. require own password
+#: src/su.c:385
+msgid "(Enter your own password.)"
+msgstr "(자신의 패스워드를 입력하세요.)"
+
+#: src/su.c:419
+#, c-format
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(무시됨)\n"
+
+#: src/su.c:626
+msgid "No shell\n"
+msgstr "쉘이 없음\n"
+
+#. must be a password file!
+#: src/sulogin.c:132
+msgid "No password file\n"
+msgstr "패스워드 파일 없음\n"
+
+#.
+#. * Fail secure
+#.
+#: src/sulogin.c:174
+msgid "No password entry for 'root'\n"
+msgstr "'루트'에 대한 패스워드 파일 입력값 없음\n"
+
+#: src/sulogin.c:190
+msgid ""
+"\n"
+"Type control-d to proceed with normal startup,\n"
+"(or give root password for system maintenance):"
+msgstr ""
+"\n"
+"일반적으로 시작(normal startup)을 하려면 control-d 를 입력하세요,\n"
+"(그렇지 않으면 시스템 정비를 위하여 루트 패스워드를 입력하세요)"
+
+#. make new environment active
+#: src/sulogin.c:243
+msgid "Entering System Maintenance Mode\n"
+msgstr "시스템 정비 모드로 들어가고 있습니다\n"
+
+#: src/useradd.c:251
+#, c-format
+msgid "%s: rebuild the group database\n"
+msgstr "%s: 그룹 데이터베이스를 다시 만듭니다\n"
+
+#: src/useradd.c:260
+#, c-format
+msgid "%s: rebuild the shadow group database\n"
+msgstr "%s: 쉐도우 그룹 데이터베이스를 다시 만듭니다\n"
+
+#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#, c-format
+msgid "%s: invalid numeric argument `%s'\n"
+msgstr "%s: 유효하지 않은 숫자 입력값 `%s'\n"
+
+#: src/useradd.c:365
+#, c-format
+msgid "%s: unknown gid %s\n"
+msgstr "%s: 알수없는 gid(그룹 아이디) %s\n"
+
+#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
+#: src/usermod.c:1128
+#, c-format
+msgid "%s: unknown group %s\n"
+msgstr "%s: 알수없는 그룹 %s\n"
+
+#: src/useradd.c:440
+#, fuzzy, c-format
+msgid "group=%s,%u  basedir=%s  skel=%s\n"
+msgstr "그룹=%s,%ld 초기 디렉토리=%s skel=%s\n"
+
+#: src/useradd.c:444
+#, c-format
+msgid "shell=%s  "
+msgstr "쉘=%s  "
+
+#: src/useradd.c:446
+#, c-format
+msgid "inactive=%ld  expire=%s"
+msgstr "비활성화=%ld 만기=%s"
+
+#: src/useradd.c:450
+#, fuzzy, c-format
+msgid "GROUP=%u\n"
+msgstr "그룹=%ld\n"
+
+#: src/useradd.c:451
+#, c-format
+msgid "HOME=%s\n"
+msgstr "홈디렉토리=%s\n"
+
+#: src/useradd.c:453
+#, c-format
+msgid "INACTIVE=%ld\n"
+msgstr "비활성화=%ld\n"
+
+#: src/useradd.c:454
+#, c-format
+msgid "EXPIRE=%s\n"
+msgstr "만기=%s\n"
+
+#: src/useradd.c:456
+#, c-format
+msgid "SHELL=%s\n"
+msgstr "쉘=%s\n"
+
+#: src/useradd.c:457
+#, c-format
+msgid "SKEL=%s\n"
+msgstr "SKEL=%s\n"
+
+#: src/useradd.c:498
+#, c-format
+msgid "%s: cannot create new defaults file\n"
+msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
+
+#: src/useradd.c:503
+#, fuzzy, c-format
+msgid "%s: cannot open new defaults file\n"
+msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
+
+#: src/useradd.c:596 src/useradd.c:608
+#, c-format
+msgid "%s: rename: %s"
+msgstr "%s: 이름 재 설정: %s"
+
+#: src/useradd.c:697 src/usermod.c:281
+#, c-format
+msgid "%s: group `%s' is a NIS group.\n"
+msgstr "%s: 그룹 `%s' 는 NIS 그룹입니다.\n"
+
+#: src/useradd.c:706 src/usermod.c:290
+#, c-format
+msgid "%s: too many groups specified (max %d).\n"
+msgstr "%s: 너무나 많은 그룹이 명시되었습니다 (최대 %d).\n"
+
+#: src/useradd.c:738 src/usermod.c:322
+#, c-format
+msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "사용법: %s\t[-u uid(사용자 아이디) [-o]] [-g 그룹명][-G 그룹,...]\n"
+
+#: src/useradd.c:742
+msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr "\t\t[-d 홈디렉토리][-s 쉘][-c 적요사항][-m [-k template]]\n"
+
+#: src/useradd.c:745 src/usermod.c:329
+#, fuzzy
+msgid "[-f inactive] [-e expire ] "
+msgstr "[-f 비활성화][-e 만기] "
+
+#: src/useradd.c:748
+msgid "[-A program] "
+msgstr "[-A 프로그램] "
+
+#: src/useradd.c:750
+msgid "[-p passwd] name\n"
+msgstr "[-p 패스워드] 이름\n"
+
+#: src/useradd.c:753
+#, c-format
+msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
+msgstr "\t%s\t-D [-g 그룹명][-b 초기디렉토리][-s 쉘]\n"
+
+#: src/useradd.c:756
+#, fuzzy
+msgid "\t\t[-f inactive] [-e expire ]\n"
+msgstr "\t\t[-f 비활성화][-e 만기]\n"
+
+#: src/useradd.c:850 src/usermod.c:480
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: 그룹 파일 잠금을 하는데 오류\n"
+
+#: src/useradd.c:855 src/usermod.c:486
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: 그룹 파일을 여는데 오류\n"
+
+#: src/useradd.c:862 src/usermod.c:597
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: 쉐도우 그룹을 잠그는데 오류\n"
+
+#: src/useradd.c:867 src/usermod.c:603
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: 그룹 파일을 여는데 오류\n"
+
+#: src/useradd.c:1039
+#, fuzzy, c-format
+msgid "%s: uid %u is not unique\n"
+msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+
+#: src/useradd.c:1069
+#, c-format
+msgid "%s: can't get unique uid\n"
+msgstr "%s: 적절한 uid(사용자 아이디)를 얻을 수 없습니다\n"
+
+#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
+#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: `%s' 부분은 유효하지 않습니다\n"
+
+#: src/useradd.c:1189
+#, c-format
+msgid "%s: invalid base directory `%s'\n"
+msgstr "%s: 기본 디렉토리 `%s' 는 유효하지 않습니다\n"
+
+#: src/useradd.c:1199
+#, c-format
+msgid "%s: invalid comment `%s'\n"
+msgstr "%s: 적요사항 `%s' 은 유효하지 않습니다\n"
+
+#: src/useradd.c:1210
+#, c-format
+msgid "%s: invalid home directory `%s'\n"
+msgstr "%s: 홈 디렉토리 `%s' 는 유효하지 않습니다\n"
+
+#: src/useradd.c:1229 src/usermod.c:1110
+#, c-format
+msgid "%s: invalid date `%s'\n"
+msgstr "%s: 날짜 `%s' 는 유효하지 않습니다\n"
+
+#: src/useradd.c:1242
+#, c-format
+msgid "%s: shadow passwords required for -e\n"
+msgstr "%s: 쉐도우 패스워드가 -e 옵션을 요구합니다\n"
+
+#: src/useradd.c:1258
+#, c-format
+msgid "%s: shadow passwords required for -f\n"
+msgstr "%s: 쉐도우 패스워드가 -f 옵션을 요구합니다\n"
+
+#: src/useradd.c:1336
+#, c-format
+msgid "%s: invalid shell `%s'\n"
+msgstr "%s: 유효하지 않은 쉘 `%s'\n"
+
+#: src/useradd.c:1377
+#, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: 유효하지 않은 사용자명 `%s'\n"
+
+#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#, c-format
+msgid "%s: cannot rewrite password file\n"
+msgstr "%s: 패스워드 파일을 다시 쓸수가 없습니다\n"
+
+#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#, c-format
+msgid "%s: cannot rewrite shadow password file\n"
+msgstr "%s: 쉐도우 패스워드 파일을 다시 쓸수가 없습니다\n"
+
+#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: 패스워드 파일 잠금을 할 수 없습니다\n"
+
+#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: 패스워드 파일을 열 수 없습니다\n"
+
+#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#, c-format
+msgid "%s: cannot lock shadow password file\n"
+msgstr "%s: 쉐도우 패스워드 파일을 잠글 수 없습니다\n"
+
+#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#, c-format
+msgid "%s: cannot open shadow password file\n"
+msgstr "%s: 쉐도우 패스워드 파일을 열 수 없습니다\n"
+
+#: src/useradd.c:1580 src/usermod.c:1405
+#, c-format
+msgid "%s: error adding authentication method\n"
+msgstr "%s: 인증방법 추가하는데 오류\n"
+
+#: src/useradd.c:1604
+#, c-format
+msgid "%s: error adding new password entry\n"
+msgstr "%s: 새로운 패스워드 입력값을 추가하는데 오류\n"
+
+#: src/useradd.c:1618
+#, c-format
+msgid "%s: error updating password dbm entry\n"
+msgstr "%s: 패스워드 dbm 입력값을 업데이트하는데 오류\n"
+
+#: src/useradd.c:1634 src/usermod.c:1471
+#, c-format
+msgid "%s: error adding new shadow password entry\n"
+msgstr "%s: 새로운 쉐도우 패스워드 입력값을 추가하는데 오류\n"
+
+#: src/useradd.c:1650 src/usermod.c:1488
+#, c-format
+msgid "%s: error updating shadow passwd dbm entry\n"
+msgstr "%s: 쉐도우 패스워드 dbm 입력값을 업데이트 하는데 오류\n"
+
+#: src/useradd.c:1682
+#, c-format
+msgid "%s: cannot create directory %s\n"
+msgstr "%s: 디렉토리 %s 를 만들 수 없습니다\n"
+
+#: src/useradd.c:1806 src/usermod.c:1233
+#, c-format
+msgid "%s: user %s exists\n"
+msgstr "%s: 사용자 %s 는 존재합니다\n"
+
+#: src/useradd.c:1821
+#, c-format
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr ""
+
+#: src/useradd.c:1854
+#, c-format
+msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+msgstr ""
+"%s:경고: CREATE_HOME 은 지원되지 않습니다, -m 옵션을 대신 사용하세요.\n"
+
+#: src/userdel.c:129
+#, c-format
+msgid "usage: %s [-r] name\n"
+msgstr "사용법: %s [-r] 이름\n"
+
+#: src/userdel.c:181 src/userdel.c:267
+#, c-format
+msgid "%s: error updating group entry\n"
+msgstr "%s: 그룹 입력값을 업데이트하는데 오류\n"
+
+#: src/userdel.c:191 src/userdel.c:276
+#, c-format
+msgid "%s: cannot update dbm group entry\n"
+msgstr "%s: dbm 그룹 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/userdel.c:219
+#, fuzzy, c-format
+msgid "%s: cannot remove dbm group entry\n"
+msgstr "%s: dbm 그룹 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/userdel.c:308
+#, c-format
+msgid "%s: cannot rewrite TCFS key file\n"
+msgstr "%s: TCFS 키 파일을 다시 쓸 수 없습니다\n"
+
+#: src/userdel.c:392
+#, c-format
+msgid "%s: cannot lock TCFS key file\n"
+msgstr "%s: TCFS 키 파일을 잠글 수 없습니다\n"
+
+#: src/userdel.c:397
+#, c-format
+msgid "%s: cannot open TCFS key file\n"
+msgstr "%s: TCFS 키 파일을 열 수 없습니다\n"
+
+#: src/userdel.c:408
+#, c-format
+msgid "%s: cannot open group file\n"
+msgstr "%s: 그룹 파일을 열 수 없습니다\n"
+
+#: src/userdel.c:419
+#, c-format
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: 쉐도우 그룹 파일을 열 수 없습니다\n"
+
+#: src/userdel.c:451 src/userdel.c:468
+#, c-format
+msgid "%s: error deleting authentication\n"
+msgstr "%s: 인증을 지우는데 오류\n"
+
+#: src/userdel.c:479
+#, c-format
+msgid "%s: error deleting password entry\n"
+msgstr "%s: 패스워드 입력값을 지우는데 오류\n"
+
+#: src/userdel.c:485
+#, c-format
+msgid "%s: error deleting shadow password entry\n"
+msgstr "%s: 쉐도우 패스워드 입력값을 지우는데 오류\n"
+
+#: src/userdel.c:496
+#, c-format
+msgid "%s: error deleting TCFS entry\n"
+msgstr "%s: TCFS 입력값을 지우는데 오류\n"
+
+#: src/userdel.c:510
+#, c-format
+msgid "%s: error deleting password dbm entry\n"
+msgstr "%s: 패스워드 dbm 입력값을 지우는데 오류\n"
+
+#: src/userdel.c:533
+#, c-format
+msgid "%s: error deleting shadow passwd dbm entry\n"
+msgstr "%s: 쉐도우 패스워드 dbm 입력값을 지우는데 오류\n"
+
+#: src/userdel.c:569
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: 사용자 %s 는 현재 로긴한 상태 입니다\n"
+
+#: src/userdel.c:659
+#, c-format
+msgid "%s: warning: %s not owned by %s, not removing\n"
+msgstr ""
+"%s: 경고: %s 는 %s 에 소유되어 있지 않습니다, 따라서 제거되지 않습니다\n"
+
+#: src/userdel.c:666
+#, c-format
+msgid "%s: warning: can't remove "
+msgstr "%s: 경고: 제거할 수 없습니다 "
+
+#: src/userdel.c:758 src/usermod.c:1023
+#, c-format
+msgid "%s: user %s does not exist\n"
+msgstr "%s: 사용자 %s 는 존재하지 않습니다\n"
+
+#: src/userdel.c:770 src/usermod.c:1039
+#, c-format
+msgid "%s: user %s is a NIS user\n"
+msgstr "%s: 사용자 %s 는 NIS 사용자 입니다\n"
+
+#: src/userdel.c:799
+#, c-format
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %s 는 %s 에 소유되어 있지 않습니다, 따라서 제거되지 않습니다\n"
+
+#: src/userdel.c:818
+#, c-format
+msgid "%s: not removing directory %s (would remove home of user %s)\n"
+msgstr ""
+"%s: 디렉토리 %s 는 제거되지 않습니다 (사용자 %s 의 홈 디렉토리가 지워질 것입"
+"니다)\n"
+
+#: src/userdel.c:830
+#, c-format
+msgid "%s: error removing directory %s\n"
+msgstr "%s: 디렉토리 %s 를 지우는데 오류\n"
+
+#: src/usermod.c:326
+msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+msgstr "\t\t[-d 홈 디렉토리 [-m]] [-s 쉘] [-c 적요사항] [-l 새_이름]\n"
+
+#: src/usermod.c:332
+#, fuzzy
+msgid "[-A {DEFAULT|program},... ] "
+msgstr "[-A {디폴트|프로그램},...]"
+
+#: src/usermod.c:334
+#, fuzzy
+msgid "[-p passwd] [-L|-U] name\n"
+msgstr "[-p 패스워드] 이름\n"
+
+#: src/usermod.c:514
+#, c-format
+msgid "%s: out of memory in update_group\n"
+msgstr "%s: 업데이트_그룹에 메모리 부족\n"
+
+#: src/usermod.c:641
+#, c-format
+msgid "%s: out of memory in update_gshadow\n"
+msgstr "%s: 업데이트_그룹쉐도우에 메모리 부족\n"
+
+#: src/usermod.c:1210
+#, c-format
+msgid "%s: no flags given\n"
+msgstr "%s: 주어진 flag 가 없습니다\n"
+
+#: src/usermod.c:1217
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: 쉐도우 패스워드가 -e 옵션과 -f 옵션을 요구합니다\n"
+
+#: src/usermod.c:1239
+#, fuzzy, c-format
+msgid "%s: uid %lu is not unique\n"
+msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+
+#: src/usermod.c:1392
+#, c-format
+msgid "%s: error deleting authentication method\n"
+msgstr "%s: 인증방법을 지우는데 오류\n"
+
+#: src/usermod.c:1418
+#, c-format
+msgid "%s: error changing authentication method\n"
+msgstr "%s: 인증방법을 변경하는데 오류\n"
+
+#: src/usermod.c:1436
+#, c-format
+msgid "%s: error changing password entry\n"
+msgstr "%s: 패스워드 입력값을 변경하는데 오류\n"
+
+#: src/usermod.c:1442
+#, c-format
+msgid "%s: error removing password entry\n"
+msgstr "%s: 패스워드 입력값을 제거하는데 오류\n"
+
+#: src/usermod.c:1451
+#, c-format
+msgid "%s: error adding password dbm entry\n"
+msgstr "%s: 패스워드 dbm 입력값을 추가하는데 오류\n"
+
+#: src/usermod.c:1459
+#, c-format
+msgid "%s: error removing passwd dbm entry\n"
+msgstr "%s: 패스워드 dbm 입력값을 제거하는데 오류\n"
+
+#: src/usermod.c:1478
+#, c-format
+msgid "%s: error removing shadow password entry\n"
+msgstr "%s: 쉐도우 패스워드 입력값을 제거하는데 오류\n"
+
+#: src/usermod.c:1495
+#, c-format
+msgid "%s: error removing shadow passwd dbm entry\n"
+msgstr "%s: 쉐도우 패스워드 dbm 입력값을 제거하는데 오류\n"
+
+#: src/usermod.c:1524
+#, c-format
+msgid "%s: directory %s exists\n"
+msgstr "%s: 디렉토리 %s 는 존재합니다\n"
+
+#: src/usermod.c:1533
+#, c-format
+msgid "%s: can't create %s\n"
+msgstr "%s: %s 를 만들 수 없습니다\n"
+
+#: src/usermod.c:1539
+#, c-format
+msgid "%s: can't chown %s\n"
+msgstr "%s: %s 를 chown 할 수 없습니다\n"
+
+#: src/usermod.c:1556
+#, c-format
+msgid "%s: cannot rename directory %s to %s\n"
+msgstr "%s: 디렉토리 %s 에서 %s 로 이름을 바꿀수 없습니다\n"
+
+#. better leave it alone
+#: src/usermod.c:1653
+#, c-format
+msgid "%s: warning: %s not owned by %s\n"
+msgstr "%s: 경고: %s 는 %s 에 소유되어 있지 않습니다\n"
+
+#: src/usermod.c:1659
+msgid "failed to change mailbox owner"
+msgstr "메일박스 소유자를 변경하는데 실패했습니다"
+
+#: src/usermod.c:1667
+msgid "failed to rename mailbox"
+msgstr "메일박스의 이름을 바꾸는데 실패했습니다"
+
+#: src/vipw.c:104
+#, c-format
+msgid ""
+"\n"
+"%s: %s is unchanged\n"
+msgstr ""
+"\n"
+"%s: %s 는 변경되지 않았습니다\n"
+
+#: src/vipw.c:132
+msgid "Couldn't lock file"
+msgstr "파일을 잠글 수 없습니다"
+
+#: src/vipw.c:141
+msgid "Couldn't make backup"
+msgstr "백업을 만들 수 없습니다"
+
+#: src/vipw.c:206
+#, c-format
+msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgstr ""
+"%s: %s 를 복구시킬 수 없습니다: %s (당신의 변경사항은 %s 에 있습니다)\n"
+
+#: src/vipw.c:244
+msgid ""
+"Usage:\n"
+"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+msgstr ""
+"사용법:\n"
+"`vipw' 는 /etc/passwd 를 편집합니다\t`vipw -s' 는 /etc/shadow를 편집합니다\n"
+"`vigr' 은 /etc/group 을 편집합니다\t`vigr -s' 는 /etc/gshadow를 편집합니다\n"
+
+#~ msgid "%s: gid %ld is not unique\n"
+#~ msgstr "%s: gid(그룹 아이디) %ld 는 적절하지 않습니다\n"
+
+#, fuzzy
+#~ msgid "unknown gid: %u\n"
+#~ msgstr "알수없는 gid: %d\n"
+
+#~ msgid "%s: uid %d is not unique\n"
+#~ msgstr "%s: uid(사용자 아이디) %d 는 적절하지 않습니다\n"
+
+#~ msgid "user %s: bad UID (%d)\n"
+#~ msgstr "사용자 %s: 좋지 않은 UID(사용자 아이디) (%d)\n"
+
+#~ msgid "%s: no aging information present\n"
+#~ msgstr "%s: 연령에 대한 어떠한 정보도 나타나지 않습니다\n"
+
+#~ msgid "group %s: bad GID (%d)\n"
+#~ msgstr "그룹 %s: 좋지않은 GID(그룹 아이디) (%d)\n"
+
+#~ msgid "%s: permission denied (shell).\n"
+#~ msgstr "%s: 접근권한 없음 (쉘).\n"

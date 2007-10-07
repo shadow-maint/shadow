@@ -1,3 +1,229 @@
+2002-01-06  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* configure.in: It is good time to release 4.0.1.
+
+	* TODO: some things goes out other in.
+
+	* src/newgrp.c, NEWS:
+	added ability to log session closes in newgrp (look at long nice comments
+	inside source code :_) by Joseph Parmelee <jparmele@wildbear.com>.
+
+	* src/groupadd.c, src/useradd.c:
+	next part fixes for handle long UID/GID (by Thorsten Kukuk <kukuk@suse.de>).
+
+	* lib/getdef.c, lib/getdef.h:
+	adeded getdef_unum(): get unsigned numerical value from table of
+	definitions (Thorsten Kukuk <kukuk@suse.de>).
+
+	* NEWS: updated.
+
+	* libmisc/isexpired.c:
+	remove "#if defined(SHADOWPWD)" (not removed during remove AGING).
+
+	* etc/Makefile.am: useradd config file added to EXTRA_DIST.
+
+2002-01-05  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po:
+	update.
+
+	* src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/dpasswd.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/groupmems.c, src/groupmod.c, src/groups.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/logoutd.c, src/mkpasswd.c, src/newgrp.c, src/newusers.c, src/passwd.c:
+	Add -pcs to .indent.pro file and reindent all code.
+	Remove "\n" from all SYSLOG() messages.
+
+	* NEWS: s/SuSe/SuSE/
+
+2001-12-22  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* man/pl/useradd.8, man/useradd.8: documment -o option.
+
+	* man/pl/usermod.8, man/pl/chfn.1, man/pl/chsh.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/id.1, man/pl/login.1, man/pl/newgrp.1, man/pl/passwd.1, man/pl/su.1, man/pl/useradd.8, man/pl/userdel.8:
+	correct package name (s/shadow-password/shadow/).
+
+	* src/chage.c, src/expiry.c, src/login.c, src/passwd.c, src/su.c, libmisc/age.c, libmisc/isexpired.c, NEWS, configure.in:
+	Finish integrate AGING code into SHADOWPW.
+	Remove handle old HAVE_USERSEC_H code.
+
+	* po/uk.po: typo.
+
+	* man/pl/passwd.1, man/ja/passwd.1, man/chpasswd.8, man/dpasswd.8, man/newgrp.1, man/newusers.8, man/passwd.1:
+	cleanups.
+
+	* src/dpasswd.c, src/expiry.c, src/grpck.c, src/id.c, src/mkpasswd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/chfn.c, src/chsh.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, man/useradd.8:
+	standarize usage messages syntax.
+
+	* man/pl/useradd.8, man/pl/usermod.8, man/pl/vipw.8, man/pl/userdel.8:
+	removed duplicated man page text.
+
+	* src/chage.c, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po:
+	standarize usage meissages syntax.
+
+	* src/chage.c, NEWS (main):
+	merge part Solar shadow-4.0.0-owl-pam-auth.diff patch with reorder
+	nitialize PAM and checkin is chage is runed by root or not - now chage can be
+	runed from non-root account for checking by user own accout information.
+
+	* src/pwck.c: indent source.
+
+	* src/pwck.c (main): remove old work around for Slackware bug.
+
+2001-12-20  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* man/ja/Makefile.am, man/ja/adduser.8, man/ja/limits.5, man/ja/pwconv.8:
+	- updated to man-pages-ja-20011215
+
+2001-11-19  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* src/grpck.c:
+	remove check for a Slackware bug (make sure GID is not -1; it was special
+	meaning for some syscalls).
+
+	* src/newgrp.c, src/pwck.c, src/su.c, src/useradd.c, src/usermod.c, src/groupadd.c, src/groupmod.c, src/id.c, NEWS:
+	fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>).
+
+	* src/chage.c: - break ussage vomment line.
+
+	* lib/defines.h:
+	removed bunch spaces on end line in conditionale #include <errno.h>
+	which in some cases dissallow compile correctly shadow (thanks for
+	Silvan Minghetti <bullet@users.sourceforge.net>).
+
+2001-11-17  Micha³ Moskal  <malekith@pld.org.pl>
+
+	* NEWS:
+	- mention fix for SEGV when using pwck -s on /etc/passwd file with
+	  empty lines in it
+
+	* lib/commonio.c:
+	- installed fix for SEGV when using pwck -s on /etc/passwd file with
+	  empty lines in it
+
+2001-11-17  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* libmisc/chkname.c, NEWS:
+	next merge from Solar patches (shadow-4.0.0-owl-check_names.diff) but only
+	part this patch with checking login name matching; checking is login
+	string isn't longer than possible probably it will be good prepare using
+	_POSIX_LOGIN_NAME_MAX from <bits/posix1_lim.h>
+
+2001-11-16  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* NEWS: typos.
+
+	* NEWS: added info about new hu man pages.
+
+	* NEWS: updated.
+
+2001-11-16  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* man/ja/passwd.5, man/ja/porttime.5, man/ja/pw_auth.3, man/ja/pwauth.8, man/ja/pwck.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/Makefile.am, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/dpasswd.8, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/grpck.8, man/ja/lastlog.8, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/logoutd.8, man/ja/mkpasswd.8, man/ja/newgrp.1, man/ja/passwd.1:
+	- updated to man-pages-ja-20011115.tar.gz
+
+	* man/ja/groups.1: 3c26de91cfd359c0b7c36ca3cd3e170d  groups.1
+
+	* man/ja/grpconv.8: 402190c04b8df45e20afd01e3acd0da4  grpconv.8
+
+	* man/ja/grpunconv.8: 402190c04b8df45e20afd01e3acd0da4  grpunconv.8
+
+	* man/ja/id.1: 3edc687b1c09bbdd170553f326a71711  id.1
+
+	* man/ja/newusers.8: c2ecaa6ddffe07de2c39be3aefb5bcae  newusers.8
+
+	* man/ja/pwunconv.8: 402190c04b8df45e20afd01e3acd0da4  pwunconv.8
+
+	* man/ja/shadowconfig.8:
+	f79300c0db64fd961443177c88605087  shadowconfig.8
+
+	* man/ja/useradd.8: 3333b9a2e5a388a472fb05106d65a596  useradd.8
+
+	* man/ja/vigr.8: 42825938683e54e391897ea100001af1  vigr.8
+
+	* man/ja/vipw.8: 0cb8db0f1f19de7690f0ef9baeceb919  vipw.8
+
+2001-11-16  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* lib/getpass.c:
+	one fix warning from Solar shadow-4.0.0-owl-warnings.diff.
+
+	* src/chage.c, lib/defines.h:
+	move "#include <errno.h>" to /lib/defines.h.
+
+	* configure.in: added AC_CHECK_HEADERS(errno.h)
+
+	* src/chage.c: apply shadow-4.0.0-owl-chage-drop-priv.diff and
+	shadow-4.0.0-owl-chage-ro-no-lock.diff by Solar Designer <solar@openwall.com>.
+	Added locks which are needed when doing r/w accesses, not when running as root.
+	If root does read-only, there's no lock needed. Added missing
+	"#include <errno.h>" for above.
+
+2001-11-14  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* configure.in: - added hu directory antry
+
+	* man/Makefile.am: - groups.1 moved to EXTRA_DIST
+	- added hu directory entry
+
+	* man/ja/Makefile.am: - sorted
+	- shadow.3 moved to EXTRA_DIST
+
+	* man/pl/Makefile.am: - sorted
+	- added entries for new pages
+	- EXTRA_DIST synced with man/Makefile.am
+
+	* man/hu/Makefile.am, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/newgrp.1, man/hu/passwd.1, man/hu/sg.1:
+	- man pages from Debian
+
+	* man/groupmems.8: - typo
+
+	* man/pl/expiry.1, man/pl/groupmems.8: - translated pages
+
+2001-11-07  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* libmisc/Makefile.am:
+	fix building with cracklib enabled: $(LIBCRACK) added to libmisc_la_LIBADD.
+
+	* src/useradd.c: typo.
+
+2001-11-06  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* src/dpasswd.c, src/gpasswd.c, src/groupadd.c, src/groupmod.c, src/grpck.c, src/lastlog.c, src/login.c, src/passwd.c, src/pwck.c, src/userdel.c, src/usermod.c, src/chage.c, src/chfn.c, src/chsh.c, libmisc/utmp.c:
+	removed prototypes which are defined in libc header files
+	(Thorsten Kukuk <kukuk@suse.de>).
+
+	* libmisc/Makefile.am, libmisc/nscd.c, lib/commonio.c:
+	implemetn better reloading the nscd cache (per NSS map)
+	by Thorsten Kukuk <kukuk@suse.de>
+
+	* src/login.c, libmisc/setupenv.c:
+	fixed warnings "not used but defined" on compile using gcc 3.0.x
+	by bulletpr00ph <bullet@users.sourceforge.net>.
+
+2001-10-24  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* NEWS: New entries for 4.0.1.
+
+	* po/pl.po: few more pl translations.
+
+	* po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po:
+	"make update-po".
+
+	* po/ja.po, po/ko.po, configure.in:
+	added ja, ko translations found in SuSe.
+
+2001-10-17  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* src/useradd.c: sort alphabetically *flg variables.
+
+	* debian/Attic/tar.c, debian/Makefile.am: removed.
+
+2001-10-10  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* man/ja/Makefile.am, man/ja/sg.1, man/pl/Makefile.am, man/pl/sg.1, man/pl/vigr.8, man/sg.1, man/vigr.8, man/Makefile.am:
+	added vigr(1) man page as roff .so link to vipw(1),                                                                             - added sg(1) man page as roff .so link to newgrp(1).
+
+	* src/Makefile.am:
+	added install symlinks newgrp -> sg, vipw -> vigr in install-exec-hook target.
+
 2001-10-06  Tomasz K³oczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am (libshadow_la_SOURCES):
@@ -523,7 +749,7 @@
 
 1999-03-07  Marek Micha³kiewicz  <marekm@pld.org.pl>
 
-	* po/pl.po, po/el.po, doc/LSM, src/useradd.c, src/su.c, src/pwconv.c, src/pwck.c, src/passwd.c, src/newusers.c, src/newgrp.c, src/logoutd.c, src/login.c, src/grpconv.c, src/grpck.c, src/groupadd.c, src/gpasswd.c, src/dpasswd.c, src/chfn.c, src/chage.c, man/usermod.8, man/useradd.8, man/limits.5, man/chage.1, libmisc/valid.c, libmisc/sub.c, libmisc/strtoday.c, libmisc/setupenv.c, libmisc/obscure.c, libmisc/limits.c, libmisc/env.c, lib/snprintf.h, lib/getdef.c, lib/encrypt.c, lib/defines.h, etc/login.defs.linux, doc/WISHLIST, doc/README.nls, doc/README.pam, doc/README.platforms, doc/README.mirrors, doc/README.linux, doc/Makefile.am, doc/Attic/CHANGES, debian/tar.c, debian/rules, debian/Attic/logoutd, debian/control, debian/changelog, configure.in:
+	* po/pl.po, po/el.po, doc/LSM, src/useradd.c, src/su.c, src/pwconv.c, src/pwck.c, src/passwd.c, src/newusers.c, src/newgrp.c, src/logoutd.c, src/login.c, src/grpconv.c, src/grpck.c, src/groupadd.c, src/gpasswd.c, src/dpasswd.c, src/chfn.c, src/chage.c, man/usermod.8, man/useradd.8, man/limits.5, man/chage.1, libmisc/valid.c, libmisc/sub.c, libmisc/strtoday.c, libmisc/setupenv.c, libmisc/obscure.c, libmisc/limits.c, libmisc/env.c, lib/snprintf.h, lib/getdef.c, lib/encrypt.c, lib/defines.h, etc/login.defs.linux, doc/WISHLIST, doc/README.nls, doc/README.pam, doc/README.platforms, doc/README.mirrors, doc/README.linux, doc/Makefile.am, doc/Attic/CHANGES, debian/Attic/tar.c, debian/rules, debian/Attic/logoutd, debian/control, debian/changelog, configure.in:
 	*** empty log message ***
 
 1998-12-28  Marek Micha³kiewicz  <marekm@pld.org.pl>
@@ -548,7 +774,7 @@
 
 1998-04-16  Marek Micha³kiewicz  <marekm@pld.org.pl>
 
-	* src/useradd.c, src/userdel.c, src/usermod.c, src/passwd.c, src/sulogin.c, src/groupdel.c, src/login.c, src/logoutd.c, src/newgrp.c, src/chage.c, src/dpasswd.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, src/Makefile.am, libmisc/utmp.c, redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, libmisc/limits.c, libmisc/log.c, libmisc/login_desrpc.c, libmisc/loginprompt.c, libmisc/obscure.c, libmisc/strtoday.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/copydir.c, libmisc/failure.c, lib/defines.h, lib/dialchk.c, lib/pwauth.c, lib/pwpack.c, doc/Attic/CHANGES, doc/README.linux, doc/WISHLIST, doc/cracklib26.diff, lib/commonio.c, acconfig.h, configure.in, debian/tar.c:
+	* src/useradd.c, src/userdel.c, src/usermod.c, src/passwd.c, src/sulogin.c, src/groupdel.c, src/login.c, src/logoutd.c, src/newgrp.c, src/chage.c, src/dpasswd.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, src/Makefile.am, libmisc/utmp.c, redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, libmisc/limits.c, libmisc/log.c, libmisc/login_desrpc.c, libmisc/loginprompt.c, libmisc/obscure.c, libmisc/strtoday.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/copydir.c, libmisc/failure.c, lib/defines.h, lib/dialchk.c, lib/pwauth.c, lib/pwpack.c, doc/Attic/CHANGES, doc/README.linux, doc/WISHLIST, doc/cracklib26.diff, lib/commonio.c, acconfig.h, configure.in, debian/Attic/tar.c:
 	*** empty log message ***
 
 1998-04-02  Marek Micha³kiewicz  <marekm@pld.org.pl>

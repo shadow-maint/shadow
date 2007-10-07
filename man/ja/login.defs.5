@@ -1,4 +1,4 @@
-.\" Copyright 1991 - 1993, John F. Haugh II and Chip Rosenthal
+.\" Copyright 1991 - 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,28 +25,33 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.defs.5,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: login.defs.5,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated Wed Apr 26 17:22:36 JST 2000
+.\"         by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Sat Jan 13 09:24:04 JST 2001
+.\"         by Kentaro Shirakata <argrath@ub32.org>
 .\"
+.\" WORD: shadow login suite	shadow ログイン機能
 .TH LOGIN 5
 .SH 名前
-/etc/login.defs \- Loginの設定
+/etc/login.defs \- loginの設定
 .SH 説明
 .I /etc/login.defs
-ファイルはshadow login suiteに対するサイト固有の設定を行うためのものである。
+ファイルは shadow ログイン機能に対するサイト固有の設定を行うためのものである。
 このファイルは必ず存在しなければならない。
 このファイルが無くともシステム運用は可能であるが、おそらく望まない
 結果となるだろう。
 .PP
 このファイルは読み取り可能なテキストファイルで、ファイル中の一行につき
-一つのパラメタを設定している。
+一つのパラメータを設定している。
 各行は設定パラメータの名前及びその値が空白で区切られたものからなる。
 空行及びコメント行は無視される。
-コメント行は'#'記号で始まる。記号'#'はその行の最初の空白以外の文字
+コメント行は`#'記号で始まる。記号`#'はその行での空白以外の最初の文字
 でなくてはならない。
 .PP
 パラメータ値は四つの型を取ることが出来る: 文字列、ブール型、数、倍精度数
@@ -64,6 +65,42 @@
 .PP
 以下に示すような設定項目がある:
 .\"
+.IP "CHFN_AUTH (ブール値)"
+もし
+.I yes
+なら、
+.B chfn
+と
+.B chsh
+プログラムはスーパーユーザが起動したのでない限り
+何らかの変更を行なう前にパスワードを訊ねる。
+.\"
+.IP "CHFN_RESTRICT (文字列)"
+このパラメータは
+.I passwd
+ファイルの
+.I gecos
+フィールドのうち、
+一般ユーザが
+.B chfn
+を使って変更出来るフィールドを指定する。
+指定する文字列は
+.IR f ,
+.IR r ,
+.IR w ,
+.I h
+の文字の任意の組み合わせで、それぞれフルネーム、部屋番号、
+職場電話番号、自宅電話番号を意味する。
+指定されなかった場合は、スーパーユーザだけが全ての項目を変更出来る。
+.\"
+.IP "CLOSE_SESSIONS (ブール値)"
+pam_close_session() 呼び出しを有効にする。
+通常の(pam_unix.so)セッション管理モジュールを使う場合は、これは不要である。
+しかし kerberos やその他の永続的セッションモデルを用いるモジュールでは、
+.B login
+は fork してシェルが終了するのを待つ必要があり、
+それでセッションをクリーンアップ出来る。
+.\"
 .IP "CONSOLE (文字列)"
 この項目を指定すると、rootがログインできるコンソールデバイスを制限する
 ことが出来る。
@@ -71,16 +108,16 @@
 しようとしても拒否される。この項目の設定は二つの形式を用いることが出来、
 ひとつは
 .sp
-.ft CW
+.ft I
 	CONSOLE /etc/consoles
-.ft P
+.ft R
 .sp
 の様な絶対パスを用いた指定法、
 今一つは
 .sp
-.ft CW
+.ft I
 	CONSOLE console:tty01:tty02:tty03:tty04
-.ft P
+.ft R
 .sp
 の様にコロンで区切られたリストで端末線を指定する方法である。
 パス名を指定する場合は、一行で一つの端末接続線を指定しなくてはならない。
@@ -91,6 +128,15 @@ rootは全ての端末デバイスからログイン出来てしまう。
 ならない。
 セキュリティが非常に重要である場合は、このようなアタックの可能性を無くす
 ために、コロンで区切った形式を用いなくてはならない。
+.\"
+.IP "CONSOLE_GROUPS (文字列)"
+XXX 文書化の必要あり。
+.\"
+.IP "CRACKLIB_DICTPATH (文字列)"
+XXX 文書化の必要あり。
+.\"
+.IP "DEFAULT_HOME (ブール値)"
+XXX 文書化の必要あり。
 .\"
 .IP "DIALUPS_CHECK_ENAB (ブール値)"
 値が
@@ -103,21 +149,25 @@ rootは全ての端末デバイスからログイン出来てしまう。
 指定しなくてはならない:
 .nf
 .sp
-.ft CW
+.ft I
 	ttyfm01
 	ttyfm02
 	\0\0.
 	\0\0.
 	\0\0.
-.ft P
+.ft R
 .sp
 .fi
+.\"
+.IP "ENVIRON_FILE (文字列)"
+ログインしたり su したりした時にセットする環境変数のリスト (一行にひとつずつ)
+が書かれたファイル。
 .\"
 .IP "ENV_HZ (文字列)"
 このパラメータにはHZ環境変数の内容を指定する。
 使用例は:
 .sp
-	\f(CWENV_HZ     HZ=50\fP
+	\fIENV_HZ     HZ=50\fR
 .sp
 このパラメータが定義されていない場合は、HZの値は初期化されない。
 .\"
@@ -126,14 +176,14 @@ rootは全ての端末デバイスからログイン出来てしまう。
 UIDがゼロ以外のユーザがログインした場合、環境変数PATHの内容はこの
 値に初期化される。
 このパラメータは必ず必要である; 定義されていない場合は誤った
-ディフォルト値に設定されてしまうだろう。
+デフォルト値に設定されてしまうだろう。
 .\"
 .IP "ENV_SUPATH (文字列)"
 このパラメータはスーパーユーザの検索パスに設定しなくてはならない。
 UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 値に初期化される。
 このパラメータは必ず必要である; 定義されていない場合は誤りのあり得る
-ディフォルト値に設定されてしまうだろう。
+デフォルト値に設定されてしまうだろう。
 .\"
 .IP "ENV_TZ (文字列)"
 このパラメータには環境変数TZを作り出すための情報を指定する。
@@ -141,13 +191,13 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 絶対パス名でなくてはならない。
 使用例は:
 .sp
-	\f(CWENV_TZ\0\0\0\0TZ=CST6CDT\fP
+	\fIENV_TZ\0\0\0\0TZ=CST6CDT\fP
 .sp
 又は
 .sp
-	\f(CWENV_TZ\0\0\0\0/etc/tzname\fP
+	\fIENV_TZ\0\0\0\0/etc/tzname\fP
 .sp
-存在しないファイルを指定した場合、TZはあるディフォルト値に初期化される。
+存在しないファイルを指定した場合、TZはあるデフォルト値に初期化される。
 このパラメータが未定義の場合はTZの値は初期化されない。
 .\"
 .IP "ERASECHAR (数)"
@@ -164,8 +214,17 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 に設定した場合は、ログインの失敗が
 .I /var/log/faillog
 中に
-.I faillog(8)
+.BR faillog (8)
 の書式で記録される。
+.\"
+.IP "FAIL_DELAY (数)"
+ログインが失敗する毎に遅延させる秒数。
+.\"
+.IP "FAKE_SHELL (文字列)"
+本当のユーザーシェルの代わりに、このパラメータで指定されたプログラムが起動される。
+しかし、その目に見える名前 (argv[0]) は元のシェルとなる。
+起動されたプログラムは実際のシェルの起動前に必要な作業
+(ロギング、追加認証、バナー、...)が行なえる。
 .\"
 .IP "FTMP_FILE (文字列)"
 このパラメータにはログイン失敗を記録するファイルの絶対パス名を指定する。
@@ -181,6 +240,11 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 このパラメータが指定されていない場合はロギングが抑制される。
 関連情報はFAILLOG_ENABとLOG_UNKFAIL_ENABを参照せよ。
 .\"
+.IP "GID_MAX (数)"
+.IP "GID_MIN (数)"
+.B groupadd
+プログラムがグループIDを選択する時の範囲。
+.\"
 .IP "HUSHLOGIN_FILE (文字列)"
 このパラメータは``hushlogin''の条件を設定するために用いる。
 この設定を行う方法には二通りある。
@@ -195,13 +259,13 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 この場合、ファイルは以下の様な書式でなくてはならない:
 .nf
 .sp
-.ft CW
+.ft I
 	demo
 	/usr/lib/uucp/uucico
 	\0\0.
 	\0\0.
 	\0\0.
-.ft P
+.ft R
 .sp
 .fi
 このパラメータが未定義の場合は、``hushlogin''条件が成立することは無い。
@@ -212,6 +276,9 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 ユーザがパスワード期限のチェックを回避できてしまうことに注意。
 関連する情報はMOTD_FILE, FAILLOG_ENAB, LASTLOG_ENAB, 及びMAIL_CHECK_ENAB
 を参照せよ。 
+.\"
+.IP "ISSUE_FILE (文字列)"
+ログインプロンプトを出す前に表示するファイルのフルパス名。
 .\"
 .IP "KILLCHAR (数)"
 端末の
@@ -224,7 +291,7 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 .\"
 .IP "LASTLOG_ENAB (ブール値)"
 このパラメータを
-.IR yes ,
+.I yes
 に設定し、且つファイル
 .I /var/log/lastlog
 が存在する場合、ユーザがログインに成功した記録がこのファイルに残される。
@@ -233,6 +300,16 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 ログイン失敗の表示は行われない。
 ``hushlogin''条件が成り立っている場合はログイン成功も失敗も表示されない。
 .\"
+.IP "LOGIN_RETRIES (数)"
+.B login
+プログラムが終了するまでに可能なログインの再試行の数。
+.\"
+.IP "LOGIN_STRING (文字列)"
+XXX 文書化の必要あり。
+.IP "LOGIN_TIMEOUT (数)"
+XXX 文書化の必要あり。
+.IP "LOG_OK_LOGINS (ブール値)"
+XXX 文書化の必要あり。
 .IP "LOG_UNKFAIL_ENAB (ブール値)"
 このパラメータが
 .I yes
@@ -245,7 +322,7 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 .\"
 .IP "MAIL_CHECK_ENAB (ブール値)"
 このパラメータを
-.IR yes ,
+.I yes
 に設定すると、ログイン時にユーザにメイルボックスの状態を通知する。
 関連情報はMAIL_DIRを参照せよ。
 .\"
@@ -254,8 +331,32 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 絶対パスを指定する。
 このパスにユーザのログイン名を付け足してMAIL環境変数 \- ユーザの
 メイルボックスへのパス \- を作り出す。
-このパラメータは必ず定義しなくてはならない; 未定義の場合は正しくない可能性
-のあるディフォルト値が使われる。関連情報はMAIL_CHECK_ENABを参照せよ。
+このパラメータと MAIL_FILE のどちらかは必ず定義しなくてはならない;
+未定義の場合は正しくない可能性のあるデフォルト値が使われる。
+関連情報はMAIL_CHECK_ENABを参照せよ。
+.\"
+.IP "MAIL_FILE (文字列)"
+このパラメータにはメイルボックスファイルの名前を指定する。
+ユーザのホームディレクトリにこの名前が追加されて、
+MAIL環境変数 \- ユーザのメイルボックスへのパス \- を作り出す。
+このパラメータと MAIL_DIR のどちらかは必ず定義しなくてはならない;
+未定義の場合は正しくない可能性のあるデフォルト値が使われる。
+関連情報はMAIL_CHECK_ENABを参照せよ。
+.\"
+.IP "MD5_CRYPT_ENAB (ブール値)"
+.I yes
+なら、
+.B passwd
+プログラムは新しく変更されたパスワードを新しい MD5 ベースの
+.BR crypt (3)
+パスワードハッシュアルゴリズムを用いて暗号化する。
+これは FreeBSD で最初に採用され、Linux では
+libc-5.4.38 と glibc-2.0 (またはそれ以上) で対応している。
+このアルゴリズムは 8 文字以上のパスワードに対応している (
+.BR getpass (3)
+により 127 文字に制限される)が、従来の
+.BR crypt (3)
+実装と互換性がない。
 .\"
 .IP "MOTD_FILE (文字列)"
 このパラメータには``その日のメッセージ''ファイルへのパス名をコロンで区切って
@@ -266,26 +367,33 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 が成り立つ場合には、表示は行われない。
 .\"
 .IP "NOLOGINS_FILE (文字列)"
-.\" the user will be disconnected.  If this parameter is not specified
-.\" then this feature will be inhibited.
 このパラメータにはroot以外のログインを禁止するファイルの絶対パス名を指定
 する。
 このファイルが存在する場合には、root以外のユーザがログインしようとした際
 ファイルの中身が表示され、ログインは拒否される。このパラメータが指定されて
 いない場合はこの機能は使用できない。
 .\"
+.IP "NOLOGIN_STR (文字列)"
+XXX 文書化の必要あり。
+.\"
 .IP "OBSCURE_CHECKS_ENAB (ブール値)"
 このパラメータが
-.IR yes
+.I yes
 に設定されている場合は、パスワード変更を受け付ける前にプログラム
-.I passwd
+.B passwd
 が余分にチェックを行う。
 行われるチェックは非常に単純であり、是非とも用いるべきである。
-.I passwd
+.B passwd
 プログラムが
-.IR root
+.I root
 によって実行された場合は、パスワードの難解度チェックはバイパスされる。
 関連情報はPASS_MIN_LENを参照せよ。
+.\"
+.IP "PASS_ALWAYS_WARN (ブール値)"
+XXX 文書化の必要あり。
+.\"
+.IP "PASS_CHANGE_TRIES (数)"
+XXX 文書化の必要あり。
 .\"
 .IP "PASS_MIN_DAYS (数)"
 パスワードが変更できるようになるまでの最短日数。
@@ -302,10 +410,14 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 一つのパスワードを使える最長日数。パスワードがこの日数よりも古い場合は
 アカウントがロックされる。指定されていない場合はある大きな数が用いられる。
 .\"
+.IP "PASS_MAX_LEN (数)"
+XXX 文書化の必要あり。
+.\"
 .IP "PASS_WARN_AGE (数)"
 パスワードの有効期限が来る前に警告を発する日数。ゼロにしておくと、当日にのみ
 警告を行い、負数を指定した場合は警告は行われない。
 指定されていない場合は警告は行われない。
+.\"
 .IP "PORTTIME_CHECKS_ENAB (ブール値)"
 このパラメータを
 .I yes
@@ -313,50 +425,62 @@ UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
 .I /etc/porttime
 ファイルが存在する場合は、ユーザがその時間指定した端末からログインして良いか
 を確認するのにそのファイルを参照する。
-c.f. porttime(4)
+c.f.
+.BR porttime (5)
+.\"
+.IP "QMAIL_DIR (文字列)"
+このパラメータには Qmail ユーザのための Maildir があるディレクトリを指
+定する。関連情報は MAIL_CHECK_ENAB を参照せよ。
 .\"
 .IP "QUOTAS_ENAB (ブール値)"
 このパラメータが
 .I yes
-に設定されている場合は、ユーザの``ulimit,'' ``umask,`` 及び ``niceness''
+に設定されている場合は、ユーザの``ulimit'', ``umask'', ``niceness''
 が
 .I passwd
 ファイルの
 .I gecos
 欄に指定されている値に初期化される。
-c.f. passwd(4).
+c.f.
+.BR passwd (5)
 .\"
 .IP "SU_NAME (文字列)"
 このパラメータは``su -''が実行された場合のコマンド名を設定する。
 例えば、このパラメータが``su''と定義されていた場合、
-.I ps(1)
+.BR ps (1)
 では実行中のコマンドが``-su''と表示される。
 このパラメータが定義されていない場合は、
-.I ps(1)
+.BR ps (1)
 には実行中の実際のシェルの名前、例えば``-sh``といった表示がなされる。
 .\"
 .IP "SULOG_FILE (文字列)"
 このパラメータには
-.I su
+.B su
 コマンドの実行記録を書き込むファイルの絶対パス名を指定する。
 このパラメータが設定されていない場合は、記録は行われない。
-.I su
+.B su
 コマンドはパスワードを認証する際に使われる事もあるので、このオプション又は
 .I syslog
 のいずれかを用いて
-.I su
+.B su
 実行を記録しなくてはならない。
 関連情報はSYSLOG_SU_ENABオプションを参照せよ。
+.\"
+.IP "SU_WHEEL_ONLY (ブール値)"
+XXX 文書化の必要あり。
+.\"
+.IP "SYSLOG_SG_ENAB (ブール値)"
+XXX 文書化の必要あり。
 .\"
 .IP "SYSLOG_SU_ENAB (ブール値)"
 このパラメータが
 .I yes
 に設定され、且つ
-.I login
+.B login
 が
 .I syslog
 機能を働かせるようにコンパイルされている場合は、全ての
-.I su
+.B su
 実行が
 .I syslog
 機能を用いて通知される。
@@ -368,24 +492,24 @@ c.f. passwd(4).
 コントロールシーケンスを送る、というものがある。
 この問題は、他のユーザが端末線にアクセスできないように許可属性を設定すれば
 回避できるが、こうすると残念ながら
-.I write
+.B write
 といったプログラムが機能しなくなってしまう。他の解決方法としては、
 潜在的に危険を孕んだ文字シーケンスをフィルターして取り除いてしまう様な
-.I write
+.B write
 プログラムを使い、これを特殊なグループに``setgid''させ、このグループに
-端末デバイスのグループ所有属性を割り当て、端末線の許可属性を\f(CW0620\fPに
+端末デバイスのグループ所有属性を割り当て、端末線の許可属性を\fI0620\fRに
 設定する、というものもある。
 TTYGROUPはまさにこの様な状況のために設定できるようにしてある。
 この項目が定義されていないときは、端末のグループ所有属性はユーザのグループ
 番号に初期化される。
-関連情報はTTYPERMSを参照せよ。
+関連情報は TTYPERM を参照せよ。
 .\"
 .IP "TTYPERM (数)"
 ログイン端末の許可属性がこの値に初期化される。
-典型的な設定値としては、\f(CW0622\fPに設定して他のユーザがその端末にwrite
-アクセス出来る様にするものや、\f(CW0600\fPに設定して他のユーザから端末を
+典型的な設定値としては、\fI0622\fRに設定して他のユーザがその端末にwrite
+アクセス出来る様にするものや、\fI0600\fRに設定して他のユーザから端末を
 守るものなどがある。
-指定されていない場合は、端末の許可属性は\f(CW0622\fPに初期化される。
+指定されていない場合は、端末の許可属性は\fI0622\fRに初期化される。
 関連情報はTTYGROUPを参照せよ。
 .\"
 .IP "TTYTYPE_FILE (文字列)"
@@ -394,23 +518,29 @@ TTYGROUPはまさにこの様な状況のために設定できるようにしてある。
 例えば:
 .nf
 .sp
-.ft CW
+.ft I
 	vt100\0	tty01
 	wyse60	tty02
 	\0\0.\0\0\0	\0\0.
 	\0\0.\0\0\0	\0\0.
 	\0\0.\0\0\0	\0\0.
-.ft P
+.ft R
 .sp
 .fi
-この情報は環境変数TERMを初期化するために用いられる。
+この情報は環境変数 TERM がまだ設定されていない時に
+これを初期化するためだけに用いられる。
 記号``#''で始まる行はコメントとして扱われる。
 このパラメータが設定されていない場合、ファイルが存在しない場合、もしくはこの
 ファイル中で端末線が見つからない場合は、環境変数TERMは設定されない。
 .\"
+.IP "UID_MAX (数)"
+XXX 文書化の必要あり。
+.IP "UID_MIN (数)"
+XXX 文書化の必要あり。
+.\"
 .IP "ULIMIT (倍精度数)"
 ファイルサイズの限度をこの値に初期化する。
-.IR ulimit
+.I ulimit
 が備わっているシステム、例えばSystem Vでのみサポートされている。
 指定されていない場合は、ファイルサイズ限度はある大きな値に初期化される。
 .\"
@@ -418,11 +548,12 @@ TTYGROUPはまさにこの様な状況のために設定できるようにしてある。
 許可属性マスクをこの値に初期化する。
 指定されていない場合は、許可属性マスクはゼロに初期化される。
 .\"
+.IP "USERDEL_CMD (文字列)"
+XXX 文書化の必要あり。
+.\"
 .SH 相互参照
-.\" The following cross reference shows which programs in the shadow login
-.\" suite use which parameters.
-以下の相互参照はshadow login suite中のどのプログラムが
-どのパラメータを使用するかを示したものである
+以下の相互参照は shadow ログイン機能中のどのプログラムが
+どのパラメータを使用するかを示したものである。
 .na
 .IP login 12
 CONSOLE DIALUPS_CHECK_ENAB ENV_HZ ENV_SUPATH ENV_TZ ERASECHAR FAILLOG_ENAB
@@ -441,7 +572,17 @@ MOTD_FILE NOLOGIN_STR QUOTAS_ENAB SULOG_FILE SYSLOG_SU_ENAB
 .IP sulogin 12
 ENV_HZ ENV_SUPATH ENV_TZ MAIL_DIR QUOTAS_ENAB TTYPERM
 .ad
+.SH バグ
+この man ページに書かれていない設定パラメータもある。
 .SH 関連項目
-login(1), passwd(4), faillog(4), porttime(4), faillog(8)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR login (1),
+.BR passwd (5),
+.BR faillog (5),
+.BR porttime (5),
+.BR faillog (8)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.br
+Chip Rosenthal (chip@unicom.com)
+
+

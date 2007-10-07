@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.20 2001/09/07 15:35:57 kloczek Exp $")
+RCSID("$Id: commonio.c,v 1.22 2001/11/17 13:15:52 malekith Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -292,35 +292,6 @@ commonio_lock(struct commonio_db *db)
 #endif
 }
 
-#ifndef NSCD_PID_FILE
-#define NSCD_PID_FILE "/var/run/nscd.pid"
-#endif
-
-/*
-   reload_nscd() is called after updating all of the password files,
-   to tell the "nscd" caching daemon to clear its cache.
-   Very loosely based on a shadow-utils patch from Red Hat.
- */
-
-static void
-reload_nscd(void)
-{
-#ifdef ENABLE_NSCD_SIGHUP  /* not every version of nscd can handle it */
-	FILE *pidfile;
-	int pid;
-
-	pidfile = fopen(NSCD_PID_FILE, "r");
-	if (pidfile) {
-		pid = 0;
-		fscanf(pidfile, "%d", &pid);
-		if (pid > 0)
-			kill(pid, SIGHUP);
-		fclose(pidfile);
-	}
-#endif
-}
-
-
 static void
 dec_lock_count(void)
 {
@@ -330,7 +301,8 @@ dec_lock_count(void)
 			/* Tell nscd when lock count goes to zero,
 			   if any of the files were changed.  */
 			if (nscd_need_reload) {
-				reload_nscd();
+				nscd_flush_cache("passwd");
+				nscd_flush_cache("group");
 				nscd_need_reload = 0;
 			}
 #ifdef HAVE_LCKPWDF
@@ -578,6 +550,8 @@ commonio_sort_wrt(struct commonio_db *shadow, struct commonio_db *passwd)
 	const char *name;
 
 	for (pw_ptr = passwd->head; pw_ptr; pw_ptr = pw_ptr->next) {
+		if (pw_ptr->eptr == NULL)
+			continue;
 		name = passwd->ops->getname(pw_ptr->eptr);
 		for (spw_ptr = shadow->head; spw_ptr; spw_ptr = spw_ptr->next)
 			if (strcmp(name, shadow->ops->getname(spw_ptr->eptr)) == 0)

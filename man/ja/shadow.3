@@ -1,4 +1,4 @@
-.\" Copyright 1989 - 1993, John F. Haugh II
+.\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: shadow.3,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: shadow.3,v 1.2 2001/11/16 17:01:33 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -40,28 +36,34 @@
 .SH 名前
 shadow \- 暗号化されたパスワードファイル用ルーチン
 .SH 書式
-#include <shadow.h>
-.br
-struct spwd *getspent();
-.br
-struct spwd *getspnam(char * name);
-.br
-void setspent();
-.br
-void endspent();
-.br
-struct spwd *fgetspent(FILE *fp);
-.br
-struct spwd *sgetspent(char *cp);
-.br
-int putspent(struct spwd *p,FILE *fp);
-.br
-int lckpwdf ();
-.br
-int ulckpwdf ();
+.B #include <shadow.h>
+.PP
+.B struct spwd *getspent();
+.PP
+.B struct spwd *getspnam(char
+.IB *name );
+.PP
+.B void setspent();
+.PP
+.B void endspent();
+.PP
+.B struct spwd *fgetspent(FILE
+.IB *fp );
+.PP
+.B struct spwd *sgetspent(char
+.IB *cp );
+.PP
+.B int putspent(struct spwd
+.I *p,
+.B FILE
+.IB *fp );
+.PP
+.B int lckpwdf();
+.PP
+.B int ulckpwdf();
 .SH 説明
 .I shadow
-はshadowパスワードファイル\fB/etc/shadow\fRの内容を操作するルーチンである。
+はshadowパスワードファイル\fI/etc/shadow\fRの内容を操作するルーチンである。
 .sp
 struct spwd {
 .in +.5i
@@ -109,24 +111,24 @@ sp_expire \- 1970年1月1からアカウント使用不能となる迄の日数
 .br
 sp_flag \- 将来の使用に予約
 .SH 説明
-\fIgetspent\fR, \fIgetspname\fR, \fIfgetspent\fR, 及び \fIsgetspent\fR
+\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, 及び \fBsgetspent\fR
 は各々\fBstruct spwd\fRへのポインタを返す。
-\fIgetspent\fRはファイルから次のエントリを、\fIfgetspent\fRは
+\fBgetspent\fRはファイルから次のエントリを、\fBfgetspent\fRは
 指定されたストリームから次のエントリを返す。
 この際、ファイルは正しい書式である仮定している。
-\fIsgetspent\fRは入力として与えられた文字列を用いて\fBstruct spwd\fR
+\fBsgetspent\fRは入力として与えられた文字列を用いて\fBstruct spwd\fR
 へのポインタを返す。
-\fIgetspnam\fRはファイル中の現在の位置から\fIname\fRに符合するエントリ
+\fBgetspnam\fRはファイル中の現在の位置から\fBname\fRに符合するエントリ
 を探す。
 .PP
-\fIsetspent\fR及び\fIendspent\fRはshadowしたパスワードファイルへの
+\fBsetspent\fR及び\fBendspent\fRはshadowしたパスワードファイルへの
 アクセスを夫々開始及び終了するために用いることが出来る。
 .PP
 \fB/etc/shadow\fRファイルに対する排他的なアクセスを保証するために、
-\fIlckpwdf\fR及び\fIulckpwdf\fRルーチンを用いなくてはならない。
-\fIlckpwdf\fRは\fIpw_lock\fRを用いて最大15秒間ロックをしようとする。
+\fBlckpwdf\fR及び\fBulckpwdf\fRルーチンを用いなくてはならない。
+\fBlckpwdf\fRは\fBpw_lock\fRを用いて最大15秒間ロックをしようとする。
 そして、最初の15秒の残りを用いて二度目のロックをしようとし続ける。
-全部で15秒間の間にいずれかの試みが失敗した場合は、\fIlckpwdf\fRは-1を返す。
+全部で15秒間の間にいずれかの試みが失敗した場合は、\fBlckpwdf\fRは-1を返す。
 いずれのロックも成功した場合は0が返される。
 .SH 返り値
 これらのルーチンは、エントリが残っていない場合又は処理の過程で
@@ -138,7 +140,7 @@ shadowされたパスワードファイルへのアクセスは制限されているので、
 .SH ファイル
 /etc/shadow \- 暗号化されたユーザパスワード
 .SH 関連項目
-getpwent(3),
-shadow(5)
-.\" .SH 翻訳者
-.\" 古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+.BR getpwent (3),
+.BR shadow (5)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

@@ -30,12 +30,14 @@ man_MANS = \
 	pwck.8 \
 	pwconv.8 \
 	pwunconv.8 \
+	sg.1 \
 	shadow.5 \
 	su.1 \
 	suauth.5 \
 	useradd.8 \
 	userdel.8 \
 	usermod.8 \
+	vigr.8 \
 	vipw.8
 
 EXTRA_DIST = $(man_MANS) \
@@ -49,4 +51,4 @@ EXTRA_DIST = $(man_MANS) \
 	sulogin.8
 
 # subdirectories for translated manual pages
-SUBDIRS = ja pl pt_BR
+SUBDIRS = hu ja pl pt_BR

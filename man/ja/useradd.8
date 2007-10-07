@@ -1,0 +1,201 @@
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"
+.\"     $Id: useradd.8,v 1.1 2001/11/16 17:00:42 ankry Exp $
+.\"
+.\" Japanese Version Copyright (c) 1996 HANATAKA Shinya
+.\"         all rights reserved.
+.\" Translated Wed Nov 20 17:42:39 JST 1996
+.\"         by HANATAKA Shinya 
+.\"
+.\"WORD:        initial group           主グループ
+.\"WORD:        supplementary group     補助グループ
+.\"
+.TH USERADD 8
+.SH 名前
+useradd \- 新規ユーザの作成、および新規ユーザのデフォルト情報の変更
+.SH 書式
+.TP 8
+.B useradd
+.\" .RB [ -A
+.\" .RI { method | \fBDEFAULT\fR "},... ]"
+.RB [ -c
+.IR comment ]
+.RB [ -d
+.IR home_dir ]
+.br
+.RB [ -e
+.IR expire_date ]
+.RB [ -f
+.IR inactive_time ]
+.br
+.RB [ -g
+.IR initial_group ]
+.RB [ -G
+.IR group [,...]]
+.br
+.RB [ -m " [" -k
+.IR skeleton_dir ]]
+.RB [ -p
+.IR passwd ]
+.br
+.RB [ -s
+.IR shell ]
+.RB [ -u
+.IR uid " ["
+.BR -o ]]
+.I login
+.TP 8
+.B useradd
+\fB-D\fR
+[\fB-g\fI default_group\fR]
+[\fB-b\fI default_home\fR]
+.br
+[\fB-f\fI default_inactive\fR]
+[\fB-e\fI default_expire_date\fR]
+.br
+[\fB-s\fI default_shell\fR]
+.SH 説明
+.SS 新規ユーザの作成
+\fB-D\fR オプションなしで実行された場合、 \fBuseradd\fR コマンドは、
+コマンドラインで与えられた値とデフォルトの設定値をもとに、
+新規ユーザのアカウントを作成する。
+コマンドラインのオプションに応じて、新規ユーザのアカウントが
+必要なシステムファイルに追加され、ホームディレクトリが作られ、
+設定ファイルがコピーされる。
+\fBuseradd\fR コマンドのオプションは次のとおりである。
+.\" .IP "\fB-A {\fImethod\fR|\fBDEFAULT\fR},..."
+.\" The value of the user's authentication method.
+.\" The authentication method is the name of a program which is responsible
+.\" for validating the user's identity.
+.\" The string \fBDEFAULT\fR may be used to change the user's authentication
+.\" method to the standard system password method.
+.\" This is a comma-separated list of program names.
+.\" It may include \fBDEFAULT\fR exactly once.
+.IP "\fB-c \fIcomment\fR"
+パスワードファイルに追加する新規ユーザのコメントフィールド。
+.IP "\fB-d \fIhome_dir\fR"
+新規ユーザのログイン時のディレクトリは、 \fIhome_dir\fR とする。
+デフォルトでは、 \fIlogin\fR を \fIdefault_home\fR に付け加えたものが
+ログイン時のディレクトリとなる。
+.IP "\fB-e \fIexpire_date\fR"
+ユーザアカウントが無効となる日付。
+日付は \fIYYYY-MM-DD\fR の形式である。
+.IP "\fB-f \fIinactive_days\fR"
+パスワードがの使用期限が切れてから、このオプションで与えた日数経過すると
+アカウントは永久に使用不能となる。
+値として 0 を指定すると、パスワードが失効した直後にアカウントは使用不能となり、
+-1 を指定すると、この機能は無効となる。
+デフォルト値は -1 である。
+.IP "\fB-g \fIinitial_group\fR"
+ユーザの属する主グループのグループ名またはグループ ID。
+グループ名はすでに存在するものでなければならない。
+グループ ID は、すでに存在するグループに対応するものでなければならない。
+デフォルトのグループ ID は 1 である。
+.IP "\fB-G \fIgroup,[...]\fR"
+ユーザの属する補助グループのリスト。
+グループはコンマで区切り、空白を含めてはいけない。
+これらのグループは、 \fB-g\fR オプションと同様に、
+すでに存在するものでなければならない。
+デフォルトでは、ユーザは主グループのみに属する。
+.IP \fB-m\fR
+ホームディレクトリが存在しない場合には、ホームディレクトリを作成する。
+\fB-k\fR オプションを同時に指定すると \fIskeleton_dir\fR 以下のファイルが、
+指定しないと \fI/etc/skel\fR 以下のファイルが、
+ホームディレクトリにコピーされる。
+\fIskeleton_dir\fR または \fI/etc/skel\fR に含まれるすべてのディレクトリも、
+ホームディレクトリに作られる。
+\fB-k\fR オプションは、 \fB-m\fR オプションとともに使われる場合のみ有効である。
+デフォルトでは、ホームディレクトリを作らず、ファイルのコピーもしない。
+.IP "\fB-p \fIpasswd\fR"
+\fBcrypt\fR(3) によって暗号化されたパスワード。
+デフォルトでは、アカウントは使えない状態となる。
+.IP "\fB-s \fIshell\fR"
+ユーザのログインシェル名。
+デフォルトではこのフィールドは空白となり、
+システムがデフォルトのログインシェルを選ぶ。
+.IP "\fB-u \fIuid\fR"
+ユーザ ID。
+\fI-o\fR オプションが同時に指定されない場合は、他と重なってはならない。
+数値は非負の値でなければならない。
+デフォルトでは、 99 より大きく、
+すでに存在するどのユーザよりも大きい数のうち、最小の値が使われる。
+0 から 99 までの値は大抵、システムアカウント用として予約されている。
+.SS デフォルト値の変更
+\fB-D\fR オプションを指定すると、
+\fBuseradd\fR は現在のデフォルト値を表示するか、
+またはオプションで与えられた値に応じてデフォルト値を変更する。
+使用可能なオプションは次のとおりである。
+.IP "\fB-b \fIdefault_home\fR"
+新規ユーザのホームディレクトリへのパス。
+新規ユーザアカウントを作成する際に \fB-d\fI オプションを指定しない場合、
+\fIdefault_home\fR の後にユーザ名を付け加えたものが
+新規ディレクトリ名として使われる。
+.IP "\fB-e \fIdefault_expire_date\fR"
+ユーザアカウントが無効となる日付。
+.IP "\fB-f \fIdefault_inactive\fR"
+パスワードの使用期限が切れてからアカウントが使用不能となるまでの日数。
+.IP "\fB-g \fIdefault_group\fR"
+新規ユーザの属する主グループのグループ名またはグループ ID。
+グループ名はすでに存在するものでなければならない。
+グループ ID は、すでに存在するグループに対応するものでなければならない。
+.IP "\fB-s \fIdefault_shell\fR"
+新規ユーザのログインシェル。
+指定されたプログラムが、今後作られるすべてのユーザアカウントに適用される。
+.PP
+オプションを指定しない場合、 \fBuseradd\fR は現在のデフォルト値を表示する。
+.SH 注意
+\fI/etc/skel\fR ディレクトリにデフォルトのユーザファイルを置く作業は
+システム管理者の責任である。
+.SH 警告
+NIS のグループにユーザを加えてはならない。
+これは必ず NIS サーバ上で行うこと。
+.SH ファイル
+/etc/passwd \- ユーザアカウント情報
+.br
+/etc/shadow \- shadow されたユーザアカウント情報
+.br
+/etc/group \- グループ情報
+.br
+/etc/default/useradd \- デフォルト値の情報
+.br
+/etc/skel \- ファイルの雛形が置かれるディレクトリ
+.SH 関連項目
+.BR chfn (1),
+.BR chsh (1),
+.BR crypt (3),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR passwd (1),
+.BR userdel (8),
+.BR usermod (8)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+
+

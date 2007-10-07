@@ -6,7 +6,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chkname.c,v 1.4 1998/04/16 19:57:43 marekm Exp $")
+RCSID("$Id: chkname.c,v 1.5 2001/11/17 01:24:57 kloczek Exp $")
 
 #include <ctype.h>
 #include "defines.h"
@@ -22,19 +22,16 @@ static int
 good_name(const char *name)
 {
 	/*
-	 * User/group names must start with a letter, and may not
-	 * contain colons, commas, newlines (used in passwd/group
-	 * files...) or any non-printable characters.
+	 * User/group names must match [a-z_][a-z0-9_-]*
 	 */
-	if (!*name || !isalpha(*name))
+	if (!*name || !((*name >= 'a' && *name <= 'z') || *name == '_'))
 		return 0;
 
-	while (*name) {
-		if (*name == ':' || *name == ',' ||
-		    *name == '\n' || !isprint(*name))
+	while (*++name) {
+		if (!((*name >= 'a' && *name <= 'z') ||
+		    (*name >= '0' && *name <= '9') ||
+		    *name == '_' || *name == '-'))
 			return 0;
-
-		name++;
 	}
 
 	return 1;

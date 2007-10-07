@@ -1,4 +1,4 @@
-.\" Copyright 1991, John F. Haugh II
+.\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -9,18 +9,14 @@
 .\" 2. Redistributions in binary form must reproduce the above copyright
 .\"    notice, this list of conditions and the following disclaimer in the
 .\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\" This product includes software developed by John F. Haugh, II
-.\"      and other contributors.
-.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
 .\"    may be used to endorse or promote products derived from this software
 .\"    without specific prior written permission.
 .\"
-.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
 .\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 .\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
 .\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
 .\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
 .\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -29,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: newgrp.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"	$Id: newgrp.1,v 1.2 2001/11/16 17:01:32 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -42,21 +38,21 @@ newgrp \- グループIDを変更する
 .br
 sg \- 異なるグループIDでコマンドを実行する
 .SH 書式
-.B newgrp
-[ - ] [ \fIgroup\fR ]
+.BR newgrp " [" - ]
+[\fIgroup\fR]
 .br
-.B sg
-[ - ] [ \fIgroup\fR [ \fB-c\fR \fIcommand\fR ] ]
+.BR sg " [" - ]
+[\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
 .SH 説明
-.I newgrp
+.B newgrp
 はログインセッション中に現在のグループIDを変更するために用いられる。
 オプションとして\fB\-\fRフラグを与えた場合は、
 新たにログインしたのと同じ様に環境が再初期化される。
 そうでない場合は、作業ディレクトリを含めて、現在の環境は変化しない。
 .PP
-.I newgrp
+.B newgrp
 は、現在の実際のグループIDを、指定したグループに、
-またグループ名を指定しなかった場合は\fB/etc/passwd\fRに記載された
+またグループ名を指定しなかった場合は\fI/etc/passwd\fRに記載された
 ディフォルトのグループに、変更する。
 ユーザにはパスワードがなくグループにはある場合、
 もしくは、メンバーであると設定されておらず、
@@ -65,25 +61,23 @@ sg \- 異なるグループIDでコマンドを実行する
 グループのパスワードが設定されておらず、かつユーザがメンバーとして
 設定されていない場合は、アクセスを拒否される。
 .PP
-.I sg
-コマンドは\fInewgrp\fRと同様な働きをするが、
+.B sg
+コマンドは\fBnewgrp\fRと同様な働きをするが、
 ユーザのシェルは置き換わらない。
-従って、\fIsg\fRコマンドから抜けた場合は以前のグループIDに戻る。
-.I sg
+従って、\fBsg\fRコマンドから抜けた場合は以前のグループIDに戻る。
+.B sg
 はコマンドも受け付ける。
 コマンドはBourneシェルで実行され、引用符で囲まなくてはならない。
 .SH 警告
-.PP
-この版の\fInewgrp\fRには多くのコンパイル時オプションがあるが、
+この版の\fBnewgrp\fRには多くのコンパイル時オプションがあるが、
 サイトによっては、そのうちのいくつかしか設定されていないこともある。
 .SH ファイル
 /etc/passwd \- ユーザのアカウント情報
 .br
 /etc/group \- グループ情報
 .SH 関連項目
-login(1),
-id(1),
-su(1)
-.SH 翻訳者
-古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
-
+.BR login (1),
+.BR id (1),
+.BR su (1)
+.SH 著者
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
