@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+# FIXME - this is out of date, please update for current Debian
+
 package = shadow
 
 # see dpkg-architecture(8)
@@ -21,11 +23,6 @@ else
 package-list = binary-passwd
 endif
 
-# set up environment so that dpkg --build runs our tar wrapper
-# (XXX this is no longer needed, and will be removed soon - install
-# libtricks and use "dpkg-buildpackage -rfakeroot" instead)
-#TAR_WRAPPER_SETUP = REAL_TAR=`command -p -v tar` PATH=`cd debian && pwd`:$$PATH
-
 # for "exec login" to work for ordinary users, /bin/login needs to be setuid
 # but very few people use this feature, so we make it non-setuid by default
 LOGIN_PERM = 0755
@@ -37,9 +34,6 @@ build:
 	./configure --disable-shared --disable-desrpc \
 	  --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 	$(MAKE)
-	if [ -n "$(TAR_WRAPPER_SETUP)" ] ; then \
-	  gcc -O2 -Wall -o debian/tar debian/tar.c ; \
-	fi
 	touch build
 
 clean:
@@ -84,7 +78,6 @@ binary-login:	checkroot build
 	dpkg-shlibdeps debian/tmp-l/{bin/*,usr/bin/*,usr/sbin/*}
 	dpkg-gencontrol -isp -plogin -Pdebian/tmp-l
 	./debian/checksums debian/tmp-l
-	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-l ..
 
 binary-passwd:	checkroot build
 	$(checkdir)
@@ -126,7 +119,6 @@ ifeq ($(DEB_HOST_GNU_SYSTEM),gnu)
 endif
 	dpkg-gencontrol -isp -ppasswd -Pdebian/tmp-p
 	./debian/checksums debian/tmp-p
-	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-p ..
 
 binary-su: checkroot build
 	$(checkdir)
@@ -146,7 +138,6 @@ binary-su: checkroot build
 	dpkg-shlibdeps debian/tmp-s/bin/su
 	dpkg-gencontrol -isp -psecure-su -Pdebian/tmp-s
 	./debian/checksums debian/tmp-s
-	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-s ..
 
 define checkdir
 	test -f lib/shadow.c -a -f debian/rules

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: gpasswd.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: gpasswd.c,v 1.17 2000/09/02 18:40:43 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -230,9 +230,9 @@ main(int argc, char **argv)
 
 	Prog = Basename(argv[0]);
 
-	openlog("gpasswd", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
-	setbuf (stdout, (char *) 0);
-	setbuf (stderr, (char *) 0);
+	OPENLOG("gpasswd");
+	setbuf(stdout, NULL);
+	setbuf(stderr, NULL);
 
 #ifdef SHADOWGRP
 	is_shadowgrp = sgr_file_present();

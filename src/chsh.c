@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chsh.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: chsh.c,v 1.17 2000/09/02 18:40:43 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -179,13 +179,12 @@ main(int argc, char **argv)
 
 	/*
 	 * Get the program name.  The program name is used as a
-	 * prefix to most error messages.  It is also used as input
-	 * to the openlog() function for error logging.
+	 * prefix to most error messages.
 	 */
 
 	Prog = Basename(argv[0]);
 
-	openlog("chsh", LOG_PID, LOG_AUTH);
+	OPENLOG("chsh");
 
 	/*
 	 * There is only one option, but use getopt() anyway to

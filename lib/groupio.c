@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: groupio.c,v 1.8 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: groupio.c,v 1.9 2000/09/02 18:40:43 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -102,8 +102,7 @@ static struct commonio_db group_db = {
 	0,		/* changed */
 	0,		/* isopen */
 	0,		/* locked */
-	0,		/* readonly */
-	0		/* use_lckpwdf */
+	0		/* readonly */
 };
 
 int

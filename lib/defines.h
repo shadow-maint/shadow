@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.16 2000/08/26 18:27:17 marekm Exp $ */
+/* $Id: defines.h,v 1.17 2000/09/02 18:40:43 marekm Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -138,13 +138,24 @@ char *strchr(), *strrchr(), *strtok();
 #define LOG_WARN LOG_WARNING
 #endif
 
+/* LOG_NOWAIT is deprecated */
+#ifndef LOG_NOWAIT
+#define LOG_NOWAIT 0
+#endif
+
+/* LOG_AUTH is deprecated, use LOG_AUTHPRIV instead */
+#ifndef LOG_AUTHPRIV
+#define LOG_AUTHPRIV LOG_AUTH
+#endif
+
 /* cleaner than lots of #ifdefs everywhere - use this as follows:
    SYSLOG((LOG_CRIT, "user %s cracked root", user)); */
 #if HAVE_SETLOCALE
 /* Temporarily set LC_TIME to "C" to avoid strange dates in syslog.
    This is a workaround for a more general syslog(d) design problem -
    syslogd should log the current system time for each event, and not
-   trust the formatted time received from the unix domain socket.  -MM */
+   trust the formatted time received from the unix domain (or worse,
+   UDP) socket.  -MM */
 #define SYSLOG(x)							\
 	do {								\
 		char *saved_locale = setlocale(LC_ALL, NULL);		\
@@ -169,6 +180,20 @@ char *strchr(), *strrchr(), *strtok();
 #define closelog()  /* empty */
 
 #endif  /* !USE_SYSLOG */
+
+/* The default syslog settings can now be changed here,
+   in just one place.  */
+
+#ifndef SYSLOG_OPTIONS
+/* #define SYSLOG_OPTIONS (LOG_PID | LOG_CONS | LOG_NOWAIT) */
+#define SYSLOG_OPTIONS (LOG_PID)
+#endif
+
+#ifndef SYSLOG_FACILITY
+#define SYSLOG_FACILITY LOG_AUTHPRIV
+#endif
+
+#define OPENLOG(progname) openlog(progname, SYSLOG_OPTIONS, SYSLOG_FACILITY)
 
 #ifndef F_OK
 # define F_OK 0

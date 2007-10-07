@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: usermod.8,v 1.7 2000/08/26 18:27:17 marekm Exp $
+.\"	$Id: usermod.8,v 1.8 2000/09/02 18:40:43 marekm Exp $
 .\"
 .TH USERMOD 8
 .SH NAME
@@ -61,6 +61,7 @@ usermod \- Modify a user account
 .RB [ -u
 .IR uid " ["
 .BR -o ]]
+.RB [ -L | -U ]
 .I login
 .SH DESCRIPTION
 The \fBusermod\fR command modifies the system account files to reflect
@@ -124,6 +125,14 @@ Any files which the user owns and which are located in the directory
 tree rooted at the user's home directory will have the file user ID
 changed automatically.
 Files outside of the user's home directory must be altered manually.
+.IP "\fB-L\fR"
+Lock a user's password.
+This puts a '!' in front of the encrypted password, effectively disabling
+the password.  You can't use this option with \fI-p\fR or \fI-U\fR.
+.IP "\fB-U\fR"
+Unlock a user's password.
+This removes the '!' in front of the encrypted password.
+You can't use this option with \fI-p\fR or \fI-L\fR.
 .SH CAVEATS
 \fBusermod\fR will not allow you to change the name of a user who is
 logged in.
