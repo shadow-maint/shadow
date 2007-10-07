@@ -1421,7 +1421,7 @@ fi
 
 # Define the identity of the package.
 PACKAGE=shadow
-VERSION=4.0.2
+VERSION=4.0.3
 
 cat >>confdefs.h <<EOF
 #define PACKAGE "$PACKAGE"
@@ -10343,7 +10343,7 @@ EOF
 echo "${ECHO_T}yes" >&6
 fi
 
-ALL_LINGUAS="cs el fr ja ko pl sv uk"
+ALL_LINGUAS="cs de el fr ja ko pl sv uk"
 if test -n "$ac_tool_prefix"; then
   # Extract the first word of "${ac_tool_prefix}ranlib", so it can be a program name with args.
 set dummy ${ac_tool_prefix}ranlib; ac_word=$2
@@ -12141,7 +12141,7 @@ echo "${ECHO_T}$LINGUAS" >&6
 
       INTL_LIBTOOL_SUFFIX_PREFIX=
 
-ac_config_files="$ac_config_files Makefile intl/Makefile po/Makefile.in doc/Makefile man/Makefile man/hu/Makefile man/ja/Makefile man/pl/Makefile man/pt_BR/Makefile libmisc/Makefile lib/Makefile src/Makefile contrib/Makefile debian/Makefile etc/Makefile etc/pam.d/Makefile shadow.spec"
+ac_config_files="$ac_config_files Makefile intl/Makefile po/Makefile.in doc/Makefile man/Makefile man/cs/Makefile man/de/Makefile man/fr/Makefile man/hu/Makefile man/id/Makefile man/it/Makefile man/ja/Makefile man/ko/Makefile man/pl/Makefile man/pt_BR/Makefile libmisc/Makefile lib/Makefile src/Makefile contrib/Makefile debian/Makefile etc/Makefile etc/pam.d/Makefile shadow.spec"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -12466,8 +12466,14 @@ do
   "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
   "doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
   "man/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/Makefile" ;;
+  "man/cs/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/cs/Makefile" ;;
+  "man/de/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/de/Makefile" ;;
+  "man/fr/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/fr/Makefile" ;;
   "man/hu/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/hu/Makefile" ;;
+  "man/id/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/id/Makefile" ;;
+  "man/it/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/it/Makefile" ;;
   "man/ja/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/ja/Makefile" ;;
+  "man/ko/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/ko/Makefile" ;;
   "man/pl/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/pl/Makefile" ;;
   "man/pt_BR/Makefile" ) CONFIG_FILES="$CONFIG_FILES man/pt_BR/Makefile" ;;
   "libmisc/Makefile" ) CONFIG_FILES="$CONFIG_FILES libmisc/Makefile" ;;
@@ -12481,7 +12487,7 @@ do
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "default-2" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-2" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
-  *) { { echo "$as_me:12484: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:12490: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -12754,7 +12760,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:12757: creating $ac_file" >&5
+    { echo "$as_me:12763: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -12772,7 +12778,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:12775: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:12781: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -12785,7 +12791,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:12788: error: cannot find input file: $f" >&5
+           { { echo "$as_me:12794: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -12846,7 +12852,7 @@ for ac_file in : $CONFIG_HEADERS; do test "x$ac_file" = x: && continue
   * )   ac_file_in=$ac_file.in ;;
   esac
 
-  test x"$ac_file" != x- && { echo "$as_me:12849: creating $ac_file" >&5
+  test x"$ac_file" != x- && { echo "$as_me:12855: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
 
   # First look for the input files in the build tree, otherwise in the
@@ -12857,7 +12863,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:12860: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:12866: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -12870,7 +12876,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:12873: error: cannot find input file: $f" >&5
+           { { echo "$as_me:12879: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;
@@ -12987,7 +12993,7 @@ cat >>$CONFIG_STATUS <<\EOF
   rm -f $tmp/in
   if test x"$ac_file" != x-; then
     if cmp -s $ac_file $tmp/config.h 2>/dev/null; then
-      { echo "$as_me:12990: $ac_file is unchanged" >&5
+      { echo "$as_me:12996: $ac_file is unchanged" >&5
 echo "$as_me: $ac_file is unchanged" >&6;}
     else
       ac_dir=`$as_expr X"$ac_file" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \

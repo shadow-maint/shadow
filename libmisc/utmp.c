@@ -41,12 +41,12 @@
 #include <stdio.h>
 
 #include "rcsid.h"
-RCSID("$Id: utmp.c,v 1.9 2001/11/06 16:18:08 kloczek Exp $")
+RCSID("$Id: utmp.c,v 1.10 2002/03/08 04:30:30 kloczek Exp $")
 
 #if HAVE_UTMPX_H
-extern	struct	utmpx	utxent;
+struct utmpx utxent;
 #endif
-extern	struct	utmp	utent;
+struct utmp utent;
 
 extern	struct	utmp	*getutent();
 extern	struct	utmp	*getutline();

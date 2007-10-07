@@ -1,0 +1,57 @@
+.TH PASSWD 5 "19. bøezna 1997" "Linux" "Linux - pøíruèka programátora"
+.do hla cs
+.do hpf hyphen.cs
+.SH JMÉNO
+passwd \- seznam hesel u¾ivatelù
+.SH POPIS
+.B Passwd
+je èitelný textový soubor, který obsahuje seznam u¾ivatelù systému a hesel,
+která musejí pou¾ít pro pøístup. Seznam hesel u¾ivatelù by mìl být s právy
+pro ètení pro ka¾dého, co¾ v poøádku, proto¾e jsou hesla za¹ifrována, ale 
+zápisová práva má jenom superu¾ivatel. Jestli¾e vytvoøíte nový login,
+nechejte pole pro heslo prázdné a pou¾ijte \fBpasswd\fP(1) pro doplnìní.
+Hvìzdièka nebo nìco podobného v poli hesel znaèí, ¾e tento u¾ivatel se nemù¾e
+pøihlásit pøes \fBlogin\fP(1). Jestli¾e je vá¹ koøenový adresáø v 
+.IR /dev/ram,
+tak musíte ulo¾it zmìnìný soubor hesel do va¹eho koøenového adresáøe na
+disketì nì¾ systém vypnete. Jestli¾e chcete
+vytvoøit skupinu u¾ivatelù, jejich GID musí být stejná a musí pro ni
+existovat záznam v souboru \fI/etc/group\fP, nebo skupina nebude existovat.
+.PP
+Ka¾dý øádek tvoøí jeden záznam, který má následující formát:
+.sp
+.RS
+login_name:passwd:UID:GID:user_name:directory:shell
+.RE
+.sp
+Popis jednotlivých polí:
+.sp
+.RS
+.TP 1.0in
+.I login_name
+pøihla¹ovací jméno u¾ivatele systému
+.TP
+.I password
+za¹ifrované heslo u¾ivatele
+.TP
+.I UID
+èíselná identifikace u¾ivatele (user ID)
+.TP
+.I GID
+èíselná identifikace  skupiny  (group ID)
+.TP
+.I user_name
+(volitelné) poznámka (èasto celé jméno u¾ivatele)
+.TP
+.I directory
+domovský adresáø u¾ivatele ($HOME)
+.TP
+.I shell
+program, který je spu¹tìn po úspì¹ném pøihlá¹ení (jestli¾e je prázdný,
+pou¾ije se
+.IR /bin/sh ).
+.RE
+.SH SOUBORY
+.I /etc/passwd
+.SH DAL©Í INFORMACE
+.BR passwd "(1), " login "(1), " group (5)

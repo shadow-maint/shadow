@@ -1,4 +1,4 @@
-.\"$Id: newgrp.1,v 1.10 2001/12/22 05:40:01 kloczek Exp $
+.\"$Id: newgrp.1,v 1.12 2002/03/09 19:22:30 ankry Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,13 +27,13 @@
 .\" SUCH DAMAGE.
 .TH NEWGRP 1
 .SH NAME
-newgrp \- Change group ID
+newgrp \- log in to a new group
 .br
-sg \- Execute command as different group ID
+sg \- execute command as different group ID
 .SH SYNOPSIS
 \fBnewgrp\fR [\fB-\fR] [\fIgroup\fR]
 .br
-\fBnewgrp\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
+\fBsg\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
 .SH DESCRIPTION
 \fBnewgrp\fR is used to change the current group ID during a login session.
 If the optional \fB\-\fR flag is given, the user's environment
@@ -43,25 +43,25 @@ remains unchanged.
 .PP
 \fBnewgrp\fR changes the current real group ID to the named group, or to the
 default group listed in \fI/etc/passwd\fR if no group name is given. The
-user will be prompted for a password if they do not have a password and the
+user will be prompted for a password if she do not have a password and the
 group does, or if the user is not listed as a member and the group has a
 password. The user will be denied access if the group password is empty and
 the user is not listed as a member.
 .PP
-The \fBsg\fR command works similiar to \fBnewgrp\fR but does not replace the
-user's shell, so upon exit from a \fBsg\fR command, you are returned to your
-previous group ID. \fBsg\fR also accepts a command. The command will be
-executed with the Bourne shell and must be enclosed in quotes.
-.SH CAVEATS
-This version of \fBnewgrp\fR has many compilation options,
-only some of which may be in use at any particular site.
+The \fBsg\fR command works similiar to \fBnewgrp\fR but accepts a command.
+The command will be executed with the Bourne shell.  With most shells you
+may run \fBsg\fR from, you need to enclose multi-word commands in quotes.
+Another difference between \fBnewgrp\fR and \fBsg\fR is that some shells
+treat \fBnewgrp\fR specially, replacing themselves with a new instance of
+a shell that \fBnewgrp\fR creates.  This doesn't happen with \fBsg\fR, so
+upon exit from a \fBsg\fR command you are returned to your previous group ID.
 .SH FILES
 /etc/passwd \- user account information
 .br
 /etc/group \- group information
 .SH SEE ALSO
-.BR login (1),
 .BR id (1),
+.BR login (1),
 .BR su (1)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

@@ -1,4 +1,4 @@
-.\" $Id: id.1,v 1.5 2001/12/22 07:18:47 kloczek Exp $
+.\" $Id: id.1,v 1.7 2002/03/09 19:24:25 ankry Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -28,28 +28,24 @@
 .\" SUCH DAMAGE.
 .TH ID 1
 .SH NAZWA
-id - wy¶wietl nazwy bie¿±cych ID u¿ytkownika i grupy
+id - wy¶wietlenie nazw bie¿±cych ID u¿ytkownika i grupy
 .SH SK£ADNIA
-\fBid\fR [\fB-a\fR]
+\fBid [\fB-a\fR]
 .SH OPIS
 .B id
 wy¶wietla bie¿±ce nazwy (lub warto¶ci) rzeczywistych i efektywnych
 identyfikatorów u¿ytkownika i grupy.
 Je¿eli dana warto¶æ nie posiada odpowiedniego wpisu w \fI/etc/passwd\fR
 lub \fI/etc/group\fR, to zostanie wy¶wietlona bez odpowiedniej nazwy.
-Opcjonalna flaga \fB-a\fR wy¶wietla zestaw grup w systemach, które obs³uguj±
-równoczesne cz³onkostwo w wielu grupach.
+U¿yvie opcji \fB-a\fR powoduje wy¶wietlenie zestaw grup w systemach, które
+obs³uguj± równoczesne cz³onkostwo w wielu grupach.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+/etc/passwd \- informacja o kontach u¿ytkowników
 .br
-.IR /etc/group " - informacja o grupach"
+/etc/group \- informacja o grupach
 .SH ZOBACZ TAK¯E
-.BR getuid (2),
 .BR getgid (2),
-.BR getgroups (2)
+.BR getgroups (2),
+.BR getuid (2)
 .SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow. Z
-uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz z
-w³a¶ciwej dokumentacji.
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

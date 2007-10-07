@@ -1,6 +1,6 @@
-.\" $Id: gpasswd.1,v 1.3 2001/01/27 02:55:54 kloczek Exp $
+.\" $Id: gpasswd.1,v 1.4 2002/03/09 19:24:25 ankry Exp $
 .\" {PTM/WK/1999-09-16}
-.\" Copyright 1996, Rafal Maszkowski, rzm@pdi.net
+.\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
 .\" published by the Free Software Foundation; either version 2 of the
@@ -11,30 +11,29 @@
 gpasswd \- administracja plikiem /etc/group
 .br
 .SH SK£ADNIA
-\fBgpasswd\fR \fIgrupa\fR
+\fBgpasswd \fIgrupa\fR
 .br
-\fBgpasswd\fR -a\fR \fIu¿ytkownik grupa\fR
+\fBgpasswd -a \fIu¿ytkownik grupa\fR
 .br
-\fBgpasswd -d\fR \fIu¿ytkownik grupa\fR
+\fBgpasswd -d \fIu¿ytkownik grupa\fR
 .br
-\fBgpasswd -R\fR \fIgrupa\fR
+\fBgpasswd -R \fIgrupa\fR
 .br
-\fBgpasswd -r\fR \fIgrupa\fR
+\fBgpasswd -r \fIgrupa\fR
 .br
-\fBgpasswd\fR [\fB-A\fR \fIu¿ytkownik ,...\fR] [\fB-M\fR
-\fIu¿ytkownik ,...\fR] \fIgrupa\fR
+\fBgpasswd\fR [\fB-A \fIu¿ytkownik\fR,...] [\fB-M \fIu¿ytkownik\fR,...] \fIgrupa\fR
 .SH OPIS
-\fBgpasswd\fR s³u¿y do administrowania plikiem \fI/etc/group\fR (oraz
-\fI/etc/gshadow\fR je¶li zosta³a wykonana kompilacja ze zdefiniowanym
+\fBgpasswd\fR s³u¿y do administrowania plikiem /etc/group (oraz
+/etc/gshadow je¶li zosta³a wykonana kompilacja ze zdefiniowanym
 SHADOWGRP). Ka¿da z grup mo¿e posiadaæ administratorów, cz³onków i has³o.
 Administrator systemu mo¿e pos³u¿yæ siê opcj± \fB-A\fR do zdefiniowania
-administratora(ów) grupy oraz opcj± \fB-M\fR do zdefiniowania jej cz³onków.
+administratora(-ów) grupy oraz opcj± \fB-M\fR do zdefiniowania jej cz³onków.
 Posiada on wszystkie prawa administratorów i cz³onków grup.
 .PP
 Administrator grupy mo¿e dodawaæ i usuwaæ u¿ytkowników przy pomocy,
 odpowiednio, opcji \fB-a\fR i \fB-d\fR. Administratorzy mog± te¿ u¿ywaæ opcji
 \fB-r\fR w celu usuniêcia has³a grupy. Je¿eli grupa nie posiada has³a,
-to polecenia 
+to polecenia
 .BR newgrp (1)
 do przy³±czenia siê do grupy mog± u¿ywaæ tylko jej cz³onkowie.
 Opcja \fB-R\fR wy³±cza dostêp do grupy za pomoc± polecenia
@@ -45,13 +44,16 @@ wywo³ane przez administratora grupy tylko z nazw± grupy pyta o jej has³o.
 Je¿eli has³o jest ustawione, to cz³onkowie grupy mog± nadal wykonywaæ
 .BR newgrp (1)
 bez has³a, inni musz± natomiast podaæ has³o.
+
 .SH PLIKI
-.IR /etc/group "   - informacja o grupach"
+/etc/group \- informacja o grupach
 .br
-.IR /etc/gshadow " - chroniona informacja o grupach"
+/etc/gshadow \- chroniona informacja o grupach
 .SH ZOBACZ TAK¯E
 .BR newgrp (1),
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
 .BR grpck (8)
+.SH AUTOR
+Rafal Maszkowski <rzm@pdi.net>

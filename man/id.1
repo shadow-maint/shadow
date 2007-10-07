@@ -1,4 +1,4 @@
-.\"$Id: id.1,v 1.8 2001/01/27 02:55:52 kloczek Exp $
+.\"$Id: id.1,v 1.10 2002/03/09 19:22:29 ankry Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,7 +29,7 @@
 .SH NAME
 id \- Display current user and group ID names
 .SH SYNOPSIS
-\fBid\fR [\fB-a\fR]
+\fBid [\fB-a\fR]
 .SH DESCRIPTION
 \fBid\fR displays the current real and effective user and group ID names or
 values. If the value does not have a corresponding entry in
@@ -41,8 +41,8 @@ set on systems which support multiple concurrent group membership.
 .br
 /etc/group \- group information
 .SH SEE ALSO
-.BR getuid (2),
 .BR getgid (2),
-.BR getgroups (2)
+.BR getgroups (2),
+.BR getuid (2)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

@@ -1,4 +1,4 @@
-.\" $Id: useradd.8,v 1.8 2001/12/22 08:03:38 kloczek Exp $
+.\" $Id: useradd.8,v 1.10 2002/03/09 11:16:23 ankry Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -101,26 +101,29 @@ Opcja \fB-k\fR jest dozwolona tylko w po³±czeniu z opcj± \fB-m\fR.
 Domy¶lnym dzia³aniem jest nie tworzenie katalogu i nie kopiowanie
 jakichkolwiek plików.
 .IP "\fB-o\fR"
-Umo¿liwia utworzenie uzytkownaika z nieunikalnym UID (takim samym jak ju¿
+Umo¿liwia utworzenie u¿ytkownaika z nieunikalnym UID (takim samym jak ju¿
 istniej±cy).
-.IP \fB-r\fR
-Tworzenie konta systemowego. Ta opcja pozwala na utworzenie konta o UID
-ni¿szym ni¿ UID_MIN zdefiniowane w fI/etc/login.defs\fR. O ile nie poda siê
-dodatkowo opcji \fB-m\fR nie jest tworzony katalog domowy dla tak tworzonego
-u¿ytkownika niezaleznie od tego czy twozrenie katalogu jest ustawione czy
-nei w \fI/etc/login.defs\fR.
+.IP "\fB-p \fIpasswd\fR"
+Zakodowane has³o w postaci zwracanej przez \fBcrypt\fR(3).
+Domy¶lnym dzia³aniem jest blokowanie konta.
+.\" .IP \fB-r\fR
+.\" Tworzenie konta systemowego. Ta opcja pozwala na utworzenie konta o UID
+.\" ni¿szym ni¿ UID_MIN zdefiniowane w fI/etc/login.defs\fR. O ile nie poda siê
+.\" dodatkowo opcji \fB-m\fR nie jest tworzony katalog domowy dla tak tworzonego
+.\" u¿ytkownika niezale¿nie od tego czy tworzenie katalogu jest ustawione czy
+.\" nie w \fI/etc/login.defs\fR.
 .IP "\fB-s \fIpow³oka\fR"
 Nazwa pow³oki (shell) u¿ytkownika. Ustawienie tego pola na puste
 powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
 .IP "\fB-u \fIuid\fR"
 Numeryczna warto¶æ identyfikatora u¿ytkownika (user's ID). Warto¶æ ta musi
-byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
+byæ niepowtarzalna, chyba ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
 Domy¶lnie u¿ywana jest tu najmniejsza warto¶æ identyfikatora wiêksza od 99
 i wiêksza od identyfikatorów pozosta³ych u¿ytkowników.
 Warto¶ci od 0 do 99 s± zwykle zarezerwowane dla kont systemowych.
 .SS Zmiana warto¶ci domy¶lnych
 Wywo³ane z opcj± \fB-D\fR, polecenie \fBuseradd\fR albo wy¶wietli bie¿±ce
-warto¶ci domy¶lne, albo zaaktualizuje domy¶lne warto¶ci z wiersza poleceñ.
+warto¶ci domy¶lne, albo zaktualizuje domy¶lne warto¶ci z wiersza poleceñ.
 Dozwolonymi opcjami s±:
 .IP "\fB-b \fIkatalog_bazowy\fR"
 Pocz±tkowy przedrostek ¶cie¿ki dla katalogu domowego nowego u¿ytkownika.
@@ -136,7 +139,7 @@ Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
 istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
 .IP "\fB-s \fIdomy¶lna_pow³oka\fR"
 Nazwa pow³oki (shell) dla nowych u¿ytkowników. Podany program bêdzie u¿yty
-dla wszystkich przysz³uych nowych kont u¿ytkowników.
+dla wszystkich przysz³ych nowych kont u¿ytkowników.
 .PP
 Bez podania opcji \fBuseradd\fR wy¶wietla bie¿±ce ustawienia domy¶lne.
 .SH UWAGI
@@ -158,12 +161,13 @@ na serwerze NIS.
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),
+.BR passwd (1),
+.BR crypt (3),
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
-.BR passwd (1),
 .BR userdel (8),
-.BR usermod (8).
+.BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
 .SH OD T£UMACZA

@@ -1,0 +1,64 @@
+.TH SHADOW 5
+.do hla cs
+.do hpf hyphen.cs
+.SH JMÉNO
+shadow \- soubor se za¹ifrovanými hesly
+.SH POPIS
+.I shadow
+obsahuje informace o za¹ifrovaných heslech u¾ivatelských úètù a
+volitelnì mù¾e obsahovat informace o stárnutí hesel. Soubor obsahuje
+
+.IP "" .5i
+Pøihla¹ovací jméno
+.IP "" .5i
+Za¹ifrované heslo
+.IP "" .5i
+Poèet dnù od 1. ledna 1970, kdy bylo heslo naposledy zmìnìno
+.IP "" .5i
+Poèet dnù, po jejich¾ uplynutí mù¾e být heslo zmìnìno
+.IP "" .5i
+Poèet dnù, po jejich¾ uplynutí musí být heslo zmìnìno
+.IP "" .5i
+Poèet dnù pøed lhùtou, kdy je u¾ivatel varován, ¾e heslo vypr¹í
+.IP "" .5i
+Poèet dnù, po jejich¾ uplynutí po propadnutí hesla je zablokován úèet.
+.IP "" .5i
+Poèet dnù od 1. ledna 1970, kdy byl úèet zablokován
+.IP "" .5i
+Rezervované pole
+.PP
+Pole hesla musí být vyplnìno. Za¹ifrované heslo se skládá ze 13 a¾ 24
+znakù z 64 prvkové mno¾iny znakù (a a¾ z, A a¾ Z, 0 a¾ 9, \. a
+/). \fIcrypt(3)\fR obsahuje detailní informace o tom, jak
+interpretovat tento øetìzec.
+.PP
+Datum poslední zmìny hesla je dáno poètem dní od 1. ledna 1970. Heslo
+nesmí býti znovu zmìnìno dokud øádnì neuplyne specifikovaný poèet dní,
+a musí být zmìnìno po uplynutí maximálního poètu dní. Pokud je
+minimální poèet dnù platnosti hesla vy¹¹í ne¾ maximální poèet
+povolených dní, heslo nemù¾e být zmìnìno u¾ivatelem.
+.PP
+Úèet je pova¾ován za neaktivní a bude zablokován, jestli¾e heslo není
+zmìnìno bìhem urèeného poètu dní po vypr¹ení platnosti hesla. Úèet
+bude také zablokován v urèený den nezávisle na ostatních informacích o
+vypr¹ení hesla.
+.PP
+Tyto informace o heslu a dobì jeho platnosti mají prioritu pøed
+informacemi ulo¾enými v souboru \fB/etc/passwd\fR.
+.PP
+Tento soubor nesmí být èitelný øádnými u¾ivateli, má-li být
+ochrana hesel úèinná.
+.SH SOUBORY
+/etc/passwd \- informace o u¾ivatelských úètech
+.br
+/etc/shadow \- za¹ifrovaná hesla u¾ivatelù
+.SH DAL©Í INFORMACE
+chage(1),
+login(1),
+passwd(1),
+su(1),
+sulogin(1M),
+shadow(3),
+passwd(5),
+pwconv(8),
+pwunconv(8)

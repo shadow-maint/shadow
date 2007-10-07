@@ -49,7 +49,6 @@ libmisc_la_SOURCES = \
 	setupenv.c \
 	shell.c \
 	strtoday.c \
-	suauth.c \
 	sub.c \
 	sulog.c \
 	ttytype.c \

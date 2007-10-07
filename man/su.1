@@ -1,4 +1,4 @@
-.\"$Id: su.1,v 1.9 2001/01/27 02:55:52 kloczek Exp $
+.\"$Id: su.1,v 1.11 2002/03/09 19:22:30 ankry Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,7 +27,7 @@
 .\" SUCH DAMAGE.
 .TH SU 1
 .SH NAME
-su \- Change user ID or become super-user
+su \- change user ID or become super-user
 .SH SYNOPSIS
 \fBsu\fR [\fB-\fR] [\fIusername\fR [\fIargs\fR]]
 .SH DESCRIPTION
@@ -46,8 +46,8 @@ The user will be prompted for a password, if appropriate. Invalid passwords
 will produce an error message. All attempts, both valid and invalid, are
 logged to detect abuses of the system.
 .PP
-The current environment is passed to the new shell.  The value of fB$PATH\fR
-\is reset to \fB/bin:/usr/bin\fR for normal users, or
+The current environment is passed to the new shell.  The value of \fB$PATH\fR
+is reset to \fB/bin:/usr/bin\fR for normal users, or
 \fB/sbin:/bin:/usr/sbin:/usr/bin\fR for the super user.  This may be changed
 with the \fBENV_PATH\fR and \fBENV_SUPATH\fR definitions in
 \fI/etc/login.defs\fR.
@@ -56,10 +56,9 @@ A subsystem login is indicated by the presense of a "*" as the first
 character of the login shell. The given home directory will be used as
 the root of a new filesystem which the user is actually logged into.
 .SH CAVEATS
-.PP
 This version of \fBsu\fR has many compilation options, only some of which
 may be in use at any particular site.
-.SH Files
+.SH FILES
 /etc/passwd \- user account information
 .br
 /etc/shadow \- encrypted passwords and age information
@@ -68,7 +67,7 @@ $HOME/.profile \- initialization script for default shell
 .SH SEE ALSO
 .BR login (1),
 .BR sh (1),
-.BR suauth (5),
-.BR login.defs (5)
+.BR login.defs (5),
+.BR suauth (5)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

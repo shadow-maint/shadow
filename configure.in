@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(lib/dialchk.c)
-AM_INIT_AUTOMAKE(shadow, 4.0.2)
+AM_INIT_AUTOMAKE(shadow, 4.0.3)
 AM_CONFIG_HEADER(config.h)
 
 dnl Some hacks...
@@ -282,7 +282,7 @@ else
 	AC_MSG_RESULT(yes)
 fi
 
-ALL_LINGUAS="cs el fr ja ko pl sv uk"
+ALL_LINGUAS="cs de el fr ja ko pl sv uk"
 AM_GNU_GETTEXT
 
 AC_OUTPUT([
@@ -291,8 +291,14 @@ AC_OUTPUT([
 	po/Makefile.in
 	doc/Makefile
 	man/Makefile
+	man/cs/Makefile
+	man/de/Makefile
+	man/fr/Makefile
 	man/hu/Makefile
+	man/id/Makefile
+	man/it/Makefile
 	man/ja/Makefile
+	man/ko/Makefile
 	man/pl/Makefile
 	man/pt_BR/Makefile
 	libmisc/Makefile

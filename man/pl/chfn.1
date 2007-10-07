@@ -1,4 +1,4 @@
-.\" $Id: chfn.1,v 1.5 2001/12/22 07:18:47 kloczek Exp $
+.\" $Id: chfn.1,v 1.6 2002/03/09 19:24:25 ankry Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
@@ -28,39 +28,38 @@
 .\" SUCH DAMAGE.
 .TH CHFN 1
 .SH NAZWA
-chfn \- zmieñ nazwê u¿ytkownika i informacjê o nim
+chfn \- zmiana rzeczywistej nazwy u¿ytkownika i informacji o nim
 .SH SK£ADNIA
 .TP 5
-\fBchfn\fR [\fB-f\fR \fIpe³na_nazwa\fR] [\fB-r\fR \fInr_pokoju\fR]
-[\fB-w\fR \fItel_s³u¿b\fI] [\fB-h\fR \fItel_dom\fR]
-[\fB-o\fR \fIinne\fR] [\fIu¿ytkownik\fR]
+\fBchfn\fR
+[\fB-f \fIpe³na_nazwa\fR] [\fB-r \fInr_pokoju\fR]
+.br
+[\fB-w \fR \fItel_s³u¿b\fR] [\fB-h \fItel_dom\fR] [\fB-o \fIinne\fR]
+[\fIu¿ytkownik\fR]
 .SH OPIS
 \fBchfn\fR zmienia pe³n± nazwê (imiê i nazwisko), telefon s³u¿bowy i domowy
-dla danego konta u¿ytkownika. Informacja ta jest zwykle drukowana przez
+dla danego konta u¿ytkownika. Informacja ta jest zwykle wypisywana przez
 \fBfinger\fR(1) i podobne mu programy.
 Zwyk³y u¿ytkownik mo¿e zmieniaæ wy³±cznie pola opisuj±ce w³asne konto.
-Tylko superu¿ytkownik mo¿e zmieniaæ pola dowolnego konta.
-Równie¿ tylko on mo¿e pos³u¿yæ siê opcj± \fB-o\fR by zmieniæ niezdefiniowane
-czê¶ci pola GECOS.
+Tylko superu¿ytkownik mo¿e zmieniaæ pola dla dowolnego konta.
+Równie¿ tylko superu¿ytkownik mo¿e pos³u¿yæ siê opcj± \fB-o\fR by zmieniæ
+niezdefiniowane czê¶ci pola GECOS.
 .PP
 Jedynym ograniczeniem nak³adanym na zawarto¶æ pól jest zakaz u¿ywania w nich
-znaków kontrolnych oraz przecinka, dwukropka i znaku równo¶ci.
+znaków steruj±cych oraz przecinka, dwukropka i znaku równo¶ci.
 Pola \fIinne\fR (other) nie obowi±zuje to ograniczenie. Pole to s³u¿y do
 przechowywania informacji rozliczeniowej u¿ywanej przez inne aplikacje.
 .PP
 Je¶li nie wybrano ¿adnej z opcji, to \fBchfn\fR dzia³a w trybie interaktywnym,
-proponuj±c u¿ytkownikowi warto¶ci bie¿±ce dla ka¿dego z pól. Wprowad¼ now±
-warto¶æ by zmieniæ pole, lub pozostaw pust± by u¿yæ warto¶ci bie¿±cej.
-Bie¿±ca warto¶æ pola wy¶wietlana jest miêdzy par± znaczników \fB[ ]\fR.
-Bez podania opcji \fBchfn\fR pyta o konto u¿ytkownika, które ma podlegaæ
-zmianie.
+proponuj±c u¿ytkownikowi warto¶ci bie¿±ce dla ka¿dego z pól. Wprowadzenie
+nowej warto¶ci powoduje zmianê warto¶ci pola, a podanie warto¶ci pustej
+pozostawia warto¶æ bie¿±c±.
+Bie¿±ca warto¶æ pola wy¶wietlana jest w nawiasach \fB[ ]\fR.
+Je¶li nie podano ¿adnej opcji, \fBchfn\fR pyta o konto u¿ytkownika, które ma
+podlegaæ zmianie.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+/etc/passwd \- informacja o kontach u¿ytkowników
 .SH ZOBACZ TAK¯E
 .BR passwd (5)
 .SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow. Z
-uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz z
-w³a¶ciwej dokumentacji.
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

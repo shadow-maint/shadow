@@ -1,4 +1,4 @@
-.\"$Id: chfn.1,v 1.7 2001/01/25 10:43:50 kloczek Exp $
+.\"$Id: chfn.1,v 1.8 2002/03/09 19:22:29 ankry Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,7 +27,7 @@
 .\" SUCH DAMAGE.
 .TH CHFN 1
 .SH NAME
-chfn \- change user name and information
+chfn \- change real user name and information
 .SH SYNOPSIS
 .TP 5
 \fBchfn\fR
@@ -40,12 +40,12 @@ chfn \- change user name and information
 phone number information for a user's account. 
 This information is typically printed by \fBfinger\fR(1) and similiar
 programs.
-A normal user may only change the fields for their own account,
+A normal user may only change the fields for her own account,
 the super user may change the fields for any account.
 Also, only the super user may use the \fB-o\fR option to change the
-undefined portions of the GCOS field.
+undefined portions of the GECOS field.
 .PP
-The only restrictions placed on the contents of the fields is that no
+The only restriction placed on the contents of the fields is that no
 control characters may be present, nor any of comma, colon, or equal sign.
 The \fIother\fR field does not have this restriction, and is used to
 store accounting information used by other applications.
@@ -61,4 +61,4 @@ Without options, chfn prompts for the current user account.
 .SH SEE ALSO
 .BR passwd (5)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

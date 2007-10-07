@@ -158,6 +158,7 @@ groupmod_LDADD = $(LDADD) $(LIBPAM)
 login_LDADD = $(LDADD) $(LIBPAM)
 newusers_LDADD = $(LDADD) $(LIBPAM)
 passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK)
+su_SOURCES = su.c suauth.c
 su_LDADD = $(LDADD) $(LIBPAM)
 useradd_LDADD = $(LDADD) $(LIBPAM)
 userdel_LDADD = $(LDADD) $(LIBPAM)
@@ -326,8 +327,8 @@ pwunconv_LDADD = $(LDADD)
 pwunconv_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/lib/libshadow.la
 pwunconv_LDFLAGS =
-su_SOURCES = su.c
-su_OBJECTS = su.$(OBJEXT)
+am_su_OBJECTS = su.$(OBJEXT) suauth.$(OBJEXT)
+su_OBJECTS = $(am_su_OBJECTS)
 su_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.la \
 	$(top_builddir)/lib/libshadow.la
 su_LDFLAGS =
@@ -376,9 +377,10 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/newgrp.Po $(DEPDIR)/newusers.Po \
 @AMDEP_TRUE@	$(DEPDIR)/passwd.Po $(DEPDIR)/pwck.Po \
 @AMDEP_TRUE@	$(DEPDIR)/pwconv.Po $(DEPDIR)/pwunconv.Po \
-@AMDEP_TRUE@	$(DEPDIR)/su.Po $(DEPDIR)/sulogin.Po \
-@AMDEP_TRUE@	$(DEPDIR)/useradd.Po $(DEPDIR)/userdel.Po \
-@AMDEP_TRUE@	$(DEPDIR)/usermod.Po $(DEPDIR)/vipw.Po
+@AMDEP_TRUE@	$(DEPDIR)/su.Po $(DEPDIR)/suauth.Po \
+@AMDEP_TRUE@	$(DEPDIR)/sulogin.Po $(DEPDIR)/useradd.Po \
+@AMDEP_TRUE@	$(DEPDIR)/userdel.Po $(DEPDIR)/usermod.Po \
+@AMDEP_TRUE@	$(DEPDIR)/vipw.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -391,9 +393,10 @@ DIST_SOURCES = chage.c chfn.c chpasswd.c chsh.c dpasswd.c expiry.c \
 	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
 	grpck.c grpconv.c grpunconv.c id.c lastlog.c login.c logoutd.c \
 	mkpasswd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c \
-	pwunconv.c su.c sulogin.c useradd.c userdel.c usermod.c vipw.c
+	pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c \
+	usermod.c vipw.c
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = chage.c chfn.c chpasswd.c chsh.c dpasswd.c expiry.c faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c lastlog.c login.c logoutd.c mkpasswd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c pwunconv.c su.c sulogin.c useradd.c userdel.c usermod.c vipw.c
+SOURCES = chage.c chfn.c chpasswd.c chsh.c dpasswd.c expiry.c faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c lastlog.c login.c logoutd.c mkpasswd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c usermod.c vipw.c
 
 all: all-am
 
@@ -620,6 +623,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/pwconv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/pwunconv.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/su.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/suauth.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sulogin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/useradd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/userdel.Po@am__quote@
@@ -794,8 +798,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
 
 
 install-exec-hook:
-	$(LN_S) newgrp	$(DESTDIR)$(bindir)/sg
-	$(LN_S) vigr	$(DESTDIR)$(bindir)/vipw
+	ln -sf newgrp	$(DESTDIR)$(bindir)/sg
+	ln -sf vigr	$(DESTDIR)$(bindir)/vipw
 	for i in $(suidbins); do \
 		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
 	done

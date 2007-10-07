@@ -1,26 +1,26 @@
-.\"	$Id: gpasswd.1,v 1.4 2001/01/27 02:55:52 kloczek Exp $
-.\" Copyright 1996, Rafal Maszkowski, rzm@pdi.net
+.\"$Id: gpasswd.1,v 1.5 2002/03/09 19:22:29 ankry Exp $
+.\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
 .\" published by the Free Software Foundation; either version 2 of the
 .\" License, or (at your option) any later version.
+.\"
 .TH GPASSWD 1
 .SH NAME
 gpasswd \- administer the /etc/group file
 .br
 .SH SYNOPSIS
-\fBgpasswd\fR \fIgroup\fR
+\fBgpasswd \fIgroup\fR
 .br
-\fBgpasswd\fR \fB-a\fR \fIuser\fR \fIgroup\fR
+\fBgpasswd -a \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd\fR \fB-d\fR \fIuser\fR \fIgroup\fR
+\fBgpasswd -d \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd\fR \fB-R\fR \fIgroup\fR
+\fBgpasswd -R \fIgroup\fR
 .br
-\fBgpasswd\fR \fB-r\fR \fIgroup\fR
+\fBgpasswd -r \fIgroup\fR
 .br
-\fBgpasswd\fR [\fB-A\fR \fIuser\fR,...] [\fB-M\fR \fIuser\fR,...] \fIgroup\fR
-.br
+\fBgpasswd\fR [\fB-A \fIuser\fR,...] [\fB-M\fR \fIuser\fR,...] \fIgroup\fR
 .SH DESCRIPTION
 .B gpasswd
 is used to administer the /etc/group file (and /etc/gshadow
@@ -55,3 +55,5 @@ without a password, non-members must supply the password.
 .BR groupdel (8),
 .BR groupmod (8),
 .BR grpck (8)
+.SH AUTHOR
+Rafal Maszkowski <rzm@pdi.net>

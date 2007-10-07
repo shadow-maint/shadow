@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.25 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.26 2002/03/08 04:30:28 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -99,14 +99,16 @@ static pam_handle_t *pamh = NULL;
 
 const char *hostname = "";
 
-struct passwd pwent;
+static struct passwd pwent;
 
 #if HAVE_UTMPX_H
-struct utmpx utxent, failent;
-struct utmp utent;
+extern	struct	utmpx	utxent;
+struct utmpx failent;
 #else
-struct utmp utent, failent;
+struct utmp failent;
 #endif
+extern	struct	utmp	utent;
+
 struct lastlog lastlog;
 static int pflg = 0;
 static int fflg = 0;

@@ -47,14 +47,15 @@ groupmod_LDADD = $(LDADD) $(LIBPAM)
 login_LDADD    = $(LDADD) $(LIBPAM)
 newusers_LDADD = $(LDADD) $(LIBPAM)
 passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK)
+su_SOURCES     = su.c suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM)
 useradd_LDADD  = $(LDADD) $(LIBPAM)
 userdel_LDADD  = $(LDADD) $(LIBPAM)
 usermod_LDADD  = $(LDADD) $(LIBPAM)
 
 install-exec-hook:
-	$(LN_S) newgrp	$(DESTDIR)$(bindir)/sg
-	$(LN_S) vigr	$(DESTDIR)$(bindir)/vipw
+	ln -sf newgrp	$(DESTDIR)$(bindir)/sg
+	ln -sf vigr	$(DESTDIR)$(bindir)/vipw
 	for i in $(suidbins); do \
 		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
 	done

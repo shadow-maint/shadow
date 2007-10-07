@@ -2,8 +2,6 @@
 # "*" partialy exist/implemented
 # "+" done
 
-- fix building shadow utils without PAM enabled,
-
 - fix nscd flushing databases on change (I'm still not shure where it will
   be bether add this on shadow or on PAM level),
 

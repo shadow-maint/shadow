@@ -157,7 +157,6 @@ libmisc_la_SOURCES = \
 	setupenv.c \
 	shell.c \
 	strtoday.c \
-	suauth.c \
 	sub.c \
 	sulog.c \
 	ttytype.c \
@@ -184,8 +183,8 @@ am_libmisc_la_OBJECTS = addgrps.lo age.lo basename.lo chkname.lo \
 	login_desrpc.lo login_krb.lo loginprompt.lo mail.lo motd.lo \
 	myname.lo nscd.lo obscure.lo pam_pass.lo pwd2spwd.lo \
 	pwdcheck.lo pwd_init.lo rlogin.lo salt.lo setugid.lo setup.lo \
-	setupenv.lo shell.lo strtoday.lo suauth.lo sub.lo sulog.lo \
-	ttytype.lo tz.lo ulimit.lo utmp.lo valid.lo xmalloc.lo
+	setupenv.lo shell.lo strtoday.lo sub.lo sulog.lo ttytype.lo \
+	tz.lo ulimit.lo utmp.lo valid.lo xmalloc.lo
 libmisc_la_OBJECTS = $(am_libmisc_la_OBJECTS)
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 CPPFLAGS = @CPPFLAGS@
@@ -211,11 +210,11 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/rlogin.Plo $(DEPDIR)/salt.Plo \
 @AMDEP_TRUE@	$(DEPDIR)/setugid.Plo $(DEPDIR)/setup.Plo \
 @AMDEP_TRUE@	$(DEPDIR)/setupenv.Plo $(DEPDIR)/shell.Plo \
-@AMDEP_TRUE@	$(DEPDIR)/strtoday.Plo $(DEPDIR)/suauth.Plo \
-@AMDEP_TRUE@	$(DEPDIR)/sub.Plo $(DEPDIR)/sulog.Plo \
-@AMDEP_TRUE@	$(DEPDIR)/ttytype.Plo $(DEPDIR)/tz.Plo \
-@AMDEP_TRUE@	$(DEPDIR)/ulimit.Plo $(DEPDIR)/utmp.Plo \
-@AMDEP_TRUE@	$(DEPDIR)/valid.Plo $(DEPDIR)/xmalloc.Plo
+@AMDEP_TRUE@	$(DEPDIR)/strtoday.Plo $(DEPDIR)/sub.Plo \
+@AMDEP_TRUE@	$(DEPDIR)/sulog.Plo $(DEPDIR)/ttytype.Plo \
+@AMDEP_TRUE@	$(DEPDIR)/tz.Plo $(DEPDIR)/ulimit.Plo \
+@AMDEP_TRUE@	$(DEPDIR)/utmp.Plo $(DEPDIR)/valid.Plo \
+@AMDEP_TRUE@	$(DEPDIR)/xmalloc.Plo
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -317,7 +316,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/setupenv.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/shell.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/strtoday.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/suauth.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sub.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/sulog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/ttytype.Plo@am__quote@

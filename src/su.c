@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.21 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.22 2002/03/08 04:30:28 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -66,7 +66,7 @@ static char oldname[BUFSIZ];
 
 static char *Prog;
 
-struct passwd pwent;
+extern struct passwd pwent;
 
 /*
  * External identifiers

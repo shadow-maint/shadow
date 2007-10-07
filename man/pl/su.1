@@ -1,4 +1,4 @@
-.\" $Id: su.1,v 1.5 2001/12/22 07:18:47 kloczek Exp $
+.\" $Id: su.1,v 1.7 2002/03/09 19:24:25 ankry Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
@@ -28,13 +28,13 @@
 .\" SUCH DAMAGE.
 .TH SU 1
 .SH NAZWA
-su \- zmieñ ID u¿ytkownika lub stañ siê superu¿ytkownikiem
+su \- zmiana identyfikatora u¿ytkownika lub uzyskanie praw superu¿ytkownika
 .SH SK£ADNIA
 \fBsu\fR [\fB-\fR] [\fInazwa_u¿ytkownika\fR [\fIargumenty\fR]]
 .SH OPIS
 .B su
-s³u¿y do stawania siê innym u¿ytkownikiem w trakcie w³asnej sesji pracy.
-Wywo³anie bez parametru - nazwy u¿ytkownika, domy¶lnie oznacza dla \fBsu\fR
+s³u¿y do stawania siê innym u¿ytkownikiem w trakcie w³asnej sesji.
+Wywo³anie bez nazwy u¿ytkownika, domy¶lnie oznacza dla \fBsu\fR
 próbê stania siê superu¿ytkownikiem.
 Opcjonalnym argumentem \fB\-\fR mo¿na pos³u¿yæ siê do zasymulowania
 rzeczywistego rozpoczynania sesji pracy. Pozwala to na utworzenie ¶rodowiska
@@ -49,33 +49,30 @@ Polecenie zostanie wykonane przez pow³okê wymienion± w \fI/etc/passwd\fR dla
 docelowego u¿ytkownika.
 .PP
 U¿ytkownik pytany jest o odpowiednie has³o, je¶li takowe istnieje.
-B³êdne has³a powoduj± komunikat o b³êdzie. Wszystkie próby, udane i nieudane,
-s± rejestrowane do celów wykrywania nadu¿yæ systemu.
+Nieprawid³owe has³o spowoduje wypisanie komunikatu o b³êdzie. Wszystkie próby,
+udane i nieudane, s± rejestrowane do celów wykrywania nadu¿yæ w systemie.
 .PP
-Do nowej pow³oki przekazywane jest bie¿±ce ¶rodowisko.
-Warto¶æ \fB$PATH\fR dla zwyk³ych u¿ytkowników ustawiana jest jest na
-\fB/bin:/usr/bin\fR, za¶ dla superu¿ytkownika
-na \fB/sbin:/bin:/usr/sbin:/usr/bin\fR.
+Nowej pow³oce przekazywane jest bie¿±ce ¶rodowisko. Warto¶æ \fB$PATH\fR dla
+zwyk³ych u¿ytkowników ustawiana jest na \fB/bin:/usr/bin\fR, za¶ dla
+superu¿ytkownika na \fB/sbin:/bin:/usr/sbin:/usr/bin\fR.
 Mo¿na to zmieniæ przy pomocy definicji \fBENV_PATH\fR i \fBENV_SUPATH\fR
 w \fI/etc/login.defs\fR.
+Logowanie do podsystemu jest wykazywane przez obecno¶æ "*" jako pierwszego
+znaku pow³oki zg³oszeniowej. Podany katalog domowy zostanie potraktowany jako
+katalog g³ówny nowego systemu plików, do którego u¿ytkownik siê zaloguje.
 .SH PRZESTROGI
-.PP
 Niniejsza wersja \fBsu\fR posiada wiele opcji kompilacji, z których tylko
 czê¶æ bêdzie mieæ zastosowanie w danej instalacji.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+/etc/passwd \- informacje o kontach u¿ytkowników
 .br
-.IR /etc/shadow " - zakodowane has³a i informacja o ich wa¿no¶ci"
+/etc/shadow \- zakodowane has³a i informacje o ich wa¿no¶ci
 .br
-.IR $HOME/.profile " - plik startowy dla domy¶lnej pow³oki"
+$HOME/.profile \- plik startowy dla domy¶lnej pow³oki
 .SH ZOBACZ TAK¯E
 .BR login (1),
 .BR sh (1),
-.BR suauth (5),
-.BR login.defs (5)
+.BR login.defs (5),
+.BR suauth (5)
 .SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow. Z
-uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz z
-w³a¶ciwej dokumentacji.
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

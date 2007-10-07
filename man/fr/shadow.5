@@ -1,0 +1,92 @@
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: shadow.5,v 1.1 2002/03/10 07:41:04 kloczek Exp $
+.\"
+.TH SHADOW 5
+.SH NOM
+shadow \- fichiers de mots de passe cryptés
+.SH DESCRIPTION
+.I /etc/shadow
+contient les mots de passe cryptés des utilisateurs [ Ndt : plus exactement, le résultat du cryptage d'une chaîne de longueur nulle
+avec le mot de passe comme clé de cryptage ] ainsi qu'éventuellement des informations sur l'âge des mots de passe :
+.IP "" .5i
+Nom de login
+.IP "" .5i
+mot de passe crypté
+.IP "" .5i
+Nombre de jours écoulés depuis le 1er janvier 1970 jusqu'au dernier changement de mot de passe
+.IP "" .5i
+Nombre de jours durant lesquels le mot de passe est encore valide
+.IP "" .5i
+Nombre de jours après lesquels le mot de passe doit être changé
+.IP "" .5i
+Nombre de jours avant l'expiration du mot de passe impliquant l'avertissement de l'utilisateur
+.IP "" .5i
+Nombre de jours après l'expiration provoquant la desactivation du compte
+.IP "" .5i
+Numéro du jour depuis le 1er janvier 1970 à partir duquel le compte a été désactivé
+.IP "" .5i
+Champs réservé
+.PP
+Le champs 
+.I mot de passe
+doit être rempli.
+Le mot de passe crypté comprend 13 à 24 caractères pris dans 
+l'alphabet réduit a-z, A-Z, 0-9, \. et /.
+Consultez \fBcrypt\fR(3) pour plus d'information sur le traitement de cette chaîne.
+.PP
+La date de dernière modification du mot de passe est donné par le nNombre de jours écoulés depuis le 1er janvier 1970 jusqu'au dernier changement de mot de passe.
+Le mot de passe ne peut être changé jusqu'à ce que le nombre de jours indiqués soit écoulé, et doit être changé après que le nombre maximum de jours indiqué.
+Si le nomnre minimum de jours requis est plus grand que le nombre maximum de jours de vailidé, ce mot de passe
+.B ne peut pas
+être changé par l'utilisateur.
+.PP
+Un compte est considéré comme inactif et est désactivé si le mot de passe n'est pas changé dans l'intervalle spécifié après l'expiration du mot de passe.
+Un compte est également désactivé le jours indiqué quelque soit les autres informations d'expiration.
+.PP
+Cette information est prioritaire sur toutes les autres champs présents dans \fI/etc/passwd\fR.
+.PP
+Ce fichier \fBne doit pas être\fR accessible en lecture par les utilisateurs normaux afin de maintenir la sécurité des mots de passe, en particuliers contre les attaques aux dictionnaires.
+.SH FICHIERS
+/etc/passwd - information sur les comptes des utilisateurs
+.br
+/etc/shadow - mots de passe cryptés des utilisateurs
+.SH VOIR AUSSI
+.BR chage (1),
+.BR login (1),
+.BR passwd (1),
+.BR su (1),
+.BR sulogin (8),
+.BR shadow (3),
+.BR passwd (5),
+.BR pwconv (8),
+.BR pwunconv (8)
+.SH AUTEUR
+Julianne Frances Haugh (jfh@tab.com)
+.SH TRADUCTION
+.RI "Thierry Vignaud <" tvignaud@mandrakesoft.com ">, 1999"

@@ -1,4 +1,4 @@
-.\"$Id: login.1,v 1.9 2001/01/25 10:43:50 kloczek Exp $
+.\"$Id: login.1,v 1.11 2002/03/09 19:22:30 ankry Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,13 +27,13 @@
 .\" SUCH DAMAGE.
 .TH LOGIN 1
 .SH NAME
-login \- Begin session on the system
+login \- begin session on the system
 .SH SYNOPSIS
-\fBlogin\fR [\fB-p\fR] [\fIusername\fR] [\fIENV=VAR ...\fR]
+\fBlogin\fR [\fB-p\fR] [\fIusername\fR] [\fIENV=VAR\fR ...]
 .br
-\fBlogin\fR [\fB-p\fR] [\fB-h\fR \fIhost\fR] [\fB-f\fR \fIusername\fR]
+\fBlogin\fR [\fB-p\fR] [\fB-h \fIhost\fR] [\fB-f \fIusername\fR]
 .br
-\fBlogin\fR [\fB-p\fR] \fB-r\fR \fIhost\fR
+\fBlogin\fR [\fB-p\fR] \fB-r \fIhost\fR
 .SH DESCRIPTION
 .B login
 is used to establish a new session with the system.
@@ -66,7 +66,7 @@ If password aging has been enabled for your account, you may be
 prompted for a new password before proceeding.
 You will be forced to provide your old password and the new
 password before continuing.
-Please refer to \fBpasswd \fR(1) for more information.
+Please refer to \fBpasswd\fR(1) for more information.
 .PP
 After a successful login,
 you will be informed of any system messages and the presence
@@ -87,7 +87,7 @@ Ulimit, umask and nice values may also be set according to
 entries in the GECOS field.
 .PP
 On some installations, the environmental variable \fB$TERM\fR will be
-initialize to the terminal type on your tty line, as specified in
+initialized to the terminal type on your tty line, as specified in
 \fI/etc/ttytype\fR.
 .PP
 An initialization script for your command interpreter may also be
@@ -112,14 +112,15 @@ Name of the remote host for this login.
 .B -r
 Perform autologin protocol for rlogin.
 .PP
-The \fB-r -h\fP and \fB-f\fP options are only used when \fBlogin\fP is invoked by root.
+The \fB-r\fP, \fB-h\fP and \fB-f\fP options are only used when \fBlogin\fP is
+invoked by root.
 .SH CAVEATS
-.PP
 This version of \fBlogin\fR has many compilation options, only some of which
 may be in use at any particular site.
 .PP
 The location of files is subject to differences in system configuration.
 .SH FILES
+.br
 /etc/utmp \- list of current login sessions
 .br
 /etc/wtmp \- list of previous login sessions
@@ -137,17 +138,15 @@ The location of files is subject to differences in system configuration.
 $HOME/.profile \- initialization script for default shell
 .br
 $HOME/.hushlogin \- suppress printing of system messages
-.br
 .SH SEE ALSO
-.PP
-.BR getty (8),
 .BR mail (1),
 .BR passwd (1),
 .BR sh (1),
 .BR su (1),
-.BR login.defs (5),
 .\" .BR d_passwd (5),
+.BR login.defs (5),
+.BR nologin (5),
 .BR passwd (5),
-.BR nologin (5)
+.BR getty (8)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

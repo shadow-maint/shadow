@@ -1,0 +1,31 @@
+.\" $Id: vipw.8,v 1.1 2002/03/10 07:41:07 kloczek Exp $
+.\" Traduzione in italiano  di Isabella Ruocco <isacher@nettaxi.com>
+.\" Giugno 1999
+.TH VIPW 8 "26 sep 1997"
+.SH NOME
+vipw, vigr \- editano i file delle password, dei gruppi, delle password oscurate, o dei gruppi oscurati.
+.SH SINTASSI
+.BR vipw " [-s]"
+.br
+.BR vigr " [-s]"
+.SH DESCRIZIONE
+.BR vipw " e " vigr
+editeranno i file
+.IR /etc/passwd " ed " /etc/group ", rispettivamente."
+Con l'opzione
+.B -s
+, editeranno la versione oscurata di quei file,
+.IR /etc/shadow " ed " /etc/gshadow ", rispettivamente.
+I programmi imposteranno i lock appropriati per evitare la corruzione dei file.
+
+Quando cercano un editor, i programmi prima proveranno 
+con la variabile d'ambiente
+.BR VISUAL ,
+poi con la variabile d'ambiente
+.BR EDITOR ,
+e infine con l'editor predefinito,
+.BR vi .
+.SH "VEDERE ANCHE"
+.BR passwd (5),
+.BR group (5),
+.BR shadow (5)

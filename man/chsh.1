@@ -1,4 +1,4 @@
-.\"$Id: chsh.1,v 1.7 2001/01/25 10:43:50 kloczek Exp $
+.\"$Id: chsh.1,v 1.8 2002/03/09 19:22:29 ankry Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -35,24 +35,24 @@ chsh \- change login shell
 .SH DESCRIPTION
 \fBchsh\fR changes the user login shell.
 This determines the name of the user's initial login command.
-A normal user may only change the login shell for their own account,
+A normal user may only change the login shell for her own account,
 the super user may change the login shell for any account.
 .PP
 The only restrictions placed on the login shell is that the
 command name must be listed in \fI/etc/shells\fR, unless the
 invoker is the super-user, and then any value may be added.
 An account with a restricted login shell may not change
-their login shell.
+her login shell.
 For this reason, placing \fB/bin/rsh\fR in \fI/etc/shells\fR
 is discouraged since accidentally changing to a restricted
-shell would prevent the user from every changing their login
+shell would prevent the user from every changing her login
 shell back to its original value.
 .PP
 If the \fB-s\fR option is not selected, \fBchsh\fR operates in an interactive
 fashion, prompting the user with the current login shell.
-Enter the new value to change the field, or leave the line blank to use
-the current value.
-The current value is displayed between a pair of \fB[ ]\fR marks.
+Enter the new value to change the shell, or leave the line blank to use
+the current one.
+The current shell is displayed between a pair of \fB[ ]\fR marks.
 .SH FILES
 /etc/passwd \- user account information
 .br
@@ -61,4 +61,4 @@ The current value is displayed between a pair of \fB[ ]\fR marks.
 .BR chfn (1),
 .BR passwd (5)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

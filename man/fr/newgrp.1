@@ -1,0 +1,32 @@
+.\" Original author unknown.  This man page is in the public domain.
+.\" Modified Sat Oct  9 17:46:48 1993 by faith@cs.unc.edu
+.TH NEWGRP 1 "9 October 1993" "Linux 1.2" "Manuel du Programmeur Linux"
+.SH NOM
+newgrp \- se connecter sous un nouveau groupe
+.SH SYNOPSIS
+.BI "newgrp [ " groupe " ]"
+.SH DESCRIPTION
+.B Newgrp
+change le groupe de l'appelant, de la même manière que
+.BR login (1).
+Le même utilisateur reste connecté, et le répertoire courant
+reste inchangé, mais l'évaluation des droits d'accès aux fichiers
+se fait en fonction du nouvel identifiant de groupe.
+.LP
+Si aucun groupe n'est spécifié, le GID est échangé pour celui du login initial.
+.LP
+.SH FICHIERS
+.I /etc/group
+.br
+.I /etc/passwd
+
+.SH "VOIR AUSSI"
+.BR login "(1), " group (5)
+
+.SH AUTEUR
+Version originale par Michael Haardt. Désormais maintenu par
+Peter Orbaek (poe@daimi.aau.dk).
+
+.SH TRADUCTION
+Sébastien Mahé, 2001
+

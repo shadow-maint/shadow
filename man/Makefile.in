@@ -13,6 +13,8 @@
 
 @SET_MAKE@
 
+# subdirectories for translated manual pages
+
 SHELL = @SHELL@
 
 srcdir = @srcdir@
@@ -107,6 +109,8 @@ am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
 
+SUBDIRS = cs de fr hu id it ja ko pl pt_BR
+
 man_MANS = \
 	adduser.8 \
 	chage.1 \
@@ -116,6 +120,7 @@ man_MANS = \
 	expiry.1 \
 	faillog.5 \
 	faillog.8 \
+	getspnam.3 \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
@@ -151,6 +156,7 @@ man_MANS = \
 
 EXTRA_DIST = $(man_MANS) \
 	dpasswd.8 \
+	getspnam.3 \
 	groups.1 \
 	id.1 \
 	pw_auth.3 \
@@ -159,9 +165,6 @@ EXTRA_DIST = $(man_MANS) \
 	shadowconfig.8 \
 	sulogin.8
 
-
-# subdirectories for translated manual pages
-SUBDIRS = hu ja pl pt_BR
 subdir = man
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
@@ -235,6 +238,45 @@ uninstall-man1:
 	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
 	  echo " rm -f $(DESTDIR)$(man1dir)/$$inst"; \
 	  rm -f $(DESTDIR)$(man1dir)/$$inst; \
+	done
+
+man3dir = $(mandir)/man3
+install-man3: $(man3_MANS) $(man_MANS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(man3dir)
+	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
+	  else file=$$i; fi; \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst"; \
+	  $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst; \
+	done
+uninstall-man3:
+	@$(NORMAL_UNINSTALL)
+	@list='$(man3_MANS) $(dist_man3_MANS) $(nodist_man3_MANS)'; \
+	l2='$(man_MANS) $(dist_man_MANS) $(nodist_man_MANS)'; \
+	for i in $$l2; do \
+	  case "$$i" in \
+	    *.3*) list="$$list $$i" ;; \
+	  esac; \
+	done; \
+	for i in $$list; do \
+	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
+	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
+	  inst=`echo $$inst | sed -e 's/^.*\///'`; \
+	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
+	  echo " rm -f $(DESTDIR)$(man3dir)/$$inst"; \
+	  rm -f $(DESTDIR)$(man3dir)/$$inst; \
 	done
 
 man5dir = $(mandir)/man5
@@ -446,7 +488,7 @@ check: check-recursive
 all-am: Makefile $(MANS)
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs) $(DESTDIR)$(man1dir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir)
+	$(mkinstalldirs) $(DESTDIR)$(man1dir) $(DESTDIR)$(man3dir) $(DESTDIR)$(man5dir) $(DESTDIR)$(man8dir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -494,7 +536,7 @@ install-exec-am:
 
 install-info: install-info-recursive
 
-install-man: install-man1 install-man5 install-man8
+install-man: install-man1 install-man3 install-man5 install-man8
 
 installcheck-am:
 
@@ -510,7 +552,8 @@ uninstall-am: uninstall-info-am uninstall-man
 
 uninstall-info: uninstall-info-recursive
 
-uninstall-man: uninstall-man1 uninstall-man5 uninstall-man8
+uninstall-man: uninstall-man1 uninstall-man3 uninstall-man5 \
+	uninstall-man8
 
 .PHONY: $(RECURSIVE_TARGETS) GTAGS all all-am check check-am clean \
 	clean-generic clean-libtool clean-recursive distclean \
@@ -519,15 +562,16 @@ uninstall-man: uninstall-man1 uninstall-man5 uninstall-man8
 	info-recursive install install-am install-data install-data-am \
 	install-data-recursive install-exec install-exec-am \
 	install-exec-recursive install-info install-info-am \
-	install-info-recursive install-man install-man1 install-man5 \
-	install-man8 install-recursive install-strip installcheck \
-	installcheck-am installdirs installdirs-am \
+	install-info-recursive install-man install-man1 install-man3 \
+	install-man5 install-man8 install-recursive install-strip \
+	installcheck installcheck-am installdirs installdirs-am \
 	installdirs-recursive maintainer-clean maintainer-clean-generic \
 	maintainer-clean-recursive mostlyclean mostlyclean-generic \
 	mostlyclean-libtool mostlyclean-recursive tags tags-recursive \
 	uninstall uninstall-am uninstall-info-am \
 	uninstall-info-recursive uninstall-man uninstall-man1 \
-	uninstall-man5 uninstall-man8 uninstall-recursive
+	uninstall-man3 uninstall-man5 uninstall-man8 \
+	uninstall-recursive
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

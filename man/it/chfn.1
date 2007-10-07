@@ -1,0 +1,74 @@
+.\" $Id: chfn.1,v 1.1 2002/03/10 07:41:06 kloczek Exp $
+.\"
+.\"  chfn.1 -- change your finger information
+.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
+.\"
+.\"
+.\"  Traduzione in italiano di Giovanni Bortolozzo <borto@dei.unipd.it>
+.\"  Agosto 1996
+.\"
+.\"  this program is free software.  you can redistribute it and
+.\"  modify it under the terms of the gnu general public license.
+.\"  there is no warranty.
+.\"
+.\"  $Author: kloczek $
+.\"  $Revision: 1.1 $
+.\"  $Date: 2002/03/10 07:41:06 $
+.\"
+.\" " for hilit19
+.TH CHFN 1 "13 ottobre 1994" "chfn" "Linux Reference Manual"
+.SH NOME
+chfn \- cambia le proprie "finger information"
+.SH SINTASSI
+.B chfn
+[\ \-f\ nome_vero\] [\ \-o\ ufficio\] [\ \-p\ telefono_ufficio\]
+[\ \-h\ telefono_casa\] [\ \-u\ ] [\ \-v\ ] [\ nome_utente\]
+.SH DESCRIZIONE
+.B chfn
+è usato per cambiare le proprie finger information. Queste informazioni sono
+salvate nel file
+.IR /etc/passwd ,
+e sono mostrate dal programma 
+.BR finger .
+Il comando
+.B finger
+di Linux mostra quattro porzioni di informazione che possono essere 
+cambiati tramite 
+.BR chfn :
+il proprio nome vero, l'ufficio e il numero di telefono di quest'ultimo, e il
+proprio numero di telefono di casa.
+.SS LINEA DI COMANDO
+Ognuno delle quattro porzioni può essere specificata nella linea di comando.
+Se non viene passata alcuna informazione sulla linea di comando,
+.B chfn
+entra in modo interattivo.
+.SS MODO INTERATTIVO
+Nel modo interattivo,
+.B chfn
+chiederà ognuno dei campi. Al prompt, possono essere immesse le nuove 
+informazioni, o premere return per non cambiare il campo. L'immissione della
+parola chiave "none" cancella il campo.
+.SH OPZIONI
+.TP
+.I "\-f, \-\-full-name"
+Specifica il proprio nome reale.
+.TP
+.I "\-o, \-\-office"
+Specifica il numero del proprio ufficio.
+.TP
+.I "\-p, \-\-office-phone"
+Specifica il numero di telefono del proprio ufficio.
+.TP
+.I "\-h, \-\-home-phone"
+Specifica il numero di telefono di casa.
+.TP
+.I "\-u, \-\-help"
+Mostra un messaggio d'aiuto ed esce.
+.TP
+.I "-v, \-\-version"
+Mostra informazioni sulla versione ed esce.
+.SH "VEDERE ANCHE"
+.BR finger (1),
+.BR passwd (5)
+.SH AUTORE
+Salvatore Valente <svalente@mit.edu>

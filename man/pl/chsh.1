@@ -1,4 +1,4 @@
-.\" $Id: chsh.1,v 1.5 2001/12/22 07:18:47 kloczek Exp $
+.\" $Id: chsh.1,v 1.6 2002/03/09 19:24:25 ankry Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
@@ -28,10 +28,11 @@
 .\" SUCH DAMAGE.
 .TH CHSH 1
 .SH NAZWA
-chsh \- zmieñ pow³okê zg³oszeniow±
+chsh \- zmiana pow³oki zg³oszeniowej
 .SH SK£ADNIA
 .TP 5
-\fBchsh\fR [\fB-s\fR \fIpow³oka\fR] [\fIu¿ytkownik\fR]
+\fBchsh\fR
+[\fB-s \fIpow³oka\fR] [\fIu¿ytkownik\fR]
 .SH OPIS
 \fBchsh\fR zmienia pow³okê zg³oszeniow± u¿ytkownika.
 Okre¶la nazwê pocz±tkowego polecenia zg³oszeniowego u¿ytkownika.
@@ -39,28 +40,24 @@ Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie pow³okê zg³oszeniow± w³asnego konta,
 superu¿ytkownik mo¿e zmieniæ pow³okê zg³oszeniow± dla dowolnego konta.
 .PP
 Jedynym ograniczeniem na³o¿onym na pow³okê zg³oszeniow± jest to, ¿e jej nazwa
-musi byæ ujêta w \fI/etc/shells\fR, chyba ¿e polecenie \fBchsh\fR wywo³ywane
-jest przez superu¿ytkownika, wówczas mo¿e byæ podana nazwa dowolnego polecenia.
-U¿ytkownicy kont z ograniczon± pow³ok± logowania nie mog± jej zmieniaæ.
-Odradza siê z tego powodu umieszczanie \fB/bin/rsh\fR w pliku \fI/etc/shells\fR,
-gdy¿ przypadkowa zmiana na pow³okê ograniczon± uniemo¿liwi u¿ytkownikowi
-jak±kolwiek zmianê pow³oki logowania, nawet z powrotem na dotychczasow±.
+musi byæ wymieniona w \fI/etc/shells\fR, chyba ¿e polecenie \fBchsh\fR
+wywo³ywane jest przez superu¿ytkownika - wówczas mo¿e byæ podana dowolna
+nazwa. U¿ytkownicy kont z ograniczon± pow³ok± logowania nie mog± jej zmieniaæ.
+Odradza siê z tego powodu umieszczanie \fB/bin/rsh\fR w pliku
+\fI/etc/shells\fR, gdy¿ przypadkowa zmiana na pow³okê ograniczon± uniemo¿liwi
+u¿ytkownikowi jak±kolwiek zmianê pow³oki logowania, nawet z powrotem na
+dotychczasow±.
 .PP
-je¿eli nie podano opcji \fB-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
-proponuj±c u¿ytkownikowi bie¿±c± pow³okê logowania. Wprowad¼ now± warto¶æ
-do pola lub pozostaw je puste, by pozostawiæ aktualn± warto¶æ.
-Bie¿±ca warto¶æ wy¶wietlana jest pomiêdzy par± znaczników \fB[ ]\fR.
+Je¿eli nie podano opcji \fB-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
+proponuj±c u¿ytkownikowi bie¿±c± pow³okê logowania. Wprowadzenie nowej
+warto¶ci powoduje zmianê pow³oki, a podanie warto¶ci pustej pozostawia bie¿±c±
+pow³okê. Bie¿±ca pow³oka wy¶wietlana jest w nawiasach \fB[ ]\fR.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+/etc/passwd \- informacja o kontach u¿ytkowników
 .br
-.IR /etc/shells " - lista dozwolonych pow³ok zg³oszeniowych"
+/etc/shells \- lista dozwolonych pow³ok zg³oszeniowych
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR passwd (5)
 .SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
-grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
-z w³a¶ciwej dokumentacji.
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

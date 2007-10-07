@@ -1,4 +1,4 @@
-.\"$Id: passwd.1,v 1.10 2001/12/22 05:40:01 kloczek Exp $
+.\"$Id: passwd.1,v 1.13 2002/03/09 19:22:30 ankry Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,20 +33,24 @@ passwd \- change user password
 .br
 \fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIgroup\fR
 .br
-\fBpasswd\fR [\fB-x\fR \fImax\fR] [\fB-n\fR \fImin\fR]
-[\fB-w\fR \fIwarn\fR] [\fB-i\fR \fIinact\fR] \fIlogin\fR
+\fBpasswd\fR [\fB-x \fImax\fR] [\fB-n \fImin\fR]
+[\fB-w \fIwarn\fR] [\fB-i \fIinact\fR] \fIlogin\fR
 .br
 \fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fIlogin\fR
 .SH DESCRIPTION
 \fBpasswd\fR changes passwords for user and group accounts.
-A normal user may only change the password for their own account,
+A normal user may only change the password for his/her own account,
 the super user may change the password for any account.
 The administrator of a group may change the password for the group.
 \fBpasswd\fR also changes account information, such as the full name
-of the user, their login shell, or password expiry dates and intervals.
+of the user, user's login shell, or password expiry date and interval.
+.PP
+The \fB-s\fR option makes passwd call chsh to change the user's shell. The
+\fB-f\fR option makes passwd call chfn to change the user's gecos
+information. These two options are only meant for compatiblity, since the
+other programs can be called directly.
 .SS Password Changes
-The user is first prompted for their old password,
-if one is present.
+The user is first prompted for his/her old password, if one is present.
 This password is then encrypted and compared against the
 stored password.
 The user has only one chance to enter the correct password.
@@ -54,7 +58,7 @@ The super user is permitted to bypass this step so that forgotten
 passwords may be changed.
 .PP
 After the password has been entered, password aging information
-is checked to see if the user is permitted to change their password
+is checked to see if the user is permitted to change the password
 at this time.
 If not, \fBpasswd\fR refuses to change the password and exits.
 .PP
@@ -80,7 +84,7 @@ complex.
 If the password is accepted,
 \fBpasswd\fR will prompt again and compare the second entry
 against the first.
-Both entries are require to match in order for the password
+Both entries are required to match in order for the password
 to be changed.
 .SS Group passwords
 When the \fB-g\fR option is used, the password for the named
@@ -104,13 +108,20 @@ before a password may be changed.
 The user will not be permitted to change the password until
 \fImin\fR days have elapsed.
 The \fB-w\fR option is used to set the number of days of warning
-the user will receive before their password will expire.
+the user will receive before his/her password will expire.
 The warning occurs \fIwarn\fR days before the expiration, telling
-the user how many days until the password is set to expire.
+the user how many days remain until the password is set to expire.
 The \fB-i\fR option is used to disable an account after the
 password has been expired for a number of days.
 After a user account has had an expired password for \fIinact\fR
 days, the user may no longer sign on to the account.
+.PP
+If you wish to immediately expire an account's password, you can use the
+\fB-e\fR option. This in effect can force a user to change his/her password at
+the user's next login. You can also use the \fB-d\fR option to delete a user's
+password (make it empty). Use caution with this option since it can make an
+account not require a password at all to login, leaving your system open to
+intruders.
 .SS Account maintenance
 User accounts may be locked and unlocked with the \fB-l\fR and
 \fB-u\fR flags.
@@ -118,13 +129,6 @@ The \fB-l\fR option disables an account by changing the password to a
 value which matches no possible encrypted value.
 The \fB-u\fR option re-enables an account by changing the password
 back to its previous value.
-.PP
-If you wish to immediately expire an accounts password, you can use the
-\fB-e\fR option. This in affect can force a user to change their password at
-their next login. You can also use the \fB-d\fR option to delete a users
-password (make it empty). Use caution with this option since it can make an
-account not require a password at all to login, leaving your system open to
-intruders.
 .PP
 The account status may be given with the \fB-S\fR option.
 The status information consists of 6 parts.
@@ -141,15 +145,10 @@ the NBS DES algorithm and is very secure.
 The size of the key space depends upon the randomness of the
 password which is selected.
 .PP
-The \fB-s\fR option makes passwd call chsh to change the users shell. The
-\fB-f\fR option makes passwd call chfn to change the users gecos
-information. These two options are only meant for compatiblity, since the
-other programs can be called directly.
-.PP
 Compromises in password security normally result from careless
 password selection or handling.
-For this reason, you should select a password which does not
-appear in a dictionary or which must be written down.
+For this reason, you should not select a password which appears in
+a dictionary or which must be written down.
 The password should also not be a proper name, your license
 number, birth date, or street address.
 Any of these may be used as guesses to violate system security.
@@ -162,7 +161,7 @@ For example, Pass%word.
 .PP
 Other methods of construction involve selecting an easily
 remembered phrase from literature and selecting the first
-or last letter from each.
+or last letter from each word.
 An example of this is
 .IP "" .5i
 Ask not for whom the bell tolls.
@@ -172,7 +171,7 @@ which produces
 An4wtbt.
 .PP
 You may be reasonably sure few crackers will have
-included this in their dictionary.
+included this in their dictionaries.
 You should, however, select your own methods for constructing
 passwords and not rely exclusively on the methods given here.
 .SS Notes about group passwords
@@ -183,16 +182,16 @@ between different users.
 .SH CAVEATS
 Not all options may be supported.
 Password complexity checking may vary from site to site.
-The user is urged to select as complex a password as they
-feel comfortable with.
-User's may not be able to change their password on a system if NIS
+The user is urged to select a password as complex as he
+feels comfortable with.
+Users may not be able to change their password on a system if NIS
 is enabled and they are not logged into the NIS server.
 .SH FILES
 /etc/passwd \- user account information
 .br
 /etc/shadow \- encrypted user passwords
-.SH SEE ALSO
+.SH "SEE ALSO"
 .BR group (5),
 .BR passwd (5)
 .SH AUTHOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

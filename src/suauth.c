@@ -1,7 +1,5 @@
 #include <config.h>
 
-#ifdef SU_ACCESS
-
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
@@ -19,6 +17,10 @@
 #define	DENY		-1
 #define	OWNPWORD	2
 
+struct passwd pwent;
+
+#ifdef SU_ACCESS
+
 /* Really, I could do with a few const char's here defining all the 
  * strings output to the user or the syslog. -- chris
  */
@@ -30,7 +32,6 @@ int isgrp(const char *, const char *);
 
 static int lines = 0;
 
-extern struct passwd pwent;
 
 int
 check_su_auth(const char *actual_id, const char *wanted_id)

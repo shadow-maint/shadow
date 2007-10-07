@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
-"POT-Creation-Date: 2002-02-17 21:48+0100\n"
+"POT-Creation-Date: 2002-03-12 12:16+0100\n"
 "PO-Revision-Date: 1999-08-16 21:20+0100\n"
 "Last-Translator: Kristoffer Brånemyr <ztion@swipnet.se>\n"
 "Language-Team: sv <sv@li.org>\n"
@@ -146,18 +146,6 @@ msgstr "Startar skal %s\n"
 #, c-format
 msgid "Cannot execute %s"
 msgstr "Kan inte starta %s"
-
-#: libmisc/suauth.c:99
-msgid "Access to su to that account DENIED.\n"
-msgstr "Du har inte behörighet att köra su till det kontot.\n"
-
-#: libmisc/suauth.c:106
-msgid "Password authentication bypassed.\n"
-msgstr "Hoppade över lösenordskontroll.\n"
-
-#: libmisc/suauth.c:113
-msgid "Please enter your OWN password as authentication.\n"
-msgstr "Var god skriv in ditt EGET lösenord som äkthetsbevis.\n"
 
 #: libmisc/sub.c:61
 #, c-format
@@ -339,7 +327,7 @@ msgstr "Lösenordet upphör:\t"
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: inkludera inte \"l\" tillsammands med andra flaggor\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:516
+#: src/chage.c:481 src/chage.c:652 src/login.c:518
 #, c-format
 msgid "%s: permission denied\n"
 msgstr "%s: tillåtelse nekas\n"
@@ -1288,26 +1276,26 @@ msgstr "Användarnamn            Port     Senaste\n"
 msgid "**Never logged in**"
 msgstr "**Aldrig inloggad**"
 
-#: src/login.c:183
+#: src/login.c:185
 #, c-format
 msgid "usage: %s [-p] [name]\n"
 msgstr "Användning: %s [-p] [namn]\n"
 
-#: src/login.c:186
+#: src/login.c:188
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h värd] [-f namn]\n"
 
-#: src/login.c:188
+#: src/login.c:190
 #, c-format
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r värd\n"
 
-#: src/login.c:272
+#: src/login.c:274
 msgid "Invalid login time\n"
 msgstr "Felaktig inloggningstid\n"
 
-#: src/login.c:327
+#: src/login.c:329
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1315,7 +1303,7 @@ msgstr ""
 "\n"
 "Systemet är stängt för rutinunderhåll\n"
 
-#: src/login.c:338
+#: src/login.c:340
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1323,7 +1311,7 @@ msgstr ""
 "\n"
 "[Nerkoppling kringgicks -- root inloggning tillåten.]\n"
 
-#: src/login.c:375
+#: src/login.c:377
 #, c-format
 msgid ""
 "\n"
@@ -1332,17 +1320,17 @@ msgstr ""
 "\n"
 "Inloggningen avbröts efter %d sekunders inaktivitet.\n"
 
-#: src/login.c:687
+#: src/login.c:689
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " på \"%.100s\" från \"%.200s\""
 
-#: src/login.c:691
+#: src/login.c:693
 #, c-format
 msgid " on `%.100s'"
 msgstr " på \"%.100s\""
 
-#: src/login.c:850
+#: src/login.c:852
 #, c-format
 msgid ""
 "\n"
@@ -1351,34 +1339,34 @@ msgstr ""
 "\n"
 "%s användare: "
 
-#: src/login.c:853
+#: src/login.c:855
 msgid "login: "
 msgstr "användare: "
 
-#: src/login.c:1069 src/sulogin.c:233
+#: src/login.c:1071 src/sulogin.c:233
 msgid "Login incorrect"
 msgstr "Felaktig inloggning"
 
-#: src/login.c:1263
+#: src/login.c:1265
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Varning: inloggning på nytt aktiv efter den temporära utelåsningen.\n"
 
-#: src/login.c:1276
+#: src/login.c:1278
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Senaste inloggning: %s på %s"
 
-#: src/login.c:1279
+#: src/login.c:1281
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "Senaste inloggning: %.19s på %s"
 
-#: src/login.c:1285
+#: src/login.c:1287
 #, c-format
 msgid " from %.*s"
 msgstr " från %.*s"
 
-#: src/login.c:1362
+#: src/login.c:1364
 msgid "Starting rad_login\n"
 msgstr "Startar rad_login\n"
 
@@ -1836,6 +1824,18 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Inget skal\n"
 
+#: src/suauth.c:100
+msgid "Access to su to that account DENIED.\n"
+msgstr "Du har inte behörighet att köra su till det kontot.\n"
+
+#: src/suauth.c:107
+msgid "Password authentication bypassed.\n"
+msgstr "Hoppade över lösenordskontroll.\n"
+
+#: src/suauth.c:114
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "Var god skriv in ditt EGET lösenord som äkthetsbevis.\n"
+
 #. must be a password file!
 #: src/sulogin.c:132
 msgid "No password file\n"
@@ -1962,16 +1962,16 @@ msgstr "%s: för många grupper speciferade (max %d).\n"
 #: src/useradd.c:738 src/usermod.c:322
 #, c-format
 msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "Användning: %s\t[-u uid [-o]] [-g grupp] [-G grupp,...] \n"
+msgstr "Användning: %s [-u uid [-o]] [-g grupp] [-G grupp,...] \n"
 
 #: src/useradd.c:742
 msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t[-d hem] [-s skal] [-c kommentar] [-m [-k mall]]\n"
+msgstr "\t\t    [-d hem] [-s skal] [-c kommentar] [-m [-k mall]]\n"
 
 #: src/useradd.c:745 src/usermod.c:329
 #, fuzzy
 msgid "[-f inactive] [-e expire ] "
-msgstr "[-f inaktiv] [-e upphör] "
+msgstr "    [-f inaktiv] [-e upphör] "
 
 #: src/useradd.c:748
 msgid "[-A program] "
@@ -1984,12 +1984,12 @@ msgstr "[-p passwd] namn\n"
 #: src/useradd.c:753
 #, c-format
 msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "       %s\t-D [-g grupp] [-b bas] [-s skal]\n"
+msgstr "            %s -D [-g grupp] [-b bas] [-s skal]\n"
 
 #: src/useradd.c:756
 #, fuzzy
 msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f inaktiv] [-e utgång]\n"
+msgstr "\t\t    [-f inaktiv] [-e utgång]\n"
 
 #: src/useradd.c:850 src/usermod.c:480
 #, c-format

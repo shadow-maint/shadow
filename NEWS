@@ -1,4 +1,19 @@
-$Id: NEWS,v 1.27 2002/01/31 10:38:39 kloczek Exp $
+$Id: NEWS,v 1.31 2002/03/13 09:30:52 kloczek Exp $
+
+shadow-4.0.2 => shadow-4.0.3
+
+- added variouse cs, de, fr, id, it, ko man pages found mainly in national
+  man pages translations projects (this documents are not synced with
+  current en version but you know .. "Documentations is lik sex. When it is
+  good it very very good. Whet it is bad it is better than nothing."). Any
+  changes for syncing this are welcome and for anyone who will want maintain
+  this documents directly I can give cvs write access to project resources.
+- added new de translation (by Frank Schmid <frank@cs-schmid.de>).
+- fixed building --with-shared: swapped utent (in src/login.c and
+  libmisc/utmp.c) and pwent (in libmisc/suauth.c and src/su.c)
+  definition/extern (by Dimitar Zhekov <jimmy@is-vn.bg>).
+- minor changes and updates in man pages (also merged
+  shadow-4.0.0-owl-man.patch by Solar Designer <solar@openwall.com>).
 
 shadow-4.0.1 => shadow-4.0.2
 
