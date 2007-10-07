@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.11)
+AM_INIT_AUTOMAKE(shadow, 4.0.11.1)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -201,7 +201,15 @@ dnl be interrupted with Ctrl-C (unlike Linux libc).
 AC_DEFINE(getpass, libshadow_getpass,
 	[Define to libshadow_getpass to use our own version of getpass().])
 
-AC_ARG_ENABLE(shadowgrp, [  --enable-shadowgrp      enable shadow group support [default=yes]])
+AC_ARG_ENABLE(shadowgrp,
+	[  --enable-shadowgrp	enable shadow group support [default=yes]],
+	[case "${enableval}" in
+	 yes) enable_shadowgrp="yes" ;;
+	  no) enable_shadowgrp="no" ;;
+	   *) AC_MSG_ERROR(bad value ${enableval} for --enable-shadowgrp) ;;
+	 esac],
+	[enable_shadowgrp="no"]
+)
 
 AC_ARG_WITH(libcrack, [  --with-libcrack	try to use libcrack (default if found)])
 AC_ARG_WITH(libpam,   [  --with-libpam 		use libpam for PAM support])

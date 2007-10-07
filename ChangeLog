@@ -1,4 +1,28 @@
+2005-07-20  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, configure.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po:
+	4.0.11.1 will be released tmorrow (21-07-2005).
+
+	* configure.in, NEWS:
+	fixed configure.in: now is possible build shadow with enabled/disabled shadow group
+	support (thanks for report symptoms of the bug to Greg Schafer <gschafer@zip.com.au>).
+
+	* po/sv.po, NEWS: update finished (by Per Olofsson <pelle@dsv.su.se>)
+
+	* po/sv.po: partialy updated (by Per Olofsson <pelle@dsv.su.se>).
+
+2005-07-19  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* NEWS, configure.in: start work on 4.0.12.
+
 2005-07-18  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* libmisc/sub.c:
+	fixed compilation warning about incompatible implicit declaration of built-in
+	function â€˜printfâ€™: added "#include <stdio.h>".
+
+	* src/groupadd.c:
+	move #ifdef USE_PAM .. #endif #includes outside #ifdef SHADOWGRP .. #endif.
 
 	* libmisc/pwdcheck.c:
 	added missing "#include <stdio.h>" (fix compilation with PAM disabled).

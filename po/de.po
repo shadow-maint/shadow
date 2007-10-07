@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.11\n"
+"Project-Id-Version: shadow 4.0.11.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-18 16:02+0200\n"
+"POT-Creation-Date: 2005-07-21 13:09+0200\n"
 "PO-Revision-Date: 2002-03-11 12:02-0100\n"
 "Last-Translator: Frank Schmid <frank@cs-schmid.de>\n"
 "Language-Team: Frank Schmid <frank@cs-schmid.de>\n"

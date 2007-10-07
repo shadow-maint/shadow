@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.11\n"
+"Project-Id-Version: shadow 4.0.11.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-18 16:02+0200\n"
+"POT-Creation-Date: 2005-07-21 13:09+0200\n"
 "PO-Revision-Date: 2005-07-13 20:38+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@id.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"

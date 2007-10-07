@@ -1034,7 +1034,7 @@ Optional Features:
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --disable-largefile     omit support for large files
-  --enable-shadowgrp      enable shadow group support default=yes
+  --enable-shadowgrp	enable shadow group support default=yes
   --disable-nls           do not use Native Language Support
   --disable-rpath         do not hardcode runtime library paths
 
@@ -1815,7 +1815,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.11
+ VERSION=4.0.11.1
 
 
 cat >>confdefs.h <<_ACEOF
@@ -23195,6 +23195,15 @@ _ACEOF
 # Check whether --enable-shadowgrp or --disable-shadowgrp was given.
 if test "${enable_shadowgrp+set}" = set; then
   enableval="$enable_shadowgrp"
+  case "${enableval}" in
+	 yes) enable_shadowgrp="yes" ;;
+	  no) enable_shadowgrp="no" ;;
+	   *) { { echo "$as_me:$LINENO: error: bad value ${enableval} for --enable-shadowgrp" >&5
+echo "$as_me: error: bad value ${enableval} for --enable-shadowgrp" >&2;}
+   { (exit 1); exit 1; }; } ;;
+	 esac
+else
+  enable_shadowgrp="no"
 
 fi;
 
