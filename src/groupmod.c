@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groupmod.c,v 1.13 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: groupmod.c,v 1.14 2000/09/02 18:40:44 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -474,7 +474,7 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
+	OPENLOG(Prog);
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present();

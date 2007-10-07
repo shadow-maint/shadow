@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chage.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: chage.c,v 1.18 2000/09/02 18:40:43 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -129,6 +129,21 @@ static int new_fields(void);
 static void print_date(time_t);
 static void list_fields(void);
 static void cleanup(int);
+
+
+/*
+ * isnum - determine whether or not a string is a number
+ */
+int
+isnum(const char *s)
+{
+	while (*s) {
+		if (!isdigit(*s))
+			return 0;
+		s++;
+	}
+	return 1;
+}
 
 /*
  * usage - print command line syntax and exit
@@ -390,7 +405,7 @@ main(int argc, char **argv)
 
 	Prog = Basename(argv[0]);
 
-	openlog("chage", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
+	OPENLOG("chage");
 #ifdef	NDBM
 #ifdef	SHADOWPWD
 	sp_dbm_mode = O_RDWR;
@@ -427,7 +442,7 @@ main(int argc, char **argv)
 				break;
 			case 'd':
 				dflg++;
-				if (strchr (optarg, '/'))
+				if (!isnum(optarg))
 					lastday = strtoday (optarg);
 				else
 					lastday = strtol (optarg, 0, 10);
@@ -443,7 +458,7 @@ main(int argc, char **argv)
 				break;
 			case 'E':
 				Eflg++;
-				if (strchr (optarg, '/'))
+				if (!isnum(optarg))
 					expdays = strtoday (optarg);
 				else
 					expdays = strtol (optarg, 0, 10);

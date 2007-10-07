@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: passwd.c,v 1.19 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: passwd.c,v 1.20 2000/09/02 18:40:44 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -1038,7 +1038,7 @@ main(int argc, char **argv)
 
 	sanitize_env();
 
-	openlog("passwd", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
+	OPENLOG("passwd");
 
 	/*
 	 * Start with the flags which cause another command to be

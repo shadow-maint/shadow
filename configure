@@ -723,7 +723,7 @@ fi
 
 PACKAGE=shadow
 
-VERSION=20000826
+VERSION=20000902
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   { echo "configure: error: source directory already configured; run "make distclean" there first" 1>&2; exit 1; }
@@ -2746,7 +2746,7 @@ else
 #include "confdefs.h"
 #include <pwd.h>
 int main() {
- struct passwd pw;  pw.pw_quota = ""; 
+ struct passwd pw;  pw.pw_quota = 0; 
 ; return 0; }
 EOF
 if { (eval echo configure:2753: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>&5; }; then

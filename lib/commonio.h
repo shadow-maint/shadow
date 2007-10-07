@@ -1,4 +1,4 @@
-/* $Id: commonio.h,v 1.5 2000/08/26 18:27:17 marekm Exp $ */
+/* $Id: commonio.h,v 1.6 2000/09/02 18:40:43 marekm Exp $ */
 
 /*
  * Linked list entry.
@@ -82,7 +82,6 @@ struct commonio_db {
 	int isopen:1;
 	int locked:1;
 	int readonly:1;
-	int use_lckpwdf:1;
 };
 
 extern int commonio_setname(struct commonio_db *, const char *);
