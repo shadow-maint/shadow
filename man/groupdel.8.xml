@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='groupdel.8'>
+  <!-- $Id: groupdel.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>groupdel</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>groupdel</refname>
+    <refpurpose>Delete a group</refpurpose>
+  </refnamediv>
+  <!-- body begins here -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>groupdel</command>    
+      <arg choice='plain'>
+        <replaceable>group</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para> The <command>groupdel</command> command modifies the system
+      account files, deleting all entries that refer to <emphasis
+      remap='I'>group</emphasis>. The named group must exist.
+    </para>
+    
+    <para>You must manually check all filesystems to insure that no files
+      remain with the named group as the file group ID.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>You may not remove the primary group of any existing user. You
+      must remove the user before you remove the group.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/group</filename></term>
+        <listitem>group account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/gshadow</filename></term>
+        <listitem>secure group account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <variablelist remap='TP'>
+      <varlistentry>
+        <term>
+          The <command>groupdel</command> command exits with the
+          following values:
+        </term>
+        <listitem>
+          <!-- .br -->
+          <para>
+            <literal>0</literal>	- success
+            <!-- .br -->
+            <literal>2</literal>	- invalid command syntax
+            <!-- .br -->
+            <literal>6</literal>	- specified group doesn't exist
+            <!-- .br -->
+            <literal>8</literal>	- can't remove user's primary
+            group                        <!-- .br -->
+            <literal>10</literal>	- can't update group file
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

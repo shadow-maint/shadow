@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='lastlog.8'>
+  <!-- $Id: lastlog.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>lastlog</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>lastlog</refname>
+    <refpurpose>examine lastlog file</refpurpose>
+  </refnamediv>
+  <!-- body begins here -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>lastlog</command>    
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>lastlog</command> formats and prints the contents of the last
+      login log <filename>/var/log/lastlog</filename> file. The <emphasis
+      remap='B'> login-name</emphasis>, <emphasis remap='B'>port</emphasis>,
+      and <emphasis remap='B'>last login time</emphasis> will be printed.
+      The default (no flags) causes lastlog entries to be printed, sorted by
+      their order in <filename>/etc/passwd</filename>.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <variablelist remap='TP'>
+      <varlistentry>
+        <term>
+          The options which apply to the <command>lastlog</command>
+          command are:
+        </term>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-h</option>, <option>--help</option>
+        </term>
+        <listitem>
+          <para>Print help message and exit.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-t</option>, <option>--time</option> <replaceable>
+            DAYS
+          </replaceable>
+        </term>
+        <listitem>
+          <para>
+            Print the lastlog records more recent than <emphasis remap='I'>
+              DAYS
+            </emphasis>
+            .
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-u</option>, <option>--user</option> <replaceable>
+            LOGIN
+          </replaceable>
+        </term>
+        <listitem>
+          <para> Print the lastlog record for user with specified <emphasis
+            remap='I'> LOGIN</emphasis>only.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='TP'>
+      <varlistentry>
+        <term>
+          The <option>-t</option> flag overrides the use of <option>-u</option>.
+        </term>
+        <listitem>
+          <para></para> <!-- FIXME: blank list item -->
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <para> If the user has never logged in the message <emphasis
+      remap='B'>"**Never logged in**" </emphasis> will be displayed instead
+      of the port and time.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/var/log/lastlog</filename></term>
+        <listitem>lastlog logging file</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>Large gaps in uid numbers will cause the lastlog program to run
+      longer with no output to the screen (i.e. if mmdf=800 and last
+      uid=170, program will appear to hang as it processes uid 171-799).
+    </para>
+  </refsect1>
+  
+  <refsect1 id='authors'>
+    <title>AUTHORS</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+      <!-- .br -->
+      Phillip Street
+    </para>
+  </refsect1>
+</refentry>

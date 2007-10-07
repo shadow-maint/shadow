@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-04-20 22:39+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team:  French <debian-l10n-french@lists.debian.org>\n"
@@ -161,13 +161,13 @@ msgstr "Impossible de changer le répertoire racine en « %s »\n"
 msgid "malloc(%d) failed\n"
 msgstr "échec de malloc(%d)\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr ""
 "Impossible d'allouer l'espace pour l'information sur la configuration.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -1074,14 +1074,14 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options :\n"
-"  -u, --login LOGIN   afficher l'enregistrement « lastlog » "
+"  -u, --user LOGIN    afficher l'enregistrement « lastlog » "
 "pour                       l'utilisateur dont le compte est LOGIN\n"
 "  -h, --help          afficher ce message d'aide et quitter\n"
 "  -t, --time JOURS    afficher uniquement les enregistrements "
@@ -1270,7 +1270,7 @@ msgstr "gid inconnu: %lu\n"
 msgid "Sorry.\n"
 msgstr " \n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "trop de groupes\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2004-06-12 17:16-0300\n"
 "Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -154,12 +154,12 @@ msgstr "Não foi possível mudar o diretório raíz para \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) falhou\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Não foi possível alocar espaço para a informação de configuração.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -1035,7 +1035,7 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
@@ -1222,7 +1222,7 @@ msgstr "gid desconhecido : %lu\n"
 msgid "Sorry.\n"
 msgstr "Desculpe.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "muitos grupos\n"

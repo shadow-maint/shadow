@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='faillog.5'>
+  <!-- $Id: faillog.5.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>faillog</refentrytitle>
+    <manvolnum>5</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>faillog</refname>
+    <refpurpose>Login failure logging file</refpurpose>
+  </refnamediv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <filename>/var/log/faillog</filename> maintains a count of login
+      failures and the limits for each account. The file is fixed length
+      record, indexed by numerical UID. Each record contains the count of
+      login failures since the last successful login; the maximum number of
+      failures before the account is disabled; the line the last login
+      failure occured on; and the date the last login failure occured.
+    </para>
+    
+    <para>The structure of the file is</para>
+    <literallayout remap='DS'>
+      struct	faillog {
+      short   fail_cnt;
+      short   fail_max;
+      char    fail_line[12];
+      time_t  fail_time;
+      };
+    </literallayout>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/var/log/faillog</filename></term>
+        <listitem>login failure log</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>faillog</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>
+

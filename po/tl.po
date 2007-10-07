@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-01-26 22:00+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -158,12 +158,12 @@ msgstr "Hindi mapalitan ang root directory sa \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "sawi ang malloc(%d)\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Hindi makareserba ng lugar para sa impormasyong pagsasaayos.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -1046,7 +1046,7 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
@@ -1240,7 +1240,7 @@ msgstr "di kilalang gid: %lu\n"
 msgid "Sorry.\n"
 msgstr "Ipagpaumanhin.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "labis ang dami ng mga grupo\n"

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='newusers8'>
+  <!-- $Id: newusers.8.xml,v 1.4 2005/04/22 07:00:57 kloczek Exp $ -->
+  <!--  Copyright 1991 \- 1994, Julianne Frances Haugh -->
+  <!--  All rights reserved. -->
+  
+  <!--  Redistribution and use in source and binary forms, with or without -->
+  <!--  modification, are permitted provided that the following conditions -->
+  <!--  are met: -->
+  <!--  1. Redistributions of source code must retain the above copyright -->
+  <!--     notice, this list of conditions and the following disclaimer. -->
+  <!--  2. Redistributions in binary form must reproduce the above copyright -->
+  <!--     notice, this list of conditions and the following disclaimer in the -->
+  <!--     documentation and/or other materials provided with the distribution. -->
+  <!--  3. Neither the name of Julianne F. Haugh nor the names of its contributors -->
+  <!--     may be used to endorse or promote products derived from this software -->
+  <!--     without specific prior written permission. -->
+  
+  <!--  THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND -->
+  <!--  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE -->
+  <!--  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE -->
+  <!--  ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE -->
+  <!--  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL -->
+  <!--  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS -->
+  <!--  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) -->
+  <!--  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT -->
+  <!--  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY -->
+  <!--  OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF -->
+  <!--  SUCH DAMAGE. -->
+  <refmeta>
+    <refentrytitle>NEWUSERS</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>newusers</refname>
+    <refpurpose>update and create new users in batch</refpurpose>
+  </refnamediv>
+  <!-- body begins here -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>newusers</command>    
+      <arg choice='opt'>
+        <replaceable>new_users</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>newusers</command> reads a file of user name and
+      clear-text password pairs and
+      uses this information to update a group of existing users or to
+      create new
+      users. Each line is in the same format as the standard password
+      file (see
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>
+      )with the following exceptions.
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <emphasis remap='I'>pw_passwd</emphasis>
+        </term>
+        <listitem>
+          <para>This field will be encrypted and used as the new
+            value of the encrypted
+            password.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <emphasis remap='I'>pw_age</emphasis>
+        </term>
+        <listitem>
+          <para>This field will be ignored for shadow passwords if
+            the user already exists.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <emphasis remap='I'>pw_gid</emphasis>
+        </term>
+        <listitem>
+          <para>This field may be the name of an existing group, in
+            which case the named
+            user will be added as a member. If a non-existent
+            numerical group is given,
+            a new group will be created having this number.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <emphasis remap='I'>pw_dir</emphasis>
+        </term>
+        <listitem>
+          <para>This field will be checked for existence as a
+            directory and a new directory
+            with the same name will be created if it does not
+            already exist. The
+            ownership of the directory will be set to be that of
+            the user being created
+            or updated.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <para>This command is intended to be used in a large system environment
+      where many
+      accounts are updated at a single time.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>The input file must be protected since it contains unencrypted
+      passwords.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>
+      ,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

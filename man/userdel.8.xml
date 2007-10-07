@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='userdel.8'>
+  <!-- $Id: userdel.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>USERDEL</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>userdel</refname>
+    <refpurpose>Delete a user account and related files</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>userdel</command>    
+      <arg choice='opt'>-r </arg>
+      <arg choice='plain'>
+        <replaceable>login</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      The <command>userdel</command> command modifies the system account
+      files, deleting all entries that refer to <emphasis
+      remap='I'>login</emphasis>. The named user must exist.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>userdel</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-r</option>
+        </term>
+        <listitem>
+          <para>Files in the user's home directory will be removed along
+            with the home directory itself and the user's mail spool. Files
+            located in other file systems will have to be searched for and
+            deleted manually.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/group</filename></term>
+        <listitem>group account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <variablelist remap='TP'>
+      <varlistentry>
+        <term>
+          The <command>userdel</command> command exits with the following
+          values:
+        </term>
+        <listitem>
+          <!-- .br -->
+          <para>
+            <literal>0</literal>	- success
+            <!-- .br -->
+            <literal>1</literal>	- can't update password file
+            <!-- .br -->
+            <literal>2</literal>	- invalid command syntax
+            <!-- .br -->
+            <literal>6</literal>	- specified user doesn't exist
+            <!-- .br -->
+            <literal>8</literal>	- user currently logged in
+            <!-- .br -->
+            <literal>10</literal>	- can't update group file
+            <!-- .br -->
+            <literal>12</literal>	- can't remove home directory
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>
+      <command>userdel</command> will not allow you to remove an account if
+      the user is currently logged in. You must kill any running processes
+      which belong to an account that you are deleting. You may not remove
+      any NIS attributes on an NIS client. This must be performed on the NIS
+      server.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

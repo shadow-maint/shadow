@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-04-19 16:02+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -155,12 +155,12 @@ msgstr "루트 디렉토리를 \"%s\"(으)로 바꿀 수 없습니다\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d)에 실패했음\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "설정 정보를 위한 공간 확보를 할 수 없습니다.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -1054,14 +1054,14 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 "사용법: lastlog [옵션]\n"
 "\n"
 "옵션:\n"
-"  -u, --login LOGIN\tLOGIN이라는 사용자의 최근 기록을 봅니다\n"
+"  -u, --user LOGIN\tLOGIN이라는 사용자의 최근 기록을 봅니다\n"
 "  -h, --help\t\t이 도움말 메세지를 표시하고 끝납니다\n"
 "  -t, --time DAYS\tDAYS일 내의 최근 로그 기록만 표시합니다\n"
 
@@ -1249,7 +1249,7 @@ msgstr "알 수 없는 GID: %lu\n"
 msgid "Sorry.\n"
 msgstr "죄송합니다.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "그룹들이 너무나 많습니다\n"

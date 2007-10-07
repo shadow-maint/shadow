@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: encrypt.c,v 1.11 2005/04/06 02:59:22 kloczek Exp $")
+RCSID ("$Id: encrypt.c,v 1.12 2005/05/19 12:05:03 kloczek Exp $")
 #include <unistd.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -40,7 +40,7 @@ char *pw_encrypt (const char *clear, const char *salt)
 	static char cipher[128];
 	char *cp;
 
-	crypt (clear, salt);
+	cp = crypt (clear, salt);
 	if (!cp) {
 		/*
 		 * Single Unix Spec: crypt() may return a null pointer,

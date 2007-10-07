@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='chage.1'>
+  <!--  $Id: chage.1.xml,v 1.7 2005/04/26 12:31:14 kloczek Exp $  -->
+  <refmeta>
+    <refentrytitle>chage</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>chage</refname>
+    <refpurpose>change user password expiry information</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>chage</command>    
+      <arg choice='opt'>-m <replaceable>mindays</replaceable></arg>
+      <arg choice='opt'>-M <replaceable>maxdays</replaceable></arg>
+      <arg choice='opt'>-d <replaceable>lastday</replaceable></arg>
+      <arg choice='opt'>-I <replaceable>inactive</replaceable></arg>
+      <sbr/>
+      <arg choice='opt'>-E <replaceable>expiredate</replaceable></arg>
+      <arg choice='opt'>-W <replaceable>warndays</replaceable></arg>
+      <arg choice='plain'><replaceable>user</replaceable></arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>chage</command>    
+      <arg choice='plain'>-l <replaceable>user</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para><command>chage</command> command changes the number of days
+      between passwordchanges and the date of the last password change. 
+      This information is used by the system to determine when a user must
+      change her password.
+    </para>
+    <para>The <command>chage</command> command is restricted to the root
+      user, except for the <option>-l</option> option, which may be used by
+      an unprivileged user to determine when her password or account is due
+      to expire.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>chage</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-d</option> <replaceable>lastday</replaceable>
+        </term>
+        <listitem>
+          <para>
+            Set the number of days since January 1st, 1970 when the password
+            was last changed. The date may also be expressed in the format
+            YYYY-MM-DD (or the format more commonly used in your area).
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-E</option> <replaceable>expiredate</replaceable>
+        </term>
+        <listitem>
+          <para>Set the date on which the user's account will no longer be
+            accessible. The <emphasis remap='I'>expiredate</emphasis> option
+            is the number of days since January 1, 1970 on which the
+            accounted is locked. The date may also be expressed in the
+            format YYYY-MM-DD (or the format more commonly used in your
+            area). A user whose account is locked must contact the system
+            administrator before being able to use the system again. Passing
+            the number <emphasis remap='I'>-1</emphasis> as the <emphasis
+            remap='I'>expiredate</emphasis> will remove an accounts
+            expiration date.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-I</option> <replaceable>inactive</replaceable>
+        </term>
+        <listitem>
+          <para>
+            Set the number of days of inactivity after a password has
+            expired before the account is locked. The <emphasis
+            remap='I'>inactive</emphasis> option is the number of days of
+            inactivity. A value of 0 disables this feature. A user whose
+            account is locked must contact the system administrator before
+            being able to use the system again.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-m</option> <replaceable>mindays</replaceable>
+        </term>
+        <listitem>
+          <para>
+            Set the minimum number of days between password changes. A value
+            of zero for this field indicates that the user may change her
+            password at any time.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-M</option> <replaceable>maxdays</replaceable>
+        </term>
+        <listitem>
+          <para>
+            Set maximum number of days during which a password is valid. 
+            When <emphasis remap='I'>maxdays</emphasis> plus <emphasis
+            remap='I'>lastday</emphasis> is less than the current day, the
+            user will be required to change her password before being able
+            to use her account.  This occurrence can be planned for in
+            advance by use of the <option>-W</option> option, which provides
+            the user with advance warning.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-W</option> <replaceable>warndays</replaceable>
+        </term>
+        <listitem>
+          <para>
+            Set the number of days of warning before a password change is
+            required. The <emphasis remap='I'>warndays</emphasis> option is
+            the number of days prior to the password expiring that a user
+            will be warned her password is about to expire.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+      If none of the options are selected, <command>chage</command> operates
+      in an interactive fashion, prompting the user with the current values
+      for all of the fields.  Enter the new value to change the field, or
+      leave the line blank to use the current value. The current value is
+      displayed between a pair of <emphasis remap='B'>[ ]</emphasis> marks.
+    </para>
+  </refsect1>
+  <refsect1 id='note'>
+    <title>NOTE</title>
+    <para>
+      The <command>chage</command> program requires shadow password file to
+      be available.  Its functionality is not available when passwords are
+      stored in the passwd file.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <filename>/etc/passwd</filename>
+        </term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <filename>/etc/shadow</filename>
+        </term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+    </variablelist>
+    
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
+  </refsect1>
+</refentry>

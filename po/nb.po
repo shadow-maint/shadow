@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2004-06-03 21:42+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -162,12 +162,12 @@ msgstr "Kan ikke endre rot mappa til \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) feilet\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Fant ikke plass til config-info.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "feil med oppsettet - ukjent element «%s» (kontakt administrator)\n"
@@ -1039,7 +1039,7 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
@@ -1226,7 +1226,7 @@ msgstr "ukjent gid: %lu\n"
 msgid "Sorry.\n"
 msgstr "Beklager.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "For mange grupper\n"

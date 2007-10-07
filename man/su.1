@@ -1,4 +1,4 @@
-.\" $Id: su.1,v 1.16 2005/04/12 16:31:06 kloczek Exp $
+.\" $Id: su.1,v 1.18 2005/05/19 10:35:00 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,7 +33,7 @@ su \- change user ID or become super\-user
 .SH DESCRIPTION
 \fBsu\fR is used to become another user during a login session. Invoked
 without a username, \fBsu\fR defaults to becoming the super user. The
-optional argument \fB\-\fR may be used to provide an environment similiar to
+optional argument \fB\-\fR may be used to provide an environment similar to
 what the user would expect had the user logged in directly.
 .PP
 Additional arguments may be provided after the username, in which case they
@@ -46,7 +46,7 @@ The user will be prompted for a password, if appropriate. Invalid passwords
 will produce an error message. All attempts, both valid and invalid, are
 logged to detect abuses of the system.
 .PP
-The current environment is passed to the new shell. The value of fB$PATH\fR
+The current environment is passed to the new shell. The value of \fB$PATH\fR
 \is reset to \fB/bin:/usr/bin\fR for normal users, or
 \fB/sbin:/bin:/usr/sbin:/usr/bin\fR for the super user. This may be changed
 with the \fBENV_PATH\fR and \fBENV_SUPATH\fR definitions in

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-04-19 10:17+0200\n"
 "Last-Translator: Claus Hindsgaul <claus_h@image.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -160,12 +160,12 @@ msgstr "Kan ikke ændre rodmappen til \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) mislykkedes\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Kunne ikke frigøre plads til opsætningsoplysninger.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "opsætningsfejl - ukendt punkt %s (informér administrator)\n"
@@ -1057,14 +1057,14 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 "Brug: lastlog [tilvalg]\n"
 "\n"
 "Tilvalg:\n"
-"  -u, --login LOGIND\tvis lastlog-optegnelser for brugeren med det angivne "
+"  -u, --user LOGIND\tvis lastlog-optegnelser for brugeren med det angivne "
 "LOGIND\n"
 "  -h, --help\t\tdvis denne hjælpebesked og afslut\n"
 "  -t, --time DAGE\tvis kun lastlog-optegnelser, der er nyere end DAGE\n"
@@ -1251,7 +1251,7 @@ msgstr "ukendt gid: %lu\n"
 msgid "Sorry.\n"
 msgstr "Beklager.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "for mange grupper\n"

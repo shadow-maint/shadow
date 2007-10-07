@@ -1,4 +1,110 @@
+2005-05-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/Makefile.am: remove shadow-man-pages.pot target from all.
+
+2005-05-19  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* lib/encrypt.c, NEWS:
+	fixed passwd segfault in non-PAM connfiguration (submited by Greg Schafer <gschafer@zip.com.au>).
+
+	* po/sv.po: upsdate (by Christian Perrier <bubulle@debian.org>).
+
+	* NEWS, src/newgrp.c:
+	fixed NULL pointer dereference - getlogin() and ttyname() can
+	return NULL which is not checked (http://bugs.debian.org/162303).
+
+	* man/pwconv.8.xml, man/su.1, man/su.1.xml, man/pwconv.8:
+	fixed typo (s,similiar,similar,).
+
+2005-05-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/ro.po: updated by Sorin B. <sorin@bonbon.net>.
+
+	* po/ru.po, NEWS: updated by yu-koz <yu-koz@yandex.ru>.
+
+2005-05-13  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/ro.po: few updates by Sorin Batariuc <sorin@bonbon.net>.
+
+2005-05-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/ru.po: updated (by Yuri Kozlov <yuray@id.ru>).
+
+2005-05-10  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/vi.po:
+	completed translations for HEAD (by Clytie Siddall <clytie@riverland.net.au>).
+
+2005-05-09  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/LINGUAS, po/vi.po: added new vi translation.
+
+	* NEWS, lib/getdef.c:
+	leaves the table as it is, and changes from the binary search to
+	a sequential one (fix by Lucas Correia Villa Real <lucasvr@gobolinux.org>).
+
+	* man/passwd.1, man/passwd.1.xml: make bold passwd and chfn commands.
+
+2005-04-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/usermod.8.xml, man/vipw.8.xml: cleanups.
+
+2005-04-27  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/gpasswd.1.xml, man/groups.1.xml, man/grpck.8.xml, man/login.defs.5.xml, man/passwd.1.xml, man/pwck.8.xml, man/shadowconfig.8.xml, man/sulogin.8.xml, man/useradd.8.xml:
+	replace <emphasis remap='B'></emphasis> by <command></command>.
+
+	* po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, src/lastlog.c:
+	fixed lastlog --help message (s,--login,--user,) http://bugs.debian.org/249611
+
+	* man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/mkpasswd.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml:
+	use <varlistentry></varlistentry> in FILES section. Cleanups.
+
+	* man/expiry.1.xml, man/chsh.1.xml, man/chpasswd.8.xml, man/chfn.1.xml, man/porttime.5.xml, man/pw_auth.3.xml:
+	cleanups.
+
+	* man/vipw.8, man/vipw.8.xml:
+	small fix: s,vi,vi(1), (reported by Helge Kreutzmann <kreutzm@itp.uni-hannover.de> in
+	http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=260636).
+	s,VISUAL,$VISUAL; s,EDITOR,$EDITOR,
+
+2005-04-26  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/login.1.xml: fixed bold (use <command></command>). Cleanups.
+
+	* man/login.1: fixed typo in bold.
+
+	* man/chage.1.xml: fixed italic. Cleanups.
+
+	* man/chage.1: fixed typo in italic.
+
+	* man/login.defs.5.xml:
+	fixed italic (use <filename></filename> istead italic). Cleanups.
+
+	* man/login.defs.5: fixed typo in italic.
+
+	* man/vipw.8.xml: fixed italic (use <filename></filename>).
+
+	* man/vipw.8: typo in italic.
+
+	* man/Makefile.am:
+	added target for generate shadow-man-pages.pot. List all now useable xml files
+	in man_XMANS variable.
+
+	* man/pwconv.8.xml:
+	fixed bold. Use in more places <command></command> istead bold.
+
+	* man/login.defs.5: typo in bold.
+
+	* man/su.1.xml:
+	removed comment. Use <variablelist></variablelist> in Files secstion.
+	Fixed bold.
+
+	* man/pwconv.8, man/su.1: typo in bold.
+
 2005-04-25  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, configure.in: start work on 4.0.9.
 
 	* po/nl.po: kill fuzzy.
 

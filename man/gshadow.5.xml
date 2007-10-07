@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='gshadow.5'>
+  <!-- $Id: gshadow.5.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>gshadow</refentrytitle>
+    <manvolnum>5</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>gshadow</refname>
+    <refpurpose>shadowed group file</refpurpose>
+  </refnamediv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <emphasis remap='I'>gshadow</emphasis> contains the shadowed
+      information for group accounts. It contains lines with the folowing
+      colon-separated fields:
+    </para>
+    
+    <para>Group name</para>
+    
+    <para>Encrypted password</para>
+    
+    <para>Comma-separated list of group administrators</para>
+    
+    <para>Comma-separated list of group members.</para>
+    
+    <para>The group name and password fields must be filled.  The encryped
+      password consists of 13 characters from the 64-character alphabet a
+      thru z, A thru Z, 0 thru 9, \. and /.  Refer to <citerefentry>
+        <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry> for details on how this string is interpreted.  If the
+      password field contains some string that is not valid result of
+      <citerefentry>
+      <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry>, for instance ! or *, the user will not be able to use
+      a unix password to log in, subject to <citerefentry>
+        <refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum>
+      </citerefentry>.
+    </para>
+    
+    <para>This information supercedes any password present in
+    <filename>/etc/group</filename>.
+    </para>
+    
+    <para>This file must not be readable by regular users if password
+      security is to be maintained.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/group</filename></term>
+        <listitem>group account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/gshadow</filename></term>
+        <listitem>secure group account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Nicolas FRANCOIS</para>
+  </refsect1>
+</refentry>

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='usermod.8'>
+  <!--  $Id: usermod.8.xml,v 1.5 2005/04/28 13:57:45 kloczek Exp $  -->
+  <refmeta>
+    <refentrytitle>usermod</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>usermod</refname>
+    <refpurpose>Modify a user account</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>usermod</command>    
+      <arg choice='opt'>-c <replaceable>comment</replaceable></arg>
+      <arg choice='opt'>
+        <arg choice='plain'>-d <replaceable>home_dir</replaceable></arg>
+        <arg choice='opt'>-m </arg>
+      </arg>
+      <arg choice='opt'>-e <replaceable>expire_date</replaceable></arg>
+      <arg choice='opt'>-f <replaceable>inactive_time</replaceable></arg>
+      <arg choice='opt'>-g <replaceable>initial_group</replaceable></arg>
+      <sbr/>
+      <arg choice='opt'>
+        <arg choice='plain'>-G <replaceable>group1</replaceable></arg>
+        <arg choice='opt'>
+          <arg choice='plain' rep='repeat'><replaceable>,group2,</replaceable></arg>
+          <arg choice='plain'><replaceable>,</replaceable></arg>
+          <arg choice='opt'><replaceable>groupN</replaceable></arg>
+        </arg>
+      </arg>
+      <sbr/>
+      <arg choice='opt'>-l <replaceable>login_name</replaceable></arg>
+      <arg choice='opt'>-p <replaceable>passwd</replaceable></arg>
+      <arg choice='opt'>-s <replaceable>shell</replaceable></arg>
+      <arg choice='opt'>
+        <arg choice='plain'>-u <replaceable>uid</replaceable></arg>
+        <arg choice='opt'>-o </arg>
+      </arg>
+      <sbr/>
+      <group choice='opt'>
+        <arg choice='plain'>-L </arg><arg choice='plain'>-U </arg>
+      </group>
+      <arg choice='plain'><replaceable>login</replaceable></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      The <command>usermod</command> command modifies the system account
+      files to reflect the changes that are specified on the command line.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>usermod</command> command
+      are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-c</option> <replaceable>comment</replaceable>
+        </term>
+        <listitem>
+          <para>The new value of the user's password file comment
+            field. It is normally modified using the <citerefentry>
+              <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+            </citerefentry>utility.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-d</option> <replaceable>home_dir</replaceable>
+        </term>
+        <listitem>
+          <para>
+            The user's new login directory. If the <option>-m</option>
+            option is given the contents of the current home directory will
+            be moved to the new home directory, which is created if it does
+            not already exist.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-e</option> <replaceable>expire_date</replaceable>
+        </term>
+        <listitem>
+          <para>The date on which the user account will be disabled.  The
+            date is specified in the format <emphasis remap='I'>YYYY-MM-DD
+            </emphasis>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-f</option> <replaceable>inactive_days</replaceable>
+        </term>
+        <listitem>
+          <para>The number of days after a password expires until the
+            account is permanently disabled. A value of 0 disables the
+            account as soon as the password has expired, and a value of -1
+            disables the feature. The default value is -1.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-g</option> <replaceable>initial_group</replaceable>
+        </term>
+        <listitem>
+          <para>The group name or number of the user's new initial login
+            group. The group name must exist. A group number must refer to
+            an already existing group. The default group number is 1.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-G</option> <replaceable>group1</replaceable>[<emphasis remap='I'>
+            ,group2,...,
+          </emphasis>
+          [<emphasis remap='I'>groupN</emphasis>]]]
+        </term>
+        <listitem>
+          <para>A list of supplementary groups which the user is also a
+            member of. Each group is separated from the next by a comma,
+            with no intervening whitespace. The groups are subject to the
+            same restrictions as the group given with the
+            <option>-g</option> option. If the user is currently a member of
+            a group which is not listed, the user will be removed from the
+            group.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-l</option> <replaceable>login_name</replaceable>
+        </term>
+        <listitem>
+          <para>
+            The name of the user will be changed from <emphasis
+            remap='I'>login </emphasis> to <emphasis
+            remap='I'>login_name</emphasis>.  Nothing else is changed. In
+            particular, the user's home directory name should probably be
+            changed to reflect the new login name.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-L</option>
+        </term>
+        <listitem>
+          <para>Lock a user's password. This puts a '!' in front of the
+            encrypted password, effectively disabling the password. You
+            can't use this option with <option>-p</option> or
+            <option>-U</option>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-o</option>
+        </term>
+        <listitem>
+          <para>
+            When used with the <option>-u</option> option, this option
+            allows to change the user ID to a non-unique value.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-p</option> <replaceable>passwd</replaceable>
+        </term>
+        <listitem>
+          <para>
+            The encrypted password, as returned by <citerefentry>
+              <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+            </citerefentry>.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-s</option> <replaceable>shell</replaceable>
+        </term>
+        <listitem>
+          <para>The name of the user's new login shell. Setting this field
+            to blank causes the system to select the default login shell.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-u</option> <replaceable>uid</replaceable>
+        </term>
+        <listitem>
+          <para>The numerical value of the user's ID. This value must be
+            unique, unless the <option>-o</option> option is used. The value
+            must be non-negative. Values between 0 and 99 are typically
+            reserved for system accounts. Any files which the user owns and
+            which are located in the directory tree rooted at the user's
+            home directory will have the file user ID changed automatically.
+            Files outside of the user's home directory must be altered
+            manually.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-U</option>
+        </term>
+        <listitem>
+          <para>Unlock a user's password. This removes the '!' in front of
+            the encrypted password. You can't use this option with
+            <option>-p</option> or <option>-L</option>.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>
+      <command>usermod</command> will not allow you to change the name of a
+      user who is logged in. You must make certain that the named user is
+      not executing any processes when this command is being executed if the
+      user's numerical user ID is being changed. You must change the owner
+      of any crontab files manually. You must change the owner of any at
+      jobs manually. You must make any changes involving NIS on the NIS
+      server.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/group</filename></term>
+        <listitem>group account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

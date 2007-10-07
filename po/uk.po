@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-04-19 23:22+0300\n"
 "Last-Translator: Roman Festchook <linux@polesye.net>\n"
 "Language-Team:  <linux@polesye.net>\n"
@@ -157,12 +157,12 @@ msgstr "Не можу змінити кореневу теку на \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) не виконано\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Не можу виділити ресурси для конфігураційних данних.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -1058,14 +1058,14 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 "Використання: lastlog [опції]\n"
 "\n"
 "Опції:\n"
-"  -u, --login ЛОГІН\tвивести записи останніх входів для користувача з "
+"  -u, --user ЛОГІН\tвивести записи останніх входів для користувача з "
 "ЛОГІНом\n"
 "  -h, --help\t\tвивести допомогу та вийти\n"
 "  -t, --time ДНІВ\tвивести лише записи свіжіші за ДНІВ\n"
@@ -1252,7 +1252,7 @@ msgstr "невідомий gid: %lu\n"
 msgid "Sorry.\n"
 msgstr "Вибачте.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "занадто багато груп\n"

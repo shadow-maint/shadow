@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: lastlog.c,v 1.17 2005/04/25 10:26:37 kloczek Exp $")
+RCSID (PKG_VER "$Id: lastlog.c,v 1.18 2005/04/27 16:55:33 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -64,7 +64,7 @@ static void usage (void)
 	fprintf (stdout, _("Usage: lastlog [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -u, --login LOGIN	print lastlog record for user with specified LOGIN\n"
+			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"));
 	exit (1);

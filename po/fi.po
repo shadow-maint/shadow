@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
 "PO-Revision-Date: 2005-04-19 09:23+0300\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -158,12 +158,12 @@ msgstr "Ei voi vaihtaa juurihakemistoksi \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) epäonnistui\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Asetustiedoille ei voi varata tilaa.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "asetusvirhe - tuntematon kohta \"%s\" (kerro ylläpidolle)\n"
@@ -1056,14 +1056,14 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 "Käyttö: lastlog [valitsimet]\n"
 "\n"
 "Valitsimet:\n"
-"  -u, --login TUNNUS    Tulosta lastlog-tietue käyttäjälle TUNNUS\n"
+"  -u, --user TUNNUS     Tulosta lastlog-tietue käyttäjälle TUNNUS\n"
 "  -h, --help            Näytä tämä ohje ja lopeta\n"
 "  -t, --time PÄIVÄÄ     Tulosta vain PÄIVÄÄ tuoreemmat lastlog-tietueet\n"
 
@@ -1250,7 +1250,7 @@ msgstr "tuntematon gid: %lu\n"
 msgid "Sorry.\n"
 msgstr "Pahoittelen.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "liian monta ryhmää\n"

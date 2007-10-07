@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='sulogin.8'>
+  <!--  $Id: sulogin.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>sulogin</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>sulogin</refname>
+    <refpurpose>Single-user login</refpurpose>
+  </refnamediv>
+  
+  <refsect1 id='syntax'>
+    <title>SYNTAX</title>
+    <para>
+      <command>sulogin</coamand> [<emphasis remap='I'>
+        tty-device
+      </emphasis>
+      ]
+    </para>
+  </refsect1>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>sulogin</coamand> is invoked by <command>init</coamand> prior
+      to allowing the user access to the system when in single user mode. 
+      This feature may only be available on certain systems where
+      <command>init</coamand> has been modified accordingly, or where the
+      <filename>/etc/inittab</filename> has an entry for a single user
+      login.
+    </para>
+    
+    <para>The user is prompted</para>
+    
+    <para>Type control-d to proceed with normal startup,
+      <!-- .br -->
+      (or give root password for system maintenance):
+    </para>
+    
+    <para>Input and output will be performed with the standard file
+      descriptors unless
+      the optional device name argument is provided.
+    </para>
+    
+    <para>If the user enters the correct root password, a login session is
+      initiated.
+      When <emphasis remap='B'>EOF</emphasis> is pressed instead, the
+      system enters multi-user mode.
+    </para>
+    
+    <para>After the user exits the single-user shell, or presses <emphasis
+      remap='B'>EOF</emphasis>, the system begins the initialization process
+      required to enter multi-user mode.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>
+      This command can only be used if <command>init</coamand> has been
+      modified to call <command>sulogin</coamand> instead of
+      <filename>/bin/sh</filename>, or if the user has set the <emphasis
+      remap='I'>inittab</emphasis> to support a single user login. For
+      example, the line:
+    </para>
+    <!-- .br -->
+    
+    <para>co:s:respawn:/etc/sulogin /dev/console</para>
+    <!-- .br -->
+    
+    <para>should execute the sulogin command in single user mode.</para>
+    
+    <para>As complete an environment as possible is created. However,
+      various devices
+      may be unmounted or uninitialized and many of the user commands may
+      be
+      unavailable or nonfunctional as a result.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>init</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

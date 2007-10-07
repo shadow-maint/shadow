@@ -2,21 +2,21 @@
 # translation of shadow_ro.po to Romanian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-# Sorin Batariuc <sorin@bonbon.net>, 2004.
+# Sorin Batariuc <sorin@bonbon.net>, 2004, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ro\n"
+"Project-Id-Version: shadow 4.0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-25 12:28+0200\n"
-"PO-Revision-Date: 2004-12-14 18:17+0200\n"
+"POT-Creation-Date: 2005-05-23 12:26+0200\n"
+"PO-Revision-Date: 2005-05-14 02:20+0300\n"
 "Last-Translator: Sorin Batariuc <sorin@bonbon.net>\n"
-"Language-Team: Romanian\n"
+"Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=2; plural=n>1\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #: libmisc/addgrps.c:56
 #, c-format
@@ -82,7 +82,7 @@ msgid "You may not change $%s\n"
 msgstr "Nu puteţi schimba $%s\n"
 
 #: libmisc/failure.c:229
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
@@ -90,9 +90,11 @@ msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
 msgstr[0] ""
-"%d eşuare de la ultima autentificare.  Ultima oară a fost %s în %s.\n"
+"%d eşuare de la ultima autentificare.\n"
+"Ultima oară a fost %s în %s.\n"
 msgstr[1] ""
-"%d eşuare de la ultima autentificare.  Ultima oară a fost %s în %s.\n"
+"%d eşuări de la ultima autentificare.\n"
+"Ultima oară a fost %s în %s.\n"
 
 #: libmisc/limits.c:397
 #, c-format
@@ -105,7 +107,7 @@ msgstr "Aveţi mesaje noi."
 
 #: libmisc/mail.c:72
 msgid "No mail."
-msgstr "N-aveţi mesaje."
+msgstr "Nu aveţi mesaje."
 
 #: libmisc/mail.c:74
 msgid "You have mail."
@@ -128,7 +130,7 @@ msgstr "passwd: %s\n"
 
 #: libmisc/pam_pass.c:49
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: parolă actualizată cu succes\n"
 
 #: libmisc/setupenv.c:207
 #, c-format
@@ -159,12 +161,12 @@ msgstr "Nu pot schimba directorul rădăcină la \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "eşuare malloc(%d)\n"
 
-#: lib/getdef.c:265
+#: lib/getdef.c:262
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Nu pot aloca spaţiu pentru informaţiile despre configurare.\n"
 
-#: lib/getdef.c:319
+#: lib/getdef.c:303
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -180,13 +182,13 @@ msgid "%s's Password: "
 msgstr "Parola %s: "
 
 #: src/chage.c:112
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
 "             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"Utilizare: %s [-l] [-m min_zile] [-M max_zile] [-W avertiza]\n"
-"\t[-I inactivă] [-E expiră] [-d ultima_zi] utilizator\n"
+"Utilizare: chage [-l] [-m min_zile] [-M max_zile] [-W avertiza]\n"
+"             [-I inactivă] [-E expiră] [-d ultima_zi] utilizator\n"
 
 #: src/chage.c:145 src/chfn.c:139 src/chsh.c:89
 #, c-format
@@ -218,44 +220,44 @@ msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Data expirării contului (AAAA-LL-ZZ)"
 
 #: src/chage.c:231
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Ultima schimbare de parolă (AAAA-LL-ZZ)"
+msgstr "Ultima schimbare de parolă\t\t\t\t\t: "
 
 #: src/chage.c:233 src/chage.c:247 src/chage.c:263 src/chage.c:276
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
-msgstr "Niciodată\n"
+msgstr "niciodată\n"
 
 #: src/chage.c:244
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Parola expiră:\t"
+msgstr "Parola expiră:\t\t\t\t\t\t: "
 
 #: src/chage.c:260
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Parolă inactivă:\t"
+msgstr "Parolă inactivă\t\t\t\t\t\t: "
 
 #: src/chage.c:274
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Contul expiră:\t"
+msgstr "Contul expiră\t\t\t\t\t\t: "
 
 #: src/chage.c:290
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Numărul minim de zile dintre modificările de parolă\t\t: %ld\n"
 
 #: src/chage.c:292
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Numărul maxim de încercări a fost atins (%d)\n"
+msgstr "Numărul maxim de zile dintre modificările de parolă\t\t: %ld\n"
 
 #: src/chage.c:294
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "Numărul de zile de avertizări dinaintea expirării parolei\t: %ld\n"
 
 #: src/chage.c:431
 #, c-format
@@ -265,9 +267,9 @@ msgstr "%s: nu include \"l\" cu alte semnalizatoare\n"
 #: src/chage.c:443 src/chage.c:571 src/chfn.c:268 src/chfn.c:277
 #: src/chfn.c:286 src/chfn.c:295 src/chfn.c:304 src/chfn.c:370
 #: src/gpasswd.c:150 src/login.c:421 src/passwd.c:823 src/passwd.c:859
-#, fuzzy, c-format
+#, c-format
 msgid "%s: permission denied.\n"
-msgstr "%s: permisiune refuzată\n"
+msgstr "%s: permisiune refuzată.\n"
 
 #: src/chage.c:476 src/chage.c:682 src/chpasswd.c:178 src/groupadd.c:489
 #: src/groupdel.c:275 src/groupmod.c:457 src/newusers.c:361 src/useradd.c:1527
@@ -390,9 +392,9 @@ msgid "%s: `%s' is the NIS master for this client.\n"
 msgstr "%s: `%s' este stăpânul NIS pentru acest client.\n"
 
 #: src/chfn.c:382
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: permisiune refuzată\n"
+msgstr "%s: permisiune refuzată.\n"
 
 #: src/chfn.c:446
 #, c-format
@@ -479,8 +481,8 @@ msgstr ""
 "\n"
 "Opţiuni:\n"
 "  -e, --encrypted\tparola furnizată este criptată\n"
-"  -h, --help\t\tafişez acest mesaj de ajutor şi termin\n"
-"  -m, --md5\t\tfolosesc criptarea MD5 în loc de DES când parola\n"
+"  -h, --help\t\tafişare acest mesaj de ajutor şi ieşire\n"
+"  -m, --md5\t\tutilizează criptarea MD5 în loc de DES atunci când parola\n"
 "\t\t\tfurnizată nu este criptată\n"
 
 #: src/chpasswd.c:189
@@ -594,11 +596,30 @@ msgid ""
 "\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
 "\t\t\t\tfor user with LOGIN\n"
 msgstr ""
+"Utilizare: faillog [opţiuni]\n"
+"\n"
+"Opţiuni:\n"
+"  -a, --all\t\t\tafişare înregistrările de jurnal pentru eşuări pentru toţi "
+"utilizatorii\n"
+"  -h, --help\t\t\tafişare acest mesaj de ajutor şi ieşire\n"
+"  -l, --lock-time SEC\t\tdupă eşuarea autentificării se închide contorul "
+"pentru SEC secunde\n"
+"  -m, --maximum MAX\t\tsetează contorul maxim de autentificări eşuate la "
+"MAX\n"
+"  -r, --reset\t\t\tresetează contoarele de autentificări eşuate\n"
+"  -t, --time ZILE\t\tafişare înregistrările de jurnal pentru eşuări mai "
+"recente de ZILE\n"
+"  -u, --user LOGIN\t\tafişare înregistrări de jurnal pentru eşuări sau "
+"menţine contoarele de eşuări\n"
+"\t\t\t\tşi doar le limitează (dacă este folosit cu opţiunile -r, -m sau -l)\n"
+"\t\t\t\tpentru utilizatorul cu LOGIN\n"
 
 #: src/faillog.c:87
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr ""
+"Autentificare           Eşuări Maxim Cea mai recentă                     De "
+"la\n"
 
 #: src/faillog.c:105
 #, c-format
@@ -616,9 +637,9 @@ msgid "Unknown User: %s\n"
 msgstr "Utilizator necunoscut: %s\n"
 
 #: src/gpasswd.c:71
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r|-R] group\n"
-msgstr "utilizare: %s [-r|-R] grup\n"
+msgstr "Utilizare: %s -r|-R] grup\n"
 
 #: src/gpasswd.c:72
 #, c-format
@@ -738,9 +759,9 @@ msgid "%s: can't unlock file\n"
 msgstr "%s: nu pot descuia fişierul\n"
 
 #: src/groupadd.c:97
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
-msgstr "utilizare: groupadd [-g id_grup [-o]] grup\n"
+msgstr "Utilizare: groupadd [-g id_grup [-o]] [-f] grup\n"
 
 #: src/groupadd.c:161 src/groupadd.c:170 src/groupmod.c:174 src/groupmod.c:197
 #: src/useradd.c:857 src/usermod.c:514 src/usermod.c:636
@@ -764,7 +785,7 @@ msgid "%s: can't get unique gid\n"
 msgstr "%s: nu pot prelua id unic de grup\n"
 
 #: src/groupadd.c:280 src/groupmod.c:283
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s is not a valid group name\n"
 msgstr "%s: %s nu este un nume de grup valid\n"
 
@@ -816,9 +837,9 @@ msgid "%s: group %s exists\n"
 msgstr "%s: grupul %s există\n"
 
 #: src/groupdel.c:83
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupdel group\n"
-msgstr "utilizare: groupdel grup\n"
+msgstr "Utilizare: groupdel grup\n"
 
 #: src/groupdel.c:96 src/groupmod.c:178 src/groupmod.c:201
 #, c-format
@@ -851,9 +872,9 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s este stăpân NIS\n"
 
 #: src/groupmod.c:98
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "utilizare: groupmod [-g id_grup [-o]] [-n nume] grup\n"
+msgstr "Utilizare: groupmod [-g id_grup [-o]] [-n nume] grup\n"
 
 #: src/groupmod.c:156
 #, c-format
@@ -1025,14 +1046,14 @@ msgid "%s: can't delete shadow group file\n"
 msgstr "%s: nu pot şterge fişierul de parole criptate de grupuri\n"
 
 #: src/id.c:53
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: id [-a]\n"
-msgstr "utilizare: id [-a]\n"
+msgstr "Utilizare: id [-a]\n"
 
 #: src/id.c:55
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: id\n"
-msgstr "utilizare: id\n"
+msgstr "Utilizare: id\n"
 
 #: src/id.c:169
 #, c-format
@@ -1040,22 +1061,23 @@ msgid " groups="
 msgstr " grupuri="
 
 #: src/lastlog.c:64
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --login LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
-"Utilizare: chpasswd [opţiuni]\n"
+"Utilizare: lastlog [opţiuni]\n"
 "\n"
 "Opţiuni:\n"
-"  -e, --encrypted\tparola furnizată este criptată\n"
-"  -h, --help\t\tafişez acest mesaj de ajutor şi termin\n"
-"  -m, --md5\t\tfolosesc criptarea MD5 în loc de DES când parola\n"
-"\t\t\tfurnizată nu este criptată\n"
+"  -u, --user LOGIN\tafişare ultima înregistrare de jurnal pentru "
+"utilizatorul cu LOGIN-ul specificat\n"
+"  -h, --help\t\tafişare acest mesaj de ajutor şi ieşire\n"
+"  -t, --time ZILE\tafişare doar ultimile înregistrari de jurnal mai recente "
+"decât ZILE\n"
 
 #: src/lastlog.c:90
 #, c-format
@@ -1072,9 +1094,9 @@ msgid "**Never logged in**"
 msgstr "**Niciodată autentificat**"
 
 #: src/login.c:156
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
-msgstr "utilizare: %s [-p] [nume]\n"
+msgstr "Utilizare: %s [-p] [nume]\n"
 
 #: src/login.c:159
 #, c-format
@@ -1176,9 +1198,9 @@ msgid "%s: cannot open DBM files for %s\n"
 msgstr "%s: nu pot deschide fişierele DBM pentru %s\n"
 
 #: src/mkpasswd.c:286
-#, fuzzy, c-format
+#, c-format
 msgid "%s: the line beginning with %.16s... is too long\n"
-msgstr "%s: începutul cu "
+msgstr "%s: linia care începe cu %.16s... este prea lungă\n"
 
 #: src/mkpasswd.c:313
 #, c-format
@@ -1186,14 +1208,14 @@ msgid "%s: error parsing line \"%s\"\n"
 msgstr "%s: eroare la analiza liniei \"%s\"\n"
 
 #: src/mkpasswd.c:321 src/mkpasswd.c:326 src/mkpasswd.c:331 src/mkpasswd.c:336
-#, fuzzy, c-format
+#, c-format
 msgid "adding record for name %s\n"
-msgstr "adăugare înregistrare pentru nume "
+msgstr "adăugare înregistrare pentru nume %s\n"
 
 #: src/mkpasswd.c:342 src/mkpasswd.c:348 src/mkpasswd.c:353 src/mkpasswd.c:358
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error adding record for %s\n"
-msgstr "%s: eroare la adăugare înregistrare pentru "
+msgstr "%s: eroare la adăugare înregistrare pentru %s\n"
 
 #: src/mkpasswd.c:376
 #, c-format
@@ -1216,14 +1238,14 @@ msgid "Usage: %s [-vf] [-p|g] file\n"
 msgstr "Utilizare: %s [-vf] [-p|g] fişier\n"
 
 #: src/newgrp.c:61
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: newgrp [-] [group]\n"
-msgstr "utilizare: newgrp [-] [grup]\n"
+msgstr "Utilizare: newgrp [-] [grup]\n"
 
 #: src/newgrp.c:63
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: sg group [[-c] command]\n"
-msgstr "utilizare: sg grup [[-c] comanda]\n"
+msgstr "Utilizare: sg grup [[-c] comanda]\n"
 
 #: src/newgrp.c:131
 #, c-format
@@ -1239,7 +1261,7 @@ msgstr "id grup necunoscut: %lu\n"
 msgid "Sorry.\n"
 msgstr "Scuze.\n"
 
-#: src/newgrp.c:467
+#: src/newgrp.c:472
 #, c-format
 msgid "too many groups\n"
 msgstr "prea multe grupuri\n"
@@ -1310,9 +1332,9 @@ msgid "%s: error updating files\n"
 msgstr "%s: eroare la actualizarea fişierelor\n"
 
 #: src/passwd.c:154
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-f|-s] [name]\n"
-msgstr "utilizare: %s [-f|-s] [nume]\n"
+msgstr "Utilizare: %s [-f|-s] [nume]\n"
 
 #: src/passwd.c:158
 #, c-format
@@ -1392,9 +1414,10 @@ msgid "%s: repository %s not supported\n"
 msgstr "%s: depozitul %s nu este suportat\n"
 
 #: src/passwd.c:884
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "Nu puteţi schimba consola pentru %s.\n"
+msgstr ""
+"%s: Nu puteţi vizualiza sau modifica informaţiile despre parola lui %s.\n"
 
 #: src/passwd.c:934
 #, c-format
@@ -1631,29 +1654,30 @@ msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: prea multe grupuri specificate (maximum %d).\n"
 
 #: src/useradd.c:660
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "utilizare: %s\t[-u id_utilizator [-o]] [-g grup] [-G grup,...] \n"
+msgstr "Utilizare: useradd [-u id_utilizator [-o]] [-g grup] [-G grup,...] \n"
 
 #: src/useradd.c:663
-#, fuzzy, c-format
+#, c-format
 msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t[-d acasă] [-s consolă] [-c comentariu] [-m [-k şablon]]\n"
+msgstr ""
+"                 [-d acasă] [-s consolă] [-c comentariu] [-m [-k şablon]]\n"
 
 #: src/useradd.c:665 src/useradd.c:671
-#, fuzzy, c-format
+#, c-format
 msgid "               [-f inactive] [-e expire]\n"
-msgstr "\t\t[-f inactivă] [-e expiră ]\n"
+msgstr "                [-f inactivă] [-e expiră ]\n"
 
 #: src/useradd.c:667
-#, fuzzy, c-format
+#, c-format
 msgid "               [-p passwd] name\n"
-msgstr "[-p passwd] nume\n"
+msgstr "                [-p passwd] nume\n"
 
 #: src/useradd.c:669
-#, fuzzy, c-format
+#, c-format
 msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-msgstr "       %s\t-D [-g grup] [-b base] [-s consolă]\n"
+msgstr "       useradd -D [-g grup] [-b baza] [-s consolă]\n"
 
 #: src/useradd.c:756 src/usermod.c:444
 #, c-format
@@ -1782,11 +1806,13 @@ msgstr "%s: nu pot crea directorul %s\n"
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
+"Nu există nici un grup cu numele de \"mail\", se crează directorul de poştă "
+"cu modul 0600.\n"
 
 #: src/useradd.c:1446
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: nu pot actualiza intrarea pentru utilizatorul %s\n"
+msgstr "Nu pot crea directorul de poştă pentru utilizatorul %s.\n"
 
 #: src/useradd.c:1550 src/usermod.c:919
 #, c-format
@@ -1807,9 +1833,9 @@ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: avertisment: CREATE_HOME nu este suportat, vă rog folosiţi -m.\n"
 
 #: src/userdel.c:108
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] name\n"
-msgstr "utilizare: %s [-r] nume\n"
+msgstr "Utilizare: %s [-r] nume\n"
 
 #: src/userdel.c:160 src/userdel.c:221
 #, c-format
@@ -1874,9 +1900,9 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: eroare la ştergerea directorului %s\n"
 
 #: src/usermod.c:289
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "utilizare: %s\t[-u id_utilizator [-o]] [-g grup] [-G grup,...] \n"
+msgstr "Utilizare: %s\t[-u id_utilizator [-o]] [-g grup] [-G grup,...] \n"
 
 #: src/usermod.c:293
 #, c-format
@@ -1884,7 +1910,7 @@ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d acasă [-m]] [-s consolă] [-c comentariu] [-l nume_nou]\n"
 
 #: src/usermod.c:296
-#, fuzzy, c-format
+#, c-format
 msgid "[-f inactive] [-e expire] "
 msgstr "[-f inactivă] [-e expiră ] "
 

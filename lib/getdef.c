@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: getdef.c,v 1.28 2005/04/01 22:52:03 kloczek Exp $")
+RCSID ("$Id: getdef.c,v 1.29 2005/05/09 10:45:26 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
@@ -44,10 +44,6 @@ struct itemdef {
 	const char *name;	/* name of the item                     */
 	char *value;		/* value given, or NULL if no value     */
 };
-
-/*
- * This list *must* be sorted by the "name" member.
- */
 
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
@@ -118,7 +114,8 @@ static struct itemdef def_table[] = {
 	{"UID_MAX", NULL},
 	{"UID_MIN", NULL},
 	{"UMASK", NULL},
-	{"USERGROUPS_ENAB", NULL}
+	{"USERGROUPS_ENAB", NULL},
+	{NULL, NULL}
 };
 
 #ifndef LOGINDEFS
@@ -278,37 +275,24 @@ int putdef_str (const char *name, const char *value)
 /*
  * def_find - locate named item in table
  *
- * Search through a sorted table of configurable items to locate the
+ * Search through a table of configurable items to locate the
  * specified configuration option.
  */
 
 static struct itemdef *def_find (const char *name)
 {
-	int min, max, curr, n;
+	int n;
+	struct itemdef *ptr;
+
 
 	/*
-	 * Invariant - desired item in range [min:max].
+	 * Search into the table.
 	 */
 
-	min = 0;
-	max = NUMDEFS - 1;
-
-	/*
-	 * Binary search into the table.  Relies on the items being
-	 * sorted by name.
-	 */
-
-	while (min <= max) {
-		curr = (min + max) / 2;
-
-		if (!(n = strcmp (def_table[curr].name, name)))
-			return &def_table[curr];
-
-		if (n < 0)
-			min = curr + 1;
-		else
-			max = curr - 1;
-	}
+	for (ptr = def_table; ptr->name; ptr++) {
+		if (!(n = strcmp (ptr->name, name)))
+			return ptr;
+ 	}
 
 	/*
 	 * Item was never found.

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.27 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.28 2005/05/19 11:28:27 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -379,8 +379,13 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_INFO, "user `%s' switched to group `%s'",
 			 name, group));
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
-		char *loginname = xstrdup (getlogin ());
-		char *tty = xstrdup (ttyname (0));
+		char *loginname = getlogin ();
+		char *tty = ttyname (0);
+
+		if (loginname != NULL)
+			loginname = xstrdup (loginname);
+		if (tty != NULL)
+			tty = xstrdup (tty);
 
 		if (loginname == NULL)
 			loginname = "???";

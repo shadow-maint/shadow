@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='grpck.8'>
+  <!-- $Id: grpck.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>grpck</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>grpck</refname>
+    <refpurpose>verify integrity of group files</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>grpck</command>    <arg choice='opt'>-r </arg>
+      <arg choice='opt'>
+        <arg choice='plain'><replaceable>group</replaceable></arg>
+        <arg choice='plain'><replaceable>shadow</replaceable></arg>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>grpck</command> verifies the integrity of the system
+      authentication information. All entries in the
+      <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
+      are checked to see that the entry has the proper format and valid data
+      in each field. The user is prompted to delete entries that are
+      improperly formatted or which have other incorrectable errors.
+    </para>
+    
+    <para>Checks are made to verify that each entry has:</para>
+    
+    <!-- .in +.5i -->
+    <para>- the correct number of fields
+      <!-- .br -->
+      - a unique group name
+      <!-- .br -->
+      - a valid list of members and administrators
+    </para>
+    <!-- .in \-.5i -->
+    
+    <para>The checks for correct number of fields and unique group name are
+      fatal. If the entry has the wrong number of fields, the user will be
+      prompted to delete the entire line. If the user does not answer
+      affirmatively, all further checks are bypassed. An entry with a
+      duplicated group name is prompted for deletion, but the remaining
+      checks will still be made. All other errors are warnings and the user
+      is encouraged to run the <command>groupmod</coamand> command to
+      correct the error.
+    </para>
+    
+    <para>The commands which operate on the <filename>/etc/group</filename>
+      file are not able to alter corrupted or duplicated entries.
+      <command>grpck</command> should be used in those circumstances to
+      remove the offending entry.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      By default, <command>grpck</command> operates on the files
+      <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>. 
+      The user may select alternate files with the <emphasis
+      remap='I'>group</emphasis> and <emphasis remap='I'>shadow</emphasis>
+      parameters. Additionally, the user may execute the command in
+      read-only mode by specifying the <option>-r</option> flag. This causes
+      all questions regarding changes to be answered <emphasis
+      remap='B'>no</emphasis> without user intervention. 
+      <command>grpck</command> can also sort entries in
+      <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
+      by GID. To run it in sort mode pass it <option>-s</option> flag. No
+      checks are performed then, it just sorts.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/group</filename></term>
+        <listitem>group account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/gshadow</filename></term>
+        <listitem>secure group account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <variablelist remap='TP'>
+      <varlistentry>
+        <term>
+          The <command>grpck</command> command exits with the
+          following values:
+        </term>
+        <listitem>
+          <!-- .br -->
+          <para>
+            <literal>0</literal>	- success
+            <!-- .br -->
+            <literal>1</literal>	- syntax Error
+            <!-- .br -->
+            <literal>2</literal>	- one or more bad group entries
+            <!-- .br -->
+            <literal>3</literal>	- can't open group files
+            <!-- .br -->
+            <literal>4</literal>	- can't lock group files
+            <!-- .br -->
+            <literal>5</literal>	- can't update group files
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>

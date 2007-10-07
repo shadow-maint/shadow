@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='expiry.1'>
+  <!-- $Id: expiry.1.xml,v 1.6 2005/04/27 16:25:27 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>expiry</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>expiry</refname>
+    <refpurpose>check and enforce password expiration policy</refpurpose>
+  </refnamediv>
+  <!-- body begins here -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>expiry</command>
+      <arg choice='opt'>-c </arg>
+      <arg choice='opt'>-f </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>expiry</command> checks (<option>-c</option>) the current
+      password expiration and forces (<option>-f</option>) changes when
+      required. It is callable as a normal user command.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Ben Collins &lt;bcollins@debian.org&gt;</para>
+  </refsect1>
+</refentry>

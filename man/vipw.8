@@ -1,4 +1,4 @@
-.\"$Id: vipw.8,v 1.8 2005/04/05 18:47:50 kloczek Exp $
+.\"$Id: vipw.8,v 1.10 2005/04/27 08:29:36 kloczek Exp $
 .TH VIPW 8 "26 Sep 1997"
 .SH NAME
 vipw, vigr \- edit the password, group, shadow\-password, or shadow\-group file.
@@ -9,12 +9,11 @@ vipw, vigr \- edit the password, group, shadow\-password, or shadow\-group file.
 .SH DESCRIPTION
 \fBvipw\fR and \fBvigr\fR will edit the files \fI/etc/passwd\fR and
 \fI/etc/group\fR, respectively. With the \fB\-s\fR flag, they will edit the
-shadow versions of those files, fI/etc/shadow\fR and \fI/etc/gshadow\fR,
+shadow versions of those files, \fI/etc/shadow\fR and \fI/etc/gshadow\fR,
 respectively. The programs will set the appropriate locks to prevent file
 corruption. When looking for an editor, the programs will first try the
-environment variable \fBVISUAL\fR, then the environment variable
-\fBEDITOR\fR, and finally the default editor,
-.BR vi .
+environment variable \fB$VISUAL\fR, then the environment variable
+\fB$EDITOR\fR, and finally the default editor, \fBvi\fR(1).
 .SH "SEE ALSO"
 .BR group (5),
 .BR passwd (5),

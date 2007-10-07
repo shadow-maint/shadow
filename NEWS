@@ -1,4 +1,17 @@
-$Id: NEWS,v 1.147 2005/04/25 10:39:48 kloczek Exp $
+$Id: NEWS,v 1.155 2005/05/19 12:05:02 kloczek Exp $
+
+shadow-4.0.8 -> shadow-4.0.9
+
+*** general:
+- passwd: fixed segfault in non-PAM connfiguration
+  (submited by Greg Schafer <gschafer@zip.com.au>),
+- newgrp: fixed NULL pointer dereference - getlogin() and ttyname() can
+  return NULL which is not checked (http://bugs.debian.org/162303),
+- updated translations: ro, ru,
+- added new translations: vi,
+- lib/getdef.c: leaves the table as it is, and changes from the binary search to
+  a sequential one (Lucas Correia Villa Real <lucasvr@gobolinux.org>),
+- lastlog: fixed --help message (s,--login,--user,) http://bugs.debian.org/249611.
 
 shadow-4.0.7 -> shadow-4.0.8
 

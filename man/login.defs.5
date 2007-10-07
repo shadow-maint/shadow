@@ -1,4 +1,4 @@
-.\" $Id: login.defs.5,v 1.15 2005/04/05 18:47:50 kloczek Exp $
+.\" $Id: login.defs.5,v 1.17 2005/04/26 12:16:36 kloczek Exp $
 .\" Copyright 1991 - 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
@@ -57,8 +57,8 @@ If \fIyes\fR, the \fBchfn\fR and \fBchsh\fR programs will require
 authentication before making any changes, unless run by the superuser.
 .\"
 .IP "CHFN_RESTRICT (string)"
-This parameter specifies which values in the fIgecos\fR field of the
-\fI/etc/passwd\fR file may be changed by regular users using the fBchfn\fR
+This parameter specifies which values in the \fIgecos\fR field of the
+\fI/etc/passwd\fR file may be changed by regular users using the \fBchfn\fR
 program. It can be any combination of letters \fIf\fR, \fIr\fR, \fIw\fR,
 \fIh\fR, for Full name, Room number, Work phone, and Home phone,
 respectively. For backward compatibility, "yes" is equivalent to "rwh" and

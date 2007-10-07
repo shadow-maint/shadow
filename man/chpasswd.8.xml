@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+                   "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+<refentry id='chpasswd.8'>
+  <!-- $Id: chpasswd.8.xml,v 1.6 2005/04/27 16:22:25 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>chpasswd</refentrytitle>
+    <manvolnum>8</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>chpasswd</refname>
+    <refpurpose>update passwords in batch mode</refpurpose>
+  </refnamediv>
+
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>chpasswd</command>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  
+  <refsect1 id='description'>
+    <title>DESCRIPTION</title>
+    <para>
+      <command>chpasswd</command> reads a list of user name and password
+      pairs from standard input and uses this information to update a group
+      of existing users. Each line is of the format:
+    </para>
+    <para>
+      <emphasis remap='I'>user_name</emphasis>:<emphasis
+      remap='I'>password</emphasis>
+    </para>
+    <para>By default the supplied password must be in clear-text. Default
+      encription algoritm is DES. Also the password age will be updated, if
+      present.
+    </para>
+    <para>This command is intended to be used in a large system environment
+      where many accounts are created at a single time.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>chpasswd</command> command
+      are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term><option>-e</option>, <option>--encrypted</option></term>
+        <listitem>
+          <para>Supplied passwords are in encrypted form.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-h</option>, <option>--help</option></term>
+        <listitem>
+          <para>Display help message and exit.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><option>-m</option>, <option>--md5</option></term>
+        <listitem>
+          <para>Use MD5 encryption instead DES when the supplied passwords
+            are not encrypted.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+  
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>Remember keep protected for reading by others fille passed to
+      standard input <command>chpasswd</command> command if it contains
+      unencrypted passwords.
+    </para>
+  </refsect1>
+  
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+  
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
+  </refsect1>
+</refentry>
