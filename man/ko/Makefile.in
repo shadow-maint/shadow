@@ -161,6 +161,8 @@ man_MANS = \
 	newgrp.1 \
 	passwd.5
 
+
+EXTRA_DIST = $(man_MANS)
 subdir = man/ko
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -158,6 +158,8 @@ man_MANS = \
 	passwd.1 \
 	su.1
 
+
+EXTRA_DIST = $(man_MANS)
 subdir = man/es
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -1,0 +1,149 @@
+.\" Copyright (c) 1993 Michael Haardt (u31b3hs@pool.informatik.rwth-aachen.de), Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 10:46:28 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Aug 21 18:12:27 1994 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Jun 18 01:53:57 1995 by Andries Brouwer (aeb@cwi.nl)
+.\"
+.\" Traduction 17/10/1996 par Christophe Blaess (ccb@club-internet.fr)
+.\" Mise à jour 18/05/1998 (LDP-man-pages-1.19)
+.\"
+.TH PASSWD 5 "18 Mai 1998" Linux "Manuel de l'administrateur Linux"
+.SH NOM
+passwd \- Fichier des mots de passe.
+.SH DESCRIPTION
+.B Passwd
+est un fichier de texte qui contient la liste des comptes sur le système,
+ainsi que des informations utiles sur ces comptes, comme l'identification
+de l'utilisateur, du groupe, le répertoire personnel, le shell, etc.
+Souvent, ce fichier contient également le mot de passé chiffré de l'utilisateur.
+Le fichier des mots
+de passe doit permettre la lecture par tout le monde (de nombreux
+utilitaires comme
+.IR ls (1)
+l'utilisent pour convertir les UID en noms d'utilisateur).
+Par contre seul le Super\-User doit disposer de droits d'écriture sur
+le fichier.
+
+Au bon vieux temps, aucun problème de sécurite ne se posait avec ce
+droit de lecture général. Chacun pouvait consulter les mots de passe
+cryptés, mais le matériel était trop lent pour pouvoir décrypter un
+mot de passe bien choisi. De plus le principe de base d'Unix reposait
+sur une communaute soudée d'utilisateurs sans intentions néfastes.
+Actuellement, il est de plus en plus recommandé d'utiliser des
+systèmes de masquage des mots de passe, comme 
+.BR shadow
+avec lequel le fichier
+.I /etc/passwd
+contient des * à la place des mots de passe, et où ces derniers sont
+stockés sous forme cryptée dans
+.I /etc/shadow
+qui n'est lisible que par le Super-utilisateur.
+
+Que le masquage des mots de passe soit utilisé ou non, de nombreux
+administrateurs systèmes utilisent un astérique dans le champ
+'mot de passe' pour s'assurer que l'utilisateur en question ne
+pouirra pas se connecter (Voir le paragrahe Notes plus bas).
+
+Si vous devez créer un nouvel utilisateur, placez un astérique dans le champ
+'mot de passe', puis utilisez la commande \fBpasswd\fP(1) pour le mettre à jour.
+
+Si la racine du système de fichiers est sur un disque RAM, vous devez penser
+à copier sur le disque physique les modifications du fichier des mots de passe
+avant d'arrêter le systeme. Vous devez également vérifier à ce moment les
+droits d'accès au fichier.
+
+Si vous désirez créer des groupes d'utilisateurs, leur champ GID doivent
+correspondre à une entree du fichier
+.IR /etc/group (5).
+
+Il doit y avoir, dans le fichier des mots de passe, une ligne par utilisateur,
+avec le format suivant :
+.sp
+.RS
+account:passwd:UID:GID:GECOS:directory:shell
+.RE
+.sp
+Les divers champs sont les suivants :
+.sp
+.RS
+.TP 1.0in
+.I account
+Le nom que l'utilisateur utilisera pour se connecter, il ne devrait normalement
+pas contenir de majuscules
+.TP
+.I password
+La représentation encryptée (optionnelle) du mot de passe.
+.TP
+.I UID
+L'ID numérique de l'utilisateur.
+.TP
+.I GID
+L'ID numérique du groupe principal de l'utilisateur.
+.TP
+.I GECOS
+Ce champ est optionnel et n'a qu'un rôle informatif. Il contient généralement
+le nom complet de l'utilisateur. GECOS signifie "General Electric Comprehensive
+Operating System", qui fut renommé GCOS quand la division "gros systèmes" de
+General Electric a été vendue a Honeywell. Dennis Ritchie raconte:
+"Il arrivait que l'on envoie des sortie d'impression ou des résultats de
+traitements différés vers une machine GCOS. Le champ GCOS du fichier password
+était un endroit classique pour glisser des informations dans la carte
+$IDENT. Pas très élégant..."
+
+.TP
+.I directory
+Le répertoire de connexion de l'utilisateur (variable d'
+.IR environnement (5)
+$HOME).
+.TP
+.I shell
+Le programme à exécuter après la phase de connexion (par défaut 
+.IR /bin/sh ).
+Si ce fichier n'existe pas, l'utilisateur ne pourra pas se connecter avec
+.BR login (1).
+.RE
+.SH NOTES
+Si vous désirez créer des groupes d'utilisateurs, leurs champs GIDs doivent
+être identiques, et il doit y avoir une entrée correspondante dans le fichier
+.IR /etc/group .
+
+Si le mot de passe crypté est rempli avec un astérisque, l'utilisateur ne
+pourra pas se connecter avec
+.BR login (1),
+mais pourra toujours le faire avec
+.BR rlogin (1),
+lancer des processus en utilisant
+.BR rsh (1),
+.BR cront (1),
+.BR at (1),
+ou des filtres de courrier, etc...
+La modification du champ "Shell" a généralement les mêmes effets, et autorise
+toujours l'utilisation de
+.BR su (1).
+.SH FICHIERS
+.I /etc/passwd
+.SH "VOIR AUSSI"
+.BR passwd "(1), " login "(1), " group "(5), " shadow (5).
+
+.SH TRADUCTION
+Christophe Blaess, 1997.

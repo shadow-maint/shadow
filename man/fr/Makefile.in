@@ -169,6 +169,8 @@ man_MANS = \
 	userdel.8 \
 	usermod.8
 
+
+EXTRA_DIST = $(man_MANS)
 subdir = man/fr
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

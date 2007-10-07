@@ -179,6 +179,8 @@ man_MANS = \
 	vigr.8 \
 	vipw.8
 
+
+EXTRA_DIST = $(man_MANS)
 subdir = man/it
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -8,3 +8,5 @@ man_MANS = \
 	login.1 \
 	newgrp.1 \
 	passwd.5
+
+EXTRA_DIST = $(man_MANS)

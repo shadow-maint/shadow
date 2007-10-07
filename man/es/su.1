@@ -1,0 +1,139 @@
+.\" -*- nroff -*-
+.\"Translated 21 Jul 1998 by Javi Diaz (javid@si.upc.es)
+.TH SU 1 "Utilidades Shell de GNU" "FSF"
+.SH NOMBRE
+su \-  ejecuta una shell con identificadores de grupo y de usuario distintos
+.SH SINOPSIS
+.B su
+[\-flmp] [\-c comando] [\-s shell] [\-\-login] [\-\-fast]
+[\-\-preserve-environment] [\-\-command=comando] [\-\-shell=shell] [\-]
+[\-\-help] [\-\-version] [usuario [arg...]]
+.SH DESCRIPCIÓN
+Este documento ya no es mantenido y puede ser impreciso o incompleto. La
+documentación de Texinfo es ahora la fuente de información recomendada.
+.PP
+Esta página del manual documenta la versión GNU de
+.BR su .
+.B su
+permite a un usuario convertirse temporalmente en otro usuario. Se ejecuta
+una shell con los identificadores reales y efectivos, el identificador de
+grupo, y los identificadores suplementarios del grupo del USUARIO. Si no se
+especifica ningún USUARIO, por defecto se usa root, el superusuario.
+La shell a ejecutar se toma de la entrada correspondiente al USUARIO en el
+fichero de passwords, o /bin/sh si no se especifica ninguna en dicho fichero.
+Si el USUARIO tiene password, 
+.B su
+lo solicitará, a menos que sea ejecutado por el usuario con identificador real
+0 (el superusuario).
+.PP
+Por defecto,
+.B su
+no cambia el directorio actual.
+.B su
+modifica las variables de entorno `HOME' y `SHELL' de acuerdo con la entrada
+del fichero de passwords correspondiente al USUARIO, y si el USUARIO no es el
+superusuario, coloca en las variables `USER' y `LOGNAME' el valor de USUARIO.
+Por defecto, la shell ejecutada no es una shell de entrada al sistema.
+.PP
+Si se facilitan uno o más ARGs, estos son pasados como argumentos adicionales
+a la shell ejecutada.
+.PP
+.B su
+no ejecuta de manera especial /bin/sh u otras shells (colocando en argv[0] el
+valor "-su", pasando -c únicamente a algunas shells, etc.).
+.PP
+En sistemas que utilicen syslog,
+.B su
+puede ser compilado para reportar fallo, y opcionalmente éxito en syslog.
+.B su
+intentará utilizar syslog.
+.PP
+Este programa no soporta el grupo "wheel", el cual restringe quien podrá
+ejecutar
+.B su
+hacia la cuenta de root (el superusuario) ya que esta política podría
+ayudar a los administradores de máquinas a facilitar un uso inadecuado a otros
+usuarios.
+.SS OPCIONES
+.TP
+.I "\-c COMANDO, \-\-command=COMANDO"
+Pasa el COMANDO, una única línea a ejecutar, a la shell con la opción
+.I \-c
+en vez de ejecutar una shell interactiva.
+.TP
+.I "\-f, \-\-fast"
+Pasa la opción
+.I \-f
+a la shell. Esto probablemente tiene sentido con 
+.B csh
+y
+.BR tcsh ,
+en estos casos la opción
+.I \-f
+indica que no se lean los ficheros de arranque de la shell (.cshrc).
+Con las shells del estilo Bourne shell, la opción
+.I \-f
+deshabilita la expansión de los patrones de fichero, la cual cosa no es 
+demasiado deseable.
+.TP
+.I "\-\-help"
+Escribe un mensaje sobre el uso en la salida estándar y acaba sin
+provocar error.
+.TP
+.I "\-, \-l, \-\-login"
+Provoca que la shell a ejecutar sea una shell de login. Lo cual significa que
+se eliminan del entorno todas las variables excepto `TERM', `HOME' y `SHELL'
+(las cuales se modifican como se explicó anteriormente) y `USER'y `LOGNAME'
+(que se modifican, incluso para el superusuario, como se explicó anteriormente),
+la variable `PATH' se añade al entorno con el valor por defecto que se
+estableció al compilar
+.B su
+, además de los cambios anteriores, 
+.B su
+cambia al directorio por defecto del USUARIO. Si se antepone "\-" al nombre de
+la shell a ejecutar, se leerán los ficheros de arraque pertinentes.
+.TP
+.I "\-m, \-p, \-\-preserve\-environment"
+No se cambian las variables de entorno `HOME', `USER', `LOGNAME' ni `SHELL'.
+Se ejecuta la shell especificada en la variable de entorno `SHELL' en vez
+de la shell que indique la entrada para el USUARIO en el fichero /etc/passwd,
+a menos que el usuario que ejecute
+.B su
+no sea el superusuario y la shell del USUARIO esté restringida.
+Una shell restringida es aquella que no está listada en el fichero /etc/shells
+o en una lista generada al compilar
+.B su
+si dicho fichero no existe. Algunos detalles de lo que hace esta opción pueden
+ser invalidadas mediante la opción
+.I \-\-login
+y
+.IR \-\-shell .
+.TP
+.I "\-s, \-\-shell shell"
+Ejecuta la SHELL en vez de la shell del USUARIO especificada en el fichero
+\fI/etc/passwd\fR, a menos que el usuario que ejecute
+.B su
+no sea el superusuario y la shell del USUARIO esté restringida.
+.TP
+.I "\-\-version"
+Escribe información sobre la versión en  la  salida estándar y acaba sin
+provocar error.
+
+.SH Por que GNU no soporta el grupo "wheel" (por Richard Stallman)
+A veces, algunos listillos intentan hacerse con el poder total
+sobre el resto de usuarios. Por ejemplo, en 1984, un grupo de usuarios del
+laboratorio de Inteligencia Artificial del MIT decidieron tomar el poder
+cambiando el password de operador del sistema Twenex y manteniendolo secreto
+para el resto de usuarios. (De todas maneras, hubiera sido posible desbaratar
+la situación y devolver el control a los usuarios legítimos parcheando el
+kernel, pero no sabría como realizar esta operación en un sistema Unix.)
+.PP
+Sin embargo, casualmente alguien contó el secreto. Mediante el uso habitual de
+.B su
+una vez que alguien conoce el password de root puede contarselo al resto de 
+usuarios. El grupo "wheel" hará que esto sea imposible, protegiendo así el poder
+de los superusuarios.
+.PP
+Yo estoy del lado de las masas, no de los superusuarios. Si eres de los que
+estan de acuerdo con los jefes y los administradores de sistemas en cualquier
+cosa que hagan, al principio encontrarás esta idea algo extraña.

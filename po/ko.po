@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-14 07:41+0100\n"
+"POT-Creation-Date: 2004-01-14 15:16+0100\n"
 "PO-Revision-Date: 2001-02-03 15:09+0900\n"
 "Last-Translator: Hwang, Sang-Jin <violiet@suse.de>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -275,7 +275,7 @@ msgid "%s: permission denied\n"
 msgstr "%s: 접근권한 없음\n"
 
 #: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
-#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1661 src/userdel.c:657
 #: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
@@ -337,7 +337,7 @@ msgid "%s: can't rewrite password file\n"
 msgstr "%s 패스워드 파일을 다시 작성할 수 없습니다\n"
 
 #: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
-#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1786 src/userdel.c:814
 #: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
@@ -771,18 +771,18 @@ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
 msgstr "사용법: groupadd [-g gid(그룹 아이디) [-o]] 그룹명\n"
 
 #: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
-#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
+#: src/useradd.c:940 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: 새로운 그룹을 추가하는데 오류\n"
 
-#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:951
 #: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
 msgstr "%s: 새로운 dbm 그룹 입력값을 추가하는데 오류\n"
 
-#: src/groupadd.c:256 src/useradd.c:977
+#: src/groupadd.c:256 src/useradd.c:1004
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: %s 란 이름은 적절하지 않습니다\n"
@@ -807,18 +807,18 @@ msgstr "%s: %s 는 유효한 그룹명이 아닙니다\n"
 msgid "%s: invalid group %s\n"
 msgstr "%s: 유효하지 않은 그룹 %s\n"
 
-#: src/groupadd.c:364 src/useradd.c:1173
+#: src/groupadd.c:364 src/useradd.c:1200
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
 msgstr "%s: NAME=VALUE 를 위해서는 -O 옵션이 필요합니다\n"
 
-#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1315
 #: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: 그룹파일을 다시 쓸 수 없습니다\n"
 
-#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1324
 #: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
@@ -1672,248 +1672,262 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "시스템 정비 모드로 들어가고 있습니다\n"
 
-#: src/useradd.c:234
+#: src/useradd.c:239
 #, c-format
 msgid "%s: rebuild the group database\n"
 msgstr "%s: 그룹 데이터베이스를 다시 만듭니다\n"
 
-#: src/useradd.c:243
+#: src/useradd.c:248
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
 msgstr "%s: 쉐도우 그룹 데이터베이스를 다시 만듭니다\n"
 
-#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
+#: src/useradd.c:283 src/useradd.c:297 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: 유효하지 않은 숫자 입력값 `%s'\n"
 
-#: src/useradd.c:349
+#: src/useradd.c:354
 #, c-format
 msgid "%s: unknown gid %s\n"
 msgstr "%s: 알수없는 gid(그룹 아이디) %s\n"
 
-#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/useradd.c:362 src/useradd.c:663 src/useradd.c:1156 src/usermod.c:244
 #: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: 알수없는 그룹 %s\n"
 
-#: src/useradd.c:419
+#: src/useradd.c:434
 #, c-format
 msgid "GROUP=%u\n"
 msgstr "그룹=%u\n"
 
-#: src/useradd.c:420
+#: src/useradd.c:435
 #, c-format
 msgid "HOME=%s\n"
 msgstr "홈디렉토리=%s\n"
 
-#: src/useradd.c:422
+#: src/useradd.c:437
 #, c-format
 msgid "INACTIVE=%ld\n"
 msgstr "비활성화=%ld\n"
 
-#: src/useradd.c:423
+#: src/useradd.c:438
 #, c-format
 msgid "EXPIRE=%s\n"
 msgstr "만기=%s\n"
 
-#: src/useradd.c:425
+#: src/useradd.c:440
 #, c-format
 msgid "SHELL=%s\n"
 msgstr "쉘=%s\n"
 
-#: src/useradd.c:426
+#: src/useradd.c:441
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:462
+#: src/useradd.c:442
+#, c-format
+msgid "CREATE_MAIL_SPOOL=%s\n"
+msgstr ""
+
+#: src/useradd.c:479
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
 
-#: src/useradd.c:467
+#: src/useradd.c:484
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
 
-#: src/useradd.c:552 src/useradd.c:564
+#: src/useradd.c:578 src/useradd.c:590
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: 이름 재 설정: %s"
 
-#: src/useradd.c:657 src/usermod.c:265
+#: src/useradd.c:684 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: 그룹 `%s' 는 NIS 그룹입니다.\n"
 
-#: src/useradd.c:666 src/usermod.c:274
+#: src/useradd.c:693 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: 너무나 많은 그룹이 명시되었습니다 (최대 %d).\n"
 
-#: src/useradd.c:698
+#: src/useradd.c:725
 msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
 msgstr ""
 "사용법: useradd [-u uid(사용자 아이디) [-o]] [-g 그룹명][-G 그룹,...]\n"
 
-#: src/useradd.c:701
+#: src/useradd.c:728
 msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr ""
 "                [-d 홈디렉토리][-s 쉘][-c 적요사항][-m [-k template]]\n"
 
-#: src/useradd.c:703 src/useradd.c:708
+#: src/useradd.c:730 src/useradd.c:735
 msgid "               [-f inactive] [-e expire]\n"
 msgstr "                [-f 비활성화] [-e 만기]\n"
 
-#: src/useradd.c:706
+#: src/useradd.c:733
 msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
 msgstr "        useradd -D [-g 그룹명][-b 초기디렉토리][-s 쉘]\n"
 
-#: src/useradd.c:793 src/usermod.c:461
+#: src/useradd.c:820 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: 그룹 파일 잠금을 하는데 오류\n"
 
-#: src/useradd.c:798 src/usermod.c:467
+#: src/useradd.c:825 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: 그룹 파일을 여는데 오류\n"
 
-#: src/useradd.c:805 src/usermod.c:578
+#: src/useradd.c:832 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: 쉐도우 그룹을 잠그는데 오류\n"
 
-#: src/useradd.c:810 src/usermod.c:584
+#: src/useradd.c:837 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: 그룹 파일을 여는데 오류\n"
 
-#: src/useradd.c:982
+#: src/useradd.c:1009
 #, c-format
 msgid "%s: uid %u is not unique\n"
 msgstr "%s: uid(사용자 아이디) %u 는 적절하지 않습니다\n"
 
-#: src/useradd.c:1012
+#: src/useradd.c:1039
 #, c-format
 msgid "%s: can't get unique uid\n"
 msgstr "%s: 적절한 uid(사용자 아이디)를 얻을 수 없습니다\n"
 
-#: src/useradd.c:1049
+#: src/useradd.c:1076
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: 기본 디렉토리 `%s' 는 유효하지 않습니다\n"
 
-#: src/useradd.c:1059
+#: src/useradd.c:1086
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: 적요사항 `%s' 은 유효하지 않습니다\n"
 
-#: src/useradd.c:1070
+#: src/useradd.c:1097
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: 홈 디렉토리 `%s' 는 유효하지 않습니다\n"
 
-#: src/useradd.c:1089 src/usermod.c:858
+#: src/useradd.c:1116 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: 날짜 `%s' 는 유효하지 않습니다\n"
 
-#: src/useradd.c:1102
+#: src/useradd.c:1129
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: 쉐도우 패스워드가 -e 옵션을 요구합니다\n"
 
-#: src/useradd.c:1118
+#: src/useradd.c:1145
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: 쉐도우 패스워드가 -f 옵션을 요구합니다\n"
 
-#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/useradd.c:1212 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
 #: src/usermod.c:935
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: `%s' 부분은 유효하지 않습니다\n"
 
-#: src/useradd.c:1196
+#: src/useradd.c:1223
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: 유효하지 않은 쉘 `%s'\n"
 
-#: src/useradd.c:1237
+#: src/useradd.c:1264
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: 유효하지 않은 사용자명 `%s'\n"
 
-#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
+#: src/useradd.c:1300 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: 패스워드 파일을 다시 쓸수가 없습니다\n"
 
-#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
+#: src/useradd.c:1307 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: 쉐도우 패스워드 파일을 다시 쓸수가 없습니다\n"
 
-#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
+#: src/useradd.c:1348 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: 패스워드 파일 잠금을 할 수 없습니다\n"
 
-#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
+#: src/useradd.c:1353 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: 패스워드 파일을 열 수 없습니다\n"
 
-#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
+#: src/useradd.c:1361 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: 쉐도우 패스워드 파일을 잠글 수 없습니다\n"
 
-#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
+#: src/useradd.c:1368 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: 쉐도우 패스워드 파일을 열 수 없습니다\n"
 
-#: src/useradd.c:1435
+#: src/useradd.c:1462
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: 새로운 패스워드 입력값을 추가하는데 오류\n"
 
-#: src/useradd.c:1449
+#: src/useradd.c:1476
 #, c-format
 msgid "%s: error updating password dbm entry\n"
 msgstr "%s: 패스워드 dbm 입력값을 업데이트하는데 오류\n"
 
-#: src/useradd.c:1465 src/usermod.c:1151
+#: src/useradd.c:1492 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s: 새로운 쉐도우 패스워드 입력값을 추가하는데 오류\n"
 
-#: src/useradd.c:1481 src/usermod.c:1168
+#: src/useradd.c:1508 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
 msgstr "%s: 쉐도우 패스워드 dbm 입력값을 업데이트 하는데 오류\n"
 
-#: src/useradd.c:1513
+#: src/useradd.c:1540
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: 디렉토리 %s 를 만들 수 없습니다\n"
 
-#: src/useradd.c:1634 src/usermod.c:981
+#: src/useradd.c:1570
+msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgstr ""
+
+#: src/useradd.c:1593
+#, fuzzy, c-format
+msgid "Can't create mail spool for user %s.\n"
+msgstr "%s: 사용자 %s 에 대한 입력값을 업데이트 할 수 없습니다\n"
+
+#: src/useradd.c:1713 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: 사용자 %s 는 존재합니다\n"
 
-#: src/useradd.c:1649
+#: src/useradd.c:1728
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:1687
+#: src/useradd.c:1766
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
@@ -2150,10 +2164,6 @@ msgstr ""
 "사용법:\n"
 "`vipw' 는 /etc/passwd 를 편집합니다\t`vipw -s' 는 /etc/shadow를 편집합니다\n"
 "`vigr' 은 /etc/group 을 편집합니다\t`vigr -s' 는 /etc/gshadow를 편집합니다\n"
-
-#, fuzzy
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "%s: 사용자 %s 에 대한 입력값을 업데이트 할 수 없습니다\n"
 
 #~ msgid "User %s has a TCFS key, his old password is required.\n"
 #~ msgstr ""

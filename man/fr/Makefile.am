@@ -16,3 +16,5 @@ man_MANS = \
 	useradd.8 \
 	userdel.8 \
 	usermod.8
+
+EXTRA_DIST = $(man_MANS)

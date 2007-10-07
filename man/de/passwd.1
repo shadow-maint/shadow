@@ -1,0 +1,199 @@
+.\" Copyleft (C) 2003 Josef Spillner <josef@ggzgamingzone.org>
+.\" Übersetzung der englischen Version von Julianne Frances Haugh
+.\" Ersatz für die originale Version von:
+.\" Copyright 1993 Sebastian Hetze und Peter Orbaek.
+.\"
+.\" Veröffentlicht unter der GNU General Public License (GPL).
+.\"
+.TH PASSWD 1
+.SH BEZEICHNUNG
+passwd \- ändert das Nutzerkennwort
+.SH SYNTAX
+\fBpasswd\fR [\fB-f\fR|\fB-s\fR] [\fIName\fR]
+.br
+\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIGruppe\fR
+.br
+\fBpasswd\fR [\fB-x \fImax\fR] [\fB-n \fImin\fR]
+[\fB-w \fIwarn\fR] [\fB-i \fIinaktiv\fR] \fILogin\fR
+.br
+\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fILogin\fR
+.SH BESCHREIBUNG
+\fBpasswd\fR ändert Kennwörter für Nutzer- und Gruppenkonten.
+Ein normaler Nutzer darf das Kennwort nur für sein/ihr eigenes
+Login ändern, während der Superuser (root) dies für jedes Login darf.
+Der Administrator einer Gruppe kann das Kennwort für die Gruppe ändern.
+\fBpasswd\fR ändert auch Kontoinformationen, wie den vollen Namen
+des Nutzers, seine/ihre Loginshell, oder das Datum und Intervall des
+Ablaufes des Kennwortes.
+.PP
+Die Option \fB-s\fR sorgt dafür, daß \fBpasswd\fR das Programm \fBchsh\fR
+aufruft, welches die Shell des Nutzers ändert. Die Option \fB-f\fR
+läßt \fBpasswd\fR das Programm \fBchfn\fR zum Ändern der GECOS-Information
+starten.
+Diese beiden Optionen sind nur aus Kompatibilitätsgründen vorhanden, da diese
+Programme direkt aufgerufen werden können.
+.SS Änderung des Kennwortes
+Der Nutzer wird zuerst nach seinem/ihren alten Kennwort gefragt, sofern es
+bereits existiert. Dieses wird dann verschlüsselt und mit dem gespeicherten
+Kennwort verglichen.
+Der Nutzer hat nur einen Versuch, das Kennwort korrekt einzugeben.
+Hingegen kann der Superuser diesen Schritt überspringen, um vergessene
+Kennwörter abzuändern.
+.PP
+Nachdem das Kennwort eingegeben wurde, wird die Gültigkeitsinformation
+geprüft, um herauszufinden ob der Nutzer zu diesem Zeitpunkt das Kennwort
+ändern darf.
+Wenn das nicht der Fall ist, verweigert \fBpasswd\fR die Kennwortänderung
+und beendet sich.
+.PP
+Anschließend wird der Nutzer nach einem Ersatzkennwort gefragt.
+Dieses wird auf Komplexität überprüft.
+Als Richtlinie sollten Kennwörter mit 6 bis 8 Zeichen gewählt werden,
+inklusive einem oder mehreren Zeichen aus den folgenden Mengen:
+.IP "" .5i
+Kleinbuchstaben
+.IP "" .5i
+Großbuchstaben
+.IP "" .5i
+Ziffern von 0 bis 9
+.IP "" .5i
+Satzzeichen
+.PP
+Es sollte darauf geachtet werden, daß keine Systemlöschzeichen
+oder sonstigen Sonderzeichen darunter sind.
+\fBpasswd\fR lehnt jedes Kennwort ab, welches nicht ein Mindestmaß
+an Komplexität besitzt.
+.PP
+Wenn das Kennwort akzeptiert wurde, wird
+\fBpasswd\fR ein weiteres Mal nach dem Kennwort fragen und dieses mit
+der ersten Eingabe vergleichen.
+Beide Eingaben müssen identisch sein, damit das Kennwort geändert
+werden kann.
+.SS Gruppenkennwörter
+Wenn die Option \fB-g\fR benutzt wird, hat das die Änderung des Kennwortes
+für die angegebene Gruppe zur Auswahl.
+Dafür muß der Nutzer entweder der Superuser oder der Gruppenadministrator
+sein.
+Es wird nicht nach dem aktuellen Gruppenkennwort gefragt.
+Die Option \fB-r\fR wird zusammen mit \fB-g\fR verwendet, um das aktuelle
+Kennwort von der angegebenen Gruppe zu entfernen.
+Das erlaubt den Zugriff auf die Gruppe durch alle Mitglieder.
+Die Option \fB-R\fR in Kombination mit \fB-g\fR beschränkt den
+Zugriff für alle Nutzer.
+.SS Kennwortgültigkeitsinformationen
+Die Information zur Gültigkeitsdauer des Kennwortes kann vom Superuser
+mit den Optionen \fB-x\fR, \fB-n\fR, \fB-w\fR und \fB-i\fR geändert werden.
+Mit der Option \fB-x\fR wird die maximale Anzahl an Tagen eingestellt,
+die ein Kennwort gültig bleiben soll.
+Nach \fImax\fR Tagen wird eine Kennwortänderung verlangt.
+Die Option \fB-n\fR setzt die minimale Gültigkeitsdauer in Tagen,
+nach der ein Kennwort geändert werden kann.
+Es ist dem Nutzer nicht gestattet, sein Kennwort zu ändern, bis
+\fImin\fR Tage verstrichen sind.
+Die Option \fB-w\fR wird genutzt, um die Anzahl der Tage zu setzen,
+an denen der Nutzer gewarnt wird, daß die Gültigkeit seines/ihres Kennwortes
+bald ausläuft.
+Die Warnung tritt dann \fIwarn\fR Tage vor dem Ablauf der Gültigkeit ein,
+und teilt dem Nutzer mit, wieviele Tage noch bis zur notwendigen Änderung
+verbleiben.
+Durch \fB-i\fR wird verwendet, ein Konto zu sperren, wenn das Kennwort nicht
+ein paar Tage nach Ablauf der Gültigkeit geändert wurde.
+Wenn die Gültigkeit bereits für \fIinaktiv\fR Tage überschritten wurde,
+kann sich der Nutzer nicht mehr an seinem Konto anmelden.
+.PP
+Wenn die sofortige Ungültigkeit eines Kennwortes gewünscht wird,
+kann dieses über die Option \fB-e\fR eingestellt werden.
+Diese Maßnahme zwingt den Nutzer dazu, sein/ihr Kennwort beim nächsten
+Login zu ändern. Mit der Option \fB-d\fR kann ein Kennwort gelöscht werden.
+Dies sollte mit Vorsicht verwendet werden, denn ein leeres Kennwort kann
+bedeuten, daß beim Login keines mehr benötigt wird und somit Eindringlinge
+Zugang zum System haben.
+.SS Kontoverwaltung
+Nutzerkonten können mit den Optionen \fB-l\fR und \fB-u\fR gesperrt und
+wieder entsperrt werden.
+Die Option \fB-l\fR deaktiviert ein Konto dadurch, daß das Kennwort
+auf einen Wert gesetzt wird, der durch kein verschlüsseltes Kennwort
+dargestellt werden kann.
+Die Option \fB-u\fR schaltet das Konto wieder frei, indem das
+Kennwort auf seinen vorherigen Wert zurückgesetzt wird.
+.PP
+Der Status eines Kontos kann mit der Option \fB-S\fR angesehen werden.
+Die Statusinformation besteht aus 7 Feldern.
+Das erste Feld ist der Loginname des Nutzers, gefolgt von dem Zustand
+des Kontos: gesperrt (L), ohne Kennwort (NP), oder normal mit Kennwort
+(P). Das dritte Feld gibt das Datum der letzten Kennwortänderung
+zurück. In den restlichen vier Feldern stehen die minimale und maximale
+Gültigkeitsdauer, die Warnzeit und die Dauer, nach der bei Inaktivität
+das Konto gesperrt wird.
+Diese Werte sind als Tagesangaben zu verstehen.
+Siehe obiger Absatz
+.B Kennwortgültigkeitsinformationen
+für eine Erläuterung dieser Felder.
+.SS Hinweise für Nutzerkennwörter
+Die Sicherheit des Kennwortes hängt von der Leistungsfähigkeit
+des Verschlüsselungsalgorithmus und dem Schlüsselraum ab.
+Die auf \fB\s-2UNIX\s+2\fR-Systemen eingesetzte Verschlüsselungsmethode
+basiert auf dem NBS DES-Algorithmus und gilt als sehr sicher.
+Die Größe des Schlüsselraumes hängt von der Zufälligkeit (Entropie)
+des ausgewählten Kennwortes ab.
+.PP
+Zwischenfälle bei Sicherheitsmaßnahmen mit Kennwörtern sind meist
+durch unsachgemäßen Umgang oder ungenügende Kennwortwahl bedingt.
+Aus diesem Grund sollte man kein Kennwort wählen, welches in einem
+Wörterbuch vorkommt, oder so kompliziert ist daß man es notieren
+muß.
+Es sollte auch keinem Namen entsprechen, und ebensowenig der
+Ausweisnummer, dem Geburtstagsdatum oder der Adresse.
+Nichtbeachtung dieser Regeln führt oft zu Verletzungen der Systemsicherheit.
+.PP
+Das Kennwort muß dennoch einfach genug gehalten sein, daß man nicht
+gezwungen ist, es auf Papier niederzuschreiben.
+Das kann erreicht werden, indem man zwei kleine Wörter durch ein
+Sonderzeichen miteinander verbindet, bespielsweise so: Pass%wort.
+.PP
+Andere Konstruktionsmethoden beinhalten die Auswahl eines leicht
+zu merkenden Satzes und die Bildung eines Wortes durch
+Aneinanderreihung der Anfangs- oder Endbuchstaben seiner Wörter.
+Das Beispiel hierfür kommt aus 'Faust'
+.IP "" .5i
+Was wollt ihr da? Was schlich sich ein?
+.PP
+welches folgendes Wort bildet:
+.IP "" .5i
+WwidWss1.
+.PP
+Man kann sich ziemlich sicher sein, daß nur weniger Cracker
+diesen Term in ihrem Wörterbuch haben.
+Man sollte jedoch eigene Methoden zum Konstruieren von
+Kennwörtern finden, und sich nicht ausschließlich auf die
+hier aufgezeigten Kennwörter verlassen.
+.SS Bemerkungen zu Gruppenkennwörtern
+Gruppenkennwörter können ein ernsthaftes Sicherheitsproblem
+darstellen, da mehr als eine Person befugt ist, das Kennwort
+zu kennen.
+Gruppen sind allerdings ein wichtiges Werkzeug für die Kooperation
+unter verschiedenen Nutzern.
+.SH HINWEISE
+Nicht alle Optionen werden unterstützt.
+Die Komplexitätsprüfung für Kennwörter kann sich von Rechner
+zu Rechner unterscheiden.
+Der Nutzer wird angehalten, ein Kennwort zu wählen, was so
+komplex ist wie er/sie es für richtig hält.
+Nutzer können eventuell ihre Kennwörter nicht ändern,
+wenn NIS eingesetzt wird und sie nicht im NIS-Server eingeloggt sind.
+.SH DATEIEN
+.TP
+.I /etc/passwd 
+Informationen über Nutzerkonten
+.TP
+.I /etc/shadow 
+Verschlüsselte Nutzerkennwörter
+.SH "SIEHE AUCH"
+.BR group (5),
+.BR passwd (5)
+.BR shadow (5)
+.SH AUTOR
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+.br
+Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
+

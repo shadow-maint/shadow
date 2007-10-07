@@ -1,0 +1,332 @@
+.\" Copyright 1993 Rickard E. Faith (faith@cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+.\"
+.\" Translated 17 sep. 1998 by Juan José López Mellado(laveneno@hotmail.com) 
+.\"
+.TH LOGIN 1 "4 Noviembre 1996" "Util-linux 1.6" "Manual del Programador de Linux"
+.SH NOMBRE
+login \- firmar
+.SH SINOPSIS
+.BR "login [ " name " ]"
+.br
+.B "login \-p"
+.br
+.BR "login \-h " hostname
+.br
+.BR "login \-f " name
+.SH DESCRIPCIÓN
+.B login
+es usado cuando se firma en un sistema. Puede ser usado para cambiar
+desde un usuario a otro en cualquier momento (los shells más modernos
+disponen de esta característica incluida internamente).
+
+Si no se da ningún argumento,
+.B login
+pregunta por el nombre de usuario.
+
+Si el usuario
+.I no
+es root, y si existe
+.IR /etc/nologin ,
+el contenido de este fichero se escribe en la pantalla y el ingreso
+finaliza. Esto se usa típicamente para prevenir los ingresos cuando el
+sistema se está cerrando.
+
+Si se han especificado restricciones de acceso para el usuario en
+.IR /etc/usertty ,
+estas son requeridas, o la petición de ingreso será denegada y se
+generará un mensaje a través de
+.BR syslog .
+Vea la sección "Restricciones de Acceso Especiales".
+
+Si el usuario es root, entonces el ingreso debe estar ocurriendo en
+alguno de los tty listados en
+.IR /etc/securetty .
+Los fallos serán registrados mediante
+.BR syslog .
+
+Después de comprobar estas condiciones, se pedirá la contraseña y se
+validará (si es que se requiere de una contraseña para el usuario). Se
+permite un total de diez intentos antes de que
+.B login
+muera, pero después de los tres primeros, la respuesta comienza a ser muy
+lenta. Los fallos de ingreso son registrados a través de
+.BR syslog .
+También es usado para registrar cualquier ingreso correcto del usuario
+root.
+
+Si el fichero
+.I .hushlogin
+existe, entonces se realiza un ingreso "reservado" (esto deshabilita la
+comprobación del correo y la escritura de la hora del último ingreso así
+como el mensaje del día). Por otro lado, si existe
+.IR /var/log/lastlog ,
+la hora del último ingreso se imprime (y el ingreso actual es
+registrado).
+
+Se llevan a cabo algunas tareas administrativas, como el cambio del UID y
+GID del tty. La variable de entorno TERM se preserva, si existe (las
+otras variables de entorno son preservadas si se usa la opción
+.BR \-p ).
+Después son definidas las variables HOME, PATH, SHELL, TERM, MAIL y
+LOGNAME. El PATH por defecto será
+.I /usr/local/bin:/bin:/usr/bin:.
+para usuarios normales, y
+.I /sbin:/bin:/usr/sbin:/usr/bin
+para root. Por último, si no es un ingreso "reservado", el mensaje del
+día será imprimido y se comprobará el fichero con el nombre del usuario en
+.I /usr/spool/mail
+y se imprimirá un mensaje si este tuviera un tamaño diferente de cero.
+
+A continuación, se inicia el shell del usuario. Si no se especifica ninguno
+para el usuario en
+.BR /etc/passwd ,
+entonces se usará
+.BR /bin/sh .
+Si no hay un directorio especificado en
+.IR /etc/passwd ,
+entonces se usará
+.I /
+(el directorio del usuario se analizará en busca del fichero
+.I .hushlogin
+descrito más abajo).
+
+.SH OPCIONES
+.TP
+.B \-p
+Usado por
+.BR getty (8)
+para indicar a
+.B login
+que no destruya el entorno
+.TP
+.B \-f
+Usado para evitar la segunda autenticación del ingreso. Esto 
+.B no
+funciona específicamente para root y no parece que funcione
+correctamente bajo Linux.
+.TP
+.B \-h
+Usado por otros servidores (por ejemplo,
+.BR telnetd (8))
+para pasar el nombre del host remoto a
+.B login
+de tal manera que pueda ser puesto en utmp y wtmp. Solo el superusuario
+podrá usar esta opción.
+
+.SH "RESTRICCIONES DE ACCESO ESPECIALES"
+El fichero
+.I /etc/securetty
+lista los nombres de los ttys donde se permite que el root pueda
+ingresar. Deberá especificarse un nombre de tty por línea (sin el prefijo
+/dev/). Si el fichero no existiera, se permitirá su ingreso desde
+cualquier tty.
+.PP
+El fichero
+.I /etc/usertty
+especifica restricciones de acceso adicionales para usuarios específicos.
+Si no existiera este fichero, no se impondrá ninguna restricción de
+acceso adicional. El fichero consiste en una secuencia de secciones. Hay
+tres tipos de secciones posibles: CLASSES, GROUPS y USERS. Una sección
+de tipo CLASSES define tipos de ttys y patrones de nombres de hosts, una
+sección de tipo GROUPS define los ttys permitidos y los hosts grupo por
+grupo y una sección USERS define los ttys permitidos y los hosts usuario
+por usuario.
+.PP
+Cada línea de este fichero no puede tener más de 255 caracteres. Los
+comentarios comienzan con un carácter # y se extienden hasta el final de
+la línea.
+.PP
+.SS "La sección CLASSES"
+Una sección de tipo CLASSES comienza por la palabra CLASSES al principio
+de la línea escrito en mayúsculas. Cada una de las líneas hasta el
+principio de una nueva sección o del final del fichero consiste en una
+secuencia de palabras separadas pos tabuladores o espacios. Cada línea
+define una clase de ttys y patrones de hosts.
+.PP
+La palabra al principio de la línea es tomada como el nombre colectivo
+para los ttys y patrones de hosts especificados en el resto de la línea.
+Este nombre colectivo puede usarse en las siguientes secciones de tipo
+GROUPS o USERS. No debería aparecer el nombre de una clase como parte de
+la definición de una clase para evitar problemas de recursividad de
+nombres.
+.PP
+Una sección CLASSES de ejemplo:
+.PP
+.nf
+.in +.5
+CLASSES
+miclase1		tty1 tty2
+miclase2		tty3 @.foo.com
+.in -.5
+.fi
+.PP
+Esto define las clases
+.I miclase1
+y
+.I miclase2
+como las partes derechas correspondientes.
+.PP
+
+.SS "La sección GROUPS"
+Una sección GROUPS define los ttys y hosts permitidos para cada grupo
+.I /etc/passwd
+y
+.I /etc/group
+y ese grupo es mencionado en una sección de tipo GROUPS en
+.I /etc/usertty
+entonces el usuario tiene acceso permitido.
+.PP
+Una sección GROUPS comienza con la palabra GROUPS en mayúsculas en el
+principio de una línea, y cada una de las siguientes líneas es una
+secuencia de palabras separadas pos espacios o tabuladores. La primera
+palabra de una línea es el nombre del grupo, y el resto de las palabras
+de la línea especifican los ttys y hosts donde los miembros de ese grupo
+tienen permitido el acceso. Estas especificaciones pueden comportar el
+uso de las clases definidas en secciones CLASSES anteriores.
+.PP
+Un ejemplo de una sección GROUPS:
+.PP
+.nf
+.in +0.5
+GROUPS
+sys		tty1 @.bar.edu
+stud		miclase1 tty4
+.in -0.5
+.fi
+.PP
+Este ejemplo especifica que los miembros del grupo
+.I sys
+pueden ingresar en el tty1 y desde los hosts en el dominio bar.edu. Los
+usuarios en el grupo
+.I stud
+pueden ingresar desde los hosts/ttys especificados en la clase miclase1 o
+desde el tty4.
+.PP
+
+.SS "La sección USERS"
+Una sección USERS comienza con la palabra USERS toda en mayúsculas al
+principio de la línea, y cada una de las líneas siguientes es una
+secuencia de palabras separadas por espacios o tabuladores. La primera
+palabra de una línea es un nombre de usuario y a ese usuario se le
+permite ingresar en los ttys y desde los hosts mencionados en el resto de
+la línea. Estas especificaciones pueden contener clases definidas en
+secciones CLASSES anteriores. Si no se especifica al principio del
+fichero una cabecera de sección, por defecto la primera sección se
+interpreta como del tipo USERS.
+
+.PP
+Una sección USERS de ejemplo:
+.PP
+.nf
+.in +0.5
+USERS
+zacho		tty1 @130.225.16.0/255.255.255.0
+pepe		tty3 miclase2
+.in -0.5
+.fi
+.PP
+Esto autoriza al usuario zacho a ingresar solo en el tty1 y desde los
+hosts con direcciones IP en el rango 130.225.16.0 \- 130.225.16.255, y
+también autoriza al usuario pepe a ingresar en el tty3 y desde cualquier
+parte mencionada en la clase miclase2.
+.PP
+Podrá aparecer una línea en la sección USERS que comience por un nombre
+de usuario *. Esta es la regla por defecto y será aplicada a cualquier
+usuario que no aparezca en ninguna de las otras líneas.
+.PP
+Si un usuario encaja con una línea USERS y con una línea GROUPS, el
+usuario estará autorizado a ingresar desde la unión de todos los
+ttys/hosts mencionados en estas especificaciones.
+
+.SS Orígenes
+Las especificaciones de patrones de tty y host usadas en la
+especificación de las clases, grupos y usuarios se llaman orígenes. Un
+origen es una cadena de caracteres que puede tener uno de estos formatos:
+.IP o 
+El nombre de un dispositivo tty sin el prefijo /dev/, por ejemplo tty1 o
+ttyS0.
+.PP
+.IP o
+La cadena @localhost, indicando que el usuario está autorizado a
+telnet/rlogin desde el host local al mismo host. Esto también habilita al
+usuario a ejecutar, por ejemplo, el comando: xterm -e /bin/login.
+.PP
+.IP o
+Un sufijo de nombre de dominio como @.algun.dom, indicando que el usuario
+podrá hacer rlogin/telnet desde cualquier host cuyo nombre de dominio
+tenga el sufijo .algun.dom.
+.PP
+.IP o
+Un rango de direcciones IPv4, escritas @x.x.x.x/y.y.y.y donde x.x.x.x es
+la dirección IP en la notación decimal tradicional con puntos, e y.y.y.y
+es una máscara de bits en la misma notación especificando cuales de los
+bits de la dirección serán comparados con la dirección IP del host
+remoto. Por ejemplo @130.255.16.0/255.255.254.0 significa que el usuario
+podrá hacer rlogin/telnet desde cualquier host cuya dirección IP esté en
+el rango 130.255.16.0 \- 130.255.17.255.
+.PP
+Cualquiera de los orígenes anteriores pueden tener un prefijo con la
+especificación temporal acordando con la sintaxis:
+.PP
+.nf
+espec-tiempo ::= '[' <día-u-hora> [':' <día-u-hora>]* ']'
+día          ::= 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
+hora         ::= '0' | '1' | ... | '23'
+espec-hora   ::= <hora> | <hora> '\-' <hora>
+día-u-hora   ::= <día> | <espec-hora>
+.fi
+.PP
+Por ejemplo, el origen [mon:tue:wed:thu:fri:8\-17]tty3 significa que solo
+se permitirán ingresos de lunes a viernes entre las 8:00 y las 17:59
+(5:59 pm) en el tty3. Esto también muestra que un rango de horas a\-b
+incluye todo momento entre a:00 y b:59. Una sola hora (por ejemplo 10)
+significará un espacio temporal entre las 10:00 y las 10:59.
+.PP
+Si no se especifica ningún prefijo temporal para un tty o host significará
+que se permitirá el ingreso desde ese origen a cualquier hora. Si da un
+prefijo temporal asegúrese de especificar tanto el conjunto de días como
+una o más horas o rango de horas. Una especificación de tiempo no puede
+incluir espacios en blanco.
+.PP
+Si no se define ninguna regla por defecto entonces los usuarios que no
+concuerden con ninguna línea de
+.I /etc/usertty
+está autorizados para ingresar desde cualquier lugar en la manera
+estándar.
+.PP
+.SH FICHEROS
+.nf
+.I /var/run/utmp
+.I /var/log/wtmp
+.I /var/log/lastlog
+.I /usr/spool/mail/*
+.I /etc/motd
+.I /etc/passwd
+.I /etc/nologin
+.I /etc/usertty
+.I .hushlogin
+.fi
+.SH "VÉASE TAMBIÉN"
+.BR init (8),
+.BR getty (8),
+.BR mail (1),
+.BR passwd (1),
+.BR passwd (5),
+.BR environ (7),
+.BR shutdown (8)
+.SH FALLOS
+
+Linux, a diferencia de otros sistemas operativos draconianos, no comprueba
+las cuotas.
+
+La opción no documentada
+.B \-r
+de BSD no está soportada. Esta podría ser requerida por algún programa
+.BR rlogind (8)
+.
+.SH AUTOR
+Derivado de login 5.40 de BSD (5/9/89) por Michael Glad (glad@daimi.dk)
+para HP-UX
+.br
+Portado a Linux 0.12: Peter Orbaek (poe@daimi.aau.dk)

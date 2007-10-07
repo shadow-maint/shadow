@@ -1,0 +1,147 @@
+.\" Copyleft (C) 2003 Josef Spillner <josef@ggzgamingzone.org>
+.\" Übersetzung der englischen Version von Julianne Frances Haugh
+.\" Ersatz für die originale Version von:
+.\" Copyright 1993 Sebastian Hetze und Peter Orbaek.
+.\"
+.\" Veröffentlicht unter der GNU General Public License (GPL).
+.\"
+.TH LOGIN 1
+.SH BEZEICHNUNG
+login \- startet eine Sitzung auf dem System
+.SH SYNTAX
+\fBlogin\fR [\fB-p\fR] [\fINutzername\fR] [\fIENV=VAR\fR ...]
+.br
+\fBlogin\fR [\fB-p\fR] [\fB-h \fIHost\fR] [\fB-f \fINutzername\fR]
+.br
+\fBlogin\fR [\fB-p\fR] \fB-r \fIHost\fR
+.SH BESCHREIBUNG
+.B login
+wird verwendet, um eine neue Sitzung auf dem System zu starten.
+Es wird normalerweise automatisch als Antwort auf den Prompt
+.I login:
+auf dem Terminal des Nutzers ausgeführt.
+.B login
+kann von der Shell speziell behandelt werden und kann nicht als
+Subprozess gestartet werden.
+Typischerweise wird
+.B login
+von der Shell als \fBexec login\fR ausgeführt, so daß der Nutzer die
+aktuelle Shell verlassen muß.
+Der Versuch, von einer Shell außer der Login-Shell \fBlogin\fR
+auszuführen, wird eine Fehlermeldung generieren.
+.PP
+Wenn das Programm vom Prompt \fIlogin:\fR ausgeführt wird,
+kann der Nutzer Umgebungsvariablen nach dem Nutzernamen eingeben.
+
+Diese Variablen werden in der Form \fBNAME=WERT\fR angegeben.
+Nicht alle Variablen können auf diese Art und Weise gesetzt werden,
+insbesondere \fBPATH\fR, \fBHOME\fR und \fBSHELL\fR stellen eine
+Ausnahme dar.
+Außerdem kann \fBIFS\fR dazugehören, wenn die Login-Shell des
+Nutzers \fB/bin/sh\fR ist.
+.PP
+Der Nutzer wird anschließend nach einem Kennwort gefragt, falls
+erforderlich. Dieses wird während der Eingabe nicht angezeigt.
+Es sind nur eine kleine Anzahl von Login-Fehlern möglich,
+falls \fBlogin\fR abbricht und die Kommunikation getrennt wird.
+.PP
+Falls die Kennwortalterung für ein Konto aktiviert wurde,
+kann es sein, daß der Nutzer vor der weiteren Nutzung nach
+einem neuen Kennwort gefragt wird. Das alte und das neue Kennwort
+müssen angegeben werden, bevor fortgefahren werden kann.
+In der Dokumentation zu \fBpasswd\fR(1) finden sich weitere
+Informationen.
+.PP
+Nach einem erfolgreichen Login werdem dem Nutzer Systemmeldungen
+präsentiert, sowie das Vorhandensein von Mails angezeigt.
+Die Anzeige der systemweiten Nachrichtendatei \fI/etc/motd\fR kann
+unterdrückt werden, wenn im Loginverzeichnis eine leere Datei
+\fI.hushlogin\fR angelegt wird.
+Die Mailnachricht ist entweder "\fBSie haben neue Mails.\fR",
+"\fBSie haben Mails.\fR", oder "\fBKeine Mails.\fR", je nach
+Zustandes der Mailbox des Nutzers.
+.PP
+Die Nutzer- und Gruppen-IDs werden gemäß den Werten in der Datei
+\fI/etc/passwd\fR gesetzt.
+Die Werte für \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR
+und \fB$MAIL\fR werden ebenfalls entsprechend der Einträge in dem
+Kennworteintrag gesetzt.
+Werte für ulimit, umask und nice können ebenfalls gemäß Werten im
+GECOS-Feld eingestellt werden.
+.PP
+Auf einigen Installationen wird die Umgebungsvariable \fB$TERM\fR
+entsprechend dem Typ des Ausgabeterminals gesetzt, so wie in
+\fI/etc/ttytype\fR angegeben.
+.PP
+Ein Initialisierungsskript für den Kommandozeilen-Interpreter
+kann auch ausgeführt werden. Dazu sehe man in den entsprechenden
+Manual-Seiten nach.
+.PP
+Ein Subsystem-Login wird durch das Vorhandensein eines "*" als erstem
+Buchstaben der Login-Shell angezeigt. Das angegebene Heimatverzeichnis
+wird als Wurzel des neuen Dateisystems verwendet werden, in das
+der Nutzer tatsächlich eingeloggt ist.
+.SH OPTIONEN
+.TP
+.B -p
+Behalte die Umgebungseinstellungen bei.
+.TP
+.B -f
+Keine Authentifizierung durchführen, Nutzer ist bereits angemeldet.
+.TP
+.B -h
+Name des entfernten Rechners für das Login.
+.TP
+.B -r
+Führ das Autologin-Protokoll für rlogin aus.
+.PP
+Die Optionen \fB-r\fP, \fB-h\fP und \fB-f\fP werden nur genutzt,
+wenn \fBlogin\fP als root ausgeführt wird.
+.SH HINWEISE
+Diese Version von \fBlogin\fR hat viele Optionen für die Compilierung,
+davon sind eventuell nur einige auf bestimmten Systemen in Gebrauch.
+.PP
+Der Ort der Konfigurationsdateien kann entsprechend der Systemkonfiguration
+abweichen.
+.PP
+Es liegt NICHT in der Verantwortung von \fBlogin\fR, Nutzer von der utmp-Datei
+zu entfernen.
+Sowohl
+.BR getty (8)
+als auch
+.BR init (8)
+sind dafür zuständig, die Eigentümerschaft einer Terminalsitzung aufzuräumen.
+Falls \fBlogin\fR ohne \fBexec\fR von der Shell genutzt wird, wird der Nutzer
+weiterhin in der Lage sein, eingeloggt zu erscheinen, obwohl er aus der
+Subsitzung ausgeloggt ist.
+.SH DATEIEN
+.br
+\fI/var/run/utmp\fR		\- Liste der aktuellen Login-Sitzungen
+.br
+\fI/var/log/wtmp\fR		\- Liste der vorherigen Login-Sitzungen
+.br
+\fI/etc/passwd\fR		\- Informationen über Nutzerkonten
+.br
+\fI/etc/shadow\fR		\- Verschlüsselte Kennwörter und Alterungsinformationen
+.br
+\fI/etc/motd\fR			\- Systemnachricht-Datei
+.br
+\fI/etc/nologin\fR		\- Verhindert, daß sich Nutzer außer dem Supernutzer einloggen
+.br
+\fI/etc/ttytype\fR		\- Lister der Terminaltypen
+.br
+\fI$HOME/.hushlogin\fR	\- Unterdrückt die Ausgabe der Systemnachricht
+.SH "SIEHE AUCH"
+.BR mail (1),
+.BR passwd (1),
+.BR sh (1),
+.BR su (1),
+.BR login.defs (5),
+.BR nologin (5),
+.BR passwd (5),
+.BR getty (8)
+.SH AUTOR
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+.br
+Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
+

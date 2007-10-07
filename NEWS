@@ -1,4 +1,8 @@
-$Id: NEWS,v 1.57.2.1 2004/01/14 06:20:26 kloczek Exp $
+$Id: NEWS,v 1.57.2.1.2.1 2004/01/14 14:11:25 kloczek Exp $
+
+shadow-4.0.4 => shadow-4.0.4.1
+- bug fixes in automake files for generate correct tar ball on "make dist":
+  added midsiing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
 shadow-4.0.3 => shadow-4.0.4
 

@@ -10,4 +10,6 @@ man_MANS = \
 	passwd.1 \
 	sg.1 \
 	su.1
+
+EXTRA_DIST = $(man_MANS)
  

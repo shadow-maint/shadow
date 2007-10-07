@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-14 07:41+0100\n"
+"POT-Creation-Date: 2004-01-14 15:16+0100\n"
 "PO-Revision-Date: 1999-07-09 20:02+0200\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"
@@ -281,7 +281,7 @@ msgid "%s: permission denied\n"
 msgstr "%s: permission refusée\n"
 
 #: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
-#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1661 src/userdel.c:657
 #: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
@@ -343,7 +343,7 @@ msgid "%s: can't rewrite password file\n"
 msgstr "%s: impossible de re-écrire le fichier password\n"
 
 #: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
-#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1786 src/userdel.c:814
 #: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
@@ -776,18 +776,18 @@ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
 msgstr "Usage: groupadd [-g gid [-o]] [-f] groupe\n"
 
 #: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
-#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
+#: src/useradd.c:940 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: erreur durant l'addition du nouveau groupe\n"
 
-#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:951
 #: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
 msgstr "%s: impossible d'ajouter une nouvelle entrée pour le groupe dbm\n"
 
-#: src/groupadd.c:256 src/useradd.c:977
+#: src/groupadd.c:256 src/useradd.c:1004
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: le nom %s n'est pas unique\n"
@@ -812,18 +812,18 @@ msgstr "%s: %s n'est pas un nom de groupe valide\n"
 msgid "%s: invalid group %s\n"
 msgstr "%s: groupe %s non valide\n"
 
-#: src/groupadd.c:364 src/useradd.c:1173
+#: src/groupadd.c:364 src/useradd.c:1200
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
 msgstr "%s: -O requiert NAME=VALEUR\n"
 
-#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1315
 #: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: impossible de re-écrire le fichier group\n"
 
-#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1324
 #: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
@@ -1672,247 +1672,261 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Entrée du système en mode maintenance\n"
 
-#: src/useradd.c:234
+#: src/useradd.c:239
 #, c-format
 msgid "%s: rebuild the group database\n"
 msgstr "%s: reconstruction de la base de données des groupes\n"
 
-#: src/useradd.c:243
+#: src/useradd.c:248
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
 msgstr "%s: reconstruction de la base de données des groupes shadow\n"
 
-#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
+#: src/useradd.c:283 src/useradd.c:297 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: argument numérique `%s' non valide\n"
 
-#: src/useradd.c:349
+#: src/useradd.c:354
 #, c-format
 msgid "%s: unknown gid %s\n"
 msgstr "%s: gid %s inconnu\n"
 
-#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/useradd.c:362 src/useradd.c:663 src/useradd.c:1156 src/usermod.c:244
 #: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: groupe %s inconnu\n"
 
-#: src/useradd.c:419
+#: src/useradd.c:434
 #, c-format
 msgid "GROUP=%u\n"
 msgstr "GROUP=%u\n"
 
-#: src/useradd.c:420
+#: src/useradd.c:435
 #, c-format
 msgid "HOME=%s\n"
 msgstr "HOME=%s\n"
 
-#: src/useradd.c:422
+#: src/useradd.c:437
 #, c-format
 msgid "INACTIVE=%ld\n"
 msgstr "INACTIVE=%ld\n"
 
-#: src/useradd.c:423
+#: src/useradd.c:438
 #, c-format
 msgid "EXPIRE=%s\n"
 msgstr "EXPIRE=%s\n"
 
-#: src/useradd.c:425
+#: src/useradd.c:440
 #, c-format
 msgid "SHELL=%s\n"
 msgstr "SHELL=%s\n"
 
-#: src/useradd.c:426
+#: src/useradd.c:441
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:462
+#: src/useradd.c:442
+#, c-format
+msgid "CREATE_MAIL_SPOOL=%s\n"
+msgstr ""
+
+#: src/useradd.c:479
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: impossible de créer un nouveau fichier de défauts\n"
 
-#: src/useradd.c:467
+#: src/useradd.c:484
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: impossible de créer un nouveau fichier de défauts\n"
 
-#: src/useradd.c:552 src/useradd.c:564
+#: src/useradd.c:578 src/useradd.c:590
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: rename: %s"
 
-#: src/useradd.c:657 src/usermod.c:265
+#: src/useradd.c:684 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: le groupe `%s' est un groupe NIS.\n"
 
-#: src/useradd.c:666 src/usermod.c:274
+#: src/useradd.c:693 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: trop de groupes spécifiés (max %d).\n"
 
-#: src/useradd.c:698
+#: src/useradd.c:725
 msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
 msgstr "Usage: useradd [-u uid [-o]] [-g groupe] [-G groupe,...] \n"
 
-#: src/useradd.c:701
+#: src/useradd.c:728
 msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr ""
 "               [-d home] [-s shell] [-c commentaire] [-m [-k template]]\n"
 
-#: src/useradd.c:703 src/useradd.c:708
+#: src/useradd.c:730 src/useradd.c:735
 msgid "               [-f inactive] [-e expire]\n"
 msgstr "               [-f inactif] [-e expire]\n"
 
-#: src/useradd.c:706
+#: src/useradd.c:733
 msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
 msgstr "       useradd -D [-g groupe] [-b base] [-s shell]\n"
 
-#: src/useradd.c:793 src/usermod.c:461
+#: src/useradd.c:820 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: erreur lors du vérouillage du fichier de groupe\n"
 
-#: src/useradd.c:798 src/usermod.c:467
+#: src/useradd.c:825 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: erreur lors d'ouverture du fichier de groupe\n"
 
-#: src/useradd.c:805 src/usermod.c:578
+#: src/useradd.c:832 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: erreur lors du vérouillage du fichier shadow group\n"
 
-#: src/useradd.c:810 src/usermod.c:584
+#: src/useradd.c:837 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: erreur lors de l'ouverture du fichier shadow group\n"
 
-#: src/useradd.c:982
+#: src/useradd.c:1009
 #, c-format
 msgid "%s: uid %u is not unique\n"
 msgstr "%s: l'uid %u n'est pas unique\n"
 
-#: src/useradd.c:1012
+#: src/useradd.c:1039
 #, c-format
 msgid "%s: can't get unique uid\n"
 msgstr "%s: impossible d'obtenir un uid unique\n"
 
-#: src/useradd.c:1049
+#: src/useradd.c:1076
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: répertoire de base non valide `%s'\n"
 
-#: src/useradd.c:1059
+#: src/useradd.c:1086
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: commentaire `%s' non valide\n"
 
-#: src/useradd.c:1070
+#: src/useradd.c:1097
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: répertoire personnel `%s' non valide\n"
 
-#: src/useradd.c:1089 src/usermod.c:858
+#: src/useradd.c:1116 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: date `%s' non valide\n"
 
-#: src/useradd.c:1102
+#: src/useradd.c:1129
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: mots de passe shadow nécessaires pour -e\n"
 
-#: src/useradd.c:1118
+#: src/useradd.c:1145
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: mots de passe shadow nécessaires pour -f\n"
 
-#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/useradd.c:1212 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
 #: src/usermod.c:935
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: champs `%s' non valide\n"
 
-#: src/useradd.c:1196
+#: src/useradd.c:1223
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: shell `%s' non valide\n"
 
-#: src/useradd.c:1237
+#: src/useradd.c:1264
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: nom d'utilisateur `%s' non valide\n"
 
-#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
+#: src/useradd.c:1300 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: impossible de reécrire le fichier de mots de passe\n"
 
-#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
+#: src/useradd.c:1307 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: impossible de reécrire le fichier shadow\n"
 
-#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
+#: src/useradd.c:1348 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: impossible de vérouiller le fichier de mots de passe\n"
 
-#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
+#: src/useradd.c:1353 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: impossible d'ouvrir le fichier de mots de passe\n"
 
-#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
+#: src/useradd.c:1361 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: impossible de vérouiller le fichier de mots de passe\n"
 
-#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
+#: src/useradd.c:1368 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: impossible d'ouvrir le fichier shadow\n"
 
-#: src/useradd.c:1435
+#: src/useradd.c:1462
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: erreur lors de l'ajout de la nouvelle entrée\n"
 
-#: src/useradd.c:1449
+#: src/useradd.c:1476
 #, c-format
 msgid "%s: error updating password dbm entry\n"
 msgstr "%s: erreur lors de la mise à jour de l'entrée dbm\n"
 
-#: src/useradd.c:1465 src/usermod.c:1151
+#: src/useradd.c:1492 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s: erreur lors de l'ajout de la nouvelle entrée shadow\n"
 
-#: src/useradd.c:1481 src/usermod.c:1168
+#: src/useradd.c:1508 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
 msgstr "%s: erreur lors de la mise à jour de l'entrée shadow passwd dbm\n"
 
-#: src/useradd.c:1513
+#: src/useradd.c:1540
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: impossible de créer le répertoire %s\n"
 
-#: src/useradd.c:1634 src/usermod.c:981
+#: src/useradd.c:1570
+msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgstr ""
+
+#: src/useradd.c:1593
+#, fuzzy, c-format
+msgid "Can't create mail spool for user %s.\n"
+msgstr "%s: impossible de mettre à jour l'entrée %s\n"
+
+#: src/useradd.c:1713 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: l'utilisateur %s existe\n"
 
-#: src/useradd.c:1649
+#: src/useradd.c:1728
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:1687
+#: src/useradd.c:1766
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: avertissement: CREATE_HOME non supporté, utilisez -m à la place.\n"
@@ -2146,10 +2160,6 @@ msgstr ""
 "Usage :\n"
 "`vipw' édite /etc/passwd        `vipw -s' édite /etc/shadow\n"
 "`vigr' édite /etc/group         `vigr -s' édite /etc/gshadow\n"
-
-#, fuzzy
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "%s: impossible de mettre à jour l'entrée %s\n"
 
 #~ msgid "User %s has a TCFS key, his old password is required.\n"
 #~ msgstr ""

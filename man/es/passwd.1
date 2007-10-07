@@ -1,0 +1,140 @@
+.\" Copyright 1992 Rickard E. Faith (faith@cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+.\"
+.\" Translated 2 Dec 1998 by Victor Moral (victor@venexma.es) 
+.\"
+.TH PASSWD 1 "11 Noviembre 1996" "Util-linux 2.6" "Manual del Programador Linux"
+.SH NOMBRE
+passwd \- cambia contraseñas
+.SH SINOPSIS
+.BR "passwd"
+.RB [ " \-o " ]
+.RB [ " \-q " ]
+.RB [ " \-v " ]
+.RI [ " usuario " [ " contraseña " ]]
+.br
+.BR "passwd \-f "
+.RI [ " parámetros para el cambio de nombre completo del usuario " ]
+.br
+.BR "passwd \-s "
+.RI [ " parámetros para el cambio de shell " ]
+
+.SH DESCRIPCIÓN
+
+Cuando se utiliza sin parámetros
+.B passwd
+cambia la contraseña para el usuario que lo invoca. Primero le exigirá 
+la contraseña vigente, y a continuación pedirá dos veces la nueva para 
+prevenir errores de escritura.
+
+La invocación del programa con los parámetros 
+.IR usuario 
+y
+.IR contraseña
+sólo puede realizarse desde la cuenta de superusuario. 
+
+Utilizando la invocación sólo con el parámetro
+.IR usuario
+, el 
+superusuario puede cambiar la contraseña para ese
+.IR usuario .
+
+En este caso no se exige al superusuario la contraseña vigente para el usuario,
+pero las reglas para validar contraseñas se siguen aplicando a menos que se
+utilice la opción
+.B "\-o".
+El superusuario puede tener razones legítimas para elegir una contraseña no
+conforme a las reglas.
+
+
+El uso de los dos parámetros asigna al 
+.IR usuario " la " contraseña
+indicada en el segundo parámetro. Puede ser útil cuando se debe dar a muchos
+usuarios una contraseña inicial predefinida. Pero también puede ser 
+extremadamente peligroso. Un simple fallo en un programa podría cambiar la 
+contraseña del superusuario (root) a cualquier cosa desconocida.
+
+Indicar una cadena vacía como el segundo parámetro borra la contraseña para 
+el usuario, pero sólo en combinación de la opción
+.B "\-o".
+
+Los cambios de contraseña pueden registrarse utilizando el servicio
+.BR syslog (3),
+dependiendo de las definiciones hechas en tiempo de compilación del programa
+(estando esta característica activa por omisión).
+Si es así, todos los cambios se registrarán a un nivel bajo como auth.notice,
+excepto para cambiar la contraseña del superusuario (root); en este caso se 
+registrarán con nivel auth.warning.
+
+.SH OPCIONES
+.TP
+.B "\-f, \-\-fullname"
+Cambia el nombre completo del usuario (el campo GECOS del registro de 
+contraseñas). Invoca el programa /usr/bin/chfn utilizando los parámetros
+que ha recibido que no son opciones.  
+
+.TP
+.B "\-o, \-\-force"
+Desactiva las verificaciones de validación sobre la nueva contraseña . Sólo
+puede ser utilizada por el superusuario, y está pensado para permitirle 
+asignar contraseñas iniciales simples.
+
+.TP
+.B "\-s, \-\-shell"
+Cambia el shell del usuario mediante la invocación del programa /usr/bin/chsh
+con los parámetros recibidos que no son opciones.
+
+.TP
+.B "\-q, \-\-quiet, \-\-silent"
+En este modo de funcionamiento passwd no indica que la contraseña se haya
+cambiado.
+
+.TP
+.B "\-v, \-V, \-\-version"
+Muestra información acerca de la versión del programa y finaliza.
+
+.SH REGLAS DE CONTRASEÑAS
+La nueva contraseña debe cumplir estas reglas:
+.TP
+o
+tener como mínimo seis caracteres;
+
+.TP
+o
+no ser igual a la contraseña anterior;
+
+.TP
+o
+contener caracteres que pertenezcan, como mínimo, a dos de las 
+siguientes categorías: mayúsculas y minúsculas, dígitos y caracteres no 
+alfanuméricos;
+
+.TP
+o
+no debe coincidir ni con el nombre del usuario, ni con ninguna de las palabras
+que forman su nombre completo (real), tanto en orden normal como inverso, ni 
+al principio ni al final.
+
+.SH FALLOS (BUGS)
+
+Si cambia de opinión no hay escape del programa. Insistirá en obtener una 
+contraseña nueva hasta que sea muerto (mediante kill) desde otro terminal.
+(Esto es provocado por un fallo en getpass(3): e ignora las señales.)
+
+.SH FICHEROS
+.TP
+.I /etc/passwd
+El archivo que contiene las contraseñas.
+.SH "VÉASE TAMBIÉN"
+.BR chsh (1),
+.BR chfn (1),
+.BR syslog (3),
+.BR syslog.conf (5),
+.BR passwd (8).
+.SH AUTOR
+Peter Orbaek (poe@daimi.aau.dk).
+.br
+Martin Schulze (joey@infodrom.north.de) con extensas mejoras y reescrituras.
+.br
+.SH MANTENIMIENTO
+Nicolai Langfeldt (janl@math.uio.no)

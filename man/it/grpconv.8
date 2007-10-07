@@ -1,0 +1,58 @@
+.\" $Id: grpconv.8,v 1.1 2002/03/10 07:41:06 kloczek Exp $
+.\" Traduzione in italiano  di Isabella Ruocco <isacher@nettaxi.com>
+.\" Giugno 1999
+.TH PWCONV 8 "26 sep 1997"
+.SH NOME
+pwconv, pwunconv, grpconv, grpunconv \- convertono a e da password e gruppi shadow.
+.SH SINTASSI
+.B pwconv
+.br
+.B pwunconv
+.br
+.B grpconv
+.br
+.B grpunconv
+.SH DESCRIZIONE
+Questi quattro programmi agiscono tutti sui file normali e e oscurati (shadow) 
+delle password e dei gruppi:
+.IR /etc/passwd ", " /etc/group ", " /etc/shadow ", e " /etc/gshadow .
+
+.B pwconv
+.RI "crea " shadow " da " passwd " e, in modo opzionale, da un preesistente " shadow .
+.B pwunconv
+.RI "crea " passwd " da " passwd " e " shadow " e quindi rimuove " shadow .
+.B grpconv
+.RI "crea " gshadow " da " group " e, in modo opzionale, da un preesistente " gshadow .
+.B grpunconv
+.RI "crea " group " da " group " e " gshadow " e quindi rimuove " gshadow .
+
+Ciascun programma, prima della conversione, acquisisce i lock necessari.
+
+.BR pwconv " e " grpconv
+sono simili.  Per prima cosa vengono rimosse le voci nel file oscurato che non esistono 
+nel file principale.  Quindi vengono aggiornate le voci oscurate che 
+non hanno `x' come password nel file principale.  Vengono aggiunte le eventuali voci
+oscurate mancanti.  Infine, le password nel file principale vengono 
+sostituite con `x'.  Questi programmi possono essere usati per le conversioni iniziali
+così come per aggiornare il file oscurato se il file principale viene editato 
+a mano.
+
+.B pwconv
+userà i valori di
+.BR PASS_MIN_GIORNI ", " PASS_MAX_GIORNI ", e " PASS__GIORNI_PREAVVISO
+da
+.I /etc/login.defs
+quando si aggiungono nuove voci a
+.IR /etc/shadow .
+
+.RB "Analogamente, " pwunconv " e " grpunconv
+sono simili.  Le password nel file principale vengono aggiornate 
+dal file oscurato. Voci che esistono nel file principale ma non 
+nel file oscurato vengono lasciate stare.  Infine, viene rimosso il file oscurato.
+
+Alcune informazioni sull'invecchiamento delle password vengono perse da
+.BR pwunconv .
+Questo convertirà quello che potrà.
+.SH "VEDERE ANCHE"
+.BR login.defs (5),
+.BR shadowconfig (8)

@@ -7,3 +7,5 @@ man_MANS = \
 	groups.1 \
 	login.1 \
 	passwd.1
+
+EXTRA_DIST = $(man_MANS)

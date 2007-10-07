@@ -1,3 +1,7 @@
+2004-01-14  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* configure.in: Fixed checking is avalaible st_rdev in struct stat.
+
 2004-01-13  Tomasz K³oczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: Typo.

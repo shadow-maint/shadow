@@ -163,6 +163,8 @@ man_MANS = \
 	sg.1 \
 	su.1
 
+
+EXTRA_DIST = $(man_MANS)
 subdir = man/hu
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
