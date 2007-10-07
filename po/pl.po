@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-981228\n"
-"POT-Creation-Date: 2000-10-12 06:20+0200\n"
+"POT-Creation-Date: 2000-10-16 23:43+0200\n"
 "PO-Revision-Date: 1999-03-02 22:29+01:00\n"
 "Last-Translator: Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>\n"
 "Language-Team: PL <pl@li.org>\n"

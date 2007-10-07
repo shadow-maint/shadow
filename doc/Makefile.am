@@ -3,5 +3,4 @@
 
 EXTRA_DIST = ANNOUNCE HOWTO LICENSE LSM README \
  README.limits README.linux README.mirrors README.nls README.pam \
- README.platforms README.shadow-paper README.sun4 \
- WISHLIST console.c.spec.txt cracklib26.diff
+ README.platforms README.sun4 WISHLIST console.c.spec.txt cracklib26.diff

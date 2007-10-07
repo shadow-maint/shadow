@@ -1,0 +1,111 @@
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: passwd.5,v 1.6 2000/10/16 21:34:40 kloczek Exp $
+.\"
+.TH PASSWD 5
+.SH NAME
+passwd \- The password file
+.SH DESCRIPTION
+.I passwd
+contains various pieces of information for each user account.
+Included is
+.IP "" .5i
+Login name
+.IP "" .5i
+Optional encrypted password
+.IP "" .5i
+Numerical user ID
+.IP "" .5i
+Numerical group ID
+.IP "" .5i
+User name or comment field
+.IP "" .5i
+User home directory
+.IP "" .5i
+User command interpreter
+.PP
+The password field may not be filled if shadow passwords
+have been enabled.
+If shadow passwords are being used, the encrypted password will
+be found in \fI/etc/shadow\fR.
+The encryped password consists of 13 characters from the
+64 character alphabet
+a thru z, A thru Z, 0 thru 9, \. and /.
+Refer to \fBcrypt\fR(3) for details on how this string is
+interpreted.
+.PP
+An optional password age string may follow the encrypted
+password, separated by a comma, from the same alphabet
+as the password itself.
+The first character gives the number of weeks during which the
+password is valid.
+The second character gives the number of weeks which must pass
+before the user is permitted to change the password.
+The last two characters give the week since Jan 1970 when the
+password was last changed.
+When the number of weeks during which the password is valid
+have passed, the user will be required to provide a new
+password.
+.PP
+The comment field is used by various system utilities, such as
+\fBfinger\fR(1).
+Three additional values may be present in the comment field.
+They are
+.IP "" .5i
+pri= \- set initial value of nice
+.IP "" .5i
+umask= \- set initial value of umask
+.IP "" .5i
+ulimit= \- set initial value of ulimit
+.PP
+These fields are separated from each other and from any other
+comment field by a comma.
+.PP
+The home directory field provides the name of the initial
+working directory.
+\fBLogin\fR uses this information to set the value of
+the \fBHOME\fR environmental variable.
+.PP
+The command interpreter field provides the name of the user's
+command language interpreter, or the name of the initial program
+to execute.
+\fBLogin\fR uses this information to set the value of the
+\fBSHELL\fR environmental variable.
+If this field is empty, it defaults to the value \fB/bin/sh\fR.
+.SH FILES
+/etc/passwd \- user account information
+.SH SEE ALSO
+.BR login (1),
+.BR passwd (1),
+.BR su (1),
+.BR sulogin (8),
+.BR shadow (5),
+.BR pwconv (8),
+.BR pwunconv (8)
+.SH AUTHOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

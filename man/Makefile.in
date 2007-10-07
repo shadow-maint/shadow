@@ -101,20 +101,18 @@ VERSION = @VERSION@
 YACC = @YACC@
 l = @l@
 
-AUTOMAKE_OPTIONS = 1.0 foreign
+man_MANS =  	chage.1 	chfn.1 	chsh.1 	gpasswd.1 	login.1 	newgrp.1 	passwd.1 	su.1 	faillog.5 	limits.5 	login.access.5 	login.defs.5 	passwd.5 	porttime.5 	shadow.5 	suauth.5 	adduser.8 	chpasswd.8 	faillog.8 	groupadd.8 	groupdel.8 	groupmod.8 	grpconv.8 	grpunconv.8 	grpck.8 	lastlog.8 	logoutd.8 	mkpasswd.8 	newusers.8 	pwck.8 	pwunconv.8 	pwconv.8 	shadowconfig.8 	useradd.8 	userdel.8 	usermod.8 	vipw.8
+
+
+EXTRA_DIST = $(man_MANS) 	groups.1 id.1 pw_auth.3 shadow.3 pwauth.8 sulogin.8 	dpasswd.8
+
 
 # subdirectories for translated manual pages
 SUBDIRS = pl
-
-man_MANS =  	chage.1 	chfn.1 	chsh.1 	gpasswd.1 	login.1 	newgrp.1 	passwd.1 	su.1 	shadow.3 	dialups.5 	faillog.5 	limits.5 	login.access.5 	login.defs.5 	passwd.5 	porttime.5 	shadow.5 	suauth.5 	adduser.8 	chpasswd.8 	dpasswd.8 	faillog.8 	groupadd.8 	groupdel.8 	groupmod.8 	grpconv.8 	grpunconv.8 	grpck.8 	lastlog.8 	logoutd.8 	mkpasswd.8 	newusers.8 	pwck.8 	pwunconv.8
-
-
-EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
 man1dir = $(mandir)/man1
-man3dir = $(mandir)/man3
 man5dir = $(mandir)/man5
 man8dir = $(mandir)/man8
 MANS = $(man_MANS)
@@ -130,7 +128,7 @@ GZIP_ENV = --best
 all: all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-	cd $(top_srcdir) && $(AUTOMAKE) --foreign --include-deps man/Makefile
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps man/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) \
@@ -168,39 +166,6 @@ uninstall-man1:
 	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
 	  echo " rm -f $(DESTDIR)$(man1dir)/$$inst"; \
 	  rm -f $(DESTDIR)$(man1dir)/$$inst; \
-	done
-
-install-man3:
-	$(mkinstalldirs) $(DESTDIR)$(man3dir)
-	@list='$(man3_MANS)'; \
-	l2='$(man_MANS)'; for i in $$l2; do \
-	  case "$$i" in \
-	    *.3*) list="$$list $$i" ;; \
-	  esac; \
-	done; \
-	for i in $$list; do \
-	  if test -f $(srcdir)/$$i; then file=$(srcdir)/$$i; \
-	  else file=$$i; fi; \
-	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
-	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
-	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
-	  echo " $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst"; \
-	  $(INSTALL_DATA) $$file $(DESTDIR)$(man3dir)/$$inst; \
-	done
-
-uninstall-man3:
-	@list='$(man3_MANS)'; \
-	l2='$(man_MANS)'; for i in $$l2; do \
-	  case "$$i" in \
-	    *.3*) list="$$list $$i" ;; \
-	  esac; \
-	done; \
-	for i in $$list; do \
-	  ext=`echo $$i | sed -e 's/^.*\\.//'`; \
-	  inst=`echo $$i | sed -e 's/\\.[0-9a-z]*$$//'`; \
-	  inst=`echo $$inst | sed '$(transform)'`.$$ext; \
-	  echo " rm -f $(DESTDIR)$(man3dir)/$$inst"; \
-	  rm -f $(DESTDIR)$(man3dir)/$$inst; \
 	done
 
 install-man5:
@@ -270,12 +235,10 @@ uninstall-man8:
 	done
 install-man: $(MANS)
 	@$(NORMAL_INSTALL)
-	$(MAKE) $(AM_MAKEFLAGS) install-man1 install-man3 install-man5 \
-	 install-man8
+	$(MAKE) $(AM_MAKEFLAGS) install-man1 install-man5 install-man8
 uninstall-man:
 	@$(NORMAL_UNINSTALL)
-	$(MAKE) $(AM_MAKEFLAGS) uninstall-man1 uninstall-man3 uninstall-man5 \
-	 uninstall-man8
+	$(MAKE) $(AM_MAKEFLAGS) uninstall-man1 uninstall-man5 uninstall-man8
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -416,8 +379,8 @@ install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs)  $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man3 \
-		$(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8
+	$(mkinstalldirs)  $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 \
+		$(DESTDIR)$(mandir)/man8
 
 
 mostlyclean-generic:
@@ -449,13 +412,12 @@ maintainer-clean-am:  maintainer-clean-tags maintainer-clean-generic \
 
 maintainer-clean: maintainer-clean-recursive
 
-.PHONY: install-man1 uninstall-man1 install-man3 uninstall-man3 \
-install-man5 uninstall-man5 install-man8 uninstall-man8 install-man \
-uninstall-man install-data-recursive uninstall-data-recursive \
-install-exec-recursive uninstall-exec-recursive installdirs-recursive \
-uninstalldirs-recursive all-recursive check-recursive \
-installcheck-recursive info-recursive dvi-recursive \
-mostlyclean-recursive distclean-recursive clean-recursive \
+.PHONY: install-man1 uninstall-man1 install-man5 uninstall-man5 \
+install-man8 uninstall-man8 install-man uninstall-man \
+install-data-recursive uninstall-data-recursive install-exec-recursive \
+uninstall-exec-recursive installdirs-recursive uninstalldirs-recursive \
+all-recursive check-recursive installcheck-recursive info-recursive \
+dvi-recursive mostlyclean-recursive distclean-recursive clean-recursive \
 maintainer-clean-recursive tags tags-recursive mostlyclean-tags \
 distclean-tags clean-tags maintainer-clean-tags distdir info-am info \
 dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
@@ -464,12 +426,6 @@ uninstall-am uninstall all-redirect all-am all installdirs-am \
 installdirs mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
-	pwconv.8 \
-	shadowconfig.8 \
-	useradd.8 \
-	userdel.8 \
-	usermod.8 \
-	vipw.8
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

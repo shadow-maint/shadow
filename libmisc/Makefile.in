@@ -111,7 +111,7 @@ localedir = $(datadir)/locale
 INCLUDES = -I$(top_srcdir)/libmisc -I$(top_srcdir)/lib
 DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
 
-libmisc_a_SOURCES =  	addgrps.c 	age.c 	basename.c 	chkname.c 	chkshell.c 	chowndir.c 	chowntty.c 	console.c 	copydir.c 	entry.c 	env.c 	failure.c 	fields.c 	getdate.y 	hushed.c 	isexpired.c 	limits.c 	list.c log.c 	login_access.c 	login_desrpc.c 	login_krb.c 	loginprompt.c 	mail.c 	motd.c 	myname.c 	obscure.c 	pam_pass.c 	pwd2spwd.c 	pwd_init.c 	rlogin.c 	salt.c 	setugid.c 	setup.c 	setupenv.c 	shell.c 	strtoday.c 	suauth.c 	sub.c 	sulog.c 	ttytype.c 	tz.c 	ulimit.c 	utmp.c 	valid.c 	xmalloc.c
+libmisc_a_SOURCES =  	addgrps.c 	age.c 	basename.c 	chkname.c 	chkshell.c 	chowndir.c 	chowntty.c 	console.c 	copydir.c 	entry.c 	env.c 	failure.c 	fields.c 	getdate.y 	hushed.c 	isexpired.c 	limits.c 	list.c log.c 	login_access.c 	login_desrpc.c 	login_krb.c 	loginprompt.c 	mail.c 	motd.c 	myname.c 	obscure.c 	pam_pass.c 	pwd2spwd.c 	pwdcheck.c 	pwd_init.c 	rlogin.c 	salt.c 	setugid.c 	setup.c 	setupenv.c 	shell.c 	strtoday.c 	suauth.c 	sub.c 	sulog.c 	ttytype.c 	tz.c 	ulimit.c 	utmp.c 	valid.c 	xmalloc.c
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h
@@ -126,9 +126,9 @@ libmisc_a_OBJECTS =  addgrps.o age.o basename.o chkname.o chkshell.o \
 chowndir.o chowntty.o console.o copydir.o entry.o env.o failure.o \
 fields.o getdate.o hushed.o isexpired.o limits.o list.o log.o \
 login_access.o login_desrpc.o login_krb.o loginprompt.o mail.o motd.o \
-myname.o obscure.o pam_pass.o pwd2spwd.o pwd_init.o rlogin.o salt.o \
-setugid.o setup.o setupenv.o shell.o strtoday.o suauth.o sub.o sulog.o \
-ttytype.o tz.o ulimit.o utmp.o valid.o xmalloc.o
+myname.o obscure.o pam_pass.o pwd2spwd.o pwdcheck.o pwd_init.o rlogin.o \
+salt.o setugid.o setup.o setupenv.o shell.o strtoday.o suauth.o sub.o \
+sulog.o ttytype.o tz.o ulimit.o utmp.o valid.o xmalloc.o
 AR = ar
 CFLAGS = @CFLAGS@
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)

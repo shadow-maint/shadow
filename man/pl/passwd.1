@@ -1,0 +1,201 @@
+.\" {PTM/WK/1999-09-20}
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH PASSWD 1
+.SH NAZWA
+passwd \- zmieñ has³o u¿ytkownika
+.SH SK£ADNIA
+.B passwd
+.RB [ -f | -s ]
+.RI [ nazwa ]
+.br
+.B passwd
+.RB [ -g ]
+.RB [ -r | R ]
+.I grupa
+.br
+.B passwd
+.RB [ -x
+.IR max ]
+.RB [ -n
+.IR min ]
+.RB [ -w
+.IR ostrze¿ ]
+.RB [ -i
+.IR nieakt ]
+.I nazwa
+.br
+.B passwd
+.RB { -l | -u | -d | -S }
+.I nazwa
+.SH OPIS
+\fBpasswd\fR zmienia has³a kont u¿ytkowników i grup.
+Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie has³o w³asnego konta, superu¿ytkownik
+mo¿e zmieniaæ has³a dowolnych kont.
+Administrator grupy mo¿e zmieniæ has³o tej grupy.
+\fBpasswd\fR zmienia tak¿e informacje o koncie, takie jak pe³na nazwa
+u¿ytkownika, jego pow³oka zg³oszeniowa (logowania) czy daty i interwa³y dotycz±ce
+wa¿no¶ci has³a.
+.SS Zmiany has³a
+Na pocz±tku u¿ytkownik pytany jest o stare, dotychczasowe has³o, je¶li takie
+istnieje. Has³o to jest kodowane i porównywane z przechowywanym has³em.
+U¿ytkownik ma tylko jedn± próbê na wprowadzenie poprawnego has³a.
+Superu¿ytkownikowi zezwala siê na pominiêcie tego kroku, zatem mog± byæ
+zmienione has³a, których zapomniano.
+.PP
+Po wprowadzeniu has³a, sprawdzana jest informacja o jego wieku, by stwierdziæ
+czy u¿ytkownikowi wolno w danym czasie zmieniæ has³o.
+Je¿eli nie, to \fBpasswd\fR odmawia zmiany has³a i koñczy pracê.
+.PP
+Nastêpnie u¿ytkownik proszony jest o nowe, zastêpuj±ce dotychczasowe, has³o
+Has³o podlega sprawdzeniu jego zawi³o¶ci. Jako ogóln± wskazówk± mo¿na podaæ,
+¿e has³a powinny sk³adaæ siê z 6 do 8 znaków, zawieraj±c po jednym lub wiêcej
+znaków z ka¿dej z poni¿szych kategorii:
+.IP "" .5i
+ma³e litery alfabetu
+.IP "" .5i
+du¿e litery alfabetu
+.IP "" .5i
+cyfry od 0 do 9
+.IP "" .5i
+znaki interpunkcyjne
+.PP
+Nale¿y uwa¿aæ, by nie u¿yæ domy¶lnych systemowych znaków akcji erase lub kill.
+\fBpasswd\fR odrzuci ka¿de niedostatecznie skomplikowane has³o.
+.PP
+Je¶li has³o zostanie przyjête, to \fBpasswd\fR prosi o jego powtórzenie
+i porównuje drugi wpis z pierwszym.
+Oba wpisy musz± byæ takie same by has³o zosta³o zmienione.
+.SS Has³a grup
+Je¿eli pos³u¿ono siê opcj± \fB-g\fR, to zmieniane jest has³o podanej grupy.
+U¿ytkownik powinien byæ albo superu¿ytkownikiem albo administratorem tej grupy.
+Nie wystêpuje pytanie o bie¿±ce has³o grupy.
+Do usuwania bie¿±cego has³a danej grupy s³u¿y opcja \fB-g\fR w po³±czeniu
+z \fB-r\fR. Pozwala to na dostêp do grupy tylko jej cz³onkom.
+Opcja \fB-R\fR w po³±czeniu z \fR-g\fR ogranicza dostêp do grupy wszystkim
+u¿ytkownikom.
+.SS Informacja o wa¿no¶ci konta
+Superu¿ytkownik mo¿e zmieniaæ informacjê o wieku konta pos³uguj±c siê opcjami
+\fB-x\fR, \fB-n\fR, \fB-w\fR oraz \fB-i\fR.
+Opcja \fB-x\fR s³u¿y do ustawiania maksymalnej liczby dni, przez jakie has³o
+pozostaje wa¿ne.
+Po up³ywie \fImax\fR dni, has³o musi byæ zmienione.
+Opcja \fB-n\fR ustawia minimaln± liczbê dni, jakie musz± up³yn±æ zanim has³o
+bêdzie mog³o byæ zmienione.
+U¿ytkownik nie otrzyma zezwolenia na zmianê has³a przed up³ywem \fImin\fR dni.
+Opcja \fB-w\fR s³u¿y do ustawienia liczby dni przed up³ywem terminu wa¿no¶ci
+has³a, przez które u¿ytkownik bêdzie otrzymywa³ ostrze¿enie mówi±ce mu, ile dni
+pozosta³o do tej daty. Ostrze¿enia zaczn± pojawiaæ siê \fIostrze¿\fR dni przed
+up³ywem wa¿no¶ci has³a.
+Opcja \fB-i\fR (nieaktywno¶æ) s³u¿y do wy³±czania konta po up³ywie zadanej
+liczby dni po wyga¶niêciu has³a.
+Po up³ywie \fInieakt\fR dni od przeterminowania has³a u¿ytkownik nie mo¿e ju¿
+korzystaæ z konta.
+.SS Utrzymywanie i konserwacja konta
+Konta u¿ytkowników mog± byæ blokowane i odblokowywane przy pomocy flag \fB-l\fR
+i \fB-u\fR.
+Opcja \fB-l\fR wy³±cza konto zmieniaj±c jego has³o na warto¶æ nieodpowiadaj±c±
+¿adnemu mo¿liwemu zakodowanemu has³u.
+Opcja \fB-u\fR ponownie udostêpnia konto przywracaj±c uprzedni± warto¶æ has³a.
+.PP
+Stan konta mo¿na uzyskaæ przy pomocy opcji \fB-S\fR.
+Informacja o stanie sk³ada siê z 6 czê¶ci.
+Pierwsza wskazuje, czy konto u¿ytkownika jest zablokowane (L) (locked),
+nie posiada has³a (NP) (no password) lub ma funkcjonalne has³o (P) (password).
+Druga czê¶æ podaje datê ostatniej zmiany has³a.
+nastêpne cztery to minimalny wiek, maksymalny wiek, okres ostrzegania i okres
+nieaktywno¶ci has³a.
+.SS Podpowiedzi dotycz±ce hase³ u¿ytkownika
+Bezpieczeñstwo has³a zale¿y od si³y algorytmu koduj±cego oraz rozmiaru
+klucza. 
+Metoda kodowania u¿ywana w Systemie \fB\s-2UNIX\s+2\fR oparta jest o algorytm
+NBS DES i jest bardzo bezpieczna.
+Rozmiar klucza zale¿y od losowo¶ci wybranego has³a.
+.PP
+Naruszenia bezpieczeñstwa hase³ wynikaj± zwykle z beztroski przy wyborze lub
+przechowywaniu has³a.
+Z tego powodu powiniene¶ wybraæ has³o nie wystêpuj±ce w s³owniku. Has³o nie
+powinno te¿ byæ poprawn± nazw±, imieniem, nazwiskiem, numerem prawa jazdy,
+dat± urodzenia czy elementem adresu.
+Wszystkie z powy¿szych mog± byæ u¿yte do odgadniêcia has³a i naruszenia
+bezpieczeñstwa systemu.
+.PP
+Has³o musi byæ ³atwe do zapamiêtania, tak by nie byæ zmuszonym do jego
+zapisywania na kartce. Mo¿na to osi±gn±æ sklejaj±c ze sob± dwa krótkie s³owa,
+ze wstawionym pomiêdzy nie znakiem specjalnym lub cyfr±.
+Na przyk³ad, Pass%word, Lew7konia.
+.PP
+Inna metoda konstrukcji has³a polega na wyborze ³atwego do zapamiêtania zdania
+(np. z literatury) i wyborze pierwszej b±d¼ ostatniej litery ka¿dego wyrazu.
+Przyk³adem tego jest
+.IP "" .5i
+Ask not for whom the bell tolls.
+.PP
+co daje
+.IP "" .5i
+An4wtbt,
+.PP
+albo te¿
+.IP "" .5i
+A czy znasz Ty, bracie m³ody
+.PP
+co daje
+.IP "" .5i
+A3zTbm.
+.PP
+W zasadzie mo¿esz byæ pewien, ¿e niewielu crackerów bêdzie mieæ takie has³o
+w swoim s³owniku. Powiniene¶ jednak wybraæ w³asn± metodê konstrukcji hase³
+a nie polegaæ wy³±cznie na opisanych tutaj.
+.SS Uwagi o has³ach grup
+Has³a grup s± nieod³±cznym problemem bezpieczeñstwa, gdy¿ do ich znajomo¶ci
+uprawniona jest wiêcej ni¿ jedna osoba.
+Grupy s± jednak u¿ytecznym narzêdziem pozwalaj±cym na wspó³pracê miêdzy
+ró¿nymi u¿ytkownikami.
+.SH PRZESTROGI
+Mog± nie byæ obs³ugiwane wszystkie opcje. 
+Sprawdzanie z³o¿ono¶ci has³a mo¿e ró¿niæ siê w ró¿nych instalacjach. Zachêca
+siê u¿ytkownika do wyboru tak skomplikowanego has³a, z jakim bêdzie mu
+wygodnie.
+U¿ytkownicy mog± nie móc zmieniæ has³a w systemie przy w³±czonym NIS, je¶li
+nie s± zalogowani do serwera NIS.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - zakodowane has³a u¿ytkowników"
+.SH ZOBACZ TAK¯E
+.BR passwd (3),
+.BR shadow (3),
+.BR group (5),
+.BR passwd (5)
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

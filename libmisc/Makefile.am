@@ -39,6 +39,7 @@ libmisc_a_SOURCES = \
 	obscure.c \
 	pam_pass.c \
 	pwd2spwd.c \
+	pwdcheck.c \
 	pwd_init.c \
 	rlogin.c \
 	salt.c \

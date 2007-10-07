@@ -1,0 +1,61 @@
+.\" {PRM/WK/1999-09-25}
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH GROUPS 1
+.SH NAZWA
+groups \- wy¶wietl nazwy bie¿±cych grup
+.SH SK£ADNIA
+.B groups
+.RI [ u¿ytkownik ]
+.SH OPIS
+.B groups
+wy¶wietla nazwy lub warto¶ci bie¿±cych identyfikatorów grup.
+Je¿eli warto¶æ nie posiada odpowiedniego wpisu w \fI/etc/group\fR, to zostanie
+wy¶wietlona jako numeryczny identyfikator grupy.
+Opcjonalny parametr \fIu¿ytkownik\fR powoduje wy¶wietlenie grup dla danego
+\fIu¿ytkownika\fR.
+.SH UWAGA
+Systemy nie obs³uguj±ce równoczesnych grup (tj.takie, w których u¿ytkownik mo¿e
+w danej byæ cz³onkiem tylko jednej grupy, grupy aktywnej) bêd± wy¶wietlaæ
+informacjê z \fI/etc/group\fR.
+Do zmiany bie¿±cego rzeczywistego i efektywnego identyfikatora grupy u¿ytkownik
+musi u¿yæ polecenia \fBnewgrp\fR lub \fBsg\fR.
+.SH PLIKI
+.IR /etc/group " - informacja o grupach"
+.SH ZOBACZ TAK¯E
+.BR newgrp (1),
+.BR getuid (2),
+.BR getgid (2),
+.BR getgroups (2)
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

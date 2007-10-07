@@ -1,0 +1,152 @@
+.\" {PTM/WK/1999-09-15}
+.\" Copyright 1992 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: pw_auth.3,v 1.2 2000/10/16 21:34:43 kloczek Exp $
+.\"
+.TH PWAUTH 3
+.SH NAZWA
+pwauth \- procedury uwierzytelniania hase³ zdefiniowane przez administratora
+.SH SK£ADNIA
+.B #include <pwauth.h>
+.PP
+.B int pw_auth (char
+.I *command,
+.B char
+.I *user,
+.B int
+.I reason,
+.B char
+.IB *input) ;
+.SH OPIS
+.B pw_auth
+wywo³uje funkcje zdefiniowane przez administratora dla danego u¿ytkownika.
+.PP
+\fIcommand\fR jest nazw± programu uwierzytelniania (autentykacji).
+Jest ona otrzymywana z informacji zawartej pliku hase³ u¿ytkowników.
+Odpowiedni ³añcuch (z pola has³a) zawiera jedn± lub wiêcej, rozdzielonych
+¶rednikami, nazw plików wykonywalnych.
+Programy zostan± wykonane w zadanej kolejno¶ci.
+Dla ka¿dej z przyczyn (reason) podanych ni¿ej podane s± argumenty wiersza
+poleceñ.
+.PP
+\fIuser\fR jest nazw± sprawdzanego u¿ytkownika, w postaci podanej w pliku
+\fI/etc/passwd\fR.
+Pozycje opisuj±ce u¿ytkowników indeksowane s± nazw± u¿ytkownika.
+Pozwala to na istnienie powtarzaj±cych siê identyfikatorów (UID). Ka¿da
+z ró¿nych nazw u¿ytkownika o tym samym identyfikatorze mo¿e
+posiadaæ inny program i informacjê autentykuj±c±.
+.PP
+Ka¿da z dopuszczalnych przyczyn autentykacji obs³ugiwana jest w potencjalnie
+ró¿ny sposób.
+Do komunikacji z u¿ytkownikiem dostêpne s± standardowe deskryptory plików
+0, 1 i 2, chyba ¿e wspomniano inaczej.
+Do ustalenia to¿samo¶ci u¿ytkownika wykonuj±cego ¿±danie uwierzytelnienia
+mo¿e zostaæ u¿yty rzeczywisty identyfikator.
+Przyczyna (\fIreason\fR) jest jedn± z
+.IP \fBPW_SU\fR 1i
+Wykonaj uwierzytelnienie dla bie¿±cego rzeczywistego identyfikatora u¿ytkownika
+próbuj±c prze³±czyæ rzeczywisty ID na podanego u¿ytkownika.
+Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB-s\fR poprzedzaj±c±
+nazwê u¿ytkownika.
+.IP \fBPW_LOGIN\fR 1i
+Wykonaj uwierzytelnienie dla danego u¿ytkownika tworz±c now± sesjê pracy
+(loginow±). Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB-l\fR,
+po której wyst±pi nazwa u¿ytkownika.
+.IP \fBPW_ADD\fR 1i
+Utwórz nowy wpis dla danego u¿ytkownika.
+Pozwala to programowi uwierzytelniania na zainicjowanie miejsca dla nowego
+u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB-a\fR, po której wyst±pi nazwa u¿ytkownika.
+.IP \fBPW_CHANGE\fR 1i
+Zmieñ istniej±cy wpis dla danego u¿ytkownika.
+Pozwala to na programowi uwierzytelniaj±cemu na zmianê informacji autentykuj±cej
+dla istniej±cego u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB-c\fR poprzedzaj±c± nazwê u¿ytkownika.
+.IP \fBPW_DELETE\fR 1i
+Usuñ informacjê autentykuj±c± dla danego u¿ytkownika.
+Pozwala programowi uwierzytelniania na odzyskanie miejsca po u¿ytkowniku, który
+nie bêdzie ju¿ identyfikowany przy u¿yciu tego programu.
+Program uwierzytelniania zostanie wywo³any z opcj± \fB-d\fR,
+po której wyst±pi nazwa u¿ytkownika.
+.IP \fBPW_TELNET\fR 1i
+Wykonaj uwierzytelnianie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+polecenia \fBtelnet\fR.
+Program zostanie wywo³any z opcj± \fB-t\fR, po której wyst±pi nazwa u¿ytkownika.
+.IP \fBPW_RLOGIN\fR 1i
+Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+polecenia \fBrlogin\fR.
+Program zostanie wywo³any z opcj± \fB-r\fR, po której wyst±pi nazwa u¿ytkownika.
+.IP \fBPW_FTP\fR 1i
+Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+polecenia \fBftp\fR.
+Program uwierzytelniania zostanie wywo³any z opcj± \fB-f\fR,
+po której wyst±pi nazwa u¿ytkownika.
+Do komunikacji z u¿ytkownikiem NIE s± dostêpne standardowe deskryptory plików.
+Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,
+za¶ pozosta³e dwa deskryptory plików dostan± pod³±czone do \fI/dev/null\fR.
+Funkcja \fBpw_auth\fR bêdzie potokowaæ pojedynczy wiersz danych do programu
+uwierzytelniania pos³uguj±c siê deskryptorem 0.
+.IP \fBPW_REXEC\fR 1i
+Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+polecenia \fIrexec\fR.
+Program zostanie wywo³any z opcj± \fB-x\fR, po której wyst±pi nazwa u¿ytkownika.
+Do komunikacji ze zdalnym u¿ytkownikiem NIE s± dostêpne standardowe
+deskryptory plików.
+Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,
+za¶ pozosta³e dwa deskryptory plików dostan± pod³±czone do \fI/dev/null\fR.
+Funkcja \fBpw_auth\fR bêdzie potokowaæ pojedynczy wiersz danych do programu
+uwierzytelniania pos³uguj±c siê deskryptorem 0.
+.PP
+Ostatni argument stanowi dane autentykacji, u¿ywane przez
+.B PW_FTP
+oraz
+.B PW_REXEC
+Jest on traktowany jak pojedynczy wiersz tekstu potokowany do programu
+uwierzytelniaj±cego.
+Dla
+.B PW_CHANGE
+warto¶æ \fIinput\fR jest warto¶ci± poprzedniej nazwy u¿ytkownika,
+je¶li zmieniana jest nazwa.
+.SH PRZESTROGI
+Funkcja ta nie tworzy faktycznej sesji.
+Wskazuje jedynie, czy u¿ytkownik powinien otrzymaæ zezwolenie na jej
+utworzenie.
+.PP
+Obecnie opcje sieciowe nie s± jeszcze przetestowane.
+.SH DIAGNOSTYKA
+Funkcja \fBpw_auth\fR zwraca 0 je¶li program uwierzytelniania zakoñczy³
+dzia³anie z zerowym kodem powrotu, w przeciwnym wypadku warto¶æ niezerow±.
+.SH ZOBACZ TAK¯E
+.BR login (1),
+.BR passwd (1),
+.BR su (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8)
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

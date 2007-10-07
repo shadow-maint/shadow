@@ -1,0 +1,87 @@
+.\" {PTM/WK/1999-09-15}
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: newgrp.1,v 1.2 2000/10/16 21:34:43 kloczek Exp $
+.\"
+.TH NEWGRP 1
+.SH NAZWA
+newgrp \- zmieñ identyfikator grupy
+.br
+sg \- wykonaj polecenie przy innym ID grupy
+.SH SK£ADNIA
+.BR newgrp " [" - ]
+.RI [ grupa ]
+.br
+.BR sg " [" - ]
+.RI [ grupa
+.RB [ -c
+.IR polecenie ]]
+.SH OPIS
+.B newgrp
+s³u¿y do zmiany bie¿±cego identyfikatora grupy (GID) podczas sesji logowania.
+Je¿eli podano opcjonaln± flagê \fB\-\fR, to ¶rodowisko u¿ytkownika zostanie
+ponownie zainicjowane, tak jak wówczas, gdy u¿ytkownik siê loguje. Je¿eli nie
+u¿yto flagi \fB\-\fR, to bie¿±ce ¶rodowisko, ³±cznie z bie¿±cym katalogiem
+roboczym, pozostaje bez zmian.
+.PP
+.B newgrp
+zmienia bie¿±cy faktyczny identyfikator grupy na identyfikator danej grupy
+lub, je¶li nie podano nazwy grupy, na identyfikator grupy domy¶lnej, podanej
+w \fI/etc/passwd\fR.
+Je¿eli grupa posiada has³o, za¶ u¿ytkownik nie ma has³a b±d¼ nie jest jej
+cz³onkiem, to zostanie poproszony o podanie has³a.
+Je¿eli has³o grupy jest puste za¶ u¿ytkownik nie jest jej cz³onkiem, to
+efektem bêdzie odmowa dostêpu.
+.PP
+Polecenie
+.B sg
+dzia³a podobnie do \fBnewgrp\fR, lecz nie zastêpuje pow³oki u¿ytkownika,
+wiêc po zakoñczeniu \fBsg\fR powracasz do swego poprzedniego identyfikatora
+grupy.
+.B sg
+przyjmuje tak¿e pojedyncze polecenie. Podane polecenie zostanie wykonane
+w pow³oce Bourne'a i musi byæ umieszczone w cudzys³owach.
+.\" enclosed in quotes.
+.SH PRZESTROGI
+Niniejsza wersja \fBnewgrp\fR posiada wiele opcji kompilacji,
+z których tylko czê¶æ mo¿e byæ u¿yteczna w konkretnej instalacji.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/group  "  - informacja o grupach"
+.SH ZOBACZ TAK¯E
+.BR login (1),
+.BR id (1),
+.BR su (1)
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

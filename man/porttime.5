@@ -1,0 +1,84 @@
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: porttime.5,v 1.6 2000/10/16 21:34:40 kloczek Exp $
+.\"
+.TH PORTTIME 5
+.SH NAME
+porttime \- port access time file
+.SH DESCRIPTION
+.I porttime
+contains a list of tty devices, user names, and permitted login times.
+.PP
+Each entry consists of three colon separated fields.
+The first field is a comma separated list of tty devices,
+or an asterisk to indicate that all tty devices are matched by this entry.
+The second field is a comma separated list of user names, or an
+asterisk to indicated that all user names are matched by this entry.
+The third field is a comma separated list of permitted access times.
+.PP
+Each access time entry consists of zero or more days of the week,
+abbreviated \fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR,
+\fBFr\fR, and \fBSa\fR, followed by a pair of times separated by
+a hyphen.
+The abbreviation \fBWk\fR may be used to represent Monday thru Friday,
+and \fBAl\fR may be used to indicate every day.
+If no days are given, \fBAl\fR is assumed.
+.SH EXAMPLES
+The following entry allows access to user \fBjfh\fR on every port
+during weekdays from 9am to 5pm.
+.br
+.sp 1
+	*:jfh:Wk0900-1700
+.br
+.sp 1
+The following entries allow access only to the users \fBroot\fR and
+\fBoper\fR on /dev/console at any time.
+This illustrates how the
+\fI/etc/porttime\fR file is an ordered list of access times.
+Any other user would match the second entry which does not permit
+access at any time.
+.br
+.sp 1
+	console:root,oper:Al0000-2400
+.br
+	console:*:
+.br
+.sp 1
+The following entry allows access for the user \fBgames\fR on any
+port during non-working hours.
+.br
+.sp 1
+	*:games:Wk1700-0900,SaSu0000-2400
+.br
+.sp 1
+.SH FILES
+/etc/porttime \- file containing port access times
+.SH SEE ALSO
+.BR login (1)
+.SH AUTHOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

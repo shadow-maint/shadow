@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
-"POT-Creation-Date: 2000-10-12 06:20+0200\n"
+"POT-Creation-Date: 2000-10-16 23:43+0200\n"
 "PO-Revision-Date: 1999-07-09 20:02+0200\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: Vincent Renardias <vincent@ldsol.com>\n"

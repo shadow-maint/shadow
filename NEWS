@@ -1,4 +1,11 @@
-$Id: NEWS,v 1.2 2000/10/12 03:19:03 kloczek Exp $
+$Id: NEWS,v 1.3 2000/10/16 21:34:08 kloczek Exp $
+
+shadow-20001012 -> shadow-20001016:
+- conditionaly disabled body reload_nscd() because not every
+  version of nscd can handle it (this can be enabled by define
+  ENABLE_NSCD_SIGHUP) (Marek Micha³kiewicz  <marekm@linux.org.pl>)
+- fixes on autoconf/automake level for dist target,
+- Julianne F. Haugh new contact adress.
 
 shadow-20000902 => shadow-20001012
 

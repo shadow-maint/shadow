@@ -727,7 +727,7 @@ fi
 
 PACKAGE=shadow
 
-VERSION=20001012
+VERSION=20001016
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   { echo "configure: error: source directory already configured; run "make distclean" there first" 1>&2; exit 1; }
@@ -6492,8 +6492,7 @@ trap 'rm -fr `echo "libmisc/Makefile man/Makefile man/pl/Makefile
 	lib/Makefile src/Makefile Makefile
 	contrib/Makefile debian/Makefile doc/Makefile etc/Makefile
 	intl/Makefile intl/po2tbl.sed po/Makefile.in
-	etc/pam.d/Makefile old/Makefile
-	shadow-utils.spec config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
+	etc/pam.d/Makefile shadow-utils.spec config.h" | sed "s/:[^ ]*//g"` conftest*; exit 1' 1 2 15
 EOF
 cat >> $CONFIG_STATUS <<EOF
 
@@ -6629,8 +6628,7 @@ CONFIG_FILES=\${CONFIG_FILES-"libmisc/Makefile man/Makefile man/pl/Makefile
 	lib/Makefile src/Makefile Makefile
 	contrib/Makefile debian/Makefile doc/Makefile etc/Makefile
 	intl/Makefile intl/po2tbl.sed po/Makefile.in
-	etc/pam.d/Makefile old/Makefile
-	shadow-utils.spec"}
+	etc/pam.d/Makefile shadow-utils.spec"}
 EOF
 cat >> $CONFIG_STATUS <<\EOF
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then

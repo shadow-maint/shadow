@@ -1,0 +1,373 @@
+.\" {PTM/WK/0.1/VIII-1999}
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: useradd.8,v 1.3 2000/10/16 21:34:43 kloczek Exp $
+.\"
+.TH USERADD 8
+.SH NAZWA
+useradd - twórz nowego u¿ytkownika lub zmieñ domy¶ln± informacjê o nowym
+.SH SK£ADNIA
+.TP 8
+.B useradd
+.\" .RB [ -A
+.\" .RI { metoda | \fBDEFAULT\fR "},... ]"
+.RB [ -c
+.IR komentarz ]
+.RB [ -d
+.IR katalog_domowy ]
+.br
+.RB [ -e
+.IR data_wa¿no¶ci ]
+.RB [ -f
+.IR dni_nieaktywno¶ci ]
+.br
+.RB [ -g
+.IR grupa_pocz±tkowa ]
+.RB [ -G
+.IR grupa [,...]]
+.br
+.RB [ -m " [" -k
+.IR katalog_wzorców ]]
+.RB [ -s
+.IR pow³oka ]
+.br
+.RB [ -u
+.IR uid " ["
+.BR -o ]]
+.I login
+.TP 8
+.B useradd
+\fB-D\fR
+[\fB-g\fI domy¶lna_grupa\fR]
+[\fB-b\fI katalog_bazowy\fR]
+.br
+[\fB-f\fI domy¶lne_dni_nieaktywno¶ci\fR]
+[\fB-e\fI domy¶lna_data_wa¿no¶ci\fR]
+.br
+[\fB-s\fI domy¶lna_pow³oka\fR]
+.SH OPIS
+.SS Tworzenie nowych u¿ytkowników
+.\" .SS Creating New Users
+Wywo³ane bez opcji \fB-D\fR, polecenie \fBuseradd\fR tworzy nowe konto
+u¿ytkownika pos³uguj±c siê warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi
+warto¶ciami z systemu.
+W zale¿no¶ci od potrzeb i opcji wiersza poleceñ, do plików systemowych
+zostanie wprowadzone nowe konto u¿ytkownika, utworzony bêdzie jego katalog
+domowy, do którego przekopiowane zostan± pliki startowe.
+Polecenie \fBuseradd\fR posiada nastêpuj±ce opcje:
+.\" .IP "\fB-A {\fImetoda\fR|\fBDEFAULT\fR},..."
+.\" Okre¶la metodê autentykacji u¿ytkownika.
+.\" Metoda autentykacji jest nazw± programu odpowiedzialnego za weryfikacjê
+.\" to¿samo¶ci u¿ytkownika.
+.\" Mo¿e zostaæ u¿yty ³añcuch \fBDEFAULT\fR w celu zmiany metody autentykacji
+.\" u¿ytkownika na standardow± metodê has³a systemowego.
+.\" Argumentem tej opcji jest lista oddzielonych przecinkami nazw programów.
+.\" Mo¿e ona zawieraæ ³añcuch \fBDEFAULT\fR tylko jednokrotnie.
+.IP "\fB-c \fIkomentarz\fR"
+Pole komentarza dla zak³adanego u¿ytkownika w pliku hase³.
+.IP "\fB-d \fIkatalog_domowy\fR"
+Warto¶æ \fIkatalog_domowy\fR zostanie u¿yta do okre¶lenia katalogu logowania
+nowotworzonego u¿ytkownika.
+Domy¶lnie do \fIdomy¶lny_domowy\fR dodawana jest nazwa u¿ytkownika
+(\fIlogin\fR) tworz±c pe³n± nazwê katalogu logowania.
+.IP "\fB-e \fIdata_wa¿no¶ci\fR"
+Data, od której konto u¿ytkownika zostanie wy³±czone.
+Data podawana jest w formacie \fIMM/DD/YY\fR.
+.IP "\fB-f \fIdni_nieaktywno¶ci\fR"
+Liczba dni po wyga¶niêciu has³a do sta³ego wy³±czenia konta.
+Warto¶æ 0 wy³±cza konto natychmiast po przeterminowaniu has³a, za¶ warto¶æ
+-1 wy³±cza tê cechê. Domy¶ln± warto¶ci± jest -1.
+.IP "\fB-g \fIgrupa_pocz±tkowa\fR"
+Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
+istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
+Domy¶lnym numerem grupy jest 1.
+.IP "\fB-G \fIgrupa,[...]\fR"
+Lista dodatkowych grup, do których równie¿ nale¿y u¿ytkownik.
+Ka¿da grupa oddzielona jest od nastêpnej przecinkiem, bez wtr±conej spacji.
+Do grup odnosz± siê te same ograniczenia, które obowi±zuj± przy grupie podanej
+w opcji \fB-g\fR.
+Domy¶lnie u¿ytkownik nale¿y tylko do grupy pocz±tkowej.
+.IP \fB-m\fR
+Je¶li nie istnieje katalog domowy u¿ytkownika, to zostanie on utworzony.
+Je¶li pos³u¿ono siê opcj± \fB-k\fR, to bêd± do niego przekopiowane wzorcowe
+pliki startowe zawarte w \fIkatalogu_wzorców\fR. W przeciwnym przypadku,
+zamiast nich zostan± u¿yte pliki zawarte w \fI/etc/skel\fR.
+W katalogu domowym u¿ytkownika zostan± równie¿ utworzone
+podkatalogi zawarte w \fIkatalogu_wzorców\fR lub \fI/etc/skel\fR.
+Opcja \fB-k\fR jest dozwolona tylko w po³±czeniu z opcj± \fB-m\fR.
+Domy¶lnym dzia³aniem jest nie tworzenie katalogu i nie kopiowanie
+jakichkolwiek plików.
+.IP "\fB-s \fIpow³oka\fR"
+Nazwa pow³oki (shell) u¿ytkownika. Ustawienie tego pola na puste
+powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
+.IP "\fB-u \fIuid\fR"
+Numeryczna warto¶æ identyfikatora u¿ytkownika (user's ID). Warto¶æ ta musi
+byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
+Domy¶lnie u¿ywana jest tu najmniejsza warto¶æ identyfikatora wiêksza od 99
+i wiêksza od identyfikatorów pozosta³ych u¿ytkowników.
+Warto¶ci od 0 do 99 s± zwykle zarezerwowane dla kont systemowych.
+.SS Zmiana warto¶ci domy¶lnych
+Wywo³ane z opcj± \fB-D\fR, polecenie \fBuseradd\fR albo wy¶wietli bie¿±ce
+warto¶ci domy¶lne, albo zaaktualizuje domy¶lne warto¶ci z wiersza poleceñ.
+Dozwolonymi opcjami s±:
+.IP "\fB-b \fIkatalog_bazowy\fR"
+Pocz±tkowy przedrostek ¶cie¿ki dla katalogu domowego nowego u¿ytkownika.
+Je¶li przy tworzeniu nowego konta nie u¿yto opcji \fB-d\fR, to
+na koniec \fIkatalogu_bazowego\fR zostanie dodana nazwa u¿ytkownika, tworz±c
+now± nazwê katalogu.
+.IP "\fB-e \fIdomy¶lna_data_wa¿no¶ci\fR"
+Data, od której konto u¿ytkownika zostanie wy³±czone.
+.IP "\fB-f \fIdomy¶lne_dni_nieaktywno¶ci\fR"
+Liczba dni po wyga¶niêciu has³a do sta³ego wy³±czenia konta.
+.IP "\fB-g \fIdomy¶lna_grupa\fR"
+Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
+istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
+.IP "\fB-s \fIdomy¶lna_pow³oka\fR"
+Nazwa pow³oki (shell) dla nowych u¿ytkowników. Podany program bêdzie u¿yty
+dla wszystkich przysz³uych nowych kont u¿ytkowników.
+.PP
+Bez podania opcji \fBuseradd\fR wy¶wietla bie¿±ce ustawienia domy¶lne.
+.SH UWAGI
+Administrator systemu odpowiedzialny jest za umieszczenie domy¶lnych
+plików u¿ytkownika w katalogu \fI/etc/skel\fR.
+.SH OSTRZE¯ENIA
+Nie mo¿esz dodaæ u¿ytkownika do grupy NIS. Musi to zostaæ wykonane
+na serwerze NIS.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - bezpieczna informacja o kontach u¿ytkowników"
+.br
+.IR /etc/group " - informacja o grupach"
+.br
+.IR /etc/default/useradd " - informacja o ustawieniach domy¶lnych"
+.br
+.IR /etc/skel " - katalog zawieraj±cy pliki domy¶lne"
+.SH ZOBACZ TAK¯E
+.BR chfn (1),
+.BR chsh (1),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR passwd (1),
+.BR userdel (8),
+.BR usermod (8).
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Istnieje wiele programów i skryptów do zarz±dzania kontami
+u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
+siê, ¿e korzystasz z w³a¶ciwej dokumentacji.
+.\" {PTM/WK/0.1/VIII-1999}
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: useradd.8,v 1.3 2000/10/16 21:34:43 kloczek Exp $
+.\"
+.TH USERADD 8
+.SH NAZWA
+useradd - twórz nowego u¿ytkownika lub zmieñ domy¶ln± informacjê o nowym
+.SH SK£ADNIA
+.TP 8
+.B useradd
+.\" .RB [ -A
+.\" .RI { metoda | \fBDEFAULT\fR "},... ]"
+.RB [ -c
+.IR komentarz ]
+.RB [ -d
+.IR katalog_domowy ]
+.br
+.RB [ -e
+.IR data_wa¿no¶ci ]
+.RB [ -f
+.IR dni_nieaktywno¶ci ]
+.br
+.RB [ -g
+.IR grupa_pocz±tkowa ]
+.RB [ -G
+.IR grupa [,...]]
+.br
+.RB [ -m " [" -k
+.IR katalog_wzorców ]]
+.RB [ -s
+.IR pow³oka ]
+.br
+.RB [ -u
+.IR uid " ["
+.BR -o ]]
+.I login
+.TP 8
+.B useradd
+\fB-D\fR
+[\fB-g\fI domy¶lna_grupa\fR]
+[\fB-b\fI katalog_bazowy\fR]
+.br
+[\fB-f\fI domy¶lne_dni_nieaktywno¶ci\fR]
+[\fB-e\fI domy¶lna_data_wa¿no¶ci\fR]
+.br
+[\fB-s\fI domy¶lna_pow³oka\fR]
+.SH OPIS
+.SS Tworzenie nowych u¿ytkowników
+Wywo³ane bez opcji \fB-D\fR, polecenie \fBuseradd\fR tworzy nowe konto
+u¿ytkownika pos³uguj±c siê warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi
+warto¶ciami z systemu.
+W zale¿no¶ci od potrzeb i opcji wiersza poleceñ, do plików systemowych
+zostanie wprowadzone nowe konto u¿ytkownika, utworzony bêdzie jego katalog
+domowy, do którego przekopiowane zostan± pliki startowe.
+Polecenie \fBuseradd\fR posiada nastêpuj±ce opcje:
+.\" .IP "\fB-A {\fImetoda\fR|\fBDEFAULT\fR},..."
+.\" Okre¶la metodê autentykacji u¿ytkownika.
+.\" Metoda autentykacji jest nazw± programu odpowiedzialnego za weryfikacjê
+.\" to¿samo¶ci u¿ytkownika.
+.\" Mo¿e zostaæ u¿yty ³añcuch \fBDEFAULT\fR w celu zmiany metody autentykacji
+.\" u¿ytkownika na standardow± metodê has³a systemowego.
+.\" Argumentem tej opcji jest lista oddzielonych przecinkami nazw programów.
+.\" Mo¿e ona zawieraæ ³añcuch \fBDEFAULT\fR tylko jednokrotnie.
+.IP "\fB-c \fIkomentarz\fR"
+Pole komentarza dla zak³adanego u¿ytkownika w pliku hase³.
+.IP "\fB-d \fIkatalog_domowy\fR"
+Warto¶æ \fIkatalog_domowy\fR zostanie u¿yta do okre¶lenia katalogu logowania
+nowotworzonego u¿ytkownika.
+Domy¶lnie do \fIdomy¶lny_domowy\fR dodawana jest nazwa u¿ytkownika
+(\fIlogin\fR) tworz±c pe³n± nazwê katalogu logowania.
+.IP "\fB-e \fIdata_wa¿no¶ci\fR"
+Data, od której konto u¿ytkownika zostanie wy³±czone.
+Data podawana jest w formacie \fIMM/DD/YY\fR.
+.IP "\fB-f \fIdni_nieaktywno¶ci\fR"
+Liczba dni po wyga¶niêciu has³a do sta³ego wy³±czenia konta.
+Warto¶æ 0 wy³±cza konto natychmiast po przeterminowaniu has³a, za¶ warto¶æ
+-1 wy³±cza tê cechê. Domy¶ln± warto¶ci± jest -1.
+.IP "\fB-g \fIgrupa_pocz±tkowa\fR"
+Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
+istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
+Domy¶lnym numerem grupy jest 1.
+.IP "\fB-G \fIgrupa,[...]\fR"
+Lista dodatkowych grup, do których równie¿ nale¿y u¿ytkownik.
+Ka¿da grupa oddzielona jest od nastêpnej przecinkiem, bez wtr±conej spacji.
+Do grup odnosz± siê te same ograniczenia, które obowi±zuj± przy grupie podanej
+w opcji \fB-g\fR.
+Domy¶lnie u¿ytkownik nale¿y tylko do grupy pocz±tkowej.
+.IP \fB-m\fR
+Je¶li nie istnieje katalog domowy u¿ytkownika, to zostanie on utworzony.
+Je¶li pos³u¿ono siê opcj± \fB-k\fR, to bêd± do niego przekopiowane wzorcowe
+pliki startowe zawarte w \fIkatalogu_wzorców\fR. W przeciwnym przypadku,
+zamiast nich zostan± u¿yte pliki zawarte w \fI/etc/skel\fR.
+W katalogu domowym u¿ytkownika zostan± równie¿ utworzone
+podkatalogi zawarte w \fIkatalogu_wzorców\fR lub \fI/etc/skel\fR.
+Opcja \fB-k\fR jest dozwolona tylko w po³±czeniu z opcj± \fB-m\fR.
+Domy¶lnym dzia³aniem jest nie tworzenie katalogu i nie kopiowanie
+jakichkolwiek plików.
+.IP "\fB-s \fIpow³oka\fR"
+Nazwa pow³oki (shell) u¿ytkownika. Ustawienie tego pola na puste
+powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
+.IP "\fB-u \fIuid\fR"
+Numeryczna warto¶æ identyfikatora u¿ytkownika (UID). Warto¶æ ta musi
+byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
+Domy¶lnie u¿ywana jest tu najmniejsza warto¶æ identyfikatora wiêksza od 99
+i wiêksza od identyfikatorów pozosta³ych u¿ytkowników.
+Warto¶ci od 0 do 99 s± zwykle zarezerwowane dla kont systemowych.
+.SS Zmiana warto¶ci domy¶lnych
+Wywo³ane z opcj± \fB-D\fR, polecenie \fBuseradd\fR albo wy¶wietli bie¿±ce
+warto¶ci domy¶lne, albo zaaktualizuje domy¶lne warto¶ci z wiersza poleceñ.
+Dozwolonymi opcjami s±:
+.IP "\fB-b \fIkatalog_bazowy\fR"
+Pocz±tkowy przedrostek ¶cie¿ki dla katalogu domowego nowego u¿ytkownika.
+Je¶li przy tworzeniu nowego konta nie u¿yto opcji \fB-d\fR, to
+na koniec \fIkatalogu_bazowego\fR zostanie dodana nazwa u¿ytkownika, tworz±c
+now± nazwê katalogu.
+.IP "\fB-e \fIdomy¶lna_data_wa¿no¶ci\fR"
+Data, od której konto u¿ytkownika zostanie wy³±czone.
+.IP "\fB-f \fIdomy¶lne_dni_nieaktywno¶ci\fR"
+Liczba dni po wyga¶niêciu has³a do sta³ego wy³±czenia konta.
+.IP "\fB-g \fIdomy¶lna_grupa\fR"
+Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
+istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
+.IP "\fB-s \fIdomy¶lna_pow³oka\fR"
+Nazwa pow³oki (shell) dla nowych u¿ytkowników. Podany program bêdzie u¿yty
+dla wszystkich przysz³ych nowych kont u¿ytkowników.
+.PP
+Bez podania opcji \fBuseradd\fR wy¶wietla bie¿±ce ustawienia domy¶lne.
+.SH UWAGI
+Administrator systemu odpowiedzialny jest za umieszczenie domy¶lnych
+plików u¿ytkownika w katalogu \fI/etc/skel\fR.
+.SH OSTRZE¯ENIA
+Nie mo¿esz dodaæ u¿ytkownika do grupy NIS. Musi to zostaæ wykonane
+na serwerze NIS.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - bezpieczna informacja o kontach u¿ytkowników"
+.br
+.IR /etc/group " - informacja o grupach"
+.br
+.IR /etc/default/useradd " - ustawienia domy¶lne"
+.br
+.IR /etc/skel " - katalog plików domy¶lnych"
+.SH ZOBACZ TAK¯E
+.BR chfn (1),
+.BR chsh (1),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR passwd (1),
+.BR userdel (8),
+.BR usermod (8).
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Istnieje wiele programów i skryptów do zarz±dzania kontami
+u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
+siê, ¿e korzystasz z w³a¶ciwej dokumentacji.

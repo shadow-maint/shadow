@@ -1,0 +1,66 @@
+.\" {PTM/WK/1999-09-14}
+.\" $Id: pwconv.8,v 1.1 2000/09/05 17:27:30 marekm Exp $
+.TH PWCONV 8 "26 wrze¶nia 1997"
+.SH NAZWA
+pwconv, pwunconv, grpconv, grpunconv - konwersja dot. chronionych plików hase³ i grup
+.SH SK£ADNIA
+.B pwconv
+.br
+.B pwunconv
+.br
+.B grpconv
+.br
+.B grpunconv
+.SH OPIS
+Wszystkie te cztery programy dzia³aj± na zwyk³ych i dodatkowych (shadow)
+plikach hase³ i grup:
+.IR /etc/passwd ", " /etc/group ", " /etc/shadow " i " /etc/gshadow .
+
+.B pwconv
+.RI "tworzy " shadow " z " passwd " i opcjonalnie istniej±cego " shadow .
+.B pwunconv
+.RI "tworzy " passwd " z " passwd " i " shadow " a nastêpnie usuwa " shadow .
+.B grpconv
+.RI "tworzy " gshadow " z " group " i opcjonalnie istniej±cego " gshadow .
+.B grpunconv
+.RI "tworzy " group " z " group " i " gshadow " a nastêpnie usuwa " gshadow .
+
+Ka¿dy z programów zdobywa niezbêdne blokady przed konwersj±.
+
+.BR pwconv " i " grpconv
+s± podobne. Po pierwsze, z pliku dodatkowego usuwane s± pozycje, które
+nie istniej± w pliku g³ównym. Nastêpnie, w pliku dodatkowym aktualizowane s±
+pozycje nie posiadaj±ce 'x' jako has³a w pliku g³ównym. Dodawane s± pozycje
+brakuj±ce w stosunku do pliku g³ównego. Na koniec, has³a w pliku g³ównym
+zastêpowane s± przez 'x'. Programy te mog± s³u¿yæ zarówno do pocz±tkowej
+konwersji jak i do aktualizacji dodatkowego pliku hase³ je¶li plik g³ówny
+zmieniany by³ rêcznie.
+
+Przy dodawaniu nowych wpisów do
+.IR /etc/shadow
+.B pwconv
+u¿yje warto¶ci
+.BR PASS_MIN_DAYS ", " PASS_MAX_DAYS " i " PASS_WARN_AGE
+z pliku
+.IR /etc/login.defs .
+
+.RB "Podobnie, " pwunconv " oraz " grpunconv
+s± zbli¿one.  Has³a w pliku g³ównym aktualizowane s± na podstawie pliku
+dodatkowego (shadow). Wpisy istniej±ce w pliku g³ównym, a nie posiadaj±ce
+odpowiedników w dodatkowym s± pozostawiane bez zmian. Na koniec usuwany
+jest plik dodatkowy.
+
+Czê¶æ informacji o wa¿no¶ci hase³ jest tracona przez
+.BR pwunconv .
+Przeprowadza on konwersjê tego, co potrafi.
+.SH B£ÊDY
+B³êdy w plikach hase³ czy grup (takie jak nieprawid³owe czy powtórzone
+pozycje) mog± spowodowaæ zapêtlenie siê omawianych programów lub ró¿nego
+rodzaju inne b³êdne zachowanie. Przed konwersj± na lub z dodatkowych plików
+hase³ lub grup proszê uruchomiæ \fBpwck\fR i \fBgrpck\fR, by poprawiæ tego
+rodzaju b³êdy.
+.SH ZOBACZ TAK¯E
+.BR login.defs (5),
+.BR pwck (8),
+.BR grpck (8),
+.BR shadowconfig (8)

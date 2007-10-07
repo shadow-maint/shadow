@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
-"POT-Creation-Date: 2000-10-12 06:20+0200\n"
+"POT-Creation-Date: 2000-10-16 23:43+0200\n"
 "PO-Revision-Date: 1999-08-16 21:20+0100\n"
 "Last-Translator: Kristoffer Brånemyr <ztion@swipnet.se>\n"
 "Language-Team: sv <sv@li.org>\n"

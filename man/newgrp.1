@@ -1,0 +1,80 @@
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: newgrp.1,v 1.7 2000/10/16 21:34:40 kloczek Exp $
+.\"
+.TH NEWGRP 1
+.SH NAME
+newgrp \- Change group ID
+.br
+sg \- Execute command as different group ID
+.SH SYNOPSIS
+.BR newgrp " [" - ]
+[\fIgroup\fR]
+.br
+.BR sg " [" - ]
+[\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
+.SH DESCRIPTION
+.B newgrp
+is used to change the current group ID during a login session.
+If the optional \fB\-\fR flag is given, the user's environment
+will be reinitialized as though the user had logged in, otherwise
+the current environment, including current working directory,
+remains unchanged.
+.PP
+.B newgrp
+changes the current real group ID to the named group, or to
+the default group listed in \fI/etc/passwd\fR if no group name
+is given.
+The user will be prompted for a password if they do not have a
+password and the group does, or if the user is not listed as a
+member and the group has a password.
+The user will be denied access if the group password is empty
+and the user is not listed as a member.
+.PP
+The
+.B sg
+command works similiar to \fBnewgrp\fR but does not replace the
+user's shell, so upon exit from a \fBsg\fR command, you are
+returned to your previous group ID.
+.B sg
+also accepts a command.
+The command will be executed with the Bourne shell and must be
+enclosed in quotes.
+.SH CAVEATS
+This version of \fBnewgrp\fR has many compilation options,
+only some of which may be in use at any particular site.
+.SH FILES
+/etc/passwd \- user account information
+.br
+/etc/group \- group information
+.SH SEE ALSO
+.BR login (1),
+.BR id (1),
+.BR su (1)
+.SH AUTHOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

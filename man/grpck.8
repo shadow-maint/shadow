@@ -1,0 +1,101 @@
+.\" Copyright 1992 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: grpck.8,v 1.6 2000/10/16 21:34:40 kloczek Exp $
+.\"
+.TH GRPCK 1
+.SH NAME
+grpck \- verify integrity of group files
+.SH SYNOPSIS
+\fBgrpck\fR [\fB-r\fR] [\fIgroup\fR \fIshadow\fR]
+.SH DESCRIPTION
+\fBgrpck\fR verifies the integrity of the system authentication information.
+All entries in the \fI/etc/group\fR and \fI/etc/gshadow\fR are checked to
+see that the entry has the proper format and valid data in each field.
+The user is prompted to delete entries that are improperly formatted or
+which have other incorrectable errors.
+.P
+Checks are made to verify that each entry has
+.sp
+.in +.5i
+- the correct number of fields
+.br
+- a unique group name
+.br
+- a valid list of members and administrators
+.in -.5i
+.sp
+.P
+The checks for correct number of fields and unique group name are fatal.
+If the entry has the wrong number of fields, the user will be prompted to
+delete the entire line.
+If the user does not answer affirmatively, all further checks are bypassed.
+An entry with a duplicated group name is prompted for deletion, but the
+remaining checks will still be made.
+All other errors are warnings and the user is encouraged to run the
+\fBgroupmod\fR command to correct the error.
+.P
+The commands which operate on the \fI/etc/group\fR file are not able to
+alter corrupted or duplicated entries.
+\fBgrpck\fR should be used in those circumstances to remove the offending
+entry.
+.SH OPTIONS
+By default, \fBgrpck\fR operates on the files \fI/etc/group\fR and
+\fI/etc/gshadow\fR.
+The user may select alternate files with the \fIgroup\fR and \fIshadow\fR
+parameters.
+Additionally, the user may execute the command in read-only mode by
+specifying the \fB-r\fR flag.
+This causes all questions regarding changes to be answered \fBno\fR
+without user intervention.
+.SH FILES
+/etc/group \- group account information
+.br
+/etc/gshadow \- encrypted passwords and group administrator information
+.br
+/etc/passwd \- user information
+.SH SEE ALSO
+.BR groupmod (8),
+.BR group (5),
+.BR passwd (5),
+.BR shadow (5)
+.SH DIAGNOSTICS
+The \fBgrpck\fR command exits with the following values:
+.IP 0 5
+Success
+.IP 1 5
+Syntax Error
+.IP 2 5
+One or more bad group entries
+.IP 3 5
+Cannot open group files
+.IP 4 5
+Cannot lock group files
+.IP 5 5
+Cannot update group files
+.SH AUTHOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Shadow 980726\n"
-"POT-Creation-Date: 2000-10-12 06:20+0200\n"
+"POT-Creation-Date: 2000-10-16 23:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>\n"
 "Language-Team: Hellenic <el@li.org>\n"

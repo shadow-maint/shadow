@@ -1,0 +1,63 @@
+.\" Copyright 1992, Phillip Street and Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
+.\"	$Id: lastlog.8,v 1.7 2000/10/16 21:34:40 kloczek Exp $
+.\"
+.TH LASTLOG 8
+.SH NAME
+lastlog \- examine lastlog file
+.SH SYNOPSIS
+.B lastlog
+.RB [ -u
+.IR login-name ]
+.RB [ -t
+.IR days ]
+.SH DESCRIPTION
+\fBlastlog\fR formats and prints the contents of the last login log,
+\fI/var/log/lastlog\fR.  The \fBlogin-name\fR, \fBport\fR, and \fBlast login 
+time\fR will be printed.
+The default (no flags) causes lastlog entries to be printed, sorted
+by the numerical UID.
+Entering \fB-u \fIlogin-name\fR flag will
+cause the lastlog record for \fIlogin-name\fR only to be printed.
+Entering \fB-t \fIdays\fR will cause only the
+lastlogins more recent than \fIdays\fR to be printed.
+The \fB-t\fR flag overrides the use of \fB-u\fR.
+.PP
+If the user has never logged in the message \fB"**Never logged in**"\fR will 
+be displayed instead of the port and time.
+.SH FILES
+/var/log/lastlog \- lastlog logging file
+.SH CAVEATS
+Large gaps in uid numbers will cause the lastlog program to run longer with
+no output to the screen (i.e. if mmdf=800 and last uid=170, program will
+appear to hang as it processes uid 171-799).
+.SH AUTHORS
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.br
+Phillip Street

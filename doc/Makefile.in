@@ -104,7 +104,7 @@ VERSION = @VERSION@
 YACC = @YACC@
 l = @l@
 
-EXTRA_DIST = ANNOUNCE HOWTO LICENSE LSM README  README.limits README.linux README.mirrors README.nls README.pam  README.platforms README.shadow-paper README.sun4  WISHLIST console.c.spec.txt cracklib26.diff
+EXTRA_DIST = ANNOUNCE HOWTO LICENSE LSM README  README.limits README.linux README.mirrors README.nls README.pam  README.platforms README.sun4 WISHLIST console.c.spec.txt cracklib26.diff
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h

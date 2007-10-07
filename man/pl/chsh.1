@@ -1,0 +1,70 @@
+.\" {PTM/WK/1999-09-25}
+.\" Copyright 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH CHSH 1
+.SH NAZWA
+chsh \- zmieñ pow³okê zg³oszeniow±
+.SH SK£ADNIA
+.TP 5
+.B chsh
+.RB [ -s
+.IR pow³oka ]
+.RI [ u¿ytkownik ]
+.SH OPIS
+\fBchsh\fR zmienia pow³okê zg³oszeniow± u¿ytkownika.
+Okre¶la nazwê pocz±tkowego polecenia zg³oszeniowego u¿ytkownika.
+Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie pow³okê zg³oszeniow± w³asnego konta,
+superu¿ytkownik mo¿e zmieniæ pow³okê zg³oszeniow± dla dowolnego konta.
+.PP
+Jedynym ograniczeniem na³o¿onym na pow³okê zg³oszeniow± jest to, ¿e jej nazwa
+musi byæ ujêta w \fI/etc/shells\fR, chyba ¿e polecenie \fBchsh\fR wywo³ywane
+jest przez superu¿ytkownika, wówczas mo¿e byæ podana nazwa dowolnego polecenia.
+U¿ytkownicy kont z ograniczon± pow³ok± logowania nie mog± jej zmieniaæ.
+Odradza siê z tego powodu umieszczanie \fB/bin/rsh\fR w pliku \fI/etc/shells\fR,
+gdy¿ przypadkowa zmiana na pow³okê ograniczon± uniemo¿liwi u¿ytkownikowi
+jak±kolwiek zmianê pow³oki logowania, nawet z powrotem na dotychczasow±.
+.PP
+je¿eli nie podano opcji \fB-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
+proponuj±c u¿ytkownikowi bie¿±c± pow³okê logowania. Wprowad¼ now± warto¶æ
+do pola lub pozostaw je puste, by pozostawiæ aktualn± warto¶æ.
+Bie¿±ca warto¶æ wy¶wietlana jest pomiêdzy par± znaczników \fB[ ]\fR.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shells " - lista dozwolonych pow³ok zg³oszeniowych"
+.SH ZOBACZ TAK¯E
+.BR chfn (1),
+.BR passwd (5)
+.SH AUTOR
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Istnieje wiele programów i skryptów do zarz±dzania kontami
+u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
+siê, ¿e korzystasz z w³a¶ciwej dokumentacji.

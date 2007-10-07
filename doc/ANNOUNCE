@@ -1,4 +1,4 @@
-$Id: ANNOUNCE,v 1.4 2000/08/26 18:27:09 marekm Exp $
+$Id: ANNOUNCE,v 1.5 2000/10/16 21:34:39 kloczek Exp $
 
 [ This is the original comp.os.linux.announce posting (only the
   author's name and e-mail address has been updated), kept here
@@ -10,7 +10,7 @@ $Id: ANNOUNCE,v 1.4 2000/08/26 18:27:09 marekm Exp $
 This is a new beta release of the Shadow Password Suite for Linux.
 Many bugs have been reported (and fixed!), and the package is now
 under a BSD-style copyright.  It was written by Julianne F. Haugh
-<jfh@austin.ibm.com>, and the Linux port is now maintained by me.
+<jockgrrl@ix.netcom.com>, and the Linux port is now maintained by me.
 
 Again, this is beta software which may still have some bugs, please
 treat it as such.  Please don't install it if you don't know what
@@ -34,7 +34,7 @@ Version:	3.3.3-951218
 Entered-date:	18DEC95
 Description:	
 Keywords:	login passwd security shadow
-Author:		jfh@austin.ibm.com (Julie Haugh)
+Author:		jfh@austin.ibm.com (Julianne Frances Haugh)
 Maintained-by:	marekm@i17linuxb.ists.pwr.wroc.pl (Marek Michalkiewicz)
 Primary-site:	sunsite.unc.edu /pub/Linux/system/Admin
 		220K shadow-951218.tar.gz

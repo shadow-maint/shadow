@@ -1,8 +1,4 @@
 
-AUTOMAKE_OPTIONS = 1.0 foreign
-
-SUBDIRS = pl
-
 man_MANS = \
 	chage.1 \
 	chfn.1 \
@@ -12,8 +8,6 @@ man_MANS = \
 	newgrp.1 \
 	passwd.1 \
 	su.1 \
-	shadow.3 \
-	dialups.5 \
 	faillog.5 \
 	limits.5 \
 	login.access.5 \
@@ -24,7 +18,6 @@ man_MANS = \
 	suauth.5 \
 	adduser.8 \
 	chpasswd.8 \
-	dpasswd.8 \
 	faillog.8 \
 	groupadd.8 \
 	groupdel.8 \
@@ -37,7 +30,7 @@ man_MANS = \
 	mkpasswd.8 \
 	newusers.8 \
 	pwck.8 \
-	pwunconv.8
+	pwunconv.8 \
 	pwconv.8 \
 	shadowconfig.8 \
 	useradd.8 \
@@ -45,7 +38,9 @@ man_MANS = \
 	usermod.8 \
 	vipw.8
 
-EXTRA_DIST = groups.1 id.1 pw_auth.3 pwauth.8 sulogin.8
+EXTRA_DIST = $(man_MANS) \
+	groups.1 id.1 pw_auth.3 shadow.3 pwauth.8 sulogin.8 \
+	dpasswd.8
 
 # subdirectories for translated manual pages
 SUBDIRS = pl

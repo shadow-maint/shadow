@@ -8,7 +8,7 @@ Description:    Shadow password file utilities.  This package includes
                 additional tools to maintain password and group files
                 (that work with both shadow and non-shadow passwords).
 Keywords:       login passwd security shadow
-Author:         jfh@austin.ibm.com (Julianne F. Haugh)
+Author:         jockgrrl@ix.netcom.com (Julianne F. Haugh)
 Maintained-by:  kloczek@rudy.mif.pg.gda.pl (Tomasz Kloczko)
                 marekm@linux.org.pl (Marek Michalkiewicz) - previous maintainer
 Primary-site:   ftp://ftp.pld.org.pl/software/shadow/
