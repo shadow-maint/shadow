@@ -1,0 +1,79 @@
+.\" $Id: limits.5,v 1.4 2005/12/01 20:38:27 kloczek Exp $
+.TH LIMITS 5
+.SH NAZWA
+limits \- definicja ograniczeń zasobów
+.SH OPIS
+Plik
+.I limits
+(domyślnie /etc/limits lub LIMITS_FILE zdefiniowane w config.h)
+opisuje ograniczenia zasobów, jakie chciałbyś narzucić użytkownikom.
+Właścicielem tego pliku powinien być użytkownik root i wyłącznie dla niego
+plik ten powinien być dostępny do odczytu.
+.PP
+Domyślnie użytkownikowi 'root' nie są narzucane żadne ograniczenia.
+W rzeczywistości, przy użyciu tego sposobu nie jest możliwe narzucenie limitów
+dla kont równoważnych root (kont z UID równym 0).
+.PP
+Każdy wiersz definiuje ograniczenie dla użytkownika w postaci:
+.sp
+.I	użytkownik ŁAŃCUCH_OGRANICZEŃ
+.PP
+\fBŁAŃCUCH OGRANICZEŃ\fP składa się z połączonych definicji ograniczeń zasobów.
+Każde ograniczenie opisywane jest literą z następującą po niej wartością
+numeryczną limitu.
+.PP
+Dozwolone są następujące identyfikatory:
+.sp
+A: max. przestrzeń adresowa (KB)
+.br
+C: max. rozmiar pliku core (KB)
+.br
+D: max. rozmiar danych (KB)
+.br
+F: maksymalny rozmiar pliku (KB)
+.br
+M: max. locked\-in\-memory address space (KB)
+.br
+N: max. liczba otwartych plików
+.br
+R: max. resident set size (KB)
+.br
+S: max. rozmiar stosu (KB)
+.br
+T: max. czas procesora (CPU) (MIN)
+.br
+U: max. liczba procesów
+.br
+L: max. liczba sesji pracy dla tego użytkownika
+.br
+P: priorytet procesu, ustawiany przez \fBsetpriority\fR(2).
+.PP
+Na przykład, \fIL2D2048N5\fP jest poprawnym \fBŁAŃCUCHEM OGRANICZEŃ\fP.
+Z uwagi na lepszą czytelności przyjęto, że poniższe zapisy są równoważne:
+.sp
+nazwa_użytkownika L2D2048N5
+.br
+nazwa_użytkownika L2 D2048 N5
+.PP
+Należy podkreślić, że reszta wiersza po \fInazwie_użytkownika\fP traktowana
+jest jako łańcuch ograniczeń, zatem komentarze nie są dozwolone. Nieprawidłowy
+łańcuch ograniczeń zostanie odrzucony (nie będzie brany pod uwagę) przez
+program login.
+.PP
+Nazwa użytkownika równa "\fB*\fP" oznacza wpis domyślny.
+Jeżeli w pliku \fBLIMITS_FILE\fP posiadasz wiele takich wpisów, to jako
+domyślny zostanie użyty ostatni z nich.
+.PP
+Pojedyncza kreska "\fB\-\fP" całkowicie wyłącza ograniczenia dla użytkownika.
+.PP
+Zauważ też, proszę, że wszystkie te ograniczenia definiowane są w odniesieniu
+do pojedynczej sesji (per login). Nie są one globalne ani stałe. Być może będą
+kiedyś ograniczenia globalne, ale na razie tyle musi wystarczyć ;)
+.SH PLIKI
+.I /etc/limits
+.SH ZOBACZ TAKŻE
+.BR login (1),
+.BR setpriority (2),
+.BR setrlimit (2)
+.SH AUTOR
+Cristian Gafton (gafton@sorosis.ro)

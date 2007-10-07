@@ -1,0 +1,73 @@
+.\"     Title: porttime
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Filformat och konversioner
+.\"    Source: Filformat och konversioner
+.\"
+.TH "PORTTIME" "5" "20\-07\-2006" "Filformat och konversioner" "Filformat och konversioner"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+porttime \- port access time file
+.SH "BESKRIVNING"
+.PP
+\fIporttime\fR
+innehåller en lista av tty\-enheter, användarnamn och tillåtna inloggningstider.
+.PP
+Each entry consists of three colon separated fields. The first field is a comma separated list of tty devices, or an asterisk to indicate that all tty devices are matched by this entry. The second field is a comma separated list of user names, or an asterisk to indicated that all user names are matched by this entry. The third field is a comma separated list of permitted access times.
+.PP
+Each access time entry consists of zero or more days of the week, abbreviated
+\fISu\fR,
+\fIMo\fR,
+\fITu\fR,
+\fIWe\fR,
+\fITh\fR,
+\fIFr\fR, and
+\fISa\fR, followed by a pair of times separated by a hyphen. The abbreviation
+\fIWk\fR
+may be used to represent Monday thru Friday, and
+\fIAl\fR
+may be used to indicate every day. If no days are given,
+\fIAl\fR
+is assumed.
+.SH "EXEMPEL"
+.PP
+Följande post tillåter åtkomst för användaren
+\fBjfh\fR
+på varje port under veckodagar från 09.00 till 17.00.
+.PP
+*:jfh:Wk0900\-1700
+.PP
+De följande posterna tillåter åtkomst endast till användarna
+\fIroot\fR
+och
+\fIoper\fR
+på
+\fI/dev/console\fR
+när som helst. Detta illustrerar hur filen
+\fI/etc/porttime\fR
+är en ordnad lista för åtkomsttider. Alla andra användare skulle matcha den andra poster, vilken inte tillåter någon Ã\(Yetkomst oavsett tid.
+.sp
+.RS 3n
+.nf
+      console:root,oper:Al0000\-2400
+      console:*:
+    
+.fi
+.RE
+.PP
+Fölajnde post tillåter åtkomst för användaren
+\fIgames\fR
+på valfri port men inte under arbetstid.
+.PP
+*:games:Wk1700\-0900,SaSu0000\-2400
+.SH "FILER"
+.TP 3n
+\fI/etc/porttime\fR
+Fil som innehåller portåtkomst
+.SH "SE OCKSÅ"
+.PP
+\fBlogin\fR(1).

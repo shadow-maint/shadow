@@ -1,4 +1,22 @@
+2006-08-03  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* man/fr/Makefile.am:
+	removed whitespaces following trailing backslashes.
+
+	* NEWS, configure.in: release 4.0.18.1.
+
+	* man/Makefile.am, man/fr/Makefile.am, man/it/Makefile.am, man/ja/Makefile.am, man/pl/Makefile.am, man/ru/Makefile.am, man/sv/Makefile.am, NEWS:
+	fixed missing man pages in dist tar ball necessary on build when PAM is disabled.
+
+	* NEWS, src/groupmems.c:
+	fixed groupmems compilation when PAM is disabled (by Johannes Winkelmann <jw@smts.ch>).
+
+	* configure.in:
+	typo s/followig/following/ (by Johannes Winkelmann <jw@smts.ch>).
+
 2006-08-01  Tomasz K³oczko  <kloczek@pld.org.pl>
+
+	* NEWS: release date corrected.
 
 	* NEWS, src/su.c:
 	fixed set enviroment too early when using PAM, so move it to !USE_PAM

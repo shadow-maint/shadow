@@ -1,16 +1,6 @@
 mandir = @mandir@/sv
 
-if USE_PAM
-man_nonpam =
-else
-man_nonpam = \
-	limits.5 \
-	login.access.5 \
-	porttime.5
-endif
-                        
 man_MANS = \
-	$(man_nonpam) \
 	chage.1 \
 	chfn.1 \
 	chgpasswd.8 \
@@ -52,6 +42,15 @@ man_MANS = \
 	usermod.8 \
 	vigr.8 \
 	vipw.8
+
+man_nopam = \
+	limits.5 \
+	login.access.5 \
+	porttime.5
+
+if !USE_PAM
+man_MANS += $(man_nopam)
+endif
 
 EXTRA_DIST = \
 	$(man_MANS) \

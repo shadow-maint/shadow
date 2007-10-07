@@ -2278,7 +2278,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.18
+ VERSION=4.0.18.1
 
 
 cat >>confdefs.h <<_ACEOF
@@ -29138,7 +29138,7 @@ fi
 
 
 echo
-echo "shadow will be compiled with the followig feactures:"
+echo "shadow will be compiled with the following features:"
 echo
 echo "	auditing support:		$with_audit"
 echo "	CrackLib support:		$with_libcrack"

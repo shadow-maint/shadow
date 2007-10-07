@@ -37,8 +37,8 @@
 #include <sys/types.h>
 #ifdef USE_PAM
 #include "pam_defs.h"
-#include <pwd.h>
 #endif				/* USE_PAM */
+#include <pwd.h>
 #include "defines.h"
 #include "groupio.h"
 

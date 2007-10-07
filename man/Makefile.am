@@ -50,17 +50,8 @@ man_XMANS = \
 	usermod.8.xml \
 	vipw.8.xml
 
-if USE_PAM
-man_nonpam =
-else
-man_nonpam = \
-	limits.5 \
-	login.access.5 \
-	porttime.5
-endif
-
 man_MANS = \
-	$(man_nonpam) \
+	$(man_nopam) \
 	chage.1 \
 	chfn.1 \
 	chgpasswd.8 \
@@ -103,10 +94,19 @@ man_MANS = \
 	vigr.8 \
 	vipw.8
 
+man_nopam = \
+	limits.5 \
+	login.access.5 \
+	porttime.5
+
+if !USE_PAM
+man_MANS += $(man_nopam)
+endif
+
 EXTRA_DIST = \
 	$(man_MANS) \
 	$(man_XMANS) \
-	$(man_nonpam) \
+	$(man_nopam) \
 	id.1 \
 	id.1.xml \
 	sulogin.8 \

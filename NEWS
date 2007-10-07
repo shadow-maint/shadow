@@ -1,4 +1,12 @@
-$Id: NEWS,v 1.482 2006/08/01 11:49:18 kloczek Exp $
+$Id: NEWS,v 1.485 2006/08/03 10:14:05 kloczek Exp $
+
+shadow-4.0.18 -> shadow-4.0.18.1					03-08-2006
+
+*** general:
+- groupmems: fixed compilation when PAM is disabled
+  (by Johannes Winkelmann <jw@smts.ch>),
+- fixed missing man pages in dist tar ball necessary on build when
+  PAM is disabled.
 
 shadow-4.0.17 -> shadow-4.0.18						01-08-2006
 
