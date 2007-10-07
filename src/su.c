@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.61 2006/01/02 22:37:47 kloczek Exp $"
+#ident "$Id: su.c,v 1.66 2006/02/08 10:52:49 kloczek Exp $"
 
 #include <getopt.h>
 #include <grp.h>
@@ -147,7 +147,7 @@ static void su_failure (const char *tty)
 
 #ifdef USE_PAM
 /* Signal handler for parent process later */
-static void su_catch_sig (int sig)
+static void catch_signals (int sig)
 {
 	++caught;
 }
@@ -156,7 +156,8 @@ static void su_catch_sig (int sig)
  * have been applied.  Some work was needed to get it integrated into
  * su.c from shadow.
  */
-static void run_shell (const char *shellstr, char *args[], int doshell)
+static void run_shell (const char *shellstr, char *args[], int doshell,
+		       char *const envp[])
 {
 	int child;
 	sigset_t ourset;
@@ -168,14 +169,10 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 		pam_end (pamh, PAM_SUCCESS);
 
 		if (doshell)
-			shell (shellstr, (char *) args[0]);
+			(void) shell (shellstr, (char *) args[0], envp);
 		else
-			(void) execv (shellstr, (char **) args);
-		{
-			int exit_status = (errno == ENOENT ? 127 : 126);
-
-			exit (exit_status);
-		}
+			(void) execve (shellstr, (char **) args, envp);
+		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if (child == -1) {
 		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
@@ -191,7 +188,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 	if (!caught) {
 		struct sigaction action;
 
-		action.sa_handler = su_catch_sig;
+		action.sa_handler = catch_signals;
 		sigemptyset (&action.sa_mask);
 		action.sa_flags = 0;
 		sigemptyset (&ourset);
@@ -256,6 +253,7 @@ static void usage (void)
 	fprintf (stderr, _("Usage: su [options] [login]\n"
 			   "\n"
 			   "Options:\n"
+			   "  -c, --command COMMAND		pass COMMAND to the invoked shell\n"
 			   "  -h, --help			display this help message and exit\n"
 			   "  -, -l, --login		make the shell a login shell\n"
 			   "  -m, -p,\n"
@@ -286,11 +284,13 @@ int main (int argc, char **argv)
 	uid_t my_uid;
 	struct passwd *pw = 0;
 	char **envp = environ;
-	char *shellstr = 0;
+	char *shellstr = 0, *command = 0;
 
 #ifdef USE_PAM
 	int ret;
 #else				/* !USE_PAM */
+	int err = 0;
+
 	RETSIGTYPE (*oldsig) ();
 	int is_console = 0;
 
@@ -328,6 +328,7 @@ int main (int argc, char **argv)
 		int option_index = 0;
 		int c;
 		static struct option long_options[] = {
+			{"command", required_argument, NULL, 'c'},
 			{"help", no_argument, NULL, 'h'},
 			{"login", no_argument, NULL, 'l'},
 			{"preserve-environment", no_argument, NULL, 'p'},
@@ -336,7 +337,7 @@ int main (int argc, char **argv)
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "-hlmps:", long_options,
+			getopt_long (argc, argv, "-c:hlmps:", long_options,
 				     &option_index)) != -1) {
 			switch (c) {
 			case 1:
@@ -349,6 +350,9 @@ int main (int argc, char **argv)
 				optind--;
 				goto end_su_options;
 				break;	/* NOT REACHED */
+			case 'c':
+				command = optarg;
+				break;
 			case 'h':
 				usage ();
 				break;
@@ -423,6 +427,8 @@ int main (int argc, char **argv)
 		(void) strcpy (name, "root");
 
 	doshell = argc == optind;	/* any arguments remaining? */
+	if (command)
+		doshell = 0;
 
 	/*
 	 * Get the user's real name. The current UID is used to determine
@@ -755,6 +761,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "pam_open_session: %s",
 			 pam_strerror (pamh, ret)));
 		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
+		pam_setcred(pamh, PAM_DELETE_CRED);
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -778,6 +785,7 @@ int main (int argc, char **argv)
 
 	/* become the new user */
 	if (change_uid (&pwent)) {
+		pam_close_session(pamh, 0);
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		pam_end (pamh, PAM_ABORT);
 		exit (1);
@@ -832,25 +840,32 @@ int main (int argc, char **argv)
 	if (!doshell) {
 		/* Position argv to the remaining arguments */
 		argv += optind;
+		if (command) {
+			argv -= 2;
+			argv[0] = "-c";
+			argv[1] = command;
+		}
 		/*
 		 * Use the shell and create an argv
 		 * with the rest of the command line included.
 		 */
 		argv[-1] = shellstr;
 #ifndef USE_PAM
-		(void) execv (shellstr, &argv[-1]);
-#else
-		run_shell (shellstr, &argv[-1], 0);
-#endif
+		(void) execve (shellstr, &argv[-1], environ);
+		err = errno;
 		(void) fprintf (stderr, _("No shell\n"));
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
-		exit (1);
+		exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+#else
+		run_shell (shellstr, &argv[-1], 0, environ);	/* no return */
+#endif
 	}
 #ifndef USE_PAM
-	shell (shellstr, cp);
+	err = shell (shellstr, cp, environ);
+	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 #else
-	run_shell (shellstr, &cp, 1);
+	run_shell (shellstr, &cp, 1, environ);
 #endif
 	/* NOT REACHED */
 	exit (1);

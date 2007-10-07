@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chage.c,v 1.68 2005/12/02 19:42:25 kloczek Exp $"
+#ident "$Id: chage.c,v 1.71 2006/02/21 22:44:35 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -235,7 +235,7 @@ static void list_fields (void)
 	if (lastday < 0) {
 		printf (_("never\n"));
 	} else if (lastday == 0) {
-		printf (_("password must be changed"));
+		printf (_("password must be changed\n"));
 	} else {
 		changed = lastday * SCALE;
 		print_date (changed);
@@ -337,7 +337,6 @@ static void cleanup (int state)
 
 int main (int argc, char **argv)
 {
-	int flag;
 	const struct spwd *sp;
 	struct spwd spwd;
 	uid_t ruid;
@@ -361,11 +360,10 @@ int main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	ruid = getuid ();
-#ifdef WITH_SELINUX
-	amroot = (ruid == 0
-		  && selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
-#else
 	amroot = (ruid == 0);
+#ifdef WITH_SELINUX
+	if (amroot && is_selinux_enabled () > 0)
+		amroot = (selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
 #endif
 
 	/*

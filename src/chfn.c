@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chfn.c,v 1.38 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id: chfn.c,v 1.39 2006/02/21 22:44:35 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -373,6 +373,7 @@ int main (int argc, char **argv)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
+	    && (is_selinux_enabled () > 0)
 	    && (selinux_check_passwd_access (PASSWD__CHFN) != 0)) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();

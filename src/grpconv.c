@@ -9,7 +9,7 @@
  */
 
 #include <config.h>
-#ident "$Id: grpconv.c,v 1.19 2005/08/31 17:25:00 kloczek Exp $"
+#ident "$Id: grpconv.c,v 1.20 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -19,6 +19,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "groupio.h"

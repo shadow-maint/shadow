@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -238,8 +238,8 @@ msgstr "最近一次密碼修改時間\t\t\t\t\t："
 msgid "never\n"
 msgstr "從不\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
+#, c-format
+msgid "password must be changed\n"
 msgstr "密碼已更改。\n"
 
 #, c-format
@@ -437,6 +437,68 @@ msgstr "無法提交密碼檔案變動。\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "無法解鎖密碼檔案。\n"
 
+#, fuzzy, c-format
+msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"用法：chpasswd [選項]\n"
+"\n"
+"選項：\n"
+"  -e, --encrypted\t所提供的密碼已經過加密\n"
+"  -h, --help\t\t顯示這份說明文字然後結束\n"
+"  -m,  --md5\t\t如果所提供的密碼沒有加密，則使用 MD5 加密法\n"
+"\t\t\t來替代 DES。\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s：無法鎖定群組檔案\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s：無法打開群組檔案\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s：無法鎖定 shadow 檔\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s：無法打開 shadow 檔\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s：第 %d 行：此行太長\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s：第 %d 行：缺少新密碼\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s：第 %d 行：未知使用者 %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s：第 %d 行：無法更新密碼項目\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s：發現錯誤，忽略更動\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s：更新shadow檔案時出錯。\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s：更新密碼檔案時出錯。\n"
+
 #, c-format
 msgid ""
 "Usage: chpasswd [options]\n"
@@ -464,36 +526,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s：無法鎖定 shadow 檔\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s：無法打開 shadow 檔\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s：第 %d 行：此行太長\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s：第 %d 行：缺少新密碼\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s：第 %d 行：未知使用者 %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s：第 %d 行：無法更新密碼項目\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s：發現錯誤，忽略更動\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s：更新shadow檔案時出錯。\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s：更新密碼檔案時出錯。\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -865,14 +899,6 @@ msgid "%s: no changes\n"
 msgstr "%s：無改變\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s：無法鎖定群組檔案\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s：無法打開群組檔案\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s：無法鎖定shadow群組檔案\n"
 
@@ -945,6 +971,10 @@ msgid "**Never logged in**"
 msgstr "**從未登入過**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "用法：%s [-p] [名稱]\n"
 
@@ -997,10 +1027,24 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid ""
+msgid "%s login: "
+msgstr ""
 "\n"
-"Login incorrect\n"
-msgstr "登入錯誤"
+" %s 使用者名稱："
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+" %s 使用者名稱："
+
+#, fuzzy, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "最多必須相隔幾天才能改變密碼\t\t\t\t：%ld\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1302,6 +1346,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1723,6 +1768,12 @@ msgstr "無法備份"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr "登入錯誤"
 
 #, fuzzy
 #~ msgid ""

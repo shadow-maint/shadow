@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='limits.5'>
-  <!-- $Id: limits.5.xml,v 1.17 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: limits.5.xml,v 1.18 2006/02/07 04:03:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>limits</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -74,10 +74,10 @@
       following entries are equivalent:
     </para>
 
-    <para>username L2D2048N5
-      <!-- .br -->
+    <programlisting>
+      username L2D2048N5
       username L2 D2048 N5
-    </para>
+    </programlisting>
 
     <para>
       Be aware that after <emphasis remap='I'>username</emphasis> the rest

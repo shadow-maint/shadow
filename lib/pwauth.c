@@ -30,7 +30,7 @@
 #include <config.h>
 
 #ifndef USE_PAM
-#ident "$Id: pwauth.c,v 1.19 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id: pwauth.c,v 1.20 2006/03/11 21:15:55 kloczek Exp $"
 
 #include <sys/types.h>
 #include <signal.h>
@@ -122,6 +122,14 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * and then we can try validating the created cyphertext and the SKEY.
 	 * If there is no SKEY information we default to not using SKEY.
 	 */
+
+# ifdef SKEY_BSD_STYLE
+	/*
+	 * Some BSD updates to the S/KEY API adds a fourth parameter; the
+	 * sizeof of the challenge info buffer.
+	 */
+#  define skeychallenge(s,u,c) skeychallenge(s,u,c,sizeof(c))
+# endif
 
 	if (skeychallenge (&skey, user, challenge_info) == 0)
 		use_skey = 1;

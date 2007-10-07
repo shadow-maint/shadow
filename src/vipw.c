@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#ident "$Id: vipw.c,v 1.20 2005/12/13 14:01:08 kloczek Exp $"
+#ident "$Id: vipw.c,v 1.21 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <errno.h>
 #include <getopt.h>
@@ -235,7 +235,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 int main (int argc, char **argv)
 {
-	int flag;
 	int editshadow = 0;
 	char *a;
 	int do_vipw;

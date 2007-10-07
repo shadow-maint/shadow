@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.26 2006/01/02 23:32:51 kloczek Exp $
+ * $Id: prototypes.h,v 1.28 2006/02/07 16:36:30 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -82,13 +82,9 @@ extern int hushed (const struct passwd *);
 /* audit_help.c */
 #ifdef WITH_AUDIT
 extern int audit_fd;
-#endif
-void audit_help_open (void);
-void audit_help_log (const char *, ...)
-#ifdef __GNUC__
-    __attribute__ ((format (printf, 1, 2)));
-#else
-;
+extern void audit_help_open (void);
+extern void audit_logger (int type, const char *pgname, const char *op,
+			  const char *name, unsigned int id, int result);
 #endif
 
 /* limits.c */
@@ -149,7 +145,7 @@ extern void setup (struct passwd *);
 extern void setup_env (struct passwd *);
 
 /* shell.c */
-extern void shell (const char *, const char *);
+extern int shell (const char *, const char *, char *const *);
 
 /* strtoday.c */
 extern long strtoday (const char *);

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 	           "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chpasswd.8'>
-  <!-- $Id: chpasswd.8.xml,v 1.16 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!-- $Id: chpasswd.8.xml,v 1.17 2006/03/02 19:33:02 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chpasswd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -78,9 +78,8 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      Remember keep protected for reading by others file passed to standard
-      input <command>chpasswd</command> command if it contains unencrypted
-      passwords.
+      Remember to set permissions or umask to prevent readability of
+      unencrypted files by other users.
     </para>
   </refsect1>
 

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: lastlog.c,v 1.23 2005/08/31 17:25:00 kloczek Exp $"
+#ident "$Id: lastlog.c,v 1.25 2006/03/05 22:06:58 kloczek Exp $"
 
 #include <getopt.h>
 #include <lastlog.h>
@@ -212,6 +212,12 @@ int main (int argc, char **argv)
 				usage ();
 				break;
 			}
+		}
+		if (argc > optind) {
+			fprintf (stderr,
+			         _("lastlog: unexpected argument: %s\n"),
+			         argv[optind]);
+			usage();
 		}
 	}
 

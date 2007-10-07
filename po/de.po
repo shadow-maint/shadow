@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.12\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2002-03-11 12:02-0100\n"
 "Last-Translator: Frank Schmid <frank@cs-schmid.de>\n"
 "Language-Team: Frank Schmid <frank@cs-schmid.de>\n"
@@ -241,8 +241,8 @@ msgstr "Letzte Kennwortänderung\t\t\t\t\t: "
 msgid "never\n"
 msgstr "Nie\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
+#, c-format
+msgid "password must be changed\n"
 msgstr "Kennwort geändert.\n"
 
 #, c-format
@@ -441,6 +441,68 @@ msgstr "Kann Änderungen in der Kennwortdatei nicht schreiben.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Kann die Kennwortdatei nicht entsperren.\n"
 
+#, fuzzy, c-format
+msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Syntax: chpasswd [Optionen]\n"
+"\n"
+"Optionen:\n"
+"  -e, --encrypted\tAngegebene Kennwörter sind verschlüsselt\n"
+"  -h, --help\t\tZeigt diese Hilfe, sonst nichts\n"
+"  -m, --md5\t\tMD5-Verschlüsselung statt DES verwenden, wen\n"
+"\t\t\tdie angegebenen Kennwörter nicht verschlüsselt sind\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: Kann Gruppendatei nicht sperren\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: Kann Gruppendatei nicht öffnen\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: Kann die Shadow-Datei nicht sperren\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: Kann die Shadow-Datei nicht öffnen\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: Zeile %d: Zeile zu lang\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: Zeile %d: Neues Kennwort fehlt\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: Zeile %d: Benutzer %s unbekannt\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: Zeile %d: Kann Kennworteintrag nicht aktualisieren\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: Fehler entdeckt, Änderungen werden verworfen\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: Fehler beim aktualisieren der Shadow-Datei\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: Fehler beim Aktualisieren der Kennwortdatei\n"
+
 #, c-format
 msgid ""
 "Usage: chpasswd [options]\n"
@@ -468,36 +530,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: Kann die Shadow-Datei nicht sperren\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: Kann die Shadow-Datei nicht öffnen\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: Zeile %d: Zeile zu lang\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: Zeile %d: Neues Kennwort fehlt\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: Zeile %d: Benutzer %s unbekannt\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: Zeile %d: Kann Kennworteintrag nicht aktualisieren\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: Fehler entdeckt, Änderungen werden verworfen\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: Fehler beim aktualisieren der Shadow-Datei\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: Fehler beim Aktualisieren der Kennwortdatei\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -878,14 +912,6 @@ msgid "%s: no changes\n"
 msgstr "%s: keine Änderungen\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: Kann Gruppendatei nicht sperren\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: Kann Gruppendatei nicht öffnen\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: Kann Shadow-Gruppendatei nicht sperren\n"
 
@@ -958,6 +984,10 @@ msgid "**Never logged in**"
 msgstr "**Nie angemeldet **"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Syntax: %s [-p] [Name]\n"
 
@@ -1010,10 +1040,24 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid ""
+msgid "%s login: "
+msgstr ""
 "\n"
-"Login incorrect\n"
-msgstr "Login fehlerhaft"
+"%s login: "
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+"%s login: "
+
+#, fuzzy, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Maximale Anzahl der Tage zwischen Kennwortänderungen\t: %ld\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1317,6 +1361,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1796,6 +1841,12 @@ msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
 "%s: Wiederherstellung von %s fehlgeschlagen: %s\n"
 "(Ihre Änderungen befinden sich in %s)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr "Login fehlerhaft"
 
 #, fuzzy
 #~ msgid ""

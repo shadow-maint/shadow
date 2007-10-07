@@ -10,7 +10,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpunconv.c,v 1.17 2005/08/31 17:25:00 kloczek Exp $"
+#ident "$Id: grpunconv.c,v 1.18 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +19,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <grp.h>
+#include "nscd.h"
 #include "prototypes.h"
 #ifdef SHADOWGRP
 #include "groupio.h"

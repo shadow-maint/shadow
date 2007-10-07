@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: expiry.c,v 1.18 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: expiry.c,v 1.19 2006/02/08 10:53:16 kloczek Exp $"
 
 #include <pwd.h>
 #include <signal.h>
@@ -38,13 +38,13 @@
 #include "defines.h"
 #include "prototypes.h"
 /* local function prototypes */
-static RETSIGTYPE catch (int);
+static RETSIGTYPE catch_signals (int);
 static void usage (void);
 
 /*
- * catch - signal catcher
+ * catch_signals - signal catcher
  */
-static RETSIGTYPE catch (int sig)
+static RETSIGTYPE catch_signals (int sig)
 {
 	exit (10);
 }
@@ -76,11 +76,11 @@ int main (int argc, char **argv)
 	/* 
 	 * Start by disabling all of the keyboard signals.
 	 */
-	signal (SIGHUP, catch);
-	signal (SIGINT, catch);
-	signal (SIGQUIT, catch);
+	signal (SIGHUP, catch_signals);
+	signal (SIGINT, catch_signals);
+	signal (SIGQUIT, catch_signals);
 #ifdef	SIGTSTP
-	signal (SIGTSTP, catch);
+	signal (SIGTSTP, catch_signals);
 #endif
 
 	/*

@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.14)
+AM_INIT_AUTOMAKE(shadow, 4.0.15)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -324,10 +324,17 @@ if test "$with_skey" = "yes"; then
 	AC_CHECK_LIB(skey, skeychallenge, [LIBSKEY=-lskey],
 		[AC_MSG_ERROR([liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
 	AC_DEFINE(SKEY, 1, [Define to support S/Key logins.])
+	AC_TRY_COMPILE([
+		#include <stdio.h>
+		#include <skey.h>
+	],[
+		skeychallenge((void*)0, (void*)0, (void*)0, 0);
+	],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])])
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)
 AM_GNU_GETTEXT([external], [need-ngettext])
+AM_CONDITIONAL(USE_NLS, test "x$USE_NLS" = "xyes")
 
 AC_CONFIG_FILES([
 	Makefile

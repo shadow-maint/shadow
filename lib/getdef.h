@@ -9,4 +9,7 @@ extern unsigned int getdef_unum (const char *, unsigned int);
 extern char *getdef_str (const char *);
 extern int putdef_str (const char *, const char *);
 
+/* default UMASK value if not specified in /etc/login.defs */
+#define		GETDEF_DEFAULT_UMASK	022
+
 #endif				/* _GETDEF_H */

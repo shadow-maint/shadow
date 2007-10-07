@@ -320,6 +320,9 @@
 /* Define to support S/Key logins. */
 #undef SKEY
 
+/* Define to support newer BSD S/Key API */
+#undef SKEY_BSD_STYLE
+
 /* Define to 1 if the `S_IS*' macros in <sys/stat.h> do not work properly. */
 #undef STAT_MACROS_BROKEN
 

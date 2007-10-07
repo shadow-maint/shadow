@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupdel.c,v 1.30 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id: groupdel.c,v 1.31 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -345,4 +345,5 @@ int main (int argc, char **argv)
 #endif
 	exit (errors == 0 ? E_SUCCESS : E_GRP_UPDATE);
 	/* NOT REACHED */
+	return 0;
 }

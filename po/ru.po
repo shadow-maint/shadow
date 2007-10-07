@@ -1,15 +1,16 @@
+# translation of po_ru.po to Russian
 # translation of ru.po to Russian
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # Nikolai Prokoschenko <nikolai@prokoschenko.de>, 2004.
 # Eugene Konev <ejka@imfi.kspu.ru>, 2004.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005.
+# Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-14 19:47+0300\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-09 21:23+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +73,7 @@ msgstr "Не удалось сменить терминал %s"
 
 #, c-format
 msgid "Environment overflow\n"
-msgstr "Cлишком большое количество переменных среды выполнения\n"
+msgstr "Слишком большое количество переменных среды выполнения\n"
 
 #, c-format
 msgid "You may not change $%s\n"
@@ -252,8 +253,8 @@ msgid "never\n"
 msgstr "никогда\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "пароль должен быть изменён"
+msgid "password must be changed\n"
+msgstr "пароль должен быть изменён\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -455,6 +456,68 @@ msgstr "Не удалось разблокировать файл паролей
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Использование: chpasswd [параметры]\n"
+"\n"
+"Параметры:\n"
+"  -e, --encrypted\tвводится уже шифрованный пароль\n"
+"  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
+"  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
+"\t\t\tвводится нешифрованным\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: не удалось заблокировать файл групп\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: не удалось открыть файл групп\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: не удалось выполнить блокировку файла gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: не удалось открыть теневой файл паролей\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: строка %d: слишком длинная строка\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: строка %d: отсутствует новый пароль\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: строка %d: неизвестная группа %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: строка %d: не удалось обновить поле пароля\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: обнаружена ошибка, изменения не были сохранены\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: не удалось обновить теневой файл паролей\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: не удалось обновить файл паролей\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -480,36 +543,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: не удалось заблокировать теневой файл паролей\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: не удалось открыть теневой файл паролей\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: строка %d: слишком длинная строка\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: строка %d: отсутствует новый пароль\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: строка %d: неизвестный пользователь %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: строка %d: не удалось обновить поле пароля\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: обнаружена ошибка, изменения не были сохранены\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: не удалось обновить теневой файл паролей\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: не удалось обновить файл паролей\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -896,14 +931,6 @@ msgid "%s: no changes\n"
 msgstr "%s: изменений не внесено\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: не удалось заблокировать файл групп\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: не удалось открыть файл групп\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: не удалось заблокировать теневой файл групп\n"
 
@@ -977,6 +1004,10 @@ msgid "**Never logged in**"
 msgstr "**Никогда не входил в систему**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: неожиданный параметр: %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Использование: %s [-p] [имя пользователя]\n"
 
@@ -1026,15 +1057,23 @@ msgstr " на `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr "login: ошибка PAM, завершение работы: %s\n"
+msgstr "login: ошибка PAM, аварийное завершение работы: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Неверное имя пользователя\n"
+msgid "%s login: "
+msgstr "%s имя пользователя: "
+
+#, c-format
+msgid "login: "
+msgstr "имя пользователя: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Превышено максимальное число попыток (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: аварийное завершение работы по запросу PAM\n"
 
 #, c-format
 msgid ""
@@ -1362,6 +1401,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1372,6 +1412,7 @@ msgstr ""
 "Использование: su [параметры] [имя пользователя]\n"
 "\n"
 "Параметры:\n"
+"  -c, --command КОМАНДА\t\tпередать КОМАНДУ вызываемой оболочке\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
 "  -, -l, --login\t\tзапускать оболочку как регистрационную\n"
 "  -m, -p,\n"

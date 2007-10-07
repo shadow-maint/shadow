@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groups.c,v 1.13 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: groups.c,v 1.15 2006/02/07 22:41:56 kloczek Exp $"
 
 #include <grp.h>
 #include <pwd.h>
@@ -103,7 +103,7 @@ int main (int argc, char **argv)
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups = malloc (sys_ngroups * sizeof (GETGROUPS_T));
+	groups = (GETGROUPS_T *) malloc (sys_ngroups * sizeof (GETGROUPS_T));
 #endif
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);

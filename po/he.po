@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -224,7 +224,7 @@ msgid "never\n"
 msgstr "אף פעם\n"
 
 #, c-format
-msgid "password must be changed"
+msgid "password must be changed\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -422,6 +422,61 @@ msgstr "לא יכול לשחרר נעילה של קובץ הסיסמאות.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: שורה %d: שורה ארוכה מידי\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: שורה %d: חסרה סיסמה חדשה\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: שגיאה זוהתה, מתעלם משינויים\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: שגיאה בעדכון קובץ צל\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: שגיאה בעדכון קובץ סיסמאות\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -440,36 +495,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: לא יכול לנעול קובץ צל\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: לא יכול לפתוח קובץ צל\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: שורה %d: שורה ארוכה מידי\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: שורה %d: חסרה סיסמה חדשה\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: שגיאה זוהתה, מתעלם משינויים\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: שגיאה בעדכון קובץ צל\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: שגיאה בעדכון קובץ סיסמאות\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -830,14 +857,6 @@ msgid "%s: no changes\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr ""
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr ""
 
@@ -903,6 +922,10 @@ msgstr ""
 msgid "**Never logged in**"
 msgstr ""
 
+#, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "שימוש: %s [-p] [name]\n"
@@ -950,9 +973,19 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
+msgid "%s login: "
+msgstr ""
+
+#, c-format
+msgid "login: "
+msgstr ""
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr ""
+
+#, c-format
+msgid "login: abort requested by PAM\n"
 msgstr ""
 
 #, c-format
@@ -1249,6 +1282,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"

@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "shadow" "3" "11/10/2005" "Библиотечные функции" "Библиотечные функции"
+.TH "shadow" "3" "03/11/2006" "Библиотечные функции" "Библиотечные функции"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -25,7 +25,7 @@ shadow, getspnam \- процедуры для работы с файлом ши�
 .PP
 \fIstruct spwd *sgetspent(char\fR\fI*cp\fR\fI);\fR
 .PP
-\fIint putspent(struct spwd\fR\fI*p,\fR\fIFILE\fR\fI*fp\fR\fI);\fR
+\fIint putspent(struct spwd\fR\fI*p,\fR\fIФАЙЛ\fR\fI*fp\fR\fI);\fR
 .PP
 \fIint lckpwdf();\fR
 .PP
@@ -107,7 +107,6 @@ sp_flag \- зарезервировано
 \fIendspent\fR
 можно использовать для перемещения в начало и конец, соответственно, файла теневых паролей.
 .PP
-Функции
 \fIlckpwdf\fR
 и
 \fIulckpwdf\fR

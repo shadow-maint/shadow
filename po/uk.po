@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-4.0.13\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2005-10-23 19:11+0300\n"
 "Last-Translator: Eugeniy Meshcheryakov <eugen@univ.kiev.ua>\n"
 "Language-Team: Ukrainian\n"
@@ -246,9 +246,9 @@ msgstr "Остання зміна пароля\t\t\t\t\t: "
 msgid "never\n"
 msgstr "ніколи\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
-msgstr "Пароль змінено.\n"
+#, c-format
+msgid "password must be changed\n"
+msgstr "Пароль змінено\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -447,6 +447,68 @@ msgstr "Не можу записати зміни до файлу паролів
 msgid "Cannot unlock the password file.\n"
 msgstr "Не можу розблокувати файл паролів.\n"
 
+#, fuzzy, c-format
+msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Використання: chpasswd [опції]\n"
+"\n"
+"Опції:\n"
+"  -e, --encrypted\tвказаний пароль зашифровано\n"
+"  -h, --help\t\tпоказати цю допомогу та вийти\n"
+"  -m, --md5\t\tвикористовувати MD5 шифрування замість DES, якщо вказані\n"
+"\t\t\tпаролі не зашифровано\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: не можу блокувати файл груп\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: не можу відкрити файл груп\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: не можу заблокувати файл з прихованими паролями\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: не можу відкрити файл з прихованими паролями\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: рядок %d: рядок занадто довгий\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: рядок %d: бракує нового пароля\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: рядок %d: невідомий користувач %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: рядок %d: не можу оновити запис у базі паролів\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: виявлено помилку, зміни ігноруються\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: помилка оновлення файлу з прихованими паролями\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: помилка оновлення файлу з паролями\n"
+
 #, c-format
 msgid ""
 "Usage: chpasswd [options]\n"
@@ -474,36 +536,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: не можу заблокувати файл з прихованими паролями\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: не можу відкрити файл з прихованими паролями\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: рядок %d: рядок занадто довгий\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: рядок %d: бракує нового пароля\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: рядок %d: невідомий користувач %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: рядок %d: не можу оновити запис у базі паролів\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: виявлено помилку, зміни ігноруються\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: помилка оновлення файлу з прихованими паролями\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: помилка оновлення файлу з паролями\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -888,14 +922,6 @@ msgid "%s: no changes\n"
 msgstr "%s: без змін\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: не можу блокувати файл груп\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: не можу відкрити файл груп\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: не можу блокувати файл прихованих груп\n"
 
@@ -970,6 +996,10 @@ msgid "**Never logged in**"
 msgstr "**Ніколи не входив**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Використання: %s [-p] [ім'я]\n"
 
@@ -1021,13 +1051,25 @@ msgstr " на `%.100s'"
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: Помилка PAM, перервано: %s\n"
 
-#, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
+#, fuzzy, c-format
+msgid "%s login: "
 msgstr ""
 "\n"
-"Невірний логін\n"
+"%s логін: "
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+"%s логін: "
+
+#, fuzzy, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Максимальна кількість днів між змінами паролю\t\t: %ld\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1353,6 +1395,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1826,6 +1869,13 @@ msgstr "Не можу зробити резервну копію"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: не можу відновити %s: %s (ваші зміни у %s)\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Невірний логін\n"
 
 #, fuzzy
 #~ msgid ""

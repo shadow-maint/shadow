@@ -1,4 +1,78 @@
-$Id: NEWS,v 1.331 2006/01/03 16:45:47 kloczek Exp $
+$Id: NEWS,v 1.382 2006/03/12 22:35:35 kloczek Exp $
+
+shadow-4.0.14 -> shadow-4.0.15						13-03-2006
+
+*** general:
+- do not install translated man pages if shadow is configured with
+  --disable-nls
+  (based patch submited by Mike Frysinger <vapier@gentoo.org>),
+- added fixes for detect BSD's S/Key with updated the skeychallenge()
+  function for take a fourth argument in case BSD version (patch submited by
+  Mike Frysinger <vapier@gentoo.org>),
+- login: default UMASK if not specified in login.defs is 022 (pointed by
+  Peter Vrabec <pvrabec@redhat.com>),
+- chgpasswd: new tool (by Jonas Meurer <mejo@debian.org>),
+- lastlog: print the usage and exit if an additional argument is profided to
+  lastlog (merge 488_laslog_verify_arguments Debian patch),
+- login, newgrp, nologin, su: do not link with libselinux (merge
+  490_link_selinux_only_when_needed Debian patch),
+- chage, chfn, chsh, passwd: fixed confusing error message if /proc is not
+  mounted (http://bugs.debian.org/352494 patch Nicolas François
+  <nicolas.francois@centraliens.net>),
+- login (merge 433_login_more_LOG_UNKFAIL_ENAB Debian patch):
+  - TOO MANY LOGIN... logged if PAM_MAXTRIES or failcount >= retries (was
+    onl test PAM_MAXTRIES),
+  - print to stderr (in addition to syslog) in case of maximum number of
+    tries exceeded,
+  - always prints the number of tries in the syslog entry.
+  - add special handling for PAM_ABORT
+  - add an entry to failog, as when USE_PAM is not defined. (#53164)
+  - changed pam_end to PAM_END. This is certainly was a mistake.  PAM_END is
+    pam_close_seesion + pam_end. Here, the session is still not open, we
+    don't have to close it.
+  - a HAVE_PAM_FAIL_DELAY is missing,
+- su: fixed pam session support (patch from Topi Miettinen; fixed #57526,
+  #55873, 57532 Debian bugs),
+- userdel: user's group is already removed by update_groups().
+  remove_group() is not needed (bug introduced in 4.0.14 on merge FC fixes).
+  Fixed by Nicolas François <nicolas.francois@centraliens.net>,
+- useradd: allways remove group and gshadow databases lock, Fixed by Nicolas
+  François <nicolas.francois@centraliens.net>
+  (http://bugs.debian.org/348250)
+- auditing fixes:
+  - corrected prototypes in lib/prototypes.h (thre is no audit_help_log();
+    added audit_logger() prototype),
+  - useradd: fixed excess audit_logger() argument,
+- chage: added missing \n on display password status if password must be
+  chaged,
+- useradd: fixed allow non-unique UID (http://bugs.debian.org/351281),
+- variouse code cleanups for make possible compilation of shadow with -Wall
+  -Werror (by Alexander Gattin <xrgtn@yandex.ru>),
+- su: move exit() outside libmisc/shell.c::shell() for handle shell() errors
+  on higher level (now is better visable where some programs exit with 126
+  and 127 exit codes); added new shell() parameter (char *const envp[])
+  which allow fix preserving enviloment in su on using -p, (patch by
+  Alexander Gattin <xrgtn@yandex.ru>),
+- su: added handle -c,--command option for GNU su compliance (merge
+  437_su_-c_option Debian patch),
+- login: added translate login prompt string (suggested by Evgeniy
+  Dushistov),
+- updated translations: ca, cs, da, el, es, eu, gl, fi, fr, it, nb, nl, pt,
+  pt_BR, ro, ru, sk, sv, tl, vi, zh_CN,
+- new translations: gl.
+*** documentation:
+- ru man pages: added new nologin(8) and updated all other man pages (by
+  Yuri Kozlov <kozlov.y@gmail.com>),
+- chsh(1), su(1): update fi translations generated from XML files
+  (Tommi Vainikainen <thv+debian@iki.fi>),
+- expiry(1), faillog(5), faillog(8), gpasswd(1), groupadd(8), groupdel(8),
+  logoutd(8), nologin(8), vipw(8): added new cs man pages, (by Miroslav Kure
+  <kurem@upcase.inf.upol.cz>)
+- login.defs(5): default UMASK if not specified in login.defs is 022
+  (pointed by Peter Vrabec <pvrabec@redhat.com>),
+- useradd(8): better document that -d will not add the user's home directory
+  if it does not already exist (http://bugs.debian.org/154996),
+- nologin(8) man pages added (merge 478_nologin.8.xml Debian patch).
 
 shadow-4.0.13 -> shadow-4.0.14						03-01-2006
 
@@ -36,7 +110,8 @@ shadow-4.0.13 -> shadow-4.0.14						03-01-2006
   http://bugs.debian.org/11189),
 - su, vipw: rewrited for use getopt_long(),
 - su: log successful/failed through syslog (http://bugs.debian.org/190215),
-- updated translations: ca, cs, da, eu, fi, fr, it, pl, pt, ru, sv, tl, vi.
+- updated translations: ca, cs, da, eu, fi, fr, it, pl, pt, ru, sv, tl, vi,
+- new translations: gl.
 *** documentation:
 - added es, ko vigr(8) and vipw(8), hu lastlog(8), ko vipw(8), zh_CN su(1),
   zh_TW chpasswd(8) and su(1),

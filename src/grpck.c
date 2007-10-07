@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpck.c,v 1.28 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: grpck.c,v 1.29 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <fcntl.h>
 #include <grp.h>
@@ -39,6 +39,7 @@
 #include "commonio.h"
 #include "defines.h"
 #include "groupio.h"
+#include "nscd.h"
 #include "prototypes.h"
 extern void __gr_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__gr_get_head (void);

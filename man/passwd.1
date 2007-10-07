@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "1" "12/03/2005" "User Commands" "User Commands"
+.TH "PASSWD" "1" "02/28/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,15 +11,13 @@
 passwd \- change user password
 .SH "SYNOPSIS"
 .HP 7
-\fBpasswd\fR [\-x\ \fImax\fR] [\-n\ \fImin\fR] [\-w\ \fIwarn\fR] [\-i\ \fIinact\fR] \fIlogin\fR
-.HP 7
-\fBpasswd\fR [\-l \-u \-d \-S \-e] \fIlogin\fR
+\fBpasswd\fR [\fIoptions\fR] \fIlogin\fR
 .SH "DESCRIPTION"
 .PP
 \fBpasswd\fR
-changes passwords for user accounts. A normal user may only change the password for his/her own account, the super user may change the password for any account.
+changes passwords for user accounts. A normal user may only change the password for his/her own account, while the super user may change the password for any account.
 \fBpasswd\fR
-also changes account information, such as the full name of the user, user's login shell, or password expiry date and interval.
+also changes account information, such as the full name of the user, the user's login shell, or his/her password expiry date and interval.
 .SS "Password Changes"
 .PP
 The user is first prompted for his/her old password, if one is present. This password is then encrypted and compared against the stored password. The user has only one chance to enter the correct password. The super user is permitted to bypass this step so that forgotten passwords may be changed.
@@ -54,7 +52,7 @@ System encryption method is based on the NBS DES algorithm and is very secure. T
 .PP
 Compromises in password security normally result from careless password selection or handling. For this reason, you should not select a password which appears in a dictionary or which must be written down. The password should also not be a proper name, your license number, birth date, or street address. Any of these may be used as guesses to violate system security.
 .PP
-Your password must easily remembered so that you will not be forced to write it on a piece of paper. This can be accomplished by appending two small words together and separating each with a special character or digit. For example, Pass%word.
+Your password must be easily remembered so that you will not be forced to write it on a piece of paper. This can be accomplished by appending two small words together and separating each with a special character or digit. For example, Pass%word.
 .PP
 Other methods of construction involve selecting an easily remembered phrase from literature and selecting the first or last letter from each word. An example of this is:
 .TP 3
@@ -83,7 +81,7 @@ and causes show status for all users.
 Delete a user's password (make it empty). This is a quick way to disable a password for an account. It will set the named account passwordless.
 .TP
 \fB\-e\fR, \fB\-\-expire\fR
-Immediately expire an account\(cqs password. This in effect can force a user to change his/her password at the user\(cqs next login.
+Immediately expire an account's password. This in effect can force a user to change his/her password at the user's next login.
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 Display help message and exit.
@@ -100,7 +98,7 @@ Indicate change password should be performed only for expired authentication tok
 Lock the named account. This option disables an account by changing the password to a value which matches no possible encrypted value.
 .TP
 \fB\-n\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
-Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change her password at any time.
+Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change his/her password at any time.
 .TP
 \fB\-q\fR, \fB\-\-quiet\fR
 Quiet mode.
@@ -111,7 +109,7 @@ change password in
 repository
 .TP
 \fB\-S\fR, \fB\-\-status\fR
-Display account status information. The status information consists of 7 fields. The first field is the user\(cqs login name. The second field indicates if the user account is locked (L), has no password (NP), or has a usable password (P). The third field gives the date of the last password change. The next four fields are the minimum age, maximum age, warning period, and inactivity period for the password. These ages are expressed in days.
+Display account status information. The status information consists of 7 fields. The first field is the user's login name. The second field indicates if the user account is locked (L), has no password (NP), or has a usable password (P). The third field gives the date of the last password change. The next four fields are the minimum age, maximum age, warning period, and inactivity period for the password. These ages are expressed in days.
 .TP
 \fB\-u\fR, \fB\-\-unlock\fR
 Unlock the named account. This option re\-enables an account by changing the password back to its previous value (to value before using
@@ -121,14 +119,14 @@ option).
 \fB\-w\fR, \fB\-\-warndays\fR \fIWARN_DAYS\fR
 Set the number of days of warning before a password change is required. The
 \fIWARN_DAYS\fR
-option is the number of days prior to the password expiring that a user will be warned her password is about to expire.
+option is the number of days prior to the password expiring that a user will be warned that his/her password is about to expire.
 .TP
 \fB\-x\fR, \fB\-\-maxdays\fR \fIMAX_DAYS\fR
 Set the maximum number of days a password remains valid. After
 \fIMAX_DAYS\fR, the password is required to be changed.
 .SH "CAVEATS"
 .PP
-Not all options may be supported. Password complexity checking may vary from site to site. The user is urged to select a password as complex as he feels comfortable with. Users may not be able to change their password on a system if NIS is enabled and they are not logged into the NIS server.
+Not all options may be supported. Password complexity checking may vary from site to site. The user is urged to select a password as complex as he or she feels comfortable with. Users may not be able to change their password on a system if NIS is enabled and they are not logged into the NIS server.
 .SH "FILES"
 .TP
 \fI/etc/passwd\fR

@@ -113,7 +113,7 @@
 #define yycheck  gd_yycheck
 
 static int yylex ();
-static int yyerror ();
+static int yyerror (char *s);
 
 #define EPOCH		1970
 #define HOUR(x)		((x) * 60)
@@ -596,17 +596,12 @@ static TABLE const MilitaryTable[] = {
 
 
 /* ARGSUSED */
-static int
-yyerror (s)
-     char *s;
+static int yyerror (char *s)
 {
   return 0;
 }
 
-static int
-ToHour (Hours, Meridian)
-     int Hours;
-     MERIDIAN Meridian;
+static int ToHour (int Hours, MERIDIAN Meridian)
 {
   switch (Meridian)
     {
@@ -632,9 +627,7 @@ ToHour (Hours, Meridian)
   /* NOTREACHED */
 }
 
-static int
-ToYear (Year)
-     int Year;
+static int ToYear (int Year)
 {
   if (Year < 0)
     Year = -Year;
@@ -649,9 +642,7 @@ ToYear (Year)
   return Year;
 }
 
-static int
-LookupWord (buff)
-     char *buff;
+static int LookupWord (char *buff)
 {
   register char *p;
   register char *q;
@@ -831,9 +822,7 @@ yylex ()
 #define TM_YEAR_ORIGIN 1900
 
 /* Yield A - B, measured in seconds.  */
-static long
-difftm (a, b)
-     struct tm *a, *b;
+static long difftm (struct tm *a, struct tm *b)
 {
   int ay = a->tm_year + (TM_YEAR_ORIGIN - 1);
   int by = b->tm_year + (TM_YEAR_ORIGIN - 1);
@@ -852,10 +841,7 @@ difftm (a, b)
 	  + (a->tm_sec - b->tm_sec));
 }
 
-time_t
-get_date (p, now)
-     const char *p;
-     const time_t *now;
+time_t get_date (const char *p, const time_t *now)
 {
   struct tm tm, tm0, *tmp;
   time_t Start;

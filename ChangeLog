@@ -1,3 +1,389 @@
+2006-03-13  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/it.po:
+	updated for 4.0.15 (by Danilo Piazzalunga <danilopiazza@gmail.com>).
+
+2006-03-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/nb.po:
+	updated for 4.0.15 (by Bj繪rn Steensrud <bjornst@powertech.no>).
+
+	* po/pt.po:
+	updated for 4.0.15 (by Miguel Figueiredo <mfigueiredo@gmail.com>).
+
+	* man/Makefile.am, NEWS, configure.in:
+	do not install translated man pages if shadow is configured with --disable-nls
+	(based patch submited by Mike Frysinger <vapier@gentoo.org>).
+
+	* NEWS, po/pt_BR.po:
+	updated for 4.0.15 (by Andre Luis Lopes <andrelop@debian.org>).
+
+	* po/fr.po:
+	updated for 4.0.15 (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
+
+2006-03-11  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, configure.in, lib/pwauth.c:
+	added fixes for detect BSD's S/Key with updated the skeychallenge() function
+	for take a fourth argument in case BSD version
+	(patch submited by Mike Frysinger <vapier@gentoo.org>)
+
+	* README: added paragragraph about S/Key support.
+
+	* po/sk.po: updated for 4.0.15 (by Peter Mann <Peter.Mann@tuke.sk>).
+
+	* NEWS: newgrp: do not link with libselinux.
+
+	* NEWS, po/zh_CN.po:
+	updated for 4.0.15 (by Carlos Z.F. Liu <carlosliu@users.sourceforge.net>).
+
+	* po/ru.po: updated for 4.0.15 (by Yuri Kozlov <kozlov.y@gmail.com>).
+
+	* src/Makefile.am:
+	removed $(LIBSELINUX) from newgrp_LDADD (newgrp does not need to be linked
+	with SELinux libraries).
+
+	* man/ru/chsh.1, man/ru/expiry.1, man/ru/faillog.5, man/ru/faillog.8, man/ru/gpasswd.1, man/ru/groupadd.8, man/ru/groupdel.8, man/ru/groupmems.8, man/ru/groupmod.8, man/ru/groups.1, man/ru/grpck.8, man/ru/gshadow.5, man/ru/id.1, man/ru/lastlog.8, man/ru/limits.5, man/ru/login.1, man/ru/login.access.5, man/ru/login.defs.5, man/ru/logoutd.8, man/ru/newgrp.1, man/ru/newusers.8, man/ru/nologin.8, man/ru/passwd.1, man/ru/passwd.5, man/ru/porttime.5, man/ru/pw_auth.3, man/ru/pwck.8, man/ru/pwconv.8, man/ru/sg.1, man/ru/shadow.3, man/ru/shadow.5, man/ru/su.1, man/ru/suauth.5, man/ru/sulogin.8, man/ru/useradd.8, man/ru/userdel.8, man/ru/usermod.8, man/ru/vipw.8, NEWS, man/ru/Makefile.am, man/ru/chage.1, man/ru/chfn.1, man/ru/chpasswd.8:
+	ru man pages: added new nologin(8) and updated all other man pages
+	(by Yuri Kozlov <kozlov.y@gmail.com>).
+
+2006-03-09  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/nl.po:
+	updated for 4.0.15 (by cobaco (aka Bart Cornelis) <cobaco@linux.be>).
+
+	* po/vi.po:
+	updated for 4.0.15 (by Clytie Siddall <clytie@riverland.net.au>).
+
+	* po/sv.po:
+	updated for 4.0.15 (by Daniel Nylander <po@danielnylander.se>).
+
+2006-03-08  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/eu.po: updated for 4.0.15 (by pi <pi@beobide.net>).
+
+	* po/ro.po: cleanups.
+
+	* NEWS, po/tl.po:
+	updated for 4.0.15 (by eric pareja <xenos@upm.edu.ph>).
+
+	* po/ro.po: updated for 4.0.15 (by Sorin B. <sorin@bonbon.net>).
+
+	* NEWS, po/es.po:
+	updated for 4.0.15 (by Ruben Porras <nahoo82@gmail.com>).
+
+2006-03-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/da.po:
+	updated for 4.0.15 (by Claus Hindsgaul <claus.hindsgaul@gmail.com>).
+
+	* NEWS, man/fi/chsh.1, man/fi/su.1:
+	update fi chsh(1), su(1) man pages generated from XML files
+	(Tommi Vainikainen <thv+debian@iki.fi>).
+
+	* NEWS, po/fi.po:
+	updated for 4.0.15 (by Tommi Vainikainen <thv+debian@iki.fi>).
+
+	* NEWS, po/cs.po:
+	updated for 4.0.15 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
+
+	* NEWS, man/cs/Makefile.am, man/cs/expiry.1, man/cs/faillog.5, man/cs/faillog.8, man/cs/gpasswd.1, man/cs/groupadd.8, man/cs/groupdel.8, man/cs/logoutd.8, man/cs/nologin.8, man/cs/vipw.8:
+	added new cs man pages: expiry(1), faillog(5), faillog(8), gpasswd(1),
+	groupadd(8), groupdel(8), logoutd(8), nologin(8), vipw(8).
+
+	* NEWS: typo.
+
+	* src/useradd.c, NEWS, lib/getdef.h, man/login.defs.5, man/login.defs.5.xml, src/login.c, src/newusers.c:
+	default UMASK if not specified in login.defs is 022.
+
+2006-03-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/pl.po: updated for 4.0.15.
+
+	* NEWS, po/gl.po:
+	updated for 4.0.15 (by Jacobo Tarrio <jtarrio@trasno.net>).
+
+	* NEWS, configure.in: schedule release 4.0.15 to 13-03-2006.
+
+2006-03-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: typo (s/onas Meurer/Jonas Meurer/)
+
+	* src/.cvsignore: added chgpasswd.
+
+	* po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/Makefile.am, src/chgpasswd.c, NEWS, po/POTFILES.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po:
+	chgpasswd: new tool (by onas Meurer <mejo@debian.org>).
+
+	* src/lastlog.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
+	s/Unexpected/unexpected/
+
+	* po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/lastlog.c, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po:
+	print the usage and exit if an additional argument is profided to
+	lastlog (merge 488_laslog_verify_arguments Debian patch).
+
+2006-03-02  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/chpasswd.8, man/chpasswd.8.xml:
+	fixed CAVEATS section (by Justin Pryzby <justinpryzby@users.sourceforge.net>)
+
+2006-02-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/passwd.1, man/passwd.1.xml:
+	fixed SYNOPSIS section (http://bugs.debian.org/352136).
+
+2006-02-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/ro.po: updated (by Sorin Batariuc <sorin@bonbon.net>).
+
+2006-02-21  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, lib/Makefile.am, src/Makefile.am:
+	login, nologin, su: do not link with libselinux
+	(merge 490_link_selinux_only_when_needed Debian patch).
+
+	* NEWS, src/chage.c, src/chfn.c, src/chsh.c, src/passwd.c:
+	fixed confusing error message if /proc is not mounted
+	(http://bugs.debian.org/352494
+	patch Nicolas Fran癟ois <nicolas.francois@centraliens.net>)
+
+	* po/ro.po:
+	updated (commited http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=347755).
+
+	* NEWS, po/ca.po: updated (by Jordi Mallach <jordi@debian.org>).
+
+2006-02-20  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/gpasswd.1.xml, man/passwd.1.xml, man/passwd.5.xml, man/pwck.8.xml, man/sg.1.xml, man/useradd.8.xml:
+	cleanups.
+
+	* po/gl.po: updated (Jacobo Tarrio <jtarrio@trasno.net>).
+
+	* NEWS, po/pt.po:
+	updated (by Miguel Figueiredo <mfigueiredo@gmail.com>).
+
+2006-02-15  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/it.po:
+	update (by Danilo Piazzalunga <danilopiazza@gmail.com>).
+
+	* po/vi.po: update (by Clytie Siddall <clytie@riverland.net.au>).
+
+	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
+
+2006-02-09  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fr.po: updated (by Christian Perrier <bubulle@kheops.frmug.org>).
+
+	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
+	run "make update-po".
+
+	* po/pl.po: updated.
+
+	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>).
+
+	* po/eu.po: update (by ^pi^ <pi@beobide.net>).
+
+2006-02-08  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, src/login.c:
+	merge 433_login_more_LOG_UNKFAIL_ENAB Debian patch:
+	- TOO MANY LOGIN... logged if PAM_MAXTRIES or failcount >= retries
+	  (was onl test PAM_MAXTRIES),
+	- print to stderr (in addition to syslog) in case of maximum number of
+	  tries exceeded,
+	- always prints the number of tries in the syslog entry.
+	- add special handling for PAM_ABORT
+	- add an entry to failog, as when USE_PAM is not defined. (#53164)
+	- changed pam_end to PAM_END. This is certainly was a mistake.
+	  PAM_END is pam_close_seesion + pam_end. Here, the session is still not
+	  open, we don't have to close it.
+	- a HAVE_PAM_FAIL_DELAY is missing
+
+	* po/ro.po: kill one fuzzy.
+
+	* po/ro.po, NEWS: updated (by Sorin B. <sorin@bonbon.net>).
+
+	* src/gpasswd.c: s/die/catch_signals/
+
+	* src/expiry.c, src/sulogin.c: s/catch/catch_signals/
+
+	* src/su.c: /su_catch_sig/chatch_signals/
+
+2006-02-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/id.c, src/groups.c, libmisc/getdate.y: lint code using CC=g++.
+
+	* NEWS, src/su.c:
+	fixed pam session support (patch from Topi Miettinen; fixed #57526, #55873,
+	#57532 Debian bugs).
+
+	* NEWS:
+	fixed pam session support (patch from Topi Miettinen; fixed #57526,
+	#55873, #57532 Debian bugs).
+
+	* NEWS, src/userdel.c:
+	user's group is already removed by update_groups(). remove_group()
+	is not needed (bug introduced in 4.0.14 on merge FC fixes). Fixed by Nicolas
+	Fran癟ois <nicolas.francois@centraliens.net>
+
+	* NEWS, src/useradd.c: allways remove group and gshadow databases lock,
+	Fixed by Nicolas Fran癟ois <nicolas.francois@centraliens.net>
+	(http://bugs.debian.org/348250)
+
+	* NEWS, src/userdel.c: fixed excess audit_logger() argument.
+
+	* NEWS, lib/prototypes.h:
+	corrected prototypes in lib/prototypes.h (thre is no audit_help_log(); added
+	audit_logger() prototype).
+
+	* src/login.c: fixed missing ";" in declaration.
+
+	* man/limits.5, man/limits.5.xml:
+	fixed example limits string (by Yuri Kozlov <kozlov.y@gmail.com>).
+
+2006-02-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chage.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po:
+	added missing \n on display password status if password must be chaged.
+
+2006-02-04  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/useradd.c, NEWS:
+	fixed allow non-unique UID (http://bugs.debian.org/351281).
+
+2006-02-01  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/cs.po: updated (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
+
+2006-01-27  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/vi.po:
+	updated (by Clytie Siddall <clytie@riverland.net.au>).
+
+2006-01-26  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fr.po:
+	typo (fixed by Christian Perrier <bubulle@kheops.frmug.org>).
+
+	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>).
+
+2006-01-25  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/grpck.8, man/pl/login.defs.5, man/pl/passwd.1, man/pl/pwck.8, man/de/passwd.1, man/es/login.1, man/es/vipw.8, man/fi/passwd.1, man/hu/passwd.1, man/id/login.1, man/it/grpck.8, man/it/pwck.8, man/ja/grpck.8, man/ja/passwd.1, man/ja/pwck.8, man/ko/login.1, man/ko/su.1:
+	fixes some issues that cause warnings when the manpages are
+	displayed (by Nicolas Fran癟ois <nicolas.francois@centraliens.net>).
+
+2006-01-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/eu.po: updated (by pi <pi@beobide.net>).
+
+	* libmisc/addgrps.c, libmisc/xmalloc.c, src/groups.c:
+	fixes after linting code using CC=g++: cast {m,re}alloc() return value to
+	proper type.
+
+2006-01-22  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/chage.1, man/chage.1.xml, man/passwd.5, man/passwd.5.xml, man/su.1, man/su.1.xml, man/useradd.8, man/useradd.8.xml:
+	uniformity and grammar fixes (by Christine Spang <spangarang@twcny.rr.com>).
+
+	* NEWS, po/ru.po: updated (by Yuri Kozlov <kozlov.y@gmail.com>).
+
+2006-01-20  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fr.po, NEWS:
+	updated (by Christian Perrier <bubulle@kheops.frmug.org>).
+
+2006-01-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, libmisc/setupenv.c, src/chage.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/usermod.c, src/vipw.c:
+	variouse code cleanups for make possible compilation of shadow with
+	-Wall -Werror (by Alexander Gattin <xrgtn@yandex.ru>).
+
+	* libmisc/age.c, libmisc/shell.c, src/login.c, src/newgrp.c, src/su.c, src/sulogin.c, src/userdel.c, NEWS, lib/prototypes.h:
+	move exit() outside libmisc/shell.c::shell() for handle shell() errors
+	on higher level (now is better visable where some programs exit with 126 and
+	127 exit codes); added new shell() parameter (char *const envp[]) which allow
+	fix preserving enviloment in su on using -p.
+	(patch by Alexander Gattin <xrgtn@yandex.ru>)
+
+	* NEWS, po/el.po:
+	updated (by Konstantinos Margaritis <markos@debian.org>).
+
+2006-01-17  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* lib/exitcodes.h: new #defines:
+	#define E_CMD_NOEXEC           126     /* can't run command/shell */
+	#define E_CMD_NOTFOUND         127     /* can't find command/shell to run */
+
+2006-01-16  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/passwd.1, man/passwd.1.xml:
+	fixes after reviewed for grammatical and other small errors that detract from the
+	polish of the content to native English speakers.
+	I also went ahead and changed all gender references to be a consistent
+	"his/her" (or equivalent) - the original had a mix of just "his", just
+	"her", and occasionally "his/her".
+	(by Christine Spang <spangarang@twcny.rr.com>).
+
+	* po/it.po: updated (by Danilo Piazzalunga <danilopiazza@gmail.com>).
+
+2006-01-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: updated.
+
+	* libmisc/shell.c: remove DEBUG code.
+
+	* po/LINGUAS, po/gl.po, NEWS:
+	added new gl translation (by Jacobo Tarrio <jtarrio@trasno.net>).
+
+2006-01-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/eu.po: small update (by pi <pi@beobide.net>).
+
+2006-01-10  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/su.c: fixed compilation error.
+
+2006-01-08  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>)
+	http://bugs.debian.org/346449
+
+2006-01-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, man/useradd.8, man/useradd.8.xml:
+	better document useradd -d option: will not add the user's home directory
+	if it does not already exist (http://bugs.debian.org/154996)
+
+	* man/su.1, man/su.1.xml, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, src/su.c:
+	added handle -c,--command option for GNU su compliance (merge
+	437_su_-c_option Debian Patch).
+
+	* man/login.1, man/login.1.xml, man/passwd.1, man/passwd.1.xml, man/su.1, man/su.1.xml:
+	man pages cleanups.
+	(http://bugs.debian.org/341489)
+
+	* NEWS, man/Makefile.am, man/nologin.8, man/nologin.8.xml:
+	nologin(8) man pages added (merge 478_nologin.8.xml Debian patch).
+
+	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>)
+	http://bugs.debian.org/346376
+
+2006-01-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/id.po: updated (by Parlin Imanuel <parlin_i@yahoo.com>)
+	http://bugs.debian.org/345514
+
+	* NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/login.c:
+	added translate login prompt string (suggested by Evgeniy Dushistov).
+
+2006-01-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, configure.in: start work on 4.1.0.
+
+	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
+	http://bugs.debian.org/346017
+
 2006-01-03  Tomasz K這czko  <kloczek@pld.org.pl>
 
 	* NEWS: correct 4.0.14 release date (03-01-2006).

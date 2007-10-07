@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1990827\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2000-06-18 120:22+0900\n"
 "Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
 "Language-Team: Japanese\n"
@@ -223,8 +223,8 @@ msgstr "最後パスワード変更日付 (YYYY-MM-DD)"
 msgid "never\n"
 msgstr "なし:\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
+#, c-format
+msgid "password must be changed\n"
 msgstr "パスワードは変更されました.\n"
 
 #, fuzzy, c-format
@@ -424,6 +424,61 @@ msgstr "パスワード・ファイルをロック解除できません.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: グループ・ファイルをロックできません\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: グループファイルを開けません\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: シャドウ・ファイルをロックできません\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: シャドウ・ファイルを開けません\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: %d 行: 1行が長過ぎます\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: %d 行: 新規パスワードがありません\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: %d 行: 不明なユーザ %s です\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: %d 行: パスワード入力を更新できません\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: エラーが検出されました, 変更は無効になりました\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: シャドウ・ファイルの更新にエラーです\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: パスワード・ファイルの更新のエラーです\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -442,36 +497,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: シャドウ・ファイルをロックできません\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: シャドウ・ファイルを開けません\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: %d 行: 1行が長過ぎます\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: %d 行: 新規パスワードがありません\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: %d 行: 不明なユーザ %s です\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: %d 行: パスワード入力を更新できません\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: エラーが検出されました, 変更は無効になりました\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: シャドウ・ファイルの更新にエラーです\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: パスワード・ファイルの更新のエラーです\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -832,14 +859,6 @@ msgid "%s: no changes\n"
 msgstr "%s: 変更はありません\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: グループファイルを開けません\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
 
@@ -906,6 +925,10 @@ msgid "**Never logged in**"
 msgstr "**一度もログインはありません**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "使用法:  %s [-p] [ユーザ名]\n"
 
@@ -954,10 +977,24 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid ""
+msgid "%s login: "
+msgstr ""
 "\n"
-"Login incorrect\n"
-msgstr "ログインが違います"
+"%s ログイン: "
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+"%s ログイン: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr ""
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1258,6 +1295,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1677,6 +1715,12 @@ msgstr "バックアップを作成できません"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %sを復旧できませんでした: %s (あなたの変更は%sにあります)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr "ログインが違います"
 
 #, fuzzy
 #~ msgid ""

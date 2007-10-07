@@ -2,13 +2,13 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERADD" "8" "01/02/2006" "System Management Commands" "System Management Commands"
+.TH "USERADD" "8" "01/22/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-useradd \- Create a new user or update default new user information
+useradd \- create a new user or update default new user information
 .SH "SYNOPSIS"
 .HP 8
 \fBuseradd\fR [\fIoptions\fR] \fILOGIN\fR
@@ -39,7 +39,9 @@ dir is not specified.
 \fIBASE_DIR\fR
 is concatenated with the account name to define the home directory. If the
 \fB\-m\fR
-option is not used, base_dir must exist.
+option is not used,
+\fIBASE_DIR\fR
+must exist.
 .TP
 \fB\-d\fR, \fB\-\-home\fR \fIHOME_DIR\fR
 The new user will be created using
@@ -48,7 +50,9 @@ as the value for the user's login directory. The default is to append the
 \fILOGIN\fR
 name to
 \fIBASE_DIR\fR
-and use that as the login directory name.
+and use that as the login directory name. The directory
+\fIHOME_DIR\fR
+does not have to exist but will not be created if it is missing.
 .TP
 \fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
 The date on which the user account will be disabled. The date is specified in the format
@@ -101,7 +105,7 @@ Note:
 doesn't work yet.
 .TP
 \fB\-o\fR, \fB\-\-non\-unique\fR
-Allow create user account with duplicate (non\-unique) UID.
+Allow the creation of a user account with a duplicate (non\-unique) UID.
 .TP
 \fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
 The encrypted password, as returned by

@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHAGE" "1" "11/05/2005" "User Commands" "User Commands"
+.TH "CHAGE" "1" "01/22/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,8 +14,9 @@ chage \- change user password expiry information
 \fBchage\fR [\fIoptions\fR] \fIuser\fR
 .SH "DESCRIPTION"
 .PP
+The
 \fBchage\fR
-command changes the number of days between password changes and the date of the last password change. This information is used by the system to determine when a user must change her password.
+command changes the number of days between password changes and the date of the last password change. This information is used by the system to determine when a user must change his/her password.
 .SH "OPTIONS"
 .PP
 The options which apply to the
@@ -26,7 +27,7 @@ command are:
 Set the number of days since January 1st, 1970 when the password was last changed. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area).
 .TP
 \fB\-E\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
-Set the date number of days since January 1, 1970 on which the user's account will no longer be accessible. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area). A user whose account is locked must contact the system administrator before being able to use the system again.
+Set the date or number of days since January 1, 1970 on which the user's account will no longer be accessible. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area). A user whose account is locked must contact the system administrator before being able to use the system again.
 .sp
 Passing the number
 \fI\-1\fR
@@ -46,33 +47,33 @@ Passing the number
 \fI\-1\fR
 as the
 \fIINACTIVE\fR
-will remove an accounts inactivity.
+will remove an account's inactivity.
 .TP
 \fB\-l\fR, \fB\-\-list\fR
 Show account aging information.
 .TP
 \fB\-m\fR, \fB\-\-mindays\fR \fIMIN_DAYS\fR
-Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change her password at any time.
+Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change his/her password at any time.
 .TP
 \fB\-M\fR, \fB\-\-maxdays\fR \fIMAX_DAYS\fR
-Set maximum number of days during which a password is valid. When
+Set the maximum number of days during which a password is valid. When
 \fIMAX_DAYS\fR
 plus
 \fILAST_DAY\fR
-is less than the current day, the user will be required to change her password before being able to use her account. This occurrence can be planned for in advance by use of the
+is less than the current day, the user will be required to change his/her password before being able to use his/her account. This occurrence can be planned for in advance by use of the
 \fB\-W\fR
 option, which provides the user with advance warning.
 .sp
 Passing the number
 \fI\-1\fR
-as the
+as
 \fIMAX_DAYS\fR
-will remove checking a password validation.
+will remove checking a password's validity.
 .TP
 \fB\-W\fR, \fB\-\-warndays\fR \fIWARN_DAYS\fR
 Set the number of days of warning before a password change is required. The
 \fIWARN_DAYS\fR
-option is the number of days prior to the password expiring that a user will be warned her password is about to expire.
+option is the number of days prior to the password expiring that a user will be warned his/her password is about to expire.
 .PP
 If none of the options are selected,
 \fBchage\fR
@@ -83,13 +84,13 @@ marks.
 .PP
 The
 \fBchage\fR
-program requires shadow password file to be available. Its functionality is not available when passwords are stored in the passwd file.
+program requires a shadow password file to be available. Its functionality is not available when passwords are stored in the passwd file.
 .PP
 The
 \fBchage\fR
 command is restricted to the root user, except for the
 \fB\-l\fR
-option, which may be used by an unprivileged user to determine when her password or account is due to expire.
+option, which may be used by an unprivileged user to determine when his/her password or account is due to expire.
 .SH "FILES"
 .TP
 \fI/etc/passwd\fR

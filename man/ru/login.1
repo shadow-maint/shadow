@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "login" "1" "12/14/2005" "Пользовательские команды" "Пользовательские команды"
+.TH "login" "1" "03/11/2006" "Пользовательские команды" "Пользовательские команды"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,9 +11,9 @@
 login \- начинает сеанс в системе
 .SH "СИНТАКСИС"
 .HP 6
-\fBlogin\fR [\-p] [\fIимя\ пользователя\fR] [\fIПЕРЕМЕННАЯ_СРЕДЫ=ЗНАЧЕНИЕ\fR...]
+\fBlogin\fR [\-p] [\fIusername\fR] [\fIПЕРЕМЕННАЯ_СРЕДЫ=ЗНАЧЕНИЕ\fR...]
 .HP 6
-\fBlogin\fR [\-p] [\-h\ \fIхост\fR] [\-f\ \fIимя\ пользователя\fR]
+\fBlogin\fR [\-p] [\-h\ \fIхост\fR] [\-f\ \fIusername\fR]
 .HP 6
 \fBlogin\fR [\-p] \-r\ \fIхост\fR
 .SH "ОПИСАНИЕ"
@@ -45,16 +45,16 @@ login \- начинает сеанс в системе
 .PP
 Значения идентификатора учётной записи и группы будет взято из файла
 \fI/etc/passwd\fR. Значения переменных
-\fI$HOME\fR,
-\fI$SHELL\fR,
-\fI$PATH\fR,
-\fI$LOGNAME\fR
+\fB$HOME\fR,
+\fB$SHELL\fR,
+\fB$PATH\fR,
+\fB$LOGNAME\fR
 и
-\fI$MAIL\fR
+\fB$MAIL\fR
 устанавливаются согласно соответствующим полям учётной записи пользователя. Также могут быть установлены значения ulimit, umask и nice из поля GECOS.
 .PP
 В некоторых системах переменной среды
-\fI$TERM\fR
+\fB$TERM\fR
 будет присвоен тип терминала линии tty, согласно данным из файла
 \fI/etc/ttytype\fR.
 .PP

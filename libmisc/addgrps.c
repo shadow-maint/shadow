@@ -9,7 +9,7 @@
 #include <grp.h>
 #include <errno.h>
 
-#ident "$Id: addgrps.c,v 1.8 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id: addgrps.c,v 1.9 2006/01/23 09:46:30 kloczek Exp $"
 
 #define SEP ",:"
 /*
@@ -33,7 +33,7 @@ int add_groups (const char *list)
 
 	i = 16;
 	for (;;) {
-		grouplist = malloc (i * sizeof (GETGROUPS_T));
+		grouplist = (gid_t *) malloc (i * sizeof (GETGROUPS_T));
 		if (!grouplist)
 			return -1;
 		ngroups = getgroups (i, grouplist);
@@ -67,7 +67,7 @@ int add_groups (const char *list)
 			fprintf (stderr, _("Warning: too many groups\n"));
 			break;
 		}
-		tmp = realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));
+		tmp = (gid_t *) realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));
 		if (!tmp) {
 			free (grouplist);
 			return -1;

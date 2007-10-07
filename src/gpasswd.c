@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: gpasswd.c,v 1.34 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: gpasswd.c,v 1.36 2006/02/08 10:58:46 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -41,6 +41,7 @@
 #include "defines.h"
 #include "exitcodes.h"
 #include "groupio.h"
+#include "nscd.h"
 #include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
@@ -65,7 +66,7 @@ unsigned int bywho = -1;
 
 /* local function prototypes */
 static void usage (void);
-static RETSIGTYPE die (int);
+static RETSIGTYPE catch_signals (int);
 static int check_list (const char *);
 
 /*
@@ -86,13 +87,14 @@ static void usage (void)
 }
 
 /*
- * die - set or reset termio modes.
+ * catch_signals - set or reset termio modes.
  *
- *	die() is called before processing begins. signal() is then called
- *	with die() as the signal handler. If signal later calls die() with a
- *	signal number, the terminal modes are then reset.
+ *	catch_signals() is called before processing begins. signal() is then
+ *	called with catch_signals() as the signal handler. If signal later
+ *	calls catch_signals() with a signal number, the terminal modes are
+ *	then reset.
  */
-static RETSIGTYPE die (int killed)
+static RETSIGTYPE catch_signals (int killed)
 {
 	static TERMIO sgtty;
 
@@ -555,14 +557,14 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	die (0);		/* save tty modes */
+	catch_signals (0);	/* save tty modes */
 
-	signal (SIGHUP, die);
-	signal (SIGINT, die);
-	signal (SIGQUIT, die);
-	signal (SIGTERM, die);
+	signal (SIGHUP, catch_signals);
+	signal (SIGINT, catch_signals);
+	signal (SIGQUIT, catch_signals);
+	signal (SIGTERM, catch_signals);
 #ifdef	SIGTSTP
-	signal (SIGTSTP, die);
+	signal (SIGTSTP, catch_signals);
 #endif
 
 	/*

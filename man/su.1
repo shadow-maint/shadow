@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SU" "1" "12/17/2005" "User Commands" "User Commands"
+.TH "SU" "1" "01/22/2006" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -21,7 +21,7 @@ defaults to becoming the super user. The optional argument
 \fB\-\fR
 may be used to provide an environment similar to what the user would expect had the user logged in directly.
 .PP
-Additional arguments may be provided after the username, in which case they are supplied to the user\(aas login shell. In particular, an argument of
+Additional arguments may be provided after the username, in which case they are supplied to the user's login shell. In particular, an argument of
 \fB\-c\fR
 will cause the next argument to be treated as a command by most command interpreters. The command will be executed by the shell specified in
 \fI/etc/passwd\fR
@@ -33,7 +33,7 @@ argument to separate
 \fBsu\fR
 options from the arguments supplied to the shell.
 .PP
-The user will be prompted for a password, if appropriate. Invalid passwords will produce an error message. All attempts, both valid and invalid, are logged to detect abuses of the system.
+The user will be prompted for a password, if appropriate. Invalid passwords will produce an error message. All attempts, both valid and invalid, are logged to detect abuse of the system.
 .PP
 The current environment is passed to the new shell. The value of
 \fB$PATH\fR
@@ -54,6 +54,10 @@ A subsystem login is indicated by the presence of a "*" as the first character o
 The options which apply to the
 \fBsu\fR
 command are:
+.TP
+\fB\-c\fR, \fB\-\-command\fR \fISHELL\fR
+Specify a command that will be invoked by the shell using its
+\fB\-c\fR.
 .TP
 \fB\-\fR, \fB\-l\fR, \fB\-\-login\fR
 Provide an environment similar to what the user would expect had the user logged in directly.

@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "lastlog" "8" "11/10/2005" "Команды управления системой" "Команды управления системой"
+.TH "lastlog" "8" "03/11/2006" "Команды управления системой" "Команды управления системой"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -30,20 +30,20 @@ lastlog \- показывает файл lastlog
 \fBlastlog\fR
 :
 .TP
-\fB\-b\fR, \fB\-\-before\fR \fIДНЕЙ\fR
+\fB\-b\fR, \fB\-\-before\fR \fIDAYS\fR
 Показать записи lastlog за последние
-\fIДНЕЙ\fR.
+\fIDAYS\fR.
 .TP
 \fB\-h\fR, \fB\-\-help\fR
-Показать это сообщение и выйти.
+Показать краткую справку и закончить работу.
 .TP
-\fB\-t\fR, \fB\-\-time\fR \fIДНЕЙ\fR
+\fB\-t\fR, \fB\-\-time\fR \fIDAYS\fR
 Показать записи lastlog новее чем
-\fIДНЕЙ\fR.
+\fIDAYS\fR.
 .TP
-\fB\-u\fR, \fB\-\-user\fR \fIИМЯ ПОЛЬЗОВАТЕЛЯ\fR
+\fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR
 Показать запись lastlog только для указанного пользователя
-\fIИМЯ ПОЛЬЗОВАТЕЛЯ\fR.
+\fILOGIN\fR.
 .TP
 \fB\-t\fR отменяет действие параметра \fB\-u\fR.
 .PP
@@ -60,4 +60,4 @@ lastlog \- показывает файл lastlog
 содержит даты последнего входа пользователей систему
 .SH "ПРЕДОСТЕРЕЖЕНИЯ"
 .PP
-Большие промежутки в значениях идентификаторов пользователей приводят к тому, что программа некоторое время ничего не выводит на экран (то есть, если mmdf=800 и последний uid=170, то во время обработки uid с 171 по 799 программа кажется повисшей).
+Большие промежутки в значениях идентификаторов пользователей приводят к тому, что программа некоторое время ничего не выводит на экран (то есть, если mmdf=800 и последний UID=170, то во время обработки UID с 171 по 799 программа кажется повисшей).

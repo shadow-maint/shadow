@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.16 2005/12/02 22:20:23 kloczek Exp $ -->
+  <!-- $Id: pwck.8.xml,v 1.17 2006/02/20 01:05:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -106,8 +106,8 @@
 	</term>
 	<listitem>
 	  <para>
-            Report errors only. The warnings which do not require any
-            action from the user won't be displayed.
+	    Report errors only. The warnings which do not require any
+	    action from the user won't be displayed.
 	  </para>
 	</listitem>
       </varlistentry>

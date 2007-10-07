@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.89 2005/12/15 15:06:28 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.92 2006/03/07 15:47:33 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -1271,7 +1271,6 @@ static void close_files (void)
 				 _("%s: cannot rewrite group file\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-		gr_unlock ();
 #ifdef	SHADOWGRP
 		if (is_shadow_grp && !sgr_close ()) {
 			fprintf (stderr,
@@ -1280,13 +1279,16 @@ static void close_files (void)
 				 Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-		if (is_shadow_grp)
-			sgr_unlock ();
 #endif
 	}
 	if (is_shadow_pwd)
 		spw_unlock ();
 	pw_unlock ();
+	gr_unlock ();
+#ifdef	SHADOWGRP
+	if (is_shadow_grp)
+		sgr_unlock ();
+#endif
 }
 
 /*
@@ -1564,7 +1566,8 @@ static void create_home (void)
 			fail_exit (E_HOMEDIR);
 		}
 		chown (user_home, user_id, user_gid);
-		chmod (user_home, 0777 & ~getdef_num ("UMASK", 022));
+		chmod (user_home,
+		       0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 		home_added++;
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -1755,10 +1758,12 @@ int main (int argc, char **argv)
 	 */
 	open_files ();
 
-	/* first, seek for a valid uid to use for this user.
-	 * We do this because later we can use the uid we found as
-	 * gid too ... --gafton */
-	find_new_uid ();
+	if (!oflg) {
+		/* first, seek for a valid uid to use for this user.
+		 * We do this because later we can use the uid we found as
+		 * gid too ... --gafton */
+		find_new_uid ();
+	}
 
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */

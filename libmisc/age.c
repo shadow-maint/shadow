@@ -35,10 +35,11 @@
 #include <errno.h>
 #include "prototypes.h"
 #include "defines.h"
+#include "exitcodes.h"
 #include <pwd.h>
 #include <grp.h>
 
-#ident "$Id: age.c,v 1.12 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id: age.c,v 1.13 2006/01/18 19:38:27 kloczek Exp $"
 
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
@@ -125,7 +126,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
 		err = errno;
 		perror ("Can't execute " PASSWD_PROGRAM);
-		_exit ((err == ENOENT) ? 127 : 126);
+		_exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if (pid == -1) {
 		perror ("fork");
 		exit (1);

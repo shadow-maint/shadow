@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHPASSWD" "8" "11/05/2005" "System Management Commands" "System Management Commands"
+.TH "CHPASSWD" "8" "03/02/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -38,9 +38,7 @@ Display help message and exit.
 Use MD5 encryption instead DES when the supplied passwords are not encrypted.
 .SH "CAVEATS"
 .PP
-Remember keep protected for reading by others file passed to standard input
-\fBchpasswd\fR
-command if it contains unencrypted passwords.
+Remember to set permissions or umask to prevent readability of unencrypted files by other users.
 .SH "SEE ALSO"
 .PP
 \fBpasswd\fR(1),

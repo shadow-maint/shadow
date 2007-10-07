@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chage.1'>
-  <!--  $Id: chage.1.xml,v 1.29 2005/11/05 17:17:29 kloczek Exp $  -->
+  <!--  $Id: chage.1.xml,v 1.30 2006/01/22 10:14:51 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>chage</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -25,10 +25,10 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>chage</command> command changes the number of days between
+      The <command>chage</command> command changes the number of days between
       password changes and the date of the last password change. This
       information is used by the system to determine when a user must change
-      her password.
+      his/her password.
     </para>
   </refsect1>
 
@@ -56,7 +56,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set the date number of days since January 1, 1970 on which the
+	    Set the date or number of days since January 1, 1970 on which the
 	    user's account will no longer be accessible. The date may also
 	    be expressed in the format YYYY-MM-DD (or the format more
 	    commonly used in your area). A user whose account is locked must
@@ -90,7 +90,7 @@
 	  </para>
 	  <para>
 	    Passing the number <emphasis remap='I'>-1</emphasis> as the
-	    <replaceable>INACTIVE</replaceable> will remove an accounts
+	    <replaceable>INACTIVE</replaceable> will remove an account's
 	    inactivity.
 	  </para>
 	</listitem>
@@ -112,7 +112,7 @@
 	<listitem>
 	  <para>
 	    Set the minimum number of days between password changes. A value
-	    of zero for this field indicates that the user may change her
+	    of zero for this field indicates that the user may change his/her
 	    password at any time.
 	  </para>
 	</listitem>
@@ -123,18 +123,18 @@
 	</term>
 	<listitem>
 	  <para>
-	    Set maximum number of days during which a password is valid. 
+	    Set the maximum number of days during which a password is valid. 
 	    When <replaceable>MAX_DAYS</replaceable> plus
 	    <replaceable>LAST_DAY</replaceable> is less than the current
-	    day, the user will be required to change her password before
-	    being able to use her account. This occurrence can be planned for
+	    day, the user will be required to change his/her password before
+	    being able to use his/her account. This occurrence can be planned for
 	    in advance by use of the <option>-W</option> option, which
 	    provides the user with advance warning.
 	  </para>
 	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the
+	    Passing the number <emphasis remap='I'>-1</emphasis> as
 	    <replaceable>MAX_DAYS</replaceable> will remove checking a
-	    password validation.
+	    password's validity.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -147,7 +147,7 @@
 	    Set the number of days of warning before a password change is
 	    required. The <replaceable>WARN_DAYS</replaceable> option is the
 	    number of days prior to the password expiring that a user will
-	    be warned her password is about to expire.
+	    be warned his/her password is about to expire.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -163,13 +163,13 @@
   <refsect1 id='note'>
     <title>NOTE</title>
     <para>
-      The <command>chage</command> program requires shadow password file to
+      The <command>chage</command> program requires a shadow password file to
       be available. Its functionality is not available when passwords are
       stored in the passwd file.
     </para>
     <para>The <command>chage</command> command is restricted to the root
       user, except for the <option>-l</option> option, which may be used by
-      an unprivileged user to determine when her password or account is due
+      an unprivileged user to determine when his/her password or account is due
       to expire.
     </para>
   </refsect1>

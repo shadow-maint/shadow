@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: shell.c,v 1.11 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id: shell.c,v 1.13 2006/01/18 19:38:27 kloczek Exp $"
 
 #include <stdio.h>
 #include <errno.h>
@@ -51,13 +51,15 @@ extern size_t newenvc;
  *	the file.  If all that fails, give up in disgust ...
  */
 
-void shell (const char *file, const char *arg)
+int shell (const char *file, const char *arg, char *const envp[])
 {
 	char arg0[1024];
 	int err;
 
-	if (file == (char *) 0)
-		exit (1);
+	if (file == (char *) 0) {
+		errno = EINVAL;
+		return errno;
+	}
 
 	/*
 	 * The argv[0]'th entry is usually the path name, but
@@ -65,22 +67,17 @@ void shell (const char *file, const char *arg)
 	 * that.  So, we determine the 0'th entry only if they
 	 * don't want to tell us what it is themselves.
 	 */
-
 	if (arg == (char *) 0) {
 		snprintf (arg0, sizeof arg0, "-%s", Basename ((char *) file));
 		arg = arg0;
 	}
-#ifdef DEBUG
-	printf ("Executing shell %s\n", file);
-#endif
 
 	/*
 	 * First we try the direct approach.  The system should be
 	 * able to figure out what we are up to without too much
 	 * grief.
 	 */
-
-	execle (file, arg, (char *) 0, newenvp);
+	execle (file, arg, (char *) 0, envp);
 	err = errno;
 
 	/* Linux handles #! in the kernel, and bash doesn't make
@@ -92,7 +89,6 @@ void shell (const char *file, const char *arg)
 	 * relies on the standard shell being able to make sense
 	 * of the "#!" magic number.
 	 */
-
 	if (err == ENOEXEC) {
 		FILE *fp;
 
@@ -100,7 +96,7 @@ void shell (const char *file, const char *arg)
 			if (getc (fp) == '#' && getc (fp) == '!') {
 				fclose (fp);
 				execle ("/bin/sh", "sh",
-					file, (char *) 0, newenvp);
+					file, (char *) 0, envp);
 				err = errno;
 			} else {
 				fclose (fp);
@@ -114,9 +110,8 @@ void shell (const char *file, const char *arg)
 	 * how to execute this stupid shell, so I might as well give
 	 * up in disgust ...
 	 */
-
 	snprintf (arg0, sizeof arg0, _("Cannot execute %s"), file);
 	errno = err;
 	perror (arg0);
-	exit (1);
+	return err;
 }

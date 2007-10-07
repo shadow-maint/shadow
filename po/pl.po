@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow-4.0.12\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2005-09-05 13:05+0200\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -249,8 +249,8 @@ msgid "never\n"
 msgstr "nigdy\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "Hasło musi zostać zmienione"
+msgid "password must be changed\n"
+msgstr "Hasło musi zostać zmienione\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -450,6 +450,69 @@ msgstr "Nie można usunąć blokady z pliku z hasłami.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Użycie: chgpasswd [opcje]\n"
+"\n"
+"Opcje:\n"
+"  -e, --encrypted\tprzekazywane hasła są w postaci zakodowane\n"
+"  -h, --help\t\twyświetlenie tego opisu i zakończenie\n"
+"  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy "
+"przekazywane\n"
+"\t\t\thasła nie są zakodowane\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: nie można zablokować pliku z grupami\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: nie można otworzyć pliku z grupami\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: nie można zablokować pliku gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: linia %d: linia zbyt długa\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: linia %d: brakuje nowego hasła\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: linia %d: nieznana grupa %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linia %d: nie można zaktualizować wpisu do bazy haseł\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: wykryto błąd, zignorowano modyfikacje\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: błąd podczas aktualizacji pliku z ukrytymi hasłami\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: błąd podczas aktualizacji pliku z hasłami\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -476,36 +539,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: nie można zablokować pliku z ukrytymi hasłami\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: linia %d: linia zbyt długa\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: linia %d: brakuje nowego hasła\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linia %d: nieznany użytkownik %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linia %d: nie można zaktualizować wpisu do bazy haseł\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: wykryto błąd, zignorowano modyfikacje\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: błąd podczas aktualizacji pliku z ukrytymi hasłami\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: błąd podczas aktualizacji pliku z hasłami\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -890,14 +925,6 @@ msgid "%s: no changes\n"
 msgstr "%s: bez zmian\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: nie można zablokować pliku z grupami\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: nie można otworzyć pliku z grupami\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: nie można zablokować pliku z ukrytymi hasłami grup\n"
 
@@ -973,6 +1000,10 @@ msgid "**Never logged in**"
 msgstr "**Nigdy nie zalogowany**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: nieoczekiwany argument: %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Użycie: %s [-p] [nazwa]\n"
 
@@ -1025,12 +1056,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM niepowodzenie, przerwane: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Nieprawidłowe logowanie\n"
+msgid "%s login: "
+msgstr "%s login: "
+
+#, c-format
+msgid "login: "
+msgstr "login: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Maksymalna ilość prób przekroczona (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: przerwanie wywołane przez PAM\n"
 
 #, c-format
 msgid ""
@@ -1144,7 +1183,7 @@ msgstr "%s: linia %d: nie można zaktualizować wpisu\n"
 msgid "%s: error updating files\n"
 msgstr "%s: błąd podczas aktualizowania plików\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
@@ -1172,20 +1211,20 @@ msgstr ""
 "Opcje:\n"
 "  -a, --all\t\t\traportuj status hasła dla wszystkich kont\n"
 "  -d, --delete\t\t\tkasuje hasło użytkowanika\n"
-"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -e, --expire\t\t\twymuś przeterminowanie hasła\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
 "  -k, --keep-tokens\t\tzmiana hasła tylko w przypadku kiedy\n"
 "\t\t\t\tjest przeterminowane\n"
-"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
-"\t\t\t\tto INACTIVE\n"
+"  -i, --inactive NIEAKTYWNE\tkonto przeterminowane po upływie NIEAKTYWNE\n"
+"\t\t\t\tdni po wygaśnięciu hasła\n"
 "  -l, --lock\t\t\tzablokuj konto\n"
-"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
-"\t\t\t\tchange to MIN_DAYS\n"
+"  -n, --mindays MIN_DNI\tustaw minimalną ilość dni prezed kolejną zmianą\n"
+"\t\t\t\thasła na MIN_DNI\n"
 "  -n, --mindays MIN_DNI\t\tustawia minimalną liczbę dni pomiędzy zmianami\n"
 "\t\t\t\thasła na MIN_DAYS\n"
 "  -q, --quiet\t\t\tcichy tryb pracy\n"
-"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
-"  -S, --status\t\t\treport password status on the named account\n"
+"  -r, --repository REPOZYTORIUM\tzmień hasło w repozytorium REPOZYTORIUM\n"
+"  -S, --status\t\t\traportuj status hasła\n"
 "  -u, --unlock\t\t\todblokuj konto\n"
 "  -w, --warndays DNI_OSTRZ\tustawia na DNI_OSTRZ liczbę dni przed\n"
 "\t\t\t\tupływem ważności hasła\n"
@@ -1358,6 +1397,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1368,6 +1408,7 @@ msgstr ""
 "Użycie: su [opcje] [LOGIN]\n"
 "\n"
 "Options:\n"
+"  -c, --command POLECENIE\t\turuchom POLECENIE w to wywoływanym shellu\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
 "  -, -l, --login\turuchom z  powłoką z powłoką zgłoszeniową\n"
 "  -m, -p,\n"

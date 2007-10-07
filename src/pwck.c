@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwck.c,v 1.32 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: pwck.c,v 1.33 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <fcntl.h>
 #include <grp.h>
@@ -41,6 +41,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "nscd.h"
 extern void __pw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__pw_get_head (void);
 

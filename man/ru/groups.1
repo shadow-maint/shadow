@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "groups" "1" "11/10/2005" "Пользовательские команды" "Пользовательские команды"
+.TH "groups" "1" "03/11/2006" "Пользовательские команды" "Пользовательские команды"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,15 +11,15 @@
 groups \- показывает имена групп запустившего программу пользователя
 .SH "СИНТАКСИС"
 .HP 7
-\fBgroups\fR [\fIпользователь\fR]
+\fBgroups\fR [\fIuser\fR]
 .SH "ОПИСАНИЕ"
 .PP
 \fBgroups\fR
 показывает имена групп запустившего команду пользователя или их числовые идентификаторы (ID). Если для номера группы нет соответствующей записи в файле
-\fI/etc/group\fR, то выводится числовой идентификатор группы. Если указан необязательный параметр
-\fIпользователь\fR
+\fI/etc/group\fR, то отображается числовое значение без соответствующего имени. При указании необязательного параметра
+\fIuser\fR
 , то выводятся группы учётной записи
-\fIпользователь\fR.
+\fIuser\fR.
 .SH "ЗАМЕЧАНИЕ"
 .PP
 В системах, не имеющих поддержки одновременного членства в группах, используется информация из файла

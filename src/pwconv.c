@@ -28,7 +28,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwconv.c,v 1.21 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: pwconv.c,v 1.22 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -43,6 +43,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "nscd.h"
 /*
  * exit status values
  */

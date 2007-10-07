@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: userdel.c,v 1.58 2005/12/01 20:10:48 kloczek Exp $"
+#ident "$Id: userdel.c,v 1.61 2006/02/07 20:19:46 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -50,6 +50,7 @@
 #include "pwauth.h"
 #include "pwio.h"
 #include "shadowio.h"
+#include "exitcodes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
@@ -65,9 +66,7 @@
 #define E_HOMEDIR	12	/* can't remove home directory */
 static char *user_name;
 static uid_t user_id;
-static gid_t user_gid;
 static char *user_home;
-static char *user_group;
 
 static char *Prog;
 static int fflg = 0, rflg = 0;
@@ -264,65 +263,6 @@ static void update_groups (void)
 }
 
 /*
- * remove_group - remove the user's group unless it is not really a user-private group
- */
-static void remove_group ()
-{
-	char *glist_name;
-	struct group *gr;
-	struct passwd *pwd;
-
-	if (user_group == NULL || user_name == NULL)
-		return;
-
-	if (strcmp (user_name, user_group)) {
-		return;
-	}
-
-	glist_name = NULL;
-	gr = getgrnam (user_group);
-	if (gr)
-		glist_name = *(gr->gr_mem);
-	while (glist_name) {
-		while (glist_name && *glist_name) {
-			if (strncmp (glist_name, user_name, 16)) {
-				return;
-			}
-			glist_name++;
-		}
-	}
-
-	setpwent ();
-	while ((pwd = getpwent ())) {
-		if (strcmp (pwd->pw_name, user_name) == 0)
-			continue;
-
-		if (pwd->pw_gid == user_gid) {
-			return;
-		}
-	}
-
-	/* now actually do the removal if we haven't already returned */
-
-	if (!gr_remove (user_group)) {
-		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
-	}
-#ifdef SHADOWGRP
-
-	/*
-	 * Delete the shadow group entries as well.
-	 */
-
-	if (is_shadow_grp && !sgr_remove (user_group)) {
-		fprintf (stderr, _("%s: error removing shadow group entry\n"),
-			 Prog);
-	}
-#endif				/* SHADOWGRP */
-	SYSLOG ((LOG_INFO, "remove group `%s'\n", user_group));
-	return;
-}
-
-/*
  * close_files - close all of the files that were opened
  *
  *	close_files() closes all of the files that were opened for this
@@ -384,8 +324,7 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking password file", user_name, user_id, 1,
-			      0);
+			      "locking password file", user_name, user_id, 0);
 #endif
 		exit (E_PW_UPDATE);
 	}
@@ -572,13 +511,8 @@ static void user_cancel (const char *user)
 	pid = fork ();
 	if (pid == 0) {
 		execl (cmd, cmd, user, (char *) 0);
-		if (errno == ENOENT) {
-			perror (cmd);
-			_exit (127);
-		} else {
-			perror (cmd);
-			_exit (126);
-		}
+		perror (cmd);
+		_exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if (pid == -1) {
 		perror ("fork");
 		return;
@@ -657,7 +591,6 @@ static void remove_mailbox (void)
 int main (int argc, char **argv)
 {
 	struct passwd *pwd;
-	struct group *grp;
 	int arg;
 	int errors = 0;
 
@@ -765,10 +698,6 @@ int main (int argc, char **argv)
 #endif
 	user_id = pwd->pw_uid;
 	user_home = xstrdup (pwd->pw_dir);
-	user_gid = pwd->pw_gid;
-	grp = getgrgid (user_gid);
-	if (grp)
-		user_group = xstrdup (grp->gr_name);
 	/*
 	 * Check to make certain the user isn't logged in.
 	 */
@@ -821,9 +750,6 @@ int main (int argc, char **argv)
 		endpwent ();
 	}
 #endif
-
-	/* Remove the user's group if appropriate. */
-	remove_group ();
 
 	if (rflg) {
 		if (remove_tree (user_home)

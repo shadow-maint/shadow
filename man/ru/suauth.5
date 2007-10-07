@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "suauth" "5" "11/10/2005" "Форматы файлов" "Форматы файлов"
+.TH "suauth" "5" "03/11/2006" "Форматы файлов" "Форматы файлов"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -62,7 +62,7 @@ suauth \- файл управления командой su
 .nf
       # пример файла /etc/suauth
       #
-      # Пара привелегированных имён пользователей
+      # Пара привилегированных имён пользователей
       # могут выполнить su, чтобы получить права суперпользователя введя свой пароль.
       #
       root:chris,birddog:OWNPASS
@@ -85,7 +85,7 @@ suauth \- файл управления командой su
 .SH "ФАЙЛЫ"
 .TP
 \fI/etc/suauth\fR
-.SH "БАГИ"
+.SH "ОШИБКИ"
 .PP
 Может быть несколько кривостей. Анализатор файла, в частности, не прощает синтаксических ошибок, ожидая, что не будет недопустимых пробелов (кроме как в начале и конце строк), и специальных слов, разделяющих различные вещи.
 .SH "ДИАГНОСТИКА"

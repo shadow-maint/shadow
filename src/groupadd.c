@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupadd.c,v 1.50 2005/12/06 20:24:03 kloczek Exp $"
+#ident "$Id: groupadd.c,v 1.51 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -85,7 +85,6 @@ static void new_sgent (struct sgrp *);
 static void grp_update (void);
 static void find_new_gid (void);
 static void check_new_name (void);
-static void process_flags (int, char **);
 static void close_files (void);
 static void open_files (void);
 static void fail_exit (int);

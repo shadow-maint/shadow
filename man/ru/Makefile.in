@@ -133,6 +133,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 U = @U@
 USE_NLS = @USE_NLS@
+USE_NLS_FALSE = @USE_NLS_FALSE@
+USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -210,6 +212,7 @@ man_MANS = \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
+	nologin.8 \
 	passwd.1 \
 	passwd.5 \
 	porttime.5 \

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.defs.5'>
-  <!--  $Id: login.defs.5.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
+  <!--  $Id: login.defs.5.xml,v 1.16 2006/03/07 15:47:32 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login.defs</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -162,7 +162,7 @@
 	<listitem>
 	  <para>
 	    The permission mask is initialized to this value. If not
-	    specified, the permission mask will be initialized to 077.
+	    specified, the permission mask will be initialized to 022.
 	  </para>
 	</listitem>
       </varlistentry>

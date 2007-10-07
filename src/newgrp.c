@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: newgrp.c,v 1.42 2005/11/10 16:01:27 kloczek Exp $"
+#ident "$Id: newgrp.c,v 1.44 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -38,9 +38,11 @@
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
+#include "exitcodes.h"
 /*
  * Global variables
  */
+extern char **newenvp;
 extern char **environ;
 
 #ifdef HAVE_SETGROUPS
@@ -103,6 +105,7 @@ int main (int argc, char **argv)
 	int needspasswd = 0;
 	int i;
 	int cflag = 0;
+	int err = 0;
 	gid_t gid;
 	char *cp;
 	const char *cpasswd, *name, *prog;
@@ -482,8 +485,8 @@ int main (int argc, char **argv)
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
-			} while (pid == child && WIFSTOPPED (cst) ||
-				 pid != child && errno == EINTR);
+			} while ((pid == child && WIFSTOPPED (cst)) ||
+				 (pid != child && errno == EINTR));
 			SYSLOG ((LOG_INFO,
 				 "user `%s' (login `%s' on %s) returned to group `%s'",
 				 name, loginname, tty,
@@ -556,13 +559,8 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_USER_START, Prog, "changing",
 			      NULL, getuid (), 0);
 #endif
-		if (errno == ENOENT) {
-			perror ("/bin/sh");
-			exit (127);
-		} else {
-			perror ("/bin/sh");
-			exit (126);
-		}
+		perror ("/bin/sh");
+		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	}
 
 	/*
@@ -631,7 +629,8 @@ int main (int argc, char **argv)
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
 	 */
-	shell (prog, initflag ? (char *) 0 : cp);
+	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
+	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/* NOTREACHED */
       failure:
 

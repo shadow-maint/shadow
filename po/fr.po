@@ -1,22 +1,22 @@
 # shadow fr.po
-# Copyright (C) 1999, 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 1999, 2004, 2005, 2006 Free Software Foundation, Inc.
 # Patches, suggestions, etc welcome.
-# Vincent Renardias <vincent@ldsol.com>, 1999, 2005.
-# Christian Perrier <bubulle@debian.org>, 2005.
 #
+# Vincent Renardias <vincent@ldsol.com>, 1999, 2005.
+# Jean-Luc Coulon <jean.luc.coulon@wanadoo.fr>, 2005, 2006.
+# Christian Perrier <bubulle@debian.org>, 2005, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-14 09:04+0100\n"
-"Last-Translator: Jean-Luc Coulon <jean.luc.coulon@wanadoo.fr>\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-12 14:46+0100\n"
+"Last-Translator: Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: KBabel 1.10.2\n"
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -253,8 +253,8 @@ msgid "never\n"
 msgstr "jamais\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "Le mot de passe doit être changé"
+msgid "password must be changed\n"
+msgstr "Le mot de passe doit être changé\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -470,6 +470,75 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Utilisation : chgpasswd [options]\n"
+"\n"
+"Options :\n"
+"  -e, --encrypted    les mots de passe fournis sont chiffrés\n"
+"  -h, --help         afficher ce message d'aide et quitter\n"
+"  -m, --md5          utiliser le chiffrage MD5 à la place de DES lorsque "
+"les\n"
+"                     mots de passe fournis ne sont pas chiffrés\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s : impossible de verrouiller le fichier des groupes /etc/group\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s : impossible d'ouvrir le fichier des groupes /etc/group\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr ""
+"%s : impossible de verrouiller le fichier des groupes cachés /etc/gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr ""
+"%s : impossible d'ouvrir le fichier des mots de passe cachés /etc/shadow\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s : ligne %d : ligne trop longue\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s : ligne %d : nouveau mot de passe manquant\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s : ligne %d : groupe %s inconnu\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr ""
+"%s : ligne %d : impossible de mettre à jour l'entrée dans /etc/passwd\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s : erreur détectée ; modifications ignorées\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr ""
+"%s : erreur lors de la mise à jour du fichier des mots de passe cachés /etc/"
+"shadow\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr ""
+"%s : erreur lors de la mise à jour du fichier des mots de passe /etc/passwd\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -499,41 +568,8 @@ msgstr ""
 "shadow\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr ""
-"%s : impossible d'ouvrir le fichier des mots de passe cachés /etc/shadow\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s : ligne %d : ligne trop longue\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s : ligne %d : nouveau mot de passe manquant\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s : ligne %d : utilisateur %s inconnu\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr ""
-"%s : ligne %d : impossible de mettre à jour l'entrée dans /etc/passwd\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s : erreur détectée ; modifications ignorées\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr ""
-"%s : erreur lors de la mise à jour du fichier des mots de passe cachés /etc/"
-"shadow\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr ""
-"%s : erreur lors de la mise à jour du fichier des mots de passe /etc/passwd\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -936,15 +972,6 @@ msgid "%s: no changes\n"
 msgstr "%s : aucun changement\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr ""
-"%s : impossible de verrouiller le fichier des mots de passe /etc/group\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s : impossible d'ouvrir le fichier des mots de passe /etc/group\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr ""
 "%s : impossible de verrouiller le fichier des mots de passe cachés /etc/"
@@ -1030,6 +1057,10 @@ msgid "**Never logged in**"
 msgstr "**Jamais connecté**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog : paramètre inattendu : %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Utilisation : %s [-p] [nom]\n"
 
@@ -1082,12 +1113,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login : échec de PAM, abandon : %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Identifiant de connexion incorrect\n"
+msgid "%s login: "
+msgstr "%s login : "
+
+#, c-format
+msgid "login: "
+msgstr "login : "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Dépassement du nombre maximum de tentatives (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login : interruption requise par PAM\n"
 
 #, c-format
 msgid ""
@@ -1142,7 +1181,7 @@ msgstr "L'identifiant d'utilisateur (UID) %u est inconnu\n"
 
 #, c-format
 msgid "unknown GID: %lu\n"
-msgstr "Identifiant de groupe (GID) inconnu : %lu\n"
+msgstr "L'identifiant de groupe (GID) %lu est inconnu\n"
 
 msgid "Sorry.\n"
 msgstr " \n"
@@ -1431,6 +1470,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1440,17 +1480,19 @@ msgid ""
 msgstr ""
 "Utilisation : su [options] [login]\n"
 "\n"
-"Options:\n"
-"  -h, --help\t\t\taffiche ce message d'aide et quitte\n"
-"  -, -l, --login\t\tutilise un interpréteur de commandes initial\n"
-"                \t\t(« login shell ») ;\n"
+"Options :\n"
+"  -c, --command COMMANDE  passer la commande COMMANDE à\n"
+"                          l'interpréteur de commande appelé ;\n"
+"  -h, --help              afficher ce message d'aide et quitter ;\n"
+"  -, -l, --login          utiliser un interpréteur de commandes\n"
+"                          initial (« login shell ») ;\n"
 "  -m, -p,\n"
-"  --preserve-environment\tne réinitialise pas les variables\n"
-"\t\t\t\td'environnement et conserve le même interpréteur de\n"
-"\t\t\t\tcommandes ;\n"
-"  -s, --shell SHELL\t\tutilise SHELL comme interpréteur de\n"
-"\t\t\t\tcommandes à la place de celui défini dans le fichier\n"
-"\t\t\t\tpasswd.\n"
+"  --preserve-environment  ne pas réinitialisee les variables\n"
+"                          d'environnement et conserver le même\n"
+"                          interpréteur de commandes ;\n"
+"  -s, --shell SHELL       utiliser SHELL comme interpréteur de\n"
+"                          commandes à la place de celui défini\n"
+"                          dans le fichier passwd.\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1578,7 +1620,7 @@ msgstr ""
 "                              défaut modifiée de « useradd »\n"
 "  -e, --expiredate DATE_EXPIR fixer la date de fin de validité du\n"
 "                              compte à DATE_EXPIR\n"
-"  -f, --inactive INACTIF      fixer la durée d'inactivité du mot de masse\n"
+"  -f, --inactive INACTIF      fixer la durée d'inactivité du mot de passe\n"
 "                              après sa fin de validité à INACTIF\n"
 "  -g, --gid GROUPE            forcer l'utilisation de GROUPE pour le compte\n"
 "                              du nouvel utilisateur\n"
@@ -1595,7 +1637,7 @@ msgstr ""
 "                              dupliqué (non unique)\n"
 "  -p, --password MOT_DE_PASSE utiliser un mot de passe chiffré pour le\n"
 "                              compte du nouvel utilisateur\n"
-"  -s, --shell INTERPRÉTEUR    interpréteur de commande initial pour le\n"
+"  -s, --shell INTERPRÉTEUR    interpréteur de commandes initial pour le\n"
 "                              compte du nouvel utilisateur\n"
 "  -u, --uid UID               forcer l'utilisation de l'identifiant « UID »\n"
 "                              pour le compte du nouvel utilisateur\n"
@@ -1783,7 +1825,7 @@ msgstr "%s : %s n'appartient pas à %s, non supprimé\n"
 
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s : attention: suppression impossible "
+msgstr "%s : attention : suppression impossible "
 
 #, c-format
 msgid "%s: user %s does not exist\n"
@@ -1835,7 +1877,7 @@ msgstr ""
 "                              « GECOS »\n"
 "  -d, --home-dir REP_PERS     définir un nouveau répertoire personnel pour\n"
 "                              le compte de l'utilisateur\n"
-"  -e, --expiredate DATE_EXPIR fixer la date de fin de validité du comptei\n"
+"  -e, --expiredate DATE_EXPIR fixer la date de fin de validité du compte\n"
 "                              à DATE_EXPIR\n"
 "  -f, --inactive INACTIF      fixer la durée d'inactivité du mot de masse\n"
 "                              après sa fin de validité à INACTIF\n"
@@ -1852,7 +1894,7 @@ msgstr ""
 "                              d'utilisateur (UID) dupliqué (non unique)\n"
 "  -p, --password MOT_DE_PASSE utiliser un mot de passe chiffré pour le\n"
 "                              nouveau mot de passe\n"
-"  -s, --shell INTERPRÉTEUR    définir un nouvel interpréteur de commande\n"
+"  -s, --shell INTERPRÉTEUR    définir un nouvel interpréteur de commandes\n"
 "                              initial pour le compte de l'utilisateur\n"
 "  -u, --uid UID               définir un nouvel identifiant (UID) pour le\n"
 "                              compte de l'utilisateur\n"
@@ -1946,7 +1988,7 @@ msgstr ""
 "  -p, --passwd\t\t\tmodifier la base de données des comptes\n"
 "              \t\t\t(/etc/passwd)\n"
 "  -p, --quiet\t\t\tmode silencieux\n"
-"  -s, --shadow\t\t\tmodifier les bases de données de mots de passe\n"
+"  -s, --shadow\t\t\tmodifier la base de données des mots de passe\n"
 "              \t\t\tcachés (« shadow passwords ») : shadow ou gshadow\n"
 
 #, c-format

@@ -59,6 +59,7 @@ lib/shadowio.c
 lib/utent.c
 src/chage.c
 src/chfn.c
+src/chgpasswd.c
 src/chpasswd.c
 src/chsh.c
 src/expiry.c

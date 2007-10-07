@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.64 2005/12/05 18:19:47 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.65 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -87,18 +87,20 @@ static uid_t user_newid;
 static gid_t user_gid;
 static gid_t user_newgid;
 static char *user_comment;
-static char *user_newcomment;	/* Audit */
 static char *user_home;
 static char *user_newhome;
 static char *user_shell;
-static char *user_newshell;	/* Audit */
-
 static long user_expire;
-static long user_newexpire;	/* Audit */
 static long user_inactive;
-static long user_newinactive;	/* Audit */
 static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
+
+#ifdef WITH_AUDIT
+static char *user_newcomment;	/* Audit */
+static char *user_newshell;	/* Audit */
+static long user_newexpire;	/* Audit */
+static long user_newinactive;	/* Audit */
+#endif
 
 static char *Prog;
 
@@ -840,7 +842,6 @@ static void process_flags (int argc, char **argv)
 
 	const struct spwd *spwd = NULL;
 	int anyflag = 0;
-	int arg;
 
 	if (argc == 1 || argv[argc - 1][0] == '-')
 		usage ();

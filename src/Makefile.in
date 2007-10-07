@@ -40,12 +40,13 @@ bin_PROGRAMS = groups$(EXEEXT) login$(EXEEXT) su$(EXEEXT)
 ubin_PROGRAMS = faillog$(EXEEXT) lastlog$(EXEEXT) chage$(EXEEXT) \
 	chfn$(EXEEXT) chsh$(EXEEXT) expiry$(EXEEXT) gpasswd$(EXEEXT) \
 	newgrp$(EXEEXT) passwd$(EXEEXT)
-usbin_PROGRAMS = chpasswd$(EXEEXT) groupadd$(EXEEXT) groupdel$(EXEEXT) \
-	groupmod$(EXEEXT) grpck$(EXEEXT) grpconv$(EXEEXT) \
-	grpunconv$(EXEEXT) logoutd$(EXEEXT) newusers$(EXEEXT) \
-	nologin$(EXEEXT) pwck$(EXEEXT) pwconv$(EXEEXT) \
-	pwunconv$(EXEEXT) useradd$(EXEEXT) userdel$(EXEEXT) \
-	usermod$(EXEEXT) vipw$(EXEEXT)
+usbin_PROGRAMS = chgpasswd$(EXEEXT) chpasswd$(EXEEXT) \
+	groupadd$(EXEEXT) groupdel$(EXEEXT) groupmod$(EXEEXT) \
+	grpck$(EXEEXT) grpconv$(EXEEXT) grpunconv$(EXEEXT) \
+	logoutd$(EXEEXT) newusers$(EXEEXT) nologin$(EXEEXT) \
+	pwck$(EXEEXT) pwconv$(EXEEXT) pwunconv$(EXEEXT) \
+	useradd$(EXEEXT) userdel$(EXEEXT) usermod$(EXEEXT) \
+	vipw$(EXEEXT)
 noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -70,16 +71,23 @@ am__DEPENDENCIES_1 = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 am__DEPENDENCIES_2 =
 chage_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 chfn_SOURCES = chfn.c
 chfn_OBJECTS = chfn.$(OBJEXT)
-chfn_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+chfn_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
+chgpasswd_SOURCES = chgpasswd.c
+chgpasswd_OBJECTS = chgpasswd.$(OBJEXT)
+chgpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 chpasswd_SOURCES = chpasswd.c
 chpasswd_OBJECTS = chpasswd.$(OBJEXT)
-chpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+chpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 chsh_SOURCES = chsh.c
 chsh_OBJECTS = chsh.$(OBJEXT)
-chsh_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+chsh_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 expiry_SOURCES = expiry.c
 expiry_OBJECTS = expiry.$(OBJEXT)
 expiry_LDADD = $(LDADD)
@@ -92,19 +100,20 @@ faillog_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 gpasswd_SOURCES = gpasswd.c
 gpasswd_OBJECTS = gpasswd.$(OBJEXT)
-gpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+gpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 groupadd_SOURCES = groupadd.c
 groupadd_OBJECTS = groupadd.$(OBJEXT)
 groupadd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 groupdel_SOURCES = groupdel.c
 groupdel_OBJECTS = groupdel.$(OBJEXT)
 groupdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 groupmod_SOURCES = groupmod.c
 groupmod_OBJECTS = groupmod.$(OBJEXT)
 groupmod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 groups_SOURCES = groups.c
 groups_OBJECTS = groups.$(OBJEXT)
 groups_LDADD = $(LDADD)
@@ -112,19 +121,13 @@ groups_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 grpck_SOURCES = grpck.c
 grpck_OBJECTS = grpck.$(OBJEXT)
-grpck_LDADD = $(LDADD)
-grpck_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+grpck_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 grpconv_SOURCES = grpconv.c
 grpconv_OBJECTS = grpconv.$(OBJEXT)
-grpconv_LDADD = $(LDADD)
-grpconv_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+grpconv_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 grpunconv_SOURCES = grpunconv.c
 grpunconv_OBJECTS = grpunconv.$(OBJEXT)
-grpunconv_LDADD = $(LDADD)
-grpunconv_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+grpunconv_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 id_SOURCES = id.c
 id_OBJECTS = id.$(OBJEXT)
 id_LDADD = $(LDADD)
@@ -150,29 +153,25 @@ newgrp_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
 	$(am__DEPENDENCIES_2)
 newusers_SOURCES = newusers.c
 newusers_OBJECTS = newusers.$(OBJEXT)
-newusers_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+newusers_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 nologin_SOURCES = nologin.c
 nologin_OBJECTS = nologin.$(OBJEXT)
 nologin_DEPENDENCIES =
 passwd_SOURCES = passwd.c
 passwd_OBJECTS = passwd.$(OBJEXT)
 passwd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 pwck_SOURCES = pwck.c
 pwck_OBJECTS = pwck.$(OBJEXT)
-pwck_LDADD = $(LDADD)
-pwck_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+pwck_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 pwconv_SOURCES = pwconv.c
 pwconv_OBJECTS = pwconv.$(OBJEXT)
-pwconv_LDADD = $(LDADD)
-pwconv_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+pwconv_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 pwunconv_SOURCES = pwunconv.c
 pwunconv_OBJECTS = pwunconv.$(OBJEXT)
-pwunconv_LDADD = $(LDADD)
-pwunconv_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+pwunconv_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 am_su_OBJECTS = su.$(OBJEXT) suauth.$(OBJEXT)
 su_OBJECTS = $(am_su_OBJECTS)
 su_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
@@ -184,20 +183,18 @@ sulogin_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 useradd_SOURCES = useradd.c
 useradd_OBJECTS = useradd.$(OBJEXT)
 useradd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 userdel_SOURCES = userdel.c
 userdel_OBJECTS = userdel.$(OBJEXT)
 userdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 usermod_SOURCES = usermod.c
 usermod_OBJECTS = usermod.$(OBJEXT)
 usermod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 vipw_SOURCES = vipw.c
 vipw_OBJECTS = vipw.$(OBJEXT)
-vipw_LDADD = $(LDADD)
-vipw_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+vipw_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -209,15 +206,15 @@ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
-	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
-	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
+SOURCES = chage.c chfn.c chgpasswd.c chpasswd.c chsh.c expiry.c \
+	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
+	grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
 	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
 	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
 	userdel.c usermod.c vipw.c
-DIST_SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
-	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
-	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
+DIST_SOURCES = chage.c chfn.c chgpasswd.c chpasswd.c chsh.c expiry.c \
+	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
+	grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
 	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
 	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
 	userdel.c usermod.c vipw.c
@@ -301,6 +298,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 U = @U@
 USE_NLS = @USE_NLS@
+USE_NLS_FALSE = @USE_NLS_FALSE@
+USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -365,31 +364,39 @@ LDADD = $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 
 AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\"
-chage_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-chfn_LDADD = $(LDADD) $(LIBPAM)
-chsh_LDADD = $(LDADD) $(LIBPAM)
-chpasswd_LDADD = $(LDADD) $(LIBPAM)
-gpasswd_LDADD = $(LDADD) $(LIBAUDIT)
-groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+chage_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+chfn_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
+chgpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
+chsh_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
+chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
+gpasswd_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX)
+groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+grpck_LDADD = $(LDADD) $(LIBSELINUX)
+grpconv_LDADD = $(LDADD) $(LIBSELINUX)
+grpunconv_LDADD = $(LDADD) $(LIBSELINUX)
 login_SOURCES = \
 	login.c \
 	login_nopam.c
 
 login_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 newgrp_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-newusers_LDADD = $(LDADD) $(LIBPAM)
+newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
 nologin_LDADD = 
-passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT)
+passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT) $(LIBSELINUX)
+pwck_LDADD = $(LDADD) $(LIBSELINUX)
+pwconv_LDADD = $(LDADD) $(LIBSELINUX)
+pwunconv_LDADD = $(LDADD) $(LIBSELINUX)
 su_SOURCES = \
 	su.c \
 	suauth.c
 
 su_LDADD = $(LDADD) $(LIBPAM)
-useradd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-userdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-usermod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+useradd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+userdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+usermod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+vipw_LDADD = $(LDADD) $(LIBSELINUX)
 all: all-am
 
 .SUFFIXES:
@@ -520,6 +527,9 @@ chage$(EXEEXT): $(chage_OBJECTS) $(chage_DEPENDENCIES)
 chfn$(EXEEXT): $(chfn_OBJECTS) $(chfn_DEPENDENCIES) 
 	@rm -f chfn$(EXEEXT)
 	$(LINK) $(chfn_LDFLAGS) $(chfn_OBJECTS) $(chfn_LDADD) $(LIBS)
+chgpasswd$(EXEEXT): $(chgpasswd_OBJECTS) $(chgpasswd_DEPENDENCIES) 
+	@rm -f chgpasswd$(EXEEXT)
+	$(LINK) $(chgpasswd_LDFLAGS) $(chgpasswd_OBJECTS) $(chgpasswd_LDADD) $(LIBS)
 chpasswd$(EXEEXT): $(chpasswd_OBJECTS) $(chpasswd_DEPENDENCIES) 
 	@rm -f chpasswd$(EXEEXT)
 	$(LINK) $(chpasswd_LDFLAGS) $(chpasswd_OBJECTS) $(chpasswd_LDADD) $(LIBS)
@@ -616,6 +626,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chage.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chfn.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chgpasswd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chpasswd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chsh.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/expiry.Po@am__quote@

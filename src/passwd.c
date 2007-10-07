@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.55 2005/12/06 20:19:52 kloczek Exp $"
+#ident "$Id: passwd.c,v 1.57 2006/02/21 22:44:35 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -603,7 +603,6 @@ static long getnumber (const char *str)
  */
 int main (int argc, char **argv)
 {
-	int flag;		/* Current option to process     */
 	const struct passwd *pw;	/* Password file entry for user      */
 
 #ifndef USE_PAM
@@ -803,7 +802,9 @@ int main (int argc, char **argv)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
-	    && (selinux_check_passwd_access (PASSWD__PASSWD) != 0)) {
+	    && (is_selinux_enabled () > 0 ?
+		(selinux_check_passwd_access (PASSWD__PASSWD) != 0) :
+		!amroot)) {
 #else
 	/*
 	 * If the UID of the user does not match the current real UID,
@@ -898,11 +899,12 @@ int main (int argc, char **argv)
 
 	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name, myname));
 	closelog ();
-	if (!qflg)
+	if (!qflg) {
 		if (!eflg)
 			printf (_("Password changed.\n"));
 		else
 			printf (_("Password set to expire.\n"));
+	}
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }

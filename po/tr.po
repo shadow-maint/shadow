@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2004-06-13 10:27+0300\n"
 "Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -223,9 +223,9 @@ msgstr "Son Parola Değişimi (YYYY-AA-GG)"
 msgid "never\n"
 msgstr "Hiçbir zaman\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
-msgstr "Parola değişti \n"
+#, c-format
+msgid "password must be changed\n"
+msgstr "Parola değişti\n"
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -424,6 +424,61 @@ msgstr "Parola dosyası kilidi açılamıyor.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: grup dosyası kilitlenemiyor\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: grup dosyası açılamıyor\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: gölge dosyası kilitlenemiyor\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: gölge dosyası açılamıyor\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: satır %d: satır çok uzun\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: satır %d: yeni parola eksik\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: satır %d: bilinmeyen kullanıcı %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: satır %d: parola kaydı güncellenemiyor\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: hata algılandı, değişiklikler görmezden gelindi\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: gölge (shadow9 dosyası güncellenmesinde hata\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: parola dosyası güncellenmesinde hata\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -442,36 +497,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: gölge dosyası kilitlenemiyor\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: gölge dosyası açılamıyor\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: satır %d: satır çok uzun\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: satır %d: yeni parola eksik\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: satır %d: bilinmeyen kullanıcı %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: satır %d: parola kaydı güncellenemiyor\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: hata algılandı, değişiklikler görmezden gelindi\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: gölge (shadow9 dosyası güncellenmesinde hata\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: parola dosyası güncellenmesinde hata\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -832,14 +859,6 @@ msgid "%s: no changes\n"
 msgstr "%s: değişiklik yok\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: grup dosyası kilitlenemiyor\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: grup dosyası açılamıyor\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: gölge grup dosyası kilitlenemiyor\n"
 
@@ -906,6 +925,10 @@ msgid "**Never logged in**"
 msgstr "**Hiç giriş yapmadı**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Kullanım: %s [-p] [isim]\n"
 
@@ -958,10 +981,24 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid ""
+msgid "%s login: "
+msgstr ""
 "\n"
-"Login incorrect\n"
-msgstr "Giriş geçersiz"
+"%s giriş: "
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+"%s giriş: "
+
+#, fuzzy, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Maksimum giriş denemesi sayısı aşıldı (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1264,6 +1301,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1687,6 +1725,12 @@ msgstr "Yedek alınamadı"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s geri yüklenemiyor: %s (değişiklikleriniz %s içinde)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr "Giriş geçersiz"
 
 #, fuzzy
 #~ msgid ""

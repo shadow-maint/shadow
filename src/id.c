@@ -37,7 +37,7 @@
 
 #include <config.h>
 
-#ident "$Id: id.c,v 1.18 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: id.c,v 1.19 2006/02/07 22:55:41 kloczek Exp $"
 
 #include <grp.h>
 #include <pwd.h>
@@ -91,7 +91,7 @@ static void usage (void)
 	 */
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups = malloc (sys_ngroups * sizeof (GETGROUPS_T));
+	groups = (GETGROUPS_T *) malloc (sys_ngroups * sizeof (GETGROUPS_T));
 	/*
 	 * See if the -a flag has been given to print out the concurrent
 	 * group set.

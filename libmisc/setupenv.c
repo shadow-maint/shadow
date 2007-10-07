@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: setupenv.c,v 1.20 2005/09/30 14:29:11 kloczek Exp $"
+#ident "$Id: setupenv.c,v 1.21 2006/01/18 19:55:15 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -43,6 +43,8 @@
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
+
+#ifndef USE_PAM
 static void
 addenv_path (const char *varname, const char *dirname, const char *filename)
 {
@@ -54,8 +56,6 @@ addenv_path (const char *varname, const char *dirname, const char *filename)
 	free (buf);
 }
 
-
-#ifndef USE_PAM
 static void read_env_file (const char *filename)
 {
 	FILE *fp;

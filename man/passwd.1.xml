@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='passwd.1'>
-  <!--  $Id: passwd.1.xml,v 1.23 2005/12/03 16:07:53 kloczek Exp $ -->
+  <!--  $Id: passwd.1.xml,v 1.27 2006/02/28 19:23:59 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -16,22 +16,9 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>passwd</command>
-      <arg choice='opt'>-x <replaceable>max</replaceable></arg>
-      <arg choice='opt'>-n <replaceable>min</replaceable></arg>
-      <arg choice='opt'>-w <replaceable>warn</replaceable></arg>
-      <arg choice='opt'>-i <replaceable>inact</replaceable></arg>
-      <arg choice='plain'><replaceable>login</replaceable>
+      <arg choice='opt'>
+	<replaceable>options</replaceable>
       </arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>passwd</command>
-      <group choice='opt'>
-	<arg choice='plain'>-l </arg>
-	<arg choice='plain'>-u </arg>
-	<arg choice='plain'>-d </arg>
-	<arg choice='plain'>-S </arg>
-	<arg choice='plain'>-e </arg>
-      </group>
       <arg choice='plain'><replaceable>login</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -40,17 +27,17 @@
     <title>DESCRIPTION</title>
     <para>
       <command>passwd</command> changes passwords for user accounts.  A
-      normal user may only change the password for his/her own account, the
-      super user may change the password for any account.
+      normal user may only change the password for his/her own account, while 
+      the super user may change the password for any account.
       <command>passwd</command> also changes account information, such as
-      the full name of the user, user's login shell, or password expiry date
-      and interval.
+      the full name of the user, the user's login shell, or his/her password
+      expiry date and interval.
     </para>
 
     <refsect2 id='password_changes'>
       <title>Password Changes</title>
       <para>
-        The user is first prompted for his/her old password, if one is
+	The user is first prompted for his/her old password, if one is
 	present. This password is then encrypted and compared against the
 	stored password. The user has only one chance to enter the correct
 	password. The super user is permitted to bypass this step so that
@@ -58,14 +45,14 @@
       </para>
 
       <para>
-        After the password has been entered, password aging information is
+	After the password has been entered, password aging information is
 	checked to see if the user is permitted to change the password at
 	this time. If not, <command>passwd</command> refuses to change the
 	password and exits.
       </para>
 
       <para>
-        The user is then prompted for a replacement password. This password
+	The user is then prompted for a replacement password. This password
 	is tested for complexity. As a general guideline, passwords should
 	consist of 6 to 8 characters including one or more from each of
 	following sets:
@@ -84,22 +71,22 @@
       </itemizedlist>
 
       <para>
-        Care must be taken not to include the system default erase or kill
+	Care must be taken not to include the system default erase or kill
 	characters. <command>passwd</command> will reject any password which
 	is not suitably complex.
       </para>
 
-      <para>If the password is accepted, <command>passwd</command> will
-	prompt again and compare the second entry against the first. Both
-	entries are required to match in order for the password to be
-	changed.
+      <para>
+	If the password is accepted, <command>passwd</command> will prompt
+	again and compare the second entry against the first. Both entries
+	are required to match in order for the password to be changed.
       </para>
     </refsect2>
 
     <refsect2 id='hints_for_user_passwords'>
       <title>Hints for user passwords</title>
       <para>
-        The security of a password depends upon the strength of the
+	The security of a password depends upon the strength of the
 	encryption algorithm and the size of the key space. The
 	<emphasis>UNIX</emphasis> System encryption method is based on the
 	NBS DES algorithm and is very secure. The size of the key space
@@ -107,7 +94,7 @@
       </para>
 
       <para>
-        Compromises in password security normally result from careless
+	Compromises in password security normally result from careless
 	password selection or handling. For this reason, you should not
 	select a password which appears in a dictionary or which must be
 	written down. The password should also not be a proper name, your
@@ -116,14 +103,14 @@
       </para>
 
       <para>
-        Your password must easily remembered so that you will not be forced
+	Your password must be easily remembered so that you will not be forced
 	to write it on a piece of paper. This can be accomplished by
 	appending two small words together and separating each with a
 	special character or digit. For example, Pass%word.
       </para>
 
       <para>
-        Other methods of construction involve selecting an easily remembered
+	Other methods of construction involve selecting an easily remembered
 	phrase from literature and selecting the first or last letter from
 	each word. An example of this is:
       </para>
@@ -141,7 +128,7 @@
       </itemizedlist>
 
       <para>
-        You may be reasonably sure few crackers will have included this in
+	You may be reasonably sure few crackers will have included this in
 	their dictionaries. You should, however, select your own methods for
 	constructing passwords and not rely exclusively on the methods given
 	here.
@@ -184,8 +171,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    Immediately expire an account’s password. This in effect can
-	    force a user to change his/her password at the user’s next login.
+	    Immediately expire an account's password. This in effect can
+	    force a user to change his/her password at the user's next login.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -238,7 +225,7 @@
 	<listitem>
 	  <para>
 	    Set the minimum number of days between password changes. A value
-	    of zero for this field indicates that the user may change her
+	    of zero for this field indicates that the user may change his/her
 	    password at any time.
 	  </para>
 	</listitem>
@@ -270,7 +257,7 @@
 	<listitem>
 	  <para>
 	    Display account status information. The status information
-	    consists of 7 fields. The first field is the user’s login name. 
+	    consists of 7 fields. The first field is the user's login name. 
 	    The second field indicates if the user account is locked (L),
 	    has no password (NP), or has a usable password (P). The third
 	    field gives the date of the last password change. The next four
@@ -301,7 +288,7 @@
 	    Set the number of days of warning before a password change is
 	    required. The <replaceable>WARN_DAYS</replaceable> option is
 	    the number of days prior to the password expiring that a user
-	    will be warned her password is about to expire.
+	    will be warned that his/her password is about to expire.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -325,9 +312,9 @@
     <para>
       Not all options may be supported. Password complexity checking may
       vary from site to site. The user is urged to select a password as
-      complex as he feels comfortable with. Users may not be able to change
-      their password on a system if NIS is enabled and they are not logged
-      into the NIS server.
+      complex as he or she feels comfortable with. Users may not be able to 
+      change their password on a system if NIS is enabled and they are not 
+      logged into the NIS server.
     </para>
   </refsect1>
 

@@ -1,6 +1,11 @@
 
 # subdirectories for translated manual pages
-SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
+DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
+if USE_NLS
+SUBDIRS = $(DIST_SUBDIRS)
+else
+SUBDIRS =
+endif
 
 man_XMANS = \
 	chage.1.xml \
@@ -26,6 +31,7 @@ man_XMANS = \
 	logoutd.8.xml \
 	newgrp.1.xml \
 	newusers.8.xml \
+	nologin.8.xml \
 	passwd.1.xml \
 	passwd.5.xml \
 	porttime.5.xml \
@@ -67,6 +73,7 @@ man_MANS = \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
+	nologin.8 \
 	passwd.1 \
 	passwd.5 \
 	porttime.5 \
@@ -173,6 +180,9 @@ newgrp.1: newgrp.1.xml
 	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 newusers.8: newusers.8.xml
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+
+nologin.8: nologin.8.xml
 	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 passwd.1: passwd.1.xml

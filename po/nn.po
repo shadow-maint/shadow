@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -223,9 +223,9 @@ msgstr "Førre passordendring (ÅÅÅÅ-MM-DD)"
 msgid "never\n"
 msgstr "Aldri\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
-msgstr "Passord er endra.\n"
+#, c-format
+msgid "password must be changed\n"
+msgstr "Passord er endra\n"
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -424,6 +424,61 @@ msgstr "Klarer ikkje låsa opp passordfila.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: klarer ikkje låsa gruppefil\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: klarer ikkje opna gruppefil\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: klarer ikkje låsa skuggepassordfila\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: klarer ikkje opna skuggepassordfila\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: linje %d: linja er for lang\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: linje %d: manglar nytt passord\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: linje %d: ukjent brukar %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linje %d: klarer ikkje oppdatere passordet\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: feil funne, endringar er ikkje utført\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: feil ved oppdatering av skuggepassordfila\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: feil ved oppdatering av passordfila\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -442,36 +497,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: klarer ikkje låsa skuggepassordfila\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: klarer ikkje opna skuggepassordfila\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: linje %d: linja er for lang\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: linje %d: manglar nytt passord\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linje %d: ukjent brukar %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linje %d: klarer ikkje oppdatere passordet\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: feil funne, endringar er ikkje utført\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: feil ved oppdatering av skuggepassordfila\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: feil ved oppdatering av passordfila\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -832,14 +859,6 @@ msgid "%s: no changes\n"
 msgstr "%s: ingen endringar\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: klarer ikkje låsa gruppefil\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: klarer ikkje opna gruppefil\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: klarer ikkje låsa skuggegruppefil\n"
 
@@ -906,6 +925,10 @@ msgid "**Never logged in**"
 msgstr "**Aldri vore innlogga**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Bruk: %s [-p] [namn]\n"
 
@@ -958,10 +981,24 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
 
 #, fuzzy, c-format
-msgid ""
+msgid "%s login: "
+msgstr ""
 "\n"
-"Login incorrect\n"
-msgstr "Feil innlogging"
+"%s brukarnamn: "
+
+#, fuzzy, c-format
+msgid "login: "
+msgstr ""
+"\n"
+"%s brukarnamn: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr ""
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1265,6 +1302,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1688,6 +1726,12 @@ msgstr "Klarte ikkje laga reservekopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr "Feil innlogging"
 
 #, fuzzy
 #~ msgid ""

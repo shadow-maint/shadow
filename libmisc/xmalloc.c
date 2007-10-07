@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#ident "$Id: xmalloc.c,v 1.7 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id: xmalloc.c,v 1.8 2006/01/23 09:46:30 kloczek Exp $"
 
 #include <stdio.h>
 #include "defines.h"
@@ -17,7 +17,7 @@ char *xmalloc (size_t size)
 {
 	char *ptr;
 
-	ptr = malloc (size);
+	ptr = (char *) malloc (size);
 	if (!ptr && size) {
 		fprintf (stderr, _("malloc(%d) failed\n"), (int) size);
 		exit (13);

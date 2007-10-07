@@ -2,7 +2,7 @@
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the shadow package.
 # Giuseppe Sacco <eppesuig@debian.org>, 2004.
-# Danilo Piazzalunga <danilopiazza@gmail.com>, 2004-2005.
+# Danilo Piazzalunga <danilopiazza@gmail.com>, 2004-2006.
 #
 # Convenzioni utilizzate per tradurre i termini più frequenti:
 #
@@ -23,10 +23,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-11 02:31+0100\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-06 21:13+0100\n"
 "Last-Translator: Danilo Piazzalunga <danilopiazza@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -264,8 +264,8 @@ msgid "never\n"
 msgstr "mai\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "la password deve essere cambiata"
+msgid "password must be changed\n"
+msgstr "la password deve essere cambiata\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -467,6 +467,68 @@ msgstr "Impossibile togliere il lock dal file delle password.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Uso: chgpasswd [OPZIONI]\n"
+"\n"
+"Opzioni:\n"
+"  -e, --encrypted\tle password fornite sono cifrate\n"
+"  -h, --help\t\tmostra questo messaggio di aiuto ed esce\n"
+"  -m, --md5\t\tusa la cifratura MD5 anziché DES quando le\n"
+"\t\t\tpassword fornite non sono cifrate\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: impossibile fare il lock del file dei gruppi\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: impossibile aprire il file dei gruppi\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: impossibile fare il lock del file gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: impossibile aprire il file shadow\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: riga %d: riga troppo lunga\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: riga %d: manca la nuova password\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: riga %d: gruppo «%s» sconosciuto\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: riga %d: impossibile aggiornare la voce nel file delle password\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: rilevato un errore; le modifiche vengono ignorate\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: errore nell'aggiornare il file shadow\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: errore nell'aggiornare il file delle password\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -492,36 +554,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: impossibile fare il lock del file shadow\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: impossibile aprire il file shadow\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: riga %d: riga troppo lunga\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: riga %d: manca la nuova password\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: riga %d: utente «%s» sconosciuto\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: riga %d: impossibile aggiornare la voce nel file delle password\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: rilevato un errore; le modifiche vengono ignorate\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: errore nell'aggiornare il file shadow\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: errore nell'aggiornare il file delle password\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -914,14 +948,6 @@ msgid "%s: no changes\n"
 msgstr "%s: nessuna modifica\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: impossibile fare il lock del file dei gruppi\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: impossibile aprire il file dei gruppi\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: impossibile fare il lock del file dei gruppi shadow\n"
 
@@ -998,6 +1024,10 @@ msgid "**Never logged in**"
 msgstr "**Nessun accesso effettuato**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: argomento «%s» non previsto\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Uso: %s [-p] [NOME]\n"
 
@@ -1051,12 +1081,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM ha restituito un errore: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Login non corretto\n"
+msgid "%s login: "
+msgstr "%s login: "
+
+#, c-format
+msgid "login: "
+msgstr "login: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Superato il numero massimo di tentativi (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: PAM ha richiesto l'uscita immediata\n"
 
 #, c-format
 msgid ""
@@ -1388,6 +1426,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1398,6 +1437,7 @@ msgstr ""
 "Uso: su [OPZIONI] [LOGIN]\n"
 "\n"
 "Opzioni:\n"
+"  -c, --command COMANDO\t\tpassa il COMANDO alla shell invocata\n"
 "  -h, --help\t\t\tmostra questo messaggio di aiuto ed esce\n"
 "  -, -l, --login\t\trende la shell una shell di login\n"
 "  -m, -p,\n"

@@ -1,18 +1,13 @@
 # Portuguese (Portugal) Translation Project (traduz@debianpt.org)
 # Nuno Sénica <njs@av.it.pt>, 2004
-#
-# 18-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 5f1u
-# 12-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 7u4f
-# 14-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f2u
-# 03-09-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f12u
-# 2005-12-14 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
+# Miguel Figueiredo <elmig@debianpt.org>, 2005,2006
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-14 23:25+0000\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-12 21:00+0000\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -245,8 +240,8 @@ msgid "never\n"
 msgstr "nunca\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "a password tem de ser alterada"
+msgid "password must be changed\n"
+msgstr "a password tem de ser alterada\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -451,6 +446,68 @@ msgstr "Não é possível libertar o ficheiro de passwords.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Utilização: chgpasswd [opções]\n"
+"\n"
+"Opções:\n"
+"  -e, --encrypted\tas passwords fornecidas são encriptadas\n"
+"  -h, --help\t\tmostrar esta mensagem de ajuda e sair\n"
+"  -m, --md5\t\tutilizar encriptação MD5 em vez de DES quando as passwords\n"
+"\t\t\tfornecidas não forem encriptadas\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: não é possível obter acesso exclusivo ao ficheiro dos grupos\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: não é possível abrir o ficheiro dos grupos\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: não é possível obter acesso exclusivo ao ficheiro gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: não é possível abrir o ficheiro shadow\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: linha %d: linha demasiado grande\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: linha %d: falta a nova password\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: linha %d: grupo %s desconhecido\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linha %d: não é possível actualizar o registo da password\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: foi detectado um erro, as alterações foram ignoradas\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: erro a actualizar o ficheiro shadow\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: erro a actualizar o ficheiro de passwords\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -476,36 +533,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: não é possível obter acesso exclusivo ao ficheiro shadow\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: não é possível abrir o ficheiro shadow\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: linha %d: linha demasiado grande\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: linha %d: falta a nova password\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linha %d: utilizador %s desconhecido\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linha %d: não é possível actualizar o registo da password\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: foi detectado um erro, as alterações foram ignoradas\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: erro a actualizar o ficheiro shadow\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: erro a actualizar o ficheiro de passwords\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -888,14 +917,6 @@ msgid "%s: no changes\n"
 msgstr "%s: não houve alterações\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: não é possível obter acesso exclusivo ao ficheiro dos grupos\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: não é possível abrir o ficheiro dos grupos\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr ""
 "%s: não é possível obter acesso exclusivo ao ficheiro de shadow dos grupos\n"
@@ -972,6 +993,10 @@ msgid "**Never logged in**"
 msgstr "**Nunca entrou no sistema**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: argumento inesperado: %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Utilização: %s [-p] [nome]\n"
 
@@ -1024,12 +1049,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: Falha de PAM, a abortar: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Login incorrecto\n"
+msgid "%s login: "
+msgstr "%s login: "
+
+#, c-format
+msgid "login: "
+msgstr "login: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Número máximo de tentativas excedidas (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: abortar pedido por PAM\n"
 
 #, c-format
 msgid ""
@@ -1356,6 +1389,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1366,6 +1400,7 @@ msgstr ""
 "Utilização: su [opções] [login]\n"
 "\n"
 "Opções:\n"
+"  -c, --command COMANDO\t\tpassar COMANDO à shell invocada\n"
 "  -h, --help\t\t\tmostrar esta mensagem de ajuda e terminar\n"
 "  -, -l, --login\t\ttornar a shell numa shell de login\n"
 " -m, -p,\n"
@@ -1861,3 +1896,10 @@ msgstr "Não é possível efectuar cópia de segurança"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: não é possível restaurar %s: %s (a suas alterações estão em %s)\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Login incorrecto\n"

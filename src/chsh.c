@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chsh.c,v 1.37 2006/01/02 23:31:59 kloczek Exp $"
+#ident "$Id: chsh.c,v 1.39 2006/02/21 22:44:35 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -68,6 +68,7 @@ static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* local function prototypes */
 static void usage (void);
 static void new_fields (void);
+static int check_shell (const char *);
 static int restricted_shell (const char *);
 
 /*
@@ -117,7 +118,7 @@ static int restricted_shell (const char *sh)
  * If getusershell() is available (Linux, *BSD, possibly others), use it
  * instead of re-implementing it.
  */
-int check_shell (const char *sh)
+static int check_shell (const char *sh)
 {
 	char *cp;
 	int found = 0;
@@ -298,6 +299,7 @@ int main (int argc, char **argv)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
+	    && (is_selinux_enabled () > 0)
 	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();

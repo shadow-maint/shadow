@@ -28,6 +28,7 @@ man_MANS = \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
+	nologin.8 \
 	passwd.1 \
 	passwd.5 \
 	porttime.5 \

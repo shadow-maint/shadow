@@ -1,13 +1,13 @@
 # Finnish translation for shadow.
-# Copyright (C) 2004-2005 Free Software Foundation, Inc.
-# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2005.
+# Copyright (C) 2004-2006 Free Software Foundation, Inc.
+# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.13\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-14 23:31+0200\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-07 22:31+0200\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -243,8 +243,8 @@ msgid "never\n"
 msgstr "ei koskaan\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "salasana täytyy vaihtaa"
+msgid "password must be changed\n"
+msgstr "salasana täytyy vaihtaa\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -443,6 +443,68 @@ msgstr "Salasanatiedoston lukitusta ei voi avata.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Käyttö: chgpasswd [valitsimet]\n"
+"\n"
+"Valitsimet:\n"
+"  -e, --encrypted       Annetut salasanat ovat salakirjoitettuja\n"
+"  -h, --help            Näytä tämä ohje ja lopeta\n"
+"  -m, --md5             Käytä MD5:tä eikä DES:iä kun annetut salasanat\n"
+"                        eivät ole salakirjoitettuja\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: ryhmätiedostoa ei voi lukita\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: ryhmätiedostoa ei voi avata\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: gshadow-tiedostoa ei voi lukita\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: varjotiedostoa ei voi avata\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: rivi %d: rivi on liian pitkä\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: rivi %d: uusi salasana puuttuu\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: rivi %d: tuntematon ryhmä %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: rivi %d: salasanatietuetta ei voi päivittää\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: virhe havaittu, muutokset ohitetaan\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: virhe päivitettäessä varjotiedostoa\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: virhe päivitettäessä salasanatiedostoa\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -468,36 +530,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: varjotiedostoa ei voi lukita\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: varjotiedostoa ei voi avata\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: rivi %d: rivi on liian pitkä\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: rivi %d: uusi salasana puuttuu\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: rivi %d: tuntematon käyttäjä %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: rivi %d: salasanatietuetta ei voi päivittää\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: virhe havaittu, muutokset ohitetaan\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: virhe päivitettäessä varjotiedostoa\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: virhe päivitettäessä salasanatiedostoa\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -884,14 +918,6 @@ msgid "%s: no changes\n"
 msgstr "%s: ei muutoksia\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: ryhmätiedostoa ei voi lukita\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: ryhmätiedostoa ei voi avata\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: varjoryhmätiedostoa ei voi lukita\n"
 
@@ -965,6 +991,10 @@ msgid "**Never logged in**"
 msgstr "**Ei koskaan kirjautunut sisään**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: odottamaton argumentti: %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Käyttö: %s [-p] [nimi]\n"
 
@@ -1017,12 +1047,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM-virhe, keskeytetään: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Sisäänkirjautuminen epäonnistui\n"
+msgid "%s login: "
+msgstr "%s-tunnus: "
+
+#, c-format
+msgid "login: "
+msgstr "tunnus: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Suurin sallittu määrä yrityksiä ylitetty (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: keskeytyspyyntö PAM:sta\n"
 
 #, c-format
 msgid ""
@@ -1351,6 +1389,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1361,10 +1400,11 @@ msgstr ""
 "Käyttö: su [valitsimet] [tunnus]\n"
 "\n"
 "Valitsimet:\n"
+"  -c, --command KOMENTO         Välitä KOMENTO käynnistyvälle kuorelle\n"
 "  -h, --help                    Näytä tämä ohje ja lopeta\n"
 "  -, -l, --login                Tee kuoresta sisäänkirjautumiskuori\n"
 "  -m, -p,\n"
-"  --preserve-environment        Älä tyhjää ympäristömuuttijia ja säilytä\n"
+"  --preserve-environment        Älä tyhjää ympäristömuuttujia ja säilytä\n"
 "                                sama kuori\n"
 "  -s, --shell KUORI             Käytä kuorta KUORI passwd:n oletuksen "
 "sijaan\n"

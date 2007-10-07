@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sulogin.c,v 1.23 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: sulogin.c,v 1.25 2006/02/08 10:53:16 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -39,6 +39,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
+#include "exitcodes.h"
 /*
  * Global variables
  */
@@ -57,9 +58,9 @@ extern char **environ;
 #endif
 
 /* local function prototypes */
-static RETSIGTYPE catch (int);
+static RETSIGTYPE catch_signals (int);
 
-static RETSIGTYPE catch (int sig)
+static RETSIGTYPE catch_signals (int sig)
 {
 	exit (1);
 }
@@ -76,6 +77,7 @@ static RETSIGTYPE catch (int sig)
 	char *cp;
 	char **envp = environ;
 	TERMIO termio;
+	int err = 0;
 
 #ifdef	USE_TERMIO
 	ioctl (0, TCGETA, &termio);
@@ -153,7 +155,7 @@ static RETSIGTYPE catch (int sig)
 
 	(void) strcpy (name, "root");	/* KLUDGE!!! */
 
-	signal (SIGALRM, catch);	/* exit if the timer expires */
+	signal (SIGALRM, catch_signals);	/* exit if the timer expires */
 	alarm (ALARM);		/* only wait so long ... */
 
 	while (1) {		/* repeatedly get login/password pairs */
@@ -220,6 +222,8 @@ static RETSIGTYPE catch (int sig)
 #ifdef	USE_SYSLOG
 	closelog ();
 #endif
-	shell (pwent.pw_shell, (char *) 0);	/* exec the shell finally. */
+	/* exec the shell finally. */
+	err = shell (pwent.pw_shell, (char *) 0, environ);
+	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	 /*NOTREACHED*/ return (0);
 }

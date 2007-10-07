@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.23 2005/12/15 14:50:15 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.24 2006/01/07 19:30:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -39,7 +39,7 @@
     <para>
       <command>login</command> is used to establish a new session with the
       system. It is normally invoked automatically by responding to the
-      <emphasis remap='I'>login:</emphasis> prompt on the user&acute;s
+      <emphasis remap='I'>login:</emphasis> prompt on the user's
       terminal. <command>login</command> may be special to the shell and may
       not be invoked as a sub-process. Typically, <command>login</command>
       is treated by the shell as <emphasis remap='B'>exec login</emphasis>

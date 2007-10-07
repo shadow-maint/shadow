@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-                   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+		"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id='sg.1'>
-  <!-- $Id: sg.1.xml,v 1.8 2005/11/05 17:17:30 kloczek Exp $ -->
+  <!-- $Id: sg.1.xml,v 1.9 2006/02/20 01:05:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>sg</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -18,7 +18,7 @@
       <command>sg</command>
       <arg choice='opt'>- </arg>
       <arg choice='opt'>group
-        <arg choice='opt'>-c </arg>
+	<arg choice='opt'>-c </arg>
 	command
       </arg>
     </cmdsynopsis>

@@ -1,26 +1,23 @@
-# translation of shadow.po to Norwegian (Nynorsk)
 # translation of shadow.po to Norwegian Bokmål
-# translation of shadow.po to
-# translation of shadow.po to Norwegian
-# translation of shadow.po to
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2006 Free Software Foundation, Inc.
 # Knut Yrvin <knuty@skolelinux.no>, 2004.
 # Klaus Ade Johnstad <klaus.johnstad@holmlia.gs.oslo.no>, 2004.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 # Håvard Korsvoll <korsvoll@skulelinux.no>, 2004.
+# Bjørn Steensrud <bjornst@powertech.no>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2004-06-03 21:42+0200\n"
-"Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
-"Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-12 21:08+0100\n"
+"Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
+"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
+"X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, c-format
@@ -81,15 +78,19 @@ msgstr "Omgivelsene er overfyllt\n"
 msgid "You may not change $%s\n"
 msgstr "Du kan ikke endre $%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
 msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
-msgstr[0] "%d %s siden forrige innlogging.  Forrige innlogging var %s på %s.\n"
-msgstr[1] "%d %s siden forrige innlogging.  Forrige innlogging var %s på %s.\n"
+msgstr[0] ""
+"%d mislykket siden forrige innlogging.\n"
+"Forrige var %s på %s.\n"
+msgstr[1] ""
+"%d mislykte siden forrige innlogging.\n"
+"Forrige var %s på %s.\n"
 
 #, c-format
 msgid "Too many logins.\n"
@@ -104,27 +105,26 @@ msgstr "Ingen epost."
 msgid "You have mail."
 msgstr "Du har epost."
 
-#, fuzzy
 msgid "no change"
-msgstr "%s: ingen endringer\n"
+msgstr "ingen endring"
 
 msgid "a palindrome"
-msgstr ""
+msgstr "et palindrom"
 
 msgid "case changes only"
-msgstr ""
+msgstr "bare endring i store/så bokstaver"
 
 msgid "too similar"
-msgstr ""
+msgstr "for likt"
 
 msgid "too simple"
-msgstr ""
+msgstr "for enkelt"
 
 msgid "rotated"
-msgstr ""
+msgstr "rotert"
 
 msgid "too short"
-msgstr ""
+msgstr "for kort"
 
 #, c-format
 msgid "Bad password: %s.  "
@@ -132,18 +132,18 @@ msgstr "Dårlig passord: %s.  "
 
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "passwd: pam_start() feilet, feil %d\n"
+msgstr "passwd: pam_start() mislyktes, feil %d\n"
 
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: passorder ble oppdatert\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Incorrect password for %s.\n"
-msgstr "Feil passord for «%s»\n"
+msgstr "Feil passord for «%s».\n"
 
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
@@ -165,15 +165,14 @@ msgid "Can't change root directory to \"%s\"\n"
 msgstr "Kan ikke endre rot mappa til \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
+msgstr "Ingen oppføring i utmp. Du må kjøre «login» fra «sh» på laveste nivå"
 
-#, fuzzy
 msgid "Unable to determine your tty name."
-msgstr "%s: Kan ikke avgjøre ditt brukernavn.\n"
+msgstr "Kan ikke finne ut ditt terminalnavn."
 
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) feilet\n"
+msgstr "malloc(%d) mislyktes\n"
 
 msgid "Password: "
 msgstr "Passord: "
@@ -199,6 +198,20 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 msgstr ""
+"Bruk: chage [valg] bruker\n"
+"\n"
+"Valg:   -d, --lastday SISTE_DAG\t angi at siste passord-endring skjedde "
+"SISTE_DAG\n"
+"  -E, --expiredate UTLØPSDATO\t angi at kontoen utløper UTLØPSDATO\n"
+"  -h, .--help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -I, --inaktive INAKTIV\t angi at passordet settes til INAKTIV etter utløp\n"
+"  -l, --list\t\t\t vis informasjon om kontoens aldring og utløp\n"
+"  m, --mindays MIN_DAGER\toppgir at passordet først kan endres etter \n"
+"\t\t\t\tMIN_DAGER\n"
+"  M, --maxdays MAKS_DAGER\t oppgir at passordet må endres før det er\n"
+"\t\t\t\tgått MAKS_DAGER\n"
+"  -W, --warndats VARSLDAGER\tetter VARSLDAGER varsles bruker om at\n"
+"\t\t\t\tpassordet snart utløper\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -215,7 +228,7 @@ msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Siste endring av passord (YYYY-MM-DD)"
 
 msgid "Password Expiration Warning"
-msgstr "Varsel når passordet er utgått på dato"
+msgstr "Varsel når passordet snart går ut på dato"
 
 msgid "Password Inactive"
 msgstr "Inaktivt passord"
@@ -223,53 +236,53 @@ msgstr "Inaktivt passord"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Konto utløper (YYYY-MM-DD)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Siste endring av passord (YYYY-MM-DD)"
+msgstr "Siste endring av passord\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
-msgstr "Aldri\n"
+msgstr "aldri\n"
 
-#, fuzzy, c-format
-msgid "password must be changed"
-msgstr "Passordet er endret.\n"
+#, c-format
+msgid "password must be changed\n"
+msgstr "passordet må endres\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Passord utløper:\t"
+msgstr "Passord utløper\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Passord er inaktivt:\t"
+msgstr "Passordet inaktivt\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Kontoen utløper:\t"
+msgstr "Kontoen utløper\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Minste antall dager mellom passord-endring\t\t:%ld\n"
 
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Største antall dager mellom passord-endring\t\t:%ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "Antall dager med varsling før passordet utløper:\t\t %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: ikke inkluder \"l\" sammen med andre opsjoner\n"
+msgstr "%s: ikke ta med «l» sammen med andre valg\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: ikke tillatelse\n"
+msgstr "%s: Ikke tillatelse.\n"
 
 #, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM autentifisering feilet\n"
+msgstr "%s: PAM autentisering mislyktes\n"
 
 #, c-format
 msgid "%s: can't open password file\n"
@@ -279,9 +292,9 @@ msgstr "%s: kan ikke åpne passordfila\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: ukjent bruker %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: kan ikke åpne skyggepassordfila\n"
+msgstr "%s: skyggepassordfila finnes ikke\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -293,7 +306,7 @@ msgstr "%s: kan ikke åpne skyggepassordfila\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgstr "%s: klarte ikke minske privilegier (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -324,12 +337,12 @@ msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Bruk: %s [-f fullt_navn] [-r room_no] [-w work_ph]\n"
-"\t[-h home_ph] [-o other] [bruker]\n"
+"Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf]\n"
+"\t[-h hjemmetlf] [-o annet] [bruker]\n"
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr "Bruk: %s [-f fullt_navn] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgstr "Bruk: %s [-f fullt_navn] [-r rom_nr] [-w jobbtlf] [-h hjemmetlf]\n"
 
 msgid "Full Name"
 msgstr "Fullstendig navn"
@@ -341,26 +354,26 @@ msgstr "\tFullstendig navn: %s\n"
 msgid "Room Number"
 msgstr "Romnummer"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "Romnummer"
+msgstr "\tRomnummer: %s\n"
 
 msgid "Work Phone"
 msgstr "Jobbtelefon"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "Jobbtelefon"
+msgstr "\tJobbtelefon: %s\n"
 
 msgid "Home Phone"
 msgstr "Hjemtelefon"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "Hjemtelefon"
+msgstr "\tHjemtelefon: %s\n"
 
 msgid "Other"
-msgstr "Andre"
+msgstr "Annet"
 
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
@@ -380,23 +393,23 @@ msgstr "Endrer brukerinformasjon for %s\n"
 
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: Ugyldig navn: \"%s\"\n"
+msgstr "%s: ugyldig navn: «%s»\n"
 
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: ugyldig romnummer: \"%s\"\n"
+msgstr "%s: ugyldig romnummer: «%s»\n"
 
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: ugyldig jobbtelefon: \"%s\"\n"
+msgstr "%s: ugyldig jobbtelefon: «%s»\n"
 
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: ugyldig hjemtelefon: \"%s\"\n"
+msgstr "%s: ugyldig hjemtelefon: «%s»\n"
 
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" inneholder ugyldige tegn\n"
+msgstr "%s: «%s» inneholder ugyldige tegn\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -432,7 +445,7 @@ msgstr "Kan ikke låse opp passordfila.\n"
 
 #, c-format
 msgid ""
-"Usage: chpasswd [options]\n"
+"Usage: chgpasswd [options]\n"
 "\n"
 "Options:\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
@@ -440,18 +453,29 @@ msgid ""
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
 msgstr ""
+"Bruk: chgpasswd [valg]\n"
+"\n"
+"Valg:\n"
+"  -e, --encrypted\t oppgitte passord er krypterte\n"
+"  h, --help\t\tvis denne hjelpeteksten og avslutt\n"
+"  -m, --md5\t\tbruk MD5-kryptering i stedet for DES når de oppgitte\n"
+"\t\t\tpassordene ikke er krypterte\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: kan ikke låse passordfila\n"
+msgid "%s: can't lock group file\n"
+msgstr "%s: klarer ikke å låse gruppefila\n"
 
 #, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: kan ikke låse shadow filen\n"
+msgid "%s: can't open group file\n"
+msgstr "%s: klarer ikke å åpne gruppefila\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: klarer ikke å låse gshadow-fila\n"
 
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: kan ikke åpne shadow filen\n"
+msgstr "%s: kan ikke åpne shadow-fila\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
@@ -462,8 +486,8 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s: linje %d: mangler nytt passord\n"
 
 #, c-format
-msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: linje %d: ukjent bruker %s\n"
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: linje %d: ukjent gruppe %s\n"
 
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
@@ -475,22 +499,52 @@ msgstr "%s: feil funnet, endringer er ikke utført\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: feil ved oppdatering av skyggefilen\n"
+msgstr "%s: feil ved oppdatering av shadow-fila\n"
 
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: feil ved oppdatering av passordfilen\n"
+msgstr "%s: feil ved oppdatering av passordfila\n"
+
+#, c-format
+msgid ""
+"Usage: chpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Bruk: chpasswd [valg]\n"
+"\n"
+"Valg:\n"
+"  -e, --encrypted\t oppgitte passord er krypterte\n"
+"  h, --help\t\tvis denne hjelpeteksten og avslutt\n"
+"  -m, --md5\t\tbruk MD5-kryptering i stedet for DES når de oppgitte\n"
+"\t\t\tpassordene ikke er krypterte\n"
+
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: kan ikke låse passordfila\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: kan ikke låse shadow-fila\n"
+
+#, c-format
+msgid "%s: line %d: unknown user %s\n"
+msgstr "%s: linje %d: ukjent bruker %s\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Bruk: %s [-s skjell] [navn]\n"
+msgstr "Bruk: %s [-s skall] [navn]\n"
 
 msgid "Login Shell"
 msgstr "Innloggingsskall"
 
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Du kan ikke endre skall til %s.\n"
+msgstr "Du kan ikke endre skallet til %s.\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
@@ -527,10 +581,22 @@ msgid ""
 "\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
 "\t\t\t\tfor user with LOGIN\n"
 msgstr ""
+"Bruk: faillog [valg]\n"
+"\n"
+"Valg:\n"
+"  -a, --all\t\t\t vis faillog-oppføringer for alle brukere\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -l, --lock-time SEK\t\tetter mislykket innlogging, lås kontoen i SEK\n"
+"\t\t\t\t\tsekunder\n"
+"  -m, --maximum MAX\t\tsett største antall mislykte innlogginger til MAX\n"
+"  -r, --reset\t\t\tnullstill tellerne for mislykte innlogginger\n"
+"  -t, --time DAGER\t\tvis mislykte innlogginger nyere enn DAGER\n"
+"  -u, --user BRUKER\t\tvis mislykte innlogginger eller styr tellene og\n"
+"\t\t\t\tgrenseverdiene (med -r, -m eller -l) bare for bruker BRUKER\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr ""
+msgstr "Logginn       Mislykt Maksimum Siste                   På\n"
 
 #, c-format
 msgid " [%lds left]"
@@ -600,7 +666,7 @@ msgid "New Password: "
 msgstr "Nytt passord: "
 
 msgid "Re-enter new password: "
-msgstr "Skriv inn passordet pånytt: "
+msgstr "Skriv inn passordet på nytt: "
 
 msgid "They don't match; try again"
 msgstr "Passordene var ikke like, prøv igjen"
@@ -654,6 +720,17 @@ msgid ""
 "  -o, --non-unique\t\tallow create group with duplicate\n"
 "\t\t\t\t(non-unique) GID\n"
 msgstr ""
+"Bruk: groupadd [valg] gruppe\n"
+"\n"
+"Valg:\n"
+"  -f, --force\t\ttving fram normal avslutning hvis den oppgitte\n"
+"\t\t\t\tgruppa finnes fra før\n"
+"  -g, --gid GID\t\t bruk GID for den nye gruppa\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -K, --key NØKKEL=VERDI\t\t overstyrer standardverdier\n"
+"\t\t\t\t fra /etc/login.defs\n"
+"  -o, --non-unique\t\ttillat å opprette en gruppe med duplisert\n"
+"\t\t\t\tGID\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -661,15 +738,15 @@ msgstr "%s: feil ved oppretting av ny gruppeoppføring\n"
 
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s: navn %s er ikke unikt\n"
+msgstr "%s: navn %s er ikke entydig\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID %u is not unique\n"
-msgstr "%s: gid %u er ikke unikt\n"
+msgstr "%s: GID %u er ikke entydig\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique GID\n"
-msgstr "%s: klarer ikke å få unik gid\n"
+msgstr "%s: klarer ikke å få entydig GID\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -685,31 +762,31 @@ msgstr "%s: klarer ikke å omskrive shadow-fila\n"
 
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: klarer ikke å låse gruppefilen\n"
+msgstr "%s: klarer ikke å låse gruppefila\n"
 
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: klarer ikke å åpne gruppefilen\n"
+msgstr "%s: klarer ikke å åpne gruppefila\n"
 
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: klarer ikke å låse shadow gruppefilen\n"
+msgstr "%s: klarer ikke å låse shadow-gruppefila\n"
 
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: klarer ikke å åpne shadow gruppefila\n"
+msgstr "%s: klarer ikke å åpne shadow-gruppefila\n"
 
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s: ugyldig gruppe %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -O krever NAME=VALUE\n"
+msgstr "%s: -K krever KEY=VALUE\n"
 
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: gruppen %s finnes allerede\n"
+msgstr "%s: gruppa %s finnes allerede\n"
 
 #, c-format
 msgid "Usage: groupdel group\n"
@@ -721,7 +798,7 @@ msgstr "%s: feil ved fjerning av gruppeoppføring\n"
 
 #, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s: feil ved sletting av shadow gruppe oppføring\n"
+msgstr "%s: feil ved sletting av shadow-gruppeoppføring\n"
 
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
@@ -729,11 +806,11 @@ msgstr "%s: kan ikke fjerne brukerens primærgruppe.\n"
 
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: gruppen %s finnes ikke\n"
+msgstr "%s: gruppa %s finnes ikke\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s: gruppen %s er en NIS gruppe\n"
+msgstr "%s: gruppa %s er en NIS gruppe\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
@@ -747,9 +824,9 @@ msgstr "Bruk: groupmod [-g gid [-o]] [-n navn] gruppe\n"
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s ikke funnet i /etc/group\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u er ikke en entydig gid\n"
+msgstr "%s: %u er ikke en entydig GID\n"
 
 #, c-format
 msgid "%s: %s is not a unique name\n"
@@ -763,9 +840,9 @@ msgstr "Bruk: %s [-r] [-s] [gruppe [gshadow]]\n"
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Bruk: %s [-r] [-s] [gruppe]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "No\n"
-msgstr "Nei"
+msgstr "Nei\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
@@ -773,11 +850,11 @@ msgstr "%s: -s og -r kan ikke brukes samtidig\n"
 
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s: kan ikke låse filen %s\n"
+msgstr "%s: kan ikke låse fila %s\n"
 
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: kan ikke åpne filen %s\n"
+msgstr "%s: kan ikke åpne fila %s\n"
 
 #, c-format
 msgid "invalid group file entry\n"
@@ -805,11 +882,11 @@ msgstr "slett medlem `%s'? "
 
 #, c-format
 msgid "invalid shadow group file entry\n"
-msgstr "ugyldig oppføring i shadow gruppefila\n"
+msgstr "ugyldig oppføring i shadow-gruppefila\n"
 
 #, c-format
 msgid "duplicate shadow group entry\n"
-msgstr "duplisert shadowgruppe-oppføring\n"
+msgstr "duplisert shadow-gruppeoppføring\n"
 
 #, c-format
 msgid "no matching group file entry\n"
@@ -833,19 +910,11 @@ msgstr "%s: kan ikke oppdatere fila %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: filene har blitt oppdatert\n"
+msgstr "%s: filene er blitt oppdatert\n"
 
 #, c-format
 msgid "%s: no changes\n"
 msgstr "%s: ingen endringer\n"
-
-#, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: klarer ikke å låse gruppefila\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: klarer ikke å åpne gruppefila\n"
 
 #, c-format
 msgid "%s: can't lock shadow group file\n"
@@ -901,6 +970,13 @@ msgid ""
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
+"Bruk: lastlog [valg]\n"
+"\n"
+"Valg:\n"
+"  -b, --before DAGER\tskriv bare oppføringer eldre enn DAGER\n"
+"  -h, --help\t\tvis denne hjelpeteksten og avslutt\n"
+"  -t, --time DAGER\t skriv bare oppføringer nyere enn DAGER\n"
+"  -u, --user BRUKER\tskriv oppføringer for bruker BRUKER\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -912,6 +988,10 @@ msgstr "Brukernavn                Port     Sist\n"
 
 msgid "**Never logged in**"
 msgstr "**Aldri vært innlogget**"
+
+#, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: uventet argument: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -963,13 +1043,23 @@ msgstr " på `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr ""
+msgstr "login: PAM mislyktes, abvbryter: %s\n"
 
-#, fuzzy, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr "Ugyldig innlogging"
+#, c-format
+msgid "%s login: "
+msgstr "%s login: "
+
+#, c-format
+msgid "login: "
+msgstr "login: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Maks. antall forsøk er overskredet (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: PAM ber om avbrytelse\n"
 
 #, c-format
 msgid ""
@@ -984,7 +1074,7 @@ msgstr "Ugyldig innlogging"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr ""
+msgstr "%s: mislykket fork: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Advarsel: innlogging reaktivert etter midlertidig stenging.\n"
@@ -1005,6 +1095,8 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
+"innloggingstid overskredet\n"
+"\n"
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1014,9 +1106,9 @@ msgstr "Bruk: newgrp [-] [gruppe]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Bruk: sg group [[-c] command]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unknown UID: %u\n"
-msgstr "ukjent GID: %lu\n"
+msgstr "ukjent UID: %u\n"
 
 #, c-format
 msgid "unknown GID: %lu\n"
@@ -1027,7 +1119,7 @@ msgstr "Beklager.\n"
 
 #, c-format
 msgid "too many groups\n"
-msgstr "For mange grupper\n"
+msgstr "for mange grupper\n"
 
 #, c-format
 msgid "Usage: %s [input]\n"
@@ -1067,11 +1159,11 @@ msgstr "%s: linje %d: kan ikke oppdatere passord\n"
 
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: linje %d: mkdir feilet\n"
+msgstr "%s: linje %d: mkdir mislyktes\n"
 
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: linje %d: chown feilet\n"
+msgstr "%s: linje %d: chown mislyktes\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
@@ -1104,6 +1196,24 @@ msgid ""
 "  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
 "\t\t\t\tchange to MAX_DAYS\n"
 msgstr ""
+"Bruk: passwd [valg] [bruker]\n"
+"\n"
+"Valg: \n"
+"  -a, --all\t\t\trapporter passordstatus for alle kontoer\n"
+"  -d, --delete\t\t\tslett passordet for oppgitt konto\n"
+"  -e, --expire\t\t\tangi at passordet for konten er utgått\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -k, --keep-tokens\t\tendre passord bare hvis utgått\n"
+"  -i, --inactive INAKTIV\t set passord inaktivt etter utløp til INAKTIV\n"
+"  -l, --lock\t\t\tlås oppgitt konto\n"
+"  -n, --mindays MIN_DAGER\tangi at passord ikke kan endres før etter\n"
+"\t\t\t\tIN_DAGER\n"
+"  -q, --quiet\t\t\tordknapp kjøremåte\n"
+"  -r, --repository LAGER\tendre passord i lageret LAGER\n"
+"  -S, --status\t\t\trapporter passordstatus på oppgitt konto\n"
+"  -u, .--unlock\t\t\t lås opp oppgitt konto\n"
+"  -w, --warndays DAGER\tvarsle om utgått passord DAGER før utløp\n"
+"  -x, --maxdays DAGER\tpassordet må endres før det er gått DAGER\n"
 
 msgid "Old password: "
 msgstr "Gammelt passord: "
@@ -1151,13 +1261,13 @@ msgstr "%s: slapp opp for minne\n"
 msgid "%s: repository %s not supported\n"
 msgstr "%s: ikke støtte for lager %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "Du kan ikke endre skall til %s.\n"
+msgstr "%s: Du kan ikke vise eller endre passordinformasjon for %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "Endrer passordet til %s\n"
+msgstr "Endrer passordet for %s\n"
 
 #, c-format
 msgid "The password for %s is unchanged.\n"
@@ -1167,9 +1277,9 @@ msgstr "Passordet for %s er uendret.\n"
 msgid "Password changed.\n"
 msgstr "Passordet er endret.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password set to expire.\n"
-msgstr "Ditt passord har utgått på dato."
+msgstr "Passordet vil utgå på dato.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1185,7 +1295,7 @@ msgstr "duplisert oppføring i passordfila\n"
 
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "ugyldig brukernavn '%s'\n"
+msgstr "ugyldig brukernavn «%s»\n"
 
 #, c-format
 msgid "user %s: no group %u\n"
@@ -1262,15 +1372,16 @@ msgstr "Oppgi ditt EGET passord som autentisering.\n"
 msgid "Sorry."
 msgstr "Beklager."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s\n"
-msgstr "passwd: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1278,6 +1389,17 @@ msgid ""
 "\t\t\t\tthe same shell\n"
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 msgstr ""
+"Bruk: su [valg] [konto]\n"
+"\n"
+"Valg:\n"
+"  -c, --command KOMMANDO\t\t send KOMMANDO til det skallet\n"
+"\t\t\t\tsom startes\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -, --login\t\tgjør det nye skallet til en login-skall\n"
+"  -m, -p,\n"
+" --preserve-environment\tikke endre miljøvariabler, og behold\n"
+"\t\t\t\tdet samme skalletn   -s, --shell SKALL\t\tbruk SKALL i stedet for "
+"det i /etc/passwd\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1391,14 +1513,35 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
+"Bruk: useradd [valg] KONTO\n"
+"\n"
+"Valg: \n"
+"  -b, --base-dir BASIS\tbasis-mappe for hjemmemappa til den nye\n"
+"\t\t\t\tbrukerkontoen\n"
+"  -c, --comment KOMMENTAR\tsett i GECOS-feltet for den nye \t\t\t"
+"\tbrukerkontoen\n"
+"  -d, --home-dir HJEMME\thjemmemappe for den nye brukerkontoen\n"
+"  -D, --defaults\t\tskriv ut eller lagre endret standardoppsett for useradd\n"
+"  -e, --expiredate DATO\tangi at kontoen utgår på DATO\n"
+"  -f, --inactive INAKTIV\tsett passordet inaktivt etter utløp\n"
+"  -g, --gid GRUPPE\tangi GRUPPE for den nye brukerkontoen\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -k, --skel SKJELETT\toppgi en annen skel-mappe\n"
+"  -K, --key NØKKEL=VERDI\t overstyrer oppsett fra /etc/login.defs\n"
+"  -m, --create-home\t\topprett hjemmemappe for den nye brukerkontoen\n"
+"  -o, --non-unique\t\ttillat å opprette bruker med duplisert UID\n"
+"  -p, --password PASSORD\tbruk dette krypterte passordet for\n"
+"\t\t\t\tden nye brukerkontoen\n"
+"  -s, --shell SKALL\t\tinnloggingsskall for den nye brukerkontoen\n"
+"  -u, --uid UID\t\t\tbruk UID for den nye brukerkontoen\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: gid %u er ikke unikt\n"
+msgstr "%s: UID %u er ikke entydig\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique UID\n"
-msgstr "%s: klarer ikke å få unik gid\n"
+msgstr "%s: klarer ikke å få entydig UID\n"
 
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
@@ -1491,10 +1634,11 @@ msgstr "%s: kan ikke opprette mappa %s\n"
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
+"Gruppe «mail» finnes ikke, oppretter e-postmappe med rettigheter 0600.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: klarer ikke å oppdatere oppføring for bruker %s\n"
+msgstr "Kan ikke opprette e-postmappe for bruker %s\n"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1504,14 +1648,16 @@ msgstr "%s: bruker %s finnes\n"
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: gruppen %s finnes - hvis du ønsker å legge til denne brukeren til denne "
-"gruppen, bruk -g.\n"
+"%s: gruppa %s finnes - hvis du ønsker å legge til denne brukeren til denne "
+"gruppa, bruk -g.\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
+"%s: advarsel: hjemmemappa finnes fra før.\n"
+"Kopierer ikke filer dit fra skel-mappa.\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
@@ -1525,9 +1671,10 @@ msgstr "Bruk: %s [-r] navn\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: feil ved oppdatering av gruppe-oppføring\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: kan ikke fjerne brukerens primærgruppe.\n"
+msgstr ""
+"%s: kan ikke fjerne gruppe %s som er en primærgruppe for en annen bruker.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1598,6 +1745,14 @@ msgid ""
 "  -u, --uid UID\t\t\tnew UID for the user account\n"
 "  -U, --unlock\t\t\tunlock the user account\n"
 msgstr ""
+"Bruk: usermod [valg] konto\n"
+"\n"
+"Valg:\n"
+"  -a, --append GRUPPE\t\tlegg til bruker i tilleggsgruppa GRUPPE\n"
+"  -c, --comment KOMMENTAR\t\tny verdi i GECOS-feltet\n"
+"  -d, --home HJEMME\t\thjemmemappe for den nye kontoen\n"
+"  -e, --expiredate DATOt\tkontoen utgår på datoen DATE\n"
+"  -f, --inacttive INAKTIV\t\tangi inaktivt passord etter utløp\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1617,11 +1772,11 @@ msgstr "%s: shadow-passord kreves for -e og -f\n"
 
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr ""
+msgstr "%s: -a er BARE tillatt sammen med -G\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %lu er ikke unik\n"
+msgstr "%s: uid %lu er ikke entydig\n"
 
 #, c-format
 msgid "%s: error changing password entry\n"
@@ -1641,7 +1796,7 @@ msgstr "%s: mappa %s finnes\n"
 
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: kan ikke lage %s\n"
+msgstr "%s: kan ikke opprette %s\n"
 
 #, c-format
 msgid "%s: can't chown %s\n"
@@ -1650,6 +1805,7 @@ msgstr "%s: kan ikke chown %s\n"
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
+"%s: advarsel: klarte ikke å fullstendig fjerne den gamle hjemmemappa %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -1676,6 +1832,14 @@ msgid ""
 "  -q, --quiet\t\t\tquiet mode\n"
 "  -s, --shadow\t\t\tedit shadow or gshadow database\n"
 msgstr ""
+"Bruk: vipw [valg]\n"
+"\n"
+"Valg: \n"
+"  -g, --group\t\t\trediger gruppedatabasen\n"
+"  -h, --help\t\t\tvis denne hjelpeteksten og avslutt\n"
+"  -p, --passwd\t\t\trediger passwd-databasen\n"
+"  -q., --quiet\t\t\tordknapp kjøremåte\n"
+"  -s, --shadow \t\t\trediger shadow- eller gshadow-databasen\n"
 
 #, c-format
 msgid ""
@@ -1694,33 +1858,3 @@ msgstr "Kunne ikke lage backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kan ikke gjenopprette %s: %s (dine endringer befinner seg i %s)\n"
-
-#, fuzzy
-#~ msgid ""
-#~ "Usage:\n"
-#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-#~ "`{vipw|vigr} -q' quiet mode\n"
-#~ msgstr ""
-#~ "Bruk:\n"
-#~ "«vipw» redigerer /etc/passwd        «vipw -s» redigerer /etc/shadow\n"
-#~ "«vigr» redigerer /etc/group         «vigr -s» redigerer /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: PAM chauthtok feilet\n"
-
-#~ msgid "%s: Cannot execute %s"
-#~ msgstr "%s: Kan ikke utføre %s"
-
-#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-#~ msgstr "Bruk: %s\t[-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
-
-#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-#~ msgstr "\t\t[-d hjem [-m]] [-s skall] [-c kommentar] [-l nytt_navn]\n"
-
-#, fuzzy
-#~ msgid "[-f inactive] [-e expire] "
-#~ msgstr "[-f inaktiv] [-e utgå ] "
-
-#~ msgid "[-p passwd] [-L|-U] name\n"
-#~ msgstr "[-p passord] [-L|-U] navn\n"

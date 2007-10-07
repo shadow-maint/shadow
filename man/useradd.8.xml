@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.29 2006/01/02 13:59:01 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.32 2006/02/20 01:05:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -10,7 +10,7 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>useradd</refname>
-    <refpurpose>Create a new user or update default new user information</refpurpose>
+    <refpurpose>create a new user or update default new user information</refpurpose>
   </refnamediv>
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
@@ -73,8 +73,8 @@
 	    The default base directory for the system if <option>-d</option>
 	    dir is not specified. <replaceable>BASE_DIR</replaceable> is
 	    concatenated with the account name to define the home directory. 
-	    If the <option>-m</option> option is not used, base_dir must
-	    exist.
+	    If the <option>-m</option> option is not used,
+	    <replaceable>BASE_DIR</replaceable> must exist.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -90,7 +90,8 @@
 	    login directory. The default is to append the
 	    <replaceable>LOGIN</replaceable> name to
 	    <replaceable>BASE_DIR</replaceable> and use that as the login
-	    directory name.
+	    directory name. The directory <replaceable>HOME_DIR</replaceable>
+	    does not have to exist but will not be created if it is missing.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -208,7 +209,7 @@
 	  <option>-o</option>, <option>--non-unique</option>
 	</term>
 	<listitem>
-	  <para>Allow create user account with duplicate (non-unique) UID.</para>
+	  <para>Allow the creation of a user account with a duplicate (non-unique) UID.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

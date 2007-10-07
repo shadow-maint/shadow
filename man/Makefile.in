@@ -63,7 +63,6 @@ NROFF = nroff
 MANS = $(man_MANS)
 ETAGS = etags
 CTAGS = ctags
-DIST_SUBDIRS = $(SUBDIRS)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMDEP_FALSE = @AMDEP_FALSE@
@@ -142,6 +141,8 @@ SHELL = @SHELL@
 STRIP = @STRIP@
 U = @U@
 USE_NLS = @USE_NLS@
+USE_NLS_FALSE = @USE_NLS_FALSE@
+USE_NLS_TRUE = @USE_NLS_TRUE@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -193,7 +194,9 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 # subdirectories for translated manual pages
-SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
+DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
+@USE_NLS_FALSE@SUBDIRS = 
+@USE_NLS_TRUE@SUBDIRS = $(DIST_SUBDIRS)
 man_XMANS = \
 	chage.1.xml \
 	chfn.1.xml \
@@ -218,6 +221,7 @@ man_XMANS = \
 	logoutd.8.xml \
 	newgrp.1.xml \
 	newusers.8.xml \
+	nologin.8.xml \
 	passwd.1.xml \
 	passwd.5.xml \
 	porttime.5.xml \
@@ -259,6 +263,7 @@ man_MANS = \
 	logoutd.8 \
 	newgrp.1 \
 	newusers.8 \
+	nologin.8 \
 	passwd.1 \
 	passwd.5 \
 	porttime.5 \
@@ -862,6 +867,9 @@ update-po: shadow-man-pages.pot
 @ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 @ENABLE_REGENERATE_MAN_TRUE@newusers.8: newusers.8.xml
+@ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+
+@ENABLE_REGENERATE_MAN_TRUE@nologin.8: nologin.8.xml
 @ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 @ENABLE_REGENERATE_MAN_TRUE@passwd.1: passwd.1.xml

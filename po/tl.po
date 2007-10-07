@@ -8,10 +8,10 @@
 # Itong talaksan ay inaalagaan ni Eric Pareja <xenos@upm.edu.ph>
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.14\n"
+"Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-12-10 21:48+0100\n"
-"PO-Revision-Date: 2005-12-30 13:12+0800\n"
+"POT-Creation-Date: 2006-03-05 23:11+0100\n"
+"PO-Revision-Date: 2006-03-08 17:13+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -251,8 +251,8 @@ msgid "never\n"
 msgstr "Hindi kailanman\n"
 
 #, c-format
-msgid "password must be changed"
-msgstr "kailangan palitan ang password"
+msgid "password must be changed\n"
+msgstr "kailangan palitan ang password\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -454,6 +454,68 @@ msgstr "Hindi maalis ang aldaba sa talaksang password.\n"
 
 #, c-format
 msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Pag-gamit: chpasswd [mga opsyon]\n"
+"\n"
+"Mga opsyon:\n"
+"  -e, --encrypted\tang mga bigay na mga password ay naka-encrypt\n"
+"  -h, --help\t\tipakita itong payo na ito at lumabas\n"
+"  -m, --md5\t\tgamitin ang MD5 encryption imbes na DES kapag ang\n"
+"\t\t\tmga ibinigay na mga password ay hindi naka-encrypt\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s: hindi maaldaba ang talaksang gshadow\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: hindi mabuksan ang talaksang shadow\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: linya %d: sobrang haba ng linya\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: linya %d: walang bagong password\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s: linya %d: di kilalang grupo %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linya %d: hindi ma-apdeyt password entry\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: may error na naganap, di pinansin ang mga pagbabago\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: error sa pag-apdeyt ng talaksang shadow\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: error sa pag-apdeyt ng talaksang password\n"
+
+#, c-format
+msgid ""
 "Usage: chpasswd [options]\n"
 "\n"
 "Options:\n"
@@ -479,36 +541,8 @@ msgid "%s: can't lock shadow file\n"
 msgstr "%s: hindi maaldaba ang talaksang shadow\n"
 
 #, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: hindi mabuksan ang talaksang shadow\n"
-
-#, c-format
-msgid "%s: line %d: line too long\n"
-msgstr "%s: linya %d: sobrang haba ng linya\n"
-
-#, c-format
-msgid "%s: line %d: missing new password\n"
-msgstr "%s: linya %d: walang bagong password\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linya %d: di kilalang gumagamit %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linya %d: hindi ma-apdeyt password entry\n"
-
-#, c-format
-msgid "%s: error detected, changes ignored\n"
-msgstr "%s: may error na naganap, di pinansin ang mga pagbabago\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: error sa pag-apdeyt ng talaksang shadow\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: error sa pag-apdeyt ng talaksang password\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -894,14 +928,6 @@ msgid "%s: no changes\n"
 msgstr "%s: walang pagbabago\n"
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: hindi maaldaba ang talaksang grupo\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: hindi mabuksan ang talaksang grupo\n"
-
-#, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: hindi maaldaba ang talaksang grupo na shadow\n"
 
@@ -975,6 +1001,10 @@ msgid "**Never logged in**"
 msgstr "**Di pumasok kailanman**"
 
 #, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "lastlog: hindi inaasahang argumento: %s\n"
+
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Pag-gamit: %s [-p] [pangalan]\n"
 
@@ -1027,12 +1057,20 @@ msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: kabiguan sa PAM, humihinto: %s\n"
 
 #, c-format
-msgid ""
-"\n"
-"Login incorrect\n"
-msgstr ""
-"\n"
-"Maling pagpasok\n"
+msgid "%s login: "
+msgstr "%s login: "
+
+#, c-format
+msgid "login: "
+msgstr "login: "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "Lumampas sa bilang ng maaaring pagsubok : (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "login: hiniling na mag-abort ng PAM\n"
 
 #, c-format
 msgid ""
@@ -1349,6 +1387,7 @@ msgid ""
 "Usage: su [options] [login]\n"
 "\n"
 "Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -, -l, --login\t\tmake the shell a login shell\n"
 "  -m, -p,\n"
@@ -1359,6 +1398,7 @@ msgstr ""
 "Pag-gamit: su [mga opsyon] [login]\n"
 "\n"
 "Mga opsyon:\n"
+"  -c, --command UTOS\t\tipasa ang UTOS sa tinawag na shell\n"
 "  -h, --help\t\t\tipakita ang payo na ito\n"
 "  -, -l, --login\t\tgawing login shell ang shell\n"
 "  -m, -p,\n"

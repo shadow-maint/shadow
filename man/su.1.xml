@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.19 2005/12/17 17:45:58 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.22 2006/01/22 10:14:51 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -42,7 +42,7 @@
 
     <para>
       Additional arguments may be provided after the username, in which case
-      they are supplied to the user&acute;s login shell. In particular, an
+      they are supplied to the user's login shell. In particular, an
       argument of <option>-c</option> will cause the next argument to be
       treated as a command by most command interpreters. The command will be
       executed by the shell specified in <filename>/etc/passwd</filename>
@@ -56,7 +56,7 @@
 
     <para>The user will be prompted for a password, if appropriate. Invalid
       passwords will produce an error message. All attempts, both valid and
-      invalid, are logged to detect abuses of the system.
+      invalid, are logged to detect abuse of the system.
     </para>
 
     <para>
@@ -80,6 +80,18 @@
     <para>The options which apply to the <command>su</command> command are:
     </para>
     <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-c</option>, <option>--command</option>
+	  <replaceable>SHELL</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Specify a command that will be invoked by the shell using its
+	    <option>-c</option>.
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>
 	  <option>-</option>, <option>-l</option>, <option>--login</option>

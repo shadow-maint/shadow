@@ -35,7 +35,7 @@
 
 #include <config.h>
 
-#ident "$Id: newusers.c,v 1.31 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id: newusers.c,v 1.33 2006/03/07 15:47:32 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -49,8 +49,9 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-#include "pwio.h"
 #include "groupio.h"
+#include "nscd.h"
+#include "pwio.h"
 #include "shadowio.h"
 /*
  * Global variables
@@ -474,15 +475,16 @@ int main (int argc, char **argv)
 
 		if (newpw.pw_dir[0] && access (newpw.pw_dir, F_OK)) {
 			if (mkdir (newpw.pw_dir,
-				   0777 & ~getdef_num ("UMASK", 022)))
+				   0777 & ~getdef_num ("UMASK",
+						       GETDEF_DEFAULT_UMASK)))
 				fprintf (stderr,
-					 _("%s: line %d: mkdir failed\n"),
-					 Prog, line);
+					 _("%s: line %d: mkdir failed\n"), Prog,
+					 line);
 			else if (chown
 				 (newpw.pw_dir, newpw.pw_uid, newpw.pw_gid))
 				fprintf (stderr,
-					 _("%s: line %d: chown failed\n"),
-					 Prog, line);
+					 _("%s: line %d: chown failed\n"), Prog,
+					 line);
 		}
 
 		/*

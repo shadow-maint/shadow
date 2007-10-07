@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: login.c,v 1.77 2005/12/13 14:04:54 kloczek Exp $"
+#ident "$Id: login.c,v 1.83 2006/03/07 15:47:32 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -47,6 +47,7 @@
 #include "getdef.h"
 #include "prototypes.h"
 #include "pwauth.h"
+#include "exitcodes.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 
@@ -258,7 +259,10 @@ static void check_flags (int argc, char *const *argv)
 
 static void init_env (void)
 {
-	char *cp, *tmp;
+#ifndef USE_PAM
+	char *cp;
+#endif
+	char *tmp;
 
 	if ((tmp = getenv ("LANG"))) {
 		addenv ("LANG", tmp);
@@ -331,6 +335,7 @@ int main (int argc, char **argv)
 	int flag;
 	int subroot = 0;
 	int is_console;
+	int err;
 	const char *cp;
 	char *tmp;
 	char fromhost[512];
@@ -490,7 +495,7 @@ int main (int argc, char **argv)
 		setup_tty ();
 
 #ifndef USE_PAM
-		umask (getdef_num ("UMASK", 077));
+		umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 
 		{
 			/* 
@@ -603,10 +608,10 @@ int main (int argc, char **argv)
 			if (!gethostname (hostn, sizeof (hostn)))
 				snprintf (login_prompt,
 					  sizeof (login_prompt),
-					  "%s login: ", hostn);
+					  _("%s login: "), hostn);
 			else
 				snprintf (login_prompt,
-					  sizeof (login_prompt), "login: ");
+					  sizeof (login_prompt), _("login: "));
 
 			retcode =
 			    pam_set_item (pamh, PAM_USER_PROMPT, login_prompt);
@@ -627,68 +632,60 @@ int main (int argc, char **argv)
 			 * pay attention to failure count and get rid of
 			 * MAX_LOGIN_TRIES?
 			 */
-			retcode = pam_authenticate (pamh, 0);
-			while ((failcount++ < retries) &&
-			       ((retcode == PAM_AUTH_ERR) ||
-				(retcode == PAM_USER_UNKNOWN) ||
-				(retcode == PAM_CRED_INSUFFICIENT) ||
-				(retcode == PAM_AUTHINFO_UNAVAIL))) {
-				pam_get_item (pamh, PAM_USER,
-					      (const void **) &pam_user);
-				SYSLOG ((LOG_NOTICE,
-					 "FAILED LOGIN %d FROM %s FOR %s, %s",
-					 failcount, hostname, pam_user,
-					 pam_strerror (pamh, retcode)));
-#ifdef HAVE_PAM_FAIL_DELAY
-				pam_fail_delay (pamh, 1000000 * delay);
-#endif
-#ifdef WITH_AUDIT
-				{
-					struct passwd *pw;
-					char buf[64];
+			failcount = 0;
+			while (1) {
+			  const char *failent_user;
+			  failed = 0;
 
-					audit_fd = audit_open ();
-					pw = getpwnam (username);
-					if (pw) {
-						snprintf (buf, sizeof (buf),
-							  "uid=%d", pw->pw_uid);
-						audit_log_user_message
-						    (audit_fd, AUDIT_USER_LOGIN,
-						     buf, hostname, NULL,
-						     tty, 0);
-					} else {
-						snprintf (buf, sizeof (buf),
-							  "acct=%s", username);
-						audit_log_user_message
-						    (audit_fd, AUDIT_USER_LOGIN,
-						     buf, hostname, NULL,
-						     tty, 0);
-					}
-					close (audit_fd);
-				}
-#endif				/* WITH_AUDIT */
+			  failcount++;
+			  if (delay > 0)
+			    retcode = pam_fail_delay(pamh, 1000000*delay);
 
-				fprintf (stderr, _("\nLogin incorrect\n"));
-				pam_set_item (pamh, PAM_USER, NULL);
-				retcode = pam_authenticate (pamh, 0);
-			}
+			  retcode = pam_authenticate (pamh, 0);
 
-			if (retcode != PAM_SUCCESS) {
-				pam_get_item (pamh, PAM_USER,
-					      (const void **) &pam_user);
+			  pam_get_item (pamh, PAM_USER,
+					(const void **) &pam_user);
 
-				if (retcode == PAM_MAXTRIES)
-					SYSLOG ((LOG_NOTICE,
-						 "TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
-						 failcount, hostname,
-						 pam_user,
-						 pam_strerror (pamh, retcode)));
-				else
-					SYSLOG ((LOG_NOTICE,
-						 "FAILED LOGIN SESSION FROM %s FOR %s, %s",
-						 hostname, pam_user,
-						 pam_strerror (pamh, retcode)));
+			  if (pam_user && pam_user[0]) {
+			    pwd = getpwnam(pam_user);
+			    if (pwd) {
+			      pwent = *pwd;
+			      failent_user = pwent.pw_name;
+			    } else {
+			      if (getdef_bool("LOG_UNKFAIL_ENAB") && pam_user)
+				failent_user = pam_user;
+			      else
+				failent_user = "UNKNOWN";
+			    }
+			  } else {
+			    pwd = NULL;
+			    failent_user = "UNKNOWN";
+			  }
 
+			  if (retcode == PAM_MAXTRIES || failcount >= retries) {
+			    SYSLOG ((LOG_NOTICE,
+				    "TOO MANY LOGIN TRIES (%d)%s FOR `%s'",
+				    failcount, fromhost, failent_user));
+			    fprintf(stderr,
+				    _("Maximum number of tries exceeded (%d)\n"),
+				    failcount);
+			    PAM_END;
+			    exit(0);
+			  } else if (retcode == PAM_ABORT) {
+			    /* Serious problems, quit now */
+			    fprintf(stderr,_("login: abort requested by PAM\n"));
+			    SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
+			    PAM_END;
+			    exit(99);
+			  } else if (retcode != PAM_SUCCESS) {
+			    SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR `%s', %s",
+				   failcount, fromhost, failent_user,
+				   pam_strerror (pamh, retcode)));
+			    failed = 1;
+			  }
+
+			  if (!failed)
+			    break;
 
 #ifdef WITH_AUDIT
 				{
@@ -716,11 +713,13 @@ int main (int argc, char **argv)
 				}
 #endif				/* WITH_AUDIT */
 
-				fprintf (stderr, "\nLogin incorrect\n");
-				pam_end (pamh, retcode);
-				exit (0);
+			  fprintf(stderr,"\nLogin incorrect\n");
+
+			  /* Let's give it another go around */
+			  pam_set_item(pamh,PAM_USER,NULL);
 			}
 
+			/* We don't get here unless they were authenticated above */
 			retcode = pam_acct_mgmt (pamh, 0);
 
 			if (retcode == PAM_NEW_AUTHTOK_REQD) {
@@ -1127,10 +1126,12 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_INFO, "`%s' logged in %s", username, fromhost));
 #endif
 	closelog ();
-	if ((tmp = getdef_str ("FAKE_SHELL")) != NULL) {
-		shell (tmp, pwent.pw_shell);	/* fake shell */
-	}
-	shell (pwent.pw_shell, (char *) 0);	/* exec the shell finally. */
+	if ((tmp = getdef_str ("FAKE_SHELL")) != NULL)
+		err = shell (tmp, pwent.pw_shell, newenvp); /* fake shell */
+	else
+		/* exec the shell finally */
+		err = shell (pwent.pw_shell, (char *) 0, newenvp);
+	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/* NOT REACHED */
 	return 0;
 }

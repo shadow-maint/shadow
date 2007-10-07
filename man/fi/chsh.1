@@ -1,53 +1,49 @@
-.\"
-.\"  chsh.1 -- change your login shell
-.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
-.\"
-.\"  this program is free software.  you can redistribute it and
-.\"  modify it under the terms of the gnu general public license.
-.\"  there is no warranty.
-.\"
-.\"  $Author: kloczek $
-.\"  $Revision: 1.2 $
-.\"  $Date: 2005/12/01 20:38:25 $
-.\" Proofread by Raimo Koski, Nov-Dec. 1999
-.\" Translated into Finnish by Juha-Pekka Syrjälä (jsyrjala@iki.fi)
-.\" Proofread by Raimo Koski (rkoski@pp.weppi.fi)
-.\"
-.TH CHSH 1 "24. Huhtikuuta 1998" "chsh" "Käyttäjän sovellusohjelmat"
-.SH NIMI
-chsh \- vaihtaa sisäänkirjautumisessa käytetyn komentotulkin
-.SH "YLEISKATSAUS"
-.B chsh
-[\ \-s\ komentotulkki\ ] [\ \-l\ ] [\ \-u\ ] [\ \-v\ ] [\ käyttäjätunnus\ ]
-.SH KUVAUS
-.B chsh
-- käytetään vaihtamaan sisäänkirjautumisessa käytetty komentotulkki.
-Jos komentotulkkia ei ole annettu komentorivillä,
-.B chsh
-kysyy sitä.
-.SS HYVÄKSYTTÄVÄT KOMENTOTULKIT
-.B chsh
-hyväksyy minkä tahansa ajattavan tiedoston, jolle annetaan koko tiedostonimi polkuineen.
-Se kuitenkin varoittaa, jos komentotulkki ei ole määritelty 
-.I /etc/shells-tiedostossa.
-.SH OPTIOT
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "CHSH" "1" "03/07/2006" "Käyttäjän sovellukset" "Käyttäjän sovellukset"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+chsh \- vaihda sisäänkirjautumiskuorta
+.SH "SYNOPSIS"
+.HP 5
+\fBchsh\fR [\-s\ \fIsisäänkirjautumiskuori\fR] [\fIkäyttäjä\fR]
+.SH "KUVAUS"
+.PP
+\fBchsh\fR
+vaihtaa käyttäjän sisäänkirjautumiskuorta. Tämä määrittää käyttäjän ensimmäisen kirjautumiskomennon. Tavallinen käyttäjä voi vaihtaa ainoastaan oman tunnuksensa kirjautumiskuorta, mutta pääkäyttäjä voi vaihtaa kenen tahansa kirjautumiskuoren.
+.PP
+Ainoa rajoitus kirjautumiskuorelle on, että komennon nimen täytyy olla lueteltuna tiedostossa
+\fI/etc/shells\fR
+ellei komentoa käynnistänyt pääkäyttäjä, jolloin mikä tahansa arvo voidaan lisätä. Tunnus, jolla on rajoitettu kirjautumiskuori, ei voi vaihtaa omaa kirjautumiskuortaan. Tästä syystä komennon
+\fI/bin/rsh\fR
+lisääminen tiedostoon
+\fI/etc/shells\fR
+ei ole suositeltavaa, koska käyttäjän vahingossa vaihtaessa rajoitettuun kuoreen, ei hän voi koskaan vaihtaa kirjautumiskuortaan takaisin alkuperäiseen arvoon.
+.SH "VALITSIMET"
+.PP
+Mikäli valitsinta
+\fB\-s\fR
+ei ole annettu,
+\fBchsh\fR
+toimii interaktiivisesti kysyen käyttäjältä kirjautumiskuorta. Syöttämällä uuden arvon vaihdetaan kuorta, ja antamalla tyhjän syötteen, vanha kuori jää voimaan. Nykyinen kuori tulostetaan
+\fI[ ]\fR\-merkkiparin välissä.
+.SH "TIEDOSTOT"
 .TP
-.I "\-s, \-\-shell"
-Määrittele sisäänkirjautumisessa käytetty komentotulkki.
+\fI/etc/passwd\fR
+käyttäjätunnuksien tiedot
 .TP
-.I "\-l, \-\-list-shells"
-Tulostaa listan komentotulkeista, jotka ovat määritelty
-.I /etc/shells
--tiedostossa ja sulkee ohjelman.
+\fI/etc/shells\fR
+luettelo sallituista kirjautumiskuorista
 .TP
-.I "\-u, \-\-help"
-Tulostaa ohjeen ja sulkee ohjelman.
-.TP
-.I "-v, \-\-version"
-Tulostaa versiota koskevan informaation ja sulkee ohjelman.
-.SH TEKIJÄ
-Salvatore Valente <svalente@mit.edu>
+\fI/etc/login.defs\fR
+varjosalasanakaluston asetukset
 .SH "KATSO MYÖS"
-.BR login (1),
-.BR passwd (5),
-.BR shells (5),
+.PP
+\fBchfn\fR(1),
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(5)

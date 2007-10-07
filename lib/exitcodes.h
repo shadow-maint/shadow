@@ -1,4 +1,4 @@
-/* $Id: exitcodes.h,v 1.7 2005/08/31 17:36:11 kloczek Exp $ */
+/* $Id: exitcodes.h,v 1.8 2006/01/17 22:06:03 kloczek Exp $ */
 
 /*
  * Exit codes used by shadow programs
@@ -11,3 +11,5 @@
 #define E_SHADOW_NOTFOUND	15	/* not found shadow password file */
 #define E_GROUP_NOTFOUND	16	/* not found group file */
 #define E_GSHADOW_NOTFOUND	17	/* not found shadow group file */
+#define E_CMD_NOEXEC		126	/* can't run command/shell */
+#define E_CMD_NOTFOUND		127	/* can't find command/shell to run */
