@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groups.c,v 1.5 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: groups.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <pwd.h>
@@ -39,8 +39,7 @@ RCSID(PKG_VER "$Id: groups.c,v 1.5 1999/06/07 16:40:45 marekm Exp $")
 #include "defines.h"
 
 /* local function prototypes */
-static void print_groups P_((const char *));
-int main P_((int, char **));
+static void print_groups(const char *);
 
 /*
  * print_groups - print the groups which the named user is a member of

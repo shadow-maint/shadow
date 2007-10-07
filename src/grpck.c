@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: grpck.c,v 1.12 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: grpck.c,v 1.13 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -44,13 +44,13 @@ RCSID(PKG_VER "$Id: grpck.c,v 1.12 1999/06/07 16:40:45 marekm Exp $")
 #include "commonio.h"
 
 #include "groupio.h"
-extern void __gr_del_entry P_((const struct commonio_entry *));
-extern struct commonio_entry *__gr_get_head P_((void));
+extern void __gr_del_entry(const struct commonio_entry *);
+extern struct commonio_entry *__gr_get_head(void);
 
 #ifdef SHADOWGRP
 #include "sgroupio.h"
-extern void __sgr_del_entry P_((const struct commonio_entry *));
-extern struct commonio_entry *__sgr_get_head P_((void));
+extern void __sgr_del_entry(const struct commonio_entry *);
+extern struct commonio_entry *__sgr_get_head(void);
 #endif
 
 /*
@@ -83,10 +83,9 @@ static const char *sgr_file = SGROUP_FILE;
 static int read_only = 0;
 
 /* local function prototypes */
-static void usage P_((void));
-static int yes_or_no P_((void));
-static void delete_member P_((char **, const char *));
-int main P_((int, char **));
+static void usage(void);
+static int yes_or_no(void);
+static void delete_member(char **, const char *);
 
 /*
  * usage - print syntax message and exit
@@ -289,7 +288,7 @@ main(int argc, char **argv)
 		 * be parsed properly.
 		 */
 
-		if (!gre->entry) {
+		if (!gre->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and
@@ -327,7 +326,7 @@ delete_gr:
 		 * Group structure is good, start using it.
 		 */
 
-		grp = gre->entry;
+		grp = gre->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
@@ -335,7 +334,7 @@ delete_gr:
 
 		for (tgre = __gr_get_head(); tgre; tgre = tgre->next) {
 
-			const struct group *ent = tgre->entry;
+			const struct group *ent = tgre->eptr;
 
 			/*
 			 * Don't check this entry
@@ -444,7 +443,7 @@ delete_gr:
 		 * be parsed properly.
 		 */
 
-		if (!sge->entry) {
+		if (!sge->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and
@@ -482,7 +481,7 @@ delete_sg:
 		 * Shadow group structure is good, start using it.
 		 */
 
-		sgr = sge->entry;
+		sgr = sge->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
@@ -490,7 +489,7 @@ delete_sg:
 
 		for (tsge = __sgr_get_head(); tsge; tsge = tsge->next) {
 
-			const struct sgrp *ent = tsge->entry;
+			const struct sgrp *ent = tsge->eptr;
 
 			/*
 			 * Don't check this entry

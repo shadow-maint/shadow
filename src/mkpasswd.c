@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: mkpasswd.c,v 1.6 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: mkpasswd.c,v 1.7 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -103,8 +103,7 @@ extern	int	sg_dbm_update();
 #endif
 
 /* local function prototypes */
-int main P_((int, char **));
-static void usage P_((void));
+static void usage(void);
 
 /*
  * mkpasswd - create DBM files for /etc/passwd-like input file

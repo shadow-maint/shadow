@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: copydir.c,v 1.6 1998/06/25 22:10:42 marekm Exp $")
+RCSID("$Id: copydir.c,v 1.7 2000/08/26 18:27:17 marekm Exp $")
 
 
 #include <sys/stat.h>
@@ -192,11 +192,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		}
 		snprintf(dst_name, sizeof dst_name, "%s/%s", dst_root, ent->d_name);
 
-#ifdef	S_IFLNK
-		if (lstat (src_name, &sb) == -1)
-#else
-		if (stat (src_name, &sb) == -1)
-#endif
+		if (LSTAT(src_name, &sb) == -1)
 			continue;
 
 		if (S_ISDIR(sb.st_mode)) {
@@ -380,11 +376,7 @@ remove_tree(const char *root)
 			break;
 		}
 		snprintf(new_name, sizeof new_name, "%s/%s", root, ent->d_name);
-#ifdef	S_IFLNK
-		if (lstat (new_name, &sb) == -1)
-#else
-		if (stat (new_name, &sb) == -1)
-#endif
+		if (LSTAT(new_name, &sb) == -1)
 			continue;
 
 		if (S_ISDIR(sb.st_mode)) {

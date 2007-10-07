@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: passwd.c,v 1.18 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: passwd.c,v 1.19 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -155,7 +155,6 @@ static int tcfs_force = 0;
  * External identifiers
  */
 
-extern char *crypt_make_salt P_((void));
 #ifdef ATT_AGE
 extern char *l64a();
 #endif
@@ -197,39 +196,38 @@ extern	int	pw_dbm_mode;
 #define NOCHGPASSWD "did not change password for `%s'"
 
 /* local function prototypes */
-static void usage P_((int));
+static void usage(int);
 #ifndef USE_PAM
 #ifdef AUTH_METHODS
-static char *get_password P_((const char *));
-static int uses_default_method P_((const char *));
+static char *get_password(const char *);
+static int uses_default_method(const char *);
 #endif /* AUTH_METHODS */
-static int reuse P_((const char *, const struct passwd *));
-static int new_password P_((const struct passwd *));
+static int reuse(const char *, const struct passwd *);
+static int new_password(const struct passwd *);
 #ifdef SHADOWPWD
-static void check_password P_((const struct passwd *, const struct spwd *));
+static void check_password(const struct passwd *, const struct spwd *);
 #else /* !SHADOWPWD */
-static void check_password P_((const struct passwd *));
+static void check_password(const struct passwd *);
 #endif /* !SHADOWPWD */
-static char *insert_crypt_passwd P_((const char *, const char *));
+static char *insert_crypt_passwd(const char *, const char *);
 #endif /* !USE_PAM */
-static char *date_to_str P_((time_t));
-static const char *pw_status P_((const char *));
-static void print_status P_((const struct passwd *));
-static void fail_exit P_((int));
-static void oom P_((void));
-static char *update_crypt_pw P_((char *));
-static void update_noshadow P_((void));
+static char *date_to_str(time_t);
+static const char *pw_status(const char *);
+static void print_status(const struct passwd *);
+static void fail_exit(int);
+static void oom(void);
+static char *update_crypt_pw(char *);
+static void update_noshadow(void);
 #ifdef SHADOWPWD
-static void update_shadow P_((void));
+static void update_shadow(void);
 #endif
 #ifdef HAVE_TCFS
-static void update_tcfs P_((void));
+static void update_tcfs(void);
 #endif
 #ifdef HAVE_USERSEC_H
-static void update_userpw P_((char *));
+static void update_userpw(char *);
 #endif
-static long getnumber P_((const char *));
-int main P_((int, char **));
+static long getnumber(const char *);
 
 /*
  * usage - print command usage and exit
@@ -301,10 +299,10 @@ reuse(const char *pass, const struct passwd *pw)
 #ifdef HAVE_LIBCRACK_HIST
 	const char *reason;
 #ifdef HAVE_LIBCRACK_PW
-	const char *FascistHistoryPw P_((const char *,const struct passwd *));
+	const char *FascistHistoryPw(const char *,const struct passwd *);
 	reason = FascistHistory(pass, pw);
 #else
-	const char *FascistHistory P_((const char *, int));
+	const char *FascistHistory(const char *, int);
 	reason = FascistHistory(pass, pw->pw_uid);
 #endif
 	if (reason) {
@@ -333,7 +331,7 @@ new_password(const struct passwd *pw)
 	int	warned;
 	int	pass_max_len;
 #ifdef HAVE_LIBCRACK_HIST
-	int HistUpdate P_((const char *, const char *));
+	int HistUpdate(const char *, const char *);
 #endif
 
 	/*

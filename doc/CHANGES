@@ -1,4 +1,23 @@
-$Id: CHANGES,v 1.28 1999/08/27 19:02:50 marekm Exp $
+$Id: CHANGES,v 1.29 2000/08/26 18:27:09 marekm Exp $
+
+shadow-19990827 => shadow-20000826
+
+WARNING: this release is not tested (other than that it compiles for me),
+please be careful.  Previous release was a year ago, so it is really time
+to release something and start looking for a new, better maintainer...
+(I've been extremely busy recently.  Credit for most of the real work,
+such as complete PAM support, should go to Ben Collins <bcollins@debian.org>
+who maintains this package for Debian.)
+
+- merged most of the changes from Debian (not all of them yet, PAM support
+  should be complete but is not tested - need to upgrade to potato first)
+- added Polish translations of manual pages from PLD
+- change sulog() to not depend on global variables oldname, name
+- try to not follow symbolic links when deleting files recursively
+  in userdel (still not perfect, safest to do it in single user mode)
+- removed workarounds for ancient (pre-ANSI) C compilers - use gcc!
+  (a few ANSI C constructs were used already, and no one complained)
+- updated author's e-mail address (jfh@bga.com -> jfh@austin.ibm.com)
 
 shadow-19990709 => shadow-19990827
 

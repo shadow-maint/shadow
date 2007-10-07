@@ -43,7 +43,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chpasswd.c,v 1.9 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: chpasswd.c,v 1.10 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include "prototypes.h"
@@ -61,12 +61,10 @@ static int eflg = 0;
 static int is_shadow_pwd;
 #endif
 
-extern char *crypt_make_salt P_((void));
 extern	char	*l64a();
 
 /* local function prototypes */
-static void usage P_((void));
-int main P_((int, char **));
+static void usage(void);
 
 /*
  * usage - display usage message and exit

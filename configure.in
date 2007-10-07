@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(lib/dialchk.c)
-AM_INIT_AUTOMAKE(shadow, 19990827)
+AM_INIT_AUTOMAKE(shadow, 20000826)
 AM_CONFIG_HEADER(config.h)
 
 dnl Some hacks...
@@ -111,8 +111,8 @@ AC_FUNC_STRFTIME
 dnl Disabled for now, strtoday.c has problems with year 2000 or later
 dnl AC_CHECK_FUNCS(strptime)
 AC_CHECK_FUNCS(a64l fchmod fchown fsync getgroups gethostname getspnam)
-AC_CHECK_FUNCS(gettimeofday getusershell getutent initgroups lckpwdf)
-AC_CHECK_FUNCS(memcpy memset setgroups sigaction strchr updwtmp updwtmpx)
+AC_CHECK_FUNCS(gettimeofday getusershell getutent initgroups lchown lckpwdf)
+AC_CHECK_FUNCS(lstat memcpy memset setgroups sigaction strchr updwtmp updwtmpx)
 
 AC_REPLACE_FUNCS(mkdir putgrent putpwent putspent rename rmdir)
 AC_REPLACE_FUNCS(sgetgrent sgetpwent sgetspent)
@@ -259,8 +259,10 @@ if test "$with_libcrack" != "no"; then
 fi
 
 AC_SUBST(LIBSKEY)
+AC_SUBST(LIBMD)
 if test "$with_libskey" = "yes"; then
-	AC_CHECK_LIB(skey, skeychallenge, AC_DEFINE(SKEY) LIBSKEY=-lskey, , $LIBCRYPT)
+	AC_CHECK_LIB(md, MD5Init, LIBMD=-lmd)
+	AC_CHECK_LIB(skey, skeychallenge, AC_DEFINE(SKEY) LIBSKEY=-lskey, , $LIBMD $LIBCRYPT)
 elif test "$with_libopie" = "yes"; then
 	AC_CHECK_LIB(opie, opiechallenge, AC_DEFINE(OPIE) LIBSKEY=-lopie, , $LIBCRYPT)
 fi
@@ -299,7 +301,8 @@ dnl AC_SUBST(LTALLOCA)
 AM_GNU_GETTEXT
 dnl AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
-AC_OUTPUT(libmisc/Makefile man/Makefile lib/Makefile src/Makefile Makefile
+AC_OUTPUT(libmisc/Makefile man/Makefile man/pl/Makefile
+	lib/Makefile src/Makefile Makefile
 	contrib/Makefile debian/Makefile doc/Makefile etc/Makefile
 	intl/Makefile intl/po2tbl.sed po/Makefile.in
 	etc/pam.d/Makefile old/Makefile

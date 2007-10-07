@@ -47,15 +47,15 @@ suidubins = chage chfn chsh expiry gpasswd newgrp passwd
 
 install-exec-hook:
 	for i in $(suidbins); do \
-		chmod 4755 $(bindir)/$$i; \
+		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
 	done
 
 install-data-hook:
 	for i in $(suidubins); do \
-		chmod 4755 $(ubindir)/$$i; \
+		chmod 4755 $(DESTDIR)$(ubindir)/$$i; \
 	done
-	rm -f $(ubindir)/sg
-	ln -s newgrp $(ubindir)/sg
+	rm -f $(DESTDIR)$(ubindir)/sg
+	ln -s newgrp $(DESTDIR)$(ubindir)/sg
 
 noinst_PROGRAMS = groups id sulogin
 
@@ -79,7 +79,7 @@ noinst_PROGRAMS = groups id sulogin
 shlibs = ../lib/libshadow.la
 # With glibc2, almost all programs need libcrypt for some reason,
 # even those that don't actually use crypt().
-LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@
+LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@ @LIBMD@
 INCLUDES = -I${top_srcdir}/lib -I$(top_srcdir)/libmisc
 
 chfn_LDADD = ${LDADD} @LIBPAM@

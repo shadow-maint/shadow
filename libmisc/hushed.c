@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: hushed.c,v 1.3 1997/12/07 23:27:05 marekm Exp $")
+RCSID("$Id: hushed.c,v 1.4 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -68,7 +68,7 @@ hushed(const struct passwd *pw)
 	 */
 
 	if (hushfile[0] != '/') {
-		strcat(strcat(strcpy(buf, pw->pw_dir), "/"), hushfile);
+		snprintf(buf, sizeof(buf), "%s/%s", pw->pw_dir, hushfile);
 		return (access(buf, F_OK) == 0);
 	}
 

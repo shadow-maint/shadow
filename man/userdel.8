@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: userdel.8,v 1.4 1998/12/28 20:35:29 marekm Exp $
+.\"	$Id: userdel.8,v 1.5 2000/08/26 18:27:17 marekm Exp $
 .\"
 .TH USERDEL 8
 .SH NAME
@@ -40,8 +40,8 @@ all entries that refer to \fIlogin\fR.
 The named user must exist.
 .IP \fB-r\fR
 Files in the user's home directory will be removed along with the
-home directory itself.
-Files located in other file system will have to be searched for
+home directory itself and the user's mail spool.
+Files located in other file systems will have to be searched for
 and deleted manually.
 .SH FILES
 /etc/passwd \- user account information
@@ -66,4 +66,4 @@ This must be performed on the NIS server.
 .BR useradd (8),
 .BR usermod (8)
 .SH AUTHOR
-Julianne Frances Haugh (jfh@bga.com)
+Julianne Frances Haugh (jfh@austin.ibm.com)

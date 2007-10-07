@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: vipw.c,v 1.1 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: vipw.c,v 1.2 2000/08/26 18:27:19 marekm Exp $")
 
 #include "defines.h"
 
@@ -44,13 +44,12 @@ RCSID(PKG_VER "$Id: vipw.c,v 1.1 1999/07/09 18:02:43 marekm Exp $")
 
 static const char *progname, *filename, *fileeditname;
 static int filelocked = 0, createedit = 0;
-static int (*unlock)();
+static int (*unlock)(void);
 
 /* local function prototypes */
-static int create_backup_file P_((FILE *, const char *, struct stat *));
-static void vipwexit P_((const char *, int, int));
-static void vipwedit P_((const char *, int (*) P_((void)), int (*) P_((void))));
-int main P_((int, char **));
+static int create_backup_file(FILE *, const char *, struct stat *);
+static void vipwexit(const char *, int, int);
+static void vipwedit(const char *, int (*)(void), int (*)(void));
 
 static int
 create_backup_file(FILE *fp, const char *backup, struct stat *sb)
@@ -109,7 +108,7 @@ vipwexit(const char *msg, int syserr, int ret)
 #endif
 
 static void
-vipwedit(const char *file, int (*file_lock) P_((void)), int (*file_unlock) P_((void)))
+vipwedit(const char *file, int (*file_lock)(void), int (*file_unlock)(void))
 {
   const char *editor;
   pid_t pid;
@@ -143,9 +142,23 @@ vipwedit(const char *file, int (*file_lock) P_((void)), int (*file_unlock) P_((v
   
   if ((pid = fork()) == -1) vipwexit("fork", 1, 1);
   else if (!pid) {
+#if 0
     execlp(editor, editor, fileedit, (char *) 0);
     fprintf(stderr, "%s: %s: %s\n", progname, editor, strerror(errno));
     exit(1);
+#else
+    /* use the system() call to invoke the editor so that it accepts
+       command line args in the EDITOR and VISUAL environment vars */
+    char *buf;
+    buf = (char *) malloc (strlen(editor) + strlen(fileedit) + 2);
+    snprintf(buf, strlen(editor) + strlen(fileedit) + 2, "%s %s",
+	     editor, fileedit);
+    if (system(buf) != 0) {
+       fprintf(stderr, "%s: %s: %s\n", progname, editor, strerror(errno));
+       exit(1);
+    } else
+       exit(0);
+#endif
   }
 
   for (;;) {

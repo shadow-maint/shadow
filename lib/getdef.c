@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.13 1999/08/27 19:02:51 marekm Exp $")
+RCSID("$Id: getdef.c,v 1.14 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -55,6 +55,9 @@ struct itemdef {
 static struct itemdef def_table[] = {
 	{ "CHFN_AUTH",			NULL },
 	{ "CHFN_RESTRICT",		NULL },
+#ifdef USE_PAM
+	{ "CLOSE_SESSIONS",		NULL },
+#endif
 	{ "CONSOLE",			NULL },
 	{ "CONSOLE_GROUPS",		NULL },
 	{ "CRACKLIB_DICTPATH",		NULL },
@@ -63,7 +66,8 @@ static struct itemdef def_table[] = {
 	{ "DIALUPS_CHECK_ENAB",		NULL },
 	{ "ENVIRON_FILE",		NULL },
 	{ "ENV_HZ",			NULL },
-	{ "ENV_PATH" ,			NULL },
+	{ "ENV_PATH",			NULL },
+	{ "ENV_ROOTPATH",		NULL },  /* SuSE compatibility? */
 	{ "ENV_SUPATH",			NULL },
 	{ "ENV_TZ",			NULL },
 	{ "ERASECHAR",			NULL },
@@ -130,8 +134,8 @@ static int def_loaded = 0;		/* are defs already loaded?	*/
 extern long strtol();
 
 /* local function prototypes */
-static struct itemdef *def_find P_((const char *));
-static void def_load P_((void));
+static struct itemdef *def_find(const char *);
+static void def_load(void);
 
 
 /*

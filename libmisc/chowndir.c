@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chowndir.c,v 1.5 1998/04/16 19:57:43 marekm Exp $")
+RCSID("$Id: chowndir.c,v 1.6 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -94,10 +94,11 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 
 		snprintf(new_name, sizeof new_name, "%s/%s", root, ent->d_name);
 
-		if (stat (new_name, &sb) == -1)
+		/* Don't follow symbolic links! */
+		if (LSTAT(new_name, &sb) == -1)
 			continue;
 
-		if (S_ISDIR(sb.st_mode)) {
+		if (S_ISDIR(sb.st_mode) && !S_ISLNK(sb.st_mode)) {
 
 			/*
 			 * Do the entire subdirectory.
@@ -107,8 +108,13 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 					      old_gid, new_gid)))
 				break;
 		}
+#ifndef HAVE_LCHOWN
+		/* don't use chown (follows symbolic links!) */
+		if (S_ISLNK(sb.st_mode))
+			continue;
+#endif
 		if (sb.st_uid == old_uid)
-			chown (new_name, new_uid,
+			LCHOWN(new_name, new_uid,
 				sb.st_gid == old_gid ? new_gid:sb.st_gid);
 	}
 	closedir (dir);
@@ -119,7 +125,7 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 
 	if (! stat (root, &sb)) {
 		if (sb.st_uid == old_uid)
-			chown (root, new_uid,
+			LCHOWN(root, new_uid,
 				sb.st_gid == old_gid ? new_gid:sb.st_gid);
 	}
 	return rc;

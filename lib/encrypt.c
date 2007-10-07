@@ -30,13 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: encrypt.c,v 1.6 1999/03/07 19:14:35 marekm Exp $")
+RCSID("$Id: encrypt.c,v 1.7 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
 
 extern	char	*crypt();
-extern char *libshadow_md5_crypt P_((const char *, const char *));
+extern char *libshadow_md5_crypt(const char *, const char *);
 
 char *
 pw_encrypt(const char *clear, const char *salt)

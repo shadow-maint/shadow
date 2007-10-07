@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwio.c,v 1.9 1998/01/29 23:22:31 marekm Exp $")
+RCSID("$Id: pwio.c,v 1.10 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -12,8 +12,8 @@ RCSID("$Id: pwio.c,v 1.9 1998/01/29 23:22:31 marekm Exp $")
 #include "commonio.h"
 #include "pwio.h"
 
-extern struct passwd *sgetpwent P_((const char *));
-extern int putpwent P_((const struct passwd *, FILE *));
+extern struct passwd *sgetpwent(const char *);
+extern int putpwent(const struct passwd *, FILE *);
 
 struct passwd *
 __pw_dup(const struct passwd *pwent)

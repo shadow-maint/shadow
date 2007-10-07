@@ -11,7 +11,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: grpunconv.c,v 1.9 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: grpunconv.c,v 1.10 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,8 +32,7 @@ static int group_locked = 0;
 static int gshadow_locked = 0;
 
 /* local function prototypes */
-static void fail_exit P_((int));
-int main P_((int, char **));
+static void fail_exit(int);
 
 static void
 fail_exit(int status)

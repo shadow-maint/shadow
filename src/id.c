@@ -38,7 +38,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: id.c,v 1.5 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: id.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -47,8 +47,7 @@ RCSID(PKG_VER "$Id: id.c,v 1.5 1999/06/07 16:40:45 marekm Exp $")
 #include "defines.h"
 
 /* local function prototypes */
-static void usage P_((void));
-int main P_((int, char **));
+static void usage(void);
 
 static void
 usage(void)

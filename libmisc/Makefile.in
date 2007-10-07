@@ -78,6 +78,7 @@ INTLOBJS = @INTLOBJS@
 LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
+LIBMD = @LIBMD@
 LIBPAM = @LIBPAM@
 LIBSKEY = @LIBSKEY@
 LIBTCFS = @LIBTCFS@
@@ -339,8 +340,8 @@ suauth.o: suauth.c ../config.h ../lib/prototypes.h ../lib/defines.h \
 	../lib/gshadow_.h
 sub.o: sub.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
 	../lib/defines.h ../lib/gshadow_.h
-sulog.o: sulog.c ../config.h ../lib/rcsid.h ../lib/defines.h \
-	../lib/gshadow_.h ../lib/getdef.h
+sulog.o: sulog.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
+	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
 ttytype.o: ttytype.c ../config.h ../lib/rcsid.h ../lib/prototypes.h \
 	../lib/defines.h ../lib/gshadow_.h ../lib/getdef.h
 tz.o: tz.c ../config.h ../lib/rcsid.h ../lib/defines.h ../lib/gshadow_.h \

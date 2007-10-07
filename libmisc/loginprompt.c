@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: loginprompt.c,v 1.5 1998/04/16 19:57:44 marekm Exp $")
+RCSID("$Id: loginprompt.c,v 1.6 2000/08/26 18:27:17 marekm Exp $")
 
 #include <stdio.h>
 #include <signal.h>
@@ -62,9 +62,9 @@ login_prompt(const char *prompt, char *name, int namesize)
 	char	*cp;
 	int	i;
 	FILE	*fp;
-	RETSIGTYPE	(*sigquit) P_((int));
+	RETSIGTYPE	(*sigquit)(int);
 #ifdef	SIGTSTP
-	RETSIGTYPE	(*sigtstp) P_((int));
+	RETSIGTYPE	(*sigtstp)(int);
 #endif
 
 	/*

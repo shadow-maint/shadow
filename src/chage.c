@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chage.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: chage.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -59,6 +59,7 @@ RCSID(PKG_VER "$Id: chage.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
 #endif	/* SHADOWPWD */
 
 static char	*Prog;
+static int amroot;
 
 #ifdef	AGING	/*{*/
 
@@ -122,13 +123,12 @@ extern	int	sp_dbm_mode;
 #endif
 
 /* local function prototypes */
-static void usage P_((void));
-static void date_to_str P_((char *, size_t, time_t));
-static int new_fields P_((void));
-static void print_date P_((time_t));
-static void list_fields P_((void));
-int main P_((int, char **));
-static void cleanup P_((int));
+static void usage(void);
+static void date_to_str(char *, size_t, time_t);
+static int new_fields(void);
+static void print_date(time_t);
+static void list_fields(void);
+static void cleanup(int);
 
 /*
  * usage - print command line syntax and exit
@@ -371,7 +371,7 @@ main(int argc, char **argv)
 #else
 	char	new_age[5];
 #endif
-	uid_t ruid = getuid ();
+	uid_t ruid;
 	const struct passwd *pw;
 	struct passwd pwent;
 	char	name[BUFSIZ];
@@ -380,6 +380,9 @@ main(int argc, char **argv)
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
+
+	ruid = getuid();
+	amroot = (ruid == 0);
 
 	/*
 	 * Get the program name so that error messages can use it.
@@ -476,7 +479,7 @@ main(int argc, char **argv)
 	 * information.
 	 */
 
-	if (ruid != 0 && ! lflg) {
+	if (!amroot && !lflg) {
 		fprintf (stderr, _("%s: permission denied\n"), Prog);
 		closelog();
 		exit (1);
@@ -487,14 +490,14 @@ main(int argc, char **argv)
 	 * password file entries into memory.  Then we get a pointer
 	 * to the password file entry for the requested user.
 	 */
-
-	if (!pw_lock()) {
+	/* We don't lock the password file if we are not root */
+	if (amroot && !pw_lock()) {
 		fprintf(stderr, _("%s: can't lock password file\n"), Prog);
 		SYSLOG((LOG_ERR, LOCK_FAIL, PASSWD_FILE));
 		closelog();
 		exit(1);
 	}
-	if (!pw_open((ruid != 0 || lflg) ? O_RDONLY:O_RDWR)) {
+	if (!pw_open((!amroot || lflg) ? O_RDONLY:O_RDWR)) {
 		fprintf(stderr, _("%s: can't open password file\n"), Prog);
 		cleanup(1);
 		SYSLOG((LOG_ERR, OPEN_FAIL, PASSWD_FILE));
@@ -519,15 +522,15 @@ main(int argc, char **argv)
 	 * a new entry will be created for this user if one does
 	 * not exist already.
 	 */
-
-	if (!spw_lock()) {
+	/* We don't lock the shadow file if we are not root */
+	if (amroot && !spw_lock()) {
 		fprintf(stderr, _("%s: can't lock shadow password file\n"), Prog);
 		cleanup(1);
 		SYSLOG((LOG_ERR, LOCK_FAIL, SHADOW_FILE));
 		closelog();
 		exit(1);
 	}
-	if (!spw_open((ruid != 0 || lflg) ? O_RDONLY:O_RDWR)) {
+	if (!spw_open((!amroot || lflg) ? O_RDONLY : O_RDWR)) {
 		fprintf(stderr, _("%s: can't open shadow password file\n"), Prog);
 		cleanup(2);
 		SYSLOG((LOG_ERR, OPEN_FAIL, SHADOW_FILE));
@@ -588,7 +591,7 @@ main(int argc, char **argv)
 	 */
 
 	if (lflg) {
-		if (ruid != 0 && ruid != pwent.pw_uid) {
+		if (!amroot && (ruid != pwent.pw_uid)) {
 			fprintf(stderr, _("%s: permission denied\n"), Prog);
 			closelog();
 			exit(1);
@@ -785,14 +788,16 @@ static void
 cleanup(int state)
 {
 	switch (state) {
-		case 2:
+	case 2:
 #ifdef	SHADOWPWD
-			spw_unlock ();
+		if (amroot)
+			spw_unlock();
 #endif
-		case 1:
-			pw_unlock ();
-		case 0:
-			break;
+	case 1:
+		if (amroot)
+			pw_unlock();
+	case 0:
+		break;
 	}
 }
 

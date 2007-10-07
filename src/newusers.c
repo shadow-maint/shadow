@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newusers.c,v 1.10 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: newusers.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -49,8 +49,6 @@ RCSID(PKG_VER "$Id: newusers.c,v 1.10 1999/06/07 16:40:45 marekm Exp $")
 
 static char *Prog;
 
-extern char *crypt_make_salt P_((void));
-
 #include "getdef.h"
 #include "pwio.h"
 #include "groupio.h"
@@ -62,12 +60,11 @@ static int is_shadow;
 #endif
 
 /* local function prototypes */
-static void usage P_((void));
-static int add_group P_((const char *, const char *, gid_t *));
-static int add_user P_((const char *, const char *, uid_t *, gid_t));
-static void update_passwd P_((struct passwd *, const char *));
-static int add_passwd P_((struct passwd *, const char *));
-int main P_((int, char **));
+static void usage(void);
+static int add_group(const char *, const char *, gid_t *);
+static int add_user(const char *, const char *, uid_t *, gid_t);
+static void update_passwd(struct passwd *, const char *);
+static int add_passwd(struct passwd *, const char *);
 
 /*
  * usage - display usage message and exit

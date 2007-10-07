@@ -1,0 +1,88 @@
+.\" Copyright (c) 1993 Michael Haardt (u31b3hs@pool.informatik.rwth-aachen.de), Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 10:46:28 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Aug 21 18:12:27 1994 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Jun 18 01:53:57 1995 by Andries Brouwer (aeb@cwi.nl)
+.\"
+.\" Polish translation nov.1996 piotr.pogorzelski@ippt.gov.pl
+.\"
+.TH PASSWD 5 "24 Czerwiec 1993" "Linux" "Podrêcznik programisty linuxowego"
+.SH NAZWA
+passwd \- plik passwd definiuj±cy u¿ytkowników systemu
+.SH OPIS
+Plik 
+.B passwd
+jest plikiem tekstowym ASCII, który zawiera listê u¿ytkowników systemu
+oraz has³a jakich musz± u¿ywaæ aby otrzymaæ dostêp do systemu.
+Ka¿dy powinien móc odczytaæ informacje z pliku passwd (poniewa¿ has³a
+w tym pliku s± zakodowane jest to poprawne) lecz prawo do modyfikacji
+pliku powinien mieæ tylko administrator.
+Dodaj±c nowego u¿ytkownika nale¿y pole przeznaczone na has³o pozostawiæ puste
+i u¿yæ programu \fBpasswd\fP(1). Gwiazdka lub inny pojedynczy znak w polu
+has³a oznacza, ze u¿ytkownik nie mo¿e dostaæ siê do systemu przez \fBlogin\fP(1). 
+Je¶li g³ówny system plików jest na ram dysku (/dev/ram) nale¿y
+plik passwd skopiowaæ na dyskietkê przechowuj±c± g³ówny system plików
+przed zamkniêciem systemu. Trzeba równie¿ sprawdziæ prawa dostêpu do.
+Je¶li trzeba utworzyæ grupê u¿ytkowników, ich identyfikatory grupy
+GID musz± byæ równe oraz musi istnieæ odpowiednia pozycja w pliku
+\fI/etc/group\fP, lub grupa nie bêdzie istnia³a.  
+.PP
+Ka¿da pozycja zajmuje jeden wiersz w formacie:
+.sp
+login_name:has³o:UID:GID:imie_nazwisko:katalog:pow³oka
+.RS
+.RE
+.sp
+Krótki opis poszczególnych pól:
+.sp
+.RS
+.TP 1.0in
+.I login_name
+nazwa u¿ytkownika w systemie (radzê u¿ywaæ ma³ych liter).
+.TP
+.I has³o
+zakodowane has³o u¿ytkownika.
+.TP
+.I UID
+identyfikator u¿ytkownika (liczbowo).
+.TP
+.I GID
+identyfikator grupy (liczbowo).
+.TP
+.I imiê_nazwisko
+Opisowa nazwa u¿ytkownika, zwykle imiê i nazwisko (wykorzystywane
+przez programy pocztowe).
+.TP
+.I katalog
+katalog macierzysty ($HOME) u¿ytkownika.
+.TP
+.I pow³oka
+program jaki uruchomiæ po wej¶ciu u¿ytkownika do systemu.
+(je¶li pusty u¿yj /bin/sh, je¶li istnieje /etc/shells i
+dana pow³oka nie jest tam wymieniona, u¿ytkownik nie bêdzie móg³
+dostaæ siê do systemu wykorzystuj±c protokó³ ftp).
+.RE
+.SH PLIKI
+.I /etc/passwd
+.SH "ZOBACZ TAK¯E"
+.BR passwd "(1), " login "(1), " group (5)

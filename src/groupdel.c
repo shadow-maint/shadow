@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groupdel.c,v 1.10 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: groupdel.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -70,12 +70,11 @@ static int is_shadow_grp;
 #define E_GRP_UPDATE	10	/* can't update group file */
 
 /* local function prototypes */
-static void usage P_((void));
-static void grp_update P_((void));
-static void close_files P_((void));
-static void open_files P_((void));
-static void group_busy P_((gid_t));
-int main P_((int, char **));
+static void usage(void);
+static void grp_update(void);
+static void close_files(void);
+static void open_files(void);
+static void group_busy(gid_t);
 
 /*
  * usage - display usage message and exit

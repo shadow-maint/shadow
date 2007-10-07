@@ -45,7 +45,7 @@ libdir = ${exec_prefix}/lib
 #lib_PROGRAMS = libshadow.la
 lib_LTLIBRARIES = libshadow.la
 libshadow_la_SOURCES = ${libshadow_a_SOURCES}
-#libshadow_la_LIBADD = @LTLIBOBJS@
+libshadow_la_LIBADD = @LTLIBOBJS@
 #libshadow_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libshadow_la_LDFLAGS = -version-info 0:0:0
 

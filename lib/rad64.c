@@ -30,14 +30,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: rad64.c,v 1.4 1997/12/07 23:26:56 marekm Exp $")
+RCSID("$Id: rad64.c,v 1.5 2000/08/26 18:27:17 marekm Exp $")
 
 /*
  * c64i - convert a radix 64 character to an integer
  */
 
 int
-c64i(char c)
+c64i(int c)
 {
 	if (c == '.')
 		return (0);
@@ -117,7 +117,7 @@ a64l(const char *s)
 	long	shift = 0;
 
 	for (i = 0, value = 0L;i < 6 && *s;s++) {
-		value += (c64i (*s) << shift);
+		value += (c64i ((int) *s) << shift);
 		shift += 6;
 	}
 	return (value);

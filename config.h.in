@@ -260,8 +260,14 @@
 /* Define if you have the initgroups function.  */
 #undef HAVE_INITGROUPS
 
+/* Define if you have the lchown function.  */
+#undef HAVE_LCHOWN
+
 /* Define if you have the lckpwdf function.  */
 #undef HAVE_LCKPWDF
+
+/* Define if you have the lstat function.  */
+#undef HAVE_LSTAT
 
 /* Define if you have the memcpy function.  */
 #undef HAVE_MEMCPY

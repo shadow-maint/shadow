@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwauth.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
+RCSID("$Id: pwauth.c,v 1.11 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <signal.h>
@@ -68,7 +68,7 @@ extern char *getpass_with_echo();
 
 struct	method	{
 	char	*name;
-	int	(*func) P_((const char *, int, const char *));
+	int	(*func)(const char *, int, const char *);
 };
 
 #ifdef PAD_AUTH

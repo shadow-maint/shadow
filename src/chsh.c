@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chsh.c,v 1.15 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: chsh.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -91,10 +91,9 @@ extern	int	pw_dbm_mode;
 #define	CHGSHELL	"changed user `%s' shell to `%s'\n"
 
 /* local function prototypes */
-static void usage P_((void));
-static void new_fields P_((void));
-static int restricted_shell P_((const char *));
-int main P_((int, char **));
+static void usage(void);
+static void new_fields(void);
+static int restricted_shell(const char *);
 
 /*
  * usage - print command line syntax and exit

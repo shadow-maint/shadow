@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: faillog.c,v 1.9 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: faillog.c,v 1.10 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -61,16 +61,15 @@ extern	char	*optarg;
 #define	NOW	(time((time_t *) 0))
 
 /* local function prototypes */
-static void usage P_((void));
-int main P_((int, char **));
-static void print P_((void));
-static void print_one P_((const struct faillog *, uid_t));
-static void reset P_((void));
-static int reset_one P_((uid_t));
-static void setmax P_((int));
-static void setmax_one P_((uid_t, int));
-static void set_locktime P_((long));
-static void set_locktime_one P_((uid_t, long));
+static void usage(void);
+static void print(void);
+static void print_one(const struct faillog *, uid_t);
+static void reset(void);
+static int reset_one(uid_t);
+static void setmax(int);
+static void setmax_one(uid_t, int);
+static void set_locktime(long);
+static void set_locktime_one(uid_t, long);
 
 
 static void

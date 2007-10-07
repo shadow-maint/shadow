@@ -82,6 +82,7 @@ INTLOBJS = @INTLOBJS@
 LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
+LIBMD = @LIBMD@
 LIBPAM = @LIBPAM@
 LIBSKEY = @LIBSKEY@
 LIBTCFS = @LIBTCFS@
@@ -104,7 +105,7 @@ VERSION = @VERSION@
 YACC = @YACC@
 l = @l@
 
-EXTRA_DIST = README adduser.c adduser-old.c adduser.sh adduser2.sh  atudel pwdauth.c rpasswd.c shadow-anonftp.patch udbachk.v012.tgz
+EXTRA_DIST = README adduser.c adduser-old.c adduser.sh adduser2.sh  atudel groupmems.shar pwdauth.c rpasswd.c shadow-anonftp.patch  udbachk.v012.tgz
 
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = ../config.h

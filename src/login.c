@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: login.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: login.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -78,7 +78,7 @@ RCSID(PKG_VER "$Id: login.c,v 1.16 1999/08/27 19:02:51 marekm Exp $")
 #include <netdb.h>
 #endif
 
-#ifdef USE_PAM_not_yet
+#ifdef USE_PAM
 #include "pam_defs.h"
 
 static const struct pam_conv conv = {
@@ -96,7 +96,7 @@ static pam_handle_t *pamh = NULL;
 #define PAM_END { retcode = pam_close_session(pamh,0); \
 		pam_end(pamh,retcode); }
 
-#endif /* USE_PAM_not_yet */
+#endif /* USE_PAM */
 
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
@@ -140,16 +140,14 @@ static int timeout;
 extern char **newenvp;
 extern size_t newenvc;
 
-extern char *tz P_((const char *));
-extern void subsystem P_((const struct passwd *));
-extern void dolastlog P_((struct lastlog *, const struct passwd *, const char *, const char *));
+extern void dolastlog(struct lastlog *, const struct passwd *, const char *, const char *);
 
 extern	int	optind;
 extern	char	*optarg;
 extern	char	**environ;
 
-extern int login_access P_((const char *user, const char *from));
-extern void login_fbtab P_((const char *tty, uid_t uid, gid_t gid));
+extern int login_access(const char *, const char *);
+extern void login_fbtab(const char *, uid_t, gid_t);
 
 #ifndef	ALARM
 #define	ALARM	60
@@ -175,14 +173,15 @@ static struct faillog faillog;
 #define MANY_FAILS	"REPEATED login failures%s\n"
 
 /* local function prototypes */
-static void usage P_((void));
-static void setup_tty P_((void));
-static void bad_time_notify P_((void));
-static void check_flags P_((int, char * const *));
-static void check_nologin P_((void));
-static void init_env P_((void));
-static RETSIGTYPE alarm_handler P_((int));
-int main P_((int, char **));
+static void usage(void);
+static void setup_tty(void);
+static void bad_time_notify(void);
+static void check_flags(int, char * const *);
+#ifndef USE_PAM
+static void check_nologin(void);
+#endif
+static void init_env(void);
+static RETSIGTYPE alarm_handler(int);
 
 /*
  * usage - print login command usage and exit
@@ -305,7 +304,7 @@ check_flags(int argc, char * const *argv)
 	}
 }
 
-
+#ifndef USE_PAM
 static void
 check_nologin(void)
 {
@@ -352,7 +351,7 @@ check_nologin(void)
 		printf(_("\n[Disconnect bypassed -- root login allowed.]\n"));
 	}
 }
-
+#endif /* !USE_PAM */
 
 static void
 init_env(void)
@@ -436,10 +435,11 @@ main(int argc, char **argv)
 	char	**envp = environ;
 	static char temp_pw[2];
 	static char temp_shell[] = "/bin/sh";
-#ifdef USE_PAM_not_yet
+#ifdef USE_PAM
 	int retcode;
 	pid_t child;
-#endif /* USE_PAM_not_yet */
+	char *pam_user;
+#endif /* USE_PAM */
 #ifdef	SHADOWPWD
 	struct	spwd	*spwd=NULL;
 #endif
@@ -704,7 +704,7 @@ top:
 	delay = getdef_num("FAIL_DELAY", 1);
 	retries = getdef_num("LOGIN_RETRIES", RETRIES);
 
-#ifdef USE_PAM_not_yet
+#ifdef USE_PAM
 	retcode = pam_start("login", username, &conv, &pamh);
 	if(retcode != PAM_SUCCESS) {
 		fprintf(stderr,"login: PAM Failure, aborting: %s\n",
@@ -714,15 +714,38 @@ top:
 		exit(99);
 	}
 	/* hostname & tty are either set to NULL or their correct values,
-	   depending on how much we know */
+	   depending on how much we know.  We also set PAM's fail delay
+	   to ours.  */
 	retcode = pam_set_item(pamh, PAM_RHOST, hostname);
 	PAM_FAIL_CHECK;
 	retcode = pam_set_item(pamh, PAM_TTY, tty);
 	PAM_FAIL_CHECK;
-
+#ifdef HAVE_PAM_FAIL_DELAY
+	retcode = pam_fail_delay(pamh, 1000000*delay);
+	PAM_FAIL_CHECK;
+#endif
 	/* if fflg == 1, then the user has already been authenticated */
 	if (!fflg || (getuid() != 0)) {
-		int failcount = 0;
+		int failcount;
+		char hostn[256];
+		char login_prompt[256]; /* That's one hell of a prompt :) */
+
+		/* Make the login prompt look like we want it */
+		if (!gethostname(hostn, sizeof(hostn)))
+			snprintf(login_prompt, sizeof(login_prompt),
+				 "%s login: ", hostn);
+		else
+			snprintf(login_prompt, sizeof(login_prompt),
+				 "login: ");
+
+		retcode = pam_set_item(pamh, PAM_USER_PROMPT, login_prompt);
+		PAM_FAIL_CHECK;
+
+		/* if we didn't get a user on the command line,
+		   set it to NULL */
+		pam_get_item(pamh, PAM_USER, (const void **) &pam_user);
+		if (pam_user[0] == '\0')
+			pam_set_item(pamh, PAM_USER, NULL);
 
 		/* there may be better ways to deal with some of these
 		   conditions, but at least this way I don't think we'll
@@ -737,30 +760,33 @@ top:
 			(retcode == PAM_USER_UNKNOWN) ||
 			(retcode == PAM_CRED_INSUFFICIENT) ||
 			(retcode == PAM_AUTHINFO_UNAVAIL))) {
-			pam_get_item(pamh, PAM_USER, (const void **) &username);
+			pam_get_item(pamh, PAM_USER, (const void **) &pam_user);
 			syslog(LOG_NOTICE,"FAILED LOGIN %d FROM %s FOR %s, %s",
-				failcount, hostname, username,
+				failcount, hostname, pam_user,
 				PAM_STRERROR(pamh, retcode));
-			fprintf(stderr,"Login incorrect\n\n");
-			pam_set_item(pamh,PAM_USER,NULL);
+#ifdef HAVE_PAM_FAIL_DELAY
+			pam_fail_delay(pamh, 1000000*delay);
+#endif
+			fprintf(stderr, "Login incorrect\n\n");
+			pam_set_item(pamh, PAM_USER, NULL);
 			retcode = pam_authenticate(pamh, 0);
 		}
 
 		if (retcode != PAM_SUCCESS) {
-			pam_get_item(pamh, PAM_USER, (const void **) &username);
+			pam_get_item(pamh, PAM_USER, (const void **) &pam_user);
 
 			if (retcode == PAM_MAXTRIES)
 				syslog(LOG_NOTICE,
 					"TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
-					failcount, hostname, username,
+					failcount, hostname, pam_user,
 					PAM_STRERROR(pamh, retcode));
 			else
 				syslog(LOG_NOTICE,
 					"FAILED LOGIN SESSION FROM %s FOR %s, %s",
-					hostname, username,
+					hostname, pam_user,
 					PAM_STRERROR(pamh, retcode));
 
-			fprintf(stderr,"\nLogin incorrect\n");
+			fprintf(stderr, "\nLogin incorrect\n");
 			pam_end(pamh, retcode);
 			exit(0);
 		}
@@ -777,11 +803,12 @@ top:
 	/* Grab the user information out of the password file for future usage
 	   First get the username that we are actually using, though.
 	 */
-	retcode = pam_get_item(pamh, PAM_USER, (const void **) &username);
+	retcode = pam_get_item(pamh, PAM_USER, (const void **) &pam_user);
 	setpwent();
-	pwd = getpwnam(username);
-	if (pwd)
-		initgroups(username, pwd->pw_gid);
+	pwd = getpwnam(pam_user);
+
+	if (!pwd || setup_groups(pwd))
+		exit(1);
 
 	retcode = pam_setcred(pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
@@ -790,7 +817,7 @@ top:
 	PAM_FAIL_CHECK;
 
 
-#else  /* ! USE_PAM_not_yet */
+#else  /* ! USE_PAM */
 	while (1) {	/* repeatedly get login/password pairs */
 		failed = 0;		/* haven't failed authentication yet */
 #ifdef RADIUS
@@ -813,8 +840,15 @@ top:
 #endif
 			continue;
 		}
-		if (! (pwd = getpwnam(username))) {
+#endif /* ! USE_PAM */
+
+#ifdef USE_PAM
+		if (!(pwd = getpwnam(pam_user))) {
+			pwent.pw_name = pam_user;
+#else
+		if (!(pwd = getpwnam(username))) {
 			pwent.pw_name = username;
+#endif
 			strcpy(temp_pw, "!");
 			pwent.pw_passwd = temp_pw;
 			pwent.pw_shell = temp_shell;
@@ -824,7 +858,8 @@ top:
 		} else {
 			pwent = *pwd;
 		}
-#ifdef	SHADOWPWD
+#ifndef USE_PAM
+#ifdef SHADOWPWD
 		spwd = NULL;
 		if (pwd && strcmp(pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 			spwd = getspnam(username);
@@ -833,7 +868,7 @@ top:
 			else
 				SYSLOG((LOG_WARN, NO_SHADOW, username, fromhost));
 		}
-#endif	/* SHADOWPWD */
+#endif /* SHADOWPWD */
 
 		/*
 		 * If the encrypted password begins with a "!", the account
@@ -996,9 +1031,9 @@ auth_ok:
 			exit(1);
 		}
 	}  /* while (1) */
-#endif /* ! USE_PAM_not_yet */
+#endif /* ! USE_PAM */
 	(void) alarm (0);		/* turn off alarm clock */
-#if 1
+#ifndef USE_PAM  /* PAM does this */
 	/*
 	 * porttime checks moved here, after the user has been
 	 * authenticated.  now prints a message, as suggested
@@ -1011,14 +1046,18 @@ auth_ok:
 		bad_time_notify();
 		exit(1);
 	}
-#endif
 
 	check_nologin();
+#endif
 
 	if (getenv("IFS"))		/* don't export user IFS ... */
 		addenv("IFS= \t\n", NULL);  /* ... instead, set a safe IFS */
 
+#ifdef USE_PAM
+	setutmp(pam_user, tty, hostname); /* make entry in utmp & wtmp files */
+#else
 	setutmp(username, tty, hostname); /* make entry in utmp & wtmp files */
+#endif
 	if (pwent.pw_shell[0] == '*') {	/* subsystem root */
 		subsystem (&pwent);	/* figure out what to execute */
 		subroot++;		/* say i was here again */
@@ -1032,14 +1071,17 @@ auth_ok:
 #endif
 		goto top;		/* go do all this all over again */
 	}
+#ifndef USE_PAM  /* pam_lastlog handles this */
 	if (getdef_bool("LASTLOG_ENAB")) /* give last login and log this one */
 		dolastlog(&lastlog, &pwent, utent.ut_line, hostname);
+#endif
 
 #ifdef SVR4_SI86_EUA
 	sysi86(SI86LIMUSER, EUA_ADD_USER);	/* how do we test for fail? */
 #endif
 
-#ifdef	AGING
+#ifndef USE_PAM /* PAM handles this as well */
+#ifdef AGING
 	/*
 	 * Have to do this while we still have root privileges, otherwise
 	 * we don't have access to /etc/shadow.  expire() closes password
@@ -1066,7 +1108,7 @@ auth_ok:
 	}
 #endif	/* ATT_AGE */
 #endif /* SHADOWPWD */
-#endif	/* AGING */
+#endif /* AGING */
 
 #ifdef RADIUS
 	if (is_rad_login) {
@@ -1082,6 +1124,7 @@ auth_ok:
 	}
 #endif
 	setup_limits(&pwent);  /* nice, ulimit etc. */
+#endif /* ! USE_PAM */
 	chown_tty(tty, &pwent);
 
 #ifdef LOGIN_FBTAB
@@ -1117,7 +1160,12 @@ auth_ok:
 	login_fbtab(tty, pwent.pw_uid, pwent.pw_gid);
 #endif
 
+	/* We call set_groups() above because this clobbers pam_groups.so */
+#ifndef USE_PAM
 	if (setup_uid_gid(&pwent, is_console))
+#else
+	if (change_uid(&pwent))
+#endif
 		exit(1);
 
 #ifdef KERBEROS
@@ -1135,7 +1183,7 @@ auth_ok:
 
 	setup_env(&pwent);  /* set env vars, cd to the home dir */
 
-#ifdef USE_PAM_not_yet
+#ifdef USE_PAM
 	{
 		int i;
 		const char * const * env;
@@ -1154,6 +1202,8 @@ auth_ok:
 
 	if (!hushed(&pwent)) {
 		addenv("HUSHLOGIN=FALSE", NULL);
+	/* pam_unix, pam_mail and pam_lastlog should take care of this */
+#ifndef USE_PAM
 		motd();		/* print the message of the day */
 		if (getdef_bool("FAILLOG_ENAB") && faillog.fail_cnt != 0) {
 			failprint(&faillog);
@@ -1192,6 +1242,7 @@ auth_ok:
 #endif
 #endif	/* AGING */
 		mailcheck();	/* report on the status of mail */
+#endif /* !USE_PAM */
 	} else
 		addenv("HUSHLOGIN=TRUE", NULL);
 
@@ -1203,7 +1254,7 @@ auth_ok:
 	signal(SIGALRM, SIG_DFL);	/* default alarm signal */
 	signal(SIGHUP, SIG_DFL);	/* added this.  --marekm */
 
-#ifdef USE_PAM_not_yet
+#ifdef USE_PAM
 	/* We must fork before setuid() because we need to call
 	 * pam_close_session() as root.
 	 */
@@ -1211,20 +1262,26 @@ auth_ok:
 	   the parent process of login (init, telnetd, ...) is responsible
 	   for calling pam_close_session().  This avoids an extra process
 	   for each login.  Maybe we should do this on Linux too?  -MM */
-	signal(SIGINT, SIG_IGN);
-	child = fork();
-	if (child < 0) {
-		/* error in fork() */
-		fprintf(stderr,"login: failure forking: %s", strerror(errno));
-		PAM_END;
-		exit(0);
-	} else if (child) {
-		/* parent - wait for child to finish, then cleanup session */
-		wait(NULL);
-		PAM_END;
-		exit(0);
+	/* We let the admin configure whether they need to keep login
+	   around to close sessions */
+	if (getdef_bool("CLOSE_SESSIONS")) {
+		signal(SIGINT, SIG_IGN);
+		child = fork();
+		if (child < 0) {
+			/* error in fork() */
+			fprintf(stderr, "login: failure forking: %s",
+				strerror(errno));
+			PAM_END;
+			exit(0);
+		} else if (child) {
+			/* parent - wait for child to finish,
+			   then cleanup session */
+			wait(NULL);
+			PAM_END;
+			exit(0);
+		}
+		/* child */
 	}
-	/* child */
 #endif
 	signal(SIGINT, SIG_DFL);	/* default interrupt signal */
 

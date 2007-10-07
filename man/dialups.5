@@ -1,0 +1,22 @@
+.TH DIALUPS 5 "03 Oct 1999"
+.SH NAME
+d_passwd \- The dialup shell password file
+.br
+dialups \- List of dialup lines
+.SH DESCRIPTION
+The \fBd_passwd\fR file contains the names of login shells which require
+dialup passwords.  Each line contains the fully qualified path name
+for the shell, followed by an optional password.  Each field is separated
+by a '\fB:\fR'.
+.PP
+The \fBdialups\fR file contains the names of ports which may be dialup
+lines. Each line consists of the last component of the path name. The
+leading "\fB/dev/\fR" string is removed.
+.SH FILES
+/etc/d_passwd \- dialup shell password file
+.br
+/etc/dialups \- dialup line list
+.SH SEE ALSO
+.BR login (1),
+.SH AUTHOR
+Ben Collins <bcollins@debian.org>

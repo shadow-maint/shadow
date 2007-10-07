@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: su.c,v 1.13 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: su.c,v 1.14 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -63,9 +63,9 @@ static pam_handle_t *pamh = NULL;
  * Global variables
  */
 
-/* needed by sulog.c */
-char	name[BUFSIZ];
-char	oldname[BUFSIZ];
+/* not needed by sulog.c anymore */
+static char name[BUFSIZ];
+static char oldname[BUFSIZ];
 
 static char *Prog;
 
@@ -78,19 +78,14 @@ struct	passwd	pwent;
 extern char **newenvp;
 extern size_t newenvc;
 
-extern void sulog P_((const char *, int));
-extern void subsystem P_((const struct passwd *));
-extern char *tz P_((const char *));
-extern int check_su_auth P_((const char *, const char *));
 extern char **environ;
 
 /* local function prototypes */
-int main P_((int, char **));
 
 #ifndef USE_PAM
 
-static RETSIGTYPE die P_((int));
-static int iswheel P_((const char *));
+static RETSIGTYPE die(int);
+static int iswheel(const char *);
 
 /*
  * die - set or reset termio modes.
@@ -133,7 +128,7 @@ iswheel(const char *username)
 static void
 su_failure(const char *tty)
 {
-	sulog(tty, 0);		/* log failed attempt */
+	sulog(tty, 0, oldname, name);  /* log failed attempt */
 #ifdef USE_SYSLOG
 	if (getdef_bool("SYSLOG_SU_ENAB"))
 		SYSLOG((pwent.pw_uid ? LOG_INFO:LOG_NOTICE,
@@ -247,27 +242,24 @@ main(int argc, char **argv)
 	 * be ignored and a new one created later on.
 	 */
 
-	if (! fakelogin)
-		while (*envp)
-			addenv(*envp++, NULL);
-
-	if (fakelogin && (cp=getdef_str("ENV_TZ")))
-		addenv(*cp == '/' ? tz(cp) : cp, NULL);
-
+	if (fakelogin) {
+		if ((cp=getdef_str("ENV_TZ")))
+			addenv(*cp == '/' ? tz(cp) : cp, NULL);
 	/*
 	 * The clock frequency will be reset to the login value if required
 	 */
-
-	if (fakelogin && (cp=getdef_str("ENV_HZ")) )
-		addenv(cp, NULL);	/* set the default $HZ, if one */
-
+		if ((cp=getdef_str("ENV_HZ")))
+			addenv(cp, NULL);  /* set the default $HZ, if one */
 	/*
 	 * The terminal type will be left alone if it is present in the
 	 * environment already.
 	 */
-
-	if (fakelogin && (cp = getenv ("TERM")))
-		addenv("TERM", cp);
+		if ((cp = getenv ("TERM")))
+			addenv("TERM", cp);
+	} else {
+		while (*envp)
+			addenv(*envp++, NULL);
+	}
 
 	/*
 	 * The next argument must be either a user ID, or some flag to
@@ -508,8 +500,19 @@ top:
 	}
 #endif  /* !USE_PAM */
 
-	cp = getdef_str(pwent.pw_uid == 0 ? "ENV_SUPATH" : "ENV_PATH");
+	cp = getdef_str((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+#if 0
 	addenv(cp ? cp : "PATH=/bin:/usr/bin", NULL);
+#else
+	/* XXX very similar code duplicated in libmisc/setupenv.c */
+	if (!cp) {
+		addenv("PATH=/bin:/usr/bin", NULL);
+	} else if (strchr(cp, '=')) {
+		addenv(cp, NULL);
+	} else {
+		addenv("PATH", cp);
+	}
+#endif
 
 	environ = newenvp;		/* make new environment active */
 
@@ -525,7 +528,7 @@ top:
 		goto top;
 	}
 
-	sulog (tty, 1);			/* save SU information */
+	sulog(tty, 1, oldname, name);		/* save SU information */
 	endpwent ();
 #ifdef SHADOWPWD
 	endspent ();
@@ -593,20 +596,6 @@ top:
 	 * arguments.
 	 */
 
-	if (! doshell) {
-
-		/*
-		 * Use new user's shell from /etc/passwd and create an
-		 * argv with the rest of the command line included.
-		 */
-
-		argv[-1] = pwent.pw_shell;
-		(void) execv (pwent.pw_shell, &argv[-1]);
-		(void) fprintf (stderr, _("No shell\n"));
-		SYSLOG((LOG_WARN, "Cannot execute %s\n", pwent.pw_shell));
-		closelog();
-		exit (1);
-	}
 	if (fakelogin) {
 		char *arg0;
 
@@ -626,6 +615,21 @@ top:
 		cp = arg0;
 	} else
 		cp = Basename(pwent.pw_shell);
+
+	if (! doshell) {
+
+		/*
+		 * Use new user's shell from /etc/passwd and create an
+		 * argv with the rest of the command line included.
+		 */
+
+		argv[-1] = pwent.pw_shell;
+		(void) execv (pwent.pw_shell, &argv[-1]);
+		(void) fprintf (stderr, _("No shell\n"));
+		SYSLOG((LOG_WARN, "Cannot execute %s\n", pwent.pw_shell));
+		closelog();
+		exit (1);
+	}
 
 	shell(pwent.pw_shell, cp);
 	/*NOTREACHED*/

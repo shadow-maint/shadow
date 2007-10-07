@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: groupio.c,v 1.7 1998/01/29 23:22:28 marekm Exp $")
+RCSID("$Id: groupio.c,v 1.8 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -10,8 +10,8 @@ RCSID("$Id: groupio.c,v 1.7 1998/01/29 23:22:28 marekm Exp $")
 #include "commonio.h"
 #include "groupio.h"
 
-extern int putgrent P_((const struct group *, FILE *));
-extern struct group *sgetgrent P_((const char *));
+extern int putgrent(const struct group *, FILE *);
+extern struct group *sgetgrent(const char *);
 
 struct group *
 __gr_dup(const struct group *grent)

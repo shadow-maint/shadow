@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: sulogin.c,v 1.10 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: sulogin.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -65,15 +65,13 @@ extern char **newenvp;
 extern size_t newenvc;
 
 extern	char	**environ;
-extern char *tz P_((const char *));
 
 #ifndef	ALARM
 #define	ALARM	60
 #endif
 
 /* local function prototypes */
-static RETSIGTYPE catch P_((int));
-int main P_((int, char **));
+static RETSIGTYPE catch(int);
 
 static RETSIGTYPE
 catch(int sig)
@@ -170,7 +168,7 @@ main(int argc, char **argv)
 	alarm (ALARM);			/* only wait so long ... */
 
 	while (1) {		/* repeatedly get login/password pairs */
-		entry (name, &pwent);	/* get entry from password file */
+		pw_entry(name, &pwent);  /* get entry from password file */
 		if (pwent.pw_name == (char *) 0) {
 
 			/*

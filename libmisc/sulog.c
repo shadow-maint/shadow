@@ -30,25 +30,22 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sulog.c,v 1.4 1998/04/02 21:51:51 marekm Exp $")
+RCSID("$Id: sulog.c,v 1.5 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <time.h>
+#include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
-extern	char	name[];
-extern	char	oldname[];
-extern struct tm *localtime ();
 
 /*
  * sulog - log a SU command execution result
  */
 
 void
-sulog(const char *tty, int success)
+sulog(const char *tty, int success, const char *oldname, const char *name)
 {
 	char *sulog_file;
 	time_t now;

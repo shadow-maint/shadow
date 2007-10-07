@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: useradd.c,v 1.16 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: useradd.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -197,33 +197,32 @@ static int	sg_dbm_added;
 #endif
 
 /* local function prototypes */
-static void fail_exit P_((int));
-static struct group *getgr_nam_gid P_((const char *));
-static long get_number P_((const char *));
-static void get_defaults P_((void));
-static void show_defaults P_((void));
-static int set_defaults P_((void));
-static int get_groups P_((char *));
-static void usage P_((void));
-static void new_pwent P_((struct passwd *));
+static void fail_exit(int);
+static struct group *getgr_nam_gid(const char *);
+static long get_number(const char *);
+static void get_defaults(void);
+static void show_defaults(void);
+static int set_defaults(void);
+static int get_groups(char *);
+static void usage(void);
+static void new_pwent(struct passwd *);
 #ifdef SHADOWPWD
-static long scale_age P_((long));
-static void new_spent P_((struct spwd *));
+static long scale_age(long);
+static void new_spent(struct spwd *);
 #endif
-static void grp_update P_((void));
-static void find_new_uid P_((void));
+static void grp_update(void);
+static void find_new_uid(void);
 #ifdef AUTH_METHODS
-static void convert_auth P_((char *, const char *));
-static int valid_auth P_((const char *));
+static void convert_auth(char *, const char *);
+static int valid_auth(const char *);
 #endif
-static void process_flags P_((int argc, char **argv));
-static void close_files P_((void));
-static void open_files P_((void));
-static void faillog_reset P_((uid_t));
-static void lastlog_reset P_((uid_t));
-static void usr_update P_((void));
-static void create_home P_((void));
-int main P_((int, char **));
+static void process_flags(int argc, char **argv);
+static void close_files(void);
+static void open_files(void);
+static void faillog_reset(uid_t);
+static void lastlog_reset(uid_t);
+static void usr_update(void);
+static void create_home(void);
 
 /*
  * fail_exit - undo as much as possible

@@ -1,4 +1,4 @@
-[ $Id: README,v 1.3 1998/12/28 20:34:27 marekm Exp $ ]
+[ $Id: README,v 1.4 2000/08/26 18:27:09 marekm Exp $ ]
 
 This is the explanatory document for Julianne Frances Haugh's login
 replacement, release 3.  This document was last updated 16 Feb 1997.
@@ -32,7 +32,7 @@ SUCH DAMAGE.
 
 This source code is currently archived on ftp.uu.net in the
 comp.sources.misc portion of the USENET archives.  You may also contact
-the author, Julianne F. Haugh, at jfh@bga.com if you have any questions
+the author, Julianne F. Haugh, at jfh@austin.ibm.com if you have any questions
 regarding this package.
 
 THIS SOFTWARE IS BEING DISTRIBUTED AS-IS.  THE AUTHORS DISCLAIM ALL

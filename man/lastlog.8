@@ -26,7 +26,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"	$Id: lastlog.8,v 1.5 1998/12/28 20:35:11 marekm Exp $
+.\"	$Id: lastlog.8,v 1.6 2000/08/26 18:27:17 marekm Exp $
 .\"
 .TH LASTLOG 8
 .SH NAME
@@ -34,15 +34,15 @@ lastlog \- examine lastlog file
 .SH SYNOPSIS
 .B lastlog
 .RB [ -u
-.IR uid ]
+.IR login-name ]
 .RB [ -t
 .IR days ]
 .SH DESCRIPTION
 \fBlastlog\fR formats and prints the contents of the last login log,
 \fI/var/log/lastlog\fR.  The \fBlogin-name\fR, \fBport\fR, and \fBlast login 
 time\fR will be printed.
-The default (no flags) causes lastlog entries to be printed in UID
-order.
+The default (no flags) causes lastlog entries to be printed, sorted
+by the numerical UID.
 Entering \fB-u \fIlogin-name\fR flag will
 cause the lastlog record for \fIlogin-name\fR only to be printed.
 Entering \fB-t \fIdays\fR will cause only the
@@ -58,6 +58,6 @@ Large gaps in uid numbers will cause the lastlog program to run longer with
 no output to the screen (i.e. if mmdf=800 and last uid=170, program will
 appear to hang as it processes uid 171-799).
 .SH AUTHORS
-Julianne Frances Haugh (jfh@bga.com)
+Julianne Frances Haugh (jfh@austin.ibm.com)
 .br
 Phillip Street

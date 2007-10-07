@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: pwck.c,v 1.13 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: pwck.c,v 1.14 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -44,13 +44,13 @@ RCSID(PKG_VER "$Id: pwck.c,v 1.13 1999/06/07 16:40:45 marekm Exp $")
 #include "commonio.h"
 
 #include "pwio.h"
-extern void __pw_del_entry P_((const struct commonio_entry *));
-extern struct commonio_entry *__pw_get_head P_((void));
+extern void __pw_del_entry(const struct commonio_entry *);
+extern struct commonio_entry *__pw_get_head(void);
 
 #ifdef SHADOWPWD
 #include "shadowio.h"
-extern void __spw_del_entry P_((const struct commonio_entry *));
-extern struct commonio_entry *__spw_get_head P_((void));
+extern void __spw_del_entry(const struct commonio_entry *);
+extern struct commonio_entry *__spw_get_head(void);
 #endif
 
 /*
@@ -84,9 +84,8 @@ static int read_only = 0;
 static int quiet = 0;  /* don't report warnings, only errors */
 
 /* local function prototypes */
-static void usage P_((void));
-static int yes_or_no P_((void));
-int main P_((int, char **));
+static void usage(void);
+static int yes_or_no(void);
 
 /*
  * usage - print syntax message and exit
@@ -276,7 +275,7 @@ main(int argc, char **argv)
 		 * be parsed properly.
 		 */
 
-		if (!pfe->entry) {
+		if (!pfe->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and
@@ -314,14 +313,14 @@ delete_pw:
 		 * Password structure is good, start using it.
 		 */
 
-		pwd = pfe->entry;
+		pwd = pfe->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
 
 		for (tpfe = __pw_get_head(); tpfe; tpfe = tpfe->next) {
-			const struct passwd *ent = tpfe->entry;
+			const struct passwd *ent = tpfe->eptr;
 
 			/*
 			 * Don't check this entry
@@ -445,7 +444,7 @@ delete_pw:
 		 * be parsed properly.
 		 */
 
-		if (!spe->entry) {
+		if (!spe->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and
@@ -483,14 +482,14 @@ delete_spw:
 		 * Shadow password structure is good, start using it.
 		 */
 
-		spw = spe->entry;
+		spw = spe->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
 
 		for (tspe = __spw_get_head(); tspe; tspe = tspe->next) {
-			const struct spwd *ent = tspe->entry;
+			const struct spwd *ent = tspe->eptr;
 
 			/*
 			 * Don't check this entry

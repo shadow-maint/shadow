@@ -79,6 +79,7 @@ INTLOBJS = @INTLOBJS@
 LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
+LIBMD = @LIBMD@
 LIBPAM = @LIBPAM@
 LIBSKEY = @LIBSKEY@
 LIBTCFS = @LIBTCFS@
@@ -101,18 +102,17 @@ VERSION = @VERSION@
 YACC = @YACC@
 l = @l@
 
-AUTOMAKE_OPTIONS = 1.0 foreign ansi2knr
+AUTOMAKE_OPTIONS = 1.0 foreign
 
-SUBDIRS = intl po man lib libmisc src  contrib debian doc etc old redhat
+SUBDIRS = intl po man lib libmisc src  contrib debian doc etc redhat # old
 
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = 
 DIST_COMMON =  ./stamp-h.in ABOUT-NLS Makefile.am Makefile.in acconfig.h \
-aclocal.m4 ansi2knr.1 ansi2knr.c config.guess config.h.in config.sub \
-configure configure.in install-sh ltconfig ltmain.sh missing \
-mkinstalldirs
+aclocal.m4 config.guess config.h.in config.sub configure configure.in \
+install-sh ltconfig ltmain.sh missing mkinstalldirs
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)

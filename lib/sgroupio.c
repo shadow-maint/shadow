@@ -4,7 +4,7 @@
 #ifdef SHADOWGRP
 
 #include "rcsid.h"
-RCSID("$Id: sgroupio.c,v 1.9 1998/01/29 23:22:31 marekm Exp $")
+RCSID("$Id: sgroupio.c,v 1.10 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -12,8 +12,8 @@ RCSID("$Id: sgroupio.c,v 1.9 1998/01/29 23:22:31 marekm Exp $")
 #include "commonio.h"
 #include "sgroupio.h"
 
-extern int putsgent P_((const struct sgrp *, FILE *));
-extern struct sgrp *sgetsgent P_((const char *));
+extern int putsgent(const struct sgrp *, FILE *);
+extern struct sgrp *sgetsgent(const char *);
 
 struct sgrp *
 __sgr_dup(const struct sgrp *sgent)

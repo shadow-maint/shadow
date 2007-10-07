@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: expiry.c,v 1.8 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: expiry.c,v 1.9 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <signal.h>
@@ -45,7 +45,6 @@ RCSID(PKG_VER "$Id: expiry.c,v 1.8 1999/06/07 16:40:45 marekm Exp $")
 #endif
 #endif
 
-int main P_((int, char **));
 
 #if !defined(SHADOWPWD) && !defined(AGING) /*{*/
 
@@ -62,8 +61,8 @@ main(int argc, char **argv)
 #else	/*} AGING || SHADOWPWD {*/
 
 /* local function prototypes */
-static RETSIGTYPE catch P_((int));
-static void usage P_((void));
+static RETSIGTYPE catch(int);
+static void usage(void);
 
 /*
  * catch - signal catcher

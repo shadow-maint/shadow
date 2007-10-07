@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: gpasswd.c,v 1.15 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: gpasswd.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -65,7 +65,6 @@ static int
 #define	RETRIES	3
 #endif
 
-extern char *crypt_make_salt P_((void));
 extern int optind;
 extern char *optarg;
 #ifdef	NDBM
@@ -76,10 +75,9 @@ extern	int	gr_dbm_mode;
 #endif
 
 /* local function prototypes */
-static void usage P_((void));
-static RETSIGTYPE die P_((int));
-static int check_list P_((const char *));
-int main P_((int, char **));
+static void usage(void);
+static RETSIGTYPE die(int);
+static int check_list(const char *);
 
 /*
  * usage - display usage message
@@ -564,11 +562,12 @@ main(int argc, char **argv)
 
 	cp = pw_encrypt(pass, crypt_make_salt());
 	memzero(pass, sizeof pass);
-#ifdef	SHADOWGRP
-	sgent.sg_passwd = cp;
-#else
-	grent.gr_passwd = cp;
+#ifdef SHADOWGRP
+	if (is_shadowgrp)
+		sgent.sg_passwd = cp;
+	else
 #endif
+	grent.gr_passwd = cp;
 	SYSLOG((LOG_INFO, "change the password for group %s by %s\n", group, myname));
 
 	/*

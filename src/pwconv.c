@@ -31,7 +31,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: pwconv.c,v 1.10 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: pwconv.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -65,8 +65,7 @@ static int
 	passwd_locked = 0;
 
 /* local function prototypes */
-static void fail_exit P_((int));
-int main P_((int, char **));
+static void fail_exit(int);
 
 static void
 fail_exit(int status)

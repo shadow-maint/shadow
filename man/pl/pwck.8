@@ -1,0 +1,109 @@
+.\" {PTM/WK/1999-09-14}
+.\" Copyright 1992, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: pwck.8,v 1.3 1999/09/25 20:07:47 wojtek2 Exp $
+.\"
+.TH PWCK 1
+.SH NAZWA
+pwck - weryfikacja spójno¶ci plików hase³
+.SH OPIS
+\fBpwck\fR [\fB-r\fR] [\fIpasswd\fR \fIshadow\fR]
+.SH OPIS
+\fBpwck\fR weryfikuje integralno¶æ informacji autentykacji systemowej.
+W plikach \fI/etc/passwd\fR i \fI/etc/shadow\fR sprawdzane s± wszystkie
+pozycje, by upewniæ siê, ¿e ka¿da z nich posiada w³a¶ciwy format
+i poprawne dane w ka¿dym z pól. U¿ytkownik monitowany jest o usuniêcie
+pozycji, które s± sformatowane niepoprawnie lub posiadaj± inne nie daj±ce
+siê skorygowaæ b³êdy.
+.P
+Kontrolowane jest czy ka¿da pozycja posiada
+.sp
+.in +.5i
+- w³a¶ciw± liczbê pól
+.br
+- unikaln± nazwê u¿ytkownika
+.br
+- poprawny identyfikator u¿ytkownika i grupy
+.br
+- poprawn± grupê g³ówn±
+.br
+- poprawny katalog domowy
+.br
+- poprawn± pow³okê zg³oszeniow± (startow±)
+.in -.5i
+.sp
+.P
+Kontrola w³a¶ciwej liczby pól i niepowtarzalnej nazwy u¿ytkownika jest
+decyduj±ca. Je¿eli pozycja posiada b³êdn± liczbê pól, to u¿ytkownik jest
+proszony o usuniêcie ca³ej pozycji (wiersza).
+Je¿eli u¿ytkownik nie potwierdzi decyzji o usuniêciu, to pomijane s± wszelkie
+dalsze sprawdzenia.
+Pozycja z powtórzon± nazw± u¿ytkownika powoduje monit o usuniêcie, ale nadal
+bêd± wykonywane pozosta³e sprawdzenia.
+Wszystkie inne b³êdy daj± ostrze¿enia a u¿ytkownik jest zachêcany
+do uruchomienia polecenia \fBusermod\fR, by je poprawiæ.
+.P
+Polecenia dzia³aj±ce na pliku \fI/etc/passwd\fR nie potrafi± zmieniaæ
+uszkodzonych lub powielonych pozycji. W takich okoliczno¶ciach powinien byæ
+u¿ywany \fBpwck\fR, by usun±æ nieprawid³ow± pozycjê.
+.SH OPCJE
+Domy¶lnie \fBpwck\fR dzia³a na plikach \fI/etc/passwd\fR oraz \fI/etc/shadow\fR.
+Przy pomocy parametrów \fIpasswd\fR i \fIshadow\fR u¿ytkownik mo¿e wybraæ inne
+pliki.
+Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko-do-odczytu, poprzez
+podanie flagi \fB-r\fR.
+Powoduje to, ¿e na wszystkie pytania dotycz±ce zmian zostanie, bez ingerencji
+u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - zakodowana informacja o has³ach"
+.br
+.IR /etc/group "  - informacja o grupach"
+.SH ZOBACZ TAK¯E
+.BR usermod (8),
+.BR group (5),
+.BR passwd (5),
+.BR shadow (5)
+.SH DIAGNOSTYKA
+Polecenie \fBpwck\fR koñczy pracê z nastêpuj±cymi warto¶ciami kodów
+zakoñczenia:
+.IP 0 5
+Powodzenie
+.IP 1 5
+B³±d sk³adni
+.IP 2 5
+Jedna lub wiêcej z³ych pozycji pliku hase³
+.IP 3 5
+Niemo¿liwe otwarcie plików hase³
+.IP 4 5
+Niemo¿liwa blokada plików hase³
+.IP 5 5
+Niemo¿liwa aktualizacja plików hase³
+.SH AUTOR
+Julianne Frances Haugh (jfh@austin.ibm.com)

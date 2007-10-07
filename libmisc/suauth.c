@@ -23,10 +23,10 @@
  * strings output to the user or the syslog. -- chris
  */
 
-static int applies P_((const char *, char *));
+static int applies(const char *, char *);
 
-int check_su_auth P_((const char *, const char *));
-int isgrp P_((const char *, const char *));
+int check_su_auth(const char *, const char *);
+int isgrp(const char *, const char *);
 
 static int lines = 0;
 

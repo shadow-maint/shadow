@@ -27,14 +27,13 @@
 #include "sgroupio.h"
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: grpconv.c,v 1.10 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: grpconv.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 static int group_locked = 0;
 static int gshadow_locked = 0;
 
 /* local function prototypes */
-static void fail_exit P_((int));
-int main P_((int, char **));
+static void fail_exit(int);
 
 static void
 fail_exit(int status)

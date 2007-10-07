@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.defs.5,v 1.6 1998/12/28 20:35:13 marekm Exp $
+.\"	$Id: login.defs.5,v 1.7 2000/08/26 18:27:17 marekm Exp $
 .\"
 .TH LOGIN 5
 .SH NAME
@@ -78,6 +78,14 @@ program.  It can be any combination of letters
 .IR h ,
 for Full name, Room number, Work phone, and Home phone, respectively.
 If not specified, only the superuser can make any changes.
+.\"
+.IP "CLOSE_SESSIONS (boolean)"
+Enable pam_close_session() calling. When using normal (pam_unix.so)
+session handling modules, this is not needed. However with modules
+(such as kerberos or other persistent session models),
+.B login
+needs to fork and wait for the shell to exit, so that sessions can be
+cleaned up.
 .\"
 .IP "CONSOLE (string)"
 If specified, this definition provides for a restricted set of lines
@@ -134,7 +142,8 @@ dialups, one per line, for example:
 .fi
 .\"
 .IP "ENVIRON_FILE (string)"
-XXX needs to be documented.
+File containing a list of environment variables (one per line) to set
+when logging in or su'ing.
 .\"
 .IP "ENV_HZ (string)"
 This parameter specifies a value for an HZ environment parameter.
@@ -502,7 +511,8 @@ type and a terminal line, seperated by whitespace, for example:
 .ft R
 .sp
 .fi
-This information is used to initialize the TERM environment parameter.
+This information is only used to initialize the TERM environment parameter
+when it does not already exist.
 A line starting with a ``#'' pound sign will be treated as a comment.
 If this paramter is not specified, the file does not exist, or the terminal
 line is not found in the file, then the TERM environment parameter will not
@@ -558,6 +568,6 @@ manual page.
 .BR porttime (5),
 .BR faillog (8)
 .SH AUTHORS
-Julianne Frances Haugh (jfh@bga.com)
+Julianne Frances Haugh (jfh@austin.ibm.com)
 .br
 Chip Rosenthal (chip@unicom.com)

@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.14 1998/07/23 22:13:15 marekm Exp $")
+RCSID("$Id: commonio.c,v 1.15 2000/08/26 18:27:17 marekm Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -19,15 +19,15 @@ RCSID("$Id: commonio.c,v 1.14 1998/07/23 22:13:15 marekm Exp $")
 #include "commonio.h"
 
 /* local function prototypes */
-static int check_link_count P_((const char *));
-static int do_lock_file P_((const char *, const char *));
-static FILE *fopen_set_perms P_((const char *, const char *, const struct stat *));
-static int create_backup P_((const char *, FILE *));
-static void free_linked_list P_((struct commonio_db *));
-static void add_one_entry P_((struct commonio_db *, struct commonio_entry *));
-static int name_is_nis P_((const char *));
-static int write_all P_((const struct commonio_db *));
-static struct commonio_entry *find_entry_by_name P_((struct commonio_db *, const char *));
+static int check_link_count(const char *);
+static int do_lock_file(const char *, const char *);
+static FILE *fopen_set_perms(const char *, const char *, const struct stat *);
+static int create_backup(const char *, FILE *);
+static void free_linked_list(struct commonio_db *);
+static void add_one_entry(struct commonio_db *, struct commonio_entry *);
+static int name_is_nis(const char *);
+static int write_all(const struct commonio_db *);
+static struct commonio_entry *find_entry_by_name(struct commonio_db *, const char *);
 
 #ifdef HAVE_LCKPWDF
 static int lock_count = 0;
@@ -199,8 +199,8 @@ free_linked_list(struct commonio_db *db)
 		if (p->line)
 			free(p->line);
 
-		if (p->entry)
-			db->ops->free(p->entry);
+		if (p->eptr)
+			db->ops->free(p->eptr);
 
 		free(p);
 	}
@@ -354,26 +354,26 @@ name_is_nis(const char *n)
 
 #if KEEP_NIS_AT_END
 /* prototype */
-static void add_one_entry_nis P_((struct commonio_db *, struct commonio_entry *));
+static void add_one_entry_nis(struct commonio_db *, struct commonio_entry *);
 
 static void
-add_one_entry_nis(struct commonio_db *db, struct commonio_entry *new)
+add_one_entry_nis(struct commonio_db *db, struct commonio_entry *newp)
 {
 	struct commonio_entry *p;
 
 	for (p = db->head; p; p = p->next) {
-		if (name_is_nis(p->entry ? db->ops->getname(p->entry) : p->line)) {
-			new->next = p;
-			new->prev = p->prev;
+		if (name_is_nis(p->eptr ? db->ops->getname(p->eptr) : p->line)) {
+			newp->next = p;
+			newp->prev = p->prev;
 			if (p->prev)
-				p->prev->next = new;
+				p->prev->next = newp;
 			else
-				db->head = new;
-			p->prev = new;
+				db->head = newp;
+			p->prev = newp;
 			return;
 		}
 	}
-	add_one_entry(db, new);
+	add_one_entry(db, newp);
 }
 #endif /* KEEP_NIS_AT_END */
 
@@ -385,7 +385,7 @@ commonio_open(struct commonio_db *db, int mode)
 	char	*cp;
 	char *line;
 	struct commonio_entry *p;
-	void *entry;
+	void *eptr;
 	int flags = mode;
 
 	mode &= ~O_CREAT;
@@ -425,10 +425,10 @@ commonio_open(struct commonio_db *db, int mode)
 			goto cleanup;
 
 		if (name_is_nis(line)) {
-			entry = NULL;
-		} else if ((entry = db->ops->parse(line))) {
-			entry = db->ops->dup(entry);
-			if (!entry)
+			eptr = NULL;
+		} else if ((eptr = db->ops->parse(line))) {
+			eptr = db->ops->dup(eptr);
+			if (!eptr)
 				goto cleanup_line;
 		}
 
@@ -436,7 +436,7 @@ commonio_open(struct commonio_db *db, int mode)
 		if (!p)
 			goto cleanup_entry;
 
-		p->entry = entry;
+		p->eptr = eptr;
 		p->line = line;
 		p->changed = 0;
 
@@ -447,8 +447,8 @@ commonio_open(struct commonio_db *db, int mode)
 	return 1;
 
 cleanup_entry:
-	if (entry)
-		db->ops->free(entry);
+	if (eptr)
+		db->ops->free(eptr);
 cleanup_line:
 	free(line);
 cleanup:
@@ -464,12 +464,12 @@ static int
 write_all(const struct commonio_db *db)
 {
 	const struct commonio_entry *p;
-	void *entry;
+	void *eptr;
 
 	for (p = db->head; p; p = p->next) {
 		if (p->changed) {
-			entry = p->entry;
-			if (db->ops->put(entry, db->fp))
+			eptr = p->eptr;
+			if (db->ops->put(eptr, db->fp))
 				return -1;
 		} else if (p->line) {
 			if (db->ops->fputs(p->line, db->fp) == EOF)
@@ -581,7 +581,7 @@ find_entry_by_name(struct commonio_db *db, const char *name)
 	void *ep;
 
 	for (p = db->head; p; p = p->next) {
-		ep = p->entry;
+		ep = p->eptr;
 		if (ep && strcmp(db->ops->getname(ep), name) == 0)
 			break;
 	}
@@ -590,7 +590,7 @@ find_entry_by_name(struct commonio_db *db, const char *name)
 
 
 int
-commonio_update(struct commonio_db *db, const void *entry)
+commonio_update(struct commonio_db *db, const void *eptr)
 {
 	struct commonio_entry *p;
 	void *nentry;
@@ -599,14 +599,14 @@ commonio_update(struct commonio_db *db, const void *entry)
 		errno = EINVAL;
 		return 0;
 	}
-	if (!(nentry = db->ops->dup(entry))) {
+	if (!(nentry = db->ops->dup(eptr))) {
 		errno = ENOMEM;
 		return 0;
 	}
-	p = find_entry_by_name(db, db->ops->getname(entry));
+	p = find_entry_by_name(db, db->ops->getname(eptr));
 	if (p) {
-		db->ops->free(p->entry);
-		p->entry = nentry;
+		db->ops->free(p->eptr);
+		p->eptr = nentry;
 		p->changed = 1;
 		db->cursor = p;
 
@@ -621,7 +621,7 @@ commonio_update(struct commonio_db *db, const void *entry)
 		return 0;
 	}
 
-	p->entry = nentry;
+	p->eptr = nentry;
 	p->line = NULL;
 	p->changed = 1;
 
@@ -676,8 +676,8 @@ commonio_remove(struct commonio_db *db, const char *name)
 	if (p->line)
 		free(p->line);
 
-	if (p->entry)
-		db->ops->free(p->entry);
+	if (p->eptr)
+		db->ops->free(p->eptr);
 
 	return 1;
 }
@@ -698,7 +698,7 @@ commonio_locate(struct commonio_db *db, const char *name)
 		return NULL;
 	}
 	db->cursor = p;
-	return p->entry;
+	return p->eptr;
 }
 
 
@@ -717,7 +717,7 @@ commonio_rewind(struct commonio_db *db)
 const void *
 commonio_next(struct commonio_db *db)
 {
-	void *entry;
+	void *eptr;
 
 	if (!db->isopen) {
 		errno = EINVAL;
@@ -729,9 +729,9 @@ commonio_next(struct commonio_db *db)
 		db->cursor = db->cursor->next;
 
 	while (db->cursor) {
-		entry = db->cursor->entry;
-		if (entry)
-			return entry;
+		eptr = db->cursor->eptr;
+		if (eptr)
+			return eptr;
 
 		db->cursor = db->cursor->next;
 	}

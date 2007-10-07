@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: lastlog.c,v 1.5 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: lastlog.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -69,9 +69,8 @@ extern	char	*optarg;
 #define	NOW	(time ((time_t *) 0))
 
 /* local function prototypes */
-int main P_((int, char **));
-static void print P_((void));
-static void print_one P_((const struct passwd *));
+static void print(void);
+static void print_one(const struct passwd *);
 
 int
 main(int argc, char **argv)

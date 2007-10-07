@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: userdel.c,v 1.15 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: userdel.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/stat.h>
 #include <stdio.h>
@@ -101,22 +101,21 @@ static int is_shadow_grp;
 extern int optind;
 
 /* local function prototypes */
-static void usage P_((void));
-static void update_groups P_((void));
-static void close_files P_((void));
-static void fail_exit P_((int));
-static void open_files P_((void));
-static void update_user P_((void));
-static void user_busy P_((const char *, uid_t));
-static void user_cancel P_((const char *));
+static void usage(void);
+static void update_groups(void);
+static void close_files(void);
+static void fail_exit(int);
+static void open_files(void);
+static void update_user(void);
+static void user_busy(const char *, uid_t);
+static void user_cancel(const char *);
 #ifdef EXTRA_CHECK_HOME_DIR
-static int path_prefix P_((const char *, const char *));
+static int path_prefix(const char *, const char *);
 #endif
-static int is_owner P_((uid_t, const char *));
+static int is_owner(uid_t, const char *);
 #ifndef NO_REMOVE_MAILBOX
-static void remove_mailbox P_((void));
+static void remove_mailbox(void);
 #endif
-int main P_((int, char **));
 
 /*
  * usage - display usage message and exit
@@ -134,6 +133,10 @@ usage(void)
  *
  *	update_groups() takes the user name that was given and searches
  *	the group files for membership in any group.
+ *
+ *	we also check to see if they have any groups they own (the same
+ *	name is their user name) and delete them too (only if USERGROUPS_ENAB
+ *	is enabled).
  */
 
 static void
@@ -188,9 +191,36 @@ update_groups(void)
 		SYSLOG((LOG_INFO, "delete `%s' from group `%s'\n",
 			user_name, ngrp->gr_name));
 	}
-#ifdef	NDBM
+#ifdef NDBM
+	endgrent();
+#endif
+	/*
+	 * we've removed their name from all the groups above, so
+	 * now if they have a group with the same name as their
+	 * user name, with no members, we delete it.
+	 */
+
+	grp = getgrnam(user_name);
+	if (grp && getdef_bool("USERGROUPS_ENAB") && (grp->gr_mem[0] == NULL)) {
+
+		gr_remove(grp->gr_name);
+
+		/*
+		 * Update the DBM group file with the new entry as well.
+		 */
+
+#ifdef NDBM
+		if (!gr_dbm_remove(grp))
+			fprintf(stderr,
+				_("%s: cannot remove dbm group entry\n"),
+				Prog);
+#endif
+		SYSLOG((LOG_INFO, "removed group `%s' owned by `%s'\n",
+			grp->gr_name, user_name));
+	}
+#ifdef NDBM
 	endgrent ();
-#endif	/* NDBM */
+#endif
 #ifdef	SHADOWGRP
 	if (!is_shadow_grp)
 		return;

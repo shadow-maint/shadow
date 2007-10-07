@@ -41,7 +41,7 @@
  *	lines.  Each line consists of the last component of the path
  *	name.  The leading "/dev/" string is removed.
  *
- *	$Id: dialup.h,v 1.2 1997/05/01 23:14:39 marekm Exp $
+ *	$Id: dialup.h,v 1.3 2000/08/26 18:27:17 marekm Exp $
  */
 
 #ifndef	_DIALUP_H
@@ -52,13 +52,13 @@ struct	dialup {
 	char	*du_passwd;
 };
 
-extern void setduent P_((void));
-extern void endduent P_((void));
-extern struct dialup *fgetduent P_((FILE *));
-extern struct dialup *getduent P_((void));
-extern struct dialup *getdushell P_((const char *));
-extern int putduent P_((const struct dialup *, FILE *));
-extern int isadialup P_((const char *));
+extern void setduent(void);
+extern void endduent(void);
+extern struct dialup *fgetduent(FILE *);
+extern struct dialup *getduent(void);
+extern struct dialup *getdushell(const char *);
+extern int putduent(const struct dialup *, FILE *);
+extern int isadialup(const char *);
 
 #define	DIALPWD	"/etc/d_passwd"
 #define	DIALUPS	"/etc/dialups"

@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.13 1999/07/09 18:02:43 marekm Exp $
+ * $Id: prototypes.h,v 1.14 2000/08/26 18:27:17 marekm Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -23,191 +23,206 @@
 #include "defines.h"
 
 /* addgrps.c */
-extern int add_groups P_((const char *));
-extern void add_cons_grps P_((void));
+extern int add_groups(const char *);
+extern void add_cons_grps(void);
 
 /* age.c */
 #ifdef SHADOWPWD
-extern void agecheck P_((const struct passwd *pw, const struct spwd *sp));
-extern int expire P_((const struct passwd *pw, const struct spwd *sp));
-extern int isexpired P_((const struct passwd *pw, const struct spwd *sp));
+extern void agecheck(const struct passwd *, const struct spwd *);
+extern int expire(const struct passwd *, const struct spwd *);
+extern int isexpired(const struct passwd *, const struct spwd *);
 #else
-extern void agecheck P_((const struct passwd *pw));
-extern int expire P_((const struct passwd *pw));
-extern int isexpired P_((const struct passwd *pw));
+extern void agecheck(const struct passwd *);
+extern int expire(const struct passwd *);
+extern int isexpired(const struct passwd *);
 #endif
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
-extern char *Basename P_((char *str));
+extern char *Basename(char *str);
 
 /* chkshell.c */
-extern int check_shell P_((const char *));
+extern int check_shell(const char *);
 
 /* chowndir.c */
-extern int chown_tree P_((const char *, uid_t, uid_t, gid_t, gid_t));
+extern int chown_tree(const char *, uid_t, uid_t, gid_t, gid_t);
 
 /* chowntty.c */
-extern void chown_tty P_((const char *, const struct passwd *));
+extern void chown_tty(const char *, const struct passwd *);
 
 /* console.c */
-extern int console P_((const char *tty));
-extern int is_listed P_((const char *cfgin, const char *tty, int def));
+extern int console(const char *);
+extern int is_listed(const char *, const char *, int);
 
 /* copydir.c */
-extern int copy_tree P_((const char *, const char *, uid_t, gid_t));
-extern int remove_tree P_((const char *));
+extern int copy_tree(const char *, const char *, uid_t, gid_t);
+extern int remove_tree(const char *);
 
 /* encrypt.c */
-extern char *pw_encrypt P_((const char *, const char *));
+extern char *pw_encrypt(const char *, const char *);
 
 /* entry.c */
-extern void entry P_((const char *name, struct passwd *pwent));
+extern void pw_entry(const char *, struct passwd *);
 
 /* env.c */
-extern void addenv P_((const char *, const char *));
-extern void initenv P_((void));
-extern void set_env P_((int, char * const *));
-extern void sanitize_env P_((void));
+extern void addenv(const char *, const char *);
+extern void initenv(void);
+extern void set_env(int, char * const *);
+extern void sanitize_env(void);
 
 /* fields.c */
-extern void change_field P_((char *buf, size_t maxsize, const char *prompt));
-extern int valid_field P_((const char *field, const char *illegal));
+extern void change_field(char *, size_t, const char *);
+extern int valid_field(const char *, const char *);
 
 /* fputsx.c */
-extern char *fgetsx P_((char *, int, FILE *));
-extern int fputsx P_((const char *, FILE *));
+extern char *fgetsx(char *, int, FILE *);
+extern int fputsx(const char *, FILE *);
 
 /* grdbm.c */
-extern int gr_dbm_remove P_((const struct group *gr));
-extern int gr_dbm_update P_((const struct group *gr));
-extern int gr_dbm_present P_((void));
+extern int gr_dbm_remove(const struct group *);
+extern int gr_dbm_update(const struct group *);
+extern int gr_dbm_present(void);
 
 /* grent.c */
-extern int putgrent P_((const struct group *, FILE *));
+extern int putgrent(const struct group *, FILE *);
 
 /* grpack.c */
-extern int gr_pack P_((const struct group *group, char *buf));
-extern int gr_unpack P_((char *buf, int len, struct group *group));
+extern int gr_pack(const struct group *, char *);
+extern int gr_unpack(char *, int, struct group *);
 
 #ifdef SHADOWGRP
 /* gsdbm.c */
-extern int sg_dbm_remove P_((const char *name));
-extern int sg_dbm_update P_((const struct sgrp *sgr));
-extern int sg_dbm_present P_((void));
+extern int sg_dbm_remove(const char *);
+extern int sg_dbm_update(const struct sgrp *);
+extern int sg_dbm_present(void);
 
 /* gspack.c */
-extern int sgr_pack P_((const struct sgrp *sgrp, char *buf));
-extern int sgr_unpack P_((char *buf, int len, struct sgrp *sgrp));
+extern int sgr_pack(const struct sgrp *, char *);
+extern int sgr_unpack(char *, int, struct sgrp *);
 #endif
 
 /* hushed.c */
-extern int hushed P_((const struct passwd *pw));
+extern int hushed(const struct passwd *);
 
 /* limits.c */
-extern void setup_limits P_((const struct passwd *));
+extern void setup_limits(const struct passwd *);
 
 /* list.c */
-extern char **add_list P_((char **list, const char *member));
-extern char **del_list P_((char **list, const char *member));
-extern char **dup_list P_((char * const *list));
-extern int is_on_list P_((char * const *list, const char *member));
-extern char **comma_to_list P_((const char *comma));
+extern char **add_list(char **, const char *);
+extern char **del_list(char **, const char *);
+extern char **dup_list(char * const *);
+extern int is_on_list(char * const *, const char *);
+extern char **comma_to_list(const char *);
 
 /* login.c */
-extern void login_prompt P_((const char *, char *, int));
+extern void login_prompt(const char *, char *, int);
 
 /* login_desrpc.c */
-extern int login_desrpc P_((const char *));
+extern int login_desrpc(const char *);
 
 /* mail.c */
-extern void mailcheck P_((void));
+extern void mailcheck(void);
 
 /* motd.c */
-extern void motd P_((void));
+extern void motd(void);
 
 /* myname.c */
-extern struct passwd *get_my_pwent P_((void));
+extern struct passwd *get_my_pwent(void);
 
 /* obscure.c */
-extern int obscure P_((const char *, const char *, const struct passwd *));
+extern int obscure(const char *, const char *, const struct passwd *);
 
 /* pam_pass.c */
-extern int do_pam_passwd P_((const char *, int, int));
+extern int do_pam_passwd(const char *, int, int);
 
 /* port.c */
-extern int isttytime P_((const char *, const char *, time_t));
+extern int isttytime(const char *, const char *, time_t);
 
 /* pwd2spwd.c */
 #ifdef SHADOWPWD
-extern struct spwd *pwd_to_spwd P_((const struct passwd *pw));
+extern struct spwd *pwd_to_spwd(const struct passwd *);
 #endif
 
 /* pwdcheck.c */
-extern void passwd_check P_((const char *, const char *, const char *));
+extern void passwd_check(const char *, const char *, const char *);
 
 /* pwd_init.c */
-extern void pwd_init P_((void));
+extern void pwd_init(void);
 
 /* pwdbm.c */
-extern int pw_dbm_remove P_((const struct passwd *pw));
-extern int pw_dbm_update P_((const struct passwd *pw));
-extern int pw_dbm_present P_((void));
+extern int pw_dbm_remove(const struct passwd *);
+extern int pw_dbm_update(const struct passwd *);
+extern int pw_dbm_present(void);
 
 /* pwpack.c */
-extern int pw_pack P_((const struct passwd *passwd, char *buf));
-extern int pw_unpack P_((char *buf, int len, struct passwd *passwd));
+extern int pw_pack(const struct passwd *, char *);
+extern int pw_unpack(char *, int, struct passwd *);
 
 /* rad64.c */
-extern int c64i P_((char c));
-extern int i64c P_((int i));
+extern int c64i(int);
+extern int i64c(int);
 
 /* rlogin.c */
-extern int do_rlogin P_((const char *, char *, int, char *, int));
+extern int do_rlogin(const char *, char *, int, char *, int);
+
+/* salt.c */
+extern char *crypt_make_salt(void);
 
 /* setugid.c */
-extern int setup_groups P_((const struct passwd *));
-extern int change_uid P_((const struct passwd *));
-extern int setup_uid_gid P_((const struct passwd *, int));
+extern int setup_groups(const struct passwd *);
+extern int change_uid(const struct passwd *);
+extern int setup_uid_gid(const struct passwd *, int);
 
 /* setup.c */
-extern void setup P_((struct passwd *info));
+extern void setup(struct passwd *);
 
 /* setupenv.c */
-extern void setup_env P_((struct passwd *));
+extern void setup_env(struct passwd *);
 
 /* shell.c */
-extern void shell P_((const char *file, const char *arg));
+extern void shell(const char *, const char *);
 
 #ifdef SHADOWPWD
 /* spdbm.c */
-extern int sp_dbm_remove P_((const char *user));
-extern int sp_dbm_update P_((const struct spwd *sp));
-extern int sp_dbm_present P_((void));
+extern int sp_dbm_remove(const char *);
+extern int sp_dbm_update(const struct spwd *);
+extern int sp_dbm_present(void);
 
 /* sppack.c */
-extern int spw_pack P_((const struct spwd *spwd, char *buf));
-extern int spw_unpack P_((char *buf, int len, struct spwd *spwd));
+extern int spw_pack(const struct spwd *, char *);
+extern int spw_unpack(char *, int, struct spwd *);
 #endif
 
 /* strtoday.c */
-extern long strtoday P_((const char *str));
+extern long strtoday(const char *);
+
+/* suauth.c */
+extern int check_su_auth(const char *, const char *);
+
+/* sulog.c */
+extern void sulog(const char *, int, const char *, const char *);
+
+/* sub.c */
+extern void subsystem(const struct passwd *);
 
 /* ttytype.c */
-extern void ttytype P_((const char *line));
+extern void ttytype(const char *);
+
+/* tz.c */
+extern char *tz(const char *);
 
 /* ulimit.c */
-extern void set_filesize_limit P_((int));
+extern void set_filesize_limit(int);
 
 /* utmp.c */
-extern void checkutmp P_((int));
-extern void setutmp P_((const char *, const char *, const char *));
+extern void checkutmp(int);
+extern void setutmp(const char *, const char *, const char *);
 
 /* valid.c */
-extern int valid P_((const char *, const struct passwd *));
+extern int valid(const char *, const struct passwd *);
 
 /* xmalloc.c */
-extern char *xmalloc P_((size_t size));
-extern char *xstrdup P_((const char *str));
+extern char *xmalloc(size_t);
+extern char *xstrdup(const char *);
 
 #endif /* _PROTOTYPES_H */

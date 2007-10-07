@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: usermod.c,v 1.17 1999/06/07 16:40:45 marekm Exp $")
+RCSID(PKG_VER "$Id: usermod.c,v 1.18 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -151,38 +151,37 @@ extern char *optarg;
 extern int optind;
 
 /* local function prototypes */
-static int get_groups P_((char *));
-static void usage P_((void));
-static void new_pwent P_((struct passwd *));
+static int get_groups(char *);
+static void usage(void);
+static void new_pwent(struct passwd *);
 #ifdef SHADOWPWD
-static void new_spent P_((struct spwd *));
+static void new_spent(struct spwd *);
 #endif
-static void fail_exit P_((int));
-static int update_group P_((void));
+static void fail_exit(int);
+static int update_group(void);
 #ifdef SHADOWGRP
-static int update_gshadow P_((void));
+static int update_gshadow(void);
 #endif
-static int grp_update P_((void));
+static int grp_update(void);
 #ifdef AUTH_METHODS
-static char *get_password P_((const char *));
-static void split_auths P_((char *, char **));
-static void update_auths P_((const char *, const char *, char *));
-static void add_auths P_((const char *, const char *, char *));
-static void delete_auths P_((const char *, const char *, char *));
-static void convert_auth P_((char *, const char *, const char *));
-static int valid_auth P_((const char *));
+static char *get_password(const char *);
+static void split_auths(char *, char **);
+static void update_auths(const char *, const char *, char *);
+static void add_auths(const char *, const char *, char *);
+static void delete_auths(const char *, const char *, char *);
+static void convert_auth(char *, const char *, const char *);
+static int valid_auth(const char *);
 #endif
-static long get_number P_((const char *));
-static void process_flags P_((int, char **));
-static void close_files P_((void));
-static void open_files P_((void));
-static void usr_update P_((void));
-static void move_home P_((void));
-static void update_files P_((void));
+static long get_number(const char *);
+static void process_flags(int, char **);
+static void close_files(void);
+static void open_files(void);
+static void usr_update(void);
+static void move_home(void);
+static void update_files(void);
 #ifndef NO_MOVE_MAILBOX
-static void move_mailbox P_((void));
+static void move_mailbox(void);
 #endif
-int main P_((int, char **));
 
 /* Had to move this over from useradd.c since we have groups named
  * "56k-family"... ergh.

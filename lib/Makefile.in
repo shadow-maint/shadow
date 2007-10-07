@@ -78,6 +78,7 @@ INTLOBJS = @INTLOBJS@
 LD = @LD@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
+LIBMD = @LIBMD@
 LIBPAM = @LIBPAM@
 LIBSKEY = @LIBSKEY@
 LIBTCFS = @LIBTCFS@
@@ -138,7 +139,7 @@ libdir = ${exec_prefix}/lib
 #lib_PROGRAMS = libshadow.la
 lib_LTLIBRARIES = libshadow.la
 libshadow_la_SOURCES = ${libshadow_a_SOURCES}
-#libshadow_la_LIBADD = @LTLIBOBJS@
+libshadow_la_LIBADD = @LTLIBOBJS@
 #libshadow_la_LDFLAGS = -version-info 0:0:0 -rpath $(libdir)
 libshadow_la_LDFLAGS = -version-info 0:0:0
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -156,7 +157,7 @@ rad64.o sgroupio.o shadow.o shadowio.o utent.o tcfsio.o
 AR = ar
 LTLIBRARIES =  $(lib_LTLIBRARIES)
 
-libshadow_la_LIBADD = 
+libshadow_la_DEPENDENCIES =  @LTLIBOBJS@
 libshadow_la_OBJECTS =  commonio.lo dialchk.lo dialup.lo encrypt.lo \
 fputsx.lo getdef.lo getpass.lo groupio.lo gshadow.lo lockpw.lo port.lo \
 pwauth.lo pwio.lo rad64.lo sgroupio.lo shadow.lo shadowio.lo utent.lo \
@@ -335,14 +336,17 @@ gshadow.lo gshadow.o : gshadow.c ../config.h rcsid.h prototypes.h \
 	defines.h gshadow_.h
 lockpw.lo lockpw.o : lockpw.c ../config.h
 port.lo port.o : port.c ../config.h rcsid.h defines.h gshadow_.h port.h
-putgrent.o: putgrent.c ../config.h prototypes.h defines.h gshadow_.h
+putgrent.lo putgrent.o : putgrent.c ../config.h prototypes.h defines.h \
+	gshadow_.h
 pwauth.lo pwauth.o : pwauth.c ../config.h rcsid.h prototypes.h defines.h \
 	gshadow_.h pwauth.h getdef.h
 pwio.lo pwio.o : pwio.c ../config.h rcsid.h prototypes.h defines.h \
 	gshadow_.h commonio.h pwio.h
 rad64.lo rad64.o : rad64.c ../config.h rcsid.h
-sgetgrent.o: sgetgrent.c ../config.h rcsid.h defines.h gshadow_.h
-sgetpwent.o: sgetpwent.c ../config.h rcsid.h defines.h gshadow_.h
+sgetgrent.lo sgetgrent.o : sgetgrent.c ../config.h rcsid.h defines.h \
+	gshadow_.h
+sgetpwent.lo sgetpwent.o : sgetpwent.c ../config.h rcsid.h defines.h \
+	gshadow_.h
 sgroupio.lo sgroupio.o : sgroupio.c ../config.h rcsid.h prototypes.h \
 	defines.h gshadow_.h commonio.h sgroupio.h
 shadowio.lo shadowio.o : shadowio.c ../config.h rcsid.h prototypes.h \

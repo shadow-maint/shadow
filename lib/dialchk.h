@@ -1,4 +1,4 @@
-/* $Id: dialchk.h,v 1.1 1997/12/07 23:26:49 marekm Exp $ */
+/* $Id: dialchk.h,v 1.2 2000/08/26 18:27:17 marekm Exp $ */
 #ifndef _DIALCHK_H_
 #define _DIALCHK_H_
 
@@ -11,6 +11,6 @@
  *	line.  If so, a dialup password may be required if the shell
  *	is listed as one which requires a second password.
  */
-extern int dialcheck P_((const char *tty, const char *sh));
+extern int dialcheck(const char *, const char *);
 
 #endif

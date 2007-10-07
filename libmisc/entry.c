@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: entry.c,v 1.3 1997/12/07 23:27:03 marekm Exp $")
+RCSID("$Id: entry.c,v 1.4 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -38,10 +38,10 @@ RCSID("$Id: entry.c,v 1.3 1997/12/07 23:27:03 marekm Exp $")
 #include "defines.h"
 #include <pwd.h>
 
-struct	passwd	*fgetpwent ();
+extern struct	passwd	*fgetpwent ();
 
 void
-entry(const char *name, struct passwd *pwent)
+pw_entry(const char *name, struct passwd *pwent)
 {
 	struct	passwd	*passwd;
 #ifdef	SHADOWPWD

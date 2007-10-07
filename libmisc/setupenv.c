@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: setupenv.c,v 1.9 1999/03/07 19:14:41 marekm Exp $")
+RCSID("$Id: setupenv.c,v 1.10 2000/08/26 18:27:17 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -235,8 +235,21 @@ setup_env(struct passwd *info)
 	 * Create the PATH environmental variable and export it.
 	 */
 
-	cp = getdef_str( info->pw_uid == 0 ? "ENV_SUPATH" : "ENV_PATH" );
+	cp = getdef_str((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+#if 0
 	addenv(cp ? cp : "PATH=/bin:/usr/bin", NULL);
+#else
+	if (!cp) {
+		/* not specified, use a minimal default */
+		addenv("PATH=/bin:/usr/bin", NULL);
+	} else if (strchr(cp, '=')) {
+		/* specified as name=value (PATH=...) */
+		addenv(cp, NULL);
+	} else {
+		/* only value specified without "PATH=" */
+		addenv("PATH", cp);
+	}
+#endif
 
 	/*
 	 * Export the user name.  For BSD derived systems, it's "USER", for
@@ -269,9 +282,11 @@ setup_env(struct passwd *info)
 #endif
 	}
 
+#ifndef USE_PAM
 	/*
 	 * Read environment from optional config file.  --marekm
 	 */
 	if ((envf = getdef_str("ENVIRON_FILE")))
 		read_env_file(envf);
+#endif
 }

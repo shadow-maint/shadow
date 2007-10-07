@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groupmod.c,v 1.12 1999/07/09 18:02:43 marekm Exp $")
+RCSID(PKG_VER "$Id: groupmod.c,v 1.13 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -83,18 +83,17 @@ extern int optind;
 extern char *optarg;
 
 /* local function prototypes */
-static void usage P_((void));
-static void new_grent P_((struct group *));
+static void usage(void);
+static void new_grent(struct group *);
 #ifdef SHADOWGRP
-static void new_sgent P_((struct sgrp *));
+static void new_sgent(struct sgrp *);
 #endif
-static void grp_update P_((void));
-static void check_new_gid P_((void));
-static void check_new_name P_((void));
-static void process_flags P_((int, char **));
-static void close_files P_((void));
-static void open_files P_((void));
-int main P_((int, char **));
+static void grp_update(void);
+static void check_new_gid(void);
+static void check_new_name(void);
+static void process_flags(int, char **);
+static void close_files(void);
+static void open_files(void);
 
 /*
  * usage - display usage message and exit

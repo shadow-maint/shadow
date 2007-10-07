@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: logoutd.c,v 1.14 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: logoutd.c,v 1.15 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -60,8 +60,7 @@ static char	*Prog;
 #endif
 
 /* local function prototypes */
-static int check_login P_((const struct utmp *));
-int main P_((int, char **));
+static int check_login(const struct utmp *);
 
 
 /*

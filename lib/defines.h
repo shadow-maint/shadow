@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.15 1999/08/27 19:02:50 marekm Exp $ */
+/* $Id: defines.h,v 1.16 2000/08/26 18:27:17 marekm Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -27,14 +27,6 @@
 # undef textdomain
 # define textdomain(Domain) /* empty */
 # define _(Text) Text
-#endif
-
-#ifndef P_
-# ifdef PROTOTYPES
-#  define P_(x) x
-# else
-#  define P_(x) ()
-# endif
 #endif
 
 #if STDC_HEADERS
@@ -194,7 +186,25 @@ char *strchr(), *strrchr(), *strtok();
 #ifdef STAT_MACROS_BROKEN
 # define S_ISDIR(x) ((x) & S_IFMT) == S_IFDIR)
 # define S_ISREG(x) ((x) & S_IFMT) == S_IFREG)
-# define S_ISLNK(x) ((x) & S_IFMT) == S_IFLNK)
+# ifdef S_IFLNK
+#  define S_ISLNK(x) ((x) & S_IFMT) == S_IFLNK)
+# endif
+#endif
+
+#ifndef S_ISLNK
+#define S_ISLNK(x) (0)
+#endif
+
+#if HAVE_LCHOWN
+#define LCHOWN lchown
+#else
+#define LCHOWN chown
+#endif
+
+#if HAVE_LSTAT
+#define LSTAT lstat
+#else
+#define LSTAT stat
 #endif
 
 #if HAVE_TERMIOS_H

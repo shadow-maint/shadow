@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newgrp.c,v 1.14 1999/08/27 19:02:51 marekm Exp $")
+RCSID(PKG_VER "$Id: newgrp.c,v 1.15 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <errno.h>
@@ -53,8 +53,7 @@ static char *Prog;
 static int is_newgrp;
 
 /* local function prototypes */
-static void usage P_((void));
-int main P_((int, char **));
+static void usage(void);
 
 /*
  * usage - print command usage message
@@ -79,6 +78,7 @@ main(int argc, char **argv)
 	int	initflag = 0;
 	int	needspasswd = 0;
 	int	i;
+	int their_grp = 0;
 	int cflag = 0;
 	gid_t gid;
 	char *cp;
@@ -95,7 +95,10 @@ main(int argc, char **argv)
 	struct sgrp *sgrp;
 #endif
 
+#if ENABLE_NLS
+	/* XXX - remove when gettext is safe to use in setuid programs */
 	sanitize_env();
+#endif
 
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
@@ -243,6 +246,7 @@ main(int argc, char **argv)
 			goto failure;
 		}
 		group = grp->gr_name;
+		their_grp = 1;
 	} else if (! (grp = getgrnam (group))) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 		goto failure;
@@ -259,9 +263,13 @@ main(int argc, char **argv)
 	 * if she isn't a member, she needs to provide the
 	 * group password.  if there is no group password, she
 	 * will be denied access anyway.
+	 *
+	 * we also check if this is the users default group, eg.
+	 * they aren't a member, but this is the group listed as
+	 * the one they belong to in their pwd entry.
 	 */
 
-	if (!is_on_list(grp->gr_mem, name))
+	if (!is_on_list(grp->gr_mem, name) && !their_grp)
 		needspasswd = 1;
 
 	/*

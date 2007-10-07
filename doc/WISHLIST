@@ -1,4 +1,4 @@
-$Id: WISHLIST,v 1.23 1999/08/27 19:02:50 marekm Exp $
+$Id: WISHLIST,v 1.24 2000/08/26 18:27:09 marekm Exp $
 
 This is my wishlist for the shadow suite, in no particular order.  Feel
 free to do anything from this list and mail me the diffs :-).
@@ -16,7 +16,6 @@ New ideas to add to this list are welcome, too.  --marekm
 - update man pages to reflect all the changes (real programmers ... :-)
 - patch for rlogind/telnetd to create utmp entry and fill in ut_addr
 - fix the usermod -l bug properly [for now it's OK - #undef AUTH_METHODS]
-- IMPORTANT: finish PAM support (passwd, su - done, untested; login - started)
 - option to specify encrypted password in passwd (for yppasswdd, so it
   doesn't need to know about shadow/non-shadow); should probably use a pipe
   (less insecure than command line arguments)
@@ -28,7 +27,7 @@ New ideas to add to this list are welcome, too.  --marekm
 - poppassd (remote password change for eudora etc.)
 - add support for passwd/shadow db files (glibc)
 - better documentation
-- su -l, -m, -p, -s options (as in GNU su)
+- su -l, -m, -p, -s options (as in GNU su) - done in the Debian patches
 - vipw: check password files for errors after editing
 - clean up login utmp(x) handling code
 - add "maximum time users allowed to stay logged in" limit option to logoutd
@@ -46,10 +45,7 @@ New ideas to add to this list are welcome, too.  --marekm
   (and use UID_MIN, UID_MAX from login.defs)
 - newusers should be able to copy /etc/skel to the new home directory
   (like useradd)
-- include i18n files in Debian packages
-- integrate the latest upstream version into the Debian distribution
-  (as of this writing, they still have shadow-980403 with huge diff,
-  and many bugs have been fixed since then)
+- integrate the changes from Debian (complete PAM support, bug fixes)
 - add directories where other packages can add hooks for package-specific
   per-user configuration, to be executed with run-parts. Some hooks should
   be executed at package install time for existing users, likewise for

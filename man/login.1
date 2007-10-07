@@ -25,15 +25,17 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.1,v 1.6 1999/06/07 16:40:44 marekm Exp $
+.\"	$Id: login.1,v 1.7 2000/08/26 18:27:17 marekm Exp $
 .\"
 .TH LOGIN 1
 .SH NAME
 login \- Begin session on the system
 .SH SYNOPSIS
-.B login
-.RI [ username " [" environmental-variables ]]
-.\" XXX - document -f -h -p -r options
+\fBlogin\fR [\fB-p\fR] [\fIusername\fR] [\fIENV=VAR ...\fR]
+.br
+\fBlogin\fR [\fB-p\fR] [\fB-h\fR \fIhost\fR] [\fB-f\fR \fIusername\fR]
+.br
+\fBlogin\fR [\fB-p\fR] \fB-r\fR \fIhost\fR
 .SH DESCRIPTION
 .B login
 is used to establish a new session with the system.
@@ -94,6 +96,25 @@ An initialization script for your command interpreter may also be
 executed.
 Please see the appropriate manual section for more information on
 this function.
+.PP
+A subsystem login is indicated by the presense of a "*" as the first
+character of the login shell. The given home directory will be used as
+the root of a new filesystem which the user is actually logged into.
+.SH OPTIONS
+.TP
+.B -p
+Preserve environment.
+.TP
+.B -f
+Do not perform authentication, user is preauthenticated.
+.TP
+.B -h
+Name of the remote host for this login.
+.TP
+.B -r
+Perform autologin protocol for rlogin.
+.PP
+The \fB-r -h\fP and \fB-f\fP options are only used when \fBlogin\fP is invoked by root.
 .SH CAVEATS
 .PP
 This version of \fBlogin\fR has many compilation options, only some of which
@@ -131,4 +152,4 @@ $HOME/.hushlogin \- suppress printing of system messages
 .BR passwd (5),
 .BR nologin (5)
 .SH AUTHOR
-Julianne Frances Haugh (jfh@bga.com)
+Julianne Frances Haugh (jfh@austin.ibm.com)
