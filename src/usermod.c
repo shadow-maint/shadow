@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: usermod.c,v 1.19 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: usermod.c,v 1.18 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -114,8 +114,6 @@ static int
 	fflg = 0, /* days until account with expired password is locked */
 	eflg = 0, /* days since 1970-01-01 when account becomes expired */
 #endif
-	Lflg = 0, /* lock the password */
-	Uflg = 0, /* unlock the password */
 	pflg = 0, /* new encrypted password */
 	lflg = 0; /* new user name */
 
@@ -322,39 +320,8 @@ usage(void)
 #ifdef AUTH_METHODS
 	fprintf(stderr, _("[-A {DEFAULT|program},... ] "));
 #endif
-	fprintf(stderr, _("[-p passwd] [-L|-U] name\n"));
+	fprintf(stderr, _("[-p passwd] name\n"));
 	exit(E_USAGE);
-}
-
-/* update encrypted password string (for both shadow and non-shadow passwords) */
-
-static char *
-new_pw_passwd(char *pw_pass, const char *pw_name)
-{
-	if (Lflg && pw_pass[0] != '!') {
-		char *buf = xmalloc(strlen(pw_pass) + 2);
-
-		SYSLOG((LOG_INFO, "lock user `%s' password\n",
-			pw_name));
-		strcpy(buf, "!");
-		strcat(buf, pw_pass);
-		pw_pass = buf;
-	} else if (Uflg && pw_pass[0] == '!') {
-		char *s;
-
-		SYSLOG((LOG_INFO, "unlock user `%s' password\n",
-			pw_name));
-		s = pw_pass;
-		while (*s) {
-			*s = *(s + 1);
-			s++;
-		}
-	} else if (pflg) {
-		SYSLOG((LOG_INFO, "change user `%s' password\n",
-			pw_name));
-		pw_pass = xstrdup(user_pass);
-	}
-	return pw_pass;
 }
 
 /*
@@ -372,12 +339,14 @@ new_pwent(struct passwd *pwent)
 			pwent->pw_name, user_newname));
 		pwent->pw_name = xstrdup (user_newname);
 	}
-
 #ifdef SHADOWPWD
 	if (!is_shadow_pwd)
 #endif
-	pwent->pw_passwd = new_pw_passwd(pwent->pw_passwd, pwent->pw_name);
-
+	if (pflg) {
+		SYSLOG((LOG_INFO, "change user `%s' password\n",
+			pwent->pw_name));
+		pwent->pw_passwd = xstrdup(user_pass);
+	}
 	if (uflg) {
 		SYSLOG((LOG_INFO, "change user `%s' UID from `%d' to `%d'\n",
 			pwent->pw_name, pwent->pw_uid, user_newid));
@@ -430,7 +399,11 @@ new_spent(struct spwd *spent)
 			spent->sp_namp, spent->sp_expire, user_expire));
 		spent->sp_expire = user_expire;
 	}
-	spent->sp_pwdp = new_pw_passwd(spent->sp_pwdp, spent->sp_namp);
+	if (pflg) {
+		SYSLOG((LOG_INFO, "change user `%s' password\n",
+			spent->sp_namp));
+		spent->sp_pwdp = xstrdup(user_pass);
+	}
 }
 #endif	/* SHADOWPWD */
 
@@ -1032,9 +1005,9 @@ process_flags(int argc, char **argv)
 	}
 #endif
 #ifdef	SHADOWPWD
-#define FLAGS "A:u:og:G:d:s:c:mf:e:l:p:LU"
+#define FLAGS "A:u:og:G:d:s:c:mf:e:l:p:"
 #else
-#define FLAGS "A:u:og:G:d:s:c:ml:p:LU"
+#define FLAGS "A:u:og:G:d:s:c:ml:p:"
 #endif
 	while ((arg = getopt(argc, argv, FLAGS)) != EOF) {
 #undef FLAGS
@@ -1126,12 +1099,6 @@ process_flags(int argc, char **argv)
 
 			user_newname = optarg;
 			break;
-		case 'L':
-			if (Uflg || pflg)
-				usage ();
-
-			Lflg++;
-			break;
 		case 'm':
 			if (! dflg)
 				usage ();
@@ -1145,9 +1112,6 @@ process_flags(int argc, char **argv)
 			oflg++;
 			break;
 		case 'p':
-			if (Lflg || Uflg)
-				usage ();
-
 			user_pass = optarg;
 			pflg++;
 			break;
@@ -1164,12 +1128,6 @@ process_flags(int argc, char **argv)
 		case 'u':
 			user_newid = get_number(optarg);
 			uflg++;
-			break;
-		case 'U':
-			if (Lflg && pflg)
-				usage ();
-
-			Uflg++;
 			break;
 		default:
 			usage ();
@@ -1387,7 +1345,7 @@ usr_update(void)
 			pwent.pw_passwd = user_auth;
 	}
 #endif  /* AUTH_METHODS */
-	if (lflg || uflg || gflg || cflg || dflg || sflg || Aflg || pflg || Lflg || Uflg) {
+	if (lflg || uflg || gflg || cflg || dflg || sflg || Aflg || pflg) {
 		if (! pw_update (&pwent)) {
 			fprintf(stderr,
 				_("%s: error changing password entry\n"),
@@ -1419,7 +1377,7 @@ usr_update(void)
 #endif
 	}
 #ifdef	SHADOWPWD
-	if (spwd && (lflg || eflg || fflg || Aflg || pflg || Lflg || Uflg)) {
+	if (spwd && (lflg || eflg || fflg || Aflg || pflg)) {
 		if (! spw_update (&spent)) {
 			fprintf(stderr,
 				_("%s: error adding new shadow password entry\n"),
@@ -1636,7 +1594,7 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	OPENLOG(Prog);
+	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 #ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present();

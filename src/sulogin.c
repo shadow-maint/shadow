@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: sulogin.c,v 1.12 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: sulogin.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -113,7 +113,7 @@ main(int argc, char **argv)
 	textdomain(PACKAGE);
 
 #ifdef	USE_SYSLOG
-	OPENLOG("sulogin");
+	openlog ("sulogin", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 #endif
 	initenv();
 	if (argc > 1) {

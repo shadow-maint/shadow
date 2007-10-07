@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: dpasswd.c,v 1.12 2000/09/02 18:40:43 marekm Exp $")
+RCSID(PKG_VER "$Id: dpasswd.c,v 1.11 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -90,7 +90,7 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	OPENLOG(Prog);
+	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 	while ((opt = getopt (argc, argv, "a:d:")) != EOF) {
 		switch (opt) {

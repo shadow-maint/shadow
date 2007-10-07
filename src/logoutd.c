@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: logoutd.c,v 1.16 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: logoutd.c,v 1.15 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -198,7 +198,7 @@ main(int argc, char **argv)
 
 	Prog = Basename(argv[0]);
 
-	OPENLOG(Prog);
+	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 	/*
 	 * Scan the UTMP file once per minute looking for users that

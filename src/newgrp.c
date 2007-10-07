@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newgrp.c,v 1.16 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: newgrp.c,v 1.15 2000/08/26 18:27:18 marekm Exp $")
 
 #include <stdio.h>
 #include <errno.h>
@@ -114,7 +114,7 @@ main(int argc, char **argv)
 
 	Prog = Basename(argv[0]);
 	is_newgrp = (strcmp(Prog, "newgrp") == 0);
-	OPENLOG(is_newgrp ? "newgrp" : "sg");
+	openlog(is_newgrp ? "newgrp" : "sg", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 	gid = getgid();
 	argc--; argv++;
 

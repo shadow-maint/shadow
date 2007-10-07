@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: su.c,v 1.15 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: su.c,v 1.14 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -193,7 +193,7 @@ main(int argc, char **argv)
 
 	Prog = Basename(argv[0]);
 
-	OPENLOG("su");
+	openlog("su", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 	initenv();
 

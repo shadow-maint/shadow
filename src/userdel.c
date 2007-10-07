@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: userdel.c,v 1.17 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: userdel.c,v 1.16 2000/08/26 18:27:18 marekm Exp $")
 
 #include <sys/stat.h>
 #include <stdio.h>
@@ -690,7 +690,7 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	OPENLOG(Prog);
+	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 #ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present();

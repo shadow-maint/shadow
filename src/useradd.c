@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: useradd.c,v 1.18 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: useradd.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -750,7 +750,7 @@ new_pwent(struct passwd *pwent)
 	pwent->pw_comment = (char *) "";
 #endif
 #ifdef BSD_QUOTA
-	pwent->pw_quota = 0;
+	pwent->pw_quota = (char *) "";
 #endif
 	pwent->pw_dir = (char *) user_home;
 	pwent->pw_shell = (char *) user_shell;
@@ -1659,7 +1659,7 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	OPENLOG(Prog);
+	openlog(Prog, LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 #ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present();
@@ -1740,7 +1740,6 @@ main(int argc, char **argv)
 	}
 
 	close_files ();
-
 	exit(E_SUCCESS);
 	/*NOTREACHED*/
 }

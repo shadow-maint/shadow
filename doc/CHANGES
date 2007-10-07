@@ -1,25 +1,4 @@
-$Id: CHANGES,v 1.30 2000/09/02 18:40:42 marekm Exp $
-
-shadow-20000826 => shadow-20000902
-
-This is probably the last release from me.
-Tomasz Kloczko <kloczek@rudy.mif.pg.gda.pl> is the new maintainer.
-Good luck!
-
-(I'm still interested to know what is going on with this package,
-which is fairly important to many Linux distributions, so please
-Cc: marekm@linux.org.pl in any related discussions - just don't
-expect me to respond quickly...)
-
-Previous warning still applies - be careful!
-
-- applied some of the Red Hat patches (revised slightly), thanks to
-  Bernhard Rosenkraenzer <bero@redhat.de>: fix for truncated long
-  lines (>8K) in /etc/group, send SIGHUP to nscd (caching daemon
-  in glibc 2.1.x) after changing anything, add usermod -L and -U
-  options, remove LOG_CONS from openlog(), chage -d and -E handles
-  dates in yyyy-mm-dd format ('/' is not required)
-- various cleanups
+$Id: CHANGES,v 1.29 2000/08/26 18:27:09 marekm Exp $
 
 shadow-19990827 => shadow-20000826
 

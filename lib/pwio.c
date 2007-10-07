@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwio.c,v 1.11 2000/09/02 18:40:43 marekm Exp $")
+RCSID("$Id: pwio.c,v 1.10 2000/08/26 18:27:17 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -110,7 +110,8 @@ static struct commonio_db passwd_db = {
 	0,		/* changed */
 	0,		/* isopen */
 	0,		/* locked */
-	0		/* readonly */
+	0,		/* readonly */
+	1		/* use_lckpwdf */
 };
 
 int

@@ -1,8 +1,5 @@
 # shadow-utils.spec generated automatically from shadow-utils.spec.in
-# $Id: shadow-utils.spec.in,v 1.3 2000/09/02 18:40:43 marekm Exp $
-
-# FIXME - this is out of date, please update for current Red Hat
-
+# $Id: shadow-utils.spec.in,v 1.2 1999/06/07 16:40:45 marekm Exp $
 Summary: Shadow password file utilities for Linux
 Name: shadow-utils
 Version: @VERSION@

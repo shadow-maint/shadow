@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: login.c,v 1.18 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: login.c,v 1.17 2000/08/26 18:27:18 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -596,7 +596,7 @@ main(int argc, char **argv)
 		preauth_flag++;
 #endif
 
-	OPENLOG("login");
+	openlog("login", LOG_PID|LOG_CONS|LOG_NOWAIT, LOG_AUTH);
 
 	setup_tty();
 

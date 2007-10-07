@@ -4,7 +4,7 @@
 #ifdef SHADOWPWD
 
 #include "rcsid.h"
-RCSID("$Id: shadowio.c,v 1.12 2000/09/02 18:40:43 marekm Exp $")
+RCSID("$Id: shadowio.c,v 1.11 1998/01/29 23:22:32 marekm Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -88,7 +88,8 @@ static struct commonio_db shadow_db = {
 	0,		/* changed */
 	0,		/* isopen */
 	0,		/* locked */
-	0		/* readonly */
+	0,		/* readonly */
+	1		/* use_lckpwdf */
 };
 
 int

@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.16 2000/09/02 18:40:42 marekm Exp $")
+RCSID("$Id: commonio.c,v 1.15 2000/08/26 18:27:17 marekm Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -29,8 +29,9 @@ static int name_is_nis(const char *);
 static int write_all(const struct commonio_db *);
 static struct commonio_entry *find_entry_by_name(struct commonio_db *, const char *);
 
+#ifdef HAVE_LCKPWDF
 static int lock_count = 0;
-static int nscd_need_reload = 0;
+#endif
 
 static int
 check_link_count(const char *file)
@@ -235,7 +236,6 @@ commonio_lock_nowait(struct commonio_db *db)
 	snprintf(lock, sizeof lock, "%s.lock", db->filename);
 	if (do_lock_file(file, lock)) {
 		db->locked = 1;
-		lock_count++;
 		return 1;
 	}
 	return 0;
@@ -245,30 +245,31 @@ commonio_lock_nowait(struct commonio_db *db)
 int
 commonio_lock(struct commonio_db *db)
 {
+	int i;
+
 #ifdef HAVE_LCKPWDF
 	/*
 	 * only if the system libc has a real lckpwdf() - the one from
 	 * lockpw.c calls us and would cause infinite recursion!
 	 */
-
-	/*
-	 * Call lckpwdf() on the first lock.
-	 * If it succeeds, call *_lock() only once
-	 * (no retries, it should always succeed).
-	 */
-	if (lock_count == 0) {
-		if (lckpwdf() == -1)
+	if (db->use_lckpwdf) {
+		/*
+		 * Call lckpwdf() on the first lock.
+		 * If it succeeds, call *_lock() only once
+		 * (no retries, it should always succeed).
+		 */
+		if (lock_count == 0) {
+			if (lckpwdf() == -1)
+				return 0;  /* failure */
+		}
+		if (!commonio_lock_nowait(db)) {
+			ulckpwdf();
 			return 0;  /* failure */
-	}
-
-	if (commonio_lock_nowait(db))
+		}
+		lock_count++;
 		return 1;  /* success */
-
-	ulckpwdf();
-	return 0;  /* failure */
-#else
-	int i;
-
+	}
+#endif
 	/*
 	 * lckpwdf() not used - do it the old way.
 	 */
@@ -289,53 +290,6 @@ commonio_lock(struct commonio_db *db)
 			return 0;
 	}
 	return 0;  /* failure */
-#endif
-}
-
-#ifndef NSCD_PID_FILE
-#define NSCD_PID_FILE "/var/run/nscd.pid"
-#endif
-
-/*
-   reload_nscd() is called after updating all of the password files,
-   to tell the "nscd" caching daemon to clear its cache.
-   Very loosely based on a shadow-utils patch from Red Hat.
- */
-
-static void
-reload_nscd(void)
-{
-	FILE *pidfile;
-	int pid;
-
-	pidfile = fopen(NSCD_PID_FILE, "r");
-	if (pidfile) {
-		pid = 0;
-		fscanf(pidfile, "%d", &pid);
-		if (pid > 0)
-			kill(pid, SIGHUP);
-		fclose(pidfile);
-	}
-}
-
-
-static void
-dec_lock_count(void)
-{
-	if (lock_count > 0) {
-		lock_count--;
-		if (lock_count == 0) {
-			/* Tell nscd when lock count goes to zero,
-			   if any of the files were changed.  */
-			if (nscd_need_reload) {
-				reload_nscd();
-				nscd_need_reload = 0;
-			}
-#ifdef HAVE_LCKPWDF
-			ulckpwdf();
-#endif
-		}
-	}
 }
 
 
@@ -346,11 +300,8 @@ commonio_unlock(struct commonio_db *db)
 
 	if (db->isopen) {
 		db->readonly = 1;
-		if (!commonio_close(db)) {
-			if (db->locked)
-				dec_lock_count();
+		if (!commonio_close(db))
 			return 0;
-		}
 	}
   	if (db->locked) {
 		/*
@@ -360,7 +311,13 @@ commonio_unlock(struct commonio_db *db)
   		db->locked = 0;
 		snprintf(lock, sizeof lock, "%s.lock", db->filename);
 		unlink(lock);
-		dec_lock_count();
+#ifdef HAVE_LCKPWDF
+		if (db->use_lckpwdf && lock_count > 0) {
+			lock_count--;
+			if (lock_count == 0)
+				ulckpwdf();
+		}
+#endif
 		return 1;
 	}
 	return 0;
@@ -396,6 +353,7 @@ name_is_nis(const char *n)
 #endif
 
 #if KEEP_NIS_AT_END
+/* prototype */
 static void add_one_entry_nis(struct commonio_db *, struct commonio_entry *);
 
 static void
@@ -419,20 +377,16 @@ add_one_entry_nis(struct commonio_db *db, struct commonio_entry *newp)
 }
 #endif /* KEEP_NIS_AT_END */
 
-/* Initial buffer size, as well as increment if not sufficient
-   (for reading very long lines in group files).  */
-#define BUFLEN 4096
 
 int
 commonio_open(struct commonio_db *db, int mode)
 {
-	char *buf;
-	char *cp;
+	char	buf[8192];
+	char	*cp;
 	char *line;
 	struct commonio_entry *p;
 	void *eptr;
 	int flags = mode;
-	int buflen;
 
 	mode &= ~O_CREAT;
 
@@ -463,25 +417,12 @@ commonio_open(struct commonio_db *db, int mode)
 		return 0;
 	}
 
-	buflen = BUFLEN;
-	buf = (char *) malloc(buflen);
-	if (!buf)
-		goto cleanup;
-
-	while (db->ops->fgets(buf, buflen, db->fp)) {
-		while (!(cp = strrchr(buf, '\n')) && !feof(db->fp)) {
-			buflen += BUFLEN;
-			cp = (char *) realloc(buf, buflen);
-			if (!cp)
-				goto cleanup_buf;
-			buf = cp;
-			db->ops->fgets(buf + buflen - BUFLEN, BUFLEN, db->fp);
-		}
+	while (db->ops->fgets(buf, sizeof buf, db->fp)) {
 		if ((cp = strrchr(buf, '\n')))
 			*cp = '\0';
 
 		if (!(line = strdup(buf)))
-			goto cleanup_buf;
+			goto cleanup;
 
 		if (name_is_nis(line)) {
 			eptr = NULL;
@@ -503,7 +444,6 @@ commonio_open(struct commonio_db *db, int mode)
 	}
 
 	db->isopen = 1;
-	free(buf);
 	return 1;
 
 cleanup_entry:
@@ -511,8 +451,6 @@ cleanup_entry:
 		db->ops->free(eptr);
 cleanup_line:
 	free(line);
-cleanup_buf:
-	free(buf);
 cleanup:
 	free_linked_list(db);
 	fclose(db->fp);
@@ -625,8 +563,6 @@ commonio_close(struct commonio_db *db)
 
 	if (rename(buf, db->filename))
 		goto fail;
-
-	nscd_need_reload = 1;
 
 success:
 	free_linked_list(db);
