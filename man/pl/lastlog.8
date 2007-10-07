@@ -1,4 +1,4 @@
-.\" $Id: lastlog.8,v 1.10 2004/11/02 19:28:32 kloczek Exp $
+.\" $Id: lastlog.8,v 1.12 2004/12/12 20:36:50 kloczek Exp $
 .\" {PTM/WK/1999-09-18}
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
@@ -30,11 +30,10 @@
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
 .TH LASTLOG 8
 .SH NAZWA
-lastlog \- sprawd¼ plik ostatnich logowañ (lastlog)
+\fBlastlog\fR \- sprawd¼ plik ostatnich logowañ (lastlog)
 .SH SK£ADNIA
 .TP 8
-\fBlastlog\fR [(\fB-u\fR|\fB--user\fR) \fIlogin\fR]
-[(\fB-t\fR|\fB--time\fR) \fIdni\fR] [(\fB-h\fR|\fB--help\fR)]
+\fBlastlog\fR [\fBopcje\fR]
 .SH OPIS
 \fBlastlog\fR formatuje i wy¶wietla zawarto¶æ dziennika ostatnich logowañ
 zapisanych w pliku \fI/var/log/lastlog\fR. Wy¶wietlone zostan± \fBnazwa
@@ -42,16 +41,14 @@ u¿ytkownika\fR, \fBport\fR i \fBczas ostatniego logowania\fR. Domy¶lnie (bez
 flag) pozycje pliku wy¶wietlane s± w kolejno¶ci w jakiej s± w pliku
 \fB/etc/passwd\fR.
 .SH OPCJE
-.TP
-\fB-h\fR, \fB--help\fR wietl krótk± informacjê o tym jak u¿ywaæ
-programu i zakoñcz pracê.
-.TP
-\fB-t\fR, \fB--time\fR \fIdni\fR spowoduje, ¿e bêd± wy¶wietlone ostatnie
-logowania u¿ytkowników nowsze ni¿ sprzed zadanej liczby \fIdni\fR.
-.TP
-\fB-u\fR, \fB--user\fR \fIlogin-u¿ytkownika\fR spowoduje wy¶wietlenie tylko
-pozycji opisuj±cej ostatnie rozpoczêcie sesji tylko dla u¿ytkownika
-\fIlogin-u¿ytkownika\fR.
+Polecenie \fBlastlog\fR posiada nastêpuj±ce opcje:
+.IP "\fB-h\fR, \fB--help\fR"
+Wy¶wietla krótk± informacjê o tym jak u¿ywaæ program i koñczy pracê.
+.IP "\fB-t\fR, \fB--time\fR \fIDNI\fR"
+Wy¶wietla tylko ostatnie logowania u¿ytkowników nie starsze ni¿ zadana
+ilo¶æ \fIDNI\fR.
+.IP "\fB-u\fR, \fB--user\fR \fILOGIN\fR"
+Wy¶wietla tylko informacji o ostanim logowaniu u¿ytkownika \fILOGIN\fR.
 .TP
 Opcja \fB-t\fR przes³ania u¿ycie opcji \fB-u\fR.
 .PP

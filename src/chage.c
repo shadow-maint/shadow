@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.34 2004/10/11 13:42:49 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.35 2005/01/17 23:12:04 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -148,8 +148,8 @@ static int new_fields (void)
 	char buf[200];
 	char *cp;
 
-	printf (_
-		("Enter the new value, or press ENTER for the default\n\n"));
+	printf (_("Enter the new value, or press ENTER for the default\n"));
+	printf("\n");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
@@ -454,7 +454,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (!amroot && !lflg) {
-		fprintf (stderr, _("%s: permission denied\n"), Prog);
+		fprintf (stderr, _("%s: permission denied.\n"), Prog);
 		closelog ();
 		exit (1);
 	}
@@ -514,7 +514,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 	if (!(pw = pw_locate (argv[optind]))) {
-		fprintf (stderr, _("%s: unknown user: %s\n"), Prog,
+		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 			 argv[optind]);
 		cleanup (1);
 		closelog ();
@@ -584,7 +584,7 @@ int main (int argc, char **argv)
 
 	if (lflg) {
 		if (!amroot && (ruid != pwent.pw_uid)) {
-			fprintf (stderr, _("%s: permission denied\n"),
+			fprintf (stderr, _("%s: permission denied.\n"),
 				 Prog);
 			closelog ();
 			exit (1);

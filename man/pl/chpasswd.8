@@ -1,4 +1,4 @@
-.\" $Id: chpasswd.8,v 1.5 2002/03/09 11:16:18 ankry Exp $
+.\" $Id: chpasswd.8,v 1.7 2004/12/13 01:24:14 kloczek Exp $
 .\" {PTM/WK/1999-09-16}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -28,29 +28,37 @@
 .\" SUCH DAMAGE.
 .TH CHPASSWD 8
 .SH NAZWA
-chpasswd - wsadowa aktualizacja pliku hase³
+\fBchpasswd\fR - wsadowa aktualizacja pliku hase³
 .SH SK£ADNIA
 \fBchpasswd\fR [\fI-e\fR]
 .SH OPIS
-\fBchpasswd\fR odczytuje ze standardowego wej¶cia plik zawieraj±cy pary:
-nazwa u¿ytkownika i has³o. Odczytan± informacje wykorzystuje do aktualizacji
-grupy istniej±cych u¿ytkowników.
-Bez prze³±cznika -e, has³a traktowane s± jako podane jawnie. Z prze³±cznikiem
--e has³a powinny byæ dostarczone w postaci zakodowanej (encrypted).
-Ka¿dy wiersz ma postaæ
+\fBchpasswd\fR odczytuje pary danych (u¿ytkownik i has³o) ze standardowego
+wej¶cia. Odczytane informacje wykorzystywane s± do aktualizacji danych o
+grupie istniej±cych u¿ytkowników.
+Ka¿dy wiersz przekazywanych danych ma postaæ:
 .sp 1
 	  \fInazwa_U¿ytkownika\fR:\fIhas³o\fR
 .sp 1
-Dany u¿ytkownik musi istnieæ.
-Je¿eli bêdzie to konieczne, podane has³o zostanie zakodowane a wiek has³a,
-je¶li wystêpuje, zaktualizowany.
+Domy¶lnie dostarczane has³a musz± byæ w postaci jawnej. Podczas kodowania
+hase³ u¿ywany jest domy¶lniealgorytm DES. W trakcie zmiany has³a aktualizowany
+jest tak¿e wiek has³a.
 .PP
 Polecenie to przeznaczone jest do u¿ytku w du¿ych systemach, gdzie aktualizuje
 siê wiele kont naraz.
+.SH OPCJE
+Polecenie \fBchpasswd\fR posiada nastêpuj±ce opcje:
+.IP "\fB-e\fR, \fB--encrypted\fR"
+Dostarczone na standardowe wej¶cie has³a s± traktowane jako ju¿ zakodowane.
+.IP "\fB-h\fR, \fB--help\fR"
+Wy¶wietla krótk± informacjê o tym jak u¿ywaæ program i zakoñczy pracê.
+.IP "\fB-m\fR, \fB--md5\fR"
+Je¿eli dpostarczane has³a s± w postaci jawnej u¿yj kodowania MD5 zamiast
+domy¶lnego DES.
 .SH PRZESTROGI
 .\" Po u¿yciu \fBchpasswd\fR musi zostaæ wykonane polecenie \fImkpasswd\fR,
 .\" aktualizuj±ce pliki DBM hase³ (DBM password files).
-Plik ¼ród³owy, je¶li zawiera niezakodowane has³a, musi byæ chroniony.
+Pamiêtaj ¿eby zabezpieczyæ przed odczytem plik przekazywany na standardowe
+wej¶cie polecenia \fBchpasswd\fR o ile zaiwiera on has³a w postaci jawnej.
 .\" Polecenie to mo¿e byæ zaniechane na rzecz polecenia newusers(8).
 .SH ZOBACZ TAK¯E
 .\" mkpasswd(8), passwd(1), useradd(1)

@@ -30,16 +30,16 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.12 2003/04/25 22:32:36 kloczek Exp $")
+RCSID (PKG_VER "$Id: faillog.c,v 1.17 2005/01/02 06:36:48 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <pwd.h>
 #include <time.h>
+#include <getopt.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "faillog.h"
-static char *Prog;		/* program name */
 static FILE *fail;		/* failure file stream */
 static uid_t user;		/* one single user, specified on command line */
 static int days;		/* number of days to consider for print command */
@@ -47,153 +47,27 @@ static time_t seconds;		/* that number of days in seconds */
 
 static int
  aflg = 0,			/* set if all users are to be printed always */
- uflg = 0,			/* set if user is a valid user id */
- tflg = 0;			/* print is restricted to most recent days */
+    uflg = 0,			/* set if user is a valid user id */
+    tflg = 0;			/* print is restricted to most recent days */
 
 static struct stat statbuf;	/* fstat buffer for file size */
 
-#if !defined(UNISTD_H) && !defined(STDLIB_H)
-extern char *optarg;
-#endif
-
 #define	NOW	(time((time_t *) 0))
-
-/* local function prototypes */
-static void usage (void);
-static void print (void);
-static void print_one (const struct faillog *, uid_t);
-static void reset (void);
-static int reset_one (uid_t);
-static void setmax (int);
-static void setmax_one (uid_t, int);
-static void set_locktime (long);
-static void set_locktime_one (uid_t, long);
-
 
 static void usage (void)
 {
-	fprintf (stderr,
-		 _
-		 ("Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"),
-		 Prog);
+	fprintf (stderr, _("Usage: faillog [options]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -a, --all			display faillog records for all users\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -l, --lock-time SEC		after failed login lock accout to SEC seconds\n"
+			   "  -m, --maximum MAX		set maiximum failed login counters to MAX\n"
+			   "  -r, --reset			reset the counters of login failures\n"
+			   "  -u, --user LOGIN		display faillog record or maintains failure counters\n"
+			   "				and limits (if used with -r, -m or -l options) only\n"
+			   "				for user with LOGIN\n"));
 	exit (1);
-}
-
-int main (int argc, char **argv)
-{
-	int c, anyflag = 0;
-	struct passwd *pwent;
-
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	/* try to open for read/write, if that fails - read only */
-
-	fail = fopen (FAILLOG_FILE, "r+");
-	if (!fail)
-		fail = fopen (FAILLOG_FILE, "r");
-	if (!fail) {
-		perror (FAILLOG_FILE);
-		exit (1);
-	}
-	while ((c = getopt (argc, argv, "al:m:pru:t:")) != EOF) {
-		switch (c) {
-		case 'a':
-			aflg++;
-			if (uflg)
-				usage ();
-			break;
-		case 'l':
-			set_locktime ((long) atoi (optarg));
-			anyflag++;
-			break;
-		case 'm':
-			setmax (atoi (optarg));
-			anyflag++;
-			break;
-		case 'p':
-			print ();
-			anyflag++;
-			break;
-		case 'r':
-			reset ();
-			anyflag++;
-			break;
-		case 'u':
-			if (aflg)
-				usage ();
-
-			pwent = getpwnam (optarg);
-			if (!pwent) {
-				fprintf (stderr, _("Unknown User: %s\n"),
-					 optarg);
-				exit (1);
-			}
-			uflg++;
-			user = pwent->pw_uid;
-			break;
-		case 't':
-			days = atoi (optarg);
-			seconds = days * DAY;
-			tflg++;
-			break;
-		default:
-			usage ();
-		}
-	}
-	/* no flags implies -a -p (= print information for all users)  */
-	if (!(anyflag || aflg || tflg || uflg))
-		aflg++;
-	/* (-a or -t days or -u user) and no other flags implies -p
-	   (= print information for selected users) */
-	if (!anyflag && (aflg || tflg || uflg))
-		print ();
-	fclose (fail);
-	return 0;
- /*NOTREACHED*/}
-
-static void print (void)
-{
-	uid_t uid;
-	off_t offset;
-	struct faillog faillog;
-
-	if (uflg) {
-		offset = user * sizeof faillog;
-		if (fstat (fileno (fail), &statbuf)) {
-			perror (FAILLOG_FILE);
-			return;
-		}
-		if (offset >= statbuf.st_size)
-			return;
-
-		fseek (fail, (off_t) user * sizeof faillog, SEEK_SET);
-		if (fread ((char *) &faillog, sizeof faillog, 1, fail) ==
-		    1)
-			print_one (&faillog, user);
-		else
-			perror (FAILLOG_FILE);
-	} else {
-		for (uid = 0;
-		     fread ((char *) &faillog, sizeof faillog, 1,
-			    fail) == 1; uid++) {
-
-			if (aflg == 0 && faillog.fail_cnt == 0)
-				continue;
-
-			if (aflg == 0 && tflg &&
-			    NOW - faillog.fail_time > seconds)
-				continue;
-
-			if (aflg && faillog.fail_time == 0)
-				continue;
-
-			print_one (&faillog, uid);
-		}
-	}
 }
 
 static void print_one (const struct faillog *fl, uid_t uid)
@@ -242,16 +116,6 @@ static void print_one (const struct faillog *fl, uid_t uid)
 	}
 }
 
-static void reset (void)
-{
-	uid_t uid;
-
-	if (uflg)
-		reset_one (user);
-	else
-		for (uid = 0; reset_one (uid); uid++);
-}
-
 static int reset_one (uid_t uid)
 {
 	off_t offset;
@@ -265,7 +129,7 @@ static int reset_one (uid_t uid)
 	if (offset >= statbuf.st_size)
 		return 0;
 
-	if (fseek (fail, offset, SEEK_SET) != 0) {
+	if (fseeko (fail, offset, SEEK_SET) != 0) {
 		perror (FAILLOG_FILE);
 		return 0;
 	}
@@ -280,7 +144,7 @@ static int reset_one (uid_t uid)
 
 	faillog.fail_cnt = 0;
 
-	if (fseek (fail, offset, SEEK_SET) == 0
+	if (fseeko (fail, offset, SEEK_SET) == 0
 	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1) {
 		fflush (fail);
 		return 1;
@@ -288,6 +152,82 @@ static int reset_one (uid_t uid)
 		perror (FAILLOG_FILE);
 	}
 	return 0;
+}
+
+static void reset (void)
+{
+	uid_t uid;
+
+	if (uflg)
+		reset_one (user);
+	else
+		for (uid = 0; reset_one (uid); uid++);
+}
+
+static void print (void)
+{
+	uid_t uid;
+	off_t offset;
+	struct faillog faillog;
+
+	if (uflg) {
+		offset = user * sizeof faillog;
+		if (fstat (fileno (fail), &statbuf)) {
+			perror (FAILLOG_FILE);
+			return;
+		}
+		if (offset >= statbuf.st_size)
+			return;
+
+		fseeko (fail, (off_t) user * sizeof faillog, SEEK_SET);
+		if (fread ((char *) &faillog, sizeof faillog, 1, fail) ==
+		    1)
+			print_one (&faillog, user);
+		else
+			perror (FAILLOG_FILE);
+	} else {
+		for (uid = 0;
+		     fread ((char *) &faillog, sizeof faillog, 1,
+			    fail) == 1; uid++) {
+
+			if (aflg == 0 && faillog.fail_cnt == 0)
+				continue;
+
+			if (aflg == 0 && tflg &&
+			    NOW - faillog.fail_time > seconds)
+				continue;
+
+			if (aflg && faillog.fail_time == 0)
+				continue;
+
+			print_one (&faillog, uid);
+		}
+	}
+}
+
+static void setmax_one (uid_t uid, int max)
+{
+	off_t offset;
+	struct faillog faillog;
+
+	offset = uid * sizeof faillog;
+
+	if (fseeko (fail, offset, SEEK_SET) != 0) {
+		perror (FAILLOG_FILE);
+		return;
+	}
+	if (fread ((char *) &faillog, sizeof faillog, 1, fail) != 1) {
+		if (!feof (fail))
+			perror (FAILLOG_FILE);
+		memzero (&faillog, sizeof faillog);
+	}
+	faillog.fail_max = max;
+
+	if (fseeko (fail, offset, SEEK_SET) == 0
+	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)
+		fflush (fail);
+	else
+		perror (FAILLOG_FILE);
 }
 
 static void setmax (int max)
@@ -303,14 +243,14 @@ static void setmax (int max)
 	}
 }
 
-static void setmax_one (uid_t uid, int max)
+static void set_locktime_one (uid_t uid, long locktime)
 {
 	off_t offset;
 	struct faillog faillog;
 
 	offset = uid * sizeof faillog;
 
-	if (fseek (fail, offset, SEEK_SET) != 0) {
+	if (fseeko (fail, offset, SEEK_SET) != 0) {
 		perror (FAILLOG_FILE);
 		return;
 	}
@@ -319,9 +259,9 @@ static void setmax_one (uid_t uid, int max)
 			perror (FAILLOG_FILE);
 		memzero (&faillog, sizeof faillog);
 	}
-	faillog.fail_max = max;
+	faillog.fail_locktime = locktime;
 
-	if (fseek (fail, offset, SEEK_SET) == 0
+	if (fseeko (fail, offset, SEEK_SET) == 0
 	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)
 		fflush (fail);
 	else
@@ -345,27 +285,94 @@ static void set_locktime (long locktime)
 	}
 }
 
-static void set_locktime_one (uid_t uid, long locktime)
+int main (int argc, char **argv)
 {
-	off_t offset;
-	struct faillog faillog;
+	int anyflag = 0;
+	struct passwd *pwent;
 
-	offset = uid * sizeof faillog;
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 
-	if (fseek (fail, offset, SEEK_SET) != 0) {
+	/* try to open for read/write, if that fails - read only */
+
+	fail = fopen (FAILLOG_FILE, "r+");
+	if (!fail)
+		fail = fopen (FAILLOG_FILE, "r");
+	if (!fail) {
 		perror (FAILLOG_FILE);
-		return;
+		exit (1);
 	}
-	if (fread ((char *) &faillog, sizeof faillog, 1, fail) != 1) {
-		if (!feof (fail))
-			perror (FAILLOG_FILE);
-		memzero (&faillog, sizeof faillog);
-	}
-	faillog.fail_locktime = locktime;
 
-	if (fseek (fail, offset, SEEK_SET) == 0
-	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)
-		fflush (fail);
-	else
-		perror (FAILLOG_FILE);
+	{
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"help", no_argument, NULL, 'h'},
+			{"lock-secs", no_argument, NULL, 'l'},
+			{"maximum", no_argument, NULL, 'm'},
+			{"reset", no_argument, NULL, 'r'},
+			{"user", no_argument, NULL, 'u'},
+			{"", no_argument, NULL, 't'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "ahl:m:rt:u:",
+				     long_options, &option_index)) != -1) {
+		switch (c) {
+			case 'a':
+				aflg++;
+				if (uflg)
+					usage ();
+				break;
+			case 'l':
+				set_locktime ((long) atoi (optarg));
+				anyflag++;
+				break;
+			case 'm':
+				setmax (atoi (optarg));
+				anyflag++;
+				break;
+			case 'p':
+				print ();
+				anyflag++;
+				break;
+			case 'r':
+				reset ();
+				anyflag++;
+				break;
+			case 'u':
+				if (aflg)
+					usage ();
+
+				pwent = getpwnam (optarg);
+				if (!pwent) {
+					fprintf (stderr, _("Unknown User: %s\n"),
+						 optarg);
+					exit (1);
+				}
+				uflg++;
+				user = pwent->pw_uid;
+				break;
+			case 't':
+				days = atoi (optarg);
+				seconds = days * DAY;
+				tflg++;
+				break;
+			default:
+				usage ();
+			}
+		}
+	}
+
+	/* no flags implies -a -p (= print information for all users)  */
+	if (!(anyflag || aflg || tflg || uflg))
+		aflg++;
+	/* (-a or -t days or -u user) and no other flags implies -p
+	   (= print information for selected users) */
+	if (!anyflag && (aflg || tflg || uflg))
+		print ();
+	fclose (fail);
+	return 0;
 }

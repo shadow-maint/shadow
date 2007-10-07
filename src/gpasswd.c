@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.21 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: gpasswd.c,v 1.22 2005/01/17 23:12:04 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -154,7 +154,7 @@ static int check_list (const char *users)
 
 static void failure (void)
 {
-	fprintf (stderr, _("Permission denied.\n"));
+	fprintf (stderr, _("%s: permission denied.\n"), Prog);
 	exit (1);
  /*NOTREACHED*/}
 

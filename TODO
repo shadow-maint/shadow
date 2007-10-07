@@ -18,7 +18,7 @@ ALL:
   - add handle create user mail spool in maildir format.
 
 - add handle -n switch in groups and id command for allow query is
-  group/user with specyfied id/gid exist - this will be very useable
+  group/user with specified id/gid exist - this will be very useable
   on automation in packages for quoery/check is group/user exist in system
   or not,
 

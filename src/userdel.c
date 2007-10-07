@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.31 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.32 2005/01/17 23:12:05 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -591,7 +591,7 @@ static void remove_mailbox (void)
 	if (i == 0) {
 		fprintf (stderr,
 			 _
-			 ("%s: warning: %s not owned by %s, not removing\n"),
+			 ("%s: %s not owned by %s, not removing\n"),
 			 Prog, mailfile, user_name);
 		return;
 	} else if (i == -1)

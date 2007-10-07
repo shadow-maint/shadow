@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.19 2004/06/03 00:27:19 kloczek Exp $")
+RCSID("$Id: getdef.c,v 1.20 2005/01/20 12:43:05 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -129,8 +129,6 @@ static struct itemdef def_table[] = {
 
 static char def_fname[] = LOGINDEFS;	/* login config defs file	*/
 static int def_loaded = 0;		/* are defs already loaded?	*/
-
-extern long strtol();
 
 /* local function prototypes */
 static struct itemdef *def_find(const char *);

@@ -1,13 +1,13 @@
 # Finnish translation for shadow.
-# Copyright (C) 2004 Free Software Foundation, Inc.
-# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004.
+# Copyright (C) 2004-2005 Free Software Foundation, Inc.
+# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow\n"
+"Project-Id-Version: shadow 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-09 04:44+0100\n"
-"PO-Revision-Date: 2004-01-30 11:33+0200\n"
+"POT-Creation-Date: 2005-01-26 07:53+0100\n"
+"PO-Revision-Date: 2005-01-19 13:11+0200\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "passwd: %s\n"
 
 #: libmisc/pam_pass.c:50
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: salasanan päivitys onnistui\n"
 
 #: libmisc/setupenv.c:208
 #, c-format
@@ -168,12 +168,12 @@ msgstr "Ei voi vaihtaa juurihakemistoksi \"%s\"\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) epäonnistui\n"
 
-#: lib/getdef.c:275
+#: lib/getdef.c:273
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Asetustiedoille ei voi varata tilaa.\n"
 
-#: lib/getdef.c:329
+#: lib/getdef.c:327
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "asetusvirhe - tuntematon kohta \"%s\" (kerro ylläpidolle)\n"
@@ -191,11 +191,6 @@ msgstr "Käyttäjän %s salasana: "
 msgid "(Echo on) "
 msgstr "(Kaiku päällä) "
 
-#: lib/strerror.c:20
-#, c-format
-msgid "Unknown error %d"
-msgstr "Tuntematon virhe %d"
-
 #: src/chage.c:118
 #, c-format
 msgid ""
@@ -205,14 +200,10 @@ msgstr ""
 "Käyttö: chage [-l] [-m väh_päivää] [-M kork_päivää] [-W varoitus]\n"
 "              [-I poiskäytöstä] [-E vanhenee] [-d viim_päivä] käyttäjä\n"
 
-#: src/chage.c:152
+#: src/chage.c:151 src/chfn.c:140 src/chsh.c:90
 #, c-format
-msgid ""
-"Enter the new value, or press ENTER for the default\n"
-"\n"
-msgstr ""
-"Syötä uusi arvo tai paina ENTER jättääksesi oletuksen\n"
-"\n"
+msgid "Enter the new value, or press ENTER for the default\n"
+msgstr "Syötä uusi arvo tai paina ENTER jättääksesi oletuksen\n"
 
 #: src/chage.c:155
 msgid "Minimum Password Age"
@@ -239,71 +230,74 @@ msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Tunnuksen vanhenemispäiväys (VVVV-KK-PP)"
 
 #: src/chage.c:238
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Viimeisin salasanan vaihto (VVVV-KK-PP)"
+msgstr "Edellinen salasanan vaihto\t\t\t\t\t: "
 
 #: src/chage.c:240 src/chage.c:254 src/chage.c:270 src/chage.c:283
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
-msgstr "Ei koskaan\n"
+msgstr "ei koskaan\n"
 
 #: src/chage.c:251
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Salasana vanhenee:\t"
+msgstr "Salasana vanhenee\t\t\t\t\t: "
 
 #: src/chage.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Salasana pois käytöstä:\t"
+msgstr "Salasana pois käytöstä\t\t\t\t\t:"
 
 #: src/chage.c:281
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Tunnus vanhenee:\t"
+msgstr "Tunnus vanhenee\t\t\t\t\t:"
 
 #: src/chage.c:297
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Salasanan vaihtamisten välillä vähintään päiviä\t\t: %ld\n"
 
 #: src/chage.c:298
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Salasanan vaihtamisten välillä korkeintaan päiviä\t\t: %ld\n"
 
 #: src/chage.c:299
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "Montako päivää varoitetaan ennen salasanan vanhenemista\t\t: %ld\n"
 
 #: src/chage.c:444
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: älä sisällytä \"l\" muiden lippujen kanssa\n"
 
-#: src/chage.c:457 src/chage.c:587 src/login.c:503
+#: src/chage.c:457 src/chage.c:587 src/chfn.c:272 src/chfn.c:282
+#: src/chfn.c:292 src/chfn.c:302 src/chfn.c:312 src/chfn.c:380
+#: src/gpasswd.c:157 src/login.c:503 src/passwd.c:853 src/passwd.c:890
 #, c-format
-msgid "%s: permission denied\n"
-msgstr "%s: lupa evätty\n"
+msgid "%s: permission denied.\n"
+msgstr "%s: Lupa evätty.\n"
 
-#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:142 src/groupadd.c:534
+#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:177 src/groupadd.c:534
 #: src/groupdel.c:330 src/groupmod.c:523 src/newusers.c:365 src/useradd.c:1672
 #: src/userdel.c:674 src/usermod.c:1425
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM-todennus epäonnistui\n"
 
-#: src/chage.c:509 src/chpasswd.c:159
+#: src/chage.c:509 src/chpasswd.c:194
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: salasanatiedostoa ei voi avata\n"
 
-#: src/chage.c:517
+#: src/chage.c:517 src/chfn.c:333 src/chsh.c:185 src/gpasswd.c:146
+#: src/gpasswd.c:230 src/groups.c:65 src/passwd.c:903
 #, c-format
-msgid "%s: unknown user: %s\n"
-msgstr "%s: tuntematon käyttäjä: %s\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s: Tuntematon käyttäjä %s\n"
 
 #: src/chage.c:535
 #, c-format
@@ -351,7 +345,7 @@ msgstr "%s: varjosalasanatiedostoa ei voi uudelleenkirjoittaa\n"
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: salasanatiedostoa ei voi uudelleenkirjoittaa\n"
 
-#: src/chage.c:760 src/chpasswd.c:336 src/groupadd.c:595 src/groupdel.c:413
+#: src/chage.c:760 src/chpasswd.c:379 src/groupadd.c:595 src/groupdel.c:413
 #: src/groupmod.c:607 src/newusers.c:609 src/useradd.c:1787 src/userdel.c:817
 #: src/usermod.c:1498
 #, c-format
@@ -372,11 +366,6 @@ msgstr ""
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr "Käyttö: %s [-f koko_nimi] [-r huonenro] [-w työpuh] [-h kotipuh]\n"
 
-#: src/chfn.c:140
-#, c-format
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Syötä uusi arvo tai paina ENTER jättääksesi oletuksen\n"
-
 #: src/chfn.c:143
 msgid "Full Name"
 msgstr "Koko nimi"
@@ -386,47 +375,21 @@ msgstr "Koko nimi"
 msgid "\tFull Name: %s\n"
 msgstr "\tKoko nimi: %s\n"
 
-#: src/chfn.c:148
+#: src/chfn.c:148 src/chfn.c:150
 msgid "Room Number"
 msgstr "Huonenumero"
 
-#: src/chfn.c:150
-#, c-format
-msgid "\tRoom Number: %s\n"
-msgstr "\tHuonenumero: %s\n"
-
-#: src/chfn.c:153
+#: src/chfn.c:153 src/chfn.c:155
 msgid "Work Phone"
 msgstr "Työpuhelin"
 
-#: src/chfn.c:155
-#, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "\tTyöpuhelin: %s\n"
-
-#: src/chfn.c:158
+#: src/chfn.c:158 src/chfn.c:160
 msgid "Home Phone"
 msgstr "Kotipuhelin"
-
-#: src/chfn.c:160
-#, c-format
-msgid "\tHome Phone: %s\n"
-msgstr "\tKotipuhelin: %s\n"
 
 #: src/chfn.c:163
 msgid "Other"
 msgstr "Muu"
-
-#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
-#: src/chfn.c:380 src/passwd.c:853
-#, c-format
-msgid "%s: Permission denied.\n"
-msgstr "%s: Lupa evätty.\n"
-
-#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
-#, c-format
-msgid "%s: Unknown user %s\n"
-msgstr "%s: Tuntematon käyttäjä %s\n"
 
 #: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
@@ -513,58 +476,72 @@ msgstr "Salasanatiedoston muutoksia ei voi tallentaa.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Salasanatiedoston lukitusta ei voi avata.\n"
 
-#: src/chpasswd.c:67
+#: src/chpasswd.c:69
 #, c-format
-msgid "Usage: %s [-e]\n"
-msgstr "Käyttö: %s [-e]\n"
+msgid ""
+"Usage: chpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Käyttö: chpasswd [valitsimet]\n"
+"\n"
+"Valitsimet:\n"
+"  -e, --encrypted       Annetut salasanat ovat salakirjoitettuja\n"
+"  -h, --help            Näytä tämä ohje ja lopeta\n"
+"  -m, --md5             Käytä MD5:tä eikä DES:iä kun annetut salasanat\n"
+"                        eivät ole salakirjoitettuja\n"
 
-#: src/chpasswd.c:154
+#: src/chpasswd.c:189
 #, c-format
 msgid "%s: can't lock password file\n"
 msgstr "%s: salasanatiedostoa ei voi lukita\n"
 
-#: src/chpasswd.c:168 src/pwconv.c:95
+#: src/chpasswd.c:203 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: varjotiedostoa ei voi lukita\n"
 
-#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/chpasswd.c:209 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
 #: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
 msgstr "%s: varjotiedostoa ei voi avata\n"
 
-#: src/chpasswd.c:197 src/newusers.c:441
+#: src/chpasswd.c:232 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: rivi %d: rivi on liian pitkä\n"
 
-#: src/chpasswd.c:217
+#: src/chpasswd.c:252
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: rivi %d: uusi salasana puuttuu\n"
 
-#: src/chpasswd.c:234
+#: src/chpasswd.c:277
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: rivi %d: tuntematon käyttäjä %s\n"
 
-#: src/chpasswd.c:280
+#: src/chpasswd.c:323
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: rivi %d: salasanatietuetta ei voi päivittää\n"
 
-#: src/chpasswd.c:297 src/newusers.c:569
+#: src/chpasswd.c:340 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: virhe havaittu, muutokset ohitetaan\n"
 
-#: src/chpasswd.c:309
+#: src/chpasswd.c:352
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: virhe päivitettäessä varjotiedostoa\n"
 
-#: src/chpasswd.c:318
+#: src/chpasswd.c:361
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: virhe päivitettäessä salasanatiedostoa\n"
@@ -573,12 +550,6 @@ msgstr "%s: virhe päivitettäessä salasanatiedostoa\n"
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Käyttö: %s [-s kuori] [nimi]\n"
-
-# Yhtenäistetään ainakin suomennosta...
-#: src/chsh.c:90
-#, c-format
-msgid "Enter the new value, or press return for the default\n"
-msgstr "Syötä uusi arvo tai paina ENTER jättääksesi oletuksen\n"
 
 #: src/chsh.c:91
 msgid "Login Shell"
@@ -619,36 +590,60 @@ msgstr "%s: VAROITUS!  Oikeuksina täytyy olla aseta-UID pääkäyttäjäksi!\n"
 msgid "%s: unknown user\n"
 msgstr "%s: tuntematon käyttäjä\n"
 
-#: src/faillog.c:77
+#: src/faillog.c:59
 #, c-format
-msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgid ""
+"Usage: faillog [options]\n"
+"\n"
+"Options:\n"
+"  -a, --all\t\t\tdisplay faillog records for all users\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --lock-time SEC\t\tafter failed login lock accout to SEC seconds\n"
+"  -m, --maximum MAX\t\tset maiximum failed login counters to MAX\n"
+"  -r, --reset\t\t\treset the counters of login failures\n"
+"  -u, --user LOGIN\t\tdisplay faillog record or maintains failure counters\n"
+"\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
+"\t\t\t\tfor user with LOGIN\n"
 msgstr ""
-"Käyttö: %s [-a|-u käyttäjä] [-m kork] [-r] [-t päivää] [-l lukkkosekuntia]\n"
+"Käyttö: faillog [valitsimet]\n"
+"\n"
+"Valitsimet:\n"
+"  -a, --all                     Näytä faillog-tietueet kaikille käyttäjille\n"
+"  -h, --help                    Näytä tämä ohje ja lopeta\n"
+"  -l, --lock-time SEK           Epäonnistuneen kirjautumisen jälkeen "
+"lukitse\n"
+"                                tunnus SEK sekunniksi\n"
+"  -m, --maximum MAX             Aseta sallittujen kirjautumisyritysten\n"
+"                                laskureiksi MAX\n"
+"  -r, --reset                   Nollaa kirjautumisyrityslaskurit\n"
+"  -u, --user TUNNUS             Näytä faillog-tietue käyttäjälle TUNNUS tai\n"
+"                                muuta kirjautumisyrityslaskureita (kun\n"
+"                                käytetään -r, -m tai -l -valitsimilla)\n"
 
-#: src/faillog.c:131 src/lastlog.c:96
-#, c-format
-msgid "Unknown User: %s\n"
-msgstr "Tuntematon käyttäjä: %s\n"
-
-#: src/faillog.c:212
+#: src/faillog.c:86
 #, c-format
 msgid "Username   Failures  Maximum  Latest\n"
 msgstr "Käyttäjä   Yritystä  Maksimi  Viimeisin\n"
 
-#: src/faillog.c:229
+#: src/faillog.c:103
 #, c-format
 msgid "  %s on %s"
 msgstr "  %s päätteellä %s"
 
-#: src/faillog.c:233
+#: src/faillog.c:107
 #, c-format
 msgid " [%lds left]"
 msgstr " [%lds jäljellä]"
 
-#: src/faillog.c:237
+#: src/faillog.c:111
 #, c-format
 msgid " [%lds lock]"
 msgstr " [%lds lukittu]"
+
+#: src/faillog.c:351 src/lastlog.c:191
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "Tuntematon käyttäjä: %s\n"
 
 #: src/gpasswd.c:78
 #, c-format
@@ -674,16 +669,6 @@ msgstr "       %s [-A käyttäjä,...] [-M käyttäjä,...] ryhmä\n"
 #, c-format
 msgid "       %s [-M user,...] group\n"
 msgstr "       %s [-M käyttäjä,...] ryhmä\n"
-
-#: src/gpasswd.c:146 src/gpasswd.c:230
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: tuntematon käyttäjä %s\n"
-
-#: src/gpasswd.c:157
-#, c-format
-msgid "Permission denied.\n"
-msgstr "Lupa evätty.\n"
 
 #: src/gpasswd.c:243
 #, c-format
@@ -921,51 +906,6 @@ msgstr "%s: ryhmä %s on NIS-ryhmä\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: isäntä %s on NIS-palvelin\n"
 
-#: src/groupmems.c:95
-#, c-format
-msgid "Member already exists\n"
-msgstr "Jäsen on jo olemassa\n"
-
-#: src/groupmems.c:125
-#, c-format
-msgid "Member to remove could not be found\n"
-msgstr "Poistettavaa jäsentä ei löydy\n"
-
-#: src/groupmems.c:158
-#, c-format
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr "Käyttö: groupmems -a käyttäjä | -d käyttäjä | -D | -l [-g ryhmänimi]\n"
-
-#: src/groupmems.c:201
-#, c-format
-msgid "Only root can add members to different groups\n"
-msgstr "Vain pääkäyttäjä voi lisätä jäseniä muihin ryhmiin\n"
-
-#: src/groupmems.c:206
-#, c-format
-msgid "Group access is required\n"
-msgstr "Ryhmäoikeudet tarvitaan\n"
-
-#: src/groupmems.c:210
-#, c-format
-msgid "Not primary owner of current group\n"
-msgstr "Ei ensisijainen nykyisen ryhmän omistaja\n"
-
-#: src/groupmems.c:215
-#, c-format
-msgid "Unable to lock group file\n"
-msgstr "Ryhmätiedostoa ei voi lukita\n"
-
-#: src/groupmems.c:220
-#, c-format
-msgid "Unable to open group file\n"
-msgstr "Ryhmätiedostoa ei voi avata\n"
-
-#: src/groupmems.c:240
-#, c-format
-msgid "Cannot close group file\n"
-msgstr "Ryhmätiedostoa ei voi sulkea\n"
-
 #: src/groupmod.c:104
 #, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -990,11 +930,6 @@ msgstr "%s: %u ei ole ainutkertainen gid\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s ei ole ainutkertainen nimi\n"
-
-#: src/groups.c:59
-#, c-format
-msgid "unknown user %s\n"
-msgstr "tuntematon käyttäjä %s\n"
 
 #: src/grpck.c:87
 #, c-format
@@ -1170,22 +1105,34 @@ msgstr "Käyttö: id\n"
 msgid " groups="
 msgstr " ryhmät="
 
-#: src/lastlog.c:110 src/lastlog.c:116
+#: src/lastlog.c:68
 #, c-format
-msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
-msgstr "Käyttö: %s [{-u|--login} tunnus] [{-t|--time} päivää] [{-h|--help}]\n"
+msgid ""
+"Usage: lastlog [options]\n"
+"\n"
+"Options:\n"
+"  -u, --login LOGIN\tprint lastlog record for user with specyfied LOGIN\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+msgstr ""
+"Käyttö: lastlog [valitsimet]\n"
+"\n"
+"Valitsimet:\n"
+"  -u, --login TUNNUS    Tulosta lastlog-tietue käyttäjälle TUNNUS\n"
+"  -h, --help            Näytä tämä ohje ja lopeta\n"
+"  -t, --time PÄIVÄÄ     Tulosta vain PÄIVÄÄ tuoreemmat lastlog-tietueet\n"
 
-#: src/lastlog.c:181
+#: src/lastlog.c:94
 #, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Käyttäjä         Portti   Mistä            Viimeksi\n"
 
-#: src/lastlog.c:183
+#: src/lastlog.c:96
 #, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Käyttäjä                Portti   Viimeksi\n"
 
-#: src/lastlog.c:198
+#: src/lastlog.c:111
 msgid "**Never logged in**"
 msgstr "**Ei koskaan kirjautunut sisään**"
 
@@ -1197,12 +1144,12 @@ msgstr "Käyttö: %s [-p] [nimi]\n"
 #: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "        %s [-p] [-h isäntä] [-f nimi]\n"
+msgstr "       %s [-p] [-h isäntä] [-f nimi]\n"
 
 #: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "        %s [-p] -r isäntä\n"
+msgstr "       %s [-p] -r isäntä\n"
 
 #: src/login.c:259
 #, c-format
@@ -1305,51 +1252,40 @@ msgstr "%s: DBM-tiedostoja %s ei voi avata\n"
 
 #: src/mkpasswd.c:286
 #, c-format
-msgid "%s: the beginning with "
-msgstr "%s: rivi, jonka alussa on "
+msgid "%s: the line beginning with %.16s... is too long\n"
+msgstr "%s: rivi, joka alkaa %.16s... on liian pitkä\n"
 
-#: src/mkpasswd.c:287
-#, c-format
-msgid " is too long\n"
-msgstr ", on liian pitkä\n"
-
-#: src/mkpasswd.c:314
+#: src/mkpasswd.c:313
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
 msgstr "%s: virhe jäsennettäessä riviä \"%s\"\n"
 
-#: src/mkpasswd.c:322 src/mkpasswd.c:327 src/mkpasswd.c:332 src/mkpasswd.c:337
+#: src/mkpasswd.c:321 src/mkpasswd.c:326 src/mkpasswd.c:331 src/mkpasswd.c:336
 #, c-format
-msgid "adding record for name "
-msgstr "lisätään tietue nimelle "
+msgid "adding record for name %s\n"
+msgstr "lisätään tietue nimelle %s\n"
 
-#: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
-#: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
+#: src/mkpasswd.c:342 src/mkpasswd.c:348 src/mkpasswd.c:353 src/mkpasswd.c:358
 #, c-format
-msgid "\n"
-msgstr "\n"
+msgid "%s: error adding record for %s\n"
+msgstr "%s: virhe lisättäessä tietuetta nimelle %s\n"
 
-#: src/mkpasswd.c:343 src/mkpasswd.c:349 src/mkpasswd.c:354 src/mkpasswd.c:359
-#, c-format
-msgid "%s: error adding record for "
-msgstr "%s: virhe lisättäessä tietuetta nimelle "
-
-#: src/mkpasswd.c:377
+#: src/mkpasswd.c:376
 #, c-format
 msgid "added %d entries, longest was %d\n"
 msgstr "lisätty %d tietuetta, pisin oli %d\n"
 
-#: src/mkpasswd.c:391
+#: src/mkpasswd.c:390
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
 msgstr "Käyttö: %s [-vf] [-p|g|sp|sg] tiedosto\n"
 
-#: src/mkpasswd.c:394
+#: src/mkpasswd.c:393
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
 msgstr "Käyttö: %s [-vf] [-p|g|sp] tiedosto\n"
 
-#: src/mkpasswd.c:397
+#: src/mkpasswd.c:396
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
 msgstr "Käyttö: %s [-vf] [-p|g] tiedosto\n"
@@ -1456,7 +1392,7 @@ msgstr "Käyttö: %s [-f|-s] [nimi]\n"
 #: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "        %s [-x kork] [-n väh] [-w varoitus] [-i poiskäyt] nimi\n"
+msgstr "       %s [-x kork] [-n väh] [-w varoitus] [-i poiskäyt] nimi\n"
 
 #: src/passwd.c:161
 #, c-format
@@ -1528,11 +1464,6 @@ msgstr "%s: Komento %s ei voi suorittaa"
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: tietolähdettä %s ei tueta\n"
-
-#: src/passwd.c:890
-#, c-format
-msgid "%s: Permission denied\n"
-msgstr "%s: Lupa evätty\n"
 
 #: src/passwd.c:914
 #, c-format
@@ -1792,22 +1723,22 @@ msgstr "Käyttö: useradd [-u uid [-o]] [-g ryhmä] [-G ryhmä,...] \n"
 #: src/useradd.c:724
 #, c-format
 msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "                [-d koti] [-s kuori] [-c komento] [-m [-k malli]]\n"
+msgstr "               [-d koti] [-s kuori] [-c komento] [-m [-k malli]]\n"
 
 #: src/useradd.c:726 src/useradd.c:732
 #, c-format
 msgid "               [-f inactive] [-e expire]\n"
-msgstr "                [-f poiskäytöstä] [-e vanhenee]\n"
+msgstr "               [-f poiskäytöstä] [-e vanhenee]\n"
 
 #: src/useradd.c:728
 #, c-format
 msgid "               [-p passwd] name\n"
-msgstr "                [-p passwd] nimi\n"
+msgstr "               [-p salansana] nimi\n"
 
 #: src/useradd.c:730
 #, c-format
 msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-msgstr "        useradd -D [-g ryhmä] [-b perus] [-s kuori]\n"
+msgstr "       useradd -D [-g ryhmä] [-b perus] [-s kuori]\n"
 
 #: src/useradd.c:817 src/usermod.c:461
 #, c-format
@@ -1944,11 +1875,13 @@ msgstr "%s: hakemistoa %s ei voi luoda\n"
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
+"Ryhmää nimeltä \"mail\" ei ole olemassa, luodaan postilaatikko oikeuksilla "
+"0600.\n"
 
 #: src/useradd.c:1590
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: käyttäjän %s tietuetta ei voi päivittää\n"
+msgstr "Käyttäjälle %s ei voi luoda postilaatikkoa.\n"
 
 #: src/useradd.c:1714 src/usermod.c:981
 #, c-format
@@ -2023,10 +1956,10 @@ msgstr "%s: virhe poistettaessa varjosalasana-dbm-tietuetta\n"
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: käyttäjä %s on nyt sisäänkirjautuneena\n"
 
-#: src/userdel.c:594
+#: src/userdel.c:594 src/userdel.c:759
 #, c-format
-msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: varoitus: tiedoston %s omistaja ei ole %s, ei poisteta\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: tiedoston %s omistaja ei ole %s, ei poisteta\n"
 
 #: src/userdel.c:600
 #, c-format
@@ -2042,11 +1975,6 @@ msgstr "%s: käyttäjää %s ei ole olemassa\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: käyttäjä %s on NIS-käyttäjä\n"
-
-#: src/userdel.c:759
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: tiedoston %s omistaja ei ole %s, ei poisteta\n"
 
 #: src/userdel.c:782
 #, c-format

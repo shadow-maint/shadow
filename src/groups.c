@@ -30,12 +30,18 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groups.c,v 1.8 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: groups.c,v 1.9 2005/01/17 23:12:04 kloczek Exp $")
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
 #include "prototypes.h"
 #include "defines.h"
+
+/*
+ * Global variables
+ */
+static char *Prog;
+
 /* local function prototypes */
 static void print_groups (const char *);
 
@@ -56,7 +62,7 @@ static void print_groups (const char *member)
 	setgrent ();
 
 	if ((pwd = getpwnam (member)) == 0) {
-		fprintf (stderr, _("unknown user %s\n"), member);
+		fprintf (stderr, _("%s: unknown user %s\n"), Prog, member);
 		exit (1);
 	}
 	while ((grp = getgrent ())) {
@@ -105,6 +111,12 @@ int main (int argc, char **argv)
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+
+	/*
+	 * Get the program name so that error messages can use it.
+	 */
+
+	Prog = Basename (argv[0]);
 
 	if (argc == 1) {
 

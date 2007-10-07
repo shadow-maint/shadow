@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.7 2004/06/03 00:27:19 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.8 2004/12/20 02:19:30 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -63,7 +63,7 @@ create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 		return -1;
 
 	c = 0;
-	if (fseek(fp, 0, SEEK_SET) == 0)
+	if (fseeko(fp, 0, SEEK_SET) == 0)
 		while ((c = getc(fp)) != EOF) {
 			if (putc(c, bkfp) == EOF)
 				break;

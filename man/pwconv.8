@@ -1,4 +1,4 @@
-.\"$Id: pwconv.8,v 1.11 2003/05/01 18:17:39 kloczek Exp $
+.\"$Id: pwconv.8,v 1.12 2004/12/11 20:05:01 kloczek Exp $
 .TH PWCONV 8 "26 Sep 1997"
 .SH NAME
 pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and groups.
@@ -17,7 +17,7 @@ pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and
 \fBpwunconv\fR creates \fIpasswd\fR from \fIpasswd\fR and \fIshadow\fR and then
 removes \fIshadow\fR.
 .PP
-\fBgrpconv\fR creates \fIgshadow/fR from \fIgroup/fR and an optionally existing
+\fBgrpconv\fR creates \fIgshadow\fR from \fIgroup\fR and an optionally existing
 \fIgshadow\fR.
 .PP
 \fBgrpunconv\fR creates \fIgroup\fR from \fIgroup\fR and \fIgshadow\fR and then
@@ -29,7 +29,7 @@ files: \fI/etc/passwd\fR, \fI/etc/group\fR, \fI/etc/shadow\fR, and
 .PP
 .PP 
 Each program acquires the necessary locks before conversion. fBpwconv\fR and
-\fBgrpconv\fR are similiar. First, entries in the shadowed file which don't
+\fBgrpconv\fR are similar. First, entries in the shadowed file which don't
 exist in the main file are removed. Then, shadowed entries which don't have
 `x' as the password in the main file are updated. Any missing shadowed
 entries are added. Finally, passwords in the main file are replaced with

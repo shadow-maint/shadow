@@ -1,8 +1,32 @@
-$Id: NEWS,v 1.85 2004/11/09 03:57:36 kloczek Exp $
+$Id: NEWS,v 1.104 2005/01/21 20:55:46 kloczek Exp $
+
+shadow-4.0.6 -> shadow-4.0.7
+
+- updated translations: da, es, fi, it, nl, pl, pt,
+- added zh_TW translation (from Debian resources),
+- remove unused now files in lib/ directory,
+- switch faillog to use getopt_long(),
+- added de vigr(8), vipw(8) man pages (from Debian resources),
+- added ro, sq translations (from Debian resources),
+- fixed large file support in lastlog and faillog:
+-- added AC_SYS_LARGEFILE macro to autoconf,
+-- use fseeko() instead fseek() and remove casting file ofsets to unsigned
+   long.
+- lastlog:
+-- rewrited source code using the same style as in chpasswd.c,
+-- open lastlog file after finish parse comman line optiomns
+   (now --help otput can be displayd for users without lastlog
+   file read permission),
+-- cleanups in lastlog(8) man page using the same style as in
+   chpasswd(8).
+- chpasswd:
+-- switch chpasswd to use getopt_long() and adds a --md5 option
+   (by Ian Gulliver <ian@penguinhosting.net>),
+-- rewrited chpasswd(8) man page.  
 
 shadow-4.0.5 -> shadow-4.0.6
 
-- su: fix adding of pam_env env variables to enviroment
+- su: fixed adding of pam_env env variables to enviroment
   (Martin Schlemmer <azarah@nosferatu.za.org>),
 - autoconf: fixed filling MAIL_SPOOL_DIR and MAIL_SPOOL_FILE variables
   which was allways empty (Gregorio Guidi <g.guidi@sns.it>),
@@ -133,7 +157,7 @@ shadow-4.0.1 => shadow-4.0.2
 
 - resolve many fuzzy translations also all this which may cause problems on
   displaing long uid/gid,
-- allow use "$" on ending in cereated by useradd usermname accouts for allow
+- allow use "$" on ending in cereated by useradd usermname accounts for allow
   create machine acounts for samba (thanks to Jerome Borsboom
   <borsboom@tch.fgg.eur.nl> for point this problem in 4.0.1),
 - fix small but ugly bug in configure.in in libpam_mics library detection.
@@ -164,7 +188,7 @@ shadow-4.0.0 => shadow-4.0.1
   shadow-4.0.0-owl-pam-auth.diff
     Merge part with reorder initialize PAM and checkin is chage is runed by
     root or not - now chage can be runed from non-root account for checking
-    by user own accout information (if PAM enabled).
+    by user own account information (if PAM enabled).
 - fixes for handle/print correctly 32bit uid/gid (Thorsten Kukuk <kukuk@suse.de>),
 - implemented functions for better reloading the nscd cache (per NSS map)
   (Thorsten Kukuk <kukuk@suse.de>),

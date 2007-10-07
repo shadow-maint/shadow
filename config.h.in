@@ -118,6 +118,9 @@
 /* Define to 1 if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
 
+/* Define to 1 if you have the `fseeko' function. */
+#undef HAVE_FSEEKO
+
 /* Define to 1 if you have the `fsync' function. */
 #undef HAVE_FSYNC
 
@@ -377,6 +380,12 @@
 
 /* Build shadow with SELinux support */
 #undef WITH_SELINUX
+
+/* Number of bits in a file offset, on hosts where this is settable. */
+#undef _FILE_OFFSET_BITS
+
+/* Define for large files, on AIX-style hosts. */
+#undef _LARGE_FILES
 
 /* Define like PROTOTYPES; this can be used by system headers. */
 #undef __PROTOTYPES

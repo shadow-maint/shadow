@@ -1,4 +1,4 @@
-.\"$Id: lastlog.8,v 1.16 2004/11/02 19:28:31 kloczek Exp $
+.\"$Id: lastlog.8,v 1.19 2004/12/12 20:31:57 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,23 +31,22 @@
 lastlog \- examine lastlog file
 .SH SYNOPSIS
 .TP 8
-\fBlastlog\fR [(\fB-u\fR|\fB--user\fR) \fIlogin\fR]
-[(\fB-t\fR|\fB--time\fR) \fIdays\fR] [(\fB-h\fR|\fB--help\fR) ]
+\fBlastlog\fR [\fBoptions\fR]
 .SH DESCRIPTION
 .PP
 \fBlastlog\fR formats and prints the contents of the last login log
-\fI/var/log/lastlog\fR file . The \fBlogin-name\fR, \fBport\fR, and \fBlast
+\fI/var/log/lastlog\fR file. The \fBlogin-name\fR, \fBport\fR, and \fBlast
 login time\fR will be printed. The default (no flags) causes lastlog entries
 to be printed, sorted by their order in \fB/etc/passwd\fR.
 .SH OPTIONS
 .TP
-\fB-h\fR, \fB--help\fR print a one-line help message and exit.
-.TP
-\fB-t\fR, \fB--time\fR \fIdays\fR will cause only the lastlogins more recent
-\than fIdays\fR to be printed
-.TP
-\fB-u\fR, \fB--user\fR \fIlogin-name\fR will cause the lastlog record for
-\fIlogin-name\fR only to be printed
+The options which apply to the \fBlastlog\fR command are:
+.IP "\fB-h\fR, \fB--help\fR"
+Print help message and exit.
+.IP "\fB-t\fR, \fB--time\fR \fIDAYS\fR"
+Print the lastlog records more recent than \fIDAYS\fR.
+.IP "\fB-u\fR, \fB--user\fR \fILOGIN\fR"
+Print the lastlog record for user with specified \fILOGIN\fR only.
 .TP
 The \fB-t\fR flag overrides the use of \fB-u\fR.
 .PP
@@ -61,5 +60,5 @@ no output to the screen (i.e. if mmdf=800 and last uid=170, program will
 appear to hang as it processes uid 171-799).
 .SH AUTHORS
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.BR
+.br
 Phillip Street

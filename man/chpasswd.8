@@ -1,4 +1,4 @@
-.\"$Id: chpasswd.8,v 1.11 2003/05/01 18:17:39 kloczek Exp $
+.\"$Id: chpasswd.8,v 1.17 2004/12/12 20:49:52 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,26 +27,32 @@
 .\" SUCH DAMAGE.
 .TH CHPASSWD 8
 .SH NAME
-\fBchpasswd\fR - update password file in batch
+chpasswd - update passwords in batch mode
 .SH SYNOPSIS
-\fBchpasswd\fR [\fB-e\fR]
+\fBchpasswd\fR [\fBoptions\fR]
 .SH DESCRIPTION
-\fBchpasswd\fR reads a file of user name and password pairs from standard
-input and uses this information to update a group of existing users. Without
-the \fB-e\fR switch, the passwords are expected to be cleartext. With the
-\fB-e\fR switch, the passwords are expected to be in encrypted form. Each
+\fBchpasswd\fR reads a list of user name and password pairs from standard
+input and uses this information to update a group of existing users. Each
 line is of the format:
 .sp 1
 	  \fIuser_name\fR:\fIpassword\fR
 .sp 1
-The named user must exist. The supplied password will be encrypted as
-necessary, and the password age updated, if present.
-
+By default the supplied password must be in clear-text. Default encription
+algoritm is DES. Also the password age will be updated, if present.
 .PP
 This command is intended to be used in a large system environment where many
 accounts are created at a single time.
+.SH OPTIONS
+The options which apply to the \fBchpasswd\fR command are:
+.IP "\fB-e\fR, \fB--encrypted\fR"
+Supplied passwords are in encrypted form.
+.IP "\fB-h\fR, \fB--help\fR"
+Display help message and exit.
+.IP "\fB-m\fR, \fB--md5\fR"
+Use MD5 encryption instead DES when the supplied passwords are not encrypted.
 .SH CAVEATS
-The input file must be protected if it contains unencrypted passwords.
+Remember keep protected for reading by others fille passed to standard input
+\fBchpasswd\fR command if it contains unencrypted passwords.
 .SH SEE ALSO
 .BR passwd (1),
 .BR newusers (8),

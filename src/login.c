@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.37 2004/08/04 10:33:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.38 2005/01/17 23:12:04 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -500,7 +500,7 @@ int main (int argc, char **argv)
 	 */
 
 	if ((rflg || fflg || hflg) && !amroot) {
-		fprintf (stderr, _("%s: permission denied\n"), Prog);
+		fprintf (stderr, _("%s: permission denied.\n"), Prog);
 		exit (1);
 	}
 

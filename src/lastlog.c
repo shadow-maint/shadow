@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: lastlog.c,v 1.13 2003/12/17 12:52:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: lastlog.c,v 1.15 2004/12/20 02:10:56 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -43,6 +43,7 @@ RCSID (PKG_VER "$Id: lastlog.c,v 1.13 2003/12/17 12:52:25 kloczek Exp $")
 #else
 #include "lastlog_.h"
 #endif
+#include <getopt.h>
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
  */
@@ -60,106 +61,17 @@ static struct lastlog lastlog;	/* scratch structure to play with ... */
 static struct stat statbuf;	/* fstat buffer for file size */
 static struct passwd *pwent;
 
-#include <getopt.h>
-static struct option const longopts[] = {
-	{"user", required_argument, 0, 'u'},
-	{"time", required_argument, 0, 't'},
-	{"help", no_argument, 0, 'h'},
-	{0, 0, 0, 0}
-};
-
 #define	NOW	(time ((time_t *) 0))
 
-/* local function prototypes */
-static void print (void);
-static void print_one (const struct passwd *);
-
-int main (int argc, char **argv)
+static void usage (void)
 {
-	int c;
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	if ((lastlogfile = fopen (LASTLOG_FILE, "r")) == (FILE *) 0) {
-		perror (LASTLOG_FILE);
-		exit (1);
-	}
-	while ((c =
-		getopt_long (argc, argv, "u:t:h", longopts, NULL)) != -1) {
-		switch (c) {
-		case 'u':
-			pwent = getpwnam (optarg);
-			if (!pwent) {
-				fprintf (stderr,
-					 _("Unknown User: %s\n"), optarg);
-				exit (1);
-			}
-			uflg++;
-			user = pwent->pw_uid;
-			break;
-		case 't':
-			days = atoi (optarg);
-			seconds = days * DAY;
-			tflg++;
-			break;
-		case 'h':
-			fprintf (stdout,
-				 _
-				 ("Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"),
-				 argv[0]);
-			exit (0);
-		default:
-			fprintf (stdout,
-				 _
-				 ("Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"),
-				 argv[0]);
-			exit (1);
-		}
-	}
-	print ();
-	fclose (lastlogfile);
-	exit (0);
- /*NOTREACHED*/}
-
-static void print (void)
-{
-	off_t offset;
-
-	if (uflg) {
-		offset = (unsigned long) user *sizeof lastlog;
-
-		if (fstat (fileno (lastlogfile), &statbuf)) {
-			perror (LASTLOG_FILE);
-			return;
-		}
-		if (offset >= statbuf.st_size)
-			return;
-
-		fseek (lastlogfile, offset, SEEK_SET);
-		if (fread ((char *) &lastlog, sizeof lastlog, 1,
-			   lastlogfile) == 1)
-			print_one (pwent);
-		else
-			perror (LASTLOG_FILE);
-	} else {
-		setpwent ();
-		while ((pwent = getpwent ())) {
-			user = pwent->pw_uid;
-			offset = (unsigned long) user *sizeof lastlog;
-
-			fseek (lastlogfile, offset, SEEK_SET);
-			if (fread ((char *) &lastlog, sizeof lastlog, 1,
-				   lastlogfile) != 1)
-				continue;
-
-			if (tflg && NOW - lastlog.ll_time > seconds)
-				continue;
-
-			print_one (pwent);
-		}
-	}
+	fprintf (stdout, _("Usage: lastlog [options]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -u, --login LOGIN	print lastlog record for user with specyfied LOGIN\n"
+			   "  -h, --help		display this help message and exit\n"
+			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"));
+	exit (1);
 }
 
 static void print_one (const struct passwd *pw)
@@ -168,6 +80,7 @@ static void print_one (const struct passwd *pw)
 	char *cp;
 	struct tm *tm;
 	time_t ll_time;
+
 #ifdef HAVE_STRFTIME
 	char ptime[80];
 #endif
@@ -203,4 +116,98 @@ static void print_one (const struct passwd *pw)
 #else
 	printf ("%-16s\t%-8.8s %s\n", pw->pw_name, lastlog.ll_line, cp);
 #endif
+}
+
+static void print (void)
+{
+	off_t offset;
+
+	if (uflg) {
+		offset = user * sizeof lastlog;
+
+		if (fstat (fileno (lastlogfile), &statbuf)) {
+			perror (LASTLOG_FILE);
+			return;
+		}
+		if (offset >= statbuf.st_size)
+			return;
+
+		fseeko (lastlogfile, offset, SEEK_SET);
+		if (fread ((char *) &lastlog, sizeof lastlog, 1,
+			   lastlogfile) == 1)
+			print_one (pwent);
+		else
+			perror (LASTLOG_FILE);
+	} else {
+		setpwent ();
+		while ((pwent = getpwent ())) {
+			user = pwent->pw_uid;
+			offset = user * sizeof lastlog;
+
+			fseeko (lastlogfile, offset, SEEK_SET);
+			if (fread ((char *) &lastlog, sizeof lastlog, 1,
+				   lastlogfile) != 1)
+				continue;
+
+			if (tflg && NOW - lastlog.ll_time > seconds)
+				continue;
+
+			print_one (pwent);
+		}
+	}
+}
+
+int main (int argc, char **argv)
+{
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	{
+		int c;
+		static struct option const longopts[] = {
+			{"help", no_argument, NULL, 'h'},
+			{"time", required_argument, NULL, 't'},
+			{"user", required_argument, NULL, 'u'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "ht:u:", longopts,
+				     NULL)) != -1) {
+			switch (c) {
+			case 'h':
+				usage ();
+				break;
+			case 't':
+				days = atoi (optarg);
+				seconds = days * DAY;
+				tflg++;
+				break;
+			case 'u':
+				pwent = getpwnam (optarg);
+				if (!pwent) {
+					fprintf (stderr,
+						 _("Unknown User: %s\n"),
+						 optarg);
+					exit (1);
+				}
+				uflg++;
+				user = pwent->pw_uid;
+				break;
+			default:
+				usage ();
+				break;
+			}
+		}
+	}
+
+	if ((lastlogfile = fopen (LASTLOG_FILE, "r")) == (FILE *) 0) {
+		perror (LASTLOG_FILE);
+		exit (1);
+	}
+
+	print ();
+	fclose (lastlogfile);
+	exit (0);
 }

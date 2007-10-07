@@ -32,12 +32,12 @@
 #ifdef RLOGIN
 
 #include "rcsid.h"
-RCSID ("$Id: rlogin.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: rlogin.c,v 1.7 2005/01/20 12:47:20 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
-extern int ruserok ();
+#include <unistd.h>
 
 static struct {
 	int spd_name;

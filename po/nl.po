@@ -2,12 +2,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow\n"
+"Project-Id-Version: shadow 4.0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-09 04:44+0100\n"
-"PO-Revision-Date: 2004-07-26 16:39+0200\n"
+"POT-Creation-Date: 2005-01-26 07:53+0100\n"
+"PO-Revision-Date: 2005-01-18 17:55+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@linux.be>\n"
-"Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"Language-Team: debian-l10n-dutch <debian-l10n-dutch@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,17 +78,18 @@ msgid "You may not change $%s\n"
 msgstr "U mag $%s niet veranderen\n"
 
 #: libmisc/failure.c:230
-#, fuzzy, c-format
+#, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
-msgstr "%d mislukking sinds de vorige aanmelding. De laatste was %s op %s.\n"
+msgstr ""
+"%d %s sinds u de laatste keer aangemeld heeft. De laatste %s was op %s.\n"
 
 #: libmisc/failure.c:232
 msgid "failures"
-msgstr ""
+msgstr "mislukkingen"
 
 #: libmisc/failure.c:232
 msgid "failure"
-msgstr ""
+msgstr "mislukking"
 
 #: libmisc/limits.c:396
 #, c-format
@@ -135,7 +136,7 @@ msgstr "passwd: %s\n"
 
 #: libmisc/pam_pass.c:50
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: wachtwoord is mes succes aangepast\n"
 
 #: libmisc/setupenv.c:208
 #, c-format
@@ -166,12 +167,12 @@ msgstr "Kan de hoofdmap niet veranderen naar '%s'\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) is mislukt\n"
 
-#: lib/getdef.c:275
+#: lib/getdef.c:273
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Kon geen ruimte toewijzen voor de configuratie-informatie.\n"
 
-#: lib/getdef.c:329
+#: lib/getdef.c:327
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
@@ -190,11 +191,6 @@ msgstr "Wachtwoord van %s:"
 msgid "(Echo on) "
 msgstr "(Echo aan) "
 
-#: lib/strerror.c:20
-#, fuzzy, c-format
-msgid "Unknown error %d"
-msgstr "Onbekende gebruiker %s\n"
-
 #: src/chage.c:118
 #, c-format
 msgid ""
@@ -204,14 +200,11 @@ msgstr ""
 "Gebruik: chage [-l] [-m min_dagen] [-M max_dagen] [-W waarschuwing]\n"
 "               [-I niet actief] [-E vervalt] [-d laatste_dag] gebruiker\n"
 
-#: src/chage.c:152
+#: src/chage.c:151 src/chfn.c:140 src/chsh.c:90
 #, c-format
-msgid ""
-"Enter the new value, or press ENTER for the default\n"
-"\n"
+msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
-"Voer de nieuwe waarde in, of druk 'enter' voor de standaardwaarde\n"
-"\n"
+"U dient de nieuwe waarde in te voeren, druk 'enter' voor de standaardwaarde\n"
 
 #: src/chage.c:155
 msgid "Minimum Password Age"
@@ -238,71 +231,76 @@ msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Vervaldatum van account (JJJJ-MM-DD)"
 
 #: src/chage.c:238
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Laatste wachtwoordverandering (JJJJ-MM-DD)"
+msgstr "Laatste wachtwoord-verandering\t\t\t\t\t: "
 
 #: src/chage.c:240 src/chage.c:254 src/chage.c:270 src/chage.c:283
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
-msgstr "Nooit\n"
+msgstr "nooit\n"
 
 #: src/chage.c:251
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Wachtwoord vervalt:\t"
+msgstr "Wachtwoord vervalt\t\t\t\t\t:"
 
 #: src/chage.c:267
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Wachtwoord niet actief:\t"
+msgstr "Wachtwoord niet actief\t\t\t\t\t:"
 
 #: src/chage.c:281
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Account vervalt:\t"
+msgstr "Account vervalt\t\t\t\t\t\t:"
 
 #: src/chage.c:297
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Minimaal aantal dagen tussen wachtwoord-wijzigingen\t\t: %ld\n"
 
 #: src/chage.c:298
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Maximaal aantal pogingen is overschreven (%d)\n"
+msgstr "Maximale aantal dagen tussen wachtwoordwijzigingen\t\t: %ld\n"
 
 #: src/chage.c:299
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr ""
+"Aantal dagen voor gewaarschuwd wordt dat het wachtwoord dreigt te vervallen"
+"\t: %ld\n"
 
 #: src/chage.c:444
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: gebruik 'l' niet samen met andere vlaggen\n"
 
-#: src/chage.c:457 src/chage.c:587 src/login.c:503
+#: src/chage.c:457 src/chage.c:587 src/chfn.c:272 src/chfn.c:282
+#: src/chfn.c:292 src/chfn.c:302 src/chfn.c:312 src/chfn.c:380
+#: src/gpasswd.c:157 src/login.c:503 src/passwd.c:853 src/passwd.c:890
 #, c-format
-msgid "%s: permission denied\n"
-msgstr "%s: toegang geweigerd\n"
+msgid "%s: permission denied.\n"
+msgstr "%s: toegang geweigerd.\n"
 
-#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:142 src/groupadd.c:534
+#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:177 src/groupadd.c:534
 #: src/groupdel.c:330 src/groupmod.c:523 src/newusers.c:365 src/useradd.c:1672
 #: src/userdel.c:674 src/usermod.c:1425
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM-authenticatie is mislukt\n"
 
-#: src/chage.c:509 src/chpasswd.c:159
+#: src/chage.c:509 src/chpasswd.c:194
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: kan wachtwoordbestand niet openen\n"
 
-#: src/chage.c:517
+#: src/chage.c:517 src/chfn.c:333 src/chsh.c:185 src/gpasswd.c:146
+#: src/gpasswd.c:230 src/groups.c:65 src/passwd.c:903
 #, c-format
-msgid "%s: unknown user: %s\n"
-msgstr "%s: onbekende gebruiker: %s\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s: onbekende gebruiker %s\n"
 
 #: src/chage.c:535
 #, c-format
@@ -350,7 +348,7 @@ msgstr "%s: kan het schaduwwachtwoordbestand niet herschrijven\n"
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: kan het wachtwoordbestand niet herschrijven\n"
 
-#: src/chage.c:760 src/chpasswd.c:336 src/groupadd.c:595 src/groupdel.c:413
+#: src/chage.c:760 src/chpasswd.c:379 src/groupadd.c:595 src/groupdel.c:413
 #: src/groupmod.c:607 src/newusers.c:609 src/useradd.c:1787 src/userdel.c:817
 #: src/usermod.c:1498
 #, c-format
@@ -372,12 +370,6 @@ msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
 "Gebruik: %s [-f volledige_naam] [-r kamer_nr] [-w tel_werk] [-h tel_thuis]\n"
 
-#: src/chfn.c:140
-#, c-format
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"U dient de nieuwe waarde in te voeren, druk 'enter' voor de standaardwaarde\n"
-
 #: src/chfn.c:143
 msgid "Full Name"
 msgstr "Volledig naam"
@@ -387,47 +379,21 @@ msgstr "Volledig naam"
 msgid "\tFull Name: %s\n"
 msgstr "\tVolledige naam: %s\n"
 
-#: src/chfn.c:148
+#: src/chfn.c:148 src/chfn.c:150
 msgid "Room Number"
 msgstr "Kamernummer"
 
-#: src/chfn.c:150
-#, c-format
-msgid "\tRoom Number: %s\n"
-msgstr "\tKamernummer: %s\n"
-
-#: src/chfn.c:153
+#: src/chfn.c:153 src/chfn.c:155
 msgid "Work Phone"
 msgstr "Telefoon werk"
 
-#: src/chfn.c:155
-#, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "\tTelefoon werk: %s\n"
-
-#: src/chfn.c:158
+#: src/chfn.c:158 src/chfn.c:160
 msgid "Home Phone"
 msgstr "Telefoon thuis"
-
-#: src/chfn.c:160
-#, c-format
-msgid "\tHome Phone: %s\n"
-msgstr "\tTelefoon thuis: %s\n"
 
 #: src/chfn.c:163
 msgid "Other"
 msgstr "Varia"
-
-#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
-#: src/chfn.c:380 src/passwd.c:853
-#, c-format
-msgid "%s: Permission denied.\n"
-msgstr "%s: Toegang geweigerd.\n"
-
-#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
-#, c-format
-msgid "%s: Unknown user %s\n"
-msgstr "%s: Onbekende gebruiker %s\n"
 
 #: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
@@ -516,58 +482,72 @@ msgstr "Kan de aanpassingen aan het wachtwoordbestand niet vastleggen.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Kan het wachtwoordbestand niet ontgrendelen.\n"
 
-#: src/chpasswd.c:67
+#: src/chpasswd.c:69
 #, c-format
-msgid "Usage: %s [-e]\n"
-msgstr "Gebruik: %s [-e]\n"
+msgid ""
+"Usage: chpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
+"Gebruik: chpasswd [opties]\n"
+"\n"
+"Opties:\n"
+"  -e, --encrypted\tvoorziene wachtwoorden zijn versleutelt\n"
+"  -h, --help\t\ttoon dit bericht en sluit af\n"
+"  -m, --md5\t\tmaak gebruik van MD5-versleuteling i.p.v. DES wanneer\n"
+"\t\t\topgegeven wachtwoorden niet versleutelt zijn\n"
 
-#: src/chpasswd.c:154
+#: src/chpasswd.c:189
 #, c-format
 msgid "%s: can't lock password file\n"
 msgstr "%s: kan wachtwoordbestand niet vergrendelen\n"
 
-#: src/chpasswd.c:168 src/pwconv.c:95
+#: src/chpasswd.c:203 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: kan het 'schadow'-bestand niet vergrendelen\n"
 
-#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/chpasswd.c:209 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
 #: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
 msgstr "%s: kan het schaduwbestand niet openen\n"
 
-#: src/chpasswd.c:197 src/newusers.c:441
+#: src/chpasswd.c:232 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: op regel %d: regel is te lang\n"
 
-#: src/chpasswd.c:217
+#: src/chpasswd.c:252
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: regel %d: nieuw wachtwoord ontbreekt\n"
 
-#: src/chpasswd.c:234
+#: src/chpasswd.c:277
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: regel %d: onbekende gebruiker %s\n"
 
-#: src/chpasswd.c:280
+#: src/chpasswd.c:323
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: regel %d: kan wachtwoordingang niet bijwerken\n"
 
-#: src/chpasswd.c:297 src/newusers.c:569
+#: src/chpasswd.c:340 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: fouten gedetecteerd, aanpassingen genegeerd\n"
 
-#: src/chpasswd.c:309
+#: src/chpasswd.c:352
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: fout tijdens bijwerken schaduwbestand\n"
 
-#: src/chpasswd.c:318
+#: src/chpasswd.c:361
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: fout tijdens bijwerken van het wachtwoordbestand\n"
@@ -576,12 +556,6 @@ msgstr "%s: fout tijdens bijwerken van het wachtwoordbestand\n"
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Gebruik: %s [-s shell] [naam]\n"
-
-#: src/chsh.c:90
-#, c-format
-msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"U dient de nieuwe waarde in te voeren, of 'enter' voor de standaardwaarde\n"
 
 #: src/chsh.c:91
 msgid "Login Shell"
@@ -622,36 +596,59 @@ msgstr "%s: WAARSCHUWING! Dient set-UID root ingesteld te zijn!\n"
 msgid "%s: unknown user\n"
 msgstr "%s: onbekende gebruiker\n"
 
-#: src/faillog.c:77
-#, fuzzy, c-format
-msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
-msgstr ""
-"Gebruik: %s [-a|-u gebruiker] [-m max] [-r] [-t dagen] [-l op_slot_sec]\n"
-
-#: src/faillog.c:131 src/lastlog.c:96
+#: src/faillog.c:59
 #, c-format
-msgid "Unknown User: %s\n"
-msgstr "Onbekende gebruiker %s\n"
+msgid ""
+"Usage: faillog [options]\n"
+"\n"
+"Options:\n"
+"  -a, --all\t\t\tdisplay faillog records for all users\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --lock-time SEC\t\tafter failed login lock accout to SEC seconds\n"
+"  -m, --maximum MAX\t\tset maiximum failed login counters to MAX\n"
+"  -r, --reset\t\t\treset the counters of login failures\n"
+"  -u, --user LOGIN\t\tdisplay faillog record or maintains failure counters\n"
+"\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
+"\t\t\t\tfor user with LOGIN\n"
+msgstr ""
+"Gebruik: faillog [opties]\n"
+"\n"
+"Opties:\n"
+"  -a, --all\t\t\ttoon de faillog-records van alle gebruikers\n"
+"  -h, --help\t\t\ttoon dit bericht en sluit af\n"
+"  -l, --lock-time SEC\t\tBevries accounts SEC seconden na mislukt aanmelden\n"
+"  -m, --maximum MAX\t\tstel maximaal aantal mislukte aanmeldingen in op MAX\n"
+"  -r, --reset\t\t\therbegin de tellers voor mislukte aanmeldingen\n"
+"  -u, --user LOGIN\t\tgeef faillog-record weer en onderhoud mislukking-"
+"tellers\n"
+"\t\t\t\ten limieten (indien de -r, -m or -l opties gebruikt worden), maar "
+"enkel\n"
+"\t\t\t\tvoor gebruiker LOGIN\n"
 
-#: src/faillog.c:212
+#: src/faillog.c:86
 #, c-format
 msgid "Username   Failures  Maximum  Latest\n"
 msgstr "Gebruikersnaam Mislukkingen Maximum Laatste\n"
 
-#: src/faillog.c:229
+#: src/faillog.c:103
 #, c-format
 msgid "  %s on %s"
 msgstr "  %s op %s"
 
-#: src/faillog.c:233
+#: src/faillog.c:107
 #, c-format
 msgid " [%lds left]"
 msgstr " [%lds over]"
 
-#: src/faillog.c:237
+#: src/faillog.c:111
 #, c-format
 msgid " [%lds lock]"
 msgstr " [%lds slot]"
+
+#: src/faillog.c:351 src/lastlog.c:191
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "Onbekende gebruiker %s\n"
 
 #: src/gpasswd.c:78
 #, c-format
@@ -677,16 +674,6 @@ msgstr "         %s [-A gebruiker,...] [-M gebruiker,...] groep\n"
 #, c-format
 msgid "       %s [-M user,...] group\n"
 msgstr "         %s [-M gebruiker,...] groep\n"
-
-#: src/gpasswd.c:146 src/gpasswd.c:230
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: onbekende gebruiker %s\n"
-
-#: src/gpasswd.c:157
-#, c-format
-msgid "Permission denied.\n"
-msgstr "Toegang geweigerd.\n"
 
 #: src/gpasswd.c:243
 #, c-format
@@ -924,51 +911,6 @@ msgstr "%s: groep %s is een NIS-groep\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s is de NIS-master\n"
 
-#: src/groupmems.c:95
-#, c-format
-msgid "Member already exists\n"
-msgstr ""
-
-#: src/groupmems.c:125
-#, c-format
-msgid "Member to remove could not be found\n"
-msgstr ""
-
-#: src/groupmems.c:158
-#, c-format
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr ""
-
-#: src/groupmems.c:201
-#, c-format
-msgid "Only root can add members to different groups\n"
-msgstr ""
-
-#: src/groupmems.c:206
-#, c-format
-msgid "Group access is required\n"
-msgstr ""
-
-#: src/groupmems.c:210
-#, c-format
-msgid "Not primary owner of current group\n"
-msgstr ""
-
-#: src/groupmems.c:215
-#, fuzzy, c-format
-msgid "Unable to lock group file\n"
-msgstr "%s: kan groepbestand niet vergrendelen\n"
-
-#: src/groupmems.c:220
-#, fuzzy, c-format
-msgid "Unable to open group file\n"
-msgstr "%s: kan groepbestand niet openen\n"
-
-#: src/groupmems.c:240
-#, fuzzy, c-format
-msgid "Cannot close group file\n"
-msgstr "%s: kan groepbestand niet openen\n"
-
 #: src/groupmod.c:104
 #, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -993,11 +935,6 @@ msgstr "%s: %u is geen unieke gid\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s is geen unieke naam\n"
-
-#: src/groups.c:59
-#, c-format
-msgid "unknown user %s\n"
-msgstr "onbekende gebruiker %s\n"
 
 #: src/grpck.c:87
 #, c-format
@@ -1173,23 +1110,34 @@ msgstr "Gebruik: id\n"
 msgid " groups="
 msgstr " groepen="
 
-#: src/lastlog.c:110 src/lastlog.c:116
+#: src/lastlog.c:68
 #, c-format
-msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
+msgid ""
+"Usage: lastlog [options]\n"
+"\n"
+"Options:\n"
+"  -u, --login LOGIN\tprint lastlog record for user with specyfied LOGIN\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
-"Gebruik: %s [{-u|--login} gebruikersnaam] [{-t|--time} dagen] [{-h|--help}]\n"
+"Gebruik: lastlog [opties]\n"
+"\n"
+"Opties:\n"
+"  -u, --login LOGIN\tprint het lastlog-record van de gebruiker LOGIN\n"
+"  -h, --help\t\ttoon dit bericht en sluit af\n"
+"  -t, --time DAGEN\tprint enkel lastlog-records van de laatste DAGEN dagen\n"
 
-#: src/lastlog.c:181
+#: src/lastlog.c:94
 #, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Gebruikersnaam  Poort    Vanaf            Laatste\n"
 
-#: src/lastlog.c:183
+#: src/lastlog.c:96
 #, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Gebruikersnaam         Poort    Laatste\n"
 
-#: src/lastlog.c:198
+#: src/lastlog.c:111
 msgid "**Never logged in**"
 msgstr "**Heeft zich nog nooit aangemeld**"
 
@@ -1308,51 +1256,40 @@ msgstr "%s: kan DBM-bestanden niet openen voor %s\n"
 
 #: src/mkpasswd.c:286
 #, c-format
-msgid "%s: the beginning with "
-msgstr "%s: het begin met "
+msgid "%s: the line beginning with %.16s... is too long\n"
+msgstr "%s: de regel die begint met %.16s... is te lang\n"
 
-#: src/mkpasswd.c:287
-#, c-format
-msgid " is too long\n"
-msgstr " is te lang\n"
-
-#: src/mkpasswd.c:314
+#: src/mkpasswd.c:313
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
 msgstr "%s: fout tijdens het ontleden van regel '%s'\n"
 
-#: src/mkpasswd.c:322 src/mkpasswd.c:327 src/mkpasswd.c:332 src/mkpasswd.c:337
+#: src/mkpasswd.c:321 src/mkpasswd.c:326 src/mkpasswd.c:331 src/mkpasswd.c:336
 #, c-format
-msgid "adding record for name "
-msgstr "record voor naam wordt toegevoegd"
+msgid "adding record for name %s\n"
+msgstr "record voor naam '%s' wordt toegevoegd\n"
 
-#: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
-#: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
+#: src/mkpasswd.c:342 src/mkpasswd.c:348 src/mkpasswd.c:353 src/mkpasswd.c:358
 #, c-format
-msgid "\n"
-msgstr "\n"
+msgid "%s: error adding record for %s\n"
+msgstr "%s: fout tijdens toevoegen record voor '%s'\n"
 
-#: src/mkpasswd.c:343 src/mkpasswd.c:349 src/mkpasswd.c:354 src/mkpasswd.c:359
-#, c-format
-msgid "%s: error adding record for "
-msgstr "%s: fout tijdens toevoegen record voor "
-
-#: src/mkpasswd.c:377
+#: src/mkpasswd.c:376
 #, c-format
 msgid "added %d entries, longest was %d\n"
 msgstr "%d ingangen toegevoegd, langste was %d\n"
 
-#: src/mkpasswd.c:391
+#: src/mkpasswd.c:390
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
 msgstr "Gebruik: %s [-vf] [-p|g|sp|sg] bestand\n"
 
-#: src/mkpasswd.c:394
+#: src/mkpasswd.c:393
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
 msgstr "Gebruik: %s [-vf] [-p|g|sp] bestand\n"
 
-#: src/mkpasswd.c:397
+#: src/mkpasswd.c:396
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
 msgstr "Gebruik: %s [-vf] [-p|g] bestand\n"
@@ -1534,15 +1471,10 @@ msgstr "%s: Kan %s niet uitvoeren"
 msgid "%s: repository %s not supported\n"
 msgstr "%s: opslagplaats %s wordt niet ondersteund\n"
 
-#: src/passwd.c:890
-#, c-format
-msgid "%s: Permission denied\n"
-msgstr "%s: Toegang geweigerd\n"
-
 #: src/passwd.c:914
-#, fuzzy, c-format
+#, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "U mag de shell voor %s niet aanpassen.\n"
+msgstr "U mag het wachtwoord van %s niet aanpassen.\n"
 
 #: src/passwd.c:962
 #, c-format
@@ -1950,11 +1882,13 @@ msgstr "%s: kan map %s niet aanmaken\n"
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
+"Er bestaat geen groep met de naam 'mail', bijgevolg wordt de mailspool "
+"aangemaakt met modus 0600.\n"
 
 #: src/useradd.c:1590
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: kan ingang voor gebruiker %s niet bijwerken\n"
+msgstr "Kan geen mailspool aanmaken voor gebruiker %s.\n"
 
 #: src/useradd.c:1714 src/usermod.c:981
 #, c-format
@@ -2031,10 +1965,10 @@ msgstr "%s: fout tijdens verwijderen dbm-schaduwwachtwoordingang\n"
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: gebruiker %s is momenteel niet aangemeld\n"
 
-#: src/userdel.c:594
+#: src/userdel.c:594 src/userdel.c:759
 #, c-format
-msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: waarschuwing: %s is niet van %s, wordt niet verwijderd\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %s is niet van %s, wordt niet verwijderd\n"
 
 #: src/userdel.c:600
 #, c-format
@@ -2050,11 +1984,6 @@ msgstr "%s: gebruiker %s bestaat niet\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: gebruiker %s is een NIS-gebruiker\n"
-
-#: src/userdel.c:759
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s is niet van %s, wordt niet verwijderd\n"
 
 #: src/userdel.c:782
 #, c-format

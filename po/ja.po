@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1990827\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-09 04:44+0100\n"
+"POT-Creation-Date: 2005-01-26 07:53+0100\n"
 "PO-Revision-Date: 2000-06-18 120:22+0900\n"
 "Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
 "Language-Team: Japanese\n"
@@ -165,12 +165,12 @@ msgstr "ルートディレクトリを \"%s\"へ変更できません\n"
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) に失敗しました\n"
 
-#: lib/getdef.c:275
+#: lib/getdef.c:273
 #, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "設定情報用の空き容量が確保できませんでした.\n"
 
-#: lib/getdef.c:329
+#: lib/getdef.c:327
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "設定エラー - 不明なアイテム '%s'です  (notify administrator)\n"
@@ -188,11 +188,6 @@ msgstr "%sのパスワード: "
 msgid "(Echo on) "
 msgstr ""
 
-#: lib/strerror.c:20
-#, c-format
-msgid "Unknown error %d"
-msgstr "不明なエラー %d"
-
 #: src/chage.c:118
 #, c-format
 msgid ""
@@ -202,15 +197,12 @@ msgstr ""
 "使用法: chage [-l] [-m 最小日数] [-M 最大日数] [-W 警告]\n"
 "              [-I 無効] [-E 期限切れ] [-d 最後日] ユーザ\n"
 
-#: src/chage.c:152
-#, fuzzy, c-format
-msgid ""
-"Enter the new value, or press ENTER for the default\n"
-"\n"
+#: src/chage.c:151 src/chfn.c:140 src/chsh.c:90
+#, c-format
+msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
-"新しい値を入力してください, 標準設定値を利用するにはリターンを押してくださ"
+"新しい値を入力してください, 標準設定値を利用するには リターンを押してくださ"
 "い.\n"
-"\n"
 
 #: src/chage.c:155
 msgid "Minimum Password Age"
@@ -281,27 +273,30 @@ msgstr ""
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: 他のフラグのため \"l\" オプションは含ませることができません\n"
 
-#: src/chage.c:457 src/chage.c:587 src/login.c:503
-#, c-format
-msgid "%s: permission denied\n"
+#: src/chage.c:457 src/chage.c:587 src/chfn.c:272 src/chfn.c:282
+#: src/chfn.c:292 src/chfn.c:302 src/chfn.c:312 src/chfn.c:380
+#: src/gpasswd.c:157 src/login.c:503 src/passwd.c:853 src/passwd.c:890
+#, fuzzy, c-format
+msgid "%s: permission denied.\n"
 msgstr "%s: 権限がありません\n"
 
-#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:142 src/groupadd.c:534
+#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:177 src/groupadd.c:534
 #: src/groupdel.c:330 src/groupmod.c:523 src/newusers.c:365 src/useradd.c:1672
 #: src/userdel.c:674 src/usermod.c:1425
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "バイバスによってパスワードを認証します.\n"
 
-#: src/chage.c:509 src/chpasswd.c:159
+#: src/chage.c:509 src/chpasswd.c:194
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: パスワードファイルが開けません\n"
 
-#: src/chage.c:517
+#: src/chage.c:517 src/chfn.c:333 src/chsh.c:185 src/gpasswd.c:146
+#: src/gpasswd.c:230 src/groups.c:65 src/passwd.c:903
 #, c-format
-msgid "%s: unknown user: %s\n"
-msgstr "%s: 不明なユーザです: %s\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s: 不明なユーザ %s です\n"
 
 #: src/chage.c:535
 #, fuzzy, c-format
@@ -349,7 +344,7 @@ msgstr "%s: シャドウ・パスワード・ファイルを削除できませ�
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: パスワード・ファイルを上書きできません\n"
 
-#: src/chage.c:760 src/chpasswd.c:336 src/groupadd.c:595 src/groupdel.c:413
+#: src/chage.c:760 src/chpasswd.c:379 src/groupadd.c:595 src/groupdel.c:413
 #: src/groupmod.c:607 src/newusers.c:609 src/useradd.c:1787 src/userdel.c:817
 #: src/usermod.c:1498
 #, fuzzy, c-format
@@ -370,13 +365,6 @@ msgstr ""
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr "使用法: %s [-f フルネーム] [-r ルームNo] [-w 職場TEL] [-h 自宅TEL]\n"
 
-#: src/chfn.c:140
-#, c-format
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"新しい値を入力してください, 標準設定値を利用するには リターンを押してくださ"
-"い.\n"
-
 #: src/chfn.c:143
 msgid "Full Name"
 msgstr "フルネーム"
@@ -386,47 +374,21 @@ msgstr "フルネーム"
 msgid "\tFull Name: %s\n"
 msgstr "\tフルネーム: %s\n"
 
-#: src/chfn.c:148
+#: src/chfn.c:148 src/chfn.c:150
 msgid "Room Number"
 msgstr "部屋番号"
 
-#: src/chfn.c:150
-#, c-format
-msgid "\tRoom Number: %s\n"
-msgstr "\t部屋番号: %s\n"
-
-#: src/chfn.c:153
+#: src/chfn.c:153 src/chfn.c:155
 msgid "Work Phone"
 msgstr "職場電話番号"
 
-#: src/chfn.c:155
-#, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "\t職場電話番号: %s\n"
-
-#: src/chfn.c:158
+#: src/chfn.c:158 src/chfn.c:160
 msgid "Home Phone"
 msgstr "自宅電話番号"
-
-#: src/chfn.c:160
-#, c-format
-msgid "\tHome Phone: %s\n"
-msgstr "\t自宅電話番号: %s\n"
 
 #: src/chfn.c:163
 msgid "Other"
 msgstr "その他"
-
-#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
-#: src/chfn.c:380 src/passwd.c:853
-#, c-format
-msgid "%s: Permission denied.\n"
-msgstr "%s: 権限がありません.\n"
-
-#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
-#, c-format
-msgid "%s: Unknown user %s\n"
-msgstr "%s: 不明なユーザ %s\n"
 
 #: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
@@ -513,58 +475,65 @@ msgstr "パスワード・ファイルの変更を確定(commit)できません.
 msgid "Cannot unlock the password file.\n"
 msgstr "パスワード・ファイルをロック解除できません.\n"
 
-#: src/chpasswd.c:67
+#: src/chpasswd.c:69
 #, c-format
-msgid "Usage: %s [-e]\n"
-msgstr "使用法: %s [-e]\n"
+msgid ""
+"Usage: chpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+msgstr ""
 
-#: src/chpasswd.c:154
+#: src/chpasswd.c:189
 #, c-format
 msgid "%s: can't lock password file\n"
 msgstr "%s: パスワードファイルをロックできません\n"
 
-#: src/chpasswd.c:168 src/pwconv.c:95
+#: src/chpasswd.c:203 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: シャドウ・ファイルをロックできません\n"
 
-#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/chpasswd.c:209 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
 #: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
 msgstr "%s: シャドウ・ファイルを開けません\n"
 
-#: src/chpasswd.c:197 src/newusers.c:441
+#: src/chpasswd.c:232 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: %d 行: 1行が長過ぎます\n"
 
-#: src/chpasswd.c:217
+#: src/chpasswd.c:252
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: %d 行: 新規パスワードがありません\n"
 
-#: src/chpasswd.c:234
+#: src/chpasswd.c:277
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: %d 行: 不明なユーザ %s です\n"
 
-#: src/chpasswd.c:280
+#: src/chpasswd.c:323
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: %d 行: パスワード入力を更新できません\n"
 
-#: src/chpasswd.c:297 src/newusers.c:569
+#: src/chpasswd.c:340 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: エラーが検出されました, 変更は無効になりました\n"
 
-#: src/chpasswd.c:309
+#: src/chpasswd.c:352
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: シャドウ・ファイルの更新にエラーです\n"
 
-#: src/chpasswd.c:318
+#: src/chpasswd.c:361
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: パスワード・ファイルの更新のエラーです\n"
@@ -573,13 +542,6 @@ msgstr "%s: パスワード・ファイルの更新のエラーです\n"
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
 msgstr "使用法: %s [-s シェル] [ユーザ名]\n"
-
-#: src/chsh.c:90
-#, fuzzy, c-format
-msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"新しい値を入力してください, 標準設定値を利用するには リターンを押してくださ"
-"い.\n"
 
 #: src/chsh.c:91
 msgid "Login Shell"
@@ -620,35 +582,46 @@ msgstr "%s: 警告!  set-UID rootされてなくてはなりません!\n"
 msgid "%s: unknown user\n"
 msgstr "%s: 不明なユーザです\n"
 
-#: src/faillog.c:77
+#: src/faillog.c:59
 #, c-format
-msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
-msgstr "使用法: %s [-a|-u ユーザ] [-m 最大] [-r] [-t 日数] [-l ロック秒]\n"
+msgid ""
+"Usage: faillog [options]\n"
+"\n"
+"Options:\n"
+"  -a, --all\t\t\tdisplay faillog records for all users\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --lock-time SEC\t\tafter failed login lock accout to SEC seconds\n"
+"  -m, --maximum MAX\t\tset maiximum failed login counters to MAX\n"
+"  -r, --reset\t\t\treset the counters of login failures\n"
+"  -u, --user LOGIN\t\tdisplay faillog record or maintains failure counters\n"
+"\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
+"\t\t\t\tfor user with LOGIN\n"
+msgstr ""
 
-#: src/faillog.c:131 src/lastlog.c:96
-#, c-format
-msgid "Unknown User: %s\n"
-msgstr "不明なユーザです: %s\n"
-
-#: src/faillog.c:212
+#: src/faillog.c:86
 #, c-format
 msgid "Username   Failures  Maximum  Latest\n"
 msgstr "ユーザ名   失敗      最大     最近\n"
 
-#: src/faillog.c:229
+#: src/faillog.c:103
 #, fuzzy, c-format
 msgid "  %s on %s"
 msgstr "最近のログイン: %s on %s"
 
-#: src/faillog.c:233
+#: src/faillog.c:107
 #, c-format
 msgid " [%lds left]"
 msgstr ""
 
-#: src/faillog.c:237
+#: src/faillog.c:111
 #, c-format
 msgid " [%lds lock]"
 msgstr ""
+
+#: src/faillog.c:351 src/lastlog.c:191
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "不明なユーザです: %s\n"
 
 #: src/gpasswd.c:78
 #, c-format
@@ -674,16 +647,6 @@ msgstr "       %s [-A ユーザ,...] [-M ユーザ,...] グループ\n"
 #, c-format
 msgid "       %s [-M user,...] group\n"
 msgstr "       %s [-M ユーザ,...] グループ\n"
-
-#: src/gpasswd.c:146 src/gpasswd.c:230
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: 不明なユーザ %s です\n"
-
-#: src/gpasswd.c:157
-#, c-format
-msgid "Permission denied.\n"
-msgstr "アクセス権が拒否されました.\n"
 
 #: src/gpasswd.c:243
 #, c-format
@@ -921,51 +884,6 @@ msgstr "%s: %sグループは NIS のグループです\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s は NIS マスターです\n"
 
-#: src/groupmems.c:95
-#, c-format
-msgid "Member already exists\n"
-msgstr ""
-
-#: src/groupmems.c:125
-#, c-format
-msgid "Member to remove could not be found\n"
-msgstr ""
-
-#: src/groupmems.c:158
-#, c-format
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr ""
-
-#: src/groupmems.c:201
-#, c-format
-msgid "Only root can add members to different groups\n"
-msgstr ""
-
-#: src/groupmems.c:206
-#, c-format
-msgid "Group access is required\n"
-msgstr ""
-
-#: src/groupmems.c:210
-#, c-format
-msgid "Not primary owner of current group\n"
-msgstr ""
-
-#: src/groupmems.c:215
-#, fuzzy, c-format
-msgid "Unable to lock group file\n"
-msgstr "グループ・ファイルをロックできません\n"
-
-#: src/groupmems.c:220
-#, fuzzy, c-format
-msgid "Unable to open group file\n"
-msgstr "グループファイルを開けません\n"
-
-#: src/groupmems.c:240
-#, fuzzy, c-format
-msgid "Cannot close group file\n"
-msgstr "グループ・ファイルを開けません\n"
-
 #: src/groupmod.c:104
 #, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -990,11 +908,6 @@ msgstr "%s: %u はグループIDが重複しています\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s は名前が重複しています\n"
-
-#: src/groups.c:59
-#, c-format
-msgid "unknown user %s\n"
-msgstr "不明なユーザです %s\n"
 
 #: src/grpck.c:87
 #, c-format
@@ -1170,22 +1083,28 @@ msgstr "使用法: id\n"
 msgid " groups="
 msgstr " グループ="
 
-#: src/lastlog.c:110 src/lastlog.c:116
+#: src/lastlog.c:68
 #, c-format
-msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
+msgid ""
+"Usage: lastlog [options]\n"
+"\n"
+"Options:\n"
+"  -u, --login LOGIN\tprint lastlog record for user with specyfied LOGIN\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 
-#: src/lastlog.c:181
+#: src/lastlog.c:94
 #, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "ユーザ名         ポート   場所             最近のログイン\n"
 
-#: src/lastlog.c:183
+#: src/lastlog.c:96
 #, c-format
 msgid "Username                Port     Latest\n"
 msgstr "ユーザ名                ポート   最近のログイン\n"
 
-#: src/lastlog.c:198
+#: src/lastlog.c:111
 msgid "**Never logged in**"
 msgstr "**一度もログインはありません**"
 
@@ -1300,51 +1219,40 @@ msgstr "%s: ファイル %s を開けません\n"
 
 #: src/mkpasswd.c:286
 #, c-format
-msgid "%s: the beginning with "
+msgid "%s: the line beginning with %.16s... is too long\n"
 msgstr ""
 
-#: src/mkpasswd.c:287
-#, fuzzy, c-format
-msgid " is too long\n"
-msgstr " 入力内容が長過ぎます\n"
-
-#: src/mkpasswd.c:314
+#: src/mkpasswd.c:313
 #, fuzzy, c-format
 msgid "%s: error parsing line \"%s\"\n"
 msgstr "%s: ファイル更新のエラーです\n"
 
-#: src/mkpasswd.c:322 src/mkpasswd.c:327 src/mkpasswd.c:332 src/mkpasswd.c:337
-#, c-format
-msgid "adding record for name "
-msgstr ""
-
-#: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
-#: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
-#, c-format
-msgid "\n"
-msgstr ""
-
-#: src/mkpasswd.c:343 src/mkpasswd.c:349 src/mkpasswd.c:354 src/mkpasswd.c:359
+#: src/mkpasswd.c:321 src/mkpasswd.c:326 src/mkpasswd.c:331 src/mkpasswd.c:336
 #, fuzzy, c-format
-msgid "%s: error adding record for "
+msgid "adding record for name %s\n"
 msgstr "%s: 新規グループエントリへ追加のエラーです\n"
 
-#: src/mkpasswd.c:377
+#: src/mkpasswd.c:342 src/mkpasswd.c:348 src/mkpasswd.c:353 src/mkpasswd.c:358
+#, fuzzy, c-format
+msgid "%s: error adding record for %s\n"
+msgstr "%s: 新規グループエントリへ追加のエラーです\n"
+
+#: src/mkpasswd.c:376
 #, c-format
 msgid "added %d entries, longest was %d\n"
 msgstr ""
 
-#: src/mkpasswd.c:391
+#: src/mkpasswd.c:390
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
 msgstr "使用法: %s [-vf] [-p|g|sp|sg] ファイル\n"
 
-#: src/mkpasswd.c:394
+#: src/mkpasswd.c:393
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
 msgstr "使用法: %s [-vf] [-p|g|sp] ファイル\n"
 
-#: src/mkpasswd.c:397
+#: src/mkpasswd.c:396
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
 msgstr "使用法: %s [-vf] [-p|g] ファイル\n"
@@ -1522,11 +1430,6 @@ msgstr "%s: %sを実行できません"
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: レポジトリ %s はサポートしていません\n"
-
-#: src/passwd.c:890
-#, c-format
-msgid "%s: Permission denied\n"
-msgstr "%s: 権限がありません\n"
 
 #: src/passwd.c:914
 #, c-format
@@ -2015,10 +1918,10 @@ msgstr "%s: シャドウ・パスワード・エントリ削除のエラーで�
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: ユーザ %s は現在ログイン中です\n"
 
-#: src/userdel.c:594
+#: src/userdel.c:594 src/userdel.c:759
 #, c-format
-msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: 警告: %sは %s の所有ではありません, 削除は行いません\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %sは %sの所有ではありません, 削除は行いません\n"
 
 #: src/userdel.c:600
 #, fuzzy, c-format
@@ -2034,11 +1937,6 @@ msgstr "%s: ユーザ %s は存在しません\n"
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: ユーザ %s は NIS ユーザです\n"
-
-#: src/userdel.c:759
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %sは %sの所有ではありません, 削除は行いません\n"
 
 #: src/userdel.c:782
 #, c-format

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.30 2003/12/17 09:43:30 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.31 2005/01/17 23:12:05 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -850,7 +850,7 @@ int main (int argc, char **argv)
 		if (anyflag || !Sflg || (optind < argc))
 			usage (E_USAGE);
 		if (!amroot) {
-			fprintf (stderr, _("%s: Permission denied.\n"),
+			fprintf (stderr, _("%s: permission denied.\n"),
 				 Prog);
 			exit (E_NOPERM);
 		}
@@ -887,7 +887,7 @@ int main (int argc, char **argv)
 		usage (E_USAGE);
 
 	if (anyflag && !amroot) {
-		fprintf (stderr, _("%s: Permission denied\n"), Prog);
+		fprintf (stderr, _("%s: permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
 #ifdef NDBM
@@ -900,7 +900,7 @@ int main (int argc, char **argv)
 
 	pw = getpwnam (name);
 	if (!pw) {
-		fprintf (stderr, _("%s: Unknown user %s\n"), Prog, name);
+		fprintf (stderr, _("%s: unknown user %s\n"), Prog, name);
 		exit (E_NOPERM);
 	}
 

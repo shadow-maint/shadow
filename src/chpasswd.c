@@ -30,12 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.19 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.22 2004/12/10 00:27:55 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include "pwio.h"
 #ifdef	SHADOWPWD
 #include "shadowio.h"
@@ -48,6 +49,7 @@ RCSID (PKG_VER "$Id: chpasswd.c,v 1.19 2004/10/11 06:26:40 kloczek Exp $")
 #endif				/* USE_PAM */
 static char *Prog;
 static int eflg = 0;
+static int md5flg = 0;
 
 #ifdef SHADOWPWD
 static int is_shadow_pwd;
@@ -64,7 +66,13 @@ static void usage (void);
 
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-e]\n"), Prog);
+	fprintf (stderr, _("Usage: chpasswd [options]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -e, --encrypted	supplied passwords are encrypted\n"
+			   "  -h, --help		display this help message and exit\n"
+			   "  -m, --md5		use MD5 encryption instead DES when the supplied\n"
+			   "			passwords are not encrypted\n"));
 	exit (1);
 }
 
@@ -105,11 +113,38 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	/* XXX - use getopt() */
-	if (!(argc == 1 || (argc == 2 && !strcmp(argv[1], "-e"))))
-		usage();
-	if (argc == 2)
-		eflg = 1;
+	{
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"encrypted", no_argument, NULL, 'e'},
+			{"help", no_argument, NULL, 'h'},
+			{"md5", no_argument, NULL, 'm'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "ehm", long_options,
+				     &option_index)) != -1) {
+			switch (c) {
+			case 'e':
+				eflg = 1;
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 'm':
+				md5flg = 1;
+				break;
+			case 0:
+				/* long option */
+				break;
+			default:
+				usage ();
+				break;
+			}
+		}
+	}
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -220,8 +255,16 @@ int main (int argc, char **argv)
 			continue;
 		}
 		newpwd = cp;
-		if (!eflg)
-			cp = pw_encrypt (newpwd, crypt_make_salt ());
+		if (!eflg) {
+			if (md5flg) {
+				char salt[12] = "$1$";
+
+				strcat (salt, crypt_make_salt ());
+				cp = pw_encrypt (newpwd, salt);
+			} else
+				cp = pw_encrypt (newpwd,
+						 crypt_make_salt ());
+		}
 
 		/*
 		 * Get the password file entry for this user. The user must

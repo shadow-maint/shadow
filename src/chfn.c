@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.22 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: chfn.c,v 1.23 2005/01/17 23:12:04 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -147,17 +147,17 @@ static void new_fields (void)
 	if (may_change_field ('r'))
 		change_field (roomno, sizeof roomno, _("Room Number"));
 	else
-		printf (_("\tRoom Number: %s\n"), roomno);
+		printf ("\t%s: %s\n", _("Room Number"), roomno);
 
 	if (may_change_field ('w'))
 		change_field (workph, sizeof workph, _("Work Phone"));
 	else
-		printf (_("\tWork Phone: %s\n"), workph);
+		printf ("\t%s: %s\n", _("Work Phone"), workph);
 
 	if (may_change_field ('h'))
 		change_field (homeph, sizeof homeph, _("Home Phone"));
 	else
-		printf (_("\tHome Phone: %s\n"), homeph);
+		printf ("\t%s: %s\n", _("Home Phone"), homeph);
 
 	if (amroot)
 		change_field (slop, sizeof slop, _("Other"));
@@ -269,7 +269,7 @@ int main (int argc, char **argv)
 		case 'f':
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"),
+					 _("%s: permission denied.\n"),
 					 Prog);
 				exit (1);
 			}
@@ -279,7 +279,7 @@ int main (int argc, char **argv)
 		case 'r':
 			if (!may_change_field ('r')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"),
+					 _("%s: permission denied.\n"),
 					 Prog);
 				exit (1);
 			}
@@ -289,7 +289,7 @@ int main (int argc, char **argv)
 		case 'w':
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"),
+					 _("%s: permission denied.\n"),
 					 Prog);
 				exit (1);
 			}
@@ -299,7 +299,7 @@ int main (int argc, char **argv)
 		case 'h':
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"),
+					 _("%s: permission denied.\n"),
 					 Prog);
 				exit (1);
 			}
@@ -309,7 +309,7 @@ int main (int argc, char **argv)
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"),
+					 _("%s: permission denied.\n"),
 					 Prog);
 				exit (1);
 			}
@@ -330,7 +330,7 @@ int main (int argc, char **argv)
 		user = argv[optind];
 		pw = getpwnam (user);
 		if (!pw) {
-			fprintf (stderr, _("%s: Unknown user %s\n"), Prog,
+			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 				 user);
 			exit (1);
 		}
@@ -377,7 +377,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (!amroot && pw->pw_uid != getuid ()) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		fprintf (stderr, _("%s: permission denied.\n"), Prog);
 		closelog ();
 		exit (1);
 	}

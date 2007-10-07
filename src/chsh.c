@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chsh.c,v 1.23 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: chsh.c,v 1.24 2005/01/17 23:12:04 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -87,7 +87,7 @@ static void usage (void)
 static void new_fields (void)
 {
 	printf (_
-		("Enter the new value, or press return for the default\n"));
+		("Enter the new value, or press ENTER for the default\n"));
 	change_field (loginsh, sizeof loginsh, _("Login Shell"));
 }
 
@@ -182,7 +182,7 @@ int main (int argc, char **argv)
 		pw = getpwnam (user);
 		if (!pw) {
 			fprintf (stderr,
-				 _("%s: Unknown user %s\n"), Prog, user);
+				 _("%s: unknown user %s\n"), Prog, user);
 			exit (1);
 		}
 	} else {

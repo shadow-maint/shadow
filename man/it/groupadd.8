@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupadd.8,v 1.6 2004/11/04 03:06:32 kloczek Exp $
+.\"	$Id: groupadd.8,v 1.7 2004/12/12 20:23:58 kloczek Exp $
 .\"
 .\" Traduzione in italiano a cura di Isabella Ruocco <isacher@nettaxi.com>
 .\" luglio 1999
@@ -39,7 +39,8 @@ groupadd \- Crea un nuovo gruppo
 Il comando \fBgroupadd\fR crea un nuovo account di gruppo usando i valori 
 specificati sulla linea di comando ed i valori predefiniti dal sistema.
 Il nuovo gruppo verrà aggiunto ai file di sistema che lo necessitano.
-Le opzioni che si applicano al comando \fBgroupadd\fR sono
+.SH OPZIONI
+Le opzioni che si applicano al comando \fBgroupadd\fR sono:
 .IP "\fB-g \fIgid\fR"
 Il valore numerico dell'identificatore (ID) del gruppo.
 Questo valore deve essere univoco, a meno che non venga usata l'opzione \fB-o\fR.

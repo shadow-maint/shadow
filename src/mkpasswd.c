@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: mkpasswd.c,v 1.10 2004/08/18 09:52:32 kloczek Exp $")
+RCSID (PKG_VER "$Id: mkpasswd.c,v 1.11 2005/01/17 23:12:05 kloczek Exp $")
 #include <sys/stat.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -283,9 +283,8 @@ int main (int argc, char **argv)
 		buf[sizeof buf - 1] = '\0';
 		if (!(cp = strchr (buf, '\n'))) {
 			fprintf (stderr,
-				 _("%s: the beginning with " %
-				   .16 s..." is too long\n"), Progname,
-				 buf);
+				 _("%s: the line beginning with %.16s... is too long\n"),
+				 Progname, buf);
 			exit (1);
 		}
 		*cp = '\0';
@@ -319,45 +318,45 @@ int main (int argc, char **argv)
 		if (vflg) {
 			if (!sflg && pflg)
 				printf (_
-					("adding record for name " %
-					 s "\n"), passwd->pw_name);
+					("adding record for name %s\n"),
+					passwd->pw_name);
 #ifdef	SHADOWPWD
 			if (sflg && pflg)
 				printf (_
-					("adding record for name " %
-					 s "\n"), shadow->sp_namp);
+					("adding record for name %s\n"), 
+					shadow->sp_namp);
 #endif
 			if (!sflg && gflg)
 				printf (_
-					("adding record for name " %
-					 s "\n"), group->gr_name);
+					("adding record for name %s\n"),
+					group->gr_name);
 #ifdef	SHADOWGRP
 			if (sflg && gflg)
 				printf (_
-					("adding record for name " %
-					 s "\n"), gshadow->sg_name);
+					("adding record for name %s\n"),
+					gshadow->sg_name);
 #endif
 		}
 		if (!sflg && pflg && !pw_dbm_update (passwd))
 			fprintf (stderr,
-				 _("%s: error adding record for " %
-				   s "\n"), Progname, passwd->pw_name);
+				 _("%s: error adding record for %s\n"),
+				 Progname, passwd->pw_name);
 
 #ifdef	SHADOWPWD
 		if (sflg && pflg && !sp_dbm_update (shadow))
 			fprintf (stderr,
-				 _("%s: error adding record for " %
-				   s "\n"), Progname, shadow->sp_namp);
+				 _("%s: error adding record for %s\n"),
+				 Progname, shadow->sp_namp);
 #endif
 		if (!sflg && gflg && !gr_dbm_update (group))
 			fprintf (stderr,
-				 _("%s: error adding record for " %
-				   s "\n"), Progname, group->gr_name);
+				 _("%s: error adding record for %s\n"),
+				 Progname, group->gr_name);
 #ifdef	SHADOWGRP
 		if (sflg && gflg && !sg_dbm_update (gshadow))
 			fprintf (stderr,
-				 _("%s: error adding record for " %
-				   s "\n"), Progname, gshadow->sg_name);
+				 _("%s: error adding record for %s\n"),
+				 Progname, gshadow->sg_name);
 #endif				/* SHADOWGRP */
 
 		/*
