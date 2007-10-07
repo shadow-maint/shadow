@@ -1,0 +1,68 @@
+Read this file first for a brief overview of the new versions of login
+and passwd.
+
+
+---Shadow passwords
+
+The command `shadowconfig on' will turn on shadow password support.
+`shadowconfig off' will turn it back off.  If you turn on shadow
+password support, you'll gain the ability to set password ages and
+expirations with chage(1).
+
+You may want to install the secure-su package which allows more
+restrictions on su, for example a wheel group.
+
+
+---General configuration
+
+Most of the configuration for the shadow utilities is in
+/etc/login.defs.  See login.defs(5).  The defaults are quite
+reasonable.
+
+
+---MD5 Encryption
+
+If you set MD5_CRYPT_ENAB=yes in /etc/login.defs, passwords will be
+encrypted with an MD5-based algorithm.  It also supports of passwords
+of unlimited length and longer salt strings.
+
+
+---Login and resource control
+
+/etc/login.access and /etc/porttime control who may login to which
+ports and when they may login.  To enforce time restrictions, you'll
+need to run logoutd.  /etc/init.d/logoutd will start it on bootup if
+there are non-comment lines in /etc/portttime.
+
+The lastlog and faillog commands will report the last time a user had
+a successful and failed login, respectively.
+
+You may set per-user resource limits by editing /etc/limits.  See
+limits(5).
+
+
+---Adding users and groups
+
+Though you may add users and groups with the SysV type commands,
+useradd and groupadd, I recommend you add them with Debian adduser
+version 3+.  adduser gives you more configuration and conforms to the
+Debian UID and GID allocation.
+
+Editing user and group parameters can be done with usermod and
+groupmod.  Removing users and groups can be done with userdel and
+groupdel.
+
+
+--- Group administration
+
+Local group allocation is much easier.  With gpasswd(1) you can
+designate users to administer groups.  They can then securely add or
+remove users from the group.
+
+
+--- What to read next?
+
+Read the manpages, the other files in this directory, and the Shadow
+Password HOWTO (included in the doc-linux package).  A large portion
+of these files deals with getting shadow installed.  You can, of
+course, ignore those parts.

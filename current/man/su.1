@@ -1,0 +1,87 @@
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: su.1,v 1.6 2000/08/26 18:27:17 marekm Exp $
+.\"
+.TH SU 1
+.SH NAME
+su \- Change user ID or become super-user
+.SH SYNOPSIS
+.BR su " [" - ]
+.RI [ username " [" args ]]
+.SH DESCRIPTION
+.B su
+is used to become another user during a login session.
+Invoked without a username, \fBsu\fR defaults to becoming
+the super user.
+The optional argument \fB\-\fR may be used to provide an
+environment similiar to what the user would expect had
+the user logged in directly.
+.PP
+Additional arguments may be provided after the username,
+in which case they are supplied to the user\'s login shell.
+In particular, an argument of \fB-c\fR will cause the
+next argument to be treated as a command by most command
+interpreters.
+.\" The command will be executed under the shell specified by
+.\" \fB$SHELL\fR, or if undefined, by the one specified in
+.\" \fI/etc/passwd\fR.
+.\" XXX - the above was not quite correct.  --marekm
+The command will be executed by the shell specified in
+\fI/etc/passwd\fR for the target user.
+.PP
+The user will be prompted for a password, if appropriate.
+Invalid passwords will produce an error message.
+All attempts, both valid and invalid, are logged to detect
+abuses of the system.
+.PP
+The current environment is passed to the new shell.  The value of
+\fB$PATH\fR is reset to \fB/bin:/usr/bin\fR for normal users, or
+\fB/sbin:/bin:/usr/sbin:/usr/bin\fR for the super user.  This may be
+changed with the \fBENV_PATH\fR and \fBENV_SUPATH\fR definitions in
+\fI/etc/login.defs\fR.
+.PP
+A subsystem login is indicated by the presense of a "*" as the first
+character of the login shell. The given home directory will be used as
+the root of a new filesystem which the user is actually logged into.
+.SH CAVEATS
+.PP
+This version of \fBsu\fR has many compilation options, only some of which
+may be in use at any particular site.
+.SH Files
+/etc/passwd \- user account information
+.br
+/etc/shadow \- encrypted passwords and age information
+.br
+$HOME/.profile \- initialization script for default shell
+.SH SEE ALSO
+.BR login (1),
+.BR sh (1),
+.BR suauth (5),
+.BR login.defs (5)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@austin.ibm.com)

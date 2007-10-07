@@ -1,0 +1,79 @@
+.\" {PTM/WK/1999-09-18}
+.TH LIMITS 5
+.SH NAZWA
+limits \- definicja ograniczeñ zasobów
+.SH OPIS
+Plik
+.I limits
+(domy¶lnie /etc/limits lub LIMITS_FILE zdefiniowane w config.h)
+opisuje ograniczenia zasobów, jakie chcia³by¶ narzuciæ u¿ytkownikom.
+W³a¶cicielem tego pliku powinien byæ u¿ytkownik root i wy³±cznie dla niego
+plik ten powinien byæ dostêpny do odczytu.
+.PP
+Domy¶lnie u¿ytkownikowi 'root' nie s± narzucane ¿adne ograniczenia.
+W rzeczywisto¶ci, przy u¿yciu tego sposobu nie jest mo¿liwe narzucenie limitów
+dla kont równowa¿nych root (kont z UID równym 0).
+.PP
+Ka¿dy wiersz definiuje ograniczenie dla u¿ytkownika w postaci:
+.sp
+.I	u¿ytkownik £AÑCUCH_OGRANICZEÑ
+.PP
+\fB£AÑCUCH OGRANICZEÑ\fP sk³ada siê z po³±czonych definicji ograniczeñ zasobów.
+Ka¿de ograniczenie opisywane jest liter± z nastêpuj±c± po niej warto¶ci±
+numeryczn± limitu.
+.PP
+Dozwolone s± nastêpuj±ce identyfikatory:
+.sp
+A: max. przestrzeñ adresowa (KB)
+.br
+C: max. rozmiar pliku core (KB)
+.br
+D: max. rozmiar danych (KB)
+.br
+F: maksymalny rozmiar pliku (KB)
+.br
+M: max. locked-in-memory address space (KB)
+.br
+N: max. liczba otwartych plików
+.br
+R: max. resident set size (KB)
+.br
+S: max. rozmiar stosu (KB)
+.br
+T: max. czas procesora (CPU) (MIN)
+.br
+U: max. liczba procesów
+.br
+L: max. liczba sesji pracy dla tego u¿ytkownika
+.br
+P: priorytet procesu, ustawiany przez \fBsetpriority\fR(2).
+.PP
+Na przyk³ad, \fIL2D2048N5\fP jest poprawnym \fB£AÑCUCHEM OGRANICZEÑ\fP.
+Z uwagi na lepsz± czytelno¶ci przyjêto, ¿e poni¿sze zapisy s± równowa¿ne:
+.sp
+nazwa_u¿ytkownika L2D2048N5
+.br
+nazwa_u¿ytkownika L2 D2048 N5
+.PP
+Nale¿y podkre¶liæ, ¿e reszta wiersza po \fInazwie_u¿ytkownika\fP traktowana
+jest jako ³añcuch ograniczeñ, zatem komentarze nie s± dozwolone. Nieprawid³owy
+³añcuch ograniczeñ zostanie odrzucony (nie bêdzie brany pod uwagê) przez
+program login.
+.PP
+Nazwa u¿ytkownika równa "\fB*\fP" oznacza wpis domy¶lny.
+Je¿eli w pliku \fBLIMITS_FILE\fP posiadasz wiele takich wpisów, to jako
+domy¶lny zostanie u¿yty ostatni z nich.
+.PP
+Pojedyncza kreska "\fB-\fP" ca³kowicie wy³±cza ograniczenia dla u¿ytkownika.
+.PP
+Zauwa¿ te¿, proszê, ¿e wszystkie te ograniczenia definiowane s± w odniesieniu
+do pojedynczej sesji (per login). Nie s± one globalne ani sta³e. Byæ mo¿e bêd±
+kiedy¶ ograniczenia globalne, ale na razie tyle musi wystarczyæ ;)
+.SH PLIKI
+.I /etc/limits
+.SH ZOBACZ TAK¯E
+.BR login (1),
+.BR setpriority (2),
+.BR setrlimit (2)
+.SH AUTOR
+Cristian Gafton (gafton@sorosis.ro)

@@ -1,0 +1,694 @@
+$Id: CHANGES,v 1.30 2000/09/02 18:40:42 marekm Exp $
+
+shadow-20000826 => shadow-20000902
+
+This is probably the last release from me.
+Tomasz Kloczko <kloczek@rudy.mif.pg.gda.pl> is the new maintainer.
+Good luck!
+
+(I'm still interested to know what is going on with this package,
+which is fairly important to many Linux distributions, so please
+Cc: marekm@linux.org.pl in any related discussions - just don't
+expect me to respond quickly...)
+
+Previous warning still applies - be careful!
+
+- applied some of the Red Hat patches (revised slightly), thanks to
+  Bernhard Rosenkraenzer <bero@redhat.de>: fix for truncated long
+  lines (>8K) in /etc/group, send SIGHUP to nscd (caching daemon
+  in glibc 2.1.x) after changing anything, add usermod -L and -U
+  options, remove LOG_CONS from openlog(), chage -d and -E handles
+  dates in yyyy-mm-dd format ('/' is not required)
+- various cleanups
+
+shadow-19990827 => shadow-20000826
+
+WARNING: this release is not tested (other than that it compiles for me),
+please be careful.  Previous release was a year ago, so it is really time
+to release something and start looking for a new, better maintainer...
+(I've been extremely busy recently.  Credit for most of the real work,
+such as complete PAM support, should go to Ben Collins <bcollins@debian.org>
+who maintains this package for Debian.)
+
+- merged most of the changes from Debian (not all of them yet, PAM support
+  should be complete but is not tested - need to upgrade to potato first)
+- added Polish translations of manual pages from PLD
+- change sulog() to not depend on global variables oldname, name
+- try to not follow symbolic links when deleting files recursively
+  in userdel (still not perfect, safest to do it in single user mode)
+- removed workarounds for ancient (pre-ANSI) C compilers - use gcc!
+  (a few ANSI C constructs were used already, and no one complained)
+- updated author's e-mail address (jfh@bga.com -> jfh@austin.ibm.com)
+
+shadow-19990709 => shadow-19990827
+
+- upgrade to autoconf-2.13, automake-1.4, libtool-1.3.3
+- i18n: added French translation by Vincent Renardias <vincent@ldsol.com>
+- i18n: added Swedish translation by Kristoffer Brånemyr <ztion@swipnet.se>
+- logoutd no longer reads /etc/logoutd.mesg at startup - instead, read
+  it when sending to luser's tty (no need to reload with SIGHUP)
+- added support for "usergroups" feature often found in Linux distributions
+  (if USERGROUPS_ENAB in login.defs set to "yes", uid != 0, uid == gid, and
+  username == groupname, then set umask to 002 instead of 022)
+- Debian: pwck and grpck are now run from a daily cron job (root will
+  receive an e-mail if something is wrong), and at system startup
+- added support for setting umask in /etc/limits
+- when using OPIE, re-prompt with echo on after empty password was entered
+- GETPASS_ASTERISKS now run time configurable (login.defs)
+- getpass() now uses stdin and stderr (not stdout) if it can't open /dev/tty
+- getpass() allows all input to be erased using Control-U, and beeps when
+  too many characters are entered
+- removed obsolete sgtty support, in 1999 everyone should have termios :)
+- Debian: tar wrapper no longer needed to build packages as non-root user
+  (install libtricks, and use "dpkg-buildpackage -rfakeroot" instead)
+- Debian: changes for GNU Hurd by Marcus Brinkmann <brinkmd@debian.org>:
+  dpkg-architecture, cross compilation, only build passwd, add
+  etc/login.defs.hurd conffile, conditionalize CBAUD
+- newgrp sets $HOME before running the new shell
+- both "sg group command" (usage message) and "sg group -c command"
+  (man page) work, updated both the usage message and the man page :)
+- i18n: added missing _() for some translatable strings
+
+shadow-19990607 => shadow-19990709
+
+- added PAM support to chfn and chsh (thanks to Thorsten Kukuk)
+- fixed a bug in newgrp if the user is in >= 17 groups
+- added @LIBSKEY@ to LDADD for all programs (for some reason,
+  almost all programs need it if skey/opie support is enabled)
+- changed grpconv/grpunconv to compile with --disable-shadowgrp
+- changed faillog to do something (assume -p) with no options specified
+- updated version of the udbachk passwd/shadow/group file integrity
+  checker (contrib/udbachk.v012.tgz)
+
+shadow-19990307 => shadow-19990607
+
+- upgraded to libtool-1.2, latest config.{guess,sub}
+- added missing #include "defines.h" in libmisc/login_desrpc.c - thanks
+  to almost everyone for reporting it :-)
+- moved PAM-related defines to pam_defs.h
+- added some braces to if/else to avoid egcs warnings
+- started adding PAM support to login (based on util-linux, not finished yet)
+- changed "!" to "x" for pw_passwd in src/newusers.c
+- a few more Y2K fixes
+- added contrib/udbachk.tgz (passwd/shadow/group file integrity checker),
+  thanks to Sami Kerola
+- Debian: made /etc/{limits,login.access,login.defs,porttime,securetty}
+  files all mode 0600 (Bug#38729 - login: /etc/limits is world readable)
+- updated mailing list information (moved again, now hosted by SuSE),
+  updated README.mirrors, other minor documentation updates
+- made getpass work with redirected stdin
+- new readpass echoing asterisks disabled by default by popular demand
+  (can be enabled at compile time: ./configure --enable-readpass)
+- the random number of asterisks in readpass is now more random
+  (random number generator initialization was missing)
+- commented out --enable-md5crypt (obsolete) in configure.in
+- when checking for libskey, link with -lcrypt if libcrypt is available
+  (otherwise the configure test for libskey fails - libskey needs libcrypt)
+- added Package/Version ident strings (so you can use the RCS "ident"
+  command to check any binary, which version of shadow it comes from)
+
+shadow-981228 => shadow-19990307
+
+- added support for setting process priority in /etc/limits
+- i18n: updated Greek translation
+- i18n: added Polish translation by Arkadiusz Miskiewicz
+- documented the -p option in useradd.8 and usermod.8 man pages
+- some "const" gcc warning fixes
+- attempt to fix lib/snprintf.c compilation problems
+- added restart/reload/force-reload to /etc/init.d/logoutd (found by lintian)
+- always require password for root logins (even with NO_PASSWORD_CONSOLE)
+- workaround for RedHat's CREATE_HOME feature in /etc/login.defs
+- changed to Y2K compatible version numbering
+- more Y2K fixes, use the ISO 8601 date format (yyyy-mm-dd) for default
+  values of user-entered dates (you can still enter dates in any format
+  supported by GNU date)
+- oops, added doc/README.nls to list of files to distribute
+- added missing sanitize_env() call to src/login.c
+- debian/rules installs /bin/login non-setuid by default, just in case...
+- build Debian packages with cracklib support (depends on cracklib-runtime)
+
+shadow-980724 => shadow-981228
+
+- login now clears the username in argv[] (in case someone types the
+  password instead of username, by mistake)
+- i18n support, Greek translation (Nikos Mavroyanopoulos), see README.nls
+- updated author's e-mail address (jfh@tab.com -> jfh@bga.com)
+- new getpass() replacement that displays *'s (Pavel Machek)
+- no password required when logging in from ttys listed under
+  NO_PASSWORD_CONSOLE in login.defs (Pavel Machek)
+- fixed limits code so RLIMIT_AS should work
+- upgraded to Debian 2.0
+- built a new machine (P2 350MHz, 64MB RAM) so the thing can be compiled
+  in reasonable time again
+- upgraded to automake-1.3, libtool-1.0h (also new config.guess and
+  config.sub that work on i686)
+- usermod fixed to handle group names starting with digits (not recommended)
+
+shadow-980626 => shadow-980724
+
+- security: login no longer gives you a root shell if setgid()
+  or initgroups() or setuid() fails for any reason, discovered
+  by Ted Hickman <thickman@sy.net>
+- remove libshadow.so -> libshadow.so.x.x symlink after install
+- a few int -> uid_t type cleanups
+- fail immediately (don't retry) in *_lock() if euid != 0
+- added sample PAM config files etc/pam.d/{passwd,su}
+- preliminary PAM support in su (untested - use at your own risk,
+  comments and patches welcome!)
+- cleanup and more comments in OPIE code (Algis Rudys)
+- added support for TCFS (Transparent Cryptographic File System)
+  (use ./configure --with-libtcfs, see http://tcfs.dia.unisa.it/
+  for more info), thanks to Aniello Del Sorbo
+
+shadow-980529 => shadow-980626
+
+- fixed bug in commonio_lock() (infinite recursion if lckpwdf() not
+  used and database cannot be locked), thanks to Jonathan Hankins
+- fixed bug in copy_tree() (NUL-terminate readlink() results),
+  thanks to Lutz Schwalowsky
+- no need to press Enter after Ctrl-C to interrupt password prompt
+- removed a few harmless gcc warnings
+- secure RPC login disabled if <rpc/key_prot.h> not found (glibc 2.0)
+- faillog.8: changed /usr/adm -> /var/log
+- pwconv.8: documented that it may fail on invalid password files
+
+shadow-980417 => shadow-980529
+
+- fixed "interesting" strzero() bug introduced by me in 980417:
+  strzero(cp) didn't work as intended (the macro used a local
+  variable called "cp" - oops...); Leonard N. Zubkoff was the
+  first person to report it - thanks!
+- fixed usermod -e to accept empty argument (like useradd),
+  thanks to Martin Bene
+- several changes from Debian 980403-0.2, see debian/changelog
+- added contrib/shadow-anonftp.patch (not yet merged, sorry...)
+  thanks to Calle Karlsson
+
+shadow-980403 => shadow-980417
+
+- fixed login session limits (again - broken since 980130)
+- more symbolic constants for exit status values
+- fixed logoutd to work with 8-character usernames in utmp
+  (no room for terminating NUL!)
+- various fixes to make the code more glibc2-friendly
+- updated doc/cracklib26.diff (fix for empty gecos, etc.)
+- updated the files in redhat/ from shadow-utils-970616-11.src.rpm
+  (RH 5.0 updates)
+
+shadow-980130 => shadow-980403
+
+- security: su now creates the sulog file (if enabled and doesn't
+  already exist) with umask 077
+- hopefully removed arbitrary group size limits (not yet for
+  shadow groups though - sgetsgent() still needs a rewrite,
+  but I don't want to delay this release any longer...)
+- fixed NULL dereference in groupmod -n
+
+shadow-971215 => shadow-980130
+
+- Debian binary packages can be built without root privileges
+  (tar wrapper - debian/tar.c)
+- new subdir "redhat" (needs more work, see redhat/README)
+- in several places, exit(127) if exec fails with ENOENT, and
+  exit(126) on other errors (as in ksh and bash)
+- renamed getpass() and md5_crypt() to libshadow_* to avoid name
+  conflicts with libc functions - md5_crypt() is also in libcrypt.a
+  on Linux/PPC, thanks to Anton Gluck <gluc@midway.uchicago.edu>
+- handle crypt() returning NULL (possible according to Single Unix
+  Spec) more gracefully (exit instead of SIGSEGV)
+- fixed bug in putgrent() that showed up when realloc() moved the
+  buffer while expanding it, thanks to Floody <flood@evcom.net>
+- fixed bug in login session limits (with a limit set to N logins,
+  only N-1 logins were allowed), thanks to Floody <flood@evcom.net>
+- upgraded to libtool-1.0h (now recognizes GNU ld on Debian 1.3.1)
+- newer config.guess and config.sub (should work on x86 for x > 5)
+- removed doc/automake-1.0.diff (obsoleted by automake-1.2)
+- added doc/cracklib26.diff (some patches for cracklib-2.6)
+- documented more (not all yet) login.defs(5) settings
+- replaced more exit status numeric values with #defines
+- shadow-utils.spec now generated from shadow-utils.spec.in
+  (so I don't have to edit version numbers for every new release)
+- groupadd -f option, based on RedHat's shadow-utils-970616-9 patch
+  ("force" - exit(0) if the group already exists); other RedHat-
+  specific options not added yet (best done in a perl script that
+  runs useradd/usermod/groupadd - see Debian's adduser-3.x)
+- added -O option (override login.defs values) to useradd and groupadd
+- if usermod can't update the group file(s), exit(10) but update the
+  password file(s) anyway (as documented by Solaris man page)
+- useradd should no longer set sp_expire to the current date (oops)
+- configure.in: added --enable-desrpc, check for gethostbyname in libc
+  before trying libnsl (necessary for Solaris; not for Linux or Irix,
+  even though libnsl may be present), fixed pw_age/pw_comment/pw_quota
+  detection, setpgrp vs. setpgid, other minor tweaks
+- various */Makefile.am tweaks
+- login.defs: added FAKE_SHELL - program to run instead of the login
+  shell, with the real shell in argv[0] (Frank Denis)
+- login.defs: ignore case in yes/no settings
+- more E_* defines instead of hardcoded numbers for exit()
+- added sanitize_env() for setuid programs
+- login_desrpc() checks for getnetname() errors
+- new password is not "too similar" if it is long enough
+- replacement strstr() was static, no one noticed :-)
+- {pw,spw}_lock() and {pw,spw}_unlock() track the lock count and call
+  lckpwdf() and ulckpwdf() as needed, *_lock_first() hack removed
+- login sets $REMOTEHOST for remote logins
+- added newgrp -l option (Single Unix Spec, same as "-")
+- EXPERIMENTAL shared lib support using libtool (libshadow.so saves about
+  200K of disk space on Linux/x86), enabled by default if supported by
+  the system, use ./configure --disable-shared if it causes any problems.
+  Warning: libshadow.so is intended for internal use by this package
+  only - binary compatibility with future releases is not guaranteed.
+  There should be no need to link any other programs with libshadow.so -
+  the libshadow.so -> libshadow.so.x.x symlink is unnecessary.
+- pam_strerror() takes one or two arguments, depending on the Linux-PAM
+  version (!) - added check to configure; fixed do_pam_passwd prototype
+- libmisc/login_access.c should compile on Linux/PPC and Solaris
+- added information about the new ftp site to doc/README.mirrors
+
+shadow-971001 => shadow-971215
+
+- added workaround for NYS libc 5.3.12 (RedHat 4.2) bug to grpck
+- updated the RPM .spec file
+- renamed rlogin() to do_rlogin() to avoid Linux/PPC build problem
+  (glibc defines something else named "rlogin" in utmpbits.h ?)
+- added MD5 checksums in Debian packages
+- added -p and -g options to vipw (edit the password or group file
+  respectively, regardless of the command name in argv[0])
+- removed old DBM support (NDBM code is still there)
+- fixed a bug in gpasswd: current username was incorrectly identified as
+  "root" because of setuid(0) done too early.  It may be a security hole
+  when using shadow groups - if "root" is listed as a group administrator,
+  any user can add/remove members in that group.  Thanks to Jesse Thilo.
+- gpasswd now logs which user (root or group admin) made the changes
+- passwd now uses $PATH to search for the chfn, chsh, gpasswd commands
+- newgrp and add_groups() allocate supplementary group lists dynamically
+- moved check_shell() from src/chsh.c to libmisc/chkshell.c
+- CHFN_RESTRICT in login.defs can now specify exactly which fields may be
+  changed by regular users (any combination of letters "frwh")
+- fixed contrib/pwdauth.c segfault with non-existent usernames
+- minor change in lib/getdef.c to handle quotes better (Juergen Heinzl)
+- new date parsing code (from GNU date) used by useradd, usermod, chage
+- upgraded to automake-1.2, added libtool-0.7 (no libshadow.so yet)
+- converted code to ANSI C, added ansi2knr (untested - use gcc!)
+- fixed useradd -G segfault (one '*' that shouldn't be there)
+- allow 8-bit characters in chfn
+- added support for RLIMIT_AS (max address space) in libmisc/limits.c
+- changed the handling of NIS plus entries in password files
+- some more tweaking in various debian/* files
+- logoutd uses getutent() instead of reading utmp file directly
+- fixed lckpwdf() called twice (and failing) when changing password
+  if the user is not listed in /etc/shadow (Mike Pakovic)
+- erase and kill characters left unchanged if not defined in login.defs
+
+shadow-970616 => shadow-971001
+
+- Debian: mkpasswd no longer installed (dbm files not supported)
+- chpasswd checks for shadow/non-shadow at run time, too
+- added chpasswd -e (input file with encrypted passwords) - Jay Soffian
+- changed libmisc/login_access.c as suggested by Dave Hagewood
+- replaced sprintf() with snprintf() in several places
+- added lib/snprintf.[ch] (from XFree86) for systems without snprintf()
+- minor tweaks in contrib/adduser.c (/usr/local -> /usr)
+- non-root users can only run su with a terminal on stdin
+- temporarily disabled DES_RPC because getsecretkey() causes login to hang
+  for 5 minutes on at least one RH 4.0 system.  Not sure if this is a bug
+  in libc, or system misconfiguration.  Needs further investigation.
+- check for strerror() and -lrpcsvc (should compile on SunOS again)
+- fixed free() called twice in libmisc/mail.c
+- added information about mirror sites (doc/README.mirrors)
+- updated pwconv.8 and pwunconv.8 man pages
+- "make install" now installs pwconv, pwunconv, grpconv, grpunconv
+- pwauth.8 no longer installed (AUTH_METHODS not supported by default)
+- corrected su.1 man page ($SHELL not used)
+- no need for --with-md5crypt if the MD5-based crypt() is already in libc
+  (or another library specified in /etc/ld.so.preload - Linux ld.so 1.8.0+)
+- cleaned up PASS_MAX in getpass() (127 always assumed)
+- default editor for vipw changed from /bin/ae to a real editor :)
+
+shadow-970601 => shadow-970616
+
+- fixed execlp call (missing NULL) in src/vipw.c
+- vipw now preserves permissions on edited files
+- commented out the xdm-shadow hack in shadowconfig
+- improved RedHat spec file (Timo Karjalainen)
+- updated mailing list information
+- added information about the shadow paper (doc/README.shadow-paper)
+- renamed doc/console.c.spec (confused RPM)
+
+shadow-970502-2 => shadow-970601
+
+- fixed a typo in libmisc/mail.c causing login to segfault
+  if MAIL_CHECK_ENAB=yes (sorry!)
+- patches for OPIE support (Algis Rudys) (untested)
+- programs that modify /etc/passwd or /etc/shadow will use
+  lckpwdf() if available
+- now compiles with PAM support! (still untested)
+- cosmetic error message changes (prefixed by argv[0]:)
+
+shadow-970216 => shadow-970502-2
+
+- shadow group support fixes (grpconv didn't work - for some
+  reason, putsgent() returns 1 instead of 0 on success;
+  now -1 = failure, anything else = success)
+- upgraded to autoconf-2.12
+- pwconv and pwunconv now follow other UN*X systems and SVID3
+  (modify files in place), original versions moved to "old"
+- scologin.c moved to "old" (it was only for SCO Xenix) so
+  people stop sending patches for scologin.c gcc warnings :)
+- don't use the MD5* functions in libmisc/salt.c (glibc has
+  the new md5 crypt(), but no <md5.h> and MD5* functions!)
+- support for MkLinux, Solaris, JIS, Qmail (Frank Denis)
+- "passwd -S -a" now really works
+- support for Debian, vipw, a few fixes (Guy Maor)
+- src/login.c radius bug fix (Rafal Maszkowski)
+- ISSUE_FILE_ENAB -> ISSUE_FILE in the sample /etc/login.defs
+- fixes for glibc and DES_RPC (Thorsten Kukuk)
+- limits.5 man page (Luca Berra)
+- expiry will work setgid shadow too, removed euid 0 check
+- added check for a64l() to configure (glibc)
+
+shadow-961025 => shadow-970216
+
+- major rewrite of *io.c (no more 4 copies of almost identical code)
+- use fsync() (if available) instead of sync() when updating password files
+- use fchmod() and fchown() if available
+- keep the NIS "plus on a line by itself" entries at end of passwd/group
+- configure checks location of passwd/chfn/chsh programs (/usr/bin or /bin)
+- passwd -S -a: list information about all users (root only)
+- passwd -k: change only expired passwords
+- passwd -q: quiet mode
+- first attempt at PAM support in passwd
+- passwd updates the non-shadow password if /etc/shadow exists but the
+  user has no shadow password
+- passwd logs who changed the password, added hook to allow non-root
+  administrators who can change passwords (not implemented yet)
+- su sets $HOME even without the "-" option (suggested by Joey Hess)
+- added -p (set encrypted password) option to useradd and usermod
+  (idea from hpux10 - undocumented option used internally by SAM)
+- useradd -D -e does the right thing (set default expiration date)
+- USERDEL_CMD in login.defs instead of hardcoded {ATRM,CRONTAB}_COMMAND
+  because there are just too many systems that need different commands
+- removed #ifdef FAILLOG_LOCKTIME (now always enabled), warning: the
+  faillog file format has been changed (somewhere between 960129 and
+  960810), please truncate the old file (if any) to zero length
+- ISSUE_FILE (may be different from /etc/issue) instead of ISSUE_FILE_ENAB
+- wtmp, lastlog, faillog file location guessed by configure
+- separate checks for invalid user and group names, max username length
+  based on struct utmp (it's not always 8 characters)
+- pwck and grpck now check for invalid user/group names
+- pwck -q (quiet, report only serious problems) option added
+- separate cleaner sgetpwent() without the NIS magic
+- NIS entries ignored (never changed) by *io.c, pwck, grpck
+- various code cleanups
+- new get_my_pwent() function for getting my own username, uid etc.
+- faillog opens the file read-write if possible (even if not root)
+- passwd -S allowed for normal users (for their own uid only)
+- handle the case of login denied to passwordless accounts better
+  ("Login incorrect" without "Password:" prompt looks strange)
+- corrected author information and removed a copyright restriction
+
+shadow-960925 => shadow-961025
+
+- fixed a few typos in shadow group code
+- don't check for names starting with 'r' to determine if the shell
+  is restricted, use /etc/shells instead (for the "rc" shell)
+- removed extra definition of LASTLOG_FILE in configure.in
+- expiry no longer segfaults if no /etc/shadow
+- userdel -r "can't remove mailbox" warning no longer printed on success
+- useradd exit codes changed to match hpux10 man page
+- fixed possible fd leak etc. in file locking code (lib/commonio.c)
+
+shadow-960920 => shadow-960925
+
+- bug fixes to the new environment code using malloc
+- use hardcoded names instead of basename(argv[0]) for openlog() in programs
+  that users can run (chage, chfn, chsh, gpasswd, login, newgrp, passwd, su)
+- small fix to isexpired(), and use it in passwd as well
+- use strftime() and strptime() if available
+- added chmod 600 /etc/passwd- at the end of pwconv5 (backup file may
+  contain encrypted passwords!)
+- pass size to change_field (chage, chfn, chsh) instead of assuming BUFSIZ
+  (nothing bad happened yet, just a cleanup)
+- gpasswd should work with both shadow and non-shadow group passwords
+- detect unsupported options if no shadow (gpasswd, useradd, usermod)
+- passwd -e for sunos4 (ATT_AGE), untested
+- read environment from file (ENVIRON_FILE in login.defs), idea from ssh
+- small fix to l64a()
+- passwd prints a message after password successfully changed (for things
+  like poppassd which run passwd and expect some output)
+- passwd logs if password was changed by root (as opposed to a luser)
+- passwd uses current uid if no username argument and getlogin() fails
+
+shadow-960910 => shadow-960920
+
+- use malloc for environment variables, no more MAXENV (Juergen Heinzl)
+- newusers should work with both shadow and non-shadow passwords
+  (still left to do: chpasswd, gpasswd)
+- login-static no longer compiled by default
+- more SYSLOG() macros
+
+shadow-960810 => shadow-960910
+
+- updated README.linux to point to the new ftp site
+- chfn and chsh optionally (CHFN_AUTH) prompt for password like util-linux
+- man pages now closer to LDP standards (Ivan Nejgebauer)
+- newgrp uses SYSLOG_SG_ENAB (not SU) as in the /etc/login.defs comments
+- obscure.c fixed to compile with HAVE_LIBCRACK
+- cosmetic message changes in age.c
+- utmp open error check fixed in utmp.c
+- grpunconv added (Michael Meskes)
+- login reports invalid login time, not "Login incorrect" (Ivan Nejgebauer)
+- logoutd sets OPOST before writing to the tty (Ivan Nejgebauer)
+- sulogin: don't use syslog(), other minor changes (Ivan Nejgebauer)
+- passwords can be changed if sp_max == -1 (now considered infinity)
+- usermod: don't use sizeof(struct lastlog) when writing to faillog (ugh)
+- started replacing lots of #ifdef USE_SYSLOG with cleaner macros
+- contrib/rpasswd.c added (Joshua Cowan)
+- PASS_MAX is 127 with MD5_CRYPT (not just for Linux - sunos4 too...)
+- workarounds for a RedHat NYS libc getspnam() bug (if /etc/shadow
+  doesn't exist, it succeeds and returns sp_lstchg==0 instead of -1).
+
+shadow-960129 => shadow-960810
+
+- automake, configure checks for libcrypt and libcrack (Janos Farkas)
+- added --enable-shadowgrp to configure (shadow groups disabled by default)
+- should compile on SunOS 4.1.x - but it does NOT mean that it works :-)
+- login sets HUSHLOGIN=TRUE or FALSE (for shell startup scripts etc.)
+- hopefully removed all the rcsid warnings
+- contrib/atudel perl script to remove at jobs (thanks to Brian Gaeke)
+- resource limits (Cristian Gafton)
+- workaround for buggy init/getty(?) leaving junk in ut_host on RedHat
+- more fixes in man pages
+- pwck and grpck no longer suggest to run mkpasswd if *DBM not compiled in
+- most programs (groupadd, groupdel, groupmod, grpck, login, passwd, pwck,
+  su, useradd, userdel, usermod) should now work with both shadow and
+  non-shadow passwords/groups (check for /etc/shadow and /etc/gshadow at
+  run time); a few programs still left to do
+- mailbox mv/chown/rm in usermod/userdel (suggested by Cristian Gafton)
+- new contrib/adduser.c from Chris Evans
+- lots of other minor changes
+- source tree reorganization, GNU autoconf, portability cleanups
+- basename() renamed to Basename() to avoid name space confusion
+- new programs to create /etc/shadow and /etc/gshadow: pwconv5, grpconv
+- newgrp cleanup and a few fixes
+- useradd uses PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE
+- don't make the first group member the group admin by default
+  (define FIRST_MEMBER_IS_ADMIN to get the old gpasswd behaviour)
+- password aging constants, NGROUPS_MAX and syslog stuff in only one
+  place (defines.h) instead of repeating it in all source files...
+- added userdel -r safety check (refuse to remove the home directory
+  if it would result in removing some other user's home directory)
+- usermod -u now correctly checks for non-unique uid (unless -o)
+- sync() after updating password files, just to be more safe
+- "make install" should install /etc/login.defs if it doesn't exist
+- new option to control what happens if we can't cd to the home directory
+  (DEFAULT_HOME in /etc/login.defs)
+- enter the home directory as the user, not as root (for NFS etc.)
+- added check for Slackware bugs (nobody UID -1) in pwck and grpck
+- new CONSOLE_GROUPS feature (thanks to pacman@tardis.mars.net), it is
+  possible to add specified groups (floppy etc.) for console logins
+- new faillog feature: lock account for specified (per-user) time since
+  the last failure after exceeding the failure limit
+- new man pages (gpasswd.1, login.access.5, suauth.5)
+- fixes in man pages, renamed *.4 to *.5
+- new "contrib" directory (two adduser programs)
+- changed some "system" to "feature" #ifdefs (autoconf someday...)
+- sulogin no longer requires to be run from init, should work from rc
+  scripts too
+- changes to prevent unshadowing with libc SHADOW_COMPAT (get info
+  using xx_locate(), modify it and call xx_update(), don't write back
+  anything returned by getpwnam() etc.)
+- stupid bug fixed in lastlog.c
+- don't move non-directories in "usermod -m"
+- don't log unknown usernames (passwords mistyped for usernames) (lmain.c)
+- macros to get around ancient compilers which don't like prototypes
+- make more use of "const" (not everywhere yet)
+- added #ifdef AUTH_METHODS - very few people use administrator defined
+  authentication methods because many programs are not aware of them;
+  not supporting them makes the code simpler
+- new "save" and "restore" Makefile targets, thanks to Rafal Maszkowski
+- sgetgrent() in libshadow.a is optional, some versions of libc have it,
+  see HAVE_SGETGRENT in config.h (grent.c)
+- don't use continued lines in /etc/group, the standard getgr*() functions
+  don't support that (grent.c)
+- removed the third main() argument (according to libc docs, not allowed by
+  POSIX.1 - use environ instead) (lmain.c, smain.c, newgrp.c, sulogin.c)
+- login access control (lmain.c, login_access.c)
+- added copyright notice to login_access.c (from logdaemon-5.0)
+- detailed su access control (smain.c, suauth.c) - thanks to Chris Evans
+- added closelog() in su before executing the shell (smain.c)
+- getting current user name changed (smain.c)
+- "x" instead of "*" in pw_passwd, consistent with pwconv (useradd.c)
+- getpass() shouldn't return NULL except on errors (getpass.c)
+- moved isexpired() to isexpired.c (now part of libshadow.a) from age.c
+- SunOS4-like passwd -e (force change on next login) (isexpired.c, passwd.c)
+- can use shadow support in new versions of Linux libc instead of libshadow.a,
+  see HAVE_SHADOWPWD, HAVE_SHADOWGRP in config.h.linux (shadow.c, gshadow.c)
+- "no shadow password" not logged, the same /bin/login should work with both
+  shadow and non-shadow passwords (lmain.c)
+- some cleanup in various places (lmain.c, passwd.c)
+- new program to verify username/password pairs, for xlock etc.; it is not
+  installed by default, read the comments first (pwdauth.c)
+- authentication programs run with empty environment for safety (pwauth.c)
+- added missing fstat error checks (faillog.c, lastlog.c, setup.c, *io.c)
+- common code separated from *io.c (commonio.c)
+- ownership and permissions on password files are now preserved (we may try
+  to make more use of setgid and setuid non-root programs in the future)
+- added (untested) MD5-based crypt() from FreeBSD (md5crypt.c), see
+  MD5_CRYPT in config.h.linux and MD5_CRYPT_ENAB in login.defs.linux
+- termios/termio/sgtty macros cleaned up a bit
+
+shadow-951218 => shadow-960129
+
+Emergency bug fix release - no new features since 951218.  There are many
+new changes, but this bug really can't wait until they are tested.
+
+Probably all previous versions of the shadow suite have a serious bug which
+makes it possible to overwrite the stack by entering very long username at
+the login prompt.  This can give root access to any remote user!
+
+Changed the maximum size in login.c from BUFSIZ (1024) to 32 (to match
+size of the array in lmain.c).  Aaargh!!!
+
+shadow-951203 => shadow-951218
+
+Changes:
+- Linux utmp handling fixes (utmp.c)
+- last failure date printing fixes (failure.c)
+- minor fix to compile with USE_CRACKLIB (obscure.c)
+- eliminated the use of snprintf (env.c, lmain.c, login.c, shell.c, smain.c)
+- basename.c added, replacing duplicated code in various places
+- "su -" runs the shell with '-' in argv[0] again (smain.c)
+- removing at/cron jobs cleaned up (userdel.c)
+- /etc/gshadow should not be world-readable (sgroupio.c)
+- if fflush() failed, files were not closed (*io.c)
+- login prompt is now "hostname login: " on Linux (lmain.c, login.c)
+- "save" and "restore" targets commented out (don't work) (Makefile.linux)
+- some minor cleanups for gcc -Wall (unused variables etc.)
+- removed README.FIRST (copyrights are OK now)
+- updated ANNOUNCE, README.linux, WISHLIST
+- as suggested, converted to RCS
+
+shadow-3.3.2-951127 => shadow-951203-jfh
+
+Changes:
+- Added the BSD-style copyright to all of the files.  Any files with the
+  old copyright have multiple copyright holders and need to be cleanroomed
+  to produce BSD-style copyrightable files, or I need to get the consent
+  of the others to change the copyright.
+- Changed the ANNOUNCE file to not refer to the README.FIRST file.  Now
+  that all of the files should have the correct copyright there is no need
+  to refer to that e-mail message.
+- Changes SCCS strings to "%W% %U% %G%".  Marek needs to either convert to
+  RCS or check into SCCS and then checkout.  I'd suggest using RCS ;-)
+
+  jfh@rpp386.cactus.org
+
+shadow-3.3.2-951106 => shadow-951127
+
+Note: for now this code only supports Linux.  All the #ifdef's are there
+(and will be; support for at least SunOS 4.1.x would be nice) but:
+- I had to fix some potential security problems resulting from sloppy
+  coding (no bounds checking), and it was easier for me to use snprintf()
+  (not available on many systems, unfortunately), I'll fix that later.
+  Old versions of Linux libc don't have snprintf() either, and the one
+  in libbsd.a ignores the max size - don't use it!  (libc-4.6.27 is OK)
+- I am lazy and only updated Makefile.linux and config.h.linux this time
+- I don't have root access to non-Linux systems (this means no testing)
+- this code needs some major reorganization, which will (hopefully)
+  make porting easier
+
+Changes:
+- some code cleanup, prototypes.h, defines.h, Makefile and config.h changes
+- login can be statically linked (not that I think it's a good idea, better
+  fix the telnetd, but paranoid people will like it :-)
+- login is installed non-setuid by default
+- check for NULL from getpass()
+- wipe cleartext password from getpass() when no longer needed (pwauth.c)
+- use standard "Password: " prompt by default (pwauth.c)
+- hopefully fixed bogus sigaction() stuff (Linux only) (getpass.c)
+- oops, setrlimit wants bytes, ulimit wants 512-byte units (lmain.c)
+- Linux has <lastlog.h>
+- print ll_host on Linux too (lmain.c)
+- size checking in various places (setuid root programs, argh!)
+- preserve TERM from getty (lmain.c)
+- don't ignore SIGHUP (lmain.c)
+- :%s/setenv/set_env/g (setenv(3) conflict) (env.c, lmain.c, login.c)
+- remove LD_xxx (env.c)
+- use bzero() instead of memset() for BSD portability and less #ifdef's
+  (if the system has no bzero(), implement it as a macro using memset())
+- the above fixes wrong order of memset() parameters (log.c)
+- use getutent/pututline instead of doing it by hand (utmp.c)
+- added the new settings to login.defs.linux
+- added login_access.c to the distribution (not used yet)
+
+==========
+
+shadow-3.3.2 => shadow-3.3.2-951106
+
+- added dummy pad.c and #ifdef'ed out references to pad_auth (pwauth.c)
+- malloc/strdup error checking, hopefully no more core dumps...
+- define HAVE_RLIMIT instead of HAVE_ULIMIT for Linux (config.h.linux)
+- changed pathnames on Linux to conform to new FSSTND (/var/log etc.)
+- larger buffer for cipher, for md5 crypt() if and when (encrypt.c, passwd.c)
+- use POSIX termios whenever possible on Linux
+- list.c, removed add_list/del_list from gpmain.c, user{add,del,mod}.c
+- strtoday.c, removed duplicates from chage.c, useradd.c, usermod.c
+- login -h only for root (lmain.c)
+- login -r not needed for Linux (lmain.c)
+- sample login.defs modified for Linux (login.defs.linux)
+- swapped chfn USAGE and ADMUSAGE (chfn.c)
+- added -u to passwd usage (passwd.c)
+- no #! check necessary for Linux (shell.c)
+- define OLD_CRON for some old incompatible Linux distributions (userdel.c)
+- PASS_MAX is now 127 (not 8) for Linux (getpass.c)
+- LOGIN_RETRIES, LOGIN_TIMEOUT, PASS_CHANGE_TRIES are no longer compiled in,
+  can now be set in login.defs, old values are used as defaults (lmain.c)
+- unique uid/gid selection now more robust (useradd.c, groupadd.c)
+- UID_MIN, UID_MAX, GID_MIN, GID_MAX in login.defs (useradd.c, groupadd.c)
+- CRACKLIB_DICTPATH no longer compiled in, can be set in login.defs (passwd.c)
+- PASS_ALWAYS_WARN: warn about weak passwords even for root (passwd.c)
+- PASS_MAX_LEN, check truncated passwords again (obscure.c)
+- check for weak passwords too if previous password was empty (obscure.c)
+- CHFN_RESTRICT: don't let users change their full names (chfn.c)
+- Linux has getusershell(), use it (chsh.c)
+- check if the new shell is executable by the user (chsh.c)
+- sleep before printing "Login incorrect", not the other way around (lmain.c)
+- don't be picky about utmp only if any of -rfh flags given (lmain.c)
+- do "wheel group" more like BSD does (smain.c)
+- use getlogin() in su (smain.c)
+- UMASK from login.defs defaults to 077, not 0 (lmain.c, newusers.c)
+- #undef HAS_ATRM for Linux until atrm can do what we need (config.h.linux)
+- Linux has most commands in /usr/bin, not /bin (age.c, passwd.c, userdel.c)
+- ULIMIT from login.defs works on systems using setrlimit() too (lmain.c)
+- LOGIN_STRING should work now (pwauth.c, getdef.c)
+- kludge to avoid conflict with Linux <shadow.h> (gshadow.h)
+- mv Makefile Makefile.xenix ; mv config.h config.h.xenix - so that they are
+  not lost when you copy the right ones to Makefile and config.h
+
+==========
+
+shadow-3.3.2
+
+Original version, received directly from the author.
+

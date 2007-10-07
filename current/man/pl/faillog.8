@@ -1,0 +1,95 @@
+.\" {PTM/WK/1999-09-18}
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH FAILLOG 8
+.SH NAZWA
+faillog \- sprawd¼ faillog i ustaw limity b³êdnych logowañ
+.SH SK£ADNIA
+.TP 8
+.B faillog
+.RB [ -u
+.IR nazwa ]
+.RB [ -a ]
+.RB [ -t
+.IR dni ]
+.RB [ -m
+.IR max ]
+.RB [ -pr ] 
+.SH OPIS
+\fBfaillog\fR formatuje zawarto¶æ rejestru nieudanych prób rozpoczêcia sesji,
+\fI/var/log/faillog\fR, oraz obs³uguje ograniczenia i liczniki b³êdnych prób.
+Kolejno¶æ argumentów \fBfaillog\fR jest znacz±ca. Ka¿dy z argumentów jest
+natychmiast przetwarzany w zadanej kolejno¶ci.
+.PP
+Flaga \fB-p\fR powoduje, ¿e zapisy o nieudanych logowaniach wy¶wietlane bêd±
+w kolejno¶ci rosn±cych identyfikatorów u¿ytkowników (UID).
+Pos³u¿enie siê flag± \fB-u \fInazwa\fR spowoduje, ¿e zostanie wy¶wietlony
+wy³±cznie zapis dotycz±cy u¿ytkownika o tej \fInazwie\fR.
+U¿ycie \fB-t \fIdni\fR powoduje wy¶wietlanie wy³±cznie nieudanych prób
+logowania ¶wie¿szych ni¿ sprzed zadanej liczby \fIdni\fR.
+Flaga \fB-t\fR uniewa¿nia u¿ycie \fB-u\fR.
+Flaga \fB-a\fR powoduje wybranie wszystkich u¿ytkowników.
+W po³±czeniu z flag± \fB-p\fR flag, opcja ta wybiera wszystkich u¿ytkowników,
+dla których kiedykolwiek odnotowano niepomy¶ln± próbê logowania.
+Opcja ta nie ma znaczenia w po³±czeniu z flag± \fB-r\fR.
+.PP
+\fB-r\fR s³u¿y do zerowania licznika b³êdnych logowañ. Do poprawnego dzia³ania
+tej opcji wymagane jest prawo zapisu do \fI/var/log/faillog\fR.
+W po³±czeniu z \fB-u \fInazwa\fR s³u¿y do zerowania licznika b³êdów u¿ytkownika
+o podanej \fInazwie\fR.
+.PP
+Flaga \fB-m\fR ustawia maksymaln± liczbê b³êdów logowania, po której konto
+zostanie wy³±czone. Dla tej opcji wymagane jest prawo zapisu do
+\fI/var/log/faillog\fR.
+Argumenty \fB-m \fImax\fR powoduj±, ¿e wszystkie konta bêd± wy³±czane po
+\fImax\fR nieudanych próbach logowania.
+U¿ycie dodatkowo \fB-u \fInazwa\fR, ogranicza dzia³anie tej funkcji do
+u¿ytkownika o podanej \fInazwie\fR.
+Pos³u¿enie siê zerow± warto¶ci± \fImax\fR powoduje, ¿e liczba nieudanych prób
+rozpoczêcia sesji jest nieograniczona.
+Dla u¿ytkownika \fBroot\fR maksymalna liczba niepowodzeñ powinna byæ zawsze
+ustawiona na 0, by zapobiec atakom typu denial of service (odmowa obs³ugi).
+.PP
+Opcje mog± byæ ³±czone w praktycznie dowolny sposób. Ka¿da z opcji \fB-p\fR,
+\fB-r\fR i \fB-m\fR powoduje natychmiastowe wykonanie przy u¿yciu modyfikatora
+\fB-u\fR lub \fB-t\fR.
+.SH PRZESTROGI
+\fBfaillog\fR wy¶wietla wy³±cznie u¿ytkowników, którzy od ostatniej nieudanej
+próby nie mieli poprawnych logowañ.
+Chc±c wy¶wietliæ u¿ytkownika, który po ostatniej pora¿ce logowa³ siê ju¿
+pomy¶lnie, musisz jawnie za¿±daæ o nim informacji przy pomocy flagi \fB-u\fR.
+Mo¿esz tak¿e wy¶wietliæ wszystkich u¿ytkowników pos³uguj±c siê flag± \fB-a\fR.
+.PP
+W niektórych systemach zamiast /var/log wystêpuje /var/adm lub /usr/adm.
+.SH PLIKI
+.IR /var/log/faillog " - plik rejestracji b³êdów logowania"
+.SH ZOBACZ TAK¯E
+.BR login (1),
+.BR faillog (5)
+.SH AUTOR
+Julianne Frances Haugh (jfh@austin.ibm.com)

@@ -1,0 +1,2406 @@
+# Swedish messages for Shadow 
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Kristoffer Brånemyr <ztion@swipnet.se>, 1999.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: shadow 19990709\n"
+"POT-Creation-Date: 2000-09-02 20:40+0200\n"
+"PO-Revision-Date: 1999-08-16 21:20+0100\n"
+"Last-Translator: Kristoffer Brånemyr <ztion@swipnet.se>\n"
+"Language-Team: sv <sv@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libmisc/addgrps.c:60
+#, c-format
+msgid "Warning: unknown group %s\n"
+msgstr "Varning: okänd grupp %s\n"
+
+#: libmisc/addgrps.c:71
+msgid "Warning: too many groups\n"
+msgstr "Varning: för många grupper\n"
+
+#: libmisc/age.c:104
+msgid "Your password has expired."
+msgstr "Ditt lösenord har upphört"
+
+#: libmisc/age.c:107
+msgid "Your password is inactive."
+msgstr "Ditt lösenord är inaktivt"
+
+#: libmisc/age.c:110
+msgid "Your login has expired."
+msgstr "Din användare har upphört."
+
+#: libmisc/age.c:127
+msgid "  Contact the system administrator.\n"
+msgstr "  Kontakta systemoperatören.\n"
+
+#: libmisc/age.c:130
+msgid "  Choose a new password.\n"
+msgstr "  Välj ett nytt lösenord.\n"
+
+#: libmisc/age.c:228
+#, c-format
+msgid "Your password will expire in %ld days.\n"
+msgstr "Ditt lösenord upphör om %ld dagar.\n"
+
+#: libmisc/age.c:230
+msgid "Your password will expire tomorrow.\n"
+msgstr "Ditt lösenord upphör imorgon.\n"
+
+#: libmisc/age.c:232
+msgid "Your password will expire today.\n"
+msgstr "Ditt lösenord upphör idag.\n"
+
+#: libmisc/chowntty.c:110
+#, c-format
+msgid "Unable to change tty %s"
+msgstr "Kunde inte byta tty %s"
+
+#: libmisc/env.c:160
+msgid "Environment overflow\n"
+msgstr "Miljön överflödades\n"
+
+#: libmisc/env.c:200
+#, c-format
+msgid "You may not change $%s\n"
+msgstr "Du får inte ändra $%s\n"
+
+#: libmisc/failure.c:238
+#, c-format
+msgid "%d %s since last login.  Last was %s on %s.\n"
+msgstr "%d %s sedan förra inloggningen.  Den sista var %s på %s.\n"
+
+#: libmisc/failure.c:239
+msgid "failures"
+msgstr "felaktiga inloggningar"
+
+#: libmisc/failure.c:239
+msgid "failure"
+msgstr "felaktig inloggning"
+
+#: libmisc/limits.c:397
+msgid "Too many logins.\n"
+msgstr "För många inloggningar.\n"
+
+#: libmisc/login_desrpc.c:63
+#, c-format
+msgid "Password does not decrypt secret key for %s.\n"
+msgstr "Lösenordet avkrypterar inte den hemliga nyckeln för %s.\n"
+
+#: libmisc/login_desrpc.c:69
+#, c-format
+msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
+msgstr ""
+"Kunde inte sätta den hemliga nyckeln för %s: är keyserv demonen igång?\n"
+
+#: libmisc/mail.c:62 libmisc/mail.c:77
+msgid "You have new mail."
+msgstr "Du har ny post."
+
+#: libmisc/mail.c:73
+msgid "No mail."
+msgstr "Ingen post."
+
+#: libmisc/mail.c:75
+msgid "You have mail."
+msgstr "Du har post."
+
+#: libmisc/obscure.c:281 src/passwd.c:309
+#, c-format
+msgid "Bad password: %s.  "
+msgstr "Felaktigt lösenord: %s.  "
+
+#: libmisc/pam_pass.c:42
+#, c-format
+msgid "passwd: pam_start() failed, error %d\n"
+msgstr "passwd: pam_start() misslyckades, fel %d\n"
+
+#: libmisc/pam_pass.c:49
+#, c-format
+msgid "passwd: %s\n"
+msgstr "passwd: %s\n"
+
+#: libmisc/setupenv.c:205
+#, c-format
+msgid "Unable to cd to \"%s\"\n"
+msgstr "Kunde inte byta aktuell katalog till \"%s\"\n"
+
+#: libmisc/setupenv.c:213
+msgid "No directory, logging in with HOME=/"
+msgstr "Ingen hemkatalog, loggar in med HOME=/"
+
+#: libmisc/shell.c:78
+#, c-format
+msgid "Executing shell %s\n"
+msgstr "Startar skal %s\n"
+
+#.
+#. * Obviously something is really wrong - I can't figure out
+#. * how to execute this stupid shell, so I might as well give
+#. * up in disgust ...
+#.
+#: libmisc/shell.c:122
+#, c-format
+msgid "Cannot execute %s"
+msgstr "Kan inte starta %s"
+
+#: libmisc/suauth.c:99
+msgid "Access to su to that account DENIED.\n"
+msgstr "Du har inte behörighet att köra su till det kontot.\n"
+
+#: libmisc/suauth.c:106
+msgid "Password authentication bypassed.\n"
+msgstr "Hoppade över lösenordskontroll.\n"
+
+#: libmisc/suauth.c:113
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "Var god skriv in ditt EGET lösenord som äkthetsbevis.\n"
+
+#: libmisc/sub.c:61
+#, c-format
+msgid "Invalid root directory \"%s\"\n"
+msgstr "Felaktig rotkatalog \"%s\"\n"
+
+#: libmisc/sub.c:73
+#, c-format
+msgid "Can't change root directory to \"%s\"\n"
+msgstr "Kan inte byta rotkatalog till \"%s\"\n"
+
+#: libmisc/xmalloc.c:28
+#, c-format
+msgid "malloc(%d) failed\n"
+msgstr "malloc(%d) misslyckades\n"
+
+#: lib/dialchk.c:71
+msgid "Dialup Password: "
+msgstr "Uppringningslösenord: "
+
+#: lib/getdef.c:253
+msgid "Could not allocate space for config info.\n"
+msgstr "Kunde inte allokera rum för konfigureringsinformation.\n"
+
+#.
+#. * Item was never found.
+#.
+#: lib/getdef.c:307
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "konfigurerings fel - okänt object \"%s\" (meddela systemoperatören)\n"
+
+#: lib/getdef.c:394
+#, c-format
+msgid "error - lookup '%s' failed\n"
+msgstr "fel - kunde inte hitta \"%s\"\n"
+
+#: lib/getdef.c:402
+#, c-format
+msgid "%s not found\n"
+msgstr "%s hittades inte\n"
+
+#.
+#. * get the password from her, and set the salt for
+#. * the decryption from the group file.
+#.
+#: lib/pwauth.c:54 src/newgrp.c:305
+msgid "Password: "
+msgstr "Lösenord: "
+
+#: lib/pwauth.c:56
+#, c-format
+msgid "%s's Password: "
+msgstr "Lösenord för %s: "
+
+#: lib/pwauth.c:270
+msgid "(Echo on) "
+msgstr ""
+
+#: lib/strerror.c:20
+#, c-format
+msgid "Unknown error %d"
+msgstr "Okänt fel %d"
+
+#: src/chage.c:156
+#, c-format
+msgid ""
+"Usage: %s [ -l ] [ -m min_days ] [ -M max_days ] [ -W warn ]\n"
+"  [ -I inactive ] [ -E expire ] [ -d last_day ] user\n"
+msgstr ""
+"Användning: %s [ -l ] [ -m min_dagar ] [ -M max_dagar ] [ -W varna ]\n"
+"  [ -I inaktiv ] [ -E utgång ] [ -d senaste_dag ] användare\n"
+
+#: src/chage.c:158
+#, c-format
+msgid "Usage: %s [ -l ] [ -m min_days ] [ -M max_days ] [ -d last_day ] user\n"
+msgstr ""
+"Användning: %s [ -l ] [ -m min_dagar ] [ -M max_dagar ] [ -d senaste_dag ] "
+"användare\n"
+
+#: src/chage.c:193
+msgid ""
+"Enter the new value, or press return for the default\n"
+"\n"
+msgstr ""
+"Skriv in det nya värdet, eller tryck på return för standardvärdet\n"
+"\n"
+
+#: src/chage.c:196
+msgid "Minimum Password Age"
+msgstr "Minsta lösenordsålder"
+
+#: src/chage.c:201
+msgid "Maximum Password Age"
+msgstr "Högsta lösenordsålder"
+
+#: src/chage.c:207
+msgid "Last Password Change (YYYY-MM-DD)"
+msgstr "Senaste lösenordsändring (ÅÅÅÅ-MM-DD)"
+
+#: src/chage.c:216
+msgid "Password Expiration Warning"
+msgstr "Lösenords upphörningsvarning"
+
+#: src/chage.c:221
+msgid "Password Inactive"
+msgstr "Lösenord inaktivt"
+
+#: src/chage.c:227
+msgid "Account Expiration Date (YYYY-MM-DD)"
+msgstr "Kontot upphör (ÅÅÅÅ-MM-DD)"
+
+#.
+#. * Start with the easy numbers - the number of days before the
+#. * password can be changed, the number of days after which the
+#. * password must be chaged, the number of days before the
+#. * password expires that the user is told, and the number of
+#. * days after the password expires that the account becomes
+#. * unusable.
+#.
+#: src/chage.c:281
+#, c-format
+msgid "Minimum:\t%ld\n"
+msgstr "Minst:\t%ld\n"
+
+#: src/chage.c:282
+#, c-format
+msgid "Maximum:\t%ld\n"
+msgstr "Högst:\t%ld\n"
+
+#: src/chage.c:284
+#, c-format
+msgid "Warning:\t%ld\n"
+msgstr "Varning:\t%ld\n"
+
+#: src/chage.c:285
+#, c-format
+msgid "Inactive:\t%ld\n"
+msgstr "Inaktivt:\t%ld\n"
+
+#.
+#. * The "last change" date is either "Never" or the date the
+#. * password was last modified.  The date is the number of
+#. * days since 1/1/1970.
+#.
+#: src/chage.c:294
+msgid "Last Change:\t\t"
+msgstr "Senaste ändring:\t\t"
+
+#: src/chage.c:296 src/chage.c:310 src/chage.c:327 src/chage.c:340
+msgid "Never\n"
+msgstr "Aldrig\n"
+
+#.
+#. * The password expiration date is determined from the last
+#. * change date plus the number of days the password is valid
+#. * for.
+#.
+#: src/chage.c:308
+msgid "Password Expires:\t"
+msgstr "Lösenordet upphör:\t"
+
+#.
+#. * The account becomes inactive if the password is expired
+#. * for more than "inactdays".  The expiration date is calculated
+#. * and the number of inactive days is added.  The resulting date
+#. * is when the active will be disabled.
+#.
+#: src/chage.c:324
+#, fuzzy
+msgid "Password Inactive:\t"
+msgstr "Lösenord inaktivt"
+
+#.
+#. * The account will expire on the given date regardless of the
+#. * password expiring or not.
+#.
+#: src/chage.c:338
+#, fuzzy
+msgid "Account Expires:\t"
+msgstr "Lösenordet upphör:\t"
+
+#: src/chage.c:486
+#, c-format
+msgid "%s: do not include \"l\" with other flags\n"
+msgstr "%s: inkludera inte \"l\" tillsammands med andra flaggor\n"
+
+#: src/chage.c:498 src/chage.c:610 src/login.c:529
+#, c-format
+msgid "%s: permission denied\n"
+msgstr "%s: tillåtelse nekas\n"
+
+#: src/chage.c:510 src/chpasswd.c:120
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: kan inte låsa lösenordsfilen\n"
+
+#: src/chage.c:516 src/chpasswd.c:124
+#, c-format
+msgid "%s: can't open password file\n"
+msgstr "%s: kan inte öppna lösenordsfilen\n"
+
+#: src/chage.c:523
+#, c-format
+msgid "%s: unknown user: %s\n"
+msgstr "%s: okänd användare: %s\n"
+
+#: src/chage.c:542
+#, c-format
+msgid "%s: can't lock shadow password file\n"
+msgstr "%s: kan inte låsa skugglösenordsfilen\n"
+
+#: src/chage.c:549
+#, c-format
+msgid "%s: can't open shadow password file\n"
+msgstr "%s: kan inte öppna skugglösenordsfilen\n"
+
+#: src/chage.c:631
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Ändrar åldringsinformation för %s\n"
+
+#: src/chage.c:633
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: fel uppstod under byte av fält\n"
+
+#: src/chage.c:660 src/chage.c:723 src/pwunconv.c:183
+#, c-format
+msgid "%s: can't update password file\n"
+msgstr "%s: kan inte uppdatera lösenordsfilen\n"
+
+#: src/chage.c:690 src/pwunconv.c:178
+#, c-format
+msgid "%s: can't update shadow password file\n"
+msgstr "%s: kan inte uppdatera skugglösenordsfilen\n"
+
+#: src/chage.c:739 src/chage.c:754 src/chfn.c:570 src/chsh.c:409
+#: src/passwd.c:825 src/passwd.c:926
+msgid "Error updating the DBM password entry.\n"
+msgstr "Fel under uppdatering av DBM-lösenordsnoteringen.\n"
+
+#: src/chage.c:771
+#, c-format
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: kan inte skriva om skugglösenordsfilen\n"
+
+#: src/chage.c:785
+#, c-format
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: kan inte skriva om lösenordsfilen\n"
+
+#: src/chage.c:836
+#, c-format
+msgid "%s: no aging information present\n"
+msgstr "%s: ingen åldringsinformation finns tillgänglig\n"
+
+#: src/chfn.c:107
+#, c-format
+msgid ""
+"Usage: %s [ -f full_name ] [ -r room_no ] [ -w work_ph ]\n"
+"\t[ -h home_ph ] [ -o other ] [ user ]\n"
+msgstr ""
+"%s [ -f hela_namnet ] [ -r rumsnummer ] [ -w arbetstele ]\n"
+"\t[ -h hemtele ] [ -o övrigt ] [ användare ]\n"
+
+#: src/chfn.c:111
+#, c-format
+msgid ""
+"Usage: %s [ -f full_name ] [ -r room_no ] [ -w work_ph ] [ -h home_ph ]\n"
+msgstr ""
+"Användning: %s [ -f hela_namnet ] [ -r rumsnummer ] [ -w arbetstele ] [ -h "
+"hemtele ]\n"
+
+#: src/chfn.c:163 src/chsh.c:119
+msgid "Enter the new value, or press return for the default\n"
+msgstr "Skriv in det nya värdet, eller tryck return för standardvärdet\n"
+
+#: src/chfn.c:166
+msgid "Full Name"
+msgstr "Hela namnet"
+
+#: src/chfn.c:168
+#, c-format
+msgid "\tFull Name: %s\n"
+msgstr "\tHela namnet: %s\n"
+
+#: src/chfn.c:171
+msgid "Room Number"
+msgstr "Rumsnummer"
+
+#: src/chfn.c:173
+#, c-format
+msgid "\tRoom Number: %s\n"
+msgstr "\tRumsnummer: %s\n"
+
+#: src/chfn.c:176
+msgid "Work Phone"
+msgstr "Arbetstelefonnummer"
+
+#: src/chfn.c:178
+#, c-format
+msgid "\tWork Phone: %s\n"
+msgstr "\tArbetstelefonnummer: %s\n"
+
+#: src/chfn.c:181
+msgid "Home Phone"
+msgstr "Hemtelefonnummer"
+
+#: src/chfn.c:183
+#, c-format
+msgid "\tHome Phone: %s\n"
+msgstr "\tHemtelefonnummer: %s\n"
+
+#: src/chfn.c:186
+msgid "Other"
+msgstr "Övrigt"
+
+#: src/chfn.c:298 src/chfn.c:306 src/chfn.c:314 src/chfn.c:322 src/chfn.c:330
+#: src/chfn.c:391 src/passwd.c:1226
+#, c-format
+msgid "%s: Permission denied.\n"
+msgstr "%s: Tillåtelse nekas.\n"
+
+#: src/chfn.c:351 src/chsh.c:224 src/passwd.c:1277
+#, c-format
+msgid "%s: Unknown user %s\n"
+msgstr "%s: Okänd användare %s\n"
+
+#: src/chfn.c:357 src/chsh.c:232 src/passwd.c:1207
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Kan inte avgöra ditt användarnamn.\n"
+
+#: src/chfn.c:373 src/chsh.c:250
+#, c-format
+msgid "%s: cannot change user `%s' on NIS client.\n"
+msgstr "%s: kan inte ändra användare \"%s\" på NIS-klienten.\n"
+
+#: src/chfn.c:378 src/chsh.c:257
+#, c-format
+msgid "%s: `%s' is the NIS master for this client.\n"
+msgstr "%s: \"%s\" är NIS-mästare för denna klient.\n"
+
+#: src/chfn.c:453
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Ändrar användarinformation för %s\n"
+
+#: src/chfn.c:462
+#, c-format
+msgid "%s: invalid name: \"%s\"\n"
+msgstr "%s: felaktigt namn: \"%s\"\n"
+
+#: src/chfn.c:467
+#, c-format
+msgid "%s: invalid room number: \"%s\"\n"
+msgstr "%s: felaktigt rumsnummer: \"%s\"\n"
+
+#: src/chfn.c:472
+#, c-format
+msgid "%s: invalid work phone: \"%s\"\n"
+msgstr "%s: felaktigt arbetstelefonnummer: \"%s\"\n"
+
+#: src/chfn.c:477
+#, c-format
+msgid "%s: invalid home phone: \"%s\"\n"
+msgstr "%s: felaktigt hemtelefonnummer: \"%s\"\n"
+
+#: src/chfn.c:482
+#, c-format
+msgid "%s: \"%s\" contains illegal characters\n"
+msgstr "%s: \"%s\" innehåller otillåtna tecken\n"
+
+#: src/chfn.c:494
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: för långa fält\n"
+
+#: src/chfn.c:509 src/chsh.c:347 src/gpasswd.c:582 src/passwd.c:1388
+msgid "Cannot change ID to root.\n"
+msgstr "Kan inte ändra ID till root.\n"
+
+#: src/chfn.c:522 src/chsh.c:361 src/passwd.c:735 src/passwd.c:880
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Kan inte låsa lösenordsfilen; försök igen senare.\n"
+
+#: src/chfn.c:528 src/chsh.c:367 src/passwd.c:740 src/passwd.c:885
+msgid "Cannot open the password file.\n"
+msgstr "Kan inte öppna lösenordsfilen.\n"
+
+#: src/chfn.c:545 src/chsh.c:382 src/passwd.c:746 src/usermod.c:1313
+#, c-format
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s hittades inte i /etc/passwd\n"
+
+#: src/chfn.c:562 src/chsh.c:401 src/passwd.c:819 src/passwd.c:920
+#: src/passwd.c:960
+msgid "Error updating the password entry.\n"
+msgstr "Fel under uppdatering av lösenordsnoteringen.\n"
+
+#: src/chfn.c:585 src/chsh.c:424 src/passwd.c:832 src/passwd.c:933
+msgid "Cannot commit password file changes.\n"
+msgstr "Kan inte genomföra ändringar i lösenordsfilen.\n"
+
+#: src/chfn.c:592 src/chsh.c:431
+msgid "Cannot unlock the password file.\n"
+msgstr "Kan inte låsa upp lösenordsfilen.\n"
+
+#: src/chpasswd.c:76
+#, c-format
+msgid "usage: %s [-e]\n"
+msgstr "Användning: %s [-e]\n"
+
+#: src/chpasswd.c:132 src/pwconv.c:104
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: kan inte låsa skuggfilen\n"
+
+#: src/chpasswd.c:137 src/gpasswd.c:608 src/pwconv.c:109 src/pwunconv.c:118
+#: src/pwunconv.c:123
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: kan inte öppna skuggfilen\n"
+
+#: src/chpasswd.c:159 src/newusers.c:415
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: rad %d: för lång rad\n"
+
+#: src/chpasswd.c:179
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: rad %d: det nya lösenordet saknas\n"
+
+#: src/chpasswd.c:195
+#, c-format
+msgid "%s: line %d: unknown user %s\n"
+msgstr "%s: rad %d: okänd användare %s\n"
+
+#: src/chpasswd.c:247
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: rad %d: kan inte uppdatera lösenordsnoteringen\n"
+
+#: src/chpasswd.c:263 src/newusers.c:535
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: fel upptäcktes, ändringarna ignorerades\n"
+
+#: src/chpasswd.c:274
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: fel under uppdatering av skuggfilen\n"
+
+#: src/chpasswd.c:282
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: fel under uppdatering av lösenordsfilen\n"
+
+#: src/chsh.c:105
+#, c-format
+msgid "Usage: %s [ -s shell ] [ name ]\n"
+msgstr "Användning: %s [ -s skal ] [ namn ]\n"
+
+#: src/chsh.c:120
+msgid "Login Shell"
+msgstr "Inloggningsskal"
+
+#: src/chsh.c:273 src/chsh.c:286
+#, c-format
+msgid "You may not change the shell for %s.\n"
+msgstr "Du får inte ändra skal åt %s.\n"
+
+#: src/chsh.c:315
+#, c-format
+msgid "Changing the login shell for %s\n"
+msgstr "Ändrar inloggningsskal åt %s\n"
+
+#: src/chsh.c:327
+#, c-format
+msgid "%s: Invalid entry: %s\n"
+msgstr "%s: Felaktig notering: %s\n"
+
+#: src/chsh.c:332
+#, c-format
+msgid "%s is an invalid shell.\n"
+msgstr "%s är ett felaktigt skal.\n"
+
+#: src/dpasswd.c:69
+#, c-format
+msgid "Usage: %s [ -(a|d) ] shell\n"
+msgstr "Användning: %s [ -(a|d) ] skal\n"
+
+#: src/dpasswd.c:134
+msgid "Shell password: "
+msgstr "Skallösenord: "
+
+#: src/dpasswd.c:140
+msgid "re-enter Shell password: "
+msgstr "skriv in skallösenordet igen: "
+
+#: src/dpasswd.c:147
+#, c-format
+msgid "%s: Passwords do not match, try again.\n"
+msgstr "%s: Lösenorden matchar inte varandra, försök igen.\n"
+
+#: src/dpasswd.c:167
+#, c-format
+msgid "%s: can't create %s"
+msgstr "%s: kan inte skapa %s"
+
+#: src/dpasswd.c:172
+#, c-format
+msgid "%s: can't open %s"
+msgstr "%s: kan inte öppna %s"
+
+#: src/dpasswd.c:200
+#, c-format
+msgid "%s: Shell %s not found.\n"
+msgstr "%s: Hittade inte skalet %s.\n"
+
+#: src/expiry.c:84
+msgid "Usage: expiry { -f | -c }\n"
+msgstr "Användning: expiry { -f | -c }\n"
+
+#: src/expiry.c:137
+#, c-format
+msgid "%s: WARNING!  Must be set-UID root!\n"
+msgstr "%s: VARNING!  Måste vara set-UID root!\n"
+
+#: src/expiry.c:148
+#, c-format
+msgid "%s: unknown user\n"
+msgstr "%s: okänd användare\n"
+
+#: src/faillog.c:79
+#, c-format
+msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgstr ""
+"Användning: %s [-a|-u användare] [-m högst] [-r] [-t dagar] [-l låssek]\n"
+
+#: src/faillog.c:134 src/lastlog.c:94
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "Okänd användare: %s\n"
+
+#: src/faillog.c:215
+msgid "Username   Failures  Maximum  Latest\n"
+msgstr "Användarnamn  Felaktiga inloggningar  Högsta  Senaste\n"
+
+#: src/faillog.c:232
+#, c-format
+msgid "  %s on %s"
+msgstr "  %s på %s"
+
+#: src/faillog.c:236
+#, c-format
+msgid " [%lds left]"
+msgstr " [%lds kvar]"
+
+#: src/faillog.c:239
+#, c-format
+msgid " [%lds lock]"
+msgstr " [%lds låsning]"
+
+#: src/gpasswd.c:89
+#, c-format
+msgid "usage: %s [-r|-R] group\n"
+msgstr "Användning: %s [-r|-R] grupp\n"
+
+#: src/gpasswd.c:90
+#, c-format
+msgid "       %s [-a user] group\n"
+msgstr "       %s [-a användare] grupp\n"
+
+#: src/gpasswd.c:91
+#, c-format
+msgid "       %s [-d user] group\n"
+msgstr "       %s [-d användare] grupp\n"
+
+#: src/gpasswd.c:93
+#, c-format
+msgid "       %s [-A user,...] [-M user,...] group\n"
+msgstr "       %s [-A användare,...] [-M användare,...] grupp\n"
+
+#: src/gpasswd.c:96
+#, c-format
+msgid "       %s [-M user,...] group\n"
+msgstr "       %s [-M användare,...] grupp\n"
+
+#: src/gpasswd.c:160 src/gpasswd.c:245
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: okänd användare %s\n"
+
+#: src/gpasswd.c:172
+msgid "Permission denied.\n"
+msgstr "Tillåtelse nekas.\n"
+
+#: src/gpasswd.c:257
+#, c-format
+msgid "%s: shadow group passwords required for -A\n"
+msgstr "%s: skuggrupplösenord krävs för -A\n"
+
+#: src/gpasswd.c:308
+msgid "Who are you?\n"
+msgstr "Vem är du?\n"
+
+#: src/gpasswd.c:328 src/newgrp.c:251
+#, c-format
+msgid "unknown group: %s\n"
+msgstr "okänd grupp: %s\n"
+
+#: src/gpasswd.c:436
+#, c-format
+msgid "Adding user %s to group %s\n"
+msgstr "Lägger till användare %s till grupp %s\n"
+
+#: src/gpasswd.c:453
+#, c-format
+msgid "Removing user %s from group %s\n"
+msgstr "Tar bort användare %s från grupp %s\n"
+
+#: src/gpasswd.c:466
+#, c-format
+msgid "%s: unknown member %s\n"
+msgstr "%s: okänd medlem %s\n"
+
+#: src/gpasswd.c:513
+#, c-format
+msgid "%s: Not a tty\n"
+msgstr "%s: Inte en tty\n"
+
+#.
+#. * A new password is to be entered and it must be encrypted,
+#. * etc.  The password will be prompted for twice, and both
+#. * entries must be identical.  There is no need to validate
+#. * the old password since the invoker is either the group
+#. * owner, or root.
+#.
+#: src/gpasswd.c:535
+#, c-format
+msgid "Changing the password for group %s\n"
+msgstr "Ändrar lösenordet för grupp %s\n"
+
+#: src/gpasswd.c:538
+msgid "New Password: "
+msgstr "Nytt lösenord: "
+
+#: src/gpasswd.c:543 src/passwd.c:422
+msgid "Re-enter new password: "
+msgstr "Skriv in det nya lösenordet igen: "
+
+#: src/gpasswd.c:555
+msgid "They don't match; try again"
+msgstr "De matchar inte; försök igen"
+
+#: src/gpasswd.c:559
+#, c-format
+msgid "%s: Try again later\n"
+msgstr "%s: Försök igen senare\n"
+
+#: src/gpasswd.c:590
+#, c-format
+msgid "%s: can't get lock\n"
+msgstr "%s: kan inte låsa\n"
+
+#: src/gpasswd.c:596
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: kan inte låsa skuggfilen\n"
+
+#: src/gpasswd.c:602
+#, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: kan inte öppna filen\n"
+
+#: src/gpasswd.c:614
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: kan inte uppdatera noteringen\n"
+
+#: src/gpasswd.c:620
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: kan inte uppdatera noteringen i skuggfilen\n"
+
+#: src/gpasswd.c:626
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: kan inte skriva om filen\n"
+
+#: src/gpasswd.c:632
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: kan inte skriva om skuggfilen\n"
+
+#: src/gpasswd.c:640
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: kan inte låsa upp filen\n"
+
+#: src/gpasswd.c:645
+#, c-format
+msgid "%s: can't update DBM files\n"
+msgstr "%s: kan inte uppdatera DBM-filer\n"
+
+#: src/gpasswd.c:652
+#, c-format
+msgid "%s: can't update DBM shadow files\n"
+msgstr "%s: kan inte uppdatera DBM-skuggfiler\n"
+
+#: src/groupadd.c:105
+msgid "usage: groupadd [-g gid [-o]] group\n"
+msgstr "Användning: groupadd [-g gid [-o]] grupp\n"
+
+#: src/groupadd.c:173 src/groupadd.c:196 src/groupmod.c:183 src/groupmod.c:230
+#: src/useradd.c:931 src/usermod.c:539 src/usermod.c:675
+#, c-format
+msgid "%s: error adding new group entry\n"
+msgstr "%s: gick inte att lägga till en ny gruppnotering\n"
+
+#: src/groupadd.c:183 src/groupadd.c:206 src/groupmod.c:199 src/useradd.c:942
+#: src/usermod.c:551 src/usermod.c:687
+#, c-format
+msgid "%s: cannot add new dbm group entry\n"
+msgstr "%s: kan inte lägga till en ny dbm-gruppnotering\n"
+
+#: src/groupadd.c:258 src/useradd.c:996
+#, c-format
+msgid "%s: name %s is not unique\n"
+msgstr "%s: namnet %s är inte unikt\n"
+
+#: src/groupadd.c:273
+#, c-format
+msgid "%s: gid %ld is not unique\n"
+msgstr "%s: gid %ld är inte unikt\n"
+
+#: src/groupadd.c:297
+#, c-format
+msgid "%s: can't get unique gid\n"
+msgstr "%s: kan inte hitta ett unikt gid\n"
+
+#.
+#. * All invalid group names land here.
+#.
+#: src/groupadd.c:321 src/groupmod.c:341
+#, c-format
+msgid "%s: %s is a not a valid group name\n"
+msgstr "%s: %s är inte ett giltigt gruppnamn\n"
+
+#: src/groupadd.c:350 src/groupmod.c:367
+#, c-format
+msgid "%s: invalid group %s\n"
+msgstr "%s: ogiltig grupp %s\n"
+
+#: src/groupadd.c:367 src/useradd.c:1272
+#, c-format
+msgid "%s: -O requires NAME=VALUE\n"
+msgstr "%s: -O kräver NAME=VÄRDE\n"
+
+#: src/groupadd.c:412 src/groupdel.c:167 src/groupmod.c:403 src/useradd.c:1381
+#: src/userdel.c:303 src/usermod.c:563
+#, c-format
+msgid "%s: cannot rewrite group file\n"
+msgstr "%s: kan inte skriva om gruppfilen\n"
+
+#: src/groupadd.c:418 src/groupdel.c:173 src/groupmod.c:409 src/useradd.c:1389
+#: src/userdel.c:309 src/usermod.c:700
+#, c-format
+msgid "%s: cannot rewrite shadow group file\n"
+msgstr "%s: kan inte skriva om skuggruppfilen\n"
+
+#: src/groupadd.c:437 src/groupdel.c:192 src/groupmod.c:428 src/userdel.c:389
+#, c-format
+msgid "%s: unable to lock group file\n"
+msgstr "%s: kan inte låsa gruppfilen\n"
+
+#: src/groupadd.c:441 src/groupdel.c:196 src/groupmod.c:432
+#, c-format
+msgid "%s: unable to open group file\n"
+msgstr "%s: kan inte öppna gruppfilen\n"
+
+#: src/groupadd.c:446 src/groupdel.c:201 src/groupmod.c:437 src/userdel.c:398
+#, c-format
+msgid "%s: unable to lock shadow group file\n"
+msgstr "%s: kan inte låsa skuggruppfilen\n"
+
+#: src/groupadd.c:451 src/groupdel.c:206 src/groupmod.c:442
+#, c-format
+msgid "%s: unable to open shadow group file\n"
+msgstr "%s: kan inte öppna skuggruppfilen\n"
+
+#: src/groupadd.c:518
+#, c-format
+msgid "%s: group %s exists\n"
+msgstr "%s: grupp %s existerar\n"
+
+#: src/groupdel.c:86
+msgid "usage: groupdel group\n"
+msgstr "Användning: groupdel grupp\n"
+
+#: src/groupdel.c:104 src/groupmod.c:187 src/groupmod.c:234
+#, c-format
+msgid "%s: error removing group entry\n"
+msgstr "%s: fel under borttagning av gruppnotering\n"
+
+#: src/groupdel.c:116 src/groupmod.c:206
+#, c-format
+msgid "%s: error removing group dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-gruppnotering\n"
+
+#: src/groupdel.c:131
+#, c-format
+msgid "%s: error removing shadow group entry\n"
+msgstr "%s: fel under borttagning av skuggruppnotering\n"
+
+#: src/groupdel.c:144 src/groupmod.c:252
+#, c-format
+msgid "%s: error removing shadow group dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-skuggruppnotering\n"
+
+#.
+#. * Can't remove the group.
+#.
+#: src/groupdel.c:248
+#, c-format
+msgid "%s: cannot remove user's primary group.\n"
+msgstr "%s: kan inte ta bort användarens primära grupp.\n"
+
+#: src/groupdel.c:305 src/groupmod.c:501
+#, c-format
+msgid "%s: group %s does not exist\n"
+msgstr "%s: grupp %s existerar inte\n"
+
+#: src/groupdel.c:319 src/groupmod.c:517
+#, c-format
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s: grupp %s är en NIS-grupp\n"
+
+#: src/groupdel.c:325 src/groupmod.c:523 src/userdel.c:761 src/usermod.c:1016
+#, c-format
+msgid "%s: %s is the NIS master\n"
+msgstr "%s: %s är NIS-mästeren\n"
+
+#: src/groupmod.c:105
+msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "Användning: groupmod [-g gid [-o]] [-n namn] grupp\n"
+
+#: src/groupmod.c:165
+#, c-format
+msgid "%s: %s not found in /etc/group\n"
+msgstr "%s: %s hittades inte i /etc/group\n"
+
+#: src/groupmod.c:246
+#, c-format
+msgid "%s: cannot add new dbm shadow group entry\n"
+msgstr "%s: kunde inte lägga till en ny dbm-skuggruppnotering\n"
+
+#: src/groupmod.c:299
+#, c-format
+msgid "%s: %ld is not a unique gid\n"
+msgstr "%s: %ld är inte ett unikt gid\n"
+
+#: src/groupmod.c:330
+#, c-format
+msgid "%s: %s is not a unique name\n"
+msgstr "%s: %s är inte ett unikt namn\n"
+
+#: src/groups.c:62
+#, c-format
+msgid "unknown user %s\n"
+msgstr "okänd användare %s\n"
+
+#: src/grpck.c:98
+#, c-format
+msgid "Usage: %s [ -r ] [ group [ gshadow ] ]\n"
+msgstr "Användning: %s [ -r ] [ grupp [ gshadow ] ]\n"
+
+#: src/grpck.c:100
+#, c-format
+msgid "Usage: %s [ -r ] [ group ]\n"
+msgstr "Användning: %s [ -r ] [ grupp ]\n"
+
+#: src/grpck.c:119 src/pwck.c:119
+msgid "No"
+msgstr "Nej"
+
+#: src/grpck.c:234 src/grpck.c:242 src/pwck.c:216 src/pwck.c:225
+#, c-format
+msgid "%s: cannot lock file %s\n"
+msgstr "%s: kan inte låsa filen %s\n"
+
+#: src/grpck.c:257 src/grpck.c:265 src/mkpasswd.c:216 src/pwck.c:241
+#: src/pwck.c:250
+#, c-format
+msgid "%s: cannot open file %s\n"
+msgstr "%s: kan inte öppna filen %s\n"
+
+#.
+#. * Tell the user this entire line is bogus and
+#. * ask them to delete it.
+#.
+#: src/grpck.c:298
+msgid "invalid group file entry\n"
+msgstr "felaktig gruppfilsnotering\n"
+
+#: src/grpck.c:299 src/grpck.c:362 src/grpck.c:454 src/grpck.c:517
+#: src/grpck.c:534 src/pwck.c:286 src/pwck.c:348 src/pwck.c:455 src/pwck.c:517
+#: src/pwck.c:541
+#, c-format
+msgid "delete line `%s'? "
+msgstr "ta bort rad \"%s\"? "
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/grpck.c:361
+msgid "duplicate group entry\n"
+msgstr "dubblett av gruppnotering\n"
+
+#: src/grpck.c:378
+#, c-format
+msgid "invalid group name `%s'\n"
+msgstr "ogiltigt gruppnamn \"%s\"\n"
+
+#: src/grpck.c:388
+#, c-format
+msgid "group %s: bad GID (%d)\n"
+msgstr "grupp %s: felaktigt GID (%d)\n"
+
+#: src/grpck.c:414
+#, c-format
+msgid "group %s: no user %s\n"
+msgstr "grupp %s: användaren %s finns inte\n"
+
+#: src/grpck.c:416 src/grpck.c:585
+#, c-format
+msgid "delete member `%s'? "
+msgstr "ta bort medlem \"%s\"? "
+
+#.
+#. * Tell the user this entire line is bogus and
+#. * ask them to delete it.
+#.
+#: src/grpck.c:453
+msgid "invalid shadow group file entry\n"
+msgstr "felaktig skuggruppfilsnotering\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/grpck.c:516
+msgid "duplicate shadow group entry\n"
+msgstr "dubblett av skuggruppfilsnotering\n"
+
+#: src/grpck.c:533
+msgid "no matching group file entry\n"
+msgstr "inga matchande gruppfilsnoteringar\n"
+
+#: src/grpck.c:553
+#, c-format
+msgid "shadow group %s: no administrative user %s\n"
+msgstr "skuggrupp %s: finns ingen administrativ användare %s\n"
+
+#: src/grpck.c:555
+#, c-format
+msgid "delete administrative member `%s'? "
+msgstr "ta bort administrativa medlemmen \"%s\"? "
+
+#: src/grpck.c:583
+#, c-format
+msgid "shadow group %s: no user %s\n"
+msgstr "skuggrupp %s: finns ingen användare %s\n"
+
+#: src/grpck.c:610 src/grpck.c:616 src/pwck.c:572 src/pwck.c:580
+#, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: kan inte uppdatera filen %s\n"
+
+#: src/grpck.c:640 src/pwck.c:606
+#, c-format
+msgid "%s: the files have been updated; run mkpasswd\n"
+msgstr "%s: filerna är uppdaterade; kör mkpasswd\n"
+
+#: src/grpck.c:641 src/grpck.c:645 src/pwck.c:607 src/pwck.c:611
+#, c-format
+msgid "%s: no changes\n"
+msgstr "%s: inga ändringar\n"
+
+#: src/grpck.c:644 src/pwck.c:610
+#, c-format
+msgid "%s: the files have been updated\n"
+msgstr "%s: filerna är uppdaterade\n"
+
+#: src/grpconv.c:62 src/grpunconv.c:63
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: kan inte låsa gruppfilen\n"
+
+#: src/grpconv.c:67 src/grpunconv.c:68
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: kan inte öppna gruppfilen\n"
+
+#: src/grpconv.c:72 src/grpunconv.c:73
+#, c-format
+msgid "%s: can't lock shadow group file\n"
+msgstr "%s: kan inte låsa skuggruppfilen\n"
+
+#: src/grpconv.c:77 src/grpunconv.c:78
+#, c-format
+msgid "%s: can't open shadow group file\n"
+msgstr "%s: kan inte öppna skuggruppfilen\n"
+
+#.
+#. * This shouldn't happen (the entry exists) but...
+#.
+#: src/grpconv.c:93
+#, c-format
+msgid "%s: can't remove shadow group %s\n"
+msgstr "%s: kan inte ta bort skuggruppen %s\n"
+
+#: src/grpconv.c:134 src/pwconv.c:160
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: kan inte uppdatera skuggnoteringen för %s\n"
+
+#: src/grpconv.c:143 src/grpunconv.c:94
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: kan inte uppdatera noteringen för gruppen %s\n"
+
+#: src/grpconv.c:150 src/grpunconv.c:102
+#, c-format
+msgid "%s: can't update shadow group file\n"
+msgstr "%s: kan inte uppdatera skuggruppfilen\n"
+
+#: src/grpconv.c:154 src/grpunconv.c:107
+#, c-format
+msgid "%s: can't update group file\n"
+msgstr "%s: kan inte uppdatera gruppfilen\n"
+
+#: src/grpconv.c:169 src/grpunconv.c:128
+#, c-format
+msgid "%s: not configured for shadow group support.\n"
+msgstr "%s: inte konfigurerad med stöd för skuggrupper.\n"
+
+#: src/grpunconv.c:112
+#, c-format
+msgid "%s: can't delete shadow group file\n"
+msgstr "%s: kan inte ta bort skuggruppfilen\n"
+
+#: src/id.c:56
+msgid "usage: id [ -a ]\n"
+msgstr "Användning: id [ -a ]\n"
+
+#: src/id.c:58
+msgid "usage: id\n"
+msgstr "Användning: id\n"
+
+#: src/id.c:118
+#, c-format
+msgid "uid=%d(%s)"
+msgstr "uid=%d(%s)"
+
+#: src/id.c:120
+#, c-format
+msgid "uid=%d"
+msgstr "uid=%d"
+
+#: src/id.c:124
+#, c-format
+msgid " gid=%d(%s)"
+msgstr " gid=%d(%s)"
+
+#: src/id.c:126
+#, c-format
+msgid " gid=%d"
+msgstr " gid=%d"
+
+#: src/id.c:136
+#, c-format
+msgid " euid=%d(%s)"
+msgstr " euid=%d(%s)"
+
+#: src/id.c:138
+#, c-format
+msgid " euid=%d"
+msgstr " euid=%d"
+
+#: src/id.c:143
+#, c-format
+msgid " egid=%d(%s)"
+msgstr " egid=%d(%s)"
+
+#: src/id.c:145
+#, c-format
+msgid " egid=%d"
+msgstr " egid=%d"
+
+#.
+#. * Start off the group message.  It will be of the format
+#. *
+#. *	groups=###(aaa),###(aaa),###(aaa)
+#. *
+#. * where "###" is a numerical value and "aaa" is the
+#. * corresponding name for each respective numerical value.
+#.
+#: src/id.c:166
+msgid " groups="
+msgstr " grupper="
+
+#: src/lastlog.c:167
+msgid "Username         Port     From             Latest\n"
+msgstr "Användarnamn     Port     Från             Senaste\n"
+
+#: src/lastlog.c:169
+msgid "Username                Port     Latest\n"
+msgstr "Användarnamn            Port     Senaste\n"
+
+#: src/lastlog.c:183
+msgid "**Never logged in**"
+msgstr "**Aldrig inloggad**"
+
+#: src/login.c:198
+#, c-format
+msgid "usage: %s [-p] [name]\n"
+msgstr "Användning: %s [-p] [namn]\n"
+
+#: src/login.c:201
+#, c-format
+msgid "       %s [-p] [-h host] [-f name]\n"
+msgstr "       %s [-p] [-h värd] [-f namn]\n"
+
+#: src/login.c:203
+#, c-format
+msgid "       %s [-p] -r host\n"
+msgstr "       %s [-p] -r värd\n"
+
+#: src/login.c:286
+msgid "Invalid login time\n"
+msgstr "Felaktig inloggningstid\n"
+
+#: src/login.c:341
+msgid ""
+"\n"
+"System closed for routine maintenance\n"
+msgstr ""
+"\n"
+"Systemet är stängt för rutinunderhåll\n"
+
+#: src/login.c:351
+msgid ""
+"\n"
+"[Disconnect bypassed -- root login allowed.]\n"
+msgstr ""
+"\n"
+"[Nerkoppling kringgicks -- root inloggning tillåten.]\n"
+
+#: src/login.c:390
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %d seconds.\n"
+msgstr ""
+"\n"
+"Inloggningen avbröts efter %d sekunders inaktivitet.\n"
+
+#: src/login.c:692
+#, c-format
+msgid " on `%.100s' from `%.200s'"
+msgstr " på \"%.100s\" från \"%.200s\""
+
+#: src/login.c:694
+#, c-format
+msgid " on `%.100s'"
+msgstr " på \"%.100s\""
+
+#: src/login.c:834
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s användare: "
+
+#: src/login.c:836
+msgid "login: "
+msgstr "användare: "
+
+#: src/login.c:1026 src/sulogin.c:231
+msgid "Login incorrect"
+msgstr "Felaktig inloggning"
+
+#: src/login.c:1213
+msgid "Warning: login re-enabled after temporary lockout.\n"
+msgstr "Varning: inloggning på nytt aktiv efter den temporära utelåsningen.\n"
+
+#: src/login.c:1223
+#, c-format
+msgid "Last login: %s on %s"
+msgstr "Senaste inloggning: %s på %s"
+
+#: src/login.c:1226
+#, c-format
+msgid "Last login: %.19s on %s"
+msgstr "Senaste inloggning: %.19s på %s"
+
+#: src/login.c:1231
+#, c-format
+msgid " from %.*s"
+msgstr " från %.*s"
+
+#: src/login.c:1303
+msgid "Starting rad_login\n"
+msgstr "Startar rad_login\n"
+
+#: src/mkpasswd.c:49
+#, c-format
+msgid "%s: no DBM database on system - no action performed\n"
+msgstr "%s: ingen DBM-databas på systemet - ingen åtgärd genomfördes\n"
+
+#: src/mkpasswd.c:245 src/mkpasswd.c:249
+#, c-format
+msgid "%s: cannot overwrite file %s\n"
+msgstr "%s: kan inte skriva över filen %s\n"
+
+#: src/mkpasswd.c:263
+#, c-format
+msgid "%s: cannot open DBM files for %s\n"
+msgstr "%s: kan inte öppna DBM-filer för %s\n"
+
+#: src/mkpasswd.c:296
+#, c-format
+msgid "%s: the beginning with "
+msgstr "%s: början med "
+
+#: src/mkpasswd.c:321
+#, c-format
+msgid "%s: error parsing line \"%s\"\n"
+msgstr "%s: fel under analysering av rad \"%s\"\n"
+
+#: src/mkpasswd.c:326 src/mkpasswd.c:328 src/mkpasswd.c:330 src/mkpasswd.c:332
+msgid "adding record for name "
+msgstr "lägger till notering för namn "
+
+#: src/mkpasswd.c:336 src/mkpasswd.c:341 src/mkpasswd.c:345 src/mkpasswd.c:349
+#, c-format
+msgid "%s: error adding record for "
+msgstr "%s: fel under tillägg av notering för "
+
+#: src/mkpasswd.c:367
+#, c-format
+msgid "added %d entries, longest was %d\n"
+msgstr "lade till %d noteringar, den längsta var %d\n"
+
+#: src/mkpasswd.c:382
+#, c-format
+msgid "Usage: %s [ -vf ] [ -p|g|sp|sg ] file\n"
+msgstr "Användning: %s [ -vf ] [ -p|g|sp|sg ] fil\n"
+
+#: src/mkpasswd.c:384
+#, c-format
+msgid "Usage: %s [ -vf ] [ -p|g|sp ] file\n"
+msgstr "Användning: %s [ -vf ] [ -p|g|sp ] fil\n"
+
+#: src/mkpasswd.c:387
+#, c-format
+msgid "Usage: %s [ -vf ] [ -p|g ] file\n"
+msgstr "Användning: %s [ -vf ] [ -p|g ] fil\n"
+
+#: src/newgrp.c:66
+msgid "usage: newgrp [ - ] [ group ]\n"
+msgstr "Användning: newgrp [ - ] [ grupp ]\n"
+
+#: src/newgrp.c:68
+#, fuzzy
+msgid "usage: sg group [[-c] command ]\n"
+msgstr "Användning: sg grupp [ kommando ]\n"
+
+#: src/newgrp.c:125
+#, c-format
+msgid "unknown uid: %d\n"
+msgstr "okänt uid: %d\n"
+
+#: src/newgrp.c:201
+#, c-format
+msgid "unknown gid: %ld\n"
+msgstr "okänt gid: %ld\n"
+
+#: src/newgrp.c:245
+#, c-format
+msgid "unknown gid: %d\n"
+msgstr "okänt gid: %d\n"
+
+#: src/newgrp.c:323 src/newgrp.c:332
+msgid "Sorry.\n"
+msgstr "Tyvärr.\n"
+
+#: src/newgrp.c:364
+msgid "too many groups\n"
+msgstr "för många grupper\n"
+
+#: src/newusers.c:76
+#, c-format
+msgid "Usage: %s [ input ]\n"
+msgstr "Användning: %s [ indata ]\n"
+
+#: src/newusers.c:364
+#, c-format
+msgid "%s: can't lock /etc/passwd.\n"
+msgstr "%s: kan inte låsa /etc/passwd.\n"
+
+#: src/newusers.c:375
+#, c-format
+msgid "%s: can't lock files, try again later\n"
+msgstr "%s: kan inte låsa filerna, försök igen senare\n"
+
+#: src/newusers.c:390
+#, c-format
+msgid "%s: can't open files\n"
+msgstr "%s: kan inte öppna filerna\n"
+
+#: src/newusers.c:435
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: rad %d: ogiltig rad\n"
+
+#: src/newusers.c:453
+#, c-format
+msgid "%s: line %d: can't create GID\n"
+msgstr "%s: rad %d: kan inte skapa GID\n"
+
+#: src/newusers.c:469
+#, c-format
+msgid "%s: line %d: can't create UID\n"
+msgstr "%s: rad %d: kan inte skapa UID\n"
+
+#: src/newusers.c:481
+#, c-format
+msgid "%s: line %d: cannot find user %s\n"
+msgstr "%s: rad %d: kan inte hitta användaren %s\n"
+
+#: src/newusers.c:489
+#, c-format
+msgid "%s: line %d: can't update password\n"
+msgstr "%s: rad %d: kan inte uppdatera lösenordet\n"
+
+#: src/newusers.c:506
+#, c-format
+msgid "%s: line %d: mkdir failed\n"
+msgstr "%s: rad %d: mkdir misslyckades\n"
+
+#: src/newusers.c:510
+#, c-format
+msgid "%s: line %d: chown failed\n"
+msgstr "%s: rad %d: chown misslyckades\n"
+
+#: src/newusers.c:519
+#, c-format
+msgid "%s: line %d: can't update entry\n"
+msgstr "%s: rad %d: kan inte uppdatera notering\n"
+
+#: src/newusers.c:550
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: kunde inte uppdatera filerna\n"
+
+#: src/passwd.c:239
+#, c-format
+msgid "usage: %s [ -f | -s ] [ name ]\n"
+msgstr "Användning: %s [ -f | -s ] [ namn ]\n"
+
+#: src/passwd.c:242
+#, c-format
+msgid "       %s [ -x max ] [ -n min ] [ -w warn ] [ -i inact ] name\n"
+msgstr "       %s [ -x högst ] [ -n minst ] [ -w varna ] [ -i inaktiv ] namn\n"
+
+#: src/passwd.c:245
+#, c-format
+msgid "       %s { -l | -u | -d | -S | -e } name\n"
+msgstr "       %s { -l | -u | -d | -S | -e } namn\n"
+
+#: src/passwd.c:347
+#, c-format
+msgid "User %s has a TCFS key, his old password is required.\n"
+msgstr "Användare %s har en TCFS-nyckel, hans förra lösenord krävs.\n"
+
+#: src/passwd.c:348
+msgid "You can use -t option to force the change.\n"
+msgstr "Du kan använda flaggan -t för att påtvinga ändringen.\n"
+
+#: src/passwd.c:354
+msgid "Old password: "
+msgstr "Förra lösenordet: "
+
+#: src/passwd.c:361
+#, c-format
+msgid "Incorrect password for `%s'\n"
+msgstr "Felaktigt lösenord för \"%s\"\n"
+
+#: src/passwd.c:374
+#, c-format
+msgid "Warning: user %s has a TCFS key.\n"
+msgstr "Varning: användare %s har en TCFS-nyckel.\n"
+
+#: src/passwd.c:392
+#, c-format
+msgid ""
+"Enter the new password (minimum of %d, maximum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Skriv in det nya lösenordet (minst %d, högst %d tecken)\n"
+"Var god använd en kombination av versaler, gemener och siffror.\n"
+
+#: src/passwd.c:399
+msgid "New password: "
+msgstr "Nytt lösenord: "
+
+#: src/passwd.c:409
+msgid "Try again.\n"
+msgstr "Försök igen.\n"
+
+#: src/passwd.c:418
+msgid ""
+"\n"
+"Warning: weak password (enter it again to use it anyway).\n"
+msgstr ""
+"\n"
+"Varning: svagt lösenord (skriv in det igen för att använda det ändå).\n"
+
+#: src/passwd.c:427
+msgid "They don't match; try again.\n"
+msgstr "De matchar inte; försök igen.\n"
+
+#: src/passwd.c:512 src/passwd.c:528
+#, c-format
+msgid "The password for %s cannot be changed.\n"
+msgstr "Lösenordet för %s kan inte bytas.\n"
+
+#: src/passwd.c:556
+#, c-format
+msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgstr "Tyvärr, lösenordet för %s kan inte ändras än.\n"
+
+#: src/passwd.c:693
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: slut på minne\n"
+
+#: src/passwd.c:845
+msgid "Cannot lock the TCFS key database; try again later\n"
+msgstr "Kan inte låsa TCFS-nyckeldatabasen; försök igen senare\n"
+
+#: src/passwd.c:851
+msgid "Cannot open the TCFS key database.\n"
+msgstr "Kan inte öppna TCFS-nyckeldatabasen.\n"
+
+#: src/passwd.c:857
+msgid "Error updating the TCFS key database.\n"
+msgstr "Fel under uppdatering av TCFS-nyckeldatabasen.\n"
+
+#: src/passwd.c:862
+msgid "Cannot commit TCFS changes.\n"
+msgstr "Kan inte utföra TCFS ändringar.\n"
+
+#: src/passwd.c:1069
+#, c-format
+msgid "%s: Cannot execute %s"
+msgstr "%s: Kan inte starta %s"
+
+#: src/passwd.c:1176
+#, c-format
+msgid "%s: repository %s not supported\n"
+msgstr "%s: förvaringsplatsen %s stöds ej\n"
+
+#: src/passwd.c:1263
+#, c-format
+msgid "%s: Permission denied\n"
+msgstr "%s: Tillåtelse nekas\n"
+
+#: src/passwd.c:1287
+#, c-format
+msgid "You may not change the password for %s.\n"
+msgstr "Du får inte ändra lösenordet för %s.\n"
+
+#: src/passwd.c:1352
+#, c-format
+msgid "Changing password for %s\n"
+msgstr "Ändrar lösenord för %s\n"
+
+#: src/passwd.c:1356
+#, c-format
+msgid "The password for %s is unchanged.\n"
+msgstr "Lösenordet för %s är oförändrat.\n"
+
+#: src/passwd.c:1412
+msgid "Password changed.\n"
+msgstr "Lösenordet ändrat.\n"
+
+#: src/pwck.c:98
+#, c-format
+msgid "Usage: %s [ -qr ] [ passwd [ shadow ] ]\n"
+msgstr "Användning: %s [ -qr ] [ passwd [ shadow ] ]\n"
+
+#: src/pwck.c:100
+#, c-format
+msgid "Usage: %s [ -qr ] [ passwd ]\n"
+msgstr "Användning: %s [ -qr ] [ passwd ]\n"
+
+#.
+#. * Tell the user this entire line is bogus and
+#. * ask them to delete it.
+#.
+#: src/pwck.c:285
+msgid "invalid password file entry\n"
+msgstr "felaktig notering i lösenordsfilen\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/pwck.c:347
+msgid "duplicate password entry\n"
+msgstr "dubblett av lösenords notering\n"
+
+#: src/pwck.c:363
+#, c-format
+msgid "invalid user name `%s'\n"
+msgstr "ogiltigt användarnamn \"%s\"\n"
+
+#: src/pwck.c:373
+#, c-format
+msgid "user %s: bad UID (%d)\n"
+msgstr "användare %s: felaktigt UID (%d)\n"
+
+#.
+#. * No primary group, just give a warning
+#.
+#: src/pwck.c:388
+#, c-format
+msgid "user %s: no group %d\n"
+msgstr "användare %s: ingen grupp %d\n"
+
+#.
+#. * Home directory doesn't exist, give a warning
+#.
+#: src/pwck.c:403
+#, c-format
+msgid "user %s: directory %s does not exist\n"
+msgstr "användare %s: katalogen %s finns inte\n"
+
+#.
+#. * Login shell doesn't exist, give a warning
+#.
+#: src/pwck.c:418
+#, c-format
+msgid "user %s: program %s does not exist\n"
+msgstr "användare %s: programmet %s finns inte\n"
+
+#.
+#. * Tell the user this entire line is bogus and
+#. * ask them to delete it.
+#.
+#: src/pwck.c:454
+msgid "invalid shadow password file entry\n"
+msgstr "felaktig notering i skugglösenordsfilen\n"
+
+#.
+#. * Tell the user this entry is a duplicate of
+#. * another and ask them to delete it.
+#.
+#: src/pwck.c:516
+msgid "duplicate shadow password entry\n"
+msgstr "dubblett av notering i skugglösenordsfilen\n"
+
+#.
+#. * Tell the user this entry has no matching
+#. * /etc/passwd entry and ask them to delete it.
+#.
+#: src/pwck.c:540
+msgid "no matching password file entry\n"
+msgstr "ingen matchande notering i lösenordsfilen\n"
+
+#: src/pwck.c:557
+#, c-format
+msgid "user %s: last password change in the future\n"
+msgstr "användare %s: senaste lösenordsändring i framtiden\n"
+
+#: src/pwconv.c:94 src/pwunconv.c:108
+#, c-format
+msgid "%s: can't lock passwd file\n"
+msgstr "%s: kan inte låsa lösenordsfilen\n"
+
+#: src/pwconv.c:99 src/pwunconv.c:113
+#, c-format
+msgid "%s: can't open passwd file\n"
+msgstr "%s: kan inte öppna lösenordsfilen\n"
+
+#: src/pwconv.c:126
+#, c-format
+msgid "%s: can't remove shadow entry for %s\n"
+msgstr "%s: kan inte ta bort notering i skugglösenordsfilen för %s\n"
+
+#: src/pwconv.c:169
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s: kan inte uppdatera noteringen i lösenordsfilen för %s\n"
+
+#: src/pwconv.c:176
+#, c-format
+msgid "%s: can't update shadow file\n"
+msgstr "%s: kan inte uppdatera skuggfilen\n"
+
+#: src/pwconv.c:180
+#, c-format
+msgid "%s: can't update passwd file\n"
+msgstr "%s: kan inte uppdatera lösenordsfilen\n"
+
+#: src/pwunconv.c:62
+#, c-format
+msgid "%s: Shadow passwords are not configured.\n"
+msgstr "%s: Shadowlösenord är inte konfigurerade.\n"
+
+#: src/pwunconv.c:171
+#, c-format
+msgid "%s: can't update entry for user %s\n"
+msgstr "%s: kan inte uppdatera noteringen för användaren %s\n"
+
+#: src/pwunconv.c:188
+#, c-format
+msgid "%s: can't delete shadow password file\n"
+msgstr "%s: kan inte ta bort skugglösenordsfilen\n"
+
+#: src/su.c:140
+msgid "Sorry."
+msgstr "Tyvärr."
+
+#: src/su.c:222
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: måste köras från en terminal\n"
+
+#: src/su.c:311
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: fel %d\n"
+
+#: src/su.c:337
+#, c-format
+msgid "Unknown id: %s\n"
+msgstr "Okänt id: %s\n"
+
+#. access denied (-1) or unexpected value
+#: src/su.c:372 src/su.c:387
+#, c-format
+msgid "You are not authorized to su %s\n"
+msgstr "Du har inte tillåtelse att köra su till %s\n"
+
+#. require own password
+#: src/su.c:383
+msgid "(Enter your own password.)"
+msgstr "(Skriv in ditt eget lösenord.)"
+
+#: src/su.c:404
+#, c-format
+msgid "%s: permission denied (shell).\n"
+msgstr "%s: tillåtelse nekas (skal).\n"
+
+#: src/su.c:428
+#, c-format
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Ignorerad)\n"
+
+#: src/su.c:628
+msgid "No shell\n"
+msgstr "Inget skal\n"
+
+#. must be a password file!
+#: src/sulogin.c:136
+msgid "No password file\n"
+msgstr "Ingen lösenordsfil\n"
+
+#.
+#. * Fail secure
+#.
+#: src/sulogin.c:178
+msgid "No password entry for 'root'\n"
+msgstr "Ingen lösenordsnotering för \"root\"\n"
+
+#.
+#. * Here we prompt for the root password, or if no password is
+#. * given we just exit.
+#.
+#. get a password for root
+#: src/sulogin.c:192
+msgid ""
+"\n"
+"Type control-d to proceed with normal startup,\n"
+"(or give root password for system maintenance):"
+msgstr ""
+"\n"
+"Skriv control-d för att fortsätta med den normala uppstarten,\n"
+"(eller skriv in lösenordet för root för systemunderhåll):"
+
+#. make new environment active
+#: src/sulogin.c:241
+msgid "Entering System Maintenance Mode\n"
+msgstr "Går in i systemunderhållsläge\n"
+
+#: src/useradd.c:243
+#, c-format
+msgid "%s: rebuild the group database\n"
+msgstr "%s: bygg om gruppdatabasen\n"
+
+#: src/useradd.c:250
+#, c-format
+msgid "%s: rebuild the shadow group database\n"
+msgstr "%s: bygg om skuggruppdatabasen\n"
+
+#: src/useradd.c:287 src/usermod.c:967
+#, c-format
+msgid "%s: invalid numeric argument `%s'\n"
+msgstr "%s: ogiltigt numeriskt argument \"%s\"\n"
+
+#: src/useradd.c:343
+#, c-format
+msgid "%s: unknown gid %s\n"
+msgstr "%s: okänt gid %s\n"
+
+#: src/useradd.c:350 src/useradd.c:642 src/useradd.c:1228 src/usermod.c:254
+#: src/usermod.c:1098
+#, c-format
+msgid "%s: unknown group %s\n"
+msgstr "%s: okänd grupp %s\n"
+
+#: src/useradd.c:418
+#, c-format
+msgid "group=%s,%ld  basedir=%s  skel=%s\n"
+msgstr "grupp=%s,%ld  baskatalog=%s  skel=%s\n"
+
+#: src/useradd.c:421
+#, c-format
+msgid "shell=%s  "
+msgstr "skal=%s  "
+
+#: src/useradd.c:423
+#, c-format
+msgid "inactive=%ld  expire=%s"
+msgstr "inaktiv=%ld  upphör=%s"
+
+#: src/useradd.c:427
+#, c-format
+msgid "GROUP=%ld\n"
+msgstr "GRUPP=%ld\n"
+
+#: src/useradd.c:428
+#, c-format
+msgid "HOME=%s\n"
+msgstr "HEM=%s\n"
+
+#: src/useradd.c:430
+#, c-format
+msgid "INACTIVE=%ld\n"
+msgstr "INAKTIV=%ld\n"
+
+#: src/useradd.c:431
+#, c-format
+msgid "EXPIRE=%s\n"
+msgstr "UPPHÖR=%s\n"
+
+#: src/useradd.c:433
+#, c-format
+msgid "SHELL=%s\n"
+msgstr "SKAL=%s\n"
+
+#: src/useradd.c:434
+#, c-format
+msgid "SKEL=%s\n"
+msgstr "SKEL=%s\n"
+
+#: src/useradd.c:470
+#, c-format
+msgid "%s: cannot create new defaults file\n"
+msgstr "%s: kan inte skapa en ny standardfil\n"
+
+#: src/useradd.c:564 src/useradd.c:575
+#, c-format
+msgid "%s: rename: %s"
+msgstr "%s: rename: %s"
+
+#: src/useradd.c:662 src/usermod.c:274
+#, c-format
+msgid "%s: group `%s' is a NIS group.\n"
+msgstr "%s: grupp \"%s\" är en NIS-grupp.\n"
+
+#: src/useradd.c:670 src/usermod.c:282
+#, c-format
+msgid "%s: too many groups specified (max %d).\n"
+msgstr "%s: för många grupper speciferade (max %d).\n"
+
+#: src/useradd.c:702 src/usermod.c:314
+#, c-format
+msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Användning: %s\t[-u uid [-o]] [-g grupp] [-G grupp,...] \n"
+
+#: src/useradd.c:705
+msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr "\t\t[-d hem] [-s skal] [-c kommentar] [-m [-k mall]]\n"
+
+#: src/useradd.c:708 src/usermod.c:320
+msgid "[-f inactive] [-e expire ] "
+msgstr "[-f inaktiv] [-e upphör ] "
+
+#: src/useradd.c:711
+msgid "[-A program] "
+msgstr "[-A program] "
+
+#: src/useradd.c:713
+msgid "[-p passwd] name\n"
+msgstr "[-p passwd] namn\n"
+
+#: src/useradd.c:715
+#, c-format
+msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
+msgstr "       %s\t-D [-g grupp] [-b bas] [-s skal]\n"
+
+#: src/useradd.c:718
+msgid "\t\t[-f inactive] [-e expire ]\n"
+msgstr "\t\t[-f inaktiv] [-e utgång ]\n"
+
+#: src/useradd.c:815 src/usermod.c:472
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: fel under låsning av gruppfilen\n"
+
+#: src/useradd.c:819 src/usermod.c:477
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: fel under öppning av gruppfilen\n"
+
+#: src/useradd.c:824 src/usermod.c:584
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: fel under låsning av skuggruppfilen\n"
+
+#: src/useradd.c:829 src/usermod.c:590
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: fel under öppning av skuggruppfilen\n"
+
+#: src/useradd.c:1001
+#, c-format
+msgid "%s: uid %d is not unique\n"
+msgstr "%s: uid %d är inte unikt\n"
+
+#: src/useradd.c:1031
+#, c-format
+msgid "%s: can't get unique uid\n"
+msgstr "%s: kan inte hitta ett unikt uid\n"
+
+#: src/useradd.c:1139 src/useradd.c:1283 src/usermod.c:1046 src/usermod.c:1057
+#: src/usermod.c:1067 src/usermod.c:1113 src/usermod.c:1157
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: felaktigt fält \"%s\"\n"
+
+#: src/useradd.c:1153
+#, c-format
+msgid "%s: invalid base directory `%s'\n"
+msgstr "%s: felaktig baskatalog \"%s\"\n"
+
+#: src/useradd.c:1163
+#, c-format
+msgid "%s: invalid comment `%s'\n"
+msgstr "%s: felaktig kommentar \"%s\"\n"
+
+#: src/useradd.c:1173
+#, c-format
+msgid "%s: invalid home directory `%s'\n"
+msgstr "%s: felaktig hemkatalog \"%s\"\n"
+
+#: src/useradd.c:1191 src/usermod.c:1080
+#, c-format
+msgid "%s: invalid date `%s'\n"
+msgstr "%s: felaktigt datum \"%s\"\n"
+
+#: src/useradd.c:1203
+#, c-format
+msgid "%s: shadow passwords required for -e\n"
+msgstr "%s: skugglösenord krävs för -e\n"
+
+#: src/useradd.c:1218
+#, c-format
+msgid "%s: shadow passwords required for -f\n"
+msgstr "%s: skugglösenord krävs för -f\n"
+
+#: src/useradd.c:1292
+#, c-format
+msgid "%s: invalid shell `%s'\n"
+msgstr "%s: felaktigt skal \"%s\"\n"
+
+#: src/useradd.c:1333
+#, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: felaktigt användar namn \"%s\"\n"
+
+#: src/useradd.c:1369 src/userdel.c:292 src/usermod.c:1225
+#, c-format
+msgid "%s: cannot rewrite password file\n"
+msgstr "%s: kan inte skriva om lösenordsfilen\n"
+
+#: src/useradd.c:1374 src/userdel.c:295 src/usermod.c:1230
+#, c-format
+msgid "%s: cannot rewrite shadow password file\n"
+msgstr "%s: kan inte skriva om skugglösenordsfilen\n"
+
+#: src/useradd.c:1414 src/userdel.c:359 src/usermod.c:1265
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: kan inte låsa lösenordsfilen\n"
+
+#: src/useradd.c:1418 src/userdel.c:363 src/usermod.c:1269
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: kan inte öppna lösenordsfilen\n"
+
+#: src/useradd.c:1424 src/userdel.c:368 src/usermod.c:1274
+#, c-format
+msgid "%s: cannot lock shadow password file\n"
+msgstr "%s: kan inte låsa skugglösenordsfilen\n"
+
+#: src/useradd.c:1430 src/userdel.c:373 src/usermod.c:1279
+#, c-format
+msgid "%s: cannot open shadow password file\n"
+msgstr "%s: kan inte öppna skugglösenordsfilen\n"
+
+#: src/useradd.c:1529 src/usermod.c:1366
+#, c-format
+msgid "%s: error adding authentication method\n"
+msgstr "%s: fel under tillägning av metod för äkthetsbevisning\n"
+
+#: src/useradd.c:1552
+#, c-format
+msgid "%s: error adding new password entry\n"
+msgstr "%s: fel under tilläggning av ny lösenordsnotering\n"
+
+#: src/useradd.c:1567
+#, c-format
+msgid "%s: error updating password dbm entry\n"
+msgstr "%s: fel under uppdatering av dbm-lösenordsnotering\n"
+
+#: src/useradd.c:1583 src/usermod.c:1425
+#, c-format
+msgid "%s: error adding new shadow password entry\n"
+msgstr "%s: fel under tilläggning av ny skugglösenordsnotering\n"
+
+#: src/useradd.c:1599 src/usermod.c:1440
+#, c-format
+msgid "%s: error updating shadow passwd dbm entry\n"
+msgstr "%s: fel under uppdatering av dbm-skugglösenordsnotering\n"
+
+#: src/useradd.c:1631
+#, c-format
+msgid "%s: cannot create directory %s\n"
+msgstr "%s: kan inte skapa katalog %s\n"
+
+#: src/useradd.c:1708 src/usermod.c:1203
+#, c-format
+msgid "%s: user %s exists\n"
+msgstr "%s: användare %s existerar\n"
+
+#: src/useradd.c:1738
+#, c-format
+msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+msgstr "%s: varning: CREATE_HOME stöds inte, använd -m istället.\n"
+
+#: src/userdel.c:127
+#, c-format
+msgid "usage: %s [-r] name\n"
+msgstr "Användning: %s [-r] namn\n"
+
+#: src/userdel.c:178 src/userdel.c:260
+#, c-format
+msgid "%s: error updating group entry\n"
+msgstr "%s: fel under uppdatering av gruppnotering\n"
+
+#: src/userdel.c:188 src/userdel.c:269
+#, c-format
+msgid "%s: cannot update dbm group entry\n"
+msgstr "%s: kan inte uppdatera dbm-gruppnotering\n"
+
+#: src/userdel.c:215
+#, fuzzy, c-format
+msgid "%s: cannot remove dbm group entry\n"
+msgstr "%s: kan inte uppdatera dbm-gruppnotering\n"
+
+#: src/userdel.c:300
+#, c-format
+msgid "%s: cannot rewrite TCFS key file\n"
+msgstr "%s: kan inte skriva om TCFS-nyckelfilen\n"
+
+#: src/userdel.c:380
+#, c-format
+msgid "%s: cannot lock TCFS key file\n"
+msgstr "%s: kan inte låsa TCFS-nyckelfilen\n"
+
+#: src/userdel.c:384
+#, c-format
+msgid "%s: cannot open TCFS key file\n"
+msgstr "%s: kan inte öppna TCFS-nyckelfilen\n"
+
+#: src/userdel.c:393
+#, c-format
+msgid "%s: cannot open group file\n"
+msgstr "%s: kan inte öppna gruppfilen\n"
+
+#: src/userdel.c:403
+#, c-format
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: kan inte öppna skuggruppfilen\n"
+
+#: src/userdel.c:434 src/userdel.c:449
+#, c-format
+msgid "%s: error deleting authentication\n"
+msgstr "%s: fel under borttagning av metod för äkthetsbevisning\n"
+
+#: src/userdel.c:458
+#, c-format
+msgid "%s: error deleting password entry\n"
+msgstr "%s: fel under borttagning av lösenordsnotering\n"
+
+#: src/userdel.c:461
+#, c-format
+msgid "%s: error deleting shadow password entry\n"
+msgstr "%s: fel under borttagning av skugglösenordsnotering\n"
+
+#: src/userdel.c:470
+#, c-format
+msgid "%s: error deleting TCFS entry\n"
+msgstr "%s: fel under borttagning av TCFS-notering\n"
+
+#: src/userdel.c:483
+#, c-format
+msgid "%s: error deleting password dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-lösenordsnotering\n"
+
+#: src/userdel.c:502
+#, c-format
+msgid "%s: error deleting shadow passwd dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-skugglösenordsnotering\n"
+
+#: src/userdel.c:543
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s: användare %s är inloggad\n"
+
+#: src/userdel.c:660
+#, c-format
+msgid "%s: warning: %s not owned by %s, not removing\n"
+msgstr "%s: varning: %s ägs inte av %s, tar inte bort\n"
+
+#: src/userdel.c:666
+#, c-format
+msgid "%s: warning: can't remove "
+msgstr "%s: varning: kan inte ta bort "
+
+#: src/userdel.c:741 src/usermod.c:994
+#, c-format
+msgid "%s: user %s does not exist\n"
+msgstr "%s: användare %s finns inte\n"
+
+#: src/userdel.c:755 src/usermod.c:1010
+#, c-format
+msgid "%s: user %s is a NIS user\n"
+msgstr "%s: användare %s är en NIS-användare\n"
+
+#: src/userdel.c:792
+#, c-format
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %s ägs inte av %s, tar inte bort\n"
+
+#: src/userdel.c:815
+#, c-format
+msgid "%s: not removing directory %s (would remove home of user %s)\n"
+msgstr "%s: tar inte bort katalogen %s (skulle ta bort hemkatalogen för %s)\n"
+
+#: src/userdel.c:828
+#, c-format
+msgid "%s: error removing directory %s\n"
+msgstr "%s: fel under borttagning av katalogen %s\n"
+
+#: src/usermod.c:317
+msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+msgstr "\t\t[-d hem [-m]] [-s skal] [-c kommentar] [-l nytt_namn]\n"
+
+#: src/usermod.c:323
+msgid "[-A {DEFAULT|program},... ] "
+msgstr "[-A {DEFAULT|program},... ] "
+
+#: src/usermod.c:325
+#, fuzzy
+msgid "[-p passwd] [-L|-U] name\n"
+msgstr "[-p passwd] namn\n"
+
+#: src/usermod.c:504
+#, c-format
+msgid "%s: out of memory in update_group\n"
+msgstr "%s: slut på minne i update_group\n"
+
+#: src/usermod.c:627
+#, c-format
+msgid "%s: out of memory in update_gshadow\n"
+msgstr "%s: slut på minne i update_gshadow\n"
+
+#: src/usermod.c:1180
+#, c-format
+msgid "%s: no flags given\n"
+msgstr "%s: inga flaggor givna\n"
+
+#: src/usermod.c:1187
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s: skugglösenord krävs för -e och -f\n"
+
+#: src/usermod.c:1208
+#, c-format
+msgid "%s: uid %ld is not unique\n"
+msgstr "%s: uid %ld är inte unikt\n"
+
+#: src/usermod.c:1356
+#, c-format
+msgid "%s: error deleting authentication method\n"
+msgstr "%s: fel under borttagning av metod för äkthetsbevisning\n"
+
+#: src/usermod.c:1376
+#, c-format
+msgid "%s: error changing authentication method\n"
+msgstr "%s: fel under ändring av metod för äkthetsbevisning\n"
+
+#: src/usermod.c:1393
+#, c-format
+msgid "%s: error changing password entry\n"
+msgstr "%s: fel under ändring av lösenordsnotering\n"
+
+#: src/usermod.c:1399
+#, c-format
+msgid "%s: error removing password entry\n"
+msgstr "%s: fel under borttagning av lösenordsnotering\n"
+
+#: src/usermod.c:1407
+#, c-format
+msgid "%s: error adding password dbm entry\n"
+msgstr "%s: fel under tilläggning av dbm-lösenordsnotering\n"
+
+#: src/usermod.c:1414
+#, c-format
+msgid "%s: error removing passwd dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-lösenordsnotering\n"
+
+#: src/usermod.c:1431
+#, c-format
+msgid "%s: error removing shadow password entry\n"
+msgstr "%s: fel under borttagning av skugglösenordsnotering\n"
+
+#: src/usermod.c:1446
+#, c-format
+msgid "%s: error removing shadow passwd dbm entry\n"
+msgstr "%s: fel under borttagning av dbm-skugglösenordsnotering\n"
+
+#: src/usermod.c:1477
+#, c-format
+msgid "%s: directory %s exists\n"
+msgstr "%s: katalogen %s existerar\n"
+
+#: src/usermod.c:1484
+#, c-format
+msgid "%s: can't create %s\n"
+msgstr "%s: kan inte skapa %s\n"
+
+#: src/usermod.c:1490
+#, c-format
+msgid "%s: can't chown %s\n"
+msgstr "%s: kan inte byta ägare på %s\n"
+
+#: src/usermod.c:1506
+#, c-format
+msgid "%s: cannot rename directory %s to %s\n"
+msgstr "%s: kan inte byta namn på katalogen %s till %s\n"
+
+#. better leave it alone
+#: src/usermod.c:1603
+#, c-format
+msgid "%s: warning: %s not owned by %s\n"
+msgstr "%s: varning: %s ägs inte av %s\n"
+
+#: src/usermod.c:1609
+msgid "failed to change mailbox owner"
+msgstr "kunde inte byta ägare av brevlådan"
+
+#: src/usermod.c:1616
+msgid "failed to rename mailbox"
+msgstr "kunde inte byta namn på brevlådan"
+
+#: src/vipw.c:102
+#, c-format
+msgid ""
+"\n"
+"%s: %s is unchanged\n"
+msgstr ""
+"\n"
+"%s: %s är oförändrad\n"
+
+#: src/vipw.c:127
+msgid "Couldn't lock file"
+msgstr "Kunde inte låsa filen"
+
+#: src/vipw.c:134
+msgid "Couldn't make backup"
+msgstr "Kunde inte göra en backup"
+
+#: src/vipw.c:187
+#, c-format
+msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgstr "%s: kan inte återställa %s: %s (dina ändringar är i %s)\n"
+
+#: src/vipw.c:226
+msgid ""
+"Usage:\n"
+"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+msgstr ""
+"Användning:\n"
+"\"vipw\" editerar /etc/passwd   \"vipw -w\" editerar /etc/shadow\n"
+"\"vipg\" editerar /etc/group    \"vipg -w\" editerar /etc/gshadow\n"

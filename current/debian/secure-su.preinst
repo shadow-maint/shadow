@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [ install = "$1" ] ; then
+    # dpkg-divert uses rename so can't do cross-device diversions.  bleah.
+    [ -d /bin/secure-su ] || mkdir /bin/secure-su
+    chmod 700 /bin/secure-su
+    ln -sf ../../usr/doc/secure-su/README.gz /bin/secure-su/README.gz
+    dpkg-divert --package secure-su --add --rename \
+	--divert /bin/secure-su/su /bin/su
+    dpkg-divert --package secure-su --add --rename \
+	--divert /usr/man/man1/gnu-su.1.gz /usr/man/man1/su.1.gz
+fi

@@ -1,0 +1,66 @@
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: groupmod.8,v 1.5 2000/08/26 18:27:17 marekm Exp $
+.\"
+.TH GROUPMOD 8
+.SH NAME
+groupmod \- Modify a group
+.SH SYNOPSIS
+.B groupmod
+[\fB-g\fI gid \fR[\fB-o\fR]]
+[\fB-n\fI group_name \fR]
+.I group
+.SH DESCRIPTION
+The \fBgroupmod\fR command modifies the system account files to reflect
+the changes that are specified on the command line.
+The options which apply to the \fIgroupmod\fR command are
+.IP "\fB-g \fIgid\fR"
+The numerical value of the group's ID.
+This value must be unique, unless the \fB-o\fR option is used.
+The value must be non-negative.
+Values between 0 and 99 are typically reserved for system groups.
+Any files which the old group ID is the file group ID
+must have the file group ID changed manually.
+.IP "\fB-n \fIgroup_name\fR"
+The name of the group will be changed from \fIgroup\fR to
+\fIgroup_name\fR.
+.SH FILES
+/etc/group \- group information
+.br
+/etc/gshadow \- secure group information
+.SH SEE ALSO
+.BR chfn (1),
+.BR chsh (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.BR passwd (1),
+.BR groupadd (8),
+.BR groupdel (8)
+.SH AUTHOR
+Julianne Frances Haugh (jfh@austin.ibm.com)

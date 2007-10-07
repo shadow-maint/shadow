@@ -1,0 +1,54 @@
+.\" {PTM/WK/1999-09-17}
+.TH LOGIN.ACCESS 5
+.\" .Dt SKEY.ACCESS 5
+.\" .Os FreeBSD 1.2
+.SH NAZWA
+login.access \- tabela kontroli dostêpu logowania
+.SH OPIS
+Plik
+.I login.access
+okre¶la kombinacje (u¿ytkownik, host) i/lub (u¿ytkownik, tty) 
+dla których logowanie bêdzie albo przyjête albo odrzucone.
+.PP
+Gdy kto¶ siê loguje, plik
+.I login.access
+przeszukiwany jest do znalezienia pierwszej pozycji pasuj±cej do danej
+kombinacji (u¿ytkownik, host), lub, w przypadku logowañ nie-sieciowych
+kombinacji (u¿ytkownik, tty). Pole zezwolenia w tej tablicy pozycji okre¶la
+czy logowanie bêdzie przyjête czy odrzucone.
+.PP
+Ka¿dy wiersz tabeli kontroli dostêpu logowania posiada trzy, oddzielone
+znakiem dwukropka, pola:
+.sp 1
+.IR 	zezwolenie : u¿ytkownicy : pochodzenie
+.sp 1
+Pierwsze pole powinno zawieraæ znak "\fB+\fR" (dostêp zapewniony) lub "\fB-\fR"
+(zakaz dostêpu). Drugie z pól powinno zawieraæ listê jednego lub wiêcej nazw
+u¿ytkowników, grup lub s³owo
+.B ALL
+(zawsze pasuje do wszystkich). Trzecie pole powinno byæ list± jednej lub wiêcej
+nazw tty (dla logowañ nie-sieciowych), nazw hostów, domen (rozpoczynaj±cych siê
+od kropki), adresów hostów, internetowych numerów sieci (koñcz±cych siê
+kropk±), s³owem
+.B ALL
+(wszystkie - zawsze pasuje) lub
+.B LOCAL
+(dopasowuje dowolny ³añcuch nie zawieraj±cy kropki).
+Je¿eli uruchomisz NIS mo¿esz u¿yæ @nazwagrupysieciowej we wzorcu hosta
+lub u¿ytkownika.
+.\" @netgroupname
+.PP
+Operator
+.B EXCEPT
+(oprócz) umo¿liwia pisanie z³o¿onych regu³.
+.PP
+Plik grup przeszukiwany jest wy³±cznie wtedy, gdy nazwa nie pasuje do
+loguj±cego siê u¿ytkownika. Dopasowywane s± tylko te grupy, w których
+u¿ytkownik jest jawnie wymieniony: program nie sprawdza warto¶ci
+identyfikatora grupy g³ównej u¿ytkownika.
+.SH PLIKI
+.I /etc/login.access
+.SH ZOBACZ TAK¯E
+.BR login (1)
+.SH AUTOR
+Guido van Rooij

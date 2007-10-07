@@ -1,0 +1,77 @@
+.\" {PTM/WK/1999-09-25}
+.\" Copyright 1990 - 1994 Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH CHFN 1
+.SH NAZWA
+chfn \- zmieñ nazwê u¿ytkownika i informacjê o nim
+.SH SK£ADNIA
+.TP 5
+.B chfn
+.RB [ -f
+.IR pe³na_nazwa ]
+.RB [ -r
+.IR nr_pokoju ]
+.br
+.RB [ -w
+.IR tel_s³u¿b ]
+.RB [ -h
+.IR tel_dom ]
+.RB [ -o
+.IR inne ]
+.RI [ u¿ytkownik ]
+.SH OPIS
+\fBchfn\fR zmienia pe³n± nazwê (imiê i nazwisko), telefon s³u¿bowy i domowy
+dla danego konta u¿ytkownika. Informacja ta jest zwykle drukowana przez
+\fBfinger\fR(1) i podobne mu programy.
+Zwyk³y u¿ytkownik mo¿e zmieniaæ wy³±cznie pola opisuj±ce w³asne konto.
+Tylko superu¿ytkownik mo¿e zmieniaæ pola dowolnego konta.
+Równie¿ tylko on mo¿e pos³u¿yæ siê opcj± \fB-o\fR by zmieniæ niezdefiniowane
+czê¶ci pola GECOS.
+.PP
+Jedynym ograniczeniem nak³adanym na zawarto¶æ pól jest zakaz u¿ywania w nich
+znaków kontrolnych oraz przecinka, dwukropka i znaku równo¶ci.
+Pola \fIinne\fR (other) nie obowi±zuje to ograniczenie. Pole to s³u¿y do
+przechowywania informacji rozliczeniowej u¿ywanej przez inne aplikacje.
+.PP
+Je¶li nie wybrano ¿adnej z opcji, to \fBchfn\fR dzia³a w trybie interaktywnym,
+proponuj±c u¿ytkownikowi warto¶ci bie¿±ce dla ka¿dego z pól. Wprowad¼ now±
+warto¶æ by zmieniæ pole, lub pozostaw pust± by u¿yæ warto¶ci bie¿±cej.
+Bie¿±ca warto¶æ pola wy¶wietlana jest miêdzy par± znaczników \fB[ ]\fR.
+Bez podania opcji \fBchfn\fR pyta o konto u¿ytkownika, które ma podlegaæ
+zmianie.
+.SH PLIKI
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.SH ZOBACZ TAK¯E
+.BR passwd (5)
+.SH AUTOR
+Julianne Frances Haugh (jfh@austin.ibm.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

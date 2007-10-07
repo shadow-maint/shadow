@@ -1,0 +1,73 @@
+.\" Copyright 1996, Rafal Maszkowski, rzm@pdi.net
+.\" All rights reserved. You can redistribute this man page and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of the
+.\" License, or (at your option) any later version.
+.\"
+.\"	$Id: gpasswd.1,v 1.2 1996/09/10 02:45:18 marekm Exp $
+.\"
+.TH GPASSWD 1
+.SH NAME
+gpasswd \- administer the /etc/group file
+.br
+.SH SYNOPSIS
+.B gpasswd \fIgroup\fR
+.br
+.B gpasswd
+.B -a
+\fIuser\fR \fIgroup\fR
+.br
+.B gpasswd
+.B -d
+\fIuser\fR \fIgroup\fR
+.br
+.B gpasswd
+.B -R
+\fIgroup\fR
+.br
+.B gpasswd
+.B -r
+\fIgroup\fR
+.br
+.B gpasswd
+.RB [ -A
+\fIuser\fR,...]
+.RB [ -M
+\fIuser\fR,...]
+\fIgroup\fR
+.br
+.SH DESCRIPTION
+.B gpasswd
+is used to administer the /etc/group file (and /etc/gshadow
+file if compiled with SHADOWGRP defined). Every group can
+have administrators, members and a password. System
+administrator can use \fB-A\fR option to define group
+administrator(s) and \fB-M\fR option to define members and
+has all rights of group administrators and members.
+.PP
+Group administrator can add and delete users using \fB-a\fR
+and \fB-d\fR options respectively. Administrators can use
+\fB-r\fR option to remove group password. When no password 
+is set only group members can use
+.BR newgrp (1)
+to join the group. Option \fB-R\fR disables 
+access to the group through
+.BR newgrp (1)
+command.
+.PP
+.B gpasswd
+called by a group administrator with group name only prompts
+for the group password. If password is set the members can still
+.BR newgrp (1)
+without a password, non-members must supply the password.
+
+.SH FILES
+/etc/group \- group information
+.br
+/etc/gshadow \- shadow group information
+.SH SEE ALSO
+.BR newgrp (1),
+.BR groupadd (8),
+.BR groupdel (8),
+.BR groupmod (8),
+.BR grpck (8)

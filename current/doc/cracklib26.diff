@@ -1,0 +1,340 @@
+diff -ur orig/cracklib26_small/cracklib/fascist.c cracklib26_small/cracklib/fascist.c
+--- orig/cracklib26_small/cracklib/fascist.c	Mon Dec 15 02:56:55 1997
++++ cracklib26_small/cracklib/fascist.c	Sat Apr  4 22:14:45 1998
+@@ -12,6 +12,7 @@
+ #include <ctype.h>
+ #include <sys/types.h>
+ #include <pwd.h>
++#include <string.h>
+ 
+ #define ISSKIP(x) (isspace(x) || ispunct(x))
+ 
+@@ -460,28 +461,27 @@
+ }
+ 
+ char *
+-FascistGecos(password, uid)
++FascistGecosPw(password, pwd)
+     char *password;
+-    int uid;
++    struct passwd *pwd;
+ {
+     int i;
+     int j;
+     int wc;
+     char *ptr;
+-    struct passwd *pwp;
+     char gbuffer[STRINGSIZE];
+     char tbuffer[STRINGSIZE];
+     char *uwords[STRINGSIZE];
+     char longbuffer[STRINGSIZE * 2];
+ 
+-    if (!(pwp = getpwuid(uid)))
++    if (!pwd)
+     {
+ 	return ("you are not registered in the password file");
+     }
+ 
+     /* lets get really paranoid and assume a dangerously long gecos entry */
+ 
+-    strncpy(tbuffer, pwp->pw_name, STRINGSIZE);
++    strncpy(tbuffer, pwd->pw_name, STRINGSIZE);
+     tbuffer[STRINGSIZE-1] = '\0';
+     if (GTry(tbuffer, password))
+     {
+@@ -490,12 +490,13 @@
+ 
+     /* it never used to be that you got passwd strings > 1024 chars, but now... */
+ 
+-    strncpy(tbuffer, pwp->pw_gecos, STRINGSIZE);
++    strncpy(tbuffer, pwd->pw_gecos, STRINGSIZE);
+     tbuffer[STRINGSIZE-1] = '\0';
+     strcpy(gbuffer, Lowercase(tbuffer));
+ 
+     wc = 0;
+     ptr = gbuffer;
++    uwords[0] = (char *) 0;
+ 
+     while (*ptr)
+     {
+@@ -530,6 +531,8 @@
+ 	    *(ptr++) = '\0';
+ 	}
+     }
++    if (!uwords[0])
++	return ((char *) 0);  /* empty gecos */
+ #ifdef DEBUG
+     for (i = 0; uwords[i]; i++)
+     {
+@@ -586,9 +589,10 @@
+ }
+ 
+ char *
+-FascistLook(pwp, instring)
++FascistLookPw(pwp, instring, pwd)
+     PWDICT *pwp;
+     char *instring;
++    struct passwd *pwd;
+ {
+     int i;
+     char *ptr;
+@@ -667,7 +671,7 @@
+ 	return ("it looks like a National Insurance number.");
+     }
+ 
+-    if (ptr = FascistGecos(password, getuid()))
++    if (ptr = FascistGecosPw(password, pwd ? pwd : getpwuid(getuid())))
+     {
+ 	return (ptr);
+     }
+@@ -715,9 +719,10 @@
+ }
+ 
+ char *
+-FascistCheck(password, path)
++FascistCheckPw(password, path, pwd)
+     char *password;
+     char *path;
++    struct passwd *pwd;
+ {
+     static char lastpath[STRINGSIZE];
+     static PWDICT *pwp;
+@@ -750,5 +755,29 @@
+ 	strncpy(lastpath, path, STRINGSIZE);
+     }
+ 
+-    return (FascistLook(pwp, pwtrunced));
++    return (FascistLookPw(pwp, pwtrunced, pwd));
++}
++
++char *
++FascistGecos(password, uid)
++    char *password;
++    int uid;
++{
++    return (FascistGecosPw(password, getpwuid(uid)));
++}
++
++char *
++FascistLook(pwp, instring)
++    PWDICT *pwp;
++    char *instring;
++{
++    return (FascistLookPw(pwp, instring, (char *) 0));
++}
++
++char *
++FascistCheck(password, path)
++    char *password;
++    char *path;
++{
++    return (FascistCheckPw(password, path, (char *) 0));
+ }
+diff -ur orig/cracklib26_small/cracklib/packer.h cracklib26_small/cracklib/packer.h
+--- orig/cracklib26_small/cracklib/packer.h	Mon Dec 15 00:09:30 1997
++++ cracklib26_small/cracklib/packer.h	Sat Jan 10 22:13:46 1998
+@@ -34,6 +34,7 @@
+     FILE *dfp;
+     FILE *wfp;
+ 
++    int canfree;
+     int32 flags;
+ #define PFOR_WRITE	0x0001
+ #define PFOR_FLUSH	0x0002
+diff -ur orig/cracklib26_small/cracklib/packlib.c cracklib26_small/cracklib/packlib.c
+--- orig/cracklib26_small/cracklib/packlib.c	Fri Jul  9 22:22:58 1993
++++ cracklib26_small/cracklib/packlib.c	Sat Jan 10 22:28:49 1998
+@@ -16,7 +16,7 @@
+     char *mode;
+ {
+     int32 i;
+-    static PWDICT pdesc;
++    PWDICT *pdesc;
+     char iname[STRINGSIZE];
+     char dname[STRINGSIZE];
+     char wname[STRINGSIZE];
+@@ -25,92 +25,94 @@
+     FILE *ifp;
+     FILE *wfp;
+ 
+-    if (pdesc.header.pih_magic == PIH_MAGIC)
+-    {
+-	fprintf(stderr, "%s: another dictionary already open\n", prefix);
++    if ((pdesc = (PWDICT *) malloc(sizeof(PWDICT))) == 0)
+ 	return ((PWDICT *) 0);
+-    }
+ 
+-    memset(&pdesc, '\0', sizeof(pdesc));
++    memset(pdesc, '\0', sizeof(*pdesc));
+ 
+     sprintf(iname, "%s.pwi", prefix);
+     sprintf(dname, "%s.pwd", prefix);
+     sprintf(wname, "%s.hwm", prefix);
+ 
+-    if (!(pdesc.dfp = fopen(dname, mode)))
++    if (!(pdesc->dfp = fopen(dname, mode)))
+     {
+ 	perror(dname);
++	free(pdesc);
+ 	return ((PWDICT *) 0);
+     }
+ 
+-    if (!(pdesc.ifp = fopen(iname, mode)))
++    if (!(pdesc->ifp = fopen(iname, mode)))
+     {
+-	fclose(pdesc.dfp);
++	fclose(pdesc->dfp);
+ 	perror(iname);
++	free(pdesc);
+ 	return ((PWDICT *) 0);
+     }
+ 
+-    if (pdesc.wfp = fopen(wname, mode))
++    if (pdesc->wfp = fopen(wname, mode))
+     {
+-	pdesc.flags |= PFOR_USEHWMS;
++	pdesc->flags |= PFOR_USEHWMS;
+     }
+ 
+-    ifp = pdesc.ifp;
+-    dfp = pdesc.dfp;
+-    wfp = pdesc.wfp;
++    ifp = pdesc->ifp;
++    dfp = pdesc->dfp;
++    wfp = pdesc->wfp;
+ 
+     if (mode[0] == 'w')
+     {
+-	pdesc.flags |= PFOR_WRITE;
+-	pdesc.header.pih_magic = PIH_MAGIC;
+-	pdesc.header.pih_blocklen = NUMWORDS;
+-	pdesc.header.pih_numwords = 0;
++	pdesc->flags |= PFOR_WRITE;
++	pdesc->header.pih_magic = PIH_MAGIC;
++	pdesc->header.pih_blocklen = NUMWORDS;
++	pdesc->header.pih_numwords = 0;
+ 
+-	fwrite((char *) &pdesc.header, sizeof(pdesc.header), 1, ifp);
++	fwrite((char *) &pdesc->header, sizeof(pdesc->header), 1, ifp);
+     } else
+     {
+-	pdesc.flags &= ~PFOR_WRITE;
++	pdesc->flags &= ~PFOR_WRITE;
+ 
+-	if (!fread((char *) &pdesc.header, sizeof(pdesc.header), 1, ifp))
++	if (!fread((char *) &pdesc->header, sizeof(pdesc->header), 1, ifp))
+ 	{
+ 	    fprintf(stderr, "%s: error reading header\n", prefix);
+ 
+-	    pdesc.header.pih_magic = 0;
++	    pdesc->header.pih_magic = 0;
+ 	    fclose(ifp);
+ 	    fclose(dfp);
++	    free(pdesc);
+ 	    return ((PWDICT *) 0);
+ 	}
+ 
+-	if (pdesc.header.pih_magic != PIH_MAGIC)
++	if (pdesc->header.pih_magic != PIH_MAGIC)
+ 	{
+ 	    fprintf(stderr, "%s: magic mismatch\n", prefix);
+ 
+-	    pdesc.header.pih_magic = 0;
++	    pdesc->header.pih_magic = 0;
+ 	    fclose(ifp);
+ 	    fclose(dfp);
++	    free(pdesc);
+ 	    return ((PWDICT *) 0);
+ 	}
+ 
+-	if (pdesc.header.pih_blocklen != NUMWORDS)
++	if (pdesc->header.pih_blocklen != NUMWORDS)
+ 	{
+ 	    fprintf(stderr, "%s: size mismatch\n", prefix);
+ 
+-	    pdesc.header.pih_magic = 0;
++	    pdesc->header.pih_magic = 0;
+ 	    fclose(ifp);
+ 	    fclose(dfp);
++	    free(pdesc);
+ 	    return ((PWDICT *) 0);
+ 	}
+ 
+-	if (pdesc.flags & PFOR_USEHWMS)
++	if (pdesc->flags & PFOR_USEHWMS)
+ 	{
+-	    if (fread(pdesc.hwms, 1, sizeof(pdesc.hwms), wfp) != sizeof(pdesc.hwms))
++	    if (fread(pdesc->hwms, 1, sizeof(pdesc->hwms), wfp) != sizeof(pdesc->hwms))
+ 	    {
+-		pdesc.flags &= ~PFOR_USEHWMS;
++		pdesc->flags &= ~PFOR_USEHWMS;
+ 	    }
+ 	}
+     }
+-
+-    return (&pdesc);
++    pdesc->canfree = 1;
++    return (pdesc);
+ }
+ 
+ int
+@@ -159,8 +161,13 @@
+ 
+     fclose(pwp->ifp);
+     fclose(pwp->dfp);
++    if (pwp->wfp)
++	fclose(pwp->wfp);
+ 
+-    pwp->header.pih_magic = 0;
++    if (pwp->canfree)
++	free(pwp);
++    else
++	pwp->header.pih_magic = 0;
+ 
+     return (0);
+ }
+@@ -307,6 +314,11 @@
+     register char *this;
+     int idx;
+ 
++/*
++ * comment in npasswd-2.0beta4 says this:
++ * This does not work under all circumstances, so don't bother
++ */
++#if 0
+     if (pwp->flags & PFOR_USEHWMS)
+     {
+ 	idx = string[0] & 0xff;
+@@ -317,6 +329,10 @@
+     	lwm = 0;
+     	hwm = PW_WORDS(pwp) - 1;
+     }
++#else
++    lwm = 0;
++    hwm = PW_WORDS(pwp);
++#endif
+ 
+ #ifdef DEBUG
+     printf("---- %lu, %lu ----\n", lwm, hwm);
+diff -ur orig/cracklib26_small/util/mkdict cracklib26_small/util/mkdict
+--- orig/cracklib26_small/util/mkdict	Fri Jul  9 22:23:03 1993
++++ cracklib26_small/util/mkdict	Sat Apr  4 22:31:45 1998
+@@ -14,9 +14,16 @@
+ SORT="sort"
+ ###SORT="sort -T /tmp"
+ 
+-cat $* |
++### Use zcat to read compressed (as well as uncompressed) dictionaries.
++### Compressed dictionaries can save quite a lot of disk space.
++
++CAT="gzip -cdf"
++###CAT="zcat"
++###CAT="cat"
++
++$CAT $* |
+ 	tr '[A-Z]' '[a-z]' |
+-	tr -cd '[\012a-z0-9]' |
++	tr -cd '\012[a-z][0-9]' |
+ 	$SORT |
+ 	uniq |
+ 	grep -v '^#' |
