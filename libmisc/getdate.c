@@ -149,7 +149,7 @@
 
 #include "getdate.h"
 
-#if defined (STDC_HEADERS) || defined (USG)
+#if defined (STDC_HEADERS)
 # include <string.h>
 #endif
 

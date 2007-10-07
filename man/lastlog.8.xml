@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='lastlog.8'>
-  <!-- $Id: lastlog.8.xml,v 1.6 2005/06/14 16:54:20 kloczek Exp $ -->
+  <!-- $Id: lastlog.8.xml,v 1.7 2005/07/11 16:33:21 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>lastlog</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -92,6 +92,18 @@
     </para>
   </refsect1>
   
+  <refsect1 id='note'>
+    <title>NOTE</title>
+    <para>
+      The <command>lastlog</command> file is a database which contains info
+      on the last login of each user. You should not rotate it. It is a sparse
+      file, so its size on the disk is much smaller than the one shown by
+      <command>ls -l</command> (which can indicate a really big file if
+      you have an high UID). You can display its real size with
+      <command>ls -s</command>.
+    </para>
+  </refsect1>
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>

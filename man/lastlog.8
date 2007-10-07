@@ -56,6 +56,11 @@ The \fB\-t\fR flag overrides the use of \fB\-u\fR\&.
 .PP
 If the user has never logged in the message \fI **Never logged in**\fR will be displayed instead of the port and time\&.
 
+.SH "NOTE"
+
+.PP
+The \fBlastlog\fR file is a database which contains info on the last login of each user\&. You should not rotate it\&. It is a sparse file, so its size on the disk is much smaller than the one shown by \fBls \-l\fR (which can indicate a really big file if you have an high UID)\&. You can display its real size with \fBls \-s\fR\&.
+
 .SH "FILES"
 
 .TP

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.9 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.10 2005/07/10 20:00:21 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -58,9 +58,9 @@
       <filename>/etc/login.defs</filename>.
     </para>
     
-    <para>A subsystem login is indicated by the presense of a "*" as the
+    <para>A subsystem login is indicated by the presence of a "*" as the
       first character of the login shell. The given home directory will be
-      used as the root of a new filesystem which the user is actually logged
+      used as the root of a new file system which the user is actually logged
       into.
     </para>
   </refsect1>

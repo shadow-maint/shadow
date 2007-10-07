@@ -30,11 +30,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: sub.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: sub.c,v 1.8 2005/07/18 13:19:05 kloczek Exp $")
+#include <pwd.h>
+#include <stdio.h>
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #define	BAD_SUBROOT2	"invalid root `%s' for user `%s'\n"
 #define	NO_SUBROOT2	"no subsystem root `%s' for user `%s'\n"
 /*

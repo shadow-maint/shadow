@@ -58,6 +58,7 @@ libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libshadow_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 am_libshadow_la_OBJECTS = commonio.lo encrypt.lo fputsx.lo getdef.lo \
 	getpass.lo groupio.lo gshadow.lo lockpw.lo nscd.lo port.lo \
@@ -121,10 +122,12 @@ LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBICONV = @LIBICONV@
 LIBINTL = @LIBINTL@
+LIBMD = @LIBMD@
 LIBOBJS = @LIBOBJS@
 LIBPAM = @LIBPAM@
 LIBS = @LIBS@
 LIBSELINUX = @LIBSELINUX@
+LIBSKEY = @LIBSKEY@
 LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBICONV = @LTLIBICONV@
@@ -201,7 +204,7 @@ target_alias = @target_alias@
 AUTOMAKE_OPTIONS = 1.0 foreign
 lib_LTLIBRARIES = libshadow.la
 libshadow_la_LDFLAGS = -version-info 0:0:0
-libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSELINUX)
+libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD) $(LIBSELINUX)
 libshadow_la_SOURCES = \
 	commonio.c \
 	commonio.h \

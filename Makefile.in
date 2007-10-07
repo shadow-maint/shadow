@@ -38,8 +38,8 @@ host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
 	$(srcdir)/shadow.spec.in $(top_srcdir)/configure ABOUT-NLS \
-	ChangeLog NEWS TODO acconfig.h config.guess config.rpath \
-	config.sub depcomp install-sh ltmain.sh missing mkinstalldirs
+	ChangeLog NEWS TODO config.guess config.rpath config.sub \
+	depcomp install-sh ltmain.sh missing mkinstalldirs
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
@@ -113,10 +113,12 @@ LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBICONV = @LIBICONV@
 LIBINTL = @LIBINTL@
+LIBMD = @LIBMD@
 LIBOBJS = @LIBOBJS@
 LIBPAM = @LIBPAM@
 LIBS = @LIBS@
 LIBSELINUX = @LIBSELINUX@
+LIBSKEY = @LIBSKEY@
 LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBICONV = @LTLIBICONV@
@@ -242,7 +244,7 @@ config.h: stamp-h1
 stamp-h1: $(srcdir)/config.h.in $(top_builddir)/config.status
 	@rm -f stamp-h1
 	cd $(top_builddir) && $(SHELL) ./config.status config.h
-$(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) $(top_srcdir)/acconfig.h
+$(srcdir)/config.h.in: @MAINTAINER_MODE_TRUE@ $(am__configure_deps) 
 	cd $(top_srcdir) && $(AUTOHEADER)
 	rm -f stamp-h1
 	touch $@

@@ -1,4 +1,51 @@
-$Id: NEWS,v 1.178 2005/06/28 14:28:19 kloczek Exp $
+$Id: NEWS,v 1.211 2005/07/18 09:53:57 kloczek Exp $
+
+shadow-4.0.10 -> shadow-4.0.11						18-07-2005
+
+*** general:
+- su: ignore SIGINT while authenticating. A ^C could defeat the waiting period and
+  permit brute-force attacks. Also ignore SIGQUIT.
+  Fixed: http://bugs.debian.org/52372 and http://bugs.debian.org/288827
+- useradd: rewrited for use getopt_long(),
+- newgrp: add fix for handle splitted NIS groups: extends the functionality that,
+  if the requested group is given, all groups of the same GID are tested for
+  membership of the requesting user.
+  (fix by Christian Mudra <C.Mudra@science-computing.de>)
+- fix nscd_flush_cache(): for some reason doing the INVALIDATE call with two
+  write()'s fails. Do one writev() call instead.
+  http://bugs.gentoo.org/show_bug.cgi?id=80413
+  (submited by Martin Schlemmer <azarah@gentoo.org>)
+- merge nscd-socket-path patch from Fedora: newer glibc's have a different nscd socket
+  location (/var/run/nscd/socket instead /var/run/.nscd_socket),
+- S/Key support is back,
+- usermod: added -a option. This flag can only be used in conjunction with the -G
+  option. It cause usermod to append user to the current supplementary group list.
+  (patch by Peter Vrabec <pvrabec@redhat.com>) 
+- chage: added missing \n in error messages,
+- useradd, groupadd: change -O option to -K and document it in man page,
+- su, sulogin, login: fixed erroneous warning messages when used with PAM about some
+  login.defs variables (fix by DJ Lucas <dj@linuxfromscratch.org>),
+- autoconf:
+-- stop with error message if crypt() not found,
+-- remove --with{,out}-libcrypt switch,
+-- move all autoheader templates from acconfig.h to configure.in,
+- login: setup limits and umask (using login.defs ULIMITS and UMASK variables) only when
+  PAM support is disabled (it is task for pam_limits and pam_umask modules),
+- sulogin, login: use SYSLOG macro instead syslog() which saves the locale, sets the
+  locale to C, sends the message and restores the locale
+  (fix by Nicolas François <nicolas.francois@centraliens.net>).
+- updated translations: cs, da, de, es, fi, pl, pt, ro, ru, sk.
+*** documentation:
+- pwck(8): document -q option (based on Debian patch for fix http://bugs.debian.org/309408)
+- pwck(8): rewrited OPTIONS section and better SYNOPSIS,
+- lastlog(8): document that lastlog is a sparse file, and don't need to be rotated
+  http://bugs.debian.org/219321
+- login(8): better explain the respective roles of login, init and getty with regards
+  to the utmp file (based on 441_manpages-shadow.5 Debian patch),
+- shadowconfig(8): removed (will be maintained in Debian shadow pkg repository),
+- groupadd(8): document -o option,
+- in SEE ALLSO section in groupadd(8), groupdel(8), groupmod(8), userdel(8), usermod(8)
+  added refer to gpasswd(8) (suggested by Mike Frysinger <vapier@gentoo.org>).
 
 shadow-4.0.9 -> shadow-4.0.10						28-06-2005
 
@@ -30,7 +77,7 @@ shadow-4.0.9 -> shadow-4.0.10						28-06-2005
   when it should have used pam_user) http://bugs.debian.org/47819
 - remove using SHADOWPWD #define so now shadow is allways builded with shadow
   passwowd support,
-- chage: rewrite for use getopt_long(),
+- chage: rewrited for use getopt_long(),
 - updated translations: ca, cs, da, fi, pl, ru, zh_TW.
 *** documentation:
 - most of the man pages now are generated from XML files so in case submiting any
@@ -104,7 +151,7 @@ shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 - newgrp(1): fix #251926, #166173, #113191 Debian bugs: explain why editing /etc/group   
   (without gshadow) doesn't permit to use newgrp,
 - newgrp(1): newgrp uses /bin/sh (not bash),
-- faillog(8): updated after rewrite faillog command for use getopt_long(),
+- faillog(8): updated after rewrited faillog command for use getopt_long(),
 - login(1): removed fragment about abilities pass enviroment variables in login prompt,
 - gshadow(5): new file (by Nicolas Nicolas François <nicolas.francois@centraliens.net>),
 - usermod(8): fixed #302388 Debian bug: added separated -o option description,

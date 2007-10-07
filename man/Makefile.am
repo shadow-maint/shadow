@@ -88,8 +88,6 @@ EXTRA_DIST = $(man_MANS) \
 	id.1.xml \
 	pw_auth.3 \
 	pw_auth.3.xml \
-	shadowconfig.8 \
-	shadowconfig.8.xml \
 	sulogin.8 \
 	sulogin.8.xml \
 	sulogin.8.xml

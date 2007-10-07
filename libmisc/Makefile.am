@@ -11,7 +11,6 @@ libmisc_a_SOURCES = \
 	basename.c \
 	chkname.c \
 	chkname.h \
-	chkshell.c \
 	chowndir.c \
 	chowntty.c \
 	console.c \

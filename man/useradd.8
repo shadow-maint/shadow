@@ -24,15 +24,19 @@ useradd \- Create a new user or update default new user information
 .ad l
 .hy 0
 .HP 8
-\fBuseradd\fR [\-c\ \fIcomment\fR] [\-d\ \fIhome_dir\fR] [\-e\ \fIexpire_date\fR] [\-f\ \fIinactive_days\fR]
-.br
- [\-g\ \fIinitial_group\fR] [\-G\ \fIgroup1\fR\ [\fI,group2,\fR...\ \fI,\fR\ [\fIgroupN\fR]]]
-.br
- [[\-M]\ \-m\ [\-k\ \fIskeleton_dir\fR]] [\-o] [\-p\ \fIpasswd\fR] [\-s\ \fIshell\fR]
-.br
- [\-u\ \fIuid\fR] \fIlogin\fR \fIuseradd\fR \-D [\-g\ \fIgroup\fR] [\-b\ \fIhome_dir\fR] [\-e\ \fIexpire_date\fR]
-.br
- [\-f\ \fIinactive_days\fR] [\-s\ \fIshell\fR]
+\fBuseradd\fR [\fIoptions\fR] \fILOGIN\fR
+.ad
+.hy
+.ad l
+.hy 0
+.HP 8
+\fBuseradd\fR \-D
+.ad
+.hy
+.ad l
+.hy 0
+.HP 8
+\fBuseradd\fR \-D [\fIoptions\fR]
 .ad
 .hy
 
@@ -49,51 +53,61 @@ When invoked without the \fB\-D\fR option, the \fBuseradd\fR command creates a n
 The options which apply to the \fBuseradd\fR command are:
 
 .TP
-\fB\-c\fR \fIcomment\fR
-The new user's password file comment field\&.
+\fB\-c\fR, \fB\-\-comment\fR \fICOMMENT\fR
+Any text string\&. It is generally a short description of the login, and is currently used as the field for the user's full name\&.
 
 .TP
-\fB\-d\fR \fIhome_dir\fR
-The new user will be created using \fI home_dir \fRas the value for the user's login directory\&. The default is to append the \fIlogin\fR name to \fIhome\fR and use that as the login directory name\&.
+\fB\-b\fR, \fB\-\-base\-dir\fR \fIBASE_DIR\fR
+The default base directory for the system if \fB\-d\fR dir is not specified\&. \fIBASE_DIR\fR is concatenated with the account name to define the home directory\&. If the \fB\-m\fR option is not used, base_dir must exist\&.
 
 .TP
-\fB\-e\fR \fIexpire_date\fR
+\fB\-d\fR, \fB\-\-home\fR \fIHOME_DIR\fR
+The new user will be created using \fIHOME_DIR\fR as the value for the user's login directory\&. The default is to append the \fILOGIN\fR name to \fIBASE_DIR\fR and use that as the login directory name\&.
+
+.TP
+\fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
 The date on which the user account will be disabled\&. The date is specified in the format \fIYYYY\-MM\-DD\fR\&.
 
 .TP
-\fB\-f\fR \fIinactive_days\fR
+\fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
 The number of days after a password expires until the account is permanently disabled\&. A value of 0 disables the account as soon as the password has expired, and a value of \-1 disables the feature\&. The default value is \-1\&.
 
 .TP
-\fB\-g\fR \fIinitial_group\fR
+\fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
 The group name or number of the user's initial login group\&. The group name must exist\&. A group number must refer to an already existing group\&. The default group number is 1 or whatever is specified in \fI/etc/default/useradd\fR\&.
 
 .TP
-\fB\-G\fR \fIgroup1\fR[\fI ,group2,\&.\&.\&., \fR [\fIgroupN\fR]]]
+\fB\-G\fR, \fB\-\-groups\fR \fIGROUP1\fR[\fI,GROUP2,\&.\&.\&.\fR[\fI,GROUPN\fR]]]
 A list of supplementary groups which the user is also a member of\&. Each group is separated from the next by a comma, with no intervening whitespace\&. The groups are subject to the same restrictions as the group given with the \fB\-g\fR option\&. The default is for the user to belong only to the initial group\&.
 
 .TP
-\fB\-M\fR
-RedHat added the CREATE_HOME option in login\&.defs in their version of shadow\-utils (which makes \-m the default, with new \-M option to turn it off)\&. Unfortunately, this changes the way useradd works (it can be run by scripts expecting some standard behaviour), compared to other Unices and other Linux distributions, and also adds a lot of confusion\&.
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit\&.
 
 .TP
-\fB\-m\fR
+\fB\-m\fR, \fB\-\-create\-home\fR
 The user's home directory will be created if it does not exist\&. The files contained in \fIskeleton_dir\fR will be copied to the home directory if the \fB\-k\fR option is used, otherwise the files contained in \fI/etc/skel\fR will be used instead\&. Any directories contained in \fI skeleton_dir\fR or \fI/etc/skel\fR will be created in the user's home directory as well\&. The \fB\-k\fR option is only valid in conjunction with the \fB\-m\fR option\&. The default is to not create the directory and to not copy any files\&.
 
 .TP
-\fB\-o\fR
-Allow create user with duplicate (non\-unique) UID\&.
+\fB\-K\fR, \fB\-\-key\fR \fIKEY\fR=\fIVALUE\fR
+Overrides /etc/login\&.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS and others)\&. For example: \fB\-K\fR  \fIPASS_MAX_DAYS\fR=\fI\-1\fR can be used when creating system account to turn off password ageing, even though system account has no password at all\&. Multiple \fB\-K\fR options can be specified, e\&.g\&.: \fB\-K\fR  \fIUID_MIN\fR=\fI100\fR  \fB\-K\fR  \fIUID_MAX\fR=\fI499\fR 
+
+Note: \fB\-K\fR  \fIUID_MIN\fR=\fI10\fR,\fIUID_MAX\fR=\fI499\fR doesn't work yet\&.
 
 .TP
-\fB\-p\fR \fIpasswd\fR
+\fB\-o\fR, \fB\-\-non\-unique\fR
+Allow create user account with duplicate (non\-unique) UID\&.
+
+.TP
+\fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
 The encrypted password, as returned by \fBcrypt\fR(3)\&. The default is to disable the account\&.
 
 .TP
-\fB\-s\fR \fIshell\fR
+\fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The name of the user's login shell\&. The default is to leave this field blank, which causes the system to select the default login shell\&.
 
 .TP
-\fB\-u\fR \fIuid\fR
+\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
 The numerical value of the user's ID\&. This value must be unique, unless the \fB\-o\fR option is used\&. The value must be non\-negative\&. The default is to use the smallest ID value greater than 999 and greater than every other user\&. Values between 0 and 999 are typically reserved for system accounts\&.
 
 .SS "Changing the default values"
@@ -114,11 +128,11 @@ The date on which the user account is disabled\&.
 The number of days after a password has expired before the account will be disabled\&.
 
 .TP
-\fB\-g\fR \fIgroup\fR
+\fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
 The group name or ID for a new user's initial group\&. The named group must exist, and a numerical group ID must have an existing entry \&.
 
 .TP
-\fB\-s\fR \fIshell\fR
+\fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The name of the new user's login shell\&. The named program will be used for all future new user accounts\&.
 
 .PP

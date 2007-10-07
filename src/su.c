@@ -30,42 +30,40 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.34 2005/06/20 10:17:08 kloczek Exp $")
-#include <sys/types.h>
+RCSID (PKG_VER "$Id: su.c,v 1.39 2005/07/18 10:14:39 kloczek Exp $")
+#include <grp.h>
+#include <pwd.h>
+#include <signal.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include "prototypes.h"
+#include "defines.h"
+#include "pwauth.h"
+#include "getdef.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
+#endif
+/*
+ * Assorted #defines to control su's behavior
+ */
+/*
+ * Global variables
+ */
+/* not needed by sulog.c anymore */
+static char name[BUFSIZ];
+static char oldname[BUFSIZ];
+
+#ifdef USE_PAM
 static const struct pam_conv conv = {
 	misc_conv,
 	NULL
 };
 
 static pam_handle_t *pamh = NULL;
+static int caught = 0;
 #endif
 
-#include "prototypes.h"
-#include "defines.h"
-
-#include <grp.h>
-#include <signal.h>
-#include <pwd.h>
-#include "pwauth.h"
-#include "getdef.h"
-
-/*
- * Assorted #defines to control su's behavior
- */
-
-/*
- * Global variables
- */
-
-/* not needed by sulog.c anymore */
-static char name[BUFSIZ];
-static char oldname[BUFSIZ];
-
 static char *Prog;
-
 extern struct passwd pwent;
 
 /*
@@ -73,9 +71,8 @@ extern struct passwd pwent;
  */
 
 extern char **newenvp;
-extern size_t newenvc;
-
 extern char **environ;
+extern size_t newenvc;
 
 /* local function prototypes */
 
@@ -133,9 +130,8 @@ static void su_failure (const char *tty)
 	exit (1);
 }
 
-#ifdef USE_PAM
-static int caught = 0;
 
+#ifdef USE_PAM
 /* Signal handler for parent process later */
 static void su_catch_sig (int sig)
 {
@@ -341,13 +337,6 @@ int main (int argc, char **argv)
 	 */
 
 	if (fakelogin) {
-		if ((cp = getdef_str ("ENV_TZ")))
-			addenv (*cp == '/' ? tz (cp) : cp, NULL);
-		/*
-		 * The clock frequency will be reset to the login value if required
-		 */
-		if ((cp = getdef_str ("ENV_HZ")))
-			addenv (cp, NULL);	/* set the default $HZ, if one */
 		/*
 		 * The terminal type will be left alone if it is present in
 		 * the environment already.
@@ -355,6 +344,13 @@ int main (int argc, char **argv)
 		if ((cp = getenv ("TERM")))
 			addenv ("TERM", cp);
 #ifndef USE_PAM
+		if ((cp = getdef_str ("ENV_TZ")))
+			addenv (*cp == '/' ? tz (cp) : cp, NULL);
+		/*
+		 * The clock frequency will be reset to the login value if required
+		 */
+		if ((cp = getdef_str ("ENV_HZ")))
+			addenv (cp, NULL);	/* set the default $HZ, if one */
 		/*
 		 * Also leave DISPLAY and XAUTHORITY if present, else
 		 * pam_xauth will not work.
@@ -506,6 +502,8 @@ int main (int argc, char **argv)
 	if (pwent.pw_shell[0] == '\0')
 		pwent.pw_shell = "/bin/sh";	/* XXX warning: const */
 
+	signal (SIGINT, SIG_IGN);
+	signal (SIGQUIT, SIG_IGN);
 #ifdef USE_PAM
 	ret = pam_authenticate (pamh, 0);
 	if (ret != PAM_SUCCESS) {
@@ -586,6 +584,7 @@ int main (int argc, char **argv)
 #endif				/* !USE_PAM */
 
 	signal (SIGINT, SIG_DFL);
+#ifndef USE_PAM
 	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 
 	/* XXX very similar code duplicated in libmisc/setupenv.c */
@@ -597,10 +596,8 @@ int main (int argc, char **argv)
 		addenv ("PATH", cp);
 	}
 
-/* setup the environment for pam later on, else we run into auth problems */
-#ifndef USE_PAM
 	environ = newenvp;	/* make new environment active */
-#endif
+#endif				/* !USE_PAM */
 
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.8 2005/06/16 18:58:43 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.13 2005/07/10 17:17:38 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,45 +14,21 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>useradd</command>    
-      <arg choice='opt'>-c <replaceable>comment</replaceable></arg>
-      <arg choice='opt'>-d <replaceable>home_dir</replaceable></arg>
-      <arg choice='opt'>-e <replaceable>expire_date</replaceable></arg>
-      <arg choice='opt'>-f <replaceable>inactive_days</replaceable></arg>
-      <sbr/>
-      <arg choice='opt'>-g <replaceable>initial_group</replaceable></arg>
       <arg choice='opt'>
-        <arg choice='plain'>-G <replaceable>group1</replaceable></arg>
-        <arg choice='opt'>
-	  <arg choice='plain' rep='repeat'>
-	    <replaceable>,group2,</replaceable>
-          </arg>
-          <arg choice='plain'>
-            <replaceable>,</replaceable>
-          </arg>
-          <arg choice='opt'>
-            <replaceable>groupN</replaceable>
-          </arg>
-        </arg>
+        <replaceable>options</replaceable>
       </arg>
-      <sbr/>
-      <arg choice='opt'>
-        <arg choice='opt'>-M </arg><arg choice='plain'>-m </arg>
-        <arg choice='opt'>-k <replaceable>skeleton_dir</replaceable></arg>
-      </arg>
-      <arg choice='opt'>-o </arg>
-      <arg choice='opt'>-p <replaceable>passwd</replaceable></arg>
-      <arg choice='opt'>-s <replaceable>shell</replaceable></arg>
-      <sbr/>
-      <arg choice='opt'>-u <replaceable>uid</replaceable></arg>
-      <arg choice='plain'><replaceable>login</replaceable></arg>
-      <arg choice='plain'><replaceable>useradd</replaceable></arg>
+      <arg choice='plain'><replaceable>LOGIN</replaceable></arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>useradd</command>    
       <arg choice='plain'>-D </arg>
-      <arg choice='opt'>-g <replaceable>group</replaceable></arg>
-      <arg choice='opt'>-b <replaceable>home_dir</replaceable></arg>
-      <arg choice='opt'>-e <replaceable>expire_date</replaceable></arg>
-      <sbr/>
-      <arg choice='opt'>-f <replaceable>inactive_days</replaceable></arg>
-      <arg choice='opt'>-s <replaceable>shell</replaceable></arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>useradd</command>    
+      <arg choice='plain'>-D </arg>
+      <arg choice='opt'>
+        <replaceable>options</replaceable>
+      </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
   
@@ -78,29 +54,49 @@
     <variablelist remap='IP'>
       <varlistentry>
         <term>
-          <option>-c</option> <replaceable>comment</replaceable>
+          <option>-c</option>, <option>--comment</option>
+	  <replaceable>COMMENT</replaceable>
         </term>
         <listitem>
-          <para>The new user's password file comment field.</para>
+          <para>
+	    Any text string. It is generally a short description of the
+	    login, and is currently used as the field for the user's full
+	    name.
+	  </para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-d</option> <replaceable>home_dir</replaceable>
+          <option>-b</option>, <option>--base-dir</option>
+	  <replaceable>BASE_DIR</replaceable>
+        </term>
+        <listitem>
+          <para>The default base directory for the system if
+	    <option>-d</option> dir is not specified.
+	    <replaceable>BASE_DIR</replaceable> is concatenated with the
+	    account name to define the home directory. If the
+	    <option>-m</option> option is not used, base_dir must exist.
+	  </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-d</option>, <option>--home</option>
+	  <replaceable>HOME_DIR</replaceable>
         </term>
         <listitem>
           <para>
-            The new user will be created using <emphasis remap='I'> home_dir
-            </emphasis>as the value for the user's login directory. The
-            default is to append the <emphasis remap='I'>login</emphasis>
-            name to <emphasis remap='I'>home</emphasis> and use that as the
-            login directory name.
+            The new user will be created using <emphasis remap='I'>HOME_DIR</emphasis>
+	    as the value for the user's login directory. The default is to append
+	    the <emphasis remap='I'>LOGIN</emphasis> name to
+	    <emphasis remap='I'>BASE_DIR</emphasis> and use that as the login directory name.
           </para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-e</option> <replaceable>expire_date</replaceable>
+          <option>-e</option>, <option>--expiredate</option>
+	  <replaceable>EXPIRE_DATE</replaceable>
         </term>
         <listitem>
           <para>The date on which the user account will be disabled. The
@@ -111,7 +107,8 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-f</option> <replaceable>inactive_days</replaceable>
+          <option>-f</option>, <option>--inactive</option>
+	  <replaceable>INACTIVE</replaceable>
         </term>
         <listitem>
           <para>The number of days after a password expires until the
@@ -123,7 +120,8 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-g</option> <replaceable>initial_group</replaceable>
+          <option>-g</option>, <option>--gid</option>
+	  <replaceable>GROUP</replaceable>
         </term>
         <listitem>
           <para>The group name or number of the user's initial login group.
@@ -136,10 +134,8 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-G</option> <replaceable>group1</replaceable>[<emphasis remap='I'>
-            ,group2,...,
-          </emphasis>
-          [<emphasis remap='I'>groupN</emphasis>]]]
+          <option>-G</option>, <option>--groups</option>
+	  <replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
         </term>
         <listitem>
           <para>A list of supplementary groups which the user is also a
@@ -152,22 +148,14 @@
         </listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-M</option>
-        </term>
-        <listitem>
-          <para>RedHat added the CREATE_HOME option in login.defs in their
-            version of shadow-utils (which makes -m the default, with new -M
-            option to turn it off). Unfortunately, this changes the way
-            useradd works (it can be run by scripts expecting some standard
-            behaviour), compared to other Unices and other Linux
-            distributions, and also adds a lot of confusion.
-          </para>
-        </listitem>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-m</option>
+          <option>-m</option>, <option>--create-home</option>
         </term>
         <listitem>
           <para>The user's home directory will be created if it does not
@@ -186,27 +174,52 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-o</option>
+          <option>-K</option>, <option>--key</option>
+	  <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable>
         </term>
         <listitem>
-          <para>Allow create user with duplicate (non-unique) UID.</para>
+	  <para>
+	    Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS and
+            others). For example: <option>-K</option>
+	    <replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable> can be
+	    used when creating system account to turn off password ageing, even though
+	    system account has no password at all. Multiple <option>-K</option> options can
+	    be specified, e.g.: <option>-K</option>
+	    <replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>
+	    <option>-K</option> <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	  </para>
+	  <para>
+	    Note: <option>-K</option>
+	    <replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	    doesn't work yet.
+	  </para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-p</option> <replaceable>passwd</replaceable>
+          <option>-o</option>, <option>--non-unique</option>
+        </term>
+        <listitem>
+          <para>Allow create user account with duplicate (non-unique) UID.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-p</option>, <option>--password</option>
+	  <replaceable>PASSWORD</replaceable>
         </term>
         <listitem>
           <para>
             The encrypted password, as returned by <citerefentry>
-              <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+            <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
             </citerefentry>. The default is to disable the account.
           </para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-s</option> <replaceable>shell</replaceable>
+          <option>-s</option>, <option>--shell</option>
+	  <replaceable>SHELL</replaceable>
         </term>
         <listitem>
           <para>The name of the user's login shell. The default is to
@@ -218,7 +231,8 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-u</option> <replaceable>uid</replaceable>
+          <option>-u</option>, <option>--uid</option>
+	  <replaceable>UID</replaceable>
         </term>
         <listitem>
           <para>The numerical value of the user's ID. This value must be
@@ -274,7 +288,8 @@
         </varlistentry>
         <varlistentry>
           <term>
-            <option>-g</option> <replaceable>group</replaceable>
+            <option>-g</option>, <option>--gid</option>
+	    <replaceable>GROUP</replaceable>
           </term>
           <listitem>
             <para>The group name or ID for a new user's initial group. The
@@ -285,7 +300,8 @@
         </varlistentry>
         <varlistentry>
           <term>
-            <option>-s</option> <replaceable>shell</replaceable>
+            <option>-s</option>, <option>--shell</option>
+	    <replaceable>SHELL</replaceable>
           </term>
           <listitem>
             <para>The name of the new user's login shell. The named program

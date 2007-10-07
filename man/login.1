@@ -66,6 +66,9 @@ An initialization script for your command interpreter may also be executed\&. Pl
 .PP
 A subsystem login is indicated by the presence of a "*" as the first character of the login shell\&. The given home directory will be used as the root of a new file system which the user is actually logged into\&.
 
+.PP
+The \fBlogin\fR program is NOT responsible for removing users from the utmp file\&. It is the responsibility of getty(8) and init(8) to clean up apparent ownership of a terminal session\&. If you use \fBlogin\fR from the shell prompt without \fBexec\fR, the user you use will continue to appear to be logged in even after you log out of the "subsession"\&.
+
 .SH "OPTIONS"
 
 .TP

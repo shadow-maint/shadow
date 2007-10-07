@@ -30,12 +30,17 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.33 2005/06/20 09:57:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.37 2005/07/18 13:17:45 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
 #include <ctype.h>
 #include <fcntl.h>
+#ifdef USE_PAM
+#include <security/pam_appl.h>
+#include <security/pam_misc.h>
+#include <pwd.h>
+#endif				/* USE_PAM */
 #include "defines.h"
 #include "prototypes.h"
 #include "chkname.h"
@@ -44,11 +49,6 @@ RCSID (PKG_VER "$Id: groupadd.c,v 1.33 2005/06/20 09:57:51 kloczek Exp $")
 #include "nscd.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
-#ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
-#include <pwd.h>
-#endif				/* USE_PAM */
 static int is_shadow_grp;
 #endif
 
@@ -295,8 +295,18 @@ static void process_flags (int argc, char **argv)
 	char *cp;
 	int arg;
 
-	while ((arg = getopt (argc, argv, "og:O:f")) != EOF) {
+	while ((arg = getopt (argc, argv, "fg:K:o")) != EOF) {
 		switch (arg) {
+		case 'f':
+			/*
+			 * "force" - do nothing, just exit(0), if the
+			 * specified group already exists. With -g, if
+			 * specified gid already exists, choose another
+			 * (unique) gid (turn off -g). Based on the RedHat's
+			 * patch from shadow-utils-970616-9.
+			 */
+			fflg++;
+			break;
 		case 'g':
 			gflg++;
 			if (!isdigit (optarg[0]))
@@ -310,19 +320,16 @@ static void process_flags (int argc, char **argv)
 				fail_exit (E_BAD_ARG);
 			}
 			break;
-		case 'o':
-			oflg++;
-			break;
-		case 'O':
+		case 'K':
 			/*
-			 * override login.defs defaults (-O name=value)
-			 * example: -O GID_MIN=100 -O GID_MAX=499
-			 * note: -O GID_MIN=10,GID_MAX=499 doesn't work yet
+			 * override login.defs defaults (-K name=value)
+			 * example: -K GID_MIN=100 -K GID_MAX=499
+			 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
 			 */
 			cp = strchr (optarg, '=');
 			if (!cp) {
 				fprintf (stderr,
-					 _("%s: -O requires NAME=VALUE\n"),
+					 _("%s: -K requires KEY=VALUE\n"),
 					 Prog);
 				exit (E_BAD_ARG);
 			}
@@ -331,15 +338,8 @@ static void process_flags (int argc, char **argv)
 			if (putdef_str (optarg, cp) < 0)
 				exit (E_BAD_ARG);
 			break;
-		case 'f':
-			/*
-			 * "force" - do nothing, just exit(0), if the
-			 * specified group already exists. With -g, if
-			 * specified gid already exists, choose another
-			 * (unique) gid (turn off -g). Based on the RedHat's
-			 * patch from shadow-utils-970616-9.
-			 */
-			fflg++;
+		case 'o':
+			oflg++;
 			break;
 		default:
 			usage ();

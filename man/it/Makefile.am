@@ -4,7 +4,6 @@ mandir = @mandir@/it
 # Links to missing pages:
 #	grpconv.8 \
 #	grpunconv.8 \
-#	pwunconv.8 \
 man_MANS = \
 	chage.1 \
 	chfn.1 \
@@ -14,20 +13,31 @@ man_MANS = \
 	faillog.5 \
 	faillog.8 \
 	getspnam.3 \
+	gpasswd.1 \
+	groupadd.8 \
+	groupdel.8 \
+	groupmod.8 \
 	groups.1 \
 	grpck.8 \
+	grpconv.8 \
+	grpunconv.8 \
 	id.1 \
 	lastlog.8 \
 	login.1 \
-	logoutd.8 \
 	newgrp.1 \
+	passwd.1 \
+	passwd.5 \
 	porttime.5 \
 	pwck.8 \
+	pwconv.8 \
+	pwunconv.8 \
 	sg.1 \
 	shadow.3 \
 	shadow.5 \
-	shadowconfig.8 \
 	su.1 \
+	useradd.8 \
+	userdel.8 \
+	usermod.8 \
 	vigr.8 \
 	vipw.8
 

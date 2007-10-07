@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.10)
+AM_INIT_AUTOMAKE(shadow, 4.0.11)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -63,7 +63,7 @@ if test "$ac_cv_header_utmp_h" = "yes"; then
 	)
 
 	if test "$ac_cv_struct_utmp_ut_host" = "yes"; then
-		AC_DEFINE(UT_HOST)
+		AC_DEFINE(UT_HOST, 1, [Define if you have ut_host in struct utmp.])
 	fi
 
 	AC_CACHE_CHECK(for ut_user in struct utmp,
@@ -77,7 +77,8 @@ if test "$ac_cv_header_utmp_h" = "yes"; then
 	)
 
 	if test "$ac_cv_struct_utmp_ut_user" = "no"; then
-		AC_DEFINE(ut_user, ut_name)
+		AC_DEFINE(ut_user, ut_name,
+			[Define to ut_name if struct utmp has ut_name (not ut_user).])
 	fi
 fi
 
@@ -93,7 +94,8 @@ if test "$ac_cv_header_lastlog_h" = "yes"; then
 	)
 
 	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
-		AC_DEFINE(HAVE_LL_HOST)
+		AC_DEFINE(HAVE_LL_HOST, 1,
+			[Define if struct lastlog has ll_host])
 	fi
 fi
 
@@ -110,26 +112,26 @@ AC_CHECK_FUNC(setpgrp)
 AC_FUNC_SETPGRP
 
 if test "$ac_cv_header_shadow_h" = "yes"; then
-AC_CACHE_CHECK(for working shadow group support,
-	ac_cv_libc_shadowgrp,
-	AC_RUN_IFELSE([AC_LANG_SOURCE([
-			#include <shadow.h>
-			main()
-			{
-				struct sgrp *sg = sgetsgent("test:x::");
-				/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
-				return !sg || !sg->sg_adm || !sg->sg_mem;
-			}]
-		)],
-		[ac_cv_libc_shadowgrp=yes],
-		[ac_cv_libc_shadowgrp=no],
-		[ac_cv_libc_shadowgrp=no]
+	AC_CACHE_CHECK(for working shadow group support,
+		ac_cv_libc_shadowgrp,
+		AC_RUN_IFELSE([AC_LANG_SOURCE([
+				#include <shadow.h>
+				main()
+				{
+					struct sgrp *sg = sgetsgent("test:x::");
+					/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
+					return !sg || !sg->sg_adm || !sg->sg_mem;
+				}]
+			)],
+			[ac_cv_libc_shadowgrp=yes],
+			[ac_cv_libc_shadowgrp=no],
+			[ac_cv_libc_shadowgrp=no]
+		)
 	)
-)
 
-if test "$ac_cv_libc_shadowgrp" = "yes"; then
-	AC_DEFINE(HAVE_SHADOWGRP)
-fi
+	if test "$ac_cv_libc_shadowgrp" = "yes"; then
+		AC_DEFINE(HAVE_SHADOWGRP, 1, [Have working shadow group support in libc])
+	fi
 fi
 
 AC_CACHE_CHECK([location of shared mail directory], shadow_cv_maildir,
@@ -139,7 +141,8 @@ AC_CACHE_CHECK([location of shared mail directory], shadow_cv_maildir,
 	fi
 done])
 if test $shadow_cv_maildir != none; then
-	AC_DEFINE_UNQUOTED(MAIL_SPOOL_DIR, "$shadow_cv_maildir")
+	AC_DEFINE_UNQUOTED(MAIL_SPOOL_DIR, "$shadow_cv_maildir",
+		[Location of system mail spool directory.])
 fi
 
 AC_CACHE_CHECK([location of user mail file], shadow_cv_mailfile,
@@ -149,7 +152,8 @@ AC_CACHE_CHECK([location of user mail file], shadow_cv_mailfile,
 	fi
 done])
 if test $shadow_cv_mailfile != none; then
-	AC_DEFINE_UNQUOTED(MAIL_SPOOL_FILE, "$shadow_cv_mailfile")
+	AC_DEFINE_UNQUOTED(MAIL_SPOOL_FILE, "$shadow_cv_mailfile",
+		[Name of user's mail spool file if stored in user's home directory.])
 fi
 
 AC_CACHE_CHECK([location of utmp], shadow_cv_utmpdir,
@@ -161,7 +165,8 @@ done])
 if test "$shadow_cv_utmpdir" = "none"; then
 	AC_MSG_WARN(utmp file not found)
 fi
-AC_DEFINE_UNQUOTED(_UTMP_FILE, "$shadow_cv_utmpdir/utmp")
+AC_DEFINE_UNQUOTED(_UTMP_FILE, "$shadow_cv_utmpdir/utmp",
+	[Path for utmp file.])
 
 AC_CACHE_CHECK([location of faillog/lastlog/wtmp], shadow_cv_logdir,
 [for shadow_cv_logdir in /var/log /var/adm /usr/adm /etc; do
@@ -169,9 +174,12 @@ AC_CACHE_CHECK([location of faillog/lastlog/wtmp], shadow_cv_logdir,
 		break
 	fi
 done])
-AC_DEFINE_UNQUOTED(_WTMP_FILE, "$shadow_cv_logdir/wtmp")
-AC_DEFINE_UNQUOTED(LASTLOG_FILE, "$shadow_cv_logdir/lastlog")
-AC_DEFINE_UNQUOTED(FAILLOG_FILE, "$shadow_cv_logdir/faillog")
+AC_DEFINE_UNQUOTED(_WTMP_FILE, "$shadow_cv_logdir/wtmp",
+	[Path for wtmp file.])
+AC_DEFINE_UNQUOTED(LASTLOG_FILE, "$shadow_cv_logdir/lastlog",
+	[Path for lastlog file.])
+AC_DEFINE_UNQUOTED(FAILLOG_FILE, "$shadow_cv_logdir/faillog",
+	[Path for faillog file.])
 
 AC_CACHE_CHECK([location of the passwd program], shadow_cv_passwd_dir,
 [if test -f /usr/bin/passwd; then
@@ -179,25 +187,26 @@ AC_CACHE_CHECK([location of the passwd program], shadow_cv_passwd_dir,
 else
 	shadow_cv_passwd_dir=/bin
 fi])
-AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$shadow_cv_passwd_dir/passwd")
+AC_DEFINE_UNQUOTED(PASSWD_PROGRAM, "$shadow_cv_passwd_dir/passwd",
+	[Path to passwd program.])
 
 dnl XXX - quick hack, should disappear before anyone notices :).
-AC_DEFINE(USG)
-AC_DEFINE(USE_SYSLOG)
-AC_DEFINE(RLOGIN)
-AC_DEFINE(RUSEROK, 0)
+AC_DEFINE(USE_SYSLOG, 1, [Define to use syslog().])
+AC_DEFINE(RLOGIN, 1, [Define if login should support the -r flag for rlogind.])
+AC_DEFINE(RUSEROK, 0, [Define to the ruserok() "success" return value (0 or 1).])
 
 dnl Use our own version of getpass(), which handles long passwords
 dnl (unlike many systems which have a limit of 8 characters), and can
 dnl be interrupted with Ctrl-C (unlike Linux libc).
-AC_DEFINE(getpass, libshadow_getpass)
+AC_DEFINE(getpass, libshadow_getpass,
+	[Define to libshadow_getpass to use our own version of getpass().])
 
 AC_ARG_ENABLE(shadowgrp, [  --enable-shadowgrp      enable shadow group support [default=yes]])
 
 AC_ARG_WITH(libcrack, [  --with-libcrack	try to use libcrack (default if found)])
-AC_ARG_WITH(libcrypt, [  --with-libcrypt	try to use libcrypt (default if found)])
 AC_ARG_WITH(libpam,   [  --with-libpam 		use libpam for PAM support])
 AC_ARG_WITH(selinux,  [  --with-selinux		use SELinux support])
+AC_ARG_WITH(skey,     [  --with-skey		use S/Key support])
 
 dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
@@ -207,21 +216,23 @@ AC_SEARCH_LIBS(inet_ntoa, inet)
 AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(gethostbyname, nsl)
 
-if test "$enable_shadowgrp" != "no"; then
-	AC_DEFINE(SHADOWGRP)
+if test "$enable_shadowgrp" = "yes"; then
+	AC_DEFINE(SHADOWGRP, 1, [Define to support the shadow group file.])
 fi
 
 AC_SUBST(LIBCRYPT)
-if test "$with_libcrypt" != "no"; then
-	AC_CHECK_LIB(crypt, crypt, [AC_DEFINE(HAVE_LIBCRYPT) LIBCRYPT=-lcrypt])
-fi
+AC_CHECK_LIB(crypt, crypt, [LIBCRYPT=-lcrypt],
+	[AC_MSG_ERROR([crypt() not found])])
 
 AC_SUBST(LIBCRACK)
-if test "$with_libcrack" != "no"; then
+if test "$with_libcrack" = "yes"; then
 	echo "checking cracklib flavour, don't be surprised by the results"
-	AC_CHECK_LIB(crack, FascistCheck, AC_DEFINE(HAVE_LIBCRACK) LIBCRACK=-lcrack)
-	AC_CHECK_LIB(crack, FascistHistory, AC_DEFINE(HAVE_LIBCRACK_HIST))
-	AC_CHECK_LIB(crack, FascistHistoryPw, AC_DEFINE(HAVE_LIBCRACK_PW))
+	AC_CHECK_LIB(crack, FascistCheck,
+		[LIBCRACK=-lcrack AC_DEFINE(HAVE_LIBCRACK, 1, [Defined if you have libcrack.])])
+	AC_CHECK_LIB(crack, FascistHistory,
+		AC_DEFINE(HAVE_LIBCRACK_HIST, 1, [Defined if you have the ts&szs cracklib.]))
+	AC_CHECK_LIB(crack, FascistHistoryPw,
+		AC_DEFINE(HAVE_LIBCRACK_PW, 1, [Defined if it includes *Pw functions.]))
 fi
 
 if test "$with_selinux" = "yes"; then
@@ -247,8 +258,17 @@ if test "$with_libpam" = "yes"; then
 	AC_MSG_RESULT(no)
 else
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
-	AC_DEFINE(SU_ACCESS)
+	AC_DEFINE(SU_ACCESS, 1, [Define to support /etc/suauth su access control.])
 	AC_MSG_RESULT(yes)
+fi
+
+AC_SUBST(LIBSKEY)
+AC_SUBST(LIBMD)
+if test "$with_libskey" = "yes"; then
+	AC_CHECK_LIB(md, MD5Init, [LIBMD=-lmd])
+	AC_CHECK_LIB(skey, skeychallenge, [LIBSKEY=-lskey],
+		[AC_MSG_ERROR([liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2])])
+	AC_DEFINE(SKEY, 1, [Define to support S/Key logins.])
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)

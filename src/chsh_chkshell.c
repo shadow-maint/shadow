@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: chkshell.c,v 1.2 2003/04/22 10:59:21 kloczek Exp $")
+RCSID ("$Id: chsh_chkshell.c,v 1.1 2005/07/07 08:40:27 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>

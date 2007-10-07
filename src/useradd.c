@@ -30,26 +30,27 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.59 2005/06/20 10:17:09 kloczek Exp $")
-#include "prototypes.h"
-#include "defines.h"
-#include "chkname.h"
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <errno.h>
-#include <pwd.h>
-#include <grp.h>
+RCSID (PKG_VER "$Id: useradd.c,v 1.67 2005/07/11 11:58:00 kloczek Exp $")
 #include <ctype.h>
+#include <errno.h>
 #include <fcntl.h>
-#include <time.h>
+#include <getopt.h>
+#include <grp.h>
+#include <lastlog.h>
+#include <pwd.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <pwd.h>
 #endif				/* USE_PAM */
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include "prototypes.h"
+#include "defines.h"
+#include "chkname.h"
 #include "pwauth.h"
-#include <lastlog.h>
 #include "faillog.h"
 #include "nscd.h"
 #ifndef SKEL_DIR
@@ -630,17 +631,32 @@ static int get_groups (char *list)
 
 static void usage (void)
 {
-	fprintf (stderr,
-		 _
-		 ("Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"));
-	fprintf (stderr,
-		 _
-		 ("               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"));
-	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
-	fprintf (stderr, _("               [-p passwd] name\n"));
-	fprintf (stderr,
-		 _("       useradd -D [-g group] [-b base] [-s shell]\n"));
-	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
+	fprintf (stderr, _("Usage: useradd [options] LOGIN\n"
+			   "\n"
+			   "Options:\n"
+			   "  -b, --base-dir BASE_DIR	base directory for the the new user account\n"
+			   "				home directory\n"
+			   "  -c, --comment COMMENT		set the GECOS field for the new user account\n"
+			   "  -d, --home-dir HOME_DIR	home directory for the new user account\n"
+			   "  -D, --defaults		print or save modified default useradd\n"
+			   "				configuration\n"
+			   "  -e, --expiredate EXPIRE_DATE	set account expiration date to EXPIRE_DATE\n"
+			   "  -f, --inactive INACTIVE	set password inactive after expiration\n"
+			   "				to INACTIVE\n"
+			   "  -g, --gid GROUP		force use GROUP for the new user account\n"
+			   "  -G, --groups GROUPS		list of supplementary groups for the new\n"
+			   "				user account\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -k, --skel SKEL_DIR 		specify an alternative skel directory\n"
+			   "  -K, --key KEY=VALUE		overrides /etc/login.defs defaults\n"
+			   "  -m, --create-home		create home directory for the new user\n"
+			   "				account\n"
+			   "  -o, --non-unique		allow create user with duplicate\n"
+			   "				(non-unique) UID\n"
+			   "  -p, --password PASSWORD	use encrypted password for the new user\n"
+			   "				account\n"
+			   "  -s, --shell SHELL		the login shell for the new user account\n"
+			   "  -u, --uid UID			force use the UID for the new user account\n"));
 	exit (E_USAGE);
 }
 
@@ -920,182 +936,211 @@ static void process_flags (int argc, char **argv)
 {
 	const struct group *grp;
 	int anyflag = 0;
-	int arg;
 	char *cp;
 
-	while ((arg =
-		getopt (argc, argv, "A:Du:og:G:d:s:c:mk:p:f:e:b:O:M")) != EOF) {
-		switch (arg) {
-		case 'b':
-			if (!Dflg)
-				usage ();
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int c;
+		static struct option long_options[] = {
+			{"base-dir", required_argument, NULL, 'b'},
+			{"comment", required_argument, NULL, 'c'},
+			{"home-dir", required_argument, NULL, 'd'},
+			{"defaults", required_argument, NULL, 'D'},
+			{"expiredate", required_argument, NULL, 'e'},
+			{"inactive", required_argument, NULL, 'f'},
+			{"gid", required_argument, NULL, 'g'},
+			{"groups", required_argument, NULL, 'G'},
+			{"help", no_argument, NULL, 'h'},
+			{"skel", required_argument, NULL, 'k'},
+			{"key", required_argument, NULL, 'K'},
+			{"create-home", no_argument, NULL, 'm'},
+			{"non-unique", no_argument, NULL, 'o'},
+			{"password", required_argument, NULL, 'p'},
+			{"shell", required_argument, NULL, 's'},
+			{"uid", required_argument, NULL, 'u'},
+			{NULL, 0, NULL, '\0'}
+		};
+		while ((c =
+			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:mMop:s:u:",
+				     long_options, NULL)) != -1) {
+			switch (c) {
+			case 'b':
+				if (!Dflg)
+					usage ();
 
-			if (!VALID (optarg) || optarg[0] != '/') {
-				fprintf (stderr,
-					 _
-					 ("%s: invalid base directory `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			def_home = optarg;
-			bflg++;
-			break;
-		case 'c':
-			if (!VALID (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid comment `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			user_comment = optarg;
-			cflg++;
-			break;
-		case 'd':
-			if (!VALID (optarg) || optarg[0] != '/') {
-				fprintf (stderr,
-					 _
-					 ("%s: invalid home directory `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			user_home = optarg;
-			dflg++;
-			break;
-		case 'D':
-			if (anyflag)
-				usage ();
-			Dflg++;
-			break;
-		case 'e':
-			if (*optarg) {
-				user_expire = strtoday (optarg);
-				if (user_expire == -1) {
+				if (!VALID (optarg)
+				    || optarg[0] != '/') {
 					fprintf (stderr,
 						 _
-						 ("%s: invalid date `%s'\n"),
+						 ("%s: invalid base directory `%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-			} else
-				user_expire = -1;
+				def_home = optarg;
+				bflg++;
+				break;
+			case 'c':
+				if (!VALID (optarg)) {
+					fprintf (stderr,
+						 _
+						 ("%s: invalid comment `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				user_comment = optarg;
+				cflg++;
+				break;
+			case 'd':
+				if (!VALID (optarg)
+				    || optarg[0] != '/') {
+					fprintf (stderr,
+						 _
+						 ("%s: invalid home directory `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				user_home = optarg;
+				dflg++;
+				break;
+			case 'D':
+				if (anyflag)
+					usage ();
+				Dflg++;
+				break;
+			case 'e':
+				if (*optarg) {
+					user_expire = strtoday (optarg);
+					if (user_expire == -1) {
+						fprintf (stderr,
+							 _
+							 ("%s: invalid date `%s'\n"),
+							 Prog, optarg);
+						exit (E_BAD_ARG);
+					}
+				} else
+					user_expire = -1;
 
-			/*
-			 * -e "" is allowed - it's a no-op without /etc/shadow
-			 */
-			if (*optarg && !is_shadow_pwd) {
-				fprintf (stderr,
-					 _
-					 ("%s: shadow passwords required for -e\n"),
-					 Prog);
-				exit (E_USAGE);
+				/*
+				 * -e "" is allowed - it's a no-op without /etc/shadow
+				 */
+				if (*optarg && !is_shadow_pwd) {
+					fprintf (stderr,
+						 _
+						 ("%s: shadow passwords required for -e\n"),
+						 Prog);
+					exit (E_USAGE);
+				}
+				if (Dflg)
+					def_expire = optarg;
+				eflg++;
+				break;
+			case 'f':
+				def_inactive = get_number (optarg);
+				/*
+				 * -f -1 is allowed - it's a no-op without /etc/shadow
+				 */
+				if (def_inactive != -1 && !is_shadow_pwd) {
+					fprintf (stderr,
+						 _
+						 ("%s: shadow passwords required for -f\n"),
+						 Prog);
+					exit (E_USAGE);
+				}
+				fflg++;
+				break;
+			case 'g':
+				grp = getgr_nam_gid (optarg);
+				if (!grp) {
+					fprintf (stderr,
+						 _
+						 ("%s: unknown group %s\n"),
+						 Prog, optarg);
+					exit (E_NOTFOUND);
+				}
+				if (Dflg) {
+					def_group = grp->gr_gid;
+					def_gname = optarg;
+				} else {
+					user_gid = grp->gr_gid;
+				}
+				gflg++;
+				break;
+			case 'G':
+				if (get_groups (optarg))
+					exit (E_NOTFOUND);
+				if (user_groups[0])
+					do_grp_update++;
+				Gflg++;
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 'k':
+				def_template = optarg;
+				kflg++;
+				break;
+			case 'K':
+				/*
+				 * override login.defs defaults (-K name=value)
+				 * example: -K UID_MIN=100 -K UID_MAX=499
+				 * note: -K UID_MIN=10,UID_MAX=499 doesn't work yet
+				 */
+				cp = strchr (optarg, '=');
+				if (!cp) {
+					fprintf (stderr,
+						 _
+						 ("%s: -K requires KEY=VALUE\n"),
+						 Prog);
+					exit (E_BAD_ARG);
+				}
+				/* terminate name, point to value */
+				*cp++ = '\0';
+				if (putdef_str (optarg, cp) < 0)
+					exit (E_BAD_ARG);
+				break;
+			case 'm':
+				mflg++;
+				break;
+			case 'o':
+				oflg++;
+				break;
+			case 'p':	/* set encrypted password */
+				if (!VALID (optarg)) {
+					fprintf (stderr,
+						 _
+						 ("%s: invalid field `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				user_pass = optarg;
+				break;
+			case 's':
+				if (!VALID (optarg)
+				    || (optarg[0]
+					&& (optarg[0] != '/'
+					    && optarg[0] != '*'))) {
+					fprintf (stderr,
+						 _
+						 ("%s: invalid shell `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				user_shell = optarg;
+				def_shell = optarg;
+				sflg++;
+				break;
+			case 'u':
+				user_id = get_uid (optarg);
+				uflg++;
+				break;
+			default:
+				usage ();
 			}
-			if (Dflg)
-				def_expire = optarg;
-			eflg++;
-			break;
-		case 'f':
-			def_inactive = get_number (optarg);
-			/*
-			 * -f -1 is allowed - it's a no-op without /etc/shadow
-			 */
-			if (def_inactive != -1 && !is_shadow_pwd) {
-				fprintf (stderr,
-					 _
-					 ("%s: shadow passwords required for -f\n"),
-					 Prog);
-				exit (E_USAGE);
-			}
-			fflg++;
-			break;
-		case 'g':
-			grp = getgr_nam_gid (optarg);
-			if (!grp) {
-				fprintf (stderr,
-					 _("%s: unknown group %s\n"), Prog,
-					 optarg);
-				exit (E_NOTFOUND);
-			}
-			if (Dflg) {
-				def_group = grp->gr_gid;
-				def_gname = optarg;
-			} else {
-				user_gid = grp->gr_gid;
-			}
-			gflg++;
-			break;
-		case 'G':
-			if (get_groups (optarg))
-				exit (E_NOTFOUND);
-			if (user_groups[0])
-				do_grp_update++;
-			Gflg++;
-			break;
-		case 'k':
-			def_template = optarg;
-			kflg++;
-			break;
-		case 'm':
-			mflg++;
-			break;
-		case 'M':
-			/*
-			 * don't create home dir - this is the default,
-			 * ignored for RedHat/PLD adduser compatibility.
-			 */
-			break;
-		case 'o':
-			oflg++;
-			break;
-		case 'O':
-			/*
-			 * override login.defs defaults (-O name=value)
-			 * example: -O UID_MIN=100 -O UID_MAX=499
-			 * note: -O UID_MIN=10,UID_MAX=499 doesn't work yet
-			 */
-			cp = strchr (optarg, '=');
-			if (!cp) {
-				fprintf (stderr,
-					 _("%s: -O requires NAME=VALUE\n"),
-					 Prog);
-				exit (E_BAD_ARG);
-			}
-			/* terminate name, point to value */
-			*cp++ = '\0';
-			if (putdef_str (optarg, cp) < 0)
-				exit (E_BAD_ARG);
-			break;
-		case 'p':	/* set encrypted password */
-			if (!VALID (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			user_pass = optarg;
-			break;
-		case 's':
-			if (!VALID (optarg) || (optarg[0] &&
-						(optarg[0] != '/'
-						 && optarg[0] != '*'))) {
-				fprintf (stderr,
-					 _("%s: invalid shell `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			user_shell = optarg;
-			def_shell = optarg;
-			sflg++;
-			break;
-		case 'u':
-			user_id = get_uid (optarg);
-			uflg++;
-			break;
-		default:
-			usage ();
+			anyflag++;
 		}
-		anyflag++;
 	}
-
 	/*
 	 * Certain options are only valid in combination with others.
 	 * Check it here so that they can be specified in any order.
@@ -1119,7 +1164,9 @@ static void process_flags (int argc, char **argv)
 
 		user_name = argv[optind];
 		if (!check_user_name (user_name)) {
-			fprintf (stderr, _("%s: invalid user name '%s'\n"),
+			fprintf (stderr,
+				 _
+				 ("%s: invalid user name '%s'\n"),
 				 Prog, user_name);
 			exit (E_BAD_ARG);
 		}
@@ -1307,7 +1354,8 @@ static void usr_update (void)
 
 	if (is_shadow_pwd && !spw_update (&spent)) {
 		fprintf (stderr,
-			 _("%s: error adding new shadow password entry\n"),
+			 _
+			 ("%s: error adding new shadow password entry\n"),
 			 Prog);
 		exit (E_PW_UPDATE);
 	}
@@ -1334,7 +1382,8 @@ static void create_home (void)
 		/* XXX - create missing parent directories.  --marekm */
 		if (mkdir (user_home, 0)) {
 			fprintf (stderr,
-				 _("%s: cannot create directory %s\n"),
+				 _
+				 ("%s: cannot create directory %s\n"),
 				 Prog, user_home);
 			fail_exit (E_HOMEDIR);
 		}
@@ -1377,8 +1426,8 @@ static void create_mail (void)
 			sprintf (ms, "/var/mail/%s", user_name);
 			if (access (ms, R_OK) != 0) {
 				fd = open (ms,
-					   O_CREAT | O_EXCL | O_WRONLY |
-					   O_TRUNC, 0);
+					   O_CREAT | O_EXCL |
+					   O_WRONLY | O_TRUNC, 0);
 				if (fd != -1) {
 					fchown (fd, user_id, mail_gid);
 					fchmod (fd, mode);

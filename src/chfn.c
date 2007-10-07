@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.28 2005/06/20 09:36:26 kloczek Exp $")
+RCSID (PKG_VER "$Id: chfn.c,v 1.29 2005/07/07 15:32:50 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -271,24 +271,6 @@ int main (int argc, char **argv)
 			fflg++;
 			STRFCPY (fullnm, optarg);
 			break;
-		case 'r':
-			if (!may_change_field ('r')) {
-				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
-			}
-			rflg++;
-			STRFCPY (roomno, optarg);
-			break;
-		case 'w':
-			if (!may_change_field ('w')) {
-				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
-			}
-			wflg++;
-			STRFCPY (workph, optarg);
-			break;
 		case 'h':
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
@@ -298,6 +280,15 @@ int main (int argc, char **argv)
 			hflg++;
 			STRFCPY (homeph, optarg);
 			break;
+		case 'r':
+			if (!may_change_field ('r')) {
+				fprintf (stderr,
+					 _("%s: Permission denied.\n"), Prog);
+				exit (1);
+			}
+			rflg++;
+			STRFCPY (roomno, optarg);
+			break;
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
@@ -306,6 +297,15 @@ int main (int argc, char **argv)
 			}
 			oflg++;
 			STRFCPY (slop, optarg);
+			break;
+		case 'w':
+			if (!may_change_field ('w')) {
+				fprintf (stderr,
+					 _("%s: Permission denied.\n"), Prog);
+				exit (1);
+			}
+			wflg++;
+			STRFCPY (workph, optarg);
 			break;
 		default:
 			usage ();

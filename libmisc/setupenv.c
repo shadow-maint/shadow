@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: setupenv.c,v 1.14 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: setupenv.c,v 1.17 2005/07/06 11:49:21 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -238,7 +238,17 @@ void setup_env (struct passwd *info)
 	 * Create the PATH environmental variable and export it.
 	 */
 
+	/*
+	 * Export the user name.  For BSD derived systems, it's "USER", for
+	 * all others it's "LOGNAME".  We set both of them.
+	 */
+
+	addenv ("USER", info->pw_name);
+	addenv ("LOGNAME", info->pw_name);
+
+#ifndef USE_PAM
 	cp = getdef_str ((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+
 	if (!cp) {
 		/* not specified, use a minimal default */
 		addenv ("PATH=/bin:/usr/bin", NULL);
@@ -249,14 +259,6 @@ void setup_env (struct passwd *info)
 		/* only value specified without "PATH=" */
 		addenv ("PATH", cp);
 	}
-
-	/*
-	 * Export the user name.  For BSD derived systems, it's "USER", for
-	 * all others it's "LOGNAME".  We set both of them.
-	 */
-
-	addenv ("USER", info->pw_name);
-	addenv ("LOGNAME", info->pw_name);
 
 	/*
 	 * MAILDIR environment variable for Qmail
@@ -281,11 +283,10 @@ void setup_env (struct passwd *info)
 #endif
 	}
 
-#ifndef USE_PAM
 	/*
 	 * Read environment from optional config file.  --marekm
 	 */
 	if ((envf = getdef_str ("ENVIRON_FILE")))
 		read_env_file (envf);
-#endif
+#endif				/* !USE_PAM */
 }

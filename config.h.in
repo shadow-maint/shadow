@@ -1,83 +1,11 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
-/* $Id: acconfig.h,v 1.23 2005/06/16 18:39:30 kloczek Exp $ */
-
-
-
-/* Path for faillog file.  */
-#undef FAILLOG_FILE
-
-/* Defined if you have libcrack.  */
-#undef HAVE_LIBCRACK
-
-/* Defined if you have the ts&szs cracklib.  */
-#undef HAVE_LIBCRACK_HIST
-
-/* Defined if it includes *Pw functions.  */
-#undef HAVE_LIBCRACK_PW
-
-/* Defined if you have libcrypt.  */
-#undef HAVE_LIBCRYPT
-
-/* Define if struct lastlog has ll_host */
-#undef HAVE_LL_HOST
-
-/* Working shadow group support in libc?  */
-#undef HAVE_SHADOWGRP
-
-/* Path for lastlog file.  */
-#undef LASTLOG_FILE
-
-/* Define to support /etc/login.access login access control.  */
-#undef LOGIN_ACCESS
-
-/* Location of system mail spool directory.  */
-#undef MAIL_SPOOL_DIR
-
-/* Name of user's mail spool file if stored in user's home directory.  */
-#undef MAIL_SPOOL_FILE
-
-/* Path to passwd program.  */
-#undef PASSWD_PROGRAM
-
-/* Define if login should support the -r flag for rlogind.  */
-#undef RLOGIN
-
-/* Define to the ruserok() "success" return value (0 or 1).  */
-#undef RUSEROK
-
-/* Define to support the shadow group file.  */
-#undef SHADOWGRP
-
-/* Define to support S/Key logins.  */
-#undef SKEY
-
-/* Define to support /etc/suauth su access control.  */
-#undef SU_ACCESS
-
-/* Define to use syslog().  */
-#undef USE_SYSLOG
-
-/* Define to support USG (Unix Systems Group?) behavior. */
-#undef USG
-
-/* Define if you have ut_host in struct utmp.  */
-#undef UT_HOST
-
-/* Path for utmp file.  */
-#undef _UTMP_FILE
-
-/* Path for wtmp file.  */
-#undef _WTMP_FILE
-
-/* Define to libshadow_getpass to use our own version of getpass().  */
-#undef getpass
-
-/* Define to ut_name if struct utmp has ut_name (not ut_user).  */
-#undef ut_user
 
 /* Define to 1 if translation of program messages to the user's native
    language is requested. */
 #undef ENABLE_NLS
+
+/* Path for faillog file. */
+#undef FAILLOG_FILE
 
 /* Define to the type of elements in the array set by `getgroups'. Usually
    this is either `int' or `gid_t'. */
@@ -162,8 +90,20 @@
 /* Define to 1 if you have the `lckpwdf' function. */
 #undef HAVE_LCKPWDF
 
+/* Defined if you have libcrack. */
+#undef HAVE_LIBCRACK
+
+/* Defined if you have the ts&szs cracklib. */
+#undef HAVE_LIBCRACK_HIST
+
+/* Defined if it includes *Pw functions. */
+#undef HAVE_LIBCRACK_PW
+
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
+
+/* Define if struct lastlog has ll_host */
+#undef HAVE_LL_HOST
 
 /* Define to 1 if you have the <locale.h> header file. */
 #undef HAVE_LOCALE_H
@@ -224,6 +164,9 @@
 
 /* Define to 1 if you have the <sgtty.h> header file. */
 #undef HAVE_SGTTY_H
+
+/* Have working shadow group support in libc */
+#undef HAVE_SHADOWGRP
 
 /* Define to 1 if you have the <shadow.h> header file. */
 #undef HAVE_SHADOW_H
@@ -326,6 +269,15 @@
 /* Define to 1 if you have the <utmp.h> header file. */
 #undef HAVE_UTMP_H
 
+/* Path for lastlog file. */
+#undef LASTLOG_FILE
+
+/* Location of system mail spool directory. */
+#undef MAIL_SPOOL_DIR
+
+/* Name of user's mail spool file if stored in user's home directory. */
+#undef MAIL_SPOOL_FILE
+
 /* Name of package */
 #undef PACKAGE
 
@@ -344,20 +296,38 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
+/* Path to passwd program. */
+#undef PASSWD_PROGRAM
+
 /* Define to 1 if the C compiler supports function prototypes. */
 #undef PROTOTYPES
 
 /* Define as the return type of signal handlers (`int' or `void'). */
 #undef RETSIGTYPE
 
+/* Define if login should support the -r flag for rlogind. */
+#undef RLOGIN
+
+/* Define to the ruserok() "success" return value (0 or 1). */
+#undef RUSEROK
+
 /* Define to 1 if the `setpgrp' function takes no argument. */
 #undef SETPGRP_VOID
+
+/* Define to support the shadow group file. */
+#undef SHADOWGRP
+
+/* Define to support S/Key logins. */
+#undef SKEY
 
 /* Define to 1 if the `S_IS*' macros in <sys/stat.h> do not work properly. */
 #undef STAT_MACROS_BROKEN
 
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
+
+/* Define to support /etc/suauth su access control. */
+#undef SU_ACCESS
 
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
 #undef TIME_WITH_SYS_TIME
@@ -367,6 +337,12 @@
 
 /* Define to support Pluggable Authentication Modules */
 #undef USE_PAM
+
+/* Define to use syslog(). */
+#undef USE_SYSLOG
+
+/* Define if you have ut_host in struct utmp. */
+#undef UT_HOST
 
 /* Version number of package */
 #undef VERSION
@@ -385,11 +361,20 @@
 /* Define for large files, on AIX-style hosts. */
 #undef _LARGE_FILES
 
+/* Path for utmp file. */
+#undef _UTMP_FILE
+
+/* Path for wtmp file. */
+#undef _WTMP_FILE
+
 /* Define like PROTOTYPES; this can be used by system headers. */
 #undef __PROTOTYPES
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const
+
+/* Define to libshadow_getpass to use our own version of getpass(). */
+#undef getpass
 
 /* Define to `int' if <sys/types.h> doesn't define. */
 #undef gid_t
@@ -405,3 +390,6 @@
 
 /* Define to `int' if <sys/types.h> doesn't define. */
 #undef uid_t
+
+/* Define to ut_name if struct utmp has ut_name (not ut_user). */
+#undef ut_user

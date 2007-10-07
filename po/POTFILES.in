@@ -4,7 +4,6 @@ libmisc/addgrps.c
 libmisc/age.c
 libmisc/basename.c
 libmisc/chkname.c
-libmisc/chkshell.c
 libmisc/chowndir.c
 libmisc/chowntty.c
 libmisc/console.c
@@ -65,6 +64,7 @@ src/chage.c
 src/chfn.c
 src/chpasswd.c
 src/chsh.c
+src/chsh_chkshell.c
 src/expiry.c
 src/faillog.c
 src/gpasswd.c

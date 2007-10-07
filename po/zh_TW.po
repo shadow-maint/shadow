@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 17:48+0200\n"
+"POT-Creation-Date: 2005-07-18 16:02+0200\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -144,12 +144,12 @@ msgstr "沒有目錄，將以 HOME=/ 登入"
 msgid "Cannot execute %s"
 msgstr "無法執行 %s"
 
-#: libmisc/sub.c:55
+#: libmisc/sub.c:56
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
 msgstr "無效的根目錄“%s”\n"
 
-#: libmisc/sub.c:67
+#: libmisc/sub.c:68
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "無法將根目錄改變為“%s”\n"
@@ -169,16 +169,16 @@ msgstr "無法為設定訊息配置空間。\n"
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "配置錯誤 - 未知項目“%s”(請通知管理員)\n"
 
-#: lib/pwauth.c:45 src/newgrp.c:338
+#: lib/pwauth.c:48 src/newgrp.c:384
 msgid "Password: "
 msgstr "密碼："
 
-#: lib/pwauth.c:47
+#: lib/pwauth.c:50
 #, c-format
 msgid "%s's Password: "
 msgstr "%s 的密碼："
 
-#: src/chage.c:110
+#: src/chage.c:115
 #, fuzzy, c-format
 msgid ""
 "Usage: chage [options] user\n"
@@ -208,147 +208,147 @@ msgstr ""
 "  -M, --maxdays MAX_DAYS\t最多必須相隔 MIN_DAYS 天才能改變密碼\n"
 "  -W, --warndays WARN_DAYS\t密碼在過期前 WARN_DAYS 天會發出警告\n"
 
-#: src/chage.c:155 src/chfn.c:139 src/chsh.c:89
+#: src/chage.c:160 src/chfn.c:139 src/chsh.c:89
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "請輸入新值，或直接按 ENTER 鍵以使用預設值\n"
 
-#: src/chage.c:159
+#: src/chage.c:164
 msgid "Minimum Password Age"
 msgstr "密碼期限最小值"
 
-#: src/chage.c:165
+#: src/chage.c:170
 msgid "Maximum Password Age"
 msgstr "密碼期限最大值"
 
-#: src/chage.c:172
+#: src/chage.c:177
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "最近一次密碼修改時間 (YYYY-MM-DD)"
 
-#: src/chage.c:180
+#: src/chage.c:185
 msgid "Password Expiration Warning"
 msgstr "密碼過期警告"
 
-#: src/chage.c:186
+#: src/chage.c:191
 msgid "Password Inactive"
 msgstr "密碼失效"
 
-#: src/chage.c:194
+#: src/chage.c:199
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "帳戶過期時間 (YYYY-MM-DD)"
 
-#: src/chage.c:241
+#: src/chage.c:246
 #, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "最近一次密碼修改時間\t\t\t\t\t："
 
-#: src/chage.c:243 src/chage.c:257 src/chage.c:273 src/chage.c:286
+#: src/chage.c:248 src/chage.c:262 src/chage.c:278 src/chage.c:291
 #, c-format
 msgid "never\n"
 msgstr "從不\n"
 
-#: src/chage.c:254
+#: src/chage.c:259
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "密碼過期\t\t\t\t\t："
 
-#: src/chage.c:270
+#: src/chage.c:275
 #, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "密碼失效\t\t\t\t\t："
 
-#: src/chage.c:284
+#: src/chage.c:289
 #, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "帳戶過期\t\t\t\t\t："
 
-#: src/chage.c:300
+#: src/chage.c:305
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr "最少必須相隔幾天才能改變密碼\t\t\t\t：%ld\n"
 
-#: src/chage.c:302
+#: src/chage.c:307
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "最多必須相隔幾天才能改變密碼\t\t\t\t：%ld\n"
 
-#: src/chage.c:304
+#: src/chage.c:309
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "在密碼將要過期之前多少天會發出警告\t\t\t\t：%ld\n"
 
-#: src/chage.c:462
+#: src/chage.c:467
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s：請不要與其它標誌一同使用“l”\n"
 
-#: src/chage.c:474 src/chage.c:602 src/chfn.c:268 src/chfn.c:277
+#: src/chage.c:479 src/chage.c:607 src/chfn.c:268 src/chfn.c:277
 #: src/chfn.c:286 src/chfn.c:295 src/chfn.c:304 src/chfn.c:370 src/chfn.c:382
-#: src/gpasswd.c:150 src/login.c:426 src/passwd.c:769 src/passwd.c:805
+#: src/gpasswd.c:150 src/login.c:430 src/passwd.c:769 src/passwd.c:805
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s：權限被拒。\n"
 
-#: src/chage.c:507 src/chage.c:713 src/chpasswd.c:173 src/groupadd.c:488
-#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1469
-#: src/userdel.c:567 src/usermod.c:1272 src/usermod.c:1326
+#: src/chage.c:512 src/chage.c:718 src/chpasswd.c:173 src/groupadd.c:488
+#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1518
+#: src/userdel.c:567 src/usermod.c:1283 src/usermod.c:1337
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s：PAM 驗証失敗\n"
 
-#: src/chage.c:525 src/chpasswd.c:188
+#: src/chage.c:530 src/chpasswd.c:188
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s：無法打開密碼文件\n"
 
-#: src/chage.c:532 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
+#: src/chage.c:537 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
 #: src/gpasswd.c:216 src/groups.c:64 src/passwd.c:811
 #, c-format
 msgid "%s: unknown user %s\n"
 msgstr "%s：未知使用者：%s\n"
 
-#: src/chage.c:550
+#: src/chage.c:555
 #, c-format
-msgid "%s: can't lock shadow password file"
-msgstr "%s：無法鎖定shadow密碼文件"
+msgid "%s: can't lock shadow password file\n"
+msgstr "%s：無法鎖定shadow密碼文件\n"
 
-#: src/chage.c:558
+#: src/chage.c:563
 #, c-format
-msgid "%s: can't open shadow password file"
-msgstr "%s：無法打開影子密碼文件"
+msgid "%s: can't open shadow password file\n"
+msgstr "%s：無法打開影子密碼文件\n"
 
-#: src/chage.c:618
+#: src/chage.c:623
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "正在為 %s 修改年齡訊息\n"
 
-#: src/chage.c:620
+#: src/chage.c:625
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s：改變字段時出錯\n"
 
-#: src/chage.c:644 src/pwunconv.c:136
+#: src/chage.c:649 src/pwunconv.c:136
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s：無法更新密碼檔案\n"
 
-#: src/chage.c:667 src/pwunconv.c:131
+#: src/chage.c:672 src/pwunconv.c:131
 #, c-format
 msgid "%s: can't update shadow password file\n"
 msgstr "%s：無法更新shadow密碼檔案\n"
 
-#: src/chage.c:680
+#: src/chage.c:685
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
 msgstr "%s：無法重寫shadow密碼檔案\n"
 
-#: src/chage.c:724
+#: src/chage.c:729
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s：無法重寫密碼檔案\n"
 
-#: src/chage.c:743 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
-#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1564 src/userdel.c:689
+#: src/chage.c:748 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
+#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1613 src/userdel.c:689
 #, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s：PAM chauthtok 失敗\n"
@@ -457,7 +457,7 @@ msgstr "無法鎖定密碼檔案﹔稍後再試。\n"
 msgid "Cannot open the password file.\n"
 msgstr "無法打開密碼檔案。\n"
 
-#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:982
+#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:993
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s：未在 /etc/passwd 中找到 %s\n"
@@ -674,7 +674,7 @@ msgstr "%s：-A 需要shadow群組密碼\n"
 msgid "Who are you?\n"
 msgstr "你是誰？\n"
 
-#: src/gpasswd.c:299 src/newgrp.c:289
+#: src/gpasswd.c:299 src/newgrp.c:318
 #, c-format
 msgid "unknown group: %s\n"
 msgstr "未知群組：%s\n"
@@ -767,12 +767,12 @@ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
 msgstr "用法：groupadd [-g gid [-o]] [-f] 群組\n"
 
 #: src/groupadd.c:161 src/groupadd.c:169 src/groupmod.c:174 src/groupmod.c:196
-#: src/useradd.c:823 src/usermod.c:496 src/usermod.c:618
+#: src/useradd.c:839 src/usermod.c:495 src/usermod.c:617
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s：增加新群組項目時出錯\n"
 
-#: src/groupadd.c:218 src/useradd.c:870
+#: src/groupadd.c:218 src/useradd.c:886
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s：名稱 %s 並不唯一\n"
@@ -792,24 +792,24 @@ msgstr "%s：無法獲取獨有的 gid\n"
 msgid "%s: %s is not a valid group name\n"
 msgstr "%s：%s 不是有效的群組名\n"
 
-#: src/groupadd.c:308 src/groupmod.c:307
+#: src/groupadd.c:318 src/groupmod.c:307
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s：無效群組名 %s\n"
 
-#: src/groupadd.c:325 src/useradd.c:1058
-#, c-format
-msgid "%s: -O requires NAME=VALUE\n"
+#: src/groupadd.c:332 src/useradd.c:1094
+#, fuzzy, c-format
+msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s：-O 需要 NAME=VALUE\n"
 
-#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1167
-#: src/userdel.c:247 src/usermod.c:504
+#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1214
+#: src/userdel.c:247 src/usermod.c:503
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s：無法重寫群組檔案\n"
 
-#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1175
-#: src/userdel.c:253 src/usermod.c:627
+#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1222
+#: src/userdel.c:253 src/usermod.c:626
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
 msgstr "%s：無法重寫shadow群組檔案\n"
@@ -869,7 +869,7 @@ msgstr "%s：%s 群組不存在\n"
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s：%s 群組是一個 NIS 群組\n"
 
-#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:723
+#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:722
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s：%s 是 NIS 管理員\n"
@@ -1131,7 +1131,7 @@ msgstr ""
 "\n"
 "[忽略斷線要求 -- 允許 root 登入。]\n"
 
-#: src/login.c:297
+#: src/login.c:302
 #, c-format
 msgid ""
 "\n"
@@ -1140,17 +1140,17 @@ msgstr ""
 "\n"
 "登入逾時 %d 秒\n"
 
-#: src/login.c:570
+#: src/login.c:576
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " 在“%.100s”上，來自“%.200s”"
 
-#: src/login.c:573
+#: src/login.c:579
 #, c-format
 msgid " on `%.100s'"
 msgstr "在“%.100s”上"
 
-#: src/login.c:730
+#: src/login.c:736
 #, c-format
 msgid ""
 "\n"
@@ -1159,25 +1159,25 @@ msgstr ""
 "\n"
 " %s 使用者名稱："
 
-#: src/login.c:885 src/sulogin.c:203
+#: src/login.c:891 src/sulogin.c:207
 msgid "Login incorrect"
 msgstr "登入錯誤"
 
-#: src/login.c:1032
+#: src/login.c:1038
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "警告：在短暫的鎖定後將恢復登入。\n"
 
-#: src/login.c:1046
+#: src/login.c:1052
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "上次登入：%s 在 %s 上"
 
-#: src/login.c:1049
+#: src/login.c:1055
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "上次登入：%.19s 在 %s 上"
 
-#: src/login.c:1054
+#: src/login.c:1060
 #, c-format
 msgid " from %.*s"
 msgstr " 來自 %.*s"
@@ -1192,21 +1192,21 @@ msgstr "用法：newgrp [-] [群組]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "用法：sg 群組 [[-c] 命令]\n"
 
-#: src/newgrp.c:130
+#: src/newgrp.c:159
 #, fuzzy, c-format
 msgid "unknown UID: %u\n"
 msgstr "未知的 GID：%lu\n"
 
-#: src/newgrp.c:212
+#: src/newgrp.c:241
 #, c-format
 msgid "unknown GID: %lu\n"
 msgstr "未知的 GID：%lu\n"
 
-#: src/newgrp.c:355 src/newgrp.c:364
+#: src/newgrp.c:401 src/newgrp.c:410
 msgid "Sorry.\n"
 msgstr "抱歉。\n"
 
-#: src/newgrp.c:469
+#: src/newgrp.c:515
 #, c-format
 msgid "too many groups\n"
 msgstr "使用者群組過多\n"
@@ -1352,7 +1352,7 @@ msgstr "%s：記憶體不足\n"
 msgid "%s: Cannot execute %s"
 msgstr "%s：無法執行 %s"
 
-#: src/passwd.c:732
+#: src/passwd.c:727
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s：不支持 %s 套件存庫。\n"
@@ -1469,35 +1469,35 @@ msgstr "%s：不能更新使用者 %s 的項目\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s：無法刪除shadow密碼檔案\n"
 
-#: src/su.c:132
+#: src/su.c:129
 msgid "Sorry."
 msgstr "抱歉"
 
-#: src/su.c:319
+#: src/su.c:315
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s：必須從終端中執行\n"
 
-#: src/su.c:416
+#: src/su.c:412
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s：pam_start：錯誤 %d\n"
 
-#: src/su.c:444
+#: src/su.c:440
 #, c-format
 msgid "Unknown id: %s\n"
 msgstr "未知 id：%s\n"
 
-#: src/su.c:479 src/su.c:495
+#: src/su.c:475 src/su.c:491
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "您沒有被授權 su %s\n"
 
-#: src/su.c:490
+#: src/su.c:486
 msgid "(Enter your own password.)"
 msgstr "(請輸入您自己的密碼)"
 
-#: src/su.c:522
+#: src/su.c:520
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -1506,7 +1506,7 @@ msgstr ""
 "%s：%s\n"
 "(忽略)\n"
 
-#: src/su.c:730
+#: src/su.c:727
 #, c-format
 msgid "No shell\n"
 msgstr "沒有 shell\n"
@@ -1531,12 +1531,12 @@ msgstr "請輸入您自己的密碼作為驗証。\n"
 msgid "No password file\n"
 msgstr "沒有密碼檔案\n"
 
-#: src/sulogin.c:160
+#: src/sulogin.c:164
 #, c-format
 msgid "No password entry for 'root'\n"
 msgstr "沒有“root”的密碼項目\n"
 
-#: src/sulogin.c:175
+#: src/sulogin.c:179
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -1546,220 +1546,226 @@ msgstr ""
 "按下 control-d 即可繼續使用普通帳戶環境，\n"
 "(或者輸入 root 密碼以進行系統維護)："
 
-#: src/sulogin.c:210
+#: src/sulogin.c:214
 msgid "Entering System Maintenance Mode\n"
 msgstr "正在進入系統維護模式\n"
 
-#: src/useradd.c:221 src/useradd.c:234 src/usermod.c:664 src/usermod.c:677
+#: src/useradd.c:222 src/useradd.c:235 src/usermod.c:663 src/usermod.c:676
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s：無效的數字參數“%s”\n"
 
-#: src/useradd.c:289
+#: src/useradd.c:290
 #, c-format
 msgid "%s: unknown GID %s\n"
 msgstr "%s：未知的 GID %s\n"
 
-#: src/useradd.c:297 src/useradd.c:573 src/useradd.c:1014 src/usermod.c:217
-#: src/usermod.c:785
+#: src/useradd.c:298 src/useradd.c:574 src/useradd.c:1058 src/usermod.c:216
+#: src/usermod.c:788
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s：未知的群組 %s\n"
 
-#: src/useradd.c:405
+#: src/useradd.c:406
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s：無法建立新的預設檔案\n"
 
-#: src/useradd.c:410
+#: src/useradd.c:411
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s：無法打開新的預設檔案\n"
 
-#: src/useradd.c:498 src/useradd.c:509
+#: src/useradd.c:499 src/useradd.c:510
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s：更名：%s"
 
-#: src/useradd.c:594 src/usermod.c:238
+#: src/useradd.c:595 src/usermod.c:237
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s：“%s”群組是一個 NIS 群組。\n"
 
-#: src/useradd.c:603 src/usermod.c:247
+#: src/useradd.c:604 src/usermod.c:246
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s：指定了過多群組(最多 %d)。\n"
 
-#: src/useradd.c:635
+#: src/useradd.c:634
 #, c-format
-msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "用法：useradd [-u uid [-o]] [-g 群組] [-G 群組,...] \n"
+msgid ""
+"Usage: useradd [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -b, --base-dir BASE_DIR\tbase directory for the the new user account\n"
+"\t\t\t\thome directory\n"
+"  -c, --comment COMMENT\t\tset the GECOS field for the new user account\n"
+"  -d, --home-dir HOME_DIR\thome directory for the new user account\n"
+"  -D, --defaults\t\tprint or save modified default useradd\n"
+"\t\t\t\tconfiguration\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP for the new user account\n"
+"  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
+"\t\t\t\tuser account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -m, --create-home\t\tcreate home directory for the new user\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tallow create user with duplicate\n"
+"\t\t\t\t(non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new user\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\tthe login shell for the new user account\n"
+"  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
+msgstr ""
 
-#: src/useradd.c:638
-#, c-format
-msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "               [-d 主目錄] [-s shell] [-c 注釋] [-m [-k 模板]]\n"
-
-#: src/useradd.c:639 src/useradd.c:643
-#, c-format
-msgid "               [-f inactive] [-e expire]\n"
-msgstr "               [-f 失效日] [-e 過期日 ]\n"
-
-#: src/useradd.c:640
-#, c-format
-msgid "               [-p passwd] name\n"
-msgstr "               [-p 密碼] 名稱\n"
-
-#: src/useradd.c:642
-#, c-format
-msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-msgstr "       useradd -D [-g 群組] [-b 主目錄] [-s shell]\n"
-
-#: src/useradd.c:722 src/usermod.c:426
+#: src/useradd.c:738 src/usermod.c:425
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s：鎖定群組檔案時出錯\n"
 
-#: src/useradd.c:726 src/usermod.c:431
+#: src/useradd.c:742 src/usermod.c:430
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s：打開群組檔案時出錯\n"
 
-#: src/useradd.c:732 src/usermod.c:524
+#: src/useradd.c:748 src/usermod.c:523
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s：鎖定shadow群組檔案時出錯\n"
 
-#: src/useradd.c:737 src/usermod.c:530
+#: src/useradd.c:753 src/usermod.c:529
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s：打開shadow群組檔案時出錯\n"
 
-#: src/useradd.c:875
+#: src/useradd.c:891
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s：gid %u 並不唯一\n"
 
-#: src/useradd.c:905
+#: src/useradd.c:921
 #, fuzzy, c-format
 msgid "%s: can't get unique UID\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
-#: src/useradd.c:936
+#: src/useradd.c:977
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s：無效的主目錄“%s”\n"
 
-#: src/useradd.c:946
+#: src/useradd.c:988
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s：無效注釋“%s”\n"
 
-#: src/useradd.c:957
+#: src/useradd.c:1000
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s：無效的主目錄“%s”\n"
 
-#: src/useradd.c:975 src/usermod.c:768
+#: src/useradd.c:1018 src/usermod.c:771
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s：無效日期“%s”\n"
 
-#: src/useradd.c:988
+#: src/useradd.c:1031
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s：-e 參數需要有shadow密碼\n"
 
-#: src/useradd.c:1004
+#: src/useradd.c:1047
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s：-f 參數需要有shadow密碼\n"
 
-#: src/useradd.c:1070 src/usermod.c:745 src/usermod.c:755 src/usermod.c:800
-#: src/usermod.c:844
+#: src/useradd.c:1113 src/usermod.c:748 src/usermod.c:758 src/usermod.c:803
+#: src/usermod.c:847
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s：無效字段 “%s”\n"
 
-#: src/useradd.c:1081
+#: src/useradd.c:1126
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s：無效 shell“%s”\n"
 
-#: src/useradd.c:1122
+#: src/useradd.c:1169
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s：無效使用者名稱“%s”\n"
 
-#: src/useradd.c:1156 src/userdel.c:242 src/usermod.c:909
+#: src/useradd.c:1203 src/userdel.c:242 src/usermod.c:920
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s：無法重寫密碼檔案\n"
 
-#: src/useradd.c:1161 src/userdel.c:245 src/usermod.c:914
+#: src/useradd.c:1208 src/userdel.c:245 src/usermod.c:925
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s：無法重寫shadow密碼檔案\n"
 
-#: src/useradd.c:1197 src/userdel.c:289 src/usermod.c:942
+#: src/useradd.c:1244 src/userdel.c:289 src/usermod.c:953
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s：無法鎖定密碼檔案\n"
 
-#: src/useradd.c:1201 src/userdel.c:293 src/usermod.c:946
+#: src/useradd.c:1248 src/userdel.c:293 src/usermod.c:957
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s：無法打開密碼檔案\n"
 
-#: src/useradd.c:1207 src/userdel.c:298 src/usermod.c:951
+#: src/useradd.c:1254 src/userdel.c:298 src/usermod.c:962
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s：無法鎖定shadow密碼檔案\n"
 
-#: src/useradd.c:1213 src/userdel.c:303 src/usermod.c:956
+#: src/useradd.c:1260 src/userdel.c:303 src/usermod.c:967
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s：無法打開shadow密碼檔案\n"
 
-#: src/useradd.c:1300
+#: src/useradd.c:1347
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s：加入新密碼項目時出錯\n"
 
-#: src/useradd.c:1310 src/usermod.c:1019
+#: src/useradd.c:1358 src/usermod.c:1030
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s：加入新shadow密碼項時出錯\n"
 
-#: src/useradd.c:1337
+#: src/useradd.c:1386
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s：無法建立目錄 %s\n"
 
-#: src/useradd.c:1367
+#: src/useradd.c:1416
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr "找不到名為 \"mail\" 的群組，以 0600 模式來建立郵件暫存檔。\n"
 
-#: src/useradd.c:1390
+#: src/useradd.c:1439
 #, c-format
 msgid "Can't create mail spool for user %s.\n"
 msgstr "無法替使用者 %s 建立郵件暫存檔。\n"
 
-#: src/useradd.c:1492 src/usermod.c:888
+#: src/useradd.c:1541 src/usermod.c:899
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s：使用者 %s 已存在\n"
 
-#: src/useradd.c:1506
+#: src/useradd.c:1555
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s：%s 群組已經存在 - 如果您想將此使用者加入到該群組，請使用 -g 參數。\n"
 
-#: src/useradd.c:1544
+#: src/useradd.c:1593
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s：警告：CREATE_HOME 不支援，請使用 -m 參數。\n"
@@ -1809,12 +1815,12 @@ msgstr "%s：%s 並不屬於 %s，所以不會刪除\n"
 msgid "%s: warning: can't remove "
 msgstr "%s：警告：無法刪除"
 
-#: src/userdel.c:584 src/usermod.c:702
+#: src/userdel.c:584 src/usermod.c:701
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s：使用者 %s 不存在\n"
 
-#: src/userdel.c:599 src/usermod.c:718
+#: src/userdel.c:599 src/usermod.c:717
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s：使用者 %s 是 NIS 使用者\n"
@@ -1829,101 +1835,106 @@ msgstr "%s：不能刪除目錄 %s (因為這將刪除使用者 %s 的主目錄)
 msgid "%s: error removing directory %s\n"
 msgstr "%s：刪除目錄 %s 時出錯\n"
 
-#: src/usermod.c:279
+#: src/usermod.c:278
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
 msgstr "用法：%s\t[-u uid [-o]] [-g 群組] [-G 群組,...] \n"
 
-#: src/usermod.c:283
+#: src/usermod.c:282
 #, c-format
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d 家目錄 [-m]] [-s shell] [-c 注釋] [-l 新名稱]\n"
 
-#: src/usermod.c:285
+#: src/usermod.c:284
 #, c-format
 msgid "[-f inactive] [-e expire] "
 msgstr "[-f 失效日] [-e 過期日 ] "
 
-#: src/usermod.c:286
+#: src/usermod.c:285
 #, c-format
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p 密碼] [-L|-U] 名稱\n"
 
-#: src/usermod.c:458
+#: src/usermod.c:457
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s：update_group 時記憶體不足\n"
 
-#: src/usermod.c:567
+#: src/usermod.c:566
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s：update_gshadow 時記憶體不足\n"
 
-#: src/usermod.c:867
+#: src/usermod.c:870
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s：沒有指定標誌\n"
 
-#: src/usermod.c:873
+#: src/usermod.c:876
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s：-e 和 -f 參數需要shadow密碼\n"
 
-#: src/usermod.c:893
+#: src/usermod.c:886
+#, c-format
+msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgstr ""
+
+#: src/usermod.c:904
 #, c-format
 msgid "%s: uid %lu is not unique\n"
 msgstr "%s：uid %lu 不唯一\n"
 
-#: src/usermod.c:1004
+#: src/usermod.c:1015
 #, c-format
 msgid "%s: error changing password entry\n"
 msgstr "%s：改變密碼項目時出錯\n"
 
-#: src/usermod.c:1010
+#: src/usermod.c:1021
 #, c-format
 msgid "%s: error removing password entry\n"
 msgstr "%s：移除密碼項時出錯\n"
 
-#: src/usermod.c:1026
+#: src/usermod.c:1037
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr "%s：刪除shadow密碼項目時出錯\n"
 
-#: src/usermod.c:1053
+#: src/usermod.c:1064
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s：目錄 %s 不存在\n"
 
-#: src/usermod.c:1061
+#: src/usermod.c:1072
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s：無法建立 %s\n"
 
-#: src/usermod.c:1066
+#: src/usermod.c:1077
 #, c-format
 msgid "%s: can't chown %s\n"
 msgstr "%s：無法改變 %s 的所有者和群組\n"
 
-#: src/usermod.c:1078
+#: src/usermod.c:1089
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 
-#: src/usermod.c:1088
+#: src/usermod.c:1099
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s：無法將目錄 %s 改名為 %s\n"
 
-#: src/usermod.c:1183
+#: src/usermod.c:1194
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s：警告：%s 不屬於 %s\n"
 
-#: src/usermod.c:1189
+#: src/usermod.c:1200
 msgid "failed to change mailbox owner"
 msgstr "改變信箱所有者失敗"
 
-#: src/usermod.c:1197
+#: src/usermod.c:1208
 msgid "failed to rename mailbox"
 msgstr "無法為信箱改名"
 
@@ -1959,6 +1970,27 @@ msgstr ""
 "用法：\n"
 "“vipw” 編輯 /etc/passwd      “vipw -s” 編輯 /etc/shadow\n"
 "“vigr” 編輯 /etc/group       “vigr -s” 編輯 /etc/gshadow\n"
+
+#, fuzzy
+#~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "用法：useradd [-u uid [-o]] [-g 群組] [-G 群組,...] \n"
+
+#~ msgid ""
+#~ "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+#~ msgstr "               [-d 主目錄] [-s shell] [-c 注釋] [-m [-k 模板]]\n"
+
+#~ msgid "               [-f inactive] [-e expire]\n"
+#~ msgstr "               [-f 失效日] [-e 過期日 ]\n"
+
+#, fuzzy
+#~ msgid "               [-p passwd] [-K KEY=VALUE] name\n"
+#~ msgstr "               [-p 密碼] 名稱\n"
+
+#~ msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+#~ msgstr "       useradd -D [-g 群組] [-b 主目錄] [-s shell]\n"
+
+#~ msgid "%s: -O requires NAME=VALUE\n"
+#~ msgstr "%s：-O 需要 NAME=VALUE\n"
 
 #~ msgid "unknown uid: %u\n"
 #~ msgstr "未知的 uid：%u\n"

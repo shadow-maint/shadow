@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: tz.c,v 1.5 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: tz.c,v 1.6 2005/07/06 11:33:05 kloczek Exp $")
 #include <stdio.h>
 #include <string.h>
 #include "defines.h"
@@ -49,8 +49,10 @@ char *tz (const char *fname)
 
 	if ((fp = fopen (fname, "r")) == NULL ||
 	    fgets (tzbuf, sizeof (tzbuf), fp) == NULL) {
+#ifndef USE_PAM
 		if (!(def_tz = getdef_str ("ENV_TZ")) || def_tz[0] == '/')
 			def_tz = "TZ=CST6CDT";
+#endif				/* !USE_PAM */
 
 		strcpy (tzbuf, def_tz);
 	} else

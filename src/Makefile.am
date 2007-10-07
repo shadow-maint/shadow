@@ -20,8 +20,8 @@ INCLUDES = \
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS = groups login su
-ubin_PROGRAMS = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
+bin_PROGRAMS   = groups login su
+ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
 usbin_PROGRAMS = \
 	chpasswd \
 	groupadd \
@@ -40,37 +40,39 @@ usbin_PROGRAMS = \
 	usermod \
 	vipw
 
-login_SOURCES = \
-	login.c \
-	login_nopam.c
-
+# id and groups are from gnu, sulogin from sysvinit
 noinst_PROGRAMS = id sulogin
 
-# id and groups are from gnu, sulogin from sysvinit
+suidbins       = su
+suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
 
-suidbins = su
-suidubins = chage chfn chsh expiry gpasswd newgrp passwd
-
-LDADD = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+LDADD 	       = $(top_builddir)/libmisc/libmisc.a \
+		 $(top_builddir)/lib/libshadow.la
+AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
 chpasswd_LDADD = $(LDADD) $(LIBPAM)
 chage_LDADD    = $(LDADD) $(LIBPAM)
 chfn_LDADD     = $(LDADD) $(LIBPAM)
+chsh_SOURCES   = \
+	chsh.c \
+	chsh_chkshell.c
 chsh_LDADD     = $(LDADD) $(LIBPAM)
 groupadd_LDADD = $(LDADD) $(LIBPAM)
 groupdel_LDADD = $(LDADD) $(LIBPAM)
 groupmod_LDADD = $(LDADD) $(LIBPAM)
+login_SOURCES  = \
+	login.c \
+	login_nopam.c
 login_LDADD    = $(LDADD) $(LIBPAM)
 newusers_LDADD = $(LDADD) $(LIBPAM)
 passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK)
-su_SOURCES     = su.c suauth.c
+su_SOURCES     = \
+	su.c \
+	suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM)
 useradd_LDADD  = $(LDADD) $(LIBPAM)
 userdel_LDADD  = $(LDADD) $(LIBPAM)
 usermod_LDADD  = $(LDADD) $(LIBPAM)
-
-AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
 install-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am

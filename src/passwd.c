@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.39 2005/06/20 09:36:27 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.41 2005/07/07 15:32:50 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -670,22 +670,17 @@ int main (int argc, char **argv)
 	 */
 
 
-	while ((flag = getopt (argc, argv, "adlqr:uSekn:x:i:w:")) != EOF) {
+	while ((flag = getopt (argc, argv, "adei:kln:qr:Suw:x:")) != EOF) {
 		switch (flag) {
-		case 'x':
-			age_max = getnumber (optarg);
-			xflg++;
+		case 'a':
+			aflg++;
+			break;
+		case 'd':
+			dflg++;
 			anyflag = 1;
 			break;
-		case 'n':
-			age_min = getnumber (optarg);
-			nflg++;
-			anyflag = 1;
-			break;
-		case 'w':
-			warn = getnumber (optarg);
-			if (warn >= -1)
-				wflg++;
+		case 'e':
+			eflg++;
 			anyflag = 1;
 			break;
 		case 'i':
@@ -694,16 +689,18 @@ int main (int argc, char **argv)
 				iflg++;
 			anyflag = 1;
 			break;
-		case 'e':
-			eflg++;
-			anyflag = 1;
-			break;
 		case 'k':
 			/* change only if expired, like Linux-PAM passwd -k. */
 			kflg++;	/* ok for users */
 			break;
-		case 'a':
-			aflg++;
+		case 'l':
+			lflg++;
+			anyflag = 1;
+			break;
+		case 'n':
+			age_min = getnumber (optarg);
+			nflg++;
+			anyflag = 1;
 			break;
 		case 'q':
 			qflg++;	/* ok for users */
@@ -711,16 +708,14 @@ int main (int argc, char **argv)
 		case 'S':
 			Sflg++;	/* ok for users */
 			break;
-		case 'd':
-			dflg++;
-			anyflag = 1;
-			break;
-		case 'l':
-			lflg++;
-			anyflag = 1;
-			break;
 		case 'u':
 			uflg++;
+			anyflag = 1;
+			break;
+		case 'w':
+			warn = getnumber (optarg);
+			if (warn >= -1)
+				wflg++;
 			anyflag = 1;
 			break;
 		case 'r':
@@ -733,6 +728,11 @@ int main (int argc, char **argv)
 					 Prog, optarg);
 				exit (E_BAD_ARG);
 			}
+			break;
+		case 'x':
+			age_max = getnumber (optarg);
+			xflg++;
+			anyflag = 1;
 			break;
 		default:
 			usage (E_BAD_ARG);

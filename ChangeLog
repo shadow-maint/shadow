@@ -1,3 +1,271 @@
+2005-07-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* libmisc/pwdcheck.c:
+	added missing "#include <stdio.h>" (fix compilation with PAM disabled).
+
+	* po/ro.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/pl.po, po/pt_BR.po, po/nl.po, po/nn.po, po/nb.po, po/ko.po, po/ja.po, po/it.po, po/he.po, po/id.po, po/fr.po, po/bs.po, po/ca.po, po/da.po, po/el.po, po/es.po, po/eu.po, po/fi.po:
+	run "make update-po".
+
+	* src/su.c:
+	move declaration of pamh nad caught variables to #ifdef USE_PAM .. #endif.
+
+	* po/pl.po, NEWS: updated pl translation.
+
+2005-07-17  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/sk.po:
+	updated for 4.0.11 (by Peter Mann <Peter.Mann@tuke.sk>).
+
+2005-07-16  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/cs.po:
+	updated for 4.0.11 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
+
+2005-07-15  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/de.po, NEWS:
+	updated for 4.0.11 (by Frank Schmid <frank@cs-schmid.de>).
+
+2005-07-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, po/pt.po:
+	updated for 4.0.11 (by Miguel Figueiredo <elmig@debianpt.org>).
+
+2005-07-13  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/stats: reorder gsub().
+
+	* po/ru.po: cleanups.
+
+	* po/ru.po, NEWS:
+	updated for 4.0.11 (by Yuri Kozlov <yucoz@yandex.ru>).
+
+2005-07-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* lib/getdef.c:
+	move MAIL_DIR variable from def_table[] to part independent to USE_PAM
+	(still used in userdel/usermod).
+
+	* NEWS, man/pwck.8, man/pwck.8.xml:
+	document -q option (based on Debian patch for fix http://bugs.debian.org/309408)
+	Rewrited OPTIONS section and better SYNOPSIS.
+
+	* NEWS, po/da.po:
+	- updated for 4.0.11 (by Claus Hindsgaul <claus_h@image.dk>).
+
+	* NEWS, src/su.c:
+	ignore SIGINT while authenticating. A ^C could defeat the waiting period and
+	permit brute-force attacks. Also ignore SIGQUIT.
+	Fixed: http://bugs.debian.org/52372 and http://bugs.debian.org/288827
+
+	* po/fi.po, NEWS:
+	- updated for 4.0.11 (by Tommi Vainikainen <thv+debian@iki.fi>).
+
+	* po/ro.po: - updated Project-Id-Version field.
+
+	* NEWS, po/ro.po:
+	- updated for 4.0.11 (by Sorin B. <sorin@bonbon.net>).
+
+2005-07-11  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, man/lastlog.8, man/lastlog.8.xml:
+	document that lastlog is a sparse file, and don't need to be rotated.
+	http://bugs.debian.org/219321
+
+	* src/chage.c: use E_USAGE=2 as usage() exit code.
+
+	* NEWS, po/es.po:
+	updated for 4.0.11 (by Ruben Porras <nahoo82@telefonica.net>).
+
+	* src/useradd.c: cleanups in usage() oyput.
+
+	* po/zh_TW.po, po/vi.po, po/zh_CN.po, po/uk.po, po/tl.po, po/tr.po, po/sv.po, po/sq.po, po/sk.po, po/ro.po, po/ru.po, po/pt.po, po/pt_BR.po, po/pl.po, po/nb.po, po/nl.po, po/nn.po, po/ko.po, po/it.po, po/ja.po, po/he.po, po/id.po, po/fr.po, po/eu.po, po/fi.po, po/es.po, po/da.po, po/de.po, po/el.po, po/bs.po, po/ca.po, po/cs.po:
+	cleanups in usage() output.
+
+	* NEWS: release 4.0.11 is sheduled to 18-06-2005.
+
+2005-07-10  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/login.1, man/login.1.xml, NEWS:
+	better explain the respective roles of login, init and getty with regards
+	to the utmp file (based on 441_manpages-shadow.5 Debian patch)
+
+	* man/groupdel.8.xml, man/su.1, man/su.1.xml, man/groupdel.8:
+	s/presense/presence/; s/filesystem/file system/
+	(sed on 440_manpages-login.1 Debian patch)
+
+	* man/pl/shadowconfig.8, man/pl/Makefile.am, man/ja/shadowconfig.8, man/ja/Makefile.am, man/it/shadowconfig.8, man/shadowconfig.8, man/shadowconfig.8.xml, man/Makefile.am, NEWS:
+	removed shadowconfig(8) man page (will be maintained in Debian shadow pkg repository).
+
+	* man/it/sg.1: added.
+
+	* man/it/Makefile.am: more files in man_MANS.
+
+	* man/it/Makefile.am: move pwunconv.8 to man_MANS.
+
+	* man/useradd.8.xml, man/useradd.8:
+	updated after rewrite for for getopt_long() in useradd (-D and -k options
+	idescription must be finished).
+
+	* src/useradd.c, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, NEWS:
+	rewrited for use getopt_long().
+
+	* po/stats: more gsub().
+
+2005-07-08  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/newgrp.c:
+	indent source code and use fix for handle splitted groups unconditionaly.
+
+	* lib/nscd.c: indent.
+
+	* NEWS, src/newgrp.c:
+	add fix for handle splitted NIS groups: extends the functionality that,
+	if the requested group is given, all groups of the same GID are tested for
+	membership of the requesting user.
+	(fix by Christian Mudra <C.Mudra@science-computing.de>
+
+	* lib/nscd.c, NEWS:
+	for some reason doing the INVALIDATE call with two write()'s fails.
+	Do one writev() call instead. http://bugs.gentoo.org/show_bug.cgi?id=80413
+	(submited by Martin Schlemmer <azarah@gentoo.org>)
+
+	* NEWS, lib/nscd.c:
+	merge nscd-socket-path patch from Fedora: newer glibc's have a different nscd socket
+	location (/var/run/nscd/socket instead /var/run/.nscd_socket).
+
+2005-07-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/stats: improved.
+
+	* man/groupadd.8, man/groupadd.8.xml, NEWS:
+	document -o option in groupadd(8).
+
+	* configure.in: s/'"$<foo>" != "no"'/'"$<foo>" = "yes"'/
+
+	* NEWS, configure.in, lib/Makefile.am, lib/pwauth.c:
+	S/Key support is back.
+
+	* po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po:
+	run "make update-po".
+
+	* po/pl.po: updated.
+
+	* src/useradd.c: s,key=value,KEY=VALUE,
+
+	* src/groupadd.c, NEWS, man/groupadd.8, man/groupadd.8.xml:
+	change -O option to -K and document it in man page.
+
+	* man/useradd.8, man/useradd.8.xml, src/useradd.c:
+	s/NAME=VALUE/KEY=VALUE/; s/key=value/KEY=VALUE/
+
+	* src/chfn.c, src/groupadd.c, src/groupmems.c, src/login.c, src/passwd.c, src/vipw.c:
+	sort cases in switch (flag) {}.
+
+	* src/gpasswd.c, src/groupadd.c, src/groupmems.c, src/groupmod.c, src/passwd.c, src/useradd.c, src/usermod.c:
+	sort getopt() optstring.
+
+	* src/useradd.c:
+	remove A: from getopt() optstring (the same bug as in usermod).
+
+	* src/usermod.c:
+	remove A: from getopt() optstring (it was for handle AUTH_METHODS code but now
+	it is not used option). Catched by Thorsten Kukuk <kukuk@suse.de>.
+
+	* src/usermod.c, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po:
+	indent source code. Added usermod error message about -a option usage to translated messages.
+
+	* po/POTFILES.in: mistake s,chage_chkshell.c,chsh_chkshell.c,
+
+	* po/POTFILES.in: s,libmisc/chkshell.c,src/chage_chkshell.c,
+
+	* man/usermod.8, man/usermod.8.xml, src/usermod.c, NEWS:
+	added -a option. This flag can only be used in conjunction with the -G
+	option. It cause usermod to append user to the current supplementary group list.
+	(patch by Peter Vrabec <pvrabec@redhat.com>)
+
+	* libmisc/chkshell.c, libmisc/Makefile.am, src/Makefile.am, src/chsh_chkshell.c:
+	move libmisc/chkshell.c to src/chsh_chkshell.c. check_shell() is used only by chsh.
+
+2005-07-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* acconfig.h, NEWS, configure.in:
+	finish move all autoheader templates from acconfig.h to configure.in.
+
+	* src/chage.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS:
+	added missing \n in chage error messages.
+
+	* po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/bs.po:
+	run "make update-po".
+
+	* src/usermod.c: move all #include in one place.
+
+	* src/useradd.c: s/-O/-K/
+
+	* man/useradd.8, man/useradd.8.xml:
+	cleanups in Note: in -K description.
+
+	* NEWS, man/useradd.8, man/useradd.8.xml, src/useradd.c:
+	change -O option to -K and document it in man page.
+
+	* man/useradd.8, man/useradd.8.xml:
+	added separated <cmdsynopsis></cmdsynopsis> for -D description and remove using </srb> tags from
+	<refsynopsisdiv id='synopsis'>.
+
+	* src/login.c:
+	replace #ifdef USE_PAM .. #endif #ifndef USE_PAN .. #endif by
+	#ifdef USE_PAM .. #else .. #endif.
+
+	* src/su.c: conditiona code reorganization.
+
+	* src/login.c: remove one #ifndef USE_PAM .. #endif.
+
+	* libmisc/setupenv.c: move setup $MAIL to !USE_PAM.
+
+	* libmisc/setupenv.c, src/su.c:
+	consolidate two sections of code #ifndef USE_PAM to one.
+
+	* src/su.c, src/sulogin.c, libmisc/setupenv.c, libmisc/tz.c, src/login.c, NEWS:
+	fixed erroneous warning messages about some login.defs variables when used with PAM
+	(fix by DJ Lucas <dj@linuxfromscratch.org>)
+
+2005-07-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in, libmisc/getdate.y, libmisc/utmp.c, src/logoutd.c:
+	remove non-USG code.
+
+	* acconfig.h, configure.in:
+	start moving all autoheader templates from acconfig.h to configure.in.
+
+	* configure.in: remove not used AC_DEFINE(HAVE_LIBCRYPT).
+
+	* acconfig.h, NEWS, configure.in:
+	stop with error message if crypt() not found. Remove --with{,out}-libcrypt switch.
+
+	* src/login.c: fixed use SYSLOG macro.
+
+2005-07-02  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/login_nopam.c: fixed use SYSLOG macro.
+
+2005-07-01  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, src/login.c:
+	setup limits and umask (using login.defs ULIMITS and UMASK variables) only when
+	PAM support is disabled (it is task for pam_limits and pam_umask modules).
+
+2005-06-30  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/sulogin.c, src/login.c, src/login_nopam.c, NEWS:
+	use SYSLOG macro instead syslog() which saves the locale, sets the locale to C,
+	sends the message and restores the locale (fix by Nicolas Fran癟ois <nicolas.francois@centraliens.net>).
+
+	* NEWS, man/groupadd.8, man/groupadd.8.xml, man/groupdel.8, man/groupdel.8.xml, man/groupmod.8, man/groupmod.8.xml, man/userdel.8, man/userdel.8.xml, man/usermod.8, man/usermod.8.xml:
+	in SEE ALLSO section added refer to gpasswd(8)
+	(suggested by Mike Frysinger <vapier@gentoo.org>)
+
+	* NEWS, configure.in: start work on 4.0.11.
+
 2005-06-28  Tomasz K這czko  <kloczek@pld.org.pl>
 
 	* NEWS: +1 day release 4.0.10 date.
@@ -150,7 +418,7 @@
 
 	* src/login.c: indent.
 
-	* man/chage.1.xml, man/faillog.8.xml, man/groupmems.8.xml, man/gshadow.5.xml, man/login.1.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/shadowconfig.8.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
+	* man/shadowconfig.8.xml, man/chage.1.xml, man/faillog.8.xml, man/groupmems.8.xml, man/gshadow.5.xml, man/login.1.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
 	cleanups.
 
 2005-06-14  Tomasz K這czko  <kloczek@pld.org.pl>
@@ -242,7 +510,7 @@
 	* src/mkpasswd.c, src/chpasswd.c, src/faillog.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/encrypt.c, lib/getdef.c, lib/gshadow.c, lib/pwauth.h, lib/shadow.c, libmisc/failure.c, libmisc/isexpired.c, libmisc/salt.c:
 	indent all.
 
-	* src/chage.c, src/chpasswd.c, src/expiry.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, lib/defines.h, lib/lockpw.c, lib/prototypes.h, lib/sgetspent.c, lib/shadow.c, lib/shadowio.c, lib/sppack.c, libmisc/age.c, libmisc/entry.c, libmisc/isexpired.c, libmisc/pwd2spwd.c, libmisc/pwdcheck.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, NEWS, acconfig.h, configure.in:
+	* src/chage.c, src/chpasswd.c, src/expiry.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, lib/defines.h, lib/lockpw.c, lib/prototypes.h, lib/sgetspent.c, lib/shadow.c, lib/shadowio.c, lib/sppack.c, libmisc/age.c, libmisc/entry.c, libmisc/isexpired.c, libmisc/pwd2spwd.c, libmisc/pwdcheck.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, acconfig.h, NEWS, configure.in:
 	remove using SHADOWPWD #define so now shadow is allways builded with shadow
 	password support.
 
@@ -306,7 +574,7 @@
 
 2005-04-27  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/gpasswd.1.xml, man/groups.1.xml, man/grpck.8.xml, man/login.defs.5.xml, man/passwd.1.xml, man/pwck.8.xml, man/shadowconfig.8.xml, man/sulogin.8.xml, man/useradd.8.xml:
+	* man/shadowconfig.8.xml, man/gpasswd.1.xml, man/groups.1.xml, man/grpck.8.xml, man/login.defs.5.xml, man/passwd.1.xml, man/pwck.8.xml, man/sulogin.8.xml, man/useradd.8.xml:
 	replace <emphasis remap='B'></emphasis> by <command></command>.
 
 	* po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, src/lastlog.c:
@@ -384,15 +652,15 @@
 	* man/chage.1.xml, man/chfn.1.xml, man/chsh.1.xml, man/expiry.1.xml, man/gpasswd.1.xml, man/groups.1.xml, man/id.1.xml, man/login.1.xml, man/passwd.1.xml, man/su.1.xml:
 	added <refmiscinfo class="sectdesc">User Commands</refmiscinfo> in <refmeta></refmeta>.
 
-	* man/mkpasswd.8.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/shadowconfig.8.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/vigr.8.xml:
+	* man/mkpasswd.8.xml, man/shadowconfig.8.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/vigr.8.xml:
 	Use encoding="UTF-8" and DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN".
 
-	* man/userdel.8.xml, man/usermod.8.xml, man/vigr.8.xml, man/vipw.8.xml, man/mkpasswd.8.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/shadowconfig.8.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml:
+	* man/userdel.8.xml, man/usermod.8.xml, man/vigr.8.xml, man/vipw.8.xml, man/mkpasswd.8.xml, man/shadowconfig.8.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml:
 	better formation using "xmlindent -l 80 -d 2".
 
 2005-04-21  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/it/chsh.1, man/it/expiry.1, man/it/faillog.5, man/it/faillog.8, man/it/getspnam.3, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/logoutd.8, man/it/newgrp.1, man/it/porttime.5, man/it/pwck.8, man/it/shadow.3, man/it/shadow.5, man/it/shadowconfig.8, man/it/su.1, man/it/vipw.8, NEWS, man/it/Makefile.am, man/it/chage.1, man/it/chfn.1, man/it/chpasswd.8:
+	* man/it/shadowconfig.8, man/it/chsh.1, man/it/expiry.1, man/it/faillog.5, man/it/faillog.8, man/it/getspnam.3, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/logoutd.8, man/it/newgrp.1, man/it/porttime.5, man/it/pwck.8, man/it/shadow.3, man/it/shadow.5, man/it/su.1, man/it/vipw.8, NEWS, man/it/Makefile.am, man/it/chage.1, man/it/chfn.1, man/it/chpasswd.8:
 	updated it man pages: chfn.1, chsh.1, groups.1, grpck.8, grpconv.8, grpunconv.8,
 	id.1, lastlog.8, login.1, newgrp.1, pwunconv.8, shadow.5, vigr.8, vipw.8.
 	new it man pages: chage.1, chpasswd.8, expiry.1, faillog.5, faillog.8,
@@ -402,7 +670,7 @@
 	* po/uk.po:
 	cleanups in plural forms (by Roman Festchook <roma@polesye.net>).
 
-	* man/mkpasswd.8.xml, man/chage.1, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/shadowconfig.8.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
+	* man/mkpasswd.8.xml, man/shadowconfig.8.xml, man/chage.1, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
 	reformated using xemacs.
 
 2005-04-20  Tomasz K這czko  <kloczek@pld.org.pl>
@@ -444,7 +712,7 @@
 	* man/useradd.8:
 	fixed typos in useadd syntax (in SYNOPSIS section) catched using doclifter.
 
-	* man/mkpasswd.8.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/getspnam.3.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/grpconv.8.xml, man/grpunconv.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/pwunconv.8.xml, man/sg.1.xml, man/shadow.3.xml, man/shadow.5.xml, man/shadowconfig.8.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vigr.8.xml, man/vipw.8.xml:
+	* man/mkpasswd.8.xml, man/shadowconfig.8.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/getspnam.3.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/grpconv.8.xml, man/grpunconv.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pw_auth.3.xml, man/pwck.8.xml, man/pwconv.8.xml, man/pwunconv.8.xml, man/sg.1.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vigr.8.xml, man/vipw.8.xml:
 	raw version converted using doclifter.
 
 	* configure.in: remove handle --with-lib{opie,skey}.
@@ -661,7 +929,7 @@
 
 2005-04-05  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/ru/passwd.5, man/zh_CN/chfn.1, man/zh_CN/chpasswd.8, man/zh_CN/chsh.1, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8, man/ko/chfn.1, man/ko/chsh.1, man/ko/groups.1, man/ko/id.1, man/ko/login.1, man/ko/passwd.5, man/ko/su.1, man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/ja/mkpasswd.8, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/expiry.1, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/newgrp.1, man/ja/passwd.1, man/ja/porttime.5, man/ja/pw_auth.3, man/ja/pwck.8, man/ja/shadow.3, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, man/hu/chfn.1, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/id.1, man/hu/login.1, man/hu/newgrp.1, man/hu/passwd.1, man/hu/su.1, man/id/chsh.1, man/id/login.1, man/id/useradd.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/passwd.5, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/it/usermod.8, man/it/vipw.8, man/de/chfn.1, man/de/chsh.1, man/de/login.1, man/de/passwd.1, man/de/passwd.5, man/de/su.1, man/de/vipw.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/cs/groups.1, man/cs/id.1, man/cs/lastlog.8, man/cs/passwd.5, man/cs/shadow.5, man/cs/su.1, man/pl/mkpasswd.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/expiry.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/shadowconfig.8, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/vipw.8, man/chage.1, man/chfn.1, man/expiry.1, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupmems.8, man/groupmod.8, man/grpck.8, man/lastlog.8, man/limits.5, man/login.1, man/login.defs.5, man/newgrp.1, man/passwd.1, man/porttime.5, man/pwck.8, man/shadow.3, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/usermod.8, man/vipw.8:
+	* man/ru/passwd.5, man/zh_CN/chfn.1, man/zh_CN/chpasswd.8, man/zh_CN/chsh.1, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8, man/ko/chfn.1, man/ko/chsh.1, man/ko/groups.1, man/ko/id.1, man/ko/login.1, man/ko/passwd.5, man/ko/su.1, man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/ja/mkpasswd.8, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/expiry.1, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/newgrp.1, man/ja/passwd.1, man/ja/porttime.5, man/ja/pw_auth.3, man/ja/pwck.8, man/ja/shadow.3, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, man/hu/chfn.1, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/id.1, man/hu/login.1, man/hu/newgrp.1, man/hu/passwd.1, man/hu/su.1, man/id/chsh.1, man/id/login.1, man/id/useradd.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/passwd.5, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/it/usermod.8, man/it/vipw.8, man/de/chfn.1, man/de/chsh.1, man/de/login.1, man/de/passwd.1, man/de/passwd.5, man/de/su.1, man/de/vipw.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/cs/groups.1, man/cs/id.1, man/cs/lastlog.8, man/cs/passwd.5, man/cs/shadow.5, man/cs/su.1, man/pl/mkpasswd.8, man/pl/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/expiry.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/vipw.8, man/chage.1, man/chfn.1, man/expiry.1, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupmems.8, man/groupmod.8, man/grpck.8, man/lastlog.8, man/limits.5, man/login.1, man/login.defs.5, man/newgrp.1, man/passwd.1, man/porttime.5, man/pwck.8, man/shadow.3, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/usermod.8, man/vipw.8:
 	more replaces "-" by "\-" (s,\\-,-,g; s,-,\\-,g).
 
 	* man/pl/usermod.8: finish sync with english version.
@@ -1079,7 +1347,7 @@
 
 2004-12-11  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/chage.1, man/chfn.1, man/grpck.8, man/id.1, man/lastlog.8, man/login.1, man/newgrp.1, man/newusers.8, man/passwd.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/shadowconfig.8, man/suauth.5, man/useradd.8:
+	* man/shadowconfig.8, man/chage.1, man/chfn.1, man/grpck.8, man/id.1, man/lastlog.8, man/login.1, man/newgrp.1, man/newusers.8, man/passwd.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/suauth.5, man/useradd.8:
 	Fixed varoiuse typos and misspeling based partialy on patch from Bug#141322
 	from Debian (submited by Christian Perrier <bubulle@debian.org>).
 
@@ -1780,7 +2048,7 @@
 
 2003-05-01  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/dpasswd.8, man/mkpasswd.8, man/pwauth.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/expiry.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmems.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/limits.5, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pwck.8, man/pwconv.8, man/shadow.3, man/shadow.5, man/shadowconfig.8, man/su.1, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, man/vipw.8:
+	* man/dpasswd.8, man/mkpasswd.8, man/pwauth.8, man/shadowconfig.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/expiry.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmems.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/limits.5, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pwck.8, man/pwconv.8, man/shadow.3, man/shadow.5, man/su.1, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, man/vipw.8:
 	Reformated.
 
 	* etc/login.defs:
@@ -1800,7 +2068,7 @@
 
 	* man/ko/passwd.5: Remove ^M from end of line.
 
-	* src/chage.c, src/chpasswd.c, src/login.c, src/newusers.c, src/passwd.c, src/pwunconv.c, src/su.c, src/useradd.c, NEWS, acconfig.h, configure.in:
+	* src/chage.c, src/chpasswd.c, src/login.c, src/newusers.c, src/passwd.c, src/pwunconv.c, src/su.c, src/useradd.c, acconfig.h, NEWS, configure.in:
 	Removed old ATT_AGE (account ageing in passwd file) dependent code.
 
 	* po/pl.po: Fix chage and lastlog messages.
@@ -1857,7 +2125,7 @@
 	* NEWS, configure.in, man/Makefile.am, man/ru/Makefile.am, man/ru/passwd.5:
 	Added ru passwd(1) man page from KSI resources.
 
-	* man/zh_CN/Makefile.am, man/zh_CN/chfn.1, man/zh_CN/chsh.1, man/zh_TW/Makefile.am, man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/ja/dpasswd.8, man/ja/mkpasswd.8, man/ja/pwauth.8, man/ja/Makefile.am, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/expiry.1, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/logoutd.8, man/ja/newgrp.1, man/ja/newusers.8, man/ja/passwd.1, man/ja/passwd.5, man/ja/porttime.5, man/ja/pw_auth.3, man/ja/pwck.8, man/ja/pwconv.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/shadowconfig.8, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, NEWS, man/cs/Makefile.am, man/cs/id.1:
+	* man/zh_CN/Makefile.am, man/zh_CN/chfn.1, man/zh_CN/chsh.1, man/zh_TW/Makefile.am, man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/ja/dpasswd.8, man/ja/mkpasswd.8, man/ja/pwauth.8, man/ja/shadowconfig.8, man/ja/Makefile.am, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/expiry.1, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/logoutd.8, man/ja/newgrp.1, man/ja/newusers.8, man/ja/passwd.1, man/ja/passwd.5, man/ja/porttime.5, man/ja/pw_auth.3, man/ja/pwck.8, man/ja/pwconv.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, NEWS, man/cs/Makefile.am, man/cs/id.1:
 	Added chch(1), chfn(1) man pages from chinese man pages translation
 	project.
 	Added id(1) man page czech man pages translation project.
@@ -1911,7 +2179,7 @@
 
 2003-04-22  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* libmisc/getdate.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/nscd.c, libmisc/setup.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/pwdcheck.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/addgrps.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chkshell.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c:
+	* libmisc/getdate.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/nscd.c, libmisc/setup.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/pwdcheck.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/chkshell.c, libmisc/addgrps.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c:
 	Indent all using current .indent.pro settings.
 
 	* po/Makevars: New file neccessary for gettext >=0.11.5.
@@ -1994,7 +2262,7 @@
 
 2002-03-18  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
 
-	* man/ja/dpasswd.8, man/ja/chpasswd.8, man/ja/faillog.8, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/id.1, man/ja/lastlog.8, man/ja/login.defs.5, man/ja/newusers.8, man/ja/shadowconfig.8, man/ja/su.1, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8:
+	* man/ja/dpasswd.8, man/ja/shadowconfig.8, man/ja/chpasswd.8, man/ja/faillog.8, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/id.1, man/ja/lastlog.8, man/ja/login.defs.5, man/ja/newusers.8, man/ja/su.1, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8:
 	- updated to man-pages-ja-20020315 (except cvs tags)
 
 2002-03-15  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
@@ -2101,7 +2369,7 @@
 
 	* man/hu/passwd.1: missing "-"
 
-	* man/ja/passwd.5, man/ja/shadow.5, man/ja/shadowconfig.8:
+	* man/ja/shadowconfig.8, man/ja/passwd.5, man/ja/shadow.5:
 	- updated to man-pages-ja-20020215
 
 2002-02-23  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
@@ -2658,7 +2926,7 @@
 
 	* autogen.sh: add to conf_flags --disable-shared.
 
-	* man/pl/d_passwd.5, man/pl/dialups.5, man/pl/dpasswd.8, man/pl/mkpasswd.8, man/pl/pwauth.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/shadowconfig.8, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/vipw.8, man/mkpasswd.8, man/pwauth.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/shadow.3, man/shadow.5, man/shadowconfig.8, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, man/vipw.8, man/dpasswd.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/expiry.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmems.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/limits.5, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8:
+	* man/pl/d_passwd.5, man/pl/dialups.5, man/pl/dpasswd.8, man/pl/mkpasswd.8, man/pl/pwauth.8, man/pl/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/vipw.8, man/mkpasswd.8, man/pwauth.8, man/shadowconfig.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/shadow.3, man/shadow.5, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, man/vipw.8, man/dpasswd.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/expiry.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmems.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/limits.5, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8:
 	put or move to top cemmented Id cvs keyword,
 	(passwd.1): documment -e option (patch from Debian),
 	(userdel.1): remove commented obsoleted options.
@@ -2889,7 +3157,7 @@
 
 2000-09-05  Marek Micha趾iewicz  <marekm@pld.org.pl>
 
-	* man/pl/sulogin.8, man/pl/vipw.8, po/el.po, po/fr.po, po/pl.po, po/sv.po, man/pl/d_passwd.5, man/pl/dialups.5, man/pl/dpasswd.8, man/pl/mkpasswd.8, man/pl/pwauth.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/shadowconfig.8, man/pl/su.1, man/pl/suauth.5:
+	* man/pl/sulogin.8, man/pl/vipw.8, po/el.po, po/fr.po, po/pl.po, po/sv.po, man/pl/d_passwd.5, man/pl/dialups.5, man/pl/dpasswd.8, man/pl/mkpasswd.8, man/pl/pwauth.8, man/pl/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pw_auth.3, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5:
 	*** empty log message ***
 
 2000-09-02  Marek Micha趾iewicz  <marekm@pld.org.pl>
@@ -2954,7 +3222,7 @@
 
 1998-01-30  Marek Micha趾iewicz  <marekm@pld.org.pl>
 
-	* install-sh, src/userdel.c, src/usermod.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/groupmod.c, src/login.c, src/logoutd.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, redhat/README, redhat/shadow-utils.spec.in, src/Makefile.am, src/chage.c, man/login.defs.5, man/useradd.8, man/usermod.8, redhat/Makefile.am, libmisc/pam_pass.c, libmisc/strtoday.c, libmisc/tz.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/obscure.c, libmisc/age.c, libmisc/env.c, libmisc/limits.c, lib/strstr.c, lib/shadow.c, lib/shadowio.c, lib/shadowio.h, lib/utent.c, lib/rmdir.c, lib/pwio.c, lib/pwio.h, lib/sgetspent.c, lib/sgroupio.c, lib/mkdir.c, lib/putgrent.c, lib/prototypes.h, lib/pwauth.c, lib/md5crypt.c, lib/getpass.c, lib/groupio.c, lib/gshadow.c, lib/lockpw.c, lib/commonio.h, lib/defines.h, lib/encrypt.c, lib/getdef.c, lib/getdef.h, doc/README.mirrors, doc/automake-1.0.diff, doc/WISHLIST, lib/Makefile.am, lib/commonio.c, doc/ANNOUNCE, doc/CHANGES, doc/Makefile.am, doc/README.limits, doc/README.linux, debian/Makefile.am, debian/changelog, debian/login.copyright, debian/rules, mkinstalldirs, shadow-utils.spec, contrib/README, aclocal.m4, acconfig.h, configure.in, Makefile.am:
+	* install-sh, src/userdel.c, src/usermod.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/groupmod.c, src/login.c, src/logoutd.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, redhat/README, redhat/shadow-utils.spec.in, src/Makefile.am, src/chage.c, man/login.defs.5, man/useradd.8, man/usermod.8, redhat/Makefile.am, libmisc/pam_pass.c, libmisc/strtoday.c, libmisc/tz.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/obscure.c, libmisc/age.c, libmisc/env.c, libmisc/limits.c, lib/strstr.c, lib/shadow.c, lib/shadowio.c, lib/shadowio.h, lib/utent.c, lib/rmdir.c, lib/pwio.c, lib/pwio.h, lib/sgetspent.c, lib/sgroupio.c, lib/mkdir.c, lib/putgrent.c, lib/prototypes.h, lib/pwauth.c, lib/md5crypt.c, lib/getpass.c, lib/groupio.c, lib/gshadow.c, lib/lockpw.c, lib/commonio.h, lib/defines.h, lib/encrypt.c, lib/getdef.c, lib/getdef.h, doc/README.mirrors, doc/automake-1.0.diff, doc/WISHLIST, lib/Makefile.am, lib/commonio.c, doc/ANNOUNCE, doc/CHANGES, doc/Makefile.am, doc/README.limits, doc/README.linux, debian/Makefile.am, debian/changelog, debian/login.copyright, debian/rules, mkinstalldirs, shadow-utils.spec, contrib/README, acconfig.h, aclocal.m4, configure.in, Makefile.am:
 	*** empty log message ***
 
 1998-01-25  Marek Micha趾iewicz  <marekm@pld.org.pl>
@@ -2968,7 +3236,7 @@
 
 1997-12-08  Marek Micha趾iewicz  <marekm@pld.org.pl>
 
-	* src/userdel.c, src/usermod.c, src/shadowconfig.sh, src/su.c, src/sulogin.c, src/useradd.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/newgrp.c, src/newusers.c, src/mkpasswd.c, src/logoutd.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/dpasswd.c, src/chsh.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/Makefile.am, src/chage.c, src/chfn.c, src/chpasswd.c, old/Makefile.am, old/pwconv.8, old/vipw.8, man/Makefile.am, man/limits.5, man/pwconv.8, man/shadowconfig.8, man/vipw.8, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/suauth.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/setup.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/rlogin.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/getdate.c, libmisc/failure.h, libmisc/fields.c, libmisc/getdate.h, libmisc/getdate.y, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chkname.h, libmisc/chkshell.c, lib/strdup.c, lib/strerror.c, lib/strstr.c, lib/utent.c, libmisc/Makefile.am, libmisc/addgrps.c, lib/spdbm.c, lib/sgroupio.c, lib/shadow.c, lib/shadowio.c, lib/sppack.c, lib/rename.c, lib/rmdir.c, lib/sgetgrent.c, lib/sgetpwent.c, lib/sgetspent.c, lib/rad64.c, lib/pwdbm.c, lib/pwent.c, lib/pwauth.c, lib/pwio.c, lib/pwpack.c, lib/mkdir.c, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/port.c, lib/prototypes.h, lib/gsdbm.c, lib/md5.c, lib/md5crypt.c, lib/gshadow.c, lib/gspack.c, lib/lockpw.c, lib/grdbm.c, lib/grent.c, lib/groupio.c, lib/grpack.c, lib/getpass.c, lib/dialup.c, lib/encrypt.c, lib/fputsx.c, lib/getdef.c, lib/dialchk.c, lib/dialchk.h, lib/commonio.c, lib/commonio.h, lib/defines.h, doc/automake-1.0.diff, etc/limits, etc/login.defs.linux, lib/Makefile.am, doc/CHANGES, doc/README.mirrors, doc/README.linux, doc/WISHLIST, debian/login.conffiles, debian/login.postinst, debian/passwd.postinst, debian/porttime, debian/rules, debian/secure-su.README, debian/securetty, contrib/pwdauth.c, debian/changelog, debian/control, aclocal.m4, shadow-utils.spec, acconfig.h, configure.in, Makefile.am:
+	* src/userdel.c, src/usermod.c, src/shadowconfig.sh, src/su.c, src/sulogin.c, src/useradd.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/newgrp.c, src/newusers.c, src/mkpasswd.c, src/logoutd.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/dpasswd.c, src/chsh.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/Makefile.am, src/chage.c, src/chfn.c, src/chpasswd.c, old/Makefile.am, old/pwconv.8, old/vipw.8, man/shadowconfig.8, man/Makefile.am, man/limits.5, man/pwconv.8, man/vipw.8, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/suauth.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/setup.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/rlogin.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/getdate.c, libmisc/failure.h, libmisc/fields.c, libmisc/getdate.h, libmisc/getdate.y, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, libmisc/chkshell.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chkname.h, lib/strdup.c, lib/strerror.c, lib/strstr.c, lib/utent.c, libmisc/Makefile.am, libmisc/addgrps.c, lib/spdbm.c, lib/sgroupio.c, lib/shadow.c, lib/shadowio.c, lib/sppack.c, lib/rename.c, lib/rmdir.c, lib/sgetgrent.c, lib/sgetpwent.c, lib/sgetspent.c, lib/rad64.c, lib/pwdbm.c, lib/pwent.c, lib/pwauth.c, lib/pwio.c, lib/pwpack.c, lib/mkdir.c, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/port.c, lib/prototypes.h, lib/gsdbm.c, lib/md5.c, lib/md5crypt.c, lib/gshadow.c, lib/gspack.c, lib/lockpw.c, lib/grdbm.c, lib/grent.c, lib/groupio.c, lib/grpack.c, lib/getpass.c, lib/dialup.c, lib/encrypt.c, lib/fputsx.c, lib/getdef.c, lib/dialchk.c, lib/dialchk.h, lib/commonio.c, lib/commonio.h, lib/defines.h, doc/automake-1.0.diff, etc/limits, etc/login.defs.linux, lib/Makefile.am, doc/CHANGES, doc/README.mirrors, doc/README.linux, doc/WISHLIST, debian/login.conffiles, debian/login.postinst, debian/passwd.postinst, debian/porttime, debian/rules, debian/secure-su.README, debian/securetty, contrib/pwdauth.c, debian/changelog, debian/control, acconfig.h, aclocal.m4, shadow-utils.spec, configure.in, Makefile.am:
 	*** empty log message ***
 
 1997-10-01  Marek Micha趾iewicz  <marekm@pld.org.pl>
@@ -2993,12 +3261,12 @@
 
 1997-06-01  Marek Micha趾iewicz  <marekm@pld.org.pl>
 
-	* debian/changelog, src/userdel.c, src/usermod.c, src/pwck.c, src/pwunconv.c, src/useradd.c, src/grpunconv.c, src/newusers.c, src/passwd.c, src/expiry.c, src/grpconv.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/Makefile.am, redhat/Makefile.am, redhat/README, redhat/shadow-970502-config.patch, redhat/shadow-utils.spec, libmisc/mail.c, libmisc/login_desrpc.c, lib/pwio.h, lib/shadowio.c, lib/shadowio.h, lib/prototypes.h, lib/pwauth.c, lib/pwio.c, lib/commonio.c, lib/defines.h, doc/README.linux, doc/WISHLIST, doc/CHANGES, doc/INSTALL, install-sh, mkinstalldirs, Makefile.am, acconfig.h, configure.in:
+	* debian/changelog, src/userdel.c, src/usermod.c, src/pwck.c, src/pwunconv.c, src/useradd.c, src/grpunconv.c, src/newusers.c, src/passwd.c, src/expiry.c, src/grpconv.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/Makefile.am, redhat/Makefile.am, redhat/README, redhat/shadow-970502-config.patch, redhat/shadow-utils.spec, libmisc/mail.c, libmisc/login_desrpc.c, lib/pwio.h, lib/shadowio.c, lib/shadowio.h, lib/prototypes.h, lib/pwauth.c, lib/pwio.c, lib/commonio.c, lib/defines.h, doc/README.linux, doc/WISHLIST, doc/CHANGES, doc/INSTALL, install-sh, mkinstalldirs, acconfig.h, Makefile.am, configure.in:
 	*** empty log message ***
 
 1997-05-02  Marek Micha趾iewicz  <marekm@pld.org.pl>
 
-	* src/shadowconfig.sh, src/Makefile.am, man/Makefile.am, libmisc/mail.c, libmisc/salt.c, lib/sgroupio.c, lib/shadowio.c, lib/groupio.c, lib/pwio.c, etc/Makefile.am, doc/WISHLIST, doc/CHANGES, debian/shadowconfig, debian/Makefile.am, debian/changelog, debian/control, debian/rules, configure.in, configure, shlib/Makefile.in, man/Makefile.in, libmisc/Makefile.in, lib/Makefile.in, etc/Makefile.in, doc/Makefile.in, contrib/Makefile.in, Makefile.in, man/userdel.8, man/usermod.8, man/shadow.5, man/su.1, man/sulogin.8, man/useradd.8, man/pwauth.8, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/pwunconv.8, man/shadow.3, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/mkpasswd.8, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/limits.5, man/login.1, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/faillog.5, man/faillog.8, man/groupadd.8, man/groupdel.8, man/groupmod.8, man/dpasswd.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, libmisc/valid.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/utmp.c, libmisc/setup.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/setugid.c, libmisc/obscure.c, libmisc/pwd2spwd.c, libmisc/rlogin.c, libmisc/login_access.c, libmisc/loginprompt.c, libmisc/motd.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/copydir.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/age.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, lib/utent.c, lib/shadow_.h, lib/spdbm.c, lib/strstr.c, lib/sppack.c, lib/shadow.c, lib/sgetpwent.c, lib/sgetspent.c, lib/rad64.c, lib/rename.c, lib/rmdir.c, lib/pwpack.c, lib/sgetgrent.c, lib/pwdbm.c, lib/pwent.c, lib/pwauth.h, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/port.h, lib/pwauth.c, lib/lastlog_.h, lib/mkdir.c, lib/lockpw.c, lib/port.c, lib/gsdbm.c, lib/grpack.c, lib/gshadow.c, lib/gshadow_.h, lib/gspack.c, lib/grdbm.c, lib/grent.c, lib/getdef.c, lib/getpass.c, lib/dialup.h, lib/encrypt.c, lib/faillog.h, lib/fputsx.c, lib/dialchk.c, lib/dialup.c, lib/commonio.c, lib/defines.h, etc/login.defs, etc/login.defs.linux, doc/README.linux, doc/LICENSE, doc/Makefile.am, doc/README, doc/HOWTO, doc/ANNOUNCE, debian/secure-su.README, debian/secure-su.conffiles, debian/secure-su.copyright, debian/secure-su.postrm, debian/secure-su.preinst, debian/securetty, debian/passwd.conffiles, debian/passwd.copyright, debian/passwd.postinst, debian/porttime, debian/login.conffiles, debian/login.copyright, debian/login.postinst, debian/login.postrm, debian/login.preinst, debian/login.prerm, debian/logoutd, config.h.in, acconfig.h, Makefile.am, old/Makefile.in, old/scologin.c, old/orig-config.h, old/pwconv-old.c, old/pwd.h.m4, old/pwunconv-old.c, old/config.h.sun4, old/config.h.svr4, old/config.h.xenix, old/config.h.linux, old/Makefile.sun4, old/Makefile.svr4, old/Makefile.xenix, old/Makefile.am, old/Makefile.linux, src/Makefile.in, src/pwconv.c, src/userdel.c, src/usermod.c, src/useradd.c, src/su.c, src/sulogin.c, src/pwconv5.c, src/scologin.c, src/pwck.c, src/pwunconv.c, src/patchlevel.h, src/newusers.c, src/passwd.c, src/mkpasswd.c, src/logoutd.c, src/newgrp.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/grpck.c, src/grpconv.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/dpasswd.c, src/chsh.c, src/expiry.c, src/chfn.c, src/chpasswd.c, src/chage.c:
+	* src/shadowconfig.sh, src/Makefile.am, man/Makefile.am, libmisc/mail.c, libmisc/salt.c, lib/sgroupio.c, lib/shadowio.c, lib/groupio.c, lib/pwio.c, etc/Makefile.am, doc/WISHLIST, doc/CHANGES, debian/shadowconfig, debian/Makefile.am, debian/changelog, debian/control, debian/rules, configure.in, configure, shlib/Makefile.in, man/Makefile.in, libmisc/Makefile.in, lib/Makefile.in, etc/Makefile.in, doc/Makefile.in, contrib/Makefile.in, Makefile.in, man/userdel.8, man/usermod.8, man/shadow.5, man/su.1, man/sulogin.8, man/useradd.8, man/pwauth.8, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/pwunconv.8, man/shadow.3, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/mkpasswd.8, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/limits.5, man/login.1, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/faillog.5, man/faillog.8, man/groupadd.8, man/groupdel.8, man/groupmod.8, man/dpasswd.8, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, libmisc/valid.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/utmp.c, libmisc/setup.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/setugid.c, libmisc/obscure.c, libmisc/pwd2spwd.c, libmisc/rlogin.c, libmisc/login_access.c, libmisc/loginprompt.c, libmisc/motd.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/copydir.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/age.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, lib/utent.c, lib/shadow_.h, lib/spdbm.c, lib/strstr.c, lib/sppack.c, lib/shadow.c, lib/sgetpwent.c, lib/sgetspent.c, lib/rad64.c, lib/rename.c, lib/rmdir.c, lib/pwpack.c, lib/sgetgrent.c, lib/pwdbm.c, lib/pwent.c, lib/pwauth.h, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/port.h, lib/pwauth.c, lib/lastlog_.h, lib/mkdir.c, lib/lockpw.c, lib/port.c, lib/gsdbm.c, lib/grpack.c, lib/gshadow.c, lib/gshadow_.h, lib/gspack.c, lib/grdbm.c, lib/grent.c, lib/getdef.c, lib/getpass.c, lib/dialup.h, lib/encrypt.c, lib/faillog.h, lib/fputsx.c, lib/dialchk.c, lib/dialup.c, lib/commonio.c, lib/defines.h, etc/login.defs, etc/login.defs.linux, doc/README.linux, doc/LICENSE, doc/Makefile.am, doc/README, doc/HOWTO, doc/ANNOUNCE, debian/secure-su.README, debian/secure-su.conffiles, debian/secure-su.copyright, debian/secure-su.postrm, debian/secure-su.preinst, debian/securetty, debian/passwd.conffiles, debian/passwd.copyright, debian/passwd.postinst, debian/porttime, debian/login.conffiles, debian/login.copyright, debian/login.postinst, debian/login.postrm, debian/login.preinst, debian/login.prerm, debian/logoutd, acconfig.h, config.h.in, Makefile.am, old/Makefile.in, old/scologin.c, old/orig-config.h, old/pwconv-old.c, old/pwd.h.m4, old/pwunconv-old.c, old/config.h.sun4, old/config.h.svr4, old/config.h.xenix, old/config.h.linux, old/Makefile.sun4, old/Makefile.svr4, old/Makefile.xenix, old/Makefile.am, old/Makefile.linux, src/Makefile.in, src/pwconv.c, src/userdel.c, src/usermod.c, src/useradd.c, src/su.c, src/sulogin.c, src/pwconv5.c, src/scologin.c, src/pwck.c, src/pwunconv.c, src/patchlevel.h, src/newusers.c, src/passwd.c, src/mkpasswd.c, src/logoutd.c, src/newgrp.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/grpck.c, src/grpconv.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/dpasswd.c, src/chsh.c, src/expiry.c, src/chfn.c, src/chpasswd.c, src/chage.c:
 	*** empty log message ***
 
 1997-02-11  Marek Micha趾iewicz  <marekm@pld.org.pl>
@@ -3039,6 +3307,6 @@
 	* contrib/adduser-old.c, contrib/adduser.sh, contrib/adduser2.sh, contrib/atudel:
 	960810 - first version under cvs
 
-	* contrib/Makefile.in, contrib/Makefile.am, contrib/README, contrib/adduser.c, contrib/pwdauth.c, doc/ANNOUNCE, doc/CHANGES, doc/Makefile.in, doc/README.sun4, doc/automake-1.0.diff, doc/console.c.spec, doc/HOWTO, doc/LICENSE, doc/Makefile.am, doc/README, doc/README.limits, doc/README.linux, doc/WISHLIST, etc/Makefile.in, etc/Makefile.am, etc/login.access, etc/login.defs, etc/login.defs.linux, old/Makefile.in, src/patchlevel.h, src/pwconv5.c, src/scologin.c, src/chage.c, src/chfn.c, src/chsh.c, src/expiry.c, src/gpasswd.c, src/groups.c, src/grpconv.c, src/id.c, src/login.c, src/newgrp.c, src/passwd.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/sulogin.c, lib/dialup.h, lib/grdbm.c, lib/grent.c, lib/gsdbm.c, lib/lastlog_.h, lib/md5.c, lib/md5.h, lib/md5crypt.c, lib/mkdir.c, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/pwdbm.c, lib/pwent.c, lib/rename.c, lib/rmdir.c, lib/shadow_.h, lib/spdbm.c, lib/strdup.c, lib/strstr.c, lib/defines.h, lib/faillog.h, lib/getdef.h, lib/groupio.h, lib/grpack.c, lib/gshadow_.h, lib/gspack.c, lib/port.h, lib/prototypes.h, lib/pwauth.h, lib/pwio.h, lib/pwpack.c, lib/rcsid.h, lib/sgetgrent.c, lib/sgetpwent.c, lib/sgetspent.c, lib/sgroupio.h, lib/shadow.c, lib/shadowio.c, lib/shadowio.h, lib/sppack.c, lib/utent.c, src/Makefile.in, src/dpasswd.c, src/mkpasswd.c, src/Makefile.am, src/chpasswd.c, src/faillog.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/lastlog.c, src/logoutd.c, src/newusers.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/Makefile.in, lib/dialchk.c, lib/dialup.c, lib/rad64.c, lib/Makefile.am, lib/commonio.c, lib/encrypt.c, lib/fputsx.c, lib/getdef.c, lib/getpass.c, lib/groupio.c, lib/gshadow.c, lib/lockpw.c, lib/port.c, lib/pwauth.c, lib/pwio.c, lib/sgroupio.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/setup.c, libmisc/suauth.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/obscure.c, libmisc/pwd2spwd.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, man/Makefile.in, man/dpasswd.8, man/mkpasswd.8, man/pwauth.8, man/Makefile.am, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/pwunconv.8, man/shadow.3, man/shadow.5, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, Makefile.in, aclocal.m4, config.h.in, configure, install-sh, mkinstalldirs, stamp-h.in, Makefile.am, README, acconfig.h, configure.in, libmisc/Makefile.in, libmisc/Makefile.am, libmisc/addgrps.c:
+	* contrib/Makefile.in, contrib/Makefile.am, contrib/README, contrib/adduser.c, contrib/pwdauth.c, doc/ANNOUNCE, doc/CHANGES, doc/Makefile.in, doc/README.sun4, doc/automake-1.0.diff, doc/console.c.spec, doc/HOWTO, doc/LICENSE, doc/Makefile.am, doc/README, doc/README.limits, doc/README.linux, doc/WISHLIST, etc/Makefile.in, etc/Makefile.am, etc/login.access, etc/login.defs, etc/login.defs.linux, old/Makefile.in, src/patchlevel.h, src/pwconv5.c, src/scologin.c, src/chage.c, src/chfn.c, src/chsh.c, src/expiry.c, src/gpasswd.c, src/groups.c, src/grpconv.c, src/id.c, src/login.c, src/newgrp.c, src/passwd.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/sulogin.c, lib/dialup.h, lib/grdbm.c, lib/grent.c, lib/gsdbm.c, lib/lastlog_.h, lib/md5.c, lib/md5.h, lib/md5crypt.c, lib/mkdir.c, lib/putgrent.c, lib/putpwent.c, lib/putspent.c, lib/pwdbm.c, lib/pwent.c, lib/rename.c, lib/rmdir.c, lib/shadow_.h, lib/spdbm.c, lib/strdup.c, lib/strstr.c, lib/defines.h, lib/faillog.h, lib/getdef.h, lib/groupio.h, lib/grpack.c, lib/gshadow_.h, lib/gspack.c, lib/port.h, lib/prototypes.h, lib/pwauth.h, lib/pwio.h, lib/pwpack.c, lib/rcsid.h, lib/sgetgrent.c, lib/sgetpwent.c, lib/sgetspent.c, lib/sgroupio.h, lib/shadow.c, lib/shadowio.c, lib/shadowio.h, lib/sppack.c, lib/utent.c, src/Makefile.in, src/dpasswd.c, src/mkpasswd.c, src/Makefile.am, src/chpasswd.c, src/faillog.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/lastlog.c, src/logoutd.c, src/newusers.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/Makefile.in, lib/dialchk.c, lib/dialup.c, lib/rad64.c, lib/Makefile.am, lib/commonio.c, lib/encrypt.c, lib/fputsx.c, lib/getdef.c, lib/getpass.c, lib/groupio.c, lib/gshadow.c, lib/lockpw.c, lib/port.c, lib/pwauth.c, lib/pwio.c, lib/sgroupio.c, libmisc/login_access.c, libmisc/login_desrpc.c, libmisc/login_krb.c, libmisc/setup.c, libmisc/suauth.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/obscure.c, libmisc/pwd2spwd.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, man/Makefile.in, man/dpasswd.8, man/mkpasswd.8, man/pwauth.8, man/Makefile.am, man/chage.1, man/chfn.1, man/chpasswd.8, man/chsh.1, man/faillog.5, man/faillog.8, man/gpasswd.1, man/groupadd.8, man/groupdel.8, man/groupmod.8, man/groups.1, man/grpck.8, man/id.1, man/lastlog.8, man/login.1, man/login.access.5, man/login.defs.5, man/logoutd.8, man/newgrp.1, man/newusers.8, man/passwd.1, man/passwd.5, man/porttime.5, man/pw_auth.3, man/pwck.8, man/pwconv.8, man/pwunconv.8, man/shadow.3, man/shadow.5, man/su.1, man/suauth.5, man/sulogin.8, man/useradd.8, man/userdel.8, man/usermod.8, Makefile.in, acconfig.h, aclocal.m4, config.h.in, configure, install-sh, mkinstalldirs, stamp-h.in, Makefile.am, README, configure.in, libmisc/Makefile.in, libmisc/Makefile.am, libmisc/addgrps.c:
 	New file.
 

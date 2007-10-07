@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.7 2005/06/16 18:58:43 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.8 2005/06/30 19:26:08 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>USERDEL</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -126,6 +126,9 @@
       </citerefentry>,
       <citerefentry>
         <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
         <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>

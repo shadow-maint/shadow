@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: getdef.c,v 1.30 2005/05/25 19:31:50 kloczek Exp $")
+RCSID ("$Id: getdef.c,v 1.31 2005/07/12 18:54:39 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
@@ -72,7 +72,6 @@ static struct itemdef def_table[] = {
 	{"LASTLOG_ENAB", NULL},
 	{"LOGIN_STRING", NULL},
 	{"MAIL_CHECK_ENAB", NULL},
-	{"MAIL_DIR", NULL},
 	{"MAIL_FILE", NULL},
 	{"MD5_CRYPT_ENAB", NULL},
 	{"MOTD_FILE", NULL},
@@ -88,8 +87,8 @@ static struct itemdef def_table[] = {
 	{"QUOTAS_ENAB", NULL},
 	{"ULIMIT", NULL},
 #endif
-	{"CONSOLE", NULL},
 	{"CONSOLE_GROUPS", NULL},
+	{"CONSOLE", NULL},
 	{"CREATE_HOME", NULL},
 	{"ERASECHAR", NULL},
 	{"FAKE_SHELL", NULL},
@@ -102,6 +101,7 @@ static struct itemdef def_table[] = {
 	{"LOGIN_TIMEOUT", NULL},
 	{"LOG_OK_LOGINS", NULL},
 	{"LOG_UNKFAIL_ENAB", NULL},
+	{"MAIL_DIR", NULL},
 	{"SULOG_FILE", NULL},
 	{"SU_NAME", NULL},
 #ifdef USE_SYSLOG

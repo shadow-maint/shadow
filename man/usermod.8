@@ -24,7 +24,7 @@ usermod \- Modify a user account
 .ad l
 .hy 0
 .HP 8
-\fBusermod\fR [\-c\ \fIcomment\fR] [\-d\ \fIhome_dir\fR\ [\-m]] [\-e\ \fIexpire_date\fR] [\-f\ \fIinactive_days\fR] [\-g\ \fIinitial_group\fR] [\-G\ \fIgroup1\fR\ [\fI,group2,\fR...\ \fI,\fR\ [\fIgroupN\fR]]] [\-l\ \fIlogin_name\fR] [\-p\ \fIpasswd\fR] [\-s\ \fIshell\fR] [\-u\ \fIuid\fR\ [\-o]] [\fB\-L\fR | \fB\-U\fR] \fIlogin\fR
+\fBusermod\fR [\-c\ \fIcomment\fR] [\-d\ \fIhome_dir\fR\ [\-m]] [\-e\ \fIexpire_date\fR] [\-f\ \fIinactive_days\fR] [\-g\ \fIinitial_group\fR] [\-G\ \fIgroup1\fR\ [\fI,group2,\fR...\ \fI,\fR\ [\fIgroupN\fR]\ [\-a]]] [\-l\ \fIlogin_name\fR] [\-p\ \fIpasswd\fR] [\-s\ \fIshell\fR] [\-u\ \fIuid\fR\ [\-o]] [\fB\-L\fR | \fB\-U\fR] \fIlogin\fR
 .ad
 .hy
 
@@ -60,7 +60,7 @@ The group name or number of the user's new initial login group\&. The group name
 
 .TP
 \fB\-G\fR \fIgroup1\fR[\fI ,group2,\&.\&.\&., \fR [\fIgroupN\fR]]]
-A list of supplementary groups which the user is also a member of\&. Each group is separated from the next by a comma, with no intervening whitespace\&. The groups are subject to the same restrictions as the group given with the \fB\-g\fR option\&. If the user is currently a member of a group which is not listed, the user will be removed from the group\&.
+A list of supplementary groups which the user is also a member of\&. Each group is separated from the next by a comma, with no intervening whitespace\&. The groups are subject to the same restrictions as the group given with the \fB\-g\fR option\&. If the user is currently a member of a group which is not listed, the user will be removed from the group\&. This behaviour can be changed via \fB\-a\fR option, which appends user to the current supplementary group list\&.
 
 .TP
 \fB\-l\fR \fIlogin_name\fR
@@ -109,7 +109,7 @@ group account information
 .SH "SEE ALSO"
 
 .PP
-\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBcrypt\fR(3), \fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBuseradd\fR(8), \fBuserdel\fR(8)\&.
+\fBchfn\fR(1), \fBchsh\fR(1), \fBpasswd\fR(1), \fBcrypt\fR(3), \fBgpasswd\fR(8), \fBgroupadd\fR(8), \fBgroupdel\fR(8), \fBgroupmod\fR(8), \fBuseradd\fR(8), \fBuserdel\fR(8)\&.
 
 .SH "AUTHOR"
 

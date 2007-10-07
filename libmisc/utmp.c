@@ -41,7 +41,7 @@
 #include <stdio.h>
 
 #include "rcsid.h"
-RCSID ("$Id: utmp.c,v 1.15 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: utmp.c,v 1.16 2005/07/05 20:17:51 kloczek Exp $")
 #if HAVE_UTMPX_H
 struct utmpx utxent;
 #endif
@@ -217,29 +217,7 @@ void checkutmp (int picky)
 	}
 }
 
-#else				/* !USG */
-
-void checkutmp (int picky)
-{
-	char *line;
-
-	/*
-	 * Hand-craft a new utmp entry.
-	 */
-
-	memzero (&utent, sizeof utent);
-	if (!(line = ttyname (0))) {
-		puts (NO_TTY);
-		exit (1);
-	}
-	if (strncmp (line, "/dev/", 5) == 0)
-		line += 5;
-
-	(void) strncpy (utent.ut_line, line, sizeof utent.ut_line);
-	utent.ut_time = time (NULL);
-}
-
-#endif				/* !USG */
+#endif
 
 
 /*

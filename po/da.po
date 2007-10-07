@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.10\n"
+"Project-Id-Version: shadow 4.0.11\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 17:48+0200\n"
-"PO-Revision-Date: 2005-06-20 22:27+0200\n"
+"POT-Creation-Date: 2005-07-18 16:02+0200\n"
+"PO-Revision-Date: 2005-07-11 21:49+0200\n"
 "Last-Translator: Claus Hindsgaul <claus_h@image.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -145,12 +145,12 @@ msgstr "Ingen mappe, logger på med HOME=/"
 msgid "Cannot execute %s"
 msgstr "Kan ikke udføre %s"
 
-#: libmisc/sub.c:55
+#: libmisc/sub.c:56
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
 msgstr "Ugyldig rodmappe \"%s\"\n"
 
-#: libmisc/sub.c:67
+#: libmisc/sub.c:68
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "Kan ikke ændre rodmappen til \"%s\"\n"
@@ -170,16 +170,16 @@ msgstr "Kunne ikke frigøre plads til opsætningsoplysninger.\n"
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "opsætningsfejl - ukendt punkt %s (informér administrator)\n"
 
-#: lib/pwauth.c:45 src/newgrp.c:338
+#: lib/pwauth.c:48 src/newgrp.c:384
 msgid "Password: "
 msgstr "Adgangskode: "
 
-#: lib/pwauth.c:47
+#: lib/pwauth.c:50
 #, c-format
 msgid "%s's Password: "
 msgstr "%s's adgangskode: "
 
-#: src/chage.c:110
+#: src/chage.c:115
 #, c-format
 msgid ""
 "Usage: chage [options] user\n"
@@ -213,147 +213,147 @@ msgstr ""
 "  -W, --warndays VARSELSDAGE\tsæt antallet af udløbsvarselsdage til "
 "VARSELSDAGE\n"
 
-#: src/chage.c:155 src/chfn.c:139 src/chsh.c:89
+#: src/chage.c:160 src/chfn.c:139 src/chsh.c:89
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Angiv ny værdi eller tryk RETUR for standardværdien\n"
 
-#: src/chage.c:159
+#: src/chage.c:164
 msgid "Minimum Password Age"
 msgstr "Minimal adgangskode-alder"
 
-#: src/chage.c:165
+#: src/chage.c:170
 msgid "Maximum Password Age"
 msgstr "Maksimal adgangskode-alder"
 
-#: src/chage.c:172
+#: src/chage.c:177
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Sidste ændring af adgangskode (ÅÅÅÅ-MM-DD)"
 
-#: src/chage.c:180
+#: src/chage.c:185
 msgid "Password Expiration Warning"
 msgstr "Advarsel om udløb af adgangskode"
 
-#: src/chage.c:186
+#: src/chage.c:191
 msgid "Password Inactive"
 msgstr "Adgangskode inaktiv"
 
-#: src/chage.c:194
+#: src/chage.c:199
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Konto-udløbsdato (ÅÅÅÅ-MM-DD)"
 
-#: src/chage.c:241
+#: src/chage.c:246
 #, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Sidste ændring af adgangskode\t\t\t\t\t: "
 
-#: src/chage.c:243 src/chage.c:257 src/chage.c:273 src/chage.c:286
+#: src/chage.c:248 src/chage.c:262 src/chage.c:278 src/chage.c:291
 #, c-format
 msgid "never\n"
 msgstr "aldrig\n"
 
-#: src/chage.c:254
+#: src/chage.c:259
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Adgangskode udløber\t\t\t\t\t: "
 
-#: src/chage.c:270
+#: src/chage.c:275
 #, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Adgangskode inaktiv\t\t\t\t\t: "
 
-#: src/chage.c:284
+#: src/chage.c:289
 #, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Konto udløber\t\t\t\t\t\t: "
 
-#: src/chage.c:300
+#: src/chage.c:305
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr "Minimalt antal dage mellem ændring af adgangskoden\t\t: %ld\n"
 
-#: src/chage.c:302
+#: src/chage.c:307
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "Maksimalt antal dage mellem ændring af adgangskoden\t\t: %ld\n"
 
-#: src/chage.c:304
+#: src/chage.c:309
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "Antal dages forvarsel om adgangskodens udløb\t: %ld\n"
 
-#: src/chage.c:462
+#: src/chage.c:467
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: medtag ikke \"l\" med andre flag\n"
 
-#: src/chage.c:474 src/chage.c:602 src/chfn.c:268 src/chfn.c:277
+#: src/chage.c:479 src/chage.c:607 src/chfn.c:268 src/chfn.c:277
 #: src/chfn.c:286 src/chfn.c:295 src/chfn.c:304 src/chfn.c:370 src/chfn.c:382
-#: src/gpasswd.c:150 src/login.c:426 src/passwd.c:769 src/passwd.c:805
+#: src/gpasswd.c:150 src/login.c:430 src/passwd.c:769 src/passwd.c:805
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: Adgang nægtet.\n"
 
-#: src/chage.c:507 src/chage.c:713 src/chpasswd.c:173 src/groupadd.c:488
-#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1469
-#: src/userdel.c:567 src/usermod.c:1272 src/usermod.c:1326
+#: src/chage.c:512 src/chage.c:718 src/chpasswd.c:173 src/groupadd.c:488
+#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1518
+#: src/userdel.c:567 src/usermod.c:1283 src/usermod.c:1337
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM-autentifikation mislykkedes\n"
 
-#: src/chage.c:525 src/chpasswd.c:188
+#: src/chage.c:530 src/chpasswd.c:188
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: kan ikke åbne adgangskodefil\n"
 
-#: src/chage.c:532 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
+#: src/chage.c:537 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
 #: src/gpasswd.c:216 src/groups.c:64 src/passwd.c:811
 #, c-format
 msgid "%s: unknown user %s\n"
 msgstr "%s: ukendt bruger %s\n"
 
-#: src/chage.c:550
+#: src/chage.c:555
 #, c-format
-msgid "%s: can't lock shadow password file"
-msgstr "%s: kan ikke låse skyggeadgangskodefil"
+msgid "%s: can't lock shadow password file\n"
+msgstr "%s: kan ikke låse skyggeadgangskodefil\n"
 
-#: src/chage.c:558
+#: src/chage.c:563
 #, c-format
-msgid "%s: can't open shadow password file"
-msgstr "%s: kan ikke åbne skyggeadgangskodefil"
+msgid "%s: can't open shadow password file\n"
+msgstr "%s: kan ikke åbne skyggeadgangskodefil\n"
 
-#: src/chage.c:618
+#: src/chage.c:623
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "Ændrer forældelsesoplysninger for %s\n"
 
-#: src/chage.c:620
+#: src/chage.c:625
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: fejl ved ændring af felter\n"
 
-#: src/chage.c:644 src/pwunconv.c:136
+#: src/chage.c:649 src/pwunconv.c:136
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s: kan ikke opdatere adgangskodefil\n"
 
-#: src/chage.c:667 src/pwunconv.c:131
+#: src/chage.c:672 src/pwunconv.c:131
 #, c-format
 msgid "%s: can't update shadow password file\n"
 msgstr "%s: kan ikke opdatere skyggeadgangskodefil\n"
 
-#: src/chage.c:680
+#: src/chage.c:685
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
 msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
 
-#: src/chage.c:724
+#: src/chage.c:729
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: kan ikke genskrive adgangskodefilen\n"
 
-#: src/chage.c:743 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
-#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1564 src/userdel.c:689
+#: src/chage.c:748 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
+#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1613 src/userdel.c:689
 #, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s: PAM chauthtok fejlede\n"
@@ -463,7 +463,7 @@ msgstr "Kan ikke låse adgangskodefilen; forsøg igen senere.\n"
 msgid "Cannot open the password file.\n"
 msgstr "Kan ikke åbne adgangskodefilen.\n"
 
-#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:982
+#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:993
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s: %s ikke fundet i /etc/passwd\n"
@@ -682,7 +682,7 @@ msgstr "%s: der kræves skyggeadgangskoder for -A\n"
 msgid "Who are you?\n"
 msgstr "Hvem er du?\n"
 
-#: src/gpasswd.c:299 src/newgrp.c:289
+#: src/gpasswd.c:299 src/newgrp.c:318
 #, c-format
 msgid "unknown group: %s\n"
 msgstr "ukendt gruppe: %s\n"
@@ -775,12 +775,12 @@ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
 msgstr "Brug: groupadd [-g gid [-o]] [-f] gruppe\n"
 
 #: src/groupadd.c:161 src/groupadd.c:169 src/groupmod.c:174 src/groupmod.c:196
-#: src/useradd.c:823 src/usermod.c:496 src/usermod.c:618
+#: src/useradd.c:839 src/usermod.c:495 src/usermod.c:617
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: fejl under tilføjelse af gruppelinje\n"
 
-#: src/groupadd.c:218 src/useradd.c:870
+#: src/groupadd.c:218 src/useradd.c:886
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: navnet %s er ikke unikt\n"
@@ -800,24 +800,24 @@ msgstr "%s: kan ikke få unik GID\n"
 msgid "%s: %s is not a valid group name\n"
 msgstr "%s: %s er ikke et gyldigt gruppenavn\n"
 
-#: src/groupadd.c:308 src/groupmod.c:307
+#: src/groupadd.c:318 src/groupmod.c:307
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s: ugyldig gruppe %s\n"
 
-#: src/groupadd.c:325 src/useradd.c:1058
+#: src/groupadd.c:332 src/useradd.c:1094
 #, c-format
-msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s: -O kræver NAVN=VÆRDI\n"
+msgid "%s: -K requires KEY=VALUE\n"
+msgstr "%s: -K kræver NAVN=VÆRDI\n"
 
-#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1167
-#: src/userdel.c:247 src/usermod.c:504
+#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1214
+#: src/userdel.c:247 src/usermod.c:503
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: kan ikke genskrive gruppefil\n"
 
-#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1175
-#: src/userdel.c:253 src/usermod.c:627
+#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1222
+#: src/userdel.c:253 src/usermod.c:626
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
 msgstr "%s: kan ikke genskrive skyggegruppefil\n"
@@ -877,7 +877,7 @@ msgstr "%s: gruppen %s eksisterer ikke\n"
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s: gruppen %s er en NIS-gruppe\n"
 
-#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:723
+#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:722
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s er NIS-masteren\n"
@@ -1140,7 +1140,7 @@ msgstr ""
 "\n"
 "[Afbrød ikke forbindelsen -- root-login er tilladt.]\n"
 
-#: src/login.c:297
+#: src/login.c:302
 #, c-format
 msgid ""
 "\n"
@@ -1149,17 +1149,17 @@ msgstr ""
 "\n"
 "Login udløb efter %d sekunder.\n"
 
-#: src/login.c:570
+#: src/login.c:576
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " på `%.100s' fra `%.200s'"
 
-#: src/login.c:573
+#: src/login.c:579
 #, c-format
 msgid " on `%.100s'"
 msgstr " på `%.100s'"
 
-#: src/login.c:730
+#: src/login.c:736
 #, c-format
 msgid ""
 "\n"
@@ -1168,25 +1168,25 @@ msgstr ""
 "\n"
 "%s login: "
 
-#: src/login.c:885 src/sulogin.c:203
+#: src/login.c:891 src/sulogin.c:207
 msgid "Login incorrect"
 msgstr "Forkert login"
 
-#: src/login.c:1032
+#: src/login.c:1038
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Advarsel: login genetableret efter midlertidig udelukkelse.\n"
 
-#: src/login.c:1046
+#: src/login.c:1052
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Sidst logget på: %s på %s"
 
-#: src/login.c:1049
+#: src/login.c:1055
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "Sidst logget på: %.19s på %s"
 
-#: src/login.c:1054
+#: src/login.c:1060
 #, c-format
 msgid " from %.*s"
 msgstr " fra %.*s"
@@ -1201,21 +1201,21 @@ msgstr "Brug: newgrp [-] [gruppe]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Brug: sg gruppe [[-c] kommando]\n"
 
-#: src/newgrp.c:130
+#: src/newgrp.c:159
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "ukendt UID: %u\n"
 
-#: src/newgrp.c:212
+#: src/newgrp.c:241
 #, c-format
 msgid "unknown GID: %lu\n"
 msgstr "ukendt GID: %lu\n"
 
-#: src/newgrp.c:355 src/newgrp.c:364
+#: src/newgrp.c:401 src/newgrp.c:410
 msgid "Sorry.\n"
 msgstr "Beklager.\n"
 
-#: src/newgrp.c:469
+#: src/newgrp.c:515
 #, c-format
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
@@ -1361,7 +1361,7 @@ msgstr "%s: hukommelse opbrugt\n"
 msgid "%s: Cannot execute %s"
 msgstr "%s: Kan ikke udføre %s"
 
-#: src/passwd.c:732
+#: src/passwd.c:727
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: samlingen %s understøttes ikke\n"
@@ -1478,35 +1478,35 @@ msgstr "%s: kan ikke opdatere linje for brugeren %s\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: kan ikke slette skyggeadgangskodefilen\n"
 
-#: src/su.c:132
+#: src/su.c:129
 msgid "Sorry."
 msgstr "Beklager."
 
-#: src/su.c:319
+#: src/su.c:315
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: skal køres fra en terminal\n"
 
-#: src/su.c:416
+#: src/su.c:412
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: fejl %d\n"
 
-#: src/su.c:444
+#: src/su.c:440
 #, c-format
 msgid "Unknown id: %s\n"
 msgstr "Ukendt id: %s\n"
 
-#: src/su.c:479 src/su.c:495
+#: src/su.c:475 src/su.c:491
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "Du er ikke autoriseret til at 'su %s'\n"
 
-#: src/su.c:490
+#: src/su.c:486
 msgid "(Enter your own password.)"
 msgstr "(Angiv din adgangskode.)"
 
-#: src/su.c:522
+#: src/su.c:520
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -1515,7 +1515,7 @@ msgstr ""
 "%s: %s\n"
 "(Ignoreret)\n"
 
-#: src/su.c:730
+#: src/su.c:727
 #, c-format
 msgid "No shell\n"
 msgstr "Ingen skal\n"
@@ -1540,12 +1540,12 @@ msgstr "Angiv din EGEN adgangskode som autentifikation.\n"
 msgid "No password file\n"
 msgstr "Ingen adgangskodefil\n"
 
-#: src/sulogin.c:160
+#: src/sulogin.c:164
 #, c-format
 msgid "No password entry for 'root'\n"
 msgstr "Ingen adgangskodelinje for 'root'\n"
 
-#: src/sulogin.c:175
+#: src/sulogin.c:179
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -1555,216 +1555,244 @@ msgstr ""
 "Tryk control-d for at fortsætte den normale opstart,\n"
 "(eller angiv root-adgangskoden for systemvedligehold):"
 
-#: src/sulogin.c:210
+#: src/sulogin.c:214
 msgid "Entering System Maintenance Mode\n"
 msgstr "Går i systemvedligeholdelses-tilstand\n"
 
-#: src/useradd.c:221 src/useradd.c:234 src/usermod.c:664 src/usermod.c:677
+#: src/useradd.c:222 src/useradd.c:235 src/usermod.c:663 src/usermod.c:676
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: ugyldigt numerisk parameter`%s'\n"
 
-#: src/useradd.c:289
+#: src/useradd.c:290
 #, c-format
 msgid "%s: unknown GID %s\n"
 msgstr "%s: ukendt GID %s\n"
 
-#: src/useradd.c:297 src/useradd.c:573 src/useradd.c:1014 src/usermod.c:217
-#: src/usermod.c:785
+#: src/useradd.c:298 src/useradd.c:574 src/useradd.c:1058 src/usermod.c:216
+#: src/usermod.c:788
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: ukendt gruppe %s\n"
 
-#: src/useradd.c:405
+#: src/useradd.c:406
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: kan ikke oprette ny standardværdi-fil\n"
 
-#: src/useradd.c:410
+#: src/useradd.c:411
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: kan ikke åbne ny standardværdi-fil\n"
 
-#: src/useradd.c:498 src/useradd.c:509
+#: src/useradd.c:499 src/useradd.c:510
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: omdøb: %s"
 
-#: src/useradd.c:594 src/usermod.c:238
+#: src/useradd.c:595 src/usermod.c:237
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: gruppen`%s' er en NIS-gruppe.\n"
 
-#: src/useradd.c:603 src/usermod.c:247
+#: src/useradd.c:604 src/usermod.c:246
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: der er angivet for mange grupper (maks %d).\n"
+msgstr "%s: der er angivet for mange grupper (højst %d).\n"
 
-#: src/useradd.c:635
+#: src/useradd.c:634
 #, c-format
-msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "Brug: useradd [-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
-
-#: src/useradd.c:638
-#, c-format
-msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgid ""
+"Usage: useradd [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -b, --base-dir BASE_DIR\tbase directory for the the new user account\n"
+"\t\t\t\thome directory\n"
+"  -c, --comment COMMENT\t\tset the GECOS field for the new user account\n"
+"  -d, --home-dir HOME_DIR\thome directory for the new user account\n"
+"  -D, --defaults\t\tprint or save modified default useradd\n"
+"\t\t\t\tconfiguration\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP for the new user account\n"
+"  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
+"\t\t\t\tuser account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -m, --create-home\t\tcreate home directory for the new user\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tallow create user with duplicate\n"
+"\t\t\t\t(non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new user\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\tthe login shell for the new user account\n"
+"  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-"              [-d hjemmemappe] [-s skal] [-c kommentar] [-m [-k skabelon]]\n"
+"Brug: useradd [tilvalg] LOGIND\n"
+"\n"
+"Tilvalg:\n"
+"  -b, --base-dir GRUNDMAPPE\tGrundmappe for den nye brugerkontos "
+"hjemmebibliotek\n"
+"  -c, --comment KOMMENTAR\t\tsæt den nye brugerkontos GECOS-felt\n"
+"  -d, --home-dir HJEMMEMAPPE\tden nye brugerkontos hjemmemappe\n"
+"  -D, --defaults\t\tvis skal gem ændret standard useradd-opsætning\n"
+"  -e, --expiredate UDLØBSDATO\tsæt kontoens udløbsdatur til UDLØBSDATO\n"
+"  -f, --inactive INAKTIV\tsæt inaktiv adgangskode efter udløb til INAKTIV\n"
+"  -g, --gid GRUPPE\t\tgennemtving brugen af GRUPPE til den nye brugerkonto\n"
+"  -G, --groups GRUPPER\t\tvis den nye brugerkontos supplerende grupper\n"
+"  -h, --help\t\t\tvis denne hjælp og afslut\n"
+"  -k, --skel SKELETMAPPE \t\tangiv en alternativ skeletmappe\n"
+"  -K, --key NØGLE=VÆRDI\t\ttilsidesætter standardindstillingerne i /etc/"
+"login.defs\n"
+"  -m, --create-home\t\topret hjemmemappe til den nye brugerkonto\n"
+"  -o, --non-unique\t\ttillad oprettelse af ens (ikke-unikke) UID\n"
+"  -p, --password ADGANGSKODE\tbrug krypteret adgangskode til den nye "
+"brugerkonto\n"
+"  -s, --shell SKAL\t\tden nye brugerkontos logind-skal\n"
+"  -u, --uid UID\t\t\tgennemtving brugen af bruger-ID'en UID til den nye "
+"brugerkonto\n"
 
-#: src/useradd.c:639 src/useradd.c:643
-#, c-format
-msgid "               [-f inactive] [-e expire]\n"
-msgstr "              [-f inaktiv] [-e udløb ]\n"
-
-#: src/useradd.c:640
-#, c-format
-msgid "               [-p passwd] name\n"
-msgstr "              [-p adgangskode] navn\n"
-
-#: src/useradd.c:642
-#, c-format
-msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-msgstr "      useradd -D [-g gruppe] [-b grundmappe] [-s skal]\n"
-
-#: src/useradd.c:722 src/usermod.c:426
+#: src/useradd.c:738 src/usermod.c:425
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: fejl under låsning af gruppefil\n"
 
-#: src/useradd.c:726 src/usermod.c:431
+#: src/useradd.c:742 src/usermod.c:430
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: fejl under åbning af gruppefil\n"
 
-#: src/useradd.c:732 src/usermod.c:524
+#: src/useradd.c:748 src/usermod.c:523
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: fejl under låsning af skyggegruppefil\n"
 
-#: src/useradd.c:737 src/usermod.c:530
+#: src/useradd.c:753 src/usermod.c:529
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: fejl under åbning af skyggegruppefil\n"
 
-#: src/useradd.c:875
+#: src/useradd.c:891
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u er ikke unikt\n"
 
-#: src/useradd.c:905
+#: src/useradd.c:921
 #, c-format
 msgid "%s: can't get unique UID\n"
 msgstr "%s: kan ikke få unik UID\n"
 
-#: src/useradd.c:936
+#: src/useradd.c:977
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: ugyldig grundmappe '%s'\n"
 
-#: src/useradd.c:946
+#: src/useradd.c:988
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: ugyldig kommentar '%s'\n"
 
-#: src/useradd.c:957
+#: src/useradd.c:1000
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: ugyldig hjemmemappe '%s'\n"
 
-#: src/useradd.c:975 src/usermod.c:768
+#: src/useradd.c:1018 src/usermod.c:771
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: ugyldig dato '%s'\n"
 
-#: src/useradd.c:988
+#: src/useradd.c:1031
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: der kræves skyggeadgangskoder for -e\n"
 
-#: src/useradd.c:1004
+#: src/useradd.c:1047
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: der kræves skyggeadgangskoder for -f\n"
 
-#: src/useradd.c:1070 src/usermod.c:745 src/usermod.c:755 src/usermod.c:800
-#: src/usermod.c:844
+#: src/useradd.c:1113 src/usermod.c:748 src/usermod.c:758 src/usermod.c:803
+#: src/usermod.c:847
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: ugyldigt felt ''%s'\n"
 
-#: src/useradd.c:1081
+#: src/useradd.c:1126
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: ugyldig skal '%s'\n"
 
-#: src/useradd.c:1122
+#: src/useradd.c:1169
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: ugyldigt brugernavn '%s'\n"
 
-#: src/useradd.c:1156 src/userdel.c:242 src/usermod.c:909
+#: src/useradd.c:1203 src/userdel.c:242 src/usermod.c:920
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: kan ikke genskrive adgangskodefilen\n"
 
-#: src/useradd.c:1161 src/userdel.c:245 src/usermod.c:914
+#: src/useradd.c:1208 src/userdel.c:245 src/usermod.c:925
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
 
-#: src/useradd.c:1197 src/userdel.c:289 src/usermod.c:942
+#: src/useradd.c:1244 src/userdel.c:289 src/usermod.c:953
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: kunne ikke låse adgangskodefilen\n"
 
-#: src/useradd.c:1201 src/userdel.c:293 src/usermod.c:946
+#: src/useradd.c:1248 src/userdel.c:293 src/usermod.c:957
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: kunne ikke åbne adgangskodefilen\n"
 
-#: src/useradd.c:1207 src/userdel.c:298 src/usermod.c:951
+#: src/useradd.c:1254 src/userdel.c:298 src/usermod.c:962
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: kunne ikke låse skyggeadgangskodefilen\n"
 
-#: src/useradd.c:1213 src/userdel.c:303 src/usermod.c:956
+#: src/useradd.c:1260 src/userdel.c:303 src/usermod.c:967
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: kunne ikke åbne skyggeadgangskodefilen\n"
 
-#: src/useradd.c:1300
+#: src/useradd.c:1347
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: fejl under tilføjelse af ny adgangskodelinje\n"
 
-#: src/useradd.c:1310 src/usermod.c:1019
+#: src/useradd.c:1358 src/usermod.c:1030
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s: fejl under tilføjelse af ny skyggeadgangskode-linje\n"
 
-#: src/useradd.c:1337
+#: src/useradd.c:1386
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: kan ikke oprette mappen %s\n"
 
-#: src/useradd.c:1367
+#: src/useradd.c:1416
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
 "Der er ingen gruppe med navnet \"mail\", opretter postkø med "
 "filrettighederne 0600.\n"
 
-#: src/useradd.c:1390
+#: src/useradd.c:1439
 #, c-format
 msgid "Can't create mail spool for user %s.\n"
 msgstr "Kan ikke oprette postkø for brugeren %s.\n"
 
-#: src/useradd.c:1492 src/usermod.c:888
+#: src/useradd.c:1541 src/usermod.c:899
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: brugeren %s eksisterer\n"
 
-#: src/useradd.c:1506
+#: src/useradd.c:1555
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
@@ -1772,7 +1800,7 @@ msgstr ""
 "%s: gruppen %s eksisterer - brug -g hvis du vil tilføje denne bruger til den "
 "gruppe.\n"
 
-#: src/useradd.c:1544
+#: src/useradd.c:1593
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: advarsel: CREATE_HOME understøttes ikke, brug i stedet -m.\n"
@@ -1822,12 +1850,12 @@ msgstr "%s: %s ejes ikke af %s, fjerner ikke\n"
 msgid "%s: warning: can't remove "
 msgstr "%s: advarsel: kan ikke fjerne "
 
-#: src/userdel.c:584 src/usermod.c:702
+#: src/userdel.c:584 src/usermod.c:701
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s: brugeren %s eksisterer ikke\n"
 
-#: src/userdel.c:599 src/usermod.c:718
+#: src/userdel.c:599 src/usermod.c:717
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: brugeren %s er en NIS-bruger\n"
@@ -1843,101 +1871,106 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: fejl under fjernelse af mappen %s\n"
 
-#: src/usermod.c:279
+#: src/usermod.c:278
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
 msgstr "Brug: %s\t[-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
 
-#: src/usermod.c:283
+#: src/usermod.c:282
 #, c-format
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d hjemmemappe [-m]] [-s skal] [-c kommentar] [-l nyt_navn]\n"
 
-#: src/usermod.c:285
+#: src/usermod.c:284
 #, c-format
 msgid "[-f inactive] [-e expire] "
 msgstr "[-f inaktiv] [-e udløb ] "
 
-#: src/usermod.c:286
+#: src/usermod.c:285
 #, c-format
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p adgangskode] [-L|-U] navn\n"
 
-#: src/usermod.c:458
+#: src/usermod.c:457
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s: løbet tør for hukommelse i update_group\n"
 
-#: src/usermod.c:567
+#: src/usermod.c:566
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s: løbet tør for hukommelse i update_gshadow\n"
 
-#: src/usermod.c:867
+#: src/usermod.c:870
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s: ingen flag angivet\n"
 
-#: src/usermod.c:873
+#: src/usermod.c:876
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: skyggeadgangskoder kræves for e og -f\n"
 
-#: src/usermod.c:893
+#: src/usermod.c:886
+#, c-format
+msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgstr "%s: flaget -a er KUN tilladt sammen med -G\n"
+
+#: src/usermod.c:904
 #, c-format
 msgid "%s: uid %lu is not unique\n"
 msgstr "%s: uid %lu er ikke unik\n"
 
-#: src/usermod.c:1004
+#: src/usermod.c:1015
 #, c-format
 msgid "%s: error changing password entry\n"
 msgstr "%s: fejl under ændring af adgangskodelinje\n"
 
-#: src/usermod.c:1010
+#: src/usermod.c:1021
 #, c-format
 msgid "%s: error removing password entry\n"
 msgstr "%s: fejl under fjernelse af adgangskodelinje\n"
 
-#: src/usermod.c:1026
+#: src/usermod.c:1037
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr "%s: fejl under fjernelse af skyggeadgangskodelinje\n"
 
-#: src/usermod.c:1053
+#: src/usermod.c:1064
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: mappen %s eksisterer\n"
 
-#: src/usermod.c:1061
+#: src/usermod.c:1072
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s: kan ikke oprette %s\n"
 
-#: src/usermod.c:1066
+#: src/usermod.c:1077
 #, c-format
 msgid "%s: can't chown %s\n"
 msgstr "%s: kan ikke chown %s\n"
 
-#: src/usermod.c:1078
+#: src/usermod.c:1089
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr "%s: advarsel: kunne ikke fjerne den gamle hjemmemappe %s fuldstændigt"
 
-#: src/usermod.c:1088
+#: src/usermod.c:1099
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: kan ikke omdøbe mappen %s til %s\n"
 
-#: src/usermod.c:1183
+#: src/usermod.c:1194
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: advarsel: %s ejes ikke af %s\n"
 
-#: src/usermod.c:1189
+#: src/usermod.c:1200
 msgid "failed to change mailbox owner"
 msgstr "kunne ikke ændre postkassens ejer"
 
-#: src/usermod.c:1197
+#: src/usermod.c:1208
 msgid "failed to rename mailbox"
 msgstr "kunne ikke omdøbe postkasse"
 
@@ -1973,6 +2006,29 @@ msgstr ""
 "Brug:\n"
 "'vipw' redigerer /etc/passwd    `vipw -s' redigerer /etc/shadow\n"
 "'vigr' redigerer /etc/group     `vigr -s' redigerer /etc/gshadow\n"
+
+#, fuzzy
+#~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "Brug: useradd [-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
+
+#~ msgid ""
+#~ "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+#~ msgstr ""
+#~ "              [-d hjemmemappe] [-s skal] [-c kommentar] [-m [-k "
+#~ "skabelon]]\n"
+
+#~ msgid "               [-f inactive] [-e expire]\n"
+#~ msgstr "              [-f inaktiv] [-e udløb ]\n"
+
+#, fuzzy
+#~ msgid "               [-p passwd] [-K KEY=VALUE] name\n"
+#~ msgstr "              [-p adgangskode] navn\n"
+
+#~ msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+#~ msgstr "      useradd -D [-g gruppe] [-b grundmappe] [-s skal]\n"
+
+#~ msgid "%s: -O requires NAME=VALUE\n"
+#~ msgstr "%s: -O kræver NAVN=VÆRDI\n"
 
 #~ msgid "unknown uid: %u\n"
 #~ msgstr "ukendt uid: %u\n"

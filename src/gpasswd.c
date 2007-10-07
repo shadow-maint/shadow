@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.25 2005/06/20 09:36:27 kloczek Exp $")
+RCSID (PKG_VER "$Id: gpasswd.c,v 1.26 2005/07/07 15:11:48 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -207,7 +207,7 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadowgrp = sgr_file_present ();
 #endif
-	while ((flag = getopt (argc, argv, "a:d:grRA:M:")) != EOF) {
+	while ((flag = getopt (argc, argv, "a:A:d:gM:rR")) != EOF) {
 		switch (flag) {
 		case 'a':	/* add a user */
 			user = optarg;

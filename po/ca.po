@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-20 17:48+0200\n"
+"POT-Creation-Date: 2005-07-18 16:02+0200\n"
 "PO-Revision-Date: 2005-06-21 01:22+0300\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -142,12 +142,12 @@ msgstr "No hi ha directori, entrant amb HOME=/"
 msgid "Cannot execute %s"
 msgstr "No es pot executar %s"
 
-#: libmisc/sub.c:55
+#: libmisc/sub.c:56
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
 msgstr "El directori arrel «%s» no és vàlid\n"
 
-#: libmisc/sub.c:67
+#: libmisc/sub.c:68
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "No s'ha pogut canviar el directori arrel a «%s»\n"
@@ -169,16 +169,16 @@ msgstr ""
 "error de configuració - element «%s» desconegut (notifiqueu-ho a "
 "l'administrador)\n"
 
-#: lib/pwauth.c:45 src/newgrp.c:338
+#: lib/pwauth.c:48 src/newgrp.c:384
 msgid "Password: "
 msgstr "Contrasenya: "
 
-#: lib/pwauth.c:47
+#: lib/pwauth.c:50
 #, c-format
 msgid "%s's Password: "
 msgstr "Contrasenya de l'usuari %s: "
 
-#: src/chage.c:110
+#: src/chage.c:115
 #, c-format
 msgid ""
 "Usage: chage [options] user\n"
@@ -214,147 +214,147 @@ msgstr ""
 "  -W, --warndays DIES_AVÍS\testableix els dies d'avís d'expiració\n"
 "\t\t\t\ta DIES_AVÍS\n"
 
-#: src/chage.c:155 src/chfn.c:139 src/chsh.c:89
+#: src/chage.c:160 src/chfn.c:139 src/chsh.c:89
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Introduïu el nou valor, o premeu ENTER per al predeterminat\n"
 
-#: src/chage.c:159
+#: src/chage.c:164
 msgid "Minimum Password Age"
 msgstr "Duració mínima de la contrasenya"
 
-#: src/chage.c:165
+#: src/chage.c:170
 msgid "Maximum Password Age"
 msgstr "Duració màxima de la contrasenya"
 
-#: src/chage.c:172
+#: src/chage.c:177
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Últim canvi de contrasenya (AAAA-MM-DD)"
 
-#: src/chage.c:180
+#: src/chage.c:185
 msgid "Password Expiration Warning"
 msgstr "Avís de caducitat de la contrasenya"
 
-#: src/chage.c:186
+#: src/chage.c:191
 msgid "Password Inactive"
 msgstr "Contrasenya inactiva"
 
-#: src/chage.c:194
+#: src/chage.c:199
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Data de caducitat per al compte (AAAA-MM-YY)"
 
-#: src/chage.c:241
+#: src/chage.c:246
 #, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Últim canvi de contrasenya\t\t\t\t: "
 
-#: src/chage.c:243 src/chage.c:257 src/chage.c:273 src/chage.c:286
+#: src/chage.c:248 src/chage.c:262 src/chage.c:278 src/chage.c:291
 #, c-format
 msgid "never\n"
 msgstr "mai\n"
 
-#: src/chage.c:254
+#: src/chage.c:259
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "La contrasenya caduca\t\t\t\t\t: "
 
-#: src/chage.c:270
+#: src/chage.c:275
 #, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Contrasenya inactiva\t\t\t\t\t: "
 
-#: src/chage.c:284
+#: src/chage.c:289
 #, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "El compte caduca\t\t\t\t\t: "
 
-#: src/chage.c:300
+#: src/chage.c:305
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr "Número mínim de dies entre canvi de contrasenya\t\t: %ld\n"
 
-#: src/chage.c:302
+#: src/chage.c:307
 #, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "Número màxim de dies entre canvi de contrasenya\t\t: %ld\n"
 
-#: src/chage.c:304
+#: src/chage.c:309
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "Número de dies d'avís abans que la contrasenya expiri\t: %ld\n"
 
-#: src/chage.c:462
+#: src/chage.c:467
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: no inclogueu «l» amb altres senyaladors\n"
 
-#: src/chage.c:474 src/chage.c:602 src/chfn.c:268 src/chfn.c:277
+#: src/chage.c:479 src/chage.c:607 src/chfn.c:268 src/chfn.c:277
 #: src/chfn.c:286 src/chfn.c:295 src/chfn.c:304 src/chfn.c:370 src/chfn.c:382
-#: src/gpasswd.c:150 src/login.c:426 src/passwd.c:769 src/passwd.c:805
+#: src/gpasswd.c:150 src/login.c:430 src/passwd.c:769 src/passwd.c:805
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: Permís denegat.\n"
 
-#: src/chage.c:507 src/chage.c:713 src/chpasswd.c:173 src/groupadd.c:488
-#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1469
-#: src/userdel.c:567 src/usermod.c:1272 src/usermod.c:1326
+#: src/chage.c:512 src/chage.c:718 src/chpasswd.c:173 src/groupadd.c:488
+#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1518
+#: src/userdel.c:567 src/usermod.c:1283 src/usermod.c:1337
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: l'autenticació PAM ha fallat\n"
 
-#: src/chage.c:525 src/chpasswd.c:188
+#: src/chage.c:530 src/chpasswd.c:188
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: no es pot obrir el fitxer de contrasenyes\n"
 
-#: src/chage.c:532 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
+#: src/chage.c:537 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
 #: src/gpasswd.c:216 src/groups.c:64 src/passwd.c:811
 #, c-format
 msgid "%s: unknown user %s\n"
 msgstr "%s: l'usuari %s desconegut\n"
 
-#: src/chage.c:550
+#: src/chage.c:555
 #, c-format
-msgid "%s: can't lock shadow password file"
-msgstr "%s: no es pot bloquejar el fitxer de contrasenyes ombra"
+msgid "%s: can't lock shadow password file\n"
+msgstr "%s: no es pot bloquejar el fitxer de contrasenyes ombra\n"
 
-#: src/chage.c:558
+#: src/chage.c:563
 #, c-format
-msgid "%s: can't open shadow password file"
-msgstr "%s: no es pot obrir el fitxer de contrasenyes ombra"
+msgid "%s: can't open shadow password file\n"
+msgstr "%s: no es pot obrir el fitxer de contrasenyes ombra\n"
 
-#: src/chage.c:618
+#: src/chage.c:623
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "S'està canviant la informació de caducitat per a %s\n"
 
-#: src/chage.c:620
+#: src/chage.c:625
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: s'ha produït un error en canviar els camps\n"
 
-#: src/chage.c:644 src/pwunconv.c:136
+#: src/chage.c:649 src/pwunconv.c:136
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s: no es pot actualitzar el fitxer de contrasenyes\n"
 
-#: src/chage.c:667 src/pwunconv.c:131
+#: src/chage.c:672 src/pwunconv.c:131
 #, c-format
 msgid "%s: can't update shadow password file\n"
 msgstr "%s: no es pot actualitzar el fitxer de contrasenyes ombra\n"
 
-#: src/chage.c:680
+#: src/chage.c:685
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
 msgstr "%s: no es pot reescriure el fitxer de contrasenyes ombra\n"
 
-#: src/chage.c:724
+#: src/chage.c:729
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: no es pot reescriure el fitxer de contrasenyes\n"
 
-#: src/chage.c:743 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
-#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1564 src/userdel.c:689
+#: src/chage.c:748 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
+#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1613 src/userdel.c:689
 #, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s: PAM chauthok ha fallat\n"
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Cannot open the password file.\n"
 msgstr "No s'ha pogut obrir el fitxer de contrasenyes.\n"
 
-#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:982
+#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:993
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s: no s'ha trobat %s a «/etc/passwd»\n"
@@ -687,7 +687,7 @@ msgstr "%s: contrasenyes ombra de grups requerides per a «-A»\n"
 msgid "Who are you?\n"
 msgstr "Qui sou?\n"
 
-#: src/gpasswd.c:299 src/newgrp.c:289
+#: src/gpasswd.c:299 src/newgrp.c:318
 #, c-format
 msgid "unknown group: %s\n"
 msgstr "El grup és desconegut: %s\n"
@@ -780,12 +780,12 @@ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
 msgstr "Forma d'ús: groupadd [-g gid [-o]] [-f] grup\n"
 
 #: src/groupadd.c:161 src/groupadd.c:169 src/groupmod.c:174 src/groupmod.c:196
-#: src/useradd.c:823 src/usermod.c:496 src/usermod.c:618
+#: src/useradd.c:839 src/usermod.c:495 src/usermod.c:617
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: s'ha produït un error en afegir la nova entrada de grup\n"
 
-#: src/groupadd.c:218 src/useradd.c:870
+#: src/groupadd.c:218 src/useradd.c:886
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: el nom %s no és únic\n"
@@ -805,24 +805,24 @@ msgstr "%s: no es pot obtenir un GID únic\n"
 msgid "%s: %s is not a valid group name\n"
 msgstr "%s: %s no és un nom de grup valid\n"
 
-#: src/groupadd.c:308 src/groupmod.c:307
+#: src/groupadd.c:318 src/groupmod.c:307
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s: el grup %s no és vàlid\n"
 
-#: src/groupadd.c:325 src/useradd.c:1058
-#, c-format
-msgid "%s: -O requires NAME=VALUE\n"
+#: src/groupadd.c:332 src/useradd.c:1094
+#, fuzzy, c-format
+msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: «-O» requereix NOM=VALOR\n"
 
-#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1167
-#: src/userdel.c:247 src/usermod.c:504
+#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1214
+#: src/userdel.c:247 src/usermod.c:503
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: no es pot reescriure el fitxer de grup\n"
 
-#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1175
-#: src/userdel.c:253 src/usermod.c:627
+#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1222
+#: src/userdel.c:253 src/usermod.c:626
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
 msgstr "%s: no es pot reescriure el fitxer de grups ombra\n"
@@ -882,7 +882,7 @@ msgstr "%s: el grup %s no existeix\n"
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s: el grup %s no és un grup NIS\n"
 
-#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:723
+#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:722
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s és el mestre NIS\n"
@@ -1146,7 +1146,7 @@ msgstr ""
 "\n"
 "[S'ha evitat la desconnexió -- l'accés de root està permès.]\n"
 
-#: src/login.c:297
+#: src/login.c:302
 #, c-format
 msgid ""
 "\n"
@@ -1155,17 +1155,17 @@ msgstr ""
 "\n"
 "L'accés ha caducat després de %d segons.\n"
 
-#: src/login.c:570
+#: src/login.c:576
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " a «%.100s» des de «%.200s»"
 
-#: src/login.c:573
+#: src/login.c:579
 #, c-format
 msgid " on `%.100s'"
 msgstr " a «%.100s»"
 
-#: src/login.c:730
+#: src/login.c:736
 #, c-format
 msgid ""
 "\n"
@@ -1174,25 +1174,25 @@ msgstr ""
 "\n"
 "%s accés: "
 
-#: src/login.c:885 src/sulogin.c:203
+#: src/login.c:891 src/sulogin.c:207
 msgid "Login incorrect"
 msgstr "Accés incorrecte"
 
-#: src/login.c:1032
+#: src/login.c:1038
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Avís: accés reactivat després d'un bloqueig temporal.\n"
 
-#: src/login.c:1046
+#: src/login.c:1052
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Últim accés: %s a %s"
 
-#: src/login.c:1049
+#: src/login.c:1055
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "Última accés: %.19s a %s"
 
-#: src/login.c:1054
+#: src/login.c:1060
 #, c-format
 msgid " from %.*s"
 msgstr " des de %.*s"
@@ -1207,21 +1207,21 @@ msgstr "Forma d'ús: newgrp [-] [grup]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Forma d'ús: sg grup [[-c] ordre]\n"
 
-#: src/newgrp.c:130
+#: src/newgrp.c:159
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "El UID és desconegut: %u\n"
 
-#: src/newgrp.c:212
+#: src/newgrp.c:241
 #, c-format
 msgid "unknown GID: %lu\n"
 msgstr "El GID és desconegut: %lu\n"
 
-#: src/newgrp.c:355 src/newgrp.c:364
+#: src/newgrp.c:401 src/newgrp.c:410
 msgid "Sorry.\n"
 msgstr "Disculpeu.\n"
 
-#: src/newgrp.c:469
+#: src/newgrp.c:515
 #, c-format
 msgid "too many groups\n"
 msgstr "hi ha massa grups\n"
@@ -1368,7 +1368,7 @@ msgstr "%s: sense memòria\n"
 msgid "%s: Cannot execute %s"
 msgstr "%s: No es pot executar %s"
 
-#: src/passwd.c:732
+#: src/passwd.c:727
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: el repositori %s no està suportat\n"
@@ -1485,35 +1485,35 @@ msgstr "%s: no es pot actualitzar l'entrada per a l'usuari %s\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: no es pot eliminar el fitxer de contrasenyes ombra\n"
 
-#: src/su.c:132
+#: src/su.c:129
 msgid "Sorry."
 msgstr "Disculpeu."
 
-#: src/su.c:319
+#: src/su.c:315
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: s'ha d'executar des d'una terminal\n"
 
-#: src/su.c:416
+#: src/su.c:412
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: s'ha produït un error %d\n"
 
-#: src/su.c:444
+#: src/su.c:440
 #, c-format
 msgid "Unknown id: %s\n"
 msgstr "L'id és desconegut: %s\n"
 
-#: src/su.c:479 src/su.c:495
+#: src/su.c:475 src/su.c:491
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "No esteu autoritzats a usar «su %s»\n"
 
-#: src/su.c:490
+#: src/su.c:486
 msgid "(Enter your own password.)"
 msgstr "(Introduïu la vostra pròpia contrasenya)."
 
-#: src/su.c:522
+#: src/su.c:520
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -1522,7 +1522,7 @@ msgstr ""
 "%s: %s\n"
 "(Ignorat)\n"
 
-#: src/su.c:730
+#: src/su.c:727
 #, c-format
 msgid "No shell\n"
 msgstr "No hi ha intèrpret\n"
@@ -1548,12 +1548,12 @@ msgstr ""
 msgid "No password file\n"
 msgstr "No hi ha fitxer de contrasenyes\n"
 
-#: src/sulogin.c:160
+#: src/sulogin.c:164
 #, c-format
 msgid "No password entry for 'root'\n"
 msgstr "No hi ha entrada de contrasenya per a «root»\n"
 
-#: src/sulogin.c:175
+#: src/sulogin.c:179
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -1563,216 +1563,221 @@ msgstr ""
 "Pitgeu «control-d» per a continuar amb l'inici normal de sistema,\n"
 "(o introduïu la contrasenya de «root» per a manteniment del sistema):"
 
-#: src/sulogin.c:210
+#: src/sulogin.c:214
 msgid "Entering System Maintenance Mode\n"
 msgstr "S'està entrant en mode de manteniment del sistema\n"
 
-#: src/useradd.c:221 src/useradd.c:234 src/usermod.c:664 src/usermod.c:677
+#: src/useradd.c:222 src/useradd.c:235 src/usermod.c:663 src/usermod.c:676
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: l'argument numèric «%s» no és vàlid\n"
 
-#: src/useradd.c:289
+#: src/useradd.c:290
 #, c-format
 msgid "%s: unknown GID %s\n"
 msgstr "%s: el GID %s és desconegut\n"
 
-#: src/useradd.c:297 src/useradd.c:573 src/useradd.c:1014 src/usermod.c:217
-#: src/usermod.c:785
+#: src/useradd.c:298 src/useradd.c:574 src/useradd.c:1058 src/usermod.c:216
+#: src/usermod.c:788
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: el grup %s és desconegut\n"
 
-#: src/useradd.c:405
+#: src/useradd.c:406
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: no es pot crear un fitxer nou de preferències predeterminades\n"
 
-#: src/useradd.c:410
+#: src/useradd.c:411
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: no es pot obrir un fitxer nou de preferències predeterminades\n"
 
-#: src/useradd.c:498 src/useradd.c:509
+#: src/useradd.c:499 src/useradd.c:510
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: renombra: %s"
 
-#: src/useradd.c:594 src/usermod.c:238
+#: src/useradd.c:595 src/usermod.c:237
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: el grup «%s» és un grup NIS.\n"
 
-#: src/useradd.c:603 src/usermod.c:247
+#: src/useradd.c:604 src/usermod.c:246
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: s'han especificat massa grups (màx de %d).\n"
 
-#: src/useradd.c:635
+#: src/useradd.c:634
 #, c-format
-msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "Forma d'ús: useradd [-u uid [-o]] [-g grup] [-G grup,...] \n"
-
-#: src/useradd.c:638
-#, c-format
-msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgid ""
+"Usage: useradd [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -b, --base-dir BASE_DIR\tbase directory for the the new user account\n"
+"\t\t\t\thome directory\n"
+"  -c, --comment COMMENT\t\tset the GECOS field for the new user account\n"
+"  -d, --home-dir HOME_DIR\thome directory for the new user account\n"
+"  -D, --defaults\t\tprint or save modified default useradd\n"
+"\t\t\t\tconfiguration\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP for the new user account\n"
+"  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
+"\t\t\t\tuser account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -m, --create-home\t\tcreate home directory for the new user\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tallow create user with duplicate\n"
+"\t\t\t\t(non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new user\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\tthe login shell for the new user account\n"
+"  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-"                    [-d home] [-s intèrpret] [-c ordre] [-m [-k plantilla]]\n"
 
-#: src/useradd.c:639 src/useradd.c:643
-#, c-format
-msgid "               [-f inactive] [-e expire]\n"
-msgstr "                    [-f inactiu] [-e caduca]\n"
-
-#: src/useradd.c:640
-#, c-format
-msgid "               [-p passwd] name\n"
-msgstr "                    [-p contrasenya] nom\n"
-
-#: src/useradd.c:642
-#, c-format
-msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-msgstr "            useradd -D [-g grup] [-b base] [-s intèrpret]\n"
-
-#: src/useradd.c:722 src/usermod.c:426
+#: src/useradd.c:738 src/usermod.c:425
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: s'ha produït un error en bloquejar el fitxer de grups\n"
 
-#: src/useradd.c:726 src/usermod.c:431
+#: src/useradd.c:742 src/usermod.c:430
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: s'ha produït un error en obrir el fitxer de grups\n"
 
-#: src/useradd.c:732 src/usermod.c:524
+#: src/useradd.c:748 src/usermod.c:523
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: s'ha produït un error en bloquejar el fitxer de grups ombra\n"
 
-#: src/useradd.c:737 src/usermod.c:530
+#: src/useradd.c:753 src/usermod.c:529
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: s'ha produït un error en obrir el fitxer de grups ombra\n"
 
-#: src/useradd.c:875
+#: src/useradd.c:891
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: el UID %u no és únic\n"
 
-#: src/useradd.c:905
+#: src/useradd.c:921
 #, c-format
 msgid "%s: can't get unique UID\n"
 msgstr "%s: no es pot obtenir un UID únic\n"
 
-#: src/useradd.c:936
+#: src/useradd.c:977
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: el directori base «%s» no és vàlid\n"
 
-#: src/useradd.c:946
+#: src/useradd.c:988
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: el comentari «%s» no és vàlid\n"
 
-#: src/useradd.c:957
+#: src/useradd.c:1000
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: el directori home «%s» no és vàlid\n"
 
-#: src/useradd.c:975 src/usermod.c:768
+#: src/useradd.c:1018 src/usermod.c:771
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: la data «%s» no és vàlida\n"
 
-#: src/useradd.c:988
+#: src/useradd.c:1031
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: les contrasenyes ombra són requerides per a «-e»\n"
 
-#: src/useradd.c:1004
+#: src/useradd.c:1047
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: les contrasenyes ombra són requerides per a «-f»\n"
 
-#: src/useradd.c:1070 src/usermod.c:745 src/usermod.c:755 src/usermod.c:800
-#: src/usermod.c:844
+#: src/useradd.c:1113 src/usermod.c:748 src/usermod.c:758 src/usermod.c:803
+#: src/usermod.c:847
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: el camp «%s» no és vàlid\n"
 
-#: src/useradd.c:1081
+#: src/useradd.c:1126
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: l'intèrpret «%s» no és vàlid\n"
 
-#: src/useradd.c:1122
+#: src/useradd.c:1169
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
 
-#: src/useradd.c:1156 src/userdel.c:242 src/usermod.c:909
+#: src/useradd.c:1203 src/userdel.c:242 src/usermod.c:920
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: no es pot reescriure el fitxer de contrasenyes\n"
 
-#: src/useradd.c:1161 src/userdel.c:245 src/usermod.c:914
+#: src/useradd.c:1208 src/userdel.c:245 src/usermod.c:925
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: no es pot reescriure el fitxer de contrasenyes ombra\n"
 
-#: src/useradd.c:1197 src/userdel.c:289 src/usermod.c:942
+#: src/useradd.c:1244 src/userdel.c:289 src/usermod.c:953
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: no es pot bloquejar el fitxer de contrasenyes\n"
 
-#: src/useradd.c:1201 src/userdel.c:293 src/usermod.c:946
+#: src/useradd.c:1248 src/userdel.c:293 src/usermod.c:957
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: no es pot d'obrir el fitxer de contrasenyes\n"
 
-#: src/useradd.c:1207 src/userdel.c:298 src/usermod.c:951
+#: src/useradd.c:1254 src/userdel.c:298 src/usermod.c:962
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: no es pot bloquejar el fitxer de contrasenyes ombra\n"
 
-#: src/useradd.c:1213 src/userdel.c:303 src/usermod.c:956
+#: src/useradd.c:1260 src/userdel.c:303 src/usermod.c:967
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: no es pot obrir el fitxer de contrasenyes ombra\n"
 
-#: src/useradd.c:1300
+#: src/useradd.c:1347
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: s'ha produït un error en afegir la nova entrada de contrasenya\n"
 
-#: src/useradd.c:1310 src/usermod.c:1019
+#: src/useradd.c:1358 src/usermod.c:1030
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr ""
 "%s: s'ha produït un error en afegir la nova entrada de contrasenya ombra\n"
 
-#: src/useradd.c:1337
+#: src/useradd.c:1386
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: no es pot crear el directori %s\n"
 
-#: src/useradd.c:1367
+#: src/useradd.c:1416
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
 "No existeix el grup «mail», s'està creant la cua de correu amb mode 0600.\n"
 
-#: src/useradd.c:1390
+#: src/useradd.c:1439
 #, c-format
 msgid "Can't create mail spool for user %s.\n"
 msgstr "No es pot crear la cua de correu per a l'usuari %s.\n"
 
-#: src/useradd.c:1492 src/usermod.c:888
+#: src/useradd.c:1541 src/usermod.c:899
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: l'usuari %s existeix\n"
 
-#: src/useradd.c:1506
+#: src/useradd.c:1555
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
@@ -1780,7 +1785,7 @@ msgstr ""
 "%s: el grup %s existeix, si voleu afegir aquest usuari a aquest grup, useu «-"
 "g».\n"
 
-#: src/useradd.c:1544
+#: src/useradd.c:1593
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
@@ -1832,12 +1837,12 @@ msgstr "%s: %s no és propietat de %s, no s'elimina\n"
 msgid "%s: warning: can't remove "
 msgstr "%s: avís: no es pot eliminar "
 
-#: src/userdel.c:584 src/usermod.c:702
+#: src/userdel.c:584 src/usermod.c:701
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s: l'usuari %s no existeix\n"
 
-#: src/userdel.c:599 src/usermod.c:718
+#: src/userdel.c:599 src/usermod.c:717
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: l'usuari %s és un usuari NIS\n"
@@ -1852,102 +1857,107 @@ msgstr "%s: no s'elimina el directori %s (eliminaria el home de l'usuari %s)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: s'ha produït un error en eliminar el directori %s\n"
 
-#: src/usermod.c:279
+#: src/usermod.c:278
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
 msgstr "Forma d'ús: %s\t[-u uid [-o]] [-g grup] [-G grup,...]\n"
 
-#: src/usermod.c:283
+#: src/usermod.c:282
 #, c-format
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d home [-m]] [-s intèrpret] [-c comentari] [-l nom_nou]\n"
 
-#: src/usermod.c:285
+#: src/usermod.c:284
 #, c-format
 msgid "[-f inactive] [-e expire] "
 msgstr "[-f inactiu] [-e caduca] "
 
-#: src/usermod.c:286
+#: src/usermod.c:285
 #, c-format
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p contrasenya] [-L|-U] nom\n"
 
-#: src/usermod.c:458
+#: src/usermod.c:457
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s: sense memòria a update_group\n"
 
-#: src/usermod.c:567
+#: src/usermod.c:566
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s: sense memòria a update_gshadow\n"
 
-#: src/usermod.c:867
+#: src/usermod.c:870
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s: no s'han especificat senyaladors\n"
 
-#: src/usermod.c:873
+#: src/usermod.c:876
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: les contrasenyes ombra són requerides per a «-e» i «-f»\n"
 
-#: src/usermod.c:893
+#: src/usermod.c:886
+#, c-format
+msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgstr ""
+
+#: src/usermod.c:904
 #, c-format
 msgid "%s: uid %lu is not unique\n"
 msgstr "%s: l'UID %lu no és únic\n"
 
-#: src/usermod.c:1004
+#: src/usermod.c:1015
 #, c-format
 msgid "%s: error changing password entry\n"
 msgstr "%s: s'ha produït un error en canviar l'entrada de contrasenya\n"
 
-#: src/usermod.c:1010
+#: src/usermod.c:1021
 #, c-format
 msgid "%s: error removing password entry\n"
 msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya\n"
 
-#: src/usermod.c:1026
+#: src/usermod.c:1037
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr "%s: s'ha produït un error en eliminar l'entrada de contrasenya ombra\n"
 
-#: src/usermod.c:1053
+#: src/usermod.c:1064
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: el directori %s ja existeix\n"
 
-#: src/usermod.c:1061
+#: src/usermod.c:1072
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s: no es pot crear %s\n"
 
-#: src/usermod.c:1066
+#: src/usermod.c:1077
 #, c-format
 msgid "%s: can't chown %s\n"
 msgstr "%s: no es pot fer canviar el propietari a %s\n"
 
-#: src/usermod.c:1078
+#: src/usermod.c:1089
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 "%s: avís: no s'ha pogut eliminar completament l'antic directori home %s"
 
-#: src/usermod.c:1088
+#: src/usermod.c:1099
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: no es pot renombrar el directori %s a %s\n"
 
-#: src/usermod.c:1183
+#: src/usermod.c:1194
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: avís: %s no és propietat de %s\n"
 
-#: src/usermod.c:1189
+#: src/usermod.c:1200
 msgid "failed to change mailbox owner"
 msgstr "no s'ha pogut canviar el propietari de la bústia de correu"
 
-#: src/usermod.c:1197
+#: src/usermod.c:1208
 msgid "failed to rename mailbox"
 msgstr "no s'ha pogut renombrar la bústia de correu"
 
@@ -1983,3 +1993,26 @@ msgstr ""
 "Forma d'ús:\n"
 "«vipw» edita /etc/passwd        «vipw -s» edita /etc/shadow\n"
 "«vigr» edita /etc/group         «vigr -s» edita /etc/gshadow\n"
+
+#, fuzzy
+#~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "Forma d'ús: useradd [-u uid [-o]] [-g grup] [-G grup,...] \n"
+
+#~ msgid ""
+#~ "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+#~ msgstr ""
+#~ "                    [-d home] [-s intèrpret] [-c ordre] [-m [-k "
+#~ "plantilla]]\n"
+
+#~ msgid "               [-f inactive] [-e expire]\n"
+#~ msgstr "                    [-f inactiu] [-e caduca]\n"
+
+#, fuzzy
+#~ msgid "               [-p passwd] [-K KEY=VALUE] name\n"
+#~ msgstr "                    [-p contrasenya] nom\n"
+
+#~ msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+#~ msgstr "            useradd -D [-g grup] [-b base] [-s intèrpret]\n"
+
+#~ msgid "%s: -O requires NAME=VALUE\n"
+#~ msgstr "%s: «-O» requereix NOM=VALOR\n"

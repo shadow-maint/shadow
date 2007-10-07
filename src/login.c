@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.59 2005/06/20 09:36:27 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.66 2005/07/07 15:32:50 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -58,7 +58,7 @@ static pam_handle_t *pamh = NULL;
 
 #define PAM_FAIL_CHECK if (retcode != PAM_SUCCESS) { \
 	fprintf(stderr,"\n%s\n",pam_strerror(pamh, retcode)); \
-	syslog(LOG_ERR,"%s",pam_strerror(pamh, retcode)); \
+	SYSLOG((LOG_ERR,"%s",pam_strerror(pamh, retcode))); \
 	pam_end(pamh, retcode); exit(1); \
    }
 #define PAM_END { retcode = pam_close_session(pamh,0); \
@@ -277,9 +277,11 @@ static void init_env (void)
 
 	if ((tmp = getenv ("TZ"))) {
 		addenv ("TZ", tmp);
-	} else if ((cp = getdef_str ("ENV_TZ")))
+	} 
+#ifndef USE_PAM
+		else if ((cp = getdef_str ("ENV_TZ")))
 		addenv (*cp == '/' ? tz (cp) : cp, NULL);
-
+#endif /* !USE_PAM */
 	/* 
 	 * Add the clock frequency so that profiling commands work
 	 * correctly.
@@ -287,8 +289,11 @@ static void init_env (void)
 
 	if ((tmp = getenv ("HZ"))) {
 		addenv ("HZ", tmp);
-	} else if ((cp = getdef_str ("ENV_HZ")))
+	} 
+#ifndef USE_PAM
+		else if ((cp = getdef_str ("ENV_HZ")))
 		addenv (cp, NULL);
+#endif /* !USE_PAM */
 }
 
 
@@ -347,8 +352,7 @@ int main (int argc, char **argv)
 	int retcode;
 	pid_t child;
 	char *pam_user;
-#endif				/* USE_PAM */
-#ifndef USE_PAM
+#else
 	struct spwd *spwd = NULL;
 #endif
 	/*
@@ -371,8 +375,8 @@ int main (int argc, char **argv)
 
 	while ((flag = getopt (argc, argv, "d:f::h:pr:")) != EOF) {
 		switch (flag) {
-		case 'p':
-			pflg++;
+		case 'd':
+			/* "-d device" ignored for compatibility */
 			break;
 		case 'f':
 			/*
@@ -389,6 +393,11 @@ int main (int argc, char **argv)
 			if (optarg)
 				STRFCPY (username, optarg);
 			break;
+		case 'h':
+			hflg++;
+			hostname = optarg;
+			reason = PW_TELNET;
+			break;
 #ifdef	RLOGIN
 		case 'r':
 			rflg++;
@@ -396,13 +405,8 @@ int main (int argc, char **argv)
 			reason = PW_RLOGIN;
 			break;
 #endif
-		case 'h':
-			hflg++;
-			hostname = optarg;
-			reason = PW_TELNET;
-			break;
-		case 'd':
-			/* "-d device" ignored for compatibility */
+		case 'p':
+			pflg++;
 			break;
 		default:
 			usage ();
@@ -503,6 +507,7 @@ int main (int argc, char **argv)
 
 		setup_tty ();
 
+#ifndef USE_PAM
 		umask (getdef_num ("UMASK", 077));
 
 		{
@@ -519,6 +524,7 @@ int main (int argc, char **argv)
 				set_filesize_limit (limit);
 		}
 
+#endif
 		/*
 		 * The entire environment will be preserved if the -p flag
 		 * is used.
@@ -589,8 +595,8 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 				 "login: PAM Failure, aborting: %s\n",
 				 pam_strerror (pamh, retcode));
-			syslog (LOG_ERR, "Couldn't initialize PAM: %s",
-				pam_strerror (pamh, retcode));
+			SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
+				pam_strerror (pamh, retcode)));
 			exit (99);
 		}
 		/*
@@ -649,10 +655,10 @@ int main (int argc, char **argv)
 				(retcode == PAM_AUTHINFO_UNAVAIL))) {
 				pam_get_item (pamh, PAM_USER,
 					      (const void **) &pam_user);
-				syslog (LOG_NOTICE,
+				SYSLOG ((LOG_NOTICE,
 					"FAILED LOGIN %d FROM %s FOR %s, %s",
 					failcount, hostname, pam_user,
-					pam_strerror (pamh, retcode));
+					pam_strerror (pamh, retcode)));
 #ifdef HAVE_PAM_FAIL_DELAY
 				pam_fail_delay (pamh, 1000000 * delay);
 #endif
@@ -666,16 +672,16 @@ int main (int argc, char **argv)
 					      (const void **) &pam_user);
 
 				if (retcode == PAM_MAXTRIES)
-					syslog (LOG_NOTICE,
+					SYSLOG ((LOG_NOTICE,
 						"TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
 						failcount, hostname,
 						pam_user,
-						pam_strerror (pamh, retcode));
+						pam_strerror (pamh, retcode)));
 				else
-					syslog (LOG_NOTICE,
+					SYSLOG ((LOG_NOTICE,
 						"FAILED LOGIN SESSION FROM %s FOR %s, %s",
 						hostname, pam_user,
-						pam_strerror (pamh, retcode));
+						pam_strerror (pamh, retcode)));
 
 				fprintf (stderr, "\nLogin incorrect\n");
 				pam_end (pamh, retcode);

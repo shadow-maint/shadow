@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.28 2005/06/20 09:57:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupmod.c,v 1.29 2005/07/07 15:11:48 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -297,7 +297,7 @@ static void process_flags (int argc, char **argv)
 	char *end;
 	int arg;
 
-	while ((arg = getopt (argc, argv, "og:n:")) != EOF) {
+	while ((arg = getopt (argc, argv, "g:n:o")) != EOF) {
 		switch (arg) {
 		case 'g':
 			gflg++;

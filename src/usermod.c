@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.42 2005/06/20 10:17:10 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.47 2005/07/07 15:11:48 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -51,8 +51,14 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.42 2005/06/20 10:17:10 kloczek Exp $")
 #include "faillog.h"
 #include <lastlog.h>
 #include "pwauth.h"
-#include "nscd.h"
 #include "getdef.h"
+#include "groupio.h"
+#include "nscd.h"
+#include "pwio.h"
+#ifdef	SHADOWGRP
+#include "sgroupio.h"
+#endif
+#include "shadowio.h"
 /*
  * exit status values
  * for E_GRP_UPDATE and E_NOSPACE (not used yet), other update requests
@@ -91,20 +97,21 @@ static char **user_groups;	/* NULL-terminated list */
 static char *Prog;
 
 static int
- uflg = 0,			/* specify new user ID */
-    oflg = 0,			/* permit non-unique user ID to be specified with -u */
+ aflg = 0,			/* append to existing secondary group set */
+    cflg = 0,			/* new comment (GECOS) field */
+    dflg = 0,			/* new home directory */
+    eflg = 0,			/* days since 1970-01-01 when account becomes expired */
+    fflg = 0,			/* days until account with expired password is locked */
     gflg = 0,			/* new primary group ID */
     Gflg = 0,			/* new secondary group set */
-    dflg = 0,			/* new home directory */
-    sflg = 0,			/* new shell program */
-    cflg = 0,			/* new comment (GECOS) field */
-    mflg = 0,			/* create user's home directory if it doesn't exist */
-    fflg = 0,			/* days until account with expired password is locked */
-    eflg = 0,			/* days since 1970-01-01 when account becomes expired */
     Lflg = 0,			/* lock the password */
-    Uflg = 0,			/* unlock the password */
+    lflg = 0,			/* new user name */
+    mflg = 0,			/* create user's home directory if it doesn't exist */
+    oflg = 0,			/* permit non-unique user ID to be specified with -u */
     pflg = 0,			/* new encrypted password */
-    lflg = 0;			/* new user name */
+    sflg = 0,			/* new shell program */
+    uflg = 0,			/* specify new user ID */
+    Uflg = 0;			/* unlock the password */
 
 static int is_shadow_pwd;
 
@@ -112,14 +119,6 @@ static int is_shadow_pwd;
 static int is_shadow_grp;
 #endif
 
-#include "groupio.h"
-
-#ifdef	SHADOWGRP
-#include "sgroupio.h"
-#endif
-
-#include "pwio.h"
-#include "shadowio.h"
 
 /* local function prototypes */
 static int get_groups (char *);
@@ -276,7 +275,7 @@ static void usage (void)
 {
 	fprintf (stderr,
 		 _
-		 ("Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"),
+		 ("Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"),
 		 Prog);
 	fprintf (stderr,
 		 _
@@ -473,7 +472,7 @@ static int update_group (void)
 					 user_name, user_newname,
 					 ngrp->gr_name));
 			}
-		} else if (was_member && Gflg && !is_member) {
+		} else if (was_member && !aflg && Gflg && !is_member) {
 			ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 			changed = 1;
 			SYSLOG ((LOG_INFO, "delete `%s' from group `%s'",
@@ -590,7 +589,7 @@ static int update_gshadow (void)
 					 user_name, user_newname,
 					 nsgrp->sg_name));
 			}
-		} else if (was_member && Gflg && !is_member) {
+		} else if (was_member && !aflg && Gflg && !is_member) {
 			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 			changed = 1;
 			SYSLOG ((LOG_INFO,
@@ -737,8 +736,12 @@ static void process_flags (int argc, char **argv)
 		user_inactive = spwd->sp_inact;
 	}
 
-	while ((arg = getopt (argc, argv, "A:u:og:G:d:s:c:mf:e:l:p:LU")) != EOF) {
+	while ((arg =
+		getopt (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U")) != EOF) {
 		switch (arg) {
+		case 'a':
+			aflg++;
+			break;
 		case 'c':
 			if (!VALID (optarg)) {
 				fprintf (stderr,
@@ -877,6 +880,14 @@ static void process_flags (int argc, char **argv)
 
 	if (optind != argc - 1)
 		usage ();
+
+	if (aflg && (!Gflg)) {
+		fprintf (stderr,
+			 _("%s: -a flag is ONLY allowed with the -G flag\n"),
+			 Prog);
+		usage ();
+		exit (E_USAGE);
+	}
 
 	if (dflg && strcmp (user_home, user_newhome) == 0)
 		dflg = mflg = 0;

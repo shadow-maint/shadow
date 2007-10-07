@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.9 2005/06/16 16:01:21 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.11 2005/07/07 14:25:48 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -29,6 +29,7 @@
           <arg choice='plain' rep='repeat'><replaceable>,group2,</replaceable></arg>
           <arg choice='plain'><replaceable>,</replaceable></arg>
           <arg choice='opt'><replaceable>groupN</replaceable></arg>
+	  <arg choice='opt'>-a</arg>
         </arg>
       </arg>
       <arg choice='opt'>-l <replaceable>login_name</replaceable></arg>
@@ -134,7 +135,8 @@
             same restrictions as the group given with the
             <option>-g</option> option. If the user is currently a member of
             a group which is not listed, the user will be removed from the
-            group.
+            group. This behaviour can be changed via <option>-a</option> option,
+            which appends user to the current supplementary group list.
           </para>
         </listitem>
       </varlistentry>
@@ -270,6 +272,9 @@
       </citerefentry>,
       <citerefentry>
         <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
         <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>

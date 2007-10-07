@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.32 2005/06/20 10:17:08 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.34 2005/07/08 17:58:55 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -61,6 +61,35 @@ static void usage (void)
 		fprintf (stderr, _("Usage: newgrp [-] [group]\n"));
 	else
 		fprintf (stderr, _("Usage: sg group [[-c] command]\n"));
+}
+
+/*
+ * find_matching_group - search all groups of a given group id for
+ *                       membership of a given username
+ */
+
+static struct group *find_matching_group (const char *name, gid_t gid)
+{
+	struct group *gr;
+	char **look;
+	int notfound = 1;
+
+	setgrent ();
+	while ((gr = getgrent ()) != NULL) {
+		if (gr->gr_gid != gid) {
+			continue;
+		}
+		/*
+		 * A group with matching GID was found.
+		 * Test for membership of 'name'.
+		 */
+		look = gr->gr_mem;
+		while (*look && (notfound = strcmp (*look++, name)));
+		if (!notfound)
+			break;
+	}
+	endgrent ();
+	return gr;
 }
 
 /*
@@ -288,6 +317,23 @@ int main (int argc, char **argv)
 	if (!(grp = getgrnam (group))) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 		goto failure;
+	}
+
+	/*
+	 * For splitted groups (due to limitations of NIS), check all 
+	 * groups of the same GID like the requested group for
+	 * membership of the current user.
+	 */
+	grp = find_matching_group (name, grp->gr_gid);
+	if (!grp) {
+		/*
+		 * No matching group found. As we already know that
+		 * the group exists, this happens only in the case
+		 * of a requested group where the user is not member.
+		 *
+		 * Re-read the group entry for further processing.
+		 */
+		grp = getgrnam (group);
 	}
 #ifdef SHADOWGRP
 	if ((sgrp = getsgnam (group))) {

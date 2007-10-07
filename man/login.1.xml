@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.9 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.10 2005/07/10 20:10:09 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>LOGIN</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -96,6 +96,17 @@
       used as the root of a new file system which the user is actually
       logged into.
     </para>
+
+    <para>The <command>login</command> program is NOT responsible for
+      removing users from the utmp file. It is the responsibility of
+      <refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum> and
+      <refentrytitle>init</refentrytitle><manvolnum>8</manvolnum> to clean
+      up apparent ownership of a terminal session. If you use
+      <command>login</command> from the shell prompt without
+      <command>exec</command>, the user you use will continue to appear to
+      be logged in even after you log out of the "subsession".
+    </para>
+
   </refsect1>
   
   <refsect1 id='options'>

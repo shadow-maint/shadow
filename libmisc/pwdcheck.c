@@ -1,10 +1,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: pwdcheck.c,v 1.6 2005/05/25 18:20:22 kloczek Exp $")
+RCSID ("$Id: pwdcheck.c,v 1.7 2005/07/18 12:55:36 kloczek Exp $")
+#include <pwd.h>
+#include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
 #include "pwauth.h"
 #ifdef HAVE_SHADOW_H
 #include <shadow.h>

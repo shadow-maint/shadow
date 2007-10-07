@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.11 2005/05/25 18:20:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.12 2005/07/07 15:32:50 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -219,17 +219,17 @@ int main (int argc, char **argv)
 
 	while ((flag = getopt (argc, argv, "ghps")) != EOF) {
 		switch (flag) {
-		case 'p':
-			do_vipw = 1;
-			break;
 		case 'g':
 			do_vipw = 0;
+			break;
+		case 'h':
+			e = 0;
+		case 'p':
+			do_vipw = 1;
 			break;
 		case 's':
 			editshadow = 1;
 			break;
-		case 'h':
-			e = 0;
 		default:
 			printf (_("Usage:\n\
 `vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n\

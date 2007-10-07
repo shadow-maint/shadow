@@ -24,7 +24,13 @@ pwck \- verify integrity of password files
 .ad l
 .hy 0
 .HP 5
-\fBpwck\fR [\-sr] [\fIpasswd\fR\ \fIshadow\fR]
+\fBpwck\fR [\-q] [\-s] [\fIpasswd\fR\ \fIshadow\fR]
+.ad
+.hy
+.ad l
+.hy 0
+.HP 5
+\fBpwck\fR [\-r] [\fIpasswd\fR\ \fIshadow\fR]
 .ad
 .hy
 
@@ -65,7 +71,22 @@ The commands which operate on the \fI/etc/passwd\fR file are not able to alter c
 .SH "OPTIONS"
 
 .PP
-By default, \fBpwck\fR operates on the files \fI/etc/passwd\fR and \fI/etc/shadow\fR\&. The user may select alternate files with the \fIpasswd\fR and \fIshadow\fR parameters\&. Additionally, the user may execute the command in read\-only mode by specifying the \fB\-r\fR flag\&. This causes all questions regarding changes to be answered \fIno\fR without user intervention\&. \fBpwck\fR can also sort entries in \fI/etc/passwd\fR and \fI/etc/shadow\fR by UID\&. To run it in sort mode pass it \fB\-s\fR flag\&. No checks are performed then, it just sorts\&.
+The options which apply to the \fBpwck\fR command are:
+
+.TP
+\fB\-q\fR
+Report errors only\&. Using this option will not require an action from the user\&.
+
+.TP
+\fB\-r\fR
+Execute the \fBpwck\fR command in read\-only mode\&.
+
+.TP
+\fB\-s\fR
+Sort entries in \fI/etc/passwd\fR and \fI/etc/shadow\fR by UID\&.
+
+.PP
+By default, \fBpwck\fR operates on the files \fI/etc/passwd\fR and \fI/etc/shadow\fR\&. The user may select alternate files with the \fIpasswd\fR and \fIshadow\fR parameters\&.
 
 .SH "FILES"
 

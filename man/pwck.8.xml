@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.8 2005/06/16 20:09:08 kloczek Exp $ -->
+  <!-- $Id: pwck.8.xml,v 1.9 2005/07/12 16:28:14 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -15,7 +15,20 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>pwck</command>
-      <arg choice='opt'>-sr </arg>
+      <arg choice='opt'>-q </arg>
+      <arg choice='opt'>-s </arg>
+      <arg choice='opt'>
+        <arg choice='plain'>
+          <replaceable>passwd</replaceable>
+        </arg>
+        <arg choice='plain'>
+          <replaceable>shadow</replaceable>
+        </arg>
+      </arg>
+    </cmdsynopsis>
+    <cmdsynopsis>
+      <command>pwck</command>
+      <arg choice='opt'>-r </arg>
       <arg choice='opt'>
         <arg choice='plain'>
           <replaceable>passwd</replaceable>
@@ -79,18 +92,49 @@
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
+      The options which apply to the <command>pwck</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+        <term>
+          <option>-q</option>
+        </term>
+        <listitem>
+          <para>
+	    Report errors only. Using this option will not require an action
+	    from the user.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-r</option>
+        </term>
+        <listitem>
+          <para>
+	    Execute the <command>pwck</command> command in read-only mode.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-s</option>
+        </term>
+        <listitem>
+          <para>
+	    Sort entries in <filename>/etc/passwd</filename> and
+	    <filename>/etc/shadow</filename> by UID.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>
       By default, <command>pwck</command> operates on the files
       <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>. 
       The user may select alternate files with the <emphasis
       remap='I'>passwd</emphasis> and <emphasis remap='I'>shadow</emphasis>
-      parameters. Additionally, the user may execute the command in
-      read-only mode by specifying the <option>-r</option> flag. This causes
-      all questions regarding changes to be answered <emphasis
-      remap='B'>no</emphasis> without user intervention. 
-      <command>pwck</command> can also sort entries in
-      <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
-      by UID. To run it in sort mode pass it <option>-s</option> flag. No
-      checks are performed then, it just sorts.
+      parameters.
     </para>
   </refsect1>
   

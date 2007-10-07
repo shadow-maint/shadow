@@ -52,20 +52,19 @@ ARFLAGS = cru
 libmisc_a_AR = $(AR) $(ARFLAGS)
 libmisc_a_LIBADD =
 am_libmisc_a_OBJECTS = addgrps.$(OBJEXT) age.$(OBJEXT) \
-	basename.$(OBJEXT) chkname.$(OBJEXT) chkshell.$(OBJEXT) \
-	chowndir.$(OBJEXT) chowntty.$(OBJEXT) console.$(OBJEXT) \
-	copydir.$(OBJEXT) entry.$(OBJEXT) env.$(OBJEXT) \
-	failure.$(OBJEXT) fields.$(OBJEXT) getdate.$(OBJEXT) \
-	hushed.$(OBJEXT) isexpired.$(OBJEXT) limits.$(OBJEXT) \
-	list.$(OBJEXT) log.$(OBJEXT) loginprompt.$(OBJEXT) \
-	mail.$(OBJEXT) motd.$(OBJEXT) myname.$(OBJEXT) \
-	obscure.$(OBJEXT) pam_pass.$(OBJEXT) pwd2spwd.$(OBJEXT) \
-	pwdcheck.$(OBJEXT) pwd_init.$(OBJEXT) rlogin.$(OBJEXT) \
-	salt.$(OBJEXT) setugid.$(OBJEXT) setupenv.$(OBJEXT) \
-	shell.$(OBJEXT) strtoday.$(OBJEXT) sub.$(OBJEXT) \
-	sulog.$(OBJEXT) ttytype.$(OBJEXT) tz.$(OBJEXT) \
-	ulimit.$(OBJEXT) utmp.$(OBJEXT) valid.$(OBJEXT) \
-	xmalloc.$(OBJEXT)
+	basename.$(OBJEXT) chkname.$(OBJEXT) chowndir.$(OBJEXT) \
+	chowntty.$(OBJEXT) console.$(OBJEXT) copydir.$(OBJEXT) \
+	entry.$(OBJEXT) env.$(OBJEXT) failure.$(OBJEXT) \
+	fields.$(OBJEXT) getdate.$(OBJEXT) hushed.$(OBJEXT) \
+	isexpired.$(OBJEXT) limits.$(OBJEXT) list.$(OBJEXT) \
+	log.$(OBJEXT) loginprompt.$(OBJEXT) mail.$(OBJEXT) \
+	motd.$(OBJEXT) myname.$(OBJEXT) obscure.$(OBJEXT) \
+	pam_pass.$(OBJEXT) pwd2spwd.$(OBJEXT) pwdcheck.$(OBJEXT) \
+	pwd_init.$(OBJEXT) rlogin.$(OBJEXT) salt.$(OBJEXT) \
+	setugid.$(OBJEXT) setupenv.$(OBJEXT) shell.$(OBJEXT) \
+	strtoday.$(OBJEXT) sub.$(OBJEXT) sulog.$(OBJEXT) \
+	ttytype.$(OBJEXT) tz.$(OBJEXT) ulimit.$(OBJEXT) utmp.$(OBJEXT) \
+	valid.$(OBJEXT) xmalloc.$(OBJEXT)
 libmisc_a_OBJECTS = $(am_libmisc_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -127,10 +126,12 @@ LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBICONV = @LIBICONV@
 LIBINTL = @LIBINTL@
+LIBMD = @LIBMD@
 LIBOBJS = @LIBOBJS@
 LIBPAM = @LIBPAM@
 LIBS = @LIBS@
 LIBSELINUX = @LIBSELINUX@
+LIBSKEY = @LIBSKEY@
 LIBTOOL = @LIBTOOL@
 LN_S = @LN_S@
 LTLIBICONV = @LTLIBICONV@
@@ -213,7 +214,6 @@ libmisc_a_SOURCES = \
 	basename.c \
 	chkname.c \
 	chkname.h \
-	chkshell.c \
 	chowndir.c \
 	chowntty.c \
 	console.c \
@@ -304,7 +304,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/age.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basename.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chkname.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chkshell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chowndir.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chowntty.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/console.Po@am__quote@

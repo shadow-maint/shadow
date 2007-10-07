@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.47 2005/06/20 15:43:09 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.49 2005/07/11 16:12:38 kloczek Exp $")
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -77,8 +77,13 @@ static long expdays;
 
 #define	EPOCH		"1969-12-31"
 
+
+/*
+ * exit status values
+ */
 #define E_SUCCESS	0	/* success */
 #define E_NOPERM	1	/* permission denied */
+#define E_USAGE 	2	/* invalid command syntax */
 
 /* local function prototypes */
 static void usage (void);
@@ -121,7 +126,7 @@ static void usage (void)
 			   "  -M, --maxdays MAX_DAYS	set maximim number of days before password\n"
 			   "				change to MAX_DAYS\n"
 			   "  -W, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"));
-	exit (1);
+	exit (E_USAGE);
 }
 
 static void date_to_str (char *buf, size_t maxsize, time_t date)
@@ -547,7 +552,7 @@ int main (int argc, char **argv)
 	 */
 	if (locks && !spw_lock ()) {
 		fprintf (stderr,
-			 _("%s: can't lock shadow password file"), Prog);
+			 _("%s: can't lock shadow password file\n"), Prog);
 		cleanup (1);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
 		closelog ();
@@ -555,7 +560,7 @@ int main (int argc, char **argv)
 	}
 	if (!spw_open (locks ? O_RDWR : O_RDONLY)) {
 		fprintf (stderr,
-			 _("%s: can't open shadow password file"), Prog);
+			 _("%s: can't open shadow password file\n"), Prog);
 		cleanup (2);
 		SYSLOG ((LOG_ERR, "failed opening %s", SHADOW_FILE));
 		closelog ();
@@ -752,5 +757,4 @@ int main (int argc, char **argv)
 
 	closelog ();
 	exit (E_SUCCESS);
-	/* NOTREACHED */
 }

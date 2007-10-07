@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupadd.8'>
-  <!-- $Id: groupadd.8.xml,v 1.8 2005/06/16 16:18:27 kloczek Exp $ -->
+  <!-- $Id: groupadd.8.xml,v 1.11 2005/07/07 19:25:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupadd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -20,6 +20,7 @@
         <arg choice='opt'>-o </arg>
       </arg>
       <arg choice='opt'>-f </arg>
+      <arg choice='opt'>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></arg>
       <arg choice='plain'>
         <replaceable>group</replaceable>
       </arg>
@@ -66,6 +67,33 @@
             Values between 0 and 999 are typically reserved for system
             accounts.
           </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></option>
+        </term>
+        <listitem>
+	  <para>
+	    Overrides /etc/login.defs defaults (GID_MIN, GID_MAX and others). Multiple
+	    <option>-K</option> options can be specified, e.g.: <option>-K</option>
+	    <replaceable>GID_MIN</replaceable>=<replaceable>100</replaceable>
+	    <option>-K</option> <replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	  </para>
+	  <para>
+	    Note: <option>-K</option> <replaceable>GID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	    doesn't work yet.
+	  </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>
+          <option>-o</option>
+        </term>
+        <listitem>
+          <para>
+	    Allow add group wit non-unique GID.
+	  </para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -128,6 +156,9 @@
       </citerefentry>,
       <citerefentry>
         <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
         <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>

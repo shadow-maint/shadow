@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: sulogin.c,v 1.18 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: sulogin.c,v 1.20 2005/07/06 11:33:06 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -108,7 +108,7 @@ static RETSIGTYPE catch (int sig)
 			dup (0);
 		} else {
 #ifdef	USE_SYSLOG
-			syslog (LOG_WARN, "cannot open %s\n", argv[1]);
+			SYSLOG (LOG_WARN, "cannot open %s\n", argv[1]);
 			closelog ();
 #endif
 			exit (1);
@@ -117,7 +117,7 @@ static RETSIGTYPE catch (int sig)
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
 		printf (_("No password file\n"));
 #ifdef	USE_SYSLOG
-		syslog (LOG_WARN, "No password file\n");
+		SYSLOG (LOG_WARN, "No password file\n");
 		closelog ();
 #endif
 		exit (1);
@@ -125,7 +125,7 @@ static RETSIGTYPE catch (int sig)
 #if !defined(DEBUG) && defined(SULOGIN_ONLY_INIT)
 	if (getppid () != 1) {	/* parent must be INIT */
 #ifdef	USE_SYSLOG
-		syslog (LOG_WARN, "Pid == %d, not 1\n", getppid ());
+		SYSLOG (LOG_WARN, "Pid == %d, not 1\n", getppid ());
 		closelog ();
 #endif
 		exit (1);
@@ -140,10 +140,14 @@ static RETSIGTYPE catch (int sig)
 	while (*envp)		/* add inherited environment, */
 		addenv (*envp++, NULL);	/* some variables change later */
 
+#ifndef USE_PAM
+
 	if ((cp = getdef_str ("ENV_TZ")))
 		addenv (*cp == '/' ? tz (cp) : cp, NULL);
 	if ((cp = getdef_str ("ENV_HZ")))
 		addenv (cp, NULL);	/* set the default $HZ, if one */
+#endif				/* !USE_PAM */
+
 	(void) strcpy (name, "root");	/* KLUDGE!!! */
 
 	signal (SIGALRM, catch);	/* exit if the timer expires */
@@ -159,7 +163,7 @@ static RETSIGTYPE catch (int sig)
 
 			printf (_("No password entry for 'root'\n"));
 #ifdef	USE_SYSLOG
-			syslog (LOG_WARN, "No password entry for 'root'\n");
+			SYSLOG (LOG_WARN, "No password entry for 'root'\n");
 			closelog ();
 #endif
 			exit (1);
@@ -181,7 +185,7 @@ static RETSIGTYPE catch (int sig)
 		 */
 		if (!cp || !*cp) {
 #ifdef	USE_SYSLOG
-			syslog (LOG_INFO, "Normal startup\n");
+			SYSLOG (LOG_INFO, "Normal startup\n");
 			closelog ();
 #endif
 			puts ("\n");
@@ -197,7 +201,7 @@ static RETSIGTYPE catch (int sig)
 			break;	/* ... encrypted passwords matched */
 
 #ifdef	USE_SYSLOG
-		syslog (LOG_WARN, "Incorrect root password\n");
+		SYSLOG (LOG_WARN, "Incorrect root password\n");
 #endif
 		sleep (2);
 		puts (_("Login incorrect"));
@@ -209,7 +213,7 @@ static RETSIGTYPE catch (int sig)
 
 	puts (_("Entering System Maintenance Mode\n"));
 #ifdef	USE_SYSLOG
-	syslog (LOG_INFO, "System Maintenance Mode\n");
+	SYSLOG (LOG_INFO, "System Maintenance Mode\n");
 #endif
 
 #ifdef	USE_SYSLOG

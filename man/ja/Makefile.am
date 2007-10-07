@@ -45,5 +45,4 @@ EXTRA_DIST = $(man_MANS) \
 	id.1 \
 	pw_auth.3 \
 	shadow.3 \
-	shadowconfig.8 \
 	sulogin.8

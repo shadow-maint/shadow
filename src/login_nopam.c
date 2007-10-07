@@ -23,7 +23,7 @@
 
 #ifndef USE_PAM
 #include "rcsid.h"
-RCSID ("$Id: login_nopam.c,v 1.3 2005/04/17 15:38:56 kloczek Exp $")
+RCSID ("$Id: login_nopam.c,v 1.5 2005/07/02 17:53:06 kloczek Exp $")
 #include "prototypes.h"
     /*
      * This module implements a simple but effective form of login access
@@ -103,9 +103,9 @@ int login_access (const char *user, const char *from)
 		while (!match && fgets (line, sizeof (line), fp)) {
 			lineno++;
 			if (line[end = strlen (line) - 1] != '\n') {
-				syslog (LOG_ERR,
+				SYSLOG ((LOG_ERR,
 					"%s: line %d: missing newline or line too long",
-					TABLE, lineno);
+					TABLE, lineno));
 				continue;
 			}
 			if (line[0] == '#')
@@ -119,15 +119,15 @@ int login_access (const char *user, const char *from)
 			    || !(users = strtok ((char *) 0, fs))
 			    || !(froms = strtok ((char *) 0, fs))
 			    || strtok ((char *) 0, fs)) {
-				syslog (LOG_ERR,
+				SYSLOG ((LOG_ERR,
 					"%s: line %d: bad field count",
-					TABLE, lineno);
+					TABLE, lineno));
 				continue;
 			}
 			if (perm[0] != '+' && perm[0] != '-') {
-				syslog (LOG_ERR,
+				SYSLOG ((LOG_ERR,
 					"%s: line %d: bad first field",
-					TABLE, lineno);
+					TABLE, lineno));
 				continue;
 			}
 			match = (list_match (froms, from, from_match)
@@ -135,7 +135,7 @@ int login_access (const char *user, const char *from)
 		}
 		(void) fclose (fp);
 	} else if (errno != ENOENT) {
-		syslog (LOG_ERR, "cannot open %s: %m", TABLE);
+		SYSLOG ((LOG_ERR, "cannot open %s: %m", TABLE));
 	}
 	return (match == 0 || (line[0] == '+'));
 }
@@ -262,7 +262,7 @@ char *string;
 	if (hp)
 		return inet_ntoa (*((struct in_addr *) *(hp->h_addr_list)));
 
-	syslog (LOG_ERR, "%s - unknown host", string);
+	SYSLOG ((LOG_ERR, "%s - unknown host", string));
 	return string;
 }
 

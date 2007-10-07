@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: logoutd.c,v 1.25 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: logoutd.c,v 1.26 2005/07/05 20:17:51 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -153,15 +153,7 @@ int main (int argc, char **argv)
 #ifndef DEBUG
 	for (i = 0; close (i) == 0; i++);
 
-#ifdef HAVE_SETPGRP
-#ifdef SETPGRP_VOID
-	setpgrp ();		/* USG */
-#else
-	setpgrp (getpid (), getpid ());
-#endif
-#else				/* !HAVE_SETPGRP */
-	setpgid (getpid (), getpid ());	/* BSD || SUN || SUN4 */
-#endif				/* !HAVE_SETPGRP */
+	setpgrp ();
 
 	/*
 	 * Put this process in the background.

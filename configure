@@ -462,7 +462,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE LN_S YACC CPP EGREP U ANSI2KNR build build_cpu build_vendor build_os host host_cpu host_vendor host_os ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL LIBOBJS LIBCRYPT LIBCRACK LIBSELINUX LIBPAM MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE INTL_MACOSX_LIBS LIBICONV LTLIBICONV INTLLIBS LIBINTL LTLIBINTL POSUB LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE LN_S YACC CPP EGREP U ANSI2KNR build build_cpu build_vendor build_os host host_cpu host_vendor host_os ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CXX CXXFLAGS ac_ct_CXX CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE CXXCPP F77 FFLAGS ac_ct_F77 LIBTOOL LIBOBJS LIBCRYPT LIBCRACK LIBSELINUX LIBPAM LIBSKEY LIBMD MKINSTALLDIRS USE_NLS MSGFMT GMSGFMT XGETTEXT MSGMERGE INTL_MACOSX_LIBS LIBICONV LTLIBICONV INTLLIBS LIBINTL LTLIBINTL POSUB LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1047,9 +1047,9 @@ Optional Packages:
   --with-tags[=TAGS]
                           include additional configurations [automatic]
   --with-libcrack	try to use libcrack (default if found)
-  --with-libcrypt	try to use libcrypt (default if found)
   --with-libpam 		use libpam for PAM support
   --with-selinux		use SELinux support
+  --with-skey		use S/Key support
   --with-gnu-ld           assume the C compiler uses GNU ld default=no
   --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
   --without-libiconv-prefix     don't search for libiconv in includedir and libdir
@@ -1815,7 +1815,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.10
+ VERSION=4.0.11
 
 
 cat >>confdefs.h <<_ACEOF
@@ -21954,7 +21954,8 @@ echo "$as_me:$LINENO: result: $ac_cv_struct_utmp_ut_host" >&5
 echo "${ECHO_T}$ac_cv_struct_utmp_ut_host" >&6
 
 	if test "$ac_cv_struct_utmp_ut_host" = "yes"; then
-		cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define UT_HOST 1
 _ACEOF
 
@@ -22018,7 +22019,8 @@ echo "$as_me:$LINENO: result: $ac_cv_struct_utmp_ut_user" >&5
 echo "${ECHO_T}$ac_cv_struct_utmp_ut_user" >&6
 
 	if test "$ac_cv_struct_utmp_ut_user" = "no"; then
-		cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define ut_user ut_name
 _ACEOF
 
@@ -22084,7 +22086,8 @@ echo "$as_me:$LINENO: result: $ac_cv_struct_lastlog_ll_host" >&5
 echo "${ECHO_T}$ac_cv_struct_lastlog_ll_host" >&6
 
 	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
-		cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define HAVE_LL_HOST 1
 _ACEOF
 
@@ -22993,7 +22996,7 @@ fi
 
 
 if test "$ac_cv_header_shadow_h" = "yes"; then
-echo "$as_me:$LINENO: checking for working shadow group support" >&5
+	echo "$as_me:$LINENO: checking for working shadow group support" >&5
 echo $ECHO_N "checking for working shadow group support... $ECHO_C" >&6
 if test "${ac_cv_libc_shadowgrp+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
@@ -23009,13 +23012,13 @@ cat confdefs.h >>conftest.$ac_ext
 cat >>conftest.$ac_ext <<_ACEOF
 /* end confdefs.h.  */
 
-			#include <shadow.h>
-			main()
-			{
-				struct sgrp *sg = sgetsgent("test:x::");
-				/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
-				return !sg || !sg->sg_adm || !sg->sg_mem;
-			}
+				#include <shadow.h>
+				main()
+				{
+					struct sgrp *sg = sgetsgent("test:x::");
+					/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
+					return !sg || !sg->sg_adm || !sg->sg_mem;
+				}
 
 _ACEOF
 rm -f conftest$ac_exeext
@@ -23045,12 +23048,13 @@ fi
 echo "$as_me:$LINENO: result: $ac_cv_libc_shadowgrp" >&5
 echo "${ECHO_T}$ac_cv_libc_shadowgrp" >&6
 
-if test "$ac_cv_libc_shadowgrp" = "yes"; then
-	cat >>confdefs.h <<\_ACEOF
+	if test "$ac_cv_libc_shadowgrp" = "yes"; then
+
+cat >>confdefs.h <<\_ACEOF
 #define HAVE_SHADOWGRP 1
 _ACEOF
 
-fi
+	fi
 fi
 
 echo "$as_me:$LINENO: checking location of shared mail directory" >&5
@@ -23067,7 +23071,8 @@ fi
 echo "$as_me:$LINENO: result: $shadow_cv_maildir" >&5
 echo "${ECHO_T}$shadow_cv_maildir" >&6
 if test $shadow_cv_maildir != none; then
-	cat >>confdefs.h <<_ACEOF
+
+cat >>confdefs.h <<_ACEOF
 #define MAIL_SPOOL_DIR "$shadow_cv_maildir"
 _ACEOF
 
@@ -23087,7 +23092,8 @@ fi
 echo "$as_me:$LINENO: result: $shadow_cv_mailfile" >&5
 echo "${ECHO_T}$shadow_cv_mailfile" >&6
 if test $shadow_cv_mailfile != none; then
-	cat >>confdefs.h <<_ACEOF
+
+cat >>confdefs.h <<_ACEOF
 #define MAIL_SPOOL_FILE "$shadow_cv_mailfile"
 _ACEOF
 
@@ -23110,6 +23116,7 @@ if test "$shadow_cv_utmpdir" = "none"; then
 	{ echo "$as_me:$LINENO: WARNING: utmp file not found" >&5
 echo "$as_me: WARNING: utmp file not found" >&2;}
 fi
+
 cat >>confdefs.h <<_ACEOF
 #define _UTMP_FILE "$shadow_cv_utmpdir/utmp"
 _ACEOF
@@ -23128,13 +23135,16 @@ done
 fi
 echo "$as_me:$LINENO: result: $shadow_cv_logdir" >&5
 echo "${ECHO_T}$shadow_cv_logdir" >&6
+
 cat >>confdefs.h <<_ACEOF
 #define _WTMP_FILE "$shadow_cv_logdir/wtmp"
 _ACEOF
 
+
 cat >>confdefs.h <<_ACEOF
 #define LASTLOG_FILE "$shadow_cv_logdir/lastlog"
 _ACEOF
+
 
 cat >>confdefs.h <<_ACEOF
 #define FAILLOG_FILE "$shadow_cv_logdir/faillog"
@@ -23154,26 +23164,27 @@ fi
 fi
 echo "$as_me:$LINENO: result: $shadow_cv_passwd_dir" >&5
 echo "${ECHO_T}$shadow_cv_passwd_dir" >&6
+
 cat >>confdefs.h <<_ACEOF
 #define PASSWD_PROGRAM "$shadow_cv_passwd_dir/passwd"
 _ACEOF
 
 
-cat >>confdefs.h <<\_ACEOF
-#define USG 1
-_ACEOF
 
 cat >>confdefs.h <<\_ACEOF
 #define USE_SYSLOG 1
 _ACEOF
 
+
 cat >>confdefs.h <<\_ACEOF
 #define RLOGIN 1
 _ACEOF
 
+
 cat >>confdefs.h <<\_ACEOF
 #define RUSEROK 0
 _ACEOF
+
 
 
 cat >>confdefs.h <<\_ACEOF
@@ -23194,12 +23205,6 @@ if test "${with_libcrack+set}" = set; then
 
 fi;
 
-# Check whether --with-libcrypt or --without-libcrypt was given.
-if test "${with_libcrypt+set}" = set; then
-  withval="$with_libcrypt"
-
-fi;
-
 # Check whether --with-libpam or --without-libpam was given.
 if test "${with_libpam+set}" = set; then
   withval="$with_libpam"
@@ -23209,6 +23214,12 @@ fi;
 # Check whether --with-selinux or --without-selinux was given.
 if test "${with_selinux+set}" = set; then
   withval="$with_selinux"
+
+fi;
+
+# Check whether --with-skey or --without-skey was given.
+if test "${with_skey+set}" = set; then
+  withval="$with_skey"
 
 fi;
 
@@ -23592,16 +23603,16 @@ if test "$ac_cv_search_gethostbyname" != no; then
 fi
 
 
-if test "$enable_shadowgrp" != "no"; then
-	cat >>confdefs.h <<\_ACEOF
+if test "$enable_shadowgrp" = "yes"; then
+
+cat >>confdefs.h <<\_ACEOF
 #define SHADOWGRP 1
 _ACEOF
 
 fi
 
 
-if test "$with_libcrypt" != "no"; then
-	echo "$as_me:$LINENO: checking for crypt in -lcrypt" >&5
+echo "$as_me:$LINENO: checking for crypt in -lcrypt" >&5
 echo $ECHO_N "checking for crypt in -lcrypt... $ECHO_C" >&6
 if test "${ac_cv_lib_crypt_crypt+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
@@ -23666,16 +23677,16 @@ fi
 echo "$as_me:$LINENO: result: $ac_cv_lib_crypt_crypt" >&5
 echo "${ECHO_T}$ac_cv_lib_crypt_crypt" >&6
 if test $ac_cv_lib_crypt_crypt = yes; then
-  cat >>confdefs.h <<\_ACEOF
-#define HAVE_LIBCRYPT 1
-_ACEOF
- LIBCRYPT=-lcrypt
+  LIBCRYPT=-lcrypt
+else
+  { { echo "$as_me:$LINENO: error: crypt() not found" >&5
+echo "$as_me: error: crypt() not found" >&2;}
+   { (exit 1); exit 1; }; }
 fi
 
-fi
 
 
-if test "$with_libcrack" != "no"; then
+if test "$with_libcrack" = "yes"; then
 	echo "checking cracklib flavour, don't be surprised by the results"
 	echo "$as_me:$LINENO: checking for FascistCheck in -lcrack" >&5
 echo $ECHO_N "checking for FascistCheck in -lcrack... $ECHO_C" >&6
@@ -23742,10 +23753,11 @@ fi
 echo "$as_me:$LINENO: result: $ac_cv_lib_crack_FascistCheck" >&5
 echo "${ECHO_T}$ac_cv_lib_crack_FascistCheck" >&6
 if test $ac_cv_lib_crack_FascistCheck = yes; then
-  cat >>confdefs.h <<\_ACEOF
+  LIBCRACK=-lcrack
+cat >>confdefs.h <<\_ACEOF
 #define HAVE_LIBCRACK 1
 _ACEOF
- LIBCRACK=-lcrack
+
 fi
 
 	echo "$as_me:$LINENO: checking for FascistHistory in -lcrack" >&5
@@ -23813,7 +23825,8 @@ fi
 echo "$as_me:$LINENO: result: $ac_cv_lib_crack_FascistHistory" >&5
 echo "${ECHO_T}$ac_cv_lib_crack_FascistHistory" >&6
 if test $ac_cv_lib_crack_FascistHistory = yes; then
-  cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define HAVE_LIBCRACK_HIST 1
 _ACEOF
 
@@ -23884,7 +23897,8 @@ fi
 echo "$as_me:$LINENO: result: $ac_cv_lib_crack_FascistHistoryPw" >&5
 echo "${ECHO_T}$ac_cv_lib_crack_FascistHistoryPw" >&6
 if test $ac_cv_lib_crack_FascistHistoryPw = yes; then
-  cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define HAVE_LIBCRACK_PW 1
 _ACEOF
 
@@ -24278,12 +24292,163 @@ echo "${ECHO_T}no" >&6
 else
 	echo "$as_me:$LINENO: checking use login and su access checking if PAM not used" >&5
 echo $ECHO_N "checking use login and su access checking if PAM not used... $ECHO_C" >&6
-	cat >>confdefs.h <<\_ACEOF
+
+cat >>confdefs.h <<\_ACEOF
 #define SU_ACCESS 1
 _ACEOF
 
 	echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
+fi
+
+
+
+if test "$with_libskey" = "yes"; then
+	echo "$as_me:$LINENO: checking for MD5Init in -lmd" >&5
+echo $ECHO_N "checking for MD5Init in -lmd... $ECHO_C" >&6
+if test "${ac_cv_lib_md_MD5Init+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lmd  $LIBS"
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+/* Override any gcc2 internal prototype to avoid an error.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+/* We use char because int might match the return type of a gcc2
+   builtin and then its argument prototype would still apply.  */
+char MD5Init ();
+int
+main ()
+{
+MD5Init ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_lib_md_MD5Init=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_lib_md_MD5Init=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+echo "$as_me:$LINENO: result: $ac_cv_lib_md_MD5Init" >&5
+echo "${ECHO_T}$ac_cv_lib_md_MD5Init" >&6
+if test $ac_cv_lib_md_MD5Init = yes; then
+  LIBMD=-lmd
+fi
+
+	echo "$as_me:$LINENO: checking for skeychallenge in -lskey" >&5
+echo $ECHO_N "checking for skeychallenge in -lskey... $ECHO_C" >&6
+if test "${ac_cv_lib_skey_skeychallenge+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lskey  $LIBS"
+cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+/* Override any gcc2 internal prototype to avoid an error.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+/* We use char because int might match the return type of a gcc2
+   builtin and then its argument prototype would still apply.  */
+char skeychallenge ();
+int
+main ()
+{
+skeychallenge ();
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  ac_cv_lib_skey_skeychallenge=yes
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+ac_cv_lib_skey_skeychallenge=no
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+LIBS=$ac_check_lib_save_LIBS
+fi
+echo "$as_me:$LINENO: result: $ac_cv_lib_skey_skeychallenge" >&5
+echo "${ECHO_T}$ac_cv_lib_skey_skeychallenge" >&6
+if test $ac_cv_lib_skey_skeychallenge = yes; then
+  LIBSKEY=-lskey
+else
+  { { echo "$as_me:$LINENO: error: liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2" >&5
+echo "$as_me: error: liskey missing. You can download S/Key source code from http://rsync1.it.gentoo.org/gentoo/distfiles/skey-1.1.5.tar.bz2" >&2;}
+   { (exit 1); exit 1; }; }
+fi
+
+
+cat >>confdefs.h <<\_ACEOF
+#define SKEY 1
+_ACEOF
+
 fi
 
 
@@ -26930,6 +27095,8 @@ s,@LIBCRYPT@,$LIBCRYPT,;t t
 s,@LIBCRACK@,$LIBCRACK,;t t
 s,@LIBSELINUX@,$LIBSELINUX,;t t
 s,@LIBPAM@,$LIBPAM,;t t
+s,@LIBSKEY@,$LIBSKEY,;t t
+s,@LIBMD@,$LIBMD,;t t
 s,@MKINSTALLDIRS@,$MKINSTALLDIRS,;t t
 s,@USE_NLS@,$USE_NLS,;t t
 s,@MSGFMT@,$MSGFMT,;t t
