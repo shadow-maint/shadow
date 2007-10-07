@@ -1,8 +1,7 @@
 $Id: NEWS,v 1.492 2007/02/01 20:49:25 kloczek Exp $
 
-*** general:
-
 shadow-4.0.18.1 -> shadow-4.0.18.2					09-08-2006
+
 *** general:
 - usermod: fixed handle -a option (by Benno Schulenberg
   <bensberg@justemail.net>),
@@ -11,10 +10,12 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					09-08-2006
 - groupadd, groupdel, groupmod, useradd, userdel, usermod: flush nscd cashes
   after close /etc/{group,passwd} files,
 - updated translations: ja, nl, tl.
-
-*** general:
 - groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
   mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>),
+
+shadow-4.0.18 -> shadow-4.0.18.1					03-08-2006
+
+*** general:
 - groupmems: fixed compilation when PAM is disabled
   (by Johannes Winkelmann <jw@smts.ch>),
 - fixed missing man pages in dist tar ball necessary on build when
