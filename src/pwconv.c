@@ -28,21 +28,21 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: pwconv.c,v 1.18 2005/08/09 15:27:02 kloczek Exp $")
+#ident "$Id: pwconv.c,v 1.21 2005/09/07 15:00:45 kloczek Exp $"
+
+#include <errno.h>
+#include <fcntl.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
 #include <time.h>
 #include <unistd.h>
-#include <errno.h>
-#include <pwd.h>
-#include "prototypes.h"
 #include "defines.h"
+#include "getdef.h"
+#include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
-#include "getdef.h"
 /*
  * exit status values
  */
@@ -53,6 +53,9 @@ RCSID (PKG_VER "$Id: pwconv.c,v 1.18 2005/08/09 15:27:02 kloczek Exp $")
 #define E_MISSING	4	/* unexpected failure, passwd file missing */
 #define E_PWDBUSY	5	/* passwd file(s) busy */
 #define E_BADENTRY	6	/* bad shadow entry */
+/*
+ * Global variables
+ */
 static int
  shadow_locked = 0, passwd_locked = 0;
 
@@ -153,6 +156,7 @@ int main (int argc, char **argv)
 				 Prog, spent.sp_namp);
 			fail_exit (E_FAILURE);
 		}
+
 		/* remove password from /etc/passwd */
 		pwent = *pw;
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */

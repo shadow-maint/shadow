@@ -7,8 +7,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: salt.c,v 1.8 2005/05/25 19:31:50 kloczek Exp $")
+#ident "$Id: salt.c,v 1.10 2005/08/31 17:24:58 kloczek Exp $"
+
 #include <sys/time.h>
 #include <stdlib.h>
 #include "prototypes.h"
@@ -26,9 +26,11 @@ char *crypt_make_salt (void)
 	static char result[40];
 
 	result[0] = '\0';
+#ifndef USE_PAM
 	if (getdef_bool ("MD5_CRYPT_ENAB")) {
 		strcpy (result, "$1$");	/* magic for the new MD5 crypt() */
 	}
+#endif
 
 	/*
 	 * Generate 8 chars of salt, the old crypt() will use only first 2.

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groups.1'>
-  <!-- $Id: groups.1.xml,v 1.9 2005/06/14 20:18:17 kloczek Exp $ -->
+  <!-- $Id: groups.1.xml,v 1.13 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groups</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -15,16 +15,17 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>groups</command>    
+      <command>groups</command>
       <arg choice='opt'>
-        <replaceable>user</replaceable>
+	<replaceable>user</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>groups</command> displays the current group names or ID
+    <para>
+      <command>groups</command> displays the current group names or ID
       values. If the value does not have a corresponding entry in
       <filename>/etc/group</filename>, the value will be displayed as the
       numerical group value. The optional <emphasis
@@ -32,43 +33,47 @@
       named <emphasis remap='I'>user</emphasis>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='note'>
     <title>NOTE</title>
-    <para>Systems which do not support concurrent group sets will have the
+    <para>
+      Systems which do not support concurrent group sets will have the
       information from <filename>/etc/group</filename> reported. The user
       must use <command>newgrp</command> or <command>sg</command> to change
       their current real and effective group ID.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getgid</refentrytitle><manvolnum>2</manvolnum>
+	<refentrytitle>getgid</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getgroups</refentrytitle><manvolnum>2</manvolnum>
+	<refentrytitle>getgroups</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
-      </citerefentry>
+	<refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

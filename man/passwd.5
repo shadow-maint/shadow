@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "5" "08/03/2005" "" ""
+.TH "PASSWD" "5" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,8 +11,8 @@
 passwd \- The password file
 .SH "DESCRIPTION"
 .PP
-\fI/etc/passwd\fR 
-contains various pieces of information for each user account. Included is:
+\fI/etc/passwd\fR
+contains one line for each user account, with seven fields delimited by colons (\(lq:\(rq). These fields are:
 .TP 3
 \(bu
 login name
@@ -33,41 +33,62 @@ user name or comment field
 user home directory
 .TP
 \(bu
-user command interpreter
+optional user command interpreter
 .PP
-The password field may not be filled if shadow passwords have been enabled. If shadow passwords are being used, the encrypted password will be found in 
-\fI/etc/shadow\fR. The encrypted password consists of characters from the 64 characters alphabet a thru z, A thru Z, 0 thru 9, \\. and /. Optionally it can start with a "$" character. This means the encrypted password was generated using another (not DES) algorithm. For example if it starts with "$1$" it means the MD5\-based algorithm was used. Refer to 
-\fBcrypt\fR(3) 
-for details on how this string is interpreted.
+The encrypted password field may be blank, in which case no password is required to authenticate as the specified login name. However, some applications which read the
+\fI/etc/passwd\fR
+file may decide not to permit
+\fIany\fR
+access at all if the
+\fIpassword\fR
+field is blank. If the
+\fIpassword\fR
+field is a lower\-case
+\(lqx\(rq, then the encrypted password is actually stored in the
+\fBshadow\fR(5)
+file instead; there
+\fImust\fR
+be a corresponding line in the
+\fIshadow\fR
+file, or else the user account is invalid. If the
+\fIpassword\fR
+field is any other string, then it will be treated as an encrypted password, as specified by
+\fBcrypt\fR(3).
 .PP
-The comment field is used by various system utilities, such as 
+The comment field is used by various system utilities, such as
 \fBfinger\fR(1).
 .PP
-The home directory field provides the name of the initial working directory. 
-\fILogin\fR 
-uses this information to set the value of the 
-\fB$HOME\fR 
+The home directory field provides the name of the initial working directory. The
+\fBlogin\fR
+program uses this information to set the value of the
+\fB$HOME\fR
 environmental variable.
 .PP
-The command interpreter field provides the name of the user's command language interpreter, or the name of the initial program to execute. 
-\fILogin\fR 
-uses this information to set the value of the 
-\fB$SHELL\fR 
-environmental variable. If this field is empty, it defaults to the value 
+The command interpreter field provides the name of the user's command language interpreter, or the name of the initial program to execute. The
+\fBlogin\fR
+program uses this information to set the value of the
+\fB$SHELL\fR
+environmental variable. If this field is empty, it defaults to the value
 \fI/bin/sh\fR.
 .SH "FILES"
 .TP
 \fI/etc/passwd\fR
 user account information
+.TP
+\fI/etc/shadow\fR
+optional encrypted password file
 .SH "SEE ALSO"
 .PP
-\fBlogin\fR(1), 
-\fBpasswd\fR(1), 
-\fBsu\fR(1), 
-\fBshadow\fR(5), 
-\fBpwconv\fR(8), 
-\fBpwunconv\fR(8), 
-\fBsulogin\fR(8)
+\fBgetent\fR(1),
+\fBlogin\fR(1),
+\fBpasswd\fR(1),
+\fBsu\fR(1),
+\fBcrypt\fR(3),
+\fBgetpwnam\fR(3),
+\fBshadow\fR(5),
+\fBpwconv\fR(8),
+\fBpwunconv\fR(8),
+\fBsulogin\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

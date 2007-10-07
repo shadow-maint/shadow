@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupmod.8'>
-  <!-- $Id: groupmod.8.xml,v 1.8 2005/06/30 19:26:08 kloczek Exp $ -->
+  <!-- $Id: groupmod.8.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,16 +14,16 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>groupmod</command>    
+      <command>groupmod</command>
       <arg choice='opt'>
-        <arg choice='plain'>-g <replaceable>gid</replaceable></arg>
-        <arg choice='opt'>-o </arg>
+	<arg choice='plain'>-g <replaceable>gid</replaceable></arg>
+	<arg choice='opt'>-o </arg>
       </arg>
       <arg choice='opt'>-n <replaceable>new_group_name</replaceable></arg>
       <arg choice='plain'><replaceable>group</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
@@ -31,7 +31,7 @@
       files to reflect the changes that are specified on the command line.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -40,113 +40,134 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-g</option> <replaceable>gid</replaceable>
-        </term>
-        <listitem>
-          <para>The numerical value of the group's ID. This value must be
-            unique, unless the <option>-o</option> option is used. The value
-            must be non-negative. Values between 0 and 999 are typically
-            reserved for system groups. Any files which the old group ID is
-            the file group ID must have the file group ID changed manually.
-          </para>
-        </listitem>
+	<term>
+	  <option>-g</option> <replaceable>gid</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    The numerical value of the group's ID. This value must be
+	    unique, unless the <option>-o</option> option is used. The value
+	    must be non-negative. Values between 0 and 999 are typically
+	    reserved for system groups. Any files which the old group ID is
+	    the file group ID must have the file group ID changed manually.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-n</option> <replaceable>new_group_name</replaceable></term>
-        <listitem>
-          <para> The name of the group will be changed from <emphasis
-            remap='I'>group</emphasis> to <emphasis
-            remap='I'>new_group_name</emphasis>.
-          </para>
-        </listitem>
+	<term><option>-n</option> <replaceable>new_group_name</replaceable></term>
+	<listitem>
+	  <para> 
+	    The name of the group will be changed from <emphasis
+	    remap='I'>group</emphasis> to <emphasis
+	    remap='I'>new_group_name</emphasis>.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/gshadow</filename></term>
-        <listitem>secure group account information</listitem>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>secure group account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
     <para>
       The <command>groupmod</command> command exits with the following values:
       <variablelist>
-        <varlistentry>
-          <term><replaceable>0</replaceable></term>
-	  <listitem>success</listitem>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>2</replaceable></term>
-	  <listitem>invalid command syntax</listitem>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>3</replaceable></term>
-	  <listitem>invalid argument to option</listitem>
+	<varlistentry>
+	  <term><replaceable>3</replaceable></term>
+	  <listitem>
+	    <para>invalid argument to option</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>4</replaceable></term>
-	  <listitem>specified group doesn't exist</listitem>
+	<varlistentry>
+	  <term><replaceable>4</replaceable></term>
+	  <listitem>
+	    <para>specified group doesn't exist</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>6</replaceable></term>
-	  <listitem>specified group doesn't exist</listitem>
+	<varlistentry>
+	  <term><replaceable>6</replaceable></term>
+	  <listitem>
+	    <para>specified group doesn't exist</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>9</replaceable></term>
-	  <listitem>group name already in use</listitem>
+	<varlistentry>
+	  <term><replaceable>9</replaceable></term>
+	  <listitem>
+	    <para>group name already in use</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>10</replaceable></term>
-	  <listitem>can't update group file</listitem>
+	<varlistentry>
+	  <term><replaceable>10</replaceable></term>
+	  <listitem>
+	    <para>can't update group file</para>
+	  </listitem>
 	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

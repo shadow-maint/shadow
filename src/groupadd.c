@@ -29,25 +29,25 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.41 2005/08/11 13:45:41 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
-#include <getopt.h>
-#include <grp.h>
+#ident "$Id: groupadd.c,v 1.48 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <ctype.h>
 #include <fcntl.h>
+#include <getopt.h>
+#include <grp.h>
+#include <stdio.h>
+#include <sys/types.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <pwd.h>
 #endif				/* USE_PAM */
-#include "defines.h"
-#include "prototypes.h"
 #include "chkname.h"
+#include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 static int is_shadow_grp;
@@ -56,7 +56,6 @@ static int is_shadow_grp;
 /*
  * exit status values
  */
-
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
@@ -64,6 +63,9 @@ static int is_shadow_grp;
 #define E_NAME_IN_USE	9	/* group name not unique */
 #define E_GRP_UPDATE	10	/* can't update group file */
 
+/*
+ * Global variables
+ */
 static char *group_name;
 static gid_t group_id;
 static char *empty_list = NULL;
@@ -92,7 +94,6 @@ static void fail_exit (int);
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: groupadd [options] group\n"
@@ -114,7 +115,6 @@ static void usage (void)
  *	new_grent() takes all of the values that have been entered and fills
  *	in a (struct group) with them.
  */
-
 static void new_grent (struct group *grent)
 {
 	memzero (grent, sizeof *grent);
@@ -131,7 +131,6 @@ static void new_grent (struct group *grent)
  *	new_sgent() takes all of the values that have been entered and fills
  *	in a (struct sgrp) with them.
  */
-
 static void new_sgent (struct sgrp *sgent)
 {
 	memzero (sgent, sizeof *sgent);
@@ -147,7 +146,6 @@ static void new_sgent (struct sgrp *sgent)
  *
  *	grp_update() writes the new records to the group files.
  */
-
 static void grp_update (void)
 {
 	struct group grp;
@@ -180,6 +178,10 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group", group_name,
+		      group_id, 1);
+#endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 		 group_name, (unsigned int) group_id));
 }
@@ -191,13 +193,12 @@ static void grp_update (void)
  *	file, or checks the given group ID against the existing ones for
  *	uniqueness.
  */
-
 static void find_new_gid (void)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max;
 
-	gid_min = getdef_unum ("GID_MIN", 100);
+	gid_min = getdef_unum ("GID_MIN", 1000);
 	gid_max = getdef_unum ("GID_MAX", 60000);
 
 	/*
@@ -213,7 +214,6 @@ static void find_new_gid (void)
 	 * user specified one with -g) or looking for the largest unused
 	 * value.
 	 */
-
 #ifdef NO_GETGRENT
 	gr_rewind ();
 	while ((grp = gr_next ())) {
@@ -276,7 +276,6 @@ static void find_new_gid (void)
  *	check_new_name() insures that the new name doesn't contain any
  *	illegal characters.
  */
-
 static void check_new_name (void)
 {
 	if (check_group_name (group_name))
@@ -298,7 +297,6 @@ static void check_new_name (void)
  *	close_files() closes all of the files that were opened for this new
  *	group. This causes any modified entries to be written out.
  */
-
 static void close_files (void)
 {
 	if (!gr_close ()) {
@@ -322,15 +320,22 @@ static void close_files (void)
  *
  *	open_files() opens the two group files.
  */
-
 static void open_files (void)
 {
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
+			      group_name, -1, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -350,13 +355,17 @@ static void open_files (void)
 /*
  * fail_exit - exit with an error code after unlocking files
  */
-
 static void fail_exit (int code)
 {
 	(void) gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp)
 		sgr_unlock ();
+#endif
+	if (code != E_SUCCESS)
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
+			      group_name, -1, 0);
 #endif
 	exit (code);
 }
@@ -380,10 +389,12 @@ int main (int argc, char **argv)
 	int retval;
 #endif
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -514,12 +525,15 @@ int main (int argc, char **argv)
 	/*
 	 * Start with a quick check to see if the group exists.
 	 */
-
 	if (getgrnam (group_name)) {
 		if (fflg) {
 			exit (E_SUCCESS);
 		}
 		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
+			      group_name, -1, 0);
+#endif
 		exit (E_NAME_IN_USE);
 	}
 
@@ -538,18 +552,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */

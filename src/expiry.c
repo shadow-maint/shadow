@@ -29,14 +29,14 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: expiry.c,v 1.14 2005/05/25 18:20:25 kloczek Exp $")
-#include <sys/types.h>
+#ident "$Id: expiry.c,v 1.18 2005/09/07 15:00:45 kloczek Exp $"
+
+#include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
-#include "prototypes.h"
+#include <sys/types.h>
 #include "defines.h"
-#include <pwd.h>
+#include "prototypes.h"
 /* local function prototypes */
 static RETSIGTYPE catch (int);
 static void usage (void);
@@ -44,7 +44,6 @@ static void usage (void);
 /*
  * catch - signal catcher
  */
-
 static RETSIGTYPE catch (int sig)
 {
 	exit (10);
@@ -53,7 +52,6 @@ static RETSIGTYPE catch (int sig)
 /*
  * usage - print syntax message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: expiry {-f|-c}\n"));
@@ -66,7 +64,6 @@ static void usage (void)
  *	expiry checks (-c) the current password expiraction and forces (-f)
  *	changes when required. It is callable as a normal user command.
  */
-
 int main (int argc, char **argv)
 {
 	struct passwd *pwd;
@@ -79,7 +76,6 @@ int main (int argc, char **argv)
 	/* 
 	 * Start by disabling all of the keyboard signals.
 	 */
-
 	signal (SIGHUP, catch);
 	signal (SIGINT, catch);
 	signal (SIGQUIT, catch);
@@ -91,7 +87,6 @@ int main (int argc, char **argv)
 	 * expiry takes one of two arguments. The default action is to give
 	 * the usage message.
 	 */
-
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
@@ -99,23 +94,9 @@ int main (int argc, char **argv)
 	if (argc != 2 || (strcmp (argv[1], "-f") && strcmp (argv[1], "-c")))
 		usage ();
 
-#if 0				/* could be setgid shadow with /etc/shadow mode 0640 */
-	/*
-	 * Make sure I am root. Can't open /etc/shadow without root
-	 * authority.
-	 */
-
-	if (geteuid () != 0) {
-		fprintf (stderr,
-			 _("%s: WARNING!  Must be set-UID root!\n"), argv[0]);
-		exit (10);
-	}
-#endif
-
 	/*
 	 * Get user entries for /etc/passwd and /etc/shadow
 	 */
-
 	if (!(pwd = get_my_pwent ())) {
 		fprintf (stderr, _("%s: unknown user\n"), Prog);
 		exit (10);
@@ -125,26 +106,22 @@ int main (int argc, char **argv)
 	/*
 	 * If checking accounts, use agecheck() function.
 	 */
-
 	if (strcmp (argv[1], "-c") == 0) {
 
 		/*
 		 * Print out number of days until expiration.
 		 */
-
 		agecheck (pwd, spwd);
 
 		/*
 		 * Exit with status indicating state of account.
 		 */
-
 		exit (isexpired (pwd, spwd));
 	}
 
 	/*
 	 * If forcing password change, use expire() function.
 	 */
-
 	if (strcmp (argv[1], "-f") == 0) {
 
 		/*
@@ -152,7 +129,6 @@ int main (int argc, char **argv)
 		 * message indicating what to do. And it doesn't return at
 		 * all unless the account is unexpired.
 		 */
-
 		expire (pwd, spwd);
 		exit (0);
 	}
@@ -160,7 +136,6 @@ int main (int argc, char **argv)
 	/*
 	 * Can't get here ...
 	 */
-
 	usage ();
 	exit (1);
 }

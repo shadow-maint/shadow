@@ -2,8 +2,8 @@
 
 #ifdef USE_PAM
 
-#include "rcsid.h"
-RCSID ("$Id: pam_pass.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: pam_pass.c,v 1.11 2005/08/31 17:24:57 kloczek Exp $"
+
 
 /*
  * Change the user's password using PAM.  Requires libpam and libpam_misc

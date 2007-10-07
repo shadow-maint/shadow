@@ -29,16 +29,19 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: sulogin.c,v 1.20 2005/07/06 11:33:06 kloczek Exp $")
-#include "prototypes.h"
-#include "defines.h"
-#include "getdef.h"
+#ident "$Id: sulogin.c,v 1.23 2005/09/07 15:00:45 kloczek Exp $"
+
+#include <fcntl.h>
+#include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
-#include <pwd.h>
-#include <fcntl.h>
+#include "defines.h"
+#include "getdef.h"
+#include "prototypes.h"
 #include "pwauth.h"
+/*
+ * Global variables
+ */
 static char name[BUFSIZ];
 static char pass[BUFSIZ];
 
@@ -156,11 +159,9 @@ static RETSIGTYPE catch (int sig)
 	while (1) {		/* repeatedly get login/password pairs */
 		pw_entry (name, &pwent);	/* get entry from password file */
 		if (pwent.pw_name == (char *) 0) {
-
 			/*
 			 * Fail secure
 			 */
-
 			printf (_("No password entry for 'root'\n"));
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_WARN, "No password entry for 'root'\n");

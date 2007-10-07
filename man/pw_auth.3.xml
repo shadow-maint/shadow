@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pw_auth.3'>
-  <!-- $Id: pw_auth.3.xml,v 1.10 2005/06/20 09:00:06 kloczek Exp $ -->
+  <!-- $Id: pw_auth.3.xml,v 1.15 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pw_auth</refentrytitle>
     <manvolnum>3</manvolnum>
@@ -11,45 +11,51 @@
     <refname>pw_auth</refname>
     <refpurpose>administrator defined password authentication routines</refpurpose>
   </refnamediv>
-  
+
   <refsect1 id='syntax'>
     <title>SYNTAX</title>
-    <para><emphasis remap='B'>#include &lt;pwauth.h&gt;</emphasis>
+    <para>
+      <emphasis>#include &lt;pwauth.h&gt;</emphasis>
     </para>
-    
-    <para><emphasis remap='B'>int pw_auth (char</emphasis>
+
+    <para>
+      <emphasis>int pw_auth (char</emphasis>
       <emphasis remap='I'>*command,</emphasis>
-      <emphasis remap='B'>char</emphasis>
+      <emphasis>char</emphasis>
       <emphasis remap='I'>*user,</emphasis>
-      <emphasis remap='B'>int</emphasis>
+      <emphasis>int</emphasis>
       <emphasis remap='I'>reason,</emphasis>
-      <emphasis remap='B'>char</emphasis>
-      <emphasis remap='I'>*input)</emphasis><emphasis remap='B'>;</emphasis>
+      <emphasis>char</emphasis>
+      <emphasis remap='I'>*input)</emphasis><emphasis>;</emphasis>
     </para>
   </refsect1>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><emphasis remap='B'>pw_auth</emphasis>
-      invokes the administrator defined functions for a given user.
+    <para>
+      <emphasis>pw_auth</emphasis> invokes the administrator defined
+      functions for a given user.
     </para>
-    
-    <para><emphasis remap='I'>command</emphasis> is the name of the
+
+    <para>
+      <emphasis remap='I'>command</emphasis> is the name of the
       authentication program. It is retrieved from the user's password file
       information. The string contains one or more executable file names,
       delimited by semi-colons. Each program will be executed in the order
       given. The command line arguments are given for each of the reasons
       listed below.
     </para>
-    
-    <para><emphasis remap='I'>user</emphasis> is the name of the user to be
+
+    <para>
+      <emphasis remap='I'>user</emphasis> is the name of the user to be
       authenticated, as given in the <filename>/etc/passwd</filename> file. 
       User entries are indexed by username. This allows non-unique user IDs
       to be present and for each different username associated with that
       user ID to have a different authentication program and information.
     </para>
-    
-    <para>Each of the permissible authentication reasons is handled in a
+
+    <para>
+      Each of the permissible authentication reasons is handled in a
       potentially differenent manner. Unless otherwise mentioned, the
       standard file descriptors 0, 1, and 2 are available for communicating
       with the user. The real user ID may be used to determine the identity
@@ -58,181 +64,190 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_SU</emphasis>
-        </term>
-        <listitem>
-          <para>Perform authentication for the current real user ID
-            attempting to switch real user ID to the named user. The
-            authentication program will be invoked with a
-            <option>-s</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_SU</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Perform authentication for the current real user ID attempting
+	    to switch real user ID to the named user. The authentication
+	    program will be invoked with a <option>-s</option> option,
+	    followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_LOGIN</emphasis>
-        </term>
-        <listitem>
-          <para>Perform authentication for the named user creating a new
-            login session. The authentication program will be invoked with a
-            <option>-l</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_LOGIN</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Perform authentication for the named user creating a new login
+	    session. The authentication program will be invoked with a
+	    <option>-l</option> option, followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_ADD</emphasis>
-        </term>
-        <listitem>
-          <para>Create a new entry for the named user. This allows an
-            authentication program to initialize storage for a new user. The
-            authentication program will be invoked with a
-            <option>-a</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_ADD</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Create a new entry for the named user. This allows an
+	    authentication program to initialize storage for a new user. The
+	    authentication program will be invoked with a
+	    <option>-a</option> option, followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_CHANGE</emphasis>
-        </term>
-        <listitem>
-          <para>Alter an existing entry for the named user. This allows an
-            authentication program to alter the authentication information
-            for an existing user. The authentication program will be invoked
-            with a <option>-c</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_CHANGE</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Alter an existing entry for the named user. This allows an
+	    authentication program to alter the authentication information
+	    for an existing user. The authentication program will be invoked
+	    with a <option>-c</option> option, followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_DELETE</emphasis>
-        </term>
-        <listitem>
-          <para>Delete authentication information for the named user. This
-            allows an authentication program to reclaim storage for a user
-            which is no longer authenticated using the authentication
-            program. The authentication program will be invoked with a
-            <option>-d</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_DELETE</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Delete authentication information for the named user. This
+	    allows an authentication program to reclaim storage for a user
+	    which is no longer authenticated using the authentication
+	    program. The authentication program will be invoked with a
+	    <option>-d</option> option, followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_TELNET</emphasis>
-        </term>
-        <listitem>
-          <para>Authenticate a user who is connecting to the system using
-            the <emphasis remap='B'>telnet</emphasis> command. The
-            authentication program will be invoked with a
-            <option>-t</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_TELNET</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Authenticate a user who is connecting to the system using the
+	    <command>telnet</command> command. The authentication program
+	    will be invoked with a <option>-t</option> option, followed by
+	    the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_RLOGIN</emphasis>
-        </term>
-        <listitem>
-          <para>
-            Authenticate a user who is connecting to the system using the
-            <emphasis remap='B'>rlogin</emphasis> command. The
-            authentication program will be invoked with a
-            <option>-r</option> option, followed by the username.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_RLOGIN</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Authenticate a user who is connecting to the system using the
+	    <emphasis>rlogin</emphasis> command. The
+	    authentication program will be invoked with a
+	    <option>-r</option> option, followed by the username.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_FTP</emphasis>
-        </term>
-        <listitem>
-          <para>
-            Authenticate a user who is connecting to the system using the
-            <emphasis remap='B'>ftp</emphasis> command. The authentication
-            program will be invoked with a <option>-f</option> option,
-            followed by the username. The standard file descriptors are not
-            available for communicating with the user. The standard input
-            file descriptor will be connected to the parent process, while
-            the other two output file descriptors will be connected to
-            <filename>/dev/null</filename>. The <emphasis
-            remap='B'>pw_auth</emphasis> function will pipe a single line of
-            data to the authentication program using file descriptor 0.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_FTP</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Authenticate a user who is connecting to the system using the
+	    <emphasis>ftp</emphasis> command. The authentication program
+	    will be invoked with a <option>-f</option> option, followed by
+	    the username. The standard file descriptors are not available
+	    for communicating with the user. The standard input file
+	    descriptor will be connected to the parent process, while the
+	    other two output file descriptors will be connected to
+	    <filename>/dev/null</filename>. The <emphasis>pw_auth</emphasis>
+	    function will pipe a single line of data to the authentication
+	    program using file descriptor 0.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='B'>PW_REXEC</emphasis>
-        </term>
-        <listitem>
-          <para>
-            Authenticate a user who is connecting to the system using the
-            <emphasis remap='I'>rexec</emphasis> command. The authentication
-            program will be invoked with a <option>-x</option> option,
-            followed by the username. The standard file descriptors are not
-            available for communicating with the remote user. The standard
-            input file descriptor will be connected to the parent process,
-            while the other two output file descriptors will be connected to
-            <filename>/dev/null</filename>. The <emphasis
-            remap='B'>pw_auth</emphasis> function will pipe a single line of
-            data to the authentication program using file descriptor 0.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis>PW_REXEC</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    Authenticate a user who is connecting to the system using the
+	    <emphasis remap='I'>rexec</emphasis> command. The authentication
+	    program will be invoked with a <option>-x</option> option,
+	    followed by the username. The standard file descriptors are not
+	    available for communicating with the remote user. The standard
+	    input file descriptor will be connected to the parent process,
+	    while the other two output file descriptors will be connected to
+	    <filename>/dev/null</filename>. The <emphasis>pw_auth</emphasis>
+	    function will pipe a single line of data to the authentication
+	    program using file descriptor 0.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
-    <para>The last argument is the authentication data which is used by the
-      <emphasis remap='B'>PW_FTP</emphasis> and <emphasis
-      remap='B'>PW_REXEC</emphasis> reasons. It is treated as a single line
-      of text which is piped to the authentication program. When the reason
-      is <emphasis remap='B'>PW_CHANGE,</emphasis> the value of <emphasis
+
+    <para>
+      The last argument is the authentication data which is used by the
+      <emphasis>PW_FTP</emphasis> and <emphasis>PW_REXEC</emphasis> reasons.
+      It is treated as a single line of text which is piped to the
+      authentication program. When the reason is
+      <emphasis>PW_CHANGE,</emphasis> the value of <emphasis
       remap='I'>input</emphasis> is the value of previous user name if the
       user name is being changed.
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>This function does not create the actual session. It only
-      indicates if the user should be allowed to create the session.
+    <para>
+      This function does not create the actual session. It only indicates if
+      the user should be allowed to create the session.
     </para>
-    
+
     <para>The network options are untested at this time.</para>
   </refsect1>
-  
+
   <refsect1 id='diagnostics'>
     <title>DIAGNOSTICS</title>
     <para>
-      The <emphasis remap='B'>pw_auth</emphasis> function returns 0 if the
+      The <emphasis>pw_auth</emphasis> function returns 0 if the
       authentication program exited with a 0 exit code, and a non-zero value
       otherwise.
     </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

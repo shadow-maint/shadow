@@ -30,8 +30,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: getpass.c,v 1.13 2005/03/31 05:14:49 kloczek Exp $")
+#ident "$Id: getpass.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+
 #include "defines.h"
 #include <signal.h>
 #include <stdio.h>

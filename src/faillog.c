@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.24 2005/08/03 17:40:59 kloczek Exp $")
+#ident "$Id: faillog.c,v 1.26 2005/08/31 17:25:00 kloczek Exp $"
+
 #include <getopt.h>
 #include <pwd.h>
 #include <stdio.h>
@@ -41,7 +41,9 @@ RCSID (PKG_VER "$Id: faillog.c,v 1.24 2005/08/03 17:40:59 kloczek Exp $")
 #include "exitcodes.h"
 #include "faillog.h"
 #include "prototypes.h"
-/* global variables */
+/*
+ * Global variables
+ */
 static FILE *fail;		/* failure file stream */
 static uid_t user;		/* one single user, specified on command line */
 static int days;		/* number of days to consider for print command */

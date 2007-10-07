@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
-<refentry id='loginaccess5'>
-  <!-- $Id: login.access.5.xml,v 1.5 2005/06/14 20:18:17 kloczek Exp $ -->
+<refentry id='login.access.5'>
+  <!-- $Id: login.access.5.xml,v 1.13 2005/10/01 15:01:45 kloczek Exp $ -->
   <!--  this is comment -->
   <refmeta>
     <refentrytitle>LOGIN.ACCESS</refentrytitle>
@@ -13,89 +13,81 @@
     <refpurpose>Login access control table</refpurpose>
   </refnamediv>
   <!-- body begins here -->
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <emphasis remap='I'>login.access</emphasis> file specifies
-      (user, host) combinations and/or
-      (user, tty) combinations for which a login will be either accepted
-      or
-      refused.
+      The <emphasis remap='I'>login.access</emphasis> file specifies (user,
+      host) combinations and/or (user, tty) combinations for which a login
+      will be either accepted or refused.
     </para>
-    
+
     <para>
-      When someone logs in, the <emphasis remap='I'>login.access</emphasis> is
-      scanned for the first entry
-      that matches the (user, host) combination, or, in case of
-      non-networked
-      logins, the first entry that matches the (user, tty) combination.
-      The
-      permissions field of that table entry determines whether the login
-      will be
-      accepted or refused.
+      When someone logs in, the <emphasis remap='I'>login.access</emphasis>
+      is scanned for the first entry that matches the (user, host)
+      combination, or, in case of non-networked logins, the first entry that
+      matches the (user, tty) combination. The permissions field of that
+      table entry determines whether the login will be accepted or refused.
     </para>
-    
-    <para>Each line of the login access control table has three fields
-      separated by a
-      ":" character:
+
+    <para>
+      Each line of the login access control table has three fields separated
+      by a ":" character:
     </para>
-    
+
     <para>
       <emphasis remap='I'>permission</emphasis>:<emphasis remap='I'>users</emphasis>:<emphasis remap='I'>
-        origins
+	origins
       </emphasis>
     </para>
-    
+
     <para>
-      The first field should be a "<emphasis remap='B'>+</emphasis>"
-      (access granted) or "<emphasis remap='B'>-</emphasis>" (access
-      denied) character. The second field should be a list of one or more
-      login
-      names, group names, or <emphasis remap='B'>ALL</emphasis> (always
-      matches). The third field should be
-      a list of one or more tty names (for non-networked logins), host
-      names,
+      The first field should be a "<emphasis>+</emphasis>" (access granted)
+      or "<emphasis>-</emphasis>" (access denied) character. The second
+      field should be a list of one or more login names, group names, or
+      <emphasis>ALL</emphasis> (always matches). The third field should be a
+      list of one or more tty names (for non-networked logins), host names,
       domain names (begin with "<literal>.</literal>"), host addresses,
-      internet network
-      numbers (end with "<literal>.</literal>"), <emphasis remap='B'>ALL</emphasis> (always matches) or <emphasis remap='B'>
-        LOCAL
-      </emphasis>
-      (matches any string that does not contain a "<literal>.</literal>"
-      character). If you run
-      NIS you can use @netgroupname in host or user patterns.
+      internet network numbers (end with "<literal>.</literal>"),
+      <emphasis>ALL</emphasis> (always matches) or
+      <emphasis>LOCAL</emphasis> (matches any string that does not contain a
+      "<literal>.</literal>" character). If you run NIS you can use
+      @netgroupname in host or user patterns.
     </para>
-    
+
     <para>
-      The <emphasis remap='B'>EXCEPT</emphasis> operator makes it
-      possible to write very compact rules.
+      The <emphasis>EXCEPT</emphasis> operator makes it possible to write
+      very compact rules.
     </para>
-    
-    <para>The group file is searched only when a name does not match that
-      of the
-      logged-in user. Only groups are matched in which users are
-      explicitly
-      listed: the program does not look at a user's primary group id
-      value.
+
+    <para>
+      The group file is searched only when a name does not match that of the
+      logged-in user. Only groups are matched in which users are explicitly
+      listed: the program does not look at a user's primary group id value.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
-    <para>
-      <filename>/etc/loginn.defs</filename>	- shadow password suite
-      configuration
-    </para>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>
+    <para>
+      <citerefentry>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Guido van Rooij</para>

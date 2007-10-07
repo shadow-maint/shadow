@@ -39,9 +39,9 @@
 #include "defines.h"
 #include <pwd.h>
 #include <time.h>
-#include "rcsid.h"
 
-RCSID ("$Id: isexpired.c,v 1.14 2005/05/25 19:31:50 kloczek Exp $")
+#ident "$Id: isexpired.c,v 1.15 2005/08/31 17:24:57 kloczek Exp $"
+
 
 /*
  * isexpired - determine if account is expired yet

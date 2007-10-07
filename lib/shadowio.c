@@ -1,8 +1,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: shadowio.c,v 1.15 2005/05/25 18:20:22 kloczek Exp $")
+#ident "$Id: shadowio.c,v 1.16 2005/08/31 17:24:56 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 #ifdef HAVE_SHADOW_H

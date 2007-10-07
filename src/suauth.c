@@ -1,12 +1,11 @@
 #include <config.h>
-
-#include <stdio.h>
-#include <pwd.h>
-#include <grp.h>
-#include <sys/types.h>
 #include <errno.h>
-#include "prototypes.h"
+#include <grp.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include "defines.h"
+#include "prototypes.h"
 
 #ifndef SUAUTHFILE
 #define SUAUTHFILE "/etc/suauth"
@@ -17,6 +16,9 @@
 #define	DENY		-1
 #define	OWNPWORD	2
 
+/*
+ * Global variables
+ */
 struct passwd pwent;
 
 #ifdef SU_ACCESS
@@ -24,7 +26,6 @@ struct passwd pwent;
 /* Really, I could do with a few const char's here defining all the 
  * strings output to the user or the syslog. -- chris
  */
-
 static int applies (const char *, char *);
 
 int check_su_auth (const char *, const char *);

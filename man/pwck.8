@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PWCK" "8" "08/03/2005" "" ""
+.TH "PWCK" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -16,11 +16,11 @@ pwck \- verify integrity of password files
 \fBpwck\fR [\-r] [\fIpasswd\fR\ \fIshadow\fR]
 .SH "DESCRIPTION"
 .PP
-\fBpwck\fR 
-verifies the integrity of the system authentication information. All entries in the 
-\fI/etc/passwd\fR 
-and 
-\fI/etc/shadow\fR 
+\fBpwck\fR
+verifies the integrity of the system authentication information. All entries in the
+\fI/etc/passwd\fR
+and
+\fI/etc/shadow\fR
 are checked to see that the entry has the proper format and valid data in each field. The user is prompted to delete entries that are improperly formatted or which have other uncorrectable errors.
 .PP
 Checks are made to verify that each entry has:
@@ -43,45 +43,45 @@ a valid home directory
 \(bu
 a valid login shell
 .PP
-The checks for correct number of fields and unique user name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated user name is prompted for deletion, but the remaining checks will still be made. All other errors are warning and the user is encouraged to run the 
-\fBusermod\fR 
+The checks for correct number of fields and unique user name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated user name is prompted for deletion, but the remaining checks will still be made. All other errors are warning and the user is encouraged to run the
+\fBusermod\fR
 command to correct the error.
 .PP
-The commands which operate on the 
-\fI/etc/passwd\fR 
-file are not able to alter corrupted or duplicated entries. 
-\fBpwck\fR 
+The commands which operate on the
+\fI/etc/passwd\fR
+file are not able to alter corrupted or duplicated entries.
+\fBpwck\fR
 should be used in those circumstances to remove the offending entry.
 .SH "OPTIONS"
 .PP
-The options which apply to the 
-\fBpwck\fR 
+The options which apply to the
+\fBpwck\fR
 command are:
 .TP
 \fB\-q\fR
 Report errors only. Using this option will not require an action from the user.
 .TP
 \fB\-r\fR
-Execute the 
-\fBpwck\fR 
+Execute the
+\fBpwck\fR
 command in read\-only mode.
 .TP
 \fB\-s\fR
-Sort entries in 
-\fI/etc/passwd\fR 
-and 
-\fI/etc/shadow\fR 
+Sort entries in
+\fI/etc/passwd\fR
+and
+\fI/etc/shadow\fR
 by UID.
 .PP
-By default, 
-\fBpwck\fR 
-operates on the files 
-\fI/etc/passwd\fR 
-and 
-\fI/etc/shadow\fR. The user may select alternate files with the 
-\fIpasswd\fR 
-and 
-\fIshadow\fR 
+By default,
+\fBpwck\fR
+operates on the files
+\fI/etc/passwd\fR
+and
+\fI/etc/shadow\fR. The user may select alternate files with the
+\fIpasswd\fR
+and
+\fIshadow\fR
 parameters.
 .SH "FILES"
 .TP
@@ -95,15 +95,15 @@ user account information
 secure user account information
 .SH "SEE ALSO"
 .PP
-\fBgroup\fR(5), 
-\fBpasswd\fR(5), 
-\fBshadow\fR(5), 
-\fBusermod\fR(8)
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBusermod\fR(8).
 .SH "EXIT VALUES"
 .PP
-The 
-\fBpwck\fR 
-command exits with the following values: 
+The
+\fBpwck\fR
+command exits with the following values:
 .TP
 \fI0\fR
 success

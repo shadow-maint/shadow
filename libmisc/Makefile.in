@@ -39,7 +39,8 @@ host_triplet = @host@
 subdir = libmisc
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in getdate.c
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+	$(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -50,19 +51,20 @@ ARFLAGS = cru
 libmisc_a_AR = $(AR) $(ARFLAGS)
 libmisc_a_LIBADD =
 am_libmisc_a_OBJECTS = addgrps.$(OBJEXT) age.$(OBJEXT) \
-	basename.$(OBJEXT) chkname.$(OBJEXT) chowndir.$(OBJEXT) \
-	chowntty.$(OBJEXT) console.$(OBJEXT) copydir.$(OBJEXT) \
-	entry.$(OBJEXT) env.$(OBJEXT) failure.$(OBJEXT) \
-	fields.$(OBJEXT) getdate.$(OBJEXT) hushed.$(OBJEXT) \
-	isexpired.$(OBJEXT) limits.$(OBJEXT) list.$(OBJEXT) \
-	log.$(OBJEXT) loginprompt.$(OBJEXT) mail.$(OBJEXT) \
-	motd.$(OBJEXT) myname.$(OBJEXT) obscure.$(OBJEXT) \
-	pam_pass.$(OBJEXT) pwd2spwd.$(OBJEXT) pwdcheck.$(OBJEXT) \
-	pwd_init.$(OBJEXT) rlogin.$(OBJEXT) salt.$(OBJEXT) \
-	setugid.$(OBJEXT) setupenv.$(OBJEXT) shell.$(OBJEXT) \
-	strtoday.$(OBJEXT) sub.$(OBJEXT) sulog.$(OBJEXT) \
-	ttytype.$(OBJEXT) tz.$(OBJEXT) ulimit.$(OBJEXT) utmp.$(OBJEXT) \
-	valid.$(OBJEXT) xmalloc.$(OBJEXT)
+	audit_help.$(OBJEXT) basename.$(OBJEXT) chkname.$(OBJEXT) \
+	chowndir.$(OBJEXT) chowntty.$(OBJEXT) console.$(OBJEXT) \
+	copydir.$(OBJEXT) entry.$(OBJEXT) env.$(OBJEXT) \
+	failure.$(OBJEXT) fields.$(OBJEXT) getdate.$(OBJEXT) \
+	hushed.$(OBJEXT) isexpired.$(OBJEXT) limits.$(OBJEXT) \
+	list.$(OBJEXT) log.$(OBJEXT) loginprompt.$(OBJEXT) \
+	mail.$(OBJEXT) motd.$(OBJEXT) myname.$(OBJEXT) \
+	obscure.$(OBJEXT) pam_pass.$(OBJEXT) pwd2spwd.$(OBJEXT) \
+	pwdcheck.$(OBJEXT) pwd_init.$(OBJEXT) rlogin.$(OBJEXT) \
+	salt.$(OBJEXT) setugid.$(OBJEXT) setupenv.$(OBJEXT) \
+	shell.$(OBJEXT) strtoday.$(OBJEXT) sub.$(OBJEXT) \
+	sulog.$(OBJEXT) ttytype.$(OBJEXT) tz.$(OBJEXT) \
+	ulimit.$(OBJEXT) utmp.$(OBJEXT) valid.$(OBJEXT) \
+	xmalloc.$(OBJEXT)
 libmisc_a_OBJECTS = $(am_libmisc_a_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -109,6 +111,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ENABLE_REGENERATE_MAN_FALSE = @ENABLE_REGENERATE_MAN_FALSE@
+ENABLE_REGENERATE_MAN_TRUE = @ENABLE_REGENERATE_MAN_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
@@ -120,6 +124,7 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 LDFLAGS = @LDFLAGS@
+LIBAUDIT = @LIBAUDIT@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBICONV = @LIBICONV@
@@ -159,6 +164,9 @@ U = @U@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
+XMLCATALOG = @XMLCATALOG@
+XML_CATALOG_FILE = @XML_CATALOG_FILE@
+XSLTPROC = @XSLTPROC@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
@@ -209,6 +217,7 @@ noinst_LIBRARIES = libmisc.a
 libmisc_a_SOURCES = \
 	addgrps.c \
 	age.c \
+	audit_help.c \
 	basename.c \
 	chkname.c \
 	chkname.h \
@@ -221,8 +230,8 @@ libmisc_a_SOURCES = \
 	failure.c \
 	failure.h \
 	fields.c \
-	getdate.y \
 	getdate.h \
+	getdate.y \
 	hushed.c \
 	isexpired.c \
 	limits.c \
@@ -264,9 +273,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  libmisc/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  libmisc/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  libmisc/Makefile
+	  $(AUTOMAKE) --foreign  libmisc/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -300,6 +309,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/addgrps.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/age.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/audit_help.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basename.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chkname.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chowndir.Po@am__quote@

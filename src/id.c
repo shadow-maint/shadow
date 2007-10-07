@@ -37,12 +37,12 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: id.c,v 1.15 2005/06/20 10:17:08 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
+#ident "$Id: id.c,v 1.18 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <grp.h>
 #include <pwd.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include "defines.h"
 /* local function prototypes */
 static void usage (void);
@@ -154,7 +154,6 @@ static void usage (void)
 	 * Print out the concurrent group set if the user has requested it.
 	 * The group numbers will be printed followed by their names.
 	 */
-
 	if (aflg && (ngroups = getgroups (sys_ngroups, groups)) != -1) {
 
 		/*
@@ -165,7 +164,6 @@ static void usage (void)
 		 * where "###" is a numerical value and "aaa" is the
 		 * corresponding name for each respective numerical value.
 		 */
-
 		printf (_(" groups="));
 		for (i = 0; i < ngroups; i++) {
 			if (i)
@@ -184,7 +182,6 @@ static void usage (void)
 	/*
 	 * Finish off the line.
 	 */
-
 	putchar ('\n');
 	exit (0);
 	/* NOT REACHED */

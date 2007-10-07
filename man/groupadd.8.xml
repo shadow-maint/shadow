@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupadd.8'>
-  <!-- $Id: groupadd.8.xml,v 1.11 2005/07/07 19:25:36 kloczek Exp $ -->
+  <!-- $Id: groupadd.8.xml,v 1.20 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupadd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,19 +14,19 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>groupadd</command>    
+      <command>groupadd</command>
       <arg choice='opt'>
-        <arg choice='plain'>-g <replaceable>gid</replaceable></arg>
-        <arg choice='opt'>-o </arg>
+	<arg choice='plain'>-g <replaceable>gid</replaceable></arg>
+	<arg choice='opt'>-o</arg>
       </arg>
       <arg choice='opt'>-f </arg>
       <arg choice='opt'>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></arg>
       <arg choice='plain'>
-        <replaceable>group</replaceable>
+	<replaceable>group</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>The <command>groupadd</command> command creates a new group
@@ -35,7 +35,7 @@
       files as needed.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -44,140 +44,183 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-f</option>
-        </term>
-        <listitem>
-          <para>This option causes to just exit with success status if the
-            specified group already exists. With <option>-g</option>, if
-            specified gid already exists, other (unique) gid is chosen (i.e.
-            <option>-g</option> is turned off).
-          </para>
-        </listitem>
+	<term>
+	  <option>-f</option>
+	</term>
+	<listitem>
+	  <para>This option causes to just exit with success status if the
+	    specified group already exists. With <option>-g</option>, if
+	    specified gid already exists, other (unique) gid is chosen (i.e.
+	    <option>-g</option> is turned off).
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-g</option> <replaceable>gid</replaceable>
-        </term>
-        <listitem>
-          <para>The numerical value of the group's ID. This value must be
-            unique, unless the <option>-o</option> option is used. The value
-            must be non-negative. The default is to use the smallest ID
-            value greater than 999 and greater than every other group.
-            Values between 0 and 999 are typically reserved for system
-            accounts.
-          </para>
-        </listitem>
+	<term>
+	  <option>-g</option> <replaceable>GID</replaceable>
+	</term>
+	<listitem>
+	  <para>The numerical value of the group's ID. This value must be
+	    unique, unless the <option>-o</option> option is used. The value
+	    must be non-negative. The default is to use the smallest ID
+	    value greater than 999 and greater than every other group.
+	    Values between 0 and 999 are typically reserved for system
+	    accounts.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></option>
-        </term>
-        <listitem>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></option>
+	</term>
+	<listitem>
 	  <para>
 	    Overrides /etc/login.defs defaults (GID_MIN, GID_MAX and others). Multiple
-	    <option>-K</option> options can be specified, e.g.: <option>-K</option>
-	    <replaceable>GID_MIN</replaceable>=<replaceable>100</replaceable>
-	    <option>-K</option> <replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	    <option>-K</option> options can be specified.
 	  </para>
 	  <para>
-	    Note: <option>-K</option> <replaceable>GID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	     Example: <option>-K </option><replaceable>GID_MIN</replaceable>=<replaceable>100</replaceable>
+	    <option> -K </option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
+	  </para>
+	  <para>
+	    Note: <option>-K </option>
+	    <replaceable>GID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>
 	    doesn't work yet.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-o</option>
-        </term>
-        <listitem>
-          <para>
-	    Allow add group wit non-unique GID.
+	<term>
+	  <option>-o</option>
+	</term>
+	<listitem>
+	  <para>
+	    This option permits to add group with non-unique GID.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/gshadow</filename></term>
-        <listitem>secure group account information</listitem>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>secure group account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
+   <refsect1 id='caveats'>
+     <title>CAVEATS</title>
+     <para>Groupnames must begin with a lower case letter or an underscore, and 
+       only lower case letters, underscores, dashes, and dollar signs may 
+       follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
+     </para>
+     <para>Groupnames may only be up to 16 characters long.</para>
+   </refsect1>
+
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
     <para>
       The <command>groupadd</command> command exits with the following values:
       <variablelist>
-        <varlistentry>
-          <term><replaceable>0</replaceable></term>
-          <listitem>success</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>2</replaceable></term>
-          <listitem>invalid command syntax</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>3</replaceable></term>
-          <listitem>invalid argument to option</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>4</replaceable></term>
-          <listitem>gid not unique (when -o not used)</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>9</replaceable></term>
-          <listitem>group name not unique</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>10</replaceable></term>
-          <listitem>can't update group file</listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>3</replaceable></term>
+	  <listitem>
+	    <para>invalid argument to option</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>4</replaceable></term>
+	  <listitem>
+	    <para>gid not unique (when <option>-o</option> not used)</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>9</replaceable></term>
+	  <listitem>
+	    <para>group name not unique</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>10</replaceable></term>
+	  <listitem>
+	    <para>can't update group file</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

@@ -5,8 +5,6 @@ EXTRA_DIST = \
 	limits \
 	login.access \
 	login.defs \
-	login.defs.hurd \
-	login.defs.linux \
 	useradd
 
 SUBDIRS = pam.d

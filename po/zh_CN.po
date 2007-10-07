@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-08-11 16:15+0200\n"
+"POT-Creation-Date: 2005-10-10 20:33+0200\n"
 "PO-Revision-Date: 2004-05-14 10:26+1200\n"
 "Last-Translator: Carlos Z.F. Liu <carlos_liu@yahoo.com>\n"
 "Language-Team: Chinese (simplified) <i18n-translation@lists.linux.net.cn>\n"
@@ -95,6 +95,28 @@ msgstr "无信件。"
 msgid "You have mail."
 msgstr "您有信件。"
 
+#, fuzzy
+msgid "no change"
+msgstr "%s：无改变\n"
+
+msgid "a palindrome"
+msgstr ""
+
+msgid "case changes only"
+msgstr ""
+
+msgid "too similar"
+msgstr ""
+
+msgid "too simple"
+msgstr ""
+
+msgid "rotated"
+msgstr ""
+
+msgid "too short"
+msgstr ""
+
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "错误的密码：%s。 "
@@ -132,6 +154,13 @@ msgstr "无效的根目录“%s”\n"
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "无法将根目录改变为“%s”\n"
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+
+#, fuzzy
+msgid "Unable to determine your tty name."
+msgstr "%s：无法确定您的用户名。\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -236,6 +265,10 @@ msgstr "%s：无法打开密码文件\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s：未知用户：%s\n"
 
+#, fuzzy, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s：无法打开影子密码文件\n"
+
 #, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr "%s：无法锁定影子密码文件\n"
@@ -243,6 +276,10 @@ msgstr "%s：无法锁定影子密码文件\n"
 #, c-format
 msgid "%s: can't open shadow password file\n"
 msgstr "%s：无法打开影子密码文件\n"
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -267,10 +304,6 @@ msgstr "%s：无法重写影子密码文件\n"
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s：无法重写密码文件\n"
-
-#, c-format
-msgid "%s: PAM chauthtok failed\n"
-msgstr "%s：PAM chauthtok 失败\n"
 
 #, c-format
 msgid ""
@@ -460,10 +493,6 @@ msgstr "%s 是无效的 shell。\n"
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "用法：expiry {-f|-c}\n"
-
-#, c-format
-msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s：警告！必须是 set-UID root！\n"
 
 #, c-format
 msgid "%s: unknown user\n"
@@ -853,9 +882,10 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -b, --before DAYS\tprint only lastlog records older than DAYS\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
 
 #, c-format
@@ -918,6 +948,16 @@ msgid " on `%.100s'"
 msgstr "在“%.100s”上"
 
 #, c-format
+msgid "login: PAM Failure, aborting: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Login incorrect\n"
+msgstr "登录错误"
+
+#, c-format
 msgid ""
 "\n"
 "%s login: "
@@ -927,6 +967,10 @@ msgstr ""
 
 msgid "Login incorrect"
 msgstr "登录错误"
+
+#, c-format
+msgid "%s: failure forking: %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "警告：在短暂的锁定后将恢复登录。\n"
@@ -942,6 +986,11 @@ msgstr "上次登录：%.19s 在 %s 上"
 #, c-format
 msgid " from %.*s"
 msgstr " 来自 %.*s"
+
+msgid ""
+"login time exceeded\n"
+"\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1019,23 +1068,31 @@ msgid "%s: error updating files\n"
 msgstr "%s：更新文件出错\n"
 
 #, c-format
-msgid "Usage: %s [-f|-s] [name]\n"
-msgstr "用法：%s [-f|-s] [名称]\n"
-
-#, c-format
-msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "       %s [-x 最大] [-n 最小] [-w 警告] [-i 失效] 名称\n"
-
-#, c-format
-msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s {-l|-u|-d|-S|-e} 名称\n"
+msgid ""
+"Usage: passwd [options] [login]\n"
+"\n"
+"Options:\n"
+"  -a, --all \t\t\treport password status on all accounts\n"
+"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tlock the named account\n"
+"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
+"  -S, --status\t\t\treport password status on the named account\n"
+"  -u, --unlock\t\t\tunlock the named account\n"
+"  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
+msgstr ""
 
 msgid "Old password: "
 msgstr "旧密码："
-
-#, c-format
-msgid "Incorrect password for `%s'\n"
-msgstr "“%s”的密码不正确\n"
 
 #, c-format
 msgid ""
@@ -1194,6 +1251,10 @@ msgstr "请输入您自己的密码作为验证。\n"
 
 msgid "Sorry."
 msgstr "抱歉"
+
+#, fuzzy, c-format
+msgid "%s: %s\n"
+msgstr "passwd：%s\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1439,6 +1500,10 @@ msgstr "用法：%s [-r] 名称\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s：更新组条目时出错\n"
 
+#, fuzzy, c-format
+msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgstr "%s：不能删除用户的主组。\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s：无法打开组文件\n"
@@ -1593,35 +1658,5 @@ msgstr ""
 "“vipw” 编辑 /etc/passwd      “vipw -s” 编辑 /etc/shadow\n"
 "“vigr” 编辑 /etc/group       “vigr -s” 编辑 /etc/gshadow\n"
 
-#~ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
-#~ msgstr "用法：groupadd [-g gid [-o]] [-f] 组\n"
-
-#, fuzzy
-#~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-#~ msgstr "用法：useradd [-u uid [-o]] [-g 组] [-G 组,...] \n"
-
-#~ msgid ""
-#~ "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-#~ msgstr "               [-d 主目录] [-s shell] [-c 注释] [-m [-k 模板]]\n"
-
-#~ msgid "               [-f inactive] [-e expire]\n"
-#~ msgstr "               [-f 失效日] [-e 过期日 ]\n"
-
-#, fuzzy
-#~ msgid "               [-p passwd] [-K KEY=VALUE] name\n"
-#~ msgstr "               [-p 密码] 名称\n"
-
-#~ msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-#~ msgstr "       useradd -D [-g 组] [-b 主目录] [-s shell]\n"
-
-#~ msgid "%s: -O requires NAME=VALUE\n"
-#~ msgstr "%s：-O 需要 NAME=VALUE\n"
-
-#~ msgid "unknown uid: %u\n"
-#~ msgstr "未知的 uid：%u\n"
-
-#~ msgid "%s: uid %u is not unique\n"
-#~ msgstr "%s：uid %u 不唯一\n"
-
-#~ msgid "%s: can't get unique uid\n"
-#~ msgstr "%s：无法获得唯一的 uid\n"
+#~ msgid "%s: PAM chauthtok failed\n"
+#~ msgstr "%s：PAM chauthtok 失败\n"

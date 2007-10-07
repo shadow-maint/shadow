@@ -32,8 +32,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: list.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
+#ident "$Id: list.c,v 1.5 2005/08/31 17:24:57 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 /*

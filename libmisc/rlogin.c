@@ -31,8 +31,8 @@
 
 #ifdef RLOGIN
 
-#include "rcsid.h"
-RCSID ("$Id: rlogin.c,v 1.9 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: rlogin.c,v 1.10 2005/08/31 17:24:58 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>

@@ -35,12 +35,10 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.26 2005/08/11 16:23:34 kloczek Exp $")
+#ident "$Id: newusers.c,v 1.30 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
@@ -49,13 +47,16 @@ RCSID (PKG_VER "$Id: newusers.c,v 1.26 2005/08/11 16:23:34 kloczek Exp $")
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #endif				/* USE_PAM */
-static char *Prog;
-
+#include "prototypes.h"
+#include "defines.h"
 #include "getdef.h"
 #include "pwio.h"
 #include "groupio.h"
-
 #include "shadowio.h"
+/*
+ * Global variables
+ */
+static char *Prog;
 
 static int is_shadow;
 
@@ -69,7 +70,6 @@ static int add_passwd (struct passwd *, const char *);
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [input]\n"), Prog);
@@ -79,7 +79,6 @@ static void usage (void)
 /*
  * add_group - create a new group or add a user to an existing group
  */
-
 static int add_group (const char *name, const char *gid, gid_t * ngid)
 {
 	const struct passwd *pwd;
@@ -92,7 +91,6 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 * Start by seeing if the named group already exists. This will be
 	 * very easy to deal with if it does.
 	 */
-
 	if ((grp = gr_locate (gid))) {
 	      add_member:
 		grent = *grp;
@@ -115,7 +113,6 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 * out the GID from the password file. I want the UID and GID to
 	 * match, unless the GID is already used.
 	 */
-
 	if (gid[0] == '\0') {
 		i = 100;
 		for (pw_rewind (); (pwd = pw_next ());) {
@@ -129,13 +126,11 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 			}
 		}
 	} else if (gid[0] >= '0' && gid[0] <= '9') {
-
 		/*
 		 * The GID is a number, which means either this is a brand
 		 * new group, or an existing group. For existing groups I
 		 * just add myself as a member, just like I did earlier.
 		 */
-
 		i = atoi (gid);
 		for (gr_rewind (); (grp = gr_next ());)
 			if (grp->gr_gid == i)
@@ -147,13 +142,11 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 		 * figure out what group ID that group name is going to
 		 * have.
 		 */
-
 		i = -1;
 
 	/*
 	 * If I don't have a group ID by now, I'll go get the next one.
 	 */
-
 	if (i == -1) {
 		for (i = 100, gr_rewind (); (grp = gr_next ());)
 			if (grp->gr_gid >= i)
@@ -163,7 +156,6 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	/*
 	 * Now I have all of the fields required to create the new group.
 	 */
-
 	if (gid[0] && (gid[0] <= '0' || gid[0] >= '9'))
 		grent.gr_name = xstrdup (gid);
 	else
@@ -182,7 +174,6 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 /*
  * add_user - create a new user ID
  */
-
 static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 {
 	const struct passwd *pwd;
@@ -193,7 +184,6 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	 * The first guess for the UID is either the numerical UID that the
 	 * caller provided, or the next available UID.
 	 */
-
 	if (uid[0] >= '0' && uid[0] <= '9') {
 		i = atoi (uid);
 	} else if (uid[0] && (pwd = pw_locate (uid))) {
@@ -210,7 +200,6 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	 * JUST YET, since there is still more data to be added. So, I fill
 	 * in the parts that I have.
 	 */
-
 	pwent.pw_name = xstrdup (name);
 	pwent.pw_passwd = "x";	/* XXX warning: const */
 	pwent.pw_uid = i;
@@ -231,7 +220,6 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 /*
  * add_passwd - add or update the encrypted password
  */
-
 static int add_passwd (struct passwd *pwd, const char *passwd)
 {
 	const struct spwd *sp;
@@ -242,16 +230,15 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * points to the entry in the password file. Shadow files are
 	 * harder since there are zillions of things to do ...
 	 */
-
 	if (!is_shadow) {
 		update_passwd (pwd, passwd);
 		return 0;
 	}
+
 	/*
 	 * Do the first and easiest shadow file case. The user already
 	 * exists in the shadow password file.
 	 */
-
 	if ((sp = spw_locate (pwd->pw_name))) {
 		spent = *sp;
 		spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt ());
@@ -264,7 +251,6 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * when the entry was created, so this user would have to have had
 	 * the password set someplace else.
 	 */
-
 	if (strcmp (pwd->pw_passwd, "x") != 0) {
 		update_passwd (pwd, passwd);
 		return 0;
@@ -274,7 +260,6 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * Now the really hard case - I need to create an entirely new
 	 * shadow password file entry.
 	 */
-
 	spent.sp_namp = pwd->pw_name;
 	spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt ());
 	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
@@ -370,7 +355,6 @@ int main (int argc, char **argv)
 	 * modified, or new entries added. The password file is the key - if
 	 * it gets locked, assume the others can be locked right away.
 	 */
-
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
 		exit (1);
@@ -404,7 +388,6 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-
 	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
 		line++;
 		if ((cp = strrchr (buf, '\n'))) {
@@ -421,7 +404,6 @@ int main (int argc, char **argv)
 		 * There MUST be 7 colon separated fields, although the
 		 * values aren't that particular.
 		 */
-
 		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
 			fields[nfields] = cp;
 			if ((cp = strchr (cp, ':')))
@@ -445,7 +427,6 @@ int main (int argc, char **argv)
 		 * new group, if that group ID exists, a whole new group ID
 		 * will be made up.
 		 */
-
 		if (!(pw = pw_locate (fields[0])) &&
 		    add_group (fields[0], fields[3], &gid)) {
 			fprintf (stderr,
@@ -462,7 +443,6 @@ int main (int argc, char **argv)
 		 * available user ID is computed and used. After this there
 		 * will at least be a (struct passwd) for the user.
 		 */
-
 		if (!pw && add_user (fields[0], fields[2], &uid, gid)) {
 			fprintf (stderr,
 				 _("%s: line %d: can't create UID\n"),
@@ -475,7 +455,6 @@ int main (int argc, char **argv)
 		 * The password, gecos field, directory, and shell fields
 		 * all come next.
 		 */
-
 		if (!(pw = pw_locate (fields[0]))) {
 			fprintf (stderr,
 				 _("%s: line %d: cannot find user %s\n"),
@@ -517,7 +496,6 @@ int main (int argc, char **argv)
 		/*
 		 * Update the password entry with the new changes made.
 		 */
-
 		if (!pw_update (&newpw)) {
 			fprintf (stderr,
 				 _("%s: line %d: can't update entry\n"),
@@ -534,7 +512,6 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-
 	if (errors) {
 		fprintf (stderr,
 			 _("%s: error detected, changes ignored\n"), Prog);
@@ -562,18 +539,6 @@ int main (int argc, char **argv)
 	(void) pw_unlock ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */

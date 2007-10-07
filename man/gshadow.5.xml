@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='gshadow.5'>
-  <!-- $Id: gshadow.5.xml,v 1.10 2005/06/16 17:35:43 kloczek Exp $ -->
+  <!-- $Id: gshadow.5.xml,v 1.15 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gshadow</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -11,31 +11,33 @@
     <refname>gshadow</refname>
     <refpurpose>shadowed group file</refpurpose>
   </refnamediv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><filename>/etc/gshadow</filename> contains the shadowed
-      information for group accounts. It contains lines with the following
+    <para>
+      <filename>/etc/gshadow</filename> contains the shadowed information
+      for group accounts. It contains lines with the following
       colon-separated fields:
     </para>
     <itemizedlist mark='bullet'>
       <listitem>
-        <para>group name</para>
-      </listitem>    
+	<para>group name</para>
+      </listitem>
       <listitem>
-        <para>encrypted password</para>
-      </listitem>    
+	<para>encrypted password</para>
+      </listitem>
       <listitem>
-        <para>comma-separated list of group administrators</para>
-      </listitem>    
+	<para>comma-separated list of group administrators</para>
+      </listitem>
       <listitem>
-        <para>comma-separated list of group members</para>
-      </listitem>    
+	<para>comma-separated list of group members</para>
+      </listitem>
     </itemizedlist>
-    
-    <para>The group name and password fields must be filled. The encrypted
-      password consists of 13 characters from the 64-character alphabet a
-      thru z, A thru Z, 0 thru 9, \. and /. Refer to <citerefentry>
+
+    <para>
+      The group name and password fields must be filled. The encrypted
+      password consists of characters from the 64-character alphabet a thru
+      z, A thru Z, 0 thru 9, \. and /. Refer to <citerefentry>
       <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry> for details on how this string is interpreted. If the
       password field contains some string that is not valid result of
@@ -44,44 +46,51 @@
       a unix password to log in, subject to <citerefentry>
       <refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum></citerefentry>.
     </para>
-    
-    <para>This information supersedes any password present in
+
+    <para>
+      This information supersedes any password present in
       <filename>/etc/group</filename>.
     </para>
-    
-    <para>This file must not be readable by regular users if password
-      security is to be maintained.
+
+    <para>
+      This file must not be readable by regular users if password security
+      is to be maintained.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/gshadow</filename></term>
-        <listitem>secure group account information</listitem>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>secure group account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Nicolas FRANCOIS</para>

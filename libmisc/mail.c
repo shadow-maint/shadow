@@ -36,8 +36,8 @@
 
 #include "getdef.h"
 
-#include "rcsid.h"
-RCSID ("$Id: mail.c,v 1.8 2003/04/22 10:59:22 kloczek Exp $")
+#ident "$Id: mail.c,v 1.9 2005/08/31 17:24:57 kloczek Exp $"
+
 
 void mailcheck (void)
 {

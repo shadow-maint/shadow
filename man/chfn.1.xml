@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
-                   "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
+	           "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chfn.1'>
-  <!-- $Id: chfn.1.xml,v 1.12 2005/08/10 08:23:18 kloczek Exp $ -->
+  <!-- $Id: chfn.1.xml,v 1.17 2005/10/03 17:49:41 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chfn</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -15,7 +15,7 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>chfn</command>    
+      <command>chfn</command>
       <arg choice='opt'>-f <replaceable>full_name</replaceable></arg>
       <arg choice='opt'>-r <replaceable>room_no</replaceable></arg>
       <arg choice='opt'>-w <replaceable>work_ph</replaceable></arg>
@@ -24,7 +24,7 @@
       <arg choice='opt'><replaceable>user</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para><command>chfn</command> changes user fullname, office number,
@@ -39,46 +39,57 @@
       the <option>-o</option> option to change the undefined portions of the
       GECOS field.
     </para>
-    
+
     <para>The only restriction placed on the contents of the fields is that
       no control characters may be present, nor any of comma, colon, or
       equal sign. The <emphasis remap='I'>other</emphasis> field does not
       have this restriction, and is used to store accounting information
       used by other applications.
     </para>
-    
+
     <para> If none of the options are selected, <command>chfn</command>
       operates in an interactive fashion, prompting the user with the
       current values for all of the fields. Enter the new value to change
       the field, or leave the line blank to use the current value. The
       current value is displayed between a pair of <emphasis remap='B'>[
-        ]</emphasis> marks. Without options, chfn prompts for the current
+	]</emphasis> marks. Without options, chfn prompts for the current
       user account.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/login.defs</filename></term>
-        <listitem>runtime configuration</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+    <para>
+      <citerefentry>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

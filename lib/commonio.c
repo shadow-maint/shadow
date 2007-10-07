@@ -1,8 +1,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: commonio.c,v 1.28 2005/03/31 05:14:49 kloczek Exp $")
+#ident "$Id: commonio.c,v 1.30 2005/09/24 12:22:50 kloczek Exp $"
+
 #include "defines.h"
 #include <sys/stat.h>
 #include <utime.h>
@@ -432,7 +432,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 #ifdef WITH_SELINUX
 	db->scontext = NULL;
-	if (is_selinux_enabled () && (!db->readonly)) {
+	if ((is_selinux_enabled () > 0) && (!db->readonly)) {
 		if (fgetfilecon (fileno (db->fp), &db->scontext) < 0) {
 			goto cleanup_errno;
 		}

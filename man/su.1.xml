@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.10 2005/07/10 20:00:21 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.15 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -17,54 +17,57 @@
       <command>su</command>
       <arg choice='opt'>- </arg>
       <arg choice='opt'>
-        <arg choice='plain'>
-          <replaceable>username</replaceable>
-        </arg>
-        <arg choice='opt'>
-          <replaceable>args</replaceable>
-        </arg>
+	<arg choice='plain'>
+	  <replaceable>username</replaceable>
+	</arg>
+	<arg choice='opt'>
+	  <replaceable>args</replaceable>
+	</arg>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>su</command> is used to become another user during a login
+    <para>
+      <command>su</command> is used to become another user during a login
       session. Invoked without a username, <command>su</command> defaults to
       becoming the super user. The optional argument <option>-</option> may
       be used to provide an environment similar to what the user would
       expect had the user logged in directly.
     </para>
-    
-    <para>Additional arguments may be provided after the username, in which
-      case they are supplied to the user&acute;s login shell. In particular,
-      an argument of <option>-c</option> will cause the next argument to be
+
+    <para>
+      Additional arguments may be provided after the username, in which case
+      they are supplied to the user&acute;s login shell. In particular, an
+      argument of <option>-c</option> will cause the next argument to be
       treated as a command by most command interpreters. The command will be
       executed by the shell specified in <filename>/etc/passwd</filename>
       for the target user.
     </para>
-    
+
     <para>The user will be prompted for a password, if appropriate. Invalid
       passwords will produce an error message. All attempts, both valid and
       invalid, are logged to detect abuses of the system.
     </para>
-    
-    <para>The current environment is passed to the new shell. The value of
-      <emphasis remap='B'>$PATH</emphasis> is reset to
+
+    <para>
+      The current environment is passed to the new shell. The value of
+      <emphasis>$PATH</emphasis> is reset to
       <filename>/bin:/usr/bin</filename> for normal users, or
       <filename>/sbin:/bin:/usr/sbin:/usr/bin</filename> for the super user. 
-      This may be changed with the <emphasis remap='B'>ENV_PATH</emphasis>
-      and <emphasis remap='B'>ENV_SUPATH</emphasis> definitions in
+      This may be changed with the <emphasis>ENV_PATH</emphasis> and
+      <emphasis>ENV_SUPATH</emphasis> definitions in
       <filename>/etc/login.defs</filename>.
     </para>
-    
-    <para>A subsystem login is indicated by the presence of a "*" as the
-      first character of the login shell. The given home directory will be
-      used as the root of a new file system which the user is actually logged
-      into.
+
+    <para>
+      A subsystem login is indicated by the presence of a "*" as the first
+      character of the login shell. The given home directory will be used as
+      the root of a new file system which the user is actually logged into.
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
@@ -72,38 +75,42 @@
       only some of which may be in use at any particular site.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>suauth</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>suauth</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

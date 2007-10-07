@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPADD" "8" "08/03/2005" "" ""
+.TH "GROUPADD" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,41 +11,46 @@
 groupadd \- Create a new group
 .SH "SYNOPSIS"
 .HP 9
-\fBgroupadd\fR [\-g\ \fIgid\fR\ [\-o\ ]] [\-f] [\-K\ \fIKEY\fR=\fIVALUE\fR] \fIgroup\fR
+\fBgroupadd\fR [\-g\ \fIgid\fR\ [\-o]] [\-f] [\-K\ \fIKEY\fR=\fIVALUE\fR] \fIgroup\fR
 .SH "DESCRIPTION"
 .PP
-The 
-\fBgroupadd\fR 
+The
+\fBgroupadd\fR
 command creates a new group account using the values specified on the command line and the default values from the system. The new group will be entered into the system files as needed.
 .SH "OPTIONS"
 .PP
-The options which apply to the 
-\fBgroupadd\fR 
+The options which apply to the
+\fBgroupadd\fR
 command are:
 .TP
 \fB\-f\fR
-This option causes to just exit with success status if the specified group already exists. With 
-\fB\-g\fR, if specified gid already exists, other (unique) gid is chosen (i.e. 
-\fB\-g\fR 
+This option causes to just exit with success status if the specified group already exists. With
+\fB\-g\fR, if specified gid already exists, other (unique) gid is chosen (i.e.
+\fB\-g\fR
 is turned off).
 .TP
-\fB\-g\fR \fIgid\fR
-The numerical value of the group's ID. This value must be unique, unless the 
-\fB\-o\fR 
+\fB\-g\fR \fIGID\fR
+The numerical value of the group's ID. This value must be unique, unless the
+\fB\-o\fR
 option is used. The value must be non\-negative. The default is to use the smallest ID value greater than 999 and greater than every other group. Values between 0 and 999 are typically reserved for system accounts.
 .TP
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP
 \fB\-K \fR\fB\fIKEY\fR\fR\fB=\fR\fB\fIVALUE\fR\fR
-Overrides /etc/login.defs defaults (GID_MIN, GID_MAX and others). Multiple 
-\fB\-K\fR 
-options can be specified, e.g.: 
-\fB\-K\fR \fIGID_MIN\fR=\fI100\fR \fB\-K\fR \fIGID_MAX\fR=\fI499\fR
-
-Note: 
-\fB\-K\fR \fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR 
+Overrides /etc/login.defs defaults (GID_MIN, GID_MAX and others). Multiple
+\fB\-K\fR
+options can be specified.
+.sp
+Example:
+\fB\-K \fR\fIGID_MIN\fR=\fI100\fR\fB \-K \fR\fIGID_MAX\fR=\fI499\fR
+.sp
+Note:
+\fB\-K \fR\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 doesn't work yet.
 .TP
 \fB\-o\fR
-Allow add group wit non\-unique GID.
+This option permits to add group with non\-unique GID.
 .SH "FILES"
 .TP
 \fI/etc/group\fR
@@ -53,11 +58,19 @@ group account information
 .TP
 \fI/etc/gshadow\fR
 secure group account information
+.TP
+\fI/etc/login.defs\fR
+shadow password suite configuration
+.SH "CAVEATS"
+.PP
+Groupnames must begin with a lower case letter or an underscore, and only lower case letters, underscores, dashes, and dollar signs may follow. In regular expression terms: [a\-z_][a\-z0\-9_\-]*[$]
+.PP
+Groupnames may only be up to 16 characters long.
 .SH "EXIT VALUES"
 .PP
-The 
-\fBgroupadd\fR 
-command exits with the following values: 
+The
+\fBgroupadd\fR
+command exits with the following values:
 .TP
 \fI0\fR
 success
@@ -69,7 +82,9 @@ invalid command syntax
 invalid argument to option
 .TP
 \fI4\fR
-gid not unique (when \-o not used)
+gid not unique (when
+\fB\-o\fR
+not used)
 .TP
 \fI9\fR
 group name not unique
@@ -78,15 +93,16 @@ group name not unique
 can't update group file
 .SH "SEE ALSO"
 .PP
-\fBchfn\fR(1), 
-\fBchsh\fR(1), 
-\fBpasswd\fR(1), 
-\fBgpasswd\fR(8), 
-\fBgroupdel\fR(8), 
-\fBgroupmod\fR(8), 
-\fBuseradd\fR(8), 
-\fBuserdel\fR(8), 
-\fBusermod\fR(8)
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBlogin.defs\fR(5),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

@@ -36,8 +36,8 @@
 
 #ifndef USE_PAM
 
-#include "rcsid.h"
-RCSID ("$Id: limits.c,v 1.18 2005/06/20 10:02:02 kloczek Exp $")
+#ident "$Id: limits.c,v 1.20 2005/09/05 17:32:17 kloczek Exp $"
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -210,6 +210,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'A':
 			/* RLIMIT_AS - max address space (KB) */
 			retval |= setrlimit_value (RLIMIT_AS, pp, 1024);
+			break;
 #endif
 #ifdef RLIMIT_CPU
 		case 't':

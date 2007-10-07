@@ -30,8 +30,8 @@
 #include <config.h>
 
 #ifndef USE_PAM
-#include "rcsid.h"
-RCSID ("$Id: pwauth.c,v 1.18 2005/07/07 18:53:14 kloczek Exp $")
+#ident "$Id: pwauth.c,v 1.19 2005/08/31 17:24:56 kloczek Exp $"
+
 #include <sys/types.h>
 #include <signal.h>
 #include <fcntl.h>

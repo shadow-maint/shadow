@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: chsh.c,v 1.30 2005/07/24 15:22:45 kloczek Exp $")
+#ident "$Id: chsh.c,v 1.35 2005/10/04 21:02:22 kloczek Exp $"
+
 #include <fcntl.h>
 #include <pwd.h>
 #include <signal.h>
@@ -56,7 +56,9 @@ RCSID (PKG_VER "$Id: chsh.c,v 1.30 2005/07/24 15:22:45 kloczek Exp $")
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
 #endif
-/* global variables */
+/*
+ * Global variables
+ */
 static char *Prog;		/* Program name */
 static int amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
@@ -71,7 +73,6 @@ static int restricted_shell (const char *);
 /*
  * usage - print command line syntax and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-s shell] [name]\n"), Prog);
@@ -84,7 +85,6 @@ static void usage (void)
  * prompt the user for the login shell and change it according to the
  * response, or leave it alone if nothing was entered.
  */
-
 static void new_fields (void)
 {
 	printf (_("Enter the new value, or press ENTER for the default\n"));
@@ -97,7 +97,6 @@ static void new_fields (void)
  * If the first letter of the filename is 'r' or 'R', the shell is
  * considered to be restricted.
  */
-
 static int restricted_shell (const char *sh)
 {
 	/*
@@ -108,6 +107,12 @@ static int restricted_shell (const char *sh)
 	return !check_shell (sh);
 }
 
+#ifdef USE_PAM
+static struct pam_conv conv = {
+	misc_conv,
+	NULL
+};
+#endif				/* USE_PAM */
 
 /*
  * chsh - this command controls changes to the user's shell
@@ -115,7 +120,6 @@ static int restricted_shell (const char *sh)
  *	The only supported option is -s which permits the the login shell to
  *	be set from the command line.
  */
-
 int main (int argc, char **argv)
 {
 	char *user;		/* User name                         */
@@ -123,6 +127,12 @@ int main (int argc, char **argv)
 	int sflg = 0;		/* -s - set shell from command line  */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;	/* New password entry                */
+
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
+	int retval;
+#endif
 
 	sanitize_env ();
 
@@ -133,14 +143,12 @@ int main (int argc, char **argv)
 	/*
 	 * This command behaves different for root and non-root users.
 	 */
-
 	amroot = getuid () == 0;
 
 	/*
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("chsh");
@@ -165,7 +173,6 @@ int main (int argc, char **argv)
 	 * There should be only one remaining argument at most and it should
 	 * be the user's name.
 	 */
-
 	if (argc > optind + 1)
 		usage ();
 
@@ -173,7 +180,6 @@ int main (int argc, char **argv)
 	 * Get the name of the user to check. It is either the command line
 	 * name, or the name getlogin() returns.
 	 */
-
 	if (optind < argc) {
 		user = argv[optind];
 		pw = getpwnam (user);
@@ -198,7 +204,6 @@ int main (int argc, char **argv)
 	/*
 	 * Now we make sure this is a LOCAL password entry for this user ...
 	 */
-
 	if (__ispwNIS ()) {
 		char *nis_domain;
 		char *nis_master;
@@ -222,7 +227,6 @@ int main (int argc, char **argv)
 	 * Non-privileged users are only allowed to change the shell if the
 	 * UID of the user matches the current real UID.
 	 */
-
 	if (!amroot && pw->pw_uid != getuid ()) {
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();
@@ -235,7 +239,6 @@ int main (int argc, char **argv)
 	 * Non-privileged users are only allowed to change the shell if it
 	 * is not a restricted one.
 	 */
-
 	if (!amroot && restricted_shell (pw->pw_shell)) {
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();
@@ -248,9 +251,8 @@ int main (int argc, char **argv)
 	 * If the UID of the user does not match the current real UID,
 	 * check if the change is allowed by SELinux policy.
 	 */
-
 	if ((pw->pw_uid != getuid ())
-	    && (checkPasswdAccess (PASSWD__CHSH) != 0)) {
+	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();
 		fprintf (stderr,
@@ -266,17 +268,45 @@ int main (int argc, char **argv)
 	 * before any changes can be made. Idea from util-linux
 	 * chfn/chsh.  --marekm
 	 */
-
 	if (!amroot && getdef_bool ("CHSH_AUTH"))
 		passwd_check (pw->pw_name, pw->pw_passwd, "chsh");
 
-#endif				/* !USE_PAM */
+#else				/* !USE_PAM */
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid (getuid ());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chsh", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (E_NOPERM);
+	}
+#endif				/* USE_PAM */
 
 	/*
 	 * Now get the login shell. Either get it from the password
 	 * file, or use the value from the command line.
 	 */
-
 	if (!sflg)
 		STRFCPY (loginsh, pw->pw_shell);
 
@@ -284,7 +314,6 @@ int main (int argc, char **argv)
 	 * If the login shell was not set on the command line, let the user
 	 * interactively change it.
 	 */
-
 	if (!sflg) {
 		printf (_("Changing the login shell for %s\n"), user);
 		new_fields ();
@@ -296,7 +325,6 @@ int main (int argc, char **argv)
 	 * users are restricted to using the shells in /etc/shells.
 	 * The shell must be executable by the user.
 	 */
-
 	if (valid_field (loginsh, ":,=")) {
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		closelog ();
@@ -314,7 +342,6 @@ int main (int argc, char **argv)
 	 * to root to protect against unexpected signals. Any
 	 * keyboard signals are set to be ignored.
 	 */
-
 	if (setuid (0)) {
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
@@ -327,7 +354,6 @@ int main (int argc, char **argv)
 	 * The passwd entry is now ready to be committed back to
 	 * the password file. Get a lock on the file and open it.
 	 */
-
 	if (!pw_lock ()) {
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
@@ -369,7 +395,6 @@ int main (int argc, char **argv)
 	 * Update the passwd file entry. If there is a DBM file, update
 	 * that entry as well.
 	 */
-
 	if (!pw_update (&pwent)) {
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
@@ -381,7 +406,6 @@ int main (int argc, char **argv)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-
 	if (!pw_close ()) {
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
@@ -398,6 +422,11 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed user `%s' shell to `%s'", user, loginsh));
 
 	nscd_flush_cache ("passwd");
+
+#ifdef USE_PAM
+	if (retval == PAM_SUCCESS)
+		pam_end (pamh, PAM_SUCCESS);
+#endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);

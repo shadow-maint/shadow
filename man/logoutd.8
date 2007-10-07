@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGOUTD" "8" "08/03/2005" "" ""
+.TH "LOGOUTD" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,15 +14,15 @@ logoutd \- Enforce login time restrictions
 \fBlogoutd\fR
 .SH "DESCRIPTION"
 .PP
-\fBlogoutd\fR 
-enforces the login time and port restrictions specified in 
-\fI/etc/porttime\fR. 
-\fBlogoutd\fR 
-should be started from 
-\fI/etc/rc\fR. The 
-\fI/var/run/utmp\fR 
-file is scanned periodically and each user name is checked to see if the named user is permitted on the named port at the current time. Any login session which is violating the restrictions in 
-\fI/etc/porttime\fR 
+\fBlogoutd\fR
+enforces the login time and port restrictions specified in
+\fI/etc/porttime\fR.
+\fBlogoutd\fR
+should be started from
+\fI/etc/rc\fR. The
+\fI/var/run/utmp\fR
+file is scanned periodically and each user name is checked to see if the named user is permitted on the named port at the current time. Any login session which is violating the restrictions in
+\fI/etc/porttime\fR
 is terminated.
 .SH "FILES"
 .TP

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='faillog.8'>
-  <!--  $Id: faillog.8.xml,v 1.9 2005/06/16 15:50:30 kloczek Exp $ -->
+  <!--  $Id: faillog.8.xml,v 1.16 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,23 +14,24 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>faillog</command>    
+      <command>faillog</command>
       <arg choice='opt'>
-        <replaceable>options</replaceable>
+	<replaceable>options</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>faillog</command> formats the contents of the failure log
+    <para>
+      <command>faillog</command> formats the contents of the failure log
       from <filename>/var/log/faillog</filename> database. It also can be
       used for maintains failure counters and limits. Run
       <command>faillog</command> without arguments display only list of user
       faillog records who have ever had a login failure.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -39,114 +40,119 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term><option>-a</option>, <option>--all</option></term>
-        <listitem>
-          <para>Display faillog records for all users.</para>
-        </listitem>
+	<term><option>-a</option>, <option>--all</option></term>
+	<listitem>
+	  <para>Display faillog records for all users.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-h</option>, <option>--help</option></term>
-        <listitem>
-          <para>Display help message and exit.</para>
-        </listitem>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-l</option>, <option>--lock-time</option>
-          <replaceable>SEC</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Lock accout to <emphasis remap='I'>SEC</emphasis>
-            seconds after failed login.
-          </para>
-        </listitem>
+	<term>
+	  <option>-l</option>, <option>--lock-time</option>
+	  <replaceable>SEC</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Lock account to <replaceable>SEC</replaceable>
+	    seconds after failed login.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-m</option>, <option>--maximum</option>
-          <replaceable>MAX</replaceable>
-        </term>
-        <listitem>
-          <para>Set maiximum number of login failures after the account is
-            disabled to <emphasis remap='I'>MAX</emphasis>. Selecting
-            <emphasis remap='I'>MAX</emphasis> value of 0 has the effect of
-            not placing a limit on the number of failed logins. The maximum
-            failure count should always be 0 for <emphasis
-            remap='B'>root</emphasis> to prevent a denial of services attack
-            against the system.
-          </para>
-        </listitem>
+	<term>
+	  <option>-m</option>, <option>--maximum</option>
+	  <replaceable>MAX</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set maximum number of login failures after the account is
+	    disabled to <replaceable>MAX</replaceable>. Selecting
+	    <replaceable>MAX</replaceable> value of 0 has the effect of not
+	    placing a limit on the number of failed logins. The maximum
+	    failure count should always be 0 for <emphasis>root</emphasis>
+	    to prevent a denial of services attack against the system.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-r</option>, <option>--reset</option></term>
-        <listitem>
-          <para>Reset the counters of login failures or one recor if used
-            with -u <emphasis remap='I'>LOGIN</emphasis> option. Write
-            access to <filename>/var/log/faillog</filename> is required for
-            this option.
-          </para>
-        </listitem>
+	<term><option>-r</option>, <option>--reset</option></term>
+	<listitem>
+	  <para>
+	    Reset the counters of login failures or one record if used with
+	    the -u <replaceable>LOGIN</replaceable> option. Write access to
+	    <filename>/var/log/faillog</filename> is required for this
+	    option.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-t</option>, <option>--time</option>
-        <replaceable>DAYS</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Display faillog records more recent than <emphasis
-            remap='I'>DAYS</emphasis>. The <option>-t</option> flag overrides
-            the use of <option>-u</option>.
-          </para>
-        </listitem>
+	<term><option>-t</option>, <option>--time</option>
+	<replaceable>DAYS</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Display faillog records more recent than
+	    <replaceable>DAYS</replaceable>. The <option>-t</option>
+	    flag overrides the use of <option>-u</option>.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-u</option>, <option>--user</option>
-          <replaceable>LOGIN</replaceable>
-        </term>
-        <listitem>
-          <para>Display faillog record or maintains failure counters and
-            limits (if used with <option>-l</option>, <option>-m</option> or
-            <option>-r</option> options) only for user with <emphasis
-            remap='I'>LOGIN</emphasis>.
-          </para>
-        </listitem>
+	<term>
+	  <option>-u</option>, <option>--user</option> <replaceable>LOGIN</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Display faillog record or maintains failure counters and limits
+	    (if used with <option>-l</option>, <option>-m</option> or
+	    <option>-r</option> options) only for user with
+	    <replaceable>LOGIN</replaceable>.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para><command>faillog</command> only prints out users with no successful
+    <para>
+      <command>faillog</command> only prints out users with no successful
       login since the last failure. To print out a user who has had a
       successful login since their last failure, you must explicitly request
       the user with the <option>-u</option> flag, or print out all users
       with the <option>-a</option> flag.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/var/log/faillog</filename></term>
-        <listitem>failure logging file</listitem>
+	<term><filename>/var/log/faillog</filename></term>
+	<listitem>
+	  <para>failure logging file</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>faillog</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>faillog</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

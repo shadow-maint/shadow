@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.22 2005/08/02 10:50:51 kloczek Exp $
+ * $Id: prototypes.h,v 1.24 2005/09/05 16:22:03 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -86,6 +86,18 @@ extern int putgrent (const struct group *, FILE *);
 
 /* hushed.c */
 extern int hushed (const struct passwd *);
+
+/* audit_help.c */
+#ifdef WITH_AUDIT
+extern int audit_fd;
+#endif
+void audit_help_open (void);
+void audit_help_log (const char *, ...)
+#ifdef __GNUC__
+    __attribute__ ((format (printf, 1, 2)));
+#else
+;
+#endif
 
 /* limits.c */
 extern void setup_limits (const struct passwd *);

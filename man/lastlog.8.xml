@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='lastlog.8'>
-  <!-- $Id: lastlog.8.xml,v 1.9 2005/08/10 07:41:27 kloczek Exp $ -->
+  <!-- $Id: lastlog.8.xml,v 1.18 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>lastlog</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,93 +14,99 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>lastlog</command>    
+      <command>lastlog</command>
       <arg choice='opt'>
-        <replaceable>options</replaceable>
+	<replaceable>options</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>lastlog</command> formats and prints the contents of the last
-      login log <filename>/var/log/lastlog</filename> file. The <emphasis
-      remap='B'> login-name</emphasis>, <emphasis remap='B'>port</emphasis>,
-      and <emphasis remap='B'>last login time</emphasis> will be printed.
-      The default (no flags) causes lastlog entries to be printed, sorted by
-      their order in <filename>/etc/passwd</filename>.
+    <para>
+      <command>lastlog</command> formats and prints the contents of the last
+      login log <filename>/var/log/lastlog</filename> file. The
+      <emphasis>login-name</emphasis>, <emphasis>port</emphasis>, and
+      <emphasis>last login time</emphasis> will be printed.  The default (no
+      flags) causes lastlog entries to be printed, sorted by their order in
+      <filename>/etc/passwd</filename>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The options which apply to the <command>lastlog</command>
-          command are:
-        </term>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The options which apply to the <command>lastlog</command> command are:
+    </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-h</option>, <option>--help</option>
-        </term>
-        <listitem>
-          <para>Print help message and exit.</para>
-        </listitem>
+	<term>
+	  <option>-b</option>, <option>--before</option> <replaceable>DAYS</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Print only lastlog records older than <emphasis remap='I'>DAYS</emphasis>.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-t</option>, <option>--time</option>
+	<term>
+	  <option>-h</option>, <option>--help</option>
+	</term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-t</option>, <option>--time</option>
 	  <replaceable>DAYS</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Print the lastlog records more recent than
+	</term>
+	<listitem>
+	  <para>
+	    Print the lastlog records more recent than
 	    <emphasis remap='I'>DAYS</emphasis>.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-u</option>, <option>--user</option>
+	<term>
+	  <option>-u</option>, <option>--user</option>
 	  <replaceable>LOGIN</replaceable>
-        </term>
-        <listitem>
-          <para>Print the lastlog record for user with specified
+	</term>
+	<listitem>
+	  <para>Print the lastlog record for user with specified
 	    <emphasis remap='I'>LOGIN</emphasis> only.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
     <variablelist remap='TP'>
       <varlistentry>
-        <term>
-          The <option>-t</option> flag overrides the use of <option>-u</option>.
-        </term>
-        <listitem>
-          <para></para>
-        </listitem>
+	<term>
+	  The <option>-t</option> flag overrides the use of <option>-u</option>.
+	</term>
+	<listitem>
+	  <para></para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
-    <para>If the user has never logged in the message <emphasis remap='B'>
-      **Never logged in**</emphasis> will be displayed instead of the port and
-      time.
+
+    <para>
+      If the user has never logged in the message <emphasis>** Never logged
+      in**</emphasis> will be displayed instead of the port and time.
     </para>
   </refsect1>
-  
+
   <refsect1 id='note'>
     <title>NOTE</title>
     <para>
-      The <command>lastlog</command> file is a database which contains info
+      The <filename>lastlog</filename> file is a database which contains info
       on the last login of each user. You should not rotate it. It is a sparse
       file, so its size on the disk is much smaller than the one shown by
-      <command>ls -l</command> (which can indicate a really big file if
+      "<command>ls -l</command>" (which can indicate a really big file if
       you have a high UID). You can display its real size with
-      <command>ls -s</command>.
+      "<command>ls -s</command>".
     </para>
   </refsect1>
 
@@ -108,20 +114,23 @@
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/var/log/lastlog</filename></term>
-        <listitem>lastlog logging file</listitem>
+	<term><filename>/var/log/lastlog</filename></term>
+	<listitem>
+	  <para>lastlog logging file</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>Large gaps in uid numbers will cause the lastlog program to run
+    <para>
+      Large gaps in uid numbers will cause the lastlog program to run
       longer with no output to the screen (i.e. if mmdf=800 and last
       uid=170, program will appear to hang as it processes uid 171-799).
     </para>
   </refsect1>
-  
+
   <refsect1 id='authors'>
     <title>AUTHORS</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

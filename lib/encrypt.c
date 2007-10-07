@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: encrypt.c,v 1.13 2005/05/25 19:31:50 kloczek Exp $")
+#ident "$Id: encrypt.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+
 #include <unistd.h>
 #include "prototypes.h"
 #include "defines.h"

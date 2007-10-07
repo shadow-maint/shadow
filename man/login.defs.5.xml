@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.defs.5'>
-  <!--  $Id: login.defs.5.xml,v 1.8 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!--  $Id: login.defs.5.xml,v 1.13 2005/10/01 13:30:10 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login.defs</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -11,26 +11,28 @@
     <refname>login.defs</refname>
     <refpurpose>shadow password suite configuration</refpurpose>
   </refnamediv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>The <filename>/etc/login.defs</filename> file defines the
+    <para>
+      The <filename>/etc/login.defs</filename> file defines the
       site-specific configuration for the shadow password suite. This file
       is required. Absence of this file will not prevent system operation,
       but will probably result in undesirable operation.
     </para>
-    
-    <para>This file is a readable text file, each line of the file
-      describing one configuration parameter. The lines consist of a
-      configuration name and value, separated by whitespace. Blank lines and
-      comment lines are ignored. Comments are introduced with a `#' pound
-      sign and the pound sign must be the first non-white character of the
-      line.
+
+    <para>
+      This file is a readable text file, each line of the file describing
+      one configuration parameter. The lines consist of a configuration name
+      and value, separated by whitespace. Blank lines and comment lines are
+      ignored. Comments are introduced with a `#' pound sign and the pound
+      sign must be the first non-white character of the line.
     </para>
-    
-    <para>Parameter values may be of four types: strings, booleans,
-      numbers, and long numbers. A string is comprised of any printable
-      characters. A boolean should be either the value &ldquo;yes&rdquo; or
+
+    <para>
+      Parameter values may be of four types: strings, booleans, numbers, and
+      long numbers. A string is comprised of any printable characters. A
+      boolean should be either the value &ldquo;yes&rdquo; or
       &ldquo;no&rdquo;. An undefined boolean parameter or one with a value
       other than these will be given a &ldquo;no&rdquo; value. Numbers (both
       regular and long) may be either decimal values, octal values (precede
@@ -38,244 +40,254 @@
       value with &ldquo;0x&rdquo;). The maximum value of the regular and
       long numeric parameters is machine-dependent.
     </para>
-    
+
     <para>The following configuration items are provided:</para>
-    
+
     <variablelist remap='IP'>
       <varlistentry>
-        <term>CHFN_AUTH (boolean)</term>
-        <listitem>
-          <para> If <emphasis remap='I'>yes</emphasis>, the
-            <command>chfn</command> and <command>chsh</command> programs
-            will require authentication before making any changes, unless
-            run by the superuser.
-          </para>
-        </listitem>
+	<term>CHFN_AUTH (boolean)</term>
+	<listitem>
+	  <para>
+	    If <emphasis remap='I'>yes</emphasis>, the
+	    <command>chfn</command> and <command>chsh</command> programs
+	    will require authentication before making any changes, unless
+	    run by the superuser.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>CHFN_RESTRICT (string)</term>
-        <listitem>
-          <para>This parameter specifies which values in the <emphasis
-            remap='I'>gecos</emphasis> field of the
-            <filename>/etc/passwd</filename> file may be changed by regular
-            users using the <command>chfn</command> program. It can be any
-            combination of letters <emphasis remap='I'>f</emphasis>
-            ,<emphasis remap='I'>r</emphasis>, <emphasis remap='I'>w</emphasis>,
-            <emphasis remap='I'>h</emphasis>, for Full name, Room number,
-            Work phone, and Home phone, respectively. For backward
-            compatibility, "yes" is equivalent to "rwh" and "no" is
-            equivalent to "frwh". If not specified, only the superuser can
-            make any changes. The most restrictive setting is better
-            achieved by not installing chfn SUID.
-          </para>
-        </listitem>
+	<term>CHFN_RESTRICT (string)</term>
+	<listitem>
+	  <para>
+	    This parameter specifies which values in the <emphasis
+	    remap='I'>gecos</emphasis> field of the
+	    <filename>/etc/passwd</filename> file may be changed by regular
+	    users using the <command>chfn</command> program. It can be any
+	    combination of letters <emphasis remap='I'>f</emphasis>
+	    ,<emphasis remap='I'>r</emphasis>, <emphasis remap='I'>w</emphasis>,
+	    <emphasis remap='I'>h</emphasis>, for Full name, Room number,
+	    Work phone, and Home phone, respectively. For backward
+	    compatibility, "yes" is equivalent to "rwh" and "no" is
+	    equivalent to "frwh". If not specified, only the superuser can
+	    make any changes. The most restrictive setting is better
+	    achieved by not installing chfn SUID.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>CREATE_HOME (boolean)</term>
-        <listitem>
-          <para>This defines whether useradd should create home directories
-            for users by default. This option is OR'ed with the
-            <option>-m</option> flag on useradd command line.
-          </para>
-        </listitem>
+	<term>CREATE_HOME (boolean)</term>
+	<listitem>
+	  <para>
+	    This defines whether useradd should create home directories for
+	    users by default. This option is OR'ed with the
+	    <option>-m</option> flag on useradd command line.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>GID_MAX (number)</term>
-        <term>GID_MIN (number)</term>
-        <listitem>
-          <para>
-            Range of group IDs to choose from for the
-            <command>useradd</command> and
-            <command>groupadd</command>programs.
-          </para>
-        </listitem>
+	<term>GID_MAX (number)</term>
+	<term>GID_MIN (number)</term>
+	<listitem>
+	  <para>
+	    Range of group IDs to choose from for the
+	    <command>useradd</command> and <command>groupadd</command>
+	    programs.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>MAIL_DIR (string)</term>
-        <listitem>
-          <para>The mail spool directory. This is needed to manipulate the
-            mailbox when its corresponding user account is modified or
-            deleted. If not specified, a compile-time default is used.
-          </para>
-        </listitem>
+	<term>MAIL_DIR (string)</term>
+	<listitem>
+	  <para>
+	    The mail spool directory. This is needed to manipulate the
+	    mailbox when its corresponding user account is modified or
+	    deleted. If not specified, a compile-time default is used.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>PASS_MAX_DAYS (number)</term>
-        <listitem>
-          <para>The maximum number of days a password may be used. If the
-            password is older than this, a password change will be forced.
-            If not specified, -1 will be assumed (which disables the
-            restriction).
-          </para>
-        </listitem>
+	<term>PASS_MAX_DAYS (number)</term>
+	<listitem>
+	  <para>
+	    The maximum number of days a password may be used. If the
+	    password is older than this, a password change will be forced. 
+	    If not specified, -1 will be assumed (which disables the
+	    restriction).
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>PASS_MIN_DAYS (number)</term>
-        <listitem>
-          <para>The minimum number of days allowed between password changes.
-            Any password changes attempted sooner than this will be
-            rejected. If not specified, -1 will be assumed (which disables
-            the restriction).
-          </para>
-        </listitem>
+	<term>PASS_MIN_DAYS (number)</term>
+	<listitem>
+	  <para>
+	    The minimum number of days allowed between password changes. 
+	    Any password changes attempted sooner than this will be
+	    rejected. If not specified, -1 will be assumed (which disables
+	    the restriction).
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>PASS_WARN_AGE (number)</term>
-        <listitem>
-          <para>The number of days warning given before a password expires.
-            A zero means warning is given only upon the day of expiration, a
-            negative value means no warning is given. If not specified, no
-            warning will be provided.
-          </para>
-        </listitem>
+	<term>PASS_WARN_AGE (number)</term>
+	<listitem>
+	  <para>
+	    The number of days warning given before a password expires. A
+	    zero means warning is given only upon the day of expiration, a
+	    negative value means no warning is given. If not specified, no
+	    warning will be provided.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
-    <para>PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE are only used at
-      the time of account creation. Any changes to these settings won't
-      affect existing accounts.
+
+    <para> 
+      PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE are only used at the
+      time of account creation. Any changes to these settings won't affect
+      existing accounts.
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>UID_MAX (number)</term>
-        <term>UID_MIN (number)</term>
-        <listitem>
-          <para>
-            Range of user IDs to choose from for the
-            <command>useradd</command> program.
-          </para>
-        </listitem>
+	<term>UID_MAX (number)</term>
+	<term>UID_MIN (number)</term>
+	<listitem>
+	  <para>
+	    Range of user IDs to choose from for the
+	    <command>useradd</command> program.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>UMASK (number)</term>
-        <listitem>
-          <para>The permission mask is initialized to this value. If not
-            specified, the permission mask will be initialized to 077.
-          </para>
-        </listitem>
+	<term>UMASK (number)</term>
+	<listitem>
+	  <para>
+	    The permission mask is initialized to this value. If not
+	    specified, the permission mask will be initialized to 077.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>USERDEL_CMD (string)</term>
-        <listitem>
-          <para>If defined, this command is run when removing a user. It
-            should remove any at/cron/print jobs etc. owned by the user to
-            be removed (passed as the first argument).
-          </para>
-        </listitem>
+	<term>USERDEL_CMD (string)</term>
+	<listitem>
+	  <para>
+	    If defined, this command is run when removing a user. It should
+	    remove any at/cron/print jobs etc. owned by the user to be
+	    removed (passed as the first argument).
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='cross_reference'>
     <title>CROSS REFERENCE</title>
-    <para>The following cross reference shows which programs in the shadow
+    <para>
+      The following cross reference shows which programs in the shadow
       password suite use which parameters.
     </para>
     <!-- .na -->
     <variablelist remap='IP'>
       <varlistentry>
-        <term>chfn</term>
-        <listitem>
-          <para>CHFN_AUTH CHFN_RESTRICT</para>
-        </listitem>
+	<term>chfn</term>
+	<listitem>
+	  <para>CHFN_AUTH CHFN_RESTRICT</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>chsh</term>
-        <listitem>
-          <para>CHFN_AUTH</para>
-        </listitem>
+	<term>chsh</term>
+	<listitem>
+	  <para>CHFN_AUTH</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>groupadd</term>
-        <listitem>
-          <para>GID_MAX GID_MIN</para>
-        </listitem>
+	<term>groupadd</term>
+	<listitem>
+	  <para>GID_MAX GID_MIN</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>newusers</term>
-        <listitem>
-          <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
-            UMASK
-          </para>
-        </listitem>
+	<term>newusers</term>
+	<listitem>
+	  <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    UMASK
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>pwconv</term>
-        <listitem>
-          <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE</para>
-        </listitem>
+	<term>pwconv</term>
+	<listitem>
+	  <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>useradd</term>
-        <listitem>
-          <para>CREATE_HOME
-            GID_MAX GID_MIN
-            PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
-            UID_MAX UID_MIN
-            UMASK
-          </para>
-        </listitem>
+	<term>useradd</term>
+	<listitem>
+	  <para>CREATE_HOME
+	    GID_MAX GID_MIN
+	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+	    UID_MAX UID_MIN
+	    UMASK
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>userdel</term>
-        <listitem>
-          <para>MAIL_DIR
-            USERDEL_CMD
-          </para>
-        </listitem>
+	<term>userdel</term>
+	<listitem>
+	  <para>MAIL_DIR
+	    USERDEL_CMD
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>usermod</term>
-        <listitem>
-          <para>MAIL_DIR</para>
-          <!-- .ad -->
-        </listitem>
+	<term>usermod</term>
+	<listitem>
+	  <para>MAIL_DIR</para>
+	  <!-- .ad -->
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='bugs'>
     <title>BUGS</title>
-    <para>Much of the functionality that used to be provided by the shadow
+    <para>
+      Much of the functionality that used to be provided by the shadow
       password suite is now handled by PAM. Thus,
       <filename>/etc/login.defs</filename> is no longer used by programs
-      such as:
-      <citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-        <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>.
-      Please refer to the corresponding PAM configuration files instead.
+      such as: <citerefentry>
+      <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>, <citerefentry>
+      <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>, <citerefentry>
+      <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>. Please refer to the corresponding PAM configuration
+      files instead.
     </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>pam</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>pam</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='authors'>
     <title>AUTHORS</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com) Chip Rosenthal (chip@unicom.com)

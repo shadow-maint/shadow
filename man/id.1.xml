@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='id.1'>
-  <!-- $Id: id.1.xml,v 1.8 2005/06/14 20:18:17 kloczek Exp $ -->
+  <!-- $Id: id.1.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>id</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -18,47 +18,53 @@
       <command>id</command>    <arg choice='opt'>-a </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>id</command> displays the current real and effective user
-      and group ID names or values. If the value does not have a
-      corresponding entry in <filename>/etc/passwd</filename> or
+    <para>
+      <command>id</command> displays the current real and effective user and
+      group ID names or values. If the value does not have a corresponding
+      entry in <filename>/etc/passwd</filename> or
       <filename>/etc/group</filename>, the value will be displayed without
       the corresponding name. The optional <option>-a</option> flag will
       display the group set on systems which support multiple concurrent
       group membership.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>getgid</refentrytitle><manvolnum>2</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>getgid</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getgroups</refentrytitle><manvolnum>2</manvolnum>
+	<refentrytitle>getgroups</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
+	<refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

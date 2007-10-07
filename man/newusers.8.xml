@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
-<refentry id='newusers8'>
-  <!-- $Id: newusers.8.xml,v 1.6 2005/06/16 17:37:58 kloczek Exp $ -->
+<refentry id='newusers.8'>
+  <!-- $Id: newusers.8.xml,v 1.11 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>NEWUSERS</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,93 +14,116 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>newusers</command>    
+      <command>newusers</command>
       <arg choice='opt'>
-        <replaceable>new_users</replaceable>
+	<replaceable>new_users</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>newusers</command> reads a file of user name and
-      clear-text password pairs and uses this information to update a group
-      of existing users or to create new users. Each line is in the same
-      format as the standard password file (see
+    <para>
+      <command>newusers</command> reads a file of user name and clear-text
+      password pairs and uses this information to update a group of existing
+      users or to create new users. Each line is in the same format as the
+      standard password file (see
       <citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>) with the following exceptions:
     </para>
 
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <emphasis remap='I'>pw_passwd</emphasis>
-        </term>
-        <listitem>
-          <para>This field will be encrypted and used as the new value of
-            the encrypted password.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis remap='I'>pw_passwd</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    This field will be encrypted and used as the new value of the
+	    encrypted password.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='I'>pw_age</emphasis>
-        </term>
-        <listitem>
-          <para>This field will be ignored for shadow passwords if the user
-            already exists.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis remap='I'>pw_age</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    This field will be ignored for shadow passwords if the user
+	    already exists.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='I'>pw_gid</emphasis>
-        </term>
-        <listitem>
-          <para>This field may be the name of an existing group, in which
-            case the named user will be added as a member. If a non-existent
-            numerical group is given, a new group will be created having
-            this number.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis remap='I'>pw_gid</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    This field may be the name of an existing group, in which case
+	    the named user will be added as a member. If a non-existent
+	    numerical group is given, a new group will be created having
+	    this number.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <emphasis remap='I'>pw_dir</emphasis>
-        </term>
-        <listitem>
-          <para>This field will be checked for existence as a directory and
-            a new directory with the same name will be created if it does
-            not already exist. The ownership of the directory will be set to
-            be that of the user being created or updated.
-          </para>
-        </listitem>
+	<term>
+	  <emphasis remap='I'>pw_dir</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    This field will be checked for existence as a directory and a
+	    new directory with the same name will be created if it does not
+	    already exist. The ownership of the directory will be set to be
+	    that of the user being created or updated.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
-    <para>This command is intended to be used in a large system environment
+
+    <para> 
+      This command is intended to be used in a large system environment
       where many accounts are updated at a single time.
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>The input file must be protected since it contains unencrypted
+    <para>
+      The input file must be protected since it contains unencrypted
       passwords.
     </para>
   </refsect1>
-  
+
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

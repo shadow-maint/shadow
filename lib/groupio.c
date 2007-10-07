@@ -1,8 +1,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: groupio.c,v 1.12 2005/06/20 09:56:37 kloczek Exp $")
+#ident "$Id: groupio.c,v 1.13 2005/08/31 17:24:56 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.9 2005/07/12 16:28:14 kloczek Exp $ -->
+  <!-- $Id: pwck.8.xml,v 1.13 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -18,61 +18,63 @@
       <arg choice='opt'>-q </arg>
       <arg choice='opt'>-s </arg>
       <arg choice='opt'>
-        <arg choice='plain'>
-          <replaceable>passwd</replaceable>
-        </arg>
-        <arg choice='plain'>
-          <replaceable>shadow</replaceable>
-        </arg>
+	<arg choice='plain'>
+	  <replaceable>passwd</replaceable>
+	</arg>
+	<arg choice='plain'>
+	  <replaceable>shadow</replaceable>
+	</arg>
       </arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>pwck</command>
       <arg choice='opt'>-r </arg>
       <arg choice='opt'>
-        <arg choice='plain'>
-          <replaceable>passwd</replaceable>
-        </arg>
-        <arg choice='plain'>
-          <replaceable>shadow</replaceable>
-        </arg>
+	<arg choice='plain'>
+	  <replaceable>passwd</replaceable>
+	</arg>
+	<arg choice='plain'>
+	  <replaceable>shadow</replaceable>
+	</arg>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>pwck</command> verifies the integrity of the system
+    <para>
+      <command>pwck</command> verifies the integrity of the system
       authentication information. All entries in the
       <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
       are checked to see that the entry has the proper format and valid data
       in each field. The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
     </para>
-    
+
     <para>Checks are made to verify that each entry has:</para>
     <itemizedlist mark='bullet'>
       <listitem>
-        <para>the correct number of fields</para>
+	<para>the correct number of fields</para>
       </listitem>
       <listitem>
-        <para>a unique user name</para>
+	<para>a unique user name</para>
       </listitem>
       <listitem>
-        <para>a valid user and group identifier</para>
+	<para>a valid user and group identifier</para>
       </listitem>
       <listitem>
-        <para>a valid primary group</para>
+	<para>a valid primary group</para>
       </listitem>
       <listitem>
-        <para> a valid home directory</para>
+	<para> a valid home directory</para>
       </listitem>
       <listitem>
-        <para>a valid login shell</para>
+	<para>a valid login shell</para>
       </listitem>
     </itemizedlist>
-    
-    <para>The checks for correct number of fields and unique user name are
+
+    <para>
+      The checks for correct number of fields and unique user name are
       fatal. If the entry has the wrong number of fields, the user will be
       prompted to delete the entire line. If the user does not answer
       affirmatively, all further checks are bypassed. An entry with a
@@ -81,14 +83,15 @@
       is encouraged to run the <command>usermod</command> command to correct
       the error.
     </para>
-    
-    <para> The commands which operate on the
-      <filename>/etc/passwd</filename> file are not able to alter corrupted
-      or duplicated entries. <command>pwck</command> should be used in
-      those circumstances to remove the offending entry.
+
+    <para>
+      The commands which operate on the <filename>/etc/passwd</filename>
+      file are not able to alter corrupted or duplicated entries.
+      <command>pwck</command> should be used in those circumstances to
+      remove the offending entry.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -96,80 +99,86 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-q</option>
-        </term>
-        <listitem>
-          <para>
+	<term>
+	  <option>-q</option>
+	</term>
+	<listitem>
+	  <para>
 	    Report errors only. Using this option will not require an action
 	    from the user.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-r</option>
-        </term>
-        <listitem>
-          <para>
+	<term>
+	  <option>-r</option>
+	</term>
+	<listitem>
+	  <para>
 	    Execute the <command>pwck</command> command in read-only mode.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-s</option>
-        </term>
-        <listitem>
-          <para>
+	<term>
+	  <option>-s</option>
+	</term>
+	<listitem>
+	  <para>
 	    Sort entries in <filename>/etc/passwd</filename> and
 	    <filename>/etc/shadow</filename> by UID.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
 
     <para>
       By default, <command>pwck</command> operates on the files
-      <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>. 
+      <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>.
       The user may select alternate files with the <emphasis
       remap='I'>passwd</emphasis> and <emphasis remap='I'>shadow</emphasis>
       parameters.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para><citerefentry>
-        <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
 
@@ -178,34 +187,46 @@
     <para>
       The <command>pwck</command> command exits with the following values:
       <variablelist>
-        <varlistentry>
-          <term><replaceable>0</replaceable></term>
-          <listitem>success</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>1</replaceable></term>
-          <listitem>invalid command syntax</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>2</replaceable></term>
-          <listitem>one or more bad password entries</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>3</replaceable></term>
-          <listitem>can't open password files</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>4</replaceable></term>
-          <listitem>can't lock password files</listitem>
-        </varlistentry>
-        <varlistentry>
-          <term><replaceable>5</replaceable></term>
-          <listitem>can't update password files</listitem>
-        </varlistentry>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>one or more bad password entries</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>3</replaceable></term>
+	  <listitem>
+	    <para>can't open password files</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>4</replaceable></term>
+	  <listitem>
+	    <para>can't lock password files</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>5</replaceable></term>
+	  <listitem>
+	    <para>can't update password files</para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.28 2005/08/09 15:27:51 kloczek Exp $")
+#ident "$Id: gpasswd.c,v 1.34 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <errno.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -45,7 +45,9 @@ RCSID (PKG_VER "$Id: gpasswd.c,v 1.28 2005/08/09 15:27:51 kloczek Exp $")
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
-/* global variables */
+/*
+ * Global variables
+ */
 static char *Prog;
 
 #ifdef SHADOWGRP
@@ -54,6 +56,8 @@ static int is_shadowgrp;
 
 static int
  aflg = 0, Aflg = 0, dflg = 0, Mflg = 0, rflg = 0, Rflg = 0;
+
+unsigned int bywho = -1;
 
 #ifndef	RETRIES
 #define	RETRIES	3
@@ -67,7 +71,6 @@ static int check_list (const char *);
 /*
  * usage - display usage message
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-r|-R] group\n"), Prog);
@@ -89,7 +92,6 @@ static void usage (void)
  *	with die() as the signal handler. If signal later calls die() with a
  *	signal number, the terminal modes are then reset.
  */
-
 static RETSIGTYPE die (int killed)
 {
 	static TERMIO sgtty;
@@ -112,7 +114,6 @@ static RETSIGTYPE die (int killed)
  *	check_list scans a comma-separated list of user names and checks
  *	that each listed name exists.
  */
-
 static int check_list (const char *users)
 {
 	const char *start, *end;
@@ -146,13 +147,11 @@ static int check_list (const char *users)
 	return errors;
 }
 
-
 static void failure (void)
 {
 	fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 	exit (1);
- /*NOTREACHED*/}
-
+}
 
 /*
  * gpasswd - administer the /etc/group file
@@ -164,7 +163,6 @@ static void failure (void)
  *	-A user,...	make list of users the administrative users
  *	-M user,...	make list of users the group members
  */
-
 int main (int argc, char **argv)
 {
 	int flag;
@@ -186,6 +184,10 @@ int main (int argc, char **argv)
 	char *group = NULL;
 	char *members = NULL;
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	sanitize_env ();
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
@@ -198,8 +200,8 @@ int main (int argc, char **argv)
 	 * prevent the invoker from issuing signals which would interfer
 	 * with this command.
 	 */
-
 	amroot = getuid () == 0;
+	bywho = getuid ();
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("gpasswd");
@@ -217,14 +219,24 @@ int main (int argc, char **argv)
 				fprintf (stderr,
 					 _("%s: unknown user %s\n"), Prog,
 					 user);
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					      "adding to group", user, -1, 0);
+#endif
 				exit (1);
 			}
 			aflg++;
 			break;
 #ifdef SHADOWGRP
 		case 'A':
-			if (!amroot)
+			if (!amroot) {
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					      "Listing administrators", NULL,
+					      bywho, 0);
+#endif
 				failure ();
+			}
 			if (!is_shadowgrp) {
 				fprintf (stderr,
 					 _
@@ -245,8 +257,14 @@ int main (int argc, char **argv)
 		case 'g':	/* no-op from normal password */
 			break;
 		case 'M':
-			if (!amroot)
+			if (!amroot) {
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					      "listing members", NULL, bywho,
+					      0);
+#endif
 				failure ();
+			}
 			members = optarg;
 			if (check_list (members))
 				exit (1);
@@ -280,7 +298,11 @@ int main (int argc, char **argv)
 	pw = get_my_pwent ();
 	if (!pw) {
 		fprintf (stderr, _("Who are you?\n"));
-		exit (1);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "user lookup", NULL,
+			      bywho, 0);
+#endif
+		failure ();
 	}
 	myname = xstrdup (pw->pw_name);
 
@@ -293,13 +315,16 @@ int main (int argc, char **argv)
 	 * XXX - should get the entry using gr_locate() and modify that,
 	 * getgrnam() could give us a NIS group.  --marekm
 	 */
-
 	if (!(group = argv[optind]))
 		usage ();
 
 	if (!(gr = getgrnam (group))) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
-		exit (1);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "group lookup", group,
+			      -1, 0);
+#endif
+		failure ();
 	}
 	grent = *gr;
 	grent.gr_name = xstrdup (gr->gr_name);
@@ -339,9 +364,13 @@ int main (int argc, char **argv)
 	 * Administrative members can do anything to a group that the root
 	 * user can.
 	 */
-
-	if (!amroot && !is_on_list (sgent.sg_adm, myname))
+	if (!amroot && !is_on_list (sgent.sg_adm, myname)) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify group", group,
+			      -1, 0);
+#endif
 		failure ();
+	}
 #else				/* ! SHADOWGRP */
 
 #ifdef FIRST_MEMBER_IS_ADMIN
@@ -352,13 +381,22 @@ int main (int argc, char **argv)
 	 * the root user can. The rationale for this hack is that the FIRST
 	 * user is probably the most important user in this entire group.
 	 */
-
 	if (!amroot) {
-		if (grent.gr_mem[0] == (char *) 0)
+		if (grent.gr_mem[0] == (char *) 0) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "modifying group", group, -1, 0);
+#endif
 			failure ();
+		}
 
-		if (strcmp (grent.gr_mem[0], myname) != 0)
+		if (strcmp (grent.gr_mem[0], myname) != 0) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "modifying group", myname, -1, 0);
+#endif
 			failure ();
+		}
 	}
 #else
 	/*
@@ -366,9 +404,13 @@ int main (int argc, char **argv)
 	 * installed on existing systems where the first group member might
 	 * be just a normal user.  --marekm
 	 */
-
-	if (!amroot)
+	if (!amroot) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
+			      group, -1, 0);
+#endif
 		failure ();
+	}
 #endif
 
 #endif				/* SHADOWGRP */
@@ -377,11 +419,14 @@ int main (int argc, char **argv)
 	 * Removing a password is straight forward. Just set the password
 	 * field to a "".
 	 */
-
 	if (rflg) {
 		grent.gr_passwd = "";	/* XXX warning: const */
 #ifdef	SHADOWGRP
 		sgent.sg_passwd = "";	/* XXX warning: const */
+#endif
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting group password", group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "remove password from group %s by %s",
 			 group, myname));
@@ -391,10 +436,13 @@ int main (int argc, char **argv)
 		 * Same thing for restricting the group. Set the password
 		 * field to "!".
 		 */
-
 		grent.gr_passwd = "!";	/* XXX warning: const */
 #ifdef	SHADOWGRP
 		sgent.sg_passwd = "!";	/* XXX warning: const */
+#endif
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "restrict access to group", group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "restrict access to group %s by %s",
 			 group, myname));
@@ -405,12 +453,15 @@ int main (int argc, char **argv)
 	 * Adding a member to a member list is pretty straightforward as
 	 * well. Call the appropriate routine and split.
 	 */
-
 	if (aflg) {
 		printf (_("Adding user %s to group %s\n"), user, group);
 		grent.gr_mem = add_list (grent.gr_mem, user);
 #ifdef	SHADOWGRP
 		sgent.sg_mem = add_list (sgent.sg_mem, user);
+#endif
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group member",
+			      user, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add member %s to group %s by %s", user,
 			 group, myname));
@@ -421,7 +472,6 @@ int main (int argc, char **argv)
 	 * Removing a member from the member list is the same deal as adding
 	 * one, except the routine is different.
 	 */
-
 	if (dflg) {
 		int removed = 0;
 
@@ -440,8 +490,16 @@ int main (int argc, char **argv)
 		if (!removed) {
 			fprintf (stderr, _("%s: unknown member %s\n"),
 				 Prog, user);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting member", user, -1, 0);
+#endif
 			exit (1);
 		}
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting member",
+			      user, -1, 1);
+#endif
 		SYSLOG ((LOG_INFO, "remove member %s from group %s by %s",
 			 user, group, myname));
 		goto output;
@@ -452,8 +510,11 @@ int main (int argc, char **argv)
 	 * list to make sure everyone is a real user. Then slap the new list
 	 * in place.
 	 */
-
 	if (Aflg) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "setting group admin",
+			      group, -1, 1);
+#endif
 		SYSLOG ((LOG_INFO, "set administrators of %s to %s",
 			 group, admins));
 		sgent.sg_adm = comma_to_list (admins);
@@ -467,8 +528,11 @@ int main (int argc, char **argv)
 	 * make sure everyone is a real user. Then slap the new list in
 	 * place.
 	 */
-
 	if (Mflg) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "setting group members", group, -1, 1);
+#endif
 		SYSLOG ((LOG_INFO, "set members of %s to %s", group, members));
 #ifdef SHADOWGRP
 		sgent.sg_mem = comma_to_list (members);
@@ -482,9 +546,12 @@ int main (int argc, char **argv)
 	 * be a tty. The typical keyboard signals are caught so the termio
 	 * modes can be restored.
 	 */
-
 	if (!isatty (0) || !isatty (1)) {
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
+			      group, -1, 0);
+#endif
 		exit (1);
 	}
 
@@ -504,7 +571,6 @@ int main (int argc, char **argv)
 	 * identical. There is no need to validate the old password since
 	 * the invoker is either the group owner, or root.
 	 */
-
 	printf (_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
@@ -524,8 +590,13 @@ int main (int argc, char **argv)
 		strzero (cp);
 		memzero (pass, sizeof pass);
 
-		if (retries + 1 < RETRIES)
+		if (retries + 1 < RETRIES) {
 			puts (_("They don't match; try again"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "changing password", group, -1, 0);
+#endif
+		}
 	}
 
 	if (retries == RETRIES) {
@@ -541,6 +612,10 @@ int main (int argc, char **argv)
 	else
 #endif
 		grent.gr_passwd = cp;
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password", group,
+		      -1, 1);
+#endif
 	SYSLOG ((LOG_INFO, "change the password for group %s by %s", group,
 		 myname));
 
@@ -550,11 +625,14 @@ int main (int argc, char **argv)
 	 * will be locked and opened for writing. The new entry will be
 	 * output, etc.
 	 */
-
       output:
 	if (setuid (0)) {
 		fprintf (stderr, _("Cannot change ID to root.\n"));
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing id to root",
+			      group, -1, 0);
+#endif
 		closelog ();
 		exit (1);
 	}
@@ -563,48 +641,80 @@ int main (int argc, char **argv)
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: can't get lock\n"), Prog);
 		SYSLOG ((LOG_WARN, "failed to get lock for /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking /etc/group",
+			      group, -1, 0);
+#endif
 		exit (1);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_lock ()) {
 		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
 		SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking /etc/gshadow", group, -1, 0);
+#endif
 		exit (1);
 	}
 #endif
 	if (!gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: can't open file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening /etc/group",
+			      group, -1, 0);
+#endif
 		exit (1);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening /etc/gshadow", group, -1, 0);
+#endif
 		exit (1);
 	}
 #endif
 	if (!gr_update (&grent)) {
 		fprintf (stderr, _("%s: can't update entry\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating /etc/group",
+			      group, -1, 0);
+#endif
 		exit (1);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_update (&sgent)) {
 		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "updating /etc/gshadow", group, -1, 0);
+#endif
 		exit (1);
 	}
 #endif
 	if (!gr_close ()) {
 		fprintf (stderr, _("%s: can't re-write file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "rewriting /etc/group", group, -1, 0);
+#endif
 		exit (1);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_close ()) {
 		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "rewriting /etc/gshadow", group, -1, 0);
+#endif
 		exit (1);
 	}
 	if (is_shadowgrp)
@@ -612,6 +722,10 @@ int main (int argc, char **argv)
 #endif
 	if (!gr_unlock ()) {
 		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "unlocking group file", group, -1, 0);
+#endif
 		exit (1);
 	}
 

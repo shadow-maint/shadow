@@ -29,30 +29,37 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: lastlog.c,v 1.18 2005/04/27 16:55:33 kloczek Exp $")
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <pwd.h>
-#include <time.h>
-#include "prototypes.h"
-#include "defines.h"
-#include <lastlog.h>
+#ident "$Id: lastlog.c,v 1.23 2005/08/31 17:25:00 kloczek Exp $"
+
 #include <getopt.h>
+#include <lastlog.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include "defines.h"
+#include "prototypes.h"
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
  */
 #ifndef LASTLOG_FILE
 #define LASTLOG_FILE "/var/log/lastlog"
 #endif
+/*
+ * Global variables
+ */
 static FILE *lastlogfile;	/* lastlog file stream */
 static off_t user;		/* one single user, specified on command line */
 static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
+static int inverse_days;	/* number of days to consider for print command */
+static time_t inverse_seconds;	/* that number of days in seconds */
+
 
 static int uflg = 0;		/* set if user is a valid user id */
 static int tflg = 0;		/* print is restricted to most recent days */
+static int bflg = 0;		/* print excludes most recent days */
 static struct lastlog lastlog;	/* scratch structure to play with ... */
 static struct stat statbuf;	/* fstat buffer for file size */
 static struct passwd *pwent;
@@ -64,9 +71,10 @@ static void usage (void)
 	fprintf (stdout, _("Usage: lastlog [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"
+			   "  -b, --before DAYS	print only lastlog records older than DAYS\n"
 			   "  -h, --help		display this help message and exit\n"
-			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"));
+			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"
+			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"));
 	exit (1);
 }
 
@@ -148,6 +156,9 @@ static void print (void)
 			if (tflg && NOW - lastlog.ll_time > seconds)
 				continue;
 
+			if (bflg && NOW - lastlog.ll_time < inverse_seconds)
+				continue;
+
 			print_one (pwent);
 		}
 	}
@@ -164,12 +175,13 @@ int main (int argc, char **argv)
 		static struct option const longopts[] = {
 			{"help", no_argument, NULL, 'h'},
 			{"time", required_argument, NULL, 't'},
+			{"before", required_argument, NULL, 'b'},
 			{"user", required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "ht:u:", longopts,
+			getopt_long (argc, argv, "ht:b:u:", longopts,
 				     NULL)) != -1) {
 			switch (c) {
 			case 'h':
@@ -179,6 +191,11 @@ int main (int argc, char **argv)
 				days = atoi (optarg);
 				seconds = days * DAY;
 				tflg++;
+				break;
+			case 'b':
+				inverse_days = atoi (optarg);
+				inverse_seconds = inverse_days * DAY;
+				bflg++;
 				break;
 			case 'u':
 				pwent = getpwnam (optarg);

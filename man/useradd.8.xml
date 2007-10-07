@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.14 2005/08/10 07:43:51 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.24 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -13,139 +13,141 @@
   </refnamediv>
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>useradd</command>    
+      <command>useradd</command>
       <arg choice='opt'>
-        <replaceable>options</replaceable>
+	<replaceable>options</replaceable>
       </arg>
       <arg choice='plain'><replaceable>LOGIN</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>useradd</command>    
+      <command>useradd</command>
       <arg choice='plain'>-D </arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>useradd</command>    
+      <command>useradd</command>
       <arg choice='plain'>-D </arg>
       <arg choice='opt'>
-        <replaceable>options</replaceable>
+	<replaceable>options</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <refsect2 id='creating_new_users'>
-      <title>Creating New Users</title>
       <para>
-        When invoked without the <option>-D</option> option, the
-        <command>useradd</command> command creates a new user account using
-        the values specified on the command line and the default values from
-        the system. Depending on command line options, the useradd command
-        will update system files and may also create the new user's home
-        directory and copy initial files.
+	When invoked without the <option>-D</option> option, the
+	<command>useradd</command> command creates a new user account using
+	the values specified on the command line and the default values from
+	the system. Depending on command line options, the useradd command
+	will update system files and may also create the new user's home
+	directory and copy initial files.
       </para>
-    </refsect2>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>The options which apply to the <command>useradd</command> command are:
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-c</option>, <option>--comment</option>
+	<term>
+	  <option>-c</option>, <option>--comment</option>
 	  <replaceable>COMMENT</replaceable>
-        </term>
-        <listitem>
-          <para>
+	</term>
+	<listitem>
+	  <para>
 	    Any text string. It is generally a short description of the
 	    login, and is currently used as the field for the user's full
 	    name.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-b</option>, <option>--base-dir</option>
+	<term>
+	  <option>-b</option>, <option>--base-dir</option>
 	  <replaceable>BASE_DIR</replaceable>
-        </term>
-        <listitem>
-          <para>The default base directory for the system if
-	    <option>-d</option> dir is not specified.
-	    <replaceable>BASE_DIR</replaceable> is concatenated with the
-	    account name to define the home directory. If the
-	    <option>-m</option> option is not used, base_dir must exist.
+	</term>
+	<listitem>
+	  <para>
+	    The default base directory for the system if <option>-d</option>
+	    dir is not specified. <replaceable>BASE_DIR</replaceable> is
+	    concatenated with the account name to define the home directory. 
+	    If the <option>-m</option> option is not used, base_dir must
+	    exist.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-d</option>, <option>--home</option>
+	<term>
+	  <option>-d</option>, <option>--home</option>
 	  <replaceable>HOME_DIR</replaceable>
-        </term>
-        <listitem>
-          <para>
-            The new user will be created using <emphasis remap='I'>HOME_DIR</emphasis>
-	    as the value for the user's login directory. The default is to append
-	    the <emphasis remap='I'>LOGIN</emphasis> name to
-	    <emphasis remap='I'>BASE_DIR</emphasis> and use that as the login directory name.
-          </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>
-          <option>-e</option>, <option>--expiredate</option>
-	  <replaceable>EXPIRE_DATE</replaceable>
-        </term>
-        <listitem>
-          <para>The date on which the user account will be disabled. The
-            date is specified in the format <emphasis
-            remap='I'>YYYY-MM-DD</emphasis>.
+	</term>
+	<listitem>
+	  <para>
+	    The new user will be created using
+	    <replaceable>HOME_DIR</replaceable> as the value for the user's
+	    login directory. The default is to append the
+	    <replaceable>LOGIN</replaceable> name to
+	    <replaceable>BASE_DIR</replaceable> and use that as the login
+	    directory name.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-f</option>, <option>--inactive</option>
+	<term>
+	  <option>-e</option>, <option>--expiredate</option>
+	  <replaceable>EXPIRE_DATE</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    The date on which the user account will be disabled. The date is
+	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-f</option>, <option>--inactive</option>
 	  <replaceable>INACTIVE</replaceable>
-        </term>
-        <listitem>
-          <para>The number of days after a password expires until the
-            account is permanently disabled. A value of 0 disables the
-            account as soon as the password has expired, and a value of -1
-            disables the feature. The default value is -1.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    The number of days after a password expires until the account is
+	    permanently disabled. A value of 0 disables the account as soon
+	    as the password has expired, and a value of -1 disables the
+	    feature. The default value is -1.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-g</option>, <option>--gid</option>
+	<term>
+	  <option>-g</option>, <option>--gid</option>
 	  <replaceable>GROUP</replaceable>
-        </term>
-        <listitem>
-          <para>The group name or number of the user's initial login group.
-            The group name must exist. A group number must refer to an
-            already existing group. The default group number is 1 or
-            whatever is specified in
-            <filename>/etc/default/useradd</filename>.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    The group name or number of the user's initial login group. The
+	    group name must exist. A group number must refer to an already
+	    existing group. The default group number is 1 or whatever is
+	    specified in <filename>/etc/default/useradd</filename>.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-G</option>, <option>--groups</option>
+	<term>
+	  <option>-G</option>, <option>--groups</option>
 	  <replaceable>GROUP1</replaceable>[<emphasis remap='I'>,GROUP2,...</emphasis>[<emphasis remap='I'>,GROUPN</emphasis>]]]
-        </term>
-        <listitem>
-          <para>A list of supplementary groups which the user is also a
-            member of. Each group is separated from the next by a comma,
-            with no intervening whitespace. The groups are subject to the
-            same restrictions as the group given with the
-            <option>-g</option> option. The default is for the user to
-            belong only to the initial group.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    A list of supplementary groups which the user is also a member
+	    of. Each group is separated from the next by a comma, with no
+	    intervening whitespace. The groups are subject to the same
+	    restrictions as the group given with the <option>-g</option>
+	    option. The default is for the user to belong only to the
+	    initial group.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><option>-h</option>, <option>--help</option></term>
@@ -154,253 +156,305 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-m</option>, <option>--create-home</option>
-        </term>
-        <listitem>
-          <para>The user's home directory will be created if it does not
-            exist. The files contained in <emphasis
-            remap='I'>skeleton_dir</emphasis> will be copied to the home
-            directory if the <option>-k</option> option is used, otherwise
-            the files contained in <filename>/etc/skel</filename> will be
-            used instead. Any directories contained in <emphasis remap='I'>
-            skeleton_dir</emphasis> or <filename>/etc/skel</filename> will
-            be created in the user's home directory as well. The
-            <option>-k</option> option is only valid in conjunction with the
-            <option>-m</option> option. The default is to not create the
-            directory and to not copy any files.
-          </para>
-        </listitem>
+	<term>
+	  <option>-m</option>, <option>--create-home</option>
+	</term>
+	<listitem>
+	  <para>
+	    The user's home directory will be created if it does not exist. 
+	    The files contained in <replaceable>SKEL_DIR</replaceable> will
+	    be copied to the home directory if the <option>-k</option>
+	    option is used, otherwise the files contained in
+	    <filename>/etc/skel</filename> will be used instead. Any
+	    directories contained in <replaceable>SKEL_DIR</replaceable> or
+	    <filename>/etc/skel</filename> will be created in the user's
+	    home directory as well. The <option>-k</option> option is only
+	    valid in conjunction with the <option>-m</option> option. The
+	    default is to not create the directory and to not copy any
+	    files.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-K</option>, <option>--key</option>
+	<term>
+	  <option>-K</option>, <option>--key</option>
 	  <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable>
-        </term>
-        <listitem>
+	</term>
+	<listitem>
 	  <para>
-	    Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS and
-            others). For example: <option>-K</option>
-	    <replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable> can be
-	    used when creating system account to turn off password ageing, even though
-	    system account has no password at all. Multiple <option>-K</option> options can
-	    be specified, e.g.: <option>-K</option>
+	    Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK,
+	    PASS_MAX_DAYS and others).
+	  <para>
+	  </para>
+	    Example: <option>-K </option><replaceable>PASS_MAX_DAYS</replaceable>=<replaceable>-1</replaceable>
+	    can be used when creating system account to turn off password
+	    ageing, even though system account has no password at all.
+	    Multiple <option>-K</option> options can be specified, e.g.:
+	    <option>-K </option>
 	    <replaceable>UID_MIN</replaceable>=<replaceable>100</replaceable>
-	    <option>-K</option> <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
+	    <option> -K </option>
+	    <replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	  </para>
 	  <para>
-	    Note: <option>-K</option>
+	    Note: <option>-K </option>
 	    <replaceable>UID_MIN</replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</replaceable>=<replaceable>499</replaceable>
 	    doesn't work yet.
 	  </para>
-        </listitem>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-o</option>, <option>--non-unique</option>
-        </term>
-        <listitem>
-          <para>Allow create user account with duplicate (non-unique) UID.</para>
-        </listitem>
+	<term>
+	  <option>-o</option>, <option>--non-unique</option>
+	</term>
+	<listitem>
+	  <para>Allow create user account with duplicate (non-unique) UID.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-p</option>, <option>--password</option>
+	<term>
+	  <option>-p</option>, <option>--password</option>
 	  <replaceable>PASSWORD</replaceable>
-        </term>
-        <listitem>
-          <para>
-            The encrypted password, as returned by <citerefentry>
-            <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-            </citerefentry>. The default is to disable the account.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    The encrypted password, as returned by <citerefentry>
+	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+	    </citerefentry>. The default is to disable the account.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-s</option>, <option>--shell</option>
+	<term>
+	  <option>-s</option>, <option>--shell</option>
 	  <replaceable>SHELL</replaceable>
-        </term>
-        <listitem>
-          <para>The name of the user's login shell. The default is to
-            leave this field
-            blank, which causes the system to select the default
-            login shell.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    The name of the user's login shell. The default is to leave this
+	    field blank, which causes the system to select the default login
+	    shell.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-u</option>, <option>--uid</option>
+	<term>
+	  <option>-u</option>, <option>--uid</option>
 	  <replaceable>UID</replaceable>
-        </term>
-        <listitem>
-          <para>The numerical value of the user's ID. This value must be
-            unique, unless the <option>-o</option> option is used. The value
-            must be non-negative. The default is to use the smallest ID
-            value greater than 999 and greater than every other user. 
-            Values between 0 and 999 are typically reserved for system
-            accounts.
-          </para>
-        </listitem>
+	</term>
+	<listitem>
+	  <para>
+	    The numerical value of the user's ID. This value must be unique,
+	    unless the <option>-o</option> option is used. The value must be
+	    non-negative. The default is to use the smallest ID value
+	    greater than 999 and greater than every other user. Values
+	    between 0 and 999 are typically reserved for system accounts.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
+
     <refsect2 id='changing_the_default_values'>
       <title>Changing the default values</title>
       <para>
-        When invoked with the <option>-D</option> option,
-        <command>useradd</command> will either display the current default
-        values, or update the default values from the command line. The
-        valid options are
+	When invoked with the <option>-D</option> option,
+	<command>useradd</command> will either display the current default
+	values, or update the default values from the command line. The
+	valid options are
       </para>
       <variablelist remap='IP'>
-        <varlistentry>
-          <term>
-            <option>-b</option> <replaceable>home_dir</replaceable>
-          </term>
-          <listitem>
-            <para>The initial path prefix for a new user's home directory.
-              The user's name will be affixed to the end of <emphasis
-              remap='I'>home</emphasis> to create the new directory name if
-              the <option>-d</option> option is not used when creating a new
-              account.
-            </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>
-            <option>-e</option> <replaceable>expire_date</replaceable>
-          </term>
-          <listitem>
-            <para>The date on which the user account is disabled.</para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>
-            <option>-f</option> <replaceable>inactive</replaceable>
-          </term>
-          <listitem>
-            <para>The number of days after a password has expired before the
-              account will be disabled.
-            </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>
-            <option>-g</option>, <option>--gid</option>
+	<varlistentry>
+	  <term>
+	    <option>-b</option> <replaceable>HOME_DIR</replaceable>
+	  </term>
+	  <listitem>
+	    <para>
+	      The initial path prefix for a new user's home directory. The
+	      user's name will be affixed to the end of
+	      <replaceable>HOME_DIR</replaceable> to create the new
+	      directory name if the <option>-d</option> option is not used
+	      when creating a new account.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>
+	    <option>-e</option> <replaceable>EXPIRE_DATE</replaceable>
+	  </term>
+	  <listitem>
+	    <para>The date on which the user account is disabled.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>
+	    <option>-f</option> <replaceable>INACTIVE</replaceable>
+	  </term>
+	  <listitem>
+	    <para>
+	      The number of days after a password has expired before the
+	      account will be disabled.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>
+	    <option>-g</option>, <option>--gid</option>
 	    <replaceable>GROUP</replaceable>
-          </term>
-          <listitem>
-            <para>The group name or ID for a new user's initial group. The
-              named group must exist, and a numerical group ID must have an
-              existing entry .
-            </para>
-          </listitem>
-        </varlistentry>
-        <varlistentry>
-          <term>
-            <option>-s</option>, <option>--shell</option>
+	  </term>
+	  <listitem>
+	    <para>
+	      The group name or ID for a new user's initial group. The named
+	      group must exist, and a numerical group ID must have an
+	      existing entry.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>
+	    <option>-s</option>, <option>--shell</option>
 	    <replaceable>SHELL</replaceable>
-          </term>
-          <listitem>
-            <para>The name of the new user's login shell. The named program
-              will be used for all future new user accounts.
-            </para>
-          </listitem>
-        </varlistentry>
+	  </term>
+	  <listitem>
+	    <para>
+	      The name of the new user's login shell. The named program will
+	      be used for all future new user accounts.
+	    </para>
+	  </listitem>
+	</varlistentry>
       </variablelist>
 
-      <para>If no options are specified, <command>useradd</command>
-        displays the current default values.
+      <para>
+	If no options are specified, <command>useradd</command> displays the
+	current default values.
       </para>
     </refsect2>
   </refsect1>
-  
+
   <refsect1 id='notes'>
     <title>NOTES</title>
     <para>The system administrator is responsible for placing the default
       user files in the <filename>/etc/skel/</filename> directory.
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>You may not add a user to a NIS group. This must be performed on
-      the NIS server.
+    <para>
+      You may not add a user to a NIS group. This must be performed on the
+      NIS server.
+    </para>
+    <para>
+      Usernames must begin with a lower case letter or an underscore, and
+      only lower case letters, underscores, dashes, and dollar signs may
+      follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/default/useradd</filename></term>
-        <listitem>default information</listitem>
+	<term><filename>/etc/default/useradd</filename></term>
+	<listitem>
+	  <para>default information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/skel/</filename></term>
-        <listitem>directory containing default files</listitem>
+	<term><filename>/etc/skel/</filename></term>
+	<listitem>
+	  <para>directory containing default files</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
     <para>
-      The <command>useadd</command> command exits with the following values:
+      The <command>useradd</command> command exits with the following values:
       <variablelist>
-        <varlistentry>
-          <term><replaceable>0</replaceable></term>
-	  <listitem>success</listitem>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>1</replaceable></term>
-	  <listitem>can't update password file</listitem>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>can't update password file</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>2</replaceable></term>
-	  <listitem>invalid command syntax</listitem>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>3</replaceable></term>
-	  <listitem>invalid argument to option</listitem>
+	<varlistentry>
+	  <term><replaceable>3</replaceable></term>
+	  <listitem>
+	    <para>invalid argument to option</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>4</replaceable></term>
-	  <listitem>uid already in use (and no -o)</listitem>
+	<varlistentry>
+	  <term><replaceable>4</replaceable></term>
+	  <listitem>
+	    <para>uid already in use (and no <option>-o</option>)</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>6</replaceable></term>
-	  <listitem>specified group doesn't exist</listitem>
+	<varlistentry>
+	  <term><replaceable>6</replaceable></term>
+	  <listitem>
+	    <para>specified group doesn't exist</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>9</replaceable></term>
-	  <listitem>username already in use</listitem>
+	<varlistentry>
+	  <term><replaceable>9</replaceable></term>
+	  <listitem>
+	    <para>username already in use</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>10</replaceable></term>
-	  <listitem>can't update group file</listitem>
+	<varlistentry>
+	  <term><replaceable>10</replaceable></term>
+	  <listitem>
+	    <para>can't update group file</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>12</replaceable></term>
-	  <listitem>can't create home directory</listitem>
+	<varlistentry>
+	  <term><replaceable>12</replaceable></term>
+	  <listitem>
+	    <para>can't create home directory</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>13</replaceable></term>
-	  <listitem>can't create mail spool</listitem>
+	<varlistentry>
+	  <term><replaceable>13</replaceable></term>
+	  <listitem>
+	    <para>can't create mail spool</para>
+	  </listitem>
 	</varlistentry>
       </variablelist>
     </para>
@@ -408,36 +462,40 @@
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+	<refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

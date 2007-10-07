@@ -1,7 +1,7 @@
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: pwdcheck.c,v 1.7 2005/07/18 12:55:36 kloczek Exp $")
+#ident "$Id: pwdcheck.c,v 1.8 2005/08/31 17:24:58 kloczek Exp $"
+
 #include <pwd.h>
 #include <stdio.h>
 #include "prototypes.h"

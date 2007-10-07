@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chage.1'>
-  <!--  $Id: chage.1.xml,v 1.15 2005/08/10 08:25:00 kloczek Exp $  -->
+  <!--  $Id: chage.1.xml,v 1.27 2005/10/10 17:11:22 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>chage</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -21,16 +21,17 @@
       <arg choice='plain'><replaceable>user</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>chage</command> command changes the number of days
-      between password changes and the date of the last password change. 
-      This information is used by the system to determine when a user must
-      change her password.
+    <para>
+      <command>chage</command> command changes the number of days between
+      password changes and the date of the last password change. This
+      information is used by the system to determine when a user must change
+      her password.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -38,108 +39,117 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-d</option>, <option>--lastday</option> <replaceable>LAST_DAY</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Set the number of days since January 1st, 1970 when the password
-            was last changed. The date may also be expressed in the format
-            YYYY-MM-DD (or the format more commonly used in your area).
-          </para>
-        </listitem>
+	<term>
+	  <option>-d</option>, <option>--lastday</option> <replaceable>LAST_DAY</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set the number of days since January 1st, 1970 when the password
+	    was last changed. The date may also be expressed in the format
+	    YYYY-MM-DD (or the format more commonly used in your area).
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-E</option>, <option>--expiredate</option> <replaceable>EXPIRE_DATE</replaceable>
-        </term>
-        <listitem>
-          <para>Set the date on which the user's account will no longer be
-            accessible. The <emphasis remap='I'>EXPIRE_DATE</emphasis> option
-            is the number of days since January 1, 1970 on which the
-            accounted is locked. The date may also be expressed in the
-            format YYYY-MM-DD (or the format more commonly used in your
-            area). A user whose account is locked must contact the system
-            administrator before being able to use the system again.
+	<term>
+	  <option>-E</option>, <option>--expiredate</option> <replaceable>EXPIRE_DATE</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set the date number of days since January 1, 1970 on which the
+	    user's account will no longer be accessible. The date may also
+	    be expressed in the format YYYY-MM-DD (or the format more
+	    commonly used in your area). A user whose account is locked must
+	    contact the system administrator before being able to use the
+	    system again.
 	  </para>
 	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
-	    remap='I'>EXPIRE_DATE</emphasis> will remove an account expiration date.
-          </para>
-        </listitem>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the
+	    <replaceable>EXPIRE_DATE</replaceable> will remove an account
+	    expiration date.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-I</option>, <option>--inactive</option> <replaceable>INACTIVE</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Set the number of days of inactivity after a password has
-            expired before the account is locked. The <emphasis
-            remap='I'>INACTIVE</emphasis> option is the number of days of
-            inactivity. A user whose account is locked must contact the system
-	    administrator before being able to use the system again.
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-I</option>, <option>--inactive</option> <replaceable>INACTIVE</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set the number of days of inactivity after a password has
+	    expired before the account is locked. The
+	    <replaceable>INACTIVE</replaceable> option is the number of days
+	    of inactivity. A user whose account is locked must contact the
+	    system administrator before being able to use the system again.
 	  </para>
 	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
-	    remap='I'>INACTIVE</emphasis> will remove an accounts inactivity.
-          </para>
-        </listitem>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the
+	    <replaceable>INACTIVE</replaceable> will remove an accounts
+	    inactivity.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-l</option>, <option>--list</option>
-        </term>
-        <listitem>
-          <para>
+	<term>
+	  <option>-l</option>, <option>--list</option>
+	</term>
+	<listitem>
+	  <para>
 	  Show account aging information.
-          </para>
-        </listitem>
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-m</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Set the minimum number of days between password changes. A value
-            of zero for this field indicates that the user may change her
-            password at any time.
-          </para>
-        </listitem>
-      </varlistentry>
-      <varlistentry>
-        <term>
-          <option>-M</option>, <option>--maxdays</option> <replaceable>MAX_DAYS</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Set maximum number of days during which a password is valid.
-            When <emphasis remap='I'>MAX_DAYS</emphasis> plus <emphasis
-            remap='I'>LAST_DAY</emphasis> is less than the current day, the
-            user will be required to change her password before being able
-            to use her account. This occurence can be planned for in
-            advance by use of the <option>-W</option> option, which provides
-            the user with advance warning.
-          </para>
+	<term>
+	  <option>-m</option>, <option>--mindays</option> <replaceable>MIN_DAYS</replaceable>
+	</term>
+	<listitem>
 	  <para>
-	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
-	    remap='I'>MAX_DAYS</emphasis> will remove checking a password validation.
-          </para>
-        </listitem>
+	    Set the minimum number of days between password changes. A value
+	    of zero for this field indicates that the user may change her
+	    password at any time.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-W</option>, <option>warndays</option> <replaceable>WARN_DAYS</replaceable>
-        </term>
-        <listitem>
-          <para>
-            Set the number of days of warning before a password change is
-            required. The <emphasis remap='I'>WARN_DAYS</emphasis> option is
-            the number of days prior to the password expiring that a user
-            will be warned her password is about to expire.
-          </para>
-        </listitem>
+	<term>
+	  <option>-M</option>, <option>--maxdays</option> <replaceable>MAX_DAYS</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set maximum number of days during which a password is valid. 
+	    When <replaceable>MAX_DAYS</replaceable> plus
+	    <replaceable>LAST_DAY</replaceable> is less than the current
+	    day, the user will be required to change her password before
+	    being able to use her account. This occurence can be planned for
+	    in advance by use of the <option>-W</option> option, which
+	    provides the user with advance warning.
+	  </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the
+	    <replaceable>MAX_DAYS</replaceable> will remove checking a
+	    password validation.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-W</option>, <option>--warndays</option> <replaceable>WARN_DAYS</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Set the number of days of warning before a password change is
+	    required. The <replaceable>WARN_DAYS</replaceable> option is the
+	    number of days prior to the password expiring that a user will
+	    be warned her password is about to expire.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
     <para>
@@ -147,7 +157,7 @@
       in an interactive fashion, prompting the user with the current values
       for all of the fields. Enter the new value to change the field, or
       leave the line blank to use the current value. The current value is
-      displayed between a pair of <emphasis remap='B'>[ ]</emphasis> marks.
+      displayed between a pair of <emphasis>[ ]</emphasis> marks.
     </para>
   </refsect1>
   <refsect1 id='note'>
@@ -163,37 +173,74 @@
       to expire.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term>
-          <filename>/etc/passwd</filename>
-        </term>
-        <listitem>user account information</listitem>
+	<term>
+	  <filename>/etc/passwd</filename>
+	</term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <filename>/etc/shadow</filename>
-        </term>
-        <listitem>secure user account information</listitem>
+	<term>
+	  <filename>/etc/shadow</filename>
+	</term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
   </refsect1>
-  
+
+  <refsect1 id='exit_values'>
+    <title>EXIT VALUES</title>
+    <para>
+      The <command>chage</command> command exits with the following values:
+      <variablelist>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>permission denied</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><replaceable>15</replaceable></term>
+	  <listitem>
+	    <para>can't find the shadow password file</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
+  </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

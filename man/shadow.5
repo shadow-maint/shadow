@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SHADOW" "5" "08/03/2005" "" ""
+.TH "SHADOW" "5" "10/01/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,7 +11,7 @@
 shadow \- encrypted password file
 .SH "DESCRIPTION"
 .PP
-\fIshadow\fR 
+\fIshadow\fR
 contains the encrypted password information for user's accounts and optional the password aging information. Included is:
 .TP 3
 \(bu
@@ -43,15 +43,19 @@ a reserved field
 .PP
 The password field must be filled. The encrypted password consists of 13 to 24 characters from the 64 characters alphabet a thru z, A thru Z, 0 thru 9, \\. and /. Optionally it can start with a "$" character. This means the encrypted password was generated using another (not DES) algorithm. For example if it starts with "$1$" it means the MD5\-based algorithm was used.
 .PP
-Refer to 
-\fBcrypt\fR(3) 
+Refer to
+\fBcrypt\fR(3)
 for details on how this string is interpreted.
+.PP
+If the password field contains some string that is not valid result of
+\fBcrypt\fR(3), for instance ! or *, the user will not be able to use a unix password to log in, subject to
+\fBpam\fR(7).
 .PP
 The date of the last password change is given as the number of days since Jan 1, 1970. The password may not be changed again until the proper number of days have passed, and must be changed after the maximum number of days. If the minimum number of days required is greater than the maximum number of day allowed, this password may not be changed by the user.
 .PP
 An account is considered to be inactive and is disabled if the password is not changed within the specified number of days after the password expires. An account will also be disabled on the specified day regardless of other password expiration information.
 .PP
-This information supersedes any password or password age information present in 
+This information supersedes any password or password age information present in
 \fI/etc/passwd\fR.
 .PP
 This file must not be readable by regular users if password security is to be maintained.
@@ -64,14 +68,14 @@ user account information
 secure user account information
 .SH "SEE ALSO"
 .PP
-\fBchage\fR(1), 
-\fBlogin\fR(1), 
-\fBpasswd\fR(1), 
-\fBsu\fR(1), 
-\fBpasswd\fR(5), 
-\fBpwconv\fR(8), 
-\fBpwunconv\fR(8), 
-\fBsulogin\fR(8)
+\fBchage\fR(1),
+\fBlogin\fR(1),
+\fBsu\fR(1),
+\fBpasswd\fR(1),
+\fBpasswd\fR(5),
+\fBpwconv\fR(8),
+\fBpwunconv\fR(8),
+\fBsulogin\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

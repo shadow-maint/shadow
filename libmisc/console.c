@@ -32,8 +32,8 @@
 #include <stdio.h>
 #include "getdef.h"
 
-#include "rcsid.h"
-RCSID ("$Id: console.c,v 1.6 2003/04/22 10:59:21 kloczek Exp $")
+#ident "$Id: console.c,v 1.7 2005/08/31 17:24:57 kloczek Exp $"
+
 
 /*
  * This is now rather generic function which decides if "tty" is listed

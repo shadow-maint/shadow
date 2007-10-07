@@ -29,32 +29,29 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.30 2005/08/02 17:49:17 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
-#include <grp.h>
+#ident "$Id: groupmod.c,v 1.36 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <ctype.h>
 #include <fcntl.h>
+#include <grp.h>
+#include <stdio.h>
+#include <sys/types.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <pwd.h>
 #endif				/* USE_PAM */
-#include "prototypes.h"
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
 #include "nscd.h"
+#include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
-static int is_shadow_grp;
 #endif
-
 /*
  * exit status values
  */
-
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
@@ -62,7 +59,12 @@ static int is_shadow_grp;
 #define E_NOTFOUND	6	/* specified group doesn't exist */
 #define E_NAME_IN_USE	9	/* group name already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
-
+/*
+ * Global variables
+ */
+#ifdef	SHADOWGRP
+static int is_shadow_grp;
+#endif
 static char *group_name;
 static char *group_newname;
 static gid_t group_id;
@@ -105,7 +107,6 @@ static void usage (void)
  *	new_grent() takes all of the values that have been entered and fills
  *	in a (struct group) with them.
  */
-
 static void new_grent (struct group *grent)
 {
 	if (nflg)
@@ -122,7 +123,6 @@ static void new_grent (struct group *grent)
  *	new_sgent() takes all of the values that have been entered and fills
  *	in a (struct sgrp) with them.
  */
-
 static void new_sgent (struct sgrp *sgent)
 {
 	if (nflg)
@@ -135,7 +135,6 @@ static void new_sgent (struct sgrp *sgent)
  *
  *	grp_update() writes the new records to the group files.
  */
-
 static void grp_update (void)
 {
 	struct group grp;
@@ -149,12 +148,15 @@ static void grp_update (void)
 	/*
 	 * Get the current settings for this group.
 	 */
-
 	ogrp = gr_locate (group_name);
 	if (!ogrp) {
 		fprintf (stderr,
 			 _("%s: %s not found in /etc/group\n"),
 			 Prog, group_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
 	grp = *ogrp;
@@ -169,40 +171,58 @@ static void grp_update (void)
 	/*
 	 * Write out the new group file entry.
 	 */
-
 	if (!gr_update (&grp)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
 	if (nflg && !gr_remove (group_name)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
+
 	/*
 	 * Make sure there was a shadow entry to begin with. Skip down to
 	 * "out" if there wasn't. Can't just return because there might be
 	 * some syslogging to do.
 	 */
-
 	if (!osgrp)
 		goto out;
 
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-
 	if (!sgr_update (&sgrp)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
 	if (nflg && !sgr_remove (group_name)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
+			      group_name, -1, 0);
+#endif
 		exit (E_GRP_UPDATE);
 	}
       out:
 #endif				/* SHADOWGRP */
 
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifing group", group_name,
+		      group_id, 1);
+#endif
 	if (nflg)
 		SYSLOG ((LOG_INFO, "change group `%s' to `%s'",
 			 group_name, group_newname));
@@ -217,7 +237,6 @@ static void grp_update (void)
  *
  *	check_new_gid() insures that the new GID value is unique.
  */
-
 static void check_new_gid (void)
 {
 	/*
@@ -225,7 +244,6 @@ static void check_new_gid (void)
 	 * didn't really change, just return. If the ID didn't change, turn
 	 * off those flags. No sense doing needless work.
 	 */
-
 	if (group_id == group_newid) {
 		gflg = 0;
 		return;
@@ -237,8 +255,11 @@ static void check_new_gid (void)
 	/*
 	 * Tell the user what they did wrong.
 	 */
-
 	fprintf (stderr, _("%s: %u is not a unique GID\n"), Prog, group_newid);
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify gid", NULL,
+		      group_newid, 0);
+#endif
 	exit (E_GID_IN_USE);
 }
 
@@ -248,13 +269,11 @@ static void check_new_gid (void)
  *	check_new_name() insures that the new name does not exist already.
  *	You can't have the same name twice, period.
  */
-
 static void check_new_name (void)
 {
 	/*
 	 * Make sure they are actually changing the name.
 	 */
-
 	if (strcmp (group_name, group_newname) == 0) {
 		nflg = 0;
 		return;
@@ -265,11 +284,14 @@ static void check_new_name (void)
 		/*
 		 * If the entry is found, too bad.
 		 */
-
 		if (getgrnam (group_newname)) {
 			fprintf (stderr,
 				 _("%s: %s is not a unique name\n"), Prog,
 				 group_newname);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "modifying group", group_name, -1, 0);
+#endif
 			exit (E_NAME_IN_USE);
 		}
 		return;
@@ -281,6 +303,10 @@ static void check_new_name (void)
 
 	fprintf (stderr, _("%s: %s is not a valid group name\n"),
 		 Prog, group_newname);
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group", group_name,
+		      -1, 0);
+#endif
 	exit (E_BAD_ARG);
 }
 
@@ -291,7 +317,6 @@ static void check_new_name (void)
  *	values that the user will be created with accordingly. The values
  *	are checked for sanity.
  */
-
 static void process_flags (int argc, char **argv)
 {
 	char *end;
@@ -306,6 +331,11 @@ static void process_flags (int argc, char **argv)
 				fprintf (stderr,
 					 _("%s: invalid group %s\n"),
 					 Prog, optarg);
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+					      "modifying group", NULL,
+					      group_newid, 0);
+#endif
 				exit (E_BAD_ARG);
 			}
 			break;
@@ -335,7 +365,6 @@ static void process_flags (int argc, char **argv)
  *	close_files() closes all of the files that were opened for this new
  *	group. This causes any modified entries to be written out.
  */
-
 static void close_files (void)
 {
 	if (!gr_close ()) {
@@ -359,7 +388,6 @@ static void close_files (void)
  *
  *	open_files() opens the two group files.
  */
-
 static void open_files (void)
 {
 	if (!gr_lock ()) {
@@ -403,7 +431,6 @@ static struct pam_conv conv = {
  *		-o - permit the group ID value to be non-unique
  *		-n - specify a new group name
  */
-
 int main (int argc, char **argv)
 {
 	struct group *grp;
@@ -414,10 +441,13 @@ int main (int argc, char **argv)
 	int retval;
 #endif
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -469,9 +499,21 @@ int main (int argc, char **argv)
 	if (!(grp = getgrnam (group_name))) {
 		fprintf (stderr, _("%s: group %s does not exist\n"),
 			 Prog, group_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
+			      group_name, -1, 0);
+#endif
 		exit (E_NOTFOUND);
 	} else
 		group_id = grp->gr_gid;
+
+#ifdef WITH_AUDIT
+	/* Set new name/id to original if not specified on command line */
+	if (nflg == 0)
+		group_newname = group_name;
+	if (gflg == 0)
+		group_newid = group_id;
+#endif
 
 #ifdef	USE_NIS
 	/*
@@ -484,6 +526,10 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: group %s is a NIS group\n"),
 			 Prog, group_name);
 
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
+			      group_name, -1, 0);
+#endif
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {
 			fprintf (stderr, _("%s: %s is the NIS master\n"),
@@ -503,7 +549,6 @@ int main (int argc, char **argv)
 	 * Do the hard stuff - open the files, create the group entries,
 	 * then close and update the files.
 	 */
-
 	open_files ();
 
 	grp_update ();
@@ -512,18 +557,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */

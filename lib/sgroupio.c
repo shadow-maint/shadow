@@ -3,8 +3,8 @@
 
 #ifdef SHADOWGRP
 
-#include "rcsid.h"
-RCSID ("$Id: sgroupio.c,v 1.13 2005/03/31 05:14:49 kloczek Exp $")
+#ident "$Id: sgroupio.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"

@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LASTLOG" "8" "08/10/2005" "" ""
+.TH "LASTLOG" "8" "10/01/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,45 +14,47 @@ lastlog \- examine lastlog file
 \fBlastlog\fR [\fIoptions\fR]
 .SH "DESCRIPTION"
 .PP
-\fBlastlog\fR 
-formats and prints the contents of the last login log 
-\fI/var/log/lastlog\fR 
-file. The 
-\fI login\-name\fR, 
-\fIport\fR, and 
-\fIlast login time\fR 
-will be printed. The default (no flags) causes lastlog entries to be printed, sorted by their order in 
+\fBlastlog\fR
+formats and prints the contents of the last login log
+\fI/var/log/lastlog\fR
+file. The
+\fIlogin\-name\fR,
+\fIport\fR, and
+\fIlast login time\fR
+will be printed. The default (no flags) causes lastlog entries to be printed, sorted by their order in
 \fI/etc/passwd\fR.
 .SH "OPTIONS"
+.PP
+The options which apply to the
+\fBlastlog\fR
+command are:
 .TP
-The options which apply to the \fBlastlog\fR command are:
+\fB\-b\fR, \fB\-\-before\fR \fIDAYS\fR
+Print only lastlog records older than
+\fIDAYS\fR.
 .TP
 \fB\-h\fR, \fB\-\-help\fR
-Print help message and exit.
+Display help message and exit.
 .TP
 \fB\-t\fR, \fB\-\-time\fR \fIDAYS\fR
-Print the lastlog records more recent than 
+Print the lastlog records more recent than
 \fIDAYS\fR.
 .TP
 \fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR
-Print the lastlog record for user with specified 
-\fILOGIN\fR 
+Print the lastlog record for user with specified
+\fILOGIN\fR
 only.
 .TP
 The \fB\-t\fR flag overrides the use of \fB\-u\fR.
-
 .PP
-If the user has never logged in the message 
-\fI **Never logged in**\fR 
+If the user has never logged in the message
+\fI** Never logged in**\fR
 will be displayed instead of the port and time.
 .SH "NOTE"
 .PP
-The 
-\fBlastlog\fR 
-file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is much smaller than the one shown by 
-\fBls \-l\fR 
-(which can indicate a really big file if you have a high UID). You can display its real size with 
-\fBls \-s\fR.
+The
+\fIlastlog\fR
+file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is much smaller than the one shown by "\fBls \-l\fR" (which can indicate a really big file if you have a high UID). You can display its real size with "\fBls \-s\fR".
 .SH "FILES"
 .TP
 \fI/var/log/lastlog\fR

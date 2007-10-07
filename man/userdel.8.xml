@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.9 2005/08/10 07:45:10 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.15 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>USERDEL</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -13,23 +13,23 @@
   </refnamediv>
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>userdel</command>    
+      <command>userdel</command>
       <arg choice='opt'>-r </arg>
       <arg choice='plain'>
-        <replaceable>login</replaceable>
+	<replaceable>login_name</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
       The <command>userdel</command> command modifies the system account
       files, deleting all entries that refer to <emphasis
-      remap='I'>login</emphasis>. The named user must exist.
+      remap='I'>login_name</emphasis>. The named user must exist.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -37,117 +37,148 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-r</option>
-        </term>
-        <listitem>
-          <para>Files in the user's home directory will be removed along
-            with the home directory itself and the user's mail spool. Files
-            located in other file systems will have to be searched for and
-            deleted manually.
-          </para>
-        </listitem>
+	<term>
+	  <option>-r</option>
+	</term>
+	<listitem>
+	  <para>
+	    Files in the user's home directory will be removed along with
+	    the home directory itself and the user's mail spool. Files
+	    located in other file systems will have to be searched for and
+	    deleted manually.
+	  </para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
     <para>
       The <command>userdel</command> command exits with the following values:
       <variablelist>
-        <varlistentry>
-          <term><replaceable>0</replaceable></term>
-	  <listitem>success</listitem>
+	<varlistentry>
+	  <term><replaceable>0</replaceable></term>
+	  <listitem>
+	    <para>success</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>1</replaceable></term>
-	  <listitem>can't update password file</listitem>
+	<varlistentry>
+	  <term><replaceable>1</replaceable></term>
+	  <listitem>
+	    <para>can't update password file</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>2</replaceable></term>
-	  <listitem>invalid command syntax</listitem>
+	<varlistentry>
+	  <term><replaceable>2</replaceable></term>
+	  <listitem>
+	    <para>invalid command syntax</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>6</replaceable></term>
-	  <listitem>specified user doesn't exist</listitem>
+	<varlistentry>
+	  <term><replaceable>6</replaceable></term>
+	  <listitem>
+	    <para>specified user doesn't exist</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>8</replaceable></term>
-	  <listitem>user currently logged in</listitem>
+	<varlistentry>
+	  <term><replaceable>8</replaceable></term>
+	  <listitem>
+	    <para>user currently logged in</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>10</replaceable></term>
-	  <listitem>can't update group file</listitem>
+	<varlistentry>
+	  <term><replaceable>10</replaceable></term>
+	  <listitem>
+	    <para>can't update group file</para>
+	  </listitem>
 	</varlistentry>
-        <varlistentry>
-          <term><replaceable>12</replaceable></term>
-	  <listitem>can't remove home directory</listitem>
+	<varlistentry>
+	  <term><replaceable>12</replaceable></term>
+	  <listitem>
+	    <para>can't remove home directory</para>
+	  </listitem>
 	</varlistentry>
       </variablelist>
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para><command>userdel</command> will not allow you to remove an account if
+    <para>
+      <command>userdel</command> will not allow you to remove an account if
       the user is currently logged in. You must kill any running processes
       which belong to an account that you are deleting. You may not remove
       any NIS attributes on a NIS client. This must be performed on the NIS
       server.
     </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

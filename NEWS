@@ -1,4 +1,60 @@
-$Id: NEWS,v 1.249 2005/08/21 12:42:51 kloczek Exp $
+$Id: NEWS,v 1.281 2005/10/10 18:24:59 kloczek Exp $
+
+shadow-4.0.12 -> shadow-4.0.13						10-10-2005
+
+*** general:
+- chage: removed duplicated pam_start(),
+- chfn, chsh: finished PAM support usin pam_start() and co.,
+- userdel: userdel should not remove the group which is primary for someone else
+  (fix by Nicolas François <nicolas.francois@centraliens.net>
+  http://bugs.debian.org/295416),
+- login: use "%c" in strftime() output (based on patch from
+  http://bugs.debian.org/89902 by Christian Perrier <bubulle@debian.org>),
+- fixedlib/commonio.c: don't assume selinux is enabled if is_selinux_enabled()
+  returns -1 (merge isSelinuxEnabled FC patch by Jeremy Katz <katzj@redhat.com>),
+- login, su (non-PAM case): fixed setup max address space limits (added missing break
+  statement in case) spoted by Lasse Collin <lasse.collin@tukaani.org>,
+- auditing support added. Patch prepared by Peter Vrabec <pvrabec@redhat.com> basing
+  on work by Steve Grubb from http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=159215
+  Now auditing support have commands: chage, gpasswd, groupadd, groupdel, groupmod,
+  useradd, userdel, usermod.
+- chage, chfn, chsh, passwd: change to use new selinux API for
+  selinux_check_passwd_access() (patch from Fedora by Dan Walsh <dwalsh@redhat.com>),
+- use #ident preprocesor directive istead RCID macro with content similar
+  to example described in ident(1) man page (modern compilers like latest GCC
+  removes not used functions by global optimization).
+  So "ident /usr/bin/passwd" will show again some useable informations
+- su: fixed twice copy enviroment which causes auth problems
+  (bug was introduced in 4.0.12; fix by Nicolas François <nicolas.francois@centraliens.net>),
+- chage: differentiate the different failure causes by the exit value
+  This will permit to adduser Debian script to detect if chage failed because the
+  system doesn't have shadowed passwords (fix for http://bugs.debian.org/317012),
+- merge 010_more-i18ned-messages Debian patch which adds i18n support for few
+  more messages (orginaly patch was prepared by Guillem Jover <guillem@debian.org>),
+- lastlog: added handle -b option which allow print only lastlog records older than
+  specified DAYS (fix by <miles@lubin.us>),
+- chpasswd, gpasswd, newusers: fixed libmisc/salt.c for use login.defs::MD5_CRYPT_ENAB
+  only if PAM support is disabled (fix by John Gatewood Ham <zappaman@buraphalinux.org>),
+- passwd: rewrited for use getopt_long(),
+- newgrp: when newgrp process sits between parent and child shells, it should
+  propagate STOPs from child to parent and CONTs from parent to child,
+  otherwise e.g. bash's "suspend" command won't work
+  Fixed Debian http://bugs.debian.org/314727
+- updated translations: da, es, fr, pt, ro, ru.
+*** documentation:
+- chsh(1), groupadd(8), newusers(8), pwconv(8), useradd(8), userdel(8), usermod(8):
+  added missing references to /etc/login.defs and login.defs(5)
+  (Christian Perrier <bubulle@kheops.frmug.org>),
+- passwd(5): rewrited based on work by Greg Wooledge <greg@wooledge.org>
+  http://bugs.debian.org/328113
+- login(1): added securetty(5) to SEE ALSO section
+  (fixed Debian bug http://bugs.debian.org/325773),
+- groupadd(8), useradd(8): fix regular expression describing alloved login/group
+  names (pointed by Nicolas François <nicolas.francois@centraliens.net>)
+  (correct is [a-z_][a-z0-9_-]*[$]),
+- groupadd(8), useradd(8): documents in CAVEATS section the limitations shadow
+  places on user and group names (fix by Mike Frysinger <vapier@gentoo.org>).
+- chage(1), groupadd(8): document -h,--help option.
 
 shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
 
@@ -49,10 +105,11 @@ shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
   on "passwd -e" (fix by Christian Perrier <bubulle@debian.org),
 - updated translations: cs, de, fi, fr, nl, pl, pt, ru, sk.
 *** documentation:
+- regenerate all roff man pages using DocBook XSLT Stylesheets 1.69.1,
 - usermod(8): give the correct range for system users (0-999 instead of 0-99),
   (http://bugs.debian.org/286258)
 - chage(8): better description -1 value passwd in -E, -I and -M options,
-- regenerate all roff man pages using DocBook XSL Stylesheets 1.69.0.
+- regenerate all roff man pages using DocBook XSLT Stylesheets 1.69.0.
 
 shadow-4.0.11 -> shadow-4.0.11.1					21-07-2005
 

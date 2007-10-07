@@ -29,13 +29,13 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: chsh_chkshell.c,v 1.1 2005/07/07 08:40:27 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
+#ident "$Id: chsh_chkshell.c,v 1.3 2005/08/31 17:25:00 kloczek Exp $"
+
 #include <fcntl.h>
-#include "prototypes.h"
+#include <stdio.h>
+#include <sys/types.h>
 #include "defines.h"
+#include "prototypes.h"
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
 #endif

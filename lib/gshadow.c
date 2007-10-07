@@ -32,8 +32,8 @@
 /* Newer versions of Linux libc already have shadow support.  */
 #if defined(SHADOWGRP) && !defined(HAVE_SHADOWGRP)	/*{ */
 
-#include "rcsid.h"
-RCSID ("$Id: gshadow.c,v 1.10 2005/05/25 19:31:50 kloczek Exp $")
+#ident "$Id: gshadow.c,v 1.11 2005/08/31 17:24:56 kloczek Exp $"
+
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"

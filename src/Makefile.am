@@ -50,29 +50,30 @@ LDADD 	       = $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
-chpasswd_LDADD = $(LDADD) $(LIBPAM)
-chage_LDADD    = $(LDADD) $(LIBPAM)
+chage_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 chfn_LDADD     = $(LDADD) $(LIBPAM)
 chsh_SOURCES   = \
 	chsh.c \
 	chsh_chkshell.c
 chsh_LDADD     = $(LDADD) $(LIBPAM)
-groupadd_LDADD = $(LDADD) $(LIBPAM)
-groupdel_LDADD = $(LDADD) $(LIBPAM)
-groupmod_LDADD = $(LDADD) $(LIBPAM)
+chpasswd_LDADD = $(LDADD) $(LIBPAM)
+gpasswd_LDADD  = $(LDADD) $(LIBAUDIT)
+groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
 login_LDADD    = $(LDADD) $(LIBPAM)
 newusers_LDADD = $(LDADD) $(LIBPAM)
-passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK)
+passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT)
 su_SOURCES     = \
 	su.c \
 	suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM)
-useradd_LDADD  = $(LDADD) $(LIBPAM)
-userdel_LDADD  = $(LDADD) $(LIBPAM)
-usermod_LDADD  = $(LDADD) $(LIBPAM)
+useradd_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+userdel_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+usermod_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 
 install-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am

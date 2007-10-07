@@ -29,19 +29,22 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: logoutd.c,v 1.26 2005/07/05 20:17:51 kloczek Exp $")
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <signal.h>
+#ident "$Id: logoutd.c,v 1.30 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <fcntl.h>
-#include "prototypes.h"
+#include <signal.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "defines.h"
+#include "prototypes.h"
+/*
+ * Global variables
+ */
 static char *Prog;
 
 #ifndef DEFAULT_HUP_MESG
-#define DEFAULT_HUP_MESG "login time exceeded\r\n"
+#define DEFAULT_HUP_MESG _("login time exceeded\n\n")
 #endif
 
 #ifndef HUP_MESG_FILE
@@ -130,7 +133,6 @@ static void send_mesg_to_tty (int tty_fd)
  *	utmpx/utmp file is periodically scanned and offending users are logged
  *	off from the system.
  */
-
 int main (int argc, char **argv)
 {
 	int i;
@@ -158,7 +160,6 @@ int main (int argc, char **argv)
 	/*
 	 * Put this process in the background.
 	 */
-
 	pid = fork ();
 	if (pid > 0) {
 		/* parent */
@@ -173,7 +174,6 @@ int main (int argc, char **argv)
 	/*
 	 * Start syslogging everything
 	 */
-
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("logoutd");
@@ -182,14 +182,12 @@ int main (int argc, char **argv)
 	 * Scan the utmpx/utmp file once per minute looking for users that
 	 * are not supposed to still be logged in.
 	 */
-
 	while (1) {
 
 		/* 
 		 * Attempt to re-open the utmpx/utmp file. The file is only
 		 * open while it is being used.
 		 */
-
 #if HAVE_UTMPX_H
 		setutxent ();
 #else
@@ -201,7 +199,6 @@ int main (int argc, char **argv)
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
-
 #if HAVE_UTMPX_H
 		while ((ut = getutxent ())) {
 #else
@@ -258,7 +255,6 @@ int main (int argc, char **argv)
 			 * vhangup() the line to kill try and kill
 			 * whatever is out there using it.
 			 */
-
 			if ((tty_fd =
 			     open (tty_name, O_RDONLY | O_NDELAY)) == -1)
 				continue;
@@ -277,7 +273,6 @@ int main (int argc, char **argv)
 			/*
 			 * This child has done all it can, drop dead.
 			 */
-
 			exit (0);
 		}
 
@@ -293,7 +288,6 @@ int main (int argc, char **argv)
 		/*
 		 * Reap any dead babies ...
 		 */
-
 		while (wait (&status) != -1);
 	}
 	return 1;

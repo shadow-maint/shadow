@@ -10,8 +10,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: myname.c,v 1.3 2003/04/22 10:59:22 kloczek Exp $")
+#ident "$Id: myname.c,v 1.4 2005/08/31 17:24:57 kloczek Exp $"
+
 #include "defines.h"
 #include <pwd.h>
 #include "prototypes.h"

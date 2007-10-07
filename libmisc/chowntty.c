@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: chowntty.c,v 1.12 2005/08/09 18:03:15 kloczek Exp $")
+#ident "$Id: chowntty.c,v 1.13 2005/08/31 17:24:57 kloczek Exp $"
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>

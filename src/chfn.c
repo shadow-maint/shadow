@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.31 2005/08/02 13:39:43 kloczek Exp $")
+#ident "$Id: chfn.c,v 1.37 2005/10/04 20:25:55 kloczek Exp $"
+
 #include <fcntl.h>
 #include <pwd.h>
 #include <signal.h>
@@ -77,7 +77,6 @@ static char *copy_field (char *, char *, char *);
 /*
  * usage - print command line syntax and exit
  */
-
 static void usage (void)
 {
 	if (amroot)
@@ -134,7 +133,6 @@ static int may_change_field (int field)
  * prompt the user for each of the four fields and fill in the fields from
  * the user's response, or leave alone if nothing was entered.
  */
-
 static void new_fields (void)
 {
 	printf (_("Enter the new value, or press ENTER for the default\n"));
@@ -173,7 +171,6 @@ static void new_fields (void)
  *	out - where to copy the field to
  *	extra - fields with '=' get copied here
  */
-
 static char *copy_field (char *in, char *out, char *extra)
 {
 	char *cp = NULL;
@@ -199,6 +196,12 @@ static char *copy_field (char *in, char *out, char *extra)
 	return cp;
 }
 
+#ifdef USE_PAM
+static struct pam_conv conv = {
+	misc_conv,
+	NULL
+};
+#endif				/* USE_PAM */
 
 /*
  * chfn - change a user's password file information
@@ -216,7 +219,6 @@ static char *copy_field (char *in, char *out, char *extra)
  *
  *	(*) requires root permission to execute.
  */
-
 int main (int argc, char **argv)
 {
 	char *cp;		/* temporary character pointer       */
@@ -232,6 +234,12 @@ int main (int argc, char **argv)
 	int oflg = 0;		/* -o - set other information        */
 	char *user;
 
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
+	int retval;
+#endif
+
 	sanitize_env ();
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
@@ -241,14 +249,12 @@ int main (int argc, char **argv)
 	 * This command behaves different for root and non-root
 	 * users.
 	 */
-
 	amroot = (getuid () == 0);
 
 	/*
 	 * Get the program name. The program name is used as a
 	 * prefix to most error messages.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("chfn");
@@ -260,7 +266,6 @@ int main (int argc, char **argv)
 	 * environment and must agree with the real UID. Also, the UID will
 	 * be checked for any commands which are restricted to root only.
 	 */
-
 	while ((flag = getopt (argc, argv, "f:r:w:h:o:")) != EOF) {
 		switch (flag) {
 		case 'f':
@@ -317,7 +322,6 @@ int main (int argc, char **argv)
 	 * Get the name of the user to check. It is either the command line
 	 * name, or the name getlogin() returns.
 	 */
-
 	if (optind < argc) {
 		user = argv[optind];
 		pw = getpwnam (user);
@@ -342,7 +346,6 @@ int main (int argc, char **argv)
 	/*
 	 * Now we make sure this is a LOCAL password entry for this user ...
 	 */
-
 	if (__ispwNIS ()) {
 		char *nis_domain;
 		char *nis_master;
@@ -358,7 +361,7 @@ int main (int argc, char **argv)
 				 ("%s: `%s' is the NIS master for this client.\n"),
 				 Prog, nis_master);
 		}
-		exit (1);
+		exit (E_NOPERM);
 	}
 #endif
 
@@ -366,7 +369,6 @@ int main (int argc, char **argv)
 	 * Non-privileged users are only allowed to change the gecos field
 	 * if the UID of the user matches the current real UID.
 	 */
-
 	if (!amroot && pw->pw_uid != getuid ()) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
@@ -377,9 +379,8 @@ int main (int argc, char **argv)
 	 * If the UID of the user does not match the current real UID,
 	 * check if the change is allowed by SELinux policy.
 	 */
-
 	if ((pw->pw_uid != getuid ())
-	    && (checkPasswdAccess (PASSWD__CHFN) != 0)) {
+	    && (selinux_check_passwd_access (PASSWD__CHFN) != 0)) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
 		exit (E_NOPERM);
@@ -393,17 +394,45 @@ int main (int argc, char **argv)
 	 * any changes can be made. Idea from util-linux chfn/chsh. 
 	 * --marekm
 	 */
-
 	if (!amroot && getdef_bool ("CHFN_AUTH"))
 		passwd_check (pw->pw_name, pw->pw_passwd, "chfn");
 
-#endif				/* !USE_PAM */
+#else				/* !USE_PAM */
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid (getuid ());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chfn", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (E_NOPERM);
+	}
+#endif				/* USE_PAM */
 
 	/*
 	 * Now get the full name. It is the first comma separated field in
 	 * the GECOS field.
 	 */
-
 	STRFCPY (old_gecos, pw->pw_gecos);
 	cp = copy_field (old_gecos, fflg ? (char *) 0 : fullnm, slop);
 
@@ -411,21 +440,18 @@ int main (int argc, char **argv)
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
-
 	if (cp)
 		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
-
 	if (cp)
 		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
-
 	if (cp)
 		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
 
@@ -454,44 +480,43 @@ int main (int argc, char **argv)
 	if (valid_field (fullnm, ":,=")) {
 		fprintf (stderr, _("%s: invalid name: \"%s\"\n"), Prog, fullnm);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (valid_field (roomno, ":,=")) {
 		fprintf (stderr, _("%s: invalid room number: \"%s\"\n"),
 			 Prog, roomno);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (valid_field (workph, ":,=")) {
 		fprintf (stderr, _("%s: invalid work phone: \"%s\"\n"),
 			 Prog, workph);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (valid_field (homeph, ":,=")) {
 		fprintf (stderr, _("%s: invalid home phone: \"%s\"\n"),
 			 Prog, homeph);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (valid_field (slop, ":")) {
 		fprintf (stderr,
 			 _("%s: \"%s\" contains illegal characters\n"),
 			 Prog, slop);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	/*
 	 * Build the new GECOS field by plastering all the pieces together,
 	 * if they will fit ...
 	 */
-
 	if (strlen (fullnm) + strlen (roomno) + strlen (workph) +
 	    strlen (homeph) + strlen (slop) > (unsigned int) 80) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
 		  fullnm, roomno, workph, homeph, slop[0] ? "," : "", slop);
@@ -502,12 +527,11 @@ int main (int argc, char **argv)
 	 * against unexpected signals. Any keyboard signals are set to be
 	 * ignored.
 	 */
-
 	if (setuid (0)) {
 		fprintf (stderr, _("Cannot change ID to root.\n"));
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	pwd_init ();
 
@@ -515,21 +539,20 @@ int main (int argc, char **argv)
 	 * The passwd entry is now ready to be committed back to the
 	 * password file. Get a lock on the file and open it.
 	 */
-
 	if (!pw_lock ()) {
 		fprintf (stderr,
 			 _
 			 ("Cannot lock the password file; try again later.\n"));
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (!pw_open (O_RDWR)) {
 		fprintf (stderr, _("Cannot open the password file.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	/*
@@ -543,7 +566,7 @@ int main (int argc, char **argv)
 		pw_unlock ();
 		fprintf (stderr,
 			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	/*
@@ -562,7 +585,7 @@ int main (int argc, char **argv)
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	/*
@@ -573,17 +596,22 @@ int main (int argc, char **argv)
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (!pw_unlock ()) {
 		fprintf (stderr, _("Cannot unlock the password file.\n"));
 		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	SYSLOG ((LOG_INFO, "changed user `%s' information", user));
 
 	nscd_flush_cache ("passwd");
+
+#ifdef USE_PAM
+	if (retval == PAM_SUCCESS)
+		pam_end (pamh, PAM_SUCCESS);
+#endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);

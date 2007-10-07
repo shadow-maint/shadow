@@ -29,24 +29,31 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.45 2005/08/11 16:23:34 kloczek Exp $")
-#include <sys/stat.h>
-#include <stdio.h>
+#ident "$Id: userdel.c,v 1.52 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <errno.h>
-#include <pwd.h>
-#include <grp.h>
-#include <ctype.h>
 #include <fcntl.h>
+#include <grp.h>
+#include <pwd.h>
+#include <stdio.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/stat.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #endif				/* USE_PAM */
-#include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-#include "pwauth.h"
+#include "groupio.h"
 #include "nscd.h"
+#include "prototypes.h"
+#include "pwauth.h"
+#include "pwio.h"
+#include "shadowio.h"
+#ifdef	SHADOWGRP
+#include "sgroupio.h"
+#endif
 /*
  * exit status values
  */
@@ -63,14 +70,6 @@ static char *user_home;
 
 static char *Prog;
 static int fflg = 0, rflg = 0;
-
-#include "groupio.h"
-#include "pwio.h"
-#include "shadowio.h"
-
-#ifdef	SHADOWGRP
-#include "sgroupio.h"
-#endif
 
 static int is_shadow_pwd;
 
@@ -97,7 +96,6 @@ static void remove_mailbox (void);
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-r] name\n"), Prog);
@@ -114,11 +112,11 @@ static void usage (void)
  *	name is their user name) and delete them too (only if USERGROUPS_ENAB
  *	is enabled).
  */
-
 static void update_groups (void)
 {
 	const struct group *grp;
 	struct group *ngrp;
+	struct passwd *pwd;
 
 #ifdef	SHADOWGRP
 	int deleted_user_group = 0;
@@ -130,14 +128,12 @@ static void update_groups (void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-
 	for (gr_rewind (), grp = gr_next (); grp; grp = gr_next ()) {
 
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-
 		if (!is_on_list (grp->gr_mem, user_name))
 			continue;
 
@@ -145,7 +141,6 @@ static void update_groups (void)
 		 * Delete the username from the list of group members and
 		 * update the group entry to reflect the change.
 		 */
-
 		ngrp = __gr_dup (grp);
 		if (!ngrp) {
 			exit (13);	/* XXX */
@@ -158,28 +153,61 @@ static void update_groups (void)
 		/*
 		 * Update the DBM group file with the new entry as well.
 		 */
-
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting user from group", user_name, user_id,
+			      0);
+#endif
 		SYSLOG ((LOG_INFO, "delete `%s' from group `%s'\n",
 			 user_name, ngrp->gr_name));
 	}
+
 	/*
 	 * we've removed their name from all the groups above, so
 	 * now if they have a group with the same name as their
 	 * user name, with no members, we delete it.
 	 */
-
 	grp = getgrnam (user_name);
 	if (grp && getdef_bool ("USERGROUPS_ENAB")
 	    && (grp->gr_mem[0] == NULL)) {
 
-		gr_remove (grp->gr_name);
+		/*
+		 * Scan the passwd file to check if this group is still
+		 * used as a primary group.
+		 */
+		setpwent ();
+		while ((pwd = getpwent ())) {
+			if (strcmp (pwd->pw_name, user_name) == 0)
+				continue;
+			if (pwd->pw_gid == grp->gr_gid) {
+				fprintf (stderr,
+					 _
+					 ("%s: Cannot remove group %s which is a primary group for another user.\n"),
+					 Prog, grp->gr_name);
+				break;
+			}
+		}
+		endpwent ();
+
+		if (pwd == NULL) {
+			/*
+			 * We can remove this group, it is not the primary
+			 * group of any remaining user.
+			 */
+			gr_remove (grp->gr_name);
 
 #ifdef SHADOWGRP
-		deleted_user_group = 1;
+			deleted_user_group = 1;
 #endif
 
-		SYSLOG ((LOG_INFO, "removed group `%s' owned by `%s'\n",
-			 grp->gr_name, user_name));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting group", user_name, user_id, 0);
+#endif
+			SYSLOG ((LOG_INFO,
+				 "removed group `%s' owned by `%s'\n",
+				 grp->gr_name, user_name));
+		}
 	}
 #ifdef	SHADOWGRP
 	if (!is_shadow_grp)
@@ -190,7 +218,6 @@ static void update_groups (void)
 	 * that the user is a member of. Both the administrative list and
 	 * the ordinary membership list is checked.
 	 */
-
 	for (sgr_rewind (), sgrp = sgr_next (); sgrp; sgrp = sgr_next ()) {
 		int was_member, was_admin;
 
@@ -198,7 +225,6 @@ static void update_groups (void)
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-
 		was_member = is_on_list (sgrp->sg_mem, user_name);
 		was_admin = is_on_list (sgrp->sg_adm, user_name);
 
@@ -219,6 +245,11 @@ static void update_groups (void)
 		if (!sgr_update (nsgrp))
 			fprintf (stderr,
 				 _("%s: error updating group entry\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting user from shadow group", user_name,
+			      user_id, 0);
+#endif
 		SYSLOG ((LOG_INFO, "delete `%s' from shadow group `%s'\n",
 			 user_name, nsgrp->sg_name));
 	}
@@ -234,7 +265,6 @@ static void update_groups (void)
  *	close_files() closes all of the files that were opened for this
  *	new user. This causes any modified entries to be written out.
  */
-
 static void close_files (void)
 {
 	if (!pw_close ())
@@ -262,7 +292,6 @@ static void close_files (void)
 /*
  * fail_exit - exit with a failure code after unlocking the files
  */
-
 static void fail_exit (int code)
 {
 	(void) pw_unlock ();
@@ -272,6 +301,10 @@ static void fail_exit (int code)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp)
 		sgr_unlock ();
+#endif
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user", user_name,
+		      user_id, 0);
 #endif
 	exit (code);
 }
@@ -286,39 +319,76 @@ static void open_files (void)
 {
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking password file", user_name, user_id, 1,
+			      0);
+#endif
 		exit (E_PW_UPDATE);
 	}
 	if (!pw_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening password file", user_name, user_id, 0);
+#endif
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking shadow password file", user_name,
+			      user_id, 0);
+#endif
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
 			 _("%s: cannot open shadow password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening shadow password file", user_name,
+			      user_id, 0);
+#endif
 		fail_exit (E_PW_UPDATE);
 	}
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
+			      user_name, user_id, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open group file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
+			      user_name, user_id, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
 			 _("%s: unable to lock shadow group file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking shadow group file", user_name, user_id,
+			      0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open shadow group file\n"),
 			 Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening shadow group file", user_name, user_id,
+			      0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif
@@ -330,7 +400,6 @@ static void open_files (void)
  *	update_user() deletes the password file entries for this user
  *	and will update the group entries as required.
  */
-
 static void update_user (void)
 {
 	if (!pw_remove (user_name))
@@ -339,6 +408,10 @@ static void update_user (void)
 	if (is_shadow_pwd && !spw_remove (user_name))
 		fprintf (stderr,
 			 _("%s: error deleting shadow password entry\n"), Prog);
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user entries",
+		      user_name, user_id, 1);
+#endif
 	SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
 }
 
@@ -349,7 +422,6 @@ static void update_user (void)
  * by this user. Also, I think this check should be in usermod
  * as well (at least when changing username or UID).  --marekm
  */
-
 static void user_busy (const char *name, uid_t uid)
 {
 
@@ -379,7 +451,13 @@ static void user_busy (const char *name, uid_t uid)
 			continue;
 		fprintf (stderr,
 			 _("%s: user %s is currently logged in\n"), Prog, name);
-		exit (E_USER_BUSY);
+		if (!fflg) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting user logged in", name, -1, 0);
+#endif
+			exit (E_USER_BUSY);
+		}
 	}
 }
 
@@ -420,7 +498,6 @@ lprm $1
 exit 0
 ==========
  */
-
 static void user_cancel (const char *user)
 {
 	char *cmd;
@@ -480,6 +557,10 @@ static void remove_mailbox (void)
 	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
 	if (fflg) {
 		unlink (mailfile);	/* always remove, ignore errors */
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
+			      user_name, user_id, 1);
+#endif
 		return;
 	}
 	i = is_owner (user_id, mailfile);
@@ -488,6 +569,10 @@ static void remove_mailbox (void)
 			 _
 			 ("%s: %s not owned by %s, not removing\n"),
 			 Prog, mailfile, user_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
+			      user_name, user_id, 0);
+#endif
 		return;
 	} else if (i == -1)
 		return;		/* mailbox doesn't exist */
@@ -495,6 +580,12 @@ static void remove_mailbox (void)
 		fprintf (stderr, _("%s: warning: can't remove "), Prog);
 		perror (mailfile);
 	}
+#ifdef WITH_AUDIT
+	else {
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
+			      user_name, user_id, 0);
+	}
+#endif
 }
 
 #ifdef USE_PAM
@@ -502,6 +593,7 @@ static struct pam_conv conv = {
 	misc_conv, NULL
 };
 #endif				/* USE_PAM */
+
 /*
  * main - userdel command
  */
@@ -516,6 +608,11 @@ int main (int argc, char **argv)
 	struct passwd *pampw;
 	int retval;
 #endif
+
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -582,6 +679,10 @@ int main (int argc, char **argv)
 	if (!(pwd = getpwnam (user_name))) {
 		fprintf (stderr, _("%s: user %s does not exist\n"),
 			 Prog, user_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting user not found", user_name, -1, 0);
+#endif
 		exit (E_NOTFOUND);
 	}
 #ifdef	USE_NIS
@@ -589,7 +690,6 @@ int main (int argc, char **argv)
 	/*
 	 * Now make sure it isn't an NIS user.
 	 */
-
 	if (__ispwNIS ()) {
 		char *nis_domain;
 		char *nis_master;
@@ -611,6 +711,7 @@ int main (int argc, char **argv)
 	 * Check to make certain the user isn't logged in.
 	 */
 	user_busy (user_name, user_id);
+
 	/*
 	 * Do the hard stuff - open the files, create the user entries,
 	 * create the home directory, then close and update the files.
@@ -631,9 +732,8 @@ int main (int argc, char **argv)
 		rflg = 0;
 		errors++;
 	}
-
-/* This may be slow, the above should be good enough. */
 #ifdef EXTRA_CHECK_HOME_DIR
+	/* This may be slow, the above should be good enough. */
 	if (rflg && !fflg) {
 		/*
 		 * For safety, refuse to remove the home directory if it
@@ -656,6 +756,7 @@ int main (int argc, char **argv)
 				break;
 			}
 		}
+		endpwent ();
 	}
 #endif
 
@@ -665,32 +766,34 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 				 _("%s: error removing directory %s\n"),
 				 Prog, user_home);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting home directory", user_name,
+				      user_id, 1);
+#endif
 			errors++;
 		}
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting home directory", user_name, user_id, 1);
+#endif
 	}
 
 	/*
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
 	 * the entry from /etc/passwd.
 	 */
-
 	user_cancel (user_name);
 	close_files ();
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS)
-			pam_end (pamh, retval);
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (E_PW_UPDATE);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
+#ifdef WITH_AUDIT
+	if (errors)
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "deleting home directory", user_name, -1, 0);
+#endif
 	exit (errors ? E_HOMEDIR : E_SUCCESS);
 	/* NOT REACHED */
 }

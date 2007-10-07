@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.41 2005/08/04 19:13:43 kloczek Exp $")
+#ident "$Id: su.c,v 1.45 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
@@ -88,7 +88,6 @@ static int iswheel (const char *);
  *	with die() as the signal handler. If signal later calls die() with a
  *	signal number, the terminal modes are then reset.
  */
-
 static RETSIGTYPE die (int killed)
 {
 	static TERMIO sgtty;
@@ -216,7 +215,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_close_session: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -247,7 +246,6 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
  *	particular, the argument "-c" will cause the next argument to be
  *	interpreted as a command by the common shell programs.
  */
-
 int main (int argc, char **argv)
 {
 	char *cp;
@@ -283,7 +281,6 @@ int main (int argc, char **argv)
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("su");
@@ -297,7 +294,6 @@ int main (int argc, char **argv)
 	 * Get the tty name. Entries will be logged indicating that the user
 	 * tried to change to the named new user from the current terminal.
 	 */
-
 	if (isatty (0) && (cp = ttyname (0))) {
 		if (strncmp (cp, "/dev/", 5) == 0)
 			tty = cp + 5;
@@ -321,7 +317,6 @@ int main (int argc, char **argv)
 	/*
 	 * Process the command line arguments. 
 	 */
-
 	argc--;
 	argv++;			/* shift out command name */
 
@@ -335,7 +330,6 @@ int main (int argc, char **argv)
 	 * If a new login is being set up, the old environment will be
 	 * ignored and a new one created later on.
 	 */
-
 	if (fakelogin) {
 		/*
 		 * The terminal type will be left alone if it is present in
@@ -346,11 +340,13 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 		if ((cp = getdef_str ("ENV_TZ")))
 			addenv (*cp == '/' ? tz (cp) : cp, NULL);
+
 		/*
 		 * The clock frequency will be reset to the login value if required
 		 */
 		if ((cp = getdef_str ("ENV_HZ")))
 			addenv (cp, NULL);	/* set the default $HZ, if one */
+
 		/*
 		 * Also leave DISPLAY and XAUTHORITY if present, else
 		 * pam_xauth will not work.
@@ -371,7 +367,6 @@ int main (int argc, char **argv)
 	 * doesn't start with a "-" unless you specify the new user name.
 	 * Any remaining arguments will be passed to the user's login shell.
 	 */
-
 	if (argc > 0 && argv[0][0] != '-') {
 		STRFCPY (name, argv[0]);	/* use this login id */
 		argc--;
@@ -386,7 +381,6 @@ int main (int argc, char **argv)
 	 * Get the user's real name. The current UID is used to determine
 	 * who has executed su. That user ID must exist.
 	 */
-
 	pw = get_my_pwent ();
 	if (!pw) {
 		SYSLOG ((LOG_CRIT, "Unknown UID: %u", my_uid));
@@ -420,7 +414,7 @@ int main (int argc, char **argv)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_set_item: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -435,7 +429,6 @@ int main (int argc, char **argv)
 	 * The password file entries for the user is gotten and the account
 	 * validated.
 	 */
-
 	if (!(pw = getpwnam (name))) {
 		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
 		closelog ();
@@ -498,7 +491,6 @@ int main (int argc, char **argv)
 	/*
 	 * Set the default shell.
 	 */
-
 	if (pwent.pw_shell[0] == '\0')
 		pwent.pw_shell = "/bin/sh";	/* XXX warning: const */
 
@@ -509,7 +501,7 @@ int main (int argc, char **argv)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		su_failure (tty);
 	}
@@ -522,7 +514,7 @@ int main (int argc, char **argv)
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
 				 pam_strerror (pamh, ret)));
-			fprintf (stderr, "%s: %s\n", Prog,
+			fprintf (stderr, _("%s: %s\n"), Prog,
 				 pam_strerror (pamh, ret));
 			pam_end (pamh, ret);
 			su_failure (tty);
@@ -532,7 +524,6 @@ int main (int argc, char **argv)
 	/*
 	 * Set up a signal handler in case the user types QUIT.
 	 */
-
 	die (0);
 	oldsig = signal (SIGQUIT, die);
 
@@ -541,7 +532,6 @@ int main (int argc, char **argv)
 	 * The first character of an administrator defined method is an '@'
 	 * character.
 	 */
-
 	if (!amroot && pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0)) {
 		SYSLOG ((pwent.pw_uid ? LOG_NOTICE : LOG_WARN,
 			 "Authentication failed for %s", name));
@@ -554,7 +544,6 @@ int main (int argc, char **argv)
 	 * expired accounts, but normal users can't become a user with an
 	 * expired password.
 	 */
-
 	if (!amroot) {
 		if (!spwd)
 			spwd = pwd_to_spwd (&pwent);
@@ -572,7 +561,6 @@ int main (int argc, char **argv)
 	 * there is a "SU" entry in the /etc/porttime file denying access to
 	 * the account.
 	 */
-
 	if (!amroot) {
 		if (!isttytime (pwent.pw_name, "SU", time ((time_t *) 0))) {
 			SYSLOG ((pwent.pw_uid ? LOG_WARN : LOG_CRIT,
@@ -595,7 +583,10 @@ int main (int argc, char **argv)
 		addenv ("PATH", cp);
 	}
 
+#ifndef USE_PAM
+	/* setup the environment for PAM later on, else we run into auth problems */
 	environ = newenvp;	/* make new environment active */
+#endif
 
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
@@ -631,7 +622,7 @@ int main (int argc, char **argv)
 	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -640,7 +631,7 @@ int main (int argc, char **argv)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_open_session: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
+		fprintf (stderr, _("%s: %s\n"), Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -694,7 +685,6 @@ int main (int argc, char **argv)
 	 * See if the user has extra arguments on the command line. In that
 	 * case they will be provided to the new user's shell as arguments.
 	 */
-
 	if (fakelogin) {
 		char *arg0;
 
@@ -710,12 +700,10 @@ int main (int argc, char **argv)
 		cp = Basename (pwent.pw_shell);
 
 	if (!doshell) {
-
 		/*
 		 * Use new user's shell from /etc/passwd and create an argv
 		 * with the rest of the command line included.
 		 */
-
 		argv[-1] = pwent.pw_shell;
 #ifndef USE_PAM
 		(void) execv (pwent.pw_shell, &argv[-1]);

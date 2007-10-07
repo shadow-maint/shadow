@@ -5,8 +5,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: chkname.c,v 1.8 2003/05/12 05:29:14 kloczek Exp $")
+#ident "$Id: chkname.c,v 1.11 2005/08/31 17:24:57 kloczek Exp $"
+
 #include <ctype.h>
 #include "defines.h"
 #include "chkname.h"
@@ -18,7 +18,7 @@ RCSID ("$Id: chkname.c,v 1.8 2003/05/12 05:29:14 kloczek Exp $")
 static int good_name (const char *name)
 {
 	/*
-	 * User/group names must match [a-z_][a-z0-9_-]*
+	 * User/group names must match [a-z_][a-z0-9_-]*[$]
 	 */
 	if (!*name || !((*name >= 'a' && *name <= 'z') || *name == '_'))
 		return 0;

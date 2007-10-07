@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SUAUTH" "5" "08/03/2005" "Feb 14, 1996" "Feb 14, 1996"
+.TH "SUAUTH" "5" "10/01/2005" "Feb 14, 1996" "Feb 14, 1996"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,39 +14,38 @@ suauth \- Detailed su control file
 \fB/etc/suauth\fR
 .SH "DESCRIPTION"
 .PP
-The file 
-\fI/etc/suauth\fR 
-is referenced whenever the su command is called. It can change the behaviour of the su command, based upon
-
+The file
+\fI/etc/suauth\fR
+is referenced whenever the su command is called. It can change the behaviour of the su command, based upon:
+.sp
 .nf
-
       1) the user su is targetting
     
 .fi
+.sp
 .PP
 2) the user executing the su command (or any groups he might be a member of)
 .PP
 The file is formatted like this, with lines starting with a # being treated as comment lines and ignored;
-
+.sp
 .nf
-
       to\-id:from\-id:ACTION
     
 .fi
 .PP
-Where to\-id is either the word 
-\fIALL\fR, a list of usernames delimited by "," or the words 
-\fIALL EXCEPT\fR 
+Where to\-id is either the word
+\fIALL\fR, a list of usernames delimited by "," or the words
+\fIALL EXCEPT\fR
 followed by a list of usernames delimited by ","
 .PP
-from\-id is formatted the same as to\-id except the extra word 
-\fIGROUP\fR 
-is recognised. 
-\fIALL EXCEPT GROUP\fR 
-is perfectly valid too. Following 
-\fIGROUP\fR 
-appears one or more group names, delimited by ",". It is not sufficient to have primary group id of the relevant group, an entry in 
-\fB/etc/group\fR(5) 
+from\-id is formatted the same as to\-id except the extra word
+\fIGROUP\fR
+is recognised.
+\fIALL EXCEPT GROUP\fR
+is perfectly valid too. Following
+\fIGROUP\fR
+appears one or more group names, delimited by ",". It is not sufficient to have primary group id of the relevant group, an entry in
+\fB/etc/group\fR(5)
 is neccessary.
 .PP
 Action can be one only of the following currently supported options.
@@ -62,16 +61,15 @@ For the su command to be successful, the user must enter his or her own password
 .PP
 Note there are three separate fields delimited by a colon. No whitespace must surround this colon. Also note that the file is examined sequentially line by line, and the first applicable rule is used without examining the file further. This makes it possible for a system administrator to exercise as fine control as he or she wishes.
 .SH "EXAMPLE"
-
+.sp
 .nf
-
       # sample /etc/suauth file
       #
       # A couple of privileged usernames may
       # su to root with their own password.
       #
       root:chris,birddog:OWNPASS
-      # 
+      #
       # Anyone else may not su to root unless in
       # group wheel. This is how BSD does things.
       #
@@ -87,6 +85,7 @@ Note there are three separate fields delimited by a colon. No whitespace must su
       #
     
 .fi
+.sp
 .SH "FILES"
 .TP
 \fI/etc/suauth\fR
@@ -95,16 +94,15 @@ Note there are three separate fields delimited by a colon. No whitespace must su
 There could be plenty lurking. The file parser is particularly unforgiving about syntax errors, expecting no spurious whitespace (apart from beginning and end of lines), and a specific token delimiting different things.
 .SH "DIAGNOSTICS"
 .PP
-An error parsing the file is reported using 
-\fBsyslogd\fR(8) 
+An error parsing the file is reported using
+\fBsyslogd\fR(8)
 as level ERR on facility AUTH.
 .SH "SEE ALSO"
 .PP
-\fBsu\fR(1)
+\fBsu\fR(1).
 .SH "AUTHOR"
-
+.sp
 .nf
-
       Chris Evans (lady0110@sable.ox.ac.uk)
       Lady Margaret Hall
       Oxford University

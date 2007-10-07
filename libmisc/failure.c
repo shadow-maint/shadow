@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: failure.c,v 1.15 2005/06/20 10:02:02 kloczek Exp $")
+#ident "$Id: failure.c,v 1.17 2005/09/26 18:46:11 kloczek Exp $"
+
 #include <fcntl.h>
 #include <stdio.h>
 #include "defines.h"
@@ -183,7 +183,6 @@ void failprint (const struct faillog *fail)
 #if HAVE_STRFTIME
 	char lasttimeb[256];
 	char *lasttime = lasttimeb;
-	const char *fmt;
 #else
 	char *lasttime;
 #endif
@@ -197,24 +196,15 @@ void failprint (const struct faillog *fail)
 
 #if HAVE_STRFTIME
 	/*
-	 * Only print as much date and time info as it needed to
-	 * know when the failure was.
+	 * Print all information we have.
 	 */
-
-	if (NOW - fail->fail_time >= YEAR)
-		fmt = "%Y";
-	else if (NOW - fail->fail_time >= DAY)
-		fmt = "%A %T";
-	else
-		fmt = "%T";
-	strftime (lasttimeb, sizeof lasttimeb, fmt, tp);
+	strftime (lasttimeb, sizeof lasttimeb, "%c", tp);
 #else
 
 	/*
 	 * Do the same thing, but don't use strftime since it
 	 * probably doesn't exist on this system
 	 */
-
 	lasttime = asctime (tp);
 	lasttime[24] = '\0';
 

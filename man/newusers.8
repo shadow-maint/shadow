@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "NEWUSERS" "8" "08/03/2005" "" ""
+.TH "NEWUSERS" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,8 +14,8 @@ newusers \- update and create new users in batch
 \fBnewusers\fR [\fInew_users\fR]
 .SH "DESCRIPTION"
 .PP
-\fBnewusers\fR 
-reads a file of user name and clear\-text password pairs and uses this information to update a group of existing users or to create new users. Each line is in the same format as the standard password file (see 
+\fBnewusers\fR
+reads a file of user name and clear\-text password pairs and uses this information to update a group of existing users or to create new users. Each line is in the same format as the standard password file (see
 \fBpasswd\fR(5)) with the following exceptions:
 .TP
 \fIpw_passwd\fR
@@ -34,10 +34,15 @@ This command is intended to be used in a large system environment where many acc
 .SH "CAVEATS"
 .PP
 The input file must be protected since it contains unencrypted passwords.
+.SH "FILES"
+.TP
+\fI/etc/login.defs\fR
+shadow password suite configuration
 .SH "SEE ALSO"
 .PP
-\fBpasswd\fR(1), 
-\fBuseradd\fR(8)
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(1),
+\fBuseradd\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

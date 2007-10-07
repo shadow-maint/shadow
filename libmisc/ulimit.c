@@ -1,7 +1,7 @@
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: ulimit.c,v 1.3 2003/04/22 10:59:22 kloczek Exp $")
+#ident "$Id: ulimit.c,v 1.4 2005/08/31 17:24:58 kloczek Exp $"
+
 #if HAVE_ULIMIT_H
 #include <ulimit.h>
 #ifndef UL_SETFSIZE

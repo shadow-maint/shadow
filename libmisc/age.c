@@ -38,8 +38,8 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "rcsid.h"
-RCSID ("$Id: age.c,v 1.11 2005/05/25 18:20:22 kloczek Exp $")
+#ident "$Id: age.c,v 1.12 2005/08/31 17:24:57 kloczek Exp $"
+
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
 #endif

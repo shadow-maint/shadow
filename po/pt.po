@@ -4,13 +4,14 @@
 # 18-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 5f1u
 # 12-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 7u4f
 # 14-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f2u
+# 03-09-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f12u
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.12\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-08-11 16:15+0200\n"
-"PO-Revision-Date: 2005-08-14 12:25+0000\n"
+"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"PO-Revision-Date: 2005-09-03 23:05+0000\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -100,6 +101,27 @@ msgstr "Não tem correio."
 msgid "You have mail."
 msgstr "Tem correio."
 
+msgid "no change"
+msgstr "sem alterações"
+
+msgid "a palindrome"
+msgstr "um palíndromo"
+
+msgid "case changes only"
+msgstr "apenas alteração de maiúsculas/minúsculas"
+
+msgid "too similar"
+msgstr "demasiado parecido"
+
+msgid "too simple"
+msgstr "demasiado simples"
+
+msgid "rotated"
+msgstr "rodado"
+
+msgid "too short"
+msgstr "demasiado curto"
+
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Password inválida: %s.  "
@@ -137,6 +159,14 @@ msgstr "Directório raiz inválido \"%s\"\n"
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "Não é possível mudar o directório raiz para \"%s\"\n"
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+"Sem entrada utmp.  Tem de executar \"login\" a partir do nível mais baixo "
+"\"sh\""
+
+msgid "Unable to determine your tty name."
+msgstr "Não é possível determinar nome do seu tty."
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -258,6 +288,10 @@ msgid "%s: unknown user %s\n"
 msgstr "%s: utilizador desconhecido %s\n"
 
 #, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: o ficheiro de passwords shadow não está presente\n"
+
+#, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr ""
 "%s: não é possível obter acesso exclusivo ao ficheiro de passwords shadow\n"
@@ -265,6 +299,10 @@ msgstr ""
 #, c-format
 msgid "%s: can't open shadow password file\n"
 msgstr "%s: não é possível abrir o ficheiro de passwords shadow\n"
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: falhou baixar privilégios (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -289,10 +327,6 @@ msgstr "%s: não é possível reescrever o ficheiro de passwords shadow\n"
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: não é possível reescrever o ficheiro de passwords\n"
-
-#, c-format
-msgid "%s: PAM chauthtok failed\n"
-msgstr "%s: falhou chauthtok de PAM\n"
 
 #, c-format
 msgid ""
@@ -386,8 +420,8 @@ msgstr "Não é possível alterar o ID para root.\n"
 #, c-format
 msgid "Cannot lock the password file; try again later.\n"
 msgstr ""
-"Não é possível obter acesso exclusivo ao ficheiro de passwords; tente de "
-"novo mais tarde.\n"
+"Não é possível obter acesso exclusivo ao ficheiro de passwords; tente "
+"novamente mais tarde.\n"
 
 #, c-format
 msgid "Cannot open the password file.\n"
@@ -494,10 +528,6 @@ msgstr "%s é uma shell inválida.\n"
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Utilização: expiry {-f|-c}\n"
-
-#, c-format
-msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s: AVISO! Tem de ter o UID root!\n"
 
 #, c-format
 msgid "%s: unknown user\n"
@@ -910,16 +940,20 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -b, --before DAYS\tprint only lastlog records older than DAYS\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
 "Utilização: lastlog [opções]\n"
 "\n"
 "Opções:\n"
+"  -b, --before DIAS\tescrever apenas registos de lastlog mais antigos que "
+"DIAS\n"
+"  -h, --help\t\tmostrar esta mensagem e sai\n"
+"  -t, --time DIAS\tescrever apenas registos de lastlog mais recentes que "
+"DIAS\n"
 "  -u, --user LOGIN\tmostra o registo de lastlog para o utilizador LOGIN\n"
-"  -h, --help\t\tmostra esta mensagem e sai\n"
-"  -t, --time DIAS\tmostra apenas registos de lastlog mais recentes que DIAS\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -981,6 +1015,18 @@ msgid " on `%.100s'"
 msgstr " em `%.100s'"
 
 #, c-format
+msgid "login: PAM Failure, aborting: %s\n"
+msgstr "login: Falha de PAM, a abortar: %s\n"
+
+#, c-format
+msgid ""
+"\n"
+"Login incorrect\n"
+msgstr ""
+"\n"
+"Login incorrecto\n"
+
+#, c-format
 msgid ""
 "\n"
 "%s login: "
@@ -990,6 +1036,10 @@ msgstr ""
 
 msgid "Login incorrect"
 msgstr "Login incorrecto"
+
+#, c-format
+msgid "%s: failure forking: %s"
+msgstr "%s: falha no fork: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Aviso: o login foi novamente permitido após um tempo de bloqueio.\n"
@@ -1005,6 +1055,13 @@ msgstr "Última entrada no sistema: %.19s em %s"
 #, c-format
 msgid " from %.*s"
 msgstr " de %.*s"
+
+msgid ""
+"login time exceeded\n"
+"\n"
+msgstr ""
+"tempo para login excedido\n"
+"\n"
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1083,23 +1140,52 @@ msgid "%s: error updating files\n"
 msgstr "%s: erro ao actualizar ficheiros\n"
 
 #, c-format
-msgid "Usage: %s [-f|-s] [name]\n"
-msgstr "Utilização: %s [-f|-s] [nome]\n"
-
-#, c-format
-msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "       %s [-x max] [-n min] [-w aviso] [-i inactivo] nome\n"
-
-#, c-format
-msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s {-l|-u|-d|-S|-e} nome\n"
+msgid ""
+"Usage: passwd [options] [login]\n"
+"\n"
+"Options:\n"
+"  -a, --all \t\t\treport password status on all accounts\n"
+"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tlock the named account\n"
+"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
+"  -S, --status\t\t\treport password status on the named account\n"
+"  -u, --unlock\t\t\tunlock the named account\n"
+"  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
+msgstr ""
+"Utilização: passwd [opções] [login]\n"
+"\n"
+"Opções:\n"
+"  -a, --all \t\t\treportar estado das passwords em todas as contas\n"
+"  -d, --delete \t\t\tapagar a password apra a conta indicada\n"
+"  -e, --expire\t\t\tforçar que a password expire para a conta indicada\n"
+"  -h, --help\t\t\tmostrar esta mensagem de ajuda e sair\n"
+"  -k, --keep-tokens\t\tapenas mudar a password se tiver expirado\n"
+"  -i, --inactive INACTIVA\tdefinir a password como inactiva após expirar\n"
+"\t\t\t\topós INACTIVA (dias)\n"
+"  -l, --lock\t\t\tbloquear a conta indicada\n"
+"  -n, --mindays MIN_DIAS\tdefinir para MIN_DIAS o número de dias antes\n"
+"\t\t\t\tde alterar a password\n"
+"  -q, --quiet\t\t\tmodo discreto\n"
+"  -r, --repository REPOSITÓRIO\tmudar a password no repositório REPOSITÓRIO\n"
+"  -S, --status\t\t\treportar estado da password na conta indicada\n"
+"  -u, --unlock\t\t\tdesbloquear a conta indicada\n"
+"  -w, --warndays AVISAR_DIAS\tdefinir para AVISAR_DIAS o número de dias\n"
+"\t\t\t\tpara alerta de expirar\n"
+"  -x, --maxdays MAX_DIAS\tdefinir para MAX_DIAS o número de dias máximo\n"
+"\t\t\t\tantes de alterar a password\n"
 
 msgid "Old password: "
 msgstr "Password antiga: "
-
-#, c-format
-msgid "Incorrect password for `%s'\n"
-msgstr "Password incorrecta para `%s'\n"
 
 #, c-format
 msgid ""
@@ -1259,6 +1345,10 @@ msgstr "Por favor introduza a SUA password como autenticação.\n"
 
 msgid "Sorry."
 msgstr "Desculpe."
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1544,6 +1634,10 @@ msgstr "Utilização: %s [-r] nome\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: erro ao actualizar o registo do grupo\n"
 
+#, fuzzy, c-format
+msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgstr "%s: não é possível remover o grupo primário do utilizador.\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: não é possível abrir o ficheiro dos grupos\n"
@@ -1701,5 +1795,5 @@ msgstr ""
 "`vipw' edita /etc/passwd        `vipw -s' edita /etc/shadow\n"
 "`vigr' edita /etc/group         `vigr -s' edita /etc/gshadow\n"
 
-#~ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
-#~ msgstr "Utilização: groupadd [-g gid [-o]] [-f] grupo\n"
+#~ msgid "%s: PAM chauthtok failed\n"
+#~ msgstr "%s: falhou chauthtok de PAM\n"

@@ -32,8 +32,8 @@
 #include <stdio.h>
 #include "defines.h"
 
-#include "rcsid.h"
-RCSID ("$Id: fputsx.c,v 1.6 2005/03/31 05:14:49 kloczek Exp $")
+#ident "$Id: fputsx.c,v 1.7 2005/08/31 17:24:56 kloczek Exp $"
+
 
 char *fgetsx (char *buf, int cnt, FILE * f)
 {

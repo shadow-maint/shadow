@@ -32,8 +32,8 @@
 /* Newer versions of Linux libc already have shadow support.  */
 #ifndef HAVE_GETSPNAM
 
-#include "rcsid.h"
-RCSID ("$Id: shadow.c,v 1.11 2005/05/25 19:31:50 kloczek Exp $")
+#ident "$Id: shadow.c,v 1.12 2005/08/31 17:24:56 kloczek Exp $"
+
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"

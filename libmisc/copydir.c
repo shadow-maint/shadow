@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: copydir.c,v 1.12 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: copydir.c,v 1.13 2005/08/31 17:24:57 kloczek Exp $"
+
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>

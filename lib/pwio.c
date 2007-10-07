@@ -1,8 +1,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: pwio.c,v 1.15 2005/06/20 10:01:57 kloczek Exp $")
+#ident "$Id: pwio.c,v 1.16 2005/08/31 17:24:56 kloczek Exp $"
+
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>

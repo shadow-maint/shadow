@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!-- $Id: groupmems.8.xml,v 1.12 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,16 +14,16 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>groupmems</command>    
+      <command>groupmems</command>
       <group choice='plain'>
-        <arg choice='plain'>-a <replaceable>user_name</replaceable></arg>
-        <arg choice='plain'>-d <replaceable>user_name</replaceable></arg>
-        <arg choice='plain'>-l </arg><arg choice='plain'>-D </arg>
-        <arg choice='opt'>-g <replaceable>group_name</replaceable></arg>
+	<arg choice='plain'>-a <replaceable>user_name</replaceable></arg>
+	<arg choice='plain'>-d <replaceable>user_name</replaceable></arg>
+	<arg choice='plain'>-l </arg><arg choice='plain'>-D </arg>
+	<arg choice='opt'>-g <replaceable>group_name</replaceable></arg>
       </group>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
@@ -33,12 +33,12 @@
       systems that configure its users to be in their own name sake primary
       group (i.e., guest / guest).
     </para>
-    
+
     <para>Only the super user, as administrator, can use
       <command>groupmems</command> to alter the memberships of other groups.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -47,104 +47,106 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-        <term><option>-a</option> <replaceable>user_name</replaceable></term>
-        <listitem>
-          <para>Add a new user to the group membership list.</para>
-        </listitem>
+	<term><option>-a</option> <replaceable>user_name</replaceable></term>
+	<listitem>
+	  <para>Add a new user to the group membership list.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-d</option> <replaceable>user_name</replaceable></term>
-        <listitem>
-          <para>Delete a user from the group membership list.</para>
-        </listitem>
+	<term><option>-d</option> <replaceable>user_name</replaceable></term>
+	<listitem>
+	  <para>Delete a user from the group membership list.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-D</option></term>
-        <listitem>
-          <para>Delete all users from the group membership list.</para>
-        </listitem>
+	<term><option>-D</option></term>
+	<listitem>
+	  <para>Delete all users from the group membership list.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-g</option> <replaceable>group_name</replaceable></term>
-        <listitem>
-          <para>The super user can specify which group membership
-            list to modify.
-          </para>
-        </listitem>
+	<term><option>-g</option> <replaceable>group_name</replaceable></term>
+	<listitem>
+	  <para>The super user can specify which group membership
+	    list to modify.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><option>-l</option></term>
-        <listitem>
-          <para>List the group membership list.</para>
-        </listitem>
+	<term><option>-l</option></term>
+	<listitem>
+	  <para>List the group membership list.</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='setup'>
     <title>SETUP</title>
     <para>
       The <command>groupmems</command> executable should be in mode
-      <literal>2770</literal> as user <emphasis remap='B'>root</emphasis>
-      and in group <emphasis remap='B'>groups</emphasis>. The system
-      administrator can add users to group groups to allow or disallow them
-      using the <command>groupmems</command> utility to manage their own
-      group membership list.
+      <literal>2770</literal> as user <emphasis>root</emphasis> and in group
+      <emphasis>groups</emphasis>. The system administrator can add users to
+      group groups to allow or disallow them using the
+      <command>groupmems</command> utility to manage their own group
+      membership list.
     </para>
-    
+
     <para>     $ groupadd -r groups
-      <!-- .br -->
       $ chmod 2770 groupmems
-      <!-- .br -->
       $ chown root.groups groupmems
-      <!-- .br -->
       $ groupmems -g groups -a gk4
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/gshadow</filename></term>
-        <listitem>secure group account information</listitem>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>secure group account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>George Kraft IV (gk4@us.ibm.com)</para>

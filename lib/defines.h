@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.27 2005/08/03 18:11:27 kloczek Exp $ */
+/* $Id: defines.h,v 1.29 2005/09/05 16:22:03 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -329,6 +329,17 @@ extern char *strerror ();
  */
 #ifndef SHADOW_PASSWD_STRING
 #define SHADOW_PASSWD_STRING "x"
+#endif
+
+#ifdef WITH_AUDIT
+#ifdef __u8			/* in case we use pam < 0.80 */
+#undef __u8
+#endif
+#ifdef __u32
+#undef __u32
+#endif
+
+#include <libaudit.h>
 #endif
 
 #endif				/* _DEFINES_H_ */

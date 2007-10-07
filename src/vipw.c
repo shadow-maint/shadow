@@ -22,23 +22,26 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.14 2005/08/03 16:00:46 kloczek Exp $")
-#include "defines.h"
+#ident "$Id: vipw.c,v 1.17 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <errno.h>
-#include <sys/stat.h>
-#include <unistd.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 #include <sys/types.h>
-#include <signal.h>
+#include <unistd.h>
 #include <utime.h>
+#include "defines.h"
+#include "groupio.h"
+#include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
-#include "shadowio.h"
-#include "groupio.h"
 #include "sgroupio.h"
-#include "nscd.h"
+#include "shadowio.h"
+/*
+ * Global variables
+ */
 static const char *progname, *filename, *fileeditname;
 static int filelocked = 0, createedit = 0;
 static int (*unlock) (void);
@@ -186,7 +189,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	 * ask the user what to do (edit again, save changes anyway, or quit
 	 * without saving). Use pwck or grpck to do the check.  --marekm
 	 */
-
 	createedit = 0;
 	unlink (filebackup);
 	link (file, filebackup);
@@ -200,7 +202,6 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 	(*file_unlock) ();
 }
-
 
 int main (int argc, char **argv)
 {

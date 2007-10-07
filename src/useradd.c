@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.75 2005/08/11 16:23:34 kloczek Exp $")
+#ident "$Id: useradd.c,v 1.84 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -46,12 +46,20 @@ RCSID (PKG_VER "$Id: useradd.c,v 1.75 2005/08/11 16:23:34 kloczek Exp $")
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
-#include "prototypes.h"
-#include "defines.h"
 #include "chkname.h"
-#include "pwauth.h"
+#include "defines.h"
 #include "faillog.h"
+#include "getdef.h"
+#include "groupio.h"
 #include "nscd.h"
+#include "prototypes.h"
+#include "pwauth.h"
+#include "pwio.h"
+#ifdef	SHADOWGRP
+#include "sgroupio.h"
+#endif
+#include "shadowio.h"
+
 #ifndef SKEL_DIR
 #define SKEL_DIR "/etc/skel"
 #endif
@@ -65,6 +73,9 @@ RCSID (PKG_VER "$Id: useradd.c,v 1.75 2005/08/11 16:23:34 kloczek Exp $")
 #ifndef LASTLOG_FILE
 #define LASTLOG_FILE "/var/log/lastlog"
 #endif
+/*
+ * Global variables
+ */
 /*
  * These defaults are used if there is no defaults file.
  */
@@ -124,16 +135,6 @@ extern int optind;
 
 static int home_added;
 
-#include "groupio.h"
-
-#ifdef	SHADOWGRP
-#include "sgroupio.h"
-#endif
-
-#include "pwio.h"
-#include "shadowio.h"
-#include "getdef.h"
-
 /*
  * exit status values
  */
@@ -185,16 +186,18 @@ static void create_mail (void);
 /*
  * fail_exit - undo as much as possible
  */
-
 static void fail_exit (int code)
 {
 	if (home_added)
 		rmdir (user_home);
 
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, -1,
+		      0);
+#endif
 	SYSLOG ((LOG_INFO, "failed adding user `%s', data deleted", user_name));
 	exit (code);
 }
-
 
 static struct group *getgr_nam_gid (const char *name)
 {
@@ -207,7 +210,6 @@ static struct group *getgr_nam_gid (const char *name)
 
 	return getgrnam (name);
 }
-
 
 static long get_number (const char *cp)
 {
@@ -244,7 +246,6 @@ static uid_t get_uid (const char *cp)
  *	various values from the file, or uses built-in default values if the
  *	file does not exist.
  */
-
 static void get_defaults (void)
 {
 	FILE *fp;
@@ -263,7 +264,6 @@ static void get_defaults (void)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-
 	while (fgets (buf, sizeof buf, fp)) {
 		if ((cp = strrchr (buf, '\n')))
 			*cp = '\0';
@@ -276,7 +276,6 @@ static void get_defaults (void)
 		/*
 		 * Primary GROUP identifier
 		 */
-
 		if (MATCH (buf, DGROUP)) {
 			unsigned int val = (unsigned int) strtoul (cp, &ep, 10);
 
@@ -353,14 +352,12 @@ static void get_defaults (void)
 	}
 }
 
-
 /*
  * show_defaults - show the contents of the defaults file
  *
  *	show_defaults() displays the values that are used from the default
  *	file and the built-in values.
  */
-
 static void show_defaults (void)
 {
 	printf ("GROUP=%u\n", (unsigned int) def_group);
@@ -379,7 +376,6 @@ static void show_defaults (void)
  *	are currently set. Duplicated lines are pruned, missing lines are
  *	added, and unrecognized lines are copied as is.
  */
-
 static int set_defaults (void)
 {
 	FILE *ifp;
@@ -399,7 +395,6 @@ static int set_defaults (void)
 	/*
 	 * Create a temporary file to copy the new output to.
 	 */
-
 	if ((ofd = mkstemp (new_file)) == -1) {
 		fprintf (stderr,
 			 _("%s: cannot create new defaults file\n"), Prog);
@@ -417,7 +412,6 @@ static int set_defaults (void)
 	 * temporary file, using any new values. Each line is checked
 	 * to insure that it is not output more than once.
 	 */
-
 	if (!(ifp = fopen (def_file, "r"))) {
 		fprintf (ofp, "# useradd defaults file\n");
 		goto skip;
@@ -461,7 +455,6 @@ static int set_defaults (void)
 	 * causes new values to be added to a file which did not previously
 	 * have an entry for that value.
 	 */
-
 	if (!out_group)
 		fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 	if (!out_home)
@@ -482,7 +475,6 @@ static int set_defaults (void)
 	 * Flush and close the file. Check for errors to make certain
 	 * the new file is intact.
 	 */
-
 	fflush (ofp);
 	if (ferror (ofp) || fclose (ofp)) {
 		unlink (new_file);
@@ -492,7 +484,6 @@ static int set_defaults (void)
 	/*
 	 * Rename the current default file to its backup name.
 	 */
-
 	snprintf (buf, sizeof buf, "%s-", def_file);
 	if (rename (def_file, buf) && errno != ENOENT) {
 		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, def_file);
@@ -504,12 +495,15 @@ static int set_defaults (void)
 	/*
 	 * Rename the new default file to its correct name.
 	 */
-
 	if (rename (new_file, def_file)) {
 		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, new_file);
 		perror (buf);
 		return -1;
 	}
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing user defaults",
+		      NULL, -1, 1);
+#endif
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
 		 "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
@@ -526,7 +520,6 @@ static int set_defaults (void)
  *	converts it to a NULL-terminated array. Any unknown group
  *	names are reported as errors.
  */
-
 static int get_groups (char *list)
 {
 	char *cp;
@@ -537,7 +530,6 @@ static int get_groups (char *list)
 	/*
 	 * Initialize the list to be empty
 	 */
-
 	user_groups[0] = (char *) 0;
 
 	if (!*list)
@@ -548,12 +540,10 @@ static int get_groups (char *list)
 	 * each name and look it up. A mix of numerical and string
 	 * values for group identifiers is permitted.
 	 */
-
 	do {
 		/*
 		 * Strip off a single name from the list
 		 */
-
 		if ((cp = strchr (list, ',')))
 			*cp++ = '\0';
 
@@ -561,14 +551,12 @@ static int get_groups (char *list)
 		 * Names starting with digits are treated as numerical
 		 * GID values, otherwise the string is looked up as is.
 		 */
-
 		grp = getgr_nam_gid (list);
 
 		/*
 		 * There must be a match, either by GID value or by
 		 * string name.
 		 */
-
 		if (!grp) {
 			fprintf (stderr, _("%s: unknown group %s\n"),
 				 Prog, list);
@@ -588,7 +576,6 @@ static int get_groups (char *list)
 		 * Don't add this group if they are an NIS group. Tell
 		 * the user to go to the server for this group.
 		 */
-
 		if (__isgrNIS ()) {
 			fprintf (stderr,
 				 _("%s: group `%s' is a NIS group.\n"),
@@ -617,7 +604,6 @@ static int get_groups (char *list)
 	/*
 	 * Any errors in finding group names are fatal
 	 */
-
 	if (errors)
 		return -1;
 
@@ -627,7 +613,6 @@ static int get_groups (char *list)
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: useradd [options] LOGIN\n"
@@ -665,7 +650,6 @@ static void usage (void)
  *	new_pwent() takes all of the values that have been entered and
  *	fills in a (struct passwd) with them.
  */
-
 static void new_pwent (struct passwd *pwent)
 {
 	memzero (pwent, sizeof *pwent);
@@ -696,7 +680,6 @@ static long scale_age (long x)
  *	new_spent() takes all of the values that have been entered and
  *	fills in a (struct spwd) with them.
  */
-
 static void new_spent (struct spwd *spent)
 {
 	memzero (spent, sizeof *spent);
@@ -717,7 +700,6 @@ static void new_spent (struct spwd *spent)
  *	grp_update() takes the secondary group set given in user_groups
  *	and adds the user to each group given by that set.
  */
-
 static void grp_update (void)
 {
 	const struct group *grp;
@@ -732,7 +714,6 @@ static void grp_update (void)
 	 * Lock and open the group file. This will load all of the group
 	 * entries.
 	 */
-
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: error locking group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -758,14 +739,12 @@ static void grp_update (void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-
 	for (gr_rewind (), grp = gr_next (); grp; grp = gr_next ()) {
 
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-
 		if (!is_on_list (user_groups, grp->gr_name))
 			continue;
 
@@ -773,7 +752,6 @@ static void grp_update (void)
 		 * Make a copy - gr_update() will free() everything
 		 * from the old entry, and we need it later.
 		 */
-
 		ngrp = __gr_dup (grp);
 		if (!ngrp) {
 			fail_exit (E_GRP_UPDATE);	/* XXX */
@@ -783,13 +761,16 @@ static void grp_update (void)
 		 * Add the username to the list of group members and
 		 * update the group entry to reflect the change.
 		 */
-
 		ngrp->gr_mem = add_list (ngrp->gr_mem, user_name);
 		if (!gr_update (ngrp)) {
 			fprintf (stderr,
-				 "%s: error adding new group entry\n", Prog);
+				 _("%s: error adding new group entry\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding user to group", user_name, -1, 1);
+#endif
 		SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
 			 user_name, ngrp->gr_name));
 	}
@@ -803,14 +784,12 @@ static void grp_update (void)
 	 * that the user is a member of. The administrative list isn't
 	 * modified.
 	 */
-
 	for (sgr_rewind (), sgrp = sgr_next (); sgrp; sgrp = sgr_next ()) {
 
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-
 		if (!gr_locate (sgrp->sg_name))
 			continue;
 
@@ -821,7 +800,6 @@ static void grp_update (void)
 		 * Make a copy - sgr_update() will free() everything
 		 * from the old entry, and we need it later.
 		 */
-
 		nsgrp = __sgr_dup (sgrp);
 		if (!nsgrp) {
 			fail_exit (E_GRP_UPDATE);	/* XXX */
@@ -831,13 +809,16 @@ static void grp_update (void)
 		 * Add the username to the list of group members and
 		 * update the group entry to reflect the change.
 		 */
-
 		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_name);
 		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
 				 _("%s: error adding new group entry\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding user to shadow group", user_name, -1, 1);
+#endif
 		SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
 			 user_name, nsgrp->sg_name));
 	}
@@ -851,20 +832,18 @@ static void grp_update (void)
  *	file, or checks the given user ID against the existing ones for
  *	uniqueness.
  */
-
 static void find_new_uid (void)
 {
 	const struct passwd *pwd;
 	uid_t uid_min, uid_max;
 
-	uid_min = getdef_unum ("UID_MIN", 100);
+	uid_min = getdef_unum ("UID_MIN", 1000);
 	uid_max = getdef_unum ("UID_MAX", 60000);
 
 	/*
 	 * Start with some UID value if the user didn't provide us with
 	 * one already.
 	 */
-
 	if (!uflg)
 		user_id = uid_min;
 
@@ -873,7 +852,6 @@ static void find_new_uid (void)
 	 * UID (if the user specified one with -u) or looking for the
 	 * largest unused value.
 	 */
-
 #ifdef NO_GETPWENT
 	pw_rewind ();
 	while ((pwd = pw_next ())) {
@@ -884,11 +862,19 @@ static void find_new_uid (void)
 		if (strcmp (user_name, pwd->pw_name) == 0) {
 			fprintf (stderr, _("%s: name %s is not unique\n"),
 				 Prog, user_name);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
+				      user_name, user_id, 0);
+#endif
 			exit (E_NAME_IN_USE);
 		}
 		if (uflg && user_id == pwd->pw_uid) {
 			fprintf (stderr, _("%s: UID %u is not unique\n"),
 				 Prog, (unsigned int) user_id);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
+				      user_name, user_id, 0);
+#endif
 			exit (E_UID_IN_USE);
 		}
 		if (!uflg && pwd->pw_uid >= user_id) {
@@ -897,6 +883,7 @@ static void find_new_uid (void)
 			user_id = pwd->pw_uid + 1;
 		}
 	}
+
 	/*
 	 * If a user with UID equal to UID_MAX exists, the above algorithm
 	 * will give us UID_MAX+1 even if not unique. Search for the first
@@ -930,7 +917,6 @@ static void find_new_uid (void)
  *	the values that the user will be created with accordingly. The
  *	values are checked for sanity.
  */
-
 static void process_flags (int argc, char **argv)
 {
 	const struct group *grp;
@@ -1140,6 +1126,7 @@ static void process_flags (int argc, char **argv)
 			anyflag++;
 		}
 	}
+
 	/*
 	 * Certain options are only valid in combination with others.
 	 * Check it here so that they can be specified in any order.
@@ -1167,6 +1154,10 @@ static void process_flags (int argc, char **argv)
 				 _
 				 ("%s: invalid user name '%s'\n"),
 				 Prog, user_name);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
+				      user_name, -1, 0);
+#endif
 			exit (E_BAD_ARG);
 		}
 		if (!dflg) {
@@ -1195,7 +1186,6 @@ static void process_flags (int argc, char **argv)
  *	close_files() closes all of the files that were opened for this
  *	new user. This causes any modified entries to be written out.
  */
-
 static void close_files (void)
 {
 	if (!pw_close ()) {
@@ -1236,27 +1226,44 @@ static void close_files (void)
  *
  *	open_files() opens the two password files.
  */
-
 static void open_files (void)
 {
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking password file", user_name, user_id, 0);
+#endif
 		exit (E_PW_UPDATE);
 	}
 	if (!pw_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening password file", user_name, user_id, 0);
+#endif
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "locking shadow password file", user_name,
+			      user_id, 0);
+#endif
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
 			 _("%s: cannot open shadow password file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening shadow password file", user_name,
+			      user_id, 0);
+#endif
 		spw_unlock ();
 		pw_unlock ();
 		exit (E_PW_UPDATE);
@@ -1298,7 +1305,6 @@ static void lastlog_reset (uid_t uid)
  *	usr_update() creates the password file entries for this user
  *	and will update the group entries if required.
  */
-
 static void usr_update (void)
 {
 	struct passwd pwent;
@@ -1311,7 +1317,6 @@ static void usr_update (void)
 	 * Fill in the password structure with any new fields, making
 	 * copies of strings.
 	 */
-
 	new_pwent (&pwent);
 	new_spent (&spent);
 
@@ -1319,7 +1324,6 @@ static void usr_update (void)
 	 * Create a syslog entry. We need to do this now in case anything
 	 * happens so we know what we were trying to accomplish.
 	 */
-
 	SYSLOG ((LOG_INFO,
 		 "new user: name=%s, UID=%u, GID=%u, home=%s, shell=%s",
 		 user_name, (unsigned int) user_id,
@@ -1331,7 +1335,6 @@ static void usr_update (void)
 	 * no user with this UID exists yet (entries for shared UIDs
 	 * are left unchanged).  --marekm
 	 */
-
 	if (!getpwuid (user_id)) {
 		faillog_reset (user_id);
 		lastlog_reset (user_id);
@@ -1340,7 +1343,6 @@ static void usr_update (void)
 	/*
 	 * Put the new (struct passwd) in the table.
 	 */
-
 	if (!pw_update (&pwent)) {
 		fprintf (stderr,
 			 _("%s: error adding new password entry\n"), Prog);
@@ -1350,19 +1352,25 @@ static void usr_update (void)
 	/*
 	 * Put the new (struct spwd) in the table.
 	 */
-
 	if (is_shadow_pwd && !spw_update (&spent)) {
 		fprintf (stderr,
 			 _
 			 ("%s: error adding new shadow password entry\n"),
 			 Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding shadow password", user_name, user_id, 0);
+#endif
 		exit (E_PW_UPDATE);
 	}
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name,
+		      user_id, 1);
+#endif
 
 	/*
 	 * Do any group file updates for this user.
 	 */
-
 	if (do_grp_update)
 		grp_update ();
 }
@@ -1374,7 +1382,6 @@ static void usr_update (void)
  *	already exist. It will be created mode 755 owned by the user
  *	with the user's default group.
  */
-
 static void create_home (void)
 {
 	if (access (user_home, F_OK)) {
@@ -1389,6 +1396,10 @@ static void create_home (void)
 		chown (user_home, user_id, user_gid);
 		chmod (user_home, 0777 & ~getdef_num ("UMASK", 022));
 		home_added++;
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "adding home directory", user_name, user_id, 1);
+#endif
 	}
 }
 
@@ -1454,7 +1465,6 @@ static struct pam_conv conv = {
 /*
  * main - useradd command
  */
-
 int main (int argc, char **argv)
 {
 #ifdef USE_PAM
@@ -1463,10 +1473,13 @@ int main (int argc, char **argv)
 	int retval;
 #endif
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -1523,7 +1536,6 @@ int main (int argc, char **argv)
 	 * See if we are messing with the defaults file, or creating
 	 * a new user.
 	 */
-
 	if (Dflg) {
 		if (gflg || bflg || fflg || eflg || sflg)
 			exit (set_defaults ()? 1 : 0);
@@ -1535,9 +1547,12 @@ int main (int argc, char **argv)
 	/*
 	 * Start with a quick check to see if the user exists.
 	 */
-
 	if (getpwnam (user_name)) {
 		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
+			      user_name, -1, 0);
+#endif
 		exit (E_NAME_IN_USE);
 	}
 
@@ -1553,6 +1568,10 @@ int main (int argc, char **argv)
 				 _
 				 ("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
 				 Prog, user_name);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "adding group", user_name, -1, 0);
+#endif
 			exit (E_NAME_IN_USE);
 		}
 	}
@@ -1566,7 +1585,6 @@ int main (int argc, char **argv)
 	 * - flush nscd caches for passwd and group services,
 	 * - then close and update the files.
 	 */
-
 	open_files ();
 
 	usr_update ();
@@ -1579,7 +1597,8 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 				 _
 				 ("%s: warning: the home directory already exists.\n"
-				  "Not copying any file from skel directory into it.\n"), Prog);
+				  "Not copying any file from skel directory into it.\n"),
+				 Prog);
 
 	} else if (getdef_str ("CREATE_HOME")) {
 		/*
@@ -1608,18 +1627,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */

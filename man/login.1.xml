@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.10 2005/07/10 20:10:09 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.17 2005/10/01 15:01:45 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>LOGIN</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -33,10 +33,11 @@
       <arg choice='plain'>-r <replaceable>host</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>login</command> is used to establish a new session with the
+    <para>
+      <command>login</command> is used to establish a new session with the
       system. It is normally invoked automatically by responding to the
       <emphasis remap='I'>login:</emphasis> prompt on the user&acute;s
       terminal. <command>login</command> may be special to the shell and may
@@ -46,192 +47,220 @@
       execute <command>login</command> from any shell but the login shell
       will produce an error message.
     </para>
-    
-    <para>The user is then prompted for a password, where appropriate. 
-      Echoing is disabled to prevent revealing the password. Only a small
-      number of password failures are permitted before
-      <command>login</command> exits and the communications link is severed.
+
+    <para>
+      The user is then prompted for a password, where appropriate. Echoing
+      is disabled to prevent revealing the password. Only a small number of
+      password failures are permitted before <command>login</command> exits
+      and the communications link is severed.
     </para>
-    
-    <para>If password aging has been enabled for your account, you may be
+
+    <para>
+      If password aging has been enabled for your account, you may be
       prompted for a new password before proceeding. You will be forced to
       provide your old password and the new password before continuing. 
       Please refer to <citerefentry>
       <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> for more information.
     </para>
-    
-    <para>After a successful login, you will be informed of any system
-      messages and the presence of mail. You may turn off the printing of
-      the system message file, <filename>/etc/motd</filename>, by creating a
+
+    <para>
+      After a successful login, you will be informed of any system messages
+      and the presence of mail. You may turn off the printing of the system
+      message file, <filename>/etc/motd</filename>, by creating a
       zero-length file <markup>.hushlogin</markup> in your login directory. 
-      The mail message will be one of "<emphasis remap='B'>You have new
-      mail.</emphasis> ", "<emphasis remap='B'>You have mail.</emphasis>",
-      or "<emphasis remap='B'>No Mail.</emphasis> "according to the
-      condition of your mailbox.
-    </para>
-    
-    <para>Your user and group ID will be set according to their values in
-      the <filename>/etc/passwd</filename> file. The value for <emphasis
-      remap='B'>$HOME</emphasis>, <emphasis remap='B'>$SHELL</emphasis>,
-      <emphasis remap='B'>$PATH</emphasis>, <emphasis remap='B'>$LOGNAME</emphasis>,
-      and <emphasis remap='B'>$MAIL</emphasis> are set according to the
-      appropriate fields in the password entry. Ulimit, umask and nice
-      values may also be set according to entries in the GECOS field.
-    </para>
-    
-    <para>On some installations, the environmental variable <emphasis
-      remap='B'>$TERM</emphasis> will be initialized to the terminal type on
-      your tty line, as specified in <filename>/etc/ttytype</filename>.
-    </para>
-    
-    <para>An initialization script for your command interpreter may also be
-      executed. Please see the appropriate manual section for more
-      information on
-      this function.
-    </para>
-    
-    <para>A subsystem login is indicated by the presence of a "*" as the
-      first character of the login shell. The given home directory will be
-      used as the root of a new file system which the user is actually
-      logged into.
+      The mail message will be one of "<emphasis>You have new
+      mail.</emphasis>", "<emphasis>You have mail.</emphasis>", or
+      "<emphasis>No Mail.</emphasis> "according to the condition of your
+      mailbox.
     </para>
 
-    <para>The <command>login</command> program is NOT responsible for
-      removing users from the utmp file. It is the responsibility of
-      <refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum> and
-      <refentrytitle>init</refentrytitle><manvolnum>8</manvolnum> to clean
-      up apparent ownership of a terminal session. If you use
-      <command>login</command> from the shell prompt without
-      <command>exec</command>, the user you use will continue to appear to
-      be logged in even after you log out of the "subsession".
+    <para>
+      Your user and group ID will be set according to their values in the
+      <filename>/etc/passwd</filename> file. The value for
+      <emphasis>$HOME</emphasis>, <emphasis>$SHELL</emphasis>,
+      <emphasis>$PATH</emphasis>, <emphasis>$LOGNAME</emphasis>, and
+      <emphasis>$MAIL</emphasis> are set according to the appropriate fields
+      in the password entry. Ulimit, umask and nice values may also be set
+      according to entries in the GECOS field.
+    </para>
+
+    <para>
+      On some installations, the environmental variable
+      <emphasis>$TERM</emphasis> will be initialized to the terminal type on
+      your tty line, as specified in <filename>/etc/ttytype</filename>.
+    </para>
+
+    <para>
+      An initialization script for your command interpreter may also be
+      executed. Please see the appropriate manual section for more
+      information on this function.
+    </para>
+
+    <para>
+      A subsystem login is indicated by the presence of a "*" as the first
+      character of the login shell. The given home directory will be used as
+      the root of a new file system which the user is actually logged into.
+    </para>
+
+    <para>
+      The <command>login</command> program is NOT responsible for removing
+      users from the utmp file. It is the responsibility of
+      <citerefentry><refentrytitle>getty</refentrytitle>
+      <manvolnum>8</manvolnum></citerefentry> and
+      <citerefentry><refentrytitle>init</refentrytitle>
+      <manvolnum>8</manvolnum></citerefentry> to clean up apparent ownership
+      of a terminal session. If you use <command>login</command> from the
+      shell prompt without <command>exec</command>, the user you use will
+      continue to appear to be logged in even after you log out of the
+      "subsession".
     </para>
 
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <variablelist remap='IP'>
       <varlistentry>
-        <term>
-          <option>-f</option>
-        </term>
-        <listitem>
-          <para>Do not perform authentication, user is preauthenticated.
-          </para>
-        </listitem>
+	<term>
+	  <option>-f</option>
+	</term>
+	<listitem>
+	  <para>Do not perform authentication, user is preauthenticated.
+	  </para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-h</option>
-        </term>
-        <listitem>
-          <para>Name of the remote host for this login.</para>
-        </listitem>
+	<term>
+	  <option>-h</option>
+	</term>
+	<listitem>
+	  <para>Name of the remote host for this login.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-p</option>
-        </term>
-        <listitem>
-          <para>Preserve environment.</para>
-        </listitem>
+	<term>
+	  <option>-p</option>
+	</term>
+	<listitem>
+	  <para>Preserve environment.</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term>
-          <option>-r</option>
-        </term>
-        <listitem>
-          <para>Perform autologin protocol for rlogin.</para>
-        </listitem>
+	<term>
+	  <option>-r</option>
+	</term>
+	<listitem>
+	  <para>Perform autologin protocol for rlogin.</para>
+	</listitem>
       </varlistentry>
     </variablelist>
-    
+
     <para>The <option>-r</option>, <option>-h</option> and
       <option>-f</option> options are only used when
       <command>login</command> is invoked by root.
     </para>
   </refsect1>
-  
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
       This version of <command>login</command> has many compilation options,
       only some of which may be in use at any particular site.
     </para>
-    
+
     <para>The location of files is subject to differences in system
       configuration.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/var/run/utmp</filename></term>
-        <listitem>list of current login sessions</listitem>
+	<term><filename>/var/run/utmp</filename></term>
+	<listitem>
+	  <para>list of current login sessions</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/var/log/wtmp</filename></term>
-        <listitem>list of previous login sessions</listitem>
+	<term><filename>/var/log/wtmp</filename></term>
+	<listitem>
+	  <para>list of previous login sessions</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/motd</filename></term>
-        <listitem>system message of the day file</listitem>
+	<term><filename>/etc/motd</filename></term>
+	<listitem>
+	  <para>system message of the day file</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/nologin</filename></term>
-        <listitem>prevent non-root users from logging in</listitem>
+	<term><filename>/etc/nologin</filename></term>
+	<listitem>
+	  <para>prevent non-root users from logging in</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/ttytype</filename></term>
-        <listitem>list of terminal types</listitem>
+	<term><filename>/etc/ttytype</filename></term>
+	<listitem>
+	  <para>list of terminal types</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>$HOME/.hushlogin</filename></term>
-        <listitem>suppress printing of system messages</listitem>
+	<term><filename>$HOME/.hushlogin</filename></term>
+	<listitem>
+	  <para>suppress printing of system messages</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>mail</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>mail</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>sh</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>nologin</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>nologin</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>securetty</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

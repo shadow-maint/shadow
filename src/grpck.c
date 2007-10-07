@@ -29,17 +29,17 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: grpck.c,v 1.25 2005/08/09 15:27:51 kloczek Exp $")
-#include <stdio.h>
+#ident "$Id: grpck.c,v 1.28 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <fcntl.h>
 #include <grp.h>
-#include "prototypes.h"
-#include "defines.h"
-#include "chkname.h"
 #include <pwd.h>
+#include <stdio.h>
+#include "chkname.h"
 #include "commonio.h"
+#include "defines.h"
 #include "groupio.h"
+#include "prototypes.h"
 extern void __gr_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__gr_get_head (void);
 
@@ -61,9 +61,8 @@ extern struct commonio_entry *__sgr_get_head (void);
 #define	E_CANT_UPDATE	5
 
 /*
- * Local variables
+ * Global variables
  */
-
 static char *Prog;
 static const char *grp_file = GROUP_FILE;
 
@@ -80,7 +79,6 @@ static void delete_member (char **, const char *);
 /*
  * usage - print syntax message and exit
  */
-
 static void usage (void)
 {
 #ifdef	SHADOWGRP
@@ -94,7 +92,6 @@ static void usage (void)
 /*
  * yes_or_no - get answer to question from the user
  */
-
 static int yes_or_no (void)
 {
 	char buf[80];
@@ -102,7 +99,6 @@ static int yes_or_no (void)
 	/*
 	 * In read-only mode all questions are answered "no".
 	 */
-
 	if (read_only) {
 		printf (_("No\n"));
 		return 0;
@@ -111,7 +107,6 @@ static int yes_or_no (void)
 	/*
 	 * Get a line and see what the first character is.
 	 */
-
 	if (fgets (buf, sizeof buf, stdin))
 		return buf[0] == 'y' || buf[0] == 'Y';
 
@@ -121,7 +116,6 @@ static int yes_or_no (void)
 /*
  * delete_member - delete an entry in a list of members
  */
-
 static void delete_member (char **list, const char *member)
 {
 	int i;
@@ -138,7 +132,6 @@ static void delete_member (char **list, const char *member)
 /*
  * grpck - verify group file integrity
  */
-
 int main (int argc, char **argv)
 {
 	int arg;
@@ -158,7 +151,6 @@ int main (int argc, char **argv)
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -170,7 +162,6 @@ int main (int argc, char **argv)
 	/*
 	 * Parse the command line arguments
 	 */
-
 	while ((arg = getopt (argc, argv, "qrs")) != EOF) {
 		switch (arg) {
 		case 'q':
@@ -195,7 +186,6 @@ int main (int argc, char **argv)
 	/*
 	 * Make certain we have the right number of arguments
 	 */
-
 #ifdef	SHADOWGRP
 	if (optind != argc && optind + 1 != argc && optind + 2 != argc)
 #else
@@ -207,7 +197,6 @@ int main (int argc, char **argv)
 	 * If there are two left over filenames, use those as the group and
 	 * group password filenames.
 	 */
-
 	if (optind != argc) {
 		grp_file = argv[optind];
 		gr_name (grp_file);
@@ -224,7 +213,6 @@ int main (int argc, char **argv)
 	/*
 	 * Lock the files if we aren't in "read-only" mode
 	 */
-
 	if (!read_only) {
 		if (!gr_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
@@ -250,7 +238,6 @@ int main (int argc, char **argv)
 	 * Open the files. Use O_RDONLY if we are in read_only mode,
 	 * O_RDWR otherwise.
 	 */
-
 	if (!gr_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"), Prog,
 			 grp_file);
@@ -282,7 +269,6 @@ int main (int argc, char **argv)
 	/*
 	 * Loop through the entire group file.
 	 */
-
 	for (gre = __gr_get_head (); gre; gre = gre->next) {
 		/*
 		 * Skip all NIS entries.
@@ -296,14 +282,12 @@ int main (int argc, char **argv)
 		 * have no (struct group) entry because they couldn't be
 		 * parsed properly.
 		 */
-
 		if (!gre->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-
 			printf (_("invalid group file entry\n"));
 			printf (_("delete line `%s'? "), gre->line);
 			errors++;
@@ -311,7 +295,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (!yes_or_no ())
 				continue;
 
@@ -321,7 +304,6 @@ int main (int argc, char **argv)
 			 * When done, it skips back to the top of the loop
 			 * to try out the next list element.
 			 */
-
 		      delete_gr:
 			SYSLOG ((LOG_INFO, "delete group line `%s'",
 				 gre->line));
@@ -334,13 +316,11 @@ int main (int argc, char **argv)
 		/*
 		 * Group structure is good, start using it.
 		 */
-
 		grp = gre->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-
 		for (tgre = __gr_get_head (); tgre; tgre = tgre->next) {
 
 			const struct group *ent = tgre->eptr;
@@ -348,14 +328,12 @@ int main (int argc, char **argv)
 			/*
 			 * Don't check this entry
 			 */
-
 			if (tgre == gre)
 				continue;
 
 			/*
 			 * Don't check invalid entries.
 			 */
-
 			if (!ent)
 				continue;
 
@@ -366,7 +344,6 @@ int main (int argc, char **argv)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-
 			printf (_("duplicate group entry\n"));
 			printf (_("delete line `%s'? "), gre->line);
 			errors++;
@@ -374,7 +351,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (yes_or_no ())
 				goto delete_gr;
 		}
@@ -392,7 +368,6 @@ int main (int argc, char **argv)
 		 * groups with no members are returned as groups with one
 		 * member "", causing grpck to fail.  --marekm
 		 */
-
 		if (grp->gr_mem[0] && !grp->gr_mem[1]
 		    && *(grp->gr_mem[0]) == '\0')
 			grp->gr_mem[0] = (char *) 0;
@@ -400,7 +375,6 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure each member exists
 		 */
-
 		for (i = 0; grp->gr_mem[i]; i++) {
 			if (getpwnam (grp->gr_mem[i]))
 				continue;
@@ -408,7 +382,6 @@ int main (int argc, char **argv)
 			 * Can't find this user. Remove them
 			 * from the list.
 			 */
-
 			errors++;
 			printf (_("group %s: no user %s\n"),
 				grp->gr_name, grp->gr_mem[i]);
@@ -433,7 +406,6 @@ int main (int argc, char **argv)
 	/*
 	 * Loop through the entire shadow group file.
 	 */
-
 	for (sge = __sgr_get_head (); sge; sge = sge->next) {
 
 		/*
@@ -441,14 +413,12 @@ int main (int argc, char **argv)
 		 * have no (struct sgrp) entry because they couldn't be
 		 * parsed properly.
 		 */
-
 		if (!sge->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-
 			printf (_("invalid shadow group file entry\n"));
 			printf (_("delete line `%s'? "), sge->line);
 			errors++;
@@ -456,7 +426,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (!yes_or_no ())
 				continue;
 
@@ -466,7 +435,6 @@ int main (int argc, char **argv)
 			 * linked list. When done, it skips back to the top
 			 * of the loop to try out the next list element.
 			 */
-
 		      delete_sg:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 sge->line));
@@ -479,13 +447,11 @@ int main (int argc, char **argv)
 		/*
 		 * Shadow group structure is good, start using it.
 		 */
-
 		sgr = sge->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-
 		for (tsge = __sgr_get_head (); tsge; tsge = tsge->next) {
 
 			const struct sgrp *ent = tsge->eptr;
@@ -493,14 +459,12 @@ int main (int argc, char **argv)
 			/*
 			 * Don't check this entry
 			 */
-
 			if (tsge == sge)
 				continue;
 
 			/*
 			 * Don't check invalid entries.
 			 */
-
 			if (!ent)
 				continue;
 
@@ -511,7 +475,6 @@ int main (int argc, char **argv)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-
 			printf (_("duplicate shadow group entry\n"));
 			printf (_("delete line `%s'? "), sge->line);
 			errors++;
@@ -519,7 +482,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (yes_or_no ())
 				goto delete_sg;
 		}
@@ -527,7 +489,6 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure this entry exists in the /etc/group file.
 		 */
-
 		if (!gr_locate (sgr->sg_name)) {
 			printf (_("no matching group file entry\n"));
 			printf (_("delete line `%s'? "), sge->line);
@@ -539,7 +500,6 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure each administrator exists
 		 */
-
 		for (i = 0; sgr->sg_adm[i]; i++) {
 			if (getpwnam (sgr->sg_adm[i]))
 				continue;
@@ -547,7 +507,6 @@ int main (int argc, char **argv)
 			 * Can't find this user. Remove them
 			 * from the list.
 			 */
-
 			errors++;
 			printf (_
 				("shadow group %s: no administrative user %s\n"),
@@ -570,7 +529,6 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure each member exists
 		 */
-
 		for (i = 0; sgr->sg_mem[i]; i++) {
 			if (getpwnam (sgr->sg_mem[i]))
 				continue;
@@ -578,7 +536,6 @@ int main (int argc, char **argv)
 			/*
 			 * Can't find this user. Remove them from the list.
 			 */
-
 			errors++;
 			printf (_("shadow group %s: no user %s\n"),
 				sgr->sg_name, sgr->sg_mem[i]);
@@ -604,7 +561,6 @@ int main (int argc, char **argv)
 	 * All done. If there were no deletions we can just abandon any
 	 * changes to the files.
 	 */
-
 	if (deleted) {
 	      write_and_bye:
 		if (!gr_close ()) {
@@ -624,7 +580,6 @@ int main (int argc, char **argv)
 	/*
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
-
 #ifdef	SHADOWGRP
 	if (is_shadow)
 		sgr_unlock ();
@@ -636,7 +591,6 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-
 	if (errors)
 		printf (deleted ?
 			_("%s: the files have been updated\n") :

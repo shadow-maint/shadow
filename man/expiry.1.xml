@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='expiry.1'>
-  <!-- $Id: expiry.1.xml,v 1.8 2005/06/14 20:18:17 kloczek Exp $ -->
+  <!-- $Id: expiry.1.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>expiry</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -20,40 +20,46 @@
       <arg choice='opt'>-f </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>expiry</command> checks (<option>-c</option>) the current
+    <para>
+      <command>expiry</command> checks (<option>-c</option>) the current
       password expiration and forces (<option>-f</option>) changes when
       required. It is callable as a normal user command.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shadow</filename></term>
-        <listitem>secure user account information</listitem>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Ben Collins &lt;bcollins@debian.org&gt;</para>

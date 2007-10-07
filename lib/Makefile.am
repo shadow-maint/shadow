@@ -33,7 +33,6 @@ libshadow_la_SOURCES = \
 	pwauth.h \
 	pwio.c \
 	pwio.h \
-	rcsid.h \
 	sgetgrent.c \
 	sgetpwent.c \
 	sgroupio.c \

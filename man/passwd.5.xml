@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='passwd.5'>
-  <!-- $Id: passwd.5.xml,v 1.7 2005/06/16 17:59:21 kloczek Exp $ -->
+  <!-- $Id: passwd.5.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -11,106 +11,133 @@
     <refname>passwd</refname>
     <refpurpose>The password file</refpurpose>
   </refnamediv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><filename>/etc/passwd</filename> contains various pieces of
-      information for each user account. Included is:
+    <para>
+      <filename>/etc/passwd</filename> contains one line for each
+      user account, with seven fields delimited by colons
+      (<quote>:</quote>).
+      These fields are:
     </para>
     <itemizedlist mark='bullet'>
       <listitem>
-        <para>login name</para>
-      </listitem>    
+	<para>login name</para>
+      </listitem>
       <listitem>
-        <para>optional encrypted password</para>
-      </listitem>    
+	<para>optional encrypted password</para>
+      </listitem>
       <listitem>
-        <para>numerical user ID</para>
-      </listitem>    
+	<para>numerical user ID</para>
+      </listitem>
       <listitem>
-        <para>numerical group ID</para>
-      </listitem>    
+	<para>numerical group ID</para>
+      </listitem>
       <listitem>
-        <para>user name or comment field</para>
-      </listitem>    
+	<para>user name or comment field</para>
+      </listitem>
       <listitem>
-        <para>user home directory</para>
-      </listitem>    
+	<para>user home directory</para>
+      </listitem>
       <listitem>
-        <para>user command interpreter</para>
-      </listitem>    
+	<para>optional user command interpreter</para>
+      </listitem>
     </itemizedlist>
 
     <para>
-      The password field may not be filled if shadow passwords have been
-      enabled. If shadow passwords are being used, the encrypted password
-      will be found in <filename>/etc/shadow</filename>. The encrypted
-      password consists of characters from the 64 characters alphabet a thru
-      z, A thru Z, 0 thru 9, \. and /. Optionally it can start with a "$"
-      character. This means the encrypted password was generated using
-      another (not DES) algorithm. For example if it starts with "$1$" it
-      means the MD5-based algorithm was used. Refer to
+      The encrypted password field may be blank, in which case no password
+      is required to authenticate as the specified login name. However,
+      some applications which read the <filename>/etc/passwd</filename> file
+      may decide not to permit <emphasis>any</emphasis> access at all if the
+      <emphasis>password</emphasis> field is blank. If the
+      <emphasis>password</emphasis> field is a lower-case <quote>x</quote>,
+      then the encrypted password is actually stored in the
+      <citerefentry><refentrytitle>shadow</refentrytitle>
+      <manvolnum>5</manvolnum></citerefentry> file instead; there
+      <emphasis>must</emphasis> be a corresponding line in the
+      <filename>shadow</filename> file, or else the user account is invalid. 
+      If the <emphasis>password</emphasis> field is any other string, then
+      it will be treated as an encrypted password, as specified by
       <citerefentry><refentrytitle>crypt</refentrytitle>
-      <manvolnum>3</manvolnum></citerefentry> for details on how this string
-      is interpreted.
+      <manvolnum>3</manvolnum></citerefentry>.
+
     </para>
 
-    <para>The comment field is used by various system utilities, such as
+    <para>
+      The comment field is used by various system utilities, such as
       <citerefentry><refentrytitle>finger</refentrytitle>
       <manvolnum>1</manvolnum></citerefentry>.
     </para>
-    
-    <para>The home directory field provides the name of the initial working
-      directory. <emphasis remap='B'>Login</emphasis> uses this information
+
+    <para>
+      The home directory field provides the name of the initial working
+      directory. The <command>login</command> program uses this information
       to set the value of the <envar>$HOME</envar> environmental variable.
     </para>
-    
+
     <para>
-      The command interpreter field provides the name of the user's
-      command language interpreter, or the name of the initial program to
-      execute. <emphasis remap='B'>Login</emphasis> uses this information
-      to set the value of the <envar>$SHELL</envar> environmental variable.
-      If this field is empty, it defaults to the value
-      <filename>/bin/sh</filename>.
+      The command interpreter field provides the name of the user's command
+      language interpreter, or the name of the initial program to execute. 
+      The <command>login</command> program uses this information to set the
+      value of the <envar>$SHELL</envar> environmental variable. If this
+      field is empty, it defaults to the value <filename>/bin/sh</filename>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>optional encrypted password file</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>getent</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>pwconv</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>pwunconv</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>getpwnam</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>sulogin</refentrytitle><manvolnum>8</manvolnum>
-      </citerefentry>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>pwconv</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>pwunconv</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>sulogin</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>

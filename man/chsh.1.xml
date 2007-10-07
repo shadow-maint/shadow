@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
-<refentry id='chsh1'>
-  <!-- $Id: chsh.1.xml,v 1.8 2005/06/16 15:43:48 kloczek Exp $ -->
+<refentry id='chsh.1'>
+  <!-- $Id: chsh.1.xml,v 1.18 2005/10/03 17:49:41 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chsh</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -15,68 +15,84 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>chsh</command>    
+      <command>chsh</command>
       <arg choice='opt'>-s <replaceable>login_shell</replaceable></arg>
       <arg choice='opt'><replaceable>user</replaceable>
       </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>chsh</command> changes the user login shell. This determines
+    <para>
+      <command>chsh</command> changes the user login shell. This determines
       the name of the user's initial login command. A normal user may only
       change the login shell for her own account, the super user may change
       the login shell for any account.
     </para>
-    
-    <para>The only restrictions placed on the login shell is that the
-      command name must be listed in <filename>/etc/shells</filename>,
-      unless the invoker is the super-user, and then any value may be added. 
-      An account with a restricted login shell may not change her login
-      shell. For this reason, placing <filename>/bin/rsh</filename> in
+
+    <para>
+      The only restriction placed on the login shell is that the command
+      name must be listed in <filename>/etc/shells</filename>, unless the
+      invoker is the super-user, and then any value may be added. An
+      account with a restricted login shell may not change her login shell.
+      For this reason, placing <filename>/bin/rsh</filename> in
       <filename>/etc/shells</filename> is discouraged since accidentally
-      changing to a restricted shell would prevent the user from every
+      changing to a restricted shell would prevent the user from ever
       changing her login shell back to its original value.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
-    <para>If the <option>-s</option> option is not selected,
+    <para>
+      If the <option>-s</option> option is not selected,
       <command>chsh</command> operates in an interactive fashion, prompting
       the user with the current login shell. Enter the new value to change
       the shell, or leave the line blank to use the current one. The current
-      shell is displayed between a pair of <emphasis remap='B'>[ ]</emphasis>
-      marks.
+      shell is displayed between a pair of <emphasis>[ ]</emphasis> marks.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/passwd</filename></term>
-        <listitem>user account information</listitem>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/shells</filename></term>
-        <listitem>list of valid login shells</listitem>
+	<term><filename>/etc/shells</filename></term>
+	<listitem>
+	  <para>list of valid login shells</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>shadow password suite configuration</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>

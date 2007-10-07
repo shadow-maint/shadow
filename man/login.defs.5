@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGIN.DEFS" "5" "08/03/2005" "" ""
+.TH "LOGIN.DEFS" "5" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,8 +11,8 @@
 login.defs \- shadow password suite configuration
 .SH "DESCRIPTION"
 .PP
-The 
-\fI/etc/login.defs\fR 
+The
+\fI/etc/login.defs\fR
 file defines the site\-specific configuration for the shadow password suite. This file is required. Absence of this file will not prevent system operation, but will probably result in undesirable operation.
 .PP
 This file is a readable text file, each line of the file describing one configuration parameter. The lines consist of a configuration name and value, separated by whitespace. Blank lines and comment lines are ignored. Comments are introduced with a `#' pound sign and the pound sign must be the first non\-white character of the line.
@@ -22,36 +22,37 @@ Parameter values may be of four types: strings, booleans, numbers, and long numb
 The following configuration items are provided:
 .TP
 CHFN_AUTH (boolean)
-If 
-\fIyes\fR, the 
-\fBchfn\fR 
-and 
-\fBchsh\fR 
+If
+\fIyes\fR, the
+\fBchfn\fR
+and
+\fBchsh\fR
 programs will require authentication before making any changes, unless run by the superuser.
 .TP
 CHFN_RESTRICT (string)
-This parameter specifies which values in the 
-\fIgecos\fR 
-field of the 
-\fI/etc/passwd\fR 
-file may be changed by regular users using the 
-\fBchfn\fR 
-program. It can be any combination of letters 
-\fIf\fR 
-,\fIr\fR, 
-\fIw\fR, 
+This parameter specifies which values in the
+\fIgecos\fR
+field of the
+\fI/etc/passwd\fR
+file may be changed by regular users using the
+\fBchfn\fR
+program. It can be any combination of letters
+\fIf\fR
+,\fIr\fR,
+\fIw\fR,
 \fIh\fR, for Full name, Room number, Work phone, and Home phone, respectively. For backward compatibility, "yes" is equivalent to "rwh" and "no" is equivalent to "frwh". If not specified, only the superuser can make any changes. The most restrictive setting is better achieved by not installing chfn SUID.
 .TP
 CREATE_HOME (boolean)
-This defines whether useradd should create home directories for users by default. This option is OR'ed with the 
-\fB\-m\fR 
+This defines whether useradd should create home directories for users by default. This option is OR'ed with the
+\fB\-m\fR
 flag on useradd command line.
 .TP
 GID_MAX (number), GID_MIN (number)
-Range of group IDs to choose from for the 
-\fBuseradd\fR 
-and 
-\fBgroupadd\fRprograms.
+Range of group IDs to choose from for the
+\fBuseradd\fR
+and
+\fBgroupadd\fR
+programs.
 .TP
 MAIL_DIR (string)
 The mail spool directory. This is needed to manipulate the mailbox when its corresponding user account is modified or deleted. If not specified, a compile\-time default is used.
@@ -68,8 +69,8 @@ The number of days warning given before a password expires. A zero means warning
 PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE are only used at the time of account creation. Any changes to these settings won't affect existing accounts.
 .TP
 UID_MAX (number), UID_MIN (number)
-Range of user IDs to choose from for the 
-\fBuseradd\fR 
+Range of user IDs to choose from for the
+\fBuseradd\fR
 program.
 .TP
 UMASK (number)
@@ -106,20 +107,20 @@ usermod
 MAIL_DIR
 .SH "BUGS"
 .PP
-Much of the functionality that used to be provided by the shadow password suite is now handled by PAM. Thus, 
-\fI/etc/login.defs\fR 
-is no longer used by programs such as: 
-\fBlogin\fR(1), 
-\fBpasswd\fR(1), 
+Much of the functionality that used to be provided by the shadow password suite is now handled by PAM. Thus,
+\fI/etc/login.defs\fR
+is no longer used by programs such as:
+\fBlogin\fR(1),
+\fBpasswd\fR(1),
 \fBsu\fR(1). Please refer to the corresponding PAM configuration files instead.
 .SH "SEE ALSO"
 .PP
-\fBlogin\fR(1), 
-\fBpasswd\fR(1), 
-\fBsu\fR(1), 
-\fBpasswd\fR(5), 
-\fBshadow\fR(5), 
-\fBpam\fR(8)
+\fBlogin\fR(1),
+\fBpasswd\fR(1),
+\fBsu\fR(1),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBpam\fR(8).
 .SH "AUTHORS"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com) Chip Rosenthal (chip@unicom.com)

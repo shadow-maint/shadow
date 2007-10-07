@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SULOGIN" "8" "08/03/2005" "" ""
+.TH "SULOGIN" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,17 +11,17 @@
 sulogin \- Single\-user login
 .SH "SYNTAX"
 .PP
-\fBsulogin\fR 
+\fBsulogin\fR
 [\fItty\-device\fR]
 .SH "DESCRIPTION"
 .PP
-\fBsulogin\fR 
-is invoked by 
-\fBinit\fR 
-prior to allowing the user access to the system when in single user mode. This feature may only be available on certain systems where 
-\fBinit\fR 
-has been modified accordingly, or where the 
-\fI/etc/inittab\fR 
+\fBsulogin\fR
+is invoked by
+\fBinit\fR
+prior to allowing the user access to the system when in single user mode. This feature may only be available on certain systems where
+\fBinit\fR
+has been modified accordingly, or where the
+\fI/etc/inittab\fR
 has an entry for a single user login.
 .PP
 The user is prompted
@@ -30,21 +30,21 @@ Type control\-d to proceed with normal startup,(or give root password for system
 .PP
 Input and output will be performed with the standard file descriptors unless the optional device name argument is provided.
 .PP
-If the user enters the correct root password, a login session is initiated. When 
-\fIEOF\fR 
+If the user enters the correct root password, a login session is initiated. When
+\fIEOF\fR
 is pressed instead, the system enters multi\-user mode.
 .PP
-After the user exits the single\-user shell, or presses 
+After the user exits the single\-user shell, or presses
 \fIEOF\fR, the system begins the initialization process required to enter multi\-user mode.
 .SH "CAVEATS"
 .PP
-This command can only be used if 
-\fBinit\fR 
-has been modified to call 
-\fBsulogin\fR 
-instead of 
-\fI/bin/sh\fR, or if the user has set the 
-\fIinittab\fR 
+This command can only be used if
+\fBinit\fR
+has been modified to call
+\fBsulogin\fR
+instead of
+\fI/bin/sh\fR, or if the user has set the
+\fIinittab\fR
 to support a single user login. For example, the line:
 .PP
 co:s:respawn:/etc/sulogin /dev/console
@@ -61,9 +61,9 @@ user account information
 secure user account information
 .SH "SEE ALSO"
 .PP
-\fBlogin\fR(1), 
-\fBsh\fR(1), 
-\fBinit\fR(8)
+\fBlogin\fR(1),
+\fBsh\fR(1),
+\fBinit\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

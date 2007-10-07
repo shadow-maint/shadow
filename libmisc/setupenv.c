@@ -33,8 +33,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: setupenv.c,v 1.18 2005/08/09 18:09:42 kloczek Exp $")
+#ident "$Id: setupenv.c,v 1.20 2005/09/30 14:29:11 kloczek Exp $"
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -235,10 +235,6 @@ void setup_env (struct passwd *info)
 	addenv ("SHELL", info->pw_shell);
 
 	/*
-	 * Create the PATH environmental variable and export it.
-	 */
-
-	/*
 	 * Export the user name.  For BSD derived systems, it's "USER", for
 	 * all others it's "LOGNAME".  We set both of them.
 	 */
@@ -247,6 +243,10 @@ void setup_env (struct passwd *info)
 	addenv ("LOGNAME", info->pw_name);
 
 #ifndef USE_PAM
+	/*
+	 * Create the PATH environmental variable and export it.
+	 */
+
 	cp = getdef_str ((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 
 	if (!cp) {

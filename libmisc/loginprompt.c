@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: loginprompt.c,v 1.8 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: loginprompt.c,v 1.9 2005/08/31 17:24:57 kloczek Exp $"
+
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-08-11 16:15+0200\n"
+"POT-Creation-Date: 2005-10-10 20:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,6 +98,27 @@ msgstr ""
 msgid "You have mail."
 msgstr ""
 
+msgid "no change"
+msgstr ""
+
+msgid "a palindrome"
+msgstr ""
+
+msgid "case changes only"
+msgstr ""
+
+msgid "too similar"
+msgstr ""
+
+msgid "too simple"
+msgstr ""
+
+msgid "rotated"
+msgstr ""
+
+msgid "too short"
+msgstr ""
+
 #, c-format
 msgid "Bad password: %s.  "
 msgstr ""
@@ -134,6 +155,12 @@ msgstr ""
 
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
+msgstr ""
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+
+msgid "Unable to determine your tty name."
 msgstr ""
 
 #, c-format
@@ -240,11 +267,19 @@ msgid "%s: unknown user %s\n"
 msgstr ""
 
 #, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr ""
+
+#, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr ""
 
 #, c-format
 msgid "%s: can't open shadow password file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
 msgstr ""
 
 #, c-format
@@ -269,10 +304,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr ""
-
-#, c-format
-msgid "%s: PAM chauthtok failed\n"
 msgstr ""
 
 #, c-format
@@ -460,10 +491,6 @@ msgstr ""
 
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
-msgstr ""
-
-#, c-format
-msgid "%s: WARNING!  Must be set-UID root!\n"
 msgstr ""
 
 #, c-format
@@ -854,9 +881,10 @@ msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -b, --before DAYS\tprint only lastlog records older than DAYS\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
 
 #, c-format
@@ -913,12 +941,26 @@ msgid " on `%.100s'"
 msgstr ""
 
 #, c-format
+msgid "login: PAM Failure, aborting: %s\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"\n"
+"Login incorrect\n"
+msgstr ""
+
+#, c-format
 msgid ""
 "\n"
 "%s login: "
 msgstr ""
 
 msgid "Login incorrect"
+msgstr ""
+
+#, c-format
+msgid "%s: failure forking: %s"
 msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
@@ -934,6 +976,11 @@ msgstr ""
 
 #, c-format
 msgid " from %.*s"
+msgstr ""
+
+msgid ""
+"login time exceeded\n"
+"\n"
 msgstr ""
 
 #, c-format
@@ -1012,22 +1059,30 @@ msgid "%s: error updating files\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s [-f|-s] [name]\n"
-msgstr ""
-
-#, c-format
-msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr ""
-
-#, c-format
-msgid "       %s {-l|-u|-d|-S|-e} name\n"
+msgid ""
+"Usage: passwd [options] [login]\n"
+"\n"
+"Options:\n"
+"  -a, --all \t\t\treport password status on all accounts\n"
+"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tlock the named account\n"
+"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
+"  -S, --status\t\t\treport password status on the named account\n"
+"  -u, --unlock\t\t\tunlock the named account\n"
+"  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
 msgstr ""
 
 msgid "Old password: "
-msgstr ""
-
-#, c-format
-msgid "Incorrect password for `%s'\n"
 msgstr ""
 
 #, c-format
@@ -1182,6 +1237,10 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
 
 msgid "Sorry."
+msgstr ""
+
+#, c-format
+msgid "%s: %s\n"
 msgstr ""
 
 #, c-format
@@ -1421,6 +1480,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: error updating group entry\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr ""
 
 #, c-format

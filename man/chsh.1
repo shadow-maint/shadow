@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHSH" "1" "08/03/2005" "User Commands" "User Commands"
+.TH "CHSH" "1" "10/03/2005" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,23 +14,23 @@ chsh \- change login shell
 \fBchsh\fR [\-s\ \fIlogin_shell\fR] [\fIuser\fR]
 .SH "DESCRIPTION"
 .PP
-\fBchsh\fR 
+\fBchsh\fR
 changes the user login shell. This determines the name of the user's initial login command. A normal user may only change the login shell for her own account, the super user may change the login shell for any account.
 .PP
-The only restrictions placed on the login shell is that the command name must be listed in 
-\fI/etc/shells\fR, unless the invoker is the super\-user, and then any value may be added. An account with a restricted login shell may not change her login shell. For this reason, placing 
-\fI/bin/rsh\fR 
-in 
-\fI/etc/shells\fR 
-is discouraged since accidentally changing to a restricted shell would prevent the user from every changing her login shell back to its original value.
+The only restriction placed on the login shell is that the command name must be listed in
+\fI/etc/shells\fR, unless the invoker is the super\-user, and then any value may be added. An account with a restricted login shell may not change her login shell. For this reason, placing
+\fI/bin/rsh\fR
+in
+\fI/etc/shells\fR
+is discouraged since accidentally changing to a restricted shell would prevent the user from ever changing her login shell back to its original value.
 .SH "OPTIONS"
 .PP
-If the 
-\fB\-s\fR 
-option is not selected, 
-\fBchsh\fR 
-operates in an interactive fashion, prompting the user with the current login shell. Enter the new value to change the shell, or leave the line blank to use the current one. The current shell is displayed between a pair of 
-\fI[ ]\fR 
+If the
+\fB\-s\fR
+option is not selected,
+\fBchsh\fR
+operates in an interactive fashion, prompting the user with the current login shell. Enter the new value to change the shell, or leave the line blank to use the current one. The current shell is displayed between a pair of
+\fI[ ]\fR
 marks.
 .SH "FILES"
 .TP
@@ -39,10 +39,14 @@ user account information
 .TP
 \fI/etc/shells\fR
 list of valid login shells
+.TP
+\fI/etc/login.defs\fR
+shadow password suite configuration
 .SH "SEE ALSO"
 .PP
-\fBchfn\fR(1), 
-\fBpasswd\fR(5)
+\fBchfn\fR(1),
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(5).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

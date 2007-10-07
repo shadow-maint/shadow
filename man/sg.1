@@ -1,1 +1,61 @@
-.so man1/newgrp.1
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "SG" "1" "10/01/2005" "" ""
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+sg \- execute command as different group ID
+.SH "SYNOPSIS"
+.HP 3
+\fBsg\fR [\-] [group\ [\-c\ ]\ command]
+.SH "DESCRIPTION"
+.PP
+The
+\fBsg\fR
+command works similar to
+\fBnewgrp\fR
+but accepts a command. The command will be executed with the
+\fI/bin/sh\fR
+shell. With most shells you may run
+\fBsg\fR
+from, you need to enclose multi\-word commands in quotes. Another difference between
+\fBnewgrp\fR
+and
+\fBsg\fR
+is that some shells treat
+\fBnewgrp\fR
+specially, replacing themselves with a new instance of a shell that
+\fBnewgrp\fR
+creates. This doesn't happen with
+\fBsg\fR, so upon exit from a
+\fBsg\fR
+command you are returned to your previous group ID.
+.SH "FILES"
+.TP
+\fI/etc/passwd\fR
+user account information
+.TP
+\fI/etc/shadow\fR
+secure user account information
+.TP
+\fI/etc/group\fR
+group account information
+.TP
+\fI/etc/gshadow\fR
+shadow group file
+.SH "SEE ALSO"
+.PP
+\fBid\fR(1),
+\fBlogin\fR(1),
+\fBnewgrp\fR(1),
+\fBsu\fR(1),
+\fBgpasswd\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)
+.SH "AUTHOR"
+.PP
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

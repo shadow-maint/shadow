@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
-<refentry id='gpasswd1'>
-  <!-- $Id: gpasswd.1.xml,v 1.9 2005/06/14 20:18:17 kloczek Exp $ -->
+<refentry id='gpasswd.1'>
+  <!-- $Id: gpasswd.1.xml,v 1.14 2005/09/30 15:41:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gpasswd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -15,23 +15,23 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>gpasswd</command>    
+      <command>gpasswd</command>
       <arg choice='plain'>
-        <replaceable>group</replaceable>
+	<replaceable>group</replaceable>
       </arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>gpasswd</command>    
+      <command>gpasswd</command>
       <arg choice='plain'>-a <replaceable>user</replaceable></arg>
       <arg choice='plain'><replaceable>group</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>gpasswd</command>    
+      <command>gpasswd</command>
       <arg choice='plain'>-d <replaceable>user</replaceable></arg>
       <arg choice='plain'><replaceable>group</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>gpasswd</command>    
+      <command>gpasswd</command>
       <arg choice='plain'>-R <replaceable>group</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
@@ -39,16 +39,17 @@
       <arg choice='plain'>-r <replaceable>group</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>gpasswd</command>    
+      <command>gpasswd</command>
       <arg choice='opt' rep='repeat'>-A <replaceable>user,</replaceable></arg>
       <arg choice='opt' rep='repeat'>-M <replaceable>user,</replaceable></arg>
       <arg choice='plain'><replaceable>group</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
-  
+
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para><command>gpasswd</command> is used to administer the
+    <para>
+      <command>gpasswd</command> is used to administer the
       <filename>/etc/group</filename> file (and
       <filename>/etc/gshadow</filename> file if compiled with SHADOWGRP
       defined). Every group can have administrators, members and a password. 
@@ -57,7 +58,7 @@
       members and has all rights of group administrators and members.
     </para>
   </refsect1>
-  
+
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
@@ -69,55 +70,62 @@
       to the group through <command>newgrp</command> command (however
       members will still be able to switch to this group).
     </para>
-    
-    <para><command>gpasswd</command> called by a group administrator with
-      group name only prompts for the group password. If password is set the
+
+    <para>
+      <command>gpasswd</command> called by a group administrator with group
+      name only prompts for the group password. If password is set the
       members can still <citerefentry>
-        <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry> without a password, non-members must supply the password.
+      <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry> without a password, non-members must supply the
+      password.
     </para>
   </refsect1>
-  
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
       <varlistentry>
-        <term><filename>/etc/group</filename></term>
-        <listitem>group account information</listitem>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
       </varlistentry>
       <varlistentry>
-        <term><filename>/etc/gshadow</filename></term>
-        <listitem>secure group account information</listitem>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>secure group account information</para>
+	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
-        <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
+    <para>
+      <citerefentry>
+	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum>
+	<refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
-        <refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>
+	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
     </para>
   </refsect1>
-  
+
   <refsect1 id='author'>
     <title>AUTHOR</title>
     <para>Rafal Maszkowski &lt;rzm@pdi.net&gt;</para>

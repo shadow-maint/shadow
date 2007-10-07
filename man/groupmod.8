@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPMOD" "8" "08/03/2005" "" ""
+.TH "GROUPMOD" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,24 +14,24 @@ groupmod \- modify a group
 \fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o\ ]] [\-n\ \fInew_group_name\fR] \fIgroup\fR
 .SH "DESCRIPTION"
 .PP
-The 
-\fBgroupmod\fR 
+The
+\fBgroupmod\fR
 command modifies the system account files to reflect the changes that are specified on the command line.
 .SH "OPTIONS"
 .PP
-The options which apply to the 
-\fBgroupmod\fR 
+The options which apply to the
+\fBgroupmod\fR
 command are:
 .TP
 \fB\-g\fR \fIgid\fR
-The numerical value of the group's ID. This value must be unique, unless the 
-\fB\-o\fR 
+The numerical value of the group's ID. This value must be unique, unless the
+\fB\-o\fR
 option is used. The value must be non\-negative. Values between 0 and 999 are typically reserved for system groups. Any files which the old group ID is the file group ID must have the file group ID changed manually.
 .TP
 \fB\-n\fR \fInew_group_name\fR
-The name of the group will be changed from 
-\fIgroup\fR 
-to 
+The name of the group will be changed from
+\fIgroup\fR
+to
 \fInew_group_name\fR.
 .SH "FILES"
 .TP
@@ -42,9 +42,9 @@ group account information
 secure group account information
 .SH "EXIT VALUES"
 .PP
-The 
-\fBgroupmod\fR 
-command exits with the following values: 
+The
+\fBgroupmod\fR
+command exits with the following values:
 .TP
 \fI0\fR
 success
@@ -68,15 +68,15 @@ group name already in use
 can't update group file
 .SH "SEE ALSO"
 .PP
-\fBchfn\fR(1), 
-\fBchsh\fR(1), 
-\fBpasswd\fR(1), 
-\fBgpasswd\fR(8), 
-\fBgroupadd\fR(8), 
-\fBgroupdel\fR(8), 
-\fBuseradd\fR(8), 
-\fBuserdel\fR(8), 
-\fBusermod\fR(8)
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

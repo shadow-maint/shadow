@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id='sg.1'>
+  <!-- $Id: sg.1.xml,v 1.5 2005/10/01 14:48:05 kloczek Exp $ -->
+  <refmeta>
+    <refentrytitle>SG</refentrytitle>
+    <manvolnum>1</manvolnum>
+  </refmeta>
+  <refnamediv id='name'>
+    <refname>sg</refname>
+    <refpurpose>execute command as different group ID</refpurpose>
+  </refnamediv>
+  <!-- body begins here -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>sg</command>
+      <arg choice='opt'>- </arg>
+      <arg choice='opt'>group
+        <arg choice='opt'>-c </arg>
+	command
+      </arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'>
+  <title>DESCRIPTION</title>
+    <para>
+      The <command>sg</command> command works similar to
+      <command>newgrp</command> but accepts a command. The command will be
+      executed with the <filename>/bin/sh</filename> shell. With most shells
+      you may run <command>sg</command> from, you need to enclose multi-word
+      commands in quotes. Another difference between
+      <command>newgrp</command> and <command>sg</command> is that some
+      shells treat <command>newgrp</command> specially, replacing themselves
+      with a new instance of a shell that <command>newgrp</command> creates.
+      This doesn't happen with <command>sg</command>, so upon exit from a
+      <command>sg</command> command you are returned to your previous group
+      ID.
+    </para>
+  </refsect1>
+
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	 </listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>shadow group file</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='see_also'>
+    <title>SEE ALSO</title>
+    <para>
+      <citerefentry>
+	<refentrytitle>id</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>
+    </para>
+  </refsect1>
+
+  <refsect1 id='author'>
+    <title>AUTHOR</title>
+    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
+  </refsect1>
+</refentry>

@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHFN" "1" "08/10/2005" "User Commands" "User Commands"
+.TH "CHFN" "1" "10/03/2005" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,33 +14,35 @@ chfn \- change real user name and information
 \fBchfn\fR [\-f\ \fIfull_name\fR] [\-r\ \fIroom_no\fR] [\-w\ \fIwork_ph\fR] [\-h\ \fIhome_ph\fR] [\-o\ \fIother\fR] [\fIuser\fR]
 .SH "DESCRIPTION"
 .PP
-\fBchfn\fR 
-changes user fullname, office number, office extension, and home phone number information for a user's account. This information is typically printed by 
-\fBfinger\fR(1) 
-and similar programs. A normal user may only change the fields for her own account, subject to the restrictions in 
-\fI/etc/login.defs\fR. (The default configuration is to prevent users from changing their fullname.) The super user may change any field for any account. Additionally, only the super user may use the 
-\fB\-o\fR 
+\fBchfn\fR
+changes user fullname, office number, office extension, and home phone number information for a user's account. This information is typically printed by
+\fBfinger\fR(1)
+and similar programs. A normal user may only change the fields for her own account, subject to the restrictions in
+\fI/etc/login.defs\fR. (The default configuration is to prevent users from changing their fullname.) The super user may change any field for any account. Additionally, only the super user may use the
+\fB\-o\fR
 option to change the undefined portions of the GECOS field.
 .PP
-The only restriction placed on the contents of the fields is that no control characters may be present, nor any of comma, colon, or equal sign. The 
-\fIother\fR 
+The only restriction placed on the contents of the fields is that no control characters may be present, nor any of comma, colon, or equal sign. The
+\fIother\fR
 field does not have this restriction, and is used to store accounting information used by other applications.
 .PP
-If none of the options are selected, 
-\fBchfn\fR 
-operates in an interactive fashion, prompting the user with the current values for all of the fields. Enter the new value to change the field, or leave the line blank to use the current value. The current value is displayed between a pair of 
-\fI[ ]\fR 
+If none of the options are selected,
+\fBchfn\fR
+operates in an interactive fashion, prompting the user with the current values for all of the fields. Enter the new value to change the field, or leave the line blank to use the current value. The current value is displayed between a pair of
+\fI[ ]\fR
 marks. Without options, chfn prompts for the current user account.
 .SH "FILES"
 .TP
+\fI/etc/login.defs\fR
+shadow password suite configuration
+.TP
 \fI/etc/passwd\fR
 user account information
-.TP
-\fI/etc/login.defs\fR
-runtime configuration
 .SH "SEE ALSO"
 .PP
-\fBpasswd\fR(5)
+\fBchsh\fR(1),
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(5).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

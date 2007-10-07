@@ -10,8 +10,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: grpunconv.c,v 1.15 2005/08/09 15:27:51 kloczek Exp $")
+#ident "$Id: grpunconv.c,v 1.17 2005/08/31 17:25:00 kloczek Exp $"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,6 +23,9 @@ RCSID (PKG_VER "$Id: grpunconv.c,v 1.15 2005/08/09 15:27:51 kloczek Exp $")
 #ifdef SHADOWGRP
 #include "groupio.h"
 #include "sgroupio.h"
+/*
+ * Global variables
+ */
 static int group_locked = 0;
 static int gshadow_locked = 0;
 

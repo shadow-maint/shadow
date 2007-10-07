@@ -1,8 +1,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: pwd_init.c,v 1.2 2003/04/22 10:59:22 kloczek Exp $")
+#ident "$Id: pwd_init.c,v 1.3 2005/08/31 17:24:58 kloczek Exp $"
+
 #include "defines.h"
 #include <signal.h>
 #include <sys/types.h>

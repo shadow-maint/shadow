@@ -50,7 +50,8 @@ noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
+	$(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -68,7 +69,8 @@ chage_OBJECTS = chage.$(OBJEXT)
 am__DEPENDENCIES_1 = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 am__DEPENDENCIES_2 =
-chage_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+chage_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 chfn_SOURCES = chfn.c
 chfn_OBJECTS = chfn.$(OBJEXT)
 chfn_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
@@ -90,18 +92,19 @@ faillog_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 gpasswd_SOURCES = gpasswd.c
 gpasswd_OBJECTS = gpasswd.$(OBJEXT)
-gpasswd_LDADD = $(LDADD)
-gpasswd_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+gpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 groupadd_SOURCES = groupadd.c
 groupadd_OBJECTS = groupadd.$(OBJEXT)
-groupadd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+groupadd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 groupdel_SOURCES = groupdel.c
 groupdel_OBJECTS = groupdel.$(OBJEXT)
-groupdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+groupdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 groupmod_SOURCES = groupmod.c
 groupmod_OBJECTS = groupmod.$(OBJEXT)
-groupmod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+groupmod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 groups_SOURCES = groups.c
 groups_OBJECTS = groups.$(OBJEXT)
 groups_LDADD = $(LDADD)
@@ -151,7 +154,7 @@ newusers_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 passwd_SOURCES = passwd.c
 passwd_OBJECTS = passwd.$(OBJEXT)
 passwd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
-	$(am__DEPENDENCIES_2)
+	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
 pwck_SOURCES = pwck.c
 pwck_OBJECTS = pwck.$(OBJEXT)
 pwck_LDADD = $(LDADD)
@@ -177,13 +180,16 @@ sulogin_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 useradd_SOURCES = useradd.c
 useradd_OBJECTS = useradd.$(OBJEXT)
-useradd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+useradd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 userdel_SOURCES = userdel.c
 userdel_OBJECTS = userdel.$(OBJEXT)
-userdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+userdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 usermod_SOURCES = usermod.c
 usermod_OBJECTS = usermod.$(OBJEXT)
-usermod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+usermod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 vipw_SOURCES = vipw.c
 vipw_OBJECTS = vipw.$(OBJEXT)
 vipw_LDADD = $(LDADD)
@@ -241,6 +247,8 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 EGREP = @EGREP@
+ENABLE_REGENERATE_MAN_FALSE = @ENABLE_REGENERATE_MAN_FALSE@
+ENABLE_REGENERATE_MAN_TRUE = @ENABLE_REGENERATE_MAN_TRUE@
 EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
@@ -252,6 +260,7 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INTLLIBS = @INTLLIBS@
 INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
 LDFLAGS = @LDFLAGS@
+LIBAUDIT = @LIBAUDIT@
 LIBCRACK = @LIBCRACK@
 LIBCRYPT = @LIBCRYPT@
 LIBICONV = @LIBICONV@
@@ -291,6 +300,9 @@ U = @U@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 XGETTEXT = @XGETTEXT@
+XMLCATALOG = @XMLCATALOG@
+XML_CATALOG_FILE = @XML_CATALOG_FILE@
+XSLTPROC = @XSLTPROC@
 YACC = @YACC@
 ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
@@ -350,32 +362,33 @@ LDADD = $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 
 AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\"
-chpasswd_LDADD = $(LDADD) $(LIBPAM)
-chage_LDADD = $(LDADD) $(LIBPAM)
+chage_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 chfn_LDADD = $(LDADD) $(LIBPAM)
 chsh_SOURCES = \
 	chsh.c \
 	chsh_chkshell.c
 
 chsh_LDADD = $(LDADD) $(LIBPAM)
-groupadd_LDADD = $(LDADD) $(LIBPAM)
-groupdel_LDADD = $(LDADD) $(LIBPAM)
-groupmod_LDADD = $(LDADD) $(LIBPAM)
+chpasswd_LDADD = $(LDADD) $(LIBPAM)
+gpasswd_LDADD = $(LDADD) $(LIBAUDIT)
+groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 login_SOURCES = \
 	login.c \
 	login_nopam.c
 
 login_LDADD = $(LDADD) $(LIBPAM)
 newusers_LDADD = $(LDADD) $(LIBPAM)
-passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK)
+passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT)
 su_SOURCES = \
 	su.c \
 	suauth.c
 
 su_LDADD = $(LDADD) $(LIBPAM)
-useradd_LDADD = $(LDADD) $(LIBPAM)
-userdel_LDADD = $(LDADD) $(LIBPAM)
-usermod_LDADD = $(LDADD) $(LIBPAM)
+useradd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+userdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+usermod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 all: all-am
 
 .SUFFIXES:
@@ -389,9 +402,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --foreign  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

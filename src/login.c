@@ -29,24 +29,24 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.67 2005/08/11 11:26:11 kloczek Exp $")
-#include "prototypes.h"
-#include "defines.h"
-#include <sys/stat.h>
-#include <stdio.h>
+#ident "$Id: login.c,v 1.74 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <errno.h>
-#include <pwd.h>
 #include <grp.h>
-#include <signal.h>
 #include <lastlog.h>
-#include "faillog.h"
-#include "failure.h"
-#include "pwauth.h"
-#include "getdef.h"
 #ifdef UT_ADDR
 #include <netdb.h>
 #endif
+#include <pwd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include "defines.h"
+#include "faillog.h"
+#include "failure.h"
+#include "getdef.h"
+#include "prototypes.h"
+#include "pwauth.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
 static const struct pam_conv conv = {
@@ -73,6 +73,9 @@ static pam_handle_t *pamh = NULL;
 #define LASTLOG_FILE "/var/log/lastlog"
 #endif
 
+/*
+ * Global variables
+ */
 const char *hostname = "";
 
 static struct passwd pwent;
@@ -150,7 +153,6 @@ static RETSIGTYPE alarm_handler (int);
  * login -h hostname	(for telnetd, etc.)
  * login -f name	(for pre-authenticated login: datakit, xterm, etc.)
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-p] [name]\n"), Prog);
@@ -172,7 +174,6 @@ static void setup_tty (void)
 	/*
 	 * Add your favorite terminal modes here ...
 	 */
-
 	termio.c_lflag |= ISIG | ICANON | ECHO | ECHOE;
 	termio.c_iflag |= ICRNL;
 
@@ -184,7 +185,6 @@ static void setup_tty (void)
 	 * ttymon invocation prefers this, but these settings won't come into
 	 * effect after the first username login 
 	 */
-
 	STTY (0, &termio);
 }
 
@@ -210,7 +210,6 @@ static void check_nologin (void)
 	 * out for root so she knows to remove the file if she's
 	 * forgotten about it ...
 	 */
-
 	fname = getdef_str ("NOLOGINS_FILE");
 	if (fname != NULL && access (fname, F_OK) == 0) {
 		FILE *nlfp;
@@ -220,7 +219,6 @@ static void check_nologin (void)
 		 * Cat the file if it can be opened, otherwise just
 		 * print a default message
 		 */
-
 		if ((nlfp = fopen (fname, "r"))) {
 			while ((c = getc (nlfp)) != EOF) {
 				if (c == '\n')
@@ -274,26 +272,24 @@ static void init_env (void)
 	 * Add the timezone environmental variable so that time functions
 	 * work correctly.
 	 */
-
 	if ((tmp = getenv ("TZ"))) {
 		addenv ("TZ", tmp);
-	} 
+	}
 #ifndef USE_PAM
-		else if ((cp = getdef_str ("ENV_TZ")))
+	else if ((cp = getdef_str ("ENV_TZ")))
 		addenv (*cp == '/' ? tz (cp) : cp, NULL);
-#endif /* !USE_PAM */
+#endif				/* !USE_PAM */
 	/* 
 	 * Add the clock frequency so that profiling commands work
 	 * correctly.
 	 */
-
 	if ((tmp = getenv ("HZ"))) {
 		addenv ("HZ", tmp);
-	} 
+	}
 #ifndef USE_PAM
-		else if ((cp = getdef_str ("ENV_HZ")))
+	else if ((cp = getdef_str ("ENV_HZ")))
 		addenv (cp, NULL);
-#endif /* !USE_PAM */
+#endif				/* !USE_PAM */
 }
 
 
@@ -321,7 +317,6 @@ static RETSIGTYPE alarm_handler (int sig)
  *	-f - do not perform authentication, user is preauthenticated
  *	-h - the name of the remote host
  */
-
 int main (int argc, char **argv)
 {
 	char username[32];
@@ -434,14 +429,6 @@ int main (int argc, char **argv)
 	if (!isatty (0) || !isatty (1) || !isatty (2))
 		exit (1);	/* must be a terminal */
 
-#if 0
-	/*
-	 * Get the utmp file entry and get the tty name from it. The
-	 * current process ID must match the process ID in the utmp
-	 * file if there are no additional flags on the command line.
-	 */
-	checkutmp (!rflg && !fflg && !hflg);
-#else
 	/*
 	 * Be picky if run by normal users (possible if installed setuid
 	 * root), but not if run by root. This way it still allows logins
@@ -450,7 +437,6 @@ int main (int argc, char **argv)
 	 * entry (will not overwrite remote hostname).  --marekm
 	 */
 	checkutmp (!amroot);
-#endif
 	STRFCPY (tty, utent.ut_line);
 	is_console = console (tty);
 
@@ -517,7 +503,6 @@ int main (int argc, char **argv)
 			 * user may have one for themselves, but otherwise,
 			 * just take what you get.
 			 */
-
 			long limit = getdef_long ("ULIMIT", -1L);
 
 			if (limit != -1)
@@ -529,7 +514,6 @@ int main (int argc, char **argv)
 		 * The entire environment will be preserved if the -p flag
 		 * is used.
 		 */
-
 		if (pflg)
 			while (*envp)	/* add inherited environment, */
 				addenv (*envp++, NULL);	/* some variables change later */
@@ -593,12 +577,13 @@ int main (int argc, char **argv)
 		retcode = pam_start ("login", username, &conv, &pamh);
 		if (retcode != PAM_SUCCESS) {
 			fprintf (stderr,
-				 "login: PAM Failure, aborting: %s\n",
+				 _("login: PAM Failure, aborting: %s\n"),
 				 pam_strerror (pamh, retcode));
 			SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
-				pam_strerror (pamh, retcode)));
+				 pam_strerror (pamh, retcode)));
 			exit (99);
 		}
+
 		/*
 		 * hostname & tty are either set to NULL or their correct values,
 		 * depending on how much we know. We also set PAM's fail delay to
@@ -646,7 +631,6 @@ int main (int argc, char **argv)
 			 * pay attention to failure count and get rid of
 			 * MAX_LOGIN_TRIES?
 			 */
-
 			retcode = pam_authenticate (pamh, 0);
 			while ((failcount++ < retries) &&
 			       ((retcode == PAM_AUTH_ERR) ||
@@ -656,13 +640,13 @@ int main (int argc, char **argv)
 				pam_get_item (pamh, PAM_USER,
 					      (const void **) &pam_user);
 				SYSLOG ((LOG_NOTICE,
-					"FAILED LOGIN %d FROM %s FOR %s, %s",
-					failcount, hostname, pam_user,
-					pam_strerror (pamh, retcode)));
+					 "FAILED LOGIN %d FROM %s FOR %s, %s",
+					 failcount, hostname, pam_user,
+					 pam_strerror (pamh, retcode)));
 #ifdef HAVE_PAM_FAIL_DELAY
 				pam_fail_delay (pamh, 1000000 * delay);
 #endif
-				fprintf (stderr, "Login incorrect\n\n");
+				fprintf (stderr, _("\nLogin incorrect\n"));
 				pam_set_item (pamh, PAM_USER, NULL);
 				retcode = pam_authenticate (pamh, 0);
 			}
@@ -673,15 +657,15 @@ int main (int argc, char **argv)
 
 				if (retcode == PAM_MAXTRIES)
 					SYSLOG ((LOG_NOTICE,
-						"TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
-						failcount, hostname,
-						pam_user,
-						pam_strerror (pamh, retcode)));
+						 "TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
+						 failcount, hostname,
+						 pam_user,
+						 pam_strerror (pamh, retcode)));
 				else
 					SYSLOG ((LOG_NOTICE,
-						"FAILED LOGIN SESSION FROM %s FOR %s, %s",
-						hostname, pam_user,
-						pam_strerror (pamh, retcode)));
+						 "FAILED LOGIN SESSION FROM %s FOR %s, %s",
+						 hostname, pam_user,
+						 pam_strerror (pamh, retcode)));
 
 				fprintf (stderr, "\nLogin incorrect\n");
 				pam_end (pamh, retcode);
@@ -803,7 +787,6 @@ int main (int argc, char **argv)
 		 * If you reach this far, your password has been
 		 * authenticated and so on.
 		 */
-
 		if (!failed && pwent.pw_name && pwent.pw_uid == 0
 		    && !is_console) {
 			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s", fromhost));
@@ -867,7 +850,6 @@ int main (int argc, char **argv)
 		if (--retries <= 0)
 			SYSLOG ((LOG_CRIT, "REPEATED login failures%s",
 				 fromhost));
-#if 1
 		/*
 		 * If this was a passwordless account and we get here, login
 		 * was denied (securetty, faillog, etc.). There was no
@@ -875,16 +857,14 @@ int main (int argc, char **argv)
 		 * guys won't see that the passwordless account exists at
 		 * all).  --marekm
 		 */
-
 		if (pwent.pw_passwd[0] == '\0')
 			pw_auth ("!", username, reason, (char *) 0);
-#endif
+
 		/*
 		 * Wait a while (a la SVR4 /usr/bin/login) before attempting
 		 * to login the user again. If the earlier alarm occurs
 		 * before the sleep() below completes, login will exit.
 		 */
-
 		if (delay > 0)
 			sleep (delay);
 
@@ -969,8 +949,8 @@ int main (int argc, char **argv)
 	child = fork ();
 	if (child < 0) {
 		/* error in fork() */
-		fprintf (stderr, "login: failure forking: %s",
-			 strerror (errno));
+		fprintf (stderr, _("%s: failure forking: %s"),
+			 Prog, strerror (errno));
 		PAM_END;
 		exit (0);
 	} else if (child) {

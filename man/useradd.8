@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERADD" "8" "08/03/2005" "" ""
+.TH "USERADD" "8" "09/30/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -17,140 +17,143 @@ useradd \- Create a new user or update default new user information
 .HP 8
 \fBuseradd\fR \-D [\fIoptions\fR]
 .SH "DESCRIPTION"
-.SS "Creating New Users"
 .PP
-When invoked without the 
-\fB\-D\fR 
-option, the 
-\fBuseradd\fR 
+When invoked without the
+\fB\-D\fR
+option, the
+\fBuseradd\fR
 command creates a new user account using the values specified on the command line and the default values from the system. Depending on command line options, the useradd command will update system files and may also create the new user's home directory and copy initial files.
 .SH "OPTIONS"
 .PP
-The options which apply to the 
-\fBuseradd\fR 
+The options which apply to the
+\fBuseradd\fR
 command are:
 .TP
 \fB\-c\fR, \fB\-\-comment\fR \fICOMMENT\fR
 Any text string. It is generally a short description of the login, and is currently used as the field for the user's full name.
 .TP
 \fB\-b\fR, \fB\-\-base\-dir\fR \fIBASE_DIR\fR
-The default base directory for the system if 
-\fB\-d\fR 
-dir is not specified. 
-\fIBASE_DIR\fR 
-is concatenated with the account name to define the home directory. If the 
-\fB\-m\fR 
+The default base directory for the system if
+\fB\-d\fR
+dir is not specified.
+\fIBASE_DIR\fR
+is concatenated with the account name to define the home directory. If the
+\fB\-m\fR
 option is not used, base_dir must exist.
 .TP
 \fB\-d\fR, \fB\-\-home\fR \fIHOME_DIR\fR
-The new user will be created using 
-\fIHOME_DIR\fR 
-as the value for the user's login directory. The default is to append the 
-\fILOGIN\fR 
-name to 
-\fIBASE_DIR\fR 
+The new user will be created using
+\fIHOME_DIR\fR
+as the value for the user's login directory. The default is to append the
+\fILOGIN\fR
+name to
+\fIBASE_DIR\fR
 and use that as the login directory name.
 .TP
 \fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
-The date on which the user account will be disabled. The date is specified in the format 
+The date on which the user account will be disabled. The date is specified in the format
 \fIYYYY\-MM\-DD\fR.
 .TP
 \fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
 The number of days after a password expires until the account is permanently disabled. A value of 0 disables the account as soon as the password has expired, and a value of \-1 disables the feature. The default value is \-1.
 .TP
 \fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
-The group name or number of the user's initial login group. The group name must exist. A group number must refer to an already existing group. The default group number is 1 or whatever is specified in 
+The group name or number of the user's initial login group. The group name must exist. A group number must refer to an already existing group. The default group number is 1 or whatever is specified in
 \fI/etc/default/useradd\fR.
 .TP
 \fB\-G\fR, \fB\-\-groups\fR \fIGROUP1\fR[\fI,GROUP2,...\fR[\fI,GROUPN\fR]]]
-A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups are subject to the same restrictions as the group given with the 
-\fB\-g\fR 
+A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups are subject to the same restrictions as the group given with the
+\fB\-g\fR
 option. The default is for the user to belong only to the initial group.
 .TP
 \fB\-h\fR, \fB\-\-help\fR
 Display help message and exit.
 .TP
 \fB\-m\fR, \fB\-\-create\-home\fR
-The user's home directory will be created if it does not exist. The files contained in 
-\fIskeleton_dir\fR 
-will be copied to the home directory if the 
-\fB\-k\fR 
-option is used, otherwise the files contained in 
-\fI/etc/skel\fR 
-will be used instead. Any directories contained in 
-\fI skeleton_dir\fR 
-or 
-\fI/etc/skel\fR 
-will be created in the user's home directory as well. The 
-\fB\-k\fR 
-option is only valid in conjunction with the 
-\fB\-m\fR 
+The user's home directory will be created if it does not exist. The files contained in
+\fISKEL_DIR\fR
+will be copied to the home directory if the
+\fB\-k\fR
+option is used, otherwise the files contained in
+\fI/etc/skel\fR
+will be used instead. Any directories contained in
+\fISKEL_DIR\fR
+or
+\fI/etc/skel\fR
+will be created in the user's home directory as well. The
+\fB\-k\fR
+option is only valid in conjunction with the
+\fB\-m\fR
 option. The default is to not create the directory and to not copy any files.
 .TP
 \fB\-K\fR, \fB\-\-key\fR \fIKEY\fR=\fIVALUE\fR
-Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS and others). For example: 
-\fB\-K\fR \fIPASS_MAX_DAYS\fR=\fI\-1\fR 
-can be used when creating system account to turn off password ageing, even though system account has no password at all. Multiple 
-\fB\-K\fR 
-options can be specified, e.g.: 
-\fB\-K\fR \fIUID_MIN\fR=\fI100\fR \fB\-K\fR \fIUID_MAX\fR=\fI499\fR
+Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS and others).
 
-Note: 
-\fB\-K\fR \fIUID_MIN\fR=\fI10\fR,\fIUID_MAX\fR=\fI499\fR 
+Example:
+\fB\-K \fR\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+can be used when creating system account to turn off password ageing, even though system account has no password at all. Multiple
+\fB\-K\fR
+options can be specified, e.g.:
+\fB\-K \fR\fIUID_MIN\fR=\fI100\fR\fB \-K \fR\fIUID_MAX\fR=\fI499\fR
+.sp
+Note:
+\fB\-K \fR\fIUID_MIN\fR=\fI10\fR,\fIUID_MAX\fR=\fI499\fR
 doesn't work yet.
 .TP
 \fB\-o\fR, \fB\-\-non\-unique\fR
 Allow create user account with duplicate (non\-unique) UID.
 .TP
 \fB\-p\fR, \fB\-\-password\fR \fIPASSWORD\fR
-The encrypted password, as returned by 
+The encrypted password, as returned by
 \fBcrypt\fR(3). The default is to disable the account.
 .TP
 \fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The name of the user's login shell. The default is to leave this field blank, which causes the system to select the default login shell.
 .TP
 \fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
-The numerical value of the user's ID. This value must be unique, unless the 
-\fB\-o\fR 
+The numerical value of the user's ID. This value must be unique, unless the
+\fB\-o\fR
 option is used. The value must be non\-negative. The default is to use the smallest ID value greater than 999 and greater than every other user. Values between 0 and 999 are typically reserved for system accounts.
 .SS "Changing the default values"
 .PP
-When invoked with the 
-\fB\-D\fR 
-option, 
-\fBuseradd\fR 
+When invoked with the
+\fB\-D\fR
+option,
+\fBuseradd\fR
 will either display the current default values, or update the default values from the command line. The valid options are
 .TP
-\fB\-b\fR \fIhome_dir\fR
-The initial path prefix for a new user's home directory. The user's name will be affixed to the end of 
-\fIhome\fR 
-to create the new directory name if the 
-\fB\-d\fR 
+\fB\-b\fR \fIHOME_DIR\fR
+The initial path prefix for a new user's home directory. The user's name will be affixed to the end of
+\fIHOME_DIR\fR
+to create the new directory name if the
+\fB\-d\fR
 option is not used when creating a new account.
 .TP
-\fB\-e\fR \fIexpire_date\fR
+\fB\-e\fR \fIEXPIRE_DATE\fR
 The date on which the user account is disabled.
 .TP
-\fB\-f\fR \fIinactive\fR
+\fB\-f\fR \fIINACTIVE\fR
 The number of days after a password has expired before the account will be disabled.
 .TP
 \fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
-The group name or ID for a new user's initial group. The named group must exist, and a numerical group ID must have an existing entry .
+The group name or ID for a new user's initial group. The named group must exist, and a numerical group ID must have an existing entry.
 .TP
 \fB\-s\fR, \fB\-\-shell\fR \fISHELL\fR
 The name of the new user's login shell. The named program will be used for all future new user accounts.
 .PP
-If no options are specified, 
-\fBuseradd\fR 
+If no options are specified,
+\fBuseradd\fR
 displays the current default values.
 .SH "NOTES"
 .PP
-The system administrator is responsible for placing the default user files in the 
-\fI/etc/skel/\fR 
+The system administrator is responsible for placing the default user files in the
+\fI/etc/skel/\fR
 directory.
 .SH "CAVEATS"
 .PP
 You may not add a user to a NIS group. This must be performed on the NIS server.
+.PP
+Usernames must begin with a lower case letter or an underscore, and only lower case letters, underscores, dashes, and dollar signs may follow. In regular expression terms: [a\-z_][a\-z0\-9_\-]*[$]
 .SH "FILES"
 .TP
 \fI/etc/passwd\fR
@@ -167,11 +170,14 @@ default information
 .TP
 \fI/etc/skel/\fR
 directory containing default files
+.TP
+\fI/etc/login.defs\fR
+shadow password suite configuration
 .SH "EXIT VALUES"
 .PP
-The 
-\fBuseadd\fR 
-command exits with the following values: 
+The
+\fBuseradd\fR
+command exits with the following values:
 .TP
 \fI0\fR
 success
@@ -186,7 +192,8 @@ invalid command syntax
 invalid argument to option
 .TP
 \fI4\fR
-uid already in use (and no \-o)
+uid already in use (and no
+\fB\-o\fR)
 .TP
 \fI6\fR
 specified group doesn't exist
@@ -204,15 +211,16 @@ can't create home directory
 can't create mail spool
 .SH "SEE ALSO"
 .PP
-\fBchfn\fR(1), 
-\fBchsh\fR(1), 
-\fBpasswd\fR(1), 
-\fBcrypt\fR(3), 
-\fBgroupadd\fR(8), 
-\fBgroupdel\fR(8), 
-\fBgroupmod\fR(8), 
-\fBuserdel\fR(8), 
-\fBusermod\fR(8)
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBcrypt\fR(3),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBlogin.defs\fR(5),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).
 .SH "AUTHOR"
 .PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

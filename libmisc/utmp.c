@@ -40,8 +40,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#include "rcsid.h"
-RCSID ("$Id: utmp.c,v 1.16 2005/07/05 20:17:51 kloczek Exp $")
+#ident "$Id: utmp.c,v 1.18 2005/08/31 17:24:58 kloczek Exp $"
+
 #if HAVE_UTMPX_H
 struct utmpx utxent;
 #endif
@@ -53,9 +53,9 @@ extern void setutent ();
 extern void endutent ();
 
 #define	NO_UTENT \
-	"No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+	_("No utmp entry.  You must exec \"login\" from the lowest level \"sh\"")
 #define	NO_TTY \
-	"Unable to determine your tty name."
+	_("Unable to determine your tty name.")
 
 /*
  * checkutmp - see if utmp file is correct for this process

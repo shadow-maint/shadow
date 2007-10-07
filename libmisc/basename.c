@@ -7,8 +7,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: basename.c,v 1.3 2003/04/22 10:59:21 kloczek Exp $")
+#ident "$Id: basename.c,v 1.4 2005/08/31 17:24:57 kloczek Exp $"
+
 #include "defines.h"
 #include "prototypes.h"
 char *Basename (char *str)

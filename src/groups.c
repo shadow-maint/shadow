@@ -29,13 +29,13 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: groups.c,v 1.10 2005/03/31 05:14:54 kloczek Exp $")
-#include <stdio.h>
-#include <pwd.h>
+#ident "$Id: groups.c,v 1.13 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <grp.h>
-#include "prototypes.h"
+#include <pwd.h>
+#include <stdio.h>
 #include "defines.h"
+#include "prototypes.h"
 /*
  * Global variables
  */
@@ -50,7 +50,6 @@ static void print_groups (const char *);
  *	print_groups() scans the groups file for the list of groups which
  *	the user is listed as being a member of.
  */
-
 static void print_groups (const char *member)
 {
 	int groups = 0;
@@ -87,7 +86,6 @@ static void print_groups (const char *member)
 /*
  * groups - print out the groups a process is a member of
  */
-
 int main (int argc, char **argv)
 {
 	long sys_ngroups;
@@ -114,7 +112,6 @@ int main (int argc, char **argv)
 	/*
 	 * Get the program name so that error messages can use it.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	if (argc == 1) {
@@ -130,7 +127,6 @@ int main (int argc, char **argv)
 		 * the system to tell me which groups are currently set for
 		 * this process.
 		 */
-
 		ngroups = getgroups (sys_ngroups, groups);
 		if (ngroups < 0) {
 			perror ("getgroups");
@@ -140,7 +136,6 @@ int main (int argc, char **argv)
 		/*
 		 * The groupset includes the primary group as well.
 		 */
-
 		pri_grp = getegid ();
 		for (i = 0; i < ngroups; i++)
 			if (pri_grp == (int) groups[i])
@@ -154,7 +149,6 @@ int main (int argc, char **argv)
 		 * set. Unknown groups are printed as their decimal group ID
 		 * values.
 		 */
-
 		if (pri_grp != -1) {
 			if ((gr = getgrgid (pri_grp)))
 				printf ("%s", gr->gr_name);
@@ -177,7 +171,6 @@ int main (int argc, char **argv)
 		 * This system does not have the getgroups() system call, so
 		 * I must check the groups file directly.
 		 */
-
 		if ((logname = getlogin ()))
 			print_groups (logname);
 		else
@@ -189,7 +182,6 @@ int main (int argc, char **argv)
 		 * The invoker wanted to know about some other user. Use
 		 * that name to look up the groups instead.
 		 */
-
 		print_groups (argv[1]);
 	}
 	exit (0);

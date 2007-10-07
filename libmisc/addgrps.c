@@ -9,8 +9,8 @@
 #include <grp.h>
 #include <errno.h>
 
-#include "rcsid.h"
-RCSID ("$Id: addgrps.c,v 1.7 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: addgrps.c,v 1.8 2005/08/31 17:24:57 kloczek Exp $"
+
 #define SEP ",:"
 /*
  * Add groups with names from LIST (separated by commas or colons)

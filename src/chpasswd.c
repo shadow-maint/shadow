@@ -29,8 +29,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.29 2005/08/11 16:23:34 kloczek Exp $")
+#ident "$Id: chpasswd.c,v 1.33 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -40,10 +40,10 @@ RCSID (PKG_VER "$Id: chpasswd.c,v 1.29 2005/08/11 16:23:34 kloczek Exp $")
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #endif				/* USE_PAM */
-#include "prototypes.h"
 #include "defines.h"
-#include "pwio.h"
 #include "nscd.h"
+#include "prototypes.h"
+#include "pwio.h"
 #include "shadowio.h"
 /*
  * Global variables
@@ -60,7 +60,6 @@ static void usage (void);
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: chpasswd [options]\n"
@@ -178,7 +177,6 @@ int main (int argc, char **argv)
 	 * Lock the password file and open it for reading. This will bring
 	 * all of the entries into memory where they may be updated.
 	 */
-
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
 		exit (1);
@@ -214,7 +212,6 @@ int main (int argc, char **argv)
 	 * last change date is set in the age only if aging information is
 	 * present.
 	 */
-
 	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
 		line++;
 		if ((cp = strrchr (buf, '\n'))) {
@@ -260,7 +257,6 @@ int main (int argc, char **argv)
 		 * Get the password file entry for this user. The user must
 		 * already exist.
 		 */
-
 		pw = pw_locate (name);
 		if (!pw) {
 			fprintf (stderr,
@@ -279,7 +275,6 @@ int main (int argc, char **argv)
 		 * user's password file entry and the last password change
 		 * date is set to the current date.
 		 */
-
 		if (sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
@@ -294,7 +289,6 @@ int main (int argc, char **argv)
 		 * be written to the password file later, after all the
 		 * other entries have been updated as well.
 		 */
-
 		if (sp)
 			ok = spw_update (&newsp);
 		else
@@ -317,7 +311,6 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-
 	if (errors) {
 		fprintf (stderr,
 			 _("%s: error detected, changes ignored\n"), Prog);
@@ -345,18 +338,6 @@ int main (int argc, char **argv)
 	pw_unlock ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */

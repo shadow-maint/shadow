@@ -1,8 +1,8 @@
 .\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHAGE" "1" "08/09/2005" "User Commands" "User Commands"
+.TH "CHAGE" "1" "10/10/2005" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -14,37 +14,38 @@ chage \- change user password expiry information
 \fBchage\fR [\fIoptions\fR] \fIuser\fR
 .SH "DESCRIPTION"
 .PP
-\fBchage\fR 
+\fBchage\fR
 command changes the number of days between password changes and the date of the last password change. This information is used by the system to determine when a user must change her password.
 .SH "OPTIONS"
 .PP
-The options which apply to the 
-\fBchage\fR 
+The options which apply to the
+\fBchage\fR
 command are:
 .TP
 \fB\-d\fR, \fB\-\-lastday\fR \fILAST_DAY\fR
 Set the number of days since January 1st, 1970 when the password was last changed. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area).
 .TP
 \fB\-E\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
-Set the date on which the user's account will no longer be accessible. The 
-\fIEXPIRE_DATE\fR 
-option is the number of days since January 1, 1970 on which the accounted is locked. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area). A user whose account is locked must contact the system administrator before being able to use the system again.
-
-Passing the number 
-\fI\-1\fR 
-as the 
-\fIEXPIRE_DATE\fR 
+Set the date number of days since January 1, 1970 on which the user's account will no longer be accessible. The date may also be expressed in the format YYYY\-MM\-DD (or the format more commonly used in your area). A user whose account is locked must contact the system administrator before being able to use the system again.
+.sp
+Passing the number
+\fI\-1\fR
+as the
+\fIEXPIRE_DATE\fR
 will remove an account expiration date.
 .TP
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP
 \fB\-I\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
-Set the number of days of inactivity after a password has expired before the account is locked. The 
-\fIINACTIVE\fR 
+Set the number of days of inactivity after a password has expired before the account is locked. The
+\fIINACTIVE\fR
 option is the number of days of inactivity. A user whose account is locked must contact the system administrator before being able to use the system again.
-
-Passing the number 
-\fI\-1\fR 
-as the 
-\fIINACTIVE\fR 
+.sp
+Passing the number
+\fI\-1\fR
+as the
+\fIINACTIVE\fR
 will remove an accounts inactivity.
 .TP
 \fB\-l\fR, \fB\-\-list\fR
@@ -54,40 +55,40 @@ Show account aging information.
 Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change her password at any time.
 .TP
 \fB\-M\fR, \fB\-\-maxdays\fR \fIMAX_DAYS\fR
-Set maximum number of days during which a password is valid. When 
-\fIMAX_DAYS\fR 
-plus 
-\fILAST_DAY\fR 
-is less than the current day, the user will be required to change her password before being able to use her account. This occurence can be planned for in advance by use of the 
-\fB\-W\fR 
+Set maximum number of days during which a password is valid. When
+\fIMAX_DAYS\fR
+plus
+\fILAST_DAY\fR
+is less than the current day, the user will be required to change her password before being able to use her account. This occurence can be planned for in advance by use of the
+\fB\-W\fR
 option, which provides the user with advance warning.
-
-Passing the number 
-\fI\-1\fR 
-as the 
-\fIMAX_DAYS\fR 
+.sp
+Passing the number
+\fI\-1\fR
+as the
+\fIMAX_DAYS\fR
 will remove checking a password validation.
 .TP
-\fB\-W\fR, \fBwarndays\fR \fIWARN_DAYS\fR
-Set the number of days of warning before a password change is required. The 
-\fIWARN_DAYS\fR 
+\fB\-W\fR, \fB\-\-warndays\fR \fIWARN_DAYS\fR
+Set the number of days of warning before a password change is required. The
+\fIWARN_DAYS\fR
 option is the number of days prior to the password expiring that a user will be warned her password is about to expire.
 .PP
-If none of the options are selected, 
-\fBchage\fR 
-operates in an interactive fashion, prompting the user with the current values for all of the fields. Enter the new value to change the field, or leave the line blank to use the current value. The current value is displayed between a pair of 
-\fI[ ]\fR 
+If none of the options are selected,
+\fBchage\fR
+operates in an interactive fashion, prompting the user with the current values for all of the fields. Enter the new value to change the field, or leave the line blank to use the current value. The current value is displayed between a pair of
+\fI[ ]\fR
 marks.
 .SH "NOTE"
 .PP
-The 
-\fBchage\fR 
+The
+\fBchage\fR
 program requires shadow password file to be available. Its functionality is not available when passwords are stored in the passwd file.
 .PP
-The 
-\fBchage\fR 
-command is restricted to the root user, except for the 
-\fB\-l\fR 
+The
+\fBchage\fR
+command is restricted to the root user, except for the
+\fB\-l\fR
 option, which may be used by an unprivileged user to determine when her password or account is due to expire.
 .SH "FILES"
 .TP
@@ -96,9 +97,26 @@ user account information
 .TP
 \fI/etc/shadow\fR
 secure user account information
+.SH "EXIT VALUES"
+.PP
+The
+\fBchage\fR
+command exits with the following values:
+.TP
+\fI0\fR
+success
+.TP
+\fI1\fR
+permission denied
+.TP
+\fI2\fR
+invalid command syntax
+.TP
+\fI15\fR
+can't find the shadow password file
 .SH "SEE ALSO"
 .PP
-\fBpasswd\fR(5), 
+\fBpasswd\fR(5),
 \fBshadow\fR(5).
 .SH "AUTHOR"
 .PP

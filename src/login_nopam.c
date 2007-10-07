@@ -22,8 +22,8 @@
 #endif
 
 #ifndef USE_PAM
-#include "rcsid.h"
-RCSID ("$Id: login_nopam.c,v 1.5 2005/07/02 17:53:06 kloczek Exp $")
+#ident "$Id: login_nopam.c,v 1.8 2005/09/07 15:00:45 kloczek Exp $"
+
 #include "prototypes.h"
     /*
      * This module implements a simple but effective form of login access
@@ -63,13 +63,11 @@ extern int innetgr ();
 #define TABLE	"/etc/login.access"
 #endif
 
- /* Delimiters for fields and for lists of users, ttys or hosts. */
-
+/* Delimiters for fields and for lists of users, ttys or hosts. */
 static char fs[] = ":";		/* field separator */
 static char sep[] = ", \t";	/* list-element separator */
 
- /* Constants to be used in assignments only, not in comparisons... */
-
+/* Constants to be used in assignments only, not in comparisons... */
 #define YES             1
 #define NO              0
 
@@ -79,7 +77,6 @@ static int from_match ();
 static int string_match ();
 
 /* login_access - match username/group and host/tty with access control file */
-
 int login_access (const char *user, const char *from)
 {
 	FILE *fp;
@@ -98,14 +95,13 @@ int login_access (const char *user, const char *from)
 	 * mandatory. The first field should be a "+" or "-" character. A
 	 * non-existing table means no access control.
 	 */
-
 	if ((fp = fopen (TABLE, "r"))) {
 		while (!match && fgets (line, sizeof (line), fp)) {
 			lineno++;
 			if (line[end = strlen (line) - 1] != '\n') {
 				SYSLOG ((LOG_ERR,
-					"%s: line %d: missing newline or line too long",
-					TABLE, lineno));
+					 "%s: line %d: missing newline or line too long",
+					 TABLE, lineno));
 				continue;
 			}
 			if (line[0] == '#')
@@ -120,14 +116,14 @@ int login_access (const char *user, const char *from)
 			    || !(froms = strtok ((char *) 0, fs))
 			    || strtok ((char *) 0, fs)) {
 				SYSLOG ((LOG_ERR,
-					"%s: line %d: bad field count",
-					TABLE, lineno));
+					 "%s: line %d: bad field count",
+					 TABLE, lineno));
 				continue;
 			}
 			if (perm[0] != '+' && perm[0] != '-') {
 				SYSLOG ((LOG_ERR,
-					"%s: line %d: bad first field",
-					TABLE, lineno));
+					 "%s: line %d: bad first field",
+					 TABLE, lineno));
 				continue;
 			}
 			match = (list_match (froms, from, from_match)
@@ -141,7 +137,6 @@ int login_access (const char *user, const char *from)
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
-
 static int list_match (char *list, const char *item, int (*match_fn) ())
 {
 	char *tok;
@@ -153,15 +148,14 @@ static int list_match (char *list, const char *item, int (*match_fn) ())
 	 * a match, look for an "EXCEPT" list and recurse to determine whether
 	 * the match is affected by any exceptions.
 	 */
-
 	for (tok = strtok (list, sep); tok != 0; tok = strtok ((char *) 0, sep)) {
 		if (strcasecmp (tok, "EXCEPT") == 0)	/* EXCEPT: give up */
 			break;
 		if ((match = (*match_fn) (tok, item)))	/* YES */
 			break;
 	}
-	/* Process exceptions to matches. */
 
+	/* Process exceptions to matches. */
 	if (match != NO) {
 		while ((tok = strtok ((char *) 0, sep))
 		       && strcasecmp (tok, "EXCEPT"))
@@ -173,7 +167,6 @@ static int list_match (char *list, const char *item, int (*match_fn) ())
 }
 
 /* myhostname - figure out local machine name */
-
 static char *myhostname (void)
 {
 	static char name[MAXHOSTNAMELEN + 1] = "";
@@ -186,7 +179,6 @@ static char *myhostname (void)
 }
 
 /* netgroup_match - match group against machine or user */
-
 static int
 netgroup_match (const char *group, const char *machine, const char *user)
 {
@@ -203,7 +195,6 @@ netgroup_match (const char *group, const char *machine, const char *user)
 }
 
 /* user_match - match a username against one token */
-
 static int user_match (const char *tok, const char *string)
 {
 	struct group *group;
@@ -219,7 +210,6 @@ static int user_match (const char *tok, const char *string)
 	 * Otherwise, return YES if the token fully matches the username, or if
 	 * the token is a group that contains the username.
 	 */
-
 	if ((at = strchr (tok + 1, '@')) != 0) {	/* split user@host pattern */
 		*at = 0;
 		return (user_match (tok, string)
@@ -281,7 +271,6 @@ static int from_match (const char *tok, const char *string)
 	 * contain a "." character. If the token is a network number, return YES
 	 * if it matches the head of the string.
 	 */
-
 	if (tok[0] == '@') {	/* netgroup */
 		return (netgroup_match (tok + 1, string, (char *) 0));
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
@@ -301,7 +290,6 @@ static int from_match (const char *tok, const char *string)
 }
 
 /* string_match - match a string against one token */
-
 static int string_match (const char *tok, const char *string)
 {
 
@@ -309,7 +297,6 @@ static int string_match (const char *tok, const char *string)
 	 * If the token has the magic value "ALL" the match always succeeds.
 	 * Otherwise, return YES if the token fully matches the string.
 	 */
-
 	if (strcasecmp (tok, "ALL") == 0) {	/* all: always matches */
 		return (YES);
 	} else if (strcasecmp (tok, string) == 0) {	/* try exact match */

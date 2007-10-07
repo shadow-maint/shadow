@@ -29,21 +29,21 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.29 2005/08/09 15:27:02 kloczek Exp $")
-#include <stdio.h>
+#ident "$Id: pwck.c,v 1.32 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <fcntl.h>
 #include <grp.h>
-#include "prototypes.h"
-#include "defines.h"
-#include "chkname.h"
 #include <pwd.h>
+#include <stdio.h>
+#include "chkname.h"
 #include "commonio.h"
+#include "defines.h"
+#include "prototypes.h"
 #include "pwio.h"
+#include "shadowio.h"
 extern void __pw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__pw_get_head (void);
 
-#include "shadowio.h"
 extern void __spw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__spw_get_head (void);
 
@@ -59,7 +59,7 @@ extern struct commonio_entry *__spw_get_head (void);
 #define	E_CANTUPDATE	5
 
 /*
- * Local variables
+ * Global variables
  */
 
 static char *Prog;
@@ -76,7 +76,6 @@ static int yes_or_no (void);
 /*
  * usage - print syntax message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
@@ -87,7 +86,6 @@ static void usage (void)
 /*
  * yes_or_no - get answer to question from the user
  */
-
 static int yes_or_no (void)
 {
 	char buf[80];
@@ -104,7 +102,6 @@ static int yes_or_no (void)
 	/*
 	 * Get a line and see what the first character is.
 	 */
-
 	if (fgets (buf, sizeof buf, stdin))
 		return buf[0] == 'y' || buf[0] == 'Y';
 
@@ -114,7 +111,6 @@ static int yes_or_no (void)
 /*
  * pwck - verify password file integrity
  */
-
 int main (int argc, char **argv)
 {
 	int arg;
@@ -131,7 +127,6 @@ int main (int argc, char **argv)
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
-
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -143,7 +138,6 @@ int main (int argc, char **argv)
 	/*
 	 * Parse the command line arguments
 	 */
-
 	while ((arg = getopt (argc, argv, "eqrs")) != EOF) {
 		switch (arg) {
 		case 'e':	/* added for Debian shadow-961025-2 compatibility */
@@ -169,7 +163,6 @@ int main (int argc, char **argv)
 	/*
 	 * Make certain we have the right number of arguments
 	 */
-
 	if (optind != argc && optind + 1 != argc && optind + 2 != argc)
 		usage ();
 
@@ -177,7 +170,6 @@ int main (int argc, char **argv)
 	 * If there are two left over filenames, use those as the password
 	 * and shadow password filenames.
 	 */
-
 	if (optind != argc) {
 		pwd_file = argv[optind];
 		pw_name (pwd_file);
@@ -192,7 +184,6 @@ int main (int argc, char **argv)
 	/*
 	 * Lock the files if we aren't in "read-only" mode
 	 */
-
 	if (!read_only) {
 		if (!pw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
@@ -216,7 +207,6 @@ int main (int argc, char **argv)
 	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
 	 * otherwise.
 	 */
-
 	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 			 Prog, pwd_file);
@@ -244,13 +234,11 @@ int main (int argc, char **argv)
 	/*
 	 * Loop through the entire password file.
 	 */
-
 	for (pfe = __pw_get_head (); pfe; pfe = pfe->next) {
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-
 		if (pfe->line[0] == '+' || pfe->line[0] == '-')
 			continue;
 
@@ -259,14 +247,11 @@ int main (int argc, char **argv)
 		 * have no (struct passwd) entry because they couldn't be
 		 * parsed properly.
 		 */
-
 		if (!pfe->eptr) {
-
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-
 			printf (_("invalid password file entry\n"));
 			printf (_("delete line `%s'? "), pfe->line);
 			errors++;
@@ -274,7 +259,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (!yes_or_no ())
 				continue;
 
@@ -284,7 +268,6 @@ int main (int argc, char **argv)
 			 * list. When done, it skips back to the top of the
 			 * loop to try out the next list element.
 			 */
-
 		      delete_pw:
 			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
 				 pfe->line));
@@ -297,27 +280,23 @@ int main (int argc, char **argv)
 		/*
 		 * Password structure is good, start using it.
 		 */
-
 		pwd = pfe->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-
 		for (tpfe = __pw_get_head (); tpfe; tpfe = tpfe->next) {
 			const struct passwd *ent = tpfe->eptr;
 
 			/*
 			 * Don't check this entry
 			 */
-
 			if (tpfe == pfe)
 				continue;
 
 			/*
 			 * Don't check invalid entries.
 			 */
-
 			if (!ent)
 				continue;
 
@@ -328,7 +307,6 @@ int main (int argc, char **argv)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-
 			printf (_("duplicate password entry\n"));
 			printf (_("delete line `%s'? "), pfe->line);
 			errors++;
@@ -336,7 +314,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (yes_or_no ())
 				goto delete_pw;
 		}
@@ -352,7 +329,6 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure the primary group exists
 		 */
-
 		if (!quiet && !getgrgid (pwd->pw_gid)) {
 
 			/*
@@ -367,13 +343,10 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure the home directory exists
 		 */
-
 		if (!quiet && access (pwd->pw_dir, F_OK)) {
-
 			/*
 			 * Home directory doesn't exist, give a warning
 			 */
-
 			printf (_
 				("user %s: directory %s does not exist\n"),
 				pwd->pw_name, pwd->pw_dir);
@@ -383,14 +356,12 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure the login shell is executable
 		 */
-
 		if (!quiet && pwd->pw_shell[0]
 		    && access (pwd->pw_shell, F_OK)) {
 
 			/*
 			 * Login shell doesn't exist, give a warning
 			 */
-
 			printf (_("user %s: program %s does not exist\n"),
 				pwd->pw_name, pwd->pw_shell);
 			errors++;
@@ -403,13 +374,11 @@ int main (int argc, char **argv)
 	/*
 	 * Loop through the entire shadow password file.
 	 */
-
 	for (spe = __spw_get_head (); spe; spe = spe->next) {
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-
 		if (spe->line[0] == '+' || spe->line[0] == '-')
 			continue;
 
@@ -418,14 +387,11 @@ int main (int argc, char **argv)
 		 * have no (struct spwd) entry because they couldn't be
 		 * parsed properly.
 		 */
-
 		if (!spe->eptr) {
-
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-
 			printf (_("invalid shadow password file entry\n"));
 			printf (_("delete line `%s'? "), spe->line);
 			errors++;
@@ -433,7 +399,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (!yes_or_no ())
 				continue;
 
@@ -443,7 +408,6 @@ int main (int argc, char **argv)
 			 * When done, it skips back to the top of the loop
 			 * to try out the next list element.
 			 */
-
 		      delete_spw:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 spe->line));
@@ -456,27 +420,23 @@ int main (int argc, char **argv)
 		/*
 		 * Shadow password structure is good, start using it.
 		 */
-
 		spw = spe->eptr;
 
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-
 		for (tspe = __spw_get_head (); tspe; tspe = tspe->next) {
 			const struct spwd *ent = tspe->eptr;
 
 			/*
 			 * Don't check this entry
 			 */
-
 			if (tspe == spe)
 				continue;
 
 			/*
 			 * Don't check invalid entries.
 			 */
-
 			if (!ent)
 				continue;
 
@@ -487,7 +447,6 @@ int main (int argc, char **argv)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-
 			printf (_("duplicate shadow password entry\n"));
 			printf (_("delete line `%s'? "), spe->line);
 			errors++;
@@ -495,7 +454,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (yes_or_no ())
 				goto delete_spw;
 		}
@@ -504,14 +462,11 @@ int main (int argc, char **argv)
 		 * Make sure this entry exists in the /etc/passwd
 		 * file.
 		 */
-
 		if (!pw_locate (spw->sp_namp)) {
-
 			/*
 			 * Tell the user this entry has no matching
 			 * /etc/passwd entry and ask them to delete it.
 			 */
-
 			printf (_("no matching password file entry\n"));
 			printf (_("delete line `%s'? "), spe->line);
 			errors++;
@@ -519,7 +474,6 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-
 			if (yes_or_no ())
 				goto delete_spw;
 		}
@@ -527,7 +481,6 @@ int main (int argc, char **argv)
 		/*
 		 * Warn if last password change in the future.  --marekm
 		 */
-
 		if (!quiet && spw->sp_lstchg > time ((time_t *) 0) / SCALE) {
 			printf (_
 				("user %s: last password change in the future\n"),
@@ -542,7 +495,6 @@ int main (int argc, char **argv)
 	 * All done. If there were no deletions we can just abandon any
 	 * changes to the files.
 	 */
-
 	if (deleted) {
 	      write_and_bye:
 		if (!pw_close ()) {
@@ -564,7 +516,6 @@ int main (int argc, char **argv)
 	/*
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
-
 	if (is_shadow)
 		spw_unlock ();
 	(void) pw_unlock ();
@@ -574,7 +525,6 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-
 	if (errors)
 		printf (deleted ?
 			_("%s: the files have been updated\n") :

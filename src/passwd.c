@@ -29,16 +29,27 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.44 2005/08/03 16:00:46 kloczek Exp $")
-#include "prototypes.h"
-#include "defines.h"
-#include <sys/types.h>
-#include <time.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <signal.h>
+#ident "$Id: passwd.c,v 1.52 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <errno.h>
+#include <fcntl.h>
+#include <getopt.h>
+#include <pwd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#endif
+#include <time.h>
+#include "defines.h"
+#include "getdef.h"
+#include "nscd.h"
+#include "prototypes.h"
+#include "pwauth.h"
+#include "pwio.h"
+#include "shadowio.h"
 #ifndef GPASSWD_PROGRAM
 #define GPASSWD_PROGRAM "gpasswd"
 #endif
@@ -47,16 +58,6 @@ RCSID (PKG_VER "$Id: passwd.c,v 1.44 2005/08/03 16:00:46 kloczek Exp $")
 #endif
 #ifndef CHSH_PROGRAM
 #define CHSH_PROGRAM "chsh"
-#endif
-#include <pwd.h>
-#include "pwauth.h"
-#include "shadowio.h"
-#include "pwio.h"
-#include "nscd.h"
-#include "getdef.h"
-#ifdef WITH_SELINUX
-#include <selinux/selinux.h>
-#include <selinux/av_permissions.h>
 #endif
 /*
  * exit status values
@@ -77,18 +78,18 @@ static char *Prog;		/* Program name */
 static int amroot;		/* The real UID was 0 */
 
 static int
- eflg = 0,			/* -e - force password change */
+ aflg = 0,			/* -a - show status for all users */
+    dflg = 0,			/* -d - delete password */
+    eflg = 0,			/* -e - force password change */
     iflg = 0,			/* -i - set inactive days */
     kflg = 0,			/* -k - change only if expired */
-    nflg = 0,			/* -n - set minimum days */
-    wflg = 0,			/* -w - set warning days */
-    xflg = 0,			/* -x - set maximum days */
-    aflg = 0,			/* -a - show status for all users */
-    dflg = 0,			/* -d - delete password */
     lflg = 0,			/* -l - lock account */
+    nflg = 0,			/* -n - set minimum days */
     qflg = 0,			/* -q - quiet mode */
     Sflg = 0,			/* -S - show password status */
-    uflg = 0;			/* -u - unlock account */
+    uflg = 0,			/* -u - unlock account */
+    wflg = 0,			/* -w - set warning days */
+    xflg = 0;			/* -x - set maximum days */
 
 /*
  * set to 1 if there are any flags which require root privileges,
@@ -136,17 +137,28 @@ static long getnumber (const char *);
 /*
  * usage - print command usage and exit
  */
-
 static void usage (int status)
 {
-	fprintf (stderr, _("Usage: %s [-f|-s] [name]\n"), Prog);
-	if (amroot) {
-		fprintf (stderr,
-			 _
-			 ("       %s [-x max] [-n min] [-w warn] [-i inact] name\n"),
-			 Prog);
-		fprintf (stderr, _("       %s {-l|-u|-d|-S|-e} name\n"), Prog);
-	}
+	fprintf (stderr, _("Usage: passwd [options] [login]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -a, --all 			report password status on all accounts\n"
+			   "  -d, --delete 			delete the password for the named account\n"
+			   "  -e, --expire			force expire the password for the named account\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -k, --keep-tokens		change password only if expired\n"
+			   "  -i, --inactive INACTIVE	set password inactive after expiration\n"
+			   "				to INACTIVE\n"
+			   "  -l, --lock			lock the named account\n"
+			   "  -n, --mindays MIN_DAYS	set minimum number of days before password\n"
+			   "				change to MIN_DAYS\n"
+			   "  -q, --quiet			quiet mode\n"
+			   "  -r, --repository REPOSITORY	change password in REPOSITORY repository\n"
+			   "  -S, --status			report password status on the named account\n"
+			   "  -u, --unlock			unlock the named account\n"
+			   "  -w, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"
+			   "  -x, --maxdays MAX_DAYS	set maximim number of days before password\n"
+			   "				change to MAX_DAYS\n"));
 	exit (status);
 }
 
@@ -177,8 +189,7 @@ static int reuse (const char *pass, const struct passwd *pw)
  * new_password - validate old password and replace with new (both old and
  * new in global "char crypt_passwd[128]")
  */
-
- /*ARGSUSED*/ static int new_password (const struct passwd *pw)
+static int new_password (const struct passwd *pw)
 {
 	char *clear;		/* Pointer to clear text */
 	char *cipher;		/* Pointer to cipher text */
@@ -204,11 +215,11 @@ static int reuse (const char *pass, const struct passwd *pw)
 
 		cipher = pw_encrypt (clear, crypt_passwd);
 		if (strcmp (cipher, crypt_passwd) != 0) {
-			SYSLOG ((LOG_WARN, "incorrect password for `%s'",
+			SYSLOG ((LOG_WARN, "incorrect password for %s",
 				 pw->pw_name));
 			sleep (1);
 			fprintf (stderr,
-				 _("Incorrect password for `%s'\n"),
+				 _("Incorrect password for %s.\n"),
 				 pw->pw_name);
 			return -1;
 		}
@@ -225,7 +236,6 @@ static int reuse (const char *pass, const struct passwd *pw)
 	 * for strength, unless it is the root user. This provides an escape
 	 * for initial login passwords.
 	 */
-
 	if (getdef_bool ("MD5_CRYPT_ENAB"))
 		pass_max_len = 127;
 	else
@@ -251,6 +261,7 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
 			printf (_("Try again.\n"));
 			continue;
 		}
+
 		/*
 		 * If enabled, warn about weak passwords even if you are
 		 * root (enter this password again to use it anyway). 
@@ -284,7 +295,6 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
 	/*
 	 * Encrypt the password, then wipe the cleartext password.
 	 */
-
 	cp = pw_encrypt (pass, crypt_make_salt ());
 	memzero (pass, sizeof pass);
 
@@ -301,7 +311,6 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
  *	check_password() sees if the invoker has permission to change the
  *	password for the given user.
  */
-
 static void check_password (const struct passwd *pw, const struct spwd *sp)
 {
 	time_t now, last, ok;
@@ -319,7 +328,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	/*
 	 * Root can change any password any time.
 	 */
-
 	if (amroot)
 		return;
 
@@ -331,7 +339,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * changed. Passwords which have been inactive too long cannot be
 	 * changed.
 	 */
-
 	if (sp->sp_pwdp[0] == '!' || exp_status > 1 ||
 	    (sp->sp_max >= 0 && sp->sp_min > sp->sp_max)) {
 		fprintf (stderr,
@@ -345,7 +352,6 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	/*
 	 * Passwords may only be changed after sp_min time is up.
 	 */
-
 	last = sp->sp_lstchg * SCALE;
 	ok = last + (sp->sp_min > 0 ? sp->sp_min * SCALE : 0);
 
@@ -397,7 +403,6 @@ static const char *pw_status (const char *pass)
 /*
  * print_status - print current password status
  */
-
 static void print_status (const struct passwd *pw)
 {
 	struct spwd *sp;
@@ -534,6 +539,7 @@ static void update_shadow (void)
 		nsp->sp_inact = (inact * DAY) / SCALE;
 	if (do_update_age)
 		nsp->sp_lstchg = time ((time_t *) 0) / SCALE;
+
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris
 	 * 2.x passwd -f. Solaris 2.x seems to do the same thing (set
@@ -574,19 +580,20 @@ static long getnumber (const char *str)
  *
  *	The valid options are
  *
- *	-l	lock the named account (*)
- *	-u	unlock the named account (*)
  *	-d	delete the password for the named account (*)
  *	-e	expire the password for the named account (*)
- *	-x #	set sp_max to # days (*)
- *	-n #	set sp_min to # days (*)
- *	-w #	set sp_warn to # days (*)
- *	-i #	set sp_inact to # days (*)
- *	-S	show password status of named account
- *	-g	execute gpasswd command to interpret flags
  *	-f	execute chfn command to interpret flags
- *	-s	execute chsh command to interpret flags
+ *	-g	execute gpasswd command to interpret flags
+ *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
+ *	-l	lock the named account (*)
+ *	-n #	set sp_min to # days (*)
+ *	-r #	change password in # repository
+ *	-s	execute chsh command to interpret flags
+ *	-S	show password status of named account
+ *	-u	unlock the named account (*)
+ *	-w #	set sp_warn to # days (*)
+ *	-x #	set sp_max to # days (*)
  *
  *	(*) requires root permission to execute.
  *
@@ -594,7 +601,6 @@ static long getnumber (const char *str)
  * 	appropriate internal format. For finer resolute the chage
  *	command must be used.
  */
-
 int main (int argc, char **argv)
 {
 	int flag;		/* Current option to process     */
@@ -634,7 +640,6 @@ int main (int argc, char **argv)
 	 * These flags are deprecated, may change in a future release.
 	 * Please run these programs directly.  --marekm
 	 */
-
 	if (argc > 1 && argv[1][0] == '-' && strchr ("gfs", argv[1][1])) {
 		char buf[200];
 
@@ -661,81 +666,99 @@ int main (int argc, char **argv)
 		exit (E_FAILURE);
 	}
 
-	/* 
-	 * The remaining arguments will be processed one by one and executed
-	 * by this command. The name is the last argument if it does not
-	 * begin with a "-", otherwise the name is determined from the
-	 * environment and must agree with the real UID. Also, the UID will
-	 * be checked for any commands which are restricted to root only.
-	 */
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"all", no_argument, NULL, 'a'},
+			{"delete", no_argument, NULL, 'd'},
+			{"expire", no_argument, NULL, 'e'},
+			{"help", no_argument, NULL, 'h'},
+			{"inactive", required_argument, NULL, 'i'},
+			{"keep-tokens", no_argument, NULL, 'k'},
+			{"lock", no_argument, NULL, 'l'},
+			{"mindays", required_argument, NULL, 'n'},
+			{"quiet", no_argument, NULL, 'q'},
+			{"repository", required_argument, NULL, 'r'},
+			{"status", no_argument, NULL, 'S'},
+			{"unlock", no_argument, NULL, 'u'},
+			{"warning", required_argument, NULL, 'w'},
+			{"maxdays", required_argument, NULL, 'x'},
+			{NULL, 0, NULL, '\0'}
+		};
 
-
-	while ((flag = getopt (argc, argv, "adei:kln:qr:Suw:x:")) != EOF) {
-		switch (flag) {
-		case 'a':
-			aflg++;
-			break;
-		case 'd':
-			dflg++;
-			anyflag = 1;
-			break;
-		case 'e':
-			eflg++;
-			anyflag = 1;
-			break;
-		case 'i':
-			inact = getnumber (optarg);
-			if (inact >= -1)
-				iflg++;
-			anyflag = 1;
-			break;
-		case 'k':
-			/* change only if expired, like Linux-PAM passwd -k. */
-			kflg++;	/* ok for users */
-			break;
-		case 'l':
-			lflg++;
-			anyflag = 1;
-			break;
-		case 'n':
-			age_min = getnumber (optarg);
-			nflg++;
-			anyflag = 1;
-			break;
-		case 'q':
-			qflg++;	/* ok for users */
-			break;
-		case 'S':
-			Sflg++;	/* ok for users */
-			break;
-		case 'u':
-			uflg++;
-			anyflag = 1;
-			break;
-		case 'w':
-			warn = getnumber (optarg);
-			if (warn >= -1)
-				wflg++;
-			anyflag = 1;
-			break;
-		case 'r':
-			/* -r repository (files|nis|nisplus) */
-			/* only "files" supported for now */
-			if (strcmp (optarg, "files") != 0) {
-				fprintf (stderr,
-					 _
-					 ("%s: repository %s not supported\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
+		while ((c =
+			getopt_long (argc, argv, "adei:kln:qr:Suw:x:",
+				     long_options, &option_index)) != -1) {
+			switch (c) {
+			case 'a':
+				aflg++;
+				break;
+			case 'd':
+				dflg++;
+				anyflag = 1;
+				break;
+			case 'e':
+				eflg++;
+				anyflag = 1;
+				break;
+			case 'i':
+				inact = getnumber (optarg);
+				if (inact >= -1)
+					iflg++;
+				anyflag = 1;
+				break;
+			case 'k':
+				/* change only if expired, like Linux-PAM passwd -k. */
+				kflg++;	/* ok for users */
+				break;
+			case 'l':
+				lflg++;
+				anyflag = 1;
+				break;
+			case 'n':
+				age_min = getnumber (optarg);
+				nflg++;
+				anyflag = 1;
+				break;
+			case 'q':
+				qflg++;	/* ok for users */
+				break;
+			case 'r':
+				/* -r repository (files|nis|nisplus) */
+				/* only "files" supported for now */
+				if (strcmp (optarg, "files") != 0) {
+					fprintf (stderr,
+						 _
+						 ("%s: repository %s not supported\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				break;
+			case 'S':
+				Sflg++;	/* ok for users */
+				break;
+			case 'u':
+				uflg++;
+				anyflag = 1;
+				break;
+			case 'w':
+				warn = getnumber (optarg);
+				if (warn >= -1)
+					wflg++;
+				anyflag = 1;
+				break;
+			case 'x':
+				age_max = getnumber (optarg);
+				xflg++;
+				anyflag = 1;
+				break;
+			default:
+				usage (E_BAD_ARG);
 			}
-			break;
-		case 'x':
-			age_max = getnumber (optarg);
-			xflg++;
-			anyflag = 1;
-			break;
-		default:
-			usage (E_BAD_ARG);
 		}
 	}
 
@@ -744,7 +767,6 @@ int main (int argc, char **argv)
 	 * command line if possible. Otherwise it is figured out from the
 	 * environment.
 	 */
-
 	pw = get_my_pwent ();
 	if (!pw) {
 		fprintf (stderr,
@@ -761,7 +783,6 @@ int main (int argc, char **argv)
 	 * The -a flag requires -S, no other flags, no username, and
 	 * you must be root.  --marekm
 	 */
-
 	if (aflg) {
 		if (anyflag || !Sflg || (optind < argc))
 			usage (E_USAGE);
@@ -794,7 +815,6 @@ int main (int argc, char **argv)
 	 * -S now ok for normal users (check status of my own account), and
 	 * doesn't require username.  --marekm
 	 */
-
 	if (anyflag && optind >= argc)
 		usage (E_USAGE);
 
@@ -817,7 +837,7 @@ int main (int argc, char **argv)
 	 * check if the change is allowed by SELinux policy.
 	 */
 	if ((pw->pw_uid != getuid ())
-	    && (checkPasswdAccess (PASSWD__PASSWD) != 0)) {
+	    && (selinux_check_passwd_access (PASSWD__PASSWD) != 0)) {
 #else
 	/*
 	 * If the UID of the user does not match the current real UID,
@@ -844,7 +864,6 @@ int main (int argc, char **argv)
 	/*
 	 * The user name is valid, so let's get the shadow file entry.
 	 */
-
 	sp = getspnam (name);
 	if (!sp)
 		sp = pwd_to_spwd (pw);
@@ -854,7 +873,6 @@ int main (int argc, char **argv)
 	/*
 	 * If there are no other flags, just change the password.
 	 */
-
 	if (!anyflag) {
 		STRFCPY (crypt_passwd, cp);
 
@@ -862,7 +880,6 @@ int main (int argc, char **argv)
 		 * See if the user is permitted to change the password. 
 		 * Otherwise, go ahead and set a new password.
 		 */
-
 		check_password (pw, sp);
 
 		/*
@@ -888,13 +905,12 @@ int main (int argc, char **argv)
 	 * against unexpected signals. Any keyboard signals are set to be
 	 * ignored.
 	 */
-
 	pwd_init ();
 
+#ifdef USE_PAM
 	/*
 	 * Don't set the real UID for PAM...
 	 */
-#ifdef USE_PAM
 	if (!anyflag) {
 		do_pam_passwd (name, qflg, kflg);
 		exit (E_SUCCESS);

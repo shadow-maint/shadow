@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-4.0.8\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-08-11 16:15+0200\n"
+"POT-Creation-Date: 2005-10-10 20:33+0200\n"
 "PO-Revision-Date: 2005-04-19 23:22+0300\n"
 "Last-Translator: Roman Festchook <linux@polesye.net>\n"
 "Language-Team:  <linux@polesye.net>\n"
@@ -100,6 +100,28 @@ msgstr "Пошти не має."
 msgid "You have mail."
 msgstr "Ви маєте пошту."
 
+#, fuzzy
+msgid "no change"
+msgstr "%s: без змін\n"
+
+msgid "a palindrome"
+msgstr ""
+
+msgid "case changes only"
+msgstr ""
+
+msgid "too similar"
+msgstr ""
+
+msgid "too simple"
+msgstr ""
+
+msgid "rotated"
+msgstr ""
+
+msgid "too short"
+msgstr ""
+
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Поганий пароль: %s.  "
@@ -137,6 +159,13 @@ msgstr "Невірна коренева тека \"%s\"\n"
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "Не можу змінити кореневу теку на \"%s\"\n"
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr ""
+
+#, fuzzy
+msgid "Unable to determine your tty name."
+msgstr "%s: Не можу визначити Ваше ім'я користувача.\n"
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -241,6 +270,10 @@ msgstr "%s: не можу відкрити файл паролей\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: невідомий користувач %s\n"
 
+#, fuzzy, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: не можу відкрити файл прихованих паролей\n"
+
 #, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr "%s: не можу заблокувати файл прихованих паролей\n"
@@ -248,6 +281,10 @@ msgstr "%s: не можу заблокувати файл прихованих �
 #, c-format
 msgid "%s: can't open shadow password file\n"
 msgstr "%s: не можу відкрити файл прихованих паролей\n"
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -272,10 +309,6 @@ msgstr "%s: не можу переписати файл прихованих п�
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: не можу переписати файл паролей\n"
-
-#, c-format
-msgid "%s: PAM chauthtok failed\n"
-msgstr "%s: помилка PAM chauthtok\n"
 
 #, c-format
 msgid ""
@@ -474,10 +507,6 @@ msgstr "%s є невірна оболонка.\n"
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Використовуйте: expiry {-f|-c}\n"
-
-#, c-format
-msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s: ЗАСТЕРЕЖЕННЯ! Програма повина бути Set-UID root!\n"
 
 #, c-format
 msgid "%s: unknown user\n"
@@ -876,22 +905,23 @@ msgstr "Використовуйте: id\n"
 msgid " groups="
 msgstr " групи="
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
 "Options:\n"
-"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"  -b, --before DAYS\tprint only lastlog records older than DAYS\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
 "Використання: lastlog [опції]\n"
 "\n"
 "Опції:\n"
-"  -u, --user ЛОГІН\tвивести записи останніх входів для користувача з "
-"ЛОГІНом\n"
 "  -h, --help\t\tвивести допомогу та вийти\n"
 "  -t, --time ДНІВ\tвивести лише записи свіжіші за ДНІВ\n"
+"  -u, --user ЛОГІН\tвивести записи останніх входів для користувача з "
+"ЛОГІНом\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -953,6 +983,16 @@ msgid " on `%.100s'"
 msgstr " на `%.100s'"
 
 #, c-format
+msgid "login: PAM Failure, aborting: %s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"\n"
+"Login incorrect\n"
+msgstr "Невірний логін"
+
+#, c-format
 msgid ""
 "\n"
 "%s login: "
@@ -962,6 +1002,10 @@ msgstr ""
 
 msgid "Login incorrect"
 msgstr "Невірний логін"
+
+#, c-format
+msgid "%s: failure forking: %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Застереження: login поновлено після тимчасового блокування.\n"
@@ -977,6 +1021,11 @@ msgstr "Останній вхід в систему: %.19s на %s"
 #, c-format
 msgid " from %.*s"
 msgstr " з %.*s"
+
+msgid ""
+"login time exceeded\n"
+"\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1054,23 +1103,31 @@ msgid "%s: error updating files\n"
 msgstr "%s: помилка оновлення файлу\n"
 
 #, c-format
-msgid "Usage: %s [-f|-s] [name]\n"
-msgstr "Використовуйте: %s [-f|-s] [ім'я]\n"
-
-#, c-format
-msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "     %s [-x макс] [-n мин] [-w застереження] [-i неактивний] ім'я\n"
-
-#, c-format
-msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "                %s {-l|-u|-d|-S|-e} ім'я\n"
+msgid ""
+"Usage: passwd [options] [login]\n"
+"\n"
+"Options:\n"
+"  -a, --all \t\t\treport password status on all accounts\n"
+"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tlock the named account\n"
+"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
+"  -S, --status\t\t\treport password status on the named account\n"
+"  -u, --unlock\t\t\tunlock the named account\n"
+"  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
+msgstr ""
 
 msgid "Old password: "
 msgstr "Старий пароль: "
-
-#, c-format
-msgid "Incorrect password for `%s'\n"
-msgstr "Невірний пароль для `%s'\n"
 
 #, c-format
 msgid ""
@@ -1230,6 +1287,10 @@ msgstr "Будьласка введіть Ваш власний пароль д�
 
 msgid "Sorry."
 msgstr "Вибачте."
+
+#, fuzzy, c-format
+msgid "%s: %s\n"
+msgstr "passwd: %s\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1477,6 +1538,10 @@ msgstr "Використовуйте: %s [-r] ім'я\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: помилка оновлення запису у базі груп\n"
 
+#, fuzzy, c-format
+msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgstr "%s: не можу видалити головну групу користувача.\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: не можу відкрити файл груп\n"
@@ -1632,35 +1697,5 @@ msgstr ""
 "`vipw' редагує /etc/passwd      `vipw -s' редагує /etc/shadow\n"
 "`vigr' редагує /etc/group       `vigr -s' редагує /etc/gshadow\n"
 
-#~ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
-#~ msgstr "Використовуйте: groupadd [-g gid [-o]] [-f] група\n"
-
-#, fuzzy
-#~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
-#~ msgstr "Використовуйте: useradd [-u uid [-o]] [-g група] [-G група,...] \n"
-
-#~ msgid ""
-#~ "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-#~ msgstr "      [-d домашня_тека] [-s shell] [-c коментар] [-m [-k шаблон]]\n"
-
-#~ msgid "               [-f inactive] [-e expire]\n"
-#~ msgstr "              [-f неактивний] [-e прострочений]\n"
-
-#, fuzzy
-#~ msgid "               [-p passwd] [-K KEY=VALUE] name\n"
-#~ msgstr "             [-p пароль] ім'я\n"
-
-#~ msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
-#~ msgstr "         useradd -D [-g група] [-b базова_тека] [-s оболонка]\n"
-
-#~ msgid "%s: -O requires NAME=VALUE\n"
-#~ msgstr "%s: -O вимагає ЗМІННА=ЗНАЧЕННЯ\n"
-
-#~ msgid "unknown uid: %u\n"
-#~ msgstr "невідомий uid: %u\n"
-
-#~ msgid "%s: uid %u is not unique\n"
-#~ msgstr "%s: uid %u не є унікальним\n"
-
-#~ msgid "%s: can't get unique uid\n"
-#~ msgstr "%s: не можу отримати унікальній uid\n"
+#~ msgid "%s: PAM chauthtok failed\n"
+#~ msgstr "%s: помилка PAM chauthtok\n"

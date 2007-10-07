@@ -31,8 +31,8 @@
 
 #ifndef USE_PAM
 
-#include "rcsid.h"
-RCSID ("$Id: obscure.c,v 1.12 2005/03/24 04:29:23 kloczek Exp $")
+#ident "$Id: obscure.c,v 1.14 2005/08/31 17:24:57 kloczek Exp $"
+
 
 /*
  * This version of obscure.c contains modifications to support "cracklib"
@@ -158,7 +158,7 @@ static const char *password_check (const char *old, const char *new,
 #endif
 
 	if (strcmp (new, old) == 0)
-		return "no change";
+		return _("no change");
 
 	newmono = str_lower (xstrdup (new));
 	oldmono = str_lower (xstrdup (old));
@@ -167,19 +167,19 @@ static const char *password_check (const char *old, const char *new,
 	strcat (wrapped, oldmono);
 
 	if (palindrome (oldmono, newmono))
-		msg = "a palindrome";
+		msg = _("a palindrome");
 
 	if (!msg && strcmp (oldmono, newmono) == 0)
-		msg = "case changes only";
+		msg = _("case changes only");
 
 	if (!msg && similar (oldmono, newmono))
-		msg = "too similar";
+		msg = _("too similar");
 
 	if (!msg && simple (old, new))
-		msg = "too simple";
+		msg = _("too simple");
 
 	if (!msg && strstr (wrapped, newmono))
-		msg = "rotated";
+		msg = _("rotated");
 
 #ifdef HAVE_LIBCRACK
 	/*
@@ -215,7 +215,7 @@ static const char *password_check (const char *old, const char *new,
 	newlen = strlen (new);
 
 	if (newlen < getdef_num ("PASS_MIN_LEN", 0))
-		return "too short";
+		return _("too short");
 
 	/*
 	 * Remaining checks are optional.

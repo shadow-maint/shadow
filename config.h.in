@@ -347,6 +347,9 @@
 /* Version number of package */
 #undef VERSION
 
+/* Define if you want to enable Audit messages */
+#undef WITH_AUDIT
+
 /* Build shadow with SELinux support */
 #undef WITH_SELINUX
 

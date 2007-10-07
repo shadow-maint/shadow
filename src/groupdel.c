@@ -29,37 +29,40 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: groupdel.c,v 1.23 2005/08/11 16:23:34 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
-#include <grp.h>
+#ident "$Id: groupdel.c,v 1.29 2005/10/04 21:05:12 kloczek Exp $"
+
 #include <ctype.h>
 #include <fcntl.h>
+#include <grp.h>
 #include <pwd.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #endif				/* USE_PAM */
+#include <stdio.h>
+#include <sys/types.h>
+#include "defines.h"
+#include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
-#include "defines.h"
+#ifdef	SHADOWGRP
+#include "sgroupio.h"
+#endif
+/*
+ * Global variables
+ */
 static char *group_name;
 static char *Prog;
 static int errors;
-
-#include "groupio.h"
+static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP
-#include "sgroupio.h"
-
 static int is_shadow_grp;
 #endif
 
 /*
  * exit status values
  */
-
 #define E_SUCCESS	0	/* success */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_NOTFOUND	6	/* specified group doesn't exist */
@@ -76,7 +79,6 @@ static void group_busy (gid_t);
 /*
  * usage - display usage message and exit
  */
-
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: groupdel group\n"));
@@ -88,7 +90,6 @@ static void usage (void)
  *
  *	grp_update() writes the new records to the group files.
  */
-
 static void grp_update (void)
 {
 	if (!gr_remove (group_name)) {
@@ -105,6 +106,10 @@ static void grp_update (void)
 		errors++;
 	}
 #endif				/* SHADOWGRP */
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group", group_name,
+		      group_id, 1);
+#endif
 	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
 	return;
 }
@@ -115,7 +120,6 @@ static void grp_update (void)
  *	close_files() closes all of the files that were opened for this
  *	new group.  This causes any modified entries to be written out.
  */
-
 static void close_files (void)
 {
 	if (!gr_close ()) {
@@ -139,7 +143,6 @@ static void close_files (void)
  *
  *	open_files() opens the two group files.
  */
-
 static void open_files (void)
 {
 	if (!gr_lock ()) {
@@ -171,7 +174,6 @@ static void open_files (void)
  *	for any user.  You must remove all users before you remove
  *	the group.
  */
-
 static void group_busy (gid_t gid)
 {
 	struct passwd *pwd;
@@ -196,7 +198,6 @@ static void group_busy (gid_t gid)
 	/*
 	 * Can't remove the group.
 	 */
-
 	fprintf (stderr, _("%s: cannot remove user's primary group.\n"), Prog);
 	exit (E_GROUP_BUSY);
 }
@@ -226,6 +227,10 @@ int main (int argc, char **argv)
 	pam_handle_t *pamh = NULL;
 	struct passwd *pampw;
 	int retval;
+#endif
+
+#ifdef WITH_AUDIT
+	audit_help_open ();
 #endif
 
 	/*
@@ -287,8 +292,15 @@ int main (int argc, char **argv)
 	if (!(grp = getgrnam (group_name))) {
 		fprintf (stderr, _("%s: group %s does not exist\n"),
 			 Prog, group_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
+			      group_name, -1, 0);
+#endif
 		exit (E_NOTFOUND);
 	}
+
+	group_id = grp->gr_gid;	/* LAUS */
+
 #ifdef	USE_NIS
 	/*
 	 * Make sure this isn't a NIS group
@@ -300,6 +312,10 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: group %s is a NIS group\n"),
 			 Prog, group_name);
 
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
+			      group_name, -1, 0);
+#endif
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {
 			fprintf (stderr, _("%s: %s is the NIS master\n"),
@@ -327,21 +343,14 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		retval = pam_chauthtok (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-		exit (1);
-	}
-
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
+	if (errors != 0)
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
+			      group_name, -1, 0);
+#endif
 	exit (errors == 0 ? E_SUCCESS : E_GRP_UPDATE);
 	/* NOT REACHED */
 }

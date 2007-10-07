@@ -33,8 +33,8 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID ("$Id: strtoday.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
+#ident "$Id: strtoday.c,v 1.11 2005/08/31 17:24:58 kloczek Exp $"
+
 #include "defines.h"
 #ifndef USE_GETDATE
 #define USE_GETDATE 1

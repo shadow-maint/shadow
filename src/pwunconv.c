@@ -29,21 +29,24 @@
 
 #include <config.h>
 
-#include "rcsid.h"
-RCSID (PKG_VER "$Id: pwunconv.c,v 1.18 2005/08/03 16:00:46 kloczek Exp $")
-#include "defines.h"
-#include <sys/types.h>
-#include <stdio.h>
+#ident "$Id: pwunconv.c,v 1.21 2005/09/07 15:00:45 kloczek Exp $"
+
 #include <fcntl.h>
 #include <pwd.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include <unistd.h>
+#include "defines.h"
+#include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
-#include "nscd.h"
-char *l64a ();
-
+/*
+ * Global variables
+ */
 static int shadow_locked = 0, passwd_locked = 0;
+
+char *l64a ();
 
 /* local function prototypes */
 static void fail_exit (int);
@@ -117,7 +120,6 @@ int main (int argc, char **argv)
 		 * put into the new file. Otherwise, the days are converted
 		 * to weeks and so on.
 		 */
-
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
 				 _("%s: can't update entry for user %s\n"),
