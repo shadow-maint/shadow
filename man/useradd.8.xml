@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.13 2005/07/10 17:17:38 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.14 2005/08/10 07:43:51 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -326,7 +326,7 @@
   
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>You may not add a user to an NIS group. This must be performed on
+    <para>You may not add a user to a NIS group. This must be performed on
       the NIS server.
     </para>
   </refsect1>

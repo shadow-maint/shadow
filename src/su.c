@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.39 2005/07/18 10:14:39 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.41 2005/08/04 19:13:43 kloczek Exp $")
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
@@ -584,10 +584,9 @@ int main (int argc, char **argv)
 #endif				/* !USE_PAM */
 
 	signal (SIGINT, SIG_DFL);
-#ifndef USE_PAM
-	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
+	signal (SIGQUIT, SIG_DFL);
 
-	/* XXX very similar code duplicated in libmisc/setupenv.c */
+	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (!cp) {
 		addenv ("PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=')) {
@@ -597,7 +596,6 @@ int main (int argc, char **argv)
 	}
 
 	environ = newenvp;	/* make new environment active */
-#endif				/* !USE_PAM */
 
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */

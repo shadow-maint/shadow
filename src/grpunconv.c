@@ -11,7 +11,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpunconv.c,v 1.14 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpunconv.c,v 1.15 2005/08/09 15:27:51 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -111,6 +111,9 @@ int main (int argc, char **argv)
 
 	sgr_unlock ();
 	gr_unlock ();
+
+	nscd_flush_cache ("group");
+
 	return 0;
 }
 #else				/* !SHADOWGRP */

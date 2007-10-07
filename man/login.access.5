@@ -1,43 +1,48 @@
-.\"$Id: login.access.5,v 1.6 2005/04/02 16:10:24 kloczek Exp $
-.\" this is comment
-.TH LOGIN.ACCESS 5
-.\" .Dt SKEY.ACCESS 5
-.\" .Os FreeBSD 1.2
-.SH NAME
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOGIN.ACCESS" "5" "08/03/2005" "" ""
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
 login.access \- Login access control table
-.SH DESCRIPTION
-The \fIlogin.access\fR file specifies (user, host) combinations and/or
-(user, tty) combinations for which a login will be either accepted or
-refused.
+.SH "DESCRIPTION"
 .PP
-When someone logs in, the \fIlogin.access\fR is scanned for the first entry
-that matches the (user, host) combination, or, in case of non\-networked
-logins, the first entry that matches the (user, tty) combination. The
-permissions field of that table entry determines whether the login will be
-accepted or refused.
+The 
+\fIlogin.access\fR 
+file specifies (user, host) combinations and/or (user, tty) combinations for which a login will be either accepted or refused.
 .PP
-Each line of the login access control table has three fields separated by a
-":" character:
-.sp 1
-.IR 	permission : users : origins
-.sp 1
-The first field should be a "\fB+\fR" (access granted) or "\fB\-\fR" (access
-denied) character. The second field should be a list of one or more login
-names, group names, or \fBALL\fR (always matches). The third field should be
-a list of one or more tty names (for non\-networked logins), host names,
-domain names (begin with "\fB.\fR"), host addresses, internet network
-numbers (end with "\fB.\fR"), \fBALL\fR (always matches) or \fBLOCAL\fR
-(matches any string that does not contain a "\fB.\fR" character). If you run
-NIS you can use @netgroupname in host or user patterns.
+When someone logs in, the 
+\fIlogin.access\fR 
+is scanned for the first entry that matches the (user, host) combination, or, in case of non\-networked logins, the first entry that matches the (user, tty) combination. The permissions field of that table entry determines whether the login will be accepted or refused.
 .PP
-The \fBEXCEPT\fR operator makes it possible to write very compact rules.
+Each line of the login access control table has three fields separated by a ":" character:
 .PP
-The group file is searched only when a name does not match that of the
-logged\-in user. Only groups are matched in which users are explicitly
-listed: the program does not look at a user's primary group id value.
-.SH FILES
-\fI/etc/loginn.defs\fR	\- shadow password suite configuration
-.SH SEE ALSO
-.BR login (1)
-.SH AUTHOR
+ \fIpermission\fR:\fIusers\fR:\fI origins \fR
+.PP
+The first field should be a "\fI+\fR" (access granted) or "\fI\-\fR" (access denied) character. The second field should be a list of one or more login names, group names, or 
+\fIALL\fR 
+(always matches). The third field should be a list of one or more tty names (for non\-networked logins), host names, domain names (begin with "."), host addresses, internet network numbers (end with "."), 
+\fIALL\fR 
+(always matches) or 
+\fI LOCAL \fR 
+(matches any string that does not contain a "." character). If you run NIS you can use @netgroupname in host or user patterns.
+.PP
+The 
+\fIEXCEPT\fR 
+operator makes it possible to write very compact rules.
+.PP
+The group file is searched only when a name does not match that of the logged\-in user. Only groups are matched in which users are explicitly listed: the program does not look at a user's primary group id value.
+.SH "FILES"
+.PP
+ \fI/etc/loginn.defs\fR 
+\- shadow password suite configuration
+.SH "SEE ALSO"
+.PP
+\fBlogin\fR(1)
+.SH "AUTHOR"
+.PP
 Guido van Rooij

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.8 2005/06/30 19:26:08 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.9 2005/08/10 07:45:10 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>USERDEL</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -111,7 +111,7 @@
     <para><command>userdel</command> will not allow you to remove an account if
       the user is currently logged in. You must kill any running processes
       which belong to an account that you are deleting. You may not remove
-      any NIS attributes on an NIS client. This must be performed on the NIS
+      any NIS attributes on a NIS client. This must be performed on the NIS
       server.
     </para>
   </refsect1>

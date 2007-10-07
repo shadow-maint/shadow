@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.23 2005/05/25 19:31:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: newusers.c,v 1.26 2005/08/11 16:23:34 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -48,7 +48,6 @@ RCSID (PKG_VER "$Id: newusers.c,v 1.23 2005/05/25 19:31:51 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 static char *Prog;
 
@@ -553,6 +552,10 @@ int main (int argc, char **argv)
 		(void) pw_unlock ();
 		exit (1);
 	}
+
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+
 	(void) gr_unlock ();
 	if (is_shadow)
 		spw_unlock ();

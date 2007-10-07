@@ -30,9 +30,10 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.37 2005/07/18 13:17:45 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.41 2005/08/11 13:45:41 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
+#include <getopt.h>
 #include <grp.h>
 #include <ctype.h>
 #include <fcntl.h>
@@ -94,7 +95,16 @@ static void fail_exit (int);
 
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: groupadd [-g gid [-o]] [-f] group\n"));
+	fprintf (stderr, _("Usage: groupadd [options] group\n"
+			   "\n"
+			   "Options:\n"
+			   "  -f, --force 		force exit with success status if the specified\n"
+			   "				group already exists\n"
+			   "  -g, --gid GID		use GID for the new group\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -K, --key KEY=VALUE		overrides /etc/login.defs defaults\n"
+			   "  -o, --non-unique		allow create group with duplicate\n"
+			   "				(non-unique) GID\n"));
 	exit (E_USAGE);
 }
 
@@ -283,80 +293,6 @@ static void check_new_name (void)
 }
 
 /*
- * process_flags - perform command line argument setting
- *
- *	process_flags() interprets the command line arguments and sets the
- *	values that the user will be created with accordingly. The values
- *	are checked for sanity.
- */
-
-static void process_flags (int argc, char **argv)
-{
-	char *cp;
-	int arg;
-
-	while ((arg = getopt (argc, argv, "fg:K:o")) != EOF) {
-		switch (arg) {
-		case 'f':
-			/*
-			 * "force" - do nothing, just exit(0), if the
-			 * specified group already exists. With -g, if
-			 * specified gid already exists, choose another
-			 * (unique) gid (turn off -g). Based on the RedHat's
-			 * patch from shadow-utils-970616-9.
-			 */
-			fflg++;
-			break;
-		case 'g':
-			gflg++;
-			if (!isdigit (optarg[0]))
-				usage ();
-
-			group_id = strtoul (optarg, &cp, 10);
-			if (*cp != '\0') {
-				fprintf (stderr,
-					 _("%s: invalid group %s\n"), Prog,
-					 optarg);
-				fail_exit (E_BAD_ARG);
-			}
-			break;
-		case 'K':
-			/*
-			 * override login.defs defaults (-K name=value)
-			 * example: -K GID_MIN=100 -K GID_MAX=499
-			 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
-			 */
-			cp = strchr (optarg, '=');
-			if (!cp) {
-				fprintf (stderr,
-					 _("%s: -K requires KEY=VALUE\n"),
-					 Prog);
-				exit (E_BAD_ARG);
-			}
-			/* terminate name, point to value */
-			*cp++ = '\0';
-			if (putdef_str (optarg, cp) < 0)
-				exit (E_BAD_ARG);
-			break;
-		case 'o':
-			oflg++;
-			break;
-		default:
-			usage ();
-		}
-	}
-
-	if (oflg && !gflg)
-		usage ();
-
-	if (optind != argc - 1)
-		usage ();
-
-	group_name = argv[argc - 1];
-	check_new_name ();
-}
-
-/*
  * close_files - close all of the files that were opened
  *
  *	close_files() closes all of the files that were opened for this new
@@ -456,7 +392,88 @@ int main (int argc, char **argv)
 
 	OPENLOG ("groupadd");
 
-	process_flags (argc, argv);
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		char *cp;
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"force", no_argument, NULL, 'f'},
+			{"gid", required_argument, NULL, 'g'},
+			{"help", no_argument, NULL, 'h'},
+			{"key", required_argument, NULL, 'K'},
+			{"non-unique", required_argument, NULL, 'o'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "fg:hK:o", long_options,
+				     &option_index)) != -1) {
+			switch (c) {
+			case 'f':
+				/*
+				 * "force" - do nothing, just exit(0), if the
+				 * specified group already exists. With -g, if
+				 * specified gid already exists, choose another
+				 * (unique) gid (turn off -g). Based on the RedHat's
+				 * patch from shadow-utils-970616-9.
+				 */
+				fflg++;
+				break;
+			case 'g':
+				gflg++;
+				if (!isdigit (optarg[0]))
+					usage ();
+
+				group_id = strtoul (optarg, &cp, 10);
+				if (*cp != '\0') {
+					fprintf (stderr,
+						 _("%s: invalid group %s\n"),
+						 Prog, optarg);
+					fail_exit (E_BAD_ARG);
+				}
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 'K':
+				/*
+				 * override login.defs defaults (-K name=value)
+				 * example: -K GID_MIN=100 -K GID_MAX=499
+				 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
+				 */
+				cp = strchr (optarg, '=');
+				if (!cp) {
+					fprintf (stderr,
+						 _
+						 ("%s: -K requires KEY=VALUE\n"),
+						 Prog);
+					exit (E_BAD_ARG);
+				}
+				/* terminate name, point to value */
+				*cp++ = '\0';
+				if (putdef_str (optarg, cp) < 0)
+					exit (E_BAD_ARG);
+				break;
+			case 'o':
+				oflg++;
+				break;
+			default:
+				usage ();
+			}
+		}
+	}
+
+	if (oflg && !gflg)
+		usage ();
+
+	if (optind != argc - 1)
+		usage ();
+
+	group_name = argv[argc - 1];
+	check_new_name ();
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -488,8 +505,6 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
-
-	OPENLOG ("groupadd");
 #endif				/* USE_PAM */
 
 #ifdef SHADOWGRP

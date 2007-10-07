@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.19 2005/05/25 18:20:22 kloczek Exp $
+ * $Id: prototypes.h,v 1.22 2005/08/02 10:50:51 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -84,21 +84,6 @@ extern int gr_dbm_present (void);
 /* grent.c */
 extern int putgrent (const struct group *, FILE *);
 
-/* grpack.c */
-extern int gr_pack (const struct group *, char *);
-extern int gr_unpack (char *, int, struct group *);
-
-#ifdef SHADOWGRP
-/* gsdbm.c */
-extern int sg_dbm_remove (const char *);
-extern int sg_dbm_update (const struct sgrp *);
-extern int sg_dbm_present (void);
-
-/* gspack.c */
-extern int sgr_pack (const struct sgrp *, char *);
-extern int sgr_unpack (char *, int, struct sgrp *);
-#endif
-
 /* hushed.c */
 extern int hushed (const struct passwd *);
 
@@ -142,15 +127,6 @@ extern void passwd_check (const char *, const char *, const char *);
 /* pwd_init.c */
 extern void pwd_init (void);
 
-/* pwdbm.c */
-extern int pw_dbm_remove (const struct passwd *);
-extern int pw_dbm_update (const struct passwd *);
-extern int pw_dbm_present (void);
-
-/* pwpack.c */
-extern int pw_pack (const struct passwd *, char *);
-extern int pw_unpack (char *, int, struct passwd *);
-
 /* rlogin.c */
 extern int do_rlogin (const char *, char *, int, char *, int);
 
@@ -170,10 +146,6 @@ extern void setup_env (struct passwd *);
 
 /* shell.c */
 extern void shell (const char *, const char *);
-
-/* sppack.c */
-extern int spw_pack (const struct spwd *, char *);
-extern int spw_unpack (char *, int, struct spwd *);
 
 /* strtoday.c */
 extern long strtoday (const char *);

@@ -1,0 +1,69 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: chsh.1,v 1.3 2005/04/21 21:03:16 kloczek Exp $
+.\" Copyright 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.TH CHSH 1   
+.SH NOME
+chsh \- cambia la shell di login
+.SH SINTASSI
+.TP 5
+\fBchsh\fP [\fB\-s\fP \fIshell_di_login\fP] [\fIutente\fP]
+.SH DESCRIZIONE
+\fBchsh\fP cambia la shell di login dell'utente, in altre parole determina il 
+comando iniziale eseguito quando un utente fa il login. Un utente qualsiasi 
+può cambiare la shell di login solo per il proprio account, mentre 
+l'amministratore può cambiare la shell di login per ogni account.
+.PP
+L'unica limitazione sulla scelta della shell di login è che il nome del 
+comando deve essere presente in \fI/etc/shells\fP; fa eccezione 
+l'amministratore di sistema, che è libero di scegliere qualsiasi valore. Un 
+account con una shell di login limitata non può cambiare la propria shell 
+di login. Per questo motivo è sconsigliato includere \fB/bin/rsh\fP in 
+\fI/etc/shells\fP: se accidentalmente un utente selezionasse una shell 
+limitata, non potrebbe più tornare alla shell di login che usava 
+originariamente.
+.PP
+.SH OPZIONI
+Se non viene specificata l'opzione \fB\-s\fP, \fBchsh\fP opera in modalità 
+interattiva, mostrando tra parentesi quadre la shell di login attuale e 
+chiedendo all'utente di selezionarne una nuova. Inserire un nuovo valore per 
+cambiare la shell, oppure lasciare la riga vuota per continuare a usare 
+quella attuale.
+.SH FILE
+\fI/etc/passwd\fP	\- informazioni sugli account degli utenti
+.br
+\fI/etc/shells\fP	\- elenco delle shell di login ammesse
+.SH "VEDERE ANCHE"
+\fBchfn\fP(1), \fBpasswd\fP(5)
+.SH AUTORE
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+.SH TRADUZIONE
+.nf
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

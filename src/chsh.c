@@ -30,27 +30,28 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chsh.c,v 1.29 2005/04/06 04:26:06 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
+RCSID (PKG_VER "$Id: chsh.c,v 1.30 2005/07/24 15:22:45 kloczek Exp $")
 #include <fcntl.h>
-#include <signal.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
-#include "pwio.h"
-#include "getdef.h"
-#include "pwauth.h"
-#include "nscd.h"
-#ifdef HAVE_SHADOW_H
-#include <shadow.h>
-#endif
-#ifdef USE_PAM
-#include "pam_defs.h"
-#endif
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
+#endif
+#ifdef HAVE_SHADOW_H
+#include <shadow.h>
+#endif
+#include "defines.h"
+#include "exitcodes.h"
+#include "getdef.h"
+#include "nscd.h"
+#include "prototypes.h"
+#include "pwauth.h"
+#include "pwio.h"
+#ifdef USE_PAM
+#include "pam_defs.h"
 #endif
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
@@ -74,7 +75,7 @@ static int restricted_shell (const char *);
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-s shell] [name]\n"), Prog);
-	exit (1);
+	exit (E_USAGE);
 }
 
 /*
@@ -399,5 +400,5 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 	closelog ();
-	exit (0);
+	exit (E_SUCCESS);
 }

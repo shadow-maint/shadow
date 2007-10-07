@@ -1,0 +1,27 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: vipw.8,v 1.3 2005/04/21 21:03:16 kloczek Exp $
+.TH VIPW 8 26/09/1997  
+.SH NOME
+vipw, vigr \- modificano i file delle password, dei gruppi, delle shadow 
+password o dei gruppi shadow
+.SH SINTASSI
+\fBvipw\fP [\fB\-s\fP]
+.br
+\fBvigr\fP [\fB\-s\fP]
+.SH DESCRIZIONE
+\fBvipw\fP e \fBvigr\fP permettono di modificare rispettivamente i file 
+\fI/etc/passwd\fP e \fI/etc/group\fP. Con l'opzione \fB\-s\fP, vengono aperte le 
+versioni shadow di quei file, rispettivamente \fI/etc/shadow\fP e 
+\fI/etc/gshadow\fP. I programmi si occupano di impostare i lock necessari per 
+evitare la corruzione dei file. Per determinare l'editor da usare, i 
+programmi prima provano con la variabile d'ambiente \fBVISUAL\fP, poi con la 
+variabile d'ambiente \fBEDITOR\fP e infine con l'editor predefinito, \fBvi\fP.
+.SH "VEDERE ANCHE"
+\fBgroup\fP(5), \fBpasswd\fP(5), \fBshadow\fP(5)
+.SH TRADUZIONE
+.nf
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

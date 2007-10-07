@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chage.1'>
-  <!--  $Id: chage.1.xml,v 1.10 2005/06/15 12:39:27 kloczek Exp $  -->
+  <!--  $Id: chage.1.xml,v 1.15 2005/08/10 08:25:00 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>chage</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -25,7 +25,7 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para><command>chage</command> command changes the number of days
-      between passwordchanges and the date of the last password change. 
+      between password changes and the date of the last password change. 
       This information is used by the system to determine when a user must
       change her password.
     </para>
@@ -60,10 +60,11 @@
             accounted is locked. The date may also be expressed in the
             format YYYY-MM-DD (or the format more commonly used in your
             area). A user whose account is locked must contact the system
-            administrator before being able to use the system again. Passing
-            the number <emphasis remap='I'>-1</emphasis> as the <emphasis
-            remap='I'>EXPIRE_DATE</emphasis> will remove an accounts
-            expiration date.
+            administrator before being able to use the system again.
+	  </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
+	    remap='I'>EXPIRE_DATE</emphasis> will remove an account expiration date.
           </para>
         </listitem>
       </varlistentry>
@@ -76,9 +77,12 @@
             Set the number of days of inactivity after a password has
             expired before the account is locked. The <emphasis
             remap='I'>INACTIVE</emphasis> option is the number of days of
-            inactivity. A value of 0 disables this feature. A user whose
-            account is locked must contact the system administrator before
-            being able to use the system again.
+            inactivity. A user whose account is locked must contact the system
+	    administrator before being able to use the system again.
+	  </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
+	    remap='I'>INACTIVE</emphasis> will remove an accounts inactivity.
           </para>
         </listitem>
       </varlistentry>
@@ -114,9 +118,13 @@
             When <emphasis remap='I'>MAX_DAYS</emphasis> plus <emphasis
             remap='I'>LAST_DAY</emphasis> is less than the current day, the
             user will be required to change her password before being able
-            to use her account. This occurrence can be planned for in
+            to use her account. This occurence can be planned for in
             advance by use of the <option>-W</option> option, which provides
             the user with advance warning.
+          </para>
+	  <para>
+	    Passing the number <emphasis remap='I'>-1</emphasis> as the <emphasis
+	    remap='I'>MAX_DAYS</emphasis> will remove checking a password validation.
           </para>
         </listitem>
       </varlistentry>

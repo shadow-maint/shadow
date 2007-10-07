@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='logoutd8'>
-  <!-- $Id: logoutd.8.xml,v 1.6 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!-- $Id: logoutd.8.xml,v 1.7 2005/08/03 16:29:14 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>LOGOUTD</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -26,8 +26,8 @@
       <filename>/etc/rc</filename>. The <filename>/var/run/utmp</filename>
       file is scanned periodically and each user name is checked to see if
       the named user is permitted on the named port at the current time. 
-      Any login session which is violating the restrictions in <filename>
-      /etc/porttime</filename> is terminated.
+      Any login session which is violating the restrictions in
+      <filename>/etc/porttime</filename> is terminated.
     </para>
   </refsect1>
   

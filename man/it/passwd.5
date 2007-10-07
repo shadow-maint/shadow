@@ -1,0 +1,136 @@
+.\" $Id: passwd.5,v 1.2 2005/04/05 19:08:54 kloczek Exp $
+.\" Copyright (c) 1993 Michael Haardt (u31b3hs@pool.informatik.rwth\-aachen.de)
+.\" Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" Traduzione in italiano di Giovanni Bortolozzo <borto@dei.unipd.it>
+.\" Agosto 1996
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 10:46:28 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Aug 21 18:12:27 1994 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Jun 18 01:53:57 1995 by Andries Brouwer (aeb@cwi.nl)
+.\" Modified Mon Jan  5 20:24:40 MET 1998 by Michael Haardt
+.\"  (michael@cantor.informatik.rwth\-aachen.de)
+.TH PASSWD 5 "5 gennaio 1988" "Linux" "Linux Programmer's Manual"
+.SH NOME
+passwd \- file delle password
+.SH DESCRIZIONE
+.B Passwd
+è un file di testo che contiene un elenco degli account sul sistema, e
+per ciascuno di questi riporta alcune informazioni utili come user ID,
+group ID, home directory, ecc. Spesso contiene anche le password
+criptate di ciascun account. Il file delle password dovrebbe avere
+permessi di lettura per tutti (molte utility, come
+.BR ls (1),
+ne fanno uso per associare lo user ID allo user name), ma permesso di
+scrittura solo per il superuser.
+.PP
+Nei buoni tempi andati, il permesso di lettura per tutti non era un
+grosso problema: chiunque poteva leggere le password criptate, ma i
+calcolatori erano troppo lenti per decifrare una password scelta
+bene. Soprattutto, si supponeva di lavorare fra amici. Oggigiorno,
+molti usano una qualche versione di shadow password (chiavi ombra), in
+cui
+.I /etc/passwd
+contiene degli * al posto delle password criptate, che a loro volta
+sono nel file \fI/etc/shadow\fP, che solo il superuser può leggere.
+.PP
+Sia che si utilizzino  o meno le shadow password, molti amministratori di
+sistema usano un asterisco nel campo della password per far sì che un
+utente non possa autenticarsi con una password (vedi le note più
+sotto).
+.PP
+Se si crea una nuova login, si metta un asterisco nel campo della
+password, e poi si usi il programma
+.BR passwd (1)
+per riempirlo.
+.PP
+C'è una voce per riga, ed ogni riga ha il formato:
+.sp
+.RS
+account:passwd:UID:GID:GECOS:directory:shell
+.RE
+.sp
+Il significato dei campi è il seguente:
+.sp
+.RS
+.TP 1.0in
+.I account
+il nome dell'utente nel sistema. Non dovrebbe contenere maiuscole.
+.TP
+.I password
+la password criptata o un asterisco.
+.TP
+.I UID
+l'identificativo numerico dell'utente (UID = User IDentifier).
+.TP
+.I GID
+l'identificativo numerico del gruppo principale per l'utente (GID =
+Group IDentifier).
+.TP
+.I GECOS
+Questo campo è opzionale e viene usato solo per fornire
+informazioni. Di solito contiene il nome per esteso dell'utente. GECOS
+sta per General Electric Comprehensive Operating System, (sistema
+operativo comprensivo della General Electric), ribattezzato GCOS
+quando la divisione grandi sistemi della GE fu venduta alla
+Honeywell. Dennis Ritchie riferì: «A volte dovevamo spedire una stampa
+o un gruppo di lavori alla macchina GCOS. Il campo del gcos nel file
+delle password era un posto in cui sbattere le informazioni per la
+$IDENTcard. Per niente elegante.»
+.TP
+.I directory
+la $HOME directory dell'utente.
+.TP
+.I shell
+il programma lanciato al login (se è vuoto, viene usato 
+.BR /bin/sh ).
+Se punta ad un programma che non esiste, l'utente non potrà avere
+accesso tramite
+.BR login (1).
+.RE
+.SH NOTE
+Se si vuole creare un gruppo di utenti, il loro GID deve
+essere uguale e ci deve essere una voce nel file \fI/etc/group\fP, o il 
+gruppo non esisterà.
+.PP
+Se la password criptata è un asterisco, l'utente non potrà fare login
+tramite
+.BR login (1).
+ma potrà ugualmente accedere al suo account usando
+.BR rlogin (1),
+far girare processi esistenti o iniziarne nuovi con
+.BR rsh (1),
+.BR cron (1),
+.BR at (1)
+o filtri per la posta, ecc. Bloccare un account semplicemente
+modificando il campo della shell ha lo stesso effetto e in più
+permette l'uso di
+.BR su (1).
+.SH FILE
+.I /etc/passwd
+.SH "VEDERE ANCHE"
+.BR passwd (1),
+.BR login (1),
+.BR su (1),
+.BR group (5),
+.BR shadow (5)

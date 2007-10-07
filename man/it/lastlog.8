@@ -1,0 +1,76 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: lastlog.8,v 1.7 2005/04/21 21:03:16 kloczek Exp $
+.\" Copyright 1992, Phillip Street and Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
+.TH LASTLOG 8   
+.SH NOME
+lastlog \- esamina il file degli ultimi accessi
+.SH SINTASSI
+.TP 8
+\fBlastlog\fP [\fBopzioni\fP]
+.SH DESCRIZIONE
+.PP
+\fBlastlog\fP mostra il log degli ultimi accessi, contenuto nel file 
+\fI/var/log/lastlog\fP. Le informazioni mostrate sono il \fBnome utente\fP, la 
+\fBporta\fP, e la \fBdata dell'ultimo accesso\fP. Il comportamento predefinito 
+(nessuna opzione specificata) è di mostrare i record di ultimo accesso per 
+tutti gli utenti, nell'ordine in cui compaiono in \fB/etc/passwd\fP.
+.SH OPZIONI
+.TP
+Il comando \fBlastlog\fP accetta le seguenti opzioni:
+.IP "\fB\-h\fP, \fB\-\-help\fP"
+Mostra un messaggio di aiuto ed esce.
+.IP "\fB\-t\fP, \fB\-\-time\fP \fIGIORNI\fP"
+Mostra solo i record di ultimo accesso più recenti di un numero di 
+\fIGIORNI\fP.
+.IP "\fB\-u\fP, \fB\-\-user\fP \fILOGIN\fP"
+Mostra il record di ultimo accesso per l'utente specificato da \fILOGIN\fP.
+.TP
+L'opzione \fB\-t\fP ha la precedenza sull'uso di \fB\-u\fP.
+.PP
+Se l'utente non ha mai effettuato accessi al sistema viene mostrato, al 
+posto della porta e della data, il messaggio \fB"**Nessun accesso 
+effettuato**"\fP.
+.SH FILE
+\fI/var/log/lastlog\fP	\- file di log degli ultimi accessi
+.SH AVVISI/CAVEAT
+Se ci sono dei grossi scarti tra i valori di UID, il programma lastlog può 
+restare in esecuzione per un tempo prolungato senza produrre output sullo 
+schermo (ad es. se mmdf=800 e l'ultimo UID vale 170, il programma sembrerà 
+bloccato come se esaminasse gli UID tra 171 e 799).
+.SH AUTORI
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.br
+Phillip Street
+.SH TRADUZIONE
+.nf
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

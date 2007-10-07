@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.67 2005/07/11 11:58:00 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.75 2005/08/11 16:23:34 kloczek Exp $")
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -41,7 +41,6 @@ RCSID (PKG_VER "$Id: useradd.c,v 1.67 2005/07/11 11:58:00 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 #include <stdio.h>
 #include <sys/stat.h>
@@ -343,7 +342,7 @@ static void get_defaults (void)
 		}
 
 		/*
-		 * Create by default user mail spoll or not ?
+		 * Create by default user mail spool or not ?
 		 */
 		else if (MATCH (buf, CREATE_MAIL_SPOOL)) {
 			if (*cp == '\0')
@@ -634,7 +633,7 @@ static void usage (void)
 	fprintf (stderr, _("Usage: useradd [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
-			   "  -b, --base-dir BASE_DIR	base directory for the the new user account\n"
+			   "  -b, --base-dir BASE_DIR	base directory for the new user account\n"
 			   "				home directory\n"
 			   "  -c, --comment COMMENT		set the GECOS field for the new user account\n"
 			   "  -d, --home-dir HOME_DIR	home directory for the new user account\n"
@@ -1563,7 +1562,7 @@ int main (int argc, char **argv)
 	 * - open the files,
 	 * - create the user entries,
 	 * - create the home directory,
-	 * - create user mail spoll,
+	 * - create user mail spool,
 	 * - flush nscd caches for passwd and group services,
 	 * - then close and update the files.
 	 */
@@ -1574,7 +1573,14 @@ int main (int argc, char **argv)
 
 	if (mflg) {
 		create_home ();
-		copy_tree (def_template, user_home, user_id, user_gid);
+		if (home_added)
+			copy_tree (def_template, user_home, user_id, user_gid);
+		else
+			fprintf (stderr,
+				 _
+				 ("%s: warning: the home directory already exists.\n"
+				  "Not copying any file from skel directory into it.\n"), Prog);
+
 	} else if (getdef_str ("CREATE_HOME")) {
 		/*
 		 * RedHat added the CREATE_HOME option in login.defs in their

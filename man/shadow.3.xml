@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='shadow.3'>
-  <!--  $Id: shadow.3.xml,v 1.9 2005/06/20 08:42:12 kloczek Exp $ -->
+  <!--  $Id: shadow.3.xml,v 1.10 2005/08/03 16:29:14 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>shadow</refentrytitle>
     <manvolnum>3</manvolnum>
@@ -58,8 +58,8 @@
       The structure in the <emphasis remap='I'>#include</emphasis> file is:
     </para>
     <programlisting>struct spwd {
-      char			*sp_namp; /* user login name */
-      char			*sp_pwdp; /* encrypted password */
+      char		*sp_namp; /* user login name */
+      char		*sp_pwdp; /* encrypted password */
       long int		sp_lstchg; /* last password change */
       long int		sp_min; /* days until change allowed. */
       long int		sp_max; /* days before change required */

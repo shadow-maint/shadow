@@ -1,0 +1,54 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: expiry.1,v 1.1 2005/04/21 21:03:16 kloczek Exp $
+.\" Copyright 1990 - 1994 Julianne Frances Haugh
+.\" All rights reserved.
+.\" Modified for expiry by Ben Collins <bcollins@debian.org>, 1999
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH EXPIRY 1   
+.SH NOME
+expiry \- controlla e fa rispettare la scadenza della password
+.SH SINTASSI
+.TP 6
+\fBexpiry\fP [\fB\-c\fP] [\fB\-f\fP]
+.SH DESCRIZIONE
+\fBexpiry\fP controlla (\fB\-c\fP) la scadenza della password in uso e, se 
+necessario, richiede (\fB\-f\fP) che venga cambiata. Questo comando può essere 
+eseguito da un utente qualsiasi.
+.SH FILE
+\fI/etc/passwd\fP	\- informazioni sugli account degli utenti
+.br
+\fI/etc/shadow\fP	\- informazioni sicure sugli account degli utenti
+.SH "VEDERE ANCHE"
+\fBpasswd\fP(5), \fBshadow\fP(5)
+.SH AUTORE
+Ben Collins <bcollins@debian.org>
+.SH TRADUZIONE
+.nf
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

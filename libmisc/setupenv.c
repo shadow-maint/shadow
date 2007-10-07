@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: setupenv.c,v 1.17 2005/07/06 11:49:21 kloczek Exp $")
+RCSID ("$Id: setupenv.c,v 1.18 2005/08/09 18:09:42 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -259,12 +259,6 @@ void setup_env (struct passwd *info)
 		/* only value specified without "PATH=" */
 		addenv ("PATH", cp);
 	}
-
-	/*
-	 * MAILDIR environment variable for Qmail
-	 */
-	if ((cp = getdef_str ("QMAIL_DIR")))
-		addenv_path ("MAILDIR", info->pw_dir, cp);
 
 	/*
 	 * Create the MAIL environmental variable and export it.  login.defs

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.66 2005/07/07 15:32:50 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.67 2005/08/11 11:26:11 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -964,36 +964,27 @@ int main (int argc, char **argv)
 	/*
 	 * We must fork before setuid() because we need to call
 	 * pam_close_session() as root.
-	 *
-	 * Note: not true in other (non-Linux) PAM implementations, where
-	 * the parent process of login (init, telnetd, ...) is responsible
-	 * for calling pam_close_session(). This avoids an extra process for
-	 * each login. Maybe we should do this on Linux too? We let the
-	 * admin configure whether they need to keep login around to close
-	 * sessions.
 	 */
-	if (getdef_bool ("CLOSE_SESSIONS")) {
-		signal (SIGINT, SIG_IGN);
-		child = fork ();
-		if (child < 0) {
-			/* error in fork() */
-			fprintf (stderr,
-				 "login: failure forking: %s",
-				 strerror (errno));
-			PAM_END;
-			exit (0);
-		} else if (child) {
-			/*
-			 * parent - wait for child to finish, then cleanup
-			 * session
-			 */
-			wait (NULL);
-			PAM_END;
-			exit (0);
-		}
-		/* child */
+	signal (SIGINT, SIG_IGN);
+	child = fork ();
+	if (child < 0) {
+		/* error in fork() */
+		fprintf (stderr, "login: failure forking: %s",
+			 strerror (errno));
+		PAM_END;
+		exit (0);
+	} else if (child) {
+		/*
+		 * parent - wait for child to finish, then cleanup
+		 * session
+		 */
+		wait (NULL);
+		PAM_END;
+		exit (0);
 	}
+	/* child */
 #endif
+
 	/* We call set_groups() above because this clobbers pam_groups.so */
 #ifndef USE_PAM
 	if (setup_uid_gid (&pwent, is_console))

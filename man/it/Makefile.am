@@ -1,9 +1,6 @@
 
 mandir = @mandir@/it
 
-# Links to missing pages:
-#	grpconv.8 \
-#	grpunconv.8 \
 man_MANS = \
 	chage.1 \
 	chfn.1 \

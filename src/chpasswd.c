@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.26 2005/05/25 19:31:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.29 2005/08/11 16:23:34 kloczek Exp $")
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -39,7 +39,6 @@ RCSID (PKG_VER "$Id: chpasswd.c,v 1.26 2005/05/25 19:31:51 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 #include "prototypes.h"
 #include "defines.h"

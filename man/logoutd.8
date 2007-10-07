@@ -1,46 +1,36 @@
-.\"$Id: logoutd.8,v 1.11 2005/04/02 16:10:24 kloczek Exp $
-.\" Copyright 1991, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.TH LOGOUTD 8
-.SH NAME
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.0).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOGOUTD" "8" "08/03/2005" "" ""
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
 logoutd \- Enforce login time restrictions
-.SH SYNOPSIS
-.B logoutd
-.SH DESCRIPTION
-\fBlogoutd\fR enforces the login time and port restrictions specified in
-\fI/etc/porttime\fR. \fBlogoutd\fR should be started from \fI/etc/rc\fR.
-The \fI/var/run/utmp\fR file is scanned periodically and each user name
-is checked to see if the named user is permitted on the named port
-at the current time.
-Any login session which is violating the restrictions in \fI/etc/porttime\fR
+.SH "SYNOPSIS"
+.HP 8
+\fBlogoutd\fR
+.SH "DESCRIPTION"
+.PP
+\fBlogoutd\fR 
+enforces the login time and port restrictions specified in 
+\fI/etc/porttime\fR. 
+\fBlogoutd\fR 
+should be started from 
+\fI/etc/rc\fR. The 
+\fI/var/run/utmp\fR 
+file is scanned periodically and each user name is checked to see if the named user is permitted on the named port at the current time. Any login session which is violating the restrictions in 
+\fI/etc/porttime\fR 
 is terminated.
-.SH FILES
-\fI/etc/porttime\fR	\- login and port permissions
-.br
-\fI/var/run/utmp\fR	\- current login sessions
-.SH AUTHOR
+.SH "FILES"
+.TP
+\fI/etc/porttime\fR
+login and port permissions
+.TP
+\fI/var/run/utmp\fR
+list of current login sessions
+.SH "AUTHOR"
+.PP
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

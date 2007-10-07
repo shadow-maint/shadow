@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.27 2005/05/25 18:20:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwck.c,v 1.29 2005/08/09 15:27:02 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -97,7 +97,7 @@ static int yes_or_no (void)
 	 */
 
 	if (read_only) {
-		puts (_("No"));
+		printf (_("No\n"));
 		return 0;
 	}
 
@@ -138,7 +138,7 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	OPENLOG ("pwsk");
+	OPENLOG ("pwck");
 
 	/*
 	 * Parse the command line arguments
@@ -329,7 +329,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 
-			puts (_("duplicate password entry\n"));
+			printf (_("duplicate password entry\n"));
 			printf (_("delete line `%s'? "), pfe->line);
 			errors++;
 
@@ -488,7 +488,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 
-			puts (_("duplicate shadow password entry\n"));
+			printf (_("duplicate shadow password entry\n"));
 			printf (_("delete line `%s'? "), spe->line);
 			errors++;
 
@@ -512,7 +512,7 @@ int main (int argc, char **argv)
 			 * /etc/passwd entry and ask them to delete it.
 			 */
 
-			puts (_("no matching password file entry\n"));
+			printf (_("no matching password file entry\n"));
 			printf (_("delete line `%s'? "), spe->line);
 			errors++;
 
@@ -568,6 +568,8 @@ int main (int argc, char **argv)
 	if (is_shadow)
 		spw_unlock ();
 	(void) pw_unlock ();
+
+	nscd_flush_cache ("passwd");
 
 	/*
 	 * Tell the user what we did and exit.

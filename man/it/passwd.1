@@ -1,0 +1,58 @@
+.\" $Id: passwd.1,v 1.2 2005/04/13 10:02:27 kloczek Exp $
+.\" Copyright 1992 Rickard E. Faith (faith@cs.unc.edu)
+.\" May be distributed under the GNU General Public License
+.\"
+.\" Traduzione in italiano di Giovanni Bortolozzo <borto@dei.unipd.it>
+.\" Agosto 1996
+.\"
+.\" " for hilit19
+.TH PASSWD 1 "22 giugno 1994" "Linux 1.2" "Linux Programmer's Manual"
+.SH NOME
+passwd \- cambia la password
+.SH SINTASSI
+.BR "passwd [ " utente " [ " password " ] ]"
+.SH DESCRIZIONE
+Senza alcun argomento 
+.B passwd
+cambierà la password per l'attuale utente. Per prima cosa all'utente è chiesta
+la vecchia password, dopo di che, per evitare errori di battitura, va immessa
+per due volte la nuova password. La nuova password deve essere lunga almeno 
+sei caratteri ed essere composta sia da maiuscole che da minuscole o da 
+caratteri non alfabetici. La nuova password non deve essere uguale alla
+vecchia password, e non deve coincidere con il nome dell'utente.
+
+Le forme a uno e due argomenti possono essere usate solo dal superuser. Usando
+la forma ad un argomento, il superuser può cambiare la password per 
+quell'utente. Al superuser non è chiesta la vecchia password, e non sono
+applicate le regole per le password valide, poiché il superuser potrebbe
+avere valide ragioni per scegliere una password che non ne sia conforme.
+
+La forma a due argomenti assegna ad
+.I utente
+la password passata come secondo argomento. Ciò può essere utile quando
+si deve assegnare a molti utenti una password iniziale.
+
+Passando una stringa vuota come secondo argomento si cancella la password 
+dell'utente.
+
+.SH FILE
+.I /etc/passwd
+.br
+.I /etc/shells
+.SH BACHI
+Sono permesse password composte solo da numeri.
+.br
+Non viene prodotto nessun messaggio d'avviso se il superuser sceglie una
+password ``scadente''.
+.br
+Le opzioni
+.B \-f
+e
+.B \-s
+non sono supportare.
+.SH "VEDERE ANCHE"
+.BR group (5),
+.BR passwd (5),
+.BR shadow (5)
+.SH AUTORE
+Peter Orbaek (poe@daimi.aau.dk)

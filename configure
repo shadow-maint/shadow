@@ -1034,7 +1034,7 @@ Optional Features:
                           optimize for fast installation [default=yes]
   --disable-libtool-lock  avoid locking (might break parallel builds)
   --disable-largefile     omit support for large files
-  --enable-shadowgrp	enable shadow group support default=yes
+  --enable-shadowgrp      enable shadow group support default=yes
   --disable-nls           do not use Native Language Support
   --disable-rpath         do not hardcode runtime library paths
 
@@ -1046,10 +1046,10 @@ Optional Packages:
                           both]
   --with-tags[=TAGS]
                           include additional configurations [automatic]
-  --with-libcrack	try to use libcrack (default if found)
-  --with-libpam 		use libpam for PAM support
-  --with-selinux		use SELinux support
-  --with-skey		use S/Key support
+  --with-libcrack         try to use libcrack (default if found)
+  --with-libpam           use libpam for PAM support
+  --with-selinux          use SELinux support
+  --with-skey             use S/Key support
   --with-gnu-ld           assume the C compiler uses GNU ld default=no
   --with-libiconv-prefix[=DIR]  search for libiconv in DIR/include and DIR/lib
   --without-libiconv-prefix     don't search for libiconv in includedir and libdir
@@ -1815,7 +1815,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.11.1
+ VERSION=4.0.12
 
 
 cat >>confdefs.h <<_ACEOF
@@ -23203,7 +23203,7 @@ echo "$as_me: error: bad value ${enableval} for --enable-shadowgrp" >&2;}
    { (exit 1); exit 1; }; } ;;
 	 esac
 else
-  enable_shadowgrp="no"
+  enable_shadowgrp="yes"
 
 fi;
 
@@ -25505,7 +25505,7 @@ echo "${ECHO_T}$USE_NLS" >&6
 
         echo "$as_me:$LINENO: checking for GNU gettext in libc" >&5
 echo $ECHO_N "checking for GNU gettext in libc... $ECHO_C" >&6
-if test "${gt_cv_func_gnugettext1_libc+set}" = set; then
+if test "${gt_cv_func_gnugettext2_libc+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
   cat >conftest.$ac_ext <<_ACEOF
@@ -25521,7 +25521,7 @@ int
 main ()
 {
 bindtextdomain ("", "");
-return (int) gettext ("") + _nl_msg_cat_cntr + *_nl_domain_bindings
+return (int) gettext ("") + (int) ngettext ("", "", 0) + _nl_msg_cat_cntr + *_nl_domain_bindings
   ;
   return 0;
 }
@@ -25548,20 +25548,20 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-  gt_cv_func_gnugettext1_libc=yes
+  gt_cv_func_gnugettext2_libc=yes
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-gt_cv_func_gnugettext1_libc=no
+gt_cv_func_gnugettext2_libc=no
 fi
 rm -f conftest.err conftest.$ac_objext \
       conftest$ac_exeext conftest.$ac_ext
 fi
-echo "$as_me:$LINENO: result: $gt_cv_func_gnugettext1_libc" >&5
-echo "${ECHO_T}$gt_cv_func_gnugettext1_libc" >&6
+echo "$as_me:$LINENO: result: $gt_cv_func_gnugettext2_libc" >&5
+echo "${ECHO_T}$gt_cv_func_gnugettext2_libc" >&6
 
-        if test "$gt_cv_func_gnugettext1_libc" != "yes"; then
+        if test "$gt_cv_func_gnugettext2_libc" != "yes"; then
 
 
 
@@ -26107,7 +26107,7 @@ fi;
 
           echo "$as_me:$LINENO: checking for GNU gettext in libintl" >&5
 echo $ECHO_N "checking for GNU gettext in libintl... $ECHO_C" >&6
-if test "${gt_cv_func_gnugettext1_libintl+set}" = set; then
+if test "${gt_cv_func_gnugettext2_libintl+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
   gt_save_CPPFLAGS="$CPPFLAGS"
@@ -26131,7 +26131,7 @@ int
 main ()
 {
 bindtextdomain ("", "");
-return (int) gettext ("") + _nl_msg_cat_cntr + *_nl_expand_alias ("")
+return (int) gettext ("") + (int) ngettext ("", "", 0) + _nl_msg_cat_cntr + *_nl_expand_alias ("")
   ;
   return 0;
 }
@@ -26158,16 +26158,16 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-  gt_cv_func_gnugettext1_libintl=yes
+  gt_cv_func_gnugettext2_libintl=yes
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
-gt_cv_func_gnugettext1_libintl=no
+gt_cv_func_gnugettext2_libintl=no
 fi
 rm -f conftest.err conftest.$ac_objext \
       conftest$ac_exeext conftest.$ac_ext
-                        if test "$gt_cv_func_gnugettext1_libintl" != yes && test -n "$LIBICONV"; then
+                        if test "$gt_cv_func_gnugettext2_libintl" != yes && test -n "$LIBICONV"; then
               LIBS="$LIBS $LIBICONV"
               cat >conftest.$ac_ext <<_ACEOF
 /* confdefs.h.  */
@@ -26186,7 +26186,7 @@ int
 main ()
 {
 bindtextdomain ("", "");
-return (int) gettext ("") + _nl_msg_cat_cntr + *_nl_expand_alias ("")
+return (int) gettext ("") + (int) ngettext ("", "", 0) + _nl_msg_cat_cntr + *_nl_expand_alias ("")
   ;
   return 0;
 }
@@ -26215,7 +26215,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   (exit $ac_status); }; }; then
   LIBINTL="$LIBINTL $LIBICONV"
                 LTLIBINTL="$LTLIBINTL $LTLIBICONV"
-                gt_cv_func_gnugettext1_libintl=yes
+                gt_cv_func_gnugettext2_libintl=yes
 
 else
   echo "$as_me: failed program was:" >&5
@@ -26228,12 +26228,12 @@ rm -f conftest.err conftest.$ac_objext \
             CPPFLAGS="$gt_save_CPPFLAGS"
             LIBS="$gt_save_LIBS"
 fi
-echo "$as_me:$LINENO: result: $gt_cv_func_gnugettext1_libintl" >&5
-echo "${ECHO_T}$gt_cv_func_gnugettext1_libintl" >&6
+echo "$as_me:$LINENO: result: $gt_cv_func_gnugettext2_libintl" >&5
+echo "${ECHO_T}$gt_cv_func_gnugettext2_libintl" >&6
         fi
 
-                                        if test "$gt_cv_func_gnugettext1_libc" = "yes" \
-           || { test "$gt_cv_func_gnugettext1_libintl" = "yes" \
+                                        if test "$gt_cv_func_gnugettext2_libc" = "yes" \
+           || { test "$gt_cv_func_gnugettext2_libintl" = "yes" \
                 && test "$PACKAGE" != gettext-runtime \
                 && test "$PACKAGE" != gettext-tools; }; then
           gt_use_preinstalled_gnugettext=yes
@@ -26273,7 +26273,7 @@ echo "${ECHO_T}$USE_NLS" >&6
     echo "$as_me:$LINENO: checking where the gettext function comes from" >&5
 echo $ECHO_N "checking where the gettext function comes from... $ECHO_C" >&6
     if test "$gt_use_preinstalled_gnugettext" = "yes"; then
-      if test "$gt_cv_func_gnugettext1_libintl" = "yes"; then
+      if test "$gt_cv_func_gnugettext2_libintl" = "yes"; then
         gt_source="external libintl"
       else
         gt_source="libc"
@@ -26288,7 +26288,7 @@ echo "${ECHO_T}$gt_source" >&6
   if test "$USE_NLS" = "yes"; then
 
     if test "$gt_use_preinstalled_gnugettext" = "yes"; then
-      if test "$gt_cv_func_gnugettext1_libintl" = "yes"; then
+      if test "$gt_cv_func_gnugettext2_libintl" = "yes"; then
         echo "$as_me:$LINENO: checking how to link with libintl" >&5
 echo $ECHO_N "checking how to link with libintl... $ECHO_C" >&6
         echo "$as_me:$LINENO: result: $LIBINTL" >&5

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpck.c,v 1.23 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpck.c,v 1.25 2005/08/09 15:27:51 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -104,7 +104,7 @@ static int yes_or_no (void)
 	 */
 
 	if (read_only) {
-		puts (_("No"));
+		printf (_("No\n"));
 		return 0;
 	}
 
@@ -367,7 +367,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 
-			puts (_("duplicate group entry\n"));
+			printf (_("duplicate group entry\n"));
 			printf (_("delete line `%s'? "), gre->line);
 			errors++;
 
@@ -512,7 +512,7 @@ int main (int argc, char **argv)
 			 * another and ask them to delete it.
 			 */
 
-			puts (_("duplicate shadow group entry\n"));
+			printf (_("duplicate shadow group entry\n"));
 			printf (_("delete line `%s'? "), sge->line);
 			errors++;
 
@@ -529,7 +529,7 @@ int main (int argc, char **argv)
 		 */
 
 		if (!gr_locate (sgr->sg_name)) {
-			puts (_("no matching group file entry\n"));
+			printf (_("no matching group file entry\n"));
 			printf (_("delete line `%s'? "), sge->line);
 			errors++;
 			if (yes_or_no ())
@@ -630,6 +630,8 @@ int main (int argc, char **argv)
 		sgr_unlock ();
 #endif
 	(void) gr_unlock ();
+
+	nscd_flush_cache ("group");
 
 	/*
 	 * Tell the user what we did and exit.

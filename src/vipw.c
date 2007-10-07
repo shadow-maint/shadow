@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.12 2005/07/07 15:32:50 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.14 2005/08/03 16:00:46 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -255,6 +255,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-	nscd_flush_cache ("shadow");
+
 	return 0;
 }

@@ -1,10 +1,64 @@
-$Id: NEWS,v 1.215 2005/07/20 20:27:21 kloczek Exp $
+$Id: NEWS,v 1.249 2005/08/21 12:42:51 kloczek Exp $
+
+shadow-4.0.11.1 -> shadow-4.0.12					22-08-2005
+
+*** general:
+- newgrp, login: remove using login.defs::CLOSE_SESSIONS variable and allways 
+  close PAM session,
+- fixed configure.in: realy enable shadow group support by default (pointed by 
+  Greg Schafer <gschafer@zip.com.au> and Peter Vrabec <pvrabec@redhat.com>),
+- login.defs: removed handle QMAIL_DIR variable,
+- login: allow regular user to login on read-only root file system (not only for root)
+  Patch by Nicolas François <nicolas.francois@centraliens.net>
+  Fix for http://bugs.debian.org/52069
+- gpasswd, grpck, grpconv, grpuconv: added flushing group nscd cache,
+- pwck, pwconv: added flushing passwd nscd cache,
+- usermod: fixed handle -p option (patch by Peter Vrabec <pvrabec@redhat.com>),
+- chage: use -1 as value for disable password inactivity, expiration date and
+  checking an password validation.
+  Based on patch by Peter Vrabec <pvrabec@redhat.com> which fixes:
+  https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=109499
+  https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=137498
+  and on 427_chage_expiry_0 Debian patch (fix for http://bugs.debian.org/78961)
+- useradd: do not copy files from skel directory if home directory exist and write
+  warning message about not copying skel files
+  Patch by Peter Vrabec <pvrabec@redhat.com> which fixes:
+  https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=143150
+  https://bugzilla.redhat.com/beta/show_bug.cgi?id=158574
+  https://bugzilla.redhat.com/beta/show_bug.cgi?id=80242
+- su: ignore SIGINT while authenticating. A ^C could defeat the waiting
+  period and permit brute-force attacks (fixed http://bugs.debian.org/288827),
+- uClibc fixes (by Martin Schlemmer <azarah@nosferatu.za.org>):
+  added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
+  and stub prototype for ngettext() in lib/prototypes.h (neccessary if shadow
+  compiled with disabled NLS support)
+- groupadd: rewrited for use getopt_long(),
+- groupadd, groupdel, groupmod, userdel: do OPENLOG() before pam_start(),
+- groupadd: fixed double OPENLOG(),
+- removed lib/{grpack,gspack,pwpack,sppack}.c and prototypes from lib/prototypes.h
+  (outdated),
+- newusers: added flushing passwd and group nscd caches,
+- passwd, pwunconv, userdel, vipw: remove flushing shadow nscd cache (nscd do not caches
+  shadow map),
+- pwck: now pwck OPENLOG with correct name ("pwck" instead "pwsk")
+  (fix by Alexander Gattin <arg@online.com.ua>),
+- pwck, grpck: replace all puts() with printf() - it fixes problems with extra blank
+  lines printed in some messages
+  (fix by Alexander Gattin <arg@online.com.ua>),
+- passwd: use separated message "Password set to expire." instead "Password changed."
+  on "passwd -e" (fix by Christian Perrier <bubulle@debian.org),
+- updated translations: cs, de, fi, fr, nl, pl, pt, ru, sk.
+*** documentation:
+- usermod(8): give the correct range for system users (0-999 instead of 0-99),
+  (http://bugs.debian.org/286258)
+- chage(8): better description -1 value passwd in -E, -I and -M options,
+- regenerate all roff man pages using DocBook XSL Stylesheets 1.69.0.
 
 shadow-4.0.11 -> shadow-4.0.11.1					21-07-2005
 
 *** general:
 - fixed configure.in: now is possible build shadow with enabled/disabled shadow group
-  support (thanks for report sympotoms of the bug to Greg Schafer <gschafer@zip.com.au>),
+  support (thanks for report symptoms of the bug to Greg Schafer <gschafer@zip.com.au>),
 - updated translations: sv.
 
 shadow-4.0.10 -> shadow-4.0.11						18-07-2005

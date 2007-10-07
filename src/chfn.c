@@ -30,28 +30,29 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.29 2005/07/07 15:32:50 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
+RCSID (PKG_VER "$Id: chfn.c,v 1.31 2005/08/02 13:39:43 kloczek Exp $")
 #include <fcntl.h>
-#include <signal.h>
-#include "prototypes.h"
-#include "defines.h"
 #include <pwd.h>
-#include "pwio.h"
-#include "getdef.h"
-#include "pwauth.h"
-#include "nscd.h"
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
 #ifdef HAVE_SHADOW_H
 #include <shadow.h>
-#endif
-#ifdef USE_PAM
-#include "pam_defs.h"
 #endif
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
 #endif
+#include "defines.h"
+#include "exitcodes.h"
+#include "getdef.h"
+#include "nscd.h"
+#ifdef USE_PAM
+#include "pam_defs.h"
+#endif
+#include "prototypes.h"
+#include "pwauth.h"
+#include "pwio.h"
 /*
  * Global variables.
  */
@@ -88,7 +89,7 @@ static void usage (void)
 		fprintf (stderr,
 			 _("Usage: %s [-f full_name] [-r room_no] "
 			   "[-w work_ph] [-h home_ph]\n"), Prog);
-	exit (1);
+	exit (E_USAGE);
 }
 
 
@@ -146,17 +147,17 @@ static void new_fields (void)
 	if (may_change_field ('r'))
 		change_field (roomno, sizeof roomno, _("Room Number"));
 	else
-		printf ("\t%s: %s\n", _("Room Number"), roomno);
+		printf (_("\tRoom Number: %s\n"), roomno);
 
 	if (may_change_field ('w'))
 		change_field (workph, sizeof workph, _("Work Phone"));
 	else
-		printf ("\t%s: %s\n", _("Work Phone"), workph);
+		printf (_("\tWork Phone: %s\n"), workph);
 
 	if (may_change_field ('h'))
 		change_field (homeph, sizeof homeph, _("Home Phone"));
 	else
-		printf ("\t%s: %s\n", _("Home Phone"), homeph);
+		printf (_("\tHome Phone: %s\n"), homeph);
 
 	if (amroot)
 		change_field (slop, sizeof slop, _("Other"));
@@ -266,7 +267,7 @@ int main (int argc, char **argv)
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
 					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
+				exit (E_NOPERM);
 			}
 			fflg++;
 			STRFCPY (fullnm, optarg);
@@ -275,7 +276,7 @@ int main (int argc, char **argv)
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
 					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
+				exit (E_NOPERM);
 			}
 			hflg++;
 			STRFCPY (homeph, optarg);
@@ -284,7 +285,7 @@ int main (int argc, char **argv)
 			if (!may_change_field ('r')) {
 				fprintf (stderr,
 					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
+				exit (E_NOPERM);
 			}
 			rflg++;
 			STRFCPY (roomno, optarg);
@@ -293,7 +294,7 @@ int main (int argc, char **argv)
 			if (!amroot) {
 				fprintf (stderr,
 					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
+				exit (E_NOPERM);
 			}
 			oflg++;
 			STRFCPY (slop, optarg);
@@ -302,7 +303,7 @@ int main (int argc, char **argv)
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
 					 _("%s: Permission denied.\n"), Prog);
-				exit (1);
+				exit (E_NOPERM);
 			}
 			wflg++;
 			STRFCPY (workph, optarg);
@@ -323,7 +324,7 @@ int main (int argc, char **argv)
 		if (!pw) {
 			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 				 user);
-			exit (1);
+			exit (E_NOPERM);
 		}
 	} else {
 		pw = get_my_pwent ();
@@ -332,7 +333,7 @@ int main (int argc, char **argv)
 				 _
 				 ("%s: Cannot determine your user name.\n"),
 				 Prog);
-			exit (1);
+			exit (E_NOPERM);
 		}
 		user = xstrdup (pw->pw_name);
 	}
@@ -369,7 +370,7 @@ int main (int argc, char **argv)
 	if (!amroot && pw->pw_uid != getuid ()) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
 	/*
@@ -381,7 +382,7 @@ int main (int argc, char **argv)
 	    && (checkPasswdAccess (PASSWD__CHFN) != 0)) {
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 #endif
 
@@ -585,5 +586,5 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 	closelog ();
-	exit (0);
+	exit (E_SUCCESS);
 }

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.41 2005/06/20 10:17:09 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.45 2005/08/11 16:23:34 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -41,7 +41,6 @@ RCSID (PKG_VER "$Id: userdel.c,v 1.41 2005/06/20 10:17:09 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 #include "prototypes.h"
 #include "defines.h"
@@ -541,6 +540,8 @@ int main (int argc, char **argv)
 	if (optind + 1 != argc)
 		usage ();
 
+	OPENLOG ("userdel");
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 	pampw = getpwuid (getuid ());
@@ -568,8 +569,6 @@ int main (int argc, char **argv)
 		exit (E_PW_UPDATE);
 	}
 #endif				/* USE_PAM */
-
-	OPENLOG ("userdel");
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP
@@ -622,7 +621,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-	nscd_flush_cache ("shadow");
 
 	if (rflg)
 		remove_mailbox ();

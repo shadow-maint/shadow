@@ -1,0 +1,141 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\" $Id: shadow.3,v 1.1 2005/04/21 21:03:16 kloczek Exp $
+.\" Copyright 1989 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.TH SHADOW 3   
+.SH NOME
+shadow \- gestione del file delle password cifrate
+.SH SINTASSI
+\fB#include <shadow.h>\fP
+.PP
+\fBstruct spwd *getspent();\fP
+.PP
+\fBstruct spwd *getspnam(char\fP \fI*name\fP\fB);\fP
+.PP
+\fBvoid setspent();\fP
+.PP
+\fBvoid endspent();\fP
+.PP
+\fBstruct spwd *fgetspent(FILE\fP \fI*fp\fP\fB);\fP
+.PP
+\fBstruct spwd *sgetspent(char\fP \fI*cp\fP\fB);\fP
+.PP
+\fBint putspent(struct spwd\fP \fI*p,\fP \fBFILE\fP \fI*fp\fP\fB);\fP
+.PP
+\fBint lckpwdf();\fP
+.PP
+\fBint ulckpwdf();\fP
+.SH DESCRIZIONE
+\fIshadow\fP manipola il contenuto del file delle shadow password, 
+\fI/etc/shadow\fP. La struttura nel file \fI#include\fP è la seguente:
+.sp
+struct spwd {
+.in +.5i
+.br
+	char	\t	*sp_namp; /* login dell'utente */
+.br
+	char	\t	*sp_pwdp; /* password cifrata */
+.br
+	long int	\tsp_lstchg; /* ultimo cambio della password */
+.br
+	long int	\tsp_min; /* giorni minimi tra i cambi */
+.br
+	long int	\tsp_max; /* giorni massimi tra i cambi */
+.br
+	long int	\tsp_warn; /* giorni di preavviso */
+.br
+	long int	\tsp_inact; /* giorni di inattività */
+.br
+	long int	\tsp_expire; /* data di scadenza dell'account */
+.br
+	unsigned long int	sp_flag; /* riservato per uso futuro */
+.br
+.in \-.5i
+}
+.PP
+Ciascun campo significa:
+.sp
+sp_namp \- puntatore a una stringa null\-terminated che contiene il nome 
+utente.
+.br
+sp_pwdp \- puntatore a una stringa null\-terminated che contiene la password.
+.br
+sp_lstchg \- giorni a partire dal 1 gennaio 1970 in cui la password è stata 
+cambiata l'ultima volta.
+.br
+sp_min \- giorni prima dei quali la password non può essere cambiata.
+.br
+sp_max \- giorni dopo i quali la password deve essere cambiata.
+.br
+sp_warn \- giorni prima della scadenza della password in cui l'utente viene 
+avvertito.
+.br
+sp_inact \- giorni dopo la scadenza della password in cui l'account viene 
+considerato inattivo e disabilitato.
+.br
+sp_expire \- giorni a partire dal 1 gennaio 1970 dopo i quali l'account viene 
+disabilitato.
+.br
+sp_flag \- riservato per uso futuro.
+.SH DESCRIZIONE
+\fBgetspent\fP, \fBgetspname\fP, \fBfgetspent\fP e \fBsgetspent\fP restituiscono un 
+puntatore a uno \fBstruct spwd\fP. \fBgetspent\fP restituisce la voce successiva 
+nel file, \fBfgetspent\fP la voce successiva nello stream specificato, che si 
+suppone sia un file nel formato corretto. \fBsgetspent\fP restituisce un 
+puntatore a uno \fBstruct spwd\fP usando come input la stringa 
+fornita. \fBgetspnam\fP cerca una voce che corrisponde a \fBname\fP partendo dalla 
+posizione corrente nel file.
+.PP
+\fBsetspent\fP e \fBendspent\fP sono usate rispettivamente per iniziare e 
+terminare l'accesso al file delle shadow password.
+.PP
+Le funzioni \fBlckpwdf\fP e \fBulckpwdf\fP si usano per garantire l'accesso 
+esclusivo al file \fI/etc/shadow\fP. \fBlckpwdf\fP prova ad acquisire il lock 
+tramite \fBpw_lock\fP per un massimo di 15 secondi, dopodiché tenta di 
+ottenere un secondo lock usando \fBspw_lock\fP per il tempo che rimane dei 15 
+secondi iniziali. Se anche uno solo dei due tentativi fallisce dopo un 
+totale di 15 secondi, \fBlckpwdf\fP restituisce \-1, mentre restituisce 0 se 
+riesce ad acquisire entrambi i lock.
+.SH DIAGNOSTICA
+Le funzioni restituiscono NULL se non ci sono altre voci disponibili o se si 
+verifica un errore durante l'elaborazione. Le funzioni di tipo \fBint\fP 
+restituiscono 0 in caso di successo e \-1 in caso di errore.
+.SH AVVISI/CAVEAT
+Queste funzioni possono essere usate solo dall'amministratore, perché 
+l'accesso al file delle shadow password è riservato.
+.SH FILE
+\fI/etc/shadow\fP	\- informazioni sicure sugli account degli utenti
+.SH "VEDERE ANCHE"
+\fBgetpwent\fP(3), \fBshadow\fP(5)
+.SH AUTORE
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH TRADUZIONE
+.nf
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

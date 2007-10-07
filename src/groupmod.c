@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.29 2005/07/07 15:11:48 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupmod.c,v 1.30 2005/08/02 17:49:17 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -426,6 +426,8 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
+	OPENLOG ("groupmod");
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -457,8 +459,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
-
-	OPENLOG ("groupmod");
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

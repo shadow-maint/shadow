@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: chowntty.c,v 1.11 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: chowntty.c,v 1.12 2005/08/09 18:03:15 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -110,7 +110,7 @@ void chown_tty (const char *tty, const struct passwd *info)
 			 info->pw_name));
 		closelog ();
 
-		if (!(err == EROFS && info->pw_uid == 0))
+		if (err != EROFS)
 			exit (1);
 	}
 #ifdef __linux__

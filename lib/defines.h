@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.26 2005/05/25 18:20:22 kloczek Exp $ */
+/* $Id: defines.h,v 1.27 2005/08/03 18:11:27 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -24,6 +24,8 @@
 # undef textdomain
 # define textdomain(Domain)	/* empty */
 # define _(Text) Text
+# define ngettext(Msgid1, Msgid2, N) \
+    ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
 #endif
 
 #if STDC_HEADERS

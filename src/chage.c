@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.49 2005/07/11 16:12:38 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.55 2005/08/09 17:20:02 kloczek Exp $")
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -48,6 +48,7 @@ RCSID (PKG_VER "$Id: chage.c,v 1.49 2005/07/11 16:12:38 kloczek Exp $")
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
 #endif
+#include "exitcodes.h"
 #include "prototypes.h"
 #include "defines.h"
 #include "pwio.h"
@@ -76,14 +77,6 @@ static long inactdays;
 static long expdays;
 
 #define	EPOCH		"1969-12-31"
-
-
-/*
- * exit status values
- */
-#define E_SUCCESS	0	/* success */
-#define E_NOPERM	1	/* permission denied */
-#define E_USAGE 	2	/* invalid command syntax */
 
 /* local function prototypes */
 static void usage (void);
@@ -258,7 +251,7 @@ static void list_fields (void)
 
 	printf (_("Password expires\t\t\t\t\t: "));
 	if (lastday <= 0 || maxdays >= 10000 * (DAY / SCALE)
-	    || maxdays <= 0) {
+	    || maxdays < 0) {
 		printf (_("never\n"));
 	} else {
 		expires = changed + maxdays * SCALE;
@@ -273,8 +266,8 @@ static void list_fields (void)
 	 */
 
 	printf (_("Password inactive\t\t\t\t\t: "));
-	if (lastday <= 0 || inactdays <= 0 ||
-	    maxdays >= 10000 * (DAY / SCALE) || maxdays <= 0) {
+	if (lastday <= 0 || inactdays < 0 ||
+	    maxdays >= 10000 * (DAY / SCALE) || maxdays < 0) {
 		printf (_("never\n"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
@@ -287,7 +280,7 @@ static void list_fields (void)
 	 */
 
 	printf (_("Account expires\t\t\t\t\t\t: "));
-	if (expdays <= 0) {
+	if (expdays < 0) {
 		printf (_("never\n"));
 	} else {
 		expires = expdays * SCALE;

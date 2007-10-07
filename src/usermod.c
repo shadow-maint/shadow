@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.47 2005/07/07 15:11:48 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.51 2005/08/11 16:23:34 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -43,7 +43,6 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.47 2005/07/07 15:11:48 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 #include "prototypes.h"
 #include "defines.h"
@@ -389,6 +388,8 @@ static void new_spent (struct spwd *spent)
 		spent->sp_expire = user_expire;
 	}
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp, spent->sp_namp);
+	if (pflg)
+		spent->sp_lstchg = time ((time_t *) 0) / SCALE;
 }
 
 /*
@@ -736,8 +737,7 @@ static void process_flags (int argc, char **argv)
 		user_inactive = spwd->sp_inact;
 	}
 
-	while ((arg =
-		getopt (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U")) != EOF) {
+	while ((arg = getopt (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U")) != EOF) {
 		switch (arg) {
 		case 'a':
 			aflg++;

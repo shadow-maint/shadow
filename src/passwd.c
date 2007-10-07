@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.41 2005/07/07 15:32:50 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.44 2005/08/03 16:00:46 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -913,12 +913,14 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-	nscd_flush_cache ("shadow");
 
 	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name, myname));
 	closelog ();
 	if (!qflg)
-		printf (_("Password changed.\n"));
+		if (!eflg)
+			printf (_("Password changed.\n"));
+		else
+			printf (_("Password set to expire.\n"));
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }

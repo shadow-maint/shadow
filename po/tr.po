@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-21 13:09+0200\n"
+"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
+"POT-Creation-Date: 2005-08-11 16:15+0200\n"
 "PO-Revision-Date: 2004-06-13 10:27+0300\n"
 "Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -15,70 +15,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=1; plural=0;\n"
 
-#: libmisc/addgrps.c:56
+#, c-format
+msgid "Could not allocate space for config info.\n"
+msgstr "Yapılandırma bilgileri için yer ayrılamadı.\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr ""
+"yapılandırma hatası - bilinmeyen öğe '%s' (sistem yöneticisine bildirin)\n"
+
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Uyarı: bilinmeyen grup %s\n"
 
-#: libmisc/addgrps.c:67
 #, c-format
 msgid "Warning: too many groups\n"
 msgstr "Uyarı: grup sayısı çok fazla\n"
 
-#: libmisc/age.c:70
 #, c-format
 msgid "Your password has expired."
 msgstr "Parolanızın kullanım süresi doldu."
 
-#: libmisc/age.c:73
 #, c-format
 msgid "Your password is inactive."
 msgstr "Parolanız etkin değil."
 
-#: libmisc/age.c:76
 #, c-format
 msgid "Your login has expired."
 msgstr "Hesabınızın kullanım süresi doldu."
 
-#: libmisc/age.c:88
 msgid "  Contact the system administrator.\n"
 msgstr "  Sistem yöneticisine başvurunuz.\n"
 
-#: libmisc/age.c:91
 msgid "  Choose a new password.\n"
 msgstr "Yeni bir parola seçin.\n"
 
-#: libmisc/age.c:167
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Parolanızın kullanım süresi %ld gün sonra dolacaktır.\n"
 
-#: libmisc/age.c:170
 #, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "Parolanızın kullanım süresi yarın dolacaktır.\n"
 
-#: libmisc/age.c:172
 #, c-format
 msgid "Your password will expire today.\n"
 msgstr "Parolanızın kullanım süresi bugün dolacaktır.\n"
 
-#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
 msgstr "Geçilemeyen tty: %s"
 
-#: libmisc/env.c:155
 #, c-format
 msgid "Environment overflow\n"
 msgstr "Ortam taşması\n"
 
-#: libmisc/env.c:194
 #, c-format
 msgid "You may not change $%s\n"
 msgstr "$%s değiştirilemez\n"
 
-#: libmisc/failure.c:229
 #, fuzzy, c-format
 msgid ""
 "%d failure since last login.\n"
@@ -89,92 +84,68 @@ msgid_plural ""
 msgstr[0] ""
 "Son girişten beri %d başarısız girişim.  En sonuncusu %s üzerinde %s idi.\n"
 
-#: libmisc/limits.c:397
 #, c-format
 msgid "Too many logins.\n"
 msgstr "Çok fazla oturum.\n"
 
-#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
 msgstr "Yeni e-postanız var."
 
-#: libmisc/mail.c:72
 msgid "No mail."
 msgstr "E-Posta yok."
 
-#: libmisc/mail.c:74
 msgid "You have mail."
 msgstr "E-Postanız var."
 
-#: libmisc/obscure.c:273 src/passwd.c:169
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Hatalı parola: %s.  "
 
-#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
 msgstr "passwd: pam_start() başarısız, hata %d\n"
 
-#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#: libmisc/pam_pass.c:49
 msgid "passwd: password updated successfully\n"
 msgstr ""
 
-#: libmisc/setupenv.c:207
+#, fuzzy, c-format
+msgid "Incorrect password for %s.\n"
+msgstr "`%s' için yanlış parola\n"
+
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
 msgstr "\"%s\" dizinine geçilemiyor\n"
 
-#: libmisc/setupenv.c:215
 msgid "No directory, logging in with HOME=/"
 msgstr "Dizin yok, HOME=/ ile giriş yapılıyor"
 
-#: libmisc/shell.c:118
 #, c-format
 msgid "Cannot execute %s"
 msgstr "%s çalıştırılamıyor"
 
-#: libmisc/sub.c:56
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
 msgstr "Geçersiz kök dizin \"%s\"\n"
 
-#: libmisc/sub.c:68
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
 msgstr "Kök dizin \"%s\" olarak değiştirilemiyor\n"
 
-#: libmisc/xmalloc.c:22
 #, c-format
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) başarısız oldu\n"
 
-#: lib/getdef.c:262
-#, c-format
-msgid "Could not allocate space for config info.\n"
-msgstr "Yapılandırma bilgileri için yer ayrılamadı.\n"
-
-#: lib/getdef.c:303
-#, c-format
-msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-"yapılandırma hatası - bilinmeyen öğe '%s' (sistem yöneticisine bildirin)\n"
-
-#: lib/pwauth.c:48 src/newgrp.c:384
 msgid "Password: "
 msgstr "Parola: "
 
-#: lib/pwauth.c:50
 #, c-format
 msgid "%s's Password: "
 msgstr "%s kullanıcı parolası: "
 
-#: src/chage.c:115
 #, c-format
 msgid ""
 "Usage: chage [options] user\n"
@@ -193,152 +164,116 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 msgstr ""
 
-#: src/chage.c:160 src/chfn.c:139 src/chsh.c:89
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Yeni değeri girin, veya varsayılan değer için ENTER'a basın\n"
 
-#: src/chage.c:164
 msgid "Minimum Password Age"
 msgstr "Asgari Parola Ömrü"
 
-#: src/chage.c:170
 msgid "Maximum Password Age"
 msgstr "Azami Parola Ömrü"
 
-#: src/chage.c:177
 msgid "Last Password Change (YYYY-MM-DD)"
 msgstr "Son Parola Değişimi (YYYY-AA-GG)"
 
-#: src/chage.c:185
 msgid "Password Expiration Warning"
 msgstr "Parola Kullanım Süresi Bitti Uyarısı"
 
-#: src/chage.c:191
 msgid "Password Inactive"
 msgstr "Parola Pasif"
 
-#: src/chage.c:199
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Hesap Bitimi Tarihi (YYYY-AA-GG)"
 
-#: src/chage.c:246
 #, fuzzy, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Son Parola Değişimi (YYYY-AA-GG)"
 
-#: src/chage.c:248 src/chage.c:262 src/chage.c:278 src/chage.c:291
 #, fuzzy, c-format
 msgid "never\n"
 msgstr "Hiçbir zaman\n"
 
-#: src/chage.c:259
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Parola Kullanım Süresi Dolumu:\t"
 
-#: src/chage.c:275
 #, fuzzy, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Parola Pasif:\t"
 
-#: src/chage.c:289
 #, fuzzy, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Hesap Bitimi:\t"
 
-#: src/chage.c:305
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
 msgstr ""
 
-#: src/chage.c:307
 #, fuzzy, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
 msgstr "Maksimum giriş denemesi sayısı aşıldı (%d)\n"
 
-#: src/chage.c:309
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr ""
 
-#: src/chage.c:467
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: diğer bayraklarla beraber \"l\" yi kullanmayınız\n"
 
-#: src/chage.c:479 src/chage.c:607 src/chfn.c:268 src/chfn.c:277
-#: src/chfn.c:286 src/chfn.c:295 src/chfn.c:304 src/chfn.c:370 src/chfn.c:382
-#: src/gpasswd.c:150 src/login.c:430 src/passwd.c:769 src/passwd.c:805
 #, fuzzy, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: müsaade edilmedi\n"
 
-#: src/chage.c:512 src/chage.c:718 src/chpasswd.c:173 src/groupadd.c:488
-#: src/groupdel.c:274 src/groupmod.c:456 src/newusers.c:355 src/useradd.c:1518
-#: src/userdel.c:567 src/usermod.c:1283 src/usermod.c:1337
 #, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM yetkilendirmesi başarısız oldu\n"
 
-#: src/chage.c:530 src/chpasswd.c:188
 #, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: parola dosyası açılamadı\n"
 
-#: src/chage.c:537 src/chfn.c:324 src/chsh.c:181 src/gpasswd.c:139
-#: src/gpasswd.c:216 src/groups.c:64 src/passwd.c:811
 #, c-format
 msgid "%s: unknown user %s\n"
 msgstr "%s: bilinmeyen kullanıcı %s\n"
 
-#: src/chage.c:555
 #, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr "%s: gölge parola dosyası kilitlenemedi\n"
 
-#: src/chage.c:563
 #, c-format
 msgid "%s: can't open shadow password file\n"
 msgstr "%s: gölge parola dosyası açılamadı\n"
 
-#: src/chage.c:623
 #, c-format
 msgid "Changing the aging information for %s\n"
 msgstr "%s için ömür bilgisi değiştiriliyor\n"
 
-#: src/chage.c:625
 #, c-format
 msgid "%s: error changing fields\n"
 msgstr "%s: alanları değiştirirken hata oluştu\n"
 
-#: src/chage.c:649 src/pwunconv.c:136
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s: parola dosyası güncellenemedi\n"
 
-#: src/chage.c:672 src/pwunconv.c:131
 #, c-format
 msgid "%s: can't update shadow password file\n"
 msgstr "%s: gölge parola dosyası güncellenemedi\n"
 
-#: src/chage.c:685
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
 msgstr "%s: gölge parola dosyasının üzerine yazılamadı\n"
 
-#: src/chage.c:729
 #, c-format
 msgid "%s: can't rewrite password file\n"
 msgstr "%s: parola dosyasına yazılamadı\n"
 
-#: src/chage.c:748 src/chpasswd.c:357 src/groupadd.c:534 src/groupdel.c:339
-#: src/groupmod.c:523 src/newusers.c:570 src/useradd.c:1613 src/userdel.c:689
 #, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s: PAM chauthok başarısız oldu\n"
 
-#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
@@ -347,122 +282,109 @@ msgstr ""
 "Kullanım: %s [-f tam_isim] [-r oda_no] [-w iş_tel]\n"
 "\t[-h ev_tel] [-o diğer] [kullanıcı]\n"
 
-#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr "Kullanım: %s [-f tam_isim] [-r oda_no] [-w iş_tel] [-h ev_tel]\n"
 
-#: src/chfn.c:142
 msgid "Full Name"
 msgstr "Tam İsim"
 
-#: src/chfn.c:144
 #, c-format
 msgid "\tFull Name: %s\n"
 msgstr "\tTam İsim: %s\n"
 
-#: src/chfn.c:147 src/chfn.c:149
 msgid "Room Number"
 msgstr "Oda Numarası"
 
-#: src/chfn.c:152 src/chfn.c:154
+#, fuzzy, c-format
+msgid "\tRoom Number: %s\n"
+msgstr "Oda Numarası"
+
 msgid "Work Phone"
 msgstr "İş Telefonu"
 
-#: src/chfn.c:157 src/chfn.c:159
+#, fuzzy, c-format
+msgid "\tWork Phone: %s\n"
+msgstr "İş Telefonu"
+
 msgid "Home Phone"
 msgstr "Ev Telefonu"
 
-#: src/chfn.c:162
+#, fuzzy, c-format
+msgid "\tHome Phone: %s\n"
+msgstr "Ev Telefonu"
+
 msgid "Other"
 msgstr "Diğer"
 
-#: src/chfn.c:333 src/chsh.c:189 src/passwd.c:751
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kullanıcı isminiz belirlenemedi.\n"
 
-#: src/chfn.c:350 src/chsh.c:206
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
 msgstr "%s: kullanıcı `%s' NIS istemcisinde değiştirilemedi.\n"
 
-#: src/chfn.c:357 src/chsh.c:213
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
 msgstr "%s: `%s' bu istemci için NIS efendisidir.\n"
 
-#: src/chfn.c:446
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "%s için kullanıcı bilgileri değiştiriliyor\n"
 
-#: src/chfn.c:454
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
 msgstr "%s: geçersiz isim: \"%s\"\n"
 
-#: src/chfn.c:459
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
 msgstr "%s: geçersiz oda numarası: \"%s\"\n"
 
-#: src/chfn.c:465
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
 msgstr "%s: geçersiz iş telefonu: \"%s\"\n"
 
-#: src/chfn.c:471
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
 msgstr "%s: geçersiz ev telefonu: \"%s\"\n"
 
-#: src/chfn.c:478
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
 msgstr "%s: \"%s\" geçersiz karakterler içeriyor\n"
 
-#: src/chfn.c:491
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: alanlar çok uzun\n"
 
-#: src/chfn.c:506 src/chsh.c:320 src/gpasswd.c:554 src/passwd.c:904
 #, c-format
 msgid "Cannot change ID to root.\n"
 msgstr "ID root kullanıcısı olarak değiştirilemiyor.\n"
 
-#: src/chfn.c:521 src/chsh.c:335 src/passwd.c:466 src/passwd.c:506
 #, c-format
 msgid "Cannot lock the password file; try again later.\n"
 msgstr "Parola dosyası kilitlenemiyor, daha sonra tekrar deneyin.\n"
 
-#: src/chfn.c:527 src/chsh.c:341 src/passwd.c:471 src/passwd.c:511
 #, c-format
 msgid "Cannot open the password file.\n"
 msgstr "Parola dosyası açılamıyor.\n"
 
-#: src/chfn.c:544 src/chsh.c:356 src/passwd.c:477 src/usermod.c:993
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s: %s /etc/passwd içinde bulunamadı\n"
 
-#: src/chfn.c:560 src/chsh.c:375 src/passwd.c:486 src/passwd.c:546
 #, c-format
 msgid "Error updating the password entry.\n"
 msgstr "Parola kaydı güncellenmesinde hata.\n"
 
-#: src/chfn.c:571 src/chsh.c:387 src/passwd.c:491 src/passwd.c:551
 #, c-format
 msgid "Cannot commit password file changes.\n"
 msgstr "Parola dosyası değişiklikleri işlenemiyor.\n"
 
-#: src/chfn.c:578 src/chsh.c:394
 #, c-format
 msgid "Cannot unlock the password file.\n"
 msgstr "Parola dosyası kilidi açılamıyor.\n"
 
-#: src/chpasswd.c:67
 #, c-format
 msgid ""
 "Usage: chpasswd [options]\n"
@@ -474,102 +396,81 @@ msgid ""
 "\t\t\tpasswords are not encrypted\n"
 msgstr ""
 
-#: src/chpasswd.c:184
 #, c-format
 msgid "%s: can't lock password file\n"
 msgstr "%s: parola dosyası kilitlenemedi\n"
 
-#: src/chpasswd.c:196 src/pwconv.c:94
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: gölge dosyası kilitlenemiyor\n"
 
-#: src/chpasswd.c:202 src/gpasswd.c:580 src/pwconv.c:99 src/pwunconv.c:88
-#: src/pwunconv.c:93
 #, c-format
 msgid "%s: can't open shadow file\n"
 msgstr "%s: gölge dosyası açılamıyor\n"
 
-#: src/chpasswd.c:224 src/newusers.c:414
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: satır %d: satır çok uzun\n"
 
-#: src/chpasswd.c:244
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: satır %d: yeni parola eksik\n"
 
-#: src/chpasswd.c:268
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: satır %d: bilinmeyen kullanıcı %s\n"
 
-#: src/chpasswd.c:307
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: satır %d: parola kaydı güncellenemiyor\n"
 
-#: src/chpasswd.c:324 src/newusers.c:541
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: hata algılandı, değişiklikler görmezden gelindi\n"
 
-#: src/chpasswd.c:333
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: gölge (shadow9 dosyası güncellenmesinde hata\n"
 
-#: src/chpasswd.c:340
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: parola dosyası güncellenmesinde hata\n"
 
-#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Kullanım: %s [-s kabuk] [isim]\n"
 
-#: src/chsh.c:90
 msgid "Login Shell"
 msgstr "Oturum Kabuğu"
 
-#: src/chsh.c:229 src/chsh.c:242 src/chsh.c:256
 #, c-format
 msgid "You may not change the shell for %s.\n"
 msgstr "%s için kabuğu değiştiremezsiniz.\n"
 
-#: src/chsh.c:288
 #, c-format
 msgid "Changing the login shell for %s\n"
 msgstr "%s için oturum kabuğu değiştiriliyor\n"
 
-#: src/chsh.c:300
 #, c-format
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Geçersiz kayıt: %s\n"
 
-#: src/chsh.c:305
 #, c-format
 msgid "%s is an invalid shell.\n"
 msgstr "%s geçersiz bir kabuk.\n"
 
-#: src/expiry.c:59
 #, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Kullanım: expiry {-f|-c}\n"
 
-#: src/expiry.c:110
 #, c-format
 msgid "%s: WARNING!  Must be set-UID root!\n"
 msgstr "%s: UYARI!  root kullanıcısına set-UID olmalı!\n"
 
-#: src/expiry.c:120
 #, c-format
 msgid "%s: unknown user\n"
 msgstr "%s: bilinmeyen kullanıcı\n"
 
-#: src/faillog.c:59
 #, c-format
 msgid ""
 "Usage: faillog [options]\n"
@@ -586,450 +487,369 @@ msgid ""
 "\t\t\t\tfor user with LOGIN\n"
 msgstr ""
 
-#: src/faillog.c:88
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr ""
 
-#: src/faillog.c:106
 #, c-format
 msgid " [%lds left]"
 msgstr " [%lds kaldı]"
 
-#: src/faillog.c:110
 #, c-format
 msgid " [%lds lock]"
 msgstr " [%lds kilitli]"
 
-#: src/faillog.c:354 src/lastlog.c:187
 #, c-format
 msgid "Unknown User: %s\n"
 msgstr "Bilinmeyen Kullanıcı: %s\n"
 
-#: src/gpasswd.c:71
 #, c-format
 msgid "Usage: %s [-r|-R] group\n"
 msgstr "Kullanım: %s [-r|-R] grup\n"
 
-#: src/gpasswd.c:72
 #, c-format
 msgid "       %s [-a user] group\n"
 msgstr "       %s [-a kullanıcı] grup\n"
 
-#: src/gpasswd.c:73
 #, c-format
 msgid "       %s [-d user] group\n"
 msgstr "       %s [-d kullanıcı] grup\n"
 
-#: src/gpasswd.c:76
 #, c-format
 msgid "       %s [-A user,...] [-M user,...] group\n"
 msgstr "        %s [-A kullanıcı,...] [-M kullanıcı,...] grup\n"
 
-#: src/gpasswd.c:78
 #, c-format
 msgid "       %s [-M user,...] group\n"
 msgstr "       %s [-M kullanıcı,...] grup\n"
 
-#: src/gpasswd.c:229
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: -A için gölge grup parolaları gerekli\n"
 
-#: src/gpasswd.c:280
 #, c-format
 msgid "Who are you?\n"
 msgstr "Siz kimsiniz?\n"
 
-#: src/gpasswd.c:299 src/newgrp.c:318
 #, c-format
 msgid "unknown group: %s\n"
 msgstr "bilinmeyen grup: %s\n"
 
-#: src/gpasswd.c:408
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "%s kullanıcısı %s grubuna ekleniyor\n"
 
-#: src/gpasswd.c:426
 #, c-format
 msgid "Removing user %s from group %s\n"
 msgstr "%s kullanıcısı %s grubundan çıkarılıyor\n"
 
-#: src/gpasswd.c:439
 #, c-format
 msgid "%s: unknown member %s\n"
 msgstr "%s: bilinmeyen üye %s\n"
 
-#: src/gpasswd.c:485
 #, c-format
 msgid "%s: Not a tty\n"
 msgstr "%s: Bir tty değil\n"
 
-#: src/gpasswd.c:506
 #, c-format
 msgid "Changing the password for group %s\n"
 msgstr "%s grubu için parola değiştiriliyor\n"
 
-#: src/gpasswd.c:509
 msgid "New Password: "
 msgstr "Yeni parola: "
 
-#: src/gpasswd.c:514 src/passwd.c:266
 msgid "Re-enter new password: "
 msgstr "Yeni parolayı tekrar girin: "
 
-#: src/gpasswd.c:526
 msgid "They don't match; try again"
 msgstr "Eşleşmiyorlar; tekrar deneyin"
 
-#: src/gpasswd.c:530
 #, c-format
 msgid "%s: Try again later\n"
 msgstr "%s: Daha sonra tekrar deneyin\n"
 
-#: src/gpasswd.c:562
 #, c-format
 msgid "%s: can't get lock\n"
 msgstr "%s: kilitlenemiyor\n"
 
-#: src/gpasswd.c:568
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: gölge kilidi koyulamıyor\n"
 
-#: src/gpasswd.c:574
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: dosya açılamıyor\n"
 
-#: src/gpasswd.c:586
 #, c-format
 msgid "%s: can't update entry\n"
 msgstr "%s: kayıt güncellenemiyor\n"
 
-#: src/gpasswd.c:592
 #, c-format
 msgid "%s: can't update shadow entry\n"
 msgstr "%s: gölge kaydı güncellenemiyor\n"
 
-#: src/gpasswd.c:598
 #, c-format
 msgid "%s: can't re-write file\n"
 msgstr "%s: dosya tekrar yazılamıyor\n"
 
-#: src/gpasswd.c:604
 #, c-format
 msgid "%s: can't re-write shadow file\n"
 msgstr "%s: gölge dosyası tekrar yazılamıyor\n"
 
-#: src/gpasswd.c:612
 #, c-format
 msgid "%s: can't unlock file\n"
 msgstr "%s: dosya kilidi açılamıyor\n"
 
-#: src/groupadd.c:97
 #, c-format
-msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
-msgstr "Kullanım: groupadd [-g gid [-o]] [-f] grup\n"
+msgid ""
+"Usage: groupadd [options] group\n"
+"\n"
+"Options:\n"
+"  -f, --force \t\tforce exit with success status if the specified\n"
+"\t\t\t\tgroup already exists\n"
+"  -g, --gid GID\t\tuse GID for the new group\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -o, --non-unique\t\tallow create group with duplicate\n"
+"\t\t\t\t(non-unique) GID\n"
+msgstr ""
 
-#: src/groupadd.c:161 src/groupadd.c:169 src/groupmod.c:174 src/groupmod.c:196
-#: src/useradd.c:839 src/usermod.c:495 src/usermod.c:617
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: yeni grup kaydı eklenirken hata oluştu\n"
 
-#: src/groupadd.c:218 src/useradd.c:886
 #, c-format
 msgid "%s: name %s is not unique\n"
 msgstr "%s: %s ismi tek değil\n"
 
-#: src/groupadd.c:233
 #, fuzzy, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: %u gid tek değil\n"
 
-#: src/groupadd.c:257
 #, fuzzy, c-format
 msgid "%s: can't get unique GID\n"
 msgstr "%s: tek (benzersiz) bir gid alınamadı\n"
 
-#: src/groupadd.c:279 src/groupmod.c:282
 #, c-format
 msgid "%s: %s is not a valid group name\n"
 msgstr "%s: %s geçerli bir grup adı değil\n"
 
-#: src/groupadd.c:318 src/groupmod.c:307
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: geçersiz grup %s\n"
-
-#: src/groupadd.c:332 src/useradd.c:1094
-#, fuzzy, c-format
-msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -O seçeneği ISIM=DEĞER gerektirir\n"
-
-#: src/groupadd.c:369 src/groupdel.c:123 src/groupmod.c:342 src/useradd.c:1214
-#: src/userdel.c:247 src/usermod.c:503
 #, c-format
 msgid "%s: cannot rewrite group file\n"
 msgstr "%s: grup dosyasına yazılamıyor\n"
 
-#: src/groupadd.c:376 src/groupdel.c:130 src/groupmod.c:349 src/useradd.c:1222
-#: src/userdel.c:253 src/usermod.c:626
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
 msgstr "%s: gölge grup dosyasına yazılamıyor\n"
 
-#: src/groupadd.c:393 src/groupdel.c:147 src/groupmod.c:366 src/userdel.c:307
 #, c-format
 msgid "%s: unable to lock group file\n"
 msgstr "%s: grup dosyası kilitlenemiyor\n"
 
-#: src/groupadd.c:397 src/groupdel.c:151 src/groupmod.c:370
 #, c-format
 msgid "%s: unable to open group file\n"
 msgstr "%s: grup dosyası açılamıyor\n"
 
-#: src/groupadd.c:403 src/groupdel.c:157 src/groupmod.c:376 src/userdel.c:317
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
 msgstr "%s: gölge grup dosyası kilitlenemiyor\n"
 
-#: src/groupadd.c:408 src/groupdel.c:162 src/groupmod.c:381
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: gölge grup dosyası açılamıyor\n"
 
-#: src/groupadd.c:507
+#, c-format
+msgid "%s: invalid group %s\n"
+msgstr "%s: geçersiz grup %s\n"
+
+#, fuzzy, c-format
+msgid "%s: -K requires KEY=VALUE\n"
+msgstr "%s: -O seçeneği ISIM=DEĞER gerektirir\n"
+
 #, c-format
 msgid "%s: group %s exists\n"
 msgstr "%s: grup %s zaten var\n"
 
-#: src/groupdel.c:83
 #, c-format
 msgid "Usage: groupdel group\n"
 msgstr "Kullanım: groupdel grup_adı\n"
 
-#: src/groupdel.c:96 src/groupmod.c:178 src/groupmod.c:200
 #, c-format
 msgid "%s: error removing group entry\n"
 msgstr "%s: grup kaydını silerken hata oluştu\n"
 
-#: src/groupdel.c:105
 #, c-format
 msgid "%s: error removing shadow group entry\n"
 msgstr "%s: gölge grup kaydını silerken hata oluştu\n"
 
-#: src/groupdel.c:201
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
 msgstr "%s: kullanıcının birincil grubu silinemez\n"
 
-#: src/groupdel.c:289 src/groupmod.c:470
 #, c-format
 msgid "%s: group %s does not exist\n"
 msgstr "%s: grup %s mevcut değil\n"
 
-#: src/groupdel.c:301 src/groupmod.c:484
 #, c-format
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s: grup %s bir NIS grubudur\n"
 
-#: src/groupdel.c:306 src/groupmod.c:489 src/userdel.c:603 src/usermod.c:722
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s NIS efendisidir\n"
 
-#: src/groupmod.c:98
 #, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
 msgstr "Kullanım: groupmod [-g gid [-o]] [-n isim] grup\n"
 
-#: src/groupmod.c:156
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s /etc/group dosyasında bulunamadı\n"
 
-#: src/groupmod.c:241
 #, fuzzy, c-format
 msgid "%s: %u is not a unique GID\n"
 msgstr "%s: %u benzersiz bir gid değil\n"
 
-#: src/groupmod.c:271
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s benzersiz bir isim değil\n"
 
-#: src/grpck.c:87
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
 msgstr "Kullanım: %s [-r] [-s] [grup [gshadow]]\n"
 
-#: src/grpck.c:89
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Kullanım: %s [-r] [-s] [grup]\n"
 
-#: src/grpck.c:107 src/pwck.c:100
-msgid "No"
+#, fuzzy, c-format
+msgid "No\n"
 msgstr "Hayır"
 
-#: src/grpck.c:191 src/pwck.c:165
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s ve -r uyumsuz\n"
 
-#: src/grpck.c:230 src/grpck.c:239 src/pwck.c:198 src/pwck.c:206
 #, c-format
 msgid "%s: cannot lock file %s\n"
 msgstr "%s: %s dosyası kilitlenemiyor\n"
 
-#: src/grpck.c:255 src/grpck.c:264 src/pwck.c:221 src/pwck.c:229
 #, c-format
 msgid "%s: cannot open file %s\n"
 msgstr "%s: %s dosyası açılamıyor\n"
 
-#: src/grpck.c:307
 #, c-format
 msgid "invalid group file entry\n"
 msgstr "geçersiz grup dosyası kaydı\n"
 
-#: src/grpck.c:308 src/grpck.c:371 src/grpck.c:453 src/grpck.c:516
-#: src/grpck.c:533 src/pwck.c:271 src/pwck.c:333 src/pwck.c:430 src/pwck.c:492
-#: src/pwck.c:516
 #, c-format
 msgid "delete line `%s'? "
 msgstr "`%s' satırı silinsin mi? "
 
-#: src/grpck.c:370
+#, c-format
 msgid "duplicate group entry\n"
 msgstr "mükerrer grup kaydı\n"
 
-#: src/grpck.c:387
 #, c-format
 msgid "invalid group name `%s'\n"
 msgstr "geçersiz grup adı `%s'\n"
 
-#: src/grpck.c:413
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grup %s: %s kullanıcısı yok\n"
 
-#: src/grpck.c:415 src/grpck.c:585
 #, c-format
 msgid "delete member `%s'? "
 msgstr "`%s' üyesi silinsin mi? "
 
-#: src/grpck.c:452
 #, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "geçersiz gölge grup dosyası kaydı\n"
 
-#: src/grpck.c:515
+#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "mükerrer gölge grup kaydı\n"
 
-#: src/grpck.c:532
+#, c-format
 msgid "no matching group file entry\n"
 msgstr "grup dosyası kaydı eşleşmedi\n"
 
-#: src/grpck.c:553
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "gölge grubu %s: %s yönetici kullanıcı değil\n"
 
-#: src/grpck.c:555
 #, c-format
 msgid "delete administrative member `%s'? "
 msgstr "yönetici üye `%s' silinsin mi? "
 
-#: src/grpck.c:583
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "gölge grubu %s: kullanıcı %s mevcut değil\n"
 
-#: src/grpck.c:611 src/grpck.c:617 src/pwck.c:549 src/pwck.c:556
 #, c-format
 msgid "%s: cannot update file %s\n"
 msgstr "%s: %s dosyası güncellenemiyor\n"
 
-#: src/grpck.c:640 src/pwck.c:578
 #, c-format
 msgid "%s: the files have been updated\n"
 msgstr "%s: dosyalar güncellendi\n"
 
-#: src/grpck.c:641 src/pwck.c:579
 #, c-format
 msgid "%s: no changes\n"
 msgstr "%s: değişiklik yok\n"
 
-#: src/grpconv.c:60 src/grpunconv.c:56
 #, c-format
 msgid "%s: can't lock group file\n"
 msgstr "%s: grup dosyası kilitlenemiyor\n"
 
-#: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
 msgstr "%s: grup dosyası açılamıyor\n"
 
-#: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
 msgid "%s: can't lock shadow group file\n"
 msgstr "%s: gölge grup dosyası kilitlenemiyor\n"
 
-#: src/grpconv.c:75 src/grpunconv.c:71
 #, c-format
 msgid "%s: can't open shadow group file\n"
 msgstr "%s: gölge grup dosyası açılamıyor\n"
 
-#: src/grpconv.c:92
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s gölge grubu %s silinemiyor\n"
 
-#: src/grpconv.c:130 src/pwconv.c:152
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
 msgstr "%s: %s için gölge kaydı güncellenemiyor\n"
 
-#: src/grpconv.c:140 src/grpunconv.c:88
 #, c-format
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: %s grubu için kayıt güncellenemiyor\n"
 
-#: src/grpconv.c:147 src/grpunconv.c:96
 #, c-format
 msgid "%s: can't update shadow group file\n"
 msgstr "%s: gölge grup dosyası güncellenemiyor\n"
 
-#: src/grpconv.c:152 src/grpunconv.c:102
 #, c-format
 msgid "%s: can't update group file\n"
 msgstr "%s: grup dosyası güncellenemiyor\n"
 
-#: src/grpunconv.c:107
 #, c-format
 msgid "%s: can't delete shadow group file\n"
 msgstr "%s: gölge grup dosyası silinemiyor\n"
 
-#: src/id.c:53
 #, c-format
 msgid "Usage: id [-a]\n"
 msgstr "Kullanım: id [-a]\n"
 
-#: src/id.c:55
 #, c-format
 msgid "Usage: id\n"
 msgstr "Kullanım: id\n"
 
-#: src/id.c:169
 #, c-format
 msgid " groups="
 msgstr ".gruplar="
 
-#: src/lastlog.c:64
 #, c-format
 msgid ""
 "Usage: lastlog [options]\n"
@@ -1040,41 +860,33 @@ msgid ""
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 msgstr ""
 
-#: src/lastlog.c:90
 #, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Kullanıcı adı         Port     Kimden             Sonuncu\n"
 
-#: src/lastlog.c:92
 #, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Kullanıcı adı                Port     Sonuncu\n"
 
-#: src/lastlog.c:107
 msgid "**Never logged in**"
 msgstr "**Hiç giriş yapmadı**"
 
-#: src/login.c:156
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
 msgstr "Kullanım: %s [-p] [isim]\n"
 
-#: src/login.c:159
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "          %s [-p] [-h host] [-f isim]\n"
 
-#: src/login.c:161
 #, c-format
 msgid "       %s [-p] -r host\n"
 msgstr "          %s [-p] -r host\n"
 
-#: src/login.c:198
 #, c-format
 msgid "Invalid login time\n"
 msgstr "Geçersiz giriş zamanı\n"
 
-#: src/login.c:234
 #, c-format
 msgid ""
 "\n"
@@ -1083,7 +895,6 @@ msgstr ""
 "\n"
 "Sistem rutin bakımlar için kapalı\n"
 
-#: src/login.c:244
 #, c-format
 msgid ""
 "\n"
@@ -1092,7 +903,6 @@ msgstr ""
 "\n"
 "[Bağlantı kesilmesi atlandı -- root girişi olanaklı.]\n"
 
-#: src/login.c:302
 #, c-format
 msgid ""
 "\n"
@@ -1101,17 +911,14 @@ msgstr ""
 "\n"
 "Giriş %d saniye sonra zaman aşımına uğradı.\n"
 
-#: src/login.c:576
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " `%.200s'den `%.100s' üzerinde"
 
-#: src/login.c:579
 #, c-format
 msgid " on `%.100s'"
 msgstr " `%.100s' üzerinde"
 
-#: src/login.c:736
 #, c-format
 msgid ""
 "\n"
@@ -1120,149 +927,119 @@ msgstr ""
 "\n"
 "%s giriş: "
 
-#: src/login.c:891 src/sulogin.c:207
 msgid "Login incorrect"
 msgstr "Giriş geçersiz"
 
-#: src/login.c:1038
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr ""
 "Uyarı: geçici bir kilitlenme sonrasında giriş tekrar olanaklı kılındı.\n"
 
-#: src/login.c:1052
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Son giriş: %s üzerinden %s"
 
-#: src/login.c:1055
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "Son giriş: %s üzerinden %.19s"
 
-#: src/login.c:1060
 #, c-format
 msgid " from %.*s"
 msgstr "%.*s'den"
 
-#: src/newgrp.c:61
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Kullanım: newgrp [-] [grup]\n"
 
-#: src/newgrp.c:63
 #, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Kullanım: sg grup [[-c] komut]\n"
 
-#: src/newgrp.c:159
 #, fuzzy, c-format
 msgid "unknown UID: %u\n"
 msgstr "bilinmeyen GID: %lu\n"
 
-#: src/newgrp.c:241
 #, c-format
 msgid "unknown GID: %lu\n"
 msgstr "bilinmeyen GID: %lu\n"
 
-#: src/newgrp.c:401 src/newgrp.c:410
 msgid "Sorry.\n"
 msgstr "Üzgünüm.\n"
 
-#: src/newgrp.c:515
 #, c-format
 msgid "too many groups\n"
 msgstr "çok fazla grup\n"
 
-#: src/newusers.c:76
 #, c-format
 msgid "Usage: %s [input]\n"
 msgstr "Kullanım: %s [girdi]\n"
 
-#: src/newusers.c:376
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: /etc/passwd kilitlenemiyor.\n"
 
-#: src/newusers.c:383
 #, c-format
 msgid "%s: can't lock files, try again later\n"
 msgstr "%s: dosyalar kilitlenemiyor, daha sonra tekrar deneyin\n"
 
-#: src/newusers.c:391
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: dosyalar açılamıyor\n"
 
-#: src/newusers.c:434
 #, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: satır %d: geçersiz satır\n"
 
-#: src/newusers.c:453
 #, c-format
 msgid "%s: line %d: can't create GID\n"
 msgstr "%s: satır %d: GID yaratılamıyor\n"
 
-#: src/newusers.c:469
 #, c-format
 msgid "%s: line %d: can't create UID\n"
 msgstr "%s: satır %d: UID yaratılamıyor\n"
 
-#: src/newusers.c:482
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
 msgstr "%s: satır %d: kullanıcı %s bulunamadı\n"
 
-#: src/newusers.c:491
 #, c-format
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: satır %d: parola güncellenemiyor\n"
 
-#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
 msgstr "%s: satır %d: mkdir başarısız oldu\n"
 
-#: src/newusers.c:514
 #, c-format
 msgid "%s: line %d: chown failed\n"
 msgstr "%s: satır %d: chown başarısız oldu\n"
 
-#: src/newusers.c:524
 #, c-format
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: satır %d: kayıt güncellenemiyor\n"
 
-#: src/newusers.c:549
 #, c-format
 msgid "%s: error updating files\n"
 msgstr "%s: dosyaların güncellenmesinde hata oluştu\n"
 
-#: src/passwd.c:142
 #, c-format
 msgid "Usage: %s [-f|-s] [name]\n"
 msgstr "Kullanım: %s [-f|-s] [isim]\n"
 
-#: src/passwd.c:146
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "          %s [-x maks] [-n min] [-w uyarı] [-i pasif] isim\n"
 
-#: src/passwd.c:148
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
 msgstr "          %s {-l|-u|-d|-S|-e} isim\n"
 
-#: src/passwd.c:202
 msgid "Old password: "
 msgstr "Eski parola: "
 
-#: src/passwd.c:211
 #, c-format
 msgid "Incorrect password for `%s'\n"
 msgstr "`%s' için yanlış parola\n"
 
-#: src/passwd.c:235
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1271,16 +1048,13 @@ msgstr ""
 "Yeni parolayı girin (asgari %d, azami %d karakter)\n"
 "Lütfen büyük, küçük harf ve rakamların bir kombinasyonunu kullanın.\n"
 
-#: src/passwd.c:241
 msgid "New password: "
 msgstr "Yeni parola: "
 
-#: src/passwd.c:251
 #, c-format
 msgid "Try again.\n"
 msgstr "Yeniden deneyin.\n"
 
-#: src/passwd.c:262
 #, c-format
 msgid ""
 "\n"
@@ -1289,177 +1063,160 @@ msgstr ""
 "\n"
 "Uyarı: zayıf parola (yine de kullanmak için aynısını tekrar girin).\n"
 
-#: src/passwd.c:271
 #, c-format
 msgid "They don't match; try again.\n"
 msgstr "Eşleşmediler, tekrar deneyin.\n"
 
-#: src/passwd.c:338
 #, c-format
 msgid "The password for %s cannot be changed.\n"
 msgstr "%s için parola değiştirilemedi.\n"
 
-#: src/passwd.c:355
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
 msgstr "Üzgünüm, %s için parola henüz değiştirilemedi.\n"
 
-#: src/passwd.c:430
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: yetersiz bellek\n"
 
-#: src/passwd.c:655
 #, c-format
 msgid "%s: Cannot execute %s"
 msgstr "%s: %s çalıştırılamıyor"
 
-#: src/passwd.c:727
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: depo %s desteklenmiyor\n"
 
-#: src/passwd.c:830
 #, fuzzy, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
 msgstr "%s için kabuğu değiştiremezsiniz.\n"
 
-#: src/passwd.c:872
 #, c-format
 msgid "Changing password for %s\n"
 msgstr "%s için parola değiştiriliyor\n"
 
-#: src/passwd.c:876
 #, c-format
 msgid "The password for %s is unchanged.\n"
 msgstr "%s için parola değişmedi\n"
 
-#: src/passwd.c:921
 #, c-format
 msgid "Password changed.\n"
 msgstr "Parola değişti \n"
 
-#: src/pwck.c:82
+#, fuzzy, c-format
+msgid "Password set to expire.\n"
+msgstr "Parolanızın kullanım süresi doldu."
+
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Kullanım: %s [-q] [-r] [-s] [parola [gölge]]\n"
 
-#: src/pwck.c:270
 #, c-format
 msgid "invalid password file entry\n"
 msgstr "geçersiz parola dosyası kaydı\n"
 
-#: src/pwck.c:332
+#, c-format
 msgid "duplicate password entry\n"
 msgstr "mükerrer parola kaydı\n"
 
-#: src/pwck.c:348
 #, c-format
 msgid "invalid user name '%s'\n"
 msgstr "geçersiz kullanıcı adı '%s'\n"
 
-#: src/pwck.c:362
 #, c-format
 msgid "user %s: no group %u\n"
 msgstr "kullanıcı %s: %u grubu mevcut değil\n"
 
-#: src/pwck.c:378
 #, c-format
 msgid "user %s: directory %s does not exist\n"
 msgstr "kullanıcı %s: %s dizini mevcut değil\n"
 
-#: src/pwck.c:394
 #, c-format
 msgid "user %s: program %s does not exist\n"
 msgstr "kullanıcı %s: uygulama %s mevcut değil\n"
 
-#: src/pwck.c:429
 #, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "geçersiz gölge parola dosyası kaydı\n"
 
-#: src/pwck.c:491
+#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "mükerrer gölge parola kaydı\n"
 
-#: src/pwck.c:515
+#, c-format
 msgid "no matching password file entry\n"
 msgstr "eşleşen parola dosyası kaydı yok\n"
 
-#: src/pwck.c:533
 #, c-format
 msgid "user %s: last password change in the future\n"
 msgstr "kullanıcı %s: gelecekteki son parola değişimi\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:78
 #, c-format
 msgid "%s: can't lock passwd file\n"
 msgstr "%s: passwd dosyası kilitlenemedi\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:83
 #, c-format
 msgid "%s: can't open passwd file\n"
 msgstr "%s: passwd dosyası açılamadı\n"
 
-#: src/pwconv.c:117
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr "%s: %s için gölge kaydı silinemedi\n"
 
-#: src/pwconv.c:162
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: %s için passwd kaydı güncellenemedi\n"
 
-#: src/pwconv.c:169
 #, c-format
 msgid "%s: can't update shadow file\n"
 msgstr "%s: gölge dosyası güncellenemedi\n"
 
-#: src/pwconv.c:173
 #, c-format
 msgid "%s: can't update passwd file\n"
 msgstr "%s: passwd dosyası güncellenemedi\n"
 
-#: src/pwunconv.c:123
 #, c-format
 msgid "%s: can't update entry for user %s\n"
 msgstr "%s: kullanıcı %s için kayıt güncellenemiyor\n"
 
-#: src/pwunconv.c:142
 #, c-format
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: gölge parola dosyası silinemiyor\n"
 
-#: src/su.c:129
+#, c-format
+msgid "Access to su to that account DENIED.\n"
+msgstr "Bu hesap için 'su'ya erişim ENGELLENDİ.\n"
+
+#, c-format
+msgid "Password authentication bypassed.\n"
+msgstr "Parola yetkilendirmesi atlandı.\n"
+
+#, c-format
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "Lütfen yetkilendirme için KENDİ parolanızı girin.\n"
+
 msgid "Sorry."
 msgstr "Üzgünüm."
 
-#: src/su.c:315
 #, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: bir terminalden çalıştırılmalı\n"
 
-#: src/su.c:412
 #, c-format
 msgid "%s: pam_start: error %d\n"
 msgstr "%s: pam_start: hata %d\n"
 
-#: src/su.c:440
 #, c-format
 msgid "Unknown id: %s\n"
 msgstr "Bilinmeyen id: %s\n"
 
-#: src/su.c:475 src/su.c:491
 #, c-format
 msgid "You are not authorized to su %s\n"
 msgstr "su %s için yetkili değilsiniz\n"
 
-#: src/su.c:486
 msgid "(Enter your own password.)"
 msgstr "(Kendi parolanızı girin.)"
 
-#: src/su.c:520
 #, c-format
 msgid ""
 "%s: %s\n"
@@ -1468,37 +1225,18 @@ msgstr ""
 "%s: %s\n"
 "(Dikkate alınmadı)\n"
 
-#: src/su.c:727
 #, c-format
 msgid "No shell\n"
 msgstr "Kabuk yok\n"
 
-#: src/suauth.c:104
-#, c-format
-msgid "Access to su to that account DENIED.\n"
-msgstr "Bu hesap için 'su'ya erişim ENGELLENDİ.\n"
-
-#: src/suauth.c:112
-#, c-format
-msgid "Password authentication bypassed.\n"
-msgstr "Parola yetkilendirmesi atlandı.\n"
-
-#: src/suauth.c:121
-#, c-format
-msgid "Please enter your OWN password as authentication.\n"
-msgstr "Lütfen yetkilendirme için KENDİ parolanızı girin.\n"
-
-#: src/sulogin.c:118
 #, c-format
 msgid "No password file\n"
 msgstr "Parola dosyası yok\n"
 
-#: src/sulogin.c:164
 #, c-format
 msgid "No password entry for 'root'\n"
 msgstr "'root' için parola kaydı yok\n"
 
-#: src/sulogin.c:179
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -1508,58 +1246,47 @@ msgstr ""
 "Normal başlangıç için control-d ye basın,\n"
 "(ya da sistem bakımı için root parolasını verin):"
 
-#: src/sulogin.c:214
 msgid "Entering System Maintenance Mode\n"
 msgstr "Sistem Bakımı Kipine Giriliyor\n"
 
-#: src/useradd.c:222 src/useradd.c:235 src/usermod.c:663 src/usermod.c:676
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
 msgstr "%s: geçersiz sayısal argüman `%s'\n"
 
-#: src/useradd.c:290
 #, c-format
 msgid "%s: unknown GID %s\n"
 msgstr "%s: bilinmeyen GID %s\n"
 
-#: src/useradd.c:298 src/useradd.c:574 src/useradd.c:1058 src/usermod.c:216
-#: src/usermod.c:788
 #, c-format
 msgid "%s: unknown group %s\n"
 msgstr "%s: bilinmeyen grup %s\n"
 
-#: src/useradd.c:406
 #, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: yeni varsayılanlar dosyası oluşturulamadı\n"
 
-#: src/useradd.c:411
 #, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: yeni varsayılanlar dosyası açılamadı\n"
 
-#: src/useradd.c:499 src/useradd.c:510
 #, c-format
 msgid "%s: rename: %s"
 msgstr "%s: yeniden adlandırma: %s"
 
-#: src/useradd.c:595 src/usermod.c:237
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: grup `%s' bir NIS grubu.\n"
 
-#: src/useradd.c:604 src/usermod.c:246
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: çok fazla grup verildi (azami %d).\n"
 
-#: src/useradd.c:634
 #, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -b, --base-dir BASE_DIR\tbase directory for the the new user account\n"
+"  -b, --base-dir BASE_DIR\tbase directory for the new user account\n"
 "\t\t\t\thome directory\n"
 "  -c, --comment COMMENT\t\tset the GECOS field for the new user account\n"
 "  -d, --home-dir HOME_DIR\thome directory for the new user account\n"
@@ -1584,143 +1311,114 @@ msgid ""
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
 
-#: src/useradd.c:738 src/usermod.c:425
 #, c-format
 msgid "%s: error locking group file\n"
 msgstr "%s: grup dosyası kilitlenmesinde hata\n"
 
-#: src/useradd.c:742 src/usermod.c:430
 #, c-format
 msgid "%s: error opening group file\n"
 msgstr "%s: grup dosyası açılırken hata\n"
 
-#: src/useradd.c:748 src/usermod.c:523
 #, c-format
 msgid "%s: error locking shadow group file\n"
 msgstr "%s: gölge grup dosyası kilitlenirken hata\n"
 
-#: src/useradd.c:753 src/usermod.c:529
 #, c-format
 msgid "%s: error opening shadow group file\n"
 msgstr "%s: gölge grup dosyası açılırken hata\n"
 
-#: src/useradd.c:891
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: %u gid tek değil\n"
 
-#: src/useradd.c:921
 #, fuzzy, c-format
 msgid "%s: can't get unique UID\n"
 msgstr "%s: tek (benzersiz) bir gid alınamadı\n"
 
-#: src/useradd.c:977
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
 msgstr "%s: geçersiz ana dizin `%s'\n"
 
-#: src/useradd.c:988
 #, c-format
 msgid "%s: invalid comment `%s'\n"
 msgstr "%s: geçersiz açıklama `%s'\n"
 
-#: src/useradd.c:1000
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
 msgstr "%s: geçersiz ev dizini `%s'\n"
 
-#: src/useradd.c:1018 src/usermod.c:771
 #, c-format
 msgid "%s: invalid date `%s'\n"
 msgstr "%s: geçersiz tarih `%s'\n"
 
-#: src/useradd.c:1031
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
 msgstr "%s: -e için gölge parolalar gerekli\n"
 
-#: src/useradd.c:1047
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: -f için gölge parolalar gerekli\n"
 
-#: src/useradd.c:1113 src/usermod.c:748 src/usermod.c:758 src/usermod.c:803
-#: src/usermod.c:847
 #, c-format
 msgid "%s: invalid field `%s'\n"
 msgstr "%s: geçersiz alan `%s'\n"
 
-#: src/useradd.c:1126
 #, c-format
 msgid "%s: invalid shell `%s'\n"
 msgstr "%s: geçersiz kabuk `%s'\n"
 
-#: src/useradd.c:1169
 #, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: geçersiz kullanıcı adı '%s'\n"
 
-#: src/useradd.c:1203 src/userdel.c:242 src/usermod.c:920
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: parola dosyası yazılamıyor\n"
 
-#: src/useradd.c:1208 src/userdel.c:245 src/usermod.c:925
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: gölge parola dosyası yazılamıyor\n"
 
-#: src/useradd.c:1244 src/userdel.c:289 src/usermod.c:953
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: parola dosyası kilitlenemiyor\n"
 
-#: src/useradd.c:1248 src/userdel.c:293 src/usermod.c:957
 #, c-format
 msgid "%s: unable to open password file\n"
 msgstr "%s: parola dosyası açılamıyor\n"
 
-#: src/useradd.c:1254 src/userdel.c:298 src/usermod.c:962
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: gölge parola dosyası kilitlenemiyor\n"
 
-#: src/useradd.c:1260 src/userdel.c:303 src/usermod.c:967
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: gölge parola dosyası açılamıyor\n"
 
-#: src/useradd.c:1347
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: yeni parola kaydı eklenirken hata\n"
 
-#: src/useradd.c:1358 src/usermod.c:1030
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr "%s: yeni gölge parola kaydı eklenirken hata\n"
 
-#: src/useradd.c:1386
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: %s dizini yaratılamıyor\n"
 
-#: src/useradd.c:1416
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
 
-#: src/useradd.c:1439
 #, fuzzy, c-format
 msgid "Can't create mail spool for user %s.\n"
 msgstr "%s: kullanıcı %s için kayıt güncellenemiyor\n"
 
-#: src/useradd.c:1541 src/usermod.c:899
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: kullanıcı %s mevcut\n"
 
-#: src/useradd.c:1555
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
@@ -1728,181 +1426,151 @@ msgstr ""
 "%s: grup %s mevcut - eğer bu kullanıcıyı bu gruba eklemek istiyorsanız, -g "
 "kullanın.\n"
 
-#: src/useradd.c:1593
+#, c-format
+msgid ""
+"%s: warning: the home directory already exists.\n"
+"Not copying any file from skel directory into it.\n"
+msgstr ""
+
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
 "%s: uyarı: CREATE_HOME desteklenmiyor, lütfen bunun yerine -m kullanın.\n"
 
-#: src/userdel.c:104
 #, c-format
 msgid "Usage: %s [-r] name\n"
 msgstr "Kullanım: %s [-r] isim\n"
 
-#: src/userdel.c:157 src/userdel.c:222
 #, c-format
 msgid "%s: error updating group entry\n"
 msgstr "%s: grup kaydı güncellenirken hata oluştu\n"
 
-#: src/userdel.c:311
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: grup dosyası açılamıyor\n"
 
-#: src/userdel.c:321
 #, c-format
 msgid "%s: cannot open shadow group file\n"
 msgstr "%s: gölge grup dosyası açılamıyor\n"
 
-#: src/userdel.c:339
 #, c-format
 msgid "%s: error deleting password entry\n"
 msgstr "%s: parola kaydı silinirken hata oluştu\n"
 
-#: src/userdel.c:342
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
 msgstr "%s: gölge parola kaydı silinirken hata oluştu\n"
 
-#: src/userdel.c:382
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: kullanıcı %s şu an oturumda\n"
 
-#: src/userdel.c:490 src/userdel.c:631
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
 msgstr "%s: %s %s kullanıcısına ait değil, silinmiyor\n"
 
-#: src/userdel.c:496
 #, c-format
 msgid "%s: warning: can't remove "
 msgstr "%s: uyarı: silinemiyor "
 
-#: src/userdel.c:584 src/usermod.c:701
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s: kullanıcı %s mevcut değil\n"
 
-#: src/userdel.c:599 src/usermod.c:717
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: kullanıcı %s bir NIS kullanıcısı\n"
 
-#: src/userdel.c:654
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr "%s: %s dizini silinmiyor (%s kullanıcısının ev dizinini silecekti)\n"
 
-#: src/userdel.c:668
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: %s dizini silinirken hata oluştu\n"
 
-#: src/usermod.c:278
 #, c-format
 msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
 msgstr "Kullanım: %s\t[-u uid [-o]] [-g grup] [-G grup,...] \n"
 
-#: src/usermod.c:282
 #, c-format
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d ev_dizini [-m]] [-s kabuk] [-c açıklama] [-l yeni_isim]\n"
 
-#: src/usermod.c:284
 #, c-format
 msgid "[-f inactive] [-e expire] "
 msgstr "[-f pasif] [-e hesap_bitimi] "
 
-#: src/usermod.c:285
 #, c-format
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p parola] [-L|-U] isim\n"
 
-#: src/usermod.c:457
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s: update_group için bellek yetersiz\n"
 
-#: src/usermod.c:566
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s: update_gshadow için bellek yetersiz\n"
 
-#: src/usermod.c:870
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s: herhangi bir bayrak verilmedi\n"
 
-#: src/usermod.c:876
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: -e ve -f için gölge parolalar gerekli\n"
 
-#: src/usermod.c:886
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
 msgstr ""
 
-#: src/usermod.c:904
 #, c-format
 msgid "%s: uid %lu is not unique\n"
 msgstr "%s: uid %lu benzersiz değil\n"
 
-#: src/usermod.c:1015
 #, c-format
 msgid "%s: error changing password entry\n"
 msgstr "%s: parola kaydı değiştirilirken hata oluştu\n"
 
-#: src/usermod.c:1021
 #, c-format
 msgid "%s: error removing password entry\n"
 msgstr "%s: parola kaydı silinirken hata oluştu\n"
 
-#: src/usermod.c:1037
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr "%s: gölge parola kaydı silinirken hata oluştu\n"
 
-#: src/usermod.c:1064
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: %s dizini mevcut\n"
 
-#: src/usermod.c:1072
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s: %s yaratılamıyor\n"
 
-#: src/usermod.c:1077
 #, c-format
 msgid "%s: can't chown %s\n"
 msgstr "%s: chown %s gerçekleştirilemiyor\n"
 
-#: src/usermod.c:1089
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
 
-#: src/usermod.c:1099
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: %s dizini %s olarak yeniden adlandırılamıyor\n"
 
-#: src/usermod.c:1194
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: uyarı: %s %s kullanıcısına ait değil\n"
 
-#: src/usermod.c:1200
 msgid "failed to change mailbox owner"
 msgstr "postakutusu sahibi değiştirilmedi"
 
-#: src/usermod.c:1208
 msgid "failed to rename mailbox"
 msgstr "postakutusu isim değişikliği başarısız"
 
-#: src/vipw.c:104
 #, c-format
 msgid ""
 "\n"
@@ -1911,20 +1579,16 @@ msgstr ""
 "\n"
 "%s: %s değiştirilmedi\n"
 
-#: src/vipw.c:131
 msgid "Couldn't lock file"
 msgstr "Dosya kilitlenemedi"
 
-#: src/vipw.c:140
 msgid "Couldn't make backup"
 msgstr "Yedek alınamadı"
 
-#: src/vipw.c:196
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s geri yüklenemiyor: %s (değişiklikleriniz %s içinde)\n"
 
-#: src/vipw.c:234
 #, c-format
 msgid ""
 "Usage:\n"
@@ -1934,6 +1598,9 @@ msgstr ""
 "Kullanım:\n"
 "`vipw' /etc/passwd'ü düzenler        `vipw -s' /etc/shadow'u düzenler\n"
 "`vigr' /etc/group'u düzenler         `vigr -s' /etc/gshadow'u düzenler\n"
+
+#~ msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+#~ msgstr "Kullanım: groupadd [-g gid [-o]] [-f] grup\n"
 
 #, fuzzy
 #~ msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"

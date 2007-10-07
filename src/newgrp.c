@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.34 2005/07/08 17:58:55 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.35 2005/08/11 11:26:11 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -440,58 +440,55 @@ int main (int argc, char **argv)
 			 "user `%s' (login `%s' on %s) switched to group `%s'",
 			 name, loginname, tty, group));
 #ifdef USE_PAM
-		if (getdef_bool ("CLOSE_SESSIONS")) {
-			/*
-			 * We want to fork and exec the new shell in the child, leaving the
-			 * parent waiting to log the session close.
-			 *
-			 * The parent must ignore signals generated from the console
-			 * (SIGINT, SIGQUIT, SIGHUP) which might make the parent terminate
-			 * before its child. When bash is exec'ed as the subshell, it
-			 * generates a new process group id for itself, and consequently
-			 * only SIGHUP, which is sent to all process groups in the session,
-			 * can reach the parent. However, since arbitrary programs can be
-			 * specified as login shells, there is no such guarantee in general.
-			 * For the same reason, we must also ignore stop signals generated
-			 * from the console (SIGTSTP, SIGTTIN, and SIGTTOU) in order to
-			 * avoid any possibility of the parent being stopped when it
-			 * receives SIGCHLD from the terminating subshell.  -- JWP
-			 */
-			pid_t child, pid;
+		/*
+		 * We want to fork and exec the new shell in the child, leaving the
+		 * parent waiting to log the session close.
+		 *
+		 * The parent must ignore signals generated from the console
+		 * (SIGINT, SIGQUIT, SIGHUP) which might make the parent terminate
+		 * before its child. When bash is exec'ed as the subshell, it
+		 * generates a new process group id for itself, and consequently
+		 * only SIGHUP, which is sent to all process groups in the session,
+		 * can reach the parent. However, since arbitrary programs can be
+		 * specified as login shells, there is no such guarantee in general.
+		 * For the same reason, we must also ignore stop signals generated
+		 * from the console (SIGTSTP, SIGTTIN, and SIGTTOU) in order to
+		 * avoid any possibility of the parent being stopped when it
+		 * receives SIGCHLD from the terminating subshell.  -- JWP
+		 */
+		pid_t child, pid;
 
-			signal (SIGINT, SIG_IGN);
-			signal (SIGQUIT, SIG_IGN);
-			signal (SIGHUP, SIG_IGN);
-			signal (SIGTSTP, SIG_IGN);
-			signal (SIGTTIN, SIG_IGN);
-			signal (SIGTTOU, SIG_IGN);
-			child = fork ();
-			if (child < 0) {
-				/* error in fork() */
-				fprintf (stderr, "%s: failure forking: %s",
-					 is_newgrp ? "newgrp" : "sg",
-					 strerror (errno));
-				exit (1);
-			} else if (child) {
-				/* parent - wait for child to finish, then log session close */
-				do {
-					pid = waitpid (child, NULL, 0);
-				} while (pid != child);
-				SYSLOG ((LOG_INFO,
-					 "user `%s' (login `%s' on %s) returned to group `%s'",
-					 name, loginname, tty,
-					 getgrgid (gid)->gr_name));
-				closelog ();
-				exit (0);
-			}
-			/* child - restore signals to their default state */
-			signal (SIGINT, SIG_DFL);
-			signal (SIGQUIT, SIG_DFL);
-			signal (SIGHUP, SIG_DFL);
-			signal (SIGTSTP, SIG_DFL);
-			signal (SIGTTIN, SIG_DFL);
-			signal (SIGTTOU, SIG_DFL);
+		signal (SIGINT, SIG_IGN);
+		signal (SIGQUIT, SIG_IGN);
+		signal (SIGHUP, SIG_IGN);
+		signal (SIGTSTP, SIG_IGN);
+		signal (SIGTTIN, SIG_IGN);
+		signal (SIGTTOU, SIG_IGN);
+		child = fork ();
+		if (child < 0) {
+			/* error in fork() */
+			fprintf (stderr, "%s: failure forking: %s",
+				 is_newgrp ? "newgrp" : "sg", strerror (errno));
+			exit (1);
+		} else if (child) {
+			/* parent - wait for child to finish, then log session close */
+			do {
+				pid = waitpid (child, NULL, 0);
+			} while (pid != child);
+			SYSLOG ((LOG_INFO,
+				 "user `%s' (login `%s' on %s) returned to group `%s'",
+				 name, loginname, tty,
+				 getgrgid (gid)->gr_name));
+			closelog ();
+			exit (0);
 		}
+		/* child - restore signals to their default state */
+		signal (SIGINT, SIG_DFL);
+		signal (SIGQUIT, SIG_DFL);
+		signal (SIGHUP, SIG_DFL);
+		signal (SIGTSTP, SIG_DFL);
+		signal (SIGTTIN, SIG_DFL);
+		signal (SIGTTOU, SIG_DFL);
 #endif				/* USE_PAM */
 	}
 #endif				/* USE_SYSLOG */

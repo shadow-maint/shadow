@@ -1,5 +1,13 @@
 # List of files which contain translatable strings.
 
+lib/commonio.c
+lib/encrypt.c
+lib/fputsx.c
+lib/getdef.c
+lib/getpass.c
+lib/groupio.c
+lib/gshadow.c
+lib/lockpw.c
 libmisc/addgrps.c
 libmisc/age.c
 libmisc/basename.c
@@ -24,6 +32,7 @@ libmisc/myname.c
 libmisc/obscure.c
 libmisc/pam_pass.c
 libmisc/pwd2spwd.c
+libmisc/pwdcheck.c
 libmisc/pwd_init.c
 libmisc/rlogin.c
 libmisc/salt.c
@@ -39,26 +48,14 @@ libmisc/ulimit.c
 libmisc/utmp.c
 libmisc/valid.c
 libmisc/xmalloc.c
-lib/commonio.c
-lib/encrypt.c
-lib/fputsx.c
-lib/getdef.c
-lib/getpass.c
-lib/groupio.c
-lib/grpack.c
-lib/gshadow.c
-lib/gspack.c
-lib/lockpw.c
 lib/port.c
 lib/pwauth.c
 lib/pwio.c
-lib/pwpack.c
 lib/sgetgrent.c
 lib/sgetpwent.c
 lib/sgroupio.c
 lib/shadow.c
 lib/shadowio.c
-lib/sppack.c
 lib/utent.c
 src/chage.c
 src/chfn.c
@@ -86,11 +83,10 @@ src/passwd.c
 src/pwck.c
 src/pwconv.c
 src/pwunconv.c
-src/su.c
 src/suauth.c
+src/su.c
 src/sulogin.c
 src/useradd.c
 src/userdel.c
 src/usermod.c
 src/vipw.c
-

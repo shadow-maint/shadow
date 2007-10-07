@@ -30,16 +30,18 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.23 2005/05/25 19:31:51 kloczek Exp $")
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
-#include <pwd.h>
-#include <time.h>
+RCSID (PKG_VER "$Id: faillog.c,v 1.24 2005/08/03 17:40:59 kloczek Exp $")
 #include <getopt.h>
-#include "prototypes.h"
+#include <pwd.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
 #include "defines.h"
+#include "exitcodes.h"
 #include "faillog.h"
+#include "prototypes.h"
+/* global variables */
 static FILE *fail;		/* failure file stream */
 static uid_t user;		/* one single user, specified on command line */
 static int days;		/* number of days to consider for print command */
@@ -68,7 +70,7 @@ static void usage (void)
 			   "  -u, --user LOGIN		display faillog record or maintains failure counters\n"
 			   "				and limits (if used with -r, -m or -l options) only\n"
 			   "				for user with LOGIN\n"));
-	exit (1);
+	exit (E_USAGE);
 }
 
 static void print_one (const struct faillog *fl, uid_t uid)
@@ -372,5 +374,6 @@ int main (int argc, char **argv)
 	if (!anyflag && (aflg || tflg || uflg))
 		print ();
 	fclose (fail);
-	return 0;
+
+	exit (E_SUCCESS);
 }

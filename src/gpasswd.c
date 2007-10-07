@@ -30,20 +30,22 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.26 2005/07/07 15:11:48 kloczek Exp $")
-#include <sys/types.h>
-#include <stdio.h>
-#include <pwd.h>
-#include <grp.h>
-#include <fcntl.h>
-#include <signal.h>
+RCSID (PKG_VER "$Id: gpasswd.c,v 1.28 2005/08/09 15:27:51 kloczek Exp $")
 #include <errno.h>
-#include "prototypes.h"
+#include <fcntl.h>
+#include <grp.h>
+#include <pwd.h>
+#include <signal.h>
+#include <stdio.h>
+#include <sys/types.h>
 #include "defines.h"
+#include "exitcodes.h"
 #include "groupio.h"
+#include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
+/* global variables */
 static char *Prog;
 
 #ifdef SHADOWGRP
@@ -77,7 +79,7 @@ static void usage (void)
 #else
 	fprintf (stderr, _("       %s [-M user,...] group\n"), Prog);
 #endif
-	exit (1);
+	exit (E_USAGE);
 }
 
 /*
@@ -612,6 +614,8 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
 		exit (1);
 	}
-	exit (0);
-	/* NOT REACHED */
+
+	nscd_flush_cache ("group");
+
+	exit (E_SUCCESS);
 }

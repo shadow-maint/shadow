@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.11 2005/07/07 14:25:48 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.12 2005/08/09 17:49:32 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -206,7 +206,7 @@
         <listitem>
           <para>The numerical value of the user's ID. This value must be
             unique, unless the <option>-o</option> option is used. The value
-            must be non-negative. Values between 0 and 99 are typically
+            must be non-negative. Values between 0 and 999 are typically
             reserved for system accounts. Any files which the user owns and
             which are located in the directory tree rooted at the user's
             home directory will have the file user ID changed automatically.

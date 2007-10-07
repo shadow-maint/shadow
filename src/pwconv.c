@@ -29,7 +29,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwconv.c,v 1.17 2005/05/25 18:20:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwconv.c,v 1.18 2005/08/09 15:27:02 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -176,5 +176,8 @@ int main (int argc, char **argv)
 	chmod (PASSWD_FILE "-", 0600);	/* /etc/passwd- (backup file) */
 	spw_unlock ();
 	pw_unlock ();
+
+	nscd_flush_cache ("passwd");
+
 	exit (E_SUCCESS);
 }

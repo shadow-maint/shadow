@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwunconv.c,v 1.17 2005/05/25 18:20:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwunconv.c,v 1.18 2005/08/03 16:00:46 kloczek Exp $")
 #include "defines.h"
 #include <sys/types.h>
 #include <stdio.h>
@@ -147,7 +147,6 @@ int main (int argc, char **argv)
 	pw_unlock ();
 
 	nscd_flush_cache ("passwd");
-	nscd_flush_cache ("shadow");
 
 	return 0;
 }

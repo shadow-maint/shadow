@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupdel.c,v 1.21 2005/05/25 19:31:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupdel.c,v 1.23 2005/08/11 16:23:34 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -40,7 +40,6 @@ RCSID (PKG_VER "$Id: groupdel.c,v 1.21 2005/05/25 19:31:51 kloczek Exp $")
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
-#include <pwd.h>
 #endif				/* USE_PAM */
 #include "nscd.h"
 #include "prototypes.h"
@@ -244,6 +243,8 @@ int main (int argc, char **argv)
 
 	group_name = argv[1];
 
+	OPENLOG ("groupdel");
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -275,8 +276,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
-
-	OPENLOG ("groupdel");
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='sulogin.8'>
-  <!--  $Id: sulogin.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $ -->
+  <!--  $Id: sulogin.8.xml,v 1.8 2005/08/03 16:29:14 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>sulogin</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,18 +14,13 @@
   
   <refsect1 id='syntax'>
     <title>SYNTAX</title>
-    <para>
-      <command>sulogin</command> [<emphasis remap='I'>
-        tty-device
-      </emphasis>
-      ]
+    <para><command>sulogin</command> [<emphasis remap='I'>tty-device</emphasis>]
     </para>
   </refsect1>
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>sulogin</command> is invoked by <command>init</command> prior
+    <para><command>sulogin</command> is invoked by <command>init</command> prior
       to allowing the user access to the system when in single user mode. 
       This feature may only be available on certain systems where
       <command>init</command> has been modified accordingly, or where the

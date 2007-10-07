@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the login package.
 #
-#	$Id: login.defs.linux,v 1.15 2005/03/07 10:09:06 kloczek Exp $
+#	$Id: login.defs.linux,v 1.16 2005/08/09 18:09:41 kloczek Exp $
 #
 # Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
 # If unspecified, some arbitrary (and possibly incorrect) value will
@@ -123,9 +123,7 @@ SU_NAME		su
 # *REQUIRED*
 #   Directory where mailboxes reside, _or_ name of file, relative to the
 #   home directory.  If you _do_ define both, MAIL_DIR takes precedence.
-#   QMAIL_DIR is for Qmail
 #
-#QMAIL_DIR	Maildir
 MAIL_DIR	/var/spool/mail
 #MAIL_FILE	.mail
 

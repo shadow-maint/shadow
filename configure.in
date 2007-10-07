@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.11.1)
+AM_INIT_AUTOMAKE(shadow, 4.0.12)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -202,19 +202,19 @@ AC_DEFINE(getpass, libshadow_getpass,
 	[Define to libshadow_getpass to use our own version of getpass().])
 
 AC_ARG_ENABLE(shadowgrp,
-	[  --enable-shadowgrp	enable shadow group support [default=yes]],
+	[  --enable-shadowgrp      enable shadow group support [default=yes]],
 	[case "${enableval}" in
 	 yes) enable_shadowgrp="yes" ;;
 	  no) enable_shadowgrp="no" ;;
 	   *) AC_MSG_ERROR(bad value ${enableval} for --enable-shadowgrp) ;;
 	 esac],
-	[enable_shadowgrp="no"]
+	[enable_shadowgrp="yes"]
 )
 
-AC_ARG_WITH(libcrack, [  --with-libcrack	try to use libcrack (default if found)])
-AC_ARG_WITH(libpam,   [  --with-libpam 		use libpam for PAM support])
-AC_ARG_WITH(selinux,  [  --with-selinux		use SELinux support])
-AC_ARG_WITH(skey,     [  --with-skey		use S/Key support])
+AC_ARG_WITH(libcrack, [  --with-libcrack         try to use libcrack (default if found)])
+AC_ARG_WITH(libpam,   [  --with-libpam           use libpam for PAM support])
+AC_ARG_WITH(selinux,  [  --with-selinux          use SELinux support])
+AC_ARG_WITH(skey,     [  --with-skey             use S/Key support])
 
 dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
@@ -280,7 +280,7 @@ if test "$with_libskey" = "yes"; then
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)
-AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT([external], [need-ngettext])
 
 AC_CONFIG_FILES([
 	Makefile

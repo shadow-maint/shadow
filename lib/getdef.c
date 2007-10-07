@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: getdef.c,v 1.31 2005/07/12 18:54:39 kloczek Exp $")
+RCSID ("$Id: getdef.c,v 1.35 2005/08/11 11:26:11 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
@@ -48,22 +48,43 @@ struct itemdef {
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
 static struct itemdef def_table[] = {
 	{"CHFN_RESTRICT", NULL},
+	{"CONSOLE_GROUPS", NULL},
+	{"CONSOLE", NULL},
+	{"CREATE_HOME", NULL},
 	{"DEFAULT_HOME", NULL},
+	{"ENV_PATH", NULL},
+	{"ENV_SUPATH", NULL},
+	{"ERASECHAR", NULL},
 	{"FAIL_DELAY", NULL},
+	{"FAKE_SHELL", NULL},
+	{"GETPASS_ASTERISKS", NULL},
+	{"GID_MAX", NULL},
+	{"GID_MIN", NULL},
+	{"HUSHLOGIN_FILE", NULL},
+	{"KILLCHAR", NULL},
+	{"LOGIN_RETRIES", NULL},
+	{"LOGIN_TIMEOUT", NULL},
+	{"LOG_OK_LOGINS", NULL},
+	{"LOG_UNKFAIL_ENAB", NULL},
+	{"MAIL_DIR", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},
 	{"PASS_WARN_AGE", NULL},
+	{"SULOG_FILE", NULL},
+	{"SU_NAME", NULL},
+	{"TTYGROUP", NULL},
+	{"TTYPERM", NULL},
+	{"TTYTYPE_FILE", NULL},
+	{"UID_MAX", NULL},
+	{"UID_MIN", NULL},
+	{"UMASK", NULL},
 	{"USERDEL_CMD", NULL},
-#ifdef USE_PAM
-	{"CLOSE_SESSIONS", NULL},
-#else
+	{"USERGROUPS_ENAB", NULL},
+#ifndef USE_PAM
 	{"CHFN_AUTH", NULL},
 	{"CHSH_AUTH", NULL},
 	{"CRACKLIB_DICTPATH", NULL},
 	{"ENV_HZ", NULL},
-	{"ENV_PATH", NULL},
-	{"ENV_ROOTPATH", NULL},	/* SuSE compatibility? */
-	{"ENV_SUPATH", NULL},
 	{"ENV_TZ", NULL},
 	{"ENVIRON_FILE", NULL},
 	{"FAILLOG_ENAB", NULL},
@@ -83,38 +104,13 @@ static struct itemdef def_table[] = {
 	{"PASS_MIN_LEN", NULL},
 	{"PORTTIME_CHECKS_ENAB", NULL},
 	{"SU_WHEEL_ONLY", NULL},
-	{"QMAIL_DIR", NULL},
 	{"QUOTAS_ENAB", NULL},
 	{"ULIMIT", NULL},
 #endif
-	{"CONSOLE_GROUPS", NULL},
-	{"CONSOLE", NULL},
-	{"CREATE_HOME", NULL},
-	{"ERASECHAR", NULL},
-	{"FAKE_SHELL", NULL},
-	{"GETPASS_ASTERISKS", NULL},
-	{"GID_MAX", NULL},
-	{"GID_MIN", NULL},
-	{"HUSHLOGIN_FILE", NULL},
-	{"KILLCHAR", NULL},
-	{"LOGIN_RETRIES", NULL},
-	{"LOGIN_TIMEOUT", NULL},
-	{"LOG_OK_LOGINS", NULL},
-	{"LOG_UNKFAIL_ENAB", NULL},
-	{"MAIL_DIR", NULL},
-	{"SULOG_FILE", NULL},
-	{"SU_NAME", NULL},
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
 #endif
-	{"TTYGROUP", NULL},
-	{"TTYPERM", NULL},
-	{"TTYTYPE_FILE", NULL},
-	{"UID_MAX", NULL},
-	{"UID_MIN", NULL},
-	{"UMASK", NULL},
-	{"USERGROUPS_ENAB", NULL},
 	{NULL, NULL}
 };
 

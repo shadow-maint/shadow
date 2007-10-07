@@ -1,0 +1,99 @@
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: shadow.5,v 1.4 2005/04/21 21:03:16 kloczek Exp $
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.TH SHADOW 5   
+.SH NOME
+shadow \- file delle password cifrate
+.SH DESCRIZIONE
+\fIshadow\fP contiene le informazioni sulle password cifrate per gli account 
+degli utenti e, opzionalmente, le informazioni sulla durata delle 
+password. Sono inclusi:
+.IP "" .5i
+Nome di login
+.IP "" .5i
+Password cifrata
+.IP "" .5i
+Giorni a partire dal 1 gennaio 1970 in cui la password è stata cambiata 
+l'ultima volta
+.IP "" .5i
+Giorni prima dei quali la password non può essere cambiata
+.IP "" .5i
+Giorni dopo i quali la password deve essere cambiata
+.IP "" .5i
+Giorni prima della scadenza della password in cui l'utente viene avvertito
+.IP "" .5i
+Giorni dopo la scadenza della password in cui l'account viene disabilitato
+.IP "" .5i
+Giorni a partire dal 1 gennaio 1970 dopo i quali l'account viene 
+disabilitato
+.IP "" .5i
+Campo riservato
+.PP
+Il campo password non può essere vuoto. La password cifrata è composta da 
+un numero compreso tra 13 a 24 di caratteri scelti da un alfabeto di 64 
+caratteri: da a fino a z, da A a Z, da 0 a 9, . e /. Facoltativamente, la 
+password può iniziare con il carattere "$"; questo sta a indicare che la 
+password cifrata è stata generata usando un algoritmo diverso da DES. Ad 
+esempio, "$1$" significa che è stato usato un algoritmo basato su MD5.
+.PP
+Fare riferimento a \fBcrypt\fP(3) per dettagli sul modo in cui questa stringa 
+viene interpretata.
+.PP
+La data dell'ultimo cambio della password è espressa come il numero di 
+giorni trascorsi dal 1 gennaio 1970. La passowrd non può essere cambiata 
+nuovamente prima che sia passato il numero di giorni previsti, ma deve 
+obbligatoriamente essere cambiata dopo il massimo numero di giorni. Se il 
+numero minimo di giorni richiesti è superiore al numero massimo di giorni 
+concessi, all'utente non è permesso cambiare la password.
+.PP
+Un account viene considerato inattivo e viene disabilitato se, dopo la 
+scadenza, la password non viene cambiata entro il numero di giorni 
+specificato. Inoltre, un account viene disabilitato il giorno specificato, 
+senza tener conto di altre informazioni sulla scadenza della password.
+.PP
+Queste informazioni hanno la precedenza su qualunque informazione sulle 
+password o sulla loro durata presente in \fI/etc/passwd\fP.
+.PP
+Questo file non deve essere leggibile dagli utenti se si vuole mantenere la 
+sicurezza delle password.
+.SH FILE
+\fI/etc/passwd\fP	\- informazioni sugli account degli utenti
+.br
+\fI/etc/shadow\fP	\- informazioni sicure sugli account degli utenti
+.SH "VEDERE ANCHE"
+\fBchage\fP(1), \fBlogin\fP(1), \fBpasswd\fP(1), \fBsu\fP(1), \fBpasswd\fP(5), 
+\fBpwconv\fP(8), \fBpwunconv\fP(8), \fBsulogin\fP(8)
+.SH AUTORE
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.SH TRADUZIONE
+.nf
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.fi

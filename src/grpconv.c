@@ -27,7 +27,7 @@
 #include "sgroupio.h"
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpconv.c,v 1.17 2005/08/09 15:27:51 kloczek Exp $")
 
 static int group_locked = 0;
 static int gshadow_locked = 0;
@@ -154,6 +154,9 @@ int main (int argc, char **argv)
 	}
 	sgr_unlock ();
 	gr_unlock ();
+
+	nscd_flush_cache ("group");
+
 	return 0;
 }
 #else				/* !SHADOWGRP */

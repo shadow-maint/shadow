@@ -13,6 +13,7 @@ libshadow_la_SOURCES = \
 	commonio.h \
 	defines.h \
 	encrypt.c \
+	exitcodes.h \
 	faillog.h \
 	fputsx.c \
 	getdef.c \
@@ -49,5 +50,4 @@ libshadow_la_SOURCES = \
 
 EXTRA_DIST = \
 	.indent.pro \
-	grpack.c gspack.c pwpack.c sppack.c \
 	gshadow_.h
