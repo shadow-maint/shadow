@@ -1,0 +1,92 @@
+.\" 1999 PTM Przemek Borys
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: shadow.5,v 1.3 1999/09/20 20:56:42 wojtek2 Exp $
+.\"
+.TH SHADOW 5
+.SH NAZWA
+shadow \- zakodowany plik z has³ami
+.SH OPIS
+.I shadow
+zawiera zakodowane dane o has³ach dla kont u¿ytkowników oraz opcjonalne
+informacje o wieku (aging) has³a.
+Zawarte s± w nim
+.IP "" .5i
+Nazwa u¿ytkownika (nazwa logowania)
+.IP "" .5i
+Zakodowane has³o
+.IP "" .5i
+Dni, licz±c od 1 stycznia 1970, kiedy has³o by³o ostatni raz zmienione
+.IP "" .5i
+Dni przed których up³yniêciem niemo¿liwa jest zmiany has³a
+.IP "" .5i
+Dni, po których up³yniêciu konieczna jest zmiana has³a
+.IP "" .5i
+Ilo¶æ dni, jaka musi dzieliæ has³o od przedawnienia, by u¿ytkownik by³
+ostrzegany
+.IP "" .5i
+Ilo¶æ dni po przedawnieniu has³a, po których konto jest wy³±czane
+.IP "" .5i
+Dni od 1 stycznia 1970, okre¶laj±ce datê, kiedy konto jest wy³±czane
+.IP "" .5i
+Pole zarezerwowane
+.PP
+Pole has³a musi byæ wype³nione. Zakodowane has³o sk³ada siê z 13-24 znaków z
+64 znakowego alfabetu a-z, A-Z, 0-9, \. i /.
+Dla szczegó³ów interpretacji tego napisu, odsy³amy do \fIcrypt(3)\fR.
+.PP
+Data ostatniej zmiany has³a jest podawana jako liczba dni od 1 stycznia
+1970. Has³a nie mog± byæ zmieniane przed up³ywem odpowiedniej ilo¶ci dni, a
+musz± byæ zmieniane po up³ywie maksymalnej ilo¶ci dni.
+Je¶li minimalna liczba dni jest wiêksza od maksymalnej, has³o nie mo¿e byæ
+przez u¿ytkownika zmienione.
+.PP
+Je¶li has³o pozostaje niezmienione po up³ywie jego wa¿no¶ci, to konto jest
+uwa¿ane za nieaktywne i zostanie wy³±czone po ustalonej liczbie dni
+nieaktywno¶ci. Konto zostanie równie¿ wy³±czone w zadanym dniu wa¿no¶ci
+konta bez wzglêdu na informacjê o terminie wa¿no¶ci has³a.
+.PP
+Informacja w pliku \fIshadow\fR zastêpuje wszelkie has³a lub dane o ich
+wieku znajduj±ce siê w \fI/etc/passwd\fR.
+.PP
+Je¶li ma byæ utrzymywane bezpieczeñstwo hase³, to plik ten nie mo¿e byæ
+odczytywalny dla zwyk³ych u¿ytkowników.
+.SH Pliki
+.IR /etc/passwd " - informacje o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - zakodowane has³a u¿ytkowników"
+.SH ZOBACZ TAK¯E
+chage(1),
+login(1),
+passwd(1),
+su(1),
+sulogin(1M),
+shadow(3),
+passwd(5),
+pwconv(8),
+pwunconv(8)

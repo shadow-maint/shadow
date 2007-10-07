@@ -1,0 +1,76 @@
+.TH LIMITS 5
+.SH NAME
+limits \- Resource limits definition
+.SH DESCRIPTION
+The
+.I limits
+file (/etc/limits by default or LIMITS_FILE defined config.h)
+describes the resource limits you wish to impose.
+It should be owned by root and readable by root account only.
+.PP
+By default no quotas are imposed on 'root'. In fact, there is no way to impose
+limits via this procedure to root-equiv accounts (accounts with UID 0).
+.PP
+Each line describes a limit for a user in the form:
+.sp
+.I	user LIMITS_STRING
+.PP
+The \fBLIMITS_STRING\fP is a string of a concatenated list of resource limits.
+Each limit consists of a letter identifier followed by a numerical limit.
+.PP
+The valid identifiers are:
+.sp
+A: max address space (KB)
+.br
+C: max core file size (KB)
+.br
+D: max data size (KB)
+.br
+F: maximum filesize (KB)
+.br
+M: max locked-in-memory address space (KB)
+.br
+N: max number of open files
+.br
+R: max resident set size (KB)
+.br
+S: max stack size (KB)
+.br
+T: max CPU time (MIN)
+.br
+U: max number of processes
+.br
+K: file creation mask, set by \fBumask\fR(2).
+.br
+L: max number of logins for this user
+.br
+P: process priority, set by \fBsetpriority\fR(2).
+.PP
+For example, \fIL2D2048N5\fP is a valid \fBLIMITS_STRING\fP. For reading convenience,
+the following entries are equivalent:
+.sp
+username L2D2048N5
+.br
+username L2 D2048 N5
+.PP
+Be aware that after \fIusername\fP the rest of the line is considered a limit
+string, thus comments are not allowed. A invalid limits string will be
+rejected (not considered) by the login program.
+.PP
+The default entry is denoted by username "\fB*\fP". If you have multiple \fIdefault\fP
+entries in your \fBLIMITS_FILE\fP, then the last one will be used as the default
+entry.
+.PP
+To completely disable limits for a user, a single dash "\fB-\fP" will do.
+.PP
+Also, please note that all limit settings are set PER LOGIN.  They are
+not global, nor are they permanent.  Perhaps global limits will come, but
+for now this will have to do ;)
+.SH FILES
+/etc/limits
+.SH SEE ALSO
+.BR login (1),
+.BR setpriority (2),
+.BR setrlimit (2)
+.SH AUTHOR
+Cristian Gafton (gafton@sorosis.ro)

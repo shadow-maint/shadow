@@ -1,0 +1,134 @@
+.\" {PTM/WK/1999-09-25}
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH LOGIN 1
+.SH NAZWA
+login \- rozpocznij sesjê pracy w systemie
+.SH SK£ADNIA
+.B login
+.RI [ u¿ytkownik " [" zmienne_¶rodowiska ]]
+.\" XXX - udokumentowaæ opcje -f -h -p -r
+.SH OPIS
+.B login
+s³u¿y do utworzenia nowej sesji pracy z systemem. Zwykle wywo³ywane jest
+automatycznie w odpowiedzi na zachêtê
+.I login:
+na terminalu u¿ytkownika.
+.B login
+mo¿e byæ specyficzne dla pow³oki i mo¿e zostaæ wywo³ane jako podproces.
+Najczê¶ciej,
+.B login
+traktowane jest przez pow³okê jako \fBexec login\fR, co powoduje opuszczenie
+przez u¿ytkownika bie¿±cej pow³oki.
+Próba wykonania \fBlogin\fR z pow³oki innej ni¿ zg³oszeniowa powoduje komunikat
+o b³êdzie.
+.PP
+Przy wywo³aniu polecenia z zachêty \fIlogin:\fR, u¿ytkownik mo¿e po swojej
+nazwie wprowadziæ zmienne ¶rodowiska. Zmienne te wprowadzane s± w postaci:
+\fBNAZWA=WARTO¦Æ\fR. Nie wszystkie zmienne mog± jednak byæ ustawione w ten
+sposób, szczególnie \fBPATH\fR, \fBHOME\fR i \fBSHELL\fR.
+Dodatkowo, zakazane mo¿e byæ \fBIFS\fR (input field separator: separator pól
+wej¶ciowych), je¿eli pow³ok± zg³oszeniow± u¿ytkownika \fB/bin/sh\fR.
+.PP
+U¿ytkownik pytany jest o has³o, je¶li takowe istnieje.
+Dla zapobie¿enia ujawnieniu has³a wy¶wietlanie wprowadzanych znaków jest
+wy³±czone. Dozwolona jest jedynie niewielka liczba nieudanych prób podania
+has³a. Po wyczerpaniu limitu prób \fBlogin\fR koñczy pracê za¶ po³±czenie
+komunikacyjne jest zrywane.
+.PP
+Je¿eli dla twego konta w³±czona jest kontrola wa¿no¶ci has³a, mo¿esz byæ
+proszony o podanie nowego has³a przed kontynuacj±. Bêdziesz wówczas musia³
+podaæ stare i nowe has³o. Wiêcej informacji na ten temat znajdziesz
+w \fBpasswd \fR(1).
+.PP
+Po poprawnym rozpoczêciu sesji (zalogowaniu siê), zostanie wy¶wietlona
+wiadomo¶æ dnia (je¶li jest) i informacja o stanie skrzynki pocztowej.
+Mo¿esz wy³±czyæ wy¶wietlanie zawarto¶ci pliku wiadomo¶ci dnia,
+\fI/etc/motd\fR, tworz±c zerowej wielko¶ci plik \fI.hushlogin\fR
+w swoim katalogu domowym.
+Informacja o stanie skrzynki pocztowej jest jedn± z:
+"\fBYou have new mail.\fR" (masz now± pocztê),
+"\fBYou have mail.\fR" (masz pocztê), lub "\fBNo Mail.\fR" (brak poczty) -
+stosownie do stanu skrzynki.
+.PP
+Identyfikator u¿ytkownika i grupy (UID i GID) zostan± ustawione wed³ug warto¶ci
+w pliku \fI/etc/passwd\fR.
+Warto¶ci \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR
+i \fB$MAIL\fR ustawiane s± stosownie do odpowiednich pól danego wpisu pliku
+hase³.
+Mog± byæ ustalane równie¿ warto¶ci ulimit, umask oraz nice wed³ug wpisów w polu
+GECOS.
+.PP
+W niektórych systemach zostanie ustawiona zmienna ¶rodowiskowa \fB$TERM\fR,
+wskazuj±ca na typ terminala na linii tty, jak podano w \fI/etc/ttytype\fR.
+.PP
+Mo¿e tak¿e zostaæ wykonany skrypt startowy (inicjacyjny) twojego interpretatora
+poleceñ.
+Przegl±dnij, proszê, odpowiedni± sekcjê dokumentacji opisuj±c± bardziej
+szczegó³owo tê funkcjê.
+.SH PRZESTROGI
+Niniejsza wersja \fBlogin\fR posiada wiele opcji kompilacji, z których tylko
+czê¶æ bêdzie mieæ zastosowanie w danej instalacji.
+.PP
+Po³o¿enie plików mo¿e byæ ró¿ne w zale¿no¶ci od konfiguracji systemu.
+.SH PLIKI
+.IR /etc/utmp " - lista bie¿±cych sesji pracy"
+.br
+.IR /etc/wtmp " - lista poprzednich sesji pracy"
+.br
+.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.br
+.IR /etc/shadow " - zakodowane has³a i informacja o ich wa¿no¶ci"
+.br
+.IR /etc/motd " - plik 'wiadomo¶ci dnia'"
+.br
+.IR /etc/nologin " - zapobiega logowaniu innych ni¿ root"
+.br
+.IR /etc/ttytype " - lista typów terminali"
+.br
+.IR $HOME/.profile " - skrypt startowy domy¶lnej pow³oki"
+.br
+.IR $HOME/.hushlogin " - zapobiega m.in. wy¶wietlaniu wiadomo¶ci dnia"
+.br
+.SH ZOBACZ TAK¯E
+.BR getty (8),
+.BR mail (1),
+.BR passwd (1),
+.BR sh (1),
+.BR su (1),
+.BR login.defs (5),
+.\" .BR d_passwd (5),
+.BR passwd (5),
+.BR nologin (5)
+.SH AUTOR
+Julianne Frances Haugh (jfh@austin.ibm.com)
+.SH OD T£UMACZA
+Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
+shadow-password.
+Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
+z w³a¶ciwej dokumentacji.

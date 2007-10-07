@@ -1,0 +1,4 @@
+# /etc/suauth - secure-su control file.  See suauth(5) for full documentation.
+
+# Uncommenting this line will only allow members of group root to su to root.
+# root:ALL EXCEPT GROUP root:DENY

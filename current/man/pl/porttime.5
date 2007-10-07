@@ -1,0 +1,81 @@
+.\" {PTM/WK/1999-09-17}
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.TH PORTTIME 5
+.SH NAZWA
+porttime \- plik czasów dostêpu do portów
+.SH OPIS
+.I porttime
+zawiera listê urz±dzeñ tty, nazw u¿ytkowników i dozwolonych czasów logowania.
+.PP
+Ka¿da pozycja sk³ada siê z trzech, rozdzielonych dwukropkiem, pól.
+Pierwsze pole zawiera listê oddzielonych przecinkami urz±dzeñ tty lub
+gwiazdkê, wskazuj±c±, ¿e pozycja ta pasuje do wszystkich urz±dzeñ tty.
+Drugie pole zawiera listê oddzielonych przecinkami nazw u¿ytkowników lub
+gwiazdkê, wskazuj±c±, ¿e pozycja dotyczy wszystkich u¿ytkowników.
+Trzecie pole jest list± oddzielonych przecinkami dozwolonych czasów dostêpu.
+.PP
+Ka¿da pozycja czasu dostêpu sk³ada siê z zera lub wiêcej dni tygodnia,
+skróconych do \fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR
+i \fBSa\fR, po których nastêpuje para rozdzielonych my¶lnikiem czasów.
+Do okre¶lenia dni roboczych (od poniedzia³ku do pi±tku) mo¿e byæ u¿yty
+skrót \fBWk\fR. Skrót \fBAl\fR oznacza ka¿dy dzieñ. Je¿eli nie podano dni
+tygodnia przyjmowane jest \fBAl\fR.
+.SH PRZYK£ADY
+Poni¿szy wpis zezwala u¿ytkownikowi \fBjfh\fR na dostêp do ka¿dego portu
+w dni robocze od godziny 9-tej do 17-tej.
+.br
+.sp 1
+	*:jfh:Wk0900-1700
+.br
+.sp 1
+Poni¿sze pozycje pozwalaj± na dostêp do konsoli (/dev/console) wy³±cznie
+u¿ytkownikom \fBroot\fR i \fBoper\fR - w dowolnym czasie.
+Przyk³ad ten pokazuje, ¿e plik \fI/etc/porttime\fR stanowi uporz±dkowan±
+listê czasów dostêpu. Ka¿dy inny u¿ytkownik bêdzie pasowa³ do drugiej pozycji
+listy, nie zezwalaj±cej na dostêp w ¿adnym czasie.
+.br
+.sp 1
+	console:root,oper:Al0000-2400
+.br
+	console:*:
+.br
+.sp 1
+Poni¿szy wpis zezwala na dostêp do dowolnego portu u¿ytkownikowi \fBgames\fR
+poza godzinami pracy.
+.br
+.sp 1
+	*:games:Wk1700-0900,SaSu0000-2400
+.br
+.sp 1
+.SH PLIKI
+.IR /etc/porttime " - plik zawieraj±cy czasy dostêpu do portów"
+.SH ZOBACZ TAK¯E
+.BR login (1)
+.SH AUTOR
+Julianne Frances Haugh (jfh@austin.ibm.com)

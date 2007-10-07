@@ -1,0 +1,4 @@
+The su from shellutils is diverted into /bin/secure-su.  That
+directory MUST be owned by root and have permissions 700.  Otherwise
+you will lost any security advantages you will gain by installing
+secure-su as users can still invoke the old su.

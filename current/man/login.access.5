@@ -1,0 +1,52 @@
+.\" this is comment
+.TH LOGIN.ACCESS 5
+.\" .Dt SKEY.ACCESS 5
+.\" .Os FreeBSD 1.2
+.SH NAME
+login.access \- Login access control table
+.SH DESCRIPTION
+The
+.I login.access
+file specifies (user, host) combinations and/or (user, tty) 
+combinations for which a login will be either accepted or refused.
+.PP
+When someone logs in, the 
+.I login.access
+is scanned for the first entry that
+matches the (user, host) combination, or, in case of non-networked
+logins, the first entry that matches the (user, tty) combination.  The
+permissions field of that table entry determines whether the login will 
+be accepted or refused.
+.PP
+Each line of the login access control table has three fields separated by a
+":" character:
+.sp 1
+.IR 	permission : users : origins
+.sp 1
+The first field should be a "\fB+\fR" (access granted) or "\fB-\fR"
+(access denied) character. The second field should be a list of one or
+more login names, group names, or
+.B ALL
+(always matches).  The third field should be a list
+of one or more tty names (for non-networked logins), host names, domain
+names (begin with "\fB.\fR"), host addresses, internet network numbers
+(end with "\fB.\fR"),
+.B ALL
+(always matches) or
+.B LOCAL
+(matches any string that does not contain a "\fB.\fR" character).
+If you run NIS you can use @netgroupname in host or user patterns.
+.PP
+The
+.B EXCEPT
+operator makes it possible to write very compact rules.
+.PP
+The group file is searched only when a name does not match that of the
+logged-in user. Only groups are matched in which users are explicitly
+listed: the program does not look at a user's primary group id value.
+.SH FILES
+/etc/login.access
+.SH SEE ALSO
+.BR login (1)
+.SH AUTHOR
+Guido van Rooij

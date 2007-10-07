@@ -1,0 +1,175 @@
+shadow (19990827) unstable; urgency=low
+
+  * upstream upgrade, see CHANGES for more details.  Note: this is
+    not the official Debian changelog entry - it is here only for
+    dpkg-buildpackage to work (so I can build and test this package
+    on my system).  To the Debian maintainers: please feel free to
+    replace this entry with your own, and put your name (instead of
+    mine) in the debian/control Maintainer field.  Thanks, and keep
+    up the good work!
+
+ -- Marek Michalkiewicz <marekm@linux.org.pl>  Fri, 27 Aug 1999 21:00:00 +0200
+
+shadow (980403-0.3.2) unstable; urgency=low
+
+  * configure.in patched for utmpx.h (for arm)
+
+ -- Jim Pick <jim@jimpick.com>  Sun,  4 Oct 1998 19:06:15 -0700
+
+shadow (980403-0.3.1) frozen unstable; urgency=low
+
+  * Non maintainer upload.
+    changes.{guess,sub} changed to recognize a Arm architecture.
+
+ -- Turbo Fredriksson <turbo@debian.org>  Fri, 14 Aug 1998 22:37:58 -0400
+
+shadow (980403-0.3) frozen unstable; urgency=high
+
+  * Non maintainer upload.
+  * src/login.c: Applied patch from <marekm@i17linuxb.ists.pwr.wroc.pl> to
+    fix security hole of login not checking the return code from setgid(),
+    initgroups() or setuid(). [#24710]
+
+ -- James Troup <james@nocrew.org>  Fri, 17 Jul 1998 18:56:31 +0100
+
+shadow (980403-0.2) frozen unstable; urgency=low
+
+  * (login.defs): fixed UMASK
+    (thanks to James Troup for noticing my screwup :)
+  * Pruned non-Debian changelog entries.
+
+ -- Joel Klecker <jk@espy.org>  Mon, 11 May 1998 11:25:22 -0700
+
+shadow (980403-0.1) frozen unstable; urgency=low
+
+  * Non-maintainer release.
+  * New upstream release (18225).
+  * (debian/login.postinst)
+    * Use 'touch' instead of 'cat >' when creating /var/log/faillog
+      (15998,16187,21687).
+    * No longer fails if no previous configured version exists (11433).
+  * (gpasswd): now checks which user invoked it before calling setuid() (18132).
+  * (debian/passwd.postinst): removed bashism (13753).
+  * (groupmod): NULL dereference fixed upstream, as a result, it no longer
+    dumps core when changing group name (16893,17894).
+  * (useradd): no longer segfaults if /etc/default/useradd is missing (18628).
+  * (login.defs.1): now documents more options (13485).
+  * (source): includes 'missing' (13815,18133,21280).
+  * (login.1):
+    * Removed mention of "d_passwd(5)", which doesn't exist,
+      and login.defs.5 now documents /etc/dialups (15176).
+    * Added /etc/nologin to FILES section and reference nologin(5) (21695).
+  * The URL mentioned in Bug#15391 is no longer valid.
+  * (login.defs): no longer sets ULIMIT (17529).
+  * (login):
+    * No longer uses static buffers for group lines (17532).
+    * Doesn't seem to make assumptions about gid_t any longer (21767).
+  * (faillog.8): s-/usr/adm-/var/log-g (19974).
+  * (lastlog.8): notes that "some systems" use /var/log instead of
+    /usr/adm (21746).
+  * Install upstream changelog as 'changelog.gz' as per policy (20052).
+  * (secure-su): Changed /etc/suauth to reference the group 'root'
+    instead of 'wheel' (17593).
+
+ -- Joel Klecker <jk@espy.org>  Thu, 30 Apr 1998 18:32:12 -0700
+
+shadow (970616-1) unstable; urgency=low
+
+  * Upstream upgrade.
+  * chage works (10561).
+  * Fix NIS behavior (5634,8734,10032,10545,10984,11160,12064).
+  * Wrote pwconv,pwunconv,grpconv,grpunconv manpage (10940).
+  * vipw fixes (10521,10696,11618,11924,12184,13001)
+  * Fixes for new automake.
+  * Compile with glibc2. (8627,8777,9824,11713,11719,12082,12108,11442).
+  * debian/rules fixes (8876,12468).
+  * /etc/login.defs: UMASK=002 (9102).
+  * chown /dev/vcs* on login (9421,13255).
+  * Added tty9-tty12 to /etc/securetty (11644).
+  * Provide template and manpage for /etc/limits (12289).
+  * Fix security hole in postinst (11769).
+  * login fills out ut_addr field in utmp (10701).
+  * shadowconfig.sh fixes (9189,9328,9386,10968,12452,12469).
+  * Overcome postinst bug in old shadow-passwd package (9939,12120).
+  * useradd default GROUP=100 (9244).
+  * Allow 8 bit chars in chfn (12367).
+  * secure-su - set HOME, use SHELL if set (11003,11189).
+
+ -- Guy Maor <maor@ece.utexas.edu>  Fri, 26 Sep 1997 19:23:42 -0500
+
+shadow (970616) unstable; urgency=low
+
+  * vipw preserves permissions on edited files (10521).
+  * various other bug fixes.
+
+ -- Marek Michalkiewicz <marekm@piast.t19.ds.pwr.wroc.pl>  Mon, 16 Jun 1997 02:02:00 +0200
+
+shadow (970601) unstable; urgency=low
+
+  * Fix typo in libmisc/mail.c causing login to segfault.
+
+ -- Marek Michalkiewicz <marekm@piast.t19.ds.pwr.wroc.pl>  Mon,  2 Jun 1997 07:33:00 +0200
+
+shadow (970502-2) unstable; urgency=low
+
+  * Fixes to shadow group support (grpconv didn't work).
+
+ -- Marek Michalkiewicz <marekm@piast.t19.ds.pwr.wroc.pl>  Fri,  2 May 1997 15:48:00 +0200
+
+shadow (970502-1) unstable; urgency=low
+
+  * Upstream upgrade.
+
+ -- Marek Michalkiewicz <marekm@piast.t19.ds.pwr.wroc.pl>  Fri,  2 May 1997 03:18:00 +0200
+
+shadow (961025-2) frozen unstable; urgency=medium
+
+  * Fix useradd -D segfault (8098, 8152, 8733).
+  * Fix shadowconfig - permfix only on xlock; /etc/init.d/xdm rewrite, chmod
+    (8102, 8320, 8333, 8708).
+  * Remove HOWTO from usr/doc/passwd as it's in linux-doc (8150).
+  * Fixes to su.1 (8153).
+  * login, passwd, su each conflict and replace with the old shadow-*
+    version. (8269, 8290, 8393, 8394).
+  * Put /etc/shells back in passwd (8328).
+  * Fixed login.postinst for upgrade from shadow-login (8392).
+  * Added -e to pwck for use in shadowconfig: reports only errors, no
+    warnings (8542).
+  * Wrote shadowconfig.8 (8588).
+
+ -- Guy Maor <maor@ece.utexas.edu>  Sat, 19 Apr 1997 02:34:59 -0500
+
+shadow (961025-1) unstable; urgency=low
+  
+  * Upstream upgrade, new source format.
+
+ -- Guy Maor <maor@ece.utexas.edu>  Mon, 10 Feb 1997 02:56:56 -0600
+
+shadow (960530-1) experimental; urgency=LOW
+
+	* Added grpunconv script
+	* Changed prerm/postinst scripts to remove/create shadowed group
+	  file
+	* Added vipw/vigr binaries
+	* Renamed package to shadow-passwd
+	* Added packages shadow-su and shadow-login
+	* Added 'Essential: yes' to be able to replace passwd and login
+	* Section now base for shadow-passwd and shadow-login
+	* Added /etc/shell conffile
+	* Added /etc/securetty conffile
+	* Added new conffile /etc/suauth. Set it up so only users in group 0
+	  can su to root.
+
+shadow (960810-1) base; urgency=LOW
+
+	* Added useradd default file so that default group is no longer 1
+	* Also corrected the useradd manpage
+	* Replaced grpunconv script by real binary which does correct
+	  locking.
+	* Added 'source' field control file to control files
+	* Changed version naming in debian.rules
+	* New upstream version
+
+Local variables:
+mode: debian-changelog
+End:

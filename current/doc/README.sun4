@@ -1,0 +1,39 @@
+[ $Id: README.sun4,v 1.1.1.1 1996/08/10 07:59:52 marekm Exp $ ]
+
+You'll need to do the following to get the shadow password dist to
+compile on a sun 4.1.1 system.
+
+copy Makefile.sun4 to Makefile, and make any system specific changes.
+
+copy config.h.sun4 config.h, and make any system specific changes.
+
+You may have to edit the pwd.h.m4 file by hand, as the sunos m4 may
+not grok the pwd.h.m4 file corectly.  If you have the /usr/5bin/m4,
+substitute that.  Be sure to delete the pwd.h file before typeing 
+'make' again, as there will be an empty one left from the failed attempt
+to use the standard sunos m4.
+
+type 'make'.  If everything goes well, then type 'make install'
+
+If using csh, then type 'rehash'.  cd to the /etc directory and type
+'pwconv'.  This will create two files,  nshadow and npasswd.
+now type 'mkpasswd -f nshadow' and 'mkpasswd -f npasswd'.  This will
+create the shadow password file.
+
+Note: The shadow group stuff does not work with sunos.  
+
+Note: ftp will still use the old password file.
+
+Note: if you run suns pcnfs, be aware that it will still be looking at the
+      old password file as well.  I may work out a patch for this, as I am
+      fairly certain the stuff on the sun side comes with source.
+
+Note: I have compiled this package with the standard c compiler and
+      suns unbundled c compiler at an optomization level of 2 in
+      both casses.  Haven't tried gcc yet, so I don't know wether it
+      works.  Same goes for suns C++ compiler.
+
+Note: has been compiled on a sun 3/75 running sunos 4.1.1.  Should compile
+      fine on sun 4's running 4.1.1, and may compile on suns running
+      4.1.  Have no idea what sort of success people will have that
+      are running 4.03 and older versions.

@@ -1,0 +1,256 @@
+--- shadow-970616/libmisc/Makefile.in.fix	Sun Jun 15 20:05:05 1997
++++ shadow-970616/libmisc/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -99,13 +99,6 @@
+ 
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+-
+ mostlyclean-noinstLIBRARIES:
+ 
+ clean-noinstLIBRARIES:
+--- shadow-970616/man/Makefile.in.fix	Sun Jun 15 20:05:05 1997
++++ shadow-970616/man/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -72,12 +72,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ install-man: $(MANS)
+ 	$(mkinstalldirs) $(mandir)/man8
+ 	$(mkinstalldirs) $(mandir)/man1
+--- shadow-970616/lib/Makefile.in.fix	Sun Jun 15 20:05:06 1997
++++ shadow-970616/lib/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -123,12 +123,6 @@
+ default: all
+ 
+ 
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+-
+ mostlyclean-noinstLIBRARIES:
+ 
+ clean-noinstLIBRARIES:
+--- shadow-970616/src/useradd.c.fix	Tue Dec 30 14:09:29 1997
++++ shadow-970616/src/useradd.c	Tue Dec 30 14:37:22 1997
+@@ -570,8 +570,7 @@
+  */
+ 
+ static int
+-get_groups(list)
+-	char *list;
++get_groups(char *list)
+ {
+ 	char *cp;
+ 	const struct group *grp;
+@@ -606,7 +605,7 @@
+ 		 * GID values, otherwise the string is looked up as is.
+ 		 */
+ 
+-		grp = getgr_nam_gid(*list);
++		grp = getgr_nam_gid(list);
+ 
+ 		/*
+ 		 * There must be a match, either by GID value or by
+@@ -1401,25 +1400,6 @@
+ 		 Prog);
+ 	fail_exit (1);
+     }
+-#endif
+-    if (do_grp_update) {
+-	if (! gr_close ()) {
+-	    fprintf (stderr, "%s: cannot rewrite group file\n",
+-		     Prog);
+-	    fail_exit (1);
+-	}
+-	(void) gr_unlock ();
+-#ifdef	SHADOWGRP
+-	if (is_shadow_grp && ! sgr_close ()) {
+-	    fprintf (stderr, "%s: cannot rewrite shadow group file\n",
+-		     Prog);
+-	    fail_exit (1);
+-	}
+-	if (is_shadow_grp)
+-	    sgr_unlock ();
+-#endif
+-    }
+-#ifdef	SHADOWPWD
+     if (is_shadow_pwd)
+ 	spw_unlock ();
+ #endif
+@@ -1758,7 +1738,6 @@
+ 	/*
+ 	 * Write out the new group file entry.
+ 	 */
+-
+ 	if (! gr_update (&grp)) {
+ 		fprintf (stderr, "%s: error adding new group entry\n", Prog);
+ 		fail_exit (10);
+@@ -1801,6 +1780,8 @@
+ #endif	/* SHADOWGRP */
+ 	SYSLOG((LOG_INFO, "new group: name=%s, gid=%d\n",
+ 		user_name, user_gid));
++	/* we need to remeber we have to close the group file... */
++	do_grp_update++;
+ }
+ 
+ /*
+--- shadow-970616/src/Makefile.in.fix	Sun Jun 15 20:05:08 1997
++++ shadow-970616/src/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -251,12 +251,6 @@
+ default: all
+ 
+ 
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+-
+ mostlyclean-usbinPROGRAMS:
+ 
+ clean-usbinPROGRAMS:
+--- shadow-970616/contrib/Makefile.in.fix	Sun Jun 15 20:05:09 1997
++++ shadow-970616/contrib/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -60,12 +60,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/debian/Makefile.in.fix	Sun Jun 15 20:05:09 1997
++++ shadow-970616/debian/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -64,12 +64,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/doc/Makefile.in.fix	Sun Jun 15 20:05:09 1997
++++ shadow-970616/doc/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -61,12 +61,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/etc/Makefile.in.fix	Sun Jun 15 20:05:09 1997
++++ shadow-970616/etc/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -60,12 +60,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/old/Makefile.in.fix	Sun Jun 15 20:05:10 1997
++++ shadow-970616/old/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -61,12 +61,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/shlib/Makefile.in.fix	Sun Jun 15 20:05:10 1997
++++ shadow-970616/shlib/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -60,11 +60,6 @@
+ default: all
+ 
+ 
+-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+-	cd $(top_srcdir) && automake $(subdir)/Makefile
+-
+-Makefile: $(top_builddir)/config.status Makefile.in
+-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+ tags: TAGS
+ TAGS:
+ 
+--- shadow-970616/configure.in.fix	Sun Jun 15 19:42:47 1997
++++ shadow-970616/configure.in	Tue Dec 30 14:09:29 1997
+@@ -38,7 +38,7 @@
+ AC_CHECK_HEADERS(gshadow.h shadow.h lastlog.h)
+ 
+ AC_EGREP_HEADER(ut_host, utmp.h, AC_DEFINE(UT_HOST))
+-AC_EGREP_HEADER(ut_name, utmp.h, AC_DEFINE(UT_USER, ut_name))
++AC_EGREP_HEADER(ut_user, utmp.h, AC_DEFINE(UT_USER, ut_user))
+ AC_EGREP_HEADER(ll_host, lastlog.h, AC_DEFINE(HAVE_LL_HOST))
+ 
+ dnl Checks for typedefs, structures, and compiler characteristics.
+--- shadow-970616/Makefile.in.fix	Sun Jun 15 20:05:08 1997
++++ shadow-970616/Makefile.in	Tue Dec 30 14:09:29 1997
+@@ -64,28 +64,6 @@
+ TAR = tar
+ default: all
+ 
+-
+-$(srcdir)/Makefile.in: Makefile.am configure.in
+-	cd $(srcdir) && automake Makefile
+-
+-# For an explanation of the following Makefile rules, see node
+-# `Automatic Remaking' in GNU Autoconf documentation.
+-Makefile: Makefile.in config.status
+-	CONFIG_FILES=$@ CONFIG_HEADERS= ./config.status
+-config.status: configure
+-	./config.status --recheck
+-$(srcdir)/configure: configure.in $(ACLOCAL) $(CONFIGURE_DEPENDENCIES)
+-	cd $(srcdir) && autoconf
+-
+-$(CONFIG_HEADER): stamp-h
+-stamp-h: $(CONFIG_HEADER_IN) config.status
+-	CONFIG_FILES= CONFIG_HEADERS=$(CONFIG_HEADER) ./config.status
+-	@echo timestamp > stamp-h
+-$(srcdir)/$(CONFIG_HEADER_IN): stamp-h.in
+-$(srcdir)/stamp-h.in: configure.in $(ACLOCAL) $(ACCONFIG) $(CONFIG_TOP) $(CONFIG_BOT)
+-	cd $(srcdir) && autoheader
+-	echo timestamp > $(srcdir)/stamp-h.in
+-
+ # This directory's subdirectories are mostly independent; you can cd
+ # into them and run `make' without going through this Makefile.
+ # To change the values of `make' variables: instead of editing Makefiles,

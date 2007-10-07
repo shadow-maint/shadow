@@ -1,0 +1,168 @@
+#!/usr/bin/make -f
+
+package = shadow
+
+# see dpkg-architecture(8)
+DEB_BUILD_ARCH := $(shell dpkg --print-installation-architecture)
+DEB_BUILD_GNU_CPU := $(patsubst hurd-%,%,$(DEB_BUILD_ARCH))
+ifeq ($(filter-out hurd-%,$(DEB_BUILD_ARCH)),)
+  DEB_BUILD_GNU_SYSTEM := gnu
+else
+  DEB_BUILD_GNU_SYSTEM := linux
+endif
+DEB_BUILD_GNU_TYPE=$(DEB_BUILD_GNU_CPU)-$(DEB_BUILD_GNU_SYSTEM)
+
+DEB_HOST_GNU_SYSTEM=$(DEB_BUILD_GNU_SYSTEM)
+DEB_HOST_GNU_TYPE=$(DEB_BUILD_GNU_TYPE)
+
+ifeq ($(DEB_HOST_GNU_SYSTEM),linux)
+package-list = binary-login binary-passwd binary-su
+else
+package-list = binary-passwd
+endif
+
+# set up environment so that dpkg --build runs our tar wrapper
+# (XXX this is no longer needed, and will be removed soon - install
+# libtricks and use "dpkg-buildpackage -rfakeroot" instead)
+#TAR_WRAPPER_SETUP = REAL_TAR=`command -p -v tar` PATH=`cd debian && pwd`:$$PATH
+
+# for "exec login" to work for ordinary users, /bin/login needs to be setuid
+# but very few people use this feature, so we make it non-setuid by default
+LOGIN_PERM = 0755
+
+build:
+	$(checkdir)
+	cp -a debian/control.$(DEB_HOST_GNU_SYSTEM) debian/control
+	# shared lib support is untested, so...
+	./configure --disable-shared --disable-desrpc \
+	  --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
+	$(MAKE)
+	if [ -n "$(TAR_WRAPPER_SETUP)" ] ; then \
+	  gcc -O2 -Wall -o debian/tar debian/tar.c ; \
+	fi
+	touch build
+
+clean:
+	$(checkdir)
+	rm -f build debian/tar
+	-$(MAKE) -i distclean
+	rm -rf {libmisc,lib,src}/.deps
+	rm -rf debian/tmp{-l,-p,-s} debian/{files*,substvars}
+	cp -a debian/control.linux debian/control
+	find . -name '*~' -print0 | xargs -0 rm -f
+
+binary-indep:	checkroot build
+	$(checkdir)
+
+binary-arch:	$(package-list)
+
+binary-login:	checkroot build
+	$(checkdir)
+	-rm -rf debian/tmp-l
+	install -d debian/tmp-l/{DEBIAN,bin,etc/init.d,usr/{bin,man/man{1,5,8},doc/login,sbin}}
+	install -s -m$(LOGIN_PERM) src/login debian/tmp-l/bin/
+	install -s -m4755 src/newgrp debian/tmp-l/usr/bin/
+	install -s src/{faillog,lastlog} debian/tmp-l/usr/bin/
+	install -s src/logoutd debian/tmp-l/usr/sbin/
+	install -m644 man/{login.1,newgrp.1} debian/tmp-l/usr/man/man1/
+	install -m644 man/{login.defs.5,login.access.5,porttime.5,faillog.5,limits.5} debian/tmp-l/usr/man/man5/
+	install -m644 man/{faillog.8,logoutd.8,lastlog.8} debian/tmp-l/usr/man/man8/
+	ln -s newgrp debian/tmp-l/usr/bin/sg
+	ln -s newgrp.1.gz debian/tmp-l/usr/man/man1/sg.1.gz
+	install -m600 etc/login.defs.linux debian/tmp-l/etc/login.defs
+	install -m600 etc/{login.access,limits} debian/{securetty,porttime} debian/tmp-l/etc/
+	install debian/logoutd.init debian/tmp-l/etc/init.d/logoutd
+	install -m644 debian/changelog debian/tmp-l/usr/doc/login/changelog.Debian
+	install -m644 doc/CHANGES debian/tmp-l/usr/doc/login/changelog
+	find debian/tmp-l/usr/{doc,man} -type f | xargs gzip -9
+	install -m644 debian/login.copyright debian/tmp-l/usr/doc/login/copyright
+	install debian/login.preinst debian/tmp-l/DEBIAN/preinst
+	install debian/login.postinst debian/tmp-l/DEBIAN/postinst
+	install debian/login.prerm    debian/tmp-l/DEBIAN/prerm
+	install debian/login.postrm   debian/tmp-l/DEBIAN/postrm
+	install -m644 debian/login.conffiles debian/tmp-l/DEBIAN/conffiles
+	dpkg-shlibdeps debian/tmp-l/{bin/*,usr/bin/*,usr/sbin/*}
+	dpkg-gencontrol -isp -plogin -Pdebian/tmp-l
+	./debian/checksums debian/tmp-l
+	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-l ..
+
+binary-passwd:	checkroot build
+	$(checkdir)
+	-rm -rf debian/tmp-p
+	install -d debian/tmp-p/{DEBIAN,etc/{cron.daily,init.d},usr/{sbin,bin,man/{man1,man5,man8},doc/passwd}}
+	install -m644 etc/shells debian/tmp-p/etc/
+	install debian/passwd.cron debian/tmp-p/etc/cron.daily/passwd
+	install debian/passwd.init debian/tmp-p/etc/init.d/passwd
+	install -s -m4755 src/{chage,chfn,chsh,expiry,gpasswd,passwd} debian/tmp-p/usr/bin/
+	install -s src/{chpasswd,groupadd,groupdel,groupmod,grpck,grpconv,grpunconv} \
+	  src/{newusers,pwck,pwconv,pwunconv,useradd,userdel} \
+	  src/{dpasswd,usermod,vipw} debian/tmp-p/usr/sbin/
+	install -m644 man/{chage.1,chfn.1,chsh.1,gpasswd.1,passwd.1} \
+	  debian/tmp-p/usr/man/man1/
+	install -m644 man/{chpasswd.8,groupadd.8,groupdel.8,groupmod.8,grpck.8} \
+	  man/{newusers.8,pwck.8,dpasswd.8} \
+	  man/{useradd.8,userdel.8,usermod.8,vipw.8,shadowconfig.8,pwconv.8} \
+	  debian/tmp-p/usr/man/man8/
+	install -m644 man/{passwd.5,shadow.5} debian/tmp-p/usr/man/man5/
+	ln -s vipw debian/tmp-p/usr/sbin/vigr
+	ln -s vipw.8.gz debian/tmp-p/usr/man/man8/vigr.8.gz
+	for i in pwunconv.8.gz grpconv.8.gz grpunconv.8.gz ; do \
+	  ln -s pwconv.8.gz debian/tmp-p/usr/man/man8/$$i ; done
+	install -m644 debian/changelog debian/tmp-p/usr/doc/passwd/changelog.Debian
+	install -m644 doc/{CHANGES,README,README.limits,README.linux,README.debian} \
+	  debian/tmp-p/usr/doc/passwd/
+	find debian/tmp-p/usr/{doc,man} -type f | xargs gzip -9f
+	install -m644 debian/passwd.copyright debian/tmp-p/usr/doc/passwd/copyright
+	install debian/login.preinst debian/tmp-p/DEBIAN/preinst
+	install debian/passwd.postinst debian/tmp-p/DEBIAN/postinst
+	install debian/passwd.postrm debian/tmp-p/DEBIAN/postrm
+	install -m644 debian/passwd.conffiles debian/tmp-p/DEBIAN/conffiles
+	dpkg-shlibdeps debian/tmp-p/usr/{bin/*,sbin/*}
+	# dpkg-shlibdeps fails on scripts, so install them now...
+	install src/shadowconfig.sh debian/tmp-p/usr/sbin/shadowconfig
+ifeq ($(DEB_HOST_GNU_SYSTEM),gnu)
+	install etc/login.defs.hurd debian/tmp-p/etc/login.defs
+	echo "/etc/login.defs" >> debian/tmp-p/DEBIAN/conffiles
+endif
+	dpkg-gencontrol -isp -ppasswd -Pdebian/tmp-p
+	./debian/checksums debian/tmp-p
+	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-p ..
+
+binary-su: checkroot build
+	$(checkdir)
+	-rm -rf debian/tmp-s
+	install -d debian/tmp-s/{DEBIAN,etc,bin,usr/{doc/secure-su,man/man{1,5}}}
+	install -s -m4755 src/su debian/tmp-s/bin/
+	install -m644 etc/suauth debian/tmp-s/etc/
+	install -m644 man/suauth.5 debian/tmp-s/usr/man/man5/
+	install -m644 man/su.1 debian/tmp-s/usr/man/man1/
+	install -m644 debian/secure-su.README debian/tmp-s/usr/doc/secure-su/README
+	install -m644 debian/changelog debian/tmp-s/usr/doc/secure-su/
+	find debian/tmp-s/usr/{doc,man} -type f | xargs gzip -9f
+	install -m644 debian/secure-su.copyright debian/tmp-s/usr/doc/secure-su/copyright
+	install debian/secure-su.preinst debian/tmp-s/DEBIAN/preinst
+	install debian/secure-su.postrm debian/tmp-s/DEBIAN/postrm
+	install -m644 debian/secure-su.conffiles debian/tmp-s/DEBIAN/conffiles
+	dpkg-shlibdeps debian/tmp-s/bin/su
+	dpkg-gencontrol -isp -psecure-su -Pdebian/tmp-s
+	./debian/checksums debian/tmp-s
+	$(TAR_WRAPPER_SETUP) dpkg --build debian/tmp-s ..
+
+define checkdir
+	test -f lib/shadow.c -a -f debian/rules
+endef
+
+
+binary:		binary-indep binary-arch
+
+source diff:
+	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
+
+checkroot:
+	$(checkdir)
+#	test root = "`whoami`"
+
+.PHONY: binary binary-arch binary-indep clean checkroot
+
+# Local Variables:
+# mode:Makefile

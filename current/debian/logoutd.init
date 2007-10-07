@@ -1,0 +1,36 @@
+#! /bin/sh
+# start/stop logoutd
+
+set -e
+
+DAEMON=/usr/sbin/logoutd
+test -f $DAEMON || exit 0
+
+# Most people won't need logoutd(8) running, so we'll only run it if
+# /etc/porttime has non-comment lines.
+egrep -vq '^#|^ *$' /etc/porttime || exit 0
+
+case "$1" in
+    start)
+	echo -n "Starting login time and port restriction enforcer: logoutd"
+	start-stop-daemon --start --quiet --exec $DAEMON
+	echo "."
+	;;
+    stop)
+	echo -n "Stopping login time and port restriction enforcer: logoutd"
+	start-stop-daemon --stop --quiet --exec $DAEMON
+	echo "."
+	;;
+    force-reload|restart)
+	$0 stop
+	$0 start
+	;;
+    reload)
+	;;
+    *)
+	echo "Usage: /etc/init.d/logoutd start|stop|restart"
+	exit 1
+	;;
+esac
+
+exit 0
