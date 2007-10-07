@@ -29,9 +29,10 @@
 
 #include <config.h>
 
-#ident "$Id: chsh.c,v 1.40 2006/05/07 17:44:39 kloczek Exp $"
+#ident "$Id: chsh.c,v 1.42 2006/07/13 21:26:35 kloczek Exp $"
 
 #include <fcntl.h>
+#include <getopt.h>
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -76,7 +77,12 @@ static int restricted_shell (const char *);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-s shell] [name]\n"), Prog);
+	fprintf (stderr, _("Usage: chsh [options] [LOGIN]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -h, --help				display this help message and exit\n"
+			   "  -s, --shell SHELL			new login shell for the user account\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -170,7 +176,6 @@ static int check_shell (const char *sh)
 int main (int argc, char **argv)
 {
 	char *user;		/* User name                         */
-	int flag;		/* Current command line flag         */
 	int sflg = 0;		/* -s - set shell from command line  */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;	/* New password entry                */
@@ -204,15 +209,29 @@ int main (int argc, char **argv)
 	 * There is only one option, but use getopt() anyway to
 	 * keep things consistent.
 	 */
+	{
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"help", no_argument, NULL, 'h'},
+			{"shell", required_argument, NULL, 's'},
+			{NULL, 0, NULL, '\0'}
+		};
 
-	while ((flag = getopt (argc, argv, "s:")) != EOF) {
-		switch (flag) {
-		case 's':
-			sflg++;
-			STRFCPY (loginsh, optarg);
-			break;
-		default:
-			usage ();
+		while ((c =
+			getopt_long (argc, argv, "hs:", long_options,
+				     &option_index)) != -1) {
+			switch (c) {
+			case 'h':
+				usage ();
+				break;
+			case 's':
+				sflg++;
+				STRFCPY (loginsh, optarg);
+				break;
+			default:
+				usage ();
+			}
 		}
 	}
 

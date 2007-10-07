@@ -2,12 +2,13 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Arkadiusz Miśkiewicz <misiek@misiek.eu.org>, 1999.
 # Jakub Bogusz <qboosh@pld-linux.org>, 2003-2004.
+# Tomasz Kłoczko <kloczek@pld.org.pl>, 2004-2006
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.17\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2005-09-05 13:05+0200\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -185,7 +186,7 @@ msgstr "Hasło użytkownika %s: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -201,7 +202,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Użycie: chage [opcje] user\n"
+"Użycie: chage [opcje] [LOGIN]\n"
 "\n"
 "Opcje:\n"
 "  -d, --lastday OSTATNI\t\tustawia date ostatniej zmiany hasła na OSTATNI\n"
@@ -217,6 +218,7 @@ msgstr ""
 "\t\t\t\tjest ważne na wartość MAX_DNI\n"
 "  -W, --warndays DNI_OSTRZ\tustawia na DNI_OSTRZ liczbę dni przed\n"
 "\t\t\t\tupływem ważności hasła\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -467,6 +469,7 @@ msgstr ""
 "  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy "
 "przekazywane\n"
 "\t\t\thasła nie są zakodowane\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -528,9 +531,9 @@ msgstr ""
 "Opcje:\n"
 "  -e, --encrypted\tprzekazywane hasła są w postaci zakodowane\n"
 "  -h, --help\t\twyświetlenie tego opisu i zakończenie działania\n"
-"  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy "
-"przekazywane\n"
-"\t\t\thasła nie są zakodowane\n"
+"  -m, --md5\t\tużyj kodowania MD5 zamiast DES w przypadku kiedy\n"
+"\t\t\tprzekazywane hasła nie są zakodowane\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -545,8 +548,20 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linia %d: nieznany użytkownik %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Użycie: %s [-s powłoka] [nazwa]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Użycie: chsh [opcje] [LOGIN]\n"
+"\n"
+"Opcje:\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
+"  -s, --shell SHELL\t\tnowy SHELL dla użytkownika LOGIN\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Powłoka logowania"
@@ -604,6 +619,7 @@ msgstr ""
 "  -u, --user LOGIN\t\twyświetlaj rekordy lub zarządzaj licznikami\n"
 "\t\t\t\ti limitami faillog (w połaczeniu z opcjami -r, -m lub -l) tylko\n"
 "\t\t\t\tdla użytkownika o loginie LOGIN\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -720,7 +736,7 @@ msgstr "%s: nie można usunąć blokady z pliku\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -732,7 +748,7 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
-"Użycie: groupadd [opcje] grupa\n"
+"Użycie: groupadd [opcje] GRUPA\n"
 "\n"
 "Opcje:\n"
 "  -f, --force\t\twymyś zakończenie programu z poprawnym statusem\n"
@@ -741,6 +757,7 @@ msgstr ""
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -K, --key KLUCZ=WARTOŚĆ\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
 "  -o, --non-unique\t\tpozwól na utworzenie grupy z nieunikalnym GID\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -787,8 +804,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami grup\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: nieprawidłowa grupa %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: nieprawidłowy argument numeryczny '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -827,8 +844,65 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s jest głównym serwerem NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Użycie: groupmod [-g gid [-o]] [-n nazwa] grupa\n"
+msgid "Member already exists\n"
+msgstr "Członek grupy już istnieje\n"
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "Nie znaleziony członek grupy do usunięcia\n"
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "Tylko root może dodać członka do różnych grup\n"
+
+#, c-format
+msgid "Group access is required\n"
+msgstr "Wymagane prawa dostępu do grupy\n"
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "Nie jesteś głównym właścicielem bieżącej grupy\n"
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr "Błąd uwierzytelniania przez PAM dla\n"
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "Nie można zablokować pliku z grupami\n"
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "Nie można otworzyć pliku z grupami\n"
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "Nie można zamknąć pliku z grupami\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Użycie: groupmod [opcje] GRUPA\n"
+"\n"
+"Opcje:\n"
+"  -g, --gid GID\t\t\twymuś użycie nowego GID dla grupy GRUPA\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
+"  -n, --new-name NOWA_GRUPA\twymuś użycie nazwy grupy NOWA_GRUPA zamiast\n"
+"\t\t\t\tGRUPA\n"
+"  -o, --non-unique\t\tpozwól na utworzenie grupy z nieunikalnym GID\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -995,6 +1069,7 @@ msgstr ""
 "  -t, --time DNI\t\twyświetl tylko rekordy lastlog nie starsze niż DNI\n"
 "  -u, --user LOGIN\t\twyświetl rekord lastlog tylko dla użytkownika\n"
 "\t\t\t\to loginie LOGIN\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1193,7 +1268,7 @@ msgstr "%s: błąd podczas aktualizowania plików\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1215,7 +1290,7 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
-"Użycie: passwd [opcje] [login]\n"
+"Użycie: passwd [opcje] [LOGIN]\n"
 "\n"
 "Opcje:\n"
 "  -a, --all\t\t\traportuj status hasła dla wszystkich kont\n"
@@ -1239,6 +1314,7 @@ msgstr ""
 "\t\t\t\tupływem ważności hasła\n"
 "  -x, --maxdays MAX_DNI\t\tustawia maksymalną liczbę dni, przez jakie hasło\n"
 "\t\t\t\tjest ważne na wartość MAX_DNI\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Stare hasło: "
@@ -1407,7 +1483,7 @@ msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1428,6 +1504,7 @@ msgstr ""
 "  -m, -p,\n"
 "  --preserve-environment\turuchomienie z zachowaniem zmiennych środowiska\n"
 "  -s, --shell SHELL\t\tużyj SHELL zamiast domyślny shell z passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1479,10 +1556,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Wchodzę w tryb konserwacji systemu\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: nieprawidłowy argument numeryczny '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1550,26 +1623,25 @@ msgstr ""
 "  -c, --comment COMMENT\t\tustaw pole komentarza (GECOS) dla nowo\n"
 "\t\t\t\ttworzonego konta\n"
 "  -d, --home-dir KAT_DOMOWY\tkatalog domowy dla nowo tworzonego konta\n"
-"  -D, --defaults\t\twypisz lub zapisz domyślną konfigurację programu "
-"useradd\n"
-"  -e, --expiredate DATA_WAŻN.\tustawia datę wazności dla nowo tworzonego "
-"konta\n"
-"\t\t\t\tna DATA_WAŻN.\n"
-"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni po których konto jest "
-"blokowane\n"
-"\t\t\t\tna NIEAKTYWNE\n"
+"  -D, --defaults\t\twypisz lub zapisz domyślną konfigurację programu\n"
+"\t\t\t\tuseradd\n"
+"  -e, --expiredate DATA_WAŻN.\tustawia datę wazności dla nowo tworzonego\n"
+"\t\t\t\tkonta na DATA_WAŻN.\n"
+"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni po których konto jest\n"
+"\t\t\t\tblokowane na NIEAKTYWNE\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
-"  -g, --gid GROUP\t\twymuś użycie konkretnej grupy dla nowo tworzonego "
-"konta\n"
+"  -g, --gid GROUP\t\twymuś użycie konkretnej grupy dla nowo tworzonego\n"
+"\t\t\t\tkonta\n"
 "  -G, --groups GROUPS\t\tlista dodatkowych grup dla nowo tworzonego konta\n"
 "  -k, --skel SKEL_DIR\t\tpodaj alternatywną ścieżkę do katalogu skel\n"
 "  -K, --key KLUCZ=WARTOŚĆ\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
 "  -m, --create-home\t\ttwórz katalog domowy dla nowego użytkownika\n"
 "  -o, --non-unique\t\tpozwól na utworzenie konta z nieunikalnym UID\n"
-"  -p, --password PASSWORD\tużyj zakodowane hasło dla nowego tworzonego "
-"konta\n"
+"  -p, --password PASSWORD\tużyj zakodowane hasło dla nowego tworzonego\n"
+"\t\t\t\tkonta\n"
 "  -s, --shell SHELL\t\ttshell dla nowo tworzonego konta\n"
 "  -u, --uid UID\t\t\twymuś użycie konkretnego UID dla nowo tworzonego konta\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1719,6 +1791,7 @@ msgstr ""
 "\t\t\t\tdo usuwanego użytkownika\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie działania\n"
 "  -r, --remove\t\t\tusuń katalog domowy i spool pocztowy\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1780,7 +1853,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1800,7 +1874,7 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
-"Użycie: usermod [opcje] login\n"
+"Użycie: usermod [opcje] LOGIN\n"
 "\n"
 "Opcje:\n"
 "  -a, --append GRUPA\t\tdołącz użytkownika do do dodatkowej grupy GRUPA\n"
@@ -1819,8 +1893,9 @@ msgstr ""
 "\t\t\t\t(może być użyte tylko z opcją -d)\n"
 "  -o, --non-unique\t\tpozwól na użycie nieunikalnego UID dla konta\n"
 "  -p, --password HASŁO\tużyj nowe zakodowane HASŁO dla użytkonta\n"
-"  -s, --shell SHELL\t\tnowy SHELL użytkownika\n"
-"  -U, --unlock\t\t\todblokuj konto użytkowqnika\n"
+"  -s, --shell SHELL\t\tnowy SHELL dla użytkownika LOGIN\n"
+"  -U, --unlock\t\t\todblokuj konto użytkownika\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1909,6 +1984,7 @@ msgstr ""
 "  -p, --passwd\t\t\tedycja bazy passwd\n"
 "  -q, --quiet\t\t\tcichy tryb pracy\n"
 "  -s, --shadow\t\t\tedycja bazy shadow lub gshadow\n"
+"\n"
 
 #, c-format
 msgid ""

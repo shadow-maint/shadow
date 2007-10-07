@@ -1,8 +1,8 @@
 
-LINGUAS = fr pl ru
+LINGUAS = fr pl ru sv
 
 # subdirectories for translated manual pages
-DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
+DIST_SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru sv tr zh_CN zh_TW
 if USE_NLS
 SUBDIRS = $(DIST_SUBDIRS)
 else
@@ -73,6 +73,7 @@ man_MANS = \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
+	groupmems.8 \
 	groupmod.8 \
 	groups.1 \
 	grpck.8 \

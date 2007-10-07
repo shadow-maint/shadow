@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.25 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.26 2006/07/18 17:02:01 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -16,13 +16,9 @@
       <arg choice='opt'>
 	<replaceable>options</replaceable>
       </arg>
-      <arg choice='opt'>- </arg>
       <arg choice='opt'>
 	<arg choice='plain'>
-	  <replaceable>username</replaceable>
-	</arg>
-	<arg choice='opt'>
-	  <replaceable>args</replaceable>
+	  <replaceable>LOGIN</replaceable>
 	</arg>
       </arg>
     </cmdsynopsis>

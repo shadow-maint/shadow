@@ -1,17 +1,20 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERDEL" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: userdel
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "USERDEL" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
-userdel \- Supprimer un compte utilisateur et les fichiers associés
+.SH "NOM"
+userdel \- supprimer un compte utilisateur et les fichiers associés
 .SH "SYNOPSIS"
 .HP 8
-\fBuserdel\fR [\-f] [\-r] \fIutilisateur\fR
+\fBuserdel\fR [options] \fILOGIN\fR
 .SH "DESCRIPTION"
 .PP
 La commande
@@ -20,25 +23,28 @@ modifie les fichiers d'administration des comptes du système, en supprimant les
 \fIutilisateur\fR. L'utilisateur nommé doit exister.
 .SH "OPTIONS"
 .PP
-Les options disponibles pour la commande
+Les options disponibles de la commande
 \fBuserdel\fR
 sont\ :
-.TP
-\fB\-f\fR
-Cette option force la suppression de l'utilisateur, même s'il est toujours connecté. Elle force également
+.TP 3n
+\fB\-f\fR, \fB\-\-force\fR
+Cette option force la suppression de l'utilisateur, même s'il est encore connecté. Elle force également
 \fBuserdel\fR
-à supprimer le répertoire personnel de l'utilisateur ou sa file d'attente des courriels, meêm si un autre utilisateur utilise le même répertoire personnel ou si l'utilisateur spécifié ne possède pas la file d'attente des courriels. Si
+à supprimer son répertoire personnel ou sa file d'attente des courriels, même si un autre utilisateur utilise le même répertoire personnel ou si l'utilisateur spécifié n'est pas le propriétaire de la file d'attente des courriels. Si
 \fIUSERGROUPS_ENAB\fR
 vaut
 \fIyes\fR
 dans le fichier
 \fI/etc/login.defs\fR
-et si un groupe existe avec le même nom que l'utilisateur supprimé, alors ce groupe sera supprimé, même s'il sagit du groupe primaire d'un autre utilisateur.
+et si un groupe existe avec le même nom que l'utilisateur supprimé, alors ce groupe sera supprimé, même s'il s'agit du groupe primaire d'un autre utilisateur.
 .sp
 \fINote\ :\fR
-Cette option est dangereuse, elle peut laisser votre système dans un état non consistant.
-.TP
-\fB\-r\fR
+Cette option est dangereuse, elle peut laisser votre système dans un état incohérent.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Afficher un message d'aide et quitter.
+.TP 3n
+\fB\-r\fR, \fB\-\-remove\fR
 Les fichiers présents dans le répertoire personnel de l'utilisateur seront supprimés en même temps que le répertoire lui\-même, ainsi que le répertoire d'attente des courriels. Vous devrez rechercher et éliminer vous\-même les fichiers situés dans d'autres systèmes de fichiers.
 .sp
 Le répertoire d'attente des courriels est défini par la variable
@@ -46,42 +52,42 @@ Le répertoire d'attente des courriels est défini par la variable
 du fichier
 \fIlogin.defs\fR.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/login.defs\fR
-configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
-.TP
+Configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc.
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shadow\fR
-informations sécurisées sur les comptes utilisateurs
-.SH "VALEUR DE RETOUR"
+Informations sécurisées sur les comptes utilisateurs.
+.SH "VALEURS DE RETOUR"
 .PP
 La commande
 \fBuserdel\fR
 retourne les valeurs suivantes en quittant\ :
-.TP
+.TP 3n
 \fI0\fR
 succès
-.TP
+.TP 3n
 \fI1\fR
 impossible de mettre à jour le fichier des mots de passe
-.TP
+.TP 3n
 \fI2\fR
 erreur de syntaxe
-.TP
+.TP 3n
 \fI6\fR
-l'utilisateur spécifié n'existe pas
-.TP
+l'utilisateur indiqué n'existe pas
+.TP 3n
 \fI8\fR
 l'utilisateur est actuellement connecté
-.TP
+.TP 3n
 \fI10\fR
 impossible de mettre à jour le fichier des groupes
-.TP
+.TP 3n
 \fI12\fR
 impossible de supprimer le répertoire personnel
 .SH "AVERTISSEMENTS"
@@ -89,7 +95,7 @@ impossible de supprimer le répertoire personnel
 \fBUserdel\fR
 ne vous permet pas de supprimer un compte si l'utilisateur en question est actuellement connecté. Vous devez tuer tous les processus en cours d'exécution appartenant à l'utilisateur que vous êtes en train de supprimer.
 .PP
-Vous ne pouvez pas supprimer d'attribut NIS d'un client NIS. Cela doit être effectué sur le serveur NIS.
+Vous ne pouvez supprimer aucun attribut NIS d'un client NIS. Cela doit être effectué sur le serveur NIS.
 .PP
 Si
 \fIUSERGROUPS_ENAB\fR
@@ -98,9 +104,9 @@ vaut
 dans le fichier
 \fI/etc/login.defs\fR,
 \fBuserdel\fR
-supprimera le groupe ayant le même nom que l'utilisateur. Afin d'éviter des problèmes de consistance entre les fichiers passwd et group,
+supprimera le groupe ayant le même nom que l'utilisateur. Afin d'éviter des incohérences entre les fichiers passwd et group,
 \fBuserdel\fR
-vérifie que le groupe n'est pas utilisé comme groupe primaire d'un autre utilisateur, et affichera un avertissement et ne supprimera pas l'utilisateur si c'est le cas. L'option
+vérifie que le groupe n'est pas utilisé comme groupe primaire d'un autre utilisateur\ ; si c'est le cas un avertissement sera affiché et l'utilisateur ne sera pas supprimé. L'option
 \fB\-f\fR
 permet de forcer la suppression du groupe.
 .SH "VOIR AUSSI"

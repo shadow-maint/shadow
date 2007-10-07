@@ -10,6 +10,7 @@ pamd_files = \
 	chpasswd \
 	groupadd \
 	groupdel \
+	groupmems \
 	groupmod \
 	login \
 	newusers \

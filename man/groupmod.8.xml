@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groupmod.8'>
-  <!-- $Id: groupmod.8.xml,v 1.16 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id: groupmod.8.xml,v 1.18 2006/07/12 15:52:48 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -8,26 +8,25 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>groupmod</refname>
-    <refpurpose>modify a group</refpurpose>
+    <refpurpose>modify a group definition on the system</refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>groupmod</command>
       <arg choice='opt'>
-	<arg choice='plain'>-g <replaceable>gid</replaceable></arg>
-	<arg choice='opt'>-o </arg>
+        <replaceable>options</replaceable>
       </arg>
-      <arg choice='opt'>-n <replaceable>new_group_name</replaceable></arg>
-      <arg choice='plain'><replaceable>group</replaceable></arg>
+      <arg choice='plain'><replaceable>GROUP</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>groupmod</command> command modifies the system account
-      files to reflect the changes that are specified on the command line.
+      The <command>groupmod</command> modifies the definition of the specified
+      <replaceable>GROUP</replaceable> by modifying the appropriate entry in
+      the group database.
     </para>
   </refsect1>
 
@@ -40,25 +39,46 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-g</option> <replaceable>gid</replaceable>
+	  <option>-g</option>, <option>--gid</option> <replaceable>GID</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    The numerical value of the group's ID. This value must be
-	    unique, unless the <option>-o</option> option is used. The value
-	    must be non-negative. Values between 0 and 999 are typically
-	    reserved for system groups. Any files which the old group ID is
-	    the file group ID must have the file group ID changed manually.
+	    Specify the new group ID for the <replaceable>GROUP</replaceable>.
+	    The numerical value of the <replaceable>GID</replaceable> must be
+	    a non-negative decimal integer. This value must be unique, unless
+	    the <option>-o</option> option is used. Values between 0 and 999
+	    are typically reserved for system groups. Any files which the old
+	    group ID is the file group ID must have the file group ID changed
+	    manually.
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-n</option> <replaceable>new_group_name</replaceable></term>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-n</option>, <option>--new-name</option>
+	  <replaceable>NEW_GROUP</replaceable>
+	</term>
 	<listitem>
 	  <para> 
-	    The name of the group will be changed from <emphasis
-	    remap='I'>group</emphasis> to <emphasis
-	    remap='I'>new_group_name</emphasis>.
+	    The name of the group will be changed from <replaceable>GROUP</replaceable>
+	    to <replaceable>NEW_GROUP</replaceable> name.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-o</option>, <option>--non-unique</option>
+	</term>
+	<listitem>
+	  <para>
+	    When used with the <option>-g</option> option allow to change the
+	    group <replaceable>GID</replaceable> to non-unique value.
 	  </para>
 	</listitem>
       </varlistentry>

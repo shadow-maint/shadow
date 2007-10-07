@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPS" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\"     Title: groups
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes utilisateur
+.\"    Source: Commandes utilisateur
+.\"
+.TH "GROUPS" "1" "30/07/2006" "Commandes utilisateur" "Commandes utilisateur"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 groups \- Afficher la liste des groupes auxquels appartient l'utilisateur
 .SH "SYNOPSIS"
 .HP 7
@@ -16,12 +19,12 @@ groups \- Afficher la liste des groupes auxquels appartient l'utilisateur
 .PP
 \fBGroups\fR
 affiche la liste des noms de groupe (ou leur identifiant numérique) de l'utilisateur. Si une valeur n'a pas d'entrée correspondante dans
-\fI/etc/group\fR, l'identifiant numérique du groupe est affiché. L'argument optionnel
+\fI/etc/group\fR, l'identifiant numérique du groupe est affiché. Le paramètre optionnel
 \fIutilisateur\fR
 permet d'afficher la liste des groupes pour cet utilisateur.
 .SH "NOTE"
 .PP
-Sur les systèmes ne supportant pas l'appartenance à plusieurs groupes, seules les informations contenues dans
+Sur les systèmes qui ne gèrent pas l'appartenance à plusieurs groupes, seules les informations contenues dans
 \fI/etc/group\fR
 sont affichées. L'utilisateur doit utiliser
 \fBnewgrp\fR
@@ -29,9 +32,9 @@ ou
 \fBsg\fR
 pour modifier l'identifiant de groupe réel et effectif.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
+Informations sur les groupes.
 .SH "VOIR AUSSI"
 .PP
 \fBnewgrp\fR(1),

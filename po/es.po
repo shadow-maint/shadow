@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-06-04 19:59+0200\n"
 "Last-Translator: Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -180,7 +180,7 @@ msgstr "Contraseña de %s: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -196,22 +196,24 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Modo de uso: chage [opciones] usuario\n"
+"Modo de uso: chage [opciones] [USUARIO]\n"
 "\n"
 "Opciones:\n"
-"  -d, --lastday ULTIMO_DÍA\testablecer el último cambio de clave a "
-"ULTIMO_DÍA\n"
-"  -E, --expiredate FECHA_EXP\testablecer la fecha de expiración de la cuenta "
-"a FECHA_EXP\n"
+"  -d, --lastday ULTIMO_DÍA\testablecer el último cambio de clave a\n"
+"\t\t\t\tULTIMO_DÍA\n"
+"  -E, --expiredate FECHA_EXP\testablecer la fecha de expiración de la "
+"cuenta\n"
+"\t\t\t\ta FECHA_EXP\n"
 "  -h, --help\t\t\tmostrar este mensaje de ayuda y terminar\n"
-"  -I, --inactive INACTIV\tdeshabilitar la cuenta después de INACTIV días de "
-"la fecha de expiración\n"
+"  -I, --inactive INACTIV\tdeshabilitar la cuenta después de INACTIV días de\n"
+"\t\t\t\tla fecha de expiración\n"
 "  -l, --list\t\t\tmostrar la información de envejecimiento de la cuenta\n"
-"  -m, --mindays DÍAS_MIN\testablecer el número mínimo de días antes de "
-"cambiar la clave a DÍAS_MIN\n"
-"  -M, --maxdays DÍAS_MAXS\testablecer el número máximo de días antes de "
-"cambiar la clave a DÍAS_MAX\n"
+"  -m, --mindays DÍAS_MIN\testablecer el número mínimo de días antes de\n"
+"\t\t\t\tcambiar la clave a DÍAS_MIN\n"
+"  -M, --maxdays DÍAS_MAXS\testablecer el número máximo de días antes de\n"
+"\t\t\t\tcambiar la clave a DÍAS_MAX\n"
 "  -W, --warndays DÍAS_AVISO\tset expiration warning days to WARN_DAYS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -462,6 +464,7 @@ msgstr ""
 "  -h, --help\t\tmuestra este mensaje de ayuda y termina\n"
 "  -m, --md5\t\tusa cifrado MD5 en vez de DES cuando las\n"
 "                        contraseñas proporcionadas no estén cifradas\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -538,9 +541,23 @@ msgstr "%s: no se puede bloquear el fichero de contraseñas ocultas (shadow)\n"
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: línea %d: usuario desconocido %s\n"
 
-#, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Modo de uso: %s [-s shell] [nombre]\n"
+#, fuzzy, c-format
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Modo de uso: userdel [opciones] USUARIO\n"
+"\n"
+"Opciones:\n"
+"  -f, --force\t\t\tforzar la eliminación de los ficheros,\n"
+"\t\t\t\tincluso si no pertenecen al usuario\n"
+"  -h, --help\t\t\tmuestra este mensaje y termina\n"
+"  -r, --remove\t\t\telimina el directorio y el buzón de correo\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Shell de acceso"
@@ -602,6 +619,7 @@ msgstr ""
 "\t\t\t\tcontadores de fallos y los límites (si se\n"
 "\t\t\t\tusan las opciones -r, -m o -l) para el usuario\n"
 "\t\t\t\tUSUARIO\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -716,9 +734,9 @@ msgstr "%s: no se puede reescribir el fichero oculto (shadow)\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: no se puede desbloquear el fichero\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -741,6 +759,7 @@ msgstr ""
 "\t\t\t\t/etc/login.defs\n"
 "  -o, --non-unique\tpermite crear grupos con un GID duplicado (que no es\n"
 "\t\t\t\túnico)\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -787,8 +806,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: incapaz de abrir el fichero de grupos oculto (shadow)\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: grupo %s inválido\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: argumento numérico inválido «%s»\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -827,8 +846,68 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s es el maestro NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Modo de uso: groupmod [-g gid [-o]] [-n nombre] grupo\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: Autenticación PAM fallida\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: incapaz de bloquear el fichero de grupos\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: incapaz de abrir el fichero de grupos\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: no se puede abrir el fichero de grupos\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Modo de uso: groupadd [opciones] grupo\n"
+"\n"
+"Opciones:\n"
+"  -f, --force\t\tfuerza una salida con un estado de éxito si el grupo\n"
+"\t\t\t\tespecificado existe\n"
+"  -g, --gid GID\t\tusa GID para el nuevo grupo\n"
+"  -h, --help\t\tmuestra esta ayuda y termina\n"
+"  -K, --key NOMBRE=VALOR prevalece sobre el valor predeterminado de\n"
+"\t\t\t\t/etc/login.defs\n"
+"  -o, --non-unique\tpermite crear grupos con un GID duplicado (que no es\n"
+"\t\t\t\túnico)\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -993,6 +1072,7 @@ msgstr ""
 "  -t, --time DÍAS\tmuestra sólo los registros lastlog más recientes\n"
 "\t\t\tque DÍAS\n"
 "  -u, --user USUARIO\tmuestra el registro lastlog para el usuario\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1191,9 +1271,9 @@ msgstr "%s: línea %d: no se puede actualizar la entrada\n"
 msgid "%s: error updating files\n"
 msgstr "%s: error actualizando los ficheros\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1236,6 +1316,7 @@ msgstr ""
 "  -w, --warndays DÍAS_AVISO\testablece el aviso de caducidad a DÍAS_AVISO\n"
 "  -x, --maxdays DÍAS_MAX\testablece el número máximo de días antes de\n"
 "\t\t\t\tcambiar la contraseña a DÍAS_MAX\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Contraseña antigua: "
@@ -1403,9 +1484,9 @@ msgstr "Disculpe."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1427,6 +1508,7 @@ msgstr ""
 "  --preserve-environment\tno restablece las variables de entorno a su\n"
 "\t\t\t\tvalor original, y conserva la misma shell\n"
 "  -s, --shell SHELL\t\tusa SHELL en vez de la predeterminada en passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1478,10 +1560,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Entrando en el Modo de Mantenimiento del Sistema\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: argumento numérico inválido «%s»\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1543,7 +1621,7 @@ msgid ""
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 "\n"
 msgstr ""
-"Modo de uso: useradd [opciones] nombre\n"
+"Modo de uso: useradd [opciones] USUARIO\n"
 "\n"
 "Opciones:\n"
 "  -b, --base-dir DIR_BASE\tdirectorio base para el nuevo directorio\n"
@@ -1552,9 +1630,8 @@ msgstr ""
 "  -d, --home-dir DIR_PERSONAL\tdirectorio personal para el nuevo usuario\n"
 "  -D, --defaults\t\tmuestra o salva la configuración predeterminada\n"
 "\t\t\t\tmodificada para useradd\n"
-"  -e, --expiredate FECHA_EXPIR\testablece la fecha de caducidad de la "
-"cuenta\n"
-"\t\t\t\ta FECHA_EXPIR\n"
+"  -e, --expiredate FECHA_EXPIR\testablece la fecha de caducidad de la \t\t\t"
+"\tcuenta a FECHA_EXPIR\n"
 "  -f, --inactive INACTIVO\testablece el tiempo de inactividad después de\n"
 "\t\t\t\tque caduque la cuenta a INACTIVO\n"
 "  -g, --gid GRUPO\t\tforzar el uso de GRUPO para la nueva cuenta de\n"
@@ -1572,6 +1649,7 @@ msgstr ""
 "\t\t\t\tnueva cuenta\n"
 "  -s, --shell SHELL\t\tla shell de entrada para la nueva cuenta de usuario\n"
 "  -u, --uid UID\t\tforzar el uso del UID para la nueva cuenta de usuario\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1723,6 +1801,7 @@ msgstr ""
 "\t\t\t\tincluso si no pertenecen al usuario\n"
 "  -h, --help\t\t\tmuestra este mensaje y termina\n"
 "  -r, --remove\t\t\telimina el directorio y el buzón de correo\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1785,7 +1864,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1805,15 +1885,14 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
-"Modo de uso: usermod [opciones] nombre\n"
+"Modo de uso: usermod [opciones] USUARIO\n"
 "\n"
 "Opciones:\n"
 "  -a, --append GRUPO\t\tañade al usuario al GRUPO\n"
 "  -c, --comment COMENTARIO\tnuevo valor del campo GECOS\n"
 "  -d, --home-dir DIR_PERSONAL\tnuevo directorio personal del nuevo usuario\n"
-"  -e, --expiredate FECHA_EXPIR\testablece la fecha de caducidad de la "
-"cuenta\n"
-"\t\t\t\ta FECHA_EXPIR\n"
+"  -e, --expiredate FECHA_EXPIR\testablece la fecha de caducidad de la \t\t\t"
+"\tcuenta a FECHA_EXPIR\n"
 "  -f, --inactive INACTIVO\testablece el tiempo de inactividad después de\n"
 "\t\t\t\tque caduque la cuenta a INACTIVO\n"
 "  -g, --gid GRUPO\t\tfuerza el uso de GRUPO para la nueva cuenta de\n"
@@ -1834,6 +1913,7 @@ msgstr ""
 "  -u, --uid UID\t\t\tfuerza el uso del UID para la nueva cuenta\n"
 "\t\t\t\tde usuario\n"
 "  -U, --unlock\t\t\tdesbloque la cuenta de usuario\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1922,6 +2002,7 @@ msgstr ""
 "  -p, --passwd\t\t\tedita la base de datos con las contraseñas\n"
 "  -q, --quiet\t\t\tmodo silencioso\n"
 "  -s, --shadow\t\t\tedita la base de datos shadow o gshadow\n"
+"\n"
 
 #, c-format
 msgid ""

@@ -1,0 +1,89 @@
+.\"     Title: groupmems
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "GROUPMEMS" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+groupmems \- administrera medlemmar av en användares primära grupp
+.SH "SYNOPSIS"
+.HP 10
+\fBgroupmems\fR \-a\ \fIanvändarnamn\fR | \-d\ \fIanvändarnamn\fR | \-l | \-p | [\-g\ \fIgruppnamn\fR] 
+.SH "BESKRIVNING"
+.PP
+The
+\fBgroupmems\fR
+utility allows a user to administer his/her own group membership list without the requirement of super user privileges. The
+\fBgroupmems\fR
+utility is for systems that configure its users to be in their own name sake primary group (i.e., guest / guest).
+.PP
+Endast superanvändaren, som administratör, kan använda
+\fBgroupmems\fR
+för att göra ändringar i medlemskap för andra grupper.
+.SH "FLAGGOR"
+.PP
+Flaggorna som gäller för kommandot
+\fBgroupmems\fR
+är:
+.TP 3n
+\fB\-a\fR \fIanvändarnamn\fR
+Lägg till en ny användare till gruppens medlemslista.
+.TP 3n
+\fB\-d\fR \fIanvändarnamn\fR
+Ta bort en användare från gruppen medlemslista.
+.TP 3n
+\fB\-p\fR
+Rensa alla användare från gruppens medlemslista.
+.TP 3n
+\fB\-g\fR \fIgruppnamn\fR
+Superanvändaren kan ange vilken grupps medlemslista som ska ändras.
+.TP 3n
+\fB\-l\fR
+Lista gruppens medlemslista.
+.SH "SETUP"
+.PP
+The
+\fBgroupmems\fR
+executable should be in mode
+2770
+as user
+\fIroot\fR
+and in group
+\fIgroups\fR. The system administrator can add users to group
+\fIgroups\fR
+to allow or disallow them using the
+\fBgroupmems\fR
+utility to manage their own group membership list.
+.sp
+.RS 3n
+.nf
+	$ groupadd \-r groups
+	$ chmod 2770 groupmems
+	$ chown root.groups groupmems
+	$ groupmems \-g groups \-a gk4
+    
+.fi
+.RE
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/gshadow\fR
+säker gruppkontoinformation
+.SH "SE OCKSÅ"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

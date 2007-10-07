@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PWCONV" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: pwconv
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "PWCONV" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 pwconv, pwunconv, grpconv, grpunconv \- Convertir vers ou depuis les fichiers de mots de passe ou de groupe cachés
 .SH "SYNOPSIS"
 .HP 7
@@ -66,9 +69,9 @@ Chaque programme place les verrous nécessaires avant d'effectuer la conversion.
 \fBPwconv\fR
 et
 \fBgrpconv\fR
-sont similaires. Dans un premier temps, les entrées présentes dans le fichier de mots de passe cachés (\fI/etc/shadow\fR
+sont similaires. Dans un premier temps, les entrées du fichier de mots de passe cachés (\fI/etc/shadow\fR
 ou
-\fI/etc/gshadow\fR), mais non présentes dans le fichier principal (\fIpasswd\fR
+\fI/etc/gshadow\fR) qui n'existent pas dans le fichier principal (\fIpasswd\fR
 ou
 \fIgroup\fR), sont retirées. Ensuite, les entrées du fichier
 \fIshadow\fR
@@ -102,9 +105,9 @@ et
 \fBgrpck\fR
 pour corriger ces erreurs avant lancer toute conversion.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/login.defs\fR
-configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+Configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc.
 .SH "VOIR AUSSI"
 .PP
 \fBgrpck\fR(8),

@@ -1,0 +1,96 @@
+.\"     Title: passwd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Filformat och konversioner
+.\"    Source: Filformat och konversioner
+.\"
+.TH "PASSWD" "5" "20\-07\-2006" "Filformat och konversioner" "Filformat och konversioner"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+passwd \- lösenordsfilen
+.SH "BESKRIVNING"
+.PP
+\fI/etc/passwd\fR
+innehåller en rad för varje anvÃ\(Csndarkonto men sju fält separerade med kolontecken (\(lq:\(rq). Dessa fält är:
+.TP 3n
+\(bu
+inloggningsnamn
+.TP 3n
+\(bu
+valfritt krypterat lösenord
+.TP 3n
+\(bu
+numeriskt användar\-id
+.TP 3n
+\(bu
+numeriskt grupp\-id
+.TP 3n
+\(bu
+användarnamn eller kommentarsfält
+.TP 3n
+\(bu
+användarens hemkatalog
+.TP 3n
+\(bu
+optional user command interpreter
+.sp
+.RE
+.PP
+The encrypted password field may be blank, in which case no password is required to authenticate as the specified login name. However, some applications which read the
+\fI/etc/passwd\fR
+file may decide not to permit
+\fIany\fR
+access at all if the
+\fIpassword\fR
+field is blank. If the
+\fIpassword\fR
+field is a lower\-case
+\(lqx\(rq, then the encrypted password is actually stored in the
+\fBshadow\fR(5)
+file instead; there
+\fImust\fR
+be a corresponding line in the
+\fI/etc/shadow\fR
+file, or else the user account is invalid. If the
+\fIpassword\fR
+field is any other string, then it will be treated as an encrypted password, as specified by
+\fBcrypt\fR(3).
+.PP
+The comment field is used by various system utilities, such as
+\fBfinger\fR(1).
+.PP
+The home directory field provides the name of the initial working directory. The
+\fBlogin\fR
+program uses this information to set the value of the
+\fB$HOME\fR
+environmental variable.
+.PP
+The command interpreter field provides the name of the user's command language interpreter, or the name of the initial program to execute. The
+\fBlogin\fR
+program uses this information to set the value of the
+\fB$SHELL\fR
+environmental variable. If this field is empty, it defaults to the value
+\fI/bin/sh\fR.
+.SH "FILER"
+.TP 3n
+\fI/etc/passwd\fR
+Användarkontoinformation.
+.TP 3n
+\fI/etc/shadow\fR
+optional encrypted password file
+.SH "SE OCKSÅ"
+.PP
+\fBgetent\fR(1),
+\fBlogin\fR(1),
+\fBpasswd\fR(1),
+\fBsu\fR(1),
+\fBcrypt\fR(3),
+\fBgetpwnam\fR(3),
+\fBshadow\fR(5),
+\fBpwconv\fR(8),
+\fBpwunconv\fR(8),
+\fBsulogin\fR(8).

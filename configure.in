@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.17)
+AM_INIT_AUTOMAKE(shadow, 4.0.18)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -329,9 +329,6 @@ if test "$with_skey" = "yes"; then
 	],[
 		skeychallenge((void*)0, (void*)0, (void*)0, 0);
 	],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])])
-	dnl libshadow_getpass() handles password prompt with enabled echo
-	AC_DEFINE(getpass, libshadow_getpass,
-		[Define to libshadow_getpass to use our own version of getpass().])
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)
@@ -356,6 +353,7 @@ AC_CONFIG_FILES([
 	man/pl/Makefile
 	man/pt_BR/Makefile
 	man/ru/Makefile
+	man/sv/Makefile
 	man/tr/Makefile
 	man/zh_CN/Makefile
 	man/zh_TW/Makefile

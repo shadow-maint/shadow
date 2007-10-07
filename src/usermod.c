@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.69 2006/06/25 13:10:29 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.71 2006/07/28 17:42:48 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -68,12 +68,12 @@
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* UID already in use (and no -o) */
-/* #define E_BAD_PWFILE     5 *//* passwd file contains errors */
+/* #define E_BAD_PWFILE	5	   passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
-/* #define E_NOSPACE        11 *//* insufficient space to move home dir */
+/* #define E_NOSPACE	11	   insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 /*
@@ -160,16 +160,18 @@ static void move_mailbox (void);
  * "56k-family"... ergh.
  * --Pac.
  */
-static struct group *getgr_nam_gid (const char *name)
+static struct group *getgr_nam_gid (const char *grname)
 {
-	gid_t gid;
-	char *ep;
+	long val;
+	char *errptr;
 
-	gid = strtoul (name, &ep, 10);
-	if (*name != '\0' && *ep == '\0')	/* valid numeric GID */
-		return getgrgid (gid);
-
-	return getgrnam (name);
+	val = strtol (grname, &errptr, 10);
+	if (*errptr || errno == ERANGE || val < 0) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 grname);
+		exit (E_BAD_ARG);
+	}
+	return getgrnam (grname);
 }
 
 /*
@@ -276,7 +278,8 @@ static void usage (void)
 	fprintf (stderr, _("Usage: usermod [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
-			   "  -a, --append GROUP		append the user to the supplemental GROUP\n"
+			   "  -a, --append			append the user to the supplemental GROUPS\n"
+			   "				(use only with -G)\n"
 			   "  -c, --comment COMMENT		new value of the GECOS field\n"
 			   "  -d, --home HOME_DIR		new home directory for the user account\n"
 			   "  -e, --expiredate EXPIRE_DATE	set account expiration date to EXPIRE_DATE\n"
@@ -803,30 +806,32 @@ static int grp_update (void)
 	return ret;
 }
 
-static long get_number (const char *cp)
+static long get_number (const char *numstr)
 {
 	long val;
-	char *ep;
+	char *errptr;
 
-	val = strtol (cp, &ep, 10);
-	if (*cp != '\0' && *ep == '\0')	/* valid number */
-		return val;
-
-	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
-	exit (E_BAD_ARG);
+	val = strtol (numstr, &errptr, 10);
+	if (*errptr || errno == ERANGE) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 numstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
 }
 
-static uid_t get_id (const char *cp)
+static uid_t get_id (const char *uidstr)
 {
-	uid_t val;
-	char *ep;
+	long val;
+	char *errptr;
 
-	val = strtoul (cp, &ep, 10);
-	if (*cp != '\0' && *ep == '\0')	/* valid number */
-		return val;
-
-	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
-	exit (E_BAD_ARG);
+	val = strtol (uidstr, &errptr, 10);
+	if (*errptr || errno == ERANGE || val < 0) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 uidstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
 }
 
 /*
@@ -922,7 +927,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "a:c:d:e:f:g:G:hl:Lmop:s:u:U",
+			getopt_long (argc, argv, "ac:d:e:f:g:G:hl:Lmop:s:u:U",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':

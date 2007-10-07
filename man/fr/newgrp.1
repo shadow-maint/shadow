@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "NEWGRP" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\"     Title: newgrp
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes utilisateur
+.\"    Source: Commandes utilisateur
+.\"
+.TH "NEWGRP" "1" "30/07/2006" "Commandes utilisateur" "Commandes utilisateur"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
-newgrp \- se connecte avec un nouveau groupe
+.SH "NOM"
+newgrp \- se connecter avec un nouveau groupe
 .SH "SYNOPSIS"
 .HP 7
 \fBnewgrp\fR [\-] [\fIgroupe\fR]
@@ -17,36 +20,35 @@ newgrp \- se connecte avec un nouveau groupe
 \fBNewgrp\fR
 permet de changer l'identifiant de groupe de l'utilisateur au cours d'une session. Si l'option
 \fB\-\fR
-est fournie, l'environnement de l'utilisateur est réinitialisé, comme si l'utilisateur venait de se connecter. Sinon, l'environnement courant est utilisé. Entre autre, le répertoire de travail est conservé.
+est fournie, l'environnement de l'utilisateur est réinitialisé, comme si l'utilisateur venait de se connecter. Sinon, l'environnement actuel, y\-compris le répertoire de travail actuel est conservé.
 .PP
 \fBNewgrp\fR
-change l'identifiant de groupe réel à la valeur du groupe donné en argument, ou au groupe par défaut défini dans
+change l'identifiant de groupe réel actuel à la valeur du groupe indiqué, ou au groupe par défaut défini dans
 \fI/etc/passwd\fR
-si aucun groupe n'est fourni.
+si aucun nom de groupe n'est fourni.
 \fBNewgrp\fR
-essaiera également d'ajouter le groupe aux groupes de l'utilisateur. Si l'utilisateur n'est pas superutilisateur, un mot de passe sera demandé si l'utilisateur n'utilise pas de mot de passe (dans
-\fI/etc/shadow\fR
-si cet utilisateur a une entrée dans le fichier des mots de passe cachés, ou dans
+essaiera également d'ajouter le groupe à l'ensemble des groupes de l'utilisateur. Si l'utilisateur n'est pas superutilisateur, un mot de passe sera lui demandé s'il n'utilise pas de mot de passe (dans
+\fI/etc/shadow\fR, si cet utilisateur a une entrée dans le fichier des mots de passe cachés, ou dans
 \fI/etc/passwd\fR
-sinon), mais que le groupe en a un, ou si l'utilisateur n'est pas dans la liste des membres de ce groupe et que ce groupe utilise un mot de passe. L'accès sera refusé si le groupe n'a pas de mot de passe et que l'utilisateur ne fait pas partie de ses membres.
+sinon), mais que le groupe en a un, ou si l'utilisateur n'est pas dans la liste des membres de ce groupe et que ce groupe utilise un mot de passe. L'accès sera refusé si le mot de passe du groupe est vide et que l'utilisateur ne fait pas partie de ses membres.
 .PP
 S'il y a une entrée pour ce groupe dans
 \fI/etc/gshadow\fR, alors la liste des membres et le mot de passe de ce groupe seront pris dans ce fichier, sinon, l'entrée du fichier
 \fI/etc/group\fR
-est considérée.
+est utilisée.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shadow\fR
-informations sécurisées sur les comptes utilisateurs
-.TP
+Informations sécurisées sur les comptes utilisateurs.
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/gshadow\fR
-informations cachées sur les groupes
+Informations sécurisées sur les groupes.
 .SH "VOIR AUSSI"
 .PP
 \fBid\fR(1),

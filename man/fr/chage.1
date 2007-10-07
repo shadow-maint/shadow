@@ -1,114 +1,119 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHAGE" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\"     Title: chage
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes utilisateur
+.\"    Source: Commandes utilisateur
+.\"
+.TH "CHAGE" "1" "30/07/2006" "Commandes utilisateur" "Commandes utilisateur"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 chage \- Modifier les informations de validité d'un mot de passe
 .SH "SYNOPSIS"
 .HP 6
-\fBchage\fR [\fIoptions\fR] \fIutilisateur\fR
+\fBchage\fR [\fIoptions\fR] [\fILOGIN\fR]
 .SH "DESCRIPTION"
 .PP
-\fBChage\fR
+La commande
+\fBchage\fR
 modifie le nombre de jours entre les changements de mot de passe et la date du dernier changement. Ces informations sont utilisées par le système pour déterminer si un utilisateur doit changer son mot de passe.
 .SH "OPTIONS"
 .PP
 Les options disponibles pour la commande
 \fBchage\fR
 sont\ :
-.TP
+.TP 3n
 \fB\-d\fR, \fB\-\-lastday\fR \fIDERNIER_JOUR\fR
-Fixe le numéro du jour depuis le 1er janvier 1970, où le mot de passe a été changé la dernière fois. La date peut aussi être exprimée dans le format AAAA\-MM\-JJ (ou le format utilisé plus communément dans votre région).
-.TP
+Fixer le nombre du jour, à compter du 1er janvier 1970, où le mot de passe a été changé la dernière fois. La date peut aussi être exprimée dans le format AAAA\-MM\-JJ (ou le format utilisé plus communément dans votre région).
+.TP 3n
 \fB\-E\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDITÉ\fR
-Fixe la date à partir de laquelle le compte de l'utilisateur ne sera plus accessible. La date est le numéro du jour depuis le 1er janvier 1970 après lequel le compte sera bloqué. La date peut aussi être exprimée dans un format AAAA\-MM\-JJ (ou le format plus communément utilisé dans votre région). Un utilisateur dont le compte est bloqué doit contacter l'administrateur système pour pouvoir utiliser le système à nouveau.
+Fixer la date, ou le nombre de jours à compter du 1er janvier 1970, à partir de laquelle le compte de l'utilisateur ne sera plus accessible. La date peut aussi être exprimée dans le format AAAA\-MM\-JJ (ou le format plus communément utilisé dans votre région). Un utilisateur dont le compte est bloqué doit contacter l'administrateur système pour pouvoir utiliser à nouveau le système.
 .sp
 Une valeur de
 \fI\-1\fR
 pour
 \fIDATE_FIN_VALIDITÉ\fR
-aurra pour effet de supprimer la date de fin de validité.
-.TP
+aura pour effet de supprimer la date de fin de validité.
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
-Affiche un message d'aide et quitte.
-.TP
+Afficher un message d'aide et quitter.
+.TP 3n
 \fB\-I\fR, \fB\-\-inactive\fR \fIDURÉE_INACTIVITÉ\fR
-Fixe le nombre de jours d'inactivité, après qu'un mot de passe ait dépassé la date de fin de validité, avant que le compte ne soit bloqué. La valeur
+Fixer le nombre de jours d'inactivité, après qu'un mot de passe ait dépassé la date de fin de validité, avant que le compte ne soit bloqué. La valeur
 \fIDURÉE_INACTIVITÉ\fR
-est le nombre de jours d'inactivité. Un utilisateur dont le compte est bloqué doit contacter l'administrateur système avant de pouvoir utiliser le système à nouveau.
+est le nombre de jours d'inactivité. Un utilisateur dont le compte est bloqué doit contacter l'administrateur système avant de pouvoir utiliser de nouveau le système.
 .sp
 Une valeur de
 \fI\-1\fR
 pour
 \fIDURÉE_INACTIVITÉ\fR
 supprime la durée d'inactivité pour un compte.
-.TP
+.TP 3n
 \fB\-l\fR, \fB\-\-list\fR
-Affiche les informations sur les âges des comptes.
-.TP
+Afficher les informations sur l'âge des comptes.
+.TP 3n
 \fB\-m\fR, \fB\-\-mindays\fR \fIJOURS_MIN\fR
-Fixe le nombre minimum de jours entre chaque changement de mot de passe. Une valeur de zéro pour ce champ indique que l'utilisateur peut changer son mot de passe n'importe quand.
-.TP
+Définit le nombre minimum de jours entre chaque changement de mot de passe à
+\fIMIN_DAYS\fR. Une valeur de zéro pour ce champ indique que l'utilisateur peut changer son mot de passe quand il le souhaite.
+.TP 3n
 \fB\-M\fR, \fB\-\-maxdays\fR \fIJOURS_MAX\fR
-Fixe le nombre maximum de jours pendant lesquels un mot de passe est valable. Quand
+Fixer le nombre maximum de jours pendant lesquels un mot de passe est valable. Quand
 \fIJOURS_MAX\fR
 plus
 \fIDERNIER_JOUR\fR
-est inférieur à la date courante, l'utilisateur est obligé de changer son mot de passe avant de pouvoir utiliser son compte. Cet événement peut être déclenché plus tôt grâce à l'option
+est inférieur à la date actuelle, l'utilisateur est obligé de changer son mot de passe avant de pouvoir utiliser son compte. Cet événement peut être déclenché plus tôt grâce à l'option
 \fB\-W\fR
-qui prévient l'utilisateur à l'avance avec un message d'alerte.
+qui prévient l'utilisateur à l'avance par un message d'alerte.
 .sp
 Une valeur de
 \fI\-1\fR
 pour
 \fIJOURS_MAX\fR
-supprime cette fonctionnalité.
-.TP
+supprime la vérification de validité.
+.TP 3n
 \fB\-W\fR, \fB\-\-warndays\fR \fIDURÉE_AVERTISSEMENT\fR
-Fixe le nombre de jours d'avertissement avant que le changement de mot de passe ne soit obligatoire. La valeur
+Fixer le nombre de jours d'avertissement avant que le changement de mot de passe ne soit obligatoire. La valeur
 \fIDURÉE_AVERTISSEMENT\fR
 est le nombre de jours précédant la fin de validité pendant lesquels un utilisateur sera prévenu que son mot de passe est sur le point d'arriver en fin de validité.
 .PP
 Si aucune de ces options n'est donnée,
 \fBchage\fR
-utilise un mode interactif, demandant confirmation à l'utilisateur pour les valeurs de tous les champs. Entrez la nouvelle valeur pour changer la valeur du champ, ou laissez la ligne vide pour conserver la valeur actuelle. La valeur actuelle est affichée entre crochets.
+utilise un mode interactif, demandant confirmation à l'utilisateur pour les valeurs de tous les champs. Entrez la nouvelle valeur pour modifier la valeur du champ, ou laissez la ligne vide pour conserver la valeur actuelle. La valeur actuelle est affichée entre crochets.
 .SH "NOTE"
 .PP
 Le programme
 \fBchage\fR
-nécessite l'utilisation d'un fichier de mots de passe cachés (\(Fo\ shadow password file\ \(Fc). Ces fonctionnalités ne sont pas disponibles quand les mots de passe sont enregistrés dans un fichier de mots de passe simple (\(Fo\ passwd file\ \(Fc).
+nécessite l'utilisation d'un fichier de mots de passe cachés (\(Fo\ shadow password file\ \(Fc).
 .PP
 La commande
 \fBchage\fR
 est réservée à l'utilisateur root, sauf pour l'option
-\fB\-l\fR, qui peut être utilisée par un utilisateur non privilégié pour savoir quand son mot de passe ou son compte arrivera en fin de validité.
+\fB\-l\fR, qui peut être utilisée par un utilisateur non privilégié pour lui permettre de savoir quand son mot de passe ou son compte arrivera en fin de validité.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shadow\fR
-informations sécurisées sur les comptes utilisateurs
-.SH "VALEUR DE RETOUR"
+Informations sécurisées sur les comptes utilisateurs.
+.SH "VALEURS DE RETOUR"
 .PP
 La commande
 \fBchage\fR
 retourne les valeurs suivantes en quittant\ :
-.TP
+.TP 3n
 \fI0\fR
 succès
-.TP
+.TP 3n
 \fI1\fR
 permission refusée
-.TP
+.TP 3n
 \fI2\fR
 erreur de syntaxe
-.TP
+.TP 3n
 \fI15\fR
 impossible de trouver le fichier des mots de passe cachés
 .SH "VOIR AUSSI"

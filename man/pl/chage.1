@@ -1,101 +1,122 @@
-.\" $Id: chage.1,v 1.14 2006/03/22 12:13:14 kloczek Exp $
-.\" Copyright 1990 - 1994 Julianne Frances Haugh
-.\" All rights reserved.
+.\"     Title: chage
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 14/07/2006
+.\"    Manual: Polecenia użytkowników
+.\"    Source: Polecenia użytkowników
 .\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.TH CHAGE 1
-.SH NAZWA
+.TH "CHAGE" "1" "14/07/2006" "Polecenia użytkowników" "Polecenia użytkowników"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAZWA"
 chage \- zmiana informacji o terminie ważności hasła użytkownika
-.SH SKŁADNIA
-.TP 6
-\fBchage\fR
-[\fB\-m\fR \fImindni\fR] [\fB\-M\fR \fImaxdni\fR]
-[\fB\-d\fR \fIostatni\fR] [\fB\-I\fR \fInieaktywne\fR]
-.br
-[\fB\-E\fR \fIdata_ważności\fR] [\fB\-W\fR \fIdni_ostrzegania\fR] \fIużytkownik\fR
-.TP 6
-\fBchage\fR
-\fB\-l\fR \fIużytkownik\fR
-.SH OPIS
-\fBchage\fR zmienia liczbę dni pomiędzy zmianami hasła i datę ostatniej
-zmiany hasła. Informację tę system wykorzystuje do ustalenia, kiedy
-użytkownik musi zmienić hasło.
-Polecenia \fBchage\fR może użyć tylko użytkownik root, za wyjątkiem
-opcji \fB\-l\fR. Może się nią posłużyć się użytkownik nieuprzywilejowany
-do stwierdzenia, kiedy wygasa jego własne hasło lub konto.
-.SH OPCJE
-Polecenie \fBchage\fR posiada następujące opcje:
-.IP "\fB\-E\fR \fIdata_ważności\fR"
-Ustawia datę, począwszy od której konto użytkownika nie będzie już dostępne.
-\fIdata_ważności\fR jest liczbą dni od 1 stycznia 1970, od której konto jest
-blokowane. Data może być też wyrażona w postaci RRRR\-MM\-DD (lub innej,
-powszechniej używanej w danym regionie).
-Użytkownik, którego konto jest zablokowane musi skontaktować się
-z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
-Przekazanie \fI-1\fR jako \fIdata_ważności\fR usuwa ograniczenie ważności
-konta użytkownika.
-.IP "\fB\-I\fR \fInieaktywne\fR"
-Opcja \fB\-I\fR służy do ustawiania czasu nieaktywności po wygaśnięciu
-hasła, po którym konto jest blokowane. Parametr \fInieaktywne\fR podaje
-liczbę dni nieaktywności. Wartość 0 wyłącza tę funkcję.
-Użytkownik, którego konto jest zablokowane musi skontaktować się
-z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
-.IP "\fB\-m\fR \fImindni\fR"
-Utawia minimalną liczbę dni pomiędzy zmianami hasła na wartość \fImindni\fR.
-Wartość zerowa oznacza, że użytkownik może je zmieniać w dowolnym czasie.
-.IP "\fB\-M\fR \fImaxdni\fR"
-Ustawia maksymalną liczbę dni, przez jakie hasło jest ważne na wartość
-\fImaxdni\fR. Gdy \fImaxdni\fR plus \fIostatni\fR jest mniejsze niż bieżący
-dzień, użytkownik musi zmienić swoje hasła, zanim będzie mógł skorzystać z
-konta. Zdarzenie to może być zaplanowane z wyprzedzeniem przez wykorzystanie
-opcji \fB\-W\fR, ostrzegającej zawczasu użytkownika o zbliżającym się
-terminie zmiany.
-.IP "\fB\-M\fR \fIostatni\fR"
-Ustawia liczbę dni od 1 stycznia 1970 do dnia kiedy ostatnio zmieniono hasło
-na \fIostatni\fR. Data może również zostać podana w postaci RRRR\-MM\-DD (lub
-postaci powszechniej używanej w danym regionie).
-.IP "\fB\-W\fR \fIdni_ostrzegania\fR"
-Ustawia na \fIdni_ostrzegania\fR liczbę dni przed upływem ważności hasła.
-Od tego dnia użytkownik będzie ostrzegany o nadchodzącym terminie zmiany
-hasła.
+.SH "SKŁADNIA"
+.HP 6
+\fBchage\fR [\fIopcje\fR] [\fILOGIN\fR]
+.SH "OPIS"
 .PP
-Jeśli nie podano żadnej opcji, to \fBchage\fR działa w trybie interaktywnym,
-proponując użytkownikowi wartości bieżące dla każdego z pól. Wprowadzenie
-nowej wartości powoduje zmianę wartości pola, a podanie wartości pustej
-pozostawia wartość bieżącą.
-Bieżąca wartość pola wyświetlana jest w nawiasach \fB[ ]\fR.
-.SH UWAGA
-Program \fBchage\fR wymaga do działania chronionego pliku haseł użytkowników
-(shadow). Jeśli hasła użytkowników są przechowywane w pliku passwd,
-funkcjonalność programu \fBchage\fR jest niedostępna.
-.SH PLIKI
-\fI/etc/passwd\fR \- informacje o kontach użytkowników
-.br
-\fI/etc/shadow\fR \- chronione informacje o kontach użytkowników
-.SH ZOBACZ TAKŻE
-.BR passwd (5),
-.BR shadow (5)
-.SH AUTOR
-Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+Polecenie
+\fBchage\fR
+zmienia liczbę dni pomiędzy zmianami hasła i datę ostatniej zmiany hasła. Informację tę system wykorzystuje do ustalenia, kiedy użytkownik musi zmienić hasło.
+.SH "OPCJE"
+.PP
+Polecenie
+\fBchage\fR
+posiada następujące opcje:
+.TP 3n
+\fB\-d\fR, \fB\-\-lastday\fR\fIOSTATNI\fR
+Ustawia ilość dni od 1 stycznia 1970 kiedy hało było ostani raz zmieniane. Data ważności może być takze prezekazana w formacie RRRR\-MM\-DD (lub formacie używanym lokalnie).
+.TP 3n
+\fB\-E\fR, \fB\-\-expiredate\fR\fIDATA_WAŻN\fR
+Ustawia datę, począwszy od której konto użytkownika nie będzie już dostępne.
+\fIDATA_WAŻN\fR
+jest liczbą dni od 1 stycznia 1970, od której konto jest blokowane. Data może być też wyrażona w formacie RRRR\-MM\-DD (lub innej, powszechniej używanej w danym regionie). Użytkownik, którego konto jest zablokowane musi skontaktować się z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
+.sp
+Przekazanie
+\fI\-1\fR
+jako
+\fIDATA_WAŻN\fR
+usuwa ograniczenie ważności konta użytkownika.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Wyświetlenie komunikatu pomocy i zakończenie działania.
+.TP 3n
+\fB\-I\fR, \fB\-\-inactive\fR\fINIEAKTYWNE\fR
+Opcja ta służy do ustawiania czasu nieaktywności konta po wygaśnięciu ważności hasła, po którym to czasie konto jest blokowane. Parametr
+\fINIEAKTYWNE\fR
+jest liczbą dni nieaktywności. Użytkownik, którego konto jest zablokowane musi skontaktować się z administratorem systemu zanim będzie mógł z niego ponownie skorzystać.
+.sp
+Przekazanie
+\fI\-1\fR
+jako
+\fINIEAKTYWNE\fR
+usuwa ograniczenie nieaktywniści konta użytkownika.
+.TP 3n
+\fB\-l\fR, \fB\-\-list\fR
+Wyświetlenie informacji o terminach ważności konta i hasła.
+.TP 3n
+\fB\-m\fR, \fB\-\-mindays\fR\fIMIN_DNI\fR
+Utawia minimalną liczbę dni pomiędzy zmianami hasła na
+\fIMIN_DAYS\fR. Wartość zerowa oznacza, że użytkownik może je zmieniać w dowolnym czasie.
+.TP 3n
+\fB\-M\fR, \fB\-\-maxdays\fR\fIMAX_DNI\fR
+Ustawia maksymalną liczbę dni, przez jakie hasło jest ważne. Gdy
+\fIMAX_DNI\fR
+plus
+\fIOSTATNI\fR
+jest mniejsze niż bieżący dzień, użytkownik musi zmienić swoje hasła, zanim będzie mógł skorzystać z konta. Zdarzenie to może być zaplanowane z wyprzedzeniem przez wykorzystanie opcji
+\fB\-W\fR, ostrzegającej zawczasu użytkownika o zbliżającym się terminie zmiany.
+.sp
+Przekazanie
+\fI\-1\fR
+jako
+\fIMAX_DAYS\fR
+usuwa sprawdzanie wazności hasła.
+.TP 3n
+\fB\-W\fR, \fB\-\-warndays\fR\fIDNI_OSTRZ\fR
+Ustawia na
+\fIDNI_OSTRZ\fR
+liczbę dni przed upływem ważności hasła. Od tego dnia użytkownik będzie ostrzegany o nadchodzącym terminie zmiany hasła.
+.PP
+Jeśli nie podano żadnej opcji, to
+\fBchage\fR
+działa w trybie interaktywnym, proponując użytkownikowi wartości bieżące dla każdego z pól. Wprowadzenie nowej wartości powoduje zmianę wartości pola, a podanie wartości pustej pozostawia wartość bieżącą. Bieżąca wartość pola wyświetlana jest w nawiasach
+\fI[ ]\fR.
+.SH "UWAGI"
+.PP
+Program
+\fBchage\fR
+wymaga do działania chronionego pliku haseł użytkowników (shadow).
+.PP
+Polecenia chage może użyć tylko użytkownik root, za wyjątkiem opcji
+\fB\-l\fR. Może się nią posłużyć się użytkownik nieuprzywilejowany do stwierdzenia, kiedy wygasa jego własne hasło lub konto.
+.SH "PLIKI"
+.TP 3n
+\fI/etc/passwd\fR
+Informacja o kontach użytkowników.
+.TP 3n
+\fI/etc/shadow\fR
+Informacje chronione o użytkownikach.
+.SH "KOD ZAKOŃCZENIA"
+.PP
+Polecenie
+\fBchage\fR
+kończy działanie z następującymi wartościami kodów zakończenia:
+.TP 3n
+\fI0\fR
+poprawne zakończenie działania programu
+.TP 3n
+\fI1\fR
+brak dostępu
+.TP 3n
+\fI2\fR
+niepoprawna składnia polecenia
+.TP 3n
+\fI15\fR
+nie można znaleźć pliku shadow
+.SH "ZOBACZ TAKŻE"
+.PP
+\fBpasswd\fR(5),
+\fBshadow\fR(5).

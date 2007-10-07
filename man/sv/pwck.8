@@ -1,0 +1,131 @@
+.\"     Title: pwck
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "PWCK" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+pwck \- validera integriteten för lösenordsfiler
+.SH "SYNOPSIS"
+.HP 5
+\fBpwck\fR [\-q] [\-s] [\fIpasswd\fR\ \fIshadow\fR]
+.HP 5
+\fBpwck\fR [\-q] [\-r] [\fIpasswd\fR\ \fIshadow\fR]
+.SH "BESKRIVNING"
+.PP
+
+\fBpwck\fR
+verifies the integrity of the system authentication information. All entries in the
+\fI/etc/passwd\fR
+and
+\fI/etc/shadow\fR
+are checked to see that the entry has the proper format and valid data in each field. The user is prompted to delete entries that are improperly formatted or which have other uncorrectable errors.
+.PP
+Kontroller görs för att validera att varje post har:
+.TP 3n
+\(bu
+korrekt antal fält
+.TP 3n
+\(bu
+ett unikt användarnamn
+.TP 3n
+\(bu
+en giltig identifierare för användare och grupp
+.TP 3n
+\(bu
+en giltig primär grupp
+.TP 3n
+\(bu
+en giltig hemkatalog
+.TP 3n
+\(bu
+ett giltigt inloggningsskal
+.sp
+.RE
+.PP
+The checks for correct number of fields and unique user name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated user name is prompted for deletion, but the remaining checks will still be made. All other errors are warning and the user is encouraged to run the
+\fBusermod\fR
+command to correct the error.
+.PP
+The commands which operate on the
+\fI/etc/passwd\fR
+file are not able to alter corrupted or duplicated entries.
+\fBpwck\fR
+should be used in those circumstances to remove the offending entry.
+.SH "FLAGGOR"
+.PP
+Flaggorna som gäller för kommandot
+\fBpwck\fR
+är:
+.TP 3n
+\fB\-q\fR
+Report errors only. The warnings which do not require any action from the user won't be displayed.
+.TP 3n
+\fB\-r\fR
+Starta kommandot
+\fBpwck\fR
+i skrivskyddat läge.
+.TP 3n
+\fB\-s\fR
+Sorterar poster i
+\fI/etc/passwd\fR
+och
+\fI/etc/shadow\fR
+efter UID.
+.PP
+By default,
+\fBpwck\fR
+operates on the files
+\fI/etc/passwd\fR
+and
+\fI/etc/shadow\fR. The user may select alternate files with the
+\fIpasswd\fR
+and
+\fIshadow\fR
+parameters.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/passwd\fR
+Användarkontoinformation.
+.TP 3n
+\fI/etc/shadow\fR
+Säker användarkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBusermod\fR(8).
+.SH "AVSLUTNINGSVÄRDEN"
+.PP
+Kommandot
+\fBpwck\fR
+avslutas med följande värden:
+.TP 3n
+\fI0\fR
+lyckad
+.TP 3n
+\fI1\fR
+ogiltig kommandosyntax
+.TP 3n
+\fI2\fR
+en eller flera felaktiga lösenordsposter
+.TP 3n
+\fI3\fR
+kan inte öppna lösenordsfiler
+.TP 3n
+\fI4\fR
+kan inte låsa lösenordsfiler
+.TP 3n
+\fI5\fR
+kan inte uppdatera lösenordsfiler
+

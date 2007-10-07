@@ -1,4 +1,27 @@
-$Id: NEWS,v 1.457 2006/07/10 20:58:33 kloczek Exp $
+$Id: NEWS,v 1.482 2006/08/01 11:49:18 kloczek Exp $
+
+shadow-4.0.17 -> shadow-4.0.18						01-08-2006
+
+*** general:
+- su: fixed set enviroment too early when using PAM, so move it to !USE_PAM
+  (patch submitted by Mike Frysinger <vapier@gentoo.org>),
+- groupadd, groupmod, useradd, usermod: fixed UID/GID overflow (fixed
+  http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920)
+- passwd, useradd, usermod: fixed inactive/mindays/warndays/maxdays overflow
+  (simillar to RH#198920),
+- groupmems: rewrited for use PAM and getopt_long() and now it is enabled
+  for build and install (patch by George Kraft <gk4@swbell.net>),
+- S/Key: removed assign getpass() to libshadow_getpass() on autoconf level
+  (patch by Ulrich Mueller <ulm@kph.uni-mainz.de>; http://bugs.gentoo.org/139966),
+- usermod: back to previous -a option semantics and clarify -a behavior
+  on documentation level (by Greg Schafer <gschafer@zip.com.au>),
+- chsh, groupmod: rewrited for use getopt_long().
+- updated translations: ca, cs, da, eu, fr, gl, hu, ko, pl, pt, ru, sv, tr, uk, vi.
+*** documentation:
+- fr and ru man pages are up to date,
+- partially translated sv man pages set added
+  (by Daniel Nylander <info@danielnylander.se>),
+- pl chage(1), chsh(1), groupmod(8): translation finished.
 
 shadow-4.0.16 -> shadow-4.0.17						10-07-2006
 

@@ -1,3 +1,239 @@
+2006-08-01  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, src/su.c:
+	fixed set enviroment too early when using PAM, so move it to !USE_PAM
+	(patch submitted by Mike Frysinger <vapier@gentoo.org>).
+
+2006-07-30  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/fr/chage.1, man/fr/chfn.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/expiry.1, man/fr/faillog.5, man/fr/faillog.8, man/fr/gpasswd.1, man/fr/groupadd.8, man/fr/groupdel.8, man/fr/groupmod.8, man/fr/groups.1, man/fr/grpck.8, man/fr/gshadow.5, man/fr/lastlog.8, man/fr/limits.5, man/fr/login.1, man/fr/login.access.5, man/fr/login.defs.5, man/fr/logoutd.8, man/fr/newgrp.1, man/fr/newusers.8, man/fr/passwd.1, man/fr/passwd.5, man/fr/porttime.5, man/fr/pwck.8, man/fr/pwconv.8, man/fr/sg.1, man/fr/shadow.3, man/fr/shadow.5, man/fr/su.1, man/fr/suauth.5, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/fr/vipw.8, NEWS:
+	fr man pages are now up to date.
+
+	* man/fr/fr.po:
+	more updates for 4.0.18 (by Nicolas Fran癟ois <nicolas.francois@centraliens.net>).
+
+	* man/fr/fr.po:
+	updated for 4.0.18 (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
+
+2006-07-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po:
+	updated.
+
+	* src/useradd.c, src/usermod.c:
+	fixed UID/GID overflow (fixed http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920).
+	Fixed expiredate/inactive/mindays/warndays/maxdays overflow (simillar to RH#198920).
+
+	* src/passwd.c:
+	fixed inactive/mindays/warndays/maxdays overflow (similar to RH#198920).
+
+	* src/groupadd.c, src/groupmod.c:
+	fixed GID overflow (fixed http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920).
+
+2006-07-27  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/.cvsignore: groupmems added.
+
+2006-07-24  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fr.po:
+	updated for 4.0.18 (by ean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
+
+	* po/uk.po: break lines longer than 80 cols and add missing \n.
+
+	* po/uk.po:
+	updated for 4.0.18 (by Eugeniy Meshcheryakov <eugen@univ.kiev.ua>).
+
+	* man/pl/pl.po, man/ru/ru.po, man/sv/sv.po, man/chgpasswd.8.xml, man/chpasswd.8.xml, man/fr/fr.po:
+	s/instead DES/instead of DES/
+
+	* NEWS: sv man pages are partially translated.
+
+2006-07-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/groupmems.c: fix compilation warnings.
+
+	* po/ko.po: use \t.
+
+	* po/nl.po: break lines longer than 80 cols and add missing \n.
+
+2006-07-22  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/ru/faillog.5: regenerated.
+
+	* po/ko.po: updated for 4.0.18 (by Changwoo Ryu <cwryu@debian.org>).
+
+2006-07-20  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/faillog.5.xml, man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po:
+	added <refmiscinfo class="sectdesc"> tag for faillog.5.xml.
+
+	* man/sv/Attic/grupper.1: removed.
+
+	* man/sv/Makefile.am, man/sv/chage.1, man/sv/chfn.1, man/sv/chgpasswd.8, man/sv/chpasswd.8, man/sv/chsh.1, man/sv/expiry.1, man/sv/faillog.5, man/sv/faillog.8, man/sv/gpasswd.1, man/sv/groupadd.8, man/sv/groupdel.8, man/sv/groupmems.8, man/sv/groupmod.8, man/sv/groups.1, man/sv/grpck.8, man/sv/gshadow.5, man/sv/lastlog.8, man/sv/limits.5, man/sv/login.1, man/sv/login.access.5, man/sv/login.defs.5, man/sv/logoutd.8, man/sv/newgrp.1, man/sv/newusers.8, man/sv/nologin.8, man/sv/passwd.1, man/sv/passwd.5, man/sv/porttime.5, man/sv/pwck.8, man/sv/pwconv.8, man/sv/sg.1, man/sv/shadow.3, man/sv/shadow.5, man/sv/su.1, man/sv/suauth.5, man/sv/sv.po, man/sv/useradd.8, man/sv/userdel.8, man/sv/usermod.8, man/sv/vipw.8:
+	corrected text charset and other minor cleanups (by Daniel Nylander <info@danielnylander.se>).
+
+	* po/tr.po: break lines longer than 80 cols.
+
+	* po/tr.po:
+	updated for 4.0.18 (by Mehmet TURKER <mturker@innova.com.tr>).
+
+	* configure.in, man/Makefile.am, man/sv/Makefile.am:
+	fixes for "make {dist|distchec}" and sv man pages.
+
+	* man/sv/Attic/grupper.1, man/sv/groupmems.8, man/sv/groupmod.8, man/sv/grpck.8, man/sv/grpconv.8, man/sv/grpunconv.8, man/sv/gshadow.5, man/sv/lastlog.8, man/sv/limits.5, man/sv/login.1, man/sv/login.access.5, man/sv/login.defs.5, man/sv/logoutd.8, man/sv/newgrp.1, man/sv/newusers.8, man/sv/nologin.8, man/sv/passwd.1, man/sv/passwd.5, man/sv/porttime.5, man/sv/pwck.8, man/sv/pwconv.8, man/sv/pwunconv.8, man/sv/sg.1, man/sv/shadow.3, man/sv/shadow.5, man/sv/su.1, man/sv/suauth.5, man/sv/sv.po, man/sv/useradd.8, man/sv/userdel.8, man/sv/usermod.8, man/sv/vigr.8, man/sv/vipw.8, NEWS, man/Makefile.am, man/sv/Makefile.am, man/sv/chage.1, man/sv/chfn.1, man/sv/chgpasswd.8, man/sv/chpasswd.8, man/sv/chsh.1, man/sv/expiry.1, man/sv/faillog.5, man/sv/faillog.8, man/sv/getspnam.3, man/sv/gpasswd.1, man/sv/groupadd.8, man/sv/groupdel.8:
+	full sv man pages set added (by Daniel Nylander <info@danielnylander.se>).
+	This man pages are translated using new XML/xml2po/gettext infrastructure.
+
+	* po/pl.po: updated for 4.0.18.
+
+2006-07-19  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/pt.po:
+	updated for 4.0.18 (by Miguel Figueiredo <mfigueiredo@gmail.com>).
+
+	* po/gl.po, NEWS:
+	updated for 4.0.18 (by Jacobo Tarrio <jacobo@tarrio.org>).
+
+	* NEWS, po/eu.po:
+	updated for 4.0.18 (by Piarres Beobide <pi@beobide.net>).
+
+	* man/ru/chsh.1, man/ru/faillog.5, man/ru/groupmems.8, man/ru/groupmod.8, man/ru/ru.po, man/ru/su.1, man/ru/useradd.8, man/ru/usermod.8, man/ru/vipw.8, NEWS, po/ru.po:
+	updated for 4.0.18 (by Yuri Kozlov <kozlov.y@gmail.com>).
+
+	* po/vi.po, NEWS:
+	updated for 4.0.18 (by Clytie Siddall <clytie@riverland.net.au>).
+
+	* NEWS, po/cs.po:
+	updated for 4.0.18 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
+
+	* NEWS, po/sv.po:
+	updated for 4.0.18 (by Daniel Nylander <info@danielnylander.se>).
+
+	* NEWS, po/ca.po:
+	updated for 4.0.18 (by Guillem Jover <guillem@debian.org>).
+
+2006-07-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/hu.po: cleanups.
+
+	* NEWS, po/da.po:
+	updated for 4.0.18 (by Claus Hindsgaul <claus.hindsgaul@gmail.com>).
+
+	* po/hu.po, NEWS: updated for 4.0.18 (by SZERV��C Attila <sas@321.hu>).
+
+	* NEWS: typos.
+
+	* man/ru/ru.po, man/fr/fr.po, man/pl/pl.po: run "make update-po".
+
+	* man/su.1.xml: fixes in <refsynopsisdiv>.
+
+	* src/groupmems.c: indent soutrce code.
+
+	* src/groupmems.c: use shadow Copyright.
+
+	* po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/POTFILES.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po:
+	added src/groupmems.c to POTFILES.in.
+
+	* NEWS, etc/pam.d/Makefile.am, etc/pam.d/groupmems, man/Makefile.am, man/groupmems.8.xml, src/Makefile.am, src/groupmems.c:
+	groupmems rewrited for use PAM and getopt_long() nad now it is enabled
+	for build and install (patch by George Kraft <gk4@swbell.net>).
+
+	* NEWS, configure.in: start prepare for 4.0.18.
+
+2006-07-17  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
+	run "make update-po" and some cleanups (added missing \n and use tabs instead spaces).
+
+	* src/su.c: s#[login]#[LOGIN]# in help message.
+
+	* man/useradd.8.xml:
+	added missing --<foo> long options names in "Changing the default values" section.
+
+	* po/tr.po: updated (by Murat ��enel <muratasenel@gmail.com>).
+
+2006-07-16  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po: updated.
+
+	* man/useradd.8.xml: added newusers(8) to SEE ALSO section.
+
+	* etc/login.defs:
+	removed GETPASS_ASTERISKS (patch by Mike Frysinger <vapier@gentoo.org>).
+
+2006-07-15  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, man/pl/chsh.1, man/pl/pl.po: pl chage(1): translation finished.
+
+	* NEWS:
+	s#fix by Mike Frysinger <vapier@gentoo.org>)#(patch by Ulrich Mueller <ulm@kph.uni-mainz.de>; http://bugs.gentoo.org/139966#
+
+	* NEWS, configure.in:
+	S/Key: removed assign getpass() to libshadow_getpass() on autoconf level
+	(fix by Mike Frysinger <vapier@gentoo.org>).
+
+2006-07-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/vipw.8.xml: make options <replaceable> in SYNOPSIS.
+
+	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/groupadd.c:
+	s/group/GROUP/ in groupadd help message.
+
+	* src/su.c (main):
+	move **envcp declaration to #ifdef USE_PAM (fixed warning about unused
+	variable when shadow is builded with PAM didabled).
+
+	* man/pl/pl.po, NEWS, man/pl/chage.1: pl chage(1) translation finished.
+
+	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po: updated.
+
+	* man/chsh.1.xml: updated after rewrite chsh for use getopt_long().
+
+	* po/pl.po: kill fuzzy.
+
+2006-07-13  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chsh.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po:
+	one \t more in help message.
+
+	* po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po:
+	updated.
+
+	* NEWS, src/chsh.c: chsh rewrited for use getopt_long().
+
+2006-07-12  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/groupmod.8, man/pl/pl.po: finish translation groupmod(8).
+
+	* man/fr/fr.po, man/groupmod.8.xml, man/pl/groupmod.8, man/pl/pl.po, man/ru/ru.po:
+	cleanups in groupmod(8).
+
+	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/usermod.8.xml, src/usermod.c, NEWS:
+	back to previouse usermod -a option sematics and clarify -a behavior
+	on documentation level (by Greg Schafer <gschafer@zip.com.au>).
+
+	* man/fr/fr.po, man/groupmod.8.xml, man/pl/pl.po, man/ru/ru.po:
+	updated groupmod man page.
+
+2006-07-11  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/groupmod.c: too many \t in help message.
+
+	* man/ru/chage.1, man/ru/passwd.1, man/ru/ru.po, man/chage.1.xml, man/fr/fr.po, man/passwd.1.xml, man/pl/pl.po:
+	updated.
+
+	* po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po:
+	run "make update-po".
+
+	* src/groupmod.c: cleunps in help message.
+
+	* src/chage.c: s/user/\[LOGIN\]/ in help message.
+
+	* src/passwd.c: s/\[login\]/\[LOGIN\]/ in help message.
+
+	* NEWS, src/groupmod.c: groupmod rewrited for use getopt_log().
+
 2006-07-10  Tomasz K這czko  <kloczek@pld.org.pl>
 
 	* po/sv.po:

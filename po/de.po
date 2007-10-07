@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-06-23 21:03+0200\n"
 "Last-Translator: Holger Wansing <linux@wansing-online.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
@@ -182,7 +182,7 @@ msgstr "Kennwort von %s: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -542,9 +542,23 @@ msgstr "%s: Kann die shadow-Datei nicht sperren\n"
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: Zeile %d: Benutzer %s unbekannt\n"
 
-#, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Aufruf: %s [-s Shell] [Name]\n"
+#, fuzzy, c-format
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Aufruf: userdel [Optionen] LOGIN\n"
+"\n"
+"Optionen:\n"
+"  -f, --force\t\t\tEntfernen von Dateien erzwingen, auch wenn sie\n"
+"\t\t\t\tnicht Eigentum des zu löschenden Benutzers sind\n"
+"  -h, --help\t\t\tDiese Hilfe anzeigen, sonst nichts\n"
+"  -r, --remove\t\t\tEntferne Home- und Mail-Spool-Verzeichnis\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Login-Shell"
@@ -718,9 +732,9 @@ msgstr "%s: shadow-Datei kann nicht neu geschrieben werden\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: Datei kann nicht entsperrt werden\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -788,8 +802,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: Kann Shadow-group-Datei nicht öffnen\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: Ungültige Gruppe %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: Ungültiges numerisches Argument »%s«\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -828,8 +842,66 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s ist der NIS-Master\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Aufruf: groupmod [-g GID [-o]] [-n NAME] Gruppe\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: PAM-Authentifizierung fehlgeschlagen\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: Kann group-Datei nicht sperren\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: Kann group-Datei nicht öffnen\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: Kann group-Datei nicht öffnen\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Aufruf: groupadd [Optionen] Gruppe\n"
+"\n"
+"Optionen:\n"
+"  -f, --force\t\tErfolgreich beenden, wenn die Gruppe bereits existiert\n"
+"  -g, --gid GID\t\tdiese GID für die neue Gruppe benutzen\n"
+"  -h, --help\t\t\tDiese Hilfe anzeigen, sonst nichts\n"
+"  -K, --key KEY=WERT\t\tDie Standards in /etc/login.defs überschreiben\n"
+"  -o, --non-unique\t\tDas Erstellen einer Gruppe mit einer nicht\n"
+"\t\t\t\teinmaligen (doppelten) GID erlauben\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -1190,9 +1262,9 @@ msgstr "%s: Zeile %d: Kann Eintrag nicht aktualisieren\n"
 msgid "%s: error updating files\n"
 msgstr "%s: Fehler beim Aktualisieren von Dateien\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1405,9 +1477,9 @@ msgstr "Entschuldigung."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1481,10 +1553,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Starte im Systemwartungsmodus\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: Ungültiges numerisches Argument »%s«\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1780,12 +1848,13 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: Fehler beim Löschen des Verzeichnisses %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"

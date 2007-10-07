@@ -1,21 +1,42 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHSH" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\"     Title: chsh
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes utilisateur
+.\"    Source: Commandes utilisateur
+.\"
+.TH "CHSH" "1" "30/07/2006" "Commandes utilisateur" "Commandes utilisateur"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 chsh \- Changer l'interpréteur de commandes initial
 .SH "SYNOPSIS"
 .HP 5
-\fBchsh\fR [\-s\ \fIinterpréteur\fR] [\fIutilisateur\fR]
+\fBchsh\fR [\fIoptions\fR] [\fILOGIN\fR]
 .SH "DESCRIPTION"
 .PP
 \fBChsh\fR
-modifie l'interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur qui sera invoqué lors des connexions de l'utilisateur. Un utilisateur normal ne peut changer que l'interpréteur associé à son compte. Le superutilisateur peut changer l'interpréteur de commandes initial pour n'importe quel compte.
+modifie l'interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur qui sera invoqué lors des connexions de l'utilisateur. Un utilisateur normal ne peut changer que l'interpréteur associé à son propre compte. Le superutilisateur peut changer l'interpréteur de commandes initial de n'importe quel compte.
+.SH "OPTIONS"
+.PP
+Les options applicables à la commande
+\fBchsh\fR
+sont\ :
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Afficher un message d'aide et quitter.
+.TP 3n
+\fB\-s\fR, \fB\-\-shell\fR \fIINTERPRÉTEUR\fR
+Nom du nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur. Si ce champ est vide, le système sélectionnera l'interpréteur de commandes initial par défaut.
+.PP
+Quand l'option
+\fB\-s\fR
+n'est pas sélectionnée,
+\fBchsh\fR
+opère de façon interactive, demandant à l'utilisateur quel doit être le nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc). L'utilisateur pourra entrer une nouvelle valeur pour modifier l'interpréteur, ou laisser la ligne blanche pour conserver l'interpréteur actuel. L'interpréteur actuel est indiqué entre crochets (\fI[\ ]\fR).
+.SH "NOTE"
 .PP
 La seule restriction placée sur l'interpréteur est que cette commande doit être listée dans
 \fI/etc/shells\fR, à moins que
@@ -24,23 +45,16 @@ ne soit invoqué par le superutilisateur, qui peut ajouter n'importe quelle vale
 \fI/bin/rsh\fR
 dans
 \fI/etc/shells\fR, puisqu'un changement accidentel vers un interpréteur restreint empêchera alors l'utilisateur de retourner ensuite à l'interpréteur précédent.
-.SH "OPTIONS"
-.PP
-Quand l'option
-\fB\-s\fR
-n'est pas sélectionnée,
-\fBchsh\fR
-opère de façon interactive, demandant à l'utilisateur quel doit être le nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc). L'utilisateur pourra entrer une nouvelle valeur pour modifier l'interpréteur, ou laisser la ligne blanche pour conserver l'interpréteur actuel. L'interpréteur actuel est indiqué entre crochets (\fI[\ ]\fR).
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shells\fR
-liste des interpréteurs de commandes initiaux valables
-.TP
+Liste des interpréteurs de commandes initiaux valables.
+.TP 3n
 \fI/etc/login.defs\fR
-configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+Configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc.
 .SH "VOIR AUSSI"
 .PP
 \fBchfn\fR(1),

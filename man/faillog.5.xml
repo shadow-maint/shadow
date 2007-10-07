@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='faillog.5'>
-  <!-- $Id: faillog.5.xml,v 1.17 2006/06/19 08:31:03 kloczek Exp $ -->
+  <!-- $Id: faillog.5.xml,v 1.18 2006/07/20 20:26:13 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc"> File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>faillog</refname>

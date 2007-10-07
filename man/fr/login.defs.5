@@ -1,26 +1,29 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGIN.DEFS" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\"     Title: login.defs
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Formats et conversions de fichiers
+.\"    Source: Formats et conversions de fichiers
+.\"
+.TH "LOGIN.DEFS" "5" "30/07/2006" "Formats et conversions de fich" "Formats et conversions de fich"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 login.defs \- configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
 .SH "DESCRIPTION"
 .PP
 Le fichier
 \fI/etc/login.defs\fR
-défini la configuration de la suite shadow password (mots de passe cachés) pour le système. Ce fichier est indispensable. Son absence n'empêchera pas le système de fonctionner, mais aura probablement des conséquences indésirables.
+définit la configuration de la suite shadow password (mots de passe cachés) pour le système. Ce fichier est indispensable. Son absence n'empêchera pas le système de fonctionner, mais aura probablement des conséquences indésirables.
 .PP
-Ce fichier est un fichier texte, dont chaque ligne décrit un paramètre de configuration. Les lignes consistent en un nom et une valeur, séparés par un espace. Les lignes blanches et les lignes de commentaires sont ignorées. Les commentaires commencent par un caractère \(Fo\ #\ \(Fc, qui ne doit être précédé que par des espaces.
+Ce fichier est un fichier texte, dont chaque ligne décrit un paramètre de configuration. Les lignes consistent en un nom et une valeur, séparés par un espace. Les lignes blanches et les lignes de commentaires sont ignorées. Les commentaires commencent par un caractère \(Fo\ #\ \(Fc, qui doit être le premier caractère non blanc de la ligne.
 .PP
-Les valeurs des paramètres sont de quatre types\ : chaînes de caractères, booléens, nombres et nombres longs. Une chaîne de caractères est constituée de n'importe quel caractère imprimable. Un booléen est soit \(Fo\ yes\ \(Fc (oui) soit \(Fo\ no\ \(Fc (non). Un paramètre booléen non défini, ou défini avec une valeur autre prendra la valeur \(Fo\ no\ \(Fc. Un nombre (normal ou long) peut être soit décimal, soit octal (en précédant la valeur d'un \(Fo\ 0\ \(Fc), ou encore hexadécimal (en précédant la valeur de \(Fo\ 0x\ \(Fc). La valeur maximale des paramètres numériques normaux ou longs dépend de la machine.
+Les valeurs des paramètres sont de quatre types\ : chaînes de caractères, booléens, nombres et nombres longs. Une chaîne de caractères est constituée de n'importe quel caractère imprimable. Un booléen est soit \(Fo\ yes\ \(Fc (oui) soit \(Fo\ no\ \(Fc (non). Un paramètre booléen non défini, ou défini avec une valeur autre que celles\-là prendra la valeur \(Fo\ no\ \(Fc. Un nombre (normal ou long) peut être soit décimal, soit octal (en précédant la valeur d'un \(Fo\ 0\ \(Fc), ou encore hexadécimal (en précédant la valeur de \(Fo\ 0x\ \(Fc). La valeur maximale des paramètres numériques normaux ou longs dépend de la machine.
 .PP
 Les paramètres de configuration suivants sont fournis\ :
-.TP
+.TP 3n
 CHFN_AUTH (booléen)
 La valeur
 \fIyes\fR
@@ -29,78 +32,82 @@ indique que les programmes
 et
 \fBchsh\fR
 nécessiteront une authentification avant de procéder à tout changement, à moins qu'ils ne soient exécutés par le superutilisateur.
-.TP
+.TP 3n
 CHFN_RESTRICT (chaîne)
 Ce paramètre spécifie quelles valeurs du champ
 \fIgecos\fR
 du fichier
 \fIpasswd\fR
-peuvent être modifiées par les utilisateurs ordinaires avec le programme
+peuvent être modifiées par les utilisateurs ordinaires à l'aide du programme
 \fBchfn\fR. Il est constitué d'une combinaison de lettre parmi
 \fIf\fR,
 \fIr\fR,
 \fIw\fR
 et
-\fIh\fR, correspondant respectivement au nom complet, au numéro de bureau, au numéro de téléphone professionnel et au numéro de téléphone personnel. Pour des raisons de compatibilité avec des versions antérieures, \(Fo\ yes\ \(Fc est équivalent à \(Fo\ rwh\ \(Fc et \(Fo\ no\ \(Fc, à \(Fo\ frwh\ \(Fc. S'il n'est pas spécifié, seul le superutilisateur peut réaliser une modification. Pour une configuration encore plus restrictive, il sera préférable de ne pas installer
+\fIh\fR, correspondant respectivement au nom complet, au numéro de bureau, au numéro de téléphone professionnel et au numéro de téléphone personnel. Pour des raisons de compatibilité avec des versions antérieures, \(Fo\ yes\ \(Fc est équivalent à \(Fo\ rwh\ \(Fc et \(Fo\ no\ \(Fc, à \(Fo\ frwh\ \(Fc. S'il n'est pas spécifié, seul le superutilisateur peut effectuer des modifications. Pour une configuration encore plus restrictive, il sera préférable de ne pas installer
 \fBchfn\fR
-avec le drapeau SUID.
-.TP
+avec l'indicateur SUID positionné.
+.PP
 GID_MAX (nombre), GID_MIN (nombre)
-Domaine des identifiants de groupe que les commandes
+.RS 3n
+Plage d'identifiants numérique de groupe que les commandes
 \fBuseradd\fR
 et
 \fBgroupadd\fR
 peuvent utiliser.
-.TP
+.RE
+.TP 3n
 MAIL_DIR (chaîne)
-Le répertoire d'attente des courriels (\(Fo\ mail spool directory\ \(Fc). Ce paramètre est nécessaire pour manipuler les boîtes aux lettres lorsque le compte d'un utilisateur est modifié ou supprimé. S'il n'est pas spécifié, une valeur par défaut définie à la compilation est utilisée.
-.TP
+Répertoire d'attente des courriels (\(Fo\ mail spool directory\ \(Fc). Ce paramètre est nécessaire pour manipuler les boîtes à lettres lorsque le compte d'un utilisateur est modifié ou supprimé. S'il n'est pas spécifié, une valeur par défaut définie à la compilation est utilisée.
+.TP 3n
 PASS_MAX_DAYS (nombre)
-Le nombre de jours maximal de validité d'un mot de passe. Après cette durée, une modification du mot de passe est obligatoire. S'il n'est pas précisé, la valeur de \-1 est utilisée (ce qui enlève toute restriction).
-.TP
+Nombre maximum de jours de validité d'un mot de passe. Après cette durée, une modification du mot de passe est obligatoire. S'il n'est pas précisé, la valeur de \-1 est utilisée (ce qui enlève toute restriction).
+.TP 3n
 PASS_MIN_DAYS (nombre)
-Le nombre de jours minimal autorisé avant la modification d'un mot de passe. Toute tentative de modification du mot de passe avant cette durée est rejetée. S'il n'est pas précisé, la valeur de \-1 est utilisée (ce qui enlève toute restriction).
-.TP
+Nombre minimum de jours autorisé avant la modification d'un mot de passe. Toute tentative de modification du mot de passe avant cette durée est rejetée. S'il n'est pas précisé, la valeur de \-1 est utilisée (ce qui enlève toute restriction).
+.TP 3n
 PASS_WARN_AGE (nombre)
-Le nombre de jours durant lesquels l'utilisateur recevra un avertissement avant que son mot de passe arrive en fin de validité. Une valeur négative signifie qu'aucun avertissement n'est donné. S'il n'est pas précisé, aucun avertissement n'est donné.
+Nombre de jours durant lesquels l'utilisateur recevra un avertissement avant que son mot de passe n'arrive en fin de validité. Une valeur négative signifie qu'aucun avertissement n'est donné. S'il n'est pas précisé, aucun avertissement n'est donné.
 .PP
 Les paramètres PASS_MAX_DAYS, PASS_MIN_DAYS et PASS_WARN_AGE ne sont utilisés qu'au moment de la création d'un compte. Les changements n'affecteront pas les comptes existants.
-.TP
+.PP
 UID_MAX (nombre), UID_MIN (nombre)
-Domaine d'identifiant utilisateur que
+.RS 3n
+Plage d'identifiants numériques d'utilisateur que
 \fBuseradd\fR
 peut utiliser.
-.TP
+.RE
+.TP 3n
 UMASK (nombre)
-Valeur d'initialisation du masque de permissions. S'il n'est pas précisé, le masque est initialisé à 077.
-.TP
+Valeur d'initialisation du masque de permissions. S'il n'est pas précisé, le masque des permissions sera initialisé à 022.
+.TP 3n
 USERDEL_CMD (chaîne)
-Si ce paramètre est défini, cette commande est exécutée lors de la suppression d'un utilisateur. Elle pourra supprimer toutes les tâches périodiques cron ou at, tous les travaux d'impression, etc. de l'utilisateur (qui sera fourni comme premier argument).
+Si ce paramètre est défini, cette commande est exécutée lors de la suppression d'un utilisateur. Elle pourra supprimer toutes les tâches périodiques cron ou at, tous les travaux d'impression, etc. de l'utilisateur (qui sera fourni comme premier paramètre).
 .SH "RÉFÉRENCES CROISÉES"
 .PP
 Les références croisées ci\-dessous montrent quels sont les paramètres utilisés par les différents programmes de la suite shadow password.
-.TP
+.TP 3n
 chfn
 CHFN_AUTH CHFN_RESTRICT
-.TP
+.TP 3n
 chsh
 CHFN_AUTH
-.TP
+.TP 3n
 groupadd
 GID_MAX GID_MIN
-.TP
+.TP 3n
 newusers
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UMASK
-.TP
+.TP 3n
 pwconv
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
-.TP
+.TP 3n
 useradd
 GID_MAX GID_MIN PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UID_MAX UID_MIN UMASK
-.TP
+.TP 3n
 userdel
 MAIL_DIR USERDEL_CMD
-.TP
+.TP 3n
 usermod
 MAIL_DIR
 .SH "BOGUES"

@@ -42,11 +42,12 @@ ubin_PROGRAMS = faillog$(EXEEXT) lastlog$(EXEEXT) chage$(EXEEXT) \
 	chfn$(EXEEXT) chsh$(EXEEXT) expiry$(EXEEXT) gpasswd$(EXEEXT) \
 	newgrp$(EXEEXT) passwd$(EXEEXT)
 usbin_PROGRAMS = chgpasswd$(EXEEXT) chpasswd$(EXEEXT) \
-	groupadd$(EXEEXT) groupdel$(EXEEXT) groupmod$(EXEEXT) \
-	grpck$(EXEEXT) grpconv$(EXEEXT) grpunconv$(EXEEXT) \
-	logoutd$(EXEEXT) newusers$(EXEEXT) pwck$(EXEEXT) \
-	pwconv$(EXEEXT) pwunconv$(EXEEXT) useradd$(EXEEXT) \
-	userdel$(EXEEXT) usermod$(EXEEXT) vipw$(EXEEXT)
+	groupadd$(EXEEXT) groupdel$(EXEEXT) groupmems$(EXEEXT) \
+	groupmod$(EXEEXT) grpck$(EXEEXT) grpconv$(EXEEXT) \
+	grpunconv$(EXEEXT) logoutd$(EXEEXT) newusers$(EXEEXT) \
+	pwck$(EXEEXT) pwconv$(EXEEXT) pwunconv$(EXEEXT) \
+	useradd$(EXEEXT) userdel$(EXEEXT) usermod$(EXEEXT) \
+	vipw$(EXEEXT)
 noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -111,6 +112,10 @@ groupdel_SOURCES = groupdel.c
 groupdel_OBJECTS = groupdel.$(OBJEXT)
 groupdel_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
 	$(am__DEPENDENCIES_2) $(am__DEPENDENCIES_2)
+groupmems_SOURCES = groupmems.c
+groupmems_OBJECTS = groupmems.$(OBJEXT)
+groupmems_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 groupmod_SOURCES = groupmod.c
 groupmod_OBJECTS = groupmod.$(OBJEXT)
 groupmod_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
@@ -208,17 +213,17 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = chage.c chfn.c chgpasswd.c chpasswd.c chsh.c expiry.c \
-	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
-	grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
-	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
-	userdel.c usermod.c vipw.c
+	faillog.c gpasswd.c groupadd.c groupdel.c groupmems.c \
+	groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c \
+	lastlog.c $(login_SOURCES) logoutd.c newgrp.c newusers.c \
+	nologin.c passwd.c pwck.c pwconv.c pwunconv.c $(su_SOURCES) \
+	sulogin.c useradd.c userdel.c usermod.c vipw.c
 DIST_SOURCES = chage.c chfn.c chgpasswd.c chpasswd.c chsh.c expiry.c \
-	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
-	grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
-	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
-	userdel.c usermod.c vipw.c
+	faillog.c gpasswd.c groupadd.c groupdel.c groupmems.c \
+	groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c \
+	lastlog.c $(login_SOURCES) logoutd.c newgrp.c newusers.c \
+	nologin.c passwd.c pwck.c pwconv.c pwunconv.c $(su_SOURCES) \
+	sulogin.c useradd.c userdel.c usermod.c vipw.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -254,6 +259,7 @@ EXEEXT = @EXEEXT@
 F77 = @F77@
 FFLAGS = @FFLAGS@
 GMSGFMT = @GMSGFMT@
+GREP = @GREP@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -294,6 +300,7 @@ PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 POSUB = @POSUB@
 RANLIB = @RANLIB@
+SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
@@ -309,12 +316,10 @@ XMLCATALOG = @XMLCATALOG@
 XML_CATALOG_FILE = @XML_CATALOG_FILE@
 XSLTPROC = @XSLTPROC@
 YACC = @YACC@
-ac_ct_AR = @ac_ct_AR@
+YFLAGS = @YFLAGS@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_F77 = @ac_ct_F77@
-ac_ct_RANLIB = @ac_ct_RANLIB@
-ac_ct_STRIP = @ac_ct_STRIP@
 am__fastdepCC_FALSE = @am__fastdepCC_FALSE@
 am__fastdepCC_TRUE = @am__fastdepCC_TRUE@
 am__fastdepCXX_FALSE = @am__fastdepCXX_FALSE@
@@ -331,23 +336,30 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
@@ -375,6 +387,7 @@ chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
 gpasswd_LDADD = $(LDADD) $(LIBAUDIT) $(LIBSELINUX)
 groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
 groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD = $(LDADD) $(LIBSELINUX)
@@ -413,9 +426,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/Makefile
+	  $(AUTOMAKE) --foreign  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -582,6 +595,9 @@ groupadd$(EXEEXT): $(groupadd_OBJECTS) $(groupadd_DEPENDENCIES)
 groupdel$(EXEEXT): $(groupdel_OBJECTS) $(groupdel_DEPENDENCIES) 
 	@rm -f groupdel$(EXEEXT)
 	$(LINK) $(groupdel_LDFLAGS) $(groupdel_OBJECTS) $(groupdel_LDADD) $(LIBS)
+groupmems$(EXEEXT): $(groupmems_OBJECTS) $(groupmems_DEPENDENCIES) 
+	@rm -f groupmems$(EXEEXT)
+	$(LINK) $(groupmems_LDFLAGS) $(groupmems_OBJECTS) $(groupmems_LDADD) $(LIBS)
 groupmod$(EXEEXT): $(groupmod_OBJECTS) $(groupmod_DEPENDENCIES) 
 	@rm -f groupmod$(EXEEXT)
 	$(LINK) $(groupmod_LDFLAGS) $(groupmod_OBJECTS) $(groupmod_LDADD) $(LIBS)
@@ -665,6 +681,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpasswd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groupadd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groupdel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groupmems.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groupmod.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groups.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grpck.Po@am__quote@

@@ -1,0 +1,98 @@
+.\"     Title: groupmod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "GROUPMOD" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+groupmod \- ändra en gruppdefinition på systemet
+.SH "SYNOPSIS"
+.HP 9
+\fBgroupmod\fR [\fIflaggor\fR] \fIGRUPP\fR
+.SH "BESKRIVNING"
+.PP
+The
+\fBgroupmod\fR
+modifies the definition of the specified
+\fIGROUP\fR
+by modifying the appropriate entry in the group database.
+.SH "FLAGGOR"
+.PP
+Flaggorna som gäller för kommandot
+\fBgroupmod\fR
+är:
+.TP 3n
+\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+Specify the new group ID for the
+\fIGROUP\fR. The numerical value of the
+\fIGID\fR
+must be a non\-negative decimal integer. This value must be unique, unless the
+\fB\-o\fR
+option is used. Values between 0 and 999 are typically reserved for system groups. Any files which the old group ID is the file group ID must have the file group ID changed manually.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Visa hjälpmeddelande och avsluta.
+.TP 3n
+\fB\-n\fR, \fB\-\-new\-name\fR\fINY_GRUPP\fR
+The name of the group will be changed from
+\fIGROUP\fR
+to
+\fINEW_GROUP\fR
+name.
+.TP 3n
+\fB\-o\fR, \fB\-\-non\-unique\fR
+When used with the
+\fB\-g\fR
+option allow to change the group
+\fIGID\fR
+to non\-unique value.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/gshadow\fR
+Säker gruppkontoinformation.
+.SH "AVSLUTNINGSVÄRDEN"
+.PP
+Kommandot
+\fBgroupmod\fR
+avslutas med följande värden:
+.TP 3n
+\fI0\fR
+lyckad
+.TP 3n
+\fI2\fR
+ogiltig kommandosyntax
+.TP 3n
+\fI3\fR
+ogiltigt argument till flagga
+.TP 3n
+\fI4\fR
+angiven grupp finns inte
+.TP 3n
+\fI6\fR
+angiven grupp finns inte
+.TP 3n
+\fI9\fR
+gruppnamnet används redan
+.TP 3n
+\fI10\fR
+kan inte uppdatera gruppfilen
+.SH "SE OCKSÅ"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

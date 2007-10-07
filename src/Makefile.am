@@ -28,6 +28,7 @@ usbin_PROGRAMS = \
 	chpasswd \
 	groupadd \
 	groupdel \
+	groupmems \
 	groupmod \
 	grpck \
 	grpconv \
@@ -60,6 +61,7 @@ chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX)
 groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
 groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD    = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD  = $(LDADD) $(LIBSELINUX)

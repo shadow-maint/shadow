@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-06-03 19:29+0300\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -178,7 +178,7 @@ msgstr "Käyttäjän %s salasana: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -194,7 +194,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Käyttö: chage [valitsimet] käyttäjä\n"
+"Käyttö: chage [valitsimet] [TUNNUS]\n"
 "\n"
 "Valitsimet:\n"
 "  -d, --lastday VIIM_PVM\tAseta edelliseksi salasanan vaihtopäiväksi\n"
@@ -209,6 +209,7 @@ msgstr ""
 "  -M, --maxdays MAX_PÄIVIÄ\tAseta suurimmaksi sallituksi määräksi päiviä\n"
 "\t\t\t\tennen salasanan vaihtamista MAX_PÄIVIÄ\n"
 "  -W, --warndays VAR_PÄIVIÄ\tAseta vanhenemisen varoitusajaksi VAR_PÄIVIÄ\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -457,6 +458,7 @@ msgstr ""
 "  -h, --help\t\tNäytä tämä ohje ja lopeta\n"
 "  -m, --md5\t\tKäytä MD5:tä eikä DES:iä kun annetut salasanat\n"
 "\t\t\teivät ole salakirjoitettuja\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -533,9 +535,23 @@ msgstr "%s: varjotiedostoa ei voi lukita\n"
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: rivi %d: tuntematon käyttäjä %s\n"
 
-#, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Käyttö: %s [-s kuori] [nimi]\n"
+#, fuzzy, c-format
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Käyttö: userdel [valitsimet] TUNNUS\n"
+"\n"
+"Valitsimet:\n"
+"  -f, --force\t\t\tPakota tiedostojen poisto vaikkei niitä\n"
+"\t\t\t\tomistaisikaan käyttäjä\n"
+"  -h, --help\t\t\tNäytä tämä ohje ja poistu\n"
+"  -r, --remove\t\t\tPoista kotihakemistoja ja postilaatikko\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Sisäänkirjautumiskuori"
@@ -595,6 +611,7 @@ msgstr ""
 "\t\t\t\tkirjautumisyrityslaskureita (kun\n"
 "\t\t\t\tkäytetään -r, -m tai -l-valitsimilla)\n"
 "\t\t\t\tvain käyttäjälle TUNNUS\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -709,9 +726,9 @@ msgstr "%s: varjotiedostoa ei voi uudelleenkirjoittaa\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: tiedoston lukkoa ei voi avata\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -733,6 +750,7 @@ msgstr ""
 "  -K, --key AVAIN=ARVO\t\tohita /etc/login.defs:n oletusarvot\n"
 "  -o, --non-unique\t\tsalli ryhmän luominen (ei-uniikilla)\n"
 "\t\t\t\tkopio-RYHMÄID:llä\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -779,8 +797,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: varjoryhmätiedostoa ei voi avata\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: virheellinen ryhmä %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: virheellinen numeroargumentti \"%s\"\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -819,8 +837,67 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: isäntä %s on NIS-palvelin\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Käyttö: groupmod [-g gid [-o]] [-n nimi] ryhmä\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: PAM-todennus epäonnistui\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: ryhmätiedostoa ei voi lukita\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: ryhmätiedostoa ei voi avata\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: ryhmätiedostoa ei voi avata\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Käyttö: groupadd [valitsimet] ryhmä\n"
+"\n"
+"Valitsimet:\n"
+"  -f, --force\t\t\tpoistu onnistuneella arvolla vaikka annettu\n"
+"\t\t\t\tryhmä olisikin jo olemassa\n"
+"  -g, --gid RYHMÄID\t\tkäytä RYHMÄID:tä uudelle ryhmälle\n"
+"  -h, --help\t\t\tnäytä tämä ohjeviesti ja poistu\n"
+"  -K, --key AVAIN=ARVO\t\tohita /etc/login.defs:n oletusarvot\n"
+"  -o, --non-unique\t\tsalli ryhmän luominen (ei-uniikilla)\n"
+"\t\t\t\tkopio-RYHMÄID:llä\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -984,6 +1061,7 @@ msgstr ""
 "  -t, --time PÄIVÄÄ\tTulosta vain PÄIVÄÄ tuoreemmat lastlog-tietueet\n"
 "  -u, --login TUNNUS\tTulosta lastlog-tietue käyttäjälle TUNNUS\n"
 "  -h, --help\t\tNäytä tämä ohje ja lopeta\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1181,9 +1259,9 @@ msgstr "%s: rivi %d: tietuetta ei voi päivittää\n"
 msgid "%s: error updating files\n"
 msgstr "%s: virhe päivitettäessä tiedostoja\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1226,6 +1304,7 @@ msgstr ""
 "\t\t\t\tvanhentumista\n"
 "  -x, --maxdays KORK_PÄIVÄ\tAseta korkein määrä päivä ennen kuin salasana\n"
 "\t\t\t\ttäytyy vaihtaa KORK_PÄIVÄksi\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Vanha salasana: "
@@ -1392,9 +1471,9 @@ msgstr "Pahoittelen."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1409,14 +1488,14 @@ msgstr ""
 "Käyttö: su [valitsimet] [tunnus]\n"
 "\n"
 "Valitsimet:\n"
-"  -c, --command KOMENTO         Välitä KOMENTO käynnistyvälle kuorelle\n"
-"  -h, --help                    Näytä tämä ohje ja lopeta\n"
-"  -, -l, --login                Tee kuoresta sisäänkirjautumiskuori\n"
+"  -c, --command KOMENTO\tVälitä KOMENTO käynnistyvälle kuorelle\n"
+"  -h, --help\t\t\tNäytä tämä ohje ja lopeta\n"
+"  -, -l, --login\t\tTee kuoresta sisäänkirjautumiskuori\n"
 "  -m, -p,\n"
-"  --preserve-environment        Älä tyhjää ympäristömuuttujia ja säilytä\n"
-"                                sama kuori\n"
-"  -s, --shell KUORI             Käytä kuorta KUORI passwd:n oletuksen "
-"sijaan\n"
+"  --preserve-environment\tÄlä tyhjää ympäristömuuttujia ja säilytä\n"
+"\t\t\t\tsama kuori\n"
+"  -s, --shell KUORI\t\tKäytä kuorta KUORI passwd:n oletuksen sijaan\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1468,10 +1547,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Siirrytään järjestelmän ylläpitotilaan\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: virheellinen numeroargumentti \"%s\"\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1551,13 +1626,13 @@ msgstr ""
 "  -k, --skel MALLIHAK\t\tMääritä vaihtoehtoinen mallihakemisto\n"
 "  -K, --key AVAIN=ARVO\t\tKumoa /etc/login.defs-oletusarvot\n"
 "  -m, --create-home\t\tLuo kotihakemisto uudelle käyttäjätunnukselle\n"
-"  -o, --non-unique\t\tSalli UID:n uudelleenkäyttö (ei-uniikki UID) "
-"luotaessa\n"
-"\t\t\t\tkäyttäjätunnus\n"
+"  -o, --non-unique\t\tSalli UID:n uudelleenkäyttö (ei-uniikki UID)\n"
+"\t\t\t\tluotaessa käyttäjätunnus\n"
 "  -p, --password SALASANA\tKäytä salakirjoitettua salasanaa uudelle\n"
 "\t\t\t\tkäyttäjätunnukselle\n"
 "  -s, --shell KUORI\t\tUuden käyttäjätunnuksen sisäänkirjautumiskuori\n"
 "  -u, --uid UID\t\tValitse itse UID uudelle käyttäjätunnukselle\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1708,6 +1783,7 @@ msgstr ""
 "\t\t\t\tomistaisikaan käyttäjä\n"
 "  -h, --help\t\t\tNäytä tämä ohje ja poistu\n"
 "  -r, --remove\t\t\tPoista kotihakemistoja ja postilaatikko\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1769,7 +1845,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1810,6 +1887,7 @@ msgstr ""
 "  -s, --shell KUORI\t\tKäyttäjätunnuksen uusi sisäänkirjautumiskuori\n"
 "  -u, --uid UID\t\tUusi UID käyttäjätunnukselle\n"
 "  -U, --unlock\t\t\tAvaa annetun tunnuksen lukitus\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1898,6 +1976,7 @@ msgstr ""
 "  -p, --passwd\t\t\tMuokkaa passwd-tietokantaa\n"
 "  -q, --quiet\t\t\tHiljainen toiminta\n"
 "  -s, --shadow\t\t\tMuokkaa shadow- tai gshadow-tietokantaa\n"
+"\n"
 
 #, c-format
 msgid ""

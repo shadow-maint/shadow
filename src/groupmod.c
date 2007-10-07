@@ -29,10 +29,11 @@
 
 #include <config.h>
 
-#ident "$Id: groupmod.c,v 1.37 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id: groupmod.c,v 1.41 2006/07/28 17:38:52 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -89,6 +90,7 @@ static void check_new_name (void);
 static void process_flags (int, char **);
 static void close_files (void);
 static void open_files (void);
+static gid_t get_gid (const char *gidstr);
 
 /*
  * usage - display usage message and exit
@@ -96,7 +98,14 @@ static void open_files (void);
 
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: groupmod [-g gid [-o]] [-n name] group\n"));
+	fprintf (stderr, _("Usage: groupmod [options] GROUP\n"
+			   "\n"
+			   "Options:\n"
+			   "  -g, --gid GID			force use new GID by GROUP\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -n, --new-name NEW_GROUP	force use NEW_GROUP name by GROUP\n"
+			   "  -o, --non-unique		allow using duplicate (non-unique) GID by GROUP\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -310,6 +319,23 @@ static void check_new_name (void)
 }
 
 /*
+ * get_id - validate and get group ID
+ */
+static gid_t get_gid (const char *gidstr)
+{
+	long val;
+	char *errptr;
+
+	val = strtol (gidstr, &errptr, 10);
+	if (*errptr || errno == ERANGE || val < 0) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 gidstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
+}
+
+/*
  * process_flags - perform command line argument setting
  *
  *	process_flags() interprets the command line arguments and sets the
@@ -318,37 +344,43 @@ static void check_new_name (void)
  */
 static void process_flags (int argc, char **argv)
 {
-	char *end;
-	int arg;
 
-	while ((arg = getopt (argc, argv, "g:n:o")) != EOF) {
-		switch (arg) {
-		case 'g':
-			gflg++;
-			group_newid = strtoul (optarg, &end, 10);
-			if (*end != '\0') {
-				fprintf (stderr,
-					 _("%s: invalid group %s\n"),
-					 Prog, optarg);
+	{
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"gid", required_argument, NULL, 'g'},
+			{"help", no_argument, NULL, 'h'},
+			{"new-name", required_argument, NULL, 'n'},
+			{"non-unique", no_argument, NULL, 'o'},
+			{NULL, 0, NULL, '\0'}
+		};
+		while ((c =
+			getopt_long (argc, argv, "g:hn:o",
+				     long_options, &option_index)) != -1) {
+			switch (c) {
+			case 'g':
+				gflg++;
+				group_newid = get_gid (optarg);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					      "modifying group", NULL,
-					      group_newid, 0);
+				audit_logger (AUDIT_USER_CHAUTHTOK,
+					      Prog, "modifying group",
+					      NULL, group_newid, 0);
 #endif
-				exit (E_BAD_ARG);
+				break;
+			case 'n':
+				nflg++;
+				group_newname = optarg;
+				break;
+			case 'o':
+				oflg++;
+				break;
+			default:
+				usage ();
 			}
-			break;
-		case 'n':
-			nflg++;
-			group_newname = optarg;
-			break;
-		case 'o':
-			oflg++;
-			break;
-		default:
-			usage ();
 		}
 	}
+
 	if (oflg && !gflg)
 		usage ();
 

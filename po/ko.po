@@ -5,11 +5,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.17\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
-"PO-Revision-Date: 2006-06-25 22:55+0900\n"
-"Last-Translator: Sunjae Park <darehanl@gmail.com>\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
+"PO-Revision-Date: 2006-07-22 00:05+0900\n"
+"Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -177,7 +177,7 @@ msgstr "%s의 열쇠글: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -193,11 +193,11 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"사용법: chage [옵션] <사용자>\n"
+"사용법: chage [옵션] [로그인]\n"
 "\n"
 "옵션:\n"
-"  -d, --lastday <최근날짜>\t최근 열쇠글을 변경한 날짜를 \t\t\t\t<최근날짜>로 "
-"합니다.\n"
+"  -d, --lastday <최근날짜>\t최근 열쇠글을 변경한 날짜를\n"
+"\t\t\t\t<최근날짜>로 합니다.\n"
 "  -E, --expiredate <만료날짜>\t계정 만료날짜를 <만료날짜>로 합니다.\n"
 "  -h, --help\t\t\t이 도움말을 표시하고 끝냅니다.\n"
 "  -I, --inactive <비활성화기간>\t만료된 후 비활성화 기간을 \n"
@@ -434,7 +434,7 @@ msgstr "열쇠글 입력을 업데이트하는 데 오류가 발생했습니다.
 
 #, c-format
 msgid "Cannot commit password file changes.\n"
-msgstr "열쇠글 파일의 변경사항을 적용할 수 없습니다.\n"
+msgstr "열쇠글 파일의 바뀐 점을 적용할 수 없습니다.\n"
 
 #, c-format
 msgid "Cannot unlock the password file.\n"
@@ -537,8 +537,20 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: line %d: 알 수 없는 사용자 %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "사용법: %s [-s 쉘] [이름]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"사용법: chsh [옵션] [로그인]\n"
+"\n"
+"옵션:\n"
+"  -h, --help\t\t\t이 도움말 메시지를 표시하고 끝냅니다\n"
+"  -s, --shelll <쉘>\t\t사용자 계정의 새 로그인 쉘\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "로그인 쉘"
@@ -595,6 +607,7 @@ msgstr ""
 "  -u, --user <로그인>\t\t<로그인> 사용자의 로그인 실패 기록만을 보거나\n"
 "\t\t\t\t-r, -m, -l 옵션을 사용할 때에는 <로그인> 사용자의 \n"
 "\t\t\t\t로그인 실패 횟수와 한계값만 관리합니다.\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -650,7 +663,7 @@ msgstr "사용자 %s을(를) %s 그룹에 등록 중\n"
 
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "사용자 %s을(를) 그룹 %s로부터 삭제 중\n"
+msgstr "사용자 %s을(를) 그룹 %s에서 지우는 중\n"
 
 #, c-format
 msgid "%s: unknown member %s\n"
@@ -711,7 +724,7 @@ msgstr "%s: 파일 잠금을 해제할 수 없습니다\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -726,18 +739,18 @@ msgstr ""
 "사용법: groupadd [옵션] <그룹>\n"
 "\n"
 "옵션\n"
-"  -f, --force\t\t\t지정한 그룹이 이미 존재할 경우에도 끝내고 \n"
+"  -f, --force\t\t\t지정한 그룹이 이미 있을 경우에도 끝내고 \n"
 "\t\t\t\t성공한 것으로 표시합니다\n"
 "  -g, --gid <GID>\t\t새 그룹의 gid를 <GID>로 합니다\n"
 "  -h, --help\t\t\t이 도움말 메시지를 표시하고 끝냅니다\n"
 "  -K, --key <키>=<값>\t\t/etc/login.defs의 기본값을 무시하고 설정합니다\n"
 "  -o, --non-unique\t\tGID가 중복되더라도(유일하지 않더라도)\n"
-"\t\t\t\t그룹 생성을 허용합니다\n"
+"\t\t\t\t그룹 만들기를 허용합니다\n"
 "\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: 새 그룹을 추가하는 데 오류가 발생했습니다\n"
+msgstr "%s: 새 그룹을 더하는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid "%s: name %s is not unique\n"
@@ -780,8 +793,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: 셰도우 그룹 파일을 열 수 없습니다\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: 그룹 %s이(가) 허용되지 않습니다\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: 잘못된 숫자 인자 '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -789,7 +802,7 @@ msgstr "%s: -K 옵션에는 <키>=<값> 형태의 입력이 필요합니다\n"
 
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: 그룹 %s이(가) 이미 존재합니다\n"
+msgstr "%s: 그룹 %s이(가) 이미 있습니다\n"
 
 #, c-format
 msgid "Usage: groupdel group\n"
@@ -809,7 +822,7 @@ msgstr "%s: 사용자의 주요 그룹은 지울 수 없습니다.\n"
 
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: %s 그룹은 존재하지 않습니다\n"
+msgstr "%s: %s 그룹이 없습니다\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
@@ -820,8 +833,67 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s은(는) NIS 마스터입니다\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "사용법: groupmod [-g GID [-o]] [-n 이름] 그룹명\n"
+msgid "Member already exists\n"
+msgstr "이미 멤버가 있습니다\n"
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "지우려는 멤버가 없습니다\n"
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+"사용법: groupmems -a <사용자이름> | -d <사용자이름> | -D | -l [-g <그룹이름"
+">]\n"
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "루트 사용자만 그룹에 멤버를 더할 수 있습니다\n"
+
+#, c-format
+msgid "Group access is required\n"
+msgstr "그룹 접근 권한이 필요합니다\n"
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "현재 그룹의 소유자가 아닙니다\n"
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr "다음에 대해 PAM 인증이 실패했습니다\n"
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "그룹 파일을 잠글 수 없습니다\n"
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "그룹 파일을 열 수 없습니다\n"
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "그룹 파일을 닫을 수 없습니다\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"사용법: groupmod [옵션] <그룹>\n"
+"\n"
+"옵션:\n"
+"  -g, --gid GID\t\t\t<그룹>에 새 GID를 사용합니다\n"
+"  -h, --help\t\t\t이 도움말을 출력하고 끝납니다\n"
+"  -n, --new-name <새그룹>\t<그룹>에 <새그룹> 이름을 강제로 사용합니다\n"
+"  -o, --non-unique\t\t<그룹>에 중복된 (유일하지 않은) GID로 그룹을 \n"
+"\t\t\t\t만듭니다\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -917,7 +989,7 @@ msgstr "관리용 멤버 '%s'을(를) 지울까요? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "셰도우 그룹 %s: %s라는 사용자가 없습니다\n"
+msgstr "셰도우 그룹 %s: %s(이)라는 사용자가 없습니다\n"
 
 #, c-format
 msgid "%s: cannot update file %s\n"
@@ -929,7 +1001,7 @@ msgstr "%s: 파일이 업데이트 되었습니다\n"
 
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: 변경사항 없음\n"
+msgstr "%s: 바뀐 점이 없음\n"
 
 #, c-format
 msgid "%s: can't lock shadow group file\n"
@@ -1184,7 +1256,7 @@ msgstr "%s: 파일을 업데이트 하는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1213,18 +1285,18 @@ msgstr ""
 "  -d, --delete\t\t\t지정된 계정의 열쇠글을 지웁니다\n"
 "  -e, --expire\t\t\t지정된 계정 열쇠글을 강제로 만기시킵니다\n"
 "  -h, --help\t\t\t이 도움말 메시지를 표시하고 끝냅니다\n"
-"  -k, --keep-tokens\t\t열쇠글이 만기되었을 때만 변경합니다\n"
+"  -k, --keep-tokens\t\t열쇠글이 만기되었을 때만 바꿉니다\n"
 "  -i, --inactive <비활성화기간>\t만료된 후 비활성화 기간을 \n"
 "\t\t\t\t<비활성화기간>으로 합니다\n"
 "  -l, --lock\t\t\t지정된 계정을 잠급니다\n"
-"  -n, --mindays <최소날수>\t열쇠글을 다시 변경할 수 있는 최소 일\n"
+"  -n, --mindays <최소날수>\t열쇠글을 다시 바꿀 수 있는 최소 일\n"
 "\t\t\t\t수를 <최소날수>로 합니다\n"
 "  -q, --quiet\t\t\t조용한 모드\n"
-"  -r, --repository <저장소>\t<저장소> 저장소에 있는 열쇠글을 변경합니다\n"
+"  -r, --repository <저장소>\t<저장소> 저장소에 있는 열쇠글을 바꿉니다\n"
 "  -S, --status\t\t\t지정된 계정의 열쇠글 상태를 보고합니다\n"
 "  -u, --unlock\t\t\t지정된 계정의 잠금을 해제합니다\n"
 "  -w, --warndays <경고날수>\t열쇠글 만기 예고를 <경고날수> 이전부터 합니다\n"
-"  -x, --maxdays <최대날수>\t열쇠글을 변경하지 않을 수 있는 최대 일\n"
+"  -x, --maxdays <최대날수>\t열쇠글을 바꾸지 않을 수 있는 최대 일\n"
 "\t\t\t\t수를 <최대날수>로 합니다\n"
 "\n"
 
@@ -1328,7 +1400,7 @@ msgstr "%s에 있는 열쇠글 파일 입력값이 일치하지 않습니다\n"
 
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "사용자 '%s'을(를) %s에 추가할까요?"
+msgstr "사용자 '%s'을(를) %s에 더할까요?"
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
@@ -1395,7 +1467,7 @@ msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1433,7 +1505,7 @@ msgstr "알 수 없는 아이디: %s\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "su %s를 하도록 인증이 되지 않았습니다\n"
+msgstr "su %s을(를) 하도록 인증이 되지 않았습니다\n"
 
 msgid "(Enter your own password)"
 msgstr "(본인의 열쇠글을 입력하십시오)"
@@ -1469,10 +1541,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "시스템 정비 모드로 들어가고 있습니다\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: 잘못된 숫자 인자 '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1548,7 +1616,7 @@ msgstr ""
 "  -h, --help\t\t\t이 도움말을 표시하고 끝냅니다\n"
 "  -k, --skel <SKEL디렉토리>\t다른 skel 디렉토리를 지정합니다\n"
 "  -K, --key <키>=<값>\t\t/etc/login.defs의 기본값을 무시하고 설정합니다\n"
-"  -m, --create-home\t\t새 사용자 계정의 홈 디렉토리를 생성합니다\n"
+"  -m, --create-home\t\t새 사용자 계정의 홈 디렉토리를 만듭니다\n"
 "  -o, --non-unique\t\t중복되는 UID도 허용합니다\n"
 "  -p, --password <열쇠글>\t새로 사용할 열쇠글을 암호화하여 사용합니다\n"
 "  -s, --shell <셸>\t\t지정된 사용자 계정의 로그인 셸을 지정합니다\n"
@@ -1641,7 +1709,7 @@ msgstr "%s: 그룹 파일을 여는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: 새 열쇠글 입력값을 추가하는 데 오류가 발생했습니다\n"
+msgstr "%s: 새 열쇠글 입력값을 더하는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
@@ -1652,35 +1720,33 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s: 디렉토리 %s을(를) 만들 수 없습니다\n"
 
 msgid "Creating mailbox file"
-msgstr "메일함 파일을 생성 중"
+msgstr "메일함 파일을 만드는 중"
 
 #, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
-msgstr ""
-"'mail' 그룹이 존재하지 않습니다. 사용자의 메일함 파일을 0600 모드로\n"
-"생성합니다\n"
+msgstr "'mail' 그룹이 없습니다. 사용자의 메일함 파일을 0600 모드로 만듭니다.\n"
 
 msgid "Setting mailbox file permissions"
 msgstr "메일함의 파일 권한을 설정 중"
 
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: 사용자 %s이(가) 이미 존재합니다\n"
+msgstr "%s: 사용자 %s이(가) 이미 있습니다\n"
 
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: %s 그룹이 이미 존재합니다 - 이 사용자를 이 그룹에 더하고자 한다면, \n"
-"-g 옵션을 사용하십시오.\n"
+"%s: %s 그룹이 이미 있습니다. 이 사용자를 이 그룹에 더하려면, -g 옵션을 사용하"
+"십시오.\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
-"%s: 경고: 홈디렉토리가 이미 존재합니다.\n"
+"%s: 경고: 홈디렉토리가 이미 있습니다.\n"
 "skel 디렉토리에서 파일을 복사하지 않습니다.\n"
 
 #, c-format
@@ -1765,7 +1831,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1788,10 +1855,11 @@ msgstr ""
 "사용법: usermod [옵션] <로그인>\n"
 "\n"
 "옵션:\n"
-"  -a, --append <그룹>\t\t사용자를 보조 그룹 <그룹>에 추가합니다\n"
+"  -a, --append\t\t\t사용자를 보조 그룹 <그룹>에 추가합니다\n"
+"\t\t\t\t(-G 옵션과 함께 사용해야 함)\n"
 "  -c, --comment <설명>\t\tGECOS필드의 값을 새로 설정합니다\n"
-"  -d, --home <홈디렉토리>\t\t지정된 사용자 계정의 새 홈 디렉토리를 지정합니"
-"다\n"
+"  -d, --home <홈디렉토리>\t\t지정된 사용자 계정의 새 홈 디렉토리를\n"
+"\t\t\t\t지정합니 다\n"
 "  -e, --expiredate <만료날짜>\t계정 만기 날짜를 <만료날짜>로 합니다\n"
 "  -f, --inactive <비활성화기간>\t만료된 후 비활성화 기간을 \n"
 "\t\t\t\t<비활성화기간>으로 합니다\n"
@@ -1805,7 +1873,7 @@ msgstr ""
 "  -o, --non-unique\t\t중복되는 UID도 허용합니다\n"
 "  -p, --password <열쇠글>\t새로 사용할 열쇠글을 암호화하여 사용합니다\n"
 "  -s, --shell <셸>\t\t지정된 사용자 계정의 로그인 셸을 지정합니다\n"
-"  -u, --uid <UID>\t\t\t지정된 사용자 계정의 새 <UID> 값을 지정합니다\n"
+"  -u, --uid <UID>\t\t지정된 사용자 계정의 새 <UID> 값을 지정합니다\n"
 "  -U, --unlock\t\t\t사용자 계정의 잠금을 해제합니다\n"
 "\n"
 
@@ -1847,7 +1915,7 @@ msgstr "%s: 셰도우 열쇠글 입력값을 제거하는 데 오류가 발생�
 
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: 디렉토리 %s은(는) 이미 존재합니다\n"
+msgstr "%s: 디렉토리 %s은(는) 이미 있습니다\n"
 
 #, c-format
 msgid "%s: can't create %s\n"

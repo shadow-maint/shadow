@@ -1,0 +1,124 @@
+.\"     Title: usermod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "USERMOD" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+usermod \- ändra ett användarkonto
+.SH "SYNOPSIS"
+.HP 8
+\fBusermod\fR [\fIflaggor\fR] \fIINLOGGNINGSNAMN\fR
+.SH "BESKRIVNING"
+.PP
+Kommandot
+\fBusermod\fR
+ändrar systemkontofiler enligt det som anges på kommandoraden.
+.SH "FLAGGOR"
+.PP
+Flaggorna som gäller för kommandot
+\fBusermod\fR
+är:
+.TP 3n
+\fB\-a\fR, \fB\-\-append\fR
+Lägg till användaren till tilläggsgrupp(er). Använd endast med flaggan
+\fB\-G\fR.
+.TP 3n
+\fB\-c\fR, \fB\-\-comment\fR\fIKOMMENTAR\fR
+Det nya värdet för användarens kommentarsfält i lösenordsfilen. Vanligtvis ändras det med verktyget
+\fBchfn\fR(1).
+.TP 3n
+\fB\-d\fR, \fB\-\-home\fR\fIHEM_KAT\fR
+The user's new login directory. If the
+\fB\-m\fR
+option is given the contents of the current home directory will be moved to the new home directory, which is created if it does not already exist.
+.TP 3n
+\fB\-e\fR, \fB\-\-expiredate\fR\fIUTGÅNGSDATUM\fR
+The date on which the user account will be disabled. The date is specified in the format
+\fIYYYY\-MM\-DD\fR.
+.TP 3n
+\fB\-f\fR, \fB\-\-inactive\fR\fIINAKTIV\fR
+The number of days after a password expires until the account is permanently disabled. A value of 0 disables the account as soon as the password has expired, and a value of \-1 disables the feature. The default value is \-1.
+.TP 3n
+\fB\-g\fR, \fB\-\-gid\fR\fIGRUPP\fR
+The group name or number of the user's new initial login group. The group name must exist. A group number must refer to an already existing group. The default group number is 1.
+.TP 3n
+\fB\-G\fR, \fB\-\-groups\fR\fIGRUPP1\fR[\fI,GRUPP2,...\fR[\fI,GRUPPN\fR]]]
+A list of supplementary groups which the user is also a member of. Each group is separated from the next by a comma, with no intervening whitespace. The groups are subject to the same restrictions as the group given with the
+\fB\-g\fR
+option. If the user is currently a member of a group which is not listed, the user will be removed from the group. This behaviour can be changed via
+\fB\-a\fR
+option, which appends user to the current supplementary group list.
+.TP 3n
+\fB\-l\fR, \fB\-\-login\fR\fINYTT_INLOGGNINGSNAMN\fR
+The name of the user will be changed from
+\fILOGIN\fR
+to
+\fINEW_LOGIN\fR. Nothing else is changed. In particular, the user's home directory name should probably be changed to reflect the new login name.
+.TP 3n
+\fB\-L\fR, \fB\-\-lock\fR
+Lås en användares lösenord. Detta sätter ett "!" i början av det krypterade lösenordet som effektivt inaktiverar lösenordet. Du kan inte använda denna flagga med
+\fB\-p\fR
+eller
+\fB\-U\fR.
+.TP 3n
+\fB\-o\fR, \fB\-\-non\-unique\fR
+When used with the
+\fB\-u\fR
+option, this option allows to change the user ID to a non\-unique value.
+.TP 3n
+\fB\-p\fR, \fB\-\-password\fR\fILÖSENORD\fR
+Det krypterade lösenordet, som returneras av
+\fBcrypt\fR(3).
+.TP 3n
+\fB\-s\fR, \fB\-\-shell\fR\fISKAL\fR
+The name of the user's new login shell. Setting this field to blank causes the system to select the default login shell.
+.TP 3n
+\fB\-u\fR, \fB\-\-uid\fR\fIUID\fR
+The numerical value of the user's ID. This value must be unique, unless the
+\fB\-o\fR
+option is used. The value must be non\-negative. Values between 0 and 999 are typically reserved for system accounts. Any files which the user owns and which are located in the directory tree rooted at the user's home directory will have the file user ID changed automatically. Files outside of the user's home directory must be altered manually.
+.TP 3n
+\fB\-U\fR, \fB\-\-unlock\fR
+Låser upp en användares lösenord. Detta tar bort det inledande "!" i det krypterade lösenordet. Du kan inte använda denna flagga med
+\fB\-p\fR
+eller
+\fB\-L\fR.
+.SH "TÄNK PÅ"
+.PP
+
+\fBusermod\fR
+will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any
+\fBcrontab\fR
+files manually. You must change the owner of any
+\fBat\fR
+jobs manually. You must make any changes involving NIS on the NIS server.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/passwd\fR
+Användarkontoinformation.
+.TP 3n
+\fI/etc/shadow\fR
+Säker användarkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBcrypt\fR(3),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBlogin.defs\fR(5),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8).

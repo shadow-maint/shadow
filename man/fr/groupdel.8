@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPDEL" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: groupdel
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "GROUPDEL" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 groupdel \- Supprimer un groupe
 .SH "SYNOPSIS"
 .HP 9
@@ -17,34 +20,34 @@ groupdel \- Supprimer un groupe
 La commande
 \fBgroupdel\fR
 modifie les fichiers d'administration des comptes du système, en supprimant les entrées qui se réfèrent à
-\fIgroupe\fR. Le groupe nommé doit exister.
+\fIgroupe\fR. Le groupe indiqué doit exister.
 .PP
 Vous devez vérifier vous\-même qu'aucun fichier possédé par le groupe ne subsiste sur tous les systèmes de fichiers.
 .SH "AVERTISSEMENTS"
 .PP
-Vous ne devez pas supprimer le groupe primaire d'un utilisateur existant. Vous devez supprimer l'utilisateur auparavant.
+Vous ne pouvez pas supprimer le groupe primaire d'un utilisateur existant. Vous devez supprimer l'utilisateur auparavant.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/gshadow\fR
-informations cachées sur les groupes
-.SH "VALEUR DE RETOUR"
+Informations sécurisées sur les groupes.
+.SH "VALEURS DE RETOUR"
 .PP
 La commande
 \fBgroupdel\fR
 retourne les valeurs suivantes en quittant\ :
-.TP
+.TP 3n
 \fI0\fR
 succès
-.TP
+.TP 3n
 \fI2\fR
 erreur de syntaxe
-.TP
+.TP 3n
 \fI8\fR
 impossible de supprimer le groupe primaire d'un utilisateur existant
-.TP
+.TP 3n
 \fI10\fR
 impossible de mettre à jour le fichier des groupes
 .SH "VOIR AUSSI"

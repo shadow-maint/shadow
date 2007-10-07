@@ -1,41 +1,57 @@
 .\"     Title: groupmod
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 06/24/2006
+.\"      Date: 07/30/2006
 .\"    Manual: System Management Commands
 .\"    Source: System Management Commands
 .\"
-.TH "GROUPMOD" "8" "06/24/2006" "System Management Commands" "System Management Commands"
+.TH "GROUPMOD" "8" "07/30/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
 .SH "NAME"
-groupmod \- modify a group
+groupmod \- modify a group definition on the system
 .SH "SYNOPSIS"
 .HP 9
-\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o\ ]] [\-n\ \fInew_group_name\fR] \fIgroup\fR
+\fBgroupmod\fR [\fIoptions\fR] \fIGROUP\fR
 .SH "DESCRIPTION"
 .PP
 The
 \fBgroupmod\fR
-command modifies the system account files to reflect the changes that are specified on the command line.
+modifies the definition of the specified
+\fIGROUP\fR
+by modifying the appropriate entry in the group database.
 .SH "OPTIONS"
 .PP
 The options which apply to the
 \fBgroupmod\fR
 command are:
 .TP 3n
-\fB\-g\fR \fIgid\fR
-The numerical value of the group's ID. This value must be unique, unless the
+\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+Specify the new group ID for the
+\fIGROUP\fR. The numerical value of the
+\fIGID\fR
+must be a non\-negative decimal integer. This value must be unique, unless the
 \fB\-o\fR
-option is used. The value must be non\-negative. Values between 0 and 999 are typically reserved for system groups. Any files which the old group ID is the file group ID must have the file group ID changed manually.
+option is used. Values between 0 and 999 are typically reserved for system groups. Any files which the old group ID is the file group ID must have the file group ID changed manually.
 .TP 3n
-\fB\-n\fR \fInew_group_name\fR
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP 3n
+\fB\-n\fR, \fB\-\-new\-name\fR \fINEW_GROUP\fR
 The name of the group will be changed from
-\fIgroup\fR
+\fIGROUP\fR
 to
-\fInew_group_name\fR.
+\fINEW_GROUP\fR
+name.
+.TP 3n
+\fB\-o\fR, \fB\-\-non\-unique\fR
+When used with the
+\fB\-g\fR
+option allow to change the group
+\fIGID\fR
+to non\-unique value.
 .SH "FILES"
 .TP 3n
 \fI/etc/group\fR

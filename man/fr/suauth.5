@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "SUAUTH" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\"     Title: suauth
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Formats et conversions de fichiers
+.\"    Source: Formats et conversions de fichiers
+.\"
+.TH "SUAUTH" "5" "30/07/2006" "Formats et conversions de fich" "Formats et conversions de fich"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 suauth \- Fichier de contrôle détaillé de su
 .SH "SYNOPSIS"
 .HP 12
@@ -18,49 +21,54 @@ Le fichier
 \fI/etc/suauth\fR
 est lu chaque fois que su est exécuté. Il permet de modifier le comportement de la commande su, en fonction de\ :
 .sp
+.RS 3n
 .nf
       1) l'utilisateur cible de su
     
 .fi
+.RE
 .sp
 .PP
 2) l'utilisateur qui exécute la commande su (ou un groupe dont il est membre)
 .PP
 Le fichier est formaté de la façon suivante (les lignes commençant par un \(Fo\ #\ \(Fc sont des commentaires, et sont ignorées)\ :
 .sp
+.RS 3n
 .nf
       vers\-id:par\-id:ACTION
     
 .fi
+.RE
 .PP
 Où vers\-id peut être le mot
-\fIALL\fR, une liste de noms d'utilisateurs délimités par une virgule ou
+\fIALL\fR, une liste de noms d'utilisateurs séparés par une virgule ou
 \fIALL EXCEPT\fR
-suivi d'une liste d'utilisateurs délimités par une virgule.
+suivi d'une liste d'utilisateurs séparés par une virgule.
 .PP
-par\-id utilise le même format que vers\-id, mais accepte également le mot\-clef
+par\-id utilise le même format que vers\-id, mais accepte également le mot\-clé
 \fIGROUP\fR.
 \fIALL EXCEPT GROUP\fR
 est également accepté.
 \fIGROUP\fR
-est suivi d'un ou plusieurs noms de groupes, délimités par une virgule. Avoir comme groupe primaire le groupe approprié ne sera pas suffisant\ : une entrée dans
+est suivi d'un ou plusieurs noms de groupes, séparés par une virgule. Il n'est pas suffisant d'avoir comme groupe primaire le groupe approprié\ : une entrée dans
 \fB/etc/group\fR(5)
 est nécessaire.
 .PP
-Les valeur d'ACTION valables sont\ :
-.TP
+Les valeurs d'ACTION valables sont\ :
+.TP 3n
 \fIDENY\fR
-La tentative de changement d'utilisateur est arrêtée avant que le mot de passe ne soit demandé.
-.TP
+La tentative de changement d'utilisateur s'est arrêtée avant que le mot de passe ne soit demandé.
+.TP 3n
 \fINOPASS\fR
 La tentative est automatiquement réussie. Aucun mot de passe n'est demandé.
-.TP
+.TP 3n
 \fIOWNPASS\fR
-Pour que la commande su soit réussie, l'utilisateur doit entrer son propre mot de passe. Ceci lui sera précisé.
+Pour que la commande su soit réussie, l'utilisateur doit entrer son propre mot de passe. Ceci lui est demandé.
 .PP
-Notez qu'il y a trois champs séparés par un \(Fo\ deux\-points\ \(Fc. Ne pas accoller d'espace à ce \(Fo\ deux\-points\ \(Fc. Notez aussi que le fichier est examiné séquentiellement ligne par ligne, et que la première règle applicable est utilisée sans que le reste du fichier ne soit examiné. Ceci permet à l'administrateur système de définir un contrôle aussi fin qu'il le souhaite.
+Notez qu'il y a trois champs séparés par un \(Fo\ deux\-points\ \(Fc. Ne pas accoler d'espace à ce \(Fo\ deux\-points\ \(Fc. Notez aussi que le fichier est examiné séquentiellement ligne par ligne, et que la première règle applicable est utilisée sans que le reste du fichier ne soit examiné. Ceci permet à l'administrateur système de définir un contrôle aussi fin qu'il le souhaite.
 .SH "EXEMPLE"
 .sp
+.RS 3n
 .nf
       # exemple de fichier /etc/suauth
       #
@@ -85,9 +93,10 @@ Notez qu'il y a trois champs séparés par un \(Fo\ deux\-points\ \(Fc. Ne pas a
       #
     
 .fi
+.RE
 .sp
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/suauth\fR
 .SH "BOGUES"
 .PP

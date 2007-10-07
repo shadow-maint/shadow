@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='passwd.1'>
-  <!--  $Id: passwd.1.xml,v 1.32 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!--  $Id: passwd.1.xml,v 1.33 2006/07/11 13:34:47 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -17,7 +17,9 @@
       <arg choice='opt'>
 	<replaceable>options</replaceable>
       </arg>
-      <arg choice='plain'><replaceable>login</replaceable></arg>
+      <arg choice='opt'>
+        <replaceable>LOGIN</replaceable>
+      </arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 

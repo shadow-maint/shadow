@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.71 2006/06/20 20:00:04 kloczek Exp $"
+#ident "$Id: su.c,v 1.74 2006/08/01 10:30:02 kloczek Exp $"
 
 #include <getopt.h>
 #include <grp.h>
@@ -252,7 +252,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell,
   */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: su [options] [login]\n"
+	fprintf (stderr, _("Usage: su [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -c, --command COMMAND		pass COMMAND to the invoked shell\n"
@@ -279,7 +279,6 @@ static void usage (void)
 int main (int argc, char **argv)
 {
 	char *cp;
-	char **envcp;
 	const char *tty = 0;	/* Name of tty SU is run from        */
 	int doshell = 0;
 	int fakelogin = 0;
@@ -290,6 +289,7 @@ int main (int argc, char **argv)
 	char *shellstr = 0, *command = 0;
 
 #ifdef USE_PAM
+	char **envcp;
 	int ret;
 #else				/* !USE_PAM */
 	int err = 0;
@@ -710,11 +710,6 @@ int main (int argc, char **argv)
 		addenv ("PATH", cp);
 	}
 
-#ifndef USE_PAM
-	/* setup the environment for PAM later on, else we run into auth problems */
-	environ = newenvp;	/* make new environment active */
-#endif
-
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 
@@ -794,6 +789,8 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #else				/* !USE_PAM */
+	environ = newenvp;	/* make new environment active */
+	
 	if (!amroot)		/* no limits if su from root */
 		setup_limits (&pwent);
 

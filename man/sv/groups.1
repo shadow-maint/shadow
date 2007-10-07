@@ -1,0 +1,45 @@
+.\"     Title: groups
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Användarkommandon
+.\"    Source: Användarkommandon
+.\"
+.TH "GROUPS" "1" "20\-07\-2006" "Användarkommandon" "Användarkommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+groups \- visa aktuella gruppnamn
+.SH "SYNOPSIS"
+.HP 7
+\fBgroups\fR [\fIanvändare\fR]
+.SH "BESKRIVNING"
+.PP
+
+\fBgroups\fR
+displays the current group names or ID values. If the value does not have a corresponding entry in
+\fI/etc/group\fR, the value will be displayed as the numerical group value. The optional
+\fIuser\fR
+parameter will display the groups for the named
+\fIuser\fR.
+.SH "NOTERA"
+.PP
+Systems which do not support concurrent group sets will have the information from
+\fI/etc/group\fR
+reported. The user must use
+\fBnewgrp\fR
+or
+\fBsg\fR
+to change their current real and effective group ID.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBnewgrp\fR(1),
+\fBgetgid\fR(2),
+\fBgetgroups\fR(2),
+\fBgetuid\fR(2).

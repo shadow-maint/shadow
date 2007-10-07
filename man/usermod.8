@@ -1,11 +1,11 @@
 .\"     Title: usermod
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 06/24/2006
+.\"      Date: 07/30/2006
 .\"    Manual: System Management Commands
 .\"    Source: System Management Commands
 .\"
-.TH "USERMOD" "8" "06/24/2006" "System Management Commands" "System Management Commands"
+.TH "USERMOD" "8" "07/30/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -26,8 +26,10 @@ The options which apply to the
 \fBusermod\fR
 command are:
 .TP 3n
-\fB\-a\fR, \fB\-\-append\fR \fIGROUP\fR
-Add the user to the supplemental group.
+\fB\-a\fR, \fB\-\-append\fR
+Add the user to the supplemental group(s). Use only with
+\fB\-G\fR
+option.
 .TP 3n
 \fB\-c\fR, \fB\-\-comment\fR \fICOMMENT\fR
 The new value of the user's password file comment field. It is normally modified using the

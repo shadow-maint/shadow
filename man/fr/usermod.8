@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERMOD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: usermod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "USERMOD" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 usermod \- Modifier un compte utilisateur
 .SH "SYNOPSIS"
 .HP 8
@@ -16,87 +19,91 @@ usermod \- Modifier un compte utilisateur
 .PP
 La commande
 \fBusermod\fR
-modifie les fichiers d'administration des comptes du système pour refléter les modifications qui ont été spécifiées sur la ligne de commande.
+modifie les fichiers d'administration des comptes du système selon les modifications qui ont été indiquées sur la ligne de commande.
 .SH "OPTIONS"
 .PP
 Les options disponibles pour la commande
 \fBusermod\fR
 sont\ :
-.TP
+.TP 3n
+\fB\-a\fR, \fB\-\-append\fR
+Ajouter l'utilisateur aux groupes supplémentaires. N'utilisez cette option qu'avec l'option
+\fB\-G\fR.
+.TP 3n
 \fB\-c\fR, \fB\-\-comment\fR \fICOMMENTAIRE\fR
 La nouvelle valeur du champ de commentaire du fichier de mots de passe pour l'utilisateur. Il est normalement modifié en utilisant l'utilitaire
 \fBchfn\fR(1).
-.TP
+.TP 3n
 \fB\-d\fR, \fB\-\-home\fR \fIRÉP_PERSO\fR
 Le nouveau répertoire de connexion de l'utilisateur. Si l'option
 \fB\-m\fR
 est fournie, le contenu du répertoire personnel actuel sera déplacé dans le nouveau répertoire personnel, qui sera créé si nécessaire.
-.TP
+.TP 3n
 \fB\-e\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDITÉ\fR
-La date à laquelle le compte utilisateur sera désactivé. La date est spécifiée dans le format
+Date à laquelle le compte utilisateur sera désactivé. La date est indiquée dans le format
 \fIAAAA\-MM\-JJ\fR.
-.TP
+.TP 3n
 \fB\-f\fR, \fB\-\-inactive\fR \fIDURÉE_INACTIVITÉ\fR
-Le nombre de jours suivant la fin de validité d'un mot de passe après lequel le compte est définitivement désactivé. Une valeur de 0 désactive le compte dès que le mot de passe a dépassé sa fin de validité, et une valeur de \-1 désactive cette fonctionnalité. La valeur par défaut est de \-1.
-.TP
+Nombre de jours suivant la fin de validité d'un mot de passe après lequel le compte est définitivement désactivé. Une valeur de 0 désactive le compte dès que le mot de passe a dépassé sa fin de validité, et une valeur de \-1 désactive cette fonctionnalité. La valeur par défaut est de \-1.
+.TP 3n
 \fB\-g\fR, \fB\-\-gid\fR \fIGROUPE\fR
-Le nom du groupe ou l'identifiant numérique du groupe de connexion initial de l'utilisateur. Le nom du groupe doit exister. Un numéro de groupe doit se référer à un groupe préexistant. Le numéro de groupe par défaut est de 1.
-.TP
+Nom du groupe ou identifiant numérique du groupe de connexion initial de l'utilisateur. Le nom du groupe doit exister. Un numéro de groupe doit se référer à un groupe déjà existant. Le numéro de groupe par défaut est de 1.
+.TP 3n
 \fB\-G\fR, \fB\-\-groups\fR \fIGROUPE1\fR[\fI,GROUPE2,...\fR[\fI,GROUPEN\fR]]]
-Une liste de groupes supplémentaires auxquels fait également partie l'utilisateur. Les groupes sont séparés par une virgule, sans espace entre eux. Les groupes sont soumis aux mêmes restrictions que celles données avec l'option
-\fB\-g\fR. Si l'utilisateur fait actuellement partie d'un groupe qui n'est pas listé, l'utilisateur sera supprimé du groupe. Ce comportement peut être changé avec l'option
-\fB\-a\fR, qui permet d'ajouter l'utilisateur à une liste de groupes supplémentaires.
-.TP
-\fB\-l\fR, \fB\-\-login\fR \fInouvel_utilisateur\fR
+Liste de groupes supplémentaires auxquels appartient également l'utilisateur. Les groupes sont séparés par une virgule, sans espace entre eux. Les groupes sont soumis aux mêmes restrictions que celles données avec l'option
+\fB\-g\fR. Si l'utilisateur fait actuellement partie d'un groupe qui n'est pas listé, l'utilisateur sera supprimé du groupe. Ce comportement peut être modifié par l'option
+\fB\-a\fR, qui permet d'ajouter l'utilisateur à la liste actuelle des groupes supplémentaires.
+.TP 3n
+\fB\-l\fR, \fB\-\-login\fR\fINOUVEAU_LOGIN\fR
 Le nom de l'utilisateur passera de
-\fIutilisateur\fR
+\fILOGIN\fR
 à
-\fInouvel_utilisateur\fR. Rien d'autre n'est modifié. En particulier, le répertoire personnel de l'utilisateur devra probablement être changé pour refléter le nouveau nom de connexion.
-.TP
+\fINOUVEAU_LOGIN\fR. Rien d'autre ne sera modifié. En particulier, le nom du répertoire personnel de l'utilisateur devra probablement être changé pour refléter le nouveau nom de connexion.
+.TP 3n
 \fB\-L\fR, \fB\-\-lock\fR
-Verrouille le mot de passe d'un utilisateur. Cette option ajoute un \(Fo\ !\ \(Fc devant le mot de passe chiffré, ce qui désactive le mot de passe. Vous ne pouvez pas utiliser cette option avec
+Verrouiller le mot de passe d'un utilisateur. Cette option ajoute un \(Fo\ !\ \(Fc devant le mot de passe chiffré, ce qui désactive le mot de passe. Vous ne pouvez pas utiliser cette option avec
 \fB\-p\fR
 ou
 \fB\-U\fR.
-.TP
+.TP 3n
 \fB\-o\fR, \fB\-\-non\-unique\fR
 En combinaison avec l'option
 \fB\-u\fR, cette option permet de changer l'identifiant utilisateur vers une valeur déjà utilisée.
-.TP
+.TP 3n
 \fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
-Le mot de passe chiffré, comme renvoyé par
+Mot de passe chiffré, comme renvoyé par
 \fBcrypt\fR(3).
-.TP
+.TP 3n
 \fB\-s\fR, \fB\-\-shell\fR \fIINTERPRÉTEUR\fR
-Le nom du nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur. Si le champ est vide, le système sélectionnera l'interpréteur de commandes initial par défaut.
-.TP
+Nom du nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur. Si ce champ est vide, le système sélectionnera l'interpréteur de commandes initial par défaut.
+.TP 3n
 \fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
-La valeur numérique de l'identifiant de l'utilisateur. Cette valeur doit être unique, à moins que l'option
+Valeur numérique de l'identifiant de l'utilisateur. Cette valeur doit être unique, à moins que l'option
 \fB\-o\fR
-ne soit utilisée. La valeur ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système. Tous les fichiers possédés par l'utilisateur et qui sont situés dans le répertoire personnel de l'utilisateur verront leur identifiant utilisateur automatiquement modifié. Vous devrez rechercher et modifier vous\-même les fichiers situés à l'extérieur du répertoire personnel de l'utilisateur.
-.TP
+ne soit utilisée. La valeur ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système. Tous les fichiers possédés par l'utilisateur et qui sont situés dans son répertoire personnel verront leur identifiant d'utilisateur automatiquement modifié. Vous devrez modifier vous\-même les fichiers situés à l'extérieur du répertoire personnel de l'utilisateur.
+.TP 3n
 \fB\-U\fR, \fB\-\-unlock\fR
-Déverrouille le mot de passe d'un utilisateur. Cela supprime le \(Fo\ !\ \(Fc situé devant le mot de passe chiffré. Vous ne pouvez pas utiliser cette option avec
+Déverrouiller le mot de passe d'un utilisateur. Cela supprime le \(Fo\ !\ \(Fc situé devant le mot de passe chiffré. Vous ne pouvez pas utiliser cette option avec
 \fB\-p\fR
 ou
 \fB\-L\fR.
 .SH "AVERTISSEMENTS"
 .PP
 \fBUsermod\fR
-ne vous permet pas de modifier le nom d'un utilisateur qui est actuellement connecté. Vous devez être sûr que l'utilisateur nommé n'est pas en train d'exécuter un quelconque programme quand cette commande est exécutée si l'UID numérique de l'utilisateur est modifié. Vous devez modifier vous\-même le nom du propriétaire de tous les fichiers crontab et des tâches at. Vous devez effectuer les modifications impliquant NIS sur le serveur NIS.
+ne vous permet pas de modifier le nom d'un utilisateur qui est actuellement connecté. Vous devez vous assurer que l'utilisateur nommé n'est pas en train d'exécuter un quelconque programme lorsque cette commande est exécutée si l'UID numérique de l'utilisateur est modifié. Vous devez modifier vous\-même le nom du propriétaire de tous les fichiers
+\fBcrontab\fR
+et des tâches
+\fBat\fR. Vous devez effectuer toutes les modifications impliquant NIS sur le serveur NIS.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
-\fI/etc/login.defs\fR
-configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shadow\fR
-informations sécurisées sur les comptes utilisateurs
+Informations sécurisées sur les comptes utilisateurs.
 .SH "VOIR AUSSI"
 .PP
 \fBchfn\fR(1),

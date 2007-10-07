@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-03-06 21:13+0100\n"
 "Last-Translator: Danilo Piazzalunga <danilopiazza@gmail.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -200,7 +200,7 @@ msgstr "Password di %s: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -216,7 +216,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Uso: chage [OPZIONI] UTENTE\n"
+"Uso: chage [OPZIONI] [LOGIN]\n"
 "\n"
 "Opzioni:\n"
 "  -d, --lastday ULTIMO_CAMBIO\timposta la data dell'ULTIMO_CAMBIO della\n"
@@ -233,6 +233,7 @@ msgstr ""
 "\t\t\t\tcambi di password\n"
 "  -w, --warndays PREAVVISO\timposta il numero di giorni di PREAVVISO\n"
 "\t\t\t\tprima della scadenza della password\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -484,6 +485,7 @@ msgstr ""
 "  -h, --help\t\tmostra questo messaggio di aiuto ed esce\n"
 "  -m, --md5\t\tusa la cifratura MD5 anziché DES quando le\n"
 "\t\t\tpassword fornite non sono cifrate\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -561,8 +563,14 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: riga %d: utente «%s» sconosciuto\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Uso: %s [-s SHELL] [NAME]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
 
 msgid "Login Shell"
 msgstr "Shell di login"
@@ -624,6 +632,7 @@ msgstr ""
 "\t\t\tstate usate con le opzioni -r, -m o -l, imposta\n"
 "\t\t\tconteggi e limiti solo per l'utente specificato\n"
 "\t\t\tda LOGIN\n"
+"\n"
 
 # NdT: Vedere faillog(5) per il significato dei campi. Il campo "On"
 # è il device tty su cui è avvenuto l'ultimo accesso fallito.
@@ -742,9 +751,9 @@ msgstr "%s: impossibile riscrivere il file shadow\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: impossibile togliere il lock dal file\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -767,6 +776,7 @@ msgstr ""
 "\t\t\t\tpredefinito in /etc/login.defs\n"
 "  -o, --non-unique\t\tpermette di creare un gruppo con un GID\n"
 "\t\t\t\tduplicato (non univoco)\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -812,9 +822,9 @@ msgstr "%s: impossibile fare il lock del file dei gruppi shadow\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: impossibile aprire il file dei gruppi shadow\n"
 
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: gruppo «%s» non valido\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: argomento numerico «%s» non valido\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -853,8 +863,68 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s è il NIS master\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Uso: groupmod [-g GID [-o]] [-n NOME] GRUPPO\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: autenticazione PAM non riuscita\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: impossibile fare il lock del file dei gruppi\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: impossibile aprire il file dei gruppi\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: impossibile aprire il file dei gruppi\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Uso: groupadd [OPZIONI] GRUPPO\n"
+"\n"
+"Opzioni:\n"
+"  -f, --force\t\t\ttermina con successo anche se il gruppo\n"
+"\t\t\t\tspecificato esiste già\n"
+"  -g, --gid GID\t\t\tusa GID per il nuovo gruppo\n"
+"  -h, --help\t\t\tmostra questo messaggio di aiuto ed esce\n"
+"  -K, --key CHIAVE=VALORE\tspecifica un valore diverso da quello\n"
+"\t\t\t\tpredefinito in /etc/login.defs\n"
+"  -o, --non-unique\t\tpermette di creare un gruppo con un GID\n"
+"\t\t\t\tduplicato (non univoco)\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -1021,6 +1091,7 @@ msgstr ""
 "\t\t\tdi un numero di GIORNI\n"
 "  -u, --user LOGIN\tmostra il record di ultimo accesso per l'utente\n"
 "\t\t\tspecificato da LOGIN\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1219,9 +1290,9 @@ msgstr "%s: riga %d: impossibile aggiornare la voce\n"
 msgid "%s: error updating files\n"
 msgstr "%s: errore nell'aggiornare i file\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1259,8 +1330,8 @@ msgstr ""
 "  -n, --mindays MINIMO\t\timposta a il numero MINIMO di giorni tra i\n"
 "\t\t\t\tcambi di password\n"
 "  -q, --quiet\t\t\topera in modalità silenziosa\n"
-"  -r, --repository REPOSITORY\tcambia la password nel REPOSITORY "
-"specificato\n"
+"  -r, --repository REPOSITORY\tcambia la password nel REPOSITORY\n"
+"\t\t\t\tspecificato\n"
 "  -S, --status\t\t\tmostra lo stato della password dell'account\n"
 "\t\t\t\tspecificato\n"
 "  -u, --unlock\t\t\tsblocca l'account specificato\n"
@@ -1268,6 +1339,7 @@ msgstr ""
 "\t\t\t\tprima della scadenza della password\n"
 "  -x, --maxdays MASSIMO\t\timposta il numero MASSIMO di giorni tra i\n"
 "\t\t\t\tcambi di password\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Vecchia password: "
@@ -1436,9 +1508,9 @@ msgstr "Spiacente."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1461,6 +1533,7 @@ msgstr ""
 "\t\t\t\tla stessa shell\n"
 "  -s, --shell SHELL\t\tusa la SHELL specificata anziché quella\n"
 "\t\t\t\tpredefinita in passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1512,10 +1585,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Avvio modalità manutenzione del sistema\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: argomento numerico «%s» non valido\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1601,6 +1670,7 @@ msgstr ""
 "  -p, --password PASSWORD\tusa la PASSWORD cifrata per il nuovo account\n"
 "  -s, --shell SHELL\t\tla shell di login per il nuovo account\n"
 "  -u, --uid UID\t\t\timpone l'uso di UID per il nuovo account\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1805,7 +1875,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1847,6 +1918,7 @@ msgstr ""
 "  -s, --shell SHELL\t\tla nuova shell di login dell'utente\n"
 "  -u, --uid UID\t\t\timposta il nuovo UID dell'utente\n"
 "  -U, --unlock\t\t\tsblocca l'account dell'utente\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1936,6 +2008,7 @@ msgstr ""
 "  -p, --passwd\t\t\tmodifica il database delle password\n"
 "  -q, --quiet\t\t\topera in modalità silenziosa\n"
 "  -s, --shadow\t\t\tmodifica il database shadow o gshadow\n"
+"\n"
 
 #, c-format
 msgid ""
@@ -1955,12 +2028,3 @@ msgstr "Impossibile effettuare il backup"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
 "%s: impossibile ripristinare %s: %s (le modifiche effettuate sono in %s)\n"
-
-#~ msgid ""
-#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-#~ msgstr ""
-#~ "Il gruppo «mail» non esiste; lo spool di posta verrà creato con modo "
-#~ "0600.\n"
-
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "Impossibile creare lo spool di posta dell'utente %s.\n"

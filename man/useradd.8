@@ -1,11 +1,11 @@
 .\"     Title: useradd
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 06/24/2006
+.\"      Date: 07/30/2006
 .\"    Manual: System Management Commands
 .\"    Source: System Management Commands
 .\"
-.TH "USERADD" "8" "06/24/2006" "System Management Commands" "System Management Commands"
+.TH "USERADD" "8" "07/30/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -133,17 +133,17 @@ option,
 \fBuseradd\fR
 will either display the current default values, or update the default values from the command line. The valid options are
 .TP 3n
-\fB\-b\fR \fIHOME_DIR\fR
+\fB\-b\fR, \fB\-\-base\-dir\fR \fIBASE_DIR\fR
 The initial path prefix for a new user's home directory. The user's name will be affixed to the end of
 \fIHOME_DIR\fR
 to create the new directory name if the
 \fB\-d\fR
 option is not used when creating a new account.
 .TP 3n
-\fB\-e\fR \fIEXPIRE_DATE\fR
+\fB\-e\fR, \fB\-\-expiredate\fR \fIEXPIRE_DATE\fR
 The date on which the user account is disabled.
 .TP 3n
-\fB\-f\fR \fIINACTIVE\fR
+\fB\-f\fR, \fB\-\-inactive\fR \fIINACTIVE\fR
 The number of days after a password has expired before the account will be disabled.
 .TP 3n
 \fB\-g\fR, \fB\-\-gid\fR \fIGROUP\fR
@@ -236,5 +236,6 @@ can't create mail spool
 \fBgroupdel\fR(8),
 \fBgroupmod\fR(8),
 \fBlogin.defs\fR(5),
+\fBnewusers\fR(8),
 \fBuserdel\fR(8),
 \fBusermod\fR(8).

@@ -1,19 +1,22 @@
+# translation of shadow.po to Türkçe
 # Turkish translation of shadow.
 # This file is distributed under the same license as the shadow package.
-# Mehmet Türker <mturker@innova.com.tr>, 2004
 #
+# Mehmet Türker <mturker@innova.com.tr>, 2004.
+# Murat Şenel <muratasenel@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
-"PO-Revision-Date: 2004-06-13 10:27+0300\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
+"PO-Revision-Date: 2006-07-20 15:58+0200\n"
 "Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
-"Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
+"Language-Team: Türkçe <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.1\n"
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -74,7 +77,7 @@ msgstr "Ortam taşması\n"
 msgid "You may not change $%s\n"
 msgstr "$%s değiştirilemez\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
@@ -97,27 +100,26 @@ msgstr "E-Posta yok."
 msgid "You have mail."
 msgstr "E-Postanız var."
 
-#, fuzzy
 msgid "no change"
-msgstr "%s: değişiklik yok\n"
+msgstr "değişiklik yok"
 
 msgid "a palindrome"
-msgstr ""
+msgstr "bu bir palindrome (tersinden de aynı şekilde okunabilen kelime)"
 
 msgid "case changes only"
-msgstr ""
+msgstr "sadece durum değişiklikleri"
 
 msgid "too similar"
-msgstr ""
+msgstr "çok benzer"
 
 msgid "too simple"
-msgstr ""
+msgstr "çok basit"
 
 msgid "rotated"
-msgstr ""
+msgstr "döndürülmüş"
 
 msgid "too short"
-msgstr ""
+msgstr "çok kısa"
 
 #, c-format
 msgid "Bad password: %s.  "
@@ -132,13 +134,13 @@ msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: şifre başarıyla güncellendi\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "`%s' için yanlış parola\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "\"%s\" dizinine geçilemiyor\n"
 
@@ -149,20 +151,21 @@ msgstr "Dizin yok, HOME=/ ile giriş yapılıyor"
 msgid "Cannot execute %s"
 msgstr "%s çalıştırılamıyor"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root directory '%s'\n"
-msgstr "Geçersiz kök dizin \"%s\"\n"
+msgstr "Geçersiz kök dizin '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't change root directory to '%s'\n"
-msgstr "Kök dizin \"%s\" olarak değiştirilemiyor\n"
+msgstr "Kök dizin '%s' olarak değiştirilemiyor\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
+"Bu bir utmp girişi değil.  En düşük \"sh\" düzeyinde \"login\" i "
+"çalıştırmalısınız. "
 
-#, fuzzy
 msgid "Unable to determine your tty name."
-msgstr "%s: Kullanıcı isminiz belirlenemedi.\n"
+msgstr "Kullanıcı isminiz belirlenemedi."
 
 #, c-format
 msgid "malloc(%d) failed\n"
@@ -177,7 +180,7 @@ msgstr "%s kullanıcı parolası: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -193,6 +196,24 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
+"Kullanım: chage [seçenekler] kullanıcı\n"
+"\n"
+"Seçenekler:\n"
+"  -d, --lastday SON_GÜN(LAST_DAY)\tson şifre değiştirme gününü SON_GÜN\n"
+"\t\t\t\tolarak belirle\n"
+"  -E, --expiredate GEÇERLİLİK_TARİHİ(EXPIRE_DATE)\thesap geçerlilik\n"
+"\t\t\t\ttarihini GEÇERLİLİK_TARİHİ olarak belirle\n"
+"  -h, --help\t\t\tbu yardım mesajını görüntüle ve çık\n"
+"  -I, --inactive INACTIVE\tkullanım süresi dolduktan sonra şifreyi\n"
+"\t\t\t\tINACTIVE olarak belirle\n"
+"  -l, --list\t\t\thesap aging bilgisini göster\n"
+"  -m, --mindays ASGARİ_GÜN(MIN_DAYS)\tşifre değişikliği için asgari gün\n"
+"\t\t\t\tsayısını ASGARİ_GÜN olarak belirle\n"
+"  -M, --maxdays AZAMİ_GÜN(MAX_DAYS)\tşifre değişikliği için azami gün\n"
+"\t\t\t\tsayısını AZAMİ_GÜN olarak belirle\n"
+"  -W, --warndays UYARI_GÜN_SAYISI (WARN_DAYS)\tzorunlu şifre değişikliği\n"
+"\t\t\t\tuyarısından önceki gün sayısını UYARI_GÜN_SAYISI olarak belirle\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -216,49 +237,49 @@ msgstr "Parola Pasif"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Hesap Bitimi Tarihi (YYYY-AA-GG)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Son Parola Değişimi (YYYY-AA-GG)"
+msgstr "Son Parola Değişimi\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
 msgstr "Hiçbir zaman\n"
 
 #, c-format
 msgid "password must be changed\n"
-msgstr "Parola değişti\n"
+msgstr "Parola değiştirilmeli\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
-msgstr "Parola Kullanım Süresi Dolumu:\t"
+msgstr "Parola Kullanım Süresi Dolumu\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
-msgstr "Parola Pasif:\t"
+msgstr "Parola Pasif\t\t\t\t\t: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
-msgstr "Hesap Bitimi:\t"
+msgstr "Hesap Bitimi\t\t\t\t\t\t: "
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Şifre değişiklikleri arasındaki en az gün sayısı\t\t: %ld\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Maksimum giriş denemesi sayısı aşıldı (%d)\n"
+msgstr "Maksimum giriş denemesi sayısı aşıldı \t\t: %ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "Şifre süresinin dolumundan önceki uyarı gün sayısı\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
 msgstr "%s: diğer bayraklarla beraber \"l\" yi kullanmayınız\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: müsaade edilmedi\n"
+msgstr "%s: İzin verilmedi\n"
 
 #, c-format
 msgid "%s: PAM authentication failed\n"
@@ -272,9 +293,9 @@ msgstr "%s: parola dosyası açılamadı\n"
 msgid "%s: unknown user %s\n"
 msgstr "%s: bilinmeyen kullanıcı %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: gölge parola dosyası açılamadı\n"
+msgstr "%s: shadow parola dosyası açılamadı\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -286,7 +307,7 @@ msgstr "%s: gölge parola dosyası açılamadı\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgstr "%s: ayrıcalıklar iptal edilemedi (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -334,23 +355,23 @@ msgstr "\tTam İsim: %s\n"
 msgid "Room Number"
 msgstr "Oda Numarası"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "Oda Numarası"
+msgstr "\tOda Numarası: %s\n"
 
 msgid "Work Phone"
 msgstr "İş Telefonu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "İş Telefonu"
+msgstr "\tİş Telefonu: %s\n"
 
 msgid "Home Phone"
 msgstr "Ev Telefonu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "Ev Telefonu"
+msgstr "\tEv Telefonu: %s\n"
 
 msgid "Other"
 msgstr "Diğer"
@@ -359,11 +380,11 @@ msgstr "Diğer"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kullanıcı isminiz belirlenemedi.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s: kullanıcı `%s' NIS istemcisinde değiştirilemedi.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s: `%s' bu istemci için NIS efendisidir.\n"
 
@@ -371,25 +392,25 @@ msgstr "%s: `%s' bu istemci için NIS efendisidir.\n"
 msgid "Changing the user information for %s\n"
 msgstr "%s için kullanıcı bilgileri değiştiriliyor\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid name: '%s'\n"
-msgstr "%s: geçersiz isim: \"%s\"\n"
+msgstr "%s: geçersiz isim: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid room number: '%s'\n"
-msgstr "%s: geçersiz oda numarası: \"%s\"\n"
+msgstr "%s: geçersiz oda numarası: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid work phone: '%s'\n"
-msgstr "%s: geçersiz iş telefonu: \"%s\"\n"
+msgstr "%s: geçersiz iş telefonu: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home phone: '%s'\n"
-msgstr "%s: geçersiz ev telefonu: \"%s\"\n"
+msgstr "%s: geçersiz ev telefonu: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: \"%s\" geçersiz karakterler içeriyor\n"
+msgstr "%s: '%s' geçersiz karakterler içeriyor\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -434,6 +455,14 @@ msgid ""
 "\t\t\tpasswords are not encrypted\n"
 "\n"
 msgstr ""
+"Kullanım: chgpasswd [seçenekler]\n"
+"\n"
+"Seçenekler:\n"
+"  -e, --encrypted\tverilen parolalar, şifrelendirilir\n"
+"  -h, --help\t\tbu yardım dosyasını gösterir ve çıkar\n"
+"  -m, --md5\t\tgirilen parolalar şifrelenmediğinde, DES yerine MD5\n"
+"\t\t\t\tşifrelemesi kullanır\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -443,7 +472,7 @@ msgstr "%s: grup dosyası kilitlenemiyor\n"
 msgid "%s: can't open group file\n"
 msgstr "%s: grup dosyası açılamıyor\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock gshadow file\n"
 msgstr "%s: gölge dosyası kilitlenemiyor\n"
 
@@ -459,7 +488,7 @@ msgstr "%s: satır %d: satır çok uzun\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: satır %d: yeni parola eksik\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: satır %d: bilinmeyen kullanıcı %s\n"
 
@@ -490,6 +519,14 @@ msgid ""
 "\t\t\tpasswords are not encrypted\n"
 "\n"
 msgstr ""
+"Kullanım: chpasswd [seçenekler]\n"
+"\n"
+"Seçenekler:\n"
+"  -e, --encrypted\tverilen parolalar, şifrelendirilir\n"
+"  -h, --help\t\tbu yardım dosyasını gösterir ve çıkar\n"
+"  -m, --md5\t\tgirilen şifreler şifrelenmediğinde, DES yerine MD5\n"
+"\t\t\tşifrelemesi kullanır\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -504,8 +541,20 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: satır %d: bilinmeyen kullanıcı %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Kullanım: %s [-s kabuk] [isim]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Kullanım: chsh [seçenekler] [KULLANICI]\n"
+"\n"
+"Seçenekler:\n"
+"  -h, --help\t\t\tbu yardım mesajını göster ve çık\n"
+"  -s, --shell KABUK(SHELL)\t\t\tkullanıcı hesabı için yeni kabuk\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Oturum Kabuğu"
@@ -550,10 +599,26 @@ msgid ""
 "\t\t\t\tfor user with LOGIN\n"
 "\n"
 msgstr ""
+"Kullanım: faillog [seçenekler]\n"
+"\n"
+"Seçenekler:\n"
+"  -a, --all\t\t\ttüm kullanıcılar için faillog kayıtlarını gösterir\n"
+" -h, --help\t\tbu yardım dosyasını göster ve çık\n"
+"  -l, --lock-time SANİYE(SEC)\t\thatalı oturum açılımından sonra, hesabı\n"
+"\t\t\t\tSANİYE kadar saniye kilitler\n"
+"  -m, --maximum AZAMİ(MAX)\t\ten fazla hatalı oturum açılış sayacını AZAMİ\n"
+"\t\t\t\tdeğerine ayarlar\n"
+"  -r, --reset\t\t\toturum açılış sayacını sıfırlar\n"
+"  -t, --time GÜN_SAYISI(DAYS)\t\tGÜN_SAYISI kadar günden daha güncel olan\n"
+"\t\t\t\tfaillog kayıtlarını gösterir\n"
+"  -u, --user KULLANICI(LOGIN)\t\tfaillog kaydını gösterir veya hata\n"
+"\t\t\t\tsayacını onarır ve sadece KULLANICI ile belirtilen kullanıcıları\n"
+"\t\t\t\tsınırlar (-r, -m veya -l seçenekleri ile kullanıldıysa)\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr ""
+msgstr "Oturum Aç       Failures Maximum Latest                   Açık\n"
 
 #, c-format
 msgid " [%lds left]"
@@ -666,7 +731,7 @@ msgstr "%s: dosya kilidi açılamıyor\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -678,6 +743,17 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
+"Kullanım: groupadd [seçenekler] GRUP\n"
+"\n"
+"Seçenekler:\n"
+"  -f, --force\t\tbelirtilen grub mevcutsa bile, çıkışta\n"
+"\t\t\t\tbaşarılı kodu verecek şekilde zorla\n"
+"  -g, --gid GID\t\tyeni grub için bu GID yi kullan\n"
+"  -h, --help\t\tbu yardım dosyasını göster ve çık\n"
+"  -K, --key ANAHTAR=DEĞER(KEY=VALUE)\t\t/etc/login.defs dosyasındaki\n"
+"\t\t\t\töntanımlı değerlerin üzerine yazar\n"
+"  -o, --non-unique\t\taynı GID ile grub oluşturulmasına izin ver\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -687,13 +763,13 @@ msgstr "%s: yeni grup kaydı eklenirken hata oluştu\n"
 msgid "%s: name %s is not unique\n"
 msgstr "%s: %s ismi tek değil\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID %u is not unique\n"
-msgstr "%s: %u gid tek değil\n"
+msgstr "%s: GID %u tek değil\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique GID\n"
-msgstr "%s: tek (benzersiz) bir gid alınamadı\n"
+msgstr "%s: tek (benzersiz) bir GID alınamadı\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -724,12 +800,12 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: gölge grup dosyası açılamıyor\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: geçersiz grup %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: geçersiz sayısal argüman '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -O seçeneği ISIM=DEĞER gerektirir\n"
+msgstr "%s: -K seçeneği ANAHTAR=DEĞER gerektirir\n"
 
 #, c-format
 msgid "%s: group %s exists\n"
@@ -764,16 +840,73 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s NIS efendisidir\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Kullanım: groupmod [-g gid [-o]] [-n isim] grup\n"
+msgid "Member already exists\n"
+msgstr "Üye zaten mevcut\n"
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "Silinecek üye bulunamadı\n"
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+"Kullanım: groupmems -a kullanıcıadı | -d kullanıcıadı | -D | -l[-g grupadı]\n"
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "Sadece root kullacısı üyeleri başka gruplara ekleyebilir\n"
+
+#, c-format
+msgid "Group access is required\n"
+msgstr "Grup hakkı gerekli\n"
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "Şu anki grubun birincil sahibi değil\n"
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr "PAM yetkilendirmesi başarısız oldu\n"
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "Grup dosyası kilitlenemiyor\n"
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "Grup dosyası açılamıyor\n"
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "Grup dosyası kapatılamıyor\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Usage: groupmod [seçenekler] GRUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tbu grubu yeni GID ile kullanıma zorla\n"
+"  -h, --help\t\tbu yardım dosyasını göster ve çık\n"
+"  -n, --new-name YENİ_GRUP\tgrubu YENİ_GRUP ismini kullanmaya zorla\n"
+"  -o, --non-unique\t\tgrubun aynı GID yi kullanmasına izin ver\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s /etc/group dosyasında bulunamadı\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u benzersiz bir gid değil\n"
+msgstr "%s: %u benzersiz bir GID değil\n"
 
 #, c-format
 msgid "%s: %s is not a unique name\n"
@@ -787,9 +920,9 @@ msgstr "Kullanım: %s [-r] [-s] [grup [gshadow]]\n"
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Kullanım: %s [-r] [-s] [grup]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "No\n"
-msgstr "Hayır"
+msgstr "Hayır\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
@@ -807,7 +940,7 @@ msgstr "%s: %s dosyası açılamıyor\n"
 msgid "invalid group file entry\n"
 msgstr "geçersiz grup dosyası kaydı\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete line '%s'? "
 msgstr "`%s' satırı silinsin mi? "
 
@@ -815,25 +948,25 @@ msgstr "`%s' satırı silinsin mi? "
 msgid "duplicate group entry\n"
 msgstr "mükerrer grup kaydı\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid group name '%s'\n"
-msgstr "geçersiz grup adı `%s'\n"
+msgstr "geçersiz grup adı '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grup %s: %s kullanıcısı yok\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete member '%s'? "
-msgstr "`%s' üyesi silinsin mi? "
+msgstr "'%s' üyesi silinsin mi? "
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "grup dosyası kaydı eşleşmedi\n"
+msgstr "%s girişi içinde grup dosyası kaydı eşleşmedi\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add group '%s' in %s ?"
-msgstr "gölge grubu %s: kullanıcı %s mevcut değil\n"
+msgstr "Grup %s, %s'in içine eklensin mi?"
 
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
@@ -855,9 +988,9 @@ msgstr "mükerrer gölge grup kaydı\n"
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "gölge grubu %s: %s yönetici kullanıcı değil\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete administrative member '%s'? "
-msgstr "yönetici üye `%s' silinsin mi? "
+msgstr "yönetici üye '%s' silinsin mi? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -922,6 +1055,17 @@ msgid ""
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 "\n"
 msgstr ""
+"Kullanım: lastlog [seçenekler]\n"
+"\n"
+"Seçenekler:\n"
+"  -b, --before GÜN_SAYISI(DAYS)\tGÜN_SAYISI kadar günden daha eski olan\n"
+"\t\t\tlastlog kayıtlarını gösterir\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -t, --time GÜN_SAYISI(DAYS)\tGÜN_SAYISI kadar günden daha yeni olan\n"
+"\t\t\tlastlog kayıtlarını gösterir\n"
+"  -u, --user KULLANICI\tKULLANICI ile belirtilen kullanıcının lastlog\n"
+"\t\t\tkayıtlarını gösterir\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -936,7 +1080,7 @@ msgstr "**Hiç giriş yapmadı**"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
-msgstr ""
+msgstr "lastlog: bilinmeyen argüman: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -978,37 +1122,33 @@ msgstr ""
 "\n"
 "Giriş %d saniye sonra zaman aşımına uğradı.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid " on '%.100s' from '%.200s'"
-msgstr " `%.200s'den `%.100s' üzerinde"
+msgstr " '%.200s'den '%.100s' üzerinde"
 
-#, fuzzy, c-format
+#, c-format
 msgid " on '%.100s'"
-msgstr " `%.100s' üzerinde"
+msgstr " '%.100s' üzerinde"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr ""
+msgstr "login: PAM başarısızlığa uğradı, çıkıyor: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s login: "
-msgstr ""
-"\n"
-"%s giriş: "
+msgstr "%s giriş: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "login: "
-msgstr ""
-"\n"
-"%s giriş: "
+msgstr "giriş: "
 
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr "Maksimum giriş denemesi sayısı aşıldı (%d)\n"
 
 #, c-format
 msgid "login: abort requested by PAM\n"
-msgstr ""
+msgstr "Giriş PAM tarafından iptal edildi\n"
 
 #, c-format
 msgid ""
@@ -1023,7 +1163,7 @@ msgstr "Giriş geçersiz"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr ""
+msgstr "%s: çatallama hatası: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr ""
@@ -1045,6 +1185,8 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
+"oturum açma süresi aşıldı\n"
+"\n"
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1054,9 +1196,9 @@ msgstr "Kullanım: newgrp [-] [grup]\n"
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Kullanım: sg grup [[-c] komut]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unknown UID: %u\n"
-msgstr "bilinmeyen GID: %lu\n"
+msgstr "bilinmeyen UID: %u\n"
 
 #, c-format
 msgid "unknown GID: %lu\n"
@@ -1123,7 +1265,7 @@ msgstr "%s: dosyaların güncellenmesinde hata oluştu\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1145,6 +1287,29 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
+"Kullanım: passwd [seçenekler] [KULLANICI]\n"
+"\n"
+"Seçenekler:\n"
+"  -a, --all\t\t\ttüm hesaplardaki şifre durumunu bildirir\n"
+"  -d, --delete\t\t\tismi belirtilen hesabın şifresini siler\n"
+"  -e, --expire\t\t\tismi belirtilen hesaba ait şifrenin süresini bitirir\n"
+"  -h, --help\t\t\tbu yardım dosyasını göster ve çık\n"
+"  -k, --keep-tokens\t\tsadece süresi dolduğunda şifreleri değiştirir\n"
+"  -i, --inactive INACTIVE\tşifre süresi dolduktan sonra, şifreyi INACTIVE\n"
+"\t\t\t\t olarak ayarlar\n"
+"  -l, --lock\t\t\tismi belirtilen hesabı kilitler\n"
+"  -n, --mindays ASGARİ_GÜN_SAYISI(MIN_DAYS)\tşifre değiştirilmeden önceki\n"
+"\t\t\t\ten az gün sayısını ASGARİ_GÜN_SAYISI olarak ayarlar\n"
+"  -q, --quiet\t\t\tsessiz kip\n"
+"  -r, --repository DEPO(REPOSITORY)\tDEPO deposundaki şifreyi değiştirir\n"
+"  -S, --status\t\t\tismi belirtilen hesaptaki şifre durumunu bildirir\n"
+"  -u, --unlock\t\t\tismi belirtilen hesabın kilidini açar\n"
+"  -w, --warndays UYARI_GÜN_SAYISI(WARN_DAYS)\tşifre dolum uyarı gününü\n"
+"\t\t\t\tUYARI_GÜN_SAYISI\n"
+"\t\t\t\t olarak ayarlar\n"
+"  -x, --maxdays AZAMİ_GÜN_SAYISI(MAX_DAYS)\tşifre değiştirilmeden önceki\n"
+"\t\t\t\ten fazla gün sayısını AZAMİ_GÜN_SAYISI olarak ayarlar\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Eski parola: "
@@ -1192,9 +1357,9 @@ msgstr "%s: yetersiz bellek\n"
 msgid "%s: repository %s not supported\n"
 msgstr "%s: depo %s desteklenmiyor\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s için kabuğu değiştiremezsiniz.\n"
+msgstr "%s: %s için şifre bilgisini göremez ve değiştiremezsiniz..\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1206,11 +1371,11 @@ msgstr "%s için parola değişmedi\n"
 
 #, c-format
 msgid "Password changed.\n"
-msgstr "Parola değişti\n"
+msgstr "Parola değişti \n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password set to expire.\n"
-msgstr "Parolanızın kullanım süresi doldu."
+msgstr "Parolanızın kullanım süresi doldu.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1240,13 +1405,13 @@ msgstr "kullanıcı %s: %s dizini mevcut değil\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "kullanıcı %s: uygulama %s mevcut değil\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "eşleşen parola dosyası kaydı yok\n"
+msgstr "%s içinde eşleşen parola dosyası kaydı yok\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add user '%s' in %s? "
-msgstr "gölge grubu %s: kullanıcı %s mevcut değil\n"
+msgstr "'%s' adlı kullanıyı %s'e ekle?"
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
@@ -1307,13 +1472,13 @@ msgstr "Lütfen yetkilendirme için KENDİ parolanızı girin.\n"
 msgid "Sorry."
 msgstr "Üzgünüm."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s\n"
-msgstr "passwd: %s\n"
+msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1325,6 +1490,18 @@ msgid ""
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 "\n"
 msgstr ""
+"Kullanım: su [seçenekler] [KULLANICI]\n"
+"\n"
+"Seçenekler:\n"
+"  -c  --command KOMUT\t\tKOMUT u istenen kabuğa geçir\n"
+"  -h, --help\t\t\tbu yardım dosyasını göster ve çık\n"
+"  -, -l, --login\t\tkabuğu oturum açma kabuğu haline getirir\n"
+"  -m, -p,\n"
+"  --preserve-environment\tçevre değişkenlerini sıfırlama ve \n"
+"\t\t\t\taynı kabuğu sakla\n"
+"  -s, --shell KABUK(SHELL)\t\tpasswd dosyasındaki öntanımlı kabuk yerine\n"
+"\t\t\tKABUK kabuğunu kullan\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1377,10 +1554,6 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Sistem Bakımı Kipine Giriliyor\n"
 
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: geçersiz sayısal argüman `%s'\n"
-
 #, c-format
 msgid "%s: unknown GID %s\n"
 msgstr "%s: bilinmeyen GID %s\n"
@@ -1401,9 +1574,9 @@ msgstr "%s: yeni varsayılanlar dosyası açılamadı\n"
 msgid "%s: rename: %s"
 msgstr "%s: yeniden adlandırma: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: grup `%s' bir NIS grubu.\n"
+msgstr "%s: grup '%s' bir NIS grubu.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1439,30 +1612,58 @@ msgid ""
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 "\n"
 msgstr ""
+"Kullanım: useradd [seçenekler] KULLANICI\n"
+"\n"
+"Seçenekler:\n"
+"  -b, --base-dir EV_DİZİNİ(BASE_DIR)\tyeni kullanıcı hesabının ev dizini "
+"için\n"
+"\t\t\t\tana dizin\n"
+"  -c, --comment YORUM(COMMENT)\t\tyeni kullanıcı için GECOS alanını ayarlar\n"
+"  -d, --home-dir EV_DİZİNİ(HOME_DIR)\tyeni kullanıcı hesabı için ev dizini\n"
+"  -D, --defaults\t\tön tanımlı kullanıcı ekleme yapılandırmasını\n"
+"\t\t\t\tgörüntüler ve ya kaydeder\n"
+"  -e, --expiredate EXPIRE_DATE\thesap süresi dolumunu EXPIRE_DATE olarak\n"
+"\t\t\t\tayarlar\n"
+"  -f, --inactive INACTIVE\tşifre süresi dolduktan sonra şifreyi\n"
+"\t\t\t\tINACTIVE olarak ayarlar\n"
+"  -g, --gid GRUP\t\tyeni kullanıcı hesabı için GRUP kullanımını zorlar\n"
+"  -G, --groups GRUPLAR\t\tyeni kullanıcı hesabı için\n"
+"\t\t\t\tilave grubları listeler\n"
+"  -h, --help\t\t\tbu yardım dosyasını göster ve çık\n"
+"  -k, --skel TEMEL_DİZİN(SKEL_DIR)\t\tfarklı bir temel dizin belirtir\n"
+"  -K, --key KEY=VALUE\t\t/etc/login.defs dosyasındaki öntanımlı değerlerin\n"
+"\t\t\t\t üzerine yazar\n"
+"  -m, --create-home\t\tyeni kullanıcı hesabı için ev dizini yaratır\n"
+"  -o, --non-unique\t\taynı UID ile kullanıcı yaratılmasına izin verir\n"
+"  -p, --password PAROLA\tyeni kullanıcı hesabı için şifrelenmiş\n"
+"\t\t\t\tparola kullanır\n"
+"  -s, --shell KABUK(SHELL)\t\tyeni kullanıcı hesabı için oturum açma kabuğu\n"
+"  -u, --uid UID\t\t\tyeni kullanıcı hesabı için UID kullanıını zorla\n"
+"\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: %u gid tek değil\n"
+msgstr "%s: GID %u tek değil\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique UID\n"
-msgstr "%s: tek (benzersiz) bir gid alınamadı\n"
+msgstr "%s: tek (benzersiz) bir UID alınamadı\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid base directory '%s'\n"
-msgstr "%s: geçersiz ana dizin `%s'\n"
+msgstr "%s: geçersiz ana dizin '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s: geçersiz açıklama `%s'\n"
+msgstr "%s: geçersiz açıklama '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr "%s: geçersiz ev dizini `%s'\n"
+msgstr "%s: geçersiz ev dizini '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid date '%s'\n"
-msgstr "%s: geçersiz tarih `%s'\n"
+msgstr "%s: geçersiz tarih '%s'\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1472,13 +1673,13 @@ msgstr "%s: -e için gölge parolalar gerekli\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s: -f için gölge parolalar gerekli\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s: geçersiz alan `%s'\n"
+msgstr "%s: geçersiz alan '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s: geçersiz kabuk `%s'\n"
+msgstr "%s: geçersiz kabuk '%s'\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1537,15 +1738,17 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s: %s dizini yaratılamıyor\n"
 
 msgid "Creating mailbox file"
-msgstr ""
+msgstr "Mesaj kutusu dosyası yaratılıyor"
 
 #, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
+"'mail' grubu bulunamadı. Kullanıcının mail kutusu dosyası 0600 dosya "
+"yetkileriyle yaratılıyor.\n"
 
 msgid "Setting mailbox file permissions"
-msgstr ""
+msgstr "Mail kutusu dosyası için yetkiler ayarlanıyor"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1563,6 +1766,8 @@ msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
+"%s: uyarı: Ev dizini zaten mevcut.\n"
+"Temel dizinden hiçbir dosya kopyalanmıyor.\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
@@ -1579,14 +1784,22 @@ msgid ""
 "  -r, --remove\t\t\tremove home directory and mail spool\n"
 "\n"
 msgstr ""
+"Kullanım: userdel [seçenekler] KULLANICI\n"
+"\n"
+"Seçenekler:\n"
+"  -f, --force\t\t\tdosyalar kullanıcıya ait değilse bile sil\n"
+"  -h, --help\t\t\tbu yardım mesajını göster ve çık\n"
+"  -r, --remove\t\t\tev dizinini ve mesaj arşivini sil\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
 msgstr "%s: grup kaydı güncellenirken hata oluştu\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: kullanıcının birincil grubu silinemez\n"
+msgstr ""
+"%s: Başka bir kullanıcı için birincil grub olan %s grubu kaldırılamıyor.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1637,7 +1850,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1657,6 +1871,32 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
+"Kullanım: usermod [seçenekler] LOGIN\n"
+"\n"
+"Seçenekler:\n"
+"  -a, --append GROUP\t\tkullanıcıyı ilave grupların sonuna ekle\n"
+"\t\t\t\t(sadece -G ile kullanılır)\n"
+"  -c, --comment YORUM (COMMENT)\t\tGECOS alanının yeni değeri\n"
+"  -d, --home EV_DIZINI(HOME_DIR)\t\tyeni kullanıcı için yeni oturum açma\n"
+"\t\t\t\tdizini\n"
+"  -e, --expiredate GEÇERLİLİK_TARİHİ(EXPIRE_DATE)\thesap dolum süresini\n"
+"\t\t\t\tGEÇERLİLİK_TARİHİ(EXPIRE_DATE) olarak ayarlar\n"
+"  -f, --inactive INACTIVE\tşifre süresi dolduktan sonra şifreyi\n"
+"\t\t\t\tINACTIVE olarak ayarlar\n"
+"  -g, --gid GROUP\t\tbaşlangıç oturum açılış grubu olarak GROUP kullanımını\n"
+"\t\t\t\tzorla\n"
+"  -G, --groups GROUPS\t\tilave grupları listeler\n"
+"  -h, --help\t\t\tbu yardım dosyasını gösterir ve çıkar\n"
+"  -l, --login LOGIN\t\toturum açma ismi için yeni değer\n"
+"  -L, --lock\t\t\tkullanıcı hesabını kilitler\n"
+"  -m, --move-home\t\tEv dizininin içeriğini başka bir\n"
+"\t\t\t\tdizine kopyalar(sadece -d ile kullanılır)\n"
+"  -o, --non-unique\t\taynı UID kullanımına izin verir\n"
+"  -p, --password PASSWORD\tyeni şifreler için şifrelenmiş şifre kullanır\n"
+"  -s, --shell SHELL\t\tkullanıcı hesabı için oturum açma kabuğu\n"
+"  -u, --uid UID\t\t\tkullanıcı hesabı için yeni UID\n"
+"  -U, --unlock\t\t\tkullanıcı hesabı kilidini aç\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1676,7 +1916,7 @@ msgstr "%s: -e ve -f için gölge parolalar gerekli\n"
 
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr ""
+msgstr "%s: -a bayrağına sadece -g bayrağı ile kullanıldığında izin verilir\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1708,7 +1948,7 @@ msgstr "%s: chown %s gerçekleştirilemiyor\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr ""
+msgstr "%s: uyarı: eski Ev dizinindeki tüm dosyalar kaldırılamadı %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -1736,6 +1976,15 @@ msgid ""
 "  -s, --shadow\t\t\tedit shadow or gshadow database\n"
 "\n"
 msgstr ""
+"Kullanım: vipw [seçenekler]\n"
+"\n"
+"Seçenekler:\n"
+"  -g, --group\t\t\tgrub veri tabanını düzenler\n"
+"  -h, --help\t\t\tbu yardım dosyasını gösterir ve çıkar\n"
+"  -p, --passwd\t\t\tşifre veri tabanını düzenler\n"
+"  -q, --quiet\t\t\tsessiz kip\n"
+"  -s, --shadow\t\t\tshadow veya gshadow veri tabanını düzenler\n"
+"\n"
 
 #, c-format
 msgid ""
@@ -1754,7 +2003,3 @@ msgstr "Yedek alınamadı"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s geri yüklenemiyor: %s (değişiklikleriniz %s içinde)\n"
-
-#, fuzzy
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "%s: kullanıcı %s için kayıt güncellenemiyor\n"

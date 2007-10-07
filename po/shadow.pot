@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,7 +176,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -501,7 +501,13 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
 msgstr ""
 
 msgid "Login Shell"
@@ -663,7 +669,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -721,7 +727,7 @@ msgid "%s: unable to open shadow group file\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid group %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr ""
 
 #, c-format
@@ -761,7 +767,55 @@ msgid "%s: %s is the NIS master\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr ""
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr ""
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr ""
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
 msgstr ""
 
 #, c-format
@@ -1107,7 +1161,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1293,7 +1347,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1350,10 +1404,6 @@ msgid ""
 msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
-msgstr ""
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1609,7 +1659,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"

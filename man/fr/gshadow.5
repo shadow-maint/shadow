@@ -1,36 +1,40 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GSHADOW" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\"     Title: gshadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Formats et conversions de fichiers
+.\"    Source: Formats et conversions de fichiers
+.\"
+.TH "GSHADOW" "5" "30/07/2006" "Formats et conversions de fich" "Formats et conversions de fich"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 gshadow \- informations cachées sur les groupes
 .SH "DESCRIPTION"
 .PP
 \fI/etc/gshadow\fR
 contient les informations cachées sur les groupes. Il contient des lignes avec les champs suivant séparés par des deux\-points\ :
-.TP 3
+.TP 3n
 \(bu
 nom du groupe
-.TP
+.TP 3n
 \(bu
 mot de passe chiffré
-.TP
+.TP 3n
 \(bu
 liste d'administrateurs du groupe séparés par des virgules
-.TP
+.TP 3n
 \(bu
 liste des membres du groupe séparés par des virgules
+.sp
+.RE
 .PP
 Les champs \(Fo\ nom du groupe\ \(Fc et \(Fo\ mot de passe\ \(Fc doivent être remplis. Le mot de passe chiffré comprend 13 caractères pris dans l'alphabet de 64 caractères a\-z, A\-Z, 0\-9, \\. et /. Consultez
 \fBcrypt\fR(3)
 pour plus d'informations sur le traitement de cette chaîne. Si le champ du mot de passe contient une chaîne qui ne peut pas être un résultat valable de
-\fBcrypt\fR(3)
-, par exemple si elle contient les caractères ! ou *, alors l'utilisateur ne pourra pas utiliser son mot de passe UNIX pour se connecter. Ceci peut dépendre de
+\fBcrypt\fR(3), par exemple si elle contient les caractères\ ! ou *, alors l'utilisateur ne pourra pas utiliser son mot de passe UNIX pour se connecter. Ceci peut dépendre de
 \fBpam\fR(7).
 .PP
 Ces informations sont prioritaires sur tous les autres champs présents dans
@@ -38,12 +42,12 @@ Ces informations sont prioritaires sur tous les autres champs présents dans
 .PP
 Ce fichier ne doit pas être accessible en lecture par les utilisateurs normaux afin de maintenir la sécurité des mots de passe, en particuliers pour prévenir les attaques par dictionnaires.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/gshadow\fR
-informations cachées sur les groupes
+Informations sécurisées sur les groupes.
 .SH "VOIR AUSSI"
 .PP
 \fBgroup\fR(5),

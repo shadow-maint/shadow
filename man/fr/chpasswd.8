@@ -1,13 +1,16 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHPASSWD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: chpasswd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "CHPASSWD" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 chpasswd \- Mettre à jour des mots de passe par lot
 .SH "SYNOPSIS"
 .HP 9
@@ -27,20 +30,18 @@ Cette commande est destinée aux gros systèmes pour lesquels un nombre importan
 Les options disponibles pour la commande
 \fBchpasswd\fR
 sont\ :
-.TP
+.TP 3n
 \fB\-e\fR, \fB\-\-encrypted\fR
 Indique que les mots de passe fournis sont chiffrés.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
-Affiche un message d'aide et quitte.
-.TP
+Afficher un message d'aide et quitter.
+.TP 3n
 \fB\-m\fR, \fB\-\-md5\fR
-Permet d'utiliser le chiffrement MD5, plutôt que DES, lorsque les mots de passe fournis ne sont pas chiffrés.
+Permettre d'utiliser le chiffrement MD5, plutôt que DES, lorsque les mots de passe fournis ne sont pas chiffrés.
 .SH "AVERTISSEMENTS"
 .PP
-Veuillez veiller à éviter que le fichier utilisé par la commande
-\fBchpasswd\fR
-soit accessible en lecture s'il contient des mots de passe non chiffrés.
+Pensez à fixer les permissions ou umask afin d'empêcher la lecture par les autres utilisateurs des fichiers non chiffrés.
 .SH "VOIR AUSSI"
 .PP
 \fBpasswd\fR(1),

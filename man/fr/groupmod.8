@@ -1,69 +1,85 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPMOD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: groupmod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "GROUPMOD" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
-groupmod \- Modifier un groupe
+.SH "NOM"
+groupmod \- Modifier la définition d'un groupe du système
 .SH "SYNOPSIS"
 .HP 9
-\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o]] [\-n\ \fInouveau_nom_groupe\fR] \fIgroupe\fR
+\fBgroupmod\fR [\fIoptions\fR] \fIGROUPE\fR
 .SH "DESCRIPTION"
 .PP
 La commande
 \fBgroupmod\fR
-modifie les fichiers d'administration des comptes du système pour refléter les modifications spécifiées sur la ligne de commande.
+modifie la définition du
+\fIGROUPE\fR
+spécifié en modifiant l'entrée correspondante de la base de données des groupes.
 .SH "OPTIONS"
 .PP
 Les options disponibles pour la commande
 \fBgroupmod\fR
 sont\ :
-.TP
-\fB\-g\fR \fIgid\fR
-La valeur numérique de l'identifiant du groupe ([\ NdT\ : group ID ou GID\ ]). Cette valeur doit être unique, à moins que l'option
+.TP 3n
+\fB\-g\fR, \fB\-\-gid\fR \fIGID\fR
+Indiquer la nouvelle Valeur numérique de l'identifiant du
+\fIGROUPE\fR
+(\(Fo\ group ID\ \(Fc ou GID). La valeur de
+\fIGID\fR
+doit être un entier décimal non négatif. Cette valeur doit être unique, à moins que l'option
 \fB\-o\fR
-ne soit utilisée. La valeur ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système. Vous devrez modifier vous\-même le groupe propriétaire de tous les fichiers possédés par ce groupe.
-.TP
-\fB\-n\fR \fInouveau_nom_groupe\fR
+ne soit utilisée. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système. Vous devrez modifier vous\-même le groupe propriétaire de tous les fichiers possédés par ce groupe.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Afficher un message d'aide et quitter.
+.TP 3n
+\fB\-n\fR, \fB\-\-new\-name\fR\fINOUVEAU_NOM_GROUPE\fR
 Le nom du groupe sera modifié de
-\fIgroupe\fR
+\fIGROUPE\fR
 vers
-\fInouveau_nom_groupe\fR.
+\fINOUVEAU_NOM_GROUPE\fR.
+.TP 3n
+\fB\-o\fR, \fB\-\-non\-unique\fR
+En combinaison avec l'option
+\fB\-g\fR, cette option permet de changer l'identifiant du groupe vers une valeur déjà utilisée.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/gshadow\fR
-informations cachées sur les groupes
-.SH "VALEUR DE RETOUR"
+Informations sécurisées sur les groupes.
+.SH "VALEURS DE RETOUR"
 .PP
 La commande
 \fBgroupmod\fR
 retourne les valeurs suivantes en quittant\ :
-.TP
+.TP 3n
 \fI0\fR
 succès
-.TP
+.TP 3n
 \fI2\fR
 erreur de syntaxe
-.TP
+.TP 3n
 \fI3\fR
-argument non valable pour l'option
-.TP
+paramètre non valable pour l'option
+.TP 3n
 \fI4\fR
 le groupe spécifié n'existe pas
-.TP
+.TP 3n
 \fI6\fR
 le groupe spécifié n'existe pas
-.TP
+.TP 3n
 \fI9\fR
 nom de groupe déjà utilisé
-.TP
+.TP 3n
 \fI10\fR
 impossible de mettre à jour le fichier des groupes
 .SH "VOIR AUSSI"

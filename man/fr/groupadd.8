@@ -1,102 +1,111 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPADD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: groupadd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "GROUPADD" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
+.SH "NOM"
 groupadd \- Créer un nouveau groupe
 .SH "SYNOPSIS"
 .HP 9
-\fBgroupadd\fR [\-g\ \fIgid\fR\ [\-o]] [\-f] [\-K\ \fICLÉE\fR=\fIVALEUR\fR] \fIgroupe\fR
+\fBgroupadd\fR [\-g\ \fIGID\fR\ [\-o]] [\-f] [\-K\ \fICLÉ\fR=\fIVALEUR\fR] \fIgroupe\fR
 .SH "DESCRIPTION"
 .PP
 La commande
 \fBgroupadd\fR
-crée un nouveau compte de groupe en utilisant les valeurs spécifiées sur la ligne de commande et les valeurs par défaut du système. Le nouveau groupe sera inséré dans les fichiers du système quand c'est nécessaire.
+crée un nouveau compte de groupe en utilisant les valeurs spécifiées sur la ligne de commande et les valeurs par défaut du système. Le nouveau groupe sera inséré dans les fichiers du système selon les besoins.
 .SH "OPTIONS"
 .PP
 Les options disponibles pour la commande
 \fBgroupadd\fR
 sont\ :
-.TP
+.TP 3n
 \fB\-f\fR
 Avec cette option,
 \fBgroupadd\fR
-quittera juste avec un status de succès si le groupe spécifié existe déjà. Avec l'option
-\fB\-g\fR, si le groupe spécifié existe déjà, une autre gid (non utilisé) sera choisi (c.\-à\-d. que l'option \-g est désactivée).
-.TP
+quittera juste avec un état de succès si le groupe indiqué existe déjà. Avec l'option
+\fB\-g\fR, si le groupe indiqué existe déjà, un autre gid (non utilisé) sera choisi (c.\-à\-d. que
+\fB\-g\fR
+est désactivée).
+.TP 3n
 \fB\-g\fR \fIGID\fR
-La valeur numérique de l'identifiant du groupe ([\ NdT\ : group ID ou GID\ ]. Cette valeur doit être unique, à moins que l'option
+La valeur numérique de l'identifiant du groupe (\(Fo\ group ID\ \(Fc ou GID). Cette valeur doit être unique, à moins que l'option
 \fB\-o\fR
 ne soit utilisée. La valeur ne doit pas être négative. Par défaut le plus petit identifiant plus grand que 999 et que les identifiants des groupes existants est utilisé. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
-Affiche un message d'aide et quitte.
-.TP
-\fB\-K \fR\fB\fICLÉE\fR\fR\fB=\fR\fB\fIVALEUR\fR\fR
-Surcharge les valeurs par défaut du fichier
+Afficher un message d'aide et quitter.
+.TP 3n
+\fB\-K \fR\fB\fICLÉ\fR\fR\fB=\fR\fB\fIVALEUR\fR\fR
+Surcharger les valeurs par défaut du fichier
 \fI/etc/login.defs\fR
 (GID_MIN, GID_MAX et autres). L'option
 \fB\-K\fR
-peut être spécifiée plusieurs fois.
+peut être indiquée plusieurs fois.
 .sp
 Exemple\ :
-\fB\-K\fR\fIGID_MIN\fR=\fI10\fR\fB\-K\fR\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR
+\fIGID_MIN\fR=\fI10\fR
+\fB\-K\fR
+\fIGID_MAX\fR=\fI499\fR
 .sp
 Note\ :
-\fB\-K\fR\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
+\fB\-K\fR
+\fIGID_MIN\fR=\fI10\fR,\fIGID_MAX\fR=\fI499\fR
 ne fonctionne pas pour l'instant.
-.TP
+.TP 3n
 \fB\-o\fR
 Permet de créer un groupe avec un identifiant (\(Fo\ GID\ \(Fc) déjà utilisé.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/group\fR
-informations sur les groupes
-.TP
+Informations sur les groupes.
+.TP 3n
 \fI/etc/gshadow\fR
-informations cachées sur les groupes
-.TP
+Informations sécurisées sur les groupes.
+.TP 3n
 \fI/etc/login.defs\fR
-configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+Configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc.
 .SH "AVERTISSEMENTS"
 .PP
-Les noms de groupe doivent commencer par une lettre minuscule ou un \(Fo\ underscore\ \(Fc, et seuls des lettres minuscules, des chiffres, des \(Fo\ underscore\ \(Fc, des tirets ou un dollar peuvent suivre. Soit, sous la forme d'une expression rationnelle\ : [a\-z_][a\-z0\-9_\-]*[$]
+Les noms de groupe doivent commencer par une lettre minuscule ou un tiret bas (\(Fo\ underscore\ \(Fc), et seuls des lettres minuscules, des chiffres, des \(Fo\ underscore\ \(Fc, des tirets ou un dollar peuvent suivre. Soit, sous la forme d'une expression rationnelle\ : [a\-z_][a\-z0\-9_\-]*[$]
 .PP
 Les noms de groupe sont limités à 16 caractères.
 .PP
-Si le nom de l'utilisateur existe dans une base de données externe, telle que NIS,
-\fBuseradd\fR
-refusera de créer l'utilisateur.
+Si le nom du groupe existe dans une base de données externe, telle que NIS,
+\fBgroupadd\fR
+refusera de créer le groupe.
 .PP
 Les noms de groupe sont limités à 16 caractères.
-.SH "VALEUR DE RETOUR"
+.SH "VALEURS DE RETOUR"
 .PP
 La commande
 \fBgroupadd\fR
 retourne les valeurs suivantes en quittant\ :
-.TP
+.TP 3n
 \fI0\fR
 succès
-.TP
+.TP 3n
 \fI2\fR
 erreur de syntaxe
-.TP
+.TP 3n
 \fI3\fR
-argument non valable pour l'option
-.TP
+paramètre non valable pour l'option
+.TP 3n
 \fI4\fR
-gid déjà utilisé (et
+GID déjà utilisé (et
 \fB\-o\fR
 n'est pas utilisé)
-.TP
+.TP 3n
 \fI9\fR
 nom de groupe déjà utilisé
-.TP
+.TP 3n
 \fI10\fR
 impossible de mettre à jour le fichier des groupes
 .SH "VOIR AUSSI"

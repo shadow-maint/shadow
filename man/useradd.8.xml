@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.34 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.36 2006/07/17 15:04:14 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -264,7 +264,8 @@
       <variablelist remap='IP'>
 	<varlistentry>
 	  <term>
-	    <option>-b</option> <replaceable>HOME_DIR</replaceable>
+	    <option>-b</option>, <option>--base-dir</option>
+	    <replaceable>BASE_DIR</replaceable>
 	  </term>
 	  <listitem>
 	    <para>
@@ -278,7 +279,8 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-e</option> <replaceable>EXPIRE_DATE</replaceable>
+	    <option>-e</option>, <option>--expiredate</option>
+	    <replaceable>EXPIRE_DATE</replaceable>
 	  </term>
 	  <listitem>
 	    <para>The date on which the user account is disabled.</para>
@@ -286,7 +288,8 @@
 	</varlistentry>
 	<varlistentry>
 	  <term>
-	    <option>-f</option> <replaceable>INACTIVE</replaceable>
+	    <option>-f</option>, <option>--inactive</option>
+	    <replaceable>INACTIVE</replaceable>
 	  </term>
 	  <listitem>
 	    <para>
@@ -493,6 +496,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>newusers</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum>

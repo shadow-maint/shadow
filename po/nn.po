@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -177,7 +177,7 @@ msgstr "%s sitt passord: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -504,8 +504,14 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linje %d: ukjent brukar %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Bruk: %s [-s skal] [namn]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
 
 msgid "Login Shell"
 msgstr "Innloggingskal"
@@ -666,7 +672,7 @@ msgstr "%s: klarer ikkje låsa opp fil\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -723,9 +729,9 @@ msgstr "%s: klarer ikkje låsa skuggegruppefil\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: klarer ikkje opna skuggegruppefil\n"
 
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: ugyldig gruppe %s\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ugyldig nummerisk argument «%s»\n"
 
 #, fuzzy, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -764,8 +770,56 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s er NIS-hovudet\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Bruk: groupmod [-g gid [-o]] [-n namn] gruppe\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: PAM-autentisering feila\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: klarer ikkje låsa gruppefil\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: klarer ikkje opna gruppefil\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: klarer ikkje opna gruppefila\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -1123,7 +1177,7 @@ msgstr "%s: feil ved oppdatering av filer\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1314,7 +1368,7 @@ msgstr "passwd: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1377,10 +1431,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Startar modus for systemvedlikehald\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: ugyldig nummerisk argument «%s»\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1638,7 +1688,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1755,7 +1806,3 @@ msgstr "Klarte ikkje laga reservekopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
-
-#, fuzzy
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "%s: klarer ikkje oppdatere oppføring for brukar %s\n"

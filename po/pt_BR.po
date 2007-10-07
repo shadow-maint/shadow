@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-03-12 12:33-0300\n"
 "Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -179,9 +179,9 @@ msgstr "Senha : "
 msgid "%s's Password: "
 msgstr "Senha de %s : "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -213,6 +213,7 @@ msgstr ""
 "\t\t\t\ttroca de senha para MAX_DIAS\n"
 "  -W, --warndays AVISO_DIAS\tdefine dias para aviso de expiração para\n"
 "\t\t\t\tAVISO_DIAS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -465,6 +466,7 @@ msgstr ""
 "  -h, --help\t\texibir esta mensagem de ajuda e finalizar\n"
 "  -m, --md5\t\tutilizar encriptação MD5 ao invés de DES quando as\n"
 "\t\t\tsenhas fornecidas não estiverem encriptadas\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -528,6 +530,7 @@ msgstr ""
 "  -h, --help\t\texibir esta mensagem de ajuda e finalizar\n"
 "  -m, --md5\t\tutilizar ecriptação MD5 ao invés de DES quando as\n"
 "\t\t\tsenhas fornecidas não estiverem encriptadas\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -542,8 +545,14 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s : linha %d : usuário %s desconhecido\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Uso : %s [-s shell] [nome]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
 
 msgid "Login Shell"
 msgstr "Shell de Login"
@@ -600,6 +609,7 @@ msgstr ""
 "  -u, --user LOGIN\t\texibir registros faillog ou manter somente contadores\n"
 "\t\t\t\tde falhas e limites (caso usado com as opções -r, -m ou -l)\n"
 "\t\t\t\tpara usuário com LOGIN\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -714,9 +724,9 @@ msgstr "%s : não foi possível regravar arquivo shadow\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s : não foi possível remover o lock do arquivo\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -738,6 +748,7 @@ msgstr ""
 "  -K, --key CHAVE=VALOR\t\tsobrepõe os padrões em /etc/login.defs\n"
 "  -o, --non-unique\t\tpermiti criar grupo com GID duplicado\n"
 "\t\t\t\t(não-único)\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -783,9 +794,9 @@ msgstr "%s : não foi possível obter lock em arquivo de grupo shadow\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s : não foi possível abrir arquivo de grupo shadow\n"
 
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s : grupo %s inválido\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s : argumento numérico `%s' inválido\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -824,8 +835,67 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s : %s é o mestre NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Uso : groupmod [-g gid [-o]] [-n nome] grupo\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s : autenticação PAM falhou\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s : não foi possível obter lock em arquivo de grupo\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s : não foi possível abrir arquivo de grupo\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s : não foi possível abrir arquivo de grupo\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Uso: groupadd [opções] grupo\n"
+"\n"
+"Opções:\n"
+"  -f, --force\t\tforçar sair com estado de sucesso caso grupo especificado\n"
+"\t\t\t\tjá exista\n"
+"  -g, --gid GID\t\tutilizar GID para o novo grupo\n"
+"  -h, --help\t\t\texibir esta mensagem de ajuda e finalizar\n"
+"  -K, --key CHAVE=VALOR\t\tsobrepõe os padrões em /etc/login.defs\n"
+"  -o, --non-unique\t\tpermiti criar grupo com GID duplicado\n"
+"\t\t\t\t(não-único)\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -991,6 +1061,7 @@ msgstr ""
 "  -t, --time DIAS\timprime somente registros lastlog mais recentes que DIAS\n"
 "  -u, --user LOGIN\timprime registro lastlog para usuário com LOGIN\n"
 "\t\t\t\tespecificado\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1188,9 +1259,9 @@ msgstr "%s : linha %d : não foi possível atualizar entrada\n"
 msgid "%s: error updating files\n"
 msgstr "%s : erro atualizando arquivos\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1233,6 +1304,7 @@ msgstr ""
 "\t\t\t\tDIAS_AVISO\n"
 "  -x, --maxdays MAX_DIAS\tdefine número máximo de dias antes da troca\n"
 "\t\t\t\tde senhas para MAX_DIAS\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Senha antiga : "
@@ -1401,9 +1473,9 @@ msgstr "Desculpe."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1425,6 +1497,7 @@ msgstr ""
 "  --preserver-environment\t\tnão zera variáveis de ambiente e\n"
 "\t\t\t\tmantém o mesmo shell\n"
 "  -s, --shell SHELL\t\tutiliza SHELL ao invés do padrão no passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1476,10 +1549,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Entrando em Modo de Manutenção do Sistema\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s : argumento numérico `%s' inválido\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1568,6 +1637,7 @@ msgstr ""
 "\t\t\t\tusuário\n"
 "  -s, --shell SHELL\t\to shell de login para a nova conta de usuário\n"
 "  -u, --uid UID\t\t\tforça o uso de UID para a nova conta de usuário\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1769,7 +1839,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1812,6 +1883,7 @@ msgstr ""
 "  -s, --shell SHELL\t\tnovo shell de login para a conta de usuário\n"
 "  -u, --uid UID\t\t\tnovo UID para a conta de usuário\n"
 "  -U, --unlock\t\t\tdestravar a conta de usuário\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1899,6 +1971,7 @@ msgstr ""
 "  -p, --passwd\t\t\teditar base de dados de senhas\n"
 "  -q, --quiet\t\t\tmodo quieto\n"
 "  -s, --shadow\t\t\teditar base de dados shadow ou gshadow\n"
+"\n"
 
 #, c-format
 msgid ""

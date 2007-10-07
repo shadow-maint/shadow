@@ -1,14 +1,17 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LASTLOG" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\"     Title: lastlog
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Commandes de gestion du système
+.\"    Source: Commandes de gestion du système
+.\"
+.TH "LASTLOG" "8" "30/07/2006" "Commandes de gestion du systèm" "Commandes de gestion du systèm"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
-lastlog \- Examiner le fichier lastlog
+.SH "NOM"
+lastlog \- signaler les connexions les plus récentes de tous les utilisateurs ou d'un utilisateur donné
 .SH "SYNOPSIS"
 .HP 8
 \fBlastlog\fR [\fIoptions\fR]
@@ -26,23 +29,23 @@ connexion sont affichés. Par défaut (aucune option de spécifiée), les entré
 Les options disponibles pour la commande
 \fBlastlog\fR
 sont\ :
-.TP
+.TP 3n
 \fB\-b\fR, \fB\-\-before\fR \fIJOURS\fR
-Affiche les entrées du fichier lastlog plus anciennes que
+N'affiche que les entrées du fichier lastlog plus anciennes que
 \fIJOURS\fR.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
-Affiche un message d'aide et quitte.
-.TP
+Afficher un message d'aide et quitter.
+.TP 3n
 \fB\-t\fR, \fB\-\-time\fR \fIJOURS\fR
-Affiche les entréesdu fichier lastlog plus récentes que
+Affiche les entrées du fichier lastlog plus récentes que
 \fIJOURS\fR.
-.TP
+.TP 3n
 \fB\-u\fR, \fB\-\-user\fR \fIIDENTIFIANT\fR
 N'affiche que les entrées correspondant à l'utilisateur
 \fIIDENTIFIANT\fR.
-.TP
-L'utilisation de l'option \fB\-t\fR supplante celle de \fB\-u\fR.
+.TP 3n
+L'utilisation de l'option \fB\-t\fR supplante l'option \fB\-u\fR.
 .PP
 Dans le cas où l'utilisateur ne s'est jamais connecté, le message \(Fo\ \fI**Never logged in**\fR\ \(Fc (\(Fo\ \fI**Jamais connecté**\fR\ \(Fc) est affiché à la place des champs
 \fIPort\fR
@@ -53,11 +56,11 @@ connexion.
 .PP
 Le fichier
 \fIlastlog\fR
-est une base de données qui contient les informations sur les dernières connexions de chaque utilisateur. Vous n'avez pas à faire de rotation (avec rotate) sur ce fichier. C'est un fichier creux, donc sa taille sur le disque est bien plus petite que celle affichée par by \(Fo\ \fBls \-l\fR\ \(Fc (qui peut indiquer un très gros fichier si vous avez des utilisateurs avec des UID élevés). Vous pouvez afficher sa taille réelle avec \(Fo\ \fBls \-s\fR\ \(Fc.
+est une base de données qui contient des informations concernant la dernière connexion de chaque utilisateur. Vous n'avez pas à faire de rotation (avec rotate) sur ce fichier. C'est un fichier \(Fo\ creux\ \(Fc, donc sa taille sur le disque est bien plus petite que celle affichée par \(Fo\ \fBls \-l\fR\ \(Fc (qui peut indiquer un très gros fichier si vous avez des utilisateurs avec des UID élevés). Vous pouvez afficher sa taille réelle avec \(Fo\ \fBls \-s\fR\ \(Fc.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/var/log/lastlog\fR
-Journal des dernières connexions
+Base de données de l'heure des connexions précédentes des utilisateurs.
 .SH "AVERTISSEMENTS"
 .PP
-S'il y a des écarts importants dans les valeurs des UID, lastlog s'exécutera plus longtemps, sans affichage à l'écran (c\-à\-d si mmdf=800 et que le dernier UID est 170, le programme semblera bloqué comme s'il examinait les UID 171 à 799).
+S'il y a des trous importants dans les valeurs des UID, lastlog s'exécutera plus lentement, sans affichage à l'écran (par exemple, s'il n'y a pas d'entrée pour les utilisateurs ayant un UID compris entre 170 et 800 dans base de données lastlog, le programme lastlog semblera bloqué comme s'il traitait les entrées correspondant aux UID 171 à 799).

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-04-07 11:45+0700\n"
 "Last-Translator: Parlin Imanuel Toh <parlin_i@yahoo.com>\n"
 "Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
@@ -176,7 +176,7 @@ msgstr "Kata sandi dari %s:"
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -192,12 +192,12 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Penggunaan: chage [pilihan-pilihan] pengguna\n"
+"Penggunaan: chage [pilihan-pilihan] [NAMA-LOGIN]\n"
 "\n"
 "Pilihan-pilihan:\n"
 "  -d, --lastday LAST_DAY\tatur pergantian password terakhir pada LAST_DAY\n"
-"  -E, --expiredate EXPIRE_DATE\tatur kadaluarsa akun pada tanggal "
-"EXPIRE_DATE\n"
+"  -E, --expiredate EXPIRE_DATE\tatur kadaluarsa akun pada tanggal\n"
+"\t\t\t\tEXPIRE_DATE\n"
 "  -h, --help\t\t\ttampilkan pesan bantuan ini dan keluar\n"
 "  -I, --inactive INACTIVE\tatur masa inaktif kata sandi setelah kadaluarsa\n"
 "\t\t\t\tpada INACTIVE\n"
@@ -206,8 +206,9 @@ msgstr ""
 "\t\t\t\tdiganti menjadi MIN_DAYS\n"
 "  -M, --maxdays MAX_DAYS\tatur jumlah hari maksimum sebelum kata sandi\n"
 "\t\t\t\tdiganti menjadi MAX_DAYS\n"
-"  -W, --warndays WARN_DAYS\tatur hari peringatan kadaluarsa menjadi "
-"WARN_DAYS\n"
+"  -W, --warndays WARN_DAYS\tatur hari peringatan kadaluarsa menjadi\n"
+"\t\t\t\tWARN_DAYS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -457,6 +458,7 @@ msgstr ""
 "  -h, --help\t\ttampilkan pesan bantuan ini dan keluar\n"
 "  -m, --md5\t\tgunakan enkripsi MD5 daripada DES bila kata sandi\n"
 "\t\t\tyang diberikan tak terenkripsi\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -534,8 +536,14 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: baris %d: pengguna %s tak dikenal\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Penggunaan: %s [-s shell] [nama]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
 
 msgid "Login Shell"
 msgstr "Login Shell"
@@ -589,10 +597,10 @@ msgstr ""
 "  -m, --maximum MAX\t\tatur penghitung kegagalan login maksimum pada MAX\n"
 "  -r, --reset\t\t\treset penghitung kegagalan login\n"
 "  -t, --time HARI\t\ttampilkan record faillog yang lebih baru dari HARI\n"
-"  -u, --user NAMA\t\ttampilkan record faillog atau atur penghitung "
-"kegagalan\n"
-"\t\t\t\tdan batasnya (bila digunakan dengan -r, -m atau -l) hanya\n"
+"  -u, --user NAMA\t\ttampilkan record faillog atau atur penghitung\n"
+"\t\t\t\tkegagalan dan batasnya (bila digunakan dengan -r, -m atau -l) hanya\n"
 "\t\t\t\tuntuk pengguna dengan nama NAMA\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -707,9 +715,9 @@ msgstr "%s: tidak dapat menuliskan kembali berkas bayangan\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: tidak dapat membuka kunci berkas\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -730,6 +738,7 @@ msgstr ""
 "  -K, --key KEY=VALUE\t\tganti nilai bawaan pada /etc/login.defs\n"
 "  -o, --non-unique\t\tperbolehkan pembuatan grup dengan GID terduplikasi\n"
 "\t\t\t\t(tak-unik)\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -775,9 +784,9 @@ msgstr "%s: tidak dapat mengunci berkas grup bayangan\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: tidak dapat membuka berkas grup bayangan\n"
 
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: grup %s tidak sah\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: argumen numerik tak sah `%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -816,8 +825,66 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s merupakan master NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Penggunaan: groupmod [-g gid [-o]] [-n nama] grup\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: Otentikasi PAM gagal\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: tidak dapat mengunci berkas grup\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: tidak dapat membuka berkas grup\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: tak dapat membuka berkas grup\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Usage: groupadd [pilihan-pilihan] namagroup\n"
+"\n"
+"Pilihan-pilihan:\n"
+"  -f, --force\t\tpaksa status sukses saat keluar bila grup telah ada\n"
+"  -g, --gid GID\t\tgunakan GID untuk grup yang baru ini\n"
+"  -h, --help\t\t\ttampilkan pesan bantuan ini dan keluar\n"
+"  -K, --key KEY=VALUE\t\tganti nilai bawaan pada /etc/login.defs\n"
+"  -o, --non-unique\t\tperbolehkan pembuatan grup dengan GID terduplikasi\n"
+"\t\t\t\t(tak-unik)\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -981,6 +1048,7 @@ msgstr ""
 "  -h, --help\t\ttampilkan pesan bantuan ini dan keluar\n"
 "  -t, --time HARI\tcetak hanya record lastlog yang lebih baru dari HARI\n"
 "  -u, --user NAMA\tcetak record lastlog untuk pengguna dengan nama NAMA\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1177,9 +1245,9 @@ msgstr "%s: baris %d: tak dapat memperbaharui entri\n"
 msgid "%s: error updating files\n"
 msgstr "%s: kesalahan saat memperbaharui berkas-berkas\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1221,6 +1289,7 @@ msgstr ""
 "  -w, --warndays HARI\tatur hari peringatan kadaluarsa pada HARI\n"
 "  -x, --maxdays HARI_MAKS\tatur jumlah hari maksimum sebelum kata sandi\n"
 "\t\t\t\tdiganti pada HARI_MAKS\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Kata sandi lama: "
@@ -1387,9 +1456,9 @@ msgstr "Maaf."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1408,10 +1477,11 @@ msgstr ""
 "  -h, --help\t\t\ttampilkan pesan bantuan ini dan keluar\n"
 "  -, -l, --login\t\tbuat shell menjadi shell login\n"
 "  -m, -p,\n"
-"  --preserve-environment\tjangan reset  variabel lingkungan, dan "
-"pertahankan\n"
+"  --preserve-environment\tjangan reset  variabel lingkungan, dan\n"
+"\t\t\t\tpertahankan\n"
 "\t\t\t\tshell yang sama\n"
 "  -s, --shell SHELL\t\tgunakan shell SHELL daripada bawaan di passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1463,10 +1533,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Memasuki Mode Pengelolaan Sistem\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: argumen numerik tak sah `%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1550,6 +1616,7 @@ msgstr ""
 "\t\t\t\tpengguna baru\n"
 "  -s, --shell SHELL\t\tshell login untuk pengguna baru\n"
 "  -u, --uid UID\t\t\tpaksakan uid UID untuk pengguna baru\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1750,7 +1817,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1770,7 +1838,7 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
-"Penggunaan: usermod [pilihan-pilihan] nama-pengguna\n"
+"Penggunaan: usermod [pilihan-pilihan] NAMA-LOGIN\n"
 "\n"
 "Pilihan-pilihan:\n"
 "  -a, --append GRUP\t\ttambahkan pengguna ke grup tambahan GRUP\n"
@@ -1790,6 +1858,7 @@ msgstr ""
 "  -s, --shell SHELL\t\tshell login baru bagi pengguna\n"
 "  -u, --uid UID\t\t\tUID baru untuk pengguna\n"
 "  -U, --unlock\t\t\tbuka bloking pengguna\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1877,6 +1946,7 @@ msgstr ""
 "  -p, --passwd\t\t\tsunting basisdata kata sandi\n"
 "  -q, --quiet\t\t\tmode tenang\n"
 "  -s, --shadow\t\t\tsunting basisdata shadow atau gshadow\n"
+"\n"
 
 #, c-format
 msgid ""
@@ -1895,11 +1965,3 @@ msgstr "Tidak dapat membuat backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: tidak dapat mengembalikan %s: %s (perubahan ada dalam %s)\n"
-
-#~ msgid ""
-#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-#~ msgstr ""
-#~ "Grup bernama \"mail\" tak ada, membuat spul surat dengan mode 0600.\n"
-
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "Tak dapat membuat spul surat untuk pengguna %s.\n"

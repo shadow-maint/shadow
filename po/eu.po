@@ -5,9 +5,9 @@
 # Inaki Larranga Murgoitio <dooteo@euskalgnu.org>, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.17\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-06-12 23:00+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale <librezale@librezale.org>\n"
@@ -184,7 +184,7 @@ msgstr "%s (r)en pasahitza: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -200,7 +200,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Erabilera: chage [aukerak] erabiltzailea\n"
+"Erabilera: chage [aukerak] [IZENA]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday AZKEN_EGUNA\tezarri pasahitz aldaketa AZKEN_EGUNA\n"
@@ -215,6 +215,7 @@ msgstr ""
 "  -M, --maxdays GEHI_EGUN\tpasashitz aldaketa gehienezko data GEHI_EGUN-era\n"
 "\t\t\t\taldatu\n"
 "  -W, --warndays ABISU_EGUN\tiraungitze abisua ABISU_EGUN-era ezarri\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -463,6 +464,7 @@ msgstr ""
 "  -h, --help\t\tlaguntzako mezu hau erakutsi eta irten egiten da\n"
 "  -m, --md5\t\terabili MD5 enkriptatze mota (DES-en ordez),\n"
 "\t\t\tpasahitzak enkriptatuta ez daudenean\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -526,6 +528,7 @@ msgstr ""
 "  -h, --help\t\tlaguntzako mezu hau erakutsi eta irten egiten da\n"
 "  -m, --md5\t\terabili MD5 enkriptatze mota (DES-en ordez),\n"
 "\t\t\tpasahitzak enkriptatuta ez daudenean\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -540,8 +543,20 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: %d. lerroa: %s erabiltzaile ezezaguna\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Erabilera: %s [-s shell] [izena]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Erabilera: chsh [aukerak] [IZENA]\n"
+"\n"
+"Aukerak:\n"
+"  -h, --help\t\t\tlaguntza testu hau bistarazi eta irten\n"
+"  -r, --shell IZENA\t\t\terabiltzaile kontukoaren shell berria\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Saio-hasierako shell-a"
@@ -589,21 +604,21 @@ msgstr ""
 "Erabilera: faillog [aukerak]\n"
 "\n"
 "Aukerak:\n"
-"  -a, --all\t\t\terabiltzaile guztien faillog-en erregistroak bistaratzen "
-"ditu\n"
+"  -a, --all\t\t\terabiltzaile guztien faillog-en erregistroak bistaratzen\n"
+"\t\t\t\tditu\n"
 "  -h, --help\t\t\tlaguntzako mezu hau bistarazi eta irten egiten da\n"
 "  -l, --lock-time SEG\t\tsaio-hasieran hutsegin ondoren kontua zenbat\n"
 "\t\t\t\tsegundutan blokeatuta egongo den\n"
 "  -m, --maximum GEH\t\tsaio-hasierako GEHiengo hutsegite kopurua ezartzeko\n"
 "  -r, --reset\t\t\tsaio-hasierako hutsegiteen kontatzailea\n"
 "\t\t\t\tberrezartzeko\n"
-"  -t, --time EGUNAK\t\tEGUNAK baino berriagoak diren faillog-en "
-"erregistroak\n"
-"\t\t\t\tbistaratzeko\n"
+"  -t, --time EGUNAK\t\tEGUNAK baino berriagoak diren faillog-en\n"
+"\t\t\t\terregistroak bistaratzeko\n"
 "  -u, --user SAIOA\t\tfaillog-en erregistroak bistaratzeko edo\n"
 "\t\t\t\thutsegiteen kontatzailea eta ERABILTZAILEA\n"
 "\t\t\t\tizeneko erabiltzailearen(-r, -m edo -l aukerekin\n"
 "\t\t\t\terabiltzen bada) mantentzeko.\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -720,7 +735,7 @@ msgstr "%s: ezin da fitxategia desblokeatu\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -732,9 +747,9 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
-"Erabilera: groupadd [aukerak] taldea\n"
+"Erabilera: groupadd [aukerak] TALDEA\n"
 "\n"
-"Options:\n"
+"Aukerak:\n"
 "  -f, --force\t\tIndartu arrakastatsuki amaitzea nahiz ezarritako\n"
 "\t\t\t\ttaldea aurretik egon\n"
 "  -g, --gid GID\t\tGID erabili talde berrirako\n"
@@ -742,6 +757,7 @@ msgstr ""
 "  -K, --key KEY=BALIO\t\t/etc/login.defs lehenespenak gainidatzi\n"
 "  -o, --non-unique\t\tonartu bikoizutiko (ez bakarra) GID-a duen\n"
 "\t\t\t\ttaldea sortzea\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -788,8 +804,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: ezin da itzalpeko talde-fitxategia ireki\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: %s talde baliogabea\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s:baliogabeko zenbakizko '%s' argumentoa\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -828,8 +844,68 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s NIS nagusia da\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Erabilera: groupmod [-g gid [-o]] [-n izena] taldea\n"
+msgid "Member already exists\n"
+msgstr "Partaidea dagoeneko badago\n"
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "Ezabatzeko partaidea ez da aurkitu\n"
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+"Erabilera: groupmems -a erabiltzailea | -d erabiltzailea | -D | -l [-g "
+"taldea]\n"
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "Root-ekbakarri gehitu ditzake partaideak talde ezberdinetara\n"
+
+#, c-format
+msgid "Group access is required\n"
+msgstr "Talde sarrera beharrezkoa da\n"
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "Ez da taldearen jabe nagusia\n"
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr "PAM autentifikazioak huts egin du\n"
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "Ezin da talde-fitxategia blokeatu\n"
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "Ezin da talde fitxategia ireki\n"
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "Ezin da talde fitxategia ireki\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Erabilera: groupmod [aukerak] TALDEA\n"
+"\n"
+"Aukerak::\n"
+"  -g, --gid GID\t\ttaldearentzat GID berria erabiltzea indartu\n"
+"  -h, --help\t\t\tlaguntza hau bistarazi eta irten\n"
+"  -K, --new-name TALDE_BERRIA\tTalderarentzat TALDE_BERRI izena\n"
+"\t\t\t\terabiltzea indartu\n"
+"  -o, --non-unique\t\tonartu bikoizutiko (ez bakarra) GID-a erabiltzea\n"
+"\t\t\t\ttaldearentzat\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -995,6 +1071,7 @@ msgstr ""
 "\t\t\t\tbakarrik bistaratzen ditu\n"
 "  -u, --user IZENA\tIZENA duen erabiltzailearen lastlog erregistroa\n"
 "\t\t\t\tbistaratzen du\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1195,7 +1272,7 @@ msgstr "%s: errorea fitxategiak eguneratzean\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1217,9 +1294,9 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
-"Erabilera: passwd [aukerak] [izena]\n"
+"Erabilera: passwd [aukerak] [IZENA]\n"
 "\n"
-"Options:\n"
+"Aukerak:\n"
 "  -a, --all\t\t\tkontu guztien pasahitzen egoera erreportea\n"
 "  -d, --delete\t\t\temandako kontuaren pasahitza ezabatu\n"
 "  -e, --expire\t\t\temandako kontuaren pasahitzaren iraungitzea behartu\n"
@@ -1238,6 +1315,7 @@ msgstr ""
 "  -w, --warndays ABISU_EGUN\tezarri iraungitze abisu data ABISU_EGUN-era\n"
 "  -x, --maxdays GEHI_EGUN\tezarri pashitz aldatu aurretik gehinezko egun\n"
 "\t\t\t\tkopurua GEHI_EGUN-era\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Pasahitz zaharra: "
@@ -1406,7 +1484,7 @@ msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1418,7 +1496,7 @@ msgid ""
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 "\n"
 msgstr ""
-"Erabilera: su [aukerak] [izena]\n"
+"Erabilera: su [aukerak] [IZENA]\n"
 "\n"
 "Aukerak:\n"
 "  -c, --command KOMANDOA\t\tdeituriko shell-ari KOMANDOA pasa\n"
@@ -1428,6 +1506,7 @@ msgstr ""
 "  --preserve-environment\tez ingurune aldagaiak berezarri eta mantendu\n"
 "\t\t\t\tshell berdina\n"
 "  -s, --shell SHELL\t\tSHELL erabili lehentsiaren ordez\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1479,10 +1558,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Sistemaren mantentze-lanetako moduan sartzen\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s:baliogabeko zenbakizko '%s' argumentoa\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1563,6 +1638,7 @@ msgstr ""
 "  -K, --key KEY=VALUE\t\tlehenetsiriko /etc/login.defs gainidatzi\n"
 "  -m, --create-home\t\terabiltzaile kontu berriarentzar etxe direktorioa\n"
 "\t\t\t\tsortu\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1705,13 +1781,14 @@ msgid ""
 "  -r, --remove\t\t\tremove home directory and mail spool\n"
 "\n"
 msgstr ""
-"Erabilera: userdel [aukerak] LOGIN\n"
+"Erabilera: userdel [aukerak] IZENA\n"
 "\n"
 "Aukerak:\n"
 "  -f, --force\t\t\tfitxategien ezabatzea indartu nahiz ez\n"
 "\t\t\t\terabiltzailearenak izan\n"
 "  -h, --help\t\t\tlaguntza testu hau bistarazi eta irten\n"
 "  -r, --remove\t\t\tetxe direktorioa eta posta hilara ezabatu\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1772,7 +1849,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1795,7 +1873,8 @@ msgstr ""
 "Erabilera: usermod [aukerak] IZENA\n"
 "\n"
 "Aukerak:\n"
-"  -a, --append TALDEA\t\tgehitu erabiltzailea TALDE gehigarrira\n"
+"  -a, --append TALDEA\t\tgehitu erabiltzailea TALDE gehigarrietara\n"
+"\t\t\t\t(-G-rekin bakarrik erabili)\n"
 "  -c, --comment COMMENT\t\tGECOS eremuaren balio berria\n"
 "  -d, --home-dir HOME_DIR\terabiltzaile kontu berriaren etxe direktorioa\n"
 "  -e, --expiredate IRAUNG_DATA\tkontu iraungitze data ezarri\n"
@@ -1816,6 +1895,7 @@ msgstr ""
 "  -s, --shell SHELL\t\terabiltzaile kontuaren saio shell berria\n"
 "  -u, --uid UID\t\t\terabiltzaile kontuaren UID berria\n"
 "  -U, --unlock\t\t\terabiltzaile kontua desblokeatu\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1903,6 +1983,7 @@ msgstr ""
 "  -p, --passwd\t\t\tpasahitz datu-basea editatu\n"
 "  -q, --quiet\t\t\tixiltasun modua\n"
 "  -s, --shadow\t\t\tshadow edo gshadow datubasea editatu\n"
+"\n"
 
 #, c-format
 msgid ""

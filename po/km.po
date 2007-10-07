@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -184,7 +184,7 @@ msgstr "ពាក្យសម្ងាត់​របស់ %sសម្ងាត
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -214,6 +214,7 @@ msgstr ""
 "  -M, --ចំនួនថ្ងៃ​អតិបរមា MAX_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អតិបរមា ​មុន​ពាក្យ​សម្ងាត់​\n"
 "\t\t\t\tប្តូរ​ទៅ​ជា​ MAX_DAYS\n"
 "  -W, --ថ្ងៃព្រមាន WARN_DAYS\tកំណត់ការព្រមាន​ថ្ងៃ​ផុត​កំណត់​ទៅជា​ WARN_DAYS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -540,9 +541,22 @@ msgstr "%s ៖ មិនអាច​ចាក់​សោ​ឯកសារ​�
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនស្គាល់​អ្នកប្រើ​ %s\n"
 
-#, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "ការ​ប្រើប្រាស់ ៖ %s [-s shell] [name]\n"
+#, fuzzy, c-format
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "សែលចូល"
@@ -599,6 +613,7 @@ msgstr ""
 "  -u, --user ឈ្មោះចូល\t\tបង្ហាញ​កំណត់ត្រា​កំណត់ហេតុ​បរាជ័យ ឬ ថែទាំ​អថេរ​រាប់​ការ​បរាជ័យ\n"
 "\t\t\t\tនិង កំណត់ (បើ​ប្រើ​ជាមួយ​ជម្រើស -r, -m ឬ -l) សម្រាប់​តែ\n"
 "\t\t\t\tអ្នកប្រើ​ដែល​មាន​ឈ្មោះ​ចូល \"ឈ្មោះចូល\"\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -713,9 +728,9 @@ msgstr "%s ៖ មិន​អាច​សរសេរ​​​​​ឯកស�
 msgid "%s: can't unlock file\n"
 msgstr "%s ៖ មិនអាច​ដោះសោ​ឯកសារបានទេ\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -784,8 +799,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​ស្រមោល​បានទេ​\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s ៖ ក្រុម​មិន​ត្រឹមត្រូវ​ %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s ៖ អាគុយម៉ង់​ជាលេខ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -824,8 +839,67 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s ៖ %s គឺជា​មេ NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "របៀបប្រើ ៖ groupmod ក្រុម [-g gid [-o]] [-n name]​\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s ៖ PAM ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវបាន​បរាជ័យ​\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារក្រុម​បានទេ\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​បានទេ​\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s ៖ មិនអាចបើក​ឯកសារក្រុម​បានឡើយ​\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ groupadd ក្រុម [options]​\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -f, --បង្ខំ​ \t\t បង្ខំឲ្យ​​ចេញ​ជាមួយ​ស្ថានភាព​ជោគជ័យ​ ប្រសិនបើ​មាន​\n"
+"\t\t\t\tក្រុមដែលបានបញ្ជាក់​​មាន​រួច​ហើយ​\n"
+"  -g, --gid GID\t\tប្រើ​ GID សម្រាប់​ក្រុម​ថ្មី​\n"
+"  -h, --ជំនួយ\t\t\tបង្ហាញ​សារជំនួយ​​នេះ​ ហើយ​ ចេញ​\n"
+"  -K, --កូនសោ KEY=VALUE\t\tបដិសេធ​ /etc/login.defs លំនាំ​ដើម​\n"
+"  -o, --មិនមែនមានតែមួយ\t\t អនុញ្ញាតឲ្យ​​បង្កើត​ក្រុម​ស្ទួន​\n"
+"\t\t\t\t(មិនមែនមានតែមួយ) GID\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -1189,7 +1263,7 @@ msgstr "%s ៖ មានកំហុសក្នុងការ​ធ្វើ�
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1398,9 +1472,9 @@ msgstr "សូមអភ័យទោស​ ។"
 msgid "%s: %s\n"
 msgstr "%s ៖ %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1474,10 +1548,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "កំពុង​បញ្ចូល​របៀប​តំហែទាំ​ប្រព័ន្ធ​\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s ៖ អាគុយម៉ង់​ជាលេខ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1763,12 +1833,13 @@ msgstr "%s ៖ មិនយក​ថត​ %s ចេញ​ឡើយ (នឹង�
 msgid "%s: error removing directory %s\n"
 msgstr "%s ៖ មានកំហុស​ក្នុងការយក​ថត​ %s ចេញ\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"

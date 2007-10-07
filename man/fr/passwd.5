@@ -1,51 +1,56 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\"     Title: passwd
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 30/07/2006
+.\"    Manual: Formats et conversions de fichiers
+.\"    Source: Formats et conversions de fichiers
+.\"
+.TH "PASSWD" "5" "30/07/2006" "Formats et conversions de fich" "Formats et conversions de fich"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
 .ad l
-.SH "NAME"
-passwd \- Le fichier des mots de passe
+.SH "NOM"
+passwd \- fichier des mots de passe
 .SH "DESCRIPTION"
 .PP
 \fI/etc/passwd\fR
 contient différentes informations sur les comptes utilisateurs. Ces informations consistent en sept champs séparés par des deux\-points (\(Fo\ :\ \(Fc)\ :
-.TP 3
+.TP 3n
 \(bu
 nom de connexion de l'utilisateur (\(Fo\ login\ \(Fc)
-.TP
+.TP 3n
 \(bu
 un mot de passe chiffré optionnel
-.TP
+.TP 3n
 \(bu
 l'identifiant numérique de l'utilisateur
-.TP
+.TP 3n
 \(bu
 l'identifiant numérique du groupe de l'utilisateur
-.TP
+.TP 3n
 \(bu
 le nom complet de l'utilisateur ou un champ de commentaires
-.TP
+.TP 3n
 \(bu
 le répertoire personnel de l'utilisateur
-.TP
+.TP 3n
 \(bu
-l'interpréteur de commandes de l'utilisateur (optionel)
+l'interpréteur de commandes de l'utilisateur (optionnel)
+.sp
+.RE
 .PP
-Le champ du mot de passe chiffré peut être vide. Dans ce cas, aucun mot de passe n'est nécessaire pour s'identifier comme le login donné. Cependant, certaines applications qui lisent le fichier
+Le champ du mot de passe chiffré peut être vide. Dans ce cas, aucun mot de passe n'est nécessaire pour s'authentifier avec le compte donné. Cependant, certaines applications qui lisent le fichier
 \fI/etc/passwd\fR
 peuvent décider de ne donner aucun accès si le
 \fImot de\fR
 passe est vide. Si le mot de passe est un
-\(lqx\(rq
-minuscule, alors le mot de passe chiffré est enregistré dans le fichier
+\(Fo\ x\ \(Fc
+minuscule, alors le mot de passe chiffré se trouve dans le fichier
 \fBshadow\fR(5)\ ; il
 \fIdoit\fR
 y avoir une ligne correspondante dans le fichier
-\fIshadow\fR, sinon le compte de l'utilisateur n'est pas valide. Si le mot de passe est une autre chaîne, alors il est considéré comme un mot de pass chiffré, comme indiqué dans
+\fIshadow\fR, sinon le compte de l'utilisateur n'est pas valide. Si le mot de passe est constitué d'une autre chaîne, alors il est considéré comme un mot de passe chiffré, comme indiqué dans
 \fBcrypt\fR(3).
 .PP
 Le champ de commentaire est utilisé par différents utilitaires système, tels que
@@ -54,7 +59,7 @@ Le champ de commentaire est utilisé par différents utilitaires système, tels 
 Le champ du répertoire personnel de l'utilisateur correspond au nom du répertoire de travail initial.
 \fBLogin\fR
 utilise cette information pour définir la valeur de la variable d'environnement
-\fBHOME\fR.
+\fB$HOME\fR.
 .PP
 Le champ de l'interpréteur de commandes correspond au nom de l'interpréteur de commandes de l'utilisateur, ou au nom d'un programme initial à exécuter.
 \fBLogin\fR
@@ -63,10 +68,10 @@ utilise cette information pour définir la valeur de la variable d'environnement
 \fI/bin/sh\fR
 est utilisé par défaut.
 .SH "FICHIERS"
-.TP
+.TP 3n
 \fI/etc/passwd\fR
-informations sur les comptes des utilisateurs
-.TP
+Informations sur les comptes des utilisateurs.
+.TP 3n
 \fI/etc/shadow\fR
 un mot de passe chiffré optionnel
 .SH "VOIR AUSSI"

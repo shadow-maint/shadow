@@ -1,62 +1,61 @@
-.\" $Id: chsh.1,v 1.11 2005/12/01 20:38:27 kloczek Exp $
-.\" Copyright 1990, Julianne Frances Haugh
-.\" All rights reserved.
+.\"     Title: chsh
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 16/07/2006
+.\"    Manual: Polecenia użytkowników
+.\"    Source: Polecenia użytkowników
 .\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.TH CHSH 1
-.SH NAZWA
+.TH "CHSH" "1" "16/07/2006" "Polecenia użytkowników" "Polecenia użytkowników"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAZWA"
 chsh \- zmiana powłoki zgłoszeniowej
-.SH SKŁADNIA
-.TP 5
-\fBchsh\fR
-[\fB\-s\fR \fIpowłoka\fR] [\fIużytkownik\fR]
-.SH OPIS
-\fBchsh\fR zmienia powłokę zgłoszeniową użytkownika.
-Określa nazwę początkowego polecenia zgłoszeniowego użytkownika.
-Zwykły użytkownik może zmienić wyłącznie powłokę zgłoszeniową własnego konta,
-superużytkownik może zmienić powłokę zgłoszeniową dla dowolnego konta.
+.SH "SKŁADNIA"
+.HP 5
+\fBchsh\fR [\fIopcje\fR] [\fILOGIN\fR]
+.SH "OPIS"
 .PP
-Jedynym ograniczeniem nałożonym na powłokę zgłoszeniową jest to, że jej nazwa
-musi być wymieniona w \fI/etc/shells\fR, chyba że polecenie \fBchsh\fR
-wywoływane jest przez superużytkownika \- wówczas może być podana dowolna
-nazwa. Użytkownicy kont z ograniczoną powłoką logowania nie mogą jej zmieniać.
-Odradza się z tego powodu umieszczanie \fB/bin/rsh\fR w pliku
-\fI/etc/shells\fR, gdyż przypadkowa zmiana na powłokę ograniczoną uniemożliwi
-użytkownikowi jakąkolwiek zmianę powłoki logowania, nawet z powrotem na
-dotychczasową.
-.SH OPCJE
-Jeżeli nie podano opcji \fB\-s\fR, to \fBchsh\fR działa w trybie interaktywnym,
-proponując użytkownikowi bieżącą powłokę logowania. Wprowadzenie nowej
-wartości powoduje zmianę powłoki, a podanie wartości pustej pozostawia bieżącą
-powłokę. Bieżąca powłoka wyświetlana jest w nawiasach \fB[ ]\fR.
-.SH PLIKI
-\fI/etc/passwd\fR \- informacja o kontach użytkowników
-.br
-\fI/etc/shells\fR \- lista dozwolonych powłok zgłoszeniowych
-.SH ZOBACZ TAKŻE
-.BR chfn (1),
-.BR passwd (5)
-.SH AUTOR
-Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+Poleceni
+\fBchsh\fR
+zmienia powłokę zgłoszeniową użytkownika. Określa nazwę początkowego polecenia zgłoszeniowego użytkownika. Zwykły użytkownik może zmienić wyłącznie powłokę zgłoszeniową własnego konta, superużytkownik może zmienić powłokę zgłoszeniową dla dowolnego konta.
+.SH "OPCJE"
+.PP
+Polecenie
+\fBchsh\fR
+posiada następujące opcje:
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Wyświetlenie komunikatu pomocy i zakończenie działania.
+.TP 3n
+\fB\-s\fR, \fB\-\-shell\fR\fISHELL\fR
+Nazwa nowej powłoki (shell) użytkownika. Ustawienie tego pola na puste powoduje, że system wybierze domyślną powłokę logowania.
+.PP
+Jeżeli nie podano opcji
+\fB\-s\fR, to polecenie
+\fBchsh\fR
+działa w trybie interaktywnym, proponując użytkownikowi bieżącą powłokę logowania. Wprowadzenie nowej wartości powoduje zmianę powłoki, a podanie wartości pustej pozostawia bieżącą powłokę. Bieżąca powłoka wyświetlana jest w nawiasach
+\fI[ ]\fR
+.SH "UWAGI"
+.PP
+Jedynym ograniczeniem nałożonym na powłokę zgłoszeniową jest to, że jej nazwa musi być wymieniona w
+\fI/etc/shells\fR, chyba że polecenie chsh zostało uruchomione przez superużytkownika wówczas może być podana dowolna nazwa. Użytkownicy kont z ograniczoną powłoką logowania nie mogą jej zmieniać. Odradza się z tego powodu umieszczanie
+\fI/bin/rsh\fR
+w pliku
+\fI/etc/shells\fR, gdyż przypadkowa zmiana na powłokę ograniczoną uniemożliwi użytkownikowi jakąkolwiek zmianę powłoki logowania, nawet z powrotem na dotychczasową.
+.SH "PLIKI"
+.TP 3n
+\fI/etc/passwd\fR
+Informacja o kontach użytkowników.
+.TP 3n
+\fI/etc/shells\fR
+Lista dozwolonych powłok zgłoszeniowych.
+.TP 3n
+\fI/etc/login.defs\fR
+Konfiguracja pakietu shadow.
+.SH "ZOBACZ TAKŻE"
+.PP
+\fBchfn\fR(1),
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(5).

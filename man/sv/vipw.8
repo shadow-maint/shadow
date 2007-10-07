@@ -1,0 +1,77 @@
+.\"     Title: vipw
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "VIPW" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+vipw, vigr \- redigera lösenordet, grupp, skugglösenord eller skuggruppfil
+.SH "SYNOPSIS"
+.HP 5
+\fBvipw\fR [\fIflaggor\fR]
+.HP 5
+\fBvigr\fR [\fIflaggor\fR]
+.SH "BESKRIVNING"
+.PP
+\fBvipw\fR
+and
+\fBvigr\fR
+redigerar filerna
+\fI/etc/passwd\fR
+och
+\fI/etc/group\fR, respektive. Med flaggan
+\fB\-s\fR, kommer de att redigera skuggversionerna av dessa filer,
+\fI/etc/shadow\fR
+och
+\fI/etc/gshadow\fR, respektive. Programmen kommer att ställa in de lämpliga lås som behövs för att förhindra att filerna skadas. NÃ\(Csr de letar efter en redigerare kommer programmen att första försöka med miljövariabeln
+\fB$VISUAL\fR, sedan miljövariabeln
+\fB$EDITOR\fR
+och till sist standardredigeraren,
+\fBvi\fR(1).
+.SH "FLAGGOR"
+.PP
+Flaggorna som gäller för kommandona
+\fBvipw\fR
+och
+\fBvigr\fR
+är:
+.TP 3n
+\fB\-g\fR, \fB\-\-group\fR
+Redigera gruppdatabasen.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Visa hjälpmeddelande och avsluta.
+.TP 3n
+\fB\-p\fR, \fB\-\-passwd\fR
+Redigera lösenordsdatabasen.
+.TP 3n
+\fB\-q\fR, \fB\-\-quiet\fR
+Tyst läge.
+.TP 3n
+\fB\-s\fR, \fB\-\-shadow\fR
+Redigera shadow\- eller gshadow\-databasen.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/gshadow\fR
+Säker gruppkontoinformation.
+.TP 3n
+\fI/etc/passwd\fR
+Användarkontoinformation.
+.TP 3n
+\fI/etc/shadow\fR
+Säker användarkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBvi\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)\fBpasswd\fR(5),
+\fBshadow\fR(5).

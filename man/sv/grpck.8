@@ -1,0 +1,113 @@
+.\"     Title: grpck
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Systemhanteringskommandon
+.\"    Source: Systemhanteringskommandon
+.\"
+.TH "GRPCK" "8" "20\-07\-2006" "Systemhanteringskommandon" "Systemhanteringskommandon"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+grpck \- validera integriteten för gruppfiler
+.SH "SYNOPSIS"
+.HP 6
+\fBgrpck\fR [\-r] [\fIgrupp\fR\ \fIshadow\fR]
+.SH "BESKRIVNING"
+.PP
+
+\fBgrpck\fR
+verifies the integrity of the system authentication information. All entries in the
+\fI/etc/group\fR
+and
+\fI/etc/gshadow\fR
+are checked to see that the entry has the proper format and valid data in each field. The user is prompted to delete entries that are improperly formatted or which have other uncorrectable errors.
+.PP
+Kontroller görs för att validera att varje post har:
+.TP 3n
+\(bu
+korrekt antal fält
+.TP 3n
+\(bu
+ett unikt gruppnamn
+.TP 3n
+\(bu
+en giltig lista med medlemmar och administratörer
+.sp
+.RE
+.PP
+The checks for correct number of fields and unique group name are fatal. If the entry has the wrong number of fields, the user will be prompted to delete the entire line. If the user does not answer affirmatively, all further checks are bypassed. An entry with a duplicated group name is prompted for deletion, but the remaining checks will still be made. All other errors are warnings and the user is encouraged to run the
+\fBgroupmod\fR
+command to correct the error.
+.PP
+The commands which operate on the
+\fI/etc/group\fR
+file are not able to alter corrupted or duplicated entries.
+\fBgrpck\fR
+should be used in those circumstances to remove the offending entry.
+.SH "FLAGGOR"
+.PP
+By default,
+\fBgrpck\fR
+operates on the files
+\fI/etc/group\fR
+and
+\fI/etc/gshadow\fR. The user may select alternate files with the
+\fIgroup\fR
+and
+\fIshadow\fR
+parameters. Additionally, the user may execute the command in read\-only mode by specifying the
+\fB\-r\fR
+flag. This causes all questions regarding changes to be answered
+\fIno\fR
+without user intervention.
+\fBgrpck\fR
+can also sort entries in
+\fI/etc/group\fR
+and
+\fI/etc/gshadow\fR
+by GID. To run it in sort mode pass it
+\fB\-s\fR
+flag. No checks are performed then, it just sorts.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/gshadow\fR
+Säker gruppkontoinformation.
+.TP 3n
+\fI/etc/passwd\fR
+Användarkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBgroupmod\fR(8).
+.SH "AVSLUTNINGSVÄRDEN"
+.PP
+Kommandot
+\fBgrpck\fR
+avslutas med följande värden:
+.TP 3n
+\fI0\fR
+lyckad
+.TP 3n
+\fI1\fR
+ogiltig kommandosyntax
+.TP 3n
+\fI2\fR
+en eller flera felaktiga grupposter
+.TP 3n
+\fI3\fR
+kan inte öppna gruppfiler
+.TP 3n
+\fI4\fR
+kan inte låsa gruppfiler
+.TP 3n
+\fI5\fR
+kan inte uppdatera gruppfiler
+

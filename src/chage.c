@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chage.c,v 1.72 2006/06/20 20:00:04 kloczek Exp $"
+#ident "$Id: chage.c,v 1.73 2006/07/11 13:15:41 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -103,7 +103,7 @@ int isnum (const char *s)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: chage [options] user\n"
+	fprintf (stderr, _("Usage: chage [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -d, --lastday LAST_DAY	set last password change to LAST_DAY\n"

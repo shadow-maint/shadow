@@ -1,78 +1,95 @@
-.\" $Id: groupmod.8,v 1.14 2005/12/01 20:38:27 kloczek Exp $
-.\" Copyright 1991, Julianne Frances Haugh
-.\" All rights reserved.
+.\"     Title: groupmod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 12/07/2006
+.\"    Manual: Polecenia Zarządzania Systemem
+.\"    Source: Polecenia Zarządzania Systemem
 .\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.TH GROUPMOD 8
-.SH NAZWA
-groupmod \- zmień dane grupy
-.SH SKŁADNIA
-\fBgroupmod\fR [\fB\-g\fR \fIGID\fR [\fB\-o\fR]] [\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR]
+.TH "GROUPMOD" "8" "12/07/2006" "Polecenia Zarządzania Systemem" "Polecenia Zarządzania Systemem"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAZWA"
+groupmod \- modyfikuj definicję grupy systemowej
+.SH "SKŁADNIA"
+.HP 9
+\fBgroupmod\fR [\fIopcje\fR] \fIGRUPA\fR
+.SH "OPIS"
+.PP
+Polcenie
+\fBgroupmod\fR
+modifikuje definicję grupy\fIGRUPA\fR
+poprzez modifikację stosownego wpisu w bazie grup.
+.SH "OPCJE"
+.PP
+Polecenie
+\fBgroupmod\fR
+posiada następujące opcje:
+.TP 3n
+\fB\-g\fR, \fB\-\-gid\fR\fIGID\fR
+Nowa wartość ID grupy
+\fIGRUPA\fR. Numeryczna wartość
+\fIGID\fR
+musi mieć nieujemną wartość całkowitą. Wartość ta musi być unikalna chyba że użyto opcji
+\fB\-o\fR. Wartości pomiędzy 0 a 999 są zwykle zarezerwowane dla grup systemowych. Pliki, dla których stary identyfikator jest identyfikatorem grupy pliku, wymagają ręcznej zmiany ID grupy.
+.TP 3n
+\fB\-h\fR, \fB\-\-help\fR
+Wyświetlenie komunikatu pomocy i zakończenie działania.
+.TP 3n
+\fB\-a\fR, \fB\-\-append\fR\fINOWA_GRUPA\fR
+Nazwa grupy zostanie zmieniona z
 \fIGRUPA\fR
-.SH OPIS
-Polecenie \fBgroupmod\fR modyfikuje systemowe pliki kont tak, by
-odzwierciedlić w nich zmiany grup podane w wierszu poleceń.
-.SH OPCJE
-Polecenie \fBgroupmod\fR posiada następujące opcje:
-.IP "\fB\-g\fR \fIGID\fR"
-Numeryczna wartość identyfikatora grupy (group ID). Wartość ta musi być
-niepowtarzalna, chyba że użyto opcji \fB\-o\fR. Nie może być ujemna.
-Wartości pomiędzy 0 a 999 są zwykle zarezerwowane dla grup systemowych. 
-Pliki, dla których stary identyfikator jest identyfikatorem
-grupy pliku, wymagają ręcznej zmiany ID grupy.
-.IP "\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR"
-Nazwa grupy zostanie zmieniona z \fIGRUPA\fR na \fINOWA_NAZWA_GRUPY\fR.
-.SH PLIKI
-\fI/etc/group\fR	\- informacja o grupach
-.br
-\fI/etc/gshadow\fR	\- bezpieczna informacja o grupach
-.SH KOD ZAKOŃCZENIA
-.TP 2
-Polecenie \fBgroupmod\fR kończy działanie z następującymi wartościami kodów zakończenia:
-.br
-\fB0\fR	\- powodzenie
-.br
-\fB2\fR	\- niewłaściwa składnia parametrów polecenia
-.br
-\fB3\fR	\- niewłaściwe parametry opcji
-.br
-\fB4\fR	\- gid jest już używany (i nie użyto opcji \-o)
-.br
-\fB6\fR	\- podana grupa nie istnieje
-.br
-\fB9\fR	\- grupa jest już używana
-.br
-\fB10\fR	\- niemożliwa aktualizacja plików grup
-.SH ZOBACZ TAKŻE
-.BR chfn (1),
-.BR chsh (1),
-.BR passwd (1),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR useradd (8),
-.BR userdel (8),
-.BR usermod (8)
-.SH AUTOR
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+na nazwę
+\fINOWA_GRUPA\fR.
+.TP 3n
+\fB\-o\fR, \fB\-\-non\-unique\fR
+Użyte z opcją
+\fB\-g\fR
+umożliwia zmiane
+\fIGID\fR
+grupy na wartość nieunikalną.
+.SH "PLIKI"
+.TP 3n
+\fI/etc/group\fR
+Informacje o grupach użytkowników.
+.TP 3n
+\fI/etc/gshadow\fR
+Informacje chronione o grupach użytkowników.
+.SH "KOD ZAKOŃCZENIA"
+.PP
+Polecenie
+\fBgroupmod\fR
+kończy działanie z następującymi wartościami kodów zakończenia:
+.TP 3n
+\fI0\fR
+poprawne zakończenie działania programu
+.TP 3n
+\fI2\fR
+niepoprawna składnia polecenia
+.TP 3n
+\fI3\fR
+nieprawidłowy argument opcji
+.TP 3n
+\fI4\fR
+specified group doesn't exist
+.TP 3n
+\fI6\fR
+specified group doesn't exist
+.TP 3n
+\fI9\fR
+nazwa grupy już jest w użyciu
+.TP 3n
+\fI10\fR
+nie można zaktualizować pliku z grupami
+.SH "ZOBACZ TAKŻE"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

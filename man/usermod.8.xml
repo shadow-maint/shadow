@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.27 2006/06/12 14:19:24 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.28 2006/07/12 14:23:14 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -39,11 +39,11 @@
       <varlistentry>
 	<term>
 	  <option>-a</option>, <option>--append</option>
-	  <replaceable>GROUP</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    Add the user to the supplemental group.
+	    Add the user to the supplemental group(s). Use only with
+	    <option>-G</option> option.
 	  </para>
 	</listitem>
       </varlistentry>

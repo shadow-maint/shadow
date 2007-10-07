@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.99 2006/06/22 11:30:32 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.100 2006/07/28 17:42:48 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -198,42 +198,47 @@ static void fail_exit (int code)
 	exit (code);
 }
 
-static struct group *getgr_nam_gid (const char *name)
+static struct group *getgr_nam_gid (const char *grname)
 {
-	gid_t gid;
-	char *ep;
+	long gid;
+	char *errptr;
 
-	gid = strtoul (name, &ep, 10);
-	if (*name != '\0' && *ep == '\0')	/* valid numeric GID */
-		return getgrgid (gid);
-
-	return getgrnam (name);
+	gid = strtol (grname, &errptr, 10);
+	if (*errptr || errno == ERANGE || gid < 0) {
+		fprintf (stderr,
+			 _("%s: invalid numeric argument '%s'\n"), Prog, grname);
+		exit (E_BAD_ARG);
+	}
+	return getgrnam (grname);
 }
 
-static long get_number (const char *cp)
+static long get_number (const char *numstr)
 {
 	long val;
-	char *ep;
+	char *errptr;
 
-	val = strtol (cp, &ep, 10);
-	if (*cp != '\0' && *ep == '\0')	/* valid number */
-		return val;
-
-	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
-	exit (E_BAD_ARG);
+	val = strtol (numstr, &errptr, 10);
+	if (*errptr || errno == ERANGE) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 numstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
 }
 
-static uid_t get_uid (const char *cp)
+static uid_t get_uid (const char *uidstr)
 {
-	uid_t val;
-	char *ep;
+	long val;
+	char *errptr;
 
-	val = strtoul (cp, &ep, 10);
-	if (*cp != '\0' && *ep == '\0')	/* valid number */
-		return val;
-
-	fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog, cp);
-	exit (E_BAD_ARG);
+	val = strtol (uidstr, &errptr, 10);
+	if (*errptr || errno == ERANGE || val < 0) {
+		fprintf (stderr,
+			 _("%s: invalid numeric argument '%s'\n"), Prog,
+			 uidstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
@@ -316,7 +321,7 @@ static void get_defaults (void)
 		else if (MATCH (buf, INACT)) {
 			long val = strtol (cp, &ep, 10);
 
-			if (*cp != '\0' && *ep == '\0')	/* valid number */
+			if (*cp || errno == ERANGE)
 				def_inactive = val;
 			else
 				def_inactive = -1;

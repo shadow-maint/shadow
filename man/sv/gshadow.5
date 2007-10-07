@@ -1,0 +1,55 @@
+.\"     Title: gshadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 20.07.2006
+.\"    Manual: Filformat och konversioner
+.\"    Source: Filformat och konversioner
+.\"
+.TH "GSHADOW" "5" "20\-07\-2006" "Filformat och konversioner" "Filformat och konversioner"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAMN"
+gshadow \- skuggad gruppfil
+.SH "BESKRIVNING"
+.PP
+\fI/etc/gshadow\fR
+innehåller skuggad gruppkontoinformation. Den innehåller rader med följande kolonseparerade fält:
+.TP 3n
+\(bu
+gruppnamn
+.TP 3n
+\(bu
+krypterat lösenord
+.TP 3n
+\(bu
+kommaseparerad lista med gruppadministratörer
+.TP 3n
+\(bu
+kommaseparerad lista med gruppmedlemmar
+.sp
+.RE
+.PP
+The group name and password fields must be filled. The encrypted password consists of characters from the 64\-character alphabet a thru z, A thru Z, 0 thru 9, \\. and /. Refer to
+\fBcrypt\fR(3)
+for details on how this string is interpreted. If the password field contains some string that is not valid result of
+\fBcrypt\fR(3), for instance ! or *, the user will not be able to use a unix password to log in, subject to
+\fBpam\fR(7).
+.PP
+This information supersedes any password present in
+\fI/etc/group\fR.
+.PP
+Denna fil får inte vara läsbar av vanliga användare om lösenordssÃ\(Cskerheten ska upprätthållas.
+.SH "FILER"
+.TP 3n
+\fI/etc/group\fR
+Gruppkontoinformation.
+.TP 3n
+\fI/etc/gshadow\fR
+Säker gruppkontoinformation.
+.SH "SE OCKSÅ"
+.PP
+\fBgroup\fR(5),
+\fBgpasswd\fR(5),
+\fBnewgrp\fR(5).

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupadd.c,v 1.53 2006/06/24 05:52:00 kloczek Exp $"
+#ident "$Id: groupadd.c,v 1.55 2006/07/28 17:38:52 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -88,13 +88,14 @@ static void check_new_name (void);
 static void close_files (void);
 static void open_files (void);
 static void fail_exit (int);
+static gid_t get_gid (const char *gidstr);
 
 /*
  * usage - display usage message and exit
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: groupadd [options] group\n"
+	fprintf (stderr, _("Usage: groupadd [options] GROUP\n"
 			   "\n"
 			   "Options:\n"
 			   "  -f, --force			force exit with success status if the specified\n"
@@ -370,6 +371,23 @@ static void fail_exit (int code)
 }
 
 /*
+ * get_id - validate and get group ID
+ */
+static gid_t get_gid (const char *gidstr)
+{
+	long val;
+	char *errptr;
+
+	val = strtol (gidstr, &errptr, 10);
+	if (*errptr || errno == ERANGE || val < 0) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 gidstr);
+		exit (E_BAD_ARG);
+	}
+	return val;
+}
+
+/*
  * main - groupadd command
  */
 
@@ -427,16 +445,7 @@ int main (int argc, char **argv)
 				break;
 			case 'g':
 				gflg++;
-				if (!isdigit (optarg[0]))
-					usage ();
-
-				group_id = strtoul (optarg, &cp, 10);
-				if (*cp != '\0') {
-					fprintf (stderr,
-						 _("%s: invalid group %s\n"),
-						 Prog, optarg);
-					fail_exit (E_BAD_ARG);
-				}
+				group_id = get_gid (optarg);
 				break;
 			case 'h':
 				usage ();

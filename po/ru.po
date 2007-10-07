@@ -1,3 +1,4 @@
+# translation of shadow_po_ru.po to Russian
 # translation of po_ru.po to Russian
 # translation of ru.po to Russian
 # Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
@@ -7,10 +8,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.17\n"
+"Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
-"PO-Revision-Date: 2006-06-22 20:36+0300\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
+"PO-Revision-Date: 2006-07-19 21:01+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -187,7 +188,7 @@ msgstr "Пароль пользователя %s: "
 
 #, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -203,7 +204,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Использование: chage [параметры] имя пользователя\n"
+"Использование: chage [параметры] [ИМЯ]\n"
 "\n"
 "Параметры:\n"
 "  -d, --lastday LAST_DAY\tустановить последний день смены пароля в LAST_DAY\n"
@@ -219,6 +220,7 @@ msgstr ""
 "\t\t\t\tпароля в MAX_DAYS\n"
 "  -W, --warndays WARN_DAYS\tустановить количество дней с выдачей\n"
 "\t\t\t\tпредупреждения в WARN_DAYS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -471,6 +473,7 @@ msgstr ""
 "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
 "  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
 "\t\t\tвводится нешифрованным\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -534,6 +537,7 @@ msgstr ""
 "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
 "  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
 "\t\t\tвводится не шифрованным\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -548,8 +552,20 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: строка %d: неизвестный пользователь %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Использование: %s [-s командная оболочка] [имя пользователя]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
+"Использование: chsh [параметры] [ИМЯ]\n"
+"\n"
+"Параметры:\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -s, --shell SHELL\t\tновая регистрационная оболочка для учётной записи\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Командная оболочка"
@@ -608,6 +624,7 @@ msgstr ""
 "  -u, --user ИМЯ\t\tпоказать запись faillog или настроить счётчики\n"
 "\t\t\t\tнеудачных попыток и ограничения (с помощью -r, -m или -l) только\n"
 "\t\t\t\tдля учётной записи с заданным ИМЕНЕМ\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -726,7 +743,7 @@ msgstr "%s: не удалось разблокировать файл\n"
 
 #, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -738,17 +755,17 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
-"Использование: groupadd [параметры] группа\n"
+"Использование: groupadd [параметры] ГРУППА\n"
 "\n"
 "Параметры:\n"
-"  -f, --force\t\t\tзакончить работу с успешным кодом возврата, если "
-"заданная\n"
-"\t\t\t\tгруппа уже существует\n"
+"  -f, --force\t\t\tзакончить работу с успешным кодом возврата, если\n"
+"\t\t\t\tзаданная группа уже существует\n"
 "  -g, --gid GID\t\t\tдля новой группы использовать GID\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
 "  -K, --key KEY=VALUE\t\tизменить значения по умолчанию из /etc/login.defs\n"
 "  -o, --non-unique\t\tразрешить создание группы с уже имеющимся\n"
 "\t\t\t\t(не уникальным) GID\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -795,8 +812,8 @@ msgid "%s: unable to open shadow group file\n"
 msgstr "%s: не удалось открыть теневой файл групп\n"
 
 #, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: неверная группа %s\n"
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: неверный числовой параметр '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -835,8 +852,67 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s -- сервер NIS\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Использование: groupmod [-g gid [-o]] [-n имя] группа\n"
+msgid "Member already exists\n"
+msgstr "Член уже существует\n"
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "Не найден член для удаления\n"
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+"Использование: groupmems -a ИМЯ_ПОЛЬЗОВАТЕЛЯ | -d ИМЯ_ПОЛЬЗОВАТЕЛЯ | -D | -l "
+"[-g ИМЯ_ГРУППЫ]\n"
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "Только суперпользователь может добавлять членов в различные группы\n"
+
+#, c-format
+msgid "Group access is required\n"
+msgstr "Требуется доступ к группе\n"
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "Не первичный владелец текущей группы\n"
+
+#, c-format
+msgid "PAM authentication failed for\n"
+msgstr "Проверка подлинности PAM завершилась неудачно для\n"
+
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "Не удалось заблокировать файл group\n"
+
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "Не удалось открыть файл group\n"
+
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "Не удалось закрыть файл group\n"
+
+#, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Использование: groupmod [параметры] ГРУППА\n"
+"\n"
+"Параметры:\n"
+"  -g, --gid GID\t\t\tдля новой ГРУППЫ использовать GID\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -n, --new-name NEW_GROUP\tиспользовать имя NEW_GROUP для ГРУППЫ\n"
+"  -o, --non-unique\t\tразрешить создание группы с уже имеющимся\n"
+"\t\t\t\t(не уникальным) GID\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -852,11 +928,11 @@ msgstr "%s: %s имя уже существует\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Использование: %s [-r] [-s] [файл групп [теневой файл групп]]\n"
+msgstr "Использование: %s [-r] [-s] [group [gshadow]]\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Использование: %s [-r] [-s] [файл групп]\n"
+msgstr "Использование: %s [-r] [-s] [group]\n"
 
 #, c-format
 msgid "No\n"
@@ -1000,6 +1076,7 @@ msgstr ""
 "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
 "  -t, --time DAYS\tпоказать записи lastlog за последние DAYS дней\n"
 "  -u, --user ИМЯ\tпоказать запись lastlog для учётной записи ИМЯ\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1198,7 +1275,7 @@ msgstr "%s: ошибка обновления файлов\n"
 
 #, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1241,6 +1318,7 @@ msgstr ""
 "\t\t\t\tпредупреждения в WARN_DAYS\n"
 "  -x, --maxdays MAX_DAYS\tустановить максимальное число дней перед сменой\n"
 "\t\t\t\tпароля в MAX_DAYS\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Старый пароль: "
@@ -1411,7 +1489,7 @@ msgstr "%s: %s\n"
 
 #, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1426,7 +1504,7 @@ msgstr ""
 "Использование: su [параметры] [имя пользователя]\n"
 "\n"
 "Параметры:\n"
-"  -c, --command КОМАНДА\t\tпередать КОМАНДУ вызываемой оболочке\n"
+"  -c, --command COMMAND\t\tпередать команду COMMAND вызываемой оболочке\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
 "  -, -l, --login\t\tзапускать оболочку как регистрационную\n"
 "  -m, -p,\n"
@@ -1434,6 +1512,7 @@ msgstr ""
 "\t\t\t\tзапустившую оболочку\n"
 "  -s, --shell SHELL\t\tиспользовать значение переменной SHELL\n"
 "\t\t\t\tвместо значения из файла passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1486,10 +1565,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Вход в режим системного обслуживания\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: неверный числовой параметр '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1579,6 +1654,7 @@ msgstr ""
 "\t\t\t\tучётной записи\n"
 "  -u, --uid UID\t\t\tпринудительно назначить UID для новой\n"
 "\t\t\t\tучётной записи\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1728,6 +1804,7 @@ msgstr ""
 "  -f, --force\t\t\tудалять файлы, даже если они не принадлежат пользователю\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
 "  -r, --remove\t\t\tудалить домашний каталог и почтовый ящик\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1789,7 +1866,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1813,13 +1891,13 @@ msgstr ""
 "\n"
 "Параметры:\n"
 "  -a, --append ГРУППА\t\tдобавить пользователя в дополнительную ГРУППУ\n"
+"\t\t\t\t(использовать только вместе с -G)\n"
 "  -c, --comment КОММЕНТАРИЙ\t\tзаполнить поле GECOS учётной записи\n"
 "  -d, --home ДОМ_КАТ\tновый домашний каталог учётной записи\n"
 "  -e, --expiredate EXPIRE_DATE\tустановить дату окончания действия\n"
 "\t\t\t\tучётной записи в EXPIRE_DATE\n"
-"  -f, --inactive INACTIVE\tустановить пароль после устаревания учётной "
-"записи\n"
-"\t\t\t\tв INACTIVE\n"
+"  -f, --inactive INACTIVE\tустановить пароль после устаревания учётной\n"
+"\t\t\t\tзаписи в INACTIVE\n"
 "  -g, --gid ГРУППА\t\tпринудительно назначить первичную ГРУППУ\n"
 "  -G, --groups ГРУППЫ\t\tсписок дополнительных ГРУПП\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
@@ -1924,6 +2002,7 @@ msgstr ""
 "  -q, --quiet\t\t\tquiet mode\n"
 "  -s, --shadow\t\t\tредактировать базу данных теневых\n"
 "\t\t\t\tпаролей пользователей или групп\n"
+"\n"
 
 #, c-format
 msgid ""

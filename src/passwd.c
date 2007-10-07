@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.59 2006/06/20 20:00:04 kloczek Exp $"
+#ident "$Id: passwd.c,v 1.61 2006/07/28 17:40:15 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -130,7 +130,7 @@ static long getnumber (const char *);
  */
 static void usage (int status)
 {
-	fprintf (stderr, _("Usage: passwd [options] [login]\n"
+	fprintf (stderr, _("Usage: passwd [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -a, --all			report password status on all accounts\n"
@@ -553,14 +553,17 @@ static void update_shadow (void)
 	spw_unlock ();
 }
 
-static long getnumber (const char *str)
+static long getnumber (const char *numstr)
 {
 	long val;
-	char *cp;
+	char *errptr;
 
-	val = strtol (str, &cp, 10);
-	if (*cp)
-		usage (E_BAD_ARG);
+	val = strtol (numstr, &errptr, 10);
+	if (*errptr || errno == ERANGE) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+			 numstr);
+		exit (E_BAD_ARG);
+	}
 	return val;
 }
 

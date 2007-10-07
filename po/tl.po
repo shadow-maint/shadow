@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
 "PO-Revision-Date: 2006-03-08 17:13+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -184,9 +184,9 @@ msgstr "Password: "
 msgid "%s's Password: "
 msgstr "Password ni %s: "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chage [options] user\n"
+"Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
@@ -219,6 +219,7 @@ msgstr ""
 "\t\t\t\tbago palitan ang password\n"
 "  -W, --warndays WARN_DAYS\titakda ang babala tungkol sa pagpaso sa\n"
 "\t\t\t\tWARN_DAYS\n"
+"\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -470,6 +471,7 @@ msgstr ""
 "  -h, --help\t\tipakita itong payo na ito at lumabas\n"
 "  -m, --md5\t\tgamitin ang MD5 encryption imbes na DES kapag ang\n"
 "\t\t\tmga ibinigay na mga password ay hindi naka-encrypt\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -533,6 +535,7 @@ msgstr ""
 "  -h, --help\t\tipakita itong payo na ito at lumabas\n"
 "  -m, --md5\t\tgamitin ang MD5 encryption imbes na DES kapag ang\n"
 "\t\t\tmga ibinigay na mga password ay hindi naka-encrypt\n"
+"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -547,8 +550,14 @@ msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linya %d: di kilalang gumagamit %s\n"
 
 #, c-format
-msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Pag-gamit: %s [-s shell] [pangalan]\n"
+msgid ""
+"Usage: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\t\tdisplay this help message and exit\n"
+"  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
+"\n"
+msgstr ""
 
 msgid "Login Shell"
 msgstr "Login Shell"
@@ -607,6 +616,7 @@ msgstr ""
 "  -u, --user LOGIN\tipakita ang faillog record o pangasiwaan ang tagabilang\n"
 "\t\t\tng pagkabigo at mga palugit (kung gamit ang -r, -m o\n"
 "\t\t\t-l na opsyon) para sa gumagamit ng LOGIN lamang\n"
+"\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -721,9 +731,9 @@ msgstr "%s: hindi maisulat muli ang talaksang shadow\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: hindi matanggal ang aldaba ng talaksan\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: groupadd [options] group\n"
+"Usage: groupadd [options] GROUP\n"
 "\n"
 "Options:\n"
 "  -f, --force\t\t\tforce exit with success status if the specified\n"
@@ -744,6 +754,7 @@ msgstr ""
 "  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
 "  -K, --key KEY=HALAGA\tnangingibabaw sa mga default sa /etc/login.defs\n"
 "  -o, --non-unique\tpayagang gumawa ng grupo na may kaparehong GID\n"
+"\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -789,9 +800,9 @@ msgstr "%s: hindi maaldaba ang talaksang grupo ng shadow\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: hindi mabuksan ang talaksang grupo ng shadow\n"
 
-#, c-format
-msgid "%s: invalid group %s\n"
-msgstr "%s: hindi tanggap na grupo %s\n"
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: hindi tanggap na argumentong numero `%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -830,8 +841,66 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s ay ang NIS master\n"
 
 #, c-format
-msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Pag-gamit: groupmod [-g gid [-o]] [-n pangalan] grupo\n"
+msgid "Member already exists\n"
+msgstr ""
+
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr ""
+
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr ""
+
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr ""
+
+#, c-format
+msgid "Group access is required\n"
+msgstr ""
+
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "PAM authentication failed for\n"
+msgstr "%s: bigo ang pagpapakilalang PAM\n"
+
+#, fuzzy, c-format
+msgid "Unable to lock group file\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo\n"
+
+#, fuzzy, c-format
+msgid "Unable to open group file\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
+
+#, fuzzy, c-format
+msgid "Cannot close group file\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
+
+#, fuzzy, c-format
+msgid ""
+"Usage: groupmod [options] GROUP\n"
+"\n"
+"Options:\n"
+"  -g, --gid GID\t\t\tforce use new GID by GROUP\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -n, --new-name NEW_GROUP\tforce use NEW_GROUP name by GROUP\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
+"\n"
+msgstr ""
+"Pag-gamit: groupadd [mga opsyon] grupo\n"
+"\n"
+"Mga opsyon:\n"
+"  -f, --force\t\tipilit ang paglabas na kalagayang matagumpay kung\n"
+"\t\t\tang ibinigay na grupo ay mayroon na\n"
+"  -g, --gid GID\t\tgamitin ang GID para sa bagong grupo\n"
+"  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
+"  -K, --key KEY=HALAGA\tnangingibabaw sa mga default sa /etc/login.defs\n"
+"  -o, --non-unique\tpayagang gumawa ng grupo na may kaparehong GID\n"
+"\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
@@ -995,6 +1064,7 @@ msgstr ""
 "  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
 "  -t, --time ARAW\tipakita lamang ang lastlog record na mas-bagos sa ARAW\n"
 "  -u, --user LOGIN\tipakita lamang ang gumagamit na LOGIN\n"
+"\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1191,9 +1261,9 @@ msgstr "%s: linya %d: hindi ma-apdeyt ang ipinasok\n"
 msgid "%s: error updating files\n"
 msgstr "%s: error sa pag-apdeyt ng mga talaksan\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: passwd [options] [login]\n"
+"Usage: passwd [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -a, --all\t\t\treport password status on all accounts\n"
@@ -1227,6 +1297,7 @@ msgstr ""
 "\t\t\t\tsa INACTIVE\n"
 "  -l, --lock\t\ti-lock ang account\n"
 "  -n, --mindays MIN_ARAW\n"
+"\n"
 
 msgid "Old password: "
 msgstr "Lumang password: "
@@ -1394,9 +1465,9 @@ msgstr "Ipagpaumanhin."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: su [options] [login]\n"
+"Usage: su [options] [LOGIN]\n"
 "\n"
 "Options:\n"
 "  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
@@ -1420,6 +1491,7 @@ msgstr ""
 "\t\t\t\tang parehong shell\n"
 "  -s, --shell SHELL\t\tgamitin ang SHELL sa halip ng\n"
 "\t\t\t\tdefault sa passwd\n"
+"\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1471,10 +1543,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode\n"
 msgstr "Pumapasok sa Modang Pagtataguyod ng Sistema\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: hindi tanggap na argumentong numero `%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1561,6 +1629,7 @@ msgstr ""
 "\t\t\t\taccount\n"
 "  -s, --shell SHELL\t\titakda ang login shell para sa bagong account\n"
 "  -u, --uid UID\t\t\tgamitin ang UID para sa bagong account\n"
+"\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1762,7 +1831,8 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1807,6 +1877,7 @@ msgstr ""
 "  -s, --shell SHELL\t\titakda ang login shell para sa bagong account\n"
 "  -u, --uid UID\t\t\tgamitin ang UID para sa bagong account\n"
 "  -U, --unlock\t\t\ttanggalin ang pagkaaldaba ng account ng gumagamit\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1895,6 +1966,7 @@ msgstr ""
 "  -p, --passwd\t\tbaguhin ang database na passwd\n"
 "  -q, --quiet\t\tmodong tahimik\n"
 "  -s, --shadow\t\tbaguhin ang database na shadow o gshadow\n"
+"\n"
 
 #, c-format
 msgid ""
@@ -1913,11 +1985,3 @@ msgstr "Hindi makagawa ng backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
-
-#~ msgid ""
-#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-#~ msgstr ""
-#~ "Walang grupong \"mail\", nililikha ang mail spool na may modong 0600.\n"
-
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "Hindi makalikha ng mail spool para kay %s.\n"
