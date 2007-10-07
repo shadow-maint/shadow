@@ -4,7 +4,7 @@
 #ifdef SHADOWGRP
 
 #include "rcsid.h"
-RCSID("$Id: sgroupio.c,v 1.11 2000/09/02 18:40:43 marekm Exp $")
+RCSID("$Id: sgroupio.c,v 1.12 2001/08/14 21:10:36 malekith Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -206,6 +206,15 @@ void
 __sgr_del_entry(const struct commonio_entry *ent)
 {
 	commonio_del_entry(&gshadow_db, ent);
+}
+
+/* Sort with respect to group ordering. */
+int
+sgr_sort()
+{
+	extern struct commonio_db *__gr_get_db();
+
+	return commonio_sort_wrt(&gshadow_db, __gr_get_db());
 }
 #else
 extern int errno;  /* warning: ANSI C forbids an empty source file */

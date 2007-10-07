@@ -14,8 +14,3 @@
 #ifndef PAM_DATA_SILENT
 #define PAM_DATA_SILENT 0
 #endif
-#ifdef PAM_STRERROR_NEEDS_TWO_ARGS  /* Linux-PAM 0.59+ */
-#define PAM_STRERROR(pamh, err) pam_strerror(pamh, err)
-#else
-#define PAM_STRERROR(pamh, err) pam_strerror(err)
-#endif

@@ -30,12 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chowntty.c,v 1.7 1998/12/28 20:34:43 marekm Exp $")
+RCSID("$Id: chowntty.c,v 1.9 2001/06/23 11:09:02 marekm Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #include <stdio.h>
+#include <errno.h>
 #include <grp.h>
 
 #include "prototypes.h"
@@ -107,12 +108,16 @@ chown_tty(const char *tty, const struct passwd *info)
 	
 	if (chown(tty, info->pw_uid, gid) ||
 			chmod(tty, getdef_num("TTYPERM", 0600))) {
+		int err = errno;
+
 		snprintf(buf, sizeof buf, _("Unable to change tty %s"), tty);
+		perror(buf);
 		SYSLOG((LOG_WARN, "unable to change tty `%s' for user `%s'\n",
 			tty, info->pw_name));
 		closelog();
-		perror (buf);
-		exit(1);
+
+		if (!(err == EROFS && info->pw_uid == 0))
+			exit(1);
 	}
 
 #ifdef __linux__

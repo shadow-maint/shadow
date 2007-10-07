@@ -1,0 +1,70 @@
+.\" Copyright 1991, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: groupmod.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH GROUPMOD 1M
+.SH 名前
+groupmod \- グループに変更を加える
+.SH 書式
+.B groupmod
+[ \fB-g\fI gid \fR[ \fB-o\fR ] ]
+[ \fB-n\fI group_name \fR ]
+.I group
+.SH 説明
+\fIgroupmod\fRコマンドは、コマンドライン上で指定した変更事項に即して
+システムのアカウントファイルを改変する。
+\fIgroupmod\fRコマンドに指定できるオプションは次の通り
+.IP "\fB-g \fIgid\fR"
+変更を受けるグループのID番号。
+この値は、\fI-o\fRオプションを用いる場合以外は、他と重複してはならない。
+また、非負値でなくてはならない。
+ディフォルトでは、99より大きく且つ他の全ての既存グループのIDよりも
+大きなものの中で最小のものである。
+変更前のグループIDを持つ全てのファイルは、手作業で新しいグループIDへと
+変更しなくてはならない。
+.IP "\fB-n \fIgroup_name\fR"
+グループの名前が\fIgroup\fRから\fIgroup_name\fRに変更される。
+.SH ファイル
+/etc/group \- グループの情報
+.br
+/etc/gshadow \- グループの安全な情報
+.SH 関連項目
+\fBchfn(1), chsh(1), useradd(1M), userdel(1M), usermod(1M),
+passwd(1), groupadd(1M), groupdel(1M)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

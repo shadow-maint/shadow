@@ -10,7 +10,7 @@
 #include <errno.h>
 
 #include "rcsid.h"
-RCSID("$Id: addgrps.c,v 1.4 1998/12/28 20:34:41 marekm Exp $")
+RCSID("$Id: addgrps.c,v 1.5 2001/09/01 04:19:15 kloczek Exp $")
 
 #define SEP ",:"
 
@@ -67,7 +67,7 @@ add_groups(const char *list)
 		if (i < ngroups)
 			continue;
 
-		if (ngroups >= NGROUPS_MAX) {
+		if (ngroups >= sysconf(_SC_NGROUPS_MAX)) {
 			fprintf(stderr, _("Warning: too many groups\n"));
 			break;
 		}

@@ -1,3 +1,4 @@
+.\" $Id: lastlog.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
 .\" {PTM/WK/1999-09-18}
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
@@ -27,33 +28,37 @@
 .\" SUCH DAMAGE.
 .\"
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"
 .TH LASTLOG 8
 .SH NAZWA
 lastlog \- sprawd¼ plik ostatnich logowañ (lastlog)
 .SH SK£ADNIA
-.B lastlog
-.RB [ -u
-.IR uid ]
-.RB [ -t
-.IR dni
+.TP 8
+\fBlastlog\fR [<\fB-u\fR|\fB--user\fR> \fIlogin-u¿ytkownika\fR]
+[<\fB-t\fR|\fB--time\fR> \fIdni\fR] [<\fB-h\fR|\fB--help\fR>]
 .SH OPIS
-\fBlastlog\fR formatuje i wy¶wietla zawarto¶æ dziennika ostatnich logowañ,
-\fI/var/log/lastlog\fR.  Wy¶wietlone zostan± \fBnazwa u¿ytkownika\fR,
-\fBport\fR i \fBczas ostatniego logowania\fR.
-Domy¶lnie (bez flag) pozycje pliku wy¶wietlane s± w kolejno¶ci identyfikatorów
-u¿ytkowników (UID).
-Wprowadzenie opcji \fB-u \fInazwa_u¿ytkownika\fR spowoduje wy¶wietlenie
-pozycji opisuj±cej ostatnie rozpoczêcie sesji tylko dla tego u¿ytkownika.
-U¿ycie \fB-t \fIdni\fR powoduje, ¿e bêd± wy¶wietlone ostatnie logowania
-u¿ytkowników nowsze ni¿ sprzed zadanej liczby \fIdni\fR.
+\fBlastlog\fR formatuje i wy¶wietla zawarto¶æ dziennika ostatnich logowañ
+zapisanych w pliku \fI/var/log/lastlog\fR. Wy¶wietlone zostan± \fBnazwa
+u¿ytkownika\fR, \fBport\fR i \fBczas ostatniego logowania\fR. Domy¶lnie (bez
+flag) pozycje pliku wy¶wietlane s± w kolejno¶ci identyfikatorów u¿ytkowników
+(UID).
+.TP
+\fB-u\fR, \fB--user\fR \fIlogin-u¿ytkownika\fR spowoduje wy¶wietlenie tylko
+pozycji opisuj±cej ostatnie rozpoczêcie sesji tylko dla u¿ytkownika
+\fIlogin-u¿ytkownika\fR.
+.TP
+\fB-t\fR, \fB--time\fR \fIdni\fR spowoduje, ¿e bêd± wy¶wietlone ostatnie
+logowania u¿ytkowników nowsze ni¿ sprzed zadanej liczby \fIdni\fR.
+.TP
+\fB-h\fR, \fB--help\fR wietl krótk± informacjê o tym jak u¿ywaæ
+programu i zakoñcz pracê.
+.TP
 Opcja \fB-t\fR przes³ania u¿ycie opcji \fB-u\fR.
 .PP
 Je¿eli u¿ytkownik nigdy siê nie logowa³ to zamiast portu i czasu logowania
 zostanie wy¶wietlony komunikat \fB"**Never logged in**"\fR (nigdy siê nie
 logowa³).
 .SH PLIKI
-.IR /var/log/lastlog " - dziennik ostatnich logowañ"
+\fI/var/log/lastlog\fR " - dziennik ostatnich logowañ"
 .SH PRZESTROGI
 Du¿e luki w numeracji UID powoduj±, ¿e program bêdzie pracowa³ d³u¿ej, nie
 wy¶wietlaj±c wyników (np. je¶li mmdf=800, za¶ ostatni uid=170, to program

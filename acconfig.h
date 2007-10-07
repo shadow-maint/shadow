@@ -1,4 +1,4 @@
-/* $Id: acconfig.h,v 1.13 1999/08/27 19:02:50 marekm Exp $ */
+/* $Id: acconfig.h,v 1.15 2001/07/27 13:26:04 kloczek Exp $ */
 
 
 
@@ -95,9 +95,6 @@
 /* Package name.  */
 #undef PACKAGE
 
-/* Define if pam_strerror() needs two arguments (Linux-PAM 0.59+).  */
-#undef PAM_STRERROR_NEEDS_TWO_ARGS
-
 /* Path to passwd program.  */
 #undef PASSWD_PROGRAM
 
@@ -149,3 +146,5 @@
 /* Path for wtmp file.  */
 #undef _WTMP_FILE
 
+/* */
+#undef USG

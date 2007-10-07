@@ -1,0 +1,83 @@
+.\" Copyright 1989 - 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: su.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH SU 1
+.SH 名前
+su \- ユーザIDを変更する、又はスーパーユーザになる
+.SH 書式
+.B su
+[ - ] [ username [ args ] ]
+.SH 説明
+.I su
+はログインセッション中に別のユーザに成りすますのに用いる。
+ユーザ名を指定せずに起動した場合、
+ディフォルトではスーパーユーザのIDに変更する。
+オプション引数\fB\-\fRを用いると、
+直接ログインした場合と同じ環境に初期化される。
+.PP
+ユーザ名の後ろに追加の引数を与えることもでき、
+その場合の引数はユーザのログインシェルに渡される。
+特に、その引数の一つとして\fB-c\fRを渡した場合、
+それに続く引数は大部分のコマンドインタプリタにコマンドとして解釈される。
+そのコマンドは\fB$SHELL\fRで指定されたシェルで、もしくは
+未定義の場合には\fI/etc/passwd\fRで指定されたシェルで実行される。
+.PP
+必要な場合には、ユーザにはパスワードの入力が促される。
+間違ったパスワードが入力された場合にはエラーメッセージが出力される。
+\fIsu\fRしようとした場合は、システム破壊を検知するために、
+それが正しい場合も不正な場合も常に記録が残される。
+.PP
+現在の環境は新しいシェルに引き継がれる。
+\fB$PATH\fRの値は、通常のユーザの場合は\fB/bin:/usr/bin\fRに、
+スーパーユーザの場合は\fB/bin:/usr/bin:/etc\fRに再設定される。
+.SH 警告
+.PP
+この版の\fIsu\fRには多くのコンパイル時オプションがあるが、
+サイトによっては、その一部しか設定されていないこともある。
+.SH ファイル
+/etc/passwd \- ユーザアカウントの情報
+.br
+/etc/shadow \- 暗号化されたパスワード及び期限情報
+.br
+$HOME/.profile \- ディフォルトシェル用の初期化スクリプト
+.SH 関連項目
+login(1),
+sh(1)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

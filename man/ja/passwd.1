@@ -1,0 +1,193 @@
+.\" Copyright 1989 - 1994, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: passwd.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH PASSWD 1
+.SH 名前
+passwd \- ユーザパスワードを変更する
+.SH 書式
+\fBpasswd\fR [ \fB-f \fR|\fB -s \fR ] [ \fIname\fR ]
+.br
+\fBpasswd\fR [ \fB-g\fR ] [ \fB-r\fR|\fBR\fR ] \fIgroup\fR
+.br
+\fBpasswd\fR [ \fB-x\fR \fImax\fR ] [ \fB-n\fR \fImin\fR ]
+[ \fB-w\fR \fIwarn\fR ] [ \fB-i\fR \fIinact\fR ] \fIname\fR
+.br
+\fBpasswd\fR { \fB-l\fR | \fB-u\fR | \fB-d\fR | \fB-S\fR } \fIname\fR
+.SH 説明
+\fIpasswd\fRはユーザ及びグループアカウントのパスワードを変更する。
+一般ユーザは自分のアカウントのパスワードしか変更できない。
+スーパーユーザはいかなるアカウントのパスワードも変更することが出来る。
+グループの管理者はグループのパスワードを変更することが出来る。
+\fIpasswd\fRによって、ユーザのフルネーム、ログインシェル、パスワードの
+期限切れの日付及び有効期間等のアカウント情報を変更することもできる。
+.SS パスワードの変更
+パスワードが既にある場合は、先ず古いパスワードを入力するよう促される。
+入力されたパスワードは、暗号化され、記録されているものと照合される。
+正しいパスワードを1回で入力しなくてはならない。
+スーパーユーザは、パスワードを忘れてしまった際の変更も行なえる様に、
+このステップを無視することが出来る。
+.PP
+パスワードが入力された後、パスワード有効期限の情報を調べ、
+現在パスワードの変更が許されているか検査する。
+もし許可されていない場合は、\fIpasswd\fRは変更を拒否して終了する。
+.PP
+次いで、代わりのパスワードを入力するよう促される。
+入力されたパスワードは複雑さを検査される。
+一般的な指針としては、パスワードは以下の集合それぞれから一つ以上の
+文字を使った6から8文字のものにすべきである
+.IP "" .5i
+小文字のアルファベット
+.IP "" .5i
+大文字のアルファベット
+.IP "" .5i
+0から9迄の数字
+.IP "" .5i
+句読点
+.PP
+システムのディフォルトの消去文字やkill文字を含めない様に
+注意しなくてはならない。
+\fIpasswd\fRはあまりに単純なパスワードへの変更は拒否する。
+.PP
+入力したパスワードが受け入れられた場合、
+\fIpasswd\fRはもう一度入力を促し、二番目に入力したものを最初の
+ものと比較する。
+パスワード変更が受け入れられるためには、両方の入力が符合なくてはならない。
+.SS グループパスワード
+\fB-g\fRオプションを用いた場合、指定したグループのパスワードが変更される。
+スーパーユーザか指定したグループの管理者でないと
+このオプションは使えない。
+現在のグループパスワードは尋ねてこない。
+\fB-g\fRオプションを\fB-r\fRオプションとともに用いると、
+指定したグループのパスワードが削除される。
+こうすると、全てのメンバーがこのグループにアクセスできる。
+\fB-R\fRオプションを\fB-g\fRオプションとともに用いると、
+全てのユーザに対して指定したグループへのアクセスを禁止する事が出来る。
+.SS パスワードの有効期限情報
+パスワードの有効期限の情報はスーパーユーザが\fB-x\fR、\fB-n\fR、
+\fB-w\fR及び\fB-i\fRオプションを用いて変更できる。
+\fB-x\fRオプションはパスワードが有効な最大日数を設定するのに用いられる。
+\fImax\fR日が過ぎるとパスワードを変更するように求められる。
+\fB-n\fRオプションはパスワードが変更可能となるまでの最小日数を
+設定するのに用いられる。
+ユーザは\fImin\fR日が経過した後でないとパスワードを変更することが
+できない。
+\fB-w\fRオプションはパスワードの使用期限が来る前に何日間
+警告を与えるかを設定するために用いられる。
+期限切れの\fIwarn\fR日前から注意が開始され、
+あと何日でパスワードが期限切れになるかが示される。
+\fB-i\fRオプションは、パスワードの期限が切れたあと何日間そのアカウント
+が使用不能の状態にするかを設定するのに用いる。
+\fIinact\fR日間アカウントをパスワード期限切れ状態のままにすると、
+ユーザはそのアカウントに入ることが出来なくなる。
+.SS アカウントの保守
+\fB-l\fR及び\fB-u\fRフラッグを用いてアカウントをロックしたり
+ロックを外したりする事が出来る。
+\fB-l\fRオプションを用いると、パスワードは暗号化された如何なる値とも
+符合しなくなり、アカウントは使用不能になる。
+\fB-u\fRオプションを用いると、パスワードが以前の値に戻り、
+アカウントが再び使用可能となる。
+.PP
+\fB-S\fRオプションを用いるとアカウントの状態が表示される。
+アカウントの状態の情報は6つの部分からなる。
+最初の部分は、アカウントにロックがかけられているのか(L)、
+パスワードが存在しないのか(NP)、
+もしくは使用可能なパスワードがある(P)のかを示す。
+2番目は最後にパスワードが変更された日付を示す。
+残りの4つの部分はそれぞれパスワードの最短期限、最長期限、警告期間、
+使用不能期間である。
+.SS ユーザパスワードに対するヒント
+パスワードの安全性は暗号化アルゴリズムの強力さとキー空間の大きさに
+依存する。
+\fB\s-2UNIX\s+2\fRのシステム暗号化の方法はNBS DESアルゴリズムに
+基づいており、非常に安全性が高い。
+キー空間の大きさは選ばれたパスワードのランダムさに依存する。
+.PP
+パスワードの安全性が脅かされるのは、大抵の場合パスワードを注意深く
+選び扱わない事による。
+したがって、パスワードは辞書に載っていないもの若しくは
+書き留める必要のないものを選択すべきである。
+また、固有名詞や免許証番号、誕生日や自宅の住所といったものを
+パスワードにするのも避けるべきである。
+というのは、上のいずれもシステムのセキュリティを犯す際の推量として
+用いられる可能性があるからである。
+.PP
+パスワードは紙片に書き留めておく必要が無いような簡単に思い出せる
+ものにしなくてはならない。
+これは、例えば短い二つの単語をくっ付けてその間に特殊記号又は数字を
+挟み込むことによって作ることが出来る。
+例えば、Pass%word等である。
+.PP
+他の作り方としては、文学作品などから思い出しやすい句を選び出し、
+それぞれの単語から最初若しくは最後の文字を抜き出す方法がある。
+この方法の例としては
+.IP "" .5i
+Ask not for whom the bell tolls.
+.PP
+という句から次の様なパスワードが作り出せる。
+.IP "" .5i
+An4wtbt.
+.PP
+恐らくクラッカーの持っている辞書にこんな語句は載っていなさそうだ、
+と思うであろう。
+しかし、ここに示した方法だけに頼るのではなく、自分独自のパスワード
+の作り方を考え出すべきである。
+.SS グループのパスワードに関する注意
+グループパスワードは、一人以上の人間が知ることが許されるものであるから、
+生来的にセキュリティ上の問題を抱えている。
+しかし、グループという道具立ては別々の人間が共同で作業する事が出来るので、
+便利ではある。
+.SH 警告
+全てのオプションが使えるようには設定されていない可能性がある。
+パスワードの複雑さの検証はサイト毎に異なっているだろう。
+ユーザはシステムが満足する充分複雑なパスワードを選ぶよう強いられる。
+NISが動作しておりしかもNISサーバ以外にログインしている場合は
+パスワードを変更することが出来ない。
+.SH ファイル
+/etc/passwd \- ユーザアカウントに関する情報
+.br
+/etc/shadow \- ユーザの暗号化されたパスワード
+.SH 関連項目
+passwd(3),
+shadow(3),
+group(5),
+passwd(5)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+
+
+

@@ -1,0 +1,75 @@
+.\" Copyright 1990 - 1994 John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: chfn.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH CHFN 1
+.SH NAME
+chfn \- ユーザの名前等の情報を変更する。
+.SH 書式
+\fBchfn\fR [ \fB-f \fIfull_name\fR ] [ \fB-r \fIroom_no\fR ]
+.br
+[ \fB-w \fIwork_ph\fR ] [ \fB-h \fIhome_ph\fR ] [ \fB-o \fIother\fR ]
+[ \fIuser\fR ]
+.SH 説明
+\fIchfn\fR
+は、ユーザのフルネーム、オフィスの部屋番号及び内線番号、
+自宅の電話番号といったアカウント情報を変更する。
+この情報は\fIfinger(1)\fRやそれと類似のプログラムによって表示される。
+一般ユーザは自分自身のアカウントの情報の変更のみ行うことが出来る。
+スーパーユーザは全てのアカウントに対して情報の変更が出来る。
+また、\fB-o\fRオプションを用いてGCOS欄の未定義部分の変更を行えるのも
+スーパーユーザだけである。
+.PP
+各欄には、コントロール文字及び、コンマ、コロン、等号以外の全ての文字を
+書くことが出来る。
+\fIother\fR欄に対してはこの制限はないので、他のアプリケーションが用いる
+アカウンティング情報を記録しておく事が出来る。
+.PP
+いずれのオプションも選択されなかった場合は、\fIchfn\fRは対話的に動作し、
+全ての欄に対して、各々現在の設定値を表示し、新しい値の入力を促す。
+新しい値を設定する場合はそれを入力し、または現在の値を使うなら空行のまま
+リターンキーを押せばよい。
+現在の値は一対の \fB[ ]\fR 記号の間に表示される。
+オプションを指定しなかった場合、chfnはそれを起動したユーザのアカウントに
+対して働く。
+.SH ファイル
+/etc/passwd \- ユーザのアカウント情報
+.SH 関連コマンド
+passwd(4)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

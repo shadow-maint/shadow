@@ -10,3 +10,4 @@ extern int gr_remove(const char *);
 extern int gr_rewind(void);
 extern int gr_unlock(void);
 extern int gr_update(const struct group *);
+extern int gr_sort(void);

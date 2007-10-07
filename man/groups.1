@@ -1,3 +1,4 @@
+.\"$Id: groups.1,v 1.8 2001/01/27 02:55:52 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,23 +25,16 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: groups.1,v 1.6 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH GROUPS 1
 .SH NAME
 groups \- Display current group ID names
 .SH SYNOPSIS
-.B groups
-.RI [ user ]
+\fBgroups\fR [\fIuser\fR]
 .SH DESCRIPTION
-.B groups
-displays the current group ID names
-or values.
-If the value does not have a corresponding entry in
-\fI/etc/group\fR, the value will be displayed as the numerical group value.
-The optional \fIuser\fR parameter will display the groups for the named
-\fIuser\fR.
+\fBgroups\fR displays the current group ID names or values. If the value
+does not have a corresponding entry in \fI/etc/group\fR, the value will be
+displayed as the numerical group value. The optional \fIuser\fR parameter
+will display the groups for the named \fIuser\fR.
 .SH NOTE
 Systems which do not support concurrent group sets will have the information
 from \fI/etc/group\fR reported.

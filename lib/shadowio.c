@@ -4,7 +4,7 @@
 #ifdef SHADOWPWD
 
 #include "rcsid.h"
-RCSID("$Id: shadowio.c,v 1.12 2000/09/02 18:40:43 marekm Exp $")
+RCSID("$Id: shadowio.c,v 1.13 2001/08/14 21:10:36 malekith Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -167,5 +167,14 @@ void
 __spw_del_entry(const struct commonio_entry *ent)
 {
 	commonio_del_entry(&shadow_db, ent);
+}
+
+/* Sort with respect to passwd ordering. */
+int
+spw_sort()
+{
+	extern struct commonio_db *__pw_get_db();
+
+	return commonio_sort_wrt(&shadow_db, __pw_get_db());
 }
 #endif

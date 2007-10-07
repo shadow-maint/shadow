@@ -2,7 +2,7 @@
 
 EXTRA_DIST = NEWS README TODO shadow-utils.spec.in
 
-AUTOMAKE_OPTIONS = 1.0 foreign
+AUTOMAKE_OPTIONS = 1.5 dist-bzip2 foreign
 
-SUBDIRS = intl po man lib libmisc src \
+SUBDIRS = intl po man libmisc lib src \
 	contrib debian doc etc

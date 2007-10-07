@@ -1,0 +1,115 @@
+.\" Copyright 1990 - 1994 John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: chage.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH CHAGE 1
+.SH 名前
+chage \- ユーザパスワードの有効期限の情報を変更する。
+.SH 書式
+\fBchage\fR [ \fB-m \fImindays\fR ] [ \fB-M \fImaxdays\fR ]
+[ \fB-d \fIlastday\fR ] [ \fB-I \fIinactive\fR ]
+[ \fB-E \fIexpiredate\fR ] [ \fB-W \fIwarndays\fR ] \fIuser\fR
+.sp 1
+\fBchage\fR -l \fIuser\fR
+.SH 説明
+\fIchage\fRは、
+パスワードの最終更新日から次に変更すべき期日までの日数を変更する。
+システムは、この情報を用いて、ユーザがいつパスワードを変更すべきかを決定する。
+\fIchage\fRコマンドの使用は、\fB-l\fRオプションを用いる場合以外は
+rootユーザのみに制限されている。
+\fB-l\fRオプションは、一般ユーザが自分のパスワード又はアカウント
+の期限が切れる日がいつかを知るために使うことが出来る。
+.PP
+\fB-m\fRオプションを指定した場合、
+\fImindays\fRの値はパスワード変更の間の最低日数になる。
+この欄をゼロとした時は、ユーザはいつでもパスワードを変更できる。
+.PP
+\fB-M\fRオプションを指定した場合、
+\fImaxdays\fRの値はパスワードが有効な最長日数となる。
+\fImaxdays\fRと\fIlastday\fRをたした値が現在の日付より小さい場合、
+ユーザがアカウントを使用するためにはパスワードを変更しなくては
+ならない。
+\fB-W\fRオプションを使えばこの期日がいつ来るかが分かるようにすることができ、
+その場合はユーザに事前に警告が与えられる。
+.PP
+\fB-d\fRオプションを用いる場合、
+\fIlastday\fRの値は1970年1月1日からパスワード最終更新日迄の日数になる。
+日数は月月/日日/年年という書式 (若しくはあなたの地域でもっとよく用いられて
+いる書式)で指定する事もできる。
+.PP
+\fB-E\fRオプションはユーザがアカウントに最早アクセスできなくなる
+日付を設定するのに用いられる。
+\fIexpiredate\fRオプションは1970年1月1日からアカウントがロック
+される日迄の日数である。
+日数は月月/日日/年年という書式(若しくはあなたの地域でもっとよく
+用いられているもの)で指定することも出来る。
+アカウントがロックされたユーザが再びそのシステムを使うためには、
+システム管理者にコンタクトを取らねばならない。
+.PP
+\fB-I\fRオプションはパスワードの期限が切れてからアカウントがロック
+される迄の使用不能日数を設定するために用いる。
+アカウントがロックされたユーザが再びそのシステムを使うためには、
+システム管理者にコンタクトを取らねばならない。
+\fIinactive\fRオプションは使用不能となる期間の日数である。
+0とするとこの機能を効かなくすることが出来る。
+.PP
+\fB-W\fRオプションは、パスワードの変更が必要となる前に警告を行う
+日数を設定するために用いる。
+\fIwarndays\fRオプションは、パスワードの期限切れに先だって
+ユーザに期限が切れかかっていることを警告する日数である。
+.PP
+シャドーパスワードファイルが用いられる時は、上に挙げた値は日数として
+保存されるが、標準のパスワードファイルが用いられる時には
+週の数に変換される。
+この変換が行われるため、丸めの誤差が生じることもある。
+.PP
+上に挙げたいずれのオプションも指定しなかった場合は、
+\fIchage\fRは対話的に動作し、全ての欄に対して、各々現在の設定値を表示し、
+新しい値の入力を促す。
+新しい値を設定する場合はそれを入力し、現在の値を使うなら空行のまま
+リターンキーを押せばよい。
+現在の値は一対の\fB[ ]\fR記号の間に表示される。
+.SH ファイル
+/etc/passwd \- ユーザのアカウント情報
+.br
+/etc/shadow \- ユーザの shadow アカウント情報
+.SH 関連項目
+passwd(4),
+shadow(4)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

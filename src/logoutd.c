@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: logoutd.c,v 1.16 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: logoutd.c,v 1.17 2001/08/06 06:23:26 kloczek Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -279,7 +279,7 @@ main(int argc, char **argv)
 			close (tty_fd);
 #endif  /* BSD || SUN || SUN4 */
 
-			strncpy(user, ut->ut_line, sizeof(user) - 1);
+			strncpy(user, ut->ut_user, sizeof(user) - 1);
 			user[sizeof(user) - 1] = '\0';
 
 			SYSLOG((LOG_NOTICE, "logged off user `%s' on `%s'\n",

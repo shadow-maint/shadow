@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: copydir.c,v 1.7 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: copydir.c,v 1.8 2001/06/28 18:27:29 marekm Exp $")
 
 
 #include <sys/stat.h>
@@ -293,7 +293,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			err++;
 			break;
 		}
-		if ((ofd = open (dst_name, O_WRONLY|O_CREAT, 0)) < 0 ||
+		if ((ofd = open (dst_name, O_WRONLY|O_CREAT|O_TRUNC, 0)) < 0 ||
 			chown (dst_name, uid == (uid_t) -1 ? sb.st_uid:uid,
 					gid == (gid_t) -1 ? sb.st_gid:gid) ||
 				chmod (dst_name, sb.st_mode & 07777)) {

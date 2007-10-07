@@ -1,18 +1,14 @@
 
-AUTOMAKE_OPTIONS = 1.0 foreign
+EXTRA_DOST = .indent.pro
 
-# Watch out; note the difference between prefix & exec_prefix.
-# Normally configure sets exec_prefix to root when prefix is /usr.
-
-bindir = ${exec_prefix}/bin
-sbindir = ${exec_prefix}/sbin
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
-localedir = $(datadir)/locale
 
-noinst_HEADERS = patchlevel.h
+DEFS = -D_HAVE_CONFIG_H -DLOCALEDIR=\"$(datadir)/locale\"
 
-DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
+INCLUDES = -I${top_srcdir} \
+	-I${top_srcdir}/lib \
+	-I$(top_srcdir)/libmisc
 
 # XXX why are login and su in /bin anyway (other than for
 # historical reasons)?
@@ -25,22 +21,37 @@ DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
 # and installation would be much simpler (just two directories,
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
-bin_PROGRAMS = login su
+bin_PROGRAMS = groups login su
 ubin_PROGRAMS = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
 usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod \
 	logoutd mkpasswd newusers useradd userdel usermod grpck \
 	pwck vipw grpconv grpunconv pwconv pwunconv
 
-EXTRA_DIST = shadowconfig.sh
+noinst_PROGRAMS = id sulogin
 
 # id and groups are from gnu, sulogin from sysvinit,
 # also suid programs are installed by hand.
-# XXX installation by hand breaks libtool shared lib support
-# (the wrapper scripts get installed instead of binaries),
-# so we now chmod the programs by hand after normal installation.
 
 suidbins = su
 suidubins = chage chfn chsh expiry gpasswd newgrp passwd
+
+LDADD = $(top_builddir)/libmisc/libmisc.la \
+	$(top_builddir)/lib/libshadow.la
+
+chpasswd_LDADD = $(LDADD) $(LIBPAM)
+chage_LDADD    = $(LDADD) $(LIBPAM)
+chfn_LDADD     = $(LDADD) $(LIBPAM)
+chsh_LDADD     = $(LDADD) $(LIBPAM)
+groupadd_LDADD = $(LDADD) $(LIBPAM)
+groupdel_LDADD = $(LDADD) $(LIBPAM)
+groupmod_LDADD = $(LDADD) $(LIBPAM)
+login_LDADD    = $(LDADD) $(LIBPAM)
+newusers_LDADD = $(LDADD) $(LIBPAM)
+passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK)
+su_LDADD       = $(LDADD) $(LIBPAM)
+useradd_LDADD  = $(LDADD) $(LIBPAM)
+userdel_LDADD  = $(LDADD) $(LIBPAM)
+usermod_LDADD  = $(LDADD) $(LIBPAM)
 
 install-exec-hook:
 	for i in $(suidbins); do \
@@ -53,43 +64,3 @@ install-data-hook:
 	done
 	rm -f $(DESTDIR)$(ubindir)/sg
 	ln -s newgrp $(DESTDIR)$(ubindir)/sg
-
-noinst_PROGRAMS = groups id sulogin
-
-#install-exec-local:
-#	$(mkinstalldirs) $(bindir)
-#	for i in $(suidbins); do \
-#	  $(INSTALL) -m 4755 $$i $(bindir); \
-#	done
-#	$(mkinstalldirs) $(ubindir)
-#	for i in $(suidubins); do \
-#	  $(INSTALL) -m 4755 $$i $(ubindir); \
-#	done
-#	rm -f $(bindir)/sg
-#	ln -s $(ubindir)/newgrp $(bindir)/sg
-#
-#noinst_PROGRAMS = id groups \
-# su \
-# chage chfn chsh expiry gpasswd newgrp passwd \
-# sulogin
-
-shlibs = ../lib/libshadow.la
-# With glibc2, almost all programs need libcrypt for some reason,
-# even those that don't actually use crypt().
-LDADD = ${shlibs} ../libmisc/libmisc.a ../lib/libshadow.a @INTLLIBS@ @LIBCRYPT@ @LIBTCFS@ @LIBSKEY@ @LIBMD@
-INCLUDES = -I${top_srcdir}/lib -I$(top_srcdir)/libmisc
-
-chfn_LDADD = $(LDADD) @LIBPAM@
-chsh_LDADD = $(LDADD) @LIBPAM@
-login_LDADD = $(LDADD) @LIBPAM@
-passwd_LDADD = $(LDADD) @LIBCRACK@ @LIBPAM@
-su_LDADD = $(LDADD) @LIBPAM@
-chage_LDADD = $(LDADD) @LIBPAM@
-chpasswd_LDADD = $(LDADD) @LIBPAM@
-groupadd_LDADD = $(LDADD) @LIBPAM@
-groupdel_LDADD = $(LDADD) @LIBPAM@
-groupmod_LDADD = $(LDADD) @LIBPAM@
-newusers_LDADD = $(LDADD) @LIBPAM@
-useradd_LDADD = $(LDADD) @LIBPAM@
-userdel_LDADD = $(LDADD) @LIBPAM@
-usermod_LDADD = $(LDADD) @LIBPAM@

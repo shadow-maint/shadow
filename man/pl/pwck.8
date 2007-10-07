@@ -1,3 +1,4 @@
+.\" $Id: pwck.8,v 1.4 2001/08/14 21:11:19 malekith Exp $
 .\" {PTM/WK/1999-09-14}
 .\" Copyright 1992, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,9 +26,6 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: pwck.8,v 1.2 2000/10/16 21:34:43 kloczek Exp $
-.\"
 .TH PWCK 1
 .SH NAZWA
 pwck - weryfikacja spójno¶ci plików hase³
@@ -79,6 +77,9 @@ Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko-do-odczytu, poprzez
 podanie flagi \fB-r\fR.
 Powoduje to, ¿e na wszystkie pytania dotycz±ce zmian zostanie, bez ingerencji
 u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
+\fBpwck\fR mo¿e byæ równie¿ u¿yty do sortowania pozycji w plikach \fI/etc/passwd\fR 
+oraz \fI/etc/shadow\fR wed³ug UID. By w³±czyæ tryb sortowania nale¿y przekazaæ
+opcjê \fB-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
 .SH PLIKI
 .IR /etc/passwd " - informacja o kontach u¿ytkowników"
 .br

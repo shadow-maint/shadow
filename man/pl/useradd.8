@@ -1,3 +1,4 @@
+.\" $Id: useradd.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,48 +26,24 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: useradd.8,v 1.3 2000/10/16 21:34:43 kloczek Exp $
-.\"
 .TH USERADD 8
 .SH NAZWA
 useradd - twórz nowego u¿ytkownika lub zmieñ domy¶ln± informacjê o nowym
 .SH SK£ADNIA
 .TP 8
-.B useradd
-.\" .RB [ -A
-.\" .RI { metoda | \fBDEFAULT\fR "},... ]"
-.RB [ -c
-.IR komentarz ]
-.RB [ -d
-.IR katalog_domowy ]
+\fBuseradd\fR [\fB-c\fR \fIkomentarz\fR] [\fB-d\fR \fIkatalog_domowy\fR]
+[\fB-e\fR \fIdata_wa¿no¶ci\fR] [\fB-f\fR \fIdni_nieaktywno¶ci\fR]
 .br
-.RB [ -e
-.IR data_wa¿no¶ci ]
-.RB [ -f
-.IR dni_nieaktywno¶ci ]
+[\fB-g\fR \fIgrupa_pocz±tkowa\fR] [\fB-G\fR \fIgrupa [,...]\fR]
 .br
-.RB [ -g
-.IR grupa_pocz±tkowa ]
-.RB [ -G
-.IR grupa [,...]]
+[\fB-m\fR [\fB-k\fR \fIkatalog_wzorców\fR]] [\fB-s\fR \fIpow³oka\fR]
 .br
-.RB [ -m " [" -k
-.IR katalog_wzorców ]]
-.RB [ -s
-.IR pow³oka ]
-.br
-.RB [ -u
-.IR uid " ["
-.BR -o ]]
-.I login
+[\fB-u\fR \fIuid\fR [\fB-o\fR]] \fIlogin\fR
 .TP 8
-.B useradd
-\fB-D\fR
-[\fB-g\fI domy¶lna_grupa\fR]
-[\fB-b\fI katalog_bazowy\fR]
+\fBuseradd\fR \fB-D\fR [\fB-g\fI domy¶lna_grupa\fR] [\fB-b\fI katalog_bazowy\fR]
 .br
 [\fB-f\fI domy¶lne_dni_nieaktywno¶ci\fR]
+.br
 [\fB-e\fI domy¶lna_data_wa¿no¶ci\fR]
 .br
 [\fB-s\fI domy¶lna_pow³oka\fR]
@@ -213,7 +190,7 @@ siê, ¿e korzystasz z w³a¶ciwej dokumentacji.
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: useradd.8,v 1.3 2000/10/16 21:34:43 kloczek Exp $
+.\"	$Id: useradd.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
 .\"
 .TH USERADD 8
 .SH NAZWA

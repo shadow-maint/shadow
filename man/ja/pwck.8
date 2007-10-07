@@ -1,0 +1,113 @@
+.\" Copyright 1992, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: pwck.8,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH PWCK 8
+.SH 名前
+pwck \- パスワードファイルの完全性を検証する
+.SH 書式
+\fBpwck\fR [ \fB-r\fR ] [ \fIpassword\fR \fIshadow\fR ]
+.SH 書式
+\fBpwck\fRはシステムの認証情報の完全性の検証を行う。
+\fB/etc/passwd\fR及び\fB/etc/shadow\fRファイル中の全てのエントリーに対して、
+書式が正しいか及び各欄に記されているデータは有効なものかどうかの検証が
+行なわれる。
+書式が正しくなかったりその他の訂正不能な誤りを含むエントリーは削除を促される。
+.P
+各々のエントリーに対して
+.sp
+.in +.5i
+- 欄の数が正しいか
+.br
+- ユーザ名に重複がないか
+.br
+- ユーザ及びグループアイデンティファイアが有効なものであるか
+.br
+- 主グループが有効なものであるか
+.br
+- ホームディレクトリが正しいか
+.br
+- ログインシェルが正しいか
+.in -.5i
+等のチェックが行われる。
+.sp
+.P
+欄の数が正しいこと及びユーザ名の重複がないことが最重要事項である。
+欄の数が正しくない場合、その行のエントリーを削除するよう促される。
+削除に同意しなかった場合は、それ以降のチェックは無視される。
+重複したユーザ名があった場合も削除を促されるが、この場合は
+それ以降のチェックは続行される。
+他の全てのエラーに対しては警告がなされるのみであり、その場合は
+誤りを訂正するために\fBusermod\fRコマンドを実行するよう勧められる。
+.P
+\fB/etc/passwd\fRファイルに作用するコマンドは、誤ったもしくは
+重複したエントリーを変更することは出来ない。
+その際は、\fBpwck\fRを用いて誤りのあるエントリーを削除すべきである。
+.SH オプション
+ディフォルトでは、\fBpwck\fRは\fB/etc/passwd\fRファイル及び
+\fB/etc/shadow\fRに対して作用する。
+\fIpasswd\fR及び\fIshadow\fRパラメータを用いて別のファイルを選択する
+事もできる。
+加えて、\fB-r\fRフラッグで指示することにより、
+リードオンリーモードでコマンドを実行することもできる。
+この場合は、変更を行うかどうかの質問に対していちいち答えなくとも、
+自動的に\fBno\fRと回答される。
+.SH ファイル
+/etc/passwd \- ユーザアカウントに関する情報
+.br
+/etc/shadow \- 暗号化されたパスワード情報
+.br
+/etc/group \- グループに関する情報
+.SH 関連項目
+usermod(1), group(4), passwd(4), shadow(4)
+.SH 返り値
+\fIpwck\fRコマンドは以下の戻り値を返して終了する:
+.IP 0 5
+成功
+.IP 1 5
+構文エラー
+.IP 2 5
+誤ったパスワードエントリーが存在する
+.IP 3 5
+パスワードファイルをオープンできない
+.IP 4 5
+パスワードファイルをロックできない
+.IP 5 5
+パスワードファイルを更新出来ない
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

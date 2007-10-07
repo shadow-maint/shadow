@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: login.c,v 1.18 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: login.c,v 1.21 2001/06/28 20:47:06 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -89,8 +89,8 @@ static const struct pam_conv conv = {
 static pam_handle_t *pamh = NULL;
 
 #define PAM_FAIL_CHECK if (retcode != PAM_SUCCESS) { \
-	fprintf(stderr,"\n%s\n",PAM_STRERROR(pamh, retcode)); \
-	syslog(LOG_ERR,"%s",PAM_STRERROR(pamh, retcode)); \
+	fprintf(stderr,"\n%s\n",pam_strerror(pamh, retcode)); \
+	syslog(LOG_ERR,"%s",pam_strerror(pamh, retcode)); \
 	pam_end(pamh, retcode); exit(1); \
    }
 #define PAM_END { retcode = pam_close_session(pamh,0); \
@@ -146,7 +146,10 @@ extern	int	optind;
 extern	char	*optarg;
 extern	char	**environ;
 
+#ifndef USE_PAM
 extern int login_access(const char *, const char *);
+#endif
+
 extern void login_fbtab(const char *, uid_t, gid_t);
 
 #ifndef	ALARM
@@ -708,9 +711,9 @@ top:
 	retcode = pam_start("login", username, &conv, &pamh);
 	if(retcode != PAM_SUCCESS) {
 		fprintf(stderr,"login: PAM Failure, aborting: %s\n",
-		PAM_STRERROR(pamh, retcode));
+		pam_strerror(pamh, retcode));
 		syslog(LOG_ERR,"Couldn't initialize PAM: %s",
-			PAM_STRERROR(pamh, retcode));
+			pam_strerror(pamh, retcode));
 		exit(99);
 	}
 	/* hostname & tty are either set to NULL or their correct values,
@@ -726,7 +729,7 @@ top:
 #endif
 	/* if fflg == 1, then the user has already been authenticated */
 	if (!fflg || (getuid() != 0)) {
-		int failcount;
+		int failcount = 0;
 		char hostn[256];
 		char login_prompt[256]; /* That's one hell of a prompt :) */
 
@@ -763,7 +766,7 @@ top:
 			pam_get_item(pamh, PAM_USER, (const void **) &pam_user);
 			syslog(LOG_NOTICE,"FAILED LOGIN %d FROM %s FOR %s, %s",
 				failcount, hostname, pam_user,
-				PAM_STRERROR(pamh, retcode));
+				pam_strerror(pamh, retcode));
 #ifdef HAVE_PAM_FAIL_DELAY
 			pam_fail_delay(pamh, 1000000*delay);
 #endif
@@ -779,12 +782,12 @@ top:
 				syslog(LOG_NOTICE,
 					"TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
 					failcount, hostname, pam_user,
-					PAM_STRERROR(pamh, retcode));
+					pam_strerror(pamh, retcode));
 			else
 				syslog(LOG_NOTICE,
 					"FAILED LOGIN SESSION FROM %s FOR %s, %s",
 					hostname, pam_user,
-					PAM_STRERROR(pamh, retcode));
+					pam_strerror(pamh, retcode));
 
 			fprintf(stderr, "\nLogin incorrect\n");
 			pam_end(pamh, retcode);
@@ -1059,6 +1062,7 @@ auth_ok:
 	setutmp(username, tty, hostname); /* make entry in utmp & wtmp files */
 #endif
 	if (pwent.pw_shell[0] == '*') {	/* subsystem root */
+		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
 		subroot++;		/* say i was here again */
 		endpwent ();		/* close all of the file which were */

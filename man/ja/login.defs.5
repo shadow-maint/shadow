@@ -1,0 +1,447 @@
+.\" Copyright 1991 - 1993, John F. Haugh II and Chip Rosenthal
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: login.defs.5,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH LOGIN 5
+.SH 名前
+/etc/login.defs \- Loginの設定
+.SH 説明
+.I /etc/login.defs
+ファイルはshadow login suiteに対するサイト固有の設定を行うためのものである。
+このファイルは必ず存在しなければならない。
+このファイルが無くともシステム運用は可能であるが、おそらく望まない
+結果となるだろう。
+.PP
+このファイルは読み取り可能なテキストファイルで、ファイル中の一行につき
+一つのパラメタを設定している。
+各行は設定パラメータの名前及びその値が空白で区切られたものからなる。
+空行及びコメント行は無視される。
+コメント行は'#'記号で始まる。記号'#'はその行の最初の空白以外の文字
+でなくてはならない。
+.PP
+パラメータ値は四つの型を取ることが出来る: 文字列、ブール型、数、倍精度数
+である。
+文字列には全ての印刷可能文字を使うことが出来る。
+ブール型パラメータの値は``yes''又は``no''のいずれかでなくてはならない。
+未定義の、もしくは上記以外の値のブール型パラメータの値は``no''とされる。
+(単精度及び倍精度)数は、十進数、(数値の前に``0''を付けた)八進数または
+(数値の前に``0x''を付けた)十六進数のいずれかで指定する。
+単及び倍精度数パラメータの最大値は計算機に依存する。
+.PP
+以下に示すような設定項目がある:
+.\"
+.IP "CONSOLE (文字列)"
+この項目を指定すると、rootがログインできるコンソールデバイスを制限する
+ことが出来る。
+ここで指定した設定を満たさないコンソールデバイスからrootとしてログイン
+しようとしても拒否される。この項目の設定は二つの形式を用いることが出来、
+ひとつは
+.sp
+.ft CW
+	CONSOLE /etc/consoles
+.ft P
+.sp
+の様な絶対パスを用いた指定法、
+今一つは
+.sp
+.ft CW
+	CONSOLE console:tty01:tty02:tty03:tty04
+.ft P
+.sp
+の様にコロンで区切られたリストで端末線を指定する方法である。
+パス名を指定する場合は、一行で一つの端末接続線を指定しなくてはならない。
+このパラメータが未定義である場合や指定したファイルが存在しない場合は、
+rootは全ての端末デバイスからログイン出来てしまう。
+このファイルが存在しない場合や壊れている場合にはrootとしての不正なログインが
+出来てしまうことになるので、このファイルはプロテクトをかけておかなくては
+ならない。
+セキュリティが非常に重要である場合は、このようなアタックの可能性を無くす
+ために、コロンで区切った形式を用いなくてはならない。
+.\"
+.IP "DIALUPS_CHECK_ENAB (ブール値)"
+値が
+.I yes
+で、かつ
+.I /etc/dialups
+ファイルが存在する場合は、このファイルで指定したダイアルアップデバイス
+では第二のパスワードも使用される。
+このファイルにはダイアルアップ接続線のリストを以下の様に一行に一つずつ
+指定しなくてはならない:
+.nf
+.sp
+.ft CW
+	ttyfm01
+	ttyfm02
+	\0\0.
+	\0\0.
+	\0\0.
+.ft P
+.sp
+.fi
+.\"
+.IP "ENV_HZ (文字列)"
+このパラメータにはHZ環境変数の内容を指定する。
+使用例は:
+.sp
+	\f(CWENV_HZ     HZ=50\fP
+.sp
+このパラメータが定義されていない場合は、HZの値は初期化されない。
+.\"
+.IP "ENV_PATH (文字列)"
+このパラメータは一般ユーザの検索パスに設定しなくてはならない。
+UIDがゼロ以外のユーザがログインした場合、環境変数PATHの内容はこの
+値に初期化される。
+このパラメータは必ず必要である; 定義されていない場合は誤った
+ディフォルト値に設定されてしまうだろう。
+.\"
+.IP "ENV_SUPATH (文字列)"
+このパラメータはスーパーユーザの検索パスに設定しなくてはならない。
+UIDがゼロのユーザがログインした場合、環境変数PATHの内容はこの
+値に初期化される。
+このパラメータは必ず必要である; 定義されていない場合は誤りのあり得る
+ディフォルト値に設定されてしまうだろう。
+.\"
+.IP "ENV_TZ (文字列)"
+このパラメータには環境変数TZを作り出すための情報を指定する。
+パラメータの値は、TZに指定したい値か、この情報が記述されているファイルの
+絶対パス名でなくてはならない。
+使用例は:
+.sp
+	\f(CWENV_TZ\0\0\0\0TZ=CST6CDT\fP
+.sp
+又は
+.sp
+	\f(CWENV_TZ\0\0\0\0/etc/tzname\fP
+.sp
+存在しないファイルを指定した場合、TZはあるディフォルト値に初期化される。
+このパラメータが未定義の場合はTZの値は初期化されない。
+.\"
+.IP "ERASECHAR (数)"
+端末の
+.I erase
+文字がこの値に初期化される。
+.I termio
+インターフェースを備えたシステム(例えば System V)でのみサポートされている。
+指定されていない場合は、erase文字はバックスペースに初期化される。
+関連情報についてはKILLCHARを参照せよ。
+.\"
+.IP "FAILLOG_ENAB (ブール値)"
+.I yes
+に設定した場合は、ログインの失敗が
+.I /var/log/faillog
+中に
+.I faillog(8)
+の書式で記録される。
+.\"
+.IP "FTMP_FILE (文字列)"
+このパラメータにはログイン失敗を記録するファイルの絶対パス名を指定する。
+ログイン失敗が発生した場合、その記録がこのファイルに
+.I utmp
+形式のレコードで追加される。
+.I /var/log/faillog
+.\" this parameter is not specified then logging will be inhibited.  See
+.\" FAILLOG_ENAB and LOG_UNKFAIL_ENAB for related information.
+へのログイン失敗の記録とは、以下の点で異なっていることに注意。
+この機能ではログイン失敗を全て記録するが、``faillog''機能ではログイン失敗
+情報をユーザ毎に記録して行く。
+このパラメータが指定されていない場合はロギングが抑制される。
+関連情報はFAILLOG_ENABとLOG_UNKFAIL_ENABを参照せよ。
+.\"
+.IP "HUSHLOGIN_FILE (文字列)"
+このパラメータは``hushlogin''の条件を設定するために用いる。
+この設定を行う方法には二通りある。
+第一の方法は、このパラメータの値がファイル名であり且つそのファイルが
+ユーザのホームディレクトリに存在する場合は``hushlogin''の条件が成立する、
+というものである。
+ファイルの中身は無視される; それが存在する事のみが``hushlogin''条件を
+成立させるのである。
+第二の方法は、このパラメータの値が絶対パス名で、ユーザのログイン名又は
+シェルがこのファイル中に記述されている場合に``hushlogin''条件が成り立つ、
+というものである。
+この場合、ファイルは以下の様な書式でなくてはならない:
+.nf
+.sp
+.ft CW
+	demo
+	/usr/lib/uucp/uucico
+	\0\0.
+	\0\0.
+	\0\0.
+.ft P
+.sp
+.fi
+このパラメータが未定義の場合は、``hushlogin''条件が成立することは無い。
+``hushlogin''条件が成立した場合、その日のメッセージの表示、もっとも最近の
+ログイン成功及び失敗の表示、メイルの有無の表示、パスワード期限のチェックは
+行われない。
+ユーザのホームディレクトリにhushloginファイルを置かせる方法を用いると
+ユーザがパスワード期限のチェックを回避できてしまうことに注意。
+関連する情報はMOTD_FILE, FAILLOG_ENAB, LASTLOG_ENAB, 及びMAIL_CHECK_ENAB
+を参照せよ。 
+.\"
+.IP "KILLCHAR (数)"
+端末の
+.I kill
+文字がこの値に初期化される。
+.I termio
+インターフェースを備えたシステム(例えば System V)でのみサポートされている。
+指定されていない場合は、kill文字は\s-2CTRL/U\s0に初期化される。
+関連情報についてはERASECHARを参照せよ。
+.\"
+.IP "LASTLOG_ENAB (ブール値)"
+このパラメータを
+.IR yes ,
+に設定し、且つファイル
+.I /var/log/lastlog
+が存在する場合、ユーザがログインに成功した記録がこのファイルに残される。
+さらに、このオプションがオンに設定されている場合は最も最近のログイン成功
+及び失敗日時がユーザに表示される。FAILLOG_ENABがオンになっていない場合は
+ログイン失敗の表示は行われない。
+``hushlogin''条件が成り立っている場合はログイン成功も失敗も表示されない。
+.\"
+.IP "LOG_UNKFAIL_ENAB (ブール値)"
+このパラメータが
+.I yes
+に設定されている場合はログイン失敗が記録される際に未登録のユーザ名も
+含められる。セキュリティを危険に晒す可能性もあることに注意; よく見られる
+ログインの失敗に、ユーザ名とパスワードを入れ換えて入力してしまうことが
+挙げられるが、この場合パスワードが失敗ログに記録されてしまう。
+このオプションをオフにしておくと、未登録ユーザ名はログイン失敗メッセージに
+記録されない。
+.\"
+.IP "MAIL_CHECK_ENAB (ブール値)"
+このパラメータを
+.IR yes ,
+に設定すると、ログイン時にユーザにメイルボックスの状態を通知する。
+関連情報はMAIL_DIRを参照せよ。
+.\"
+.IP "MAIL_DIR (文字列)"
+このパラメータにはユーザのメイルボックスファイルが置かれているディレクトリの
+絶対パスを指定する。
+このパスにユーザのログイン名を付け足してMAIL環境変数 \- ユーザの
+メイルボックスへのパス \- を作り出す。
+このパラメータは必ず定義しなくてはならない; 未定義の場合は正しくない可能性
+のあるディフォルト値が使われる。関連情報はMAIL_CHECK_ENABを参照せよ。
+.\"
+.IP "MOTD_FILE (文字列)"
+このパラメータには``その日のメッセージ''ファイルへのパス名をコロンで区切って
+指定する。
+指定したファイルが存在する場合は、ユーザのログイン時にファイルの中身が
+表示される。
+このパラメータが定義されていない場合、もしくは``hushlogin''ログイン条件
+が成り立つ場合には、表示は行われない。
+.\"
+.IP "NOLOGINS_FILE (文字列)"
+.\" the user will be disconnected.  If this parameter is not specified
+.\" then this feature will be inhibited.
+このパラメータにはroot以外のログインを禁止するファイルの絶対パス名を指定
+する。
+このファイルが存在する場合には、root以外のユーザがログインしようとした際
+ファイルの中身が表示され、ログインは拒否される。このパラメータが指定されて
+いない場合はこの機能は使用できない。
+.\"
+.IP "OBSCURE_CHECKS_ENAB (ブール値)"
+このパラメータが
+.IR yes
+に設定されている場合は、パスワード変更を受け付ける前にプログラム
+.I passwd
+が余分にチェックを行う。
+行われるチェックは非常に単純であり、是非とも用いるべきである。
+.I passwd
+プログラムが
+.IR root
+によって実行された場合は、パスワードの難解度チェックはバイパスされる。
+関連情報はPASS_MIN_LENを参照せよ。
+.\"
+.IP "PASS_MIN_DAYS (数)"
+パスワードが変更できるようになるまでの最短日数。
+この日数が経たないうちにパスワードを変更しようとしても拒否される。
+指定されていない場合はゼロと見做される。
+.\"
+.IP "PASS_MIN_LEN (数)"
+パスワードとして許される最小の文字数。
+これよりも短いパスワードを設定しようとしても拒否される。
+ゼロに設定しておくとこの検査は行われない。
+指定されていない場合はゼロと見做される。
+.\"
+.IP "PASS_MAX_DAYS (数)"
+一つのパスワードを使える最長日数。パスワードがこの日数よりも古い場合は
+アカウントがロックされる。指定されていない場合はある大きな数が用いられる。
+.\"
+.IP "PASS_WARN_AGE (数)"
+パスワードの有効期限が来る前に警告を発する日数。ゼロにしておくと、当日にのみ
+警告を行い、負数を指定した場合は警告は行われない。
+指定されていない場合は警告は行われない。
+.IP "PORTTIME_CHECKS_ENAB (ブール値)"
+このパラメータを
+.I yes
+に設定し、且つ
+.I /etc/porttime
+ファイルが存在する場合は、ユーザがその時間指定した端末からログインして良いか
+を確認するのにそのファイルを参照する。
+c.f. porttime(4)
+.\"
+.IP "QUOTAS_ENAB (ブール値)"
+このパラメータが
+.I yes
+に設定されている場合は、ユーザの``ulimit,'' ``umask,`` 及び ``niceness''
+が
+.I passwd
+ファイルの
+.I gecos
+欄に指定されている値に初期化される。
+c.f. passwd(4).
+.\"
+.IP "SU_NAME (文字列)"
+このパラメータは``su -''が実行された場合のコマンド名を設定する。
+例えば、このパラメータが``su''と定義されていた場合、
+.I ps(1)
+では実行中のコマンドが``-su''と表示される。
+このパラメータが定義されていない場合は、
+.I ps(1)
+には実行中の実際のシェルの名前、例えば``-sh``といった表示がなされる。
+.\"
+.IP "SULOG_FILE (文字列)"
+このパラメータには
+.I su
+コマンドの実行記録を書き込むファイルの絶対パス名を指定する。
+このパラメータが設定されていない場合は、記録は行われない。
+.I su
+コマンドはパスワードを認証する際に使われる事もあるので、このオプション又は
+.I syslog
+のいずれかを用いて
+.I su
+実行を記録しなくてはならない。
+関連情報はSYSLOG_SU_ENABオプションを参照せよ。
+.\"
+.IP "SYSLOG_SU_ENAB (ブール値)"
+このパラメータが
+.I yes
+に設定され、且つ
+.I login
+が
+.I syslog
+機能を働かせるようにコンパイルされている場合は、全ての
+.I su
+実行が
+.I syslog
+機能を用いて通知される。
+関連情報はSULOG_FILEを参照せよ。
+.\"
+.IP "TTYGROUP (文字列又は数)"
+端末のグループ所有属性がこのグループ名もしくはIDに初期化される。
+良く知られたセキュリティ攻撃の一つに、他のユーザの端末線に端末
+コントロールシーケンスを送る、というものがある。
+この問題は、他のユーザが端末線にアクセスできないように許可属性を設定すれば
+回避できるが、こうすると残念ながら
+.I write
+といったプログラムが機能しなくなってしまう。他の解決方法としては、
+潜在的に危険を孕んだ文字シーケンスをフィルターして取り除いてしまう様な
+.I write
+プログラムを使い、これを特殊なグループに``setgid''させ、このグループに
+端末デバイスのグループ所有属性を割り当て、端末線の許可属性を\f(CW0620\fPに
+設定する、というものもある。
+TTYGROUPはまさにこの様な状況のために設定できるようにしてある。
+この項目が定義されていないときは、端末のグループ所有属性はユーザのグループ
+番号に初期化される。
+関連情報はTTYPERMSを参照せよ。
+.\"
+.IP "TTYPERM (数)"
+ログイン端末の許可属性がこの値に初期化される。
+典型的な設定値としては、\f(CW0622\fPに設定して他のユーザがその端末にwrite
+アクセス出来る様にするものや、\f(CW0600\fPに設定して他のユーザから端末を
+守るものなどがある。
+指定されていない場合は、端末の許可属性は\f(CW0622\fPに初期化される。
+関連情報はTTYGROUPを参照せよ。
+.\"
+.IP "TTYTYPE_FILE (文字列)"
+このパラメータには端末デバイスを端末の種類にマップするファイルの絶対パス名を
+指定する。各行には端末の種類を一つと端末線を一つ、空白で区切って記述する。
+例えば:
+.nf
+.sp
+.ft CW
+	vt100\0	tty01
+	wyse60	tty02
+	\0\0.\0\0\0	\0\0.
+	\0\0.\0\0\0	\0\0.
+	\0\0.\0\0\0	\0\0.
+.ft P
+.sp
+.fi
+この情報は環境変数TERMを初期化するために用いられる。
+記号``#''で始まる行はコメントとして扱われる。
+このパラメータが設定されていない場合、ファイルが存在しない場合、もしくはこの
+ファイル中で端末線が見つからない場合は、環境変数TERMは設定されない。
+.\"
+.IP "ULIMIT (倍精度数)"
+ファイルサイズの限度をこの値に初期化する。
+.IR ulimit
+が備わっているシステム、例えばSystem Vでのみサポートされている。
+指定されていない場合は、ファイルサイズ限度はある大きな値に初期化される。
+.\"
+.IP "UMASK (数)"
+許可属性マスクをこの値に初期化する。
+指定されていない場合は、許可属性マスクはゼロに初期化される。
+.\"
+.SH 相互参照
+.\" The following cross reference shows which programs in the shadow login
+.\" suite use which parameters.
+以下の相互参照はshadow login suite中のどのプログラムが
+どのパラメータを使用するかを示したものである
+.na
+.IP login 12
+CONSOLE DIALUPS_CHECK_ENAB ENV_HZ ENV_SUPATH ENV_TZ ERASECHAR FAILLOG_ENAB
+FTMP_FILE HUSHLOGIN_FILE KILLCHAR LASTLOG_ENAB LOG_UNKFAIL_ENAB
+MAIL_CHECK_ENAB MAIL_DIR MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB
+QUOTAS_ENAB TTYPERM TTYTYPE_FILE ULIMIT UMASK
+.IP newusers 12
+PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UMASK
+.IP passwd 12
+OBSCURE_CHECKS_ENAB PASS_MIN_LEN
+.IP pwconv 12
+PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
+.IP su 12
+ENV_HZ ENV_SUPATH ENV_TZ HUSHLOGIN_FILE MAIL_CHECK_ENAB MAIL_DIR
+MOTD_FILE NOLOGIN_STR QUOTAS_ENAB SULOG_FILE SYSLOG_SU_ENAB
+.IP sulogin 12
+ENV_HZ ENV_SUPATH ENV_TZ MAIL_DIR QUOTAS_ENAB TTYPERM
+.ad
+.SH 関連項目
+login(1), passwd(4), faillog(4), porttime(4), faillog(8)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: su.c,v 1.15 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: su.c,v 1.18 2001/06/28 20:47:06 kloczek Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -302,9 +302,8 @@ main(int argc, char **argv)
 #endif
 	oldpass = xstrdup(pw->pw_passwd);
 #endif  /* SU_ACCESS */
-#endif  /* !USE_PAM */
 
-#ifdef USE_PAM
+#else  /* USE_PAM */
 	ret = pam_start("su", name, &conv, &pamh);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG((LOG_ERR, "pam_start: error %d\n", ret);
@@ -316,8 +315,8 @@ main(int argc, char **argv)
 	if (ret == PAM_SUCCESS)
 		ret = pam_set_item(pamh, PAM_RUSER, (const void *) oldname);
 	if (ret != PAM_SUCCESS) {
-		SYSLOG((LOG_ERR, "pam_set_item: %s\n", PAM_STRERROR(pamh, ret)));
-		fprintf(stderr, "%s: %s\n", Prog, PAM_STRERROR(pamh, ret));
+		SYSLOG((LOG_ERR, "pam_set_item: %s\n", pam_strerror(pamh, ret)));
+		fprintf(stderr, "%s: %s\n", Prog, pam_strerror(pamh, ret));
 		pam_end(pamh, ret);
 		exit(1);
 	}
@@ -394,20 +393,6 @@ top:
 	/*
 	 * Set the default shell.
 	 */
-#if 0
-	/*
-	 * XXX - GNU and *BSD versions of su support the -m option.
-	 * Need to add some option parsing code.
-	 */
-	if (mflg) {
-		if (!amroot && !check_shell(pwent.pw_shell)) {
-			fprintf(stderr, _("%s: permission denied (shell).\n"), Prog);
-			exit(1);
-		}
-		if ((cp = getenv("SHELL")))
-			pwent.pw_shell = cp;
-	}
-#endif
 
 	if (pwent.pw_shell[0] == '\0')
 		pwent.pw_shell = "/bin/sh";  /* XXX warning: const */
@@ -416,8 +401,8 @@ top:
 	ret = pam_authenticate(pamh, 0);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG((LOG_ERR, "pam_authenticate: %s\n",
-			PAM_STRERROR(pamh, ret)));
-		fprintf(stderr, "%s: %s\n", Prog, PAM_STRERROR(pamh, ret));
+			pam_strerror(pamh, ret)));
+		fprintf(stderr, "%s: %s\n", Prog, pam_strerror(pamh, ret));
 		pam_end(pamh, ret);
 		su_failure(tty);
 	}
@@ -425,11 +410,11 @@ top:
 	ret = pam_acct_mgmt(pamh, 0);
 	if (ret != PAM_SUCCESS) {
 		if (amroot) {
-			fprintf(stderr, _("%s: %s\n(Ignored)\n"), Prog, PAM_STRERROR(pamh, ret));
+			fprintf(stderr, _("%s: %s\n(Ignored)\n"), Prog, pam_strerror(pamh, ret));
 		} else {
 			SYSLOG((LOG_ERR, "pam_acct_mgmt: %s\n",
-				PAM_STRERROR(pamh, ret)));
-			fprintf(stderr, "%s: %s\n", Prog, PAM_STRERROR(pamh, ret));
+				pam_strerror(pamh, ret)));
+			fprintf(stderr, "%s: %s\n", Prog, pam_strerror(pamh, ret));
 			pam_end(pamh, ret);
 			su_failure(tty);
 		}
@@ -500,6 +485,7 @@ top:
 	}
 #endif  /* !USE_PAM */
 
+	signal(SIGINT, SIG_DFL);
 	cp = getdef_str((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 #if 0
 	addenv(cp ? cp : "PATH=/bin:/usr/bin", NULL);
@@ -520,6 +506,7 @@ top:
 		addenv("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 
 	if (pwent.pw_shell[0] == '*') { /* subsystem root required */
+		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
 		endpwent ();
 #ifdef SHADOWPWD
@@ -550,8 +537,8 @@ top:
 	   and much more, depending on the configured modules */
 	ret = pam_setcred(pamh, PAM_ESTABLISH_CRED);
 	if (ret != PAM_SUCCESS) {
-		SYSLOG((LOG_ERR, "pam_setcred: %s\n", PAM_STRERROR(pamh, ret)));
-		fprintf(stderr, "%s: %s\n", Prog, PAM_STRERROR(pamh, ret));
+		SYSLOG((LOG_ERR, "pam_setcred: %s\n", pam_strerror(pamh, ret)));
+		fprintf(stderr, "%s: %s\n", Prog, pam_strerror(pamh, ret));
 		pam_end(pamh, ret);
 		exit(1);
 	}

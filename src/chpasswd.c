@@ -25,25 +25,12 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
- *
- * chpasswd - update passwords in batch
- *
- *	chpasswd reads standard input for a list of colon separated
- *	user names and new passwords.  the appropriate password
- *	files are updated to reflect the changes.  because the
- *	changes are made in a batch fashion, the user must run
- *	the mkpasswd command after this command terminates since
- *	no password updates occur until the very end.
- *
- * 1997/07/29: Modified to take "-e" argument which specifies that
- *             the passwords have already been encrypted.
- *             -- Jay Soffian <jay@lw.net>
  */
 
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: chpasswd.c,v 1.12 2000/10/09 19:02:20 kloczek Exp $")
+RCSID(PKG_VER "$Id: chpasswd.c,v 1.13 2001/01/25 10:36:07 kloczek Exp $")
 
 #include <stdio.h>
 #include "prototypes.h"

@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwio.c,v 1.11 2000/09/02 18:40:43 marekm Exp $")
+RCSID("$Id: pwio.c,v 1.12 2001/08/14 21:10:36 malekith Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -183,4 +183,38 @@ void
 __pw_del_entry(const struct commonio_entry *ent)
 {
 	commonio_del_entry(&passwd_db, ent);
+}
+
+struct commonio_db *
+__pw_get_db(void)
+{
+	return &passwd_db;
+}
+
+static int
+pw_cmp(const void *p1, const void *p2)
+{
+	uid_t u1, u2;
+
+	if ((*(struct commonio_entry**)p1)->eptr == NULL)
+		return 1;
+	if ((*(struct commonio_entry**)p2)->eptr == NULL)
+		return -1;
+	
+	u1 = ((struct passwd *)(*(struct commonio_entry**)p1)->eptr)->pw_uid;
+	u2 = ((struct passwd *)(*(struct commonio_entry**)p2)->eptr)->pw_uid;
+
+	if (u1 < u2)
+		return -1;
+	else if (u1 > u2)
+		return 1;
+	else
+		return 0;
+}
+
+/* Sort entries by uid */
+int
+pw_sort()
+{
+	return commonio_sort(&passwd_db, pw_cmp);
 }

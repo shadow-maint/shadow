@@ -38,7 +38,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: id.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: id.c,v 1.7 2001/09/01 04:19:16 kloczek Exp $")
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -67,6 +67,7 @@ main(int argc, char **argv)
 	uid_t ruid, euid;
 	gid_t rgid, egid;
 	int i;
+	long sys_ngroups;
 /*
  * This block of declarations is particularly strained because of several
  * different ways of doing concurrent groups.  Old BSD systems used int
@@ -75,7 +76,7 @@ main(int argc, char **argv)
  * usually about 16 or 32.  Others use bigger values.
  */
 #ifdef HAVE_GETGROUPS
-	GETGROUPS_T groups[NGROUPS_MAX];
+	GETGROUPS_T *groups;
 	int	ngroups;
 	int	aflg = 0;
 #endif
@@ -86,7 +87,15 @@ main(int argc, char **argv)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
+	/*
+	 * Dynamically get the maximum number of groups from system, instead
+	 * of using the symbolic constant NGROUPS_MAX. This ensures that the
+	 * group limit is not hard coded into the binary, so it will still
+	 * work if the system library is recompiled.
+	 */
+	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
+	groups=malloc(sys_ngroups*sizeof(GETGROUPS_T));
 	/*
 	 * See if the -a flag has been given to print out the
 	 * concurrent group set.
@@ -152,7 +161,7 @@ main(int argc, char **argv)
 	 * names.
 	 */
 
-	if (aflg && (ngroups = getgroups (NGROUPS_MAX, groups)) != -1) {
+	if (aflg && (ngroups = getgroups (sys_ngroups, groups)) != -1) {
 
 		/*
 		 * Start off the group message.  It will be of the format
@@ -175,6 +184,7 @@ main(int argc, char **argv)
 				printf("%d", (int) groups[i]);
 		}
 	}
+	free(groups);
 #endif
 
 	/*

@@ -1,3 +1,4 @@
+.\"$Id: lastlog.8,v 1.10 2001/01/27 02:55:52 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,32 +25,33 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"	$Id: lastlog.8,v 1.7 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH LASTLOG 8
 .SH NAME
 lastlog \- examine lastlog file
 .SH SYNOPSIS
-.B lastlog
-.RB [ -u
-.IR login-name ]
-.RB [ -t
-.IR days ]
+.TP 8
+\fBlastlog\fR [<\fB-u\fR|\fB--user\fR> \fIlogin-name\fR]
+[<\fB-t\fR|\fB--time\fR> \fIdays\fR] [<\fB-h\fR|\fB--help\fR>]
 .SH DESCRIPTION
-\fBlastlog\fR formats and prints the contents of the last login log,
-\fI/var/log/lastlog\fR.  The \fBlogin-name\fR, \fBport\fR, and \fBlast login 
-time\fR will be printed.
-The default (no flags) causes lastlog entries to be printed, sorted
-by the numerical UID.
-Entering \fB-u \fIlogin-name\fR flag will
-cause the lastlog record for \fIlogin-name\fR only to be printed.
-Entering \fB-t \fIdays\fR will cause only the
-lastlogins more recent than \fIdays\fR to be printed.
+.PP
+\fBlastlog\fR formats and prints the contents of the last login log
+\fI/var/log/lastlog\fR file . The \fBlogin-name\fR, \fBport\fR, and \fBlast
+login time\fR will be printed. The default (no flags) causes lastlog entries
+to be printed, sorted by the numerical UID.
+.TP
+\fB-u\fR, \fB--user\fR \fIlogin-name\fR will cause the lastlog record for
+\fIlogin-name\fR only to be printed
+.TP
+\fB-t\fR, \fB--time\fR \fIdays\fR will cause only the lastlogins more recent
+\than fIdays\fR to be printed
+.TP
+\fB-h\fR, \fB--help\fR print a one-line help message and exit.
+.BR
+.TP
 The \fB-t\fR flag overrides the use of \fB-u\fR.
 .PP
-If the user has never logged in the message \fB"**Never logged in**"\fR will 
+If the user has never logged in the message \fB"**Never logged in**"\fR will
 be displayed instead of the port and time.
 .SH FILES
 /var/log/lastlog \- lastlog logging file
@@ -59,5 +61,5 @@ no output to the screen (i.e. if mmdf=800 and last uid=170, program will
 appear to hang as it processes uid 171-799).
 .SH AUTHORS
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.br
+.BR
 Phillip Street

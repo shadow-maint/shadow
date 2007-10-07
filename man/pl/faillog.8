@@ -1,3 +1,4 @@
+.\" $Id: faillog.8,v 1.4 2001/01/27 02:55:54 kloczek Exp $
 .\" {PTM/WK/1999-09-18}
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,21 +26,13 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .TH FAILLOG 8
 .SH NAZWA
 faillog \- sprawd¼ faillog i ustaw limity b³êdnych logowañ
 .SH SK£ADNIA
 .TP 8
-.B faillog
-.RB [ -u
-.IR nazwa ]
-.RB [ -a ]
-.RB [ -t
-.IR dni ]
-.RB [ -m
-.IR max ]
-.RB [ -pr ] 
+\fBfaillog\fR [\fB-u\fR \fInazwa\fR] [\fB-a\fR] [\fB-t\fR \fIdni\fR]
+[\fB-m \fImax\fR] [\fB-pr\fR] 
 .SH OPIS
 \fBfaillog\fR formatuje zawarto¶æ rejestru nieudanych prób rozpoczêcia sesji,
 \fI/var/log/faillog\fR, oraz obs³uguje ograniczenia i liczniki b³êdnych prób.

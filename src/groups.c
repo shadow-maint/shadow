@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: groups.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: groups.c,v 1.7 2001/09/01 04:19:16 kloczek Exp $")
 
 #include <stdio.h>
 #include <pwd.h>
@@ -89,9 +89,10 @@ print_groups(const char *member)
 int
 main(int argc, char **argv)
 {
+	long sys_ngroups;
 #ifdef HAVE_GETGROUPS
 	int	ngroups;
-	GETGROUPS_T groups[NGROUPS_MAX];
+	GETGROUPS_T *groups;
 	int	pri_grp;
 	int	i;
 	struct	group	*gr;
@@ -100,6 +101,10 @@ main(int argc, char **argv)
 	char	*getlogin();
 #endif
 
+	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
+#ifdef HAVE_GETGROUPS
+	groups=malloc(sys_ngroups*sizeof(GETGROUPS_T));
+#endif
 	setlocale(LC_ALL, "");
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
@@ -118,7 +123,7 @@ main(int argc, char **argv)
 		 * currently set for this process.
 		 */
 
-		ngroups = getgroups(NGROUPS_MAX, groups);
+		ngroups = getgroups(sys_ngroups, groups);
 		if (ngroups < 0) {
 			perror("getgroups");
 			exit(1);

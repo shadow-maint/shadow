@@ -1,0 +1,82 @@
+.\" Copyright 1996, Rafal Maszkowski, rzm@pdi.net
+.\" All rights reserved. You can redistribute this man page and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of the
+.\" License, or (at your option) any later version.
+.\"
+.\"	$Id: gpasswd.1,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH GPASSWD 1
+.SH NAME
+gpasswd \- /etc/groupファイルを管理する
+.br
+.SH 書式
+.B gpasswd \fIgroup\fR
+.br
+.B gpasswd
+-a \fIuser\fR \fIgroup\fR
+.br
+.B gpasswd
+-d \fIuser\fR \fIgroup\fR
+.br
+.B gpasswd
+-R \fIgroup\fR
+.br
+.B gpasswd
+-r \fIgroup\fR
+.br
+.B gpasswd
+[ -A \fIuser\fR,... ]
+[ -M \fIuser\fR,... ]
+\fIgruop\fR
+.br
+.SH 説明
+.I gpasswd
+は/etc/groupファイル
+(及び、SHADOWGRPを定義してコンパイルした時は/etc/gshadowファイル)
+を管理するのに用いられる。
+各グループに管理者を置き、メンバー及びパスワードを設定することが出来る。
+システム管理者は、
+\fB-A\fRオプションを使ってグループ管理者(複数でも可)を定義することや
+\fB-M\fRオプションを使ってメンバーを定義することができ、
+各グループの管理者及びメンバーと同等の特権を持っている。
+.PP
+グループ管理者は、それぞれ\fB-a\fR及び\fB-d\fRオプションを用いて
+ユーザを追加したり削除することが出来る。
+管理者は\fB-r\fRオプションを用いてグループパスワードを削除する事が出来る。
+パスワードが設定されていない時は、
+グループのメンバーのみが
+.I newgrp(1)
+を用いてグループの一員となることが出来る。
+オプション\fB-R\fRを指定した場合は、
+.I newgrp(1)
+コマンドを用いたグループへのアクセスを出来なくする。
+.PP
+グループの管理者がグループ名のみを指定して
+.I gpasswd
+コマンドを実行した場合は
+パスワードの入力を求められる。
+パスワードが設定されている場合でも、
+メンバーはパスワードなしで
+.I newgrp(1)
+コマンドを用いることが出来るが、
+メンバーでない人はパスワードを入力しなくてはならない。
+
+.SH ファイル
+/etc/group \- グループ情報
+.br
+/etc/gshadow \- shadowしたグループ情報
+.SH 関連項目
+newgrp(1),
+groupadd(1),
+groupdel(1),
+groupmod(1),
+grpck(1)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+

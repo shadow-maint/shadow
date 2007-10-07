@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.16 2000/09/02 18:40:42 marekm Exp $")
+RCSID("$Id: commonio.c,v 1.20 2001/09/07 15:35:57 kloczek Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -210,7 +210,7 @@ free_linked_list(struct commonio_db *db)
 int
 commonio_setname(struct commonio_db *db, const char *name)
 {
-	strcpy(db->filename, name);
+	snprintf(db->filename, sizeof(db->filename), "%s", name);
 	return 1;
 }
 
@@ -305,6 +305,7 @@ commonio_lock(struct commonio_db *db)
 static void
 reload_nscd(void)
 {
+#ifdef ENABLE_NSCD_SIGHUP  /* not every version of nscd can handle it */
 	FILE *pidfile;
 	int pid;
 
@@ -316,6 +317,7 @@ reload_nscd(void)
 			kill(pid, SIGHUP);
 		fclose(pidfile);
 	}
+#endif
 }
 
 
@@ -470,12 +472,15 @@ commonio_open(struct commonio_db *db, int mode)
 
 	while (db->ops->fgets(buf, buflen, db->fp)) {
 		while (!(cp = strrchr(buf, '\n')) && !feof(db->fp)) {
+			int len;
+
 			buflen += BUFLEN;
 			cp = (char *) realloc(buf, buflen);
 			if (!cp)
 				goto cleanup_buf;
 			buf = cp;
-			db->ops->fgets(buf + buflen - BUFLEN, BUFLEN, db->fp);
+			len = strlen(buf);
+			db->ops->fgets(buf + len, buflen - len, db->fp);
 		}
 		if ((cp = strrchr(buf, '\n')))
 			*cp = '\0';
@@ -521,6 +526,83 @@ cleanup:
 	return 0;
 }
 
+/*
+ * Sort given db according to cmp function (usually compares uids)
+ */
+int
+commonio_sort(struct commonio_db *db, int (*cmp)(const void *, const void *))
+{
+	struct commonio_entry **entries, *ptr;
+	int n = 0, i;
+
+	for (ptr = db->head; ptr; ptr = ptr->next)
+		n++;
+
+	if (n <= 1)
+		return 0;
+		
+	entries = malloc(n * sizeof(struct commonio_entry*));
+	if (entries == NULL)
+		return -1;
+	
+	n = 0;
+	for (ptr = db->head; ptr; ptr = ptr->next)
+		entries[n++] = ptr;
+	qsort(entries, n, sizeof(struct commonio_entry*), cmp);
+	
+	db->head = entries[0];
+	db->tail = entries[--n];
+	db->head->prev = NULL;
+	db->head->next = entries[1];
+	db->tail->prev = entries[n-1];
+	db->tail->next = NULL;
+
+	for (i = 1; i < n; i++) {
+		entries[i]->prev = entries[i-1];
+		entries[i]->next = entries[i+1];
+	}
+
+	free(entries);
+	db->changed = 1;
+
+	return 0;
+}
+
+/*
+ * Sort entries in db according to order in another.
+ */
+int
+commonio_sort_wrt(struct commonio_db *shadow, struct commonio_db *passwd)
+{
+	struct commonio_entry *head = NULL, *pw_ptr, *spw_ptr;
+	const char *name;
+
+	for (pw_ptr = passwd->head; pw_ptr; pw_ptr = pw_ptr->next) {
+		name = passwd->ops->getname(pw_ptr->eptr);
+		for (spw_ptr = shadow->head; spw_ptr; spw_ptr = spw_ptr->next)
+			if (strcmp(name, shadow->ops->getname(spw_ptr->eptr)) == 0)
+				break;
+		if (spw_ptr == NULL) 
+			continue;
+		commonio_del_entry(shadow, spw_ptr);
+		spw_ptr->next = head;
+		head = spw_ptr;
+	}
+	
+	for (spw_ptr = head; spw_ptr; spw_ptr = head) {
+		head = head->next;
+		
+		if (shadow->head)
+			shadow->head->prev = spw_ptr;
+		spw_ptr->next = shadow->head;
+		shadow->head = spw_ptr;
+	}
+	
+	shadow->head->prev = NULL;
+	shadow->changed = 1;
+
+	return 0;
+}
 
 static int
 write_all(const struct commonio_db *db)

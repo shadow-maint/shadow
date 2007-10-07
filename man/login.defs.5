@@ -1,3 +1,4 @@
+.\"$Id: login.defs.5,v 1.10 2001/06/23 08:50:25 marekm Exp $
 .\" Copyright 1991 - 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
@@ -24,9 +25,6 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: login.defs.5,v 1.8 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH LOGIN 5
 .SH NAME
 /etc/login.defs \- Login configuration
@@ -532,7 +530,7 @@ to some large value.
 .\"
 .IP "UMASK (number)"
 The permission mask is initialized to this value.  If not specified,
-the permission mask will be initialized to zero.
+the permission mask will be initialized to 077.
 .\"
 .IP "USERDEL_CMD (string)"
 XXX needs to be documented.

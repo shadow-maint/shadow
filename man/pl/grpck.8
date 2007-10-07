@@ -1,3 +1,4 @@
+.\" $Id: grpck.8,v 1.5 2001/08/14 21:11:19 malekith Exp $
 .\" {PTM/WK/1999-09-17}
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,15 +26,11 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .TH GRPCK 1
 .SH NAZWA
 grpck \- weryfikacja spójno¶ci plików grup
 .SH SK£ADNIA
-.B grpck
-.RB [ -r ]
-.RI [ group
-.IR shadow ]
+\fBgrpck\fR [\fB-r\fR] [\fIgroup shadow\fR]
 .SH OPIS
 \fBgrpck\fR weryfikuje integralno¶æ informacji autentykacji systemowej.
 Sprawdzane s± wszystkie pozycje w plikach \fI/etc/group\fR
@@ -74,6 +71,9 @@ Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko-do-odczytu, poprzez
 podanie flagi \fB-r\fR.
 Powoduje to, ¿e na wszystkie pytania dotycz±ce zmian zostanie, bez ingerencji
 u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
+\fBgrpck\fR mo¿e byæ równie¿ u¿yty do sortowania pozycji w plikach \fI/etc/group\fR 
+oraz \fI/etc/gshadow\fR wed³ug GID. By w³±czyæ tryb sortowania nale¿y przekazaæ
+opcjê \fB-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
 .SH PLIKI
 .IR /etc/group " - informacja o kontach grup"
 .br

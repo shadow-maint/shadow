@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: lastlog.c,v 1.6 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: lastlog.c,v 1.9 2000/11/29 12:50:09 kloczek Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -64,6 +64,15 @@ static struct lastlog lastlog;	/* scratch structure to play with ... */
 static struct stat statbuf;	/* fstat buffer for file size */
 static struct passwd *pwent;
 
+#include <getopt.h> 
+static struct option const longopts[] =
+{
+  {"user", required_argument, 0, 'u'},
+  {"time", required_argument, 0, 't'},
+  {"help", no_argument, 0, 'h'},
+  {0, 0, 0, 0}
+};
+
 extern	char	*optarg;
 
 #define	NOW	(time ((time_t *) 0))
@@ -85,7 +94,7 @@ main(int argc, char **argv)
 		perror (LASTLOG_FILE);
 		exit (1);
 	}
-	while ((c = getopt (argc, argv, "u:t:")) != EOF) {
+	while ((c = getopt_long (argc, argv, "u:t:h", longopts, NULL)) != -1) {
 		switch (c) {
 			case 'u':
 				pwent = getpwnam (optarg);
@@ -103,6 +112,14 @@ main(int argc, char **argv)
 				seconds = days * DAY;
 				tflg++;
 				break;
+			case 'h':
+				fprintf(stdout, _("Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"),
+					argv[0]);
+				exit(0);
+			default:
+				fprintf(stdout, _("Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"),
+					argv[0]);
+				exit(1);
 		}
 	}
 	print ();

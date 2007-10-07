@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: useradd.c,v 1.21 2000/10/09 20:03:12 kloczek Exp $")
+RCSID(PKG_VER "$Id: useradd.c,v 1.26 2001/09/01 04:19:16 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -106,7 +106,8 @@ static int is_shadow_pwd;
 #ifdef SHADOWGRP
 static int is_shadow_grp;
 #endif
-static char *user_groups[NGROUPS_MAX+1];  /* NULL-terminated list */
+static char **user_groups;  /* NULL-terminated list */
+static long sys_ngroups;
 static int do_grp_update = 0;  /* group files need to be updated */
 
 static char	*Prog;
@@ -124,7 +125,8 @@ static int
 	kflg = 0, /* specify a directory to fill new user directory */
 	fflg = 0, /* days until account with expired password is locked */
 	eflg = 0, /* days since 1970-01-01 when account is locked */
-	Dflg = 0; /* set/show new user default values */
+	Dflg = 0, /* set/show new user default values */
+	nflg = 0; /* create a group having the same name as the user */
 
 #ifdef AUTH_METHODS
 static int Aflg = 0; /* specify authentication method for user */
@@ -457,6 +459,7 @@ set_defaults(void)
 	char	buf[1024];
 	static	char	new_file[] = NEW_USER_FILE;
 	char	*cp;
+	int	ofd;
 	int	out_group = 0;
 	int	out_home = 0;
 	int	out_inactive = 0;
@@ -471,9 +474,18 @@ set_defaults(void)
 	 * Create a temporary file to copy the new output to.
 	 */
 
-	mktemp (new_file);
-	if (!(ofp = fopen (new_file, "w"))) {
+#ifdef HAVE_MKSTEMP
+	if ((ofd = mkstemp (new_file)) == -1) {
+#else
+	if ((ofd = mktemp (new_file)) == -1) {
+#endif
 		fprintf(stderr, _("%s: cannot create new defaults file\n"),
+ 			Prog);
+ 		return -1;
+ 	}
+ 
+ 	if (!(ofp = fdopen(ofd, "w"))) {
+ 		fprintf(stderr, _("%s: cannot open new defaults file\n"),
 			Prog);
 		return -1;
 	}
@@ -671,7 +683,7 @@ get_groups(char *list)
 		}
 #endif
 
-		if (ngroups == NGROUPS_MAX) {
+		if (ngroups == sys_ngroups) {
 			fprintf(stderr,
 				_("%s: too many groups specified (max %d).\n"),
 				Prog, ngroups);
@@ -1671,6 +1683,8 @@ main(int argc, char **argv)
 	 * Get my name so that I can use it to report errors.
 	 */
 
+	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
+	user_groups=malloc((1+sys_ngroups)*sizeof(char *));
 	Prog = Basename(argv[0]);
 
 	setlocale(LC_ALL, "");
@@ -1686,7 +1700,7 @@ main(int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval = pam_start("shadow", pampw->pw_name, &conv, &pamh);
+		retval = pam_start("useradd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -1765,7 +1779,7 @@ main(int argc, char **argv)
 	 * to that group, use useradd -g username username.
 	 * --bero
 	 */
-	if (! (nflg || gflg)) {
+	if (!gflg) {
 	    if (getgrnam(user_name)) {
                 fprintf(stderr, _("%s: group %s exists - if you want to add this user to that group, use -g.\n"), Prog, user_name);
 		exit(E_NAME_IN_USE);

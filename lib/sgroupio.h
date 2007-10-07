@@ -11,3 +11,4 @@ extern int sgr_remove(const char *);
 extern int sgr_rewind(void);
 extern int sgr_unlock(void);
 extern int sgr_update(const struct sgrp *);
+extern int sgr_sort(void);

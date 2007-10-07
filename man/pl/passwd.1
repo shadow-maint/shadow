@@ -1,3 +1,4 @@
+.\" $Id: passwd.1,v 1.5 2001/01/27 02:55:54 kloczek Exp $
 .\" {PTM/WK/1999-09-20}
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,34 +26,18 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .TH PASSWD 1
 .SH NAZWA
 passwd \- zmieñ has³o u¿ytkownika
 .SH SK£ADNIA
-.B passwd
-.RB [ -f | -s ]
-.RI [ nazwa ]
+\fBpasswd\fR [\fB-f\fR|\fB-s\fR]
 .br
-.B passwd
-.RB [ -g ]
-.RB [ -r | R ]
-.I grupa
+\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fBR\fR] \fIgrupa\fR
 .br
-.B passwd
-.RB [ -x
-.IR max ]
-.RB [ -n
-.IR min ]
-.RB [ -w
-.IR ostrze¿ ]
-.RB [ -i
-.IR nieakt ]
-.I nazwa
+\fBpasswd\fR [\fB-x\fR \fImax\fR] [\fB-n\fR \fImin\fR]
+[\fB-w\fR \fIostrze¿\fR] [\fB-i\fR \fInieakt\fR] \fIlogin\fR
 .br
-.B passwd
-.RB { -l | -u | -d | -S }
-.I nazwa
+\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fIlogin\fR
 .SH OPIS
 \fBpasswd\fR zmienia has³a kont u¿ytkowników i grup.
 Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie has³o w³asnego konta, superu¿ytkownik
@@ -123,6 +108,14 @@ Opcja \fB-l\fR wy³±cza konto zmieniaj±c jego has³o na warto¶æ nieodpowiadaj±c±
 ¿adnemu mo¿liwemu zakodowanemu has³u.
 Opcja \fB-u\fR ponownie udostêpnia konto przywracaj±c uprzedni± warto¶æ has³a.
 .PP
+Jeêli chcesz ustawic has³o kota jako przerminowane mo¿esz u¿yæ opcji
+\fB-e\f. Spowoduje to qymuszenie zmiany has³± przy nastêpnym logowaniu.
+Mo¿esz tak¿e u¿yæ opcji \fB-d\R w celu wykasowania has³a (ustawieniu na
+puste). Niemniej nale¿y uwa¿aæ z u¿ywaniem tej opcji poniewa¿ przy nastêpnym
+logowaniu u¿ykownik nie jest pytany o has³o i mo¿e siê od razu zalogowaæ.
+Pozostawianie kont z wykasowanym has³em mo¿e umo¿liwiæ przejêcie konta przez
+intruza.
+.PP
 Stan konta mo¿na uzyskaæ przy pomocy opcji \fB-S\fR.
 Informacja o stanie sk³ada siê z 6 czê¶ci.
 Pierwsza wskazuje, czy konto u¿ytkownika jest zablokowane (L) (locked),
@@ -132,18 +125,16 @@ nastêpne cztery to minimalny wiek, maksymalny wiek, okres ostrzegania i okres
 nieaktywno¶ci has³a.
 .SS Podpowiedzi dotycz±ce hase³ u¿ytkownika
 Bezpieczeñstwo has³a zale¿y od si³y algorytmu koduj±cego oraz rozmiaru
-klucza. 
-Metoda kodowania u¿ywana w Systemie \fB\s-2UNIX\s+2\fR oparta jest o algorytm
-NBS DES i jest bardzo bezpieczna.
-Rozmiar klucza zale¿y od losowo¶ci wybranego has³a.
+klucza. Metoda kodowania u¿ywana w Systemie \fB\s-2UNIX\s+2\fR oparta jest
+o algorytm NBS DES i jest bardzo bezpieczna. Rozmiar klucza zale¿y od
+losowo¶ci wybranego has³a.
 .PP
 Naruszenia bezpieczeñstwa hase³ wynikaj± zwykle z beztroski przy wyborze lub
-przechowywaniu has³a.
-Z tego powodu powiniene¶ wybraæ has³o nie wystêpuj±ce w s³owniku. Has³o nie
-powinno te¿ byæ poprawn± nazw±, imieniem, nazwiskiem, numerem prawa jazdy,
-dat± urodzenia czy elementem adresu.
-Wszystkie z powy¿szych mog± byæ u¿yte do odgadniêcia has³a i naruszenia
-bezpieczeñstwa systemu.
+przechowywaniu has³a. Z tego powodu powiniene¶ wybraæ has³o nie wystêpuj±ce
+w s³owniku. Has³o nie powinno te¿ byæ poprawn± nazw±, imieniem, nazwiskiem,
+numerem prawa jazdy, dat± urodzenia czy elementem adresu. Wszystkie z
+powy¿szych mog± byæ u¿yte do odgadniêcia has³a i naruszenia bezpieczeñstwa
+systemu.
 .PP
 Has³o musi byæ ³atwe do zapamiêtania, tak by nie byæ zmuszonym do jego
 zapisywania na kartce. Mo¿na to osi±gn±æ sklejaj±c ze sob± dwa krótkie s³owa,
@@ -188,8 +179,6 @@ nie s± zalogowani do serwera NIS.
 .br
 .IR /etc/shadow " - zakodowane has³a u¿ytkowników"
 .SH ZOBACZ TAK¯E
-.BR passwd (3),
-.BR shadow (3),
 .BR group (5),
 .BR passwd (5)
 .SH AUTOR

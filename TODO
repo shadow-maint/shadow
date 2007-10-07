@@ -1,7 +1,38 @@
+# "-" to do
+# "*" partialy exist/implemented
+# "+" done
+
+- fix building shadow utils without PAM enabled,
+
 - fix nscd flushing databases on change (I'm still not shure where it will
   be bether add this on shadow or on PAM level),
 
 - add more translations (maintainners for man pages and gettext files
   welcome),
 
-- move all doc to docbook (maybe also man pages).
+- add handle /etc/defaults/useradd::USERGROUPS={yes,no} for allow configure
+  using by useradd create per user group,
+
+- add handle -n switch in groups nad id command for allow query is
+  group/user with specyfied id/gid exist - this will be very useable
+  on automation in packages for quoery/check is group/user exist in system
+  or not,
+
+- groupmems: 
+  - need some work on add PAM and i18n support.
+
+- userdel:
+  - add backup option on remomove user resources,
+  - add lookop and remove per user group.
+
+Documentation:
+
+- move all doc to docbook (also man pages)
+  look at http://refentry2man.pld.org.pl/ for fast refentry xml/docbook to
+  roff converter,
+
+- document {pw,grp}ck -s option in pt_BR, ja man pages,
+
+- documment in pt_BR, ja man pages -s {pw,grp}ck option,
+
+- pl man page for login(1) - documment -f -h -p -r options.

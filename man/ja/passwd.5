@@ -1,0 +1,111 @@
+.\" Copyright 1989 - 1990, John F. Haugh II
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\" This product includes software developed by John F. Haugh, II
+.\"      and other contributors.
+.\" 4. Neither the name of John F. Haugh, II nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JOHN HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JOHN HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: passwd.5,v 1.1 2001/06/16 02:35:46 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
+.\"         all rights reserved.
+.\" Translated Fri Feb 14 23:06:00 JST 1997
+.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\"
+.TH PASSWD 5
+.SH 名前
+passwd \- パスワードファイル
+.SH 説明
+.I passwd
+ファイルには各ユーザアカウントの様々な情報が記録されている。
+書かれているのは、
+.IP "" .5i
+ログイン名
+.IP "" .5i
+オプションの暗号化されたパスワード
+.IP "" .5i
+ユーザID番号
+.IP "" .5i
+グループID番号
+.IP "" .5i
+ユーザ名もしくはコメント欄
+.IP "" .5i
+ユーザのホームディレクトリ
+.IP "" .5i
+ユーザのコマンドインタプリタ
+.PP
+パスワードがshadowされている場合、パスワード欄を埋めてはならない。
+shadowパスワードを用いている場合、暗号化されたパスワードは
+\fB/etc/shadow\fRに書かれている。
+暗号化されたパスワードは、アルファベットaからz、AからZ、0から9
+及び\.と/.の64文字から作られた13文字からなる。
+この文字列がどのように解釈されるかの詳細は、\fIcrypt(3)\fRを
+参照のこと。
+.PP
+オプションで、パスワードに続いてパスワード有効期限が、
+コンマで区切って同じ文字集合の文字をを使って記されていることもある。
+パスワード有効期限は、パスワード自身と同じ文字集合から作られている。
+最初の文字には、パスワードが何週間有効かが記されている。
+二番目の文字は、何週間経てばユーザがパスワードを変更できるかを与える。
+最後の二文字には、最後にパスワードを変更したのは1970年1月から何週間
+経過した時であるかを表す。
+パスワードの有効期限が過ぎた時は、ユーザは新しいパスワードを設定
+しなくてはならない。
+.PP
+コメント欄は、\fIfinger(1)\fR等の様々なシステムユーティリティに利用される。
+コメント欄には更に3つの数値が記入されていても良い。
+それらは、
+.IP "" .5i
+pri= \- niceの初期設定値
+.IP "" .5i
+umask= \- umaskの初期設定値
+.IP "" .5i
+ulimit= \- ulimitの初期設定値
+.PP
+これらの欄は互いに、またコメント欄の別のフィールドと、コンマを用いて
+区別されている。
+.PP
+ホームディレクトリ欄にはログイン時の作業ディレクトリ名が記されている。
+\fILogin\fRはこの情報を用いて環境変数\fBHOME\fRの内容を設定する。
+.PP
+コマンドインタプリタ欄にはユーザのコマンド言語インタプリタもしくは
+最初に実行するプログラムの名前を記す。
+\fILogin\fRはこの情報を用いて環境変数\fBSHELL\fRの内容を設定する。
+この欄に何も記されていない場合は、ディフォルト値として\fB/bin/sh\fRを
+使用する。
+.SH ファイル
+/etc/passwd \- ユーザのアカウント情報
+.SH 関連項目
+login(1),
+passwd(1),
+su(1),
+sulogin(1M),
+shadow(5),
+pwconv(8),
+pwunconv(8)
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>

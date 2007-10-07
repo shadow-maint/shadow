@@ -11,3 +11,4 @@ extern int spw_remove(const char *);
 extern int spw_rewind(void);
 extern int spw_unlock(void);
 extern int spw_update(const struct spwd *);
+extern int spw_sort(void);

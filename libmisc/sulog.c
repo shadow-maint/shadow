@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sulog.c,v 1.5 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: sulog.c,v 1.6 2001/08/23 23:17:37 kloczek Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -65,7 +65,7 @@ sulog(const char *tty, int success, const char *oldname, const char *name)
 	time(&now);
 	tm = localtime(&now);
 
-	fprintf(fp, "SU %.02d/%.02d %.02d:%.02d %c %.6s %s-%s\n",
+	fprintf(fp, "SU %.02d/%.02d %.02d:%.02d %c %s %s-%s\n",
 		tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min,
 		success ? '+':'-', tty, oldname, name);
 

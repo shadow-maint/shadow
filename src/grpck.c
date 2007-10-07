@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: grpck.c,v 1.14 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: grpck.c,v 1.16 2001/08/18 09:28:16 malekith Exp $")
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -95,9 +95,9 @@ static void
 usage(void)
 {
 #ifdef	SHADOWGRP
-	fprintf(stderr, _("Usage: %s [ -r ] [ group [ gshadow ] ]\n"), Prog);
+	fprintf(stderr, _("Usage: %s [ -sr ] [ group [ gshadow ] ]\n"), Prog);
 #else
-	fprintf(stderr, _("Usage: %s [ -r ] [ group ]\n"), Prog);
+	fprintf(stderr, _("Usage: %s [ -sr ] [ group ]\n"), Prog);
 #endif
 	exit(E_USAGE);
 }
@@ -161,6 +161,7 @@ main(int argc, char **argv)
 	int	i;
 	struct	commonio_entry	*gre, *tgre;
 	struct	group	*grp;
+	int	sort_mode = 0;
 #ifdef	SHADOWGRP
 	struct	commonio_entry	*sge, *tsge;
 	struct	sgrp	*sgr;
@@ -183,7 +184,7 @@ main(int argc, char **argv)
 	 * Parse the command line arguments
 	 */
 
-	while ((arg = getopt(argc, argv, "qr")) != EOF) {
+	while ((arg = getopt(argc, argv, "qrs")) != EOF) {
 		switch (arg) {
 		case 'q':
 			/* quiet - ignored for now */
@@ -191,11 +192,20 @@ main(int argc, char **argv)
 		case 'r':
 			read_only = 1;
 			break;
+		case 's':
+			sort_mode = 1;
+			break;
 		default:
 			usage();
 		}
 	}
 
+	if (sort_mode && read_only) {
+		fprintf(stderr, _("%s: -s and -r are incompatibile\n"),
+			Prog);
+		exit(E_USAGE);
+	}
+	
 	/*
 	 * Make certain we have the right number of arguments
 	 */
@@ -269,6 +279,15 @@ main(int argc, char **argv)
 		exit(E_CANT_OPEN);
 	}
 #endif
+
+	if (sort_mode) {
+		gr_sort();
+#ifdef	SHADOWGRP
+		if (is_shadow)
+			sgr_sort();
+#endif
+		goto write_and_bye;
+	}
 
 	/*
 	 * Loop through the entire group file.
@@ -606,6 +625,7 @@ shadow_done:
 	 */
 
 	if (deleted) {
+write_and_bye:
 		if (!gr_close()) {
 			fprintf(stderr, _("%s: cannot update file %s\n"),
 				Prog, grp_file);

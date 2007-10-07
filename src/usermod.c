@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: usermod.c,v 1.21 2000/10/09 19:02:20 kloczek Exp $")
+RCSID(PKG_VER "$Id: usermod.c,v 1.22 2001/09/01 04:19:16 kloczek Exp $")
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -95,7 +95,8 @@ static char *user_shell;
 static long user_expire;
 static long user_inactive;
 #endif
-static char *user_groups[NGROUPS_MAX+1];  /* NULL-terminated list */
+static long sys_ngroups;
+static char **user_groups;  /* NULL-terminated list */
 
 static char *Prog;
 
@@ -283,7 +284,7 @@ get_groups(char *list)
 		}
 #endif
 
-		if (ngroups == NGROUPS_MAX) {
+		if (ngroups == sys_ngroups) {
 			fprintf(stderr,
 				_("%s: too many groups specified (max %d).\n"),
 				Prog, ngroups);
@@ -1645,6 +1646,8 @@ main(int argc, char **argv)
 	int retval;
 #endif
 
+	sys_ngroups=sysconf(_SC_NGROUPS_MAX);
+	user_groups=malloc((1+sys_ngroups)*sizeof(char *));
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */

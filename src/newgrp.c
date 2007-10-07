@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: newgrp.c,v 1.16 2000/09/02 18:40:44 marekm Exp $")
+RCSID(PKG_VER "$Id: newgrp.c,v 1.17 2001/09/01 04:19:16 kloczek Exp $")
 
 #include <stdio.h>
 #include <errno.h>
@@ -360,7 +360,7 @@ main(int argc, char **argv)
 			break;
 	}
 	if (i == ngroups) {
-		if (ngroups >= NGROUPS_MAX) {
+		if (ngroups >= sysconf(_SC_NGROUPS_MAX)) {
 			fprintf (stderr, _("too many groups\n"));
 		} else {
 			grouplist[ngroups++] = gid;

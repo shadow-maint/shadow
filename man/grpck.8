@@ -1,3 +1,4 @@
+.\"$Id: grpck.8,v 1.8 2001/08/14 21:11:18 malekith Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,9 +25,6 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: grpck.8,v 1.6 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH GRPCK 1
 .SH NAME
 grpck \- verify integrity of group files
@@ -72,6 +70,9 @@ Additionally, the user may execute the command in read-only mode by
 specifying the \fB-r\fR flag.
 This causes all questions regarding changes to be answered \fBno\fR
 without user intervention.
+\fBgrpck\fR can also sort entries in \fI/etc/group\fR and \fI/etc/gshadow\fR
+by GID. To run it in sort mode pass it \fB-s\fR flag. No checks are
+performed then, it just sorts.
 .SH FILES
 /etc/group \- group account information
 .br

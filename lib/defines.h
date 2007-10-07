@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.17 2000/09/02 18:40:43 marekm Exp $ */
+/* $Id: defines.h,v 1.18 2001/06/28 20:47:05 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -337,12 +337,6 @@ extern char *strerror();
  */
 #ifndef SHADOW_PASSWD_STRING
 #define SHADOW_PASSWD_STRING "x"
-#endif
-
-#ifdef PAM_STRERROR_NEEDS_TWO_ARGS  /* Linux-PAM 0.59+ */
-#define PAM_STRERROR(pamh, err) pam_strerror(pamh, err)
-#else
-#define PAM_STRERROR(pamh, err) pam_strerror(err)
 #endif
 
 #endif  /* _DEFINES_H_ */

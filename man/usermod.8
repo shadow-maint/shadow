@@ -1,3 +1,4 @@
+.\"$Id: usermod.8,v 1.11 2001/01/27 02:55:52 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,55 +25,25 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: usermod.8,v 1.9 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH USERMOD 8
 .SH NAME
 usermod \- Modify a user account
 .SH SYNOPSIS
 .TP 8
-.B usermod
-.\" .RB [ -A
-.\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ -c
-.IR comment ]
-.RB [ -d
-.IR home_dir " ["
-.BR -m ]]
+\fBusermod\fR [\fB-c\fR \fIcomment\fR] [\fB-d\fR \fIhome_dir\fR [\fB-m\fR]]
 .br
-.RB [ -e
-.IR expire_date ]
-.RB [ -f
-.IR inactive_time ]
+[\fB-e\fR \fIexpire_date\fR] [\fB-f\fR \fIinactive_time\fR]
 .br
-.RB [ -g
-.IR initial_group ]
-.RB [ -G
-.IR group [,...]]
+[\fB-g\fR \fIinitial_group\fR] [\fB-G\fR \fIgroup\fR [,...]]
 .br
-.RB [ -l
-.IR login_name ]
-.RB [ -p
-.IR passwd ]
+[\fB-l\fR \fIlogin_name\fR] [\fB-p\fR \fIpasswd\fR]
 .br
-.RB [ -s
-.IR shell ]
-.RB [ -u
-.IR uid " ["
-.BR -o ]]
-.RB [ -L | -U ]
-.I login
+[\fB-s\fR \fIshell\fR] [\fB-u\fR \fIuid\fR [\fB-o\fR]] [\fB-L\fR|\fB-U\fR]
+\fIlogin\fR
 .SH DESCRIPTION
 The \fBusermod\fR command modifies the system account files to reflect
 the changes that are specified on the command line.
-The options which apply to the \fBusermod\fR command are
-.\" .IP "\fB-A \fImethod\fR|\fBDEFAULT\fR"
-.\" The new value of the user's authentication method.
-.\" The authentication method is the name of a program which is responsible
-.\" for validating the user's identity.
-.\" The string \fBDEFAULT\fR may be used to change the user's authentication
-.\" method to the standard system password method.
+The options which apply to the \fBusermod\fR command are:
 .IP "\fB-c \fIcomment\fR"
 The new value of the user's password file comment field.
 It is normally modified using the \fBchfn\fR(1) utility.

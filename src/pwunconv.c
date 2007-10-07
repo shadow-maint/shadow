@@ -25,21 +25,12 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
- *
- * pwunconv - restore old password file from shadow password file.
- *
- *	Pwunconv copies the password file information from the shadow
- *	password file, merging entries from an optional existing shadow
- *	file.
- *
- *      Modifed by Guy Maor <maor@debian.org> to acquire necessary locks
- *      and modify the files in place.
  */
 
 #include <config.h>
 
 #include "rcsid.h"
-RCSID(PKG_VER "$Id: pwunconv.c,v 1.9 2000/08/26 18:27:18 marekm Exp $")
+RCSID(PKG_VER "$Id: pwunconv.c,v 1.10 2001/01/25 10:36:07 kloczek Exp $")
 
 #include "defines.h"
 #include <sys/types.h>

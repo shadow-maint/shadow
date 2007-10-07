@@ -1,3 +1,4 @@
+.\" $Id: su.1,v 1.4 2001/01/27 02:55:54 kloczek Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
@@ -25,13 +26,11 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .TH SU 1
 .SH NAZWA
 su \- zmieñ ID u¿ytkownika lub stañ siê superu¿ytkownikiem
 .SH SK£ADNIA
-.BR su " [" - ]
-.RI [ nazwa_u¿ytkownika " [" argumenty ]]
+\fBsu\fR [\fB-\fR] [\fInazwa_u¿ytkownika\fR [\fIargumenty\fR]]
 .SH OPIS
 .B su
 s³u¿y do stawania siê innym u¿ytkownikiem w trakcie w³asnej sesji pracy.
@@ -46,10 +45,6 @@ Po nazwie u¿ytkownika mog± wyst±piæ dodatkowe argumenty. Zostan± one
 dostarczone pow³oce zg³oszeniowej u¿ytkownika. W szczególno¶ci, argument
 \fB-c\fR spowoduje, ¿e nastêpny argument zostanie potraktowany jak polecenie
 przez wiêkszo¶æ interpretatorów poleceñ.
-.\" Polecenie zostanie wykonane przez pow³okê podan± w
-.\" \fB$SHELL\fR, albo je¶li jej nie zdefiniowano, przez podan± w
-.\" \fI/etc/passwd\fR.
-.\" XXX - powy¿sze nie by³o ca³kiem poprawne.  --marekm
 Polecenie zostanie wykonane przez pow³okê wymienion± w \fI/etc/passwd\fR dla
 docelowego u¿ytkownika.
 .PP

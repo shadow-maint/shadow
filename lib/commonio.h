@@ -1,4 +1,4 @@
-/* $Id: commonio.h,v 1.6 2000/09/02 18:40:43 marekm Exp $ */
+/* $Id: commonio.h,v 1.7 2001/08/14 21:09:54 malekith Exp $ */
 
 /*
  * Linked list entry.
@@ -97,4 +97,6 @@ extern const void *commonio_next(struct commonio_db *);
 extern int commonio_close(struct commonio_db *);
 extern int commonio_unlock(struct commonio_db *);
 extern void commonio_del_entry(struct commonio_db *, const struct commonio_entry *);
+extern int commonio_sort_wrt(struct commonio_db *shadow, struct commonio_db *passwd);
+extern int commonio_sort(struct commonio_db *db, int (*cmp)(const void *, const void *));
 

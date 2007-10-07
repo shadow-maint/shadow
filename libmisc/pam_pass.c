@@ -3,7 +3,7 @@
 #ifdef USE_PAM
 
 #include "rcsid.h"
-RCSID("$Id: pam_pass.c,v 1.6 1999/06/07 16:40:44 marekm Exp $")
+RCSID("$Id: pam_pass.c,v 1.7 2001/06/28 20:47:06 kloczek Exp $")
 
 /*
  * Change the user's password using PAM.  Requires libpam and libpam_misc
@@ -46,7 +46,7 @@ do_pam_passwd(const char *user, int silent, int change_expired)
 
 	ret = pam_chauthtok(pamh, flags);
 	if (ret != PAM_SUCCESS) {
-		fprintf(stderr, _("passwd: %s\n"), PAM_STRERROR(pamh, ret));
+		fprintf(stderr, _("passwd: %s\n"), pam_strerror(pamh, ret));
 		pam_end(pamh, ret);
 		exit(10);  /* XXX */
 	}

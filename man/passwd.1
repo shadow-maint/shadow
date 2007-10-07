@@ -1,3 +1,4 @@
+.\"$Id: passwd.1,v 1.9 2001/01/27 02:55:52 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,9 +25,6 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: passwd.1,v 1.6 2000/10/16 21:34:40 kloczek Exp $
-.\"
 .TH PASSWD 1
 .SH NAME
 passwd \- change user password
@@ -36,9 +34,9 @@ passwd \- change user password
 \fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fBR\fR] \fIgroup\fR
 .br
 \fBpasswd\fR [\fB-x\fR \fImax\fR] [\fB-n\fR \fImin\fR]
-[\fB-w\fR \fIwarn\fR] [\fB-i\fR \fIinact\fR] \fIname\fR
+[\fB-w\fR \fIwarn\fR] [\fB-i\fR \fIinact\fR] \fIlogin\fR
 .br
-\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR} \fIname\fR
+\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fIlogin\fR
 .SH DESCRIPTION
 \fBpasswd\fR changes passwords for user and group accounts.
 A normal user may only change the password for their own account,
@@ -121,6 +119,13 @@ value which matches no possible encrypted value.
 The \fB-u\fR option re-enables an account by changing the password
 back to its previous value.
 .PP
+If you wish to immediately expire an accounts password, you can use the
+\fB-e\fR option. This in affect can force a user to change their password at
+their next login. You can also use the \fB-d\fR option to delete a users
+password (make it empty). Use caution with this option since it can make an
+account not require a password at all to login, leaving your system open to
+intruders.
+.PP
 The account status may be given with the \fB-S\fR option.
 The status information consists of 6 parts.
 The first part indicates if the user account is locked (L), has no
@@ -135,6 +140,11 @@ The \fB\s-2UNIX\s+2\fR System encryption method is based on
 the NBS DES algorithm and is very secure.
 The size of the key space depends upon the randomness of the
 password which is selected.
+.PP
+The \fB-s\fR option makes passwd call chsh to change the users shell. The
+\fB-f\fR option makes passwd call chfn to change the users gecos
+information. These two options are only meant for compatiblity, since the
+other programs can be called directly.
 .PP
 Compromises in password security normally result from careless
 password selection or handling.
@@ -182,8 +192,6 @@ is enabled and they are not logged into the NIS server.
 .br
 /etc/shadow \- encrypted user passwords
 .SH SEE ALSO
-.BR passwd (3),
-.\" .BR shadow (3),
 .BR group (5),
 .BR passwd (5)
 .SH AUTHOR

@@ -10,3 +10,4 @@ extern int pw_remove(const char *);
 extern int pw_rewind(void);
 extern int pw_unlock(void);
 extern int pw_update(const struct passwd *);
+extern int pw_sort(void);

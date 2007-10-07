@@ -1,0 +1,213 @@
+.TH SUAUTH 5 "Feb 14, 1996"
+.UC 5
+.SH 名前
+suauth \- suを詳細にコントロールするためのファイル
+.SH 書式
+.B /etc/suauth
+.SH 説明
+.I /etc/suauth
+ファイルは、
+.IR /etc/login.defs (5)
+ファイル中で設定されている場合は、
+suコマンドを実行した時に必ず参照される。
+このファイルによって、
+.PP
+.RS
+.nf
+1) suが対象とするユーザ
+.fi
+2)suコマンドを実行しているユーザ(もしくはそのユーザが属するグループ)
+.RE
+に基づいてsuコマンドの振舞が変更される。
+.PP
+このファイルは以下の様な書式をしており、
+#で始まる行はコメントとして扱われ、無視される;
+.PP
+.RS
+to-id:from-id:ACTION
+.RE
+.PP
+ここで、to-idはALLという語、コンマで区切られたユーザ名のリスト
+もしくはALL EXCEPTという語とそれに続く","で区切られたユーザ名のリスト
+のいずれかである。
+.PP
+from-idはto-idと同じ書式であり、更にGROUPという語も使用できる。
+ALL EXCEPT GROUPという使い方も全く正しい。
+GROUPの後には一つ以上のグループ名を","で区切って記す。
+関連するグループの主グループidを記すだけでは十分ではなく、
+.IR /etc/group (5)
+中のエントリを記す必要がある。
+.PP
+ACTIONには、現在サポートされている以下のオプションのいずれか一つ
+を指定できる。
+.TP 20
+DENY
+パスワードを聞く前にsuを停止する。
+.TP 20
+NOPASS
+自動的にsuすることが出来、パスワードは尋ねて来ない。
+.TP 20
+OWNPASS
+su出来るためには、ユーザが自分のパスワードを入力しなくては
+ならない。パスワードを入力するように要求される。
+.PP
+コロンによって区切られた別々の欄が三つあることに注意。
+コロンの隣に空白があってはならない。
+ファイルは一行毎に順番に吟味されること及び、最初に適合した規則を用い、
+ファイルの残りは吟味されないことにも注意せよ。
+したがって、システム管理者は必要とするだけ微調整を行うことが出来る。
+.SH 例
+.PP
+.nf
+# /etc/suauthファイルの例
+#
+# 数名の特権ユーザは自分のパスワードを
+# 用いてrootにsu出来る。
+#
+root:chris,birddog:OWNPASS
+# 
+# 他のユーザはwheelグループに属していない限り
+# rootにsuすることは出来ない。
+# BSDと同じ振舞。
+#
+root:ALL EXCEPT GROUP wheel:DENY
+#
+# おそらくterryとbirddogは同じ人間が
+# 所有するアカウントである。
+# パスワード無しで互いに
+# 他方にsu出来る。
+#
+terry:birddog:NOPASS
+birddog:terry:NOPASS
+#
+.fi
+.SH ファイル
+/etc/suauth
+.SH バグ
+多くのバグが潜んでいる可能性がある。
+とりわけ、ファイルパーサは書式エラーに寛大ではなく、
+(行の始め及び終わり以外に)見かけの空白はあってはならないし、
+特定のトークンにより全く別の区切り方になってしまう事もある。
+.SH 返り値
+ファイルをパースする際のエラーはsyslogd(8)を用いてAUTH機能のレベルERR
+として通知される。
+.SH 関連項目
+su(1), login.defs(5)
+.SH 著者
+.nf
+Chris Evans (lady0110@sable.ox.ac.uk)
+Lady Margaret Hall
+Oxford University
+England
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>
+
+----Next_Part(Sat_Feb_15_01:37:39_1997)----
+
+----Next_Part(Sat_Feb_15_01:37:39_1997)--
+Content-Type: Text/Plain; charset=iso-2022-jp
+Content-Transfer-Encoding: 7bit
+
+.TH SUAUTH 5 "Feb 14, 1996"
+.UC 5
+.SH 名前
+suauth \- suを詳細にコントロールするためのファイル
+.SH 書式
+.B /etc/suauth
+.SH 説明
+.I /etc/suauth
+ファイルは、
+.IR /etc/login.defs (5)
+ファイル中で設定されている場合は、
+suコマンドを実行した時に必ず参照される。
+このファイルによって、
+.PP
+.RS
+.nf
+1) suが対象とするユーザ
+.fi
+2)suコマンドを実行しているユーザ(もしくはそのユーザが属するグループ)
+.RE
+に基づいてsuコマンドの振舞が変更される。
+.PP
+このファイルは以下の様な書式をしており、
+#で始まる行はコメントとして扱われ、無視される;
+.PP
+.RS
+to-id:from-id:ACTION
+.RE
+.PP
+ここで、to-idはALLという語、コンマで区切られたユーザ名のリスト
+もしくはALL EXCEPTという語とそれに続く","で区切られたユーザ名のリスト
+のいずれかである。
+.PP
+from-idはto-idと同じ書式であり、更にGROUPという語も使用できる。
+ALL EXCEPT GROUPという使い方も全く正しい。
+GROUPの後には一つ以上のグループ名を","で区切って記す。
+関連するグループの主グループidを記すだけでは十分ではなく、
+.IR /etc/group (5)
+中のエントリを記す必要がある。
+.PP
+ACTIONには、現在サポートされている以下のオプションのいずれか一つ
+を指定できる。
+.TP 20
+DENY
+パスワードを聞く前にsuを停止する。
+.TP 20
+NOPASS
+自動的にsuすることが出来、パスワードは尋ねて来ない。
+.TP 20
+OWNPASS
+su出来るためには、ユーザが自分のパスワードを入力しなくては
+ならない。パスワードを入力するように要求される。
+.PP
+コロンによって区切られた別々の欄が三つあることに注意。
+コロンの隣に空白があってはならない。
+ファイルは一行毎に順番に吟味されること及び、最初に適合した規則を用い、
+ファイルの残りは吟味されないことにも注意せよ。
+したがって、システム管理者は必要とするだけ微調整を行うことが出来る。
+.SH 例
+.PP
+.nf
+# /etc/suauthファイルの例
+#
+# 数名の特権ユーザは自分のパスワードを
+# 用いてrootにsu出来る。
+#
+root:chris,birddog:OWNPASS
+# 
+# 他のユーザはwheelグループに属していない限り
+# rootにsuすることは出来ない。
+# BSDと同じ振舞。
+#
+root:ALL EXCEPT GROUP wheel:DENY
+#
+# おそらくterryとbirddogは同じ人間が
+# 所有するアカウントである。
+# パスワード無しで互いに
+# 他方にsu出来る。
+#
+terry:birddog:NOPASS
+birddog:terry:NOPASS
+#
+.fi
+.SH ファイル
+/etc/suauth
+.SH バグ
+多くのバグが潜んでいる可能性がある。
+とりわけ、ファイルパーサは書式エラーに寛大ではなく、
+(行の始め及び終わり以外に)見かけの空白はあってはならないし、
+特定のトークンにより全く別の区切り方になってしまう事もある。
+.SH 返り値
+ファイルをパースする際のエラーはsyslogd(8)を用いてAUTH機能のレベルERR
+として通知される。
+.SH 関連項目
+su(1), login.defs(5)
+.SH 著者
+.nf
+Chris Evans (lady0110@sable.ox.ac.uk)
+Lady Margaret Hall
+Oxford University
+England
+.SH 翻訳者
+古高和禎 <furutaka@Flux.tokai.jaeri.go.jp>

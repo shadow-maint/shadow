@@ -1,20 +1,18 @@
 
-AUTOMAKE_OPTIONS = 1.0 foreign
+EXTRA_DOST = .indent.pro
 
-noinst_HEADERS = chkname.h failure.h getdate.h
+DEFS = -DHAVE_CONFIG_H
 
-noinst_LIBRARIES = libmisc.a
+INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/lib
 
-libdir = $(prefix)/lib
-localedir = $(datadir)/locale
-INCLUDES = -I$(top_srcdir)/libmisc -I$(top_srcdir)/lib
-DEFS = -DLOCALEDIR=\"$(localedir)\" -I. -I$(srcdir) -I.. @DEFS@
+lib_LTLIBRARIES = libmisc.la
 
-libmisc_a_SOURCES = \
+libmisc_la_SOURCES = \
 	addgrps.c \
 	age.c \
 	basename.c \
 	chkname.c \
+	chkname.h \
 	chkshell.c \
 	chowndir.c \
 	chowntty.c \
@@ -23,8 +21,10 @@ libmisc_a_SOURCES = \
 	entry.c \
 	env.c \
 	failure.c \
+	failure.h \
 	fields.c \
 	getdate.y \
+	getdate.h \
 	hushed.c \
 	isexpired.c \
 	limits.c \
@@ -57,4 +57,3 @@ libmisc_a_SOURCES = \
 	utmp.c \
 	valid.c \
 	xmalloc.c
-
