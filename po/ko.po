@@ -2,11 +2,10 @@
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # Hwang, SangJin <accel@accellinux.org>, 1999.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: 2001-02-03 15:09+0900\n"
 "Last-Translator: Hwang, Sang-Jin <violiet@suse.de>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -238,11 +237,12 @@ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
 msgstr "사용법: %s [-l] [-m 최소일수] [-M 최대일수] [-W 경고일수] 사용자\n"
 
 #: src/chage.c:157
-#, fuzzy
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
-msgstr "새로운 값을 넣거나, 디폴트 값을 원한다면 ENTER키를 치세요.\n"
+msgstr ""
+"새로운 값을 넣거나, 디폴트 값을 원한다면 ENTER키를 치세요.\n"
+"\n"
 
 #: src/chage.c:160
 msgid "Minimum Password Age"
@@ -366,14 +366,14 @@ msgid "%s: unknown user: %s\n"
 msgstr "알수없는 사용자: %s\n"
 
 #: src/chage.c:571
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "쉐도우 패스워드 파일을 lock할 수 없습니다\n"
+msgstr "%"
 
 #: src/chage.c:579
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't open shadow password file"
-msgstr "쉐도우 패스워드 파일을 열수가 없습니다\n"
+msgstr "%s: 쉐도우 패스워드 파일을 열수가 없습니다"
 
 #: src/chage.c:674
 #, c-format
@@ -685,9 +685,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: %s의 쉘이 발견되지 없습니다.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "사용법: 만기 { -f | -c }\n"
+msgstr "사용법: 만기 {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -896,9 +895,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "%s: %s 란 이름은 적절하지 않습니다\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+msgstr "%s: uid(사용자 아이디) %u 는 적절하지 않습니다\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1032,19 +1031,16 @@ msgid "Not primary owner of current group\n"
 msgstr ""
 
 #: src/groupmems.c:215
-#, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: 그룹 파일 잠금을 할 수 없습니다\n"
+msgstr "그룹 파일 잠금을 할 수 없습니다\n"
 
 #: src/groupmems.c:220
-#, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: 그룹 파일을 열수가 없습니다\n"
+msgstr "그룹 파일을 열수가 없습니다\n"
 
 #: src/groupmems.c:240
-#, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: 그룹 파일을 열 수 없습니다\n"
+msgstr "그룹 파일을 열 수 없습니다\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -1061,9 +1057,9 @@ msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: 새로운 dbm 쉐도우 그룹 입력값을 추가할 수 없습니다\n"
 
 #: src/groupmod.c:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %ld 는 적절한 gid(그룹 아이디)가 아닙니다\n"
+msgstr "%s: %u 는 적절한 gid(그룹 아이디)가 아닙니다\n"
 
 #: src/groupmod.c:330
 #, c-format
@@ -1076,12 +1072,12 @@ msgid "unknown user %s\n"
 msgstr "알수없는 사용자 %s\n"
 
 #: src/grpck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "사용법: %s [-s][-r] [group [gshadow]]\n"
+msgstr "사용법: %s [-s] [-r] [group [gshadow]]\n"
 
 #: src/grpck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "사용법: %s [-s] [-r] [group]\n"
 
@@ -1261,46 +1257,6 @@ msgstr "사용법: id [-a]\n"
 msgid "usage: id\n"
 msgstr "사용법: id\n"
 
-#: src/id.c:123
-#, fuzzy, c-format
-msgid "uid=%u(%s)"
-msgstr "uid(사용자 아이디)=%d(%s)"
-
-#: src/id.c:125
-#, fuzzy, c-format
-msgid "uid=%u"
-msgstr "uid(사용자 아이디)=%d"
-
-#: src/id.c:129
-#, fuzzy, c-format
-msgid " gid=%u(%s)"
-msgstr " gid(그룹 아이디)=%d(%s)"
-
-#: src/id.c:131
-#, fuzzy, c-format
-msgid " gid=%u"
-msgstr " gid(그룹 아이디)=%d"
-
-#: src/id.c:141
-#, fuzzy, c-format
-msgid " euid=%u(%s)"
-msgstr " euid=%d(%s)"
-
-#: src/id.c:143
-#, fuzzy, c-format
-msgid " euid=%u"
-msgstr " euid=%d"
-
-#: src/id.c:148
-#, fuzzy, c-format
-msgid " egid=%u(%s)"
-msgstr " egid=%d(%s)"
-
-#: src/id.c:150
-#, fuzzy, c-format
-msgid " egid=%u"
-msgstr " egid=%d"
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1447,9 +1403,8 @@ msgid "%s: the beginning with "
 msgstr "%s: ~와 함께 시작 "
 
 #: src/mkpasswd.c:288
-#, fuzzy
 msgid " is too long\n"
-msgstr "%s: 입력범위가 너무 깁니다\n"
+msgstr " 입력범위가 너무 깁니다\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1499,14 +1454,14 @@ msgid "usage: sg group [[-c] command]\n"
 msgstr "사용법: sg group [[-c] 명령]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "알수없는 uid(사용자 아이디): %d\n"
+msgstr "알수없는 uid(사용자 아이디): %u\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "알수없는 gid(그룹 아이디): %ld\n"
+msgstr "알수없는 gid(그룹 아이디): %lu\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1592,9 +1547,9 @@ msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "\t%s [-x 최대][-n 최소][-w 경고][-i 비활성화] 이름\n"
 
 #: src/passwd.c:180
-#, fuzzy, c-format
+#, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "\t%s { -l | -u | -d | -S | -e } 이름\n"
+msgstr "\t%s {-l|-u|-d|-S|-e} 이름\n"
 
 #: src/passwd.c:283
 #, c-format
@@ -1715,12 +1670,12 @@ msgid "Password changed.\n"
 msgstr "패스워드가 변경되었습니다.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "사용법: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "사용법: %s [-q] [-r] [-s] [패스워드]\n"
 
@@ -1742,16 +1697,16 @@ msgstr "패스워드 입력값 복제\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "유효하지 않은 사용자명 `%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "유효하지 않은 사용자명 '%s'\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "사용자 %s: 그룹이 없습니다 %d\n"
+msgstr "사용자 %s: 그룹이 없습니다 %u\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1936,9 +1891,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: 알수없는 그룹 %s\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "그룹=%s,%ld 초기 디렉토리=%s skel=%s\n"
+msgstr "그룹=%s,%u 초기 디렉토리=%s skel=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -1951,9 +1906,9 @@ msgid "inactive=%ld  expire=%s"
 msgstr "비활성화=%ld 만기=%s"
 
 #: src/useradd.c:450
-#, fuzzy, c-format
+#, c-format
 msgid "GROUP=%u\n"
-msgstr "그룹=%ld\n"
+msgstr "그룹=%u\n"
 
 #: src/useradd.c:451
 #, c-format
@@ -1986,7 +1941,7 @@ msgid "%s: cannot create new defaults file\n"
 msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
 
 #: src/useradd.c:503
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot open new defaults file\n"
 msgstr "%s: 새로운 디폴트 파일을 만들수 없습니다\n"
 
@@ -2015,9 +1970,8 @@ msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr "\t\t[-d 홈디렉토리][-s 쉘][-c 적요사항][-m [-k template]]\n"
 
 #: src/useradd.c:745 src/usermod.c:329
-#, fuzzy
 msgid "[-f inactive] [-e expire ] "
-msgstr "[-f 비활성화][-e 만기] "
+msgstr "[-f 비활성화] [-e 만기] "
 
 #: src/useradd.c:748
 msgid "[-A program] "
@@ -2033,9 +1987,8 @@ msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
 msgstr "\t%s\t-D [-g 그룹명][-b 초기디렉토리][-s 쉘]\n"
 
 #: src/useradd.c:756
-#, fuzzy
 msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f 비활성화][-e 만기]\n"
+msgstr "\t\t[-f 비활성화] [-e 만기]\n"
 
 #: src/useradd.c:850 src/usermod.c:480
 #, c-format
@@ -2058,9 +2011,9 @@ msgid "%s: error opening shadow group file\n"
 msgstr "%s: 그룹 파일을 여는데 오류\n"
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+msgstr "%s: uid(사용자 아이디) %u 는 적절하지 않습니다\n"
 
 #: src/useradd.c:1069
 #, c-format
@@ -2110,7 +2063,7 @@ msgstr "%s: 유효하지 않은 쉘 `%s'\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
+msgid "%s: invalid user name '%s'\n"
 msgstr "%s: 유효하지 않은 사용자명 `%s'\n"
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
@@ -2313,14 +2266,12 @@ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d 홈 디렉토리 [-m]] [-s 쉘] [-c 적요사항] [-l 새_이름]\n"
 
 #: src/usermod.c:332
-#, fuzzy
 msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {디폴트|프로그램},...]"
+msgstr "[-A {디폴트|프로그램},...] "
 
 #: src/usermod.c:334
-#, fuzzy
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p 패스워드] 이름\n"
+msgstr "[-p 패스워드] -L|-U] 이름\n"
 
 #: src/usermod.c:514
 #, c-format
@@ -2343,9 +2294,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: 쉐도우 패스워드가 -e 옵션과 -f 옵션을 요구합니다\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid(사용자 아이디) %ld 는 적절하지 않습니다\n"
+msgstr "%s: uid(사용자 아이디) %u 는 적절하지 않습니다\n"
 
 #: src/usermod.c:1392
 #, c-format

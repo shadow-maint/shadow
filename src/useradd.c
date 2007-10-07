@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.31 2002/01/06 14:09:07 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.32 2002/01/10 13:01:28 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -1374,7 +1374,7 @@ static void process_flags (int argc, char **argv)
 
 		user_name = argv[optind];
 		if (!check_user_name (user_name)) {
-			fprintf (stderr, _("%s: invalid user name `%s'\n"),
+			fprintf (stderr, _("%s: invalid user name '%s'\n"),
 				 Prog, user_name);
 			exit (E_BAD_ARG);
 		}

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-20001016\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: 2001-08-04 19:45+0200\n"
 "Last-Translator: Roman Festchook <roma@orta.zt.ua>\n"
 "Language-Team: Roman Festchook <roma@orta.zt.ua>\n"
@@ -239,12 +239,12 @@ msgstr ""
 "користувач\n"
 
 #: src/chage.c:157
-#, fuzzy
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
 "Введ╕ть нове значення, або нажм╕ть ENTER для значення по замовчуванню\n"
+"\n"
 
 #: src/chage.c:160
 msgid "Minimum Password Age"
@@ -324,7 +324,6 @@ msgstr "Пароль простроченно:\t"
 #. * active will be disabled.
 #.
 #: src/chage.c:290
-#, fuzzy
 msgid "Password Inactive:\t"
 msgstr "Пароль неактивний:\t"
 
@@ -333,7 +332,6 @@ msgstr "Пароль неактивний:\t"
 #. * password expiring or not.
 #.
 #: src/chage.c:304
-#, fuzzy
 msgid "Account Expires:\t"
 msgstr "Рахунок прострочено:\t"
 
@@ -438,11 +436,9 @@ msgstr ""
 "\t[-w робоч╕й_телефон] [-h домашн╕й_телефон]\n"
 
 #: src/chfn.c:139
-#, fuzzy
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
 "Введ╕ть нове значення, або нажм╕ть ENTER, для значення по замовчуванню\n"
-"\n"
 
 #: src/chfn.c:142
 msgid "Full Name"
@@ -631,11 +627,9 @@ msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Використовуйте: %s [-s shell] [╕м'я]\n"
 
 #: src/chsh.c:89
-#, fuzzy
 msgid "Enter the new value, or press return for the default\n"
 msgstr ""
 "Введ╕ть нове значення, або нажм╕ть ENTER, для значення по замовчуванню\n"
-"\n"
 
 #: src/chsh.c:90
 msgid "Login Shell"
@@ -695,9 +689,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: Shell %s не знайдено.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Використовуйте: expiry { -f | -c }\n"
+msgstr "Використовуйте: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -908,9 +901,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "%s: ╕м'я %s не ╓ ун╕кальним\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid %ld не ╓ ун╕кальним\n"
+msgstr "%s: uid %u не ╓ ун╕кальним\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1046,24 +1039,23 @@ msgstr ""
 #: src/groupmems.c:215
 #, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: не можу заблокувати файл груп\n"
+msgstr "не можу заблокувати файл груп\n"
 
 #: src/groupmems.c:220
 #, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
+msgstr "не можу в╕дкрити файл груп\n"
 
 #: src/groupmems.c:240
-#, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
+msgstr "не можу в╕дкрити файл груп\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
 msgstr "використовуйте: groupmod [-g gid [-o]] [-n ╕м'я] група\n"
 
 #: src/groupmod.c:161
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s не знайдено у /etc/passwd\n"
 
@@ -1073,9 +1065,9 @@ msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: не можу додати запис у базу прихованих груп dbm\n"
 
 #: src/groupmod.c:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %ld не ╓ ун╕кальний gid\n"
+msgstr "%s: %u не ╓ ун╕кальний gid\n"
 
 #: src/groupmod.c:330
 #, c-format
@@ -1088,12 +1080,12 @@ msgid "unknown user %s\n"
 msgstr "нев╕домий користувач %s\n"
 
 #: src/grpck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
 msgstr "Використовуйте: %s [-r] [-s] [група [gshadow]]\n"
 
 #: src/grpck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Використовуйте: %s [-r] [-s] [група]\n"
 
@@ -1273,46 +1265,6 @@ msgstr "використовуйте: id [-a]\n"
 msgid "usage: id\n"
 msgstr "використовуйте: id\n"
 
-#: src/id.c:123
-#, fuzzy, c-format
-msgid "uid=%u(%s)"
-msgstr "uid=%d(%s)"
-
-#: src/id.c:125
-#, fuzzy, c-format
-msgid "uid=%u"
-msgstr "uid=%d"
-
-#: src/id.c:129
-#, fuzzy, c-format
-msgid " gid=%u(%s)"
-msgstr " gid=%d(%s)"
-
-#: src/id.c:131
-#, fuzzy, c-format
-msgid " gid=%u"
-msgstr " gid=%d"
-
-#: src/id.c:141
-#, fuzzy, c-format
-msgid " euid=%u(%s)"
-msgstr " euid=%d(%s)"
-
-#: src/id.c:143
-#, fuzzy, c-format
-msgid " euid=%u"
-msgstr " euid=%d"
-
-#: src/id.c:148
-#, fuzzy, c-format
-msgid " egid=%u(%s)"
-msgstr " egid=%d(%s)"
-
-#: src/id.c:150
-#, fuzzy, c-format
-msgid " egid=%u"
-msgstr " egid=%d"
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1457,9 +1409,8 @@ msgid "%s: the beginning with "
 msgstr "%s: розпочина╓мо з "
 
 #: src/mkpasswd.c:288
-#, fuzzy
 msgid " is too long\n"
-msgstr "%s: поля занадто довг╕\n"
+msgstr " поля занадто довг╕\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1505,19 +1456,18 @@ msgid "usage: newgrp [-] [group]\n"
 msgstr "використовуйте: newgrp [-] [група]\n"
 
 #: src/newgrp.c:63
-#, fuzzy
 msgid "usage: sg group [[-c] command]\n"
-msgstr "використовуйте: sg група [команда]\n"
+msgstr "використовуйте: sg група [[-c] команда]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "нев╕домий uid: %d\n"
+msgstr "нев╕домий uid: %u\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "нев╕домий gid: %ld\n"
+msgstr "нев╕домий gid: %lu\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1603,9 +1553,9 @@ msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "       %s [-x макс] [-n мин] [-w застереження] [-i неактивний] ╕м'я\n"
 
 #: src/passwd.c:180
-#, fuzzy, c-format
+#, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s { -l | -u | -d | -S | -e } ╕м'я\n"
+msgstr "       %s {-l|-u|-d|-S|-e} ╕м'я\n"
 
 #: src/passwd.c:283
 #, c-format
@@ -1726,12 +1676,12 @@ msgid "Password changed.\n"
 msgstr "Пароль зм╕нено.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Використовуйте: %s [-q] [-r] [-s] [пароль [shadow]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "Використовуйте: %s [-q] [-r] [-s] [пароль]\n"
 
@@ -1753,16 +1703,16 @@ msgstr "дублюючий запис у файл╕ паролей\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "нев╕рне ╕м'я користувача `%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "нев╕рне ╕м'я користувача '%s'\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "користувач %s: не ма╓ групи %d\n"
+msgstr "користувач %s: не ма╓ групи %u\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1947,9 +1897,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: нев╕дома група %s\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "група=%s,%ld головна_тека=%s  skel=%s\n"
+msgstr "група=%s,%u головна_тека=%s  skel=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -1962,9 +1912,9 @@ msgid "inactive=%ld  expire=%s"
 msgstr "неактивний=%ld  просторочений=%s"
 
 #: src/useradd.c:450
-#, fuzzy, c-format
+#, c-format
 msgid "GROUP=%u\n"
-msgstr "ГРУПА=%ld\n"
+msgstr "ГРУПА=%u\n"
 
 #: src/useradd.c:451
 #, c-format
@@ -2026,9 +1976,8 @@ msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr "\t\t[-d домашня_тека] [-s shell] [-c коментар] [-m [-k wzСr]]\n"
 
 #: src/useradd.c:745 src/usermod.c:329
-#, fuzzy
 msgid "[-f inactive] [-e expire ] "
-msgstr "[-f неактивний] [-e прострочений]"
+msgstr "[-f неактивний] [-e прострочений] "
 
 #: src/useradd.c:748
 msgid "[-A program] "
@@ -2044,7 +1993,6 @@ msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
 msgstr "       %s\t-D [-g група] [-b базова_тека] [-s shell]\n"
 
 #: src/useradd.c:756
-#, fuzzy
 msgid "\t\t[-f inactive] [-e expire ]\n"
 msgstr "\t\t[-f неактивний] [-e прострочений]\n"
 
@@ -2069,9 +2017,9 @@ msgid "%s: error opening shadow group file\n"
 msgstr "%s: не можу в╕дкрити файл прихованих груп\n"
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: uid %ld не ╓ ун╕кальним\n"
+msgstr "%s: uid %u не ╓ ун╕кальним\n"
 
 #: src/useradd.c:1069
 #, c-format
@@ -2121,8 +2069,8 @@ msgstr "%s: нев╕рний shell `%s'\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
-msgstr "%s: нев╕рне ╕м'я користувача `%s'\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: нев╕рне ╕м'я користувача '%s'\n"
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
 #, c-format
@@ -2327,9 +2275,8 @@ msgid "[-A {DEFAULT|program},... ] "
 msgstr "[-A {DEFAULT|program},...] "
 
 #: src/usermod.c:334
-#, fuzzy
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p пароль] ╕м'я\n"
+msgstr "[-p пароль] [-L|-U] ╕м'я\n"
 
 #: src/usermod.c:514
 #, c-format
@@ -2352,9 +2299,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: прихован╕ парол╕ потр╕бн╕ для -e ╕ -f\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %ld не ╓ ун╕кальним\n"
+msgstr "%s: uid %lu не ╓ ун╕кальним\n"
 
 #: src/usermod.c:1392
 #, c-format
@@ -2442,7 +2389,7 @@ msgstr ""
 #: src/vipw.c:132
 #, fuzzy
 msgid "Couldn't lock file"
-msgstr "%s: Не можу блокувати файл\n"
+msgstr "Не можу блокувати файл\n"
 
 #: src/vipw.c:141
 msgid "Couldn't make backup"

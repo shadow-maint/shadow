@@ -1,17 +1,15 @@
-# Swedish messages for Shadow 
-# Copyright (C) 1999 Free Software Foundation, Inc.
-# Kristoffer Brånemyr <ztion@swipnet.se>, 1999.
+# Swedish messages for Shadow Copyright (C) 1999 Free Software Foundation,
+# Inc. Kristoffer Brånemyr <ztion@swipnet.se>, 1999.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: 1999-08-16 21:20+0100\n"
 "Last-Translator: Kristoffer Brånemyr <ztion@swipnet.se>\n"
 "Language-Team: sv <sv@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso8859-1\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: libmisc/addgrps.c:60
@@ -325,16 +323,14 @@ msgstr "Lösenordet upphör:\t"
 #. * active will be disabled.
 #.
 #: src/chage.c:290
-#, fuzzy
 msgid "Password Inactive:\t"
-msgstr "Lösenord inaktivt"
+msgstr "Lösenord inaktiv:\t"
 
 #.
 #. * The account will expire on the given date regardless of the
 #. * password expiring or not.
 #.
 #: src/chage.c:304
-#, fuzzy
 msgid "Account Expires:\t"
 msgstr "Lösenordet upphör:\t"
 
@@ -371,14 +367,14 @@ msgid "%s: unknown user: %s\n"
 msgstr "%s: okänd användare: %s\n"
 
 #: src/chage.c:571
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%s: kan inte låsa skugglösenordsfilen\n"
+msgstr "%s: kan inte låsa skugglösenordsfilen"
 
 #: src/chage.c:579
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: kan inte öppna skugglösenordsfilen\n"
+msgstr "%s: kan inte öppna skugglösenordsfilen"
 
 #: src/chage.c:674
 #, c-format
@@ -439,11 +435,8 @@ msgstr ""
 "hemtele]\n"
 
 #: src/chfn.c:139
-#, fuzzy
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"Skriv in det nya värdet, eller tryck på ENTER för standardvärdet\n"
-"\n"
+msgstr "Skriv in det nya värdet, eller tryck ENTER för standardvärdet\n"
 
 #: src/chfn.c:142
 msgid "Full Name"
@@ -632,11 +625,8 @@ msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Användning: %s [-s skal] [namn]\n"
 
 #: src/chsh.c:89
-#, fuzzy
 msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"Skriv in det nya värdet, eller tryck på ENTER för standardvärdet\n"
-"\n"
+msgstr "Skriv in det nya värdet, eller tryck på ENTER för standardvärdet\n"
 
 #: src/chsh.c:90
 msgid "Login Shell"
@@ -696,9 +686,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: Hittade inte skalet %s.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Användning: expiry { -f | -c }\n"
+msgstr "Användning: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -908,9 +897,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "%s: namnet %s är inte unikt\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid %ld är inte unikt\n"
+msgstr "%s: gid %u är inte unikt\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1044,19 +1033,16 @@ msgid "Not primary owner of current group\n"
 msgstr ""
 
 #: src/groupmems.c:215
-#, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: kan inte låsa gruppfilen\n"
+msgstr "Kan inte låsa gruppfilen\n"
 
 #: src/groupmems.c:220
-#, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: kan inte öppna gruppfilen\n"
+msgstr "Kan inte öppna gruppfilen\n"
 
 #: src/groupmems.c:240
-#, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: kan inte öppna gruppfilen\n"
+msgstr "Kan inte öppna gruppfilen\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -1073,9 +1059,9 @@ msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: kunde inte lägga till en ny dbm-skuggruppnotering\n"
 
 #: src/groupmod.c:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %ld är inte ett unikt gid\n"
+msgstr "%s: %u är inte ett unikt gid\n"
 
 #: src/groupmod.c:330
 #, c-format
@@ -1088,14 +1074,14 @@ msgid "unknown user %s\n"
 msgstr "okänd användare %s\n"
 
 #: src/grpck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Användning: %s [-s][-r] [grupp [gshadow]]\n"
+msgstr "Användning: %s [-s] [-r] [grupp [gshadow]]\n"
 
 #: src/grpck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Användning: %s [-s][-r] [grupp]\n"
+msgstr "Användning: %s [-s] [-r] [grupp]\n"
 
 #: src/grpck.c:108 src/pwck.c:108
 msgid "No"
@@ -1273,46 +1259,6 @@ msgstr "Användning: id [-a]\n"
 msgid "usage: id\n"
 msgstr "Användning: id\n"
 
-#: src/id.c:123
-#, fuzzy, c-format
-msgid "uid=%u(%s)"
-msgstr "uid=%d(%s)"
-
-#: src/id.c:125
-#, fuzzy, c-format
-msgid "uid=%u"
-msgstr "uid=%d"
-
-#: src/id.c:129
-#, fuzzy, c-format
-msgid " gid=%u(%s)"
-msgstr " gid=%d(%s)"
-
-#: src/id.c:131
-#, fuzzy, c-format
-msgid " gid=%u"
-msgstr " gid=%d"
-
-#: src/id.c:141
-#, fuzzy, c-format
-msgid " euid=%u(%s)"
-msgstr " euid=%d(%s)"
-
-#: src/id.c:143
-#, fuzzy, c-format
-msgid " euid=%u"
-msgstr " euid=%d"
-
-#: src/id.c:148
-#, fuzzy, c-format
-msgid " egid=%u(%s)"
-msgstr " egid=%d(%s)"
-
-#: src/id.c:150
-#, fuzzy, c-format
-msgid " egid=%u"
-msgstr " egid=%d"
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1457,9 +1403,8 @@ msgid "%s: the beginning with "
 msgstr "%s: början med "
 
 #: src/mkpasswd.c:288
-#, fuzzy
 msgid " is too long\n"
-msgstr "%s: för långa fält\n"
+msgstr " för långa fält\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1505,19 +1450,18 @@ msgid "usage: newgrp [-] [group]\n"
 msgstr "Användning: newgrp [-] [grupp]\n"
 
 #: src/newgrp.c:63
-#, fuzzy
 msgid "usage: sg group [[-c] command]\n"
-msgstr "Användning: sg grupp [kommando]\n"
+msgstr "Användning: sg grupp [[-c] kommando]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "okänt uid: %d\n"
+msgstr "okänt uid: %u\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "okänt gid: %ld\n"
+msgstr "okänt gid: %lu\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1725,14 +1669,14 @@ msgid "Password changed.\n"
 msgstr "Lösenordet ändrat.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Användning: %s [-qr] [passwd [shadow]]\n"
+msgstr "Användning: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
-msgstr "Användning: %s [-qr] [passwd]\n"
+msgstr "Användning: %s [-q] [-r] [-s] [passwd]\n"
 
 #.
 #. * Tell the user this entire line is bogus and ask
@@ -1752,16 +1696,16 @@ msgstr "dubblett av lösenords notering\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "ogiltigt användarnamn \"%s\"\n"
+msgid "invalid user name '%s'\n"
+msgstr "ogiltigt användarnamn '%s'\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "användare %s: ingen grupp %d\n"
+msgstr "användare %s: ingen grupp %u\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1946,9 +1890,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: okänd grupp %s\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "grupp=%s,%ld  baskatalog=%s  skel=%s\n"
+msgstr "grupp=%s,%u  baskatalog=%s  skel=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -1961,9 +1905,9 @@ msgid "inactive=%ld  expire=%s"
 msgstr "inaktiv=%ld  upphör=%s"
 
 #: src/useradd.c:450
-#, fuzzy, c-format
+#, c-format
 msgid "GROUP=%u\n"
-msgstr "GRUPP=%ld\n"
+msgstr "GRUPP=%u\n"
 
 #: src/useradd.c:451
 #, c-format
@@ -2068,9 +2012,9 @@ msgid "%s: error opening shadow group file\n"
 msgstr "%s: fel under öppning av skuggruppfilen\n"
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: uid %ld är inte unikt\n"
+msgstr "%s: uid %u är inte unikt\n"
 
 #: src/useradd.c:1069
 #, c-format
@@ -2120,8 +2064,8 @@ msgstr "%s: felaktigt skal \"%s\"\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
-msgstr "%s: felaktigt användar namn \"%s\"\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: felaktigt användar namn '%s'\n"
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
 #, c-format
@@ -2324,9 +2268,8 @@ msgid "[-A {DEFAULT|program},... ] "
 msgstr "[-A {DEFAULT|program},...] "
 
 #: src/usermod.c:334
-#, fuzzy
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p passwd] namn\n"
+msgstr "[-p passwd] [-L|-U] namn\n"
 
 #: src/usermod.c:514
 #, c-format
@@ -2349,9 +2292,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: skugglösenord krävs för -e och -f\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %ld är inte unikt\n"
+msgstr "%s: uid %lu är inte unikt\n"
 
 #: src/usermod.c:1392
 #, c-format

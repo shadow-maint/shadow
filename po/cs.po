@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-utils-20000902\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: 2000-09-23 19:58+0200\n"
 "Last-Translator: Jiøí Pavlovský <pavlovsk@ff.cuni.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -238,12 +238,12 @@ msgstr ""
 "Pou¾ití: %s [-l] [-m min_dnù] [-M max_dnù] [-d poslední den] u¾ivatel\n"
 
 #: src/chage.c:157
-#, fuzzy
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
 "Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
+"\n"
 
 #: src/chage.c:160
 msgid "Minimum Password Age"
@@ -367,14 +367,14 @@ msgid "%s: unknown user: %s\n"
 msgstr "%s: u¾ivatel %s je neznámý\n"
 
 #: src/chage.c:571
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%s: soubor se stínovými hesly nelze zamknout\n"
+msgstr "%s: soubor se stínovými hesly nelze zamknout"
 
 #: src/chage.c:579
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: soubor se stínovými hesly nelze otevøít\n"
+msgstr "%s: soubor se stínovými hesly nelze otevøít"
 
 #: src/chage.c:674
 #, c-format
@@ -435,11 +435,9 @@ msgstr ""
 "\t[-h telefon domù]\n"
 
 #: src/chfn.c:139
-#, fuzzy
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
 "Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
-"\n"
 
 #: src/chfn.c:142
 msgid "Full Name"
@@ -628,11 +626,9 @@ msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Pou¾ití: %s [-s shell] [jméno]\n"
 
 #: src/chsh.c:89
-#, fuzzy
 msgid "Enter the new value, or press return for the default\n"
 msgstr ""
 "Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
-"\n"
 
 #: src/chsh.c:90
 msgid "Login Shell"
@@ -692,9 +688,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: Shell %s nebyl nalezen.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Pou¾ití: expiry { -f | -c }\n"
+msgstr "Pou¾ití: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -903,9 +898,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "%s: jméno %s není jedineèné\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s uid %ld není jedineèné\n"
+msgstr "%s: uid %u není jedineèné\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1041,19 +1036,16 @@ msgid "Not primary owner of current group\n"
 msgstr ""
 
 #: src/groupmems.c:215
-#, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: soubor se skupinami nelze zamknout\n"
+msgstr "Soubor se skupinami nelze zamknout\n"
 
 #: src/groupmems.c:220
-#, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: soubor se skupinami nelze otevøít\n"
+msgstr "Soubor se skupinami nelze otevøít\n"
 
 #: src/groupmems.c:240
-#, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: soubor se skupinami nelze otevøít\n"
+msgstr "Soubor se skupinami nelze otevøít\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -1070,9 +1062,9 @@ msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: nelze pøidat polo¾ku do souboru s dbm databází stínových skupin\n"
 
 #: src/groupmod.c:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: gid %ld není jedineèné\n"
+msgstr "%s: gid %u není jedineèné\n"
 
 #: src/groupmod.c:330
 #, c-format
@@ -1085,13 +1077,13 @@ msgid "unknown user %s\n"
 msgstr "u¾ivatel %s je neznámý\n"
 
 #: src/grpck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
 msgstr ""
 "Pou¾ití: %s [-r] [-s] [soubor se skupinami [soubor se stínovými skupinami]]\n"
 
 #: src/grpck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Usage: %s [-r] [-s] [soubor se skupinami]\n"
 
@@ -1271,46 +1263,6 @@ msgstr "Pou¾ití: id [-a]\n"
 msgid "usage: id\n"
 msgstr "Pou¾ití: id\n"
 
-#: src/id.c:123
-#, fuzzy, c-format
-msgid "uid=%u(%s)"
-msgstr "uid=%d(%s)"
-
-#: src/id.c:125
-#, fuzzy, c-format
-msgid "uid=%u"
-msgstr "uid=%d"
-
-#: src/id.c:129
-#, fuzzy, c-format
-msgid " gid=%u(%s)"
-msgstr " gid=%d(%s)"
-
-#: src/id.c:131
-#, fuzzy, c-format
-msgid " gid=%u"
-msgstr " gid=%d"
-
-#: src/id.c:141
-#, fuzzy, c-format
-msgid " euid=%u(%s)"
-msgstr " euid=%d(%s)"
-
-#: src/id.c:143
-#, fuzzy, c-format
-msgid " euid=%u"
-msgstr " euid=%d"
-
-#: src/id.c:148
-#, fuzzy, c-format
-msgid " egid=%u(%s)"
-msgstr " egid=%d(%s)"
-
-#: src/id.c:150
-#, fuzzy, c-format
-msgid " egid=%u"
-msgstr " egid=%d"
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1455,9 +1407,8 @@ msgid "%s: the beginning with "
 msgstr "%s: zaèátek s "
 
 #: src/mkpasswd.c:288
-#, fuzzy
 msgid " is too long\n"
-msgstr "%s: polo¾ka je pøíli¹ dlouhá\n"
+msgstr " polo¾ka je pøíli¹ dlouhá\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1507,14 +1458,14 @@ msgid "usage: sg group [[-c] command]\n"
 msgstr "Pou¾ití: sg skupina [[-c] pøíkaz]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "uid %d je neznámé\n"
+msgstr "uid %u je neznámé\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "gid %ld je neznámé\n"
+msgstr "gid %lu je neznámé\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1600,9 +1551,9 @@ msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "       %s [-x max] [-n min] [-w varování] [-i vypnutí] jméno\n"
 
 #: src/passwd.c:180
-#, fuzzy, c-format
+#, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s { -l | -u | -d | -S | -e } jméno\n"
+msgstr "       %s {-l|-u|-d|-S|-e} jméno\n"
 
 #: src/passwd.c:283
 #, c-format
@@ -1722,13 +1673,13 @@ msgid "Password changed.\n"
 msgstr "Heslo bylo zmìnìno.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 "Pou¾ití: %s [-q] [-r] [-s] [soubor s hesly [soubor se stínovými hesly]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "Pou¾ití: %s [-q] [-r] [-s] [soubor s hesly]\n"
 
@@ -1750,16 +1701,16 @@ msgstr "duplikovaná polo¾ka v souboru s hesly\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "chybné u¾ivatelské jméno `%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "chybné u¾ivatelské jméno '%s'\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "u¾ivatel %s: skupina %d neexistuje\n"
+msgstr "u¾ivatel %s: skupina %u neexistuje\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1944,9 +1895,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: skupina %s je neznámá\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "skupina=%s,%ld základ. adr.=%s skel=%s\n"
+msgstr "skupina=%s,%u základ. adr.=%s skel=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -1959,9 +1910,9 @@ msgid "inactive=%ld  expire=%s"
 msgstr "vypnutí=%ld   vypr¹ení=%s"
 
 #: src/useradd.c:450
-#, fuzzy, c-format
+#, c-format
 msgid "GROUP=%u\n"
-msgstr "SKUPINA=%ld\n"
+msgstr "SKUPINA=%u\n"
 
 #: src/useradd.c:451
 #, c-format
@@ -2066,9 +2017,9 @@ msgid "%s: error opening shadow group file\n"
 msgstr "%s: chyba pøi otevírání souboru se stínovými hesly\n"
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s uid %ld není jedineèné\n"
+msgstr "%s uid %u není jedineèné\n"
 
 #: src/useradd.c:1069
 #, c-format
@@ -2118,7 +2069,7 @@ msgstr "%s: chybný shell `%s'\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
+msgid "%s: invalid user name '%s'\n"
 msgstr "%s: chybné u¾ivatelské jméno `%s'\n"
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
@@ -2317,7 +2268,6 @@ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d domácí adr. [-m]] [-s shell] [-c komentáø] [-l nové jméno]\n"
 
 #: src/usermod.c:332
-#, fuzzy
 msgid "[-A {DEFAULT|program},... ] "
 msgstr "[-A {DEFAULT|program},...] "
 
@@ -2346,9 +2296,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: pøepínaèe -e a -f vy¾adují stínová hesla\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s uid %ld není jedineèné\n"
+msgstr "%s uid %lu není jedineèné\n"
 
 #: src/usermod.c:1392
 #, c-format

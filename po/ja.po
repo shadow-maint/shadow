@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1990827\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: 2000-06-18 120:22+0900\n"
 "Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
 "Language-Team: Japanese\n"
@@ -690,9 +690,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: シェル %sが見付かりません.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "使用法: expiry { -f | -c }\n"
+msgstr "使用法: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -880,9 +879,8 @@ msgid "%s: can't update DBM shadow files\n"
 msgstr "%s: DBM シャドウ・ファイルを更新できません\n"
 
 #: src/groupadd.c:101
-#, fuzzy
 msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "使用法: groupadd [-g グループID [-o]]  [-r] [-f] グループ\n"
+msgstr "使用法: groupadd [-g グループID [-o]] グループ\n"
 
 #: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
 #: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
@@ -902,9 +900,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "s: 名前 %s は重複しています\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: ユーザID %ld が重複しています\n"
+msgstr "%s: ユーザID %u が重複しています\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1040,17 +1038,17 @@ msgstr ""
 #: src/groupmems.c:215
 #, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
+msgstr "グループ・ファイルをロックできません\n"
 
 #: src/groupmems.c:220
 #, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: グループファイルを開けません\n"
+msgstr "グループファイルを開けません\n"
 
 #: src/groupmems.c:240
 #, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
+msgstr "グループ・ファイルを開けません\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -1067,9 +1065,9 @@ msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr "%s: 新規DBMシャドウ・グループ・エントリを追加できません\n"
 
 #: src/groupmod.c:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %ld はグループIDが重複しています\n"
+msgstr "%s: %u はグループIDが重複しています\n"
 
 #: src/groupmod.c:330
 #, c-format
@@ -1082,14 +1080,14 @@ msgid "unknown user %s\n"
 msgstr "不明なユーザです %s\n"
 
 #: src/grpck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
 msgstr "使用法: %s [-r] [-s] [グループ [グループシャドウ]]\n"
 
 #: src/grpck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "使用法: %s [-r] [グループ]\n"
+msgstr "使用法: %s [-r] [-s] [グループ]\n"
 
 #: src/grpck.c:108 src/pwck.c:108
 msgid "No"
@@ -1267,46 +1265,6 @@ msgstr "使用法: id [-a]\n"
 msgid "usage: id\n"
 msgstr "使用法: id\n"
 
-#: src/id.c:123
-#, fuzzy, c-format
-msgid "uid=%u(%s)"
-msgstr "ユーザID=%d(%s)"
-
-#: src/id.c:125
-#, fuzzy, c-format
-msgid "uid=%u"
-msgstr "ユーザID=%d"
-
-#: src/id.c:129
-#, fuzzy, c-format
-msgid " gid=%u(%s)"
-msgstr " グループID=%d(%s)"
-
-#: src/id.c:131
-#, fuzzy, c-format
-msgid " gid=%u"
-msgstr " グループID=%d"
-
-#: src/id.c:141
-#, fuzzy, c-format
-msgid " euid=%u(%s)"
-msgstr " 実効ユーザID=%d(%s)"
-
-#: src/id.c:143
-#, fuzzy, c-format
-msgid " euid=%u"
-msgstr " 実効ユーザID=%d"
-
-#: src/id.c:148
-#, fuzzy, c-format
-msgid " egid=%u(%s)"
-msgstr " 実効グループID=%d(%s)"
-
-#: src/id.c:150
-#, fuzzy, c-format
-msgid " egid=%u"
-msgstr " 実効グループID=%d"
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1451,7 +1409,7 @@ msgstr ""
 #: src/mkpasswd.c:288
 #, fuzzy
 msgid " is too long\n"
-msgstr "%s: 入力内容が長過ぎます\n"
+msgstr " 入力内容が長過ぎます\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1501,14 +1459,14 @@ msgid "usage: sg group [[-c] command]\n"
 msgstr "使用法: sg グループ [[-c] コマンド]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "不明なユーザIDです: %d\n"
+msgstr "不明なユーザIDです: %u\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "不明なグループIDです: %ld\n"
+msgstr "不明なグループIDです: %lu\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1594,9 +1552,9 @@ msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "       %s [-x 最大] [-n 最小] [-w 警告] [-i 無効] ユーザ名\n"
 
 #: src/passwd.c:180
-#, fuzzy, c-format
+#, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s { -l | -u | -d | -S | -e } ユーザ名\n"
+msgstr "       %s {-l|-u|-d|-S|-e} ユーザ名\n"
 
 #: src/passwd.c:283
 #, c-format
@@ -1716,12 +1674,12 @@ msgid "Password changed.\n"
 msgstr "パスワードは変更されました.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "使用: %s [-q] [-r] [-s] [パスワード [シャドウ]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "使用: %s [-q] [-r] [-s] [パスワード]\n"
 
@@ -1743,16 +1701,16 @@ msgstr "パスワードエントリが重複しています\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "不正なユーザ名`%s' です\n"
+msgid "invalid user name '%s'\n"
+msgstr "不正なユーザ名'%s' です\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "ユーザ %s: グループ %d がありません\n"
+msgstr "ユーザ %s: グループ %u がありません\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1934,9 +1892,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: 不明なグループ %s\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "グループ=%s,%ld ベースディレクトリ=%s  雛型=%s\n"
+msgstr "グループ=%s,%u ベースディレクトリ=%s  雛型=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -2013,7 +1971,6 @@ msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr "\t\t[-d ホーム] [-s シェル] [-c コメント] [-m [-k テンプレート]]\n"
 
 #: src/useradd.c:745 src/usermod.c:329
-#, fuzzy
 msgid "[-f inactive] [-e expire ] "
 msgstr "[-f 無効日数] [-e 期限切れ日] "
 
@@ -2022,9 +1979,8 @@ msgid "[-A program] "
 msgstr "[-A プログラム] "
 
 #: src/useradd.c:750
-#, fuzzy
 msgid "[-p passwd] name\n"
-msgstr "[-p パスワード] [-L|-U] ユーザ名\n"
+msgstr "[-p パスワード] ユーザ名\n"
 
 #: src/useradd.c:753
 #, c-format
@@ -2032,7 +1988,6 @@ msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
 msgstr "       %s\t-D [-g グループ] [-b ベース] [-s シェル]\n"
 
 #: src/useradd.c:756
-#, fuzzy
 msgid "\t\t[-f inactive] [-e expire ]\n"
 msgstr "\t\t[-f 無効日数] [-e 期限切れ日]\n"
 
@@ -2057,9 +2012,9 @@ msgid "%s: error opening shadow group file\n"
 msgstr ""
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: ユーザID %ld が重複しています\n"
+msgstr "%s: ユーザID %u が重複しています\n"
 
 #: src/useradd.c:1069
 #, c-format
@@ -2109,7 +2064,7 @@ msgstr "%s: シェル `%s' は不正です\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
+msgid "%s: invalid user name '%s'\n"
 msgstr ""
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
@@ -2339,9 +2294,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: シャドウ・パスワードには -e および -e が必要です\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: ユーザID %ld が重複しています\n"
+msgstr "%s: ユーザID %lu が重複しています\n"
 
 #: src/usermod.c:1392
 #, c-format

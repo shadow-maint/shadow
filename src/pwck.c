@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.22 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwck.c,v 1.23 2002/01/10 13:01:28 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -370,7 +370,7 @@ int main (int argc, char **argv)
 		 * Check for invalid usernames.  --marekm
 		 */
 		if (!check_user_name (pwd->pw_name)) {
-			printf (_("invalid user name `%s'\n"),
+			printf (_("invalid user name '%s'\n"),
 				pwd->pw_name);
 			errors++;
 		}

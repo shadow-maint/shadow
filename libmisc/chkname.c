@@ -6,7 +6,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chkname.c,v 1.5 2001/11/17 01:24:57 kloczek Exp $")
+RCSID("$Id: chkname.c,v 1.6 2002/01/10 13:04:34 kloczek Exp $")
 
 #include <ctype.h>
 #include "defines.h"
@@ -30,7 +30,8 @@ good_name(const char *name)
 	while (*++name) {
 		if (!((*name >= 'a' && *name <= 'z') ||
 		    (*name >= '0' && *name <= '9') ||
-		    *name == '_' || *name == '-'))
+		    *name == '_' || *name == '-' ||
+		    (*name == '$' && *(name+1) == NULL)))
 			return 0;
 	}
 

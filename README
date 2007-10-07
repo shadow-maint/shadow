@@ -7,7 +7,7 @@ FTP site
 CVS repository
 	anonymous read only access :pserver:cvs@anoncvs.pld.org.pl:/cvsroot
 	module: shadow
-	password: cvs
+	password: [empty password]
 
 CVS web interface
 	http://cvsweb.pld.org.pl/index.cgi/shadow/

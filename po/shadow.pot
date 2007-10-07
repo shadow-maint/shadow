@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1250,46 +1250,6 @@ msgstr ""
 msgid "usage: id\n"
 msgstr ""
 
-#: src/id.c:123
-#, c-format
-msgid "uid=%u(%s)"
-msgstr ""
-
-#: src/id.c:125
-#, c-format
-msgid "uid=%u"
-msgstr ""
-
-#: src/id.c:129
-#, c-format
-msgid " gid=%u(%s)"
-msgstr ""
-
-#: src/id.c:131
-#, c-format
-msgid " gid=%u"
-msgstr ""
-
-#: src/id.c:141
-#, c-format
-msgid " euid=%u(%s)"
-msgstr ""
-
-#: src/id.c:143
-#, c-format
-msgid " euid=%u"
-msgstr ""
-
-#: src/id.c:148
-#, c-format
-msgid " egid=%u(%s)"
-msgstr ""
-
-#: src/id.c:150
-#, c-format
-msgid " egid=%u"
-msgstr ""
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1715,7 +1675,7 @@ msgstr ""
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
+msgid "invalid user name '%s'\n"
 msgstr ""
 
 #.
@@ -2076,7 +2036,7 @@ msgstr ""
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
+msgid "%s: invalid user name '%s'\n"
 msgstr ""
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255

@@ -1,4 +1,61 @@
+2002-02-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in: release 4.0.2.
+
+2002-02-17  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* Attic/shadow-utils.spec.in, Makefile.am, configure.in, shadow.spec.in:
+	rename spec file s/shadow-utils.spec/shadow.spec/
+
+	* po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/sv.po, po/uk.po:
+	update-po before release.
+
+	* po/ko.po, po/pl.po: cleanups.
+
+2002-02-01  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/adduser.8, man/grpconv.8, man/grpunconv.8, man/pwunconv.8, man/sg.1, man/vigr.8:
+	placa ".so man<level>/<man_page>.<level>" in roff .so includes (seems some
+	man page viewers do not handles correctly man documents without subdirectory
+	name in roff .so incude).
+
+2002-01-31  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, NEWS:
+	resolve many fuzzy translations also all this which may cause problems on
+	displaing long uid/gid.
+
+	* src/id.c, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po:
+	drop translate some messages in id output (about {,e}{u,g}id).
+
+2002-01-19  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* README: s#password: cvs#password: [empty password]#
+
+2002-01-10  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: two new entries.
+
+	* libmisc/chkname.c (good_name):
+	allow usernames ending with "$" for allow create machine
+	acounts for samba (thanks for point this problem in 4.0.1 by
+	Jerome Borsboom <borsboom@tch.fgg.eur.nl>).
+
+	* src/pwck.c, src/useradd.c, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
+	s/invalid user name `%s'/invalid user name '%s'/
+
+2002-01-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in:
+	fix in libpam_misc detection (removed one "," AC_CHECK_LIB()).
+	Thanks to Silvan Minghetti for report this.
+
 2002-01-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: start prepare to 4.0.2.
+
+	* po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po:
+	updated.
 
 	* configure.in: It is good time to release 4.0.1.
 
@@ -646,7 +703,7 @@
 
 	* README: - added README with all shadow sites and resources details.
 
-	* shadow-utils.spec.in: - partialy rewrited.
+	* Attic/shadow-utils.spec.in: - partialy rewrited.
 
 	* configure.in: - change version to 20001010.
 
@@ -658,7 +715,7 @@
 
 2000-10-09  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, Makefile.am, configure.in, shadow-utils.spec.in:
+	* redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, Attic/shadow-utils.spec.in, Makefile.am, configure.in:
 	- remove redhat/ directory with obsoleted files.
 
 	* man/Makefile.am: - removed redundant ${man_MANS} from EXTRA_DIST.

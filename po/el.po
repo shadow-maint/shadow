@@ -2,16 +2,15 @@
 # Greek Translation by Nikos Mavroyanopoulos
 # Thanks to Simos Xenitelis (S.Xenitellis@rhbnc.ac.uk) for his
 # comments about making this translation better. 
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Shadow 980726\n"
-"POT-Creation-Date: 2002-01-06 16:13+0100\n"
+"POT-Creation-Date: 2002-02-17 21:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>\n"
 "Language-Team: Hellenic <el@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO8859-7\n"
+"Content-Type: text/plain; charset=iso-8859-7\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
 #: libmisc/addgrps.c:60
@@ -243,11 +242,12 @@ msgstr ""
 "Χρήση: %s [-l] [-m ελάχ_μέρες] [-M μεγ_μέρες] [-d τελευταία_μέρα] χρήστης\n"
 
 #: src/chage.c:157
-#, fuzzy
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
-msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+msgstr ""
+"Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+"\n"
 
 #: src/chage.c:160
 msgid "Minimum Password Age"
@@ -327,16 +327,14 @@ msgstr "Το συνθηματικό λήγει:\t"
 #. * active will be disabled.
 #.
 #: src/chage.c:290
-#, fuzzy
 msgid "Password Inactive:\t"
-msgstr "Ανενεργό συνθηματικό"
+msgstr "Ανενεργό συνθηματικό:\t"
 
 #.
 #. * The account will expire on the given date regardless of the
 #. * password expiring or not.
 #.
 #: src/chage.c:304
-#, fuzzy
 msgid "Account Expires:\t"
 msgstr "Το συνθηματικό λήγει:\t"
 
@@ -442,11 +440,8 @@ msgstr ""
 "[-h τηλ_οικίας]\n"
 
 #: src/chfn.c:139
-#, fuzzy
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
-"\n"
+msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
 
 #: src/chfn.c:142
 msgid "Full Name"
@@ -636,11 +631,8 @@ msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Χρήση: %s [-s φλοιός] [όνομα]\n"
 
 #: src/chsh.c:89
-#, fuzzy
 msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
-"\n"
+msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
 
 #: src/chsh.c:90
 msgid "Login Shell"
@@ -700,9 +692,8 @@ msgid "%s: Shell %s not found.\n"
 msgstr "%s: Ο φλοιός %s δεν βρέθηκε.\n"
 
 #: src/expiry.c:59
-#, fuzzy
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Χρήση: expiry { -f | -c }\n"
+msgstr "Χρήση: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -914,9 +905,9 @@ msgid "%s: name %s is not unique\n"
 msgstr "%s: Το όνομα %s δεν είναι μοναδικό\n"
 
 #: src/groupadd.c:270
-#, fuzzy, c-format
+#, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: Το uid %ld δεν είναι μοναδικό\n"
+msgstr "%s: Το uid %u δεν είναι μοναδικό\n"
 
 #: src/groupadd.c:294
 #, c-format
@@ -1055,17 +1046,17 @@ msgstr ""
 #: src/groupmems.c:215
 #, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "%s: Αδυναμία κλειδώματος του αρχείου ομάδων\n"
+msgstr "Αδυναμία κλειδώματος του αρχείου ομάδων\n"
 
 #: src/groupmems.c:220
 #, fuzzy
 msgid "Unable to open group file\n"
-msgstr "%s: Αδυναμία ανοίγματος του αρχείου ομάδων\n"
+msgstr "Αδυναμία ανοίγματος του αρχείου ομάδων\n"
 
 #: src/groupmems.c:240
 #, fuzzy
 msgid "Cannot close group file\n"
-msgstr "%s: αδυναμία ανοίγματος αρχείου ομάδων\n"
+msgstr "αδυναμία ανοίγματος αρχείου ομάδων\n"
 
 #: src/groupmod.c:103
 msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
@@ -1289,46 +1280,6 @@ msgstr "χρήση: id [-a]\n"
 msgid "usage: id\n"
 msgstr "χρήση: id\n"
 
-#: src/id.c:123
-#, c-format
-msgid "uid=%u(%s)"
-msgstr ""
-
-#: src/id.c:125
-#, c-format
-msgid "uid=%u"
-msgstr ""
-
-#: src/id.c:129
-#, c-format
-msgid " gid=%u(%s)"
-msgstr ""
-
-#: src/id.c:131
-#, c-format
-msgid " gid=%u"
-msgstr ""
-
-#: src/id.c:141
-#, c-format
-msgid " euid=%u(%s)"
-msgstr ""
-
-#: src/id.c:143
-#, c-format
-msgid " euid=%u"
-msgstr ""
-
-#: src/id.c:148
-#, c-format
-msgid " egid=%u(%s)"
-msgstr ""
-
-#: src/id.c:150
-#, c-format
-msgid " egid=%u"
-msgstr ""
-
 #.
 #. * Start off the group message. It will be of the format
 #. *
@@ -1478,7 +1429,7 @@ msgstr "%s: η αρχή με "
 #: src/mkpasswd.c:288
 #, fuzzy
 msgid " is too long\n"
-msgstr "%s: Πολύ μακριά πεδία\n"
+msgstr " Πολύ μακριά πεδία\n"
 
 #: src/mkpasswd.c:315
 #, c-format
@@ -1524,19 +1475,18 @@ msgid "usage: newgrp [-] [group]\n"
 msgstr "χρήση: newgrp [-] [ομάδα]\n"
 
 #: src/newgrp.c:63
-#, fuzzy
 msgid "usage: sg group [[-c] command]\n"
-msgstr "χρήση: sg ομάδα [εντολή]\n"
+msgstr "χρήση: sg ομάδα [[-c] εντολή]\n"
 
 #: src/newgrp.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "unknown uid: %u\n"
-msgstr "άγνωστο uid: %d\n"
+msgstr "άγνωστο uid: %u\n"
 
 #: src/newgrp.c:219
-#, fuzzy, c-format
+#, c-format
 msgid "unknown gid: %lu\n"
-msgstr "άγνωστο gid: %ld\n"
+msgstr "άγνωστο gid: %lu\n"
 
 #: src/newgrp.c:365 src/newgrp.c:374
 msgid "Sorry.\n"
@@ -1622,9 +1572,9 @@ msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "       %s [-x μεγ.] [-n ελάχ.] [-w προειδ.] [-i ανενεργό] όνομα\n"
 
 #: src/passwd.c:180
-#, fuzzy, c-format
+#, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s { -l | -u | -d | -S | -e } όνομα\n"
+msgstr "       %s {-l|-u|-d|-S|-e} όνομα\n"
 
 #: src/passwd.c:283
 #, c-format
@@ -1747,12 +1697,12 @@ msgid "Password changed.\n"
 msgstr "Το συνθηματικό άλλαξε.\n"
 
 #: src/pwck.c:87
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #: src/pwck.c:90
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "Χρήση: %s [-q] [-r] [-s] [passwd]\n"
 
@@ -1774,16 +1724,16 @@ msgstr "αντιγραφή καταχώρησης στο αρχείο συνθηματικών\n"
 
 #: src/pwck.c:373
 #, c-format
-msgid "invalid user name `%s'\n"
-msgstr "Μη έγκυρο όνομα χρήστη `%s'\n"
+msgid "invalid user name '%s'\n"
+msgstr "Μη έγκυρο όνομα χρήστη '%s'\n"
 
 #.
 #. * No primary group, just give a warning
 #.
 #: src/pwck.c:388
-#, fuzzy, c-format
+#, c-format
 msgid "user %s: no group %u\n"
-msgstr "χρήστης %s: καμιά ομάδα %d\n"
+msgstr "χρήστης %s: καμιά ομάδα %u\n"
 
 #: src/pwck.c:404
 #, c-format
@@ -1970,9 +1920,9 @@ msgid "%s: unknown group %s\n"
 msgstr "%s: άγνωστη ομάδα %s\n"
 
 #: src/useradd.c:440
-#, fuzzy, c-format
+#, c-format
 msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "ομάδα=%s,%ld  βασικός_καταλ=%s  σκελ=%s\n"
+msgstr "ομάδα=%s,%u  βασικός_καταλ=%s  σκελ=%s\n"
 
 #: src/useradd.c:444
 #, c-format
@@ -1985,9 +1935,9 @@ msgid "inactive=%ld  expire=%s"
 msgstr "ανενεργό=%ld  λήξη=%s"
 
 #: src/useradd.c:450
-#, fuzzy, c-format
+#, c-format
 msgid "GROUP=%u\n"
-msgstr "ΟΜΑΔΑ=%ld\n"
+msgstr "ΟΜΑΔΑ=%u\n"
 
 #: src/useradd.c:451
 #, c-format
@@ -2051,7 +2001,6 @@ msgstr ""
 "\t\t[-m [-k κανόνας]]\n"
 
 #: src/useradd.c:745 src/usermod.c:329
-#, fuzzy
 msgid "[-f inactive] [-e expire ] "
 msgstr "[-f ανενεργό] [-e λήξη] "
 
@@ -2069,7 +2018,6 @@ msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
 msgstr "       %s\t-D [-g ομάδα] [-b βάση] [-s φλοιός]\n"
 
 #: src/useradd.c:756
-#, fuzzy
 msgid "\t\t[-f inactive] [-e expire ]\n"
 msgstr "\t\t[-f ανενεργό] [-e λήξη]\n"
 
@@ -2094,7 +2042,7 @@ msgid "%s: error opening shadow group file\n"
 msgstr "%s: Σφάλμα κατά το άνοιγμα του αρχείου σκιωδών συνθηματικών ομάδων\n"
 
 #: src/useradd.c:1039
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %u is not unique\n"
 msgstr "%s: Το uid %ld δεν είναι μοναδικό\n"
 
@@ -2146,7 +2094,7 @@ msgstr "%s: Μη έγκυρος φλοιός `%s'\n"
 
 #: src/useradd.c:1377
 #, c-format
-msgid "%s: invalid user name `%s'\n"
+msgid "%s: invalid user name '%s'\n"
 msgstr "%s: Μη έγκυρο όνομα χρήστη `%s'\n"
 
 #: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
@@ -2363,9 +2311,8 @@ msgid "[-A {DEFAULT|program},... ] "
 msgstr "[-A {DEFAULT|πρόγραμμα},...] "
 
 #: src/usermod.c:334
-#, fuzzy
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p συνθηματικό] όνομα\n"
+msgstr "[-p συνθηματικό] [-L|-U] όνομα\n"
 
 #: src/usermod.c:514
 #, c-format
@@ -2388,9 +2335,9 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: σκιώδη συνθηματικά απαιτούνται για το -e και -f\n"
 
 #: src/usermod.c:1239
-#, fuzzy, c-format
+#, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: Το uid %ld δεν είναι μοναδικό\n"
+msgstr "%s: Το uid %lu δεν είναι μοναδικό\n"
 
 #: src/usermod.c:1392
 #, c-format
@@ -2483,7 +2430,7 @@ msgstr ""
 #: src/vipw.c:132
 #, fuzzy
 msgid "Couldn't lock file"
-msgstr "%s: αδυναμία ξεκλειδώματος αρχείου\n"
+msgstr "αδυναμία ξεκλειδώματος αρχείου\n"
 
 #: src/vipw.c:141
 msgid "Couldn't make backup"
