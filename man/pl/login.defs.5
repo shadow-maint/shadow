@@ -1,6 +1,5 @@
-.\" $Id: login.defs.5,v 1.5 2002/03/09 11:16:19 ankry Exp $
-.\" {PTM/WK/1999-09-18}
-.\" Copyright 1991 - 1993, Julianne Frances Haugh and Chip Rosenthal
+.\" $Id: login.defs.5,v 1.7 2005/04/05 18:47:51 kloczek Exp $
+.\" Copyright 1991 \- 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -256,7 +255,7 @@ T± warto¶ci± inicjowany jest terminalowy znak
 Jest to obs³ugiwane tylko w systemach z interfejsem
 .IR termio,
 np. System V. Je¿eli nie podano parametru, to znak kasowania zostanie
-zainicjowany na \s-2CTRL/U\s0. Informacjê powi±zan± znajdziesz w opisie
+zainicjowany na \s\-2CTRL/U\s0. Informacjê powi±zan± znajdziesz w opisie
 ERASECHAR.
 .\"
 .IP "LASTLOG_ENAB (logiczna)"
@@ -302,7 +301,7 @@ MAIL_DIR.
 .IP "MAIL_DIR (napis)"
 Okre¶la pe³n± nazwê ¶cie¿kow± do katalogu zawieraj±cego pliki skrzynki
 pocztowej u¿ytkownika. Do powy¿szej ¶cie¿ki doklejana jest nazwa u¿ytkownika,
-tworz±c w ten sposób zmienn± ¶rodowiskow± MAIL - ¶cie¿kê do skrzynki
+tworz±c w ten sposób zmienn± ¶rodowiskow± MAIL \- ¶cie¿kê do skrzynki
 u¿ytkownika. Musi byæ zdefiniowany albo niniejszy parametr albo parametr
 MAIL_FILE; je¶li nie zostan± zdefiniowane, to zostanie nadana, byæ mo¿e
 niepoprawna, warto¶æ domy¶lna. Zobacz tak¿e opis MAIL_CHECK_ENAB.
@@ -310,7 +309,7 @@ niepoprawna, warto¶æ domy¶lna. Zobacz tak¿e opis MAIL_CHECK_ENAB.
 .IP "MAIL_FILE (napis)"
 Okre¶la nazwê pliku skrzynki pocztowej u¿ytkownika. Nazwa ta doklejana jest
 na koniec nazwy katalogu domowego u¿ytkownika tworz±c zmienn± ¶rodowiskow±
-MAIL - ¶cie¿kê do skrzynki u¿ytkownika. Musi byæ zdefiniowany albo niniejszy
+MAIL \- ¶cie¿kê do skrzynki u¿ytkownika. Musi byæ zdefiniowany albo niniejszy
 parametr albo parametr MAIL_DIR; je¶li nie zostan± zdefiniowane, to zostanie
 nadana, byæ mo¿e niepoprawna, warto¶æ domy¶lna. Zobacz tak¿e opis
 MAIL_CHECK_ENAB.
@@ -322,8 +321,8 @@ to program
 .B passwd
 bêdzie kodowaæ nowo zmieniane has³a przy pomocy nowego algorytmu
 .BR crypt (3),
-opartego o MD-5. Algorytm ten pierwotnie pojawi³ siê we FreeBSD i jest te¿
-obs³ugiwany przez libc-5.4.38 oraz glibc-2.0 (lub wy¿sz±) w Linuksie.
+opartego o MD\-5. Algorytm ten pierwotnie pojawi³ siê we FreeBSD i jest te¿
+obs³ugiwany przez libc\-5.4.38 oraz glibc\-2.0 (lub wy¿sz±) w Linuksie.
 Pozwala on na u¿ywanie hase³ d³u¿szych ni¿ 8 znaków (ograniczone przez
 .BR getpass (3)
 do 127 znaków), ale nie jest zgodny z tradycyjnymi implementacjami polecenia
@@ -342,9 +341,6 @@ innych ni¿ root. Je¿eli plik ten istnieje a u¿ytkownik inny ni¿ root usi³uje
 siê zalogowaæ, to wy¶wietlana zostanie zawarto¶æ pliku a u¿ytkownik bêdzie
 roz³±czony. Je¿eli nie podano tego parametru, to opisana funkcja bêdzie
 wy³±czona.
-.\"
-.IP "NOLOGIN_STR (napis)"
-XXX powinno zostaæ udokumentowane.
 .\"
 .IP "OBSCURE_CHECKS_ENAB (logiczna)"
 Je¿eli ma warto¶æ
@@ -415,13 +411,13 @@ Patrz tak¿e podrêcznik
 .BR passwd (5).
 .\"
 .IP "SU_NAME (napis)"
-Przypisuje nazwê polecenia do uruchomionego "su -". Na przyk³ad, je¶li
+Przypisuje nazwê polecenia do uruchomionego "su \-". Na przyk³ad, je¶li
 parametr ten jest zdefiniowany jako "su", to polecenie
 .BR ps (1)
-poka¿e uruchomione polecenie jako "-su". Je¶li parametr ten jest
+poka¿e uruchomione polecenie jako "\-su". Je¶li parametr ten jest
 niezdefiniowany, to
 .BR ps (1)
-poka¿e nazwê faktycznie wykonywanej pow³oki, np. co¶ w rodzaju "-sh".
+poka¿e nazwê faktycznie wykonywanej pow³oki, np. co¶ w rodzaju "\-sh".
 .\"
 .IP "SULOG_FILE (napis)"
 Pokazuje pe³n± nazwê ¶cie¿kow± pliku, w którym rejestrowane jest wykorzystanie
@@ -538,7 +534,7 @@ OBSCURE_CHECKS_ENAB PASS_MIN_LEN
 PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 .IP su 12
 ENV_HZ ENV_SUPATH ENV_TZ HUSHLOGIN_FILE MAIL_CHECK_ENAB MAIL_DIR
-MOTD_FILE NOLOGIN_STR QUOTAS_ENAB SULOG_FILE SYSLOG_SU_ENAB
+MOTD_FILE QUOTAS_ENAB SULOG_FILE SYSLOG_SU_ENAB
 .IP sulogin 12
 ENV_HZ ENV_SUPATH ENV_TZ MAIL_DIR QUOTAS_ENAB TTYPERM
 .ad

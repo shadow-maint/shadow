@@ -1,22 +1,15 @@
+.\" $Id: chfn.1,v 1.2 2005/04/05 19:08:56 kloczek Exp $
+.\" (c) 1994 by salvatore valente <svalente@athena.mit.edu>
 .\"
-.\"  chfn.1 -- change your finger information
-.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
-.\"
-.\"  this program is free software.  you can redistribute it and
-.\"  modify it under the terms of the gnu general public license.
-.\"  there is no warranty.
-.\"
-.\"  $Author: kloczek $
-.\"  $Revision: 1.1 $
-.\"  $Date: 2002/03/13 19:03:01 $
-.\"
+.\" this program is free software.  you can redistribute it and
+.\" modify it under the terms of the gnu general public license.
+.\" there is no warranty.
 .TH CHFN 1 "October 13 1994" "chfn" "Linux Reference Manual"
 .SH NAME
 chfn \- 사용자 finger 정보를 바꾼다.
 .SH SYNOPSIS
-.B chfn
-[\ \-f\ full-name\ ] [\ \-o\ office\ ] [\ \-p\ office-phone\ ]
-[\ \-h\ home-phone\ ] [\ \-u\ ] [\ \-v\ ] [\ username\ ]
+\fBchfn\fR [\fB\-f\fR \fIfull\-name\fR] [\fB\-o\fR \fIoffice\fR] [\fB\-p\fR \fIoffice\-phone\fR]
+[\ \-h\ home\-phone\ ] [\ \-u\ ] [\ \-v\ ] [\ username\ ]
 .SH DESCRIPTION
 .B chfn
 명령은 사용자의 finger 정보를 바꾼다. 이것은 
@@ -37,22 +30,22 @@ chfn \- 사용자 finger 정보를 바꾼다.
 그냥 Enter 글쇠를 누르면 된다.
 .SH OPTIONS
 .TP
-.I "\-f, \-\-full-name"
+.I "\-f, \-\-full\-name"
 사용자 실재 이름
 .TP
 .I "\-o, \-\-office"
 사용자 직장
 .TP
-.I "\-p, \-\-office-phone"
+.I "\-p, \-\-office\-phone"
 사용자 직장 전화번호
 .TP
-.I "\-h, \-\-home-phone"
+.I "\-h, \-\-home\-phone"
 사용자 집 전화 번호
 .TP
 .I "\-u, \-\-help"
 도움말을 보여주고 마친다.
 .TP
-.I "-v, \-\-version"
+.I "\-v, \-\-version"
 버전 정보를 보여주고 마친다.
 .SH "SEE ALSO"
 .BR finger (1),

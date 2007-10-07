@@ -30,14 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: failure.c,v 1.9 2003/04/25 21:11:08 kloczek Exp $")
+RCSID ("$Id: failure.c,v 1.12 2005/04/12 14:12:26 kloczek Exp $")
 #include <fcntl.h>
 #include <stdio.h>
 #include "defines.h"
 #include "faillog.h"
 #include "getdef.h"
 #include "failure.h"
-
 #define	YEAR	(365L*DAY)
 /*
  * failure - make failure entry
@@ -227,9 +226,12 @@ void failprint (const struct faillog *fail)
 	if (*lasttime == ' ')
 		lasttime++;
 #endif
-	printf (_("%d %s since last login.  Last was %s on %s.\n"),
+	printf (ngettext("%d failure since last login.\n"
+			 "Last was %s on %s.\n",
+			 "%d failures since last login.\n"
+			 "Last was %s on %s.\n",
+			 fail->fail_cnt),
 		fail->fail_cnt,
-		fail->fail_cnt > 1 ? _("failures") : _("failure"),
 		lasttime, fail->fail_line);
 }
 

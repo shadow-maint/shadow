@@ -1,4 +1,4 @@
-.\"$Id: login.1,v 1.6 2003/04/28 02:14:00 kloczek Exp $
+.\" $Id: login.1,v 1.9 2005/04/06 15:00:47 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,24 +25,15 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
-.\"         all rights reserved.
-.\" Translated Fri Feb 14 23:06:00 JST 1997
-.\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
-.\" Updated Fri Jan 12 04:05:44 JST 2001
-.\"         by Kentaro Shirakata <argrath@ub32.org>
-.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
-.\"
 .TH LOGIN 1
 .SH 名前
 login \- システム上でセッションを開く
 .SH 書式
-\fBlogin\fR [\fB-p\fR] [\fIusername\fR] [\fIENV=VAR\fR ...]
+\fBlogin\fR [\fB\-p\fR] [\fIusername\fR] [\fIENV=VAR\fR ...]
 .br
-\fBlogin\fR [\fB-p\fR] [\fB-h \fIhost\fR] [\fB-f \fIusername\fR]
+\fBlogin\fR [\fB\-p\fR] [\fB\-h\fR \fIhost\fR] [\fB\-f\fR \fIusername\fR]
 .br
-\fBlogin\fR [\fB-p\fR] \fB-r \fIhost\fR
+\fBlogin\fR [\fB\-p\fR] \fB\-r\fR \fIhost\fR
 .SH 説明
 .B login
 はシステムに新たにセッションを開くために用いられる。
@@ -58,16 +49,6 @@ login \- システム上でセッションを開く
 \fBexec login\fR とみなすので、ユーザは現在のシェルから抜けることになる。
 ログインシェル以外から \fBlogin\fR を起動しようとすると、
 エラーメッセージが表示される。
-.PP
-\fIlogin:\fRプロンプトから起動した際は、
-ユーザ名に続いて環境変数を入力する事もできる。
-それらを入力する場合は \fBNAME=VALUE\fR という書式で行う。
-この方法で全ての変数を設定できるわけではない。
-例えば
-\fBPATH\fR, \fBHOME\fR, \fBSHELL\fR
-などは設定できない。
-さらにログインシェルが \fB/bin/sh\fR の場合は
-\fBIFS\fR も設定もできない。
 .PP
 次いで、必要な場合には、ユーザはパスワードを入力するよう促される。
 パスワードを表示してしまわないよう、エコーは行われない。
@@ -111,19 +92,19 @@ GECOS フィールドのエントリーによって設定されることもある。
 ユーザが実際にログインする新しいファイルシステムのルートとして扱われる。
 .SH オプション
 .TP
-.B -p
+.B \-p
 環境を保存する。
 .TP
-.B -f
+.B \-f
 ユーザはすでに認証されているものとして、認証動作を行なわない。
 .TP
-.B -h
+.B \-h
 このログインのリモートホストの名前。
 .TP
-.B -r
+.B \-r
 rlogin の自動ログインプロトコルを実行する。
 .PP
-\fB-r\fP, \fB-h\fP, \fB-f\fP オプションは、
+\fB\-r\fP, \fB\-h\fP, \fB\-f\fP オプションは、
 root が \fBlogin\fP を起動した場合にのみ用いる。
 .SH 警告
 この版の \fBlogin\fR には多くのコンパイル時オプションがあるが、
@@ -131,21 +112,21 @@ root が \fBlogin\fP を起動した場合にのみ用いる。
 .PP
 システム設定の違いによって上記ファイルの置き場所は変わる。
 .SH ファイル
-\fI/var/log/utmp\fR \   - 現在のログインセッションのリスト
+\fI/var/log/utmp\fR		\- 現在のログインセッションのリスト
 .br
-\fI/var/run/wtmp\fR \   - 過去のログインセッションのリスト
+\fI/var/run/wtmp\fR		\- 過去のログインセッションのリスト
 .br
-\fI/etc/passwd\fR \     - ユーザアカウント情報
+\fI/etc/passwd\fR		\- ユーザアカウント情報
 .br
-\fI/etc/shadow\fR \     - 暗号化パスワードと有効期限情報
+\fI/etc/shadow\fR		\- 暗号化パスワードと有効期限情報
 .br
-\fI/etc/motd\fR \       - システムメッセージファイル
+\fI/etc/motd\fR			\- システムメッセージファイル
 .br
-\fI/etc/nologin\fR \    - root 以外のユーザのログインを禁止する
+\fI/etc/nologin\fR		\- root 以外のユーザのログインを禁止する
 .br
-\fI/etc/ttytype\fR \    - 端末の型のリスト
+\fI/etc/ttytype\fR		\- 端末の型のリスト
 .br
-\fI$HOME/.hushlogin\fR \- システムメッセージの表示を抑制する
+\fI$HOME/.hushlogin\fR	\- システムメッセージの表示を抑制する
 .SH 関連項目
 .BR mail (1),
 .BR passwd (1),

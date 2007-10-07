@@ -1,4 +1,4 @@
-.\"$Id: limits.5,v 1.7 2003/05/01 18:17:39 kloczek Exp $
+.\"$Id: limits.5,v 1.9 2005/04/05 18:47:50 kloczek Exp $
 .TH LIMITS 5
 .SH NAME
 limits \- Resource limits definition
@@ -8,7 +8,7 @@ config.h) describes the resource limits you wish to impose. It should be
 owned by root and readable by root account only.
 .PP
 By default no quotas are imposed on 'root'. In fact, there is no way to impose
-limits via this procedure to root-equiv accounts (accounts with UID 0).
+limits via this procedure to root\-equiv accounts (accounts with UID 0).
 .PP
 Each line describes a limit for a user in the form:
 .sp
@@ -27,7 +27,7 @@ D: max data size (KB)
 .br
 F: maximum filesize (KB)
 .br
-M: max locked-in-memory address space (KB)
+M: max locked\-in\-memory address space (KB)
 .br
 N: max number of open files
 .br
@@ -60,12 +60,11 @@ The default entry is denoted by username "\fB*\fP". If you have multiple
 \fIdefault\fP entries in your \fBLIMITS_FILE\fP, then the last one will be
 used as the default entry.
 .PP
-To completely disable limits for a user, a single dash "\fB-\fP" will do.
+To completely disable limits for a user, a single dash "\fB\-\fP" will do.
 .PP
 Also, please note that all limit settings are set PER LOGIN. They are not
 global, nor are they permanent. Perhaps global limits will come, but for
 now this will have to do ;)
-
 .SH FILES
 \fI/etc/limits\fR
 .SH SEE ALSO

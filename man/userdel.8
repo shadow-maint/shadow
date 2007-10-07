@@ -1,4 +1,4 @@
-.\"$Id: userdel.8,v 1.12 2004/11/02 19:28:31 kloczek Exp $
+.\"$Id: userdel.8,v 1.14 2005/04/12 17:55:55 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,14 +30,14 @@
 userdel \- Delete a user account and related files
 .SH SYNOPSIS
 .B userdel
-[\fB-r\fR]
+[\fB\-r\fR]
 .I login
 .SH DESCRIPTION
 The \fBuserdel\fR command modifies the system account files, deleting all
 entries that refer to \fIlogin\fR. The named user must exist.
 .SH OPTIONS
 The options which apply to the \fBuserdel\fR command are:
-.IP \fB-r\fR
+.IP \fB\-r\fR
 Files in the user's home directory will be removed along with the home
 directory itself and the user's mail spool. Files located in other file
 systems will have to be searched for and deleted manually.
@@ -46,7 +46,7 @@ systems will have to be searched for and deleted manually.
 .br
 \fI/etc/shadow\fR	\- secure user account information
 .br
-\fI/etc/group\fR	\- group information
+\fI/etc/group\fR	\- group account information
 .SH EXIT VALUES
 .TP 2
 The \fBuserdel\fR command exits with the following values:

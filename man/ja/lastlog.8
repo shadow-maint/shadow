@@ -1,4 +1,4 @@
-.\"$Id: lastlog.8,v 1.8 2003/04/28 06:38:54 kloczek Exp $
+.\"$Id: lastlog.8,v 1.9 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -41,8 +41,8 @@
 lastlog \- lastlog ファイルを調べる
 .SH 書式
 .TP 8
-\fBlastlog\fR [(\fB-u\fR|\fB--user\fR) \fIlogin\fR]
-[(\fB-t\fR|\fB--time\fR) \fIdays\fR] [(\fB-h\fR|\fB--help\fR)]
+\fBlastlog\fR [(\fB\-u\fR|\fB\-\-user\fR) \fIlogin\fR]
+[(\fB\-t\fR|\fB\-\-time\fR) \fIdays\fR] [(\fB\-h\fR|\fB\-\-help\fR)]
 .SH 説明
 \fBlastlog\fR は最終ログインの記録ファイル
 \fI/var/log/lastlog\fR の内容を整形して表示する。
@@ -50,16 +50,16 @@ lastlog \- lastlog ファイルを調べる
 オプションを指定しなかった場合、デフォルトでは
 lastlog エントリを UID の数値でソートして表示する。
 .TP
-\fB-u\fR, \fB--user\fR \fIlogin-name\fR
-\fIlogin-name\fR の記録だけを表示する。
+\fB\-u\fR, \fB\-\-user\fR \fIlogin\-name\fR
+\fIlogin\-name\fR の記録だけを表示する。
 .TP
-\fB-t\fR, \fB--time\fR \fIdays\fR
+\fB\-t\fR, \fB\-\-time\fR \fIdays\fR
 最近 \fIdays\fR 日以内の最終ログインを表示する。
 .TP
-\fB-h\fR, \fB--help\fR
+\fB\-h\fR, \fB\-\-help\fR
 オンラインヘルプを表示して終了する。
 .PP
-\fB-u\fR フラグを用いると \fB-t\fR は無視される。
+\fB\-u\fR フラグを用いると \fB\-t\fR は無視される。
 .\"nakano というのが実際の動作のように見えるのだが。
 .PP
 一度もログインしていないユーザに対しては、
@@ -72,7 +72,7 @@ lastlog エントリを UID の数値でソートして表示する。
 UID 番号に大きな飛びがあると、
 lastlog プログラムは長時間画面に何も出力しないまま
 実行を続ける (例えば mmdf が 800 で最後の UID が 170 の場合、
-UID が 171-799 の間プログラムは何も出力しないので、
+UID が 171\-799 の間プログラムは何も出力しないので、
 ハングしたように見える)。
 .SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

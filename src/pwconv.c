@@ -29,7 +29,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwconv.c,v 1.15 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -130,8 +130,7 @@ int main (int argc, char **argv)
 		sp = spw_locate (pw->pw_name);
 		if (sp) {
 			/* do we need to update this entry? */
-			if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) ==
-			    0)
+			if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)
 				continue;
 			/* update existing shadow entry */
 			spent = *sp;
@@ -168,13 +167,11 @@ int main (int argc, char **argv)
 	}
 
 	if (!spw_close ()) {
-		fprintf (stderr, _("%s: can't update shadow file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't update shadow file\n"), Prog);
 		fail_exit (E_FAILURE);
 	}
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: can't update passwd file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't update passwd file\n"), Prog);
 		fail_exit (E_FAILURE);
 	}
 	chmod (PASSWD_FILE "-", 0600);	/* /etc/passwd- (backup file) */
@@ -187,8 +184,7 @@ int main (int argc, char **argv)
 int main (int argc, char **argv)
 {
 	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n",
-		 argv[0]);
+		 "%s: not configured for shadow password support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWPWD */

@@ -1,4 +1,4 @@
-.\"$Id: newgrp.1,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: newgrp.1,v 1.7 2005/04/12 18:08:47 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -39,9 +39,9 @@ newgrp \- 新しいグループにログインする
 .br
 sg \- 別のグループ ID でコマンドを実行する
 .SH 書式
-\fBnewgrp\fR [\fB-\fR] [\fIgroup\fR]
+\fBnewgrp\fR [\fB\-\fR] [\fIgroup\fR]
 .br
-\fBsg\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
+\fBsg\fR [\fB\-\fR] [\fIgroup\fR [[\fB\-c\fR] \fIcommand\fR]]
 .SH 説明
 .B newgrp
 はログインセッション中に現在のグループ ID を変更するために用いられる。
@@ -66,7 +66,7 @@ sg \- 別のグループ ID でコマンドを実行する
 コマンドは
 .B newgrp
 と同様に動作するが、コマンドを受け付ける。
-このコマンドは Bourne シェルで実行される。
+このコマンドは \fB/bin/sh\fR シェルで実行される。
 コマンドが複数の単語からなる場合は、
 sg の実行元となるであろうシェルのほとんどにおいて、
 これらをクォートする必要があるだろう。
@@ -81,9 +81,9 @@ sg の実行元となるであろうシェルのほとんどにおいて、
 .B sg
 コマンドから戻った際には以前のグループ ID に戻る。
 .SH ファイル
-\fI/etc/passwd\fR \- ユーザアカウント情報
+\fI/etc/passwd\fR	\- ユーザアカウント情報
 .br
-\fI/etc/group\fR \ - グループ情報
+\fI/etc/group\fR	\- グループ情報
 .SH 関連項目
 .BR id (1),
 .BR login (1),

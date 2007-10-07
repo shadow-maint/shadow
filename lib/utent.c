@@ -37,18 +37,17 @@
 #include <utmp.h>
 
 #ifndef	lint
-static char rcsid[] = "$Id: utent.c,v 1.4 1998/01/29 23:22:32 marekm Exp $";
+static char rcsid[] = "$Id: utent.c,v 1.5 2005/03/31 05:14:49 kloczek Exp $";
 #endif
 
-static	int	utmp_fd = -1;
-static	struct	utmp	utmp_buf;
+static int utmp_fd = -1;
+static struct utmp utmp_buf;
 
 /*
  * setutent - open or rewind the utmp file
  */
 
-void
-setutent(void)
+void setutent (void)
 {
 	if (utmp_fd == -1)
 		if ((utmp_fd = open (_UTMP_FILE, O_RDWR)) == -1)
@@ -62,8 +61,7 @@ setutent(void)
  * endutent - close the utmp file
  */
 
-void
-endutent(void)
+void endutent (void)
 {
 	if (utmp_fd != -1)
 		close (utmp_fd);
@@ -75,8 +73,7 @@ endutent(void)
  * getutent - get the next record from the utmp file
  */
 
-struct utmp *
-getutent(void)
+struct utmp *getutent (void)
 {
 	if (utmp_fd == -1)
 		setutent ();
@@ -94,11 +91,10 @@ getutent(void)
  * getutline - get the utmp entry matching ut_line
  */
 
-struct utmp *
-getutline(const struct utmp *utent)
+struct utmp *getutline (const struct utmp *utent)
 {
-	struct	utmp	save;
-	struct	utmp	*new;
+	struct utmp save;
+	struct utmp *new;
 
 	save = *utent;
 	while (new = getutent ())
@@ -110,5 +106,5 @@ getutline(const struct utmp *utent)
 	return (struct utmp *) 0;
 }
 #else
-extern int errno;  /* warning: ANSI C forbids an empty source file */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif

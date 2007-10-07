@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: chowndir.c,v 1.7 2003/04/22 10:59:21 kloczek Exp $")
+RCSID ("$Id: chowndir.c,v 1.8 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -86,8 +86,7 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 		 * destination files.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 >
-		    sizeof new_name)
+		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name)
 			break;
 
 		snprintf (new_name, sizeof new_name, "%s/%s", root,
@@ -114,8 +113,7 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 #endif
 		if (sb.st_uid == old_uid)
 			LCHOWN (new_name, new_uid,
-				sb.st_gid ==
-				old_gid ? new_gid : sb.st_gid);
+				sb.st_gid == old_gid ? new_gid : sb.st_gid);
 	}
 	closedir (dir);
 
@@ -126,8 +124,7 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 	if (!stat (root, &sb)) {
 		if (sb.st_uid == old_uid)
 			LCHOWN (root, new_uid,
-				sb.st_gid ==
-				old_gid ? new_gid : sb.st_gid);
+				sb.st_gid == old_gid ? new_gid : sb.st_gid);
 	}
 	return rc;
 }

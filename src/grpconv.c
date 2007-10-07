@@ -27,7 +27,7 @@
 #include "sgroupio.h"
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpconv.c,v 1.15 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
 
 static int group_locked = 0;
 static int gshadow_locked = 0;
@@ -67,14 +67,12 @@ int main (int argc, char **argv)
 	}
 
 	if (!sgr_lock ()) {
-		fprintf (stderr, _("%s: can't lock shadow group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't lock shadow group file\n"), Prog);
 		fail_exit (5);
 	}
 	gshadow_locked++;
 	if (!sgr_open (O_CREAT | O_RDWR)) {
-		fprintf (stderr, _("%s: can't open shadow group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't open shadow group file\n"), Prog);
 		fail_exit (1);
 	}
 
@@ -107,8 +105,7 @@ int main (int argc, char **argv)
 		if (sg) {
 			/* update existing shadow group entry */
 			sgent = *sg;
-			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) !=
-			    0)
+			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) != 0)
 				sgent.sg_passwd = gr->gr_passwd;
 		} else {
 			static char *empty = 0;
@@ -163,8 +160,7 @@ int main (int argc, char **argv)
 int main (int argc, char **argv)
 {
 	fprintf (stderr,
-		 "%s: not configured for shadow group support.\n",
-		 argv[0]);
+		 "%s: not configured for shadow group support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWGRP */

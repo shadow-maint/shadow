@@ -41,7 +41,7 @@
 #include <stdio.h>
 
 #include "rcsid.h"
-RCSID ("$Id: utmp.c,v 1.14 2003/12/17 12:52:25 kloczek Exp $")
+RCSID ("$Id: utmp.c,v 1.15 2005/03/31 05:14:50 kloczek Exp $")
 #if HAVE_UTMPX_H
 struct utmpx utxent;
 #endif
@@ -108,8 +108,7 @@ void checkutmp (int picky)
 		utent.ut_pid = pid;
 		strncpy (utent.ut_line, line, sizeof utent.ut_line);
 		/* XXX - assumes /dev/tty?? */
-		strncpy (utent.ut_id, utent.ut_line + 3,
-			 sizeof utent.ut_id);
+		strncpy (utent.ut_id, utent.ut_line + 3, sizeof utent.ut_id);
 		strcpy (utent.ut_user, "LOGIN");
 		utent.ut_time = time (NULL);
 	}
@@ -175,11 +174,9 @@ void checkutmp (int picky)
 			}
 			if (strncmp (line, "/dev/", 5) == 0)
 				line += 5;
-			strncpy (utent.ut_line, line,
-				 sizeof utent.ut_line);
+			strncpy (utent.ut_line, line, sizeof utent.ut_line);
 #if HAVE_UTMPX_H
-			strncpy (utxent.ut_line, line,
-				 sizeof utxent.ut_line);
+			strncpy (utxent.ut_line, line, sizeof utxent.ut_line);
 #endif
 		}
 	} else {
@@ -201,15 +198,13 @@ void checkutmp (int picky)
 #if HAVE_UTMPX_H
 		strncpy (utxent.ut_line, line, sizeof utxent.ut_line);
 		if ((utx = getutxline (&utxent)))
-			strncpy (utxent.ut_id, utx->ut_id,
-				 sizeof utxent.ut_id);
+			strncpy (utxent.ut_id, utx->ut_id, sizeof utxent.ut_id);
 
 		strcpy (utxent.ut_user, "LOGIN");
 		utxent.ut_pid = utent.ut_pid;
 		utxent.ut_type = utent.ut_type;
 		if (sizeof (utxent.ut_tv) == sizeof (struct timeval))
-			gettimeofday ((struct timeval *) &utxent.ut_tv,
-				      NULL);
+			gettimeofday ((struct timeval *) &utxent.ut_tv, NULL);
 		else {
 			struct timeval tv;
 
@@ -393,8 +388,7 @@ void setutmp (const char *name, const char *line, const char *host)
 	}
 	utline.ut_time = utxline.ut_tv.tv_sec;
 
-	strncpy (utxline.ut_host, host ? host : "",
-		 sizeof utxline.ut_host);
+	strncpy (utxline.ut_host, host ? host : "", sizeof utxline.ut_host);
 
 	pututxline (&utxline);
 	pututline (&utline);

@@ -1,4 +1,4 @@
-.\"$Id: pwck.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: pwck.8,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -37,7 +37,7 @@
 .SH 名前
 pwck \- パスワードファイルが正しいかどうか検査する
 .SH 書式
-\fBpwck\fR [\fB-sr\fR] [\fIpasswd\fR \fIshadow\fR]
+\fBpwck\fR [\fB\-sr\fR] [\fIpasswd\fR \fIshadow\fR]
 .SH 説明
 \fBpwck\fR コマンドはシステムの認証情報が正しいかどうか検査する。
 \fI/etc/passwd\fR と \fI/etc/shadow\fR
@@ -50,18 +50,18 @@ pwck \- パスワードファイルが正しいかどうか検査する
 各々のエントリに対して
 .sp
 .in +.5i
-- フィールドの数が正しいか
+\- フィールドの数が正しいか
 .br
-- ユーザ名に重複がないか
+\- ユーザ名に重複がないか
 .br
-- ユーザやグループの ID が正しいか
+\- ユーザやグループの ID が正しいか
 .br
-- プライマリグループが正しいか
+\- プライマリグループが正しいか
 .br
-- ホームディレクトリが正しいか
+\- ホームディレクトリが正しいか
 .br
-- ログインシェルが正しいか
-.in -.5i
+\- ログインシェルが正しいか
+.in \-.5i
 .sp
 がチェックされる。
 .P
@@ -84,20 +84,20 @@ pwck \- パスワードファイルが正しいかどうか検査する
 \fI/etc/shadow\fR に対して動作する。
 \fIpasswd\fR パラメータと \fIshadow\fR パラメータを用いて、
 別のファイルを選択することもできる。
-さらに \fB-r\fR フラグを指定すれば、
+さらに \fB\-r\fR フラグを指定すれば、
 リードオンリーモードでコマンドを実行することもできる。
 この場合、変更を行うかどうかはユーザへ問い合わされず、
 自動的に \fBno\fR と回答される。
 \fBpwck\fR は \fI/etc/passwd\fR と \fI/etc/shadow\fR
 のエントリを UID でソートすることもできる。
-ソートモードで動作させるには \fB-s\fR フラグを与える。
+ソートモードで動作させるには \fB\-s\fR フラグを与える。
 この場合チェックは行われず、単にソートするだけである。
 .SH ファイル
 \fI/etc/passwd\fR \- ユーザーアカウント情報
 .br
 \fI/etc/shadow\fR \- 暗号化されたパスワード情報
 .br
-\fI/etc/group\fR \ - グループ情報
+\fI/etc/group\fR \ \- グループ情報
 .SH 関連項目
 .BR group (5),
 .BR passwd (5),

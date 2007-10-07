@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.24 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupmod.c,v 1.26 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -72,13 +72,8 @@ static char *Prog;
 
 static int
  oflg = 0,			/* permit non-unique group ID to be specified with -g */
- gflg = 0,			/* new ID value for the group */
- nflg = 0;			/* a new name has been specified for the group */
-
-#ifdef	NDBM
-extern int gr_dbm_mode;
-extern int sg_dbm_mode;
-#endif
+    gflg = 0,			/* new ID value for the group */
+    nflg = 0;			/* a new name has been specified for the group */
 
 /* local function prototypes */
 static void usage (void);
@@ -100,8 +95,7 @@ static void open_files (void);
 
 static void usage (void)
 {
-	fprintf (stderr,
-		 _("Usage: groupmod [-g gid [-o]] [-n name] group\n"));
+	fprintf (stderr, _("Usage: groupmod [-g gid [-o]] [-n name] group\n"));
 	exit (E_USAGE);
 }
 
@@ -177,41 +171,15 @@ static void grp_update (void)
 	 */
 
 	if (!gr_update (&grp)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (nflg && !gr_remove (group_name)) {
-		fprintf (stderr, _("%s: error removing group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM group file with the new entry as well.
-	 */
-
-	if (gr_dbm_present ()) {
-		if (!gr_dbm_update (&grp)) {
-			fprintf (stderr,
-				 _("%s: cannot add new dbm group entry\n"),
-				 Prog);
-			exit (E_GRP_UPDATE);
-		}
-		if (nflg && (ogrp = getgrnam (group_name)) &&
-		    !gr_dbm_remove (ogrp)) {
-			fprintf (stderr,
-				 _("%s: error removing group dbm entry\n"),
-				 Prog);
-			exit (E_GRP_UPDATE);
-		}
-		endgrent ();
-	}
-#endif				/* NDBM */
 
 #ifdef	SHADOWGRP
-
 	/*
 	 * Make sure there was a shadow entry to begin with. Skip down to
 	 * "out" if there wasn't. Can't just return because there might be
@@ -226,39 +194,13 @@ static void grp_update (void)
 	 */
 
 	if (!sgr_update (&sgrp)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (nflg && !sgr_remove (group_name)) {
-		fprintf (stderr, _("%s: error removing group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM shadow group file with the new entry as well.
-	 */
-
-	if (sg_dbm_present ()) {
-		if (!sg_dbm_update (&sgrp)) {
-			fprintf (stderr,
-				 _
-				 ("%s: cannot add new dbm shadow group entry\n"),
-				 Prog);
-			exit (E_GRP_UPDATE);
-		}
-		if (nflg && !sg_dbm_remove (group_name)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error removing shadow group dbm entry\n"),
-				 Prog);
-			exit (E_GRP_UPDATE);
-		}
-		endsgent ();
-	}
-#endif				/* NDBM */
       out:
 #endif				/* SHADOWGRP */
 
@@ -297,8 +239,7 @@ static void check_new_gid (void)
 	 * Tell the user what they did wrong.
 	 */
 
-	fprintf (stderr,
-		 _("%s: %u is not a unique gid\n"), Prog, group_newid);
+	fprintf (stderr, _("%s: %u is not a unique gid\n"), Prog, group_newid);
 	exit (E_GID_IN_USE);
 }
 
@@ -399,16 +340,14 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (!gr_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp)
@@ -425,26 +364,22 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: unable to lock group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"),
-			 Prog);
+			 _("%s: unable to lock shadow group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"),
-			 Prog);
+			 _("%s: unable to open shadow group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -490,7 +425,7 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	process_flags(argc, argv);
+	process_flags (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -501,8 +436,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -520,8 +454,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 #endif				/* USE_PAM */
@@ -531,23 +464,9 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
-
-	/*
-	 * The open routines for the DBM files don't use read-write as the
-	 * mode, so we have to clue them in.
-	 */
-
-#ifdef	NDBM
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif				/* SHADOWGRP */
-#endif				/* NDBM */
-
 	/*
 	 * Start with a quick check to see if the group exists.
 	 */
-
 	if (!(grp = getgrnam (group_name))) {
 		fprintf (stderr, _("%s: group %s does not exist\n"),
 			 Prog, group_name);
@@ -556,11 +475,9 @@ int main (int argc, char **argv)
 		group_id = grp->gr_gid;
 
 #ifdef	USE_NIS
-
 	/*
 	 * Now make sure it isn't an NIS group.
 	 */
-
 	if (__isgrNIS ()) {
 		char *nis_domain;
 		char *nis_master;

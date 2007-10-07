@@ -1,5 +1,4 @@
-.\" $Id: shadow.3,v 1.4 2003/01/07 14:32:57 kloczek Exp $
-.\" {PTM/WK/1999-09-16}
+.\" $Id: shadow.3,v 1.5 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -81,7 +80,7 @@ struct spwd {
 .br
 	unsigned long int	sp_flag; /* zarezerwowane do przysz³ego u¿ytku */
 .br
-.in -.5i
+.in \-.5i
 }
 .PP
 Znaczenie poszczególnych pól:
@@ -127,18 +126,18 @@ byæ u¿ywane procedury \fBlckpwdf\fR i \fBulckpwdf\fR.
 Kontynuuje próbê uzyskania drugiej blokady przy pomocy \fBspw_lock\fR
 przez czas pozosta³y z pocz±tkowych 15 sekund.
 Je¿eli po up³ywie 15 sekund którakolwiek z tych prób zawiedzie,
-to \fBlckpwdf\fR zwraca -1.
+to \fBlckpwdf\fR zwraca \-1.
 Je¿eli uzyskano obie blokady, to zwracane jest 0.
 .SH DIAGNOSTYKA
 Je¿eli nie ma dalszych pozycji lub podczas przetwarzania pojawi siê b³±d,
 to procedury zwracaj± NULL.
 Procedury zwracaj±ce warto¶æ typu \fBint\fR zwracaj± 0 w przypadku powodzenia
-a -1 dla pora¿ki.
+a \-1 dla pora¿ki.
 .SH PRZESTROGI
 Procedury te mog± byæ u¿ywane wy³±cznie przez superu¿ytkownika, gdy¿ dostêp
 do dodatkowego, chronionego pliku hase³ jest ograniczony.
 .SH PLIKI
-.IR /etc/shadow " - zakodowane has³a u¿ytkowników"
+.IR /etc/shadow " \- zakodowane has³a u¿ytkowników"
 .SH ZOBACZ TAK¯E
 .BR getpwent (3),
 .BR shadow (5)

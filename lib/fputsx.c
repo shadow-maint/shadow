@@ -33,10 +33,9 @@
 #include "defines.h"
 
 #include "rcsid.h"
-RCSID("$Id: fputsx.c,v 1.5 1999/06/07 16:40:44 marekm Exp $")
+RCSID ("$Id: fputsx.c,v 1.6 2005/03/31 05:14:49 kloczek Exp $")
 
-char *
-fgetsx(char *buf, int cnt, FILE *f)
+char *fgetsx (char *buf, int cnt, FILE * f)
 {
 	char *cp = buf;
 	char *ep;
@@ -57,17 +56,16 @@ fgetsx(char *buf, int cnt, FILE *f)
 	return buf;
 }
 
-int
-fputsx(const char *s, FILE *stream)
+int fputsx (const char *s, FILE * stream)
 {
 	int i;
 
-	for (i = 0;*s;i++, s++) {
+	for (i = 0; *s; i++, s++) {
 		if (putc (*s, stream) == EOF)
 			return EOF;
 
-#if 0  /* The standard getgr*() can't handle that.  --marekm */
-		if (i > (BUFSIZ/2)) {
+#if 0				/* The standard getgr*() can't handle that.  --marekm */
+		if (i > (BUFSIZ / 2)) {
 			if (putc ('\\', stream) == EOF ||
 			    putc ('\n', stream) == EOF)
 				return EOF;

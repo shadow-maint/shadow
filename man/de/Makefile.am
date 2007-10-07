@@ -7,6 +7,7 @@ man_MANS = \
 	groups.1 \
 	login.1 \
 	passwd.1 \
+	passwd.5 \
 	vigr.8 \
 	vipw.8
 

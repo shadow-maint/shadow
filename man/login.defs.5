@@ -1,3 +1,4 @@
+.\" $Id: login.defs.5,v 1.15 2005/04/05 18:47:50 kloczek Exp $
 .\" Copyright 1991 - 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
@@ -24,15 +25,12 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: login.defs.5,v 1.12 2003/05/01 18:17:39 kloczek Exp $
-.\"
 .TH LOGIN.DEFS 5
 .SH NAME
 /etc/login.defs \- shadow password suite configuration
 .SH DESCRIPTION
 The
-\fI/etc/login.defs\fR file defines the site-specific configuration for the
+\fI/etc/login.defs\fR file defines the site\-specific configuration for the
 shadow password suite. This file is required. Absence of this file will
 not prevent system operation, but will probably result in undesirable
 operation.
@@ -41,7 +39,7 @@ This file is a readable text file, each line of the file describing one
 configuration parameter. The lines consist of a configuration name and
 value, separated by whitespace. Blank lines and comment lines are ignored. 
 Comments are introduced with a `#' pound sign and the pound sign must be the
-first non-white character of the line.
+first non\-white character of the line.
 .PP
 Parameter values may be of four types:  strings, booleans, numbers, and long
 numbers. A string is comprised of any printable characters. A boolean should
@@ -50,7 +48,7 @@ with a value other than these will be given a ``no'' value. Numbers (both
 regular and long) may be either decimal values, octal values (precede the
 value with ``0'') or hexadecimal values (precede the value with ``0x''). 
 The maximum value of the regular and long numeric parameters is
-machine-dependent.
+machine\-dependent.
 .PP
 The following configuration items are provided:
 .\"
@@ -70,25 +68,25 @@ installing chfn SUID.
 .\"
 .IP "CREATE_HOME (boolean)"
 This defines whether useradd should create home directories for users by
-default. This option is OR'ed with the \fI-m\fR flag on useradd command line.
+default. This option is OR'ed with the \fI\-m\fR flag on useradd command line.
 .\"
 .IP "GID_MAX (number)"
 .IP "GID_MIN (number)"
-Range of group IDs to choose from for the fBuseradd\fR and \fBgroupadd\fR
+Range of group IDs to choose from for the \fBuseradd\fR and \fBgroupadd\fR
 programs.
 .\"
 .IP "MAIL_DIR (string)"
 The mail spool directory. This is needed to manipulate the mailbox when its
 corresponding user account is modified or deleted. If not specified, a
-compile-time default is used.
+compile\-time default is used.
 .\"
 .IP "PASS_MAX_DAYS (number)"
 The maximum number of days a password may be used. If the password is older
-than this, a password change will be forced. If not specified, -1 will be
+than this, a password change will be forced. If not specified, \-1 will be
 assumed (which disables the restriction).
 .IP "PASS_MIN_DAYS (number)"
 The minimum number of days allowed between password changes. Any password
-changes attempted sooner than this will be rejected. If not specified, -1
+changes attempted sooner than this will be rejected. If not specified, \-1
 will be assumed (which disables the restriction).
 .IP "PASS_WARN_AGE (number)"
 The number of days warning given before a password expires. A zero means

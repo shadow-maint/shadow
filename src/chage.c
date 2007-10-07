@@ -30,21 +30,28 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.35 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.43 2005/04/17 00:07:00 kloczek Exp $")
 #include <sys/types.h>
-#include <stdio.h>
+#include <ctype.h>
 #include <fcntl.h>
 #include <signal.h>
-#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
-#include "prototypes.h"
-#include "defines.h"
 #ifdef SHADOWPWD
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #endif				/* USE_PAM */
 #include <pwd.h>
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#endif
+#include "prototypes.h"
+#include "defines.h"
+#include "pwio.h"
+#include "shadowio.h"
 /*
  * Global variables
  */
@@ -52,12 +59,12 @@ static char *Prog;
 
 static int
  dflg = 0,			/* set last password change date */
- Eflg = 0,			/* set account expiration date */
- Iflg = 0,			/* set password inactive after expiration */
- lflg = 0,			/* show account aging information */
- mflg = 0,			/* set minimum number of days before password change */
- Mflg = 0,			/* set maximim number of days before password change */
- Wflg = 0;			/* set expiration warning days */
+    Eflg = 0,			/* set account expiration date */
+    Iflg = 0,			/* set password inactive after expiration */
+    lflg = 0,			/* show account aging information */
+    mflg = 0,			/* set minimum number of days before password change */
+    Mflg = 0,			/* set maximim number of days before password change */
+    Wflg = 0;			/* set expiration warning days */
 
 static int locks;
 
@@ -68,23 +75,10 @@ static long warndays;
 static long inactdays;
 static long expdays;
 
-/*
- * External identifiers
- */
-
-extern long a64l ();
-extern char *l64a ();
-
-#include "pwio.h"
-
-#include "shadowio.h"
-
-#ifdef	NDBM
-extern int pw_dbm_mode;
-extern int sp_dbm_mode;
-#endif
-
 #define	EPOCH		"1969-12-31"
+
+#define E_SUCCESS	0	/* success */
+#define E_NOPERM	1	/* permission denied */
 
 /* local function prototypes */
 static void usage (void);
@@ -149,7 +143,7 @@ static int new_fields (void)
 	char *cp;
 
 	printf (_("Enter the new value, or press ENTER for the default\n"));
-	printf("\n");
+	printf ("\n");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
@@ -165,8 +159,7 @@ static int new_fields (void)
 
 	date_to_str (buf, sizeof buf, lastday * SCALE);
 
-	change_field (buf, sizeof buf,
-		      _("Last Password Change (YYYY-MM-DD)"));
+	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
 	if (strcmp (buf, EPOCH) == 0)
 		lastday = -1;
@@ -294,9 +287,12 @@ static void list_fields (void)
 	 * password expires that the account becomes unusable.
 	 */
 
-	printf (_("Minimum number of days between password change\t\t: %ld\n"), mindays);
-	printf (_("Maximum number of days between password change\t\t: %ld\n"), maxdays);
-	printf (_("Number of days of warning before password expires\t: %ld\n"), warndays);
+	printf (_("Minimum number of days between password change\t\t: %ld\n"),
+		mindays);
+	printf (_("Maximum number of days between password change\t\t: %ld\n"),
+		maxdays);
+	printf (_("Number of days of warning before password expires\t: %ld\n"),
+		warndays);
 }
 
 #ifdef USE_PAM
@@ -368,29 +364,20 @@ int main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	ruid = getuid ();
+#ifdef WITH_SELINUX
+	amroot = (ruid == 0 && checkPasswdAccess (PASSWD__ROOTOK) == 0);
+#else
 	amroot = (ruid == 0);
+#endif
 
 	/*
 	 * Get the program name so that error messages can use it.
 	 */
-
 	Prog = Basename (argv[0]);
 
-	OPENLOG ("chage");
-
-#ifdef	NDBM
-	sp_dbm_mode = O_RDWR;
-	pw_dbm_mode = O_RDWR;
-#endif
-
 	/*
-	 * Parse the flags. The difference between password file formats
-	 * includes the number of fields, and whether the dates are entered
-	 * as days or weeks. Shadow password file info =must= be entered in
-	 * days, while regular password file info =must= be entered in
-	 * weeks.
+	 * Parse the command line options.
 	 */
-
 	while ((flag = getopt (argc, argv, "lm:M:W:I:E:d:")) != EOF) {
 		switch (flag) {
 		case 'l':
@@ -443,7 +430,6 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 			 _("%s: do not include \"l\" with other flags\n"),
 			 Prog);
-		closelog ();
 		usage ();
 	}
 
@@ -455,9 +441,11 @@ int main (int argc, char **argv)
 
 	if (!amroot && !lflg) {
 		fprintf (stderr, _("%s: permission denied.\n"), Prog);
-		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
+
+	OPENLOG ("chage");
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -485,12 +473,9 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
-		exit (1);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (E_NOPERM);
 	}
-
-	OPENLOG ("chage");
 #endif				/* USE_PAM */
 
 	/*
@@ -506,19 +491,18 @@ int main (int argc, char **argv)
 	 */
 	pwrw = 0;
 	if (!pw_open (pwrw ? O_RDWR : O_RDONLY)) {
-		fprintf (stderr, _("%s: can't open password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't open password file\n"), Prog);
 		cleanup (1);
 		SYSLOG ((LOG_ERR, "failed opening %s", PASSWD_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (!(pw = pw_locate (argv[optind]))) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 			 argv[optind]);
 		cleanup (1);
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	pwent = *pw;
@@ -536,7 +520,7 @@ int main (int argc, char **argv)
 		cleanup (1);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	if (!spw_open (locks ? O_RDWR : O_RDONLY)) {
 		fprintf (stderr,
@@ -544,13 +528,13 @@ int main (int argc, char **argv)
 		cleanup (2);
 		SYSLOG ((LOG_ERR, "failed opening %s", SHADOW_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	if (lflg && (setgid (getgid ()) || setuid (ruid))) {
 		fprintf (stderr, "%s: failed to drop privileges (%s)\n",
 			 Prog, strerror (errno));
-		exit (1);
+		exit (E_NOPERM);
 	}
 
 	sp = spw_locate (argv[optind]);
@@ -584,15 +568,14 @@ int main (int argc, char **argv)
 
 	if (lflg) {
 		if (!amroot && (ruid != pwent.pw_uid)) {
-			fprintf (stderr, _("%s: permission denied.\n"),
-				 Prog);
+			fprintf (stderr, _("%s: permission denied.\n"), Prog);
 			closelog ();
-			exit (1);
+			exit (E_NOPERM);
 		}
 		list_fields ();
 		cleanup (2);
 		closelog ();
-		exit (0);
+		exit (E_SUCCESS);
 	}
 
 	/*
@@ -601,14 +584,13 @@ int main (int argc, char **argv)
 	 */
 
 	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg) {
-		printf (_("Changing the aging information for %s\n"),
-			name);
+		printf (_("Changing the aging information for %s\n"), name);
 		if (!new_fields ()) {
 			fprintf (stderr, _("%s: error changing fields\n"),
 				 Prog);
 			cleanup (2);
 			closelog ();
-			exit (1);
+			exit (E_NOPERM);
 		}
 	}
 	/*
@@ -628,18 +610,12 @@ int main (int argc, char **argv)
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
-				 _("%s: can't update password file\n"),
-				 Prog);
+				 _("%s: can't update password file\n"), Prog);
 			cleanup (2);
-			SYSLOG ((LOG_ERR, "failed updating %s",
-				 PASSWD_FILE));
+			SYSLOG ((LOG_ERR, "failed updating %s", PASSWD_FILE));
 			closelog ();
-			exit (1);
+			exit (E_NOPERM);
 		}
-#ifdef NDBM
-		(void) pw_dbm_update (&pwent);
-		endpwent ();
-#endif
 	}
 
 	/*
@@ -657,79 +633,56 @@ int main (int argc, char **argv)
 
 	if (!spw_update (&spwd)) {
 		fprintf (stderr,
-			 _("%s: can't update shadow password file\n"),
-			 Prog);
+			 _("%s: can't update shadow password file\n"), Prog);
 		cleanup (2);
 		SYSLOG ((LOG_ERR, "failed updating %s", SHADOW_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
-#ifdef	NDBM
-
-	/*
-	 * See if the shadow DBM file exists and try to update it.
-	 */
-
-	if (sp_dbm_present () && !sp_dbm_update (&spwd)) {
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		cleanup (2);
-		SYSLOG ((LOG_ERR, "error updating DBM passwd entry"));
-		closelog ();
-		exit (1);
-	}
-	endspent ();
-
-#endif				/* NDBM */
 
 	/*
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
 	 */
-
 	if (!spw_close ()) {
 		fprintf (stderr,
-			 _("%s: can't rewrite shadow password file\n"),
-			 Prog);
+			 _("%s: can't rewrite shadow password file\n"), Prog);
 		cleanup (2);
 		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
-
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid(getuid());
+	pampw = getpwuid (getuid ());
 	if (pampw == NULL) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval = pam_start("chage", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval = pam_authenticate(pamh, 0);
+		retval = pam_authenticate (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end(pamh, retval);
+			pam_end (pamh, retval);
 		}
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval = pam_acct_mgmt(pamh, 0);
+		retval = pam_acct_mgmt (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end(pamh, retval);
+			pam_end (pamh, retval);
 		}
 	}
 
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		exit (E_NOPERM);
 	}
-
-	OPENLOG("chage");
-#endif /* USE_PAM */
+#endif				/* USE_PAM */
 
 	/*
 	 * Close the password file. If any entries were modified, the file
@@ -737,12 +690,11 @@ int main (int argc, char **argv)
 	 */
 
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: can't rewrite password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
 		cleanup (2);
 		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
 		closelog ();
-		exit (1);
+		exit (E_NOPERM);
 	}
 	cleanup (2);
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", name));
@@ -757,9 +709,8 @@ int main (int argc, char **argv)
 		}
 
 		if (retval != PAM_SUCCESS) {
-			fprintf (stderr, _("%s: PAM chauthtok failed\n"),
-				 Prog);
-			exit (1);
+			fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
+			exit (E_NOPERM);
 		}
 	}
 
@@ -769,9 +720,7 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	closelog ();
-
-
-	exit (0);
+	exit (E_SUCCESS);
 	/* NOTREACHED */
 }
 
@@ -779,8 +728,7 @@ int main (int argc, char **argv)
 int main (int argc, char **argv)
 {
 	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n",
-		 argv[0]);
-	exit (1);
+		 "%s: not configured for shadow password support.\n", argv[0]);
+	exit (E_NOPERM);
 }
 #endif				/* !SHADOWPWD */

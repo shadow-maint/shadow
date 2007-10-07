@@ -1,4 +1,4 @@
-.\"$Id: shadow.5,v 1.11 2003/05/01 18:17:39 kloczek Exp $
+.\"$Id: shadow.5,v 1.15 2005/04/12 16:31:06 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -51,9 +51,12 @@ Days since Jan 1, 1970 that account is disabled
 A reserved field
 .PP
 The password field must be filled. The encryped password consists of 13 to
-24 characters from the 64 character alphabet a thru z, A thru Z, 0 thru 9,
-\. and /. Refer to \fBcrypt\fR(3) for details on how this string is
-interpreted.
+24 characters from the 64 characters alphabet a thru z, A thru Z, 0 thru 9,
+\&\. and /. Optionally it can start with a "$" character. This means the
+encrypted password was generated using another (not DES) algorithm. For
+example if it starts with "$1$" it means the MD5\-based algorithm was used.
+.PP
+Refer to \fBcrypt\fR(3) for details on how this string is interpreted.
 .PP
 The date of the last password change is given as the number of days since
 Jan 1, 1970. The password may not be changed again until the proper number
@@ -72,9 +75,9 @@ in \fI/etc/passwd\fR.
 This file must not be readable by regular users if password security is to
 be maintained.
 .SH FILES
-\fI/etc/passwd\fR \	- user account information
+\fI/etc/passwd\fR	\- user account information
 .br
-\fI/etc/shadow\fR \	- encrypted user passwords
+\fI/etc/shadow\fR	\- secure user account information
 .SH SEE ALSO
 .BR chage (1),
 .BR login (1),

@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.8 2004/12/20 02:19:30 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.10 2005/04/13 22:59:18 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -48,8 +48,7 @@ static int create_backup_file (FILE *, const char *, struct stat *);
 static void vipwexit (const char *, int, int);
 static void vipwedit (const char *, int (*)(void), int (*)(void));
 
-static int
-create_backup_file (FILE * fp, const char *backup, struct stat *sb)
+static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 {
 	struct utimbuf ub;
 	FILE *bkfp;
@@ -63,12 +62,12 @@ create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 		return -1;
 
 	c = 0;
-	if (fseeko(fp, 0, SEEK_SET) == 0)
-		while ((c = getc(fp)) != EOF) {
-			if (putc(c, bkfp) == EOF)
+	if (fseeko (fp, 0, SEEK_SET) == 0)
+		while ((c = getc (fp)) != EOF) {
+			if (putc (c, bkfp) == EOF)
 				break;
 		}
-	if (c != EOF || ferror(fp) || fflush(bkfp)) {
+	if (c != EOF || ferror (fp) || fflush (bkfp)) {
 		fclose (bkfp);
 		unlink (backup);
 		return -1;
@@ -94,10 +93,10 @@ static void vipwexit (const char *msg, int syserr, int ret)
 {
 	int err = errno;
 
-	if (filelocked)
-		(*unlock) ();
 	if (createedit)
 		unlink (fileeditname);
+	if (filelocked)
+		(*unlock) ();
 	if (msg)
 		fprintf (stderr, "%s: %s", progname, msg);
 	if (syserr)
@@ -111,8 +110,7 @@ static void vipwexit (const char *msg, int syserr, int ret)
 #endif
 
 static void
-vipwedit (const char *file, int (*file_lock) (void),
-	  int (*file_unlock) (void))
+vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 {
 	const char *editor;
 	pid_t pid;
@@ -155,9 +153,7 @@ vipwedit (const char *file, int (*file_lock) (void),
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
 
-		buf =
-		    (char *) malloc (strlen (editor) + strlen (fileedit) +
-				     2);
+		buf = (char *) malloc (strlen (editor) + strlen (fileedit) + 2);
 		snprintf (buf, strlen (editor) + strlen (fileedit) + 2,
 			  "%s %s", editor, fileedit);
 		if (system (buf) != 0) {

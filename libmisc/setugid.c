@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: setugid.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: setugid.c,v 1.9 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include <grp.h>
 #include "prototypes.h"
@@ -80,12 +80,7 @@ int change_uid (const struct passwd *info)
 	/*
 	 * Set the real UID to the UID value in the password file.
 	 */
-#ifndef	BSD
-	if (setuid (info->pw_uid))
-#else
-	if (setreuid (info->pw_uid, info->pw_uid))
-#endif
-	{
+	if (setuid (info->pw_uid)) {
 		perror ("setuid");
 		SYSLOG ((LOG_ERR, "bad user ID `%d' for user `%s': %m\n",
 			 (int) info->pw_uid, info->pw_name));

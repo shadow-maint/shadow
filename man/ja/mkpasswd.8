@@ -1,4 +1,4 @@
-.\"$Id: mkpasswd.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: mkpasswd.8,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,7 +36,7 @@
 .SH 名前
 mkpasswd \- passwd と group のデータベースファイルを更新する
 .SH 書式
-\fBmkpasswd\fR [\fB-fvgps\fR] \fIfile\fR
+\fBmkpasswd\fR [\fB\-fvgps\fR] \fIfile\fR
 .SH 説明
 .B mkpasswd
 はフラグで与えられた書式にしたがってファイルを読み込み、
@@ -46,25 +46,25 @@ mkpasswd \- passwd と group のデータベースファイルを更新する
 出力ファイルの名前は
 \fIfile\fR.dir および \fIfile\fR.pagとなる。
 .PP
-\fB-f\fR オプションを指定すると、
+\fB\-f\fR オプションを指定すると、
 \fBmkpasswd\fR は出力ファイルが存在していても無視して上書きする。
 通常は、出力ファイルが既に存在する旨の警告を発して終了する。
 .PP
-\fB-v\fR オプションを指定すると、
+\fB\-v\fR オプションを指定すると、
 \fBmkpasswd\fR は変換を行なう毎に各レコードの情報を出力し、
 最後に終了メッセージを表示する。
 .PP
-\fB-g\fR オプションを指定すると、
+\fB\-g\fR オプションを指定すると、
 入力ファイルが \fI/etc/group\fR
 ファイルの書式であるとみなして処理を行なう。
-\fB-s\fR オプションと同時に用いた場合は、
+\fB\-s\fR オプションと同時に用いた場合は、
 \fI/etc/gshadow\fR ファイルの書式が用いられる。
 .PP
-\fB-p\fR オプションを指定すると、
+\fB\-p\fR オプションを指定すると、
 入力ファイルが \fB/etc/passwd\fR
 ファイルの書式であるとみなして処理を行う。
 これがデフォルトの動作である。
-\fB-s\fR オプションと同時に用いた場合は、
+\fB\-s\fR オプションと同時に用いた場合は、
 \fI/etc/shadow\fR ファイルの書式が用いられる。
 .SH 警告
 複数のデータベースファイルを使えるのは、
@@ -75,11 +75,11 @@ NDBM データベースライブラリを備えたシステムのみであり、
 このコマンドが必要になるのは、データベースを削除してしまった場合や、
 データベースが壊れた場合などに、再生成するときだけである。
 .SH ファイル
-\fI/etc/passwd\fR \ - ユーザアカウント情報
+\fI/etc/passwd\fR \ \- ユーザアカウント情報
 .br
-\fI/etc/shadow\fR \ - shadow 化されたユーザ情報
+\fI/etc/shadow\fR \ \- shadow 化されたユーザ情報
 .br
-\fI/etc/group\fR \  - グループ情報
+\fI/etc/group\fR \  \- グループ情報
 .br
 \fI/etc/gshadow\fR \- shadow 化されたグループ情報
 .SH 関連項目

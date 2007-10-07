@@ -30,17 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: log.c,v 1.7 2003/12/17 12:52:25 kloczek Exp $")
+RCSID ("$Id: log.c,v 1.9 2005/04/02 11:31:39 kloczek Exp $")
 #include <sys/types.h>
 #include <pwd.h>
 #include <fcntl.h>
 #include <time.h>
 #include "defines.h"
-#if HAVE_LASTLOG_H
 #include <lastlog.h>
-#else
-#include "lastlog_.h"
-#endif
 /* 
  * dolastlog - create lastlog entry
  *
@@ -89,6 +85,7 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 
 	ll_time = newlog.ll_time;
 	time (&ll_time);
+	newlog.ll_time = ll_time;
 	strncpy (newlog.ll_line, line, sizeof newlog.ll_line);
 #if HAVE_LL_HOST
 	strncpy (newlog.ll_host, host, sizeof newlog.ll_host);

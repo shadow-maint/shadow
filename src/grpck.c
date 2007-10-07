@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpck.c,v 1.21 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpck.c,v 1.23 2005/04/06 04:26:06 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -84,8 +84,7 @@ static void delete_member (char **, const char *);
 static void usage (void)
 {
 #ifdef	SHADOWGRP
-	fprintf (stderr, _("Usage: %s [-r] [-s] [group [gshadow]]\n"),
-		 Prog);
+	fprintf (stderr, _("Usage: %s [-r] [-s] [group [gshadow]]\n"), Prog);
 #else
 	fprintf (stderr, _("Usage: %s [-r] [-s] [group]\n"), Prog);
 #endif
@@ -189,8 +188,7 @@ int main (int argc, char **argv)
 	}
 
 	if (sort_mode && read_only) {
-		fprintf (stderr, _("%s: -s and -r are incompatibile\n"),
-			 Prog);
+		fprintf (stderr, _("%s: -s and -r are incompatibile\n"), Prog);
 		exit (E_USAGE);
 	}
 
@@ -232,8 +230,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 				 Prog, grp_file);
 			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s",
-					 grp_file));
+				SYSLOG ((LOG_WARN, "cannot lock %s", grp_file));
 			closelog ();
 			exit (E_CANT_LOCK);
 		}
@@ -242,8 +239,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 				 Prog, sgr_file);
 			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s",
-					 sgr_file));
+				SYSLOG ((LOG_WARN, "cannot lock %s", sgr_file));
 			closelog ();
 			exit (E_CANT_LOCK);
 		}
@@ -388,8 +384,7 @@ int main (int argc, char **argv)
 		 */
 		if (!check_group_name (grp->gr_name)) {
 			errors++;
-			printf (_("invalid group name `%s'\n"),
-				grp->gr_name);
+			printf (_("invalid group name `%s'\n"), grp->gr_name);
 		}
 
 		/*
@@ -641,16 +636,9 @@ int main (int argc, char **argv)
 	 */
 
 	if (errors)
-#ifdef NDBM
-		printf (deleted ?
-			_
-			("%s: the files have been updated; run mkpasswd\n")
-			: _("%s: no changes\n"), Prog);
-#else
 		printf (deleted ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
-#endif
 
 	exit (errors ? E_BAD_ENTRY : E_OKAY);
 }

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.29 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.31 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -72,11 +72,6 @@ static char *Prog;
 static int oflg = 0;		/* permit non-unique group ID to be specified with -g */
 static int gflg = 0;		/* ID value for the new group */
 static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
-
-#ifdef	NDBM
-extern int gr_dbm_mode;
-extern int sg_dbm_mode;
-#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -154,7 +149,6 @@ static void grp_update (void)
 	/*
 	 * Create the initial entries for this new group.
 	 */
-
 	new_grent (&grp);
 #ifdef	SHADOWGRP
 	new_sgent (&sgrp);
@@ -163,50 +157,19 @@ static void grp_update (void)
 	/*
 	 * Write out the new group file entry.
 	 */
-
 	if (!gr_update (&grp)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM group file with the new entry as well.
-	 */
-
-	if (gr_dbm_present () && !gr_dbm_update (&grp)) {
-		fprintf (stderr, _("%s: cannot add new dbm group entry\n"),
-			 Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-	endgrent ();
-#endif				/* NDBM */
 
 #ifdef	SHADOWGRP
-
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-
 	if (is_shadow_grp && !sgr_update (&sgrp)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM group file with the new entry as well.
-	 */
-
-	if (is_shadow_grp && sg_dbm_present () && !sg_dbm_update (&sgrp)) {
-		fprintf (stderr, _("%s: cannot add new dbm group entry\n"),
-			 Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-	endsgent ();
-#endif				/* NDBM */
 #endif				/* SHADOWGRP */
 	SYSLOG ((LOG_INFO, "new group: name=%s, gid=%u",
 		 group_name, (unsigned int) group_id));
@@ -292,8 +255,7 @@ static void find_new_gid (void)
 #endif
 		}
 		if (group_id == gid_max) {
-			fprintf (stderr, _("%s: can't get unique gid\n"),
-				 Prog);
+			fprintf (stderr, _("%s: can't get unique gid\n"), Prog);
 			fail_exit (E_GID_IN_USE);
 		}
 	}
@@ -405,16 +367,14 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (!gr_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp)
@@ -431,26 +391,22 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: unable to lock group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"),
-			 Prog);
+			 _("%s: unable to lock shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"),
-			 Prog);
+			 _("%s: unable to open shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -499,9 +455,9 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	OPENLOG("groupadd");
+	OPENLOG ("groupadd");
 
-	process_flags(argc, argv);
+	process_flags (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -512,8 +468,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -531,8 +486,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 
@@ -544,18 +498,6 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * The open routines for the DBM files don't use read-write as the
-	 * mode, so we have to clue them in.
-	 */
-
-#ifdef	NDBM
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif				/* SHADOWGRP */
-#endif				/* NDBM */
-
-	/*
 	 * Start with a quick check to see if the group exists.
 	 */
 
@@ -563,8 +505,7 @@ int main (int argc, char **argv)
 		if (fflg) {
 			exit (E_SUCCESS);
 		}
-		fprintf (stderr, _("%s: group %s exists\n"), Prog,
-			 group_name);
+		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
 		exit (E_NAME_IN_USE);
 	}
 
@@ -572,7 +513,6 @@ int main (int argc, char **argv)
 	 * Do the hard stuff - open the files, create the group entries,
 	 * then close and update the files.
 	 */
-
 	open_files ();
 
 	if (!gflg || !oflg)

@@ -21,9 +21,9 @@
 #include <config.h>
 #endif
 
-#ifdef LOGIN_ACCESS
+#ifndef USE_PAM
 #include "rcsid.h"
-RCSID ("$Id: login_access.c,v 1.9 2003/05/05 21:44:15 kloczek Exp $")
+RCSID ("$Id: login_nopam.c,v 1.3 2005/04/17 15:38:56 kloczek Exp $")
 #include "prototypes.h"
     /*
      * This module implements a simple but effective form of login access
@@ -154,8 +154,7 @@ static int list_match (char *list, const char *item, int (*match_fn) ())
 	 * the match is affected by any exceptions.
 	 */
 
-	for (tok = strtok (list, sep); tok != 0;
-	     tok = strtok ((char *) 0, sep)) {
+	for (tok = strtok (list, sep); tok != 0; tok = strtok ((char *) 0, sep)) {
 		if (strcasecmp (tok, "EXCEPT") == 0)	/* EXCEPT: give up */
 			break;
 		if ((match = (*match_fn) (tok, item)))	/* YES */
@@ -167,8 +166,7 @@ static int list_match (char *list, const char *item, int (*match_fn) ())
 		while ((tok = strtok ((char *) 0, sep))
 		       && strcasecmp (tok, "EXCEPT"))
 			/* VOID */ ;
-		if (tok == 0
-		    || list_match ((char *) 0, item, match_fn) == NO)
+		if (tok == 0 || list_match ((char *) 0, item, match_fn) == NO)
 			return (match);
 	}
 	return (NO);
@@ -262,8 +260,7 @@ char *string;
 
 	hp = gethostbyname (string);
 	if (hp)
-		return
-		    inet_ntoa (*((struct in_addr *) *(hp->h_addr_list)));
+		return inet_ntoa (*((struct in_addr *) *(hp->h_addr_list)));
 
 	syslog (LOG_ERR, "%s - unknown host", string);
 	return string;
@@ -297,8 +294,7 @@ static int from_match (const char *tok, const char *string)
 		if (strchr (string, '.') == 0)
 			return (YES);
 	} else if (tok[(tok_len = strlen (tok)) - 1] == '.'	/* network */
-		   && strncmp (tok, resolve_hostname (string),
-			       tok_len) == 0) {
+		   && strncmp (tok, resolve_hostname (string), tok_len) == 0) {
 		return (YES);
 	}
 	return (NO);
@@ -321,4 +317,5 @@ static int string_match (const char *tok, const char *string)
 	}
 	return (NO);
 }
-#endif				/* LOGIN_ACCESS */
+
+#endif				/* !USE_PAM */

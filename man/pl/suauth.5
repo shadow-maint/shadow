@@ -1,9 +1,8 @@
-.\" $Id: suauth.5,v 1.2 2001/01/25 10:43:54 kloczek Exp $
-.\" {PTM/WK/1999-09-14}
+.\" $Id: suauth.5,v 1.3 2005/04/05 18:47:51 kloczek Exp $
 .TH SUAUTH 5 "14 lutego 1996"
 .UC 5
 .SH NAZWA
-suauth - plik szczegó³owej kontroli su
+suauth \- plik szczegó³owej kontroli su
 .\" detailed su control file
 .SH SK£ADNIA
 .B /etc/suauth
@@ -25,17 +24,17 @@ Plik sformatowany jest jak poni¿ej. Wiersze rozpoczynaj±ce siê od # s±
 traktowane jak wiersze komentarza i ignorowane.
 .PP
 .RS
-na-ID:z-ID:AKCJA
+na\-ID:z\-ID:AKCJA
 .RE
 .PP
-Gdzie na-ID jest albo s³owem
+Gdzie na\-ID jest albo s³owem
 .B ALL
 (wszyscy), albo list± nazw u¿ytkowników rozdzielonych "," albo te¿ s³owami
 .B ALL EXCEPT
 (wszyscy oprócz), po których nastêpuje lista nazw u¿ytkowników
 rozdzielonych przecinkiem.
 .PP
-z-ID jest formatowane w taki sam sposób jak na-ID, z wyj±tkiem tego, ¿e
+z\-ID jest formatowane w taki sam sposób jak na\-ID, z wyj±tkiem tego, ¿e
 rozpoznawane jest dodatkowe s³owo
 .BR GROUP.
 Zapis 
@@ -44,7 +43,7 @@ Zapis
 Po s³owie
 .B GROUP
 powinna wyst±piæ jedna lub wiêcej rozdzielonych przecinkiem nazw grup.
-Niewystarczaj±ce jest podanie g³ównego ID danej grupy - niezbêdny jest
+Niewystarczaj±ce jest podanie g³ównego ID danej grupy \- niezbêdny jest
 wpis w 
 .BR /etc/group (5).
 .PP

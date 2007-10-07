@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.31 2005/01/17 23:12:05 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.36 2005/04/15 21:23:49 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -56,6 +56,10 @@ RCSID (PKG_VER "$Id: passwd.c,v 1.31 2005/01/17 23:12:05 kloczek Exp $")
 #include "pwio.h"
 #include "nscd.h"
 #include "getdef.h"
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#endif
 /*
  * exit status values
  */
@@ -77,18 +81,18 @@ static int amroot;		/* The real UID was 0 */
 static int
 #ifdef SHADOWPWD
  eflg = 0,			/* -e - force password change */
- iflg = 0,			/* -i - set inactive days */
- kflg = 0,			/* -k - change only if expired */
- nflg = 0,			/* -n - set minimum days */
- wflg = 0,			/* -w - set warning days */
- xflg = 0,			/* -x - set maximum days */
+    iflg = 0,			/* -i - set inactive days */
+    kflg = 0,			/* -k - change only if expired */
+    nflg = 0,			/* -n - set minimum days */
+    wflg = 0,			/* -w - set warning days */
+    xflg = 0,			/* -x - set maximum days */
 #endif
- aflg = 0,			/* -a - show status for all users */
- dflg = 0,			/* -d - delete password */
- lflg = 0,			/* -l - lock account */
- qflg = 0,			/* -q - quiet mode */
- Sflg = 0,			/* -S - show password status */
- uflg = 0;			/* -u - unlock account */
+    aflg = 0,			/* -a - show status for all users */
+    dflg = 0,			/* -d - delete password */
+    lflg = 0,			/* -l - lock account */
+    qflg = 0,			/* -q - quiet mode */
+    Sflg = 0,			/* -S - show password status */
+    uflg = 0;			/* -u - unlock account */
 
 /*
  * set to 1 if there are any flags which require root privileges,
@@ -113,11 +117,6 @@ static int do_update_pwd = 0;
 /*
  * External identifiers
  */
-
-#ifdef	NDBM
-extern int sp_dbm_mode;
-extern int pw_dbm_mode;
-#endif
 
 /* local function prototypes */
 static void usage (int);
@@ -158,8 +157,7 @@ static void usage (int status)
 			 _
 			 ("       %s [-x max] [-n min] [-w warn] [-i inact] name\n"),
 			 Prog);
-		fprintf (stderr, _("       %s {-l|-u|-d|-S|-e} name\n"),
-			 Prog);
+		fprintf (stderr, _("       %s {-l|-u|-d|-S|-e} name\n"), Prog);
 	}
 	exit (status);
 }
@@ -261,8 +259,7 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
 		STRFCPY (pass, cp);
 		strzero (cp);
 
-		if (!amroot
-		    && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
+		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
 			printf (_("Try again.\n"));
 			continue;
 		}
@@ -283,8 +280,7 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
 			return -1;
 		}
 		if (strcmp (cp, pass))
-			fprintf (stderr,
-				 _("They don't match; try again.\n"));
+			fprintf (stderr, _("They don't match; try again.\n"));
 		else {
 			strzero (cp);
 			break;
@@ -363,8 +359,7 @@ static void check_password (const struct passwd *pw)
 		fprintf (stderr,
 			 _("The password for %s cannot be changed.\n"),
 			 sp->sp_namp);
-		SYSLOG ((LOG_WARN, "password locked for `%s'",
-			 sp->sp_namp));
+		SYSLOG ((LOG_WARN, "password locked for `%s'", sp->sp_namp));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -381,8 +376,7 @@ static void check_password (const struct passwd *pw)
 		fprintf (stderr,
 			 _("The password for %s cannot be changed.\n"),
 			 pw->pw_name);
-		SYSLOG ((LOG_WARN, "password locked for `%s'",
-			 pw->pw_name));
+		SYSLOG ((LOG_WARN, "password locked for `%s'", pw->pw_name));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -395,8 +389,7 @@ static void check_password (const struct passwd *pw)
 			 _
 			 ("Sorry, the password for %s cannot be changed yet.\n"),
 			 pw->pw_name);
-		SYSLOG ((LOG_WARN, "now < minimum age for `%s'",
-			 pw->pw_name));
+		SYSLOG ((LOG_WARN, "now < minimum age for `%s'", pw->pw_name));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -532,23 +525,12 @@ static void update_noshadow (void)
 		oom ();
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
 	if (!pw_update (npw)) {
-		fprintf (stderr,
-			 _("Error updating the password entry.\n"));
+		fprintf (stderr, _("Error updating the password entry.\n"));
 		SYSLOG ((LOG_ERR, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
-#ifdef NDBM
-	if (pw_dbm_present () && !pw_dbm_update (npw)) {
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		SYSLOG ((LOG_ERR, "error updaring dbm password entry"));
-		fail_exit (E_FAILURE);
-	}
-	endpwent ();
-#endif
 	if (!pw_close ()) {
-		fprintf (stderr,
-			 _("Cannot commit password file changes.\n"));
+		fprintf (stderr, _("Cannot commit password file changes.\n"));
 		SYSLOG ((LOG_ERR, "can't rewrite password file"));
 		fail_exit (E_FAILURE);
 	}
@@ -604,23 +586,12 @@ static void update_shadow (void)
 		nsp->sp_lstchg = 0;
 
 	if (!spw_update (nsp)) {
-		fprintf (stderr,
-			 _("Error updating the password entry.\n"));
+		fprintf (stderr, _("Error updating the password entry.\n"));
 		SYSLOG ((LOG_ERR, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
-#ifdef NDBM
-	if (sp_dbm_present () && !sp_dbm_update (nsp)) {
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		SYSLOG ((LOG_ERR, "error updaring dbm password entry"));
-		fail_exit (E_FAILURE);
-	}
-	endspent ();
-#endif
 	if (!spw_close ()) {
-		fprintf (stderr,
-			 _("Cannot commit password file changes.\n"));
+		fprintf (stderr, _("Cannot commit password file changes.\n"));
 		SYSLOG ((LOG_ERR, "can't rewrite password file"));
 		fail_exit (E_FAILURE);
 	}
@@ -831,8 +802,7 @@ int main (int argc, char **argv)
 	pw = get_my_pwent ();
 	if (!pw) {
 		fprintf (stderr,
-			 _("%s: Cannot determine your user name.\n"),
-			 Prog);
+			 _("%s: Cannot determine your user name.\n"), Prog);
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);
@@ -850,8 +820,7 @@ int main (int argc, char **argv)
 		if (anyflag || !Sflg || (optind < argc))
 			usage (E_USAGE);
 		if (!amroot) {
-			fprintf (stderr, _("%s: permission denied.\n"),
-				 Prog);
+			fprintf (stderr, _("%s: permission denied.\n"), Prog);
 			exit (E_NOPERM);
 		}
 		setpwent ();
@@ -890,30 +859,33 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
-#ifdef NDBM
-	endpwent ();
-	pw_dbm_mode = O_RDWR;
-#ifdef SHADOWPWD
-	sp_dbm_mode = O_RDWR;
-#endif
-#endif
 
 	pw = getpwnam (name);
 	if (!pw) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog, name);
 		exit (E_NOPERM);
 	}
-
+#ifdef WITH_SELINUX
 	/*
-	 * Now I have a name, let's see if the UID for the name matches the
-	 * current real UID.
+	 * If the UID of the user does not match the current real UID,
+	 * check if the change is allowed by SELinux policy.
 	 */
-
+	if ((pw->pw_uid != getuid ())
+	    && (checkPasswdAccess (PASSWD__PASSWD) != 0)) {
+#else
+	/*
+	 * If the UID of the user does not match the current real UID,
+	 * check if I'm root.
+	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
+#endif
 		fprintf (stderr,
-			 _("You may not change the password for %s.\n"),
-			 name);
-		SYSLOG ((LOG_WARN, "can't change pwd for `%s'", name));
+			 _
+			 ("%s: You may not view or modify password information for %s.\n"),
+			 Prog, name);
+		SYSLOG ((LOG_WARN,
+			 "%s: can't view or modify password information for %s",
+			 Prog, name));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1009,8 +981,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("shadow");
 #endif
 
-	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name,
-		 myname));
+	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name, myname));
 	closelog ();
 	if (!qflg)
 		printf (_("Password changed.\n"));

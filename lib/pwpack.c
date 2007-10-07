@@ -30,23 +30,18 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwpack.c,v 1.6 2003/12/17 01:33:28 kloczek Exp $")
-
+RCSID ("$Id: pwpack.c,v 1.7 2005/03/31 05:14:49 kloczek Exp $")
 #include <sys/types.h>
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
-
-
 /*
  * pw_pack - convert a (struct pwd) to a packed record
  * WARNING: buf must be large enough, no check for overrun!
  */
-
-int
-pw_pack(const struct passwd *passwd, char *buf)
+int pw_pack (const struct passwd *passwd, char *buf)
 {
-	char	*cp;
+	char *cp;
 
 	cp = buf;
 	strcpy (cp, passwd->pw_name);
@@ -68,7 +63,7 @@ pw_pack(const struct passwd *passwd, char *buf)
 	cp += strlen (cp) + 1;
 
 	strcpy (cp, passwd->pw_shell);
-		cp += strlen (cp) + 1;
+	cp += strlen (cp) + 1;
 
 	return cp - buf;
 }
@@ -77,12 +72,11 @@ pw_pack(const struct passwd *passwd, char *buf)
  * pw_unpack - convert a packed (struct pwd) record to a (struct pwd)
  */
 
-int
-pw_unpack(char *buf, int len, struct passwd *passwd)
+int pw_unpack (char *buf, int len, struct passwd *passwd)
 {
-	char	*org = buf;
+	char *org = buf;
 
-	memzero(passwd, sizeof *passwd);
+	memzero (passwd, sizeof *passwd);
 
 	passwd->pw_name = buf;
 	buf += strlen (buf) + 1;

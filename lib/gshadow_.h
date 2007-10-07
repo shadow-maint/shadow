@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	$Id: gshadow_.h,v 1.2 1997/05/01 23:14:41 marekm Exp $
+ *	$Id: gshadow_.h,v 1.3 2005/03/31 05:14:49 kloczek Exp $
  */
 
 #ifndef	_H_GSHADOW
@@ -36,36 +36,36 @@
  * Shadow group security file structure
  */
 
-struct	sgrp {
-	char	*sg_name;	/* group name */
-	char	*sg_passwd;	/* group password */
-	char	**sg_adm;	/* group administator list */
-	char	**sg_mem;	/* group membership list */
+struct sgrp {
+	char *sg_name;		/* group name */
+	char *sg_passwd;	/* group password */
+	char **sg_adm;		/* group administator list */
+	char **sg_mem;		/* group membership list */
 };
 
 /*
  * Shadow group security file functions.
  */
 
-#include <stdio.h>  /* for FILE */
+#include <stdio.h>		/* for FILE */
 
 #if __STDC__
-struct	sgrp	*getsgent (void);
-struct	sgrp	*getsgnam (const char *);
-struct	sgrp	*sgetsgent (const char *);
-struct	sgrp	*fgetsgent (FILE *);
-void	setsgent (void);
-void	endsgent (void);
-int	putsgent (const struct sgrp *, FILE *);
+struct sgrp *getsgent (void);
+struct sgrp *getsgnam (const char *);
+struct sgrp *sgetsgent (const char *);
+struct sgrp *fgetsgent (FILE *);
+void setsgent (void);
+void endsgent (void);
+int putsgent (const struct sgrp *, FILE *);
 #else
-struct	sgrp	*getsgent ();
-struct	sgrp	*getsgnam ();
-struct	sgrp	*sgetsgent ();
-struct	sgrp	*fgetsgent ();
-void	setsgent ();
-void	endsgent ();
-int	putsgent ();
+struct sgrp *getsgent ();
+struct sgrp *getsgnam ();
+struct sgrp *sgetsgent ();
+struct sgrp *fgetsgent ();
+void setsgent ();
+void endsgent ();
+int putsgent ();
 #endif
 
 #define	GSHADOW	"/etc/gshadow"
-#endif /* ifndef _H_GSHADOW */
+#endif				/* ifndef _H_GSHADOW */

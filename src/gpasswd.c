@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.22 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: gpasswd.c,v 1.24 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -55,13 +55,6 @@ static int
 
 #ifndef	RETRIES
 #define	RETRIES	3
-#endif
-
-#ifdef	NDBM
-#ifdef	SHADOWGRP
-extern int sg_dbm_mode;
-#endif
-extern int gr_dbm_mode;
 #endif
 
 /* local function prototypes */
@@ -205,13 +198,6 @@ int main (int argc, char **argv)
 	 */
 
 	amroot = getuid () == 0;
-#ifdef	NDBM
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif
-	gr_dbm_mode = O_RDWR;
-#endif
-
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("gpasswd");
@@ -437,8 +423,7 @@ int main (int argc, char **argv)
 	if (dflg) {
 		int removed = 0;
 
-		printf (_("Removing user %s from group %s\n"), user,
-			group);
+		printf (_("Removing user %s from group %s\n"), user, group);
 
 		if (is_on_list (grent.gr_mem, user)) {
 			removed = 1;
@@ -482,8 +467,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (Mflg) {
-		SYSLOG ((LOG_INFO, "set members of %s to %s", group,
-			 members));
+		SYSLOG ((LOG_INFO, "set members of %s to %s", group, members));
 #ifdef SHADOWGRP
 		sgent.sg_mem = comma_to_list (members);
 #endif
@@ -605,8 +589,7 @@ int main (int argc, char **argv)
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_update (&sgent)) {
-		fprintf (stderr, _("%s: can't update shadow entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
 		exit (1);
 	}
@@ -618,8 +601,7 @@ int main (int argc, char **argv)
 	}
 #ifdef	SHADOWGRP
 	if (is_shadowgrp && !sgr_close ()) {
-		fprintf (stderr, _("%s: can't re-write shadow file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
 		exit (1);
 	}
@@ -630,24 +612,6 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
 		exit (1);
 	}
-#ifdef	NDBM
-	if (gr_dbm_present () && !gr_dbm_update (&grent)) {
-		fprintf (stderr, _("%s: can't update DBM files\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot update /etc/group DBM files"));
-		exit (1);
-	}
-	endgrent ();
-#ifdef	SHADOWGRP
-	if (is_shadowgrp && sg_dbm_present () && !sg_dbm_update (&sgent)) {
-		fprintf (stderr, _("%s: can't update DBM shadow files\n"),
-			 Prog);
-		SYSLOG ((LOG_WARN,
-			 "cannot update /etc/gshadow DBM files"));
-		exit (1);
-	}
-	endsgent ();
-#endif
-#endif
 	exit (0);
 	/* NOT REACHED */
 }

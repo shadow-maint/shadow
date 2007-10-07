@@ -1,5 +1,4 @@
-.\" $Id: login.access.5,v 1.2 2001/01/25 10:43:54 kloczek Exp $
-.\" {PTM/WK/1999-09-17}
+.\" $Id: login.access.5,v 1.3 2005/04/05 18:47:51 kloczek Exp $
 .TH LOGIN.ACCESS 5
 .\" .Dt SKEY.ACCESS 5
 .\" .Os FreeBSD 1.2
@@ -14,7 +13,7 @@ dla których logowanie bêdzie albo przyjête albo odrzucone.
 Gdy kto¶ siê loguje, plik
 .I login.access
 przeszukiwany jest do znalezienia pierwszej pozycji pasuj±cej do danej
-kombinacji (u¿ytkownik, host), lub, w przypadku logowañ nie-sieciowych
+kombinacji (u¿ytkownik, host), lub, w przypadku logowañ nie\-sieciowych
 kombinacji (u¿ytkownik, tty). Pole zezwolenia w tej tablicy pozycji okre¶la
 czy logowanie bêdzie przyjête czy odrzucone.
 .PP
@@ -23,16 +22,16 @@ znakiem dwukropka, pola:
 .sp 1
 .IR 	zezwolenie : u¿ytkownicy : pochodzenie
 .sp 1
-Pierwsze pole powinno zawieraæ znak "\fB+\fR" (dostêp zapewniony) lub "\fB-\fR"
+Pierwsze pole powinno zawieraæ znak "\fB+\fR" (dostêp zapewniony) lub "\fB\-\fR"
 (zakaz dostêpu). Drugie z pól powinno zawieraæ listê jednego lub wiêcej nazw
 u¿ytkowników, grup lub s³owo
 .B ALL
 (zawsze pasuje do wszystkich). Trzecie pole powinno byæ list± jednej lub wiêcej
-nazw tty (dla logowañ nie-sieciowych), nazw hostów, domen (rozpoczynaj±cych siê
+nazw tty (dla logowañ nie\-sieciowych), nazw hostów, domen (rozpoczynaj±cych siê
 od kropki), adresów hostów, internetowych numerów sieci (koñcz±cych siê
 kropk±), s³owem
 .B ALL
-(wszystkie - zawsze pasuje) lub
+(wszystkie \- zawsze pasuje) lub
 .B LOCAL
 (dopasowuje dowolny ³añcuch nie zawieraj±cy kropki).
 Je¿eli uruchomisz NIS mo¿esz u¿yæ @nazwagrupysieciowej we wzorcu hosta

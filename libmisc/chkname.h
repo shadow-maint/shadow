@@ -1,4 +1,4 @@
-/* $Id: chkname.h,v 1.2 2000/08/26 18:27:17 marekm Exp $ */
+/* $Id: chkname.h,v 1.3 2005/03/31 05:14:50 kloczek Exp $ */
 #ifndef _CHKNAME_H_
 #define _CHKNAME_H_
 
@@ -9,7 +9,7 @@
 
 #include "defines.h"
 
-extern int check_user_name(const char *);
-extern int check_group_name(const char *name);
+extern int check_user_name (const char *);
+extern int check_group_name (const char *name);
 
 #endif

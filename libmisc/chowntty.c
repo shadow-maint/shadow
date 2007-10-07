@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: chowntty.c,v 1.10 2003/04/22 10:59:21 kloczek Exp $")
+RCSID ("$Id: chowntty.c,v 1.11 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -103,8 +103,7 @@ void chown_tty (const char *tty, const struct passwd *info)
 	    chmod (tty, getdef_num ("TTYPERM", 0600))) {
 		int err = errno;
 
-		snprintf (buf, sizeof buf, _("Unable to change tty %s"),
-			  tty);
+		snprintf (buf, sizeof buf, _("Unable to change tty %s"), tty);
 		perror (buf);
 		SYSLOG ((LOG_WARN,
 			 "unable to change tty `%s' for user `%s'\n", tty,

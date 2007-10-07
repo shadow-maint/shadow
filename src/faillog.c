@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.17 2005/01/02 06:36:48 kloczek Exp $")
+RCSID (PKG_VER "$Id: faillog.c,v 1.22 2005/04/25 10:25:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -62,8 +62,9 @@ static void usage (void)
 			   "  -a, --all			display faillog records for all users\n"
 			   "  -h, --help			display this help message and exit\n"
 			   "  -l, --lock-time SEC		after failed login lock accout to SEC seconds\n"
-			   "  -m, --maximum MAX		set maiximum failed login counters to MAX\n"
+			   "  -m, --maximum MAX		set maximum failed login counters to MAX\n"
 			   "  -r, --reset			reset the counters of login failures\n"
+			   "  -t, --time DAYS		display faillog records more recent than DAYS\n"
 			   "  -u, --user LOGIN		display faillog record or maintains failure counters\n"
 			   "				and limits (if used with -r, -m or -l options) only\n"
 			   "				for user with LOGIN\n"));
@@ -83,24 +84,21 @@ static void print_one (const struct faillog *fl, uid_t uid)
 #endif
 
 	if (!once) {
-		printf (_("Username   Failures  Maximum  Latest\n"));
+		printf (_("Login       Failures Maximum Latest                   On\n"));
 		once++;
 	}
 	pwent = getpwuid (uid);
 	time (&now);
 	tm = localtime (&fl->fail_time);
 #ifdef HAVE_STRFTIME
-	strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
+	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
 	cp = ptime;
-#else
-	cp = asctime (tm);
-	cp[24] = '\0';
 #endif
 	if (pwent) {
-		printf ("%-12s   %4d     %4d",
+		printf ("%-9s   %5d    %5d   ",
 			pwent->pw_name, fl->fail_cnt, fl->fail_max);
 		if (fl->fail_time) {
-			printf (_("  %s on %s"), cp, fl->fail_line);
+			printf ("%s  %s", cp, fl->fail_line);
 			if (fl->fail_locktime) {
 				if (fl->fail_time + fl->fail_locktime > now
 				    && fl->fail_cnt)
@@ -180,8 +178,7 @@ static void print (void)
 			return;
 
 		fseeko (fail, (off_t) user * sizeof faillog, SEEK_SET);
-		if (fread ((char *) &faillog, sizeof faillog, 1, fail) ==
-		    1)
+		if (fread ((char *) &faillog, sizeof faillog, 1, fail) == 1)
 			print_one (&faillog, user);
 		else
 			perror (FAILLOG_FILE);
@@ -295,7 +292,6 @@ int main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	/* try to open for read/write, if that fails - read only */
-
 	fail = fopen (FAILLOG_FILE, "r+");
 	if (!fail)
 		fail = fopen (FAILLOG_FILE, "r");
@@ -308,23 +304,27 @@ int main (int argc, char **argv)
 		int option_index = 0;
 		int c;
 		static struct option long_options[] = {
+			{"all", no_argument, NULL, 'a'},
 			{"help", no_argument, NULL, 'h'},
 			{"lock-secs", no_argument, NULL, 'l'},
 			{"maximum", no_argument, NULL, 'm'},
 			{"reset", no_argument, NULL, 'r'},
+			{"time", no_argument, NULL, 't'},
 			{"user", no_argument, NULL, 'u'},
-			{"", no_argument, NULL, 't'},
 			{NULL, 0, NULL, '\0'}
 		};
 
 		while ((c =
 			getopt_long (argc, argv, "ahl:m:rt:u:",
 				     long_options, &option_index)) != -1) {
-		switch (c) {
+			switch (c) {
 			case 'a':
 				aflg++;
 				if (uflg)
 					usage ();
+				break;
+			case 'h':
+				usage ();
 				break;
 			case 'l':
 				set_locktime ((long) atoi (optarg));
@@ -334,13 +334,14 @@ int main (int argc, char **argv)
 				setmax (atoi (optarg));
 				anyflag++;
 				break;
-			case 'p':
-				print ();
-				anyflag++;
-				break;
 			case 'r':
 				reset ();
 				anyflag++;
+				break;
+			case 't':
+				days = atoi (optarg);
+				seconds = days * DAY;
+				tflg++;
 				break;
 			case 'u':
 				if (aflg)
@@ -348,17 +349,13 @@ int main (int argc, char **argv)
 
 				pwent = getpwnam (optarg);
 				if (!pwent) {
-					fprintf (stderr, _("Unknown User: %s\n"),
+					fprintf (stderr,
+						 _("Unknown User: %s\n"),
 						 optarg);
 					exit (1);
 				}
 				uflg++;
 				user = pwent->pw_uid;
-				break;
-			case 't':
-				days = atoi (optarg);
-				seconds = days * DAY;
-				tflg++;
 				break;
 			default:
 				usage ();

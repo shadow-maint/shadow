@@ -1,3 +1,4 @@
+.\" $Id: useradd.8,v 1.6 2005/04/05 19:08:57 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,7 +26,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: useradd.8,v 1.4 2004/11/04 03:06:33 kloczek Exp $
+.\"	$Id: useradd.8,v 1.6 2005/04/05 19:08:57 kloczek Exp $
 .\"
 .TH USERADD 8
 .SH 名 称
@@ -33,135 +34,122 @@ useradd \- 帐 号 建 立 或 更 新 新 使 用 者 的 资 讯
 .SH 语 法
 .TP 8
 .B useradd
-.\" .RB [ -A
-.\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ -c
+.RB [ \-c
 .IR comment ]
-.RB [ -d
+.RB [ \-d
 .IR home_dir ]
 .br
-.RB [ -e
+.RB [ \-e
 .IR expire_date ]
-.RB [ -f
+.RB [ \-f
 .IR inactive_time ]
 .br
-.RB [ -g
+.RB [ \-g
 .IR initial_group ]
-.RB [ -G
+.RB [ \-G
 .IR group [,...]]
 .br
-.RB [ -m " [" -k
-.IR skeleton_dir ] " |" " " -M ]
-.RB [ -s
+.RB [ \-m " [" \-k
+.IR skeleton_dir ] " |" " " \-M ]
+.RB [ \-s
 .IR shell ]
 .br
-.RB [ -u
+.RB [ \-u
 .IR uid " ["
-.BR -o ]]
-.RB [ -n ]
-.RB [ -r ]
+.BR \-o ]]
+.RB [ \-n ]
+.RB [ \-r ]
 .I login
 .TP 8
 .B useradd
-\fB-D\fR
-[\fB-g\fI default_group\fR]
-[\fB-b\fI default_home\fR]
+\fB\-D\fR [\fB\-g\fR \fIdefault_group\fR] [\fB\-b\fR \fIdefault_home\fR]
 .br
-[\fB-f\fI default_inactive\fR]
-[\fB-e\fI default_expire_date\fR]
+[\fB\-f\fR \fIdefault_inactive\fR] [\fB\-e\fR \fIdefault_expire_date\fR]
 .br
-[\fB-s\fI default_shell\fR]
+[\fB\-s\fR \fIdefault_shell\fR]
 .SH 描 述
 .SS 新 帐 号 建 立
-当 不 加 \fB-D\fR 参 数 , \fBuseradd\fR 指 令 使 用 命 令 列 来 指 定
+当 不 加 \fB\-D\fR 参 数 , \fBuseradd\fR 指 令 使 用 命 令 列 来 指 定
 新 帐 号 的 设 定 值 and 使 用 系 统 上 的 预 设 值 .
 新 使 用 者 帐 号 将 产 生 一 些 系 统 档 案 ， 使 用 者 目 录 建 立 ，
 拷 备 起 始 档 案 等
 ， 这 些 均 可 以 利 用 命 令列 选 项 指 定 。 此 版 本 为 Red Hat Linux 提 供
-， 可 帮 每 个 新 加 入 的 使 用 者 建 立 个 别 的 group , 毋 须 添 加 \fB-n\fR
+， 可 帮 每 个 新 加 入 的 使 用 者 建 立 个 别 的 group , 毋 须 添 加 \fB\-n\fR
 选 项 。  
 \fBuseradd\fR 可 使 用 的 选 项 为
-.\" .IP "\fB-A {\fImethod\fR|\fBDEFAULT\fR},..."
-.\" The value of the user's authentication method.
-.\" The authentication method is the name of a program which is responsible
-.\" for validating the user's identity.
-.\" The string \fBDEFAULT\fR may be used to change the user's authentication
-.\" method to the standard system password method.
-.\" This is a comma-separated list of program names.
-.\" It may include \fBDEFAULT\fR exactly once.
-.IP "\fB-c \fIcomment\fR"
+.IP "\fB\-c\fR \fIcomment\fR"
 新 帐 号 password 档 的 说 明 栏 。 
-.IP "\fB-d \fIhome_dir\fR"
+.IP "\fB\-d\fR \fIhome_dir\fR"
 新 帐 号 每 次 登 入 时 所 使 用 的 \fIhome_dir\fR 。 
 预 设 值 为 \fIdefault_home\fR 内 \fIlogin\fR 名 称 ， 并 当 成 登 入 时 目 录 
 名 称 。
-.IP "\fB-e \fIexpire_date\fR"
+.IP "\fB\-e\fR \fIexpire_date\fR"
 帐 号 终 止 日 期 。 日 期 的 指 定 格 式 为 \fIMM/DD/YY\fR 。
-.IP "\fB-f \fIinactive_days\fR"
+.IP "\fB\-f\fR \fIinactive_days\fR"
 帐 号 过 期 几 日 后 永 久 停 权 。
 当 值 为 0 时 帐 号 则 立 刻 被 停 权 。
-而 当 值 为 -1 时 则 关 闭 此 功 能 ， 预 设 值 为 -1
-.IP "\fB-g \fIinitial_group\fR"
+而 当 值 为 \-1 时 则 关 闭 此 功 能 ， 预 设 值 为 \-1
+.IP "\fB\-g\fR \fIinitial_group\fR"
 group 名 称 或 以 数 字 来 做 为 使 用 者 登 入 起 始 群 组 (group) 。
 群 组 名 须 为 现 有 存 在 的 名 称 。
 群 组 数 字 也 须 为 现 有 存 在 的 群 组 。
 预 设 的 群 组 数 字 为 1 。
-.IP "\fB-G \fIgroup,[...]\fR"
+.IP "\fB\-G\fR \fIgroup,[...]\fR"
 定 义 此 使 用 者 为 此 一 堆 groups 的 成 员 。
 每 个 群 组 使 用 "," 区 格 开 来 ， 不 可 以 夹 杂 空 白 字 元 。
- 群 组 名 同 \fB-g\fR 选 项 的 限 制 。
+ 群 组 名 同 \fB\-g\fR 选 项 的 限 制 。
 定 义 值 为 使用 者 的 起 始 群 组 。
-.IP \fB-m\fR
+.IP \fB\-m\fR
 使 用 者 目 录 如 不 存 在 则 自 动 建 立 。
-如 使 用 \fB-k\fR 选 项 \fIskeleton_dir\fR 内 的 档 案 将 复 制 至 使 用 者 目 
+如 使 用 \fB\-k\fR 选 项 \fIskeleton_dir\fR 内 的 档 案 将 复 制 至 使 用 者 目 
 录 下 。
 然 而 在 \fI/etc/skel\fR 目 录 下 的 档 案 也 会 复 制 过 去 取 代 。
 任 何 在 \fIskeleton_dir\fR or \fI/etc/skel\fR 的 目 录 也 相 同 会 在 使 用 者
 目 录 下 一 一 建 立 。
-The \fB-k\fR 同 \fB-m\fR
+The \fB\-k\fR 同 \fB\-m\fR
 不 建 立 目 录 以 及 不 复 制 任 何 档 案 为 预 设 值 。
-.IP \fB-M\fR
+.IP \fB\-M\fR
 不 建 立 使 用 者 目 录 ， 即 使 \fI/etc/login.defs\fR 系 统 档 设 定 要 建 
 立 使 用 者 目 录 。
-.IP \fB-n\fR
+.IP \fB\-n\fR
 预 设 值 使 用 者 群 组 与 使 用 者 名 称 会 相 同 。 此 选 项 将 取 消 此 预 
 设 值 。
-.IP \fB-r\fR
+.IP \fB\-r\fR
 此 参 数 是 用 来 建 立 系 统 帐 号 。 系 统 帐 号 的 UID 会 比 定 义 在 系
 统 档 上 \fI/etc/login.defs\fR.
 的 UID_MIN 来 的 小 。 注 意 \fBuseradd\fR 此 用 法 所 建 立 的 帐 号 不 会
 建 立 使 用 者 目 录
 ， 也 不 会 在 乎 纪 录 在 \fI/etc/login.defs\fR. 的 定 义 值 。
-如 果 你 想 要 有 使 用 者 目 录 须 额 外 指 定 \fB-m\fR 参 数 来 建 立 系 
+如 果 你 想 要 有 使 用 者 目 录 须 额 外 指 定 \fB\-m\fR 参 数 来 建 立 系 
 统 帐 号 。
 这 是 RED HAT 额 外 增 设 的 选 项 。
-.IP "\fB-s \fIshell\fR"
+.IP "\fB\-s \fIshell\fR"
 使 用 者 登 入 后 使 用 的 shell 名 称 。
 预 设 为 不 填 写 ， 这 样 系 统 会 帮 你 指 定 预 设 的 登 入 shell 。
-.IP "\fB-u \fIuid\fR"
-使 用 者 的 ID 值 。 必 须 为 唯 一 的 ID 值 ， 除 非 用 \fI-o\fR 选 项 。
+.IP "\fB\-u \fIuid\fR"
+使 用 者 的 ID 值 。 必 须 为 唯 一 的 ID 值 ， 除 非 用 \fI\-o\fR 选 项 。
 数 字 不 可 为 负 值。预 设 为 最 小 不 得 小 于 999 而 逐 次 增 加 。
 0~ 999 传 统 上 是 保 留 给 系 统 帐 号 使 用 。
 
 .SS 改 变 预 设 值
-当 \fB-D\fR 选 项 出 现 时 ， \fBuseradd\fR 秀 出 现 在 的 预 设 值 ， 或 是 藉 
+当 \fB\-D\fR 选 项 出 现 时 ， \fBuseradd\fR 秀 出 现 在 的 预 设 值 ， 或 是 藉 
 由
 命 令 列 的 方 式 更 新 预 设 值 。
 可 用 选 项 为 ∶
-.IP "\fB-b \fIdefault_home\fR"
+.IP "\fB\-b\fR \fIdefault_home\fR"
 定 义 使 用 者 所 属 目 录 的 前 一 个 目 录 。
 使 用 者 名 称 会 附 加 在 \fIdefault_home\fR 后 面
 用 来 建 立 新 使 用 者 的 目 录 。
-当 然 使 用 \fB-d\fI 后 则 此 选 项 无 效 。
-.IP "\fB-e \fIdefault_expire_date\fR"
+当 然 使 用 \fB\-d\fI 后 则 此 选 项 无 效 。
+.IP "\fB\-e\fR \fIdefault_expire_date\fR"
 使 用 者 帐 号 停 止 日 期 。
-.IP "\fB-f \fIdefault_inactive\fR"
+.IP "\fB\-f\fR \fIdefault_inactive\fR"
 帐 号 过 期 几 日 后 停 权 。
-.IP "\fB-g \fIdefault_group\fR"
+.IP "\fB\-g\fR \fIdefault_group\fR"
 新 帐 号 起 始 群 组 名 或 ID 。
 群 组 名 须 为 现 有 存 在 的 名 称 。
 群 组 I D 也 须 为 现 有 存 在 的 群 组 。
-.IP "\fB-s \fIdefault_shell\fR"
+.IP "\fB\-s\fR \fIdefault_shell\fR"
 使 用 者 登 入 后 使 用 的 shell 名 称 。
 往 后 新 加 入 的 帐 号 都 将 使 用 此 shell.
 .PP

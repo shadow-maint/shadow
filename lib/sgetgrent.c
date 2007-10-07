@@ -30,14 +30,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sgetgrent.c,v 1.4 1998/04/02 21:51:45 marekm Exp $")
-
+RCSID ("$Id: sgetgrent.c,v 1.5 2005/03/31 05:14:49 kloczek Exp $")
 #include <stdio.h>
 #include <grp.h>
 #include "defines.h"
-
 #define	NFIELDS	4
-
 /*
  * list - turn a comma-separated string into an array of (char *)'s
  *
@@ -51,12 +48,10 @@ RCSID("$Id: sgetgrent.c,v 1.4 1998/04/02 21:51:45 marekm Exp $")
  * FINALLY added dynamic allocation.  Still need to fix sgetsgent().
  *  --marekm
  */
-
-static char **
-list(char *s)
+static char **list (char *s)
 {
 	static char **members = 0;
-	static int size = 0;  /* max members + 1 */
+	static int size = 0;	/* max members + 1 */
 	int i;
 	char **rbuf;
 
@@ -65,17 +60,18 @@ list(char *s)
 		/* check if there is room for another pointer (to a group
 		   member name, or terminating NULL).  */
 		if (i >= size) {
-			size = i + 100;  /* at least: i + 1 */
+			size = i + 100;	/* at least: i + 1 */
 			if (members) {
-				rbuf = realloc(members, size * sizeof(char *));
+				rbuf =
+				    realloc (members, size * sizeof (char *));
 			} else {
 				/* for old (before ANSI C) implementations of
 				   realloc() that don't handle NULL properly */
-				rbuf = malloc(size * sizeof(char *));
+				rbuf = malloc (size * sizeof (char *));
 			}
 			if (!rbuf) {
 				if (members)
-					free(members);
+					free (members);
 				members = 0;
 				size = 0;
 				return (char **) 0;
@@ -95,46 +91,45 @@ list(char *s)
 }
 
 
-struct group *
-sgetgrent(const char *buf)
+struct group *sgetgrent (const char *buf)
 {
 	static char *grpbuf = 0;
 	static size_t size = 0;
 	static char *grpfields[NFIELDS];
 	static struct group grent;
-	int	i;
-	char	*cp;
+	int i;
+	char *cp;
 
-	if (strlen(buf) + 1 > size) {
+	if (strlen (buf) + 1 > size) {
 		/* no need to use realloc() here - just free it and
 		   allocate a larger block */
 		if (grpbuf)
-			free(grpbuf);
-		size = strlen(buf) + 1000;  /* at least: strlen(buf) + 1 */
-		grpbuf = malloc(size);
+			free (grpbuf);
+		size = strlen (buf) + 1000;	/* at least: strlen(buf) + 1 */
+		grpbuf = malloc (size);
 		if (!grpbuf) {
 			size = 0;
 			return 0;
 		}
 	}
-	strcpy(grpbuf, buf);
+	strcpy (grpbuf, buf);
 
-	if ((cp = strrchr(grpbuf, '\n')))
+	if ((cp = strrchr (grpbuf, '\n')))
 		*cp = '\0';
 
 	for (cp = grpbuf, i = 0; i < NFIELDS && cp; i++) {
 		grpfields[i] = cp;
-		if ((cp = strchr(cp, ':')))
+		if ((cp = strchr (cp, ':')))
 			*cp++ = 0;
 	}
-	if (i < (NFIELDS-1) || *grpfields[2] == '\0')
+	if (i < (NFIELDS - 1) || *grpfields[2] == '\0')
 		return 0;
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
-	grent.gr_gid = atoi(grpfields[2]);
-	grent.gr_mem = list(grpfields[3]);
+	grent.gr_gid = atoi (grpfields[2]);
+	grent.gr_mem = list (grpfields[3]);
 	if (!grent.gr_mem)
-		return (struct group *) 0;  /* out of memory */
+		return (struct group *) 0;	/* out of memory */
 
 	return &grent;
 }

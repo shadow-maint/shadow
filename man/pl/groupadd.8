@@ -1,5 +1,4 @@
-.\" $Id: groupadd.8,v 1.13 2004/11/04 03:06:32 kloczek Exp $
-.\" {PTM/WK/0.1/VIII-1999}
+.\" $Id: groupadd.8,v 1.14 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -28,9 +27,9 @@
 .\" SUCH DAMAGE.
 .TH GROUPADD 8
 .SH NAZWA
-groupadd - twórz now± grupê
+groupadd \- twórz now± grupê
 .SH SK£ADNIA
-\fBgroupadd\fR [\fB-g\fR \fIgid\fR [\fB-o\fR]] [\fB-f\fR] \fIgrupa\fR
+\fBgroupadd\fR [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-f\fR] \fIgrupa\fR
 .SH OPIS
 Polecenie \fBgroupadd\fR tworzy nowe konto grupy pos³uguj±c siê
 warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi warto¶ciami z systemu.
@@ -38,14 +37,14 @@ W razie potrzeby zostanie wprowadzona do systemu nowa grupa.
 .SH OPCJE
 Polecenie \fBgroupadd\fR posiada nastêpuj±ce opcje:
 .TP
-.BI -f
+.BI \-f
 Ta opcja powoduje zakoñczenie programu ze statusem oznaczaj±cym sukces je¶li
-podana groupa ju¿ istnieje. Z opcj± \fB-g\fR, je¶li podany gid ju¿ istnieje,
-wybierany jest inny (unikalny) gid (czyli \fB-g\fR jest wy³±czane).
+podana groupa ju¿ istnieje. Z opcj± \fB\-g\fR, je¶li podany gid ju¿ istnieje,
+wybierany jest inny (unikalny) gid (czyli \fB\-g\fR jest wy³±czane).
 .TP
-.BI -g " gid"
+.BI \-g " gid"
 Numeryczna warto¶æ identyfikatora grupy. Warto¶æ ta musi byæ niepowtarzalna,
-chyba ¿e u¿yto opcji \fB-o\fR. Warto¶æ ID grupy nie mo¿e byæ ujemna. Domy¶lnie
+chyba ¿e u¿yto opcji \fB\-o\fR. Warto¶æ ID grupy nie mo¿e byæ ujemna. Domy¶lnie
 u¿ywana jest najmniejsza warto¶æ identyfikatora wiêksza ni¿ 999 a wiêksza ni¿
 jakiejkolwiek innej grupy.
 Warto¶ci miêdzy 0 a 999 s± zwykle zarezerwowane dla kont systemowych.
@@ -63,7 +62,7 @@ Polecenie \fBgroupadd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zako
 .br
 \fB3\fR	\- niew³a¶ciwe parametry opcji
 .br
-\fB4\fR	\- uid jest ju¿ u¿ywany (i nie u¿yto opcji -o)
+\fB4\fR	\- uid jest ju¿ u¿ywany (i nie u¿yto opcji \-o)
 .br
 \fB9\fR	\- nazwa groupy nie jest unikalna
 .br

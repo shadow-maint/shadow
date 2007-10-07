@@ -29,14 +29,12 @@
 
 #include <config.h>
 
-#ifdef	SHADOWGRP	/*{*/
+#ifdef	SHADOWGRP		/*{ */
 
 #include "rcsid.h"
-RCSID("$Id: gspack.c,v 1.3 1997/12/07 23:26:53 marekm Exp $")
-
+RCSID ("$Id: gspack.c,v 1.4 2005/03/31 05:14:49 kloczek Exp $")
 #include <stdio.h>
 #include "defines.h"
-
 /*
  * sgr_pack - convert a shadow group structure to a packed
  *	      shadow group record
@@ -45,12 +43,10 @@ RCSID("$Id: gspack.c,v 1.3 1997/12/07 23:26:53 marekm Exp $")
  *	the components in a record.  this record will be
  *	unpacked later by sgr_unpack.
  */
-
-int
-sgr_pack(const struct sgrp *sgrp, char *buf)
+int sgr_pack (const struct sgrp *sgrp, char *buf)
 {
-	char	*cp;
-	int	i;
+	char *cp;
+	int i;
 
 	/*
 	 * The name and password are both easy - append each string
@@ -74,13 +70,13 @@ sgr_pack(const struct sgrp *sgrp, char *buf)
 	 * find the start of the members.
 	 */
 
-	for (i = 0;sgrp->sg_adm[i];i++) {
+	for (i = 0; sgrp->sg_adm[i]; i++) {
 		strcpy (cp, sgrp->sg_adm[i]);
 		cp += strlen (cp) + 1;
 	}
 	*cp++ = '\0';
 
-	for (i = 0;sgrp->sg_mem[i];i++) {
+	for (i = 0; sgrp->sg_mem[i]; i++) {
 		strcpy (cp, sgrp->sg_mem[i]);
 		cp += strlen (cp) + 1;
 	}
@@ -97,11 +93,10 @@ sgr_pack(const struct sgrp *sgrp, char *buf)
  *	into the normal shadow group structure format.
  */
 
-int
-sgr_unpack(char *buf, int len, struct sgrp *sgrp)
+int sgr_unpack (char *buf, int len, struct sgrp *sgrp)
 {
-	char	*org = buf;
-	int	i;
+	char *org = buf;
+	int i;
 
 	/*
 	 * The name and password are both easy - they are the first
@@ -125,7 +120,7 @@ sgr_unpack(char *buf, int len, struct sgrp *sgrp)
 	 * looking for an initial character of '\0'.
 	 */
 
-	for (i = 0;*buf && i < 1024;i++) {
+	for (i = 0; *buf && i < 1024; i++) {
 		sgrp->sg_adm[i] = buf;
 		buf += strlen (buf) + 1;
 
@@ -133,10 +128,10 @@ sgr_unpack(char *buf, int len, struct sgrp *sgrp)
 			return -1;
 	}
 	sgrp->sg_adm[i] = (char *) 0;
-	if (! *buf)
+	if (!*buf)
 		buf++;
 
-	for (i = 0;*buf && i < 1024;i++) {
+	for (i = 0; *buf && i < 1024; i++) {
 		sgrp->sg_mem[i] = buf;
 		buf += strlen (buf) + 1;
 
@@ -147,4 +142,4 @@ sgr_unpack(char *buf, int len, struct sgrp *sgrp)
 
 	return 0;
 }
-#endif /*}*/
+#endif				/*} */

@@ -10,7 +10,7 @@
 #include <errno.h>
 
 #include "rcsid.h"
-RCSID ("$Id: addgrps.c,v 1.6 2003/04/22 10:59:21 kloczek Exp $")
+RCSID ("$Id: addgrps.c,v 1.7 2005/03/31 05:14:50 kloczek Exp $")
 #define SEP ",:"
 /*
  * Add groups with names from LIST (separated by commas or colons)
@@ -58,8 +58,7 @@ int add_groups (const char *list)
 			continue;
 		}
 
-		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid;
-		     i++);
+		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid; i++);
 
 		if (i < ngroups)
 			continue;
@@ -68,9 +67,7 @@ int add_groups (const char *list)
 			fprintf (stderr, _("Warning: too many groups\n"));
 			break;
 		}
-		tmp =
-		    realloc (grouplist,
-			     (ngroups + 1) * sizeof (GETGROUPS_T));
+		tmp = realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));
 		if (!tmp) {
 			free (grouplist);
 			return -1;

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: mkpasswd.c,v 1.11 2005/01/17 23:12:05 kloczek Exp $")
+RCSID (PKG_VER "$Id: mkpasswd.c,v 1.12 2005/03/31 05:14:54 kloczek Exp $")
 #include <sys/stat.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -323,7 +323,7 @@ int main (int argc, char **argv)
 #ifdef	SHADOWPWD
 			if (sflg && pflg)
 				printf (_
-					("adding record for name %s\n"), 
+					("adding record for name %s\n"),
 					shadow->sp_namp);
 #endif
 			if (!sflg && gflg)
@@ -373,8 +373,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (vflg)
-		printf (_("added %d entries, longest was %d\n"), cnt,
-			longest);
+		printf (_("added %d entries, longest was %d\n"), cnt, longest);
 
 	exit (errors);
  /*NOTREACHED*/}
@@ -387,8 +386,7 @@ static void usage (void)
 {
 #ifdef	SHADOWPWD
 #ifdef	SHADOWGRP
-	fprintf (stderr, _("Usage: %s [-vf] [-p|g|sp|sg] file\n"),
-		 Progname);
+	fprintf (stderr, _("Usage: %s [-vf] [-p|g|sp|sg] file\n"), Progname);
 #else				/* !SHADOWGRP */
 	fprintf (stderr, _("Usage: %s [-vf] [-p|g|sp] file\n"), Progname);
 #endif				/* SHADOWGRP */

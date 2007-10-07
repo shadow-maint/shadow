@@ -32,13 +32,12 @@
 #ifdef RLOGIN
 
 #include "rcsid.h"
-RCSID ("$Id: rlogin.c,v 1.7 2005/01/20 12:47:20 kloczek Exp $")
+RCSID ("$Id: rlogin.c,v 1.9 2005/03/31 05:14:50 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
-#include <unistd.h>
-
+#include <netdb.h>
 static struct {
 	int spd_name;
 	int spd_baud;

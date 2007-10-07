@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.26 2003/07/29 06:16:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.27 2005/03/31 05:14:54 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -153,8 +153,7 @@ int main (int argc, char **argv)
 	 *      sg [-] groupid [[-c command]
 	 */
 
-	if (argc > 0
-	    && (!strcmp (argv[0], "-") || !strcmp (argv[0], "-l"))) {
+	if (argc > 0 && (!strcmp (argv[0], "-") || !strcmp (argv[0], "-l"))) {
 		argc--;
 		argv++;
 		initflag = 1;
@@ -232,8 +231,7 @@ int main (int argc, char **argv)
 	/* don't use getgroups(0, 0) - it doesn't work on some systems */
 	i = 16;
 	for (;;) {
-		grouplist =
-		    (GETGROUPS_T *) xmalloc (i * sizeof (GETGROUPS_T));
+		grouplist = (GETGROUPS_T *) xmalloc (i * sizeof (GETGROUPS_T));
 		ngroups = getgroups (i, grouplist);
 		if (i > ngroups && !(ngroups == -1 && errno == EINVAL))
 			break;
@@ -578,7 +576,7 @@ int main (int argc, char **argv)
 
 	shell (prog, initflag ? (char *) 0 : cp);
 	/* NOTREACHED */
-failure:
+      failure:
 
 	/*
 	 * The previous code, when run as newgrp, re-exec'ed the shell in

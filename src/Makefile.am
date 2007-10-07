@@ -40,6 +40,10 @@ usbin_PROGRAMS = \
 	usermod \
 	vipw
 
+login_SOURCES = \
+	login.c \
+	login_nopam.c
+
 noinst_PROGRAMS = id sulogin
 
 # id and groups are from gnu, sulogin from sysvinit
@@ -65,6 +69,8 @@ su_LDADD       = $(LDADD) $(LIBPAM)
 useradd_LDADD  = $(LDADD) $(LIBPAM)
 userdel_LDADD  = $(LDADD) $(LIBPAM)
 usermod_LDADD  = $(LDADD) $(LIBPAM)
+
+AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
 install-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am

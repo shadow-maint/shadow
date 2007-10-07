@@ -1,7 +1,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: pwdcheck.c,v 1.4 2004/11/02 18:46:30 kloczek Exp $")
+RCSID ("$Id: pwdcheck.c,v 1.5 2005/03/31 05:14:50 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -13,8 +13,7 @@ RCSID ("$Id: pwdcheck.c,v 1.4 2004/11/02 18:46:30 kloczek Exp $")
 #include "pam_defs.h"
 #endif
 #define WRONGPWD2	"incorrect password for `%s'"
-void
-passwd_check (const char *user, const char *passwd, const char *progname)
+void passwd_check (const char *user, const char *passwd, const char *progname)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;

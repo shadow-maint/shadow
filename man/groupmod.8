@@ -1,4 +1,4 @@
-.\"$Id: groupmod.8,v 1.16 2004/12/12 20:58:26 kloczek Exp $
+.\"$Id: groupmod.8,v 1.20 2005/04/12 17:55:55 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,35 +29,35 @@
 .SH NAME
 groupmod \- modify a group
 .SH SYNOPSIS
-\fBgroupmod\fR [\fB-g\fR \fIGID\fR [\fB-o\fR]] [\fB-n\fR \fINEW_GROUP_NAME\fR]
-\fIGROUP\fR
+\fBgroupmod\fR [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-n\fR \fInew_group_name\fR]
+\fIgroup\fR
 .SH DESCRIPTION
 The \fBgroupmod\fR command modifies the system account files to reflect the
 changes that are specified on the command line.
 .SH OPTIONS
 The options which apply to the \fBgroupmod\fR command are:
-.IP "\fB-g\fR \fIGID\fR"
+.IP "\fB\-g\fR \fIgid\fR"
 The numerical value of the group's ID. This value must be unique, unless the
-\fB-o\fR option is used. The value must be non-negative. Values between 0
+\fB\-o\fR option is used. The value must be non\-negative. Values between 0
 and 999 are typically reserved for system groups. Any files which the old
 group ID is the file group ID must have the file group ID changed manually.
-.IP "\fB-n\fR \fINEW_GROUP_NAME\fR"
-The name of the group will be changed from \fIGROUP\fR to \fINEW_GROUP_NAME\fR.
+.IP "\fB\-n\fR \fInew_group_name\fR"
+The name of the group will be changed from \fIgroup\fR to \fInew_group_name\fR.
 .SH FILES
-\fI/etc/group\fR	\- group information
+\fI/etc/group\fR	\- group account information
 .br
 \fI/etc/gshadow\fR	\- secure group information
 .SH EXIT VALUES
 .TP 2
 The \fBgroupmod\fR command exits with the following values:
 .br
-\fB0\fR \- success
+\fB0\fR	\- success
 .br
 \fB2\fR	\- bad command syntax
 .br
 \fB3\fR	\- invalid argument to option
 .br
-\fB4\fR	\- gid already in use (and no -o)
+\fB4\fR	\- gid already in use (and no \-o)
 .br
 \fB6\fR	\- specified group doesn't exist
 .br

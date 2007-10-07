@@ -1,4 +1,4 @@
-.\"$Id: chfn.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\" $Id: chfn.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -37,10 +37,9 @@
 chfn \- ユーザの氏名や情報を変更する。
 .SH 書式
 .TP 5
-\fBchfn\fR
-[\fB-f \fIfull_name\fR] [\fB-r \fIroom_no\fR]
+\fBchfn\fR [\fB\-f\fR \fIfull_name\fR] [\fB\-r\fR \fIroom_no\fR]
 .br
-[\fB-w \fIwork_ph\fR] [\fB-h \fIhome_ph\fR] [\fB-o \fIother\fR]
+[\fB\-w\fR \fIwork_ph\fR] [\fB\-h\fR \fIhome_ph\fR] [\fB\-o\fR \fIother\fR]
 [\fIuser\fR]
 .SH 説明
 \fBchfn\fR は、ユーザのフルネーム・オフィスの部屋番号・内線番号・
@@ -48,7 +47,7 @@ chfn \- ユーザの氏名や情報を変更する。
 この情報は \fBfinger\fR(1) のようなプログラムによって表示される。
 一般ユーザは自分自身のアカウント情報のみを変更できる。
 スーパーユーザは全てのアカウントに対して情報を変更できる。
-また \fB-o\fR オプションを用いて
+また \fB\-o\fR オプションを用いて
 GECOS 欄の未定義部分を変更できるのもスーパーユーザだけである。
 .PP
 各フィールドに書く内容に関する制限は、

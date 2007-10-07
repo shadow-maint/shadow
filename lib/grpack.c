@@ -30,18 +30,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: grpack.c,v 1.3 1997/12/07 23:26:52 marekm Exp $")
-
+RCSID ("$Id: grpack.c,v 1.4 2005/03/31 05:14:49 kloczek Exp $")
 #include <stdio.h>
 #include <grp.h>
-
 #include "defines.h"
-
-int
-gr_pack(const struct group *group, char *buf)
+int gr_pack (const struct group *group, char *buf)
 {
-	char	*cp;
-	int	i;
+	char *cp;
+	int i;
 
 	cp = buf;
 	strcpy (cp, group->gr_name);
@@ -53,7 +49,7 @@ gr_pack(const struct group *group, char *buf)
 	memcpy (cp, (const char *) &group->gr_gid, sizeof group->gr_gid);
 	cp += sizeof group->gr_gid;
 
-	for (i = 0;group->gr_mem[i];i++) {
+	for (i = 0; group->gr_mem[i]; i++) {
 		strcpy (cp, group->gr_mem[i]);
 		cp += strlen (cp) + 1;
 	}
@@ -62,11 +58,10 @@ gr_pack(const struct group *group, char *buf)
 	return cp - buf;
 }
 
-int
-gr_unpack(char *buf, int len, struct group *group)
+int gr_unpack (char *buf, int len, struct group *group)
 {
-	char	*org = buf;
-	int	i;
+	char *org = buf;
+	int i;
 
 	group->gr_name = buf;
 	buf += strlen (buf) + 1;
@@ -83,7 +78,7 @@ gr_unpack(char *buf, int len, struct group *group)
 	if (buf - org > len)
 		return -1;
 
-	for (i = 0;*buf && i < 1024;i++) {
+	for (i = 0; *buf && i < 1024; i++) {
 		group->gr_mem[i] = buf;
 		buf += strlen (buf) + 1;
 

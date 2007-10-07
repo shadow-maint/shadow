@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.24 2005/01/17 19:03:34 kloczek Exp $ */
+/* $Id: defines.h,v 1.25 2005/03/31 05:14:49 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -20,25 +20,26 @@
 # define _(Text) gettext (Text)
 #else
 # undef bindtextdomain
-# define bindtextdomain(Domain, Directory) /* empty */
+# define bindtextdomain(Domain, Directory)	/* empty */
 # undef textdomain
-# define textdomain(Domain) /* empty */
+# define textdomain(Domain)	/* empty */
 # define _(Text) Text
 #endif
 
 #if STDC_HEADERS
 # include <stdlib.h>
 # include <string.h>
-#else  /* not STDC_HEADERS */
+#else				/* not STDC_HEADERS */
 # ifndef HAVE_STRCHR
 #  define strchr index
 #  define strrchr rindex
 # endif
-char *strchr(), *strrchr(), *strtok();
+char *strchr (), *strrchr (), *strtok ();
+
 # ifndef HAVE_MEMCPY
 #  define memcpy(d, s, n) bcopy((s), (d), (n))
 # endif
-#endif /* not STDC_HEADERS */
+#endif				/* not STDC_HEADERS */
 
 #if HAVE_ERRNO_H
 # include <errno.h>
@@ -63,32 +64,32 @@ char *strchr(), *strrchr(), *strtok();
 #if TIME_WITH_SYS_TIME
 # include <sys/time.h>
 # include <time.h>
-#else  /* not TIME_WITH_SYS_TIME */
+#else				/* not TIME_WITH_SYS_TIME */
 # if HAVE_SYS_TIME_H
 #  include <sys/time.h>
 # else
 #  include <time.h>
 # endif
-#endif /* not TIME_WITH_SYS_TIME */
+#endif				/* not TIME_WITH_SYS_TIME */
 
 #ifdef HAVE_MEMSET
 # define memzero(ptr, size) memset((void *)(ptr), 0, (size))
 #else
 # define memzero(ptr, size) bzero((char *)(ptr), (size))
 #endif
-#define strzero(s) memzero(s, strlen(s))  /* warning: evaluates twice */
+#define strzero(s) memzero(s, strlen(s))	/* warning: evaluates twice */
 
-#ifdef HAVE_DIRENT_H  /* DIR_SYSV */
+#ifdef HAVE_DIRENT_H		/* DIR_SYSV */
 # include <dirent.h>
 # define DIRECT dirent
 #else
-# ifdef HAVE_SYS_NDIR_H  /* DIR_XENIX */
+# ifdef HAVE_SYS_NDIR_H		/* DIR_XENIX */
 #  include <sys/ndir.h>
 # endif
-# ifdef HAVE_SYS_DIR_H  /* DIR_??? */
+# ifdef HAVE_SYS_DIR_H		/* DIR_??? */
 #  include <sys/dir.h>
 # endif
-# ifdef HAVE_NDIR_H  /* DIR_BSD */
+# ifdef HAVE_NDIR_H		/* DIR_BSD */
 #  include <ndir.h>
 # endif
 # define DIRECT direct
@@ -106,13 +107,13 @@ char *strchr(), *strrchr(), *strtok();
 #if defined(SHADOWGRP) && !defined(GSHADOW)
 #include "gshadow_.h"
 #endif
-#else  /* not HAVE_SHADOW_H */
+#else				/* not HAVE_SHADOW_H */
 #include "shadow_.h"
 #ifdef SHADOWGRP
 #include "gshadow_.h"
 #endif
-#endif  /* not HAVE_SHADOW_H */
-#endif  /* SHADOWPWD */
+#endif				/* not HAVE_SHADOW_H */
+#endif				/* SHADOWPWD */
 
 #include <limits.h>
 
@@ -162,17 +163,17 @@ char *strchr(), *strrchr(), *strtok();
 			free(saved_locale);				\
 		}							\
 	} while (0)
-#else  /* !ENABLE_NLS */
+#else				/* !ENABLE_NLS */
 #define SYSLOG(x) syslog x
-#endif /* !ENABLE_NLS */
+#endif				/* !ENABLE_NLS */
 
-#else  /* !USE_SYSLOG */
+#else				/* !USE_SYSLOG */
 
-#define SYSLOG(x)  /* empty */
-#define openlog(a,b,c)  /* empty */
-#define closelog()  /* empty */
+#define SYSLOG(x)		/* empty */
+#define openlog(a,b,c)		/* empty */
+#define closelog()		/* empty */
 
-#endif  /* !USE_SYSLOG */
+#endif				/* !USE_SYSLOG */
 
 /* The default syslog settings can now be changed here,
    in just one place.  */
@@ -231,7 +232,7 @@ char *strchr(), *strrchr(), *strtok();
 # define GTTY(fd, termio) tcgetattr(fd, termio)
 # define TERMIO struct termios
 # define USE_TERMIOS
-#else  /* assumed HAVE_TERMIO_H */
+#else				/* assumed HAVE_TERMIO_H */
 # include <sys/ioctl.h>
 # include <termio.h>
 # define STTY(fd, termio) ioctl(fd, TCSETA, termio)
@@ -275,7 +276,7 @@ char *strchr(), *strrchr(), *strtok();
 #if defined(AIX) || defined(__linux__)
 #define SETXXENT_TYPE void
 #define SETXXENT_RET(x) return
-#define SETXXENT_TEST(x) x; if (0) /* compiler should optimize this away */
+#define SETXXENT_TEST(x) x; if (0)	/* compiler should optimize this away */
 #else
 #define SETXXENT_TYPE int
 #define SETXXENT_RET(x) return(x)
@@ -311,11 +312,11 @@ char *strchr(), *strrchr(), *strtok();
 #define NULL ((void *) 0)
 #endif
 
-#ifdef sun  /* hacks for compiling on SunOS */
+#ifdef sun			/* hacks for compiling on SunOS */
 # ifndef SOLARIS
-extern int fputs();
-extern char *strdup();
-extern char *strerror();
+extern int fputs ();
+extern char *strdup ();
+extern char *strerror ();
 # endif
 #endif
 
@@ -332,4 +333,4 @@ extern char *strerror();
 #define SHADOW_PASSWD_STRING "x"
 #endif
 
-#endif  /* _DEFINES_H_ */
+#endif				/* _DEFINES_H_ */

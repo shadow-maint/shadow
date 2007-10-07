@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: hushed.c,v 1.5 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: hushed.c,v 1.6 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include "defines.h"
@@ -64,8 +64,7 @@ int hushed (const struct passwd *pw)
 	 */
 
 	if (hushfile[0] != '/') {
-		snprintf (buf, sizeof (buf), "%s/%s", pw->pw_dir,
-			  hushfile);
+		snprintf (buf, sizeof (buf), "%s/%s", pw->pw_dir, hushfile);
 		return (access (buf, F_OK) == 0);
 	}
 
@@ -80,8 +79,7 @@ int hushed (const struct passwd *pw)
 	for (found = 0; !found && fgets (buf, sizeof buf, fp);) {
 		buf[strlen (buf) - 1] = '\0';
 		found = !strcmp (buf,
-				 buf[0] ==
-				 '/' ? pw->pw_shell : pw->pw_name);
+				 buf[0] == '/' ? pw->pw_shell : pw->pw_name);
 	}
 	(void) fclose (fp);
 	return found;

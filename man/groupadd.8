@@ -1,4 +1,4 @@
-.\"$Id: groupadd.8,v 1.21 2004/11/04 03:06:31 kloczek Exp $
+.\"$Id: groupadd.8,v 1.24 2005/04/05 18:47:50 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,20 +30,20 @@
 groupadd \- Create a new group
 .SH SYNOPSIS
 .TP 6
-\fBgroupadd\fR [\fB-g\fI gid \fR[\fB-o\fR]] [\fB-f\fR] \fIgroup\fR
+\fBgroupadd\fR [\fB\-g\fR \fIgid \fR[\fB\-o\fR]] [\fB\-f\fR] \fIgroup\fR
 .SH DESCRIPTION
 The \fBgroupadd\fR command creates a new group account using the values
 specified on the command line and the default values from the system. The
 new group will be entered into the system files as needed.
 .SH OPTIONS
 The options which apply to the \fBgroupadd\fR command are:
-.IP "\fB-f\fR"
+.IP "\fB\-f\fR"
 This option causes to just exit with success status if the specified
-group already exists. With \fB-g\fR, if specified gid already exists,
-other (unique) gid is chosen (i.e. \fB-g\fR is turned off).
-.IP "\fB-g\fR \fIgid\fR"
+group already exists. With \fB\-g\fR, if specified gid already exists,
+other (unique) gid is chosen (i.e. \fB\-g\fR is turned off).
+.IP "\fB\-g\fR \fIgid\fR"
 The numerical value of the group's ID. This value must be unique, unless the
-\fB-o\fR option is used. The value must be non-negative. The default is to
+\fB\-o\fR option is used. The value must be non\-negative. The default is to
 use the smallest ID value greater than 999 and greater than every other
 group. Values between 0 and 999 are typically reserved for system accounts.
 .SH FILES
@@ -60,7 +60,7 @@ The \fBgroupadd\fR command exits with the following values:
 .br
 \fB3\fR	\- invalid argument to option
 .br
-\fB4\fR	\- gid not unique (when -o not used)
+\fB4\fR	\- gid not unique (when \-o not used)
 .br
 \fB9\fR	\- group name not unique
 .br

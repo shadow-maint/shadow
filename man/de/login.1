@@ -9,11 +9,11 @@
 .SH BEZEICHNUNG
 login \- startet eine Sitzung auf dem System
 .SH SYNTAX
-\fBlogin\fR [\fB-p\fR] [\fINutzername\fR] [\fIENV=VAR\fR ...]
+\fBlogin\fR [\fB\-p\fR] [\fINutzername\fR] [\fIENV=VAR\fR ...]
 .br
-\fBlogin\fR [\fB-p\fR] [\fB-h \fIHost\fR] [\fB-f \fINutzername\fR]
+\fBlogin\fR [\fB\-p\fR] [\fB\-h\fR \fIHost\fR] [\fB\-f\fR \fINutzername\fR]
 .br
-\fBlogin\fR [\fB-p\fR] \fB-r \fIHost\fR
+\fBlogin\fR [\fB\-p\fR] \fB\-r\fR \fIHost\fR
 .SH BESCHREIBUNG
 .B login
 wird verwendet, um eine neue Sitzung auf dem System zu starten.
@@ -27,22 +27,12 @@ Typischerweise wird
 .B login
 von der Shell als \fBexec login\fR ausgeführt, so daß der Nutzer die
 aktuelle Shell verlassen muß.
-Der Versuch, von einer Shell außer der Login-Shell \fBlogin\fR
+Der Versuch, von einer Shell außer der Login\-Shell \fBlogin\fR
 auszuführen, wird eine Fehlermeldung generieren.
-.PP
-Wenn das Programm vom Prompt \fIlogin:\fR ausgeführt wird,
-kann der Nutzer Umgebungsvariablen nach dem Nutzernamen eingeben.
-
-Diese Variablen werden in der Form \fBNAME=WERT\fR angegeben.
-Nicht alle Variablen können auf diese Art und Weise gesetzt werden,
-insbesondere \fBPATH\fR, \fBHOME\fR und \fBSHELL\fR stellen eine
-Ausnahme dar.
-Außerdem kann \fBIFS\fR dazugehören, wenn die Login-Shell des
-Nutzers \fB/bin/sh\fR ist.
 .PP
 Der Nutzer wird anschließend nach einem Kennwort gefragt, falls
 erforderlich. Dieses wird während der Eingabe nicht angezeigt.
-Es sind nur eine kleine Anzahl von Login-Fehlern möglich,
+Es sind nur eine kleine Anzahl von Login\-Fehlern möglich,
 falls \fBlogin\fR abbricht und die Kommunikation getrennt wird.
 .PP
 Falls die Kennwortalterung für ein Konto aktiviert wurde,
@@ -61,41 +51,41 @@ Die Mailnachricht ist entweder "\fBSie haben neue Mails.\fR",
 "\fBSie haben Mails.\fR", oder "\fBKeine Mails.\fR", je nach
 Zustandes der Mailbox des Nutzers.
 .PP
-Die Nutzer- und Gruppen-IDs werden gemäß den Werten in der Datei
+Die Nutzer\- und Gruppen\-IDs werden gemäß den Werten in der Datei
 \fI/etc/passwd\fR gesetzt.
 Die Werte für \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR
 und \fB$MAIL\fR werden ebenfalls entsprechend der Einträge in dem
 Kennworteintrag gesetzt.
 Werte für ulimit, umask und nice können ebenfalls gemäß Werten im
-GECOS-Feld eingestellt werden.
+GECOS\-Feld eingestellt werden.
 .PP
 Auf einigen Installationen wird die Umgebungsvariable \fB$TERM\fR
 entsprechend dem Typ des Ausgabeterminals gesetzt, so wie in
 \fI/etc/ttytype\fR angegeben.
 .PP
-Ein Initialisierungsskript für den Kommandozeilen-Interpreter
+Ein Initialisierungsskript für den Kommandozeilen\-Interpreter
 kann auch ausgeführt werden. Dazu sehe man in den entsprechenden
-Manual-Seiten nach.
+Manual\-Seiten nach.
 .PP
-Ein Subsystem-Login wird durch das Vorhandensein eines "*" als erstem
-Buchstaben der Login-Shell angezeigt. Das angegebene Heimatverzeichnis
+Ein Subsystem\-Login wird durch das Vorhandensein eines "*" als erstem
+Buchstaben der Login\-Shell angezeigt. Das angegebene Heimatverzeichnis
 wird als Wurzel des neuen Dateisystems verwendet werden, in das
 der Nutzer tatsächlich eingeloggt ist.
 .SH OPTIONEN
 .TP
-.B -f
+.B \-f
 Keine Authentifizierung durchführen, Nutzer ist bereits angemeldet.
 .TP
-.B -h
+.B \-h
 Name des entfernten Rechners für das Login.
 .TP
-.B -p
+.B \-p
 Behalte die Umgebungseinstellungen bei.
 .TP
-.B -r
-Führ das Autologin-Protokoll für rlogin aus.
+.B \-r
+Führ das Autologin\-Protokoll für rlogin aus.
 .PP
-Die Optionen \fB-r\fP, \fB-h\fP und \fB-f\fP werden nur genutzt,
+Die Optionen \fB\-r\fP, \fB\-h\fP und \fB\-f\fP werden nur genutzt,
 wenn \fBlogin\fP als root ausgeführt wird.
 .SH HINWEISE
 Diese Version von \fBlogin\fR hat viele Optionen für die Compilierung,
@@ -104,7 +94,7 @@ davon sind eventuell nur einige auf bestimmten Systemen in Gebrauch.
 Der Ort der Konfigurationsdateien kann entsprechend der Systemkonfiguration
 abweichen.
 .PP
-Es liegt NICHT in der Verantwortung von \fBlogin\fR, Nutzer von der utmp-Datei
+Es liegt NICHT in der Verantwortung von \fBlogin\fR, Nutzer von der utmp\-Datei
 zu entfernen.
 Sowohl
 .BR getty (8)
@@ -116,15 +106,15 @@ weiterhin in der Lage sein, eingeloggt zu erscheinen, obwohl er aus der
 Subsitzung ausgeloggt ist.
 .SH DATEIEN
 .br
-\fI/var/run/utmp\fR		\- Liste der aktuellen Login-Sitzungen
+\fI/var/run/utmp\fR		\- Liste der aktuellen Login\-Sitzungen
 .br
-\fI/var/log/wtmp\fR		\- Liste der vorherigen Login-Sitzungen
+\fI/var/log/wtmp\fR		\- Liste der vorherigen Login\-Sitzungen
 .br
 \fI/etc/passwd\fR		\- Informationen über Nutzerkonten
 .br
 \fI/etc/shadow\fR		\- Verschlüsselte Kennwörter und Alterungsinformationen
 .br
-\fI/etc/motd\fR			\- Systemnachricht-Datei
+\fI/etc/motd\fR			\- Systemnachricht\-Datei
 .br
 \fI/etc/nologin\fR		\- Verhindert, daß sich Nutzer außer dem Supernutzer einloggen
 .br
@@ -144,4 +134,3 @@ Subsitzung ausgeloggt ist.
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
 .br
 Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
-

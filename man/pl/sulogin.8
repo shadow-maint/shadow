@@ -1,5 +1,4 @@
-.\" $Id: sulogin.8,v 1.5 2003/04/26 13:24:15 kloczek Exp $
-.\" {PTM/WK/1999-09-14}
+.\" $Id: sulogin.8,v 1.7 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1989 - 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -28,9 +27,9 @@
 .\" SUCH DAMAGE.
 .TH SULOGIN 8
 .SH NAZWA
-sulogin - login w trybie jednou¿ytkownikowym
+sulogin \- login w trybie jednou¿ytkownikowym
 .SH SK£ADNIA
-\fBsulogin\fR [\fIurz±dzenie-tty\fR]
+\fBsulogin\fR [\fIurz±dzenie\-tty\fR]
 .SH OPIS
 .B sulogin
 wywo³ywane jest przez \fBinit\fR przed zezwoleniem u¿ytkownikowi
@@ -41,16 +40,16 @@ pozycjê dla logowania siê w trybie jednou¿ytkownikowym.
 .PP
 Wy¶wietlany jest symbol zachêty
 .IP "" .5i
-Type control-d to proceed with normal startup,
+Type control\-d to proceed with normal startup,
 .br
 (or give root password for system maintenance):
 .br
-Naci¶nij control-d by kontynuowaæ zwyk³y start,
+Naci¶nij control\-d by kontynuowaæ zwyk³y start,
 .br
 (lub podaj has³o u¿ytkownika root do konserwacji systemu):
 .PP
 Wej¶cie i wyj¶cie bêd± obs³ugiwane przy u¿yciu standardowych deskryptorów
-plików, chyba ¿e u¿yto opcjonalnego argumentu - nazwy urz±dzenia.
+plików, chyba ¿e u¿yto opcjonalnego argumentu \- nazwy urz±dzenia.
 .PP
 Je¶li u¿ytkownik wprowadzi poprawne has³o superu¿ytkownika root,
 to rozpoczynana jest sesja pracy na koncie root.
@@ -79,9 +78,9 @@ Jednak¿e w efekcie mog± nie byæ do³±czone czy zainicjowane ró¿ne
 urz±dzenia, za¶ wiele poleceñ u¿ytkownika mo¿e byæ niedostêpnych lub
 nie funkcjonowaæ.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+.IR /etc/passwd " \- informacja o kontach u¿ytkowników"
 .br
-.IR /etc/shadow " - zakodowane has³a i informacja o ich wa¿no¶ci"
+.IR /etc/shadow " \- zakodowane has³a i informacja o ich wa¿no¶ci"
 .SH ZOBACZ TAK¯E
 .BR login (1),
 .BR sh (1),

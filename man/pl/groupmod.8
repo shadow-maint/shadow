@@ -1,5 +1,4 @@
-.\" $Id: groupmod.8,v 1.11 2004/12/12 20:58:26 kloczek Exp $
-.\" {PTM/WK/0.1/VIII-1999}
+.\" $Id: groupmod.8,v 1.13 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -28,27 +27,27 @@
 .\" SUCH DAMAGE.
 .TH GROUPMOD 8
 .SH NAZWA
-groupmod - zmieñ dane grupy
+groupmod \- zmieñ dane grupy
 .SH SK£ADNIA
-\fBgroupmod\fR [\fB-g\fR \fIGID\fR [\fB-o\fR]] [\fB-n\fR \fINOWA_NAZWA_GRUPY\fR]
+\fBgroupmod\fR [\fB\-g\fR \fIGID\fR [\fB\-o\fR]] [\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR]
 \fIGRUPA\fR
 .SH OPIS
 Polecenie \fBgroupmod\fR modyfikuje systemowe pliki kont tak, by
 odzwierciedliæ w nich zmiany grup podane w wierszu poleceñ.
 .SH OPCJE
 Polecenie \fBgroupmod\fR posiada nastêpuj±ce opcje:
-.IP "\fB-g\fR \fIGID\fR"
+.IP "\fB\-g\fR \fIGID\fR"
 Numeryczna warto¶æ identyfikatora grupy (group ID). Warto¶æ ta musi byæ
-niepowtarzalna, chyba ¿e u¿yto opcji \fB-o\fR. Nie mo¿e byæ ujemna.
+niepowtarzalna, chyba ¿e u¿yto opcji \fB\-o\fR. Nie mo¿e byæ ujemna.
 Warto¶ci pomiêdzy 0 a 999 s± zwykle zarezerwowane dla grup systemowych. 
 Pliki, dla których stary identyfikator jest identyfikatorem
 grupy pliku, wymagaj± rêcznej zmiany ID grupy.
-.IP "\fB-n\fR \fINOWA_NAZWA_GRUPY\fR"
+.IP "\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR"
 Nazwa grupy zostanie zmieniona z \fIGRUPA\fR na \fINOWA_NAZWA_GRUPY\fR.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o grupach
 .br
-\fI/etc/gshadow\fI	\- bezpieczna informacja o grupach
+\fI/etc/gshadow\fR	\- bezpieczna informacja o grupach
 .SH KOD ZAKOÑCZENIA
 .TP 2
 Polecenie \fBgroupmod\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
@@ -59,7 +58,7 @@ Polecenie \fBgroupmod\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zako
 .br
 \fB3\fR	\- niew³a¶ciwe parametry opcji
 .br
-\fB4\fR	\- gid jest ju¿ u¿ywany (i nie u¿yto opcji -o)
+\fB4\fR	\- gid jest ju¿ u¿ywany (i nie u¿yto opcji \-o)
 .br
 \fB6\fR	\- podana grupa nie istnieje
 .br

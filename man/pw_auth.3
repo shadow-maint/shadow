@@ -1,4 +1,4 @@
-.\"$Id: pw_auth.3,v 1.9 2004/12/11 20:05:01 kloczek Exp $
+.\"$Id: pw_auth.3,v 1.10 2005/04/02 16:10:24 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -46,7 +46,7 @@ invokes the administrator defined functions for a given user.
 \fIcommand\fR is the name of the authentication program.
 It is retrieved from the user's password file information.
 The string contains one or more executable file names, delimited by
-semi-colons.
+semi\-colons.
 Each program will be executed in the order given.
 The command line arguments are given for each of the reasons listed
 below.
@@ -54,7 +54,7 @@ below.
 \fIuser\fR is the name of the user to be authenticated, as given
 in the \fI/etc/passwd\fR file.
 User entries are indexed by username.
-This allows non-unique user IDs to be present and for each different
+This allows non\-unique user IDs to be present and for each different
 username associated with that user ID to have a different
 authentication program and information.
 .PP
@@ -68,44 +68,44 @@ making the authentication request.
 .IP \fBPW_SU\fR 1i
 Perform authentication for the current real user ID attempting to
 switch real user ID to the named user.
-The authentication program will be invoked with a \fB-s\fR option, followed
+The authentication program will be invoked with a \fB\-s\fR option, followed
 by the username.
 .IP \fBPW_LOGIN\fR 1i
 Perform authentication for the named user creating a new login session.
-The authentication program will be invoked with a \fB-l\fR option, followed
+The authentication program will be invoked with a \fB\-l\fR option, followed
 by the username.
 .IP \fBPW_ADD\fR 1i
 Create a new entry for the named user.
 This allows an authentication program to initialize storage for a new
 user.
-The authentication program will be invoked with a \fB-a\fR option, followed
+The authentication program will be invoked with a \fB\-a\fR option, followed
 by the username.
 .IP \fBPW_CHANGE\fR 1i
 Alter an existing entry for the named user.
 This allows an authentication program to alter the authentication
 information for an existing user.
-The authentication program will be invoked with a \fB-c\fR option, followed
+The authentication program will be invoked with a \fB\-c\fR option, followed
 by the username.
 .IP \fBPW_DELETE\fR 1i
 Delete authentication information for the named user.
 This allows an authentication program to reclaim storage for a user which
 is no longer authenticated using the authentication program.
-The authentication program will be invoked with a \fB-d\fR option, followed
+The authentication program will be invoked with a \fB\-d\fR option, followed
 by the username.
 .IP \fBPW_TELNET\fR 1i
 Authenticate a user who is connecting to the system using the 
 \fBtelnet\fR command.
-The authentication program will be invoked with a \fB-t\fR option, followed
+The authentication program will be invoked with a \fB\-t\fR option, followed
 by the username.
 .IP \fBPW_RLOGIN\fR 1i
 Authenticate a user who is connecting to the system using the \fBrlogin\fR
 command.
-The authentication program will be invoked with a \fB-r\fR option, followed
+The authentication program will be invoked with a \fB\-r\fR option, followed
 by the username.
 .IP \fBPW_FTP\fR 1i
 Authenticate a user who is connecting to the system using the \fBftp\fR
 command.
-The authentication program will be invoked with a \fB-f\fR option, followed
+The authentication program will be invoked with a \fB\-f\fR option, followed
 by the username.
 The standard file descriptors are not available for communicating with the
 user.
@@ -117,7 +117,7 @@ authentication program using file descriptor 0.
 .IP \fBPW_REXEC\fR 1i
 Authenticate a user who is connecting to the system using the \fIrexec\fR
 command.
-The authentication program will be invoked with a \fB-x\fR option, followed
+The authentication program will be invoked with a \fB\-x\fR option, followed
 by the username.
 The standard file descriptors are not available for communicating with the
 remote user.
@@ -145,7 +145,7 @@ It only indicates if the user should be allowed to create the session.
 The network options are untested at this time.
 .SH DIAGNOSTICS
 The \fBpw_auth\fR function returns 0 if the authentication program exited
-with a 0 exit code, and a non-zero value otherwise.
+with a 0 exit code, and a non\-zero value otherwise.
 .SH SEE ALSO
 .BR login (1),
 .BR passwd (1),

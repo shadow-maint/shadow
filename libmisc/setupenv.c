@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: setupenv.c,v 1.13 2003/05/05 21:44:15 kloczek Exp $")
+RCSID ("$Id: setupenv.c,v 1.14 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -44,8 +44,7 @@ RCSID ("$Id: setupenv.c,v 1.13 2003/05/05 21:44:15 kloczek Exp $")
 #include <pwd.h>
 #include "getdef.h"
 static void
-addenv_path (const char *varname, const char *dirname,
-	     const char *filename)
+addenv_path (const char *varname, const char *dirname, const char *filename)
 {
 	char *buf;
 

@@ -1,4 +1,4 @@
-.\"$Id: vipw.8,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\" $Id: vipw.8,v 1.5 2005/04/05 19:08:55 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 2001 Maki KURODA
 .\"     all right reserved,
@@ -10,15 +10,15 @@
 .SH 名前
 vipw, vigr \- password, group とそれぞれの shadow ファイルを編集する
 .SH 書式
-\fBvipw\fR [\fB-s\fR]
+\fBvipw\fR [\fB\-s\fR]
 .br
-\fBvigr\fR [\fB-s\fR]
+\fBvigr\fR [\fB\-s\fR]
 .SH 説明
 .BR vipw " と " vigr
 は、それぞれ
 \fI/etc/passwd\fR " と " \fI/etc/group\fR
 を編集する。
-.B -s
+.B \-s
 フラグが指定されると、これらのファイルの shadow 化版である
 \fI/etc/shadow\fR と \fI/etc/gshadow\fR
 をそれぞれ編集する。

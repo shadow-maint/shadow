@@ -3,7 +3,7 @@
 .\"
 .\" Translated 17 sep. 1998 by Juan José López Mellado(laveneno@hotmail.com) 
 .\"
-.TH LOGIN 1 "4 Noviembre 1996" "Util-linux 1.6" "Manual del Programador de Linux"
+.TH LOGIN 1 "4 Noviembre 1996" "Util\-linux 1.6" "Manual del Programador de Linux"
 .SH NOMBRE
 login \- firmar
 .SH SINOPSIS
@@ -158,7 +158,7 @@ Una sección CLASSES de ejemplo:
 CLASSES
 miclase1		tty1 tty2
 miclase2		tty3 @.foo.com
-.in -.5
+.in \-.5
 .fi
 .PP
 Esto define las clases
@@ -192,7 +192,7 @@ Un ejemplo de una sección GROUPS:
 GROUPS
 sys		tty1 @.bar.edu
 stud		miclase1 tty4
-.in -0.5
+.in \-0.5
 .fi
 .PP
 Este ejemplo especifica que los miembros del grupo
@@ -223,7 +223,7 @@ Una sección USERS de ejemplo:
 USERS
 zacho		tty1 @130.225.16.0/255.255.255.0
 pepe		tty3 miclase2
-.in -0.5
+.in \-0.5
 .fi
 .PP
 Esto autoriza al usuario zacho a ingresar solo en el tty1 y desde los
@@ -250,7 +250,7 @@ ttyS0.
 .IP o
 La cadena @localhost, indicando que el usuario está autorizado a
 telnet/rlogin desde el host local al mismo host. Esto también habilita al
-usuario a ejecutar, por ejemplo, el comando: xterm -e /bin/login.
+usuario a ejecutar, por ejemplo, el comando: xterm \-e /bin/login.
 .PP
 .IP o
 Un sufijo de nombre de dominio como @.algun.dom, indicando que el usuario
@@ -270,11 +270,11 @@ Cualquiera de los orígenes anteriores pueden tener un prefijo con la
 especificación temporal acordando con la sintaxis:
 .PP
 .nf
-espec-tiempo ::= '[' <día-u-hora> [':' <día-u-hora>]* ']'
+espec\-tiempo ::= '[' <día\-u\-hora> [':' <día\-u\-hora>]* ']'
 día          ::= 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 hora         ::= '0' | '1' | ... | '23'
-espec-hora   ::= <hora> | <hora> '\-' <hora>
-día-u-hora   ::= <día> | <espec-hora>
+espec\-hora   ::= <hora> | <hora> '\-' <hora>
+día\-u\-hora   ::= <día> | <espec\-hora>
 .fi
 .PP
 Por ejemplo, el origen [mon:tue:wed:thu:fri:8\-17]tty3 significa que solo
@@ -327,6 +327,6 @@ de BSD no está soportada. Esta podría ser requerida por algún programa
 .
 .SH AUTOR
 Derivado de login 5.40 de BSD (5/9/89) por Michael Glad (glad@daimi.dk)
-para HP-UX
+para HP\-UX
 .br
 Portado a Linux 0.12: Peter Orbaek (poe@daimi.aau.dk)

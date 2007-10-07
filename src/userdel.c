@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.32 2005/01/17 23:12:05 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.37 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -65,19 +65,6 @@ static char *user_home;
 static char *Prog;
 static int fflg = 0, rflg = 0;
 
-#ifdef	NDBM
-extern int pw_dbm_mode;
-
-#ifdef	SHADOWPWD
-extern int sp_dbm_mode;
-#endif
-extern int gr_dbm_mode;
-
-#ifdef	SHADOWGRP
-extern int sg_dbm_mode;
-#endif
-#endif
-
 #include "groupio.h"
 #include "pwio.h"
 
@@ -110,10 +97,7 @@ static void user_cancel (const char *);
 static int path_prefix (const char *, const char *);
 #endif
 static int is_owner (uid_t, const char *);
-
-#ifndef NO_REMOVE_MAILBOX
 static void remove_mailbox (void);
-#endif
 
 /*
  * usage - display usage message and exit
@@ -173,25 +157,15 @@ static void update_groups (void)
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 		if (!gr_update (ngrp))
 			fprintf (stderr,
-				 _("%s: error updating group entry\n"),
-				 Prog);
+				 _("%s: error updating group entry\n"), Prog);
 
 		/*
 		 * Update the DBM group file with the new entry as well.
 		 */
 
-#ifdef	NDBM
-		if (!gr_dbm_update (ngrp))
-			fprintf (stderr,
-				 _("%s: cannot update dbm group entry\n"),
-				 Prog);
-#endif				/* NDBM */
 		SYSLOG ((LOG_INFO, "delete `%s' from group `%s'\n",
 			 user_name, ngrp->gr_name));
 	}
-#ifdef NDBM
-	endgrent ();
-#endif
 	/*
 	 * we've removed their name from all the groups above, so
 	 * now if they have a group with the same name as their
@@ -204,22 +178,9 @@ static void update_groups (void)
 
 		gr_remove (grp->gr_name);
 
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-
-#ifdef NDBM
-		if (!gr_dbm_remove (grp))
-			fprintf (stderr,
-				 _("%s: cannot remove dbm group entry\n"),
-				 Prog);
-#endif
 		SYSLOG ((LOG_INFO, "removed group `%s' owned by `%s'\n",
 			 grp->gr_name, user_name));
 	}
-#ifdef NDBM
-	endgrent ();
-#endif
 #ifdef	SHADOWGRP
 	if (!is_shadow_grp)
 		return;
@@ -250,33 +211,17 @@ static void update_groups (void)
 		}
 
 		if (was_member)
-			nsgrp->sg_mem =
-			    del_list (nsgrp->sg_mem, user_name);
+			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 
 		if (was_admin)
-			nsgrp->sg_adm =
-			    del_list (nsgrp->sg_adm, user_name);
+			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
 
 		if (!sgr_update (nsgrp))
 			fprintf (stderr,
-				 _("%s: error updating group entry\n"),
-				 Prog);
-#ifdef	NDBM
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-
-		if (!sg_dbm_update (nsgrp))
-			fprintf (stderr,
-				 _("%s: cannot update dbm group entry\n"),
-				 Prog);
-#endif				/* NDBM */
+				 _("%s: error updating group entry\n"), Prog);
 		SYSLOG ((LOG_INFO, "delete `%s' from shadow group `%s'\n",
 			 user_name, nsgrp->sg_name));
 	}
-#ifdef	NDBM
-	endsgent ();
-#endif				/* NDBM */
 #endif				/* SHADOWGRP */
 }
 
@@ -290,24 +235,20 @@ static void update_groups (void)
 static void close_files (void)
 {
 	if (!pw_close ())
-		fprintf (stderr, _("%s: cannot rewrite password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ())
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow password file\n"), Prog);
 #endif
 	if (!gr_close ())
-		fprintf (stderr, _("%s: cannot rewrite group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 
 	(void) gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ())
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow group file\n"), Prog);
 
 	if (is_shadow_grp)
 		(void) sgr_unlock ();
@@ -347,32 +288,27 @@ static void fail_exit (int code)
 static void open_files (void)
 {
 	if (!pw_lock ()) {
-		fprintf (stderr, _("%s: unable to lock password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
 	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"),
-			 Prog);
+			 _("%s: cannot lock shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"),
-			 Prog);
+			 _("%s: cannot open shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #endif
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: unable to lock group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
@@ -382,8 +318,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"),
-			 Prog);
+			 _("%s: unable to lock shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
@@ -409,39 +344,9 @@ static void update_user (void)
 #ifdef SHADOWPWD
 	if (is_shadow_pwd && !spw_remove (user_name))
 		fprintf (stderr,
-			 _("%s: error deleting shadow password entry\n"),
-			 Prog);
+			 _("%s: error deleting shadow password entry\n"), Prog);
 #endif
-#ifdef NDBM
-	if (pw_dbm_present ()) {
-		if ((pwd = getpwnam (user_name))
-		    && !pw_dbm_remove (pwd))
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting password dbm entry\n"),
-				 Prog);
-		/*
-		 * If the user's UID is a duplicate the duplicated
-		 * entry needs to be updated so that a UID match can
-		 * be found in the DBM files.
-		 */
-		for (pw_rewind (), pwd = pw_next (); pwd; pwd = pw_next ()) {
-			if (pwd->pw_uid == user_id)
-				pw_dbm_update (pwd);
-			break;
-		}
-	}
-}
-}
-
-#ifdef SHADOWPWD
-if (is_shadow_pwd && sp_dbm_present ()
-    && !sp_dbm_remove (user_name))
-	fprintf (stderr, _("%s: error deleting shadow passwd dbm entry\n"), Prog);
-#endif
-endpwent ();
-#endif				/* NDBM */
-SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
+	SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
 }
 
 /*
@@ -480,9 +385,7 @@ static void user_busy (const char *name, uid_t uid)
 		if (strncmp (utent->ut_user, name, sizeof utent->ut_user))
 			continue;
 		fprintf (stderr,
-			 _
-			 ("%s: user %s is currently logged in\n"),
-			 Prog, name);
+			 _("%s: user %s is currently logged in\n"), Prog, name);
 		exit (E_USER_BUSY);
 	}
 }
@@ -568,7 +471,6 @@ static int is_owner (uid_t uid, const char *path)
 	return (st.st_uid == uid);
 }
 
-#ifndef NO_REMOVE_MAILBOX
 static void remove_mailbox (void)
 {
 	const char *maildir;
@@ -601,7 +503,6 @@ static void remove_mailbox (void)
 		perror (mailfile);
 	}
 }
-#endif
 
 #ifdef USE_PAM
 static struct pam_conv conv = {
@@ -654,8 +555,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS)
-		retval = pam_start ("userdel", pampw->pw_name, &conv,
-				    &pamh);
+		retval = pam_start ("userdel", pampw->pw_name, &conv, &pamh);
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
@@ -670,8 +570,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr,
-			 _("%s: PAM authentication failed\n"), Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
 #endif				/* USE_PAM */
@@ -684,20 +583,7 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
-	/*
-	 * The open routines for the DBM files don't use read-write as the
-	 * mode, so we have to clue them in.
-	 */
-#ifdef	NDBM
-	pw_dbm_mode = O_RDWR;
-#ifdef	SHADOWPWD
-	sp_dbm_mode = O_RDWR;
-#endif
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif
-#endif
+
 	/*
 	 * Start with a quick check to see if the user exists.
 	 */
@@ -718,11 +604,9 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: user %s is a NIS user\n"),
-			 Prog, user_name);
+			 _("%s: user %s is a NIS user\n"), Prog, user_name);
 		if (!yp_get_default_domain (&nis_domain)
-		    && !yp_master (nis_domain,
-				   "passwd.byname", &nis_master)) {
+		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _("%s: %s is the NIS master\n"),
 				 Prog, nis_master);
@@ -750,10 +634,8 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("shadow");
 #endif
 
-#ifndef NO_REMOVE_MAILBOX
 	if (rflg)
 		remove_mailbox ();
-#endif
 	if (rflg && !fflg && !is_owner (user_id, user_home)) {
 		fprintf (stderr,
 			 _("%s: %s not owned by %s, not removing\n"),

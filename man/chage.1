@@ -1,4 +1,4 @@
-.\"$Id: chage.1,v 1.15 2004/12/11 20:05:01 kloczek Exp $
+.\"$Id: chage.1,v 1.24 2005/04/25 15:15:17 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,51 +30,48 @@
 chage \- change user password expiry information
 .SH SYNOPSIS
 .TP 6
-\fBchage\fR
-[\fB-m \fImindays\fR] [\fB-M \fImaxdays\fR]
-[\fB-d \fIlastday\fR] [\fB-I \fIinactive\fR]
-.br
-[\fB-E \fIexpiredate\fR] [\fB-W \fIwarndays\fR] \fIuser\fR
+\fBchage\fR [\fB\-m\fR \fImindays\fR] [\fB\-M\fR \fImaxdays\fR] [\fB\-d\fR \fIlastday\fR] [\fB\-I\fR \fIinactive\fR]
+[\fB\-E\fR \fIexpiredate\fR] [\fB\-W\fR \fIwarndays\fR] \fIuser\fR
 .TP 6
-\fBchage\fR
-\fB-l \fIuser\fR
+\fBchage\fR \fB\-l\fR \fIuser\fR
 .SH DESCRIPTION
-\fBchage\fR changes the number of days between password changes and the date
-of the last password change. This information is used by the system to
-determine when a user must change her password.
+\fBchage\fR command changes the number of days between password changes and
+the date of the last password change. This information is used by the system
+to determine when a user must change her password.
 .PP
 The \fBchage\fR command is restricted to the root user, except for the
-\fB-l\fR option, which may be used by an unprivileged user to determine
+\fB\-l\fR option, which may be used by an unprivileged user to determine
 when her password or account is due to expire.
 .SH OPTIONS
 The options which apply to the \fBchage\fR command are:
-.IP "\fB-d\fR \fIlastday\fR"
+.IP "\fB\-d\fR \fIlastday\fR"
 Set the number of days since January 1st, 1970 when the password was last
-changed. The date may also be expressed in the format YYYY-MM-DD (or the
+changed. The date may also be expressed in the format YYYY\-MM\-DD (or the
 format more commonly used in your area).
-.IP "\fB-E\fR \fIexpiredate\fR"
+.IP "\fB\-E\fR \fIexpiredate\fR"
 Set the date on which the user's account will no longer be accessible. The
 \fIexpiredate\fR option is the number of days since January 1, 1970 on which
 the accounted is locked. The date may also be expressed in the format
-YYYY-MM-DD (or the format more commonly used in your area). A user whose
+YYYY\-MM\-DD (or the format more commonly used in your area). A user whose
 account is locked must contact the system administrator before being able to
-use the system again.
-.IP "\fB-I\fR \fIinactive\fR"
+use the system again. Passing the number \fI-1\fR as the \fIexpiredate\fR will
+remove an accounts expiration date.
+.IP "\fB\-I\fR \fIinactive\fR"
 Set the number of days of inactivity after a password has expired before the
 account is locked. The \fIinactive\fR option is the number of days of
 inactivity. A value of 0 disables this feature. A user whose account is
 locked must contact the system administrator before being able to use the
 system again.
-.IP "\fB-m\fR \fImindays\fR"
+.IP "\fB\-m\fR \fImindays\fR"
 Set the minimum number of days between password changes. A value of zero for
 this field indicates that the user may change her password at any time.
-.IP "\fB-M\fR \fImaxdays\fR"
+.IP "\fB\-M\fR \fImaxdays\fR"
 Set maximum number of days during which a password is valid. When
 \fImaxdays\fR plus fIlastday\fR is less than the current day, the user will
 be required to change her password before being able to use her account.
-This occurrence can be planned for in advance by use of the \fB-W\fR option,
+This occurrence can be planned for in advance by use of the \fB\-W\fR option,
 which provides the user with advance warning.
-.IP "\fB-W\fR \fIwarndays\fR"
+.IP "\fB\-W\fR \fIwarndays\fR"
 Set the number of days of warning before a password change is required. The
 \fIwarndays\fR option is the number of days prior to the password expiring
 that a user will be warned her password is about to expire.
@@ -89,9 +86,9 @@ The \fBchage\fR program requires shadow password file to be available.
 Its functionality is not available when passwords are stored in the 
 passwd file.
 .SH FILES
-\fI/etc/passwd\fR \	- user account information
+\fI/etc/passwd\fR	\- user account information
 .br
-\fI/etc/shadow\fR \	- shadow user account information
+\fI/etc/shadow\fR	\- secure user account information
 .SH SEE ALSO
 .BR passwd (5),
 .BR shadow (5)

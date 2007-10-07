@@ -10,10 +10,9 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: xmalloc.c,v 1.5 2004/05/06 21:31:33 kloczek Exp $")
+RCSID ("$Id: xmalloc.c,v 1.6 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include "defines.h"
-
 char *xmalloc (size_t size)
 {
 	char *ptr;

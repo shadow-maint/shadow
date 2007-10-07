@@ -1,4 +1,4 @@
-.\"$Id: newusers.8,v 1.13 2004/12/12 20:31:57 kloczek Exp $
+.\"$Id: newusers.8,v 1.14 2005/04/02 16:10:24 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,11 +27,11 @@
 .\" SUCH DAMAGE.
 .TH NEWUSERS 8
 .SH NAME
-newusers - update and create new users in batch
+newusers \- update and create new users in batch
 .SH SYNOPSIS
 \fBnewusers\fR [\fInew_users\fR]
 .SH DESCRIPTION
-\fBnewusers\fR reads a file of user name and clear-text password pairs and
+\fBnewusers\fR reads a file of user name and clear\-text password pairs and
 uses this information to update a group of existing users or to create new
 users. Each line is in the same format as the standard password file (see
 \fBpasswd\fR(5)) with the following exceptions.
@@ -42,7 +42,7 @@ password.
 This field will be ignored for shadow passwords if the user already exists.
 .IP "\fIpw_gid\fR"
 This field may be the name of an existing group, in which case the named
-user will be added as a member. If a non-existent numerical group is given,
+user will be added as a member. If a non\-existent numerical group is given,
 a new group will be created having this number.
 .IP "\fIpw_dir\fR"
 This field will be checked for existence as a directory and a new directory

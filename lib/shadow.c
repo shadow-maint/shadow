@@ -30,41 +30,32 @@
 #include <config.h>
 
 /* Newer versions of Linux libc already have shadow support.  */
-#if defined(SHADOWPWD) && !defined(HAVE_GETSPNAM)	/*{*/
+#if defined(SHADOWPWD) && !defined(HAVE_GETSPNAM)	/*{ */
 
 #include "rcsid.h"
-RCSID("$Id: shadow.c,v 1.7 2003/05/03 16:14:24 kloczek Exp $")
-
+RCSID ("$Id: shadow.c,v 1.9 2005/04/06 04:26:05 kloczek Exp $")
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
 
-#ifdef	NDBM
-#include <ndbm.h>
-#include <fcntl.h>
-DBM	*sp_dbm;
-int	sp_dbm_mode = -1;
-static	int	dbmopened;
-static	int	dbmerror;
-#endif
-
 #ifdef	USE_NIS
-static	int	nis_used;
-static	int	nis_ignore;
-static	enum	{ native, start, middle, native2 } nis_state;
-static	int	nis_bound;
-static	char	*nis_domain;
-static	char	*nis_key;
-static	int	nis_keylen;
-static	char	*nis_val;
-static	int	nis_vallen;
+static int nis_used;
+static int nis_ignore;
+static enum { native, start, middle, native2 } nis_state;
+static int nis_bound;
+static char *nis_domain;
+static char *nis_key;
+static int nis_keylen;
+static char *nis_val;
+static int nis_vallen;
+
 #define	IS_NISCHAR(c) ((c)=='+')
 #endif
 
-static	FILE	*shadow;
-static	char	spwbuf[BUFSIZ];
-static	struct	spwd	spwd;
+static FILE *shadow;
+static char spwbuf[BUFSIZ];
+static struct spwd spwd;
 
 #define	FIELDS	9
 #define	OFIELDS	5
@@ -75,10 +66,9 @@ static	struct	spwd	spwd;
  * __setspNIS - turn on or off NIS searches
  */
 
-void
-__setspNIS(int flag)
+void __setspNIS (int flag)
 {
-	nis_ignore = ! flag;
+	nis_ignore = !flag;
 
 	if (nis_ignore)
 		nis_used = 0;
@@ -88,8 +78,7 @@ __setspNIS(int flag)
  * bind_nis - bind to NIS server
  */
 
-static int
-bind_nis(void)
+static int bind_nis (void)
 {
 	if (yp_get_default_domain (&nis_domain))
 		return -1;
@@ -103,40 +92,15 @@ bind_nis(void)
  * setspent - initialize access to shadow text and DBM files
  */
 
-void
-setspent(void)
+void setspent (void)
 {
 	if (shadow)
-		rewind(shadow);
+		rewind (shadow);
 	else
-		shadow = fopen(SHADOW_FILE, "r");
+		shadow = fopen (SHADOW_FILE, "r");
 
 #ifdef	USE_NIS
 	nis_state = native;
-#endif
-
-	/*
-	 * Attempt to open the DBM files if they have never been opened
-	 * and an error has never been returned.
-	 */
-
-#ifdef NDBM
-	if (! dbmerror && ! dbmopened) {
-		int	mode;
-		char	dbmfiles[BUFSIZ];
-
-		strcpy (dbmfiles, SHADOW_PAG_FILE);
-
-		if (sp_dbm_mode == -1)
-			mode = O_RDWR;
-		else
-			mode = (sp_dbm_mode == O_RDWR) ? O_RDWR:O_RDONLY;
-
-		if (! (sp_dbm = dbm_open (SHADOW_FILE, mode, 0)))
-			dbmerror = 1;
-		else
-			dbmopened = 1;
-	}
 #endif
 }
 
@@ -144,43 +108,33 @@ setspent(void)
  * endspent - terminate access to shadow text and DBM files
  */
 
-void
-endspent(void)
+void endspent (void)
 {
 	if (shadow)
 		(void) fclose (shadow);
 
 	shadow = (FILE *) 0;
-#ifdef	NDBM
-	if (dbmopened && sp_dbm) {
-		dbm_close (sp_dbm);
-		sp_dbm = 0;
-	}
-	dbmopened = 0;
-	dbmerror = 0;
-#endif
 }
 
 /*
  * my_sgetspent - convert string in shadow file format to (struct spwd *)
  */
 
-static struct spwd *
-my_sgetspent(const char *string)
+static struct spwd *my_sgetspent (const char *string)
 {
-	char	*fields[FIELDS];
-	char	*cp;
-	char	*cpp;
-	int	i;
+	char *fields[FIELDS];
+	char *cp;
+	char *cpp;
+	int i;
 
 	/*
 	 * Copy string to local buffer.  It has to be tokenized and we
 	 * have to do that to our private copy.
 	 */
 
-	if (strlen(string) >= sizeof spwbuf)
+	if (strlen (string) >= sizeof spwbuf)
 		return 0;
-	strcpy(spwbuf, string);
+	strcpy (spwbuf, string);
 
 	if ((cp = strrchr (spwbuf, '\n')))
 		*cp = '\0';
@@ -190,7 +144,7 @@ my_sgetspent(const char *string)
 	 * FIELDS different fields.
 	 */
 
-	for (cp = spwbuf, i = 0;*cp && i < FIELDS;i++) {
+	for (cp = spwbuf, i = 0; *cp && i < FIELDS; i++) {
 		fields[i] = cp;
 		while (*cp && *cp != ':')
 			cp++;
@@ -199,7 +153,7 @@ my_sgetspent(const char *string)
 			*cp++ = '\0';
 	}
 
-	if (i == (FIELDS-1))
+	if (i == (FIELDS - 1))
 		fields[i++] = cp;
 
 	if ((cp && *cp) || (i != FIELDS && i != OFIELDS))
@@ -227,7 +181,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_lstchg = strtol (fields[2], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_lstchg = -1;
@@ -243,7 +197,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_min = strtol (fields[3], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_min = -1;
@@ -259,7 +213,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_max = strtol (fields[4], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_max = -1;
@@ -276,7 +230,7 @@ my_sgetspent(const char *string)
 
 	if (i == OFIELDS) {
 		spwd.sp_warn = spwd.sp_inact = spwd.sp_expire =
-			spwd.sp_flag = -1;
+		    spwd.sp_flag = -1;
 
 		return &spwd;
 	}
@@ -287,7 +241,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_warn = strtol (fields[5], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_warn = -1;
@@ -304,7 +258,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_inact = strtol (fields[6], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_inact = -1;
@@ -321,7 +275,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_expire = strtol (fields[7], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_expire = -1;
@@ -338,7 +292,7 @@ my_sgetspent(const char *string)
 
 	if ((spwd.sp_flag = strtol (fields[8], &cpp, 10)) == 0 && *cpp) {
 #ifdef	USE_NIS
-		if (! nis_used)
+		if (!nis_used)
 			return 0;
 		else
 			spwd.sp_flag = -1;
@@ -355,13 +309,12 @@ my_sgetspent(const char *string)
  * fgetspent - get an entry from a /etc/shadow formatted stream
  */
 
-struct spwd *
-fgetspent(FILE *fp)
+struct spwd *fgetspent (FILE * fp)
 {
-	char	buf[BUFSIZ];
-	char	*cp;
+	char buf[BUFSIZ];
+	char *cp;
 
-	if (! fp)
+	if (!fp)
 		return (0);
 
 #ifdef	USE_NIS
@@ -376,7 +329,7 @@ fgetspent(FILE *fp)
 		if (nis_ignore && IS_NISCHAR (buf[0]))
 			continue;
 #endif
-		return my_sgetspent(buf);
+		return my_sgetspent (buf);
 	}
 	return 0;
 }
@@ -385,19 +338,18 @@ fgetspent(FILE *fp)
  * getspent - get a (struct spwd *) from the current shadow file
  */
 
-struct spwd *
-getspent(void)
+struct spwd *getspent (void)
 {
 #ifdef	USE_NIS
-	int	nis_1_user = 0;
-	struct	spwd	*val;
-	char	buf[BUFSIZ];
+	int nis_1_user = 0;
+	struct spwd *val;
+	char buf[BUFSIZ];
 #endif
-	if (! shadow)
+	if (!shadow)
 		setspent ();
 
 #ifdef	USE_NIS
-again:
+      again:
 	/*
 	 * See if we are reading from the local file.
 	 */
@@ -409,7 +361,7 @@ again:
 		 * right away if there is none.
 		 */
 
-		if (! (val = fgetspent (shadow)))
+		if (!(val = fgetspent (shadow)))
 			return 0;
 
 		/*
@@ -455,20 +407,20 @@ again:
 		}
 		if (nis_state == start) {
 			if (yp_first (nis_domain, "shadow.bynam", &nis_key,
-				&nis_keylen, &nis_val, &nis_vallen)) {
+				      &nis_keylen, &nis_val, &nis_vallen)) {
 				nis_state = native2;
 				goto again;
 			}
 			nis_state = middle;
 		} else if (nis_state == middle) {
 			if (yp_next (nis_domain, "shadow.bynam", nis_key,
-				nis_keylen, &nis_key, &nis_keylen,
-				&nis_val, &nis_vallen)) {
+				     nis_keylen, &nis_key, &nis_keylen,
+				     &nis_val, &nis_vallen)) {
 				nis_state = native2;
 				goto again;
 			}
 		}
-		return my_sgetspent(nis_val);
+		return my_sgetspent (nis_val);
 	}
 #else
 	return (fgetspent (shadow));
@@ -479,68 +431,42 @@ again:
  * getspnam - get a shadow entry by name
  */
 
-struct spwd *
-getspnam(const char *name)
+struct spwd *getspnam (const char *name)
 {
-	struct	spwd	*sp;
-#ifdef NDBM
-	datum	key;
-	datum	content;
-#endif
+	struct spwd *sp;
+
 #ifdef	USE_NIS
-	char	buf[BUFSIZ];
-	static	char	save_name[16];
-	int	nis_disabled = 0;
+	char buf[BUFSIZ];
+	static char save_name[16];
+	int nis_disabled = 0;
 #endif
 
 	setspent ();
 
-#ifdef NDBM
-
-	/*
-	 * If the DBM file are now open, create a key for this UID and
-	 * try to fetch the entry from the database.  A matching record
-	 * will be unpacked into a static structure and returned to
-	 * the user.
-	 */
-
-	if (dbmopened) {
-		key.dsize = strlen (name);
-		key.dptr = (char *) name;
-
-		content = dbm_fetch (sp_dbm, key);
-		if (content.dptr != 0) {
-			memcpy (spwbuf, content.dptr, content.dsize);
-			spw_unpack (spwbuf, content.dsize, &spwd);
-			endspent();
-			return &spwd;
-		}
-	}
-#endif
 #ifdef	USE_NIS
 	/*
 	 * Search the shadow.byname map for this user.
 	 */
 
-	if (! nis_ignore && ! nis_bound)
+	if (!nis_ignore && !nis_bound)
 		bind_nis ();
 
-	if (! nis_ignore && nis_bound) {
-		char	*cp;
+	if (!nis_ignore && nis_bound) {
+		char *cp;
 
 		if (yp_match (nis_domain, "shadow.byname", name,
-				strlen (name), &nis_val, &nis_vallen) == 0) {
+			      strlen (name), &nis_val, &nis_vallen) == 0) {
 
 			if (cp = strchr (nis_val, '\n'))
 				*cp = '\0';
 
 			nis_state = middle;
-			if ((sp = my_sgetspent(nis_val))) {
+			if ((sp = my_sgetspent (nis_val))) {
 				strcpy (save_name, sp->sp_namp);
 				nis_key = save_name;
 				nis_keylen = strlen (save_name);
 			}
-			endspent();
+			endspent ();
 			return sp;
 		} else
 			nis_state = native2;
@@ -567,9 +493,9 @@ getspnam(const char *name)
 	if (nis_disabled)
 		nis_ignore--;
 #endif
-	endspent();
+	endspent ();
 	return (sp);
 }
 #else
-extern int errno;  /* warning: ANSI C forbids an empty source file */
-#endif	/*}*/
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/*} */

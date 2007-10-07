@@ -1,4 +1,4 @@
-.\" -*- nroff -*-
+.\" \-*\- nroff \-*\-
 .\"Translated 21 Jul 1998 by Javi Diaz (javid@si.upc.es)
 .TH SU 1 "Utilidades Shell de GNU" "FSF"
 .SH NOMBRE
@@ -6,7 +6,7 @@ su \-  ejecuta una shell con identificadores de grupo y de usuario distintos
 .SH SINOPSIS
 .B su
 [\-flmp] [\-c comando] [\-s shell] [\-\-login] [\-\-fast]
-[\-\-preserve-environment] [\-\-command=comando] [\-\-shell=shell] [\-]
+[\-\-preserve\-environment] [\-\-command=comando] [\-\-shell=shell] [\-]
 [\-\-help] [\-\-version] [usuario [arg...]]
 .SH DESCRIPCIÓN
 Este documento ya no es mantenido y puede ser impreciso o incompleto. La
@@ -40,7 +40,7 @@ a la shell ejecutada.
 .PP
 .B su
 no ejecuta de manera especial /bin/sh u otras shells (colocando en argv[0] el
-valor "-su", pasando -c únicamente a algunas shells, etc.).
+valor "\-su", pasando \-c únicamente a algunas shells, etc.).
 .PP
 En sistemas que utilicen syslog,
 .B su

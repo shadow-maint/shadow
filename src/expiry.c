@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: expiry.c,v 1.12 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: expiry.c,v 1.13 2005/03/31 05:14:54 kloczek Exp $")
 #include <sys/types.h>
 #include <signal.h>
 #include <stdio.h>
@@ -98,8 +98,7 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	if (argc != 2
-	    || (strcmp (argv[1], "-f") && strcmp (argv[1], "-c")))
+	if (argc != 2 || (strcmp (argv[1], "-f") && strcmp (argv[1], "-c")))
 		usage ();
 
 #if 0				/* could be setgid shadow with /etc/shadow mode 0640 */
@@ -110,8 +109,7 @@ int main (int argc, char **argv)
 
 	if (geteuid () != 0) {
 		fprintf (stderr,
-			 _("%s: WARNING!  Must be set-UID root!\n"),
-			 argv[0]);
+			 _("%s: WARNING!  Must be set-UID root!\n"), argv[0]);
 		exit (10);
 	}
 #endif

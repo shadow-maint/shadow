@@ -4,5 +4,5 @@
 #include <config.h>
 #include "defines.h"
 
-time_t get_date(const char *, const time_t *);
+time_t get_date (const char *, const time_t *);
 #endif

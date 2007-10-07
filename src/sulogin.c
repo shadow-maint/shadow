@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: sulogin.c,v 1.17 2003/05/12 04:39:17 kloczek Exp $")
+RCSID (PKG_VER "$Id: sulogin.c,v 1.18 2005/03/31 05:14:54 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -159,8 +159,7 @@ static RETSIGTYPE catch (int sig)
 
 			printf (_("No password entry for 'root'\n"));
 #ifdef	USE_SYSLOG
-			syslog (LOG_WARN,
-				"No password entry for 'root'\n");
+			syslog (LOG_WARN, "No password entry for 'root'\n");
 			closelog ();
 #endif
 			exit (1);
@@ -187,8 +186,7 @@ static RETSIGTYPE catch (int sig)
 #endif
 			puts ("\n");
 #ifdef	TELINIT
-			execl (PATH_TELINIT, "telinit", RUNLEVEL,
-			       (char *) 0);
+			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) 0);
 #endif
 			exit (0);
 		} else {

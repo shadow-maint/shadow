@@ -1,5 +1,4 @@
-.\" $Id: chsh.1,v 1.8 2004/11/02 19:28:32 kloczek Exp $
-.\" {PTM/WK/1999-09-25}
+.\" $Id: chsh.1,v 1.10 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -32,7 +31,7 @@ chsh \- zmiana pow³oki zg³oszeniowej
 .SH SK£ADNIA
 .TP 5
 \fBchsh\fR
-[\fB-s \fIpow³oka\fR] [\fIu¿ytkownik\fR]
+[\fB\-s\fR \fIpow³oka\fR] [\fIu¿ytkownik\fR]
 .SH OPIS
 \fBchsh\fR zmienia pow³okê zg³oszeniow± u¿ytkownika.
 Okre¶la nazwê pocz±tkowego polecenia zg³oszeniowego u¿ytkownika.
@@ -41,14 +40,14 @@ superu¿ytkownik mo¿e zmieniæ pow³okê zg³oszeniow± dla dowolnego konta.
 .PP
 Jedynym ograniczeniem na³o¿onym na pow³okê zg³oszeniow± jest to, ¿e jej nazwa
 musi byæ wymieniona w \fI/etc/shells\fR, chyba ¿e polecenie \fBchsh\fR
-wywo³ywane jest przez superu¿ytkownika - wówczas mo¿e byæ podana dowolna
+wywo³ywane jest przez superu¿ytkownika \- wówczas mo¿e byæ podana dowolna
 nazwa. U¿ytkownicy kont z ograniczon± pow³ok± logowania nie mog± jej zmieniaæ.
 Odradza siê z tego powodu umieszczanie \fB/bin/rsh\fR w pliku
 \fI/etc/shells\fR, gdy¿ przypadkowa zmiana na pow³okê ograniczon± uniemo¿liwi
 u¿ytkownikowi jak±kolwiek zmianê pow³oki logowania, nawet z powrotem na
 dotychczasow±.
 .SH OPCJE
-Je¿eli nie podano opcji \fB-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
+Je¿eli nie podano opcji \fB\-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
 proponuj±c u¿ytkownikowi bie¿±c± pow³okê logowania. Wprowadzenie nowej
 warto¶ci powoduje zmianê pow³oki, a podanie warto¶ci pustej pozostawia bie¿±c±
 pow³okê. Bie¿±ca pow³oka wy¶wietlana jest w nawiasach \fB[ ]\fR.

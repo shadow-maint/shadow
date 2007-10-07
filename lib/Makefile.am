@@ -6,7 +6,7 @@ DEFS =
 lib_LTLIBRARIES = libshadow.la
 
 libshadow_la_LDFLAGS = -version-info 0:0:0
-libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD) $(LIBSELINUX)
+libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSELINUX)
 
 libshadow_la_SOURCES = \
 	commonio.c \
@@ -32,7 +32,6 @@ libshadow_la_SOURCES = \
 	pwauth.h \
 	pwio.c \
 	pwio.h \
-	rad64.c \
 	rcsid.h \
 	sgetgrent.c \
 	sgetpwent.c \
@@ -50,6 +49,5 @@ libshadow_la_SOURCES = \
 
 EXTRA_DIST = \
 	.indent.pro \
-	grdbm.c gsdbm.c pwdbm.c spdbm.c \
 	grpack.c gspack.c pwpack.c sppack.c \
 	gshadow_.h

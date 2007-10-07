@@ -27,9 +27,6 @@ libmisc_a_SOURCES = \
 	isexpired.c \
 	limits.c \
 	list.c log.c \
-	login_access.c \
-	login_desrpc.c \
-	login_krb.c \
 	loginprompt.c \
 	mail.c \
 	motd.c \

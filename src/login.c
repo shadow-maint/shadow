@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.38 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.52 2005/04/17 15:38:56 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -39,25 +39,11 @@ RCSID (PKG_VER "$Id: login.c,v 1.38 2005/01/17 23:12:04 kloczek Exp $")
 #include <pwd.h>
 #include <grp.h>
 #include <signal.h>
-#if HAVE_LASTLOG_H
 #include <lastlog.h>
-#else
-#include "lastlog_.h"
-#endif
 #include "faillog.h"
 #include "failure.h"
 #include "pwauth.h"
 #include "getdef.h"
-#ifdef RADIUS
-/*
- * Support for RADIUS authentication based on a hacked util-linux login
- * source sent to me by Jon Lewis. Not tested. You need to link login
- * with the radauth.c file (not included here - it doesn't have a clear
- * copyright statement, and I don't want to have problems with Debian
- * putting the whole package in non-free because of this).  --marekm
- */
-#include "radlogin.h"
-#endif
 #ifdef UT_ADDR
 #include <netdb.h>
 #endif
@@ -92,12 +78,12 @@ const char *hostname = "";
 static struct passwd pwent;
 
 #if HAVE_UTMPX_H
-extern	struct	utmpx	utxent;
+extern struct utmpx utxent;
 struct utmpx failent;
 #else
 struct utmp failent;
 #endif
-extern	struct	utmp	utent;
+extern struct utmp utent;
 
 struct lastlog lastlog;
 static int pflg = 0;
@@ -131,12 +117,6 @@ extern void dolastlog (struct lastlog *, const struct passwd *,
 
 extern char **environ;
 
-#ifndef USE_PAM
-extern int login_access (const char *, const char *);
-#endif
-
-extern void login_fbtab (const char *, uid_t, gid_t);
-
 #ifndef	ALARM
 #define	ALARM	60
 #endif
@@ -145,19 +125,20 @@ extern void login_fbtab (const char *, uid_t, gid_t);
 #define	RETRIES	3
 #endif
 
-#ifndef USE_PAM
-static struct faillog faillog;
-#endif
-
 /* local function prototypes */
 static void usage (void);
 static void setup_tty (void);
 static void check_flags (int, char *const *);
 
 #ifndef USE_PAM
+extern int login_access (const char *, const char *);
+
+static struct faillog faillog;
+
 static void bad_time_notify (void);
 static void check_nologin (void);
 #endif
+
 static void init_env (void);
 static RETSIGTYPE alarm_handler (int);
 
@@ -182,7 +163,6 @@ static void usage (void)
 	exit (1);
 }
 
-
 static void setup_tty (void)
 {
 	TERMIO termio;
@@ -196,35 +176,8 @@ static void setup_tty (void)
 	termio.c_lflag |= ISIG | ICANON | ECHO | ECHOE;
 	termio.c_iflag |= ICRNL;
 
-#if defined(ECHOKE) && defined(ECHOCTL)
-	termio.c_lflag |= ECHOKE | ECHOCTL;
-#endif
-#if defined(ECHOPRT) && defined(NOFLSH) && defined(TOSTOP)
-	termio.c_lflag &= ~(ECHOPRT | NOFLSH | TOSTOP);
-#endif
-#ifdef	ONLCR
-	termio.c_oflag |= ONLCR;
-#endif
-
-#ifdef	SUN4
-
-	/*
-	 * Terminal setup for SunOS 4.1 courtesy of Steve Allen
-	 * at UCO/Lick.
-	 */
-
-	termio.c_cc[VEOF] = '\04';
-	termio.c_cflag &= ~CSIZE;
-	termio.c_cflag |= (PARENB | CS7);
-	termio.c_lflag |= (ISIG | ICANON | ECHO | IEXTEN);
-	termio.c_iflag |=
-	    (BRKINT | IGNPAR | ISTRIP | IMAXBEL | ICRNL | IXON);
-	termio.c_iflag &= ~IXANY;
-	termio.c_oflag |= (XTABS | OPOST | ONLCR);
-#endif
 	/* leave these values unchanged if not specified in login.defs */
-	termio.c_cc[VERASE] =
-	    getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
+	termio.c_cc[VERASE] = getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
 	termio.c_cc[VKILL] = getdef_num ("KILLCHAR", termio.c_cc[VKILL]);
 
 	/*
@@ -236,48 +189,16 @@ static void setup_tty (void)
 }
 
 
+#ifndef USE_PAM
 /*
  * Tell the user that this is not the right time to login at this tty
  */
-#ifndef USE_PAM
 static void bad_time_notify (void)
 {
-#ifdef HUP_MESG_FILE
-	FILE *mfp;
-
-	if ((mfp = fopen (HUP_MESG_FILE, "r")) != NULL) {
-		int c;
-
-		while ((c = fgetc (mfp)) != EOF) {
-			if (c == '\n')
-				putchar ('\r');
-			putchar (c);
-		}
-		fclose (mfp);
-	} else
-#endif
-		printf (_("Invalid login time\n"));
+	printf (_("Invalid login time\n"));
 	fflush (stdout);
 }
-#endif
 
-
-static void check_flags (int argc, char *const *argv)
-{
-	int arg;
-
-	/*
-	 * Check the flags for proper form. Every argument starting with
-	 * "-" must be exactly two characters long. This closes all the
-	 * clever rlogin, telnet, and getty holes.
-	 */
-	for (arg = 1; arg < argc; arg++) {
-		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2)
-			usage ();
-	}
-}
-
-#ifndef USE_PAM
 static void check_nologin (void)
 {
 	char *fname;
@@ -310,8 +231,7 @@ static void check_nologin (void)
 			fflush (stdout);
 			fclose (nlfp);
 		} else
-			printf (_
-				("\nSystem closed for routine maintenance\n"));
+			printf (_("\nSystem closed for routine maintenance\n"));
 		/*
 		 * Non-root users must exit. Root gets the message, but
 		 * gets to login.
@@ -321,11 +241,26 @@ static void check_nologin (void)
 			closelog ();
 			exit (0);
 		}
-		printf (_
-			("\n[Disconnect bypassed -- root login allowed.]\n"));
+		printf (_("\n[Disconnect bypassed -- root login allowed.]\n"));
 	}
 }
 #endif				/* !USE_PAM */
+
+static void check_flags (int argc, char *const *argv)
+{
+	int arg;
+
+	/*
+	 * Check the flags for proper form. Every argument starting with
+	 * "-" must be exactly two characters long. This closes all the
+	 * clever rlogin, telnet, and getty holes.
+	 */
+	for (arg = 1; arg < argc; arg++) {
+		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2)
+			usage ();
+	}
+}
+
 
 static void init_env (void)
 {
@@ -359,8 +294,7 @@ static void init_env (void)
 
 static RETSIGTYPE alarm_handler (int sig)
 {
-	fprintf (stderr, _("\nLogin timed out after %d seconds.\n"),
-		 timeout);
+	fprintf (stderr, _("\nLogin timed out after %d seconds.\n"), timeout);
 	exit (0);
 }
 
@@ -417,22 +351,6 @@ int main (int argc, char **argv)
 #if defined(SHADOWPWD) && !defined(USE_PAM)
 	struct spwd *spwd = NULL;
 #endif
-#ifdef RADIUS
-	RAD_USER_DATA rad_user_data;
-	int is_rad_login;
-#endif
-#if defined(RADIUS) || defined(DES_RPC) || defined(KERBEROS)
-	/* from pwauth.c */
-	extern char *clear_pass;
-	extern int wipe_clear_pass;
-
-	/*
-	 * We may need the password later, don't want pw_auth() to wipe it
-	 * (we do it ourselves when it is no longer needed).  --marekm
-	 */
-	wipe_clear_pass = 0;
-#endif
-
 	/*
 	 * Some quick initialization.
 	 */
@@ -541,8 +459,7 @@ int main (int argc, char **argv)
 		 * be unknown, etc.).  --marekm
 		 */
 		if ((he = gethostbyname (hostname))) {
-			utent.ut_addr =
-			    *((int32_t *) (he->h_addr_list[0]));
+			utent.ut_addr = *((int32_t *) (he->h_addr_list[0]));
 #endif
 #ifdef UT_HOST
 			strncpy (utent.ut_host, hostname,
@@ -645,8 +562,7 @@ int main (int argc, char **argv)
 
 		if (*cp)
 			snprintf (fromhost, sizeof fromhost,
-				  _(" on `%.100s' from `%.200s'"), tty,
-				  cp);
+				  _(" on `%.100s' from `%.200s'"), tty, cp);
 		else
 			snprintf (fromhost, sizeof fromhost,
 				  _(" on `%.100s'"), tty);
@@ -698,12 +614,10 @@ int main (int argc, char **argv)
 					  "%s login: ", hostn);
 			else
 				snprintf (login_prompt,
-					  sizeof (login_prompt),
-					  "login: ");
+					  sizeof (login_prompt), "login: ");
 
 			retcode =
-			    pam_set_item (pamh, PAM_USER_PROMPT,
-					  login_prompt);
+			    pam_set_item (pamh, PAM_USER_PROMPT, login_prompt);
 			PAM_FAIL_CHECK;
 
 			/* if we didn't get a user on the command line,
@@ -751,14 +665,12 @@ int main (int argc, char **argv)
 						"TOO MANY LOGIN TRIES (%d) FROM %s FOR %s, %s",
 						failcount, hostname,
 						pam_user,
-						pam_strerror (pamh,
-							      retcode));
+						pam_strerror (pamh, retcode));
 				else
 					syslog (LOG_NOTICE,
 						"FAILED LOGIN SESSION FROM %s FOR %s, %s",
 						hostname, pam_user,
-						pam_strerror (pamh,
-							      retcode));
+						pam_strerror (pamh, retcode));
 
 				fprintf (stderr, "\nLogin incorrect\n");
 				pam_end (pamh, retcode);
@@ -780,13 +692,12 @@ int main (int argc, char **argv)
 		   First get the username that we are actually using, though.
 		 */
 		retcode =
-		    pam_get_item (pamh, PAM_USER,
-				  (const void **) &pam_user);
+		    pam_get_item (pamh, PAM_USER, (const void **) &pam_user);
 		setpwent ();
 		pwd = getpwnam (pam_user);
 
 		if (fflg) {
-			retcode = pam_acct_mgmt(pamh, 0);
+			retcode = pam_acct_mgmt (pamh, 0);
 			PAM_FAIL_CHECK;
 		}
 
@@ -802,29 +713,16 @@ int main (int argc, char **argv)
 #else				/* ! USE_PAM */
 		while (1) {	/* repeatedly get login/password pairs */
 			failed = 0;	/* haven't failed authentication yet */
-#ifdef RADIUS
-			is_rad_login = 0;
-#endif
-		if (!username[0]) {	/* need to get a login id */
-			if (subroot) {
-				closelog ();
-				exit (1);
+			if (!username[0]) {	/* need to get a login id */
+				if (subroot) {
+					closelog ();
+					exit (1);
+				}
+				preauth_flag = 0;
+				login_prompt (_("\n%s login: "), username,
+					      sizeof username);
+				continue;
 			}
-			preauth_flag = 0;
-#ifndef LOGIN_PROMPT
-#ifdef __linux__		/* hostname login: - like in util-linux login */
-			login_prompt (_("\n%s login: "), username,
-				      sizeof username);
-#else
-			login_prompt (_("login: "), username,
-				      sizeof username);
-#endif
-#else
-			login_prompt (LOGIN_PROMPT, username,
-				      sizeof username);
-#endif
-			continue;
-		}
 #endif				/* ! USE_PAM */
 
 #ifdef USE_PAM
@@ -846,9 +744,7 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 #ifdef SHADOWPWD
 		spwd = NULL;
-		if (pwd
-		    && strcmp (pwd->pw_passwd,
-			       SHADOW_PASSWD_STRING) == 0) {
+		if (pwd && strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 			spwd = getspnam (username);
 			if (spwd)
 				pwent.pw_passwd = spwd->sp_pwdp;
@@ -864,8 +760,7 @@ int main (int argc, char **argv)
 		 * is locked and the user cannot login, even if they have
 		 * been "pre-authenticated."
 		 */
-		if (pwent.pw_passwd[0] == '!'
-		    || pwent.pw_passwd[0] == '*')
+		if (pwent.pw_passwd[0] == '!' || pwent.pw_passwd[0] == '*')
 			failed = 1;
 
 		/*
@@ -876,29 +771,8 @@ int main (int argc, char **argv)
 			goto auth_ok;
 
 		if (pw_auth
-		    (pwent.pw_passwd, username, reason,
-		     (char *) 0) == 0)
+		    (pwent.pw_passwd, username, reason, (char *) 0) == 0)
 			goto auth_ok;
-
-#ifdef RADIUS
-		/*
-		 * If normal passwd authentication didn't work, try radius.
-		 */
-
-		if (failed) {
-			pwd =
-			    rad_authenticate (&rad_user_data,
-					      username,
-					      clear_pass ?
-					      clear_pass : "");
-			if (pwd) {
-				is_rad_login = 1;
-				pwent = *pwd;
-				failed = 0;
-				goto auth_ok;
-			}
-		}
-#endif				/* RADIUS */
 
 		/*
 		 * Don't log unknown usernames - I mistyped the password for
@@ -918,32 +792,20 @@ int main (int argc, char **argv)
 		 * authenticated and so on.
 		 */
 
-#if defined(RADIUS) && !(defined(DES_RPC) || defined(KERBEROS))
-		if (clear_pass) {
-			strzero (clear_pass);
-			clear_pass = NULL;
-		}
-#endif
-
 		if (!failed && pwent.pw_name && pwent.pw_uid == 0
 		    && !is_console) {
-			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s",
-				 fromhost));
+			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s", fromhost));
 			failed = 1;
 		}
-#ifdef LOGIN_ACCESS
 		if (!failed
-		    && !login_access (username,
-		      *hostname ? hostname : tty))
-		{
-			SYSLOG ((LOG_WARN, "LOGIN `%s' REFUSED %s", username,
-				 fromhost));
+		    && !login_access (username, *hostname ? hostname : tty)) {
+			SYSLOG ((LOG_WARN, "LOGIN `%s' REFUSED %s",
+				 username, fromhost));
 			failed = 1;
 		}
-#endif
 		if (pwd && getdef_bool ("FAILLOG_ENAB") &&
 		    !failcheck (pwent.pw_uid, &faillog, failed)) {
-			SYSLOG ((LOG_CRIT, 
+			SYSLOG ((LOG_CRIT,
 				 "exceeded failure limit for `%s' %s",
 				 username, fromhost));
 			failed = 1;
@@ -960,14 +822,15 @@ int main (int argc, char **argv)
 #if HAVE_UTMPX_H
 			failent = utxent;
 			if (sizeof (failent.ut_tv) == sizeof (struct timeval))
-			  gettimeofday ((struct timeval *) &failent.ut_tv, NULL);
-			else
-			  {
+				gettimeofday ((struct timeval *)
+					      &failent.ut_tv, NULL);
+			else {
 				struct timeval tv;
+
 				gettimeofday (&tv, NULL);
 				failent.ut_tv.tv_sec = tv.tv_sec;
 				failent.ut_tv.tv_usec = tv.tv_usec;
-			  }
+			}
 #else
 			failent = utent;
 			failent.ut_time = time (NULL);
@@ -975,8 +838,7 @@ int main (int argc, char **argv)
 			if (pwd) {
 				failent_user = pwent.pw_name;
 			} else {
-				if (getdef_bool
-				    ("LOG_UNKFAIL_ENAB"))
+				if (getdef_bool ("LOG_UNKFAIL_ENAB"))
 					failent_user = username;
 				else
 					failent_user = "UNKNOWN";
@@ -1003,8 +865,7 @@ int main (int argc, char **argv)
 		 */
 
 		if (pwent.pw_passwd[0] == '\0')
-			pw_auth ("!", username, reason,
-				 (char *) 0);
+			pw_auth ("!", username, reason, (char *) 0);
 #endif
 		/*
 		 * Wait a while (a la SVR4 /usr/bin/login) before attempting
@@ -1022,9 +883,9 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (1);
 		}
-	}		/* while (1) */
+	}			/* while (1) */
 #endif				/* ! USE_PAM */
-	alarm (0);	/* turn off alarm clock */
+	alarm (0);		/* turn off alarm clock */
 #ifndef USE_PAM			/* PAM does this */
 	/*
 	 * porttime checks moved here, after the user has been
@@ -1067,8 +928,7 @@ int main (int argc, char **argv)
 	}
 #ifndef USE_PAM			/* pam_lastlog handles this */
 	if (getdef_bool ("LASTLOG_ENAB"))	/* give last login and log this one */
-		dolastlog (&lastlog, &pwent, utent.ut_line,
-			   hostname);
+		dolastlog (&lastlog, &pwent, utent.ut_line, hostname);
 #endif
 
 #ifndef USE_PAM			/* PAM handles this as well */
@@ -1079,7 +939,7 @@ int main (int argc, char **argv)
 	 * program.  --marekm
 	 */
 #ifdef	SHADOWPWD
-	if (spwd) {	/* check for age of password */
+	if (spwd) {		/* check for age of password */
 		if (expire (&pwent, spwd)) {
 			pwd = getpwnam (username);
 			spwd = getspnam (username);
@@ -1088,58 +948,9 @@ int main (int argc, char **argv)
 		}
 	}
 #endif				/* SHADOWPWD */
-
-#ifdef RADIUS
-	if (is_rad_login) {
-		char whofilename[128];
-		FILE *whofile;
-
-		snprintf (whofilename, sizeof whofilename,
-			  "/var/log/radacct/%.20s", tty);
-		whofile = fopen (whofilename, "w");
-		if (whofile) {
-			fprintf (whofile, "%s\n", username);
-			fclose (whofile);
-		}
-	}
-#endif
 	setup_limits (&pwent);	/* nice, ulimit etc. */
 #endif				/* ! USE_PAM */
 	chown_tty (tty, &pwent);
-
-#ifdef LOGIN_FBTAB
-	/*
-	 * XXX - not supported yet. Change permissions and ownerships of
-	 * devices like floppy/audio/mouse etc. for console logins, based
-	 * on /etc/fbtab or /etc/logindevperm configuration files (Suns do
-	 * this with their framebuffer devices). Problems:
-	 *
-	 * - most systems (except BSD) don't have that nice revoke() system
-	 *   call to ensure the previous user didn't leave a process holding
-	 *   one of these devices open or mmap'ed. Any volunteers to do it
-	 *   in Linux?
-	 *
-	 * - what to do with different users logged in on different virtual
-	 *   consoles?  Maybe permissions should be changed only on user's
-	 *   request, by running a separate (setuid root) program?
-	 *
-	 * - init/telnetd/rlogind/whatever should restore permissions after
-	 *   the user logs out.
-	 *
-	 * Try the new CONSOLE_GROUPS feature instead. It adds specified
-	 * groups (like "floppy") to the group set if the user is logged in
-	 * on the console. This still has the first problem (users leaving
-	 * processes with these devices open), but doesn't need to change
-	 * any permissions, just make them 0660 root:floppy etc.  --marekm
-	 *
-	 * Warning: users can still gain permanent access to these groups
-	 * unless any user-writable filesystems are mounted with the
-	 * "nosuid" option. Alternatively, the kernel could be modified to
-	 * prevent ordinary users from setting the setgid bit on
-	 * executables.
-	 */
-	login_fbtab (tty, pwent.pw_uid, pwent.pw_gid);
-#endif
 
 	/* We call set_groups() above because this clobbers pam_groups.so */
 #ifndef USE_PAM
@@ -1148,19 +959,6 @@ int main (int argc, char **argv)
 	if (change_uid (&pwent))
 #endif
 		exit (1);
-
-#ifdef KERBEROS
-	if (clear_pass)
-		login_kerberos (username, clear_pass);
-#endif
-#ifdef DES_RPC
-	if (clear_pass)
-		login_desrpc (clear_pass);
-#endif
-#if defined(DES_RPC) || defined(KERBEROS)
-	if (clear_pass)
-		strzero (clear_pass);
-#endif
 
 	setup_env (&pwent);	/* set env vars, cd to the home dir */
 
@@ -1198,13 +996,13 @@ int main (int argc, char **argv)
 				      ("Warning: login re-enabled after temporary lockout.\n"));
 				SYSLOG ((LOG_WARN,
 					 "login `%s' re-enabled after temporary lockout (%d failures)",
-					 username,
-					 (int) faillog.fail_cnt));
+					 username, (int) faillog.fail_cnt));
 			}
 		}
 		if (getdef_bool ("LASTLOG_ENAB")
 		    && lastlog.ll_time != 0) {
 			time_t ll_time = lastlog.ll_time;
+
 #ifdef HAVE_STRFTIME
 			strftime (ptime, sizeof (ptime),
 				  "%a %b %e %H:%M:%S %z %Y",
@@ -1213,8 +1011,7 @@ int main (int argc, char **argv)
 				ptime, lastlog.ll_line);
 #else
 			printf (_("Last login: %.19s on %s"),
-				ctime (&ll_time),
-				lastlog.ll_line);
+				ctime (&ll_time), lastlog.ll_line);
 #endif
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
 			if (lastlog.ll_host[0])
@@ -1235,8 +1032,7 @@ int main (int argc, char **argv)
 	} else
 		addenv ("HUSHLOGIN=TRUE", NULL);
 
-	if (getdef_str ("TTYTYPE_FILE") != NULL
-	    && getenv ("TERM") == NULL)
+	if (getdef_str ("TTYTYPE_FILE") != NULL && getenv ("TERM") == NULL)
 		ttytype (tty);
 
 	signal (SIGQUIT, SIG_DFL);	/* default quit signal */
@@ -1280,26 +1076,19 @@ int main (int argc, char **argv)
 #endif
 	signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
-	endpwent ();	/* stop access to password file */
-	endgrent ();	/* stop access to group file */
+	endpwent ();		/* stop access to password file */
+	endgrent ();		/* stop access to group file */
 #ifdef	SHADOWPWD
-	endspent ();	/* stop access to shadow passwd file */
+	endspent ();		/* stop access to shadow passwd file */
 #endif
 #ifdef	SHADOWGRP
-	endsgent ();	/* stop access to shadow group file */
+	endsgent ();		/* stop access to shadow group file */
 #endif
 	if (pwent.pw_uid == 0)
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	else if (getdef_bool ("LOG_OK_LOGINS"))
 		SYSLOG ((LOG_INFO, "`%s' logged in %s", username, fromhost));
 	closelog ();
-#ifdef RADIUS
-	if (is_rad_login) {
-		printf (_("Starting rad_login\n"));
-		rad_login (&rad_user_data);
-		exit (0);
-	}
-#endif
 	if ((tmp = getdef_str ("FAKE_SHELL")) != NULL) {
 		shell (tmp, pwent.pw_shell);	/* fake shell */
 	}

@@ -30,13 +30,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groups.c,v 1.9 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: groups.c,v 1.10 2005/03/31 05:14:54 kloczek Exp $")
 #include <stdio.h>
 #include <pwd.h>
 #include <grp.h>
 #include "prototypes.h"
 #include "defines.h"
-
 /*
  * Global variables
  */

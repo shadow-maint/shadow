@@ -34,7 +34,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: strtoday.c,v 1.9 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: strtoday.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
 #include "defines.h"
 #ifndef USE_GETDATE
 #define USE_GETDATE 1
@@ -190,8 +190,7 @@ long strtoday (const char *str)
 	 */
 
 	total = (long) ((year - 1970) * 365L) + (((year + 1) - 1970) / 4);
-	total += (long) juldays[month] + (month > 2
-					  && (year % 4) == 0 ? 1 : 0);
+	total += (long) juldays[month] + (month > 2 && (year % 4) == 0 ? 1 : 0);
 	total += (long) day - 1;
 
 	return total;

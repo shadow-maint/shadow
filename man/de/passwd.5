@@ -1,0 +1,94 @@
+.\" Copyright (c) 1993 Michael Haardt (u31b3hs@pool.informatik.rwth\-aachen.de), Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 10:46:28 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Aug 21 18:12:27 1994 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Jun 18 01:53:57 1995 by Andries Brouwer (aeb@cwi.nl)
+.\" Modified Thu Dec 21 19:49:52 1995 by Rene Tschirley (gremlin@cs.tu\-berlin.de)
+.\" Modified Mon Jun 10 00:15:12 1996 by Martin Schulze (joey@linux.de)
+.\"
+.TH PASSWD 5 "24. Juli 1993" "Linux" "Dateiformate"
+.SH BEZEICHNUNG
+passwd \- Paßwort\-Datei
+.SH BESCHREIBUNG
+.B Passwd
+ist eine ASCII\-Datei, die eine Liste der Benutzer des Systems und
+deren Paßwörter enthält.  Die Paßwort\-Datei sollte für alle
+Benutzer lesbar sein, was für die Verschlüsselung notwendig ist,
+aber nur vom Superuser beschreibbar.  Wenn Sie eine neue Kennung
+einrichten, lassen Sie das Paßwort\-Feld in der Datei frei und benutzen
+.BR passwd (1),
+um dem System ein Paßword für die neue Kennung mitzuteilen.  Ein Stern
+oder ein ähnliches Sonderzeichen im Paßwort bedeutet, daß sich dieser
+Benutzer nicht mit
+.BR login (1)s
+einloggen kann.  Wenn sich Ihr Root\-Dateisystem in  
+.I /dev/ram
+befindet, müssen Sie die veränderte Paßwort\-Datei in
+Ihr Root\-Dateisystem auf der Startdiskette kopieren und die
+Zugriffsrechte überprüfen, bevor Sie Ihr System herunterfahren.
+Wenn Sie Benutzer zu Gruppen zusammenfassen möchten, muß die GID
+übereinstimmen und es muß ein entsprechender Eintrag in der Datei
+.I /etc/group
+existieren, oder die Gruppe wird nicht vom System anerkannt.
+.PP
+Die Datei enthält einen Eintrag pro Zeile, mit dem Format:
+.sp
+.RS
+login_name:passwd:UID:GID:user_name:directory:shell
+.RE
+.sp
+Die Bedeutung der Felder:
+.sp
+.RS
+.TP 1.0in
+.I login_name
+Kennung des Benutzers auf dem System.
+.TP
+.I password
+Das verschlüsselte Paßwort des Benutzers.
+.TP
+.I UID
+Die numerische Benutzernummer.
+.TP
+.I GID
+Die numerische Gruppennummer des Benutzers.
+.TP
+.I user_name
+Ein optionales Kommentarfeld, oft benutzt für den vollen Namen des
+Benutzers und weitere Informationen (Telefon, Raum\-Nummer etc.).
+.TP
+.I directory
+Das Heimatverzeichnis $HOME des Benutzers.
+.TP
+.I shell
+Das Programm, das beim Einloggen gestartet werden soll (falls nicht
+nötig, benutzen Sie 
+.IR /bin/sh ).
+.RE
+.SH DATEIEN
+.I /etc/passwd
+.SH "SIEHE AUCH"
+.BR passwd (1),
+.BR login (1), 
+.BR group (5).
+

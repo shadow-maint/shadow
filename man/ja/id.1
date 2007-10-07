@@ -1,4 +1,4 @@
-.\"$Id: id.1,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: id.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,7 +36,7 @@
 .SH 名前
 id \- 現在のユーザ ID 名とグループ ID 名を表示する
 .SH 書式
-\fBid\fR [\fB-a\fR]
+\fBid\fR [\fB\-a\fR]
 .SH 説明
 \fBid\fRは、現在の実ユーザ ID、実効ユーザ ID、実グループ ID、
 実効グループ ID の名前または値を表示する。
@@ -44,11 +44,11 @@ id \- 現在のユーザ ID 名とグループ ID 名を表示する
 \fI/etc/group\fR に存在しない場合は、
 対応する名前は表示されずに値だけが表示される。
 ユーザが同時に複数のグループのメンバーになれるシステムでは、
-\fB-a\fR オプションを指定するとグループの集合が表示される。
+\fB\-a\fR オプションを指定するとグループの集合が表示される。
 .SH ファイル
 \fI/etc/passwd\fR \- ユーザーアカウント情報
 .br
-\fI/etc/group\fR \ - グループ情報
+\fI/etc/group\fR \ \- グループ情報
 .SH 関連項目
 .BR getgid (2),
 .BR getgroups (2),

@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.defs.5,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"	$Id: login.defs.5,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -100,7 +100,7 @@ chfn を SUID ではインストールしなければよい。
 .IP "CREATE_HOME (ブール値)"
 useradd が、デフォルトでユーザのホームディレクトリを
 作成するかどうかを定義する。
-このオプションは useradd のコマンドラインの -m フラグと OR される。
+このオプションは useradd のコマンドラインの \-m フラグと OR される。
 .\"
 .IP "GID_MAX (数値)"
 .IP "GID_MIN (数値)"
@@ -118,11 +118,11 @@ useradd が、デフォルトでユーザのホームディレクトリを
 .IP "PASS_MAX_DAYS (数値)"
 一つのパスワードを使える最長日数。
 パスワードがこの日数よりも古い場合は、変更するよう強制される。
-指定されていない場合は -1 となる (この制限機能を無効にする)。
+指定されていない場合は \-1 となる (この制限機能を無効にする)。
 .IP "PASS_MIN_DAYS (数値)"
 パスワードを変更してから次に変更できるようになるまでの最短日数。
 この日数が経たないうちにパスワードを変更しようとしても拒否される。
-指定されていない場合は -1 となる (この制限機能を無効にする)。
+指定されていない場合は \-1 となる (この制限機能を無効にする)。
 .IP "PASS_WARN_AGE (数値)"
 パスワードの有効期限が来る前に警告を発する期間の日数。
 ゼロにしておくと、期限切れの当日にのみ警告を行い、

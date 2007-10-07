@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.19 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: newusers.c,v 1.21 2005/03/31 05:14:54 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -104,10 +104,8 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 			if (strcmp (grent.gr_mem[i], name) == 0)
 				return 0;
 
-		grent.gr_mem =
-		    (char **) xmalloc (sizeof (char *) * (i + 2));
-		memcpy (grent.gr_mem, grp->gr_mem,
-			sizeof (char *) * (i + 2));
+		grent.gr_mem = (char **) xmalloc (sizeof (char *) * (i + 2));
+		memcpy (grent.gr_mem, grp->gr_mem, sizeof (char *) * (i + 2));
 		grent.gr_mem[i] = xstrdup (name);
 		grent.gr_mem[i + 1] = (char *) 0;
 
@@ -188,8 +186,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
  * add_user - create a new user ID
  */
 
-static int
-add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
+static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 {
 	const struct passwd *pwd;
 	struct passwd pwent;
@@ -343,8 +340,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("newusers", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -362,16 +358,14 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 #endif				/* USE_PAM */
 
 	if (argc == 2) {
 		if (!freopen (argv[1], "r", stdin)) {
-			snprintf (buf, sizeof buf, "%s: %s", Prog,
-				  argv[1]);
+			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
 			exit (1);
 		}
@@ -397,8 +391,7 @@ int main (int argc, char **argv)
 #endif
 	{
 		fprintf (stderr,
-			 _("%s: can't lock files, try again later\n"),
-			 Prog);
+			 _("%s: can't lock files, try again later\n"), Prog);
 		(void) pw_unlock ();
 #ifdef	SHADOWPWD
 		if (is_shadow)
@@ -531,13 +524,12 @@ int main (int argc, char **argv)
 
 		if (newpw.pw_dir[0] && access (newpw.pw_dir, F_OK)) {
 			if (mkdir (newpw.pw_dir,
-				   0777 & ~getdef_num ("UMASK", 077)))
+				   0777 & ~getdef_num ("UMASK", 022)))
 				fprintf (stderr,
 					 _("%s: line %d: mkdir failed\n"),
 					 Prog, line);
 			else if (chown
-				 (newpw.pw_dir, newpw.pw_uid,
-				  newpw.pw_gid))
+				 (newpw.pw_dir, newpw.pw_uid, newpw.pw_gid))
 				fprintf (stderr,
 					 _("%s: line %d: chown failed\n"),
 					 Prog, line);

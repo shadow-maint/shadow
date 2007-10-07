@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.28 2004/11/09 03:57:36 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.30 2005/04/02 14:09:48 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -111,7 +111,7 @@ static int iswheel (const char *username)
 {
 	struct group *grp;
 
-	grp = getgrgid (0);
+	grp = getgrnam ("wheel");;
 	if (!grp || !grp->gr_mem)
 		return 0;
 	return is_on_list (grp->gr_mem, username);
@@ -126,8 +126,7 @@ static void su_failure (const char *tty)
 	if (getdef_bool ("SYSLOG_SU_ENAB"))
 		SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
 			 "- %s %s-%s", tty,
-			 oldname[0] ? oldname : "???",
-			 name[0] ? name : "???"));
+			 oldname[0] ? oldname : "???", name[0] ? name : "???"));
 	closelog ();
 #endif
 	puts (_("Sorry."));
@@ -168,8 +167,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 			exit (exit_status);
 		}
 	} else if (child == -1) {
-		(void) fprintf (stderr, "%s: Cannot fork user shell\n",
-				Prog);
+		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", pwent.pw_shell));
 		closelog ();
 		exit (1);
@@ -222,8 +220,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_close_session: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog,
-			 pam_strerror (pamh, ret));
+		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -320,8 +317,7 @@ int main (int argc, char **argv)
 		 */
 		if (!amroot) {
 			fprintf (stderr,
-				 _("%s: must be run from a terminal\n"),
-				 Prog);
+				 _("%s: must be run from a terminal\n"), Prog);
 			exit (1);
 		}
 		tty = "???";
@@ -427,13 +423,11 @@ int main (int argc, char **argv)
 
 	ret = pam_set_item (pamh, PAM_TTY, (const void *) tty);
 	if (ret == PAM_SUCCESS)
-		ret =
-		    pam_set_item (pamh, PAM_RUSER, (const void *) oldname);
+		ret = pam_set_item (pamh, PAM_RUSER, (const void *) oldname);
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_set_item: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog,
-			 pam_strerror (pamh, ret));
+		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -487,8 +481,7 @@ int main (int argc, char **argv)
 		if (pwent.pw_uid == 0 && getdef_bool ("SU_WHEEL_ONLY")
 		    && !iswheel (oldname)) {
 			fprintf (stderr,
-				 _("You are not authorized to su %s\n"),
-				 name);
+				 _("You are not authorized to su %s\n"), name);
 			exit (1);
 		}
 #ifdef SU_ACCESS
@@ -504,8 +497,7 @@ int main (int argc, char **argv)
 			break;
 		default:	/* access denied (-1) or unexpected value */
 			fprintf (stderr,
-				 _("You are not authorized to su %s\n"),
-				 name);
+				 _("You are not authorized to su %s\n"), name);
 			exit (1);
 		}
 #endif				/* SU_ACCESS */
@@ -524,8 +516,7 @@ int main (int argc, char **argv)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_authenticate: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog,
-			 pam_strerror (pamh, ret));
+		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		su_failure (tty);
 	}
@@ -639,8 +630,7 @@ int main (int argc, char **argv)
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB"))
 		SYSLOG ((LOG_INFO, "+ %s %s-%s", tty,
-			 oldname[0] ? oldname : "???",
-			 name[0] ? name : "???"));
+			 oldname[0] ? oldname : "???", name[0] ? name : "???"));
 #endif
 
 #ifdef USE_PAM
@@ -656,10 +646,8 @@ int main (int argc, char **argv)
 	 */
 	ret = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	if (ret != PAM_SUCCESS) {
-		SYSLOG ((LOG_ERR, "pam_setcred: %s",
-			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog,
-			 pam_strerror (pamh, ret));
+		SYSLOG ((LOG_ERR, "pam_setcred: %s", pam_strerror (pamh, ret)));
+		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}
@@ -668,8 +656,7 @@ int main (int argc, char **argv)
 	if (ret != PAM_SUCCESS) {
 		SYSLOG ((LOG_ERR, "pam_open_session: %s",
 			 pam_strerror (pamh, ret)));
-		fprintf (stderr, "%s: %s\n", Prog,
-			 pam_strerror (pamh, ret));
+		fprintf (stderr, "%s: %s\n", Prog, pam_strerror (pamh, ret));
 		pam_end (pamh, ret);
 		exit (1);
 	}

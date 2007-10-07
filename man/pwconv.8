@@ -1,4 +1,4 @@
-.\"$Id: pwconv.8,v 1.12 2004/12/11 20:05:01 kloczek Exp $
+.\"$Id: pwconv.8,v 1.15 2005/04/02 08:01:24 kloczek Exp $
 .TH PWCONV 8 "26 Sep 1997"
 .SH NAME
 pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and groups.
@@ -28,7 +28,7 @@ files: \fI/etc/passwd\fR, \fI/etc/group\fR, \fI/etc/shadow\fR, and
 \fI/etc/gshadow\fR.
 .PP
 .PP 
-Each program acquires the necessary locks before conversion. fBpwconv\fR and
+Each program acquires the necessary locks before conversion. \fBpwconv\fR and
 \fBgrpconv\fR are similar. First, entries in the shadowed file which don't
 exist in the main file are removed. Then, shadowed entries which don't have
 `x' as the password in the main file are updated. Any missing shadowed
@@ -36,8 +36,8 @@ entries are added. Finally, passwords in the main file are replaced with
 `x'. These programs can be used for initial conversion as well to update the
 shadowed file if the main file is edited by hand.
 .PP
-\fBpwconv\fR will use the values of fBPASS_MIN_DAYS\fR, \fBPASS_MAX_DAYS\fR,
-and \fBPASS_WARN_AGE\fR from fI/etc/login.defs\fR when adding new entries
+\fBpwconv\fR will use the values of \fIPASS_MIN_DAYS\fR, \fIPASS_MAX_DAYS\fR,
+and \fIPASS_WARN_AGE\fR from \fI/etc/login.defs\fR when adding new entries
 to \fI/etc/shadow\fR.
 .PP
 Likewise  \fBpwunconv\fR and \fBgrpunconv\fR are similiar. Passwords in the

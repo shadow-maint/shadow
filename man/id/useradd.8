@@ -1,14 +1,14 @@
-.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" Copyright 1991 \- 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Pendistribusian dan penggunaan dalam bentuk source dan binary, dengan
-.\" atau tanpa modifikasi, diperbolehkan asal syarat-syarat ini dipenuhi :
+.\" atau tanpa modifikasi, diperbolehkan asal syarat\-syarat ini dipenuhi :
 .\" 1. Pendistribusian source code harus mempertahankan tulisan copyright
 .\"    di atas, persyaratan ini, dan disclaimer berikut.
 .\" 2. Pendistribusian dalam bentuk binary harus menampilkan copyright di atas,
 .\"    persyaratan ini, dan disclaimer yang tercantum pada dokumentasi dan/
 .\"    atau keterangan lainnya yang terdapat pada distribusi ini.
-.\" 3. Nama Julianne F. Haugh atau nama-nama kontributor lainnya tidak boleh
+.\" 3. Nama Julianne F. Haugh atau nama\-nama kontributor lainnya tidak boleh
 .\"    digunakan sebagai jaminan atau untuk mempromosikan produk yang berasal
 .\"    dari software ini tanpa izin khusus tertulis.
 .\"
@@ -25,7 +25,7 @@
 .\" KARENA KESALAHAN DALAM MENGGUNAKAN SOFTWARE INI, BAHKAN JIKA TELAH
 .\" DIPERINGATKAN SEBELUMNYA TENTANG KEMUNGKINAN AKAN KERUSAKAN TERSEBUT.
 .\"
-.\"	$Id: useradd.8,v 1.3 2004/11/04 03:06:31 kloczek Exp $
+.\"	$Id: useradd.8,v 1.4 2005/04/05 19:08:54 kloczek Exp $
 .\"
 .TH USERADD 8
 .SH NAME
@@ -33,147 +33,147 @@ useradd \- Membuat user baru atau memperbarui informasi tentang user baru
 .SH SYNOPSIS
 .TP 8
 .B useradd
-.\" .RB [ -A
+.\" .RB [ \-A
 .\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ -c
+.RB [ \-c
 .IR comment ]
-.RB [ -d
+.RB [ \-d
 .IR home_dir ]
 .br
-.RB [ -e
+.RB [ \-e
 .IR expire_date ]
-.RB [ -f
+.RB [ \-f
 .IR inactive_time ]
 .br
-.RB [ -g
+.RB [ \-g
 .IR initial_group ]
-.RB [ -G
+.RB [ \-G
 .IR group [,...]]
 .br
-.RB [ -m " [" -k
-.IR skeleton_dir ] " |" " " -M ]
-.RB [ -s
+.RB [ \-m " [" \-k
+.IR skeleton_dir ] " |" " " \-M ]
+.RB [ \-s
 .IR shell ]
 .br
-.RB [ -u
+.RB [ \-u
 .IR uid " ["
-.BR -o ]]
-.RB [ -n ]
-.RB [ -r ]
+.BR \-o ]]
+.RB [ \-n ]
+.RB [ \-r ]
 .I login
 .TP 8
 .B useradd
-\fB-D\fR
-[\fB-g\fI default_group\fR]
-[\fB-b\fI default_home\fR]
+\fB\-D\fR
+[\fB\-g\fI default_group\fR]
+[\fB\-b\fI default_home\fR]
 .br
-[\fB-f\fI default_inactive\fR]
-[\fB-e\fI default_expire_date\fR]
+[\fB\-f\fI default_inactive\fR]
+[\fB\-e\fI default_expire_date\fR]
 .br
-[\fB-s\fI default_shell\fR]
+[\fB\-s\fI default_shell\fR]
 .SH PENJELASAN
 .SS Membuat User Baru
-Jika digunakan tanpa option \fB-D\fR, perintah \fBuseradd\fR menciptakan
+Jika digunakan tanpa option \fB\-D\fR, perintah \fBuseradd\fR menciptakan
 sebuah  user account baru dengan menggunakan nilai yang terdapat pada
 baris perintah dan nilai default dari system.
 User account yang baru tersebut akan dimasukkan ke system files seperlunya,
-home directory akan dibuatkan, dan initial files di-copy-kan, tergantung
+home directory akan dibuatkan, dan initial files di\-copy\-kan, tergantung
 option yang terdapat pada baris perintah.
 Versi yang terdapat pada Red Hat Linux akan membuat sebuah group untuk
-setiap user yang didaftarkan pada system, jika \fB-b\fR tidak diberikan.
+setiap user yang didaftarkan pada system, jika \fB\-b\fR tidak diberikan.
 Option yang dapat digunakan pada perintah \fBuseradd\fR adalah
-.\" .IP "\fB-A {\fImethod\fR|\fBDEFAULT\fR},..."
+.\" .IP "\fB\-A {\fImethod\fR|\fBDEFAULT\fR},..."
 .\" Nilai milik user dalam metode autentikasi/pengecekan.
 .\" Metode autentikasi/pengecekan adalah nama sebuah program yang bertanggung 
 .\" jawab untuk memeriksa identitas user.
 .\" String \fBDEFAULT\fR dapat digunakan untuk mengubah metode autentikasi
 .\" menjadi metode password system yang standar.
-.\" Daftar tersebut berisi nama-nama program, yang dipisahkan oleh koma.
+.\" Daftar tersebut berisi nama\-nama program, yang dipisahkan oleh koma.
 .\" \fBDEFAULT\fR hanya dapat dicantumkan sekali saja.
 .\" 
 .\" 
 .\" 
-.IP "\fB-c \fIcomment\fR"
+.IP "\fB\-c \fIcomment\fR"
 Komentar pada file password milik user baru.
-.IP "\fB-d \fIhome_dir\fR"
+.IP "\fB\-d \fIhome_dir\fR"
 User baru akan diciptakan dengan \fIhome_dir\fR sebagai lokasi directory 
-login-nya.
-Default-nya adalah menambahkan nama \fIlogin\fR pada \fIdefault_home\fR
+login\-nya.
+Default\-nya adalah menambahkan nama \fIlogin\fR pada \fIdefault_home\fR
 dan menggunakannya sebagai nama directory login.
-.IP "\fB-e \fIexpire_date\fR"
+.IP "\fB\-e \fIexpire_date\fR"
 Tanggal ketika user account dimatikan.
 Tanggal ditulis dalam format \fIMM/DD/YY\fR.
-.IP "\fB-f \fIinactive_days\fR"
+.IP "\fB\-f \fIinactive_days\fR"
 Jumlah hari setelah sebuah password kadaluarsa hingga account 
 tersebut dimatikan secara permanen.
 Nilai 0 mematikan account segera setelah password kadaluarsa,
-dan nilai -1 mematikan fungsi ini.
-Nilai default-nya adalah -1.
-.IP "\fB-g \fIinitial_group\fR"
+dan nilai \-1 mematikan fungsi ini.
+Nilai default\-nya adalah \-1.
+.IP "\fB\-g \fIinitial_group\fR"
 Nama group atau angka initial login group.
 Nama group harus sudah ada.  Seorang anggota group harus merujuk
 pada group yang sudah ada.
-Nilai group default-nya adalah 1.
-.IP "\fB-G \fIgroup,[...]\fR"
-Daftar group tambahan yang juga merupakan group-nya user.
+Nilai group default\-nya adalah 1.
+.IP "\fB\-G \fIgroup,[...]\fR"
+Daftar group tambahan yang juga merupakan group\-nya user.
 Setiap group dipisahkan oleh koma, tanpa diikuti spasi.
-Group juga mengikuti aturan yang diberikan dengan option \fB-g\fR.
-Default-nya hanyalah untuk user yang terdaftar pada group awal.
-.IP \fB-m\fR
+Group juga mengikuti aturan yang diberikan dengan option \fB\-g\fR.
+Default\-nya hanyalah untuk user yang terdaftar pada group awal.
+.IP \fB\-m\fR
 Home directory milik user akan dibuatkan jika belum ada.
 File yang terdapat pada \fIskeleton_dir\fR atau \fI/etc/skel\fR
 akan dibuatkan pada home directory milik user.
-Option \fB-k\fR hanya valid jika bertemu option \fB-m\fR.
-Dafault-nya adalah tidak membuat directory dan tidak meng-copy
+Option \fB\-k\fR hanya valid jika bertemu option \fB\-m\fR.
+Dafault\-nya adalah tidak membuat directory dan tidak meng\-copy
 segala file.
-.IP \fB-M\fR
+.IP \fB\-M\fR
 Home directory milik user tidak akan dibuatkan, bahkan jika setting
 system pada \fI/etc/login.defs\fR ditujukan untuk membuat home 
 directory.
-.IP \fB-n\fR
+.IP \fB\-n\fR
 Sebuah group yang namanya sama dengan user akan ditambahkan ke dalam
 system secara default.  Option ini akan mematikan kebiasaan tersebut
 yang terdapat pada Red Hat Linux.
-.IP \fB-r\fR
+.IP \fB\-r\fR
 Flag ini digunakan untuk membuat sebuah system account.  Yaitu, user
 dengan UID yang lebih kecil dari UID_MIN yang tercantum pada 
 \fI/etc/login.defs\fR.  Harap diingat bahwa \fBuseradd\fR tidak akan
 membuat home directory untuk user semacam ini, menghiraukan setting
 default yang terdapat di \fI/etc/login.defs\fR.
-Anda harus menyebutkan option \fB-m\fR jika ingin membuat home directory
+Anda harus menyebutkan option \fB\-m\fR jika ingin membuat home directory
 untuk sebuah system account yang akan dibuat.
 Ini adalah option yang ditambahkan oleh Red Hat.
-.IP "\fB-s \fIshell\fR"
+.IP "\fB\-s \fIshell\fR"
 Nama login shell milik user.
-Default-nya adalah membiarkan field ini kosong, yang menyebabkan
+Default\-nya adalah membiarkan field ini kosong, yang menyebabkan
 system untuk memilih login shell yang default.
-.IP "\fB-u \fIuid\fR"
+.IP "\fB\-u \fIuid\fR"
 Nilai user ID secara numerik.
-Nilai ini harus unique, kecuali jika option \fI-o\fR digunakan.
+Nilai ini harus unique, kecuali jika option \fI\-o\fR digunakan.
 Nilai tersebut tidak boleh negatif.
-Default-nya adalah menggunakan nilai ID yang lebih besar dari 999
+Default\-nya adalah menggunakan nilai ID yang lebih besar dari 999
 dan lebih besar dari semua user lain.
 Nilai di antara 0 dan 999 biasanya disiapkan untuk system aacount.
-.SS Mengubah nilai-nilai default.
-Ketika digunakan dengan option \fB-D\fR, \fBuseradd\fR akan
+.SS Mengubah nilai\-nilai default.
+Ketika digunakan dengan option \fB\-D\fR, \fBuseradd\fR akan
 menampilkan nilai default, atau memperbarui nilai default baru
 yang terdapat pada baris perintah.
 Option yang dapat digunakan adalah
-.IP "\fB-b \fIdefault_home\fR"
+.IP "\fB\-b \fIdefault_home\fR"
 Awalan path untuk home directory milik user baru.
 Nama user akan ditambahkan setelah akhir \fIdefault_home\fR
-ketika membuat nama directory baru jika option \fB-d\fI tidak
+ketika membuat nama directory baru jika option \fB\-d\fI tidak
 disebutkan dalam membuat account baru.
-.IP "\fB-e \fIdefault_expire_date\fR"
+.IP "\fB\-e \fIdefault_expire_date\fR"
 Tanggal ketika user account dimatikan.
-.IP "\fB-f \fIdefault_inactive\fR"
+.IP "\fB\-f \fIdefault_inactive\fR"
 Jumlah hari setelah password kadaluarsa sebelum account
 dimatikan.
-.IP "\fB-g \fIdefault_group\fR"
+.IP "\fB\-g \fIdefault_group\fR"
 Nama group atau ID sebagai group awal user baru.
 Nama group yang disebut harus sudah ada dan nomor group ID
 harus mempunyai entry.
-.IP "\fB-s \fIdefault_shell\fR"
+.IP "\fB\-s \fIdefault_shell\fR"
 Nama untuk login shell milik user baru.
 Nama program yang disebutkan akan digunakan untuk semua user
 account baru mendatang.
@@ -198,7 +198,7 @@ Ini harus dilakukan pada server NIS.
 .br
 \fB/etc/default/useradd\fR \- informasi tentang nilai default
 .br
-\fB/etc/login.defs\fR \- system-wide settings
+\fB/etc/login.defs\fR \- system\-wide settings
 .br
 \fB/etc/skel\fR \- directory yang mengandung default files
 .SH LIHAT JUGA

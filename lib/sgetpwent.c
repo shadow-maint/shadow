@@ -30,15 +30,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sgetpwent.c,v 1.6 2003/05/03 16:14:23 kloczek Exp $")
-
+RCSID ("$Id: sgetpwent.c,v 1.7 2005/03/31 05:14:49 kloczek Exp $")
 #include <sys/types.h>
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
-
 #define	NFIELDS	7
-
 /*
  * sgetpwent - convert a string to a (struct passwd)
  *
@@ -51,15 +48,13 @@ RCSID("$Id: sgetpwent.c,v 1.6 2003/05/03 16:14:23 kloczek Exp $")
  *	performance reasons.  I am going to come up with some conditional
  *	compilation glarp to improve on this in the future.
  */
-
-struct passwd *
-sgetpwent(const char *buf)
+struct passwd *sgetpwent (const char *buf)
 {
 	static struct passwd pwent;
 	static char pwdbuf[1024];
-	register int	i;
-	register char	*cp;
-	char	*ep;
+	register int i;
+	register char *cp;
+	char *ep;
 	char *fields[NFIELDS];
 
 	/*
@@ -67,20 +62,20 @@ sgetpwent(const char *buf)
 	 * the password structure remain valid.
 	 */
 
-	if (strlen(buf) >= sizeof pwdbuf)
-		return 0;  /* fail if too long */
-	strcpy(pwdbuf, buf);
+	if (strlen (buf) >= sizeof pwdbuf)
+		return 0;	/* fail if too long */
+	strcpy (pwdbuf, buf);
 
 	/*
 	 * Save a pointer to the start of each colon separated
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = pwdbuf, i = 0;i < NFIELDS && cp;i++) {
+	for (cp = pwdbuf, i = 0; i < NFIELDS && cp; i++) {
 		fields[i] = cp;
 		while (*cp && *cp != ':')
 			++cp;
-	
+
 		if (*cp)
 			*cp++ = '\0';
 		else
@@ -105,11 +100,11 @@ sgetpwent(const char *buf)
 	pwent.pw_name = fields[0];
 	pwent.pw_passwd = fields[1];
 	if (fields[2][0] == '\0' ||
-		((pwent.pw_uid = strtol (fields[2], &ep, 10)) == 0 && *ep)) {
+	    ((pwent.pw_uid = strtol (fields[2], &ep, 10)) == 0 && *ep)) {
 		return 0;
 	}
 	if (fields[3][0] == '\0' ||
-		((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && *ep)) {
+	    ((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && *ep)) {
 		return 0;
 	}
 	pwent.pw_gecos = fields[4];

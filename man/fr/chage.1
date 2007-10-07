@@ -1,4 +1,4 @@
-.\" Copyright 1990 - 1994 Julianne Frances Haugh
+.\" Copyright 1990 \- 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chage.1,v 1.2 2003/04/26 13:24:12 kloczek Exp $
+.\"	$Id: chage.1,v 1.4 2005/04/05 19:08:53 kloczek Exp $
 .\"
 .TH CHAGE 1 "1 Novembre 2001"
 .SH NOM
@@ -34,64 +34,64 @@ utilisateur.
 .SH SYNOPSIS
 .TP 6
 \fBchage\fR
-[\fB-m \fImin\fR] [\fB-M \fImax\fR]
-[\fB-d \fIdernier\fR] [\fB-I \fIinactive\fR]
+[\fB\-m\fR \fImin\fR] [\fB\-M\fR \fImax\fR]
+[\fB\-d\fR \fIdernier\fR] [\fB\-I\fR \fIinactive\fR]
 .br
-[\fB-E \fIexpire\fR] [\fB-W \fIalerte\fR] \fIutilisateur\fR
+[\fB\-E\fR \fIexpire\fR] [\fB\-W\fR \fIalerte\fR] \fIutilisateur\fR
 .TP 6
 \fBchage\fR
-\fB-l\fR \fIutilisateur\fR
+\fB\-l\fR \fIutilisateur\fR
 .SH DESCRIPTION
 \fBchage\fR modifie le nombre de jours entre les changements de mot de passe
 ainsi que la date du dernier changement.
 Cette information est utilisée par le système pour déterminer quand un
 utilisateur doit changer son mot de passe.
-La commande \fBchage\fR est réservée au Super-utilisateur, sauf pour l'option
-\fB-l\fR, qui peut être utilisée par un utilisateur non privilégié pour savoir
+La commande \fBchage\fR est réservée au Super\-utilisateur, sauf pour l'option
+\fB\-l\fR, qui peut être utilisée par un utilisateur non privilégié pour savoir
 quand son mot de passe ou sont compte doit expirer.
 .PP
-Avec l'option \fB-m\fR, la valeur de \fImin\fR représente le nombre minimum
+Avec l'option \fB\-m\fR, la valeur de \fImin\fR représente le nombre minimum
 de jours entre chaque changement de mot de passe.
 Une valeur de zéro pour ce champ indique que l'utilisateur peut changer
 son mot de passe n'importe quand.
 .PP
-Avec l'option \fB-M\fR, la valeur de \fImax\fR représente le nombre maximum
+Avec l'option \fB\-M\fR, la valeur de \fImax\fR représente le nombre maximum
 de jours pendant lesquels un mot de passe est valide.
 Quand \fImax\fR plus \fIdernier\fR est inférieur à la date courante,
 l'utilisateur est obligé de changer son mot de passe avant de pouvoir
 utiliser son compte.
-Cet évènement peut être déclenché plus tôt grâce à l'option \fB-W\fR
+Cet évènement peut être déclenché plus tôt grâce à l'option \fB\-W\fR
 qui prévient l'utilisateur à l'avance avec un message d'alerte.
 .PP
-Avec l'option \fB-d\fR, la valeur \fIdernier\fR est le numéro du
+Avec l'option \fB\-d\fR, la valeur \fIdernier\fR est le numéro du
 jour depuis le 1er Janvier 1970, où le mot de passe a été changé la
 dernière fois.
-La date peut aussi être exprimée dans le format YYYY-MM-DD (ou le format
+La date peut aussi être exprimée dans le format YYYY\-MM\-DD (ou le format
 utilisé plus communément dans votre région).
 .PP
-L'option \fB-E\fR est utilisée pour définir une date à partir de laquelle
+L'option \fB\-E\fR est utilisée pour définir une date à partir de laquelle
 le compte de l'utilisateur ne sera plus accessible.
 La valeur \fIexpire\fR est le numéro du jour depuis le 1er Janvier 1970
 après lequel le compte sera bloqué.
-La date peut aussi être exprimée dans un format YYYY-MM-DD (ou le format
+La date peut aussi être exprimée dans un format YYYY\-MM\-DD (ou le format
 plus communément utilisé dans votre région).
 Un utilisateur dont le compte est bloqué doit contacter l'administrateur
 système pour pouvoir utiliser le système à nouveau.
 .PP
-L'option \fB-I\fR est utilisée pour définir le nombre de jours d'inactivité,
+L'option \fB\-I\fR est utilisée pour définir le nombre de jours d'inactivité,
 après qu'un mot de passe a expiré, avant que le compte ne soit bloqué.
 Un utilisateur dont le compte est bloqué doit contacter l'administrateur
 système avant de pouvoir utiliser le système à nouveau.
 La valeur \fIinactive\fR est le nombre de jours d'inactivité. Une valeur
 de 0 désactive cette fonction.
 .PP
-L'option \fB-W\fR est utilisée pour définir le nombre de jours d'alerte
+L'option \fB\-W\fR est utilisée pour définir le nombre de jours d'alerte
 avant que le changement de mot de passe ne soit obligatoire.
 La valeur \fIalerte\fR est le nombre de jours précédent l'expiration
 pendant lesquels un utilisateur sera prévenu que son mot de passe est
 sur le point d'expirer.
 .PP
-Toutes les valeurs ci-dessus sont stockées au jour près quand le fichier
+Toutes les valeurs ci\-dessus sont stockées au jour près quand le fichier
 «\~shadow password\~» est utilisé, mais sont converties en semaines
 quand le fichier de mots de passe standard est utilisé.
 À cause de cette conversion, des erreurs d'arrondis peuvent apparaître.
@@ -110,4 +110,3 @@ La valeur courante est affichée entre crochets.
 .BR shadow (5)
 .SH TRADUCTION
 Olivier Marin, 2001.
-

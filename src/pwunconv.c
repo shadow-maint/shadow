@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwunconv.c,v 1.15 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwunconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
 #include "defines.h"
 #include <sys/types.h>
 #include <stdio.h>
@@ -129,21 +129,18 @@ int main (int argc, char **argv)
 
 	if (!spw_close ()) {
 		fprintf (stderr,
-			 _("%s: can't update shadow password file\n"),
-			 Prog);
+			 _("%s: can't update shadow password file\n"), Prog);
 		fail_exit (3);
 	}
 
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: can't update password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't update password file\n"), Prog);
 		fail_exit (3);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
-			 _("%s: can't delete shadow password file\n"),
-			 Prog);
+			 _("%s: can't delete shadow password file\n"), Prog);
 		fail_exit (3);
 	}
 
@@ -162,8 +159,7 @@ int main (int argc, char **argv)
 int main (int argc, char **argv)
 {
 	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n",
-		 argv[0]);
+		 "%s: not configured for shadow password support.\n", argv[0]);
 	exit (1);
 }
 #endif				/* !SHADOWPWD */

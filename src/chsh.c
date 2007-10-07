@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chsh.c,v 1.24 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: chsh.c,v 1.29 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -48,6 +48,10 @@ RCSID (PKG_VER "$Id: chsh.c,v 1.24 2005/01/17 23:12:04 kloczek Exp $")
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#endif
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
 #endif
@@ -57,10 +61,6 @@ static int amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 
 /* external identifiers */
-
-#ifdef	NDBM
-extern int pw_dbm_mode;
-#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -86,8 +86,7 @@ static void usage (void)
 
 static void new_fields (void)
 {
-	printf (_
-		("Enter the new value, or press ENTER for the default\n"));
+	printf (_("Enter the new value, or press ENTER for the default\n"));
 	change_field (loginsh, sizeof loginsh, _("Login Shell"));
 }
 
@@ -135,9 +134,6 @@ int main (int argc, char **argv)
 	 */
 
 	amroot = getuid () == 0;
-#ifdef	NDBM
-	pw_dbm_mode = O_RDWR;
-#endif
 
 	/*
 	 * Get the program name. The program name is used as a prefix to
@@ -211,8 +207,7 @@ int main (int argc, char **argv)
 			 Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "passwd.byname",
-				&nis_master)) {
+		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _
 				 ("%s: `%s' is the NIS master for this client.\n"),
@@ -231,8 +226,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();
 		fprintf (stderr,
-			 _("You may not change the shell for %s.\n"),
-			 user);
+			 _("You may not change the shell for %s.\n"), user);
 		exit (1);
 	}
 
@@ -245,11 +239,26 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
 		closelog ();
 		fprintf (stderr,
-			 _("You may not change the shell for %s.\n"),
-			 user);
+			 _("You may not change the shell for %s.\n"), user);
 		exit (1);
 	}
+#ifdef WITH_SELINUX
+	/*
+	 * If the UID of the user does not match the current real UID,
+	 * check if the change is allowed by SELinux policy.
+	 */
 
+	if ((pw->pw_uid != getuid ())
+	    && (checkPasswdAccess (PASSWD__CHSH) != 0)) {
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		closelog ();
+		fprintf (stderr,
+			 _("You may not change the shell for %s.\n"), user);
+		exit (1);
+	}
+#endif
+
+#ifndef USE_PAM
 	/*
 	 * Non-privileged users are optionally authenticated (must enter
 	 * the password of the user whose information is being changed)
@@ -257,8 +266,10 @@ int main (int argc, char **argv)
 	 * chfn/chsh.  --marekm
 	 */
 
-	if (!amroot && getdef_bool ("CHFN_AUTH"))
+	if (!amroot && getdef_bool ("CHSH_AUTH"))
 		passwd_check (pw->pw_name, pw->pw_passwd, "chsh");
+
+#endif				/* !USE_PAM */
 
 	/*
 	 * Now get the login shell. Either get it from the password
@@ -286,13 +297,11 @@ int main (int argc, char **argv)
 	 */
 
 	if (valid_field (loginsh, ":,=")) {
-		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog,
-			 loginsh);
+		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		closelog ();
 		exit (1);
 	}
-	if (!amroot
-	    && (!check_shell (loginsh) || access (loginsh, X_OK) != 0)) {
+	if (!amroot && (!check_shell (loginsh) || access (loginsh, X_OK) != 0)) {
 		fprintf (stderr, _("%s is an invalid shell.\n"), loginsh);
 		closelog ();
 		exit (1);
@@ -344,8 +353,7 @@ int main (int argc, char **argv)
 	if (!pw) {
 		pw_unlock ();
 		fprintf (stderr,
-			 _("%s: %s not found in /etc/passwd\n"), Prog,
-			 user);
+			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
 		exit (1);
 	}
 
@@ -364,22 +372,10 @@ int main (int argc, char **argv)
 	if (!pw_update (&pwent)) {
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
-		fprintf (stderr,
-			 _("Error updating the password entry.\n"));
+		fprintf (stderr, _("Error updating the password entry.\n"));
 		pw_unlock ();
 		exit (1);
 	}
-#ifdef NDBM
-	if (pw_dbm_present () && !pw_dbm_update (&pwent)) {
-		SYSLOG ((LOG_ERR, "error updating DBM passwd entry"));
-		closelog ();
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		pw_unlock ();
-		exit (1);
-	}
-	endpwent ();
-#endif
 
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
@@ -388,8 +384,7 @@ int main (int argc, char **argv)
 	if (!pw_close ()) {
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
-		fprintf (stderr,
-			 _("Cannot commit password file changes.\n"));
+		fprintf (stderr, _("Cannot commit password file changes.\n"));
 		pw_unlock ();
 		exit (1);
 	}
@@ -399,8 +394,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("Cannot unlock the password file.\n"));
 		exit (1);
 	}
-	SYSLOG ((LOG_INFO, "changed user `%s' shell to `%s'", user,
-		 loginsh));
+	SYSLOG ((LOG_INFO, "changed user `%s' shell to `%s'", user, loginsh));
 
 	nscd_flush_cache ("passwd");
 

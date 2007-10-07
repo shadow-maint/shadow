@@ -1,11 +1,13 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.7)
+AM_INIT_AUTOMAKE(shadow, 4.0.8)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
 test "$prefix" = "NONE" && prefix="/usr"
 test "$prefix" = "/usr" && exec_prefix=""
+
+AC_GNU_SOURCE
 
 AM_DISABLE_SHARED
 AM_ENABLE_STATIC
@@ -32,7 +34,7 @@ AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utime.h ulimit.h sys/resource.h gshadow.h shadow.h lastlog.h \
 	locale.h rpc/key_prot.h)
 
-AC_CHECK_FUNCS(a64l fchmod fchown fseeko fsync getgroups gethostname getspnam \
+AC_CHECK_FUNCS(a64l fchmod fchown fsync getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
 	memcpy memset setgroups sigaction strchr updwtmp updwtmpx)
 AC_SYS_LARGEFILE
@@ -97,7 +99,6 @@ fi
 
 dnl Checks for library functions.
 AC_TYPE_GETGROUPS
-AC_PROG_GCC_TRADITIONAL
 AC_TYPE_SIGNAL
 AC_FUNC_UTIME_NULL
 AC_FUNC_STRFTIME
@@ -152,7 +153,7 @@ if test $shadow_cv_mailfile != none; then
 fi
 
 AC_CACHE_CHECK([location of utmp], shadow_cv_utmpdir,
-[for utmpdir in /var/run /var/adm /usr/adm /etc none; do
+[for shadow_cv_utmpdir in /var/run /var/adm /usr/adm /etc none; do
 	if test -f $shadow_cv_utmpdir/utmp; then
 		break
 	fi
@@ -192,14 +193,11 @@ dnl (unlike many systems which have a limit of 8 characters), and can
 dnl be interrupted with Ctrl-C (unlike Linux libc).
 AC_DEFINE(getpass, libshadow_getpass)
 
-AC_ARG_ENABLE(desrpc, [  --enable-desrpc         try to use secure RPC in login (default if found)])
 AC_ARG_ENABLE(shadowgrp, [  --enable-shadowgrp      enable shadow group support [default=yes]])
 
 AC_ARG_WITH(libcrack, [  --with-libcrack	try to use libcrack (default if found)])
 AC_ARG_WITH(libcrypt, [  --with-libcrypt	try to use libcrypt (default if found)])
-AC_ARG_WITH(libopie,  [  --with-libopie		use libopie for OPIE support])
 AC_ARG_WITH(libpam,   [  --with-libpam 		use libpam for PAM support])
-AC_ARG_WITH(libskey,  [  --with-libskey		use libskey for S/Key support])
 AC_ARG_WITH(selinux,  [  --with-selinux		use SELinux support])
 
 dnl Check for some functions in libc first, only if not found check for
@@ -209,15 +207,6 @@ dnl needed (Linux glibc, Irix), but still link it if needed (Solaris).
 AC_SEARCH_LIBS(inet_ntoa, inet)
 AC_SEARCH_LIBS(socket, socket)
 AC_SEARCH_LIBS(gethostbyname, nsl)
-
-dnl XXX - getsecretkey() causes login to hang for 5 minutes on at least
-dnl one RH 4.0 system.  Use --disable-desrpc if you have this problem.
-dnl Reported by Mohan Khurana <mohan@stealth.net>.
-
-if test "$enable_desrpc" != "no" -a "$ac_cv_header_rpc_key_prot_h" = "yes" ; then
-	AC_CHECK_FUNC(getsecretkey, AC_DEFINE(DES_RPC),
-		AC_CHECK_LIB(rpcsvc, getsecretkey, AC_DEFINE(DES_RPC)))
-fi
 
 if test "$enable_shadowgrp" != "no"; then
 	AC_DEFINE(SHADOWGRP)
@@ -236,17 +225,8 @@ if test "$with_libcrack" != "no"; then
 	AC_CHECK_LIB(crack, FascistHistoryPw, AC_DEFINE(HAVE_LIBCRACK_PW))
 fi
 
-AC_SUBST(LIBSKEY)
-AC_SUBST(LIBMD)
-if test "$with_libskey" = "yes"; then
-	AC_CHECK_LIB(md, MD5Init, LIBMD=-lmd)
-	AC_CHECK_LIB(skey, skeychallenge, AC_DEFINE(SKEY) LIBSKEY=-lskey, [], $LIBMD $LIBCRYPT)
-elif test "$with_libopie" = "yes"; then
-	AC_CHECK_LIB(opie, opiechallenge, AC_DEFINE(OPIE) LIBSKEY=-lopie, [], $LIBCRYPT)
-fi
-
 if test "$with_selinux" = "yes"; then
-	AC_CHECK_LIB(selinux, is_selinux_enabled, [LIBSELINUX="-lselinux"], [SELinuux enabled but libselinux not found])
+	AC_CHECK_LIB(selinux, is_selinux_enabled, [LIBSELINUX="-lselinux"], [SELinux enabled but libselinux not found])
 	AC_SUBST(LIBSELINUX)
 	AC_CHECK_HEADERS(selinux/selinux.h, [], [selinux/selinux.h is missing])
 	AC_DEFINE(WITH_SELINUX, 1, [Build shadow with SELinux support])
@@ -260,23 +240,20 @@ if test "$with_libpam" = "yes"; then
 		AC_CHECK_LIB(pam_misc, main,
 			[LIBPAM="$LIBPAM -lpam_misc"],
 			AC_MSG_ERROR(libpam_misc is missing)
-		)]
+		)],
 		[AC_MSG_CHECKING(use login access checking if PAM not used)
-		AC_DEFINE(LOGIN_ACCESS)
 		AC_MSG_RESULT(yes)]
 	)
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_MSG_RESULT(no)
 else
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
-	AC_DEFINE(LOGIN_ACCESS)
 	AC_DEFINE(SU_ACCESS)
 	AC_MSG_RESULT(yes)
 fi
 
 AM_GNU_GETTEXT_VERSION(0.12.1)
 AM_GNU_GETTEXT([external])
-AC_DEFINE_UNQUOTED(LOCALEDIR, "${datadir}/locale", [locale directory])
 
 AC_CONFIG_FILES([
 	Makefile

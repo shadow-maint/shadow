@@ -30,94 +30,29 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: encrypt.c,v 1.7 2000/08/26 18:27:17 marekm Exp $")
-
+RCSID ("$Id: encrypt.c,v 1.11 2005/04/06 02:59:22 kloczek Exp $")
+#include <unistd.h>
 #include "prototypes.h"
 #include "defines.h"
 
-extern	char	*crypt();
-extern char *libshadow_md5_crypt(const char *, const char *);
-
-char *
-pw_encrypt(const char *clear, const char *salt)
+char *pw_encrypt (const char *clear, const char *salt)
 {
-	static	char	cipher[128];
-	char	*cp;
-#ifdef SW_CRYPT
-	static	int	count;
-#endif
+	static char cipher[128];
+	char *cp;
 
-#ifdef MD5_CRYPT
-	/*
-	 * If the salt string from the password file or from crypt_make_salt()
-	 * begins with the magic string, use the new algorithm.
-	 */
-	if (strncmp(salt, "$1$", 3) == 0)
-		return libshadow_md5_crypt(clear, salt);
-#endif
-
-#ifdef	SW_CRYPT
-	/*
-	 * Copy over the salt.  It is always the first two
-	 * characters of the string.
-	 */
-
-	cipher[0] = salt[0];
-	cipher[1] = salt[1];
-	cipher[2] = '\0';
-
-	/*
-	 * Loop up to ten times on the cleartext password.
-	 * This is because the input limit for passwords is
-	 * 80 characters.
-	 *
-	 * The initial salt is that provided by the user, or the
-	 * one generated above.  The subsequent salts are gotten
-	 * from the first two characters of the previous encrypted
-	 * block of characters.
-	 */
-
-	for (count = 0;count < 10;count++) {
-		cp = crypt(clear, salt);
-		if (!cp) {
-			perror("crypt");
-			exit(1);
-		}
-		if (strlen(cp) != 13)
-			return cp;
-		strcat(cipher, cp + 2);
-		salt = cipher + 11 * count + 2;
-
-		if (strlen(clear) > 8)
-			clear += 8;
-		else
-			break;
-	}
-#else
-	cp = crypt(clear, salt);
+	crypt (clear, salt);
 	if (!cp) {
 		/*
 		 * Single Unix Spec: crypt() may return a null pointer,
 		 * and set errno to indicate an error.  The caller doesn't
 		 * expect us to return NULL, so...
 		 */
-		perror("crypt");
-		exit(1);
+		perror ("crypt");
+		exit (1);
 	}
-	if (strlen(cp) != 13)
-		return cp;  /* nonstandard crypt() in libc, better bail out */
-	strcpy(cipher, cp);
+	if (strlen (cp) != 13)
+		return cp;	/* nonstandard crypt() in libc, better bail out */
+	strcpy (cipher, cp);
 
-#ifdef	DOUBLESIZE
-	if (strlen (clear) > 8) {
-		cp = crypt(clear + 8, salt);
-		if (!cp) {
-			perror("crypt");
-			exit(1);
-		}
-		strcat(cipher, cp + 2);
-	}
-#endif	/* DOUBLESIZE */
-#endif	/* SW_CRYPT */
 	return cipher;
 }

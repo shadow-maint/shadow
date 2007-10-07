@@ -1,0 +1,40 @@
+.\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
+.\"	$Id: lastlog.8,v 1.2 2005/04/05 19:08:52 kloczek Exp $
+.\"
+.TH LASTLOG 8
+.SH JMÉNO
+lastlog \- prozkoumá soubor lastlog
+.SH SYNTAXE
+.B lastlog
+.RB [ \-u
+.IR pøihla¹ovací\-jméno ]
+.RB [ \-t
+.IR dny ]
+.SH POPIS
+\fBlastlog\fR setøídí a zobrazí obsah souboru
+\fI/var/log/lastlog\fR,
+který obsahuje záznamy o pøihla¹ování a odhla¹ování u¾ivatelù v systému.
+Zobrazí se \fBpøihla¹ovací jméno\fR, \fBjméno terminálu\fR a \fBèas posledního
+pøihla¹ení\fR.
+Standardnì (tj. bez dal¹ích voleb) lastlog zobrazí záznamy setøídìné
+podle èísla UID.
+Pou¾ití pøepínaèe \fB\-u \fIpøihla¹ovací\-jméno\fR
+zpùsobí, ¾e bude vyti¹tìn pouze poslední záznam o pøihlá¹ení pøíslu¹ného u¾ivatele.
+Zadáním \fB\-t \fIdny\fR se zobrazí pouze
+ta pøihlá¹ení, které jsou døívìj¹í ne¾ zadané \fIdny\fR.
+Parametr \fB\-t\fR pøekryje pøípadný parametr \fB\-u\fR.
+.PP
+Pokud se u¾ivatel je¹tì nikdy nepøihlásil, zobrazí se zpráva \fB"**Never logged in**"\fR (Nikdy nepøihlá¹en)
+místo jména terminálu a èasu.
+.SH SOUBORY
+/var/log/lastlog \- soubor se záznamy o pøihlá¹ení a odhlá¹ení
+.SH NÁMITKY
+Velké rozdíly v UID èíslech jsou zpùsobeny tím, ¾e lastlog program bì¾el dlouho bez
+výstupu na obrazovku (napø. mmdf=800 a poslední uid=170, program se bude
+jevit jako s uid 171\-799).
+.SH AUTOØI
+Julianne Frances Haugh (jfh@austin.ibm.com)
+.br
+Phillip Street
+.SH PØELO®IL
+Ondøej Pavlíèek (mox@post.cz).

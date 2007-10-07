@@ -1,4 +1,4 @@
-.\"$Id: chpasswd.8,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: chpasswd.8,v 1.5 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -38,13 +38,13 @@
 .SH 名前
 \fBchpasswd\fR \- パスワードファイルをバッチ処理で更新する
 .SH 書式
-\fBchpasswd\fR [\fB-e\fR]
+\fBchpasswd\fR [\fB\-e\fR]
 .SH 説明
 \fBchpasswd\fR コマンドは
 標準入力からユーザ名とパスワードの組が記されているファイルを読み込み、
 その情報を用いて既存のユーザ群のパスワード情報を更新する。
--e オプションがない場合は、パスワードは平文とみなされる。
--e オプションがある場合は、パスワードは暗号化されているとみなされる。
+\-e オプションがない場合は、パスワードは平文とみなされる。
+\-e オプションがある場合は、パスワードは暗号化されているとみなされる。
 各行の書式は次の通り。
 .sp 1
 	  \fIuser_name\fR:\fIpassword\fR

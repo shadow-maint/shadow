@@ -1,5 +1,4 @@
-.\" $Id: usermod.8,v 1.12 2004/11/04 03:06:32 kloczek Exp $
-.\" {PTM/WK/0.1/VIII-1999}
+.\" $Id: usermod.8,v 1.14 2005/04/05 18:22:49 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,87 +30,73 @@
 usermod \- zmiana danych konta u¿ytkownika
 .SH SK£ADNIA
 .TP 8
-.B usermod
-.\" .RB [ -A
-.\" .RI { metoda | \fBDEFAULT\fR "},... ]"
-.RB [ -c
-.IR komentarz ]
-.RB [ -d
-.IR katalog_domowy " ["
-.BR -m ]]
+\fBusermod\fR [\fB\-c\fR \fIkomentarz\fR] [\fB\-d\fR \fIkatalog_domowy\fR [\fB\-m\fR]]
 .br
-.RB [ -e
-.IR data_wa¿no¶ci ]
-.RB [ -f
-.IR dni_nieaktywno¶ci ]
+[\fB\-e\fR \fIdata_wa¿no¶ci\fR] [\fB\-f\fR \fIdni_nieaktywno¶ci\fR]
 .br
-.RB [ -g
-.IR grupa_pocz±tkowa ]
-.RB [ -G
-.IR grupa [,...]]
+[\fB\-g\fR \fIgrupa_pocz±tkowa\fR] [\fB\-G\fR \fIgrupa\fR [,...]]
 .br
-.RB [ -l
-.IR login_name ]
-.RB [ -s
-.IR pow³oka ]
+[\fB\-l\fR \fIlogin_name\fR] [\fB\-p\fR \fIhas³o\fR]
 .br
-.RB [ -u
-.IR uid " ["
-.BR -o ]]
-.I login
+[\fB\-s\fR \fIpow³oka\fR] [\fB\-u\fR \fIuid\fR [\fB\-o\fR]] [\fB\-L\fR|\fB\-U\fR]
+\fIlogin\fR
 .SH OPIS
 Polecenie \fBusermod\fR zmienia systemowe pliki kont, odzwierciedlaj±c zmiany
 podane w wierszu poleceñ.
 .SH OPCJE
-Posiada ono nastêpuj±ce opcje:
-.\" .IP "\fB-A \fImetoda\fR|\fBDEFAULT\fR"
-.\" Nowa warto¶æ metody autentykacji u¿ytkownika. Metoda autentykacji jest
-.\" nazw± programu odpowiedzialnego za weryfikacjê to¿samo¶ci u¿ytkownika.
-.\" Mo¿e zostaæ u¿yty ³añcuch \fBDEFAULT\fR w celu zmiany metody autentykacji
-.\" u¿ytkownika na standardow± metodê has³a systemowego.
-.\" method to the standard system password method.
-.IP "\fB-c \fIkomentarz\fR"
+Polecenie \fBusermod\fR posiada nastêpuj±ce opcje:
+.IP "\fB\-c\fR \fIkomentarz\fR"
 Nowa warto¶æ pola komentarza dla danego u¿ytkownika w pliku hase³.
 Zwykle jest zmieniana przy pomocy narzêzia \fBchfn\fR(1).
-.IP "\fB-d \fIkatalog_domowy\fR"
-Nowy katalog logowania u¿ytkownika. Je¿eli podano opcjê \fB-m\fR, to zawarto¶æ
+.IP "\fB\-d\fR \fIkatalog_domowy\fR"
+Nowy katalog logowania u¿ytkownika. Je¿eli podano opcjê \fB\-m\fR, to zawarto¶æ
 aktualnego katalogu domowego zostanie przesuniêta do nowego katalogu. Nowy
 katalog domowy jest tworzony je¶li nie istnieje.
-.IP "\fB-e \fIdata_wa¿no¶ci\fR"
+.IP "\fB\-e\fR \fIdata_wa¿no¶ci\fR"
 Data, od której konto danego u¿ytkownika zostanie wy³±czone.
-.\" disabled
 Data podawana jest w formacie \fIMM/DD/YY\fR.
-.IP "\fB-f \fIdni_nieaktywno¶ci\fR"
+.IP "\fB\-f\fR \fIdni_nieaktywno¶ci\fR"
 Liczba dni po wyga¶niêciu has³a do sta³ego wy³±czenia konta.
 Warto¶æ 0 wy³±cza konto natychmiast po przeterminowaniu has³a, za¶ warto¶æ
--1 wy³±cza tê cechê. Domy¶ln± warto¶ci± jest -1.
-.IP "\fB-g \fIgrupa_pocz±tkowa\fR"
+\-1 wy³±cza tê cechê. Domy¶ln± warto¶ci± jest \-1.
+.IP "\fB\-g\fR \fIgrupa_pocz±tkowa\fR"
 Nazwa lub numer pocz±tkowej grupy logowania u¿ytkownika. Nazwa grupy musi
 istnieæ. Numer grupy musi odnosiæ siê do ju¿ istniej±cej grupy.
 Domy¶lnym numerem grupy jest 1.
-.IP "\fB-G \fIgrupa,[...]\fR"
+.IP "\fB\-G\fR \fIgrupa,[...]\fR"
 Lista dodatkowych grup, do których równie¿ nale¿y u¿ytkownik.
 Ka¿da grupa oddzielona jest od nastêpnej przecinkiem, bez wtr±conej spacji.
 Do grup odnosz± siê te same ograniczenia, które obowi±zuj± przy grupie podanej
-w opcji \fB-g\fR.
+w opcji \fB\-g\fR.
 Je¿eli u¿ytkownik jest obecnie cz³onkiem grupy, której nie podano na li¶cie,
 to zostanie z niej usuniêty.
-.IP "\fB-l \fIlogin_name\fR"
+.IP "\fB\-l\fR \fIlogin_name\fR"
 Nazwa u¿ytkownika zostanie zmieniona z \fIlogin\fR na \fIlogin_name\fR.
 Nic wiêcej nie jest zmieniane. W szczególno¶ci, prawdopodobnie powinna zostaæ
 zmieniona nazwa katalogu domowego u¿ytkownika, tak by odzwierciedla³a now±
 nazwê u¿ytkownika.
-.IP "\fB-s \fIpow³oka\fR"
+.IP "\fB\-L\fR"
+Zablokuj has³o u¿ytkownika. Opcja ta powoduje wstawienie '!' na pocz±tku zakodowanego
+has³a. Opcji tej nie mo¿na u¿ywaæ z opcjami \fI\-p\fR, \fI\-U\fR.
+.IP "\fB\-o\fR"
+U¿yte z opcja \fI\-u\fR umo¿liwia zmiane ID u¿ytkownika na warto¶æ nieunikaln±.
+.IP "\fB\-p\fR \fIpasswd\fR"
+Zakodowane has³o w postaci zwracanej przez \fBcrypt\fR(3).
+Domy¶lnym dzia³aniem jest blokowanie konta.
+.IP "\fB\-s\fR \fIpow³oka\fR"
 Nazwa nowej pow³oki (shell) u¿ytkownika. Ustawienie tego pola na puste
 powoduje, ¿e system wybierze domy¶ln± pow³okê logowania.
-.IP "\fB-u \fIuid\fR"
+.IP "\fB\-u\fR \fIuid\fR"
 Numeryczna warto¶æ identyfikatora u¿ytkownika (user's ID). Warto¶æ ta musi
-byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI-o\fR. Warto¶æ musi byæ nieujemna.
+byæ niepowtarzalna, chyba, ¿e u¿yto opcji \fI\-o\fR. Warto¶æ musi byæ nieujemna.
 Warto¶ci od 0 do 999 s± zwykle zarezerwowane dla kont systemowych.
 Wszystkim plikom posiadanym przez u¿ytkownika, a po³o¿onym w drzewie katalogowym
 rozpoczynaj±cym siê od jego katalogu domowego zostanie automatycznie zmieniony
 identyfikator u¿ytkownika pliku.
 Pliki poza katalogiem domowym u¿ytkownika musz± zostaæ zmienione rêcznie.
+.IP "\fB\-U\fR"
+Odblokowuje has³o u¿ytkownika. Opcja ta powoduje usuniecie '!' z pocz±tku
+zakodowanego has³a. Opcji tej nie mo¿na u¿ywaæ z opcjami \fI\-p\fR, \fI\-L\fR.
 .SH OSTRZE¯ENIA
 \fBusermod\fR nie pozwoli na zmianê nazwy zalogowanego u¿ytkownika.
 Je¶li zmieniany jest numeryczny identyfikator u¿ytkownika procesu, to musisz
@@ -121,11 +106,11 @@ W³a¶niciela plików crontab musisz zmieniæ rêcznie.
 W³a¶niciela zadañ at musisz zmieniæ rêcznie.
 Jakiekolwiek zmiany dotycz±ce NIS musisz wykonaæ na serwerze NIS.
 .SH PLIKI
-\fI/etc/passwd\fR \- informacja o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacja o kontach u¿ytkowników
 .br
-\fI/etc/shadow\fR \- bezpieczna informacja o kontach u¿ytkowników
+\fI/etc/shadow\fR	\- bezpieczna informacja o kontach u¿ytkowników
 .br
-\fI/etc/group\fR  \- informacja o grupach
+\fI/etc/group\fR	\- informacja o grupach
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),

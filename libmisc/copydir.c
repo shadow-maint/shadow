@@ -30,14 +30,17 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: copydir.c,v 1.10 2004/10/18 20:10:10 kloczek Exp $")
-
+RCSID ("$Id: copydir.c,v 1.12 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+static int selinux_enabled = -1;
+#endif
 static const char *src_orig;
 static const char *dst_orig;
 
@@ -49,6 +52,26 @@ struct link_name {
 	struct link_name *ln_next;
 };
 static struct link_name *links;
+
+#ifdef WITH_SELINUX
+static int selinux_file_context (const char *dst_name)
+{
+	security_context_t scontext = NULL;
+
+	if (selinux_enabled < 0)
+		selinux_enabled = is_selinux_enabled () > 0;
+	if (selinux_enabled) {
+		if (matchpathcon (dst_name, 0, &scontext) < 0)
+			if (security_getenforce ())
+				return 1;
+		if (setfscreatecon (scontext) < 0)
+			if (security_getenforce ())
+				return 1;
+		freecon (scontext);
+	}
+	return 0;
+}
+#endif
 
 /*
  * remove_link - delete a link from the link list
@@ -80,8 +103,7 @@ static void remove_link (struct link_name *ln)
  * check_link - see if a file is really a link
  */
 
-static struct link_name *check_link (const char *name,
-				     const struct stat *sb)
+static struct link_name *check_link (const char *name, const struct stat *sb)
 {
 	struct link_name *lp;
 	int src_len;
@@ -119,9 +141,7 @@ static struct link_name *check_link (const char *name,
  *	as it goes.
  */
 
-int
-copy_tree (const char *src_root, const char *dst_root, uid_t uid,
-	   gid_t gid)
+int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 {
 	char src_name[1024];
 	char dst_name[1024];
@@ -202,6 +222,9 @@ copy_tree (const char *src_root, const char *dst_root, uid_t uid,
 			 * the user and then recursively copy that directory.
 			 */
 
+#ifdef WITH_SELINUX
+			selinux_file_context (dst_name);
+#endif
 			mkdir (dst_name, sb.st_mode & 0777);
 			chown (dst_name,
 			       uid == (uid_t) - 1 ? sb.st_uid : uid,
@@ -238,16 +261,19 @@ copy_tree (const char *src_root, const char *dst_root, uid_t uid,
 				break;
 			}
 			oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
-			if (!strncmp
-			    (oldlink, src_orig, strlen (src_orig))) {
+			if (!strncmp (oldlink, src_orig, strlen (src_orig))) {
 				snprintf (dummy, sizeof dummy, "%s%s",
 					  dst_orig,
 					  oldlink + strlen (src_orig));
 				strcpy (oldlink, dummy);
 			}
-			if (symlink(oldlink, dst_name) ||
-			    lchown (dst_name, uid == (uid_t) -1 ? sb.st_uid:uid,
-				    gid == (gid_t) -1 ? sb.st_gid:gid)) {
+#ifdef WITH_SELINUX
+			selinux_file_context (dst_name);
+#endif
+			if (symlink (oldlink, dst_name) ||
+			    lchown (dst_name,
+				    uid == (uid_t) - 1 ? sb.st_uid : uid,
+				    gid == (gid_t) - 1 ? sb.st_gid : gid)) {
 				err++;
 				break;
 			}
@@ -281,8 +307,10 @@ copy_tree (const char *src_root, const char *dst_root, uid_t uid,
 		 */
 
 		if (!S_ISREG (sb.st_mode)) {
-			if (mknod
-			    (dst_name, sb.st_mode & ~07777, sb.st_rdev)
+#ifdef WITH_SELINUX
+			selinux_file_context (dst_name);
+#endif
+			if (mknod (dst_name, sb.st_mode & ~07777, sb.st_rdev)
 			    || chown (dst_name,
 				      uid == (uid_t) - 1 ? sb.st_uid : uid,
 				      gid == (gid_t) - 1 ? sb.st_gid : gid)
@@ -302,6 +330,9 @@ copy_tree (const char *src_root, const char *dst_root, uid_t uid,
 			err++;
 			break;
 		}
+#ifdef WITH_SELINUX
+		selinux_file_context (dst_name);
+#endif
 		if ((ofd =
 		     open (dst_name, O_WRONLY | O_CREAT | O_TRUNC, 0)) < 0
 		    || chown (dst_name,
@@ -381,8 +412,7 @@ int remove_tree (const char *root)
 		 * Make the filename for the current entry.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 >
-		    sizeof new_name) {
+		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name) {
 			err++;
 			break;
 		}

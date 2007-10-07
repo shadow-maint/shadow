@@ -1,4 +1,4 @@
-.\"$Id: newgrp.1,v 1.15 2004/12/11 20:05:01 kloczek Exp $
+.\"$Id: newgrp.1,v 1.23 2005/04/12 18:08:46 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,9 +31,9 @@ newgrp \- log in to a new group
 .br
 sg \- execute command as different group ID
 .SH SYNOPSIS
-\fBnewgrp\fR [\fB-\fR] [\fIgroup\fR]
+\fBnewgrp\fR [\fB\-\fR] [\fIgroup\fR]
 .br
-\fBsg\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
+\fBsg\fR [\fB\-\fR] [\fIgroup\fR [[\fB\-c\fR] \fIcommand\fR]]
 .SH DESCRIPTION
 \fBnewgrp\fR is used to change the current group ID during a login session.
 If the optional \fB\-\fR flag is given, the user's environment will be
@@ -41,26 +41,38 @@ reinitialized as though the user had logged in, otherwise the current
 environment, including current working directory, remains unchanged.
 .PP
 \fBnewgrp\fR changes the current real group ID to the named group, or to the
-default group listed in \fI/etc/passwd\fR if no group name is given. The
-user will be prompted for a password if she do not have a password and the
-group does, or if the user is not listed as a member and the group has a
-password. The user will be denied access if the group password is empty and
-the user is not listed as a member.
+default group listed in \fI/etc/passwd\fR if no group name is given.
+\fBnewgrp\fR also tries to add the group to the user groupset. If not root,
+the user will be prompted for a password if she do not have a password and
+the group does, or if the user is not listed as a member and the group has
+a password. The user will be denied access if the group password is empty
+and the user is not listed as a member.
+If compiled with SHADOWPWD (respectively SHADOWGRP) defined, the password
+of the user (respectively, the password and the members of the group) will
+be overwritten by the value defined in \fI/etc/shadow\fR (respectively in
+\fI/etc/gshadow\fR) if an entry exists for this user (resp. group).
 .PP
 The \fBsg\fR command works similar to \fBnewgrp\fR but accepts a command.
-The command will be executed with the Bourne shell. With most shells you
-may run \fBsg\fR from, you need to enclose multi-word commands in quotes.
+The command will be executed with the \fB/bin/sh\fR shell. With most shells you
+may run \fBsg\fR from, you need to enclose multi\-word commands in quotes.
 Another difference between \fBnewgrp\fR and \fBsg\fR is that some shells
 treat \fBnewgrp\fR specially, replacing themselves with a new instance of a
 shell that \fBnewgrp\fR creates. This doesn't happen with \fBsg\fR, so upon
 exit from a \fBsg\fR command you are returned to your previous group ID.
 .SH FILES
-\fI/etc/passwd\fR \- user account information
+\fI/etc/passwd\fR	\- user account information
 .br
-\fI/etc/group\fR \- group information
+\fI/etc/shadow\fR	\- secure user account information
+.br
+\fI/etc/group\fR	\- group account information
+.br
+\fI/etc/gshadow\fR	\- shadow group file
 .SH SEE ALSO
 .BR id (1),
 .BR login (1),
-.BR su (1)
+.BR su (1),
+.BR gpasswd (1),
+.BR group (5),
+.BR gshadow (5)
 .SH AUTHOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

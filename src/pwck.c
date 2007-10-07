@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.24 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwck.c,v 1.26 2005/04/06 04:26:06 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -172,8 +172,7 @@ int main (int argc, char **argv)
 	}
 
 	if (sort_mode && read_only) {
-		fprintf (stderr, _("%s: -s and -r are incompatibile\n"),
-			 Prog);
+		fprintf (stderr, _("%s: -s and -r are incompatibile\n"), Prog);
 		exit (E_USAGE);
 	}
 
@@ -215,8 +214,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 				 Prog, pwd_file);
 			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s",
-					 pwd_file));
+				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
 			closelog ();
 			exit (E_CANTLOCK);
 		}
@@ -225,8 +223,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 				 Prog, spw_file);
 			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s",
-					 spw_file));
+				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
 			closelog ();
 			exit (E_CANTLOCK);
 		}
@@ -370,8 +367,7 @@ int main (int argc, char **argv)
 		 * Check for invalid usernames.  --marekm
 		 */
 		if (!check_user_name (pwd->pw_name)) {
-			printf (_("invalid user name '%s'\n"),
-				pwd->pw_name);
+			printf (_("invalid user name '%s'\n"), pwd->pw_name);
 			errors++;
 		}
 
@@ -606,16 +602,9 @@ int main (int argc, char **argv)
 	 */
 
 	if (errors)
-#ifdef NDBM
-		printf (deleted ?
-			_
-			("%s: the files have been updated; run mkpasswd\n")
-			: _("%s: no changes\n"), Prog);
-#else
 		printf (deleted ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
-#endif
 
 	closelog ();
 	exit (errors ? E_BADENTRY : E_OKAY);

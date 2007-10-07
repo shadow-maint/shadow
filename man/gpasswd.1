@@ -1,4 +1,4 @@
-.\"$Id: gpasswd.1,v 1.10 2004/11/02 19:28:31 kloczek Exp $
+.\"$Id: gpasswd.1,v 1.17 2005/04/12 17:55:55 kloczek Exp $
 .\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
@@ -11,37 +11,37 @@ gpasswd \- administer the /etc/group file
 .br
 .SH SYNOPSIS
 .TP 6
-\fBgpasswd \fIgroup\fR
+\fBgpasswd\fR \fIgroup\fR
 .br
-\fBgpasswd -a \fIuser\fR \fIgroup\fR
+\fBgpasswd \-a\fR \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd -d \fIuser\fR \fIgroup\fR
+\fBgpasswd \-d\fR \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd -R \fIgroup\fR
+\fBgpasswd \-R\fR \fIgroup\fR
 .br
-\fBgpasswd -r \fIgroup\fR
+\fBgpasswd \-r\fR \fIgroup\fR
 .br
-\fBgpasswd\fR [\fB-A \fIuser\fR,...] [\fB-M\fR \fIuser\fR,...] \fIgroup\fR
+\fBgpasswd\fR [\fB\-A\fR \fIuser\fR,...] [\fB\-M\fR \fIuser\fR,...] \fIgroup\fR
 .SH DESCRIPTION
 \fBgpasswd\fR is used to administer the \fI/etc/group\fR file (and
 \fI/etc/gshadow\fR file if compiled with SHADOWGRP defined). Every group can
 have administrators, members and a password. System administrator can use
-\fB-A\fR option to define group administrator(s) and \fB-M\fR option to
+\fB\-A\fR option to define group administrator(s) and \fB\-M\fR option to
 define members and has all rights of group administrators and members.
 .SH OPTIONS
 .PP
-Group administrator can add and delete users using \fB-a\fR and \fB-d\fR
-options respectively. Administrators can use \fB-r\fR option to remove group
+Group administrator can add and delete users using \fB\-a\fR and \fB\-d\fR
+options respectively. Administrators can use \fB\-r\fR option to remove group
 password. When no password is set only group members can use \fBnewgrp\fR to
-join the group. Option \fB-R\fR disables access to the group through
-\fBnewgrp\fR command.
+join the group. Option \fB\-R\fR disables access via a password to the group
+through \fBnewgrp\fR command (however members will still be able to switch to
+this group).
 .PP
 \fBgpasswd\fR called by a group administrator with group name only prompts
 for the group password. If password is set the members can still
-.BR newgrp (1)
-without a password, non-members must supply the password.
+\fBnewgrp\fR(1) without a password, non\-members must supply the password.
 .SH FILES
-\fI/etc/group\fR	\- group information
+\fI/etc/group\fR	\- group account information
 .br
 \fI/etc/gshadow\fR	\- shadow group information
 .SH SEE ALSO
@@ -49,6 +49,8 @@ without a password, non-members must supply the password.
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
-.BR grpck (8)
+.BR grpck (8),
+.BR group (5),
+.BR gshadow (5)
 .SH AUTHOR
 Rafal Maszkowski <rzm@pdi.net>

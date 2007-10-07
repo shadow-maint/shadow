@@ -1,4 +1,5 @@
-.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" $Id: shadow.5,v 1.4 2005/04/05 19:08:56 kloczek Exp $
+.\" Copyright 1989 \- 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -24,9 +25,6 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: shadow.5,v 1.3 2003/04/26 13:24:16 kloczek Exp $
-.\"
 .TH SHADOW 5
 .SH NOME
 shadow \- arquivo de senhas criptografadas
@@ -53,19 +51,19 @@ Dias decorridos entre 1 de janeiro de 1970 e a data em que a conta foi desabilit
 .IP "" .5i
 Campo reservado.
 .PP
-O campo senha deve ser preenchido. A senha criptografada consiste de 13 a 24 caracteres entre os 64 caracteres alfabéticos - de a até z e de A até Z, além de 0 a 9, \. e /. Verifique em \fBcrypt\fR(3) por maiores detalhes de como esta cadeia de caracteres é interpretada.
+O campo senha deve ser preenchido. A senha criptografada consiste de 13 a 24 caracteres entre os 64 caracteres alfabéticos \- de a até z e de A até Z, além de 0 a 9, \. e /. Verifique em \fBcrypt\fR(3) por maiores detalhes de como esta cadeia de caracteres é interpretada.
 .PP
 A data da última mudança da senha é dada pelo número de dias desde 1 de janeiro de 1970. A senha não pode ser alterada novamente até que um determinado número de dias tenha se passado, e deve ser alterada após um número máximo de dias. Se o número mínimo de dias for maior que o número máximo, a senha não pode ser alterada pelo usuário.
 .PP
 uma conta é considerada inativa e desabilitada se a senha não foi alterada dentro de um determinado número de dias após a expiração das senhas. Uma conta poderá ser desabilitada ainda no dia especificado, independentemente de qualquer informação de expiração da senha.
 .PP
-Esta informação sobrepõe-se a qualquer senha ou idade de senha presente no arquivo.
+Esta informação sobrepõe\-se a qualquer senha ou idade de senha presente no arquivo.
 .PP
 Este arquivo não poderá ser acessado por usuários comuns, caso deseje manter a segurança das senhas.
 .SH ARQUIVOS
-\fI/etc/passwd\fR \- informações das contas de usuários
+\fI/etc/passwd\fR	\- informações das contas de usuários
 .br
-\fI/etc/shadow\fR \- senhas de usuários criptografadas
+\fI/etc/shadow\fR	\- senhas de usuários criptografadas
 .SH VEJA TAMBÉM
 .BR chage (1),
 .BR login (1),

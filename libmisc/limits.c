@@ -34,8 +34,10 @@
 
 #include <config.h>
 
+#ifndef USE_PAM
+
 #include "rcsid.h"
-RCSID ("$Id: limits.c,v 1.14 2003/05/05 21:44:15 kloczek Exp $")
+RCSID ("$Id: limits.c,v 1.16 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -248,8 +250,7 @@ static int do_user_limits (const char *buf, const char *name)
 		case 'm':
 		case 'M':
 			/* RLIMIT_MEMLOCK - max locked-in-memory address space (KB) */
-			retval |=
-			    setrlimit_value (RLIMIT_MEMLOCK, pp, 1024);
+			retval |= setrlimit_value (RLIMIT_MEMLOCK, pp, 1024);
 			break;
 #endif
 #ifdef RLIMIT_NOFILE
@@ -398,8 +399,7 @@ void setup_limits (const struct passwd *info)
 				exit (1);
 			}
 #endif
-		for (cp = info->pw_gecos; cp != NULL;
-		     cp = strchr (cp, ',')) {
+		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
 			if (*cp == ',')
 				cp++;
 
@@ -424,3 +424,5 @@ void setup_limits (const struct passwd *info)
 		}
 	}
 }
+
+#endif				/* !USE_PAM */

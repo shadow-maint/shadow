@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: sulog.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: sulog.c,v 1.8 2005/03/31 05:14:50 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -41,8 +41,7 @@ RCSID ("$Id: sulog.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
 /*
  * sulog - log a SU command execution result
  */
-void
-sulog (const char *tty, int success, const char *oldname, const char *name)
+void sulog (const char *tty, int success, const char *oldname, const char *name)
 {
 	char *sulog_file;
 	time_t now;

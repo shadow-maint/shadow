@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: env.c,v 1.10 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: env.c,v 1.11 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -179,8 +179,7 @@ void set_env (int argc, char *const *argv)
 			continue;	/* ignore long entries */
 
 		if (!(cp = strchr (*argv, '='))) {
-			snprintf (variable, sizeof variable, "L%d",
-				  noname++);
+			snprintf (variable, sizeof variable, "L%d", noname++);
 			addenv (variable, *argv);
 		} else {
 			const char **p;

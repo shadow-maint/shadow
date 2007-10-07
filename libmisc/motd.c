@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: motd.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: motd.c,v 1.5 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -54,8 +54,7 @@ void motd (void)
 	strncpy (motdlist, mb, sizeof (motdlist));
 	motdlist[sizeof (motdlist) - 1] = '\0';
 
-	for (mb = motdlist; (motdfile = strtok (mb, ":")) != NULL;
-	     mb = NULL) {
+	for (mb = motdlist; (motdfile = strtok (mb, ":")) != NULL; mb = NULL) {
 		if ((fp = fopen (motdfile, "r")) != NULL) {
 			while ((c = getc (fp)) != EOF)
 				putchar (c);

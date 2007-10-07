@@ -1,5 +1,4 @@
-.\" $Id: pw_auth.3,v 1.3 2001/01/25 10:43:54 kloczek Exp $
-.\" {PTM/WK/1999-09-15}
+.\" $Id: pw_auth.3,v 1.4 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -69,40 +68,40 @@ Przyczyna (\fIreason\fR) jest jedn± z
 .IP \fBPW_SU\fR 1i
 Wykonaj uwierzytelnienie dla bie¿±cego rzeczywistego identyfikatora u¿ytkownika
 próbuj±c prze³±czyæ rzeczywisty ID na podanego u¿ytkownika.
-Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB-s\fR poprzedzaj±c±
+Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB\-s\fR poprzedzaj±c±
 nazwê u¿ytkownika.
 .IP \fBPW_LOGIN\fR 1i
 Wykonaj uwierzytelnienie dla danego u¿ytkownika tworz±c now± sesjê pracy
-(loginow±). Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB-l\fR,
+(loginow±). Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB\-l\fR,
 po której wyst±pi nazwa u¿ytkownika.
 .IP \fBPW_ADD\fR 1i
 Utwórz nowy wpis dla danego u¿ytkownika.
 Pozwala to programowi uwierzytelniania na zainicjowanie miejsca dla nowego
 u¿ytkownika.
-Program zostanie wywo³any z opcj± \fB-a\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB\-a\fR, po której wyst±pi nazwa u¿ytkownika.
 .IP \fBPW_CHANGE\fR 1i
 Zmieñ istniej±cy wpis dla danego u¿ytkownika.
 Pozwala to na programowi uwierzytelniaj±cemu na zmianê informacji autentykuj±cej
 dla istniej±cego u¿ytkownika.
-Program zostanie wywo³any z opcj± \fB-c\fR poprzedzaj±c± nazwê u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB\-c\fR poprzedzaj±c± nazwê u¿ytkownika.
 .IP \fBPW_DELETE\fR 1i
 Usuñ informacjê autentykuj±c± dla danego u¿ytkownika.
 Pozwala programowi uwierzytelniania na odzyskanie miejsca po u¿ytkowniku, który
 nie bêdzie ju¿ identyfikowany przy u¿yciu tego programu.
-Program uwierzytelniania zostanie wywo³any z opcj± \fB-d\fR,
+Program uwierzytelniania zostanie wywo³any z opcj± \fB\-d\fR,
 po której wyst±pi nazwa u¿ytkownika.
 .IP \fBPW_TELNET\fR 1i
 Wykonaj uwierzytelnianie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
 polecenia \fBtelnet\fR.
-Program zostanie wywo³any z opcj± \fB-t\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB\-t\fR, po której wyst±pi nazwa u¿ytkownika.
 .IP \fBPW_RLOGIN\fR 1i
 Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
 polecenia \fBrlogin\fR.
-Program zostanie wywo³any z opcj± \fB-r\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB\-r\fR, po której wyst±pi nazwa u¿ytkownika.
 .IP \fBPW_FTP\fR 1i
 Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
 polecenia \fBftp\fR.
-Program uwierzytelniania zostanie wywo³any z opcj± \fB-f\fR,
+Program uwierzytelniania zostanie wywo³any z opcj± \fB\-f\fR,
 po której wyst±pi nazwa u¿ytkownika.
 Do komunikacji z u¿ytkownikiem NIE s± dostêpne standardowe deskryptory plików.
 Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,
@@ -112,7 +111,7 @@ uwierzytelniania pos³uguj±c siê deskryptorem 0.
 .IP \fBPW_REXEC\fR 1i
 Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
 polecenia \fIrexec\fR.
-Program zostanie wywo³any z opcj± \fB-x\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywo³any z opcj± \fB\-x\fR, po której wyst±pi nazwa u¿ytkownika.
 Do komunikacji ze zdalnym u¿ytkownikiem NIE s± dostêpne standardowe
 deskryptory plików.
 Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,

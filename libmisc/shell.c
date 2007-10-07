@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: shell.c,v 1.9 2003/05/05 21:49:56 kloczek Exp $")
+RCSID ("$Id: shell.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include "prototypes.h"
@@ -67,8 +67,7 @@ void shell (const char *file, const char *arg)
 	 */
 
 	if (arg == (char *) 0) {
-		snprintf (arg0, sizeof arg0, "-%s",
-			  Basename ((char *) file));
+		snprintf (arg0, sizeof arg0, "-%s", Basename ((char *) file));
 		arg = arg0;
 	}
 #ifdef DEBUG

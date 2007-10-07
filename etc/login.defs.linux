@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the login package.
 #
-#	$Id: login.defs.linux,v 1.14 2003/05/04 20:09:43 kloczek Exp $
+#	$Id: login.defs.linux,v 1.15 2005/03/07 10:09:06 kloczek Exp $
 #
 # Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
 # If unspecified, some arbitrary (and possibly incorrect) value will
@@ -137,14 +137,6 @@ MAIL_DIR	/var/spool/mail
 #
 HUSHLOGIN_FILE	.hushlogin
 #HUSHLOGIN_FILE	/etc/hushlogins
-
-#
-# If defined, the presence of this value in an /etc/passwd "shell" field will
-# disable logins for that user, although "su" will still be allowed.
-#
-# XXX this does not seem to be implemented yet...  --marekm
-# no, it was implemented but I ripped it out ;-) -- jfh
-NOLOGIN_STR	NOLOGIN
 
 #
 # If defined, either a TZ environment parameter spec or the

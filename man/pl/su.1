@@ -1,5 +1,4 @@
-.\" $Id: su.1,v 1.8 2003/04/26 13:24:15 kloczek Exp $
-.\" {PTM/WK/1999-09-25}
+.\" $Id: su.1,v 1.9 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,7 +29,7 @@
 .SH NAZWA
 su \- zmiana identyfikatora u¿ytkownika lub uzyskanie praw superu¿ytkownika
 .SH SK£ADNIA
-\fBsu\fR [\fB-\fR] [\fInazwa_u¿ytkownika\fR [\fIargumenty\fR]]
+\fBsu\fR [\fB\-\fR] [\fInazwa_u¿ytkownika\fR [\fIargumenty\fR]]
 .SH OPIS
 .B su
 s³u¿y do stawania siê innym u¿ytkownikiem w trakcie w³asnej sesji.
@@ -43,7 +42,7 @@ u¿ytkownika w systemie.
 .PP
 Po nazwie u¿ytkownika mog± wyst±piæ dodatkowe argumenty. Zostan± one
 dostarczone pow³oce zg³oszeniowej u¿ytkownika. W szczególno¶ci, argument
-\fB-c\fR spowoduje, ¿e nastêpny argument zostanie potraktowany jak polecenie
+\fB\-c\fR spowoduje, ¿e nastêpny argument zostanie potraktowany jak polecenie
 przez wiêkszo¶æ interpretatorów poleceñ.
 Polecenie zostanie wykonane przez pow³okê wymienion± w \fI/etc/passwd\fR dla
 docelowego u¿ytkownika.
@@ -64,9 +63,9 @@ katalog g³ówny nowego systemu plików, do którego u¿ytkownik siê zaloguje.
 Niniejsza wersja \fBsu\fR posiada wiele opcji kompilacji, z których tylko
 czê¶æ bêdzie mieæ zastosowanie w danej instalacji.
 .SH PLIKI
-\fI/etc/passwd\fR \- informacje o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacje o kontach u¿ytkowników
 .br
-\fI/etc/shadow\fR \- zakodowane has³a i informacje o ich wa¿no¶ci
+\fI/etc/shadow\fR	\- zakodowane has³a i informacje o ich wa¿no¶ci
 .SH ZOBACZ TAK¯E
 .BR login (1),
 .BR sh (1),

@@ -1,6 +1,6 @@
+.\"	$Id: groupmod.8,v 1.7 2005/04/05 19:08:56 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" Todos os direitos reservados.
-.\"
 .\"
 .\" É permitida a confecção e distribuição deste manual, devidamente
 .\" acompanhado dos avisos de direitos autorais e desta permissão
@@ -22,31 +22,29 @@
 .\" Você deve receber uma cópia da Licença Pública GNU
 .\" junto com este manual; caso contrário, escreva para a Free Software
 .\" Foundation, Inc., 675 mass Ave, Cambridge, MA 02139 USA ou
-.\" em português na Conectiva Informática Ltda. - http://www.conectiva.com.br
-.\"
-.\"
-.\"
-.\"	$Id: groupmod.8,v 1.5 2004/11/04 03:06:32 kloczek Exp $
-.\"
+.\" em português na Conectiva Informática Ltda. \- http://www.conectiva.com.br
 .TH GROUPMOD 8
 .SH NOME
 groupmod \- Modifica um grupo
 .SH SINOPSE
-.B groupmod
-[\fB-g\fI gid \fR[\fB-o\fR]]
-[\fB-n\fI nome_grupo \fR]
-.I grupo
+\fBgroupmod\fR [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-n\fR \fInome_grupo\fR] \fIgrupo\fR
 .SH DESCRIÇÃO
-O comando \fBgroupmod\fR modifica os arquivos de contas do sistema para as novas configurações informadas na linha de comando. As opções que aplicam-se ao comando \fIgroupmod\fR são:
-.IP "\fB-g \fIgid\fR"
-O valor numérico de identificação do grupo é denominada GID. Este valor deve ser único, a menos que a opção \fB-o\fR seja usada. O valor dever ser não negativo. Valores entre 0 e 999 são tipicamente reservados para grupos do sistema. Quaisquer arquivos com uma identificação antiga de grupo devem ter o ID mudado manualmente. 
-.IP "\fB-n \fInome_grupo\fR"
+O comando \fBgroupmod\fR modifica os arquivos de contas do sistema para as
+novas configuraXXes informadas na linha de comando. As opXXes que aplicam\-se
+ao comando \fIgroupmod\fR sXo:
+.IP "\fB\-g\fR \fIgid\fR"
+O valor numXrico de identificaXXo do grupo X denominada GID. Este valor deve
+ser Xnico, a menos que a opXXo \fB\-o\fR seja usada. O valor dever ser nXo
+negativo. Valores entre 0 e 999 sXo tipicamente reservados para grupos do
+sistema. Quaisquer arquivos com uma identificaXXo antiga de grupo devem ter
+o ID mudado manualmente.
+.IP "\fB\-n\fR \fInome_grupo\fR"
 O nome do grupo irá ser alterado de \fIgroup\fR para
 \fInome_grupo\fR.
 .SH ARQUIVOS
-\fI/etc/group\fR \- Informações do grupo
+\fI/etc/group\fR	\- Informações do grupo
 .br
-\fI/etc/gshadow\fR \- informações seguras do grupo
+\fI/etc/gshadow\fR	\- informações seguras do grupo
 .SH VEJA TAMBÉM
 .BR chfn (1),
 .BR chsh (1),

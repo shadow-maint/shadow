@@ -1,7 +1,4 @@
-.\" $Id: passwd.1,v 1.11 2003/04/28 17:52:15 kloczek Exp $
-.\" Translation (c) 1999 Wojtek Kotwica
-.\"             (c) 2002 Andrzej Krzysztofowicz
-.\" 
+.\" $Id: passwd.1,v 1.15 2005/04/14 00:13:56 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -32,14 +29,14 @@
 .SH NAZWA
 passwd \- zmiana has³a u¿ytkownika
 .SH SK£ADNIA
-\fBpasswd\fR [\fB-f\fR|\fB-s\fR] [\fInazwa\fR]
+\fBpasswd\fR [\fB\-f\fR|\fB\-s\fR] [\fInazwa\fR]
 .br
-\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIgrupa\fR
+\fBpasswd\fR [\fB\-g\fR] [\fB\-r\fR|\fB\-R\fR] \fIgrupa\fR
 .br
-\fBpasswd\fR [\fB-x \fImax\fR] [\fB-n \fImin\fR]
-[\fB-w \fIostrze¿\fR] [\fB-i \fInieakt\fR] \fIlogin\fR
+\fBpasswd\fR [\fB\-x\fR \fImax\fR] [\fB\-n\fR \fImin\fR]
+[\fB\-w\fR \fIostrze¿\fR] [\fB\-i\fR \fInieakt\fR] \fIlogin\fR
 .br
-\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fIlogin\fR
+\fBpasswd\fR {\fB\-l\fR|\fB\-u\fR|\fB\-d\fR|\fB\-S\fR|\fB\-e\fR} \fIlogin\fR
 .SH OPIS
 \fBpasswd\fR zmienia has³a kont u¿ytkowników i grup.
 Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie has³o w³asnego konta, superu¿ytkownik
@@ -49,9 +46,9 @@ Administrator grupy mo¿e zmieniæ has³o tej grupy.
 u¿ytkownika, jego pow³oka zg³oszeniowa (logowania) czy daty i interwa³y dotycz±ce
 wa¿no¶ci has³a.
 .PP
-U¿ycie opcji \fB-s\fR powoduje wywo³anie przez passwd programu chsh w celu
-zmiany pow³oki u¿ytkownika, u¿ycie opcji \fB-f\fR powoduje wywo³anie przez
-passwd programu chfn w celu zmiany infirmacji o u¿ytkowniku. Te dwie opcje
+U¿ycie opcji \fB\-s\fR powoduje wywo³anie przez \fBpasswd\fR programu \fBchsh\fR
+w celu zmiany pow³oki u¿ytkownika, u¿ycie opcji \fB\-f\fR powoduje wywo³anie
+przez passwd programu chfn w celu zmiany infirmacji o u¿ytkowniku. Te dwie opcje
 istniej± jedynie dla zgodno¶ci, gdy¿ wymienione programy mog± byæ wywo³ywane
 bezpo¶rednio.
 .SS Zmiany has³a
@@ -85,46 +82,46 @@ Je¶li has³o zostanie przyjête, to \fBpasswd\fR prosi o jego powtórzenie
 i porównuje drugi wpis z pierwszym.
 Oba wpisy musz± byæ takie same, by has³o zosta³o zmienione.
 .SS Has³a grup
-Je¿eli pos³u¿ono siê opcj± \fB-g\fR, to zmieniane jest has³o podanej grupy.
+Je¿eli pos³u¿ono siê opcj± \fB\-g\fR, to zmieniane jest has³o podanej grupy.
 U¿ytkownik powinien byæ albo superu¿ytkownikiem albo administratorem tej grupy.
 Nie wystêpuje pytanie o bie¿±ce has³o grupy.
-Do usuwania bie¿±cego has³a danej grupy s³u¿y opcja \fB-g\fR w po³±czeniu
-z \fB-r\fR. Pozwala to na dostêp do grupy tylko jej cz³onkom.
-Opcja \fB-R\fR w po³±czeniu z \fR-g\fR ogranicza dostêp do grupy wszystkim
+Do usuwania bie¿±cego has³a danej grupy s³u¿y opcja \fB\-g\fR w po³±czeniu
+z \fB\-r\fR. Pozwala to na dostêp do grupy tylko jej cz³onkom.
+Opcja \fB\-R\fR w po³±czeniu z \fR\-g\fR ogranicza dostêp do grupy wszystkim
 u¿ytkownikom.
 .SS Informacja o wa¿no¶ci konta
 Superu¿ytkownik mo¿e zmieniaæ informacjê o wieku konta pos³uguj±c siê opcjami
-\fB-x\fR, \fB-n\fR, \fB-w\fR oraz \fB-i\fR.
-Opcja \fB-x\fR s³u¿y do ustawiania maksymalnej liczby dni, przez jakie has³o
+\fB\-x\fR, \fB\-n\fR, \fB\-w\fR oraz \fB\-i\fR.
+Opcja \fB\-x\fR s³u¿y do ustawiania maksymalnej liczby dni, przez jakie has³o
 pozostaje wa¿ne.
 Po up³ywie \fImax\fR dni, has³o musi byæ zmienione.
-Opcja \fB-n\fR ustawia minimaln± liczbê dni, jakie musz± up³yn±æ zanim has³o
+Opcja \fB\-n\fR ustawia minimaln± liczbê dni, jakie musz± up³yn±æ zanim has³o
 bêdzie mog³o byæ zmienione.
 U¿ytkownik nie otrzyma zezwolenia na zmianê has³a przed up³ywem \fImin\fR dni.
-Opcja \fB-w\fR s³u¿y do ustawienia liczby dni przed up³ywem terminu wa¿no¶ci
+Opcja \fB\-w\fR s³u¿y do ustawienia liczby dni przed up³ywem terminu wa¿no¶ci
 has³a, przez które u¿ytkownik bêdzie otrzymywa³ ostrze¿enie mówi±ce mu, ile dni
 pozosta³o do tej daty. Ostrze¿enia zaczn± pojawiaæ siê \fIostrze¿\fR dni przed
 up³ywem wa¿no¶ci has³a.
-Opcja \fB-i\fR (nieaktywno¶æ) s³u¿y do wy³±czania konta po up³ywie zadanej
+Opcja \fB\-i\fR (nieaktywno¶æ) s³u¿y do wy³±czania konta po up³ywie zadanej
 liczby dni po wyga¶niêciu has³a.
 Po up³ywie \fInieakt\fR dni od przeterminowania has³a u¿ytkownik nie mo¿e ju¿
 korzystaæ z konta.
 .PP
 Je¶li istnieje potrzeba natychmiastowego przeterminowania has³a dla danego
-konta, mo¿na pos³u¿yæ siê opcj± \fB-e\fR. Spowoduje to zmuszenie u¿ytkownika
-do zmiany has³a przy najbli¿szym logowaniu. Za pomoc± opcji \fB-d\fR mo¿na
+konta, mo¿na pos³u¿yæ siê opcj± \fB\-e\fR. Spowoduje to zmuszenie u¿ytkownika
+do zmiany has³a przy najbli¿szym logowaniu. Za pomoc± opcji \fB\-d\fR mo¿na
 skasowaæ has³o u¿ytkownika (uczyniæ je pustym). Nale¿y zachowaæ szczególn±
 ostro¿no¶æ u¿ywaj±c tej opcji, gdy¿ mo¿e ona spowodowaæ, ¿e do zalogowania
 siê na konto nie bêdzie w ogóle potrzebne has³o, pozostawiaj±c system otwartym
 dla nieproszonych go¶ci.
 .SS Utrzymywanie i konserwacja konta
 Konta u¿ytkowników mog± byæ blokowane i odblokowywane przy pomocy opcji
-\fB-l\fR i \fB-u\fR.
-Opcja \fB-l\fR wy³±cza konto zmieniaj±c jego has³o na warto¶æ nieodpowiadaj±c±
+\fB\-l\fR i \fB\-u\fR.
+Opcja \fB\-l\fR wy³±cza konto zmieniaj±c jego has³o na warto¶æ nieodpowiadaj±c±
 ¿adnemu mo¿liwemu zakodowanemu has³u.
-Opcja \fB-u\fR ponownie udostêpnia konto przywracaj±c uprzedni± warto¶æ has³a.
+Opcja \fB\-u\fR ponownie udostêpnia konto przywracaj±c uprzedni± warto¶æ has³a.
 .PP
-Stan konta mo¿na uzyskaæ przy pomocy opcji \fB-S\fR.
+Stan konta mo¿na uzyskaæ przy pomocy opcji \fB\-S\fR.
 Informacja o stanie sk³ada siê z 6 czê¶ci.
 Pierwsza wskazuje, czy konto u¿ytkownika jest zablokowane (L) (locked),
 nie posiada has³a (NP) (no password) lub ma funkcjonalne has³o (P) (password).
@@ -133,7 +130,7 @@ nastêpne cztery to minimalny wiek, maksymalny wiek, okres ostrzegania i okres
 nieaktywno¶ci has³a.
 .SS Podpowiedzi dotycz±ce hase³ u¿ytkownika
 Bezpieczeñstwo has³a zale¿y od si³y algorytmu koduj±cego oraz rozmiaru
-przestrzeni kluczy. Metoda kodowania u¿ywana w Systemie \fB\s-2UNIX\s+2\fR
+przestrzeni kluczy. Metoda kodowania u¿ywana w Systemie \fB\s\-2UNIX\s+2\fR
 oparta jest o algorytm NBS DES i jest bardzo bezpieczna. Rozmiar przestrzeni
 kluczy zale¿y od losowo¶ci wybranego has³a.
 .PP
@@ -205,6 +202,7 @@ Polecenie \fBpasswd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñc
 \fB6\fR	\- niew³a¶ciwe parametry opcji
 .SH "ZOBACZ TAK¯E"
 .BR group (5),
-.BR passwd (5)
+.BR passwd (5),
+.BR shadow (5)
 .SH AUTOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

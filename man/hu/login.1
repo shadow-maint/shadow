@@ -1,4 +1,4 @@
-.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" Copyright 1989 \- 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.1,v 1.4 2003/04/28 02:07:12 kloczek Exp $
+.\"	$Id: login.1,v 1.6 2005/04/05 19:08:54 kloczek Exp $
 .\"
 .TH LOGIN 1
 .SH NÉV
@@ -45,18 +45,11 @@ A
 a shell szempontjából különleges kezelésû lehet és elôfordulhat, hogy 
 nem hívható meg alfolyamatként. Tipikus példa erre, amikor a 
 .B login
-parancsot a shell \fBexec login\fR -ként értelmezi, tehát az új 
+parancsot a shell \fBexec login\fR \-ként értelmezi, tehát az új 
 bejelentkezés elõtt az aktuálisból való kilépésre készteti a 
 felhasználót. 
 Ha nem login shellbõl próbáljuk meg a \fBlogin\fR parancsot végrehajtani, 
 hibaüzenetet kapunk.
-.PP
-Amikor a \fIlogin:\fR promptnál kerül meghívásra, lehetõség van a 
-felhasználónév után környezeti változók megadására, \fBNÉV=ÉRTÉK\fR. 
-formában, azonban nem minden változót tudunk ily módon szabályozni: 
-például a \fBPATH\fR, \fBHOME\fR és a \fBSHELL\fR nem kaphat itt értéket, 
-továbbá az \fBIFS\fR letiltásra kerülhet, ha a \felhasználó login shellje 
-a fB/bin/sh\fR.
 .PP
 Ezután a jelszavunkat kell megadnunk. A beírt karakterek nem jelennek meg 
 a képernyõn, megelõzvén a 'leskelõdést'. Ha többször hibás jelszót adunk 
@@ -76,7 +69,7 @@ következõ üzenetek valamelyikét kapjuk: "\fBYou have new mail.\fR" (Új
 levél van), "\fBYou have mail.\fR" (Levél van), vagy "\fBNo Mail.\fR" 
 (Nincs levél).
 .PP
-A felhasználói- (UID) és a csoportazonosítónk (GID) beállításra kerül az 
+A felhasználói\- (UID) és a csoportazonosítónk (GID) beállításra kerül az 
 \fI/etc/passwd\fR alapján. A \fB$HOME\fR, \fB$SHELL\fR,
 \fB$PATH\fR, \fB$LOGNAME\fR és a \fB$MAIL\fR környezeti változók 
 beállításra kerülnek a passwd adatbázis megfelelõ mezõi alapján.
@@ -84,10 +77,10 @@ Az ulimit, umask és a nice is értéket kaphat a GECOS mezõ tartalma
 alapján.
 .PP
 Néhány rendszeren a \fB$TERM\fR változó is értéket kap, miként az a 
-\fI/etc/ttytype\fR-ban meg van írva.
+\fI/etc/ttytype\fR\-ban meg van írva.
 .PP
 Végrehajtódhat a parancsértelmezõnk inicializációs scriptje is. Ez ügyben 
-lásd a megfelelõ kézikönyv-oldalt.
+lásd a megfelelõ kézikönyv\-oldalt.
 .SH FIGYELMEZTETÉSEK
 .PP
 A \fBlogin\fR ezen verziója sok fordítási opcióval rendelkezik, bár csak 
@@ -101,13 +94,13 @@ változhat.
 .br
 \fI/var/log/wtmp\fR \- az elõzõ (eddigi) bejelentkezések listája
 .br
-\fI/etc/passwd\fR \- felhasználói account-okra vonatkozó információk
+\fI/etc/passwd\fR \- felhasználói account\-okra vonatkozó információk
 .br
-\fI/etc/shadow\fR \- titkosított jelszavak és érvényességi idõ-információk
+\fI/etc/shadow\fR \- titkosított jelszavak és érvényességi idõ\-információk
 .br
 \fI/etc/motd\fR \- rendszerüzenet file
 .br
-\fI/etc/nologin\fR \- nem-root felhasználók belépésének tiltása
+\fI/etc/nologin\fR \- nem\-root felhasználók belépésének tiltása
 .br
 \fI/etc/ttytype\fR \- termináltípusok listája
 .br

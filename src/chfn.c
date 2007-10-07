@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.23 2005/01/17 23:12:04 kloczek Exp $")
+RCSID (PKG_VER "$Id: chfn.c,v 1.27 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -48,6 +48,10 @@ RCSID (PKG_VER "$Id: chfn.c,v 1.23 2005/01/17 23:12:04 kloczek Exp $")
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#include <selinux/av_permissions.h>
+#endif
 /*
  * Global variables.
  */
@@ -62,10 +66,6 @@ static int amroot;
 /*
  * External identifiers
  */
-
-#ifdef	NDBM
-extern int pw_dbm_mode;
-#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -136,8 +136,7 @@ static int may_change_field (int field)
 
 static void new_fields (void)
 {
-	printf (_
-		("Enter the new value, or press ENTER for the default\n"));
+	printf (_("Enter the new value, or press ENTER for the default\n"));
 
 	if (may_change_field ('f'))
 		change_field (fullnm, sizeof fullnm, _("Full Name"));
@@ -243,9 +242,6 @@ int main (int argc, char **argv)
 	 */
 
 	amroot = (getuid () == 0);
-#ifdef	NDBM
-	pw_dbm_mode = O_RDWR;
-#endif
 
 	/*
 	 * Get the program name. The program name is used as a
@@ -269,8 +265,7 @@ int main (int argc, char **argv)
 		case 'f':
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"),
-					 Prog);
+					 _("%s: permission denied.\n"), Prog);
 				exit (1);
 			}
 			fflg++;
@@ -279,8 +274,7 @@ int main (int argc, char **argv)
 		case 'r':
 			if (!may_change_field ('r')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"),
-					 Prog);
+					 _("%s: permission denied.\n"), Prog);
 				exit (1);
 			}
 			rflg++;
@@ -289,8 +283,7 @@ int main (int argc, char **argv)
 		case 'w':
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"),
-					 Prog);
+					 _("%s: permission denied.\n"), Prog);
 				exit (1);
 			}
 			wflg++;
@@ -299,8 +292,7 @@ int main (int argc, char **argv)
 		case 'h':
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"),
-					 Prog);
+					 _("%s: permission denied.\n"), Prog);
 				exit (1);
 			}
 			hflg++;
@@ -309,8 +301,7 @@ int main (int argc, char **argv)
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"),
-					 Prog);
+					 _("%s: permission denied.\n"), Prog);
 				exit (1);
 			}
 			oflg++;
@@ -360,8 +351,7 @@ int main (int argc, char **argv)
 			 Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "passwd.byname",
-				&nis_master)) {
+		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _
 				 ("%s: `%s' is the NIS master for this client.\n"),
@@ -381,7 +371,21 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (1);
 	}
+#ifdef WITH_SELINUX
+	/*
+	 * If the UID of the user does not match the current real UID,
+	 * check if the change is allowed by SELinux policy.
+	 */
 
+	if ((pw->pw_uid != getuid ())
+	    && (checkPasswdAccess (PASSWD__CHFN) != 0)) {
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		closelog ();
+		exit (1);
+	}
+#endif
+
+#ifndef USE_PAM
 	/*
 	 * Non-privileged users are optionally authenticated (must enter the
 	 * password of the user whose information is being changed) before
@@ -391,6 +395,8 @@ int main (int argc, char **argv)
 
 	if (!amroot && getdef_bool ("CHFN_AUTH"))
 		passwd_check (pw->pw_name, pw->pw_passwd, "chfn");
+
+#endif				/* !USE_PAM */
 
 	/*
 	 * Now get the full name. It is the first comma separated field in
@@ -425,7 +431,6 @@ int main (int argc, char **argv)
 	/*
 	 * Anything left over is "slop".
 	 */
-
 	if (cp && !oflg) {
 		if (slop[0])
 			strcat (slop, ",");
@@ -437,7 +442,6 @@ int main (int argc, char **argv)
 	 * If none of the fields were changed from the command line, let the
 	 * user interactively change them.
 	 */
-
 	if (!fflg && !rflg && !wflg && !hflg && !oflg) {
 		printf (_("Changing the user information for %s\n"), user);
 		new_fields ();
@@ -446,10 +450,8 @@ int main (int argc, char **argv)
 	/*
 	 * Check all of the fields for valid information
 	 */
-
 	if (valid_field (fullnm, ":,=")) {
-		fprintf (stderr, _("%s: invalid name: \"%s\"\n"), Prog,
-			 fullnm);
+		fprintf (stderr, _("%s: invalid name: \"%s\"\n"), Prog, fullnm);
 		closelog ();
 		exit (1);
 	}
@@ -491,8 +493,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
-		  fullnm, roomno, workph, homeph, slop[0] ? "," : "",
-		  slop);
+		  fullnm, roomno, workph, homeph, slop[0] ? "," : "", slop);
 
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
@@ -540,8 +541,7 @@ int main (int argc, char **argv)
 	if (!pw) {
 		pw_unlock ();
 		fprintf (stderr,
-			 _("%s: %s not found in /etc/passwd\n"), Prog,
-			 user);
+			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
 		exit (1);
 	}
 
@@ -556,34 +556,19 @@ int main (int argc, char **argv)
 	 * Update the passwd file entry. If there is a DBM file, update that
 	 * entry as well.
 	 */
-
 	if (!pw_update (&pwent)) {
-		fprintf (stderr,
-			 _("Error updating the password entry.\n"));
+		fprintf (stderr, _("Error updating the password entry.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
 		exit (1);
 	}
-#ifdef NDBM
-	if (pw_dbm_present () && !pw_dbm_update (&pwent)) {
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		pw_unlock ();
-		SYSLOG ((LOG_ERR, "error updating DBM passwd entry"));
-		closelog ();
-		exit (1);
-	}
-	endpwent ();
-#endif
 
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-
 	if (!pw_close ()) {
-		fprintf (stderr,
-			 _("Cannot commit password file changes.\n"));
+		fprintf (stderr, _("Cannot commit password file changes.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();

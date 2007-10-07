@@ -41,7 +41,7 @@
 #if defined(SHADOWPWD)
 
 #include "rcsid.h"
-RCSID ("$Id: age.c,v 1.9 2004/03/29 00:26:18 kloczek Exp $")
+RCSID ("$Id: age.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
 #endif
@@ -124,8 +124,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		if (setup_uid_gid (pw, 0))
 			_exit (126);
 
-		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name,
-		       (char *) 0);
+		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
 		err = errno;
 		perror ("Can't execute " PASSWD_PROGRAM);
 		_exit ((err == ENOENT) ? 127 : 126);
@@ -170,8 +169,7 @@ void agecheck (const struct passwd *pw, const struct spwd *sp)
 				("Your password will expire in %ld days.\n"),
 				remain);
 		else if (remain == 1)
-			printf (_
-				("Your password will expire tomorrow.\n"));
+			printf (_("Your password will expire tomorrow.\n"));
 		else if (remain == 0)
 			printf (_("Your password will expire today.\n"));
 	}

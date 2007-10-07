@@ -1,4 +1,4 @@
-.\"$Id: shadow.3,v 1.10 2003/05/01 18:17:39 kloczek Exp $
+.\" $Id: shadow.3,v 1.13 2005/04/12 16:31:06 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -81,14 +81,14 @@ struct spwd {
 .br
 	unsigned long int	sp_flag; /* reserved for future use */
 .br
-.in -.5i
+.in \-.5i
 }
 .PP
 The meanings of each field are
 .sp
-sp_namp \- pointer to null-terminated user name.
+sp_namp \- pointer to null\-terminated user name.
 .br
-sp_pwdp \- pointer to null-terminated password.
+sp_pwdp \- pointer to null\-terminated password.
 .br
 sp_lstchg \- days since Jan 1, 1970 password was last changed.
 .br
@@ -122,17 +122,17 @@ exclusive access to the \fI/etc/shadow\fR file. \fBlckpwdf\fR attempts to
 acquire a lock using \fBpw_lock\fR for up to 15 seconds. It continues by
 attempting to acquire a second lock using \fBspw_lock\fR for the remainder
 of the initial 15 seconds. Should either attempt fail after a total of 15
-seconds, \fBlckpwdf\fR returns -1. When both locks are acquired 0 is
+seconds, \fBlckpwdf\fR returns \-1. When both locks are acquired 0 is
 returned.
 .SH DIAGNOSTICS
 Routines return NULL if no more entries are available or if an error occurs
 during processing. Routines which have \fBint\fR as the return value return
-0 for success and -1 for failure.
+0 for success and \-1 for failure.
 .SH CAVEATS
 These routines may only be used by the super user as access to the shadow
 password file is restricted.
 .SH FILES
-\fI/etc/shadow\fR \	- encrypted user passwords
+\fI/etc/shadow\fR	\- secure user account information
 .SH SEE ALSO
 .BR getpwent (3),
 .BR shadow (5)

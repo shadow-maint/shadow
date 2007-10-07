@@ -30,7 +30,7 @@
 /*
  * port.h - structure of /etc/porttime
  *
- *	$Id: port.h,v 1.2 1997/05/01 23:14:43 marekm Exp $
+ *	$Id: port.h,v 1.3 2005/03/31 05:14:49 kloczek Exp $
  *
  *	Each entry in /etc/porttime consists of a TTY device
  *	name or "*" to indicate all TTY devices, followed by
@@ -62,10 +62,10 @@
  *	pt_times - pointer to list of allowable time periods.
  */
 
-struct	port	{
-	char	**pt_names;
-	char	**pt_users;
-	struct	pt_time	*pt_times;
+struct port {
+	char **pt_names;
+	char **pt_users;
+	struct pt_time *pt_times;
 };
 
 /*
@@ -74,8 +74,8 @@ struct	port	{
  *	t_end - ending time for this entry
  */
 
-struct	pt_time	{
-	short	t_days;
-	short	t_start;
-	short	t_end;
+struct pt_time {
+	short t_days;
+	short t_start;
+	short t_end;
 };

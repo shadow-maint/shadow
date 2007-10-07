@@ -28,19 +28,16 @@
  */
 
 #include <config.h>
-#ifdef	SHADOWPWD	/*{*/
+#ifdef	SHADOWPWD		/*{ */
 
 #include "rcsid.h"
-RCSID("$Id: sppack.c,v 1.3 1997/12/07 23:26:58 marekm Exp $")
-
+RCSID ("$Id: sppack.c,v 1.4 2005/03/31 05:14:49 kloczek Exp $")
 #include <stdio.h>
 #include <sys/types.h>
 #include "defines.h"
-
-int
-spw_pack(const struct spwd *spwd, char *buf)
+int spw_pack (const struct spwd *spwd, char *buf)
 {
-	char	*cp;
+	char *cp;
 
 	cp = buf;
 	strcpy (cp, spwd->sp_namp);
@@ -73,10 +70,9 @@ spw_pack(const struct spwd *spwd, char *buf)
 	return cp - buf;
 }
 
-int
-spw_unpack(char *buf, int len, struct spwd *spwd)
+int spw_unpack (char *buf, int len, struct spwd *spwd)
 {
-	char	*org = buf;
+	char *org = buf;
 
 	spwd->sp_namp = buf;
 	buf += strlen (buf) + 1;
@@ -110,4 +106,4 @@ spw_unpack(char *buf, int len, struct spwd *spwd)
 
 	return 0;
 }
-#endif	/*}*/
+#endif				/*} */

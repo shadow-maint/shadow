@@ -1,4 +1,62 @@
-$Id: NEWS,v 1.104 2005/01/21 20:55:46 kloczek Exp $
+$Id: NEWS,v 1.147 2005/04/25 10:39:48 kloczek Exp $
+
+shadow-4.0.7 -> shadow-4.0.8
+
+*** general:
+- remove not working OPIE and SKEY support,
+- chage, useradd, usermod: reduce multiple OPENLOG() calls,
+- passwd: fix #61313 Debian bug: "passwd -S root" (as a normal user) should not
+  display "You may not change the password for root.",
+- vipw: fixed race condition (Debian #242407 bug; fix by Alexander Gattin
+  <arg@online.com.ua>),
+- configure.in: add using AC_GNU_SOURCE macro for kill compilation warnings about
+  implicit declaration of function `fseeko',
+- faillog: changed faillog record display format for allow fit in 80 columns all
+  faillog atributies,
+- removed NDBM code (unused),
+- fixed use of SU_WHEEL_ONLY in su. Now su realy is avalaible for wheel group
+  members. Thanks to Mike Frysinger <vapier@gentoo.org> for report:
+  http://bugs.gentoo.org/show_bug.cgi?id=80345
+- drop never finished kerberos and des_rpc support (for kerberos support back firs
+  must be prepared modularization),
+- fixed UTMP path detection (by Kelledin <kelledin@users.sf.net>),
+- useradd: rewrited group count to dynamic (by John Newbigin
+  <jnewbigin@ict.swin.edu.au>),
+- login: fixed create lastlog entry fo users never loged in on non-PAM
+  variant of login (fix by <oracular@ziplip.com>),
+- remove handle login.defs::NOLOGIN_STR (never used),
+- useradd: fixes a potential security problem when mailbox is created in
+  useradd.
+  Patch and comment by Koblinger Egmont <egmont@uhulinux.hu>:
+  Only two arguments are passed to the open() call though it expects three
+  because O_CREAT is present. Hence the permission of the file first becomes
+  some random garbage found on the stack, and an attacker can perhaps open
+  this file and hold it open for reading or writing before the proper
+  fchmod() is executed. (Actually, we could also pass the final "mode" to
+  the open() call and then save the consequent fchmod().)
+- SELinux changes: added changes in chage, chfn, chsh, passwd for allow
+  construct more grained user password/accuunt properties on SELinux
+  policies level. Patch originally based on RH changes (submited by Chris
+  PeBenito <pebenito@gentoo.org>),
+- added SELinux changes: in libmisc/copydir.c (based on Fedora patch),
+- updated translations: cs, da, es, eu, fi, fr, it, ko, nl, pl, pt, sk, uk,
+- added new translations: tl,
+- reindent all source code using -l80,
+*** documentation:
+- it man pages (by Danilo Piazzalunga <danilopiazza@libero.it>):
+-- updated: chfn.1, chsh.1, groups.1, grpck.8, grpconv.8,
+   grpunconv.8, id.1, lastlog.8, login.1, newgrp.1, pwunconv.8, shadow.5,
+   vigr.8, vipw.8,
+-- new: chage.1, chpasswd.8, expiry.1, faillog.5, faillog.8, getspnam.3,
+   logoutd.8, porttime.5, pwck.8, shadow.3, shadowconfig.8, su.1,
+- passwd(1): fix #160477 Debian bug: improve -S output description,
+- newgrp(1): fix #251926, #166173, #113191 Debian bugs: explain why editing /etc/group   
+  (without gshadow) doesn't permit to use newgrp,
+- newgrp(1): newgrp uses /bin/sh (not bash),
+- faillog(8): updated after rewrite faillog command for use getopt_long(),
+- login(1): removed fragment about abilities pass enviroment variables in login prompt,
+- gshadow(5): new file (by Nicolas Nicolas François <nicolas.francois@centraliens.net>),
+- usermod(8): fixed #302388 Debian bug: added separated -o option description,
 
 shadow-4.0.6 -> shadow-4.0.7
 
@@ -10,7 +68,7 @@ shadow-4.0.6 -> shadow-4.0.7
 - added ro, sq translations (from Debian resources),
 - fixed large file support in lastlog and faillog:
 -- added AC_SYS_LARGEFILE macro to autoconf,
--- use fseeko() instead fseek() and remove casting file ofsets to unsigned
+-- use fseeko() instead fseek() and remove casting file offsets to unsigned
    long.
 - lastlog:
 -- rewrited source code using the same style as in chpasswd.c,

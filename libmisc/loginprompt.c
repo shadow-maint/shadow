@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: loginprompt.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: loginprompt.c,v 1.8 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
@@ -144,8 +144,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 				envp[envc] = nvar;
 			} else {
 				envp[envc] = xmalloc (strlen (nvar) + 32);
-				sprintf (envp[envc], "L%d=%s", count++,
-					 nvar);
+				sprintf (envp[envc], "L%d=%s", count++, nvar);
 			}
 		}
 		set_env (envc, envp);

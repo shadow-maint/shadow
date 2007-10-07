@@ -1,4 +1,4 @@
-.\"$Id: gpasswd.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: gpasswd.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
@@ -14,17 +14,17 @@
 .SH 名前
 gpasswd \- /etc/groupファイルを管理する
 .SH 書式
-\fBgpasswd \fIgroup\fR
+\fBgpasswd\fR \fIgroup\fR
 .br
-\fBgpasswd -a \fIuser\fR \fIgroup\fR
+\fBgpasswd \-a\fR \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd -d \fIuser\fR \fIgroup\fR
+\fBgpasswd \-d\fR \fIuser\fR \fIgroup\fR
 .br
-\fBgpasswd -R \fIgroup\fR
+\fBgpasswd \-R\fR \fIgroup\fR
 .br
-\fBgpasswd -r \fIgroup\fR
+\fBgpasswd \-r\fR \fIgroup\fR
 .br
-\fBgpasswd\fR [\fB-A \fIuser\fR,...] [\fB-M\fR \fIuser\fR,...] \fIgroup\fR
+\fBgpasswd\fR [\fB\-A\fR \fIuser\fR,...] [\fB\-M\fR \fIuser\fR,...] \fIgroup\fR
 .SH 説明
 .B gpasswd
 は /etc/group ファイル
@@ -32,18 +32,18 @@ gpasswd \- /etc/groupファイルを管理する
 の管理に用いられる。
 各グループには、管理者・メンバー・パスワードを設定できる。
 システム管理者は、
-\fB-A\fR オプションを使ってグループ管理者 (複数でも可) を定義したり、
-\fB-M\fR オプションを使ってメンバーを定義したりでき、
+\fB\-A\fR オプションを使ってグループ管理者 (複数でも可) を定義したり、
+\fB\-M\fR オプションを使ってメンバーを定義したりでき、
 各グループの管理者・メンバーと同等の特権を持つ。
 .PP
-グループ管理者は、\fB-a\fR オプションを用いてユーザを追加したり、
-\fB-d\fR オプションを用いてユーザを削除したりできる。
-管理者は \fB-r\fR オプションを用いてグループパスワードを削除できる。
+グループ管理者は、\fB\-a\fR オプションを用いてユーザを追加したり、
+\fB\-d\fR オプションを用いてユーザを削除したりできる。
+管理者は \fB\-r\fR オプションを用いてグループパスワードを削除できる。
 パスワードが設定されていない時は、
 グループのメンバーのみが
 .BR newgrp (1)
 を用いてグループの一員になれる。
-オプション \fB-R\fR を指定すると、
+オプション \fB\-R\fR を指定すると、
 .BR newgrp (1)
 コマンドを用いたグループへのアクセスはできなくなる。
 .PP

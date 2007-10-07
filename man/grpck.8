@@ -1,4 +1,4 @@
-.\"$Id: grpck.8,v 1.14 2004/12/11 20:05:01 kloczek Exp $
+.\"$Id: grpck.8,v 1.17 2005/04/12 17:53:21 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,7 +29,7 @@
 .SH NAME
 grpck \- verify integrity of group files
 .SH SYNOPSIS
-\fBgrpck\fR [\fB-r\fR] [\fIgroup\fR \fIshadow\fR]
+\fBgrpck\fR [\fB\-r\fR] [\fIgroup\fR \fIshadow\fR]
 .SH DESCRIPTION
 \fBgrpck\fR verifies the integrity of the system authentication information.
 All entries in the \fI/etc/group\fR and \fI/etc/gshadow\fR are checked to
@@ -40,12 +40,12 @@ have other incorrectable errors.
 Checks are made to verify that each entry has:
 .sp
 .in +.5i
-- the correct number of fields
+\- the correct number of fields
 .br
-- a unique group name
+\- a unique group name
 .br
-- a valid list of members and administrators
-.in -.5i
+\- a valid list of members and administrators
+.in \-.5i
 .sp
 .PP
 The checks for correct number of fields and unique group name are fatal. If
@@ -63,17 +63,17 @@ circumstances to remove the offending entry.
 By default, \fBgrpck\fR operates on the files \fI/etc/group\fR and
 \fI/etc/gshadow\fR. The user may select alternate files with the \fIgroup\fR
 and \fIshadow\fR parameters. Additionally, the user may execute the command
-in read-only mode by specifying the \fB-r\fR flag. This causes all questions
+in read\-only mode by specifying the \fB\-r\fR flag. This causes all questions
 regarding changes to be answered \fBno\fR without user intervention.
 \fBgrpck\fR can also sort entries in \fI/etc/group\fR and \fI/etc/gshadow\fR
-by GID. To run it in sort mode pass it \fB-s\fR flag. No checks are
+by GID. To run it in sort mode pass it \fB\-s\fR flag. No checks are
 performed then, it just sorts.
 .SH FILES
-\fI/etc/group\fR\	- group account information
+\fI/etc/group\fR	\- group account information
 .br
-\fI/etc/gshadow\fR\	- encrypted passwords and group administrator information
+\fI/etc/gshadow\fR	\- encrypted passwords and group administrator information
 .br
-\fI/etc/passwd\fR\	- user information
+\fI/etc/passwd\fR	\- user account information
 .SH SEE ALSO
 .BR group (5),
 .BR passwd (5),

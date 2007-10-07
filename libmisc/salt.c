@@ -8,13 +8,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: salt.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: salt.c,v 1.7 2005/04/06 00:21:37 kloczek Exp $")
+#include <sys/time.h>
+#include <stdlib.h>
 #include "prototypes.h"
 #include "defines.h"
-#include <sys/time.h>
-#if 1
 #include "getdef.h"
-extern char *l64a ();
 
 /*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
@@ -44,21 +43,3 @@ char *crypt_make_salt (void)
 
 	return result;
 }
-#else
-/*
- * This is the old style random salt generator...
- */
-char *crypt_make_salt (void)
-{
-	time_t now;
-	static unsigned long x;
-	static char result[3];
-
-	time (&now);
-	x += now + getpid () + clock ();
-	result[0] = i64c (((x >> 18) ^ (x >> 6)) & 077);
-	result[1] = i64c (((x >> 12) ^ x) & 077);
-	result[2] = '\0';
-	return result;
-}
-#endif

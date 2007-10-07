@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.50 2004/11/09 02:45:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.55 2005/04/17 00:15:55 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -49,11 +49,7 @@ RCSID (PKG_VER "$Id: useradd.c,v 1.50 2004/11/09 02:45:43 kloczek Exp $")
 #include <pwd.h>
 #endif				/* USE_PAM */
 #include "pwauth.h"
-#if HAVE_LASTLOG_H
 #include <lastlog.h>
-#else
-#include "lastlog_.h"
-#endif
 #include "faillog.h"
 #include "nscd.h"
 #ifndef SKEL_DIR
@@ -112,50 +108,24 @@ static char *Prog;
 
 static int
  bflg = 0,			/* new default root of home directory */
- cflg = 0,			/* comment (GECOS) field for new account */
- dflg = 0,			/* home directory for new account */
- Dflg = 0,			/* set/show new user default values */
- eflg = 0,			/* days since 1970-01-01 when account is locked */
- fflg = 0,			/* days until account with expired password is locked */
- gflg = 0,			/* primary group ID for new account */
- Gflg = 0,			/* secondary group set for new account */
- kflg = 0,			/* specify a directory to fill new user directory */
- mflg = 0,			/* create user's home directory if it doesn't exist */
- nflg = 0,			/* create a group having the same name as the user */
- oflg = 0,			/* permit non-unique user ID to be specified with -u */
- sflg = 0,			/* shell program for new account */
- uflg = 0;			/* specify user ID for new account */
+    cflg = 0,			/* comment (GECOS) field for new account */
+    dflg = 0,			/* home directory for new account */
+    Dflg = 0,			/* set/show new user default values */
+    eflg = 0,			/* days since 1970-01-01 when account is locked */
+    fflg = 0,			/* days until account with expired password is locked */
+    gflg = 0,			/* primary group ID for new account */
+    Gflg = 0,			/* secondary group set for new account */
+    kflg = 0,			/* specify a directory to fill new user directory */
+    mflg = 0,			/* create user's home directory if it doesn't exist */
+    nflg = 0,			/* create a group having the same name as the user */
+    oflg = 0,			/* permit non-unique user ID to be specified with -u */
+    sflg = 0,			/* shell program for new account */
+    uflg = 0;			/* specify user ID for new account */
 
 extern char *optarg;
 extern int optind;
 
-#ifdef NDBM
-extern int pw_dbm_mode;
-
-#ifdef	SHADOWPWD
-extern int sp_dbm_mode;
-#endif
-
-extern int gr_dbm_mode;
-
-#ifdef	SHADOWGRP
-extern int sg_dbm_mode;
-#endif
-#endif
-
 static int home_added;
-
-#ifdef NDBM
-static int pw_dbm_added;
-static int gr_dbm_added;
-
-#ifdef	SHADOWPWD
-static int sp_dbm_added;
-#endif
-#ifdef	SHADOWGRP
-static int sg_dbm_added;
-#endif
-#endif				/* NDBM */
 
 #include "groupio.h"
 
@@ -227,33 +197,10 @@ static void create_mail (void);
 
 static void fail_exit (int code)
 {
-#ifdef NDBM
-	struct passwd pwent;
-
-	if (pw_dbm_added) {
-		pwent.pw_name = user_name;
-		pwent.pw_uid = user_id;
-		pw_dbm_remove (&pwent);
-	}
-	if (gr_dbm_added)
-		fprintf (stderr, _("%s: rebuild the group database\n"),
-			 Prog);
-#ifdef	SHADOWPWD
-	if (sp_dbm_added)
-		sp_dbm_remove (user_name);
-#endif
-#ifdef	SHADOWGRP
-	if (sg_dbm_added)
-		fprintf (stderr,
-			 _("%s: rebuild the shadow group database\n"),
-			 Prog);
-#endif
-#endif				/* NDBM */
 	if (home_added)
 		rmdir (user_home);
 
-	SYSLOG ((LOG_INFO, "failed adding user `%s', data deleted",
-		 user_name));
+	SYSLOG ((LOG_INFO, "failed adding user `%s', data deleted", user_name));
 	exit (code);
 }
 
@@ -280,8 +227,7 @@ static long get_number (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog,
-		 cp);
+	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -294,8 +240,7 @@ static uid_t get_uid (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog,
-		 cp);
+	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -342,8 +287,7 @@ static void get_defaults (void)
 		 */
 
 		if (MATCH (buf, DGROUP)) {
-			unsigned int val =
-			    (unsigned int) strtoul (cp, &ep, 10);
+			unsigned int val = (unsigned int) strtoul (cp, &ep, 10);
 
 			if (*cp != '\0' && *ep == '\0') {	/* valid number */
 				def_group = val;
@@ -359,8 +303,7 @@ static void get_defaults (void)
 				def_gname = xstrdup (cp);
 			} else {
 				fprintf (stderr,
-					 _("%s: unknown group %s\n"), Prog,
-					 cp);
+					 _("%s: unknown group %s\n"), Prog, cp);
 			}
 		}
 
@@ -498,8 +441,7 @@ static int set_defaults (void)
 			*cp = '\0';
 
 		if (!out_group && MATCH (buf, DGROUP)) {
-			fprintf (ofp, DGROUP "%u\n",
-				 (unsigned int) def_group);
+			fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 			out_group++;
 		} else if (!out_home && MATCH (buf, HOME)) {
 			fprintf (ofp, HOME "%s\n", def_home);
@@ -551,8 +493,7 @@ static int set_defaults (void)
 		fprintf (ofp, SKEL "%s\n", def_template);
 
 	if (!out_create_mail_spool)
-		fprintf (ofp, CREATE_MAIL_SPOOL "%s\n",
-			 def_create_mail_spool);
+		fprintf (ofp, CREATE_MAIL_SPOOL "%s\n", def_create_mail_spool);
 
 	/*
 	 * Flush and close the file. Check for errors to make certain
@@ -571,8 +512,7 @@ static int set_defaults (void)
 
 	snprintf (buf, sizeof buf, "%s-", def_file);
 	if (rename (def_file, buf) && errno != ENOENT) {
-		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog,
-			  def_file);
+		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, def_file);
 		perror (buf);
 		unlink (new_file);
 		return -1;
@@ -583,8 +523,7 @@ static int set_defaults (void)
 	 */
 
 	if (rename (new_file, def_file)) {
-		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog,
-			  new_file);
+		snprintf (buf, sizeof buf, _("%s: rename: %s"), Prog, new_file);
 		perror (buf);
 		return -1;
 	}
@@ -814,13 +753,11 @@ static void grp_update (void)
 	 */
 
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: error locking group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error locking group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: error opening group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error opening group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -869,29 +806,12 @@ static void grp_update (void)
 		ngrp->gr_mem = add_list (ngrp->gr_mem, user_name);
 		if (!gr_update (ngrp)) {
 			fprintf (stderr,
-				 "%s: error adding new group entry\n",
-				 Prog);
+				 "%s: error adding new group entry\n", Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-#ifdef	NDBM
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-
-		if (!gr_dbm_update (ngrp)) {
-			fprintf (stderr,
-				 "%s: cannot add new dbm group entry\n",
-				 Prog);
-			fail_exit (E_GRP_UPDATE);
-		} else
-			gr_dbm_added++;
-#endif
 		SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
 			 user_name, ngrp->gr_name));
 	}
-#ifdef NDBM
-	endgrent ();
-#endif
 
 #ifdef	SHADOWGRP
 	if (!is_shadow_grp)
@@ -934,29 +854,12 @@ static void grp_update (void)
 		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_name);
 		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"),
-				 Prog);
+				 _("%s: error adding new group entry\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-#ifdef	NDBM
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-
-		if (!sg_dbm_update (nsgrp)) {
-			fprintf (stderr,
-				 _("%s: cannot add new dbm group entry\n"),
-				 Prog);
-			fail_exit (E_GRP_UPDATE);
-		} else
-			sg_dbm_added++;
-#endif				/* NDBM */
 		SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
 			 user_name, nsgrp->sg_name));
 	}
-#ifdef NDBM
-	endsgent ();
-#endif				/* NDBM */
 #endif				/* SHADOWGRP */
 }
 
@@ -1033,8 +936,7 @@ static void find_new_uid (void)
 #endif
 		}
 		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: can't get unique uid\n"),
-				 Prog);
+			fprintf (stderr, _("%s: can't get unique uid\n"), Prog);
 			fail_exit (E_UID_IN_USE);
 		}
 	}
@@ -1294,23 +1196,20 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #endif
 	if (do_grp_update) {
 		if (!gr_close ()) {
 			fprintf (stderr,
-				 _("%s: cannot rewrite group file\n"),
-				 Prog);
+				 _("%s: cannot rewrite group file\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
 		gr_unlock ();
@@ -1342,28 +1241,24 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (!pw_lock ()) {
-		fprintf (stderr, _("%s: unable to lock password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
 	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"),
-			 Prog);
+			 _("%s: cannot lock shadow password file\n"), Prog);
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"),
-			 Prog);
+			 _("%s: cannot open shadow password file\n"), Prog);
 		spw_unlock ();
 		pw_unlock ();
 		exit (E_PW_UPDATE);
@@ -1459,25 +1354,6 @@ static void usr_update (void)
 			 _("%s: error adding new password entry\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
-#ifdef NDBM
-	/*
-	 * Update the DBM files. This creates the user before the flat
-	 * files are updated. This is safe before the password field is
-	 * either locked, or set to a valid authentication string.
-	 */
-
-	if (pw_dbm_present ()) {
-		if (!pw_dbm_update (&pwent)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error updating password dbm entry\n"),
-				 Prog);
-			exit (E_PW_UPDATE);
-		} else
-			pw_dbm_added = 1;
-	}
-	endpwent ();
-#endif
 
 #ifdef	SHADOWPWD
 	/*
@@ -1490,26 +1366,6 @@ static void usr_update (void)
 			 Prog);
 		exit (E_PW_UPDATE);
 	}
-#ifdef	NDBM
-	/* 
-	 * Update the DBM files for the shadow password. This entry is
-	 * output before the entry in the flat file, but this is safe as
-	 * the password is locked or the authentication string has the
-	 * proper values.
-	 */
-
-	if (is_shadow_pwd && sp_dbm_present ()) {
-		if (!sp_dbm_update (&spent)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error updating shadow passwd dbm entry\n"),
-				 Prog);
-			fail_exit (E_PW_UPDATE);
-		} else
-			sp_dbm_added++;
-		endspent ();
-	}
-#endif
 #endif				/* SHADOWPWD */
 
 	/*
@@ -1578,7 +1434,7 @@ static void create_mail (void)
 			if (access (ms, R_OK) != 0) {
 				fd = open (ms,
 					   O_CREAT | O_EXCL | O_WRONLY |
-					   O_TRUNC);
+					   O_TRUNC, 0);
 				if (fd != -1) {
 					fchown (fd, user_id, mail_gid);
 					fchmod (fd, mode);
@@ -1625,21 +1481,21 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	OPENLOG("useradd");
+	OPENLOG ("useradd");
 
-	sys_ngroups = sysconf(_SC_NGROUPS_MAX);
-	user_groups = malloc((1 + sys_ngroups) * sizeof(char *));
+	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
+	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
 
 #ifdef SHADOWPWD
-	is_shadow_pwd = spw_file_present();
+	is_shadow_pwd = spw_file_present ();
 #endif
 #ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present();
+	is_shadow_grp = sgr_file_present ();
 #endif
 
-	get_defaults();
+	get_defaults ();
 
-	process_flags(argc, argv);
+	process_flags (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -1650,8 +1506,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("useradd", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("useradd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -1669,29 +1524,10 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
-
-	OPENLOG("useradd");
 #endif				/* USE_PAM */
-
-	/*
-	 * The open routines for the NDBM files don't use read-write
-	 * as the mode, so we have to clue them in.
-	 */
-
-#ifdef	NDBM
-	pw_dbm_mode = O_RDWR;
-#ifdef	SHADOWPWD
-	sp_dbm_mode = O_RDWR;
-#endif
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif
-#endif
 
 	/*
 	 * See if we are messing with the defaults file, or creating
@@ -1711,8 +1547,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (getpwnam (user_name)) {
-		fprintf (stderr, _("%s: user %s exists\n"), Prog,
-			 user_name);
+		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_name);
 		exit (E_NAME_IN_USE);
 	}
 

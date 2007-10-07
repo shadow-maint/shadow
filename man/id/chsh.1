@@ -1,5 +1,5 @@
 .\"
-.\"  chsh.1 -- change your login shell
+.\"  chsh.1 \-\- change your login shell
 .\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
 .\"
 .\"  this program is free software.  you can redistribute it and
@@ -7,8 +7,8 @@
 .\"  there is no warranty.
 .\"
 .\"  $Author: kloczek $
-.\"  $Revision: 1.2 $
-.\"  $Date: 2004/08/04 13:02:25 $
+.\"  $Revision: 1.3 $
+.\"  $Date: 2005/04/05 19:08:54 $
 .\"
 .TH CHSH 1 "October 13 1994" "chsh" "Linux Reference Manual"
 .SH NAMA PERINTAH/PROGRAM
@@ -22,7 +22,7 @@ digunakan untuk merubah shell login Anda.
 Bila shell tidak diberikan pada baris perintah maka
 .B chsh
 menampilkan prompt untuk memasukkan shell.
-.SS SHELL-SHELL YANG BENAR
+.SS SHELL\-SHELL YANG BENAR
 .B chsh
 akan menerima pathname lengkap dari file executable pada sistem.
 Walau demikian, akan menampilkan peringatan bila shell tidak terdapat
@@ -30,7 +30,7 @@ dalam file
 .I /etc/shells .
 .SH OPTION
 .TP
-.I "\-l, \-\-list-shells"
+.I "\-l, \-\-list\-shells"
 Menampilkan daftar shell yang ada dalam
 .I /etc/shells
 dan keluar atau exit.
@@ -41,7 +41,7 @@ Menentukan shell login Anda.
 .I "\-u, \-\-help"
 Menampilkan cara penggunaan program.
 .TP
-.I "-v, \-\-version"
+.I "\-v, \-\-version"
 Menampilkan informasi versi program.
 .SH "LIHAT JUGA"
 .BR login (1),

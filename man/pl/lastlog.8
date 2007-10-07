@@ -1,5 +1,4 @@
-.\" $Id: lastlog.8,v 1.12 2004/12/12 20:36:50 kloczek Exp $
-.\" {PTM/WK/1999-09-18}
+.\" $Id: lastlog.8,v 1.13 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -42,15 +41,15 @@ flag) pozycje pliku wy¶wietlane s± w kolejno¶ci w jakiej s± w pliku
 \fB/etc/passwd\fR.
 .SH OPCJE
 Polecenie \fBlastlog\fR posiada nastêpuj±ce opcje:
-.IP "\fB-h\fR, \fB--help\fR"
+.IP "\fB\-h\fR, \fB\-\-help\fR"
 Wy¶wietla krótk± informacjê o tym jak u¿ywaæ program i koñczy pracê.
-.IP "\fB-t\fR, \fB--time\fR \fIDNI\fR"
+.IP "\fB\-t\fR, \fB\-\-time\fR \fIDNI\fR"
 Wy¶wietla tylko ostatnie logowania u¿ytkowników nie starsze ni¿ zadana
 ilo¶æ \fIDNI\fR.
-.IP "\fB-u\fR, \fB--user\fR \fILOGIN\fR"
+.IP "\fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR"
 Wy¶wietla tylko informacji o ostanim logowaniu u¿ytkownika \fILOGIN\fR.
 .TP
-Opcja \fB-t\fR przes³ania u¿ycie opcji \fB-u\fR.
+Opcja \fB\-t\fR przes³ania u¿ycie opcji \fB\-u\fR.
 .PP
 Je¿eli u¿ytkownik nigdy siê nie logowa³ to zamiast portu i czasu logowania
 zostanie wy¶wietlony komunikat \fB"**Never logged in**"\fR (nigdy siê nie
@@ -60,7 +59,7 @@ logowa³).
 .SH PRZESTROGI
 Du¿e luki w numeracji UID powoduj±, ¿e program bêdzie pracowa³ d³u¿ej, nie
 wy¶wietlaj±c wyników (np. je¶li mmdf=800, za¶ ostatni uid=170, to program
-bêdzie sprawia³ wra¿enie zawieszonego w trakcie przetwarzania uid 171-799).
+bêdzie sprawia³ wra¿enie zawieszonego w trakcie przetwarzania uid 171\-799).
 .SH AUTORZY
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
 .br

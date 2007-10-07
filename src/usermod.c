@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.32 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.37 2005/04/17 15:49:01 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -49,11 +49,7 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.32 2004/10/11 06:26:40 kloczek Exp $")
 #include "defines.h"
 #include "chkname.h"
 #include "faillog.h"
-#if HAVE_LASTLOG_H
 #include <lastlog.h>
-#else
-#include "lastlog_.h"
-#endif
 #include "pwauth.h"
 #include "nscd.h"
 #include "getdef.h"
@@ -67,12 +63,12 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.32 2004/10/11 06:26:40 kloczek Exp $")
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* uid already in use (and no -o) */
-    /* #define E_BAD_PWFILE	5 *//* passwd file contains errors */
+    /* #define E_BAD_PWFILE     5 *//* passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
-    /* #define E_NOSPACE	11 *//* insufficient space to move home dir */
+    /* #define E_NOSPACE        11 *//* insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 static char *user_name;
@@ -98,34 +94,21 @@ static char *Prog;
 
 static int
  uflg = 0,			/* specify new user ID */
- oflg = 0,			/* permit non-unique user ID to be specified with -u */
- gflg = 0,			/* new primary group ID */
- Gflg = 0,			/* new secondary group set */
- dflg = 0,			/* new home directory */
- sflg = 0,			/* new shell program */
- cflg = 0,			/* new comment (GECOS) field */
- mflg = 0,			/* create user's home directory if it doesn't exist */
+    oflg = 0,			/* permit non-unique user ID to be specified with -u */
+    gflg = 0,			/* new primary group ID */
+    Gflg = 0,			/* new secondary group set */
+    dflg = 0,			/* new home directory */
+    sflg = 0,			/* new shell program */
+    cflg = 0,			/* new comment (GECOS) field */
+    mflg = 0,			/* create user's home directory if it doesn't exist */
 #ifdef SHADOWPWD
- fflg = 0,			/* days until account with expired password is locked */
- eflg = 0,			/* days since 1970-01-01 when account becomes expired */
+    fflg = 0,			/* days until account with expired password is locked */
+    eflg = 0,			/* days since 1970-01-01 when account becomes expired */
 #endif
- Lflg = 0,			/* lock the password */
- Uflg = 0,			/* unlock the password */
- pflg = 0,			/* new encrypted password */
- lflg = 0;			/* new user name */
-
-#ifdef	NDBM
-extern int pw_dbm_mode;
-
-#ifdef	SHADOWPWD
-extern int sp_dbm_mode;
-#endif
-extern int gr_dbm_mode;
-
-#ifdef	SHADOWGRP
-extern int sg_dbm_mode;
-#endif
-#endif
+    Lflg = 0,			/* lock the password */
+    Uflg = 0,			/* unlock the password */
+    pflg = 0,			/* new encrypted password */
+    lflg = 0;			/* new user name */
 
 #ifdef SHADOWPWD
 static int is_shadow_pwd;
@@ -458,14 +441,12 @@ static int update_group (void)
 	 * entries.
 	 */
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: error locking group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error locking group file\n"), Prog);
 		SYSLOG ((LOG_ERR, "error locking group file"));
 		return -1;
 	}
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: error opening group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error opening group file\n"), Prog);
 		SYSLOG ((LOG_ERR, "error opening group file"));
 		gr_unlock ();
 		return -1;
@@ -530,32 +511,15 @@ static int update_group (void)
 		changed = 0;
 		if (!gr_update (ngrp)) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"),
-				 Prog);
+				 _("%s: error adding new group entry\n"), Prog);
 			SYSLOG ((LOG_ERR, "error adding group entry"));
 			gr_unlock ();
 			return -1;
 		}
-#ifdef	NDBM
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-		if (!gr_dbm_update (ngrp)) {
-			fprintf (stderr,
-				 _("%s: cannot add new dbm group entry\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR, "error adding dbm group entry"));
-			gr_unlock ();
-			return -1;
-		}
-#endif				/* NDBM */
 	}
-#ifdef NDBM
-	endgrent ();
-#endif				/* NDBM */
+
 	if (!gr_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		gr_unlock ();
 		return -1;
 	}
@@ -609,8 +573,7 @@ static int update_gshadow (void)
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-		is_member = Gflg
-		    && is_on_list (user_groups, sgrp->sg_name);
+		is_member = Gflg && is_on_list (user_groups, sgrp->sg_name);
 
 		if (!was_member && !was_admin && !is_member)
 			continue;
@@ -626,10 +589,8 @@ static int update_gshadow (void)
 		}
 
 		if (was_admin && lflg) {
-			nsgrp->sg_adm =
-			    del_list (nsgrp->sg_adm, user_name);
-			nsgrp->sg_adm =
-			    add_list (nsgrp->sg_adm, user_newname);
+			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
+			nsgrp->sg_adm = add_list (nsgrp->sg_adm, user_newname);
 			changed = 1;
 			SYSLOG ((LOG_INFO,
 				 "change admin `%s' to `%s' in shadow group `%s'",
@@ -648,8 +609,7 @@ static int update_gshadow (void)
 					 nsgrp->sg_name));
 			}
 		} else if (was_member && Gflg && !is_member) {
-			nsgrp->sg_mem =
-			    del_list (nsgrp->sg_mem, user_name);
+			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
 			changed = 1;
 			SYSLOG ((LOG_INFO,
 				 "delete `%s' from shadow group `%s'",
@@ -673,35 +633,16 @@ static int update_gshadow (void)
 		 */
 		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR,
-				 "error adding shadow group entry"));
+				 _("%s: error adding new group entry\n"), Prog);
+			SYSLOG ((LOG_ERR, "error adding shadow group entry"));
 			sgr_unlock ();
 			return -1;
 		}
-#ifdef	NDBM
-		/*
-		 * Update the DBM group file with the new entry as well.
-		 */
-		if (!sg_dbm_update (nsgrp)) {
-			fprintf (stderr,
-				 _("%s: cannot add new dbm group entry\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR,
-				 "error adding dbm shadow group entry"));
-			sgr_unlock ();
-			return -1;
-		}
-#endif				/* NDBM */
 	}
-#ifdef NDBM
-	endsgent ();
-#endif				/* NDBM */
+
 	if (!sgr_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		sgr_unlock ();
 		return -1;
 	}
@@ -738,8 +679,7 @@ static long get_number (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog,
-		 cp);
+	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -752,8 +692,7 @@ static uid_t get_id (const char *cp)
 	if (*cp != '\0' && *ep == '\0')	/* valid number */
 		return val;
 
-	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog,
-		 cp);
+	fprintf (stderr, _("%s: invalid numeric argument `%s'\n"), Prog, cp);
 	exit (E_BAD_ARG);
 }
 
@@ -800,8 +739,7 @@ static void process_flags (int argc, char **argv)
 			 Prog, user_name);
 
 		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "passwd.byname",
-				&nis_master)) {
+		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr, _("%s: %s is the NIS master\n"),
 				 Prog, nis_master);
 		}
@@ -978,8 +916,7 @@ static void process_flags (int argc, char **argv)
 		uflg = oflg = 0;
 
 	if (lflg && getpwnam (user_newname)) {
-		fprintf (stderr, _("%s: user %s exists\n"), Prog,
-			 user_newname);
+		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_newname);
 		exit (E_NAME_IN_USE);
 	}
 
@@ -1000,15 +937,13 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #endif
@@ -1041,26 +976,22 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (!pw_lock ()) {
-		fprintf (stderr, _("%s: unable to lock password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
 	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"),
-			 Prog);
+			 _("%s: cannot lock shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"),
-			 Prog);
+			 _("%s: cannot open shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
 #endif
@@ -1123,25 +1054,6 @@ static void usr_update (void)
 				 Prog);
 			fail_exit (E_PW_UPDATE);
 		}
-#ifdef NDBM
-		if (pw_dbm_present ()) {
-			if (!pw_dbm_update (&pwent)) {
-				fprintf (stderr,
-					 _
-					 ("%s: error adding password dbm entry\n"),
-					 Prog);
-				fail_exit (E_PW_UPDATE);
-			}
-			if (lflg && (pwd = getpwnam (user_name)) &&
-			    !pw_dbm_remove (pwd)) {
-				fprintf (stderr,
-					 _
-					 ("%s: error removing passwd dbm entry\n"),
-					 Prog);
-				fail_exit (E_PW_UPDATE);
-			}
-		}
-#endif
 	}
 #ifdef	SHADOWPWD
 	if (spwd && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
@@ -1160,24 +1072,6 @@ static void usr_update (void)
 			fail_exit (E_PW_UPDATE);
 		}
 	}
-#ifdef	NDBM
-	if (spwd && sp_dbm_present ()) {
-		if (!sp_dbm_update (&spent)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error updating shadow passwd dbm entry\n"),
-				 Prog);
-			fail_exit (E_PW_UPDATE);
-		}
-		if (lflg && !sp_dbm_remove (user_name)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error removing shadow passwd dbm entry\n"),
-				 Prog);
-			fail_exit (E_PW_UPDATE);
-		}
-	}
-#endif				/* NDBM */
 #endif				/* SHADOWPWD */
 }
 
@@ -1206,15 +1100,13 @@ static void move_home (void)
 			fail_exit (E_HOMEDIR);
 		} else if (rename (user_home, user_newhome)) {
 			if (errno == EXDEV) {
-				if (mkdir
-				    (user_newhome, sb.st_mode & 0777)) {
+				if (mkdir (user_newhome, sb.st_mode & 0777)) {
 					fprintf (stderr,
 						 _
 						 ("%s: can't create %s\n"),
 						 Prog, user_newhome);
 				}
-				if (chown (user_newhome,
-					   sb.st_uid, sb.st_gid)) {
+				if (chown (user_newhome, sb.st_uid, sb.st_gid)) {
 					fprintf (stderr,
 						 _("%s: can't chown %s\n"),
 						 Prog, user_newhome);
@@ -1263,8 +1155,7 @@ static void update_files (void)
 	if ((fd = open (LASTLOG_FILE, O_RDWR)) != -1) {
 		lseek (fd, (off_t) user_id * sizeof ll, SEEK_SET);
 		if (read (fd, (char *) &ll, sizeof ll) == sizeof ll) {
-			lseek (fd, (off_t) user_newid * sizeof ll,
-			       SEEK_SET);
+			lseek (fd, (off_t) user_newid * sizeof ll, SEEK_SET);
 			write (fd, (char *) &ll, sizeof ll);
 		}
 		close (fd);
@@ -1277,8 +1168,7 @@ static void update_files (void)
 	if ((fd = open (FAILLOG_FILE, O_RDWR)) != -1) {
 		lseek (fd, (off_t) user_id * sizeof fl, SEEK_SET);
 		if (read (fd, (char *) &fl, sizeof fl) == sizeof fl) {
-			lseek (fd, (off_t) user_newid * sizeof fl,
-			       SEEK_SET);
+			lseek (fd, (off_t) user_newid * sizeof fl, SEEK_SET);
 			write (fd, (char *) &fl, sizeof fl);
 		}
 		close (fd);
@@ -1383,7 +1273,7 @@ int main (int argc, char **argv)
 	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
 	user_groups[0] = (char *) 0;
 
-	OPENLOG("usermod");
+	OPENLOG ("usermod");
 
 #ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present ();
@@ -1403,8 +1293,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("usermod", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("usermod", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -1422,29 +1311,10 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
-
-	OPENLOG ("usermod");
 #endif				/* USE_PAM */
-
-	/*
-	 * The open routines for the NDBM files don't use read-write as the
-	 * mode, so we have to clue them in.
-	 */
-
-#ifdef	NDBM
-	pw_dbm_mode = O_RDWR;
-#ifdef	SHADOWPWD
-	sp_dbm_mode = O_RDWR;
-#endif
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif
-#endif				/* NDBM */
 
 	/*
 	 * Do the hard stuff - open the files, change the user entries,
@@ -1495,7 +1365,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 

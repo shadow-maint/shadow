@@ -30,16 +30,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: ttytype.c,v 1.7 2004/08/18 09:53:58 kloczek Exp $")
+RCSID ("$Id: ttytype.c,v 1.9 2005/03/31 05:14:50 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
 /*
  * ttytype - set ttytype from port to terminal type mapping database
  */
-
 void ttytype (const char *line)
 {
 	FILE *fp;
@@ -67,16 +65,9 @@ void ttytype (const char *line)
 		if ((cp = strchr (buf, '\n')))
 			*cp = '\0';
 
-#if defined(SUN) || defined(BSD) || defined(SUN4)
-		if ((sscanf (buf, "%s \"%*[^\"]\" %s", port, type) == 2 ||
-		     sscanf (buf, "%s %*s %s", port, type) == 2) &&
-		    strcmp (line, port) == 0)
-			break;
-#else				/* USG */
 		if (sscanf (buf, "%s %s", type, port) == 2 &&
 		    strcmp (line, port) == 0)
 			break;
-#endif
 	}
 	if (!feof (fp) && !ferror (fp))
 		addenv ("TERM", type);

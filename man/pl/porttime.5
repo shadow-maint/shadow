@@ -1,5 +1,4 @@
-.\" $Id: porttime.5,v 1.3 2001/01/25 10:43:54 kloczek Exp $
-.\" {PTM/WK/1999-09-17}
+.\" $Id: porttime.5,v 1.4 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -48,20 +47,20 @@ skrót \fBWk\fR. Skrót \fBAl\fR oznacza ka¿dy dzieñ. Je¿eli nie podano dni
 tygodnia przyjmowane jest \fBAl\fR.
 .SH PRZYK£ADY
 Poni¿szy wpis zezwala u¿ytkownikowi \fBjfh\fR na dostêp do ka¿dego portu
-w dni robocze od godziny 9-tej do 17-tej.
+w dni robocze od godziny 9\-tej do 17\-tej.
 .br
 .sp 1
-	*:jfh:Wk0900-1700
+	*:jfh:Wk0900\-1700
 .br
 .sp 1
 Poni¿sze pozycje pozwalaj± na dostêp do konsoli (/dev/console) wy³±cznie
-u¿ytkownikom \fBroot\fR i \fBoper\fR - w dowolnym czasie.
+u¿ytkownikom \fBroot\fR i \fBoper\fR \- w dowolnym czasie.
 Przyk³ad ten pokazuje, ¿e plik \fI/etc/porttime\fR stanowi uporz±dkowan±
 listê czasów dostêpu. Ka¿dy inny u¿ytkownik bêdzie pasowa³ do drugiej pozycji
 listy, nie zezwalaj±cej na dostêp w ¿adnym czasie.
 .br
 .sp 1
-	console:root,oper:Al0000-2400
+	console:root,oper:Al0000\-2400
 .br
 	console:*:
 .br
@@ -70,11 +69,11 @@ Poni¿szy wpis zezwala na dostêp do dowolnego portu u¿ytkownikowi \fBgames\fR
 poza godzinami pracy.
 .br
 .sp 1
-	*:games:Wk1700-0900,SaSu0000-2400
+	*:games:Wk1700\-0900,SaSu0000\-2400
 .br
 .sp 1
 .SH PLIKI
-.IR /etc/porttime " - plik zawieraj±cy czasy dostêpu do portów"
+\fI/etc/porttime\fR	\- plik zawieraj±cy czasy dostêpu do portów
 .SH ZOBACZ TAK¯E
 .BR login (1)
 .SH AUTOR

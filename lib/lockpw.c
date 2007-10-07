@@ -32,30 +32,25 @@
 #ifndef HAVE_LCKPWDF
 
 #include "rcsid.h"
-RCSID("$Id: lockpw.c,v 1.4 1998/01/29 23:22:28 marekm Exp $")
-
+RCSID ("$Id: lockpw.c,v 1.5 2005/03/31 05:14:49 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
-
 #include "pwio.h"
 #ifdef SHADOWPWD
 #include "shadowio.h"
 #endif
-
 /*
  * lckpwdf - lock the password files
  */
-
-int
-lckpwdf(void)
+int lckpwdf (void)
 {
-	int	i;
+	int i;
 
 	/*
 	 * We have 15 seconds to lock the whole mess
 	 */
 
-	for (i = 0;i < 15;i++)
+	for (i = 0; i < 15; i++)
 		if (pw_lock ())
 			break;
 		else
@@ -73,7 +68,7 @@ lckpwdf(void)
 	 * file.
 	 */
 
-	for (;i < 15;i++)
+	for (; i < 15; i++)
 		if (spw_lock ())
 			break;
 		else
@@ -99,16 +94,15 @@ lckpwdf(void)
  * ulckpwdf - unlock the password files
  */
 
-int
-ulckpwdf(void)
+int ulckpwdf (void)
 {
 
 	/*
 	 * Unlock both files.
 	 */
 
-	return (pw_unlock () && spw_unlock ()) ? 0:-1;
+	return (pw_unlock () && spw_unlock ())? 0 : -1;
 }
 #else
-extern int errno;  /* warning: ANSI C forbids an empty source file */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif

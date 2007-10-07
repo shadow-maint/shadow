@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: lastlog.c,v 1.15 2004/12/20 02:10:56 kloczek Exp $")
+RCSID (PKG_VER "$Id: lastlog.c,v 1.17 2005/04/25 10:26:37 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -38,11 +38,7 @@ RCSID (PKG_VER "$Id: lastlog.c,v 1.15 2004/12/20 02:10:56 kloczek Exp $")
 #include <time.h>
 #include "prototypes.h"
 #include "defines.h"
-#if HAVE_LASTLOG_H
 #include <lastlog.h>
-#else
-#include "lastlog_.h"
-#endif
 #include <getopt.h>
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
@@ -68,7 +64,7 @@ static void usage (void)
 	fprintf (stdout, _("Usage: lastlog [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -u, --login LOGIN	print lastlog record for user with specyfied LOGIN\n"
+			   "  -u, --login LOGIN	print lastlog record for user with specified LOGIN\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"));
 	exit (1);

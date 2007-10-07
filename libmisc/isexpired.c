@@ -41,7 +41,7 @@
 #include <time.h>
 #include "rcsid.h"
 
-RCSID ("$Id: isexpired.c,v 1.11 2003/05/03 16:14:33 kloczek Exp $")
+RCSID ("$Id: isexpired.c,v 1.12 2005/03/31 05:14:50 kloczek Exp $")
 
 /*
  * isexpired - determine if account is expired yet
@@ -77,8 +77,7 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	 * if /etc/shadow doesn't exist, getspnam() still succeeds and
 	 * returns sp_lstchg==0 (must change password) instead of -1!
 	 */
-	if (sp->sp_lstchg == 0
-	    && !strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING))
+	if (sp->sp_lstchg == 0 && !strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING))
 		return 1;
 
 	if (sp->sp_lstchg > 0 && sp->sp_max >= 0 && sp->sp_inact >= 0 &&

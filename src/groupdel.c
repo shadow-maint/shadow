@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupdel.c,v 1.18 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupdel.c,v 1.20 2005/04/06 04:26:06 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -48,11 +48,6 @@ RCSID (PKG_VER "$Id: groupdel.c,v 1.18 2004/10/11 06:26:40 kloczek Exp $")
 static char *group_name;
 static char *Prog;
 static int errors;
-
-#ifdef	NDBM
-extern int gr_dbm_mode;
-extern int sg_dbm_mode;
-#endif
 
 #include "groupio.h"
 
@@ -97,62 +92,20 @@ static void usage (void)
 
 static void grp_update (void)
 {
-#ifdef	NDBM
-	struct group *ogrp;
-#endif
-
 	if (!gr_remove (group_name)) {
-		fprintf (stderr, _("%s: error removing group entry\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		errors++;
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM group file
-	 */
-
-	if (gr_dbm_present ()) {
-		if ((ogrp = getgrnam (group_name)) &&
-		    !gr_dbm_remove (ogrp)) {
-			fprintf (stderr,
-				 _("%s: error removing group dbm entry\n"),
-				 Prog);
-			errors++;
-		}
-	}
-	endgrent ();
-#endif				/* NDBM */
 
 #ifdef	SHADOWGRP
-
 	/*
 	 * Delete the shadow group entries as well.
 	 */
-
 	if (is_shadow_grp && !sgr_remove (group_name)) {
 		fprintf (stderr,
-			 _("%s: error removing shadow group entry\n"),
-			 Prog);
+			 _("%s: error removing shadow group entry\n"), Prog);
 		errors++;
 	}
-#ifdef	NDBM
-
-	/*
-	 * Update the DBM shadow group file
-	 */
-
-	if (is_shadow_grp && sg_dbm_present ()) {
-		if (!sg_dbm_remove (group_name)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error removing shadow group dbm entry\n"),
-				 Prog);
-			errors++;
-		}
-	}
-	endsgent ();
-#endif				/* NDBM */
 #endif				/* SHADOWGRP */
 	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
 	return;
@@ -168,16 +121,14 @@ static void grp_update (void)
 static void close_files (void)
 {
 	if (!gr_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		errors++;
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"),
-			 Prog);
+			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		errors++;
 	}
 	if (is_shadow_grp)
@@ -194,26 +145,22 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: unable to lock group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: unable to open group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"),
-			 Prog);
+			 _("%s: unable to lock shadow group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"),
-			 Prog);
+			 _("%s: unable to open shadow group file\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -252,8 +199,7 @@ static void group_busy (gid_t gid)
 	 * Can't remove the group.
 	 */
 
-	fprintf (stderr, _("%s: cannot remove user's primary group.\n"),
-		 Prog);
+	fprintf (stderr, _("%s: cannot remove user's primary group.\n"), Prog);
 	exit (E_GROUP_BUSY);
 }
 
@@ -295,7 +241,7 @@ int main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	if (argc != 2)
-		usage();
+		usage ();
 
 	group_name = argv[1];
 
@@ -308,8 +254,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("groupdel", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("groupdel", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -327,8 +272,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 #endif				/* USE_PAM */
@@ -340,32 +284,18 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * The open routines for the DBM files don't use read-write
-	 * as the mode, so we have to clue them in.
-	 */
-
-#ifdef	NDBM
-	gr_dbm_mode = O_RDWR;
-#ifdef	SHADOWGRP
-	sg_dbm_mode = O_RDWR;
-#endif				/* SHADOWGRP */
-#endif				/* NDBM */
-
-	/*
 	 * Start with a quick check to see if the group exists.
 	 */
-
 	if (!(grp = getgrnam (group_name))) {
 		fprintf (stderr, _("%s: group %s does not exist\n"),
 			 Prog, group_name);
 		exit (E_NOTFOUND);
 	}
-#ifdef	USE_NIS
 
+#ifdef	USE_NIS
 	/*
 	 * Make sure this isn't a NIS group
 	 */
-
 	if (__isgrNIS ()) {
 		char *nis_domain;
 		char *nis_master;
@@ -386,14 +316,12 @@ int main (int argc, char **argv)
 	 * Now check to insure that this isn't the primary group of
 	 * anyone.
 	 */
-
 	group_busy (grp->gr_gid);
 
 	/*
 	 * Do the hard stuff - open the files, delete the group entries,
 	 * then close and update the files.
 	 */
-
 	open_files ();
 
 	grp_update ();

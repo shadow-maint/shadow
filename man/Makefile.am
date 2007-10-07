@@ -19,6 +19,7 @@ man_MANS = \
 	grpck.8 \
 	grpconv.8 \
 	grpunconv.8 \
+	gshadow.5 \
 	lastlog.8 \
 	limits.5 \
 	login.1 \

@@ -4,7 +4,7 @@
 .\" published by the Free Software Foundation; either version 2 of the
 .\" License, or (at your option) any later version.
 .\"
-.\"	$Id: gpasswd.1,v 1.2 2003/04/26 13:24:13 kloczek Exp $
+.\"	$Id: gpasswd.1,v 1.3 2005/04/05 19:08:54 kloczek Exp $
 .\"
 .TH GPASSWD 1
 .SH NÉV
@@ -14,25 +14,25 @@ gpasswd \- az /etc/group fájlt adminisztrálja
 .B gpasswd \fIcsoport\fR
 .br
 .B gpasswd
-.B -a
+.B \-a
 \fIfelhasználó\fR \fIcsoport\fR
 .br
 .B gpasswd
-.B -d
+.B \-d
 \fIfelhasználó\fR \fIcsoport\fR
 .br
 .B gpasswd
-.B -R
+.B \-R
 \fIcsoport\fR
 .br
 .B gpasswd
-.B -r
+.B \-r
 \fIcsoport\fR
 .br
 .B gpasswd
-.RB [ -A
+.RB [ \-A
 \fIfelhasználó\fR,...]
-.RB [ -M
+.RB [ \-M
 \fIfelhasználó\fR,...]
 \fIcsoport\fR
 .br
@@ -42,18 +42,18 @@ A
 program segítségével adminisztrálhatjuk az /etc/group fájlt
 illetve az /etc/gshadow fájlt amennyiben a SHADOWGPR definiálva
 volt a fordítás alatt. Minden csoportban lehetnek adminisztrátorok,
-tagok és egy jelszó. A rendszeradminisztrátor a \fB-A\fR opció
-segítségével definiálhat csoportadminisztrátor(oka)t és a \fB-M\fR
+tagok és egy jelszó. A rendszeradminisztrátor a \fB\-A\fR opció
+segítségével definiálhat csoportadminisztrátor(oka)t és a \fB\-M\fR
 opcióval tagokat. A rendszeradminisztátor minden joggal rendelkezik,
 amellyel a csoportadminisztrátor és a csoport tagjai.
 .PP
-A csoportadminisztrátor a \fB-a\fR kapcsolóval hozhat létre
-felhasználókat, és a \fB-d\fR opcióval törölheti õket. Az 
-adminisztrátorok a \fB-r\fR opcióval törölhetik a csoport
+A csoportadminisztrátor a \fB\-a\fR kapcsolóval hozhat létre
+felhasználókat, és a \fB\-d\fR opcióval törölheti õket. Az 
+adminisztrátorok a \fB\-r\fR opcióval törölhetik a csoport
 jelszavát. Ha nincs jelszó beállítva, akkor csak a csoport
 tagjai használhatják a 
 .BR newgrp (1)
-parancsot a csatlakozáshoz. A \fB-R\fR opció
+parancsot a csatlakozáshoz. A \fB\-R\fR opció
 meggátolja a csoport elérését a 
 .BR newgrp (1)
 parancson keresztül.

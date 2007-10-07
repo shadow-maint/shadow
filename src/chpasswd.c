@@ -30,23 +30,27 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.22 2004/12/10 00:27:55 kloczek Exp $")
-#include <stdio.h>
-#include "prototypes.h"
-#include "defines.h"
-#include <pwd.h>
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.24 2005/04/06 00:13:45 kloczek Exp $")
 #include <fcntl.h>
 #include <getopt.h>
-#include "pwio.h"
-#ifdef	SHADOWPWD
-#include "shadowio.h"
-#endif
-#include "nscd.h"
+#include <pwd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <pwd.h>
 #endif				/* USE_PAM */
+#include "prototypes.h"
+#include "defines.h"
+#include "pwio.h"
+#include "nscd.h"
+#ifdef	SHADOWPWD
+#include "shadowio.h"
+#endif
+/*
+ * Global variables
+ */
 static char *Prog;
 static int eflg = 0;
 static int md5flg = 0;
@@ -54,8 +58,6 @@ static int md5flg = 0;
 #ifdef SHADOWPWD
 static int is_shadow_pwd;
 #endif
-
-extern char *l64a ();
 
 /* local function prototypes */
 static void usage (void);
@@ -155,8 +157,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS) {
-		retval =
-		    pam_start ("chpasswd", pampw->pw_name, &conv, &pamh);
+		retval = pam_start ("chpasswd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -174,8 +175,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"),
-			 Prog);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
 #endif				/* USE_PAM */
@@ -186,13 +186,11 @@ int main (int argc, char **argv)
 	 */
 
 	if (!pw_lock ()) {
-		fprintf (stderr, _("%s: can't lock password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
 		exit (1);
 	}
 	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("%s: can't open password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: can't open password file\n"), Prog);
 		pw_unlock ();
 		exit (1);
 	}
@@ -262,8 +260,7 @@ int main (int argc, char **argv)
 				strcat (salt, crypt_make_salt ());
 				cp = pw_encrypt (newpwd, salt);
 			} else
-				cp = pw_encrypt (newpwd,
-						 crypt_make_salt ());
+				cp = pw_encrypt (newpwd, crypt_make_salt ());
 		}
 
 		/*
@@ -349,8 +346,7 @@ int main (int argc, char **argv)
 	if (is_shadow_pwd) {
 		if (!spw_close ()) {
 			fprintf (stderr,
-				 _("%s: error updating shadow file\n"),
-				 Prog);
+				 _("%s: error updating shadow file\n"), Prog);
 			pw_unlock ();
 			exit (1);
 		}
@@ -358,8 +354,7 @@ int main (int argc, char **argv)
 	}
 #endif
 	if (!pw_close ()) {
-		fprintf (stderr, _("%s: error updating password file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: error updating password file\n"), Prog);
 		exit (1);
 	}
 

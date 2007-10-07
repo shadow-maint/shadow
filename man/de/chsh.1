@@ -7,37 +7,37 @@
 .\"
 .TH CHSH 1
 .SH BEZEICHNUNG
-chsh \- ändert die Login-Shell
-.SH SYNTAX
+chsh \- ändert die Login\-Shell
+.SH "ÜBERSICHT"
 .TP 5
 \fBchsh\fR
-[\fB-s \fILoginshell\fR] [\fINutzer\fR]
+[\fB\-s\fR \fILoginshell\fR] [\fINutzer\fR]
 .SH BESCHREIBUNG
-\fBchsh\fR ändert die Login-Shell eines Nutzers.
+\fBchsh\fR ändert die Login\-Shell eines Nutzers.
 Es legt den Namen des Befehls fest, der beim Login ausgeführt wird.
-Ein normaler Nutzer kann die Login-Shell nur für sein/ihr eigenes
+Ein normaler Nutzer kann die Login\-Shell nur für sein eigenes
 Konto ändern, während der Supernutzer dies für jedes Konto tun darf.
 .PP
-Die einzige Beschränkung, die für die Login-Shell gilt, ist daß der
-Name des Kommandos in der Datei \fI/etc/shells\fR stehen muß.
+Die einzige Beschränkung, die für die Login\-Shell gilt, ist dass der
+Name des Kommandos in der Datei \fI/etc/shells\fR stehen muss.
 Der Supernutzer darf allerdings jedes beliebige Kommando eintragen.
 Nutzern, deren Konten einer Beschränkung unterliegen, ist es nicht
-gestattet, ihre Login-Shell zu ändern.
+gestattet, ihre Login\-Shell zu ändern.
 Aus diesem Grund ist es nicht empfehlenswert, \fB/bin/rsh\fR in
 \fI/etc/shells\fR einzutragen, da ein versehentlicher Wechsel
 zu einer beschränkten Shell den Nutzer davon abhalten würde,
-seine/ihre Login-Shell wieder auf den Originalwert zurückzusetzen.
-.PP
-Wenn die Option \fB-s\fR nicht ausgewählt ist, wird \fBchsh\fR im
+seine Login\-Shell wieder auf den Originalwert zurückzusetzen.
+.SH OPTIONEN
+Wenn die Option \fB\-s\fR nicht ausgewählt ist, wird \fBchsh\fR im
 interaktiven Modus betrieben, in der das Programm den Nutzer mit
-der aktuellen Login-Shell fragt.
+der aktuellen Login\-Shell fragt.
 Durch Eingabe eines Wertes wird die Shell gewechselt, während sie bei
 einer leeren Zeile gleich bleibt.
 Die aktuelle Shell wird zwischen einem Paar von \fB[ ]\fR angezeigt.
 .SH DATEIEN
 \fI/etc/passwd\fR	\- Informationen über Nutzerkonten
 .br
-\fI/etc/shells\fR	\- Liste der gültigen Login-Shells
+\fI/etc/shells\fR	\- Liste der gültigen Login\-Shells
 .SH "SIEHE AUCH"
 .BR chfn (1),
 .BR passwd (5)
@@ -45,4 +45,3 @@ Die aktuelle Shell wird zwischen einem Paar von \fB[ ]\fR angezeigt.
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
 .br
 Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
-

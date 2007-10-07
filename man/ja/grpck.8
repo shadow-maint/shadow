@@ -1,4 +1,4 @@
-.\"$Id: grpck.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: grpck.8,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,7 +36,7 @@
 .SH 名前
 grpck \- グループファイルが正しいかどうか検査する
 .SH 書式
-\fBgrpck\fR [\fB-r\fR] [\fIgroup\fR \fIshadow\fR]
+\fBgrpck\fR [\fB\-r\fR] [\fIgroup\fR \fIshadow\fR]
 .SH 説明
 \fBgrpck\fR コマンドはシステムの認証情報が正しいかどうか検査する。
 \fI/etc/group\fR と \fI/etc/gshadow\fR
@@ -49,12 +49,12 @@ grpck \- グループファイルが正しいかどうか検査する
 各々のエントリに対して
 .sp
 .in +.5i
-- フィールドの数が正しいか
+\- フィールドの数が正しいか
 .br
-- グループ名に重複がないか
+\- グループ名に重複がないか
 .br
-- メンバーのリストと管理者のリストが正しいか
-.in -.5i
+\- メンバーのリストと管理者のリストが正しいか
+.in \-.5i
 .sp
 がチェックされる。
 .P
@@ -77,7 +77,7 @@ grpck \- グループファイルが正しいかどうか検査する
 \fI/etc/gshadow\fR に対して動作する。
 \fIgroup\fR パラメータと \fIshadow\fR パラメータを用いて、
 別のファイルを選択することもできる。
-さらに \fB-r\fR フラグを指定すれば、
+さらに \fB\-r\fR フラグを指定すれば、
 リードオンリーモードでコマンドを実行することもできる。
 この場合、変更を行うかどうかはユーザへ問い合わされず、
 自動的に \fBno\fR と回答される。
@@ -85,14 +85,14 @@ grpck \- グループファイルが正しいかどうか検査する
 は
 \fI/etc/group\fR と \fI/etc/gshadow\fR
 のエントリを GID でソートすることもできる。
-ソートモードで動作させるには \fB-s\fR フラグを与える。
+ソートモードで動作させるには \fB\-s\fR フラグを与える。
 この場合チェックは行われず、単にソートするだけである。
 .SH ファイル
-\fI/etc/group\fR \  - グループアカウント情報
+\fI/etc/group\fR \  \- グループアカウント情報
 .br
 \fI/etc/gshadow\fR \- 暗号化されたパスワードとグループ管理者情報
 .br
-\fI/etc/passwd\fR \ - ユーザー情報
+\fI/etc/passwd\fR \ \- ユーザー情報
 .SH 関連項目
 .BR group (5),
 .BR passwd (5),

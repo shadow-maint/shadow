@@ -101,8 +101,7 @@ int check_su_auth (const char *actual_id, const char *wanted_id)
 				 "DENIED su from `%s' to `%s' (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
 			fprintf (stderr,
-				 _
-				 ("Access to su to that account DENIED.\n"));
+				 _("Access to su to that account DENIED.\n"));
 			fclose (authfile_fd);
 			return DENY;
 		} else if (!strcmp (action, "NOPASS")) {

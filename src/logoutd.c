@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: logoutd.c,v 1.24 2004/10/11 06:26:40 kloczek Exp $")
+RCSID (PKG_VER "$Id: logoutd.c,v 1.25 2005/03/31 05:14:54 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -249,8 +249,7 @@ int main (int argc, char **argv)
 #define O_NOCTTY 0
 #endif
 			tty_fd =
-			    open (tty_name,
-				  O_WRONLY | O_NDELAY | O_NOCTTY);
+			    open (tty_name, O_WRONLY | O_NDELAY | O_NOCTTY);
 			if (tty_fd != -1) {
 				send_mesg_to_tty (tty_fd);
 				close (tty_fd);

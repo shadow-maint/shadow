@@ -31,44 +31,36 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getpass.c,v 1.12 2003/05/05 21:44:12 kloczek Exp $")
-
+RCSID ("$Id: getpass.c,v 1.13 2005/03/31 05:14:49 kloczek Exp $")
 #include "defines.h"
-
 #include <signal.h>
 #include <stdio.h>
-
 #include "getdef.h"
-
 /* new code, #undef if there are any problems...  */
 #define USE_SETJMP 1
-
 #ifdef USE_SETJMP
 #include <setjmp.h>
-
-static sigjmp_buf intr;  /* where to jump on SIGINT */
+static sigjmp_buf intr;		/* where to jump on SIGINT */
 #endif
 
-static	int	sig_caught;
+static int sig_caught;
+
 #ifdef HAVE_SIGACTION
-static	struct	sigaction sigact;
+static struct sigaction sigact;
 #endif
 
-/*ARGSUSED*/
-static RETSIGTYPE
-sig_catch(int sig)
+ /*ARGSUSED*/ static RETSIGTYPE sig_catch (int sig)
 {
 	sig_caught = 1;
 #ifdef USE_SETJMP
-	siglongjmp(intr, 1);
+	siglongjmp (intr, 1);
 #endif
 }
 
 #define MAXLEN 127
 
 
-static char *
-readpass(FILE *ifp, FILE *ofp, int with_echo, int max_asterisks)
+static char *readpass (FILE * ifp, FILE * ofp, int with_echo, int max_asterisks)
 {
 	static char input[MAXLEN + 1], asterix[MAXLEN + 1];
 	static char once;
@@ -77,9 +69,9 @@ readpass(FILE *ifp, FILE *ofp, int with_echo, int max_asterisks)
 
 	if (max_asterisks < 0) {
 		/* traditional code using fgets() */
-		if (fgets(input, sizeof input, ifp) != input)
+		if (fgets (input, sizeof input, ifp) != input)
 			return NULL;
-		cp = strrchr(input, '\n');
+		cp = strrchr (input, '\n');
 		if (cp)
 			*cp = '\0';
 		else
@@ -87,12 +79,12 @@ readpass(FILE *ifp, FILE *ofp, int with_echo, int max_asterisks)
 		return input;
 	}
 	if (!once) {
-		srandom(time(0)*getpid());
+		srandom (time (0) * getpid ());
 		once = 1;
 	}
 	cp = input;
 	ap = asterix;
-	while (read(fileno(ifp), &c, 1)) {
+	while (read (fileno (ifp), &c, 1)) {
 		switch (c) {
 		case '\n':
 		case '\r':
@@ -103,67 +95,68 @@ readpass(FILE *ifp, FILE *ofp, int with_echo, int max_asterisks)
 				cp--;
 				ap--;
 				for (i = *ap; i > 0; i--)
-					fputs("\b \b", ofp);
+					fputs ("\b \b", ofp);
 				*cp = '\0';
 				*ap = 0;
 			} else {
-				putc('\a', ofp);  /* BEL */
+				putc ('\a', ofp);	/* BEL */
 			}
 			break;
-		case '\025':  /* Ctrl-U = erase everything typed so far */
+		case '\025':	/* Ctrl-U = erase everything typed so far */
 			if (cp == input) {
-				putc('\a', ofp);  /* BEL */
-			} else while (cp > input) {
-				cp--;
-				ap--;
-				for (i = *ap; i > 0; i--)
-					fputs("\b \b", ofp);
-				*cp = '\0';
-				*ap = 0;
-			}
+				putc ('\a', ofp);	/* BEL */
+			} else
+				while (cp > input) {
+					cp--;
+					ap--;
+					for (i = *ap; i > 0; i--)
+						fputs ("\b \b", ofp);
+					*cp = '\0';
+					*ap = 0;
+				}
 			break;
 		default:
 			*cp++ = c;
 			if (with_echo) {
 				*ap = 1;
-				putc(c, ofp);
+				putc (c, ofp);
 			} else if (max_asterisks > 0) {
-				*ap = (random() % max_asterisks) + 1;
+				*ap = (random () % max_asterisks) + 1;
 				for (i = *ap; i > 0; i--)
-					putc('*', ofp);
+					putc ('*', ofp);
 			} else {
 				*ap = 0;
 			}
 			ap++;
 			break;
 		}
-		fflush(ofp);
+		fflush (ofp);
 		if (cp >= input + MAXLEN) {
-			putc('\a', ofp);  /* BEL */
+			putc ('\a', ofp);	/* BEL */
 			break;
 		}
 	}
-endwhile:
+      endwhile:
 	*cp = '\0';
-	putc('\n', ofp);
+	putc ('\n', ofp);
 	return input;
 }
 
-static char *
-prompt_password(const char *prompt, int with_echo)
+static char *prompt_password (const char *prompt, int with_echo)
 {
 	static char nostring[1] = "";
 	static char *return_value;
 	volatile int tty_opened;
 	static FILE *ifp, *ofp;
 	volatile int is_tty;
+
 #ifdef HAVE_SIGACTION
 	struct sigaction old_sigact;
 #else
-	RETSIGTYPE (*old_signal)();
+	RETSIGTYPE (*old_signal) ();
 #endif
 	TERMIO old_modes;
-	int max_asterisks = getdef_num("GETPASS_ASTERISKS", -1);
+	int max_asterisks = getdef_num ("GETPASS_ASTERISKS", -1);
 
 	/*
 	 * set a flag so the SIGINT signal can be re-sent if it
@@ -179,14 +172,14 @@ prompt_password(const char *prompt, int with_echo)
 	 * from stdin and write to stderr instead.
 	 */
 
-	if (!(ifp = fopen("/dev/tty", "r+"))) {
+	if (!(ifp = fopen ("/dev/tty", "r+"))) {
 		ifp = stdin;
 		ofp = stderr;
 	} else {
 		ofp = ifp;
 		tty_opened = 1;
 	}
-	setbuf(ifp, (char *) 0);
+	setbuf (ifp, (char *) 0);
 
 	/*
 	 * the current tty modes must be saved so they can be
@@ -195,26 +188,25 @@ prompt_password(const char *prompt, int with_echo)
 	 */
 
 	is_tty = 1;
-	if (GTTY(fileno(ifp), &old_modes)) {
+	if (GTTY (fileno (ifp), &old_modes)) {
 		is_tty = 0;
 	}
-
 #ifdef USE_SETJMP
 	/*
 	 * If we get a SIGINT, sig_catch() will jump here -
 	 * no need to press Enter after Ctrl-C.
 	 */
-	if (sigsetjmp(intr, 1))
+	if (sigsetjmp (intr, 1))
 		goto out;
 #endif
 
 #ifdef HAVE_SIGACTION
 	sigact.sa_handler = sig_catch;
-	sigemptyset(&sigact.sa_mask);
+	sigemptyset (&sigact.sa_mask);
 	sigact.sa_flags = 0;
-	sigaction(SIGINT, &sigact, &old_sigact);
+	sigaction (SIGINT, &sigact, &old_sigact);
 #else
-	old_signal = signal(SIGINT, sig_catch);
+	old_signal = signal (SIGINT, sig_catch);
 #endif
 
 	if (is_tty) {
@@ -232,7 +224,7 @@ prompt_password(const char *prompt, int with_echo)
 
 		new_modes.c_lflag |= ECHONL;
 
-		if (STTY(fileno(ifp), &new_modes))
+		if (STTY (fileno (ifp), &new_modes))
 			goto out;
 	}
 
@@ -243,9 +235,9 @@ prompt_password(const char *prompt, int with_echo)
 	 * returned.
 	 */
 
-	if ((fputs(prompt, ofp) != EOF) && (fflush(ofp) != EOF))
-		return_value = readpass(ifp, ofp, with_echo, max_asterisks);
-out:
+	if ((fputs (prompt, ofp) != EOF) && (fflush (ofp) != EOF))
+		return_value = readpass (ifp, ofp, with_echo, max_asterisks);
+      out:
 	/*
 	 * the old SIGINT handler is restored after the tty
 	 * modes.  then /dev/tty is closed if it was opened in
@@ -254,20 +246,19 @@ out:
 	 */
 
 	if (is_tty) {
-		if (STTY(fileno(ifp), &old_modes))
+		if (STTY (fileno (ifp), &old_modes))
 			return_value = NULL;
 	}
-
 #ifdef HAVE_SIGACTION
 	(void) sigaction (SIGINT, &old_sigact, NULL);
 #else
 	(void) signal (SIGINT, old_signal);
 #endif
 	if (tty_opened)
-		(void) fclose(ifp);
+		(void) fclose (ifp);
 
 	if (sig_caught) {
-		kill(getpid(), SIGINT);
+		kill (getpid (), SIGINT);
 		return_value = NULL;
 	}
 	if (!return_value) {
@@ -277,15 +268,12 @@ out:
 	return return_value;
 }
 
-char *
-libshadow_getpass(const char *prompt)
+char *libshadow_getpass (const char *prompt)
 {
-	return prompt_password(prompt, 0);
+	return prompt_password (prompt, 0);
 }
 
-char *
-getpass_with_echo(const char *prompt)
+char *getpass_with_echo (const char *prompt)
 {
-	return prompt_password(prompt, 1);
+	return prompt_password (prompt, 1);
 }
-

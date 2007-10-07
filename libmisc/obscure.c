@@ -29,8 +29,10 @@
 
 #include <config.h>
 
+#ifndef USE_PAM
+
 #include "rcsid.h"
-RCSID ("$Id: obscure.c,v 1.11 2003/05/05 21:44:15 kloczek Exp $")
+RCSID ("$Id: obscure.c,v 1.12 2005/03/24 04:29:23 kloczek Exp $")
 
 /*
  * This version of obscure.c contains modifications to support "cracklib"
@@ -273,3 +275,5 @@ int obscure (const char *old, const char *new, const struct passwd *pwdp)
 	}
 	return 1;
 }
+
+#endif				/* !USE_PAM */

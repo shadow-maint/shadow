@@ -1,199 +1,212 @@
-.\" Copyleft (C) 2003 Josef Spillner <josef@ggzgamingzone.org>
-.\" Übersetzung der englischen Version von Julianne Frances Haugh
-.\" Ersatz für die originale Version von:
-.\" Copyright 1993 Sebastian Hetze und Peter Orbaek.
+.\" $Id: passwd.1,v 1.7 2005/04/18 12:29:07 kloczek Exp $
+.\" Copyright 1989 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
 .\"
-.\" Veröffentlicht unter der GNU General Public License (GPL).
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
 .\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
 .TH PASSWD 1
 .SH BEZEICHNUNG
-passwd \- ändert das Nutzerkennwort
-.SH SYNTAX
-\fBpasswd\fR [\fB-f\fR|\fB-s\fR] [\fIName\fR]
+passwd \- ändert das Passwort eines Nutzers
+.SH "ÜBERSICHT"
+\fBpasswd\fR [\fB\-f\fR|\fB\-s\fR] [\fIName\fR]
 .br
-\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIGruppe\fR
+\fBpasswd\fR [\fB\-g\fR] [\fB\-r\fR|\fB\-R\fR] \fIGruppe\fR
 .br
-\fBpasswd\fR [\fB-x \fImax\fR] [\fB-n \fImin\fR]
-[\fB-w \fIwarn\fR] [\fB-i \fIinaktiv\fR] \fILogin\fR
+\fBpasswd\fR [\fB\-x \fImax\fR] [\fB\-n \fImin\fR]
+[\fB\-w \fIwarn\fR] [\fB\-i \fIinact\fR] \fIlogin\fR
 .br
-\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fILogin\fR
+\fBpasswd\fR {\fB\-l\fR|\fB\-u\fR|\fB\-d\fR|\fB\-S\fR|\fB\-e\fR} \fIlogin\fR
 .SH BESCHREIBUNG
-\fBpasswd\fR ändert Kennwörter für Nutzer- und Gruppenkonten.
-Ein normaler Nutzer darf das Kennwort nur für sein/ihr eigenes
-Login ändern, während der Superuser (root) dies für jedes Login darf.
-Der Administrator einer Gruppe kann das Kennwort für die Gruppe ändern.
-\fBpasswd\fR ändert auch Kontoinformationen, wie den vollen Namen
-des Nutzers, seine/ihre Loginshell, oder das Datum und Intervall des
-Ablaufes des Kennwortes.
+\fBpasswd\fR ändert die Passwörter für Nutzer\- und Gruppenkonten. Ein normaler
+Nutzer kann nur das Passwort seines Kontos verändern, der Superuser dagegen
+kann die Passwörter aller Konten ändern. Der Verwalter einer Gruppe kann das
+Passwort der Gruppe ändern. \fBpasswd\fR verändert auch die Informationen über
+das Konto wie den vollständigen Namen des Nutzers, seine Login\-Shell oder
+Verfallsdatum und \-intervall des Passworts.
 .PP
-Die Option \fB-s\fR sorgt dafür, daß \fBpasswd\fR das Programm \fBchsh\fR
-aufruft, welches die Shell des Nutzers ändert. Die Option \fB-f\fR
-läßt \fBpasswd\fR das Programm \fBchfn\fR zum Ändern der GECOS-Information
-starten.
-Diese beiden Optionen sind nur aus Kompatibilitätsgründen vorhanden, da diese
-Programme direkt aufgerufen werden können.
-.SS Änderung des Kennwortes
-Der Nutzer wird zuerst nach seinem/ihren alten Kennwort gefragt, sofern es
-bereits existiert. Dieses wird dann verschlüsselt und mit dem gespeicherten
-Kennwort verglichen.
-Der Nutzer hat nur einen Versuch, das Kennwort korrekt einzugeben.
-Hingegen kann der Superuser diesen Schritt überspringen, um vergessene
-Kennwörter abzuändern.
+Die Option \fB\-s\fR bewirkt, dass \fBpasswd\fR \fBchsh\fR aufruft, um die Shell
+des Nutzers zu ändern. Die Option \fB\-f\fR hat zur Folge, dass \fBpasswd\fR
+\fBchfn\fR aufruft, um die Gecos\-Informationen des Nutzers zu ändern. Diese
+beiden Optionen sind nur aus Kompatibilitätsgründen vorhanden, da die anderen
+Programme auch direkt aufgerufen werden können.
+.SS Verändern des Passworts
+Der Nutzer wird zuerst nach seinem alten Passwort gefragt, falls eines
+vorhanden ist. Dieses Passwort wird dann verschlüsselt und mit dem
+abgespeicherten Passwort verglichen. Der Nutzer hat nur eine Gelegenheit, das
+richtige Passwort einzugeben. Der Superuser kann diesen Schritt überspringen,
+so dass vergessene Passwörter geändert werden können.
 .PP
-Nachdem das Kennwort eingegeben wurde, wird die Gültigkeitsinformation
-geprüft, um herauszufinden ob der Nutzer zu diesem Zeitpunkt das Kennwort
-ändern darf.
-Wenn das nicht der Fall ist, verweigert \fBpasswd\fR die Kennwortänderung
-und beendet sich.
+Nachdem das Passwort eingegeben wurde, werden Informationen über die
+Gültigkeitsdauer des Passworts abgefragt, um festzustellen, ob der Nutzer das
+Passwort zu dieser Zeit verändern darf. Wenn nicht, lehnt \fBpasswd\fR ab,
+das Passwort zu ändern, und beendet sich.
 .PP
-Anschließend wird der Nutzer nach einem Ersatzkennwort gefragt.
-Dieses wird auf Komplexität überprüft.
-Als Richtlinie sollten Kennwörter mit 6 bis 8 Zeichen gewählt werden,
-inklusive einem oder mehreren Zeichen aus den folgenden Mengen:
+Der Nutzer wird dann aufgefordert, ein neues Passwort einzugeben. Dieses
+Passwort wird auf seine Komplexität überprüft. Eine allgemeine Richtlinie ist,
+dass Passwörter aus sechs bis acht Zeichen bestehen sollten und ein oder
+mehrere Zeichen aus folgenden Mengen enthalten sollten:
 .IP "" .5i
 Kleinbuchstaben
 .IP "" .5i
 Großbuchstaben
 .IP "" .5i
-Ziffern von 0 bis 9
+Zahlen von 0 bis 9
 .IP "" .5i
 Satzzeichen
 .PP
-Es sollte darauf geachtet werden, daß keine Systemlöschzeichen
-oder sonstigen Sonderzeichen darunter sind.
-\fBpasswd\fR lehnt jedes Kennwort ab, welches nicht ein Mindestmaß
-an Komplexität besitzt.
+Seien Sie vorsichtig, dass nicht die standardmäßigen Erase\- oder Killzeichen
+des Systems eingegeben werden. \fBpasswd\fR weist alle Passwörter zurück, die
+nicht ausreichend komplex sind.
 .PP
-Wenn das Kennwort akzeptiert wurde, wird
-\fBpasswd\fR ein weiteres Mal nach dem Kennwort fragen und dieses mit
-der ersten Eingabe vergleichen.
-Beide Eingaben müssen identisch sein, damit das Kennwort geändert
-werden kann.
-.SS Gruppenkennwörter
-Wenn die Option \fB-g\fR benutzt wird, hat das die Änderung des Kennwortes
-für die angegebene Gruppe zur Auswahl.
-Dafür muß der Nutzer entweder der Superuser oder der Gruppenadministrator
-sein.
-Es wird nicht nach dem aktuellen Gruppenkennwort gefragt.
-Die Option \fB-r\fR wird zusammen mit \fB-g\fR verwendet, um das aktuelle
-Kennwort von der angegebenen Gruppe zu entfernen.
-Das erlaubt den Zugriff auf die Gruppe durch alle Mitglieder.
-Die Option \fB-R\fR in Kombination mit \fB-g\fR beschränkt den
-Zugriff für alle Nutzer.
-.SS Kennwortgültigkeitsinformationen
-Die Information zur Gültigkeitsdauer des Kennwortes kann vom Superuser
-mit den Optionen \fB-x\fR, \fB-n\fR, \fB-w\fR und \fB-i\fR geändert werden.
-Mit der Option \fB-x\fR wird die maximale Anzahl an Tagen eingestellt,
-die ein Kennwort gültig bleiben soll.
-Nach \fImax\fR Tagen wird eine Kennwortänderung verlangt.
-Die Option \fB-n\fR setzt die minimale Gültigkeitsdauer in Tagen,
-nach der ein Kennwort geändert werden kann.
-Es ist dem Nutzer nicht gestattet, sein Kennwort zu ändern, bis
-\fImin\fR Tage verstrichen sind.
-Die Option \fB-w\fR wird genutzt, um die Anzahl der Tage zu setzen,
-an denen der Nutzer gewarnt wird, daß die Gültigkeit seines/ihres Kennwortes
-bald ausläuft.
-Die Warnung tritt dann \fIwarn\fR Tage vor dem Ablauf der Gültigkeit ein,
-und teilt dem Nutzer mit, wieviele Tage noch bis zur notwendigen Änderung
-verbleiben.
-Durch \fB-i\fR wird verwendet, ein Konto zu sperren, wenn das Kennwort nicht
-ein paar Tage nach Ablauf der Gültigkeit geändert wurde.
-Wenn die Gültigkeit bereits für \fIinaktiv\fR Tage überschritten wurde,
-kann sich der Nutzer nicht mehr an seinem Konto anmelden.
+Wenn das Passwort akzeptiert wird, fordert \fBpasswd\fR zu einer erneuten
+Eingabe des Passworts auf und vergleicht die zweite Eingabe mit der
+ersten. Beide Eingaben müssen übereinstimmen, damit das Passwort geändert wird.
+.SS Gruppenpasswörter
+Wenn die Option \fB\-g\fR benutzt wird, wird das Passwort für die bezeichnete
+Gruppe verändert. Der Nutzer muss entweder der Superuser oder der Administrator
+der Gruppe sein. Das aktuelle Gruppenpasswort wird nicht abgefragt. Die Option
+\fB\-r\fR wird zusammen mit der Option \fB\-g\fR verwendet, um das aktuelle
+Passwort der Gruppe zu entfernen. Das erlaubt den Zugang zur Gruppe für alle
+Mitglieder. Die Option \fB\-R\fR wird mit der Option \fB\-g\fR benutzt, um den
+Zugang zur Gruppe für alle Nutzer zu beschränken.
+.SS Informationen über den Verfall des Passworts
+Die Informationen über die Gültigkeitsdauer des Passworts können vom Superuser
+mit den Optionen \fB\-x\fR, \fB\-n\fR, \fB\-w\fR und \fB\-i\fR geändert werden.
+Die Option \fB\-x\fR wird verwendet, um die maximale Anzahl von Tagen
+festzulegen, die das Passwort gültig bleibt. Nach \fImax\fR Tagen muss das
+Passwort geändert werden.
+Mit der Option \fB\-n\fR kann die Mindestzahl der Tage bestimmt werden, bevor es
+verändert werden darf. Der Nutzer kann das Passwort nicht ändern, bevor nicht
+\fImin\fR Tage abgelaufen sind.
+Die Option \fB\-w\fR wird verwendet, um die Anzahl der Tage festzulegen, an
+denen der Nutzer eine Warnung erhält, bevor sein Passwort ungültig wird. Die
+Warnung wird dem Nutzer \fIwarn\fR Tage vor dem Verfall mitgeteilt und enthält
+den Hinweis, wie viele Tage noch verbleiben, bis das Passwort verfällt.
+Die Option \fB\-i\fR wird benutzt, um das Nutzerkonto zu deaktivieren, nachdem
+das Passwort für eine bestimmte Anzahl von Tagen ungültig war. Wenn ein
+Nutzerkonto ein abgelaufenes Passwort für \fIinact\fR Tage hatte, kann der
+Nutzer sich nicht mehr bei seinem Konto anmelden.
 .PP
-Wenn die sofortige Ungültigkeit eines Kennwortes gewünscht wird,
-kann dieses über die Option \fB-e\fR eingestellt werden.
-Diese Maßnahme zwingt den Nutzer dazu, sein/ihr Kennwort beim nächsten
-Login zu ändern. Mit der Option \fB-d\fR kann ein Kennwort gelöscht werden.
-Dies sollte mit Vorsicht verwendet werden, denn ein leeres Kennwort kann
-bedeuten, daß beim Login keines mehr benötigt wird und somit Eindringlinge
-Zugang zum System haben.
-.SS Kontoverwaltung
-Nutzerkonten können mit den Optionen \fB-l\fR und \fB-u\fR gesperrt und
-wieder entsperrt werden.
-Die Option \fB-l\fR deaktiviert ein Konto dadurch, daß das Kennwort
-auf einen Wert gesetzt wird, der durch kein verschlüsseltes Kennwort
-dargestellt werden kann.
-Die Option \fB-u\fR schaltet das Konto wieder frei, indem das
-Kennwort auf seinen vorherigen Wert zurückgesetzt wird.
+Wenn Sie wollen, dass ein Passwort eines Kontos sofort verfällt, sollten Sie
+die Option \fB\-e\fR verwenden. Das hat zur Folge, dass der Nutzer gezwungen
+wird, sein Passwort zu ändern, wenn er sich das nächste Mal anmeldet. Sie
+können auch die Option \fB\-d\fR verwenden, um das Passwort eines Nutzers zu
+löschen (es wird also leer).  Seien Sie mit dieser Option vorsichtig, da sie
+dazu führt, dass ein Konto überhaupt kein Passwort zur Anmeldung benötigt. Das
+öffnet Ihr System für Eindringlinge.
+.SS Wartung der Konten
+Nutzerkonten können mit den Flags \fB\-l\fR und \fB\-u\fR gesperrt und
+freigegeben werden.
+Die Option \fB\-l\fR schaltet ein Konto ab, indem es ein Passwort zuweist, das
+mit keinem möglichen verschlüsselten Wert übereinstimmen kann.
+Die Option \fB\-u\fR reaktiviert ein Konto wieder, indem das Passwort auf seinen
+alten Wert zurückgesetzt wird.
 .PP
-Der Status eines Kontos kann mit der Option \fB-S\fR angesehen werden.
-Die Statusinformation besteht aus 7 Feldern.
-Das erste Feld ist der Loginname des Nutzers, gefolgt von dem Zustand
-des Kontos: gesperrt (L), ohne Kennwort (NP), oder normal mit Kennwort
-(P). Das dritte Feld gibt das Datum der letzten Kennwortänderung
-zurück. In den restlichen vier Feldern stehen die minimale und maximale
-Gültigkeitsdauer, die Warnzeit und die Dauer, nach der bei Inaktivität
-das Konto gesperrt wird.
-Diese Werte sind als Tagesangaben zu verstehen.
-Siehe obiger Absatz
-.B Kennwortgültigkeitsinformationen
-für eine Erläuterung dieser Felder.
-.SS Hinweise für Nutzerkennwörter
-Die Sicherheit des Kennwortes hängt von der Leistungsfähigkeit
-des Verschlüsselungsalgorithmus und dem Schlüsselraum ab.
-Die auf \fB\s-2UNIX\s+2\fR-Systemen eingesetzte Verschlüsselungsmethode
-basiert auf dem NBS DES-Algorithmus und gilt als sehr sicher.
-Die Größe des Schlüsselraumes hängt von der Zufälligkeit (Entropie)
-des ausgewählten Kennwortes ab.
+Der Kontostatus kann mit der Option \fB\-S\fR abgerufen werden. Die
+Statusinformation besteht aus sieben Feldern.  
+Das erste Feld ist der Login\-Name des Nutzers.
+Das zweite Feld zeigt an, ob das Nutzerkonto gesperrt ist (L), kein Passwort
+hat (NP) oder ein verwendbares Passwort hat (P).
+Das dritte Feld zeigt das Datum der letzten Veränderung des Passworts an.
+Die nächsten vier Felder sind die minimale Zeit, die maximale Zeit, die Dauer
+der Warnung und die Dauer der Untätigkeit für das Passwort.
+Die Zeiträume werden in Tagen ausgedrückt. Lesen Sie oben
+.B Informationen über den Verfall des Passworts
+zu Ausführungen über diese Felder.
+.SS Hinweise zu Nutzerpasswörtern
+Die Sicherheit eines Passworts hängt von der Stärke des
+Verschlüsselungsalgorithmus und von der Größe des Schlüsselraums (key space)
+ab. Die Verschlüsselung auf \fB\s\-2UNIX\s+2\fR\-Systemen basiert auf dem
+NBS\-DES\-Algorithmus und ist sehr sicher. Die Größe des Schlüsselraums hängt von
+der Zufälligkeit des gewählten Passworts ab.
 .PP
-Zwischenfälle bei Sicherheitsmaßnahmen mit Kennwörtern sind meist
-durch unsachgemäßen Umgang oder ungenügende Kennwortwahl bedingt.
-Aus diesem Grund sollte man kein Kennwort wählen, welches in einem
-Wörterbuch vorkommt, oder so kompliziert ist daß man es notieren
-muß.
-Es sollte auch keinem Namen entsprechen, und ebensowenig der
-Ausweisnummer, dem Geburtstagsdatum oder der Adresse.
-Nichtbeachtung dieser Regeln führt oft zu Verletzungen der Systemsicherheit.
+Gefahren für die Sicherheit von Passwörtern kommen gewöhnlich von sorgloser
+Wahl oder Handhabung des Passworts.
+Daher sollten Sie kein Passwort wählen, das in einem Wörterbuch auftaucht oder
+das aufgeschrieben werden muss. Das Passwort sollte somit kein echter Name,
+Ihr Autokennzeichen, Geburtstag oder Ihre Adresse sein. All das kann dazu
+verwendet werden, das Passwort zu erraten, und stellt daher eine Gefahr für die
+Sicherheit Ihres Systems dar.
 .PP
-Das Kennwort muß dennoch einfach genug gehalten sein, daß man nicht
-gezwungen ist, es auf Papier niederzuschreiben.
-Das kann erreicht werden, indem man zwei kleine Wörter durch ein
-Sonderzeichen miteinander verbindet, bespielsweise so: Pass%wort.
+Sie müssen sich Ihr Passwort leicht merken können, damit Sie nicht gezwungen
+sind, es auf ein Stück Papier aufzuschreiben. Das können Sie dadurch erreichen,
+indem zwei kurze Wörter zusammengefügt werden und mit einem besonderen Zeichen
+oder einer Zahl getrennt werden. Zum Beispiel Pass%wort.
 .PP
-Andere Konstruktionsmethoden beinhalten die Auswahl eines leicht
-zu merkenden Satzes und die Bildung eines Wortes durch
-Aneinanderreihung der Anfangs- oder Endbuchstaben seiner Wörter.
-Das Beispiel hierfür kommt aus 'Faust'
+Eine andere Herangehensweise ist es, einen leicht zu merkenden Satz aus der
+Literatur zu wählen und den ersten oder letzten Buchstaben von jedem Wort zu
+nehmen. Ein Beispiel dafür:
 .IP "" .5i
-Was wollt ihr da? Was schlich sich ein?
+Die Kruste wird im Allgemeinen ueberbewertet!
 .PP
-welches folgendes Wort bildet:
+Das ergibt
 .IP "" .5i
-WwidWss1.
+DKwiAu!
 .PP
-Man kann sich ziemlich sicher sein, daß nur weniger Cracker
-diesen Term in ihrem Wörterbuch haben.
-Man sollte jedoch eigene Methoden zum Konstruieren von
-Kennwörtern finden, und sich nicht ausschließlich auf die
-hier aufgezeigten Kennwörter verlassen.
-.SS Bemerkungen zu Gruppenkennwörtern
-Gruppenkennwörter können ein ernsthaftes Sicherheitsproblem
-darstellen, da mehr als eine Person befugt ist, das Kennwort
-zu kennen.
-Gruppen sind allerdings ein wichtiges Werkzeug für die Kooperation
-unter verschiedenen Nutzern.
-.SH HINWEISE
-Nicht alle Optionen werden unterstützt.
-Die Komplexitätsprüfung für Kennwörter kann sich von Rechner
-zu Rechner unterscheiden.
-Der Nutzer wird angehalten, ein Kennwort zu wählen, was so
-komplex ist wie er/sie es für richtig hält.
-Nutzer können eventuell ihre Kennwörter nicht ändern,
-wenn NIS eingesetzt wird und sie nicht im NIS-Server eingeloggt sind.
+Sie können einigermaßen sicher sein, dass dieses Wort nur wenige Cracker in
+ihren Wörterlisten haben. Sie sollten allerdings Ihre eigenen Methoden
+entwickeln, wie Sie Passwörter wählen, und sich nicht ausschließlich auf die
+hier vorgestellten stützen.
+.SS Anmerkungen zu Gruppenpasswörtern
+Gruppenpasswörter beinhalten ein inhärentes Sicherheitsproblem, da mehr als nur
+eine Person das Passwort kennt. Damit haftet schon der Idee von
+Gruppenpasswörtern ein Sicherheitsproblem an. Jedoch sind Gruppen ein
+nützliches Werkzeug, um Zusammenarbeit zwischen verschiedenen Nutzern zu
+ermöglichen.
+.SH WARNUNGEN
+Es kann sein, dass einige Optionen nicht unterstützt werden.
+Die Komplexität der Passwortprüfung kann sich auf verschiedenen Systemen
+unterscheiden.
+Der Nutzer wird angehalten, ein so komplexes Passwort zu wählen, wie es ihm
+angenehm ist.
+Nutzer können unter Umständen ihr Passwort nicht ändern, wenn auf dem System
+NIS aktiviert ist, sie aber nicht am NIS\-Server angemeldet sind.
 .SH DATEIEN
-.TP
-.I /etc/passwd 
-Informationen über Nutzerkonten
-.TP
-.I /etc/shadow 
-Verschlüsselte Nutzerkennwörter
+\fI/etc/passwd\fR		\- Informationen zu den Nutzerkonten
+.br
+\fI/etc/shadow\fR		\- Verschlüsselte Informationen zu den Nutzerkonten
+.SH "RÜCKGABEWERTE"
+.TP 2
+Der Befehl \fBpasswd\fR gibt beim Beenden folgende Werte zurück:
+\fB0\fR	\- Erfolg
+.br
+\fB1\fR	\- Berechtigung verweigert
+.br
+\fB2\fR	\- ungültige Kombination von Optionen
+.br
+\fB3\fR	\- unerwarteter Fehler, nichts verändert
+.br
+\fB4\fR	\- unerwarteter Fehler, die Datei passwd fehlt
+.br
+\fB5\fR	\- Datei passwd wird benutzt, versuchen Sie es später noch einmal
+.br
+\fB6\fR	\- ungültiges Argument für Option
 .SH "SIEHE AUCH"
 .BR group (5),
-.BR passwd (5)
+.BR passwd (5),
 .BR shadow (5)
 .SH AUTOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
-.br
-Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
-
+.PP
+Übersetzung von Simon Brandmair <sbrandmair@gmx.net> (Apr 2005)

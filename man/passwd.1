@@ -1,4 +1,4 @@
-.\"$Id: passwd.1,v 1.17 2004/10/29 15:48:21 kloczek Exp $
+.\" $Id: passwd.1,v 1.24 2005/04/15 19:17:20 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,14 +29,14 @@
 .SH NAME
 passwd \- change user password
 .SH SYNOPSIS
-\fBpasswd\fR [\fB-f\fR|\fB-s\fR] [\fIname\fR]
+\fBpasswd\fR [\fB\-f\fR|\fB\-s\fR] [\fIname\fR]
 .br
-\fBpasswd\fR [\fB-g\fR] [\fB-r\fR|\fB-R\fR] \fIgroup\fR
+\fBpasswd\fR [\fB\-g\fR] [\fB\-r\fR|\fB\-R\fR] \fIgroup\fR
 .br
-\fBpasswd\fR [\fB-x \fImax\fR] [\fB-n \fImin\fR]
-[\fB-w \fIwarn\fR] [\fB-i \fIinact\fR] \fIlogin\fR
+\fBpasswd\fR [\fB\-x\fR \fImax\fR] [\fB\-n\fR \fImin\fR]
+[\fB\-w\fR \fIwarn\fR] [\fB\-i\fR \fIinact\fR] \fIlogin\fR
 .br
-\fBpasswd\fR {\fB-l\fR|\fB-u\fR|\fB-d\fR|\fB-S\fR|\fB-e\fR} \fIlogin\fR
+\fBpasswd\fR {\fB\-l\fR|\fB\-u\fR|\fB\-d\fR|\fB\-S\fR|\fB\-e\fR} \fIlogin\fR
 .SH DESCRIPTION
 \fBpasswd\fR changes passwords for user and group accounts. A normal user
 may only change the password for his/her own account, the super user may
@@ -45,10 +45,10 @@ the password for the group. \fBpasswd\fR also changes account information,
 such as the full name of the user, user's login shell, or password expiry
 date and interval.
 .PP
-The \fB-s\fR option makes passwd call chsh to change the user's shell. The
-\fB-f\fR option makes passwd call chfn to change the user's gecos
-information. These two options are only meant for compatiblity, since the
-other programs can be called directly.
+The \fB\-s\fR option makes \fBpasswd\fR call \fBchsh\fR to change the user's
+shell. The \fB\-f\fR option makes passwd call chfn to change the user's
+gecos information. These two options are only meant for compatiblity, since
+the other programs can be called directly.
 .SS Password Changes
 The user is first prompted for his/her old password, if one is present. This
 password is then encrypted and compared against the stored password. The
@@ -79,51 +79,54 @@ If the password is accepted, \fBpasswd\fR will prompt again and compare the
 second entry against the first. Both entries are required to match in order
 for the password to be changed.
 .SS Group passwords
-When the \fB-g\fR option is used, the password for the named group is
+When the \fB\-g\fR option is used, the password for the named group is
 changed. The user must either be the super user, or a group administrator
 for the named group. The current group password is not prompted for. The
-\fB-r\fR option is used with the \fB-g\fR option to remove the current
+\fB\-r\fR option is used with the \fB\-g\fR option to remove the current
 password from the named group. This allows group access to all members. The
-\fB-R\fR option is used with the \fB-g\fR option to restrict the named group
+\fB\-R\fR option is used with the \fB\-g\fR option to restrict the named group
 for all users.
-
 .SS Password expiry information
 The password aging information may be changed by the super user with the
-\fB-x\fR, \fB-n\fR, \fB-w\fR, and \fB-i\fR options. The \fB-x\fR option is
+\fB\-x\fR, \fB\-n\fR, \fB\-w\fR, and \fB\-i\fR options. The \fB\-x\fR option is
 used to set the maximum number of days a password remains valid. After
-\fImax\fR days, the password is required to be changed. The \fB-n\fR option
+\fImax\fR days, the password is required to be changed. The \fB\-n\fR option
 is used to set the minimum number of days before a password may be changed.
 The user will not be permitted to change the password until \fImin\fR days
-have elapsed. The \fB-w\fR option is used to set the number of days of
+have elapsed. The \fB\-w\fR option is used to set the number of days of
 warning the user will receive before his/her password will expire. The
 warning occurs \fIwarn\fR days before the expiration, telling the user how
-many days remain until the password is set to expire. The \fB-i\fR option is
+many days remain until the password is set to expire. The \fB\-i\fR option is
 used to disable an account after the password has been expired for a number
 of days. After a user account has had an expired password for \fIinact\fR
 days, the user may no longer sign on to the account.
 .PP
 If you wish to immediately expire an account's password, you can use the
-\fB-e\fR option. This in effect can force a user to change his/her password at
-the user's next login. You can also use the \fB-d\fR option to delete a user's
+\fB\-e\fR option. This in effect can force a user to change his/her password at
+the user's next login. You can also use the \fB\-d\fR option to delete a user's
 password (make it empty). Use caution with this option since it can make an
 account not require a password at all to login, leaving your system open to
 intruders.
 .SS Account maintenance
-User accounts may be locked and unlocked with the \fB-l\fR and \fB-u\fR
-flags. The \fB-l\fR option disables an account by changing the password to
-a value which matches no possible encrypted value. The \fB-u\fR option
-re-enables an account by changing the password back to its previous value.
+User accounts may be locked and unlocked with the \fB\-l\fR and \fB\-u\fR
+flags. The \fB\-l\fR option disables an account by changing the password to
+a value which matches no possible encrypted value. The \fB\-u\fR option
+re\-enables an account by changing the password back to its previous value.
 .PP
-The account status may be given with the \fB-S\fR option. The status
-information consists of 6 parts. The first part indicates if the user
-account is locked (L), has no password (NP), or has a usable password (P).
-The second part gives the date of the last password change. The next four
-parts are the minimum age, maximum age, warning period, and inactivity
-period for the password.
+The account status may be viewed with the \fB-S\fR option.
+The status information consists of 7 fields.
+The first field is the user's login name.
+The second field indicates if the user account is locked (L), has no
+password (NP), or has a usable password (P).
+The third field gives the date of the last password change.
+The next four fields are the minimum age, maximum age, warning period,
+and inactivity period for the password.
+These ages are expressed in days.
+See \fBPassword expiry information\fR above for a discussion of these fields.
 .SS Hints for user passwords
 The security of a password depends upon the strength of the
 encryption algorithm and the size of the key space.
-The \fB\s-2UNIX\s+2\fR System encryption method is based on
+The \fB\s\-2UNIX\s+2\fR System encryption method is based on
 the NBS DES algorithm and is very secure.
 The size of the key space depends upon the randomness of the
 password which is selected.
@@ -159,7 +162,7 @@ passwords and not rely exclusively on the methods given here.
 .SS Notes about group passwords
 Group passwords are an inherent security problem since more than one person
 is permitted to know the password. However, groups are a useful tool for
-permitting co-operation between different users.
+permitting co\-operation between different users.
 .SH CAVEATS
 Not all options may be supported.
 Password complexity checking may vary from site to site.
@@ -170,7 +173,7 @@ is enabled and they are not logged into the NIS server.
 .SH FILES
 \fI/etc/passwd\fR	\- user account information
 .br
-\fI/etc/shadow\fR	\- encrypted user passwords
+\fI/etc/shadow\fR	\- secure user account information
 .SH EXIT VALUES
 .TP 2
 The \fBpasswd\fR command exits with the following values:
@@ -189,6 +192,7 @@ The \fBpasswd\fR command exits with the following values:
 \fB6\fR	\- invalid argument to option
 .SH "SEE ALSO"
 .BR group (5),
-.BR passwd (5)
+.BR passwd (5),
+.BR shadow (5)
 .SH AUTHOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

@@ -1,4 +1,4 @@
-.\"$Id: chsh.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\"$Id: chsh.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -38,7 +38,7 @@ chsh \- ログインシェルを変更する
 .SH 書式
 .TP 5
 \fBchsh\fR
-[\fB-s \fIlogin_shell\fR] [\fIuser\fR]
+[\fB\-s\fR \fIlogin_shell\fR] [\fIuser\fR]
 .SH 説明
 \fBchsh\fR はユーザのログインシェルを変更する。
 これによって、ユーザがログインして最初に実行されるコマンドが決まる。
@@ -55,7 +55,7 @@ chsh \- ログインシェルを変更する
 誤って機能が制限されたシェルに変更してしまうと、
 ログインシェルを元のものに戻せなくなってしまうからである。
 .PP
-\fB-s\fR オプションを指定しなかった場合は、
+\fB\-s\fR オプションを指定しなかった場合は、
 \fBchsh\fR は対話的に動作する。
 ユーザの現在のログインシェルを表示し、新しい値の入力を促す。
 設定値を変更するなら新しい値を入力し、

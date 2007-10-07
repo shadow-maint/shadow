@@ -1,5 +1,4 @@
-.\" $Id: grpck.8,v 1.8 2004/08/09 17:39:42 kloczek Exp $
-.\" {PTM/WK/1999-09-17}
+.\" $Id: grpck.8,v 1.9 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,7 +29,7 @@
 .SH NAZWA
 grpck \- weryfikacja spójno¶ci plików grup
 .SH SK£ADNIA
-\fBgrpck\fR [\fB-r\fR] [\fIgroup shadow\fR]
+\fBgrpck\fR [\fB\-r\fR] [\fIgroup shadow\fR]
 .SH OPIS
 \fBgrpck\fR weryfikuje integralno¶æ informacji autentykacji systemowej.
 Sprawdzane s± wszystkie pozycje w plikach \fI/etc/group\fR
@@ -42,12 +41,12 @@ siê skorygowaæ b³êdy.
 Kontrolowane jest czy ka¿da pozycja posiada:
 .sp
 .in +.5i
-- w³a¶ciw± liczbê pól
+\- w³a¶ciw± liczbê pól
 .br
-- unikaln± nazwê grupy
+\- unikaln± nazwê grupy
 .br
-- poprawn± listê cz³onków i administratorów
-.in -.5i
+\- poprawn± listê cz³onków i administratorów
+.in \-.5i
 .sp
 .P
 Kontrola w³a¶ciwej liczby pól i niepowtarzalnej nazwy grupy jest
@@ -67,13 +66,13 @@ u¿ywany \fBgrpck\fR, by usun±æ nieprawid³ow± pozycjê.
 Domy¶lnie \fBgrpck\fR dzia³a na plikach \fI/etc/group\fR oraz \fI/etc/gshadow\fR.
 Przy pomocy parametrów \fIgroup\fR i \fIshadow\fR u¿ytkownik mo¿e wybraæ inne
 pliki.
-Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko-do-odczytu, poprzez
-podanie flagi \fB-r\fR.
+Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko\-do\-odczytu, poprzez
+podanie flagi \fB\-r\fR.
 Powoduje to, ¿e na wszystkie pytania dotycz±ce zmian zostanie, bez ingerencji
 u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
 \fBgrpck\fR mo¿e byæ równie¿ u¿yty do sortowania pozycji w plikach \fI/etc/group\fR 
 oraz \fI/etc/gshadow\fR wed³ug GID. By w³±czyæ tryb sortowania nale¿y przekazaæ
-opcjê \fB-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
+opcjê \fB\-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o kontach grup
 .br

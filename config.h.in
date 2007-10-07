@@ -95,6 +95,14 @@
 /* Define to 1 if you have the `a64l' function. */
 #undef HAVE_A64L
 
+/* Define to 1 if you have the MacOS X function CFLocaleCopyCurrent in the
+   CoreFoundation framework. */
+#undef HAVE_CFLOCALECOPYCURRENT
+
+/* Define to 1 if you have the MacOS X function CFPreferencesCopyAppValue in
+   the CoreFoundation framework. */
+#undef HAVE_CFPREFERENCESCOPYAPPVALUE
+
 /* Define if the GNU dcgettext() function is already present or preinstalled.
    */
 #undef HAVE_DCGETTEXT
@@ -117,9 +125,6 @@
 
 /* Define to 1 if you have the <fcntl.h> header file. */
 #undef HAVE_FCNTL_H
-
-/* Define to 1 if you have the `fseeko' function. */
-#undef HAVE_FSEEKO
 
 /* Define to 1 if you have the `fsync' function. */
 #undef HAVE_FSYNC
@@ -330,9 +335,6 @@
 /* Define to 1 if you have the <utmp.h> header file. */
 #undef HAVE_UTMP_H
 
-/* locale directory */
-#undef LOCALEDIR
-
 /* Name of package */
 #undef PACKAGE
 
@@ -383,6 +385,11 @@
 
 /* Number of bits in a file offset, on hosts where this is settable. */
 #undef _FILE_OFFSET_BITS
+
+/* Enable GNU extensions on systems that have them.  */
+#ifndef _GNU_SOURCE
+# undef _GNU_SOURCE
+#endif
 
 /* Define for large files, on AIX-style hosts. */
 #undef _LARGE_FILES

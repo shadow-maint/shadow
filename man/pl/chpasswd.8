@@ -1,5 +1,4 @@
-.\" $Id: chpasswd.8,v 1.7 2004/12/13 01:24:14 kloczek Exp $
-.\" {PTM/WK/1999-09-16}
+.\" $Id: chpasswd.8,v 1.8 2005/04/05 18:47:51 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -28,9 +27,9 @@
 .\" SUCH DAMAGE.
 .TH CHPASSWD 8
 .SH NAZWA
-\fBchpasswd\fR - wsadowa aktualizacja pliku hase³
+\fBchpasswd\fR \- wsadowa aktualizacja pliku hase³
 .SH SK£ADNIA
-\fBchpasswd\fR [\fI-e\fR]
+\fBchpasswd\fR [\fI\-e\fR]
 .SH OPIS
 \fBchpasswd\fR odczytuje pary danych (u¿ytkownik i has³o) ze standardowego
 wej¶cia. Odczytane informacje wykorzystywane s± do aktualizacji danych o
@@ -47,11 +46,11 @@ Polecenie to przeznaczone jest do u¿ytku w du¿ych systemach, gdzie aktualizuje
 siê wiele kont naraz.
 .SH OPCJE
 Polecenie \fBchpasswd\fR posiada nastêpuj±ce opcje:
-.IP "\fB-e\fR, \fB--encrypted\fR"
+.IP "\fB\-e\fR, \fB\-\-encrypted\fR"
 Dostarczone na standardowe wej¶cie has³a s± traktowane jako ju¿ zakodowane.
-.IP "\fB-h\fR, \fB--help\fR"
+.IP "\fB\-h\fR, \fB\-\-help\fR"
 Wy¶wietla krótk± informacjê o tym jak u¿ywaæ program i zakoñczy pracê.
-.IP "\fB-m\fR, \fB--md5\fR"
+.IP "\fB\-m\fR, \fB\-\-md5\fR"
 Je¿eli dpostarczane has³a s± w postaci jawnej u¿yj kodowania MD5 zamiast
 domy¶lnego DES.
 .SH PRZESTROGI

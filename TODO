@@ -5,9 +5,9 @@
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
   diffrent backend modules for db, NIS, LDAP and others. Default backend it
-  will be choose depending on /etc/nsswitch.conf and allow overwride this by
-  -r <repository> options (where the <repository> can be file, db, nis
-  nisplus, ldap .. like on /etc/nsswitch.conf in service column).
+  will be goot if will be choosen depending on /etc/nsswitch.conf and allow
+  overwride this by -r <repository> options (where the <repository> can be
+  file, db, nis nisplus, ldap .. like on /etc/nsswitch.conf in service column).
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
   user databases by well known tools.
