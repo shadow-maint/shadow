@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.30 2005/04/02 14:09:48 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.34 2005/06/20 10:17:08 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -125,7 +125,7 @@ static void su_failure (const char *tty)
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB"))
 		SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
-			 "- %s %s-%s", tty,
+			 "- %s %s:%s", tty,
 			 oldname[0] ? oldname : "???", name[0] ? name : "???"));
 	closelog ();
 #endif
@@ -270,9 +270,8 @@ int main (int argc, char **argv)
 	RETSIGTYPE (*oldsig) ();
 	int is_console = 0;
 
-#ifdef	SHADOWPWD
 	struct spwd *spwd = 0;
-#endif
+
 #ifdef SU_ACCESS
 	char *oldpass;
 #endif
@@ -405,10 +404,8 @@ int main (int argc, char **argv)
 	 * Sort out the password of user calling su, in case needed later
 	 * -- chris
 	 */
-#ifdef SHADOWPWD
 	if ((spwd = getspnam (oldname)))
 		pw->pw_passwd = spwd->sp_pwdp;
-#endif
 	oldpass = xstrdup (pw->pw_passwd);
 #endif				/* SU_ACCESS */
 
@@ -449,12 +446,10 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #ifndef USE_PAM
-#ifdef SHADOWPWD
 	spwd = NULL;
 	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0
 	    && (spwd = getspnam (name)))
 		pw->pw_passwd = spwd->sp_pwdp;
-#endif
 #endif				/* !USE_PAM */
 	pwent = *pw;
 
@@ -466,7 +461,7 @@ int main (int argc, char **argv)
 
 	/* The original Shadow 3.3.2 did this differently. Do it like BSD:
 	 *
-	 * - check for uid 0 instead of name "root" - there are systems with
+	 * - check for UID 0 instead of name "root" - there are systems with
 	 *   several root accounts under different names,
 	 *
 	 * - check the contents of /etc/group instead of the current group
@@ -563,7 +558,6 @@ int main (int argc, char **argv)
 	 */
 
 	if (!amroot) {
-#ifdef	SHADOWPWD
 		if (!spwd)
 			spwd = pwd_to_spwd (&pwent);
 
@@ -572,7 +566,6 @@ int main (int argc, char **argv)
 				 "Expired account %s", name));
 			su_failure (tty);
 		}
-#endif
 	}
 
 	/*
@@ -616,20 +609,16 @@ int main (int argc, char **argv)
 		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
 		endpwent ();
-#ifdef SHADOWPWD
 		endspent ();
-#endif
 		goto top;
 	}
 
 	sulog (tty, 1, oldname, name);	/* save SU information */
 	endpwent ();
-#ifdef SHADOWPWD
 	endspent ();
-#endif
 #ifdef USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SU_ENAB"))
-		SYSLOG ((LOG_INFO, "+ %s %s-%s", tty,
+		SYSLOG ((LOG_INFO, "+ %s %s:%s", tty,
 			 oldname[0] ? oldname : "???", name[0] ? name : "???"));
 #endif
 

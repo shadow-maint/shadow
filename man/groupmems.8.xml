@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: groupmems.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -29,7 +29,7 @@
     <para>
       The <command>groupmems</command> utility allows a user to administer
       his/her own group membership list without the requirement of super
-      user privileges.  The <command>groupmems</command> utility is for
+      user privileges. The <command>groupmems</command> utility is for
       systems that configure its users to be in their own name sake primary
       group (i.e., guest / guest).
     </para>
@@ -118,8 +118,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

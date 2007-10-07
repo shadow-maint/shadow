@@ -1,7 +1,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: pwdcheck.c,v 1.5 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: pwdcheck.c,v 1.6 2005/05/25 18:20:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -44,13 +44,11 @@ void passwd_check (const char *user, const char *passwd, const char *progname)
 
 #else				/* !USE_PAM */
 
-#ifdef SHADOWPWD
 	struct spwd *sp;
 
 	if ((sp = getspnam (user)))
 		passwd = sp->sp_pwdp;
 	endspent ();
-#endif
 	if (pw_auth (passwd, user, PW_LOGIN, (char *) 0) != 0) {
 		SYSLOG ((LOG_WARN, WRONGPWD2, user));
 		sleep (1);

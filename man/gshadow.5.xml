@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='gshadow.5'>
-  <!-- $Id: gshadow.5.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: gshadow.5.xml,v 1.10 2005/06/16 17:35:43 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gshadow</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -14,36 +14,39 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <emphasis remap='I'>gshadow</emphasis> contains the shadowed
-      information for group accounts. It contains lines with the folowing
+    <para><filename>/etc/gshadow</filename> contains the shadowed
+      information for group accounts. It contains lines with the following
       colon-separated fields:
     </para>
+    <itemizedlist mark='bullet'>
+      <listitem>
+        <para>group name</para>
+      </listitem>    
+      <listitem>
+        <para>encrypted password</para>
+      </listitem>    
+      <listitem>
+        <para>comma-separated list of group administrators</para>
+      </listitem>    
+      <listitem>
+        <para>comma-separated list of group members</para>
+      </listitem>    
+    </itemizedlist>
     
-    <para>Group name</para>
-    
-    <para>Encrypted password</para>
-    
-    <para>Comma-separated list of group administrators</para>
-    
-    <para>Comma-separated list of group members.</para>
-    
-    <para>The group name and password fields must be filled.  The encryped
+    <para>The group name and password fields must be filled. The encrypted
       password consists of 13 characters from the 64-character alphabet a
-      thru z, A thru Z, 0 thru 9, \. and /.  Refer to <citerefentry>
-        <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry> for details on how this string is interpreted.  If the
-      password field contains some string that is not valid result of
-      <citerefentry>
+      thru z, A thru Z, 0 thru 9, \. and /. Refer to <citerefentry>
       <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry> for details on how this string is interpreted. If the
+      password field contains some string that is not valid result of
+      <citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>, for instance ! or *, the user will not be able to use
       a unix password to log in, subject to <citerefentry>
-        <refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum>
-      </citerefentry>.
+      <refentrytitle>pam</refentrytitle><manvolnum>7</manvolnum></citerefentry>.
     </para>
     
-    <para>This information supercedes any password present in
-    <filename>/etc/group</filename>.
+    <para>This information supersedes any password present in
+      <filename>/etc/group</filename>.
     </para>
     
     <para>This file must not be readable by regular users if password
@@ -67,8 +70,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>

@@ -29,7 +29,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwconv.c,v 1.17 2005/05/25 18:20:25 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,7 +43,6 @@ RCSID (PKG_VER "$Id: pwconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
 #include "pwio.h"
 #include "shadowio.h"
 #include "getdef.h"
-#ifdef SHADOWPWD
 /*
  * exit status values
  */
@@ -179,12 +178,3 @@ int main (int argc, char **argv)
 	pw_unlock ();
 	exit (E_SUCCESS);
 }
-
-#else				/* !SHADOWPWD */
-int main (int argc, char **argv)
-{
-	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n", argv[0]);
-	exit (1);
-}
-#endif				/* !SHADOWPWD */

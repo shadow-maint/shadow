@@ -1,9 +1,6 @@
-/* $Id: acconfig.h,v 1.21 2003/12/17 01:46:59 kloczek Exp $ */
+/* $Id: acconfig.h,v 1.23 2005/06/16 18:39:30 kloczek Exp $ */
 
 
-
-/* Define if you have secure RPC.  */
-#undef DES_RPC
 
 /* Path for faillog file.  */
 #undef FAILLOG_FILE
@@ -38,9 +35,6 @@
 /* Name of user's mail spool file if stored in user's home directory.  */
 #undef MAIL_SPOOL_FILE
 
-/* Define to support OPIE one-time password logins.  */
-#undef OPIE
-
 /* Path to passwd program.  */
 #undef PASSWD_PROGRAM
 
@@ -52,9 +46,6 @@
 
 /* Define to support the shadow group file.  */
 #undef SHADOWGRP
-
-/* Define to support the shadow password file.  */
-#undef SHADOWPWD
 
 /* Define to support S/Key logins.  */
 #undef SKEY

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.55 2005/04/17 00:15:55 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.59 2005/06/20 10:17:09 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -75,10 +75,8 @@ static const char *def_shell = "";
 static const char *def_template = SKEL_DIR;
 static const char *def_create_mail_spool = "no";
 
-#ifdef SHADOWPWD
 static long def_inactive = -1;
 static const char *def_expire = "";
-#endif
 
 static char def_file[] = USER_DEFAULTS_FILE;
 
@@ -93,10 +91,9 @@ static const char *user_home = "";
 static const char *user_shell = "";
 static const char *create_mail_spool = "";
 
-#ifdef	SHADOWPWD
 static long user_expire = -1;
 static int is_shadow_pwd;
-#endif
+
 #ifdef SHADOWGRP
 static int is_shadow_grp;
 #endif
@@ -134,11 +131,7 @@ static int home_added;
 #endif
 
 #include "pwio.h"
-
-#ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
-
 #include "getdef.h"
 
 /*
@@ -148,7 +141,7 @@ static int home_added;
 #define E_PW_UPDATE	1	/* can't update password file */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
-#define E_UID_IN_USE	4	/* uid already in use (and no -o) */
+#define E_UID_IN_USE	4	/* UID already in use (and no -o) */
 #define E_NOTFOUND	6	/* specified group doesn't exist */
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
@@ -175,10 +168,8 @@ static int get_groups (char *);
 static void usage (void);
 static void new_pwent (struct passwd *);
 
-#ifdef SHADOWPWD
 static long scale_age (long);
 static void new_spent (struct spwd *);
-#endif
 static void grp_update (void);
 static void find_new_uid (void);
 
@@ -211,7 +202,7 @@ static struct group *getgr_nam_gid (const char *name)
 	char *ep;
 
 	gid = strtoul (name, &ep, 10);
-	if (*name != '\0' && *ep == '\0')	/* valid numeric gid */
+	if (*name != '\0' && *ep == '\0')	/* valid numeric GID */
 		return getgrgid (gid);
 
 	return getgrnam (name);
@@ -295,7 +286,7 @@ static void get_defaults (void)
 					def_gname = xstrdup (grp->gr_name);
 				} else {
 					fprintf (stderr,
-						 _("%s: unknown gid %s\n"),
+						 _("%s: unknown GID %s\n"),
 						 Prog, cp);
 				}
 			} else if ((grp = getgrnam (cp))) {
@@ -320,7 +311,6 @@ static void get_defaults (void)
 		else if (MATCH (buf, SHELL)) {
 			def_shell = xstrdup (cp);
 		}
-#ifdef SHADOWPWD
 
 		/*
 		 * Default Password Inactive value
@@ -340,7 +330,6 @@ static void get_defaults (void)
 		else if (MATCH (buf, EXPIRE)) {
 			def_expire = xstrdup (cp);
 		}
-#endif
 
 		/*
 		 * Default Skeleton information
@@ -376,10 +365,8 @@ static void show_defaults (void)
 {
 	printf ("GROUP=%u\n", (unsigned int) def_group);
 	printf ("HOME=%s\n", def_home);
-#ifdef SHADOWPWD
 	printf ("INACTIVE=%ld\n", def_inactive);
 	printf ("EXPIRE=%s\n", def_expire);
-#endif
 	printf ("SHELL=%s\n", def_shell);
 	printf ("SKEL=%s\n", def_template);
 	printf ("CREATE_MAIL_SPOOL=%s\n", def_create_mail_spool);
@@ -446,14 +433,12 @@ static int set_defaults (void)
 		} else if (!out_home && MATCH (buf, HOME)) {
 			fprintf (ofp, HOME "%s\n", def_home);
 			out_home++;
-#ifdef	SHADOWPWD
 		} else if (!out_inactive && MATCH (buf, INACT)) {
 			fprintf (ofp, INACT "%ld\n", def_inactive);
 			out_inactive++;
 		} else if (!out_expire && MATCH (buf, EXPIRE)) {
 			fprintf (ofp, EXPIRE "%s\n", def_expire);
 			out_expire++;
-#endif
 		} else if (!out_shell && MATCH (buf, SHELL)) {
 			fprintf (ofp, SHELL "%s\n", def_shell);
 			out_shell++;
@@ -481,12 +466,10 @@ static int set_defaults (void)
 		fprintf (ofp, DGROUP "%u\n", (unsigned int) def_group);
 	if (!out_home)
 		fprintf (ofp, HOME "%s\n", def_home);
-#ifdef	SHADOWPWD
 	if (!out_inactive)
 		fprintf (ofp, INACT "%ld\n", def_inactive);
 	if (!out_expire)
 		fprintf (ofp, EXPIRE "%s\n", def_expire);
-#endif
 	if (!out_shell)
 		fprintf (ofp, SHELL "%s\n", def_shell);
 	if (!out_skel)
@@ -527,20 +510,12 @@ static int set_defaults (void)
 		perror (buf);
 		return -1;
 	}
-#ifdef SHADOWPWD
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
 		 "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
 		 (unsigned int) def_group, def_home, def_shell,
 		 def_inactive, def_expire, def_template,
 		 def_create_mail_spool));
-#else
-	SYSLOG ((LOG_INFO,
-		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, "
-		 "SKEL=%s, CREATE_MAIL_SPOOL=%s",
-		 (unsigned int) def_group, def_home, def_shell,
-		 def_template, def_create_mail_spool));
-#endif
 	return 0;
 }
 
@@ -661,16 +636,11 @@ static void usage (void)
 	fprintf (stderr,
 		 _
 		 ("               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"));
-#ifdef SHADOWPWD
 	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
-#endif
 	fprintf (stderr, _("               [-p passwd] name\n"));
 	fprintf (stderr,
 		 _("       useradd -D [-g group] [-b base] [-s shell]\n"));
-#ifdef SHADOWPWD
 	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
-#endif
-
 	exit (E_USAGE);
 }
 
@@ -685,11 +655,9 @@ static void new_pwent (struct passwd *pwent)
 {
 	memzero (pwent, sizeof *pwent);
 	pwent->pw_name = (char *) user_name;
-#ifdef SHADOWPWD
 	if (is_shadow_pwd)
 		pwent->pw_passwd = (char *) SHADOW_PASSWD_STRING;
 	else
-#endif
 		pwent->pw_passwd = (char *) user_pass;
 
 	pwent->pw_uid = user_id;
@@ -699,7 +667,6 @@ static void new_pwent (struct passwd *pwent)
 	pwent->pw_shell = (char *) user_shell;
 }
 
-#ifdef SHADOWPWD
 static long scale_age (long x)
 {
 	if (x <= 0)
@@ -728,7 +695,6 @@ static void new_spent (struct spwd *spent)
 	spent->sp_expire = scale_age (user_expire);
 	spent->sp_flag = -1;
 }
-#endif
 
 /*
  * grp_update - add user to secondary group set
@@ -906,7 +872,7 @@ static void find_new_uid (void)
 			exit (E_NAME_IN_USE);
 		}
 		if (uflg && user_id == pwd->pw_uid) {
-			fprintf (stderr, _("%s: uid %u is not unique\n"),
+			fprintf (stderr, _("%s: UID %u is not unique\n"),
 				 Prog, (unsigned int) user_id);
 			exit (E_UID_IN_USE);
 		}
@@ -917,10 +883,10 @@ static void find_new_uid (void)
 		}
 	}
 	/*
-	 * If a user with uid equal to UID_MAX exists, the above algorithm
+	 * If a user with UID equal to UID_MAX exists, the above algorithm
 	 * will give us UID_MAX+1 even if not unique. Search for the first
-	 * free uid starting with UID_MIN (it's O(n*n) but can be avoided
-	 * by not having users with uid equal to UID_MAX).  --marekm
+	 * free UID starting with UID_MIN (it's O(n*n) but can be avoided
+	 * by not having users with UID equal to UID_MAX).  --marekm
 	 */
 	if (!uflg && user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
@@ -936,7 +902,7 @@ static void find_new_uid (void)
 #endif
 		}
 		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: can't get unique uid\n"), Prog);
+			fprintf (stderr, _("%s: can't get unique UID\n"), Prog);
 			fail_exit (E_UID_IN_USE);
 		}
 	}
@@ -957,13 +923,8 @@ static void process_flags (int argc, char **argv)
 	int arg;
 	char *cp;
 
-#ifdef SHADOWPWD
-#define FLAGS "A:Du:og:G:d:s:c:mk:p:f:e:b:O:M"
-#else
-#define FLAGS "A:Du:og:G:d:s:c:mk:p:b:O:M"
-#endif
-	while ((arg = getopt (argc, argv, FLAGS)) != EOF) {
-#undef FLAGS
+	while ((arg =
+		getopt (argc, argv, "A:Du:og:G:d:s:c:mk:p:f:e:b:O:M")) != EOF) {
 		switch (arg) {
 		case 'b':
 			if (!Dflg)
@@ -1005,7 +966,6 @@ static void process_flags (int argc, char **argv)
 				usage ();
 			Dflg++;
 			break;
-#ifdef SHADOWPWD
 		case 'e':
 			if (*optarg) {
 				user_expire = strtoday (optarg);
@@ -1047,7 +1007,6 @@ static void process_flags (int argc, char **argv)
 			}
 			fflg++;
 			break;
-#endif
 		case 'g':
 			grp = getgr_nam_gid (optarg);
 			if (!grp) {
@@ -1174,10 +1133,8 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-#ifdef SHADOWPWD
 	if (!eflg)
 		user_expire = strtoday (def_expire);
-#endif
 
 	if (!gflg)
 		user_gid = def_group;
@@ -1199,13 +1156,11 @@ static void close_files (void)
 		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ()) {
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#endif
 	if (do_grp_update) {
 		if (!gr_close ()) {
 			fprintf (stderr,
@@ -1225,10 +1180,8 @@ static void close_files (void)
 			sgr_unlock ();
 #endif
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		spw_unlock ();
-#endif
 	pw_unlock ();
 }
 
@@ -1249,7 +1202,6 @@ static void open_files (void)
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
@@ -1263,7 +1215,6 @@ static void open_files (void)
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
-#endif
 }
 
 
@@ -1305,10 +1256,7 @@ static void lastlog_reset (uid_t uid)
 static void usr_update (void)
 {
 	struct passwd pwent;
-
-#ifdef	SHADOWPWD
 	struct spwd spent;
-#endif
 
 	if (!oflg)
 		find_new_uid ();
@@ -1319,9 +1267,7 @@ static void usr_update (void)
 	 */
 
 	new_pwent (&pwent);
-#ifdef	SHADOWPWD
 	new_spent (&spent);
-#endif
 
 	/*
 	 * Create a syslog entry. We need to do this now in case anything
@@ -1329,7 +1275,7 @@ static void usr_update (void)
 	 */
 
 	SYSLOG ((LOG_INFO,
-		 "new user: name=%s, uid=%u, gid=%u, home=%s, shell=%s",
+		 "new user: name=%s, UID=%u, GID=%u, home=%s, shell=%s",
 		 user_name, (unsigned int) user_id,
 		 (unsigned int) user_gid, user_home, user_shell));
 
@@ -1355,7 +1301,6 @@ static void usr_update (void)
 		exit (E_PW_UPDATE);
 	}
 
-#ifdef	SHADOWPWD
 	/*
 	 * Put the new (struct spwd) in the table.
 	 */
@@ -1366,7 +1311,6 @@ static void usr_update (void)
 			 Prog);
 		exit (E_PW_UPDATE);
 	}
-#endif				/* SHADOWPWD */
 
 	/*
 	 * Do any group file updates for this user.
@@ -1486,9 +1430,7 @@ int main (int argc, char **argv)
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
 
-#ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present ();
-#endif
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif

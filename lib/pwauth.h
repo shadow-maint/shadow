@@ -26,12 +26,12 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	$Id: pwauth.h,v 1.5 2005/03/31 06:24:27 kloczek Exp $
+ *	$Id: pwauth.h,v 1.6 2005/05/25 19:31:50 kloczek Exp $
  */
 
 #ifndef USE_PAM
 int pw_auth (const char *cipher, const char *user, int flag, const char *input);
-#endif		/* !USE_PAM */
+#endif				/* !USE_PAM */
 
 /*
  * Local access

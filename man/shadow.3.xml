@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='shadow.3'>
-  <!--  $Id: shadow.3.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!--  $Id: shadow.3.xml,v 1.9 2005/06/20 08:42:12 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>shadow</refentrytitle>
     <manvolnum>3</manvolnum>
@@ -14,116 +14,101 @@
   
   <refsect1 id='syntax'>
     <title>SYNTAX</title>
-    <para>
-      <emphasis remap='B'>#include &lt;shadow.h&gt;</emphasis>
+    <para><emphasis remap='B'>#include &lt;shadow.h&gt;</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>struct spwd *getspent();</emphasis>
+    <para><emphasis remap='B'>struct spwd *getspent();</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>struct spwd *getspnam(char</emphasis>
+    <para><emphasis remap='B'>struct spwd *getspnam(char</emphasis>
       <emphasis remap='I'>*name</emphasis><emphasis remap='B'>);</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>void setspent();</emphasis>
+    <para><emphasis remap='B'>void setspent();</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>void endspent();</emphasis>
+    <para><emphasis remap='B'>void endspent();</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>struct spwd *fgetspent(FILE</emphasis>
+    <para><emphasis remap='B'>struct spwd *fgetspent(FILE</emphasis>
       <emphasis remap='I'>*fp</emphasis><emphasis remap='B'>);</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>struct spwd *sgetspent(char</emphasis>
+    <para><emphasis remap='B'>struct spwd *sgetspent(char</emphasis>
       <emphasis remap='I'>*cp</emphasis><emphasis remap='B'>);</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>int putspent(struct spwd</emphasis>
+    <para><emphasis remap='B'>int putspent(struct spwd</emphasis>
       <emphasis remap='I'>*p,</emphasis>
       <emphasis remap='B'>FILE</emphasis>
       <emphasis remap='I'>*fp</emphasis><emphasis remap='B'>);</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>int lckpwdf();</emphasis>
+    <para><emphasis remap='B'>int lckpwdf();</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>int ulckpwdf();</emphasis>
+    <para><emphasis remap='B'>int ulckpwdf();</emphasis>
     </para>
   </refsect1>
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <emphasis remap='I'>shadow</emphasis>
-      manipulates the contents of the shadow password file,
-      <filename>/etc/shadow</filename>.
-      The structure in the <emphasis remap='I'>#include</emphasis> file
-      is        
+    <para><emphasis remap='I'>shadow</emphasis> manipulates the contents of
+      the shadow password file, <filename>/etc/shadow</filename>.
+      The structure in the <emphasis remap='I'>#include</emphasis> file is:
     </para>
-    
-    <para>struct spwd {
-      <!-- .in +.5i -->
-      <!-- .br -->
+    <programlisting>struct spwd {
       char			*sp_namp; /* user login name */
-      <!-- .br -->
       char			*sp_pwdp; /* encrypted password */
-      <!-- .br -->
       long int		sp_lstchg; /* last password change */
-      <!-- .br -->
       long int		sp_min; /* days until change allowed. */
-      <!-- .br -->
       long int		sp_max; /* days before change required */
-      <!-- .br -->
       long int		sp_warn; /* days warning for expiration */
-      <!-- .br -->
       long int		sp_inact; /* days before account inactive */
-      <!-- .br -->
       long int		sp_expire; /* date when account expires */
-      <!-- .br -->
       unsigned long int	sp_flag; /* reserved for future use */
-      <!-- .br -->
-      <!-- .in \-.5i -->
-      }
-    </para>
-    
-    <para>The meanings of each field are</para>
-    
-    <para>sp_namp - pointer to null-terminated user name.
-      <!-- .br -->
-      sp_pwdp - pointer to null-terminated password.
-      <!-- .br -->
-      sp_lstchg - days since Jan 1, 1970 password was last changed.
-      <!-- .br -->
-      sp_min - days before which password may not be changed.
-      <!-- .br -->
-      sp_max - days after which password must be changed.
-      <!-- .br -->
-      sp_warn - days before password is to expire that user is warned
-      of pending password expiration.
-      <!-- .br -->
-      sp_inact - days after password expires that account is considered
-      inactive and disabled.
-      <!-- .br -->
-      sp_expire - days since Jan 1, 1970 when account will be disabled.
-      <!-- .br -->
-      sp_flag - reserved for future use.
-    </para>
+}
+    </programlisting>
+    <para>The meanings of each field are:</para>
+    <itemizedlist mark='bullet'>
+      <listitem>
+        <para>sp_namp - pointer to null-terminated user name</para>
+      </listitem>
+      <listitem>
+        <para>sp_pwdp - pointer to null-terminated password</para>
+      </listitem>
+      <listitem>
+        <para>sp_lstchg - days since Jan 1, 1970 password was last changed</para>
+      </listitem>
+      <listitem>
+        <para>sp_min - days before which password may not be changed</para>
+      </listitem>
+      <listitem>
+        <para>sp_max - days after which password must be changed</para>
+      </listitem>
+      <listitem>
+         <para>sp_warn - days before password is to expire that user is warned of
+	   pending password expiration
+	 </para>
+      </listitem>
+      <listitem>
+        <para>sp_inact - days after password expires that account is considered
+          inactive and disabled
+	</para>
+      </listitem>
+      <listitem>
+        <para>sp_expire - days since Jan 1, 1970 when account will be disabled</para>
+      </listitem>
+      <listitem>
+        <para>sp_flag - reserved for future use</para>
+      </listitem>
+    </itemizedlist>
+        
   </refsect1>
   
   <refsect1 id='description2'>
     <title>DESCRIPTION</title>
-    <para>
-      <emphasis remap='B'>getspent</emphasis>, <emphasis
+    <para><emphasis remap='B'>getspent</emphasis>, <emphasis
       remap='B'>getspname</emphasis> <emphasis
       remap='B'>fgetspent</emphasis>, and <emphasis
       remap='B'>sgetspent</emphasis> each return a pointer to a <emphasis
@@ -182,8 +167,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>getpwent</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>,
       <citerefentry>

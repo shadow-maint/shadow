@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.21 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: newusers.c,v 1.23 2005/05/25 19:31:51 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -56,11 +56,9 @@ static char *Prog;
 #include "pwio.h"
 #include "groupio.h"
 
-#ifdef	SHADOWPWD
 #include "shadowio.h"
 
 static int is_shadow;
-#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -237,10 +235,8 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 
 static int add_passwd (struct passwd *pwd, const char *passwd)
 {
-#ifdef	SHADOWPWD
 	const struct spwd *sp;
 	struct spwd spent;
-#endif
 
 	/*
 	 * In the case of regular password files, this is real easy - pwd
@@ -252,7 +248,6 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 		update_passwd (pwd, passwd);
 		return 0;
 	}
-#ifdef SHADOWPWD
 	/*
 	 * Do the first and easiest shadow file case. The user already
 	 * exists in the shadow password file.
@@ -293,7 +288,6 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	spent.sp_flag = -1;
 
 	return !spw_update (&spent);
-#endif
 }
 
 #ifdef USE_PAM
@@ -382,36 +376,22 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
 		exit (1);
 	}
-#ifdef	SHADOWPWD
 	is_shadow = spw_file_present ();
 
-	if ((is_shadow && !spw_lock ()) || !gr_lock ())
-#else
-	if (!gr_lock ())
-#endif
-	{
+	if ((is_shadow && !spw_lock ()) || !gr_lock ()) {
 		fprintf (stderr,
 			 _("%s: can't lock files, try again later\n"), Prog);
 		(void) pw_unlock ();
-#ifdef	SHADOWPWD
 		if (is_shadow)
 			spw_unlock ();
-#endif
 		exit (1);
 	}
-#ifdef	SHADOWPWD
 	if (!pw_open (O_RDWR) || (is_shadow && !spw_open (O_RDWR))
-	    || !gr_open (O_RDWR))
-#else
-	if (!pw_open (O_RDWR) || !gr_open (O_RDWR))
-#endif
-	{
+	    || !gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: can't open files\n"), Prog);
 		(void) pw_unlock ();
-#ifdef	SHADOWPWD
 		if (is_shadow)
 			spw_unlock ();
-#endif
 		(void) gr_unlock ();
 		exit (1);
 	}
@@ -560,33 +540,22 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 			 _("%s: error detected, changes ignored\n"), Prog);
 		(void) gr_unlock ();
-#ifdef	SHADOWPWD
 		if (is_shadow)
 			spw_unlock ();
-#endif
 		(void) pw_unlock ();
 		exit (1);
 	}
-#ifdef	SHADOWPWD
-	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ())
-#else
-	if (!pw_close () || !gr_close ())
-#endif
-	{
+	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ()) {
 		fprintf (stderr, _("%s: error updating files\n"), Prog);
 		(void) gr_unlock ();
-#ifdef	SHADOWPWD
 		if (is_shadow)
 			spw_unlock ();
-#endif
 		(void) pw_unlock ();
 		exit (1);
 	}
 	(void) gr_unlock ();
-#ifdef	SHADOWPWD
 	if (is_shadow)
 		spw_unlock ();
-#endif
 	(void) pw_unlock ();
 
 #ifdef USE_PAM

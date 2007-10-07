@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: failure.c,v 1.12 2005/04/12 14:12:26 kloczek Exp $")
+RCSID ("$Id: failure.c,v 1.15 2005/06/20 10:02:02 kloczek Exp $")
 #include <fcntl.h>
 #include <stdio.h>
 #include "defines.h"
@@ -56,7 +56,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		return;
 
 	/*
-	 * The file is indexed by uid value meaning that shared UID's
+	 * The file is indexed by UID value meaning that shared UID's
 	 * share failure log records.  That's OK since they really
 	 * share just about everything else ...
 	 */
@@ -226,13 +226,12 @@ void failprint (const struct faillog *fail)
 	if (*lasttime == ' ')
 		lasttime++;
 #endif
-	printf (ngettext("%d failure since last login.\n"
-			 "Last was %s on %s.\n",
-			 "%d failures since last login.\n"
-			 "Last was %s on %s.\n",
-			 fail->fail_cnt),
-		fail->fail_cnt,
-		lasttime, fail->fail_line);
+	printf (ngettext ("%d failure since last login.\n"
+			  "Last was %s on %s.\n",
+			  "%d failures since last login.\n"
+			  "Last was %s on %s.\n",
+			  fail->fail_cnt),
+		fail->fail_cnt, lasttime, fail->fail_line);
 }
 
 /*
@@ -242,7 +241,13 @@ void failprint (const struct faillog *fail)
  *	maintains a record of all login failures.
  */
 
-void failtmp (const struct utmp *failent)
+void failtmp (
+#ifdef HAVE_UTMPX_H
+		     const struct utmpx *failent
+#else
+		     const struct utmp *failent
+#endif
+    )
 {
 	char *ftmp;
 	int fd;

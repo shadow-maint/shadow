@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: getdef.c,v 1.29 2005/05/09 10:45:26 kloczek Exp $")
+RCSID ("$Id: getdef.c,v 1.30 2005/05/25 19:31:50 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
@@ -292,7 +292,7 @@ static struct itemdef *def_find (const char *name)
 	for (ptr = def_table; ptr->name; ptr++) {
 		if (!(n = strcmp (ptr->name, name)))
 			return ptr;
- 	}
+	}
 
 	/*
 	 * Item was never found.

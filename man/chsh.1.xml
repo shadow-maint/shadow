@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chsh1'>
-  <!-- $Id: chsh.1.xml,v 1.6 2005/04/27 16:24:09 kloczek Exp $ -->
+  <!-- $Id: chsh.1.xml,v 1.8 2005/06/16 15:43:48 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chsh</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -24,8 +24,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>chsh</command> changes the user login shell. This determines
+    <para><command>chsh</command> changes the user login shell. This determines
       the name of the user's initial login command. A normal user may only
       change the login shell for her own account, the super user may change
       the login shell for any account.
@@ -69,8 +68,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

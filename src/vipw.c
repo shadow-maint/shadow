@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.10 2005/04/13 22:59:18 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.11 2005/05/25 18:20:25 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -240,11 +240,9 @@ int main (int argc, char **argv)
 	}
 
 	if (do_vipw) {
-#ifdef SHADOWPWD
 		if (editshadow)
 			vipwedit (SHADOW_FILE, spw_lock, spw_unlock);
 		else
-#endif
 			vipwedit (PASSWD_FILE, pw_lock, pw_unlock);
 	} else {
 #ifdef SHADOWGRP
@@ -257,8 +255,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-#ifdef SHADOWPWD
 	nscd_flush_cache ("shadow");
-#endif
 	return 0;
 }

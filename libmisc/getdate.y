@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <time.h>
 
 #if defined (STDC_HEADERS) || (!defined (isascii) && !defined (HAVE_ISASCII))
 # define IN_CTYPE_DOMAIN(c) 1
@@ -63,10 +64,6 @@
 #if !defined (HAVE_BCOPY) && defined (HAVE_MEMCPY) && !defined (bcopy)
 # define bcopy(from, to, len) memcpy ((to), (from), (len))
 #endif
-
-extern struct tm	*gmtime ();
-extern struct tm	*localtime ();
-extern time_t		mktime ();
 
 /* Remap normal yacc parser interface names (yyparse, yylex, yyerror, etc),
    as well as gratuitiously global symbol names, so we can have multiple

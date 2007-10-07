@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='faillog.5'>
-  <!-- $Id: faillog.5.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: faillog.5.xml,v 1.7 2005/06/16 15:49:42 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -14,8 +14,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <filename>/var/log/faillog</filename> maintains a count of login
+    <para><filename>/var/log/faillog</filename> maintains a count of login
       failures and the limits for each account. The file is fixed length
       record, indexed by numerical UID. Each record contains the count of
       login failures since the last successful login; the maximum number of
@@ -23,15 +22,14 @@
       failure occured on; and the date the last login failure occured.
     </para>
     
-    <para>The structure of the file is</para>
-    <literallayout remap='DS'>
-      struct	faillog {
-      short   fail_cnt;
-      short   fail_max;
-      char    fail_line[12];
-      time_t  fail_time;
-      };
-    </literallayout>
+    <para>The structure of the file is:</para>
+      <programlisting>
+struct	faillog {
+	short   fail_cnt;
+	short   fail_max;
+	char    fail_line[12];
+	time_t  fail_time;
+};</programlisting>
   </refsect1>
   
   <refsect1 id='files'>
@@ -46,8 +44,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>faillog</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>
     </para>

@@ -32,13 +32,11 @@
 #ifndef HAVE_LCKPWDF
 
 #include "rcsid.h"
-RCSID ("$Id: lockpw.c,v 1.5 2005/03/31 05:14:49 kloczek Exp $")
+RCSID ("$Id: lockpw.c,v 1.6 2005/05/25 18:20:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "pwio.h"
-#ifdef SHADOWPWD
 #include "shadowio.h"
-#endif
 /*
  * lckpwdf - lock the password files
  */

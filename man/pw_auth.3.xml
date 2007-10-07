@@ -2,24 +2,22 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pw_auth.3'>
-  <!-- $Id: pw_auth.3.xml,v 1.5 2005/04/27 15:43:25 kloczek Exp $ -->
+  <!-- $Id: pw_auth.3.xml,v 1.10 2005/06/20 09:00:06 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pw_auth</refentrytitle>
     <manvolnum>3</manvolnum>
   </refmeta>
   <refnamediv id='name'>
-    <refname>pwauth</refname>
+    <refname>pw_auth</refname>
     <refpurpose>administrator defined password authentication routines</refpurpose>
   </refnamediv>
   
   <refsect1 id='syntax'>
     <title>SYNTAX</title>
-    <para>
-      <emphasis remap='B'>#include &lt;pwauth.h&gt;</emphasis>
+    <para><emphasis remap='B'>#include &lt;pwauth.h&gt;</emphasis>
     </para>
     
-    <para>
-      <emphasis remap='B'>int pw_auth (char</emphasis>
+    <para><emphasis remap='B'>int pw_auth (char</emphasis>
       <emphasis remap='I'>*command,</emphasis>
       <emphasis remap='B'>char</emphasis>
       <emphasis remap='I'>*user,</emphasis>
@@ -32,8 +30,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <emphasis remap='B'>pw_auth</emphasis>
+    <para><emphasis remap='B'>pw_auth</emphasis>
       invokes the administrator defined functions for a given user.
     </para>
     
@@ -45,7 +42,7 @@
       listed below.
     </para>
     
-    <para> <emphasis remap='I'>user</emphasis> is the name of the user to be
+    <para><emphasis remap='I'>user</emphasis> is the name of the user to be
       authenticated, as given in the <filename>/etc/passwd</filename> file. 
       User entries are indexed by username. This allows non-unique user IDs
       to be present and for each different username associated with that
@@ -53,11 +50,11 @@
     </para>
     
     <para>Each of the permissible authentication reasons is handled in a
-      potentially differenent manner.  Unless otherwise mentioned, the
+      potentially differenent manner. Unless otherwise mentioned, the
       standard file descriptors 0, 1, and 2 are available for communicating
-      with the user.  The real user ID may be used to determine the identity
+      with the user. The real user ID may be used to determine the identity
       of the user making the authentication request. <emphasis
-      remap='I'>reason</emphasis> is one of
+      remap='I'>reason</emphasis> is one of:
     </para>
     <variablelist remap='IP'>
       <varlistentry>
@@ -66,7 +63,7 @@
         </term>
         <listitem>
           <para>Perform authentication for the current real user ID
-            attempting to switch real user ID to the named user.  The
+            attempting to switch real user ID to the named user. The
             authentication program will be invoked with a
             <option>-s</option> option, followed by the username.
           </para>
@@ -88,7 +85,7 @@
           <emphasis remap='B'>PW_ADD</emphasis>
         </term>
         <listitem>
-          <para>Create a new entry for the named user.  This allows an
+          <para>Create a new entry for the named user. This allows an
             authentication program to initialize storage for a new user. The
             authentication program will be invoked with a
             <option>-a</option> option, followed by the username.
@@ -197,7 +194,7 @@
   
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>This function does not create the actual session.  It only
+    <para>This function does not create the actual session. It only
       indicates if the user should be allowed to create the session.
     </para>
     
@@ -215,8 +212,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

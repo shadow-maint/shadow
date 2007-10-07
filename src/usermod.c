@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.37 2005/04/17 15:49:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.42 2005/06/20 10:17:10 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -62,7 +62,7 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.37 2005/04/17 15:49:01 kloczek Exp $")
 #define E_PW_UPDATE	1	/* can't update password file */
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
-#define E_UID_IN_USE	4	/* uid already in use (and no -o) */
+#define E_UID_IN_USE	4	/* UID already in use (and no -o) */
     /* #define E_BAD_PWFILE     5 *//* passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
@@ -83,10 +83,8 @@ static char *user_home;
 static char *user_newhome;
 static char *user_shell;
 
-#ifdef	SHADOWPWD
 static long user_expire;
 static long user_inactive;
-#endif
 static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
 
@@ -101,18 +99,15 @@ static int
     sflg = 0,			/* new shell program */
     cflg = 0,			/* new comment (GECOS) field */
     mflg = 0,			/* create user's home directory if it doesn't exist */
-#ifdef SHADOWPWD
     fflg = 0,			/* days until account with expired password is locked */
     eflg = 0,			/* days since 1970-01-01 when account becomes expired */
-#endif
     Lflg = 0,			/* lock the password */
     Uflg = 0,			/* unlock the password */
     pflg = 0,			/* new encrypted password */
     lflg = 0;			/* new user name */
 
-#ifdef SHADOWPWD
 static int is_shadow_pwd;
-#endif
+
 #ifdef SHADOWGRP
 static int is_shadow_grp;
 #endif
@@ -124,19 +119,14 @@ static int is_shadow_grp;
 #endif
 
 #include "pwio.h"
-
-#ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
 
 /* local function prototypes */
 static int get_groups (char *);
 static void usage (void);
 static void new_pwent (struct passwd *);
 
-#ifdef SHADOWPWD
 static void new_spent (struct spwd *);
-#endif
 static void fail_exit (int);
 static int update_group (void);
 
@@ -169,7 +159,7 @@ static struct group *getgr_nam_gid (const char *name)
 	char *ep;
 
 	gid = strtoul (name, &ep, 10);
-	if (*name != '\0' && *ep == '\0')	/* valid numeric gid */
+	if (*name != '\0' && *ep == '\0')	/* valid numeric GID */
 		return getgrgid (gid);
 
 	return getgrnam (name);
@@ -292,9 +282,7 @@ static void usage (void)
 		 _
 		 ("\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"));
 	fprintf (stderr, "\t\t");
-#ifdef SHADOWPWD
 	fprintf (stderr, _("[-f inactive] [-e expire] "));
-#endif
 	fprintf (stderr, _("[-p passwd] [-L|-U] name\n"));
 	exit (E_USAGE);
 }
@@ -343,9 +331,7 @@ static void new_pwent (struct passwd *pwent)
 			 pwent->pw_name, user_newname));
 		pwent->pw_name = xstrdup (user_newname);
 	}
-#ifdef SHADOWPWD
 	if (!is_shadow_pwd)
-#endif
 		pwent->pw_passwd =
 		    new_pw_passwd (pwent->pw_passwd, pwent->pw_name);
 
@@ -378,7 +364,6 @@ static void new_pwent (struct passwd *pwent)
 	}
 }
 
-#ifdef	SHADOWPWD
 /*
  * new_spent - initialize the values in a shadow password file entry
  *
@@ -406,7 +391,6 @@ static void new_spent (struct spwd *spent)
 	}
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp, spent->sp_namp);
 }
-#endif				/* SHADOWPWD */
 
 /*
  * fail_exit - exit with an error code after unlocking files
@@ -419,10 +403,8 @@ static void fail_exit (int code)
 	if (is_shadow_grp)
 		sgr_unlock ();
 #endif
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		spw_unlock ();
-#endif
 	(void) pw_unlock ();
 	exit (code);
 }
@@ -709,9 +691,7 @@ static void process_flags (int argc, char **argv)
 	const struct group *grp;
 	const struct passwd *pwd;
 
-#ifdef SHADOWPWD
 	const struct spwd *spwd = NULL;
-#endif
 	int anyflag = 0;
 	int arg;
 
@@ -752,19 +732,12 @@ static void process_flags (int argc, char **argv)
 	user_home = xstrdup (pwd->pw_dir);
 	user_shell = xstrdup (pwd->pw_shell);
 
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && (spwd = getspnam (user_name))) {
 		user_expire = spwd->sp_expire;
 		user_inactive = spwd->sp_inact;
 	}
-#endif
-#ifdef	SHADOWPWD
-#define FLAGS "A:u:og:G:d:s:c:mf:e:l:p:LU"
-#else
-#define FLAGS "A:u:og:G:d:s:c:ml:p:LU"
-#endif
-	while ((arg = getopt (argc, argv, FLAGS)) != EOF) {
-#undef FLAGS
+
+	while ((arg = getopt (argc, argv, "A:u:og:G:d:s:c:mf:e:l:p:LU")) != EOF) {
 		switch (arg) {
 		case 'c':
 			if (!VALID (optarg)) {
@@ -786,7 +759,6 @@ static void process_flags (int argc, char **argv)
 			dflg++;
 			user_newhome = optarg;
 			break;
-#ifdef SHADOWPWD
 		case 'e':
 			if (*optarg) {
 				user_expire = strtoday (optarg);
@@ -806,7 +778,6 @@ static void process_flags (int argc, char **argv)
 			user_inactive = get_number (optarg);
 			fflg++;
 			break;
-#endif
 		case 'g':
 			grp = getgr_nam_gid (optarg);
 			if (!grp) {
@@ -896,7 +867,6 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr, _("%s: no flags given\n"), Prog);
 		exit (E_USAGE);
 	}
-#ifdef SHADOWPWD
 	if (!is_shadow_pwd && (eflg || fflg)) {
 		fprintf (stderr,
 			 _
@@ -904,7 +874,6 @@ static void process_flags (int argc, char **argv)
 			 Prog);
 		exit (E_USAGE);
 	}
-#endif
 
 	if (optind != argc - 1)
 		usage ();
@@ -940,17 +909,13 @@ static void close_files (void)
 		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ()) {
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#endif
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		spw_unlock ();
-#endif
 	(void) pw_unlock ();
 
 	/*
@@ -958,9 +923,7 @@ static void close_files (void)
 	 */
 
 	endpwent ();
-#ifdef	SHADOWPWD
 	endspent ();
-#endif
 	endgrent ();
 #ifdef	SHADOWGRP
 	endsgent ();
@@ -983,7 +946,6 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
@@ -994,7 +956,6 @@ static void open_files (void)
 			 _("%s: cannot open shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#endif
 }
 
 /*
@@ -1009,10 +970,8 @@ static void usr_update (void)
 	struct passwd pwent;
 	const struct passwd *pwd;
 
-#ifdef	SHADOWPWD
 	struct spwd spent;
 	const struct spwd *spwd = NULL;
-#endif
 
 	/*
 	 * Locate the entry in /etc/passwd, which MUST exist.
@@ -1027,7 +986,6 @@ static void usr_update (void)
 	pwent = *pwd;
 	new_pwent (&pwent);
 
-#ifdef	SHADOWPWD
 
 	/* 
 	 * Locate the entry in /etc/shadow. It doesn't have to exist, and
@@ -1038,7 +996,6 @@ static void usr_update (void)
 		spent = *spwd;
 		new_spent (&spent);
 	}
-#endif
 
 	if (lflg || uflg || gflg || cflg || dflg || sflg || pflg
 	    || Lflg || Uflg) {
@@ -1055,7 +1012,6 @@ static void usr_update (void)
 			fail_exit (E_PW_UPDATE);
 		}
 	}
-#ifdef	SHADOWPWD
 	if (spwd && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
 		if (!spw_update (&spent)) {
 			fprintf (stderr,
@@ -1072,7 +1028,6 @@ static void usr_update (void)
 			fail_exit (E_PW_UPDATE);
 		}
 	}
-#endif				/* SHADOWPWD */
 }
 
 /*
@@ -1115,10 +1070,15 @@ static void move_home (void)
 				}
 				if (copy_tree (user_home, user_newhome,
 					       uflg ? user_newid : -1,
-					       gflg ? user_newgid : -1) ==
-				    0 && remove_tree (user_home) == 0
-				    && rmdir (user_home) == 0)
+					       gflg ? user_newgid : -1) == 0) {
+					if (remove_tree (user_home) != 0 ||
+					    rmdir (user_home) != 0)
+						fprintf (stderr,
+							 _
+							 ("%s: warning: failed to completely remove old home directory %s"),
+							 Prog, user_home);
 					return;
+				}
 
 				(void) remove_tree (user_newhome);
 				(void) rmdir (user_newhome);
@@ -1275,9 +1235,7 @@ int main (int argc, char **argv)
 
 	OPENLOG ("usermod");
 
-#ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present ();
-#endif
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif

@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.25 2005/03/31 05:14:49 kloczek Exp $ */
+/* $Id: defines.h,v 1.26 2005/05/25 18:20:22 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -95,7 +95,6 @@ char *strchr (), *strrchr (), *strtok ();
 # define DIRECT direct
 #endif
 
-#ifdef SHADOWPWD
 /*
  * Possible cases:
  * - /usr/include/shadow.h exists and includes the shadow group stuff.
@@ -113,7 +112,6 @@ char *strchr (), *strrchr (), *strtok ();
 #include "gshadow_.h"
 #endif
 #endif				/* not HAVE_SHADOW_H */
-#endif				/* SHADOWPWD */
 
 #include <limits.h>
 
@@ -291,10 +289,8 @@ char *strchr (), *strrchr (), *strtok ();
 #define GROUP_FILE "/etc/group"
 #endif
 
-#ifdef SHADOWPWD
 #ifndef SHADOW_FILE
 #define SHADOW_FILE "/etc/shadow"
-#endif
 #endif
 
 #ifdef SHADOWGRP

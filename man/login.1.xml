@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.6 2005/04/26 12:45:50 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.9 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>LOGIN</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -36,14 +36,13 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>login</command> is used to establish a new session with the
+    <para><command>login</command> is used to establish a new session with the
       system. It is normally invoked automatically by responding to the
       <emphasis remap='I'>login:</emphasis> prompt on the user&acute;s
       terminal. <command>login</command> may be special to the shell and may
       not be invoked as a sub-process. Typically, <command>login</command>
       is treated by the shell as <emphasis remap='B'>exec login</emphasis>
-      which causes the user to exit from the current shell.  Attempting to
+      which causes the user to exit from the current shell. Attempting to
       execute <command>login</command> from any shell but the login shell
       will produce an error message.
     </para>
@@ -157,32 +156,45 @@
   
   <refsect1 id='files'>
     <title>FILES</title>
-    <para>
-      <filename>/var/run/utmp</filename>		- list of current login
-      sessions            <!-- .br -->
-      <filename>/var/log/wtmp</filename>		- list of previous login
-      sessions
-      <!-- .br -->
-      <filename>/etc/passwd</filename>		- user account information
-      <!-- .br -->
-      <filename>/etc/shadow</filename>		- secure user account information
-      <!-- .br -->
-      <filename>/etc/motd</filename>			- system message file
-      <!-- .br -->
-      <filename>/etc/nologin</filename>		- prevent non-root users from
-      logging in
-      <!-- .br -->
-      <filename>/etc/ttytype</filename>		- list of terminal types
-      <!-- .br -->
-      <emphasis remap='I'>$HOME/.hushlogin</emphasis>	- suppress printing
-      of system messages
-    </para>
+    <variablelist>
+      <varlistentry>
+        <term><filename>/var/run/utmp</filename></term>
+        <listitem>list of current login sessions</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/var/log/wtmp</filename></term>
+        <listitem>list of previous login sessions</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/passwd</filename></term>
+        <listitem>user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/shadow</filename></term>
+        <listitem>secure user account information</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/motd</filename></term>
+        <listitem>system message of the day file</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/nologin</filename></term>
+        <listitem>prevent non-root users from logging in</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/ttytype</filename></term>
+        <listitem>list of terminal types</listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><filename>$HOME/.hushlogin</filename></term>
+        <listitem>suppress printing of system messages</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>mail</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

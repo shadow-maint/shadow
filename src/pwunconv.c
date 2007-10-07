@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwunconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwunconv.c,v 1.17 2005/05/25 18:20:25 kloczek Exp $")
 #include "defines.h"
 #include <sys/types.h>
 #include <stdio.h>
@@ -41,7 +41,6 @@ RCSID (PKG_VER "$Id: pwunconv.c,v 1.16 2005/03/31 05:14:54 kloczek Exp $")
 #include "pwio.h"
 #include "shadowio.h"
 #include "nscd.h"
-#ifdef	SHADOWPWD
 char *l64a ();
 
 static int shadow_locked = 0, passwd_locked = 0;
@@ -148,18 +147,7 @@ int main (int argc, char **argv)
 	pw_unlock ();
 
 	nscd_flush_cache ("passwd");
-#ifdef SHADOWPWD
 	nscd_flush_cache ("shadow");
-#endif
 
 	return 0;
 }
-
-#else				/* !SHADOWPWD */
-int main (int argc, char **argv)
-{
-	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n", argv[0]);
-	exit (1);
-}
-#endif				/* !SHADOWPWD */

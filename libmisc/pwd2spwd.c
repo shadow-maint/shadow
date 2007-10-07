@@ -29,10 +29,8 @@
 
 #include <config.h>
 
-#ifdef SHADOWPWD
-
 #include "rcsid.h"
-RCSID ("$Id: pwd2spwd.c,v 1.5 2003/05/03 16:14:34 kloczek Exp $")
+RCSID ("$Id: pwd2spwd.c,v 1.6 2005/05/25 18:20:22 kloczek Exp $")
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -77,4 +75,3 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 
 	return &sp;
 }
-#endif				/* SHADOWPWD */

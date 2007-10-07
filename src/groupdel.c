@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupdel.c,v 1.20 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupdel.c,v 1.21 2005/05/25 19:31:51 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -96,7 +96,6 @@ static void grp_update (void)
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		errors++;
 	}
-
 #ifdef	SHADOWGRP
 	/*
 	 * Delete the shadow group entries as well.
@@ -291,7 +290,6 @@ int main (int argc, char **argv)
 			 Prog, group_name);
 		exit (E_NOTFOUND);
 	}
-
 #ifdef	USE_NIS
 	/*
 	 * Make sure this isn't a NIS group

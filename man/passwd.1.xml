@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='passwd.1'>
-  <!--  $Id: passwd.1.xml,v 1.8 2005/05/09 10:14:39 kloczek Exp $ -->
+  <!--  $Id: passwd.1.xml,v 1.11 2005/06/20 08:47:36 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -58,8 +58,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>passwd</command> changes passwords for user and group
+    <para><command>passwd</command> changes passwords for user and group
       accounts. A normal user may only change the password for his/her own
       account, the super user may change the password for any account. The
       administrator of a group may change the password for the group.
@@ -68,11 +67,12 @@
       and interval.
     </para>
     
-    <para>The <option>-s</option> option makes <command>passwd</command>
-      call <command>chsh</coamand> to change the user's shell.  The
+    <para>
+      The <option>-s</option> option makes <command>passwd</command> call
+      <command>chsh</command> to change the user's shell. The
       <option>-f</option> option makes <command>passwd</command> call
       <command>chfn</command> to change the user's gecos information. These
-      two options are only meant for compatiblity, since the other programs
+      two options are only meant for compatibility, since the other programs
       can be called directly.
     </para>
     
@@ -97,13 +97,17 @@
         of following sets:
       </para>
       
-      <para>Lower case alphabetics</para>
-      
-      <para>Upper case alphabetics</para>
-      
-      <para>Digits 0 thru 9</para>
-      
-      <para>Punctuation marks</para>
+      <itemizedlist mark='bullet'>
+        <listitem>
+          <para>lower case alphabetics</para>
+        </listitem>
+        <listitem>
+          <para>digits 0 thru 9</para>
+        </listitem>
+        <listitem>
+          <para>punctuation marks</para>
+        </listitem>
+      </itemizedlist>            
       
       <para>Care must be taken not to include the system default erase or
         kill characters. <command>passwd</command> will reject any password
@@ -140,7 +144,7 @@
         a password remains valid. After <emphasis remap='I'>max</emphasis>
         days, the password is required to be changed. The
         <option>-n</option> option is used to set the minimum number of days
-        before a password may be changed.  The user will not be permitted to
+        before a password may be changed. The user will not be permitted to
         change the password until <emphasis remap='I'>min</emphasis> days
         have elapsed. The <option>-w</option> option is used to set the
         number of days of warning the user will receive before his/her
@@ -179,7 +183,7 @@
         user account is locked (L), has no password (NP), or has a usable
         password (P). The third field gives the date of the last password
         change. The next four fields are the minimum age, maximum age,
-        warning period, and inactivity period for the password.  These ages
+        warning period, and inactivity period for the password. These ages
         are expressed in days. See <emphasis remap='B'>Password expiry
         information</emphasis> above for a discussion of these fields.
       </para>
@@ -210,14 +214,20 @@
       
       <para>Other methods of construction involve selecting an easily
         remembered phrase from literature and selecting the first or last
-        letter from each word. An example of this is
+        letter from each word. An example of this is:
       </para>
-      
-      <para>Ask not for whom the bell tolls.</para>
-      
-      <para>which produces</para>
-      
-      <para>An4wtbt.</para>
+
+      <itemizedlist mark='bullet'>
+        <listitem>
+          <para>Ask not for whom the bell tolls</para>
+        </listitem>
+        <listitem>
+          <para>which produces</para>
+        </listitem>
+        <listitem>
+          <para>An4wtbt</para>
+        </listitem>
+      </itemizedlist>            
       
       <para>You may be reasonably sure few crackers will have included this
         in their dictionaries. You should, however, select your own methods
@@ -261,38 +271,44 @@
   
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>passwd</command> command exits with the
-          following values:
-        </term>
-        <listitem>
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>1</literal>	- permission denied
-            <!-- .br -->
-            <literal>2</literal>	- invalid combination of options
-            <!-- .br -->
-            <literal>3</literal>	- unexpected failure, nothing done
-            <!-- .br -->
-            <literal>4</literal>	- unexpected failure, passwd file
-            missing
-            <!-- .br -->
-            <literal>5</literal>	- passwd file busy, try again
-            later                        <!-- .br -->
-            <literal>6</literal>	- invalid argument to option
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>passwd</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+	  <listitem>success</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>1</replaceable></term>
+	  <listitem>permission denied</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+	  <listitem>invalid combination of options</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>3</replaceable></term>
+	  <listitem>unexpected failure, nothing done</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>4</replaceable></term>
+	  <listitem>unexpected failure, passwd file missing</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>5</replaceable></term>
+	  <listitem>passwd file busy, try again</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>6</replaceable></term>
+	  <listitem>invalid argument to option</listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>

@@ -24,7 +24,6 @@ man_XMANS = \
 	login.access.5.xml \
 	login.defs.5.xml \
 	logoutd.8.xml \
-	mkpasswd.8.xml \
 	newusers.8.xml \
 	passwd.1.xml \
 	passwd.5.xml \
@@ -64,7 +63,6 @@ man_MANS = \
 	login.access.5 \
 	login.defs.5 \
 	logoutd.8 \
-	mkpasswd.8 \
 	newgrp.1 \
 	newusers.8 \
 	passwd.1 \
@@ -86,14 +84,15 @@ man_MANS = \
 
 EXTRA_DIST = $(man_MANS) \
 	$(man_XMANS) \
-	id.1.xml \
-	pw_auth.3.xml \
-	shadowconfig.8.xml \
-	sulogin.8.xml \
 	id.1 \
+	id.1.xml \
 	pw_auth.3 \
+	pw_auth.3.xml \
 	shadowconfig.8 \
-	sulogin.8
+	shadowconfig.8.xml \
+	sulogin.8 \
+	sulogin.8.xml \
+	sulogin.8.xml
 
 all:
 

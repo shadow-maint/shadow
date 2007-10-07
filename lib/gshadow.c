@@ -33,11 +33,10 @@
 #if defined(SHADOWGRP) && !defined(HAVE_SHADOWGRP)	/*{ */
 
 #include "rcsid.h"
-RCSID ("$Id: gshadow.c,v 1.9 2005/04/06 04:26:05 kloczek Exp $")
+RCSID ("$Id: gshadow.c,v 1.10 2005/05/25 19:31:50 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-
 static FILE *shadow;
 static char sgrbuf[BUFSIZ * 4];
 static char **members = NULL;

@@ -38,10 +38,8 @@
 #include <pwd.h>
 #include <grp.h>
 
-#if defined(SHADOWPWD)
-
 #include "rcsid.h"
-RCSID ("$Id: age.c,v 1.10 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: age.c,v 1.11 2005/05/25 18:20:22 kloczek Exp $")
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
 #endif
@@ -174,4 +172,3 @@ void agecheck (const struct passwd *pw, const struct spwd *sp)
 			printf (_("Your password will expire today.\n"));
 	}
 }
-#endif				/* SHADOWPWD */

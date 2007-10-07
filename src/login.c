@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.52 2005/04/17 15:38:56 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.59 2005/06/20 09:36:27 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -348,7 +348,7 @@ int main (int argc, char **argv)
 	pid_t child;
 	char *pam_user;
 #endif				/* USE_PAM */
-#if defined(SHADOWPWD) && !defined(USE_PAM)
+#ifndef USE_PAM
 	struct spwd *spwd = NULL;
 #endif
 	/*
@@ -369,7 +369,7 @@ int main (int argc, char **argv)
 
 	check_flags (argc, argv);
 
-	while ((flag = getopt (argc, argv, "d:f:h:pr:")) != EOF) {
+	while ((flag = getopt (argc, argv, "d:f::h:pr:")) != EOF) {
 		switch (flag) {
 		case 'p':
 			pflg++;
@@ -378,11 +378,16 @@ int main (int argc, char **argv)
 			/*
 			 * username must be a separate token
 			 * (-f root, *not* -froot).  --marekm
+			 *
+			 * if -f has an arg, use that, else use the
+			 * normal user name passed after all options
+			 * --benc
 			 */
-			if (optarg != argv[optind - 1])
+			if (optarg != NULL && optarg != argv[optind - 1])
 				usage ();
 			fflg++;
-			STRFCPY (username, optarg);
+			if (optarg)
+				STRFCPY (username, optarg);
 			break;
 #ifdef	RLOGIN
 		case 'r':
@@ -418,7 +423,7 @@ int main (int argc, char **argv)
 	 */
 
 	if ((rflg || fflg || hflg) && !amroot) {
-		fprintf (stderr, _("%s: permission denied.\n"), Prog);
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (1);
 	}
 
@@ -535,7 +540,7 @@ int main (int argc, char **argv)
 		init_env ();
 
 		if (optind < argc) {	/* get the user name */
-			if (rflg || fflg)
+			if (rflg || (fflg && username[0]))
 				usage ();
 
 			STRFCPY (username, argv[optind]);
@@ -703,11 +708,14 @@ int main (int argc, char **argv)
 
 		if (!pwd || setup_groups (pwd))
 			exit (1);
+		else
+			pwent = *pwd;
 
 		retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 		PAM_FAIL_CHECK;
 
-		retcode = pam_open_session (pamh, 0);
+		retcode = pam_open_session (pamh,
+					    hushed (&pwent) ? PAM_SILENT : 0);
 		PAM_FAIL_CHECK;
 
 #else				/* ! USE_PAM */
@@ -742,7 +750,6 @@ int main (int argc, char **argv)
 			pwent = *pwd;
 		}
 #ifndef USE_PAM
-#ifdef SHADOWPWD
 		spwd = NULL;
 		if (pwd && strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 			spwd = getspnam (username);
@@ -753,7 +760,6 @@ int main (int argc, char **argv)
 					 "no shadow password for `%s'%s",
 					 username, fromhost));
 		}
-#endif				/* SHADOWPWD */
 
 		/*
 		 * If the encrypted password begins with a "!", the account
@@ -918,9 +924,7 @@ int main (int argc, char **argv)
 		subroot++;	/* say i was here again */
 		endpwent ();	/* close all of the file which were */
 		endgrent ();	/* open in the original rooted file */
-#ifdef	SHADOWPWD
 		endspent ();	/* system. they will be re-opened */
-#endif
 #ifdef	SHADOWGRP
 		endsgent ();	/* in the new rooted file system */
 #endif
@@ -938,7 +942,6 @@ int main (int argc, char **argv)
 	 * and changes to the user in the child before executing the passwd
 	 * program.  --marekm
 	 */
-#ifdef	SHADOWPWD
 	if (spwd) {		/* check for age of password */
 		if (expire (&pwent, spwd)) {
 			pwd = getpwnam (username);
@@ -947,11 +950,44 @@ int main (int argc, char **argv)
 				pwent = *pwd;
 		}
 	}
-#endif				/* SHADOWPWD */
 	setup_limits (&pwent);	/* nice, ulimit etc. */
 #endif				/* ! USE_PAM */
 	chown_tty (tty, &pwent);
 
+#ifdef USE_PAM
+	/*
+	 * We must fork before setuid() because we need to call
+	 * pam_close_session() as root.
+	 *
+	 * Note: not true in other (non-Linux) PAM implementations, where
+	 * the parent process of login (init, telnetd, ...) is responsible
+	 * for calling pam_close_session(). This avoids an extra process for
+	 * each login. Maybe we should do this on Linux too? We let the
+	 * admin configure whether they need to keep login around to close
+	 * sessions.
+	 */
+	if (getdef_bool ("CLOSE_SESSIONS")) {
+		signal (SIGINT, SIG_IGN);
+		child = fork ();
+		if (child < 0) {
+			/* error in fork() */
+			fprintf (stderr,
+				 "login: failure forking: %s",
+				 strerror (errno));
+			PAM_END;
+			exit (0);
+		} else if (child) {
+			/*
+			 * parent - wait for child to finish, then cleanup
+			 * session
+			 */
+			wait (NULL);
+			PAM_END;
+			exit (0);
+		}
+		/* child */
+	}
+#endif
 	/* We call set_groups() above because this clobbers pam_groups.so */
 #ifndef USE_PAM
 	if (setup_uid_gid (&pwent, is_console))
@@ -1021,11 +1057,7 @@ int main (int argc, char **argv)
 #endif
 			printf (".\n");
 		}
-#ifdef	SHADOWPWD
 		agecheck (&pwent, spwd);
-#else
-		agecheck (&pwent);
-#endif
 
 		mailcheck ();	/* report on the status of mail */
 #endif				/* !USE_PAM */
@@ -1039,55 +1071,22 @@ int main (int argc, char **argv)
 	signal (SIGTERM, SIG_DFL);	/* default terminate signal */
 	signal (SIGALRM, SIG_DFL);	/* default alarm signal */
 	signal (SIGHUP, SIG_DFL);	/* added this.  --marekm */
-
-#ifdef USE_PAM
-	/*
-	 * We must fork before setuid() because we need to call
-	 * pam_close_session() as root.
-	 *
-	 * Note: not true in other (non-Linux) PAM implementations, where
-	 * the parent process of login (init, telnetd, ...) is responsible
-	 * for calling pam_close_session(). This avoids an extra process for
-	 * each login. Maybe we should do this on Linux too? We let the
-	 * admin configure whether they need to keep login around to close
-	 * sessions.
-	 */
-	if (getdef_bool ("CLOSE_SESSIONS")) {
-		signal (SIGINT, SIG_IGN);
-		child = fork ();
-		if (child < 0) {
-			/* error in fork() */
-			fprintf (stderr,
-				 "login: failure forking: %s",
-				 strerror (errno));
-			PAM_END;
-			exit (0);
-		} else if (child) {
-			/*
-			 * parent - wait for child to finish, then cleanup
-			 * session
-			 */
-			wait (NULL);
-			PAM_END;
-			exit (0);
-		}
-		/* child */
-	}
-#endif
 	signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
 	endpwent ();		/* stop access to password file */
 	endgrent ();		/* stop access to group file */
-#ifdef	SHADOWPWD
 	endspent ();		/* stop access to shadow passwd file */
-#endif
 #ifdef	SHADOWGRP
 	endsgent ();		/* stop access to shadow group file */
 #endif
 	if (pwent.pw_uid == 0)
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	else if (getdef_bool ("LOG_OK_LOGINS"))
+#ifdef USE_PAM
+		SYSLOG ((LOG_INFO, "`%s' logged in %s", pam_user, fromhost));
+#else
 		SYSLOG ((LOG_INFO, "`%s' logged in %s", username, fromhost));
+#endif
 	closelog ();
 	if ((tmp = getdef_str ("FAKE_SHELL")) != NULL) {
 		shell (tmp, pwent.pw_shell);	/* fake shell */

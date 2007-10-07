@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwconv.8'>
-  <!-- $Id: pwconv.8.xml,v 1.6 2005/05/19 10:35:00 kloczek Exp $ -->
+  <!-- $Id: pwconv.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $ -->
   <refentryinfo>
     <date>26 Sep 1997</date>
   </refentryinfo>
@@ -87,7 +87,7 @@
       are updated from the shadowed file. Entries which exist in the main
       file but not in the shadowed file are left alone. Finally, the
       shadowed file is removed. Some password aging information is lost by
-      <command>pwunconv</command>.  It will convert what it can.
+      <command>pwunconv</command>. It will convert what it can.
     </para>
   </refsect1>
   
@@ -95,7 +95,7 @@
     <title>BUGS</title>
     <para>Errors in the password or group files (such as invalid or
       duplicate entries) may cause these programs to loop forever or fail in
-      other strange ways.  Please run <command>pwck</command> and
+      other strange ways. Please run <command>pwck</command> and
       <command>grpck</command> to correct any such errors before converting
       to or from shadow passwords or groups.
     </para>
@@ -103,8 +103,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>

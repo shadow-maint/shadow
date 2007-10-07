@@ -2,13 +2,13 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.defs.5'>
-  <!--  $Id: login.defs.5.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!--  $Id: login.defs.5.xml,v 1.8 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login.defs</refentrytitle>
     <manvolnum>5</manvolnum>
   </refmeta>
   <refnamediv id='name'>
-    <refname>/etc/login.defs</refname>
+    <refname>login.defs</refname>
     <refpurpose>shadow password suite configuration</refpurpose>
   </refnamediv>
   
@@ -35,7 +35,7 @@
       other than these will be given a &ldquo;no&rdquo; value. Numbers (both
       regular and long) may be either decimal values, octal values (precede
       the value with &ldquo;0&rdquo;) or hexadecimal values (precede the
-      value with &ldquo;0x&rdquo;).  The maximum value of the regular and
+      value with &ldquo;0x&rdquo;). The maximum value of the regular and
       long numeric parameters is machine-dependent.
     </para>
     
@@ -46,7 +46,7 @@
         <term>CHFN_AUTH (boolean)</term>
         <listitem>
           <para> If <emphasis remap='I'>yes</emphasis>, the
-            <command>chfn</coamand> and <command>chsh</coamand> programs
+            <command>chfn</command> and <command>chsh</command> programs
             will require authentication before making any changes, unless
             run by the superuser.
           </para>
@@ -85,8 +85,8 @@
         <listitem>
           <para>
             Range of group IDs to choose from for the
-            <command>useradd</coamand> and
-            <command>groupadd</coamand>programs.
+            <command>useradd</command> and
+            <command>groupadd</command>programs.
           </para>
         </listitem>
       </varlistentry>
@@ -142,7 +142,7 @@
         <listitem>
           <para>
             Range of user IDs to choose from for the
-            <command>useradd</coamand> program.
+            <command>useradd</command> program.
           </para>
         </listitem>
       </varlistentry>
@@ -255,8 +255,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

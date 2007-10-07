@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.36 2005/04/15 21:23:49 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.39 2005/06/20 09:36:27 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -50,9 +50,7 @@ RCSID (PKG_VER "$Id: passwd.c,v 1.36 2005/04/15 21:23:49 kloczek Exp $")
 #endif
 #include <pwd.h>
 #include "pwauth.h"
-#ifdef SHADOWPWD
 #include "shadowio.h"
-#endif
 #include "pwio.h"
 #include "nscd.h"
 #include "getdef.h"
@@ -79,14 +77,12 @@ static char *Prog;		/* Program name */
 static int amroot;		/* The real UID was 0 */
 
 static int
-#ifdef SHADOWPWD
  eflg = 0,			/* -e - force password change */
     iflg = 0,			/* -i - set inactive days */
     kflg = 0,			/* -k - change only if expired */
     nflg = 0,			/* -n - set minimum days */
     wflg = 0,			/* -w - set warning days */
     xflg = 0,			/* -x - set maximum days */
-#endif
     aflg = 0,			/* -a - show status for all users */
     dflg = 0,			/* -d - delete password */
     lflg = 0,			/* -l - lock account */
@@ -100,12 +96,10 @@ static int
  */
 static int anyflag = 0;
 
-#ifdef SHADOWPWD
 static long age_min = 0;	/* Minimum days before change   */
 static long age_max = 0;	/* Maximum days until change     */
 static long warn = 0;		/* Warning days before change   */
 static long inact = 0;		/* Days without change before locked */
-#endif
 
 static int do_update_age = 0;
 
@@ -125,11 +119,7 @@ static void usage (int);
 static int reuse (const char *, const struct passwd *);
 static int new_password (const struct passwd *);
 
-#ifdef SHADOWPWD
 static void check_password (const struct passwd *, const struct spwd *);
-#else				/* !SHADOWPWD */
-static void check_password (const struct passwd *);
-#endif				/* !SHADOWPWD */
 static char *insert_crypt_passwd (const char *, const char *);
 #endif				/* !USE_PAM */
 static char *date_to_str (time_t);
@@ -140,9 +130,7 @@ static void oom (void);
 static char *update_crypt_pw (char *);
 static void update_noshadow (void);
 
-#ifdef SHADOWPWD
 static void update_shadow (void);
-#endif
 static long getnumber (const char *);
 
 /*
@@ -314,21 +302,12 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
  *	password for the given user.
  */
 
-#ifdef SHADOWPWD
 static void check_password (const struct passwd *pw, const struct spwd *sp)
 {
-#else
-static void check_password (const struct passwd *pw)
-{
-#endif
 	time_t now, last, ok;
 	int exp_status;
 
-#ifdef SHADOWPWD
 	exp_status = isexpired (pw, sp);
-#else
-	exp_status = isexpired (pw);
-#endif
 
 	/*
 	 * If not expired and the "change only if expired" option (idea from
@@ -346,7 +325,6 @@ static void check_password (const struct passwd *pw)
 
 	time (&now);
 
-#ifdef SHADOWPWD
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
 	 * locked may not be changed. Passwords where min > max may not be
@@ -371,19 +349,6 @@ static void check_password (const struct passwd *pw)
 	last = sp->sp_lstchg * SCALE;
 	ok = last + (sp->sp_min > 0 ? sp->sp_min * SCALE : 0);
 
-#else				/* !SHADOWPWD */
-	if (pw->pw_passwd[0] == '!' || exp_status > 1) {
-		fprintf (stderr,
-			 _("The password for %s cannot be changed.\n"),
-			 pw->pw_name);
-		SYSLOG ((LOG_WARN, "password locked for `%s'", pw->pw_name));
-		closelog ();
-		exit (E_NOPERM);
-	}
-
-	last = 0;
-	ok = 0;
-#endif				/* !SHADOWPWD */
 	if (now < ok) {
 		fprintf (stderr,
 			 _
@@ -435,11 +400,8 @@ static const char *pw_status (const char *pass)
 
 static void print_status (const struct passwd *pw)
 {
-#ifdef SHADOWPWD
 	struct spwd *sp;
-#endif
 
-#ifdef SHADOWPWD
 	sp = getspnam (pw->pw_name);
 	if (sp) {
 		printf ("%s %s %s %ld %ld %ld %ld\n",
@@ -450,9 +412,7 @@ static void print_status (const struct passwd *pw)
 			(sp->sp_max * SCALE) / DAY,
 			(sp->sp_warn * SCALE) / DAY,
 			(sp->sp_inact * SCALE) / DAY);
-	} else
-#endif
-	{
+	} else {
 		printf ("%s %s\n", pw->pw_name, pw_status (pw->pw_passwd));
 	}
 }
@@ -461,9 +421,7 @@ static void print_status (const struct passwd *pw)
 static void fail_exit (int status)
 {
 	pw_unlock ();
-#ifdef SHADOWPWD
 	spw_unlock ();
-#endif
 	exit (status);
 }
 
@@ -537,7 +495,6 @@ static void update_noshadow (void)
 	pw_unlock ();
 }
 
-#ifdef SHADOWPWD
 static void update_shadow (void)
 {
 	const struct spwd *sp;
@@ -597,7 +554,6 @@ static void update_shadow (void)
 	}
 	spw_unlock ();
 }
-#endif				/* SHADOWPWD */
 
 static long getnumber (const char *str)
 {
@@ -647,9 +603,7 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 	char *cp;		/* Miscellaneous character pointing  */
 
-#ifdef SHADOWPWD
 	const struct spwd *sp;	/* Shadow file entry for user   */
-#endif
 #endif
 
 	setlocale (LC_ALL, "");
@@ -715,16 +669,9 @@ int main (int argc, char **argv)
 	 * be checked for any commands which are restricted to root only.
 	 */
 
-#ifdef SHADOWPWD
-#define FLAGS "adlqr:uSekn:x:i:w:"
-#else
-# define FLAGS "adlqr:uS"
-#endif
 
-	while ((flag = getopt (argc, argv, FLAGS)) != EOF) {
-#undef FLAGS
+	while ((flag = getopt (argc, argv, "adlqr:uSekn:x:i:w:")) != EOF) {
 		switch (flag) {
-#ifdef	SHADOWPWD
 		case 'x':
 			age_max = getnumber (optarg);
 			xflg++;
@@ -755,7 +702,6 @@ int main (int argc, char **argv)
 			/* change only if expired, like Linux-PAM passwd -k. */
 			kflg++;	/* ok for users */
 			break;
-#endif				/* SHADOWPWD */
 		case 'a':
 			aflg++;
 			break;
@@ -820,7 +766,7 @@ int main (int argc, char **argv)
 		if (anyflag || !Sflg || (optind < argc))
 			usage (E_USAGE);
 		if (!amroot) {
-			fprintf (stderr, _("%s: permission denied.\n"), Prog);
+			fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 			exit (E_NOPERM);
 		}
 		setpwent ();
@@ -856,7 +802,7 @@ int main (int argc, char **argv)
 		usage (E_USAGE);
 
 	if (anyflag && !amroot) {
-		fprintf (stderr, _("%s: permission denied.\n"), Prog);
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
 
@@ -895,7 +841,6 @@ int main (int argc, char **argv)
 		exit (E_SUCCESS);
 	}
 #ifndef USE_PAM
-#ifdef SHADOWPWD
 	/*
 	 * The user name is valid, so let's get the shadow file entry.
 	 */
@@ -905,9 +850,6 @@ int main (int argc, char **argv)
 		sp = pwd_to_spwd (pw);
 
 	cp = sp->sp_pwdp;
-#else
-	cp = pw->pw_passwd;
-#endif
 
 	/*
 	 * If there are no other flags, just change the password.
@@ -921,11 +863,7 @@ int main (int argc, char **argv)
 		 * Otherwise, go ahead and set a new password.
 		 */
 
-#ifdef SHADOWPWD
 		check_password (pw, sp);
-#else
-		check_password (pw);
-#endif
 
 		/*
 		 * Let the user know whose password is being changed.
@@ -961,25 +899,21 @@ int main (int argc, char **argv)
 		do_pam_passwd (name, qflg, kflg);
 		exit (E_SUCCESS);
 	}
-#endif				/* SHADOWPWD */
+#endif				/* USE_PAM */
 	if (setuid (0)) {
 		fprintf (stderr, _("Cannot change ID to root.\n"));
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
 		exit (E_NOPERM);
 	}
-#ifdef SHADOWPWD
 	if (spw_file_present ())
 		update_shadow ();
 	else
-#endif
 		update_noshadow ();
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-#ifdef SHADOWPWD
 	nscd_flush_cache ("shadow");
-#endif
 
 	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name, myname));
 	closelog ();

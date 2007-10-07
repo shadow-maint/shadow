@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='lastlog.8'>
-  <!-- $Id: lastlog.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: lastlog.8.xml,v 1.6 2005/06/14 16:54:20 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>lastlog</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -23,8 +23,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>lastlog</command> formats and prints the contents of the last
+    <para><command>lastlog</command> formats and prints the contents of the last
       login log <filename>/var/log/lastlog</filename> file. The <emphasis
       remap='B'> login-name</emphasis>, <emphasis remap='B'>port</emphasis>,
       and <emphasis remap='B'>last login time</emphasis> will be printed.
@@ -54,28 +53,24 @@
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-t</option>, <option>--time</option> <replaceable>
-            DAYS
-          </replaceable>
+          <option>-t</option>, <option>--time</option>
+	  <replaceable>DAYS</replaceable>
         </term>
         <listitem>
           <para>
-            Print the lastlog records more recent than <emphasis remap='I'>
-              DAYS
-            </emphasis>
-            .
+            Print the lastlog records more recent than
+	    <emphasis remap='I'>DAYS</emphasis>.
           </para>
         </listitem>
       </varlistentry>
       <varlistentry>
         <term>
-          <option>-u</option>, <option>--user</option> <replaceable>
-            LOGIN
-          </replaceable>
+          <option>-u</option>, <option>--user</option>
+	  <replaceable>LOGIN</replaceable>
         </term>
         <listitem>
-          <para> Print the lastlog record for user with specified <emphasis
-            remap='I'> LOGIN</emphasis>only.
+          <para>Print the lastlog record for user with specified
+	    <emphasis remap='I'>LOGIN</emphasis> only.
           </para>
         </listitem>
       </varlistentry>
@@ -86,14 +81,14 @@
           The <option>-t</option> flag overrides the use of <option>-u</option>.
         </term>
         <listitem>
-          <para></para> <!-- FIXME: blank list item -->
+          <para></para>
         </listitem>
       </varlistentry>
     </variablelist>
     
-    <para> If the user has never logged in the message <emphasis
-      remap='B'>"**Never logged in**" </emphasis> will be displayed instead
-      of the port and time.
+    <para>If the user has never logged in the message <emphasis remap='B'>
+      **Never logged in**</emphasis> will be displayed instead of the port and
+      time.
     </para>
   </refsect1>
   
@@ -118,7 +113,6 @@
   <refsect1 id='authors'>
     <title>AUTHORS</title>
     <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-      <!-- .br -->
       Phillip Street
     </para>
   </refsect1>

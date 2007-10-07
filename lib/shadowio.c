@@ -1,10 +1,8 @@
 
 #include <config.h>
 
-#ifdef SHADOWPWD
-
 #include "rcsid.h"
-RCSID ("$Id: shadowio.c,v 1.14 2005/03/31 05:14:49 kloczek Exp $")
+RCSID ("$Id: shadowio.c,v 1.15 2005/05/25 18:20:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #ifdef HAVE_SHADOW_H
@@ -157,4 +155,3 @@ int spw_sort ()
 
 	return commonio_sort_wrt (&shadow_db, __pw_get_db ());
 }
-#endif

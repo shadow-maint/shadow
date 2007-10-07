@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!-- $Id: pwck.8.xml,v 1.8 2005/06/16 20:09:08 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -14,7 +14,8 @@
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>pwck</command>    <arg choice='opt'>-sr </arg>
+      <command>pwck</command>
+      <arg choice='opt'>-sr </arg>
       <arg choice='opt'>
         <arg choice='plain'>
           <replaceable>passwd</replaceable>
@@ -28,31 +29,35 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>pwck</command> verifies the integrity of the system
-      authentication information.  All entries in the
+    <para><command>pwck</command> verifies the integrity of the system
+      authentication information. All entries in the
       <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
       are checked to see that the entry has the proper format and valid data
-      in each field.  The user is prompted to delete entries that are
+      in each field. The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
     </para>
     
-    <para>Checks are made to verify that each entry has</para>
-    
-    <!-- .in +.5i -->
-    <para>- the correct number of fields
-      <!-- .br -->
-      - a unique user name
-      <!-- .br -->
-      - a valid user and group identifier
-      <!-- .br -->
-      - a valid primary group
-      <!-- .br -->
-      - a valid home directory
-      <!-- .br -->
-      - a valid login shell
-    </para>
-    <!-- .in \-.5i -->
+    <para>Checks are made to verify that each entry has:</para>
+    <itemizedlist mark='bullet'>
+      <listitem>
+        <para>the correct number of fields</para>
+      </listitem>
+      <listitem>
+        <para>a unique user name</para>
+      </listitem>
+      <listitem>
+        <para>a valid user and group identifier</para>
+      </listitem>
+      <listitem>
+        <para>a valid primary group</para>
+      </listitem>
+      <listitem>
+        <para> a valid home directory</para>
+      </listitem>
+      <listitem>
+        <para>a valid login shell</para>
+      </listitem>
+    </itemizedlist>
     
     <para>The checks for correct number of fields and unique user name are
       fatal. If the entry has the wrong number of fields, the user will be
@@ -60,7 +65,7 @@
       affirmatively, all further checks are bypassed. An entry with a
       duplicated user name is prompted for deletion, but the remaining
       checks will still be made. All other errors are warning and the user
-      is encouraged to run the <command>usermod</coamand> command to correct
+      is encouraged to run the <command>usermod</command> command to correct
       the error.
     </para>
     
@@ -109,8 +114,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
@@ -127,29 +131,35 @@
 
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>pwck</command> command exits with the
-          following values:
-        </term>
-        <listitem>
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>1</literal>	- invalid command syntax
-            <!-- .br -->
-            <literal>2</literal>	- one or more bad password entries
-            <!-- .br -->
-            <literal>3</literal>	- can't open password files
-            <!-- .br -->
-            <literal>4</literal>	- can't lock password files
-            <!-- .br -->
-            <literal>5</literal>	- can't update password files
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>pwck</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+          <listitem>success</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>1</replaceable></term>
+          <listitem>invalid command syntax</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+          <listitem>one or more bad password entries</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>3</replaceable></term>
+          <listitem>can't open password files</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>4</replaceable></term>
+          <listitem>can't lock password files</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>5</replaceable></term>
+          <listitem>can't update password files</listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='author'>

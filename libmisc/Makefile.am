@@ -39,7 +39,6 @@ libmisc_a_SOURCES = \
 	rlogin.c \
 	salt.c \
 	setugid.c \
-	setup.c \
 	setupenv.c \
 	shell.c \
 	strtoday.c \

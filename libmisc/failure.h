@@ -1,10 +1,14 @@
-/* $Id: failure.h,v 1.3 2005/03/31 05:14:50 kloczek Exp $ */
+/* $Id: failure.h,v 1.4 2005/06/10 18:35:17 kloczek Exp $ */
 #ifndef _FAILURE_H_
 #define _FAILURE_H_
 
 #include "defines.h"
 #include "faillog.h"
+#ifdef HAVE_UTMPX_H
+#include <utmpx.h>
+#else
 #include <utmp.h>
+#endif
 
 /*
  * failure - make failure entry
@@ -38,6 +42,10 @@ extern void failprint (const struct faillog *);
  *	failtmp updates the (struct utmp) formatted failure log which
  *	maintains a record of all login failures.
  */
+#ifdef HAVE_UTMPX_H
+extern void failtmp (const struct utmpx *);
+#else
 extern void failtmp (const struct utmp *);
+#endif
 
 #endif

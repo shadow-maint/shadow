@@ -37,7 +37,7 @@
 #ifndef USE_PAM
 
 #include "rcsid.h"
-RCSID ("$Id: limits.c,v 1.16 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: limits.c,v 1.18 2005/06/20 10:02:02 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -357,7 +357,7 @@ static void setup_usergroups (const struct passwd *info)
 	mode_t oldmask;
 
 /*
- *	if not root, and uid == gid, and username is the same as primary
+ *	if not root, and UID == GID, and username is the same as primary
  *	group name, set umask group bits to be the same as owner bits
  *	(examples: 022 -> 002, 077 -> 007).
  */

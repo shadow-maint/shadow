@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.26 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupmod.c,v 1.28 2005/06/20 09:57:51 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -178,7 +178,6 @@ static void grp_update (void)
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		exit (E_GRP_UPDATE);
 	}
-
 #ifdef	SHADOWGRP
 	/*
 	 * Make sure there was a shadow entry to begin with. Skip down to
@@ -209,7 +208,7 @@ static void grp_update (void)
 			 group_name, group_newname));
 
 	if (gflg)
-		SYSLOG ((LOG_INFO, "change gid for `%s' to %u",
+		SYSLOG ((LOG_INFO, "change GID for `%s' to %u",
 			 nflg ? group_newname : group_name, group_newid));
 }
 
@@ -239,7 +238,7 @@ static void check_new_gid (void)
 	 * Tell the user what they did wrong.
 	 */
 
-	fprintf (stderr, _("%s: %u is not a unique gid\n"), Prog, group_newid);
+	fprintf (stderr, _("%s: %u is not a unique GID\n"), Prog, group_newid);
 	exit (E_GID_IN_USE);
 }
 

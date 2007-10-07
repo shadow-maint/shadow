@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: expiry.c,v 1.13 2005/03/31 05:14:54 kloczek Exp $")
+RCSID (PKG_VER "$Id: expiry.c,v 1.14 2005/05/25 18:20:25 kloczek Exp $")
 #include <sys/types.h>
 #include <signal.h>
 #include <stdio.h>
@@ -71,9 +71,7 @@ int main (int argc, char **argv)
 {
 	struct passwd *pwd;
 
-#ifdef	SHADOWPWD
 	struct spwd *spwd;
-#endif
 	char *Prog = argv[0];
 
 	sanitize_env ();
@@ -122,9 +120,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: unknown user\n"), Prog);
 		exit (10);
 	}
-#ifdef	SHADOWPWD
 	spwd = getspnam (pwd->pw_name);
-#endif
 
 	/*
 	 * If checking accounts, use agecheck() function.
@@ -136,21 +132,13 @@ int main (int argc, char **argv)
 		 * Print out number of days until expiration.
 		 */
 
-#ifdef	SHADOWPWD
 		agecheck (pwd, spwd);
-#else
-		agecheck (pwd);
-#endif
 
 		/*
 		 * Exit with status indicating state of account.
 		 */
 
-#ifdef	SHADOWPWD
 		exit (isexpired (pwd, spwd));
-#else
-		exit (isexpired (pwd));
-#endif
 	}
 
 	/*
@@ -165,11 +153,7 @@ int main (int argc, char **argv)
 		 * all unless the account is unexpired.
 		 */
 
-#ifdef	SHADOWPWD
 		expire (pwd, spwd);
-#else
-		expire (pwd);
-#endif
 		exit (0);
 	}
 

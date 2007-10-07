@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.37 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.41 2005/06/20 10:17:09 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -67,18 +67,14 @@ static int fflg = 0, rflg = 0;
 
 #include "groupio.h"
 #include "pwio.h"
-
-#ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
 
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #endif
 
-#ifdef SHADOWPWD
 static int is_shadow_pwd;
-#endif
+
 #ifdef SHADOWGRP
 static int is_shadow_grp;
 #endif
@@ -126,6 +122,7 @@ static void update_groups (void)
 	struct group *ngrp;
 
 #ifdef	SHADOWGRP
+	int deleted_user_group = 0;
 	const struct sgrp *sgrp;
 	struct sgrp *nsgrp;
 #endif				/* SHADOWGRP */
@@ -178,6 +175,10 @@ static void update_groups (void)
 
 		gr_remove (grp->gr_name);
 
+#ifdef SHADOWGRP
+		deleted_user_group = 1;
+#endif
+
 		SYSLOG ((LOG_INFO, "removed group `%s' owned by `%s'\n",
 			 grp->gr_name, user_name));
 	}
@@ -222,6 +223,9 @@ static void update_groups (void)
 		SYSLOG ((LOG_INFO, "delete `%s' from shadow group `%s'\n",
 			 user_name, nsgrp->sg_name));
 	}
+
+	if (deleted_user_group)
+		sgr_remove (user_name);
 #endif				/* SHADOWGRP */
 }
 
@@ -236,11 +240,9 @@ static void close_files (void)
 {
 	if (!pw_close ())
 		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_close ())
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow password file\n"), Prog);
-#endif
 	if (!gr_close ())
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 
@@ -253,10 +255,8 @@ static void close_files (void)
 	if (is_shadow_grp)
 		(void) sgr_unlock ();
 #endif
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		(void) spw_unlock ();
-#endif
 	(void) pw_unlock ();
 }
 
@@ -268,10 +268,8 @@ static void fail_exit (int code)
 {
 	(void) pw_unlock ();
 	(void) gr_unlock ();
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		spw_unlock ();
-#endif
 #ifdef	SHADOWGRP
 	if (is_shadow_grp)
 		sgr_unlock ();
@@ -295,7 +293,6 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow_pwd && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
@@ -306,7 +303,6 @@ static void open_files (void)
 			 _("%s: cannot open shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-#endif
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -341,11 +337,9 @@ static void update_user (void)
 	if (!pw_remove (user_name))
 		fprintf (stderr,
 			 _("%s: error deleting password entry\n"), Prog);
-#ifdef SHADOWPWD
 	if (is_shadow_pwd && !spw_remove (user_name))
 		fprintf (stderr,
 			 _("%s: error deleting shadow password entry\n"), Prog);
-#endif
 	SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
 }
 
@@ -354,7 +348,7 @@ static void update_user (void)
  *
  * XXX - should probably check if there are any processes owned
  * by this user. Also, I think this check should be in usermod
- * as well (at least when changing username or uid).  --marekm
+ * as well (at least when changing username or UID).  --marekm
  */
 
 static void user_busy (const char *name, uid_t uid)
@@ -577,9 +571,7 @@ int main (int argc, char **argv)
 
 	OPENLOG ("userdel");
 
-#ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present ();
-#endif
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
@@ -630,9 +622,7 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-#ifdef SHADOWPWD
 	nscd_flush_cache ("shadow");
-#endif
 
 	if (rflg)
 		remove_mailbox ();

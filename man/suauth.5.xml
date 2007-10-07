@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='suauth.5'>
-  <!-- $Id: suauth.5.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: suauth.5.xml,v 1.6 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>suauth</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -177,8 +177,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>
     </para>

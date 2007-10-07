@@ -30,15 +30,14 @@
 #include <config.h>
 
 /* Newer versions of Linux libc already have shadow support.  */
-#if defined(SHADOWPWD) && !defined(HAVE_GETSPNAM)	/*{ */
+#ifndef HAVE_GETSPNAM
 
 #include "rcsid.h"
-RCSID ("$Id: shadow.c,v 1.9 2005/04/06 04:26:05 kloczek Exp $")
+RCSID ("$Id: shadow.c,v 1.11 2005/05/25 19:31:50 kloczek Exp $")
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
-
 #ifdef	USE_NIS
 static int nis_used;
 static int nis_ignore;
@@ -498,4 +497,4 @@ struct spwd *getspnam (const char *name)
 }
 #else
 extern int errno;		/* warning: ANSI C forbids an empty source file */
-#endif				/*} */
+#endif

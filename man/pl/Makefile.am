@@ -23,7 +23,6 @@ man_MANS = \
 	login.access.5 \
 	login.defs.5 \
 	logoutd.8 \
-	mkpasswd.8 \
 	newgrp.1 \
 	newusers.8 \
 	passwd.1 \

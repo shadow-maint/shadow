@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.5 2005/04/28 13:57:45 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.9 2005/06/16 16:01:21 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -21,9 +21,8 @@
         <arg choice='opt'>-m </arg>
       </arg>
       <arg choice='opt'>-e <replaceable>expire_date</replaceable></arg>
-      <arg choice='opt'>-f <replaceable>inactive_time</replaceable></arg>
+      <arg choice='opt'>-f <replaceable>inactive_days</replaceable></arg>
       <arg choice='opt'>-g <replaceable>initial_group</replaceable></arg>
-      <sbr/>
       <arg choice='opt'>
         <arg choice='plain'>-G <replaceable>group1</replaceable></arg>
         <arg choice='opt'>
@@ -32,7 +31,6 @@
           <arg choice='opt'><replaceable>groupN</replaceable></arg>
         </arg>
       </arg>
-      <sbr/>
       <arg choice='opt'>-l <replaceable>login_name</replaceable></arg>
       <arg choice='opt'>-p <replaceable>passwd</replaceable></arg>
       <arg choice='opt'>-s <replaceable>shell</replaceable></arg>
@@ -40,9 +38,9 @@
         <arg choice='plain'>-u <replaceable>uid</replaceable></arg>
         <arg choice='opt'>-o </arg>
       </arg>
-      <sbr/>
       <group choice='opt'>
-        <arg choice='plain'>-L </arg><arg choice='plain'>-U </arg>
+        <arg choice='plain'>-L </arg>
+	<arg choice='plain'>-U </arg>
       </group>
       <arg choice='plain'><replaceable>login</replaceable></arg>
     </cmdsynopsis>
@@ -93,7 +91,7 @@
           <option>-e</option> <replaceable>expire_date</replaceable>
         </term>
         <listitem>
-          <para>The date on which the user account will be disabled.  The
+          <para>The date on which the user account will be disabled. The
             date is specified in the format <emphasis remap='I'>YYYY-MM-DD
             </emphasis>.
           </para>
@@ -148,7 +146,7 @@
           <para>
             The name of the user will be changed from <emphasis
             remap='I'>login </emphasis> to <emphasis
-            remap='I'>login_name</emphasis>.  Nothing else is changed. In
+            remap='I'>login_name</emphasis>. Nothing else is changed. In
             particular, the user's home directory name should probably be
             changed to reflect the new login name.
           </para>
@@ -231,8 +229,7 @@
 
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>
-      <command>usermod</command> will not allow you to change the name of a
+    <para><command>usermod</command> will not allow you to change the name of a
       user who is logged in. You must make certain that the named user is
       not executing any processes when this command is being executed if the
       user's numerical user ID is being changed. You must change the owner
@@ -262,8 +259,7 @@
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

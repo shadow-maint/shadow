@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.7 2005/06/16 18:58:43 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>USERDEL</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -71,38 +71,44 @@
   
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>userdel</command> command exits with the following
-          values:
-        </term>
-        <listitem>
-          <!-- .br -->
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>1</literal>	- can't update password file
-            <!-- .br -->
-            <literal>2</literal>	- invalid command syntax
-            <!-- .br -->
-            <literal>6</literal>	- specified user doesn't exist
-            <!-- .br -->
-            <literal>8</literal>	- user currently logged in
-            <!-- .br -->
-            <literal>10</literal>	- can't update group file
-            <!-- .br -->
-            <literal>12</literal>	- can't remove home directory
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>userdel</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+	  <listitem>success</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>1</replaceable></term>
+	  <listitem>can't update password file</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+	  <listitem>invalid command syntax</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>6</replaceable></term>
+	  <listitem>specified user doesn't exist</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>8</replaceable></term>
+	  <listitem>user currently logged in</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>10</replaceable></term>
+	  <listitem>can't update group file</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>12</replaceable></term>
+	  <listitem>can't remove home directory</listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
-    <para>
-      <command>userdel</command> will not allow you to remove an account if
+    <para><command>userdel</command> will not allow you to remove an account if
       the user is currently logged in. You must kill any running processes
       which belong to an account that you are deleting. You may not remove
       any NIS attributes on an NIS client. This must be performed on the NIS
@@ -112,8 +118,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

@@ -1,5 +1,6 @@
 
-EXTRA_DIST = .indent.pro
+EXTRA_DIST = \
+	.indent.pro
 
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
@@ -30,7 +31,6 @@ usbin_PROGRAMS = \
 	grpconv \
 	grpunconv \
 	logoutd \
-	mkpasswd \
 	newusers \
 	pwck \
 	pwconv \

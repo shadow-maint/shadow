@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
                    "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chfn.1'>
-  <!-- $Id: chfn.1.xml,v 1.8 2005/04/27 16:19:48 kloczek Exp $ -->
+  <!-- $Id: chfn.1.xml,v 1.11 2005/06/14 20:18:17 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chfn</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -30,12 +30,14 @@
     <para><command>chfn</command> changes user fullname, office number,
       office extension, and home phone number information for a user's
       account. This information is typically printed by <citerefentry>
-        <refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
+      <refentrytitle>finger</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> and similar programs. A normal user may only change
-      the fields for her own account, the super user may change the fields
-      for any account. Also, only the super user may use the
-      <option>-o</option> option to change the undefined portions of the
-      GECOS field.
+      may only change the fields for her own account, subject to the
+      restrictions in <filename>/etc/login.defs</filename>. (The default
+      configuration is to prevent users from changing their fullname.) The
+      super user may change any field for any account. Additionally, only
+      the super user may use the <option>-o</option> option to change the
+      undefined portions of the GECOS field.
     </para>
     
     <para>The only restriction placed on the contents of the fields is that
@@ -62,13 +64,16 @@
         <term><filename>/etc/passwd</filename></term>
         <listitem>user account information</listitem>
       </varlistentry>
+      <varlistentry>
+        <term><filename>/etc/login.defs</filename></term>
+        <listitem>runtime configuration</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>
     </para>

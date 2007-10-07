@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupdel.8'>
-  <!-- $Id: groupdel.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: groupdel.8.xml,v 1.7 2005/06/16 16:26:19 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupdel</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -53,37 +53,35 @@
       </varlistentry>
     </variablelist>
   </refsect1>
-  
+
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>groupdel</command> command exits with the
-          following values:
-        </term>
-        <listitem>
-          <!-- .br -->
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>2</literal>	- invalid command syntax
-            <!-- .br -->
-            <literal>6</literal>	- specified group doesn't exist
-            <!-- .br -->
-            <literal>8</literal>	- can't remove user's primary
-            group                        <!-- .br -->
-            <literal>10</literal>	- can't update group file
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>groupdel</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+	  <listitem>success</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+	  <listitem>invalid command syntax</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>8</replaceable></term>
+	  <listitem>can't remove user's primary group</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>10</replaceable></term>
+	  <listitem>can't update group file</listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

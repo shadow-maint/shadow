@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='vipw.8'>
-  <!--  $Id: vipw.8.xml,v 1.6 2005/04/28 13:54:06 kloczek Exp $  -->
+  <!--  $Id: vipw.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $  -->
   <refentryinfo>
     <date>26 Sep 1997</date>
   </refentryinfo>
@@ -30,8 +30,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>vipw</command> and <command>vigr</command> will edit the
+    <para><command>vipw</command> and <command>vigr</command> will edit the
       files <filename>/etc/passwd</filename> and
       <filename>/etc/group</filename>, respectively. With the
       <option>-s</option> flag, they will edit the shadow versions of those
@@ -48,8 +47,7 @@
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>

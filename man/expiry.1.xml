@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='expiry.1'>
-  <!-- $Id: expiry.1.xml,v 1.6 2005/04/27 16:25:27 kloczek Exp $ -->
+  <!-- $Id: expiry.1.xml,v 1.8 2005/06/14 20:18:17 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>expiry</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -23,8 +23,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>expiry</command> checks (<option>-c</option>) the current
+    <para><command>expiry</command> checks (<option>-c</option>) the current
       password expiration and forces (<option>-f</option>) changes when
       required. It is callable as a normal user command.
     </para>
@@ -46,8 +45,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>

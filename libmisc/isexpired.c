@@ -41,7 +41,7 @@
 #include <time.h>
 #include "rcsid.h"
 
-RCSID ("$Id: isexpired.c,v 1.12 2005/03/31 05:14:50 kloczek Exp $")
+RCSID ("$Id: isexpired.c,v 1.14 2005/05/25 19:31:50 kloczek Exp $")
 
 /*
  * isexpired - determine if account is expired yet
@@ -49,9 +49,7 @@ RCSID ("$Id: isexpired.c,v 1.12 2005/03/31 05:14:50 kloczek Exp $")
  *	isexpired calculates the expiration date based on the
  *	password expiration criteria.
  */
-     /*ARGSUSED*/
-#ifdef	SHADOWPWD
-int isexpired (const struct passwd *pw, const struct spwd *sp)
+ /*ARGSUSED*/ int isexpired (const struct passwd *pw, const struct spwd *sp)
 {
 	long now;
 
@@ -104,4 +102,3 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 		return 1;
 	return 0;
 }
-#endif				/* SHADOWPWD */

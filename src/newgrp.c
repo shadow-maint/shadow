@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.28 2005/05/19 11:28:27 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.32 2005/06/20 10:17:08 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -82,9 +82,8 @@ int main (int argc, char **argv)
 	struct passwd *pwd;
 	struct group *grp;
 
-#ifdef SHADOWPWD
 	struct spwd *spwd;
-#endif
+
 #ifdef SHADOWGRP
 	struct sgrp *sgrp;
 #endif
@@ -128,8 +127,8 @@ int main (int argc, char **argv)
 
 	pwd = get_my_pwent ();
 	if (!pwd) {
-		fprintf (stderr, _("unknown uid: %u\n"), getuid ());
-		SYSLOG ((LOG_WARN, "unknown uid %u", getuid ()));
+		fprintf (stderr, _("unknown UID: %u\n"), getuid ());
+		SYSLOG ((LOG_WARN, "unknown UID %u", getuid ()));
 		closelog ();
 		exit (1);
 	}
@@ -210,9 +209,9 @@ int main (int argc, char **argv)
 			 */
 
 			if (!(grp = getgrgid (pwd->pw_gid))) {
-				fprintf (stderr, _("unknown gid: %lu\n"),
+				fprintf (stderr, _("unknown GID: %lu\n"),
 					 (unsigned long) pwd->pw_gid);
-				SYSLOG ((LOG_CRIT, "unknown gid: %lu",
+				SYSLOG ((LOG_CRIT, "unknown GID: %lu",
 					 (unsigned long) pwd->pw_gid));
 				goto failure;
 			} else
@@ -252,14 +251,14 @@ int main (int argc, char **argv)
 	 * set to the value from her password file entry.  
 	 *
 	 * If run as newgrp, or as sg with no command, this process exec's
-	 * an interactive subshell with the effective gid of the new group. 
+	 * an interactive subshell with the effective GID of the new group. 
 	 * If run as sg with a command, that command is exec'ed in this
 	 * subshell. When this process terminates, either because the user
 	 * exits, or the command completes, the parent of this process
-	 * resumes with the current gid.
+	 * resumes with the current GID.
 	 *
 	 * If a group is explicitly specified on the command line, the
-	 * interactive shell or command is run with that effective gid. 
+	 * interactive shell or command is run with that effective GID. 
 	 * Access will be denied if no entry for that group can be found in
 	 * /etc/group. If the current user name appears in the members list
 	 * for that group, access will be granted immediately; if not, the
@@ -267,9 +266,9 @@ int main (int argc, char **argv)
 	 * password response is incorrect, if the specified group does not
 	 * have a password, or if that group has been locked by gpasswd -R,
 	 * access will be denied. This is true even if the group specified
-	 * has the user's login gid (as shown in /etc/passwd). If no group
+	 * has the user's login GID (as shown in /etc/passwd). If no group
 	 * is explicitly specified on the command line, the effect is
-	 * exactly the same as if a group name matching the user's login gid
+	 * exactly the same as if a group name matching the user's login GID
 	 * had been explicitly specified. Root, however, is never
 	 * challenged for passwords, and is always allowed access.
 	 *
@@ -313,10 +312,8 @@ int main (int argc, char **argv)
 	 * group password.
 	 */
 
-#ifdef	SHADOWPWD
 	if ((spwd = getspnam (name)))
 		pwd->pw_passwd = spwd->sp_pwdp;
-#endif
 
 	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
 		needspasswd = 1;
@@ -480,8 +477,8 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * Set the effective gid to the new group id and the effective uid
-	 * to the real uid. For root, this also sets the real gid to the
+	 * Set the effective GID to the new group id and the effective UID
+	 * to the real UID. For root, this also sets the real GID to the
 	 * new group id.
 	 */
 
@@ -542,9 +539,7 @@ int main (int argc, char **argv)
 
 	cp = Basename ((char *) prog);
 
-#ifdef	SHADOWPWD
 	endspent ();
-#endif
 #ifdef	SHADOWGRP
 	endsgent ();
 #endif

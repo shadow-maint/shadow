@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.27 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: chfn.c,v 1.28 2005/06/20 09:36:26 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -265,7 +265,7 @@ int main (int argc, char **argv)
 		case 'f':
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"), Prog);
+					 _("%s: Permission denied.\n"), Prog);
 				exit (1);
 			}
 			fflg++;
@@ -274,7 +274,7 @@ int main (int argc, char **argv)
 		case 'r':
 			if (!may_change_field ('r')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"), Prog);
+					 _("%s: Permission denied.\n"), Prog);
 				exit (1);
 			}
 			rflg++;
@@ -283,7 +283,7 @@ int main (int argc, char **argv)
 		case 'w':
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"), Prog);
+					 _("%s: Permission denied.\n"), Prog);
 				exit (1);
 			}
 			wflg++;
@@ -292,7 +292,7 @@ int main (int argc, char **argv)
 		case 'h':
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"), Prog);
+					 _("%s: Permission denied.\n"), Prog);
 				exit (1);
 			}
 			hflg++;
@@ -301,7 +301,7 @@ int main (int argc, char **argv)
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
-					 _("%s: permission denied.\n"), Prog);
+					 _("%s: Permission denied.\n"), Prog);
 				exit (1);
 			}
 			oflg++;
@@ -367,7 +367,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (!amroot && pw->pw_uid != getuid ()) {
-		fprintf (stderr, _("%s: permission denied.\n"), Prog);
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		closelog ();
 		exit (1);
 	}

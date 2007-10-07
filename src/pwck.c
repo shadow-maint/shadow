@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.26 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwck.c,v 1.27 2005/05/25 18:20:25 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -43,11 +43,9 @@ RCSID (PKG_VER "$Id: pwck.c,v 1.26 2005/04/06 04:26:06 kloczek Exp $")
 extern void __pw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__pw_get_head (void);
 
-#ifdef SHADOWPWD
 #include "shadowio.h"
 extern void __spw_del_entry (const struct commonio_entry *);
 extern struct commonio_entry *__spw_get_head (void);
-#endif
 
 /*
  * Exit codes
@@ -67,9 +65,7 @@ extern struct commonio_entry *__spw_get_head (void);
 static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
 
-#ifdef	SHADOWPWD
 static const char *spw_file = SHADOW_FILE;
-#endif
 static int read_only = 0;
 static int quiet = 0;		/* don't report warnings, only errors */
 
@@ -83,12 +79,8 @@ static int yes_or_no (void);
 
 static void usage (void)
 {
-#ifdef SHADOWPWD
 	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
 		 Prog);
-#else
-	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd]\n"), Prog);
-#endif
 	exit (E_USAGE);
 }
 
@@ -132,11 +124,9 @@ int main (int argc, char **argv)
 	struct passwd *pwd;
 	int sort_mode = 0;
 
-#ifdef	SHADOWPWD
 	struct commonio_entry *spe, *tspe;
 	struct spwd *spw;
 	int is_shadow = 0;
-#endif
 
 	/*
 	 * Get my name so that I can use it to report errors.
@@ -180,11 +170,7 @@ int main (int argc, char **argv)
 	 * Make certain we have the right number of arguments
 	 */
 
-#ifdef	SHADOWPWD
 	if (optind != argc && optind + 1 != argc && optind + 2 != argc)
-#else
-	if (optind != argc && optind + 1 != argc)
-#endif
 		usage ();
 
 	/*
@@ -196,14 +182,12 @@ int main (int argc, char **argv)
 		pwd_file = argv[optind];
 		pw_name (pwd_file);
 	}
-#ifdef SHADOWPWD
 	if (optind + 2 == argc) {
 		spw_file = argv[optind + 1];
 		spw_name (spw_file);
 		is_shadow = 1;
 	} else if (optind == argc)
 		is_shadow = spw_file_present ();
-#endif
 
 	/*
 	 * Lock the files if we aren't in "read-only" mode
@@ -218,7 +202,6 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (E_CANTLOCK);
 		}
-#ifdef	SHADOWPWD
 		if (is_shadow && !spw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 				 Prog, spw_file);
@@ -227,7 +210,6 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (E_CANTLOCK);
 		}
-#endif
 	}
 
 	/*
@@ -243,7 +225,6 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (E_CANTOPEN);
 	}
-#ifdef	SHADOWPWD
 	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 			 Prog, spw_file);
@@ -252,14 +233,11 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (E_CANTOPEN);
 	}
-#endif
 
 	if (sort_mode) {
 		pw_sort ();
-#ifdef	SHADOWPWD
 		if (is_shadow)
 			spw_sort ();
-#endif
 		goto write_and_bye;
 	}
 
@@ -419,7 +397,6 @@ int main (int argc, char **argv)
 		}
 	}
 
-#ifdef	SHADOWPWD
 	if (!is_shadow)
 		goto shadow_done;
 
@@ -560,7 +537,6 @@ int main (int argc, char **argv)
 	}
 
       shadow_done:
-#endif
 
 	/*
 	 * All done. If there were no deletions we can just abandon any
@@ -576,7 +552,6 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (E_CANTUPDATE);
 		}
-#ifdef	SHADOWPWD
 		if (is_shadow && !spw_close ()) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
 				 Prog, spw_file);
@@ -584,17 +559,14 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (E_CANTUPDATE);
 		}
-#endif
 	}
 
 	/*
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 
-#ifdef	SHADOWPWD
 	if (is_shadow)
 		spw_unlock ();
-#endif
 	(void) pw_unlock ();
 
 	/*

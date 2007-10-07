@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: groupio.c,v 1.11 2005/03/31 05:14:49 kloczek Exp $")
+RCSID ("$Id: groupio.c,v 1.12 2005/06/20 09:56:37 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
@@ -188,7 +188,7 @@ static int gr_cmp (const void *p1, const void *p2)
 		return 0;
 }
 
-/* Sort entries by gid */
+/* Sort entries by GID */
 int gr_sort ()
 {
 	return commonio_sort (&group_db, gr_cmp);

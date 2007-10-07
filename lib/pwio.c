@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: pwio.c,v 1.14 2005/03/31 05:14:49 kloczek Exp $")
+RCSID ("$Id: pwio.c,v 1.15 2005/06/20 10:01:57 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
@@ -178,7 +178,7 @@ static int pw_cmp (const void *p1, const void *p2)
 		return 0;
 }
 
-/* Sort entries by uid */
+/* Sort entries by UID */
 int pw_sort ()
 {
 	return commonio_sort (&passwd_db, pw_cmp);

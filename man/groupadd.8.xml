@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupadd.8'>
-  <!-- $Id: groupadd.8.xml,v 1.5 2005/04/27 16:44:12 kloczek Exp $ -->
+  <!-- $Id: groupadd.8.xml,v 1.8 2005/06/16 16:18:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupadd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -87,36 +87,40 @@
   
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>groupadd</command> command exits with the
-          following values:
-        </term>
-        <listitem>
-          <!-- .br -->
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>2</literal>	- invalid command syntax
-            <!-- .br -->
-            <literal>3</literal>	- invalid argument to option
-            <!-- .br -->
-            <literal>4</literal>	- gid not unique (when -o not
-            used)                        <!-- .br -->
-            <literal>9</literal>	- group name not unique
-            <!-- .br -->
-            <literal>10</literal>	- can't update group file
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>groupadd</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+          <listitem>success</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+          <listitem>invalid command syntax</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>3</replaceable></term>
+          <listitem>invalid argument to option</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>4</replaceable></term>
+          <listitem>gid not unique (when -o not used)</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>9</replaceable></term>
+          <listitem>group name not unique</listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><replaceable>10</replaceable></term>
+          <listitem>can't update group file</listitem>
+        </varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

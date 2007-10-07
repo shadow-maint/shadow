@@ -8,13 +8,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: salt.c,v 1.7 2005/04/06 00:21:37 kloczek Exp $")
+RCSID ("$Id: salt.c,v 1.8 2005/05/25 19:31:50 kloczek Exp $")
 #include <sys/time.h>
 #include <stdlib.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
 /*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
  * in /etc/login.defs is "yes", the salt string will be prefixed by "$1$"

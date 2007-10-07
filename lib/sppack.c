@@ -28,10 +28,9 @@
  */
 
 #include <config.h>
-#ifdef	SHADOWPWD		/*{ */
 
 #include "rcsid.h"
-RCSID ("$Id: sppack.c,v 1.4 2005/03/31 05:14:49 kloczek Exp $")
+RCSID ("$Id: sppack.c,v 1.5 2005/05/25 18:20:22 kloczek Exp $")
 #include <stdio.h>
 #include <sys/types.h>
 #include "defines.h"
@@ -106,4 +105,3 @@ int spw_unpack (char *buf, int len, struct spwd *spwd)
 
 	return 0;
 }
-#endif				/*} */

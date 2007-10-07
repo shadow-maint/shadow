@@ -38,7 +38,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: id.c,v 1.13 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: id.c,v 1.15 2005/06/20 10:17:08 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -120,15 +120,15 @@ static void usage (void)
 
 	pw = getpwuid (ruid);
 	if (pw)
-		printf ("uid=%u(%s)", ruid, pw->pw_name);
+		printf ("UID=%u(%s)", ruid, pw->pw_name);
 	else
-		printf ("uid=%u", ruid);
+		printf ("UID=%u", ruid);
 
 	gr = getgrgid (rgid);
 	if (gr)
-		printf (" gid=%u(%s)", rgid, gr->gr_name);
+		printf (" GID=%u(%s)", rgid, gr->gr_name);
 	else
-		printf (" gid=%u", rgid);
+		printf (" GID=%u", rgid);
 
 	/*
 	 * Print out the effective user ID and group ID if they are
@@ -138,16 +138,16 @@ static void usage (void)
 	if (ruid != euid) {
 		pw = getpwuid (euid);
 		if (pw)
-			printf (" euid=%u(%s)", euid, pw->pw_name);
+			printf (" EUID=%u(%s)", euid, pw->pw_name);
 		else
-			printf (" euid=%u", euid);
+			printf (" EUID=%u", euid);
 	}
 	if (rgid != egid) {
 		gr = getgrgid (egid);
 		if (gr)
-			printf (" egid=%u(%s)", egid, gr->gr_name);
+			printf (" EGID=%u(%s)", egid, gr->gr_name);
 		else
-			printf (" egid=%u", egid);
+			printf (" EGID=%u", egid);
 	}
 #ifdef HAVE_GETGROUPS
 	/*

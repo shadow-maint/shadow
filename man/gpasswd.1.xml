@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='gpasswd1'>
-  <!-- $Id: gpasswd.1.xml,v 1.7 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!-- $Id: gpasswd.1.xml,v 1.9 2005/06/14 20:18:17 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gpasswd</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -48,8 +48,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>gpasswd</command> is used to administer the
+    <para><command>gpasswd</command> is used to administer the
       <filename>/etc/group</filename> file (and
       <filename>/etc/gshadow</filename> file if compiled with SHADOWGRP
       defined). Every group can have administrators, members and a password. 
@@ -67,7 +66,7 @@
       <option>-r</option> option to remove group password. When no password
       is set only group members can use <command>newgrp</command> to join
       the group. Option <option>-R</option> disables access via a password
-      to the group through <command>newgrp</coamand> command (however
+      to the group through <command>newgrp</command> command (however
       members will still be able to switch to this group).
     </para>
     
@@ -95,8 +94,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

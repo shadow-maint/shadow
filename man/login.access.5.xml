@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='loginaccess5'>
-  <!-- $Id: login.access.5.xml,v 1.4 2005/04/22 07:00:57 kloczek Exp $ -->
+  <!-- $Id: login.access.5.xml,v 1.5 2005/06/14 20:18:17 kloczek Exp $ -->
   <!--  this is comment -->
   <refmeta>
     <refentrytitle>LOGIN.ACCESS</refentrytitle>
@@ -90,8 +90,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>
     </para>

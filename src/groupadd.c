@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.31 2005/04/06 04:26:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.33 2005/06/20 09:57:51 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -161,7 +161,6 @@ static void grp_update (void)
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-
 #ifdef	SHADOWGRP
 	/*
 	 * Write out the new shadow group entries as well.
@@ -171,7 +170,7 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
-	SYSLOG ((LOG_INFO, "new group: name=%s, gid=%u",
+	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 		 group_name, (unsigned int) group_id));
 }
 
@@ -231,7 +230,7 @@ static void find_new_gid (void)
 #endif
 				continue;
 			}
-			fprintf (stderr, _("%s: gid %u is not unique\n"),
+			fprintf (stderr, _("%s: GID %u is not unique\n"),
 				 Prog, (unsigned int) group_id);
 			fail_exit (E_GID_IN_USE);
 		}
@@ -255,7 +254,7 @@ static void find_new_gid (void)
 #endif
 		}
 		if (group_id == gid_max) {
-			fprintf (stderr, _("%s: can't get unique gid\n"), Prog);
+			fprintf (stderr, _("%s: can't get unique GID\n"), Prog);
 			fail_exit (E_GID_IN_USE);
 		}
 	}

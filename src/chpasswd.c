@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.24 2005/04/06 00:13:45 kloczek Exp $")
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.26 2005/05/25 19:31:51 kloczek Exp $")
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
@@ -45,9 +45,7 @@ RCSID (PKG_VER "$Id: chpasswd.c,v 1.24 2005/04/06 00:13:45 kloczek Exp $")
 #include "defines.h"
 #include "pwio.h"
 #include "nscd.h"
-#ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
 /*
  * Global variables
  */
@@ -55,9 +53,7 @@ static char *Prog;
 static int eflg = 0;
 static int md5flg = 0;
 
-#ifdef SHADOWPWD
 static int is_shadow_pwd;
-#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -92,10 +88,9 @@ int main (int argc, char **argv)
 	char *newpwd;
 	char *cp;
 
-#ifdef	SHADOWPWD
 	const struct spwd *sp;
 	struct spwd newsp;
-#endif
+
 	const struct passwd *pw;
 	struct passwd newpw;
 	int errors = 0;
@@ -194,7 +189,7 @@ int main (int argc, char **argv)
 		pw_unlock ();
 		exit (1);
 	}
-#ifdef SHADOWPWD
+
 	is_shadow_pwd = spw_file_present ();
 	if (is_shadow_pwd) {
 		if (!spw_lock ()) {
@@ -211,7 +206,6 @@ int main (int argc, char **argv)
 			exit (1);
 		}
 	}
-#endif
 
 	/*
 	 * Read each line, separating the user name from the password. The
@@ -276,12 +270,10 @@ int main (int argc, char **argv)
 			errors++;
 			continue;
 		}
-#ifdef SHADOWPWD
 		if (is_shadow_pwd)
 			sp = spw_locate (name);
 		else
 			sp = NULL;
-#endif
 
 		/*
 		 * The freshly encrypted new password is merged into the
@@ -289,14 +281,11 @@ int main (int argc, char **argv)
 		 * date is set to the current date.
 		 */
 
-#ifdef SHADOWPWD
 		if (sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
 			newsp.sp_lstchg = now;
-		} else
-#endif
-		{
+		} else {
 			newpw = *pw;
 			newpw.pw_passwd = cp;
 		}
@@ -307,11 +296,9 @@ int main (int argc, char **argv)
 		 * other entries have been updated as well.
 		 */
 
-#ifdef SHADOWPWD
 		if (sp)
 			ok = spw_update (&newsp);
 		else
-#endif
 			ok = pw_update (&newpw);
 
 		if (!ok) {
@@ -335,14 +322,11 @@ int main (int argc, char **argv)
 	if (errors) {
 		fprintf (stderr,
 			 _("%s: error detected, changes ignored\n"), Prog);
-#ifdef SHADOWPWD
 		if (is_shadow_pwd)
 			spw_unlock ();
-#endif
 		pw_unlock ();
 		exit (1);
 	}
-#ifdef SHADOWPWD
 	if (is_shadow_pwd) {
 		if (!spw_close ()) {
 			fprintf (stderr,
@@ -352,7 +336,6 @@ int main (int argc, char **argv)
 		}
 		spw_unlock ();
 	}
-#endif
 	if (!pw_close ()) {
 		fprintf (stderr, _("%s: error updating password file\n"), Prog);
 		exit (1);

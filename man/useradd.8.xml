@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='useradd.8'>
-  <!--  $Id: useradd.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!--  $Id: useradd.8.xml,v 1.8 2005/06/16 18:58:43 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>useradd</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -127,7 +127,7 @@
         </term>
         <listitem>
           <para>The group name or number of the user's initial login group.
-            The group name must exist.  A group number must refer to an
+            The group name must exist. A group number must refer to an
             already existing group. The default group number is 1 or
             whatever is specified in
             <filename>/etc/default/useradd</filename>.
@@ -343,44 +343,56 @@
   
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>useadd</coamand> command exits with the following
-          values:
-        </term>
-        <listitem>
-          <!-- .br -->
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>1</literal>	- can't update password file
-            <!-- .br -->
-            <literal>2</literal>	- invalid command syntax
-            <!-- .br -->
-            <literal>3</literal>	- invalid argument to option
-            <!-- .br -->
-            <literal>4</literal>	- uid already in use (and no -o)
-            <!-- .br -->
-            <literal>6</literal>	- specified group doesn't exist
-            <!-- .br -->
-            <literal>9</literal>	- username already in use
-            <!-- .br -->
-            <literal>10</literal>	- can't update group file
-            <!-- .br -->
-            <literal>12</literal>	- can't create home directory
-            <!-- .br -->
-            <literal>13</literal>	- can't create mail spool
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>useadd</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+	  <listitem>success</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>1</replaceable></term>
+	  <listitem>can't update password file</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+	  <listitem>invalid command syntax</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>3</replaceable></term>
+	  <listitem>invalid argument to option</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>4</replaceable></term>
+	  <listitem>uid already in use (and no -o)</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>6</replaceable></term>
+	  <listitem>specified group doesn't exist</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>9</replaceable></term>
+	  <listitem>username already in use</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>10</replaceable></term>
+	  <listitem>can't update group file</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>12</replaceable></term>
+	  <listitem>can't create home directory</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>13</replaceable></term>
+	  <listitem>can't create mail spool</listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
-  
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

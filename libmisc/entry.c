@@ -30,21 +30,18 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: entry.c,v 1.6 2003/05/03 16:14:33 kloczek Exp $")
+RCSID ("$Id: entry.c,v 1.8 2005/06/20 09:18:50 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-extern struct passwd *fgetpwent ();
 
 void pw_entry (const char *name, struct passwd *pwent)
 {
 	struct passwd *passwd;
 
-#ifdef	SHADOWPWD
 	struct spwd *spwd;
-#endif
 
 	if (!(passwd = getpwnam (name))) {
 		pwent->pw_name = (char *) 0;
@@ -56,7 +53,7 @@ void pw_entry (const char *name, struct passwd *pwent)
 		pwent->pw_gecos = xstrdup (passwd->pw_gecos);
 		pwent->pw_dir = xstrdup (passwd->pw_dir);
 		pwent->pw_shell = xstrdup (passwd->pw_shell);
-#if defined(SHADOWPWD) && !defined(AUTOSHADOW)
+#if !defined(AUTOSHADOW)
 		setspent ();
 		if ((spwd = getspnam (name))) {
 			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='sulogin.8'>
-  <!--  $Id: sulogin.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!--  $Id: sulogin.8.xml,v 1.7 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>sulogin</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -15,7 +15,7 @@
   <refsect1 id='syntax'>
     <title>SYNTAX</title>
     <para>
-      <command>sulogin</coamand> [<emphasis remap='I'>
+      <command>sulogin</command> [<emphasis remap='I'>
         tty-device
       </emphasis>
       ]
@@ -25,10 +25,10 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <command>sulogin</coamand> is invoked by <command>init</coamand> prior
+      <command>sulogin</command> is invoked by <command>init</command> prior
       to allowing the user access to the system when in single user mode. 
       This feature may only be available on certain systems where
-      <command>init</coamand> has been modified accordingly, or where the
+      <command>init</command> has been modified accordingly, or where the
       <filename>/etc/inittab</filename> has an entry for a single user
       login.
     </para>
@@ -60,8 +60,8 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      This command can only be used if <command>init</coamand> has been
-      modified to call <command>sulogin</coamand> instead of
+      This command can only be used if <command>init</command> has been
+      modified to call <command>sulogin</command> instead of
       <filename>/bin/sh</filename>, or if the user has set the <emphasis
       remap='I'>inittab</emphasis> to support a single user login. For
       example, the line:
@@ -97,8 +97,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

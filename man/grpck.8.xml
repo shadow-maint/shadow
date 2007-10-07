@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='grpck.8'>
-  <!-- $Id: grpck.8.xml,v 1.6 2005/04/27 18:20:35 kloczek Exp $ -->
+  <!-- $Id: grpck.8.xml,v 1.9 2005/06/20 08:57:34 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>grpck</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -30,19 +30,22 @@
       <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
       are checked to see that the entry has the proper format and valid data
       in each field. The user is prompted to delete entries that are
-      improperly formatted or which have other incorrectable errors.
+      improperly formatted or which have other uncorrectable errors.
     </para>
     
     <para>Checks are made to verify that each entry has:</para>
-    
-    <!-- .in +.5i -->
-    <para>- the correct number of fields
-      <!-- .br -->
-      - a unique group name
-      <!-- .br -->
-      - a valid list of members and administrators
-    </para>
-    <!-- .in \-.5i -->
+
+    <itemizedlist mark='bullet'>
+      <listitem>
+        <para>the correct number of fields</para>
+      </listitem>
+      <listitem>
+        <para>a unique group name</para>
+      </listitem>
+      <listitem>
+        <para>a valid list of members and administrators</para>
+      </listitem>
+    </itemizedlist>    
     
     <para>The checks for correct number of fields and unique group name are
       fatal. If the entry has the wrong number of fields, the user will be
@@ -50,7 +53,7 @@
       affirmatively, all further checks are bypassed. An entry with a
       duplicated group name is prompted for deletion, but the remaining
       checks will still be made. All other errors are warnings and the user
-      is encouraged to run the <command>groupmod</coamand> command to
+      is encouraged to run the <command>groupmod</command> command to
       correct the error.
     </para>
     
@@ -99,8 +102,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
@@ -117,30 +119,35 @@
   
   <refsect1 id='exit_values'>
     <title>EXIT VALUES</title>
-    <variablelist remap='TP'>
-      <varlistentry>
-        <term>
-          The <command>grpck</command> command exits with the
-          following values:
-        </term>
-        <listitem>
-          <!-- .br -->
-          <para>
-            <literal>0</literal>	- success
-            <!-- .br -->
-            <literal>1</literal>	- syntax Error
-            <!-- .br -->
-            <literal>2</literal>	- one or more bad group entries
-            <!-- .br -->
-            <literal>3</literal>	- can't open group files
-            <!-- .br -->
-            <literal>4</literal>	- can't lock group files
-            <!-- .br -->
-            <literal>5</literal>	- can't update group files
-          </para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>
+      The <command>grpck</command> command exits with the following values:
+      <variablelist>
+        <varlistentry>
+          <term><replaceable>0</replaceable></term>
+	  <listitem>success</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>1</replaceable></term>
+	  <listitem>invalid command syntax</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>2</replaceable></term>
+	  <listitem>one or more bad group entries</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>3</replaceable></term>
+	  <listitem>can't open group files</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>4</replaceable></term>
+	  <listitem>can't lock group files</listitem>
+	</varlistentry>
+        <varlistentry>
+          <term><replaceable>5</replaceable></term>
+	  <listitem>can't update group files</listitem>
+	</varlistentry>
+      </variablelist>
+    </para>
   </refsect1>
   
   <refsect1 id='author'>

@@ -29,7 +29,6 @@ libmisc/pwd_init.c
 libmisc/rlogin.c
 libmisc/salt.c
 libmisc/setugid.c
-libmisc/setup.c
 libmisc/setupenv.c
 libmisc/shell.c
 libmisc/strtoday.c
@@ -81,7 +80,6 @@ src/lastlog.c
 src/login.c
 src/login_nopam.c
 src/logoutd.c
-src/mkpasswd.c
 src/newgrp.c
 src/newusers.c
 src/passwd.c

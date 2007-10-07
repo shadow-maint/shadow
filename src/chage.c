@@ -30,15 +30,15 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.43 2005/04/17 00:07:00 kloczek Exp $")
-#include <sys/types.h>
+RCSID (PKG_VER "$Id: chage.c,v 1.47 2005/06/20 15:43:09 kloczek Exp $")
 #include <ctype.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 #include <time.h>
-#ifdef SHADOWPWD
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
@@ -107,10 +107,20 @@ int isnum (const char *s)
 
 static void usage (void)
 {
-	fprintf (stderr,
-		 _
-		 ("Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
-		  "             [-I inactive] [-E expire] [-d last_day] user\n"));
+	fprintf (stderr, _("Usage: chage [options] user\n"
+			   "\n"
+			   "Options:\n"
+			   "  -d, --lastday LAST_DAY	set last password change to LAST_DAY\n"
+			   "  -E, --expiredate EXPIRE_DATE	set account expiration date to EXPIRE_DATE\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -I, --inactive INACTIVE	set password inactive after expiration\n"
+			   "				to INACTIVE\n"
+			   "  -l, --list			show account aging information\n"
+			   "  -m, --mindays MIN_DAYS	set minimum number of days before password\n"
+			   "				change to MIN_DAYS\n"
+			   "  -M, --maxdays MAX_DAYS	set maximim number of days before password\n"
+			   "				change to MAX_DAYS\n"
+			   "  -W, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"));
 	exit (1);
 }
 
@@ -327,13 +337,13 @@ static void cleanup (int state)
  *
  *	The valid options are
  *
- *	-m	set minimum number of days before password change (*)
- *	-M	set maximim number of days before password change (*)
  *	-d	set last password change date (*)
- *	-l	show account aging information
- *	-W	set expiration warning days (*)
- *	-I	set password inactive after expiration (*)
  *	-E	set account expiration date (*)
+ *	-I	set password inactive after expiration (*)
+ *	-l	show account aging information
+ *	-M	set maximim number of days before password change (*)
+ *	-m	set minimum number of days before password change (*)
+ *	-W	set expiration warning days (*)
  *
  *	(*) requires root permission to execute.
  *
@@ -375,46 +385,67 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	/*
-	 * Parse the command line options.
-	 */
-	while ((flag = getopt (argc, argv, "lm:M:W:I:E:d:")) != EOF) {
-		switch (flag) {
-		case 'l':
-			lflg++;
-			break;
-		case 'm':
-			mflg++;
-			mindays = strtol (optarg, 0, 10);
-			break;
-		case 'M':
-			Mflg++;
-			maxdays = strtol (optarg, 0, 10);
-			break;
-		case 'd':
-			dflg++;
-			if (!isnum (optarg))
-				lastday = strtoday (optarg);
-			else
-				lastday = strtol (optarg, 0, 10);
-			break;
-		case 'W':
-			Wflg++;
-			warndays = strtol (optarg, 0, 10);
-			break;
-		case 'I':
-			Iflg++;
-			inactdays = strtol (optarg, 0, 10);
-			break;
-		case 'E':
-			Eflg++;
-			if (!isnum (optarg))
-				expdays = strtoday (optarg);
-			else
-				expdays = strtol (optarg, 0, 10);
-			break;
-		default:
-			usage ();
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"lastday", required_argument, NULL, 'd'},
+			{"expiredate", required_argument, NULL, 'E'},
+			{"help", no_argument, NULL, 'h'},
+			{"inactive", required_argument, NULL, 'I'},
+			{"list", no_argument, NULL, 'l'},
+			{"mindays", required_argument, NULL, 'm'},
+			{"maxdays", required_argument, NULL, 'M'},
+			{"warndays", required_argument, NULL, 'W'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "d:E:hI:lm:M:W:", long_options,
+				     &option_index)) != -1) {
+			switch (c) {
+			case 'd':
+				dflg++;
+				if (!isnum (optarg))
+					lastday = strtoday (optarg);
+				else
+					lastday = strtol (optarg, 0, 10);
+				break;
+			case 'E':
+				Eflg++;
+				if (!isnum (optarg))
+					expdays = strtoday (optarg);
+				else
+					expdays = strtol (optarg, 0, 10);
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 'I':
+				Iflg++;
+				inactdays = strtol (optarg, 0, 10);
+				break;
+			case 'l':
+				lflg++;
+				break;
+			case 'm':
+				mflg++;
+				mindays = strtol (optarg, 0, 10);
+				break;
+			case 'M':
+				Mflg++;
+				maxdays = strtol (optarg, 0, 10);
+				break;
+			case 'W':
+				Wflg++;
+				warndays = strtol (optarg, 0, 10);
+				break;
+			default:
+				usage ();
+			}
 		}
 	}
 
@@ -440,7 +471,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (!amroot && !lflg) {
-		fprintf (stderr, _("%s: permission denied.\n"), Prog);
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 		exit (E_NOPERM);
 	}
 
@@ -568,7 +599,7 @@ int main (int argc, char **argv)
 
 	if (lflg) {
 		if (!amroot && (ruid != pwent.pw_uid)) {
-			fprintf (stderr, _("%s: permission denied.\n"), Prog);
+			fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 			closelog ();
 			exit (E_NOPERM);
 		}
@@ -723,12 +754,3 @@ int main (int argc, char **argv)
 	exit (E_SUCCESS);
 	/* NOTREACHED */
 }
-
-#else				/* !SHADOWPWD */
-int main (int argc, char **argv)
-{
-	fprintf (stderr,
-		 "%s: not configured for shadow password support.\n", argv[0]);
-	exit (E_NOPERM);
-}
-#endif				/* !SHADOWPWD */

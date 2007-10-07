@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='su.1'>
-  <!--  $Id: su.1.xml,v 1.8 2005/05/19 10:35:00 kloczek Exp $ -->
+  <!--  $Id: su.1.xml,v 1.9 2005/06/15 12:39:27 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>su</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -29,8 +29,7 @@
   
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
-    <para>
-      <command>su</command> is used to become another user during a login
+    <para><command>su</command> is used to become another user during a login
       session. Invoked without a username, <command>su</command> defaults to
       becoming the super user. The optional argument <option>-</option> may
       be used to provide an environment similar to what the user would
@@ -90,8 +89,7 @@
   
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para>
-      <citerefentry>
+    <para><citerefentry>
         <refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

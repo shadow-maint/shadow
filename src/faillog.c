@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.22 2005/04/25 10:25:50 kloczek Exp $")
+RCSID (PKG_VER "$Id: faillog.c,v 1.23 2005/05/25 19:31:51 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -84,7 +84,8 @@ static void print_one (const struct faillog *fl, uid_t uid)
 #endif
 
 	if (!once) {
-		printf (_("Login       Failures Maximum Latest                   On\n"));
+		printf (_
+			("Login       Failures Maximum Latest                   On\n"));
 		once++;
 	}
 	pwent = getpwuid (uid);

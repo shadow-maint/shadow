@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.18 2005/04/06 03:01:07 kloczek Exp $
+ * $Id: prototypes.h,v 1.19 2005/05/25 18:20:22 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -31,15 +31,9 @@ extern int add_groups (const char *);
 extern void add_cons_grps (void);
 
 /* age.c */
-#ifdef SHADOWPWD
 extern void agecheck (const struct passwd *, const struct spwd *);
 extern int expire (const struct passwd *, const struct spwd *);
 extern int isexpired (const struct passwd *, const struct spwd *);
-#else
-extern void agecheck (const struct passwd *);
-extern int expire (const struct passwd *);
-extern int isexpired (const struct passwd *);
-#endif
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
@@ -140,9 +134,7 @@ extern int do_pam_passwd (const char *, int, int);
 extern int isttytime (const char *, const char *, time_t);
 
 /* pwd2spwd.c */
-#ifdef SHADOWPWD
 extern struct spwd *pwd_to_spwd (const struct passwd *);
-#endif
 
 /* pwdcheck.c */
 extern void passwd_check (const char *, const char *, const char *);
@@ -179,16 +171,9 @@ extern void setup_env (struct passwd *);
 /* shell.c */
 extern void shell (const char *, const char *);
 
-#ifdef SHADOWPWD
-/* spdbm.c */
-extern int sp_dbm_remove (const char *);
-extern int sp_dbm_update (const struct spwd *);
-extern int sp_dbm_present (void);
-
 /* sppack.c */
 extern int spw_pack (const struct spwd *, char *);
 extern int spw_unpack (char *, int, struct spwd *);
-#endif
 
 /* strtoday.c */
 extern long strtoday (const char *);

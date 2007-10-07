@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) logoutd.c mkpasswd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c usermod.c vipw.c
+SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) logoutd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c usermod.c vipw.c
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -44,19 +44,15 @@ ubin_PROGRAMS = faillog$(EXEEXT) lastlog$(EXEEXT) chage$(EXEEXT) \
 	newgrp$(EXEEXT) passwd$(EXEEXT)
 usbin_PROGRAMS = chpasswd$(EXEEXT) groupadd$(EXEEXT) groupdel$(EXEEXT) \
 	groupmod$(EXEEXT) grpck$(EXEEXT) grpconv$(EXEEXT) \
-	grpunconv$(EXEEXT) logoutd$(EXEEXT) mkpasswd$(EXEEXT) \
-	newusers$(EXEEXT) pwck$(EXEEXT) pwconv$(EXEEXT) \
-	pwunconv$(EXEEXT) useradd$(EXEEXT) userdel$(EXEEXT) \
-	usermod$(EXEEXT) vipw$(EXEEXT)
+	grpunconv$(EXEEXT) logoutd$(EXEEXT) newusers$(EXEEXT) \
+	pwck$(EXEEXT) pwconv$(EXEEXT) pwunconv$(EXEEXT) \
+	useradd$(EXEEXT) userdel$(EXEEXT) usermod$(EXEEXT) \
+	vipw$(EXEEXT)
 noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4/gettext.m4 \
-	$(top_srcdir)/m4/iconv.m4 $(top_srcdir)/m4/lib-ld.m4 \
-	$(top_srcdir)/m4/lib-link.m4 $(top_srcdir)/m4/lib-prefix.m4 \
-	$(top_srcdir)/m4/nls.m4 $(top_srcdir)/m4/po.m4 \
-	$(top_srcdir)/m4/progtest.m4 $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -146,11 +142,6 @@ logoutd_OBJECTS = logoutd.$(OBJEXT)
 logoutd_LDADD = $(LDADD)
 logoutd_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
-mkpasswd_SOURCES = mkpasswd.c
-mkpasswd_OBJECTS = mkpasswd.$(OBJEXT)
-mkpasswd_LDADD = $(LDADD)
-mkpasswd_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
 newgrp_SOURCES = newgrp.c
 newgrp_OBJECTS = newgrp.$(OBJEXT)
 newgrp_LDADD = $(LDADD)
@@ -214,15 +205,15 @@ LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
 	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
 	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c mkpasswd.c newgrp.c newusers.c passwd.c pwck.c \
-	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
-	userdel.c usermod.c vipw.c
+	logoutd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c \
+	pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c \
+	usermod.c vipw.c
 DIST_SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
 	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
 	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c mkpasswd.c newgrp.c newusers.c passwd.c pwck.c \
-	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
-	userdel.c usermod.c vipw.c
+	logoutd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c \
+	pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c \
+	usermod.c vipw.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -344,7 +335,9 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-EXTRA_DIST = .indent.pro
+EXTRA_DIST = \
+	.indent.pro
+
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
 INCLUDES = \
@@ -391,9 +384,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  src/Makefile
+	  $(AUTOMAKE) --gnu  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -556,9 +549,6 @@ login$(EXEEXT): $(login_OBJECTS) $(login_DEPENDENCIES)
 logoutd$(EXEEXT): $(logoutd_OBJECTS) $(logoutd_DEPENDENCIES) 
 	@rm -f logoutd$(EXEEXT)
 	$(LINK) $(logoutd_LDFLAGS) $(logoutd_OBJECTS) $(logoutd_LDADD) $(LIBS)
-mkpasswd$(EXEEXT): $(mkpasswd_OBJECTS) $(mkpasswd_DEPENDENCIES) 
-	@rm -f mkpasswd$(EXEEXT)
-	$(LINK) $(mkpasswd_LDFLAGS) $(mkpasswd_OBJECTS) $(mkpasswd_LDADD) $(LIBS)
 newgrp$(EXEEXT): $(newgrp_OBJECTS) $(newgrp_DEPENDENCIES) 
 	@rm -f newgrp$(EXEEXT)
 	$(LINK) $(newgrp_LDFLAGS) $(newgrp_OBJECTS) $(newgrp_LDADD) $(LIBS)
@@ -621,7 +611,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/login.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/login_nopam.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logoutd.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mkpasswd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/newgrp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/newusers.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/passwd.Po@am__quote@

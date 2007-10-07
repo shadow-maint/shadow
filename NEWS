@@ -1,6 +1,44 @@
-$Id: NEWS,v 1.155 2005/05/19 12:05:02 kloczek Exp $
+$Id: NEWS,v 1.178 2005/06/28 14:28:19 kloczek Exp $
 
-shadow-4.0.8 -> shadow-4.0.9
+shadow-4.0.9 -> shadow-4.0.10						28-06-2005
+
+*** general:
+- mkpasswd: removed,
+- userdel: now deletes user groups from /etc/gshdow as well as /etc/group.
+  Fix by Nicolas François <nicolas.francois@centraliens.net>.
+  http://bugs.debian.org/99442
+- usermod: when relocating a user's home directory, don't fail and remove the new
+  home directory if we can't remove the old home directory for some
+  reason; the results can be spectularly poort if, for instance, only
+  the rmdir() fails. Patch prepared by Timo Lindfors <lindi-spamtrap@newmail.com>.
+  http://bugs.debian.org/166369
+- su: fix syslogs to be less ambiguous. Use old:new format instead of old-new
+  because '-' can appear in usernames
+  http://bugs.debian.org/213592
+- removed not used now libmisc/setup.c,
+- login: use also UTMPX API instead UTMP on failure (login was affected for this
+  when shadow was builded without PAM support)
+  patch by Nicolas François <nicolas.francois@centraliens.net>
+- login: the PAM session needs to be closed as root, thus before change_uid()
+  http://bugs.debian.org/53570 http://bugs.debian.org/195048 http://bugs.debian.org/211884
+- login: made login's -f option also able to use the username after -- if none
+  was passed as it's optarg
+  http://bugs.debian.org/53702 
+- login: check for hushed login and pass PAM_SILENT if true,
+  http://bugs.debian.org/48002
+- login: fixed username on succesful login (was using the normal username,
+  when it should have used pam_user) http://bugs.debian.org/47819
+- remove using SHADOWPWD #define so now shadow is allways builded with shadow
+  passwowd support,
+- chage: rewrite for use getopt_long(),
+- updated translations: ca, cs, da, fi, pl, ru, zh_TW.
+*** documentation:
+- most of the man pages now are generated from XML files so in case submiting any
+  chages to this resources please make diff to XML files,
+- chfn: give more details about the influence of login.defs on what's allowed to
+  users.
+
+shadow-4.0.8 -> shadow-4.0.9						23-05-2005
 
 *** general:
 - passwd: fixed segfault in non-PAM connfiguration
@@ -13,7 +51,7 @@ shadow-4.0.8 -> shadow-4.0.9
   a sequential one (Lucas Correia Villa Real <lucasvr@gobolinux.org>),
 - lastlog: fixed --help message (s,--login,--user,) http://bugs.debian.org/249611.
 
-shadow-4.0.7 -> shadow-4.0.8
+shadow-4.0.7 -> shadow-4.0.8						26-04-2005
 
 *** general:
 - remove not working OPIE and SKEY support,
@@ -71,7 +109,7 @@ shadow-4.0.7 -> shadow-4.0.8
 - gshadow(5): new file (by Nicolas Nicolas François <nicolas.francois@centraliens.net>),
 - usermod(8): fixed #302388 Debian bug: added separated -o option description,
 
-shadow-4.0.6 -> shadow-4.0.7
+shadow-4.0.6 -> shadow-4.0.7						26-01-2005
 
 - updated translations: da, es, fi, it, nl, pl, pt,
 - added zh_TW translation (from Debian resources),
@@ -95,7 +133,7 @@ shadow-4.0.6 -> shadow-4.0.7
    (by Ian Gulliver <ian@penguinhosting.net>),
 -- rewrited chpasswd(8) man page.  
 
-shadow-4.0.5 -> shadow-4.0.6
+shadow-4.0.5 -> shadow-4.0.6						08-11-2004
 
 - su: fixed adding of pam_env env variables to enviroment
   (Martin Schlemmer <azarah@nosferatu.za.org>),
@@ -107,7 +145,7 @@ shadow-4.0.5 -> shadow-4.0.6
 - do not translate variable names from /etc/default/useradd during
   "useradd -D".
 
-shadow-4.0.4.1 -> shadow-4.0.5
+shadow-4.0.4.1 -> shadow-4.0.5						27-10-2004
 
 - change libmisc to private static library,
 - added SELinux support (basing on patch from Gentoo),
@@ -160,11 +198,11 @@ shadow-4.0.4.1 -> shadow-4.0.5
   zh_CN (stolen from Debian),
 - remove adduser(8) roff include man page to useradd(8).
 
-shadow-4.0.4 => shadow-4.0.4.1
+shadow-4.0.4 => shadow-4.0.4.1						14-01-2004
 - bug fixes in automake files for generate correct tar ball on "make dist":
   added mising "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
-shadow-4.0.3 => shadow-4.0.4
+shadow-4.0.3 => shadow-4.0.4						14-01-2004	
 
 *** general:
 - added missing information about -f options in groupadd usage mesage
@@ -209,7 +247,7 @@ shadow-4.0.3 => shadow-4.0.4
   (by Josef Spillner <josef@ggzgamingzone.org>),
 - many other cleanups and unifications in man pages.
 
-shadow-4.0.2 => shadow-4.0.3
+shadow-4.0.2 => shadow-4.0.3						 13-03-2002
 
 - added variouse cs, de, fr, id, it, ko man pages found mainly in national
   man pages translations projects (this documents are not synced with
@@ -224,7 +262,7 @@ shadow-4.0.2 => shadow-4.0.3
 - minor changes and updates in man pages (also merged
   shadow-4.0.0-owl-man.patch by Solar Designer <solar@openwall.com>).
 
-shadow-4.0.1 => shadow-4.0.2
+shadow-4.0.1 => shadow-4.0.2						 17-02-2002
 
 - resolve many fuzzy translations also all this which may cause problems on
   displaing long uid/gid,
@@ -272,7 +310,7 @@ shadow-4.0.0 => shadow-4.0.1
 - installed fix for SEGV when using pwck -s on /etc/passwd file with
   empty lines in it.
   
-shadow-20001016 => shadow-4.0.0
+shadow-20001016 => shadow-4.0.0						 06-01-2002
 
 - fix bug discovered and fixed by Marcel Ritter
   <Marcel.Ritter@rrze.uni-erlangen.de>
