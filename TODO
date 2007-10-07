@@ -1,7 +1,3 @@
-# "-" to do
-# "*" partialy exist/implemented
-# "+" done
-
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
   diffrent backend modules for db, NIS, LDAP and others. Default backend it
@@ -13,8 +9,6 @@ ALL:
   user databases by well known tools.
 
 - useradd:
-  - add handle /etc/defaults/useradd::USER_GROUPS={yes,no} for allow configure
-    using by useradd create per user group.
   - add handle create user mail spool in maildir format.
 
 - add handle -n switch in groups and id command for allow query is
@@ -30,10 +24,6 @@ ALL:
   - add lookop and remove per user group.
 
 Documentation:
-
-- move all doc to docbook (also man pages)
-  look at http://refentry2man.pld.org.pl/ for fast refentry xml/docbook to
-  roff converter,
 
 - documment in pt_BR, ja man pages -s {pw,grp}ck option,
 

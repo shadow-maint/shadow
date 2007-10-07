@@ -60,9 +60,9 @@ libshadow_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am_libshadow_la_OBJECTS = commonio.lo encrypt.lo fputsx.lo getdef.lo \
-	getpass.lo groupio.lo gshadow.lo lockpw.lo nscd.lo port.lo \
-	pwauth.lo pwio.lo sgetgrent.lo sgetpwent.lo sgroupio.lo \
-	shadow.lo shadowio.lo utent.lo
+	groupio.lo gshadow.lo lockpw.lo nscd.lo port.lo pwauth.lo \
+	pwio.lo sgetgrent.lo sgetpwent.lo sgroupio.lo shadow.lo \
+	shadowio.lo utent.lo
 libshadow_la_OBJECTS = $(am_libshadow_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -224,7 +224,6 @@ libshadow_la_SOURCES = \
 	fputsx.c \
 	getdef.c \
 	getdef.h \
-	getpass.c \
 	groupio.c \
 	groupio.h \
 	gshadow.c \
@@ -330,7 +329,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/encrypt.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fputsx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getdef.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getpass.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/groupio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gshadow.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lockpw.Plo@am__quote@

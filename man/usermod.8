@@ -1,11 +1,11 @@
 .\"     Title: usermod
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 06/06/2006
+.\"      Date: 06/24/2006
 .\"    Manual: System Management Commands
 .\"    Source: System Management Commands
 .\"
-.TH "USERMOD" "8" "06/06/2006" "System Management Commands" "System Management Commands"
+.TH "USERMOD" "8" "06/24/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -94,14 +94,15 @@ or
 .PP
 
 \fBusermod\fR
-will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any crontab files manually. You must change the owner of any at jobs manually. You must make any changes involving NIS on the NIS server.
+will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any
+\fBcrontab\fR
+files manually. You must change the owner of any
+\fBat\fR
+jobs manually. You must make any changes involving NIS on the NIS server.
 .SH "FILES"
 .TP 3n
 \fI/etc/group\fR
 Group account information.
-.TP 3n
-\fI/etc/login.defs\fR
-Shadow password suite configuration.
 .TP 3n
 \fI/etc/passwd\fR
 User account information.

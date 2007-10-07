@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: copydir.c,v 1.14 2006/05/07 18:10:10 kloczek Exp $"
+#ident "$Id: copydir.c,v 1.15 2006/07/10 04:35:56 kloczek Exp $"
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -396,7 +396,8 @@ int remove_tree (const char *root)
 	 * is made set-ID.
 	 */
 
-	dir = opendir (root);
+	if (!(dir = opendir (root)))
+		return -1;
 
 	while ((ent = readdir (dir))) {
 

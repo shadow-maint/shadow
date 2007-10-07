@@ -1,4 +1,27 @@
-$Id: NEWS,v 1.430 2006/06/04 19:32:56 kloczek Exp $
+$Id: NEWS,v 1.457 2006/07/10 20:58:33 kloczek Exp $
+
+shadow-4.0.16 -> shadow-4.0.17						10-07-2006
+
+*** general:
+- userdel, usermod: fixed segfault on remove home directory when it can't
+  be removed; for example when it is /dev/null (fixed http://bugs.gentoo.org/139148),
+- improved SELinux detection on autoconf level (based on patch by
+  Dan Yefimov <dan@D00M.lightwave.net.ru>),
+- removed using private implementation getpass() libc function
+  (now getpass() is used also when S/KEY support is enabled),
+- move nologin do $(sbindir),
+- useradd: fixed mail spool file creation (bug cached by Frans Pop
+  <elendil@planet.nl>;
+  fixed http://bugs.debian.org/374705),
+- updated translations: cs, da, de, ko, nb, nl, pt, ro, ru, sk, sv, vi,
+- new translations: dz, km, ne.
+*** documentation:
+- ru man pages up to date,
+- lastlog(8): updated pl translation,
+- faillog(5): added missing information about fail_locktime element of
+  faillog struct (by Thorsten Kukuk <kukuk@suse.de>),
+- updated translations: eu, fr, pl.
+- reverted using docbook.sourceforge.net in XSL url.
 
 shadow-4.0.15 -> shadow-4.0.16						05-06-2006
 

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.58 2006/03/26 19:15:27 kloczek Exp $"
+#ident "$Id: passwd.c,v 1.59 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -149,7 +149,8 @@ static void usage (int status)
 			   "  -u, --unlock			unlock the named account\n"
 			   "  -w, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"
 			   "  -x, --maxdays MAX_DAYS	set maximim number of days before password\n"
-			   "				change to MAX_DAYS\n"));
+			   "				change to MAX_DAYS\n"
+			   "\n"));
 	exit (status);
 }
 

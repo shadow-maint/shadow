@@ -1822,7 +1822,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=shadow
- VERSION=4.0.16
+ VERSION=4.0.17
 
 
 cat >>confdefs.h <<_ACEOF
@@ -22742,8 +22742,8 @@ echo "${ECHO_T}not found" >&6
     echo "$as_me:$LINENO: checking for DocBook XSL Stylesheets >= 1.70.1 in XML catalog" >&5
 echo $ECHO_N "checking for DocBook XSL Stylesheets >= 1.70.1 in XML catalog... $ECHO_C" >&6
   if $jh_found_xmlcatalog && \
-     { (echo "$as_me:$LINENO: \$XMLCATALOG --noout \"\$XML_CATALOG_FILE\" \"http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl\" >&2") >&5
-  ($XMLCATALOG --noout "$XML_CATALOG_FILE" "http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl" >&2) 2>&5
+     { (echo "$as_me:$LINENO: \$XMLCATALOG --noout \"\$XML_CATALOG_FILE\" \"http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl\" >&2") >&5
+  ($XMLCATALOG --noout "$XML_CATALOG_FILE" "http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl" >&2) 2>&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; then
@@ -23352,12 +23352,6 @@ echo "$as_me:$LINENO: result: $ac_cv_lib_selinux_is_selinux_enabled" >&5
 echo "${ECHO_T}$ac_cv_lib_selinux_is_selinux_enabled" >&6
 if test $ac_cv_lib_selinux_is_selinux_enabled = yes; then
   LIBSELINUX="-lselinux"
-else
-  { { echo "$as_me:$LINENO: error: libselinux not found" >&5
-echo "$as_me: error: libselinux not found" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
 
 
 for ac_header in selinux/selinux.h
@@ -23517,6 +23511,13 @@ done
 cat >>confdefs.h <<\_ACEOF
 #define WITH_SELINUX 1
 _ACEOF
+
+
+else
+  { { echo "$as_me:$LINENO: error: libselinux not found" >&5
+echo "$as_me: error: libselinux not found" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 fi
 

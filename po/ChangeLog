@@ -1,0 +1,7 @@
+2006-06-12  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.14.5.
+	* insert-header.sin: New file, from gettext-0.14.5.
+	* remove-potcdate.sin: New file, from gettext-0.14.5.
+	* Rules-quot: Upgrade to gettext-0.14.5.
+

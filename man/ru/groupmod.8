@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "groupmod" "8" "03/11/2006" "Команды управления системой" "Команды управления системой"
+.\"     Title: groupmod
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/24/2006
+.\"    Manual: Команды управления системой
+.\"    Source: Команды управления системой
+.\"
+.TH "groupmod" "8" "06/24/2006" "Команды управления системой" "Команды управления системой"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,56 +14,57 @@
 groupmod \- изменяет информацию о группе
 .SH "СИНТАКСИС"
 .HP 9
-\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o\ ]] [\-n\ \fIновое_имя_группы\fR] \fIgroup\fR
+\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o]] [\-n\ \fIновое_имя_группы\fR] \fIгруппа\fR
 .SH "ОПИСАНИЕ"
 .PP
+Программа
 \fBgroupmod\fR
 изменяет системные файлы учётных записей согласно параметрам, переданным в командной строке.
 .SH "ПАРАМЕТРЫ"
 .PP
-Возможные параметры команды
-\fBgroupmod\fR
-:
-.TP
+Параметры команды
+\fBgroupmod\fR:
+.TP 3n
 \fB\-g\fR \fIgid\fR
-Числовое значение идентификатора группы. Значение должно быть уникальным, если не указан параметр
+Числовое значение идентификатора группы. Значение должно быть уникальным, если не задан параметр
 \fB\-o\fR. Значение должно быть не отрицательным. Значения от 0 до 999 обычно зарезервированы под системные группы. Изменение принадлежности всех файлов старой группе необходимо выполнять вручную.
-.TP
+.TP 3n
 \fB\-n\fR \fIновое_имя_группы\fR
-Новое название группы вместо
-\fIgroup\fR
+Имя группы будет изменено с
+\fIгруппа\fR
 на
 \fIновое_имя_группы\fR.
 .SH "ФАЙЛЫ"
-.TP
+.TP 3n
 \fI/etc/group\fR
 содержит информацию о группах
-.TP
+.TP 3n
 \fI/etc/gshadow\fR
 содержит защищаемую информацию о группах
 .SH "ВОЗВРАЩАЕМЫЕ ЗНАЧЕНИЯ"
 .PP
+Команда
 \fBgroupmod\fR
 завершая работу, возвращает следующие значения:
-.TP
+.TP 3n
 \fI0\fR
 успешное выполнение
-.TP
+.TP 3n
 \fI2\fR
 ошибка в параметрах команды
-.TP
+.TP 3n
 \fI3\fR
 недопустимое значение параметра
-.TP
+.TP 3n
 \fI4\fR
 указанная группа не существует
-.TP
+.TP 3n
 \fI6\fR
 указанная группа не существует
-.TP
+.TP 3n
 \fI9\fR
 такое имя группы уже используется
-.TP
+.TP 3n
 \fI10\fR
 не удалось изменить файл групп
 .SH "СМОТРИТЕ ТАКЖЕ"

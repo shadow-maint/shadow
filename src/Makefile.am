@@ -21,6 +21,7 @@ INCLUDES = \
 # $prefix/bin and $prefix/sbin, no install-data hacks...)
 
 bin_PROGRAMS   = groups login su
+sbin_PROGRAMS  = nologin
 ubin_PROGRAMS  = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
 usbin_PROGRAMS = \
 	chgpasswd \
@@ -33,7 +34,6 @@ usbin_PROGRAMS = \
 	grpunconv \
 	logoutd \
 	newusers \
-	nologin \
 	pwck \
 	pwconv \
 	pwunconv \

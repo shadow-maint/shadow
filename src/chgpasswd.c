@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chgpasswd.c,v 1.4 2006/05/19 23:47:11 kloczek Exp $"
+#ident "$Id: chgpasswd.c,v 1.5 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <fcntl.h>
 #include <getopt.h>
@@ -71,7 +71,8 @@ static void usage (void)
 			   "  -e, --encrypted	supplied passwords are encrypted\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -m, --md5		use MD5 encryption instead DES when the supplied\n"
-			   "			passwords are not encrypted\n"));
+			   "			passwords are not encrypted\n"
+			   "\n"));
 	exit (1);
 }
 

@@ -221,9 +221,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  etc/pam.d/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  etc/pam.d/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  etc/pam.d/Makefile
+	  $(AUTOMAKE) --gnu  etc/pam.d/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

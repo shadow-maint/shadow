@@ -1,0 +1,1918 @@
+# translation of shadow_po_km.po to Khmer
+# translation of shadow_po_km.po to
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2006.
+# Poch Sokun <sokun_poch@khmeros.info>, 2006.
+# auk piseth <piseth_dv@khmeros.info>, 2006.
+# Leang Chumsoben <soben@khmeros.info>, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: shadow_po_km\n"
+"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
+"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"PO-Revision-Date: 2006-06-28 10:08+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#, c-format
+msgid "Could not allocate space for config info.\n"
+msgstr "មិន​អាច​បម្រុង​ទុក​ទំហំ​សម្រាប់​ព័ត៌មាន​​កំណត់​រចនាសម្ព័ន្ធទេ​ ។\n"
+
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr "កំហុស​ការ​កំណត់​រចនាសម្ព័ន្ធ​ - មិន​ស្គាល់​ធាតុ '%s' (ជូន​ដំណឹង​អ្នក​គ្រប់គ្រង​)\n"
+
+#, c-format
+msgid "Warning: unknown group %s\n"
+msgstr "ការ​ព្រមាន ៖ មិន​ស្គាល់​ក្រុម %s\n"
+
+#, c-format
+msgid "Warning: too many groups\n"
+msgstr "ការព្រមាន​ ៖ មាន​ច្រើន​ក្រុម​ពេក\n"
+
+#, c-format
+msgid "Your password has expired."
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​បាន​ផុត​កំណត់ហើយ​ ។"
+
+#, c-format
+msgid "Your password is inactive."
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នកអសកម្ម​ ។"
+
+#, c-format
+msgid "Your login has expired."
+msgstr "ការចូល​របស់អ្នក​បាន​ផុត​កំណត់ហើយ​ ។"
+
+msgid "  Contact the system administrator.\n"
+msgstr "  ទាក់ទងទៅ​អ្នកគ្រប់គ្រងប្រព័ន្ធ​ ។\n"
+
+msgid "  Choose a new password.\n"
+msgstr "  ជ្រើស​ពាក្យ​សម្ងាត់​មួយ ។\n"
+
+#, c-format
+msgid "Your password will expire in %ld days.\n"
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹង​ផុត​កំណត់ក្នុងពេល​ %ld ថ្ងៃ ។\n"
+
+#, c-format
+msgid "Your password will expire tomorrow.\n"
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹងផុត​កំណត់នៅ​ថ្ងៃ​ស្អែក​ ។​\n"
+
+#, c-format
+msgid "Your password will expire today.\n"
+msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹងផុត​កំណត់នៅ​ថ្ងៃ​នេះ ។\n"
+
+#, c-format
+msgid "Unable to change tty %s"
+msgstr "មិន​អាច​ប្តូរ​ tty %s បានឡើយ"
+
+#, c-format
+msgid "Environment overflow\n"
+msgstr "​លើស​ចំណុះ​បរិស្ថាន\n"
+
+#, c-format
+msgid "You may not change $%s\n"
+msgstr "អ្នក​ប្រហែល​មិន​បាន​ប្តូរ​ $%s បានទេ\n"
+
+#, c-format
+msgid ""
+"%d failure since last login.\n"
+"Last was %s on %s.\n"
+msgid_plural ""
+"%d failures since last login.\n"
+"Last was %s on %s.\n"
+msgstr[0] ""
+"%d បានបរាជ័យ ចាប់តាំងពីចូលលើក​ចុងក្រោយ​គេមក​ ។\n"
+"ចុងក្រោយគេនៅ​ %s លើ %s ។\n"
+msgstr[1] ""
+"%d ចូល​ចុងក្រោយ​បានបរាជ័យ​ ។\n"
+"ចុងក្រោម​ %s  %s.\n"
+
+#, c-format
+msgid "Too many logins.\n"
+msgstr "ចូល​ច្រើន​ពេក​ ។\n"
+
+msgid "You have new mail."
+msgstr "អ្នក​មានសំបុត្រ​ថ្មី​ ។​"
+
+msgid "No mail."
+msgstr "គ្មាន​សំបុត្រ​​​ទេ​ ។"
+
+msgid "You have mail."
+msgstr "អ្នក​មាន​សំបុត្រ ។"
+
+msgid "no change"
+msgstr "គ្មាន​​ផ្លាស់ប្តូរ​ "
+
+msgid "a palindrome"
+msgstr "ឃ្លាដែលអាច​អាន​ត្រឡប់​ចុះត្រឡប់ឡើងបាន"
+
+msgid "case changes only"
+msgstr "ករណី​បាន​តែ​ប្តូរ​"
+
+msgid "too similar"
+msgstr "ស្រដៀងគ្នា​ពេក"
+
+msgid "too simple"
+msgstr "ធម្មតា​ពេក"
+
+msgid "rotated"
+msgstr "បានបង្វិល​"
+
+msgid "too short"
+msgstr "ខ្លីពេក​"
+
+#, c-format
+msgid "Bad password: %s.  "
+msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​ ៖ %s ។  "
+
+#, c-format
+msgid "passwd: pam_start() failed, error %d\n"
+msgstr "ពាក្យ​សម្ងាត់​ ៖ pam_start() បាន​បរាជ័យ​, កំហុស​ %d\n"
+
+#, c-format
+msgid "passwd: %s\n"
+msgstr "ពាក្យសម្ងាត់ ៖ %s\n"
+
+msgid "passwd: password updated successfully\n"
+msgstr "ពាក្យសម្ងាត់ ៖ ពាក្យ​សម្ងាត់​បាន​ធ្វើ​ឲ្យ​ទាន់​សម័យ​ដោយ​ជោគជ័យ​\n"
+
+#, c-format
+msgid "Incorrect password for %s.\n"
+msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​សម្រាប់​ %s ។\n"
+
+#, c-format
+msgid "Unable to cd to '%s'\n"
+msgstr "មិន​អាច​​ cd ចូលទៅ​ '%s' បានទេ\n"
+
+msgid "No directory, logging in with HOME=/"
+msgstr "គ្មាន​ថត​ ការចូល​ជាមួយ​ HOME=/"
+
+#, c-format
+msgid "Cannot execute %s"
+msgstr "មិន​អាចប្រតិបត្តិ​ %s បានទេ"
+
+#, c-format
+msgid "Invalid root directory '%s'\n"
+msgstr "ថត​ root មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "Can't change root directory to '%s'\n"
+msgstr "មិន​អាច​ប្តូរ​ថត root ទៅ​ '%s'បាន​ទេ​\n"
+
+msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
+msgstr "គ្មាន​ធាតុ​ utmp ឡើយ ។ អ្នក​ត្រូវ​ប្រតិបត្តិ​ \"login\" ពី​កម្រិត​ទាប​បំផុត​ \"sh\""
+
+msgid "Unable to determine your tty name."
+msgstr "មិន​អាច​កំណត់​ឈ្មោះ​ tty របស់​អ្នកបានទេ​ ។"
+
+#, c-format
+msgid "malloc(%d) failed\n"
+msgstr "malloc(%d) បាន​បរាជ័យ​\n"
+
+msgid "Password: "
+msgstr "ពាក្យ​សម្ងាត់​ ៖ "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "ពាក្យសម្ងាត់​របស់ %sសម្ងាត់ ៖ "
+
+#, c-format
+msgid ""
+"Usage: chage [options] user\n"
+"\n"
+"Options:\n"
+"  -d, --lastday LAST_DAY\tset last password change to LAST_DAY\n"
+"  -E, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -I, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --list\t\t\tshow account aging information\n"
+"  -m, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -M, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
+"  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"\n"
+msgstr ""
+"ការ​ប្រើប្រាស់​ ៖ ប្តូរ​អ្នកប្រើ​ [options]​\n"
+"ជម្រើស​ ៖\n"
+"  -d, --ថ្ងៃ​មុន​ LAST_DAY\t កំណត់​ការប្ដូរ​ពាក្យ​សម្ងាត់​មុន ​ទៅ​ជា​ LAST_DAY\n"
+"  -E, --កាលបរិច្ឆេទ​ផុត​កំណត់​ EXPIRE_DATE\t កំណត់​កាលបរិច្ឆេទ​ការផុត​កំណត់​​របស់គណនីទៅ​ជា​ "
+"EXPIRE_DATE\n"
+"  -h, --ជំនួយ​\t\t\t បង្ហាញ​សារ​ជំនួយនេះ ហើយ​ ចេញ​\n"
+"  -I, --អសកម្ម​ INACTIVE\t កំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​​អសកម្ម ​បន្ទាប់​ពី​ការផុត​កំណត់​\n"
+"\t\t\t\tទៅជា INACTIVE\n"
+"  -l, --បញ្ជី​\t\t\t បង្ហាញព័ត៌មាន​ចាស់​របស់​​គណនី​\n"
+"  -m, --ចំនួនថ្ងៃ​អប្បរមា MIN_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អប្បបរមា ​មុន​ពាក្យ​សម្ងាត់​ \n"
+"\t\t\t\tប្តូរទៅ​ជា​ MIN_DAYS\n"
+"  -M, --ចំនួនថ្ងៃ​អតិបរមា MAX_DAYS\t កំណត់​ចំនួន​ថ្ងៃ​អតិបរមា ​មុន​ពាក្យ​សម្ងាត់​\n"
+"\t\t\t\tប្តូរ​ទៅ​ជា​ MAX_DAYS\n"
+"  -W, --ថ្ងៃព្រមាន WARN_DAYS\tកំណត់ការព្រមាន​ថ្ងៃ​ផុត​កំណត់​ទៅជា​ WARN_DAYS\n"
+
+#, c-format
+msgid "Enter the new value, or press ENTER for the default\n"
+msgstr "បញ្ចូល​តម្លៃ​ថ្មី​ ឬ ​សង្កត់​ បញ្ចូល សម្រាប់​លំនាំដើម​\n"
+
+msgid "Minimum Password Age"
+msgstr "អាយុ​ពាក្យសម្ងាត់​អប្បរមា"
+
+msgid "Maximum Password Age"
+msgstr "អាយុ​ពាក្យសម្ងាត់​អតិបរមាsword Age"
+
+msgid "Last Password Change (YYYY-MM-DD)"
+msgstr "ការប្ដូរ​ពាក្យ​សម្ងាត់​ជាលើកចុងក្រោយ (YYYY-MM-DD)"
+
+msgid "Password Expiration Warning"
+msgstr "ការព្រមាន​ការផុត​កំណត់​នៃ​ពាក្យ​សម្ងាត់​"
+
+msgid "Password Inactive"
+msgstr "ពាក្យ​សម្ងាត់​អសកម្ម​"
+
+msgid "Account Expiration Date (YYYY-MM-DD)"
+msgstr "កាលបរិច្ឆេទ​ការផុត​កំណត់របស់​​គណនី​ (YYYY-MM-DD)"
+
+#, c-format
+msgid "Last password change\t\t\t\t\t: "
+msgstr "ការប្តូរ​ពាក្យ​សម្ងាត់​លើកចុង​ក្រោយ​\t\t\t\t\t ៖ "
+
+#, c-format
+msgid "never\n"
+msgstr "កុំ\n"
+
+#, c-format
+msgid "password must be changed\n"
+msgstr "ពាក្យ​សម្ងាត់​ត្រូវ​តែ​ប្តូរ​\n"
+
+#, c-format
+msgid "Password expires\t\t\t\t\t: "
+msgstr "ពាក្យ​សម្ងាត់​ផុត​កំណត់​\t\t\t\t\t ៖ "
+
+#, c-format
+msgid "Password inactive\t\t\t\t\t: "
+msgstr "ពាក្យ​សម្ងាត់ អសកម្ម \t\t\t\t\t ៖ "
+
+#, c-format
+msgid "Account expires\t\t\t\t\t\t: "
+msgstr "គណនី​ផុត​កំណត់​\t\t\t\t\t\t ៖ "
+
+#, c-format
+msgid "Minimum number of days between password change\t\t: %ld\n"
+msgstr "ចំនួន​ថ្ងៃ​អប្បបរមា​រវាង​ការផ្លាស់​ប្តូរ​ពាក្យ​សម្ងាត់​\t\t ៖ %ld\n"
+
+#, c-format
+msgid "Maximum number of days between password change\t\t: %ld\n"
+msgstr "ចំនួនថ្ងៃ​អតិបរមា​រវាង​ការផ្លាស់ប្តូរ​ពាក្យ​សម្ងាត់​\t\t ៖ %ld\n"
+
+#, c-format
+msgid "Number of days of warning before password expires\t: %ld\n"
+msgstr "ចំនួន​ថ្ងៃ​នៃការព្រមាន​ មុនពេល​ពាក្យសម្ងាត់​ផុតកំណត់\t ៖ %ld\n"
+
+#, c-format
+msgid "%s: do not include \"l\" with other flags\n"
+msgstr "%s ៖ មិន​រូមបញ្ចូល​ទាំង​ \"l\" ជាមួយ​ទង់​ដទៃទៀត​ទេ\n"
+
+#, c-format
+msgid "%s: Permission denied.\n"
+msgstr "%s ៖ សិទ្ធ​ត្រូវ​បាន​បដិសេធ ។\n"
+
+#, c-format
+msgid "%s: PAM authentication failed\n"
+msgstr "%s ៖ PAM ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវបាន​បរាជ័យ​\n"
+
+#, c-format
+msgid "%s: can't open password file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ពាក្យ​សម្ងាត់​\n"
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s ៖ មិន​ស្គាល់​អ្នកប្រើ​ %s\n"
+
+#, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s ៖ គ្មាន​វត្តមាន​​ឯកសារ​ពាក្យ​សម្ងាត់ស្រមោលទេ​\n"
+
+#, c-format
+msgid "%s: can't lock shadow password file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​​ឯកសារ​ពាក្យ​សម្ងាត់ស្រមោល​បានទេ\n"
+
+#, c-format
+msgid "%s: can't open shadow password file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារពាក្យ​សម្ងាត់​ស្រមោលបានទេ\n"
+
+#, c-format
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s ៖ បរាជ័យ​ក្នុងការ​ទម្លាក់​សិទ្ធ (%s)\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "ការផ្លាស់​ប្តូរ​ព័ត៌មាន​ចាស់​សម្រាប់​ %s\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s ៖ កំហុស​ការផ្លាស់ប្តូរ​វាល​\n"
+
+#, c-format
+msgid "%s: can't update password file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារ​ពាក្យ​សម្ងាត់​ទាន់សម័យ​បានទេ\n"
+
+#, c-format
+msgid "%s: can't update shadow password file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើ​ឲ្យ​ឯកសារពាក្យសម្ងាត់​ស្រមោលទាន់សម័យបានទេ\n"
+
+#, c-format
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s ៖ មិនអាច​សរសេរ​ឯកសារពាក្យសម្ងាត់ស្រមោល​ឡើងវិញ​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't rewrite password file\n"
+msgstr "%s ៖ មិនអាច​សរសេរ​ឯកសារពាក្យសម្ងាត់​ឡើងវិញបានទេ​\n"
+
+#, c-format
+msgid ""
+"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+"\t[-h home_ph] [-o other] [user]\n"
+msgstr ""
+"កា​រប្រើប្រាស់​ ៖ %s [-f full_name] [-r room_no] [-w work_ph]\n"
+"\t[-h home_ph] [-o other] [user]\n"
+
+#, c-format
+msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgstr "របៀបប្រើ ៖ %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+
+msgid "Full Name"
+msgstr "ឈ្មោះ​ពេញ"
+
+#, c-format
+msgid "\tFull Name: %s\n"
+msgstr "\tឈ្មោះពេញ​ ៖ %s\n"
+
+msgid "Room Number"
+msgstr "លេខបន្ទប់​"
+
+#, c-format
+msgid "\tRoom Number: %s\n"
+msgstr "\tលេខ​បន្ទប់​ ៖ %s\n"
+
+msgid "Work Phone"
+msgstr "ទូរស័ព្ទ​​​កន្លែង​​​ធ្វើការ"
+
+#, c-format
+msgid "\tWork Phone: %s\n"
+msgstr "\tទូរស័ព្ទ​​​កន្លែង​​​ធ្វើការ ៖ %s\n"
+
+msgid "Home Phone"
+msgstr "ទូរស័ព្ទនៅ​ផ្ទះ"
+
+#, c-format
+msgid "\tHome Phone: %s\n"
+msgstr "\tទូរស័ព្ទនៅ​ផ្ទះ ៖ %s\n"
+
+msgid "Other"
+msgstr "ផ្សេងៗ"
+
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s ៖ មិន​អាចកំណត់​ឈ្មោះ​អ្នកប្រើ​របស់​អ្នក​បាន​ទេ ។\n"
+
+#, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s ៖ មិនអាចផ្លាស់​​ប្តូរ​អ្នក​ប្រើបានទេ​ '%s' លើ​ម៉ាស៊ីន​ភ្ញៀវ NIS បានទេ ។\n"
+
+#, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s ៖ '%s' ជាមេ​ NIS សម្រាប់​ម៉ាស៊ីន​ភ្ញៀវ​នេះ​ ។\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "កំពុងផ្លាស់​​ប្តូរ​ព័ត៌មាន​អ្នកប្រើ​សម្រាប់​ %s\n"
+
+#, c-format
+msgid "%s: invalid name: '%s'\n"
+msgstr "%s ៖ ឈ្មោះ​មិន​ត្រឹមត្រូវ​ ៖ '%s'\n"
+
+#, c-format
+msgid "%s: invalid room number: '%s'\n"
+msgstr "%s ៖ ចំនួន​បន្ទប់​មិន​ត្រឹមត្រូវ​ ៖ '%s'\n"
+
+#, c-format
+msgid "%s: invalid work phone: '%s'\n"
+msgstr "%s ៖ លេខទូរស័ព្ទ​នៅ​កន្លែង​ធ្វើការ​មិន​ត្រឹមត្រូវ​ ៖ '%s'\n"
+
+#, c-format
+msgid "%s: invalid home phone: '%s'\n"
+msgstr "%s ៖ លេខ​ទូរស័ព្ទនៅផ្ទះ​មិន​ត្រឹមត្រូវ​ ៖ '%s'\n"
+
+#, c-format
+msgid "%s: '%s' contains illegal characters\n"
+msgstr "%s ៖ '%s' មាន​តួអក្សរ​មិន​ត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s ៖ វាល គឺ​វែងវែងពេក​\n"
+
+#, c-format
+msgid "Cannot change ID to root.\n"
+msgstr "មិន​អាចផ្លាស់ប្តូរ​លេខ​សម្គាល់​ទៅ​ជា​ root បាន​ឡើយ​ ។\n"
+
+#, c-format
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "មិន​អាច​ចាក់សោ​ឯកសារ​ពាក្យ​សម្ងាត់​បានទេ ។ សូមព្យាយាម​ម្តង​ទៀតនៅ​ពេល​ក្រោយ​ ។\n"
+
+#, c-format
+msgid "Cannot open the password file.\n"
+msgstr "មិនអាច​បើក​ឯកសារ​ពាក្យសម្ងាត់​បានឡើយ ។\n"
+
+#, c-format
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s ៖ %s រក​មិន​ឃើញ​ក្នុង​ /etc/passwd ទេ\n"
+
+#, c-format
+msgid "Error updating the password entry.\n"
+msgstr "មានកំហុស​ក្នុងការ​ធ្វើ​ឲ្យ​​ធាតុបញ្ចូល​​ពាក្យសម្ងាត់ទាន់សម័យ ។\n"
+
+#, c-format
+msgid "Cannot commit password file changes.\n"
+msgstr "មិនអាច​ដាក់ស្នើ​ការផ្លាស់ប្ដូរ​ឯកសារពាក្យសម្ងាត់​បានឡើយ​ ។\n"
+
+#, c-format
+msgid "Cannot unlock the password file.\n"
+msgstr "មិន​អាច​ដោះសោ​ឯកសារ​ពាក្យ​សម្ងាត់បានឡើយ​ ។\n"
+
+#, c-format
+msgid ""
+"Usage: chgpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ chgpasswd [ជម្រើស]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -e, --encrypted\tពាក្យ​សម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
+"  -h, --help\t\tបង្ហា​ញសារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​បាន​ផ្ដល់​ឲ្យ\n"
+"\t\t\tពាក្យសម្ងាត់​មិន​ត្រូវបាន​អ៊ិនគ្រីប\n"
+"\n"
+
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​​​ឯកសារជា​​ក្រុម​បាន​ទេ\n"
+
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ជា​ក្រុម​បាន​ទេ​\n"
+
+#, c-format
+msgid "%s: can't lock gshadow file\n"
+msgstr "%s ៖មិន​អាច​ចាក់សោ​ឯកសារ​ gshadow បានទេ\n"
+
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ស្រមោល​បានទេ\n"
+
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ បន្ទាត់​វែងពេក​\n"
+
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ បាត់បង់​ពាក្យ​សម្ងាត់​ថ្មី​\n"
+
+#, c-format
+msgid "%s: line %d: unknown group %s\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​ស្គាល់​ក្រុម​ %s\n"
+
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនអាច​ធ្វើឲ្យធាតុបញ្ចូល​ពាក្យសម្ងាត់​ទាន់សម័យ​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s ៖ បានរកឃើញ​កំហុស មិនអើពើនឹងការផ្លាស់ប្ដូរ​\n"
+
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​ធ្វើឲ្យឯកសារស្រមោល​ទាន់សម័យ​\n"
+
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s ៖ កំហុស​ក្នុងការធ្វើឲ្យ​ឯកសារពាក្យសម្ងាត់ទាន់សម័យ\n"
+
+#, c-format
+msgid ""
+"Usage: chpasswd [options]\n"
+"\n"
+"Options:\n"
+"  -e, --encrypted\tsupplied passwords are encrypted\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+"\t\t\tpasswords are not encrypted\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ chpasswd [ជម្រើស]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -e, --encrypted\tពាក្យសម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
+"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​​នេះ និង​ចេញ\n"
+"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​ដែល​ពាក្យសម្ងាត់\n"
+"\t\t\tដែល​បាន​ផ្ដល់​មិន​ត្រូវបាន​អ៊ិនគ្រីប​ទេ\n"
+"\n"
+
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារ​ពាក្យ​សម្ងាត់​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s ៖ មិនអាច​ចាក់​សោ​ឯកសារ​ស្រមោល​បានទេ​\n"
+
+#, c-format
+msgid "%s: line %d: unknown user %s\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនស្គាល់​អ្នកប្រើ​ %s\n"
+
+#, c-format
+msgid "Usage: %s [-s shell] [name]\n"
+msgstr "ការ​ប្រើប្រាស់ ៖ %s [-s shell] [name]\n"
+
+msgid "Login Shell"
+msgstr "សែលចូល"
+
+#, c-format
+msgid "You may not change the shell for %s.\n"
+msgstr "អ្នក​មិនអាច​​ប្តូរ​សែល​សម្រាប់​ %s បានទេ ។\n"
+
+#, c-format
+msgid "Changing the login shell for %s\n"
+msgstr "កំពុង​ផ្លាស់ប្ដូរ​សែល​ចូល​សម្រាប់ %s\n"
+
+#, c-format
+msgid "%s: Invalid entry: %s\n"
+msgstr "%s ៖ ធាតុបញ្ចូល​​មិន​ត្រឹមត្រូវ​ ៖ %s\n"
+
+#, c-format
+msgid "%s is an invalid shell.\n"
+msgstr "%s គឺជា​សែល​មិន​ត្រឹមត្រូវ​ ។\n"
+
+#, c-format
+msgid "Usage: expiry {-f|-c}\n"
+msgstr "របៀបប្រើ ៖ ការផុតកំណត់ {-f|-c}\n"
+
+#, c-format
+msgid "%s: unknown user\n"
+msgstr "%s  ៖ មិន​ស្គាល់​អ្នក​ប្រើ​\n"
+
+#, c-format
+msgid ""
+"Usage: faillog [options]\n"
+"\n"
+"Options:\n"
+"  -a, --all\t\t\tdisplay faillog records for all users\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --lock-time SEC\t\tafter failed login lock accout to SEC seconds\n"
+"  -m, --maximum MAX\t\tset maximum failed login counters to MAX\n"
+"  -r, --reset\t\t\treset the counters of login failures\n"
+"  -t, --time DAYS\t\tdisplay faillog records more recent than DAYS\n"
+"  -u, --user LOGIN\t\tdisplay faillog record or maintains failure counters\n"
+"\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
+"\t\t\t\tfor user with LOGIN\n"
+"\n"
+msgstr ""
+"របៀប​ប្រើ ៖ faillog [ជម្រើស]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -a, --all\t\t\tបង្ហាញ​កំណត់ត្រា​កំណត់ហេតុ​បរាជ័យ សម្រាប់​អ្នក​ប្រើ​ទាំងអស់\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ ហើយ​ចេញ\n"
+"  -l, --lock-time វិ.\t\tបន្ទាប់​ពី​ចូល​បរាជ័យ ត្រូវ​ចាក់សោ​គណនី​រយៈពេល វិ. វិនាទី\n"
+"  -m, --maximum អតិ.\t\tកំណត់​ចំនួន​អតិបរមា​នៃ​ការ​ចូល​ដែល​បរាជ័យ ចំនួន អតិ.\n"
+"  -r, --reset\t\t\tកំណត់​អថេរ​រាប់​នៃ​ការ​ចូល​ដែល​បរាជ័យ​ឡើង​វិញ\n"
+"  -t, --time ថ្ងៃ\t\tបង្ហាញ​កំណត់ត្រា​កំណត់ហេតុ​បរាជ័យ ថ្មីៗ​ជាង \"ថ្ងៃ\" ថ្ងៃ\n"
+"  -u, --user ឈ្មោះចូល\t\tបង្ហាញ​កំណត់ត្រា​កំណត់ហេតុ​បរាជ័យ ឬ ថែទាំ​អថេរ​រាប់​ការ​បរាជ័យ\n"
+"\t\t\t\tនិង កំណត់ (បើ​ប្រើ​ជាមួយ​ជម្រើស -r, -m ឬ -l) សម្រាប់​តែ\n"
+"\t\t\t\tអ្នកប្រើ​ដែល​មាន​ឈ្មោះ​ចូល \"ឈ្មោះចូល\"\n"
+
+#, c-format
+msgid "Login       Failures Maximum Latest                   On\n"
+msgstr "ចូល       ភាពបរាជ័យ​នៃការចូល​ចុងក្រោយ​ជាអតិបរមា                   លើ\n"
+
+#, c-format
+msgid " [%lds left]"
+msgstr " [%lds នៅសល់]"
+
+#, c-format
+msgid " [%lds lock]"
+msgstr " [%lds ជាប់សោ]"
+
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "មិន​ស្គាល់​អ្នក​ប្រើ ៖ %s\n"
+
+#, c-format
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "របៀបប្រើ ៖ %s ក្រុម [-r|-R] \n"
+
+#, c-format
+msgid "       %s [-a user] group\n"
+msgstr "       %s ក្រុម [-a user]​\n"
+
+#, c-format
+msgid "       %s [-d user] group\n"
+msgstr "       %s ក្រុម [-d user]​\n"
+
+#, c-format
+msgid "       %s [-A user,...] [-M user,...] group\n"
+msgstr "       %s ក្រុម [-A user,...] [-M user,...]\n"
+
+#, c-format
+msgid "       %s [-M user,...] group\n"
+msgstr "       %s ក្រុម [-M user,...]\n"
+
+#, c-format
+msgid "%s: shadow group passwords required for -A\n"
+msgstr "%s ៖ បានទាមទារ​ពាក្យសម្ងាត់​ក្រុម​ស្រមោល​សម្រាប់​ -A\n"
+
+#, c-format
+msgid "Who are you?\n"
+msgstr "តើអ្នក​ជា​នណា​ ?\n"
+
+#, c-format
+msgid "unknown group: %s\n"
+msgstr "មិន​ស្គាល់​ក្រុម​ ​ ៖ %s\n"
+
+#, c-format
+msgid "Adding user %s to group %s\n"
+msgstr "កំពុង​បន្ថែម​អ្នកប្រើ​ %s ទៅក្រុម​ %s\n"
+
+#, c-format
+msgid "Removing user %s from group %s\n"
+msgstr "កំពុង​យក​អ្នក​ប្រើ​ %s ចេញពី​ក្រុម​ %s\n"
+
+#, c-format
+msgid "%s: unknown member %s\n"
+msgstr "%s ៖ មិន​ស្គាល់​សមាជិក​ %s\n"
+
+#, c-format
+msgid "%s: Not a tty\n"
+msgstr "%s ៖ មិនមែន​ tty\n"
+
+#, c-format
+msgid "Changing the password for group %s\n"
+msgstr "កំពុង​ប្តូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ក្រុម​ %s\n"
+
+msgid "New Password: "
+msgstr "ពាក្យសម្ងាត់​ថ្មី ៖ "
+
+msgid "Re-enter new password: "
+msgstr "បញ្ចូល​ពាក្យ​សម្ងាត់​ថ្មី​ឡើង​វិញ ៖ "
+
+msgid "They don't match; try again"
+msgstr "ពួកគេ​មិន​បាន​​ផ្គូរផ្គងទេ ។ សូមព្យាយាម​ម្តង​ទៀត​"
+
+#, c-format
+msgid "%s: Try again later\n"
+msgstr "%s ៖ សូមព្យាយាមម្ដងទៀត​នៅពេលក្រោយ\n"
+
+#, c-format
+msgid "%s: can't get lock\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ស្រមោល​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: can't open file\n"
+msgstr "%s ៖ មិន​អាច​បើក​​ឯកសារ​បានទេ\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s ៖ មិន​អាចធ្វើ​ឲ្យ​ធាតុបញ្ចូល​​ទាន់សម័យ​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​​ធាតុបញ្ចូល​​ស្រមោល​ទាន់សម័យបានទេ​\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ឡើង​វិញបានទេ​\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s ៖ មិន​អាច​សរសេរ​​​​​ឯកសារ​ស្រមោល​ឡើង​វិញ បាន​ទេ​\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s ៖ មិនអាច​ដោះសោ​ឯកសារបានទេ\n"
+
+#, c-format
+msgid ""
+"Usage: groupadd [options] group\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce exit with success status if the specified\n"
+"\t\t\t\tgroup already exists\n"
+"  -g, --gid GID\t\t\tuse GID for the new group\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -o, --non-unique\t\tallow create group with duplicate\n"
+"\t\t\t\t(non-unique) GID\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ groupadd [ជម្រើស] ក្រុម\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -f, --force\t\t\tបង្ខំឲ្យ​ចេញ​ជា​មួយ​នឹង​ស្ថានភាព​ជោគជ័យ ប្រសិន​បើ​ក្រុម\n"
+"\t\t\t\tដែល​បាន​បញ្ជាក់​មាន​រួច​ហើយ\n"
+"  -g, --gid GID\t\t\tប្រើ GID សម្រាប់​ក្រុមថ្មី\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -K, --key KEY=VALUE\t\tបដិសេធលំនាំដើមរបស់ /etc/login.defs \n"
+"  -o, --non-unique\t\tអនុញ្ញាត​ឲ្យ​បង្កើត​ក្រុម​ដែល​មាន\n"
+"\t\t\t\t GID (មិនមាន​តែមួយ​គត់) ស្ទួន\n"
+"\n"
+
+#, c-format
+msgid "%s: error adding new group entry\n"
+msgstr "%s ៖ កំហុស​ក្នុងការ​បន្ថែម​ធាតុបញ្ចូល​​ក្រុម​ថ្មី​\n"
+
+#, c-format
+msgid "%s: name %s is not unique\n"
+msgstr "%s ៖ ឈ្មោះ​ %s គឺមិន​មែន​មាន​តែមួយ​ទេ\n"
+
+#, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s ៖ GID %u គឺមិនមែន​មាន​តែមួយទេ​\n"
+
+#, c-format
+msgid "%s: can't get unique GID\n"
+msgstr "%s ៖ មិនអាច​យក​​ GID ​ដែលមានតែមួយ​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: %s is not a valid group name\n"
+msgstr "%s  ៖ %s ជា​ឈ្មោះ​ក្រុម​មិន​ត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid "%s: cannot rewrite group file\n"
+msgstr "%s ៖​ មិនអាច​សរសេរ​ឯកសារក្រុមឡើងវិញ​បានទេ​\n"
+
+#, c-format
+msgid "%s: cannot rewrite shadow group file\n"
+msgstr "%s ៖ មិនអាច​សរសេរ​ឯកសារក្រុម​ស្រមោល​ឡើងវិញ​បានទេ​\n"
+
+#, c-format
+msgid "%s: unable to lock group file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារក្រុម​បានទេ\n"
+
+#, c-format
+msgid "%s: unable to open group file\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​បានទេ​\n"
+
+#, c-format
+msgid "%s: unable to lock shadow group file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារក្រុមស្រមោល​បានទេ\n"
+
+#, c-format
+msgid "%s: unable to open shadow group file\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​ស្រមោល​បានទេ​\n"
+
+#, c-format
+msgid "%s: invalid group %s\n"
+msgstr "%s ៖ ក្រុម​មិន​ត្រឹមត្រូវ​ %s\n"
+
+#, c-format
+msgid "%s: -K requires KEY=VALUE\n"
+msgstr "%s: -K ទាមទារ​ KEY=VALUE\n"
+
+#, c-format
+msgid "%s: group %s exists\n"
+msgstr "%s ៖ មានក្រុម​ %s រួច​ហើយ​\n"
+
+#, c-format
+msgid "Usage: groupdel group\n"
+msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
+
+#, c-format
+msgid "%s: error removing group entry\n"
+msgstr "%s ៖ កំហុស​ក្នុងការយក​ធាតុបញ្ចូល​ក្រុមចេញ\n"
+
+#, c-format
+msgid "%s: error removing shadow group entry\n"
+msgstr "%s ៖ កំហុស​ក្នុងការយក​ធាតុបញ្ចូល​ក្រុម​ស្រមោល​ចេញ\n"
+
+#, c-format
+msgid "%s: cannot remove user's primary group.\n"
+msgstr "%s ៖ មិនអាចយក​ក្រុម​ចម្បង​របស់អ្នកប្រើ​ចេញ​បានទេ ។\n"
+
+#, c-format
+msgid "%s: group %s does not exist\n"
+msgstr "%s ៖ មិនមានក្រុម​ %sឡើយ​\n"
+
+#, c-format
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s ៖ ក្រុម​ %s គឺជា​ក្រុម NIS\n"
+
+#, c-format
+msgid "%s: %s is the NIS master\n"
+msgstr "%s ៖ %s គឺជា​មេ NIS\n"
+
+#, c-format
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "របៀបប្រើ ៖ groupmod ក្រុម [-g gid [-o]] [-n name]​\n"
+
+#, c-format
+msgid "%s: %s not found in /etc/group\n"
+msgstr "%s ៖ %s រក​មិនឃើញ​នៅក្នុង​ /etc/group ទេ\n"
+
+#, c-format
+msgid "%s: %u is not a unique GID\n"
+msgstr "%s ៖ %u មិនមែន​​ GID ដែលមានតែមួយ​ទេ\n"
+
+#, c-format
+msgid "%s: %s is not a unique name\n"
+msgstr "%s ៖ %s គឺមិនមែនជាឈ្មោះ​ដែលមានតែមួយទេ​\n"
+
+#, c-format
+msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+msgstr "របៀបប្រើ ៖​ %s [-r] [-s] [group [gshadow]]\n"
+
+#, c-format
+msgid "Usage: %s [-r] [-s] [group]\n"
+msgstr "របៀបប្រើ ៖ %s [-r] [-s] [group]\n"
+
+#, c-format
+msgid "No\n"
+msgstr "ទេ\n"
+
+#, c-format
+msgid "%s: -s and -r are incompatibile\n"
+msgstr "%s ៖ -s និង​ -r គឺមិន​ត្រូវ​គ្នាទេ​\n"
+
+#, c-format
+msgid "%s: cannot lock file %s\n"
+msgstr "%s ៖ មិន​អាច​ចាក់សោ​ឯកសារ​ %s បានទេ\n"
+
+#, c-format
+msgid "%s: cannot open file %s\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បានទេ\n"
+
+#, c-format
+msgid "invalid group file entry\n"
+msgstr "ធាតុបញ្ចូល​ឯកសារក្រុម​មិនត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid "delete line '%s'? "
+msgstr "លុប​បន្ទាត់​ '%s' ឬ ? "
+
+#, c-format
+msgid "duplicate group entry\n"
+msgstr "ធាតុបញ្ចូល​​ក្រុម​ស្ទួន​\n"
+
+#, c-format
+msgid "invalid group name '%s'\n"
+msgstr "ឈ្មោះ​ក្រុម​ '%s' មិនត្រឹមត្រូវ\n"
+
+#, c-format
+msgid "group %s: no user %s\n"
+msgstr "ក្រុម​ %s ៖ គ្មាន​អ្នកប្រើ​ %s\n"
+
+#, c-format
+msgid "delete member '%s'? "
+msgstr "លុប​សមាជិក​ '%s' ឬ ? "
+
+#, c-format
+msgid "no matching group file entry in %s\n"
+msgstr "គ្មាន​ធាតុបញ្ចូល​ឯកសារ​ក្រុមផ្គូរផ្គង​នៅក្នុង​​ %s ទេ\n"
+
+#, c-format
+msgid "add group '%s' in %s ?"
+msgstr "បន្ថែម​ក្រុម​ '%s' ទៅក្នុង​ %s ឬ ?"
+
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s ៖ មិន​អាច​ធ្វើ​ឲ្យ​ធាតុ​ស្រមោល​សម្រាប់​​ %s ទាន់សម័យបានឡើយ\n"
+
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យធាតុ​បញ្ចូល​សម្រាប់ក្រុម​ %s ទាន់សម័យ​បានទេ\n"
+
+#, c-format
+msgid "invalid shadow group file entry\n"
+msgstr "ធាតុ​ឯកសារ​ក្រុម​ស្រមោល​មិន​ត្រឹមត្រូវ\n"
+
+#, c-format
+msgid "duplicate shadow group entry\n"
+msgstr "ធាតុ​ក្រុម​ស្រមោល​ស្ទួន​\n"
+
+#, c-format
+msgid "shadow group %s: no administrative user %s\n"
+msgstr "ក្រុម​ស្រមោល​ %s ៖ គ្មានអ្នកប្រើដែលគ្រប់គ្រង​ %s ទេ\n"
+
+#, c-format
+msgid "delete administrative member '%s'? "
+msgstr "លុប​សមាជិក​ដែល​គ្រប់គ្រង​ '%s' ឬ ? "
+
+#, c-format
+msgid "shadow group %s: no user %s\n"
+msgstr "ក្រុម​ស្រមោល​ %s ៖ គ្មាន​អ្នក​ប្រើ​ %s ទេ\n"
+
+#, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យឯកសារ %s ទាន់សម័យ​បានទេ\n"
+
+#, c-format
+msgid "%s: the files have been updated\n"
+msgstr "%s ៖ មិនបានធ្វើឲ្យ​ឯកសារទាន់សម័យឡើយ​\n"
+
+#, c-format
+msgid "%s: no changes\n"
+msgstr "%s ៖គ្មាន​ការផ្លាស់ប្ដូរ​\n"
+
+#, c-format
+msgid "%s: can't lock shadow group file\n"
+msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារក្រុមស្រមោល​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't open shadow group file\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុមស្រមោល​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't remove shadow group %s\n"
+msgstr "%s ៖ មិនអាច​យក​ក្រុម​ស្រមោល %s ចេញ​បានទេ\n"
+
+#, c-format
+msgid "%s: can't update shadow group file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារ​ក្រុម​ស្រមោល​ទាន់សម័យ​បានទេ​\n"
+
+#, c-format
+msgid "%s: can't update group file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារក្រុម​ទាន់សម័យបានទេ​\n"
+
+#, c-format
+msgid "%s: can't delete shadow group file\n"
+msgstr "%s ៖ មិនអាច​លុប​ឯកសារក្រុម​ស្រមោលបានទេ​\n"
+
+#, c-format
+msgid "Usage: id [-a]\n"
+msgstr "របៀបប្រើ ៖ លេខសម្គាល់ [-a]\n"
+
+#, c-format
+msgid "Usage: id\n"
+msgstr "របៀបប្រើ​ ៖ លេខសម្គាល់\n"
+
+#, c-format
+msgid " groups="
+msgstr " ក្រុម​="
+
+#, c-format
+msgid ""
+"Usage: lastlog [options]\n"
+"\n"
+"Options:\n"
+"  -b, --before DAYS\tprint only lastlog records older than DAYS\n"
+"  -h, --help\t\tdisplay this help message and exit\n"
+"  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
+"  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ lastlog [ជម្រើស]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -b, --before DAYS\tបោះពុម្ពកំណត់កំណត់ហេតុចុងក្រោយចាស់ជាង DAYS\n"
+"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -t, --time DAYS\tបោះពុម្ព​តែ​កំណត់ត្រា​កំណត់​ហេតុ​ចុង​ក្រោយ​ដែល​ថ្មី​ជាង DAYS ប៉ុណ្ណោះ\n"
+"  -u, --user LOGIN\tបោះពុម្ព​កំណត់ត្រា​កំណត់ហេតុ​ចុង​ក្រោយ​សម្រាប់​អ្នក​ប្រើ​ដែល​មាន LOGIN ដែល​បាន​"
+"បញ្ជាក់\n"
+"\n"
+
+#, c-format
+msgid "Username         Port     From             Latest\n"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ         ច្រក     ពី             ចុង​ក្រោយ​បំផុត\n"
+
+#, c-format
+msgid "Username                Port     Latest\n"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ                ច្រក     ចុង​ក្រោយ​បំផុត​\n"
+
+msgid "**Never logged in**"
+msgstr "**មិន​ដែល​ចូល​សោះ**"
+
+#, c-format
+msgid "lastlog: unexpected argument: %s\n"
+msgstr "កំណត់ត្រាចុងក្រោយ ៖ អាគុយម៉ង់​មិន​រំពឹង​ទុក​ ៖ %s\n"
+
+#, c-format
+msgid "Usage: %s [-p] [name]\n"
+msgstr "របៀបប្រើ ៖ %s [-p] [name]\n"
+
+#, c-format
+msgid "       %s [-p] [-h host] [-f name]\n"
+msgstr "       %s [-p] [-h ម៉ាស៊ីន] [-f ឈ្មោះ]\n"
+
+#, c-format
+msgid "       %s [-p] -r host\n"
+msgstr "       %s [-p] -r ម៉ាស៊ីន​\n"
+
+#, c-format
+msgid "Invalid login time\n"
+msgstr "ពេលវេលា​ចូល​មិន​ត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid ""
+"\n"
+"System closed for routine maintenance\n"
+msgstr ""
+"\n"
+"ប្រព័ន្ធ​បាន​បិទ​សម្រាប់​តំហែទាំ​ទម្រង់ការ\n"
+
+#, c-format
+msgid ""
+"\n"
+"[Disconnect bypassed -- root login allowed.]\n"
+msgstr ""
+"\n"
+"[បាន​វៀង​ការ​ផ្ដាច់ -- បាន​អនុញ្ញាត​ការ​ចូល​ជា root ។]\n"
+
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %d seconds.\n"
+msgstr ""
+"\n"
+"អស់​ពេល​ចូល​បន្ទាប់ពី %d វិនាទី ។\n"
+
+#, c-format
+msgid " on '%.100s' from '%.200s'"
+msgstr " លើ '%.100s' ពី '%.200s'"
+
+#, c-format
+msgid " on '%.100s'"
+msgstr " លើ '%.100s'"
+
+#, c-format
+msgid "login: PAM Failure, aborting: %s\n"
+msgstr "ចូល ៖ PAM បរាជ័យ​ កំពុង​បោះបង់​ ៖ %s\n"
+
+#, c-format
+msgid "%s login: "
+msgstr "%s ចូល ៖ "
+
+#, c-format
+msgid "login: "
+msgstr "ចូល​ ៖ "
+
+#, c-format
+msgid "Maximum number of tries exceeded (%d)\n"
+msgstr "បាន​លើសពី​ចំនួន​អតិបរ​មា​នៃ​ការ​សាកល្បង​ (%d)\n"
+
+#, c-format
+msgid "login: abort requested by PAM\n"
+msgstr "ចូល​ ៖  PAM បានស្នើឲ្យ​បោះបង់ចោល​\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s ចូល​ ៖ "
+
+msgid "Login incorrect"
+msgstr "ចូល​មិន​ត្រឹមត្រូវ​"
+
+#, c-format
+msgid "%s: failure forking: %s"
+msgstr "%s ៖ ការចែកជាពីរវិធី​​បានបរាជ័យ​ ៖ %s"
+
+msgid "Warning: login re-enabled after temporary lockout.\n"
+msgstr "ការព្រមាន ៖ បាន​អនុញ្ញាតឲ្យចូល​ម្តង​ទៀត​បន្ទាប់​ពី ចេញ​បណ្តោះអាសន្ន​​\n"
+
+#, c-format
+msgid "Last login: %s on %s"
+msgstr "ចូល​ចុងក្រោយ ៖​ %s លើ​ %s"
+
+#, c-format
+msgid "Last login: %.19s on %s"
+msgstr "ចូល​ចុងក្រោយ​ ៖ %.19s លើ​ %s"
+
+#, c-format
+msgid " from %.*s"
+msgstr "ពី​ %.*s"
+
+msgid ""
+"login time exceeded\n"
+"\n"
+msgstr ""
+"បានហួសពេលវេលា​ចូល​​\n"
+"\n"
+
+#, c-format
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "របៀបប្រើ ៖ newgrp [-] [group]\n"
+
+#, c-format
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "របៀបប្រើ​ ៖ ក្រុម sg [[-c] command]\n"
+
+#, c-format
+msgid "unknown UID: %u\n"
+msgstr "មិន​ស្គាល់​ UID ៖ %u\n"
+
+#, c-format
+msgid "unknown GID: %lu\n"
+msgstr "មិន​ស្គាល់​ GID ៖ %lu\n"
+
+msgid "Sorry.\n"
+msgstr "សូមអភ័យទោស ។\n"
+
+#, c-format
+msgid "too many groups\n"
+msgstr "ច្រើន​ក្រុមពេក​\n"
+
+#, c-format
+msgid "Usage: %s [input]\n"
+msgstr "របៀបប្រើ ៖ %s [input]\n"
+
+#, c-format
+msgid "%s: can't lock /etc/passwd.\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ /etc/passwd បានឡើយ ។\n"
+
+#, c-format
+msgid "%s: can't lock files, try again later\n"
+msgstr "%s ៖ មិន​អាច​ចាក់សោ​ឯកសារ​បានឡើយ សូមព្យាយាម​ម្តង​ទៀតនៅពេលក្រោយ​\n"
+
+#, c-format
+msgid "%s: can't open files\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារបានឡើយ​\n"
+
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ បន្ទាត់​មិន​ត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid "%s: line %d: can't create GID\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ GID បានឡើយ\n"
+
+#, c-format
+msgid "%s: line %d: can't create UID\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ UID បានឡើយ\n"
+
+#, c-format
+msgid "%s: line %d: cannot find user %s\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​រក​អ្នកប្រើ​ %s ឃើញឡើយ\n"
+
+#, c-format
+msgid "%s: line %d: can't update password\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​ធ្វើ​ឲ្យ​ពាក្យ​សម្ងាត់​ទាន់សម័យ​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: line %d: mkdir failed\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ mkdir បានបរាជ័យ​\n"
+
+#, c-format
+msgid "%s: line %d: chown failed\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ chown បានបរាជ័យ​\n"
+
+#, c-format
+msgid "%s: line %d: can't update entry\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិនអាចធ្វើឲ្យ​ធាតុបញ្ចូល​ទាន់សម័យបានឡើយ\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s ៖ មានកំហុសក្នុងការ​ធ្វើឲ្យ​ឯកសារទាន់សម័យ\n"
+
+#, c-format
+msgid ""
+"Usage: passwd [options] [login]\n"
+"\n"
+"Options:\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
+"  -e, --expire\t\t\tforce expire the password for the named account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -i, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tlock the named account\n"
+"  -n, --mindays MIN_DAYS\tset minimum number of days before password\n"
+"\t\t\t\tchange to MIN_DAYS\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
+"  -S, --status\t\t\treport password status on the named account\n"
+"  -u, --unlock\t\t\tunlock the named account\n"
+"  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
+"\t\t\t\tchange to MAX_DAYS\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ passwd [ជម្រើស] [ការចូល]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -a, --all\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ទាំងអស់\n"
+"  -d, --delete\t\t\tលុប​ពាក្យសម្ងាត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
+"  -e, --expire\t\t\tបង្ហាញ​ឲ្យ​ពាក្យសម្ងាត់​ផុត​កំណត់​សម្រាប់​គណនី​ដែល​មាន​ឈ្មោះ\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -k, --keep-tokens\t\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់ ក្នុ​ង​ក​រណី​​ដែល​ផុត​កំណត់\n"
+"  -i, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
+"\t\t\t\tto INACTIVE\n"
+"  -l, --lock\t\t\tចាក់សោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
+"  -n, --mindays MIN_DAYS\tកំណត់ចំនួន​ថ្ងៃ​អប្បបរមា​មុន​ពាក្យសម្ងាត់\n"
+"\t\t\t\tផ្លាស់ប្ដូរទៅ MIN_DAYS\n"
+"  -q, --quiet\t\t\tរបៀប​ស្ងាត់\n"
+"  -r, --repository REPOSITORY\tផ្លាស់ប្ដូរ​ពាក្យសម្ងាត់​នៅ​ក្នុង​ឃ្លាំង REPOSITORY\n"
+"  -S, --status\t\t\tរាយការណ៍​ស្ថានភាព​ពាក្យសម្ងាត់​អំពី​គណនី​ដែល​មាន​ឈ្មោះ\n"
+"  -u, --unlock\t\t\tដោះសោ​គណនី​ដែល​មាន​ឈ្មោះ\n"
+"  -w, --warndays WARN_DAYS\tកំណត់​ថ្ងៃ​ព្រមាន​ផុត​កំណត់​ទៅ​ជា WARN_DAYS\n"
+"  -x, --maxdays MAX_DAYS\tកំណត់​ចំនួនថ្ងៃ​អតិបរមា​មុន​ពាក្យសម្ងាត់\n"
+"\t\t\t\tផ្លាស់ប្ដូរ​ទៅ​ជា MAX_DAYS\n"
+"\n"
+
+msgid "Old password: "
+msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
+
+#, c-format
+msgid ""
+"Enter the new password (minimum of %d, maximum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"បញ្ចូល​ពាក្យ​សម្ងាត់​ថ្មី​ (តួអក្សរ​​អប្បបរមានៃ​ %d អតិបរមានៃ %d)\n"
+"សូម​ប្រើ​អក្សរ​ធំ​ អក្សរ​តូច​ ​និង លេខ​ចូល​គ្នា​ ។\n"
+
+msgid "New password: "
+msgstr "ពាក្យ​សម្ងាត់​ថ្មី​ ៖ "
+
+#, c-format
+msgid "Try again.\n"
+msgstr "សូមព្យាយាម​ម្តង​ទៀត​ ។\n"
+
+#, c-format
+msgid ""
+"\n"
+"Warning: weak password (enter it again to use it anyway).\n"
+msgstr ""
+"\n"
+"ការព្រមាន ៖ ពាក្យ​សម្ងាត់មិនសូវមានសុវត្ថិភាព​ (សូម​បញ្ចូល​វា​ម្តង​ទៀត​​ដើម្បី​ប្រើវា​) ។\n"
+
+#, c-format
+msgid "They don't match; try again.\n"
+msgstr "ពួកវាមិនផ្គូរផ្គងគ្នាទេ ។ សូមព្យាយាម​ម្តង​ទៀត​ ។\n"
+
+#, c-format
+msgid "The password for %s cannot be changed.\n"
+msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s បានឡើយ ។\n"
+
+#, c-format
+msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgstr "សូមអភ័យទោស ពាក្យ​សម្ងាត់​សម្រាប់​ %s មិន​ទាន់​ប្តូរ​នូវ​ឡើយ​ទេ​ ។\n"
+
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s ៖ អស់​សតិ​\n"
+
+#, c-format
+msgid "%s: repository %s not supported\n"
+msgstr "%s ៖ ឃ្លាំង​ %s មិន​បាន​គាំទ្រឡើយ​\n"
+
+#, c-format
+msgid "%s: You may not view or modify password information for %s.\n"
+msgstr "%s ៖ អ្នក​មិនអាច​មើល​ ឬ កែប្រែ​ព័ត៌មាន​ពាក្យ​សម្ងាត់​សម្រាប់​ %s បានឡើយ ។\n"
+
+#, c-format
+msgid "Changing password for %s\n"
+msgstr "កំពុង​ប្តូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s\n"
+
+#, c-format
+msgid "The password for %s is unchanged.\n"
+msgstr "មិនបានប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s ឡើយ ។\n"
+
+#, c-format
+msgid "Password changed.\n"
+msgstr "ពាក្យ​សម្ងាត់​បាន​ប្តូរ​ ។\n"
+
+#, c-format
+msgid "Password set to expire.\n"
+msgstr "កំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​ផុត​កំណត់​ ។\n"
+
+#, c-format
+msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
+
+#, c-format
+msgid "invalid password file entry\n"
+msgstr "ធាតុបញ្ចូល​ឯកសារ​ពាក្យសម្ងាត់​មិនត្រឹមត្រូវ\n"
+
+#, c-format
+msgid "duplicate password entry\n"
+msgstr "ធាតុបញ្ចូល​ពាក្យ​សម្ងាត់​ស្ទួន​\n"
+
+#, c-format
+msgid "invalid user name '%s'\n"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "user %s: no group %u\n"
+msgstr "អ្នក​ប្រើ​ %s ៖ គ្មាន​ក្រុម​ %u\n"
+
+#, c-format
+msgid "user %s: directory %s does not exist\n"
+msgstr "អ្នក​ប្រើ %s ៖ មិនទាន់មាន​ថត​ %s នៅ​ឡើយ​ទេ​\n"
+
+#, c-format
+msgid "user %s: program %s does not exist\n"
+msgstr "អ្នកប្រើ​ %s ៖ មិនទាន់មាន​កម្មវិធី​ %s នៅឡើយទេ\n"
+
+#, c-format
+msgid "no matching password file entry in %s\n"
+msgstr "មិនមាន​ធាតុបញ្ចូល​ឯកសារ​ពាក្យសម្ងាត់​ដែលផ្គូរផ្គង​នៅក្នុង​ %s ឡើយ\n"
+
+#, c-format
+msgid "add user '%s' in %s? "
+msgstr "បន្ថែម​អ្នក​ប្រើ​ '%s'ក្នុង​ %s ឬ ? "
+
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ធាតុបញ្ចូលពាក្យសម្ងាត់​ទាន់សម័យ​សម្រាប់​​ %s បានឡើយ\n"
+
+#, c-format
+msgid "invalid shadow password file entry\n"
+msgstr "ធាតុបញ្ចូល​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោល​មិនត្រឹមត្រូវ​\n"
+
+#, c-format
+msgid "duplicate shadow password entry\n"
+msgstr "ធាតុ​បញ្ចូល​ពាក្យសម្ងាត់​ស្រមោល​ស្ទួន​\n"
+
+#, c-format
+msgid "user %s: last password change in the future\n"
+msgstr "អ្នកប្រើ​ %s ៖ ពាក្យ​សម្ងាត់​ចុងក្រោយ​​ប្ដូរនៅក្នុង​អនាគត\n"
+
+#, c-format
+msgid "%s: can't lock passwd file\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ឯកសារ​​ពាក្យសម្ងាត់បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't open passwd file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ឯកសារពាក្យសម្ងាត់បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't remove shadow entry for %s\n"
+msgstr "%s ៖ មិន​អាច​យក​ធាតុបញ្ចូល​​ស្រមោលចេញ​​សម្រាប់ %s បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't update shadow file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យឯកសារស្រមោល​ទាន់សម័យបានឡើយ​\n"
+
+#, c-format
+msgid "%s: can't update passwd file\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ឯកសារពាក្យសម្ងាត់​ទាន់សម័យបានឡើយ\n"
+
+#, c-format
+msgid "%s: can't update entry for user %s\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យធាតុបញ្ចូល​ទាន់សម័យ​សម្រាប់ %s បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't delete shadow password file\n"
+msgstr "%s ៖ មិន​អាច​លុប​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោល​បានឡើយ\n"
+
+#, c-format
+msgid "Access to su to that account DENIED.\n"
+msgstr "ដំណើរការ​ជា​ su ទៅ​កាន់​គណនី​នោះ​ DENIED ។\n"
+
+#, c-format
+msgid "Password authentication bypassed.\n"
+msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវពាក្យ​សម្ងាត់ bypassed ។\n"
+
+#, c-format
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់ផ្ទាល់ខ្លួន​របស់អ្នក​ ជា​ការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ​ ។\n"
+
+msgid "Sorry."
+msgstr "សូមអភ័យទោស​ ។"
+
+#, c-format
+msgid "%s: %s\n"
+msgstr "%s ៖ %s\n"
+
+#, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -c, --command COMMAND\t\tpass COMMAND to the invoked shell\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ su [ជម្រើស] [ការចូល]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -c, --command COMMAND\t\tហុច COMMAND ទៅសែលដែលបានហៅ\n"
+"  -h, --help\t\t\tបង្ហាញ​​សា​រ​ជំ​នួយ​​នេះ និង​ចេញ\n"
+"  -, -l, --login\t\tធ្វើ​ឲ្យ​សែល​ជា​សែល​ចូល\n"
+"  -m, -p,\n"
+"  --preserve-environment\tកុំ​កំណត់​អថេរ​បរិស្ថាន និង​រក្សាទុក\n"
+"\t\t\t\tសែលដដែល\n"
+"  -s, --shell SHELL\t\tប្រើ SHELL ជំនួស​​ឲ្យលំនាំដើម​នៅ​ក្នុង passwd\n"
+"\n"
+
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s ៖ ត្រូវ​តែ​រត់​ពី ស្ថានីយមួយ\n"
+
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s ៖ pam_start ៖ កំហុស​ %d\n"
+
+#, c-format
+msgid "Unknown id: %s\n"
+msgstr "មិន​ស្គាល់​លេខ​សម្គាល់​ ៖ %s\n"
+
+#, c-format
+msgid "You are not authorized to su %s\n"
+msgstr "អ្នកគ្មាន​ការ​អនុញ្ញាតឲ្យ​ចូល​ទៅ​កាន់​ su ទេ​ %s\n"
+
+msgid "(Enter your own password)"
+msgstr "(បញ្ចូល​ពាក្យ​សម្ងាត់​ផ្ទាល់​ខ្លួនរបស់អ្នក​)"
+
+#, c-format
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(មិន​អើពើ​)\n"
+
+#, c-format
+msgid "No shell\n"
+msgstr "គ្មានសែល​\n"
+
+#, c-format
+msgid "No password file\n"
+msgstr "គ្មាន​ឯកសារ​ពាក្យ​សម្ងាត់ឡើយ​\n"
+
+#, c-format
+msgid "No password entry for 'root'\n"
+msgstr "គ្មាន​ធាតុ​ពាក្យ​សម្ងាត់​សម្រាប់ 'root'​ ឡើយ\n"
+
+msgid ""
+"\n"
+"Type control-d to proceed with normal startup,\n"
+"(or give root password for system maintenance):"
+msgstr ""
+"\n"
+"ចុចគ្រាប់ចុច បញ្ជា-d ដើម្បី​បន្ត​ជាមួយ​ការ​ចាប់ផ្ដើម​ធម្មតា\n"
+"(ឬ ផ្ដល់​ពាក្យសម្ងាត់ root ដើម្បី​ជួសជុល​ប្រព័ន្ធ) ៖"
+
+msgid "Entering System Maintenance Mode\n"
+msgstr "កំពុង​បញ្ចូល​របៀប​តំហែទាំ​ប្រព័ន្ធ​\n"
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s ៖ អាគុយម៉ង់​ជាលេខ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: unknown GID %s\n"
+msgstr "%s ៖ មិន​ស្គាល់​ GID %s\n"
+
+#, c-format
+msgid "%s: unknown group %s\n"
+msgstr "%s ៖ មិន​ស្គាល់​ក្រុម​ %s\n"
+
+#, c-format
+msgid "%s: cannot create new defaults file\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ឯកសារ​លំនាំ​ដើម​ថ្មី​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: cannot open new defaults file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​លំនាំដើម​ថ្មី​​បានលឡើយ\n"
+
+#, c-format
+msgid "%s: rename: %s"
+msgstr "%s ៖​ ប្តូរ​ឈ្មោះ​ ៖ %s"
+
+#, c-format
+msgid "%s: group '%s' is a NIS group.\n"
+msgstr "%s ៖ ក្រុម​ '%s' គឺជាក្រុម​ NIS ។\n"
+
+#, c-format
+msgid "%s: too many groups specified (max %d).\n"
+msgstr "%s ៖ ក្រុម​ដែលបានបញ្ជាក់​ច្រើនពេក​ (អតិ​ %d) ។\n"
+
+#, c-format
+msgid ""
+"Usage: useradd [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -b, --base-dir BASE_DIR\tbase directory for the new user account\n"
+"\t\t\t\thome directory\n"
+"  -c, --comment COMMENT\t\tset the GECOS field for the new user account\n"
+"  -d, --home-dir HOME_DIR\thome directory for the new user account\n"
+"  -D, --defaults\t\tprint or save modified default useradd\n"
+"\t\t\t\tconfiguration\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP for the new user account\n"
+"  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
+"\t\t\t\tuser account\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
+"  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
+"  -m, --create-home\t\tcreate home directory for the new user\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tallow create user with duplicate\n"
+"\t\t\t\t(non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new user\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\tthe login shell for the new user account\n"
+"  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ useradd [ជម្រើស] LOGIN\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -b, --base-dir BASE_DIR\tថត​មូលដ្ឋាន​សម្រាប់​គណនី​អ្នក​ប្រើ​ថ្មី\n"
+"\t\t\t\tថតផ្ទះ\n"
+"  -c, --comment COMMENT\t\tកំណត់វាល GECOS សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
+"  -d, --home-dir HOME_DIR\tថត​ផ្ទះ​សម្រាប់​គណនី​អ្នក​ប្រើ​ថ្មី\n"
+"  -D, --defaults\t\tបោះពុម្ព ឬ​រក្សាទុក useradd លំនាំដើម​ដែល​បាន​កែប្រែ\n"
+"\t\t\t\tconfiguration\n"
+"  -e, --expiredate EXPIRE_DATE\tកំណត់​កាលបរិច្ឆេទ​គណនី​ទៅ​ជា EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tកំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុតកំណត់\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tបង្ខំ​ឲ្យ​ប្រើ GROUP សម្រាប់​គណនី​អ្នក​ប្រើ​ថ្មី\n"
+"  -G, --groups GROUPS\t\tបញ្ជី​របស់​ក្រុម​ផ្ដល់​សម្រាប់\n"
+"\t\t\t\tគណនី​អ្នក​ប្រើ​ថ្មី\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -k, --skel SKEL_DIR\t\tបញ្ជាក់ថត skel ជំនួស\n"
+"  -K, --key KEY=VALUE\t\tបដិសេធលំនាំដើម /etc/login.defs\n"
+"  -m, --create-home\t\tបង្កើត​ថត​ផ្ទះ​សម្រាប់​អ្នកប្រើ​ថ្មី\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tអនុញ្ញា​ឲ្យ​បង្កើត​អ្នកប្រើ​ដែល​មាន\n"
+"\t\t\t\t UID(មិនមែន​តែ​មួយគត់) ស្ទួន \n"
+"  -p, --password PASSWORD\tប្រើ​ពាក្យសម្ងាត់​ដែល​បាន​អ៊ិនគ្រីប​សម្រាប់\n"
+"\t\t\t\tគណនី​អ្នកប្រើ​ថ្មី\n"
+"  -s, --shell SHELL\t\tសែល​ចូល​សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
+"  -u, --uid UID\t\t\tបង្ខំឲ្យប្រើ UID សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
+"\n"
+
+#, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s ៖ UID %u មិន​មែន​មាន​តែមួយទេ​\n"
+
+#, c-format
+msgid "%s: can't get unique UID\n"
+msgstr "%s ៖ មិនអាចយក​ UID ដែលមានតែមួយ​បានទេ\n"
+
+#, c-format
+msgid "%s: invalid base directory '%s'\n"
+msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: invalid comment '%s'\n"
+msgstr "%s ៖ សេចក្តី​អត្ថាធិប្បាយ​មិនត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: invalid home directory '%s'\n"
+msgstr "%s ៖ ថត​ផ្ទះ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr "%s ៖ កាលបរិច្ឆទ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e\n"
+msgstr "%s ៖ បានទាមទារ​ពាក្យ​សម្ងាត់​ស្រមោល​​សម្រាប់​-e\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -f\n"
+msgstr "%s ៖ បានទាមទារពាក្យ​សម្ងាត់​ស្រមោល​​សម្រាប់​ -f\n"
+
+#, c-format
+msgid "%s: invalid field '%s'\n"
+msgstr "%s ៖ វាល​មិនត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: invalid shell '%s'\n"
+msgstr "%s ៖ សែល​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, c-format
+msgid "%s: cannot rewrite password file\n"
+msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ពាក្យ​សម្ងាត់​ឡើង​វិញ​បានឡើយ\n"
+
+#, c-format
+msgid "%s: cannot rewrite shadow password file\n"
+msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោលឡើងវិញ​​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s ​៖ មិន​អាច​ចាក់​សោ​ឯកសារ​ពាក្យ​សម្ងាត់បានឡើយ​\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ពាក្យ​សម្ងាត់​បានឡើយ\n"
+
+#, c-format
+msgid "%s: cannot lock shadow password file\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ឯកសារ​ពាក្យ​សម្ងាត់ស្រមោល​បានឡើយ\n"
+
+#, c-format
+msgid "%s: cannot open shadow password file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោលបានឡើយ\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s ៖ មានកំហុសក្នុងការ​ចាក់សោ​ឯកសារក្រុម​\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​បើក​ឯកសារក្រុម\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s ៖មានកំហុសក្នុងការ​ចាក់សោ​ឯកសារក្រុម​ស្រមោល​\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​បើក​ឯកសារក្រុម​ស្រមោល\n"
+
+#, c-format
+msgid "%s: error adding new password entry\n"
+msgstr "%s ៖ មានកំហុសក្នុងការ​បន្ថែម​ធាតុបញ្ចូល​ពាក្យសម្ងាត់​ថ្មី​\n"
+
+#, c-format
+msgid "%s: error adding new shadow password entry\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​បន្ថែម​ធាតុបញ្ចូល​ពាក្យសម្ងាត់​ស្រមោល​ថ្មី​\n"
+
+#, c-format
+msgid "%s: cannot create directory %s\n"
+msgstr "%s ៖ មិន​​អាច​បង្កើត​ថត​ %s បានឡើយ\n"
+
+msgid "Creating mailbox file"
+msgstr "កំពុង​បង្កើត​ឯកសារ​ប្រអប់​សំបុត្រ​"
+
+#, c-format
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr "រក​ក្រុម​​ 'សំបុត្រ​' មិន​ឃើញ​ឡើយ ។ កំពុង​បង្កើត​ឯកសារប្រអប់​សំបុត្រ​អ្នក​ប្រើ​ជាមួយ​របៀប​ 0600 ។\n"
+
+msgid "Setting mailbox file permissions"
+msgstr "ការកំណត់​សិទ្ធ​លើ​ឯកសារ​ប្រអប់​សំបុត្រ​"
+
+#, c-format
+msgid "%s: user %s exists\n"
+msgstr "%s ៖ អ្នក​ប្រើ​ %s មាន​រួច​ហើយ​\n"
+
+#, c-format
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr "%s ៖ ក្រុម​ %s មាន​រួច​ហើយ​ - ប្រសិនបើ​អ្នក​ចង់​បន្ថែម​អ្នក​ប្រើទៅ​កាន់​ក្រុម​នោះ​ ប្រើ​ -g ។\n"
+
+#, c-format
+msgid ""
+"%s: warning: the home directory already exists.\n"
+"Not copying any file from skel directory into it.\n"
+msgstr ""
+"%s ៖ ការព្រមាន​ ៖ មានថតផ្ទះ​រួចហើយ ។\n"
+"មិនចម្លង​​ឯកសារណាមួយ​ពីថត​ skel ចូលក្នុង​វានោះទេ ។\n"
+
+#, c-format
+msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+msgstr "%s ៖ ការព្រមាន ៖ CREATE_HOME មិន​បាន​គាំទ្រទេ​ សូម​ប្រើ​ -m ជំនួសវិញ ។\n"
+
+#, c-format
+msgid ""
+"Usage: userdel [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -r, --remove\t\t\tremove home directory and mail spool\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ userdel [ជម្រើស] LOGIN\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -f, --force\t\t\tបង្ខំ​ឲ្យ​យក​ឯកសារ​ចេញ ទោះបី​ជា​មិន​បាន​គ្រប់គ្រង​ដោយ​អ្នកប្រើ​ក៏ដោយ\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -r, --remove\t\t\tយកថ​ត​ផ្ទះ  និង​ហុង​សំបុត្រ​ចេញ\n"
+"\n"
+
+#, c-format
+msgid "%s: error updating group entry\n"
+msgstr "%s  ៖ មានកំហុស​ក្នុងការ​ធ្វើឲ្យ​ធាតុ​បញ្ចូល​ក្រុម​​ទាន់សម័យ\n"
+
+#, c-format
+msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgstr "%s ៖ មិនអាច​យកក្រុម %s ដែលជា​ក្រុម​ចម្បង​សម្រាប់​អ្នកប្រើដទៃទៀតចេញបានទេ ។\n"
+
+#, c-format
+msgid "%s: cannot open group file\n"
+msgstr "%s ៖ មិនអាចបើក​ឯកសារក្រុម​បានឡើយ​\n"
+
+#, c-format
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​ស្រមោល​បានឡើយ\n"
+
+#, c-format
+msgid "%s: error deleting password entry\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​លុប​ធាតុ​បញ្ចូល​ពាក្យសម្ងាត់​\n"
+
+#, c-format
+msgid "%s: error deleting shadow password entry\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​លុប​ធាតុបញ្ចូល​ពាក្យសម្ងាត់​ស្រមោល​\n"
+
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr "%s ៖ បច្ចុប្បន្ន ​អ្នក​ប្រើ​ %s បាន​ចូលហើយ​\n"
+
+#, c-format
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s ៖ %s មិន​បានទទួលយក​​ %s ទេ, មិនយកចេញ​\n"
+
+#, c-format
+msgid "%s: warning: can't remove "
+msgstr "%s  ៖ ការព្រមាន​ ៖ មិន​អាច​យកចេញបានឡើយ "
+
+#, c-format
+msgid "%s: user %s does not exist\n"
+msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
+
+#, c-format
+msgid "%s: user %s is a NIS user\n"
+msgstr "%s ៖ អ្នកប្រើ​ %s គឺជា​អ្នក​​ប្រើ​ NIS\n"
+
+#, c-format
+msgid "%s: not removing directory %s (would remove home of user %s)\n"
+msgstr "%s ៖ មិនយក​ថត​ %s ចេញ​ឡើយ (នឹងយក​ថតផ្ទះ​របស់អ្នកប្រើ %s ចេញ)\n"
+
+#, c-format
+msgid "%s: error removing directory %s\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការយក​ថត​ %s ចេញ\n"
+
+#, c-format
+msgid ""
+"Usage: usermod [options] LOGIN\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
+"  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ usermod [ជម្រើស] LOGIN\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -a, --append GROUP\t\tបន្ថែម​អ្នក​ប្រើ​ទៅ​ខាង​ចុង​ក្រុម​បន្ទាប់បន្សំ\n"
+"  -c, --comment COMMENT\t\tតម្លៃ​ថ្មី​របស់​វាល GECOS\n"
+"  -d, --home HOME_DIR\t\tថតផ្ទះ​ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
+"  -e, --expiredate EXPIRE_DATE\tកំណត់​កាលបរិច្ឆេទ​ផុត​កំណត់​ទៅ​ជា EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tកំណត់​ពាក្យសម្ងាត់​ឲ្យ​អសកម្ម​បន្ទាប់​ពី​ផុត​កំណត់\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tបង្ខំ​ឲ្យ​ប្រើ GROUP ជា​ក្រុម​សំខាន់​ថ្មី\n"
+"  -G, --groups GROUPS\t\tបញ្ជី​ថ្មី​របស់​ក្រុម​បន្ទាប់បន្សំ\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួ​យនេះ និង​ចេញ\n"
+"  -l, --login NEW_LOGIN\t\tតម្លៃ​ថ្មី​របស់​ឈ្មោះ​ចូល\n"
+"  -L, --lock\t\t\tចាក់សោ​គណនី​អ្នកប្រើ\n"
+"  -m, --move-home\t\tផ្លាស់ទី​មាតិកា​របស់​ថតផ្ទះ​ទៅ\n"
+"\t\t\t\tទីតាំង​ថ្មី (ប្រើ​តែជា​មួយ -d ប៉ុណ្ណោះ)\n"
+"  -o, --non-unique\t\tអនុញ្ញាត​ឲ្យ​ប្រើ UID (មិនមាន​តែ​មួយគត់) ស្ទួន\n"
+"  -p, --password PASSWORD\tប្រើ​​ពាក្យសម្ងា​ត់​​ដែ​ល​បាន​អ៊ិនគ្រីប​សម្រាប់​​ពាក្យសម្ងា​ត់​ថ្មី\n"
+"  -s, --shell SHELL\t\tសែល​​ចូ​ល​​ថ្មី​​សម្រាប់​​គណនី​អ្នកប្រើ\n"
+"  -u, --uid UID\t\t\t UID ថ្មី​សម្រាប់​គណនី​អ្នកប្រើ\n"
+"  -U, --unlock\t\t\tដោះសោ​គណនី​អ្នកប្រើ\n"
+"\n"
+
+#, c-format
+msgid "%s: out of memory in update_group\n"
+msgstr "%s: អស់​សតិ​ក្នុង​ក្នុងការធ្វើឲ្យ​ក្រុមទាន់សម័យ\n"
+
+#, c-format
+msgid "%s: out of memory in update_gshadow\n"
+msgstr "%s ៖ អស់​សតិ​ក្នុងការធ្វើឲ្យ gshadow ទាន់សម័៧\n"
+
+#, c-format
+msgid "%s: no flags given\n"
+msgstr "%s ៖ មិន​ផ្តល់​ទង់​ឲ្យឡើយ​\n"
+
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr "%s ៖ ពាក្យ​សម្ងាត់​ស្រមោល​បានត្រូវការ​​ -e និង -f\n"
+
+#, c-format
+msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgstr "%s: ទង់ -a គឺត្រូវបានអនុញ្ញាត​បានតែជាមួយទង់ -G ប៉ុណ្ណោះ\n"
+
+#, c-format
+msgid "%s: uid %lu is not unique\n"
+msgstr "%s ៖ uid %lu មិនមែន​មាន​តែ​មួយទេ​\n"
+
+#, c-format
+msgid "%s: error changing password entry\n"
+msgstr "%s  ​៖ មានកំហុស​ក្នុងការ​ផ្លាស់ប្ដូរ​ធាតុបញ្ចូល​ពាក្យសម្ងាត់​\n"
+
+#, c-format
+msgid "%s: error removing password entry\n"
+msgstr "%s ៖ មានកំហុស​ក្នុងការ​យក​ធាតុបញ្ចូល​ពាក្យសម្ងាត់ចេញ\n"
+
+#, c-format
+msgid "%s: error removing shadow password entry\n"
+msgstr "%s ៖ មានកំហុសក្នុងការ​យក​ធាតុបញ្ចូល​ពាក្យសម្ងាត់​ស្រមោល​ចេញ\n"
+
+#, c-format
+msgid "%s: directory %s exists\n"
+msgstr "%s ៖ មានថត​ %s ​រួច​ហើយ​\n"
+
+#, c-format
+msgid "%s: can't create %s\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
+
+#, c-format
+msgid "%s: can't chown %s\n"
+msgstr "%s ៖ មិន​អាច​ chown %s បានឡើយ\n"
+
+#, c-format
+msgid "%s: warning: failed to completely remove old home directory %s"
+msgstr "%s ៖ ការព្រមាន ៖ បរាជ័យ​ក្នុងការ​បញ្ចប់​ការយកថតផ្ទះ %s ចាស់ចេញ"
+
+#, c-format
+msgid "%s: cannot rename directory %s to %s\n"
+msgstr "%s ៖ មិនអាចប្ដូរឈ្មោះ​ថត​ %s ទៅ​ជា​ %s បានឡើយ\n"
+
+#, c-format
+msgid "%s: warning: %s not owned by %s\n"
+msgstr "%s ៖ ការព្រមាន ៖​ %s មិនត្រូវបានទទួល​យក​ដោយ %s ឡើយ\n"
+
+msgid "failed to change mailbox owner"
+msgstr "បរាជ័យ​ក្នុងការ​ផ្លាស់ប្ដូរ​ម្ចាស់​ប្រអប់សំបុត្រ"
+
+msgid "failed to rename mailbox"
+msgstr "​បរាជ័យ​ក្នុងការប្ដូរឈ្មោះប្រអប់"
+
+#, c-format
+msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+"\n"
+msgstr ""
+"របៀបប្រើ ៖ vipw [ជម្រើស]\n"
+"\n"
+"ជម្រើស ៖\n"
+"  -g, --group\t\t\tកែសម្រួល​មូលដ្ឋាន​ទិន្នន័យ​ក្រុម\n"
+"  -h, --help\t\t\tបង្ហាញ​សារ​ជំនួយ​នេះ និង​ចេញ\n"
+"  -p, --passwd\t\t\tកែសម្រួល​មូលដ្ឋាន​ទិន្នន័យ passwd\n"
+"  -q, --quiet\t\t\tរបៀប​ស្ងាត់\n"
+"  -s, --shadow\t\t\tកែសម្រួល​មូលដ្ឋាន​ទិន្នន័យ​ស្រមោល ឬ gshadow\n"
+"\n"
+
+#, c-format
+msgid ""
+"\n"
+"%s: %s is unchanged\n"
+msgstr ""
+"\n"
+"%s ៖ %s មិនត្រូវបានប្ដូរឡើយ​\n"
+
+msgid "Couldn't lock file"
+msgstr "មិនអាច​ចាក់សោ​ឯកសារបានឡើយ"
+
+msgid "Couldn't make backup"
+msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម្រុងទុក​បានឡើយ"
+
+#, c-format
+msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប្ដូរ​របស់អ្នក​គឺនៅក្នុង​ %s)\n"

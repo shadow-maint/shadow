@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c,v 1.39 2006/05/12 22:59:06 kloczek Exp $"
+#ident "$Id: getdef.c,v 1.40 2006/06/24 13:17:18 kloczek Exp $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -109,9 +109,6 @@ static struct itemdef def_table[] = {
 #ifdef USE_SYSLOG
 	{"SYSLOG_SG_ENAB", NULL},
 	{"SYSLOG_SU_ENAB", NULL},
-#endif
-#ifdef SKEY
-	{"GETPASS_ASTERISKS", NULL},
 #endif
 	{NULL, NULL}
 };

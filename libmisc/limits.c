@@ -36,7 +36,7 @@
 
 #ifndef USE_PAM
 
-#ident "$Id: limits.c,v 1.20 2005/09/05 17:32:17 kloczek Exp $"
+#ident "$Id: limits.c,v 1.21 2006/07/10 04:11:31 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -138,10 +138,8 @@ static int check_logins (const char *name, const char *maxlogins)
 	setutent ();
 	while ((ut = getutent ())) {
 #endif
-#ifdef USER_PROCESS
 		if (ut->ut_type != USER_PROCESS)
 			continue;
-#endif
 		if (ut->ut_user[0] == '\0')
 			continue;
 		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0)

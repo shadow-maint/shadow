@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.70 2006/05/07 17:26:59 kloczek Exp $"
+#ident "$Id: su.c,v 1.71 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <getopt.h>
 #include <grp.h>
@@ -261,7 +261,8 @@ static void usage (void)
 			   "  -m, -p,\n"
 			   "  --preserve-environment	do not reset environment variables, and keep\n"
 			   "				the same shell\n"
-			   "  -s, --shell SHELL		use SHELL instead of the default in passwd\n"));
+			   "  -s, --shell SHELL		use SHELL instead of the default in passwd\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 

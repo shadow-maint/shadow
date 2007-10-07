@@ -4,7 +4,6 @@ lib/commonio.c
 lib/encrypt.c
 lib/fputsx.c
 lib/getdef.c
-lib/getpass.c
 lib/groupio.c
 lib/gshadow.c
 lib/lockpw.c

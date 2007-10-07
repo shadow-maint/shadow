@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='usermod.8'>
-  <!--  $Id: usermod.8.xml,v 1.25 2006/05/20 12:11:38 kloczek Exp $  -->
+  <!--  $Id: usermod.8.xml,v 1.27 2006/06/12 14:19:24 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>usermod</refentrytitle>
     <manvolnum>8</manvolnum>
@@ -236,9 +236,9 @@
       user who is logged in. You must make certain that the named user is
       not executing any processes when this command is being executed if the
       user's numerical user ID is being changed. You must change the owner
-      of any crontab files manually. You must change the owner of any at
-      jobs manually. You must make any changes involving NIS on the NIS
-      server.
+      of any <command>crontab</command> files manually. You must change
+      the owner of any <command>at</command> jobs manually. You must make
+      any changes involving NIS on the NIS server.
     </para>
   </refsect1>
 
@@ -249,12 +249,6 @@
 	<term><filename>/etc/group</filename></term>
 	<listitem>
 	  <para>Group account information.</para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><filename>/etc/login.defs</filename></term>
-	<listitem>
-	  <para>Shadow password suite configuration.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>

@@ -37,16 +37,16 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = groups$(EXEEXT) login$(EXEEXT) su$(EXEEXT)
+sbin_PROGRAMS = nologin$(EXEEXT)
 ubin_PROGRAMS = faillog$(EXEEXT) lastlog$(EXEEXT) chage$(EXEEXT) \
 	chfn$(EXEEXT) chsh$(EXEEXT) expiry$(EXEEXT) gpasswd$(EXEEXT) \
 	newgrp$(EXEEXT) passwd$(EXEEXT)
 usbin_PROGRAMS = chgpasswd$(EXEEXT) chpasswd$(EXEEXT) \
 	groupadd$(EXEEXT) groupdel$(EXEEXT) groupmod$(EXEEXT) \
 	grpck$(EXEEXT) grpconv$(EXEEXT) grpunconv$(EXEEXT) \
-	logoutd$(EXEEXT) newusers$(EXEEXT) nologin$(EXEEXT) \
-	pwck$(EXEEXT) pwconv$(EXEEXT) pwunconv$(EXEEXT) \
-	useradd$(EXEEXT) userdel$(EXEEXT) usermod$(EXEEXT) \
-	vipw$(EXEEXT)
+	logoutd$(EXEEXT) newusers$(EXEEXT) pwck$(EXEEXT) \
+	pwconv$(EXEEXT) pwunconv$(EXEEXT) useradd$(EXEEXT) \
+	userdel$(EXEEXT) usermod$(EXEEXT) vipw$(EXEEXT)
 noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -58,13 +58,14 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(ubindir)" \
-	"$(DESTDIR)$(usbindir)"
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(sbindir)" \
+	"$(DESTDIR)$(ubindir)" "$(DESTDIR)$(usbindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
+sbinPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 ubinPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 usbinPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
-PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS) $(ubin_PROGRAMS) \
-	$(usbin_PROGRAMS)
+PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS) $(sbin_PROGRAMS) \
+	$(ubin_PROGRAMS) $(usbin_PROGRAMS)
 chage_SOURCES = chage.c
 chage_OBJECTS = chage.$(OBJEXT)
 am__DEPENDENCIES_1 = $(top_builddir)/libmisc/libmisc.a \
@@ -412,9 +413,9 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am  $(am__confi
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign  src/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  src/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  src/Makefile
+	  $(AUTOMAKE) --gnu  src/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -463,6 +464,34 @@ clean-binPROGRAMS:
 
 clean-noinstPROGRAMS:
 	@list='$(noinst_PROGRAMS)'; for p in $$list; do \
+	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  echo " rm -f $$p $$f"; \
+	  rm -f $$p $$f ; \
+	done
+install-sbinPROGRAMS: $(sbin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	test -z "$(sbindir)" || $(mkdir_p) "$(DESTDIR)$(sbindir)"
+	@list='$(sbin_PROGRAMS)'; for p in $$list; do \
+	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  if test -f $$p \
+	     || test -f $$p1 \
+	  ; then \
+	    f=`echo "$$p1" | sed 's,^.*/,,;$(transform);s/$$/$(EXEEXT)/'`; \
+	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(sbinPROGRAMS_INSTALL) '$$p' '$(DESTDIR)$(sbindir)/$$f'"; \
+	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(sbinPROGRAMS_INSTALL) "$$p" "$(DESTDIR)$(sbindir)/$$f" || exit 1; \
+	  else :; fi; \
+	done
+
+uninstall-sbinPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(sbin_PROGRAMS)'; for p in $$list; do \
+	  f=`echo "$$p" | sed 's,^.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+	  echo " rm -f '$(DESTDIR)$(sbindir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(sbindir)/$$f"; \
+	done
+
+clean-sbinPROGRAMS:
+	@list='$(sbin_PROGRAMS)'; for p in $$list; do \
 	  f=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
@@ -771,7 +800,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(PROGRAMS)
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(ubindir)" "$(DESTDIR)$(usbindir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(sbindir)" "$(DESTDIR)$(ubindir)" "$(DESTDIR)$(usbindir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -798,8 +827,8 @@ maintainer-clean-generic:
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libtool \
-	clean-noinstPROGRAMS clean-ubinPROGRAMS clean-usbinPROGRAMS \
-	mostlyclean-am
+	clean-noinstPROGRAMS clean-sbinPROGRAMS clean-ubinPROGRAMS \
+	clean-usbinPROGRAMS mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -819,7 +848,7 @@ info-am:
 
 install-data-am: install-ubinPROGRAMS install-usbinPROGRAMS
 
-install-exec-am: install-binPROGRAMS
+install-exec-am: install-binPROGRAMS install-sbinPROGRAMS
 
 install-info: install-info-am
 
@@ -846,22 +875,24 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
-	uninstall-ubinPROGRAMS uninstall-usbinPROGRAMS
+	uninstall-sbinPROGRAMS uninstall-ubinPROGRAMS \
+	uninstall-usbinPROGRAMS
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
 	clean-generic clean-libtool clean-noinstPROGRAMS \
-	clean-ubinPROGRAMS clean-usbinPROGRAMS ctags distclean \
-	distclean-compile distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am html html-am info info-am \
-	install install-am install-binPROGRAMS install-data \
-	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-strip install-ubinPROGRAMS \
-	install-usbinPROGRAMS installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-info-am uninstall-ubinPROGRAMS \
-	uninstall-usbinPROGRAMS
+	clean-sbinPROGRAMS clean-ubinPROGRAMS clean-usbinPROGRAMS \
+	ctags distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-binPROGRAMS \
+	install-data install-data-am install-exec install-exec-am \
+	install-info install-info-am install-man install-sbinPROGRAMS \
+	install-strip install-ubinPROGRAMS install-usbinPROGRAMS \
+	installcheck installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-info-am uninstall-sbinPROGRAMS \
+	uninstall-ubinPROGRAMS uninstall-usbinPROGRAMS
 
 
 install-am: all-am

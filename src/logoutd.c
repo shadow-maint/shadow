@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: logoutd.c,v 1.30 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: logoutd.c,v 1.31 2006/07/10 04:11:32 kloczek Exp $"
 
 #include <fcntl.h>
 #include <signal.h>
@@ -204,10 +204,8 @@ int main (int argc, char **argv)
 #else
 		while ((ut = getutent ())) {
 #endif
-#ifdef USER_PROCESS
 			if (ut->ut_type != USER_PROCESS)
 				continue;
-#endif
 			if (ut->ut_user[0] == '\0')
 				continue;
 			if (check_login (ut))
@@ -244,24 +242,12 @@ int main (int argc, char **argv)
 				close (tty_fd);
 				sleep (10);
 			}
-#ifdef USER_PROCESS		/* USG_UTMP */
+
 			if (ut->ut_pid > 1) {
 				kill (-ut->ut_pid, SIGHUP);
 				sleep (10);
 				kill (-ut->ut_pid, SIGKILL);
 			}
-#else				/* BSD || SUN || SUN4 */
-			/*
-			 * vhangup() the line to kill try and kill
-			 * whatever is out there using it.
-			 */
-			if ((tty_fd =
-			     open (tty_name, O_RDONLY | O_NDELAY)) == -1)
-				continue;
-
-			vhangup (tty_fd);
-			close (tty_fd);
-#endif				/* BSD || SUN || SUN4 */
 
 			strncpy (user, ut->ut_user, sizeof (user) - 1);
 			user[sizeof (user) - 1] = '\0';

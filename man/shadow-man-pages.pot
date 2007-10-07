@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-06-01 23:03+0200\n"
+"POT-Creation-Date: 2006-06-25 18:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 msgid "vipw"
 msgstr ""
 
-#: vipw.8.xml:6(manvolnum) usermod.8.xml:6(manvolnum) userdel.8.xml:6(manvolnum) userdel.8.xml:147(replaceable) useradd.8.xml:6(manvolnum) pwconv.8.xml:6(manvolnum) pwck.8.xml:6(manvolnum) nologin.8.xml:6(manvolnum) newusers.8.xml:6(manvolnum) logoutd.8.xml:6(manvolnum) lastlog.8.xml:6(manvolnum) grpck.8.xml:6(manvolnum) groupmod.8.xml:6(manvolnum) groupmems.8.xml:6(manvolnum) groupdel.8.xml:6(manvolnum) groupdel.8.xml:78(replaceable) groupadd.8.xml:6(manvolnum) faillog.8.xml:6(manvolnum) faillog.5.xml:49(manvolnum) chpasswd.8.xml:6(manvolnum) chgpasswd.8.xml:6(manvolnum) 
+#: vipw.8.xml:6(manvolnum) usermod.8.xml:6(manvolnum) userdel.8.xml:6(manvolnum) userdel.8.xml:147(replaceable) useradd.8.xml:6(manvolnum) pwconv.8.xml:6(manvolnum) pwck.8.xml:6(manvolnum) nologin.8.xml:6(manvolnum) newusers.8.xml:6(manvolnum) logoutd.8.xml:6(manvolnum) lastlog.8.xml:6(manvolnum) grpck.8.xml:6(manvolnum) groupmod.8.xml:6(manvolnum) groupmems.8.xml:6(manvolnum) groupdel.8.xml:6(manvolnum) groupdel.8.xml:78(replaceable) groupadd.8.xml:6(manvolnum) faillog.8.xml:6(manvolnum) faillog.5.xml:52(manvolnum) chpasswd.8.xml:6(manvolnum) chgpasswd.8.xml:6(manvolnum) 
 msgid "8"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Edit shadow or gshadow database."
 msgstr ""
 
-#: vipw.8.xml:85(title) usermod.8.xml:246(title) userdel.8.xml:88(title) useradd.8.xml:360(title) suauth.5.xml:139(title) su.1.xml:180(title) sg.1.xml:43(title) shadow.5.xml:105(title) shadow.3.xml:172(title) pwconv.8.xml:109(title) pwck.8.xml:145(title) porttime.5.xml:76(title) passwd.5.xml:87(title) passwd.1.xml:320(title) newusers.8.xml:100(title) newgrp.1.xml:54(title) logoutd.8.xml:35(title) login.access.5.xml:66(title) login.1.xml:198(title) limits.5.xml:107(title) lastlog.8.xml:113(title) gshadow.5.xml:61(title) grpck.8.xml:87(title) groups.1.xml:46(title) groupmod.8.xml:69(title) groupmems.8.xml:103(title) groupdel.8.xml:43(title) groupadd.8.xml:112(title) gpasswd.1.xml:93(title) faillog.8.xml:132(title) faillog.5.xml:34(title) expiry.1.xml:32(title) chsh.1.xml:56(title) chfn.1.xml:59(title) chage.1.xml:175(title) 
+#: vipw.8.xml:85(title) usermod.8.xml:246(title) userdel.8.xml:88(title) useradd.8.xml:360(title) suauth.5.xml:139(title) su.1.xml:180(title) sg.1.xml:43(title) shadow.5.xml:105(title) shadow.3.xml:172(title) pwconv.8.xml:109(title) pwck.8.xml:145(title) porttime.5.xml:76(title) passwd.5.xml:87(title) passwd.1.xml:320(title) newusers.8.xml:100(title) newgrp.1.xml:54(title) logoutd.8.xml:35(title) login.access.5.xml:66(title) login.1.xml:198(title) limits.5.xml:107(title) lastlog.8.xml:113(title) gshadow.5.xml:61(title) grpck.8.xml:87(title) groups.1.xml:46(title) groupmod.8.xml:69(title) groupmems.8.xml:103(title) groupdel.8.xml:43(title) groupadd.8.xml:112(title) gpasswd.1.xml:93(title) faillog.8.xml:132(title) faillog.5.xml:37(title) expiry.1.xml:32(title) chsh.1.xml:56(title) chfn.1.xml:59(title) chage.1.xml:175(title) 
 msgid "FILES"
 msgstr ""
 
@@ -109,23 +109,23 @@ msgstr ""
 msgid "Secure group account information."
 msgstr ""
 
-#: vipw.8.xml:100(filename) usermod.8.xml:261(filename) userdel.8.xml:103(filename) useradd.8.xml:363(filename) su.1.xml:183(filename) sg.1.xml:46(filename) shadow.5.xml:108(filename) pwck.8.xml:154(filename) passwd.5.xml:90(filename) passwd.1.xml:323(filename) newgrp.1.xml:57(filename) login.1.xml:213(filename) grpck.8.xml:102(filename) expiry.1.xml:35(filename) chsh.1.xml:59(filename) chfn.1.xml:68(filename) chage.1.xml:179(filename) 
+#: vipw.8.xml:100(filename) usermod.8.xml:255(filename) userdel.8.xml:103(filename) useradd.8.xml:363(filename) su.1.xml:183(filename) sg.1.xml:46(filename) shadow.5.xml:108(filename) pwck.8.xml:154(filename) passwd.5.xml:90(filename) passwd.1.xml:323(filename) newgrp.1.xml:57(filename) login.1.xml:213(filename) grpck.8.xml:102(filename) expiry.1.xml:35(filename) chsh.1.xml:59(filename) chfn.1.xml:68(filename) chage.1.xml:179(filename) 
 msgid "/etc/passwd"
 msgstr ""
 
-#: vipw.8.xml:102(para) usermod.8.xml:263(para) userdel.8.xml:105(para) useradd.8.xml:365(para) su.1.xml:185(para) sg.1.xml:48(para) shadow.5.xml:110(para) pwck.8.xml:156(para) passwd.5.xml:92(para) passwd.1.xml:325(para) newgrp.1.xml:59(para) login.1.xml:215(para) grpck.8.xml:104(para) expiry.1.xml:37(para) chsh.1.xml:61(para) chfn.1.xml:70(para) chage.1.xml:182(para) 
+#: vipw.8.xml:102(para) usermod.8.xml:257(para) userdel.8.xml:105(para) useradd.8.xml:365(para) su.1.xml:185(para) sg.1.xml:48(para) shadow.5.xml:110(para) pwck.8.xml:156(para) passwd.5.xml:92(para) passwd.1.xml:325(para) newgrp.1.xml:59(para) login.1.xml:215(para) grpck.8.xml:104(para) expiry.1.xml:37(para) chsh.1.xml:61(para) chfn.1.xml:70(para) chage.1.xml:182(para) 
 msgid "User account information."
 msgstr ""
 
-#: vipw.8.xml:106(filename) usermod.8.xml:267(filename) userdel.8.xml:109(filename) useradd.8.xml:369(filename) su.1.xml:189(filename) sg.1.xml:52(filename) shadow.5.xml:114(filename) shadow.3.xml:175(filename) pwck.8.xml:160(filename) passwd.5.xml:96(filename) passwd.1.xml:329(filename) newgrp.1.xml:63(filename) login.1.xml:219(filename) expiry.1.xml:41(filename) chage.1.xml:187(filename) 
+#: vipw.8.xml:106(filename) usermod.8.xml:261(filename) userdel.8.xml:109(filename) useradd.8.xml:369(filename) su.1.xml:189(filename) sg.1.xml:52(filename) shadow.5.xml:114(filename) shadow.3.xml:175(filename) pwck.8.xml:160(filename) passwd.5.xml:96(filename) passwd.1.xml:329(filename) newgrp.1.xml:63(filename) login.1.xml:219(filename) expiry.1.xml:41(filename) chage.1.xml:187(filename) 
 msgid "/etc/shadow"
 msgstr ""
 
-#: vipw.8.xml:108(para) usermod.8.xml:269(para) userdel.8.xml:111(para) useradd.8.xml:371(para) su.1.xml:191(para) sg.1.xml:54(para) shadow.5.xml:116(para) shadow.3.xml:177(para) pwck.8.xml:162(para) passwd.1.xml:331(para) newgrp.1.xml:65(para) login.1.xml:221(para) expiry.1.xml:43(para) chage.1.xml:190(para) 
+#: vipw.8.xml:108(para) usermod.8.xml:263(para) userdel.8.xml:111(para) useradd.8.xml:371(para) su.1.xml:191(para) sg.1.xml:54(para) shadow.5.xml:116(para) shadow.3.xml:177(para) pwck.8.xml:162(para) passwd.1.xml:331(para) newgrp.1.xml:65(para) login.1.xml:221(para) expiry.1.xml:43(para) chage.1.xml:190(para) 
 msgid "Secure user account information."
 msgstr ""
 
-#: vipw.8.xml:114(title) usermod.8.xml:276(title) userdel.8.xml:190(title) useradd.8.xml:471(title) suauth.5.xml:168(title) su.1.xml:198(title) sg.1.xml:73(title) shadow.5.xml:123(title) shadow.3.xml:184(title) pwconv.8.xml:121(title) pwck.8.xml:169(title) porttime.5.xml:88(title) passwd.5.xml:105(title) passwd.1.xml:389(title) nologin.8.xml:35(title) newusers.8.xml:112(title) newgrp.1.xml:84(title) login.defs.5.xml:256(title) login.access.5.xml:78(title) login.1.xml:252(title) limits.5.xml:117(title) gshadow.5.xml:79(title) grpck.8.xml:111(title) groups.1.xml:58(title) groupmod.8.xml:138(title) groupmems.8.xml:121(title) groupdel.8.xml:94(title) groupadd.8.xml:199(title) gpasswd.1.xml:111(title) faillog.8.xml:144(title) faillog.5.xml:46(title) expiry.1.xml:50(title) chsh.1.xml:80(title) chpasswd.8.xml:85(title) chgpasswd.8.xml:84(title) chfn.1.xml:77(title) chage.1.xml:230(title) 
+#: vipw.8.xml:114(title) usermod.8.xml:270(title) userdel.8.xml:190(title) useradd.8.xml:471(title) suauth.5.xml:168(title) su.1.xml:198(title) sg.1.xml:73(title) shadow.5.xml:123(title) shadow.3.xml:184(title) pwconv.8.xml:121(title) pwck.8.xml:169(title) porttime.5.xml:88(title) passwd.5.xml:105(title) passwd.1.xml:389(title) nologin.8.xml:35(title) newusers.8.xml:112(title) newgrp.1.xml:84(title) login.defs.5.xml:256(title) login.access.5.xml:78(title) login.1.xml:252(title) limits.5.xml:117(title) gshadow.5.xml:79(title) grpck.8.xml:111(title) groups.1.xml:58(title) groupmod.8.xml:138(title) groupmems.8.xml:121(title) groupdel.8.xml:94(title) groupadd.8.xml:199(title) gpasswd.1.xml:111(title) faillog.8.xml:144(title) faillog.5.xml:49(title) expiry.1.xml:50(title) chsh.1.xml:80(title) chpasswd.8.xml:85(title) chgpasswd.8.xml:84(title) chfn.1.xml:77(title) chage.1.xml:230(title) 
 msgid "SEE ALSO"
 msgstr ""
 
@@ -270,18 +270,10 @@ msgid "CAVEATS"
 msgstr ""
 
 #: usermod.8.xml:234(para) 
-msgid "<command>usermod</command> will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any crontab files manually. You must change the owner of any at jobs manually. You must make any changes involving NIS on the NIS server."
+msgid "<command>usermod</command> will not allow you to change the name of a user who is logged in. You must make certain that the named user is not executing any processes when this command is being executed if the user's numerical user ID is being changed. You must change the owner of any <command>crontab</command> files manually. You must change the owner of any <command>at</command> jobs manually. You must make any changes involving NIS on the NIS server."
 msgstr ""
 
-#: usermod.8.xml:255(filename) userdel.8.xml:97(filename) useradd.8.xml:393(filename) pwconv.8.xml:112(filename) newusers.8.xml:103(filename) login.access.5.xml:69(filename) groupadd.8.xml:127(filename) chsh.1.xml:71(filename) chfn.1.xml:62(filename) 
-msgid "/etc/login.defs"
-msgstr ""
-
-#: usermod.8.xml:257(para) userdel.8.xml:99(para) useradd.8.xml:395(para) pwconv.8.xml:114(para) newusers.8.xml:105(para) login.access.5.xml:71(para) groupadd.8.xml:129(para) chsh.1.xml:73(para) chfn.1.xml:64(para) 
-msgid "Shadow password suite configuration."
-msgstr ""
-
-#: usermod.8.xml:277(para) 
+#: usermod.8.xml:271(para) 
 msgid "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></citerefentry>, <citerefentry><refentrytitle>chsh</refentrytitle><manvolnum>1</manvolnum></citerefentry>, <citerefentry><refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum></citerefentry>, <citerefentry><refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum></citerefentry>, <citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>userdel</refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 msgstr ""
 
@@ -323,6 +315,14 @@ msgstr ""
 
 #: userdel.8.xml:78(para) 
 msgid "The mail spool is defined by the <emphasis>MAIL_DIR</emphasis> variable in the <filename>login.defs</filename> file."
+msgstr ""
+
+#: userdel.8.xml:97(filename) useradd.8.xml:393(filename) pwconv.8.xml:112(filename) newusers.8.xml:103(filename) login.access.5.xml:69(filename) groupadd.8.xml:127(filename) chsh.1.xml:71(filename) chfn.1.xml:62(filename) 
+msgid "/etc/login.defs"
+msgstr ""
+
+#: userdel.8.xml:99(para) useradd.8.xml:395(para) pwconv.8.xml:114(para) newusers.8.xml:105(para) login.access.5.xml:71(para) groupadd.8.xml:129(para) chsh.1.xml:73(para) chfn.1.xml:64(para) 
+msgid "Shadow password suite configuration."
 msgstr ""
 
 #: userdel.8.xml:118(title) useradd.8.xml:402(title) pwck.8.xml:186(title) passwd.1.xml:338(title) grpck.8.xml:129(title) groupmod.8.xml:87(title) groupdel.8.xml:61(title) groupadd.8.xml:154(title) chage.1.xml:197(title) 
@@ -2222,7 +2222,7 @@ msgid "lastlog"
 msgstr ""
 
 #: lastlog.8.xml:11(refpurpose) 
-msgid "examine lastlog file"
+msgid "reports the most recent login of all users or of a given user"
 msgstr ""
 
 #: lastlog.8.xml:25(para) 
@@ -2270,7 +2270,7 @@ msgid "NOTE"
 msgstr ""
 
 #: lastlog.8.xml:102(para) 
-msgid "The <filename>lastlog</filename> file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is much smaller than the one shown by \"<command>ls -l</command>\" (which can indicate a really big file if you have a high UID). You can display its real size with \"<command>ls -s</command>\"."
+msgid "The <filename>lastlog</filename> file is a database which contains info on the last login of each user. You should not rotate it. It is a sparse file, so its size on the disk is usually much smaller than the one shown by \"<command>ls -l</command>\" (which can indicate a really big file if you have in <filename>passwd</filename> users with a high UID). You can display its real size with \"<command>ls -s</command>\"."
 msgstr ""
 
 #: lastlog.8.xml:116(filename) 
@@ -2282,7 +2282,7 @@ msgid "Database times of previous user logins."
 msgstr ""
 
 #: lastlog.8.xml:126(para) 
-msgid "Large gaps in UID numbers will cause the lastlog program to run longer with no output to the screen (i.e. if mmdf=800 and last UID=170, program will appear to hang as it processes UID 171-799)."
+msgid "Large gaps in UID numbers will cause the lastlog program to run longer with no output to the screen (i.e. if in lastlog database there is no entries for users with UID between 170 and 800 lastlog will appear to hang as it processes entries with UIDs 171-799)."
 msgstr ""
 
 #: gshadow.5.xml:5(refentrytitle) gshadow.5.xml:10(refname) 
@@ -2714,7 +2714,7 @@ msgstr ""
 msgid "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></citerefentry>, <citerefentry><refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupdel</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>groupmod</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum></citerefentry>, <citerefentry><refentrytitle>group</refentrytitle><manvolnum>5</manvolnum></citerefentry>."
 msgstr ""
 
-#: faillog.8.xml:5(refentrytitle) faillog.8.xml:10(refname) faillog.8.xml:16(command) faillog.5.xml:5(refentrytitle) faillog.5.xml:9(refname) faillog.5.xml:49(refentrytitle) 
+#: faillog.8.xml:5(refentrytitle) faillog.8.xml:10(refname) faillog.8.xml:16(command) faillog.5.xml:5(refentrytitle) faillog.5.xml:9(refname) faillog.5.xml:52(refentrytitle) 
 msgid "faillog"
 msgstr ""
 
@@ -2770,11 +2770,11 @@ msgstr ""
 msgid "<command>faillog</command> only prints out users with no successful login since the last failure. To print out a user who has had a successful login since their last failure, you must explicitly request the user with the <option>-u</option> flag, or print out all users with the <option>-a</option> flag."
 msgstr ""
 
-#: faillog.8.xml:135(filename) faillog.5.xml:37(filename) 
+#: faillog.8.xml:135(filename) faillog.5.xml:40(filename) 
 msgid "/var/log/faillog"
 msgstr ""
 
-#: faillog.8.xml:137(para) faillog.5.xml:39(para) 
+#: faillog.8.xml:137(para) faillog.5.xml:42(para) 
 msgid "Failure logging file."
 msgstr ""
 
@@ -2787,16 +2787,16 @@ msgid "login failure logging file"
 msgstr ""
 
 #: faillog.5.xml:15(para) 
-msgid "<filename>/var/log/faillog</filename> maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occurred on; and the date the last login failure occurred."
+msgid "<filename>/var/log/faillog</filename> maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occurred on; the date the last login failure occurred; and the time in seconds how long the account will be locked after a failure."
 msgstr ""
 
-#: faillog.5.xml:23(para) 
+#: faillog.5.xml:25(para) 
 msgid "The structure of the file is:"
 msgstr ""
 
-#: faillog.5.xml:24(programlisting) 
+#: faillog.5.xml:26(programlisting) 
 #, no-wrap
-msgid "\nstruct\tfaillog {\n\tshort   fail_cnt;\n\tshort   fail_max;\n\tchar    fail_line[12];\n\ttime_t  fail_time;\n};"
+msgid "\nstruct\tfaillog {\n\tshort   fail_cnt;\n\tshort   fail_max;\n\tchar    fail_line[12];\n\ttime_t  fail_time;\n\tlong    fail_locktime;\n};"
 msgstr ""
 
 #: expiry.1.xml:5(refentrytitle) expiry.1.xml:10(refname) expiry.1.xml:16(command) 

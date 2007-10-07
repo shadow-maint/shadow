@@ -30,7 +30,7 @@
 #include <config.h>
 
 #ifndef USE_PAM
-#ident "$Id: pwauth.c,v 1.22 2006/05/12 22:54:22 kloczek Exp $"
+#ident "$Id: pwauth.c,v 1.23 2006/06/24 13:17:18 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -49,10 +49,6 @@
 static const char *PROMPT = gettext_noop ("Password: ");
 #else
 static const char *PROMPT = gettext_noop ("%s's Password: ");
-#endif
-
-#ifdef  SKEY
-extern char *getpass_with_echo ();
 #endif
 
 int wipe_clear_pass = 1;
@@ -179,9 +175,7 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * -- AR 8/22/1999
 	 */
 	if (retval && !input[0] && (use_skey)) {
-		strncat (prompt, "(Echo on) ",
-			 (sizeof (prompt) - strlen (prompt)));
-		clear = getpass_with_echo (prompt);
+		clear = getpass (prompt);
 		if (!clear) {
 			static char c[1];
 

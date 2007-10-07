@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "porttime" "5" "03/11/2006" "Форматы файлов" "Форматы файлов"
+.\"     Title: porttime
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/24/2006
+.\"    Manual: Форматы файлов
+.\"    Source: Форматы файлов
+.\"
+.TH "porttime" "5" "06/24/2006" "Форматы файлов" "Форматы файлов"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,6 +14,7 @@
 porttime \- файл с временами доступа к портам
 .SH "ОПИСАНИЕ"
 .PP
+Файл
 \fIporttime\fR
 содержит список устройств tty, имена пользователей и разрешённое время входа.
 .PP
@@ -28,13 +32,13 @@ porttime \- файл с временами доступа к портам
 \fIWk\fR
 можно использовать для обозначения периода с понедельника по пятницу, а
 \fIAl\fR
-обозначает каждый день. Если день не задан, то используется
+обозначает каждый день. Если день не задан, то предполагается
 \fIAl\fR
 в качестве значения по умолчанию.
 .SH "ПРИМЕРЫ"
 .PP
 Следующая запись разрешает доступ пользователю
-\fIjfh\fR
+\fBjfh\fR
 с любого порта по будням с 9:00 до 17:00.
 .PP
 *:jfh:Wk0900\-1700
@@ -45,15 +49,17 @@ porttime \- файл с временами доступа к портам
 \fIoper\fR
 с
 \fI/dev/console\fR
-в любое время. Это показывает, как файл
+в любое время. Это показывает, что файл
 \fI/etc/porttime\fR
 обрабатывается в порядке появления записей в файле. Любой другой пользователь попадёт под правило второй записи, которая не разрешает доступ в любое время.
 .sp
+.RS 3n
 .nf
       console:root,oper:Al0000\-2400
       console:*:
     
 .fi
+.RE
 .PP
 Следующая запись разрешает доступ пользователю
 \fIgames\fR
@@ -61,7 +67,7 @@ porttime \- файл с временами доступа к портам
 .PP
 *:games:Wk1700\-0900,SaSu0000\-2400
 .SH "ФАЙЛЫ"
-.TP
+.TP 3n
 \fI/etc/porttime\fR
 содержит разрешённое время работы определённых пользователей с определённых портов
 .SH "СМОТРИТЕ ТАКЖЕ"

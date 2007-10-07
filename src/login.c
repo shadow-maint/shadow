@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: login.c,v 1.85 2006/05/07 17:44:39 kloczek Exp $"
+#ident "$Id: login.c,v 1.86 2006/07/10 04:11:32 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -889,9 +889,7 @@ int main (int argc, char **argv)
 			}
 			strncpy (failent.ut_user, failent_user,
 				 sizeof (failent.ut_user));
-#ifdef USER_PROCESS
 			failent.ut_type = USER_PROCESS;
-#endif
 			failtmp (&failent);
 		}
 		memzero (username, sizeof username);

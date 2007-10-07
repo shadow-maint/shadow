@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chage.c,v 1.71 2006/02/21 22:44:35 kloczek Exp $"
+#ident "$Id: chage.c,v 1.72 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -116,7 +116,8 @@ static void usage (void)
 			   "				change to MIN_DAYS\n"
 			   "  -M, --maxdays MAX_DAYS	set maximim number of days before password\n"
 			   "				change to MAX_DAYS\n"
-			   "  -W, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"));
+			   "  -W, --warndays WARN_DAYS	set expiration warning days to WARN_DAYS\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 

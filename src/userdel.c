@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: userdel.c,v 1.64 2006/05/12 23:37:33 kloczek Exp $"
+#ident "$Id: userdel.c,v 1.66 2006/07/10 04:11:32 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -104,7 +104,8 @@ static void usage (void)
 			   "Options:\n"
 			   "  -f, --force			force removal of files, even if not owned by user\n"
 			   "  -h, --help			display this help message and exit\n"
-			   "  -r, --remove			remove home directory and mail spool\n"));
+			   "  -r, --remove			remove home directory and mail spool\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -448,13 +449,9 @@ static void user_busy (const char *name, uid_t uid)
 	setutent ();
 	while ((utent = getutent ())) {
 #endif
-#ifdef USER_PROCESS
 		if (utent->ut_type != USER_PROCESS)
 			continue;
-#else
-		if (utent->ut_user[0] == '\0')
-			continue;
-#endif
+
 		if (strncmp (utent->ut_user, name, sizeof utent->ut_user))
 			continue;
 		fprintf (stderr,

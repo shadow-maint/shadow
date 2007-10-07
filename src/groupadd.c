@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupadd.c,v 1.51 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: groupadd.c,v 1.53 2006/06/24 05:52:00 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -97,13 +97,14 @@ static void usage (void)
 	fprintf (stderr, _("Usage: groupadd [options] group\n"
 			   "\n"
 			   "Options:\n"
-			   "  -f, --force		force exit with success status if the specified\n"
+			   "  -f, --force			force exit with success status if the specified\n"
 			   "				group already exists\n"
-			   "  -g, --gid GID		use GID for the new group\n"
+			   "  -g, --gid GID			use GID for the new group\n"
 			   "  -h, --help			display this help message and exit\n"
 			   "  -K, --key KEY=VALUE		overrides /etc/login.defs defaults\n"
 			   "  -o, --non-unique		allow create group with duplicate\n"
-			   "				(non-unique) GID\n"));
+			   "				(non-unique) GID\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 

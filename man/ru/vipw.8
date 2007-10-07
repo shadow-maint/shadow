@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "vipw" "8" "03/11/2006" "Команды управления системой" "Команды управления системой"
+.\"     Title: vipw
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/24/2006
+.\"    Manual: Команды управления системой
+.\"    Source: Команды управления системой
+.\"
+.TH "vipw" "8" "06/24/2006" "Команды управления системой" "Команды управления системой"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -19,51 +22,49 @@ vipw, vigr \- служат для редактирования файлов па
 \fBvipw\fR
 и
 \fBvigr\fR
-служат для редактирования файлов
+редактируют файлы
 \fI/etc/passwd\fR
 и
 \fI/etc/group\fR, соответственно. Если указан параметр
-\fB\-s\fR
-, то будут редактироваться теневые версии этих файлов,
+\fB\-s\fR, то будут редактироваться теневые версии этих файлов,
 \fI/etc/shadow\fR
 и
 \fI/etc/gshadow\fR, соответственно. На время работы программы устанавливают блокировку для предотвращения повреждения файла. При выборе редактора программы сначала проверяют переменную среды
-\fB$VISUAL\fR, а затем
+\fB$VISUAL\fR, затем
 \fB$EDITOR\fR, и если ничего не найдено, запускают стандартный редактор
 \fBvi\fR(1).
 .SH "ПАРАМЕТРЫ"
 .PP
-Возможные параметры команды
+Параметры команд
 \fBvipw\fR
 и
-\fBvigr\fR
-:
-.TP
+\fBvigr\fR:
+.TP 3n
 \fB\-g\fR, \fB\-\-group\fR
 Редактирует базу данных групп.
-.TP
+.TP 3n
 \fB\-h\fR, \fB\-\-help\fR
 Показать краткую справку и закончить работу.
-.TP
+.TP 3n
 \fB\-p\fR, \fB\-\-passwd\fR
 Редактировать базу данных passwd.
-.TP
+.TP 3n
 \fB\-q\fR, \fB\-\-quiet\fR
-Малоинформативный режим базы данных.
-.TP
+Не выводить сообщений при работе.
+.TP 3n
 \fB\-s\fR, \fB\-\-shadow\fR
 Редактировать базу данных shadow или gshadow.
 .SH "ФАЙЛЫ"
-.TP
+.TP 3n
 \fI/etc/group\fR
 содержит информацию о группах
-.TP
+.TP 3n
 \fI/etc/gshadow\fR
 содержит защищаемую информацию о группах
-.TP
+.TP 3n
 \fI/etc/passwd\fR
 содержит информацию о пользователях
-.TP
+.TP 3n
 \fI/etc/shadow\fR
 содержит защищаемую информацию о пользователях
 .SH "СМОТРИТЕ ТАКЖЕ"

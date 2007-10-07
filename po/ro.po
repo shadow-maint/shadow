@@ -1,21 +1,21 @@
 # translation of shadow_ro.po to Romanian
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
-#
 # Sorin Batariuc <sorin@bonbon.net>, 2004, 2005, 2006.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.15\n"
+"Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-05-20 05:11+0200\n"
-"PO-Revision-Date: 2006-03-08 17:41+0200\n"
+"POT-Creation-Date: 2006-06-25 16:13+0200\n"
+"PO-Revision-Date: 2006-06-25 12:36+0300\n"
 "Last-Translator: Sorin Batariuc <sorin@bonbon.net>\n"
-"Language-Team: Romanian <debian-l10-romanian@lists.debian.org>\n"
+"Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.10.2\n"
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -143,9 +143,9 @@ msgstr "passwd: parolă actualizată cu succes\n"
 msgid "Incorrect password for %s.\n"
 msgstr "Parolă incorectă pentru %s.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to cd to '%s'\n"
-msgstr "Nu pot schimba directorul către \"%s\"\n"
+msgstr "Nu pot schimba directorul către'%s'\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Fără director personal, autentificare cu HOME=/"
@@ -154,13 +154,13 @@ msgstr "Fără director personal, autentificare cu HOME=/"
 msgid "Cannot execute %s"
 msgstr "Nu pot executa %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root directory '%s'\n"
-msgstr "Director rădăcină invalid \"%s\"\n"
+msgstr "Director rădăcină invalid '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't change root directory to '%s'\n"
-msgstr "Nu pot schimba directorul rădăcină la \"%s\"\n"
+msgstr "Nu pot schimba directorul rădăcină la '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
@@ -197,25 +197,25 @@ msgid ""
 "  -M, --maxdays MAX_DAYS\tset maximim number of days before password\n"
 "\t\t\t\tchange to MAX_DAYS\n"
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
+"\n"
 msgstr ""
 "Folosire: chage [opţiuni] utilizator\n"
 "\n"
 "Opţiuni:\n"
 "  -d, --lastday ULTIMA_ZI\tsetează ultima schimbare de parolă la ULTIMA_ZI\n"
-"  -E, --expiredate DATA_EXPIRARE\tsetează data expirării contului la "
-"DATA_EXPIRARE\n"
+"  -E, --expiredate DATA_EXPIRARE\tsetează data expirării contului la\n"
+"\t\t\t\tDATA_EXPIRARE\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
 "  -I, --inactive INACTIVĂ\tsetează parolă inactivă după expirare\n"
 "\t\t\t\tla INACTIVĂ\n"
 "  -l, --list\t\t\tarată informaţiile de temporalitate ale contului\n"
-"  -m, --mindays MIN_ZILE\tsetează numărul minim de zile înainde de "
-"schimbarea\n"
-"\t\t\t\tparolei to MIN_ZILE\n"
-"  -M, --maxdays MAX_ZILE\tsetează numărul maxim de zile înainte de "
-"schimbarea\n"
-"\t\t\t\tparolei la MAX_ZILE\n"
-"  -W, --warndays AVERTIZ_ZILE\tsetează zilele de avertisment pentru expirare "
-"la AVERTIZ_ZILE\n"
+"  -m, --mindays MIN_ZILE\tsetează numărul minim de zile înainde de\n"
+"\t\t\t\tschimbarea parolei to MIN_ZILE\n"
+"  -M, --maxdays MAX_ZILE\tsetează numărul maxim de zile înainte de\n"
+"\t\t\t\tschimbarea parolei la MAX_ZILE\n"
+"  -W, --warndays AVERTIZ_ZILE\tsetează zilele de avertisment pentru "
+"expirare\n"
+"\t\t\t\tla AVERTIZ_ZILE\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -384,37 +384,37 @@ msgstr "Altele"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Nu vă pot determina numele de utilizator.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: nu pot schimba utilizatorul `%s' pe un client NIS.\n"
+msgstr "%s: nu pot schimba utilizatorul '%s' pe un client NIS.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' este stăpânul NIS pentru acest client.\n"
+msgstr "%s: '%s' este stăpânul NIS pentru acest client.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
 msgstr "Modificare informaţii utilizator pentru %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid name: '%s'\n"
-msgstr "%s: nume nevalid: \"%s\"\n"
+msgstr "%s: nume nevalid: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid room number: '%s'\n"
-msgstr "%s: număr de cameră nevalid: \"%s\"\n"
+msgstr "%s: număr de cameră nevalid: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid work phone: '%s'\n"
-msgstr "%s: număr telefon de birou nevalid: \"%s\"\n"
+msgstr "%s: număr telefon de birou nevalid: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home phone: '%s'\n"
-msgstr "%s: număr telefon acasă nevalid: \"%s\"\n"
+msgstr "%s: număr telefon acasă nevalid: '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: \"%s\" conţine caractere ilegale\n"
+msgstr "%s: '%s' conţine caractere ilegale\n"
 
 #, c-format
 msgid "%s: fields too long\n"
@@ -457,6 +457,7 @@ msgid ""
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
+"\n"
 msgstr ""
 "Folosire: chgpasswd [opţiuni]\n"
 "\n"
@@ -519,6 +520,7 @@ msgid ""
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
 "\t\t\tpasswords are not encrypted\n"
+"\n"
 msgstr ""
 "Folosire: chpasswd [opţiuni]\n"
 "\n"
@@ -585,23 +587,23 @@ msgid ""
 "  -u, --user LOGIN\t\tdisplay faillog record or maintains failure counters\n"
 "\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
 "\t\t\t\tfor user with LOGIN\n"
+"\n"
 msgstr ""
 "Utilizare: faillog [opţiuni]\n"
 "\n"
 "Opţiuni:\n"
-"  -a, --all\t\t\tafişează jurnalul înregistrărilor de eşuări pentru toţi "
-"utilizatorii\n"
+"  -a, --all\t\t\tafişează jurnalul înregistrărilor de eşuări pentru toţi\n"
+"\t\t\t\tutilizatorii\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
-"  -l, --lock-time SEC\t\tblochează contul la SEC secunde după o "
-"autentificare eşuată\n"
+"  -l, --lock-time SEC\t\tblochează contul la SEC secunde după o\n"
+"\t\t\t\tautentificare eşuată\n"
 "  -m, --maximum MAX\t\tsetează numărul maxim de autentificări eşuate la MAX\n"
 "  -r, --reset\t\t\tresetează contorul de autentificări eşuate\n"
-"  -t, --time DAYS\t\tafişează jurnalul înregistrărilor de eşuări mai recente "
-"de DAYS zile\n"
-"  -u, --user LOGIN\t\tafişează jurnalul înregistrărilor de eşuări sau "
-"menţine contoarele de eşuări\n"
-"\t\t\t\tşi limite (dacă este folosit cu opţiunile -r, -m sau -l) doar\n"
-"\t\t\t\tpentru utilizatorul LOGIN\n"
+"  -t, --time DAYS\t\tafişează jurnalul înregistrărilor de eşuări mai\n"
+"\t\t\t\trecente de DAYS zile\n"
+"  -u, --user LOGIN\t\tafişează jurnalul înregistrărilor de eşuări sau\n"
+"\t\t\t\tmenţine contoarele de eşuări şi limite (dacă este folosit cu\n"
+"\t\t\t\topţiunile -r, -m sau -l) doar pentru utilizatorul LOGIN\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
@@ -721,13 +723,14 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force\t\tforce exit with success status if the specified\n"
+"  -f, --force\t\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
-"  -g, --gid GID\t\tuse GID for the new group\n"
+"  -g, --gid GID\t\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -o, --non-unique\t\tallow create group with duplicate\n"
 "\t\t\t\t(non-unique) GID\n"
+"\n"
 msgstr ""
 "Utilizare: groupadd [opţiuni] grup\n"
 "\n"
@@ -868,33 +871,33 @@ msgstr "%s: nu pot deschide fişierul %s\n"
 msgid "invalid group file entry\n"
 msgstr "intrare nevalidă în fişierul de grupuri\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete line '%s'? "
-msgstr "şterg linia `%s'? "
+msgstr "şterg linia '%s'? "
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "intrare de grup duplicată\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid group name '%s'\n"
-msgstr "nume de grup nevalid `%s'\n"
+msgstr "nume de grup nevalid '%s'\n"
 
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "grupul %s: nici un utilizator %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete member '%s'? "
-msgstr "şterg membrul `%s'? "
+msgstr "şterg membrul '%s'? "
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "nici o potrivire între intrarile din fişierul de grupuri\n"
+msgstr "nici o potrivire între intrările din fişierul de grupuri în %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add group '%s' in %s ?"
-msgstr "gshadow %s: nici un utilizator %s\n"
+msgstr "adaug grupul '%s' în '%s'?"
 
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
@@ -916,9 +919,9 @@ msgstr "intrare duplicată în gshadow\n"
 msgid "shadow group %s: no administrative user %s\n"
 msgstr "gshadow %s: nici un utilizator administrativ %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete administrative member '%s'? "
-msgstr "şterg membrul administrativ `%s'? "
+msgstr "şterg membrul administrativ '%s'? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -981,17 +984,20 @@ msgid ""
 "  -h, --help\t\tdisplay this help message and exit\n"
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
+"\n"
 msgstr ""
 "Utilizaree: lastlog [opţiuni]\n"
 "\n"
 "Opţiuni:\n"
-"  -b, --before ZILE\tafişează doar înregistrările ultimului jurnal mai vechi "
-"de ZILE\n"
+"  -b, --before ZILE\tafişează doar înregistrările ultimului jurnal mai "
+"vechi\n"
+"\t\t\t\tde ZILE\n"
 "  -h, --help\t\tafişează acest mesaj de ajutor şi ieşi\n"
-"  -t, --time ZILE\tafişează doar înregistrările ultimului jurnal mai recente "
-"de ZILE\n"
-"  -u, --user LOGIN\tafişează înregistrarea ultimului jurnal pentru "
-"utilizatorul cu autentificarea specificată\n"
+"  -t, --time ZILE\tafişează doar înregistrările ultimului jurnal mai "
+"recente\n"
+"\t\t\t\tde ZILE\n"
+"  -u, --user LOGIN\tafişează înregistrarea ultimului jurnal pentru\n"
+"\t\t\t\tutilizatorul cu autentificarea specificată\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1048,13 +1054,13 @@ msgstr ""
 "\n"
 "Timp expirat pentru autentificare după %d secunde.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid " on '%.100s' from '%.200s'"
-msgstr " pe `%.100s' din `%.200s'"
+msgstr " pe '%.100s' din '%.200s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid " on '%.100s'"
-msgstr " pe `%.100s'"
+msgstr " pe '%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
@@ -1210,6 +1216,7 @@ msgid ""
 "  -w, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 "  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
 "\t\t\t\tchange to MAX_DAYS\n"
+"\n"
 msgstr ""
 "Utilizare: passwd [opţiuni] [nume_cont]\n"
 "\n"
@@ -1219,9 +1226,8 @@ msgstr ""
 "  -e, --expire \t\t\tforţează expirarea parolei pentru respectivul cont\n"
 "  -h, --help \t\t\tafisează acest mesaj de ajutor şi ieşi\n"
 "  -k, --keep-tokens \t\tschimbă parola doar dacă este expirată\n"
-"  -i, --inactive INACTIV\tfixează durata de inactivitate a parolei la "
-"INACTIV\n"
-"\t\t\t\tdupă expirarea sa\n"
+"  -i, --inactive INACTIV\tfixează durata de inactivitate a parolei la\n"
+"\t\t\t\tINACTIV după expirarea sa\n"
 "  -l, --lock\t\t\tblochează respectivul cont\n"
 "  -n, --mindays ZILE_MIN \tfixează numărul minim de zile la ZILE_MIN\n"
 "\t\t\t\tînainte de schimbarea parolei\n"
@@ -1229,9 +1235,9 @@ msgstr ""
 "  -r, --repository DEPOZIT\tschimbă parola în depozitul DEPOZIT\n"
 "  -S, --status\t\t\traportează starea parolei respectivului cont\n"
 "  -u, --unlock\t\t\tdeblochează respectivul cont\n"
-"  -w, --warndays ZILE_AVERT\tfixează numărul de zile de avertisment de "
-"expirare la ZILE_AVERT\n"
-"  -x, --maxdays ZILE__MAX\tfixează numărul maxim de zile înainde de \n"
+"  -w, --warndays ZILE_AVERT\tfixează numărul de zile de avertisment de\n"
+"\t\t\t\texpirare la ZILE_AVERT\n"
+"  -x, --maxdays ZILE__MAX\tfixează numărul maxim de zile înainde de\n"
 "\t\t\t\tschimbarea parolei la ZILE_MAX\n"
 
 msgid "Old password: "
@@ -1330,13 +1336,13 @@ msgstr "utilizatorul %s: directorul %s nu există\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "utilizatorul %s: programul %s nu există\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "nici o potrivire între intrările fişierului passwd\n"
+msgstr "nici o potrivire între intrările fişierului passwd în %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add user '%s' in %s? "
-msgstr "gshadow %s: nici un utilizator %s\n"
+msgstr "adaug utilizatorul '%s' în '%s'?"
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
@@ -1413,6 +1419,7 @@ msgid ""
 "  --preserve-environment\tdo not reset environment variables, and keep\n"
 "\t\t\t\tthe same shell\n"
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+"\n"
 msgstr ""
 "Utilizare: su [opţiuni] [autentificare]\n"
 "\n"
@@ -1476,9 +1483,9 @@ msgstr ""
 msgid "Entering System Maintenance Mode\n"
 msgstr "Intrare în modul de întreţinere sistem\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: argument numeric nevalid `%s'\n"
+msgstr "%s: argument numeric nevalid '%s'\n"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1500,9 +1507,9 @@ msgstr "%s: nu pot deschide noile fişiere implicite\n"
 msgid "%s: rename: %s"
 msgstr "%s: redenumire: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a NIS group.\n"
-msgstr "%s: grupul `%s' este un grup NIS.\n"
+msgstr "%s: grupul '%s' este un grup NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
@@ -1536,6 +1543,7 @@ msgid ""
 "\t\t\t\taccount\n"
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
+"\n"
 msgstr ""
 "Folosire: useradd [opţiuni] LOGIN\n"
 "\n"
@@ -1546,8 +1554,8 @@ msgstr ""
 "  -d, --home-dir DIR_ACASA\tdirectorul personal pentru noul cont\n"
 "  -D, --defaults\t\tafişează sau salvează configuraţia useradd implicită\n"
 "\t\t\t\tmodificată\n"
-"  -e, --expiredate DATA_EXPIRĂRII\tsetează data expirării contului la "
-"DATA_EXPIRĂRII\n"
+"  -e, --expiredate DATA_EXPIRĂRII\tsetează data expirării contului la\n"
+"\t\t\t\tDATA_EXPIRĂRII\n"
 "  -f, --inactive INACTIVĂ\tsetează parola inactivă după expirare\n"
 "\t\t\t\tla INACTIVĂ\n"
 "  -g, --gid GRUP\t\tforţează folosirea GRUPULUI pentru noul cont\n"
@@ -1555,8 +1563,8 @@ msgstr ""
 "\t\t\t\tcont utilizator\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
 "  -k, --skel DIR_SKELET\t\tspecifică un schelet director alternativ\n"
-"  -K, --key KEY=VALOARE\t\tsuprascrie valorile implicite ale /etc/login."
-"defs\n"
+"  -K, --key KEY=VALOARE\t\tsuprascrie valorile implicite ale\n"
+"\t\t\t\t/etc/login.defs\n"
 "  -m, --create-home\t\tcrează directorul personal pentru noul cont\n"
 "\t\t\t\tutilizator\n"
 "  -o, --non-unique\t\tpermite creare unui utilizator cu un UID\n"
@@ -1574,21 +1582,21 @@ msgstr "%s: UID %u nu este unic\n"
 msgid "%s: can't get unique UID\n"
 msgstr "%s: nu pot prelua UID\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid base directory '%s'\n"
-msgstr "%s: director de bază nevalid `%s'\n"
+msgstr "%s: director de bază nevalid '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s: comentariu nevalid `%s'\n"
+msgstr "%s: comentariu nevalid '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr "%s: director personal nevalid `%s'\n"
+msgstr "%s: director personal nevalid '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid date '%s'\n"
-msgstr "%s: dată nevalidă `%s'\n"
+msgstr "%s: dată nevalidă '%s'\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1598,13 +1606,13 @@ msgstr "%s: parole criptate cerute pentru -e\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s; parole criptate cerute pentru -f\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s: fişier nevalid `%s'\n"
+msgstr "%s: fişier nevalid '%s'\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s: consolă nevalidă `%s'\n"
+msgstr "%s: consolă nevalidă '%s'\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1663,15 +1671,17 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s: nu pot crea directorul %s\n"
 
 msgid "Creating mailbox file"
-msgstr ""
+msgstr "Crearea fişierului căsuţă pentru mesaje"
 
 #, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
+"Grupul 'mail' nu a fost găsit. Se crează fişierul căsuţă de mesaje pentru "
+"utilizator cu modul 0600.\n"
 
 msgid "Setting mailbox file permissions"
-msgstr ""
+msgstr "Se atribuie permisiunile fişierului căsuţă de mesaje"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1704,7 +1714,16 @@ msgid ""
 "  -f, --force\t\t\tforce removal of files, even if not owned by user\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -r, --remove\t\t\tremove home directory and mail spool\n"
+"\n"
 msgstr ""
+"Folosire: userdel [opţiuni] NUME\n"
+"\n"
+"Opţiuni:\n"
+"  -f, --force\t\t\tforţează ştergerea fişierelor, chiar dacă nu sunt "
+"proprietatea utilizatorului\n"
+"  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
+"  -r, --remove\t\t\tşterge directorul personal şi cel pentru mesaje\n"
+"\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1763,19 +1782,19 @@ msgstr "%s: eroare la ştergerea directorului %s\n"
 
 #, c-format
 msgid ""
-"Usage: usermod [options] login\n"
+"Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
 "  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
-"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
 "  -f, --inactive INACTIVE\tset password inactive after expiration\n"
 "\t\t\t\tto INACTIVE\n"
-"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
-"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
+"  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
 "  -m, --move-home\t\tmove contents of the home directory to the new\n"
 "\t\t\t\tlocation (use only with -d)\n"
@@ -1784,30 +1803,31 @@ msgid ""
 "  -s, --shell SHELL\t\tnew login shell for the user account\n"
 "  -u, --uid UID\t\t\tnew UID for the user account\n"
 "  -U, --unlock\t\t\tunlock the user account\n"
+"\n"
 msgstr ""
-"Folosire: useradd [opţiuni] login\n"
+"Folosire: usermod [opţiuni] NUME\n"
 "\n"
 "Opţiuni:\n"
-"  -a, --append GRUP\tadaugă utilizatorul în GRUPUL suplimentar\n"
-"  -c, --comment COMENTARIU\t\tvaloarea nouă a câmpului GECOS\n"
-"  -d, --home-dir DIR_ACASA\tnoul director personal pentru noul cont\n"
+"  -a, --append GRUP\t\ttadaugă utilizatorul în GRUPUL suplimentar\n"
+"  -c, --comment COMENTARIU\tvaloarea nouă a câmpului GECOS\n"
+"  -d, --home DIR_ACASA\tnoul director personal pentru noul cont\n"
 "  -e, --expiredate DATA_EXPIRĂRII\tsetează data expirării contului la "
 "DATA_EXPIRĂRII\n"
 "  -f, --inactive INACTIVĂ\tsetează parola inactivă după expirare\n"
 "\t\t\t\tla INACTIVĂ\n"
-"  -g, --gid GRUP\t\tforţează folosirea GRUPULUI ca nou iniţial grup de "
-"autentificare\n"
+"  -g, --gid GRUP\t\tforţează folosirea GRUPULUI ca nou iniţial grup\n"
 "  -G, --groups GRUPURI\t\tafişează grupurile suplimentare GRUPURI\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
-"  -l, --login LOGIN\t\tnoua valoare a numelui de autentificare\n"
+"  -l, --login NUME_NOU\t\tnoua valoare a numelui de autentificare\n"
 "  -L, --lock\t\t\tblochează contul\n"
 "  -m, --move-home\t\tmută conţinutul directorului personal în noua\n"
 "\t\t\t\tlocaţie (foloseşte doar cu -d)\n"
 "  -o, --non-unique\t\tpermite folosirea UID-urilor duplicate (non-unice)\n"
-"  -p, --password PAROLA\tfoloseşte criptarea pentru noua parolă\n"
+"  -p, --password PAROLA\t\tfoloseşte criptarea pentru noua parolă\n"
 "  -s, --shell SHELL\t\tnoul mediu de autentificare pentru contul utilizator\n"
 "  -u, --uid UID\t\t\tnoul UID pentru contul utilizator\n"
 "  -U, --unlock\t\t\tdeblochează contul utilizator\n"
+"\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1886,6 +1906,7 @@ msgid ""
 "  -p, --passwd\t\t\tedit passwd database\n"
 "  -q, --quiet\t\t\tquiet mode\n"
 "  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+"\n"
 msgstr ""
 "Utilizare: vipw [opţiuni]\n"
 "\n"
@@ -1913,12 +1934,3 @@ msgstr "N-am putut face o copie de rezervă"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
-
-#~ msgid ""
-#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
-#~ msgstr ""
-#~ "Nu există nici un grup cu numele de \"mail\", se crează directorul de "
-#~ "poştă cu modul 0600.\n"
-
-#~ msgid "Can't create mail spool for user %s.\n"
-#~ msgstr "Nu pot crea directorul de emailuri pentru utilizatorul %s.\n"

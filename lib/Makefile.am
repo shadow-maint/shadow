@@ -18,7 +18,6 @@ libshadow_la_SOURCES = \
 	fputsx.c \
 	getdef.c \
 	getdef.h \
-	getpass.c \
 	groupio.c \
 	groupio.h \
 	gshadow.c \

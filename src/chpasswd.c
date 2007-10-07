@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chpasswd.c,v 1.34 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id: chpasswd.c,v 1.37 2006/06/24 10:18:55 kloczek Exp $"
 
 #include <fcntl.h>
 #include <getopt.h>
@@ -40,6 +40,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "defines.h"
+#include "exitcodes.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "pwio.h"
@@ -67,8 +68,9 @@ static void usage (void)
 			   "  -e, --encrypted	supplied passwords are encrypted\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -m, --md5		use MD5 encryption instead DES when the supplied\n"
-			   "			passwords are not encrypted\n"));
-	exit (1);
+			   "			passwords are not encrypted\n"
+			   "\n"));
+	exit (E_USAGE);
 }
 
 int main (int argc, char **argv)

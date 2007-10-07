@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: lastlog.c,v 1.25 2006/03/05 22:06:58 kloczek Exp $"
+#ident "$Id: lastlog.c,v 1.26 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <getopt.h>
 #include <lastlog.h>
@@ -74,7 +74,8 @@ static void usage (void)
 			   "  -b, --before DAYS	print only lastlog records older than DAYS\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"
-			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"));
+			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"
+			   "\n"));
 	exit (1);
 }
 

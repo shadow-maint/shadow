@@ -1,11 +1,11 @@
 .\"     Title: faillog
 .\"    Author: 
 .\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
-.\"      Date: 06/06/2006
+.\"      Date: 06/20/2006
 .\"    Manual: 
 .\"    Source: 
 .\"
-.TH "FAILLOG" "5" "06/06/2006" "" ""
+.TH "FAILLOG" "5" "06/20/2006" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -15,7 +15,7 @@ faillog \- login failure logging file
 .SH "DESCRIPTION"
 .PP
 \fI/var/log/faillog\fR
-maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occurred on; and the date the last login failure occurred.
+maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occurred on; the date the last login failure occurred; and the time in seconds how long the account will be locked after a failure.
 .PP
 The structure of the file is:
 .sp
@@ -26,6 +26,7 @@ struct	faillog {
 	short   fail_max;
 	char    fail_line[12];
 	time_t  fail_time;
+	long    fail_locktime;
 };
 .fi
 .RE

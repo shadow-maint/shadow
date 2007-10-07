@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.15\n"
-"POT-Creation-Date: 2006-05-31 21:20+0200\n"
+"POT-Creation-Date: 2006-06-19 22:18+0200\n"
 "PO-Revision-Date: 2004-12-20 23:49+0100\n"
 "Last-Translator: Nicolas François <nicolas.francois@centraliens.net>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
@@ -37,8 +37,8 @@ msgstr "vipw"
 #: groupmod.8.xml:6(manvolnum) groupmems.8.xml:6(manvolnum)
 #: groupdel.8.xml:6(manvolnum) groupdel.8.xml:78(replaceable)
 #: groupadd.8.xml:6(manvolnum) faillog.8.xml:6(manvolnum)
-#: faillog.5.xml:49(manvolnum) chpasswd.8.xml:6(manvolnum)
-#: chgpasswd.8.xml:8(manvolnum)
+#: faillog.5.xml:52(manvolnum) chpasswd.8.xml:6(manvolnum)
+#: chgpasswd.8.xml:6(manvolnum)
 msgid "8"
 msgstr "8"
 
@@ -50,7 +50,7 @@ msgstr "8"
 #: grpck.8.xml:7(refmiscinfo) groupmod.8.xml:7(refmiscinfo)
 #: groupmems.8.xml:7(refmiscinfo) groupdel.8.xml:7(refmiscinfo)
 #: groupadd.8.xml:7(refmiscinfo) faillog.8.xml:7(refmiscinfo)
-#: chpasswd.8.xml:7(refmiscinfo) chgpasswd.8.xml:9(refmiscinfo)
+#: chpasswd.8.xml:7(refmiscinfo) chgpasswd.8.xml:7(refmiscinfo)
 msgid "System Management Commands"
 msgstr "Commandes pour la gestion du système"
 
@@ -68,7 +68,7 @@ msgstr "Éditer les fichiers passwd, group, shadow ou gshadow"
 #: useradd.8.xml:29(replaceable) su.1.xml:17(replaceable)
 #: passwd.1.xml:18(replaceable) lastlog.8.xml:18(replaceable)
 #: faillog.8.xml:18(replaceable) chpasswd.8.xml:18(replaceable)
-#: chgpasswd.8.xml:20(replaceable) chage.1.xml:17(replaceable)
+#: chgpasswd.8.xml:18(replaceable) chage.1.xml:17(replaceable)
 msgid "options"
 msgstr "options"
 
@@ -84,7 +84,7 @@ msgstr "options"
 #: groups.1.xml:24(title) groupmod.8.xml:27(title) groupmems.8.xml:27(title)
 #: groupdel.8.xml:24(title) groupadd.8.xml:30(title) gpasswd.1.xml:48(title)
 #: faillog.8.xml:24(title) faillog.5.xml:14(title) expiry.1.xml:23(title)
-#: chsh.1.xml:24(title) chpasswd.8.xml:24(title) chgpasswd.8.xml:26(title)
+#: chsh.1.xml:24(title) chpasswd.8.xml:24(title) chgpasswd.8.xml:24(title)
 #: chfn.1.xml:27(title) chage.1.xml:24(title)
 msgid "DESCRIPTION"
 msgstr "DESCRIPTION"
@@ -119,7 +119,7 @@ msgstr ""
 #: passwd.1.xml:138(title) login.1.xml:119(title) lastlog.8.xml:36(title)
 #: grpck.8.xml:69(title) groupmod.8.xml:35(title) groupmems.8.xml:42(title)
 #: groupadd.8.xml:39(title) gpasswd.1.xml:71(title) faillog.8.xml:35(title)
-#: chsh.1.xml:45(title) chpasswd.8.xml:46(title) chgpasswd.8.xml:47(title)
+#: chsh.1.xml:45(title) chpasswd.8.xml:46(title) chgpasswd.8.xml:45(title)
 #: chage.1.xml:34(title)
 msgid "OPTIONS"
 msgstr "OPTIONS"
@@ -143,14 +143,14 @@ msgstr ""
 
 #: vipw.8.xml:58(term) userdel.8.xml:62(term) useradd.8.xml:153(term)
 #: passwd.1.xml:178(term) lastlog.8.xml:52(term) groupadd.8.xml:72(term)
-#: faillog.8.xml:48(term) chpasswd.8.xml:59(term) chgpasswd.8.xml:60(term)
+#: faillog.8.xml:48(term) chpasswd.8.xml:59(term) chgpasswd.8.xml:58(term)
 #: chage.1.xml:72(term)
 msgid "<option>-h</option>, <option>--help</option>"
 msgstr "<option>-h</option>, <option>--help</option>"
 
 #: vipw.8.xml:60(para) userdel.8.xml:64(para) useradd.8.xml:155(para)
 #: passwd.1.xml:180(para) lastlog.8.xml:56(para) groupadd.8.xml:74(para)
-#: faillog.8.xml:50(para) chpasswd.8.xml:61(para) chgpasswd.8.xml:62(para)
+#: faillog.8.xml:50(para) chpasswd.8.xml:61(para) chgpasswd.8.xml:60(para)
 #: chage.1.xml:74(para)
 msgid "Display help message and exit."
 msgstr "Affiche un message d'aide et quitte."
@@ -192,7 +192,7 @@ msgstr ""
 #: gshadow.5.xml:61(title) grpck.8.xml:87(title) groups.1.xml:46(title)
 #: groupmod.8.xml:69(title) groupmems.8.xml:103(title)
 #: groupdel.8.xml:43(title) groupadd.8.xml:112(title) gpasswd.1.xml:93(title)
-#: faillog.8.xml:132(title) faillog.5.xml:34(title) expiry.1.xml:32(title)
+#: faillog.8.xml:132(title) faillog.5.xml:37(title) expiry.1.xml:32(title)
 #: chsh.1.xml:56(title) chfn.1.xml:59(title) chage.1.xml:175(title)
 msgid "FILES"
 msgstr "FICHIERS"
@@ -232,7 +232,7 @@ msgstr "/etc/gshadow"
 msgid "Secure group account information."
 msgstr "informations cachées sur les groupes"
 
-#: vipw.8.xml:100(filename) usermod.8.xml:261(filename)
+#: vipw.8.xml:100(filename) usermod.8.xml:255(filename)
 #: userdel.8.xml:103(filename) useradd.8.xml:363(filename)
 #: su.1.xml:183(filename) sg.1.xml:46(filename) shadow.5.xml:108(filename)
 #: pwck.8.xml:154(filename) passwd.5.xml:90(filename)
@@ -243,7 +243,7 @@ msgstr "informations cachées sur les groupes"
 msgid "/etc/passwd"
 msgstr "/etc/passwd"
 
-#: vipw.8.xml:102(para) usermod.8.xml:263(para) userdel.8.xml:105(para)
+#: vipw.8.xml:102(para) usermod.8.xml:257(para) userdel.8.xml:105(para)
 #: useradd.8.xml:365(para) su.1.xml:185(para) sg.1.xml:48(para)
 #: shadow.5.xml:110(para) pwck.8.xml:156(para) passwd.5.xml:92(para)
 #: passwd.1.xml:325(para) newgrp.1.xml:59(para) login.1.xml:215(para)
@@ -253,7 +253,7 @@ msgstr "/etc/passwd"
 msgid "User account information."
 msgstr "informations sur les comptes des utilisateurs"
 
-#: vipw.8.xml:106(filename) usermod.8.xml:267(filename)
+#: vipw.8.xml:106(filename) usermod.8.xml:261(filename)
 #: userdel.8.xml:109(filename) useradd.8.xml:369(filename)
 #: su.1.xml:189(filename) sg.1.xml:52(filename) shadow.5.xml:114(filename)
 #: shadow.3.xml:175(filename) pwck.8.xml:160(filename)
@@ -263,7 +263,7 @@ msgstr "informations sur les comptes des utilisateurs"
 msgid "/etc/shadow"
 msgstr "/etc/shadow"
 
-#: vipw.8.xml:108(para) usermod.8.xml:269(para) userdel.8.xml:111(para)
+#: vipw.8.xml:108(para) usermod.8.xml:263(para) userdel.8.xml:111(para)
 #: useradd.8.xml:371(para) su.1.xml:191(para) sg.1.xml:54(para)
 #: shadow.5.xml:116(para) shadow.3.xml:177(para) pwck.8.xml:162(para)
 #: passwd.1.xml:331(para) newgrp.1.xml:65(para) login.1.xml:221(para)
@@ -272,7 +272,7 @@ msgstr "/etc/shadow"
 msgid "Secure user account information."
 msgstr "informations sécurisées sur les comptes utilisateurs"
 
-#: vipw.8.xml:114(title) usermod.8.xml:276(title) userdel.8.xml:190(title)
+#: vipw.8.xml:114(title) usermod.8.xml:270(title) userdel.8.xml:190(title)
 #: useradd.8.xml:471(title) suauth.5.xml:168(title) su.1.xml:198(title)
 #: sg.1.xml:73(title) shadow.5.xml:123(title) shadow.3.xml:184(title)
 #: pwconv.8.xml:121(title) pwck.8.xml:169(title) porttime.5.xml:88(title)
@@ -283,8 +283,8 @@ msgstr "informations sécurisées sur les comptes utilisateurs"
 #: grpck.8.xml:111(title) groups.1.xml:58(title) groupmod.8.xml:138(title)
 #: groupmems.8.xml:121(title) groupdel.8.xml:94(title)
 #: groupadd.8.xml:199(title) gpasswd.1.xml:111(title) faillog.8.xml:144(title)
-#: faillog.5.xml:46(title) expiry.1.xml:50(title) chsh.1.xml:80(title)
-#: chpasswd.8.xml:85(title) chgpasswd.8.xml:86(title) chfn.1.xml:77(title)
+#: faillog.5.xml:49(title) expiry.1.xml:50(title) chsh.1.xml:80(title)
+#: chpasswd.8.xml:85(title) chgpasswd.8.xml:84(title) chfn.1.xml:77(title)
 #: chage.1.xml:230(title)
 msgid "SEE ALSO"
 msgstr "VOIR AUSSI"
@@ -593,18 +593,20 @@ msgstr ""
 #: su.1.xml:172(title) shadow.3.xml:164(title) passwd.1.xml:309(title)
 #: newusers.8.xml:92(title) login.1.xml:164(title) lastlog.8.xml:125(title)
 #: groupdel.8.xml:36(title) groupadd.8.xml:136(title) faillog.8.xml:121(title)
-#: chpasswd.8.xml:77(title) chgpasswd.8.xml:78(title)
+#: chpasswd.8.xml:77(title) chgpasswd.8.xml:76(title)
 msgid "CAVEATS"
 msgstr "AVERTISSEMENTS"
 
 #: usermod.8.xml:234(para)
+#, fuzzy
 msgid ""
 "<command>usermod</command> will not allow you to change the name of a user "
 "who is logged in. You must make certain that the named user is not executing "
 "any processes when this command is being executed if the user's numerical "
-"user ID is being changed. You must change the owner of any crontab files "
-"manually. You must change the owner of any at jobs manually. You must make "
-"any changes involving NIS on the NIS server."
+"user ID is being changed. You must change the owner of any <command>crontab</"
+"command> files manually. You must change the owner of any <command>at</"
+"command> jobs manually. You must make any changes involving NIS on the NIS "
+"server."
 msgstr ""
 "<command>Usermod</command> ne vous permet pas de modifier le nom d'un "
 "utilisateur qui est actuellement connecté. Vous devez être sûr que "
@@ -614,22 +616,7 @@ msgstr ""
 "fichiers crontab et des tâches at. Vous devez effectuer les modifications "
 "impliquant NIS sur le serveur NIS."
 
-#: usermod.8.xml:255(filename) userdel.8.xml:97(filename)
-#: useradd.8.xml:393(filename) pwconv.8.xml:112(filename)
-#: newusers.8.xml:103(filename) login.access.5.xml:69(filename)
-#: groupadd.8.xml:127(filename) chsh.1.xml:71(filename)
-#: chfn.1.xml:62(filename)
-msgid "/etc/login.defs"
-msgstr "/etc/login.defs"
-
-#: usermod.8.xml:257(para) userdel.8.xml:99(para) useradd.8.xml:395(para)
-#: pwconv.8.xml:114(para) newusers.8.xml:105(para) login.access.5.xml:71(para)
-#: groupadd.8.xml:129(para) chsh.1.xml:73(para) chfn.1.xml:64(para)
-#, fuzzy
-msgid "Shadow password suite configuration."
-msgstr "configuration de la suite des mots de passe cachés « shadow password »"
-
-#: usermod.8.xml:277(para)
+#: usermod.8.xml:271(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -751,6 +738,20 @@ msgid ""
 msgstr ""
 "Le répertoire d'attente des courriels est défini par la variable "
 "<emphasis>MAIL_DIR</emphasis> du fichier <filename>login.defs</filename>."
+
+#: userdel.8.xml:97(filename) useradd.8.xml:393(filename)
+#: pwconv.8.xml:112(filename) newusers.8.xml:103(filename)
+#: login.access.5.xml:69(filename) groupadd.8.xml:127(filename)
+#: chsh.1.xml:71(filename) chfn.1.xml:62(filename)
+msgid "/etc/login.defs"
+msgstr "/etc/login.defs"
+
+#: userdel.8.xml:99(para) useradd.8.xml:395(para) pwconv.8.xml:114(para)
+#: newusers.8.xml:105(para) login.access.5.xml:71(para)
+#: groupadd.8.xml:129(para) chsh.1.xml:73(para) chfn.1.xml:64(para)
+#, fuzzy
+msgid "Shadow password suite configuration."
+msgstr "configuration de la suite des mots de passe cachés « shadow password »"
 
 #: userdel.8.xml:118(title) useradd.8.xml:402(title) pwck.8.xml:186(title)
 #: passwd.1.xml:338(title) grpck.8.xml:129(title) groupmod.8.xml:87(title)
@@ -4638,8 +4639,8 @@ msgid "lastlog"
 msgstr "lastlog"
 
 #: lastlog.8.xml:11(refpurpose)
-msgid "examine lastlog file"
-msgstr "Examiner le fichier lastlog"
+msgid "reports the most recent login of all users or of a given user"
+msgstr ""
 
 #: lastlog.8.xml:25(para)
 msgid ""
@@ -4725,12 +4726,14 @@ msgid "NOTE"
 msgstr "NOTE"
 
 #: lastlog.8.xml:102(para)
+#, fuzzy
 msgid ""
 "The <filename>lastlog</filename> file is a database which contains info on "
 "the last login of each user. You should not rotate it. It is a sparse file, "
-"so its size on the disk is much smaller than the one shown by \"<command>ls -"
-"l</command>\" (which can indicate a really big file if you have a high UID). "
-"You can display its real size with \"<command>ls -s</command>\"."
+"so its size on the disk is usually much smaller than the one shown by "
+"\"<command>ls -l</command>\" (which can indicate a really big file if you "
+"have in <filename>passwd</filename> users with a high UID). You can display "
+"its real size with \"<command>ls -s</command>\"."
 msgstr ""
 "Le fichier <filename>lastlog</filename> est une base de données qui contient "
 "les informations sur les dernières connexions de chaque utilisateur. Vous "
@@ -4753,8 +4756,9 @@ msgstr "Liste des connexions précédentes"
 #, fuzzy
 msgid ""
 "Large gaps in UID numbers will cause the lastlog program to run longer with "
-"no output to the screen (i.e. if mmdf=800 and last UID=170, program will "
-"appear to hang as it processes UID 171-799)."
+"no output to the screen (i.e. if in lastlog database there is no entries for "
+"users with UID between 170 and 800 lastlog will appear to hang as it "
+"processes entries with UIDs 171-799)."
 msgstr ""
 "S'il y a des écarts importants dans les valeurs des UID, lastlog s'exécutera "
 "plus longtemps, sans affichage à l'écran (c-à-d si mmdf=800 et que le "
@@ -5679,7 +5683,7 @@ msgstr ""
 
 #: faillog.8.xml:5(refentrytitle) faillog.8.xml:10(refname)
 #: faillog.8.xml:16(command) faillog.5.xml:5(refentrytitle)
-#: faillog.5.xml:9(refname) faillog.5.xml:49(refentrytitle)
+#: faillog.5.xml:9(refname) faillog.5.xml:52(refentrytitle)
 msgid "faillog"
 msgstr "faillog"
 
@@ -5800,11 +5804,11 @@ msgstr ""
 "demander l'affichage de tous les utilisateurs avec l'option <option>-a</"
 "option>."
 
-#: faillog.8.xml:135(filename) faillog.5.xml:37(filename)
+#: faillog.8.xml:135(filename) faillog.5.xml:40(filename)
 msgid "/var/log/faillog"
 msgstr "/var/log/faillog"
 
-#: faillog.8.xml:137(para) faillog.5.xml:39(para)
+#: faillog.8.xml:137(para) faillog.5.xml:42(para)
 #, fuzzy
 msgid "Failure logging file."
 msgstr "journal des échecs de connexion"
@@ -5825,13 +5829,15 @@ msgid "login failure logging file"
 msgstr "Journal des échecs de connexion"
 
 #: faillog.5.xml:15(para)
+#, fuzzy
 msgid ""
 "<filename>/var/log/faillog</filename> maintains a count of login failures "
 "and the limits for each account. The file is fixed length record, indexed by "
 "numerical UID. Each record contains the count of login failures since the "
 "last successful login; the maximum number of failures before the account is "
-"disabled; the line the last login failure occurred on; and the date the last "
-"login failure occurred."
+"disabled; the line the last login failure occurred on; the date the last "
+"login failure occurred; and the time in seconds how long the account will be "
+"locked after a failure."
 msgstr ""
 "<filename>/var/log/faillog</filename> maintient un compteur des échecs de "
 "connexion ainsi que les limites associées à chaque compte. Le fichier "
@@ -5841,12 +5847,12 @@ msgstr ""
 "le compte ne soit désactivé, la ligne du dernier échec de connexion, et la "
 "date du dernier échec."
 
-#: faillog.5.xml:23(para)
+#: faillog.5.xml:25(para)
 msgid "The structure of the file is:"
 msgstr "La structure du fichier est la suivante :"
 
-#: faillog.5.xml:24(programlisting)
-#, no-wrap
+#: faillog.5.xml:26(programlisting)
+#, fuzzy, no-wrap
 msgid ""
 "\n"
 "struct\tfaillog {\n"
@@ -5854,6 +5860,7 @@ msgid ""
 "\tshort   fail_max;\n"
 "\tchar    fail_line[12];\n"
 "\ttime_t  fail_time;\n"
+"\tlong    fail_locktime;\n"
 "};"
 msgstr ""
 "\n"
@@ -6015,7 +6022,7 @@ msgstr ""
 "chiffrement par défaut est le chiffrement DES. L'âge du mot de passe sera "
 "également mis à jour, s'il est présent."
 
-#: chpasswd.8.xml:39(para) chgpasswd.8.xml:40(para)
+#: chpasswd.8.xml:39(para) chgpasswd.8.xml:38(para)
 msgid ""
 "This command is intended to be used in a large system environment where many "
 "accounts are created at a single time."
@@ -6028,26 +6035,26 @@ msgid "The options which apply to the <command>chpasswd</command> command are:"
 msgstr ""
 "Les options disponibles pour la commande <command>chpasswd</command> sont :"
 
-#: chpasswd.8.xml:53(term) chgpasswd.8.xml:54(term)
+#: chpasswd.8.xml:53(term) chgpasswd.8.xml:52(term)
 msgid "<option>-e</option>, <option>--encrypted</option>"
 msgstr "<option>-e</option>, <option>--encrypted</option>"
 
-#: chpasswd.8.xml:55(para) chgpasswd.8.xml:56(para)
+#: chpasswd.8.xml:55(para) chgpasswd.8.xml:54(para)
 msgid "Supplied passwords are in encrypted form."
 msgstr "Indique que les mots de passe fournis sont chiffrés."
 
-#: chpasswd.8.xml:65(term) chgpasswd.8.xml:66(term)
+#: chpasswd.8.xml:65(term) chgpasswd.8.xml:64(term)
 msgid "<option>-m</option>, <option>--md5</option>"
 msgstr "<option>-m</option>, <option>--md5</option>"
 
-#: chpasswd.8.xml:67(para) chgpasswd.8.xml:68(para)
+#: chpasswd.8.xml:67(para) chgpasswd.8.xml:66(para)
 msgid ""
 "Use MD5 encryption instead DES when the supplied passwords are not encrypted."
 msgstr ""
 "Permet d'utiliser le chiffrement MD5, plutôt que DES, lorsque les mots de "
 "passe fournis ne sont pas chiffrés."
 
-#: chpasswd.8.xml:78(para) chgpasswd.8.xml:79(para)
+#: chpasswd.8.xml:78(para) chgpasswd.8.xml:77(para)
 msgid ""
 "Remember to set permissions or umask to prevent readability of unencrypted "
 "files by other users."
@@ -6067,18 +6074,18 @@ msgstr ""
 "<citerefentry><refentrytitle>useradd</refentrytitle><manvolnum>8</"
 "manvolnum></citerefentry>."
 
-#: chgpasswd.8.xml:7(refentrytitle) chgpasswd.8.xml:12(refname)
-#: chgpasswd.8.xml:18(command)
+#: chgpasswd.8.xml:5(refentrytitle) chgpasswd.8.xml:10(refname)
+#: chgpasswd.8.xml:16(command)
 #, fuzzy
 msgid "chgpasswd"
 msgstr "chpasswd"
 
-#: chgpasswd.8.xml:13(refpurpose)
+#: chgpasswd.8.xml:11(refpurpose)
 #, fuzzy
 msgid "update group passwords in batch mode"
 msgstr "Mettre à jour des mots de passe par lot"
 
-#: chgpasswd.8.xml:27(para)
+#: chgpasswd.8.xml:25(para)
 #, fuzzy
 msgid ""
 "<command>chgpasswd</command> reads a list of group name and password pairs "
@@ -6090,7 +6097,7 @@ msgstr ""
 "pour mettre à jour un groupe d'utilisateurs existants. Chaque ligne est au "
 "format suivant :"
 
-#: chgpasswd.8.xml:32(para)
+#: chgpasswd.8.xml:30(para)
 #, fuzzy
 msgid ""
 "<emphasis remap=\"I\">group_name</emphasis>:<emphasis remap=\"I\">password</"
@@ -6099,7 +6106,7 @@ msgstr ""
 "<emphasis remap=\"I\">nom_utilisateur</emphasis>:<emphasis remap=\"I"
 "\">mot_de_passe</emphasis>"
 
-#: chgpasswd.8.xml:36(para)
+#: chgpasswd.8.xml:34(para)
 #, fuzzy
 msgid ""
 "By default the supplied password must be in clear-text. Default encryption "
@@ -6109,14 +6116,14 @@ msgstr ""
 "chiffrement par défaut est le chiffrement DES. L'âge du mot de passe sera "
 "également mis à jour, s'il est présent."
 
-#: chgpasswd.8.xml:48(para)
+#: chgpasswd.8.xml:46(para)
 #, fuzzy
 msgid ""
 "The options which apply to the <command>chgpasswd</command> command are:"
 msgstr ""
 "Les options disponibles pour la commande <command>chpasswd</command> sont :"
 
-#: chgpasswd.8.xml:87(para)
+#: chgpasswd.8.xml:85(para)
 #, fuzzy
 msgid ""
 "<citerefentry><refentrytitle>gpasswd</refentrytitle><manvolnum>1</"
@@ -6461,6 +6468,9 @@ msgstr ""
 #: chage.1.xml:0(None)
 msgid "translator-credits"
 msgstr "Nicolas FRANÇOIS <nicolas.francois@centraliens.net>, 2005."
+
+#~ msgid "examine lastlog file"
+#~ msgstr "Examiner le fichier lastlog"
 
 # TBC: -n ou -m?
 #~ msgid ""

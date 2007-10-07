@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.66 2006/05/07 17:44:39 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.69 2006/06/25 13:10:29 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -273,19 +273,19 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: usermod [options] login\n"
+	fprintf (stderr, _("Usage: usermod [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
 			   "  -a, --append GROUP		append the user to the supplemental GROUP\n"
 			   "  -c, --comment COMMENT		new value of the GECOS field\n"
-			   "  -d, --home HOME_DIR		new login directory for the new user account\n"
+			   "  -d, --home HOME_DIR		new home directory for the user account\n"
 			   "  -e, --expiredate EXPIRE_DATE	set account expiration date to EXPIRE_DATE\n"
 			   "  -f, --inactive INACTIVE	set password inactive after expiration\n"
 			   "				to INACTIVE\n"
-			   "  -g, --gid GROUP		force use GROUP as new initial login group\n"
-			   "  -G, --groups GROUPS		list of supplementary GROUPS\n"
+			   "  -g, --gid GROUP		force use GROUP as new primary group\n"
+			   "  -G, --groups GROUPS		new list of supplementary GROUPS\n"
 			   "  -h, --help			display this help message and exit\n"
-			   "  -l, --login LOGIN		new value of the login name\n"
+			   "  -l, --login NEW_LOGIN		new value of the login name\n"
 			   "  -L, --lock			lock the user account\n"
 			   "  -m, --move-home		move contents of the home directory to the new\n"
 			   "				location (use only with -d)\n"
@@ -293,7 +293,8 @@ static void usage (void)
 			   "  -p, --password PASSWORD	use encrypted password for the new password\n"
 			   "  -s, --shell SHELL		new login shell for the user account\n"
 			   "  -u, --uid UID			new UID for the user account\n"
-			   "  -U, --unlock			unlock the user account\n"));
+			   "  -U, --unlock			unlock the user account\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -921,7 +922,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U",
+			getopt_long (argc, argv, "a:c:d:e:f:g:G:hl:Lmop:s:u:U",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':

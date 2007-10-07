@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: faillog.c,v 1.26 2005/08/31 17:25:00 kloczek Exp $"
+#ident "$Id: faillog.c,v 1.28 2006/06/25 13:08:25 kloczek Exp $"
 
 #include <getopt.h>
 #include <pwd.h>
@@ -71,7 +71,8 @@ static void usage (void)
 			   "  -t, --time DAYS		display faillog records more recent than DAYS\n"
 			   "  -u, --user LOGIN		display faillog record or maintains failure counters\n"
 			   "				and limits (if used with -r, -m or -l options) only\n"
-			   "				for user with LOGIN\n"));
+			   "				for user with LOGIN\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -311,11 +312,11 @@ int main (int argc, char **argv)
 		static struct option long_options[] = {
 			{"all", no_argument, NULL, 'a'},
 			{"help", no_argument, NULL, 'h'},
-			{"lock-secs", no_argument, NULL, 'l'},
-			{"maximum", no_argument, NULL, 'm'},
+			{"lock-secs", required_argument, NULL, 'l'},
+			{"maximum", required_argument, NULL, 'm'},
 			{"reset", no_argument, NULL, 'r'},
-			{"time", no_argument, NULL, 't'},
-			{"user", no_argument, NULL, 'u'},
+			{"time", required_argument, NULL, 't'},
+			{"user", required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 

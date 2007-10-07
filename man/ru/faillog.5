@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "faillog" "5" "03/11/2006" "" ""
+.\"     Title: faillog
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/24/2006
+.\"    Manual: 
+.\"    Source: 
+.\"
+.TH "faillog" "5" "06/24/2006" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,23 +14,28 @@
 faillog \- файл протокола неудачных попыток входа в систему
 .SH "ОПИСАНИЕ"
 .PP
+В файле
 \fI/var/log/faillog\fR
-хранит число неудачных попыток входа в систему и их предельное число для каждой учётной записи. Этот файл состоит из записей постоянной длины, упорядоченных по числовому идентификатору учётной записи. Каждая запись содержит число неудачных попыток входа с момента последнего успешного входа в систему, максимальное число неудачных попыток перед тем как учётная запись будет заблокирована, терминал, с которого осуществлялась последняя неудачная попытка входа и дата этого события.
+хранится число неудачных попыток входа в систему и их предельное число для каждой учётной записи. Этот файл состоит из записей постоянной длины, упорядоченных по числовому идентификатору учётной записи. Каждая запись содержит число неудачных попыток входа с момента последнего успешного входа в систему, максимальное число неудачных попыток перед тем как учётная запись будет заблокирована, терминал, с которого осуществлялась последняя неудачная попытка входа, дату этого события и интервал в секундах на сколько учтёная запись будет заблокирована в случае неудачной регистрации.
 .PP
 Структура файла:
 .sp
+.RS 3n
 .nf
 struct	faillog {
-	short	fail_cnt;
-	short	fail_max;
-	char	 	fail_line[12];
-	time_t	fail_time;
+	short   fail_cnt;
+	short   fail_max;
+	char    fail_line[12];
+	time_t  fail_time;
+	long    fail_locktime;
 };
 .fi
+.RE
 .SH "ФАЙЛЫ"
-.TP
+.TP 3n
 \fI/var/log/faillog\fR
 содержит журнал неудавшихся попыток входа в систему
 .SH "СМОТРИТЕ ТАКЖЕ"
 .PP
+
 \fBfaillog\fR(8)

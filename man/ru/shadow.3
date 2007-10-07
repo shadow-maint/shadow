@@ -1,8 +1,11 @@
-.\" ** You probably do not want to edit this file directly **
-.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
-.\" Instead of manually editing it, you probably should edit the DocBook XML
-.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "shadow" "3" "03/11/2006" "Библиотечные функции" "Библиотечные функции"
+.\"     Title: shadow
+.\"    Author: 
+.\" Generator: DocBook XSL Stylesheets v1.70.1 <http://docbook.sf.net/>
+.\"      Date: 06/24/2006
+.\"    Manual: Библиотечные функции
+.\"    Source: Библиотечные функции
+.\"
+.TH "shadow" "3" "06/24/2006" "Библиотечные функции" "Библиотечные функции"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,33 +14,49 @@
 shadow, getspnam \- процедуры для работы с файлом шифрованных паролей
 .SH "СИНТАКСИС"
 .PP
+
 \fI#include <shadow.h>\fR
 .PP
+
 \fIstruct spwd *getspent();\fR
 .PP
-\fIstruct spwd *getspnam(char\fR\fI*name\fR\fI);\fR
+
+\fIstruct spwd *getspnam(char\fR
+\fI*name\fR\fI);\fR
 .PP
+
 \fIvoid setspent();\fR
 .PP
+
 \fIvoid endspent();\fR
 .PP
-\fIstruct spwd *fgetspent(FILE\fR\fI*fp\fR\fI);\fR
+
+\fIstruct spwd *fgetspent(FILE\fR
+\fI*fp\fR\fI);\fR
 .PP
-\fIstruct spwd *sgetspent(char\fR\fI*cp\fR\fI);\fR
+
+\fIstruct spwd *sgetspent(char\fR
+\fI*cp\fR\fI);\fR
 .PP
-\fIint putspent(struct spwd\fR\fI*p,\fR\fIФАЙЛ\fR\fI*fp\fR\fI);\fR
+
+\fIint putspent(struct spwd\fR
+\fI*p,\fR
+\fIФАЙЛ\fR
+\fI*fp\fR\fI);\fR
 .PP
+
 \fIint lckpwdf();\fR
 .PP
+
 \fIint ulckpwdf();\fR
 .SH "ОПИСАНИЕ"
 .PP
 \fIshadow\fR
-управляет содержимым файла теневых паролей
+управляет содержимым файла теневых паролей,
 \fI/etc/shadow\fR. Структура в файле
-\fI#include\fR
-:
+\fI#include\fR:
 .sp
+.RS 3n
 .nf
 struct spwd {
       char	 	 	*sp_namp;  /* имя пользователя */
@@ -50,63 +69,64 @@ struct spwd {
       long int	 	 	sp_expire; /* дата устаревания учётной записи */
       unsigned long int	sp_flag;   /* зарезервировано */
 }
-    
 .fi
+.RE
 .PP
 Значение каждого поля:
-.TP 3
+.TP 3n
 \(bu
 sp_namp \- указатель на строку с именем пользователя, завершающуюся нулевым символом
-.TP
+.TP 3n
 \(bu
 sp_pwdp \- указатель на строку с паролем, завершающуюся нулевым символом
-.TP
+.TP 3n
 \(bu
 sp_lstchg \- количество дней, когда был изменён пароль последний раз, начиная с 1 января 1970 года
-.TP
+.TP 3n
 \(bu
 sp_min \- количество дней, когда можно не менять пароль
-.TP
+.TP 3n
 \(bu
 sp_max \- количество дней, которое должно пройти, чтобы нужно было поменять пароль
-.TP
+.TP 3n
 \(bu
 sp_warn \- количество дней, когда будет выдаваться предупреждение о скором устаревании пароля перед тем как пароль устареет
-.TP
+.TP 3n
 \(bu
 sp_inact \- количество дней, которые должны пройти после устаревания пароля, когда начинать считать, что учётная запись неактивна и заблокирована
-.TP
+.TP 3n
 \(bu
 sp_expire \- дней, после которых учётная запись будет заблокирована, начиная с 1 января 1970 года
-.TP
+.TP 3n
 \(bu
 sp_flag \- зарезервировано
 .SH "ОПИСАНИЕ"
 .PP
+Функции
 \fIgetspent\fR,
 \fIgetspname\fR,
 \fIfgetspent\fR
 и
 \fIsgetspent\fR
-возвращают указатель на
+возвращают указатель на структуру
 \fIstruct spwd\fR.
 \fIgetspent\fR
 возвращает следующую запись из файла, а
 \fIfgetspent\fR
-возвращает следующую запись из заданного канала, где предполагается, что это файл правильного формата.
-\fIsgetspent\fR
+возвращает следующую запись из заданного канала, предполагая, что это файл правильного формата.\fIsgetspent\fR
 возвращает указатель на
-\fIstruct spwd\fR
-, используя предоставленную строку в качестве входящих данных.
+\fIstruct spwd\fR, используя предоставленную строку в качестве входящих данных.
 \fIgetspnam\fR
 ищет начиная с текущей позиции в файле запись по имени
-\fIпользователя\fR.
+\fIname\fR.
 .PP
+Функции
 \fIsetspent\fR
 и
 \fIendspent\fR
-можно использовать для перемещения в начало и конец, соответственно, файла теневых паролей.
+можно использовать для перемещения в начало и конец файла теневых паролей соответственно.
 .PP
+Функции
 \fIlckpwdf\fR
 и
 \fIulckpwdf\fR
@@ -123,13 +143,12 @@ sp_flag \- зарезервировано
 .SH "ДИАГНОСТИКА"
 .PP
 Функции возвращают NULL, если все записи кончились или произошла ошибка во время работы. Функции, возвращающие
-\fIint\fR
-, возвращают 0 при успешном выполнении и \-1 в случае неудачи.
+\fIint\fR, возвращают 0 при успешном выполнении и \-1 в случае неудачи.
 .SH "ПРЕДОСТЕРЕЖЕНИЯ"
 .PP
 Данные функции могут использоваться только суперпользователем, так как доступ к файлу теневых паролей ограничен.
 .SH "ФАЙЛЫ"
-.TP
+.TP 3n
 \fI/etc/shadow\fR
 содержит защищаемую информацию о пользователях
 .SH "СМОТРИТЕ ТАКЖЕ"

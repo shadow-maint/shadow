@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.16)
+AM_INIT_AUTOMAKE(shadow, 4.0.17)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -252,7 +252,7 @@ if test "$enable_man" = "yes"; then
 	dnl check for DocBook DTD and stylesheets in the local catalog.
 	JH_CHECK_XML_CATALOG([-//OASIS//DTD DocBook XML V4.1.2//EN],
 		[DocBook XML DTD V4.1.2], [], enable_man=no)
-	JH_CHECK_XML_CATALOG([http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl],
+	JH_CHECK_XML_CATALOG([http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl],
 		[DocBook XSL Stylesheets >= 1.70.1], [], enable_man=no)
 fi
 AM_CONDITIONAL(ENABLE_REGENERATE_MAN, test x$enable_man != xno)
@@ -284,12 +284,13 @@ fi
 
 if test "$with_selinux" = "yes"; then
 	AC_CHECK_LIB(selinux, is_selinux_enabled,
-		[LIBSELINUX="-lselinux"],
+		[LIBSELINUX="-lselinux"
+		AC_SUBST(LIBSELINUX)
+		AC_CHECK_HEADERS(selinux/selinux.h, [],
+			[AC_MSG_ERROR([selinux/selinux.h is missing])])
+		AC_DEFINE(WITH_SELINUX, 1, [Build shadow with SELinux support])
+		],
 		[AC_MSG_ERROR([libselinux not found])])
-	AC_SUBST(LIBSELINUX)
-	AC_CHECK_HEADERS(selinux/selinux.h, [],
-		[AC_MSG_ERROR([selinux/selinux.h is missing])])
-	AC_DEFINE(WITH_SELINUX, 1, [Build shadow with SELinux support])
 fi
 
 AC_SUBST(LIBPAM)

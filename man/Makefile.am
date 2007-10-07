@@ -111,148 +111,145 @@ EXTRA_DIST = \
 	sulogin.8 \
 	sulogin.8.xml
 
-all:
-
 if ENABLE_REGENERATE_MAN
 
 chage.1: chage.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 chfn.1: chfn.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 chgpasswd.8: chgpasswd.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 chpasswd.8: chpasswd.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 chsh.1: chsh.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 expiry.1: expiry.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 faillog.5: faillog.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 faillog.8: faillog.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 gpasswd.1: gpasswd.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 groupadd.8: groupadd.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 groupdel.8: groupdel.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 groupmems.8: groupmems.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 groupmod.8: groupmod.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 groups.1: groups.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 grpck.8: grpck.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 gshadow.5: gshadow.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 id.1: id.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 lastlog.8: lastlog.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 limits.5: limits.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 login.1: login.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 login.access.5: login.access.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 login.defs.5: login.defs.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 logoutd.8: logoutd.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 newgrp.1: newgrp.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 newusers.8: newusers.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 nologin.8: nologin.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 passwd.1: passwd.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 passwd.5: passwd.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 porttime.5: porttime.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 pwck.8: pwck.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 grpconv.8 grpunconv.8 pwconv.8 pwunconv.8: pwconv.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 shadow.3 getspnam.3: shadow.3.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 shadow.5: shadow.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 sg.1: sg.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 su.1: su.1.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 sulogin.8: sulogin.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 suauth.5: suauth.5.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 useradd.8: useradd.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 userdel.8: userdel.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 usermod.8: usermod.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 vigr.8 vipw.8: vipw.8.xml
-	$(XSLTPROC) -nonet http://docbook.sf.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
-CLEANFILES = $(man_MANS)
-
-endif
+CLEANFILES = $(man_MANS) $(ALL_TRANSLATED_XMLS)
 
 POFILES = $(foreach lang, $(LINGUAS), $(lang)/$(lang).po)
 ALL_TRANSLATED_XMLS = $(foreach dir, $(LINGUAS), $(foreach xmlfile, $(man_XMANS), $(dir)/$(xmlfile)))
 
-all: $(POFILES)
+all: $(POFILES) $(ALL_TRANSLATED_XMLS)
 
 gen-xmls: $(ALL_TRANSLATED_XMLS)
 
-$(ALL_TRANSLATED_XMLS):
+$(ALL_TRANSLATED_XMLS): $(man_XMANS)
 	xml2po -l $(strip $(subst /,, $(dir $@))) -p $(strip $(subst /,, $(dir $@)))/$(strip $(subst /,, $(dir $@))).po -o $@ $(notdir $@)
+	sed -i 's:\(^<refentry .*\)>:\1 lang="$(strip $(subst /,, $(dir $@)))">:' $@
 
-$(foreach lang, $(LINGUAS), $(lang)/$(lang).po): shadow-man-pages.pot
+$(POFILES): shadow-man-pages.pot
 
 shadow-man-pages.pot: $(man_XMANS)
 
@@ -280,3 +277,12 @@ update-po: shadow-man-pages.pot
 	  echo "$(MSGMERGE) -o $$lang/$$lang.po $$lang/$$lang.po shadow-man-pages.pot"; \
 	  $(MSGMERGE) -o $$lang/$$lang.po $$lang/$$lang.po shadow-man-pages.pot; \
 	done
+
+else
+$(man_MANS):
+	@echo ""
+	@echo "Error: you need to run configure with '--enable-man'"
+	@echo "       in order to regenerate man pages."
+	@echo ""
+	@false
+endif

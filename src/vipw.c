@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#ident "$Id: vipw.c,v 1.21 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id: vipw.c,v 1.22 2006/06/20 20:00:04 kloczek Exp $"
 
 #include <errno.h>
 #include <getopt.h>
@@ -67,7 +67,8 @@ static void usage (void)
 			   "  -h, --help			display this help message and exit\n"
 			   "  -p, --passwd			edit passwd database\n"
 			   "  -q, --quiet			quiet mode\n"
-			   "  -s, --shadow			edit shadow or gshadow database\n"));
+			   "  -s, --shadow			edit shadow or gshadow database\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 

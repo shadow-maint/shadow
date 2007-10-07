@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.96 2006/05/30 18:28:45 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.99 2006/06/22 11:30:32 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -633,7 +633,8 @@ static void usage (void)
 			   "  -p, --password PASSWORD	use encrypted password for the new user\n"
 			   "				account\n"
 			   "  -s, --shell SHELL		the login shell for the new user account\n"
-			   "  -u, --uid UID			force use the UID for the new user account\n"));
+			   "  -u, --uid UID			force use the UID for the new user account\n"
+			   "\n"));
 	exit (E_USAGE);
 }
 
@@ -1246,6 +1247,11 @@ static void process_flags (int argc, char **argv)
 
 	if (!sflg)
 		user_shell = def_shell;
+
+	/* TODO: add handle change default spool mail creation by 
+	   -K CREATE_MAIL_SPOOL={yes,no}. It need rewrite internal API for handle
+	   shadow tools configuration */
+	create_mail_spool = def_create_mail_spool;
 }
 
 /*
@@ -1599,24 +1605,24 @@ static void create_mail (void)
 		if (fd < 0) {
 			perror (_("Creating mailbox file"));
 			return;
-
-			gr = getgrnam ("mail");
-			if (!gr) {
-				fprintf (stderr,
-					 _
-					 ("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"));
-				gid = user_gid;
-				mode = 0600;
-			} else {
-				gid = gr->gr_gid;
-				mode = 0660;
-			}
-
-			if (fchown (fd, user_id, gid) || fchmod (fd, mode))
-				perror (_("Setting mailbox file permissions"));
-
-			close (fd);
 		}
+
+		gr = getgrnam ("mail");
+		if (!gr) {
+			fprintf (stderr,
+				 _
+				 ("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"));
+			gid = user_gid;
+			mode = 0600;
+		} else {
+			gid = gr->gr_gid;
+			mode = 0660;
+		}
+
+		if (fchown (fd, user_id, gid) || fchmod (fd, mode))
+			perror (_("Setting mailbox file permissions"));
+
+		close (fd);
 	}
 }
 
