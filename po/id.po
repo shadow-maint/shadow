@@ -1,0 +1,2320 @@
+# Terjemahan Bahasa Indonesia: shadow
+# Parlin Imanuel Toh <parlin@ui.edu>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: shadow\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-10-26 01:16+0200\n"
+"PO-Revision-Date: 2004-04-09 00:12+0700\n"
+"Last-Translator: Parlin Imanuel Toh <parlin@ui.edu>\n"
+"Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: libmisc/addgrps.c:56
+#, c-format
+msgid "Warning: unknown group %s\n"
+msgstr "Peringatan: grup tidak dikenal %s\n"
+
+#: libmisc/addgrps.c:68
+#, c-format
+msgid "Warning: too many groups\n"
+msgstr "Peringatan: terlalu banyak grup\n"
+
+#: libmisc/age.c:72
+#, c-format
+msgid "Your password has expired."
+msgstr "Kata sandi anda telah kadaluarsa."
+
+#: libmisc/age.c:75
+#, c-format
+msgid "Your password is inactive."
+msgstr "Kata sandi anda tidak aktif."
+
+#: libmisc/age.c:78
+#, c-format
+msgid "Your login has expired."
+msgstr "Login anda telah kadaluarsa."
+
+#: libmisc/age.c:90
+msgid "  Contact the system administrator.\n"
+msgstr "  Hubungi administrator sistem.\n"
+
+#: libmisc/age.c:93
+msgid "  Choose a new password.\n"
+msgstr "  Pilih sebuah kata sandi baru.\n"
+
+#: libmisc/age.c:170
+#, c-format
+msgid "Your password will expire in %ld days.\n"
+msgstr "Kata sandi anda akan kadaluarsa dalam %ld hari.\n"
+
+#: libmisc/age.c:174
+#, c-format
+msgid "Your password will expire tomorrow.\n"
+msgstr "Kata sandi anda akan kadaluarsa besok.\n"
+
+#: libmisc/age.c:176
+#, c-format
+msgid "Your password will expire today.\n"
+msgstr "Kata sandi anda akan kadaluarsa hari ini.\n"
+
+#: libmisc/chowntty.c:106
+#, c-format
+msgid "Unable to change tty %s"
+msgstr "Tidak dapat mengubah tts %s"
+
+#: libmisc/env.c:155
+#, c-format
+msgid "Environment overflow\n"
+msgstr "Lingkungan overflow\n"
+
+#: libmisc/env.c:195
+#, c-format
+msgid "You may not change $%s\n"
+msgstr "Anda tidak boleh mengubah $%s\n"
+
+#: libmisc/failure.c:230
+#, fuzzy, c-format
+msgid "%d %s since last login.  Last was %s on %s.\n"
+msgstr "%d %s sejak login terakhir. Terkahir di %s pada %s.\n"
+
+#: libmisc/failure.c:232
+msgid "failures"
+msgstr "kegagalan"
+
+#: libmisc/failure.c:232
+msgid "failure"
+msgstr "kegagalan"
+
+#: libmisc/limits.c:396
+#, c-format
+msgid "Too many logins.\n"
+msgstr "Terlalu banyak login.\n"
+
+#: libmisc/login_desrpc.c:59
+#, c-format
+msgid "Password does not decrypt secret key for %s.\n"
+msgstr "Kata sandi tidak melakukan dekripsi kunci rahasia untuk %s.\n"
+
+#: libmisc/login_desrpc.c:66
+#, c-format
+msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
+msgstr ""
+"Tidak dapat mengatur kunci rahasia dari %s: apakah daemon keyserv berjalan?\n"
+
+#: libmisc/mail.c:61 libmisc/mail.c:76
+msgid "You have new mail."
+msgstr "Anda memiliki surat baru."
+
+#: libmisc/mail.c:72
+msgid "No mail."
+msgstr "Tidak ada surat."
+
+#: libmisc/mail.c:74
+msgid "You have mail."
+msgstr "Anda memiliki surat."
+
+#: libmisc/obscure.c:271 src/passwd.c:183
+#, c-format
+msgid "Bad password: %s.  "
+msgstr "Kata sandi buruk: %s."
+
+#: libmisc/pam_pass.c:38
+#, c-format
+msgid "passwd: pam_start() failed, error %d\n"
+msgstr "passwd: pam_start() gagal, kesalahan nomor %d\n"
+
+#: libmisc/pam_pass.c:44
+#, c-format
+msgid "passwd: %s\n"
+msgstr "passwd: %s\n"
+
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
+#, c-format
+msgid "Unable to cd to \"%s\"\n"
+msgstr "Tidak dapat cd ke \"%s\"\n"
+
+#: libmisc/setupenv.c:216
+msgid "No directory, logging in with HOME=/"
+msgstr "Tidak terdapat direktori, masuk dengan HOME=/"
+
+#: libmisc/shell.c:119
+#, c-format
+msgid "Cannot execute %s"
+msgstr "Tidak dapat menjalankan %s"
+
+#: libmisc/sub.c:55
+#, c-format
+msgid "Invalid root directory \"%s\"\n"
+msgstr "Direktori root tidak sah \"%s\"\n"
+
+#: libmisc/sub.c:67
+#, c-format
+msgid "Can't change root directory to \"%s\"\n"
+msgstr "Tidak dapat mengubah direktori root ke \"%s\"\n"
+
+#: libmisc/xmalloc.c:23
+#, c-format
+msgid "malloc(%d) failed\n"
+msgstr "malloc(%d) gagal\n"
+
+#: lib/getdef.c:275
+#, c-format
+msgid "Could not allocate space for config info.\n"
+msgstr "Tidak dapat mengalokasikan ruang untuk informasi konfigurasi.\n"
+
+#: lib/getdef.c:329
+#, c-format
+msgid "configuration error - unknown item '%s' (notify administrator)\n"
+msgstr ""
+"Kesalahan konfigurasi - item tidak dikenal '%s' (beritahu administrator)\n"
+
+#: lib/pwauth.c:54 src/newgrp.c:343
+msgid "Password: "
+msgstr "Kata sandi:"
+
+#: lib/pwauth.c:56
+#, c-format
+msgid "%s's Password: "
+msgstr "Kata sandi dari %s:"
+
+#: lib/pwauth.c:247
+msgid "(Echo on) "
+msgstr "(Echo on)"
+
+#: lib/strerror.c:20
+#, c-format
+msgid "Unknown error %d"
+msgstr "Kesalahan tidak dikenal nomor %d"
+
+#: src/chage.c:118
+#, c-format
+msgid ""
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
+msgstr ""
+"Penggunaan: chage [-l] [-m hari_min] [-M hari_maks] [-W peringatan]\n"
+"                  [-I tidak_aktif] [-E kadaluarsa] [-d hari_akhir] pengguna\n"
+
+#: src/chage.c:152
+#, c-format
+msgid ""
+"Enter the new value, or press ENTER for the default\n"
+"\n"
+msgstr ""
+"Masukkan nilai baru, atau tekan ENTER untuk bawaan\n"
+"\n"
+
+#: src/chage.c:155
+msgid "Minimum Password Age"
+msgstr "Umur Kata Sandi Minimal"
+
+#: src/chage.c:161
+msgid "Maximum Password Age"
+msgstr "Umur Kata Sandi Maksimal"
+
+#: src/chage.c:169
+msgid "Last Password Change (YYYY-MM-DD)"
+msgstr "Penggantian Kata Sandi Terakhir (TTTT-MM-HH)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "Peringatan Kadaluarsanya Kata Sandi"
+
+#: src/chage.c:183
+msgid "Password Inactive"
+msgstr "Kata Sandi Tak-aktif"
+
+#: src/chage.c:191
+msgid "Account Expiration Date (YYYY-MM-DD)"
+msgstr "Waktu Kadaluarsa Akun (TTTT-MM-HH)"
+
+#: src/chage.c:238
+#, fuzzy, c-format
+msgid "Last password change\t\t\t\t\t: "
+msgstr "Penggantian Kata Sandi Terakhir (TTTT-MM-HH)"
+
+#: src/chage.c:240 src/chage.c:254 src/chage.c:270 src/chage.c:283
+#, fuzzy, c-format
+msgid "never\n"
+msgstr "Tidak Pernah\n"
+
+#: src/chage.c:251
+#, fuzzy, c-format
+msgid "Password expires\t\t\t\t\t: "
+msgstr "Kata Sandi Kadaluarsa:\t"
+
+#: src/chage.c:267
+#, fuzzy, c-format
+msgid "Password inactive\t\t\t\t\t: "
+msgstr "Kata Sandi Tidak Aktif:\t"
+
+#: src/chage.c:281
+#, fuzzy, c-format
+msgid "Account expires\t\t\t\t\t\t: "
+msgstr "Akun Kadaluarsa:\t"
+
+#: src/chage.c:297
+#, c-format
+msgid "Minimum number of days between password change\t\t: %ld\n"
+msgstr ""
+
+#: src/chage.c:298
+#, c-format
+msgid "Maximum number of days between password change\t\t: %ld\n"
+msgstr ""
+
+#: src/chage.c:299
+#, c-format
+msgid "Number of days of warning before password expires\t: %ld\n"
+msgstr ""
+
+#: src/chage.c:444
+#, c-format
+msgid "%s: do not include \"l\" with other flags\n"
+msgstr "%s: jangan gabungkan \"l\" dengan flag lain\n"
+
+#: src/chage.c:457 src/chage.c:587 src/login.c:503
+#, c-format
+msgid "%s: permission denied\n"
+msgstr "%s: ijin ditolak\n"
+
+#: src/chage.c:488 src/chage.c:727 src/chpasswd.c:142 src/groupadd.c:534
+#: src/groupdel.c:330 src/groupmod.c:523 src/newusers.c:365 src/useradd.c:1672
+#: src/userdel.c:674 src/usermod.c:1425
+#, c-format
+msgid "%s: PAM authentication failed\n"
+msgstr "%s: Otentikasi PAM gagal\n"
+
+#: src/chage.c:509 src/chpasswd.c:159
+#, c-format
+msgid "%s: can't open password file\n"
+msgstr "%s: tidak dapat membuka berkas kata sandi\n"
+
+#: src/chage.c:517
+#, c-format
+msgid "%s: unknown user: %s\n"
+msgstr "%s: pengguna tidak dikenal: %s\n"
+
+#: src/chage.c:535
+#, c-format
+msgid "%s: can't lock shadow password file"
+msgstr "%s: tidak dapat mengunci berkas kata sandi bayangan"
+
+#: src/chage.c:543
+#, c-format
+msgid "%s: can't open shadow password file"
+msgstr "%s: tidak dapat membuka berkas kata sandi bayangan"
+
+#: src/chage.c:604
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Mengubah informasi umur akun untuk %s\n"
+
+#: src/chage.c:607
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: kesalahan saat mengubah ruas-ruas isian\n"
+
+#: src/chage.c:631 src/pwunconv.c:138
+#, c-format
+msgid "%s: can't update password file\n"
+msgstr "%s: tidak dapat memperbaharui berkas kata sandi\n"
+
+#: src/chage.c:660 src/pwunconv.c:132
+#, c-format
+msgid "%s: can't update shadow password file\n"
+msgstr "%s: tidak dapat memperbaharui berkas kata sandi bayangan\n"
+
+#: src/chage.c:675 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
+#, c-format
+msgid "Error updating the DBM password entry.\n"
+msgstr "Kesalahan saat memperbaharui entri kata sandi DBM.\n"
+
+#: src/chage.c:692
+#, c-format
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: tidak dapat menulis kembali berkas kata sandi bayangan\n"
+
+#: src/chage.c:740
+#, c-format
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: tidak dapat menulis kembali berkas kata sandi\n"
+
+#: src/chage.c:760 src/chpasswd.c:336 src/groupadd.c:595 src/groupdel.c:413
+#: src/groupmod.c:607 src/newusers.c:609 src/useradd.c:1787 src/userdel.c:817
+#: src/usermod.c:1498
+#, c-format
+msgid "%s: PAM chauthtok failed\n"
+msgstr "%s: chauthok PAM gagal\n"
+
+#: src/chfn.c:84
+#, c-format
+msgid ""
+"Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
+"\t[-h home_ph] [-o other] [user]\n"
+msgstr ""
+"Penggunaan: %s [-f nama_lkp] [-r no_ruang] [-w telp_ktr]\n"
+"\t[-h telp_rmh] [-o lain_lain] [pengguna]\n"
+
+#: src/chfn.c:89
+#, c-format
+msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
+msgstr ""
+"Penggunaan: %s [-f nama_lkp] [-r no_ruang] [-w telp_ktr] [-h telp_rmh]\n"
+
+#: src/chfn.c:140
+#, c-format
+msgid "Enter the new value, or press ENTER for the default\n"
+msgstr "Masukkan nilai baru atau tekan ENTER untuk nilai bawaan\n"
+
+#: src/chfn.c:143
+msgid "Full Name"
+msgstr "Nama Lengkap"
+
+#: src/chfn.c:145
+#, c-format
+msgid "\tFull Name: %s\n"
+msgstr "\tNama Lengkap: %s\n"
+
+#: src/chfn.c:148
+msgid "Room Number"
+msgstr "Nomor Ruangan"
+
+#: src/chfn.c:150
+#, c-format
+msgid "\tRoom Number: %s\n"
+msgstr "\tNomor Ruangan: %s\n"
+
+#: src/chfn.c:153
+msgid "Work Phone"
+msgstr "Telepon Kantor"
+
+#: src/chfn.c:155
+#, c-format
+msgid "\tWork Phone: %s\n"
+msgstr "\tTelepon Kantor: %s\n"
+
+#: src/chfn.c:158
+msgid "Home Phone"
+msgstr "Telepon Rumah"
+
+#: src/chfn.c:160
+#, c-format
+msgid "\tHome Phone: %s\n"
+msgstr "\tTelepon Rumah: %s\n"
+
+#: src/chfn.c:163
+msgid "Other"
+msgstr "Lain-lain"
+
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
+#, c-format
+msgid "%s: Permission denied.\n"
+msgstr "%s: Ijin ditolak.\n"
+
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
+#, c-format
+msgid "%s: Unknown user %s\n"
+msgstr "%s: Pengguna %s tidak dikenal\n"
+
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
+#, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Tidak dapat menentukan nama pengguna anda.\n"
+
+#: src/chfn.c:359 src/chsh.c:210
+#, c-format
+msgid "%s: cannot change user `%s' on NIS client.\n"
+msgstr "%s: tidak dapat mengubah pengguna '%s' pada klien NIS.\n"
+
+#: src/chfn.c:367 src/chsh.c:218
+#, c-format
+msgid "%s: `%s' is the NIS master for this client.\n"
+msgstr "%s: `%s' merupakan master NIS untuk klien ini.\n"
+
+#: src/chfn.c:442
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Mengubah informasi pengguna dari %s\n"
+
+#: src/chfn.c:451
+#, c-format
+msgid "%s: invalid name: \"%s\"\n"
+msgstr "%s: nama tidak sah: \"%s\"\n"
+
+#: src/chfn.c:457
+#, c-format
+msgid "%s: invalid room number: \"%s\"\n"
+msgstr "%s: nomor ruang tidak sah: \"%s\"\n"
+
+#: src/chfn.c:463
+#, c-format
+msgid "%s: invalid work phone: \"%s\"\n"
+msgstr "%s: telepon kantor tidak sah: \"%s\"\n"
+
+#: src/chfn.c:469
+#, c-format
+msgid "%s: invalid home phone: \"%s\"\n"
+msgstr "%s: telepon rumah tidak sah: \"%s\"\n"
+
+#: src/chfn.c:476
+#, c-format
+msgid "%s: \"%s\" contains illegal characters\n"
+msgstr "%s: \"%s\" berisi karakter-karakter ilegal\n"
+
+#: src/chfn.c:489
+#, c-format
+msgid "%s: fields too long\n"
+msgstr "%s: ruas terlalu panjang\n"
+
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
+#, c-format
+msgid "Cannot change ID to root.\n"
+msgstr "Tidak dapat mengubah ID menjadi root.\n"
+
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
+#, c-format
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Tidak dapat mengunci berkas kata sandi; coba lagi nanti.\n"
+
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
+#, c-format
+msgid "Cannot open the password file.\n"
+msgstr "Tidak dapat membuka berkas kata sandi.\n"
+
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
+#, c-format
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s tidak ditemukan pada /etc/passwd\n"
+
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
+#, c-format
+msgid "Error updating the password entry.\n"
+msgstr "Kesalahan saat memperbaharui entri kata sandi.\n"
+
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
+#, c-format
+msgid "Cannot commit password file changes.\n"
+msgstr "Tidak dapat menyimpan perubahan berkas kata sandi.\n"
+
+#: src/chfn.c:593 src/chsh.c:399
+#, c-format
+msgid "Cannot unlock the password file.\n"
+msgstr "Tidak dapat membuka kunci berkas kata sandi.\n"
+
+#: src/chpasswd.c:67
+#, c-format
+msgid "Usage: %s [-e]\n"
+msgstr "Penggunaan: %s [-e]\n"
+
+#: src/chpasswd.c:154
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: tidak dapat mengunci berkas kata sandi\n"
+
+#: src/chpasswd.c:168 src/pwconv.c:95
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: tidak dapat mengunci berkas kata sandi bayangan\n"
+
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
+#, c-format
+msgid "%s: can't open shadow file\n"
+msgstr "%s: tidak dapat membuka berkas kata sandi bayangan\n"
+
+#: src/chpasswd.c:197 src/newusers.c:441
+#, c-format
+msgid "%s: line %d: line too long\n"
+msgstr "%s: baris %d: baris terlalu panjang\n"
+
+#: src/chpasswd.c:217
+#, c-format
+msgid "%s: line %d: missing new password\n"
+msgstr "%s: baris %d: kata sandi baru hilang\n"
+
+#: src/chpasswd.c:234
+#, c-format
+msgid "%s: line %d: unknown user %s\n"
+msgstr "%s: baris %d: pengguna %s tak dikenal\n"
+
+#: src/chpasswd.c:280
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: baris %d: tidak dapat memperbaharui entri kata sandi\n"
+
+#: src/chpasswd.c:297 src/newusers.c:569
+#, c-format
+msgid "%s: error detected, changes ignored\n"
+msgstr "%s: kesalahan terdeteksi, perubahan diabaikan\n"
+
+#: src/chpasswd.c:309
+#, c-format
+msgid "%s: error updating shadow file\n"
+msgstr "%s: kesalahan saat memperbaharui berkas kata sandi bayangan\n"
+
+#: src/chpasswd.c:318
+#, c-format
+msgid "%s: error updating password file\n"
+msgstr "%s: kesalahan saat memperbaharui berkas kata sandi\n"
+
+#: src/chsh.c:76
+#, c-format
+msgid "Usage: %s [-s shell] [name]\n"
+msgstr "Penggunaan: %s [-s shell] [nama]\n"
+
+#: src/chsh.c:90
+#, c-format
+msgid "Enter the new value, or press return for the default\n"
+msgstr "Masukkan nilai yang baru, atau tekan enter untuk nilai bawaan\n"
+
+#: src/chsh.c:91
+msgid "Login Shell"
+msgstr "Login Shell"
+
+#: src/chsh.c:234 src/chsh.c:248
+#, c-format
+msgid "You may not change the shell for %s.\n"
+msgstr "Anda tidak boleh mengubah shell untuk %s.\n"
+
+#: src/chsh.c:277
+#, c-format
+msgid "Changing the login shell for %s\n"
+msgstr "Mengubah login shell untuk %s\n"
+
+#: src/chsh.c:289
+#, c-format
+msgid "%s: Invalid entry: %s\n"
+msgstr "%s: Entri tidak sah: %s\n"
+
+#: src/chsh.c:296
+#, c-format
+msgid "%s is an invalid shell.\n"
+msgstr "%s merupakan shell yang tidak sah.\n"
+
+#: src/expiry.c:59
+#, c-format
+msgid "Usage: expiry {-f|-c}\n"
+msgstr "Penggunaan: expiry {-f|-c}\n"
+
+#: src/expiry.c:113
+#, c-format
+msgid "%s: WARNING!  Must be set-UID root!\n"
+msgstr "%s: PERINGATAN! Mesti merupakan set-UID root!\n"
+
+#: src/expiry.c:124
+#, c-format
+msgid "%s: unknown user\n"
+msgstr "%s: pengguna tak dikenal\n"
+
+#: src/faillog.c:77
+#, c-format
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgstr "Penggunaan: %s [-a|-u pengguna] [-m maks] [-r] [-t hari] [-l detik]\n"
+
+#: src/faillog.c:131 src/lastlog.c:96
+#, c-format
+msgid "Unknown User: %s\n"
+msgstr "Pengguna tak dikenal: %s\n"
+
+#: src/faillog.c:212
+#, c-format
+msgid "Username   Failures  Maximum  Latest\n"
+msgstr "Pengguna   Kegagalan Maksimun Terakhir\n"
+
+#: src/faillog.c:229
+#, c-format
+msgid "  %s on %s"
+msgstr "  %s pada %s"
+
+#: src/faillog.c:233
+#, c-format
+msgid " [%lds left]"
+msgstr " [%lds tersisa]"
+
+#: src/faillog.c:237
+#, c-format
+msgid " [%lds lock]"
+msgstr " [%lds terkunci]"
+
+#: src/gpasswd.c:78
+#, c-format
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "Penggunaan: %s [-r|-R] grup\n"
+
+#: src/gpasswd.c:79
+#, c-format
+msgid "       %s [-a user] group\n"
+msgstr "       %s [-a pengguna] grup\n"
+
+#: src/gpasswd.c:80
+#, c-format
+msgid "       %s [-d user] group\n"
+msgstr "       %s [-d pengguna] grup\n"
+
+#: src/gpasswd.c:83
+#, c-format
+msgid "       %s [-A user,...] [-M user,...] group\n"
+msgstr "       %s [-A pengguna,...] [-M pengguna,...] grup\n"
+
+#: src/gpasswd.c:85
+#, c-format
+msgid "       %s [-M user,...] group\n"
+msgstr "       %s [-M pengguna,...] grup\n"
+
+#: src/gpasswd.c:146 src/gpasswd.c:230
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: pengguna %s tak dikenal\n"
+
+#: src/gpasswd.c:157
+#, c-format
+msgid "Permission denied.\n"
+msgstr "Ijin ditolak.\n"
+
+#: src/gpasswd.c:243
+#, c-format
+msgid "%s: shadow group passwords required for -A\n"
+msgstr "%s: kata sandi bayangan grup diperlukan untuk -A\n"
+
+#: src/gpasswd.c:294
+#, c-format
+msgid "Who are you?\n"
+msgstr "Anda siapa?\n"
+
+#: src/gpasswd.c:313 src/newgrp.c:292
+#, c-format
+msgid "unknown group: %s\n"
+msgstr "grup tak dikenal: %s\n"
+
+#: src/gpasswd.c:422
+#, c-format
+msgid "Adding user %s to group %s\n"
+msgstr "Menambahkan pengguna %s ke grup %s\n"
+
+#: src/gpasswd.c:440
+#, c-format
+msgid "Removing user %s from group %s\n"
+msgstr "Mengeluarkan pengguna %s dari grup %s\n"
+
+#: src/gpasswd.c:454
+#, c-format
+msgid "%s: unknown member %s\n"
+msgstr "%s: anggota tak dikenal %s\n"
+
+#: src/gpasswd.c:501
+#, c-format
+msgid "%s: Not a tty\n"
+msgstr "%s: Bukan sebuah tty\n"
+
+#: src/gpasswd.c:522
+#, c-format
+msgid "Changing the password for group %s\n"
+msgstr "Mengubah kata sandi untuk grup %s\n"
+
+#: src/gpasswd.c:525
+msgid "New Password: "
+msgstr "Kata sandi baru: "
+
+#: src/gpasswd.c:530 src/passwd.c:281
+msgid "Re-enter new password: "
+msgstr "Masukkan lagi kata sandi baru: "
+
+#: src/gpasswd.c:542
+msgid "They don't match; try again"
+msgstr "Kedua kata sandi tidak identik; coba lagi"
+
+#: src/gpasswd.c:546
+#, c-format
+msgid "%s: Try again later\n"
+msgstr "%s: Coba lagi nanti\n"
+
+#: src/gpasswd.c:578
+#, c-format
+msgid "%s: can't get lock\n"
+msgstr "%s: tidak mendapatkan kunci\n"
+
+#: src/gpasswd.c:584
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: tidak mendapatkan kunci untuk berkas bayangan\n"
+
+#: src/gpasswd.c:590
+#, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: tidak dapat membuka berkas\n"
+
+#: src/gpasswd.c:602
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: tidak dapat memperbaharui entri\n"
+
+#: src/gpasswd.c:608
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: tidak dapat memperbaharui entri bayangan\n"
+
+#: src/gpasswd.c:615
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: tidak dapat menuliskan kembali berkas\n"
+
+#: src/gpasswd.c:621
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: tidak dapat menuliskan kembali berkas bayangan\n"
+
+#: src/gpasswd.c:630
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: tidak dapat membuka kunci berkas\n"
+
+#: src/gpasswd.c:635
+#, c-format
+msgid "%s: can't update DBM files\n"
+msgstr "%s: tidak dapat memperbaharui berkas-berkas DBM\n"
+
+#: src/gpasswd.c:642
+#, c-format
+msgid "%s: can't update DBM shadow files\n"
+msgstr "%s: tidak dapat memperbaharui berkas-berkas bayangan DBM\n"
+
+#: src/groupadd.c:102
+#, c-format
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "Penggunaan: groupadd [-g gid [-o]] [-f] grup\n"
+
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:937 src/usermod.c:533 src/usermod.c:676
+#, c-format
+msgid "%s: error adding new group entry\n"
+msgstr "%s: kesalahan saat menambahkan entri grup yang baru\n"
+
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:948
+#: src/usermod.c:545 src/usermod.c:689
+#, c-format
+msgid "%s: cannot add new dbm group entry\n"
+msgstr "%s: tidak dapat menambahkan entri grup dbm yang baru\n"
+
+#: src/groupadd.c:256 src/useradd.c:1001
+#, c-format
+msgid "%s: name %s is not unique\n"
+msgstr "%s: nama %s tidak unik\n"
+
+#: src/groupadd.c:271
+#, c-format
+msgid "%s: gid %u is not unique\n"
+msgstr "%s: gid %u tidak unik\n"
+
+#: src/groupadd.c:295
+#, c-format
+msgid "%s: can't get unique gid\n"
+msgstr "%s: tidak mendapatkan gid yang unik\n"
+
+#: src/groupadd.c:318 src/groupmod.c:342
+#, c-format
+msgid "%s: %s is not a valid group name\n"
+msgstr "%s: nama grup %s tidak sah\n"
+
+#: src/groupadd.c:347 src/groupmod.c:367
+#, c-format
+msgid "%s: invalid group %s\n"
+msgstr "%s: grup %s tidak sah\n"
+
+#: src/groupadd.c:364 src/useradd.c:1197
+#, c-format
+msgid "%s: -O requires NAME=VALUE\n"
+msgstr "%s: -O memerlukan NAMA=NILAI\n"
+
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1312
+#: src/userdel.c:302 src/usermod.c:557
+#, c-format
+msgid "%s: cannot rewrite group file\n"
+msgstr "%s: tidak dapat menuliskan kembali berkas grup\n"
+
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1321
+#: src/userdel.c:309 src/usermod.c:703
+#, c-format
+msgid "%s: cannot rewrite shadow group file\n"
+msgstr "%s: tidak dapat menuliskan kembali berkas grup bayangan\n"
+
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
+#, c-format
+msgid "%s: unable to lock group file\n"
+msgstr "%s: tidak dapat mengunci berkas grup\n"
+
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
+#, c-format
+msgid "%s: unable to open group file\n"
+msgstr "%s: tidak dapat membuka berkas grup\n"
+
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
+#, c-format
+msgid "%s: unable to lock shadow group file\n"
+msgstr "%s: tidak dapat mengunci berkas grup bayangan\n"
+
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
+#, c-format
+msgid "%s: unable to open shadow group file\n"
+msgstr "%s: tidak dapat membuka berkas grup bayangan\n"
+
+#: src/groupadd.c:566
+#, c-format
+msgid "%s: group %s exists\n"
+msgstr "%s: grup %s telah ada\n"
+
+#: src/groupdel.c:88
+#, c-format
+msgid "Usage: groupdel group\n"
+msgstr "Penggunaan: groupdel grup\n"
+
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
+#, c-format
+msgid "%s: error removing group entry\n"
+msgstr "%s: kesalahan saat menghapus entri grup\n"
+
+#: src/groupdel.c:119 src/groupmod.c:205
+#, c-format
+msgid "%s: error removing group dbm entry\n"
+msgstr "%s: kesalahan saat menghapus entri dbm dari grup\n"
+
+#: src/groupdel.c:135
+#, c-format
+msgid "%s: error removing shadow group entry\n"
+msgstr "%s: kesalahan saat menghapus entri group bayangan\n"
+
+#: src/groupdel.c:149 src/groupmod.c:255
+#, c-format
+msgid "%s: error removing shadow group dbm entry\n"
+msgstr "%s: kesalahan saat menghapus entri dbm grup bayangan\n"
+
+#: src/groupdel.c:255
+#, c-format
+msgid "%s: cannot remove user's primary group.\n"
+msgstr "%s: tidak dapat menghapus grup utama dari pengguna.\n"
+
+#: src/groupdel.c:359 src/groupmod.c:552
+#, c-format
+msgid "%s: group %s does not exist\n"
+msgstr "%s: grup %s tidak ada\n"
+
+#: src/groupdel.c:373 src/groupmod.c:568
+#, c-format
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s: grup %s merupakan sebuah grup NIS\n"
+
+#: src/groupdel.c:378 src/groupmod.c:573 src/userdel.c:727 src/usermod.c:805
+#, c-format
+msgid "%s: %s is the NIS master\n"
+msgstr "%s: %s merupakan master NIS\n"
+
+#: src/groupmems.c:95
+#, c-format
+msgid "Member already exists\n"
+msgstr "Anggota telah ada\n"
+
+#: src/groupmems.c:125
+#, c-format
+msgid "Member to remove could not be found\n"
+msgstr "Anggota yang ingin dihapus tidak ditemukan\n"
+
+#: src/groupmems.c:158
+#, c-format
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgstr "Penggunaan: groupmems -a pengguna | -d pengguna | -D | -l [-g grup]\n"
+
+#: src/groupmems.c:201
+#, c-format
+msgid "Only root can add members to different groups\n"
+msgstr "Hanya root yang dapat menambahkan anggota ke dalam grup-grup berbeda\n"
+
+#: src/groupmems.c:206
+#, c-format
+msgid "Group access is required\n"
+msgstr "Akses grup diperlukan\n"
+
+#: src/groupmems.c:210
+#, c-format
+msgid "Not primary owner of current group\n"
+msgstr "Bukan pemilik utama dari grup saat ini\n"
+
+#: src/groupmems.c:215
+#, c-format
+msgid "Unable to lock group file\n"
+msgstr "Tidak dapat mengunci berkas grup\n"
+
+#: src/groupmems.c:220
+#, c-format
+msgid "Unable to open group file\n"
+msgstr "Tidak dapat membuka berkas grup\n"
+
+#: src/groupmems.c:240
+#, c-format
+msgid "Cannot close group file\n"
+msgstr "Tidak dapat menutup berkas grup\n"
+
+#: src/groupmod.c:104
+#, c-format
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "Penggunaan: groupmod [-g gid [-o]] [-n nama] grup\n"
+
+#: src/groupmod.c:162
+#, c-format
+msgid "%s: %s not found in /etc/group\n"
+msgstr "%s: %s tidak ditemukan dalam /etc/group\n"
+
+#: src/groupmod.c:248
+#, c-format
+msgid "%s: cannot add new dbm shadow group entry\n"
+msgstr "%s: tidak dapat menambah entri grup bayangan dbm yang baru\n"
+
+#: src/groupmod.c:301
+#, c-format
+msgid "%s: %u is not a unique gid\n"
+msgstr "%s: %u bukan gid yang unik\n"
+
+#: src/groupmod.c:331
+#, c-format
+msgid "%s: %s is not a unique name\n"
+msgstr "%s: %s bukan nama yang unik\n"
+
+#: src/groups.c:59
+#, c-format
+msgid "unknown user %s\n"
+msgstr "pengguna %s tidak dikenal\n"
+
+#: src/grpck.c:87
+#, c-format
+msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
+msgstr "Penggunaan: %s [-r] [-s] [grup [gbayangan]]\n"
+
+#: src/grpck.c:90
+#, c-format
+msgid "Usage: %s [-r] [-s] [group]\n"
+msgstr "Penggunaan: %s [-r] [-s] [grup]\n"
+
+#: src/grpck.c:108 src/pwck.c:108
+msgid "No"
+msgstr "Tidak"
+
+#: src/grpck.c:192 src/pwck.c:175
+#, c-format
+msgid "%s: -s and -r are incompatibile\n"
+msgstr "%s: -s dan -r tidak kompatible\n"
+
+#: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
+#, c-format
+msgid "%s: cannot lock file %s\n"
+msgstr "%s: tidak dapat mengunci berkas %s\n"
+
+#: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:201 src/pwck.c:242
+#: src/pwck.c:251
+#, c-format
+msgid "%s: cannot open file %s\n"
+msgstr "%s: tidak dapat membuka berkas %s\n"
+
+#: src/grpck.c:311
+#, c-format
+msgid "invalid group file entry\n"
+msgstr "entri berkas grup tidak sah\n"
+
+#: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
+#: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
+#: src/pwck.c:543
+#, c-format
+msgid "delete line `%s'? "
+msgstr "hapus baris `%s'? "
+
+#: src/grpck.c:374
+msgid "duplicate group entry\n"
+msgstr "entri grup berulang\n"
+
+#: src/grpck.c:391
+#, c-format
+msgid "invalid group name `%s'\n"
+msgstr "nama grup `%s' tidak sah\n"
+
+#: src/grpck.c:418
+#, c-format
+msgid "group %s: no user %s\n"
+msgstr "grup %s: tak ada pengguna %s\n"
+
+#: src/grpck.c:420 src/grpck.c:590
+#, c-format
+msgid "delete member `%s'? "
+msgstr "hapus anggota `%s'? "
+
+#: src/grpck.c:457
+#, c-format
+msgid "invalid shadow group file entry\n"
+msgstr "entri berkas grup bayangan tidak sah\n"
+
+#: src/grpck.c:520
+msgid "duplicate shadow group entry\n"
+msgstr "entri grup bayangan berulang\n"
+
+#: src/grpck.c:537
+msgid "no matching group file entry\n"
+msgstr "entri tidak ditemukan pada berkas grup\n"
+
+#: src/grpck.c:558
+#, c-format
+msgid "shadow group %s: no administrative user %s\n"
+msgstr "grup bayangan %s: tak ada pengguna administratif %s\n"
+
+#: src/grpck.c:560
+#, c-format
+msgid "delete administrative member `%s'? "
+msgstr "hapus anggota administratif `%s'? "
+
+#: src/grpck.c:588
+#, c-format
+msgid "shadow group %s: no user %s\n"
+msgstr "grup bayangan %s: tak ada pengguna %s\n"
+
+#: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
+#, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: tidak dapat memperbaharui berkas %s\n"
+
+#: src/grpck.c:647 src/pwck.c:612
+#, c-format
+msgid "%s: the files have been updated; run mkpasswd\n"
+msgstr "%s: berkas-berkas telah diperbaharui; jalankan mkpasswd\n"
+
+#: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
+#, c-format
+msgid "%s: no changes\n"
+msgstr "%s: tak ada perubahan\n"
+
+#: src/grpck.c:651 src/pwck.c:616
+#, c-format
+msgid "%s: the files have been updated\n"
+msgstr "%s: berkas-berkas telah diperbaharui\n"
+
+#: src/grpconv.c:60 src/grpunconv.c:56
+#, c-format
+msgid "%s: can't lock group file\n"
+msgstr "%s: tidak dapat mengunci berkas grup\n"
+
+#: src/grpconv.c:65 src/grpunconv.c:61
+#, c-format
+msgid "%s: can't open group file\n"
+msgstr "%s: tidak dapat membuka berkas grup\n"
+
+#: src/grpconv.c:70 src/grpunconv.c:66
+#, c-format
+msgid "%s: can't lock shadow group file\n"
+msgstr "%s: tidak dapat mengunci berkas grup bayangan\n"
+
+#: src/grpconv.c:76 src/grpunconv.c:72
+#, c-format
+msgid "%s: can't open shadow group file\n"
+msgstr "%s: tidak dapat membuka berkas grup banyangan\n"
+
+#: src/grpconv.c:94
+#, c-format
+msgid "%s: can't remove shadow group %s\n"
+msgstr "%s: tidak dapat menghapus grup bayangan %s\n"
+
+#: src/grpconv.c:133 src/pwconv.c:154
+#, c-format
+msgid "%s: can't update shadow entry for %s\n"
+msgstr "%s: tidak dapat memperbaharui entri bayangan untuk %s\n"
+
+#: src/grpconv.c:143 src/grpunconv.c:91
+#, c-format
+msgid "%s: can't update entry for group %s\n"
+msgstr "%s: tidak dapat memperbaharui entri untuk grup %s\n"
+
+#: src/grpconv.c:150 src/grpunconv.c:99
+#, c-format
+msgid "%s: can't update shadow group file\n"
+msgstr "%s: tidak dapat memperbaharui berkas grup bayangan\n"
+
+#: src/grpconv.c:155 src/grpunconv.c:105
+#, c-format
+msgid "%s: can't update group file\n"
+msgstr "%s: tidak dapat memperbaharui berkas grup\n"
+
+#: src/grpunconv.c:110
+#, c-format
+msgid "%s: can't delete shadow group file\n"
+msgstr "%s: tidak dapat menghapus berkas grup bayangan\n"
+
+#: src/id.c:53
+#, c-format
+msgid "Usage: id [-a]\n"
+msgstr "Penggunaan: id [-a]\n"
+
+#: src/id.c:55
+#, c-format
+msgid "Usage: id\n"
+msgstr "Penggunaan: id\n"
+
+#: src/id.c:169
+#, c-format
+msgid " groups="
+msgstr " grup="
+
+#: src/lastlog.c:110 src/lastlog.c:116
+#, c-format
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
+msgstr ""
+"Penggunaan: %s [{-u|--login} namalogin] [{-t|--time} hari] [{-h|--help}]\n"
+
+#: src/lastlog.c:181
+#, c-format
+msgid "Username         Port     From             Latest\n"
+msgstr "Nama pengguna    Port     Dari             Terakhir\n"
+
+#: src/lastlog.c:183
+#, c-format
+msgid "Username                Port     Latest\n"
+msgstr "Nama pengguna           Port     Terakhir\n"
+
+#: src/lastlog.c:198
+msgid "**Never logged in**"
+msgstr "**Tidak pernah log in**"
+
+#: src/login.c:175
+#, c-format
+msgid "Usage: %s [-p] [name]\n"
+msgstr "Penggunaan: %s [-p] [nama]\n"
+
+#: src/login.c:178
+#, c-format
+msgid "       %s [-p] [-h host] [-f name]\n"
+msgstr "            %s [-p] [-h host] [-f nama]\n"
+
+#: src/login.c:180
+#, c-format
+msgid "       %s [-p] -r host\n"
+msgstr "            %s [-p] -r host\n"
+
+#: src/login.c:259
+#, c-format
+msgid "Invalid login time\n"
+msgstr "Waktu login tidak sah\n"
+
+#: src/login.c:314
+#, c-format
+msgid ""
+"\n"
+"System closed for routine maintenance\n"
+msgstr ""
+"\n"
+"Sistem ditutup untuk pengelolaan rutin\n"
+
+#: src/login.c:325
+#, c-format
+msgid ""
+"\n"
+"[Disconnect bypassed -- root login allowed.]\n"
+msgstr ""
+"\n"
+"[Pemutusan hubungan diabaikan -- login root diperbolehkan.]\n"
+
+#: src/login.c:362
+#, c-format
+msgid ""
+"\n"
+"Login timed out after %d seconds.\n"
+msgstr ""
+"\n"
+"Login time out setelah %d detik.\n"
+
+#: src/login.c:648
+#, c-format
+msgid " on `%.100s' from `%.200s'"
+msgstr " pada `%.100s' dari `%.200s'"
+
+#: src/login.c:652
+#, c-format
+msgid " on `%.100s'"
+msgstr " pada `%.100s'"
+
+#: src/login.c:816
+#, c-format
+msgid ""
+"\n"
+"%s login: "
+msgstr ""
+"\n"
+"%s login: "
+
+#: src/login.c:819
+msgid "login: "
+msgstr "login: "
+
+#: src/login.c:1018 src/sulogin.c:205
+msgid "Login incorrect"
+msgstr "Login tidak tepat"
+
+#: src/login.c:1198
+msgid "Warning: login re-enabled after temporary lockout.\n"
+msgstr "Perhatian: login dibolehkan setelah penguncian sementara.\n"
+
+#: src/login.c:1212
+#, c-format
+msgid "Last login: %s on %s"
+msgstr "Login terakhir: %s pada %s"
+
+#: src/login.c:1215
+#, c-format
+msgid "Last login: %.19s on %s"
+msgstr "Login terakhir: %.19s pada %s"
+
+#: src/login.c:1221
+#, c-format
+msgid " from %.*s"
+msgstr " dari %.*s"
+
+#: src/login.c:1298
+#, c-format
+msgid "Starting rad_login\n"
+msgstr "Memulai rad_login\n"
+
+#: src/mkpasswd.c:47
+#, c-format
+msgid "%s: no DBM database on system - no action performed\n"
+msgstr "%s: tak ada basis data DBM pada sistem - tidak dilakukan tindakan\n"
+
+#: src/mkpasswd.c:231 src/mkpasswd.c:236
+#, c-format
+msgid "%s: cannot overwrite file %s\n"
+msgstr "%s: tidak dapat menimpa berkas %s\n"
+
+#: src/mkpasswd.c:251
+#, c-format
+msgid "%s: cannot open DBM files for %s\n"
+msgstr "%s: tidak dapat membukan berkas DBM untuk %s\n"
+
+#: src/mkpasswd.c:286
+#, c-format
+msgid "%s: the beginning with "
+msgstr "%s: permulaan dengan "
+
+#: src/mkpasswd.c:287
+#, c-format
+msgid " is too long\n"
+msgstr " terlalu panjang\n"
+
+#: src/mkpasswd.c:314
+#, c-format
+msgid "%s: error parsing line \"%s\"\n"
+msgstr "%s: kesalahan saat memecah baris \"%s\"\n"
+
+#: src/mkpasswd.c:322 src/mkpasswd.c:327 src/mkpasswd.c:332 src/mkpasswd.c:337
+#, c-format
+msgid "adding record for name "
+msgstr "menambah rekor untuk nama "
+
+#: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
+#: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
+#, c-format
+msgid "\n"
+msgstr "\n"
+
+#: src/mkpasswd.c:343 src/mkpasswd.c:349 src/mkpasswd.c:354 src/mkpasswd.c:359
+#, c-format
+msgid "%s: error adding record for "
+msgstr "%s: kesalahan saat menambah rekor untuk "
+
+#: src/mkpasswd.c:377
+#, c-format
+msgid "added %d entries, longest was %d\n"
+msgstr "ditambahkan %d entri, yang terpanjang adalah %d\n"
+
+#: src/mkpasswd.c:391
+#, c-format
+msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
+msgstr "Penggunaan: %s [-vf] [-p|q|sp|sg] nama-berkas\n"
+
+#: src/mkpasswd.c:394
+#, c-format
+msgid "Usage: %s [-vf] [-p|g|sp] file\n"
+msgstr "Penggunaan: %s [-vf] [-p|g|sp] nama-berkas\n"
+
+#: src/mkpasswd.c:397
+#, c-format
+msgid "Usage: %s [-vf] [-p|g] file\n"
+msgstr "Penggunaan: %s [-vf] [-p|g] nama-berkas\n"
+
+#: src/newgrp.c:61
+#, c-format
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "Penggunaan: newgrp [-] [grup]\n"
+
+#: src/newgrp.c:63
+#, c-format
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "Penggunaan: sg grup [[-c] perintah]\n"
+
+#: src/newgrp.c:131
+#, c-format
+msgid "unknown uid: %u\n"
+msgstr "uid tidak dikenal: %u\n"
+
+#: src/newgrp.c:214
+#, c-format
+msgid "unknown gid: %lu\n"
+msgstr "gid tidak dikenal: %lu\n"
+
+#: src/newgrp.c:360 src/newgrp.c:369
+msgid "Sorry.\n"
+msgstr "Maaf.\n"
+
+#: src/newgrp.c:469
+#, c-format
+msgid "too many groups\n"
+msgstr "terlalu banyak grup\n"
+
+#: src/newusers.c:78
+#, c-format
+msgid "Usage: %s [input]\n"
+msgstr "Penggunaan: %s [input]\n"
+
+#: src/newusers.c:388
+#, c-format
+msgid "%s: can't lock /etc/passwd.\n"
+msgstr "%s: tidak dapat mengunci /etc/passwd.\n"
+
+#: src/newusers.c:400
+#, c-format
+msgid "%s: can't lock files, try again later\n"
+msgstr "%s: tidak dapat mengunci berkas-berkas, coba lagi nanti\n"
+
+#: src/newusers.c:416
+#, c-format
+msgid "%s: can't open files\n"
+msgstr "%s: tidak dapat membuka berkas-berkas\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: baris %d: baris tidak sah\n"
+
+#: src/newusers.c:480
+#, c-format
+msgid "%s: line %d: can't create GID\n"
+msgstr ""
+
+#: src/newusers.c:496
+#, c-format
+msgid "%s: line %d: can't create UID\n"
+msgstr ""
+
+#: src/newusers.c:509
+#, c-format
+msgid "%s: line %d: cannot find user %s\n"
+msgstr ""
+
+#: src/newusers.c:518
+#, c-format
+msgid "%s: line %d: can't update password\n"
+msgstr ""
+
+#: src/newusers.c:536
+#, c-format
+msgid "%s: line %d: mkdir failed\n"
+msgstr ""
+
+#: src/newusers.c:542
+#, c-format
+msgid "%s: line %d: chown failed\n"
+msgstr ""
+
+#: src/newusers.c:552
+#, c-format
+msgid "%s: line %d: can't update entry\n"
+msgstr ""
+
+#: src/newusers.c:584
+#, c-format
+msgid "%s: error updating files\n"
+msgstr ""
+
+#: src/passwd.c:155
+#, c-format
+msgid "Usage: %s [-f|-s] [name]\n"
+msgstr "Penggunaan: %s [-f|-s] [nama]\n"
+
+#: src/passwd.c:159
+#, c-format
+msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
+msgstr ""
+"            %s [-x maks] [-n min] [-w peringatan] [-i tak-aktif] nama\n"
+
+#: src/passwd.c:161
+#, c-format
+msgid "       %s {-l|-u|-d|-S|-e} name\n"
+msgstr "            %s {-l|-u|-d|-S|-e} nama\n"
+
+#: src/passwd.c:216
+msgid "Old password: "
+msgstr "Kata sandi lama: "
+
+#: src/passwd.c:225
+#, c-format
+msgid "Incorrect password for `%s'\n"
+msgstr "Kata sandi tidak tepat untuk `%s'\n"
+
+#: src/passwd.c:249
+#, c-format
+msgid ""
+"Enter the new password (minimum of %d, maximum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Masukkan password baru (minimim %d, maksimum %d karakter)\n"
+"Mohon gunakan kombinasi huruf besar, huruf kecil dan angka.\n"
+
+#: src/passwd.c:255
+msgid "New password: "
+msgstr "kata sandi baru: "
+
+#: src/passwd.c:266
+#, c-format
+msgid "Try again.\n"
+msgstr "Coba lagi.\n"
+
+#: src/passwd.c:277
+#, c-format
+msgid ""
+"\n"
+"Warning: weak password (enter it again to use it anyway).\n"
+msgstr ""
+"\n"
+"Kata sandi lemah (masukkan lagi untuk tetap menggunakannya).\n"
+
+#: src/passwd.c:287
+#, c-format
+msgid "They don't match; try again.\n"
+msgstr "Kata sandi tidak sama; coba lagi.\n"
+
+#: src/passwd.c:364 src/passwd.c:382
+#, c-format
+msgid "The password for %s cannot be changed.\n"
+msgstr "Kata sandi untuk %s tidak dapat diganti.\n"
+
+#: src/passwd.c:396
+#, c-format
+msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgstr "Maaf, kata sandi untuk %s belum dapat diganti.\n"
+
+#: src/passwd.c:479
+#, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: kehabisan memori\n"
+
+#: src/passwd.c:730
+#, c-format
+msgid "%s: Cannot execute %s"
+msgstr "%s: Tidak dapat menjalankan %s"
+
+#: src/passwd.c:815
+#, c-format
+msgid "%s: repository %s not supported\n"
+msgstr "%s: repositori %s tidak didukung\n"
+
+#: src/passwd.c:890
+#, c-format
+msgid "%s: Permission denied\n"
+msgstr "%s: Ijin ditolak\n"
+
+#: src/passwd.c:914
+#, fuzzy, c-format
+msgid "You may not change the password for %s.\n"
+msgstr "Anda tidak boleh mengubah shell untuk %s.\n"
+
+#: src/passwd.c:962
+#, c-format
+msgid "Changing password for %s\n"
+msgstr "Mengganti kata sandi untuk %s\n"
+
+#: src/passwd.c:966
+#, c-format
+msgid "The password for %s is unchanged.\n"
+msgstr "Kata sandi untuk %s tidak diubah.\n"
+
+#: src/passwd.c:1016
+#, c-format
+msgid "Password changed.\n"
+msgstr "Password telah diubah.\n"
+
+#: src/pwck.c:87
+#, c-format
+msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr ""
+
+#: src/pwck.c:90
+#, c-format
+msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
+msgstr ""
+
+#: src/pwck.c:295
+#, c-format
+msgid "invalid password file entry\n"
+msgstr ""
+
+#: src/pwck.c:357
+msgid "duplicate password entry\n"
+msgstr ""
+
+#: src/pwck.c:373
+#, c-format
+msgid "invalid user name '%s'\n"
+msgstr ""
+
+#: src/pwck.c:388
+#, c-format
+msgid "user %s: no group %u\n"
+msgstr ""
+
+#: src/pwck.c:404
+#, c-format
+msgid "user %s: directory %s does not exist\n"
+msgstr ""
+
+#: src/pwck.c:420
+#, c-format
+msgid "user %s: program %s does not exist\n"
+msgstr ""
+
+#: src/pwck.c:456
+#, c-format
+msgid "invalid shadow password file entry\n"
+msgstr ""
+
+#: src/pwck.c:518
+msgid "duplicate shadow password entry\n"
+msgstr ""
+
+#: src/pwck.c:542
+msgid "no matching password file entry\n"
+msgstr ""
+
+#: src/pwck.c:560
+#, c-format
+msgid "user %s: last password change in the future\n"
+msgstr ""
+
+#: src/pwconv.c:85 src/pwunconv.c:79
+#, c-format
+msgid "%s: can't lock passwd file\n"
+msgstr ""
+
+#: src/pwconv.c:90 src/pwunconv.c:84
+#, c-format
+msgid "%s: can't open passwd file\n"
+msgstr ""
+
+#: src/pwconv.c:118
+#, c-format
+msgid "%s: can't remove shadow entry for %s\n"
+msgstr ""
+
+#: src/pwconv.c:164
+#, c-format
+msgid "%s: can't update passwd entry for %s\n"
+msgstr ""
+
+#: src/pwconv.c:171
+#, c-format
+msgid "%s: can't update shadow file\n"
+msgstr ""
+
+#: src/pwconv.c:176
+#, c-format
+msgid "%s: can't update passwd file\n"
+msgstr ""
+
+#: src/pwunconv.c:124
+#, c-format
+msgid "%s: can't update entry for user %s\n"
+msgstr ""
+
+#: src/pwunconv.c:145
+#, c-format
+msgid "%s: can't delete shadow password file\n"
+msgstr ""
+
+#: src/su.c:133
+msgid "Sorry."
+msgstr "Maaf."
+
+#: src/su.c:323
+#, c-format
+msgid "%s: must be run from a terminal\n"
+msgstr "%s: mesti dijalankan dari sebuah terminal\n"
+
+#: src/su.c:423
+#, c-format
+msgid "%s: pam_start: error %d\n"
+msgstr "%s: pam_start: kesalahan %d\n"
+
+#: src/su.c:453
+#, c-format
+msgid "Unknown id: %s\n"
+msgstr "Id tidak dikenal: %s\n"
+
+#: src/su.c:490 src/su.c:507
+#, c-format
+msgid "You are not authorized to su %s\n"
+msgstr "Anda tidak diperbolehkan untuk su %s\n"
+
+#: src/su.c:502
+msgid "(Enter your own password.)"
+msgstr "(Masukkan password anda sendiri.)"
+
+#: src/su.c:536
+#, c-format
+msgid ""
+"%s: %s\n"
+"(Ignored)\n"
+msgstr ""
+"%s: %s\n"
+"(Diabaikan)\n"
+
+#: src/su.c:754
+#, c-format
+msgid "No shell\n"
+msgstr "Tak ada shell\n"
+
+#: src/suauth.c:105
+#, c-format
+msgid "Access to su to that account DENIED.\n"
+msgstr "Akses su untuk account it DITOLAK.\n"
+
+#: src/suauth.c:113
+#, c-format
+msgid "Password authentication bypassed.\n"
+msgstr "Otentikasi kata sandi diabaikan.\n"
+
+#: src/suauth.c:122
+#, c-format
+msgid "Please enter your OWN password as authentication.\n"
+msgstr "Silakan masukkan kata sandi anda SENDIRI sebagai otentikasi.\n"
+
+#: src/sulogin.c:118
+#, c-format
+msgid "No password file\n"
+msgstr "Tak ada berkas kata sandi\n"
+
+#: src/sulogin.c:160
+#, c-format
+msgid "No password entry for 'root'\n"
+msgstr "Tak ada entri kata sandi untuk 'root'\n"
+
+#: src/sulogin.c:176
+msgid ""
+"\n"
+"Type control-d to proceed with normal startup,\n"
+"(or give root password for system maintenance):"
+msgstr ""
+"\n"
+"Ketikkan control-d untuk melanjutkan startup normal,\n"
+"(ata berikan kata sandi root untuk pengelolaan sistem):"
+
+#: src/sulogin.c:212
+msgid "Entering System Maintenance Mode\n"
+msgstr "Memasuki Mode Pengelolaan Sistem\n"
+
+#: src/useradd.c:239
+#, c-format
+msgid "%s: rebuild the group database\n"
+msgstr ""
+
+#: src/useradd.c:248
+#, c-format
+msgid "%s: rebuild the shadow group database\n"
+msgstr ""
+
+#: src/useradd.c:283 src/useradd.c:297 src/usermod.c:741 src/usermod.c:755
+#, c-format
+msgid "%s: invalid numeric argument `%s'\n"
+msgstr ""
+
+#: src/useradd.c:354
+#, c-format
+msgid "%s: unknown gid %s\n"
+msgstr ""
+
+#: src/useradd.c:362 src/useradd.c:659 src/useradd.c:1153 src/usermod.c:244
+#: src/usermod.c:876
+#, c-format
+msgid "%s: unknown group %s\n"
+msgstr ""
+
+#: src/useradd.c:434
+#, c-format
+msgid "GROUP=%u\n"
+msgstr ""
+
+#: src/useradd.c:435
+#, c-format
+msgid "HOME=%s\n"
+msgstr ""
+
+#: src/useradd.c:437
+#, c-format
+msgid "INACTIVE=%ld\n"
+msgstr ""
+
+#: src/useradd.c:438
+#, c-format
+msgid "EXPIRE=%s\n"
+msgstr ""
+
+#: src/useradd.c:440
+#, c-format
+msgid "SHELL=%s\n"
+msgstr ""
+
+#: src/useradd.c:441
+#, c-format
+msgid "SKEL=%s\n"
+msgstr ""
+
+#: src/useradd.c:442
+#, c-format
+msgid "CREATE_MAIL_SPOOL=%s\n"
+msgstr ""
+
+#: src/useradd.c:475
+#, c-format
+msgid "%s: cannot create new defaults file\n"
+msgstr ""
+
+#: src/useradd.c:480
+#, c-format
+msgid "%s: cannot open new defaults file\n"
+msgstr ""
+
+#: src/useradd.c:574 src/useradd.c:586
+#, c-format
+msgid "%s: rename: %s"
+msgstr ""
+
+#: src/useradd.c:680 src/usermod.c:265
+#, c-format
+msgid "%s: group `%s' is a NIS group.\n"
+msgstr ""
+
+#: src/useradd.c:689 src/usermod.c:274
+#, c-format
+msgid "%s: too many groups specified (max %d).\n"
+msgstr ""
+
+#: src/useradd.c:721
+#, c-format
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Penggunaan: useradd [-u uid [-o]] [-g grup] [-G grup,...] \n"
+
+#: src/useradd.c:724
+#, c-format
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr ""
+"                    [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+
+#: src/useradd.c:726 src/useradd.c:732
+#, c-format
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "                    [-f tidak_aktif] [-e kadaluarsa]\n"
+
+#: src/useradd.c:728
+#, c-format
+msgid "               [-p passwd] name\n"
+msgstr "                    [-p kata_sandi] nama\n"
+
+#: src/useradd.c:730
+#, c-format
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "            useradd -D [-g grup] [-b base] [-s shell]\n"
+
+#: src/useradd.c:817 src/usermod.c:461
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr ""
+
+#: src/useradd.c:822 src/usermod.c:467
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr ""
+
+#: src/useradd.c:829 src/usermod.c:578
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr ""
+
+#: src/useradd.c:834 src/usermod.c:584
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr ""
+
+#: src/useradd.c:1006
+#, c-format
+msgid "%s: uid %u is not unique\n"
+msgstr ""
+
+#: src/useradd.c:1036
+#, c-format
+msgid "%s: can't get unique uid\n"
+msgstr ""
+
+#: src/useradd.c:1073
+#, c-format
+msgid "%s: invalid base directory `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1083
+#, c-format
+msgid "%s: invalid comment `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1094
+#, c-format
+msgid "%s: invalid home directory `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1113 src/usermod.c:858
+#, c-format
+msgid "%s: invalid date `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1126
+#, c-format
+msgid "%s: shadow passwords required for -e\n"
+msgstr ""
+
+#: src/useradd.c:1142
+#, c-format
+msgid "%s: shadow passwords required for -f\n"
+msgstr ""
+
+#: src/useradd.c:1209 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1220
+#, c-format
+msgid "%s: invalid shell `%s'\n"
+msgstr ""
+
+#: src/useradd.c:1261
+#, c-format
+msgid "%s: invalid user name '%s'\n"
+msgstr ""
+
+#: src/useradd.c:1297 src/userdel.c:293 src/usermod.c:1003
+#, c-format
+msgid "%s: cannot rewrite password file\n"
+msgstr ""
+
+#: src/useradd.c:1304 src/userdel.c:298 src/usermod.c:1010
+#, c-format
+msgid "%s: cannot rewrite shadow password file\n"
+msgstr ""
+
+#: src/useradd.c:1345 src/userdel.c:350 src/usermod.c:1044
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr ""
+
+#: src/useradd.c:1350 src/userdel.c:355 src/usermod.c:1049
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr ""
+
+#: src/useradd.c:1358 src/userdel.c:362 src/usermod.c:1056
+#, c-format
+msgid "%s: cannot lock shadow password file\n"
+msgstr ""
+
+#: src/useradd.c:1365 src/userdel.c:368 src/usermod.c:1062
+#, c-format
+msgid "%s: cannot open shadow password file\n"
+msgstr ""
+
+#: src/useradd.c:1459
+#, c-format
+msgid "%s: error adding new password entry\n"
+msgstr ""
+
+#: src/useradd.c:1473
+#, c-format
+msgid "%s: error updating password dbm entry\n"
+msgstr ""
+
+#: src/useradd.c:1489 src/usermod.c:1151
+#, c-format
+msgid "%s: error adding new shadow password entry\n"
+msgstr ""
+
+#: src/useradd.c:1505 src/usermod.c:1168
+#, c-format
+msgid "%s: error updating shadow passwd dbm entry\n"
+msgstr ""
+
+#: src/useradd.c:1537
+#, c-format
+msgid "%s: cannot create directory %s\n"
+msgstr ""
+
+#: src/useradd.c:1567
+#, c-format
+msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+msgstr ""
+
+#: src/useradd.c:1590
+#, c-format
+msgid "Can't create mail spool for user %s.\n"
+msgstr ""
+
+#: src/useradd.c:1714 src/usermod.c:981
+#, c-format
+msgid "%s: user %s exists\n"
+msgstr ""
+
+#: src/useradd.c:1729
+#, c-format
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr ""
+
+#: src/useradd.c:1767
+#, c-format
+msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+msgstr ""
+
+#: src/userdel.c:124
+#, c-format
+msgid "Usage: %s [-r] name\n"
+msgstr "Penggunaan: %s [-r] nama\n"
+
+#: src/userdel.c:176 src/userdel.c:262
+#, c-format
+msgid "%s: error updating group entry\n"
+msgstr ""
+
+#: src/userdel.c:186 src/userdel.c:271
+#, c-format
+msgid "%s: cannot update dbm group entry\n"
+msgstr ""
+
+#: src/userdel.c:214
+#, c-format
+msgid "%s: cannot remove dbm group entry\n"
+msgstr ""
+
+#: src/userdel.c:379
+#, c-format
+msgid "%s: cannot open group file\n"
+msgstr ""
+
+#: src/userdel.c:390
+#, c-format
+msgid "%s: cannot open shadow group file\n"
+msgstr ""
+
+#: src/userdel.c:408
+#, c-format
+msgid "%s: error deleting password entry\n"
+msgstr ""
+
+#: src/userdel.c:412
+#, c-format
+msgid "%s: error deleting shadow password entry\n"
+msgstr ""
+
+#: src/userdel.c:421
+#, c-format
+msgid "%s: error deleting password dbm entry\n"
+msgstr ""
+
+#: src/userdel.c:440
+#, c-format
+msgid "%s: error deleting shadow passwd dbm entry\n"
+msgstr ""
+
+#: src/userdel.c:484
+#, c-format
+msgid "%s: user %s is currently logged in\n"
+msgstr ""
+
+#: src/userdel.c:594
+#, c-format
+msgid "%s: warning: %s not owned by %s, not removing\n"
+msgstr ""
+
+#: src/userdel.c:600
+#, c-format
+msgid "%s: warning: can't remove "
+msgstr ""
+
+#: src/userdel.c:706 src/usermod.c:783
+#, c-format
+msgid "%s: user %s does not exist\n"
+msgstr ""
+
+#: src/userdel.c:721 src/usermod.c:799
+#, c-format
+msgid "%s: user %s is a NIS user\n"
+msgstr ""
+
+#: src/userdel.c:759
+#, c-format
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr ""
+
+#: src/userdel.c:782
+#, c-format
+msgid "%s: not removing directory %s (would remove home of user %s)\n"
+msgstr ""
+
+#: src/userdel.c:796
+#, c-format
+msgid "%s: error removing directory %s\n"
+msgstr ""
+
+#: src/usermod.c:306
+#, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Penggunaan: %s\t[-u uid [-o]] [-g grup] [-G grup,...] \n"
+
+#: src/usermod.c:310
+#, c-format
+msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+msgstr "\t\t[-d home [-m]] [-s shell] [-c comment] [-l nama_baru]\n"
+
+#: src/usermod.c:313
+#, c-format
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f tidak_aktif] [-e kadaluarsa] "
+
+#: src/usermod.c:315
+#, c-format
+msgid "[-p passwd] [-L|-U] name\n"
+msgstr "[-p kata_sandi] [-L|-U] nama\n"
+
+#: src/usermod.c:495
+#, c-format
+msgid "%s: out of memory in update_group\n"
+msgstr ""
+
+#: src/usermod.c:622
+#, c-format
+msgid "%s: out of memory in update_gshadow\n"
+msgstr ""
+
+#: src/usermod.c:958
+#, c-format
+msgid "%s: no flags given\n"
+msgstr ""
+
+#: src/usermod.c:965
+#, c-format
+msgid "%s: shadow passwords required for -e and -f\n"
+msgstr ""
+
+#: src/usermod.c:987
+#, c-format
+msgid "%s: uid %lu is not unique\n"
+msgstr ""
+
+#: src/usermod.c:1116
+#, c-format
+msgid "%s: error changing password entry\n"
+msgstr ""
+
+#: src/usermod.c:1122
+#, c-format
+msgid "%s: error removing password entry\n"
+msgstr ""
+
+#: src/usermod.c:1131
+#, c-format
+msgid "%s: error adding password dbm entry\n"
+msgstr ""
+
+#: src/usermod.c:1139
+#, c-format
+msgid "%s: error removing passwd dbm entry\n"
+msgstr ""
+
+#: src/usermod.c:1158
+#, c-format
+msgid "%s: error removing shadow password entry\n"
+msgstr ""
+
+#: src/usermod.c:1175
+#, c-format
+msgid "%s: error removing shadow passwd dbm entry\n"
+msgstr ""
+
+#: src/usermod.c:1204
+#, c-format
+msgid "%s: directory %s exists\n"
+msgstr ""
+
+#: src/usermod.c:1213
+#, c-format
+msgid "%s: can't create %s\n"
+msgstr ""
+
+#: src/usermod.c:1219
+#, c-format
+msgid "%s: can't chown %s\n"
+msgstr ""
+
+#: src/usermod.c:1236
+#, c-format
+msgid "%s: cannot rename directory %s to %s\n"
+msgstr ""
+
+#: src/usermod.c:1333
+#, c-format
+msgid "%s: warning: %s not owned by %s\n"
+msgstr ""
+
+#: src/usermod.c:1339
+msgid "failed to change mailbox owner"
+msgstr ""
+
+#: src/usermod.c:1347
+msgid "failed to rename mailbox"
+msgstr ""
+
+#: src/vipw.c:105
+#, c-format
+msgid ""
+"\n"
+"%s: %s is unchanged\n"
+msgstr ""
+"\n"
+"%s: %s tidak berubah\n"
+
+#: src/vipw.c:133
+msgid "Couldn't lock file"
+msgstr "Tidak dapat mengunci berkas"
+
+#: src/vipw.c:142
+msgid "Couldn't make backup"
+msgstr "Tidak dapat membuat backup"
+
+#: src/vipw.c:200
+#, c-format
+msgid "%s: can't restore %s: %s (your changes are in %s)\n"
+msgstr "%s: tidak dapat mengembalikan %s: %s (perubahan ada dalam %s)\n"
+
+#: src/vipw.c:238
+#, c-format
+msgid ""
+"Usage:\n"
+"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+msgstr ""
+"Penggunaan:\n"
+"`vipw' mengedit /etc/passwd     `vipw -s' mengedit /etc/shadow\n"
+"`vigr' mengedit /etc/group      `vigr -s' mengedit /etc/gshadow\n"
+
+#~ msgid "Minimum:\t%ld\n"
+#~ msgstr "Minimal:\t%ld\n"
+
+#~ msgid "Maximum:\t%ld\n"
+#~ msgstr "Maksimal:\t%ld\n"
+
+#~ msgid "Warning:\t%ld\n"
+#~ msgstr "Peringatan:\t%ld\n"
+
+#~ msgid "Inactive:\t%ld\n"
+#~ msgstr "Tidak aktif:\t%ld\n"
+
+#~ msgid "Last Change:\t\t"
+#~ msgstr "Penggantian Terakhir:\t\t"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "Kata sandi dialup:"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "kesalahan - pencarian '%s' gagal\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%s tidak ditemukan\n"
+
+#, fuzzy
+#~ msgid "Incorrect password for %s.\n"
+#~ msgstr "Kata sandi tidak tepat untuk `%s'\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "Menjalankan shell %s\n"
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr ""
+#~ "Penggunaan: %s [-l] [-m hari_min] [-M hari_maks] [-d hari_akhir] "
+#~ "pengguna\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "Penggunaan: %s [-(a|d)] shell\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "Kata sandi shell: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "masukkan lagi kata sandi shell:"
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr "%s: Kedua kata sandi tidak identik, coba lagi.\n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: tidak dapat membuat %s"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: tidak dapat membuka %s"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: Shell %s tidak ditemukan.\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: tidak dikonfigurasikan untuk dukungan grup bayangan.\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr "Pengguna %s memiliki kunci TCFS, kata sandi lamanya diperlukan.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr "Anda dapat menggunakan -t untuk memaksakan perubahan.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "Perhatian: pengguna %s memiliki kunci TCFS.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr "Tidak dapat mengunci basis data kunci TCFS; coba lagi nanti\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "Tidak dapat membukan basis data kunci TCFS.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "Kesalahan saat memperbaharui basis data kunci TCFS.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "Tidak dapat melakukan commit perubahan TCFS.\n"
+
+#, fuzzy
+#~ msgid "%s: You may not view or modify password information for %s.\n"
+#~ msgstr "Anda tidak dapat menganti kata sandi untuk %s.\n"
+
+#, fuzzy
+#~ msgid "Command line args too long\n"
+#~ msgstr " terlalu panjang\n"

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwck.c,v 1.23 2002/01/10 13:01:28 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwck.c,v 1.24 2004/10/11 06:26:40 kloczek Exp $")
 #include <stdio.h>
 #include <fcntl.h>
 #include <grp.h>
@@ -148,7 +148,7 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	OPENLOG (Prog);
+	OPENLOG ("pwsk");
 
 	/*
 	 * Parse the command line arguments

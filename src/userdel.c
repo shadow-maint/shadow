@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.29 2003/12/17 09:43:30 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.31 2004/10/11 06:26:40 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -629,6 +629,23 @@ int main (int argc, char **argv)
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+
+	while ((arg = getopt (argc, argv, "fr")) != EOF) {
+		switch (arg) {
+		case 'f':	/* force remove even if not owned by user */
+			fflg++;
+			break;
+		case 'r':	/* remove home dir and mailbox */
+			rflg++;
+			break;
+		default:
+			usage ();
+		}
+	}
+
+	if (optind + 1 != argc)
+		usage ();
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 	pampw = getpwuid (getuid ());
@@ -637,7 +654,7 @@ int main (int argc, char **argv)
 	}
 
 	if (retval == PAM_SUCCESS)
-		retval = pam_start ("shadow", pampw->pw_name, &conv,
+		retval = pam_start ("userdel", pampw->pw_name, &conv,
 				    &pamh);
 
 	if (retval == PAM_SUCCESS) {
@@ -655,11 +672,12 @@ int main (int argc, char **argv)
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr,
 			 _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		exit (E_PW_UPDATE);
 	}
 #endif				/* USE_PAM */
 
-	OPENLOG (Prog);
+	OPENLOG ("userdel");
+
 #ifdef SHADOWPWD
 	is_shadow_pwd = spw_file_present ();
 #endif
@@ -680,21 +698,6 @@ int main (int argc, char **argv)
 	sg_dbm_mode = O_RDWR;
 #endif
 #endif
-	while ((arg = getopt (argc, argv, "fr")) != EOF) {
-		switch (arg) {
-		case 'f':	/* force remove even if not owned by user */
-			fflg++;
-			break;
-		case 'r':	/* remove home dir and mailbox */
-			rflg++;
-			break;
-		default:
-			usage ();
-		}
-	}
-
-	if (optind + 1 != argc)
-		usage ();
 	/*
 	 * Start with a quick check to see if the user exists.
 	 */
@@ -810,9 +813,10 @@ int main (int argc, char **argv)
 			pam_end (pamh, retval);
 	}
 
-	if (retval != PAM_SUCCESS)
+	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
-	exit (1);
+		exit (E_PW_UPDATE);
+	}
 
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);

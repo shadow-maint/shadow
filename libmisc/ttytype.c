@@ -30,12 +30,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID ("$Id: ttytype.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
+RCSID ("$Id: ttytype.c,v 1.7 2004/08/18 09:53:58 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-extern char *getenv ();
 
 /*
  * ttytype - set ttytype from port to terminal type mapping database

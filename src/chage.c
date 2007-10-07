@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.32 2003/06/19 17:57:15 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.34 2004/10/11 13:42:49 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -221,7 +221,7 @@ static void print_date (time_t date)
  * list_fields - display the current values of the expiration fields
  *
  * display the password age information from the password fields. Date
- * values will be displayed as a calendar date, or the word "Never" if
+ * values will be displayed as a calendar date, or the word "never" if
  * the date is 1/1/70, which is day number 0.
  */
 
@@ -231,26 +231,13 @@ static void list_fields (void)
 	long expires;
 
 	/*
-	 * Start with the easy numbers - the number of days before the
-	 * password can be changed, the number of days after which the
-	 * password must be chaged, the number of days before the password
-	 * expires that the user is told, and the number of days after the
-	 * password expires that the account becomes unusable.
-	 */
-
-	printf (_("Minimum:\t%ld\n"), mindays);
-	printf (_("Maximum:\t%ld\n"), maxdays);
-	printf (_("Warning:\t%ld\n"), warndays);
-	printf (_("Inactive:\t%ld\n"), inactdays);
-
-	/*
-	 * The "last change" date is either "Never" or the date the password
+	 * The "last change" date is either "never" or the date the password
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
 
-	printf (_("Last Change:\t\t"));
+	printf (_("Last password change\t\t\t\t\t: "));
 	if (lastday <= 0) {
-		printf (_("Never\n"));
+		printf (_("never\n"));
 	} else {
 		changed = lastday * SCALE;
 		print_date (changed);
@@ -261,10 +248,10 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 
-	printf (_("Password Expires:\t"));
+	printf (_("Password expires\t\t\t\t\t: "));
 	if (lastday <= 0 || maxdays >= 10000 * (DAY / SCALE)
 	    || maxdays <= 0) {
-		printf (_("Never\n"));
+		printf (_("never\n"));
 	} else {
 		expires = changed + maxdays * SCALE;
 		print_date (expires);
@@ -277,10 +264,10 @@ static void list_fields (void)
 	 * active will be disabled.
 	 */
 
-	printf (_("Password Inactive:\t"));
+	printf (_("Password inactive\t\t\t\t\t: "));
 	if (lastday <= 0 || inactdays <= 0 ||
 	    maxdays >= 10000 * (DAY / SCALE) || maxdays <= 0) {
-		printf (_("Never\n"));
+		printf (_("never\n"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
 		print_date (expires);
@@ -291,13 +278,25 @@ static void list_fields (void)
 	 * password expiring or not.
 	 */
 
-	printf (_("Account Expires:\t"));
+	printf (_("Account expires\t\t\t\t\t\t: "));
 	if (expdays <= 0) {
-		printf (_("Never\n"));
+		printf (_("never\n"));
 	} else {
 		expires = expdays * SCALE;
 		print_date (expires);
 	}
+
+	/*
+	 * Start with the easy numbers - the number of days before the
+	 * password can be changed, the number of days after which the
+	 * password must be chaged, the number of days before the password
+	 * expires that the user is told, and the number of days after the
+	 * password expires that the account becomes unusable.
+	 */
+
+	printf (_("Minimum number of days between password change\t\t: %ld\n"), mindays);
+	printf (_("Maximum number of days between password change\t\t: %ld\n"), maxdays);
+	printf (_("Number of days of warning before password expires\t: %ld\n"), warndays);
 }
 
 #ifdef USE_PAM
@@ -697,6 +696,40 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (1);
 	}
+
+#ifdef USE_PAM
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid(getuid());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start("chage", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt(pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end(pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (1);
+	}
+
+	OPENLOG("chage");
+#endif /* USE_PAM */
 
 	/*
 	 * Close the password file. If any entries were modified, the file

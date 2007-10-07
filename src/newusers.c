@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.18 2003/12/17 01:33:29 kloczek Exp $")
+RCSID (PKG_VER "$Id: newusers.c,v 1.19 2004/10/11 06:26:40 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -331,6 +331,9 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	if (argc > 1 && argv[1][0] == '-')
+		usage ();
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -341,7 +344,7 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval =
-		    pam_start ("shadow", pampw->pw_name, &conv, &pamh);
+		    pam_start ("newusers", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -364,9 +367,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
-
-	if (argc > 1 && argv[1][0] == '-')
-		usage ();
 
 	if (argc == 2) {
 		if (!freopen (argv[1], "r", stdin)) {

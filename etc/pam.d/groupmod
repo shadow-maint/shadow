@@ -1,0 +1,5 @@
+#%PAM-1.0
+# /etc/pam.d/groupmod
+auth		sufficient	pam_rootok.so
+account		required	pam_permit.so
+password	required	pam_make.so /var/db

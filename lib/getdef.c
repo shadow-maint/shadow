@@ -30,11 +30,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.18 2003/05/12 02:40:08 kloczek Exp $")
+RCSID("$Id: getdef.c,v 1.19 2004/06/03 00:27:19 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
 #include "getdef.h"
 
@@ -349,7 +350,7 @@ def_load(void)
 	if ((fp = fopen(def_fname, "r")) == NULL) {
 		SYSLOG((LOG_CRIT, "cannot open login definitions %s [%m]",
 			def_fname));
-		return;
+		exit(1);
 	}
 
 	/*
@@ -392,6 +393,13 @@ def_load(void)
 		 */
 		putdef_str(name, value);
 	}
+
+	if (ferror(fp)) {
+		SYSLOG((LOG_CRIT, "cannot read login definitions %s [%m]",
+			def_fname));
+		exit(1);
+	}
+
 	(void) fclose(fp);
 }
 

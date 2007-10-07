@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.26 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.27 2004/10/23 23:19:07 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -134,6 +134,112 @@ static void su_failure (const char *tty)
 	exit (1);
 }
 
+#ifdef USE_PAM
+static int caught = 0;
+
+/* Signal handler for parent process later */
+static void su_catch_sig (int sig)
+{
+	++caught;
+}
+
+/* This I ripped out of su.c from sh-utils after the Mandrake pam patch
+ * have been applied.  Some work was needed to get it integrated into
+ * su.c from shadow.
+ */
+static void run_shell (const char *shellstr, char *args[], int doshell)
+{
+	int child;
+	sigset_t ourset;
+	int status;
+	int ret;
+
+	child = fork ();
+	if (child == 0) {	/* child shell */
+		pam_end (pamh, PAM_SUCCESS);
+
+		if (doshell)
+			shell (shellstr, (char *) args[0]);
+		else
+			(void) execv (shellstr, (char **) args);
+		{
+			int exit_status = (errno == ENOENT ? 127 : 126);
+
+			exit (exit_status);
+		}
+	} else if (child == -1) {
+		(void) fprintf (stderr, "%s: Cannot fork user shell\n",
+				Prog);
+		SYSLOG ((LOG_WARN, "Cannot execute %s", pwent.pw_shell));
+		closelog ();
+		exit (1);
+	}
+	/* parent only */
+	sigfillset (&ourset);
+	if (sigprocmask (SIG_BLOCK, &ourset, NULL)) {
+		(void) fprintf (stderr, "%s: signal malfunction\n", Prog);
+		caught = 1;
+	}
+	if (!caught) {
+		struct sigaction action;
+
+		action.sa_handler = su_catch_sig;
+		sigemptyset (&action.sa_mask);
+		action.sa_flags = 0;
+		sigemptyset (&ourset);
+
+		if (sigaddset (&ourset, SIGTERM)
+		    || sigaddset (&ourset, SIGALRM)
+		    || sigaction (SIGTERM, &action, NULL)
+		    || sigprocmask (SIG_UNBLOCK, &ourset, NULL)
+		    ) {
+			fprintf (stderr,
+				 "%s: signal masking malfunction\n", Prog);
+			caught = 1;
+		}
+	}
+
+	if (!caught) {
+		do {
+			int pid;
+
+			pid = waitpid (-1, &status, WUNTRACED);
+
+			if (WIFSTOPPED (status)) {
+				kill (getpid (), SIGSTOP);
+				/* once we get here, we must have resumed */
+				kill (pid, SIGCONT);
+			}
+		} while (WIFSTOPPED (status));
+	}
+
+	if (caught) {
+		fprintf (stderr, "\nSession terminated, killing shell...");
+		kill (child, SIGTERM);
+	}
+
+	ret = pam_close_session (pamh, 0);
+	if (ret != PAM_SUCCESS) {
+		SYSLOG ((LOG_ERR, "pam_close_session: %s",
+			 pam_strerror (pamh, ret)));
+		fprintf (stderr, "%s: %s\n", Prog,
+			 pam_strerror (pamh, ret));
+		pam_end (pamh, ret);
+		exit (1);
+	}
+
+	ret = pam_end (pamh, PAM_SUCCESS);
+
+	if (caught) {
+		sleep (2);
+		kill (child, SIGKILL);
+		fprintf (stderr, " ...killed.\n");
+		exit (-1);
+	}
+
+	exit (WEXITSTATUS (status));
+}
+#endif
 
 /*
  * su - switch user id
@@ -152,6 +258,7 @@ static void su_failure (const char *tty)
 int main (int argc, char **argv)
 {
 	char *cp;
+	char **envcp;
 	const char *tty = 0;	/* Name of tty SU is run from        */
 	int doshell = 0;
 	int fakelogin = 0;
@@ -252,6 +359,16 @@ int main (int argc, char **argv)
 		 */
 		if ((cp = getenv ("TERM")))
 			addenv ("TERM", cp);
+#ifndef USE_PAM
+		/*
+		 * Also leave DISPLAY and XAUTHORITY if present, else
+		 * pam_xauth will not work.
+		 */
+		if ((cp = getenv ("DISPLAY")))
+			addenv ("DISPLAY", cp);
+		if ((cp = getenv ("XAUTHORITY")))
+			addenv ("XAUTHORITY", cp);
+#endif				/* !USE_PAM */
 	} else {
 		while (*envp)
 			addenv (*envp++, NULL);
@@ -496,7 +613,10 @@ int main (int argc, char **argv)
 		addenv ("PATH", cp);
 	}
 
+/* setup the environment for pam later on, else we run into auth problems */
+#ifndef USE_PAM
 	environ = newenvp;	/* make new environment active */
+#endif
 
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
@@ -544,16 +664,37 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
+	ret = pam_open_session (pamh, 0);
+	if (ret != PAM_SUCCESS) {
+		SYSLOG ((LOG_ERR, "pam_open_session: %s",
+			 pam_strerror (pamh, ret)));
+		fprintf (stderr, "%s: %s\n", Prog,
+			 pam_strerror (pamh, ret));
+		pam_end (pamh, ret);
+		exit (1);
+	}
+
+	/* we need to setup the environment *after* pam_open_session(),
+	 * else the UID is changed before stuff like pam_xauth could
+	 * run, and we cannot access /etc/shadow and co
+	 */
+	environ = newenvp;	/* make new environment active */
+
+	/* update environment with all pam set variables */
+	envcp = pam_getenvlist (pamh);
+	if (envcp) {
+		while (*envcp) {
+			putenv (*envcp);
+			envcp++;
+		}
+	}
+
 	/* become the new user */
 	if (change_uid (&pwent)) {
 		pam_setcred (pamh, PAM_DELETE_CRED);
 		pam_end (pamh, PAM_ABORT);
 		exit (1);
 	}
-
-	/* now we are done using PAM */
-	pam_end (pamh, PAM_SUCCESS);
-
 #else				/* !USE_PAM */
 	if (!amroot)		/* no limits if su from root */
 		setup_limits (&pwent);
@@ -605,14 +746,21 @@ int main (int argc, char **argv)
 		 */
 
 		argv[-1] = pwent.pw_shell;
+#ifndef USE_PAM
 		(void) execv (pwent.pw_shell, &argv[-1]);
+#else
+		run_shell (pwent.pw_shell, &argv[-1], 0);
+#endif
 		(void) fprintf (stderr, _("No shell\n"));
 		SYSLOG ((LOG_WARN, "Cannot execute %s", pwent.pw_shell));
 		closelog ();
 		exit (1);
 	}
-
+#ifndef USE_PAM
 	shell (pwent.pw_shell, cp);
+#else
+	run_shell (pwent.pw_shell, &cp, 1);
+#endif
 	/* NOT REACHED */
 	exit (1);
 }

@@ -1,13 +1,11 @@
 
 EXTRA_DOST = .indent.pro
 
-DEFS = -DHAVE_CONFIG_H
-
 INCLUDES = -I$(top_srcdir)/lib
 
-lib_LTLIBRARIES = libmisc.la
+noinst_LIBRARIES = libmisc.a
 
-libmisc_la_SOURCES = \
+libmisc_a_SOURCES = \
 	addgrps.c \
 	age.c \
 	basename.c \
@@ -56,5 +54,3 @@ libmisc_la_SOURCES = \
 	utmp.c \
 	valid.c \
 	xmalloc.c
-
-libmisc_la_LIBADD = $(LIBCRACK)

@@ -2,13 +2,12 @@
 AUTOMAKE_OPTIONS = 1.0 foreign
 
 DEFS = 
-INCLUDES =
 
 lib_LTLIBRARIES = libshadow.la
 
 libshadow_la_LDFLAGS = -version-info 0:0:0
-libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD) \
-	$(top_builddir)/libmisc/libmisc.la
+libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD) $(LIBSELINUX) \
+	$(top_builddir)/libmisc/libmisc.a
 
 libshadow_la_SOURCES = \
 	commonio.c \

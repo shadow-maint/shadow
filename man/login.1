@@ -1,4 +1,4 @@
-.\"$Id: login.1,v 1.16 2003/06/19 18:17:05 kloczek Exp $
+.\"$Id: login.1,v 1.17 2004/08/04 13:02:23 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -90,12 +90,12 @@ A subsystem login is indicated by the presense of a "*" as the first
 character of the login shell. The given home directory will be used as
 the root of a new filesystem which the user is actually logged into.
 .SH OPTIONS
-.IP "\fB-p\fR"
-Preserve environment.
 .IP "\fB-f\fR"
 Do not perform authentication, user is preauthenticated.
 .IP "\fB-h\fR"
 Name of the remote host for this login.
+.IP "\fB-p\fR"
+Preserve environment.
 .IP "\fB-r\fR"
 Perform autologin protocol for rlogin.
 .PP

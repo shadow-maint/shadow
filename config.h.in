@@ -163,15 +163,6 @@
 /* Define to 1 if you have the `lckpwdf' function. */
 #undef HAVE_LCKPWDF
 
-/* Define to 1 if you have the `inet' library (-linet). */
-#undef HAVE_LIBINET
-
-/* Define to 1 if you have the `nsl' library (-lnsl). */
-#undef HAVE_LIBNSL
-
-/* Define to 1 if you have the `socket' library (-lsocket). */
-#undef HAVE_LIBSOCKET
-
 /* Define to 1 if you have the <limits.h> header file. */
 #undef HAVE_LIMITS_H
 
@@ -192,9 +183,6 @@
 
 /* Define to 1 if you have the `mkdir' function. */
 #undef HAVE_MKDIR
-
-/* Define to 1 if you have the `mkstemp' function. */
-#undef HAVE_MKSTEMP
 
 /* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
 #undef HAVE_NDIR_H
@@ -219,6 +207,9 @@
 
 /* Define to 1 if you have the <rpc/key_prot.h> header file. */
 #undef HAVE_RPC_KEY_PROT_H
+
+/* Define to 1 if you have the <selinux/selinux.h> header file. */
+#undef HAVE_SELINUX_SELINUX_H
 
 /* Define to 1 if you have the `setgroups' function. */
 #undef HAVE_SETGROUPS
@@ -336,6 +327,9 @@
 /* Define to 1 if you have the <utmp.h> header file. */
 #undef HAVE_UTMP_H
 
+/* locale directory */
+#undef LOCALEDIR
+
 /* Name of package */
 #undef PACKAGE
 
@@ -354,7 +348,7 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define if compiler has function prototypes */
+/* Define to 1 if the C compiler supports function prototypes. */
 #undef PROTOTYPES
 
 /* Define as the return type of signal handlers (`int' or `void'). */
@@ -380,6 +374,12 @@
 
 /* Version number of package */
 #undef VERSION
+
+/* Build shadow with SELinux support */
+#undef WITH_SELINUX
+
+/* Define like PROTOTYPES; this can be used by system headers. */
+#undef __PROTOTYPES
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const

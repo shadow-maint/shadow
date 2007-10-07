@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.35 2003/12/17 12:52:25 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.37 2004/08/04 10:33:43 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -566,10 +566,10 @@ int main (int argc, char **argv)
 		else if (amroot)
 			memzero (utent.ut_host, sizeof utent.ut_host);
 #endif
-		if (hflg && fflg) {
-			reason = PW_RLOGIN;
+		if (fflg)
 			preauth_flag++;
-		}
+		if (hflg)
+			reason = PW_RLOGIN;
 #ifdef RLOGIN
 		if (rflg
 		    && do_rlogin (hostname, username, sizeof username,
@@ -784,6 +784,11 @@ int main (int argc, char **argv)
 				  (const void **) &pam_user);
 		setpwent ();
 		pwd = getpwnam (pam_user);
+
+		if (fflg) {
+			retcode = pam_acct_mgmt(pamh, 0);
+			PAM_FAIL_CHECK;
+		}
 
 		if (!pwd || setup_groups (pwd))
 			exit (1);

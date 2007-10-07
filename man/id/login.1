@@ -87,13 +87,6 @@ digunakan (home directiry diperiksa pada file
 seperti dijelaskan sebelumnya).
 .SH OPTION
 .TP
-.B \-p
-digunakan oleh
-.BR getty (8)
-untuk memberi tahu bahwa
-.B login
-tidak mengubah environment
-.TP
 .B \-f
 Used to skip a second login authentication.  This specifically does
 Digunakan untuk melewatkan pengecekan tahap kedua ketika login.  Biasanya
@@ -108,6 +101,13 @@ untuk melewatkan nama remote host ketika
 .B login
 sehingga dapat ditempatkan pada utmp dan wtmp.  HAnya superuser yang dapat
 menggunakan option ini.
+.TP
+.B \-p
+digunakan oleh
+.BR getty (8)
+untuk memberi tahu bahwa
+.B login
+tidak mengubah environment
 
 .SH "PEMBATASAN AKSES TERTENTU/SPECIAL ACCESS RESTRICTIONS"
 File

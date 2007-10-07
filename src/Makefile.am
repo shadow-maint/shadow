@@ -4,8 +4,6 @@ EXTRA_DIST = .indent.pro
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
 
-DEFS = -D_HAVE_CONFIG_H -DLOCALEDIR=\"$(datadir)/locale\"
-
 INCLUDES = \
 	-I${top_srcdir}/lib \
 	-I$(top_srcdir)/libmisc
@@ -49,7 +47,7 @@ noinst_PROGRAMS = id sulogin
 suidbins = su
 suidubins = chage chfn chsh expiry gpasswd newgrp passwd
 
-LDADD = $(top_builddir)/libmisc/libmisc.la \
+LDADD = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 
 chpasswd_LDADD = $(LDADD) $(LIBPAM)
@@ -68,14 +66,13 @@ useradd_LDADD  = $(LDADD) $(LIBPAM)
 userdel_LDADD  = $(LDADD) $(LIBPAM)
 usermod_LDADD  = $(LDADD) $(LIBPAM)
 
-install-exec-hook:
-	ln -sf newgrp	$(DESTDIR)$(bindir)/sg
-	ln -sf vipw	$(DESTDIR)$(bindir)/vigr
+install-am: all-am
+	$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+	ln -sf newgrp	$(DESTDIR)$(ubindir)/sg
+	ln -sf vipw	$(DESTDIR)$(usbindir)/vigr
 	for i in $(suidbins); do \
-		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
+		chmod -f 4755 $(DESTDIR)$(bindir)/$$i; \
 	done
-
-install-data-hook:
 	for i in $(suidubins); do \
-		chmod 4755 $(DESTDIR)$(ubindir)/$$i; \
+		chmod -f 4755 $(DESTDIR)$(ubindir)/$$i; \
 	done

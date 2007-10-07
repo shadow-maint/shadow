@@ -3,7 +3,6 @@
 SUBDIRS = cs de es fr hu id it ja ko pl pt_BR ru zh_CN zh_TW
 
 man_MANS = \
-	adduser.8 \
 	chage.1 \
 	chfn.1 \
 	chpasswd.8 \
@@ -11,6 +10,7 @@ man_MANS = \
 	expiry.1 \
 	faillog.5 \
 	faillog.8 \
+	getspnam.3 \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
@@ -35,6 +35,7 @@ man_MANS = \
 	pwconv.8 \
 	pwunconv.8 \
 	sg.1 \
+	shadow.3 \
 	shadow.5 \
 	su.1 \
 	suauth.5 \
@@ -47,6 +48,5 @@ man_MANS = \
 EXTRA_DIST = $(man_MANS) \
 	id.1 \
 	pw_auth.3 \
-	shadow.3 \
 	shadowconfig.8 \
 	sulogin.8

@@ -44,7 +44,8 @@ passwd \- mettre à jour les marques d'authentification d'un utilisateur.
 .B passwd [-k] [-l] [-u [-f]] [-d] [-S] [nom_utilisateur]
 .sp 2
 .SH DESCRIPTION
-Passwd est utilisé pour mettre à jour la (les) marque(s) d'authentification d'un utilisateur.  Passwd est configuré pour travailler grâce à l'
+Passwd est utilisé pour mettre à jour la (les) marque(s) d'authentification
+d'un utilisateur.  Passwd est configuré pour travailler grâce à l'
 .BR "API Linux-PAM" ". "
 Il s'initialise principalement en tant que service "passwd" avec
 .I Linux-PAM
@@ -80,54 +81,90 @@ pour ce service serait :
  #
 
 .sp
-Notez qu'aucun autre type de module n'est requis pour le fonctionnement correct de cette application.
+Notez qu'aucun autre type de module n'est requis pour le fonctionnement
+correct de cette application.
 
 .SH OPTIONS
-
+.IP \fB-d\fR
+C'est une façon rapide pour désactiver un mot de passe pour un compte. Il
+supprimera le besoin du mot de passe pour un compte donné. Disponible
+uniquement pour root.
 .IP \fB-k\fR
 L'option,
 .BR -k ", "
-est utilisée pour indiquer que la mise à jour ne devrait être effectuée que pour les marques d'identifications (mots de passe); l'utilisateur conserve ses marques non expirés.
-
+est utilisée pour indiquer que la mise à jour ne devrait être effectuée que
+pour les marques d'identifications (mots de passe); l'utilisateur conserve
+ses marques non expirés.
 .IP \fB-l\fR
-Cette option est utilisé pour verrouiller le compte spécifié, et n'est disponible que pour root.  Le verrouillage est effecuté en rendant le mot de passe crypté invalide (en le préfixant par un !).
-
+Cette option est utilisé pour verrouiller le compte spécifié, et n'est
+disponible que pour root.  Le verrouillage est effecuté en rendant le mot de
+passe crypté invalide (en le préfixant par un !).
 .IP \fB--stdin\fR
-Cette option est utilisée pour indiquer que \fBpasswd\fR doit lire le nouveau mot de passe à partir de l'entrée standard, qui peut être un tube.
-
+Cette option est utilisée pour indiquer que \fBpasswd\fR doit lire le
+nouveau mot de passe à partir de l'entrée standard, qui peut être un tube.
 .IP \fB-u\fR
-L'inverse de l'option précédente - il déverrouillera le mot de passe du compte en supprimant le préfixe "!".  Cette option n'est disponible que pour root.  Par défaut, \fBpasswd\fR refusera de créer un compte sans mot de passe associé (il ne déverrouillera pas un compte contenant uniquement ! pour mot de passe).  L'option \fB-f\fR outrepassera cette protection.
-
-.IP \fB-d\fR
-C'est une façon rapide pour désactiver un mot de passe pour un compte.  Il supprimera le besoin du mot de passe pour un compte donné.  Disponible uniquement pour root.
-
+L'inverse de l'option précédente - il déverrouillera le mot de passe du
+compte en supprimant le préfixe "!".  Cette option n'est disponible que pour
+root.  Par défaut, \fBpasswd\fR refusera de créer un compte sans mot de
+passe associé (il ne déverrouillera pas un compte contenant uniquement !
+pour mot de passe).  L'option \fB-f\fR outrepassera cette protection.
 .IP \fB-S\fR
-Cela affiche une information courte sur le statut du mot de passe pour un compte donné.  Disponible uniquement pour root.
+Cela affiche une information courte sur le statut du mot de passe pour un
+compte donné.  Disponible uniquement pour root.
 
 .SH "Rappelez-vous les deux principes suivants"
-
 .IP \fBProtégez\ votre\ mot de passe.\fR
-N'écrivez nulle part votre mot de passe - mémorisez-le.  En particulier, ne le laissez pas n'importe où et ne le placez pas non plus dans un fichier non crypté !  Utilisez des mots de passe non reliés sur des systèmes contrôlés par différentes organisations.  Ne divulguez ni ne partagez votre mot de passe, en particulier à quelqu'un disant prétendant faire partie d'un support technique, ou à un vendeur.  Ne laissez personne regarder votre mot de passe pendant que vous le tapez.  N'entrez pas votre mot de passe sur un ordinateur auquel vous ne faites pas confiance, ou si les "choses" ont l'air amusantes; quelqu'un pourrait être en train d'essayer de détourner votre mot de passe.  Utilisez votre mot de passe pour une période limitée et modifiez-le périodiquement.
-
+N'écrivez nulle part votre mot de passe - mémorisez-le.  En particulier, ne
+le laissez pas n'importe où et ne le placez pas non plus dans un fichier non
+crypté !  Utilisez des mots de passe non reliés sur des systèmes contrôlés
+par différentes organisations.  Ne divulguez ni ne partagez votre mot de
+passe, en particulier à quelqu'un disant prétendant faire partie d'un
+support technique, ou à un vendeur.  Ne laissez personne regarder votre mot
+de passe pendant que vous le tapez.  N'entrez pas votre mot de passe sur un
+ordinateur auquel vous ne faites pas confiance, ou si les "choses" ont l'air
+amusantes; quelqu'un pourrait être en train d'essayer de détourner votre mot
+de passe.  Utilisez votre mot de passe pour une période limitée et
+modifiez-le périodiquement.
 .IP \fBChoisisser un mot de passe difficile à deviner.\fR
 .I passwd
-essaiera de vous empêcher de choisir un mot de passe réellemnt mauvais, mais il n'est pas infaillible; créez votre mot de passe sagement.  N'utilisez rien que vous pouvez trouver dans un dictionnaire (dans n'importe quel langue ou jargon).  N'utilisez pas de nom (incluant celui d'un conjoint, d'un parent, d'un enfant, d'un animal domestique, d'un personnage imaginaire, d'un personnage célèbre, ou d'un endroit connu), ou de variation sur votre nom personnel ou de compte.  N'utilisez aucune information personnelle qui soit accessible (comme votre numéro de téléphone, votre plaque d'immatriculation ou votre numéro de sécurité sociale), ou sur les personnes de votre entourage.  N'utilisez pas une date d'anniversaire ou un motif simple comme "azerty", "qwerty", "abc" ou "aaa").  N'utilisez aucun élément cité ci-dessus suivi ou précédé par un chiffre.  Au lieu de cela, utilisez un mélange de lettres minuscules et majuscules, de chiffres et de signes de ponctuation.  Utiliseez des mots de passe longs (disons d'au moins 8 caractères).  Vous pourriez utiliser une paire de mots avec un signe de ponctuation inséré, une phrase de passe (une séquence de mots compréhensible), ou la première lettre de chaque mot dans une phrase de passe.
+essaiera de vous empêcher de choisir un mot de passe réellemnt mauvais, mais
+il n'est pas infaillible; créez votre mot de passe sagement.  N'utilisez
+rien que vous pouvez trouver dans un dictionnaire (dans n'importe quel
+langue ou jargon).  N'utilisez pas de nom (incluant celui d'un conjoint,
+d'un parent, d'un enfant, d'un animal domestique, d'un personnage
+imaginaire, d'un personnage célèbre, ou d'un endroit connu), ou de variation
+sur votre nom personnel ou de compte.  N'utilisez aucune information
+personnelle qui soit accessible (comme votre numéro de téléphone, votre
+plaque d'immatriculation ou votre numéro de sécurité sociale), ou sur les
+personnes de votre entourage.  N'utilisez pas une date d'anniversaire ou un
+motif simple comme "azerty", "qwerty", "abc" ou "aaa").  N'utilisez aucun
+élément cité ci-dessus suivi ou précédé par un chiffre.  Au lieu de cela,
+utilisez un mélange de lettres minuscules et majuscules, de chiffres et de
+signes de ponctuation.  Utiliseez des mots de passe longs (disons d'au moins
+8 caractères).  Vous pourriez utiliser une paire de mots avec un signe de
+ponctuation inséré, une phrase de passe (une séquence de mots
+compréhensible), ou la première lettre de chaque mot dans une phrase de
+passe.
 
 .SH ""
-Ces principes sont partiellement imposés par le système, mais uniquement partiellement.  Une certaine vigilance de votre côté rendra le système beaucoup plus sûr.
-
+Ces principes sont partiellement imposés par le système, mais uniquement
+partiellement.  Une certaine vigilance de votre côté rendra le système
+beaucoup plus sûr.
 .SH "VALEUR DE RETOUR"
 
 En cas de succès,
 .B passwd
-se terminera avec une valeur de retour de 0.  Une valeur de retour de 1 indique qu'une erreur s'est produite.  Les erreurs textuelles sont écrites dans le flux d'erreur standard.
+se terminera avec une valeur de retour de 0.  Une valeur de retour de 1
+indique qu'une erreur s'est produite.  Les erreurs textuelles sont écrites
+dans le flux d'erreur standard.
 
 .SH "CONFORMITÉ À"
 .br
 .BR Linux-PAM
 (Pluggable Authentication Modules pour Linux).
-.br
-Notez que si votre distribution de Linux-PAM se conforme au Standard de Système  de fichiers de Linux, vous pouvez trouver les modules dans
+.BR
+Notez que si votre distribution de Linux-PAM se conforme au Standard de
+Système de fichiers de Linux, vous pouvez trouver les modules dans
 .I /lib/security/
 au lieu de /usr/lib/security/, comme indiqué dans l'exemple.
 

@@ -1,4 +1,4 @@
-.\" $Id: groupadd.8,v 1.9 2004/01/05 01:08:32 kloczek Exp $
+.\" $Id: groupadd.8,v 1.10 2004/08/04 13:02:25 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -37,17 +37,17 @@ warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi warto¶ciami z systemu.
 W razie potrzeby zostanie wprowadzona do systemu nowa grupa.
 Polecenie \fBgroupadd\fR posiada nastêpuj±ce opcje:
 .TP
+.BI -f
+Ta opcja powoduje zakoñczenie programu ze statusem oznaczaj±cym sukces je¶li
+podana groupa ju¿ istnieje. Z opcj± \fB-g\fR, je¶li podany gid ju¿ istnieje,
+wybierany jest inny (unikalny) gid (czyli \fB-g\fR jest wy³±czane).
+.TP
 .BI -g " gid"
 Numeryczna warto¶æ identyfikatora grupy. Warto¶æ ta musi byæ niepowtarzalna,
 chyba ¿e u¿yto opcji \fB-o\fR. Warto¶æ ID grupy nie mo¿e byæ ujemna. Domy¶lnie
 u¿ywana jest najmniejsza warto¶æ identyfikatora wiêksza ni¿ 99 a wiêksza ni¿
 jakiejkolwiek innej grupy.
 Warto¶ci miêdzy 0 a 99 s± zwykle zarezerwowane dla kont systemowych.
-.TP
-.BI -f
-Ta opcja powoduje zakoñczenie programu ze statusem oznaczaj±cym sukces je¶li
-podana groupa ju¿ istnieje. Z opcj± \fB-g\fR, je¶li podany gid ju¿ istnieje,
-wybierany jest inny (unikalny) gid (czyli \fB-g\fR jest wy³±czane).
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o kontach grup
 .br

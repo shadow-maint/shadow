@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.21 2003/05/03 16:14:23 kloczek Exp $ */
+/* $Id: defines.h,v 1.22 2004/10/23 14:09:31 kloczek Exp $ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_
@@ -10,9 +10,6 @@
 
 #if HAVE_LOCALE_H
 # include <locale.h>
-#endif
-#if !HAVE_SETLOCALE
-# define setlocale(Category, Locale) /* empty */
 #endif
 
 #define gettext_noop(String) (String)
@@ -146,7 +143,7 @@ char *strchr(), *strrchr(), *strtok();
 
 /* cleaner than lots of #ifdefs everywhere - use this as follows:
    SYSLOG((LOG_CRIT, "user %s cracked root", user)); */
-#if HAVE_SETLOCALE
+#if ENABLE_NLS
 /* Temporarily set LC_TIME to "C" to avoid strange dates in syslog.
    This is a workaround for a more general syslog(d) design problem -
    syslogd should log the current system time for each event, and not
@@ -165,9 +162,9 @@ char *strchr(), *strrchr(), *strtok();
 			free(saved_locale);				\
 		}							\
 	} while (0)
-#else  /* !HAVE_SETLOCALE */
+#else  /* !ENABLE_NLS */
 #define SYSLOG(x) syslog x
-#endif /* !HAVE_SETLOCALE */
+#endif /* !ENABLE_NLS */
 
 #else  /* !USE_SYSLOG */
 

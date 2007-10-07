@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.18 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.19 2004/10/11 06:26:40 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -105,6 +105,12 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	/* XXX - use getopt() */
+	if (!(argc == 1 || (argc == 2 && !strcmp(argv[1], "-e"))))
+		usage();
+	if (argc == 2)
+		eflg = 1;
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -115,7 +121,7 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval =
-		    pam_start ("shadow", pampw->pw_name, &conv, &pamh);
+		    pam_start ("chpasswd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -138,12 +144,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
-
-	/* XXX - use getopt() */
-	if (!(argc == 1 || (argc == 2 && !strcmp (argv[1], "-e"))))
-		usage ();
-	if (argc == 2)
-		eflg = 1;
 
 	/*
 	 * Lock the password file and open it for reading. This will bring

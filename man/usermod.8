@@ -1,4 +1,4 @@
-.\"$Id: usermod.8,v 1.15 2003/10/21 20:13:11 kloczek Exp $
+.\"$Id: usermod.8,v 1.16 2004/08/04 13:02:23 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -72,6 +72,10 @@ listed, the user will be removed from the group.
 The name of the user will be changed from \fIlogin\fR to \fIlogin_name\fR.
 Nothing else is changed. In particular, the user's home directory name
 should probably be changed to reflect the new login name.
+.IP "\fB-L\fR"
+Lock a user's password. This puts a '!' in front of the encrypted password,
+effectively disabling the password.  You can't use this option with \fI-p\fR
+or \fI-U\fR.
 .IP "\fB-p\fR \fIpasswd\fR"                                                
 The encrypted password, as returned by \fBcrypt\fR(3).
 .IP "\fB-s\fR \fIshell\fR"
@@ -84,10 +88,6 @@ and 99 are typically reserved for system accounts. Any files which the user
 owns and which are located in the directory tree rooted at the user's home
 directory will have the file user ID changed automatically. Files outside of
 the user's home directory must be altered manually.
-.IP "\fB-L\fR"
-Lock a user's password. This puts a '!' in front of the encrypted password,
-effectively disabling the password.  You can't use this option with \fI-p\fR
-or \fI-U\fR.
 .IP "\fB-U\fR"
 Unlock a user's password. This removes the '!' in front of the encrypted
 password. You can't use this option with \fI-p\fR or \fI-L\fR.

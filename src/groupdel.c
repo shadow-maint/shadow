@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupdel.c,v 1.17 2003/06/19 18:11:01 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupdel.c,v 1.18 2004/10/11 06:26:40 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -294,6 +294,11 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	if (argc != 2)
+		usage();
+
+	group_name = argv[1];
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -304,7 +309,7 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval =
-		    pam_start ("shadow", pampw->pw_name, &conv, &pamh);
+		    pam_start ("groupdel", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -328,12 +333,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* USE_PAM */
 
-	if (argc != 2)
-		usage ();
-
-	group_name = argv[1];
-
-	OPENLOG (Prog);
+	OPENLOG ("groupdel");
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

@@ -41,7 +41,7 @@
 #if defined(SHADOWPWD)
 
 #include "rcsid.h"
-RCSID ("$Id: age.c,v 1.8 2003/04/22 10:59:21 kloczek Exp $")
+RCSID ("$Id: age.c,v 1.9 2004/03/29 00:26:18 kloczek Exp $")
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"
 #endif
@@ -101,7 +101,9 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 
 	endspent ();
 	endpwent ();
+#ifdef SHADOWGRP
 	endsgent ();
+#endif
 	endgrent ();
 
 	/*

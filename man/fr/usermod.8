@@ -25,7 +25,7 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: usermod.8,v 1.2 2003/04/26 13:24:12 kloczek Exp $
+.\"	$Id: usermod.8,v 1.3 2004/08/04 13:02:24 kloczek Exp $
 .\"
 .\" Traduction 27/09/2000 par Frédéric Delanoy (fdelanoy@info.fundp.ac.be)
 .\"
@@ -87,14 +87,14 @@ Le nom du groupe ou le numéro du groupe de connexion initial de l'utilisateur.  
 Une liste de groupes supplémentaires auxquels fait également partie l'utilisateur.  Chaque groupe est séparé du suivant par une virgule, sans espace entre les deux.  Les groupes sont soumis aux mêmes restrictions que celles données avec l'option \fB-g\fR.  Si l'utilisateur fait actuellement partie d'un groupe qui n'est pas listé, l'utilisateur sera supprimé du groupe.
 .IP "\fB-l \fInom_connexion\fR"
 Le nom de l'utilisateur passera de \fIlogin\fR à \fIlogin_name\fR.  Rien d'autre n'est modifié.  En particulier, le répertoire personnel de l'utilisateur devra probablement être changé pour refléter le nouveau nom de connexion.
+.IP "\fB-L\fR"
+Verrouiller le mot de passe d'un utilisateur.  Cette option ajoute un `!' devant le mot de passe crypté, ce qui désactive le mot de passe.  Vous ne pouvez pas utiliser cette option avec \fI-p\fR ou \fI-U\fR.
 .IP "\fB-p \fImot_de_passe\fR"                                                
 Le mot de passe crypté, comme renvoyé par \fBcrypt\fR(3).
 .IP "\fB-s \fIshell\fR"
 Le nom du nouveau shell de connexion de l'utilisateur.  Si shell n'est pas fourni, le système sélectionnera le shell de connexion par défaut.
 .IP "\fB-u \fIuid\fR"
 La valeur numérique de l'ID de l'utilisateur.  Cette valeur doit être unique, à moins que l'option \fI-o\fR ne soit utilisée.  La valeur doit être non négative.  Les valeurs comprises entre 0 et 99 sont typiquement réservées aux comptes systèmes.  Tous les fichiers possédés par l'utilisateur et qui sont situés dans le sous-arbre de répertoires "débutant" au répertoire personnel de l'utilisateur verront leur ID d'utilisateur automatiquement modifié.  Les fichiers situés à l'extérieur du répertoire personnel de l'utilisateur doivent être modifiés à la main.
-.IP "\fB-L\fR"
-Verrouiller le mot de passe d'un utilisateur.  Cette option ajoute un `!' devant le mot de passe crypté, ce qui désactive le mot de passe.  Vous ne pouvez pas utiliser cette option avec \fI-p\fR ou \fI-U\fR.
 .IP "\fB-U\fR"
 Déverrouiller le mot de passe d'un utilisateur.  Cela supprime le `!' situé devant le mot de passe crypté.  Vous ne pouvez pas utiliser cette option avec \fI-p\fR ou \fI-L\fR.
 .SH INCONVÉNIENTS

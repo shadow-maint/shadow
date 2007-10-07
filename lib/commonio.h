@@ -1,5 +1,8 @@
-/* $Id: commonio.h,v 1.7 2001/08/14 21:09:54 malekith Exp $ */
+/* $Id: commonio.h,v 1.8 2004/10/11 04:40:29 kloczek Exp $ */
 
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+#endif
 /*
  * Linked list entry.
  */
@@ -70,6 +73,9 @@ struct commonio_db {
 	 */
 	FILE *fp;
 
+#ifdef WITH_SELINUX
+        security_context_t scontext;
+#endif
 	/*
 	 * Head, tail, current position in linked list.
 	 */

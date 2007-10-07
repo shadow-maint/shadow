@@ -1,4 +1,279 @@
+2004-10-26  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/pl/Attic/adduser.8, man/pl/Makefile.am, man/Attic/adduser.8, man/Makefile.am, man/fr/Attic/adduser.8, man/fr/Makefile.am, man/id/Attic/adduser.8, man/id/Makefile.am, man/it/Attic/adduser.8, man/it/Makefile.am, man/ja/Attic/adduser.8, man/ja/Makefile.am, NEWS:
+	remove adduser(8) roff include man page to useradd(8).
+
+	* lib/Makefile.am: more fixes for non-inst libmisc.
+
+	* libmisc/Makefile.am, src/Makefile.am, NEWS:
+	change libmisc to private static library.
+
+	* etc/pam.d/Makefile.am: typo.
+
+2004-10-24  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* po/pl.po: - more translation/formatting fixes
+
+	* po/pl.po: - updated translation
+
+	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po:
+	- make update-po, updated usage() translation
+
+	* src/useradd.c: - syntax fix for useradd in usage()
+
+	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po:
+	- usage() formatting and other fixes
+
+	* po/fi.po: - proper UTF
+
+	* po/pl.po: - pl translation fixes/updates by Jakub Bogusz
+
+2004-10-24  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* etc/pam.d/chage, etc/pam.d/chpasswd, etc/pam.d/groupadd, etc/pam.d/groupdel, etc/pam.d/groupmod, etc/pam.d/newusers, etc/pam.d/useradd, etc/pam.d/usermod:
+	use default path to PAM modules.
+
+	* etc/pam.d/Attic/shadow, etc/pam.d/Makefile.am, etc/pam.d/chage, etc/pam.d/chpasswd, etc/pam.d/groupadd, etc/pam.d/groupdel, etc/pam.d/groupmod, etc/pam.d/login, etc/pam.d/newusers, etc/pam.d/usermod:
+	Remove shadow PAM config file. Added PAM config files for: chage, chpasswd,
+	groupadd, groupdel, groupmod, login, newusers.
+
+	* po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po:
+	"make update-po".
+
+	* configure.in: reverte previous incorrect commit.
+
+	* NEWS, src/su.c:
+	add pam_open_session() support. If builded without PAM support
+	propagate $DISPLAY and $XAUTHORITY enviroment variables.
+	Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
+
+2004-10-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in: cleanups.
+
+	* lib/defines.h:
+	define syslog() depending on ENABLE_NLS (not on HAVE_SETLOCALE).
+
+2004-10-23  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
+
+	* man/fr/Makefile.am: - killed non-existent manpage
+
+2004-10-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* libmisc/copydir.c, NEWS:
+	when placing symlinks into /etc/skel copy_tree of libmisc/copydir.c will
+	properly create the symlink in the destination directory but not change the
+	ownership to the target user/group. This makes httpd Option
+	SymlinkIfOwnerMatch break for default weg pages including symlinks placed
+	into /etc/skel/public_html for example.
+	http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=66819
+
+2004-10-11  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/Makefile.am:
+	seems I foud CorrectWay(tm) for add some symlinks on install target.
+
+	* po/pl.po: more fixes.
+
+	* po/pl.po: added missing \n.
+
+	* src/chage.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po:
+	more verbose/human readable -l output. This output is much more beter for
+	send directly via email for each users as message with account status (for
+	example as message with warning about account/password expiration).
+
+	* configure.in: start prepare for 4.0.5.
+
+	* src/Makefile.am, libmisc/Makefile.am, lib/Makefile.am, configure.in:
+	move LOCALEDIR to autoheader variables. Remove redefining DEFS in
+	Makefile.am (not neccessary now).
+
+	* src/chage.c, src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpck.c, src/logoutd.c, src/newusers.c, src/pwck.c, src/useradd.c, src/userdel.c, src/usermod.c, NEWS:
+	applied OWL shadow-4.0.4.1-owl-pam-auth.diff patch by Solar Designer
+	<solar@openwall.com>:
+	  Moved the PAM authentication in user management commands after
+	  command-line parsing, made it use separate service names for each command.
+	  Use constant strings rather than argv[0] for syslog ident in the user
+	  management commands.
+
+	* man/useradd.8:
+	reword the useradd manpage a little to make it more clear. Fix from:
+	http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-useradd-manpage-update.patch?rev=1.1
+
+	* configure.in: added libselinux detection.
+
+	* lib/Makefile.am, lib/commonio.c, lib/commonio.h, NEWS, autogen.sh, configure.in:
+	added SELinux support (basing on patch from Gentoo).
+
+	* man/fr/Makefile.am (man_MANS): added getspnam.3.
+
+2004-10-10  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, src/groupadd.c, src/groupmod.c:
+	English grammar fix: s/is a not a valid group name/is not a valid group name/
+	(pointed by Mike Frysinger <vapier@gentoo.org>).
+
+2004-10-08  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, src/userdel.c:
+	When removing a user with userdel, userdel always exits 1 (fixed).
+	Based on http://bugs.gentoo.org/show_bug.cgi?id=66687.
+
+2004-08-21  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in:
+	Use AC_SEARCH_LIBS() for inet_ntoa(), socket(), gethostbyname() probing (instead AC_CHECK_FUNC()).
+
+2004-08-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/Makefile.am: shadow(3) man page moved to man_MANS.
+
+	* libmisc/ttytype.c: Removed getenv() prototype (it is in <stdlib.h>).
+
+	* src/mkpasswd.c:
+	Removed fgetsx() prototype (it is in lib/prototypes.h).
+
+	* man/it/vigr.8: Fixed typo (s/wipw/vipw/).
+
+2004-08-09  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: Typo.
+
+	* po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po, po/cs.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nn.po, po/pl.po, po/pt.po, po/ru.po, po/sk.po, po/sv.po:
+	Run "make update-po".
+
+	* po/ca.po, po/da.po, po/nl.po, po/pt_BR.po: Converted to UTF-8.
+
+	* po/LINGUAS: Typo.
+
+	* po/nb.po, po/nl.po, po/nn.po, po/pt.po, po/pt_BR.po, po/tr.po, po/zh_CN.po, NEWS, po/LINGUAS, po/bs.po, po/ca.po, po/da.po, po/eu.po, po/he.po, po/id.po:
+	New translations: bs, ca, da, eu, he, id, nb, nl, nn, pt, pt_BR, tr,
+	zh_CN (stolen froM Debian)
+
+	* man/grpck.8, man/mkpasswd.8, man/pl/grpck.8, man/pl/mkpasswd.8, man/pl/pwck.8, man/pwck.8:
+	Corrected section number.
+
+2004-08-04  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/zh_TW/groupadd.8, man/id/chsh.1, man/id/login.1, man/it/chfn.1, man/pl/chage.1, man/pl/groupadd.8, man/pl/groupmems.8, man/pl/lastlog.8, man/pl/login.1, man/pt_BR/groupadd.8, man/zh_CN/chfn.1, man/zh_CN/chsh.1, man/de/login.1, man/de/su.1, man/fr/chsh.1, man/fr/passwd.1, man/fr/usermod.8, man/hu/chfn.1, man/chage.1, man/groupadd.8, man/groupmems.8, man/lastlog.8, man/login.1, man/usermod.8:
+	Options description in alphabetical order.
+
+	* NEWS, src/login.c:
+	Applied 036_pam_access_with_preauth.patch Debian patch submited by Bjorn
+	Torkelsson <Bjorn.Torkelsson@hpc2n.umu.se>: add support for PAM account
+	management to restrict access using pam_access when login is invoked with -f.
+
+2004-06-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/getspnam.3: added roff link to shadow(3).
+
+	* man/Makefile.am (man_MANS): added getspnam.3.
+
+2004-06-03  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, lib/commonio.c, lib/getdef.c, src/vipw.c:
+	Applied OWL shadow-4.0.4.1-owl-check-reads.diff patch by Solar Designer.
+	Add checking for read errors in commonio and vipw/vigr (not doing so could
+	result in data loss when the records are written back).
+
+	* NEWS: Add note about apply shadow-4.0.4.1-owl-tmp.diff OWL patch.
+
+	* src/useradd.c, configure.in:
+	Remove looking for mkstemp() prototype and allways use mkstemp() (removed
+	using mktemp if mkstemp() not found).
+	Partialy based on tmp OWL patch by Solar Designer <solar@openwall.com>.
+
+	* NEWS, libmisc/pwdcheck.c:
+	Fixed securirty bug which allow unauthorized account properties modification.
+	Affected tools: chfn and chsh.
+	Bug was discovered by Martin Schulze <joey@infodrom.org>.
+
+2004-05-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: typo.
+
+	* NEWS, po/LINGUAS, po/it.po:
+	added it translation (by Danilo Piazzalunga <danilopiazza@libero.it>).
+
+2004-05-18  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS: typos.
+
+	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>).
+
+2004-05-17  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/sk.po: run "make update-po".
+
+	* NEWS, po/LINGUAS, po/sk.po:
+	added sk translation (by Mann <Peter.Mann@tuke.sk>, submited by Christian
+	Perrier <bubulle@kheops.frmug.org>).
+
+2004-05-07  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* configure.in:
+	Use autoconf cache variables for file and directory location tests (by
+	Maciej W. Rozycki  <macro@ds2.pg.gda.pl>).
+
+2004-05-06  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* man/passwd.5:
+	Correct path directory delimiters (by Maciej W. Rozycki <macro@ds2.pg.gda.pl>).
+
+	* libmisc/xmalloc.c (malloc):
+	Remove the declaration (by Maciej W. Rozycki <macro@ds2.pg.gda.pl>).
+
+2004-04-28  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* src/login.c, NEWS:
+	Fixed handle -f option: now it works correctly without specify "-h
+	<host>" if open login session localy is required (thanks for help
+	investigate bug for Krzysztof Kotlenga).
+
+	* po/es.po: Updated (by Ruben Porras <nahoo82@telefonica.net>).
+
+2004-04-23  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/cs.po, po/de.po, po/el.po, po/fi.po, po/fr.po, po/ja.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po:
+	Run "update-po".
+
+2004-04-22  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/es.po: Updated to current (by run "update-po").
+
+	* po/es.po: Converted to utf-8.
+
+	* po/LINGUAS: Added es.
+
+	* po/es.po, NEWS:
+	Added es translation (by Ruben Porras <nahoo82@telefonica.net>).
+
+2004-04-05  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/ko.po, NEWS:
+	Updated ko translations (by Changwoo Ryu <cwryu@debian.org>).
+
+2004-04-02  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* po/fi.po: iconv -f iso8859-9 -t utf8
+
+2004-03-29  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* libmisc/age.c:
+	Use endsgent() conditionaly depending on SHADOWGRP (fix submited by Gabor Z.
+	Papp <gzp@papp.hu>).
+
+	* po/LINGUAS, po/fi.po, NEWS:
+	Added fi translation (by Tommi Vainikainen <thv@iki.fi>).
+
+	* README: Fixed shadow and shadow-commit lists on-line archives URLs.
+
 2004-01-14  Tomasz K這czko  <kloczek@pld.org.pl>
+
+	* NEWS, configure.in, man/fr/Makefile.am, man/hu/Makefile.am, man/it/Makefile.am, man/ko/Makefile.am, man/de/Makefile.am, man/es/Makefile.am:
+	New version 4.0.4.1
+	bug fixes in automake files for generate correct tar ball on "make dist":
+	added midsiing "EXTRA_DIST = $(man_MANS)" in man/*/Makefile.am.
 
 	* configure.in: Fixed checking is avalaible st_rdev in struct stat.
 
@@ -540,7 +815,7 @@
 
 	* TODO: updated.
 
-	* man/it/Makefile.am, man/id/Makefile.am, man/id/adduser.8, man/id/useradd.8, man/Makefile.am, man/cs/Makefile.am, man/fr/Makefile.am, configure.in, NEWS:
+	* man/it/Makefile.am, man/id/Attic/adduser.8, man/id/Makefile.am, man/id/useradd.8, man/Makefile.am, man/cs/Makefile.am, man/fr/Makefile.am, configure.in, NEWS:
 	added cs, de, fr, id, it, ko man pages to ac/am.
 
 2002-03-12  Tomasz K這czko  <kloczek@pld.org.pl>
@@ -555,7 +830,7 @@
 
 2002-03-10  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/it/usermod.8, man/it/vigr.8, man/it/vipw.8, man/it/adduser.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/newgrp.1, man/it/passwd.1, man/it/passwd.5, man/it/pwconv.8, man/it/pwunconv.8, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/id/adduser.8, man/id/chsh.1, man/id/login.1, man/fr/adduser.8, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/newgrp.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/de/chsh.1, man/de/groups.1, man/de/login.1, man/de/passwd.1, man/de/su.1, man/cs/passwd.5, man/cs/shadow.5:
+	* man/it/usermod.8, man/it/vigr.8, man/it/vipw.8, man/it/Attic/adduser.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/newgrp.1, man/it/passwd.1, man/it/passwd.5, man/it/pwconv.8, man/it/pwunconv.8, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/id/Attic/adduser.8, man/id/chsh.1, man/id/login.1, man/fr/Attic/adduser.8, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/newgrp.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/de/chsh.1, man/de/groups.1, man/de/login.1, man/de/passwd.1, man/de/su.1, man/cs/passwd.5, man/cs/shadow.5:
 	added some raw cs, de, es, fr, id, it man pages from national
 	man pages translation projects (all man pages not yet added to Makefile.am
 	files because all need some work).
@@ -657,7 +932,7 @@
 
 2002-02-01  Tomasz K這czko  <kloczek@pld.org.pl>
 
-	* man/pl/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/adduser.8, man/grpconv.8, man/grpunconv.8, man/pwunconv.8, man/sg.1, man/vigr.8:
+	* man/pl/Attic/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/Attic/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/Attic/adduser.8, man/grpconv.8, man/grpunconv.8, man/pwunconv.8, man/sg.1, man/vigr.8:
 	placa ".so man<level>/<man_page>.<level>" in roff .so includes (seems some
 	man page viewers do not handles correctly man documents without subdirectory
 	name in roff .so incude).
@@ -769,7 +1044,7 @@
 
 2001-12-20  Andrzej Krzysztofowicz  <ankry@pld.org.pl>
 
-	* man/ja/Makefile.am, man/ja/adduser.8, man/ja/limits.5, man/ja/pwconv.8:
+	* man/ja/Attic/adduser.8, man/ja/Makefile.am, man/ja/limits.5, man/ja/pwconv.8:
 	- updated to man-pages-ja-20011215
 
 2001-11-19  Tomasz K這czko  <kloczek@pld.org.pl>
@@ -1374,7 +1649,7 @@
 	- added man pages for grpconv(8), grpunconv(8), pwunconv(8) (.so link to
 	  pwconv(8))
 
-	* man/pl/Makefile.am, man/pl/adduser.8, man/Makefile.am, man/adduser.8:
+	* man/pl/Attic/adduser.8, man/pl/Makefile.am, man/Attic/adduser.8, man/Makefile.am:
 	- added man page for adduser(8) (.so link to useradd(8)).
 
 	* po/Attic/doit:
@@ -1382,7 +1657,7 @@
 
 	* etc/pam.d/passwd, etc/pam.d/su: - cosmetics.
 
-	* etc/pam.d/shadow: - sample PAM config file for shadow utils.
+	* etc/pam.d/Attic/shadow: - sample PAM config file for shadow utils.
 
 	* etc/pam.d/Makefile.am: - added shadow to EXTRA_DIST
 

@@ -1,4 +1,4 @@
-.\"$Id: chage.1,v 1.12 2003/05/06 22:55:11 kloczek Exp $
+.\"$Id: chage.1,v 1.13 2004/08/04 13:02:23 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -47,15 +47,6 @@ The \fBchage\fR command is restricted to the root user, except for the
 \fB-l\fR option, which may be used by an unprivileged user to determine
 when her password or account is due to expire.
 The options which apply to the \fBchage\fR command are:
-.IP "\fB-m\fR \fImindays\fR"
-Set the minimum number of days between password changes. A value of zero for
-this field indicates that the user may change her password at any time.
-.IP "\fB-M\fR \fImaxdays\fR"
-Set maximum number of days during which a password is valid. When
-\fImaxdays\fR plus fIlastday\fR is less than the current day, the user will
-be required to change her password before being able to use her account.
-This occurance can be planned for in advance by use of the \fB-W\fR option,
-which provides the user with advance warning.
 .IP "\fB-d\fR \fIlastday\fR"
 Set the number of days since January 1st, 1970 when the password was last
 changed. The date may also be expressed in the format YYYY-MM-DD (or the
@@ -73,6 +64,15 @@ account is locked. The \fIinactive\fR option is the number of days of
 inactivity. A value of 0 disables this feature. A user whose account is
 locked must contact the system administrator before being able to use the
 system again.
+.IP "\fB-m\fR \fImindays\fR"
+Set the minimum number of days between password changes. A value of zero for
+this field indicates that the user may change her password at any time.
+.IP "\fB-M\fR \fImaxdays\fR"
+Set maximum number of days during which a password is valid. When
+\fImaxdays\fR plus fIlastday\fR is less than the current day, the user will
+be required to change her password before being able to use her account.
+This occurance can be planned for in advance by use of the \fB-W\fR option,
+which provides the user with advance warning.
 .IP "\fB-W\fR \fIwarndays\fR"
 Set the number of days of warning before a password change is required. The
 \fIwarndays\fR option is the number of days prior to the password expiring

@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.23 2003/05/12 06:12:06 kloczek Exp $")
+RCSID("$Id: commonio.c,v 1.25 2004/10/11 04:40:29 kloczek Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -16,7 +16,10 @@ RCSID("$Id: commonio.c,v 1.23 2003/05/12 06:12:06 kloczek Exp $")
 #ifdef HAVE_SHADOW_H
 #include <shadow.h>
 #endif
-
+#ifdef WITH_SELINUX
+#include <selinux/selinux.h>
+static security_context_t old_context=NULL;
+#endif
 #include "commonio.h"
 
 /* local function prototypes */
@@ -168,12 +171,13 @@ create_backup(const char *backup, FILE *fp)
 		return -1;
 
 	/* TODO: faster copy, not one-char-at-a-time.  --marekm */
-	rewind(fp);
-	while ((c = getc(fp)) != EOF) {
-		if (putc(c, bkfp) == EOF)
-			break;
-	}
-	if (c != EOF || fflush(bkfp)) {
+	c = 0;
+	if (fseek(fp, 0, SEEK_SET) == 0)
+		while ((c = getc(fp)) != EOF) {
+			if (putc(c, bkfp) == EOF)
+				break;
+		}
+	if (c != EOF || ferror(fp) || fflush(bkfp)) {
 		fclose(bkfp);
 		return -1;
 	}
@@ -408,6 +412,7 @@ commonio_open(struct commonio_db *db, int mode)
 	void *eptr;
 	int flags = mode;
 	int buflen;
+	int saved_errno;
 
 	mode &= ~O_CREAT;
 
@@ -438,10 +443,19 @@ commonio_open(struct commonio_db *db, int mode)
 		return 0;
 	}
 
+#ifdef WITH_SELINUX
+	db->scontext=NULL;
+	if (is_selinux_enabled() &&  (! db->readonly)) {
+	  if (fgetfilecon(fileno(db->fp),&db->scontext) < 0) {
+		goto cleanup_errno;
+	  }
+	}
+#endif
+
 	buflen = BUFLEN;
 	buf = (char *) malloc(buflen);
 	if (!buf)
-		goto cleanup;
+		goto cleanup_ENOMEM;
 
 	while (db->ops->fgets(buf, buflen, db->fp)) {
 		while (!(cp = strrchr(buf, '\n')) && !feof(db->fp)) {
@@ -480,8 +494,12 @@ commonio_open(struct commonio_db *db, int mode)
 		add_one_entry(db, p);
 	}
 
-	db->isopen = 1;
 	free(buf);
+
+	if (ferror(db->fp))
+		goto cleanup_errno;
+
+	db->isopen = 1;
 	return 1;
 
 cleanup_entry:
@@ -491,11 +509,20 @@ cleanup_line:
 	free(line);
 cleanup_buf:
 	free(buf);
-cleanup:
+cleanup_ENOMEM:
+	errno = ENOMEM;
+cleanup_errno:
+	saved_errno = errno;
 	free_linked_list(db);
+#ifdef WITH_SELINUX
+	if (db->scontext!= NULL) {
+	  freecon(db->scontext);
+	  db->scontext=NULL;
+	}
+#endif
 	fclose(db->fp);
 	db->fp = NULL;
-	errno = ENOMEM;
+	errno = saved_errno;
 	return 0;
 }
 
@@ -628,6 +655,19 @@ commonio_close(struct commonio_db *db)
 			goto fail;
 		}
 
+#ifdef WITH_SELINUX
+		if (db->scontext != NULL) {
+		  int stat=getfscreatecon(&old_context);
+		  if (stat< 0) {
+		    errors++;
+		    goto fail;
+		  }
+		  if (setfscreatecon(db->scontext)<0) {
+		    errors++;
+		    goto fail;
+		  }
+		}
+#endif
 		/*
 		 * Create backup file.
 		 */
@@ -684,14 +724,26 @@ commonio_close(struct commonio_db *db)
 		goto fail;
 
 	nscd_need_reload = 1;
-
-success:
-	free_linked_list(db);
-	return 1;
-
+	goto success;
 fail:
+	errors++;
+success:
+
+#ifdef WITH_SELINUX
+	if (db->scontext != NULL) {
+	  if (setfscreatecon(old_context)<0) {
+	    errors++;
+	  }
+	  if (old_context != NULL) {		  
+	    freecon(old_context);
+	    old_context=NULL;
+	  }
+	  freecon(db->scontext);
+	  db->scontext=NULL;
+	}
+#endif
 	free_linked_list(db);
-	return 0;
+	return errors==0;
 }
 
 

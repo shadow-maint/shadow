@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.46.2.2 2004/01/14 06:41:06 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.49 2004/10/24 14:17:21 ankry Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -77,6 +77,7 @@ static const char *def_gname = "other";
 static const char *def_home = "/home";
 static const char *def_shell = "";
 static const char *def_template = SKEL_DIR;
+static const char *def_create_mail_spool = "no";
 
 #ifdef SHADOWPWD
 static long def_inactive = -1;
@@ -94,6 +95,7 @@ static gid_t user_gid;
 static const char *user_comment = "";
 static const char *user_home = "";
 static const char *user_shell = "";
+static const char *create_mail_spool = "";
 
 #ifdef	SHADOWPWD
 static long user_expire = -1;
@@ -181,6 +183,7 @@ static int sg_dbm_added;
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
+#define	E_MAIL_SPOOL	13	/* can't create mail spool */
 
 #define DGROUP			"GROUP="
 #define HOME			"HOME="
@@ -188,6 +191,7 @@ static int sg_dbm_added;
 #define INACT			"INACTIVE="
 #define EXPIRE			"EXPIRE="
 #define SKEL			"SKEL="
+#define CREATE_MAIL_SPOOL	"CREATE_MAIL_SPOOL="
 
 /* local function prototypes */
 static void fail_exit (int);
@@ -215,6 +219,7 @@ static void faillog_reset (uid_t);
 static void lastlog_reset (uid_t);
 static void usr_update (void);
 static void create_home (void);
+static void create_mail (void);
 
 /*
  * fail_exit - undo as much as possible
@@ -403,6 +408,16 @@ static void get_defaults (void)
 
 			def_template = xstrdup (cp);
 		}
+
+		/*
+		 * Create by default user mail spoll or not ?
+		 */
+		else if (MATCH (buf, CREATE_MAIL_SPOOL)) {
+			if (*cp == '\0')
+				cp = CREATE_MAIL_SPOOL;	/* XXX warning: const */
+
+			def_create_mail_spool = xstrdup (cp);
+		}
 	}
 }
 
@@ -424,6 +439,7 @@ static void show_defaults (void)
 #endif
 	printf (_("SHELL=%s\n"), def_shell);
 	printf (_("SKEL=%s\n"), def_template);
+	printf (_("CREATE_MAIL_SPOOL=%s\n"), def_create_mail_spool);
 }
 
 /*
@@ -448,16 +464,13 @@ static int set_defaults (void)
 	int out_expire = 0;
 	int out_shell = 0;
 	int out_skel = 0;
+	int out_create_mail_spool = 0;
 
 	/*
 	 * Create a temporary file to copy the new output to.
 	 */
 
-#ifdef HAVE_MKSTEMP
 	if ((ofd = mkstemp (new_file)) == -1) {
-#else
-	if ((ofd = mktemp (new_file)) == -1) {
-#endif
 		fprintf (stderr,
 			 _("%s: cannot create new defaults file\n"), Prog);
 		return -1;
@@ -505,6 +518,11 @@ static int set_defaults (void)
 		} else if (!out_skel && MATCH (buf, SKEL)) {
 			fprintf (ofp, SKEL "%s\n", def_template);
 			out_skel++;
+		} else if (!out_create_mail_spool
+			   && MATCH (buf, CREATE_MAIL_SPOOL)) {
+			fprintf (ofp, CREATE_MAIL_SPOOL "%s\n",
+				 def_create_mail_spool);
+			out_create_mail_spool++;
 		} else
 			fprintf (ofp, "%s\n", buf);
 	}
@@ -531,6 +549,10 @@ static int set_defaults (void)
 		fprintf (ofp, SHELL "%s\n", def_shell);
 	if (!out_skel)
 		fprintf (ofp, SKEL "%s\n", def_template);
+
+	if (!out_create_mail_spool)
+		fprintf (ofp, CREATE_MAIL_SPOOL "%s\n",
+			 def_create_mail_spool);
 
 	/*
 	 * Flush and close the file. Check for errors to make certain
@@ -569,15 +591,16 @@ static int set_defaults (void)
 #ifdef SHADOWPWD
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
-		 "EXPIRE=%s, SKEL=%s",
+		 "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
 		 (unsigned int) def_group, def_home, def_shell,
-		 def_inactive, def_expire, def_template));
+		 def_inactive, def_expire, def_template,
+		 def_create_mail_spool));
 #else
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, "
-		 "SKEL=%s",
+		 "SKEL=%s, CREATE_MAIL_SPOOL=%s",
 		 (unsigned int) def_group, def_home, def_shell,
-		 def_template));
+		 def_template, def_create_mail_spool));
 #endif
 	return 0;
 }
@@ -702,6 +725,7 @@ static void usage (void)
 #ifdef SHADOWPWD
 	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
 #endif
+	fprintf (stderr, _("               [-p passwd] name\n"));
 	fprintf (stderr,
 		 _("       useradd -D [-g group] [-b base] [-s shell]\n"));
 #ifdef SHADOWPWD
@@ -1520,6 +1544,58 @@ static void create_home (void)
 	}
 }
 
+/*
+ * create_mail - create the user's mail spool
+ *
+ *	create_mail() creates the user's mail spool if it does not already
+ *	exist. It will be created mode 660 owned by the user and group
+ *	'mail'
+ */
+static void create_mail (void)
+{
+	char *ms;
+	int fd;
+	struct group *mail;
+	gid_t mail_gid;
+	mode_t mode;
+
+	if (strcasecmp (create_mail_spool, "yes") == 0) {
+		mail = getgrnam ("mail");
+		if (mail == NULL) {
+			fprintf (stderr,
+				 _
+				 ("No group named \"mail\" exists, creating mail spool with mode 0600.\n"));
+			mode = 0600;
+			mail_gid = user_gid;
+		} else {
+			mode = 0660;
+			mail_gid = mail->gr_gid;
+		}
+
+		ms = malloc (strlen (user_name) + 11);
+		if (ms != NULL) {
+			sprintf (ms, "/var/mail/%s", user_name);
+			if (access (ms, R_OK) != 0) {
+				fd = open (ms,
+					   O_CREAT | O_EXCL | O_WRONLY |
+					   O_TRUNC);
+				if (fd != -1) {
+					fchown (fd, user_id, mail_gid);
+					fchmod (fd, mode);
+					close (fd);
+				}
+			} else {
+				fprintf (stderr,
+					 _
+					 ("Can't create mail spool for user %s.\n"),
+					 user_name);
+				fail_exit (E_MAIL_SPOOL);
+			}
+		}
+		free (ms);
+	}
+}
+
 #ifdef USE_PAM
 static struct pam_conv conv = {
 	misc_conv,
@@ -1538,18 +1614,32 @@ int main (int argc, char **argv)
 	struct passwd *pampw;
 	int retval;
 #endif
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
 
-	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
-	user_groups[0] = (char *) 0;
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+
+	OPENLOG("useradd");
+
+	sys_ngroups = sysconf(_SC_NGROUPS_MAX);
+	user_groups = malloc((1 + sys_ngroups) * sizeof(char *));
+
+#ifdef SHADOWPWD
+	is_shadow_pwd = spw_file_present();
+#endif
+#ifdef SHADOWGRP
+	is_shadow_grp = sgr_file_present();
+#endif
+
+	get_defaults();
+
+	process_flags(argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -1583,16 +1673,9 @@ int main (int argc, char **argv)
 			 Prog);
 		exit (1);
 	}
+
+	OPENLOG("useradd");
 #endif				/* USE_PAM */
-
-	OPENLOG (Prog);
-
-#ifdef SHADOWPWD
-	is_shadow_pwd = spw_file_present ();
-#endif
-#ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present ();
-#endif
 
 	/*
 	 * The open routines for the NDBM files don't use read-write
@@ -1609,9 +1692,6 @@ int main (int argc, char **argv)
 	sg_dbm_mode = O_RDWR;
 #endif
 #endif
-	get_defaults ();
-
-	process_flags (argc, argv);
 
 	/*
 	 * See if we are messing with the defaults file, or creating
@@ -1687,6 +1767,8 @@ int main (int argc, char **argv)
 			 ("%s: warning: CREATE_HOME not supported, please use -m instead.\n"),
 			 Prog);
 	}
+
+	create_mail ();
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

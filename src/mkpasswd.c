@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: mkpasswd.c,v 1.9 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: mkpasswd.c,v 1.10 2004/08/18 09:52:32 kloczek Exp $")
 #include <sys/stat.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -63,7 +63,6 @@ extern DBM *sp_dbm;
 #ifdef	SHADOWGRP
 extern DBM *sg_dbm;
 #endif
-char *fgetsx ();
 
 char *Progname;
 int vflg = 0;

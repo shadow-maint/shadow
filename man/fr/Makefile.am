@@ -2,7 +2,6 @@
 mandir = @mandir@/fr
 
 man_MANS = \
-	adduser.8 \
 	chage.1 \
 	chpasswd.8 \
 	chsh.1 \

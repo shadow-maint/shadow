@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.27 2004/01/05 01:08:56 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.29 2004/10/11 06:26:40 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -315,7 +315,7 @@ static void check_new_name (void)
 	 * All invalid group names land here.
 	 */
 
-	fprintf (stderr, _("%s: %s is a not a valid group name\n"),
+	fprintf (stderr, _("%s: %s is not a valid group name\n"),
 		 Prog, group_name);
 
 	exit (E_BAD_ARG);
@@ -499,6 +499,10 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	OPENLOG("groupadd");
+
+	process_flags(argc, argv);
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -509,7 +513,7 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval =
-		    pam_start ("shadow", pampw->pw_name, &conv, &pamh);
+		    pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -531,9 +535,9 @@ int main (int argc, char **argv)
 			 Prog);
 		exit (1);
 	}
-#endif				/* USE_PAM */
 
-	OPENLOG (Prog);
+	OPENLOG ("groupadd");
+#endif				/* USE_PAM */
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
@@ -550,7 +554,6 @@ int main (int argc, char **argv)
 	sg_dbm_mode = O_RDWR;
 #endif				/* SHADOWGRP */
 #endif				/* NDBM */
-	process_flags (argc, argv);
 
 	/*
 	 * Start with a quick check to see if the group exists.

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.31 2003/06/30 13:17:51 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.32 2004/10/11 06:26:40 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -1370,9 +1370,6 @@ int main (int argc, char **argv)
 	int retval;
 #endif
 
-	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
-	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
-	user_groups[0] = (char *) 0;
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1381,6 +1378,21 @@ int main (int argc, char **argv)
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+
+	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
+	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups[0] = (char *) 0;
+
+	OPENLOG("usermod");
+
+#ifdef SHADOWPWD
+	is_shadow_pwd = spw_file_present ();
+#endif
+#ifdef SHADOWGRP
+	is_shadow_grp = sgr_file_present ();
+#endif
+
+	process_flags (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -1392,7 +1404,7 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval =
-		    pam_start ("shadow", pampw->pw_name, &conv, &pamh);
+		    pam_start ("usermod", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -1414,16 +1426,9 @@ int main (int argc, char **argv)
 			 Prog);
 		exit (1);
 	}
+
+	OPENLOG ("usermod");
 #endif				/* USE_PAM */
-
-	OPENLOG (Prog);
-
-#ifdef SHADOWPWD
-	is_shadow_pwd = spw_file_present ();
-#endif
-#ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present ();
-#endif
 
 	/*
 	 * The open routines for the NDBM files don't use read-write as the
@@ -1440,7 +1445,6 @@ int main (int argc, char **argv)
 	sg_dbm_mode = O_RDWR;
 #endif
 #endif				/* NDBM */
-	process_flags (argc, argv);
 
 	/*
 	 * Do the hard stuff - open the files, change the user entries,
