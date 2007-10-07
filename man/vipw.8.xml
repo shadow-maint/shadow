@@ -2,14 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='vipw.8'>
-  <!--  $Id: vipw.8.xml,v 1.11 2005/10/01 15:01:46 kloczek Exp $  -->
-  <refentryinfo>
-    <date>26 Sep 1997</date>
-  </refentryinfo>
+  <!--  $Id: vipw.8.xml,v 1.14 2005/12/03 16:19:40 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>vipw</refentrytitle>
     <manvolnum>8</manvolnum>
-    <refmiscinfo class='date'>26 Sep 1997</refmiscinfo>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>vipw</refname>
@@ -21,10 +18,10 @@
 
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
-      <command>vipw</command><arg choice='opt'>-s </arg>
+      <command>vipw</command><arg choice='opt'>options</arg>
     </cmdsynopsis>
     <cmdsynopsis>
-      <command>vigr</command><arg choice='opt'>-s </arg>
+      <command>vigr</command><arg choice='opt'>options</arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
@@ -40,18 +37,93 @@
       the appropriate locks to prevent file corruption. When looking for an
       editor, the programs will first try the environment variable
       <envar>$VISUAL</envar>, then the environment variable
-      <emphasis>$EDITOR</emphasis>, and finally the default editor,
+      <envar>$EDITOR</envar>, and finally the default editor,
       <citerefentry><refentrytitle>vi</refentrytitle>
       <manvolnum>1</manvolnum></citerefentry>.
     </para>
   </refsect1>
 
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>
+      The options which apply to the <command>vipw</command> and
+      <command>vigr</command> commands are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-g</option>, <option>--group</option></term>
+	<listitem>
+	  <para>Edit group database.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-h</option>, <option>--help</option></term>
+	<listitem>
+	  <para>Display help message and exit.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-p</option>, <option>--passwd</option></term>
+	<listitem>
+	  <para>Edit passwd database.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-q</option>, <option>--quiet</option></term>
+	<listitem>
+	  <para>Quiet mode database.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-s</option>, <option>--shadow</option></term>
+	<listitem>
+	  <para>Edit shadow or gshadow database.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>group account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>shadow group file</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>user account information</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>secure user account information</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
+	<refentrytitle>vi</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
+      <citerefentry>
+	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,

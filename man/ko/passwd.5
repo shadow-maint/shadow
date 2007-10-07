@@ -1,4 +1,4 @@
-.\"$Id: passwd.5,v 1.3 2005/04/05 19:08:56 kloczek Exp $
+.\"$Id: passwd.5,v 1.4 2005/12/01 20:38:27 kloczek Exp $
 .\" This is free documentation; you can redistribute it and/or
 .\" modify it under the terms of the GNU General Public License as
 .\" published by the Free Software Foundation; either version 2 of
@@ -25,93 +25,93 @@
 .\" Modified Mon Jan  5 20:24:40 MET 1998 by Michael Haardt
 .\"  (michael@cantor.informatik.rwth-aachen.de)
 .\"
-.\" ÇÑ±¹¾î ¹ø¿ª : ASPLINUX<man@asp-linux.co.kr>    2000³â 7¿ù 29ÀÏ
+.\" í•œêµ­ì–´ ë²ˆì—­ : ASPLINUX<man@asp-linux.co.kr>    2000ë…„ 7ì›” 29ì¼
 .\"
 .TH PASSWD 5 "January 5, 1998" "" "File formats"
-.SH ÀÌ¸§
-passwd \- ÆÐ½º¿öµå ÆÄÀÏ 
-.SH ¼³¸í
+.SH ì´ë¦„
+passwd \- íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ 
+.SH ì„¤ëª…
 .B Passwd
-´Â ÅØ½ºÆ® ÆÄÀÏ·Î¼­, ½Ã½ºÅÛ °èÁ¤ÀÇ ¸ñ·ÏÀ» Æ÷ÇÔÇÏ°í ÀÖ°í, »ç¿ëÀÚ ID, ±×·ì 
-ID, È¨ µð·ºÅä¸®, ½© µîÀÇ °¢ °èÁ¤¿¡ ´ëÇÑ ¸Å¿ì À¯¿ëÇÑ Á¤º¸¸¦ Á¦°øÇÑ´Ù. 
-Á¾Á¾, °¢ °èÁ¤¿¡ ´ëÇÑ ¾ÏÈ£È­µÈ ÆÐ½º¿öµå¸¦ Æ÷ÇÔÇÑ´Ù. 
-Passwd´Â ÀÏ¹ÝÀûÀÎ ÀÐ±â ±ÇÇÑÀ» °¡Á®¾ß ÇÏÁö¸¸, ¼öÆÛ À¯Àú¿¡°Ô¸¸ ¾²±â Á¢±ÙÀÌ
-°¡´ÉÇÏ´Ù. 
+ëŠ” í…ìŠ¤íŠ¸ íŒŒì¼ë¡œì„œ, ì‹œìŠ¤í…œ ê³„ì •ì˜ ëª©ë¡ì„ í¬í•¨í•˜ê³  ìžˆê³ , ì‚¬ìš©ìž ID, ê·¸ë£¹ 
+ID, í™ˆ ë””ë ‰í† ë¦¬, ì‰˜ ë“±ì˜ ê° ê³„ì •ì— ëŒ€í•œ ë§¤ìš° ìœ ìš©í•œ ì •ë³´ë¥¼ ì œê³µí•œë‹¤. 
+ì¢…ì¢…, ê° ê³„ì •ì— ëŒ€í•œ ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œë¥¼ í¬í•¨í•œë‹¤. 
+PasswdëŠ” ì¼ë°˜ì ì¸ ì½ê¸° ê¶Œí•œì„ ê°€ì ¸ì•¼ í•˜ì§€ë§Œ, ìˆ˜í¼ ìœ ì €ì—ê²Œë§Œ ì“°ê¸° ì ‘ê·¼ì´
+ê°€ëŠ¥í•˜ë‹¤. 
 .PP
-¿¹Àü¿¡´Â ÀÏ¹ÝÀûÀÎ ÀÐ±â ±ÇÇÑÀ¸·ÎÀÎÇÑ ¹®Á¦µéÀÌ ¾ø¾ú´Ù. ¸ðµç »ç¶÷µéÀÌ
-¾ÏÈ£È­µÈ ÆÐ½º¿öµå¸¦ ÀÐÀ» ¼ö ÀÖ¾úÁö¸¸, ÆÐ½º¿öµå¸¦ Å©·¢ÇÏ±â¿¡´Â ÇÏµå¿þ¾î°¡
-³Ê¹«³ª ´À·È°í, ´õ¿ì±â, ±âº»ÀûÀÎ °¡Á¤Àº ±×µéÀº ¾ÆÁÖ Ä£¼÷ÇÑ »ç¿ëÀÚ
-°øµ¿Ã¼ÀÇ ÆÐ½º¿öµåµéÀÌ¾ú´Ù. 
+ì˜ˆì „ì—ëŠ” ì¼ë°˜ì ì¸ ì½ê¸° ê¶Œí•œìœ¼ë¡œì¸í•œ ë¬¸ì œë“¤ì´ ì—†ì—ˆë‹¤. ëª¨ë“  ì‚¬ëžŒë“¤ì´
+ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì½ì„ ìˆ˜ ìžˆì—ˆì§€ë§Œ, íŒ¨ìŠ¤ì›Œë“œë¥¼ í¬ëž™í•˜ê¸°ì—ëŠ” í•˜ë“œì›¨ì–´ê°€
+ë„ˆë¬´ë‚˜ ëŠë ¸ê³ , ë”ìš°ê¸°, ê¸°ë³¸ì ì¸ ê°€ì •ì€ ê·¸ë“¤ì€ ì•„ì£¼ ì¹œìˆ™í•œ ì‚¬ìš©ìž
+ê³µë™ì²´ì˜ íŒ¨ìŠ¤ì›Œë“œë“¤ì´ì—ˆë‹¤. 
 
-¿À´Ã³¯ ¸¹Àº »ç¶÷µéÀÌ ½¦µµ¿ì ÆÐ½º¿öµåÀÇ ÀÏºÎ ¹öÀüÀ» ½ÇÇàÇÑ´Ù.
- .I /etc/passwd´Â ¾ÏÈ£È­µÈ  ÆÐ½º¿öµå ´ë½Å *·Î µÈ
-ÆÐ½º¿öµå¸¦ Áö´Ï°í, ¾ÏÈ£È­µÈ ÆÐ½º¿öµåµéÀº ¼öÆÛÀ¯Àú¸¸ÀÌ ÀÐÀ» ¼ö ÀÖ´Â
-.I /etc/shadow¿¡ ÀúÀåµÈ´Ù. 
+ì˜¤ëŠ˜ë‚  ë§Žì€ ì‚¬ëžŒë“¤ì´ ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œì˜ ì¼ë¶€ ë²„ì „ì„ ì‹¤í–‰í•œë‹¤.
+ .I /etc/passwdëŠ” ì•”í˜¸í™”ëœ  íŒ¨ìŠ¤ì›Œë“œ ëŒ€ì‹  *ë¡œ ëœ
+íŒ¨ìŠ¤ì›Œë“œë¥¼ ì§€ë‹ˆê³ , ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œë“¤ì€ ìˆ˜í¼ìœ ì €ë§Œì´ ì½ì„ ìˆ˜ ìžˆëŠ”
+.I /etc/shadowì— ì €ìž¥ëœë‹¤. 
 .PP
-½¦µµ¿ì ÆÐ½º¿ìµå°¡ »ç¿ëµÇ´ÂÁö¿¡ »ó°ü¾øÀÌ, ¸¹Àº ½Ã½ºÅÛ °ü¸®ÀÚµéÀº »ç¿ëÀÚ°¡
-ÀÚ±â ÀÚ½ÅÀ» ÆÐ½º¿öµå¸¦ »ç¿ëÇÏ¿© ÀÎÁõÇÒ ¼ö ¾øµµ·Ï ÆÐ½º¿öµå ÇÊµå³»¿¡ 
-º°Ç¥¸¦ »ç¿ëÇÑ´Ù. 
+ì‰ë„ìš° íŒ¨ìŠ¤ìš°ë“œê°€ ì‚¬ìš©ë˜ëŠ”ì§€ì— ìƒê´€ì—†ì´, ë§Žì€ ì‹œìŠ¤í…œ ê´€ë¦¬ìžë“¤ì€ ì‚¬ìš©ìžê°€
+ìžê¸° ìžì‹ ì„ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì‚¬ìš©í•˜ì—¬ ì¸ì¦í•  ìˆ˜ ì—†ë„ë¡ íŒ¨ìŠ¤ì›Œë“œ í•„ë“œë‚´ì— 
+ë³„í‘œë¥¼ ì‚¬ìš©í•œë‹¤. 
 
 .PP
-¸¸ÀÏ »õ·Î¿î ·Î±×ÀÎÀ» ¸¸µé¸é, ¿ì¼± ÆÐ½º¿öµå ÇÊµå¿¡ º°Ç¥¸¦ ³õ°í, ÀÌ¸¦
-¼³Á¤ÇÏ±â À§ÇØ .BR passwd (1)À» »ç¿ëÇÑ´Ù. 
+ë§Œì¼ ìƒˆë¡œìš´ ë¡œê·¸ì¸ì„ ë§Œë“¤ë©´, ìš°ì„  íŒ¨ìŠ¤ì›Œë“œ í•„ë“œì— ë³„í‘œë¥¼ ë†“ê³ , ì´ë¥¼
+ì„¤ì •í•˜ê¸° ìœ„í•´ .BR passwd (1)ì„ ì‚¬ìš©í•œë‹¤. 
 PP
-°¢ Çà¸¶´Ù ÇÏ³ªÀÇ Ç×¸ñÀÌ ÀÖ°í, °¢ ÇàÀº ´ÙÀ½ÀÇ Çü½ÄÀ» Áö´Ñ´Ù. 
+ê° í–‰ë§ˆë‹¤ í•˜ë‚˜ì˜ í•­ëª©ì´ ìžˆê³ , ê° í–‰ì€ ë‹¤ìŒì˜ í˜•ì‹ì„ ì§€ë‹Œë‹¤. 
 .sp
 .RS
-°èÁ¤:ÆÐ½º¿öµå:UID:GID:GECOS:µð·ºÅä¸®:½©
+ê³„ì •:íŒ¨ìŠ¤ì›Œë“œ:UID:GID:GECOS:ë””ë ‰í† ë¦¬:ì‰˜
 .RE
 .sp
-°¢ ÇÊµå¿¡ ´ëÇÑ ¼³¸íÀº ´ÙÀ½°ú °°´Ù. 
+ê° í•„ë“œì— ëŒ€í•œ ì„¤ëª…ì€ ë‹¤ìŒê³¼ ê°™ë‹¤. 
 .sp
 .RS
 .TP 1.0in
-.I °èÁ¤
-½Ã½ºÅÛ¿¡¼­ÀÇ »ç¿ëÀÚ ÀÌ¸§. ´ë¹®ÀÚ¸¦ »ç¿ëÇØ¼­´Â ¾ÈµÈ´Ù. 
+.I ê³„ì •
+ì‹œìŠ¤í…œì—ì„œì˜ ì‚¬ìš©ìž ì´ë¦„. ëŒ€ë¬¸ìžë¥¼ ì‚¬ìš©í•´ì„œëŠ” ì•ˆëœë‹¤. 
 .TP
-.I ÆÐ½º¿öµå
-¾ÏÈ£È­µÈ »ç¿ëÀÚÀÇ ÆÐ½º¿öµå È¤Àº º°Ç¥
+.I íŒ¨ìŠ¤ì›Œë“œ
+ì•”í˜¸í™”ëœ ì‚¬ìš©ìžì˜ íŒ¨ìŠ¤ì›Œë“œ í˜¹ì€ ë³„í‘œ
 .TP
 .I UID
-¼ýÀÚ·Î Ç¥ÇöµÇ´Â »ç¿ëÀÚ id
+ìˆ«ìžë¡œ í‘œí˜„ë˜ëŠ” ì‚¬ìš©ìž id
 .TP
 .I GID
-ÀÌ »ç¿ëÀÚ¿¡ ´ëÇÑ ÁÖ ±×·ì ID, ¼ýÀÚ·Î Ç¥ÇöµÊ
+ì´ ì‚¬ìš©ìžì— ëŒ€í•œ ì£¼ ê·¸ë£¹ ID, ìˆ«ìžë¡œ í‘œí˜„ë¨
 .TP
 .I GECOS
-ÀÌ ÇÊµå´Â ¼±ÅÃÀûÀÌ°í, ¿ÀÁ÷ Á¤º¸ÀûÀÎ ¸ñÀûÀ¸·Î¸¸ »ç¿ëµÈ´Ù. º¸Åë, ÀÌ´Â
-»ç¿ëÀÚÀÇ ÀüÃ¼ ÀÌ¸§À» Æ÷ÇÔÇÑ´Ù. GECOS´Â ÀÏ¹Ý ÀüÀÚ ÅëÇÕ ¿î¿µÃ¼Á¦·Î¼­, 
-GEÀÇ °Å´ë ½Ã½ºÅÛÀÌ Honeywell¿¡ ÆÇ¸ÅµÈ GCOS,·Î ´Ù½Ã ¸í¸íµÇ¾ú´Ù. Dennis
-Ritchie´Â ¸»ÇÏ±â¸¦, ¶§¶§·Î ¿ì¸®´Â ÇÁ¸°ÅÍ Ãâ·Â È¤Àº ÀÏ°ý Ã³¸® ÀÛ¾÷µéÀ»
-GCOS ¸Ó½ÅÀ¸·Î Àü¼ÛÇÏ¿´´Ù. ÆÐ½º¿öµå ÆÄÀÏ¿¡¼­ GCOS ÇÊµå´Â $IDENTcard¿¡ ´ëÇÑ 
-Á¤º¸¸¦ ¼û°ÜµÎ´Â Àå¼ÒÀÌ´Ù.
+ì´ í•„ë“œëŠ” ì„ íƒì ì´ê³ , ì˜¤ì§ ì •ë³´ì ì¸ ëª©ì ìœ¼ë¡œë§Œ ì‚¬ìš©ëœë‹¤. ë³´í†µ, ì´ëŠ”
+ì‚¬ìš©ìžì˜ ì „ì²´ ì´ë¦„ì„ í¬í•¨í•œë‹¤. GECOSëŠ” ì¼ë°˜ ì „ìž í†µí•© ìš´ì˜ì²´ì œë¡œì„œ, 
+GEì˜ ê±°ëŒ€ ì‹œìŠ¤í…œì´ Honeywellì— íŒë§¤ëœ GCOS,ë¡œ ë‹¤ì‹œ ëª…ëª…ë˜ì—ˆë‹¤. Dennis
+RitchieëŠ” ë§í•˜ê¸°ë¥¼, ë•Œë•Œë¡œ ìš°ë¦¬ëŠ” í”„ë¦°í„° ì¶œë ¥ í˜¹ì€ ì¼ê´„ ì²˜ë¦¬ ìž‘ì—…ë“¤ì„
+GCOS ë¨¸ì‹ ìœ¼ë¡œ ì „ì†¡í•˜ì˜€ë‹¤. íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì—ì„œ GCOS í•„ë“œëŠ” $IDENTcardì— ëŒ€í•œ 
+ì •ë³´ë¥¼ ìˆ¨ê²¨ë‘ëŠ” ìž¥ì†Œì´ë‹¤.
 .TP
 .I directory 
-»ç¿ëÀÚÀÇ $HOME µð·ºÅä¸®
+ì‚¬ìš©ìžì˜ $HOME ë””ë ‰í† ë¦¬
 .TP
-.I shell(½©)
-·Î±×ÀÎ½Ã ½ÇÇàÇÏ´Â ÇÁ·Î±×·¥(¸¸ÀÏ ºñ¾ú´Ù¸é, .BR /bin/shÀ» »ç¿ëÇÑ´Ù.)
-¸¸ÀÏ Á¸ÀçÇÏÁö ¾Ê´Â ½ÇÇàÆÄÀÏ·Î ¼³Á¤µÇ¾ú´Ù¸é, »ç¿ëÀÚ´Â .BR login (1)À» ÅëÇØ
-·Î±×ÀÎ ÇÒ ¼ö ¾øÀ» °ÍÀÌ´Ù.
+.I shell(ì‰˜)
+ë¡œê·¸ì¸ì‹œ ì‹¤í–‰í•˜ëŠ” í”„ë¡œê·¸ëž¨(ë§Œì¼ ë¹„ì—ˆë‹¤ë©´, .BR /bin/shì„ ì‚¬ìš©í•œë‹¤.)
+ë§Œì¼ ì¡´ìž¬í•˜ì§€ ì•ŠëŠ” ì‹¤í–‰íŒŒì¼ë¡œ ì„¤ì •ë˜ì—ˆë‹¤ë©´, ì‚¬ìš©ìžëŠ” .BR login (1)ì„ í†µí•´
+ë¡œê·¸ì¸ í•  ìˆ˜ ì—†ì„ ê²ƒì´ë‹¤.
 
 .RE
-.SH ÁÖÀÇ
-¿©·¯ºÐÀÌ »ç¿ëÀÚ ±×·ìÀ» ¸¸µé°í ½Í´Ù¸é, GID´Â ÀÌ¿Í µ¿ÀÏÇÏ¿©¾ß ÇÏ¸ç, 
-\fI/etc/group\fP³»¿¡ Ç×¸ñµéÀÌ ÀÖ°Å³ª, ±×·ìÀÌ Á¸ÀçÇÏÁö ¾Ê¾Æ¾ß ÇÑ´Ù. 
+.SH ì£¼ì˜
+ì—¬ëŸ¬ë¶„ì´ ì‚¬ìš©ìž ê·¸ë£¹ì„ ë§Œë“¤ê³  ì‹¶ë‹¤ë©´, GIDëŠ” ì´ì™€ ë™ì¼í•˜ì—¬ì•¼ í•˜ë©°, 
+\fI/etc/group\fPë‚´ì— í•­ëª©ë“¤ì´ ìžˆê±°ë‚˜, ê·¸ë£¹ì´ ì¡´ìž¬í•˜ì§€ ì•Šì•„ì•¼ í•œë‹¤. 
 .PP
-¾ÏÈ£È­µÈ ÆÐ½º¿öµå°¡ º°Ç¥·Î ¼³Á¤µÈ °æ¿ì, »ç¿ëÀÚ´Â .BR login (1)·Î ·Î±×ÀÏ ÇÒ ¼ö ¾øÁö¸¸, 
-.BR rlogin (1)À» »ç¿ëÇÏ¿© ·Î±×ÀÎÇÒ ¼ö ÀÖÀ» ¼öµµ ÀÖ´Ù. Á¸ÀçÇÏ´Â ÇÁ·Î¼¼½ºµéÀ» ½ÇÇàÇÏ°í,
+ì•”í˜¸í™”ëœ íŒ¨ìŠ¤ì›Œë“œê°€ ë³„í‘œë¡œ ì„¤ì •ëœ ê²½ìš°, ì‚¬ìš©ìžëŠ” .BR login (1)ë¡œ ë¡œê·¸ì¼ í•  ìˆ˜ ì—†ì§€ë§Œ, 
+.BR rlogin (1)ì„ ì‚¬ìš©í•˜ì—¬ ë¡œê·¸ì¸í•  ìˆ˜ ìžˆì„ ìˆ˜ë„ ìžˆë‹¤. ì¡´ìž¬í•˜ëŠ” í”„ë¡œì„¸ìŠ¤ë“¤ì„ ì‹¤í–‰í•˜ê³ ,
 .BR rsh (1)
-È¤Àº
+í˜¹ì€
 .BR cron (1)
-È¤Àº
+í˜¹ì€
 .BR at (1)
-À» ÃÊ±âÈ­½ÃÅ°°Å³ª, ¸ÞÀÏ ÇÊÅÍ¸¦ ½ÃÀÛÇÑ´Ù. 
-´Ü¼øÈ÷ ½© ÇÊµå¸¦ º¯°æ½ÃÄÑ¼­ °èÁ¤À» Àá±×´Â °ÍÀº ¶È°°Àº °á°ú¸¦ °¡Á®¿À°í, 
-.BR su (1)ÀÇ »ç¿ëÀ» Çã¿ëÇÑ´Ù..
-.SH ÆÄÀÏ
+ì„ ì´ˆê¸°í™”ì‹œí‚¤ê±°ë‚˜, ë©”ì¼ í•„í„°ë¥¼ ì‹œìž‘í•œë‹¤. 
+ë‹¨ìˆœížˆ ì‰˜ í•„ë“œë¥¼ ë³€ê²½ì‹œì¼œì„œ ê³„ì •ì„ ìž ê·¸ëŠ” ê²ƒì€ ë˜‘ê°™ì€ ê²°ê³¼ë¥¼ ê°€ì ¸ì˜¤ê³ , 
+.BR su (1)ì˜ ì‚¬ìš©ì„ í—ˆìš©í•œë‹¤..
+.SH íŒŒì¼
 .I /etc/passwd
-.SH °ü·Ã Ç×¸ñ
+.SH ê´€ë ¨ í•­ëª©
 .BR passwd (1),
 .BR login (1),
 .BR su (1),

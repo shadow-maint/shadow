@@ -4,22 +4,22 @@
 .\" published by the Free Software Foundation; either version 2 of the
 .\" License, or (at your option) any later version.
 .\"
-.\"	$Id: gpasswd.1,v 1.3 2005/04/05 19:08:54 kloczek Exp $
+.\"	$Id: gpasswd.1,v 1.4 2005/12/01 20:38:25 kloczek Exp $
 .\"
 .TH GPASSWD 1
-.SH NÉV
-gpasswd \- az /etc/group fájlt adminisztrálja
+.SH NÃ‰V
+gpasswd \- az /etc/group fÃ¡jlt adminisztrÃ¡lja
 .br
-.SH ÁTTEKINTÉS
+.SH ÃTTEKINTÃ‰S
 .B gpasswd \fIcsoport\fR
 .br
 .B gpasswd
 .B \-a
-\fIfelhasználó\fR \fIcsoport\fR
+\fIfelhasznÃ¡lÃ³\fR \fIcsoport\fR
 .br
 .B gpasswd
 .B \-d
-\fIfelhasználó\fR \fIcsoport\fR
+\fIfelhasznÃ¡lÃ³\fR \fIcsoport\fR
 .br
 .B gpasswd
 .B \-R
@@ -31,51 +31,51 @@ gpasswd \- az /etc/group fájlt adminisztrálja
 .br
 .B gpasswd
 .RB [ \-A
-\fIfelhasználó\fR,...]
+\fIfelhasznÃ¡lÃ³\fR,...]
 .RB [ \-M
-\fIfelhasználó\fR,...]
+\fIfelhasznÃ¡lÃ³\fR,...]
 \fIcsoport\fR
 .br
-.SH LEÍRÁS
+.SH LEÃRÃS
 A
 .B gpasswd
-program segítségével adminisztrálhatjuk az /etc/group fájlt
-illetve az /etc/gshadow fájlt amennyiben a SHADOWGPR definiálva
-volt a fordítás alatt. Minden csoportban lehetnek adminisztrátorok,
-tagok és egy jelszó. A rendszeradminisztrátor a \fB\-A\fR opció
-segítségével definiálhat csoportadminisztrátor(oka)t és a \fB\-M\fR
-opcióval tagokat. A rendszeradminisztátor minden joggal rendelkezik,
-amellyel a csoportadminisztrátor és a csoport tagjai.
+program segÃ­tsÃ©gÃ©vel adminisztrÃ¡lhatjuk az /etc/group fÃ¡jlt
+illetve az /etc/gshadow fÃ¡jlt amennyiben a SHADOWGPR definiÃ¡lva
+volt a fordÃ­tÃ¡s alatt. Minden csoportban lehetnek adminisztrÃ¡torok,
+tagok Ã©s egy jelszÃ³. A rendszeradminisztrÃ¡tor a \fB\-A\fR opciÃ³
+segÃ­tsÃ©gÃ©vel definiÃ¡lhat csoportadminisztrÃ¡tor(oka)t Ã©s a \fB\-M\fR
+opciÃ³val tagokat. A rendszeradminisztÃ¡tor minden joggal rendelkezik,
+amellyel a csoportadminisztrÃ¡tor Ã©s a csoport tagjai.
 .PP
-A csoportadminisztrátor a \fB\-a\fR kapcsolóval hozhat létre
-felhasználókat, és a \fB\-d\fR opcióval törölheti õket. Az 
-adminisztrátorok a \fB\-r\fR opcióval törölhetik a csoport
-jelszavát. Ha nincs jelszó beállítva, akkor csak a csoport
-tagjai használhatják a 
+A csoportadminisztrÃ¡tor a \fB\-a\fR kapcsolÃ³val hozhat lÃ©tre
+felhasznÃ¡lÃ³kat, Ã©s a \fB\-d\fR opciÃ³val tÃ¶rÃ¶lheti Å‘ket. Az 
+adminisztrÃ¡torok a \fB\-r\fR opciÃ³val tÃ¶rÃ¶lhetik a csoport
+jelszavÃ¡t. Ha nincs jelszÃ³ beÃ¡llÃ­tva, akkor csak a csoport
+tagjai hasznÃ¡lhatjÃ¡k a 
 .BR newgrp (1)
-parancsot a csatlakozáshoz. A \fB\-R\fR opció
-meggátolja a csoport elérését a 
+parancsot a csatlakozÃ¡shoz. A \fB\-R\fR opciÃ³
+meggÃ¡tolja a csoport elÃ©rÃ©sÃ©t a 
 .BR newgrp (1)
-parancson keresztül.
+parancson keresztÃ¼l.
 .PP
 Ha
 .B gpasswd
-parancsot a csoportadminisztrátor adja ki a csoport nevével,
-akkor csak a jelszót kell beírnia. Ha van jelszó, akkor a tagok
-be tudnak lépni a 
+parancsot a csoportadminisztrÃ¡tor adja ki a csoport nevÃ©vel,
+akkor csak a jelszÃ³t kell beÃ­rnia. Ha van jelszÃ³, akkor a tagok
+be tudnak lÃ©pni a 
 .BR newgrp (1)
-paranccsal jelszó nélkül is, csak a csoporton kívüli felhasználóknak
-kell megadniuk a jelszót.
+paranccsal jelszÃ³ nÃ©lkÃ¼l is, csak a csoporton kÃ­vÃ¼li felhasznÃ¡lÃ³knak
+kell megadniuk a jelszÃ³t.
 
-.SH FÁJLOK
-\fI/etc/group\fR \- információ a csoportról
+.SH FÃJLOK
+\fI/etc/group\fR \- informÃ¡ciÃ³ a csoportrÃ³l
 .br
-\fI/etc/gshadow\fR \- információ a shadow csoportról
-.SH LÁSD MÉG
+\fI/etc/gshadow\fR \- informÃ¡ciÃ³ a shadow csoportrÃ³l
+.SH LÃSD MÃ‰G
 .BR newgrp (1),
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
 .BR grpck (8)
-.SH MAGYAR FORDÍTÁS
-Tímár András <timar_a@freemail.hu>
+.SH MAGYAR FORDÃTÃS
+TÃ­mÃ¡r AndrÃ¡s <timar_a@freemail.hu>

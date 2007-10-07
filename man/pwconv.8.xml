@@ -2,14 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwconv.8'>
-  <!-- $Id: pwconv.8.xml,v 1.11 2005/09/30 15:41:20 kloczek Exp $ -->
-  <refentryinfo>
-    <date>26 Sep 1997</date>
-  </refentryinfo>
+  <!-- $Id: pwconv.8.xml,v 1.14 2005/10/12 21:10:31 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>PWCONV</refentrytitle>
+    <refentrytitle>pwconv</refentrytitle>
     <manvolnum>8</manvolnum>
-    <refmiscinfo class='date'>26 Sep 1997</refmiscinfo>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>pwconv</refname>

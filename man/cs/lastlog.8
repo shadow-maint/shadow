@@ -1,40 +1,40 @@
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"	$Id: lastlog.8,v 1.2 2005/04/05 19:08:52 kloczek Exp $
+.\"	$Id: lastlog.8,v 1.3 2005/12/01 20:38:24 kloczek Exp $
 .\"
 .TH LASTLOG 8
-.SH JMÉNO
-lastlog \- prozkoumá soubor lastlog
+.SH JMÃ‰NO
+lastlog \- prozkoumÃ¡ soubor lastlog
 .SH SYNTAXE
 .B lastlog
 .RB [ \-u
-.IR pøihla¹ovací\-jméno ]
+.IR pÅ™ihlaÅ¡ovacÃ­\-jmÃ©no ]
 .RB [ \-t
 .IR dny ]
 .SH POPIS
-\fBlastlog\fR setøídí a zobrazí obsah souboru
+\fBlastlog\fR setÅ™Ã­dÃ­ a zobrazÃ­ obsah souboru
 \fI/var/log/lastlog\fR,
-kterı obsahuje záznamy o pøihla¹ování a odhla¹ování u¾ivatelù v systému.
-Zobrazí se \fBpøihla¹ovací jméno\fR, \fBjméno terminálu\fR a \fBèas posledního
-pøihla¹ení\fR.
-Standardnì (tj. bez dal¹ích voleb) lastlog zobrazí záznamy setøídìné
-podle èísla UID.
-Pou¾ití pøepínaèe \fB\-u \fIpøihla¹ovací\-jméno\fR
-zpùsobí, ¾e bude vyti¹tìn pouze poslední záznam o pøihlá¹ení pøíslu¹ného u¾ivatele.
-Zadáním \fB\-t \fIdny\fR se zobrazí pouze
-ta pøihlá¹ení, které jsou døívìj¹í ne¾ zadané \fIdny\fR.
-Parametr \fB\-t\fR pøekryje pøípadnı parametr \fB\-u\fR.
+kterÃ½ obsahuje zÃ¡znamy o pÅ™ihlaÅ¡ovÃ¡nÃ­ a odhlaÅ¡ovÃ¡nÃ­ uÅ¾ivatelÅ¯ v systÃ©mu.
+ZobrazÃ­ se \fBpÅ™ihlaÅ¡ovacÃ­ jmÃ©no\fR, \fBjmÃ©no terminÃ¡lu\fR a \fBÄas poslednÃ­ho
+pÅ™ihlaÅ¡enÃ­\fR.
+StandardnÄ› (tj. bez dalÅ¡Ã­ch voleb) lastlog zobrazÃ­ zÃ¡znamy setÅ™Ã­dÄ›nÃ©
+podle ÄÃ­sla UID.
+PouÅ¾itÃ­ pÅ™epÃ­naÄe \fB\-u \fIpÅ™ihlaÅ¡ovacÃ­\-jmÃ©no\fR
+zpÅ¯sobÃ­, Å¾e bude vytiÅ¡tÄ›n pouze poslednÃ­ zÃ¡znam o pÅ™ihlÃ¡Å¡enÃ­ pÅ™Ã­sluÅ¡nÃ©ho uÅ¾ivatele.
+ZadÃ¡nÃ­m \fB\-t \fIdny\fR se zobrazÃ­ pouze
+ta pÅ™ihlÃ¡Å¡enÃ­, kterÃ© jsou dÅ™Ã­vÄ›jÅ¡Ã­ neÅ¾ zadanÃ© \fIdny\fR.
+Parametr \fB\-t\fR pÅ™ekryje pÅ™Ã­padnÃ½ parametr \fB\-u\fR.
 .PP
-Pokud se u¾ivatel je¹tì nikdy nepøihlásil, zobrazí se zpráva \fB"**Never logged in**"\fR (Nikdy nepøihlá¹en)
-místo jména terminálu a èasu.
+Pokud se uÅ¾ivatel jeÅ¡tÄ› nikdy nepÅ™ihlÃ¡sil, zobrazÃ­ se zprÃ¡va \fB"**Never logged in**"\fR (Nikdy nepÅ™ihlÃ¡Å¡en)
+mÃ­sto jmÃ©na terminÃ¡lu a Äasu.
 .SH SOUBORY
-/var/log/lastlog \- soubor se záznamy o pøihlá¹ení a odhlá¹ení
-.SH NÁMITKY
-Velké rozdíly v UID èíslech jsou zpùsobeny tím, ¾e lastlog program bì¾el dlouho bez
-vıstupu na obrazovku (napø. mmdf=800 a poslední uid=170, program se bude
+/var/log/lastlog \- soubor se zÃ¡znamy o pÅ™ihlÃ¡Å¡enÃ­ a odhlÃ¡Å¡enÃ­
+.SH NÃMITKY
+VelkÃ© rozdÃ­ly v UID ÄÃ­slech jsou zpÅ¯sobeny tÃ­m, Å¾e lastlog program bÄ›Å¾el dlouho bez
+vÃ½stupu na obrazovku (napÅ™. mmdf=800 a poslednÃ­ uid=170, program se bude
 jevit jako s uid 171\-799).
-.SH AUTOØI
+.SH AUTOÅ˜I
 Julianne Frances Haugh (jfh@austin.ibm.com)
 .br
 Phillip Street
-.SH PØELO®IL
-Ondøej Pavlíèek (mox@post.cz).
+.SH PÅ˜ELOÅ½IL
+OndÅ™ej PavlÃ­Äek (mox@post.cz).

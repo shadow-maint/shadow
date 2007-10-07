@@ -1,0 +1,74 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "vipw" "8" "12/14/2005" "Команды управления системой" "Команды управления системой"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+vipw, vigr \- служат для редактирования файлов паролей, групп, теневых паролей пользователей или групп.
+.SH "СИНТАКСИС"
+.HP 5
+\fBvipw\fR [параметры]
+.HP 5
+\fBvigr\fR [параметры]
+.SH "ОПИСАНИЕ"
+.PP
+\fBvipw\fR
+и
+\fBvigr\fR
+редактируют файлы
+\fI/etc/passwd\fR
+и
+\fI/etc/group\fR, соответственно. Если указан параметр
+\fB\-s\fR
+, то будут редактироваться теневые версии этих файлов,
+\fI/etc/shadow\fR
+и
+\fI/etc/gshadow\fR, соответственно. На время работы программы устанавливают блокировку для предотвращения повреждения файла. При выборе редактора программы сначала проверяют переменную среды
+\fB$VISUAL\fR, а затем
+\fB$EDITOR\fR, и если ничего не найдено, запускают стандартный редактор
+\fBvi\fR(1).
+.SH "ПАРАМЕТРЫ"
+.PP
+Возможные параметры для команд
+\fBvipw\fR
+и
+\fBvigr\fR
+:
+.TP
+\fB\-g\fR, \fB\-\-group\fR
+Редактирует базу данных групп.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Показать это сообщение и выйти.
+.TP
+\fB\-p\fR, \fB\-\-passwd\fR
+Редактировать базу данных passwd.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Малоинформативный режим базы данных.
+.TP
+\fB\-s\fR, \fB\-\-shadow\fR
+Редактировать базу данных shadow или gshadow.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группах
+.TP
+\fI/etc/passwd\fR
+содержит информацию о пользователях
+.TP
+\fI/etc/shadow\fR
+содержит защищаемую информацию о пользователях
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBvi\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)\fBpasswd\fR(5),
+\fBshadow\fR(5).

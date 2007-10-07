@@ -1,0 +1,75 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "gpasswd" "1" "11/10/2005" "Пользовательские команды" "Пользовательские команды"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+gpasswd \- управляет файлом /etc/group
+.SH "СИНТАКСИС"
+.HP 8
+\fBgpasswd\fR \fIgroup\fR
+.HP 8
+\fBgpasswd\fR \-a\ \fIпользователь\fR \fIgroup\fR
+.HP 8
+\fBgpasswd\fR \-d\ \fIпользователь\fR \fIgroup\fR
+.HP 8
+\fBgpasswd\fR \-R\ \fIgroup\fR
+.HP 8
+\fBgpasswd\fR \-r\ \fIgroup\fR
+.HP 8
+\fBgpasswd\fR [\-A\ \fIпользователь,\fR...] [\-M\ \fIпользователь,\fR...] \fIgroup\fR
+.SH "ОПИСАНИЕ"
+.PP
+\fBgpasswd\fR
+используется для управления файлом
+\fI/etc/group\fR
+(а также файлом
+\fI/etc/gshadow\fR
+, если программа была собрана с параметром SHADOWGRP). Каждая группа может иметь администраторов, членов и пароль. Системный администратор может использовать параметр
+\fB\-A\fR
+, чтобы назначить группе администратора(ов) и параметр
+\fB\-M\fR
+для определения списка членов, а также имеет все права администраторов и членов группы.
+.SS "Замечания о паролях групп"
+.PP
+Пароли групп имеют врождённую проблему с безопасностью, так как пароль знает более одного человека. Однако, группы являются полезным инструментом совместной работы различных пользователей.
+.SH "ПАРАМЕТРЫ"
+.PP
+Администратор группы может добавлять и удалять пользователей с помощью параметров
+\fB\-a\fR
+и
+\fB\-d\fR
+соответственно. Администраторы могут использовать параметр
+\fB\-r\fR
+для удаления пароля группы. Если пароль не задан, то только члены группы с помощью команды
+\fBnewgrp\fR
+могут войти в группу. Указав параметр
+\fB\-R\fR
+можно запретить доступ в группу по паролю с помощью команды
+\fBnewgrp\fR
+(однако на членов группы это не распространяется).
+.PP
+\fBgpasswd\fR
+, запущенная администратором группы с именем группы, служит для смены пароля группы. Если пароль не пустой, то для членов группы вызов
+\fBnewgrp\fR(1)
+пароля не требует, а не члены группы должны ввести пароль.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группах
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBnewgrp\fR(1),
+\fBgshadow\fR(5),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBgrpck\fR(8),
+\fBgroup\fR(5).

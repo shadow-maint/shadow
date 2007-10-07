@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='userdel.8'>
-  <!-- $Id: userdel.8.xml,v 1.15 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: userdel.8.xml,v 1.20 2005/11/05 17:17:30 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>USERDEL</refentrytitle>
+    <refentrytitle>userdel</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>userdel</refname>
@@ -14,6 +15,7 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>userdel</command>
+      <arg choice='opt'>-f </arg>
       <arg choice='opt'>-r </arg>
       <arg choice='plain'>
 	<replaceable>login_name</replaceable>
@@ -38,6 +40,29 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
+	  <option>-f</option>
+	</term>
+	<listitem>
+	  <para>
+	    This option forces the removal of the user, even if she is still
+	    logged in. It also forces <command>userdel</command> to remove
+	    the user's home directory or her mail spool, even if another
+	    user uses the same home directory or if the mail spool is not
+	    owned by the specified user.  If
+	    <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis
+	    remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>
+	    and if a group exists with the same name as the deleted user,
+	    then this group will be removed, even if it is still the primary
+	    group of another user.
+	  </para>
+	  <para>
+	    <emphasis>Note:</emphasis> This option is dangerous and may let
+	    your system in an inconsistent state.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-r</option>
 	</term>
 	<listitem>
@@ -46,6 +71,10 @@
 	    the home directory itself and the user's mail spool. Files
 	    located in other file systems will have to be searched for and
 	    deleted manually.
+	  </para>
+	  <para>
+	    The mail spool is defined by the <emphasis>MAIL_DIR</emphasis>
+	    variable in the <filename>login.defs</filename> file.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -138,9 +167,19 @@
     <para>
       <command>userdel</command> will not allow you to remove an account if
       the user is currently logged in. You must kill any running processes
-      which belong to an account that you are deleting. You may not remove
-      any NIS attributes on a NIS client. This must be performed on the NIS
-      server.
+      which belong to an account that you are deleting.
+    </para>
+    <para>You may not remove any NIS attributes on a NIS client. This must
+      be performed on the NIS server.
+    </para>
+    <para>If <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis
+      remap='I'>yes</emphasis> in <filename>/etc/login.defs</filename>,
+      <command>userdel</command> will delete the group with the same name
+      as the user. To avoid inconsistencies in the passwd and group
+      databases, <command>userdel</command> will check that this group is
+      not used as a primary group for another user, and will just warn
+      without deleting the user otherwise. The <option>-f</option> option
+      can force the deletion of this group.
     </para>
   </refsect1>
 
@@ -177,10 +216,5 @@
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

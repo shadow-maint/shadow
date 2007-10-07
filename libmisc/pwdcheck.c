@@ -1,6 +1,6 @@
 #include <config.h>
 
-#ident "$Id: pwdcheck.c,v 1.8 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id: pwdcheck.c,v 1.9 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <pwd.h>
 #include <stdio.h>
@@ -19,7 +19,6 @@ void passwd_check (const char *user, const char *passwd, const char *progname)
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retcode;
-	struct pam_conv conv = { misc_conv, NULL };
 
 	if (pam_start (progname, user, &conv, &pamh)) {
 	      bailout:

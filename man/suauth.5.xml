@@ -2,11 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='suauth.5'>
-  <!-- $Id: suauth.5.xml,v 1.12 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!-- $Id: suauth.5.xml,v 1.15 2005/11/05 17:17:30 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>suauth</refentrytitle>
     <manvolnum>5</manvolnum>
-    <refmiscinfo class='source'>Feb 14, 1996</refmiscinfo>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>suauth</refname>
@@ -173,15 +173,5 @@
 	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <literallayout remap='.nf'>
-      Chris Evans (lady0110@sable.ox.ac.uk)
-      Lady Margaret Hall
-      Oxford University
-      England
-    </literallayout>
   </refsect1>
 </refentry>

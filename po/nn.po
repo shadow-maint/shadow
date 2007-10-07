@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -222,6 +222,10 @@ msgstr "Førre passordendring (ÅÅÅÅ-MM-DD)"
 #, fuzzy, c-format
 msgid "never\n"
 msgstr "Aldri\n"
+
+#, fuzzy, c-format
+msgid "password must be changed"
+msgstr "Passord er endra.\n"
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -634,7 +638,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -1075,8 +1079,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1136,10 +1140,6 @@ msgstr "Passordet for %s kan ikkje endrast enno.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: tomt for minne\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: Kan ikkje køyre %s"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1261,6 +1261,19 @@ msgid "%s: %s\n"
 msgstr "passwd: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: må køyrast frå ein terminal\n"
 
@@ -1276,8 +1289,8 @@ msgstr "Ukjent id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "Du er ikkje autorisert til su %s\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Skriv inn ditt eige passord.)"
+msgid "(Enter your own password)"
+msgstr "(Skriv inn ditt eige passord)"
 
 #, c-format
 msgid ""
@@ -1361,7 +1374,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1372,22 +1385,6 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: feil ved låsing av gruppefil\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: feil ved opning av gruppefil\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: feil ved låsing av skuggegruppefil\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: feil ved opning av skuggegruppefil\n"
 
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1456,6 +1453,22 @@ msgstr "%s: klarer ikkje låsa skuggepassordfil\n"
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: klarer ikkje opna skuggepassordfil\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: feil ved låsing av gruppefil\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: feil ved opning av gruppefil\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: feil ved låsing av skuggegruppefil\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: feil ved opning av skuggegruppefil\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
@@ -1556,20 +1569,29 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: feil ved fjerning av mappe %s\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "Bruk: %s\t[-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d heim [-m]] [-s skal] [-c kommentar] [-l nytt_namn]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f inaktiv] [-e utgår] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p passord] [-L|-U] namn\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1639,6 +1661,18 @@ msgstr "klarte ikkje endra namn på mailbox"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1655,15 +1689,31 @@ msgstr "Klarte ikkje laga reservekopi"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
 
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Bruk:\n"
-"«vipw» redigerer /etc/passwd        «vipw -s» redigerer /etc/shadow\n"
-"«vigr» redigerer /etc/group         «vigr -s» redigerer /etc/gshadow\n"
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "Bruk:\n"
+#~ "«vipw» redigerer /etc/passwd        «vipw -s» redigerer /etc/shadow\n"
+#~ "«vigr» redigerer /etc/group         «vigr -s» redigerer /etc/gshadow\n"
 
 #~ msgid "%s: PAM chauthtok failed\n"
 #~ msgstr "%s: PAM chauthtok feila\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s: Kan ikkje køyre %s"
+
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "Bruk: %s\t[-u uid [-o]] [-g gruppe] [-G gruppe,...] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d heim [-m]] [-s skal] [-c kommentar] [-l nytt_namn]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f inaktiv] [-e utgår] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p passord] [-L|-U] namn\n"

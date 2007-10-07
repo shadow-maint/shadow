@@ -1,111 +1,111 @@
 .TH SU 1 "GNU Shell Utilities" "FSF" \" \-*\- nroff \-*\-
 .do hla cs
 .do hpf hyphen.cs
-.SH JMÉNO
-su \- spustí shell pod jinım u¾ivatelskım a skupinovım ID
-.SH POU®ITÍ
+.SH JMÃ‰NO
+su \- spustÃ­ shell pod jinÃ½m uÅ¾ivatelskÃ½m a skupinovÃ½m ID
+.SH POUÅ½ITÃ
 .B su
-[\-flmp] [\-c pøíkaz] [\-s shell] [\-\-login] [\-\-fast]
-[\-\-preserve\-environment] [\-\-command=pøíkaz] [\-\-shell=shell] [\-]
-[\-\-help] [\-\-version] [u¾ivatel [arg...]]
+[\-flmp] [\-c pÅ™Ã­kaz] [\-s shell] [\-\-login] [\-\-fast]
+[\-\-preserve\-environment] [\-\-command=pÅ™Ã­kaz] [\-\-shell=shell] [\-]
+[\-\-help] [\-\-version] [uÅ¾ivatel [arg...]]
 .SH POPIS
-Tato dokumentace není dále udr¾ována a mù¾e bıt nepøesná nebo neúplná.
-Autoritativním zdrojem je Texinfo dokumentace.
+Tato dokumentace nenÃ­ dÃ¡le udrÅ¾ovÃ¡na a mÅ¯Å¾e bÃ½t nepÅ™esnÃ¡ nebo neÃºplnÃ¡.
+AutoritativnÃ­m zdrojem je Texinfo dokumentace.
 .PP
-Tato manuálová stránka popisuje GNU verzi pøíkazu
+Tato manuÃ¡lovÃ¡ strÃ¡nka popisuje GNU verzi pÅ™Ã­kazu
 .BR su .
-Pøíkaz
+PÅ™Ã­kaz
 .B su
-umo¾òuje, aby se u¾ivatel doèasnì stal jinım u¾ivatelem. Spustí
-shell s reálnım a efektivním user ID, group ID, i skupinami, jich¾
-je zadanı
-.I u¾ivatel
-èlenem. Pokud není zadán
-.IR u¾ivatel ,
-dosadí se root, superu¾ivatel. Jméno shellu je pøevzato ze souboru
-/etc/passwd. Pokud v /etc/passwd jméno shellu není, pou¾ije se
-/bin/sh. Pokud má u¾ivatelskı úèet heslo, a pøíkaz
+umoÅ¾Åˆuje, aby se uÅ¾ivatel doÄasnÄ› stal jinÃ½m uÅ¾ivatelem. SpustÃ­
+shell s reÃ¡lnÃ½m a efektivnÃ­m user ID, group ID, i skupinami, jichÅ¾
+je zadanÃ½
+.I uÅ¾ivatel
+Älenem. Pokud nenÃ­ zadÃ¡n
+.IR uÅ¾ivatel ,
+dosadÃ­ se root, superuÅ¾ivatel. JmÃ©no shellu je pÅ™evzato ze souboru
+/etc/passwd. Pokud v /etc/passwd jmÃ©no shellu nenÃ­, pouÅ¾ije se
+/bin/sh. Pokud mÃ¡ uÅ¾ivatelskÃ½ ÃºÄet heslo, a pÅ™Ã­kaz
 .B su
-není spu¹tìn pod reálnım user ID 0 (tj. superu¾ivatelem), bude
-po¾adovat zadání hesla.
+nenÃ­ spuÅ¡tÄ›n pod reÃ¡lnÃ½m user ID 0 (tj. superuÅ¾ivatelem), bude
+poÅ¾adovat zadÃ¡nÃ­ hesla.
 .PP
-Pøíkaz
+PÅ™Ã­kaz
 .B su
-implicitnì nemìní aktuální adresáø. Nastavuje promìnné prostøedí
-`HOME' a `SHELL' podle údajù z /etc/passwd a pokud zadanı
-.I u¾ivatel
-není superu¾ivatelem, nastaví promìnné `USER' a `LOGNAME' na
-.IR u¾ivatel .
-Implicitnì není spu¹tìnı shell login shellem.
+implicitnÄ› nemÄ›nÃ­ aktuÃ¡lnÃ­ adresÃ¡Å™. Nastavuje promÄ›nnÃ© prostÅ™edÃ­
+`HOME' a `SHELL' podle ÃºdajÅ¯ z /etc/passwd a pokud zadanÃ½
+.I uÅ¾ivatel
+nenÃ­ superuÅ¾ivatelem, nastavÃ­ promÄ›nnÃ© `USER' a `LOGNAME' na
+.IR uÅ¾ivatel .
+ImplicitnÄ› nenÃ­ spuÅ¡tÄ›nÃ½ shell login shellem.
 .PP
-Jsou\-li zadány dal¹í argumenty, budou pøedány jako argumenty shellu.
+Jsou\-li zadÃ¡ny dalÅ¡Ã­ argumenty, budou pÅ™edÃ¡ny jako argumenty shellu.
 .PP
-Pøíkaz
+PÅ™Ã­kaz
 .B su
-nezpracovává speciálnì /bin/sh nebo ostatní shelly (nastavením
-argv[0] na "\-su", pøedáním volby `\-c' pouze jistım shellùm, atd.).
+nezpracovÃ¡vÃ¡ speciÃ¡lnÄ› /bin/sh nebo ostatnÃ­ shelly (nastavenÃ­m
+argv[0] na "\-su", pÅ™edÃ¡nÃ­m volby `\-c' pouze jistÃ½m shellÅ¯m, atd.).
 .PP
-Na systémech se syslog démonem mù¾e bıt pøíkaz
+Na systÃ©mech se syslog dÃ©monem mÅ¯Å¾e bÃ½t pÅ™Ã­kaz
 .B su
-pøelo¾en tak, aby zaznamenával pomocí syslogu neúspì¹ná
-a volitelnì i úspì¹ná vyvolání pøíkazu
+pÅ™eloÅ¾en tak, aby zaznamenÃ¡val pomocÃ­ syslogu neÃºspÄ›Å¡nÃ¡
+a volitelnÄ› i ÃºspÄ›Å¡nÃ¡ vyvolÃ¡nÃ­ pÅ™Ã­kazu
 .BR su .
 .SS VOLBY
 .TP
-.I "\-c pøíkaz, \-\-command=pøíkaz"
-Místo odstartování interaktivního shellu pøedá
-.I pøíkaz
+.I "\-c pÅ™Ã­kaz, \-\-command=pÅ™Ã­kaz"
+MÃ­sto odstartovÃ¡nÃ­ interaktivnÃ­ho shellu pÅ™edÃ¡
+.I pÅ™Ã­kaz
 s volbou
 .I \-c
-jako jedinı pøíkazovı øádek shellu.
+jako jedinÃ½ pÅ™Ã­kazovÃ½ Å™Ã¡dek shellu.
 .TP
 .I "\-f, \-\-fast"
-Pøedá shellu volbu
+PÅ™edÃ¡ shellu volbu
 .IR \-f .
-Tuto volbu je pravdìpodobnì vhodné pou¾ívat pouze pro shelly
+Tuto volbu je pravdÄ›podobnÄ› vhodnÃ© pouÅ¾Ã­vat pouze pro shelly
 .B csh
 a
 .BR tcsh ,
-u nich¾ zabrání provedení startovacího souboru (.cshrc).
-U shellù vycházejících z Bourne shellu volba
+u nichÅ¾ zabrÃ¡nÃ­ provedenÃ­ startovacÃ­ho souboru (.cshrc).
+U shellÅ¯ vychÃ¡zejÃ­cÃ­ch z Bourne shellu volba
 .I \-f
-zakazuje expanzi ¾olíkovıch znakù, co¾ obecnì není ¾ádoucí.
+zakazuje expanzi Å¾olÃ­kovÃ½ch znakÅ¯, coÅ¾ obecnÄ› nenÃ­ Å¾Ã¡doucÃ­.
 .TP
 .I "\-\-help"
-Vypí¹e návod k pou¾ití na standardní vıstup a bezchybnì skonèí.
+VypÃ­Å¡e nÃ¡vod k pouÅ¾itÃ­ na standardnÃ­ vÃ½stup a bezchybnÄ› skonÄÃ­.
 .TP
 .I "\-, \-l, \-\-login"
-Spustí shell jako login shell. To znamená, ¾e nebude nastaven obsah
-¾ádnıch promìnnıch prostøedí kromì `TERM', `HOME', a `SHELL' (které
-budou nastaveny, jak je popsáno vı¹e), `USER' a `LOGNAME' (které
-budou nastaveny i pro superu¾ivatele jak je popsáno vı¹e). Promìnná
-prostøedí `PATH' bude nastavena na hodnotu definovanou pøi pøekladu.
-Aktuální adresáø bude nastaven na domovskı adresáø; pøed jméno
-shellu bude pøedøazen znak "\-", kterı zpùsobí, ¾e bude zpracován
-startovací soubor nebo soubory.
+SpustÃ­ shell jako login shell. To znamenÃ¡, Å¾e nebude nastaven obsah
+Å¾Ã¡dnÃ½ch promÄ›nnÃ½ch prostÅ™edÃ­ kromÄ› `TERM', `HOME', a `SHELL' (kterÃ©
+budou nastaveny, jak je popsÃ¡no vÃ½Å¡e), `USER' a `LOGNAME' (kterÃ©
+budou nastaveny i pro superuÅ¾ivatele jak je popsÃ¡no vÃ½Å¡e). PromÄ›nnÃ¡
+prostÅ™edÃ­ `PATH' bude nastavena na hodnotu definovanou pÅ™i pÅ™ekladu.
+AktuÃ¡lnÃ­ adresÃ¡Å™ bude nastaven na domovskÃ½ adresÃ¡Å™; pÅ™ed jmÃ©no
+shellu bude pÅ™edÅ™azen znak "\-", kterÃ½ zpÅ¯sobÃ­, Å¾e bude zpracovÃ¡n
+startovacÃ­ soubor nebo soubory.
 .TP
 .I "\-m, \-p, \-\-preserve\-environment"
-Nebude mìnit promìnné prostøedí `HOME', `USER', `LOGNAME' ani
-`SHELL'. Je chybou, pokud u¾ivatel, kterı spustil pøíkaz
+Nebude mÄ›nit promÄ›nnÃ© prostÅ™edÃ­ `HOME', `USER', `LOGNAME' ani
+`SHELL'. Je chybou, pokud uÅ¾ivatel, kterÃ½ spustil pÅ™Ã­kaz
 .B su
-není superu¾ivatel a pøitom má novı u¾ivatel omezenı shell. Jinak
-se spustí místo u¾ivatelova shellu z /etc/passwd shell zadanı
-v promìnné prostøedí `SHELL'. Omezenı shell je takovı, kterı
-není uveden v souboru /etc/shells, nebo v zakompilován seznamu
-souborù, pokud /etc/shells neexistuje. Chování pøíkazu
+nenÃ­ superuÅ¾ivatel a pÅ™itom mÃ¡ novÃ½ uÅ¾ivatel omezenÃ½ shell. Jinak
+se spustÃ­ mÃ­sto uÅ¾ivatelova shellu z /etc/passwd shell zadanÃ½
+v promÄ›nnÃ© prostÅ™edÃ­ `SHELL'. OmezenÃ½ shell je takovÃ½, kterÃ½
+nenÃ­ uveden v souboru /etc/shells, nebo v zakompilovÃ¡n seznamu
+souborÅ¯, pokud /etc/shells neexistuje. ChovÃ¡nÃ­ pÅ™Ã­kazu
 .B su
-s touto volbou lze zmìnit volbami
+s touto volbou lze zmÄ›nit volbami
 .I \-\-login
 a
 .I \-\-shell
-(má pøednost pøed hodnotou promìnné prostøedí SHELL).
+(mÃ¡ pÅ™ednost pÅ™ed hodnotou promÄ›nnÃ© prostÅ™edÃ­ SHELL).
 .TP
 .I "\-s, \-\-shell shell"
-Spustí zadanı shell místo u¾ivatelova shellu z /etc/passwd.
-Je chybou, pokud u¾ivatel, kterı spustil
+SpustÃ­ zadanÃ½ shell mÃ­sto uÅ¾ivatelova shellu z /etc/passwd.
+Je chybou, pokud uÅ¾ivatel, kterÃ½ spustil
 .B su
-není superu¾ivatel a pøitom shell nového u¾ivatele uvedenı
-v /etc/passwd je omezenı.
+nenÃ­ superuÅ¾ivatel a pÅ™itom shell novÃ©ho uÅ¾ivatele uvedenÃ½
+v /etc/passwd je omezenÃ½.
 .TP
 .I "\-\-version"
-Vypí¹e èíslo verze na standardní vıstup a bezchybnì skonèí.
+VypÃ­Å¡e ÄÃ­slo verze na standardnÃ­ vÃ½stup a bezchybnÄ› skonÄÃ­.

@@ -193,7 +193,7 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 # subdirectories for translated manual pages
-SUBDIRS = cs de es fr hu id it ja ko pl pt_BR ru zh_CN zh_TW
+SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
 man_XMANS = \
 	chage.1.xml \
 	chfn.1.xml \
@@ -789,6 +789,8 @@ all:
 
 shadow-man-pages.pot: $(man_XMANS)
 	xml2po -o $@ $(man_XMANS)
+
+update-po: shadow-man-pages.pot
 
 @ENABLE_REGENERATE_MAN_TRUE@chage.1: chage.1.xml
 @ENABLE_REGENERATE_MAN_TRUE@	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<

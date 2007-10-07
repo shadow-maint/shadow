@@ -1,0 +1,112 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "PWCONV" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+pwconv, pwunconv, grpconv, grpunconv \- Convertir vers ou depuis les fichiers de mots de passe ou de groupe cachés
+.SH "SYNOPSIS"
+.HP 7
+\fBpwconv\fR
+.HP 9
+\fBpwunconv\fR
+.HP 8
+\fBgrpconv\fR
+.HP 10
+\fBgrpunconv\fR
+.SH "DESCRIPTION"
+.PP
+\fBpwconv\fR
+crée le fichier
+\fIshadow\fR
+à partir du fichier
+\fIpasswd\fR
+et d'un éventuel fichier
+\fIshadow\fR.
+.PP
+\fBpwunconv\fR
+crée le fichier
+\fIpasswd\fR
+à partir des fichiers
+\fIpasswd\fR
+et
+\fIshadow\fR
+puis supprime
+\fIshadow\fR.
+.PP
+\fBgrpconv\fR
+crée
+\fIgshadow\fR
+à partir de
+\fIgroup\fR
+et d'un éventuel fichier
+\fIgshadow\fR.
+.PP
+\fBgrpunconv\fR
+crée
+\fIgroup\fR
+à partir des fichiers
+\fIgroup\fR
+et
+\fIgshadow\fR
+puis supprime
+\fIgshadow\fR.
+.PP
+Ces quatre programmes opèrent sur les fichiers de mots de passe et d'informations sur les groupes cachés ou non\ :
+\fI/etc/passwd\fR,
+\fI/etc/group\fR,
+\fI/etc/shadow\fR, et
+\fI/etc/gshadow\fR.
+.PP
+Chaque programme place les verrous nécessaires avant d'effectuer la conversion.
+\fBPwconv\fR
+et
+\fBgrpconv\fR
+sont similaires. Dans un premier temps, les entrées présentes dans le fichier de mots de passe cachés (\fI/etc/shadow\fR
+ou
+\fI/etc/gshadow\fR), mais non présentes dans le fichier principal (\fIpasswd\fR
+ou
+\fIgroup\fR), sont retirées. Ensuite, les entrées du fichier
+\fIshadow\fR
+n'ayant pas pour mot de passe \(Fo\ x\ \(Fc dans le fichier
+\fIpasswd\fR
+sont mises à jour. Enfin, les mots de passe du fichier
+\fIpasswd\fR
+sont remplacés par \(Fo\ x\ \(Fc. Ces programmes peuvent être utilisés pour une première conversion, ou bien pour une mise à jour, si les fichiers principaux [\ NdT\ : non cachés\ ] ont été édités à la main.
+.PP
+Lors de l'ajout de nouvelles entrées dans
+\fI/etc/shadow\fR,
+\fBpwconv\fR
+utilisera les valeurs de
+\fIPASS_MIN_DAYS\fR,
+\fIPASS_MAX_DAYS\fR, et
+\fIPASS_WARN_AGE\fR
+définies dans le fichier
+\fI/etc/login.defs\fR.
+.PP
+De même,
+\fBpwunconv\fR
+et
+\fBgrpunconv\fR
+sont similaires. Les mots de passe des fichiers principaux sont mis à jour à partir des fichiers d'informations cachées (\(Fo\ shadowed file\ \(Fc). Les entrées existant dans un fichier principal, mais pas dans le fichier caché sont laissées. Enfin, le fichier caché est supprimé. Certaines informations d'âge des mots de passe sont perdues par
+\fBpwunconv\fR. Il ne convertit que ce qu'il peut.
+.SH "BOGUES"
+.PP
+Des erreurs dans les fichiers de mots de passe ou d'informations sur les groupes (comme des entrées invalides ou redondantes) peuvent conduire ces programmes à boucler indéfiniment ou à échouer d'une manière toute aussi étrange. Veuillez exécuter
+\fBpwck\fR
+et
+\fBgrpck\fR
+pour corriger ces erreurs avant lancer toute conversion.
+.SH "FICHIERS"
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+.SH "VOIR AUSSI"
+.PP
+\fBgrpck\fR(8),
+\fBlogin.defs\fR(5),
+\fBpwck\fR(8).

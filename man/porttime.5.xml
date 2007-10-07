@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='porttime.5'>
-  <!--  $Id: porttime.5.xml,v 1.12 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!--  $Id: porttime.5.xml,v 1.15 2005/11/05 17:17:30 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>porttime</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>porttime</refname>
@@ -60,9 +61,10 @@
       not permit access at any time.
     </para>
 
-    <para>	console:root,oper:Al0000-2400
+    <programlisting>
+      console:root,oper:Al0000-2400
       console:*:
-    </para>
+    </programlisting>
 
     <para>
       The following entry allows access for the user
@@ -91,10 +93,5 @@
 	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

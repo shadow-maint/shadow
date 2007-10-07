@@ -1,4 +1,4 @@
-.\" $Id: sulogin.8,v 1.7 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: sulogin.8,v 1.8 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,61 +27,61 @@
 .\" SUCH DAMAGE.
 .TH SULOGIN 8
 .SH NAZWA
-sulogin \- login w trybie jednouøytkownikowym
-.SH SK£ADNIA
-\fBsulogin\fR [\fIurz±dzenie\-tty\fR]
+sulogin \- login w trybie jednou≈ºytkownikowym
+.SH SK≈ÅADNIA
+\fBsulogin\fR [\fIurzƒÖdzenie\-tty\fR]
 .SH OPIS
 .B sulogin
-wywo≥ywane jest przez \fBinit\fR przed zezwoleniem uøytkownikowi
-na dostÍp do systemu w trybie jednouøytkownikowym (single user mode).
-Funkcja ta moøe byÊ dostÍpna tylko w niektÛrych systemach, w ktÛrych
+wywo≈Çywane jest przez \fBinit\fR przed zezwoleniem u≈ºytkownikowi
+na dostƒôp do systemu w trybie jednou≈ºytkownikowym (single user mode).
+Funkcja ta mo≈ºe byƒá dostƒôpna tylko w niekt√≥rych systemach, w kt√≥rych
 odpowiednio zmieniono \fBinit\fR lub plik \fB/etc/inittab\fR posiada
-pozycjÍ dla logowania siÍ w trybie jednouøytkownikowym.
+pozycjƒô dla logowania siƒô w trybie jednou≈ºytkownikowym.
 .PP
-Wy∂wietlany jest symbol zachÍty
+Wy≈õwietlany jest symbol zachƒôty
 .IP "" .5i
 Type control\-d to proceed with normal startup,
 .br
 (or give root password for system maintenance):
 .br
-Naci∂nij control\-d by kontynuowaÊ zwyk≥y start,
+Naci≈õnij control\-d by kontynuowaƒá zwyk≈Çy start,
 .br
-(lub podaj has≥o uøytkownika root do konserwacji systemu):
+(lub podaj has≈Ço u≈ºytkownika root do konserwacji systemu):
 .PP
-Wej∂cie i wyj∂cie bÍd± obs≥ugiwane przy uøyciu standardowych deskryptorÛw
-plikÛw, chyba øe uøyto opcjonalnego argumentu \- nazwy urz±dzenia.
+Wej≈õcie i wyj≈õcie bƒôdƒÖ obs≈Çugiwane przy u≈ºyciu standardowych deskryptor√≥w
+plik√≥w, chyba ≈ºe u≈ºyto opcjonalnego argumentu \- nazwy urzƒÖdzenia.
 .PP
-Je∂li uøytkownik wprowadzi poprawne has≥o superuøytkownika root,
+Je≈õli u≈ºytkownik wprowadzi poprawne has≈Ço superu≈ºytkownika root,
 to rozpoczynana jest sesja pracy na koncie root.
-Jeøeli natomiast naci∂niÍto \fBEOF\fR, to system przechodzi
-do wielouøytkownikowego trybu pracy.
+Je≈ºeli natomiast naci≈õniƒôto \fBEOF\fR, to system przechodzi
+do wielou≈ºytkownikowego trybu pracy.
 .PP
-Po opuszczeniu przez uøytkownika pow≥oki przypisanej do
-jednouøytkownikowego trybu pracy lub po naci∂niÍciu \fBEOF\fR, system
-wykonuje proces inicjacji wymagany do przej∂cia w tryb wielouøytkownikowy.
-.SH OSTRZEØENIA
+Po opuszczeniu przez u≈ºytkownika pow≈Çoki przypisanej do
+jednou≈ºytkownikowego trybu pracy lub po naci≈õniƒôciu \fBEOF\fR, system
+wykonuje proces inicjacji wymagany do przej≈õcia w tryb wielou≈ºytkownikowy.
+.SH OSTRZE≈ªENIA
 .PP
-Polecenie to moøe byÊ uøywane wy≥±cznie wtedy, gdy \fBinit\fR zosta≥ zmieniony
-tak, by wywo≥ywaÊ \fBsulogin\fR zamiast \fB/bin/sh\fR,
-albo gdy uøytkownik skonfigurowa≥ plik \fIinittab\fR tak, by obs≥ugiwa≥
-logowanie w trybie jednouøytkownikowym.
-Na przyk≥ad, wiersz
+Polecenie to mo≈ºe byƒá u≈ºywane wy≈ÇƒÖcznie wtedy, gdy \fBinit\fR zosta≈Ç zmieniony
+tak, by wywo≈Çywaƒá \fBsulogin\fR zamiast \fB/bin/sh\fR,
+albo gdy u≈ºytkownik skonfigurowa≈Ç plik \fIinittab\fR tak, by obs≈Çugiwa≈Ç
+logowanie w trybie jednou≈ºytkownikowym.
+Na przyk≈Çad, wiersz
 .br
 .sp 1
 co:s:respawn:/etc/sulogin /dev/console
 .br
 .sp 1
-powinien wykonaÊ polecenie sulogin w trybie jednouøytkownikowym.
+powinien wykonaƒá polecenie sulogin w trybie jednou≈ºytkownikowym.
 .PP
-Na ile jest to moøliwe, tworzone jest pe≥ne ∂rodowisko.
-Jednakøe w efekcie mog± nie byÊ do≥±czone czy zainicjowane rÛøne
-urz±dzenia, za∂ wiele poleceÒ uøytkownika moøe byÊ niedostÍpnych lub
-nie funkcjonowaÊ.
+Na ile jest to mo≈ºliwe, tworzone jest pe≈Çne ≈õrodowisko.
+Jednak≈ºe w efekcie mogƒÖ nie byƒá do≈ÇƒÖczone czy zainicjowane r√≥≈ºne
+urzƒÖdzenia, za≈õ wiele polece≈Ñ u≈ºytkownika mo≈ºe byƒá niedostƒôpnych lub
+nie funkcjonowaƒá.
 .SH PLIKI
-.IR /etc/passwd " \- informacja o kontach uøytkownikÛw"
+.IR /etc/passwd " \- informacja o kontach u≈ºytkownik√≥w"
 .br
-.IR /etc/shadow " \- zakodowane has≥a i informacja o ich waøno∂ci"
-.SH ZOBACZ TAKØE
+.IR /etc/shadow " \- zakodowane has≈Ça i informacja o ich wa≈ºno≈õci"
+.SH ZOBACZ TAK≈ªE
 .BR login (1),
 .BR sh (1),
 .BR init (8)

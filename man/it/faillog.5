@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\"$Id: faillog.5,v 1.1 2005/04/21 21:03:16 kloczek Exp $
+.\"$Id: faillog.5,v 1.2 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -32,14 +32,14 @@
 faillog \- file di log degli accessi falliti
 .SH DESCRIZIONE
 \fI/var/log/faillog\fP mantiene i conteggi e i limiti dei tentativi di accesso 
-falliti per ciascun account. Il file è composto da record di lunghezza 
+falliti per ciascun account. Il file Ã¨ composto da record di lunghezza 
 fissa, indicizzati dal valore numerico di UID. Ciascun record contiene il 
 conteggio degli accessi falliti a partire dall'ultimo login corretto, il 
 numero massimo di tentativi permessi prima che l'account venga disabilitato, 
-il terminale sul quale l'ultimo tentativo fallito è avvenuto e infine la 
-data in cui è avvenuto.
+il terminale sul quale l'ultimo tentativo fallito Ã¨ avvenuto e infine la 
+data in cui Ã¨ avvenuto.
 .PP
-La struttura del file è la seguente:
+La struttura del file Ã¨ la seguente:
 .DS
 
         struct	faillog {

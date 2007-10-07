@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\" $Id: shadow.3,v 1.1 2005/04/21 21:03:16 kloczek Exp $
+.\" $Id: shadow.3,v 1.2 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -52,7 +52,7 @@ shadow \- gestione del file delle password cifrate
 \fBint ulckpwdf();\fP
 .SH DESCRIZIONE
 \fIshadow\fP manipola il contenuto del file delle shadow password, 
-\fI/etc/shadow\fP. La struttura nel file \fI#include\fP Ë la seguente:
+\fI/etc/shadow\fP. La struttura nel file \fI#include\fP √® la seguente:
 .sp
 struct spwd {
 .in +.5i
@@ -69,7 +69,7 @@ struct spwd {
 .br
 	long int	\tsp_warn; /* giorni di preavviso */
 .br
-	long int	\tsp_inact; /* giorni di inattivit‡ */
+	long int	\tsp_inact; /* giorni di inattivit√† */
 .br
 	long int	\tsp_expire; /* data di scadenza dell'account */
 .br
@@ -85,10 +85,10 @@ utente.
 .br
 sp_pwdp \- puntatore a una stringa null\-terminated che contiene la password.
 .br
-sp_lstchg \- giorni a partire dal 1 gennaio 1970 in cui la password Ë stata 
+sp_lstchg \- giorni a partire dal 1 gennaio 1970 in cui la password √® stata 
 cambiata l'ultima volta.
 .br
-sp_min \- giorni prima dei quali la password non puÚ essere cambiata.
+sp_min \- giorni prima dei quali la password non pu√≤ essere cambiata.
 .br
 sp_max \- giorni dopo i quali la password deve essere cambiata.
 .br
@@ -116,7 +116,7 @@ terminare l'accesso al file delle shadow password.
 .PP
 Le funzioni \fBlckpwdf\fP e \fBulckpwdf\fP si usano per garantire l'accesso 
 esclusivo al file \fI/etc/shadow\fP. \fBlckpwdf\fP prova ad acquisire il lock 
-tramite \fBpw_lock\fP per un massimo di 15 secondi, dopodichÈ tenta di 
+tramite \fBpw_lock\fP per un massimo di 15 secondi, dopodich√© tenta di 
 ottenere un secondo lock usando \fBspw_lock\fP per il tempo che rimane dei 15 
 secondi iniziali. Se anche uno solo dei due tentativi fallisce dopo un 
 totale di 15 secondi, \fBlckpwdf\fP restituisce \-1, mentre restituisce 0 se 
@@ -126,8 +126,8 @@ Le funzioni restituiscono NULL se non ci sono altre voci disponibili o se si
 verifica un errore durante l'elaborazione. Le funzioni di tipo \fBint\fP 
 restituiscono 0 in caso di successo e \-1 in caso di errore.
 .SH AVVISI/CAVEAT
-Queste funzioni possono essere usate solo dall'amministratore, perchÈ 
-l'accesso al file delle shadow password Ë riservato.
+Queste funzioni possono essere usate solo dall'amministratore, perch√© 
+l'accesso al file delle shadow password √® riservato.
 .SH FILE
 \fI/etc/shadow\fP	\- informazioni sicure sugli account degli utenti
 .SH "VEDERE ANCHE"

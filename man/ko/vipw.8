@@ -1,0 +1,64 @@
+.\" Copyright (c) 1983, 1991 The Regents of the University of California.
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. All advertising materials mentioning features or use of this software
+.\"    must display the following acknowledgement:
+.\"	This product includes software developed by the University of
+.\"	California, Berkeley and its contributors.
+.\" 4. Neither the name of the University nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"     from: @(#)vipw.8	6.7 (Berkeley) 3/16/91
+.\"	$Id: vipw.8,v 1.1 2005/12/13 11:34:59 kloczek Exp $
+.\"
+.Dd March 16, 1991
+.Dt VIPW 8
+.Os BSD 4
+.Sh NAME
+.Nm vipw
+.Nd 패스워드 파일 편집
+.Sh 사용법
+.Nm vipw
+.Sh 설명
+.Nm Vipw
+명령은 /etc/passwd 파일을 잠그고(lock) 편집하고, 
+편집이 끝나면, /etc/passwd 파일을 잠금해제(unlock)한다.
+이미 /etc/passwd 파일이 잠겨 있으면, 다음에 사용하라고 
+메시지를 보여준다.
+\fBvipw\fR에서 사용하는 기본 편집기는 \fBvi(1)\fR이다.
+.Sh 환경변수
+\fBvipw\fR는 다음 환경 변수를 사용한다.
+.Bl -tag -width EDITOR
+.It Ev EDITOR
+사용할 편집기 지정. 초기값은 vi
+.El
+.Sh 관련 항목
+.Xr passwd 1 ,
+.Xr vi 1 ,
+.Xr passwd 5
+.Sh 발자취
+.Nm
+명령은 
+.Bx 4.0 
+에서 처음 나타났다.

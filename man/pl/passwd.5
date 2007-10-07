@@ -1,4 +1,4 @@
-.\" $Id: passwd.5,v 1.4 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: passwd.5,v 1.5 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,65 +25,65 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.TH PASSWD 5 "24 Czerwiec 1993" "Linux" "Podrêcznik programisty linuxowego"
+.TH PASSWD 5 "24 Czerwiec 1993" "Linux" "PodrÄ™cznik programisty linuxowego"
 .SH NAZWA
-passwd \- plik passwd definiuj±cy u¿ytkowników systemu
+passwd \- plik passwd definiujÄ…cy uÅ¼ytkownikÃ³w systemu
 .SH OPIS
 Plik 
 .B passwd
-jest plikiem tekstowym ASCII, który zawiera listê u¿ytkowników systemu
-oraz has³a jakich musz± u¿ywaæ aby otrzymaæ dostêp do systemu.
-Ka¿dy powinien móc odczytaæ informacje z pliku passwd (poniewa¿ has³a
-w tym pliku s± zakodowane jest to poprawne) lecz prawo do modyfikacji
-pliku powinien mieæ tylko administrator.
-Dodaj±c nowego u¿ytkownika nale¿y pole przeznaczone na has³o pozostawiæ puste
-i u¿yæ programu \fBpasswd\fP(1). Gwiazdka lub inny pojedynczy znak w polu
-has³a oznacza, ze u¿ytkownik nie mo¿e dostaæ siê do systemu przez \fBlogin\fP(1). 
-Je¶li g³ówny system plików jest na ram dysku (/dev/ram) nale¿y
-plik passwd skopiowaæ na dyskietkê przechowuj±c± g³ówny system plików
-przed zamkniêciem systemu. Trzeba równie¿ sprawdziæ prawa dostêpu do.
-Je¶li trzeba utworzyæ grupê u¿ytkowników, ich identyfikatory grupy
-GID musz± byæ równe oraz musi istnieæ odpowiednia pozycja w pliku
-\fI/etc/group\fP, lub grupa nie bêdzie istnia³a.  
+jest plikiem tekstowym ASCII, ktÃ³ry zawiera listÄ™ uÅ¼ytkownikÃ³w systemu
+oraz hasÅ‚a jakich muszÄ… uÅ¼ywaÄ‡ aby otrzymaÄ‡ dostÄ™p do systemu.
+KaÅ¼dy powinien mÃ³c odczytaÄ‡ informacje z pliku passwd (poniewaÅ¼ hasÅ‚a
+w tym pliku sÄ… zakodowane jest to poprawne) lecz prawo do modyfikacji
+pliku powinien mieÄ‡ tylko administrator.
+DodajÄ…c nowego uÅ¼ytkownika naleÅ¼y pole przeznaczone na hasÅ‚o pozostawiÄ‡ puste
+i uÅ¼yÄ‡ programu \fBpasswd\fP(1). Gwiazdka lub inny pojedynczy znak w polu
+hasÅ‚a oznacza, ze uÅ¼ytkownik nie moÅ¼e dostaÄ‡ siÄ™ do systemu przez \fBlogin\fP(1). 
+JeÅ›li gÅ‚Ã³wny system plikÃ³w jest na ram dysku (/dev/ram) naleÅ¼y
+plik passwd skopiowaÄ‡ na dyskietkÄ™ przechowujÄ…cÄ… gÅ‚Ã³wny system plikÃ³w
+przed zamkniÄ™ciem systemu. Trzeba rÃ³wnieÅ¼ sprawdziÄ‡ prawa dostÄ™pu do.
+JeÅ›li trzeba utworzyÄ‡ grupÄ™ uÅ¼ytkownikÃ³w, ich identyfikatory grupy
+GID muszÄ… byÄ‡ rÃ³wne oraz musi istnieÄ‡ odpowiednia pozycja w pliku
+\fI/etc/group\fP, lub grupa nie bÄ™dzie istniaÅ‚a.  
 .PP
-Ka¿da pozycja zajmuje jeden wiersz w formacie:
+KaÅ¼da pozycja zajmuje jeden wiersz w formacie:
 .sp
-login_name:has³o:UID:GID:imie_nazwisko:katalog:pow³oka
+login_name:hasÅ‚o:UID:GID:imie_nazwisko:katalog:powÅ‚oka
 .RS
 .RE
 .sp
-Krótki opis poszczególnych pól:
+KrÃ³tki opis poszczegÃ³lnych pÃ³l:
 .sp
 .RS
 .TP 1.0in
 .I login_name
-nazwa u¿ytkownika w systemie (radzê u¿ywaæ ma³ych liter).
+nazwa uÅ¼ytkownika w systemie (radzÄ™ uÅ¼ywaÄ‡ maÅ‚ych liter).
 .TP
-.I has³o
-zakodowane has³o u¿ytkownika.
+.I hasÅ‚o
+zakodowane hasÅ‚o uÅ¼ytkownika.
 .TP
 .I UID
-identyfikator u¿ytkownika (liczbowo).
+identyfikator uÅ¼ytkownika (liczbowo).
 .TP
 .I GID
 identyfikator grupy (liczbowo).
 .TP
-.I imiê_nazwisko
-Opisowa nazwa u¿ytkownika, zwykle imiê i nazwisko (wykorzystywane
+.I imiÄ™_nazwisko
+Opisowa nazwa uÅ¼ytkownika, zwykle imiÄ™ i nazwisko (wykorzystywane
 przez programy pocztowe).
 .TP
 .I katalog
-katalog macierzysty ($HOME) u¿ytkownika.
+katalog macierzysty ($HOME) uÅ¼ytkownika.
 .TP
-.I pow³oka
-program jaki uruchomiæ po wej¶ciu u¿ytkownika do systemu.
-(je¶li pusty u¿yj /bin/sh, je¶li istnieje /etc/shells i
-dana pow³oka nie jest tam wymieniona, u¿ytkownik nie bêdzie móg³
-dostaæ siê do systemu wykorzystuj±c protokó³ ftp).
+.I powÅ‚oka
+program jaki uruchomiÄ‡ po wejÅ›ciu uÅ¼ytkownika do systemu.
+(jeÅ›li pusty uÅ¼yj /bin/sh, jeÅ›li istnieje /etc/shells i
+dana powÅ‚oka nie jest tam wymieniona, uÅ¼ytkownik nie bÄ™dzie mÃ³gÅ‚
+dostaÄ‡ siÄ™ do systemu wykorzystujÄ…c protokÃ³Å‚ ftp).
 .RE
 .SH PLIKI
 .I /etc/passwd
-.SH "ZOBACZ TAK¯E"
+.SH "ZOBACZ TAKÅ»E"
 .BR login (1),
 .BR passwd (1),
 .BR group (5)

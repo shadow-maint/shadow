@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: login.c,v 1.74 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: login.c,v 1.77 2005/12/13 14:04:54 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -49,10 +49,6 @@
 #include "pwauth.h"
 #ifdef USE_PAM
 #include "pam_defs.h"
-static const struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
 
 static pam_handle_t *pamh = NULL;
 
@@ -646,6 +642,32 @@ int main (int argc, char **argv)
 #ifdef HAVE_PAM_FAIL_DELAY
 				pam_fail_delay (pamh, 1000000 * delay);
 #endif
+#ifdef WITH_AUDIT
+				{
+					struct passwd *pw;
+					char buf[64];
+
+					audit_fd = audit_open ();
+					pw = getpwnam (username);
+					if (pw) {
+						snprintf (buf, sizeof (buf),
+							  "uid=%d", pw->pw_uid);
+						audit_log_user_message
+						    (audit_fd, AUDIT_USER_LOGIN,
+						     buf, hostname, NULL,
+						     tty, 0);
+					} else {
+						snprintf (buf, sizeof (buf),
+							  "acct=%s", username);
+						audit_log_user_message
+						    (audit_fd, AUDIT_USER_LOGIN,
+						     buf, hostname, NULL,
+						     tty, 0);
+					}
+					close (audit_fd);
+				}
+#endif				/* WITH_AUDIT */
+
 				fprintf (stderr, _("\nLogin incorrect\n"));
 				pam_set_item (pamh, PAM_USER, NULL);
 				retcode = pam_authenticate (pamh, 0);
@@ -666,6 +688,33 @@ int main (int argc, char **argv)
 						 "FAILED LOGIN SESSION FROM %s FOR %s, %s",
 						 hostname, pam_user,
 						 pam_strerror (pamh, retcode)));
+
+
+#ifdef WITH_AUDIT
+				{
+					struct passwd *pw;
+					char buf[64];
+
+					audit_fd = audit_open ();
+					pw = getpwnam (username);
+					if (pw) {
+						snprintf (buf, sizeof (buf),
+						  "uid=%d", pw->pw_uid);
+						audit_log_user_message
+						    (audit_fd, AUDIT_USER_LOGIN,
+						     buf, hostname, NULL,
+						     tty, 0);
+					} else {
+						snprintf (buf, sizeof (buf),
+							  "acct=%s", username);
+						audit_log_user_message
+						    (audit_fd, AUDIT_USER_LOGIN,
+						     buf, hostname, NULL,
+						     tty, 0);
+					}
+					close (audit_fd);
+				}
+#endif				/* WITH_AUDIT */
 
 				fprintf (stderr, "\nLogin incorrect\n");
 				pam_end (pamh, retcode);
@@ -916,6 +965,19 @@ int main (int argc, char **argv)
 #endif
 		goto top;	/* go do all this all over again */
 	}
+
+#ifdef WITH_AUDIT
+	{
+		char buf[32];
+
+		audit_fd = audit_open ();
+		snprintf (buf, sizeof (buf), "uid=%d", pwd->pw_uid);
+		audit_log_user_message (audit_fd, AUDIT_USER_LOGIN,
+					buf, hostname, NULL, tty, 1);
+		close (audit_fd);
+	}
+#endif				/* WITH_AUDIT */
+
 #ifndef USE_PAM			/* pam_lastlog handles this */
 	if (getdef_bool ("LASTLOG_ENAB"))	/* give last login and log this one */
 		dolastlog (&lastlog, &pwent, utent.ut_line, hostname);

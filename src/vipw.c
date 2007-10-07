@@ -22,9 +22,10 @@
 
 #include <config.h>
 
-#ident "$Id: vipw.c,v 1.17 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: vipw.c,v 1.20 2005/12/13 14:01:08 kloczek Exp $"
 
 #include <errno.h>
+#include <getopt.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,6 +34,7 @@
 #include <unistd.h>
 #include <utime.h>
 #include "defines.h"
+#include "exitcodes.h"
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
@@ -45,12 +47,33 @@
 static const char *progname, *filename, *fileeditname;
 static int filelocked = 0, createedit = 0;
 static int (*unlock) (void);
+static int quiet = 0;
 
 /* local function prototypes */
+static void usage (void);
 static int create_backup_file (FILE *, const char *, struct stat *);
 static void vipwexit (const char *, int, int);
 static void vipwedit (const char *, int (*)(void), int (*)(void));
 
+/*
+ * usage - display usage message and exit
+ */
+static void usage (void)
+{
+	fprintf (stderr, _("Usage: vipw [options]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -g, --group			edit group database\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -p, --passwd			edit passwd database\n"
+			   "  -q, --quiet			quiet mode\n"
+			   "  -s, --shadow			edit shadow or gshadow database\n"));
+	exit (E_USAGE);
+}
+
+/*
+ *
+ */
 static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 {
 	struct utimbuf ub;
@@ -91,7 +114,9 @@ static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 	return 0;
 }
 
-
+/*
+ *
+ */
 static void vipwexit (const char *msg, int syserr, int ret)
 {
 	int err = errno;
@@ -104,7 +129,9 @@ static void vipwexit (const char *msg, int syserr, int ret)
 		fprintf (stderr, "%s: %s", progname, msg);
 	if (syserr)
 		fprintf (stderr, ": %s", strerror (err));
-	fprintf (stderr, _("\n%s: %s is unchanged\n"), progname, filename);
+	if (!quiet)
+		fprintf (stdout, _("\n%s: %s is unchanged\n"), progname,
+			 filename);
 	exit (ret);
 }
 
@@ -112,6 +139,9 @@ static void vipwexit (const char *msg, int syserr, int ret)
 #define DEFAULT_EDITOR "vi"
 #endif
 
+/*
+ *
+ */
 static void
 vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 {
@@ -207,36 +237,50 @@ int main (int argc, char **argv)
 {
 	int flag;
 	int editshadow = 0;
-	char *c;
-	int e = 1;
+	char *a;
 	int do_vipw;
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	progname = ((c = strrchr (*argv, '/')) ? c + 1 : *argv);
+	progname = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
 	do_vipw = (strcmp (progname, "vigr") != 0);
 
-	while ((flag = getopt (argc, argv, "ghps")) != EOF) {
-		switch (flag) {
-		case 'g':
-			do_vipw = 0;
-			break;
-		case 'h':
-			e = 0;
-		case 'p':
-			do_vipw = 1;
-			break;
-		case 's':
-			editshadow = 1;
-			break;
-		default:
-			printf (_("Usage:\n\
-`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n\
-`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n\
-"));
-			exit (e);
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int c;
+		static struct option long_options[] = {
+			{"group", no_argument, NULL, 'g'},
+			{"help", no_argument, NULL, 'h'},
+			{"passwd", no_argument, NULL, 'p'},
+			{"quiet", no_argument, NULL, 'q'},
+			{"shadow", no_argument, NULL, 's'},
+		};
+		while ((c =
+			getopt_long (argc, argv, "ghpqs",
+				     long_options, NULL)) != -1) {
+			switch (c) {
+			case 'g':
+				do_vipw = 0;
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 'p':
+				do_vipw = 1;
+				break;
+			case 'q':
+				quiet = 1;
+				break;
+			case 's':
+				editshadow = 1;
+				break;
+			default:
+				usage ();
+			}
 		}
 	}
 
@@ -257,5 +301,5 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	return 0;
+	exit (E_SUCCESS);
 }

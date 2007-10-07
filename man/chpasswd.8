@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "CHPASSWD" "8" "10/01/2005" "" ""
+.TH "CHPASSWD" "8" "11/05/2005" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -19,7 +19,7 @@ reads a list of user name and password pairs from standard input and uses this i
 .PP
 \fIuser_name\fR:\fIpassword\fR
 .PP
-By default the supplied password must be in clear\-text. Default encription algoritm is DES. Also the password age will be updated, if present.
+By default the supplied password must be in clear\-text. Default encryption algorithm is DES. Also the password age will be updated, if present.
 .PP
 This command is intended to be used in a large system environment where many accounts are created at a single time.
 .SH "OPTIONS"
@@ -38,7 +38,7 @@ Display help message and exit.
 Use MD5 encryption instead DES when the supplied passwords are not encrypted.
 .SH "CAVEATS"
 .PP
-Remember keep protected for reading by others fille passed to standard input
+Remember keep protected for reading by others file passed to standard input
 \fBchpasswd\fR
 command if it contains unencrypted passwords.
 .SH "SEE ALSO"
@@ -46,6 +46,3 @@ command if it contains unencrypted passwords.
 \fBpasswd\fR(1),
 \fBnewusers\fR(8),
 \fBuseradd\fR(8).
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)

@@ -43,9 +43,9 @@ ubin_PROGRAMS = faillog$(EXEEXT) lastlog$(EXEEXT) chage$(EXEEXT) \
 usbin_PROGRAMS = chpasswd$(EXEEXT) groupadd$(EXEEXT) groupdel$(EXEEXT) \
 	groupmod$(EXEEXT) grpck$(EXEEXT) grpconv$(EXEEXT) \
 	grpunconv$(EXEEXT) logoutd$(EXEEXT) newusers$(EXEEXT) \
-	pwck$(EXEEXT) pwconv$(EXEEXT) pwunconv$(EXEEXT) \
-	useradd$(EXEEXT) userdel$(EXEEXT) usermod$(EXEEXT) \
-	vipw$(EXEEXT)
+	nologin$(EXEEXT) pwck$(EXEEXT) pwconv$(EXEEXT) \
+	pwunconv$(EXEEXT) useradd$(EXEEXT) userdel$(EXEEXT) \
+	usermod$(EXEEXT) vipw$(EXEEXT)
 noinst_PROGRAMS = id$(EXEEXT) sulogin$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
@@ -77,8 +77,8 @@ chfn_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 chpasswd_SOURCES = chpasswd.c
 chpasswd_OBJECTS = chpasswd.$(OBJEXT)
 chpasswd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
-am_chsh_OBJECTS = chsh.$(OBJEXT) chsh_chkshell.$(OBJEXT)
-chsh_OBJECTS = $(am_chsh_OBJECTS)
+chsh_SOURCES = chsh.c
+chsh_OBJECTS = chsh.$(OBJEXT)
 chsh_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 expiry_SOURCES = expiry.c
 expiry_OBJECTS = expiry.$(OBJEXT)
@@ -137,7 +137,8 @@ lastlog_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 am_login_OBJECTS = login.$(OBJEXT) login_nopam.$(OBJEXT)
 login_OBJECTS = $(am_login_OBJECTS)
-login_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+login_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 logoutd_SOURCES = logoutd.c
 logoutd_OBJECTS = logoutd.$(OBJEXT)
 logoutd_LDADD = $(LDADD)
@@ -145,12 +146,14 @@ logoutd_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
 	$(top_builddir)/lib/libshadow.la
 newgrp_SOURCES = newgrp.c
 newgrp_OBJECTS = newgrp.$(OBJEXT)
-newgrp_LDADD = $(LDADD)
-newgrp_DEPENDENCIES = $(top_builddir)/libmisc/libmisc.a \
-	$(top_builddir)/lib/libshadow.la
+newgrp_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_2)
 newusers_SOURCES = newusers.c
 newusers_OBJECTS = newusers.$(OBJEXT)
 newusers_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+nologin_SOURCES = nologin.c
+nologin_OBJECTS = nologin.$(OBJEXT)
+nologin_DEPENDENCIES =
 passwd_SOURCES = passwd.c
 passwd_OBJECTS = passwd.$(OBJEXT)
 passwd_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) \
@@ -206,18 +209,18 @@ LTCOMPILE = $(LIBTOOL) --tag=CC --mode=compile $(CC) $(DEFS) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = chage.c chfn.c chpasswd.c $(chsh_SOURCES) expiry.c faillog.c \
+SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
 	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
 	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c \
-	pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c \
-	usermod.c vipw.c
-DIST_SOURCES = chage.c chfn.c chpasswd.c $(chsh_SOURCES) expiry.c \
-	faillog.c gpasswd.c groupadd.c groupdel.c groupmod.c groups.c \
-	grpck.c grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
-	logoutd.c newgrp.c newusers.c passwd.c pwck.c pwconv.c \
-	pwunconv.c $(su_SOURCES) sulogin.c useradd.c userdel.c \
-	usermod.c vipw.c
+	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
+	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
+	userdel.c usermod.c vipw.c
+DIST_SOURCES = chage.c chfn.c chpasswd.c chsh.c expiry.c faillog.c \
+	gpasswd.c groupadd.c groupdel.c groupmod.c groups.c grpck.c \
+	grpconv.c grpunconv.c id.c lastlog.c $(login_SOURCES) \
+	logoutd.c newgrp.c newusers.c nologin.c passwd.c pwck.c \
+	pwconv.c pwunconv.c $(su_SOURCES) sulogin.c useradd.c \
+	userdel.c usermod.c vipw.c
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -364,10 +367,6 @@ LDADD = $(top_builddir)/libmisc/libmisc.a \
 AM_CPPFLAGS = -DLOCALEDIR=\"$(datadir)/locale\"
 chage_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 chfn_LDADD = $(LDADD) $(LIBPAM)
-chsh_SOURCES = \
-	chsh.c \
-	chsh_chkshell.c
-
 chsh_LDADD = $(LDADD) $(LIBPAM)
 chpasswd_LDADD = $(LDADD) $(LIBPAM)
 gpasswd_LDADD = $(LDADD) $(LIBAUDIT)
@@ -378,8 +377,10 @@ login_SOURCES = \
 	login.c \
 	login_nopam.c
 
-login_LDADD = $(LDADD) $(LIBPAM)
+login_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+newgrp_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 newusers_LDADD = $(LDADD) $(LIBPAM)
+nologin_LDADD = 
 passwd_LDADD = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT)
 su_SOURCES = \
 	su.c \
@@ -573,6 +574,9 @@ newgrp$(EXEEXT): $(newgrp_OBJECTS) $(newgrp_DEPENDENCIES)
 newusers$(EXEEXT): $(newusers_OBJECTS) $(newusers_DEPENDENCIES) 
 	@rm -f newusers$(EXEEXT)
 	$(LINK) $(newusers_LDFLAGS) $(newusers_OBJECTS) $(newusers_LDADD) $(LIBS)
+nologin$(EXEEXT): $(nologin_OBJECTS) $(nologin_DEPENDENCIES) 
+	@rm -f nologin$(EXEEXT)
+	$(LINK) $(nologin_LDFLAGS) $(nologin_OBJECTS) $(nologin_LDADD) $(LIBS)
 passwd$(EXEEXT): $(passwd_OBJECTS) $(passwd_DEPENDENCIES) 
 	@rm -f passwd$(EXEEXT)
 	$(LINK) $(passwd_LDFLAGS) $(passwd_OBJECTS) $(passwd_LDADD) $(LIBS)
@@ -614,7 +618,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chfn.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chpasswd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chsh.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/chsh_chkshell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/expiry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/faillog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpasswd.Po@am__quote@
@@ -632,6 +635,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/logoutd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/newgrp.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/newusers.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/nologin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/passwd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pwck.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pwconv.Po@am__quote@

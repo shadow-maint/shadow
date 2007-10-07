@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.13\n"
+"Project-Id-Version: shadow 4.0.14\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
-"PO-Revision-Date: 2005-10-01 08:50+0400\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"PO-Revision-Date: 2005-12-14 19:47+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -168,7 +168,7 @@ msgstr "Не удалось изменить корневой каталог н�
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
-"Нет записи в utmp. Вы запускать \"login\" из самомого первого уровня \"sh\""
+"Нет записи в utmp. Вы запускать \"login\" из самого первого уровня \"sh\""
 
 msgid "Unable to determine your tty name."
 msgstr "Не удалось определить название вашего tty."
@@ -252,6 +252,10 @@ msgid "never\n"
 msgstr "никогда\n"
 
 #, c-format
+msgid "password must be changed"
+msgstr "пароль должен быть изменён"
+
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Срок действия пароля истекает\t\t\t\t\t: "
 
@@ -310,7 +314,7 @@ msgstr "%s: не удалось открыть теневой файл паро�
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: не удалось снизить уровень привелегий (%s)\n"
+msgstr "%s: не удалось снизить уровень привилегий (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -688,7 +692,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -699,7 +703,7 @@ msgstr ""
 "Использование: groupadd [параметры] группа\n"
 "\n"
 "Параметры:\n"
-"  -f, --force \t\tзакончить работу с успешным кодом возврата, если заданная\n"
+"  -f, --force\t\tзакончить работу с успешным кодом возврата, если заданная\n"
 "\t\t\t\tгруппа уже существует\n"
 "  -g, --gid GID\t\tдля новой группы использовать GID\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
@@ -1149,8 +1153,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1170,8 +1174,8 @@ msgstr ""
 "Использование: passwd [параметры] [имя пользователя]\n"
 "\n"
 "Параметры:\n"
-"  -a, --all \t\t\tпоказать состояние паролей всех учётных записей\n"
-"  -d, --delete \t\t\tудалить пароль заданной учётной записи\n"
+"  -a, --all\t\t\tпоказать состояние паролей всех учётных записей\n"
+"  -d, --delete\t\t\tудалить пароль заданной учётной записи\n"
 "  -e, --expire\t\t\tпросрочить пароль заданной учётной записи\n"
 "  -h, --help\t\t\tпоказать это сообщение и завершить работу программы\n"
 "  -k, --keep-tokens\t\tизменять пароль только с истёкшим сроком действия\n"
@@ -1232,10 +1236,6 @@ msgstr "Извините, но пароль пользователя %s пока
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: нехватка памяти\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: Не удалось выполнить %s"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1358,6 +1358,29 @@ msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+"Использование: su [параметры] [имя пользователя]\n"
+"\n"
+"Параметры:\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -, -l, --login\t\tзапускать оболочку как регистрационную\n"
+"  -m, -p,\n"
+"  --preserve-environment\tне сбрасывать переменные окружения и сохранить\n"
+"\t\t\t\tзапустившую оболочку\n"
+"  -s, --shell SHELL\t\tиспользовать значение переменной SHELL\n"
+"\t\t\t\tвместо значения из файла passwd\n"
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: должен выполняться из терминала\n"
 
@@ -1373,8 +1396,8 @@ msgstr "Неизвестный id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "У вас нет права переключать учётную запись %s\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Введите ваш собственный пароль.)"
+msgid "(Enter your own password)"
+msgstr "(Введите ваш собственный пароль)"
 
 #, c-format
 msgid ""
@@ -1459,7 +1482,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1477,7 +1500,7 @@ msgstr ""
 "\t\t\t\tновой учётной записи\n"
 "  -c, --comment COMMENT\t\tзаполнить поле GECOS новой учётной записи\n"
 "  -d, --home-dir HOME_DIR\tдомашний каталог новой учётной записи\n"
-"  -D, --defaults\t\tпоказать или сохранить изменнённые настройки useradd\n"
+"  -D, --defaults\t\tпоказать или сохранить изменённые настройки useradd\n"
 "\t\t\t\tпо умолчанию useradd\n"
 "  -e, --expiredate EXPIRE_DATE\tустановить дату окончания действия\n"
 "\t\t\t\tучётной записи до EXPIRE_DATE\n"
@@ -1488,7 +1511,7 @@ msgstr ""
 "  -G, --groups GROUPS\t\tзадать список групп для новой\n"
 "\t\t\t\tучётной записи\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
-"  -k, --skel SKEL_DIR \t\tуказать альтернативный каталог с шаблонами\n"
+"  -k, --skel SKEL_DIR\t\tуказать альтернативный каталог с шаблонами\n"
 "  -K, --key KEY=VALUE\t\tизменить значения по умолчанию из /etc/login.defs\n"
 "  -m, --create-home\t\tсоздать домашний каталог для новой\n"
 "\t\t\t\tучётной записи\n"
@@ -1500,22 +1523,6 @@ msgstr ""
 "\t\t\t\tучётной записи\n"
 "  -u, --uid UID\t\t\tпринудительно назначить UID для новой\n"
 "\t\t\t\tучётной записи\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: не удалось заблокировать файл групп\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: не удалось открыть файл групп\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: не удалось заблокировать теневой файл групп\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: не удалось открыть теневой файл групп\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1586,6 +1593,22 @@ msgid "%s: cannot open shadow password file\n"
 msgstr "%s: не удалось открыть теневой файл паролей\n"
 
 #, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: не удалось заблокировать файл групп\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: не удалось открыть файл групп\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: не удалось заблокировать теневой файл групп\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: не удалось открыть теневой файл групп\n"
+
+#, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: не удалось добавить запись в файл паролей\n"
 
@@ -1637,9 +1660,11 @@ msgstr "Использование: %s [-r] имя пользователя\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: не удалось обновить запись в файле групп\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: невозможно удалить первичную группу пользователя.\n"
+msgstr ""
+"%s: невозможно удалить группу %s, так как она является первичной для другого "
+"пользователя.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1687,23 +1712,54 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: не удалось удалить каталог %s\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
 msgstr ""
-"Использование: %s\t[-u uid [-o]] [-g основная группа] [-G группа,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr ""
-"\t\t[-d домашний каталог [-m]] [-s командная оболочка] [-c комментарий] [-l "
-"новое имя пользователя]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f деактивация] [-e срок действия учётной записи ] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p пароль] [-L|-U] имя пользователя\n"
+"Использование: usermod [параметры] пользователь\n"
+"\n"
+"Параметры:\n"
+"  -a, --append ГРУППА\t\tдобавить пользователя в дополнительную ГРУППУ\n"
+"  -c, --comment КОММЕНТАРИЙ\t\tзаполнить поле GECOS учётной записи\n"
+"  -d, --home ДОМ_КАТ\tдомашний каталог учётной записи\n"
+"  -e, --expiredate EXPIRE_DATE\tустановить дату окончания действия\n"
+"\t\t\t\tучётной записи в EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tустановить пароль при устаревании учётной записи\n"
+"\t\t\t\tв INACTIVE\n"
+"  -g, --gid ГРУППА\t\tпринудительно назначить первичную ГРУППУ\n"
+"  -G, --groups ГРУППЫ\t\tсписок дополнительных ГРУПП\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -l, --login ИМЯ\t\tновое значение имени учётной записи\n"
+"  -L, --lock\t\t\tзаблокировать учётную запись\n"
+"  -m, --move-home\t\tпереместить содержимое домашнего каталога\n"
+"\t\t\t\tв новое место (использовать только вместе с -d)\n"
+"  -o, --non-unique\t\tразрешить создание учётной записи с уже имеющимся\n"
+"\t\t\t\t(не уникальным) UID\n"
+"  -p, --password ПАРОЛЬ\tзадать новый шифрованный пароль для\n"
+"\t\t\t\tучётной записи\n"
+"  -s, --shell ОБОЛОЧКА\t\tзадать новую оболочку для\n"
+"\t\t\t\tучётной записи\n"
+"  -u, --uid UID\t\t\tновый UID для учётной записи\n"
+"  -U, --unlock\t\t\tразблокировать учётную запись\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1773,6 +1829,27 @@ msgstr "не удалось переименовать почтовый ящик
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+"Использование: vipw [параметры]\n"
+"\n"
+"Параметры:\n"
+"  -g, --group\t\t\tредактировать базу данных групп\n"
+"  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
+"  -p, --passwd\t\t\tредактировать базу данных паролей\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tредактировать базу данных теневых\n"
+"\t\t\t\tпаролей пользователей или групп\n"
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1788,16 +1865,3 @@ msgstr "Не удалось создать резервную копию"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: не удалось восстановить %s: %s (ваши изменения в %s)\n"
-
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Использование:\n"
-"`vipw' редактирует /etc/passwd        `vipw -s' редактирует /etc/shadow\n"
-"`vigr' редактирует /etc/group         `vigr -s' редактирует /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: проверка подлинности (chauthtok) PAM завершилась неудачно\n"

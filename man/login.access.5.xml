@@ -2,17 +2,16 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.access.5'>
-  <!-- $Id: login.access.5.xml,v 1.13 2005/10/01 15:01:45 kloczek Exp $ -->
-  <!--  this is comment -->
+  <!-- $Id: login.access.5.xml,v 1.17 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>LOGIN.ACCESS</refentrytitle>
+    <refentrytitle>login.access</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>login.access</refname>
     <refpurpose>Login access control table</refpurpose>
   </refnamediv>
-  <!-- body begins here -->
 
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
@@ -36,9 +35,7 @@
     </para>
 
     <para>
-      <emphasis remap='I'>permission</emphasis>:<emphasis remap='I'>users</emphasis>:<emphasis remap='I'>
-	origins
-      </emphasis>
+      <emphasis remap='I'>permission</emphasis>:<emphasis remap='I'>users</emphasis>:<emphasis remap='I'>origins</emphasis>
     </para>
 
     <para>
@@ -86,10 +83,5 @@
 	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Guido van Rooij</para>
   </refsect1>
 </refentry>

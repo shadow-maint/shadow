@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PASSWD" "1" "10/01/2005" "User Commands" "User Commands"
+.TH "PASSWD" "1" "12/03/2005" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,33 +11,15 @@
 passwd \- change user password
 .SH "SYNOPSIS"
 .HP 7
-\fBpasswd\fR [\-f \-s] [\fIname\fR]
-.HP 7
-\fBpasswd\fR [\-g] [\-r \-R] \fIgroup\fR
-.HP 7
 \fBpasswd\fR [\-x\ \fImax\fR] [\-n\ \fImin\fR] [\-w\ \fIwarn\fR] [\-i\ \fIinact\fR] \fIlogin\fR
 .HP 7
 \fBpasswd\fR [\-l \-u \-d \-S \-e] \fIlogin\fR
 .SH "DESCRIPTION"
 .PP
 \fBpasswd\fR
-changes passwords for user and group accounts. A normal user may only change the password for his/her own account, the super user may change the password for any account. The administrator of a group may change the password for the group.
+changes passwords for user accounts. A normal user may only change the password for his/her own account, the super user may change the password for any account.
 \fBpasswd\fR
 also changes account information, such as the full name of the user, user's login shell, or password expiry date and interval.
-.PP
-The
-\fB\-s\fR
-option makes
-\fBpasswd\fR
-call
-\fBchsh\fR
-to change the user's shell. The
-\fB\-f\fR
-option makes
-\fBpasswd\fR
-call
-\fBchfn\fR
-to change the user's gecos information. These two options are only meant for compatibility, since the other programs can be called directly.
 .SS "Password Changes"
 .PP
 The user is first prompted for his/her old password, if one is present. This password is then encrypted and compared against the stored password. The user has only one chance to enter the correct password. The super user is permitted to bypass this step so that forgotten passwords may be changed.
@@ -64,19 +46,6 @@ will reject any password which is not suitably complex.
 If the password is accepted,
 \fBpasswd\fR
 will prompt again and compare the second entry against the first. Both entries are required to match in order for the password to be changed.
-.SS "Group passwords"
-.PP
-When the
-\fB\-g\fR
-option is used, the password for the named group is changed. The user must either be the super user, or a group administrator for the named group. The current group password is not prompted for. The
-\fB\-r\fR
-option is used with the
-\fB\-g\fR
-option to remove the current password from the named group. This allows group access to all members. The
-\fB\-R\fR
-option is used with the
-\fB\-g\fR
-option to restrict the named group for all users.
 .SS "Hints for user passwords"
 .PP
 The security of a password depends upon the strength of the encryption algorithm and the size of the key space. The
@@ -99,9 +68,6 @@ which produces
 An4wtbt
 .PP
 You may be reasonably sure few crackers will have included this in their dictionaries. You should, however, select your own methods for constructing passwords and not rely exclusively on the methods given here.
-.SS "Notes about group passwords"
-.PP
-Group passwords are an inherent security problem since more than one person is permitted to know the password. However, groups are a useful tool for permitting co\-operation between different users.
 .SH "OPTIONS"
 .PP
 The options which apply to the
@@ -137,7 +103,7 @@ Lock the named account. This option disables an account by changing the password
 Set the minimum number of days between password changes. A value of zero for this field indicates that the user may change her password at any time.
 .TP
 \fB\-q\fR, \fB\-\-quiet\fR
-quiet mode
+Quiet mode.
 .TP
 \fB\-r\fR, \fB\-\-repository\fR \fIREPOSITORY\fR
 change password in
@@ -201,6 +167,3 @@ invalid argument to option
 \fBgroup\fR(5),
 \fBpasswd\fR(5),
 \fBshadow\fR(5).
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh <jockgrrl@ix.netcom.com>

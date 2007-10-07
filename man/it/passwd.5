@@ -1,4 +1,4 @@
-.\" $Id: passwd.5,v 1.2 2005/04/05 19:08:54 kloczek Exp $
+.\" $Id: passwd.5,v 1.3 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright (c) 1993 Michael Haardt (u31b3hs@pool.informatik.rwth\-aachen.de)
 .\" Fri Apr  2 11:32:09 MET DST 1993
 .\"
@@ -35,7 +35,7 @@
 passwd \- file delle password
 .SH DESCRIZIONE
 .B Passwd
-è un file di testo che contiene un elenco degli account sul sistema, e
+Ã¨ un file di testo che contiene un elenco degli account sul sistema, e
 per ciascuno di questi riporta alcune informazioni utili come user ID,
 group ID, home directory, ecc. Spesso contiene anche le password
 criptate di ciascun account. Il file delle password dovrebbe avere
@@ -52,11 +52,11 @@ molti usano una qualche versione di shadow password (chiavi ombra), in
 cui
 .I /etc/passwd
 contiene degli * al posto delle password criptate, che a loro volta
-sono nel file \fI/etc/shadow\fP, che solo il superuser può leggere.
+sono nel file \fI/etc/shadow\fP, che solo il superuser puÃ² leggere.
 .PP
 Sia che si utilizzino  o meno le shadow password, molti amministratori di
-sistema usano un asterisco nel campo della password per far sì che un
-utente non possa autenticarsi con una password (vedi le note più
+sistema usano un asterisco nel campo della password per far sÃ¬ che un
+utente non possa autenticarsi con una password (vedi le note piÃ¹
 sotto).
 .PP
 Se si crea una nuova login, si metta un asterisco nel campo della
@@ -64,13 +64,13 @@ password, e poi si usi il programma
 .BR passwd (1)
 per riempirlo.
 .PP
-C'è una voce per riga, ed ogni riga ha il formato:
+C'Ã¨ una voce per riga, ed ogni riga ha il formato:
 .sp
 .RS
 account:passwd:UID:GID:GECOS:directory:shell
 .RE
 .sp
-Il significato dei campi è il seguente:
+Il significato dei campi Ã¨ il seguente:
 .sp
 .RS
 .TP 1.0in
@@ -88,42 +88,42 @@ l'identificativo numerico del gruppo principale per l'utente (GID =
 Group IDentifier).
 .TP
 .I GECOS
-Questo campo è opzionale e viene usato solo per fornire
+Questo campo Ã¨ opzionale e viene usato solo per fornire
 informazioni. Di solito contiene il nome per esteso dell'utente. GECOS
 sta per General Electric Comprehensive Operating System, (sistema
 operativo comprensivo della General Electric), ribattezzato GCOS
 quando la divisione grandi sistemi della GE fu venduta alla
-Honeywell. Dennis Ritchie riferì: «A volte dovevamo spedire una stampa
+Honeywell. Dennis Ritchie riferÃ¬: Â«A volte dovevamo spedire una stampa
 o un gruppo di lavori alla macchina GCOS. Il campo del gcos nel file
 delle password era un posto in cui sbattere le informazioni per la
-$IDENTcard. Per niente elegante.»
+$IDENTcard. Per niente elegante.Â»
 .TP
 .I directory
 la $HOME directory dell'utente.
 .TP
 .I shell
-il programma lanciato al login (se è vuoto, viene usato 
+il programma lanciato al login (se Ã¨ vuoto, viene usato 
 .BR /bin/sh ).
-Se punta ad un programma che non esiste, l'utente non potrà avere
+Se punta ad un programma che non esiste, l'utente non potrÃ  avere
 accesso tramite
 .BR login (1).
 .RE
 .SH NOTE
 Se si vuole creare un gruppo di utenti, il loro GID deve
 essere uguale e ci deve essere una voce nel file \fI/etc/group\fP, o il 
-gruppo non esisterà.
+gruppo non esisterÃ .
 .PP
-Se la password criptata è un asterisco, l'utente non potrà fare login
+Se la password criptata Ã¨ un asterisco, l'utente non potrÃ  fare login
 tramite
 .BR login (1).
-ma potrà ugualmente accedere al suo account usando
+ma potrÃ  ugualmente accedere al suo account usando
 .BR rlogin (1),
 far girare processi esistenti o iniziarne nuovi con
 .BR rsh (1),
 .BR cron (1),
 .BR at (1)
 o filtri per la posta, ecc. Bloccare un account semplicemente
-modificando il campo della shell ha lo stesso effetto e in più
+modificando il campo della shell ha lo stesso effetto e in piÃ¹
 permette l'uso di
 .BR su (1).
 .SH FILE

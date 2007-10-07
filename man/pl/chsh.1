@@ -1,4 +1,4 @@
-.\" $Id: chsh.1,v 1.10 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: chsh.1,v 1.11 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,35 +27,35 @@
 .\" SUCH DAMAGE.
 .TH CHSH 1
 .SH NAZWA
-chsh \- zmiana pow³oki zg³oszeniowej
-.SH SK£ADNIA
+chsh \- zmiana powÅ‚oki zgÅ‚oszeniowej
+.SH SKÅADNIA
 .TP 5
 \fBchsh\fR
-[\fB\-s\fR \fIpow³oka\fR] [\fIu¿ytkownik\fR]
+[\fB\-s\fR \fIpowÅ‚oka\fR] [\fIuÅ¼ytkownik\fR]
 .SH OPIS
-\fBchsh\fR zmienia pow³okê zg³oszeniow± u¿ytkownika.
-Okre¶la nazwê pocz±tkowego polecenia zg³oszeniowego u¿ytkownika.
-Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie pow³okê zg³oszeniow± w³asnego konta,
-superu¿ytkownik mo¿e zmieniæ pow³okê zg³oszeniow± dla dowolnego konta.
+\fBchsh\fR zmienia powÅ‚okÄ™ zgÅ‚oszeniowÄ… uÅ¼ytkownika.
+OkreÅ›la nazwÄ™ poczÄ…tkowego polecenia zgÅ‚oszeniowego uÅ¼ytkownika.
+ZwykÅ‚y uÅ¼ytkownik moÅ¼e zmieniÄ‡ wyÅ‚Ä…cznie powÅ‚okÄ™ zgÅ‚oszeniowÄ… wÅ‚asnego konta,
+superuÅ¼ytkownik moÅ¼e zmieniÄ‡ powÅ‚okÄ™ zgÅ‚oszeniowÄ… dla dowolnego konta.
 .PP
-Jedynym ograniczeniem na³o¿onym na pow³okê zg³oszeniow± jest to, ¿e jej nazwa
-musi byæ wymieniona w \fI/etc/shells\fR, chyba ¿e polecenie \fBchsh\fR
-wywo³ywane jest przez superu¿ytkownika \- wówczas mo¿e byæ podana dowolna
-nazwa. U¿ytkownicy kont z ograniczon± pow³ok± logowania nie mog± jej zmieniaæ.
-Odradza siê z tego powodu umieszczanie \fB/bin/rsh\fR w pliku
-\fI/etc/shells\fR, gdy¿ przypadkowa zmiana na pow³okê ograniczon± uniemo¿liwi
-u¿ytkownikowi jak±kolwiek zmianê pow³oki logowania, nawet z powrotem na
-dotychczasow±.
+Jedynym ograniczeniem naÅ‚oÅ¼onym na powÅ‚okÄ™ zgÅ‚oszeniowÄ… jest to, Å¼e jej nazwa
+musi byÄ‡ wymieniona w \fI/etc/shells\fR, chyba Å¼e polecenie \fBchsh\fR
+wywoÅ‚ywane jest przez superuÅ¼ytkownika \- wÃ³wczas moÅ¼e byÄ‡ podana dowolna
+nazwa. UÅ¼ytkownicy kont z ograniczonÄ… powÅ‚okÄ… logowania nie mogÄ… jej zmieniaÄ‡.
+Odradza siÄ™ z tego powodu umieszczanie \fB/bin/rsh\fR w pliku
+\fI/etc/shells\fR, gdyÅ¼ przypadkowa zmiana na powÅ‚okÄ™ ograniczonÄ… uniemoÅ¼liwi
+uÅ¼ytkownikowi jakÄ…kolwiek zmianÄ™ powÅ‚oki logowania, nawet z powrotem na
+dotychczasowÄ….
 .SH OPCJE
-Je¿eli nie podano opcji \fB\-s\fR, to \fBchsh\fR dzia³a w trybie interaktywnym,
-proponuj±c u¿ytkownikowi bie¿±c± pow³okê logowania. Wprowadzenie nowej
-warto¶ci powoduje zmianê pow³oki, a podanie warto¶ci pustej pozostawia bie¿±c±
-pow³okê. Bie¿±ca pow³oka wy¶wietlana jest w nawiasach \fB[ ]\fR.
+JeÅ¼eli nie podano opcji \fB\-s\fR, to \fBchsh\fR dziaÅ‚a w trybie interaktywnym,
+proponujÄ…c uÅ¼ytkownikowi bieÅ¼Ä…cÄ… powÅ‚okÄ™ logowania. Wprowadzenie nowej
+wartoÅ›ci powoduje zmianÄ™ powÅ‚oki, a podanie wartoÅ›ci pustej pozostawia bieÅ¼Ä…cÄ…
+powÅ‚okÄ™. BieÅ¼Ä…ca powÅ‚oka wyÅ›wietlana jest w nawiasach \fB[ ]\fR.
 .SH PLIKI
-\fI/etc/passwd\fR \- informacja o kontach u¿ytkowników
+\fI/etc/passwd\fR \- informacja o kontach uÅ¼ytkownikÃ³w
 .br
-\fI/etc/shells\fR \- lista dozwolonych pow³ok zg³oszeniowych
-.SH ZOBACZ TAK¯E
+\fI/etc/shells\fR \- lista dozwolonych powÅ‚ok zgÅ‚oszeniowych
+.SH ZOBACZ TAKÅ»E
 .BR chfn (1),
 .BR passwd (5)
 .SH AUTOR

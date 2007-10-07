@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c,v 1.36 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id: getdef.c,v 1.37 2005/12/02 22:16:11 kloczek Exp $"
 
 #include "prototypes.h"
 #include "defines.h"
@@ -67,6 +67,8 @@ static struct itemdef def_table[] = {
 	{"LOG_OK_LOGINS", NULL},
 	{"LOG_UNKFAIL_ENAB", NULL},
 	{"MAIL_DIR", NULL},
+	{"MAIL_FILE", NULL},
+	{"MD5_CRYPT_ENAB", NULL},
 	{"PASS_MAX_DAYS", NULL},
 	{"PASS_MIN_DAYS", NULL},
 	{"PASS_WARN_AGE", NULL},
@@ -93,8 +95,6 @@ static struct itemdef def_table[] = {
 	{"LASTLOG_ENAB", NULL},
 	{"LOGIN_STRING", NULL},
 	{"MAIL_CHECK_ENAB", NULL},
-	{"MAIL_FILE", NULL},
-	{"MD5_CRYPT_ENAB", NULL},
 	{"MOTD_FILE", NULL},
 	{"NOLOGINS_FILE", NULL},
 	{"OBSCURE_CHECKS_ENAB", NULL},

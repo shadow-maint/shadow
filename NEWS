@@ -1,4 +1,67 @@
-$Id: NEWS,v 1.281 2005/10/10 18:24:59 kloczek Exp $
+$Id: NEWS,v 1.331 2006/01/03 16:45:47 kloczek Exp $
+
+shadow-4.0.13 -> shadow-4.0.14						03-01-2006
+
+*** general:
+- fixes in handling login.defs: $MAIL_FILE is used in userdel and usermod,
+  $MD5_CRYPT_ENAB is used by crypt_make_salt, which is used by chpasswd,
+  gpasswd and newusers.
+  Both variables moved to PAM not dependent (447_missing_login.defs_variables
+  Debian patch),
+- chage: fix chage display when the last change field is set to 0.
+  This is consistent with PAM (merge 427_chage_expiry_0 Debian patch),
+- su: if an password is expired, su should propose to change this password
+  (fixed http://bugs.debian.org/321384),
+- login: added auditing support (based on Fedora patch for login from util-linux),
+- useradd: merge PUG fixes from RedHat patch,
+- nologin: new program,
+- vipw: added a "quiet" mode (http://bugs.debian.org/190252),
+- newgrp: added auditing support (by Steve Grubb <sgrubb@redhat.com>),
+- switch over to a new logging function (by Steve Grubb <sgrubb@redhat.com>),
+- userdel: fix incorrect audit record in userdel
+  (https://bugzilla.redhat.com/bugzilla/174392),
+- userdel: remove the user's group unless it is not really a user-private group
+  for better PUG support (based on FC patch),
+- userdel: make the -f option force the removal of the user's group (even if it
+  is the primary group of another user)
+  (merge 453_userdel_-f_removes_group Debian patch),
+- usermod: rewrited for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>),
+- grpck: fixed segmentation fault on using -s when /etc/gshadow is empty (fix by
+  Tomasz Lemiech <szpajder@staszic.waw.pl>),
+- passwd: remove handle -f, -g and -s options.
+- added handle -s/--shell, -m/-p/preserve-environment options like GNU su
+  (based on patches from Debian submited by
+  Nicolas François <nicolas.francois@centraliens.net>)
+- su: export $USER and $SHELL as well as $HOME (http://bugs.debian.org/11003 and
+  http://bugs.debian.org/11189),
+- su, vipw: rewrited for use getopt_long(),
+- su: log successful/failed through syslog (http://bugs.debian.org/190215),
+- updated translations: ca, cs, da, eu, fi, fr, it, pl, pt, ru, sv, tl, vi.
+*** documentation:
+- added es, ko vigr(8) and vipw(8), hu lastlog(8), ko vipw(8), zh_CN su(1),
+  zh_TW chpasswd(8) and su(1),
+- added tr man pages: chage(1), chfn(1), groupadd(8), groupdel(8), groupmod(8),
+  login(1), passwd(1), passwd(5), shadow(5), su(1) useradd(8), userdel(8),
+  usermod(8),
+- passwd5): added es, hu, pt_BR, zh_CN zh_TW translations,
+- added full set (up to date) fr man pages
+  (by Nicolas François <nicolas.francois@centraliens.net>),
+- pwck(1): document -q option,
+- WARNING: all translated man pages are now in UFT-8,
+- added full set of ru man pages (by Yuri Kozlov <kozlov.y@gmail.com>),
+- login(1): better explain the respective roles of login, init and getty with regards
+  to the utmp file (merge 440_manpages-login.1 Debian patch),
+- login(1): document how to initiate a trusted path on linux
+  (http://bugs.debian.org/305600),
+- userdel(8): document the -f option; document the group removal behavior (merge
+  455_userdel.8.xml Debian patch),
+- groupadd(8), useradd(8): document that useradd/groupadd refuse adding entries already in an
+  external database (http://bugs.debian.org/282184),
+- updated it groupdel(8), passwd(1), pwconv(8), useradd(8), userdel(8), usermod(8) man pages
+  (merge 205_it-manpages Debian patch),
+- added fi chfn(1), chsh(1), passwd(1), su(1),
+- newusers(8): added it translation,
+- newgrp(1): added de, es, zh_CN, zh_TW translations.
 
 shadow-4.0.12 -> shadow-4.0.13						10-10-2005
 

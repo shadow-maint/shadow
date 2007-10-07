@@ -29,8 +29,9 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.45 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: su.c,v 1.61 2006/01/02 22:37:47 kloczek Exp $"
 
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
@@ -38,6 +39,7 @@
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
+#include "exitcodes.h"
 #include "pwauth.h"
 #include "getdef.h"
 #ifdef USE_PAM
@@ -53,12 +55,10 @@
 static char name[BUFSIZ];
 static char oldname[BUFSIZ];
 
-#ifdef USE_PAM
-static const struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
+/* If nonzero, change some environment vars to indicate the user su'd to. */
+static int change_environment;
 
+#ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 static int caught = 0;
 #endif
@@ -114,6 +114,21 @@ static int iswheel (const char *username)
 }
 #endif				/* !USE_PAM */
 
+/* borrowed from GNU sh-utils' "su.c" */
+static int restricted_shell (const char *shellstr)
+{
+	char *line;
+
+	setusershell ();
+	while ((line = getusershell ()) != NULL) {
+		if (*line != '#' && strcmp (line, shellstr) == 0) {
+			endusershell ();
+			return 0;
+		}
+	}
+	endusershell ();
+	return 1;
+}
 
 static void su_failure (const char *tty)
 {
@@ -163,7 +178,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 		}
 	} else if (child == -1) {
 		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
-		SYSLOG ((LOG_WARN, "Cannot execute %s", pwent.pw_shell));
+		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
 		exit (1);
 	}
@@ -234,13 +249,27 @@ static void run_shell (const char *shellstr, char *args[], int doshell)
 #endif
 
 /*
+ * usage - print command line syntax and exit
+  */
+static void usage (void)
+{
+	fprintf (stderr, _("Usage: su [options] [login]\n"
+			   "\n"
+			   "Options:\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -, -l, --login		make the shell a login shell\n"
+			   "  -m, -p,\n"
+			   "  --preserve-environment	do not reset environment variables, and keep\n"
+			   "				the same shell\n"
+			   "  -s, --shell SHELL		use SHELL instead of the default in passwd\n"));
+	exit (E_USAGE);
+}
+
+/*
  * su - switch user id
  *
  *	su changes the user's ids to the values for the specified user.  if
  *	no new user name is specified, "root" is used by default.
- *
- *	The only valid option is a "-" character, which is interpreted as
- *	requiring a new login session to be simulated.
  *
  *	Any additional arguments are passed to the user's shell. In
  *	particular, the argument "-c" will cause the next argument to be
@@ -257,6 +286,7 @@ int main (int argc, char **argv)
 	uid_t my_uid;
 	struct passwd *pw = 0;
 	char **envp = environ;
+	char *shellstr = 0;
 
 #ifdef USE_PAM
 	int ret;
@@ -277,6 +307,8 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	change_environment = 1;
+
 	/*
 	 * Get the program name. The program name is used as a prefix to
 	 * most error messages.
@@ -284,6 +316,68 @@ int main (int argc, char **argv)
 	Prog = Basename (argv[0]);
 
 	OPENLOG ("su");
+
+	/*
+	 * Process the command line arguments. 
+	 */
+
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"help", no_argument, NULL, 'h'},
+			{"login", no_argument, NULL, 'l'},
+			{"preserve-environment", no_argument, NULL, 'p'},
+			{"shell", required_argument, NULL, 's'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "-hlmps:", long_options,
+				     &option_index)) != -1) {
+			switch (c) {
+			case 1:
+				/* this is not an su option */
+				/* The next arguments are either '-', the
+				 * target name, or arguments to be passed
+				 * to the shell.
+				 */
+				/* rewind the (not yet handled) option */
+				optind--;
+				goto end_su_options;
+				break;	/* NOT REACHED */
+			case 'h':
+				usage ();
+				break;
+			case 'l':
+				fakelogin = 1;
+				break;
+			case 'm':
+			case 'p':
+				/* This will only have an effect if the target
+				 * user do not have a restricted shell, or if
+				 * su is called by root.
+				 */
+				change_environment = 0;
+				break;
+			case 's':
+				shellstr = optarg;
+				break;
+			default:
+				usage ();	/* NOT REACHED */
+			}
+		}
+	      end_su_options:
+		if (optind < argc && !strcmp (argv[optind], "-")) {
+			fakelogin = 1;
+			optind++;
+			if (optind < argc && !strcmp (argv[optind], "--"))
+				optind++;
+		}
+	}
 
 	initenv ();
 
@@ -315,67 +409,20 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * Process the command line arguments. 
-	 */
-	argc--;
-	argv++;			/* shift out command name */
-
-	if (argc > 0 && strcmp (argv[0], "-") == 0) {
-		fakelogin = 1;
-		argc--;
-		argv++;		/* shift ... */
-	}
-
-	/*
-	 * If a new login is being set up, the old environment will be
-	 * ignored and a new one created later on.
-	 */
-	if (fakelogin) {
-		/*
-		 * The terminal type will be left alone if it is present in
-		 * the environment already.
-		 */
-		if ((cp = getenv ("TERM")))
-			addenv ("TERM", cp);
-#ifndef USE_PAM
-		if ((cp = getdef_str ("ENV_TZ")))
-			addenv (*cp == '/' ? tz (cp) : cp, NULL);
-
-		/*
-		 * The clock frequency will be reset to the login value if required
-		 */
-		if ((cp = getdef_str ("ENV_HZ")))
-			addenv (cp, NULL);	/* set the default $HZ, if one */
-
-		/*
-		 * Also leave DISPLAY and XAUTHORITY if present, else
-		 * pam_xauth will not work.
-		 */
-		if ((cp = getenv ("DISPLAY")))
-			addenv ("DISPLAY", cp);
-		if ((cp = getenv ("XAUTHORITY")))
-			addenv ("XAUTHORITY", cp);
-#endif				/* !USE_PAM */
-	} else {
-		while (*envp)
-			addenv (*envp++, NULL);
-	}
-
-	/*
 	 * The next argument must be either a user ID, or some flag to a
 	 * subshell. Pretty sticky since you can't have an argument which
 	 * doesn't start with a "-" unless you specify the new user name.
 	 * Any remaining arguments will be passed to the user's login shell.
 	 */
-	if (argc > 0 && argv[0][0] != '-') {
-		STRFCPY (name, argv[0]);	/* use this login id */
-		argc--;
-		argv++;		/* shift ... */
+	if (optind < argc && argv[optind][0] != '-') {
+		STRFCPY (name, argv[optind++]);	/* use this login id */
+		if (optind < argc && !strcmp (argv[optind], "--"))
+			optind++;
 	}
 	if (!name[0])		/* use default user ID */
 		(void) strcpy (name, "root");
 
-	doshell = argc == 0;	/* any arguments remaining? */
+	doshell = argc == optind;	/* any arguments remaining? */
 
 	/*
 	 * Get the user's real name. The current UID is used to determine
@@ -442,6 +489,48 @@ int main (int argc, char **argv)
 #endif				/* !USE_PAM */
 	pwent = *pw;
 
+	/* If su is not called by root, and the target user has a restricted
+	 * shell, the environment must be changed.
+	 */
+	change_environment |= (restricted_shell (pwent.pw_shell) && !amroot);
+
+	/*
+	 * If a new login is being set up, the old environment will be
+	 * ignored and a new one created later on.
+	 * (note: in the case of a subsystem, the shell will be restricted,
+	 *        and this won't be executed on the first pass)
+	 */
+	if (fakelogin && change_environment) {
+		/*
+		 * The terminal type will be left alone if it is present in
+		 * the environment already.
+		 */
+		if ((cp = getenv ("TERM")))
+			addenv ("TERM", cp);
+#ifndef USE_PAM
+		if ((cp = getdef_str ("ENV_TZ")))
+			addenv (*cp == '/' ? tz (cp) : cp, NULL);
+
+		/*
+		 * The clock frequency will be reset to the login value if required
+		 */
+		if ((cp = getdef_str ("ENV_HZ")))
+			addenv (cp, NULL);	/* set the default $HZ, if one */
+
+		/*
+		 * Also leave DISPLAY and XAUTHORITY if present, else
+		 * pam_xauth will not work.
+		 */
+		if ((cp = getenv ("DISPLAY")))
+			addenv ("DISPLAY", cp);
+		if ((cp = getenv ("XAUTHORITY")))
+			addenv ("XAUTHORITY", cp);
+#endif				/* !USE_PAM */
+	} else {
+		while (*envp)
+			addenv (*envp++, NULL);
+	}
+
 #ifndef USE_PAM
 	/*
 	 * BSD systems only allow "wheel" to SU to root. USG systems don't,
@@ -476,7 +565,7 @@ int main (int argc, char **argv)
 			pwent.pw_passwd = "";	/* XXX warning: const */
 			break;
 		case 2:	/* require own password */
-			puts (_("(Enter your own password.)"));
+			puts (_("(Enter your own password)"));
 			pwent.pw_passwd = oldpass;
 			break;
 		default:	/* access denied (-1) or unexpected value */
@@ -488,11 +577,28 @@ int main (int argc, char **argv)
 	}
 #endif				/* !USE_PAM */
 
+	/* If the user do not want to change the environment,
+	 * use the current SHELL.
+	 * (unless another shell is required by the command line)
+	 */
+	if (shellstr == NULL && change_environment == 0)
+		shellstr = getenv ("SHELL");
+	/* For users with non null UID, if this user has a restricted
+	 * shell, the shell must be the one specified in /etc/passwd
+	 */
+	if (shellstr != NULL && !amroot && restricted_shell (pwent.pw_shell))
+		shellstr = NULL;
+	/* If the shell is not set at this time, use the shell specified
+	 * in /etc/passwd.
+	 */
+	if (shellstr == NULL)
+		shellstr = (char *) strdup (pwent.pw_shell);
+
 	/*
 	 * Set the default shell.
 	 */
-	if (pwent.pw_shell[0] == '\0')
-		pwent.pw_shell = "/bin/sh";	/* XXX warning: const */
+	if (shellstr == NULL || shellstr[0] == '\0')
+		shellstr = "/bin/sh";
 
 	signal (SIGINT, SIG_IGN);
 	signal (SIGQUIT, SIG_IGN);
@@ -511,6 +617,16 @@ int main (int argc, char **argv)
 		if (amroot) {
 			fprintf (stderr, _("%s: %s\n(Ignored)\n"), Prog,
 				 pam_strerror (pamh, ret));
+		} else if (ret == PAM_NEW_AUTHTOK_REQD) {
+			ret = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+			if (ret != PAM_SUCCESS) {
+				SYSLOG ((LOG_ERR, "pam_chauthtok: %s",
+					 pam_strerror (pamh, ret)));
+				fprintf (stderr, _("%s: %s\n"), Prog,
+					 pam_strerror (pamh, ret));
+				pam_end (pamh, ret);
+				su_failure (tty);
+			}
 		} else {
 			SYSLOG ((LOG_ERR, "pam_acct_mgmt: %s",
 				 pam_strerror (pamh, ret)));
@@ -548,10 +664,12 @@ int main (int argc, char **argv)
 		if (!spwd)
 			spwd = pwd_to_spwd (&pwent);
 
-		if (isexpired (&pwent, spwd)) {
-			SYSLOG ((pwent.pw_uid ? LOG_WARN : LOG_CRIT,
-				 "Expired account %s", name));
-			su_failure (tty);
+		if (expire (&pwent, spwd)) {
+			struct passwd *pwd = getpwnam (name);
+
+			spwd = getspnam (name);
+			if (pwd)
+				pwent = *pwd;
 		}
 	}
 
@@ -591,6 +709,11 @@ int main (int argc, char **argv)
 	if (getenv ("IFS"))	/* don't export user IFS ... */
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 
+	/*
+	 * Even if --shell is specified, the subsystem login test is based on
+	 * the shell specified in /etc/passwd (not the one specified with
+	 * --shell, which will be the one executed in the chroot later).
+	 */
 	if (pwent.pw_shell[0] == '*') {	/* subsystem root required */
 		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
@@ -636,18 +759,20 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	/* we need to setup the environment *after* pam_open_session(),
-	 * else the UID is changed before stuff like pam_xauth could
-	 * run, and we cannot access /etc/shadow and co
-	 */
-	environ = newenvp;	/* make new environment active */
+	if (change_environment) {
+		/* we need to setup the environment *after* pam_open_session(),
+		 * else the UID is changed before stuff like pam_xauth could
+		 * run, and we cannot access /etc/shadow and co
+		 */
+		environ = newenvp;	/* make new environment active */
 
-	/* update environment with all pam set variables */
-	envcp = pam_getenvlist (pamh);
-	if (envcp) {
-		while (*envcp) {
-			addenv (*envcp, NULL);
-			envcp++;
+		/* update environment with all pam set variables */
+		envcp = pam_getenvlist (pamh);
+		if (envcp) {
+			while (*envcp) {
+				addenv (*envcp, NULL);
+				envcp++;
+			}
 		}
 	}
 
@@ -665,12 +790,17 @@ int main (int argc, char **argv)
 		exit (1);
 #endif				/* !USE_PAM */
 
-	if (fakelogin)
-		setup_env (&pwent);
-#if 1				/* Suggested by Joey Hess. XXX - is this right?  */
-	else
-		addenv ("HOME", pwent.pw_dir);
-#endif
+	if (change_environment) {
+		if (fakelogin) {
+			pwent.pw_shell = shellstr;
+			setup_env (&pwent);
+		} else {
+			addenv ("HOME", pwent.pw_dir);
+			addenv ("USER", pwent.pw_name);
+			addenv ("LOGNAME", pwent.pw_name);
+			addenv ("SHELL", shellstr);
+		}
+	}
 
 	/*
 	 * This is a workaround for Linux libc bug/feature (?) - the
@@ -690,35 +820,37 @@ int main (int argc, char **argv)
 
 		cp = getdef_str ("SU_NAME");
 		if (!cp)
-			cp = Basename (pwent.pw_shell);
+			cp = Basename (shellstr);
 
 		arg0 = xmalloc (strlen (cp) + 2);
 		arg0[0] = '-';
 		strcpy (arg0 + 1, cp);
 		cp = arg0;
 	} else
-		cp = Basename (pwent.pw_shell);
+		cp = Basename (shellstr);
 
 	if (!doshell) {
+		/* Position argv to the remaining arguments */
+		argv += optind;
 		/*
-		 * Use new user's shell from /etc/passwd and create an argv
+		 * Use the shell and create an argv
 		 * with the rest of the command line included.
 		 */
-		argv[-1] = pwent.pw_shell;
+		argv[-1] = shellstr;
 #ifndef USE_PAM
-		(void) execv (pwent.pw_shell, &argv[-1]);
+		(void) execv (shellstr, &argv[-1]);
 #else
-		run_shell (pwent.pw_shell, &argv[-1], 0);
+		run_shell (shellstr, &argv[-1], 0);
 #endif
 		(void) fprintf (stderr, _("No shell\n"));
-		SYSLOG ((LOG_WARN, "Cannot execute %s", pwent.pw_shell));
+		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
 		exit (1);
 	}
 #ifndef USE_PAM
-	shell (pwent.pw_shell, cp);
+	shell (shellstr, cp);
 #else
-	run_shell (pwent.pw_shell, &cp, 1);
+	run_shell (shellstr, &cp, 1);
 #endif
 	/* NOT REACHED */
 	exit (1);

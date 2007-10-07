@@ -1,57 +1,48 @@
-.\"
-.\"  chsh.1 \-\- change your login shell
-.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
-.\"
-.\"  this program is free software.  you can redistribute it and
-.\"  modify it under the terms of the gnu general public license.
-.\"  there is no warranty.
-.\"
-.\"  $Author: kloczek $
-.\"  $Revision: 1.4 $
-.\"  $Date: 2005/04/05 19:08:53 $
-.\"
-.\" Traduction 22/04/1997 par Christophe Blaess (ccb@club\-internet.fr)
-.\"
-.TH CHSH 1 "22 Avril 1997" Linux "Manuel de l'utilisateur Linux"
-.SH NOM
-chsh \- Changer le shell appel� � la connexion.
-.SH SYNOPSIS
-.B chsh
-[\ \-s\ shell\ ] [\ \-l\ ] [\ \-u\ ] [\ \-v\ ] [\ utilisateur\ ]
-.SH DESCRIPTION
-.B chsh
-est invoqu� pour changer le shell qui est appel� lors de la connexion de
-l'utilisateur.
-Si aucun shell n'est mentionn� sur la ligne de commande,
-.B chsh
-va en r�clamer un.
-.SH SHELLS VALIDES
-.B chsh
-acceptera le nom complet (avec chemin d'acc�s) de tout fichier ex�cutable
-sur le syst�me. N�anmoins, il affichera un message d'avertissement si le
-shell n'est pas mentionn� dans le fichier
-.IR /etc/shells .
-.SH OPTIONS
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "CHSH" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+chsh \- Changer l'interpréteur de commandes initial
+.SH "SYNOPSIS"
+.HP 5
+\fBchsh\fR [\-s\ \fIinterpréteur\fR] [\fIutilisateur\fR]
+.SH "DESCRIPTION"
+.PP
+\fBChsh\fR
+modifie l'interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur qui sera invoqué lors des connexions de l'utilisateur. Un utilisateur normal ne peut changer que l'interpréteur associé à son compte. Le superutilisateur peut changer l'interpréteur de commandes initial pour n'importe quel compte.
+.PP
+La seule restriction placée sur l'interpréteur est que cette commande doit être listée dans
+\fI/etc/shells\fR, à moins que
+\fBchsh\fR
+ne soit invoqué par le superutilisateur, qui peut ajouter n'importe quelle valeur. Un compte avec un interpréteur de commandes restreint ne peut pas changer son interpréteur. Pour cette raison, il est déconseillé de placer
+\fI/bin/rsh\fR
+dans
+\fI/etc/shells\fR, puisqu'un changement accidentel vers un interpréteur restreint empêchera alors l'utilisateur de retourner ensuite à l'interpréteur précédent.
+.SH "OPTIONS"
+.PP
+Quand l'option
+\fB\-s\fR
+n'est pas sélectionnée,
+\fBchsh\fR
+opère de façon interactive, demandant à l'utilisateur quel doit être le nouvel interpréteur de commandes initial (\(Fo\ login shell\ \(Fc). L'utilisateur pourra entrer une nouvelle valeur pour modifier l'interpréteur, ou laisser la ligne blanche pour conserver l'interpréteur actuel. L'interpréteur actuel est indiqué entre crochets (\fI[\ ]\fR).
+.SH "FICHIERS"
 .TP
-.I "\-l, \-\-list\-shells"
-Afficher la liste des shells mentionn�s dans
-.I /etc/shells
-puis quitter.
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
 .TP
-.I "\-s, \-\-shell"
-Indiquer le shell de connexion d�sir�.
+\fI/etc/shells\fR
+liste des interpréteurs de commandes initiaux valables
 .TP
-.I "\-u, \-\-help"
-Afficher un message d'aide puis quitter.
-.TP
-.I "\-v, \-\-version"
-Afficher un num�ro de version puis quitter.
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
 .SH "VOIR AUSSI"
-.BR login (1),
-.BR passwd (5),
-.BR shells (5)
-.SH AUTEURS
-Salvatore Valente <svalente@mit.edu>
-
-.SH TRADUCTION
-Christophe Blaess, 1997.
+.PP
+\fBchfn\fR(1),
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(5).

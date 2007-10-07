@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.13\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2005-09-13 15:05+0300\n"
 "Last-Translator: Sorin Batariuc <sorin@bonbon.net>\n"
 "Language-Team: Romanian <debian-l10-romanian@lists.debian.org>\n"
@@ -249,6 +249,10 @@ msgstr "Ultima schimbare de parolă\t\t\t\t\t: "
 #, c-format
 msgid "never\n"
 msgstr "Niciodată\n"
+
+#, fuzzy, c-format
+msgid "password must be changed"
+msgstr "Parolă schimbată.\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -686,7 +690,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -697,7 +701,7 @@ msgstr ""
 "Utilizare: groupadd [opţiuni] grup\n"
 "\n"
 "Opţiuni:\n"
-"  -f, --force \t\tforţează terminarea cu starea de succes dacă\n"
+"  -f, --force\t\tforţează terminarea cu starea de succes dacă\n"
 "\t\t\t\tgrupul specificat există deja\n"
 "  -g, --gid GID\t\tfoloseşte GID pentru noul grup\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
@@ -1146,8 +1150,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1167,9 +1171,9 @@ msgstr ""
 "Utilisation : passwd [options] [login]\n"
 "\n"
 "Options :\n"
-"  -a, --all                  afficher l'état des mots de passe de tous les\n"
+"  -a, --all               afficher l'état des mots de passe de tous les\n"
 "                             comptes\n"
-"  -d, --delete               supprimer le mot de passe du compte indiqué\n"
+"  -d, --delete              supprimer le mot de passe du compte indiqué\n"
 "  -e, --expire               forcer la fin de validité du compte indiqué\n"
 "  -h, --help                 afficher ce message d'aide et quitter\n"
 "  -k, --keep-tokens          ne changer le mot de passe que d'il est arrivé\n"
@@ -1232,10 +1236,6 @@ msgstr "Scuze, parola pentru %s încă nu poate fi schimbată.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: nu mai este memorie\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: nu pot executa %s"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1358,6 +1358,19 @@ msgid "%s: %s\n"
 msgstr "passwd: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: trebuie pornit de la un terminal\n"
 
@@ -1373,8 +1386,8 @@ msgstr "Identificator necunoscut: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "Nu sunteţi autorizat pentru su %s\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Introduceţi propria parolă.)"
+msgid "(Enter your own password)"
+msgstr "(Introduceţi propria parolă)"
 
 #, c-format
 msgid ""
@@ -1458,7 +1471,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1486,7 +1499,7 @@ msgstr ""
 "  -G, --groups GRUPURI\t\tafişează grupurile suplimentare pentru noul\n"
 "\t\t\t\tcont utilizator\n"
 "  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
-"  -k, --skel DIR_SKELET \t\tspecifică un schelet director alternativ\n"
+"  -k, --skel DIR_SKELET\t\tspecifică un schelet director alternativ\n"
 "  -K, --key KEY=VALOARE\t\tsuprascrie valorile implicite ale /etc/login."
 "defs\n"
 "  -m, --create-home\t\tcrează directorul personal pentru noul cont\n"
@@ -1497,22 +1510,6 @@ msgstr ""
 "\t\t\t\tutilizator\n"
 "  -s, --shell SHELL\t\tmediul de autentificare pentru noul cont utilizator\n"
 "  -u, --uid UID\t\t\tforţează utilizarea UID pentru noul cont utilizator\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: eroare la închiderea fişierului de grupuri\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: eroare la deschiderea fişierului de grupuri\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: eroare la închiderea fişierului gshadow\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: eroare la deschiderea fişierului gshadow\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1581,6 +1578,22 @@ msgstr "%s: nu pot încuia fişierul shadow\n"
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: nu pot deschide fişierul shadow\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: eroare la închiderea fişierului de grupuri\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: eroare la deschiderea fişierului de grupuri\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: eroare la închiderea fişierului gshadow\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: eroare la deschiderea fişierului gshadow\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
@@ -1685,21 +1698,58 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: eroare la ştergerea directorului %s\n"
 
-#, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "Utilizare: %s\t[-u uid [-o]] [-g grup] [-G grup,...] [-a]] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d acasă [-m]] [-s consolă] [-c comentariu] [-l nume_nou]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f inactivă] [-e expiră ] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p passwd] [-L|-U] nume\n"
+#, fuzzy, c-format
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
+"Folosire: useradd [opţiuni] LOGIN\n"
+"\n"
+"Opţiuni:\n"
+"  -b, --base-dir DIR_BAZA\tbaza directorului pentru noul director\n"
+"\t\t\t\tpersonal al contului\n"
+"  -c, --comment COMENTARIU\t\tsetează câmpul GECOS pentru noul cont\n"
+"  -d, --home-dir DIR_ACASA\tdirectorul personal pentru noul cont\n"
+"  -D, --defaults\t\tafişează sau salvează configuraţia useradd implicită\n"
+"\t\t\t\tmodificată\n"
+"  -e, --expiredate DATA_EXPIRĂRII\tsetează data expirării contului la "
+"DATA_EXPIRĂRII\n"
+"  -f, --inactive INACTIVĂ\tsetează parola inactivă după expirare\n"
+"\t\t\t\tla INACTIVĂ\n"
+"  -g, --gid GRUP\t\tforţează folosirea GRUPULUI pentru noul cont\n"
+"  -G, --groups GRUPURI\t\tafişează grupurile suplimentare pentru noul\n"
+"\t\t\t\tcont utilizator\n"
+"  -h, --help\t\t\tafişează acest mesaj de ajutor şi ieşi\n"
+"  -k, --skel DIR_SKELET\t\tspecifică un schelet director alternativ\n"
+"  -K, --key KEY=VALOARE\t\tsuprascrie valorile implicite ale /etc/login."
+"defs\n"
+"  -m, --create-home\t\tcrează directorul personal pentru noul cont\n"
+"\t\t\t\tutilizator\n"
+"  -o, --non-unique\t\tpermite creare unui utilizator cu un UID\n"
+"\t\t\t\tduplicat (non-unic)\n"
+"  -p, --password PAROLA\tfoloseşte parola criptată pentru noul cont\n"
+"\t\t\t\tutilizator\n"
+"  -s, --shell SHELL\t\tmediul de autentificare pentru noul cont utilizator\n"
+"  -u, --uid UID\t\t\tforţează utilizarea UID pentru noul cont utilizator\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1770,6 +1820,18 @@ msgstr "eşuare în redenumirea căsuţei poştale"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1786,15 +1848,31 @@ msgstr "N-am putut face o copie de rezervă"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
 
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Utilizare:\n"
-"`vipw' editează /etc/passwd        `vipw -s' editează /etc/shadow\n"
-"`vigr' editează /etc/group         `vigr -s' editează /etc/gshadow\n"
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "Utilizare:\n"
+#~ "`vipw' editează /etc/passwd        `vipw -s' editează /etc/shadow\n"
+#~ "`vigr' editează /etc/group         `vigr -s' editează /etc/gshadow\n"
 
 #~ msgid "%s: PAM chauthtok failed\n"
 #~ msgstr "%s: eşuare chauthtok PAM\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s: nu pot executa %s"
+
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "Utilizare: %s\t[-u uid [-o]] [-g grup] [-G grup,...] [-a]] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d acasă [-m]] [-s consolă] [-c comentariu] [-l nume_nou]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f inactivă] [-e expiră ] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p passwd] [-L|-U] nume\n"

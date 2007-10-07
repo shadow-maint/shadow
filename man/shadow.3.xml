@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='shadow.3'>
-  <!--  $Id: shadow.3.xml,v 1.17 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!--  $Id: shadow.3.xml,v 1.19 2005/11/05 17:17:30 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>shadow</refentrytitle>
     <manvolnum>3</manvolnum>
+    <refmiscinfo class="sectdesc">Library Calls</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>shadow</refname>
@@ -191,10 +192,5 @@
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

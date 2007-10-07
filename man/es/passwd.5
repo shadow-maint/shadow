@@ -1,0 +1,138 @@
+.\" Copyright (c) 1993 Michael Haardt (michael@moria.de), Fri Apr  2 11:32:09 MET DST 1993
+.\"
+.\" This is free documentation; you can redistribute it and/or
+.\" modify it under the terms of the GNU General Public License as
+.\" published by the Free Software Foundation; either version 2 of
+.\" the License, or (at your option) any later version.
+.\"
+.\" The GNU General Public License's references to "object code"
+.\" and "executables" are to be interpreted as the output of any
+.\" document formatting or typesetting system, including
+.\" intermediate and printed output.
+.\"
+.\" This manual is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public
+.\" License along with this manual; if not, write to the Free
+.\" Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111,
+.\" USA.
+.\"
+.\" Modified Sun Jul 25 10:46:28 1993 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Aug 21 18:12:27 1994 by Rik Faith (faith@cs.unc.edu)
+.\" Modified Sun Jun 18 01:53:57 1995 by Andries Brouwer (aeb@cwi.nl)
+.\" Translated Tue Jul 23 11:06:10 1996 by Diego Novillo (diego@cs.ualberta.ca)
+.\" Modified Mon Jan  5 20:24:40 MET 1998 by Michael Haardt
+.\"  (michael@cantor.informatik.rwth-aachen.de)
+.\" Translation revised June 6 1998
+.\" Translation revised Wed Aug 19 1998 by Juan Piernas <piernas@ditec.um.es>
+.\"
+.TH PASSWD 5 "5 Enero 1998" "Linux" "Formatos de Fichero"
+.SH NOMBRE
+passwd \- fichero de contraseñas
+.SH DESCRIPCIÓN
+.B Passwd
+es un fichero de texto que contiene una lista de las cuentas del sistema,
+proporcionando para cada cuenta cierta información útil como el
+identificador (ID) de usuario, el ID de grupo, el directorio `home', el
+intérprete de órdenes, etc.
+Con frecuencia, también contiene la contraseña cifrada de cada cuenta.
+Este fichero debe tener permiso de lectura para todos (muchas utilidades,
+como 
+.BR ls (1),
+lo usan para traducir el número de identificador de
+usuario (UID) al nombre del usuario), pero sólo el superusuario debe
+poder escribirlo.
+.PP
+En los buenos viejos tiempos no había grandes problemas con estos permisos
+generales de lectura. Cualquiera podía leer contraseñas cifradas, ya que el
+hardware era demasiado lento para descifrar una clave bien elegida
+y, además, la suposición básica solía ser que la comunidad de usuarios era
+bastante amigable. Hoy en día, mucha gente
+utiliza alguna versión del paquete \fBshadow password\fP, donde en 
+.I /etc/passwd
+encontramos *'s en lugar de las claves cifradas; éstas se encuentran 
+en el fichero
+.IR /etc/shadow ,
+el cual sólo lo puede leer el superusuario.
+.PP
+Sin tener en cuenta si se utilizan o no `shadow passwords', muchos
+administradores de sistemas usan un asterisco en el campo de contraseña
+para asegurarse de que dicho usuario no se puede autenticar a sí
+mismo usando una contraseña. (No obstante, vea la sección OBSERVACIONES más abajo).
+.PP
+Si crea una nueva cuenta, coloque primero un asterisco en el campo de
+contraseña y a continuación use
+.BR passwd (1)
+para asignarla.
+.PP
+Hay una entrada por línea, cada línea tiene el siguiente formato:
+.sp
+.RS
+cuenta:contraseña:UID:GID:GECOS:directorio:intérprete
+.RE
+.sp
+Las descripciones de los campos son las siguientes:
+.sp
+.RS
+.TP 1.0in
+.I cuenta
+el nombre del usuario en el sistema. No debe contener letras mayúsculas.
+.TP
+.I contraseña
+la contraseña cifrada del usuario o un asterisco.
+.TP
+.I UID
+el número del ID de usuario.
+.TP
+.I GID
+el número del ID de grupo primario para este usuario.
+.TP
+.I GECOS
+Este campo es opcional y sólo se usa para propósitos de información.
+Normalmente, contiene el nombre completo del usuario. GECOS significa General
+Electric Comprehensive Operating System, que se renombró a GCOS cuando
+la división de grandes sistemas de GE se vendió a Honeywell.  Dennis Ritchie
+ha dicho: "Algunas veces enviábamos una salida de impresora o unos trabajos
+por lotes a la máquina GCOS. El campo gcos en el fichero password era el
+lugar para esconder la información de la $IDENTcard. No era elegante."
+.TP
+.I directorio
+el directorio base del usuario ($HOME).
+.TP
+.I intérprete
+el programa que se debe ejecutar cuando el usuario ingresa (si está vacío,
+se utiliza
+.BR /bin/sh ).
+Si se establece a un ejecutable que no existe, el usuario será incapaz de
+entrar al sistema a través de
+.BR login (1).
+.RE
+.SH OBSERVACIONES
+Para crear un grupo de usuarios, sus GIDs deben ser iguales y debe
+haber una entrada en \fI/etc/group\fP, de lo contrario no existirá ningún
+grupo.
+.PP
+Si la contraseña cifrada es un asterisco, el usuario será incapaz de entrar
+al sistema usando
+.BR login (1),
+pero todavía podrá entrar utilizando
+.BR rlogin (1),
+ejecutar procesos existentes e iniciar nuevos procesos a través de
+.BR rsh (1),
+.BR cron (1),
+.BR at (1),
+filtros de correo, etc. Intentar cerrar una cuenta cambiando simplemente el
+campo del intérprete de órdenes produce el mismo resultado y permite
+además el uso de
+.BR su (1).
+.SH FICHEROS
+.I /etc/passwd
+.SH "VÉASE TAMBIÉN"
+.BR passwd (1),
+.BR login (1),
+.BR su (1),
+.BR group (5),
+.BR shadow (5)

@@ -1,4 +1,4 @@
-.\" $Id: shadow.3,v 1.5 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: shadow.3,v 1.6 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,8 +27,8 @@
 .\" SUCH DAMAGE.
 .TH SHADOW 3
 .SH NAZWA
-shadow \- procedury zakodowanego pliku hase³
-.SH SK£ADNIA
+shadow \- procedury zakodowanego pliku haseÅ‚
+.SH SKÅADNIA
 .B #include <shadow.h>
 .PP
 .B struct spwd *getspent();
@@ -56,89 +56,89 @@ shadow \- procedury zakodowanego pliku hase³
 .B int ulckpwdf();
 .SH OPIS
 .I shadow
-operuje na zawarto¶ci dodatkowego pliku hase³ (shadow) \fI/etc/shadow\fR.
-Plik \fI#include\fR opisuje strukturê
+operuje na zawartoÅ›ci dodatkowego pliku haseÅ‚ (shadow) \fI/etc/shadow\fR.
+Plik \fI#include\fR opisuje strukturÄ™
 .sp
 struct spwd {
 .in +.4i
 .br
-	char			*sp_namp; /* nazwa u¿ytkownika (login) */
+	char			*sp_namp; /* nazwa uÅ¼ytkownika (login) */
 .br
-	char			*sp_pwdp; /* zakodowane has³o */
+	char			*sp_pwdp; /* zakodowane hasÅ‚o */
 .br
-	long int		sp_lstchg; /* ostatnia zmiana has³a */
+	long int		sp_lstchg; /* ostatnia zmiana hasÅ‚a */
 .br
 	long int		sp_min; /* dni do dozwolonej zmiany */
 .br
-	long int		sp_max; /* dni przed wymagan± zmian± */
+	long int		sp_max; /* dni przed wymaganÄ… zmianÄ… */
 .br
-	long int		sp_warn; /* dni ostrze¿enia o wyga¶niêciu */
+	long int		sp_warn; /* dni ostrzeÅ¼enia o wygaÅ›niÄ™ciu */
 .br
-	long int		sp_inact; /* dni przed wy³±czeniem konta */
+	long int		sp_inact; /* dni przed wyÅ‚Ä…czeniem konta */
 .br
-	long int		sp_expire; /* data wa¿no¶ci konta */
+	long int		sp_expire; /* data waÅ¼noÅ›ci konta */
 .br
-	unsigned long int	sp_flag; /* zarezerwowane do przysz³ego u¿ytku */
+	unsigned long int	sp_flag; /* zarezerwowane do przyszÅ‚ego uÅ¼ytku */
 .br
 .in \-.5i
 }
 .PP
-Znaczenie poszczególnych pól:
+Znaczenie poszczegÃ³lnych pÃ³l:
 .sp
-sp_namp \- wska¼nik do zakoñczonej przez nul nazwy u¿ytkownika.
+sp_namp \- wskaÅºnik do zakoÅ„czonej przez nul nazwy uÅ¼ytkownika.
 .br
-sp_pwdp \- wska¼nik do zakoñczonego nul has³a.
+sp_pwdp \- wskaÅºnik do zakoÅ„czonego nul hasÅ‚a.
 .br
-sp_lstchg \- dni od 1 stycznia 1970; data ostatniej zmiany has³a.
+sp_lstchg \- dni od 1 stycznia 1970; data ostatniej zmiany hasÅ‚a.
 .br
-sp_min \- dni, przed up³ywem których has³o nie mo¿e byæ zmienione.
+sp_min \- dni, przed upÅ‚ywem ktÃ³rych hasÅ‚o nie moÅ¼e byÄ‡ zmienione.
 .br
-sp_max \- dni, po których has³o musi byæ zmienione.
+sp_max \- dni, po ktÃ³rych hasÅ‚o musi byÄ‡ zmienione.
 .br
-sp_warn \- dni przed dat± up³ywu wa¿no¶ci has³a, od których
-u¿ytkownik jest ostrzegany od nadchodz±cym terminie wa¿no¶ci.
+sp_warn \- dni przed datÄ… upÅ‚ywu waÅ¼noÅ›ci hasÅ‚a, od ktÃ³rych
+uÅ¼ytkownik jest ostrzegany od nadchodzÄ…cym terminie waÅ¼noÅ›ci.
 .br
-sp_inact \- dni po up³yniêciu wa¿no¶ci konta, po których konto jest
-uwa¿ane za nieaktywne i wy³±czane.
+sp_inact \- dni po upÅ‚yniÄ™ciu waÅ¼noÅ›ci konta, po ktÃ³rych konto jest
+uwaÅ¼ane za nieaktywne i wyÅ‚Ä…czane.
 .br
 sp_expire \- dni od 1 stycznia 1970, data gdy konto zostanie
-wy³±czone.
+wyÅ‚Ä…czone.
 .br
-sp_flag \- zarezerwowane do przysz³ego u¿ytku.
+sp_flag \- zarezerwowane do przyszÅ‚ego uÅ¼ytku.
 .SH OPIS
 \fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR i \fBsgetspent\fR
-zwracaj± wska¼nik do \fBstruct spwd\fR.
-\fBgetspent\fR zwraca nastêpn± pozycjê w pliku, za¶ \fBfgetspent\fR
-nastêpn± pozycjê z podanego strumienia. Zak³ada siê, ¿e strumieñ
+zwracajÄ… wskaÅºnik do \fBstruct spwd\fR.
+\fBgetspent\fR zwraca nastÄ™pnÄ… pozycjÄ™ w pliku, zaÅ› \fBfgetspent\fR
+nastÄ™pnÄ… pozycjÄ™ z podanego strumienia. ZakÅ‚ada siÄ™, Å¼e strumieÅ„
 ten jest plikiem o poprawnym formacie.
-\fBsgetspent\fR zwraca wska¼nik do \fBstruct spwd\fR u¿ywaj±c jako
-wej¶cia dostarczonego ³añcucha.
-\fBgetspnam\fR wyszukuje od bie¿±cej pozycji w pliku pozycji pasuj±cej
+\fBsgetspent\fR zwraca wskaÅºnik do \fBstruct spwd\fR uÅ¼ywajÄ…c jako
+wejÅ›cia dostarczonego Å‚aÅ„cucha.
+\fBgetspnam\fR wyszukuje od bieÅ¼Ä…cej pozycji w pliku pozycji pasujÄ…cej
 do \fBname\fR.
 .PP
-\fBsetspent\fR i \fBendspent\fR mog± zostaæ u¿yte do odpowiednio,
-rozpoczêcia i zakoñczenia dostêpu do chronionego pliku hase³ (shadow).
+\fBsetspent\fR i \fBendspent\fR mogÄ… zostaÄ‡ uÅ¼yte do odpowiednio,
+rozpoczÄ™cia i zakoÅ„czenia dostÄ™pu do chronionego pliku haseÅ‚ (shadow).
 .PP
-Do zapewnienia wy³±cznego dostêpu do pliku \fI/etc/shadow\fR powinny
-byæ u¿ywane procedury \fBlckpwdf\fR i \fBulckpwdf\fR.
-\fBlckpwdf\fR przez 15 sekund usi³uje uzyskaæ blokadê przy pomocy
+Do zapewnienia wyÅ‚Ä…cznego dostÄ™pu do pliku \fI/etc/shadow\fR powinny
+byÄ‡ uÅ¼ywane procedury \fBlckpwdf\fR i \fBulckpwdf\fR.
+\fBlckpwdf\fR przez 15 sekund usiÅ‚uje uzyskaÄ‡ blokadÄ™ przy pomocy
 \fBpw_lock\fR.
-Kontynuuje próbê uzyskania drugiej blokady przy pomocy \fBspw_lock\fR
-przez czas pozosta³y z pocz±tkowych 15 sekund.
-Je¿eli po up³ywie 15 sekund którakolwiek z tych prób zawiedzie,
+Kontynuuje prÃ³bÄ™ uzyskania drugiej blokady przy pomocy \fBspw_lock\fR
+przez czas pozostaÅ‚y z poczÄ…tkowych 15 sekund.
+JeÅ¼eli po upÅ‚ywie 15 sekund ktÃ³rakolwiek z tych prÃ³b zawiedzie,
 to \fBlckpwdf\fR zwraca \-1.
-Je¿eli uzyskano obie blokady, to zwracane jest 0.
+JeÅ¼eli uzyskano obie blokady, to zwracane jest 0.
 .SH DIAGNOSTYKA
-Je¿eli nie ma dalszych pozycji lub podczas przetwarzania pojawi siê b³±d,
-to procedury zwracaj± NULL.
-Procedury zwracaj±ce warto¶æ typu \fBint\fR zwracaj± 0 w przypadku powodzenia
-a \-1 dla pora¿ki.
+JeÅ¼eli nie ma dalszych pozycji lub podczas przetwarzania pojawi siÄ™ bÅ‚Ä…d,
+to procedury zwracajÄ… NULL.
+Procedury zwracajÄ…ce wartoÅ›Ä‡ typu \fBint\fR zwracajÄ… 0 w przypadku powodzenia
+a \-1 dla poraÅ¼ki.
 .SH PRZESTROGI
-Procedury te mog± byæ u¿ywane wy³±cznie przez superu¿ytkownika, gdy¿ dostêp
-do dodatkowego, chronionego pliku hase³ jest ograniczony.
+Procedury te mogÄ… byÄ‡ uÅ¼ywane wyÅ‚Ä…cznie przez superuÅ¼ytkownika, gdyÅ¼ dostÄ™p
+do dodatkowego, chronionego pliku haseÅ‚ jest ograniczony.
 .SH PLIKI
-.IR /etc/shadow " \- zakodowane has³a u¿ytkowników"
-.SH ZOBACZ TAK¯E
+.IR /etc/shadow " \- zakodowane hasÅ‚a uÅ¼ytkownikÃ³w"
+.SH ZOBACZ TAKÅ»E
 .BR getpwent (3),
 .BR shadow (5)
 .SH AUTOR

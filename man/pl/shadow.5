@@ -1,4 +1,4 @@
-.\" $Id: shadow.5,v 1.4 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: shadow.5,v 1.5 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,57 +27,57 @@
 .\" SUCH DAMAGE.
 .TH SHADOW 5
 .SH NAZWA
-shadow \- zakodowany plik z has³ami
+shadow \- zakodowany plik z hasÅ‚ami
 .SH OPIS
 .I shadow
-zawiera zakodowane dane o has³ach dla kont u¿ytkowników oraz opcjonalne
-informacje o wieku (aging) has³a.
-Zawarte s± w nim
+zawiera zakodowane dane o hasÅ‚ach dla kont uÅ¼ytkownikÃ³w oraz opcjonalne
+informacje o wieku (aging) hasÅ‚a.
+Zawarte sÄ… w nim
 .IP "" .5i
-Nazwa u¿ytkownika (nazwa logowania)
+Nazwa uÅ¼ytkownika (nazwa logowania)
 .IP "" .5i
-Zakodowane has³o
+Zakodowane hasÅ‚o
 .IP "" .5i
-Dni, licz±c od 1 stycznia 1970, kiedy has³o by³o ostatni raz zmienione
+Dni, liczÄ…c od 1 stycznia 1970, kiedy hasÅ‚o byÅ‚o ostatni raz zmienione
 .IP "" .5i
-Dni przed których up³yniêciem niemo¿liwa jest zmiany has³a
+Dni przed ktÃ³rych upÅ‚yniÄ™ciem niemoÅ¼liwa jest zmiany hasÅ‚a
 .IP "" .5i
-Dni, po których up³yniêciu konieczna jest zmiana has³a
+Dni, po ktÃ³rych upÅ‚yniÄ™ciu konieczna jest zmiana hasÅ‚a
 .IP "" .5i
-Ilo¶æ dni, jaka musi dzieliæ has³o od przedawnienia, by u¿ytkownik by³
+IloÅ›Ä‡ dni, jaka musi dzieliÄ‡ hasÅ‚o od przedawnienia, by uÅ¼ytkownik byÅ‚
 ostrzegany
 .IP "" .5i
-Ilo¶æ dni po przedawnieniu has³a, po których konto jest wy³±czane
+IloÅ›Ä‡ dni po przedawnieniu hasÅ‚a, po ktÃ³rych konto jest wyÅ‚Ä…czane
 .IP "" .5i
-Dni od 1 stycznia 1970, okre¶laj±ce datê, kiedy konto jest wy³±czane
+Dni od 1 stycznia 1970, okreÅ›lajÄ…ce datÄ™, kiedy konto jest wyÅ‚Ä…czane
 .IP "" .5i
 Pole zarezerwowane
 .PP
-Pole has³a musi byæ wype³nione. Zakodowane has³o sk³ada siê z 13\-24 znaków z
+Pole hasÅ‚a musi byÄ‡ wypeÅ‚nione. Zakodowane hasÅ‚o skÅ‚ada siÄ™ z 13\-24 znakÃ³w z
 64 znakowego alfabetu a\-z, A\-Z, 0\-9, \. i /.
-Dla szczegó³ów interpretacji tego napisu, odsy³amy do \fIcrypt(3)\fR.
+Dla szczegÃ³Å‚Ã³w interpretacji tego napisu, odsyÅ‚amy do \fIcrypt(3)\fR.
 .PP
-Data ostatniej zmiany has³a jest podawana jako liczba dni od 1 stycznia
-1970. Has³a nie mog± byæ zmieniane przed up³ywem odpowiedniej ilo¶ci dni, a
-musz± byæ zmieniane po up³ywie maksymalnej ilo¶ci dni.
-Je¶li minimalna liczba dni jest wiêksza od maksymalnej, has³o nie mo¿e byæ
-przez u¿ytkownika zmienione.
+Data ostatniej zmiany hasÅ‚a jest podawana jako liczba dni od 1 stycznia
+1970. HasÅ‚a nie mogÄ… byÄ‡ zmieniane przed upÅ‚ywem odpowiedniej iloÅ›ci dni, a
+muszÄ… byÄ‡ zmieniane po upÅ‚ywie maksymalnej iloÅ›ci dni.
+JeÅ›li minimalna liczba dni jest wiÄ™ksza od maksymalnej, hasÅ‚o nie moÅ¼e byÄ‡
+przez uÅ¼ytkownika zmienione.
 .PP
-Je¶li has³o pozostaje niezmienione po up³ywie jego wa¿no¶ci, to konto jest
-uwa¿ane za nieaktywne i zostanie wy³±czone po ustalonej liczbie dni
-nieaktywno¶ci. Konto zostanie równie¿ wy³±czone w zadanym dniu wa¿no¶ci
-konta bez wzglêdu na informacjê o terminie wa¿no¶ci has³a.
+JeÅ›li hasÅ‚o pozostaje niezmienione po upÅ‚ywie jego waÅ¼noÅ›ci, to konto jest
+uwaÅ¼ane za nieaktywne i zostanie wyÅ‚Ä…czone po ustalonej liczbie dni
+nieaktywnoÅ›ci. Konto zostanie rÃ³wnieÅ¼ wyÅ‚Ä…czone w zadanym dniu waÅ¼noÅ›ci
+konta bez wzglÄ™du na informacjÄ™ o terminie waÅ¼noÅ›ci hasÅ‚a.
 .PP
-Informacja w pliku \fIshadow\fR zastêpuje wszelkie has³a lub dane o ich
-wieku znajduj±ce siê w \fI/etc/passwd\fR.
+Informacja w pliku \fIshadow\fR zastÄ™puje wszelkie hasÅ‚a lub dane o ich
+wieku znajdujÄ…ce siÄ™ w \fI/etc/passwd\fR.
 .PP
-Je¶li ma byæ utrzymywane bezpieczeñstwo hase³, to plik ten nie mo¿e byæ
-odczytywalny dla zwyk³ych u¿ytkowników.
+JeÅ›li ma byÄ‡ utrzymywane bezpieczeÅ„stwo haseÅ‚, to plik ten nie moÅ¼e byÄ‡
+odczytywalny dla zwykÅ‚ych uÅ¼ytkownikÃ³w.
 .SH Pliki
-\fI/etc/passwd\fR	\- informacje o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacje o kontach uÅ¼ytkownikÃ³w
 .br
-\fI/etc/shadow\fR	\- zakodowane has³a u¿ytkowników
-.SH ZOBACZ TAK¯E
+\fI/etc/shadow\fR	\- zakodowane hasÅ‚a uÅ¼ytkownikÃ³w
+.SH ZOBACZ TAKÅ»E
 .BR chage (1),
 .BR login (1),
 .BR passwd (1),

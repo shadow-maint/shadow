@@ -1,4 +1,4 @@
-.\" $Id: grpck.8,v 1.9 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: grpck.8,v 1.10 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,75 +27,75 @@
 .\" SUCH DAMAGE.
 .TH GRPCK 8
 .SH NAZWA
-grpck \- weryfikacja spójno¶ci plików grup
-.SH SK£ADNIA
+grpck \- weryfikacja spÃ³jnoÅ›ci plikÃ³w grup
+.SH SKÅADNIA
 \fBgrpck\fR [\fB\-r\fR] [\fIgroup shadow\fR]
 .SH OPIS
-\fBgrpck\fR weryfikuje integralno¶æ informacji autentykacji systemowej.
-Sprawdzane s± wszystkie pozycje w plikach \fI/etc/group\fR
-i \fI/etc/gshadow\fR, by upewniæ siê, ¿e ka¿da z nich posiada w³a¶ciwy format
-i poprawne dane w ka¿dym z pól. U¿ytkownik monitowany jest o usuniêcie
-pozycji, które s± sformatowane niepoprawnie lub posiadaj± inne nie daj±ce
-siê skorygowaæ b³êdy.
+\fBgrpck\fR weryfikuje integralnoÅ›Ä‡ informacji autentykacji systemowej.
+Sprawdzane sÄ… wszystkie pozycje w plikach \fI/etc/group\fR
+i \fI/etc/gshadow\fR, by upewniÄ‡ siÄ™, Å¼e kaÅ¼da z nich posiada wÅ‚aÅ›ciwy format
+i poprawne dane w kaÅ¼dym z pÃ³l. UÅ¼ytkownik monitowany jest o usuniÄ™cie
+pozycji, ktÃ³re sÄ… sformatowane niepoprawnie lub posiadajÄ… inne nie dajÄ…ce
+siÄ™ skorygowaÄ‡ bÅ‚Ä™dy.
 .P
-Kontrolowane jest czy ka¿da pozycja posiada:
+Kontrolowane jest czy kaÅ¼da pozycja posiada:
 .sp
 .in +.5i
-\- w³a¶ciw± liczbê pól
+\- wÅ‚aÅ›ciwÄ… liczbÄ™ pÃ³l
 .br
-\- unikaln± nazwê grupy
+\- unikalnÄ… nazwÄ™ grupy
 .br
-\- poprawn± listê cz³onków i administratorów
+\- poprawnÄ… listÄ™ czÅ‚onkÃ³w i administratorÃ³w
 .in \-.5i
 .sp
 .P
-Kontrola w³a¶ciwej liczby pól i niepowtarzalnej nazwy grupy jest
-decyduj±ca. Je¿eli pozycja posiada b³êdn± liczbê pól, to u¿ytkownik jest
-proszony o usuniêcie ca³ej pozycji (wiersza).
-Je¿eli u¿ytkownik nie potwierdzi decyzji o usuniêciu, to pomijane s± wszelkie
+Kontrola wÅ‚aÅ›ciwej liczby pÃ³l i niepowtarzalnej nazwy grupy jest
+decydujÄ…ca. JeÅ¼eli pozycja posiada bÅ‚Ä™dnÄ… liczbÄ™ pÃ³l, to uÅ¼ytkownik jest
+proszony o usuniÄ™cie caÅ‚ej pozycji (wiersza).
+JeÅ¼eli uÅ¼ytkownik nie potwierdzi decyzji o usuniÄ™ciu, to pomijane sÄ… wszelkie
 dalsze sprawdzenia.
-Pozycja z powtórzon± nazw± grupy powoduje monit o usuniêcie, ale nadal
-bêd± wykonywane pozosta³e sprawdzenia.
-Wszystkie inne b³êdy daj± ostrze¿enia a u¿ytkownik jest zachêcany
-do uruchomienia polecenia \fBgroupmod\fR, by je poprawiæ.
+Pozycja z powtÃ³rzonÄ… nazwÄ… grupy powoduje monit o usuniÄ™cie, ale nadal
+bÄ™dÄ… wykonywane pozostaÅ‚e sprawdzenia.
+Wszystkie inne bÅ‚Ä™dy dajÄ… ostrzeÅ¼enia a uÅ¼ytkownik jest zachÄ™cany
+do uruchomienia polecenia \fBgroupmod\fR, by je poprawiÄ‡.
 .P
-Polecenia dzia³aj±ce na pliku \fI/etc/group\fR nie potrafi± zmieniaæ
-uszkodzonych lub powielonych pozycji. W takich okoliczno¶ciach powinien byæ
-u¿ywany \fBgrpck\fR, by usun±æ nieprawid³ow± pozycjê.
+Polecenia dziaÅ‚ajÄ…ce na pliku \fI/etc/group\fR nie potrafiÄ… zmieniaÄ‡
+uszkodzonych lub powielonych pozycji. W takich okolicznoÅ›ciach powinien byÄ‡
+uÅ¼ywany \fBgrpck\fR, by usunÄ…Ä‡ nieprawidÅ‚owÄ… pozycjÄ™.
 .SH OPCJE
-Domy¶lnie \fBgrpck\fR dzia³a na plikach \fI/etc/group\fR oraz \fI/etc/gshadow\fR.
-Przy pomocy parametrów \fIgroup\fR i \fIshadow\fR u¿ytkownik mo¿e wybraæ inne
+DomyÅ›lnie \fBgrpck\fR dziaÅ‚a na plikach \fI/etc/group\fR oraz \fI/etc/gshadow\fR.
+Przy pomocy parametrÃ³w \fIgroup\fR i \fIshadow\fR uÅ¼ytkownik moÅ¼e wybraÄ‡ inne
 pliki.
-Dodatkowo, u¿ytkownik mo¿e wykonaæ polecenie w trybie tylko\-do\-odczytu, poprzez
+Dodatkowo, uÅ¼ytkownik moÅ¼e wykonaÄ‡ polecenie w trybie tylko\-do\-odczytu, poprzez
 podanie flagi \fB\-r\fR.
-Powoduje to, ¿e na wszystkie pytania dotycz±ce zmian zostanie, bez ingerencji
-u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
-\fBgrpck\fR mo¿e byæ równie¿ u¿yty do sortowania pozycji w plikach \fI/etc/group\fR 
-oraz \fI/etc/gshadow\fR wed³ug GID. By w³±czyæ tryb sortowania nale¿y przekazaæ
-opcjê \fB\-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
+Powoduje to, Å¼e na wszystkie pytania dotyczÄ…ce zmian zostanie, bez ingerencji
+uÅ¼ytkownika, uÅ¼yta odpowiedÅº \fBnie\fR.
+\fBgrpck\fR moÅ¼e byÄ‡ rÃ³wnieÅ¼ uÅ¼yty do sortowania pozycji w plikach \fI/etc/group\fR 
+oraz \fI/etc/gshadow\fR wedÅ‚ug GID. By wÅ‚Ä…czyÄ‡ tryb sortowania naleÅ¼y przekazaÄ‡
+opcjÄ™ \fB\-s\fR. Nie sÄ… wtedy przeprowadzane Å¼adne kontrole, tylko sortowanie.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o kontach grup
 .br
-\fI/etc/gshadow\fR	\- zakodowana informacja o has³ach i administratorach grup 
+\fI/etc/gshadow\fR	\- zakodowana informacja o hasÅ‚ach i administratorach grup 
 .br
-\fI/etc/passwd\fR	\-informacja o u¿ytkownikach
-.SH KOD ZAKOÑCZENIA
+\fI/etc/passwd\fR	\-informacja o uÅ¼ytkownikach
+.SH KOD ZAKOÅƒCZENIA
 .TP 2
-Polecenie \fBgrpck\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+Polecenie \fBgrpck\fR koÅ„czy dziaÅ‚anie z nastÄ™pujÄ…cymi wartoÅ›ciami kodÃ³w zakoÅ„czenia:
 .br
 \fB0\fR	\- powodzenie
 .br
-\fB1\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+\fB1\fR	\- niewÅ‚aÅ›ciwa skÅ‚adnia parametrÃ³w polecenia
 .br
-\fB2\fR	\- jedna lub wiêcej z³ych pozycji pliku grup
+\fB2\fR	\- jedna lub wiÄ™cej zÅ‚ych pozycji pliku grup
 .br
-\fB3\fR	\- niemo¿liwe otwarcie plików grup
+\fB3\fR	\- niemoÅ¼liwe otwarcie plikÃ³w grup
 .br
-\fB4\fR	\- niemo¿liwa blokada plików grup
+\fB4\fR	\- niemoÅ¼liwa blokada plikÃ³w grup
 .br
-\fB5\fR	\- niemo¿liwa aktualizacja plików grup
+\fB5\fR	\- niemoÅ¼liwa aktualizacja plikÃ³w grup
 .br
-.SH ZOBACZ TAK¯E
+.SH ZOBACZ TAKÅ»E
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5),

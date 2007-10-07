@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='grpck.8'>
-  <!-- $Id: grpck.8.xml,v 1.14 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!-- $Id: grpck.8.xml,v 1.16 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>grpck</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>grpck</refname>
@@ -169,10 +170,5 @@
 	</varlistentry>
       </variablelist>
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

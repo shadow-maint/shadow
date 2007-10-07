@@ -1,4 +1,4 @@
-.\" $Id: porttime.5,v 1.4 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: porttime.5,v 1.5 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,37 +27,37 @@
 .\" SUCH DAMAGE.
 .TH PORTTIME 5
 .SH NAZWA
-porttime \- plik czasów dostêpu do portów
+porttime \- plik czasÃ³w dostÄ™pu do portÃ³w
 .SH OPIS
 .I porttime
-zawiera listê urz±dzeñ tty, nazw u¿ytkowników i dozwolonych czasów logowania.
+zawiera listÄ™ urzÄ…dzeÅ„ tty, nazw uÅ¼ytkownikÃ³w i dozwolonych czasÃ³w logowania.
 .PP
-Ka¿da pozycja sk³ada siê z trzech, rozdzielonych dwukropkiem, pól.
-Pierwsze pole zawiera listê oddzielonych przecinkami urz±dzeñ tty lub
-gwiazdkê, wskazuj±c±, ¿e pozycja ta pasuje do wszystkich urz±dzeñ tty.
-Drugie pole zawiera listê oddzielonych przecinkami nazw u¿ytkowników lub
-gwiazdkê, wskazuj±c±, ¿e pozycja dotyczy wszystkich u¿ytkowników.
-Trzecie pole jest list± oddzielonych przecinkami dozwolonych czasów dostêpu.
+KaÅ¼da pozycja skÅ‚ada siÄ™ z trzech, rozdzielonych dwukropkiem, pÃ³l.
+Pierwsze pole zawiera listÄ™ oddzielonych przecinkami urzÄ…dzeÅ„ tty lub
+gwiazdkÄ™, wskazujÄ…cÄ…, Å¼e pozycja ta pasuje do wszystkich urzÄ…dzeÅ„ tty.
+Drugie pole zawiera listÄ™ oddzielonych przecinkami nazw uÅ¼ytkownikÃ³w lub
+gwiazdkÄ™, wskazujÄ…cÄ…, Å¼e pozycja dotyczy wszystkich uÅ¼ytkownikÃ³w.
+Trzecie pole jest listÄ… oddzielonych przecinkami dozwolonych czasÃ³w dostÄ™pu.
 .PP
-Ka¿da pozycja czasu dostêpu sk³ada siê z zera lub wiêcej dni tygodnia,
-skróconych do \fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR
-i \fBSa\fR, po których nastêpuje para rozdzielonych my¶lnikiem czasów.
-Do okre¶lenia dni roboczych (od poniedzia³ku do pi±tku) mo¿e byæ u¿yty
-skrót \fBWk\fR. Skrót \fBAl\fR oznacza ka¿dy dzieñ. Je¿eli nie podano dni
+KaÅ¼da pozycja czasu dostÄ™pu skÅ‚ada siÄ™ z zera lub wiÄ™cej dni tygodnia,
+skrÃ³conych do \fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR
+i \fBSa\fR, po ktÃ³rych nastÄ™puje para rozdzielonych myÅ›lnikiem czasÃ³w.
+Do okreÅ›lenia dni roboczych (od poniedziaÅ‚ku do piÄ…tku) moÅ¼e byÄ‡ uÅ¼yty
+skrÃ³t \fBWk\fR. SkrÃ³t \fBAl\fR oznacza kaÅ¼dy dzieÅ„. JeÅ¼eli nie podano dni
 tygodnia przyjmowane jest \fBAl\fR.
-.SH PRZYK£ADY
-Poni¿szy wpis zezwala u¿ytkownikowi \fBjfh\fR na dostêp do ka¿dego portu
+.SH PRZYKÅADY
+PoniÅ¼szy wpis zezwala uÅ¼ytkownikowi \fBjfh\fR na dostÄ™p do kaÅ¼dego portu
 w dni robocze od godziny 9\-tej do 17\-tej.
 .br
 .sp 1
 	*:jfh:Wk0900\-1700
 .br
 .sp 1
-Poni¿sze pozycje pozwalaj± na dostêp do konsoli (/dev/console) wy³±cznie
-u¿ytkownikom \fBroot\fR i \fBoper\fR \- w dowolnym czasie.
-Przyk³ad ten pokazuje, ¿e plik \fI/etc/porttime\fR stanowi uporz±dkowan±
-listê czasów dostêpu. Ka¿dy inny u¿ytkownik bêdzie pasowa³ do drugiej pozycji
-listy, nie zezwalaj±cej na dostêp w ¿adnym czasie.
+PoniÅ¼sze pozycje pozwalajÄ… na dostÄ™p do konsoli (/dev/console) wyÅ‚Ä…cznie
+uÅ¼ytkownikom \fBroot\fR i \fBoper\fR \- w dowolnym czasie.
+PrzykÅ‚ad ten pokazuje, Å¼e plik \fI/etc/porttime\fR stanowi uporzÄ…dkowanÄ…
+listÄ™ czasÃ³w dostÄ™pu. KaÅ¼dy inny uÅ¼ytkownik bÄ™dzie pasowaÅ‚ do drugiej pozycji
+listy, nie zezwalajÄ…cej na dostÄ™p w Å¼adnym czasie.
 .br
 .sp 1
 	console:root,oper:Al0000\-2400
@@ -65,7 +65,7 @@ listy, nie zezwalaj±cej na dostêp w ¿adnym czasie.
 	console:*:
 .br
 .sp 1
-Poni¿szy wpis zezwala na dostêp do dowolnego portu u¿ytkownikowi \fBgames\fR
+PoniÅ¼szy wpis zezwala na dostÄ™p do dowolnego portu uÅ¼ytkownikowi \fBgames\fR
 poza godzinami pracy.
 .br
 .sp 1
@@ -73,8 +73,8 @@ poza godzinami pracy.
 .br
 .sp 1
 .SH PLIKI
-\fI/etc/porttime\fR	\- plik zawieraj±cy czasy dostêpu do portów
-.SH ZOBACZ TAK¯E
+\fI/etc/porttime\fR	\- plik zawierajÄ…cy czasy dostÄ™pu do portÃ³w
+.SH ZOBACZ TAKÅ»E
 .BR login (1)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

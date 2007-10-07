@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\"$Id: chsh.1,v 1.3 2005/04/21 21:03:16 kloczek Exp $
+.\"$Id: chsh.1,v 1.4 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,20 +36,20 @@ chsh \- cambia la shell di login
 .SH DESCRIZIONE
 \fBchsh\fP cambia la shell di login dell'utente, in altre parole determina il 
 comando iniziale eseguito quando un utente fa il login. Un utente qualsiasi 
-può cambiare la shell di login solo per il proprio account, mentre 
-l'amministratore può cambiare la shell di login per ogni account.
+puÃ² cambiare la shell di login solo per il proprio account, mentre 
+l'amministratore puÃ² cambiare la shell di login per ogni account.
 .PP
-L'unica limitazione sulla scelta della shell di login è che il nome del 
+L'unica limitazione sulla scelta della shell di login Ã¨ che il nome del 
 comando deve essere presente in \fI/etc/shells\fP; fa eccezione 
-l'amministratore di sistema, che è libero di scegliere qualsiasi valore. Un 
-account con una shell di login limitata non può cambiare la propria shell 
-di login. Per questo motivo è sconsigliato includere \fB/bin/rsh\fP in 
+l'amministratore di sistema, che Ã¨ libero di scegliere qualsiasi valore. Un 
+account con una shell di login limitata non puÃ² cambiare la propria shell 
+di login. Per questo motivo Ã¨ sconsigliato includere \fB/bin/rsh\fP in 
 \fI/etc/shells\fP: se accidentalmente un utente selezionasse una shell 
-limitata, non potrebbe più tornare alla shell di login che usava 
+limitata, non potrebbe piÃ¹ tornare alla shell di login che usava 
 originariamente.
 .PP
 .SH OPZIONI
-Se non viene specificata l'opzione \fB\-s\fP, \fBchsh\fP opera in modalità 
+Se non viene specificata l'opzione \fB\-s\fP, \fBchsh\fP opera in modalitÃ  
 interattiva, mostrando tra parentesi quadre la shell di login attuale e 
 chiedendo all'utente di selezionarne una nuova. Inserire un nuovo valore per 
 cambiare la shell, oppure lasciare la riga vuota per continuare a usare 

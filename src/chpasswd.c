@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chpasswd.c,v 1.33 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: chpasswd.c,v 1.34 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <fcntl.h>
 #include <getopt.h>
@@ -37,8 +37,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "defines.h"
 #include "nscd.h"
@@ -71,13 +70,6 @@ static void usage (void)
 			   "			passwords are not encrypted\n"));
 	exit (1);
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 int main (int argc, char **argv)
 {

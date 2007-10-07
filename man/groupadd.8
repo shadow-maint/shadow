@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GROUPADD" "8" "09/30/2005" "" ""
+.TH "GROUPADD" "8" "01/02/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,7 +11,7 @@
 groupadd \- Create a new group
 .SH "SYNOPSIS"
 .HP 9
-\fBgroupadd\fR [\-g\ \fIgid\fR\ [\-o]] [\-f] [\-K\ \fIKEY\fR=\fIVALUE\fR] \fIgroup\fR
+\fBgroupadd\fR [\-g\ \fIGID\fR\ [\-o]] [\-f] [\-K\ \fIKEY\fR=\fIVALUE\fR] \fIgroup\fR
 .SH "DESCRIPTION"
 .PP
 The
@@ -25,7 +25,7 @@ command are:
 .TP
 \fB\-f\fR
 This option causes to just exit with success status if the specified group already exists. With
-\fB\-g\fR, if specified gid already exists, other (unique) gid is chosen (i.e.
+\fB\-g\fR, if specified GID already exists, other (unique) GID is chosen (i.e.
 \fB\-g\fR
 is turned off).
 .TP
@@ -66,6 +66,12 @@ shadow password suite configuration
 Groupnames must begin with a lower case letter or an underscore, and only lower case letters, underscores, dashes, and dollar signs may follow. In regular expression terms: [a\-z_][a\-z0\-9_\-]*[$]
 .PP
 Groupnames may only be up to 16 characters long.
+.PP
+If the groupname already exists in an external group database such as NIS,
+\fBgroupadd\fR
+will deny the group creation request.
+.PP
+Groupnames may only be up to 16 characters long.
 .SH "EXIT VALUES"
 .PP
 The
@@ -82,7 +88,7 @@ invalid command syntax
 invalid argument to option
 .TP
 \fI4\fR
-gid not unique (when
+GID not unique (when
 \fB\-o\fR
 not used)
 .TP
@@ -103,6 +109,3 @@ can't update group file
 \fBuseradd\fR(8),
 \fBuserdel\fR(8),
 \fBusermod\fR(8).
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)

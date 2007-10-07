@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\"$Id: chage.1,v 1.1 2005/04/21 21:03:15 kloczek Exp $
+.\"$Id: chage.1,v 1.2 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -32,7 +32,7 @@
 chage \- cambia le informazioni sulla scadenza della password
 .SH SINTASSI
 .TP 6
-\fBchage\fP [\fB\-m\fP \fIgg_min\fP] [\fB\-M\fP \fIgg_max\fP] [\fB\-d\fP \fIultimo_giorno\fP] [\fB\-I\fP \fIinattivit‡\fP]
+\fBchage\fP [\fB\-m\fP \fIgg_min\fP] [\fB\-M\fP \fIgg_max\fP] [\fB\-d\fP \fIultimo_giorno\fP] [\fB\-I\fP \fIinattivit√†\fP]
 [\fB\-E\fP \fIdata_scadenza\fP] [\fB\-W\fP \fIgg_avviso\fP] \fIutente\fP
 .TP 6
 \fBchage\fP \fB\-l\fP \fIutente\fP
@@ -41,39 +41,39 @@ chage \- cambia le informazioni sulla scadenza della password
 data dell'ultimo cambio. Queste informazioni sono usate dal sistema per 
 determinare quando un utente deve cambiare la propria password.
 .PP
-L'uso del comando \fBchage\fP Ë permesso solo all'utente root, tranne per 
-l'opzione \fB\-l\fP, che puÚ essere usata da un utente non privilegiato per 
+L'uso del comando \fBchage\fP √® permesso solo all'utente root, tranne per 
+l'opzione \fB\-l\fP, che pu√≤ essere usata da un utente non privilegiato per 
 conoscere la scadenza della propria password o dell'account.
 .SH OPZIONI
 Il comando \fBchage\fP accetta le seguenti opzioni:
 .IP "\fB\-d\fP \fIultimo_giorno\fP"
 Imposta la data dell'ultimo cambio della password, espressa come il numero 
-di giorni trascorsi dal 1 gennaio 1970. La data puÚ anche essere 
+di giorni trascorsi dal 1 gennaio 1970. La data pu√≤ anche essere 
 specificata nel formato AAAA\-MM\-GG o nella notazione comunemente usata nel 
 proprio paese.
 .IP "\fB\-E\fP \fIdata_scadenza\fP"
-Imposta la data in cui l'account dell'utente non sar‡ pi˘ 
+Imposta la data in cui l'account dell'utente non sar√† pi√π 
 accessibile. L'opzione \fIdata_scadenza\fP indica la data in cui l'account 
 viene bloccato, espressa come il numero di giorni trascorsi dal 1 gennaio 
-1970. La data puÚ anche essere specificata nel formato AAAA\-MM\-GG o nella 
+1970. La data pu√≤ anche essere specificata nel formato AAAA\-MM\-GG o nella 
 notazione comunemente usata nel proprio paese. Un utente con l'account 
 bloccato deve contattare l'amministratore prima di poter usare ancora il 
 sistema.
-.IP "\fB\-I\fP \fIinattivit‡\fP"
-Imposta il numero di giorni di inattivit‡ dopo la scadenza della password 
-dopo i quali l'account viene bloccato. L'opzione \fIinattivit‡\fP indica il 
-numero di giorni di inattivit‡; un valore pari a zero disabilita questa 
+.IP "\fB\-I\fP \fIinattivit√†\fP"
+Imposta il numero di giorni di inattivit√† dopo la scadenza della password 
+dopo i quali l'account viene bloccato. L'opzione \fIinattivit√†\fP indica il 
+numero di giorni di inattivit√†; un valore pari a zero disabilita questa 
 funzione. Un utente con l'account bloccato deve contattare l'amministratore 
 prima di poter usare ancora il sistema.
 .IP "\fB\-m\fP \fIgg_min\fP"
 Imposta il numero minimo di giorni tra i cambi di password. Un valore pari a 
-zero indica che l'utente puÚ cambiare la propria password in qualsiasi 
+zero indica che l'utente pu√≤ cambiare la propria password in qualsiasi 
 momento.
 .IP "\fB\-M\fP \fIgg_max\fP"
-Imposta il numero massimo di giorni di validit‡ di una password. Quando la 
-somma di \fIgg_max\fP e \fIgg_min\fP Ë inferiore ai giorni attualmente trascorsi, 
-l'utente Ë obbligato a cambiare la password prima di poter usare ancora il 
-proprio account. Questo evento puÚ essere reso noto in anticipo usando 
+Imposta il numero massimo di giorni di validit√† di una password. Quando la 
+somma di \fIgg_max\fP e \fIgg_min\fP √® inferiore ai giorni attualmente trascorsi, 
+l'utente √® obbligato a cambiare la password prima di poter usare ancora il 
+proprio account. Questo evento pu√≤ essere reso noto in anticipo usando 
 l'opzione \fB\-W\fP, che fornisce un preavviso all'utente.
 .IP "\fB\-W\fP \fIgg_avviso\fP"
 Imposta il numero di giorni di preavviso prima che sia obbligatorio cambiare 
@@ -81,13 +81,13 @@ la password. L'opzione \fIgg_avviso\fP indica il numero di giorni prima della
 scadenza della password in cui l'utente viene avvertito dell'imminente 
 scadenza.
 .PP
-Se non viene specificata nessuna opzione, \fBchage\fP opera in modalit‡ 
+Se non viene specificata nessuna opzione, \fBchage\fP opera in modalit√† 
 interattiva, mostrando tra parentesi quadre il valore attuale di ciascun 
 campo e chiedendo il nuovo valore all'utente. Inserire un nuovo valore per 
 modificare il campo, oppure lasciare la riga vuota per continuare a usare il 
 valore attuale.
 .SH NOTA
-\fBchage\fP richiede che il file delle shadow password sia disponibile. Non Ë 
+\fBchage\fP richiede che il file delle shadow password sia disponibile. Non √® 
 possibile usare questo programma se le password sono memorizzate nel file 
 passwd.
 .SH FILE

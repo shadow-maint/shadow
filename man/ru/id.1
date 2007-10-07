@@ -1,0 +1,35 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "id" "1" "11/10/2005" "Пользовательские команды" "Пользовательские команды"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+id \- показывает идентификатор (ID) запустившего пользователя и его группы
+.SH "СИНТАКСИС"
+.HP 3
+\fBid\fR [\-a]
+.SH "ОПИСАНИЕ"
+.PP
+\fBid\fR
+показывает имена или числовые идентификаторы текущего действительного и эффективного пользователя и группы, в которых он состоит. Если значение идентификатора не имеет соответствующей записи в файле
+\fI/etc/passwd\fR
+или
+\fI/etc/group\fR, то отображается числовое значение без соответствующего имени. При указании необязательного параметра
+\fB\-a\fR
+также выводятся дополнительные группы, если система поддерживает одновременное членство пользователя в нескольких группах.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/passwd\fR
+содержит информацию о пользователях
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBgetgid\fR(2),
+\fBgetgroups\fR(2),
+\fBgetuid\fR(2)

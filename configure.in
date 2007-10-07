@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.13)
+AM_INIT_AUTOMAKE(shadow, 4.0.14)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -170,7 +170,7 @@ AC_DEFINE_UNQUOTED(_UTMP_FILE, "$shadow_cv_utmpdir/utmp",
 
 AC_CACHE_CHECK([location of faillog/lastlog/wtmp], shadow_cv_logdir,
 [for shadow_cv_logdir in /var/log /var/adm /usr/adm /etc; do
-	if test -d $logdir; then
+	if test -d $shadow_cv_logdir; then
 		break
 	fi
 done])
@@ -271,7 +271,7 @@ AC_SUBST(LIBAUDIT)
 if test "$with_audit" = "yes"; then
 	AC_CHECK_HEADER(libaudit.h, [audit_header="yes"], [audit_header="no"])
 	if test "$audit_header" = "yes"; then
-		AC_CHECK_LIB(audit, audit_send_message_if_enabled,
+		AC_CHECK_LIB(audit, audit_log_acct_message,
 			[AC_DEFINE(WITH_AUDIT, 1, [Define if you want to enable Audit messages])
 			LIBAUDIT="-laudit"])
 	fi
@@ -304,7 +304,7 @@ if test "$with_libpam" = "yes"; then
 		LIBPAM="-lpam"
 		AC_CHECK_LIB(pam_misc, main,
 			[LIBPAM="$LIBPAM -lpam_misc"],
-			AC_MSG_ERROR(libpam_misc is missing)
+			AC_MSG_ERROR(libpam_misc is missing for enable PAM support)
 		)],
 		[AC_MSG_CHECKING(use login access checking if PAM not used)
 		AC_MSG_RESULT(yes)]
@@ -337,6 +337,7 @@ AC_CONFIG_FILES([
 	man/cs/Makefile
 	man/de/Makefile
 	man/es/Makefile
+	man/fi/Makefile
 	man/fr/Makefile
 	man/hu/Makefile
 	man/id/Makefile
@@ -346,6 +347,7 @@ AC_CONFIG_FILES([
 	man/pl/Makefile
 	man/pt_BR/Makefile
 	man/ru/Makefile
+	man/tr/Makefile
 	man/zh_CN/Makefile
 	man/zh_TW/Makefile
 	libmisc/Makefile

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sulog.c,v 1.9 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id: sulog.c,v 1.10 2005/11/02 16:21:29 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -48,6 +48,14 @@ void sulog (const char *tty, int success, const char *oldname, const char *name)
 	struct tm *tm;
 	FILE *fp;
 	mode_t oldmask;
+
+	if (success) {
+		SYSLOG ((LOG_INFO,
+			"Successful su for %s by %s",name,oldname));
+	} else {
+		SYSLOG ((LOG_NOTICE,
+			"FAILED su for %s by %s",name,oldname));
+	}
 
 	if ((sulog_file = getdef_str ("SULOG_FILE")) == (char *) 0)
 		return;

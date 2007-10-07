@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='logoutd.8'>
-  <!-- $Id: logoutd.8.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: logoutd.8.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>LOGOUTD</refentrytitle>
+    <refentrytitle>logoutd</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>logoutd</refname>
@@ -48,10 +49,5 @@
 	</listitem>
       </varlistentry>
     </variablelist>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

@@ -1,0 +1,51 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "GSHADOW" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+gshadow \- informations cachées sur les groupes
+.SH "DESCRIPTION"
+.PP
+\fI/etc/gshadow\fR
+contient les informations cachées sur les groupes. Il contient des lignes avec les champs suivant séparés par des deux\-points\ :
+.TP 3
+\(bu
+nom du groupe
+.TP
+\(bu
+mot de passe chiffré
+.TP
+\(bu
+liste d'administrateurs du groupe séparés par des virgules
+.TP
+\(bu
+liste des membres du groupe séparés par des virgules
+.PP
+Les champs \(Fo\ nom du groupe\ \(Fc et \(Fo\ mot de passe\ \(Fc doivent être remplis. Le mot de passe chiffré comprend 13 caractères pris dans l'alphabet de 64 caractères a\-z, A\-Z, 0\-9, \\. et /. Consultez
+\fBcrypt\fR(3)
+pour plus d'informations sur le traitement de cette chaîne. Si le champ du mot de passe contient une chaîne qui ne peut pas être un résultat valable de
+\fBcrypt\fR(3)
+, par exemple si elle contient les caractères ! ou *, alors l'utilisateur ne pourra pas utiliser son mot de passe UNIX pour se connecter. Ceci peut dépendre de
+\fBpam\fR(7).
+.PP
+Ces informations sont prioritaires sur tous les autres champs présents dans
+\fI/etc/group\fR.
+.PP
+Ce fichier ne doit pas être accessible en lecture par les utilisateurs normaux afin de maintenir la sécurité des mots de passe, en particuliers pour prévenir les attaques par dictionnaires.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.SH "VOIR AUSSI"
+.PP
+\fBgroup\fR(5),
+\fBgpasswd\fR(5),
+\fBnewgrp\fR(5).

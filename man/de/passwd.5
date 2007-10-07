@@ -28,30 +28,30 @@
 .\"
 .TH PASSWD 5 "24. Juli 1993" "Linux" "Dateiformate"
 .SH BEZEICHNUNG
-passwd \- Paßwort\-Datei
+passwd \- PaÃŸwort\-Datei
 .SH BESCHREIBUNG
 .B Passwd
 ist eine ASCII\-Datei, die eine Liste der Benutzer des Systems und
-deren Paßwörter enthält.  Die Paßwort\-Datei sollte für alle
-Benutzer lesbar sein, was für die Verschlüsselung notwendig ist,
+deren PaÃŸwÃ¶rter enthÃ¤lt.  Die PaÃŸwort\-Datei sollte fÃ¼r alle
+Benutzer lesbar sein, was fÃ¼r die VerschlÃ¼sselung notwendig ist,
 aber nur vom Superuser beschreibbar.  Wenn Sie eine neue Kennung
-einrichten, lassen Sie das Paßwort\-Feld in der Datei frei und benutzen
+einrichten, lassen Sie das PaÃŸwort\-Feld in der Datei frei und benutzen
 .BR passwd (1),
-um dem System ein Paßword für die neue Kennung mitzuteilen.  Ein Stern
-oder ein ähnliches Sonderzeichen im Paßwort bedeutet, daß sich dieser
+um dem System ein PaÃŸword fÃ¼r die neue Kennung mitzuteilen.  Ein Stern
+oder ein Ã¤hnliches Sonderzeichen im PaÃŸwort bedeutet, daÃŸ sich dieser
 Benutzer nicht mit
 .BR login (1)s
 einloggen kann.  Wenn sich Ihr Root\-Dateisystem in  
 .I /dev/ram
-befindet, müssen Sie die veränderte Paßwort\-Datei in
+befindet, mÃ¼ssen Sie die verÃ¤nderte PaÃŸwort\-Datei in
 Ihr Root\-Dateisystem auf der Startdiskette kopieren und die
-Zugriffsrechte überprüfen, bevor Sie Ihr System herunterfahren.
-Wenn Sie Benutzer zu Gruppen zusammenfassen möchten, muß die GID
-übereinstimmen und es muß ein entsprechender Eintrag in der Datei
+Zugriffsrechte Ã¼berprÃ¼fen, bevor Sie Ihr System herunterfahren.
+Wenn Sie Benutzer zu Gruppen zusammenfassen mÃ¶chten, muÃŸ die GID
+Ã¼bereinstimmen und es muÃŸ ein entsprechender Eintrag in der Datei
 .I /etc/group
 existieren, oder die Gruppe wird nicht vom System anerkannt.
 .PP
-Die Datei enthält einen Eintrag pro Zeile, mit dem Format:
+Die Datei enthÃ¤lt einen Eintrag pro Zeile, mit dem Format:
 .sp
 .RS
 login_name:passwd:UID:GID:user_name:directory:shell
@@ -65,7 +65,7 @@ Die Bedeutung der Felder:
 Kennung des Benutzers auf dem System.
 .TP
 .I password
-Das verschlüsselte Paßwort des Benutzers.
+Das verschlÃ¼sselte PaÃŸwort des Benutzers.
 .TP
 .I UID
 Die numerische Benutzernummer.
@@ -74,7 +74,7 @@ Die numerische Benutzernummer.
 Die numerische Gruppennummer des Benutzers.
 .TP
 .I user_name
-Ein optionales Kommentarfeld, oft benutzt für den vollen Namen des
+Ein optionales Kommentarfeld, oft benutzt fÃ¼r den vollen Namen des
 Benutzers und weitere Informationen (Telefon, Raum\-Nummer etc.).
 .TP
 .I directory
@@ -82,7 +82,7 @@ Das Heimatverzeichnis $HOME des Benutzers.
 .TP
 .I shell
 Das Programm, das beim Einloggen gestartet werden soll (falls nicht
-nötig, benutzen Sie 
+nÃ¶tig, benutzen Sie 
 .IR /bin/sh ).
 .RE
 .SH DATEIEN

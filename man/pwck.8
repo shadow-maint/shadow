@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "PWCK" "8" "09/30/2005" "" ""
+.TH "PWCK" "8" "12/02/2005" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -13,7 +13,7 @@ pwck \- verify integrity of password files
 .HP 5
 \fBpwck\fR [\-q] [\-s] [\fIpasswd\fR\ \fIshadow\fR]
 .HP 5
-\fBpwck\fR [\-r] [\fIpasswd\fR\ \fIshadow\fR]
+\fBpwck\fR [\-q] [\-r] [\fIpasswd\fR\ \fIshadow\fR]
 .SH "DESCRIPTION"
 .PP
 \fBpwck\fR
@@ -59,7 +59,7 @@ The options which apply to the
 command are:
 .TP
 \fB\-q\fR
-Report errors only. Using this option will not require an action from the user.
+Report errors only. The warnings which do not require any action from the user won't be displayed.
 .TP
 \fB\-r\fR
 Execute the
@@ -122,6 +122,4 @@ can't lock password files
 .TP
 \fI5\fR
 can't update password files
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+

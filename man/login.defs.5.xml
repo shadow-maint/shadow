@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.defs.5'>
-  <!--  $Id: login.defs.5.xml,v 1.13 2005/10/01 13:30:10 kloczek Exp $ -->
+  <!--  $Id: login.defs.5.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>login.defs</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>login.defs</refname>
@@ -285,12 +286,6 @@
       <citerefentry>
 	<refentrytitle>pam</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
-    </para>
-  </refsect1>
-
-  <refsect1 id='authors'>
-    <title>AUTHORS</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com) Chip Rosenthal (chip@unicom.com)
     </para>
   </refsect1>
 </refentry>

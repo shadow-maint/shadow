@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\"$Id: lastlog.8,v 1.7 2005/04/21 21:03:16 kloczek Exp $
+.\"$Id: lastlog.8,v 1.8 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -39,7 +39,7 @@ lastlog \- esamina il file degli ultimi accessi
 \fBlastlog\fP mostra il log degli ultimi accessi, contenuto nel file 
 \fI/var/log/lastlog\fP. Le informazioni mostrate sono il \fBnome utente\fP, la 
 \fBporta\fP, e la \fBdata dell'ultimo accesso\fP. Il comportamento predefinito 
-(nessuna opzione specificata) è di mostrare i record di ultimo accesso per 
+(nessuna opzione specificata) Ã¨ di mostrare i record di ultimo accesso per 
 tutti gli utenti, nell'ordine in cui compaiono in \fB/etc/passwd\fP.
 .SH OPZIONI
 .TP
@@ -47,7 +47,7 @@ Il comando \fBlastlog\fP accetta le seguenti opzioni:
 .IP "\fB\-h\fP, \fB\-\-help\fP"
 Mostra un messaggio di aiuto ed esce.
 .IP "\fB\-t\fP, \fB\-\-time\fP \fIGIORNI\fP"
-Mostra solo i record di ultimo accesso più recenti di un numero di 
+Mostra solo i record di ultimo accesso piÃ¹ recenti di un numero di 
 \fIGIORNI\fP.
 .IP "\fB\-u\fP, \fB\-\-user\fP \fILOGIN\fP"
 Mostra il record di ultimo accesso per l'utente specificato da \fILOGIN\fP.
@@ -60,9 +60,9 @@ effettuato**"\fP.
 .SH FILE
 \fI/var/log/lastlog\fP	\- file di log degli ultimi accessi
 .SH AVVISI/CAVEAT
-Se ci sono dei grossi scarti tra i valori di UID, il programma lastlog può 
+Se ci sono dei grossi scarti tra i valori di UID, il programma lastlog puÃ² 
 restare in esecuzione per un tempo prolungato senza produrre output sullo 
-schermo (ad es. se mmdf=800 e l'ultimo UID vale 170, il programma sembrerà 
+schermo (ad es. se mmdf=800 e l'ultimo UID vale 170, il programma sembrerÃ  
 bloccato come se esaminasse gli UID tra 171 e 799).
 .SH AUTORI
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

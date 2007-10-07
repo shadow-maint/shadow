@@ -1,0 +1,45 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOGIN.ACCESS" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+login.access \- Table de contrôle des connexions
+.SH "DESCRIPTION"
+.PP
+Le fichier
+\fIlogin.access\fR
+permet de spécifier des couples (utilisateur, hôte) et/ou (utilisateur, tty) pour lesquels toute connexion sera soit acceptée soit refusée.
+.PP
+Lorsqu'un utilisateur se connecte, le fichier
+\fIlogin.access\fR
+est lu jusqu'à la première entrée correspondant au couple (utilisateur, hôte) ou, dans le cas d'une connexion ne passant pas par le réseau, à la première entrée correspondant au couple (utilisateur, tty). Le champ des permissions de la table pour cette entrée détermine alors si la connexion doit être acceptée ou refusée.
+.PP
+Chaque ligne de la table de contrôle des connexions (\(Fo\ login access control table\ \(Fc) est composée de trois champs séparés par le caractère \(Fo\ :\ \(Fc\ :
+.PP
+\fIpermission\fR:\fIutilisateurs\fR:\fIorigines\fR
+.PP
+Le premier champ est soit un \(Fo\ \fI+\fR\ \(Fc (accès autorisé), soit un \(Fo\ \fI\-\fR\ \(Fc (accès refusé). Le second champ est une liste d'un ou plusieurs noms d'utilisateurs ou de groupes, ou
+\fIALL\fR
+(correspond à tous les utilisateurs). Le troisième champ est une liste d'un ou plusieurs noms de tty (pour les connexions hors réseau), noms d'hôtes, noms de domaines (commençant par un \(Fo\ .\ \(Fc), adresses d'hôte, adresses de sous\-réseau (terminant par un \(Fo\ .\ \(Fc),
+\fIALL\fR
+(pour spécifier n'importe quelle connexion), ou
+\fILOCAL\fR
+(correspond à n'importe quelle chaîne ne contenant pas de \(Fo\ .\ \(Fc). Si vous utilisez NIS, vous pouvez utiliser @nomdegroupe pour les motifs d'utilisateur et d'hôte.
+.PP
+L'opérateur
+\fIEXCEPT\fR
+permet d'écrire des règles très compactes.
+.PP
+Le fichier d'informations sur les groupes (group) n'est utilisé que lorsqu'un nom ne correspond à aucun utilisateur connecté. Seuls les groupes pour lesquels la liste des utilisateurs est spécifiée sont utilisés\ : le programme ne recherche pas parmi les groupes primaires des utilisateurs.
+.SH "FICHIERS"
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+.SH "VOIR AUSSI"
+.PP
+\fBlogin\fR(1).

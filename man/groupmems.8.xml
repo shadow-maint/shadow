@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupmems.8'>
-  <!-- $Id: groupmems.8.xml,v 1.12 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!-- $Id: groupmems.8.xml,v 1.15 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupmems</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>groupmems</refname>
@@ -92,11 +93,12 @@
       membership list.
     </para>
 
-    <para>     $ groupadd -r groups
-      $ chmod 2770 groupmems
-      $ chown root.groups groupmems
-      $ groupmems -g groups -a gk4
-    </para>
+    <programlisting>
+	$ groupadd -r groups
+	$ chmod 2770 groupmems
+	$ chown root.groups groupmems
+	$ groupmems -g groups -a gk4
+    </programlisting>
   </refsect1>
 
   <refsect1 id='files'>
@@ -145,10 +147,5 @@
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>George Kraft IV (gk4@us.ibm.com)</para>
   </refsect1>
 </refentry>

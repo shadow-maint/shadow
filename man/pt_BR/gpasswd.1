@@ -1,39 +1,39 @@
 .\" Copyright 1996, Rafal Maszkowski, rzm@pdi.net
 .\"
-.\" … permitida a confecÁ„o e distribuiÁ„o deste manual, devidamente
-.\" acompanhado dos avisos de direitos autorais e desta permiss„o
-.\" em todas as cÛpias.
+.\" √â permitida a confec√ß√£o e distribui√ß√£o deste manual, devidamente
+.\" acompanhado dos avisos de direitos autorais e desta permiss√£o
+.\" em todas as c√≥pias.
 .\"
-.\" … permitida a cÛpia e distribuiÁ„o de versıes modificadas deste manual
-.\" sob as condiÁıes acima, e que todo o trabalho derivado seja distribuido
-.\"  sob  as mesmas condiÁıes deste manual.
+.\" √â permitida a c√≥pia e distribui√ß√£o de vers√µes modificadas deste manual
+.\" sob as condi√ß√µes acima, e que todo o trabalho derivado seja distribuido
+.\"  sob  as mesmas condi√ß√µes deste manual.
 .\" 
-.\" Uma vez que o kernel do Linux e suas bibliotecas est„o constantemente
-.\" mudando, esta p·gina de manual poder· estar incorreta ou desatualizada.
-.\" O(s) autor(es) n„o assumem responsabilidade por erros ou omissıes, 
-.\"  ou por danos resultantes do uso das informaÁıes aqui contidas. 
+.\" Uma vez que o kernel do Linux e suas bibliotecas est√£o constantemente
+.\" mudando, esta p√°gina de manual poder√° estar incorreta ou desatualizada.
+.\" O(s) autor(es) n√£o assumem responsabilidade por erros ou omiss√µes, 
+.\"  ou por danos resultantes do uso das informa√ß√µes aqui contidas. 
 .\"
-.\" Versıes formatadas ou processadas deste manual, desacompanhadas dos
-.\" fontes, devem conter a autorizaÁ„o e os direitos autorais dos autores do
+.\" Vers√µes formatadas ou processadas deste manual, desacompanhadas dos
+.\" fontes, devem conter a autoriza√ß√£o e os direitos autorais dos autores do
 .\" trabalho.
 .\"
-.\" VocÍ deve receber uma cÛpia da LicenÁa P˙blica GNU
-.\" junto com este manual; caso contr·rio, escreva para a Free Software
+.\" Voc√™ deve receber uma c√≥pia da Licen√ßa P√∫blica GNU
+.\" junto com este manual; caso contr√°rio, escreva para a Free Software
 .\" Foundation, Inc., 675 mass Ave, Cambridge, MA 02139 USA ou
-.\" em portuguÍs na Conectiva Inform·tica \- http://www.conectiva.com.br
+.\" em portugu√™s na Conectiva Inform√°tica \- http://www.conectiva.com.br
 .\"
-.\"	$Id: gpasswd.1,v 1.3 2005/04/05 19:08:56 kloczek Exp $
+.\"	$Id: gpasswd.1,v 1.5 2005/12/01 20:38:28 kloczek Exp $
 .\"
 .TH GPASSWD 1
 .SH NOME
 gpasswd \- administra o arquivo \fI/etc/group\fR
 .br
-.SH SINOSPE
+.SH SINOPSE
 \fBgpasswd\fR \fIgrupo\fR
 .br
-\fBgpasswd \-a\fR \fIusu·rio\fR \fIgrupo\fR
+\fBgpasswd \-a\fR \fIusu√°rio\fR \fIgrupo\fR
 .br
-\fBgpasswd \-d\fR \fIusu·rio\fR \fIgrupo\fR
+\fBgpasswd \-d\fR \fIusu√°rio\fR \fIgrupo\fR
 .br
 \fBgpasswd \-R\fR \fIgrupo\fR
 .br
@@ -43,48 +43,51 @@ gpasswd \- administra o arquivo \fI/etc/group\fR
 .br
 .B gpasswd
 .RB [ \-A
-\fIusu·rio\fR,...]
+\fIusu√°rio\fR,...]
 .RB [ \-M
-\fIusu·rio\fR,...]
+\fIusu√°rio\fR,...]
 \fIgrupo\fR
 .br
-.SH DESCRI«√O
+.SH DESCRI√á√ÉO
 O
 .B gpasswd
-È utilizado para administrar o arquivo \fI/etc/group\fR (e o arquivo
+√© utilizado para administrar o arquivo \fI/etc/group\fR (e o arquivo
 \fI/etc/gshadow\fR, caso compilado com SHADOWGRP).
 Todos os grupos podem ter administradores, membros e uma senha. O
-administrador do sistema pode usar a opÁ„o \fB\-A\fR para definir o
+administrador do sistema pode usar a op√ß√£o \fB\-A\fR para definir o
 administrador do grupo e \fB\-M\fR para definir os membros e todos os seus
 direitos assim como os do administrador.
 .PP
-Administradores de grupos podem adicionar e excluir usu·rios utilizando as
-opÁıes \fB\-a\fR e \fB\-d\fR respectivamente. Administradores podem usar a opÁ„o
-\fB\-r\fR  para remover a senha de um grupo. Quando n„o h· senhas definidas
+Administradores de grupos podem adicionar e excluir usu√°rios utilizando as
+op√ß√µes \fB\-a\fR e \fB\-d\fR respectivamente. Administradores podem usar a op√ß√£o
+\fB\-r\fR  para remover a senha de um grupo. Quando n√£o h√° senhas definidas
 para um grupo, somente os membros do grupo podem usar o comando
 .BR newgrp (1) 
-para adicionar novos usu·rios ao grupo . A opÁ„o  \fB\-R\fR 
-desabilita o acesso ao grupo atravÈs do comando 
+para adicionar novos usu√°rios ao grupo . A op√ß√£o  \fB\-R\fR 
+desabilita o acesso ao grupo atrav√©s do comando 
 .BR newgrp (1)
 .
 .PP
 O
 .B gpasswd
 executado pelo administrador do grupo seguido pelo nome 
-solicitar· a senha do grupo. Caso o comando 
+solicitar√° a senha do grupo. Caso o comando 
 .BR newgrp (1)
-esteja habilitado para outros usu·rios do grupo sem o uso de senha, n„o
-membros podem tambÈm executar o comando, informando porÈm a senha do grupo.
+esteja habilitado para outros usu√°rios do grupo sem o uso de senha, n√£o
+membros podem tamb√©m executar o comando, informando por√©m a senha do grupo.
 .SH ARQUIVOS
-\fI/etc/group\fR	\- informaÁıes do grupo
+\fI/etc/group\fR	\- informa√ß√µes do grupo
 .br
-\fI/etc/gshadow\fR	\- informaÁıes do grupo em arquivo shadow
-.SH VEJA TAMB…M
+\fI/etc/gshadow\fR	\- informa√ß√µes do grupo em arquivo shadow
+.SH VEJA TAMB√âM
 .BR newgrp (1),
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
 .BR grpck (8)
-.SH TRADU«√O E REVIS√O PARA A LÕNGUA PORTUGUESA
-Sandro Nunes Henrique <sandro@conectiva.com.br> (traduÁ„o)
-Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br> (revis„o)
+.SH TRADU√á√ÉO E REVIS√ÉO PARA A L√çNGUA PORTUGUESA
+Sandro Nunes Henrique <sandro@conectiva.com.br> (tradu√ß√£o)
+.br
+Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br> (revis√£o)
+.br
+Guilherme de S. Pastore <gpastore@colband.com.br> (revis√£o)

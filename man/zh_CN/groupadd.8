@@ -1,4 +1,4 @@
-.\" $Id: groupadd.8,v 1.6 2005/04/05 19:08:57 kloczek Exp $
+.\" $Id: groupadd.8,v 1.7 2005/12/01 20:38:28 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -26,59 +26,59 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .TH GROUPADD 8
-.SH Ãû³Æ
-groupadd \- ½¨ Á¢ ÐÂ Èº ×é
-.SH Óï·¨
+.SH åç§°
+groupadd \- å»º ç«‹ æ–° ç¾¤ ç»„
+.SH è¯­æ³•
 .B groupadd
 [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-r\fR] [\fB\-f\fR] \fIgroup\fR
-.SH ÃèÊö
+.SH æè¿°
 \fBgroupadd\fR
-¿É Ö¸ ¶¨ Èº ×é Ãû ³Æ À´ ½¨ Á¢ ÐÂ µÄ Èº ×é ÕÊ ºÅ ¡£
-Ðè Òª Ê± ¿É ´Ó Ïµ Í³ ÖÐ È¡ µÃ ÐÂ Èº ×é Öµ ¡£
-\fBgroupadd\fR ÓÐ ÏÂ ÁÐ Ñ¡ Ïî ¿É ÓÃ ¡£
+å¯ æŒ‡ å®š ç¾¤ ç»„ å ç§° æ¥ å»º ç«‹ æ–° çš„ ç¾¤ ç»„ å¸ å· ã€‚
+éœ€ è¦ æ—¶ å¯ ä»Ž ç³» ç»Ÿ ä¸­ å– å¾— æ–° ç¾¤ ç»„ å€¼ ã€‚
+\fBgroupadd\fR æœ‰ ä¸‹ åˆ— é€‰ é¡¹ å¯ ç”¨ ã€‚
 .IP "\fB\-g\fR \fIgid\fR"
-group's ID Öµ ¡£
-³ý  ·Ç Ê¹ ÓÃ \fB\-o\fR ²Î Êý ²» È» ¸Ã Öµ ±Ø Ðë ÊÇ Î¨ Ò» £¬ ²» ¿É Ïà Í¬ ¡£
-Êý Öµ ²» ¿É Îª ¸º ¡£
-Ô¤ Éè Îª ×î Ð¡  ²»  µÃ Ð¡ ÓÚ 500 ¶ø Öð ´Î Ôö ¼Ó ¡£ 0~999 ´« Í³ ÉÏ
-ÊÇ ±£ Áô ¸ø \fIÏµÍ³ÕÊºÅ\fR Ê¹ ÓÃ ¡£
+group's ID å€¼ ã€‚
+é™¤  éž ä½¿ ç”¨ \fB\-o\fR å‚ æ•° ä¸ ç„¶ è¯¥ å€¼ å¿… é¡» æ˜¯ å”¯ ä¸€ ï¼Œ ä¸ å¯ ç›¸ åŒ ã€‚
+æ•° å€¼ ä¸ å¯ ä¸º è´Ÿ ã€‚
+é¢„ è®¾ ä¸º æœ€ å°  ä¸  å¾— å° äºŽ 500 è€Œ é€ æ¬¡ å¢ž åŠ  ã€‚ 0~999 ä¼  ç»Ÿ ä¸Š
+æ˜¯ ä¿ ç•™ ç»™ \fIç³»ç»Ÿå¸å·\fR ä½¿ ç”¨ ã€‚
 .IP \fB\-r\fR
 
 
-´Ë ²Î Êý ÊÇ ÓÃ À´ ½¨ Á¢ \fIÏµÍ³ÕÊºÅ\fR ¡£
-µÄ  UID »á ±È ¶¨ Òå ÔÚ Ïµ Í³ µµ ÉÏ /etc/login.defs.
-µÄ UID_MIN À´ µÄ Ð¡ ¡£ ×¢ Òâ useradd ´Ë ÓÃ ·¨ Ëù ½¨
-Á¢  µÄ ÕÊ ºÅ ²» »á ½¨ Á¢ Ê¹ ÓÃ Õß Ä¿ Â¼ £¬ Ò² ²» »á
-ÔÚ ºõ ¼Í Â¼ ÔÚ /etc/login.defs. µÄ ¶¨ Òå Öµ  ¡£  Èç
-¹û  Äã Ïë Òª ÓÐ Ê¹ ÓÃ Õß Ä¿ Â¼ Ðë ¶î Íâ Ö¸ ¶¨ \-m ²Î
-Êý À´ ½¨ Á¢ Ïµ Í³ ÕÊ ºÅ ¡£ Õâ ÊÇ RED HAT ¶î  Íâ  Ôö
-Éè µÄ Ñ¡ Ïî ¡£
-Ëü »á ×Ô ¶¯ °ï Äã Ñ¡ ¶¨ Ò» ¸ö Ð¡ ÓÚ 999 µÄ \fIgif\fR
-²» Ðè Òª ÔÙ ¼Ó ÉÏ \fB\-g\fR ²Î Êý ¡£
+æ­¤ å‚ æ•° æ˜¯ ç”¨ æ¥ å»º ç«‹ \fIç³»ç»Ÿå¸å·\fR ã€‚
+çš„  UID ä¼š æ¯” å®š ä¹‰ åœ¨ ç³» ç»Ÿ æ¡£ ä¸Š /etc/login.defs.
+çš„ UID_MIN æ¥ çš„ å° ã€‚ æ³¨ æ„ useradd æ­¤ ç”¨ æ³• æ‰€ å»º
+ç«‹  çš„ å¸ å· ä¸ ä¼š å»º ç«‹ ä½¿ ç”¨ è€… ç›® å½• ï¼Œ ä¹Ÿ ä¸ ä¼š
+åœ¨ ä¹Ž çºª å½• åœ¨ /etc/login.defs. çš„ å®š ä¹‰ å€¼  ã€‚  å¦‚
+æžœ  ä½  æƒ³ è¦ æœ‰ ä½¿ ç”¨ è€… ç›® å½• é¡» é¢ å¤– æŒ‡ å®š \-m å‚
+æ•° æ¥ å»º ç«‹ ç³» ç»Ÿ å¸ å· ã€‚ è¿™ æ˜¯ RED HAT é¢  å¤–  å¢ž
+è®¾ çš„ é€‰ é¡¹ ã€‚
+å®ƒ ä¼š è‡ª åŠ¨ å¸® ä½  é€‰ å®š ä¸€ ä¸ª å° äºŽ 999 çš„ \fIgif\fR
+ä¸ éœ€ è¦ å† åŠ  ä¸Š \fB\-g\fR å‚ æ•° ã€‚
 .br
-Õâ ÊÇ RED HAT ¶î  Íâ  Ôö Éè µÄ Ñ¡ Ïî ¡£
+è¿™ æ˜¯ RED HAT é¢  å¤–  å¢ž è®¾ çš„ é€‰ é¡¹ ã€‚
 
 .IP \fB\-f\fR
 This is \fIforce\fR flag. 
-ÐÂ Ôö Ò» ¸ö ÒÑ ¾­ ´æ ÔÚ µÄ Èº ×é ÕÊ ºÅ £¬ Ïµ Í³ »á ³ö
-ÏÖ ´í Îó Ñ¶ Ï¢ È» ºó ½á Êø \fBgroupadd\fR ¡£
- Èç ¹û ÊÇ Õâ Ñù µÄ Çé ¿ö £¬ ²» »á ÐÂ Ôö Õâ ¸ö Èº ×é 
-( Èç ¹û ÊÇ Õâ ¸ö Çé ¿ö ÏÂ £¬ Ïµ Í³ ²» »á ÔÙ ÐÂ Ôö Ò» ´Î )
+æ–° å¢ž ä¸€ ä¸ª å·² ç» å­˜ åœ¨ çš„ ç¾¤ ç»„ å¸ å· ï¼Œ ç³» ç»Ÿ ä¼š å‡º
+çŽ° é”™ è¯¯ è®¯ æ¯ ç„¶ åŽ ç»“ æŸ \fBgroupadd\fR ã€‚
+ å¦‚ æžœ æ˜¯ è¿™ æ · çš„ æƒ… å†µ ï¼Œ ä¸ ä¼š æ–° å¢ž è¿™ ä¸ª ç¾¤ ç»„ 
+( å¦‚ æžœ æ˜¯ è¿™ ä¸ª æƒ… å†µ ä¸‹ ï¼Œ ç³» ç»Ÿ ä¸ ä¼š å† æ–° å¢ž ä¸€ æ¬¡ )
 .br
-Ò² ¿É Í¬ Ê± ¼Ó ÉÏ \fB\-g\fR Ñ¡ Ïî
-µ± Äã ¼Ó ÉÏ Ò» ¸ö \fIgid\fR £¬ ´Ë Ê±  \fIgid\fR
-¾Í ²» ÓÃ ÊÇ Î¨ Ò» Öµ £¬ ¿É ²» ¼Ó \fB\-o\fR ²Î Êý £¬
-½¨ ºÃ Èº ×é ºó »á ÏÔ ½á ¹û  
+ä¹Ÿ å¯ åŒ æ—¶ åŠ  ä¸Š \fB\-g\fR é€‰ é¡¹
+å½“ ä½  åŠ  ä¸Š ä¸€ ä¸ª \fIgid\fR ï¼Œ æ­¤ æ—¶  \fIgid\fR
+å°± ä¸ ç”¨ æ˜¯ å”¯ ä¸€ å€¼ ï¼Œ å¯ ä¸ åŠ  \fB\-o\fR å‚ æ•° ï¼Œ
+å»º å¥½ ç¾¤ ç»„ åŽ ä¼š æ˜¾ ç»“ æžœ  
 (adding a group as neither \fB\-g\fR or \fB\-o\fR options were
 specified).
 
 .br
-Õâ ÊÇ RED HAT ¶î  Íâ  Ôö Éè µÄ Ñ¡ Ïî ¡£
-.SH µµ°¸
-\fI/etc/group\fR \- Èº ×é ×Ê Ñ¶
+è¿™ æ˜¯ RED HAT é¢  å¤–  å¢ž è®¾ çš„ é€‰ é¡¹ ã€‚
+.SH æ¡£æ¡ˆ
+\fI/etc/group\fR \- ç¾¤ ç»„ èµ„ è®¯
 .br
-\fI/etc/gshadow\fR \- Èº ×é ×Ê Ñ¶ ¼Ó ÃÜ
-.SH Ïà¹ØÎÄ¼þ
+\fI/etc/gshadow\fR \- ç¾¤ ç»„ èµ„ è®¯ åŠ  å¯†
+.SH ç›¸å…³æ–‡ä»¶
 .BR chfn (1),
 .BR chsh (1),
 .BR useradd (8),
@@ -87,5 +87,5 @@ specified).
 .BR passwd (1),
 .BR groupdel (8),
 .BR groupmod (8)
-.SH ×÷Õß
+.SH ä½œè€…
 Julianne Frances Haugh (jfh@tab.com)

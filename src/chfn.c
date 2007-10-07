@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chfn.c,v 1.37 2005/10/04 20:25:55 kloczek Exp $"
+#ident "$Id: chfn.c,v 1.38 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -195,13 +195,6 @@ static char *copy_field (char *in, char *out, char *extra)
 
 	return cp;
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * chfn - change a user's password file information

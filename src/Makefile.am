@@ -32,6 +32,7 @@ usbin_PROGRAMS = \
 	grpunconv \
 	logoutd \
 	newusers \
+	nologin \
 	pwck \
 	pwconv \
 	pwunconv \
@@ -52,9 +53,6 @@ AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
 chage_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 chfn_LDADD     = $(LDADD) $(LIBPAM)
-chsh_SOURCES   = \
-	chsh.c \
-	chsh_chkshell.c
 chsh_LDADD     = $(LDADD) $(LIBPAM)
 chpasswd_LDADD = $(LDADD) $(LIBPAM)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT)
@@ -64,8 +62,10 @@ groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 login_SOURCES  = \
 	login.c \
 	login_nopam.c
-login_LDADD    = $(LDADD) $(LIBPAM)
+login_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT)
+newgrp_LDADD   = $(LDADD) $(LIBPAM) $(LIBAUDIT)
 newusers_LDADD = $(LDADD) $(LIBPAM)
+nologin_LDADD  =
 passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT)
 su_SOURCES     = \
 	su.c \

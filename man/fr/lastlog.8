@@ -1,0 +1,63 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LASTLOG" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+lastlog \- Examiner le fichier lastlog
+.SH "SYNOPSIS"
+.HP 8
+\fBlastlog\fR [\fIoptions\fR]
+.SH "DESCRIPTION"
+.PP
+\fBLastlog\fR
+affiche le contenu du journal des dernières connexions (\fI/var/log/lastlog\fR). Les champs
+\fIUtilisateur\fR,
+\fIPort\fR, date de
+\fIDernière\fR
+connexion sont affichés. Par défaut (aucune option de spécifiée), les entrées de laslog sont affichées triées par ordre d'apparition dans
+\fI/etc/passwd\fR.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBlastlog\fR
+sont\ :
+.TP
+\fB\-b\fR, \fB\-\-before\fR \fIJOURS\fR
+Affiche les entrées du fichier lastlog plus anciennes que
+\fIJOURS\fR.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-t\fR, \fB\-\-time\fR \fIJOURS\fR
+Affiche les entréesdu fichier lastlog plus récentes que
+\fIJOURS\fR.
+.TP
+\fB\-u\fR, \fB\-\-user\fR \fIIDENTIFIANT\fR
+N'affiche que les entrées correspondant à l'utilisateur
+\fIIDENTIFIANT\fR.
+.TP
+L'utilisation de l'option \fB\-t\fR supplante celle de \fB\-u\fR.
+.PP
+Dans le cas où l'utilisateur ne s'est jamais connecté, le message \(Fo\ \fI**Never logged in**\fR\ \(Fc (\(Fo\ \fI**Jamais connecté**\fR\ \(Fc) est affiché à la place des champs
+\fIPort\fR
+et date de
+\fIDernière\fR
+connexion.
+.SH "NOTE"
+.PP
+Le fichier
+\fIlastlog\fR
+est une base de données qui contient les informations sur les dernières connexions de chaque utilisateur. Vous n'avez pas à faire de rotation (avec rotate) sur ce fichier. C'est un fichier creux, donc sa taille sur le disque est bien plus petite que celle affichée par by \(Fo\ \fBls \-l\fR\ \(Fc (qui peut indiquer un très gros fichier si vous avez des utilisateurs avec des UID élevés). Vous pouvez afficher sa taille réelle avec \(Fo\ \fBls \-s\fR\ \(Fc.
+.SH "FICHIERS"
+.TP
+\fI/var/log/lastlog\fR
+Journal des dernières connexions
+.SH "AVERTISSEMENTS"
+.PP
+S'il y a des écarts importants dans les valeurs des UID, lastlog s'exécutera plus longtemps, sans affichage à l'écran (c\-à\-d si mmdf=800 et que le dernier UID est 170, le programme semblera bloqué comme s'il examinait les UID 171 à 799).

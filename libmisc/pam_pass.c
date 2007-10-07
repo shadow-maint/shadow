@@ -2,7 +2,7 @@
 
 #ifdef USE_PAM
 
-#ident "$Id: pam_pass.c,v 1.11 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id: pam_pass.c,v 1.12 2005/10/19 15:21:07 kloczek Exp $"
 
 
 /*
@@ -17,10 +17,6 @@
 #include <sys/types.h>
 #include "defines.h"
 #include "pam_defs.h"
-static const struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
 
 void do_pam_passwd (const char *user, int silent, int change_expired)
 {

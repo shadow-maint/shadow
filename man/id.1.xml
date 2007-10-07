@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='id.1'>
-  <!-- $Id: id.1.xml,v 1.12 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: id.1.xml,v 1.13 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>id</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -63,10 +63,5 @@
 	<refentrytitle>getuid</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
   </refsect1>
 </refentry>

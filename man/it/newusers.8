@@ -1,0 +1,71 @@
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: newusers.8,v 1.2 2005/12/01 20:38:26 kloczek Exp $
+.\"
+.\" Traduzione in italiano di Isabella Ruocco <isacher@nettaxi.com> 
+.\" Guigno 1999
+.\"
+.TH NEWUSERS 8
+.SH NOME
+\fBnewusers\fR - aggiorna e crea nuovi utenti in batch
+.SH SINTASSI
+\fBnewusers\fR [\fI nuovi_utenti \fR]
+.SH DESCRIZIONE
+\fBnewusers\fR legge un file di coppie nome utente e password in chiaro
+e usa questa informazione per aggiornare un gruppo di utenti esistenti o
+per creare nuovi utenti.
+Ciascuna riga è nello stesso formato del file standard delle password 
+(vedere \fBpasswd\fR(5)) con le seguenti eccezioni.
+.IP "\fIpw_passwd\fR" 10
+Questo campo verrà crittato e usato come nuovo valore 
+per la password crittata.
+.IP "\fIpw_durata\fR"
+Questo campo verrà ignorato dalle shadow password se l'utente
+esiste già.
+.IP "\fIpw_gid\fR"
+Questo campo potrebbe essere il nome di un gruppo esistente, nel qual caso
+l'utente specificato verrà aggiunto come membro. Se viene dato un identificativo 
+numerico di gruppo non esistente, verrà creato un nuovo gruppo con questo numero.
+.IP "\fIpw_dir\fR"
+Questo campo controllerà l'esistenza della directory e, se non esiste già,
+verrà creata una nuova directory con lo stesso nome.
+La proprietà della directory verrà impostata all'utente che è stato creato 
+o aggiornato.
+.PP
+Ha senso usare questo comando in un grande ambiente di sistema dove 
+molti account vengono aggiornati in una sola volta.
+.SH CAVEAT
+.\" Successivamente dovrà essere usato il comando \fImkpasswd\fR 
+.\" per aggiornare i file password DBM.
+Il file in ingresso deve essere protetto dato che contiene le password in chiaro.
+.SH VEDERE ANCHE
+.\" mkpasswd(8), passwd(1), useradd(1)
+.BR passwd (1),
+.BR useradd (8)
+.SH AUTORE
+Julianne Frances Haugh (jfh@tab.com)

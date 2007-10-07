@@ -1,4 +1,4 @@
-.\" $Id: logoutd.8,v 1.5 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: logoutd.8,v 1.6 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,23 +27,23 @@
 .\" SUCH DAMAGE.
 .TH LOGOUTD 8
 .SH NAZWA
-logoutd \- wymuszenie ograniczeÒ czasu logowania
-.SH SK£ADNIA
+logoutd \- wymuszenie ogranicze≈Ñ czasu logowania
+.SH SK≈ÅADNIA
 .B logoutd
 .SH OPIS
 .B logoutd
-wymusza ograniczenia portÛw i czasÛw logowania podane w
+wymusza ograniczenia port√≥w i czas√≥w logowania podane w
 .IR /etc/porttime .
 .B logoutd
-powinno byÊ uruchamiane z \fI/etc/rc\fR.
-Okresowo przegl±dany jest plik \fI/var/run/utmp\fR. Sprawdzana jest kaøda nazwa
-uøytkownika, by mÛc stwierdziÊ czy posiada on zezwolenie na pracÍ w bieø±cym
+powinno byƒá uruchamiane z \fI/etc/rc\fR.
+Okresowo przeglƒÖdany jest plik \fI/var/run/utmp\fR. Sprawdzana jest ka≈ºda nazwa
+u≈ºytkownika, by m√≥c stwierdziƒá czy posiada on zezwolenie na pracƒô w bie≈ºƒÖcym
 czasie na danym porcie.
-Kaøda sesja pracy (logowania) naruszaj±ca ograniczenia zawarte
-w \fI/etc/porttime\fR jest koÒczona.
+Ka≈ºda sesja pracy (logowania) naruszajƒÖca ograniczenia zawarte
+w \fI/etc/porttime\fR jest ko≈Ñczona.
 .SH PLIKI
 .IR /etc/porttime " \- zezwolenia dla logowania na portach"
 .br
-.IR /var/run/utmp "     \- bieø±ce sesje pracy"
+.IR /var/run/utmp "     \- bie≈ºƒÖce sesje pracy"
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

@@ -1,4 +1,4 @@
-.\" $Id: groupmod.8,v 1.13 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: groupmod.8,v 1.14 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,45 +27,45 @@
 .\" SUCH DAMAGE.
 .TH GROUPMOD 8
 .SH NAZWA
-groupmod \- zmieÒ dane grupy
-.SH SK£ADNIA
+groupmod \- zmie≈Ñ dane grupy
+.SH SK≈ÅADNIA
 \fBgroupmod\fR [\fB\-g\fR \fIGID\fR [\fB\-o\fR]] [\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR]
 \fIGRUPA\fR
 .SH OPIS
 Polecenie \fBgroupmod\fR modyfikuje systemowe pliki kont tak, by
-odzwierciedliÊ w nich zmiany grup podane w wierszu poleceÒ.
+odzwierciedliƒá w nich zmiany grup podane w wierszu polece≈Ñ.
 .SH OPCJE
-Polecenie \fBgroupmod\fR posiada nastÍpuj±ce opcje:
+Polecenie \fBgroupmod\fR posiada nastƒôpujƒÖce opcje:
 .IP "\fB\-g\fR \fIGID\fR"
-Numeryczna warto∂Ê identyfikatora grupy (group ID). Warto∂Ê ta musi byÊ
-niepowtarzalna, chyba øe uøyto opcji \fB\-o\fR. Nie moøe byÊ ujemna.
-Warto∂ci pomiÍdzy 0 a 999 s± zwykle zarezerwowane dla grup systemowych. 
-Pliki, dla ktÛrych stary identyfikator jest identyfikatorem
-grupy pliku, wymagaj± rÍcznej zmiany ID grupy.
+Numeryczna warto≈õƒá identyfikatora grupy (group ID). Warto≈õƒá ta musi byƒá
+niepowtarzalna, chyba ≈ºe u≈ºyto opcji \fB\-o\fR. Nie mo≈ºe byƒá ujemna.
+Warto≈õci pomiƒôdzy 0 a 999 sƒÖ zwykle zarezerwowane dla grup systemowych. 
+Pliki, dla kt√≥rych stary identyfikator jest identyfikatorem
+grupy pliku, wymagajƒÖ rƒôcznej zmiany ID grupy.
 .IP "\fB\-n\fR \fINOWA_NAZWA_GRUPY\fR"
 Nazwa grupy zostanie zmieniona z \fIGRUPA\fR na \fINOWA_NAZWA_GRUPY\fR.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o grupach
 .br
 \fI/etc/gshadow\fR	\- bezpieczna informacja o grupach
-.SH KOD ZAKO—CZENIA
+.SH KOD ZAKO≈ÉCZENIA
 .TP 2
-Polecenie \fBgroupmod\fR koÒczy dzia≥anie z nastÍpuj±cymi warto∂ciami kodÛw zakoÒczenia:
+Polecenie \fBgroupmod\fR ko≈Ñczy dzia≈Çanie z nastƒôpujƒÖcymi warto≈õciami kod√≥w zako≈Ñczenia:
 .br
 \fB0\fR	\- powodzenie
 .br
-\fB2\fR	\- niew≥a∂ciwa sk≥adnia parametrÛw polecenia
+\fB2\fR	\- niew≈Ça≈õciwa sk≈Çadnia parametr√≥w polecenia
 .br
-\fB3\fR	\- niew≥a∂ciwe parametry opcji
+\fB3\fR	\- niew≈Ça≈õciwe parametry opcji
 .br
-\fB4\fR	\- gid jest juø uøywany (i nie uøyto opcji \-o)
+\fB4\fR	\- gid jest ju≈º u≈ºywany (i nie u≈ºyto opcji \-o)
 .br
 \fB6\fR	\- podana grupa nie istnieje
 .br
-\fB9\fR	\- grupa jest juø uøywana
+\fB9\fR	\- grupa jest ju≈º u≈ºywana
 .br
-\fB10\fR	\- niemoøliwa aktualizacja plikÛw grup
-.SH ZOBACZ TAKØE
+\fB10\fR	\- niemo≈ºliwa aktualizacja plik√≥w grup
+.SH ZOBACZ TAK≈ªE
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),

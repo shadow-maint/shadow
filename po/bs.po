@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -220,6 +220,10 @@ msgstr ""
 #, fuzzy, c-format
 msgid "never\n"
 msgstr "Nikad\n"
+
+#, c-format
+msgid "password must be changed"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -630,7 +634,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -1062,8 +1066,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1119,10 +1123,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
-msgstr ""
-
-#, c-format
-msgid "%s: Cannot execute %s"
 msgstr ""
 
 #, c-format
@@ -1245,6 +1245,19 @@ msgid "%s: %s\n"
 msgstr ""
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr ""
 
@@ -1260,8 +1273,9 @@ msgstr ""
 msgid "You are not authorized to su %s\n"
 msgstr ""
 
-msgid "(Enter your own password.)"
-msgstr ""
+#, fuzzy
+msgid "(Enter your own password)"
+msgstr "Ponovo unesite novu šifru:"
 
 #, c-format
 msgid ""
@@ -1340,7 +1354,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1350,22 +1364,6 @@ msgid ""
 "\t\t\t\taccount\n"
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
-msgstr ""
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr ""
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr ""
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr ""
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
 msgstr ""
 
 #, c-format
@@ -1434,6 +1432,22 @@ msgstr ""
 
 #, c-format
 msgid "%s: cannot open shadow password file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr ""
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
 msgstr ""
 
 #, c-format
@@ -1532,19 +1546,28 @@ msgid "%s: error removing directory %s\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr ""
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr ""
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr ""
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
 msgstr ""
 
 #, c-format
@@ -1615,6 +1638,18 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1627,11 +1662,4 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr ""
-
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""

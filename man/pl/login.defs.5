@@ -1,4 +1,4 @@
-.\" $Id: login.defs.5,v 1.8 2005/08/09 18:09:42 kloczek Exp $
+.\" $Id: login.defs.5,v 1.9 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991 \- 1993, Julianne Frances Haugh and Chip Rosenthal
 .\" All rights reserved.
 .\"
@@ -31,99 +31,99 @@
 .SH OPIS
 Plik
 .I /etc/login.defs
-definiuje specyficzn± dla naszej maszyny konfiguracjê pakietu shadow login.
-Plik ten jest wymagany. Jego nieobecno¶æ nie wstrzyma dzia³ania systemu,
-ale prawdopodobnie spowoduje nieprzewidywalne dzia³anie.
+definiuje specyficznÄ… dla naszej maszyny konfiguracjÄ™ pakietu shadow login.
+Plik ten jest wymagany. Jego nieobecnoÅ›Ä‡ nie wstrzyma dziaÅ‚ania systemu,
+ale prawdopodobnie spowoduje nieprzewidywalne dziaÅ‚anie.
 .PP
-Plik ten jest czytelnym plikiem tekstowym. Ka¿dy z jego wierszy opisuje jeden
-parametr konfiguracji. Wiersze sk³adaj± siê z nazwy parametru i jego warto¶ci,
-oddzielonych bia³ym znakiem. Ignorowane s± puste wiersze i wiersze komentarzy.
-Komentarze rozpoczynaj± siê od znaku '#', który musi byæ pierwszym znakiem
-wiersza (pomijaj±c bia³e znaki).
+Plik ten jest czytelnym plikiem tekstowym. KaÅ¼dy z jego wierszy opisuje jeden
+parametr konfiguracji. Wiersze skÅ‚adajÄ… siÄ™ z nazwy parametru i jego wartoÅ›ci,
+oddzielonych biaÅ‚ym znakiem. Ignorowane sÄ… puste wiersze i wiersze komentarzy.
+Komentarze rozpoczynajÄ… siÄ™ od znaku '#', ktÃ³ry musi byÄ‡ pierwszym znakiem
+wiersza (pomijajÄ…c biaÅ‚e znaki).
 .PP
-Istniej± cztery typy warto¶ci parametrów: napisy, logiczne (boolean),
-liczby i d³ugie liczby (long numbers). Napis jest z³o¿ony
-z dowolnych znaków drukowalnych. Parametr logiczny mo¿e mieæ albo warto¶æ
+IstniejÄ… cztery typy wartoÅ›ci parametrÃ³w: napisy, logiczne (boolean),
+liczby i dÅ‚ugie liczby (long numbers). Napis jest zÅ‚oÅ¼ony
+z dowolnych znakÃ³w drukowalnych. Parametr logiczny moÅ¼e mieÄ‡ albo wartoÅ›Ä‡
 "yes" albo "no". Niezdefiniowanemu parametrowi logicznemu lub parametrowi,
-któremu przypisano warto¶æ inn± od powy¿szych przypisane zostanie "no".
-Liczby (zarówno zwyk³e jak i d³ugie) mog± byæ warto¶ciami dziesiêtnymi,
-ósemkowymi (poprzed¼ warto¶æ cyfr± "0") albo szesnastkowymi (poprzed¼ warto¶æ
-sekwencj± "0x"). Maksymalne warto¶ci zwyk³ych i d³ugich parametrów
-numerycznych zale¿± od maszyny.
+ktÃ³remu przypisano wartoÅ›Ä‡ innÄ… od powyÅ¼szych przypisane zostanie "no".
+Liczby (zarÃ³wno zwykÅ‚e jak i dÅ‚ugie) mogÄ… byÄ‡ wartoÅ›ciami dziesiÄ™tnymi,
+Ã³semkowymi (poprzedÅº wartoÅ›Ä‡ cyfrÄ… "0") albo szesnastkowymi (poprzedÅº wartoÅ›Ä‡
+sekwencjÄ… "0x"). Maksymalne wartoÅ›ci zwykÅ‚ych i dÅ‚ugich parametrÃ³w
+numerycznych zaleÅ¼Ä… od maszyny.
 .PP
-Obs³ugiwane s± nastêpuj±ce opcje konfiguracyjne:
+ObsÅ‚ugiwane sÄ… nastÄ™pujÄ…ce opcje konfiguracyjne:
 .\"
 .IP "CHFN_AUTH (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .IR yes ,
 to programy
 .B chfn
 i
 .B chsh
-bêd± pytaæ o has³o przed dokonaniem zmian, chyba ¿e uruchamiane s± przez
-superu¿ytkownika.
+bÄ™dÄ… pytaÄ‡ o hasÅ‚o przed dokonaniem zmian, chyba Å¼e uruchamiane sÄ… przez
+superuÅ¼ytkownika.
 .\"
 .IP "CHFN_RESTRICT (napis)"
-Ten parametr okre¶la, jakie warto¶ci w polu
+Ten parametr okreÅ›la, jakie wartoÅ›ci w polu
 .I gecos
 pliku
 .I passwd
-mog± byæ zmieniane przez zwyk³ych u¿ytkowników za pomoc± programu
+mogÄ… byÄ‡ zmieniane przez zwykÅ‚ych uÅ¼ytkownikÃ³w za pomocÄ… programu
 .B chfn
-Mo¿e on byæ dowoln± kombinacj± liter
+MoÅ¼e on byÄ‡ dowolnÄ… kombinacjÄ… liter
 .IR f ,
 .IR r ,
 .IR w ,
 .IR h ,
-oznaczaj±cych odpowiednio: Full name (pe³na nazwa), Room number (numer pokoju),
-Work phone (telefon s³u¿bowy) i Home phone (telefon domowy).
-Je¶li parametr nie jest podany, to zmian mo¿e dokonywaæ wy³±cznie
-superu¿ytkownik.
+oznaczajÄ…cych odpowiednio: Full name (peÅ‚na nazwa), Room number (numer pokoju),
+Work phone (telefon sÅ‚uÅ¼bowy) i Home phone (telefon domowy).
+JeÅ›li parametr nie jest podany, to zmian moÅ¼e dokonywaÄ‡ wyÅ‚Ä…cznie
+superuÅ¼ytkownik.
 .\"
 .IP "CONSOLE (napis)"
-Je¶li podana, definicja ta okre¶la ograniczony zestaw linii, na których
-dozwolone jest rozpoczynanie sesji u¿ytkownika root. Próby logowania
-u¿ytkownika root niespe³niaj±ce ustalonych tu kryteriów zostan± odrzucone.
-Warto¶æ tego pola mo¿e wyst±piæ w jednej z dwu postaci: albo pe³nej nazwy
-¶cie¿kowej pliku, jak na przyk³ad
+JeÅ›li podana, definicja ta okreÅ›la ograniczony zestaw linii, na ktÃ³rych
+dozwolone jest rozpoczynanie sesji uÅ¼ytkownika root. PrÃ³by logowania
+uÅ¼ytkownika root niespeÅ‚niajÄ…ce ustalonych tu kryteriÃ³w zostanÄ… odrzucone.
+WartoÅ›Ä‡ tego pola moÅ¼e wystÄ…piÄ‡ w jednej z dwu postaci: albo peÅ‚nej nazwy
+Å›cieÅ¼kowej pliku, jak na przykÅ‚ad
 .sp
 .ft I
 	CONSOLE /etc/consoles
 .ft R
 .sp
-albo listy linii terminalowych rozdzielonych dwukropkami, jak poni¿ej:
+albo listy linii terminalowych rozdzielonych dwukropkami, jak poniÅ¼ej:
 .sp
 .ft I
 	CONSOLE console:tty01:tty02:tty03:tty04
 .ft R
 .sp
-(Zauwa¿, ¿e wymienione tu nazwy nie zawieraj± ¶cie¿ki /dev/).
-Je¿eli podano ¶cie¿kow± nazwê pliku, to ka¿dy jego wiersz powinien okre¶laæ
-jedn± liniê terminalow±. Je¶li parametr ten nie jest zdefiniowany albo podany
-plik nie istnieje, to u¿ytkownik root bêdzie móg³ siê logowaæ z dowolnej linii
-terminalowej. Poniewa¿ usuniêcie lub obciêcie pliku definiuj±cego
-dozwolone linie mo¿e spowodowaæ nieautoryzowane logowania roota, plik ten musi
-byæ chroniony. Tam, gdzie bezpieczeñstwo jest spraw± kluczow±, powinna byæ
-u¿ywana postaæ listy separowanej dwukropkami, co chroni przed potencjaln±
-prób± ataku w opisany sposób.
+(ZauwaÅ¼, Å¼e wymienione tu nazwy nie zawierajÄ… Å›cieÅ¼ki /dev/).
+JeÅ¼eli podano Å›cieÅ¼kowÄ… nazwÄ™ pliku, to kaÅ¼dy jego wiersz powinien okreÅ›laÄ‡
+jednÄ… liniÄ™ terminalowÄ…. JeÅ›li parametr ten nie jest zdefiniowany albo podany
+plik nie istnieje, to uÅ¼ytkownik root bÄ™dzie mÃ³gÅ‚ siÄ™ logowaÄ‡ z dowolnej linii
+terminalowej. PoniewaÅ¼ usuniÄ™cie lub obciÄ™cie pliku definiujÄ…cego
+dozwolone linie moÅ¼e spowodowaÄ‡ nieautoryzowane logowania roota, plik ten musi
+byÄ‡ chroniony. Tam, gdzie bezpieczeÅ„stwo jest sprawÄ… kluczowÄ…, powinna byÄ‡
+uÅ¼ywana postaÄ‡ listy separowanej dwukropkami, co chroni przed potencjalnÄ…
+prÃ³bÄ… ataku w opisany sposÃ³b.
 .\"
 .IP "CONSOLE_GROUPS (napis)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "CRACKLIB_DICTPATH (napis)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "DEFAULT_HOME (logiczna)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "DIALUPS_CHECK_ENAB (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .I yes
 a plik
 .I /etc/dialups
-istnieje, to na liniach telefonicznych wyszczególnionych w tym pliku s±
-w³±czane wtórne has³a (has³a telefoniczne).  Plik ten powinien zawieraæ listê
-linii telefonicznych (dialups), po jednej w wierszu, na przyk³ad:
+istnieje, to na liniach telefonicznych wyszczegÃ³lnionych w tym pliku sÄ…
+wÅ‚Ä…czane wtÃ³rne hasÅ‚a (hasÅ‚a telefoniczne).  Plik ten powinien zawieraÄ‡ listÄ™
+linii telefonicznych (dialups), po jednej w wierszu, na przykÅ‚ad:
 .nf
 .sp
 .ft I
@@ -137,33 +137,33 @@ linii telefonicznych (dialups), po jednej w wierszu, na przyk³ad:
 .fi
 .\"
 .IP "ENVIRON_FILE (napis)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "ENV_HZ (napis)"
-Parametr ten okre¶la warto¶æ parametru ¶rodowiska HZ. Przyk³ad u¿ycia:
+Parametr ten okreÅ›la wartoÅ›Ä‡ parametru Å›rodowiska HZ. PrzykÅ‚ad uÅ¼ycia:
 .sp
 	\fIENV_HZ     HZ=50\fR
 .sp
-Je¿eli jest on zdefiniowany, to nie zostanie ustanowiona ¿adna warto¶æ HZ.
+JeÅ¼eli jest on zdefiniowany, to nie zostanie ustanowiona Å¼adna wartoÅ›Ä‡ HZ.
 .\"
 .IP "ENV_PATH (napis)"
-Parametr ten musi byæ zdefiniowany jako ¶cie¿ka przeszukiwania dla zwyk³ych
-u¿ytkowników. Przy logowaniu z UID innym ni¿ zero, zmienna ¶rodowiskowa PATH
-jest inicjowana t± w³a¶nie warto¶ci±. Jest to parametr wymagany; je¿eli nie
-zostanie zdefiniowany, to zostanie nadana, byæ mo¿e niepoprawna, warto¶æ
-domy¶lna.
+Parametr ten musi byÄ‡ zdefiniowany jako Å›cieÅ¼ka przeszukiwania dla zwykÅ‚ych
+uÅ¼ytkownikÃ³w. Przy logowaniu z UID innym niÅ¼ zero, zmienna Å›rodowiskowa PATH
+jest inicjowana tÄ… wÅ‚aÅ›nie wartoÅ›ciÄ…. Jest to parametr wymagany; jeÅ¼eli nie
+zostanie zdefiniowany, to zostanie nadana, byÄ‡ moÅ¼e niepoprawna, wartoÅ›Ä‡
+domyÅ›lna.
 .\"
 .IP "ENV_SUPATH (napis)"
-Parametr ten musi byæ zdefiniowany jako ¶cie¿ka przeszukiwania dla
-superu¿ytkownika. Przy rozpoczynaniu sesji z UID równym zero, zmienna
-¶rodowiskowa PATH jest inicjowana t± w³a¶nie warto¶ci±. Jest to parametr
-wymagany; je¿eli nie zostanie zdefiniowany, to zostanie nadana, byæ mo¿e
-niepoprawna, warto¶æ domy¶lna.
+Parametr ten musi byÄ‡ zdefiniowany jako Å›cieÅ¼ka przeszukiwania dla
+superuÅ¼ytkownika. Przy rozpoczynaniu sesji z UID rÃ³wnym zero, zmienna
+Å›rodowiskowa PATH jest inicjowana tÄ… wÅ‚aÅ›nie wartoÅ›ciÄ…. Jest to parametr
+wymagany; jeÅ¼eli nie zostanie zdefiniowany, to zostanie nadana, byÄ‡ moÅ¼e
+niepoprawna, wartoÅ›Ä‡ domyÅ›lna.
 .\"
 .IP "ENV_TZ (napis)"
-Parametr ten zawiera informacjê s³u¿±c± do utworzenia zmiennej ¶rodowiskowej TZ.
-Jego warto¶æ musi byæ albo wprost wymagan± zawarto¶ci± TZ, albo
-pe³n± nazw± ¶cie¿kow± pliku zawieraj±cego tê informacjê. Przyk³ad u¿ycia:
+Parametr ten zawiera informacjÄ™ sÅ‚uÅ¼Ä…cÄ… do utworzenia zmiennej Å›rodowiskowej TZ.
+Jego wartoÅ›Ä‡ musi byÄ‡ albo wprost wymaganÄ… zawartoÅ›ciÄ… TZ, albo
+peÅ‚nÄ… nazwÄ… Å›cieÅ¼kowÄ… pliku zawierajÄ…cego tÄ™ informacjÄ™. PrzykÅ‚ad uÅ¼ycia:
 .sp
 	\fIENV_TZ\0\0\0\0TZ=CST6CDT\fP
 .sp
@@ -171,61 +171,61 @@ lub
 .sp
 	\fIENV_TZ\0\0\0\0/etc/tzname\fP
 .sp
-Je¿eli podano nieistniej±cy plik, to TZ zostanie zainicjowane pewn± warto¶ci±
-domy¶ln±.  Je¿eli nie zdefiniowano tego parametru to nie bêdzie ustawiona
-¿adna warto¶æ TZ.
+JeÅ¼eli podano nieistniejÄ…cy plik, to TZ zostanie zainicjowane pewnÄ… wartoÅ›ciÄ…
+domyÅ›lnÄ….  JeÅ¼eli nie zdefiniowano tego parametru to nie bÄ™dzie ustawiona
+Å¼adna wartoÅ›Ä‡ TZ.
 .\"
 .IP "ERASECHAR (liczba)"
-T± warto¶ci± jest inicjowany terminalowy znak
+TÄ… wartoÅ›ciÄ… jest inicjowany terminalowy znak
 .I erase
-(kasowania). Jest to obs³ugiwane tylko w systemach z interfejsem
+(kasowania). Jest to obsÅ‚ugiwane tylko w systemach z interfejsem
 .IR termio,
-np. System V. Je¿eli nie podano parametru, to znak kasowania zostanie
-zainicjowany na backspace. Informacjê powi±zan± znajdziesz w opisie KILLCHAR.
+np. System V. JeÅ¼eli nie podano parametru, to znak kasowania zostanie
+zainicjowany na backspace. InformacjÄ™ powiÄ…zanÄ… znajdziesz w opisie KILLCHAR.
 .\"
 .IP "FAILLOG_ENAB (logiczna)"
-Je¿eli ustawiona na
+JeÅ¼eli ustawiona na
 .I yes
-to nieudane logowania bêd± odnotowywane w pliku
+to nieudane logowania bÄ™dÄ… odnotowywane w pliku
 .I /var/log/faillog
 w formacie
 .BR faillog (8).
 .\"
 .IP "FAIL_DELAY (liczba)"
-Czas opó¼nienia, wyra¿ony w sekundach, po ka¿dej nieudanej próbie logowania.
+Czas opÃ³Åºnienia, wyraÅ¼ony w sekundach, po kaÅ¼dej nieudanej prÃ³bie logowania.
 .\"
 .IP "FAKE_SHELL (napis)"
-Zamiast rzeczywistej pow³oki u¿ytkownika zostanie uruchomiony program okre¶lony
-warto¶ci± tego parametru. Nazwa widoczna (argv[0]) programu bêdzie jednak
-nazw± pow³oki. Program przed uruchomieniem faktycznej pow³oki mo¿e wykonywaæ
-dowoln± akcjê (logowanie, dodatkowe uwierzytelnianie, banner itp.).
+Zamiast rzeczywistej powÅ‚oki uÅ¼ytkownika zostanie uruchomiony program okreÅ›lony
+wartoÅ›ciÄ… tego parametru. Nazwa widoczna (argv[0]) programu bÄ™dzie jednak
+nazwÄ… powÅ‚oki. Program przed uruchomieniem faktycznej powÅ‚oki moÅ¼e wykonywaÄ‡
+dowolnÄ… akcjÄ™ (logowanie, dodatkowe uwierzytelnianie, banner itp.).
 .\"
 .IP "FTMP_FILE (napis)"
-Okre¶la pe³n± ¶cie¿kow± nazwê pliku, w którym rejestrowane s± nieudane próby
-rozpoczynania sesji pracy. W przypadku nieudanej próby logowania do pliku
+OkreÅ›la peÅ‚nÄ… Å›cieÅ¼kowÄ… nazwÄ™ pliku, w ktÃ³rym rejestrowane sÄ… nieudane prÃ³by
+rozpoczynania sesji pracy. W przypadku nieudanej prÃ³by logowania do pliku
 dopisywana jest pozycja o formacie
 .IR utmp .
-Zauwa¿, ¿e ró¿ni siê to od rejestracji niepomy¶lnych logowañ do
+ZauwaÅ¼, Å¼e rÃ³Å¼ni siÄ™ to od rejestracji niepomyÅ›lnych logowaÅ„ do
 .IR /var/log/faillog ,
-gdy¿ opisywana funkcja odnotowuje wszystkie nieudane próby, podczas gdy 
-"faillog" kumuluje informacjê o pora¿kach danego u¿ytkownika. Je¶li nie
-podano tego parametru, to rejestracja bêdzie wy³±czona. Powi±zane informacje
+gdyÅ¼ opisywana funkcja odnotowuje wszystkie nieudane prÃ³by, podczas gdy 
+"faillog" kumuluje informacjÄ™ o poraÅ¼kach danego uÅ¼ytkownika. JeÅ›li nie
+podano tego parametru, to rejestracja bÄ™dzie wyÅ‚Ä…czona. PowiÄ…zane informacje
 znajdziesz w opisie FAILLOG_ENAB i LOG_UNKFAIL_ENAB.
 .\"
 .IP "GID_MAX (liczba)"
 .IP "GID_MIN (liczba)"
-Zakres identyfikatorów grup, w obrêbie którego mo¿e wybieraæ program
+Zakres identyfikatorÃ³w grup, w obrÄ™bie ktÃ³rego moÅ¼e wybieraÄ‡ program
 .BR groupadd .
 .\"
 .IP "HUSHLOGIN_FILE (nazwa)"
-Parametr u¿ywany do ustalenia okoliczno¶ci cichego logowania ("hushlogin").
-Okoliczno¶ci te mog± byæ ustalone na dwa sposoby. Po pierwsze, je¿eli warto¶ci±
-parametru jest nazwa pliku, a plik ten istnieje w katalogu domowym u¿ytkownika,
-to wprowadzane s± warunki cichego logowania. Zawarto¶æ pliku jest ignorowana;
-sama jego obecno¶æ powoduje ciche logowanie. Po drugie, je¿eli warto¶ci±
-parametru jest pe³na nazwa ¶cie¿kowa pliku a w pliku tym znaleziona zostanie
-nazwa u¿ytkownika lub nazwa jego pow³oki, to wprowadzone zostan± warunki
-cichego logowania. W tym przypadku, plik powinien mieæ format podobny do:
+Parametr uÅ¼ywany do ustalenia okolicznoÅ›ci cichego logowania ("hushlogin").
+OkolicznoÅ›ci te mogÄ… byÄ‡ ustalone na dwa sposoby. Po pierwsze, jeÅ¼eli wartoÅ›ciÄ…
+parametru jest nazwa pliku, a plik ten istnieje w katalogu domowym uÅ¼ytkownika,
+to wprowadzane sÄ… warunki cichego logowania. ZawartoÅ›Ä‡ pliku jest ignorowana;
+sama jego obecnoÅ›Ä‡ powoduje ciche logowanie. Po drugie, jeÅ¼eli wartoÅ›ciÄ…
+parametru jest peÅ‚na nazwa Å›cieÅ¼kowa pliku a w pliku tym znaleziona zostanie
+nazwa uÅ¼ytkownika lub nazwa jego powÅ‚oki, to wprowadzone zostanÄ… warunki
+cichego logowania. W tym przypadku, plik powinien mieÄ‡ format podobny do:
 .nf
 .sp
 .ft I
@@ -237,246 +237,246 @@ cichego logowania. W tym przypadku, plik powinien mieæ format podobny do:
 .ft R
 .sp
 .fi
-Je¿eli nie zdefiniowano tego parametru, to warunki cichego logowania nigdy
-nie wyst±pi±. W trakcie cichego logowanie wstrzymane jest wy¶wietlanie
-wiadomo¶ci dnia (message of the day), ostatniego udanego i nieudanego
-rozpoczêcia sesji pracy, wy¶wietlanie stanu skrzynki pocztowej i sprawdzenie
-wieku has³a. Zauwa¿, ¿e zezwolenie na pliki cichego logowania w katalogach
-domowych u¿ytkowników pozwala im na wstrzymanie kontroli wa¿no¶ci
-has³a. Informacje zwi±zane z tym tematem znajdziesz w opisach MOTD_FILE,
+JeÅ¼eli nie zdefiniowano tego parametru, to warunki cichego logowania nigdy
+nie wystÄ…piÄ…. W trakcie cichego logowanie wstrzymane jest wyÅ›wietlanie
+wiadomoÅ›ci dnia (message of the day), ostatniego udanego i nieudanego
+rozpoczÄ™cia sesji pracy, wyÅ›wietlanie stanu skrzynki pocztowej i sprawdzenie
+wieku hasÅ‚a. ZauwaÅ¼, Å¼e zezwolenie na pliki cichego logowania w katalogach
+domowych uÅ¼ytkownikÃ³w pozwala im na wstrzymanie kontroli waÅ¼noÅ›ci
+hasÅ‚a. Informacje zwiÄ…zane z tym tematem znajdziesz w opisach MOTD_FILE,
 FILELOG_ENAB, LASTLOG_ENAB i MAIL_CHECK_ENAB.
 .\"
 .IP "ISSUE_FILE (napis)"
-Pe³na ¶cie¿kowa nazwa pliku wy¶wietlanego przed ka¿d± zachêt± do logowania.
+PeÅ‚na Å›cieÅ¼kowa nazwa pliku wyÅ›wietlanego przed kaÅ¼dÄ… zachÄ™tÄ… do logowania.
 .\"
 .IP "KILLCHAR (liczba)"
-T± warto¶ci± inicjowany jest terminalowy znak
+TÄ… wartoÅ›ciÄ… inicjowany jest terminalowy znak
 .IR kill .
-Jest to obs³ugiwane tylko w systemach z interfejsem
+Jest to obsÅ‚ugiwane tylko w systemach z interfejsem
 .IR termio,
-np. System V. Je¿eli nie podano parametru, to znak kasowania zostanie
-zainicjowany na \s\-2CTRL/U\s0. Informacjê powi±zan± znajdziesz w opisie
+np. System V. JeÅ¼eli nie podano parametru, to znak kasowania zostanie
+zainicjowany na \s\-2CTRL/U\s0. InformacjÄ™ powiÄ…zanÄ… znajdziesz w opisie
 ERASECHAR.
 .\"
 .IP "LASTLOG_ENAB (logiczna)"
-Je¶li ma warto¶æ
+JeÅ›li ma wartoÅ›Ä‡
 .IR yes ,
 i istnieje plik
 .IR /var/log/lastlog ,
-to w tym pliku bêdzie rejestrowane poprawne rozpoczêcie sesji pracy u¿ytkownika
-(zalogowanie siê). Ponadto, je¶li opcja ta jest w³±czona, to podczas logowania
-siê u¿ytkownika bêdzie wy¶wietlana informacja o liczbie ostatnich udanych
-i nieudanych logowañ. Zakoñczone niepowodzeniem logowania nie bêd± wy¶wietlane
-je¶li nie w³±czono FAILLOG_ENAB. W warunkach cichego logowanie nie
-bêd± wy¶wietlane informacje ani o pomy¶lnych ani o niepomy¶lnych logowaniach.
+to w tym pliku bÄ™dzie rejestrowane poprawne rozpoczÄ™cie sesji pracy uÅ¼ytkownika
+(zalogowanie siÄ™). Ponadto, jeÅ›li opcja ta jest wÅ‚Ä…czona, to podczas logowania
+siÄ™ uÅ¼ytkownika bÄ™dzie wyÅ›wietlana informacja o liczbie ostatnich udanych
+i nieudanych logowaÅ„. ZakoÅ„czone niepowodzeniem logowania nie bÄ™dÄ… wyÅ›wietlane
+jeÅ›li nie wÅ‚Ä…czono FAILLOG_ENAB. W warunkach cichego logowanie nie
+bÄ™dÄ… wyÅ›wietlane informacje ani o pomyÅ›lnych ani o niepomyÅ›lnych logowaniach.
 .\"
 .IP "LOGIN_RETRIES (liczba)"
-Dozwolona liczba prób logowania przed zakoñczeniem pracy programu
+Dozwolona liczba prÃ³b logowania przed zakoÅ„czeniem pracy programu
 .BR login .
 .\"
 .IP "LOGIN_STRING (napis)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .IP "LOGIN_TIMEOUT (liczba)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .IP "LOG_OK_LOGINS (logiczna)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .IP "LOG_UNKFAIL_ENAB (logiczna)"
-Je¶li posiada warto¶æ
+JeÅ›li posiada wartoÅ›Ä‡
 .I yes
-to nieznane nazwy u¿ytkowników bêd± równie¿ odnotowywane je¶li w³±czone jest
-rejestrowanie nieudanych prób rozpoczêcia sesji. Zauwa¿, ¿e niesie to ze sob±
-potencjalne zagro¿enie bezpieczeñstwa: powszechn± przyczyn± nieudanego
-logowania jest zamiana nazwy u¿ytkownika i has³a, tryb ten zatem spowoduje,
-¿e czêsto w rejestrach nieudanych logowañ bêd± siê odk³adaæ jawne has³a.
-Je¿eli opcja ta jest wy³±czona, to nieznane nazwy u¿ytkowników bêd± pomijane
-w komunikatach o nieudanych próbach logowania.
+to nieznane nazwy uÅ¼ytkownikÃ³w bÄ™dÄ… rÃ³wnieÅ¼ odnotowywane jeÅ›li wÅ‚Ä…czone jest
+rejestrowanie nieudanych prÃ³b rozpoczÄ™cia sesji. ZauwaÅ¼, Å¼e niesie to ze sobÄ…
+potencjalne zagroÅ¼enie bezpieczeÅ„stwa: powszechnÄ… przyczynÄ… nieudanego
+logowania jest zamiana nazwy uÅ¼ytkownika i hasÅ‚a, tryb ten zatem spowoduje,
+Å¼e czÄ™sto w rejestrach nieudanych logowaÅ„ bÄ™dÄ… siÄ™ odkÅ‚adaÄ‡ jawne hasÅ‚a.
+JeÅ¼eli opcja ta jest wyÅ‚Ä…czona, to nieznane nazwy uÅ¼ytkownikÃ³w bÄ™dÄ… pomijane
+w komunikatach o nieudanych prÃ³bach logowania.
 .\"
 .IP "MAIL_CHECK_ENAB (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .IR yes ,
-to u¿ytkownik po rozpoczêciu sesji pracy bêdzie powiadamiany o stanie swojej
-skrzynki pocztowej. Informacjê zwi±zan± z tym tematem znajdziesz w opisie
+to uÅ¼ytkownik po rozpoczÄ™ciu sesji pracy bÄ™dzie powiadamiany o stanie swojej
+skrzynki pocztowej. InformacjÄ™ zwiÄ…zanÄ… z tym tematem znajdziesz w opisie
 MAIL_DIR.
 .\"
 .IP "MAIL_DIR (napis)"
-Okre¶la pe³n± nazwê ¶cie¿kow± do katalogu zawieraj±cego pliki skrzynki
-pocztowej u¿ytkownika. Do powy¿szej ¶cie¿ki doklejana jest nazwa u¿ytkownika,
-tworz±c w ten sposób zmienn± ¶rodowiskow± MAIL \- ¶cie¿kê do skrzynki
-u¿ytkownika. Musi byæ zdefiniowany albo niniejszy parametr albo parametr
-MAIL_FILE; je¶li nie zostan± zdefiniowane, to zostanie nadana, byæ mo¿e
-niepoprawna, warto¶æ domy¶lna. Zobacz tak¿e opis MAIL_CHECK_ENAB.
+OkreÅ›la peÅ‚nÄ… nazwÄ™ Å›cieÅ¼kowÄ… do katalogu zawierajÄ…cego pliki skrzynki
+pocztowej uÅ¼ytkownika. Do powyÅ¼szej Å›cieÅ¼ki doklejana jest nazwa uÅ¼ytkownika,
+tworzÄ…c w ten sposÃ³b zmiennÄ… Å›rodowiskowÄ… MAIL \- Å›cieÅ¼kÄ™ do skrzynki
+uÅ¼ytkownika. Musi byÄ‡ zdefiniowany albo niniejszy parametr albo parametr
+MAIL_FILE; jeÅ›li nie zostanÄ… zdefiniowane, to zostanie nadana, byÄ‡ moÅ¼e
+niepoprawna, wartoÅ›Ä‡ domyÅ›lna. Zobacz takÅ¼e opis MAIL_CHECK_ENAB.
 .\"
 .IP "MAIL_FILE (napis)"
-Okre¶la nazwê pliku skrzynki pocztowej u¿ytkownika. Nazwa ta doklejana jest
-na koniec nazwy katalogu domowego u¿ytkownika tworz±c zmienn± ¶rodowiskow±
-MAIL \- ¶cie¿kê do skrzynki u¿ytkownika. Musi byæ zdefiniowany albo niniejszy
-parametr albo parametr MAIL_DIR; je¶li nie zostan± zdefiniowane, to zostanie
-nadana, byæ mo¿e niepoprawna, warto¶æ domy¶lna. Zobacz tak¿e opis
+OkreÅ›la nazwÄ™ pliku skrzynki pocztowej uÅ¼ytkownika. Nazwa ta doklejana jest
+na koniec nazwy katalogu domowego uÅ¼ytkownika tworzÄ…c zmiennÄ… Å›rodowiskowÄ…
+MAIL \- Å›cieÅ¼kÄ™ do skrzynki uÅ¼ytkownika. Musi byÄ‡ zdefiniowany albo niniejszy
+parametr albo parametr MAIL_DIR; jeÅ›li nie zostanÄ… zdefiniowane, to zostanie
+nadana, byÄ‡ moÅ¼e niepoprawna, wartoÅ›Ä‡ domyÅ›lna. Zobacz takÅ¼e opis
 MAIL_CHECK_ENAB.
 .\"
 .IP "MD5_CRYPT_ENAB (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .IR yes ,
 to program
 .B passwd
-bêdzie kodowaæ nowo zmieniane has³a przy pomocy nowego algorytmu
+bÄ™dzie kodowaÄ‡ nowo zmieniane hasÅ‚a przy pomocy nowego algorytmu
 .BR crypt (3),
-opartego o MD\-5. Algorytm ten pierwotnie pojawi³ siê we FreeBSD i jest te¿
-obs³ugiwany przez libc\-5.4.38 oraz glibc\-2.0 (lub wy¿sz±) w Linuksie.
-Pozwala on na u¿ywanie hase³ d³u¿szych ni¿ 8 znaków (ograniczone przez
+opartego o MD\-5. Algorytm ten pierwotnie pojawiÅ‚ siÄ™ we FreeBSD i jest teÅ¼
+obsÅ‚ugiwany przez libc\-5.4.38 oraz glibc\-2.0 (lub wyÅ¼szÄ…) w Linuksie.
+Pozwala on na uÅ¼ywanie haseÅ‚ dÅ‚uÅ¼szych niÅ¼ 8 znakÃ³w (ograniczone przez
 .BR getpass (3)
-do 127 znaków), ale nie jest zgodny z tradycyjnymi implementacjami polecenia
+do 127 znakÃ³w), ale nie jest zgodny z tradycyjnymi implementacjami polecenia
 .BR crypt (3).
 .\"
 .IP "MOTD_FILE (napis)"
-Okre¶la listê rozdzielonych dwukropkami ¶cie¿ek do plików "wiadomo¶ci dnia"
-(message of the day, MOTD). Je¶li podany plik istnieje, to jego zawarto¶æ jest
-wy¶wietlana u¿ytkownikowi podczas rozpoczynania przez niego sesji pracy.
-Je¿eli parametr ten jest niezdefiniowany lub wykonywane jest ciche logowanie,
-to informacja ta bêdzie pomijana.
+OkreÅ›la listÄ™ rozdzielonych dwukropkami Å›cieÅ¼ek do plikÃ³w "wiadomoÅ›ci dnia"
+(message of the day, MOTD). JeÅ›li podany plik istnieje, to jego zawartoÅ›Ä‡ jest
+wyÅ›wietlana uÅ¼ytkownikowi podczas rozpoczynania przez niego sesji pracy.
+JeÅ¼eli parametr ten jest niezdefiniowany lub wykonywane jest ciche logowanie,
+to informacja ta bÄ™dzie pomijana.
 .\"
 .IP "NOLOGINS_FILE (napis)"
-Okre¶la pe³n± nazwê ¶cie¿kow± pliku zabraniaj±cego logowañ dla u¿ytkowników
-innych ni¿ root. Je¿eli plik ten istnieje a u¿ytkownik inny ni¿ root usi³uje
-siê zalogowaæ, to wy¶wietlana zostanie zawarto¶æ pliku a u¿ytkownik bêdzie
-roz³±czony. Je¿eli nie podano tego parametru, to opisana funkcja bêdzie
-wy³±czona.
+OkreÅ›la peÅ‚nÄ… nazwÄ™ Å›cieÅ¼kowÄ… pliku zabraniajÄ…cego logowaÅ„ dla uÅ¼ytkownikÃ³w
+innych niÅ¼ root. JeÅ¼eli plik ten istnieje a uÅ¼ytkownik inny niÅ¼ root usiÅ‚uje
+siÄ™ zalogowaÄ‡, to wyÅ›wietlana zostanie zawartoÅ›Ä‡ pliku a uÅ¼ytkownik bÄ™dzie
+rozÅ‚Ä…czony. JeÅ¼eli nie podano tego parametru, to opisana funkcja bÄ™dzie
+wyÅ‚Ä…czona.
 .\"
 .IP "OBSCURE_CHECKS_ENAB (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .IR yes ,
 to program
 .B passwd
-przed akceptacj± zmiany has³a bêdzie wykonywa³ dodatkowe sprawdzenia.
-Kontrole te s± do¶æ proste, a ich u¿ycie jest zalecane.
-Te sprawdzenia nieoczywisto¶ci s± pomijane, je¿eli
+przed akceptacjÄ… zmiany hasÅ‚a bÄ™dzie wykonywaÅ‚ dodatkowe sprawdzenia.
+Kontrole te sÄ… doÅ›Ä‡ proste, a ich uÅ¼ycie jest zalecane.
+Te sprawdzenia nieoczywistoÅ›ci sÄ… pomijane, jeÅ¼eli
 .B passwd
-uruchamiane jest przez u¿ytkownika
+uruchamiane jest przez uÅ¼ytkownika
 .IR root .
-Zobacz tak¿e opis PASS_MIN_LEN.
+Zobacz takÅ¼e opis PASS_MIN_LEN.
 .\"
 .IP "PASS_ALWAYS_WARN (logiczna)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "PASS_CHANGE_TRIES (liczba)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "PASS_MIN_DAYS (liczba)"
-Minimalna liczba dni miêdzy dozwolonymi zmianami has³a. Jakiekolwiek próby
-zmiany has³a podejmowane wcze¶niej zostan± odrzucone. Je¿eli nie podano tego
-parametru, to przyjêta zostanie warto¶æ zerowa.
+Minimalna liczba dni miÄ™dzy dozwolonymi zmianami hasÅ‚a. Jakiekolwiek prÃ³by
+zmiany hasÅ‚a podejmowane wczeÅ›niej zostanÄ… odrzucone. JeÅ¼eli nie podano tego
+parametru, to przyjÄ™ta zostanie wartoÅ›Ä‡ zerowa.
 .\"
 .IP "PASS_MIN_LEN (liczba)"
-Minimalna liczba znaków w akceptowalnym ha¶le. Próba przypisania has³a o
-mniejszej liczbie znaków zostanie odrzucona. Warto¶æ zero wy³±cza tê
-kontrolê. Je¶li nie podano parametru, to przyjêta zostanie warto¶æ zerowa.
+Minimalna liczba znakÃ³w w akceptowalnym haÅ›le. PrÃ³ba przypisania hasÅ‚a o
+mniejszej liczbie znakÃ³w zostanie odrzucona. WartoÅ›Ä‡ zero wyÅ‚Ä…cza tÄ™
+kontrolÄ™. JeÅ›li nie podano parametru, to przyjÄ™ta zostanie wartoÅ›Ä‡ zerowa.
 .\"
 .IP "PASS_MAX_DAYS (liczba)"
-Maksymalna liczba dni, przez jak± mo¿e byæ u¿ywane has³o. Je¶li has³o jest
-stanie siê starsze, to rachunek zostanie zablokowany. Je¶li nie podano, to
-zostanie przyjêta bardzo du¿a warto¶æ.
+Maksymalna liczba dni, przez jakÄ… moÅ¼e byÄ‡ uÅ¼ywane hasÅ‚o. JeÅ›li hasÅ‚o jest
+stanie siÄ™ starsze, to rachunek zostanie zablokowany. JeÅ›li nie podano, to
+zostanie przyjÄ™ta bardzo duÅ¼a wartoÅ›Ä‡.
 .\"
 .IP "PASS_MAX_LEN (liczba)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "PASS_WARN_AGE (liczba)"
-Liczba dni ostrzegania przed wyga¶niêciem has³a. Warto¶æ zerowa oznacza,
-¿e ostrze¿enie wyst±pi wy³±cznie w dniu utraty wa¿no¶ci has³a. Warto¶æ
-ujemna oznacza brak ostrze¿eñ. Brak parametru oznacza, ¿e ostrze¿enia nie
-bêd± wy¶wietlane.
+Liczba dni ostrzegania przed wygaÅ›niÄ™ciem hasÅ‚a. WartoÅ›Ä‡ zerowa oznacza,
+Å¼e ostrzeÅ¼enie wystÄ…pi wyÅ‚Ä…cznie w dniu utraty waÅ¼noÅ›ci hasÅ‚a. WartoÅ›Ä‡
+ujemna oznacza brak ostrzeÅ¼eÅ„. Brak parametru oznacza, Å¼e ostrzeÅ¼enia nie
+bÄ™dÄ… wyÅ›wietlane.
 .\"
 .IP "PORTTIME_CHECKS_ENAB (logiczna)"
-Je¶li ma warto¶æ
+JeÅ›li ma wartoÅ›Ä‡
 .IR yes ,
-za¶ plik
+zaÅ› plik
 .I /etc/porttime
-istnieje, to bêdzie on przegl±dany, by upewniæ siê czy u¿ytkownik mo¿e siê
-w danej chwili zalogowaæ na danej linii. Patrz tak¿e podrêcznik
+istnieje, to bÄ™dzie on przeglÄ…dany, by upewniÄ‡ siÄ™ czy uÅ¼ytkownik moÅ¼e siÄ™
+w danej chwili zalogowaÄ‡ na danej linii. Patrz takÅ¼e podrÄ™cznik
 .BR porttime (5)
 .\"
 .IP "QUOTAS_ENAB (logiczna)"
-Je¶li ma warto¶æ
+JeÅ›li ma wartoÅ›Ä‡
 .I yes ,
-wówczas dla danego u¿ytkownika "ulimit," "umask" i "niceness" bêd±
-zainicjowane warto¶ciami podanymi (o ile s± podane) w polu
+wÃ³wczas dla danego uÅ¼ytkownika "ulimit," "umask" i "niceness" bÄ™dÄ…
+zainicjowane wartoÅ›ciami podanymi (o ile sÄ… podane) w polu
 .I gecos
 pliku
 .IR passwd .
-Patrz tak¿e podrêcznik
+Patrz takÅ¼e podrÄ™cznik
 .BR passwd (5).
 .\"
 .IP "SU_NAME (napis)"
-Przypisuje nazwê polecenia do uruchomionego "su \-". Na przyk³ad, je¶li
+Przypisuje nazwÄ™ polecenia do uruchomionego "su \-". Na przykÅ‚ad, jeÅ›li
 parametr ten jest zdefiniowany jako "su", to polecenie
 .BR ps (1)
-poka¿e uruchomione polecenie jako "\-su". Je¶li parametr ten jest
+pokaÅ¼e uruchomione polecenie jako "\-su". JeÅ›li parametr ten jest
 niezdefiniowany, to
 .BR ps (1)
-poka¿e nazwê faktycznie wykonywanej pow³oki, np. co¶ w rodzaju "\-sh".
+pokaÅ¼e nazwÄ™ faktycznie wykonywanej powÅ‚oki, np. coÅ› w rodzaju "\-sh".
 .\"
 .IP "SULOG_FILE (napis)"
-Pokazuje pe³n± nazwê ¶cie¿kow± pliku, w którym rejestrowane jest wykorzystanie
+Pokazuje peÅ‚nÄ… nazwÄ™ Å›cieÅ¼kowÄ… pliku, w ktÃ³rym rejestrowane jest wykorzystanie
 .BR su .
-Je¶li parametr ten nie jest okre¶lony, to rejestrowanie nie jest wykonywane.
-Poniewa¿ polecenie
+JeÅ›li parametr ten nie jest okreÅ›lony, to rejestrowanie nie jest wykonywane.
+PoniewaÅ¼ polecenie
 .B su
-mo¿e byæ u¿ywane podczas prób uwierzytelnienia has³a, do odnotowywania
-u¿ycia
+moÅ¼e byÄ‡ uÅ¼ywane podczas prÃ³b uwierzytelnienia hasÅ‚a, do odnotowywania
+uÅ¼ycia
 .B su
-powinny byæ u¿ywane albo niniejsza opcja
+powinny byÄ‡ uÅ¼ywane albo niniejsza opcja
 albo
 .IR syslog .
-Zobacz te¿ opis SYSLOG_SU_ENAB.
+Zobacz teÅ¼ opis SYSLOG_SU_ENAB.
 .\"
 .IP "SU_WHEEL_ONLY (logiczna)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "SYSLOG_SG_ENAB (logiczna)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
 .IP "SYSLOG_SU_ENAB (logiczna)"
-Je¿eli ma warto¶æ
+JeÅ¼eli ma wartoÅ›Ä‡
 .IR yes ,
-za¶ program
+zaÅ› program
 .B login
-zosta³ skompilowany z obs³ug±
+zostaÅ‚ skompilowany z obsÅ‚ugÄ…
 .IR syslog ,
-to wszelkie dzia³ania
+to wszelkie dziaÅ‚ania
 .B su
-bêd± rejestrowane za pomoc±
+bÄ™dÄ… rejestrowane za pomocÄ…
 .IR syslog .
-Zobacz te¿ opis SULOG_FILE.
+Zobacz teÅ¼ opis SULOG_FILE.
 .\"
 .IP "TTYGROUP (napis lub liczba)"
-Grupa (w³a¶cicielska) terminala inicjowana jest na nazwê b±d¼ numer tej grupy.
-Jeden z dobrze znanych ataków polega na wymuszeniu sekwencji kontrolnych
-terminala na linii terminalowej innego u¿ytkownika. Problemu tego mo¿na
-unikn±æ wy³±czaj±c prawa zezwalaj±ce innym u¿ytkownikom na dostêp do linii
-terminalowej, ale niestety zapobiega to równie¿ dzia³aniu programów takich
+Grupa (wÅ‚aÅ›cicielska) terminala inicjowana jest na nazwÄ™ bÄ…dÅº numer tej grupy.
+Jeden z dobrze znanych atakÃ³w polega na wymuszeniu sekwencji kontrolnych
+terminala na linii terminalowej innego uÅ¼ytkownika. Problemu tego moÅ¼na
+uniknÄ…Ä‡ wyÅ‚Ä…czajÄ…c prawa zezwalajÄ…ce innym uÅ¼ytkownikom na dostÄ™p do linii
+terminalowej, ale niestety zapobiega to rÃ³wnieÅ¼ dziaÅ‚aniu programÃ³w takich
 jak
 .BR write .
-Innym rozwi±zaniem jest pos³u¿enie siê tak± wersj± programu
+Innym rozwiÄ…zaniem jest posÅ‚uÅ¼enie siÄ™ takÄ… wersjÄ… programu
 .BR write ,
-która odfiltrowuje potencjalnie niebezpieczne sekwencje znaków. Nastêpnie
-programowi nale¿y przyznaæ rozszerzone prawa dostêpu (SGID) dla specjalnej
-grupy, ustawiæ grupê w³a¶cicieli terminala na tê grupê i nadaæ prawa dostêpu
-\fI0620\fR do linii. Definicja TTYGROUP powsta³a do obs³ugi tej w³a¶nie
+ktÃ³ra odfiltrowuje potencjalnie niebezpieczne sekwencje znakÃ³w. NastÄ™pnie
+programowi naleÅ¼y przyznaÄ‡ rozszerzone prawa dostÄ™pu (SGID) dla specjalnej
+grupy, ustawiÄ‡ grupÄ™ wÅ‚aÅ›cicieli terminala na tÄ™ grupÄ™ i nadaÄ‡ prawa dostÄ™pu
+\fI0620\fR do linii. Definicja TTYGROUP powstaÅ‚a do obsÅ‚ugi tej wÅ‚aÅ›nie
 sytuacji.
-Je¶li pozycja ta nie jest zdefiniowana, to grupa terminala inicjowana jest
-na numer grupy u¿ytkownika.
-Zobacz tak¿e TTYPERM.
+JeÅ›li pozycja ta nie jest zdefiniowana, to grupa terminala inicjowana jest
+na numer grupy uÅ¼ytkownika.
+Zobacz takÅ¼e TTYPERM.
 .\"
 .IP "TTYPERM (liczba)"
-T± warto¶ci± inicjowane s± prawa terminala logowania. Typowymi warto¶ciami s±
-\fI0622\fR zezwalaj±ce innym na pisanie do linii lub \fI0600\fR zabezpieczaj±ce
-liniê przed innymi u¿ytkownikami. Je¿eli nie podano tego parametru, to prawa
-dostêpu do terminala zostan± zainicjowane warto¶ci± \fI0622\fR. Zobacz te¿
+TÄ… wartoÅ›ciÄ… inicjowane sÄ… prawa terminala logowania. Typowymi wartoÅ›ciami sÄ…
+\fI0622\fR zezwalajÄ…ce innym na pisanie do linii lub \fI0600\fR zabezpieczajÄ…ce
+liniÄ™ przed innymi uÅ¼ytkownikami. JeÅ¼eli nie podano tego parametru, to prawa
+dostÄ™pu do terminala zostanÄ… zainicjowane wartoÅ›ciÄ… \fI0622\fR. Zobacz teÅ¼
 TTYGROUP.
 .\"
 .IP "TTYTYPE_FILE (napis)"
-Okre¶la pe³n± nazwê ¶cie¿kow± pliku przypisuj±cego typy terminali do linii
-terminalowych. Ka¿dy z wierszy tego pliku zawiera rozdzielone bia³ym znakiem
-typ i liniê terminala. Na przyk³ad:
+OkreÅ›la peÅ‚nÄ… nazwÄ™ Å›cieÅ¼kowÄ… pliku przypisujÄ…cego typy terminali do linii
+terminalowych. KaÅ¼dy z wierszy tego pliku zawiera rozdzielone biaÅ‚ym znakiem
+typ i liniÄ™ terminala. Na przykÅ‚ad:
 .nf
 .sp
 .ft I
@@ -488,33 +488,33 @@ typ i liniê terminala. Na przyk³ad:
 .ft R
 .sp
 .fi
-Informacja ta s³u¿y do inicjowania zmiennej ¶rodowiska TERM. Wiersz
-rozpoczynaj±cy siê znakiem # bêdzie traktowany jak komentarz. Je¿eli nie
+Informacja ta sÅ‚uÅ¼y do inicjowania zmiennej Å›rodowiska TERM. Wiersz
+rozpoczynajÄ…cy siÄ™ znakiem # bÄ™dzie traktowany jak komentarz. JeÅ¼eli nie
 podano tego parametru lub plik nie istnieje albo nie znaleziono w nim
 linii terminala, to zmienna TERM nie zostanie ustawiona.
 .\"
 .IP "UID_MAX (liczba)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .IP "UID_MIN (liczba)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
-.IP "ULIMIT (d³uga liczba)"
-Warto¶ci± t± inicjowany jest limit wielko¶ci pliku. Cecha ta obs³ugiwana
-jest wy³±cznie w systemach posiadaj±cych
+.IP "ULIMIT (dÅ‚uga liczba)"
+WartoÅ›ciÄ… tÄ… inicjowany jest limit wielkoÅ›ci pliku. Cecha ta obsÅ‚ugiwana
+jest wyÅ‚Ä…cznie w systemach posiadajÄ…cych
 .IR ulimit ,
-np. System V. Je¶li nie podano, to limit wielko¶ci pliku zostanie ustalony
-na pewn± wielk± warto¶æ.
+np. System V. JeÅ›li nie podano, to limit wielkoÅ›ci pliku zostanie ustalony
+na pewnÄ… wielkÄ… wartoÅ›Ä‡.
 .\"
 .IP "UMASK (liczba)"
-T± warto¶ci± inicjowana jest maska praw dostêpu. Nie podana, ustawia mask±
+TÄ… wartoÅ›ciÄ… inicjowana jest maska praw dostÄ™pu. Nie podana, ustawia maskÄ…
 praw na 077.
 .\"
 .IP "USERDEL_CMD (napis)"
-XXX powinno zostaæ udokumentowane.
+XXX powinno zostaÄ‡ udokumentowane.
 .\"
-.SH POWI¡ZANIA
-Poni¿sze zestawienie pokazuje, które z programów wchodz±cych w sk³ad pakietu
-shadow wykorzystuj± jakie parametry.
+.SH POWIÄ„ZANIA
+PoniÅ¼sze zestawienie pokazuje, ktÃ³re z programÃ³w wchodzÄ…cych w skÅ‚ad pakietu
+shadow wykorzystujÄ… jakie parametry.
 .na
 .IP login 12
 CONSOLE DIALUPS_CHECK_ENAB ENV_HZ ENV_SUPATH ENV_TZ ERASECHAR FAILLOG_ENAB
@@ -533,10 +533,10 @@ MOTD_FILE QUOTAS_ENAB SULOG_FILE SYSLOG_SU_ENAB
 .IP sulogin 12
 ENV_HZ ENV_SUPATH ENV_TZ MAIL_DIR QUOTAS_ENAB TTYPERM
 .ad
-.SH B£ÊDY
-Niektóre z obs³ugiwanych parametrów konfiguracyjnych pozosta³y
-nieopisane w niniejszym podrêczniku.
-.SH ZOBACZ TAK¯E
+.SH BÅÄ˜DY
+NiektÃ³re z obsÅ‚ugiwanych parametrÃ³w konfiguracyjnych pozostaÅ‚y
+nieopisane w niniejszym podrÄ™czniku.
+.SH ZOBACZ TAKÅ»E
 .BR login (1),
 .BR faillog (5),
 .BR passwd (5),

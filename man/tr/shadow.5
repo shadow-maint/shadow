@@ -1,0 +1,96 @@
+
+
+.\" Copyright 1989 - 1990, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+
+.TH shadow 5 "" "" ""
+.nh
+.SH İSİM  
+shadow - 
+şifreli parola dosyası
+  
+.SH AÇIKLAMA
+
+\fBshadow\fR kullanıcı hesaplarının şifreli parola bilgilerini ve isteğe bağlı parola dönemsellik bilgilerini içerir.
+
+
+.IP 
+
+Kullanıcı adı
+
+Şifreli parola
+
+1 Ocak 1970´den parolanın en son değiştiği güne kadar geçen gün sayısı
+
+Parolanın değişmesi gerekecek güne kadar olan sürenin gün sayısı
+
+Parolanın değişmesi gereken günden sonraki sürenin gün sayısı
+
+Parolanın zaman aşımından önce kullanıcının uyarılacağı gün sayısı
+
+Parolanın zaman aşımından hesabın kapatılacağı güne kadar geçecek sürenin gün sayısı
+
+1 ocak 1970´den hesabın kapatılacağı güne kadar geçen sürenin gün sayısı
+
+Bir yedek alan
+
+.PP
+Parola alanı mutlaka dolu olmalıdır. Şifreli parola alanı 64 karakterlik 
+bir alfabeden (a´dan z´ye, A´dan Z´ye, 0´dan 9´a, "." Ve "/" den oluşan bir alfabe) seçilen 13 ila 24 karakterden oluşur. Bu dizgenin nasıl yorumlandığını görmek için \fBcrypt\fR(3)'e bakınız.
+
+Parolanın en son değiştiği günün tarihi, 1 Ocak 1970´den beri geçen gün sayısı olarak belirtilir. Geçerli gün sayısı geçmeden parolanın tekrar değiştirilmesi önlenebilir ve belirli bir gün sayısı geçtikten sonra parolanın değişmesi için kullanıcı zorlanabilir. Şayet gerekli en az gün sayısı en çok gün sayısından daha büyük ise, parola kullanıcı tarafından değiştirilemez.
+
+Şayet parola son kullanım tarihinden sonra belirtilen süre içinde değiştirilmez ise, kullanıcı hesabı kapatılır. Parola son kullanım tarihinden bağımsız olarak, bir kullanıcı hesabı belirtilen sürenin sonunda kapatılabilir.
+
+Bu bilgiler, /etc/passwd dosyasında da varsa, /etc/shadow dosyasındaki bilgiler geçerlidir. 
+
+Parola güvenliği açısından bu dosya için normal kullanıcılara okuma izni kapalı olmalıdır.
+
+.SH İLGİLİ DOSYALAR
+
+/etc/passwd - kullanıcı hesap bilgileri
+.br
+/etc/shadow - şifreli kullanıcı parolaları
+
+.SH İLGİLİ BELGELER
+
+\fBchage\fR(1),
+\fBlogin\fR(1),
+\fBpasswd\fR(1),
+\fBsu\fR(1),
+\fBpasswd\fR(5),
+\fBpwconv\fR(8),
+\fBpwunconv\fR(8),
+\fBsulogin\fR(8).
+
+.SH YAZAN
+
+Julianne Frances Haugh <jockgrrl (at) ix.netcom.com> tarafından yazılmıştır.
+.SH ÇEVİREN
+
+Yalçın Kolukısa <yalcink01 (at) yahoo.com>, Ocak 2004
+

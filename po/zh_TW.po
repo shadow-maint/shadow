@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -237,6 +237,10 @@ msgstr "最近一次密碼修改時間\t\t\t\t\t："
 #, c-format
 msgid "never\n"
 msgstr "從不\n"
+
+#, fuzzy, c-format
+msgid "password must be changed"
+msgstr "密碼已更改。\n"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -667,7 +671,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -1113,8 +1117,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1173,10 +1177,6 @@ msgstr "抱歉，無法更改 %s 的密碼。\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s：記憶體不足\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s：無法執行 %s"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1298,6 +1298,19 @@ msgid "%s: %s\n"
 msgstr "passwd：%s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s：必須從終端中執行\n"
 
@@ -1313,7 +1326,7 @@ msgstr "未知 id：%s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "您沒有被授權 su %s\n"
 
-msgid "(Enter your own password.)"
+msgid "(Enter your own password)"
 msgstr "(請輸入您自己的密碼)"
 
 #, c-format
@@ -1398,7 +1411,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1409,22 +1422,6 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s：鎖定群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s：打開群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s：鎖定shadow群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s：打開shadow群組檔案時出錯\n"
 
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1493,6 +1490,22 @@ msgstr "%s：無法鎖定shadow密碼檔案\n"
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s：無法打開shadow密碼檔案\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s：鎖定群組檔案時出錯\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s：打開群組檔案時出錯\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s：鎖定shadow群組檔案時出錯\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s：打開shadow群組檔案時出錯\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
@@ -1591,20 +1604,29 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s：刪除目錄 %s 時出錯\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "用法：%s\t[-u uid [-o]] [-g 群組] [-G 群組,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d 家目錄 [-m]] [-s shell] [-c 注釋] [-l 新名稱]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f 失效日] [-e 過期日 ] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p 密碼] [-L|-U] 名稱\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1674,6 +1696,18 @@ msgstr "無法為信箱改名"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1690,15 +1724,31 @@ msgstr "無法備份"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"用法：\n"
-"“vipw” 編輯 /etc/passwd      “vipw -s” 編輯 /etc/shadow\n"
-"“vigr” 編輯 /etc/group       “vigr -s” 編輯 /etc/gshadow\n"
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "用法：\n"
+#~ "“vipw” 編輯 /etc/passwd      “vipw -s” 編輯 /etc/shadow\n"
+#~ "“vigr” 編輯 /etc/group       “vigr -s” 編輯 /etc/gshadow\n"
 
 #~ msgid "%s: PAM chauthtok failed\n"
 #~ msgstr "%s：PAM chauthtok 失敗\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s：無法執行 %s"
+
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "用法：%s\t[-u uid [-o]] [-g 群組] [-G 群組,...] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d 家目錄 [-m]] [-s shell] [-c 注釋] [-l 新名稱]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f 失效日] [-e 過期日 ] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p 密碼] [-L|-U] 名稱\n"

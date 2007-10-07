@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "FAILLOG" "5" "09/20/2005" "" ""
+.TH "FAILLOG" "5" "11/05/2005" "" ""
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -12,7 +12,7 @@ faillog \- Login failure logging file
 .SH "DESCRIPTION"
 .PP
 \fI/var/log/faillog\fR
-maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occured on; and the date the last login failure occured.
+maintains a count of login failures and the limits for each account. The file is fixed length record, indexed by numerical UID. Each record contains the count of login failures since the last successful login; the maximum number of failures before the account is disabled; the line the last login failure occurred on; and the date the last login failure occurred.
 .PP
 The structure of the file is:
 .sp
@@ -31,6 +31,3 @@ login failure log
 .SH "SEE ALSO"
 .PP
 \fBfaillog\fR(8)
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)

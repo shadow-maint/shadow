@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='gshadow.5'>
-  <!-- $Id: gshadow.5.xml,v 1.15 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: gshadow.5.xml,v 1.17 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>gshadow</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>gshadow</refname>
@@ -89,10 +90,5 @@
 	<refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Nicolas FRANCOIS</para>
   </refsect1>
 </refentry>

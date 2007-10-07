@@ -1,64 +1,117 @@
-.\" Copyright 1991 \- 1994, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: userdel.8,v 1.3 2005/04/05 19:08:53 kloczek Exp $
-.\"
-.\" Traduction 27/09/2000 par Frédéric Delanoy (fdelanoy@info.fundp.ac.be)
-.\"
-.TH USERDEL 8
-.SH NOM
-userdel \- Effacer un compte utilisateur et les fichiers associés
-.SH SYNOPSIS
-.B userdel
-[\fB\-r\fR]
-.I login
-.SH DESCRIPTION
-La commande \fBuserdel\fR modifie les fichiers des comptes du système, en supprimant toutes les entrées qui se réfèrent à \fIlogin\fR.  L'utilisateur nommé doit exister.
-.SH OPTIONS
-.IP \fB\-r\fR
-Les fichiers présents dans le répertoire personnel de l'utilisateur seront supprimés en même temps que le répertoire lui\-même.  Les fichiers situés dans d'autres systèmes de fichiers devront être recherchés et éliminés manuellement.
-.SH FICHIERS
-\fI/etc/passwd\fR \- information sur les comptes utilisateurs
-.br
-\fI/etc/shadow\fR \- information sécurisée sur les comptes utilisateurs
-.br
-\fI/etc/group\fR \- information de groupes
-.SH INCONVÉNIENTS
-\fBuserdel\fR ne vous permet pas de supprimer un compte si l'utilisateur en question est actuellement connecté.  Vous devez tuer tous les processus en cours d'exécution appartenant à l'utilisateur possédant le compte que vous êtes en train de supprimer.  Vous ne pouvez pas supprimer d'attribut NIS d'un client NIS.  Cela doit être effectué sur le serveur NIS.
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "USERDEL" "8" "12/07/2005" "Commandes pour la gestion du systÃ¨me" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+userdel \- Supprimer un compte utilisateur et les fichiers associÃ©s
+.SH "SYNOPSIS"
+.HP 8
+\fBuserdel\fR [\-f] [\-r] \fIutilisateur\fR
+.SH "DESCRIPTION"
+.PP
+La commande
+\fBuserdel\fR
+modifie les fichiers d'administration des comptes du systÃ¨me, en supprimant les entrÃ©es qui se rÃ©fÃ¨rent Ã 
+\fIutilisateur\fR. L'utilisateur nommÃ© doit exister.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBuserdel\fR
+sont\ :
+.TP
+\fB\-f\fR
+Cette option force la suppression de l'utilisateur, mÃªme s'il est toujours connectÃ©. Elle force Ã©galement
+\fBuserdel\fR
+Ã  supprimer le rÃ©pertoire personnel de l'utilisateur ou sa file d'attente des courriels, meÃªm si un autre utilisateur utilise le mÃªme rÃ©pertoire personnel ou si l'utilisateur spÃ©cifiÃ© ne possÃ¨de pas la file d'attente des courriels. Si
+\fIUSERGROUPS_ENAB\fR
+vaut
+\fIyes\fR
+dans le fichier
+\fI/etc/login.defs\fR
+et si un groupe existe avec le mÃªme nom que l'utilisateur supprimÃ©, alors ce groupe sera supprimÃ©, mÃªme s'il sagit du groupe primaire d'un autre utilisateur.
+.sp
+\fINote\ :\fR
+Cette option est dangereuse, elle peut laisser votre systÃ¨me dans un Ã©tat non consistant.
+.TP
+\fB\-r\fR
+Les fichiers prÃ©sents dans le rÃ©pertoire personnel de l'utilisateur seront supprimÃ©s en mÃªme temps que le rÃ©pertoire lui\-mÃªme, ainsi que le rÃ©pertoire d'attente des courriels. Vous devrez rechercher et Ã©liminer vous\-mÃªme les fichiers situÃ©s dans d'autres systÃ¨mes de fichiers.
+.sp
+Le rÃ©pertoire d'attente des courriels est dÃ©fini par la variable
+\fIMAIL_DIR\fR
+du fichier
+\fIlogin.defs\fR.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachÃ©s \(Fo\ shadow password\ \(Fc
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sÃ©curisÃ©es sur les comptes utilisateurs
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBuserdel\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succÃ¨s
+.TP
+\fI1\fR
+impossible de mettre Ã  jour le fichier des mots de passe
+.TP
+\fI2\fR
+erreur de syntaxe
+.TP
+\fI6\fR
+l'utilisateur spÃ©cifiÃ© n'existe pas
+.TP
+\fI8\fR
+l'utilisateur est actuellement connectÃ©
+.TP
+\fI10\fR
+impossible de mettre Ã  jour le fichier des groupes
+.TP
+\fI12\fR
+impossible de supprimer le rÃ©pertoire personnel
+.SH "AVERTISSEMENTS"
+.PP
+\fBUserdel\fR
+ne vous permet pas de supprimer un compte si l'utilisateur en question est actuellement connectÃ©. Vous devez tuer tous les processus en cours d'exÃ©cution appartenant Ã  l'utilisateur que vous Ãªtes en train de supprimer.
+.PP
+Vous ne pouvez pas supprimer d'attribut NIS d'un client NIS. Cela doit Ãªtre effectuÃ© sur le serveur NIS.
+.PP
+Si
+\fIUSERGROUPS_ENAB\fR
+vaut
+\fIyes\fR
+dans le fichier
+\fI/etc/login.defs\fR,
+\fBuserdel\fR
+supprimera le groupe ayant le mÃªme nom que l'utilisateur. Afin d'Ã©viter des problÃ¨mes de consistance entre les fichiers passwd et group,
+\fBuserdel\fR
+vÃ©rifie que le groupe n'est pas utilisÃ© comme groupe primaire d'un autre utilisateur, et affichera un avertissement et ne supprimera pas l'utilisateur si c'est le cas. L'option
+\fB\-f\fR
+permet de forcer la suppression du groupe.
 .SH "VOIR AUSSI"
-.BR chfn (1),
-.BR chsh (1),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR useradd (8),
-.BR usermod (8)
-.SH AUTEUR
-Julianne Frances Haugh (jfh@bga.com)
-.SH TRADUCTION
-Frédéric Delanoy, 2000.
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBlogin.defs\fR(5),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBuseradd\fR(8),
+\fBusermod\fR(8).

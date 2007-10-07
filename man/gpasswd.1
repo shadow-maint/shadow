@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "GPASSWD" "1" "09/30/2005" "User Commands" "User Commands"
+.TH "GPASSWD" "1" "11/05/2005" "User Commands" "User Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -34,6 +34,9 @@ file if compiled with SHADOWGRP defined). Every group can have administrators, m
 option to define group administrator(s) and
 \fB\-M\fR
 option to define members and has all rights of group administrators and members.
+.SS "Notes about group passwords"
+.PP
+Group passwords are an inherent security problem since more than one person is permitted to know the password. However, groups are a useful tool for permitting co\-operation between different users.
 .SH "OPTIONS"
 .PP
 Group administrator can add and delete users using
@@ -70,6 +73,3 @@ secure group account information
 \fBgroupmod\fR(8),
 \fBgrpck\fR(8),
 \fBgroup\fR(5).
-.SH "AUTHOR"
-.PP
-Rafal Maszkowski <rzm@pdi.net>

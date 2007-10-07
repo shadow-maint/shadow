@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-4.0.12\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2005-09-05 13:05+0200\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -113,10 +113,10 @@ msgid "a palindrome"
 msgstr "palindrom"
 
 msgid "case changes only"
-msgstr ""
+msgstr "zmieniona tylko wielkości liter"
 
 msgid "too similar"
-msgstr ""
+msgstr "zbyt podobne"
 
 msgid "too simple"
 msgstr "za proste"
@@ -167,6 +167,7 @@ msgstr "Nie można zmienić głównego katalogu na \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
+"Brak wpisu w utmp.  Musisz wykonać \"login\" z najniższego poziomu \"sh\""
 
 msgid "Unable to determine your tty name."
 msgstr "Nie można ustalić nazwy twojego terminala."
@@ -248,6 +249,10 @@ msgid "never\n"
 msgstr "nigdy\n"
 
 #, c-format
+msgid "password must be changed"
+msgstr "Hasło musi zostać zmienione"
+
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Hasło traci ważność\t\t\t\t\t: "
 
@@ -305,7 +310,7 @@ msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgstr "%s: niepowiodło się porzucenie uprawnień (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -680,7 +685,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -691,7 +696,7 @@ msgstr ""
 "Użycie: groupadd [opcje] grupa\n"
 "\n"
 "Opcje:\n"
-"  -f, --force \t\twymyś zakończenie programu z poprawnym statusem\n"
+"  -f, --force\t\twymyś zakończenie programu z poprawnym statusem\n"
 "\t\t\t\tjeżeli grupa już istnieje\n"
 "  -g, --gid GID\t\tużyj GID dla tworzonej grupy\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
@@ -1017,13 +1022,15 @@ msgstr " na `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr ""
+msgstr "login: PAM niepowodzenie, przerwane: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Login incorrect\n"
-msgstr "Nieprawidłowe logowanie"
+msgstr ""
+"\n"
+"Nieprawidłowe logowanie\n"
 
 #, c-format
 msgid ""
@@ -1059,6 +1066,8 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
+"przekroczony czas logowania\n"
+"\n"
 
 #, c-format
 msgid "Usage: newgrp [-] [group]\n"
@@ -1140,8 +1149,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1161,11 +1170,12 @@ msgstr ""
 "Użycie: passwd [opcje] [login]\n"
 "\n"
 "Opcje:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tkasuje hasło użytkowanika\n"
+"  -a, --all\t\t\traportuj status hasła dla wszystkich kont\n"
+"  -d, --delete\t\t\tkasuje hasło użytkowanika\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
-"  -k, --keep-tokens\t\tchange password only if expired\n"
+"  -k, --keep-tokens\t\tzmiana hasła tylko w przypadku kiedy\n"
+"\t\t\t\tjest przeterminowane\n"
 "  -i, --inactive INACTIVE\tset password inactive after expiration\n"
 "\t\t\t\tto INACTIVE\n"
 "  -l, --lock\t\t\tzablokuj konto\n"
@@ -1173,7 +1183,7 @@ msgstr ""
 "\t\t\t\tchange to MIN_DAYS\n"
 "  -n, --mindays MIN_DNI\t\tustawia minimalną liczbę dni pomiędzy zmianami\n"
 "\t\t\t\thasła na MIN_DAYS\n"
-"  -q, --quiet\t\t\tquiet mode\n"
+"  -q, --quiet\t\t\tcichy tryb pracy\n"
 "  -r, --repository REPOSITORY\tchange password in REPOSITORY repository\n"
 "  -S, --status\t\t\treport password status on the named account\n"
 "  -u, --unlock\t\t\todblokuj konto\n"
@@ -1223,10 +1233,6 @@ msgstr "Wybacz, hasło dla %s nie może być jeszcze zmienione.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: brak pamięci\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: Nie można wykonać %s"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1348,6 +1354,27 @@ msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+"Użycie: su [opcje] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -, -l, --login\turuchom z  powłoką z powłoką zgłoszeniową\n"
+"  -m, -p,\n"
+"  --preserve-environment\turuchomienie z zachowaniem zmiennych środowiska\n"
+"  -s, --shell SHELL\t\tużyj SHELL zamiast domyślny shell z passwd\n"
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: musisz uruchamiać z terminala\n"
 
@@ -1363,8 +1390,8 @@ msgstr "Nieznany id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "Nie masz autoryzacji by używać su %s\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Wpisz swoje własne hasło.)"
+msgid "(Enter your own password)"
+msgstr "(Wpisz swoje własne hasło)"
 
 #, c-format
 msgid ""
@@ -1448,7 +1475,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1485,22 +1512,6 @@ msgstr ""
 "konta\n"
 "  -s, --shell SHELL\t\ttshell dla nowo tworzonego konta\n"
 "  -u, --uid UID\t\t\twymuś użycie konkretnego UID dla nowo tworzonego konta\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: błąd podczas blokowania pliku z grupami\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: błąd podczas otwierania pliku z grupami\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: błąd podczas blokowania pliku z ukrytymi hasłami grup\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: błąd podczas otwierania pliku z ukrytymi hasłami grup\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1571,6 +1582,22 @@ msgid "%s: cannot open shadow password file\n"
 msgstr "%s: nie można otworzyć pliku z ukrytymi hasłami\n"
 
 #, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: błąd podczas blokowania pliku z grupami\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: błąd podczas otwierania pliku z grupami\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: błąd podczas blokowania pliku z ukrytymi hasłami grup\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: błąd podczas otwierania pliku z ukrytymi hasłami grup\n"
+
+#, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: błąd podczas dodawania nowego wpisu do pliku z hasłami\n"
 
@@ -1621,9 +1648,11 @@ msgstr "Użycie: %s [-r] nazwa\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: błąd podczas aktualizacji wpisu grupy\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: nie można usunąć podstawowej grupy użytkowników.\n"
+msgstr ""
+"%s: nie można usunąć grupy %s która jest grupą podstawową\n"
+"dla innego użytkownika.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1671,20 +1700,55 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: błąd podczas usuwania katalogu %s\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "Użycie: %s\t[-u uid [-o]] [-g grupa] [[-G grupa,...] [-a]] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d kat_dom [-m]] [-s powłoka] [-c komentarz] [-l nowa_nazwa]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f nieaktywne] [-e utrata_ważności] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p hasło] [-L|-U] nazwa\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
+"Użycie: useradd [opcje] login\n"
+"\n"
+"Opcje:\n"
+"  -b, --base-dir KAT_BAZOWY\tkatalog bazowy dla katalogu domowego nowo\n"
+"\t\t\t\ttworzonego konta\n"
+"  -c, --comment COMMENT\t\tustaw pole komentarza (GECOS) dla nowo\n"
+"\t\t\t\ttworzonego konta\n"
+"  -d, --home-dir HOME_DIR\tkatalog domowy dla nowo tworzonego konta\n"
+"  -D, --defaults\t\twypisz lub zapisz domyślną konfigurację programu "
+"useradd\n"
+"  -e, --expiredate DATA_WAŻNOSCI\tustawia datę wazności dla nowo tworzonego\n"
+"\t\t\t\tkonta na DATA_WAŻNOSCI\n"
+"  -f, --inactive NIEAKTYWNE\tustwia liczbę dni nieaktywności konta po\n"
+"\t\t\t\tktórych konta jest blokowane na NIEAKTYWNE\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -g, --gid GROUP\t\twymuś użycie konkretnej grupy dla nowo tworzonego "
+"konta\n"
+"  -G, --groups GROUPS\t\tlista dodatkowych grup dla nowo tworzonego konta\n"
+"  -k, --skel SKEL_DIR\t\tpodaj alternatywną ścieżkę do katalogu skel\n"
+"  -K, --key KEY=VALUE\t\tprzysłoń wartość domyślną z /etc/login.defs\n"
+"  -m, --create-home\t\ttwóż katalog domowy dla nowego użytkownika\n"
+"  -o, --non-unique\t\tpozwól na utwożenie konta z nieunikalnym UID\n"
+"  -p, --password PASSWORD\tużyj zakodowane hasło dla nowego tworzonego "
+"konta\n"
+"  -s, --shell SHELL\t\ttshell dla nowo tworzonego konta\n"
+"  -u, --uid UID\t\t\twymuś użycie konkretnego UID dla nowo tworzonego konta\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1755,6 +1819,26 @@ msgstr "zmiana nazwy skrzynki pocztowej nie powiodła się"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+"Użycie: vipw [opcje]\n"
+"\n"
+"Opcje:\n"
+"  -g, --group\t\t\tedycja bazy group\n"
+"  -h, --help\t\t\twyświetlenie tego opisu i zakończenie\n"
+"  -p, --passwd\t\t\tedycja bazy passwd\n"
+"  -q, --quiet\t\t\tcichy tryb pracy\n"
+"  -s, --shadow\t\t\tedycja bazy shadow lub gshadow\n"
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1770,16 +1854,3 @@ msgstr "Nie można wykonać kopii zapasowej"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nie można odzyskać %s: %s (twoje zmiany są w %s)\n"
-
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Użycie:\n"
-"`vipw' edytuje /etc/passwd      `vipw -s' edytuje /etc/shadow\n"
-"`vigr' edytuje /etc/group       `vigr -s' edytuje /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: PAM chauthtok nie powiodło się\n"

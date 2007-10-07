@@ -1,4 +1,4 @@
-.\" $Id: porttime.5,v 1.5 2005/04/05 19:08:55 kloczek Exp $
+.\" $Id: porttime.5,v 1.6 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,43 +33,43 @@
 .\" Modified Tue 18 Sep 2002 by NAKNAO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH PORTTIME 5
-.SH ̾��
-porttime \- �ݡ��ȥ���������������ե�����
-.SH ����
+.SH 名前
+porttime \- ポートアクセス時間設定ファイル
+.SH 説明
 .I porttime
-�� tty �ǥХ������桼��̾�����������ǽ���֡��Υꥹ�Ȥ���ʤ롣
+は tty デバイス・ユーザ名・ログイン可能時間、のリストからなる。
 .PP
-���줾��Υ���ȥ�ϡ�������Ƕ��ڤ�줿���ĤΥե�����ɤ���ʤ롣
-�ǽ�Υե�����ɤϥ���ޤǶ��ڤ�줿 tty �ǥХ����Υꥹ�Ȥǡ�
-�������ꥹ������ꤷ�����Ϥ����� tty �ǥХ����˥ޥå����롣
-�����ܤΥե�����ɤϥ���ޤǶ��ڤ�줿�桼��̾�Υꥹ�Ȥǡ�
-�������ꥹ������ꤷ�����Ϥ�����桼���˥ޥå����롣
-�����ܤΥե�����ɤϡ�
-����ޤǶ��ڤ�줿�����������Ļ��֤Υꥹ�ȤǤ��롣
+それぞれのエントリは、コロンで区切られた三つのフィールドからなる。
+最初のフィールドはコンマで区切られた tty デバイスのリストで、
+アスタリスクを指定した場合はあらゆる tty デバイスにマッチする。
+二番目のフィールドはコンマで区切られたユーザ名のリストで、
+アスタリスクを指定した場合はあらゆるユーザにマッチする。
+三番目のフィールドは、
+コンマで区切られたログインを許可時間のリストである。
 .PP
-�����������֤γƥ���ȥ�ϡ�
+アクセス時間の各エントリは、
 \fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR, \fBSa\fR
-��ά�����줿�����İʾ�������ȡ�
-�ϥ��ե�Ƕ��ڤ�줿 2 �Ĥλ���Ȥ���ʤ롣
-����������������ޤǤ���ꤹ�� \fBWk\fR �䡢
-���Ƥ�������ꤹ�� \fBAl\fR �Ȥ���ά��ˡ���Ѥ��뤳�Ȥ�Ǥ��롣
-�����λ��̵꤬������ \fBAl\fR ���Ȥߤʤ���롣
-.SH ��
-���Υ���ȥ�ϡ��桼�� \fBjfh\fR ��ʿ���θ���9��������5���ޤǡ�
-���ƤΥݡ��Ȥ��饢��������ǽ�Ǥ��뤳�Ȥ򼨤���
+で略記されたゼロ個以上の曜日と、
+ハイフンで区切られた 2 つの時刻とからなる。
+月曜日から金曜日までを指定する \fBWk\fR や、
+全ての日を指定する \fBAl\fR という略記法を用いることもできる。
+曜日の指定が無い場合は \fBAl\fR だとみなされる。
+.SH 例
+次のエントリは、ユーザ \fBjfh\fR が平日の午前9時から午後5時まで、
+全てのポートからアクセス可能であることを示す。
 .br
 .sp 1
 	*:jfh:Wk0900\-1700
 .br
 .sp 1
-���Υ���ȥ�ϡ�
-\fBroot\fR �� \fBoper\fR �ʳ��Υ桼���ˤϡ��ɤλ����Ӥˤ�
-/dev/console ����Υ�����������Ĥ��ʤ���
-������ϡ�\fI/etc/porttime\fR
-�ե����뤬����������ǽ���֤Υꥹ�Ȥ�
-�ɤ���������ǰ������⼨���Ƥ��롣
-¾�����ƤΥ桼���������ܤΥ���ȥ�˥ޥå�����
-�������ä� console ����Υ��������ϵ��Ĥ���ʤ���
+次のエントリは、
+\fBroot\fR と \fBoper\fR 以外のユーザには、どの時間帯にも
+/dev/console からのアクセスを許可しない。
+この例は、\fI/etc/porttime\fR
+ファイルがアクセス可能時間のリストを
+どういう順序で扱うかも示している。
+他の全てのユーザは二番目のエントリにマッチし、
+したがって console からのアクセスは許可されない。
 .br
 .sp 1
 	console:root,oper:Al0000\-2400
@@ -77,17 +77,17 @@ porttime \- �ݡ��ȥ���������������ե�����
 	console:*:
 .br
 .sp 1
-���Υ���ȥ�ϡ�
-�桼�� \fBgames\fR �������Ȼ��ֳ��ʤ�
-������ݡ��Ȥ��饢�������Ǥ���褦�˻��ꤷ�Ƥ��롣
+次のエントリは、
+ユーザ \fBgames\fR が、就業時間外なら
+あらゆるポートからアクセスできるように指定している。
 .br
 .sp 1
 	*:games:Wk1700\-0900,SaSu0000\-2400
 .br
 .sp 1
-.SH �ե�����
-\fI/etc/porttime\fR \- �ݡ��ȤؤΥ���������ǽ���֤򵭤����ե�����
-.SH ��Ϣ����
+.SH ファイル
+\fI/etc/porttime\fR \- ポートへのアクセス可能時間を記したファイル
+.SH 関連項目
 .BR login (1)
-.SH ����
+.SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

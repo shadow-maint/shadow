@@ -1,0 +1,63 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "SU" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+su \- Changer d'identifiant d'utilisateur ou devient superutilisateur
+.SH "SYNOPSIS"
+.HP 3
+\fBsu\fR [\-] [\fInom_utilisateur\fR\ [\ \fIargs\fR\ ]]
+.SH "DESCRIPTION"
+.PP
+\fBSu\fR
+permet de devenir un autre utilisateur pendant une session. Invoqué sans nom d'utilisateur, le comportement par défaut est de devenir superutilisateur. L'argument optionnel
+\fB\-\fR
+permet d'obtenir un environnement similaire à celui obtenu par l'utilisateur après une connexion.
+.PP
+Des arguments supplémentaires peuvent être fournis après le nom de l'utilisateur. Dans ce cas, il sont donnés à l'interpréteur de commandes de l'utilisateur. En particulier, l'argument \(Fo\ \fB\-c\fR\ \(Fc considére l'argument suivant comme une commande pour la plupart des interpréteurs de commandes. La commande sera exécutée par l'interpréteur spécifiée dans
+\fI/etc/passwd\fR
+pour l'utilisateur cible.
+.PP
+Un mot de passe sera demandé à l'utilisateur, si nécessaire. Les mots de passe incorrects produisent un message d'erreur. Toutes les tentatives, réussies ou non, sont enregistrées afin de détecter tout abus du système.
+.PP
+Sauf si l'option
+\fB\-m\fR
+ou
+\fB\-p\fR
+est utilisée, l'environnement actuel est fourni à l'interpréteur de commandes avec quelques changements. La valeur de
+\fB$PATH\fR
+est remise à
+\fI/bin:/usr/bin\fR
+pour les utilisateurs normaux, ou à
+\fI/sbin:/bin:/usr/sbin:/usr/bin\fR
+pour le superutilisateur. Ce comportement peut être modifié avec les paramètres
+\fIENV_PATH\fR
+et
+\fIENV_SUPATH\fR
+de
+\fI/etc/login.defs\fR.
+.PP
+Une connexion à un sous\-système est indiquée par la présence d'un \(Fo\ *\ \(Fc comme premier caractère de l'interpréteur de commandes initial. Le répertoire personnel sera utilisé comme racine d'un nouveau système de fichier dans lequel l'utilisateur sera connecté.
+.SH "AVERTISSEMENTS"
+.PP
+Cette version de
+\fBsu\fR
+a de nombreuses options de compilation. Seules certaines d'entre elles peuvent avoir été activées sur votre site.
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBlogin\fR(1),
+\fBlogin.defs\fR(5),
+\fBsh\fR(1),
+\fBsuauth\fR(5).

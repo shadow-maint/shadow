@@ -1,0 +1,53 @@
+.\"
+.\"  chsh.1 -- change your login shell
+.\"  (c) 1994 by salvatore valente <svalente@athena.mit.edu>
+.\"
+.\"  this program is free software.  you can redistribute it and
+.\"  modify it under the terms of the gnu general public license.
+.\"  there is no warranty.
+.\"
+.\"  $Author: kloczek $
+.\"  $Revision: 1.2 $
+.\"  $Date: 2005/12/01 20:38:25 $
+.\" Proofread by Raimo Koski, Nov-Dec. 1999
+.\" Translated into Finnish by Juha-Pekka Syrjälä (jsyrjala@iki.fi)
+.\" Proofread by Raimo Koski (rkoski@pp.weppi.fi)
+.\"
+.TH CHSH 1 "24. Huhtikuuta 1998" "chsh" "Käyttäjän sovellusohjelmat"
+.SH NIMI
+chsh \- vaihtaa sisäänkirjautumisessa käytetyn komentotulkin
+.SH "YLEISKATSAUS"
+.B chsh
+[\ \-s\ komentotulkki\ ] [\ \-l\ ] [\ \-u\ ] [\ \-v\ ] [\ käyttäjätunnus\ ]
+.SH KUVAUS
+.B chsh
+- käytetään vaihtamaan sisäänkirjautumisessa käytetty komentotulkki.
+Jos komentotulkkia ei ole annettu komentorivillä,
+.B chsh
+kysyy sitä.
+.SS HYVÄKSYTTÄVÄT KOMENTOTULKIT
+.B chsh
+hyväksyy minkä tahansa ajattavan tiedoston, jolle annetaan koko tiedostonimi polkuineen.
+Se kuitenkin varoittaa, jos komentotulkki ei ole määritelty 
+.I /etc/shells-tiedostossa.
+.SH OPTIOT
+.TP
+.I "\-s, \-\-shell"
+Määrittele sisäänkirjautumisessa käytetty komentotulkki.
+.TP
+.I "\-l, \-\-list-shells"
+Tulostaa listan komentotulkeista, jotka ovat määritelty
+.I /etc/shells
+-tiedostossa ja sulkee ohjelman.
+.TP
+.I "\-u, \-\-help"
+Tulostaa ohjeen ja sulkee ohjelman.
+.TP
+.I "-v, \-\-version"
+Tulostaa versiota koskevan informaation ja sulkee ohjelman.
+.SH TEKIJÄ
+Salvatore Valente <svalente@mit.edu>
+.SH "KATSO MYÖS"
+.BR login (1),
+.BR passwd (5),
+.BR shells (5),

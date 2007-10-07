@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupmod.c,v 1.36 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: groupmod.c,v 1.37 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -37,8 +37,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #include <pwd.h>
 #endif				/* USE_PAM */
 #include "chkname.h"
@@ -411,13 +410,6 @@ static void open_files (void)
 	}
 #endif				/* SHADOWGRP */
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * main - groupmod command

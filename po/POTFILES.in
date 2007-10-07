@@ -61,7 +61,6 @@ src/chage.c
 src/chfn.c
 src/chpasswd.c
 src/chsh.c
-src/chsh_chkshell.c
 src/expiry.c
 src/faillog.c
 src/gpasswd.c

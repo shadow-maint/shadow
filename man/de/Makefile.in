@@ -186,6 +186,7 @@ man_MANS = \
 	chfn.1 \
 	groups.1 \
 	login.1 \
+	newgrp.1 \
 	passwd.1 \
 	passwd.5 \
 	vigr.8 \

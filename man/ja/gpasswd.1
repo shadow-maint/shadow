@@ -1,4 +1,4 @@
-.\"$Id: gpasswd.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
+.\"$Id: gpasswd.1,v 1.7 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
@@ -11,9 +11,9 @@
 .\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH GPASSWD 1
-.SH ̾��
-gpasswd \- /etc/group�ե�������������
-.SH ��
+.SH 名前
+gpasswd \- /etc/groupファイルを管理する
+.SH 書式
 \fBgpasswd\fR \fIgroup\fR
 .br
 \fBgpasswd \-a\fR \fIuser\fR \fIgroup\fR
@@ -25,46 +25,46 @@ gpasswd \- /etc/group�ե�������������
 \fBgpasswd \-r\fR \fIgroup\fR
 .br
 \fBgpasswd\fR [\fB\-A\fR \fIuser\fR,...] [\fB\-M\fR \fIuser\fR,...] \fIgroup\fR
-.SH ����
+.SH 説明
 .B gpasswd
-�� /etc/group �ե�����
-(����� SHADOWGRP ��������ƥ���ѥ��뤷������ /etc/gshadow �ե�����)
-�δ������Ѥ����롣
-�ƥ��롼�פˤϡ������ԡ����С����ѥ���ɤ�����Ǥ��롣
-�����ƥ�����Ԥϡ�
-\fB\-A\fR ���ץ�����Ȥäƥ��롼�״����� (ʣ���Ǥ��) ����������ꡢ
-\fB\-M\fR ���ץ�����Ȥäƥ��С������������Ǥ���
-�ƥ��롼�פδ����ԡ����С���Ʊ�����ø�����ġ�
+は /etc/group ファイル
+(および SHADOWGRP を定義してコンパイルした時は /etc/gshadow ファイル)
+の管理に用いられる。
+各グループには、管理者・メンバー・パスワードを設定できる。
+システム管理者は、
+\fB\-A\fR オプションを使ってグループ管理者 (複数でも可) を定義したり、
+\fB\-M\fR オプションを使ってメンバーを定義したりでき、
+各グループの管理者・メンバーと同等の特権を持つ。
 .PP
-���롼�״����Ԥϡ�\fB\-a\fR ���ץ������Ѥ��ƥ桼�����ɲä����ꡢ
-\fB\-d\fR ���ץ������Ѥ��ƥ桼������������Ǥ��롣
-�����Ԥ� \fB\-r\fR ���ץ������Ѥ��ƥ��롼�ץѥ���ɤ����Ǥ��롣
-�ѥ���ɤ����ꤵ��Ƥ��ʤ����ϡ�
-���롼�פΥ��С��Τߤ�
+グループ管理者は、\fB\-a\fR オプションを用いてユーザを追加したり、
+\fB\-d\fR オプションを用いてユーザを削除したりできる。
+管理者は \fB\-r\fR オプションを用いてグループパスワードを削除できる。
+パスワードが設定されていない時は、
+グループのメンバーのみが
 .BR newgrp (1)
-���Ѥ��ƥ��롼�פΰ���ˤʤ�롣
-���ץ���� \fB\-R\fR ����ꤹ��ȡ�
+を用いてグループの一員になれる。
+オプション \fB\-R\fR を指定すると、
 .BR newgrp (1)
-���ޥ�ɤ��Ѥ������롼�פؤΥ��������ϤǤ��ʤ��ʤ롣
+コマンドを用いたグループへのアクセスはできなくなる。
 .PP
-���롼�פδ����Ԥ����롼��̾�Τߤ���ꤷ��
+グループの管理者がグループ名のみを指定して
 .B gpasswd
-���ޥ�ɤ�¹Ԥ������ϡ�
-�ѥ���ɤ����Ϥ�����롣
-�ѥ���ɤ����ꤵ��Ƥ�����Ǥ⡢
-���С��ϥѥ���ɤʤ���
+コマンドを実行した場合は、
+パスワードの入力を求められる。
+パスワードが設定されている場合でも、
+メンバーはパスワードなしで
 .BR newgrp (1)
-���ޥ�ɤ�Ȥ��뤬��
-���С��Ǥʤ��ͤϥѥ���ɤ����Ϥ��ʤ��ƤϤʤ�ʤ���
-.SH �ե�����
-\fI/etc/group\fR \- ���롼�׾���
+コマンドを使えるが、
+メンバーでない人はパスワードを入力しなくてはならない。
+.SH ファイル
+\fI/etc/group\fR \- グループ情報
 .br
-\fI/etc/gshadow\fR \- shadow ���줿���롼�׾���
-.SH ��Ϣ����
+\fI/etc/gshadow\fR \- shadow されたグループ情報
+.SH 関連項目
 .BR newgrp (1),
 .BR groupadd (8),
 .BR groupdel (8),
 .BR groupmod (8),
 .BR grpck (8)
-.SH ����
+.SH 著者
 Rafal Maszkowski <rzm@pdi.net>

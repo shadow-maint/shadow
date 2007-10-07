@@ -1,4 +1,4 @@
-.\" $Id: login.1,v 1.13 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: login.1,v 1.14 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 \- 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,106 +27,106 @@
 .\" SUCH DAMAGE.
 .TH LOGIN 1
 .SH NAZWA
-login \- rozpocznij sesjÍ pracy w systemie
-.SH SK£ADNIA
-\fBlogin\fR [\fB\-p\fR] [\fIuøytkownik\fR] [\fIZMIENNA=WARTO¶∆\fR ...]
+login \- rozpocznij sesjƒô pracy w systemie
+.SH SK≈ÅADNIA
+\fBlogin\fR [\fB\-p\fR] [\fIu≈ºytkownik\fR] [\fIZMIENNA=WARTO≈öƒÜ\fR ...]
 .br
-\fBlogin\fR [\fB\-p\fR] [\fB\-h\fR \fIhost\fR] [\fB\-f\fR \fIuøytkownik\fR]
+\fBlogin\fR [\fB\-p\fR] [\fB\-h\fR \fIhost\fR] [\fB\-f\fR \fIu≈ºytkownik\fR]
 .br
 \fBlogin\fR [\fB\-p\fR] \fB\-r\fR \fIhost\fR
 .SH OPIS
 .B login
-s≥uøy do utworzenia nowej sesji pracy z systemem. Zwykle wywo≥ywane jest
-automatycznie w odpowiedzi na zachÍtÍ
+s≈Çu≈ºy do utworzenia nowej sesji pracy z systemem. Zwykle wywo≈Çywane jest
+automatycznie w odpowiedzi na zachƒôtƒô
 .I login:
-na terminalu uøytkownika.
+na terminalu u≈ºytkownika.
 .B login
-moøe byÊ specyficzne dla pow≥oki i nie moøe zostaÊ wywo≥ane jako podproces.
-NajczÍ∂ciej,
+mo≈ºe byƒá specyficzne dla pow≈Çoki i nie mo≈ºe zostaƒá wywo≈Çane jako podproces.
+Najczƒô≈õciej,
 .B login
-traktowane jest przez pow≥okÍ jako \fBexec login\fR, co powoduje opuszczenie
-przez uøytkownika bieø±cej pow≥oki.
-PrÛba wykonania \fBlogin\fR z pow≥oki innej niø zg≥oszeniowa powoduje
-wypisanie komunikatu o b≥Ídzie.
+traktowane jest przez pow≈Çokƒô jako \fBexec login\fR, co powoduje opuszczenie
+przez u≈ºytkownika bie≈ºƒÖcej pow≈Çoki.
+Pr√≥ba wykonania \fBlogin\fR z pow≈Çoki innej ni≈º zg≈Çoszeniowa powoduje
+wypisanie komunikatu o b≈Çƒôdzie.
 .PP
-Uøytkownik pytany jest o has≥o, je∂li takowe istnieje.
-Dla zapobieøenia ujawnieniu has≥a wy∂wietlanie wprowadzanych znakÛw jest
-w trakcie jego wprowadzania wy≥±czone. Dozwolona jest jedynie niewielka liczba
-nieudanych prÛb podania has≥a. Po wyczerpaniu limitu prÛb \fBlogin\fR koÒczy
-pracÍ za∂ po≥±czenie komunikacyjne jest zrywane.
+U≈ºytkownik pytany jest o has≈Ço, je≈õli takowe istnieje.
+Dla zapobie≈ºenia ujawnieniu has≈Ça wy≈õwietlanie wprowadzanych znak√≥w jest
+w trakcie jego wprowadzania wy≈ÇƒÖczone. Dozwolona jest jedynie niewielka liczba
+nieudanych pr√≥b podania has≈Ça. Po wyczerpaniu limitu pr√≥b \fBlogin\fR ko≈Ñczy
+pracƒô za≈õ po≈ÇƒÖczenie komunikacyjne jest zrywane.
 .PP
-Jeøeli dla konta uøytkownika w≥±czona jest kontrola waøno∂ci has≥a, moøe on
-byÊ poproszony o podanie nowego has≥a przed kontynuacj±. BÍdzie wÛwczas musia≥
-podaÊ stare i nowe has≥o. WiÍcej informacji na ten temat znajduje siÍ
+Je≈ºeli dla konta u≈ºytkownika w≈ÇƒÖczona jest kontrola wa≈ºno≈õci has≈Ça, mo≈ºe on
+byƒá poproszony o podanie nowego has≈Ça przed kontynuacjƒÖ. Bƒôdzie w√≥wczas musia≈Ç
+podaƒá stare i nowe has≈Ço. Wiƒôcej informacji na ten temat znajduje siƒô
 w \fBpasswd\fR(1).
 .PP
-Po poprawnym rozpoczÍciu sesji (zalogowaniu siÍ), zostanie wy∂wietlona
-wiadomo∂ci dnia (je∂li jest) i informacja o stanie skrzynki pocztowej.
-Moøna wy≥±czyÊ wy∂wietlanie zawarto∂ci pliku wiadomo∂ci dnia,
-\fI/etc/motd\fR, tworz±c w swoim katalogu domowym plik \fI.hushlogin\fR
-o zerowej d≥ugo∂ci.
-Informacja o stanie skrzynki pocztowej jest jedn± z:
-"\fBMasz now± pocztÍ.\fR" (You have new mail.),
-"\fBMasz pocztÍ.\fR" (You have mail.) lub "\fBNie masz poczty.\fR" (No Mail.)
+Po poprawnym rozpoczƒôciu sesji (zalogowaniu siƒô), zostanie wy≈õwietlona
+wiadomo≈õci dnia (je≈õli jest) i informacja o stanie skrzynki pocztowej.
+Mo≈ºna wy≈ÇƒÖczyƒá wy≈õwietlanie zawarto≈õci pliku wiadomo≈õci dnia,
+\fI/etc/motd\fR, tworzƒÖc w swoim katalogu domowym plik \fI.hushlogin\fR
+o zerowej d≈Çugo≈õci.
+Informacja o stanie skrzynki pocztowej jest jednƒÖ z:
+"\fBMasz nowƒÖ pocztƒô.\fR" (You have new mail.),
+"\fBMasz pocztƒô.\fR" (You have mail.) lub "\fBNie masz poczty.\fR" (No Mail.)
 \- stosownie do stanu skrzynki.
 .PP
-Identyfikator uøytkownika i grupy (UID i GID) zostan± ustawione wed≥ug
-warto∂ci w pliku \fI/etc/passwd\fR.
-Warto∂ci \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR i \fB$MAIL\fR
-ustawiane s± stosownie do odpowiednich pÛl danego wpisu pliku hase≥.
-Mog± byÊ rÛwnieø ustawiane warto∂ci ulimit, umask oraz nice wed≥ug wpisÛw
+Identyfikator u≈ºytkownika i grupy (UID i GID) zostanƒÖ ustawione wed≈Çug
+warto≈õci w pliku \fI/etc/passwd\fR.
+Warto≈õci \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR i \fB$MAIL\fR
+ustawiane sƒÖ stosownie do odpowiednich p√≥l danego wpisu pliku hase≈Ç.
+MogƒÖ byƒá r√≥wnie≈º ustawiane warto≈õci ulimit, umask oraz nice wed≈Çug wpis√≥w
 w polu GECOS.
 .PP
-W niektÛrych systemach zostanie ustawiona zmienna ∂rodowiskowa \fB$TERM\fR,
-wskazuj±ca na typ terminala na linii tty, jak podano w \fI/etc/ttytype\fR.
+W niekt√≥rych systemach zostanie ustawiona zmienna ≈õrodowiskowa \fB$TERM\fR,
+wskazujƒÖca na typ terminala na linii tty, jak podano w \fI/etc/ttytype\fR.
 .PP
-Moøe takøe zostaÊ wykonany skrypt startowy (inicjacyjny) odpowiedniego
-interpretatora poleceÒ.
-Bardziej szczegÛ≥owe informacje na ten temat moøna znaleºÊ w odpowiednim
-rozdziale podrÍcznika man.
+Mo≈ºe tak≈ºe zostaƒá wykonany skrypt startowy (inicjacyjny) odpowiedniego
+interpretatora polece≈Ñ.
+Bardziej szczeg√≥≈Çowe informacje na ten temat mo≈ºna znale≈∫ƒá w odpowiednim
+rozdziale podrƒôcznika man.
 .PP
-Logowanie do podsystemu jest wykazywane przez obecno∂Ê "*" jako pierwszego
-znaku pow≥oki zg≥oszeniowej. Podany katalog domowy zostanie potraktowany jako
-katalog g≥Ûwny nowego systemu plikÛw, do ktÛrego uøytkownik siÍ zaloguje.
+Logowanie do podsystemu jest wykazywane przez obecno≈õƒá "*" jako pierwszego
+znaku pow≈Çoki zg≈Çoszeniowej. Podany katalog domowy zostanie potraktowany jako
+katalog g≈Ç√≥wny nowego systemu plik√≥w, do kt√≥rego u≈ºytkownik siƒô zaloguje.
 .SH OPCJE
 .TP
 .B \-f
-Nie przeprowadzanie autentykacji, uøytkownik juø zosta≥ zautentykowany.
+Nie przeprowadzanie autentykacji, u≈ºytkownik ju≈º zosta≈Ç zautentykowany.
 .TP
 .B \-h
 Name zdalnego hosta dla tego logowania.
 .TP
 .B \-p
-Zachowanie ∂rodowiska.
+Zachowanie ≈õrodowiska.
 .TP
 .B \-r
 Przeprowadzenie procedury automatycznego logowania dla rlogin.
 .PP
-Opcje \fB\-r\fP, \fB\-h\fP i \fB\-f\fP mog± byÊ uøywane tylko w przypadku
-wywo≥ania \fBlogin\fP przez roota.
+Opcje \fB\-r\fP, \fB\-h\fP i \fB\-f\fP mogƒÖ byƒá u≈ºywane tylko w przypadku
+wywo≈Çania \fBlogin\fP przez roota.
 .SH PRZESTROGI
-Niniejsza wersja \fBlogin\fR posiada wiele opcji kompilacji, z ktÛrych tylko
-czÍ∂Ê bÍdzie mieÊ zastosowanie w danej instalacji.
+Niniejsza wersja \fBlogin\fR posiada wiele opcji kompilacji, z kt√≥rych tylko
+czƒô≈õƒá bƒôdzie mieƒá zastosowanie w danej instalacji.
 .PP
-Po≥oøenie plikÛw moøe byÊ rÛøne w zaleøno∂ci od konfiguracji systemu.
+Po≈Ço≈ºenie plik√≥w mo≈ºe byƒá r√≥≈ºne w zale≈ºno≈õci od konfiguracji systemu.
 .SH PLIKI
 .br
-\fI/var/run/utmp\fR		\- lista bieø±cych sesji pracy
+\fI/var/run/utmp\fR		\- lista bie≈ºƒÖcych sesji pracy
 .br
 \fI/var/log/wtmp\fR		\- lista poprzednich sesji pracy
 .br
-\fI/etc/passwd\fR		\- informacje o kontach uøytkownikÛw
+\fI/etc/passwd\fR		\- informacje o kontach u≈ºytkownik√≥w
 .br
-\fI/etc/shadow\fR		\- zakodowane has≥a i informacje o ich waøno∂ci
+\fI/etc/shadow\fR		\- zakodowane has≈Ça i informacje o ich wa≈ºno≈õci
 .br
-\fI/etc/motd\fR			\- plik 'wiadomo∂ci dnia'
+\fI/etc/motd\fR			\- plik 'wiadomo≈õci dnia'
 .br
-\fI/etc/nologin\fR		\- zapobiega logowaniu innych niø root
+\fI/etc/nologin\fR		\- zapobiega logowaniu innych ni≈º root
 .br
-\fI/etc/ttytype\fR		\- lista typÛw terminali
+\fI/etc/ttytype\fR		\- lista typ√≥w terminali
 .br
-\fI$HOME/.hushlogin\fR	\- zapobiega wy∂wietlaniu wiadomo∂ci dnia
-.SH ZOBACZ TAKØE
+\fI$HOME/.hushlogin\fR	\- zapobiega wy≈õwietlaniu wiadomo≈õci dnia
+.SH ZOBACZ TAK≈ªE
 .BR mail (1),
 .BR passwd (1),
 .BR sh (1),

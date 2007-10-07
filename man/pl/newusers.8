@@ -1,4 +1,4 @@
-.\" $Id: newusers.8,v 1.5 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: newusers.8,v 1.6 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,34 +27,34 @@
 .\" SUCH DAMAGE.
 .TH NEWUSERS 8
 .SH NAZWA
-newusers \- wsadowa aktualizacja i tworzenie nowych uøytkownikÛw
-.SH SK£ADNIA
-\fBnewusers\fR [\fInowi_uøytkownicy\fR]
+newusers \- wsadowa aktualizacja i tworzenie nowych u≈ºytkownik√≥w
+.SH SK≈ÅADNIA
+\fBnewusers\fR [\fInowi_u≈ºytkownicy\fR]
 .SH OPIS
-\fBnewusers\fR odczytuje plik zawieraj±cy pary: nazwa uøytkownika i podane
-jawnym tekstem has≥o. Odczytan± informacjÍ wykorzystuje do aktualizacji grupy
-istniej±cych uøytkownikÛw  lub utworzenia nowych.
-Kaødy wiersz pliku posiada taki sam format jak standardowy plik hase≥ (patrz
-\fBpasswd\fR(5)), z nastÍpuj±cymi wyj±tkami:
+\fBnewusers\fR odczytuje plik zawierajƒÖcy pary: nazwa u≈ºytkownika i podane
+jawnym tekstem has≈Ço. OdczytanƒÖ informacjƒô wykorzystuje do aktualizacji grupy
+istniejƒÖcych u≈ºytkownik√≥w  lub utworzenia nowych.
+Ka≈ºdy wiersz pliku posiada taki sam format jak standardowy plik hase≈Ç (patrz
+\fBpasswd\fR(5)), z nastƒôpujƒÖcymi wyjƒÖtkami:
 .IP "\fIpw_passwd\fR" 10
-To pole zostanie zakodowane i uøyte jako nowa warto∂Ê zakodowanego has≥a.
+To pole zostanie zakodowane i u≈ºyte jako nowa warto≈õƒá zakodowanego has≈Ça.
 .IP "\fIpw_age\fR"
-Dla chronionych hase≥ (shadow) pole zostanie zignorowane je∂li uøytkownik juø
+Dla chronionych hase≈Ç (shadow) pole zostanie zignorowane je≈õli u≈ºytkownik ju≈º
 istnieje.
 .IP "\fIpw_gid\fR"
-Pole to moøe zawieraÊ nazwÍ istniej±cej grupy. Dany uøytkownik zostanie
-wÛwczas dodany do jej cz≥onkÛw. Jeøeli podano numeryczny identyfikator
-nieistniej±cej grupy, to zostanie za≥oøona nowa grupa o tym identyfikatorze.
+Pole to mo≈ºe zawieraƒá nazwƒô istniejƒÖcej grupy. Dany u≈ºytkownik zostanie
+w√≥wczas dodany do jej cz≈Çonk√≥w. Je≈ºeli podano numeryczny identyfikator
+nieistniejƒÖcej grupy, to zostanie za≈Ço≈ºona nowa grupa o tym identyfikatorze.
 .IP "\fIpw_dir\fR"
-Zostanie wykonane sprawdzenie czy istnieje katalog o tej nazwie. Jeøeli nie,
-to bÍdzie on utworzony. W≥a∂cicielem zostanie ustanowiony tworzony
-(lub aktualizowany) uøytkownik. Grupa katalogu zostanie ustawiona na grupÍ
-uøytkownika.
+Zostanie wykonane sprawdzenie czy istnieje katalog o tej nazwie. Je≈ºeli nie,
+to bƒôdzie on utworzony. W≈Ça≈õcicielem zostanie ustanowiony tworzony
+(lub aktualizowany) u≈ºytkownik. Grupa katalogu zostanie ustawiona na grupƒô
+u≈ºytkownika.
 .PP
-Polecenie to przeznaczone jest do uøytku w duøych systemach, gdzie aktualizuje
-siÍ wiele kont naraz.
-Plik ºrÛd≥owy, zawieraj±cy niezakodowane has≥a, musi byÊ chroniony.
-.SH ZOBACZ TAKØE
+Polecenie to przeznaczone jest do u≈ºytku w du≈ºych systemach, gdzie aktualizuje
+siƒô wiele kont naraz.
+Plik ≈∫r√≥d≈Çowy, zawierajƒÖcy niezakodowane has≈Ça, musi byƒá chroniony.
+.SH ZOBACZ TAK≈ªE
 .BR passwd (1),
 .BR useradd (8)
 .SH AUTOR

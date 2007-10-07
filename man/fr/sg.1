@@ -1,0 +1,54 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "SG" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+sg \- exécute une commande avec un autre identifiant de groupe
+.SH "SYNOPSIS"
+.HP 3
+\fBsg\fR [\-] [groupe\ [\-c]\ commande]
+.SH "DESCRIPTION"
+.PP
+La commande
+\fBsg\fR
+fonctionne de la même manière que
+\fBnewgrp\fR, mais accepte une commande comme argument. Cette commande sera exécutée avec un interpréteur de commandes
+\fI/bin/sh\fR. Avec la plupart des interpréteurs de commandes permettant d'exécuter
+\fBsg\fR, si la commande comporte plusieurs mots, il faut la placer entre des guillemets (\(Fo\ "\ \(Fc). Une autre différence entre
+\fBnewgrp\fR
+et
+\fBsg\fR
+est que certains interpréteurs de commandes traitent
+\fBnewgrp\fR
+de façon particulière, en se remplaçant eux\-même par une nouvelle instance d'un interpréteur que
+\fBnewgrp\fR
+crée. Ceci n'est pas le cas de
+\fBsg\fR, ce qui permet de retrouver le groupe précédent à la sortie de
+\fBsg\fR.
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.SH "VOIR AUSSI"
+.PP
+\fBid\fR(1),
+\fBlogin\fR(1),
+\fBnewgrp\fR(1),
+\fBsu\fR(1),
+\fBgpasswd\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)

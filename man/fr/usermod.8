@@ -1,124 +1,112 @@
-.\" Copyright 1991 \- 1994, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: usermod.8,v 1.6 2005/04/05 19:08:53 kloczek Exp $
-.\"
-.\" Traduction 27/09/2000 par Frédéric Delanoy (fdelanoy@info.fundp.ac.be)
-.\"
-.TH USERMOD 8
-.SH NOM
-usermod \- modifier un compte utilisateur
-.SH SYNOPSIS
-.TP 8
-.B usermod
-.\" .RB [ \-A
-.\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ \-c
-.IR commentaire ]
-.RB [ \-d
-.IR rép_perso " ["
-.BR \-m ]]
-.br
-.RB [ \-e
-.IR date_expiration ]
-.RB [ \-f
-.IR inactivité ]
-.br
-.RB [ \-g
-.IR groupe_initial ]
-.RB [ \-G
-.IR groupe [,...]]
-.br
-.RB [ \-l
-.IR nom_connexion ]
-.RB [ \-p
-.IR mot_de_passe ]
-.br
-.RB [ \-s
-.IR shell ]
-.RB [ \-u
-.IR uid " ["
-.BR \-o ]]
-.RB [ \-L | \-U ]
-.I login
-.SH DESCRIPTION
-La commande \fBusermod\fR modifie les fichiers des comptes du système pour refléter les modifications qui ont été spécifiées sur la ligne de commandes.  Les options qui s'appliquent à la commande \fBusermod\fR sont
-.\" .IP "\fB\-A \fImethod\fR|\fBDEFAULT\fR"
-.\" The new value of the user's authentication method.
-.\" The authentication method is the name of a program which is responsible
-.\" for validating the user's identity.
-.\" The string \fBDEFAULT\fR may be used to change the user's authentication
-.\" method to the standard system password method.
-.IP "\fB\-c \fIcommentaire\fR"
-La nouvelle valeur du fichier du champ de commentaire du fichier de mot de passe de l'utilisateur.  Il est normalement modifié en utilisant l'utilitaire \fBchfn\fR(1).
-.IP "\fB\-d \fIrép_perso\fR"
-Le nouveau répertoire de connexion de l'utilisateur.  Si l'option \fB\-m\fR est fournie, le contenu du répertoire personnel actuel sera déplacé dans le nouveau répertoire personnel, qui sera créé si nécessaire.
-.IP "\fB\-e \fIdate_expiration\fR"
-La date à laquelle le compte utilisateur sera désactivé.  La date est spécifiée dans le format \fIAAAA\-MM\-JJ\fR.
-.IP "\fB\-f \fIjours_inactifs\fR"
-Le nombre de jours suivant l'expiration d'un mot de passe après lequel le compte est définitivement désactivé.  Une valeur de 0 désactive le compte dès que le mot de passe a expiré, et une valeur de \-1 désactive cette caractéristique.  La valeur par défaut est de \-1.
-.IP "\fB\-g \fIgroupe_initial\fR"
-Le nom du groupe ou le numéro du groupe de connexion initial de l'utilisateur.  Le nom du groupe doit exister.  Un numéro de groupe doit se référer à un groupe préexistant.  Le numéro de groupe par défaut est de 1.
-.IP "\fB\-G \fIgroupe,[...]\fR"
-Une liste de groupes supplémentaires auxquels fait également partie l'utilisateur.  Chaque groupe est séparé du suivant par une virgule, sans espace entre les deux.  Les groupes sont soumis aux mêmes restrictions que celles données avec l'option \fB\-g\fR.  Si l'utilisateur fait actuellement partie d'un groupe qui n'est pas listé, l'utilisateur sera supprimé du groupe.
-.IP "\fB\-l \fInom_connexion\fR"
-Le nom de l'utilisateur passera de \fIlogin\fR à \fIlogin_name\fR.  Rien d'autre n'est modifié.  En particulier, le répertoire personnel de l'utilisateur devra probablement être changé pour refléter le nouveau nom de connexion.
-.IP "\fB\-L\fR"
-Verrouiller le mot de passe d'un utilisateur.  Cette option ajoute un `!' devant le mot de passe crypté, ce qui désactive le mot de passe.  Vous ne pouvez pas utiliser cette option avec \fI\-p\fR ou \fI\-U\fR.
-.IP "\fB\-p \fImot_de_passe\fR"                                                
-Le mot de passe crypté, comme renvoyé par \fBcrypt\fR(3).
-.IP "\fB\-s \fIshell\fR"
-Le nom du nouveau shell de connexion de l'utilisateur.  Si shell n'est pas fourni, le système sélectionnera le shell de connexion par défaut.
-.IP "\fB\-u \fIuid\fR"
-La valeur numérique de l'ID de l'utilisateur.  Cette valeur doit être unique, à moins que l'option \fI\-o\fR ne soit utilisée.  La valeur doit être non négative.  Les valeurs comprises entre 0 et 999 sont typiquement réservées aux comptes systèmes.  Tous les fichiers possédés par l'utilisateur et qui sont situés dans le sous\-arbre de répertoires "débutant" au répertoire personnel de l'utilisateur verront leur ID d'utilisateur automatiquement modifié.  Les fichiers situés à l'extérieur du répertoire personnel de l'utilisateur doivent être modifiés à la main.
-.IP "\fB\-U\fR"
-Déverrouiller le mot de passe d'un utilisateur.  Cela supprime le `!' situé devant le mot de passe crypté.  Vous ne pouvez pas utiliser cette option avec \fI\-p\fR ou \fI\-L\fR.
-.SH INCONVÉNIENTS
-\fBusermod\fR ne vous permet pas de modifier le nom d'un utilisateur qui est actuellement connecté.  Vous devez être sûr que l'utilisateur nommé n'est pas en train d'exécuter un quelconque programme quand cette commande est exécutée si l'UID numérique de l'utilisateur est modifié.  Vous devez modifier le nom du propriétaire de tous les fichiers \fIcrontab\fR manuellement.  Vous devez modifier le nom du propriétaire de n'importe quel travail \fIat\fR manuellement.  Vous devez effectuer les modifications impliquant NIS sur le serveur NIS.
-.SH FICHIERS
-\fI/etc/passwd\fR \- information sur les comptes utilisateurs
-.br
-\fI/etc/shadow\fR \- information sécurisée sur les comptes utilisateurs
-.br
-\fI/etc/group\fR \- information de groupes
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "USERMOD" "8" "12/07/2005" "Commandes pour la gestion du systÃ¨me" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+usermod \- Modifier un compte utilisateur
+.SH "SYNOPSIS"
+.HP 8
+\fBusermod\fR [\fIoptions\fR] \fILOGIN\fR
+.SH "DESCRIPTION"
+.PP
+La commande
+\fBusermod\fR
+modifie les fichiers d'administration des comptes du systÃ¨me pour reflÃ©ter les modifications qui ont Ã©tÃ© spÃ©cifiÃ©es sur la ligne de commande.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBusermod\fR
+sont\ :
+.TP
+\fB\-c\fR, \fB\-\-comment\fR \fICOMMENTAIRE\fR
+La nouvelle valeur du champ de commentaire du fichier de mots de passe pour l'utilisateur. Il est normalement modifiÃ© en utilisant l'utilitaire
+\fBchfn\fR(1).
+.TP
+\fB\-d\fR, \fB\-\-home\fR \fIRÃ‰P_PERSO\fR
+Le nouveau rÃ©pertoire de connexion de l'utilisateur. Si l'option
+\fB\-m\fR
+est fournie, le contenu du rÃ©pertoire personnel actuel sera dÃ©placÃ© dans le nouveau rÃ©pertoire personnel, qui sera crÃ©Ã© si nÃ©cessaire.
+.TP
+\fB\-e\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDITÃ‰\fR
+La date Ã  laquelle le compte utilisateur sera dÃ©sactivÃ©. La date est spÃ©cifiÃ©e dans le format
+\fIAAAA\-MM\-JJ\fR.
+.TP
+\fB\-f\fR, \fB\-\-inactive\fR \fIDURÃ‰E_INACTIVITÃ‰\fR
+Le nombre de jours suivant la fin de validitÃ© d'un mot de passe aprÃ¨s lequel le compte est dÃ©finitivement dÃ©sactivÃ©. Une valeur de 0 dÃ©sactive le compte dÃ¨s que le mot de passe a dÃ©passÃ© sa fin de validitÃ©, et une valeur de \-1 dÃ©sactive cette fonctionnalitÃ©. La valeur par dÃ©faut est de \-1.
+.TP
+\fB\-g\fR, \fB\-\-gid\fR \fIGROUPE\fR
+Le nom du groupe ou l'identifiant numÃ©rique du groupe de connexion initial de l'utilisateur. Le nom du groupe doit exister. Un numÃ©ro de groupe doit se rÃ©fÃ©rer Ã  un groupe prÃ©existant. Le numÃ©ro de groupe par dÃ©faut est de 1.
+.TP
+\fB\-G\fR, \fB\-\-groups\fR \fIGROUPE1\fR[\fI,GROUPE2,...\fR[\fI,GROUPEN\fR]]]
+Une liste de groupes supplÃ©mentaires auxquels fait Ã©galement partie l'utilisateur. Les groupes sont sÃ©parÃ©s par une virgule, sans espace entre eux. Les groupes sont soumis aux mÃªmes restrictions que celles donnÃ©es avec l'option
+\fB\-g\fR. Si l'utilisateur fait actuellement partie d'un groupe qui n'est pas listÃ©, l'utilisateur sera supprimÃ© du groupe. Ce comportement peut Ãªtre changÃ© avec l'option
+\fB\-a\fR, qui permet d'ajouter l'utilisateur Ã  une liste de groupes supplÃ©mentaires.
+.TP
+\fB\-l\fR, \fB\-\-login\fR \fInouvel_utilisateur\fR
+Le nom de l'utilisateur passera de
+\fIutilisateur\fR
+Ã 
+\fInouvel_utilisateur\fR. Rien d'autre n'est modifiÃ©. En particulier, le rÃ©pertoire personnel de l'utilisateur devra probablement Ãªtre changÃ© pour reflÃ©ter le nouveau nom de connexion.
+.TP
+\fB\-L\fR, \fB\-\-lock\fR
+Verrouille le mot de passe d'un utilisateur. Cette option ajoute un \(Fo\ !\ \(Fc devant le mot de passe chiffrÃ©, ce qui dÃ©sactive le mot de passe. Vous ne pouvez pas utiliser cette option avec
+\fB\-p\fR
+ou
+\fB\-U\fR.
+.TP
+\fB\-o\fR, \fB\-\-non\-unique\fR
+En combinaison avec l'option
+\fB\-u\fR, cette option permet de changer l'identifiant utilisateur vers une valeur dÃ©jÃ  utilisÃ©e.
+.TP
+\fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
+Le mot de passe chiffrÃ©, comme renvoyÃ© par
+\fBcrypt\fR(3).
+.TP
+\fB\-s\fR, \fB\-\-shell\fR \fIINTERPRÃ‰TEUR\fR
+Le nom du nouvel interprÃ©teur de commandes initial (\(Fo\ login shell\ \(Fc) de l'utilisateur. Si le champ est vide, le systÃ¨me sÃ©lectionnera l'interprÃ©teur de commandes initial par dÃ©faut.
+.TP
+\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
+La valeur numÃ©rique de l'identifiant de l'utilisateur. Cette valeur doit Ãªtre unique, Ã  moins que l'option
+\fB\-o\fR
+ne soit utilisÃ©e. La valeur ne doit pas Ãªtre nÃ©gative. Les valeurs comprises entre 0 et 999 sont gÃ©nÃ©ralement rÃ©servÃ©es aux comptes systÃ¨me. Tous les fichiers possÃ©dÃ©s par l'utilisateur et qui sont situÃ©s dans le rÃ©pertoire personnel de l'utilisateur verront leur identifiant utilisateur automatiquement modifiÃ©. Vous devrez rechercher et modifier vous\-mÃªme les fichiers situÃ©s Ã  l'extÃ©rieur du rÃ©pertoire personnel de l'utilisateur.
+.TP
+\fB\-U\fR, \fB\-\-unlock\fR
+DÃ©verrouille le mot de passe d'un utilisateur. Cela supprime le \(Fo\ !\ \(Fc situÃ© devant le mot de passe chiffrÃ©. Vous ne pouvez pas utiliser cette option avec
+\fB\-p\fR
+ou
+\fB\-L\fR.
+.SH "AVERTISSEMENTS"
+.PP
+\fBUsermod\fR
+ne vous permet pas de modifier le nom d'un utilisateur qui est actuellement connectÃ©. Vous devez Ãªtre sÃ»r que l'utilisateur nommÃ© n'est pas en train d'exÃ©cuter un quelconque programme quand cette commande est exÃ©cutÃ©e si l'UID numÃ©rique de l'utilisateur est modifiÃ©. Vous devez modifier vous\-mÃªme le nom du propriÃ©taire de tous les fichiers crontab et des tÃ¢ches at. Vous devez effectuer les modifications impliquant NIS sur le serveur NIS.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachÃ©s \(Fo\ shadow password\ \(Fc
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sÃ©curisÃ©es sur les comptes utilisateurs
 .SH "VOIR AUSSI"
-.BR chfn (1),
-.BR chsh (1),
-.BR crypt (3),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR useradd (8),
-.BR userdel (8)
-.SH AUTEUR
-Julianne Frances Haugh (jfh@bga.com)
-.SH TRADUCTION
-Frédéric Delanoy, 2000.
-
-
-
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBcrypt\fR(3),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBlogin.defs\fR(5),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8).

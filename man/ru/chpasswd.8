@@ -1,0 +1,48 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "chpasswd" "8" "11/10/2005" "Команды управления системой" "Команды управления системой"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+chpasswd \- обновляет пароли в пакетном режиме
+.SH "СИНТАКСИС"
+.HP 9
+\fBchpasswd\fR [\fIпараметры\fR]
+.SH "ОПИСАНИЕ"
+.PP
+\fBchpasswd\fR
+читает список пар "пользователь пароль" из стандартного входного потока и обновляет информацию о существующих пользователях. Каждая строка имеет вид:
+.PP
+\fIимя_пользователя\fR:\fIпароль\fR
+.PP
+По умолчанию, передаваемый пароль должен быть в виде обычного текста. Алгоритмом шифрования по умолчанию является DES. Также, если используется дата устаревания пароля, то она будет обновлёна.
+.PP
+Данная команда предназначена для работы в крупных системных средах, где за один раз заводится несколько учётных записей.
+.SH "ПАРАМЕТРЫ"
+.PP
+Возможные параметры команды
+\fBchpasswd\fR
+:
+.TP
+\fB\-e\fR, \fB\-\-encrypted\fR
+Передаваемые пароли заданы в шифрованном виде.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Показать это сообщение и выйти.
+.TP
+\fB\-m\fR, \fB\-\-md5\fR
+Использовать алгоритм шифрования MD5 вместо DES, если пароли передаются не шифрованными.
+.SH "ПРЕДОСТЕРЕЖЕНИЯ"
+.PP
+Не позволяйте другим читать файл, передаваемый на стандартный ввод команды
+\fBchpasswd\fR
+, если в нём содержатся не шифрованные пароли.
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBpasswd\fR(1),
+\fBnewusers\fR(8),
+\fBuseradd\fR(8).

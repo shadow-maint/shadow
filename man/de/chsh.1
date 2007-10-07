@@ -1,47 +1,47 @@
 .\" Copyleft (C) 2003 Josef Spillner <josef@ggzgamingzone.org>
-.\" Übersetzung der englischen Version von Julianne Frances Haugh
-.\" Ersatz für die originale Version von:
+.\" Ãœbersetzung der englischen Version von Julianne Frances Haugh
+.\" Ersatz fÃ¼r die originale Version von:
 .\" Copyright 1993 Sebastian Hetze und Peter Orbaek.
 .\"
-.\" Veröffentlicht unter der GNU General Public License (GPL).
+.\" VerÃ¶ffentlicht unter der GNU General Public License (GPL).
 .\"
 .TH CHSH 1
 .SH BEZEICHNUNG
-chsh \- ändert die Login\-Shell
-.SH "ÜBERSICHT"
+chsh \- Ã¤ndert die Login\-Shell
+.SH "ÃœBERSICHT"
 .TP 5
 \fBchsh\fR
 [\fB\-s\fR \fILoginshell\fR] [\fINutzer\fR]
 .SH BESCHREIBUNG
-\fBchsh\fR ändert die Login\-Shell eines Nutzers.
-Es legt den Namen des Befehls fest, der beim Login ausgeführt wird.
-Ein normaler Nutzer kann die Login\-Shell nur für sein eigenes
-Konto ändern, während der Supernutzer dies für jedes Konto tun darf.
+\fBchsh\fR Ã¤ndert die Login\-Shell eines Nutzers.
+Es legt den Namen des Befehls fest, der beim Login ausgefÃ¼hrt wird.
+Ein normaler Nutzer kann die Login\-Shell nur fÃ¼r sein eigenes
+Konto Ã¤ndern, wÃ¤hrend der Supernutzer dies fÃ¼r jedes Konto tun darf.
 .PP
-Die einzige Beschränkung, die für die Login\-Shell gilt, ist dass der
+Die einzige BeschrÃ¤nkung, die fÃ¼r die Login\-Shell gilt, ist dass der
 Name des Kommandos in der Datei \fI/etc/shells\fR stehen muss.
 Der Supernutzer darf allerdings jedes beliebige Kommando eintragen.
-Nutzern, deren Konten einer Beschränkung unterliegen, ist es nicht
-gestattet, ihre Login\-Shell zu ändern.
+Nutzern, deren Konten einer BeschrÃ¤nkung unterliegen, ist es nicht
+gestattet, ihre Login\-Shell zu Ã¤ndern.
 Aus diesem Grund ist es nicht empfehlenswert, \fB/bin/rsh\fR in
 \fI/etc/shells\fR einzutragen, da ein versehentlicher Wechsel
-zu einer beschränkten Shell den Nutzer davon abhalten würde,
-seine Login\-Shell wieder auf den Originalwert zurückzusetzen.
+zu einer beschrÃ¤nkten Shell den Nutzer davon abhalten wÃ¼rde,
+seine Login\-Shell wieder auf den Originalwert zurÃ¼ckzusetzen.
 .SH OPTIONEN
-Wenn die Option \fB\-s\fR nicht ausgewählt ist, wird \fBchsh\fR im
+Wenn die Option \fB\-s\fR nicht ausgewÃ¤hlt ist, wird \fBchsh\fR im
 interaktiven Modus betrieben, in der das Programm den Nutzer mit
 der aktuellen Login\-Shell fragt.
-Durch Eingabe eines Wertes wird die Shell gewechselt, während sie bei
+Durch Eingabe eines Wertes wird die Shell gewechselt, wÃ¤hrend sie bei
 einer leeren Zeile gleich bleibt.
 Die aktuelle Shell wird zwischen einem Paar von \fB[ ]\fR angezeigt.
 .SH DATEIEN
-\fI/etc/passwd\fR	\- Informationen über Nutzerkonten
+\fI/etc/passwd\fR	\- Informationen Ã¼ber Nutzerkonten
 .br
-\fI/etc/shells\fR	\- Liste der gültigen Login\-Shells
+\fI/etc/shells\fR	\- Liste der gÃ¼ltigen Login\-Shells
 .SH "SIEHE AUCH"
 .BR chfn (1),
 .BR passwd (5)
 .SH AUTOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
 .br
-Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
+Deutsche Ãœbersetzung von Josef Spillner <josef@ggzgamingzone.org>

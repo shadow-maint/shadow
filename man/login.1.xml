@@ -2,9 +2,9 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='login.1'>
-  <!--  $Id: login.1.xml,v 1.17 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!--  $Id: login.1.xml,v 1.23 2005/12/15 14:50:15 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>LOGIN</refentrytitle>
+    <refentrytitle>login</refentrytitle>
     <manvolnum>1</manvolnum>
     <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
   </refmeta>
@@ -68,7 +68,7 @@
       After a successful login, you will be informed of any system messages
       and the presence of mail. You may turn off the printing of the system
       message file, <filename>/etc/motd</filename>, by creating a
-      zero-length file <markup>.hushlogin</markup> in your login directory. 
+      zero-length file <filename>.hushlogin</filename> in your login directory. 
       The mail message will be one of "<emphasis>You have new
       mail.</emphasis>", "<emphasis>You have mail.</emphasis>", or
       "<emphasis>No Mail.</emphasis> "according to the condition of your
@@ -78,16 +78,15 @@
     <para>
       Your user and group ID will be set according to their values in the
       <filename>/etc/passwd</filename> file. The value for
-      <emphasis>$HOME</emphasis>, <emphasis>$SHELL</emphasis>,
-      <emphasis>$PATH</emphasis>, <emphasis>$LOGNAME</emphasis>, and
-      <emphasis>$MAIL</emphasis> are set according to the appropriate fields
-      in the password entry. Ulimit, umask and nice values may also be set
-      according to entries in the GECOS field.
+      <envar>$HOME</envar>, <envar>$SHELL</envar>, <envar>$PATH</envar>,
+      <envar>$LOGNAME</envar>, and <envar>$MAIL</envar> are set according
+      to the appropriate fields in the password entry. Ulimit, umask and nice
+      values may also be set according to entries in the GECOS field.
     </para>
 
     <para>
       On some installations, the environmental variable
-      <emphasis>$TERM</emphasis> will be initialized to the terminal type on
+      <envar>$TERM</envar> will be initialized to the terminal type on
       your tty line, as specified in <filename>/etc/ttytype</filename>.
     </para>
 
@@ -156,9 +155,10 @@
       </varlistentry>
     </variablelist>
 
-    <para>The <option>-r</option>, <option>-h</option> and
-      <option>-f</option> options are only used when
-      <command>login</command> is invoked by root.
+    <para>
+      The <option>-r</option>, <option>-h</option> and <option>-f</option>
+      options are only used when <command>login</command> is invoked by
+      root.
     </para>
   </refsect1>
 
@@ -172,6 +172,28 @@
     <para>The location of files is subject to differences in system
       configuration.
     </para>
+
+    <para>
+      The <command>login</command> program is NOT responsible for removing
+      users from the utmp file. It is the responsibility of <citerefentry>
+      <refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry> and <citerefentry>
+      <refentrytitle>init</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry> to clean up apparent ownership of a terminal session. 
+      If you use <command>login</command> from the shell prompt without
+      <command>exec</command>, the user you use will continue to appear to
+      be logged in even after you log out of the "subsession".
+    </para>
+
+    <para>
+      As any program, <command>login</command> appearance could be faked. 
+      If non-trusted users have a physical access to the machine, an
+      attacker could use this to obtain the password of the next person
+      sitting in front of the machine. Under Linux, the SAK mecanism can be
+      used by users to initiate of a trusted path and prevent this kind of
+      attack.
+    </para>
+
   </refsect1>
 
   <refsect1 id='files'>
@@ -259,10 +281,5 @@
 	<refentrytitle>getty</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
   </refsect1>
 </refentry>

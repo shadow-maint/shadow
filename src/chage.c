@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chage.c,v 1.66 2005/10/04 20:26:41 kloczek Exp $"
+#ident "$Id: chage.c,v 1.68 2005/12/02 19:42:25 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -40,8 +40,7 @@
 #include <sys/types.h>
 #include <time.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include <pwd.h>
 #ifdef WITH_SELINUX
@@ -233,8 +232,10 @@ static void list_fields (void)
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
 	printf (_("Last password change\t\t\t\t\t: "));
-	if (lastday <= 0) {
+	if (lastday < 0) {
 		printf (_("never\n"));
+	} else if (lastday == 0) {
+		printf (_("password must be changed"));
 	} else {
 		changed = lastday * SCALE;
 		print_date (changed);
@@ -294,13 +295,6 @@ static void list_fields (void)
 	printf (_("Number of days of warning before password expires\t: %ld\n"),
 		warndays);
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * cleanup - unlock any locked password files

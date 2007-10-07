@@ -1,0 +1,94 @@
+
+
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+
+.TH userdel 8 "" "" ""
+.nh
+.SH İSİM  
+userdel - 
+Bir kullanıcı hesabını ve onunla ilgili dosyaları siler
+
+.SH KULLANIM
+
+.nf
+
+\fBuserdel\fR [ \fB-r\fR ] \fIkullanıcı\fR
+
+.fi
+
+
+.SH AÇIKLAMA
+
+\fBuserdel\fR, userdel komutu, \fIkullanıcı\fR ile belirtilen hesabı silerek, sistem hesap dosyalarını değiştirir. Silinmeye çalışan \fIkullanıcı\fR hesabı, sistemde var olan bir hesap olmalıdır. Var olmayan bir hesabı silemezsiniz.
+
+
+
+.br
+.ns
+.TP 
+\fB-r\fR
+Kullanıcının ev dizinindeki dosyalar, ev dizininin kendisi ve 
+kullanıcının posta havuzu silinir. Diğer dosya sistemlerinde bulunan dosyalar silinmez. Bu nedenle bu dosyaları bulmak ve onları silmek sistem yöneticisinin görevidir.
+
+.PP
+
+.SH İLGİLİ DOSYALAR    
+
+.nf
+
+/etc/passwd - kullanıcı hesap bilgileri
+/etc/shadow - güvenli kullanıcı hesap bilgileri
+/etc/group  - grup bilgileri 
+
+.fi
+  
+
+.SH YETERSİZLİKLER    
+
+Kullanıcı sisteme bağlı ise, \fBuserdel\fR komutu ile bu hesabı 
+kaldıramazsınız.  Silmeye çalıştığınız hesaba ait çalışan bütün süreçleri öldürmek zorundasınız. Bir NIS istemcisindeki NIS özniteliklerini kaldıramayabilirsiniz. Bu işlem, NIS sunucu üzerinde gerçekleştirilmelidir.
+
+.SH İLGİLİ BELGELER
+
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBuseradd\fR(8),
+\fBusermod\fR(8).
+
+.SH YAZAN
+
+Julianne Frances Haugh <jockgrrl (at) ix.netcom.com> tarafından  yazılmıştır.
+
+.SH ÇEVİREN
+
+Yalçın Kolukısa <yalcink01 (at) yahoo.com>, Aralık 2003
+

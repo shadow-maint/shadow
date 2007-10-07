@@ -1,4 +1,4 @@
-.\" $Id: su.1,v 1.9 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: su.1,v 1.10 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,46 +27,46 @@
 .\" SUCH DAMAGE.
 .TH SU 1
 .SH NAZWA
-su \- zmiana identyfikatora u¿ytkownika lub uzyskanie praw superu¿ytkownika
-.SH SK£ADNIA
-\fBsu\fR [\fB\-\fR] [\fInazwa_u¿ytkownika\fR [\fIargumenty\fR]]
+su \- zmiana identyfikatora uÅ¼ytkownika lub uzyskanie praw superuÅ¼ytkownika
+.SH SKÅADNIA
+\fBsu\fR [\fB\-\fR] [\fInazwa_uÅ¼ytkownika\fR [\fIargumenty\fR]]
 .SH OPIS
 .B su
-s³u¿y do stawania siê innym u¿ytkownikiem w trakcie w³asnej sesji.
-Wywo³anie bez nazwy u¿ytkownika, domy¶lnie oznacza dla \fBsu\fR
-próbê stania siê superu¿ytkownikiem.
-Opcjonalnym argumentem \fB\-\fR mo¿na pos³u¿yæ siê do zasymulowania
-rzeczywistego rozpoczynania sesji pracy. Pozwala to na utworzenie ¶rodowiska
-u¿ytkownika. podobnego do tego, jakie wystêpuje przy bezpo¶rednim zg³oszeniu
-u¿ytkownika w systemie.
+sÅ‚uÅ¼y do stawania siÄ™ innym uÅ¼ytkownikiem w trakcie wÅ‚asnej sesji.
+WywoÅ‚anie bez nazwy uÅ¼ytkownika, domyÅ›lnie oznacza dla \fBsu\fR
+prÃ³bÄ™ stania siÄ™ superuÅ¼ytkownikiem.
+Opcjonalnym argumentem \fB\-\fR moÅ¼na posÅ‚uÅ¼yÄ‡ siÄ™ do zasymulowania
+rzeczywistego rozpoczynania sesji pracy. Pozwala to na utworzenie Å›rodowiska
+uÅ¼ytkownika. podobnego do tego, jakie wystÄ™puje przy bezpoÅ›rednim zgÅ‚oszeniu
+uÅ¼ytkownika w systemie.
 .PP
-Po nazwie u¿ytkownika mog± wyst±piæ dodatkowe argumenty. Zostan± one
-dostarczone pow³oce zg³oszeniowej u¿ytkownika. W szczególno¶ci, argument
-\fB\-c\fR spowoduje, ¿e nastêpny argument zostanie potraktowany jak polecenie
-przez wiêkszo¶æ interpretatorów poleceñ.
-Polecenie zostanie wykonane przez pow³okê wymienion± w \fI/etc/passwd\fR dla
-docelowego u¿ytkownika.
+Po nazwie uÅ¼ytkownika mogÄ… wystÄ…piÄ‡ dodatkowe argumenty. ZostanÄ… one
+dostarczone powÅ‚oce zgÅ‚oszeniowej uÅ¼ytkownika. W szczegÃ³lnoÅ›ci, argument
+\fB\-c\fR spowoduje, Å¼e nastÄ™pny argument zostanie potraktowany jak polecenie
+przez wiÄ™kszoÅ›Ä‡ interpretatorÃ³w poleceÅ„.
+Polecenie zostanie wykonane przez powÅ‚okÄ™ wymienionÄ… w \fI/etc/passwd\fR dla
+docelowego uÅ¼ytkownika.
 .PP
-U¿ytkownik pytany jest o odpowiednie has³o, je¶li takowe istnieje.
-Nieprawid³owe has³o spowoduje wypisanie komunikatu o b³êdzie. Wszystkie próby,
-udane i nieudane, s± rejestrowane do celów wykrywania nadu¿yæ w systemie.
+UÅ¼ytkownik pytany jest o odpowiednie hasÅ‚o, jeÅ›li takowe istnieje.
+NieprawidÅ‚owe hasÅ‚o spowoduje wypisanie komunikatu o bÅ‚Ä™dzie. Wszystkie prÃ³by,
+udane i nieudane, sÄ… rejestrowane do celÃ³w wykrywania naduÅ¼yÄ‡ w systemie.
 .PP
-Nowej pow³oce przekazywane jest bie¿±ce ¶rodowisko. Warto¶æ \fB$PATH\fR dla
-zwyk³ych u¿ytkowników ustawiana jest na \fB/bin:/usr/bin\fR, za¶ dla
-superu¿ytkownika na \fB/sbin:/bin:/usr/sbin:/usr/bin\fR.
-Mo¿na to zmieniæ przy pomocy definicji \fBENV_PATH\fR i \fBENV_SUPATH\fR
+Nowej powÅ‚oce przekazywane jest bieÅ¼Ä…ce Å›rodowisko. WartoÅ›Ä‡ \fB$PATH\fR dla
+zwykÅ‚ych uÅ¼ytkownikÃ³w ustawiana jest na \fB/bin:/usr/bin\fR, zaÅ› dla
+superuÅ¼ytkownika na \fB/sbin:/bin:/usr/sbin:/usr/bin\fR.
+MoÅ¼na to zmieniÄ‡ przy pomocy definicji \fBENV_PATH\fR i \fBENV_SUPATH\fR
 w \fI/etc/login.defs\fR.
-Logowanie do podsystemu jest wykazywane przez obecno¶æ "*" jako pierwszego
-znaku pow³oki zg³oszeniowej. Podany katalog domowy zostanie potraktowany jako
-katalog g³ówny nowego systemu plików, do którego u¿ytkownik siê zaloguje.
+Logowanie do podsystemu jest wykazywane przez obecnoÅ›Ä‡ "*" jako pierwszego
+znaku powÅ‚oki zgÅ‚oszeniowej. Podany katalog domowy zostanie potraktowany jako
+katalog gÅ‚Ã³wny nowego systemu plikÃ³w, do ktÃ³rego uÅ¼ytkownik siÄ™ zaloguje.
 .SH PRZESTROGI
-Niniejsza wersja \fBsu\fR posiada wiele opcji kompilacji, z których tylko
-czê¶æ bêdzie mieæ zastosowanie w danej instalacji.
+Niniejsza wersja \fBsu\fR posiada wiele opcji kompilacji, z ktÃ³rych tylko
+czÄ™Å›Ä‡ bÄ™dzie mieÄ‡ zastosowanie w danej instalacji.
 .SH PLIKI
-\fI/etc/passwd\fR	\- informacje o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacje o kontach uÅ¼ytkownikÃ³w
 .br
-\fI/etc/shadow\fR	\- zakodowane has³a i informacje o ich wa¿no¶ci
-.SH ZOBACZ TAK¯E
+\fI/etc/shadow\fR	\- zakodowane hasÅ‚a i informacje o ich waÅ¼noÅ›ci
+.SH ZOBACZ TAKÅ»E
 .BR login (1),
 .BR sh (1),
 .BR login.defs (5),

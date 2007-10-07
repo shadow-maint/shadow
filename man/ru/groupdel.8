@@ -1,0 +1,60 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "groupdel" "8" "11/10/2005" "Команды управления системой" "Команды управления системой"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+groupdel \- удаляет группу
+.SH "СИНТАКСИС"
+.HP 9
+\fBgroupdel\fR \fIгруппа\fR
+.SH "ОПИСАНИЕ"
+.PP
+Команда
+\fBgroupdel\fR
+изменяет системные файлы учётных записей, удаляя всё относящееся к группе, заданной параметром
+\fIгруппа\fR. Указанная группа должна существовать.
+.PP
+Вы должны вручную проверить все файловые системы, чтобы убедиться, что не осталось файлов, принадлежащих удалённой группе.
+.SH "ПРЕДОСТЕРЕЖЕНИЯ"
+.PP
+Вы не можете удалить группу, если она является первичной для существующего пользователя. Вы должны удалить пользователя перед тем как удалять группу.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группах
+.SH "ВОЗВРАЩАЕМЫЕ ЗНАЧЕНИЯ"
+.PP
+Команда
+\fBgroupdel\fR
+завершая работу, возвращает следующие значения:
+.TP
+\fI0\fR
+успешное выполнение
+.TP
+\fI2\fR
+ошибка в параметрах командной строки
+.TP
+\fI8\fR
+не удалось удалить первичную пользовательскую группу
+.TP
+\fI10\fR
+не удалось изменить файл групп
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupmod\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8)

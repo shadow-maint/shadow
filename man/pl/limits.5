@@ -1,30 +1,30 @@
-.\" $Id: limits.5,v 1.3 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: limits.5,v 1.4 2005/12/01 20:38:27 kloczek Exp $
 .TH LIMITS 5
 .SH NAZWA
-limits \- definicja ograniczeñ zasobów
+limits \- definicja ograniczeÅ„ zasobÃ³w
 .SH OPIS
 Plik
 .I limits
-(domy¶lnie /etc/limits lub LIMITS_FILE zdefiniowane w config.h)
-opisuje ograniczenia zasobów, jakie chcia³by¶ narzuciæ u¿ytkownikom.
-W³a¶cicielem tego pliku powinien byæ u¿ytkownik root i wy³±cznie dla niego
-plik ten powinien byæ dostêpny do odczytu.
+(domyÅ›lnie /etc/limits lub LIMITS_FILE zdefiniowane w config.h)
+opisuje ograniczenia zasobÃ³w, jakie chciaÅ‚byÅ› narzuciÄ‡ uÅ¼ytkownikom.
+WÅ‚aÅ›cicielem tego pliku powinien byÄ‡ uÅ¼ytkownik root i wyÅ‚Ä…cznie dla niego
+plik ten powinien byÄ‡ dostÄ™pny do odczytu.
 .PP
-Domy¶lnie u¿ytkownikowi 'root' nie s± narzucane ¿adne ograniczenia.
-W rzeczywisto¶ci, przy u¿yciu tego sposobu nie jest mo¿liwe narzucenie limitów
-dla kont równowa¿nych root (kont z UID równym 0).
+DomyÅ›lnie uÅ¼ytkownikowi 'root' nie sÄ… narzucane Å¼adne ograniczenia.
+W rzeczywistoÅ›ci, przy uÅ¼yciu tego sposobu nie jest moÅ¼liwe narzucenie limitÃ³w
+dla kont rÃ³wnowaÅ¼nych root (kont z UID rÃ³wnym 0).
 .PP
-Ka¿dy wiersz definiuje ograniczenie dla u¿ytkownika w postaci:
+KaÅ¼dy wiersz definiuje ograniczenie dla uÅ¼ytkownika w postaci:
 .sp
-.I	u¿ytkownik £AÑCUCH_OGRANICZEÑ
+.I	uÅ¼ytkownik ÅAÅƒCUCH_OGRANICZEÅƒ
 .PP
-\fB£AÑCUCH OGRANICZEÑ\fP sk³ada siê z po³±czonych definicji ograniczeñ zasobów.
-Ka¿de ograniczenie opisywane jest liter± z nastêpuj±c± po niej warto¶ci±
-numeryczn± limitu.
+\fBÅAÅƒCUCH OGRANICZEÅƒ\fP skÅ‚ada siÄ™ z poÅ‚Ä…czonych definicji ograniczeÅ„ zasobÃ³w.
+KaÅ¼de ograniczenie opisywane jest literÄ… z nastÄ™pujÄ…cÄ… po niej wartoÅ›ciÄ…
+numerycznÄ… limitu.
 .PP
-Dozwolone s± nastêpuj±ce identyfikatory:
+Dozwolone sÄ… nastÄ™pujÄ…ce identyfikatory:
 .sp
-A: max. przestrzeñ adresowa (KB)
+A: max. przestrzeÅ„ adresowa (KB)
 .br
 C: max. rozmiar pliku core (KB)
 .br
@@ -34,7 +34,7 @@ F: maksymalny rozmiar pliku (KB)
 .br
 M: max. locked\-in\-memory address space (KB)
 .br
-N: max. liczba otwartych plików
+N: max. liczba otwartych plikÃ³w
 .br
 R: max. resident set size (KB)
 .br
@@ -42,36 +42,36 @@ S: max. rozmiar stosu (KB)
 .br
 T: max. czas procesora (CPU) (MIN)
 .br
-U: max. liczba procesów
+U: max. liczba procesÃ³w
 .br
-L: max. liczba sesji pracy dla tego u¿ytkownika
+L: max. liczba sesji pracy dla tego uÅ¼ytkownika
 .br
 P: priorytet procesu, ustawiany przez \fBsetpriority\fR(2).
 .PP
-Na przyk³ad, \fIL2D2048N5\fP jest poprawnym \fB£AÑCUCHEM OGRANICZEÑ\fP.
-Z uwagi na lepsz± czytelno¶ci przyjêto, ¿e poni¿sze zapisy s± równowa¿ne:
+Na przykÅ‚ad, \fIL2D2048N5\fP jest poprawnym \fBÅAÅƒCUCHEM OGRANICZEÅƒ\fP.
+Z uwagi na lepszÄ… czytelnoÅ›ci przyjÄ™to, Å¼e poniÅ¼sze zapisy sÄ… rÃ³wnowaÅ¼ne:
 .sp
-nazwa_u¿ytkownika L2D2048N5
+nazwa_uÅ¼ytkownika L2D2048N5
 .br
-nazwa_u¿ytkownika L2 D2048 N5
+nazwa_uÅ¼ytkownika L2 D2048 N5
 .PP
-Nale¿y podkre¶liæ, ¿e reszta wiersza po \fInazwie_u¿ytkownika\fP traktowana
-jest jako ³añcuch ograniczeñ, zatem komentarze nie s± dozwolone. Nieprawid³owy
-³añcuch ograniczeñ zostanie odrzucony (nie bêdzie brany pod uwagê) przez
+NaleÅ¼y podkreÅ›liÄ‡, Å¼e reszta wiersza po \fInazwie_uÅ¼ytkownika\fP traktowana
+jest jako Å‚aÅ„cuch ograniczeÅ„, zatem komentarze nie sÄ… dozwolone. NieprawidÅ‚owy
+Å‚aÅ„cuch ograniczeÅ„ zostanie odrzucony (nie bÄ™dzie brany pod uwagÄ™) przez
 program login.
 .PP
-Nazwa u¿ytkownika równa "\fB*\fP" oznacza wpis domy¶lny.
-Je¿eli w pliku \fBLIMITS_FILE\fP posiadasz wiele takich wpisów, to jako
-domy¶lny zostanie u¿yty ostatni z nich.
+Nazwa uÅ¼ytkownika rÃ³wna "\fB*\fP" oznacza wpis domyÅ›lny.
+JeÅ¼eli w pliku \fBLIMITS_FILE\fP posiadasz wiele takich wpisÃ³w, to jako
+domyÅ›lny zostanie uÅ¼yty ostatni z nich.
 .PP
-Pojedyncza kreska "\fB\-\fP" ca³kowicie wy³±cza ograniczenia dla u¿ytkownika.
+Pojedyncza kreska "\fB\-\fP" caÅ‚kowicie wyÅ‚Ä…cza ograniczenia dla uÅ¼ytkownika.
 .PP
-Zauwa¿ te¿, proszê, ¿e wszystkie te ograniczenia definiowane s± w odniesieniu
-do pojedynczej sesji (per login). Nie s± one globalne ani sta³e. Byæ mo¿e bêd±
-kiedy¶ ograniczenia globalne, ale na razie tyle musi wystarczyæ ;)
+ZauwaÅ¼ teÅ¼, proszÄ™, Å¼e wszystkie te ograniczenia definiowane sÄ… w odniesieniu
+do pojedynczej sesji (per login). Nie sÄ… one globalne ani staÅ‚e. ByÄ‡ moÅ¼e bÄ™dÄ…
+kiedyÅ› ograniczenia globalne, ale na razie tyle musi wystarczyÄ‡ ;)
 .SH PLIKI
 .I /etc/limits
-.SH ZOBACZ TAK¯E
+.SH ZOBACZ TAKÅ»E
 .BR login (1),
 .BR setpriority (2),
 .BR setrlimit (2)

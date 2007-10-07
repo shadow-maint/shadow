@@ -1,4 +1,4 @@
-.\" $Id: passwd.1,v 1.8 2005/06/02 09:48:14 kloczek Exp $
+.\" $Id: passwd.1,v 1.9 2005/12/01 20:38:25 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,8 +30,8 @@
 .\" (Version 1.25)
 .TH PASSWD 1
 .SH BEZEICHNUNG
-passwd \- ändert das Passwort eines Nutzers
-.SH "ÜBERSICHT"
+passwd \- Ã¤ndert das Passwort eines Nutzers
+.SH "ÃœBERSICHT"
 \fBpasswd\fR [\fB\-f\fR|\fB\-s\fR] [\fIName\fR]
 .br
 \fBpasswd\fR [\fB\-g\fR] [\fB\-r\fR|\fB\-R\fR] \fIGruppe\fR
@@ -41,125 +41,125 @@ passwd \- ändert das Passwort eines Nutzers
 .br
 \fBpasswd\fR {\fB\-l\fR|\fB\-u\fR|\fB\-d\fR|\fB\-S\fR|\fB\-e\fR} \fIlogin\fR
 .SH BESCHREIBUNG
-\fBpasswd\fR ändert die Passwörter für Nutzer\- und Gruppenkonten. Ein normaler
-Nutzer kann nur das Passwort seines Kontos verändern, der Superuser dagegen
-kann die Passwörter aller Konten ändern. Der Verwalter einer Gruppe kann das
-Passwort der Gruppe ändern. \fBpasswd\fR verändert auch die Informationen über
-das Konto wie den vollständigen Namen des Nutzers, seine Login\-Shell oder
+\fBpasswd\fR Ã¤ndert die PasswÃ¶rter fÃ¼r Nutzer\- und Gruppenkonten. Ein normaler
+Nutzer kann nur das Passwort seines Kontos verÃ¤ndern, der Superuser dagegen
+kann die PasswÃ¶rter aller Konten Ã¤ndern. Der Verwalter einer Gruppe kann das
+Passwort der Gruppe Ã¤ndern. \fBpasswd\fR verÃ¤ndert auch die Informationen Ã¼ber
+das Konto wie den vollstÃ¤ndigen Namen des Nutzers, seine Login\-Shell oder
 Verfallsdatum und \-intervall des Passworts.
 .PP
 Die Option \fB\-s\fR bewirkt, dass \fBpasswd\fR \fBchsh\fR aufruft, um die Shell
-des Nutzers zu ändern. Die Option \fB\-f\fR hat zur Folge, dass \fBpasswd\fR
-\fBchfn\fR aufruft, um die Gecos\-Informationen des Nutzers zu ändern. Diese
-beiden Optionen sind nur aus Kompatibilitätsgründen vorhanden, da die anderen
-Programme auch direkt aufgerufen werden können.
-.SS Verändern des Passworts
+des Nutzers zu Ã¤ndern. Die Option \fB\-f\fR hat zur Folge, dass \fBpasswd\fR
+\fBchfn\fR aufruft, um die Gecos\-Informationen des Nutzers zu Ã¤ndern. Diese
+beiden Optionen sind nur aus KompatibilitÃ¤tsgrÃ¼nden vorhanden, da die anderen
+Programme auch direkt aufgerufen werden kÃ¶nnen.
+.SS VerÃ¤ndern des Passworts
 Der Nutzer wird zuerst nach seinem alten Passwort gefragt, falls eines
-vorhanden ist. Dieses Passwort wird dann verschlüsselt und mit dem
+vorhanden ist. Dieses Passwort wird dann verschlÃ¼sselt und mit dem
 abgespeicherten Passwort verglichen. Der Nutzer hat nur eine Gelegenheit, das
-richtige Passwort einzugeben. Der Superuser kann diesen Schritt überspringen,
-so dass vergessene Passwörter geändert werden können.
+richtige Passwort einzugeben. Der Superuser kann diesen Schritt Ã¼berspringen,
+so dass vergessene PasswÃ¶rter geÃ¤ndert werden kÃ¶nnen.
 .PP
-Nachdem das Passwort eingegeben wurde, werden Informationen über die
-Gültigkeitsdauer des Passworts abgefragt, um festzustellen, ob der Nutzer das
-Passwort zu dieser Zeit verändern darf. Wenn nicht, lehnt \fBpasswd\fR ab,
-das Passwort zu ändern, und beendet sich.
+Nachdem das Passwort eingegeben wurde, werden Informationen Ã¼ber die
+GÃ¼ltigkeitsdauer des Passworts abgefragt, um festzustellen, ob der Nutzer das
+Passwort zu dieser Zeit verÃ¤ndern darf. Wenn nicht, lehnt \fBpasswd\fR ab,
+das Passwort zu Ã¤ndern, und beendet sich.
 .PP
 Der Nutzer wird dann aufgefordert, ein neues Passwort einzugeben. Dieses
-Passwort wird auf seine Komplexität überprüft. Eine allgemeine Richtlinie ist,
-dass Passwörter aus sechs bis acht Zeichen bestehen sollten und ein oder
+Passwort wird auf seine KomplexitÃ¤t Ã¼berprÃ¼ft. Eine allgemeine Richtlinie ist,
+dass PasswÃ¶rter aus sechs bis acht Zeichen bestehen sollten und ein oder
 mehrere Zeichen aus folgenden Mengen enthalten sollten:
 .IP "" .5i
 Kleinbuchstaben
 .IP "" .5i
-Großbuchstaben
+GroÃŸbuchstaben
 .IP "" .5i
 Zahlen von 0 bis 9
 .IP "" .5i
 Satzzeichen
 .PP
-Seien Sie vorsichtig, dass nicht die standardmäßigen Erase\- oder Killzeichen
-des Systems eingegeben werden. \fBpasswd\fR weist alle Passwörter zurück, die
+Seien Sie vorsichtig, dass nicht die standardmÃ¤ÃŸigen Erase\- oder Killzeichen
+des Systems eingegeben werden. \fBpasswd\fR weist alle PasswÃ¶rter zurÃ¼ck, die
 nicht ausreichend komplex sind.
 .PP
 Wenn das Passwort akzeptiert wird, fordert \fBpasswd\fR zu einer erneuten
 Eingabe des Passworts auf und vergleicht die zweite Eingabe mit der
-ersten. Beide Eingaben müssen übereinstimmen, damit das Passwort geändert wird.
-.SS Gruppenpasswörter
-Wenn die Option \fB\-g\fR benutzt wird, wird das Passwort für die bezeichnete
-Gruppe verändert. Der Nutzer muss entweder der Superuser oder der Administrator
+ersten. Beide Eingaben mÃ¼ssen Ã¼bereinstimmen, damit das Passwort geÃ¤ndert wird.
+.SS GruppenpasswÃ¶rter
+Wenn die Option \fB\-g\fR benutzt wird, wird das Passwort fÃ¼r die bezeichnete
+Gruppe verÃ¤ndert. Der Nutzer muss entweder der Superuser oder der Administrator
 der Gruppe sein. Das aktuelle Gruppenpasswort wird nicht abgefragt. Die Option
 \fB\-r\fR wird zusammen mit der Option \fB\-g\fR verwendet, um das aktuelle
-Passwort der Gruppe zu entfernen. Das erlaubt den Zugang zur Gruppe für alle
+Passwort der Gruppe zu entfernen. Das erlaubt den Zugang zur Gruppe fÃ¼r alle
 Mitglieder. Die Option \fB\-R\fR wird mit der Option \fB\-g\fR benutzt, um den
-Zugang zur Gruppe für alle Nutzer zu beschränken.
-.SS Informationen über den Verfall des Passworts
-Die Informationen über die Gültigkeitsdauer des Passworts können vom Superuser
-mit den Optionen \fB\-x\fR, \fB\-n\fR, \fB\-w\fR und \fB\-i\fR geändert werden.
+Zugang zur Gruppe fÃ¼r alle Nutzer zu beschrÃ¤nken.
+.SS Informationen Ã¼ber den Verfall des Passworts
+Die Informationen Ã¼ber die GÃ¼ltigkeitsdauer des Passworts kÃ¶nnen vom Superuser
+mit den Optionen \fB\-x\fR, \fB\-n\fR, \fB\-w\fR und \fB\-i\fR geÃ¤ndert werden.
 Die Option \fB\-x\fR wird verwendet, um die maximale Anzahl von Tagen
-festzulegen, die das Passwort gültig bleibt. Nach \fImax\fR Tagen muss das
-Passwort geändert werden.
+festzulegen, die das Passwort gÃ¼ltig bleibt. Nach \fImax\fR Tagen muss das
+Passwort geÃ¤ndert werden.
 Mit der Option \fB\-n\fR kann die Mindestzahl der Tage bestimmt werden, bevor es
-verändert werden darf. Der Nutzer kann das Passwort nicht ändern, bevor nicht
+verÃ¤ndert werden darf. Der Nutzer kann das Passwort nicht Ã¤ndern, bevor nicht
 \fImin\fR Tage abgelaufen sind.
 Die Option \fB\-w\fR wird verwendet, um die Anzahl der Tage festzulegen, an
-denen der Nutzer eine Warnung erhält, bevor sein Passwort ungültig wird. Die
-Warnung wird dem Nutzer \fIwarn\fR Tage vor dem Verfall mitgeteilt und enthält
-den Hinweis, wie viele Tage noch verbleiben, bis das Passwort verfällt.
+denen der Nutzer eine Warnung erhÃ¤lt, bevor sein Passwort ungÃ¼ltig wird. Die
+Warnung wird dem Nutzer \fIwarn\fR Tage vor dem Verfall mitgeteilt und enthÃ¤lt
+den Hinweis, wie viele Tage noch verbleiben, bis das Passwort verfÃ¤llt.
 Die Option \fB\-i\fR wird benutzt, um das Nutzerkonto zu deaktivieren, nachdem
-das Passwort für eine bestimmte Anzahl von Tagen ungültig war. Wenn ein
-Nutzerkonto ein abgelaufenes Passwort für \fIinact\fR Tage hatte, kann der
+das Passwort fÃ¼r eine bestimmte Anzahl von Tagen ungÃ¼ltig war. Wenn ein
+Nutzerkonto ein abgelaufenes Passwort fÃ¼r \fIinact\fR Tage hatte, kann der
 Nutzer sich nicht mehr bei seinem Konto anmelden.
 .PP
-Wenn Sie wollen, dass ein Passwort eines Kontos sofort verfällt, sollten Sie
+Wenn Sie wollen, dass ein Passwort eines Kontos sofort verfÃ¤llt, sollten Sie
 die Option \fB\-e\fR verwenden. Das hat zur Folge, dass der Nutzer gezwungen
-wird, sein Passwort zu ändern, wenn er sich das nächste Mal anmeldet. Sie
-können auch die Option \fB\-d\fR verwenden, um das Passwort eines Nutzers zu
-löschen (es wird also leer).  Seien Sie mit dieser Option vorsichtig, da sie
-dazu führt, dass ein Konto überhaupt kein Passwort zur Anmeldung benötigt. Das
-öffnet Ihr System für Eindringlinge.
+wird, sein Passwort zu Ã¤ndern, wenn er sich das nÃ¤chste Mal anmeldet. Sie
+kÃ¶nnen auch die Option \fB\-d\fR verwenden, um das Passwort eines Nutzers zu
+lÃ¶schen (es wird also leer).  Seien Sie mit dieser Option vorsichtig, da sie
+dazu fÃ¼hrt, dass ein Konto Ã¼berhaupt kein Passwort zur Anmeldung benÃ¶tigt. Das
+Ã¶ffnet Ihr System fÃ¼r Eindringlinge.
 .SS Wartung der Konten
-Nutzerkonten können mit den Flags \fB\-l\fR und \fB\-u\fR gesperrt und
+Nutzerkonten kÃ¶nnen mit den Flags \fB\-l\fR und \fB\-u\fR gesperrt und
 freigegeben werden.
 Die Option \fB\-l\fR schaltet ein Konto ab, indem es ein Passwort zuweist, das
-mit keinem möglichen verschlüsselten Wert übereinstimmen kann.
+mit keinem mÃ¶glichen verschlÃ¼sselten Wert Ã¼bereinstimmen kann.
 Die Option \fB\-u\fR reaktiviert ein Konto wieder, indem das Passwort auf seinen
-alten Wert zurückgesetzt wird.
+alten Wert zurÃ¼ckgesetzt wird.
 .PP
 Der Kontostatus kann mit der Option \fB\-S\fR abgerufen werden. Die
 Statusinformation besteht aus sieben Feldern.  
 Das erste Feld ist der Login\-Name des Nutzers.
 Das zweite Feld zeigt an, ob das Nutzerkonto gesperrt ist (L), kein Passwort
 hat (NP) oder ein verwendbares Passwort hat (P).
-Das dritte Feld zeigt das Datum der letzten Veränderung des Passworts an.
-Die nächsten vier Felder sind die minimale Zeit, die maximale Zeit, die Dauer
-der Warnung und die Dauer der Untätigkeit für das Passwort.
-Die Zeiträume werden in Tagen ausgedrückt. Lesen Sie oben
-.B Informationen über den Verfall des Passworts
-zu Ausführungen über diese Felder.
-.SS Hinweise zu Nutzerpasswörtern
-Die Sicherheit eines Passworts hängt von der Stärke des
-Verschlüsselungsalgorithmus und von der Größe des Schlüsselraums (key space)
-ab. Die Verschlüsselung auf \fB\s\-2UNIX\s+2\fR\-Systemen basiert auf dem
-NBS\-DES\-Algorithmus und ist sehr sicher. Die Größe des Schlüsselraums hängt von
-der Zufälligkeit des gewählten Passworts ab.
+Das dritte Feld zeigt das Datum der letzten VerÃ¤nderung des Passworts an.
+Die nÃ¤chsten vier Felder sind die minimale Zeit, die maximale Zeit, die Dauer
+der Warnung und die Dauer der UntÃ¤tigkeit fÃ¼r das Passwort.
+Die ZeitrÃ¤ume werden in Tagen ausgedrÃ¼ckt. Lesen Sie oben
+.B Informationen Ã¼ber den Verfall des Passworts
+zu AusfÃ¼hrungen Ã¼ber diese Felder.
+.SS Hinweise zu NutzerpasswÃ¶rtern
+Die Sicherheit eines Passworts hÃ¤ngt von der StÃ¤rke des
+VerschlÃ¼sselungsalgorithmus und von der GrÃ¶ÃŸe des SchlÃ¼sselraums (key space)
+ab. Die VerschlÃ¼sselung auf \fB\s\-2UNIX\s+2\fR\-Systemen basiert auf dem
+NBS\-DES\-Algorithmus und ist sehr sicher. Die GrÃ¶ÃŸe des SchlÃ¼sselraums hÃ¤ngt von
+der ZufÃ¤lligkeit des gewÃ¤hlten Passworts ab.
 .PP
-Gefahren für die Sicherheit von Passwörtern kommen gewöhnlich von sorgloser
+Gefahren fÃ¼r die Sicherheit von PasswÃ¶rtern kommen gewÃ¶hnlich von sorgloser
 Wahl oder Handhabung des Passworts.
-Daher sollten Sie kein Passwort wählen, das in einem Wörterbuch auftaucht oder
+Daher sollten Sie kein Passwort wÃ¤hlen, das in einem WÃ¶rterbuch auftaucht oder
 das aufgeschrieben werden muss. Das Passwort sollte somit kein echter Name,
 Ihr Autokennzeichen, Geburtstag oder Ihre Adresse sein. All das kann dazu
-verwendet werden, das Passwort zu erraten, und stellt daher eine Gefahr für die
+verwendet werden, das Passwort zu erraten, und stellt daher eine Gefahr fÃ¼r die
 Sicherheit Ihres Systems dar.
 .PP
-Sie müssen sich Ihr Passwort leicht merken können, damit Sie nicht gezwungen
-sind, es auf ein Stück Papier aufzuschreiben. Das können Sie dadurch erreichen,
-indem zwei kurze Wörter zusammengefügt werden und mit einem besonderen Zeichen
+Sie mÃ¼ssen sich Ihr Passwort leicht merken kÃ¶nnen, damit Sie nicht gezwungen
+sind, es auf ein StÃ¼ck Papier aufzuschreiben. Das kÃ¶nnen Sie dadurch erreichen,
+indem zwei kurze WÃ¶rter zusammengefÃ¼gt werden und mit einem besonderen Zeichen
 oder einer Zahl getrennt werden. Zum Beispiel Pass%wort.
 .PP
 Eine andere Herangehensweise ist es, einen leicht zu merkenden Satz aus der
-Literatur zu wählen und den ersten oder letzten Buchstaben von jedem Wort zu
-nehmen. Ein Beispiel dafür:
+Literatur zu wÃ¤hlen und den ersten oder letzten Buchstaben von jedem Wort zu
+nehmen. Ein Beispiel dafÃ¼r:
 .IP "" .5i
 Die Kruste wird im Allgemeinen ueberbewertet!
 .PP
@@ -167,44 +167,44 @@ Das ergibt
 .IP "" .5i
 DKwiAu!
 .PP
-Sie können einigermaßen sicher sein, dass dieses Wort nur wenige Cracker in
-ihren Wörterlisten haben. Sie sollten allerdings Ihre eigenen Methoden
-entwickeln, wie Sie Passwörter wählen, und sich nicht ausschließlich auf die
-hier vorgestellten stützen.
-.SS Anmerkungen zu Gruppenpasswörtern
-Gruppenpasswörter beinhalten ein inhärentes Sicherheitsproblem, da mehr als nur
+Sie kÃ¶nnen einigermaÃŸen sicher sein, dass dieses Wort nur wenige Cracker in
+ihren WÃ¶rterlisten haben. Sie sollten allerdings Ihre eigenen Methoden
+entwickeln, wie Sie PasswÃ¶rter wÃ¤hlen, und sich nicht ausschlieÃŸlich auf die
+hier vorgestellten stÃ¼tzen.
+.SS Anmerkungen zu GruppenpasswÃ¶rtern
+GruppenpasswÃ¶rter beinhalten ein inhÃ¤rentes Sicherheitsproblem, da mehr als nur
 eine Person das Passwort kennt. Damit haftet schon der Idee von
-Gruppenpasswörtern ein Sicherheitsproblem an. Jedoch sind Gruppen ein
-nützliches Werkzeug, um Zusammenarbeit zwischen verschiedenen Nutzern zu
-ermöglichen.
+GruppenpasswÃ¶rtern ein Sicherheitsproblem an. Jedoch sind Gruppen ein
+nÃ¼tzliches Werkzeug, um Zusammenarbeit zwischen verschiedenen Nutzern zu
+ermÃ¶glichen.
 .SH WARNUNGEN
-Es kann sein, dass einige Optionen nicht unterstützt werden.
-Die Komplexität der Passwortprüfung kann sich auf verschiedenen Systemen
+Es kann sein, dass einige Optionen nicht unterstÃ¼tzt werden.
+Die KomplexitÃ¤t der PasswortprÃ¼fung kann sich auf verschiedenen Systemen
 unterscheiden.
-Der Nutzer wird angehalten, ein so komplexes Passwort zu wählen, wie es ihm
+Der Nutzer wird angehalten, ein so komplexes Passwort zu wÃ¤hlen, wie es ihm
 angenehm ist.
-Nutzer können unter Umständen ihr Passwort nicht ändern, wenn auf dem System
+Nutzer kÃ¶nnen unter UmstÃ¤nden ihr Passwort nicht Ã¤ndern, wenn auf dem System
 NIS aktiviert ist, sie aber nicht am NIS\-Server angemeldet sind.
 .SH DATEIEN
 \fI/etc/passwd\fR		\- Informationen zu den Nutzerkonten
 .br
-\fI/etc/shadow\fR		\- Verschlüsselte Informationen zu den Nutzerkonten
-.SH "RÜCKGABEWERTE"
+\fI/etc/shadow\fR		\- VerschlÃ¼sselte Informationen zu den Nutzerkonten
+.SH "RÃœCKGABEWERTE"
 .TP 2
-Der Befehl \fBpasswd\fR gibt beim Beenden folgende Werte zurück:
+Der Befehl \fBpasswd\fR gibt beim Beenden folgende Werte zurÃ¼ck:
 \fB0\fR	\- Erfolg
 .br
 \fB1\fR	\- Berechtigung verweigert
 .br
-\fB2\fR	\- ungültige Kombination von Optionen
+\fB2\fR	\- ungÃ¼ltige Kombination von Optionen
 .br
-\fB3\fR	\- unerwarteter Fehler, nichts verändert
+\fB3\fR	\- unerwarteter Fehler, nichts verÃ¤ndert
 .br
 \fB4\fR	\- unerwarteter Fehler, die Datei passwd fehlt
 .br
-\fB5\fR	\- Datei passwd wird benutzt, versuchen Sie es später noch einmal
+\fB5\fR	\- Datei passwd wird benutzt, versuchen Sie es spÃ¤ter noch einmal
 .br
-\fB6\fR	\- ungültiges Argument für Option
+\fB6\fR	\- ungÃ¼ltiges Argument fÃ¼r Option
 .SH "SIEHE AUCH"
 .BR group (5),
 .BR passwd (5),
@@ -212,4 +212,4 @@ Der Befehl \fBpasswd\fR gibt beim Beenden folgende Werte zurück:
 .SH AUTOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
 .PP
-Übersetzung von Simon Brandmair <sbrandmair@gmx.net> (Apr 2005)
+Ãœbersetzung von Simon Brandmair <sbrandmair@gmx.net> (Apr 2005)

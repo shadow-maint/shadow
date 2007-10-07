@@ -26,64 +26,64 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: newgrp.1,v 1.5 2005/04/12 18:08:46 kloczek Exp $
+.\"	$Id: newgrp.1,v 1.6 2005/12/01 20:38:25 kloczek Exp $
 .\"
 .TH NEWGRP 1
-.SH NÉV
-newgrp \- Csoportazonosító módosítása
+.SH NÃ‰V
+newgrp \- CsoportazonosÃ­tÃ³ mÃ³dosÃ­tÃ¡sa
 .br
-sg \- Parancs végrehajtása más csoportazonoító alatt
-.SH ÁTTEKINTÉS
+sg \- Parancs vÃ©grehajtÃ¡sa mÃ¡s csoportazonoÃ­tÃ³ alatt
+.SH ÃTTEKINTÃ‰S
 .BR newgrp " [" \- ]
 [\fIgroup\fR]
 .br
 .BR sg " [" \- ]
 [\fIgroup\fR [\fB\-c\fR \fIcommand\fR]]
-.SH LEÍRÁS
+.SH LEÃRÃS
 A
 .B newgrp
-parancs a jelenlegi bejelentkezéshez tartozó csoportazonosító
-módosítására használható.  Ha a parancsot az elhagyható \fB\-\fR
-kapcsolóval hívtuk meg, akkor a rendszer úgy inicializálja újra
-a felhasználói környezetet, ahogy az a bejelelentkezés során 
-megtörténik, ellenkezõ esetben a jelenlegi környezet \- beleértve
-az aktuális munkakönyvtárat is \- változatlan marad.
+parancs a jelenlegi bejelentkezÃ©shez tartozÃ³ csoportazonosÃ­tÃ³
+mÃ³dosÃ­tÃ¡sÃ¡ra hasznÃ¡lhatÃ³.  Ha a parancsot az elhagyhatÃ³ \fB\-\fR
+kapcsolÃ³val hÃ­vtuk meg, akkor a rendszer Ãºgy inicializÃ¡lja Ãºjra
+a felhasznÃ¡lÃ³i kÃ¶rnyezetet, ahogy az a bejelelentkezÃ©s sorÃ¡n 
+megtÃ¶rtÃ©nik, ellenkezÅ‘ esetben a jelenlegi kÃ¶rnyezet \- beleÃ©rtve
+az aktuÃ¡lis munkakÃ¶nyvtÃ¡rat is \- vÃ¡ltozatlan marad.
 .PP
 A
 .B newgrp
-parancs lecseréli az aktuális csoportazonosítót a megnevezett
-vagy \- ha nincs megadva \- az \fI/etc/passwd\fR fájlban megadott
-alapértelmezett csoportra.  Ha a felhasználó nem rendelkezik jelszóval,
-de a csoport igen, vagy a felhasználó nem tagja a csoportnak,
-de a csoport rendelkezik jelszóval, akkor a rendszer bekéri a csoport
-jelszavát.
-Amennyiben a csoportnak nincs jelszava, és a felhasználó nem tagja a 
-csoportnak, akkor a hozzáférés nem lehetséges.
+parancs lecserÃ©li az aktuÃ¡lis csoportazonosÃ­tÃ³t a megnevezett
+vagy \- ha nincs megadva \- az \fI/etc/passwd\fR fÃ¡jlban megadott
+alapÃ©rtelmezett csoportra.  Ha a felhasznÃ¡lÃ³ nem rendelkezik jelszÃ³val,
+de a csoport igen, vagy a felhasznÃ¡lÃ³ nem tagja a csoportnak,
+de a csoport rendelkezik jelszÃ³val, akkor a rendszer bekÃ©ri a csoport
+jelszavÃ¡t.
+Amennyiben a csoportnak nincs jelszava, Ã©s a felhasznÃ¡lÃ³ nem tagja a 
+csoportnak, akkor a hozzÃ¡fÃ©rÃ©s nem lehetsÃ©ges.
 .PP
 Az
 .B sg
-parancs mûködése hasonló a \fBnewgrp\fR parancs mûködéséhez,
-de ez nem cseréli le a felhasználó parancsértelmezõjét, így
-amikor kilépünk az \fBsg\fR parancsból, visszakapjuk az 
-eredeti csoportazonosítót.
+parancs mÅ±kÃ¶dÃ©se hasonlÃ³ a \fBnewgrp\fR parancs mÅ±kÃ¶dÃ©sÃ©hez,
+de ez nem cserÃ©li le a felhasznÃ¡lÃ³ parancsÃ©rtelmezÅ‘jÃ©t, Ã­gy
+amikor kilÃ©pÃ¼nk az \fBsg\fR parancsbÃ³l, visszakapjuk az 
+eredeti csoportazonosÃ­tÃ³t.
 Az
 .B sg
-parancsnak egy másik, aposztrófok közé zárt parancsot is meg lehet
-adni, amely a \fB/bin/sh\fR parancsértelmezõvel kerül végrehajtásra.
-.SH HIBÁK
-A \fBnewgrp\fR többféle fordítási beállítással rendelkezik,
-amelyeknek egy adott felhasználási környezetben csak egy részére
-lehet szükség.
-.SH FÁJLOK
-\fI/etc/passwd\fR	\- felhasználói információk
+parancsnak egy mÃ¡sik, aposztrÃ³fok kÃ¶zÃ© zÃ¡rt parancsot is meg lehet
+adni, amely a \fB/bin/sh\fR parancsÃ©rtelmezÅ‘vel kerÃ¼l vÃ©grehajtÃ¡sra.
+.SH HIBÃK
+A \fBnewgrp\fR tÃ¶bbfÃ©le fordÃ­tÃ¡si beÃ¡llÃ­tÃ¡ssal rendelkezik,
+amelyeknek egy adott felhasznÃ¡lÃ¡si kÃ¶rnyezetben csak egy rÃ©szÃ©re
+lehet szÃ¼ksÃ©g.
+.SH FÃJLOK
+\fI/etc/passwd\fR	\- felhasznÃ¡lÃ³i informÃ¡ciÃ³k
 .br
-\fI/etc/group\fR	\- csoportinfomációk
-.SH LÁSD MÉG
+\fI/etc/group\fR	\- csoportinfomÃ¡ciÃ³k
+.SH LÃSD MÃ‰G
 .BR id (1),
 .BR login (1),
 .BR su (1)
-.SH SZERZÔ
+.SH SZERZÃ”
 Julianne Frances Haugh (jfh@bga.com)
 .br
-.SH MAGYAR FORDÍTÁS
-Mamuzsics Péter <zumu@mentha.hu>
+.SH MAGYAR FORDÃTÃS
+Mamuzsics PÃ©ter <zumu@mentha.hu>

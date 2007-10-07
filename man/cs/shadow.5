@@ -1,58 +1,58 @@
 .TH SHADOW 5
 .do hla cs
 .do hpf hyphen.cs
-.SH JMÉNO
-shadow \- soubor se za¹ifrovanımi hesly
+.SH JMÃ‰NO
+shadow \- soubor se zaÅ¡ifrovanÃ½mi hesly
 .SH POPIS
 .I shadow
-obsahuje informace o za¹ifrovanıch heslech u¾ivatelskıch úètù a
-volitelnì mù¾e obsahovat informace o stárnutí hesel. Soubor obsahuje
+obsahuje informace o zaÅ¡ifrovanÃ½ch heslech uÅ¾ivatelskÃ½ch ÃºÄtÅ¯ a
+volitelnÄ› mÅ¯Å¾e obsahovat informace o stÃ¡rnutÃ­ hesel. Soubor obsahuje
 
 .IP "" .5i
-Pøihla¹ovací jméno
+PÅ™ihlaÅ¡ovacÃ­ jmÃ©no
 .IP "" .5i
-Za¹ifrované heslo
+ZaÅ¡ifrovanÃ© heslo
 .IP "" .5i
-Poèet dnù od 1. ledna 1970, kdy bylo heslo naposledy zmìnìno
+PoÄet dnÅ¯ od 1. ledna 1970, kdy bylo heslo naposledy zmÄ›nÄ›no
 .IP "" .5i
-Poèet dnù, po jejich¾ uplynutí mù¾e bıt heslo zmìnìno
+PoÄet dnÅ¯, po jejichÅ¾ uplynutÃ­ mÅ¯Å¾e bÃ½t heslo zmÄ›nÄ›no
 .IP "" .5i
-Poèet dnù, po jejich¾ uplynutí musí bıt heslo zmìnìno
+PoÄet dnÅ¯, po jejichÅ¾ uplynutÃ­ musÃ­ bÃ½t heslo zmÄ›nÄ›no
 .IP "" .5i
-Poèet dnù pøed lhùtou, kdy je u¾ivatel varován, ¾e heslo vypr¹í
+PoÄet dnÅ¯ pÅ™ed lhÅ¯tou, kdy je uÅ¾ivatel varovÃ¡n, Å¾e heslo vyprÅ¡Ã­
 .IP "" .5i
-Poèet dnù, po jejich¾ uplynutí po propadnutí hesla je zablokován úèet.
+PoÄet dnÅ¯, po jejichÅ¾ uplynutÃ­ po propadnutÃ­ hesla je zablokovÃ¡n ÃºÄet.
 .IP "" .5i
-Poèet dnù od 1. ledna 1970, kdy byl úèet zablokován
+PoÄet dnÅ¯ od 1. ledna 1970, kdy byl ÃºÄet zablokovÃ¡n
 .IP "" .5i
-Rezervované pole
+RezervovanÃ© pole
 .PP
-Pole hesla musí bıt vyplnìno. Za¹ifrované heslo se skládá ze 13 a¾ 24
-znakù z 64 prvkové mno¾iny znakù (a a¾ z, A a¾ Z, 0 a¾ 9, \. a
-/). \fIcrypt(3)\fR obsahuje detailní informace o tom, jak
-interpretovat tento øetìzec.
+Pole hesla musÃ­ bÃ½t vyplnÄ›no. ZaÅ¡ifrovanÃ© heslo se sklÃ¡dÃ¡ ze 13 aÅ¾ 24
+znakÅ¯ z 64 prvkovÃ© mnoÅ¾iny znakÅ¯ (a aÅ¾ z, A aÅ¾ Z, 0 aÅ¾ 9, \. a
+/). \fIcrypt(3)\fR obsahuje detailnÃ­ informace o tom, jak
+interpretovat tento Å™etÄ›zec.
 .PP
-Datum poslední zmìny hesla je dáno poètem dní od 1. ledna 1970. Heslo
-nesmí bıti znovu zmìnìno dokud øádnì neuplyne specifikovanı poèet dní,
-a musí bıt zmìnìno po uplynutí maximálního poètu dní. Pokud je
-minimální poèet dnù platnosti hesla vy¹¹í ne¾ maximální poèet
-povolenıch dní, heslo nemù¾e bıt zmìnìno u¾ivatelem.
+Datum poslednÃ­ zmÄ›ny hesla je dÃ¡no poÄtem dnÃ­ od 1. ledna 1970. Heslo
+nesmÃ­ bÃ½ti znovu zmÄ›nÄ›no dokud Å™Ã¡dnÄ› neuplyne specifikovanÃ½ poÄet dnÃ­,
+a musÃ­ bÃ½t zmÄ›nÄ›no po uplynutÃ­ maximÃ¡lnÃ­ho poÄtu dnÃ­. Pokud je
+minimÃ¡lnÃ­ poÄet dnÅ¯ platnosti hesla vyÅ¡Å¡Ã­ neÅ¾ maximÃ¡lnÃ­ poÄet
+povolenÃ½ch dnÃ­, heslo nemÅ¯Å¾e bÃ½t zmÄ›nÄ›no uÅ¾ivatelem.
 .PP
-Úèet je pova¾ován za neaktivní a bude zablokován, jestli¾e heslo není
-zmìnìno bìhem urèeného poètu dní po vypr¹ení platnosti hesla. Úèet
-bude také zablokován v urèenı den nezávisle na ostatních informacích o
-vypr¹ení hesla.
+ÃšÄet je povaÅ¾ovÃ¡n za neaktivnÃ­ a bude zablokovÃ¡n, jestliÅ¾e heslo nenÃ­
+zmÄ›nÄ›no bÄ›hem urÄenÃ©ho poÄtu dnÃ­ po vyprÅ¡enÃ­ platnosti hesla. ÃšÄet
+bude takÃ© zablokovÃ¡n v urÄenÃ½ den nezÃ¡visle na ostatnÃ­ch informacÃ­ch o
+vyprÅ¡enÃ­ hesla.
 .PP
-Tyto informace o heslu a dobì jeho platnosti mají prioritu pøed
-informacemi ulo¾enımi v souboru \fB/etc/passwd\fR.
+Tyto informace o heslu a dobÄ› jeho platnosti majÃ­ prioritu pÅ™ed
+informacemi uloÅ¾enÃ½mi v souboru \fB/etc/passwd\fR.
 .PP
-Tento soubor nesmí bıt èitelnı øádnımi u¾ivateli, má\-li bıt
-ochrana hesel úèinná.
+Tento soubor nesmÃ­ bÃ½t ÄitelnÃ½ Å™Ã¡dnÃ½mi uÅ¾ivateli, mÃ¡\-li bÃ½t
+ochrana hesel ÃºÄinnÃ¡.
 .SH SOUBORY
-\fI/etc/passwd\fR \- informace o u¾ivatelskıch úètech
+\fI/etc/passwd\fR \- informace o uÅ¾ivatelskÃ½ch ÃºÄtech
 .br
-\fI/etc/shadow\fR \- za¹ifrovaná hesla u¾ivatelù
-.SH DAL©Í INFORMACE
+\fI/etc/shadow\fR \- zaÅ¡ifrovanÃ¡ hesla uÅ¾ivatelÅ¯
+.SH DALÅ Ã INFORMACE
 chage(1),
 login(1),
 passwd(1),

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chage.1'>
-  <!--  $Id: chage.1.xml,v 1.27 2005/10/10 17:11:22 kloczek Exp $  -->
+  <!--  $Id: chage.1.xml,v 1.29 2005/11/05 17:17:29 kloczek Exp $  -->
   <refmeta>
     <refentrytitle>chage</refentrytitle>
     <manvolnum>1</manvolnum>
@@ -127,7 +127,7 @@
 	    When <replaceable>MAX_DAYS</replaceable> plus
 	    <replaceable>LAST_DAY</replaceable> is less than the current
 	    day, the user will be required to change her password before
-	    being able to use her account. This occurence can be planned for
+	    being able to use her account. This occurrence can be planned for
 	    in advance by use of the <option>-W</option> option, which
 	    provides the user with advance warning.
 	  </para>
@@ -239,10 +239,5 @@
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
   </refsect1>
 </refentry>

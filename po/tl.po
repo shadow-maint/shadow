@@ -2,16 +2,16 @@
 # shadow/po/tl.po 
 # Copyright (C) 2005 Software in the Public Interest, Inc.
 # This file is distributed under the same license as shadow
-# Itong tipunan ay ipinamamahagi sa parehong lisensya ng shadow
+# Itong talaksan ay ipinamamahagi sa parehong lisensya ng shadow
 # Eric Pareja <xenos@upm.edu.ph>, 2005
 # This file is maintained by Eric Pareja <xenos@upm.edu.ph>
-# Itong tipunan ay inaalagaan ni Eric Pareja <xenos@upm.edu.ph>
+# Itong talaksan ay inaalagaan ni Eric Pareja <xenos@upm.edu.ph>
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.7\n"
+"Project-Id-Version: shadow 4.0.14\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
-"PO-Revision-Date: 2005-01-26 22:00+0800\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"PO-Revision-Date: 2005-12-30 13:12+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -79,19 +79,23 @@ msgstr "Umapaw ang kapaligiran\n"
 msgid "You may not change $%s\n"
 msgstr "Hindi niyo maaaring baguhin ang $%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
 msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
-msgstr[0] "%d na kabiguan mula sa huling pagpasok. Ang huli ay %s noong %s.\n"
-msgstr[1] "%d na kabiguan mula sa huling pagpasok. Ang huli ay %s noong %s.\n"
+msgstr[0] ""
+"May %d kabiguan magmula ng huling pagpasok.\n"
+"Ang huli ay %s noong %s.\n"
+msgstr[1] ""
+"May %d na kabiguan magmula ng huling pagpasok.\n"
+"Ang huli ay %s noong %s.\n"
 
 #, c-format
 msgid "Too many logins.\n"
-msgstr "Sobra ang mga login.\n"
+msgstr "Labis ang mga login.\n"
 
 msgid "You have new mail."
 msgstr "May bago kang koreo."
@@ -102,27 +106,26 @@ msgstr "Walang koreo."
 msgid "You have mail."
 msgstr "Mayroon kang koreo."
 
-#, fuzzy
 msgid "no change"
-msgstr "%s: walang pagbabago\n"
+msgstr "walang pagbabago"
 
 msgid "a palindrome"
-msgstr ""
+msgstr "isang palindromo"
 
 msgid "case changes only"
-msgstr ""
+msgstr "nagpalit lamang ng laki ng titik"
 
 msgid "too similar"
-msgstr ""
+msgstr "labis na magkatulad"
 
 msgid "too simple"
-msgstr ""
+msgstr "labis na simple"
 
 msgid "rotated"
-msgstr ""
+msgstr "inikot"
 
 msgid "too short"
-msgstr ""
+msgstr "labis ng ikli"
 
 #, c-format
 msgid "Bad password: %s.  "
@@ -130,18 +133,18 @@ msgstr "Masamang password: %s.  "
 
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "passwd: sawi ang pam_start(), error %d\n"
+msgstr "passwd: bigo ang pam_start(), error %d\n"
 
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
 msgid "passwd: password updated successfully\n"
-msgstr ""
+msgstr "passwd: tagumpay sa pagpalit ng password\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Incorrect password for %s.\n"
-msgstr "Maling password para kay `%s'\n"
+msgstr "Maling password para kay %s.\n"
 
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
@@ -164,14 +167,15 @@ msgstr "Hindi mapalitan ang root directory sa \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
+"Walang nakapasok sa utmp. Kailangan niyong mag-exec \"login\" mula sa "
+"pinakamababang antas ng \"sh\""
 
-#, fuzzy
 msgid "Unable to determine your tty name."
-msgstr "%s: Hindi makilala ang inyong pangalan.\n"
+msgstr "Hindi malaman ang pangalan ng tty ninyo."
 
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "sawi ang malloc(%d)\n"
+msgstr "bigo ang malloc(%d)\n"
 
 msgid "Password: "
 msgstr "Password: "
@@ -197,6 +201,24 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "  -W, --warndays WARN_DAYS\tset expiration warning days to WARN_DAYS\n"
 msgstr ""
+"Pag-gamit: chage [mga opsyon] gumagamit\n"
+"\n"
+"Mga opsyon:\n"
+"  -d, --lastday HULING_ARAW     itakda ang huling pagpalit ng password\n"
+"                                sa HULING_ARAW\n"
+"  -E, --expiredate EXPIRE_DATE  itakda ang pagkapaso ng account sa "
+"EXPIRE_DATE\n"
+"  -h, --help                    ipakita ang tulong at lumabas\n"
+"  -I, --inactive INACTIVE       itakda ang password na inaktibo matapos "
+"mapaso\n"
+"                                at gawin itong INACTIVE\n"
+"  -l, --list                    ipakita ang impormasyon tungkol sa account\n"
+"  -m, --mindays MIN_DAYS        itakda na hindi kukulang sa MIN_DAYS\n"
+"                                bago palitan ang password\n"
+"  -M, --maxdays MAX_DAYS        itakda na hindi hihigit sa MAX_DAYS\n"
+"                                bago palitan ang password\n"
+"  -W, --warndays WARN_DAYS    itakda ang babala tungkol sa pagpaso sa "
+"WARN_DAYS\n"
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
@@ -220,37 +242,41 @@ msgstr "Inaktibo ang Password"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Hangganan ng Account (YYYY-MM-DD)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Last password change\t\t\t\t\t: "
-msgstr "Huling Pagpalit ng Password (YYYY-MM-DD)"
+msgstr "Huling Pagpalit ng Password : "
 
-#, fuzzy, c-format
+#, c-format
 msgid "never\n"
 msgstr "Hindi kailanman\n"
 
-#, fuzzy, c-format
+#, c-format
+msgid "password must be changed"
+msgstr "kailangan palitan ang password"
+
+#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Taning ng Password:\t"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Inaktibong Password:\t"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Mapapaso ang Account:\t"
 
 #, c-format
 msgid "Minimum number of days between password change\t\t: %ld\n"
-msgstr ""
+msgstr "Bilang ng mga araw bago magpalit ng password  : %ld\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Maximum number of days between password change\t\t: %ld\n"
-msgstr "Labis ang pagsubok na pumasok (%d)\n"
+msgstr "Bilang ng mga araw na dapat magpalit na ng password : %ld\n"
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
+msgstr "Bilang ng mga araw bago mapaso ang password na may babala : %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -262,31 +288,31 @@ msgstr "%s: Walang pahintulot.\n"
 
 #, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: sawi ang pagpapakilalang PAM\n"
+msgstr "%s: bigo ang pagpapakilalang PAM\n"
 
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "%s: hindi mabuksan ang tipunang password\n"
+msgstr "%s: hindi mabuksan ang talaksang password\n"
 
 #, c-format
 msgid "%s: unknown user %s\n"
 msgstr "%s: di kilalang gumagamit %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: the shadow password file is not present\n"
-msgstr "%s: hindi mabuksan ang tipunang shadow password\n"
+msgstr "%s: wala ang talaksan ng shadow password\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
-msgstr "%s: hindi maaldaba ang tipunang shadow password\n"
+msgstr "%s: hindi maaldaba ang talaksang shadow password\n"
 
 #, c-format
 msgid "%s: can't open shadow password file\n"
-msgstr "%s: hindi mabuksan ang tipunang shadow password\n"
+msgstr "%s: hindi mabuksan ang talaksang shadow password\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgstr "%s: bigo sa pagtanggal ng mga pribilehiyo (%s)\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -298,19 +324,19 @@ msgstr "%s: error sa pagbabago ng mga field\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "%s: hindi maapdeyt ang tipunang password\n"
+msgstr "%s: hindi maapdeyt ang talaksang password\n"
 
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s: hindi maapdeyt ang tipunang shadow password\n"
+msgstr "%s: hindi maapdeyt ang talaksang shadow password\n"
 
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: hindi maisulat-muli ang tipunang shadow password\n"
+msgstr "%s: hindi maisulat-muli ang talaksang shadow password\n"
 
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s: hindi maisulat-muli ang tipunang password\n"
+msgstr "%s: hindi maisulat-muli ang talaksang password\n"
 
 #, c-format
 msgid ""
@@ -337,23 +363,23 @@ msgstr "\tBuong Pangalan: %s\n"
 msgid "Room Number"
 msgstr "Bilang ng Silid"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "Bilang ng Silid"
+msgstr "\tBilang ng Silid: %s\n"
 
 msgid "Work Phone"
 msgstr "Telepono sa Trabaho"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "Telepono sa Trabaho"
+msgstr "\tTelepono sa Trabaho: %s\n"
 
 msgid "Home Phone"
 msgstr "Telepono sa Bahay"
 
-#, fuzzy, c-format
+#, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "Telepono sa Bahay"
+msgstr "\tTelepono sa Bahay: %s\n"
 
 msgid "Other"
 msgstr "Iba pa"
@@ -404,11 +430,11 @@ msgstr "Hindi mabago ang ID sa root.\n"
 
 #, c-format
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "Hindi maaldaba ang tipunang password; subukan muli mamaya.\n"
+msgstr "Hindi maaldaba ang talaksang password; subukan muli mamaya.\n"
 
 #, c-format
 msgid "Cannot open the password file.\n"
-msgstr "Hindi mabuksan ang tipunang password\n"
+msgstr "Hindi mabuksan ang talaksang password\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
@@ -420,11 +446,11 @@ msgstr "Error sa pag-apdeyt ng password entry.\n"
 
 #, c-format
 msgid "Cannot commit password file changes.\n"
-msgstr "Hindi maisulat ang pagbabago sa tipunang password.\n"
+msgstr "Hindi maisulat ang pagbabago sa talaksang password.\n"
 
 #, c-format
 msgid "Cannot unlock the password file.\n"
-msgstr "Hindi maalis ang aldaba sa tipunang password.\n"
+msgstr "Hindi maalis ang aldaba sa talaksang password.\n"
 
 #, c-format
 msgid ""
@@ -446,15 +472,15 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't lock password file\n"
-msgstr "%s: hindi maaldaba ang tipunang password\n"
+msgstr "%s: hindi maaldaba ang talaksang password\n"
 
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: hindi maaldaba ang tipunang shadow\n"
+msgstr "%s: hindi maaldaba ang talaksang shadow\n"
 
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: hindi mabuksan ang tipunang shadow\n"
+msgstr "%s: hindi mabuksan ang talaksang shadow\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
@@ -478,11 +504,11 @@ msgstr "%s: may error na naganap, di pinansin ang mga pagbabago\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: error sa pag-apdeyt ng tipunang shadow\n"
+msgstr "%s: error sa pag-apdeyt ng talaksang shadow\n"
 
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: error sa pag-apdeyt ng tipunang password\n"
+msgstr "%s: error sa pag-apdeyt ng talaksang password\n"
 
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
@@ -530,10 +556,26 @@ msgid ""
 "\t\t\t\tand limits (if used with -r, -m or -l options) only\n"
 "\t\t\t\tfor user with LOGIN\n"
 msgstr ""
+"Pag-gamit: faillog [mga opsyon]\n"
+"\n"
+"Mga opsyon:\n"
+"  -a, --all\t\tipakita ang mga record ng faillog para sa lahat\n"
+"  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
+"  -l, --lock-time SEG\tmatapos mabigo sa pagpasok, i-lock ng SEG segundo "
+"ang\n"
+"\t\t\taccount\n"
+"  -m, --maximum MAX\titakda ang maximum na bilang ng kabiguan sa pagpasok "
+"na\n"
+"\t\t\thanggang MAX lamang\n"
+"  -r, --reset\t\tireset ang mga tagabilang ng kabiguan sa pagpasok\n"
+"  -t, --time ARAW\tipakita ang faillog records na hindi tatanda sa ARAW\n"
+"  -u, --user LOGIN\tipakita ang faillog record o pangasiwaan ang tagabilang\n"
+"\t\t\tng pagkabigo at mga palugit (kung gamit ang -r, -m o\n"
+"\t\t\t-l na opsyon) para sa gumagamit ng LOGIN lamang\n"
 
 #, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr ""
+msgstr "Login       Kabiguan Maximum Pinakahuli               On\n"
 
 #, c-format
 msgid " [%lds left]"
@@ -547,9 +589,9 @@ msgstr " [%lds lock]"
 msgid "Unknown User: %s\n"
 msgstr "Di kilalang Gumagamit: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r|-R] group\n"
-msgstr "pag-gamit: %s [-r|-R] grupo\n"
+msgstr "Pag-gamit: %s [-r|-R] grupo\n"
 
 #, c-format
 msgid "       %s [-a user] group\n"
@@ -622,7 +664,7 @@ msgstr "%s: hindi makuha ang aldaba ng shadow\n"
 
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s: hindi mabuksan ang tipunan\n"
+msgstr "%s: hindi mabuksan ang talaksan\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -634,22 +676,22 @@ msgstr "%s: hindi ma-apdeyt ang entry na shadow\n"
 
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: hindi maisulat muli ang tipunan\n"
+msgstr "%s: hindi maisulat muli ang talaksan\n"
 
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: hindi maisulat muli ang tipunang shadow\n"
+msgstr "%s: hindi maisulat muli ang talaksang shadow\n"
 
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s: hindi matanggal ang aldaba ng tipunan\n"
+msgstr "%s: hindi matanggal ang aldaba ng talaksan\n"
 
 #, c-format
 msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -657,6 +699,15 @@ msgid ""
 "  -o, --non-unique\t\tallow create group with duplicate\n"
 "\t\t\t\t(non-unique) GID\n"
 msgstr ""
+"Pag-gamit: groupadd [mga opsyon] grupo\n"
+"\n"
+"Mga opsyon:\n"
+"  -f, --force\t\tipilit ang paglabas na kalagayang matagumpay kung\n"
+"\t\t\tang ibinigay na grupo ay mayroon na\n"
+"  -g, --gid GID\t\tgamitin ang GID para sa bagong grupo\n"
+"  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
+"  -K, --key KEY=HALAGA\tnangingibabaw sa mga default sa /etc/login.defs\n"
+"  -o, --non-unique\tpayagang gumawa ng grupo na may kaparehong GID\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
@@ -666,47 +717,47 @@ msgstr "%s: error sa pagdagdag ng entry ng bagong grupo\n"
 msgid "%s: name %s is not unique\n"
 msgstr "%s: hindi kakaiba ang pangalang %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: hindi kakaiba ang gid na %u\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique GID\n"
-msgstr "%s: hindi makakuha ng kakaibang gid\n"
+msgstr "%s: hindi makakuha ng kakaibang GID\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s is not a valid group name\n"
-msgstr "%s: %s ay hindi tanggap na pangalan ng grupo\n"
+msgstr "%s: hindi tanggap na pangalan ng grupo ang %s\n"
 
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: hindi maisulat muli ang tipunang grupo\n"
+msgstr "%s: hindi maisulat muli ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: hindi maisulat muli ang tipunang grupo ng shadow\n"
+msgstr "%s: hindi maisulat muli ang talaksang grupo ng shadow\n"
 
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: hindi maaldaba ang tipunang grupo\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: hindi maaldaba ang tipunang grupo ng shadow\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo ng shadow\n"
 
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo ng shadow\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo ng shadow\n"
 
 #, c-format
 msgid "%s: invalid group %s\n"
 msgstr "%s: hindi tanggap na grupo %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: kinakailangan ng -O ang PANGALAN=HALAGA\n"
 
@@ -714,9 +765,9 @@ msgstr "%s: kinakailangan ng -O ang PANGALAN=HALAGA\n"
 msgid "%s: group %s exists\n"
 msgstr "%s: mayroon nang grupong %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupdel group\n"
-msgstr "pag-gamit: groupdel grupo\n"
+msgstr "Pag-gamit: groupdel grupo\n"
 
 #, c-format
 msgid "%s: error removing group entry\n"
@@ -742,17 +793,17 @@ msgstr "%s: ang grupong %s ay grupong NIS\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s ay ang NIS master\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "pag-gamit: groupmod [-g gid [-o]] [-n pangalan] grupo\n"
+msgstr "Pag-gamit: groupmod [-g gid [-o]] [-n pangalan] grupo\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
 msgstr "%s: %s hindi nahanap sa /etc/group\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u ay hindi kakaibang gid\n"
+msgstr "%s: hindi kakaibang GID ang %u\n"
 
 #, c-format
 msgid "%s: %s is not a unique name\n"
@@ -766,9 +817,9 @@ msgstr "Pag-gamit: %s [-r] [-s] [grupo [gshadow]]\n"
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Pag-gamit: %s [-r] [-s] [grupo]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "No\n"
-msgstr "Hindi"
+msgstr "Hindi\n"
 
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
@@ -776,15 +827,15 @@ msgstr "%s: -s at -r ay hindi maaring magkasabay\n"
 
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s: hindi maaldaba ang tipunang %s\n"
+msgstr "%s: hindi maaldaba ang talaksang %s\n"
 
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: hindi mabuksan ang tipunang %s\n"
+msgstr "%s: hindi mabuksan ang talaksang %s\n"
 
 #, c-format
 msgid "invalid group file entry\n"
-msgstr "hindi tanggap na entry ng tipunang grupo\n"
+msgstr "hindi tanggap na entry ng talaksang grupo\n"
 
 #, c-format
 msgid "delete line `%s'? "
@@ -808,7 +859,7 @@ msgstr "tanggalin ang miyembrong `%s'? "
 
 #, c-format
 msgid "invalid shadow group file entry\n"
-msgstr "hindi tanggap na entry sa tipunang shadow group\n"
+msgstr "hindi tanggap na entry sa talaksang shadow group\n"
 
 #, c-format
 msgid "duplicate shadow group entry\n"
@@ -816,7 +867,7 @@ msgstr "dalawahan ang shadow group entry\n"
 
 #, c-format
 msgid "no matching group file entry\n"
-msgstr "walang tumbas na entry sa tipunang grupo\n"
+msgstr "walang tumbas na entry sa talaksang grupo\n"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -832,11 +883,11 @@ msgstr "grupong shadow %s: walang gumagamit na %s\n"
 
 #, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s: hindi ma-apdeyt ang tipunang %s\n"
+msgstr "%s: hindi ma-apdeyt ang talaksang %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: ang mga tipunan ay na-apdeyt\n"
+msgstr "%s: ang mga talaksan ay na-apdeyt\n"
 
 #, c-format
 msgid "%s: no changes\n"
@@ -844,19 +895,19 @@ msgstr "%s: walang pagbabago\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
-msgstr "%s: hindi maaldaba ang tipunang grupo\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: hindi maaldaba ang tipunang grupo na shadow\n"
+msgstr "%s: hindi maaldaba ang talaksang grupo na shadow\n"
 
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo na shadow\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo na shadow\n"
 
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
@@ -872,29 +923,29 @@ msgstr "%s: hindi ma-apdeyt ang ipinasok para sa grupong %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: hindi ma-apdeyt ang tipunang grupo na shadow\n"
+msgstr "%s: hindi ma-apdeyt ang talaksang grupo na shadow\n"
 
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: hindi ma-apdeyt ang tipunang grupo\n"
+msgstr "%s: hindi ma-apdeyt ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: hindi matanggal ang tipunang grupo na shadow\n"
+msgstr "%s: hindi matanggal ang talaksang grupo na shadow\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: id [-a]\n"
-msgstr "pag-gamit: id [-a]\n"
+msgstr "Pag-gamit: id [-a]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: id\n"
-msgstr "pag-gamit: id\n"
+msgstr "Pag-gamit: id\n"
 
 #, c-format
 msgid " groups="
 msgstr " mga grupo="
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -904,13 +955,13 @@ msgid ""
 "  -t, --time DAYS\tprint only lastlog records more recent than DAYS\n"
 "  -u, --user LOGIN\tprint lastlog record for user with specified LOGIN\n"
 msgstr ""
-"Pag-gamit: chpasswd [mga option]\n"
+"Pag-gamit: lastlog [mga option]\n"
 "\n"
 "Mga option:\n"
-"  -e, --encrypted\tang mga bigay na mga password ay naka-encrypt\n"
-"  -h, --help\t\tipakita itong payo na ito at lumabas\n"
-"  -m, --md5\t\tgamitin ang MD5 encryption imbes na DES kapag ang\n"
-"\t\t\tmga ibinigay na mga password ay hindi naka-encrypt\n"
+"  -b, --before ARAW\tipakita lamang ang lastlog record na mas-luma sa ARAW\n"
+"  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
+"  -t, --time ARAW\tipakita lamang ang lastlog record na mas-bagos sa ARAW\n"
+"  -u, --user LOGIN\tipakita lamang ang gumagamit na LOGIN\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -923,9 +974,9 @@ msgstr "Pangalan                Puerta  Hulihan\n"
 msgid "**Never logged in**"
 msgstr "**Di pumasok kailanman**"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-p] [name]\n"
-msgstr "pag-gamit: %s [-p] [pangalan]\n"
+msgstr "Pag-gamit: %s [-p] [pangalan]\n"
 
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
@@ -973,13 +1024,15 @@ msgstr " ng `%.100s'"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr ""
+msgstr "login: kabiguan sa PAM, humihinto: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 "Login incorrect\n"
-msgstr "Maling pagpasok"
+msgstr ""
+"\n"
+"Maling pagpasok\n"
 
 #, c-format
 msgid ""
@@ -994,7 +1047,7 @@ msgstr "Maling pagpasok"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr ""
+msgstr "%s: bigo sa pag-fork: %s"
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Babala: pagpasok ay enabled muli matapos ng panandalian pagbawal.\n"
@@ -1015,18 +1068,20 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
+"lumampas sa taning ng pagpasok\n"
+"\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: newgrp [-] [group]\n"
-msgstr "pag-gamit: newgrp [-] [grupo]\n"
+msgstr "Pag-gamit: newgrp [-] [grupo]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: sg group [[-c] command]\n"
-msgstr "pag-gamit: sg grupo [[-c] utos]\n"
+msgstr "Pag-gamit: sg grupo [[-c] utos]\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unknown UID: %u\n"
-msgstr "di kilalang GID: %lu\n"
+msgstr "di kilalang GID: %u\n"
 
 #, c-format
 msgid "unknown GID: %lu\n"
@@ -1049,11 +1104,11 @@ msgstr "%s: hindi maaldaba ang /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: hindi makapag-aldaba ng mga tipunan, subukan muli mamaya.\n"
+msgstr "%s: hindi makapag-aldaba ng mga talaksan, subukan muli mamaya.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: hindi mabuksan ang mga tipunan\n"
+msgstr "%s: hindi mabuksan ang mga talaksan\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1077,11 +1132,11 @@ msgstr "%s: linya %d: hindi ma-apdeyt ang password\n"
 
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: linya %d: sawi ang mkdir\n"
+msgstr "%s: linya %d: bigo ang mkdir\n"
 
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: linya %d: sawi ang chown\n"
+msgstr "%s: linya %d: bigo ang chown\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
@@ -1089,15 +1144,15 @@ msgstr "%s: linya %d: hindi ma-apdeyt ang ipinasok\n"
 
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: error sa pag-apdeyt ng mga tipunan\n"
+msgstr "%s: error sa pag-apdeyt ng mga talaksan\n"
 
 #, c-format
 msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1114,6 +1169,18 @@ msgid ""
 "  -x, --maxdays MAX_DAYS\tset maximim number of days before password\n"
 "\t\t\t\tchange to MAX_DAYS\n"
 msgstr ""
+"Pag-gamit: passwd [mga opsyon] [login]\n"
+"\n"
+"Mga opsyon:\n"
+"  -a, --all\t\tmag-ulat tungkol sa kalagayan ng password ng lahat\n"
+"  -d, --delete\t\tburahin ang password ng account\n"
+"  -e, --expire\t\tpiliting mapaso ang password ng account\n"
+"  -h, --help\t\tipakita ang tulong na ito at lumabas\n"
+"  -k, --keep-tokens\tpalitan ang password kung paso lamang\n"
+"  -i, --inactive INACTIVE\titakdang inaktibo matapos na mapaso\n"
+"\t\t\t\tsa INACTIVE\n"
+"  -l, --lock\t\ti-lock ang account\n"
+"  -n, --mindays MIN_ARAW\n"
 
 msgid "Old password: "
 msgstr "Lumang password: "
@@ -1158,16 +1225,13 @@ msgid "%s: out of memory\n"
 msgstr "%s: nagkulang ng memory\n"
 
 #, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: Hindi mapatakbo ang %s"
-
-#, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: hindi suportado ang repositoryong %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "Hindi niyo mapapalitan ang shell para kay %s.\n"
+msgstr ""
+"%s: Hindi niyo matatanaw o mapapalitan ang impormasyong password ni %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1181,9 +1245,9 @@ msgstr "Ang password ni %s ay hindi napalitan.\n"
 msgid "Password changed.\n"
 msgstr "Napalitan ang password.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Password set to expire.\n"
-msgstr "Lumampas sa taning ang inyong password."
+msgstr "Itinakdang lumampas sa taning ang password.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1191,7 +1255,7 @@ msgstr "Pag-gamit: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #, c-format
 msgid "invalid password file entry\n"
-msgstr "hindi tanggap na ipinasok sa tipunang password\n"
+msgstr "hindi tanggap na ipinasok sa talaksang password\n"
 
 #, c-format
 msgid "duplicate password entry\n"
@@ -1215,15 +1279,15 @@ msgstr "gumagamit %s: walang programang %s\n"
 
 #, c-format
 msgid "invalid shadow password file entry\n"
-msgstr "hindi tanggap na ipinasok sa tipunang password na shadow\n"
+msgstr "hindi tanggap na ipinasok sa talaksang password na shadow\n"
 
 #, c-format
 msgid "duplicate shadow password entry\n"
-msgstr "nadobleng ipinasok sa tipunang password ng shadow\n"
+msgstr "nadobleng ipinasok sa talaksang password ng shadow\n"
 
 #, c-format
 msgid "no matching password file entry\n"
-msgstr "walang kaparehas na ipinasok sa tipunang password\n"
+msgstr "walang kaparehas na ipinasok sa talaksang password\n"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1231,11 +1295,11 @@ msgstr "gumagamit %s: huling pagpalit ng password ay nasa hinaharap\n"
 
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s: hindi maaldaba ang tipunang passwd\n"
+msgstr "%s: hindi maaldaba ang talaksang passwd\n"
 
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: hindi mabuksan ang tipunang passwd\n"
+msgstr "%s: hindi mabuksan ang talaksang passwd\n"
 
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
@@ -1247,11 +1311,11 @@ msgstr "%s: hindi maapdeyt ang ipinasok sa passwd para kay %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s: hindi maapdeyt ang tipunang shadow\n"
+msgstr "%s: hindi maapdeyt ang talaksang shadow\n"
 
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s: hindi maapdeyt ang tipunang passwd\n"
+msgstr "%s: hindi maapdeyt ang talaksang passwd\n"
 
 #, c-format
 msgid "%s: can't update entry for user %s\n"
@@ -1259,7 +1323,7 @@ msgstr "%s: hindi maapdeyt ang ipinasok para kay %s\n"
 
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: hindi matanggal ang tipunang password ng shadow\n"
+msgstr "%s: hindi matanggal ang talaksang password ng shadow\n"
 
 #, c-format
 msgid "Access to su to that account DENIED.\n"
@@ -1276,9 +1340,33 @@ msgstr "Ibigay ang inyong SARILING password bilang authentication.\n"
 msgid "Sorry."
 msgstr "Ipagpaumanhin."
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s\n"
-msgstr "passwd: %s\n"
+msgstr "%s: %s\n"
+
+#, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+"Pag-gamit: su [mga opsyon] [login]\n"
+"\n"
+"Mga opsyon:\n"
+"  -h, --help\t\t\tipakita ang payo na ito\n"
+"  -, -l, --login\t\tgawing login shell ang shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\thuwag i-reset ang mga variable\n"
+"\t\t\t\tna pangkapaligiran at gamitin\n"
+"\t\t\t\tang parehong shell\n"
+"  -s, --shell SHELL\t\tgamitin ang SHELL sa halip ng\n"
+"\t\t\t\tdefault sa passwd\n"
 
 #, c-format
 msgid "%s: must be run from a terminal\n"
@@ -1296,7 +1384,7 @@ msgstr "Di kilalang id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "Hindi kayo awtorisadong gumamit ng su %s\n"
 
-msgid "(Enter your own password.)"
+msgid "(Enter your own password)"
 msgstr "(Ibigay ang sarili niyong password.)"
 
 #, c-format
@@ -1313,7 +1401,7 @@ msgstr "Walang shell\n"
 
 #, c-format
 msgid "No password file\n"
-msgstr "Walang tipunang password\n"
+msgstr "Walang talaksang password\n"
 
 #, c-format
 msgid "No password entry for 'root'\n"
@@ -1345,11 +1433,11 @@ msgstr "%s: di kilalang grupo %s\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: hindi malikha ang bagong tipunan ng mga default\n"
+msgstr "%s: hindi malikha ang bagong talaksan ng mga default\n"
 
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: hindi mabuksan ang bagong tipunan ng mga default\n"
+msgstr "%s: hindi mabuksan ang bagong talaksan ng mga default\n"
 
 #, c-format
 msgid "%s: rename: %s"
@@ -1381,7 +1469,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1392,30 +1480,41 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
+"Pag-gamit: useradd [mga opsyon] LOGIN\n"
+"\n"
+"Mga opsyon:\n"
+"  -b, --base-dir BASE_DIR\tpunong directory para sa bagong mga tahanang\n"
+"\t\t\t\tdirectory ng account\n"
+"  -c, --comment KOMENTO\t\titakda ang GECOS field ng bagong account\n"
+"  -d, --home-dir HOME_DIR\tang tahanang directory ng bagong account\n"
+"  -D, --defaults\t\tipakita o imbakin ang binagong default na\n"
+"\t\t\t\tpagkaayos ng useradd\n"
+"  -e, --expiredate EXPIRE_DATE\titakda ang petsa ng expiration ng account\n"
+"\t\t\t\tsa EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\titakda ang password na inaktibo matapos ng\n"
+"\t\t\t\tpagkapaso na INACTIVE\n"
+"  -g, --gid GRUPO\t\tipilit na gamitin ang GRUPO para sa bagong\n"
+"\t\t\t\taccount\n"
+"  -G, --groups MGAGRUPO\t\tidagdag ang mga grupo sa MGAGRUPO sa bagong\n"
+"\t\t\t\taccount\n"
+"  -h, --help\t\t\tipakita itong tulong na ito at lumabas\n"
+"  -k, --skel SKEL_DIR\t\titakda ang alternatibong skel directory\n"
+"  -K, --key KEY=HALAGA\t\tnangingibabaw sa default sa /etc/login.defs\n"
+"  -m, --create-home\t\tlikhain ang tahanang directory para sa bagong\n"
+"\t\t\t\taccount\n"
+"  -o, --non-unique\t\tpayagang lumikha ng user na may kaparehong UID\n"
+"  -p, --password PASSWOWRD\tgumamit ng encrypted password para sa bagong\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\titakda ang login shell para sa bagong account\n"
+"  -u, --uid UID\t\t\tgamitin ang UID para sa bagong account\n"
 
 #, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: error sa pagaldaba ng tipunang grupo\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: error sa pagbukas ng tipunang grupo\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: error sa pagaldaba ng tipunang grupo ng shadow\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: error sa pagbukas ng tipunang grupo ng shadow\n"
-
-#, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: hindi kakaiba ang gid na %u\n"
+msgstr "%s: hindi kakaiba ang UID %u\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't get unique UID\n"
-msgstr "%s: hindi makakuha ng kakaibang gid\n"
+msgstr "%s: hindi makakuha ng kakaibang UID\n"
 
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
@@ -1455,27 +1554,43 @@ msgstr "%s: hindi tanggap na pangalan `%s'\n"
 
 #, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: hindi maisulat muli ang tipunang password\n"
+msgstr "%s: hindi maisulat muli ang talaksang password\n"
 
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: hindi maisulat muli ang tipunang password na shadow\n"
+msgstr "%s: hindi maisulat muli ang talaksang password na shadow\n"
 
 #, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: hindi maaldaba ang tipunang password\n"
+msgstr "%s: hindi maaldaba ang talaksang password\n"
 
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: hindi mabuksan ang tipunang password\n"
+msgstr "%s: hindi mabuksan ang talaksang password\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: hindi maaldaba ang tipunang password ng shadow\n"
+msgstr "%s: hindi maaldaba ang talaksang password ng shadow\n"
 
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: hindi mabuksan ang tipunang password ng shadow\n"
+msgstr "%s: hindi mabuksan ang talaksang password ng shadow\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: error sa pagaldaba ng talaksang grupo\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: error sa pagbukas ng talaksang grupo\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: error sa pagaldaba ng talaksang grupo ng shadow\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: error sa pagbukas ng talaksang grupo ng shadow\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
@@ -1492,10 +1607,11 @@ msgstr "%s: hindi malikha ang directory %s\n"
 #, c-format
 msgid "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
 msgstr ""
+"Walang grupong \"mail\", nililikha ang mail spool na may modong 0600.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't create mail spool for user %s.\n"
-msgstr "%s: hindi maapdeyt ang ipinasok para kay %s\n"
+msgstr "Hindi makalikha ng mail spool para kay %s.\n"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1513,30 +1629,34 @@ msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
+"%s: babala: mayroon nang tahanang directory.\n"
+"Walang kokopyahing talaksan mula sa skel directory dito.\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: babala: CREATE_HOME hindi suportado, gamitin na lamang ang -m.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Usage: %s [-r] name\n"
-msgstr "pag-gamit: %s [-r] pangalan\n"
+msgstr "Pag-gamit: %s [-r] pangalan\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
 msgstr "%s: error sa pag-apdeyt ng ipinasok sa grupo\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: hindi matanggal ang pangunahing grupo ng gumagamit.\n"
+msgstr ""
+"%s: hindi matanggal ang grupong %s dahil ito'y pangunahing grupo ng ibang "
+"gumagamit.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo\n"
 
 #, c-format
 msgid "%s: cannot open shadow group file\n"
-msgstr "%s: hindi mabuksan ang tipunang grupo ng shadow\n"
+msgstr "%s: hindi mabuksan ang talaksang grupo ng shadow\n"
 
 #, c-format
 msgid "%s: error deleting password entry\n"
@@ -1574,21 +1694,55 @@ msgstr "%s: hindi tatanggalin ang directory %s (mawawalan ng bahay si %s)\n"
 msgid "%s: error removing directory %s\n"
 msgstr "%s: error sa pagtanggal ng directory %s\n"
 
-#, fuzzy, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "pag-gamit: %s\t[-u uid [-o]] [-g grupo] [-G grupo,...] \n"
-
 #, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d bahay [-m]] [-s shell] [-c comment] [-| bagong_pangalan]\n"
-
-#, fuzzy, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f inaktibo] [-e paso ] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p passwd] [-L|-U] pangalan\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
+"Pag-gamit: usermod [mga opsyon] LOGIN\n"
+"\n"
+"Mga opsyon:\n"
+"  -a, --append GRUPO\t\tidagdag ang gumagamit sa karagdagang GRUPO\n"
+"  -c, --comment KOMENTO\t\titakda ang GECOS field\n"
+"  -d, --home HOME_DIR\t\tang tahanang directory ng bagong account\n"
+"  -e, --expiredate EXPIRE_DATE\titakda ang petsa ng expiration ng account\n"
+"\t\t\t\tsa EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\titakda ang password na inaktibo matapos ng\n"
+"\t\t\t\tpagkapaso na INACTIVE\n"
+"  -g, --gid GRUPO\t\tipilit na gamitin ang GRUPO para sa bagong\n"
+"\t\t\t\taccount\n"
+"  -G, --groups MGAGRUPO\t\tidagdag ang mga grupo sa MGAGRUPO sa bagong\n"
+"\t\t\t\taccount\n"
+"  -h, --help\t\t\tipakita ang payo na ito\n"
+"  -l, --login LOGIN\t\tbagong halaga ng pangalang panglogin\n"
+"  -L, --lock\t\t\tialdaba ang account ng gumagamit\n"
+"  -m, --move-home\t\tilipat ang laman ng tahanang directory sa bagong\n"
+"\t\t\t\tlugar (gamitin lamang kasama ng -d)\n"
+"  -o, --non-unique\t\tpayagang lumikha ng user na may kaparehong UID\n"
+"  -p, --password PASSWOWRD\tgumamit ng encrypted password para sa bagong\n"
+"\t\t\t\taccount\n"
+"  -s, --shell SHELL\t\titakda ang login shell para sa bagong account\n"
+"  -u, --uid UID\t\t\tgamitin ang UID para sa bagong account\n"
+"  -U, --unlock\t\t\ttanggalin ang pagkaaldaba ng account ng gumagamit\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1608,7 +1762,7 @@ msgstr "%s: kailangan ang shadow password para sa -e at -f\n"
 
 #, c-format
 msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr ""
+msgstr "%s: ang flag na -a ay pinapayagan LAMANG kung kasama ang flag na -G\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1641,6 +1795,7 @@ msgstr "%s: hindi ma-chown %s\n"
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
 msgstr ""
+"%s: babala: bigo sa pagtanggal ng buo ng lumang directory na tahanan %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -1651,10 +1806,30 @@ msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: babala: %s ay hindi pag-aari ni %s\n"
 
 msgid "failed to change mailbox owner"
-msgstr "sawi sa pagpalit ng may-ari ng mailbox"
+msgstr "bigo sa pagpalit ng may-ari ng mailbox"
 
 msgid "failed to rename mailbox"
-msgstr "sawi sa pagpalit ng pangalan ng mailbox"
+msgstr "bigo sa pagpalit ng pangalan ng mailbox"
+
+#, c-format
+msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+"Pag-gamit: vipw [mga opsyon]\n"
+"\n"
+"Mga opsyon:\n"
+"  -g, --group\t\tbaguhin ang database ng mga grupo\n"
+"  -h, --help\t\tipakita ang payo na ito\n"
+"  -p, --passwd\t\tbaguhin ang database na passwd\n"
+"  -q, --quiet\t\tmodong tahimik\n"
+"  -s, --shadow\t\tbaguhin ang database na shadow o gshadow\n"
 
 #, c-format
 msgid ""
@@ -1665,7 +1840,7 @@ msgstr ""
 "%s: %s ay hindi binago\n"
 
 msgid "Couldn't lock file"
-msgstr "Hindi maaldaba ang tipunan"
+msgstr "Hindi maaldaba ang talaksan"
 
 msgid "Couldn't make backup"
 msgstr "Hindi makagawa ng backup"
@@ -1673,16 +1848,3 @@ msgstr "Hindi makagawa ng backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: hindi maibalik ang %s: %s (ang mga pagbabago ay nasa %s)\n"
-
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Pag-gamit:\n"
-"`vipw' ine-edit /etc/passwd     `vipw -s' ine-edit /etc/shadow\n"
-"`vigr' ine-edit /etc/group      `vigr -s' ine-edit /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: sawi ang PAM chauthtok\n"

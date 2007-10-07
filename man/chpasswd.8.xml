@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 	           "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='chpasswd.8'>
-  <!-- $Id: chpasswd.8.xml,v 1.12 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!-- $Id: chpasswd.8.xml,v 1.16 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>chpasswd</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>chpasswd</refname>
@@ -34,7 +35,7 @@
     </para>
     <para>
       By default the supplied password must be in clear-text. Default
-      encription algoritm is DES. Also the password age will be updated, if
+      encryption algorithm is DES. Also the password age will be updated, if
       present.
     </para>
     <para>
@@ -77,7 +78,7 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      Remember keep protected for reading by others fille passed to standard
+      Remember keep protected for reading by others file passed to standard
       input <command>chpasswd</command> command if it contains unencrypted
       passwords.
     </para>
@@ -96,10 +97,5 @@
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

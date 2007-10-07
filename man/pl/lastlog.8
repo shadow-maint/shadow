@@ -1,4 +1,4 @@
-.\" $Id: lastlog.8,v 1.13 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: lastlog.8,v 1.14 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,37 +29,37 @@
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
 .TH LASTLOG 8
 .SH NAZWA
-\fBlastlog\fR \- sprawdº plik ostatnich logowaÒ (lastlog)
-.SH SK£ADNIA
+\fBlastlog\fR \- sprawd≈∫ plik ostatnich logowa≈Ñ (lastlog)
+.SH SK≈ÅADNIA
 .TP 8
 \fBlastlog\fR [\fBopcje\fR]
 .SH OPIS
-\fBlastlog\fR formatuje i wy∂wietla zawarto∂Ê dziennika ostatnich logowaÒ
-zapisanych w pliku \fI/var/log/lastlog\fR. Wy∂wietlone zostan± \fBnazwa
-uøytkownika\fR, \fBport\fR i \fBczas ostatniego logowania\fR. Domy∂lnie (bez
-flag) pozycje pliku wy∂wietlane s± w kolejno∂ci w jakiej s± w pliku
+\fBlastlog\fR formatuje i wy≈õwietla zawarto≈õƒá dziennika ostatnich logowa≈Ñ
+zapisanych w pliku \fI/var/log/lastlog\fR. Wy≈õwietlone zostanƒÖ \fBnazwa
+u≈ºytkownika\fR, \fBport\fR i \fBczas ostatniego logowania\fR. Domy≈õlnie (bez
+flag) pozycje pliku wy≈õwietlane sƒÖ w kolejno≈õci w jakiej sƒÖ w pliku
 \fB/etc/passwd\fR.
 .SH OPCJE
-Polecenie \fBlastlog\fR posiada nastÍpuj±ce opcje:
+Polecenie \fBlastlog\fR posiada nastƒôpujƒÖce opcje:
 .IP "\fB\-h\fR, \fB\-\-help\fR"
-Wy∂wietla krÛtk± informacjÍ o tym jak uøywaÊ program i koÒczy pracÍ.
+Wy≈õwietla kr√≥tkƒÖ informacjƒô o tym jak u≈ºywaƒá program i ko≈Ñczy pracƒô.
 .IP "\fB\-t\fR, \fB\-\-time\fR \fIDNI\fR"
-Wy∂wietla tylko ostatnie logowania uøytkownikÛw nie starsze niø zadana
-ilo∂Ê \fIDNI\fR.
+Wy≈õwietla tylko ostatnie logowania u≈ºytkownik√≥w nie starsze ni≈º zadana
+ilo≈õƒá \fIDNI\fR.
 .IP "\fB\-u\fR, \fB\-\-user\fR \fILOGIN\fR"
-Wy∂wietla tylko informacji o ostanim logowaniu uøytkownika \fILOGIN\fR.
+Wy≈õwietla tylko informacji o ostanim logowaniu u≈ºytkownika \fILOGIN\fR.
 .TP
-Opcja \fB\-t\fR przes≥ania uøycie opcji \fB\-u\fR.
+Opcja \fB\-t\fR przes≈Çania u≈ºycie opcji \fB\-u\fR.
 .PP
-Jeøeli uøytkownik nigdy siÍ nie logowa≥ to zamiast portu i czasu logowania
-zostanie wy∂wietlony komunikat \fB"**Never logged in**"\fR (nigdy siÍ nie
-logowa≥).
+Je≈ºeli u≈ºytkownik nigdy siƒô nie logowa≈Ç to zamiast portu i czasu logowania
+zostanie wy≈õwietlony komunikat \fB"**Never logged in**"\fR (nigdy siƒô nie
+logowa≈Ç).
 .SH PLIKI
-\fI/var/log/lastlog\fR \- dziennik ostatnich logowaÒ
+\fI/var/log/lastlog\fR \- dziennik ostatnich logowa≈Ñ
 .SH PRZESTROGI
-Duøe luki w numeracji UID powoduj±, øe program bÍdzie pracowa≥ d≥uøej, nie
-wy∂wietlaj±c wynikÛw (np. je∂li mmdf=800, za∂ ostatni uid=170, to program
-bÍdzie sprawia≥ wraøenie zawieszonego w trakcie przetwarzania uid 171\-799).
+Du≈ºe luki w numeracji UID powodujƒÖ, ≈ºe program bƒôdzie pracowa≈Ç d≈Çu≈ºej, nie
+wy≈õwietlajƒÖc wynik√≥w (np. je≈õli mmdf=800, za≈õ ostatni uid=170, to program
+bƒôdzie sprawia≈Ç wra≈ºenie zawieszonego w trakcie przetwarzania uid 171\-799).
 .SH AUTORZY
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
 .br

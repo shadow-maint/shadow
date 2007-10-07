@@ -1,199 +1,167 @@
-.\" Copyright Red Hat Software, Inc., 1998, 1999.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, and the entire permission notice in its entirety,
-.\"    including the disclaimer of warranties.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. The name of the author may not be used to endorse or promote
-.\"    products derived from this software without specific prior
-.\"    written permission.
-.\"
-.\" ALTERNATIVELY, this product may be distributed under the terms of
-.\" the GNU Public License, in which case the provisions of the GPL are
-.\" required INSTEAD OF the above restrictions.  (This clause is
-.\" necessary due to a potential bad interaction between the GPL and
-.\" the restrictions contained in a BSD\-style copyright.)
-.\"
-.\"  THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESS OR IMPLIED
-.\" WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-.\" OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-.\" DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT,
-.\" INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-.\" (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-.\" SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-.\" STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-.\" ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-.\" OF THE POSSIBILITY OF SUCH DAMAGE.
-.\"
-.\" Copyright (c) Cristian Gafton, 1998, <gafton@redhat.com>
-.\"
-.\" Traduction 21/08/2000 par FrÈdÈric Delanoy (fdelanoy@info.fundp.ac.be)
-.\"
-.TH PASSWD 1 "21 Ao˚t 2000" PAM "Manuel de l'utilisateur Linux"
-.SH NOM
-
-passwd \- mettre ‡ jour les marques d'authentification d'un utilisateur.
-
-.SH SYNOPSIS
-\fBpasswd\fR [\fB\-k\fR] [\fB\-l\fR] [\fB\-u\fR [\fB\-f\fR]] [\fB\-d\fR] [\fB\-S\fR] [\fInom_utilisateur\fR]
-.sp 2
-.SH DESCRIPTION
-Passwd est utilisÈ pour mettre ‡ jour la (les) marque(s) d'authentification
-d'un utilisateur.  Passwd est configurÈ pour travailler gr‚ce ‡ l'
-.BR "API Linux\-PAM" ". "
-Il s'initialise principalement en tant que service "passwd" avec
-.I Linux\-PAM
-et utilise les modules
-.I "password"
-configurÈs pour authentifier et ensuite mettre ‡ jour le mot de passe d'un utilisateur.
-
-.sp
-Une entrÈe du fichier de configuration de
-.I Linux\-PAM
-pour ce service serait :
-.br
-  
-.br
- #
-.br
- # entrÈe de service de mot de passe effectuant une 
-.br
- # vÈrification de force d'un mot de passe
-.br
- # proposÈ avant de le mettre ‡ jour.
-.br
- #
-.br
- passwd password requisite \\
-.br
-             /usr/lib/security/pam_cracklib.so retry=3
-.br
- passwd password required \\
-.br
-             /usr/lib/security/pam_pwdb.so use_authtok
-.br
- #
-
-.sp
-Notez qu'aucun autre type de module n'est requis pour le fonctionnement
-correct de cette application.
-
-.SH OPTIONS
-.IP \fB\-d\fR
-C'est une faÁon rapide pour dÈsactiver un mot de passe pour un compte. Il
-supprimera le besoin du mot de passe pour un compte donnÈ. Disponible
-uniquement pour root.
-.IP \fB\-k\fR
-L'option,
-.BR \-k ", "
-est utilisÈe pour indiquer que la mise ‡ jour ne devrait Ítre effectuÈe que
-pour les marques d'identifications (mots de passe); l'utilisateur conserve
-ses marques non expirÈs.
-.IP \fB\-l\fR
-Cette option est utilisÈ pour verrouiller le compte spÈcifiÈ, et n'est
-disponible que pour root.  Le verrouillage est effecutÈ en rendant le mot de
-passe cryptÈ invalide (en le prÈfixant par un !).
-.IP \fB\-\-stdin\fR
-Cette option est utilisÈe pour indiquer que \fBpasswd\fR doit lire le
-nouveau mot de passe ‡ partir de l'entrÈe standard, qui peut Ítre un tube.
-.IP \fB\-u\fR
-L'inverse de l'option prÈcÈdente \- il dÈverrouillera le mot de passe du
-compte en supprimant le prÈfixe "!".  Cette option n'est disponible que pour
-root.  Par dÈfaut, \fBpasswd\fR refusera de crÈer un compte sans mot de
-passe associÈ (il ne dÈverrouillera pas un compte contenant uniquement !
-pour mot de passe).  L'option \fB\-f\fR outrepassera cette protection.
-.IP \fB\-S\fR
-Cela affiche une information courte sur le statut du mot de passe pour un
-compte donnÈ.  Disponible uniquement pour root.
-
-.SH "Rappelez\-vous les deux principes suivants"
-.IP \fBProtÈgez\ votre\ mot de passe.\fR
-N'Ècrivez nulle part votre mot de passe \- mÈmorisez\-le.  En particulier, ne
-le laissez pas n'importe o˘ et ne le placez pas non plus dans un fichier non
-cryptÈ !  Utilisez des mots de passe non reliÈs sur des systËmes contrÙlÈs
-par diffÈrentes organisations.  Ne divulguez ni ne partagez votre mot de
-passe, en particulier ‡ quelqu'un disant prÈtendant faire partie d'un
-support technique, ou ‡ un vendeur.  Ne laissez personne regarder votre mot
-de passe pendant que vous le tapez.  N'entrez pas votre mot de passe sur un
-ordinateur auquel vous ne faites pas confiance, ou si les "choses" ont l'air
-amusantes; quelqu'un pourrait Ítre en train d'essayer de dÈtourner votre mot
-de passe.  Utilisez votre mot de passe pour une pÈriode limitÈe et
-modifiez\-le pÈriodiquement.
-.IP \fBChoisisser un mot de passe difficile ‡ deviner.\fR
-.I passwd
-essaiera de vous empÍcher de choisir un mot de passe rÈellemnt mauvais, mais
-il n'est pas infaillible; crÈez votre mot de passe sagement.  N'utilisez
-rien que vous pouvez trouver dans un dictionnaire (dans n'importe quel
-langue ou jargon).  N'utilisez pas de nom (incluant celui d'un conjoint,
-d'un parent, d'un enfant, d'un animal domestique, d'un personnage
-imaginaire, d'un personnage cÈlËbre, ou d'un endroit connu), ou de variation
-sur votre nom personnel ou de compte.  N'utilisez aucune information
-personnelle qui soit accessible (comme votre numÈro de tÈlÈphone, votre
-plaque d'immatriculation ou votre numÈro de sÈcuritÈ sociale), ou sur les
-personnes de votre entourage.  N'utilisez pas une date d'anniversaire ou un
-motif simple comme "azerty", "qwerty", "abc" ou "aaa").  N'utilisez aucun
-ÈlÈment citÈ ci\-dessus suivi ou prÈcÈdÈ par un chiffre.  Au lieu de cela,
-utilisez un mÈlange de lettres minuscules et majuscules, de chiffres et de
-signes de ponctuation.  Utiliseez des mots de passe longs (disons d'au moins
-8 caractËres).  Vous pourriez utiliser une paire de mots avec un signe de
-ponctuation insÈrÈ, une phrase de passe (une sÈquence de mots
-comprÈhensible), ou la premiËre lettre de chaque mot dans une phrase de
-passe.
-
-.SH ""
-Ces principes sont partiellement imposÈs par le systËme, mais uniquement
-partiellement.  Une certaine vigilance de votre cÙtÈ rendra le systËme
-beaucoup plus s˚r.
-.SH "VALEUR DE RETOUR"
-
-En cas de succËs,
-.B passwd
-se terminera avec une valeur de retour de 0.  Une valeur de retour de 1
-indique qu'une erreur s'est produite.  Les erreurs textuelles sont Ècrites
-dans le flux d'erreur standard.
-
-.SH "CONFORMIT… ¿"
-.br
-.BR Linux\-PAM
-(Pluggable Authentication Modules pour Linux).
-.BR
-Notez que si votre distribution de Linux\-PAM se conforme au Standard de
-SystËme de fichiers de Linux, vous pouvez trouver les modules dans
-.I /lib/security/
-au lieu de /usr/lib/security/, comme indiquÈ dans l'exemple.
-
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "PASSWD" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+passwd \- Modifier le mot de passe d'un utilisateur
+.SH "SYNOPSIS"
+.HP 7
+\fBpasswd\fR [\-x\ \fImax\fR] [\-n\ \fImin\fR] [\-w\ \fIavert\fR] [\-i\ \fIinact\fR] \fIlogin\fR
+.HP 7
+\fBpasswd\fR [\-l \-u \-d \-S \-e] \fIlogin\fR
+.SH "DESCRIPTION"
+.PP
+\fBPasswd\fR
+modifie les mots de passe d'utilisateurs ou de groupes. Un utilisateur normal ne peut changer que son mot de passe, le superutilisateur peut changer le mot de passe de n'importe quel compte.
+\fBPasswd\fR
+modifie √©galement les informations associ√©es au compte, telles que le nom complet de l'utilisateur, son interpr√©teur de commandes initial (\(Fo\ login shell\ \(Fc), la date de fin de validit√© du mot de passe, ou sa dur√©e de validit√©.
+.SS "Modifications du mot de passe"
+.PP
+Dans un premier temps, l'utilisateur doit fournir son ancien mot de passe, s'il en avait un. Ce mot de passe est ensuite chiffr√© puis compar√© avec le mot de passe enregistr√©. L'utilisateur n'a droit qu'√† un seul essai pour entrer le mot de passe correct. Le superutilisateur peut contourner cette premi√®re √©tape de mani√®re √† changer les mots de passe ayant √©t√© oubli√©s.
+.PP
+Une fois que le mot de passe a √©t√© entr√©, les informations de limite de validit√© du mot de passe sont v√©rifi√©es pour s'assurer que l'utilisateur est autoris√© √† modifier son mot de passe √† cet instant. Dans le cas contraire,
+\fBpasswd\fR
+refuse de changer le mot de passe, et quitte.
+.PP
+Un nouveau mot de passe est ensuite demand√© √† l'utilisateur, et la complexit√© de ce mot de passe est test√©e. Comme ligne de conduite g√©n√©rale, un mot de passe doit toujours √™tre constitu√© de 6 √† 8 caract√®res en en choisissant un ou plus parmi chacun des ensembles suivants\ :
+.TP 3
+\(bu
+caract√®res alphab√©tiques minuscules
+.TP
+\(bu
+chiffres de 0 √† 9
+.TP
+\(bu
+marques de ponctuation
+.PP
+Il faudra faire attention √† ne pas utiliser les caract√®res de suppression ou d'effacement.
+\fBPasswd\fR
+rejettera tout mot de passe dont la complexit√© ne sera pas suffisante.
+.PP
+Si le mot de passe est accept√©,
+\fBpasswd\fR
+redemandera le nouveau mot de passe. Le second mot de passe est compar√© avec le premier. Ces deux mots de passe devront √™tre identiques pour que le mot de passe soit chang√©.
+.SS "Astuces pour les mots de passe"
+.PP
+La s√©curit√© d'un mot de passe repose sur la force de l'algorithme de chiffrement et sur la taille de l'espace de cl√©s utilis√©. La m√©thode de chiffrement des syst√®mes
+\fIUNIX\fR
+est bas√©e sur l'algorithme NBS DES, elle est tr√®s s√ªre. La taille de l'espace de cl√©s d√©pend de l'al√©a du mot de passe utilis√©.
+.PP
+Les compromissions de la s√©curit√© des mots de passe r√©sultent le plus souvent d'une n√©gligence dans le choix du mot de passe, ou lors de son utilisation. Pour cette raison, vous ne devez pas s√©lectionner de mot de passe apparaissant dans un dictionnaire ou devant √™tre √©crit. Le mot de passe ne doit pas non plus √™tre un nom propre, un num√©ro min√©ralogique, une date de naissance, ou une adresse. En effet ceux\-ci pourraient √™tre devin√©s pour violer la s√©curit√© du syst√®me.
+.PP
+Vous devez pouvoir vous rappeler facilement de votre mot de passe, afin de ne pas avoir √† le noter sur un morceau de papier. On peut pour ceci choisir d'accoler deux mots en les s√©parant avec un caract√®re sp√©cial ou un chiffre. Par exemple, Mot2passe.
+.PP
+D'autres m√©thodes de construction utilisent une phrase facile √† se rappeler, et consistent √† s√©lectionner la premi√®re ou la derni√®re lettre de chaque mot. Voici un exemple [\ NdT\ : en anglais\ ]\ :
+.TP 3
+\(bu
+Ask not for whom the bell tolls.
+.TP
+\(bu
+Ce qui donne\ :
+.TP
+\(bu
+An4wtbt.
+.PP
+Vous pouvez raisonnablement √™tre assur√© que quelques crackers ont d√©sormais inclu ces mots de passe dans leurs dictionnaires. Vous pouvez √©galement utiliser votre propre m√©thode de construction de mots de passe et ne pas compter uniquement sur les m√©thodes propos√©es ici.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBpasswd\fR
+sont\ :
+.TP
+\fB\-a\fR, \fB\-\-all\fR
+Cette option ne peut √™tre utilis√©e qu'avec
+\fB\-S\fR
+et permet d'afficher le statut des mots de passe pour tous les utilisateurs.
+.TP
+\fB\-d\fR, \fB\-\-delete\fR
+Supprime le mot de passe (le rend vide) d'un utilisateur. C'est une fa√ßon rapide de supprimer l'authentification par mot de passe pour un compte. Il rend compte indiqu√© sans mot de passe.
+.TP
+\fB\-e\fR, \fB\-\-expire\fR
+Fait expirer imm√©diatement le mot de passe d'un compte. Ceci permet d'obliger un utilisateur √† changer son mot de passe lors de sa prochaine connexion.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-i\fR, \fB\-\-inactive\fR \fIDUR√âE_INACTIVIT√â\fR
+Cett option permet de d√©sactiver un compte un certain nombre de jours apr√®s que son mot de passe ait expir√©. Apr√®s qu'un compte ait expir√© pour plus de
+\fIDUR√âE_INACTIVIT√â\fR
+jours, l'utilisateur ne pourra plus se connect√© avec ce compte.
+.TP
+\fB\-k\fR, \fB\-\-keep\-tokens\fR
+Indique que seuls les mots de passe expir√©s doivent √™tre modifi√©. C'est utile quand l'utilisateur ne veut pas modifier un mot de passe qui serait toujours valable.
+.TP
+\fB\-l\fR, \fB\-\-lock\fR
+Verouille le compte indiqu√©. Cette option d√©sactive un compte en modifiant son mot de passe en une valeur qui ne peut pas √™tre un mot de passe chiffr√© possible.
+.TP
+\fB\-n\fR, \fB\-\-mindays\fR \fIJOURS_MIN\fR
+Fixe le nombre minimum de jours entre chaque changement de mot de passe. Une valeur de z√©ro pour ce champ indique que l'utilisateur peut changer son mot de passe n'importe quand.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Quiet mode.
+.TP
+\fB\-r\fR, \fB\-\-repository\fR \fIREPOSITORY\fR
+Change le mot de passe de la base
+\fIREPOSITORY\fR
+.TP
+\fB\-S\fR, \fB\-\-status\fR
+Affiche l'√©tat d'un compte. Cet √©tat est constitu√© de 7 champs. Le premier champ est le nom du compte. Le second champ indique si le compte est bloqu√© (L), n'a pas de mot de passe (NP) ou a un mot de passe utilisable (P). Le troisi√®me champ donne la date de derni√®re modification du mot de passe. Les quatre champs suivants sont\ : la dur√©e minimum avant modification, la dur√©e maximum de validit√©, la dur√©e d'avertissement, et la dur√©e d'inactivit√© autoris√©e pour le mot de passe. Les dur√©es sont exprim√©es en jours.
+.TP
+\fB\-u\fR, \fB\-\-unlock\fR
+D√©verrouille le compte indiqu√©. Cette option r√©active un compte en changeant un mot de passe √† sa valeur pr√©c√©dente (la valeur pr√©sente avant l'utilisation de l'option
+\fB\-l\fR).
+.TP
+\fB\-w\fR, \fB\-\-warndays\fR \fIDUR√âE_AVERTISSEMENT\fR
+Fixe le nombre de jours d'avertissement avant que le changement de mot de passe ne soit obligatoire. La valeur
+\fIDUR√âE_AVERTISSEMENT\fR
+est le nombre de jours pr√©c√©dant la fin de validit√© pendant lesquels un utilisateur sera pr√©venu que son mot de passe est sur le point d'arriver en fin de validit√©.
+.TP
+\fB\-x\fR, \fB\-\-maxdays\fR \fIJOURS_MAX\fR
+Fixe le nombre maximum de jours pendant lesquel un mot de passe reste valable. Apr√®s
+\fIJOURS_MAX\fR, le mot de passe devra √™tre modifi√©.
+.SH "AVERTISSEMENTS"
+.PP
+Toutes les options ne sont pas forc√©ment support√©es. La v√©rification de la complexit√© des mots de passe peut varier d'un site √† l'autre. Il est vivement conseill√© aux utilisateurs de choisir un mot de passe aussi complexe que possible. Les utilisateurs peuvent ne pas √™tre capable de changer leur mot de passe sur un syst√®me si NIS est activ√© et qu'ils ne sont pas connect√©s au serveur NIS.
 .SH "FICHIERS"
-.br
-.B /etc/pam.d/passwd
-\- le fichier de configuration de
-.BR Linux\-PAM
-
-.SH BOGUES
-.sp 2
-Inconnus.
-
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations s√©curis√©es sur les comptes utilisateurs
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBpasswd\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succ√®s
+.TP
+\fI1\fR
+permission refus√©e
+.TP
+\fI2\fR
+combinaison d'options non valable
+.TP
+\fI3\fR
+√©chec inattendu, rien n'a √©t√© fait
+.TP
+\fI4\fR
+√©chec inattendu, le fichier passwd est manquant
+.TP
+\fI5\fR
+fichier passwd occup√©, r√©essayez plus tard
+.TP
+\fI6\fR
+argument non valable pour l'option
 .SH "VOIR AUSSI"
-
-.BR pam "(8), "
-et
-.BR pam_chauthok "(2). "
-
-.sp
-Pour des informations plus complËtes sur la faÁon de configurere cette application avec
-.BR Linux\-PAM ", "
-voyez le
-.BR "Linux\-PAM System Administrators' Guide" " at "
-.br
-.I "<http://parc.power.net/morgan/Linux\-PAM/index.html>"
-
-.SH AUTEUR
-Cristian Gafton <gafton@redhat.com>
-
-.SH TRADUCTION
-FrÈdÈric Delanoy, 2000.
+.PP
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5).

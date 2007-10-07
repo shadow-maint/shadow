@@ -1,4 +1,4 @@
-.\"$Id: id.1,v 1.6 2005/04/05 19:08:55 kloczek Exp $
+.\"$Id: id.1,v 1.7 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,25 +33,25 @@
 .\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH ID 1
-.SH ̾��
-id \- ���ߤΥ桼�� ID ̾�ȥ��롼�� ID ̾��ɽ������
-.SH ��
+.SH 名前
+id \- 現在のユーザ ID 名とグループ ID 名を表示する
+.SH 書式
 \fBid\fR [\fB\-a\fR]
-.SH ����
-\fBid\fR�ϡ����ߤμ¥桼�� ID���¸��桼�� ID���¥��롼�� ID��
-�¸����롼�� ID ��̾���ޤ����ͤ�ɽ�����롣
-�ͤ��б����륨��ȥ꤬ \fI/etc/passwd\fR ��
-\fI/etc/group\fR ��¸�ߤ��ʤ����ϡ�
-�б�����̾����ɽ�����줺���ͤ�����ɽ������롣
-�桼����Ʊ����ʣ���Υ��롼�פΥ��С��ˤʤ�륷���ƥ�Ǥϡ�
-\fB\-a\fR ���ץ�������ꤹ��ȥ��롼�פν��礬ɽ������롣
-.SH �ե�����
-\fI/etc/passwd\fR \- �桼������������Ⱦ���
+.SH 説明
+\fBid\fRは、現在の実ユーザ ID、実効ユーザ ID、実グループ ID、
+実効グループ ID の名前または値を表示する。
+値に対応するエントリが \fI/etc/passwd\fR や
+\fI/etc/group\fR に存在しない場合は、
+対応する名前は表示されずに値だけが表示される。
+ユーザが同時に複数のグループのメンバーになれるシステムでは、
+\fB\-a\fR オプションを指定するとグループの集合が表示される。
+.SH ファイル
+\fI/etc/passwd\fR \- ユーザーアカウント情報
 .br
-\fI/etc/group\fR \ \- ���롼�׾���
-.SH ��Ϣ����
+\fI/etc/group\fR \ \- グループ情報
+.SH 関連項目
 .BR getgid (2),
 .BR getgroups (2),
 .BR getuid (2)
-.SH ����
+.SH 著者
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

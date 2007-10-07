@@ -1,4 +1,4 @@
-.\" $Id: su.1,v 1.7 2005/04/05 19:08:55 kloczek Exp $
+.\" $Id: su.1,v 1.8 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,53 +36,53 @@
 .\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SU 1
-.SH ̾��
-su \- �桼��ID���ѹ����롣�ޤ��ϥ����ѡ��桼���ˤʤ�
-.SH ��
+.SH 名前
+su \- ユーザIDを変更する。またはスーパーユーザになる
+.SH 書式
 \fBsu\fR [\fB\-\fR] [\fIusername\fR [\fIargs\fR]]
-.SH ����
-\fBsu\fR �ϥ������󥻥å��������̤Υ桼���ˤʤ뤿����Ѥ��롣
-�桼��̾����ꤻ���˵�ư������硢
-�ǥե���ȤǤϥ����ѡ��桼���� ID ���ѹ����롣
-���ץ������� \fB\-\fR ���Ѥ���ȡ�
-ľ�ܥ������󤷤�����Ʊ���Ķ��˽��������롣
+.SH 説明
+\fBsu\fR はログインセッション中に別のユーザになるために用いる。
+ユーザ名を指定せずに起動した場合、
+デフォルトではスーパーユーザの ID に変更する。
+オプション引数 \fB\-\fR を用いると、
+直接ログインした場合と同じ環境に初期化される。
 .PP
-�桼��̾�θ�����ɲäΰ�����Ϳ���뤳�Ȥ�Ǥ���
-���ξ������ϥ桼���Υ������󥷥�����Ϥ���롣
-�äˡ����ΰ����ΰ�ĤȤ��� \fB\-c\fR ���Ϥ�����硢
-�����³������������ʬ�Υ��ޥ�ɥ��󥿥ץ꥿�˥��ޥ�ɤȤ��Ʋ�ᤵ��롣
-���ޥ�ɤϤ��Υ桼���� (\fI/etc/passwd\fR ��)
-���ꤵ��Ƥ��륷����Ǽ¹Ԥ���롣
+ユーザ名の後ろに追加の引数を与えることもでき、
+その場合引数はユーザのログインシェルに渡される。
+特に、その引数の一つとして \fB\-c\fR を渡した場合、
+それに続く引数は大部分のコマンドインタプリタにコマンドとして解釈される。
+コマンドはそのユーザに (\fI/etc/passwd\fR で)
+指定されているシェルで実行される。
 .PP
-ɬ�פʾ��ˤϡ��桼���ˤϥѥ���ɤ����Ϥ�¥����롣
-�ְ�ä��ѥ���ɤ����Ϥ��줿���ˤϥ��顼��å����������Ϥ���롣
-\fIsu\fR���褦�Ȥ������ϡ������ƥ�����Ѥ��Τ��뤿��ˡ�
-���줬���������������ʾ����˵�Ͽ���Ĥ���롣
+必要な場合には、ユーザにはパスワードの入力が促される。
+間違ったパスワードが入力された場合にはエラーメッセージが出力される。
+\fIsu\fRしようとした場合は、システムの濫用を検知するために、
+それが正しい場合も不正な場合も常に記録が残される。
 .PP
-���ߤδĶ��Ͽ�����������˰����Ѥ���롣
-������
-\fB$PATH\fR ���ͤϡ�
-�̾�Υ桼���Ǥ� \fB/bin:/usr/bin\fR �ˡ�
-�����ѡ��桼���Ǥ� \fB/sbin:/bin:/usr/sbin:/usr/bin\fR
-�˺����ꤵ��롣
-����� \fI/etc/login.defs\fR ��
-\fBENV_PATH\fR �� \fBENV_SUPATH\fR ���ѹ��Ǥ��롣
+現在の環境は新しいシェルに引き継がれる。
+ただし
+\fB$PATH\fR の値は、
+通常のユーザでは \fB/bin:/usr/bin\fR に、
+スーパーユーザでは \fB/sbin:/bin:/usr/sbin:/usr/bin\fR
+に再設定される。
+これは \fI/etc/login.defs\fR の
+\fBENV_PATH\fR と \fBENV_SUPATH\fR で変更できる。
 .PP
-���֥����ƥ��������Ǥϡ�
-�������󥷥���κǽ��ʸ���� "*" ���֤���
-�Ϥ��줿�ۡ���ǥ��쥯�ȥ�ϡ�
-�桼�����ºݤ˥������󤹤뿷�����ե����륷���ƥ�Υ롼�ȤȤ��ư����롣
-.SH �ٹ�
-�����Ǥ� \fBsu\fR �ˤ�¿���Υ���ѥ�������ץ���󤬤��뤬��
-�����Ȥˤ�äƤϤ��ΰ����������ꤵ��Ƥ��ʤ����Ȥ⤢�롣
-.SH �ե�����
-\fI/etc/passwd\fR \- �桼����������Ⱦ���
+サブシステムログインでは、
+ログインシェルの最初の文字に "*" を置く。
+渡されたホームディレクトリは、
+ユーザが実際にログインする新しいファイルシステムのルートとして扱われる。
+.SH 警告
+この版の \fBsu\fR には多くのコンパイル時オプションがあるが、
+サイトによってはこの一部しか設定されていないこともある。
+.SH ファイル
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-\fI/etc/shadow\fR \- �Ź沽�ѥ���ɤ�ͭ�����¾���
-.SH ��Ϣ����
+\fI/etc/shadow\fR \- 暗号化パスワードと有効期限情報
+.SH 関連項目
 .BR login (1),
 .BR sh (1),
 .BR login.defs (5),
 .BR suauth (5)
-.SH ����
+.SH 著者
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>

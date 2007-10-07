@@ -1,4 +1,4 @@
-.\" $Id: groupdel.8,v 1.8 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: groupdel.8,v 1.9 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,37 +27,37 @@
 .\" SUCH DAMAGE.
 .TH GROUPDEL 8
 .SH NAZWA
-groupdel \- usuñ grupê
-.SH SK£ADNIA
+groupdel \- usuÅ„ grupÄ™
+.SH SKÅADNIA
 \fBgroupdel\fR \fIgrupa\fR
 .SH OPIS
-Polecenie \fBgroupdel\fR zmienia systemowe pliki kont, usuwaj±c
-wszystkie zapisy odnosz±ce siê do \fIgrupy\fR.
-Wymieniona grupa musi istnieæ.
+Polecenie \fBgroupdel\fR zmienia systemowe pliki kont, usuwajÄ…c
+wszystkie zapisy odnoszÄ…ce siÄ™ do \fIgrupy\fR.
+Wymieniona grupa musi istnieÄ‡.
 .PP
-Musisz rêcznie sprawdziæ wszystkie systemy plików, by upewniæ siê, ¿e
-nie pozosta³y ¿adne pliki, dla których wymieniona grupa jest grup± w³a¶cicieli.
+Musisz rÄ™cznie sprawdziÄ‡ wszystkie systemy plikÃ³w, by upewniÄ‡ siÄ™, Å¼e
+nie pozostaÅ‚y Å¼adne pliki, dla ktÃ³rych wymieniona grupa jest grupÄ… wÅ‚aÅ›cicieli.
 .SH PRZESTROGI
-Nie mo¿esz usun±æ podstawowej grupy ¿adnego z istniej±cych u¿ytkowników.
-Musisz usun±æ u¿ytkownika przed usuniêciem takiej grupy.
+Nie moÅ¼esz usunÄ…Ä‡ podstawowej grupy Å¼adnego z istniejÄ…cych uÅ¼ytkownikÃ³w.
+Musisz usunÄ…Ä‡ uÅ¼ytkownika przed usuniÄ™ciem takiej grupy.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o grupach
 .br
 \fI/etc/gshadow\fR	\- bezpieczna informacja o grupach
-.SH KOD ZAKOÑCZENIA
+.SH KOD ZAKOÅƒCZENIA
 .TP 2
-Polecenie \fBgroupdel\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+Polecenie \fBgroupdel\fR koÅ„czy dziaÅ‚anie z nastÄ™pujÄ…cymi wartoÅ›ciami kodÃ³w zakoÅ„czenia:
 .br
 \fB0\fR	\- powodzenie
 .br
-\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+\fB2\fR	\- niewÅ‚aÅ›ciwa skÅ‚adnia parametrÃ³w polecenia
 .br
 \fB6\fR	\- podana grupa nie istnieje
 .br
-\fB8\fR	\- nie mo¿na usun±æ grupy podstawowej u¿ytykownika
+\fB8\fR	\- nie moÅ¼na usunÄ…Ä‡ grupy podstawowej uÅ¼ytykownika
 .br
-\fB10\fR	\- nie mo¿na zaktualizowaæ pliku z grupami
-.SH ZOBACZ TAK¯E
+\fB10\fR	\- nie moÅ¼na zaktualizowaÄ‡ pliku z grupami
+.SH ZOBACZ TAKÅ»E
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),

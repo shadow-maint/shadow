@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.84 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: useradd.c,v 1.89 2005/12/15 15:06:28 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
@@ -39,8 +39,7 @@
 #include <lastlog.h>
 #include <pwd.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include <stdio.h>
 #include <sys/stat.h>
@@ -527,11 +526,6 @@ static int get_groups (char *list)
 	int errors = 0;
 	int ngroups = 0;
 
-	/*
-	 * Initialize the list to be empty
-	 */
-	user_groups[0] = (char *) 0;
-
 	if (!*list)
 		return 0;
 
@@ -595,7 +589,6 @@ static int get_groups (char *list)
 		/*
 		 * Add the group name to the user's list of groups.
 		 */
-
 		user_groups[ngroups++] = xstrdup (grp->gr_name);
 	} while (list);
 
@@ -631,7 +624,7 @@ static void usage (void)
 			   "  -G, --groups GROUPS		list of supplementary groups for the new\n"
 			   "				user account\n"
 			   "  -h, --help			display this help message and exit\n"
-			   "  -k, --skel SKEL_DIR 		specify an alternative skel directory\n"
+			   "  -k, --skel SKEL_DIR		specify an alternative skel directory\n"
 			   "  -K, --key KEY=VALUE		overrides /etc/login.defs defaults\n"
 			   "  -m, --create-home		create home directory for the new user\n"
 			   "				account\n"
@@ -711,29 +704,30 @@ static void grp_update (void)
 #endif
 
 	/*
-	 * Lock and open the group file. This will load all of the group
-	 * entries.
+	 * Test for unique entries of user_groups in /etc/group
+	 * pvrabec@redhat.com
 	 */
-	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: error locking group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
+	char **user_groups_tmp = user_groups;
+
+	while (*user_groups_tmp) {
+		int count = 0;
+
+		for (gr_rewind (), grp = gr_next (); grp && count < 2;
+		     grp = gr_next ()) {
+			if (strcmp (*user_groups_tmp, grp->gr_name) == 0) {
+				count++;
+			}
+		}
+		if (count > 1) {
+			fprintf (stderr,
+				 "%s: error not unique group names in group file\n",
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		user_groups_tmp++;
 	}
-	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: error opening group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-#ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
-		fprintf (stderr,
-			 _("%s: error locking shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
-		fprintf (stderr,
-			 _("%s: error opening shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-#endif
+
+	/* Locking and opening of the group files moved to open_files() --gafton */
 
 	/*
 	 * Scan through the entire group file looking for the groups that
@@ -906,6 +900,80 @@ static void find_new_uid (void)
 		if (user_id == uid_max) {
 			fprintf (stderr, _("%s: can't get unique UID\n"), Prog);
 			fail_exit (E_UID_IN_USE);
+		}
+	}
+}
+
+ /*
+  * find_new_gid - find the next available GID
+  *
+  *     find_new_gid() locates the next highest unused GID in the group
+  *     file, or checks the given group ID against the existing ones for
+  *     uniqueness.
+  */
+
+static void find_new_gid ()
+{
+	const struct group *grp;
+	gid_t gid_min, gid_max;
+
+	gid_min = getdef_num ("GID_MIN", 500);
+	gid_max = getdef_num ("GID_MAX", 60000);
+
+	/*
+	 * Start with some GID value if the user didn't provide us with
+	 * one already.
+	 */
+	user_gid = gid_min;
+
+	/*
+	 * Search the entire group file, either looking for this
+	 * GID (if the user specified one with -g) or looking for the
+	 * largest unused value.
+	 */
+#ifdef NO_GETGRENT
+	gr_rewind ();
+	while ((grp = gr_next ()))
+#else
+	setgrent ();
+	while ((grp = getgrent ()))
+#endif
+	{
+		if (strcmp (user_name, grp->gr_name) == 0) {
+			user_gid = grp->gr_gid;
+			return;
+		}
+		if (grp->gr_gid >= user_gid) {
+			if (grp->gr_gid > gid_max)
+				continue;
+			user_gid = grp->gr_gid + 1;
+		}
+	}
+#ifndef NO_GETGRENT		/* glibc does have this, so ... */
+	/* A quick test gets here: if the UID is available
+	 * as a GID, go ahead and use it */
+	if (!getgrgid (user_id)) {
+		user_gid = user_id;
+		return;
+	}
+#endif
+	if (user_gid == gid_max + 1) {
+		for (user_gid = gid_min; user_gid < gid_max; user_gid++) {
+#ifdef NO_GETGRENT
+			gr_rewind ();
+			while ((grp = gr_next ()) && grp->gr_gid != user_gid);
+			if (!grp)
+				break;
+#else
+			if (!getgrgid (user_gid))
+				break;
+#endif
+		}
+		if (user_gid == gid_max) {
+			fprintf (stderr,
+				 "%s: can't get unique gid (run out of GIDs)\n",
+				 Prog);
+			fail_exit (4);
 		}
 	}
 }
@@ -1268,8 +1336,110 @@ static void open_files (void)
 		pw_unlock ();
 		exit (E_PW_UPDATE);
 	}
+	/*
+	 * Lock and open the group file.
+	 */
+
+	if (!gr_lock ()) {
+		fprintf (stderr, _("%s: error locking group file\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+	if (!gr_open (O_RDWR)) {
+		fprintf (stderr, _("%s: error opening group file\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+#ifdef  SHADOWGRP
+	if (is_shadow_grp && !sgr_lock ()) {
+		fprintf (stderr,
+			 _("%s: error locking shadow group file\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+	if (is_shadow_grp && !sgr_open (O_RDWR)) {
+		fprintf (stderr,
+			 _("%s: error opening shadow group file\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+#endif
 }
 
+static char *empty_list = NULL;
+
+/*
+ * new_grent - initialize the values in a group file entry
+ *
+ *      new_grent() takes all of the values that have been entered and fills
+ *      in a (struct group) with them.
+ */
+
+static void new_grent (struct group *grent)
+{
+	memzero (grent, sizeof *grent);
+	grent->gr_name = (char *) user_name;
+	grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	grent->gr_gid = user_gid;
+	grent->gr_mem = &empty_list;
+}
+
+#ifdef  SHADOWGRP
+/*
+ * new_sgent - initialize the values in a shadow group file entry
+ *
+ *      new_sgent() takes all of the values that have been entered and fills
+ *      in a (struct sgrp) with them.
+ */
+
+static void new_sgent (struct sgrp *sgent)
+{
+	memzero (sgent, sizeof *sgent);
+	sgent->sg_name = (char *) user_name;
+	sgent->sg_passwd = "!";	/* XXX warning: const */
+	sgent->sg_adm = &empty_list;
+	sgent->sg_mem = &empty_list;
+}
+#endif				/* SHADOWGRP */
+
+
+/*
+ * grp_add - add new group file entries
+ *
+ *      grp_add() writes the new records to the group files.
+ */
+
+static void grp_add (void)
+{
+	struct group grp;
+
+#ifdef  SHADOWGRP
+	struct sgrp sgrp;
+#endif				/* SHADOWGRP */
+
+	/*
+	 * Create the initial entries for this new group.
+	 */
+	new_grent (&grp);
+#ifdef  SHADOWGRP
+	new_sgent (&sgrp);
+#endif				/* SHADOWGRP */
+
+	/*
+	 * Write out the new group file entry.
+	 */
+	if (!gr_update (&grp)) {
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+#ifdef  SHADOWGRP
+	/*
+	 * Write out the new shadow group entries as well.
+	 */
+	if (is_shadow_grp && !sgr_update (&sgrp)) {
+		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fail_exit (E_GRP_UPDATE);
+	}
+#endif				/* SHADOWGRP */
+	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u", user_name, user_gid));
+	do_grp_update++;
+}
 
 static void faillog_reset (uid_t uid)
 {
@@ -1455,13 +1625,6 @@ static void create_mail (void)
 	}
 }
 
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
-
 /*
  * main - useradd command
  */
@@ -1490,6 +1653,11 @@ int main (int argc, char **argv)
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
+	/*
+	 * Initialize the list to be empty
+	 */
+	user_groups[0] = (char *) 0;
+
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP
@@ -1586,6 +1754,18 @@ int main (int argc, char **argv)
 	 * - then close and update the files.
 	 */
 	open_files ();
+
+	/* first, seek for a valid uid to use for this user.
+	 * We do this because later we can use the uid we found as
+	 * gid too ... --gafton */
+	find_new_uid ();
+
+	/* do we have to add a group for that user? This is why we need to
+	 * open the group files in the open_files() function  --gafton */
+	if (!(nflg || gflg)) {
+		find_new_gid ();
+		grp_add ();
+	}
 
 	usr_update ();
 

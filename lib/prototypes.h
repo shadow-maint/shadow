@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.24 2005/09/05 16:22:03 kloczek Exp $
+ * $Id: prototypes.h,v 1.26 2006/01/02 23:32:51 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -38,9 +38,6 @@ extern int isexpired (const struct passwd *, const struct spwd *);
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
 extern char *Basename (char *str);
-
-/* chkshell.c */
-extern int check_shell (const char *);
 
 /* chowndir.c */
 extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
@@ -75,11 +72,6 @@ extern int valid_field (const char *, const char *);
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
-
-/* grdbm.c */
-extern int gr_dbm_remove (const struct group *);
-extern int gr_dbm_update (const struct group *);
-extern int gr_dbm_present (void);
 
 /* grent.c */
 extern int putgrent (const struct group *, FILE *);

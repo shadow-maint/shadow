@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.13 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: pwck.8.xml,v 1.16 2005/12/02 22:20:23 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>pwck</refname>
@@ -28,6 +29,7 @@
     </cmdsynopsis>
     <cmdsynopsis>
       <command>pwck</command>
+      <arg choice='opt'>-q </arg>
       <arg choice='opt'>-r </arg>
       <arg choice='opt'>
 	<arg choice='plain'>
@@ -104,8 +106,8 @@
 	</term>
 	<listitem>
 	  <para>
-	    Report errors only. Using this option will not require an action
-	    from the user.
+            Report errors only. The warnings which do not require any
+            action from the user won't be displayed.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -225,10 +227,5 @@
 	</varlistentry>
       </variablelist>
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

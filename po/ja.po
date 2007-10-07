@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 1990827\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2000-06-18 120:22+0900\n"
 "Last-Translator: Yasuyuki Furukawa <furukawa@vinelinux.org>\n"
 "Language-Team: Japanese\n"
@@ -222,6 +222,10 @@ msgstr "最後パスワード変更日付 (YYYY-MM-DD)"
 #, fuzzy, c-format
 msgid "never\n"
 msgstr "なし:\n"
+
+#, fuzzy, c-format
+msgid "password must be changed"
+msgstr "パスワードは変更されました.\n"
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -634,7 +638,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -1070,8 +1074,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1129,10 +1133,6 @@ msgstr "申し訳ありませんが, %s のパスワードはまだ変更する�
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: メモリがたりません\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: %sを実行できません"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1254,6 +1254,19 @@ msgid "%s: %s\n"
 msgstr "パスワード: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: 端末上から実行してください\n"
 
@@ -1269,8 +1282,8 @@ msgstr "不明な IDです: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "あなたは su %s に認証できませんでした\n"
 
-msgid "(Enter your own password.)"
-msgstr "(あなた自身のパスワードを入力してください.)"
+msgid "(Enter your own password)"
+msgstr "(あなた自身のパスワードを入力してください)"
 
 #, c-format
 msgid ""
@@ -1351,7 +1364,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1362,22 +1375,6 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: グループ・ファイルをロックできません\n"
-
-#, fuzzy, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: グループ・ファイルを開けません\n"
-
-#, fuzzy, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
-
-#, fuzzy, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
 
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1446,6 +1443,22 @@ msgstr "シャドウ・パスワード・ファイルをロックできません
 #, fuzzy, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: シャドウ・パスワード・ファイルを開けません\n"
+
+#, fuzzy, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: グループ・ファイルをロックできません\n"
+
+#, fuzzy, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: グループ・ファイルを開けません\n"
+
+#, fuzzy, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: シャドウ・グループ・ファイルをロックできません\n"
+
+#, fuzzy, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: シャドウ・グループ・ファイルが開けません\n"
 
 #, fuzzy, c-format
 msgid "%s: error adding new password entry\n"
@@ -1545,20 +1558,29 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: ディレクトリ %s の削除のエラーです\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "使用法: %s\t[-u ユーザID [-o]] [-g グループ] [-G グループ,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d ホーム [-m]] [-s シェル] [-c コメント] [-l 新規ユーザ名]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f 無効日数] [-e 期限切れ日] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p パスワード] [-L|-U] ユーザ名\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1628,6 +1650,18 @@ msgstr "mailboxの名前変更に失敗しました"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1644,16 +1678,32 @@ msgstr "バックアップを作成できません"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %sを復旧できませんでした: %s (あなたの変更は%sにあります)\n"
 
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"使用法:\n"
-"`vipw' /etc/passwd を編集       `vipw -s' /etc/shadowを編集\n"
-"`vigr' /etc/groupを編集         `vigr -s' /etc/gshadowを編集\n"
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "使用法:\n"
+#~ "`vipw' /etc/passwd を編集       `vipw -s' /etc/shadowを編集\n"
+#~ "`vigr' /etc/groupを編集         `vigr -s' /etc/gshadowを編集\n"
 
 #, fuzzy
 #~ msgid "%s: PAM chauthtok failed\n"
 #~ msgstr "%s: ファイルをロックできません\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s: %sを実行できません"
+
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "使用法: %s\t[-u ユーザID [-o]] [-g グループ] [-G グループ,...] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d ホーム [-m]] [-s シェル] [-c コメント] [-l 新規ユーザ名]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f 無効日数] [-e 期限切れ日] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p パスワード] [-L|-U] ユーザ名\n"

@@ -1,4 +1,7 @@
-.\" Copyright 1991 \- 1993, Julianne Frances Haugh
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: groupdel.8,v 1.6 2005/12/01 20:38:26 kloczek Exp $
+.\" Copyright 1991 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -24,40 +27,52 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: groupdel.8,v 1.4 2005/04/05 19:08:54 kloczek Exp $
-.\"
-.\" Traduzione in italiano a cura di Isabella Ruocco <isacher@nettaxi.com>
-.\" luglio 1999
-.\"
-.TH GROUPDEL 8
+.TH GROUPDEL 8   
 .SH NOME
 groupdel \- Rimuove un gruppo
 .SH SINTASSI
-.B groupdel
-.I gruppo
+\fBgroupdel\fP \fIgruppo\fP
 .SH DESCRIZIONE
-Il comando \fBgroupdel\fR modifica i file di account di sistema, rimuovendo
-tutte le voci che si riferiscono a \fIgruppo\fR.
-Il gruppo nominato deve esistere.
+Il comando \fBgroupdel\fP modifica i file di account di sistema, rimuovendo 
+tutte le voci che si riferiscono a \fIgruppo\fP.  Il gruppo nominato deve 
+esistere.
 .PP
-Occorre controllare manualmente tutti i filesystem per assicurarsi che non
-rimanga alcun file avente come ID di gruppo del file il gruppo specificato.
+Occorre controllare manualmente tutti i filesystem per assicurarsi che non 
+rimanga alcun file avente come ID di gruppo il gruppo specificato.
 .SH CAVEAT
-Non si pu� rimuovere il gruppo primario di qualche utente esistente.
+Non si può rimuovere un gruppo che sia gruppo primario di un utente.  
 Occorre rimuovere l'utente prima di rimuovere il gruppo.
 .SH FILE
-\fI/etc/group\fR \- informazioni sui gruppi
+/etc/group \- informazioni sui gruppi
 .br
-\fI/etc/gshadow\fR \- informazioni sicure sui gruppi 
-.SH VEDERE ANCHE
-.BR chfn (1),
-.BR chsh (1),
-.BR useradd (8),
-.BR userdel (8),
-.BR usermod (8),
-.BR passwd (1),
-.BR groupadd (8),
-.BR groupmod (8)
+/etc/gshadow \- informazioni sicure sui gruppi
+.SH "VALORI RESTITUITI"
+0	\- successo
+.br
+2	\- errore di sintassi
+.br
+6	\- il gruppo specificato non esiste
+.br
+8	\- operazione impossibile perché il gruppo è primario per un utente
+.br
+10	\- non è possibile aggiornare il file group
+.SH "VEDERE ANCHE"
+\fBchfn\fP(1), \fBchsh\fP(1), \fBpasswd\fP(1), \fBgroupadd\fP(8), \fBgroupmod\fP(8)  
+\fBuseradd\fP(8), \fBuserdel\fP(8), \fBusermod\fP(8),
 .SH AUTORE
-Julianne Frances Haugh (jfh@tab.com)
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.\" Questa sezione si trova in un file separato che viene aggiunto
+.\" automaticamente alla pagina tradotta.
+.\" Per semplicità ho usato lo stesso file per tutte le traduzioni,
+.\" di conseguenza mischiando tutti i nomi dei traduttori: mi auguro
+.\" che non sia un problema per nessuno.
+.\"             -- Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.SH TRADUZIONE
+.nf
+Giovanni Bortolozzo <borto@dei.unipd.it>, 1996-1997
+Roberto Pertile <triplej@iol.it>, 1999
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+.fi
+.\" Conversione a PO4A:
+.\" Danilo Piazzalunga <danilopiazza@libero.it>, 2005

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: newgrp.c,v 1.41 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: newgrp.c,v 1.42 2005/11/10 16:01:27 kloczek Exp $"
 
 #include <errno.h>
 #include <grp.h>
@@ -118,6 +118,9 @@ int main (int argc, char **argv)
 	struct sgrp *sgrp;
 #endif
 
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
@@ -157,6 +160,10 @@ int main (int argc, char **argv)
 	pwd = get_my_pwent ();
 	if (!pwd) {
 		fprintf (stderr, _("unknown UID: %u\n"), getuid ());
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_START, Prog, "changing", NULL,
+			      getuid (), 0);
+#endif
 		SYSLOG ((LOG_WARN, "unknown UID %u", getuid ()));
 		closelog ();
 		exit (1);
@@ -261,6 +268,10 @@ int main (int argc, char **argv)
 	}
 	if (ngroups < 0) {
 		perror ("getgroups");
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_START, Prog,
+			      "changing", NULL, getuid (), 0);
+#endif
 		exit (1);
 	}
 #endif				/* HAVE_SETGROUPS */
@@ -453,6 +464,10 @@ int main (int argc, char **argv)
 			/* error in fork() */
 			fprintf (stderr, _("%s: failure forking: %s"),
 				 is_newgrp ? "newgrp" : "sg", strerror (errno));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_START, Prog, "changing",
+				      NULL, getuid (), 0);
+#endif
 			exit (1);
 		} else if (child) {
 			/* parent - wait for child to finish, then log session close */
@@ -523,6 +538,10 @@ int main (int argc, char **argv)
 
 	if (setuid (getuid ())) {
 		perror ("setuid");
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_START, Prog, "changing",
+			      NULL, getuid (), 0);
+#endif
 		exit (1);
 	}
 
@@ -533,6 +552,10 @@ int main (int argc, char **argv)
 	if (cflag) {
 		closelog ();
 		execl ("/bin/sh", "sh", "-c", command, (char *) 0);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_START, Prog, "changing",
+			      NULL, getuid (), 0);
+#endif
 		if (errno == ENOENT) {
 			perror ("/bin/sh");
 			exit (127);
@@ -601,6 +624,9 @@ int main (int argc, char **argv)
 			addenv (*envp++, NULL);
 	}
 
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 1);
+#endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
@@ -620,5 +646,8 @@ int main (int argc, char **argv)
 	 * harm.  -- JWP
 	 */
 	closelog ();
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 0);
+#endif
 	exit (1);
 }

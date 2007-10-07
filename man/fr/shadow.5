@@ -1,92 +1,79 @@
-.\" Copyright 1989 \- 1990, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: shadow.5,v 1.3 2005/04/05 19:08:53 kloczek Exp $
-.\"
-.TH SHADOW 5
-.SH NOM
-shadow \- fichiers de mots de passe cryptÈs
-.SH DESCRIPTION
-.I /etc/shadow
-contient les mots de passe cryptÈs des utilisateurs [ Ndt : plus exactement, le rÈsultat du cryptage d'une chaÓne de longueur nulle
-avec le mot de passe comme clÈ de cryptage ] ainsi qu'Èventuellement des informations sur l'‚ge des mots de passe :
-.IP "" .5i
-Nom de login
-.IP "" .5i
-mot de passe cryptÈ
-.IP "" .5i
-Nombre de jours ÈcoulÈs depuis le 1er janvier 1970 jusqu'au dernier changement de mot de passe
-.IP "" .5i
-Nombre de jours durant lesquels le mot de passe est encore valide
-.IP "" .5i
-Nombre de jours aprËs lesquels le mot de passe doit Ítre changÈ
-.IP "" .5i
-Nombre de jours avant l'expiration du mot de passe impliquant l'avertissement de l'utilisateur
-.IP "" .5i
-Nombre de jours aprËs l'expiration provoquant la desactivation du compte
-.IP "" .5i
-NumÈro du jour depuis le 1er janvier 1970 ‡ partir duquel le compte a ÈtÈ dÈsactivÈ
-.IP "" .5i
-Champs rÈservÈ
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "SHADOW" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+shadow \- fichier des mots de passe cach√©s
+.SH "DESCRIPTION"
 .PP
-Le champs 
-.I mot de passe
-doit Ítre rempli.
-Le mot de passe cryptÈ comprend 13 ‡ 24 caractËres pris dans 
-l'alphabet rÈduit a\-z, A\-Z, 0\-9, \. et /.
-Consultez \fBcrypt\fR(3) pour plus d'information sur le traitement de cette chaÓne.
+Le fichier
+\fI/etc/shadow\fR
+contient les informations cach√©es concernant les mots de passe des utilisateurs et leurs dates de validit√©. Ces informations comprennent\ :
+.TP 3
+\(bu
+nom de connexion de l'utilisateur (\(Fo\ login\ \(Fc)
+.TP
+\(bu
+mot de passe chiffr√©
+.TP
+\(bu
+nombre de jours √©coul√©s depuis le 1er janvier 1970 jusqu'au dernier changement de mot de passe
+.TP
+\(bu
+nombre de jours √† attendre avant de pouvoir changer le mot de passe
+.TP
+\(bu
+nombre de jours apr√®s lesquels le mot de passe doit √™tre chang√©
+.TP
+\(bu
+nombre de jours avant la fin de validit√© du mot de passe impliquant l'avertissement de l'utilisateur
+.TP
+\(bu
+nombre de jours apr√®s la fin de validit√© provoquant la d√©sactivation du compte
+.TP
+\(bu
+num√©ro du jour depuis le 1er janvier 1970 √† partir duquel le compte est d√©sactiv√©
+.TP
+\(bu
+champ r√©serv√©
 .PP
-La date de derniËre modification du mot de passe est donnÈ par le nNombre de jours ÈcoulÈs depuis le 1er janvier 1970 jusqu'au dernier changement de mot de passe.
-Le mot de passe ne peut Ítre changÈ jusqu'‡ ce que le nombre de jours indiquÈs soit ÈcoulÈ, et doit Ítre changÈ aprËs que le nombre maximum de jours indiquÈ.
-Si le nomnre minimum de jours requis est plus grand que le nombre maximum de jours de vailidÈ, ce mot de passe
-.B ne peut pas
-Ítre changÈ par l'utilisateur.
+Le champ \(Fo\ mot de passe\ \(Fc doit √™tre rempli. Le mot de passe chiffr√© comprend 13 √† 24 caract√®res pris dans l'alphabet de 64 caract√®re\ : a\-z, A\-Z, 0\-9, \\. et /. Il peut optionellement commencer par un caract√®re \(Fo\ $\ \(Fc. Ceci signifie que le mot de passse a √©t√© g√©n√©r√© par un autre algorithme (autre que DES). Par exemple, s'il commence par \(Fo\ $1$\ \(Fc, l'algorithme bas√© sur MD5 a √©t√© utilis√©.
 .PP
-Un compte est considÈrÈ comme inactif et est dÈsactivÈ si le mot de passe n'est pas changÈ dans l'intervalle spÈcifiÈ aprËs l'expiration du mot de passe.
-Un compte est Ègalement dÈsactivÈ le jours indiquÈ quelque soit les autres informations d'expiration.
+Consultez
+\fBcrypt\fR(3)
+pour plus d'informations sur le traitement de cette cha√Æne.
 .PP
-Cette information est prioritaire sur toutes les autres champs prÈsents dans \fI/etc/passwd\fR.
+Si le champ du mot de passe contient une cha√Æne qui ne peut pas √™tre un r√©sultat valable de
+\fBcrypt\fR(3), par exemple si elle contient les caract√®res ! ou *, alors l'utilisateur ne pourra pas utiliser son mot de passe UNIX pour se connecter. Ceci peut d√©pendre de
+\fBpam\fR(7).
 .PP
-Ce fichier \fBne doit pas Ítre\fR accessible en lecture par les utilisateurs normaux afin de maintenir la sÈcuritÈ des mots de passe, en particuliers contre les attaques aux dictionnaires.
-.SH FICHIERS
-\fI/etc/passwd\fR \- information sur les comptes des utilisateurs
-.br
-\fI/etc/shadow\fR \- mots de passe cryptÈs des utilisateurs
-.SH VOIR AUSSI
-.BR chage (1),
-.BR login (1),
-.BR passwd (1),
-.BR su (1),
-.BR sulogin (8),
-.BR shadow (3),
-.BR passwd (5),
-.BR pwconv (8),
-.BR pwunconv (8)
-.SH AUTEUR
-Julianne Frances Haugh (jfh@tab.com)
-.SH TRADUCTION
-.RI "Thierry Vignaud <" tvignaud@mandrakesoft.com ">, 1999"
+La date de derni√®re modification du mot de passe est donn√© par le nombre de jours √©coul√©s depuis le 1er janvier 1970 jusqu'au dernier changement du mot de passe. Un mot de passe ne peut pas √™tre chang√© de nouveau avant le nombre de jours indiqu√©s, et doit √™tre modifi√© avant le nombre maximal de jours sp√©cifi√©. Si le nombre minimal de jours requis est plus grand que le nombre maximal de jours de validit√©, ce mot de passe ne peut pas √™tre chang√© par l'utilisateur.
+.PP
+Un compte est consid√©r√© comme inactif et est d√©sactiv√© si le mot de passe n'est pas chang√© dans l'intervalle sp√©cifi√© apr√®s la fin de la validit√© du mot de passe. Un compte est √©galement d√©sactiv√© le jour indiqu√© quel que soit les autres informations de validit√©.
+.PP
+Ces informations sont prioritaires sur tous les autres champs pr√©sents dans
+\fI/etc/passwd\fR.
+.PP
+Ce fichier ne doit pas √™tre accessible en lecture par les utilisateurs normaux afin de maintenir la s√©curit√© des mots de passe, en particuliers pour pr√©venir les attaques par dictionnaires.
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations s√©curis√©es sur les comptes utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBchage\fR(1),
+\fBlogin\fR(1),
+\fBsu\fR(1),
+\fBpasswd\fR(1),
+\fBpasswd\fR(5),
+\fBpwconv\fR(8),
+\fBpwunconv\fR(8),
+\fBsulogin\fR(8).

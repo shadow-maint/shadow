@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: commonio.c,v 1.30 2005/09/24 12:22:50 kloczek Exp $"
+#ident "$Id: commonio.c,v 1.31 2005/10/19 11:34:21 kloczek Exp $"
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -562,6 +562,9 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
 {
 	struct commonio_entry *head = NULL, *pw_ptr, *spw_ptr;
 	const char *name;
+
+	if(!shadow || !shadow->head)
+		return 0;
 
 	for (pw_ptr = passwd->head; pw_ptr; pw_ptr = pw_ptr->next) {
 		if (pw_ptr->eptr == NULL)

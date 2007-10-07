@@ -1,0 +1,139 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "shadow" "3" "11/10/2005" "Библиотечные функции" "Библиотечные функции"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+shadow, getspnam \- процедуры для работы с файлом шифрованных паролей
+.SH "СИНТАКСИС"
+.PP
+\fI#include <shadow.h>\fR
+.PP
+\fIstruct spwd *getspent();\fR
+.PP
+\fIstruct spwd *getspnam(char\fR\fI*name\fR\fI);\fR
+.PP
+\fIvoid setspent();\fR
+.PP
+\fIvoid endspent();\fR
+.PP
+\fIstruct spwd *fgetspent(FILE\fR\fI*fp\fR\fI);\fR
+.PP
+\fIstruct spwd *sgetspent(char\fR\fI*cp\fR\fI);\fR
+.PP
+\fIint putspent(struct spwd\fR\fI*p,\fR\fIFILE\fR\fI*fp\fR\fI);\fR
+.PP
+\fIint lckpwdf();\fR
+.PP
+\fIint ulckpwdf();\fR
+.SH "ОПИСАНИЕ"
+.PP
+\fIshadow\fR
+управляет содержимым файла теневых паролей
+\fI/etc/shadow\fR. Структура в файле
+\fI#include\fR
+:
+.sp
+.nf
+struct spwd {
+      char	 	 	*sp_namp;  /* имя пользователя */
+      char	 	 	*sp_pwdp;  /* шифрованный пароль */
+      long int	 	 	sp_lstchg; /* дата последней смены пароля */
+      long int	 	 	sp_min;    /* дней должно пройти между сменами пароля. */
+      long int	 	 	sp_max;    /* дней перед необходимостью смены пароля */
+      long int	 	 	sp_warn;   /* дней вывода предупреждения об устаревании */
+      long int	 	 	sp_inact;  /* дней перед тем как учётная запись заблокируется */
+      long int	 	 	sp_expire; /* дата устаревания учётной записи */
+      unsigned long int	sp_flag;   /* зарезервировано */
+}
+    
+.fi
+.PP
+Значение каждого поля:
+.TP 3
+\(bu
+sp_namp \- указатель на строку с именем пользователя, завершающуюся нулевым символом
+.TP
+\(bu
+sp_pwdp \- указатель на строку с паролем, завершающуюся нулевым символом
+.TP
+\(bu
+sp_lstchg \- количество дней, когда был изменён пароль последний раз, начиная с 1 января 1970 года
+.TP
+\(bu
+sp_min \- количество дней, когда можно не менять пароль
+.TP
+\(bu
+sp_max \- количество дней, которое должно пройти, чтобы нужно было поменять пароль
+.TP
+\(bu
+sp_warn \- количество дней, когда будет выдаваться предупреждение о скором устаревании пароля перед тем как пароль устареет
+.TP
+\(bu
+sp_inact \- количество дней, которые должны пройти после устаревания пароля, когда начинать считать, что учётная запись неактивна и заблокирована
+.TP
+\(bu
+sp_expire \- дней, после которых учётная запись будет заблокирована, начиная с 1 января 1970 года
+.TP
+\(bu
+sp_flag \- зарезервировано
+.SH "ОПИСАНИЕ"
+.PP
+\fIgetspent\fR,
+\fIgetspname\fR,
+\fIfgetspent\fR
+и
+\fIsgetspent\fR
+возвращают указатель на
+\fIstruct spwd\fR.
+\fIgetspent\fR
+возвращает следующую запись из файла, а
+\fIfgetspent\fR
+возвращает следующую запись из заданного канала, где предполагается, что это файл правильного формата.
+\fIsgetspent\fR
+возвращает указатель на
+\fIstruct spwd\fR
+, используя предоставленную строку в качестве входящих данных.
+\fIgetspnam\fR
+ищет начиная с текущей позиции в файле запись по имени
+\fIпользователя\fR.
+.PP
+\fIsetspent\fR
+и
+\fIendspent\fR
+можно использовать для перемещения в начало и конец, соответственно, файла теневых паролей.
+.PP
+Функции
+\fIlckpwdf\fR
+и
+\fIulckpwdf\fR
+используются для получения монопольного доступа к файлу
+\fI/etc/shadow\fR.
+\fIlckpwdf\fR
+пытается выполнить блокировку с помощью
+\fIpw_lock\fR
+в течении 15 секунд. Далее выполняется попытка получить вторую блокировку с помощью
+\fIspw_lock\fR
+в течении времени оставшегося от первоначальных 15 секунд. При неудаче в любой из блокировок в течении 15 секунд, функция
+\fIlckpwdf\fR
+возвращает \-1. Если обе блокировки прошли успешно возвращается 0.
+.SH "ДИАГНОСТИКА"
+.PP
+Функции возвращают NULL, если все записи кончились или произошла ошибка во время работы. Функции, возвращающие
+\fIint\fR
+, возвращают 0 при успешном выполнении и \-1 в случае неудачи.
+.SH "ПРЕДОСТЕРЕЖЕНИЯ"
+.PP
+Данные функции могут использоваться только суперпользователем, так как доступ к файлу теневых паролей ограничен.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/shadow\fR
+содержит защищаемую информацию о пользователях
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBgetpwent\fR(3),
+\fBshadow\fR(5).

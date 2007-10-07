@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: userdel.c,v 1.52 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: userdel.c,v 1.58 2005/12/01 20:10:48 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -40,8 +40,7 @@
 #include <sys/stat.h>
 #include <sys/stat.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "defines.h"
 #include "getdef.h"
@@ -66,7 +65,9 @@
 #define E_HOMEDIR	12	/* can't remove home directory */
 static char *user_name;
 static uid_t user_id;
+static gid_t user_gid;
 static char *user_home;
+static char *user_group;
 
 static char *Prog;
 static int fflg = 0, rflg = 0;
@@ -171,23 +172,26 @@ static void update_groups (void)
 	if (grp && getdef_bool ("USERGROUPS_ENAB")
 	    && (grp->gr_mem[0] == NULL)) {
 
-		/*
-		 * Scan the passwd file to check if this group is still
-		 * used as a primary group.
-		 */
-		setpwent ();
-		while ((pwd = getpwent ())) {
-			if (strcmp (pwd->pw_name, user_name) == 0)
-				continue;
-			if (pwd->pw_gid == grp->gr_gid) {
-				fprintf (stderr,
-					 _
-					 ("%s: Cannot remove group %s which is a primary group for another user.\n"),
-					 Prog, grp->gr_name);
-				break;
+		pwd = NULL;
+		if (!fflg) {
+			/*
+			 * Scan the passwd file to check if this group is still
+			 * used as a primary group.
+			 */
+			setpwent ();
+			while ((pwd = getpwent ())) {
+				if (strcmp (pwd->pw_name, user_name) == 0)
+					continue;
+				if (pwd->pw_gid == grp->gr_gid) {
+					fprintf (stderr,
+						 _
+						 ("%s: Cannot remove group %s which is a primary group for another user.\n"),
+						 Prog, grp->gr_name);
+					break;
+				}
 			}
+			endpwent ();
 		}
-		endpwent ();
 
 		if (pwd == NULL) {
 			/*
@@ -257,6 +261,65 @@ static void update_groups (void)
 	if (deleted_user_group)
 		sgr_remove (user_name);
 #endif				/* SHADOWGRP */
+}
+
+/*
+ * remove_group - remove the user's group unless it is not really a user-private group
+ */
+static void remove_group ()
+{
+	char *glist_name;
+	struct group *gr;
+	struct passwd *pwd;
+
+	if (user_group == NULL || user_name == NULL)
+		return;
+
+	if (strcmp (user_name, user_group)) {
+		return;
+	}
+
+	glist_name = NULL;
+	gr = getgrnam (user_group);
+	if (gr)
+		glist_name = *(gr->gr_mem);
+	while (glist_name) {
+		while (glist_name && *glist_name) {
+			if (strncmp (glist_name, user_name, 16)) {
+				return;
+			}
+			glist_name++;
+		}
+	}
+
+	setpwent ();
+	while ((pwd = getpwent ())) {
+		if (strcmp (pwd->pw_name, user_name) == 0)
+			continue;
+
+		if (pwd->pw_gid == user_gid) {
+			return;
+		}
+	}
+
+	/* now actually do the removal if we haven't already returned */
+
+	if (!gr_remove (user_group)) {
+		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+	}
+#ifdef SHADOWGRP
+
+	/*
+	 * Delete the shadow group entries as well.
+	 */
+
+	if (is_shadow_grp && !sgr_remove (user_group)) {
+		fprintf (stderr, _("%s: error removing shadow group entry\n"),
+			 Prog);
+	}
+#endif				/* SHADOWGRP */
+	SYSLOG ((LOG_INFO, "remove group `%s'\n", user_group));
+	return;
 }
 
 /*
@@ -583,16 +646,10 @@ static void remove_mailbox (void)
 #ifdef WITH_AUDIT
 	else {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
-			      user_name, user_id, 0);
+			      user_name, user_id, 1);
 	}
 #endif
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv, NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * main - userdel command
@@ -600,6 +657,7 @@ static struct pam_conv conv = {
 int main (int argc, char **argv)
 {
 	struct passwd *pwd;
+	struct group *grp;
 	int arg;
 	int errors = 0;
 
@@ -707,6 +765,10 @@ int main (int argc, char **argv)
 #endif
 	user_id = pwd->pw_uid;
 	user_home = xstrdup (pwd->pw_dir);
+	user_gid = pwd->pw_gid;
+	grp = getgrgid (user_gid);
+	if (grp)
+		user_group = xstrdup (grp->gr_name);
 	/*
 	 * Check to make certain the user isn't logged in.
 	 */
@@ -759,6 +821,9 @@ int main (int argc, char **argv)
 		endpwent ();
 	}
 #endif
+
+	/* Remove the user's group if appropriate. */
+	remove_group ();
 
 	if (rflg) {
 		if (remove_tree (user_home)

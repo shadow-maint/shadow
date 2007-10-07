@@ -1,0 +1,49 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "gshadow" "5" "11/10/2005" "Форматы файлов" "Форматы файлов"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+gshadow \- файл с защищаемой информацией о группах
+.SH "ОПИСАНИЕ"
+.PP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о групах. Он состоит из строк с полями, отделёнными друг от друга двоеточием. Поля:
+.TP 3
+\(bu
+имя группы
+.TP
+\(bu
+шифрованный пароль
+.TP
+\(bu
+список администраторов группы, перечисленных через запятую
+.TP
+\(bu
+список членов группы, перечисленных через запятую
+.PP
+Поля с именем группы и паролем должны быть заполнены. Шифрованный пароль состоит из разрешённых 64 символов с a по z, с A по Z, с 0 по 9, \\. и /. Подробней о пароле смотрите на странице руководства
+\fBcrypt\fR(3). Если поле пароля содержит строку, которая не удовлетворяет требованиям
+\fBcrypt\fR(3), например содержит ! или *, то пользователь не сможет использовать этот unix пароль для регистрации с учётом настроек
+\fBpam\fR(7).
+.PP
+Данная информация заменяет любой пароль файла
+\fI/etc/group\fR.
+.PP
+Этот файл должен быть недоступен обычному пользователю, если нужно обеспечить безопасность паролей.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группах
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBgroup\fR(5),
+\fBgpasswd\fR(5),
+\fBnewgrp\fR(5).

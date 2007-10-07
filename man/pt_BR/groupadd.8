@@ -1,73 +1,73 @@
 .\" Copyright 1991, Julianne Frances Haugh
 .\" Todos os direitos reservados.
 .\"
-.\" … permitida a confecÁ„o e distribuiÁ„o deste manual, devidamente
-.\" acompanhado dos avisos de direitos autorais e desta permiss„o
-.\" em todas as cÛpias.
+.\" √â permitida a confec√ß√£o e distribui√ß√£o deste manual, devidamente
+.\" acompanhado dos avisos de direitos autorais e desta permiss√£o
+.\" em todas as c√≥pias.
 .\"
-.\" … permitida a cÛpia e distribuiÁ„o de versıes modificadas deste manual
-.\" sob as condiÁıes acima, e que todo o trabalho derivado seja distribuÌdo
-.\" sob  as mesmas condiÁıes deste manual.
+.\" √â permitida a c√≥pia e distribui√ß√£o de vers√µes modificadas deste manual
+.\" sob as condi√ß√µes acima, e que todo o trabalho derivado seja distribu√≠do
+.\" sob  as mesmas condi√ß√µes deste manual.
 .\" 
-.\" Uma vez que o kernel do Linux e suas bibliotecas est„o constantemente
-.\" mudando, esta p·gina de manual poder· estar incorreta ou desatualizada.
-.\" O(s) autor(es) n„o assumem responsabilidade por erros ou omissıes, 
-.\" ou por danos resultantes do uso das informaÁıes aqui contidas. 
+.\" Uma vez que o kernel do Linux e suas bibliotecas est√£o constantemente
+.\" mudando, esta p√°gina de manual poder√° estar incorreta ou desatualizada.
+.\" O(s) autor(es) n√£o assumem responsabilidade por erros ou omiss√µes, 
+.\" ou por danos resultantes do uso das informa√ß√µes aqui contidas. 
 .\"
-.\" Versıes formatadas ou processadas deste manual, desacompanhadas dos
-.\" fontes, devem conter a autorizaÁ„o e os direitos autorais dos autores do
+.\" Vers√µes formatadas ou processadas deste manual, desacompanhadas dos
+.\" fontes, devem conter a autoriza√ß√£o e os direitos autorais dos autores do
 .\" trabalho.
 .\"
-.\" VocÍ deve receber uma cÛpia da LicenÁa P˙blica GNU
-.\" junto com este manual; caso contr·rio, escreva para a Free Software
+.\" Voc√™ deve receber uma c√≥pia da Licen√ßa P√∫blica GNU
+.\" junto com este manual; caso contr√°rio, escreva para a Free Software
 .\" Foundation, Inc., 675 mass Ave, Cambridge, MA 02139 USA ou
-.\" em portuguÍs na Conectiva Inform·tica Ltda. \- http://www.conectiva.com.br
+.\" em portugu√™s na Conectiva Inform√°tica Ltda. \- http://www.conectiva.com.br
 .\"
 .\"
 .\"
-.\"	$Id: groupadd.8,v 1.8 2005/04/05 19:08:56 kloczek Exp $
+.\"	$Id: groupadd.8,v 1.9 2005/12/01 20:38:28 kloczek Exp $
 .\"
 .TH GROUPADD 8
 .SH NOME
 groupadd \- Criar um novo grupo
 .SH SINOPSE
 \fBgroupadd\fR [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-f\fR] \fIgrupo\fR
-.SH DESCRI«√O
+.SH DESCRI√á√ÉO
 O comando \fBgroupadd\fR cria um novo grupo usando valores especificados na
-linha de comando e os valores padrıes do sistema. O novo grupo ser· criado
-nos arquivos do sistema, conforme o requerido. As opÁıes que aplicam\-se ao
-comando \fBgroupadd\fR s„o
+linha de comando e os valores padr√µes do sistema. O novo grupo ser√° criado
+nos arquivos do sistema, conforme o requerido. As op√ß√µes que aplicam\-se ao
+comando \fBgroupadd\fR s√£o
 .IP \fB\-f\fR
-Este È o indicador \fIforce\fR . Ele n„o ir· parar o processamento do
-\fBgroupadd\fR e n„o finalizar· o programa, caso um grupo que esteja sendo
-criado j· exista no sistema. Neste caso, o grupo n„o ser· alterado(ou
+Este √© o indicador \fIforce\fR . Ele n√£o ir√° parar o processamento do
+\fBgroupadd\fR e n√£o finalizar√° o programa, caso um grupo que esteja sendo
+criado j√° exista no sistema. Neste caso, o grupo n√£o ser√° alterado(ou
 adicionado novamente).
 .IP "\fB\-g \fIgid\fR"
-A identificaÁ„o numÈrica do grupo È denominada ID. Este valor deve ser
-˙nico, a menos que a opÁ„o \fB\-o\fR seja usada. O valor deve ser n„o
-negativo, e o padr„o È o menor valor maior que 500 e o maior que qualquer
-outro grupo. Valores entre 0 e 999 s„o tipicamente reservados para \fIcontas
+A identifica√ß√£o num√©rica do grupo √© denominada ID. Este valor deve ser
+√∫nico, a menos que a op√ß√£o \fB\-o\fR seja usada. O valor deve ser n√£o
+negativo, e o padr√£o √© o menor valor maior que 500 e o maior que qualquer
+outro grupo. Valores entre 0 e 999 s√£o tipicamente reservados para \fIcontas
 do sistema\fR.
 .IP \fB\-r\fR
 Este indicador instrui \fBgroupadd\fR a adicionar uma  \fIconta do sistema
-\fR. A primeira identificaÁ„o de grupo \fI(gid)\fR menor que 999 ser·
-automaticamente selecionada a menos que a opÁ„o \fB\-g\fR seja informada
-tambÈm.
+\fR. A primeira identifica√ß√£o de grupo \fI(gid)\fR menor que 999 ser√°
+automaticamente selecionada a menos que a op√ß√£o \fB\-g\fR seja informada
+tamb√©m.
 .BR
-Esta È uma informaÁ„o disponibilizada pela Red Hat Software.
+Esta √© uma informa√ß√£o disponibilizada pela Red Hat Software.
 .BR
-Esta opÁ„o tambÈm modifica o modo como a opÁ„o \fB\-g\fR funciona. Ao
-solicitar um \fIgid\fR que n„o seja ˙nico e ao n„o informar a opÁ„o
-\fB\-o\fR, a criaÁ„o do grupo , a criaÁ„o ter· o comportamento padr„o
-(adicionando um grupo como se as opÁıes \fB\-g\fR ou \fB\-o\fR \fBn„o\fR
+Esta op√ß√£o tamb√©m modifica o modo como a op√ß√£o \fB\-g\fR funciona. Ao
+solicitar um \fIgid\fR que n√£o seja √∫nico e ao n√£o informar a op√ß√£o
+\fB\-o\fR, a cria√ß√£o do grupo , a cria√ß√£o ter√° o comportamento padr√£o
+(adicionando um grupo como se as op√ß√µes \fB\-g\fR ou \fB\-o\fR \fBn√£o\fR
 fossem especificadas).
 .BR
 .SH ARQUIVOS
-\fI/etc/group\fR \- informaÁıes sobre o grupo
+\fI/etc/group\fR \- informa√ß√µes sobre o grupo
 .br
-\fI/etc/gshadow\fR \- informaÁıes seguras sobre o grupo
+\fI/etc/gshadow\fR \- informa√ß√µes seguras sobre o grupo
 .br
-.SH VEJA TAMB…M
+.SH VEJA TAMB√âM
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),
@@ -78,6 +78,6 @@ fossem especificadas).
 .BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jfh@tab.com)
-.SH TRADU«√O E REVIS√O PARA A LÕNGUA PORTUGUESA
-Sandro Nunes Henrique <sandro@conectiva.com.br> (traduÁ„o)
-Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br> (revis„o)
+.SH TRADU√á√ÉO E REVIS√ÉO PARA A L√çNGUA PORTUGUESA
+Sandro Nunes Henrique <sandro@conectiva.com.br> (tradu√ß√£o)
+Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br> (revis√£o)

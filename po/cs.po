@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.13\n"
+"Project-Id-Version: shadow 4.0.14\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
-"PO-Revision-Date: 2005-09-28 13:10+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
+"PO-Revision-Date: 2005-12-14 17:23+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -243,6 +243,10 @@ msgstr "Poslední změna hesla\t\t\t\t\t: "
 #, c-format
 msgid "never\n"
 msgstr "nikdy\n"
+
+#, c-format
+msgid "password must be changed"
+msgstr "heslo musí být změněno"
 
 #, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -554,8 +558,8 @@ msgstr ""
 "  -m, --maximum MAX\t\tnastaví maximální počet chybných přihlášení na MAX\n"
 "  -r, --reset\t\t\tvynuluje počitadlo chybných přihlášení\n"
 "  -t, --time DNŮ\t\tzobrazí záznamy faillogu novější než DNŮ\n"
-"  -u, --user LOGIN\t\tzobrazí záznamy faillogu nebo upraví počitadla\n"
-"\t\t\t\ta limity chybných přihlášení pouze pro uživatele LOGIN\n"
+"  -u, --user ÚČET\t\tzobrazí záznamy faillogu nebo upraví počitadla\n"
+"\t\t\t\ta limity chybných přihlášení pouze pro uživatele ÚČET\n"
 "\t\t\t\t(s volbami -r, -m nebo -l)\n"
 
 #, c-format
@@ -676,7 +680,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -945,10 +949,10 @@ msgstr ""
 "Použití: lastlog [volby]\n"
 "\n"
 "Volby:\n"
-"  -b, --before DNŮ \tzobrazí záznamy lastlogu starší než DNŮ\n"
+"  -b, --before DNŮ\tzobrazí záznamy lastlogu starší než DNŮ\n"
 "  -h, --help\t\tzobrazí tuto nápovědu a skončí\n"
 "  -t, --time DNŮ\tzobrazí záznamy lastlogu novější než DNŮ\n"
-"  -u, --user LOGIN\tzobrazí záznamy lastlogu pro uživatele LOGIN\n"
+"  -u, --user ÚČET\tzobrazí záznamy lastlogu pro uživatele ÚČET\n"
 
 #, c-format
 msgid "Username         Port     From             Latest\n"
@@ -1138,8 +1142,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1159,8 +1163,8 @@ msgstr ""
 "Použití: passwd [volby] [účet]\n"
 "\n"
 "Volby:\n"
-"  -a, --all \t\t\tvypíše stav hesel na všech účtech\n"
-"  -d, --delete \t\t\tpro zadaný účet smaže heslo\n"
+"  -a, --all\t\t\tvypíše stav hesel na všech účtech\n"
+"  -d, --delete\t\t\tpro zadaný účet smaže heslo\n"
 "  -e, --expire\t\t\tpro zadaný účet vynutí expiraci hesla\n"
 "  -h, --help\t\t\tzobrazí tuto nápovědu a skončí\n"
 "  -k, --keep-tokens\t\tzmění heslo pouze pokud mu vypršela\n"
@@ -1219,10 +1223,6 @@ msgstr "Lituji, ale heslo pro %s nelze ještě změnit.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: došla paměť\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: %s nelze spustit"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1345,6 +1345,29 @@ msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+"Použití: su [volby] [účet]\n"
+"\n"
+"Volby:\n"
+"  -h, --help\t\t\tzobrazí tuto nápovědu a skončí\n"
+"  -, -l, --login\t\tnastaví shell jako přihlašovací\n"
+"  -m, -p,\n"
+"  --preserve-environment\tzachová proměnné prostředí a ponechá\n"
+"\t\t\t\tsoučasný shell\n"
+"  -s, --shell SHELL\t\tmísto výchozího shellu definovaného\n"
+"\t\t\t\tv passwd použije SHELL\n"
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: musí být spuštěno z terminálu\n"
 
@@ -1360,8 +1383,8 @@ msgstr "Neznámé id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "Nejste oprávněn používat su %s\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Zadejte své heslo.)"
+msgid "(Enter your own password)"
+msgstr "(Zadejte své heslo)"
 
 #, c-format
 msgid ""
@@ -1445,7 +1468,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1471,7 +1494,7 @@ msgstr ""
 "  -G, --groups SKUPINY\t\tseznam dodatečných skupin, do kterých\n"
 "\t\t\t\tmá nový účet patřit\n"
 "  -h, --help\t\t\tzobrazí tuto nápovědu a skončí\n"
-"  -k, --skel VZOR_ADR \t\tzadá alternativní vzorový adresář\n"
+"  -k, --skel VZOR_ADR\t\tzadá alternativní vzorový adresář\n"
 "  -K, --key KLÍČ=HODNOTA\tpřebije výchozí nastavení /etc/login.defs\n"
 "  -m, --create-home\t\tvytvoří domovský adresář pro nový\n"
 "\t\t\t\tuživatelský účet\n"
@@ -1481,22 +1504,6 @@ msgstr ""
 "\t\t\t\theslo\n"
 "  -s, --shell SHELL\t\tpřihlašovací shell nového účtu\n"
 "  -u, --uid UID\t\t\tvynutí použití tohoto UID pro nový účet\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: chyba při zamykání souboru se skupinami\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: chyba při otevírání souboru se skupinami\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: chyba při zamykání souboru se stínovými hesly\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: chyba při otevírání souboru se stínovými hesly\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1567,6 +1574,22 @@ msgid "%s: cannot open shadow password file\n"
 msgstr "%s: soubor se stínovými hesly nelze otevřít\n"
 
 #, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: chyba při zamykání souboru se skupinami\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: chyba při otevírání souboru se skupinami\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: chyba při zamykání souboru se stínovými hesly\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: chyba při otevírání souboru se stínovými hesly\n"
+
+#, c-format
 msgid "%s: error adding new password entry\n"
 msgstr "%s: chyba při vytváření nové položky v souboru s hesly\n"
 
@@ -1617,9 +1640,11 @@ msgstr "Použití: %s [-r] jméno\n"
 msgid "%s: error updating group entry\n"
 msgstr "%s: položku souboru se skupinami nelze aktualizovat\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: primární skupinu uživatele nelze odstranit.\n"
+msgstr ""
+"%s: Nemohu odstranit skupinu %s, která je primární skupinou jiného "
+"uživatele.\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1666,20 +1691,51 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: chyba při mazání adresáře %s\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "Použití: %s [-u uid [-o]] [-g skupina [-G skupina,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d domácí adr. [-m]] [-s shell] [-c komentář] [-l nové jméno]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f vypnutí] [-e vypršení] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p heslo] [-L|-U] jméno\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
+"Použití: usermod [volby] účet\n"
+"\n"
+"Volby:\n"
+"  -a, --append SKUPINA\t\tpřidá uživatele do další SKUPINY\n"
+"  -c, --comment KOMENTÁŘ\tnová hodnota pole GECOS\n"
+"  -d, --home-dir DOMOV_ADR\tnový domovský adresář uživatele\n"
+"  -e, --expiredate EXP_DATUM\tnastaví vypršení platnosti účtu na EXP_DATUM\n"
+"  -f, --inactive NEAKTIV\tzablokuje účet po NEAKTIV dnech od vypršení\n"
+"  -g, --gid SKUPINA\t\tvynutí novou primární SKUPINU\n"
+"  -G, --groups SKUPINY\t\tseznam dodatečných skupin, do kterých\n"
+"\t\t\t\tmá účet patřit\n"
+"  -h, --help\t\t\tzobrazí tuto nápovědu a skončí\n"
+"  -l, --login ÚČET\t\tnová hodnota přihlašovacího jména\n"
+"  -L, --lock\t\t\tzamkne uživatelský účet\n"
+"  -m, --move-home\t\tpřesune obsah původního domovského adresáře\n"
+"\t\t\t\t do nového umístění (používejte pouze s -d)\n"
+"  -o, --non-unique\t\tpovolí vytvoření uživatele s duplicitním\n"
+"\t\t\t\t(nejedinečným) UID\n"
+"  -p, --password HESLO\t\tpoužije nové zašifrované heslo\n"
+"  -s, --shell SHELL\t\tnový přihlašovací shell uživatele\n"
+"  -u, --uid UID\t\t\tnové UID pro uživatelský účet\n"
+"  -U, --unlock\t\t\todemkne uživatelský účet\n"
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1749,6 +1805,26 @@ msgstr "chyba při přejmenovávání poštovní schránky"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+"Použití: vipw [volby]\n"
+"\n"
+"Volby:\n"
+"  -g, --group\t\t\tupraví databázi skupin\n"
+"  -h, --help\t\t\tzobrazí tuto nápovědu a skončí\n"
+"  -p, --passwd\t\t\tupraví databázi hesel\n"
+"  -q, --quiet\t\t\ttichý režim\n"
+"  -s, --shadow\t\t\tupraví databázi shadow nebo gshadow\n"
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1764,16 +1840,3 @@ msgstr "Zálohování nelze provést."
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s nelze obnovit: %s (změny jsou v %s)\n"
-
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Použití:\n"
-"`vipw' edituje /etc/passwd        `vipw -s' edituje /etc/shadow\n"
-"`vigr' edituje /etc/group         `vigr -s' edituje /etc/gshadow\n"
-
-#~ msgid "%s: PAM chauthtok failed\n"
-#~ msgstr "%s: PAM chauthtok selhal\n"

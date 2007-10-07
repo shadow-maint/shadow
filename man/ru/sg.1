@@ -1,0 +1,56 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "sg" "1" "11/10/2005" "Пользовательские команды" "Пользовательские команды"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+sg \- выполняет команду с правами другой группы
+.SH "СИНТАКСИС"
+.HP 3
+\fBsg\fR [\-] [group\ [\-c\ ]\ command]
+.SH "ОПИСАНИЕ"
+.PP
+Команда
+\fBsg\fR
+работает подобно команде
+\fBnewgrp\fR
+, но в качестве параметра ожидает команду. Команда будет выполнена оболочкой
+\fI/bin/sh\fR. В большинстве оболочек, откуда может запускаться
+\fBsg\fR
+, команду из нескольких слов нужно заключать в кавычки. Другим отличием между
+\fBnewgrp\fR
+и
+\fBsg\fR
+является то, что некоторые оболочки воспринимают
+\fBnewgrp\fR
+особенным образом, заменяя себя новым экземпляром оболочки, которую создаёт
+\fBnewgrp\fR. Этого не происходит для
+\fBsg\fR, поэтому после завершения работы команды
+\fBsg\fR
+, вы возвращаетесь в предыдующую группу.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/passwd\fR
+содержит информацию о пользователях
+.TP
+\fI/etc/shadow\fR
+содержит защищаемую информацию о пользователях
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группах
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBid\fR(1),
+\fBlogin\fR(1),
+\fBnewgrp\fR(1),
+\fBsu\fR(1),
+\fBgpasswd\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)

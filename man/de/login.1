@@ -1,9 +1,9 @@
 .\" Copyleft (C) 2003 Josef Spillner <josef@ggzgamingzone.org>
-.\" Übersetzung der englischen Version von Julianne Frances Haugh
-.\" Ersatz für die originale Version von:
+.\" Ãœbersetzung der englischen Version von Julianne Frances Haugh
+.\" Ersatz fÃ¼r die originale Version von:
 .\" Copyright 1993 Sebastian Hetze und Peter Orbaek.
 .\"
-.\" Veröffentlicht unter der GNU General Public License (GPL).
+.\" VerÃ¶ffentlicht unter der GNU General Public License (GPL).
 .\"
 .TH LOGIN 1
 .SH BEZEICHNUNG
@@ -19,76 +19,76 @@ login \- startet eine Sitzung auf dem System
 wird verwendet, um eine neue Sitzung auf dem System zu starten.
 Es wird normalerweise automatisch als Antwort auf den Prompt
 .I login:
-auf dem Terminal des Nutzers ausgeführt.
+auf dem Terminal des Nutzers ausgefÃ¼hrt.
 .B login
 kann von der Shell speziell behandelt werden und kann nicht als
 Subprozess gestartet werden.
 Typischerweise wird
 .B login
-von der Shell als \fBexec login\fR ausgeführt, so daß der Nutzer die
-aktuelle Shell verlassen muß.
-Der Versuch, von einer Shell außer der Login\-Shell \fBlogin\fR
-auszuführen, wird eine Fehlermeldung generieren.
+von der Shell als \fBexec login\fR ausgefÃ¼hrt, so daÃŸ der Nutzer die
+aktuelle Shell verlassen muÃŸ.
+Der Versuch, von einer Shell auÃŸer der Login\-Shell \fBlogin\fR
+auszufÃ¼hren, wird eine Fehlermeldung generieren.
 .PP
-Der Nutzer wird anschließend nach einem Kennwort gefragt, falls
-erforderlich. Dieses wird während der Eingabe nicht angezeigt.
-Es sind nur eine kleine Anzahl von Login\-Fehlern möglich,
+Der Nutzer wird anschlieÃŸend nach einem Kennwort gefragt, falls
+erforderlich. Dieses wird wÃ¤hrend der Eingabe nicht angezeigt.
+Es sind nur eine kleine Anzahl von Login\-Fehlern mÃ¶glich,
 falls \fBlogin\fR abbricht und die Kommunikation getrennt wird.
 .PP
-Falls die Kennwortalterung für ein Konto aktiviert wurde,
-kann es sein, daß der Nutzer vor der weiteren Nutzung nach
+Falls die Kennwortalterung fÃ¼r ein Konto aktiviert wurde,
+kann es sein, daÃŸ der Nutzer vor der weiteren Nutzung nach
 einem neuen Kennwort gefragt wird. Das alte und das neue Kennwort
-müssen angegeben werden, bevor fortgefahren werden kann.
+mÃ¼ssen angegeben werden, bevor fortgefahren werden kann.
 In der Dokumentation zu \fBpasswd\fR(1) finden sich weitere
 Informationen.
 .PP
 Nach einem erfolgreichen Login werdem dem Nutzer Systemmeldungen
-präsentiert, sowie das Vorhandensein von Mails angezeigt.
+prÃ¤sentiert, sowie das Vorhandensein von Mails angezeigt.
 Die Anzeige der systemweiten Nachrichtendatei \fI/etc/motd\fR kann
-unterdrückt werden, wenn im Loginverzeichnis eine leere Datei
+unterdrÃ¼ckt werden, wenn im Loginverzeichnis eine leere Datei
 \fI.hushlogin\fR angelegt wird.
 Die Mailnachricht ist entweder "\fBSie haben neue Mails.\fR",
 "\fBSie haben Mails.\fR", oder "\fBKeine Mails.\fR", je nach
 Zustandes der Mailbox des Nutzers.
 .PP
-Die Nutzer\- und Gruppen\-IDs werden gemäß den Werten in der Datei
+Die Nutzer\- und Gruppen\-IDs werden gemÃ¤ÃŸ den Werten in der Datei
 \fI/etc/passwd\fR gesetzt.
-Die Werte für \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR
-und \fB$MAIL\fR werden ebenfalls entsprechend der Einträge in dem
+Die Werte fÃ¼r \fB$HOME\fR, \fB$SHELL\fR, \fB$PATH\fR, \fB$LOGNAME\fR
+und \fB$MAIL\fR werden ebenfalls entsprechend der EintrÃ¤ge in dem
 Kennworteintrag gesetzt.
-Werte für ulimit, umask und nice können ebenfalls gemäß Werten im
+Werte fÃ¼r ulimit, umask und nice kÃ¶nnen ebenfalls gemÃ¤ÃŸ Werten im
 GECOS\-Feld eingestellt werden.
 .PP
 Auf einigen Installationen wird die Umgebungsvariable \fB$TERM\fR
 entsprechend dem Typ des Ausgabeterminals gesetzt, so wie in
 \fI/etc/ttytype\fR angegeben.
 .PP
-Ein Initialisierungsskript für den Kommandozeilen\-Interpreter
-kann auch ausgeführt werden. Dazu sehe man in den entsprechenden
+Ein Initialisierungsskript fÃ¼r den Kommandozeilen\-Interpreter
+kann auch ausgefÃ¼hrt werden. Dazu sehe man in den entsprechenden
 Manual\-Seiten nach.
 .PP
 Ein Subsystem\-Login wird durch das Vorhandensein eines "*" als erstem
 Buchstaben der Login\-Shell angezeigt. Das angegebene Heimatverzeichnis
 wird als Wurzel des neuen Dateisystems verwendet werden, in das
-der Nutzer tatsächlich eingeloggt ist.
+der Nutzer tatsÃ¤chlich eingeloggt ist.
 .SH OPTIONEN
 .TP
 .B \-f
-Keine Authentifizierung durchführen, Nutzer ist bereits angemeldet.
+Keine Authentifizierung durchfÃ¼hren, Nutzer ist bereits angemeldet.
 .TP
 .B \-h
-Name des entfernten Rechners für das Login.
+Name des entfernten Rechners fÃ¼r das Login.
 .TP
 .B \-p
 Behalte die Umgebungseinstellungen bei.
 .TP
 .B \-r
-Führ das Autologin\-Protokoll für rlogin aus.
+FÃ¼hr das Autologin\-Protokoll fÃ¼r rlogin aus.
 .PP
 Die Optionen \fB\-r\fP, \fB\-h\fP und \fB\-f\fP werden nur genutzt,
-wenn \fBlogin\fP als root ausgeführt wird.
+wenn \fBlogin\fP als root ausgefÃ¼hrt wird.
 .SH HINWEISE
-Diese Version von \fBlogin\fR hat viele Optionen für die Compilierung,
+Diese Version von \fBlogin\fR hat viele Optionen fÃ¼r die Compilierung,
 davon sind eventuell nur einige auf bestimmten Systemen in Gebrauch.
 .PP
 Der Ort der Konfigurationsdateien kann entsprechend der Systemkonfiguration
@@ -100,7 +100,7 @@ Sowohl
 .BR getty (8)
 als auch
 .BR init (8)
-sind dafür zuständig, die Eigentümerschaft einer Terminalsitzung aufzuräumen.
+sind dafÃ¼r zustÃ¤ndig, die EigentÃ¼merschaft einer Terminalsitzung aufzurÃ¤umen.
 Falls \fBlogin\fR ohne \fBexec\fR von der Shell genutzt wird, wird der Nutzer
 weiterhin in der Lage sein, eingeloggt zu erscheinen, obwohl er aus der
 Subsitzung ausgeloggt ist.
@@ -110,17 +110,17 @@ Subsitzung ausgeloggt ist.
 .br
 \fI/var/log/wtmp\fR		\- Liste der vorherigen Login\-Sitzungen
 .br
-\fI/etc/passwd\fR		\- Informationen über Nutzerkonten
+\fI/etc/passwd\fR		\- Informationen Ã¼ber Nutzerkonten
 .br
-\fI/etc/shadow\fR		\- Verschlüsselte Kennwörter und Alterungsinformationen
+\fI/etc/shadow\fR		\- VerschlÃ¼sselte KennwÃ¶rter und Alterungsinformationen
 .br
 \fI/etc/motd\fR			\- Systemnachricht\-Datei
 .br
-\fI/etc/nologin\fR		\- Verhindert, daß sich Nutzer außer dem Supernutzer einloggen
+\fI/etc/nologin\fR		\- Verhindert, daÃŸ sich Nutzer auÃŸer dem Supernutzer einloggen
 .br
 \fI/etc/ttytype\fR		\- Lister der Terminaltypen
 .br
-\fI$HOME/.hushlogin\fR	\- Unterdrückt die Ausgabe der Systemnachricht
+\fI$HOME/.hushlogin\fR	\- UnterdrÃ¼ckt die Ausgabe der Systemnachricht
 .SH "SIEHE AUCH"
 .BR mail (1),
 .BR passwd (1),
@@ -133,4 +133,4 @@ Subsitzung ausgeloggt ist.
 .SH AUTOR
 Julianne Frances Haugh <jockgrrl@ix.netcom.com>
 .br
-Deutsche Übersetzung von Josef Spillner <josef@ggzgamingzone.org>
+Deutsche Ãœbersetzung von Josef Spillner <josef@ggzgamingzone.org>

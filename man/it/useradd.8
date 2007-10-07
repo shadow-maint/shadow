@@ -1,4 +1,7 @@
-.\" Copyright 1991 \- 1994, Julianne Frances Haugh
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: useradd.8,v 1.9 2005/12/01 20:38:26 kloczek Exp $
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -24,175 +27,140 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: useradd.8,v 1.7 2005/04/05 19:08:54 kloczek Exp $
-.\"
-.\" Traduzione in italiano a cura di Isabella Ruocco <isacher@nettaxi.com>
-.\" luglio 1999
-.\" 
-.TH USERADD 8
+.TH USERADD 8   
 .SH NOME
-useradd \- Crea un nuovo utente o aggiorna le informazioni predefinite per
-i nuovi utenti
+useradd \- Crea un nuovo utente o aggiorna le informazioni predefinite per i 
+nuovi utenti
 .SH SINTASSI
 .TP 8
-.B useradd
-.\" .RB [ \-A
-.\" .RI { metodo | \fBPREDEFINITO\fR "},... ]"
-.RB [ \-c
-.IR commento ]
-.RB [ \-d
-.IR home_dir ]
+\fBuseradd\fP [\fB\-c\fP \fIcommento\fP] [\fB\-d\fP \fIhome_dir\fP]
 .br
-.RB [ \-e
-.IR data_scadenza ]
-.RB [ \-f
-.IR tempo_inattivit‡ ]
+[\fB\-e\fP \fIdata_scadenza\fP] [\fB\-f\fP \fItempo_inattivit√†\fP]
 .br
-.RB [ \-g
-.IR gruppo_iniziale ]
-.RB [ \-G
-.IR gruppo [,...]]
+[\fB\-g\fP \fIgruppo_iniziale\fP] [\fB\-G\fP \fIgruppo\fP[,...]]
 .br
-.RB [ \-m " [" \-k
-.IR dir_scheletro ]]
-.RB [ \-s
-.IR shell ]
+[\fB\-m\fP [\fB\-k\fP \fIdir_scheletro\fP]] [ \fB\-o\fP] [\fB\-p\fP \fIpassword\fP]
 .br
-.RB [ \-u
-.IR uid " ["
-.BR \-o ]]
-.I login
+[\fB\-s\fP \fIshell\fP] [\fB\-u\fP \fIuid\fP] \fIlogin\fP
 .TP 8
-.B useradd
-\fB\-D\fR
-[\fB\-g\fI gruppo_predefinito\fR]
-[\fB\-b\fI home_predefinita\fR]
+\fBuseradd\fP \fB\-D\fP [\fB\-g\fP\fIgruppo_predefinito\fP] [\fB\-b\fP\fIhome_predefinita\fP]
 .br
-[\fB\-f\fI inattivit‡_predefinita\fR]
-[\fB\-e\fI data_scadenza_predefinita\fR]
+[\fB\-e\fP\fI data_scadenza_predefinita\fP] [\fB\-f\fP\fI inattivit√†_predefinita\fP]
 .br
-[\fB\-s\fI shell_predefinita\fR]
+[\fB\-s\fP\fI shell_predefinita\fP]
 .SH DESCRIZIONE
-.SS Creare Nuovi Utenti
-Quando viene invocato senza l'opzione \fB\-D\fR, il comando \fBuseradd\fR 
-crea un nuovo account di utente usando i valori specificati sulla linea di
-comando ed i valori predefiniti dal sistema.
-Il nuovo account di utente verr‡ aggiunto ai file di sistema che lo necessitano,
-verr‡ creata la home directory, e lÏ verranno copiati i file iniziali, a seconda
-delle opzioni sulla linea di comando.
-.SH OPZIONI
-Le opzioni che si applicano al comando \fBuseradd\fR sono:
-.\" .IP "\fB\-A {\fImetodo\fR|\fBPREDEFINITO\fR},..."
-.\" Il valore del metodo di autenticazione dell'utente.
-.\" Il metodo di autenticazione Ë il nome di un programma che Ë responsabile
-.\" della validazione dell'identit‡ dell'utente.
-.\" La stringa \fBPREDEFINITO\fR puÚ essere usata per cambiare il metodo di
-.\" autenticazione dell'utente con il metodo standard di sistema delle
-.\" password.
-.\" Questa Ë una lista di nomi di programmi separati da virgole.
-.\" PuÚ includere \fBPREDEFINITO\fR esattamente una volta.
-.IP "\fB\-c \fIcommento\fR"
+.SS "Creare Nuovi Utenti"
+Quando viene invocato senza l'opzione \fB\-D\fP, il comando \fBuseradd\fP crea un 
+nuovo account di utente usando i valori specificati sulla linea di comando 
+ed i valori predefiniti dal sistema.  Il nuovo account di utente verr√† 
+aggiunto ai file di sistema che lo necessitano, verr√† creata la home 
+directory, e l√¨ verranno copiati i file iniziali, a seconda delle opzioni 
+sulla linea di comando.  Le opzioni che si applicano al comando \fBuseradd\fP 
+sono
+.IP "\fB\-c \fP\fIcommento\fP"
 Il campo commento del nuovo utente nel file password.
-.IP "\fB\-d \fIhome_dir\fR"
-Il nuovo utente verr‡ creato usando \fIhome_dir\fR come valore per la
-directory di login dell'utente.
-Il comportamento predefinito Ë di appendere il nome \fIlogin\fR a
-\fIhome_predefinita\fR  ed usare quella come nome di directory di login.
-.IP "\fB\-e \fIdata_scadenza\fR"
-La data in cui verr‡ disabilitato l'account dell'utente.
-La data Ë specificata nel formato \fIMM/GG/AA\fR.
-.IP "\fB\-f \fIgiorni_inattivit‡\fR"
-Il numero di giorni dopo la scadenza della password fino a quando l'account
-verr‡ permanentemente disabilitato.
-Un valore pari a 0 disabilita l'account non appena Ë scaduta la password,
-ed un valore pari a \-1 disabilita questa caratteristica.
-Il valore predefinito Ë \-1.
-.IP "\fB\-g \fIgruppo_iniziale\fR"
-IL nome o numero del gruppo iniziale di login dell'utente.
-Il nome del gruppo deve esistere. Un numero di gruppo deve fare riferimento
-ad un gruppo gi‡ esistente.
-Il numero di gruppo predefinito Ë 1.
-.IP "\fB\-G \fIgruppo,[...]\fR"
-Una lista di gruppi supplementari di cui l'utente Ë altresÏ membro.
-Ciascun gruppo Ë separato dal successivo da una virgola, senza spazi
-bianchi intermedi.
-I gruppi sono soggetti alle stesse restrizioni del gruppo dato con
-l'opzione \fB\-g\fR.
-Il comportamento predefinito Ë che l'utente appartenga solo al gruppo
-iniziale.
-.IP \fB\-m\fR
-La home directory dell'utente verr‡ creata se non esiste.
-I file contenuti in \fIdir_scheletro\fR saranno copiati nella home directory
-se viene usata l'opzione \fB\-k\fR, altrimenti verranno usati i file
-contenuti in \fI/etc/skel\fR.
-Anche tutte le directory contenute in \fIdir_scheletro\fR o \fI/etc/skel\fR
-verranno create nella home directory dell'utente.
-L'opzione \fB\-k\fR Ë valida solo in congiunzione con l'opzione \fB\-m\fR.
-Il comportamento predefinito Ë di non creare la directory e di non copiarvi
-alcun file.
-.IP "\fB\-s \fIshell\fR"
-Il nome della shell di login dell'utente.
-Il comportamento predefinito Ë di lasciare vuoto questo campo, che fa sÏ che
-il sistema selezioni la shell di connessione predefinita.
-.IP "\fB\-u \fIuid\fR"
-Il valore numerico dell'ID dell'utente.
-Questo valore deve essere univoco, a meno che non venga usata l'opzione
-\fI\-o\fR.
-Il valore deve essere non\-negativo.
-Il comportamento predefinito Ë di usare il minimo valore di ID superiore a 999
-e superiore a quello di ogni altro utente.
-Valori tra 0 e 999 sono tipicamente riservati per account di sistema.
-.SS Cambiare i valori predefiniti
-Quando invocato con l'opzione \fB\-D\fR, \fBuseradd\fR o mostrer‡ i valori
-predefiniti correnti, oppure aggiorner‡ i valori predefiniti dalla linea
-di comando.
-Le opzioni valide sono
-.IP "\fB\-b \fIhome_predefinita\fR"
-Il prefisso del percorso per la home directory del nuovo utente.
-Il nome dell'utente verr‡ aggiunto alla fine di \fIhome_predefinita\fR
-per creare il nome della nuova directory se non viene usata l'opzione \fB\-d\fI
-quando si crea un nuovo account.
-.IP "\fB\-e \fIdata_scadenza_predefinita\fR"
-La data in cui l'account dell'utente verr‡ disabilitato.
-.IP "\fB\-f \fIinattivit‡_predefinita\fR"
-Il numero di giorni dopo la scadenza di una password prima che l'account
+.IP "\fB\-d \fP\fIhome_dir\fP"
+Il nuovo utente verr√† creato usando \fIhome_dir\fP come valore per la 
+directory di login dell'utente.  Il comportamento predefinito √® di 
+appendere il nome \fIlogin\fP a \fIhome_predefinita\fP ed usare quella come nome 
+di directory di login.
+.IP "\fB\-e \fP\fIdata_scadenza\fP"
+La data in cui l'account dell'utente verr√† disabilitato.  La data √® 
+specificata nel formato \fIMM/GG/AA\fP.
+.IP "\fB\-f \fP\fIgiorni_inattivit√†\fP"
+Il numero di giorni dopo la scadenza della password prima che l'account 
+verr√† permanentemente disabilitato.  Un valore pari a 0 disabilita 
+l'account non appena la password √® scaduta, ed un valore pari a \-1 
+disabilita questa caratteristica.  Il valore predefinito √® \-1.
+.IP "\fB\-g \fP\fIgruppo_iniziale\fP"
+IL nome o numero del gruppo iniziale di login dell'utente.  Il nome del 
+gruppo deve esistere. Un numero di gruppo deve fare riferimento ad un gruppo 
+gi√† esistente.  Il numero di gruppo predefinito √® 1.
+.IP "\fB\-G \fP\fIgruppo,[...]\fP"
+Una lista di gruppi supplementari di cui l'utente √® altres√¨ membro.  
+Ciascun gruppo √® separato dal successivo da una virgola, senza spazi 
+bianchi intermedi.  I gruppi sono soggetti alle stesse restrizioni del 
+gruppo dato con l'opzione \fB\-g\fP.  Il comportamento predefinito √® che 
+l'utente appartenga solo al gruppo iniziale.
+.IP \fB\-m\fP
+La home directory dell'utente verr√† creata se non esiste.  I file contenuti 
+in \fIdir_scheletro\fP saranno copiati nella home directory se viene usata 
+l'opzione \fB\-k\fP, altrimenti verranno usati i file contenuti in 
+\fI/etc/skel\fP.  Anche tutte le directory contenute in \fIdir_scheletro\fP o 
+\fI/etc/skel\fP verranno create nella home directory dell'utente.  L'opzione 
+\fB\-k\fP √® valida solo in congiunzione con l'opzione \fB\-m\fP.  Il comportamento 
+predefinito √® di non creare la directory e di non copiarvi alcun file.
+.IP \fB\-o\fP
+Allow create user with duplicate (non\-unique) UID.
+.IP "\fB\-p \fP\fIpasswd\fP"
+The encrypted password, as returned by \fBcrypt\fP(3).  The default is to 
+disable the account.
+.IP "\fB\-s \fP\fIshell\fP"
+Il nome della shell di login dell'utente.  Il comportamento predefinito √® 
+di lasciare vuoto questo campo, che fa s√¨ che il sistema selezioni la shell 
+di connessione predefinita.
+.IP "\fB\-u \fP\fIuid\fP"
+Il valore numerico dell'ID dell'utente.  Questo valore deve essere univoco, 
+a meno che non venga usata l'opzione \fI\-o\fP.  Il valore deve essere 
+non\-negativo.  Il comportamento predefinito √® di usare il minimo valore di 
+ID superiore a 99 e superiore a quello di ogni altro utente.  Valori tra 0 e 
+99 sono tipicamente riservati per account di sistema.
+.SS "Cambiare i valori predefiniti"
+Quando invocato con l'opzione \fB\-D\fP, \fBuseradd\fP o mostrer√† i valori 
+predefiniti correnti, oppure aggiorner√† i valori predefiniti dalla linea di 
+comando.  Le opzioni valide sono
+.IP "\fB\-b \fP\fIhome_predefinita\fP"
+Il prefisso del percorso per la home directory del nuovo utente.  Il nome 
+dell'utente verr√† aggiunto alla fine di \fIhome_predefinita\fP per creare il 
+nome della nuova directory se non viene usata l'opzione \fB\-d\fP\fI quando si 
+crea un nuovo account.\fP
+.IP "\fB\-e \fP\fIdata_scadenza_predefinita\fP"
+La data in cui l'account dell'utente verr√† disabilitato.
+.IP "\fB\-f \fP\fIinattivit√†_predefinita\fP"
+Il numero di giorni dopo la scadenza di una password prima che l'account 
 venga disabilitato.
-.IP "\fB\-g \fIgruppo_predefinito\fR"
-Il nome o ID del gruppo iniziale per un nuovo utente.
-Il gruppo nominato deve esistere, ed un ID numerico di gruppo deve avere una
-voce esistente.
-.IP "\fB\-s \fIshell_predifinita\fR"
-Il nome della shell di login per un nuovo utente.
-Il programma nominato verr‡ usato per tutti gli account dei futuri nuovi
-utenti.
+.IP "\fB\-g \fP\fIgruppo_predefinito\fP"
+Il nome o ID del gruppo iniziale per un nuovo utente.  Il gruppo nominato 
+deve esistere, ed un ID numerico di gruppo deve avere una voce esistente.
+.IP "\fB\-s \fP\fIshell_predifinita\fP"
+Il nome della shell di login per un nuovo utente.  Il programma nominato 
+verr√† usato per tutti gli account dei futuri nuovi utenti.
 .PP
-Se non Ë specificata alcuna opzione, \fBuseradd\fR mostra i valori predefiniti
+Se non √® specificata alcuna opzione, \fBuseradd\fP mostra i valori predefiniti 
 correnti.
 .SH NOTE
-L'amministratore di sistema Ë responsabile del posizionamento dei file
-predefiniti degli utenti nella directory \fI/etc/skel\fR.
+L'amministratore di sistema √® responsabile del posizionamento dei file 
+predefiniti degli utenti nella directory \fI/etc/skel\fP.
 .SH CAVEAT
-Non Ë possibile aggiungere un utente ad un gruppo NIS.
-Questo deve essere fatto sul server NIS. 
+Non √® possibile aggiungere un utente ad un gruppo NIS.  Questo deve essere 
+fatto sul server NIS.
 .SH FILE
-\fI/etc/passwd\fR \- informazioni sugli account di utenti
+/etc/passwd \- informazioni sugli account utente
 .br
-\fI/etc/shadow\fR \- informazioni sicure sugli account di utenti
+/etc/shadow \- informazioni sicure sugli account di utenti
 .br
-\fI/etc/group\fR \- informazioni sui gruppi
+/etc/group \- informazioni sui gruppi
 .br
-\fI/etc/default/useradd\fR \- informazioni predefinite
+/etc/default/useradd \- informazioni predefinite
 .br
-\fI/etc/skel/ \fR\- directory contenente i file predefiniti
-.SH VEDERE ANCHE
-.BR chfn (1),
-.BR chsh (1),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR userdel (8),
-.BR usermod (8)
+/etc/skel \- directory contenente i file predefiniti
+.SH "VEDERE ANCHE"
+\fBchfn\fP(1), \fBchsh\fP(1), \fBgroupadd\fP(8), \fBgroupdel\fP(8), \fBgroupmod\fP(8), 
+\fBpasswd\fP(1), \fBuserdel\fP(8), \fBusermod\fP(8)
 .SH AUTORE
-Julianne Frances Haugh (jfh@tab.com)
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.\" Questa sezione si trova in un file separato che viene aggiunto
+.\" automaticamente alla pagina tradotta.
+.\" Per semplicit√† ho usato lo stesso file per tutte le traduzioni,
+.\" di conseguenza mischiando tutti i nomi dei traduttori: mi auguro
+.\" che non sia un problema per nessuno.
+.\"             -- Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.SH TRADUZIONE
+.nf
+Giovanni Bortolozzo <borto@dei.unipd.it>, 1996-1997
+Roberto Pertile <triplej@iol.it>, 1999
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+.fi
+.\" Conversione a PO4A:
+.\" Danilo Piazzalunga <danilopiazza@libero.it>, 2005

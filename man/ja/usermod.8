@@ -1,4 +1,4 @@
-.\" $Id: usermod.8,v 1.10 2005/04/05 19:08:55 kloczek Exp $
+.\" $Id: usermod.8,v 1.11 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -34,13 +34,13 @@
 .\"         by Kentaro Shirakata <argrath@ub32.org>
 .\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
-.\"WORD:        initial group           �祰�롼��
-.\"WORD:        supplementary group     ������롼��
+.\"WORD:        initial group           主グループ
+.\"WORD:        supplementary group     補助グループ
 .\"
 .TH USERMOD 8
-.SH ̾��
-usermod \- �桼����������Ȥ�������
-.SH ��
+.SH 名前
+usermod \- ユーザアカウントを修正する
+.SH 書式
 \fBusermod\fR [\fB\-c\fR \fIcomment\fR] [\fB\-d\fR \fIhome_dir\fR [\fB\-m\fR]]
 .br
 [\fB\-e\fR \fIexpire_date\fR] [\fB\-f\fR \fIinactive_time\fR]
@@ -51,87 +51,87 @@ usermod \- �桼����������Ȥ�������
 .br
 [\fB\-s\fR \fIshell\fR] [\fB\-u\fR \fIuid\fR [\fB\-o\fR]] [\fB\-L\fR|\fB\-U\fR]
 \fIlogin\fR
-.SH ����
-\fBusermod\fR ���ޥ�ɤϡ�
-���ޥ�ɥ饤���Ǥλ���ˤ�äơ�
-�����ƥॢ������ȥե�����������롣
-\fBusermod\fR ���ޥ�ɤ˻���Ǥ��륪�ץ����ϼ����̤ꡣ
+.SH 説明
+\fBusermod\fR コマンドは、
+コマンドライン上での指定によって、
+システムアカウントファイルを修正する。
+\fBusermod\fR コマンドに指定できるオプションは次の通り。
 .IP "\fB\-c\fR \fIcomment\fR"
-�ѥ���ɥե�����Υ����ȥե�����ɤ�Ϳ���뿷�����͡�
-�̾��
+パスワードファイルのコメントフィールドに与える新しい値。
+通常は
 .BR chfn (1)
-�桼�ƥ���ƥ��ˤ�ä��ѹ�����롣
+ユーティリティによって変更される。
 .IP "\fB\-d\fR \fIhome_dir\fR"
-��������������ǥ��쥯�ȥꡣ
-\fB\-m\fR ���ץ������Ѥ���ȡ�
-���ߤΥۡ���ǥ��쥯�ȥ����Ȥ��������ۡ���ǥ��쥯�ȥ�˰�ư�����
-(��Ԥ�¸�ߤ��ʤ����Ͽ����˺��������)��
+新しいログインディレクトリ。
+\fB\-m\fR オプションを用いると、
+現在のホームディレクトリの中身が新しいホームディレクトリに移動される
+(後者が存在しない場合は新たに作成される)。
 .IP "\fB\-e\fR \fIexpire_date\fR"
-���Υ桼����������Ȥ�������ǽ�ˤʤ����ա�
-���դ� \fIYYYY\-MM\-DD\fR �Ȥ����񼰤ǻ��ꤹ�롣
+そのユーザアカウントが使用不能になる日付。
+日付は \fIYYYY\-MM\-DD\fR という書式で指定する。
 .IP "\fB\-f\fR \fIinactive_days\fR"
-�ѥ���ɤλ��Ѵ��¤��ڤ�Ƥ��饢������Ȥ��ʵפ˻�����ǽ�ˤʤ�ޤǤ�������
-0 �ˤ���ȡ�
-�ѥ���ɤδ��¤��ڤ���Ʊ���ˤ��Υ�������Ȥϻ�����ǽ�ˤʤ롣
-\-1 �ˤ���Ȥ��ε�ǽ��̵���ˤʤ롣�ǥե�����ͤ� \-1��
+パスワードの使用期限が切れてからアカウントが永久に使用不能になるまでの日数。
+0 にすると、
+パスワードの期限が切れると同時にこのアカウントは使用不能になる。
+\-1 にするとこの機能が無効になる。デフォルト値は \-1。
 .IP "\fB\-g\fR \fIinitial_group\fR"
 
-�����ˤ��Υ桼���Υ��������������롼�פȤ��륰�롼��̾�ޤ��� ID��
-���롼��̾�ϴ���¸�ߤ��Ƥ��ʤ���Фʤ�ʤ���
-���롼���ֹ�ϴ�¸�Υ��롼�פ򻲾Ȥ��Ƥ��ʤ���Фʤ�ʤ���
-�ǥե���ȤΥ��롼���ֹ�� 1��
+新たにそのユーザのログイン時初期グループとするグループ名または ID。
+グループ名は既に存在していなければならない。
+グループ番号は既存のグループを参照していなければならない。
+デフォルトのグループ番号は 1。
 .IP "\fB\-G\fR \fIgroup,[...]\fR"
-�桼����°����������롼�� (supplementary groups) �Υꥹ�ȡ�
-���롼�פϥ���ޤǶ��ڤꡢ�֤˶���ʸ��������ƤϤʤ�ʤ���
-����Ǥ��륰�롼�פˤ� \fB\-g\fR ���ץ�����Ʊ�ͤ����¤����롣
-���ߤ��Υ桼������
-�������ꥹ�Ȥˤʤ����롼�פΥ��С��ˤʤäƤ�����ϡ�
-���Υ��롼�פ���������롣
+ユーザが属する補助グループ (supplementary groups) のリスト。
+グループはコンマで区切り、間に空白文字を入れてはならない。
+指定できるグループには \fB\-g\fR オプションと同様の制限がある。
+現在そのユーザが、
+新しいリストにないグループのメンバーになっている場合は、
+そのグループから削除される。
 .IP "\fB\-l\fR \fIlogin_name\fR"
-�桼���Υ�������̾�� \fIlogin\fR ���� \fIlogin_name\fR ���ѹ����롣
-¾�ϲ����ѹ����ʤ��Τǡ�
-�����餯��������������̾�˹�碌��
-�ۡ���ǥ��쥯�ȥ��̾�����ѹ�����ɬ�פ������������
+ユーザのログイン名を \fIlogin\fR から \fIlogin_name\fR に変更する。
+他は何も変更しないので、
+おそらく新しいログイン名に合わせて
+ホームディレクトリの名前を変更する必要があるだろう。
 .IP "\fB\-p\fR \fIpasswd\fR"                                                
-\fBcrypt\fR(3) ���֤��ͤǤ���Ź沽�ѥ���ɡ�
+\fBcrypt\fR(3) の返り値である暗号化パスワード。
 .IP "\fB\-s\fR \fIshell\fR"
-�桼���ο������������󥷥����̾����
-���Υե�����ɤ����ˤ������ϡ�
-�����ƥब�ǥե���ȤΥ������󥷥�������򤹤롣
+ユーザの新しいログインシェルの名前。
+このフィールドを空白にした場合は、
+システムがデフォルトのログインシェルを選択する。
 .IP "\fB\-u\fR \fIuid\fR"
-�桼���� ID �ֹ档
-�����ͤϡ�\fB\-o\fR ���ץ������Ѥ�����������¾�Ƚ�ʣ���ƤϤʤ�ʤ���
-�ޤ������ͤǤʤ��ƤϤʤ�ʤ���
-0 ���� 999 �ޤǤ��ͤϡ��̾亮���ƥॢ��������Ѥ�ͽ�󤵤�Ƥ��롣
-�ۡ���ǥ��쥯�ȥ�ʲ��Ρ�
-���Υ桼����ͭ�Τ��٤ƤΥե�����Υ桼�� ID �ϡ�
-��ưŪ�˿������ͤ��ѹ�����롣
-�ۡ���ǥ��쥯�ȥ�ʲ��ˤʤ��ե�����ϼ��Ȥ��ѹ����ʤ���Фʤ�ʤ���
+ユーザの ID 番号。
+この値は、\fB\-o\fR オプションを用いる場合を除き、他と重複してはならない。
+また非負値でなくてはならない。
+0 から 999 までの値は、通常システムアカウント用に予約されている。
+ホームディレクトリ以下の、
+そのユーザ所有のすべてのファイルのユーザ ID は、
+自動的に新しい値に変更される。
+ホームディレクトリ以下にないファイルは手作業で変更しなければならない。
 .IP "\fB\-L\fR"
-�桼���Υѥ���ɤ���å����롣
-����ϰŹ沽���줿�ѥ���ɤ����� '!' ���ɲä���
-�¼�Ū�˥ѥ���ɤ�̵���ˤ��롣
-���Υ��ץ����� \fI\-p\fR �� \fI\-U\fR ��Ʊ�����Ѥ��뤳�ȤϤǤ��ʤ���
+ユーザのパスワードをロックする。
+これは暗号化されたパスワードの前に '!' を追加し、
+実質的にパスワードを無効にする。
+このオプションを \fI\-p\fR や \fI\-U\fR と同時に用いることはできない。
 .IP "\fB\-U\fR"
-�桼���Υѥ���ɤ򥢥���å����롣
-����ϰŹ沽���줿�ѥ���ɤ���Ƭ�� '!' ���������
-���Υ��ץ����� \fI\-p\fR �� \fI\-L\fR ��Ʊ�����Ѥ��뤳�ȤϤǤ��ʤ���
-.SH �ٹ�
+ユーザのパスワードをアンロックする。
+これは暗号化されたパスワードの先頭の '!' を取り除く。
+このオプションを \fI\-p\fR や \fI\-L\fR と同時に用いることはできない。
+.SH 警告
 \fBusermod\fR
-�ϸ��ߥ������󤷤Ƥ���桼����̾�����ѹ��Ǥ��ʤ���
-���Υ��ޥ�ɤ���Ѥ��ƥ桼���� ID �ֹ���ѹ�����ݤˤϡ�
-���ꤷ���桼���Υץ���������Ĥ�¹Ԥ���Ƥ��ʤ����Ȥ�
-�����˳�ǧ���ʤ���Фʤ�ʤ���
-crontab �ե�����ν�ͭ�Ԥϼ��Ȥ��ѹ����ʤ���Фʤ�ʤ���
-at ����֤ν�ͭ�Ԥϼ��Ȥ��ѹ����ʤ���Фʤ�ʤ���
-NIS �˴ؤ����Ȥ� NIS �����о�ǹԤʤ�ʤ���Фʤ�ʤ���
-.SH �ե�����
-\fI/etc/passwd\fR \- �桼����������Ⱦ���
+は現在ログインしているユーザの名前を変更できない。
+このコマンドを使用してユーザの ID 番号を変更する際には、
+指定したユーザのプロセスが一つも実行されていないことを
+事前に確認しなければならない。
+crontab ファイルの所有者は手作業で変更しなければならない。
+at ジョブの所有者は手作業で変更しなければならない。
+NIS に関する作業は NIS サーバ上で行なわなければならない。
+.SH ファイル
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-\fI/etc/shadow\fR \- �����ʥ桼����������Ⱦ���
+\fI/etc/shadow\fR \- 安全なユーザアカウント情報
 .br
-\fI/etc/group\fR \ \- ���롼�׾���
-.SH ��Ϣ����
+\fI/etc/group\fR \ \- グループ情報
+.SH 関連項目
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),
@@ -141,5 +141,5 @@ NIS �˴ؤ����Ȥ� NIS �����о�ǹԤʤ�ʤ���Фʤ�ʤ���
 .BR groupmod (8),
 .BR useradd (8),
 .BR userdel (8)
-.SH ����
+.SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

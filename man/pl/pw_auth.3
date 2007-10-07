@@ -1,4 +1,4 @@
-.\" $Id: pw_auth.3,v 1.4 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: pw_auth.3,v 1.5 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,8 +27,8 @@
 .\" SUCH DAMAGE.
 .TH PWAUTH 3
 .SH NAZWA
-pwauth \- procedury uwierzytelniania hase³ zdefiniowane przez administratora
-.SH SK£ADNIA
+pwauth \- procedury uwierzytelniania haseÅ‚ zdefiniowane przez administratora
+.SH SKÅADNIA
 .B #include <pwauth.h>
 .PP
 .B int pw_auth (char
@@ -41,104 +41,104 @@ pwauth \- procedury uwierzytelniania hase³ zdefiniowane przez administratora
 .IB *input) ;
 .SH OPIS
 .B pw_auth
-wywo³uje funkcje zdefiniowane przez administratora dla danego u¿ytkownika.
+wywoÅ‚uje funkcje zdefiniowane przez administratora dla danego uÅ¼ytkownika.
 .PP
-\fIcommand\fR jest nazw± programu uwierzytelniania (autentykacji).
-Jest ona otrzymywana z informacji zawartej pliku hase³ u¿ytkowników.
-Odpowiedni ³añcuch (z pola has³a) zawiera jedn± lub wiêcej, rozdzielonych
-¶rednikami, nazw plików wykonywalnych.
-Programy zostan± wykonane w zadanej kolejno¶ci.
-Dla ka¿dej z przyczyn (reason) podanych ni¿ej podane s± argumenty wiersza
-poleceñ.
+\fIcommand\fR jest nazwÄ… programu uwierzytelniania (autentykacji).
+Jest ona otrzymywana z informacji zawartej pliku haseÅ‚ uÅ¼ytkownikÃ³w.
+Odpowiedni Å‚aÅ„cuch (z pola hasÅ‚a) zawiera jednÄ… lub wiÄ™cej, rozdzielonych
+Å›rednikami, nazw plikÃ³w wykonywalnych.
+Programy zostanÄ… wykonane w zadanej kolejnoÅ›ci.
+Dla kaÅ¼dej z przyczyn (reason) podanych niÅ¼ej podane sÄ… argumenty wiersza
+poleceÅ„.
 .PP
-\fIuser\fR jest nazw± sprawdzanego u¿ytkownika, w postaci podanej w pliku
+\fIuser\fR jest nazwÄ… sprawdzanego uÅ¼ytkownika, w postaci podanej w pliku
 \fI/etc/passwd\fR.
-Pozycje opisuj±ce u¿ytkowników indeksowane s± nazw± u¿ytkownika.
-Pozwala to na istnienie powtarzaj±cych siê identyfikatorów (UID). Ka¿da
-z ró¿nych nazw u¿ytkownika o tym samym identyfikatorze mo¿e
-posiadaæ inny program i informacjê autentykuj±c±.
+Pozycje opisujÄ…ce uÅ¼ytkownikÃ³w indeksowane sÄ… nazwÄ… uÅ¼ytkownika.
+Pozwala to na istnienie powtarzajÄ…cych siÄ™ identyfikatorÃ³w (UID). KaÅ¼da
+z rÃ³Å¼nych nazw uÅ¼ytkownika o tym samym identyfikatorze moÅ¼e
+posiadaÄ‡ inny program i informacjÄ™ autentykujÄ…cÄ….
 .PP
-Ka¿da z dopuszczalnych przyczyn autentykacji obs³ugiwana jest w potencjalnie
-ró¿ny sposób.
-Do komunikacji z u¿ytkownikiem dostêpne s± standardowe deskryptory plików
-0, 1 i 2, chyba ¿e wspomniano inaczej.
-Do ustalenia to¿samo¶ci u¿ytkownika wykonuj±cego ¿±danie uwierzytelnienia
-mo¿e zostaæ u¿yty rzeczywisty identyfikator.
-Przyczyna (\fIreason\fR) jest jedn± z
+KaÅ¼da z dopuszczalnych przyczyn autentykacji obsÅ‚ugiwana jest w potencjalnie
+rÃ³Å¼ny sposÃ³b.
+Do komunikacji z uÅ¼ytkownikiem dostÄ™pne sÄ… standardowe deskryptory plikÃ³w
+0, 1 i 2, chyba Å¼e wspomniano inaczej.
+Do ustalenia toÅ¼samoÅ›ci uÅ¼ytkownika wykonujÄ…cego Å¼Ä…danie uwierzytelnienia
+moÅ¼e zostaÄ‡ uÅ¼yty rzeczywisty identyfikator.
+Przyczyna (\fIreason\fR) jest jednÄ… z
 .IP \fBPW_SU\fR 1i
-Wykonaj uwierzytelnienie dla bie¿±cego rzeczywistego identyfikatora u¿ytkownika
-próbuj±c prze³±czyæ rzeczywisty ID na podanego u¿ytkownika.
-Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB\-s\fR poprzedzaj±c±
-nazwê u¿ytkownika.
+Wykonaj uwierzytelnienie dla bieÅ¼Ä…cego rzeczywistego identyfikatora uÅ¼ytkownika
+prÃ³bujÄ…c przeÅ‚Ä…czyÄ‡ rzeczywisty ID na podanego uÅ¼ytkownika.
+Program uwierzytelniajÄ…cy zostanie wywoÅ‚any z opcjÄ… \fB\-s\fR poprzedzajÄ…cÄ…
+nazwÄ™ uÅ¼ytkownika.
 .IP \fBPW_LOGIN\fR 1i
-Wykonaj uwierzytelnienie dla danego u¿ytkownika tworz±c now± sesjê pracy
-(loginow±). Program uwierzytelniaj±cy zostanie wywo³any z opcj± \fB\-l\fR,
-po której wyst±pi nazwa u¿ytkownika.
+Wykonaj uwierzytelnienie dla danego uÅ¼ytkownika tworzÄ…c nowÄ… sesjÄ™ pracy
+(loginowÄ…). Program uwierzytelniajÄ…cy zostanie wywoÅ‚any z opcjÄ… \fB\-l\fR,
+po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
 .IP \fBPW_ADD\fR 1i
-Utwórz nowy wpis dla danego u¿ytkownika.
+UtwÃ³rz nowy wpis dla danego uÅ¼ytkownika.
 Pozwala to programowi uwierzytelniania na zainicjowanie miejsca dla nowego
-u¿ytkownika.
-Program zostanie wywo³any z opcj± \fB\-a\fR, po której wyst±pi nazwa u¿ytkownika.
+uÅ¼ytkownika.
+Program zostanie wywoÅ‚any z opcjÄ… \fB\-a\fR, po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
 .IP \fBPW_CHANGE\fR 1i
-Zmieñ istniej±cy wpis dla danego u¿ytkownika.
-Pozwala to na programowi uwierzytelniaj±cemu na zmianê informacji autentykuj±cej
-dla istniej±cego u¿ytkownika.
-Program zostanie wywo³any z opcj± \fB\-c\fR poprzedzaj±c± nazwê u¿ytkownika.
+ZmieÅ„ istniejÄ…cy wpis dla danego uÅ¼ytkownika.
+Pozwala to na programowi uwierzytelniajÄ…cemu na zmianÄ™ informacji autentykujÄ…cej
+dla istniejÄ…cego uÅ¼ytkownika.
+Program zostanie wywoÅ‚any z opcjÄ… \fB\-c\fR poprzedzajÄ…cÄ… nazwÄ™ uÅ¼ytkownika.
 .IP \fBPW_DELETE\fR 1i
-Usuñ informacjê autentykuj±c± dla danego u¿ytkownika.
-Pozwala programowi uwierzytelniania na odzyskanie miejsca po u¿ytkowniku, który
-nie bêdzie ju¿ identyfikowany przy u¿yciu tego programu.
-Program uwierzytelniania zostanie wywo³any z opcj± \fB\-d\fR,
-po której wyst±pi nazwa u¿ytkownika.
+UsuÅ„ informacjÄ™ autentykujÄ…cÄ… dla danego uÅ¼ytkownika.
+Pozwala programowi uwierzytelniania na odzyskanie miejsca po uÅ¼ytkowniku, ktÃ³ry
+nie bÄ™dzie juÅ¼ identyfikowany przy uÅ¼yciu tego programu.
+Program uwierzytelniania zostanie wywoÅ‚any z opcjÄ… \fB\-d\fR,
+po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
 .IP \fBPW_TELNET\fR 1i
-Wykonaj uwierzytelnianie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+Wykonaj uwierzytelnianie uÅ¼ytkownika podÅ‚Ä…czajÄ…cego siÄ™ do systemu przy pomocy
 polecenia \fBtelnet\fR.
-Program zostanie wywo³any z opcj± \fB\-t\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywoÅ‚any z opcjÄ… \fB\-t\fR, po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
 .IP \fBPW_RLOGIN\fR 1i
-Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+Wykonaj uwierzytelnienie uÅ¼ytkownika podÅ‚Ä…czajÄ…cego siÄ™ do systemu przy pomocy
 polecenia \fBrlogin\fR.
-Program zostanie wywo³any z opcj± \fB\-r\fR, po której wyst±pi nazwa u¿ytkownika.
+Program zostanie wywoÅ‚any z opcjÄ… \fB\-r\fR, po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
 .IP \fBPW_FTP\fR 1i
-Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+Wykonaj uwierzytelnienie uÅ¼ytkownika podÅ‚Ä…czajÄ…cego siÄ™ do systemu przy pomocy
 polecenia \fBftp\fR.
-Program uwierzytelniania zostanie wywo³any z opcj± \fB\-f\fR,
-po której wyst±pi nazwa u¿ytkownika.
-Do komunikacji z u¿ytkownikiem NIE s± dostêpne standardowe deskryptory plików.
-Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,
-za¶ pozosta³e dwa deskryptory plików dostan± pod³±czone do \fI/dev/null\fR.
-Funkcja \fBpw_auth\fR bêdzie potokowaæ pojedynczy wiersz danych do programu
-uwierzytelniania pos³uguj±c siê deskryptorem 0.
+Program uwierzytelniania zostanie wywoÅ‚any z opcjÄ… \fB\-f\fR,
+po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
+Do komunikacji z uÅ¼ytkownikiem NIE sÄ… dostÄ™pne standardowe deskryptory plikÃ³w.
+Deskryptor standardowego wejÅ›cia zostanie podÅ‚Ä…czony do procesu macierzystego,
+zaÅ› pozostaÅ‚e dwa deskryptory plikÃ³w dostanÄ… podÅ‚Ä…czone do \fI/dev/null\fR.
+Funkcja \fBpw_auth\fR bÄ™dzie potokowaÄ‡ pojedynczy wiersz danych do programu
+uwierzytelniania posÅ‚ugujÄ…c siÄ™ deskryptorem 0.
 .IP \fBPW_REXEC\fR 1i
-Wykonaj uwierzytelnienie u¿ytkownika pod³±czaj±cego siê do systemu przy pomocy
+Wykonaj uwierzytelnienie uÅ¼ytkownika podÅ‚Ä…czajÄ…cego siÄ™ do systemu przy pomocy
 polecenia \fIrexec\fR.
-Program zostanie wywo³any z opcj± \fB\-x\fR, po której wyst±pi nazwa u¿ytkownika.
-Do komunikacji ze zdalnym u¿ytkownikiem NIE s± dostêpne standardowe
-deskryptory plików.
-Deskryptor standardowego wej¶cia zostanie pod³±czony do procesu macierzystego,
-za¶ pozosta³e dwa deskryptory plików dostan± pod³±czone do \fI/dev/null\fR.
-Funkcja \fBpw_auth\fR bêdzie potokowaæ pojedynczy wiersz danych do programu
-uwierzytelniania pos³uguj±c siê deskryptorem 0.
+Program zostanie wywoÅ‚any z opcjÄ… \fB\-x\fR, po ktÃ³rej wystÄ…pi nazwa uÅ¼ytkownika.
+Do komunikacji ze zdalnym uÅ¼ytkownikiem NIE sÄ… dostÄ™pne standardowe
+deskryptory plikÃ³w.
+Deskryptor standardowego wejÅ›cia zostanie podÅ‚Ä…czony do procesu macierzystego,
+zaÅ› pozostaÅ‚e dwa deskryptory plikÃ³w dostanÄ… podÅ‚Ä…czone do \fI/dev/null\fR.
+Funkcja \fBpw_auth\fR bÄ™dzie potokowaÄ‡ pojedynczy wiersz danych do programu
+uwierzytelniania posÅ‚ugujÄ…c siÄ™ deskryptorem 0.
 .PP
-Ostatni argument stanowi dane autentykacji, u¿ywane przez
+Ostatni argument stanowi dane autentykacji, uÅ¼ywane przez
 .B PW_FTP
 oraz
 .B PW_REXEC
 Jest on traktowany jak pojedynczy wiersz tekstu potokowany do programu
-uwierzytelniaj±cego.
+uwierzytelniajÄ…cego.
 Dla
 .B PW_CHANGE
-warto¶æ \fIinput\fR jest warto¶ci± poprzedniej nazwy u¿ytkownika,
-je¶li zmieniana jest nazwa.
+wartoÅ›Ä‡ \fIinput\fR jest wartoÅ›ciÄ… poprzedniej nazwy uÅ¼ytkownika,
+jeÅ›li zmieniana jest nazwa.
 .SH PRZESTROGI
 Funkcja ta nie tworzy faktycznej sesji.
-Wskazuje jedynie, czy u¿ytkownik powinien otrzymaæ zezwolenie na jej
+Wskazuje jedynie, czy uÅ¼ytkownik powinien otrzymaÄ‡ zezwolenie na jej
 utworzenie.
 .PP
-Obecnie opcje sieciowe nie s± jeszcze przetestowane.
+Obecnie opcje sieciowe nie sÄ… jeszcze przetestowane.
 .SH DIAGNOSTYKA
-Funkcja \fBpw_auth\fR zwraca 0 je¶li program uwierzytelniania zakoñczy³
-dzia³anie z zerowym kodem powrotu, w przeciwnym wypadku warto¶æ niezerow±.
-.SH ZOBACZ TAK¯E
+Funkcja \fBpw_auth\fR zwraca 0 jeÅ›li program uwierzytelniania zakoÅ„czyÅ‚
+dziaÅ‚anie z zerowym kodem powrotu, w przeciwnym wypadku wartoÅ›Ä‡ niezerowÄ….
+.SH ZOBACZ TAKÅ»E
 .BR login (1),
 .BR passwd (1),
 .BR su (1),

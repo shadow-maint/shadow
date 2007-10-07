@@ -1,4 +1,4 @@
-.\" $Id: passwd.1,v 1.15 2005/04/14 00:13:56 kloczek Exp $
+.\" $Id: passwd.1,v 1.16 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,128 +27,128 @@
 .\" SUCH DAMAGE.
 .TH PASSWD 1
 .SH NAZWA
-passwd \- zmiana has³a u¿ytkownika
-.SH SK£ADNIA
+passwd \- zmiana hasÅ‚a uÅ¼ytkownika
+.SH SKÅADNIA
 \fBpasswd\fR [\fB\-f\fR|\fB\-s\fR] [\fInazwa\fR]
 .br
 \fBpasswd\fR [\fB\-g\fR] [\fB\-r\fR|\fB\-R\fR] \fIgrupa\fR
 .br
 \fBpasswd\fR [\fB\-x\fR \fImax\fR] [\fB\-n\fR \fImin\fR]
-[\fB\-w\fR \fIostrze¿\fR] [\fB\-i\fR \fInieakt\fR] \fIlogin\fR
+[\fB\-w\fR \fIostrzeÅ¼\fR] [\fB\-i\fR \fInieakt\fR] \fIlogin\fR
 .br
 \fBpasswd\fR {\fB\-l\fR|\fB\-u\fR|\fB\-d\fR|\fB\-S\fR|\fB\-e\fR} \fIlogin\fR
 .SH OPIS
-\fBpasswd\fR zmienia has³a kont u¿ytkowników i grup.
-Zwyk³y u¿ytkownik mo¿e zmieniæ wy³±cznie has³o w³asnego konta, superu¿ytkownik
-mo¿e zmieniaæ has³a dowolnych kont.
-Administrator grupy mo¿e zmieniæ has³o tej grupy.
-\fBpasswd\fR zmienia tak¿e informacje o koncie, takie jak pe³na nazwa
-u¿ytkownika, jego pow³oka zg³oszeniowa (logowania) czy daty i interwa³y dotycz±ce
-wa¿no¶ci has³a.
+\fBpasswd\fR zmienia hasÅ‚a kont uÅ¼ytkownikÃ³w i grup.
+ZwykÅ‚y uÅ¼ytkownik moÅ¼e zmieniÄ‡ wyÅ‚Ä…cznie hasÅ‚o wÅ‚asnego konta, superuÅ¼ytkownik
+moÅ¼e zmieniaÄ‡ hasÅ‚a dowolnych kont.
+Administrator grupy moÅ¼e zmieniÄ‡ hasÅ‚o tej grupy.
+\fBpasswd\fR zmienia takÅ¼e informacje o koncie, takie jak peÅ‚na nazwa
+uÅ¼ytkownika, jego powÅ‚oka zgÅ‚oszeniowa (logowania) czy daty i interwaÅ‚y dotyczÄ…ce
+waÅ¼noÅ›ci hasÅ‚a.
 .PP
-U¿ycie opcji \fB\-s\fR powoduje wywo³anie przez \fBpasswd\fR programu \fBchsh\fR
-w celu zmiany pow³oki u¿ytkownika, u¿ycie opcji \fB\-f\fR powoduje wywo³anie
-przez passwd programu chfn w celu zmiany infirmacji o u¿ytkowniku. Te dwie opcje
-istniej± jedynie dla zgodno¶ci, gdy¿ wymienione programy mog± byæ wywo³ywane
-bezpo¶rednio.
-.SS Zmiany has³a
-Na pocz±tku u¿ytkownik pytany jest o stare, dotychczasowe has³o, je¶li takie
-istnieje. Has³o to jest kodowane i porównywane z przechowywanym has³em.
-U¿ytkownik ma tylko jedn± próbê na wprowadzenie poprawnego has³a.
-Superu¿ytkownikowi zezwala siê na pominiêcie tego kroku, aby mog³y byæ
-zmienione has³a, których zapomniano.
+UÅ¼ycie opcji \fB\-s\fR powoduje wywoÅ‚anie przez \fBpasswd\fR programu \fBchsh\fR
+w celu zmiany powÅ‚oki uÅ¼ytkownika, uÅ¼ycie opcji \fB\-f\fR powoduje wywoÅ‚anie
+przez passwd programu chfn w celu zmiany infirmacji o uÅ¼ytkowniku. Te dwie opcje
+istniejÄ… jedynie dla zgodnoÅ›ci, gdyÅ¼ wymienione programy mogÄ… byÄ‡ wywoÅ‚ywane
+bezpoÅ›rednio.
+.SS Zmiany hasÅ‚a
+Na poczÄ…tku uÅ¼ytkownik pytany jest o stare, dotychczasowe hasÅ‚o, jeÅ›li takie
+istnieje. HasÅ‚o to jest kodowane i porÃ³wnywane z przechowywanym hasÅ‚em.
+UÅ¼ytkownik ma tylko jednÄ… prÃ³bÄ™ na wprowadzenie poprawnego hasÅ‚a.
+SuperuÅ¼ytkownikowi zezwala siÄ™ na pominiÄ™cie tego kroku, aby mogÅ‚y byÄ‡
+zmienione hasÅ‚a, ktÃ³rych zapomniano.
 .PP
-Po wprowadzeniu has³a, sprawdzana jest informacja o jego wieku, by stwierdziæ
-czy u¿ytkownikowi wolno w danym czasie zmieniæ has³o.
-Je¿eli nie, to \fBpasswd\fR odmawia zmiany has³a i koñczy pracê.
+Po wprowadzeniu hasÅ‚a, sprawdzana jest informacja o jego wieku, by stwierdziÄ‡
+czy uÅ¼ytkownikowi wolno w danym czasie zmieniÄ‡ hasÅ‚o.
+JeÅ¼eli nie, to \fBpasswd\fR odmawia zmiany hasÅ‚a i koÅ„czy pracÄ™.
 .PP
-Nastêpnie u¿ytkownik proszony jest o nowe has³o, zastêpuj±ce dotychczasowe.
-Has³o podlega sprawdzeniu jego zawi³o¶ci. Jako ogóln± wskazówkê mo¿na podaæ,
-¿e has³a powinny sk³adaæ siê z 6 do 8 znaków, zawieraj±c po jednym lub wiêcej
-znaków z ka¿dej z poni¿szych kategorii:
+NastÄ™pnie uÅ¼ytkownik proszony jest o nowe hasÅ‚o, zastÄ™pujÄ…ce dotychczasowe.
+HasÅ‚o podlega sprawdzeniu jego zawiÅ‚oÅ›ci. Jako ogÃ³lnÄ… wskazÃ³wkÄ™ moÅ¼na podaÄ‡,
+Å¼e hasÅ‚a powinny skÅ‚adaÄ‡ siÄ™ z 6 do 8 znakÃ³w, zawierajÄ…c po jednym lub wiÄ™cej
+znakÃ³w z kaÅ¼dej z poniÅ¼szych kategorii:
 .IP "" .5i
-ma³e litery alfabetu
+maÅ‚e litery alfabetu
 .IP "" .5i
-du¿e litery alfabetu
+duÅ¼e litery alfabetu
 .IP "" .5i
 cyfry od 0 do 9
 .IP "" .5i
 znaki interpunkcyjne
 .PP
-Nale¿y uwa¿aæ, by nie u¿yæ domy¶lnych systemowych znaków akcji erase lub kill.
-\fBpasswd\fR odrzuci ka¿de niedostatecznie skomplikowane has³o.
+NaleÅ¼y uwaÅ¼aÄ‡, by nie uÅ¼yÄ‡ domyÅ›lnych systemowych znakÃ³w akcji erase lub kill.
+\fBpasswd\fR odrzuci kaÅ¼de niedostatecznie skomplikowane hasÅ‚o.
 .PP
-Je¶li has³o zostanie przyjête, to \fBpasswd\fR prosi o jego powtórzenie
-i porównuje drugi wpis z pierwszym.
-Oba wpisy musz± byæ takie same, by has³o zosta³o zmienione.
-.SS Has³a grup
-Je¿eli pos³u¿ono siê opcj± \fB\-g\fR, to zmieniane jest has³o podanej grupy.
-U¿ytkownik powinien byæ albo superu¿ytkownikiem albo administratorem tej grupy.
-Nie wystêpuje pytanie o bie¿±ce has³o grupy.
-Do usuwania bie¿±cego has³a danej grupy s³u¿y opcja \fB\-g\fR w po³±czeniu
-z \fB\-r\fR. Pozwala to na dostêp do grupy tylko jej cz³onkom.
-Opcja \fB\-R\fR w po³±czeniu z \fR\-g\fR ogranicza dostêp do grupy wszystkim
-u¿ytkownikom.
-.SS Informacja o wa¿no¶ci konta
-Superu¿ytkownik mo¿e zmieniaæ informacjê o wieku konta pos³uguj±c siê opcjami
+JeÅ›li hasÅ‚o zostanie przyjÄ™te, to \fBpasswd\fR prosi o jego powtÃ³rzenie
+i porÃ³wnuje drugi wpis z pierwszym.
+Oba wpisy muszÄ… byÄ‡ takie same, by hasÅ‚o zostaÅ‚o zmienione.
+.SS HasÅ‚a grup
+JeÅ¼eli posÅ‚uÅ¼ono siÄ™ opcjÄ… \fB\-g\fR, to zmieniane jest hasÅ‚o podanej grupy.
+UÅ¼ytkownik powinien byÄ‡ albo superuÅ¼ytkownikiem albo administratorem tej grupy.
+Nie wystÄ™puje pytanie o bieÅ¼Ä…ce hasÅ‚o grupy.
+Do usuwania bieÅ¼Ä…cego hasÅ‚a danej grupy sÅ‚uÅ¼y opcja \fB\-g\fR w poÅ‚Ä…czeniu
+z \fB\-r\fR. Pozwala to na dostÄ™p do grupy tylko jej czÅ‚onkom.
+Opcja \fB\-R\fR w poÅ‚Ä…czeniu z \fR\-g\fR ogranicza dostÄ™p do grupy wszystkim
+uÅ¼ytkownikom.
+.SS Informacja o waÅ¼noÅ›ci konta
+SuperuÅ¼ytkownik moÅ¼e zmieniaÄ‡ informacjÄ™ o wieku konta posÅ‚ugujÄ…c siÄ™ opcjami
 \fB\-x\fR, \fB\-n\fR, \fB\-w\fR oraz \fB\-i\fR.
-Opcja \fB\-x\fR s³u¿y do ustawiania maksymalnej liczby dni, przez jakie has³o
-pozostaje wa¿ne.
-Po up³ywie \fImax\fR dni, has³o musi byæ zmienione.
-Opcja \fB\-n\fR ustawia minimaln± liczbê dni, jakie musz± up³yn±æ zanim has³o
-bêdzie mog³o byæ zmienione.
-U¿ytkownik nie otrzyma zezwolenia na zmianê has³a przed up³ywem \fImin\fR dni.
-Opcja \fB\-w\fR s³u¿y do ustawienia liczby dni przed up³ywem terminu wa¿no¶ci
-has³a, przez które u¿ytkownik bêdzie otrzymywa³ ostrze¿enie mówi±ce mu, ile dni
-pozosta³o do tej daty. Ostrze¿enia zaczn± pojawiaæ siê \fIostrze¿\fR dni przed
-up³ywem wa¿no¶ci has³a.
-Opcja \fB\-i\fR (nieaktywno¶æ) s³u¿y do wy³±czania konta po up³ywie zadanej
-liczby dni po wyga¶niêciu has³a.
-Po up³ywie \fInieakt\fR dni od przeterminowania has³a u¿ytkownik nie mo¿e ju¿
-korzystaæ z konta.
+Opcja \fB\-x\fR sÅ‚uÅ¼y do ustawiania maksymalnej liczby dni, przez jakie hasÅ‚o
+pozostaje waÅ¼ne.
+Po upÅ‚ywie \fImax\fR dni, hasÅ‚o musi byÄ‡ zmienione.
+Opcja \fB\-n\fR ustawia minimalnÄ… liczbÄ™ dni, jakie muszÄ… upÅ‚ynÄ…Ä‡ zanim hasÅ‚o
+bÄ™dzie mogÅ‚o byÄ‡ zmienione.
+UÅ¼ytkownik nie otrzyma zezwolenia na zmianÄ™ hasÅ‚a przed upÅ‚ywem \fImin\fR dni.
+Opcja \fB\-w\fR sÅ‚uÅ¼y do ustawienia liczby dni przed upÅ‚ywem terminu waÅ¼noÅ›ci
+hasÅ‚a, przez ktÃ³re uÅ¼ytkownik bÄ™dzie otrzymywaÅ‚ ostrzeÅ¼enie mÃ³wiÄ…ce mu, ile dni
+pozostaÅ‚o do tej daty. OstrzeÅ¼enia zacznÄ… pojawiaÄ‡ siÄ™ \fIostrzeÅ¼\fR dni przed
+upÅ‚ywem waÅ¼noÅ›ci hasÅ‚a.
+Opcja \fB\-i\fR (nieaktywnoÅ›Ä‡) sÅ‚uÅ¼y do wyÅ‚Ä…czania konta po upÅ‚ywie zadanej
+liczby dni po wygaÅ›niÄ™ciu hasÅ‚a.
+Po upÅ‚ywie \fInieakt\fR dni od przeterminowania hasÅ‚a uÅ¼ytkownik nie moÅ¼e juÅ¼
+korzystaÄ‡ z konta.
 .PP
-Je¶li istnieje potrzeba natychmiastowego przeterminowania has³a dla danego
-konta, mo¿na pos³u¿yæ siê opcj± \fB\-e\fR. Spowoduje to zmuszenie u¿ytkownika
-do zmiany has³a przy najbli¿szym logowaniu. Za pomoc± opcji \fB\-d\fR mo¿na
-skasowaæ has³o u¿ytkownika (uczyniæ je pustym). Nale¿y zachowaæ szczególn±
-ostro¿no¶æ u¿ywaj±c tej opcji, gdy¿ mo¿e ona spowodowaæ, ¿e do zalogowania
-siê na konto nie bêdzie w ogóle potrzebne has³o, pozostawiaj±c system otwartym
-dla nieproszonych go¶ci.
+JeÅ›li istnieje potrzeba natychmiastowego przeterminowania hasÅ‚a dla danego
+konta, moÅ¼na posÅ‚uÅ¼yÄ‡ siÄ™ opcjÄ… \fB\-e\fR. Spowoduje to zmuszenie uÅ¼ytkownika
+do zmiany hasÅ‚a przy najbliÅ¼szym logowaniu. Za pomocÄ… opcji \fB\-d\fR moÅ¼na
+skasowaÄ‡ hasÅ‚o uÅ¼ytkownika (uczyniÄ‡ je pustym). NaleÅ¼y zachowaÄ‡ szczegÃ³lnÄ…
+ostroÅ¼noÅ›Ä‡ uÅ¼ywajÄ…c tej opcji, gdyÅ¼ moÅ¼e ona spowodowaÄ‡, Å¼e do zalogowania
+siÄ™ na konto nie bÄ™dzie w ogÃ³le potrzebne hasÅ‚o, pozostawiajÄ…c system otwartym
+dla nieproszonych goÅ›ci.
 .SS Utrzymywanie i konserwacja konta
-Konta u¿ytkowników mog± byæ blokowane i odblokowywane przy pomocy opcji
+Konta uÅ¼ytkownikÃ³w mogÄ… byÄ‡ blokowane i odblokowywane przy pomocy opcji
 \fB\-l\fR i \fB\-u\fR.
-Opcja \fB\-l\fR wy³±cza konto zmieniaj±c jego has³o na warto¶æ nieodpowiadaj±c±
-¿adnemu mo¿liwemu zakodowanemu has³u.
-Opcja \fB\-u\fR ponownie udostêpnia konto przywracaj±c uprzedni± warto¶æ has³a.
+Opcja \fB\-l\fR wyÅ‚Ä…cza konto zmieniajÄ…c jego hasÅ‚o na wartoÅ›Ä‡ nieodpowiadajÄ…cÄ…
+Å¼adnemu moÅ¼liwemu zakodowanemu hasÅ‚u.
+Opcja \fB\-u\fR ponownie udostÄ™pnia konto przywracajÄ…c uprzedniÄ… wartoÅ›Ä‡ hasÅ‚a.
 .PP
-Stan konta mo¿na uzyskaæ przy pomocy opcji \fB\-S\fR.
-Informacja o stanie sk³ada siê z 6 czê¶ci.
-Pierwsza wskazuje, czy konto u¿ytkownika jest zablokowane (L) (locked),
-nie posiada has³a (NP) (no password) lub ma funkcjonalne has³o (P) (password).
-Druga czê¶æ podaje datê ostatniej zmiany has³a.
-nastêpne cztery to minimalny wiek, maksymalny wiek, okres ostrzegania i okres
-nieaktywno¶ci has³a.
-.SS Podpowiedzi dotycz±ce hase³ u¿ytkownika
-Bezpieczeñstwo has³a zale¿y od si³y algorytmu koduj±cego oraz rozmiaru
-przestrzeni kluczy. Metoda kodowania u¿ywana w Systemie \fB\s\-2UNIX\s+2\fR
+Stan konta moÅ¼na uzyskaÄ‡ przy pomocy opcji \fB\-S\fR.
+Informacja o stanie skÅ‚ada siÄ™ z 6 czÄ™Å›ci.
+Pierwsza wskazuje, czy konto uÅ¼ytkownika jest zablokowane (L) (locked),
+nie posiada hasÅ‚a (NP) (no password) lub ma funkcjonalne hasÅ‚o (P) (password).
+Druga czÄ™Å›Ä‡ podaje datÄ™ ostatniej zmiany hasÅ‚a.
+nastÄ™pne cztery to minimalny wiek, maksymalny wiek, okres ostrzegania i okres
+nieaktywnoÅ›ci hasÅ‚a.
+.SS Podpowiedzi dotyczÄ…ce haseÅ‚ uÅ¼ytkownika
+BezpieczeÅ„stwo hasÅ‚a zaleÅ¼y od siÅ‚y algorytmu kodujÄ…cego oraz rozmiaru
+przestrzeni kluczy. Metoda kodowania uÅ¼ywana w Systemie \fB\s\-2UNIX\s+2\fR
 oparta jest o algorytm NBS DES i jest bardzo bezpieczna. Rozmiar przestrzeni
-kluczy zale¿y od losowo¶ci wybranego has³a.
+kluczy zaleÅ¼y od losowoÅ›ci wybranego hasÅ‚a.
 .PP
-Naruszenia bezpieczeñstwa hase³ wynikaj± zwykle z beztroski przy wyborze lub
-przechowywaniu has³a. Z tego powodu nie nale¿y wybieraæ has³a wystêpuj±cego
-w s³owniku ani takiego, które wymaga zanotowania. Has³o nie powinno te¿ byæ
-poprawn± nazw±, imieniem, nazwiskiem, numerem prawa jazdy, dat± urodzenia czy
-elementem adresu. Wszystkie z powy¿szych mog± byæ u¿yte do odgadniêcia has³a
-i naruszenia bezpieczeñstwa systemu.
+Naruszenia bezpieczeÅ„stwa haseÅ‚ wynikajÄ… zwykle z beztroski przy wyborze lub
+przechowywaniu hasÅ‚a. Z tego powodu nie naleÅ¼y wybieraÄ‡ hasÅ‚a wystÄ™pujÄ…cego
+w sÅ‚owniku ani takiego, ktÃ³re wymaga zanotowania. HasÅ‚o nie powinno teÅ¼ byÄ‡
+poprawnÄ… nazwÄ…, imieniem, nazwiskiem, numerem prawa jazdy, datÄ… urodzenia czy
+elementem adresu. Wszystkie z powyÅ¼szych mogÄ… byÄ‡ uÅ¼yte do odgadniÄ™cia hasÅ‚a
+i naruszenia bezpieczeÅ„stwa systemu.
 .PP
-Has³o musi byæ ³atwe do zapamiêtania, tak by nie byæ zmuszonym do jego
-zapisywania na kartce. Mo¿na to osi±gn±æ sklejaj±c ze sob± dwa krótkie s³owa,
-ze wstawionym pomiêdzy nie znakiem specjalnym lub cyfr±.
-Na przyk³ad, Pass%word, Lew7konia.
+HasÅ‚o musi byÄ‡ Å‚atwe do zapamiÄ™tania, tak by nie byÄ‡ zmuszonym do jego
+zapisywania na kartce. MoÅ¼na to osiÄ…gnÄ…Ä‡ sklejajÄ…c ze sobÄ… dwa krÃ³tkie sÅ‚owa,
+ze wstawionym pomiÄ™dzy nie znakiem specjalnym lub cyfrÄ….
+Na przykÅ‚ad, Pass%word, Lew7konia.
 .PP
-Inna metoda konstrukcji has³a polega na wyborze ³atwego do zapamiêtania zdania
-(np. z literatury) i wyborze pierwszej b±d¼ ostatniej litery ka¿dego wyrazu.
-Przyk³adem tego jest
+Inna metoda konstrukcji hasÅ‚a polega na wyborze Å‚atwego do zapamiÄ™tania zdania
+(np. z literatury) i wyborze pierwszej bÄ…dÅº ostatniej litery kaÅ¼dego wyrazu.
+PrzykÅ‚adem tego jest
 .IP "" .5i
 Ask not for whom the bell tolls.
 .PP
@@ -156,51 +156,51 @@ co daje
 .IP "" .5i
 An4wtbt,
 .PP
-albo te¿
+albo teÅ¼
 .IP "" .5i
-A czy znasz Ty, bracie m³ody
+A czy znasz Ty, bracie mÅ‚ody
 .PP
 co daje
 .IP "" .5i
 A3zTbm.
 .PP
-W zasadzie mo¿na byæ pewnym, ¿e niewielu crackerów bêdzie mieæ takie has³o
-w swoich s³ownikach. Nale¿y jednak wybieraæ w³asne metody konstrukcji hase³
-a nie polegaæ wy³±cznie na opisanych tutaj.
-.SS Uwagi o has³ach grup
-Has³a grup s± nieod³±cznym problemem bezpieczeñstwa, gdy¿ do ich znajomo¶ci
-uprawniona jest wiêcej ni¿ jedna osoba.
-Grupy s± jednak u¿ytecznym narzêdziem pozwalaj±cym na wspó³pracê miêdzy
-ró¿nymi u¿ytkownikami.
+W zasadzie moÅ¼na byÄ‡ pewnym, Å¼e niewielu crackerÃ³w bÄ™dzie mieÄ‡ takie hasÅ‚o
+w swoich sÅ‚ownikach. NaleÅ¼y jednak wybieraÄ‡ wÅ‚asne metody konstrukcji haseÅ‚
+a nie polegaÄ‡ wyÅ‚Ä…cznie na opisanych tutaj.
+.SS Uwagi o hasÅ‚ach grup
+HasÅ‚a grup sÄ… nieodÅ‚Ä…cznym problemem bezpieczeÅ„stwa, gdyÅ¼ do ich znajomoÅ›ci
+uprawniona jest wiÄ™cej niÅ¼ jedna osoba.
+Grupy sÄ… jednak uÅ¼ytecznym narzÄ™dziem pozwalajÄ…cym na wspÃ³Å‚pracÄ™ miÄ™dzy
+rÃ³Å¼nymi uÅ¼ytkownikami.
 .SH PRZESTROGI
-Niektóre opcje mog± nie byæ obs³ugiwane. 
-Sprawdzanie z³o¿ono¶ci has³a mo¿e ró¿niæ siê w ró¿nych instalacjach. Zachêca
-siê u¿ytkownika do wyboru tak skomplikowanego has³a, z jakim bêdzie mu
+NiektÃ³re opcje mogÄ… nie byÄ‡ obsÅ‚ugiwane. 
+Sprawdzanie zÅ‚oÅ¼onoÅ›ci hasÅ‚a moÅ¼e rÃ³Å¼niÄ‡ siÄ™ w rÃ³Å¼nych instalacjach. ZachÄ™ca
+siÄ™ uÅ¼ytkownika do wyboru tak skomplikowanego hasÅ‚a, z jakim bÄ™dzie mu
 wygodnie.
-U¿ytkownicy mog± nie móc zmieniæ has³a w systemie przy w³±czonym NIS, je¶li
-nie s± zalogowani do serwera NIS.
+UÅ¼ytkownicy mogÄ… nie mÃ³c zmieniÄ‡ hasÅ‚a w systemie przy wÅ‚Ä…czonym NIS, jeÅ›li
+nie sÄ… zalogowani do serwera NIS.
 .SH PLIKI
-\fI/etc/passwd\fR	\- informacja o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacja o kontach uÅ¼ytkownikÃ³w
 .br
-\fI/etc/shadow\fR	\- zakodowane has³a u¿ytkowników
-.SH KOD ZAKOÑCZENIA
+\fI/etc/shadow\fR	\- zakodowane hasÅ‚a uÅ¼ytkownikÃ³w
+.SH KOD ZAKOÅƒCZENIA
 .TP 2
-Polecenie \fBpasswd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+Polecenie \fBpasswd\fR koÅ„czy dziaÅ‚anie z nastÄ™pujÄ…cymi wartoÅ›ciami kodÃ³w zakoÅ„czenia:
 .br
 \fB0\fR	\- powodzenie
 .br
 \fB1\fR	\- permission denied
 .br
-\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+\fB2\fR	\- niewÅ‚aÅ›ciwa skÅ‚adnia parametrÃ³w polecenia
 .br
-\fB3\fR	\- nieoczekiwanie niepowodzenie, nic nie zosta³o wykonane
+\fB3\fR	\- nieoczekiwanie niepowodzenie, nic nie zostaÅ‚o wykonane
 .br
 \fB4\fR	\- nieoczekiwanie niepowodzenie, brakuje pliku passwd
 .br
 \fB5\fR	\- passwd file busy, try again later
 .br
-\fB6\fR	\- niew³a¶ciwe parametry opcji
-.SH "ZOBACZ TAK¯E"
+\fB6\fR	\- niewÅ‚aÅ›ciwe parametry opcji
+.SH "ZOBACZ TAKÅ»E"
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5)

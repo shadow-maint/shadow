@@ -1,60 +1,33 @@
-.\" Copyright 1989 \- 1994, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.TH FAILLOG 5
-.SH NOM
-faillog \- Fichier de trace d'échecs de login
-.SH DESCRIPTION
-.I faillog
-maintient le décompte des échecs de login et la limite associés à
-chaque compte.  Ce fichier est à enregistrements de taille fixe,
-indexés par l'UID numérique.  Chaque enregistrement contient le nombre
-d'échecs de login depuis la dernière réussite, le nombre maximum
-d'échecs avant que le compte ne  soit désactivé, la ligne sur laquelle
-le dernier échec de login a eu lieu et la date du dernier échec de
-login\&.
-
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "FAILLOG" "5" "12/07/2005" "" ""
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+faillog \- Journal des Ã©checs de connexion
+.SH "DESCRIPTION"
 .PP
-La structure des enregistrements est la suivante\ :
-.DS
-
-        struct	faillog {
-                short   fail_cnt;
-                short   fail_max;
-                char    fail_line[12];
-                time_t  fail_time;
-        };
-
-.DE
-.SH FICHIERS
-\fI/var/log/faillog\fR \- Fichier de trace d'échecs de login
-.SH VOIR AUSSI
-.BR faillog (8)
-.SH AUTEUR
-Julianne Frances Haugh <jfh@austin.ibm.com>
-.SH TRADUCTION
-Pascal Terjan <CMoi@tuxfamily.org>
+\fI/var/log/faillog\fR
+maintient un compteur des Ã©checs de connexion ainsi que les limites associÃ©es Ã  chaque compte. Le fichier contient un nombre fixe d'enregistrements, indexÃ©s par un identifiant numÃ©rique. Chaque enregistrement comprend le nombre d'Ã©checs de connexion depuis la derniÃ¨re connexion rÃ©ussie, le nombre maximal d'Ã©checs avant que le compte ne soit dÃ©sactivÃ©, la ligne du dernier Ã©chec de connexion, et la date du dernier Ã©chec.
+.PP
+La structure du fichier est la suivante\ :
+.sp
+.nf
+struct	faillog {
+	short   fail_cnt;      /* compteur des Ã©checs */
+	short   fail_max;      /* nb max avant dÃ©sactivation */
+	char    fail_line[12]; /* ligne du dernier Ã©chec */
+	time_t  fail_time;     /* date du dernier Ã©chec */
+};
+.fi
+.SH "FICHIERS"
+.TP
+\fI/var/log/faillog\fR
+journal des Ã©checs de connexion
+.SH "VOIR AUSSI"
+.PP
+\fBfaillog\fR(8)

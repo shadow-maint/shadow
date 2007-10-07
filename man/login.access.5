@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LOGIN.ACCESS" "5" "10/01/2005" "" ""
+.TH "LOGIN.ACCESS" "5" "11/05/2005" "File Formats and Conversions" "File Formats and Conversions"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -21,7 +21,7 @@ is scanned for the first entry that matches the (user, host) combination, or, in
 .PP
 Each line of the login access control table has three fields separated by a ":" character:
 .PP
-\fIpermission\fR:\fIusers\fR:\fI origins \fR
+\fIpermission\fR:\fIusers\fR:\fIorigins\fR
 .PP
 The first field should be a "\fI+\fR" (access granted) or "\fI\-\fR" (access denied) character. The second field should be a list of one or more login names, group names, or
 \fIALL\fR
@@ -43,6 +43,3 @@ shadow password suite configuration
 .SH "SEE ALSO"
 .PP
 \fBlogin\fR(1).
-.SH "AUTHOR"
-.PP
-Guido van Rooij

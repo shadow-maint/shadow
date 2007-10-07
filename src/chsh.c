@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chsh.c,v 1.35 2005/10/04 21:02:22 kloczek Exp $"
+#ident "$Id: chsh.c,v 1.37 2006/01/02 23:31:59 kloczek Exp $"
 
 #include <fcntl.h>
 #include <pwd.h>
@@ -107,12 +107,58 @@ static int restricted_shell (const char *sh)
 	return !check_shell (sh);
 }
 
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
+/*
+ * check_shell - see if the user's login shell is listed in /etc/shells
+ *
+ * The /etc/shells file is read for valid names of login shells.  If the
+ * /etc/shells file does not exist the user cannot set any shell unless
+ * they are root.
+ *
+ * If getusershell() is available (Linux, *BSD, possibly others), use it
+ * instead of re-implementing it.
+ */
+int check_shell (const char *sh)
+{
+	char *cp;
+	int found = 0;
+
+#ifndef HAVE_GETUSERSHELL
+	char buf[BUFSIZ];
+	FILE *fp;
+#endif
+
+#ifdef HAVE_GETUSERSHELL
+	setusershell ();
+	while ((cp = getusershell ())) {
+		if (*cp == '#')
+			continue;
+
+		if (strcmp (cp, sh) == 0) {
+			found = 1;
+			break;
+		}
+	}
+	endusershell ();
+#else
+	if ((fp = fopen (SHELLS_FILE, "r")) == (FILE *) 0)
+		return 0;
+
+	while (fgets (buf, sizeof (buf), fp)) {
+		if ((cp = strrchr (buf, '\n')))
+			*cp = '\0';
+
+		if (buf[0] == '#')
+			continue;
+
+		if (strcmp (buf, sh) == 0) {
+			found = 1;
+			break;
+		}
+	}
+	fclose (fp);
+#endif
+	return found;
+}
 
 /*
  * chsh - this command controls changes to the user's shell

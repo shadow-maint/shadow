@@ -1,0 +1,102 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "SUAUTH" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+suauth \- Fichier de contrôle détaillé de su
+.SH "SYNOPSIS"
+.HP 12
+\fB/etc/suauth\fR
+.SH "DESCRIPTION"
+.PP
+Le fichier
+\fI/etc/suauth\fR
+est lu chaque fois que su est exécuté. Il permet de modifier le comportement de la commande su, en fonction de\ :
+.sp
+.nf
+      1) l'utilisateur cible de su
+    
+.fi
+.sp
+.PP
+2) l'utilisateur qui exécute la commande su (ou un groupe dont il est membre)
+.PP
+Le fichier est formaté de la façon suivante (les lignes commençant par un \(Fo\ #\ \(Fc sont des commentaires, et sont ignorées)\ :
+.sp
+.nf
+      vers\-id:par\-id:ACTION
+    
+.fi
+.PP
+Où vers\-id peut être le mot
+\fIALL\fR, une liste de noms d'utilisateurs délimités par une virgule ou
+\fIALL EXCEPT\fR
+suivi d'une liste d'utilisateurs délimités par une virgule.
+.PP
+par\-id utilise le même format que vers\-id, mais accepte également le mot\-clef
+\fIGROUP\fR.
+\fIALL EXCEPT GROUP\fR
+est également accepté.
+\fIGROUP\fR
+est suivi d'un ou plusieurs noms de groupes, délimités par une virgule. Avoir comme groupe primaire le groupe approprié ne sera pas suffisant\ : une entrée dans
+\fB/etc/group\fR(5)
+est nécessaire.
+.PP
+Les valeur d'ACTION valables sont\ :
+.TP
+\fIDENY\fR
+La tentative de changement d'utilisateur est arrêtée avant que le mot de passe ne soit demandé.
+.TP
+\fINOPASS\fR
+La tentative est automatiquement réussie. Aucun mot de passe n'est demandé.
+.TP
+\fIOWNPASS\fR
+Pour que la commande su soit réussie, l'utilisateur doit entrer son propre mot de passe. Ceci lui sera précisé.
+.PP
+Notez qu'il y a trois champs séparés par un \(Fo\ deux\-points\ \(Fc. Ne pas accoller d'espace à ce \(Fo\ deux\-points\ \(Fc. Notez aussi que le fichier est examiné séquentiellement ligne par ligne, et que la première règle applicable est utilisée sans que le reste du fichier ne soit examiné. Ceci permet à l'administrateur système de définir un contrôle aussi fin qu'il le souhaite.
+.SH "EXEMPLE"
+.sp
+.nf
+      # exemple de fichier /etc/suauth
+      #
+      # Deux utilisateurs privilégiés peuvent
+      # devenir root avec leur propre mot de passe.
+      #
+      root:chris,birddog:OWNPASS
+      #
+      # Les autres ne peuvent pas de venir root avec
+      # su, à l'exception des membres du groupe wheel.
+      # Ceci correspond au comportement des BSD.
+      #
+      root:ALL EXCEPT GROUP wheel:DENY
+      #
+      # terry et birddog sont des comptes possédés
+      # par la même personne.
+      # Un accès sans mot passe est aménagé
+      # entre ces deux comptes.
+      #
+      terry:birddog:NOPASS
+      birddog:terry:NOPASS
+      #
+    
+.fi
+.sp
+.SH "FICHIERS"
+.TP
+\fI/etc/suauth\fR
+.SH "BOGUES"
+.PP
+Il en reste sans doute beaucoup. L'analyseur du fichier est particulièrement impitoyable avec les erreurs de syntaxe. Il n'autorise d'espace qu'en début et fin de ligne, et seul le délimiteur spécifique doit être utilisé.
+.SH "DIAGNOSTICS"
+.PP
+Une erreur dans l'analyse du fichier est reportée via
+\fBsyslogd\fR(8)
+au niveau ERR dans la catégorie AUTH.
+.SH "VOIR AUSSI"
+.PP
+\fBsu\fR(1).

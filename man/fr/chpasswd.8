@@ -1,65 +1,48 @@
-.\" Copyright 1991, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: chpasswd.8,v 1.3 2005/04/05 19:08:53 kloczek Exp $
-.\"
-.TH CHPASSWD 8
-.SH NOM
-\fBchpasswd\fR \- met à jour le fichier de mots de passe par lot
-.SH SYNOPSIS
-\fBchpasswd\fR [\fB\-e\fR]
-.SH DESCRIPTION
-\fBchpasswd\fR lit un fichier contenant des paires de nom d'utilisateur
-et mot de passe depuis l'entrée standard et utilise cette information
-pour mettre à jour un groupe d'utilisateurs existants.  Sans l'option \-e, 
-les mots de passe fournis doivent être en clair.  Si l'option \-e est
-utilisée, les mots de passe doivent être fournis cryptés.  Chaque ligne
-est au format
-.sp 1
-	  \fInom_d_utilisateur\fR:\fImot_de_passe\fR
-.sp 1
-L'utilisateur doit exister.
-Le mot de passe fourni sera crypté si nécessaire, et l'âge du mot de passe
-sera mis à jour, s'il est présent.
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "CHPASSWD" "8" "12/07/2005" "Commandes pour la gestion du systÃ¨me" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+chpasswd \- Mettre Ã  jour des mots de passe par lot
+.SH "SYNOPSIS"
+.HP 9
+\fBchpasswd\fR [\fIoptions\fR]
+.SH "DESCRIPTION"
 .PP
-Cette commande est destinée à être utilisée dans un environnement où de nombreux
-comptes sont créés en même temps.
-.SH AVERTISSEMENTS
-.\" The \fBmkpasswd\fR command must be executed afterwards to update the
-.\" DBM password files.
-Le fichier d'entrée doit être correctement protégé s'il contient des mots de
-passe en clair.
-.\" This command may be discarded in favor of the newusers(8) command.
-.SH VOIR AUSSI
-.\" mkpasswd(8), passwd(1), useradd(1)
-.BR passwd (1),
-.BR useradd (8),
-.BR newusers (8)
-.SH AUTEUR
-Julianne Frances Haugh <jfh@austin.ibm.com>
-.SH TRADUCTION
-Amand Tihon <amand@alrj.org>
+\fBChpasswd\fR
+lit une liste de paires de noms d'utilisateurs et de mots de passe depuis l'entrÃ©e standard et utilise ces informations pour mettre Ã  jour un groupe d'utilisateurs existants. Chaque ligne est au format suivant\ :
+.PP
+\fInom_utilisateur\fR:\fImot_de_passe\fR
+.PP
+Par dÃ©faut, le mot de passe doit Ãªtre fourni en clair. L'algorithme de chiffrement par dÃ©faut est le chiffrement DES. L'Ã¢ge du mot de passe sera Ã©galement mis Ã  jour, s'il est prÃ©sent.
+.PP
+Cette commande est destinÃ©e aux gros systÃ¨mes pour lesquels un nombre importants de comptes sont crÃ©Ã©s en une seule fois.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBchpasswd\fR
+sont\ :
+.TP
+\fB\-e\fR, \fB\-\-encrypted\fR
+Indique que les mots de passe fournis sont chiffrÃ©s.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-m\fR, \fB\-\-md5\fR
+Permet d'utiliser le chiffrement MD5, plutÃ´t que DES, lorsque les mots de passe fournis ne sont pas chiffrÃ©s.
+.SH "AVERTISSEMENTS"
+.PP
+Veuillez veiller Ã  Ã©viter que le fichier utilisÃ© par la commande
+\fBchpasswd\fR
+soit accessible en lecture s'il contient des mots de passe non chiffrÃ©s.
+.SH "VOIR AUSSI"
+.PP
+\fBpasswd\fR(1),
+\fBnewusers\fR(8),
+\fBuseradd\fR(8).

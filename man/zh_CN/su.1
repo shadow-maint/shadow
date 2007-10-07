@@ -1,0 +1,62 @@
+.TH SU "1" "1999年8月" "GNU sh-utils 2.0"  FSF
+.SH NAME(名称)
+su \- 运行替换用户和组标识的shell
+.SH SYNOPSIS(总览)
+.B su
+[\fIOPTION\fR]... [\fI-\fR] [\fIUSER \fR[\fIARG\fR]...]
+.SH DESCRIPTION(描述)
+.PP
+.PP
+修改有效用户标识和组标识为USER的.
+.TP
+-, \fB\-l\fR, \fB\-\-login\fR
+使得shell为可登录的shell
+.TP
+\fB\-c\fR, \fB\-\-commmand\fR=\fICOMMAND\fR
+传递单个COMMAND给\fB\-c\fR的shell.
+.TP
+\fB\-f\fR, \fB\-\-fast\fR
+传递\fB\-f\fR给shell(针对csh或tcsh)
+.TP
+\fB\-m\fR, \fB\-\-preserve\-environment\fR
+不重置环境变量
+.TP
+\fB\-p\fR
+与\fB\-m\fR同
+.TP
+\fB\-s\fR, \fB\-\-shell\fR=\fISHELL\fR
+如果/etc/shells允许,运行SHELL.
+.TP
+\fB\-\-help\fR
+显示帮助并退出
+.TP
+\fB\-\-version\fR
+输出版本信息并退出
+.PP
+单一的-意味着\fB\-l\fR.如果没有给定USER,则假定为root.
+.SH (报告BUGS)
+报告bugs,请发邮件到bug-sh-utils@gnu.org.
+.SH (另见)
+以Texinfo手册形式维护的
+.B su
+完全文档.如果你正确地安装了
+.B info
+和
+.B echo
+命令
+.IP
+.B info su
+.PP
+应该可以使你访问到整个手册.
+.SH COPYRIGHT(版权)
+版权所有 \(co 1999 Free Software Foundation, Inc.
+.br
+这是自由软件;参看复制条件的源文件.不作任何担保,更不用说商品性或者基于特殊目的的适
+用性.
+
+.SH "[中文版维护人]"
+.B riser <boomer@ccidnet.com>
+.SH "[中文版最新更新]"
+.BR 2001/08/08
+.SH "《中国linux论坛man手册页翻译计划》:"
+.BI http://cmpp.linuxforum.net

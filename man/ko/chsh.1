@@ -1,4 +1,4 @@
-.\" $Id: chsh.1,v 1.2 2005/04/05 19:08:56 kloczek Exp $
+.\" $Id: chsh.1,v 1.3 2005/12/01 20:38:27 kloczek Exp $
 .\" (c) 1994 by salvatore valente <svalente@athena.mit.edu>
 .\"
 .\" this program is free software.  you can redistribute it and
@@ -6,35 +6,35 @@
 .\" there is no warranty.
 .TH CHSH 1 "October 13 1994" "chsh" "Linux Reference Manual"
 .SH NAME
-chsh \- »ç¿ëÀÚ ·Î±×ÀÎ ½©À» ¹Ù²Û´Ù.
+chsh \- ì‚¬ìš©ìž ë¡œê·¸ì¸ ì‰˜ì„ ë°”ê¾¼ë‹¤.
 .SH SYNOPSIS
 .B chsh
 [\ \-s\ shell\ ] [\ \-l\ ] [\ \-u\ ] [\ \-v\ ] [\ username\ ]
 .SH DESCRIPTION
 .B chsh
-¸í·ÉÀº »ç¿ëÀÚ°¡ »ç¿ëÇÏ°í ÀÖ´Â ·Î±×ÀÎ ½©À» ¹Ù²Ù´Âµ¥, »ç¿ëµÈ´Ù. 
-(ÀÌ¸»Àº exit ¸í·ÉÀ» »ç¿ëÇßÀ» ¶§ ·Î±×¾Æ¿ôµÇ´Â ½©À» ¸»ÇÑ´Ù.)
-¸í·ÉÇà¿¡¼­ ½©À» ÁöÁ¤ÇÏÁö ¾ÊÀ¸¸é, »ç¿ëÀÚ¿¡°Ô ¹°¾îº»´Ù.
+ëª…ë ¹ì€ ì‚¬ìš©ìžê°€ ì‚¬ìš©í•˜ê³  ìžˆëŠ” ë¡œê·¸ì¸ ì‰˜ì„ ë°”ê¾¸ëŠ”ë°, ì‚¬ìš©ëœë‹¤. 
+(ì´ë§ì€ exit ëª…ë ¹ì„ ì‚¬ìš©í–ˆì„ ë•Œ ë¡œê·¸ì•„ì›ƒë˜ëŠ” ì‰˜ì„ ë§í•œë‹¤.)
+ëª…ë ¹í–‰ì—ì„œ ì‰˜ì„ ì§€ì •í•˜ì§€ ì•Šìœ¼ë©´, ì‚¬ìš©ìžì—ê²Œ ë¬¼ì–´ë³¸ë‹¤.
 .SS VALID SHELLS
 .B chsh
-¸í·É¿¡¼­´Â Àý´ë °æ·Î¸¦ ÁöÁ¤ÇÏ´Â ¾î¶°ÇÑ ½ÇÇàÆÄÀÏµµ ÁöÁ¤ÀÌ °¡´ÉÇÏ´Ù. 
-ÇÏÁö¸¸, 
+ëª…ë ¹ì—ì„œëŠ” ì ˆëŒ€ ê²½ë¡œë¥¼ ì§€ì •í•˜ëŠ” ì–´ë– í•œ ì‹¤í–‰íŒŒì¼ë„ ì§€ì •ì´ ê°€ëŠ¥í•˜ë‹¤. 
+í•˜ì§€ë§Œ, 
 .I /etc/shells
-ÆÄÀÏ¿¡¼­ ÁöÁ¤µÇ¾î ÀÖÁö ¾Ê´Â Ç®±×¸²À» »ç¿ëÇÒ °æ¿ì¿¡´Â °æ°í ¸Þ½ÃÁö¸¦ º¸¿©ÁØ´Ù.
+íŒŒì¼ì—ì„œ ì§€ì •ë˜ì–´ ìžˆì§€ ì•ŠëŠ” í’€ê·¸ë¦¼ì„ ì‚¬ìš©í•  ê²½ìš°ì—ëŠ” ê²½ê³  ë©”ì‹œì§€ë¥¼ ë³´ì—¬ì¤€ë‹¤.
 .SH OPTIONS
 .TP
 .I "\-s, \-\-shell"
-ÁöÁ¤ÇÏ´Â ½©À» ¾ÕÀ¸·Î »ç¿ëÇÒ ·Î±×ÀÎ ½©·Î ¹Ù²Û´Ù.
+ì§€ì •í•˜ëŠ” ì‰˜ì„ ì•žìœ¼ë¡œ ì‚¬ìš©í•  ë¡œê·¸ì¸ ì‰˜ë¡œ ë°”ê¾¼ë‹¤.
 .TP
 .I "\-l, \-\-list\-shells"
 .I /etc/shells
-ÆÄÀÏ ¾È¿¡ ÁöÁ¤µÈ ½©À» ³ª¿­ÇÏ°í ¸¶Ä£´Ù.
+íŒŒì¼ ì•ˆì— ì§€ì •ëœ ì‰˜ì„ ë‚˜ì—´í•˜ê³  ë§ˆì¹œë‹¤.
 .TP
 .I "\-u, \-\-help"
-µµ¿ò¸»À» º¸¿©ÁÖ°í ¸¶Ä£´Ù.
+ë„ì›€ë§ì„ ë³´ì—¬ì£¼ê³  ë§ˆì¹œë‹¤.
 .TP
 .I "\-v, \-\-version"
-¹öÀü Á¤º¸¸¦ º¸¿©ÁÖ°í ¸¶Ä£´Ù.
+ë²„ì „ ì •ë³´ë¥¼ ë³´ì—¬ì£¼ê³  ë§ˆì¹œë‹¤.
 .SH "SEE ALSO"
 .BR login (1),
 .BR passwd (5),

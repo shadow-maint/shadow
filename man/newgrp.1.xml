@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='newgrp.1'>
-  <!-- $Id: newgrp.1.xml,v 1.9 2005/10/10 17:06:20 kloczek Exp $ -->
+  <!-- $Id: newgrp.1.xml,v 1.12 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>NEWGRP</refentrytitle>
+    <refentrytitle>newgrp</refentrytitle>
     <manvolnum>1</manvolnum>
+    <refmiscinfo class="sectdesc">User Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>newgrp</refname>
@@ -103,10 +104,5 @@
 	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;</para>
   </refsect1>
 </refentry>

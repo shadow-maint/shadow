@@ -1,0 +1,31 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "expiry" "1" "11/10/2005" "Пользовательские команды" "Пользовательские команды"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+expiry \- проверяет и изменяет пароль согласно срокам действия
+.SH "СИНТАКСИС"
+.HP 7
+\fBexpiry\fR [\-c] [\-f]
+.SH "ОПИСАНИЕ"
+.PP
+\fBexpiry\fR
+проверяет (параметр
+\fB\-c\fR) сколько ещё времени будет работоспособен текущий пароль и вынуждает изменить его (параметр
+\fB\-f\fR), если это требуется. Она может запускаться обычным пользователем.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/passwd\fR
+содержит информацию о пользователях
+.TP
+\fI/etc/shadow\fR
+содержит защищаемую информацию о пользователях
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBpasswd\fR(5),
+\fBshadow\fR(5).

@@ -1,0 +1,60 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "GROUPDEL" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+groupdel \- Supprimer un groupe
+.SH "SYNOPSIS"
+.HP 9
+\fBgroupdel\fR \fIgroupe\fR
+.SH "DESCRIPTION"
+.PP
+La commande
+\fBgroupdel\fR
+modifie les fichiers d'administration des comptes du système, en supprimant les entrées qui se réfèrent à
+\fIgroupe\fR. Le groupe nommé doit exister.
+.PP
+Vous devez vérifier vous\-même qu'aucun fichier possédé par le groupe ne subsiste sur tous les systèmes de fichiers.
+.SH "AVERTISSEMENTS"
+.PP
+Vous ne devez pas supprimer le groupe primaire d'un utilisateur existant. Vous devez supprimer l'utilisateur auparavant.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBgroupdel\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succès
+.TP
+\fI2\fR
+erreur de syntaxe
+.TP
+\fI8\fR
+impossible de supprimer le groupe primaire d'un utilisateur existant
+.TP
+\fI10\fR
+impossible de mettre à jour le fichier des groupes
+.SH "VOIR AUSSI"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupmod\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8)

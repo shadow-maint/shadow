@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.52 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id: passwd.c,v 1.55 2005/12/06 20:19:52 kloczek Exp $"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -142,8 +142,8 @@ static void usage (int status)
 	fprintf (stderr, _("Usage: passwd [options] [login]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -a, --all 			report password status on all accounts\n"
-			   "  -d, --delete 			delete the password for the named account\n"
+			   "  -a, --all			report password status on all accounts\n"
+			   "  -d, --delete			delete the password for the named account\n"
 			   "  -e, --expire			force expire the password for the named account\n"
 			   "  -h, --help			display this help message and exit\n"
 			   "  -k, --keep-tokens		change password only if expired\n"
@@ -631,40 +631,6 @@ int main (int argc, char **argv)
 	sanitize_env ();
 
 	OPENLOG ("passwd");
-
-	/*
-	 * Start with the flags which cause another command to be executed.
-	 * The effective UID will be set back to the real UID and the new
-	 * command executed with the flags
-	 *
-	 * These flags are deprecated, may change in a future release.
-	 * Please run these programs directly.  --marekm
-	 */
-	if (argc > 1 && argv[1][0] == '-' && strchr ("gfs", argv[1][1])) {
-		char buf[200];
-
-		setuid (getuid ());
-		switch (argv[1][1]) {
-		case 'g':
-			argv[1] = GPASSWD_PROGRAM;	/* XXX warning: const */
-			break;
-		case 'f':
-			argv[1] = CHFN_PROGRAM;	/* XXX warning: const */
-			break;
-		case 's':
-			argv[1] = CHSH_PROGRAM;	/* XXX warning: const */
-			break;
-		default:
-			usage (E_BAD_ARG);
-		}
-		snprintf (buf, sizeof buf, _("%s: Cannot execute %s"),
-			  Prog, argv[1]);
-		execvp (argv[1], &argv[1]);
-		perror (buf);
-		SYSLOG ((LOG_ERR, "cannot execute %s", argv[1]));
-		closelog ();
-		exit (E_FAILURE);
-	}
 
 	{
 		/*

@@ -1,4 +1,4 @@
-.\" $Id: shadow.3,v 1.6 2005/04/05 19:08:55 kloczek Exp $
+.\" $Id: shadow.3,v 1.7 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,9 +33,9 @@
 .\" updated Tue 17 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SHADOW 3
-.SH ̾��
-shadow \- �Ź沽���줿�ѥ���ɥե������ѥ롼����
-.SH ��
+.SH 名前
+shadow \- 暗号化されたパスワードファイル用ルーチン
+.SH 書式
 .B #include <shadow.h>
 .PP
 .B struct spwd *getspent();
@@ -61,11 +61,11 @@ shadow \- �Ź沽���줿�ѥ���ɥե������ѥ롼����
 .B int lckpwdf();
 .PP
 .B int ulckpwdf();
-.SH ����
+.SH 説明
 .I shadow
-�� shadow �ѥ���ɥե�����
-\fI/etc/shadow\fR �����Ƥ�����롼����Ǥ��롣
-\fI#include\fR �ե������Ϳ�����Ƥ��빽¤�Τϰʲ����̤ꡣ
+は shadow パスワードファイル
+\fI/etc/shadow\fR の内容を操作するルーチンである。
+\fI#include\fR ファイルに与えられている構造体は以下の通り。
 .sp
 struct spwd {
 .in +.5i
@@ -91,63 +91,63 @@ struct spwd {
 .in \-.5i
 }
 .PP
-�ƥե�����ɤΰ�̣��:
+各フィールドの意味は:
 .sp
-sp_namp \- �̥뽪ü���줿�桼��̾ʸ����ؤΥݥ���
+sp_namp \- ヌル終端されたユーザ名文字列へのポインタ
 .br
-sp_pwdp \- �̥뽪ü���줿�ѥ����ʸ����ؤΥݥ���
+sp_pwdp \- ヌル終端されたパスワード文字列へのポインタ
 .br
-sp_lstchg \- 1970ǯ1��1������ѥ���ɺǽ��ѹ�������������
+sp_lstchg \- 1970年1月1日からパスワード最終変更日時迄の日数
 .br
-sp_min \- �ѥ�����ѹ��������褦�ˤʤ�ޤǤ�����
+sp_min \- パスワード変更が出来るようになるまでの日数
 .br
-sp_max \- �ѥ���ɤ��ѹ����ʤ��Ƥ��ɤ�����
+sp_max \- パスワードを変更しなくても良い日数
 .br
-sp_warn \- �ѥ���ɤ������ڤ�ˤʤ����ˡ�
-�����ڤ줬��Ť��Ƥ���ݤηٹ��桼���˽Ф����֤�����
+sp_warn \- パスワードが期限切れになる前に、
+期限切れが近づいている旨の警告をユーザに出す期間の日数
 .br
-sp_inact \- �ѥ���ɤ������ڤ�ˤʤäƤ��顢
-��������Ȥ���ǽ�Ȥʤ���ѤǤ��ʤ��ʤ�ޤǤ�����
+sp_inact \- パスワードが期限切れになってから、
+アカウントが不能となり使用できなくなるまでの日数
 .br
-sp_expire \- 1970ǯ1��1���饢������Ȥ�������ǽ�Ȥʤ�����������
+sp_expire \- 1970年1月1からアカウントが使用不能となる日迄の日数
 .br
-sp_flag \- ����Ȥ��Ȥ��˸�����ͽ��
-.SH ����
+sp_flag \- 将来使うときに向けて予約
+.SH 説明
 \fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, \fBsgetspent\fR
-�ϡ����줾�� \fBstruct spwd\fR �ؤΥݥ��󥿤��֤���
-\fBgetspent\fR �ϥե����뤫�鼡�Υ���ȥ��
-\fBfgetspent\fR �ϻ��ꤵ�줿���ȥ꡼��
-(�������񼰤Υե�����Ȥߤʤ����)
-���鼡�Υ���ȥ���֤���
-\fBsgetspent\fR �����ϤȤ���Ϳ����줿ʸ������Ѥ���
-\fBstruct spwd\fR �ؤΥݥ��󥿤��֤���
-\fBgetspnam\fR �ϥե�������θ��ߤΰ��֤���
-\fBname\fR �˥ޥå����륨��ȥ��õ����
+は、それぞれ \fBstruct spwd\fR へのポインタを返す。
+\fBgetspent\fR はファイルから次のエントリを、
+\fBfgetspent\fR は指定されたストリーム
+(正しい書式のファイルとみなされる)
+から次のエントリを返す。
+\fBsgetspent\fR は入力として与えられた文字列を用いて
+\fBstruct spwd\fR へのポインタを返す。
+\fBgetspnam\fR はファイル中の現在の位置から
+\fBname\fR にマッチするエントリを探す。
 .PP
-\fBsetspent\fR ��
-shadow �ѥ���ɥե�����ؤΥ��������򳫻Ϥ��뤿��ˡ�
-\fBendspent\fR �Ͻ�λ���뤿����Ѥ����롣
+\fBsetspent\fR は
+shadow パスワードファイルへのアクセスを開始するために、
+\fBendspent\fR は終了するために用いられる。
 .PP
-\fI/etc/shadow\fR �ե�������Ф�����¾Ū�ʥ����������ݾڤ��������ˤϡ�
-\fBlckpwdf\fR �롼����� \fBulckpwdf\fR �롼������Ѥ��롣
-\fBlckpwdf\fR �� \fBpw_lock\fR ���Ѥ��ƺ��� 15 �ô֥��å���������褦�Ȥ��롣
-�����ƺǽ�� 15 �äλĤ�δ֡�
-\fBspw_lock\fR �ˤ�ä������ܤΥ��å��򤷤褦�Ȼ��³���롣
-�� 15 �ô֤δ֤ˤ����줫�λ�ߤ����Ԥ������ϡ�
-\fBlckpwdf\fR �� \-1 ���֤���
-������Υ��å��������������� 0 ���֤���롣
-.SH �֤���
-�����Υ롼����ϡ�����ȥ꤬�ĤäƤ��ʤ����䡢
-�����β����ǥ��顼��ȯ���������ˤ� NULL ���֤���
-�֤��ͤ� \fBint\fR �Ǥ���롼����ϡ�
-���������� 0 �򡢼��Ԥ����� \-1 ���֤���
-.SH �ٹ�
-shadow���줿�ѥ���ɥե�����ؤΥ������������¤���Ƥ���Τǡ�
-�����Υ롼����ϥ����ѡ��桼�����������ѤǤ��롣
-.SH �ե�����
-\fI/etc/shadow\fR \- �Ź沽���줿�桼���ѥ����
-.SH ��Ϣ����
+\fI/etc/shadow\fR ファイルに対する排他的なアクセスを保証したい場合には、
+\fBlckpwdf\fR ルーチンと \fBulckpwdf\fR ルーチンを用いる。
+\fBlckpwdf\fR は \fBpw_lock\fR を用いて最大 15 秒間ロックを取得しようとする。
+そして最初の 15 秒の残りの間、
+\fBspw_lock\fR によって二度目のロックをしようと試み続ける。
+計 15 秒間の間にいずれかの試みが失敗した場合は、
+\fBlckpwdf\fR は \-1 を返す。
+いずれのロックも成功した場合は 0 が返される。
+.SH 返り値
+これらのルーチンは、エントリが残っていない場合や、
+処理の過程でエラーが発生した場合には NULL を返す。
+返り値が \fBint\fR であるルーチンは、
+成功したら 0 を、失敗したら \-1 を返す。
+.SH 警告
+shadowされたパスワードファイルへのアクセスは制限されているので、
+これらのルーチンはスーパーユーザだけが利用できる。
+.SH ファイル
+\fI/etc/shadow\fR \- 暗号化されたユーザパスワード
+.SH 関連項目
 .BR getpwent (3),
 .BR shadow (5)
-.SH ����
+.SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

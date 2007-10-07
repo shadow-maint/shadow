@@ -1,161 +1,224 @@
-.\" Copyright 1991 \- 1994, Julianne Frances Haugh
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
-.\"    may be used to endorse or promote products derived from this software
-.\"    without specific prior written permission.
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
-.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
-.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
-.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
-.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
-.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-.\" SUCH DAMAGE.
-.\"
-.\"	$Id: useradd.8,v 1.4 2005/04/05 19:08:53 kloczek Exp $
-.\"
-.\" Traduction 26/09/00 par Frédéric Delanoy (fdelanoy@info.fundp.ac.be)
-.\"
-.TH USERADD 8
-.SH NOM
-useradd \- Créer un nouvel utilisateur ou mettre à jour l'information par défaut sur un nouvel utilisateur
-.SH SYNOPSIS
-.TP 8
-.B useradd
-.\" .RB [ \-A
-.\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ \-c
-.IR commentaire ]
-.RB [ \-d
-.IR rép_perso ]
-.br
-.RB [ \-e
-.IR date_expiration ]
-.RB [ \-f
-.IR inactive_time ]
-.br
-.RB [ \-g
-.IR groupe_initial ]
-.RB [ \-G
-.IR groupe [,...]]
-.br
-.RB [ \-m " [" \-k
-.IR rép_squelette ] " |" " " \-M ]
-.RB [ \-p
-.IR mot_de_passe ]
-.br
-.RB [ \-s
-.IR shell ]
-.RB [ \-u
-.IR uid " ["
-.BR \-o ]]
-.RB [ \-n ] 
-.RB [ \-r ] 
-.I login
-.TP 8
-.B useradd
-\fB\-D\fR
-[\fB\-g\fI groupe_défaut\fR]
-[\fB\-b\fI rép_perso_défaut\fR]
-.br
-[\fB\-f\fI inactivité\fR]
-[\fB\-e\fI date_expiration_défaut\fR]
-.br
-[\fB\-s\fI shell_défaut\fR]
-.SH DESCRIPTION
-.SS Création de nouveaux utilisateurs
-Quand elle est invoquée sans l'option \fB\-D\fR, la commande \fBuseradd\fR crée un nouveau compte utilisateur qui utilise les valeurs spécifiées sur la ligne de commandes, et les valeurs par défaut du système.  Le nouveau compte utilisateur sera inséré dans les fichiers du système quand c'est nécessaire, le répertoire personnel sera créé, et les fichiers initiaux copiés, cela dépendant des options présentes en ligne de commandes.  La version fournie avec Red Hat Linux crée un groupe pour chaque utilisateur ajouté au système, à moins que l'option \fB\-n\fR ne soit fournie.  Les options qui s'appliquent à la commande \fBuseradd\fR sont :
-.\" .IP "\fB\-A {\fImethod\fR|\fBDEFAULT\fR},..."
-.\" The value of the user's authentication method.
-.\" The authentication method is the name of a program which is responsible
-é.\" for validating the user's identity.
-.\" The string \fBDEFAULT\fR may be used to change the user's authentication
-.\" method to the standard system password method.
-.\" This is a comma\-separated list of program names.
-.\" It may include \fBDEFAULT\fR exactly once.
-.IP "\fB\-c \fIcommentaire\fR"
-Le champ de commentaire du fichier de mots de passe du nouvel utilisateur.
-.IP "\fB\-d \fIrép_perso\fR"
-Le nouvel utilisateur sera créé en utilisant \fIrép_perso\fR comme valeur du répertoire de connexion de l'utilisateur.  Le comportement par défaut est de concaténer le nom de \fIlogin\fR au \fIrép_perso_défaut\fR, et de l'utiliser en tant que nom de répertoire de connexion.
-.IP "\fB\-e \fIdate_expiration\fR"
-La date à laquelle le compte de l'utilisateur sera désactivé.  La date est spécifiée dans le format \fIAAAA\-MM\-JJ\fR.
-.IP "\fB\-f \fIjours_inactifs\fR"
-Le nombre de jours suivant l'expiration d'un mot de passe après lequel le compte est définitivement désactivé.  Une valeur de 0 désactive le compte dès que le mot de passe a expiré, et une valeur de \-1 désactive cette caractéristique.  La valeur par défaut est de \-1.
-.IP "\fB\-g \fIgroupe_initial\fR"
-Le nom du groupe ou le numéro du groupe de connexion initial de l'utilisateur.  Le nom du groupe doit exister.  Un numéro de groupe doit se référer à un groupe préexistant.  Le numéro de groupe par défaut est de 1.
-.IP "\fB\-G \fIgroupe,[...]\fR"
-Une liste de groupes supplémentaires auxquels fait également partie l'utilisateur.  Chaque groupe est séparé du suivant par une virgule, sans espace entre les deux.  Les groupes sont soumis aux mêmes restrictions que celui donné avec l'option \fB\-g\fR.  Le comportement par défaut pour l'utilisateur est de n'appartenir qu'au groupe initial.
-.IP \fB\-m\fR
-Le répertoire personnel de l'utilisateur sera créé s'il n'existe pas déjà.  Les fichiers contenus dans \fIrép_squelette\fR seront copiés dans le répertoire personnel si l'option \fB\-k\fR est employée; sinon, les fichiers contenus dans \fIrép_squelette\fR seront utilisés à la place.  Tous les répertoires contenus dans \fIrép_squelette\fR ou dans \fI/etc/skel\fR seront également créés dans le répertoire personnel de l'utilisateur.  L'option \fB\-k\fR n'est valide qu'en conjonction avec l'option \fB\-m\fR.  Le comportement par défaut est de ne pas créer le répertoire, et de ne copier aucun fichier.
-.IP \fB\-M\fR 
-Le répertoire personnel de l'utilisateur ne sera pas créé, même si les réglages globaux au système présents dans \fI/etc/login.defs\fR consistent en la création de répertoires personnels. 
-.IP \fB\-n\fR 
-Un groupe de même nom que l'utilisateur ajouté au système sera créé par défaut.  Cette option désactivera ce comportement spécifique de Red Hat Linux. 
-.IP \fB\-r\fR 
-Cette option est utilisée pour créer un compte système, çàd un utilisateur avec un UID plus petit que la valeur de UID_MIN définie dans
-\fI/etc/login.defs\fR.  Notez que \fBuseradd\fR ne créera pas de répertoire personnel pour un tel utilisateur, et ce quel que soit le réglage par défaut présent dans \fI/etc/login.defs\fR.  Vous devez spécifier l'option \fB\-m\fR si vous désirez la création d'un répertoire personnel pour un tel utilisateur.  C'est une option ajoutée par Red Hat. 
-.IP "\fB\-p \fImot_de_passe\fR"
-Le mot de passe crypté, comme renvoyé par \fBcrypt\fR(3).  Le comportement par défaut est de désactiver le compte.
-.IP "\fB\-s \fIshell\fR"
-Le nom du shell de connexion de l'utilisateur.  Le comportement par défaut est de laisser ce compte vide, ce qui fait sélectionner au système le shell de connexion par défaut.
-.IP "\fB\-u \fIuid\fR"
-La valeur numérique de l'ID de l'utilisateur.  Cette valeur doit être unique, à moins que l'option \fI\-o\fR ne soit utilisée.  La valeur doit être non négative.  Le comportement par défaut est d'utiliser la plus petite valeur d'ID plus grande que 999, et plus grande que celle de n'importe quel autre utilisateur.  Les valeurs comprises entre 0 et 499 sont typiquement réservées pour les comptes systèmes.
-.SS Modifier les valeurs par défaut.
-Quand il est invoqué avec l'option \fB\-D\fR, \fBuseradd\fR soit affichera les valeurs actuelles par défaut, soit mettra à jour les valeurs par défaut via la ligne de commandes.  Les options valides sont
-.IP "\fB\-b \fIrép_perso\fR"
-Le préfixe de chemin initial pour un nouveau répertoire personnel d'utilisateur.  Le nom de l'utilisateur sera suffixé à la fin de \fIrép_perso\fR pour créer le nom du nouveau répertoire si l'option \fB\-d\fI n'est pas utilisée pendant la création d'un nouveau compte.
-.IP "\fB\-e \fIdate_expiration_défaut\fR"
-La date à laquelle le compte utilisateur sera désactivé.
-.IP "\fB\-f \fIinactivité\fR"
-Le nombre de jours après l'expiration d'un mot de passe avant que le compte ne soit désactivé.
-.IP "\fB\-g \fIgroupe_défaut\fR"
-Le nom de groupe ou l'ID du groupe initial d'un nouvel utilisateur.  Le groupe nommé doit exister, et un ID de groupe numérique doit déjà exister en tant qu'ID de groupe.
-.IP "\fB\-s \fIshell_défaut\fR"
-Le nom du shell de connexion d'un nouvel utilisateur.  Le programme nommé sera utilisé pour tous les futurs nouveaux comptes.
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "USERADD" "8" "12/07/2005" "Commandes pour la gestion du systÃ¨me" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+useradd \- CrÃ©er un nouvel utilisateur ou modifier les informations par dÃ©faut appliquÃ©es aux nouveaux utilisateurs
+.SH "SYNOPSIS"
+.HP 8
+\fBuseradd\fR [\fIoptions\fR] \fILOGIN\fR
+.HP 8
+\fBuseradd\fR \-D
+.HP 8
+\fBuseradd\fR \-D [\fIoptions\fR]
+.SH "DESCRIPTION"
 .PP
-Si aucune option n'est spécifiée, \fBuseradd\fR affichera les valeurs par défaut du moment.
-.SH NOTES
-L'administrateur système est responsable du placement des fichiers d'utilisateur par défaut dans le répertoire \fI/etc/skel\fR.
-.br
-Cette version de \fIuseradd\fR a été modifiée par Red Hat pour se conformer à la convention utilisateur/groupe de RedHat.
-.SH INCONVÉNIENTS
-Vous ne pouvez pas ajouter d'utilisateur à un groupe NIS.  Cela doit être effectué sur le serveur NIS.
-.SH FICHIERS
-\fB/etc/passwd\fR \- information sur les comptes utilisateurs
-.br
-\fB/etc/shadow\fR \- information sécurisée sur les comptes utilisateurs
-.br
-\fB/etc/group\fR \- information de groupes
-.br
-\fB/etc/default/useradd\fR \- information par défaut
-.br
-\fB/etc/login.defs\fR \- réglages globaux du système
-.br
-\fB/etc/skel\fR \- répertoire contenant les fichiers utilisés par défaut
+Quand elle est invoquÃ©e sans l'option
+\fB\-D\fR, la commande
+\fBuseradd\fR
+crÃ©e un nouveau compte utilisateur qui utilise les valeurs spÃ©cifiÃ©es sur la ligne de commande et les valeurs par dÃ©faut du systÃ¨me. Le nouveau compte utilisateur sera insÃ©rÃ© dans les fichiers du systÃ¨me quand c'est nÃ©cessaire, le rÃ©pertoire personnel sera crÃ©Ã©, et les fichiers initiaux copiÃ©s, en fonction des options prÃ©sentes en ligne de commande.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBuseradd\fR
+sont\ :
+.TP
+\fB\-c\fR, \fB\-\-comment\fR \fICOMMENTAIRE\fR
+Toute chaÃ®ne de texte. C'est gÃ©nÃ©ralement une description du login, et est actuellement utilisÃ©e comme champ pour le nom complet de l'utilisateur.
+.TP
+\fB\-b\fR, \fB\-\-base\-dir\fR \fIRÃ‰P_BASE\fR
+Le rÃ©pertoire de base par dÃ©faut du systÃ¨me si l'option
+\fB\-d\fR
+rÃ©p n'est pas spÃ©cifiÃ©e.
+\fIRÃ‰P_BASE\fR
+est concatÃ©nÃ©e avec le nom du compte pour dÃ©finir le rÃ©pertoire personnel. Quand l'option
+\fB\-m\fR
+n'est pas utilisÃ©e, rÃ©p_base doit exister.
+.TP
+\fB\-d\fR, \fB\-\-home\fR \fIRÃ‰P_PERSO\fR
+Le nouvel utilisateur sera crÃ©Ã© en utilisant
+\fIRÃ‰P_PERSO\fR
+comme valeur du rÃ©pertoire de connexion de l'utilisateur. Le comportement par dÃ©faut est de concatÃ©ner
+\fIutilisateur\fR
+au rÃ©pertoire
+\fIRÃ‰P_BASE\fR, et de l'utiliser en tant que nom de rÃ©pertoire de connexion.
+.TP
+\fB\-e\fR, \fB\-\-expiredate\fR \fIDATE_FIN_VALIDITÃ‰\fR
+La date Ã  laquelle le compte utilisateur sera dÃ©sactivÃ©. La date est spÃ©cifiÃ©e dans le format
+\fIAAAA\-MM\-JJ\fR.
+.TP
+\fB\-f\fR, \fB\-\-inactive\fR \fIDURÃ‰E_INACTIVITÃ‰\fR
+Le nombre de jours suivant la fin de validitÃ© d'un mot de passe aprÃ¨s lequel le compte est dÃ©finitivement dÃ©sactivÃ©. Une valeur de 0 dÃ©sactive le compte dÃ¨s que le mot de passe a dÃ©passÃ© sa fin de validitÃ©, et une valeur de \-1 dÃ©sactive cette fonctionnalitÃ©. La valeur par dÃ©faut est de \-1.
+.TP
+\fB\-g\fR, \fB\-\-gid\fR \fIGROUPE\fR
+Le nom du groupe ou le numÃ©ro du groupe de connexion initial de l'utilisateur. Le nom du groupe doit exister. Un numÃ©ro de groupe doit se rÃ©fÃ©rer Ã  un groupe prÃ©existant. Le numÃ©ro de groupe par dÃ©faut est de 1, ou la valeur spÃ©cifiÃ©e dans
+\fI/etc/default/useradd\fR.
+.TP
+\fB\-G\fR, \fB\-\-groups\fR \fIGROUPE1\fR[\fI,GROUPE2,...\fR[\fI,GROUPEN\fR]]]
+Une liste de groupes supplÃ©mentaires auxquels fait Ã©galement partie l'utilisateur. Chaque groupe est sÃ©parÃ© du suivant par une virgule, sans espace entre eux. Les groupes sont soumis aux mÃªmes restrictions que celles de l'option
+\fB\-g\fR. Le comportement par dÃ©faut pour l'utilisateur est de n'appartenir qu'au groupe initial.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-m\fR, \fB\-\-create\-home\fR
+Le rÃ©pertoire personnel de l'utilisateur sera crÃ©Ã© s'il n'existe pas dÃ©jÃ . Les fichiers contenus dans
+\fIrÃ©p_squelette\fR
+seront copiÃ©s dans le rÃ©pertoire personnel si l'option
+\fB\-k\fR
+est employÃ©e\ ; sinon, les fichiers contenus dans
+\fI/etc/skel\fR
+seront utilisÃ©s Ã  la place. Tous les rÃ©pertoires contenus dans
+\fIrÃ©p_squelette\fR
+ou dans
+\fI/etc/skel\fR
+seront Ã©galement crÃ©Ã©s dans le rÃ©pertoire personnel de l'utilisateur. L'option
+\fB\-k\fR
+n'est valable qu'en conjonction avec l'option
+\fB\-m\fR. Le comportement par dÃ©faut est de ne pas crÃ©er le rÃ©pertoire, et de ne copier aucun fichier.
+.TP
+\fB\-K\fR, \fB\-\-key\fR \fICLÃ‰E\fR=\fIVALEUR\fR
+Surcharge les valeurs par dÃ©faut du fichier
+\fI/etc/login.defs\fR
+(UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS et autres).
+
+Par exemple.:
+\fB\-K\fR\fIPASS_MAX_DAYS\fR=\fI\-1\fR
+peut Ãªtre utilisÃ© pour la crÃ©ation de comptes systÃ¨me pour dÃ©sactiver l'Ã¢ge des mots de passe, mÃªme si les comptes systÃ¨me n'ont pas de mot de passe. Plusieurs options
+\fB\-K\fR
+peuvent Ãªtre spÃ©cifiÃ©es, comme par exemple\ :
+\fB\-K\fR\fIUID_MIN\fR=\fI100\fR\fB\-K\fR\fIUID_MAX\fR=\fI499\fR
+.sp
+Note\ :
+\fB\-K\fR\fIUID_MIN\fR=\fI10\fR,\fIUID_MAX\fR=\fI499\fR
+ne fonctionne pas pour l'instant.
+.TP
+\fB\-o\fR, \fB\-\-non\-unique\fR
+Permet de crÃ©er un utilisateur avec un identifiant (\(Fo\ UID\ \(Fc) redondant (non unique).
+.TP
+\fB\-p\fR, \fB\-\-password\fR \fIMOT_DE_PASSE\fR
+Le mot de passe chiffrÃ©, comme renvoyÃ© par
+\fBcrypt\fR(3). Le comportement par dÃ©faut est de dÃ©sactiver le compte.
+.TP
+\fB\-s\fR, \fB\-\-shell\fR \fIINTERPRÃ‰TEUR\fR
+Le nom de l'interprÃ©teur de commandes initial de l'utilisateur (\(Fo\ login shell\ \(Fc). Le comportement par dÃ©faut est de laisser ce champ vide. Le systÃ¨me sÃ©lectionnera alors l'interprÃ©teur par dÃ©faut.
+.TP
+\fB\-u\fR, \fB\-\-uid\fR \fIUID\fR
+La valeur numÃ©rique de l'identifiant de l'utilisateur. Cette valeur doit Ãªtre unique, Ã  moins que l'option
+\fB\-o\fR
+ne soit utilisÃ©e. La valeur ne doit pas Ãªtre nÃ©gative. Le comportement par dÃ©faut est d'utiliser la plus petite valeur d'identifiant plus grande que 999, et plus grande que celle des identifiants de tous les autres utilisateurs. Les valeurs comprises entre 0 et 999 sont gÃ©nÃ©ralement rÃ©servÃ©es pour les comptes systÃ¨mes.
+.SS "Modifier les valeurs par dÃ©faut"
+.PP
+Quand il est invoquÃ© avec l'option
+\fB\-D\fR,
+\fBuseradd\fR
+affichera soit les valeurs actuelles par dÃ©faut, soit mettra Ã  jour les valeurs par dÃ©faut via la ligne de commande. Les options valables sont\ :
+.TP
+\fB\-b\fR \fIRÃ‰P_PERSO\fR
+Le prÃ©fixe du chemin des rÃ©pertoires personnels pour les nouveaux utilisateurs. Le nom de l'utilisateur sera attachÃ© Ã  la fin de
+\fIrÃ©p_perso\fR
+pour crÃ©er le nom du nouveau rÃ©pertoire si l'option
+\fB\-d\fR
+n'est pas utilisÃ©e pendant la crÃ©ation d'un nouveau compte.
+.TP
+\fB\-e\fR \fIdate_fin_validitÃ©\fR
+La date Ã  laquelle le compte utilisateur sera dÃ©sactivÃ©.
+.TP
+\fB\-f\fR \fIdurÃ©e_inactivitÃ©\fR
+Le nombre de jours aprÃ¨s la fin de validitÃ© d'un mot de passe avant que le compte ne soit dÃ©sactivÃ©.
+.TP
+\fB\-g\fR, \fB\-\-gid\fR \fIGROUPE\fR
+Le nom de groupe ou l'identifiant numÃ©rique du groupe initial d'un nouvel utilisateur. Le groupe spÃ©cifiÃ© doit exister, et un identifiant de groupe numÃ©rique doit dÃ©jÃ  exister.
+.TP
+\fB\-s\fR, \fB\-\-shell\fR \fIINTERPRÃ‰TEUR\fR
+Le nom de l'interprÃ©teur de commandes initial (\(Fo\ login shell\ \(Fc) d'un nouvel utilisateur. Le programme nommÃ© sera utilisÃ© pour tous les futurs nouveaux comptes utilisateur.
+.PP
+Si aucune option n'est spÃ©cifiÃ©e,
+\fBuseradd\fR
+affiche les valeurs par dÃ©faut du moment.
+.SH "NOTES"
+.PP
+L'administrateur systÃ¨me doit se charger de placer les fichiers par dÃ©faut dans le rÃ©pertoire
+\fI/etc/skel\fR.
+.SH "AVERTISSEMENTS"
+.PP
+Vous ne pouvez pas ajouter d'utilisateur Ã  un groupe NIS. Cela doit Ãªtre effectuÃ© sur le serveur NIS.
+.PP
+De la mÃªme faÃ§on, si le nom de l'utilisateur existe dans une base de donnÃ©es externe, telle que NIS,
+\fBuseradd\fR
+refusera de crÃ©er l'utilisateur.
+.PP
+Les noms d'utilisateur doivent commencer par une lettre minuscule ou un \(Fo\ underscore\ \(Fc, et seuls des lettres minuscules, des chiffres, des \(Fo\ underscore\ \(Fc, des tirets ou un dollar peuvent suivre. Soit, sous la forme d'une expression rationnelle\ : [a\-z_][a\-z0\-9_\-]*[$]
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sÃ©curisÃ©es sur les comptes utilisateurs
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/default/useradd\fR
+valeurs par dÃ©faut utilisÃ©es par
+\fBuseradd\fR
+.TP
+\fI/etc/skel/\fR
+rÃ©pertoire contenant les fichiers ajoutÃ©s par dÃ©faut aux nouveaux utilisateurs
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachÃ©s \(Fo\ shadow password\ \(Fc
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBuseradd\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succÃ¨s
+.TP
+\fI1\fR
+impossible de mettre Ã  jour le fichier des mots de passe
+.TP
+\fI2\fR
+erreur de syntaxe
+.TP
+\fI3\fR
+argument non valable pour l'option
+.TP
+\fI4\fR
+uid dÃ©jÃ  utilisÃ© (et pas d'option
+\fB\-o\fR)
+.TP
+\fI6\fR
+le groupe spÃ©cifiÃ© n'existe pas
+.TP
+\fI9\fR
+nom d'utilisateur dÃ©jÃ  utilisÃ©
+.TP
+\fI10\fR
+impossible de mettre Ã  jour le fichier des groupes
+.TP
+\fI12\fR
+impossible de supprimer le rÃ©pertoire personnel
+.TP
+\fI13\fR
+impossible de crÃ©er le rÃ©pertoire d'attente des courriels
 .SH "VOIR AUSSI"
-.BR chfn (1),
-.BR chsh (1),
-.BR crypt (3),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR userdel (8),
-.BR usermod (8)
-.SH AUTEUR
-Julianne Frances Haugh (jfh@bga.com)
-.SH TRADUCTION
-Frédéric Delanoy, 2000.
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBcrypt\fR(3),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBgroupmod\fR(8),
+\fBlogin.defs\fR(5),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

@@ -29,15 +29,14 @@
 
 #include <config.h>
 
-#ident "$Id: groupdel.c,v 1.29 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: groupdel.c,v 1.30 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
 #include <grp.h>
 #include <pwd.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include <stdio.h>
 #include <sys/types.h>
@@ -201,13 +200,6 @@ static void group_busy (gid_t gid)
 	fprintf (stderr, _("%s: cannot remove user's primary group.\n"), Prog);
 	exit (E_GROUP_BUSY);
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * main - groupdel command

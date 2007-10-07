@@ -1,0 +1,38 @@
+.\" Original author unknown.  This man page is in the public domain.
+.\" Modified Sat Oct  9 17:46:48 1993 by faith@cs.unc.edu
+.TH NEWGRP 1 "9 October 1993" "Linux 1.2" "Linux Programmer's Manual"
+
+.SH NAME
+newgrp \- 登录到新的用户组中
+
+.SH "总览 (SYNOPSIS)"
+.BI "newgrp [ " group " ]"
+
+.SH "描述 (DESCRIPTION)"
+.B Newgrp
+改变 调用者 的 用户组标识, 类似于
+.BR login (1).
+调用者 仍旧 登录 在 系统 中, 当前目录 也不变, 但是 文件的访问权限 将 根据
+新的 用户组 ID 计算.
+.LP
+如果 没有 指定 用户组, GID 将 变成 登录 的 GID.
+.LP
+
+.SH "文件 (FILES)"
+.I /etc/group
+.br
+.I /etc/passwd
+
+.SH "另见 (SEE ALSO)"
+.BR login "(1), " group (5)
+
+.SH "作者 (AUTHOR)"
+Originally by Michael Haardt. Currently maintained by 
+Peter Orbaek (poe@daimi.aau.dk).
+
+.SH "[中文版维护人]"
+.B 徐明 <xuming@users.sourceforge.net>
+.SH "[中文版最新更新]"
+.BR 2003/05/13
+.SH "《中国Linux论坛man手册页翻译计划》"
+.BI http://cmpp.linuxforum.net

@@ -22,7 +22,78 @@ Mailing lists archives:
 	shadow@pld.org.pl - http://mail.pld.org.pl/mailman/pipermail/shadow/
 	shadow-commit@pld.org.pl - http://mail.pld.org.pl/mailman/pipermail/shadow-commit/
 
+Authors and contributors
+========================
+
+Thanks to at least the following people for sending me patches, bug
+reports and various comments.  This list may be incomplete, I received
+a lot of mail...
+
+
+Adam Rudnicki <adam@v-lo.krakow.pl>
+Alan Curry <pacman@tardis.mars.net>
+Alexander O. Yuriev <alex@bach.cis.temple.edu>
+Algis Rudys <arudys@rice.edu>
+Andreas Jaeger <aj@arthur.rhein-neckar.de>
+Aniello Del Sorbo <anidel@edu-gw.dia.unisa.it>
+Anton Gluck <gluc@midway.uchicago.edu>
+Arkadiusz Miskiewicz <misiek@pld.org.pl>
+Ben Collins <bcollins@debian.org>
+Brian R. Gaeke <brg@dgate.org>
+Calle Karlsson <ckn@kash.se>
+Chip Rosenthal <chip@unicom.com>
+Chris Evans <lady0110@sable.ox.ac.uk>
+Cristian Gafton <gafton@sorosis.ro>
+Darcy Boese <possum@chardonnay.niagara.com>
+Dave Hagewood <admin@arrowweb.com>
+David A. Holland <dholland@hcs.harvard.edu>
+David Frey <David.Frey@lugs.ch>
+Ed Carp <ecarp@netcom.com>
+Floody <flood@evcom.net>
+Frank Denis <j@4u.net>
+George Kraft IV <gk4@us.ibm.com>
+Greg Mortensen <loki@world.std.com>
+Guido van Rooij
+Guy Maor <maor@debian.org>
+Hrvoje Dogan <hdogan@bjesomar.srce.hr>
+Janos Farkas <chexum@bankinf.banki.hu>
+Jay Soffian <jay@lw.net>
+Jesse Thilo <Jesse.Thilo@pobox.com>
+Joey Hess <joey@kite.ml.org>
+John Adelsberger <jja@umr.edu>
+Jonathan Hankins <jhankins@mailserv.homewood.k12.al.us>
+Jon Lewis <jlewis@lewis.org>
+Joshua Cowan <jcowan@hermit.reslife.okstate.edu>
+Judd Bourgeois <shagboy@bluesky.net>
+Juergen Heinzl <unicorn@noris.net>
+Juha Virtanen <jiivee@iki.fi>
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>
+Leonard N. Zubkoff <lnz@dandelion.com>
+Luca Berra <bluca@www.polimi.it>
+Lutz Schwalowsky <schwalow@mineralogie.uni-hamburg.de>
+Marc Ewing <marc@redhat.com>
+Martin Bene <mb@sime.com>
+Martin Mares <mj@gts.cz>
+Michael Meskes <meskes@topsystem.de>
+Michael Talbot-Wilson <mike@calypso.bns.com.au>
+Mike Pakovic <mpakovic@users.southeast.net>
+Nicolas François <nicolas.francois@centraliens.net>
+Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>
+Pavel Machek <pavel@bug.ucw.cz>
+Phillip Street
+Rafał Maszkowski <rzm@icm.edu.pl>
+Rani Chouha <ranibey@smartec.com>
+Sami Kerola <kerolasa@rocketmail.com>
+Shane Watts <shane@nexus.mlckew.edu.au>
+Steve M. Robbins <steve@nyongwa.montreal.qc.ca>
+Thorsten Kukuk <kukuk@suse.de>
+Tim Hockin <thockin@eagle.ais.net>
+Timo Karjalainen <timok@iki.fi>
+Ulisses Alonso Camaro <ulisses@pusa.eleinf.uv.es>
+Werner Fink <werner@suse.de>
+
 Maintainer contact
 ==================
 
-Tomasz K�oczko <kloczek@pld.org.pl>
+Tomasz Kłoczko <kloczek@pld.org.pl>
+

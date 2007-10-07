@@ -1,57 +1,57 @@
-.TH PASSWD 5 "19. bøezna 1997" "Linux" "Linux \- pøíruèka programátora"
+.TH PASSWD 5 "19. bÅ™ezna 1997" "Linux" "Linux \- pÅ™Ã­ruÄka programÃ¡tora"
 .do hla cs
 .do hpf hyphen.cs
-.SH JMÉNO
-passwd \- seznam hesel u¾ivatelù
+.SH JMÃ‰NO
+passwd \- seznam hesel uÅ¾ivatelÅ¯
 .SH POPIS
 .B Passwd
-je èitelnı textovı soubor, kterı obsahuje seznam u¾ivatelù systému a hesel,
-která musejí pou¾ít pro pøístup. Seznam hesel u¾ivatelù by mìl bıt s právy
-pro ètení pro ka¾dého, co¾ v poøádku, proto¾e jsou hesla za¹ifrována, ale 
-zápisová práva má jenom superu¾ivatel. Jestli¾e vytvoøíte novı login,
-nechejte pole pro heslo prázdné a pou¾ijte \fBpasswd\fP(1) pro doplnìní.
-Hvìzdièka nebo nìco podobného v poli hesel znaèí, ¾e tento u¾ivatel se nemù¾e
-pøihlásit pøes \fBlogin\fP(1). Jestli¾e je vá¹ koøenovı adresáø v 
+je ÄitelnÃ½ textovÃ½ soubor, kterÃ½ obsahuje seznam uÅ¾ivatelÅ¯ systÃ©mu a hesel,
+kterÃ¡ musejÃ­ pouÅ¾Ã­t pro pÅ™Ã­stup. Seznam hesel uÅ¾ivatelÅ¯ by mÄ›l bÃ½t s prÃ¡vy
+pro ÄtenÃ­ pro kaÅ¾dÃ©ho, coÅ¾ v poÅ™Ã¡dku, protoÅ¾e jsou hesla zaÅ¡ifrovÃ¡na, ale 
+zÃ¡pisovÃ¡ prÃ¡va mÃ¡ jenom superuÅ¾ivatel. JestliÅ¾e vytvoÅ™Ã­te novÃ½ login,
+nechejte pole pro heslo prÃ¡zdnÃ© a pouÅ¾ijte \fBpasswd\fP(1) pro doplnÄ›nÃ­.
+HvÄ›zdiÄka nebo nÄ›co podobnÃ©ho v poli hesel znaÄÃ­, Å¾e tento uÅ¾ivatel se nemÅ¯Å¾e
+pÅ™ihlÃ¡sit pÅ™es \fBlogin\fP(1). JestliÅ¾e je vÃ¡Å¡ koÅ™enovÃ½ adresÃ¡Å™ v 
 .IR /dev/ram,
-tak musíte ulo¾it zmìnìnı soubor hesel do va¹eho koøenového adresáøe na
-disketì nì¾ systém vypnete. Jestli¾e chcete
-vytvoøit skupinu u¾ivatelù, jejich GID musí bıt stejná a musí pro ni
-existovat záznam v souboru \fI/etc/group\fP, nebo skupina nebude existovat.
+tak musÃ­te uloÅ¾it zmÄ›nÄ›nÃ½ soubor hesel do vaÅ¡eho koÅ™enovÃ©ho adresÃ¡Å™e na
+disketÄ› nÄ›Å¾ systÃ©m vypnete. JestliÅ¾e chcete
+vytvoÅ™it skupinu uÅ¾ivatelÅ¯, jejich GID musÃ­ bÃ½t stejnÃ¡ a musÃ­ pro ni
+existovat zÃ¡znam v souboru \fI/etc/group\fP, nebo skupina nebude existovat.
 .PP
-Ka¾dı øádek tvoøí jeden záznam, kterı má následující formát:
+KaÅ¾dÃ½ Å™Ã¡dek tvoÅ™Ã­ jeden zÃ¡znam, kterÃ½ mÃ¡ nÃ¡sledujÃ­cÃ­ formÃ¡t:
 .sp
 .RS
 login_name:passwd:UID:GID:user_name:directory:shell
 .RE
 .sp
-Popis jednotlivıch polí:
+Popis jednotlivÃ½ch polÃ­:
 .sp
 .RS
 .TP 1.0in
 .I login_name
-pøihla¹ovací jméno u¾ivatele systému
+pÅ™ihlaÅ¡ovacÃ­ jmÃ©no uÅ¾ivatele systÃ©mu
 .TP
 .I password
-za¹ifrované heslo u¾ivatele
+zaÅ¡ifrovanÃ© heslo uÅ¾ivatele
 .TP
 .I UID
-èíselná identifikace u¾ivatele (user ID)
+ÄÃ­selnÃ¡ identifikace uÅ¾ivatele (user ID)
 .TP
 .I GID
-èíselná identifikace  skupiny  (group ID)
+ÄÃ­selnÃ¡ identifikace  skupiny  (group ID)
 .TP
 .I user_name
-(volitelné) poznámka (èasto celé jméno u¾ivatele)
+(volitelnÃ©) poznÃ¡mka (Äasto celÃ© jmÃ©no uÅ¾ivatele)
 .TP
 .I directory
-domovskı adresáø u¾ivatele ($HOME)
+domovskÃ½ adresÃ¡Å™ uÅ¾ivatele ($HOME)
 .TP
 .I shell
-program, kterı je spu¹tìn po úspì¹ném pøihlá¹ení (jestli¾e je prázdnı,
-pou¾ije se
+program, kterÃ½ je spuÅ¡tÄ›n po ÃºspÄ›Å¡nÃ©m pÅ™ihlÃ¡Å¡enÃ­ (jestliÅ¾e je prÃ¡zdnÃ½,
+pouÅ¾ije se
 .IR /bin/sh ).
 .RE
 .SH SOUBORY
 .I /etc/passwd
-.SH DAL©Í INFORMACE
+.SH DALÅ Ã INFORMACE
 .BR passwd "(1), " login "(1), " group (5)

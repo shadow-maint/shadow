@@ -1,32 +1,57 @@
-.\" Original author unknown.  This man page is in the public domain.
-.\" Modified Sat Oct  9 17:46:48 1993 by faith@cs.unc.edu
-.TH NEWGRP 1 "9 October 1993" "Linux 1.2" "Manuel du Programmeur Linux"
-.SH NOM
-newgrp \- se connecter sous un nouveau groupe
-.SH SYNOPSIS
-.BI "newgrp [ " groupe " ]"
-.SH DESCRIPTION
-.B Newgrp
-change le groupe de l'appelant, de la mÍme maniËre que
-.BR login (1).
-Le mÍme utilisateur reste connectÈ, et le rÈpertoire courant
-reste inchangÈ, mais l'Èvaluation des droits d'accËs aux fichiers
-se fait en fonction du nouvel identifiant de groupe.
-.LP
-Si aucun groupe n'est spÈcifiÈ, le GID est ÈchangÈ pour celui du login initial.
-.LP
-.SH FICHIERS
-.I /etc/group
-.br
-.I /etc/passwd
-
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "NEWGRP" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+newgrp \- se connecte avec un nouveau groupe
+.SH "SYNOPSIS"
+.HP 7
+\fBnewgrp\fR [\-] [\fIgroupe\fR]
+.SH "DESCRIPTION"
+.PP
+\fBNewgrp\fR
+permet de changer l'identifiant de groupe de l'utilisateur au cours d'une session. Si l'option
+\fB\-\fR
+est fournie, l'environnement de l'utilisateur est r√©initialis√©, comme si l'utilisateur venait de se connecter. Sinon, l'environnement courant est utilis√©. Entre autre, le r√©pertoire de travail est conserv√©.
+.PP
+\fBNewgrp\fR
+change l'identifiant de groupe r√©el √† la valeur du groupe donn√© en argument, ou au groupe par d√©faut d√©fini dans
+\fI/etc/passwd\fR
+si aucun groupe n'est fourni.
+\fBNewgrp\fR
+essaiera √©galement d'ajouter le groupe aux groupes de l'utilisateur. Si l'utilisateur n'est pas superutilisateur, un mot de passe sera demand√© si l'utilisateur n'utilise pas de mot de passe (dans
+\fI/etc/shadow\fR
+si cet utilisateur a une entr√©e dans le fichier des mots de passe cach√©s, ou dans
+\fI/etc/passwd\fR
+sinon), mais que le groupe en a un, ou si l'utilisateur n'est pas dans la liste des membres de ce groupe et que ce groupe utilise un mot de passe. L'acc√®s sera refus√© si le groupe n'a pas de mot de passe et que l'utilisateur ne fait pas partie de ses membres.
+.PP
+S'il y a une entr√©e pour ce groupe dans
+\fI/etc/gshadow\fR, alors la liste des membres et le mot de passe de ce groupe seront pris dans ce fichier, sinon, l'entr√©e du fichier
+\fI/etc/group\fR
+est consid√©r√©e.
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations s√©curis√©es sur les comptes utilisateurs
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cach√©es sur les groupes
 .SH "VOIR AUSSI"
-.BR login "(1), " group (5)
-
-.SH AUTEUR
-Version originale par Michael Haardt. DÈsormais maintenu par
-Peter Orbaek (poe@daimi.aau.dk).
-
-.SH TRADUCTION
-SÈbastien MahÈ, 2001
-
+.PP
+\fBid\fR(1),
+\fBlogin\fR(1),
+\fBsu\fR(1),
+\fBgpasswd\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5).

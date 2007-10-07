@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "USERADD" "8" "09/30/2005" "" ""
+.TH "USERADD" "8" "01/02/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -153,6 +153,10 @@ directory.
 .PP
 You may not add a user to a NIS group. This must be performed on the NIS server.
 .PP
+Similarly, if the username already exists in an external user database such as NIS,
+\fBuseradd\fR
+will deny the user account creation request.
+.PP
 Usernames must begin with a lower case letter or an underscore, and only lower case letters, underscores, dashes, and dollar signs may follow. In regular expression terms: [a\-z_][a\-z0\-9_\-]*[$]
 .SH "FILES"
 .TP
@@ -192,7 +196,7 @@ invalid command syntax
 invalid argument to option
 .TP
 \fI4\fR
-uid already in use (and no
+UID already in use (and no
 \fB\-o\fR)
 .TP
 \fI6\fR
@@ -221,6 +225,3 @@ can't create mail spool
 \fBlogin.defs\fR(5),
 \fBuserdel\fR(8),
 \fBusermod\fR(8).
-.SH "AUTHOR"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)

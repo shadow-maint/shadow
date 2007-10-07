@@ -1,54 +1,54 @@
-.\" $Id: login.access.5,v 1.3 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: login.access.5,v 1.4 2005/12/01 20:38:27 kloczek Exp $
 .TH LOGIN.ACCESS 5
 .\" .Dt SKEY.ACCESS 5
 .\" .Os FreeBSD 1.2
 .SH NAZWA
-login.access \- tabela kontroli dostêpu logowania
+login.access \- tabela kontroli dostÄ™pu logowania
 .SH OPIS
 Plik
 .I login.access
-okre¶la kombinacje (u¿ytkownik, host) i/lub (u¿ytkownik, tty) 
-dla których logowanie bêdzie albo przyjête albo odrzucone.
+okreÅ›la kombinacje (uÅ¼ytkownik, host) i/lub (uÅ¼ytkownik, tty) 
+dla ktÃ³rych logowanie bÄ™dzie albo przyjÄ™te albo odrzucone.
 .PP
-Gdy kto¶ siê loguje, plik
+Gdy ktoÅ› siÄ™ loguje, plik
 .I login.access
-przeszukiwany jest do znalezienia pierwszej pozycji pasuj±cej do danej
-kombinacji (u¿ytkownik, host), lub, w przypadku logowañ nie\-sieciowych
-kombinacji (u¿ytkownik, tty). Pole zezwolenia w tej tablicy pozycji okre¶la
-czy logowanie bêdzie przyjête czy odrzucone.
+przeszukiwany jest do znalezienia pierwszej pozycji pasujÄ…cej do danej
+kombinacji (uÅ¼ytkownik, host), lub, w przypadku logowaÅ„ nie\-sieciowych
+kombinacji (uÅ¼ytkownik, tty). Pole zezwolenia w tej tablicy pozycji okreÅ›la
+czy logowanie bÄ™dzie przyjÄ™te czy odrzucone.
 .PP
-Ka¿dy wiersz tabeli kontroli dostêpu logowania posiada trzy, oddzielone
+KaÅ¼dy wiersz tabeli kontroli dostÄ™pu logowania posiada trzy, oddzielone
 znakiem dwukropka, pola:
 .sp 1
-.IR 	zezwolenie : u¿ytkownicy : pochodzenie
+.IR 	zezwolenie : uÅ¼ytkownicy : pochodzenie
 .sp 1
-Pierwsze pole powinno zawieraæ znak "\fB+\fR" (dostêp zapewniony) lub "\fB\-\fR"
-(zakaz dostêpu). Drugie z pól powinno zawieraæ listê jednego lub wiêcej nazw
-u¿ytkowników, grup lub s³owo
+Pierwsze pole powinno zawieraÄ‡ znak "\fB+\fR" (dostÄ™p zapewniony) lub "\fB\-\fR"
+(zakaz dostÄ™pu). Drugie z pÃ³l powinno zawieraÄ‡ listÄ™ jednego lub wiÄ™cej nazw
+uÅ¼ytkownikÃ³w, grup lub sÅ‚owo
 .B ALL
-(zawsze pasuje do wszystkich). Trzecie pole powinno byæ list± jednej lub wiêcej
-nazw tty (dla logowañ nie\-sieciowych), nazw hostów, domen (rozpoczynaj±cych siê
-od kropki), adresów hostów, internetowych numerów sieci (koñcz±cych siê
-kropk±), s³owem
+(zawsze pasuje do wszystkich). Trzecie pole powinno byÄ‡ listÄ… jednej lub wiÄ™cej
+nazw tty (dla logowaÅ„ nie\-sieciowych), nazw hostÃ³w, domen (rozpoczynajÄ…cych siÄ™
+od kropki), adresÃ³w hostÃ³w, internetowych numerÃ³w sieci (koÅ„czÄ…cych siÄ™
+kropkÄ…), sÅ‚owem
 .B ALL
 (wszystkie \- zawsze pasuje) lub
 .B LOCAL
-(dopasowuje dowolny ³añcuch nie zawieraj±cy kropki).
-Je¿eli uruchomisz NIS mo¿esz u¿yæ @nazwagrupysieciowej we wzorcu hosta
-lub u¿ytkownika.
+(dopasowuje dowolny Å‚aÅ„cuch nie zawierajÄ…cy kropki).
+JeÅ¼eli uruchomisz NIS moÅ¼esz uÅ¼yÄ‡ @nazwagrupysieciowej we wzorcu hosta
+lub uÅ¼ytkownika.
 .\" @netgroupname
 .PP
 Operator
 .B EXCEPT
-(oprócz) umo¿liwia pisanie z³o¿onych regu³.
+(oprÃ³cz) umoÅ¼liwia pisanie zÅ‚oÅ¼onych reguÅ‚.
 .PP
-Plik grup przeszukiwany jest wy³±cznie wtedy, gdy nazwa nie pasuje do
-loguj±cego siê u¿ytkownika. Dopasowywane s± tylko te grupy, w których
-u¿ytkownik jest jawnie wymieniony: program nie sprawdza warto¶ci
-identyfikatora grupy g³ównej u¿ytkownika.
+Plik grup przeszukiwany jest wyÅ‚Ä…cznie wtedy, gdy nazwa nie pasuje do
+logujÄ…cego siÄ™ uÅ¼ytkownika. Dopasowywane sÄ… tylko te grupy, w ktÃ³rych
+uÅ¼ytkownik jest jawnie wymieniony: program nie sprawdza wartoÅ›ci
+identyfikatora grupy gÅ‚Ã³wnej uÅ¼ytkownika.
 .SH PLIKI
 .I /etc/login.access
-.SH ZOBACZ TAK¯E
+.SH ZOBACZ TAKÅ»E
 .BR login (1)
 .SH AUTOR
 Guido van Rooij

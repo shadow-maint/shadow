@@ -1,4 +1,4 @@
-.\" $Id: groupadd.8,v 1.14 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: groupadd.8,v 1.15 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,47 +27,47 @@
 .\" SUCH DAMAGE.
 .TH GROUPADD 8
 .SH NAZWA
-groupadd \- twórz now± grupê
-.SH SK£ADNIA
+groupadd \- twÃ³rz nowÄ… grupÄ™
+.SH SKÅADNIA
 \fBgroupadd\fR [\fB\-g\fR \fIgid\fR [\fB\-o\fR]] [\fB\-f\fR] \fIgrupa\fR
 .SH OPIS
-Polecenie \fBgroupadd\fR tworzy nowe konto grupy pos³uguj±c siê
-warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi warto¶ciami z systemu.
+Polecenie \fBgroupadd\fR tworzy nowe konto grupy posÅ‚ugujÄ…c siÄ™
+wartoÅ›ciami podanymi w wierszu poleceÅ„ i domyÅ›lnymi wartoÅ›ciami z systemu.
 W razie potrzeby zostanie wprowadzona do systemu nowa grupa.
 .SH OPCJE
-Polecenie \fBgroupadd\fR posiada nastêpuj±ce opcje:
+Polecenie \fBgroupadd\fR posiada nastÄ™pujÄ…ce opcje:
 .TP
 .BI \-f
-Ta opcja powoduje zakoñczenie programu ze statusem oznaczaj±cym sukces je¶li
-podana groupa ju¿ istnieje. Z opcj± \fB\-g\fR, je¶li podany gid ju¿ istnieje,
-wybierany jest inny (unikalny) gid (czyli \fB\-g\fR jest wy³±czane).
+Ta opcja powoduje zakoÅ„czenie programu ze statusem oznaczajÄ…cym sukces jeÅ›li
+podana groupa juÅ¼ istnieje. Z opcjÄ… \fB\-g\fR, jeÅ›li podany gid juÅ¼ istnieje,
+wybierany jest inny (unikalny) gid (czyli \fB\-g\fR jest wyÅ‚Ä…czane).
 .TP
 .BI \-g " gid"
-Numeryczna warto¶æ identyfikatora grupy. Warto¶æ ta musi byæ niepowtarzalna,
-chyba ¿e u¿yto opcji \fB\-o\fR. Warto¶æ ID grupy nie mo¿e byæ ujemna. Domy¶lnie
-u¿ywana jest najmniejsza warto¶æ identyfikatora wiêksza ni¿ 999 a wiêksza ni¿
+Numeryczna wartoÅ›Ä‡ identyfikatora grupy. WartoÅ›Ä‡ ta musi byÄ‡ niepowtarzalna,
+chyba Å¼e uÅ¼yto opcji \fB\-o\fR. WartoÅ›Ä‡ ID grupy nie moÅ¼e byÄ‡ ujemna. DomyÅ›lnie
+uÅ¼ywana jest najmniejsza wartoÅ›Ä‡ identyfikatora wiÄ™ksza niÅ¼ 999 a wiÄ™ksza niÅ¼
 jakiejkolwiek innej grupy.
-Warto¶ci miêdzy 0 a 999 s± zwykle zarezerwowane dla kont systemowych.
+WartoÅ›ci miÄ™dzy 0 a 999 sÄ… zwykle zarezerwowane dla kont systemowych.
 .SH PLIKI
 \fI/etc/group\fR	\- informacja o kontach grup
 .br
 \fI/etc/gshadow\fR	\- bezpieczna informacja o kontach grup
-.SH KOD ZAKOÑCZENIA
+.SH KOD ZAKOÅƒCZENIA
 .TP 2
-Polecenie \fBgroupadd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+Polecenie \fBgroupadd\fR koÅ„czy dziaÅ‚anie z nastÄ™pujÄ…cymi wartoÅ›ciami kodÃ³w zakoÅ„czenia:
 .br
 \fB0\fR	\- powodzenie
 .br
-\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+\fB2\fR	\- niewÅ‚aÅ›ciwa skÅ‚adnia parametrÃ³w polecenia
 .br
-\fB3\fR	\- niew³a¶ciwe parametry opcji
+\fB3\fR	\- niewÅ‚aÅ›ciwe parametry opcji
 .br
-\fB4\fR	\- uid jest ju¿ u¿ywany (i nie u¿yto opcji \-o)
+\fB4\fR	\- uid jest juÅ¼ uÅ¼ywany (i nie uÅ¼yto opcji \-o)
 .br
 \fB9\fR	\- nazwa groupy nie jest unikalna
 .br
-\fB10\fR	\- niemo¿liwa aktualizacja plików grup
-.SH ZOBACZ TAK¯E
+\fB10\fR	\- niemoÅ¼liwa aktualizacja plikÃ³w grup
+.SH ZOBACZ TAKÅ»E
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),

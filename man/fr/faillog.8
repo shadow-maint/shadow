@@ -1,0 +1,81 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "FAILLOG" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+faillog \- Examiner le fichier faillog, et fixer les limites d'échecs de connexion
+.SH "SYNOPSIS"
+.HP 8
+\fBfaillog\fR [\fIoptions\fR]
+.SH "DESCRIPTION"
+.PP
+\fBFaillog\fR
+affiche le contenu du journal des échecs de connexion (\fI/var/log/faillog\fR), et maintient le décompte et les limitations de ces échecs. Exécuter
+\fBfaillog\fR
+sans argument n'affiche que la liste des échecs des utilisateurs qui ont déjà eu un échec de connection.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBfaillog\fR
+sont\ :
+.TP
+\fB\-a\fR, \fB\-\-all\fR
+Affiche les échecs de tous les utilisateurs.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-l\fR, \fB\-\-lock\-time\fR \fISEC\fR
+Verouille le compte pendant
+\fISEC\fR
+secondes après un échec de connexion.
+.TP
+\fB\-m\fR, \fB\-\-maximum\fR \fIMAX\fR
+Fixe le nombre maximum d'échecs de connexion après lesquels le compte sera désactivé à
+\fIMAX\fR. Une limite
+\fIMAX\fR
+de 0 aura pour effet de ne pas placer de limite d'échec. La limite pour l'utilisateur
+\fIroot\fR
+devrait toujours être 0 pour éviter tout risque de déni de service contre le système.
+.TP
+\fB\-r\fR, \fB\-\-reset\fR
+Remet les compteurs (ou un compteur, si l'option \-u
+\fIIDENTIFIANT\fR
+est utilisée) des échecs de connexion à zéro. L'accès en écriture sur
+\fI/var/log/faillog\fR
+est nécessaire pour cette option.
+.TP
+\fB\-t\fR, \fB\-\-time\fR \fIJOURS\fR
+Affiche les entrée de faillog plus récentes que
+\fIJOURS\fR. L'option
+\fB\-t\fR
+surcharge l'utilisation de l'option
+\fB\-u\fR.
+.TP
+\fB\-u\fR, \fB\-\-user\fR \fIIDENTIFIANT\fR
+Affiche l'entrée de faillog ou maitient le décompte et les limitations (suivant que l'option
+\fB\-l\fR,
+\fB\-m\fR
+ou
+\fB\-r\fR
+est utilisée) seulement pour l'utilisateur
+\fIIDENTIFIANT\fR.
+.SH "AVERTISSEMENTS"
+.PP
+\fBFaillog\fR
+n'affiche que les utilisateurs n'ayant pas eu de connexion réussie depuis leur dernier échec. Pour afficher un utilisateur ayant eu une connexion réussie depuis son dernier échec, vous devez explicitement demander cet utilisateur avec l'option
+\fB\-u\fR, ou demander l'affichage de tous les utilisateurs avec l'option
+\fB\-a\fR.
+.SH "FICHIERS"
+.TP
+\fI/var/log/faillog\fR
+journal des échecs de connexion
+.SH "VOIR AUSSI"
+.PP
+\fBlogin\fR(1),
+\fBfaillog\fR(5).

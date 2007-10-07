@@ -1,62 +1,62 @@
 .TH ID 1 "GNU Shell Utilities" "FSF" \" \-*\- nroff \-*\-
 .do hla cs
 .do hpf hyphen.cs
-.SH JMÉNO
-id \- vypí¹e reálnı a efektivní UID a GID
-.SH POU®ITÍ
+.SH JMÃ‰NO
+id \- vypÃ­Å¡e reÃ¡lnÃ½ a efektivnÃ­ UID a GID
+.SH POUÅ½ITÃ
 .B id
 [\-gnruG] [\-\-group] [\-\-name] [\-\-real] [\-\-user] [\-\-groups]
-[\-\-help] [\-\-version] [u¾ivatel]
+[\-\-help] [\-\-version] [uÅ¾ivatel]
 .SH POPIS
-Tato dokumentace není dále udr¾ována a mù¾e bıt nepøesná nebo neúplná.
-Autoritativním zdrojem je Texinfo dokumentace.
+Tato dokumentace nenÃ­ dÃ¡le udrÅ¾ovÃ¡na a mÅ¯Å¾e bÃ½t nepÅ™esnÃ¡ nebo neÃºplnÃ¡.
+AutoritativnÃ­m zdrojem je Texinfo dokumentace.
 .PP
-Tato manuálová stránka popisuje GNU verzi pøíkazu
+Tato manuÃ¡lovÃ¡ strÃ¡nka popisuje GNU verzi pÅ™Ã­kazu
 .BR id .
-Pøíkaz
+PÅ™Ã­kaz
 .B id
-vypí¹e informace o zadaném u¾ivateli nebo (pokud není jméno u¾ivatele
-zadáno) o u¾ivateli, kterı program
+vypÃ­Å¡e informace o zadanÃ©m uÅ¾ivateli nebo (pokud nenÃ­ jmÃ©no uÅ¾ivatele
+zadÃ¡no) o uÅ¾ivateli, kterÃ½ program
 .B id
-spustil. Implicitnì vypisuje reálné user ID, reálné group ID,
-efektivní user ID, pokud se li¹í od reálného user ID, efektivní
-group ID, pokud se li¹í od reálného group ID, a group ID skupin,
-v nich¾ je u¾ivatel èlenem. Pøed ka¾dou z hodnot je vypsán øetìzec
-urèující o jakou hodnotu se jedná a za ka¾dou jsou odpovídající
-jména skupin a u¾ivatelù v závorkách.
+spustil. ImplicitnÄ› vypisuje reÃ¡lnÃ© user ID, reÃ¡lnÃ© group ID,
+efektivnÃ­ user ID, pokud se liÅ¡Ã­ od reÃ¡lnÃ©ho user ID, efektivnÃ­
+group ID, pokud se liÅ¡Ã­ od reÃ¡lnÃ©ho group ID, a group ID skupin,
+v nichÅ¾ je uÅ¾ivatel Älenem. PÅ™ed kaÅ¾dou z hodnot je vypsÃ¡n Å™etÄ›zec
+urÄujÃ­cÃ­ o jakou hodnotu se jednÃ¡ a za kaÅ¾dou jsou odpovÃ­dajÃ­cÃ­
+jmÃ©na skupin a uÅ¾ivatelÅ¯ v zÃ¡vorkÃ¡ch.
 .PP
-Volby zpùsobí, ¾e program
+Volby zpÅ¯sobÃ­, Å¾e program
 .B id
-vypisuje pouze nìkteré z tìchto informací.
+vypisuje pouze nÄ›kterÃ© z tÄ›chto informacÃ­.
 .SS VOLBY
 .TP
 .I "\-g, \-\-group"
-Vypí¹e pouze group ID.
+VypÃ­Å¡e pouze group ID.
 .TP
 .I "\-G, \-\-groups"
-Vypí¹e pouze skupiny, v nich¾ je u¾ivatel èlenem.
+VypÃ­Å¡e pouze skupiny, v nichÅ¾ je uÅ¾ivatel Älenem.
 .TP
 .I "\-\-help"
-Vypí¹e návod k pou¾ití na standardní vıstup a bezchybnì skonèí.
+VypÃ­Å¡e nÃ¡vod k pouÅ¾itÃ­ na standardnÃ­ vÃ½stup a bezchybnÄ› skonÄÃ­.
 .TP
 .I "\-n, \-\-name"
-Vypí¹e jméno u¾ivatele nebo skupiny místo èísla ID.
-Vy¾aduje
+VypÃ­Å¡e jmÃ©no uÅ¾ivatele nebo skupiny mÃ­sto ÄÃ­sla ID.
+VyÅ¾aduje
 .IR \-u ,
 .IR \-g ,
 nebo
 .IR \-G .
 .TP
 .I "\-r, \-\-real"
-Vypí¹e reálné místo efektivních user a group ID.
-Vy¾aduje
+VypÃ­Å¡e reÃ¡lnÃ© mÃ­sto efektivnÃ­ch user a group ID.
+VyÅ¾aduje
 .IR \-u ,
 .IR \-g ,
 nebo
 .IR \-G .
 .TP
 .I "\-u, \-\-user"
-Vypí¹e pouze user ID.
+VypÃ­Å¡e pouze user ID.
 .TP
 .I "\-\-version"
-Vypí¹e èíslo verze na standardní vıstup a bezchybnì skonèí.
+VypÃ­Å¡e ÄÃ­slo verze na standardnÃ­ vÃ½stup a bezchybnÄ› skonÄÃ­.

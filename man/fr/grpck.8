@@ -1,0 +1,104 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "GRPCK" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+grpck \- Vérifier l'intégrité des fichiers d'administration des groupes
+.SH "SYNOPSIS"
+.HP 6
+\fBgrpck\fR [\-r] [\fIgroupe\fR\ \fIshadow\fR]
+.SH "DESCRIPTION"
+.PP
+\fBGrpck\fR
+vérifie l'intégrité des informations d'authentification du système. Toutes les entrées des fichiers
+\fI/etc/group\fR
+et
+\fI/etc/gshadow\fR
+sont vérifiées afin de s'assurer qu'elles ont le bon format et qu'elles contiennent des données valables dans chaque champ. Une confirmation de l'utilisateur sera demandée pour détruire les entrées mal formatées ou ayant d'autres erreurs non récupérables.
+.PP
+Voici les vérifications effectuées\ :
+.TP 3
+\(bu
+nombre correct de champs
+.TP
+\(bu
+unicité des noms de groupe
+.TP
+\(bu
+validité des membres et administrateurs
+.PP
+Une erreur dans le nombre de champs ou la non unicité d'un nom de groupe sera fatale. Si le nombre de champs n'est pas correct, il sera demandé à l'utilisateur de supprimer la ligne. Si l'utilisateur ne répond pas par l'affirmative, les vérifications suivantes ne seront pas effectuées. Il sera également demandé de supprimer les entrées correspondant aux noms de groupe redondants, mais dans ce cas, les autres vérifications sont effectuées. Toutes les autres erreurs ne sont que des avertissements et l'utilisateur est encouragé à utiliser
+\fBgroupmod\fR
+pour les corriger.
+.PP
+Les commandes qui opèrent sur le fichier
+\fI/etc/group\fR
+ne peuvent pas modifier les entrées corrompues ou redondantes.
+\fBGrpck\fR
+doit être utilisé dans ce cas pour retirer ces entrées.
+.SH "OPTIONS"
+.PP
+Par défaut,
+\fBgrpck\fR
+opère sur les fichiers
+\fI/etc/group\fR
+et
+\fI/etc/gshadow\fR. L'utilisateur peut spécifier d'autres fichiers avec les paramètres
+\fIgroup\fR
+et
+\fIgshadow\fR. De plus, l'utilisateur peut exécuter les commandes en lecture seule en utilisant l'option
+\fB\-r\fR. Ceci aura pour conséquence de répondre
+\fIno\fR
+à toutes les questions demandant des modifications, sans intervention de l'utilisateur.
+\fBGrpck\fR
+permet aussi de trier les entrées de
+\fI/etc/group\fR
+et
+\fI/etc/gshadow\fR
+par GID. Pour effectuer ce tri, utilisez l'option
+\fB\-s\fR. Aucune vérification n'est alors effectuée, les entrées sont seulement triées.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBgroupmod\fR(8).
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBgrpck\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succès
+.TP
+\fI1\fR
+erreur de syntaxe
+.TP
+\fI2\fR
+une entrée de groupe ou plus est incorrecte
+.TP
+\fI3\fR
+impossible d'ouvrir le fichier group
+.TP
+\fI4\fR
+impossible de verrouiller le fichier group
+.TP
+\fI5\fR
+impossible de mettre à jour le fichier group
+

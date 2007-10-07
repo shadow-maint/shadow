@@ -1,0 +1,148 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOGIN" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+login \- Démarrer une session sur le système
+.SH "SYNOPSIS"
+.HP 6
+\fBlogin\fR [\-p] [\fInom_utilisateur\fR] [\fIENV=VAR\fR...]
+.HP 6
+\fBlogin\fR [\-p] [\-h\ \fIhôte\fR] [\-f\ \fInom_utilisateur\fR]
+.HP 6
+\fBlogin\fR [\-p] \-r\ \fIhôte\fR
+.SH "DESCRIPTION"
+.PP
+\fBLogin\fR
+permet d'établir une nouvelle session sur le système. Il est généralement invoqué après avoir répondu à l'invite de login
+\fIlogin:\fR
+sur le terminal de l'utilisateur.
+\fBLogin\fR
+peut être particulier pour l'interpréteur de commandes (\(Fo\ shell\ \(Fc) et ne devrait pas être invoqué comme un sous\-processus. En général,
+\fBlogin\fR
+est traité comme
+\fBexec login\fR, ce qui entraîne la sortie de l'interpréteur de commandes de l'utilisateur. L'exécution de
+\fBlogin\fR
+depuis un interpréteur de commandes (\(Fo\ shell\ \(Fc) autre qu'un interpréteur de commandes initial (\(Fo\ login shell\ \(Fc) produira un message d'erreur.
+.PP
+Un mot de passe est ensuite demandé à l'utilisateur. L'affichage du mot de passe est désactivé pour éviter de révéler le mot de passe. Seul un petit nombre d'échecs sont permis avant que
+\fBlogin\fR
+ne quitte et que la liaison ne soit interrompue.
+.PP
+Si une date de fin de validité du mot de passe a été définie pour ce compte, un nouveau mot de passe pourra vous être demandé. Votre ancien mot de passe et votre nouveau mot de passe vous seront alors demandés avant de pouvoir continuer. Veuillez lire la page de manuel
+\fBpasswd\fR(1)
+pour plus d'informations.
+.PP
+Après une connexion réussie, un message du système et la présence de courrier pourront vous être notifiés. Vous pouvez désactiver l'affichage du message du système (\fI/etc/motd\fR), en créant un fichier vide
+\fI.hushlogin\fR
+dans le répertoire de votre compte. Le message concernant les courriers sera \(Fo\ \fIYou have new mail.\fR\ \(Fc, \(Fo\ \fIYou have mail.\fR\ \(Fc, ou \(Fo\ \fINo Mail.\fR\ \(Fc suivant l'état de votre boîte aux lettres.
+.PP
+Votre identifiant d'utilisateur et de groupe seront placés en fonction des valeurs spécifiées dans le fichier
+\fI/etc/passwd\fR. Les valeurs des variables d'environnement
+\fI$HOME\fR,
+\fI$SHELL\fR,
+\fI$PATH\fR,
+\fI$LOGNAME\fR, et
+\fI$MAIL\fR
+seront affectées en fonction des champs appropriés de l'entrée qui vous correspond. Les valeurs d'ulimit, d'umask et de nice pourront également être affectées en fonction du champ GECOS.
+.PP
+Pour certains systèmes, la variable d'environnement
+\fI$TERM\fR
+sera initialisée au type de terminal de votre tty, comme spécifié dans
+\fI/etc/ttytype\fR.
+.PP
+Un script d'initialisation pour votre interpréteur de commandes pourra également être exécuté. Veuillez vous référer à la section de manuel appropriée pour plus d'informations sur cette fonctionnalité.
+.PP
+Une connexion à un sous\-système est indiquée par la présence d'un \(Fo\ *\ \(Fc comme premier caractère de l'interpréteur de commandes initial. Le répertoire personnel sera utilisé comme racine d'un nouveau système de fichier dans lequel l'utilisateur sera connecté.
+.PP
+Le programme
+\fBlogin\fR
+n'est PAS responsable de la suppression d'utilisateurs dans le fichier utmp. Les responsables du nettoyage de l'appartenance des sessions de terminal sont
+\fBgetty\fR(8)
+et
+\fBinit\fR(8). Si vous utilisez
+\fBlogin\fR
+depuis un interpréteur de commandes sans
+\fBexec\fR, l'utilisateur que vous utilisez continuera à apparaître comme étant connecté même après s'être déconnecté de cette \(Fo\ sous\-session\ \(Fc.
+.SH "OPTIONS"
+.TP
+\fB\-f\fR
+Ne réalise pas d'authentification. L'utilisateur est pré\-authentifié.
+.TP
+\fB\-h\fR
+Nom de l'hôte distant pour cette connexion.
+.TP
+\fB\-p\fR
+Préserve l'environnement.
+.TP
+\fB\-r\fR
+Exécute le protocole de connexion automatique (autologin) pour rlogin.
+.PP
+Les options
+\fB\-r\fR,
+\fB\-h\fR
+et
+\fB\-f\fR
+ne peuvent être utilisées que par root.
+.SH "AVERTISSEMENTS"
+.PP
+Cette version de
+\fBlogin\fR
+a de nombreuses options de compilation. Seules certaines d'entre elles peuvent avoir été activées sur votre site.
+.PP
+L'emplacement des fichiers peut varier suivant la configuration du système.
+.PP
+Le programme
+\fBlogin\fR
+n'est PAS responsable de la suppression d'utilisateurs dans le fichier utmp. Les responsables du nettoyage de l'appartenance des sessions de terminal sont
+\fBgetty\fR(8)
+et
+\fBinit\fR(8). Si vous utilisez
+\fBlogin\fR
+depuis un interpréteur de commandes sans
+\fBexec\fR, l'utilisateur que vous utilisez continuera à apparaître comme étant connecté même après s'être déconnecté de cette \(Fo\ sous\-session\ \(Fc.
+.PP
+Comme pour n'importe quel programme, l'apparance de
+\fBlogin\fR
+peut être immitée. Si des utilisateurs non sûrs ont un accès physique à la machine, un attaquant pourrait utiliser cet accès pour obtenir le mot de passe de la personne qui s'asseyerait ensuite face à l'écran. Sous Linux, le mécanisme SAK peut être utilisé parles utilisateurs pour initier un chemin de confiance et prévenir ce genre d'attaques.
+.SH "FICHIERS"
+.TP
+\fI/var/run/utmp\fR
+liste des connexions courantes
+.TP
+\fI/var/log/wtmp\fR
+Liste des connexions précédentes
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.TP
+\fI/etc/motd\fR
+fichier contenant le message du système
+.TP
+\fI/etc/nologin\fR
+empêcher certains utilisateurs non\-root de se connecter
+.TP
+\fI/etc/ttytype\fR
+liste des types de terminal
+.TP
+\fI$HOME/.hushlogin\fR
+supprimer l'affichage du message du système
+.SH "VOIR AUSSI"
+.PP
+\fBmail\fR(1),
+\fBpasswd\fR(1),
+\fBsh\fR(1),
+\fBsu\fR(1),
+\fBlogin.defs\fR(5),
+\fBnologin\fR(5),
+\fBpasswd\fR(5),
+\fBsecuretty\fR(5),
+\fBgetty\fR(8).

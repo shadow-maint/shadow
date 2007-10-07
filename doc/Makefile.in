@@ -39,7 +39,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 subdir = doc
-DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.in
@@ -177,9 +177,8 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-EXTRA_DIST = HOWTO LICENSE LSM README \
- README.limits README.linux README.nls README.pam \
- README.platforms WISHLIST console.c.spec.txt cracklib26.diff
+EXTRA_DIST = HOWTO README.limits \
+    README.platforms WISHLIST console.c.spec.txt cracklib26.diff
 
 all: all-am
 

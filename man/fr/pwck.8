@@ -1,0 +1,124 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "PWCK" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+pwck \- Vérifier l'intégrité des fichiers de mots de passe
+.SH "SYNOPSIS"
+.HP 5
+\fBpwck\fR [\-q] [\-s] [\fIpasswd\fR\ \fIshadow\fR]
+.HP 5
+\fBpwck\fR [\-q] [\-r] [\fIpasswd\fR\ \fIshadow\fR]
+.SH "DESCRIPTION"
+.PP
+\fBPwck\fR
+vérifie l'intégrité des informations d'authentification du système. Toutes les entrées des fichiers
+\fI/etc/passwd\fR
+et
+\fI/etc/shadow\fR
+sont vérifiées afin de s'assurer qu'elles ont le bon format et qu'elles contiennent des données valables dans chaque champ. Une confirmation de l'utilisateur sera demandée pour détruire les entrées mal formatées ou ayant d'autres erreurs non récupérables.
+.PP
+Voici les vérifications effectuées\ :
+.TP 3
+\(bu
+nombre correct de champs
+.TP
+\(bu
+unicité des noms d'utilisateur
+.TP
+\(bu
+validité des identifiant d'utilisateur et de groupe
+.TP
+\(bu
+validité du groupe primaire
+.TP
+\(bu
+validité du répertoire personnel
+.TP
+\(bu
+validité de l'interpréteur de commandes initial (\(Fo\ login shell\ \(Fc)
+.PP
+Une erreur dans le nombre de champs ou la non unicité d'un nom d'utilisateur sera fatale. Si le nombre de champs n'est pas correct, il sera demandé à l'utilisateur de supprimer la ligne. Si l'utilisateur ne répond pas par l'affirmative, les vérifications suivantes ne seront pas effectuées. Il sera également demandé de supprimer les entrées correspondant aux noms d'utilisateur redondants, mais dans ce cas, les autres vérifications sont effectuées. Toutes les autres erreurs ne sont que des avertissements et l'utilisateur est encouragé à utiliser
+\fBusermod\fR
+pour les corriger.
+.PP
+Les commandes qui opèrent sur le fichier
+\fI/etc/passwd\fR
+ne peuvent pas modifier les entrées corrompues ou redondantes.
+\fBPwck\fR
+doit être utilisé dans ce cas pour retirer ces entrées.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBpwck\fR
+sont\ :
+.TP
+\fB\-q\fR
+Ne rapporte que les erreurs. Les avertissements qui ne nécessite pas une action de la part de l'utilisateur ne seront pas affichées.
+.TP
+\fB\-r\fR
+Permet d'exécuter
+\fBpwck\fR
+dans le mode lecture seule.
+.TP
+\fB\-s\fR
+Trie les entrée de
+\fI/etc/passwd\fR
+et
+\fI/etc/shadow\fR
+par UID.
+.PP
+Par défaut,
+\fBpwck\fR
+opère sur les fichiers
+\fI/etc/passwd\fR
+et
+\fI/etc/shadow\fR. L'utilisateur peut spécifier d'autres fichiers avec les paramètres
+\fIfichier_passwd\fR
+et
+\fIfichier_shadow\fR.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBgroup\fR(5),
+\fBpasswd\fR(5),
+\fBshadow\fR(5),
+\fBusermod\fR(8).
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBpwck\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succès
+.TP
+\fI1\fR
+erreur de syntaxe
+.TP
+\fI2\fR
+une entrée de mot de passe ou plus est incorrecte
+.TP
+\fI3\fR
+impossible d'ouvrir le fichier de mots de passe
+.TP
+\fI4\fR
+impossible de verrouiller le fichier de mots de passe
+.TP
+\fI5\fR
+impossible de mettre à jour le fichier des mots de passe
+

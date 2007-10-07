@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\"$Id: grpck.8,v 1.5 2005/04/21 21:03:16 kloczek Exp $
+.\"$Id: grpck.8,v 1.6 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,11 +29,11 @@
 .\" SUCH DAMAGE.
 .TH GRPCK 8   
 .SH NOME
-grpck \- verifica l'integrit‡ dei file di gruppo
+grpck \- verifica l'integrit√† dei file di gruppo
 .SH SINTASSI
 \fBgrpck\fP [\fB\-r\fP] [\fIgroup\fP \fIshadow\fP]
 .SH DESCRIZIONE
-\fBgrpck\fP verifica l'integrit‡ delle informazioni di autenticazione del 
+\fBgrpck\fP verifica l'integrit√† delle informazioni di autenticazione del 
 sistema. Ogni voce in \fI/etc/group\fP e in \fI/etc/gshadow\fP viene controllata 
 per verificare che abbia il formato corretto e dati validi in ciascun 
 campo. Viene richiesto all'utente di rimuovere le voci che non hanno un 
@@ -50,13 +50,13 @@ Vengono fatti controlli per verificare che ogni voce abbia:
 .in \-.5i
 .sp
 .PP
-Gli errori nelle verifiche sul corretto numero di campi e sull'univocit‡ 
+Gli errori nelle verifiche sul corretto numero di campi e sull'univocit√† 
 del nome del gruppo sono irrimediabili. Se una voce ha un numero errato di 
 campi, all'utente viene chiesto di cancellare l'intera riga; se l'utente non 
 risponde affermativamente, vengono omessi tutti gli ulteriori 
 controlli. Viene richiesta la cancellazione anche per le voci aventi il nome 
 del gruppo duplicato, ma i rimanenti controlli vengono ugualmente 
-effettuati. Tutti gli altri errori non sono gravi e l'utente Ë invitato a 
+effettuati. Tutti gli altri errori non sono gravi e l'utente √® invitato a 
 eseguire il comando \fBgroupmod\fP per correggerli.
 .PP
 I comandi che operano sul file \fI/etc/group\fP non sono in grado di modificare 
@@ -64,12 +64,12 @@ voci corrotte o duplicate; in tali circostanze va usato \fBgrpck\fP per
 rimuovere la voce scorretta.
 .SH OPZIONI
 Come impostazione predefinita, \fBgrpck\fP opera sui file \fI/etc/group\fP e in 
-\fI/etc/gshadow\fP. L'utente puÚ selezionare file alternativi con i parametri 
-\fIgroup\fP e \fIshadow\fP. Inoltre, il comando puÚ essere eseguito in modalit‡ 
+\fI/etc/gshadow\fP. L'utente pu√≤ selezionare file alternativi con i parametri 
+\fIgroup\fP e \fIshadow\fP. Inoltre, il comando pu√≤ essere eseguito in modalit√† 
 di sola lettura specificando l'opzione \fB\-r\fP: questo fa in modo che, senza 
 l'intervento dell'utente, venga risposto \fBno\fP a tutte le domande che 
 riguardano i cambiamenti. Con \fBgrpck\fP si possono anche ordinare per GID le 
-voci in \fI/etc/group\fP e in \fI/etc/gshadow\fP, Ë sufficiente fornire l'opzione 
+voci in \fI/etc/group\fP e in \fI/etc/gshadow\fP, √® sufficiente fornire l'opzione 
 \fB\-s\fP. Non viene effettuato nessun controllo, il programma si limita a 
 ordinare i file.
 .SH FILE
@@ -89,7 +89,7 @@ Il comando \fBgrpck\fP restituisce i seguenti valori:
 .br
 \fB1\fP	\- errore di sintassi
 .br
-\fB2\fP	\- una o pi˘ voci di gruppo contengono errori
+\fB2\fP	\- una o pi√π voci di gruppo contengono errori
 .br
 \fB3\fP	\- impossibile aprire i file dei gruppi
 .br

@@ -2,7 +2,7 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='faillog.5'>
-  <!-- $Id: faillog.5.xml,v 1.10 2005/09/20 15:22:24 kloczek Exp $ -->
+  <!-- $Id: faillog.5.xml,v 1.13 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>5</manvolnum>
@@ -19,7 +19,7 @@
       record, indexed by numerical UID. Each record contains the count of
       login failures since the last successful login; the maximum number of
       failures before the account is disabled; the line the last login
-      failure occured on; and the date the last login failure occured.
+      failure occurred on; and the date the last login failure occurred.
     </para>
 
     <para>The structure of the file is:</para>
@@ -51,11 +51,6 @@ struct	faillog {
 	<refentrytitle>faillog</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>
 

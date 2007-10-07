@@ -1,6 +1,6 @@
 .\" This file was generated with po4a. Translate the source file.
 .\" 
-.\" $Id: login.1,v 1.3 2005/04/21 21:03:16 kloczek Exp $
+.\" $Id: login.1,v 1.4 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -39,28 +39,28 @@ login \- apre una sessione sul sistema
 .SH DESCRIZIONE
 \fBlogin\fP viene utilizzato per aprire una sessione sul sistema. Normalmente 
 viene invocato automaticamente rispondendo al prompt \fIlogin:\fP del 
-terminale. \fBlogin\fP puÚ essere trattato in maniera speciale dalla shell e 
-non puÚ essere invocato come sottoprocesso. Normalmente \fBlogin\fP Ë 
+terminale. \fBlogin\fP pu√≤ essere trattato in maniera speciale dalla shell e 
+non pu√≤ essere invocato come sottoprocesso. Normalmente \fBlogin\fP √® 
 trattato dalla shell come \fBexec login\fP che termina la shell utente 
 attuale. L'esecuzione di \fBlogin\fP da una shell che non sia quella di login 
 produce un messaggio d'errore.
 .PP
 All'utente viene quindi chiesta la password, se necessario. Durante questa 
-operazione l'eco sul terminale Ë disabilitato per non rivelare la 
-password. Solo un basso numero di tentativi falliti Ë permesso prima che 
+operazione l'eco sul terminale √® disabilitato per non rivelare la 
+password. Solo un basso numero di tentativi falliti √® permesso prima che 
 \fBlogin\fP termini e che la connessione sia rallentata.
 .PP
-Se la scadenza delle password Ë abilitata per il proprio account, prima di 
-proseguire ci puÚ essere la richiesta di una nuova password. Il programma 
-chieder‡ prima la vecchia password e poi la nuova per poter continuare. Per 
+Se la scadenza delle password √® abilitata per il proprio account, prima di 
+proseguire ci pu√≤ essere la richiesta di una nuova password. Il programma 
+chieder√† prima la vecchia password e poi la nuova per poter continuare. Per 
 maggiori informazioni si faccia riferimento a \fBpasswd\fP(1).
 .PP
 
 Dopo aver completato correttamente l'accesso, vengono mostrati eventuali 
 messaggi di sistema e si viene informati della presenza di nuova posta. Si 
-puÚ evitare di visualizzare i messaggi in \fI/etc/motd\fP creando un file 
+pu√≤ evitare di visualizzare i messaggi in \fI/etc/motd\fP creando un file 
 vuoto chiamato \fI.hushlogin\fP nella propria directory di login. Il messaggio 
-relativo alla presenza di posta Ë "\fBC'Ë nuova posta.\fP", "\fBC'Ë la solita 
+relativo alla presenza di posta √® "\fBC'√® nuova posta.\fP", "\fBC'√® la solita 
 posta.\fP" o "\fBNessun messaggio di posta.\fP" a seconda dello stato della 
 propria casella di posta.
 
@@ -71,20 +71,20 @@ definiti nel file \fI/etc/passwd\fP. I valori di \fB$HOME\fP, \fB$SHELL\fP, \fB$
 file delle password. I valori per ulimit, umask e nice possono essere 
 impostati in base al campo GECOS.
 .PP
-In alcune installazioni la variabile d'ambiente \fB$TERM\fP puÚ essere 
+In alcune installazioni la variabile d'ambiente \fB$TERM\fP pu√≤ essere 
 impostata in base al tipo di terminale della propria connessione, come 
 specificato in \fI/etc/ttytype\fP.
 .PP
-PuÚ anche essere eseguito uno script di inizializzazione per il proprio 
+Pu√≤ anche essere eseguito uno script di inizializzazione per il proprio 
 interprete dei comandi. Fare riferimento alla relativa pagina di manuale per 
 maggiori informazioni su questa funzione.
 .PP
-Un accesso a un sottosistema Ë indicato dalla presenza del carattere "*" 
+Un accesso a un sottosistema √® indicato dalla presenza del carattere "*" 
 all'inizio della shell di login. La home directory impostata diventa la root 
 di un nuovo file system al quale l'utente accede.
 .SH OPZIONI
 .IP \fB\-f\fP
-Non effettua l'autenticazione, l'utente Ë gi‡ autenticato
+Non effettua l'autenticazione, l'utente √® gi√† autenticato
 .IP \fB\-h\fP
 Nome dell'host remoto per questo login.
 .IP \fB\-p\fP
@@ -98,7 +98,7 @@ Le opzioni \fB\-r\fP, \fB\-h\fP e \fB\-f\fP possono essere utilizzate solo quand
 Questa versione di \fBlogin\fP ha molte opzioni di compilazione; solo una parte 
 di esse potrebbe essere in uso su un determinato sistema.
 .PP
-La posizione dei file Ë soggetta a differenze in base alla configurazione 
+La posizione dei file √® soggetta a differenze in base alla configurazione 
 del sistema.
 .SH FILE
 \fI/var/run/utmp\fP	\t\- elenco delle sessioni di login attive

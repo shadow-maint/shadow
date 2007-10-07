@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='limits.5'>
-  <!-- $Id: limits.5.xml,v 1.13 2005/10/01 15:01:45 kloczek Exp $ -->
+  <!-- $Id: limits.5.xml,v 1.17 2005/11/05 17:17:29 kloczek Exp $ -->
   <refmeta>
-    <refentrytitle>LIMITS</refentrytitle>
+    <refentrytitle>limits</refentrytitle>
     <manvolnum>5</manvolnum>
+    <refmiscinfo class="sectdesc">File Formats and Conversions</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>limits</refname>
@@ -43,27 +44,29 @@
 
     <para>The valid identifiers are:</para>
 
-    <para>A: max address space (KB)
-      C: max core file size (KB)
-      D: max data size (KB)
-      F: maximum filesize (KB)
-      M: max locked-in-memory address space (KB)
-      N: max number of open files
-      R: max resident set size (KB)
-      S: max stack size (KB)
-      T: max CPU time (MIN)
-      U: max number of processes
-      K: file creation mask, set by
-      <citerefentry>
-	<refentrytitle>umask</refentrytitle><manvolnum>2</manvolnum>
-      </citerefentry>
-      .
-      L: max number of logins for this user
-      P: process priority, set by
-      <citerefentry>
-      <refentrytitle>setpriority</refentrytitle><manvolnum>2</manvolnum>
-      </citerefentry>.
-    </para>
+    <itemizedlist>
+      <listitem><para>A: max address space (KB)</para></listitem>
+      <listitem><para>C: max core file size (KB)</para></listitem>
+      <listitem><para>D: max data size (KB)</para></listitem>
+      <listitem><para>F: maximum filesize (KB)</para></listitem>
+      <listitem><para>M: max locked-in-memory address space (KB)</para></listitem>
+      <listitem><para>N: max number of open files</para></listitem>
+      <listitem><para>R: max resident set size (KB)</para></listitem>
+      <listitem><para>S: max stack size (KB)</para></listitem>
+      <listitem><para>T: max CPU time (MIN)</para></listitem>
+      <listitem><para>U: max number of processes</para></listitem>
+      <listitem><para>K: file creation mask, set by
+	<citerefentry>
+	  <refentrytitle>umask</refentrytitle><manvolnum>2</manvolnum>
+	</citerefentry>.</para>
+      </listitem>
+      <listitem><para>L: max number of logins for this user</para></listitem>
+      <listitem><para>P: process priority, set by
+	<citerefentry>
+	  <refentrytitle>setpriority</refentrytitle><manvolnum>2</manvolnum>
+	</citerefentry>.</para>
+      </listitem>
+    </itemizedlist>
 
     <para>
       For example, <emphasis remap='I'>L2D2048N5</emphasis> is a valid
@@ -123,10 +126,5 @@
 	<refentrytitle>setrlimit</refentrytitle><manvolnum>2</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Cristian Gafton (gafton@sorosis.ro)</para>
   </refsect1>
 </refentry>

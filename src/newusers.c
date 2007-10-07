@@ -35,7 +35,7 @@
 
 #include <config.h>
 
-#ident "$Id: newusers.c,v 1.30 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: newusers.c,v 1.31 2005/10/19 15:21:07 kloczek Exp $"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -44,8 +44,7 @@
 #include <grp.h>
 #include <fcntl.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "prototypes.h"
 #include "defines.h"
@@ -273,13 +272,6 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 
 	return !spw_update (&spent);
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 int main (int argc, char **argv)
 {

@@ -2,10 +2,11 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
 		"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd">
 <refentry id='groupadd.8'>
-  <!-- $Id: groupadd.8.xml,v 1.20 2005/09/30 15:41:20 kloczek Exp $ -->
+  <!-- $Id: groupadd.8.xml,v 1.24 2006/01/02 14:13:39 kloczek Exp $ -->
   <refmeta>
     <refentrytitle>groupadd</refentrytitle>
     <manvolnum>8</manvolnum>
+    <refmiscinfo class="sectdesc">System Management Commands</refmiscinfo>
   </refmeta>
   <refnamediv id='name'>
     <refname>groupadd</refname>
@@ -16,7 +17,7 @@
     <cmdsynopsis>
       <command>groupadd</command>
       <arg choice='opt'>
-	<arg choice='plain'>-g <replaceable>gid</replaceable></arg>
+	<arg choice='plain'>-g <replaceable>GID</replaceable></arg>
 	<arg choice='opt'>-o</arg>
       </arg>
       <arg choice='opt'>-f </arg>
@@ -50,7 +51,7 @@
 	<listitem>
 	  <para>This option causes to just exit with success status if the
 	    specified group already exists. With <option>-g</option>, if
-	    specified gid already exists, other (unique) gid is chosen (i.e.
+	    specified GID already exists, other (unique) GID is chosen (i.e.
 	    <option>-g</option> is turned off).
 	  </para>
 	</listitem>
@@ -139,6 +140,15 @@
        follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
      </para>
      <para>Groupnames may only be up to 16 characters long.</para>
+
+     <para>
+       If the groupname already exists in an external group database
+       such as NIS, <command>groupadd</command> will deny the group
+       creation request.
+     </para>
+
+     <para>Groupnames may only be up to 16 characters long.</para>
+
    </refsect1>
 
   <refsect1 id='exit_values'>
@@ -167,7 +177,7 @@
 	<varlistentry>
 	  <term><replaceable>4</replaceable></term>
 	  <listitem>
-	    <para>gid not unique (when <option>-o</option> not used)</para>
+	    <para>GID not unique (when <option>-o</option> not used)</para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -219,10 +229,5 @@
 	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
-  </refsect1>
-
-  <refsect1 id='author'>
-    <title>AUTHOR</title>
-    <para>Julianne Frances Haugh (jockgrrl@ix.netcom.com)</para>
   </refsect1>
 </refentry>

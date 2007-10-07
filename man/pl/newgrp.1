@@ -1,4 +1,4 @@
-.\" $Id: newgrp.1,v 1.11 2005/04/12 18:08:47 kloczek Exp $
+.\" $Id: newgrp.1,v 1.12 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -30,38 +30,38 @@
 newgrp \- zalogowanie do nowej grupy
 .br
 sg \- wykonanie polecenia z innym ID grupy
-.SH SK£ADNIA
+.SH SK≈ÅADNIA
 \fBnewgrp\fR [\fB\-\fR] [\fIgrupa\fR]
 .br
 \fBsg\fR [\fB\-\fR] [\fIgrupa\fR [[\fB\-c\fR] \fIpolecenie\fR]]
 .SH OPIS
-\fBnewgrp\fR s≥uøy do zmiany bieø±cego identyfikatora grupy (GID) podczas
-sesji. W przypadku podania opcji \fB\-\fR ∂rodowisko uøytkownika zostanie
-ponownie zainicjowane, tak jak wÛwczas, gdy uøytkownik siÍ loguje. Jeøeli
-opcja \fB\-\fR nie zostanie uøyta, to bieø±ce ∂rodowisko, ≥±cznie z bieø±cym
+\fBnewgrp\fR s≈Çu≈ºy do zmiany bie≈ºƒÖcego identyfikatora grupy (GID) podczas
+sesji. W przypadku podania opcji \fB\-\fR ≈õrodowisko u≈ºytkownika zostanie
+ponownie zainicjowane, tak jak w√≥wczas, gdy u≈ºytkownik siƒô loguje. Je≈ºeli
+opcja \fB\-\fR nie zostanie u≈ºyta, to bie≈ºƒÖce ≈õrodowisko, ≈ÇƒÖcznie z bie≈ºƒÖcym
 katalogiem roboczym, pozostaje niezmienione.
 .PP
-\fBnewgrp\fR zmienia bieø±cy rzeczywisty identyfikator grupy na identyfikator
-podanej grupy lub, je∂li nie podano nazwy grupy, na identyfikator grupy
-domy∂lnej, wyszczegÛlnionej w \fI/etc/passwd\fR. Jeøeli grupa posiada has≥o,
-za∂ uøytkownik nie ma has≥a b±dº nie jest jej cz≥onkiem, to zostanie poproszony
-o podanie has≥a. Jeøeli has≥o grupy jest puste za∂ uøytkownik nie jest jej
-cz≥onkiem, to efektem bÍdzie odmowa dostÍpu.
+\fBnewgrp\fR zmienia bie≈ºƒÖcy rzeczywisty identyfikator grupy na identyfikator
+podanej grupy lub, je≈õli nie podano nazwy grupy, na identyfikator grupy
+domy≈õlnej, wyszczeg√≥lnionej w \fI/etc/passwd\fR. Je≈ºeli grupa posiada has≈Ço,
+za≈õ u≈ºytkownik nie ma has≈Ça bƒÖd≈∫ nie jest jej cz≈Çonkiem, to zostanie poproszony
+o podanie has≈Ça. Je≈ºeli has≈Ço grupy jest puste za≈õ u≈ºytkownik nie jest jej
+cz≈Çonkiem, to efektem bƒôdzie odmowa dostƒôpu.
 .PP
-Polecenie \fBsg\fR dzia≥a podobnie do \fBnewgrp\fR, z tym øe moøna mu podaÊ
-polecenie. Podane polecenie zostanie wykonane przy uøyciu pow≥oki \fB/bin/sh\fR.
-W przypadku wiÍkszo∂ci pow≥ok, z ktÛrych \fBsg\fR moøe zostaÊ uruchomione,
-polecenie sk≥adaj±ce siÍ z wielu s≥Ûw naleøy umie∂ciÊ w cudzys≥owach. 
-Inna rÛønica pomiÍdzy \fBnewgrp\fR a \fBsg\fR polega na tym, øe niektÛre
-pow≥oki traktuj± \fBnewgrp\fR w sposÛb specjalny, zastÍpuj±c siebie przez
-now± kopiÍ pow≥oki, ktÛr± tworzy \fBnewgrp\fR. Nie zdarza siÍ to w przypadku
-\fBsg\fR, wiÍc po zakoÒczeniu \fBsg\fR uøytkownik powraca do swego
+Polecenie \fBsg\fR dzia≈Ça podobnie do \fBnewgrp\fR, z tym ≈ºe mo≈ºna mu podaƒá
+polecenie. Podane polecenie zostanie wykonane przy u≈ºyciu pow≈Çoki \fB/bin/sh\fR.
+W przypadku wiƒôkszo≈õci pow≈Çok, z kt√≥rych \fBsg\fR mo≈ºe zostaƒá uruchomione,
+polecenie sk≈ÇadajƒÖce siƒô z wielu s≈Ç√≥w nale≈ºy umie≈õciƒá w cudzys≈Çowach. 
+Inna r√≥≈ºnica pomiƒôdzy \fBnewgrp\fR a \fBsg\fR polega na tym, ≈ºe niekt√≥re
+pow≈Çoki traktujƒÖ \fBnewgrp\fR w spos√≥b specjalny, zastƒôpujƒÖc siebie przez
+nowƒÖ kopiƒô pow≈Çoki, kt√≥rƒÖ tworzy \fBnewgrp\fR. Nie zdarza siƒô to w przypadku
+\fBsg\fR, wiƒôc po zako≈Ñczeniu \fBsg\fR u≈ºytkownik powraca do swego
 poprzedniego identyfikatora grupy.
 .SH PLIKI
-\fI/etc/passwd\fR	\- informacja o kontach uøytkownikÛw
+\fI/etc/passwd\fR	\- informacja o kontach u≈ºytkownik√≥w
 .br
 \fI/etc/group\fR	\- informacja o grupach
-.SH ZOBACZ TAKØE
+.SH ZOBACZ TAK≈ªE
 .BR id (1),
 .BR login (1),
 .BR su (1)

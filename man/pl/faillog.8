@@ -1,4 +1,4 @@
-.\" $Id: faillog.8,v 1.8 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: faillog.8,v 1.9 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,58 +27,58 @@
 .\" SUCH DAMAGE.
 .TH FAILLOG 8
 .SH NAZWA
-faillog \- sprawd¼ faillog i ustaw limity b³êdnych logowañ
-.SH SK£ADNIA
+faillog \- sprawdÅº faillog i ustaw limity bÅ‚Ä™dnych logowaÅ„
+.SH SKÅADNIA
 .TP 8
 \fBfaillog\fR [\fB\-u\fR \fInazwa\fR] [\fB\-a\fR] [\fB\-t\fR \fIdni\fR]
 [\fB\-m\fR \fImax\fR] [\fB\-pr\fR] 
 .SH OPIS
-\fBfaillog\fR formatuje zawarto¶æ rejestru nieudanych prób rozpoczêcia sesji,
-\fI/var/log/faillog\fR, oraz obs³uguje ograniczenia i liczniki b³êdnych prób.
-Kolejno¶æ argumentów \fBfaillog\fR jest znacz±ca. Ka¿dy z argumentów jest
-natychmiast przetwarzany w zadanej kolejno¶ci.
+\fBfaillog\fR formatuje zawartoÅ›Ä‡ rejestru nieudanych prÃ³b rozpoczÄ™cia sesji,
+\fI/var/log/faillog\fR, oraz obsÅ‚uguje ograniczenia i liczniki bÅ‚Ä™dnych prÃ³b.
+KolejnoÅ›Ä‡ argumentÃ³w \fBfaillog\fR jest znaczÄ…ca. KaÅ¼dy z argumentÃ³w jest
+natychmiast przetwarzany w zadanej kolejnoÅ›ci.
 .SH OPCJE
-Flaga \fB\-p\fR powoduje, ¿e zapisy o nieudanych logowaniach wy¶wietlane bêd±
-w kolejno¶ci rosn±cych identyfikatorów u¿ytkowników (UID).
-Pos³u¿enie siê flag± \fB\-u\fR \fInazwa\fR spowoduje, ¿e zostanie wy¶wietlony
-wy³±cznie zapis dotycz±cy u¿ytkownika o tej \fInazwie\fR.
-U¿ycie \fB\-t\fR \fIdni\fR powoduje wy¶wietlanie wy³±cznie nieudanych prób
-logowania ¶wie¿szych ni¿ sprzed zadanej liczby \fIdni\fR.
-Flaga \fB\-t\fR uniewa¿nia u¿ycie \fB\-u\fR.
-Flaga \fB\-a\fR powoduje wybranie wszystkich u¿ytkowników.
-W po³±czeniu z flag± \fB\-p\fR flag, opcja ta wybiera wszystkich u¿ytkowników,
-dla których kiedykolwiek odnotowano niepomy¶ln± próbê logowania.
-Opcja ta nie ma znaczenia w po³±czeniu z flag± \fB\-r\fR.
+Flaga \fB\-p\fR powoduje, Å¼e zapisy o nieudanych logowaniach wyÅ›wietlane bÄ™dÄ…
+w kolejnoÅ›ci rosnÄ…cych identyfikatorÃ³w uÅ¼ytkownikÃ³w (UID).
+PosÅ‚uÅ¼enie siÄ™ flagÄ… \fB\-u\fR \fInazwa\fR spowoduje, Å¼e zostanie wyÅ›wietlony
+wyÅ‚Ä…cznie zapis dotyczÄ…cy uÅ¼ytkownika o tej \fInazwie\fR.
+UÅ¼ycie \fB\-t\fR \fIdni\fR powoduje wyÅ›wietlanie wyÅ‚Ä…cznie nieudanych prÃ³b
+logowania Å›wieÅ¼szych niÅ¼ sprzed zadanej liczby \fIdni\fR.
+Flaga \fB\-t\fR uniewaÅ¼nia uÅ¼ycie \fB\-u\fR.
+Flaga \fB\-a\fR powoduje wybranie wszystkich uÅ¼ytkownikÃ³w.
+W poÅ‚Ä…czeniu z flagÄ… \fB\-p\fR flag, opcja ta wybiera wszystkich uÅ¼ytkownikÃ³w,
+dla ktÃ³rych kiedykolwiek odnotowano niepomyÅ›lnÄ… prÃ³bÄ™ logowania.
+Opcja ta nie ma znaczenia w poÅ‚Ä…czeniu z flagÄ… \fB\-r\fR.
 .PP
-\fB\-r\fR s³u¿y do zerowania licznika b³êdnych logowañ. Do poprawnego dzia³ania
+\fB\-r\fR sÅ‚uÅ¼y do zerowania licznika bÅ‚Ä™dnych logowaÅ„. Do poprawnego dziaÅ‚ania
 tej opcji wymagane jest prawo zapisu do \fI/var/log/faillog\fR.
-W po³±czeniu z \fB\-u\fR \fInazwa\fR s³u¿y do zerowania licznika b³êdów u¿ytkownika
+W poÅ‚Ä…czeniu z \fB\-u\fR \fInazwa\fR sÅ‚uÅ¼y do zerowania licznika bÅ‚Ä™dÃ³w uÅ¼ytkownika
 o podanej \fInazwie\fR.
 .PP
-Flaga \fB\-m\fR ustawia maksymaln± liczbê b³êdów logowania, po której konto
-zostanie wy³±czone. Dla tej opcji wymagane jest prawo zapisu do
+Flaga \fB\-m\fR ustawia maksymalnÄ… liczbÄ™ bÅ‚Ä™dÃ³w logowania, po ktÃ³rej konto
+zostanie wyÅ‚Ä…czone. Dla tej opcji wymagane jest prawo zapisu do
 \fI/var/log/faillog\fR.
-Argumenty \fB\-m\fR \fImax\fR powoduj±, ¿e wszystkie konta bêd± wy³±czane po
-\fImax\fR nieudanych próbach logowania.
-U¿ycie dodatkowo \fB\-u\fR \fInazwa\fR, ogranicza dzia³anie tej funkcji do
-u¿ytkownika o podanej \fInazwie\fR.
-Pos³u¿enie siê zerow± warto¶ci± \fImax\fR powoduje, ¿e liczba nieudanych prób
-rozpoczêcia sesji jest nieograniczona.
-Dla u¿ytkownika \fBroot\fR maksymalna liczba niepowodzeñ powinna byæ zawsze
-ustawiona na 0, by zapobiec atakom typu denial of service (odmowa obs³ugi).
+Argumenty \fB\-m\fR \fImax\fR powodujÄ…, Å¼e wszystkie konta bÄ™dÄ… wyÅ‚Ä…czane po
+\fImax\fR nieudanych prÃ³bach logowania.
+UÅ¼ycie dodatkowo \fB\-u\fR \fInazwa\fR, ogranicza dziaÅ‚anie tej funkcji do
+uÅ¼ytkownika o podanej \fInazwie\fR.
+PosÅ‚uÅ¼enie siÄ™ zerowÄ… wartoÅ›ciÄ… \fImax\fR powoduje, Å¼e liczba nieudanych prÃ³b
+rozpoczÄ™cia sesji jest nieograniczona.
+Dla uÅ¼ytkownika \fBroot\fR maksymalna liczba niepowodzeÅ„ powinna byÄ‡ zawsze
+ustawiona na 0, by zapobiec atakom typu denial of service (odmowa obsÅ‚ugi).
 .PP
-Opcje mog± byæ ³±czone w praktycznie dowolny sposób. Ka¿da z opcji \fB\-p\fR,
-\fB\-r\fR i \fB\-m\fR powoduje natychmiastowe wykonanie przy u¿yciu modyfikatora
+Opcje mogÄ… byÄ‡ Å‚Ä…czone w praktycznie dowolny sposÃ³b. KaÅ¼da z opcji \fB\-p\fR,
+\fB\-r\fR i \fB\-m\fR powoduje natychmiastowe wykonanie przy uÅ¼yciu modyfikatora
 \fB\-u\fR lub \fB\-t\fR.
 .SH PRZESTROGI
-\fBfaillog\fR wy¶wietla wy³±cznie u¿ytkowników, którzy od ostatniej nieudanej
-próby nie mieli poprawnych logowañ.
-Chc±c wy¶wietliæ u¿ytkownika, który po ostatniej pora¿ce logowa³ siê ju¿
-pomy¶lnie, musisz jawnie za¿±daæ o nim informacji przy pomocy flagi \fB\-u\fR.
-Mo¿esz tak¿e wy¶wietliæ wszystkich u¿ytkowników pos³uguj±c siê flag± \fB\-a\fR.
+\fBfaillog\fR wyÅ›wietla wyÅ‚Ä…cznie uÅ¼ytkownikÃ³w, ktÃ³rzy od ostatniej nieudanej
+prÃ³by nie mieli poprawnych logowaÅ„.
+ChcÄ…c wyÅ›wietliÄ‡ uÅ¼ytkownika, ktÃ³ry po ostatniej poraÅ¼ce logowaÅ‚ siÄ™ juÅ¼
+pomyÅ›lnie, musisz jawnie zaÅ¼Ä…daÄ‡ o nim informacji przy pomocy flagi \fB\-u\fR.
+MoÅ¼esz takÅ¼e wyÅ›wietliÄ‡ wszystkich uÅ¼ytkownikÃ³w posÅ‚ugujÄ…c siÄ™ flagÄ… \fB\-a\fR.
 .SH PLIKI
-\fI/var/log/faillog\fR	\- plik rejestracji b³êdów logowania
-.SH ZOBACZ TAK¯E
+\fI/var/log/faillog\fR	\- plik rejestracji bÅ‚Ä™dÃ³w logowania
+.SH ZOBACZ TAKÅ»E
 .BR login (1),
 .BR faillog (5)
 .SH AUTOR

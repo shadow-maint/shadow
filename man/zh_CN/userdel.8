@@ -1,4 +1,4 @@
-.\" $Id: userdel.8,v 1.3 2005/04/05 19:08:57 kloczek Exp $
+.\" $Id: userdel.8,v 1.4 2005/12/01 20:38:28 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -26,32 +26,32 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .TH USERDEL 8
-.SH Ãû³Æ
-userdel \- É¾ ³ý Ê¹ ÓÃ Õß ÕÊ ºÅ ¼° Ïà ¹Ø µµ °¸
-.SH Óï·¨
+.SH åç§°
+userdel \- åˆ  é™¤ ä½¿ ç”¨ è€… å¸ å· åŠ ç›¸ å…³ æ¡£ æ¡ˆ
+.SH è¯­æ³•
 .B userdel
 [\fB\-r\fR]
 .I login
-.SH ÃèÊö
-\fBuserdel\fR Ãü Áî ÐÞ ¸Ä Ïµ Í³ ÕÊ ºÅ µµ
-É¾ ³ý Ëù ÓÐ \fIlogin\fR »á ²Î ¿¼ µÄ ²¿ ·Ý ¡£
-Ê¹ ÓÃ Õß Ãû ³Æ ±Ø ÐëÊÇ ´æ ÔÚ µÄ ¡£
+.SH æè¿°
+\fBuserdel\fR å‘½ ä»¤ ä¿® æ”¹ ç³» ç»Ÿ å¸ å· æ¡£
+åˆ  é™¤ æ‰€ æœ‰ \fIlogin\fR ä¼š å‚ è€ƒ çš„ éƒ¨ ä»½ ã€‚
+ä½¿ ç”¨ è€… å ç§° å¿… é¡»æ˜¯ å­˜ åœ¨ çš„ ã€‚
 .IP \fB\-r\fR
-Ê¹ ÓÃ Õß Ä¿ Â¼ ÏÂ µÄ µµ °¸ Ò» ²¢ ÒÆ ³ý ¡£ ÔÚ Æä Ëû Î» ÖÃ ÉÏ µÄ µµ
-°¸ Ò² ½« Ò» Ò» ÕÒ ³ö ²¢ É¾ ³ý ¡£
-.SH µµ°¸
-\fI/etc/passwd\fR \- Ê¹ ÓÃ Õß ÕÊ ºÅ ×Ê ÁÏ
+ä½¿ ç”¨ è€… ç›® å½• ä¸‹ çš„ æ¡£ æ¡ˆ ä¸€ å¹¶ ç§» é™¤ ã€‚ åœ¨ å…¶ ä»– ä½ ç½® ä¸Š çš„ æ¡£
+æ¡ˆ ä¹Ÿ å°† ä¸€ ä¸€ æ‰¾ å‡º å¹¶ åˆ  é™¤ ã€‚
+.SH æ¡£æ¡ˆ
+\fI/etc/passwd\fR \- ä½¿ ç”¨ è€… å¸ å· èµ„ æ–™
 .br
-\fI/etc/shadow\fR \- Ê¹ ÓÃ Õß ÕÊ ºÅ ×Ê Ñ¶ ¼Ó ÃÜ
+\fI/etc/shadow\fR \- ä½¿ ç”¨ è€… å¸ å· èµ„ è®¯ åŠ  å¯†
 .br
-\fI/etc/group\fR \- Èº ×é ×Ê Ñ¶
-.SH ¾¯¸æ
-\fBuserdel\fR ²» ÔÊ Ðí Äã ÒÆ ³ý Õý ÔÚÏß ÉÏ
-µÄ Ê¹ ÓÃ Õß ÕÊ ºÅ ¡£
-Äã ±Ø Ðë ¿³ µô ´Ë ÕÊ ºÅ ÏÖ ÔÚ ÔÚ Ïµ Í³ ÉÏ Ö´ ÐÐ µÄ ³Ì Ðò ²Å ÄÜ ½ø ÐÐ ÕÊ ºÅ
-É¾ ³ý ¡£
-²» ÄÜ ÔÚ NIS client ¶Ë ÒÆ ³ý NIS Êô ÐÔ µÄ ¶« Î÷ ¡£
-Õâ ¶¯ ×ö Ðë ÔÚ NIS server ¶Ë ÉÏ Ö´ ÐÐ ¡£
+\fI/etc/group\fR \- ç¾¤ ç»„ èµ„ è®¯
+.SH è­¦å‘Š
+\fBuserdel\fR ä¸ å… è®¸ ä½  ç§» é™¤ æ­£ åœ¨çº¿ ä¸Š
+çš„ ä½¿ ç”¨ è€… å¸ å· ã€‚
+ä½  å¿… é¡» ç  æŽ‰ æ­¤ å¸ å· çŽ° åœ¨ åœ¨ ç³» ç»Ÿ ä¸Š æ‰§ è¡Œ çš„ ç¨‹ åº æ‰ èƒ½ è¿› è¡Œ å¸ å·
+åˆ  é™¤ ã€‚
+ä¸ èƒ½ åœ¨ NIS client ç«¯ ç§» é™¤ NIS å±ž æ€§ çš„ ä¸œ è¥¿ ã€‚
+è¿™ åŠ¨ åš é¡» åœ¨ NIS server ç«¯ ä¸Š æ‰§ è¡Œ ã€‚
 .SH SEE ALSO
 .BR chfn (1),
 .BR chsh (1),
@@ -61,5 +61,5 @@ userdel \- É¾ ³ý Ê¹ ÓÃ Õß ÕÊ ºÅ ¼° Ïà ¹Ø µµ °¸
 .BR passwd (1),
 .BR useradd (8),
 .BR usermod (8)
-.SH ×÷Õß
+.SH ä½œè€…
 Julianne Frances Haugh (jfh@tab.com)

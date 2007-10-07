@@ -1,0 +1,32 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "EXPIRY" "1" "12/07/2005" "Commandes utilisateur" "Commandes utilisateur"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+expiry \- Vérifier et sécuriser la durée de validité des mots de passe
+.SH "SYNOPSIS"
+.HP 7
+\fBexpiry\fR [\-c] [\-f]
+.SH "DESCRIPTION"
+.PP
+Avec l'option
+\fB\-c\fR,
+\fBexpiry\fR
+vérifie la validité du mot de passe de l'utilisateur courant, et force (avec l'option
+\fB\-f\fR) des changements quand nécessaire. Il peut être appelé par un utilisateur normal.
+.SH "FICHIERS"
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBpasswd\fR(5),
+\fBshadow\fR(5).

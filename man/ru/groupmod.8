@@ -1,0 +1,79 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "groupmod" "8" "11/10/2005" "Команды управления системой" "Команды управления системой"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+groupmod \- изменяет информацию о группе
+.SH "СИНТАКСИС"
+.HP 9
+\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o\ ]] [\-n\ \fIновое\ имя\ группы\fR] \fIгруппа\fR
+.SH "ОПИСАНИЕ"
+.PP
+Команда
+\fBgroupmod\fR
+изменяет системные файлы учётных записей согласно параметрам, переданным в командной строке.
+.SH "ПАРАМЕТРЫ"
+.PP
+Возможные параметры команды
+\fBgroupmod\fR
+:
+.TP
+\fB\-g\fR \fIgid\fR
+Числовое значение идентификатора группы. Если не указан параметр
+\fB\-o\fR
+, значение должно быть уникальным. Также, оно должно быть не отрицательным. Значения от 0 и 999 обычно зарезервированы под системные группы. Изменение принадлежности файлов старой группе необходимо выполнять вручную.
+.TP
+\fB\-n\fR \fIновое имя группы\fR
+Новое название группы вместо
+\fIгруппа\fR
+\(em
+\fIновое имя группы\fR.
+.SH "ФАЙЛЫ"
+.TP
+\fI/etc/group\fR
+содержит информацию о группах
+.TP
+\fI/etc/gshadow\fR
+содержит защищаемую информацию о группаx
+.SH "ВОЗВРАЩАЕМЫЕ ЗНАЧЕНИЯ"
+.PP
+Команда
+\fBgroupmod\fR
+завершая работу, возвращает следующие значения:
+.TP
+\fI0\fR
+успешное выполнение
+.TP
+\fI2\fR
+ошибка в параметрах командной строки
+.TP
+\fI3\fR
+недопустимое значение параметра
+.TP
+\fI4\fR
+указанная группа не существует
+.TP
+\fI6\fR
+указанная группа не существует
+.TP
+\fI9\fR
+такое имя группы уже используется
+.TP
+\fI10\fR
+не удалось изменить файл групп
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

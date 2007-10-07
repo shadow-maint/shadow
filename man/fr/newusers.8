@@ -1,0 +1,45 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "NEWUSERS" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+newusers \- Mettre à jour, ou créer de nouveaux utilisateurs par lots
+.SH "SYNOPSIS"
+.HP 9
+\fBnewusers\fR [\fInouveaux_utilisateurs\fR]
+.SH "DESCRIPTION"
+.PP
+\fBNewusers\fR
+lit un fichier contenant des paires de nom d'utilisateur et de mot de passe et utilise ces informations pour mettre à jour un groupe d'utilisateurs existants ou pour créer de nouveaux utilisateurs. Chaque ligne est au même format que le fichier des mots de passe (voir
+\fBpasswd\fR(5)) avec les exceptions suivantes\ :
+.TP
+\fIpw_passwd\fR
+Ce champ sera chiffré et utilisé comme la nouvelle valeur du mot de passe chiffré.
+.TP
+\fIpw_age\fR
+Ce champ sera ignoré pour les mots de passe cachés (\(Fo\ shadow password\ \(Fc) si l'utilisateur existe déjà.
+.TP
+\fIpw_gid\fR
+Ce champ peut être le nom d'un groupe existant, ce qui permet d'ajouter l'utilisateur désigné dans la liste des membres du groupe. Si un identifiant de groupe inexistant est indiqué, un nouveau groupe est créé, avec cet identifiant de groupe.
+.TP
+\fIpw_dir\fR
+L'existence du répertoire indiqué dans ce champ est vérifiée, et dans le cas contraire, le répertoire est créé. Le propriétaire du répertoire sera l'utilisateur dont le compte est créé ou mis à jour.
+.PP
+Cette commande a été conçue pour les gros systèmes pour lesquels un grand nombre de comptes sont mis à jour à un même instant.
+.SH "AVERTISSEMENTS"
+.PP
+Le fichier d'entrée doit être correctement protégé puisqu'il contient des mots de passe en clair.
+.SH "FICHIERS"
+.TP
+\fI/etc/login.defs\fR
+configuration de la suite des mots de passe cachés \(Fo\ shadow password\ \(Fc
+.SH "VOIR AUSSI"
+.PP
+\fBlogin.defs\fR(5),
+\fBpasswd\fR(1),
+\fBuseradd\fR(8).

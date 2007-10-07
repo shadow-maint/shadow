@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "VIPW" "8" "26 Sep 1997" "26 Sep 1997" "26 Sep 1997"
+.TH "VIPW" "8" "12/07/2005" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -11,9 +11,9 @@
 vipw, vigr \- edit the password, group, shadow\-password or shadow\-group file.
 .SH "SYNOPSIS"
 .HP 5
-\fBvipw\fR [\-s]
+\fBvipw\fR [options]
 .HP 5
-\fBvigr\fR [\-s]
+\fBvigr\fR [options]
 .SH "DESCRIPTION"
 .PP
 \fBvipw\fR
@@ -29,10 +29,46 @@ flag, they will edit the shadow versions of those files,
 and
 \fI/etc/gshadow\fR, respectively. The programs will set the appropriate locks to prevent file corruption. When looking for an editor, the programs will first try the environment variable
 \fB$VISUAL\fR, then the environment variable
-\fI$EDITOR\fR, and finally the default editor,
+\fB$EDITOR\fR, and finally the default editor,
 \fBvi\fR(1).
+.SH "OPTIONS"
+.PP
+The options which apply to the
+\fBvipw\fR
+and
+\fBvigr\fR
+commands are:
+.TP
+\fB\-g\fR, \fB\-\-group\fR
+Edit group database.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Display help message and exit.
+.TP
+\fB\-p\fR, \fB\-\-passwd\fR
+Edit passwd database.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Quiet mode database.
+.TP
+\fB\-s\fR, \fB\-\-shadow\fR
+Edit shadow or gshadow database.
+.SH "FILES"
+.TP
+\fI/etc/group\fR
+group account information
+.TP
+\fI/etc/gshadow\fR
+shadow group file
+.TP
+\fI/etc/passwd\fR
+user account information
+.TP
+\fI/etc/shadow\fR
+secure user account information
 .SH "SEE ALSO"
 .PP
+\fBvi\fR(1),
 \fBgroup\fR(5),
-\fBpasswd\fR(5),
+\fBgshadow\fR(5)\fBpasswd\fR(5),
 \fBshadow\fR(5).

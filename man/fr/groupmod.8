@@ -1,0 +1,79 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "GROUPMOD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+groupmod \- Modifier un groupe
+.SH "SYNOPSIS"
+.HP 9
+\fBgroupmod\fR [\-g\ \fIgid\fR\ [\-o]] [\-n\ \fInouveau_nom_groupe\fR] \fIgroupe\fR
+.SH "DESCRIPTION"
+.PP
+La commande
+\fBgroupmod\fR
+modifie les fichiers d'administration des comptes du système pour refléter les modifications spécifiées sur la ligne de commande.
+.SH "OPTIONS"
+.PP
+Les options disponibles pour la commande
+\fBgroupmod\fR
+sont\ :
+.TP
+\fB\-g\fR \fIgid\fR
+La valeur numérique de l'identifiant du groupe ([\ NdT\ : group ID ou GID\ ]). Cette valeur doit être unique, à moins que l'option
+\fB\-o\fR
+ne soit utilisée. La valeur ne doit pas être négative. Les valeurs comprises entre 0 et 999 sont généralement réservées aux comptes système. Vous devrez modifier vous\-même le groupe propriétaire de tous les fichiers possédés par ce groupe.
+.TP
+\fB\-n\fR \fInouveau_nom_groupe\fR
+Le nom du groupe sera modifié de
+\fIgroupe\fR
+vers
+\fInouveau_nom_groupe\fR.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.SH "VALEUR DE RETOUR"
+.PP
+La commande
+\fBgroupmod\fR
+retourne les valeurs suivantes en quittant\ :
+.TP
+\fI0\fR
+succès
+.TP
+\fI2\fR
+erreur de syntaxe
+.TP
+\fI3\fR
+argument non valable pour l'option
+.TP
+\fI4\fR
+le groupe spécifié n'existe pas
+.TP
+\fI6\fR
+le groupe spécifié n'existe pas
+.TP
+\fI9\fR
+nom de groupe déjà utilisé
+.TP
+\fI10\fR
+impossible de mettre à jour le fichier des groupes
+.SH "VOIR AUSSI"
+.PP
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgpasswd\fR(8),
+\fBgroupadd\fR(8),
+\fBgroupdel\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).

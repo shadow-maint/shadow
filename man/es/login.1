@@ -1,7 +1,7 @@
 .\" Copyright 1993 Rickard E. Faith (faith@cs.unc.edu)
 .\" May be distributed under the GNU General Public License
 .\"
-.\" Translated 17 sep. 1998 by Juan JosÈ LÛpez Mellado(laveneno@hotmail.com) 
+.\" Translated 17 sep. 1998 by Juan Jos√© L√≥pez Mellado(laveneno@hotmail.com) 
 .\"
 .TH LOGIN 1 "4 Noviembre 1996" "Util\-linux 1.6" "Manual del Programador de Linux"
 .SH NOMBRE
@@ -14,13 +14,13 @@ login \- firmar
 .BR "login \-h " hostname
 .br
 .BR "login \-f " name
-.SH DESCRIPCI”N
+.SH DESCRIPCI√ìN
 .B login
 es usado cuando se firma en un sistema. Puede ser usado para cambiar
-desde un usuario a otro en cualquier momento (los shells m·s modernos
-disponen de esta caracterÌstica incluida internamente).
+desde un usuario a otro en cualquier momento (los shells m√°s modernos
+disponen de esta caracter√≠stica incluida internamente).
 
-Si no se da ning˙n argumento,
+Si no se da ning√∫n argumento,
 .B login
 pregunta por el nombre de usuario.
 
@@ -29,67 +29,67 @@ Si el usuario
 es root, y si existe
 .IR /etc/nologin ,
 el contenido de este fichero se escribe en la pantalla y el ingreso
-finaliza. Esto se usa tÌpicamente para prevenir los ingresos cuando el
-sistema se est· cerrando.
+finaliza. Esto se usa t√≠picamente para prevenir los ingresos cuando el
+sistema se est√° cerrando.
 
 Si se han especificado restricciones de acceso para el usuario en
 .IR /etc/usertty ,
-estas son requeridas, o la peticiÛn de ingreso ser· denegada y se
-generar· un mensaje a travÈs de
+estas son requeridas, o la petici√≥n de ingreso ser√° denegada y se
+generar√° un mensaje a trav√©s de
 .BR syslog .
-Vea la secciÛn "Restricciones de Acceso Especiales".
+Vea la secci√≥n "Restricciones de Acceso Especiales".
 
 Si el usuario es root, entonces el ingreso debe estar ocurriendo en
 alguno de los tty listados en
 .IR /etc/securetty .
-Los fallos ser·n registrados mediante
+Los fallos ser√°n registrados mediante
 .BR syslog .
 
-DespuÈs de comprobar estas condiciones, se pedir· la contraseÒa y se
-validar· (si es que se requiere de una contraseÒa para el usuario). Se
+Despu√©s de comprobar estas condiciones, se pedir√° la contrase√±a y se
+validar√° (si es que se requiere de una contrase√±a para el usuario). Se
 permite un total de diez intentos antes de que
 .B login
-muera, pero despuÈs de los tres primeros, la respuesta comienza a ser muy
-lenta. Los fallos de ingreso son registrados a travÈs de
+muera, pero despu√©s de los tres primeros, la respuesta comienza a ser muy
+lenta. Los fallos de ingreso son registrados a trav√©s de
 .BR syslog .
-TambiÈn es usado para registrar cualquier ingreso correcto del usuario
+Tambi√©n es usado para registrar cualquier ingreso correcto del usuario
 root.
 
 Si el fichero
 .I .hushlogin
 existe, entonces se realiza un ingreso "reservado" (esto deshabilita la
-comprobaciÛn del correo y la escritura de la hora del ˙ltimo ingreso asÌ
-como el mensaje del dÌa). Por otro lado, si existe
+comprobaci√≥n del correo y la escritura de la hora del √∫ltimo ingreso as√≠
+como el mensaje del d√≠a). Por otro lado, si existe
 .IR /var/log/lastlog ,
-la hora del ˙ltimo ingreso se imprime (y el ingreso actual es
+la hora del √∫ltimo ingreso se imprime (y el ingreso actual es
 registrado).
 
 Se llevan a cabo algunas tareas administrativas, como el cambio del UID y
 GID del tty. La variable de entorno TERM se preserva, si existe (las
-otras variables de entorno son preservadas si se usa la opciÛn
+otras variables de entorno son preservadas si se usa la opci√≥n
 .BR \-p ).
-DespuÈs son definidas las variables HOME, PATH, SHELL, TERM, MAIL y
-LOGNAME. El PATH por defecto ser·
+Despu√©s son definidas las variables HOME, PATH, SHELL, TERM, MAIL y
+LOGNAME. El PATH por defecto ser√°
 .I /usr/local/bin:/bin:/usr/bin:.
 para usuarios normales, y
 .I /sbin:/bin:/usr/sbin:/usr/bin
-para root. Por ˙ltimo, si no es un ingreso "reservado", el mensaje del
-dÌa ser· imprimido y se comprobar· el fichero con el nombre del usuario en
+para root. Por √∫ltimo, si no es un ingreso "reservado", el mensaje del
+d√≠a ser√° imprimido y se comprobar√° el fichero con el nombre del usuario en
 .I /usr/spool/mail
-y se imprimir· un mensaje si este tuviera un tamaÒo diferente de cero.
+y se imprimir√° un mensaje si este tuviera un tama√±o diferente de cero.
 
-A continuaciÛn, se inicia el shell del usuario. Si no se especifica ninguno
+A continuaci√≥n, se inicia el shell del usuario. Si no se especifica ninguno
 para el usuario en
 .BR /etc/passwd ,
-entonces se usar·
+entonces se usar√°
 .BR /bin/sh .
 Si no hay un directorio especificado en
 .IR /etc/passwd ,
-entonces se usar·
+entonces se usar√°
 .I /
-(el directorio del usuario se analizar· en busca del fichero
+(el directorio del usuario se analizar√° en busca del fichero
 .I .hushlogin
-descrito m·s abajo).
+descrito m√°s abajo).
 
 .SH OPCIONES
 .TP
@@ -101,9 +101,9 @@ para indicar a
 que no destruya el entorno
 .TP
 .B \-f
-Usado para evitar la segunda autenticaciÛn del ingreso. Esto 
+Usado para evitar la segunda autenticaci√≥n del ingreso. Esto 
 .B no
-funciona especÌficamente para root y no parece que funcione
+funciona espec√≠ficamente para root y no parece que funcione
 correctamente bajo Linux.
 .TP
 .B \-h
@@ -112,46 +112,46 @@ Usado por otros servidores (por ejemplo,
 para pasar el nombre del host remoto a
 .B login
 de tal manera que pueda ser puesto en utmp y wtmp. Solo el superusuario
-podr· usar esta opciÛn.
+podr√° usar esta opci√≥n.
 
 .SH "RESTRICCIONES DE ACCESO ESPECIALES"
 El fichero
 .I /etc/securetty
 lista los nombres de los ttys donde se permite que el root pueda
-ingresar. Deber· especificarse un nombre de tty por lÌnea (sin el prefijo
-/dev/). Si el fichero no existiera, se permitir· su ingreso desde
+ingresar. Deber√° especificarse un nombre de tty por l√≠nea (sin el prefijo
+/dev/). Si el fichero no existiera, se permitir√° su ingreso desde
 cualquier tty.
 .PP
 El fichero
 .I /etc/usertty
-especifica restricciones de acceso adicionales para usuarios especÌficos.
-Si no existiera este fichero, no se impondr· ninguna restricciÛn de
+especifica restricciones de acceso adicionales para usuarios espec√≠ficos.
+Si no existiera este fichero, no se impondr√° ninguna restricci√≥n de
 acceso adicional. El fichero consiste en una secuencia de secciones. Hay
-tres tipos de secciones posibles: CLASSES, GROUPS y USERS. Una secciÛn
+tres tipos de secciones posibles: CLASSES, GROUPS y USERS. Una secci√≥n
 de tipo CLASSES define tipos de ttys y patrones de nombres de hosts, una
-secciÛn de tipo GROUPS define los ttys permitidos y los hosts grupo por
-grupo y una secciÛn USERS define los ttys permitidos y los hosts usuario
+secci√≥n de tipo GROUPS define los ttys permitidos y los hosts grupo por
+grupo y una secci√≥n USERS define los ttys permitidos y los hosts usuario
 por usuario.
 .PP
-Cada lÌnea de este fichero no puede tener m·s de 255 caracteres. Los
-comentarios comienzan con un car·cter # y se extienden hasta el final de
-la lÌnea.
+Cada l√≠nea de este fichero no puede tener m√°s de 255 caracteres. Los
+comentarios comienzan con un car√°cter # y se extienden hasta el final de
+la l√≠nea.
 .PP
-.SS "La secciÛn CLASSES"
-Una secciÛn de tipo CLASSES comienza por la palabra CLASSES al principio
-de la lÌnea escrito en may˙sculas. Cada una de las lÌneas hasta el
-principio de una nueva secciÛn o del final del fichero consiste en una
-secuencia de palabras separadas pos tabuladores o espacios. Cada lÌnea
+.SS "La secci√≥n CLASSES"
+Una secci√≥n de tipo CLASSES comienza por la palabra CLASSES al principio
+de la l√≠nea escrito en may√∫sculas. Cada una de las l√≠neas hasta el
+principio de una nueva secci√≥n o del final del fichero consiste en una
+secuencia de palabras separadas pos tabuladores o espacios. Cada l√≠nea
 define una clase de ttys y patrones de hosts.
 .PP
-La palabra al principio de la lÌnea es tomada como el nombre colectivo
-para los ttys y patrones de hosts especificados en el resto de la lÌnea.
+La palabra al principio de la l√≠nea es tomada como el nombre colectivo
+para los ttys y patrones de hosts especificados en el resto de la l√≠nea.
 Este nombre colectivo puede usarse en las siguientes secciones de tipo
-GROUPS o USERS. No deberÌa aparecer el nombre de una clase como parte de
-la definiciÛn de una clase para evitar problemas de recursividad de
+GROUPS o USERS. No deber√≠a aparecer el nombre de una clase como parte de
+la definici√≥n de una clase para evitar problemas de recursividad de
 nombres.
 .PP
-Una secciÛn CLASSES de ejemplo:
+Una secci√≥n CLASSES de ejemplo:
 .PP
 .nf
 .in +.5
@@ -168,24 +168,24 @@ y
 como las partes derechas correspondientes.
 .PP
 
-.SS "La secciÛn GROUPS"
-Una secciÛn GROUPS define los ttys y hosts permitidos para cada grupo
+.SS "La secci√≥n GROUPS"
+Una secci√≥n GROUPS define los ttys y hosts permitidos para cada grupo
 .I /etc/passwd
 y
 .I /etc/group
-y ese grupo es mencionado en una secciÛn de tipo GROUPS en
+y ese grupo es mencionado en una secci√≥n de tipo GROUPS en
 .I /etc/usertty
 entonces el usuario tiene acceso permitido.
 .PP
-Una secciÛn GROUPS comienza con la palabra GROUPS en may˙sculas en el
-principio de una lÌnea, y cada una de las siguientes lÌneas es una
+Una secci√≥n GROUPS comienza con la palabra GROUPS en may√∫sculas en el
+principio de una l√≠nea, y cada una de las siguientes l√≠neas es una
 secuencia de palabras separadas pos espacios o tabuladores. La primera
-palabra de una lÌnea es el nombre del grupo, y el resto de las palabras
-de la lÌnea especifican los ttys y hosts donde los miembros de ese grupo
+palabra de una l√≠nea es el nombre del grupo, y el resto de las palabras
+de la l√≠nea especifican los ttys y hosts donde los miembros de ese grupo
 tienen permitido el acceso. Estas especificaciones pueden comportar el
 uso de las clases definidas en secciones CLASSES anteriores.
 .PP
-Un ejemplo de una secciÛn GROUPS:
+Un ejemplo de una secci√≥n GROUPS:
 .PP
 .nf
 .in +0.5
@@ -204,19 +204,19 @@ pueden ingresar desde los hosts/ttys especificados en la clase miclase1 o
 desde el tty4.
 .PP
 
-.SS "La secciÛn USERS"
-Una secciÛn USERS comienza con la palabra USERS toda en may˙sculas al
-principio de la lÌnea, y cada una de las lÌneas siguientes es una
+.SS "La secci√≥n USERS"
+Una secci√≥n USERS comienza con la palabra USERS toda en may√∫sculas al
+principio de la l√≠nea, y cada una de las l√≠neas siguientes es una
 secuencia de palabras separadas por espacios o tabuladores. La primera
-palabra de una lÌnea es un nombre de usuario y a ese usuario se le
+palabra de una l√≠nea es un nombre de usuario y a ese usuario se le
 permite ingresar en los ttys y desde los hosts mencionados en el resto de
-la lÌnea. Estas especificaciones pueden contener clases definidas en
+la l√≠nea. Estas especificaciones pueden contener clases definidas en
 secciones CLASSES anteriores. Si no se especifica al principio del
-fichero una cabecera de secciÛn, por defecto la primera secciÛn se
+fichero una cabecera de secci√≥n, por defecto la primera secci√≥n se
 interpreta como del tipo USERS.
 
 .PP
-Una secciÛn USERS de ejemplo:
+Una secci√≥n USERS de ejemplo:
 .PP
 .nf
 .in +0.5
@@ -228,72 +228,72 @@ pepe		tty3 miclase2
 .PP
 Esto autoriza al usuario zacho a ingresar solo en el tty1 y desde los
 hosts con direcciones IP en el rango 130.225.16.0 \- 130.225.16.255, y
-tambiÈn autoriza al usuario pepe a ingresar en el tty3 y desde cualquier
+tambi√©n autoriza al usuario pepe a ingresar en el tty3 y desde cualquier
 parte mencionada en la clase miclase2.
 .PP
-Podr· aparecer una lÌnea en la secciÛn USERS que comience por un nombre
-de usuario *. Esta es la regla por defecto y ser· aplicada a cualquier
-usuario que no aparezca en ninguna de las otras lÌneas.
+Podr√° aparecer una l√≠nea en la secci√≥n USERS que comience por un nombre
+de usuario *. Esta es la regla por defecto y ser√° aplicada a cualquier
+usuario que no aparezca en ninguna de las otras l√≠neas.
 .PP
-Si un usuario encaja con una lÌnea USERS y con una lÌnea GROUPS, el
-usuario estar· autorizado a ingresar desde la uniÛn de todos los
+Si un usuario encaja con una l√≠nea USERS y con una l√≠nea GROUPS, el
+usuario estar√° autorizado a ingresar desde la uni√≥n de todos los
 ttys/hosts mencionados en estas especificaciones.
 
-.SS OrÌgenes
+.SS Or√≠genes
 Las especificaciones de patrones de tty y host usadas en la
-especificaciÛn de las clases, grupos y usuarios se llaman orÌgenes. Un
+especificaci√≥n de las clases, grupos y usuarios se llaman or√≠genes. Un
 origen es una cadena de caracteres que puede tener uno de estos formatos:
 .IP o 
 El nombre de un dispositivo tty sin el prefijo /dev/, por ejemplo tty1 o
 ttyS0.
 .PP
 .IP o
-La cadena @localhost, indicando que el usuario est· autorizado a
-telnet/rlogin desde el host local al mismo host. Esto tambiÈn habilita al
+La cadena @localhost, indicando que el usuario est√° autorizado a
+telnet/rlogin desde el host local al mismo host. Esto tambi√©n habilita al
 usuario a ejecutar, por ejemplo, el comando: xterm \-e /bin/login.
 .PP
 .IP o
 Un sufijo de nombre de dominio como @.algun.dom, indicando que el usuario
-podr· hacer rlogin/telnet desde cualquier host cuyo nombre de dominio
+podr√° hacer rlogin/telnet desde cualquier host cuyo nombre de dominio
 tenga el sufijo .algun.dom.
 .PP
 .IP o
 Un rango de direcciones IPv4, escritas @x.x.x.x/y.y.y.y donde x.x.x.x es
-la direcciÛn IP en la notaciÛn decimal tradicional con puntos, e y.y.y.y
-es una m·scara de bits en la misma notaciÛn especificando cuales de los
-bits de la direcciÛn ser·n comparados con la direcciÛn IP del host
+la direcci√≥n IP en la notaci√≥n decimal tradicional con puntos, e y.y.y.y
+es una m√°scara de bits en la misma notaci√≥n especificando cuales de los
+bits de la direcci√≥n ser√°n comparados con la direcci√≥n IP del host
 remoto. Por ejemplo @130.255.16.0/255.255.254.0 significa que el usuario
-podr· hacer rlogin/telnet desde cualquier host cuya direcciÛn IP estÈ en
+podr√° hacer rlogin/telnet desde cualquier host cuya direcci√≥n IP est√© en
 el rango 130.255.16.0 \- 130.255.17.255.
 .PP
-Cualquiera de los orÌgenes anteriores pueden tener un prefijo con la
-especificaciÛn temporal acordando con la sintaxis:
+Cualquiera de los or√≠genes anteriores pueden tener un prefijo con la
+especificaci√≥n temporal acordando con la sintaxis:
 .PP
 .nf
-espec\-tiempo ::= '[' <dÌa\-u\-hora> [':' <dÌa\-u\-hora>]* ']'
-dÌa          ::= 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
+espec\-tiempo ::= '[' <d√≠a\-u\-hora> [':' <d√≠a\-u\-hora>]* ']'
+d√≠a          ::= 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 hora         ::= '0' | '1' | ... | '23'
 espec\-hora   ::= <hora> | <hora> '\-' <hora>
-dÌa\-u\-hora   ::= <dÌa> | <espec\-hora>
+d√≠a\-u\-hora   ::= <d√≠a> | <espec\-hora>
 .fi
 .PP
 Por ejemplo, el origen [mon:tue:wed:thu:fri:8\-17]tty3 significa que solo
-se permitir·n ingresos de lunes a viernes entre las 8:00 y las 17:59
-(5:59 pm) en el tty3. Esto tambiÈn muestra que un rango de horas a\-b
+se permitir√°n ingresos de lunes a viernes entre las 8:00 y las 17:59
+(5:59 pm) en el tty3. Esto tambi√©n muestra que un rango de horas a\-b
 incluye todo momento entre a:00 y b:59. Una sola hora (por ejemplo 10)
-significar· un espacio temporal entre las 10:00 y las 10:59.
+significar√° un espacio temporal entre las 10:00 y las 10:59.
 .PP
-Si no se especifica ning˙n prefijo temporal para un tty o host significar·
-que se permitir· el ingreso desde ese origen a cualquier hora. Si da un
-prefijo temporal aseg˙rese de especificar tanto el conjunto de dÌas como
-una o m·s horas o rango de horas. Una especificaciÛn de tiempo no puede
+Si no se especifica ning√∫n prefijo temporal para un tty o host significar√°
+que se permitir√° el ingreso desde ese origen a cualquier hora. Si da un
+prefijo temporal aseg√∫rese de especificar tanto el conjunto de d√≠as como
+una o m√°s horas o rango de horas. Una especificaci√≥n de tiempo no puede
 incluir espacios en blanco.
 .PP
 Si no se define ninguna regla por defecto entonces los usuarios que no
-concuerden con ninguna lÌnea de
+concuerden con ninguna l√≠nea de
 .I /etc/usertty
-est· autorizados para ingresar desde cualquier lugar en la manera
-est·ndar.
+est√° autorizados para ingresar desde cualquier lugar en la manera
+est√°ndar.
 .PP
 .SH FICHEROS
 .nf
@@ -307,7 +307,7 @@ est·ndar.
 .I /etc/usertty
 .I .hushlogin
 .fi
-.SH "V…ASE TAMBI…N"
+.SH "V√âASE TAMBI√âN"
 .BR init (8),
 .BR getty (8),
 .BR mail (1),
@@ -320,9 +320,9 @@ est·ndar.
 Linux, a diferencia de otros sistemas operativos draconianos, no comprueba
 las cuotas.
 
-La opciÛn no documentada
+La opci√≥n no documentada
 .B \-r
-de BSD no est· soportada. Esta podrÌa ser requerida por alg˙n programa
+de BSD no est√° soportada. Esta podr√≠a ser requerida por alg√∫n programa
 .BR rlogind (8)
 .
 .SH AUTOR

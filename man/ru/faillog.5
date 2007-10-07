@@ -1,0 +1,33 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "faillog" "5" "11/10/2005" "" ""
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "НАЗВАНИЕ"
+faillog \- файл протокола неудачных попыток входа в систему
+.SH "ОПИСАНИЕ"
+.PP
+\fI/var/log/faillog\fR
+хранит число неудачных попыток входа в систему и их предельное число для каждой учётной записи. Этот файл состоит из записей постоянной длины, упорядоченных по числовому идентификатору учётной записи. Каждая запись содержит число неудачных попыток входа с момента последнего успешного входа в систему; максимальное число неудачных попыток перед тем как учётная запись будет заблокирована; терминал, с которого осуществлялась последняя неудачная попытка входа и дата этого события.
+.PP
+Структура файла:
+.sp
+.nf
+struct	faillog {
+	short	fail_cnt;
+	short	fail_max;
+	char	 	fail_line[12];
+	time_t	fail_time;
+};
+.fi
+.SH "ФАЙЛЫ"
+.TP
+\fI/var/log/faillog\fR
+содержит журнал неудавшихся попыток входа в систему
+.SH "СМОТРИТЕ ТАКЖЕ"
+.PP
+\fBfaillog\fR(8)

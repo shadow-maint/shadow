@@ -29,17 +29,17 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.58 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: usermod.c,v 1.64 2005/12/05 18:19:47 kloczek Exp $"
 
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <lastlog.h>
 #include <pwd.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #endif				/* USE_PAM */
 #include <stdio.h>
 #include <sys/stat.h>
@@ -68,12 +68,12 @@
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* UID already in use (and no -o) */
-				/* #define E_BAD_PWFILE     5 *//* passwd file contains errors */
+/* #define E_BAD_PWFILE     5 *//* passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
-				 /* #define E_NOSPACE        11 *//* insufficient space to move home dir */
+/* #define E_NOSPACE        11 *//* insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 /*
@@ -271,16 +271,27 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fprintf (stderr,
-		 _
-		 ("Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"),
-		 Prog);
-	fprintf (stderr,
-		 _
-		 ("\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"));
-	fprintf (stderr, "\t\t");
-	fprintf (stderr, _("[-f inactive] [-e expire] "));
-	fprintf (stderr, _("[-p passwd] [-L|-U] name\n"));
+	fprintf (stderr, _("Usage: usermod [options] login\n"
+			   "\n"
+			   "Options:\n"
+			   "  -a, --append GROUP		append the user to the supplemental GROUP\n"
+			   "  -c, --comment COMMENT		new value of the GECOS field\n"
+			   "  -d, --home HOME_DIR		new login directory for the new user account\n"
+			   "  -e, --expiredate EXPIRE_DATE	set account expiration date to EXPIRE_DATE\n"
+			   "  -f, --inactive INACTIVE	set password inactive after expiration\n"
+			   "				to INACTIVE\n"
+			   "  -g, --gid GROUP		force use GROUP as new initial login group\n"
+			   "  -G, --groups GROUPS		list of supplementary GROUPS\n"
+			   "  -h, --help			display this help message and exit\n"
+			   "  -l, --login LOGIN		new value of the login name\n"
+			   "  -L, --lock			lock the user account\n"
+			   "  -m, --move-home		move contents of the home directory to the new\n"
+			   "				location (use only with -d)\n"
+			   "  -o, --non-unique		allow using duplicate (non-unique) UID\n"
+			   "  -p, --password PASSWORD	use encrypted password for the new password\n"
+			   "  -s, --shell SHELL		new login shell for the user account\n"
+			   "  -u, --uid UID			new UID for the user account\n"
+			   "  -U, --unlock			unlock the user account\n"));
 	exit (E_USAGE);
 }
 
@@ -884,159 +895,187 @@ static void process_flags (int argc, char **argv)
 #endif
 	}
 
-	while ((arg = getopt (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U")) != EOF) {
-		switch (arg) {
-		case 'a':
-			aflg++;
-			break;
-		case 'c':
-			if (!VALID (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-#ifdef WITH_AUDIT
-			user_newcomment = optarg;
-#else
-			user_comment = optarg;
-#endif
-			cflg++;
-			break;
-		case 'd':
-			if (!VALID (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			dflg++;
-			user_newhome = optarg;
-			break;
-		case 'e':
-			if (*optarg) {
-#ifdef WITH_AUDIT
-				user_newexpire = strtoday (optarg);
-				if (user_newexpire == -1) {
-#else
-				user_expire = strtoday (optarg);
-				if (user_expire == -1) {
-#endif
+	{
+		/*
+		 * Parse the command line options.
+		 */
+		int c;
+		static struct option long_options[] = {
+			{"append", required_argument, NULL, 'a'},
+			{"comment", required_argument, NULL, 'c'},
+			{"home", required_argument, NULL, 'd'},
+			{"expiredate", required_argument, NULL, 'e'},
+			{"inactive", required_argument, NULL, 'f'},
+			{"gid", required_argument, NULL, 'g'},
+			{"groups", required_argument, NULL, 'G'},
+			{"help", no_argument, NULL, 'h'},
+			{"login", required_argument, NULL, 'l'},
+			{"lock", no_argument, NULL, 'L'},
+			{"move-home", no_argument, NULL, 'm'},
+			{"non-unique", no_argument, NULL, 'o'},
+			{"password", required_argument, NULL, 'p'},
+			{"shell", required_argument, NULL, 's'},
+			{"uid", required_argument, NULL, 'u'},
+			{"unlock", no_argument, NULL, 'U'},
+			{NULL, 0, NULL, '\0'}
+		};
+		while ((c =
+			getopt_long (argc, argv, "ac:d:e:f:g:G:l:Lmop:s:u:U",
+				     long_options, NULL)) != -1) {
+			switch (c) {
+			case 'a':
+				aflg++;
+				break;
+			case 'c':
+				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid date `%s'\n"),
+						 _("%s: invalid field `%s'\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 #ifdef WITH_AUDIT
-				user_newexpire *= DAY / SCALE;
+				user_newcomment = optarg;
 #else
-				user_expire *= DAY / SCALE;
+				user_comment = optarg;
 #endif
-			} else
+				cflg++;
+				break;
+			case 'd':
+				if (!VALID (optarg)) {
+					fprintf (stderr,
+						 _("%s: invalid field `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+				dflg++;
+				user_newhome = optarg;
+				break;
+			case 'e':
+				if (*optarg) {
 #ifdef WITH_AUDIT
-				user_newexpire = -1;
+					user_newexpire = strtoday (optarg);
+					if (user_newexpire == -1) {
 #else
-				user_expire = -1;
+					user_expire = strtoday (optarg);
+					if (user_expire == -1) {
 #endif
-			eflg++;
-			break;
-		case 'f':
+						fprintf (stderr,
+							 _
+							 ("%s: invalid date `%s'\n"),
+							 Prog, optarg);
+						exit (E_BAD_ARG);
+					}
 #ifdef WITH_AUDIT
-			user_newinactive = get_number (optarg);
+					user_newexpire *= DAY / SCALE;
 #else
-			user_inactive = get_number (optarg);
+					user_expire *= DAY / SCALE;
 #endif
-			fflg++;
-			break;
-		case 'g':
-			grp = getgr_nam_gid (optarg);
-			if (!grp) {
-				fprintf (stderr,
-					 _("%s: unknown group %s\n"),
-					 Prog, optarg);
-				exit (E_NOTFOUND);
-			}
-			user_newgid = grp->gr_gid;
-			gflg++;
-			break;
-		case 'G':
-			if (get_groups (optarg))
-				exit (E_NOTFOUND);
-			Gflg++;
-			break;
-		case 'l':
-			if (!check_user_name (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-
-			/*
-			 * If the name does not really change, we mustn't
-			 * set the flag as this will cause rather serious
-			 * problems later!
-			 */
-			if (strcmp (user_name, optarg))
-				lflg++;
-
-			user_newname = optarg;
-			break;
-		case 'L':
-			if (Uflg || pflg)
-				usage ();
-
-			Lflg++;
-			break;
-		case 'm':
-			if (!dflg)
-				usage ();
-
-			mflg++;
-			break;
-		case 'o':
-			if (!uflg)
-				usage ();
-
-			oflg++;
-			break;
-		case 'p':
-			if (Lflg || Uflg)
-				usage ();
-
-			user_pass = optarg;
-			pflg++;
-			break;
-		case 's':
-			if (!VALID (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
+				} else
 #ifdef WITH_AUDIT
-			user_newshell = optarg;
+					user_newexpire = -1;
 #else
-			user_shell = optarg;
+					user_expire = -1;
 #endif
-			sflg++;
-			break;
-		case 'u':
-			user_newid = get_id (optarg);
-			uflg++;
-			break;
-		case 'U':
-			if (Lflg && pflg)
-				usage ();
+				eflg++;
+				break;
+			case 'f':
+#ifdef WITH_AUDIT
+				user_newinactive = get_number (optarg);
+#else
+				user_inactive = get_number (optarg);
+#endif
+				fflg++;
+				break;
+			case 'g':
+				grp = getgr_nam_gid (optarg);
+				if (!grp) {
+					fprintf (stderr,
+						 _("%s: unknown group %s\n"),
+						 Prog, optarg);
+					exit (E_NOTFOUND);
+				}
+				user_newgid = grp->gr_gid;
+				gflg++;
+				break;
+			case 'G':
+				if (get_groups (optarg))
+					exit (E_NOTFOUND);
+				Gflg++;
+				break;
+			case 'l':
+				if (!check_user_name (optarg)) {
+					fprintf (stderr,
+						 _("%s: invalid field `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
 
-			Uflg++;
-			break;
-		default:
-			usage ();
+				/*
+				 * If the name does not really change, we mustn't
+				 * set the flag as this will cause rather serious
+				 * problems later!
+				 */
+				if (strcmp (user_name, optarg))
+					lflg++;
+
+				user_newname = optarg;
+				break;
+			case 'L':
+				if (Uflg || pflg)
+					usage ();
+
+				Lflg++;
+				break;
+			case 'm':
+				if (!dflg)
+					usage ();
+
+				mflg++;
+				break;
+			case 'o':
+				if (!uflg)
+					usage ();
+
+				oflg++;
+				break;
+			case 'p':
+				if (Lflg || Uflg)
+					usage ();
+
+				user_pass = optarg;
+				pflg++;
+				break;
+			case 's':
+				if (!VALID (optarg)) {
+					fprintf (stderr,
+						 _("%s: invalid field `%s'\n"),
+						 Prog, optarg);
+					exit (E_BAD_ARG);
+				}
+#ifdef WITH_AUDIT
+				user_newshell = optarg;
+#else
+				user_shell = optarg;
+#endif
+				sflg++;
+				break;
+			case 'u':
+				user_newid = get_id (optarg);
+				uflg++;
+				break;
+			case 'U':
+				if (Lflg && pflg)
+					usage ();
+
+				Uflg++;
+				break;
+			default:
+				usage ();
+			}
+			anyflag++;
 		}
-		anyflag++;
 	}
+
 	if (anyflag == 0) {
 		fprintf (stderr, _("%s: no flags given\n"), Prog);
 		exit (E_USAGE);
@@ -1405,13 +1444,6 @@ static void move_mailbox (void)
 	}
 }
 #endif
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * main - usermod command

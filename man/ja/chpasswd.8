@@ -1,4 +1,4 @@
-.\"$Id: chpasswd.8,v 1.5 2005/04/05 19:08:55 kloczek Exp $
+.\"$Id: chpasswd.8,v 1.6 2005/12/01 20:38:26 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -35,36 +35,36 @@
 .\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH CHPASSWD 8
-.SH ̾��
-\fBchpasswd\fR \- �ѥ���ɥե������Хå������ǹ�������
-.SH ��
+.SH 名前
+\fBchpasswd\fR \- パスワードファイルをバッチ処理で更新する
+.SH 書式
 \fBchpasswd\fR [\fB\-e\fR]
-.SH ����
-\fBchpasswd\fR ���ޥ�ɤ�
-ɸ�����Ϥ���桼��̾�ȥѥ���ɤ��Ȥ�������Ƥ���ե�������ɤ߹��ߡ�
-���ξ�����Ѥ��ƴ�¸�Υ桼�����Υѥ���ɾ���򹹿����롣
-\-e ���ץ���󤬤ʤ����ϡ��ѥ���ɤ�ʿʸ�Ȥߤʤ���롣
-\-e ���ץ���󤬤�����ϡ��ѥ���ɤϰŹ沽����Ƥ���Ȥߤʤ���롣
-�ƹԤν񼰤ϼ����̤ꡣ
+.SH 説明
+\fBchpasswd\fR コマンドは
+標準入力からユーザ名とパスワードの組が記されているファイルを読み込み、
+その情報を用いて既存のユーザ群のパスワード情報を更新する。
+\-e オプションがない場合は、パスワードは平文とみなされる。
+\-e オプションがある場合は、パスワードは暗号化されているとみなされる。
+各行の書式は次の通り。
 .sp 1
 	  \fIuser_name\fR:\fIpassword\fR
 .sp 1
-���ꤷ���桼���ϴ���¸�ߤ��Ƥ��ʤ���Фʤ�ʤ���
-Ϳ����줿�ѥ���ɤ�ɬ�פ˱����ưŹ沽���졢
-�ѥ���ɤ�ͭ�����¤�������Ϥ���⹹������롣
+指定したユーザは既に存在していなければならない。
+与えられたパスワードは必要に応じて暗号化され、
+パスワードの有効期限がある場合はそれも更新される。
 .PP
-���Υ��ޥ�ɤϡ�Ʊ�������̤Υ�������Ȥ��������褦�ʡ�
-�絬�Ϥʥ����ƥ�Ķ����Ѥ��뤿��˺��줿��
-.SH �ٹ�
+このコマンドは、同時に大量のアカウントを作成するような、
+大規模なシステム環境で用いるために作られた。
+.SH 警告
 .\" The \fBmkpasswd\fR command must be executed afterwards to update the
 .\" DBM password files.
-���ϥե�����˰Ź沽����Ƥ��ʤ��ѥ���ɤ�������Ƥ�����ϡ�
-Ŭ�ڤ��ݸ�Ƥ����ʤ���Фʤ�ʤ���
+入力ファイルに暗号化されていないパスワードが記されている場合は、
+適切に保護しておかなければならない。
 .\" This command may be discarded in favor of the newusers(8) command.
-.SH ��Ϣ����
+.SH 関連項目
 .\" mkpasswd(8), passwd(1), useradd(1)
 .BR passwd (1),
 .BR newusers (8),
 .BR useradd (8)
-.SH ����
+.SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

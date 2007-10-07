@@ -1,4 +1,4 @@
-.\" $Id: vipw.8,v 1.5 2005/04/05 19:08:55 kloczek Exp $
+.\" $Id: vipw.8,v 1.6 2005/12/01 20:38:26 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 2001 Maki KURODA
 .\"     all right reserved,
@@ -7,32 +7,32 @@
 .\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH VIPW 8 "26 Sep 1997"
-.SH ̾��
-vipw, vigr \- password, group �Ȥ��줾��� shadow �ե�������Խ�����
-.SH ��
+.SH 名前
+vipw, vigr \- password, group とそれぞれの shadow ファイルを編集する
+.SH 書式
 \fBvipw\fR [\fB\-s\fR]
 .br
 \fBvigr\fR [\fB\-s\fR]
-.SH ����
-.BR vipw " �� " vigr
-�ϡ����줾��
-\fI/etc/passwd\fR " �� " \fI/etc/group\fR
-���Խ����롣
+.SH 説明
+.BR vipw " と " vigr
+は、それぞれ
+\fI/etc/passwd\fR " と " \fI/etc/group\fR
+を編集する。
 .B \-s
-�ե饰�����ꤵ���ȡ������Υե������ shadow ���ǤǤ���
-\fI/etc/shadow\fR �� \fI/etc/gshadow\fR
-�򤽤줾���Խ����롣
-�����Υץ������ϥե����뤬����ʤ��褦Ŭ�ڤʥ��å������ꤹ�롣
+フラグが指定されると、これらのファイルの shadow 化版である
+\fI/etc/shadow\fR と \fI/etc/gshadow\fR
+をそれぞれ編集する。
+これらのプログラムはファイルが壊れないよう適切なロックを設定する。
 
-�����Υץ������ϡ����Ѥ��륨�ǥ����Ȥ��Ƥޤ�
-�Ķ��ѿ�
+これらのプログラムは、利用するエディタとしてまず
+環境変数
 .BR VISUAL ,
-�Ķ��ѿ�
+環境変数
 .BR EDITOR ,
-���˻���Ǹ�˥ǥե���ȤΥ��ǥ����Ǥ���
+を順に試し、最後にデフォルトのエディタである
 .BR vi 
-���Ѥ��褦�Ȥ��롣
-.SH ��Ϣ����
+を用いようとする。
+.SH 関連項目
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5)

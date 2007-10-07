@@ -1,4 +1,4 @@
-.\" $Id: gpasswd.1,v 1.7 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: gpasswd.1,v 1.8 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1996, Rafal Maszkowski <rzm@pdi.net>
 .\" All rights reserved. You can redistribute this man page and/or
 .\" modify it under the terms of the GNU General Public License as
@@ -9,45 +9,45 @@
 .SH NAZWA
 gpasswd \- administracja plikiem /etc/group
 .br
-.SH SK£ADNIA
+.SH SKÅADNIA
 \fBgpasswd\fR \fIgrupa\fR
 .br
-\fBgpasswd \-a\fR \fIu¿ytkownik grupa\fR
+\fBgpasswd \-a\fR \fIuÅ¼ytkownik grupa\fR
 .br
-\fBgpasswd \-d\fR \fIu¿ytkownik grupa\fR
+\fBgpasswd \-d\fR \fIuÅ¼ytkownik grupa\fR
 .br
 \fBgpasswd \-R\fR \fIgrupa\fR
 .br
 \fBgpasswd \-r\fR \fIgrupa\fR
 .br
-\fBgpasswd\fR [\fB\-A\fR \fIu¿ytkownik\fR,...] [\fB\-M\fR \fIu¿ytkownik\fR,...] \fIgrupa\fR
+\fBgpasswd\fR [\fB\-A\fR \fIuÅ¼ytkownik\fR,...] [\fB\-M\fR \fIuÅ¼ytkownik\fR,...] \fIgrupa\fR
 .SH OPIS
-\fBgpasswd\fR s³u¿y do administrowania plikiem /etc/group (oraz
-\fI/etc/gshadow\fR je¶li zosta³a wykonana kompilacja ze zdefiniowanym
-SHADOWGRP). Ka¿da z grup mo¿e posiadaæ administratorów, cz³onków i has³o.
-Administrator systemu mo¿e pos³u¿yæ siê opcj± \fB\-A\fR do zdefiniowania
-administratora(\-ów) grupy oraz opcj± \fB\-M\fR do zdefiniowania jej cz³onków.
-Posiada on wszystkie prawa administratorów i cz³onków grup.
+\fBgpasswd\fR sÅ‚uÅ¼y do administrowania plikiem /etc/group (oraz
+\fI/etc/gshadow\fR jeÅ›li zostaÅ‚a wykonana kompilacja ze zdefiniowanym
+SHADOWGRP). KaÅ¼da z grup moÅ¼e posiadaÄ‡ administratorÃ³w, czÅ‚onkÃ³w i hasÅ‚o.
+Administrator systemu moÅ¼e posÅ‚uÅ¼yÄ‡ siÄ™ opcjÄ… \fB\-A\fR do zdefiniowania
+administratora(\-Ã³w) grupy oraz opcjÄ… \fB\-M\fR do zdefiniowania jej czÅ‚onkÃ³w.
+Posiada on wszystkie prawa administratorÃ³w i czÅ‚onkÃ³w grup.
 .PP
-Administrator grupy mo¿e dodawaæ i usuwaæ u¿ytkowników przy pomocy,
-odpowiednio, opcji \fB\-a\fR i \fB\-d\fR. Administratorzy mog± te¿ u¿ywaæ opcji
-\fB\-r\fR w celu usuniêcia has³a grupy. Je¿eli grupa nie posiada has³a,
+Administrator grupy moÅ¼e dodawaÄ‡ i usuwaÄ‡ uÅ¼ytkownikÃ³w przy pomocy,
+odpowiednio, opcji \fB\-a\fR i \fB\-d\fR. Administratorzy mogÄ… teÅ¼ uÅ¼ywaÄ‡ opcji
+\fB\-r\fR w celu usuniÄ™cia hasÅ‚a grupy. JeÅ¼eli grupa nie posiada hasÅ‚a,
 to polecenia
 .BR newgrp (1)
-do przy³±czenia siê do grupy mog± u¿ywaæ tylko jej cz³onkowie.
-Opcja \fB\-R\fR wy³±cza dostêp do grupy za pomoc± polecenia
+do przyÅ‚Ä…czenia siÄ™ do grupy mogÄ… uÅ¼ywaÄ‡ tylko jej czÅ‚onkowie.
+Opcja \fB\-R\fR wyÅ‚Ä…cza dostÄ™p do grupy za pomocÄ… polecenia
 .BR newgrp (1).
 .PP
 .B gpasswd
-wywo³ane przez administratora grupy tylko z nazw± grupy pyta o jej has³o.
-Je¿eli has³o jest ustawione, to cz³onkowie grupy mog± nadal wykonywaæ
+wywoÅ‚ane przez administratora grupy tylko z nazwÄ… grupy pyta o jej hasÅ‚o.
+JeÅ¼eli hasÅ‚o jest ustawione, to czÅ‚onkowie grupy mogÄ… nadal wykonywaÄ‡
 .BR newgrp (1)
-bez has³a, inni musz± natomiast podaæ has³o.
+bez hasÅ‚a, inni muszÄ… natomiast podaÄ‡ hasÅ‚o.
 .SH PLIKI
 \fI/etc/group\fR \- informacja o grupach
 .br
 \fI/etc/gshadow\fR \- chroniona informacja o grupach
-.SH ZOBACZ TAK¯E
+.SH ZOBACZ TAKÅ»E
 .BR newgrp (1),
 .BR groupadd (8),
 .BR groupdel (8),

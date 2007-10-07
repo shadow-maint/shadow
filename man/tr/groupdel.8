@@ -1,0 +1,77 @@
+
+
+.\" Copyright 1991 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+
+.TH groupdel 8 "" "" ""
+.nh
+.SH İSİM  
+groupdel - 
+bir grubu siler
+
+.SH KULLANIM
+\fBgroupdel \fR\fIgrup\fR
+  
+.SH AÇIKLAMA
+
+\fBgroupdel\fR komutu, sistem hesap dosyalarını düzenler ve \fIgrup\fR olarak belirtilen gruba ait bütün girdileri siler. Silinmek istenen grup, sistemde varolmalıdır.
+
+Silme işleminden sonra, silinen grup numarasına ait herhangi bir dosya kalmadığından emin olmak için bütün dosya sistemlerini kontrol etmelisiniz.
+
+.SH YETERSİZLİKLER
+
+Varolan herhangi bir kullanıcının birincil grubunu silemeyebilirsiniz. Grubu silmeden önce bu kullanıcıyı sistemden kaldırmak zorundasınız.
+
+.SH İLGİLİ DOSYALAR
+
+.nf
+
+\fB/etc/group\fR   - grupların hesap bilgileri
+\fB/etc/gshadow\fR - güvenli grup bilgileri
+
+.fi
+
+
+.SH İLGİLİ BELGELER
+
+\fBchfn\fR(1),
+\fBchsh\fR(1),
+\fBpasswd\fR(1),
+\fBgroupadd\fR(8),
+\fBgroupmod\fR(8),
+\fBuseradd\fR(8),
+\fBuserdel\fR(8),
+\fBusermod\fR(8).
+
+.SH YAZAN
+
+Julianne Frances Haugh <jockgrrl (at) ix.netcom.com> tarafından yazılmıştır.
+
+.SH ÇEVİREN
+
+Yalçın Kolukısa <yalcink01 (at) yahoo.com>, Ocak 2004
+

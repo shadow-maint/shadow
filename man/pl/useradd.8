@@ -1,4 +1,4 @@
-.\" $Id: useradd.8,v 1.20 2005/04/05 18:47:51 kloczek Exp $
+.\" $Id: useradd.8,v 1.21 2005/12/01 20:38:27 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -27,152 +27,152 @@
 .\" SUCH DAMAGE.
 .TH USERADD 8
 .SH NAZWA
-useradd \- twÛrz nowego uøytkownika lub zmieÒ domy∂ln± informacjÍ o nowym
-.SH SK£ADNIA
+useradd \- tw√≥rz nowego u≈ºytkownika lub zmie≈Ñ domy≈õlnƒÖ informacjƒô o nowym
+.SH SK≈ÅADNIA
 .TP 8
 \fBuseradd\fR [\fB\-c\fR \fIkomentarz\fR] [\fB\-d\fR \fIkatalog_domowy\fR]
 .br
-[\fB\-e\fR \fIdata_waøno∂ci\fR] [\fB\-f\fR \fIdni_nieaktywno∂ci\fR]
+[\fB\-e\fR \fIdata_wa≈ºno≈õci\fR] [\fB\-f\fR \fIdni_nieaktywno≈õci\fR]
 .br
-[\fB\-g\fR \fIgrupa_pocz±tkowa\fR] [\fB\-G\fR \fIgrupa\fR[,...]]
+[\fB\-g\fR \fIgrupa_poczƒÖtkowa\fR] [\fB\-G\fR \fIgrupa\fR[,...]]
 .br
-[[\fB\-M\fR] \fB\-m\fR [\fB\-k\fR \fIkatalog_wzorcÛw\fR]] [\fB\-o\fR] [\fB\-p\fR \fIhas≥o\fR]
+[[\fB\-M\fR] \fB\-m\fR [\fB\-k\fR \fIkatalog_wzorc√≥w\fR]] [\fB\-o\fR] [\fB\-p\fR \fIhas≈Ço\fR]
 .br
-[\fB\-s\fR \fIpow≥oka\fR] [\fB\-u\fR \fIuid\fR] \fIlogin\fR
+[\fB\-s\fR \fIpow≈Çoka\fR] [\fB\-u\fR \fIuid\fR] \fIlogin\fR
 .TP 8
-\fBuseradd\fR \fB\-D\fR [\fB\-g\fR \fIdomy∂lna_grupa\fR] [\fB\-b\fR \fIkatalog_bazowy\fR]
+\fBuseradd\fR \fB\-D\fR [\fB\-g\fR \fIdomy≈õlna_grupa\fR] [\fB\-b\fR \fIkatalog_bazowy\fR]
 .br
-[\fB\-f\fR \fIdomy∂lne_dni_nieaktywno∂ci\fR]
+[\fB\-f\fR \fIdomy≈õlne_dni_nieaktywno≈õci\fR]
 .br
-[\fB\-e\fR \fIdomy∂lna_data_waøno∂ci\fR]
+[\fB\-e\fR \fIdomy≈õlna_data_wa≈ºno≈õci\fR]
 .br
-[\fB\-s\fR \fIdomy∂lna_pow≥oka\fR]
+[\fB\-s\fR \fIdomy≈õlna_pow≈Çoka\fR]
 .SH OPIS
-.SS Tworzenie nowych uøytkownikÛw
+.SS Tworzenie nowych u≈ºytkownik√≥w
 .\" .SS Creating New Users
-Wywo≥ane bez opcji \fB\-D\fR, polecenie \fBuseradd\fR tworzy nowe konto
-uøytkownika pos≥uguj±c siÍ warto∂ciami podanymi w wierszu poleceÒ i domy∂lnymi
-warto∂ciami z systemu.
-W zaleøno∂ci od potrzeb i opcji wiersza poleceÒ, do plikÛw systemowych
-zostanie wprowadzone nowe konto uøytkownika, utworzony bÍdzie jego katalog
-domowy, do ktÛrego przekopiowane zostan± pliki startowe.
+Wywo≈Çane bez opcji \fB\-D\fR, polecenie \fBuseradd\fR tworzy nowe konto
+u≈ºytkownika pos≈ÇugujƒÖc siƒô warto≈õciami podanymi w wierszu polece≈Ñ i domy≈õlnymi
+warto≈õciami z systemu.
+W zale≈ºno≈õci od potrzeb i opcji wiersza polece≈Ñ, do plik√≥w systemowych
+zostanie wprowadzone nowe konto u≈ºytkownika, utworzony bƒôdzie jego katalog
+domowy, do kt√≥rego przekopiowane zostanƒÖ pliki startowe.
 .SH OPCJE
-Polecenie \fBuseradd\fR posiada nastÍpuj±ce opcje:
+Polecenie \fBuseradd\fR posiada nastƒôpujƒÖce opcje:
 .IP "\fB\-c\fR \fIkomentarz\fR"
-Pole komentarza dla zak≥adanego uøytkownika w pliku hase≥.
+Pole komentarza dla zak≈Çadanego u≈ºytkownika w pliku hase≈Ç.
 .IP "\fB\-d\fR \fIkatalog_domowy\fR"
-Warto∂Ê \fIkatalog_domowy\fR zostanie uøyta do okre∂lenia katalogu logowania
-nowotworzonego uøytkownika.
-Domy∂lnie do \fIdomy∂lny_domowy\fR dodawana jest nazwa uøytkownika
-(\fIlogin\fR) tworz±c pe≥n± nazwÍ katalogu logowania.
-.IP "\fB\-e\fR \fIdata_waøno∂ci\fR"
-Data, od ktÛrej konto uøytkownika zostanie wy≥±czone.
+Warto≈õƒá \fIkatalog_domowy\fR zostanie u≈ºyta do okre≈õlenia katalogu logowania
+nowotworzonego u≈ºytkownika.
+Domy≈õlnie do \fIdomy≈õlny_domowy\fR dodawana jest nazwa u≈ºytkownika
+(\fIlogin\fR) tworzƒÖc pe≈ÇnƒÖ nazwƒô katalogu logowania.
+.IP "\fB\-e\fR \fIdata_wa≈ºno≈õci\fR"
+Data, od kt√≥rej konto u≈ºytkownika zostanie wy≈ÇƒÖczone.
 Data podawana jest w formacie \fIMM/DD/YY\fR.
-.IP "\fB\-f\fR \fIdni_nieaktywno∂ci\fR"
-Liczba dni po wyga∂niÍciu has≥a do sta≥ego wy≥±czenia konta.
-Warto∂Ê 0 wy≥±cza konto natychmiast po przeterminowaniu has≥a, za∂ warto∂Ê
-\-1 wy≥±cza tÍ cechÍ. Domy∂ln± warto∂ci± jest \-1.
-.IP "\fB\-g\fR \fIgrupa_pocz±tkowa\fR"
-Nazwa lub numer pocz±tkowej grupy logowania uøytkownika. Nazwa grupy musi
-istnieÊ. Numer grupy musi odnosiÊ siÍ do juø istniej±cej grupy.
-Domy∂lnym numerem grupy jest 1.
+.IP "\fB\-f\fR \fIdni_nieaktywno≈õci\fR"
+Liczba dni po wyga≈õniƒôciu has≈Ça do sta≈Çego wy≈ÇƒÖczenia konta.
+Warto≈õƒá 0 wy≈ÇƒÖcza konto natychmiast po przeterminowaniu has≈Ça, za≈õ warto≈õƒá
+\-1 wy≈ÇƒÖcza tƒô cechƒô. Domy≈õlnƒÖ warto≈õciƒÖ jest \-1.
+.IP "\fB\-g\fR \fIgrupa_poczƒÖtkowa\fR"
+Nazwa lub numer poczƒÖtkowej grupy logowania u≈ºytkownika. Nazwa grupy musi
+istnieƒá. Numer grupy musi odnosiƒá siƒô do ju≈º istniejƒÖcej grupy.
+Domy≈õlnym numerem grupy jest 1.
 .IP "\fB\-G\fR \fIgrupa,[...]\fR"
-Lista dodatkowych grup, do ktÛrych rÛwnieø naleøy uøytkownik.
-Kaøda grupa oddzielona jest od nastÍpnej przecinkiem, bez wtr±conej spacji.
-Do grup odnosz± siÍ te same ograniczenia, ktÛre obowi±zuj± przy grupie podanej
+Lista dodatkowych grup, do kt√≥rych r√≥wnie≈º nale≈ºy u≈ºytkownik.
+Ka≈ºda grupa oddzielona jest od nastƒôpnej przecinkiem, bez wtrƒÖconej spacji.
+Do grup odnoszƒÖ siƒô te same ograniczenia, kt√≥re obowiƒÖzujƒÖ przy grupie podanej
 w opcji \fB\-g\fR.
-Domy∂lnie uøytkownik naleøy tylko do grupy pocz±tkowej.
+Domy≈õlnie u≈ºytkownik nale≈ºy tylko do grupy poczƒÖtkowej.
 .IP \fB\-M\fR
-RedHat doda≥ opcjÍ CREATE_HOME w pliku login.defs w swojej wersji shadow\-utils,
-ktÛra powodowa≥a domy∂lne uøycie \fB\-m\fR \- ta opcja wy≥±cza to. Uøywanie jej 
-znajduje zastosowanie np. w skryptach, lecz moøe byÊ powodem niezgodno∂ci
+RedHat doda≈Ç opcjƒô CREATE_HOME w pliku login.defs w swojej wersji shadow\-utils,
+kt√≥ra powodowa≈Ça domy≈õlne u≈ºycie \fB\-m\fR \- ta opcja wy≈ÇƒÖcza to. U≈ºywanie jej 
+znajduje zastosowanie np. w skryptach, lecz mo≈ºe byƒá powodem niezgodno≈õci
 z innymi wersjami shadow\-utils.
 .IP \fB\-m\fR
-Je∂li nie istnieje katalog domowy uøytkownika, to zostanie on utworzony.
-Je∂li pos≥uøono siÍ opcj± \fB\-k\fR, to bÍd± do niego przekopiowane wzorcowe
-pliki startowe zawarte w \fIkatalogu_wzorcÛw\fR. W przeciwnym przypadku,
-zamiast nich zostan± uøyte pliki zawarte w \fI/etc/skel\fR.
-W katalogu domowym uøytkownika zostan± rÛwnieø utworzone
-podkatalogi zawarte w \fIkatalogu_wzorcÛw\fR lub \fI/etc/skel\fR.
-Opcja \fB\-k\fR jest dozwolona tylko w po≥±czeniu z opcj± \fB\-m\fR.
-Domy∂lnym dzia≥aniem jest nie tworzenie katalogu i nie kopiowanie
-jakichkolwiek plikÛw.
+Je≈õli nie istnieje katalog domowy u≈ºytkownika, to zostanie on utworzony.
+Je≈õli pos≈Çu≈ºono siƒô opcjƒÖ \fB\-k\fR, to bƒôdƒÖ do niego przekopiowane wzorcowe
+pliki startowe zawarte w \fIkatalogu_wzorc√≥w\fR. W przeciwnym przypadku,
+zamiast nich zostanƒÖ u≈ºyte pliki zawarte w \fI/etc/skel\fR.
+W katalogu domowym u≈ºytkownika zostanƒÖ r√≥wnie≈º utworzone
+podkatalogi zawarte w \fIkatalogu_wzorc√≥w\fR lub \fI/etc/skel\fR.
+Opcja \fB\-k\fR jest dozwolona tylko w po≈ÇƒÖczeniu z opcjƒÖ \fB\-m\fR.
+Domy≈õlnym dzia≈Çaniem jest nie tworzenie katalogu i nie kopiowanie
+jakichkolwiek plik√≥w.
 .IP "\fB\-o\fR"
-Umoøliwia utworzenie uøytkownaika z nieunikalnym UID (takim samym jak juø
-istniej±cy).
+Umo≈ºliwia utworzenie u≈ºytkownaika z nieunikalnym UID (takim samym jak ju≈º
+istniejƒÖcy).
 .IP "\fB\-p\fR \fIpasswd\fR"
-Zakodowane has≥o w postaci zwracanej przez \fBcrypt\fR(3).
-Domy∂lnym dzia≥aniem jest blokowanie konta.
-.IP "\fB\-s\fR \fIpow≥oka\fR"
-Nazwa pow≥oki (shell) uøytkownika. Ustawienie tego pola na puste
-powoduje, øe system wybierze domy∂ln± pow≥okÍ logowania.
+Zakodowane has≈Ço w postaci zwracanej przez \fBcrypt\fR(3).
+Domy≈õlnym dzia≈Çaniem jest blokowanie konta.
+.IP "\fB\-s\fR \fIpow≈Çoka\fR"
+Nazwa pow≈Çoki (shell) u≈ºytkownika. Ustawienie tego pola na puste
+powoduje, ≈ºe system wybierze domy≈õlnƒÖ pow≈Çokƒô logowania.
 .IP "\fB\-u\fR \fIuid\fR"
-Numeryczna warto∂Ê identyfikatora uøytkownika (user's ID). Warto∂Ê ta musi
-byÊ niepowtarzalna, chyba øe uøyto opcji \fI\-o\fR. Warto∂Ê musi byÊ nieujemna.
-Domy∂lnie uøywana jest tu najmniejsza warto∂Ê identyfikatora wiÍksza od 999
-i wiÍksza od identyfikatorÛw pozosta≥ych uøytkownikÛw.
-Warto∂ci od 0 do 999 s± zwykle zarezerwowane dla kont systemowych.
-.SS Zmiana warto∂ci domy∂lnych
-Wywo≥ane z opcj± \fB\-D\fR, polecenie \fBuseradd\fR albo wy∂wietli bieø±ce
-warto∂ci domy∂lne, albo zaktualizuje domy∂lne warto∂ci z wiersza poleceÒ.
-Dozwolonymi opcjami s±:
+Numeryczna warto≈õƒá identyfikatora u≈ºytkownika (user's ID). Warto≈õƒá ta musi
+byƒá niepowtarzalna, chyba ≈ºe u≈ºyto opcji \fI\-o\fR. Warto≈õƒá musi byƒá nieujemna.
+Domy≈õlnie u≈ºywana jest tu najmniejsza warto≈õƒá identyfikatora wiƒôksza od 999
+i wiƒôksza od identyfikator√≥w pozosta≈Çych u≈ºytkownik√≥w.
+Warto≈õci od 0 do 999 sƒÖ zwykle zarezerwowane dla kont systemowych.
+.SS Zmiana warto≈õci domy≈õlnych
+Wywo≈Çane z opcjƒÖ \fB\-D\fR, polecenie \fBuseradd\fR albo wy≈õwietli bie≈ºƒÖce
+warto≈õci domy≈õlne, albo zaktualizuje domy≈õlne warto≈õci z wiersza polece≈Ñ.
+Dozwolonymi opcjami sƒÖ:
 .IP "\fB\-b\fR \fIkatalog_bazowy\fR"
-Pocz±tkowy przedrostek ∂cieøki dla katalogu domowego nowego uøytkownika.
-Je∂li przy tworzeniu nowego konta nie uøyto opcji \fB\-d\fR, to
-na koniec \fIkatalogu_bazowego\fR zostanie dodana nazwa uøytkownika, tworz±c
-now± nazwÍ katalogu.
-.IP "\fB\-e\fR \fIdomy∂lna_data_waøno∂ci\fR"
-Data, od ktÛrej konto uøytkownika zostanie wy≥±czone.
-.IP "\fB\-f\fR \fIdomy∂lne_dni_nieaktywno∂ci\fR"
-Liczba dni po wyga∂niÍciu has≥a do sta≥ego wy≥±czenia konta.
-.IP "\fB\-g\fR \fIdomy∂lna_grupa\fR"
-Nazwa lub numer pocz±tkowej grupy logowania uøytkownika. Nazwa grupy musi
-istnieÊ. Numer grupy musi odnosiÊ siÍ do juø istniej±cej grupy.
-.IP "\fB\-s\fR \fIdomy∂lna_pow≥oka\fR"
-Nazwa pow≥oki (shell) dla nowych uøytkownikÛw. Podany program bÍdzie uøyty
-dla wszystkich przysz≥ych nowych kont uøytkownikÛw.
+PoczƒÖtkowy przedrostek ≈õcie≈ºki dla katalogu domowego nowego u≈ºytkownika.
+Je≈õli przy tworzeniu nowego konta nie u≈ºyto opcji \fB\-d\fR, to
+na koniec \fIkatalogu_bazowego\fR zostanie dodana nazwa u≈ºytkownika, tworzƒÖc
+nowƒÖ nazwƒô katalogu.
+.IP "\fB\-e\fR \fIdomy≈õlna_data_wa≈ºno≈õci\fR"
+Data, od kt√≥rej konto u≈ºytkownika zostanie wy≈ÇƒÖczone.
+.IP "\fB\-f\fR \fIdomy≈õlne_dni_nieaktywno≈õci\fR"
+Liczba dni po wyga≈õniƒôciu has≈Ça do sta≈Çego wy≈ÇƒÖczenia konta.
+.IP "\fB\-g\fR \fIdomy≈õlna_grupa\fR"
+Nazwa lub numer poczƒÖtkowej grupy logowania u≈ºytkownika. Nazwa grupy musi
+istnieƒá. Numer grupy musi odnosiƒá siƒô do ju≈º istniejƒÖcej grupy.
+.IP "\fB\-s\fR \fIdomy≈õlna_pow≈Çoka\fR"
+Nazwa pow≈Çoki (shell) dla nowych u≈ºytkownik√≥w. Podany program bƒôdzie u≈ºyty
+dla wszystkich przysz≈Çych nowych kont u≈ºytkownik√≥w.
 .PP
-Bez podania opcji \fBuseradd\fR wy∂wietla bieø±ce ustawienia domy∂lne.
+Bez podania opcji \fBuseradd\fR wy≈õwietla bie≈ºƒÖce ustawienia domy≈õlne.
 .SH UWAGI
-Administrator systemu odpowiedzialny jest za umieszczenie domy∂lnych
-plikÛw uøytkownika w katalogu \fI/etc/skel\fR.
-.SH OSTRZEØENIA
-Nie moøesz dodaÊ uøytkownika do grupy NIS. Musi to zostaÊ wykonane
+Administrator systemu odpowiedzialny jest za umieszczenie domy≈õlnych
+plik√≥w u≈ºytkownika w katalogu \fI/etc/skel\fR.
+.SH OSTRZE≈ªENIA
+Nie mo≈ºesz dodaƒá u≈ºytkownika do grupy NIS. Musi to zostaƒá wykonane
 na serwerze NIS.
 .SH PLIKI
-\fI/etc/passwd\fR			\- informacja o kontach uøytkownikÛw
+\fI/etc/passwd\fR			\- informacja o kontach u≈ºytkownik√≥w
 .br
-\fI/etc/shadow\fR			\- bezpieczna informacja o kontach uøytkownikÛw
+\fI/etc/shadow\fR			\- bezpieczna informacja o kontach u≈ºytkownik√≥w
 .br
 \fI/etc/group\fR			\- informacja o grupach
 .br
-\fI/etc/default/useradd\fR	\- informacja o ustawieniach domy∂lnych
+\fI/etc/default/useradd\fR	\- informacja o ustawieniach domy≈õlnych
 .br
-\fI/etc/skel/\fR			\- katalog zawieraj±cy pliki domy∂lne
-.SH KOD ZAKO—CZENIA
+\fI/etc/skel/\fR			\- katalog zawierajƒÖcy pliki domy≈õlne
+.SH KOD ZAKO≈ÉCZENIA
 .TP 2
-Polecenie \fBuseadd\fR koÒczy dzia≥anie z nastÍpuj±cymi warto∂ciami kodÛw zakoÒczenia:
+Polecenie \fBuseadd\fR ko≈Ñczy dzia≈Çanie z nastƒôpujƒÖcymi warto≈õciami kod√≥w zako≈Ñczenia:
 .br
 \fB0\fR	\- powodzenie
 .br
-\fB1\fR	\- nie moøna zaktualizowaÊ pliku z has≥ami
+\fB1\fR	\- nie mo≈ºna zaktualizowaƒá pliku z has≈Çami
 .br
-\fB2\fR	\- niew≥a∂ciwa sk≥adnia parametrÛw polecenia
+\fB2\fR	\- niew≈Ça≈õciwa sk≈Çadnia parametr√≥w polecenia
 .br
-\fB3\fR	\- niew≥a∂ciwe parametry opcji
+\fB3\fR	\- niew≈Ça≈õciwe parametry opcji
 .br
-\fB4\fR	\- uid jest juø uøywany (i nie uøyto opcji \-o)
+\fB4\fR	\- uid jest ju≈º u≈ºywany (i nie u≈ºyto opcji \-o)
 .br
 \fB6\fR	\- podana grupa nie istnieje
 .br
-\fB9\fR	\- podany login jest juø uøywany
+\fB9\fR	\- podany login jest ju≈º u≈ºywany
 .br
-\fB10\fR	\- nie moøna zaktualizowaÊ pliku z grupami
+\fB10\fR	\- nie mo≈ºna zaktualizowaƒá pliku z grupami
 .br
-\fB12\fR	\- nie moøna utworzyÊ katalogu domowego
+\fB12\fR	\- nie mo≈ºna utworzyƒá katalogu domowego
 .br
-\fB13\fR	\- nie moøna utworzyÊ spoola pocztowego
-.SH ZOBACZ TAKØE
+\fB13\fR	\- nie mo≈ºna utworzyƒá spoola pocztowego
+.SH ZOBACZ TAK≈ªE
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),

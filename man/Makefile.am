@@ -1,6 +1,6 @@
 
 # subdirectories for translated manual pages
-SUBDIRS = cs de es fr hu id it ja ko pl pt_BR ru zh_CN zh_TW
+SUBDIRS = cs de es fi fr hu id it ja ko pl pt_BR ru tr zh_CN zh_TW
 
 man_XMANS = \
 	chage.1.xml \
@@ -98,6 +98,8 @@ all:
 
 shadow-man-pages.pot: $(man_XMANS)
 	xml2po -o $@ $(man_XMANS)
+
+update-po: shadow-man-pages.pot
 
 if ENABLE_REGENERATE_MAN
 

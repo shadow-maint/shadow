@@ -73,24 +73,9 @@ void audit_logger (int type, const char *pgname, const char *op,
 {
 	if (audit_fd < 0)
 		return;
-	else {
-		char buf[PATH_MAX];
-		const char *success;
-
-		if (result)
-			success = "success";
-		else
-			success = "failed";
-
-		if (name)
-			snprintf (buf, sizeof (buf), "%s: op=%s acct=%s res=%s",
-				  pgname, op, name, success);
-		else
-			snprintf (buf, sizeof (buf), "%s: op=%s id=%u res=%s",
-				  pgname, op, id, success);
-
-		audit_send_user_message (audit_fd, type, buf);
-	}
+	else
+		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
+					NULL, NULL, NULL, result);
 }
 
 #endif				/* WITH_AUDIT */

@@ -1,0 +1,94 @@
+.\" Hey Emacs! This file is -*- nroff -*- source.
+.\" (above from Rik Faith..:*)
+.\" Copyright (c) Andrew G. Morgan 1996, <morgan@parc.power.net>
+.\" Proofread by Raimo Koski, Nov-Dec. 1999
+.\" Translated into Finnish by Tuomo Pyhälä (tuomo@lesti.kpnet.fi)
+.\" Proofread by Raimo Koski (rkoski@pp.weppi.fi)
+.\"
+.TH PASSWD 1 "28. Huhtikuuta 1998" "SimplePAMApps 0.50" "Käyttäjän sovellusohjelmat"
+.SH NIMI
+passwd \- päivitä käyttäjän todennustunnukset
+
+.SH "YLEISKATSAUS"
+.B passwd [-u] [käyttäjänimi]
+.sp 2
+.SH KUVAUS
+Passwd on apuohjelma käyttäjän todennustunnusten
+päivittämiseen. Todennustunnus on lähes kaikissa järjestelmissä
+salasana ja termejä käytetään jäljempänä ristiin.
+
+.sp
+Ainoastaan pääkäyttäjä voi päivittää toisen käyttäjän salasanan syöttämällä
+.BR käyttäjänimen ". "
+Optiota
+.BR -u 
+käytetään, kun halutaan kertoa passwd:lle, että sen tulisi päivittää vain
+vanhentuneet salasanat (todennustunnukset) säilyttäen vanhentumattomat
+salasanat entisellään.
+
+.sp
+Passwd käyttää 
+.BR "Linux-PAM"
+ohjelmointirajapintaa ja se voidaan määrittää käyttämään
+haluttuja moduuleita salasanaa vaihtavan käyttäjän todennukseen ja
+salasanan vaihtoon. Alustaessaan ohjelmointirajapintaa passwd toimii nimellä
+"passwd".
+
+.sp
+Yksinkertainen osio
+.I Linux-PAM
+määritystiedostossa passwd:lle olisi:
+.br
+  
+.br
+ #
+.br
+ # passwd palvelun määrittely, joka tarkistaa ettei ehdotettu salasana 
+.br
+ # ole helposti arvattavissa, ennen salasanan päivittämistä.
+.br
+ #
+.br
+ passwd password requisite pam_cracklib.so retry=3
+.br
+ passwd password required pam_pwdb.so use_authtok
+.br
+ #
+
+.sp
+Huomaa, että passwd ei tarvitse muun tyyppisten moduulien määrittelyä.
+
+.SH PALUUARVO
+
+Virheettömän suorituksen jälkeen
+.B passwd
+päättää toimintansa paluuarvolla 0.  Paluuarvo 1 palautetaan virheen
+sattuessa. Virheilmoitukset kirjoitetaan virhetulosteeseen.
+
+.SH "NOUDATTAA:"
+.br
+.BR Linux-PAM
+(Pluggable Authentication modules for Linux).
+
+.SH TIEDOSTOT
+.br
+.B /etc/pam.conf
+- the
+.BR Linux-PAM
+asetus tiedosto
+
+.SH BUGIT
+.sp 2
+Ei tunnettuja virheitä.
+
+.SH "KATSO MYÖS"
+.BR pam (8),
+ja 
+.BR pam_chauthok (2).
+.sp Monipuolisempi selostus tämän ohjelman ja Linux-PAMin asetuksista 
+löytyy englanninkielisestä
+.BR "'Linux-PAM System Adminstarators' Guide'":sta
+WWW-osoitteesta:
+.br 
+.I <http://parc.power.net/morgan/Linux-PAM/index.html>
+.\" TERM authentication_token todennustunnus

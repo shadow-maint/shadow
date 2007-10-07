@@ -2,7 +2,7 @@
 .\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
 .\" Instead of manually editing it, you probably should edit the DocBook XML
 .\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
-.TH "LASTLOG" "8" "10/01/2005" "" ""
+.TH "LASTLOG" "8" "01/02/2006" "System Management Commands" "System Management Commands"
 .\" disable hyphenation
 .nh
 .\" disable justification (adjust text to left margin only)
@@ -61,9 +61,4 @@ file is a database which contains info on the last login of each user. You shoul
 lastlog logging file
 .SH "CAVEATS"
 .PP
-Large gaps in uid numbers will cause the lastlog program to run longer with no output to the screen (i.e. if mmdf=800 and last uid=170, program will appear to hang as it processes uid 171\-799).
-.SH "AUTHORS"
-.PP
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.PP
-Phillip Street
+Large gaps in UID numbers will cause the lastlog program to run longer with no output to the screen (i.e. if mmdf=800 and last UID=170, program will appear to hang as it processes UID 171\-799).

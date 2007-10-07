@@ -1,4 +1,7 @@
-.\" Copyright 1991 \- 1994, Julianne Frances Haugh
+.\" This file was generated with po4a. Translate the source file.
+.\" 
+.\"$Id: usermod.8,v 1.9 2005/12/01 20:38:26 kloczek Exp $
+.\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -24,119 +27,108 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
-.\"	$Id: usermod.8,v 1.7 2005/04/05 19:08:54 kloczek Exp $
-.\"
-.\" Traduzione in italiano a cura di Isabella Ruocco <isacher@nettaxi.com>
-.\" luglio 1999
-.\"
-.TH USERMOD 8
+.TH USERMOD 8   
 .SH NOME
 usermod \- Modifica l'account di un utente
 .SH SINTASSI
 .TP 8
-.B usermod
-.RB [ \-c
-.IR commento ]
-.RB [ \-d
-.IR home_dir " ["
-.BR \-m ]]
+\fBusermod\fP [\fB\-c\fP \fIcommento\fP] [\fB\-d\fP \fIhome_dir\fP [\fB\-m\fP]]
 .br
-.RB [ \-e
-.IR data_scadenza ]
-.RB [ \-f
-.IR tempo_inattivit‡ ]
+[\fB\-e\fP \fIdata_scadenza\fP] [\fB\-f\fP \fItempo_inattivit√†\fP]
 .br
-.RB [ \-g
-.IR gruppo_iniziale ]
-.RB [ \-G
-.IR gruppo [,...]]
+[\fB\-g\fP \fIgruppo_iniziale\fP] [\fB\-G\fP \fIgruppo\fP[,...]]
 .br
-.RB [ \-l
-.IR nome_login ]
-.RB [ \-s
-.IR shell ]
+[\fB\-l\fP \fInome_login\fP] [\fB\-p\fP \fIpassword\fP]
 .br
-.RB [ \-u
-.IR uid " ["
-.BR \-o ]]
-.I login
+[\fB\-s\fP \fIshell\fP] [\fB\-u\fP \fIuid\fP [ \fB\-o\fP]] [\fB\-L\fP|\fB\-U\fP] \fIlogin\fP
 .SH DESCRIZIONE
-Il comando \fBusermod\fR modifica i file di account di sistema in modo da
-riflettere le modifiche specificate sulla linea di comando.
-Le opzioni che si applicano al comando \fBusermod\fR sono
-.IP "\fB\-c\fR \fIcommento\fR"
-Il campo commento del nuovo utente nel file password.
-Normalmente viene modificato usando l'utilit‡ \fBchfn\fR(1).
-.IP "\fB\-d\fR \fIhome_dir\fR"
-La nuova directory di login dell'utente.
-Se Ë data l'opzione \fB\-m\fR il contenuto della home directory corrente
-sar‡ spostato nella nuova home directory, che viene creata se non esiste gi‡.
-.IP "\fB\-e\fR \fIdata_scadenza\fR"
-La data in cui l'account dell'utente verr‡ disabilitato.
-La data Ë specificata nel formato \fIMM/GG/AA\fR.
-.IP "\fB\-f\fR \fIgiorni_inattivit‡\fR"
-Il numero di giorni dopo la scadenza di una password prima che l'account 
-venga permanentemente disabilitato.
-Un valore pari a 0 disabilita l'account non appena la password Ë scaduta,
-ed un valore pari a \-1 disabilita la caratteristica.
-Il valore predefinito Ë \-1.
-.IP "\fB\-g\fR \fIgruppo_iniziale\fR"
-Il nuome o numero del nuovo gruppo di connessione dell'utente.
-Il nome del gruppo deve esistere. Un numero di gruppo deve riferirsi ad un
-gruppo gi‡ esistente.
-Il numero di gruppo predefinito Ë 1.
-.IP "\fB\-G\fR \fIgruppo,[...]\fR"
-Una lista di gruppi supplementari di cui l'utente Ë altresÏ membro.
-Ciascun gruppo Ë separato dal successivo da una virgola, senza spazi bianchi
-intermedi.
-I gruppi sono soggetti alle stesse restrizioni del gruppo dato con l'opzione
-\fB\-g\fR.
-Se l'utente Ë attualmente membro di un gruppo che non Ë elencato, l'utente
-verr‡ rimosso dal gruppo.
-.IP "\fB\-l\fR \fInome_login\fR"
-Il nome dell'utente verr‡ cambiato da \fIlogin\fR a \fInome_login\fR.
-Niente altro viene cambiato.
-In particolare, la home directory dell'utente dovrebbe probabilmente
-essere modificata in modo da riflettere il nuovo nome di login.
-.IP "\fB\-s\fR \fIshell\fR"
-Il nome della nuova shell di login dell'utente.
-Lasciando questo campo vuoto si fa in modo che il sistema selezioni la shell
-di connessione predefinita.
-.IP "\fB\-u\fR \fIuid\fR"
-Il valore numerico dell'ID dell'utente.
-Questo valore deve essere univoco, a meno che non venga usata l'opzione
-\fB\-o\fR.
-Questo valore deve essere non\-negativo.
-Valori tra 0 e 999 sono tipicamente riservati ad account di sistema.
-Tutti i file che l'utente possiede e che sono posiszionati nell'albero di
-directory avente come radice la home directory dell'utente avranno l'ID utente del
-file cambiato automaticamente.
-I file fuori della home directory dell'utente devono essere modificati
-manualmente.
+Il comando \fBusermod\fP modifica i file di account di sistema in modo da 
+riflettere le modifiche specificate sulla linea di comando.  Le opzioni che 
+si applicano al comando \fBusermod\fP sono
+.IP "\fB\-c \fP\fIcommento\fP"
+Il campo commento del nuovo utente nel file password.  Normalmente viene 
+modificato usando l'utilit√† \fBchfn\fP(1).
+.IP "\fB\-d \fP\fIhome_dir\fP"
+La nuova directory di login dell'utente.  Se √® data l'opzione \fB\-m\fP il 
+contenuto della home directory corrente sar√† spostato nella nuova home 
+directory, che viene creata se non esiste gi√†.
+.IP "\fB\-e \fP\fIdata_scadenza\fP"
+La data in cui l'account dell'utente verr√† disabilitato.  La data √® 
+specificata nel formato \fIMM/GG/AA\fP.
+.IP "\fB\-f \fP\fIgiorni_inattivit√†\fP"
+Il numero di giorni dopo la scadenza della password prima che l'account 
+verr√† permanentemente disabilitato.  Un valore pari a 0 disabilita 
+l'account non appena la password √® scaduta, ed un valore pari a \-1 
+disabilita questa caratteristica.  Il valore predefinito √® \-1.
+.IP "\fB\-g \fP\fIgruppo_iniziale\fP"
+Il nuome o numero del nuovo gruppo di connessione dell'utente.  Il nome del 
+gruppo deve esistere. Un numero di gruppo deve riferirsi ad un gruppo gi√† 
+esistente.  Il numero di gruppo predefinito √® 1.
+.IP "\fB\-G \fP\fIgruppo,[...]\fP"
+Una lista di gruppi supplementari di cui l'utente √® altres√¨ membro.  
+Ciascun gruppo √® separato dal successivo da una virgola, senza spazi 
+bianchi intermedi.  I gruppi sono soggetti alle stesse restrizioni del 
+gruppo dato con l'opzione \fB\-g\fP.  Se l'utente √® attualmente membro di un 
+gruppo che non √® elencato, l'utente verr√† rimosso dal gruppo.
+.IP "\fB\-l \fP\fInome_login\fP"
+Il nome dell'utente verr√† cambiato da \fIlogin\fP a \fInome_login\fP.  Niente 
+altro viene cambiato.  In particolare, la home directory dell'utente 
+dovrebbe probabilmente essere modificata in modo da riflettere il nuovo nome 
+di login.
+.IP \fB\-o\fP
+Used with \fI\-r\fP option allow change user ID to non\-unique value.
+.IP "\fB\-p \fP\fIpasswd\fP"
+The encrypted password, as returned by \fBcrypt\fP(3).
+.IP "\fB\-s \fP\fIshell\fP"
+Il nome della nuova shell di login dell'utente.  Lasciando questo campo 
+vuoto si fa in modo che il sistema selezioni la shell di connessione 
+predefinita.
+.IP "\fB\-u \fP\fIuid\fP"
+Il valore numerico dell'ID dell'utente.  Questo valore deve essere univoco, 
+a meno che non venga usata l'opzione \fI\-o\fP.  Questo valore deve essere 
+non\-negativo.  Valori tra 0 e 99 sono tipicamente riservati ad account di 
+sistema.  Tutti i file che l'utente possiede e che sono posiszionati 
+nell'albero di directory avente come radice la home directory dell'utente 
+avranno l'ID utente del file cambiato automaticamente.  I file fuori della 
+home directory dell'utente devono essere modificati manualmente.
+.IP \fB\-L\fP
+Lock a user's password.  This puts a '!' in front of the encrypted password, 
+effectively disabling the password.  You can't use this option with \fI\-p\fP or 
+\fI\-U\fP.
+.IP \fB\-U\fP
+Unlock a user's password.  This removes the '!' in front of the encrypted 
+password.  You can't use this option with \fI\-p\fP or \fI\-L\fP.
 .SH CAVEAT
-\fBusermod\fR non permetter‡ di modificare il nome di un utente che Ë
-attualmente connesso.
-Occorre essere certi che l'utente nominato non sta eseguendo alcun processo
-quando questo comando viene eseguito se l'ID numerico dell'utente sta per
-essere cambiato.
-Occorre cambiare il proprietario di ogni file crontab manualmente.
-Occorre cambiare il proprietario di ogni job manualmente.
-Occorre fare qualunque cambiamento che riguarda NIS sul server NIS.
+\fBusermod\fP non permetter√† di modificare il nome di un utente che √® 
+attualmente connesso.  Occorre essere certi che l'utente nominato non sta 
+eseguendo alcun processo quando questo comando viene eseguito se l'ID 
+numerico dell'utente sta per essere cambiato.  Occorre cambiare il 
+proprietario di ogni file crontab manualmente.  Occorre cambiare il 
+proprietario di ogni job manualmente.  Occorre fare qualunque cambiamento 
+che riguarda NIS sul server NIS.
 .SH FILE
-\fI/etc/passwd\fR \- informazioni sugli account di utenti
+/etc/passwd \- informazioni sugli account utente
 .br
-\fI/etc/shadow\fR \- informazioni sicure sugli account di utenti
+/etc/shadow \- informazioni sicure sugli account di utenti
 .br
-\fI/etc/group\fR \- informazioni sui gruppi
-.SH VEDERE ANCHE
-.BR chfn (1),
-.BR chsh (1),
-.BR groupadd (8),
-.BR groupdel (8),
-.BR groupmod (8),
-.BR passwd (1),
-.BR useradd (8),
-.BR userdel (8)
+/etc/group \- informazioni sui gruppi
+.SH "VEDERE ANCHE"
+\fBchfn\fP(1), \fBchsh\fP(1), \fBgroupadd\fP(8), \fBgroupdel\fP(8), \fBgroupmod\fP(8), 
+\fBpasswd\fP(1), \fBuseradd\fP(8), \fBuserdel\fP(8)
 .SH AUTORE
-Julianne Frances Haugh (jfh@tab.com)
+Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+.\" Questa sezione si trova in un file separato che viene aggiunto
+.\" automaticamente alla pagina tradotta.
+.\" Per semplicit√† ho usato lo stesso file per tutte le traduzioni,
+.\" di conseguenza mischiando tutti i nomi dei traduttori: mi auguro
+.\" che non sia un problema per nessuno.
+.\"             -- Danilo Piazzalunga <danilopiazza@libero.it>, 2005
+.SH TRADUZIONE
+.nf
+Giovanni Bortolozzo <borto@dei.unipd.it>, 1996-1997
+Roberto Pertile <triplej@iol.it>, 1999
+Isabella Ruocco <isacher@nettaxi.com>, 1999
+Giuseppe Sacco <eppesuig@debian.org>, 2005
+.fi
+.\" Conversione a PO4A:
+.\" Danilo Piazzalunga <danilopiazza@libero.it>, 2005

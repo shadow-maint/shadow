@@ -1,0 +1,33 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LOGOUTD" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+logoutd \- Imposer les restrictions de connexion dans le temps
+.SH "SYNOPSIS"
+.HP 8
+\fBlogoutd\fR
+.SH "DESCRIPTION"
+.PP
+\fBLogoutd\fR
+impose les restrictions (sur les ports, la date et l'heure de connexion) spécifiées dans
+\fI/etc/porttime\fR.
+\fBLogoutd\fR
+doit être démarré depuis
+\fI/etc/rc\fR. Il analyse le fichier
+\fI/var/run/utmp\fR
+régulièrement, et, pour chaque utilisateur, il vérifie que ce nom d'utilisateur est autorisé à être connecté à ce port à ce moment. Toute session en violation avec les restrictions de
+\fI/etc/porttime\fR
+est terminée.
+.SH "FICHIERS"
+.TP
+\fI/etc/porttime\fR
+fichier des autorisations d'accès en fonction de la date et de l'heure
+.TP
+\fI/var/run/utmp\fR
+liste des connexions courantes

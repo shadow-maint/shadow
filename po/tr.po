@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2005-10-10 20:33+0200\n"
+"POT-Creation-Date: 2005-12-10 21:48+0100\n"
 "PO-Revision-Date: 2004-06-13 10:27+0300\n"
 "Last-Translator: Mehmet Türker <mturker@innova.com.tr>\n"
 "Language-Team: Turkish <debian-l10n-turkish@lists.debian.org>\n"
@@ -222,6 +222,10 @@ msgstr "Son Parola Değişimi (YYYY-AA-GG)"
 #, fuzzy, c-format
 msgid "never\n"
 msgstr "Hiçbir zaman\n"
+
+#, fuzzy, c-format
+msgid "password must be changed"
+msgstr "Parola değişti \n"
 
 #, fuzzy, c-format
 msgid "Password expires\t\t\t\t\t: "
@@ -634,7 +638,7 @@ msgid ""
 "Usage: groupadd [options] group\n"
 "\n"
 "Options:\n"
-"  -f, --force \t\tforce exit with success status if the specified\n"
+"  -f, --force\t\tforce exit with success status if the specified\n"
 "\t\t\t\tgroup already exists\n"
 "  -g, --gid GID\t\tuse GID for the new group\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
@@ -1075,8 +1079,8 @@ msgid ""
 "Usage: passwd [options] [login]\n"
 "\n"
 "Options:\n"
-"  -a, --all \t\t\treport password status on all accounts\n"
-"  -d, --delete \t\t\tdelete the password for the named account\n"
+"  -a, --all\t\t\treport password status on all accounts\n"
+"  -d, --delete\t\t\tdelete the password for the named account\n"
 "  -e, --expire\t\t\tforce expire the password for the named account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -k, --keep-tokens\t\tchange password only if expired\n"
@@ -1135,10 +1139,6 @@ msgstr "Üzgünüm, %s için parola henüz değiştirilemedi.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: yetersiz bellek\n"
-
-#, c-format
-msgid "%s: Cannot execute %s"
-msgstr "%s: %s çalıştırılamıyor"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1260,6 +1260,19 @@ msgid "%s: %s\n"
 msgstr "passwd: %s\n"
 
 #, c-format
+msgid ""
+"Usage: su [options] [login]\n"
+"\n"
+"Options:\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -, -l, --login\t\tmake the shell a login shell\n"
+"  -m, -p,\n"
+"  --preserve-environment\tdo not reset environment variables, and keep\n"
+"\t\t\t\tthe same shell\n"
+"  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
+msgstr ""
+
+#, c-format
 msgid "%s: must be run from a terminal\n"
 msgstr "%s: bir terminalden çalıştırılmalı\n"
 
@@ -1275,8 +1288,8 @@ msgstr "Bilinmeyen id: %s\n"
 msgid "You are not authorized to su %s\n"
 msgstr "su %s için yetkili değilsiniz\n"
 
-msgid "(Enter your own password.)"
-msgstr "(Kendi parolanızı girin.)"
+msgid "(Enter your own password)"
+msgstr "(Kendi parolanızı girin)"
 
 #, c-format
 msgid ""
@@ -1360,7 +1373,7 @@ msgid ""
 "  -G, --groups GROUPS\t\tlist of supplementary groups for the new\n"
 "\t\t\t\tuser account\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
-"  -k, --skel SKEL_DIR \t\tspecify an alternative skel directory\n"
+"  -k, --skel SKEL_DIR\t\tspecify an alternative skel directory\n"
 "  -K, --key KEY=VALUE\t\toverrides /etc/login.defs defaults\n"
 "  -m, --create-home\t\tcreate home directory for the new user\n"
 "\t\t\t\taccount\n"
@@ -1371,22 +1384,6 @@ msgid ""
 "  -s, --shell SHELL\t\tthe login shell for the new user account\n"
 "  -u, --uid UID\t\t\tforce use the UID for the new user account\n"
 msgstr ""
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: grup dosyası kilitlenmesinde hata\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: grup dosyası açılırken hata\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: gölge grup dosyası kilitlenirken hata\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: gölge grup dosyası açılırken hata\n"
 
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1455,6 +1452,22 @@ msgstr "%s: gölge parola dosyası kilitlenemiyor\n"
 #, c-format
 msgid "%s: cannot open shadow password file\n"
 msgstr "%s: gölge parola dosyası açılamıyor\n"
+
+#, c-format
+msgid "%s: error locking group file\n"
+msgstr "%s: grup dosyası kilitlenmesinde hata\n"
+
+#, c-format
+msgid "%s: error opening group file\n"
+msgstr "%s: grup dosyası açılırken hata\n"
+
+#, c-format
+msgid "%s: error locking shadow group file\n"
+msgstr "%s: gölge grup dosyası kilitlenirken hata\n"
+
+#, c-format
+msgid "%s: error opening shadow group file\n"
+msgstr "%s: gölge grup dosyası açılırken hata\n"
 
 #, c-format
 msgid "%s: error adding new password entry\n"
@@ -1555,20 +1568,29 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: %s dizini silinirken hata oluştu\n"
 
 #, c-format
-msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
-msgstr "Kullanım: %s\t[-u uid [-o]] [-g grup] [-G grup,...] \n"
-
-#, c-format
-msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d ev_dizini [-m]] [-s kabuk] [-c açıklama] [-l yeni_isim]\n"
-
-#, c-format
-msgid "[-f inactive] [-e expire] "
-msgstr "[-f pasif] [-e hesap_bitimi] "
-
-#, c-format
-msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p parola] [-L|-U] isim\n"
+msgid ""
+"Usage: usermod [options] login\n"
+"\n"
+"Options:\n"
+"  -a, --append GROUP\t\tappend the user to the supplemental GROUP\n"
+"  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
+"  -d, --home HOME_DIR\t\tnew login directory for the new user account\n"
+"  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
+"  -f, --inactive INACTIVE\tset password inactive after expiration\n"
+"\t\t\t\tto INACTIVE\n"
+"  -g, --gid GROUP\t\tforce use GROUP as new initial login group\n"
+"  -G, --groups GROUPS\t\tlist of supplementary GROUPS\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -l, --login LOGIN\t\tnew value of the login name\n"
+"  -L, --lock\t\t\tlock the user account\n"
+"  -m, --move-home\t\tmove contents of the home directory to the new\n"
+"\t\t\t\tlocation (use only with -d)\n"
+"  -o, --non-unique\t\tallow using duplicate (non-unique) UID\n"
+"  -p, --password PASSWORD\tuse encrypted password for the new password\n"
+"  -s, --shell SHELL\t\tnew login shell for the user account\n"
+"  -u, --uid UID\t\t\tnew UID for the user account\n"
+"  -U, --unlock\t\t\tunlock the user account\n"
+msgstr ""
 
 #, c-format
 msgid "%s: out of memory in update_group\n"
@@ -1638,6 +1660,18 @@ msgstr "postakutusu isim değişikliği başarısız"
 
 #, c-format
 msgid ""
+"Usage: vipw [options]\n"
+"\n"
+"Options:\n"
+"  -g, --group\t\t\tedit group database\n"
+"  -h, --help\t\t\tdisplay this help message and exit\n"
+"  -p, --passwd\t\t\tedit passwd database\n"
+"  -q, --quiet\t\t\tquiet mode\n"
+"  -s, --shadow\t\t\tedit shadow or gshadow database\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
@@ -1654,15 +1688,31 @@ msgstr "Yedek alınamadı"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s geri yüklenemiyor: %s (değişiklikleriniz %s içinde)\n"
 
-#, c-format
-msgid ""
-"Usage:\n"
-"`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
-"`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
-msgstr ""
-"Kullanım:\n"
-"`vipw' /etc/passwd'ü düzenler        `vipw -s' /etc/shadow'u düzenler\n"
-"`vigr' /etc/group'u düzenler         `vigr -s' /etc/gshadow'u düzenler\n"
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "Kullanım:\n"
+#~ "`vipw' /etc/passwd'ü düzenler        `vipw -s' /etc/shadow'u düzenler\n"
+#~ "`vigr' /etc/group'u düzenler         `vigr -s' /etc/gshadow'u düzenler\n"
 
 #~ msgid "%s: PAM chauthtok failed\n"
 #~ msgstr "%s: PAM chauthok başarısız oldu\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s: %s çalıştırılamıyor"
+
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "Kullanım: %s\t[-u uid [-o]] [-g grup] [-G grup,...] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d ev_dizini [-m]] [-s kabuk] [-c açıklama] [-l yeni_isim]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f pasif] [-e hesap_bitimi] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p parola] [-L|-U] isim\n"

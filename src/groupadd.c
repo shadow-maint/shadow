@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupadd.c,v 1.48 2005/10/04 21:05:12 kloczek Exp $"
+#ident "$Id: groupadd.c,v 1.50 2005/12/06 20:24:03 kloczek Exp $"
 
 #include <ctype.h>
 #include <fcntl.h>
@@ -38,8 +38,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef USE_PAM
-#include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#include "pam_defs.h"
 #include <pwd.h>
 #endif				/* USE_PAM */
 #include "chkname.h"
@@ -99,7 +98,7 @@ static void usage (void)
 	fprintf (stderr, _("Usage: groupadd [options] group\n"
 			   "\n"
 			   "Options:\n"
-			   "  -f, --force 		force exit with success status if the specified\n"
+			   "  -f, --force		force exit with success status if the specified\n"
 			   "				group already exists\n"
 			   "  -g, --gid GID		use GID for the new group\n"
 			   "  -h, --help			display this help message and exit\n"
@@ -369,13 +368,6 @@ static void fail_exit (int code)
 #endif
 	exit (code);
 }
-
-#ifdef USE_PAM
-static struct pam_conv conv = {
-	misc_conv,
-	NULL
-};
-#endif				/* USE_PAM */
 
 /*
  * main - groupadd command

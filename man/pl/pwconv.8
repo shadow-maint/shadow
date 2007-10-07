@@ -1,8 +1,8 @@
-.\" $Id: pwconv.8,v 1.4 2005/04/05 18:47:51 kloczek Exp $
-.TH PWCONV 8 "26 wrze¶nia 1997"
+.\" $Id: pwconv.8,v 1.5 2005/12/01 20:38:27 kloczek Exp $
+.TH PWCONV 8 "26 wrzeÅ›nia 1997"
 .SH NAZWA
-pwconv, pwunconv, grpconv, grpunconv \- konwersja dot. chronionych plików hase³ i grup
-.SH SK£ADNIA
+pwconv, pwunconv, grpconv, grpunconv \- konwersja dot. chronionych plikÃ³w haseÅ‚ i grup
+.SH SKÅADNIA
 .B pwconv
 .br
 .B pwunconv
@@ -11,54 +11,54 @@ pwconv, pwunconv, grpconv, grpunconv \- konwersja dot. chronionych plików hase³ 
 .br
 .B grpunconv
 .SH OPIS
-Wszystkie te cztery programy dzia³aj± na zwyk³ych i dodatkowych (shadow)
-plikach hase³ i grup:
+Wszystkie te cztery programy dziaÅ‚ajÄ… na zwykÅ‚ych i dodatkowych (shadow)
+plikach haseÅ‚ i grup:
 .IR /etc/passwd ", " /etc/group ", " /etc/shadow " i " /etc/gshadow .
 
 .B pwconv
-.RI "tworzy " shadow " z " passwd " i opcjonalnie istniej±cego " shadow .
+.RI "tworzy " shadow " z " passwd " i opcjonalnie istniejÄ…cego " shadow .
 .B pwunconv
-.RI "tworzy " passwd " z " passwd " i " shadow " a nastêpnie usuwa " shadow .
+.RI "tworzy " passwd " z " passwd " i " shadow " a nastÄ™pnie usuwa " shadow .
 .B grpconv
-.RI "tworzy " gshadow " z " group " i opcjonalnie istniej±cego " gshadow .
+.RI "tworzy " gshadow " z " group " i opcjonalnie istniejÄ…cego " gshadow .
 .B grpunconv
-.RI "tworzy " group " z " group " i " gshadow " a nastêpnie usuwa " gshadow .
+.RI "tworzy " group " z " group " i " gshadow " a nastÄ™pnie usuwa " gshadow .
 
-Ka¿dy z programów zdobywa niezbêdne blokady przed konwersj±.
+KaÅ¼dy z programÃ³w zdobywa niezbÄ™dne blokady przed konwersjÄ….
 
 .BR pwconv " i " grpconv
-s± podobne. Po pierwsze, z pliku dodatkowego usuwane s± pozycje, które
-nie istniej± w pliku g³ównym. Nastêpnie, w pliku dodatkowym aktualizowane s±
-pozycje nie posiadaj±ce 'x' jako has³a w pliku g³ównym. Dodawane s± pozycje
-brakuj±ce w stosunku do pliku g³ównego. Na koniec, has³a w pliku g³ównym
-zastêpowane s± przez 'x'. Programy te mog± s³u¿yæ zarówno do pocz±tkowej
-konwersji jak i do aktualizacji dodatkowego pliku hase³ je¶li plik g³ówny
-zmieniany by³ rêcznie.
+sÄ… podobne. Po pierwsze, z pliku dodatkowego usuwane sÄ… pozycje, ktÃ³re
+nie istniejÄ… w pliku gÅ‚Ã³wnym. NastÄ™pnie, w pliku dodatkowym aktualizowane sÄ…
+pozycje nie posiadajÄ…ce 'x' jako hasÅ‚a w pliku gÅ‚Ã³wnym. Dodawane sÄ… pozycje
+brakujÄ…ce w stosunku do pliku gÅ‚Ã³wnego. Na koniec, hasÅ‚a w pliku gÅ‚Ã³wnym
+zastÄ™powane sÄ… przez 'x'. Programy te mogÄ… sÅ‚uÅ¼yÄ‡ zarÃ³wno do poczÄ…tkowej
+konwersji jak i do aktualizacji dodatkowego pliku haseÅ‚ jeÅ›li plik gÅ‚Ã³wny
+zmieniany byÅ‚ rÄ™cznie.
 
-Przy dodawaniu nowych wpisów do
+Przy dodawaniu nowych wpisÃ³w do
 .IR /etc/shadow
 .B pwconv
-u¿yje warto¶ci
+uÅ¼yje wartoÅ›ci
 .BR PASS_MIN_DAYS ", " PASS_MAX_DAYS " i " PASS_WARN_AGE
 z pliku
 .IR /etc/login.defs .
 
 .RB "Podobnie, " pwunconv " oraz " grpunconv
-s± zbli¿one.  Has³a w pliku g³ównym aktualizowane s± na podstawie pliku
-dodatkowego (shadow). Wpisy istniej±ce w pliku g³ównym, a nie posiadaj±ce
-odpowiedników w dodatkowym s± pozostawiane bez zmian. Na koniec usuwany
+sÄ… zbliÅ¼one.  HasÅ‚a w pliku gÅ‚Ã³wnym aktualizowane sÄ… na podstawie pliku
+dodatkowego (shadow). Wpisy istniejÄ…ce w pliku gÅ‚Ã³wnym, a nie posiadajÄ…ce
+odpowiednikÃ³w w dodatkowym sÄ… pozostawiane bez zmian. Na koniec usuwany
 jest plik dodatkowy.
 
-Czê¶æ informacji o wa¿no¶ci hase³ jest tracona przez
+CzÄ™Å›Ä‡ informacji o waÅ¼noÅ›ci haseÅ‚ jest tracona przez
 .BR pwunconv .
-Przeprowadza on konwersjê tego, co potrafi.
-.SH B£ÊDY
-B³êdy w plikach hase³ czy grup (takie jak nieprawid³owe czy powtórzone
-pozycje) mog± spowodowaæ zapêtlenie siê omawianych programów lub ró¿nego
-rodzaju inne b³êdne zachowanie. Przed konwersj± na lub z dodatkowych plików
-hase³ lub grup proszê uruchomiæ \fBpwck\fR i \fBgrpck\fR, by poprawiæ tego
-rodzaju b³êdy.
-.SH ZOBACZ TAK¯E
+Przeprowadza on konwersjÄ™ tego, co potrafi.
+.SH BÅÄ˜DY
+BÅ‚Ä™dy w plikach haseÅ‚ czy grup (takie jak nieprawidÅ‚owe czy powtÃ³rzone
+pozycje) mogÄ… spowodowaÄ‡ zapÄ™tlenie siÄ™ omawianych programÃ³w lub rÃ³Å¼nego
+rodzaju inne bÅ‚Ä™dne zachowanie. Przed konwersjÄ… na lub z dodatkowych plikÃ³w
+haseÅ‚ lub grup proszÄ™ uruchomiÄ‡ \fBpwck\fR i \fBgrpck\fR, by poprawiÄ‡ tego
+rodzaju bÅ‚Ä™dy.
+.SH ZOBACZ TAKÅ»E
 .BR login.defs (5),
 .BR grpck (8),
 .BR pwck (8),

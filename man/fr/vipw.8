@@ -1,0 +1,74 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "VIPW" "8" "12/07/2005" "Commandes pour la gestion du système" "Commandes pour la gestion du s"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+vipw, vigr \- Éditer les fichiers passwd, group, shadow ou gshadow
+.SH "SYNOPSIS"
+.HP 5
+\fBvipw\fR [options]
+.HP 5
+\fBvigr\fR [options]
+.SH "DESCRIPTION"
+.PP
+\fBvipw\fR
+and
+\fBvigr\fR
+will edit the files
+\fI/etc/passwd\fR
+and
+\fI/etc/group\fR, respectively. With the
+\fB\-s\fR
+flag, they will edit the shadow versions of those files,
+\fI/etc/shadow\fR
+and
+\fI/etc/gshadow\fR, respectively. The programs will set the appropriate locks to prevent file corruption. When looking for an editor, the programs will first try the environment variable
+\fB$VISUAL\fR, then the environment variable
+\fB$EDITOR\fR, and finally the default editor,
+\fBvi\fR(1).
+.SH "OPTIONS"
+.PP
+The options which apply to the
+\fBvipw\fR
+and
+\fBvigr\fR
+commands are:
+.TP
+\fB\-g\fR, \fB\-\-group\fR
+Edit group database.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Affiche un message d'aide et quitte.
+.TP
+\fB\-p\fR, \fB\-\-passwd\fR
+Edit passwd database.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Quiet mode database.
+.TP
+\fB\-s\fR, \fB\-\-shadow\fR
+Edit shadow or gshadow database.
+.SH "FICHIERS"
+.TP
+\fI/etc/group\fR
+informations sur les groupes
+.TP
+\fI/etc/gshadow\fR
+informations cachées sur les groupes
+.TP
+\fI/etc/passwd\fR
+informations sur les comptes des utilisateurs
+.TP
+\fI/etc/shadow\fR
+informations sécurisées sur les comptes utilisateurs
+.SH "VOIR AUSSI"
+.PP
+\fBvi\fR(1),
+\fBgroup\fR(5),
+\fBgshadow\fR(5)\fBpasswd\fR(5),
+\fBshadow\fR(5).

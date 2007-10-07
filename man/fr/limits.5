@@ -1,0 +1,95 @@
+.\" ** You probably do not want to edit this file directly **
+.\" It was generated using the DocBook XSL Stylesheets (version 1.69.1).
+.\" Instead of manually editing it, you probably should edit the DocBook XML
+.\" source for it and then use the DocBook XSL Stylesheets to regenerate it.
+.TH "LIMITS" "5" "12/07/2005" "Formats de fichiers et conversions" "Formats de fichiers et convers"
+.\" disable hyphenation
+.nh
+.\" disable justification (adjust text to left margin only)
+.ad l
+.SH "NAME"
+limits \- Définition des limites de ressource
+.SH "DESCRIPTION"
+.PP
+Le fichier
+\fIlimits\fR
+(/etc/limits) décrit les limites de ressource que vous voulez imposer. Il doit être possédé par root et ne doit être lisible que par le compte root.
+.PP
+Par défaut, aucun quota (aucune limite) n'est imposé à \(Fo\ root\ \(Fc. En fait, il n'est pas possible d'imposer de cette façon de limite aux comptes root ou équivalents (comptes ayant un UID de 0).
+.PP
+Chaque ligne décrit une limite pour un utilisateur et est de la forme suivante\ :
+.PP
+\fIutilisateur LISTE_DE_LIMITES\fR
+.PP
+Où
+\fILISTE_DE_LIMITES\fR
+est une chaîne construite par la concaténation d'une liste de limites de ressource. Chaque limite consiste en une lettre (identifiant le type de limite) et une valeur numérique.
+.PP
+Les identifiants possibles sont\ :
+.TP 3
+\(bu
+A\ : espace d'adressage maximal (en kilo octets)
+.TP
+\(bu
+C\ : taille maximale d'un vidage mémoire (\(Fo core \(Fc, en kilo octets)
+.TP
+\(bu
+D\ : taille maximale du segment de données d'un programme (en kilo octets)
+.TP
+\(bu
+F\ : taille maximale des fichiers (en kilo octets)
+.TP
+\(bu
+M\ : taille maximale de mémoire verrouillée (\(Fo locked\-in\-memory\ \(Fc, en kilo octets)
+.TP
+\(bu
+N\ : nombre maximal de fichiers ouverts
+.TP
+\(bu
+R\ : taille maximale de la mémoire résidente (\(Fo\ resident set size\ \(Fc, en kilo octets)
+.TP
+\(bu
+S\ : taille maximale de la pile (en kilo octets)
+.TP
+\(bu
+T\ : temps processeur maximal consommé (en minutes)
+.TP
+\(bu
+U\ : nombre maximal de processus
+.TP
+\(bu
+K\ : masque de création de fichier, positionné par
+\fBumask\fR(2).
+.TP
+\(bu
+L\ : nombre maximal de connexions simultanées pour cet utilisateur
+.TP
+\(bu
+P\ : priorité des processus, positionné par
+\fBsetpriority\fR(2).
+.PP
+Par exemple,
+\fIL2D2048N5\fR
+est une chaîne
+\fILISTE_DE_LIMITES\fR
+valable. Pour faciliter la lecture, les entrées suivantes sont équivalentes\ :
+.PP
+utilisateur L2D2048N5 utilisateur L2 D2048 N5
+.PP
+Attention\ : tout ce qui suit
+\fIutilisateur\fR
+est considéré comme une limite. Les commentaires ne sont pas autorisés. Une chaîne de limites non valable sera rejetée (non utilisée) lors de la connexion.
+.PP
+L'utilisateur \(Fo\ \fI*\fR\ \(Fc permet de spécifier une entrée par défaut. Si plusieurs entrées par défaut sont présentes dans le fichier de limites, alors seule la dernière sera prise en compte.
+.PP
+Pour enlever toute limite à un utilisateur, un simple tiret \(Fo\ \fI\-\fR\ \(Fc fera l'affaire.
+.PP
+Notez également que les limites ne sont spécifiées que PAR CONNEXION. Il n'y a pas de limite globale ou permanente. Des limites globales pourraient voir le jour, mais pour l'instant, il faut faire sans.
+.SH "FICHIERS"
+.TP
+\fI/etc/limits\fR
+.SH "VOIR AUSSI"
+.PP
+\fBlogin\fR(1),
+\fBsetpriority\fR(2),
+\fBsetrlimit\fR(2).

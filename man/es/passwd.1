@@ -5,109 +5,109 @@
 .\"
 .TH PASSWD 1 "11 Noviembre 1996" "Util\-linux 2.6" "Manual del Programador Linux"
 .SH NOMBRE
-passwd \- cambia contraseÒas
+passwd \- cambia contrase√±as
 .SH SINOPSIS
 .BR "passwd"
 .RB [ " \-o " ]
 .RB [ " \-q " ]
 .RB [ " \-v " ]
-.RI [ " usuario " [ " contraseÒa " ]]
+.RI [ " usuario " [ " contrase√±a " ]]
 .br
 .BR "passwd \-f "
-.RI [ " par·metros para el cambio de nombre completo del usuario " ]
+.RI [ " par√°metros para el cambio de nombre completo del usuario " ]
 .br
 .BR "passwd \-s "
-.RI [ " par·metros para el cambio de shell " ]
+.RI [ " par√°metros para el cambio de shell " ]
 
-.SH DESCRIPCI”N
+.SH DESCRIPCI√ìN
 
-Cuando se utiliza sin par·metros
+Cuando se utiliza sin par√°metros
 .B passwd
-cambia la contraseÒa para el usuario que lo invoca. Primero le exigir· 
-la contraseÒa vigente, y a continuaciÛn pedir· dos veces la nueva para 
+cambia la contrase√±a para el usuario que lo invoca. Primero le exigir√° 
+la contrase√±a vigente, y a continuaci√≥n pedir√° dos veces la nueva para 
 prevenir errores de escritura.
 
-La invocaciÛn del programa con los par·metros 
+La invocaci√≥n del programa con los par√°metros 
 .IR usuario 
 y
-.IR contraseÒa
-sÛlo puede realizarse desde la cuenta de superusuario. 
+.IR contrase√±a
+s√≥lo puede realizarse desde la cuenta de superusuario. 
 
-Utilizando la invocaciÛn sÛlo con el par·metro
+Utilizando la invocaci√≥n s√≥lo con el par√°metro
 .IR usuario
 , el 
-superusuario puede cambiar la contraseÒa para ese
+superusuario puede cambiar la contrase√±a para ese
 .IR usuario .
 
-En este caso no se exige al superusuario la contraseÒa vigente para el usuario,
-pero las reglas para validar contraseÒas se siguen aplicando a menos que se
-utilice la opciÛn
+En este caso no se exige al superusuario la contrase√±a vigente para el usuario,
+pero las reglas para validar contrase√±as se siguen aplicando a menos que se
+utilice la opci√≥n
 .B "\-o".
-El superusuario puede tener razones legÌtimas para elegir una contraseÒa no
+El superusuario puede tener razones leg√≠timas para elegir una contrase√±a no
 conforme a las reglas.
 
 
-El uso de los dos par·metros asigna al 
-.IR usuario " la " contraseÒa
-indicada en el segundo par·metro. Puede ser ˙til cuando se debe dar a muchos
-usuarios una contraseÒa inicial predefinida. Pero tambiÈn puede ser 
-extremadamente peligroso. Un simple fallo en un programa podrÌa cambiar la 
-contraseÒa del superusuario (root) a cualquier cosa desconocida.
+El uso de los dos par√°metros asigna al 
+.IR usuario " la " contrase√±a
+indicada en el segundo par√°metro. Puede ser √∫til cuando se debe dar a muchos
+usuarios una contrase√±a inicial predefinida. Pero tambi√©n puede ser 
+extremadamente peligroso. Un simple fallo en un programa podr√≠a cambiar la 
+contrase√±a del superusuario (root) a cualquier cosa desconocida.
 
-Indicar una cadena vacÌa como el segundo par·metro borra la contraseÒa para 
-el usuario, pero sÛlo en combinaciÛn de la opciÛn
+Indicar una cadena vac√≠a como el segundo par√°metro borra la contrase√±a para 
+el usuario, pero s√≥lo en combinaci√≥n de la opci√≥n
 .B "\-o".
 
-Los cambios de contraseÒa pueden registrarse utilizando el servicio
+Los cambios de contrase√±a pueden registrarse utilizando el servicio
 .BR syslog (3),
-dependiendo de las definiciones hechas en tiempo de compilaciÛn del programa
-(estando esta caracterÌstica activa por omisiÛn).
-Si es asÌ, todos los cambios se registrar·n a un nivel bajo como auth.notice,
-excepto para cambiar la contraseÒa del superusuario (root); en este caso se 
-registrar·n con nivel auth.warning.
+dependiendo de las definiciones hechas en tiempo de compilaci√≥n del programa
+(estando esta caracter√≠stica activa por omisi√≥n).
+Si es as√≠, todos los cambios se registrar√°n a un nivel bajo como auth.notice,
+excepto para cambiar la contrase√±a del superusuario (root); en este caso se 
+registrar√°n con nivel auth.warning.
 
 .SH OPCIONES
 .TP
 .B "\-f, \-\-fullname"
 Cambia el nombre completo del usuario (el campo GECOS del registro de 
-contraseÒas). Invoca el programa /usr/bin/chfn utilizando los par·metros
+contrase√±as). Invoca el programa /usr/bin/chfn utilizando los par√°metros
 que ha recibido que no son opciones.  
 
 .TP
 .B "\-o, \-\-force"
-Desactiva las verificaciones de validaciÛn sobre la nueva contraseÒa . SÛlo
-puede ser utilizada por el superusuario, y est· pensado para permitirle 
-asignar contraseÒas iniciales simples.
+Desactiva las verificaciones de validaci√≥n sobre la nueva contrase√±a . S√≥lo
+puede ser utilizada por el superusuario, y est√° pensado para permitirle 
+asignar contrase√±as iniciales simples.
 
 .TP
 .B "\-s, \-\-shell"
-Cambia el shell del usuario mediante la invocaciÛn del programa /usr/bin/chsh
-con los par·metros recibidos que no son opciones.
+Cambia el shell del usuario mediante la invocaci√≥n del programa /usr/bin/chsh
+con los par√°metros recibidos que no son opciones.
 
 .TP
 .B "\-q, \-\-quiet, \-\-silent"
-En este modo de funcionamiento passwd no indica que la contraseÒa se haya
+En este modo de funcionamiento passwd no indica que la contrase√±a se haya
 cambiado.
 
 .TP
 .B "\-v, \-V, \-\-version"
-Muestra informaciÛn acerca de la versiÛn del programa y finaliza.
+Muestra informaci√≥n acerca de la versi√≥n del programa y finaliza.
 
-.SH REGLAS DE CONTRASE—AS
-La nueva contraseÒa debe cumplir estas reglas:
+.SH REGLAS DE CONTRASE√ëAS
+La nueva contrase√±a debe cumplir estas reglas:
 .TP
 o
-tener como mÌnimo seis caracteres;
-
-.TP
-o
-no ser igual a la contraseÒa anterior;
+tener como m√≠nimo seis caracteres;
 
 .TP
 o
-contener caracteres que pertenezcan, como mÌnimo, a dos de las 
-siguientes categorÌas: may˙sculas y min˙sculas, dÌgitos y caracteres no 
-alfanumÈricos;
+no ser igual a la contrase√±a anterior;
+
+.TP
+o
+contener caracteres que pertenezcan, como m√≠nimo, a dos de las 
+siguientes categor√≠as: may√∫sculas y min√∫sculas, d√≠gitos y caracteres no 
+alfanum√©ricos;
 
 .TP
 o
@@ -117,15 +117,15 @@ al principio ni al final.
 
 .SH FALLOS (BUGS)
 
-Si cambia de opiniÛn no hay escape del programa. Insistir· en obtener una 
-contraseÒa nueva hasta que sea muerto (mediante kill) desde otro terminal.
-(Esto es provocado por un fallo en getpass(3): e ignora las seÒales.)
+Si cambia de opini√≥n no hay escape del programa. Insistir√° en obtener una 
+contrase√±a nueva hasta que sea muerto (mediante kill) desde otro terminal.
+(Esto es provocado por un fallo en getpass(3): e ignora las se√±ales.)
 
 .SH FICHEROS
 .TP
 .I /etc/passwd
-El archivo que contiene las contraseÒas.
-.SH "V…ASE TAMBI…N"
+El archivo que contiene las contrase√±as.
+.SH "V√âASE TAMBI√âN"
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5)
