@@ -1,3 +1,4 @@
+.\"$Id: userdel.8,v 1.6 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,44 +26,44 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: userdel.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
-.\" Updated Fri Jan 12 03:27:30 JST 2000
-.\"         by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Fri Jan 12 JST 2000 by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Fri Mar  1 JST 2002 by Kentaro Shirakata <argrath@ub32.org>
+.\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH USERDEL 8
 .SH 名前
-userdel \- ユーザのアカウント及び関連するファイルを削除する
+userdel \- ユーザのアカウントと関連ファイルを削除する
 .SH 書式
 .B userdel
 [\fB-r\fR]
 .I login
 .SH 説明
-\fBuserdel\fRコマンドはシステムのアカウントファイルに変更を施し、
-ユーザ\fIlogin\fRに属する全てのエントリーを削除する。
+\fBuserdel\fR コマンドは、システムアカウントファイルを修正し、
+ユーザ \fIlogin\fR に対応するすべてのエントリを削除する。
 削除されるユーザは存在していなければならない。
+\fBuserdel\fR コマンドに適用できるオプションは以下の通り。
 .IP \fB-r\fR
-ユーザのホームディレクトリ中のファイルをホームディレクトリ自体とともに
-消去する。またユーザのメールスプールも消去する。
-他のファイルシステム上にあるファイルは手作業で探し出して除去しなくては
-ならない。
+ユーザのホームディレクトリ中のファイルを削除する。
+ホームディレクトリ自体とユーザのメールスプールも消去する。
+ファイルシステム中のほかの場所にあるそのユーザのファイルは、
+手作業で探し出して削除しなければならない。
 .SH ファイル
-/etc/passwd \- ユーザのアカウントに関する情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/shadow \- 安全な、ユーザのアカウントに関する情報
+\fI/etc/shadow\fR \- 安全なユーザアカウント情報
 .br
-/etc/group \- グループに関する情報
+\fI/etc/group\fR \ - グループ情報
 .SH 警告
-\fBuserdel\fRは消去されるユーザが現在ログインしている場合は
-そのアカウントを消去する事を許可しない。
-その時は消去しようとしているアカウントに属する実行中のプロセス全てを
-killしなくてはならない。
-NISのクライアントからはいかなるNIS所有のアカウントも消去する事は出来ない。
-消去する場合にはNISのサーバから行わなくてはならない。
+\fBuserdel\fR は、削除されるユーザが現在ログインしている場合は、
+そのアカウントの削除を許可しない。
+削除しようとしているアカウントに属する実行中のプロセスは、
+すべて kill しなければならない。
+NIS のクライアントからは、NIS の属性値は削除できない。
+削除は NIS のサーバで行わなければならない。
 .SH 関連項目
 .BR chfn (1),
 .BR chsh (1),

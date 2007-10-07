@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newgrp.c,v 1.21 2002/01/06 15:00:07 kloczek Exp $")
+RCSID (PKG_VER "$Id: newgrp.c,v 1.26 2003/07/29 06:16:04 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
@@ -58,9 +58,9 @@ static void usage (void);
 static void usage (void)
 {
 	if (is_newgrp)
-		fprintf (stderr, _("usage: newgrp [-] [group]\n"));
+		fprintf (stderr, _("Usage: newgrp [-] [group]\n"));
 	else
-		fprintf (stderr, _("usage: sg group [[-c] command]\n"));
+		fprintf (stderr, _("Usage: sg group [[-c] command]\n"));
 }
 
 /*
@@ -87,11 +87,6 @@ int main (int argc, char **argv)
 #endif
 #ifdef SHADOWGRP
 	struct sgrp *sgrp;
-#endif
-
-#if ENABLE_NLS
-	/* XXX - remove when gettext is safe to use in setuid programs */
-	sanitize_env ();
 #endif
 
 	setlocale (LC_ALL, "");
@@ -152,10 +147,10 @@ int main (int argc, char **argv)
 	 * the login group ID of the current user.
 	 *
 	 * The valid syntax are
-	 *      newgrp [ - ] [ groupid ]
-	 *      newgrp [ -l ] [ groupid ]
-	 *      sg [ - ]
-	 *      sg [ - ] groupid [ command ]
+	 *      newgrp [-] [groupid]
+	 *      newgrp [-l] [groupid]
+	 *      sg [-]
+	 *      sg [-] groupid [[-c command]
 	 */
 
 	if (argc > 0
@@ -398,6 +393,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_INFO,
 			 "user `%s' (login `%s' on %s) switched to group `%s'",
 			 name, loginname, tty, group));
+#ifdef USE_PAM
 		if (getdef_bool ("CLOSE_SESSIONS")) {
 			/*
 			 * We want to fork and exec the new shell in the child, leaving the
@@ -450,6 +446,7 @@ int main (int argc, char **argv)
 			signal (SIGTTIN, SIG_DFL);
 			signal (SIGTTOU, SIG_DFL);
 		}
+#endif				/* USE_PAM */
 	}
 #endif				/* USE_SYSLOG */
 
@@ -575,19 +572,13 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * Sanitize_env() removes $HOME from the environment (maybe it
-	 * shouldn't - please tell me if you are sure that $HOME can't cause
-	 * security problems) - add it from user's passwd entry.
-	 */
-	addenv ("HOME", pwd->pw_dir);
-
-	/*
 	 * Exec the login shell and go away. We are trying to get back to
 	 * the previous environment which should be the user's login shell.
 	 */
 
 	shell (prog, initflag ? (char *) 0 : cp);
-       /*NOTREACHED*/ failure:
+	/* NOTREACHED */
+failure:
 
 	/*
 	 * The previous code, when run as newgrp, re-exec'ed the shell in

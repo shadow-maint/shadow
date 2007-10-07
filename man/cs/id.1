@@ -1,0 +1,62 @@
+.TH ID 1 "GNU Shell Utilities" "FSF" \" -*- nroff -*-
+.do hla cs
+.do hpf hyphen.cs
+.SH JMÉNO
+id \- vypí¹e reálný a efektivní UID a GID
+.SH POU®ITÍ
+.B id
+[\-gnruG] [\-\-group] [\-\-name] [\-\-real] [\-\-user] [\-\-groups]
+[\-\-help] [\-\-version] [u¾ivatel]
+.SH POPIS
+Tato dokumentace není dále udr¾ována a mù¾e být nepøesná nebo neúplná.
+Autoritativním zdrojem je Texinfo dokumentace.
+.PP
+Tato manuálová stránka popisuje GNU verzi pøíkazu
+.BR id .
+Pøíkaz
+.B id
+vypí¹e informace o zadaném u¾ivateli nebo (pokud není jméno u¾ivatele
+zadáno) o u¾ivateli, který program
+.B id
+spustil. Implicitnì vypisuje reálné user ID, reálné group ID,
+efektivní user ID, pokud se li¹í od reálného user ID, efektivní
+group ID, pokud se li¹í od reálného group ID, a group ID skupin,
+v nich¾ je u¾ivatel èlenem. Pøed ka¾dou z hodnot je vypsán øetìzec
+urèující o jakou hodnotu se jedná a za ka¾dou jsou odpovídající
+jména skupin a u¾ivatelù v závorkách.
+.PP
+Volby zpùsobí, ¾e program
+.B id
+vypisuje pouze nìkteré z tìchto informací.
+.SS VOLBY
+.TP
+.I "\-g, \-\-group"
+Vypí¹e pouze group ID.
+.TP
+.I "\-G, \-\-groups"
+Vypí¹e pouze skupiny, v nich¾ je u¾ivatel èlenem.
+.TP
+.I "\-\-help"
+Vypí¹e návod k pou¾ití na standardní výstup a bezchybnì skonèí.
+.TP
+.I "\-n, \-\-name"
+Vypí¹e jméno u¾ivatele nebo skupiny místo èísla ID.
+Vy¾aduje
+.IR \-u ,
+.IR \-g ,
+nebo
+.IR \-G .
+.TP
+.I "\-r, \-\-real"
+Vypí¹e reálné místo efektivních user a group ID.
+Vy¾aduje
+.IR \-u ,
+.IR \-g ,
+nebo
+.IR \-G .
+.TP
+.I "\-u, \-\-user"
+Vypí¹e pouze user ID.
+.TP
+.I "\-\-version"
+Vypí¹e èíslo verze na standardní výstup a bezchybnì skonèí.

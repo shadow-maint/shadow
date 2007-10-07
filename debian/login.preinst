@@ -1,4 +1,0 @@
-#!/bin/sh
-set -e
-dpkg --assert-support-predepends ||
-( echo -e "\nPlease upgrade to a newer version of dpkg\n"; exit 1; )

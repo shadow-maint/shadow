@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: commonio.c,v 1.22 2001/11/17 13:15:52 malekith Exp $")
+RCSID("$Id: commonio.c,v 1.23 2003/05/12 06:12:06 kloczek Exp $")
 
 #include "defines.h"
 #include <sys/stat.h>
@@ -12,6 +12,7 @@ RCSID("$Id: commonio.c,v 1.22 2001/11/17 13:15:52 malekith Exp $")
 #include <stdio.h>
 #include <signal.h>
 #include <pwd.h>
+#include <nscd.h>
 #ifdef HAVE_SHADOW_H
 #include <shadow.h>
 #endif

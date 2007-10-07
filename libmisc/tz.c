@@ -30,38 +30,34 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: tz.c,v 1.4 1998/01/29 23:22:36 marekm Exp $")
-
+RCSID ("$Id: tz.c,v 1.5 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include <string.h>
 #include "defines.h"
 #include "getdef.h"
-
 /*
  * tz - return local timezone name
  *
  * tz() determines the name of the local timezone by reading the
  * contents of the file named by ``fname''.
  */
-
-char *
-tz(const char *fname)
+char *tz (const char *fname)
 {
 	FILE *fp = 0;
 	static char tzbuf[BUFSIZ];
 	const char *def_tz;
 
-	if ((fp = fopen(fname,"r")) == NULL ||
-			fgets (tzbuf, sizeof (tzbuf), fp) == NULL) {
-		if (! (def_tz = getdef_str ("ENV_TZ")) || def_tz[0] == '/')
+	if ((fp = fopen (fname, "r")) == NULL ||
+	    fgets (tzbuf, sizeof (tzbuf), fp) == NULL) {
+		if (!(def_tz = getdef_str ("ENV_TZ")) || def_tz[0] == '/')
 			def_tz = "TZ=CST6CDT";
 
 		strcpy (tzbuf, def_tz);
 	} else
-		tzbuf[strlen(tzbuf) - 1] = '\0';
+		tzbuf[strlen (tzbuf) - 1] = '\0';
 
 	if (fp)
-		(void) fclose(fp);
+		(void) fclose (fp);
 
 	return tzbuf;
 }

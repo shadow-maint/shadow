@@ -2,7 +2,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwio.c,v 1.12 2001/08/14 21:10:36 malekith Exp $")
+RCSID("$Id: pwio.c,v 1.13 2003/05/03 16:14:23 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -27,14 +27,6 @@ __pw_dup(const struct passwd *pwent)
 		return NULL;
 	if (!(pw->pw_passwd = strdup(pwent->pw_passwd)))
 		return NULL;
-#ifdef ATT_AGE
-	if (!(pw->pw_age = strdup(pwent->pw_age)))
-		return NULL;
-#endif
-#ifdef ATT_COMMENT
-	if (!(pw->pw_comment = strdup(pwent->pw_comment)))
-		return NULL;
-#endif
 	if (!(pw->pw_gecos = strdup(pwent->pw_gecos)))
 		return NULL;
 	if (!(pw->pw_dir = strdup(pwent->pw_dir)))
@@ -58,12 +50,6 @@ passwd_free(void *ent)
 
 	free(pw->pw_name);
 	free(pw->pw_passwd);
-#ifdef ATT_AGE
-	free(pw->pw_age);
-#endif
-#ifdef ATT_COMMENT
-	free(pw->pw_comment);
-#endif
 	free(pw->pw_gecos);
 	free(pw->pw_dir);
 	free(pw->pw_shell);

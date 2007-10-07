@@ -1,4 +1,4 @@
-.\" $Id: grpck.8,v 1.6 2002/03/09 11:16:18 ankry Exp $
+.\" $Id: grpck.8,v 1.7 2003/04/28 17:52:15 kloczek Exp $
 .\" {PTM/WK/1999-09-17}
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
@@ -39,7 +39,7 @@ i poprawne dane w ka¿dym z pól. U¿ytkownik monitowany jest o usuniêcie
 pozycji, które s± sformatowane niepoprawnie lub posiadaj± inne nie daj±ce
 siê skorygowaæ b³êdy.
 .P
-Kontrolowane jest czy ka¿da pozycja posiada
+Kontrolowane jest czy ka¿da pozycja posiada:
 .sp
 .in +.5i
 - w³a¶ciw± liczbê pól
@@ -75,29 +75,31 @@ u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
 oraz \fI/etc/gshadow\fR wed³ug GID. By w³±czyæ tryb sortowania nale¿y przekazaæ
 opcjê \fB-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
 .SH PLIKI
-.IR /etc/group " - informacja o kontach grup"
+\fI/etc/group\fR	\- informacja o kontach grup
 .br
-.IR /etc/gshadow " - zakodowana informacja o has³ach i administratorach grup"
+\fI/etc/gshadow\fR	\- zakodowana informacja o has³ach i administratorach grup 
 .br
-.IR /etc/passwd " -informacja o u¿ytkownikach"
+\fI/etc/passwd\fR	\-informacja o u¿ytkownikach
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBgrpck\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB1\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB2\fR	\- jedna lub wiêcej z³ych pozycji pliku grup
+.br
+\fB3\fR	\- niemo¿liwe otwarcie plików grup
+.br
+\fB4\fR	\- niemo¿liwa blokada plików grup
+.br
+\fB5\fR	\- niemo¿liwa aktualizacja plików grup
+.br
 .SH ZOBACZ TAK¯E
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5),
 .BR groupmod (8)
-.SH DIAGNOSTYKA
-Polecenie \fBgrpck\fR koñczy pracê z nastêpuj±cymi warto¶ciami kodów:
-.IP 0 5
-Powodzenie
-.IP 1 5
-B³±d sk³adni
-.IP 2 5
-Jedna lub wiêcej z³ych pozycji pliku grup
-.IP 3 5
-Niemo¿liwe otwarcie plików grup
-.IP 4 5
-Niemo¿liwa blokada plików grup
-.IP 5 5
-Niemo¿liwa aktualizacja plików grup
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

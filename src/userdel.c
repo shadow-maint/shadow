@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: userdel.c,v 1.21 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: userdel.c,v 1.29 2003/12/17 09:43:30 kloczek Exp $")
 #include <sys/stat.h>
 #include <stdio.h>
 #include <errno.h>
@@ -38,7 +38,6 @@ RCSID (PKG_VER "$Id: userdel.c,v 1.21 2002/01/05 15:41:44 kloczek Exp $")
 #include <grp.h>
 #include <ctype.h>
 #include <fcntl.h>
-#include <utmp.h>
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
@@ -48,12 +47,13 @@ RCSID (PKG_VER "$Id: userdel.c,v 1.21 2002/01/05 15:41:44 kloczek Exp $")
 #include "defines.h"
 #include "getdef.h"
 #include "pwauth.h"
+#include "nscd.h"
 /*
  * exit status values
  */
 #define E_SUCCESS	0
 #define E_PW_UPDATE	1	/* can't update password file */
-#define E_USAGE		2	/* bad command syntax */
+#define E_USAGE		2	/* invalid command syntax */
 #define E_NOTFOUND	6	/* specified user doesn't exist */
 #define E_USER_BUSY	8	/* user currently logged in */
 #define E_GRP_UPDATE	10	/* can't update group file */
@@ -83,11 +83,6 @@ extern int sg_dbm_mode;
 
 #ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
-
-#ifdef	HAVE_TCFS
-#include <tcfslib.h>
-#include "tcfsio.h"
 #endif
 
 #ifdef	SHADOWGRP
@@ -126,7 +121,7 @@ static void remove_mailbox (void);
 
 static void usage (void)
 {
-	fprintf (stderr, _("usage: %s [-r] name\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-r] name\n"), Prog);
 	exit (E_USAGE);
 }
 
@@ -303,11 +298,6 @@ static void close_files (void)
 			 _("%s: cannot rewrite shadow password file\n"),
 			 Prog);
 #endif
-#ifdef	HAVE_TCFS
-	if (!tcfs_close ())
-		fprintf (stderr, _("%s: cannot rewrite TCFS key file\n"),
-			 Prog);
-#endif
 	if (!gr_close ())
 		fprintf (stderr, _("%s: cannot rewrite group file\n"),
 			 Prog);
@@ -325,9 +315,6 @@ static void close_files (void)
 #ifdef	SHADOWPWD
 	if (is_shadow_pwd)
 		(void) spw_unlock ();
-#endif
-#ifdef	HAVE_TCFS
-	(void) tcfs_unlock ();
 #endif
 	(void) pw_unlock ();
 }
@@ -348,10 +335,6 @@ static void fail_exit (int code)
 	if (is_shadow_grp)
 		sgr_unlock ();
 #endif
-#ifdef	HAVE_TCFS
-	(void) tcfs_unlock ();
-#endif
-
 	exit (code);
 }
 
@@ -383,18 +366,6 @@ static void open_files (void)
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
 			 _("%s: cannot open shadow password file\n"),
-			 Prog);
-		fail_exit (E_PW_UPDATE);
-	}
-#endif
-#ifdef	HAVE_TCFS
-	if (!tcfs_lock ()) {
-		fprintf (stderr, _("%s: cannot lock TCFS key file\n"),
-			 Prog);
-		fail_exit (E_PW_UPDATE);
-	}
-	if (!tcfs_open (O_RDWR)) {
-		fprintf (stderr, _("%s: cannot open TCFS key file\n"),
 			 Prog);
 		fail_exit (E_PW_UPDATE);
 	}
@@ -432,111 +403,46 @@ static void open_files (void)
 
 static void update_user (void)
 {
-#if defined(AUTH_METHODS) || defined(NDBM)
-	struct passwd *pwd;
-#endif
-#ifdef AUTH_METHODS
+	if (!pw_remove (user_name))
+		fprintf (stderr,
+			 _("%s: error deleting password entry\n"), Prog);
 #ifdef SHADOWPWD
-	struct spwd *spwd;
-
-	if (is_shadow_pwd && (spwd = spw_locate (user_name)) &&
-	    spwd->sp_pwdp[0] == '@') {
-		if (pw_auth
-		    (spwd->sp_pwdp + 1, user_name, PW_DELETE,
-		     (char *) 0)) {
-			SYSLOG ((LOG_ERR,
-				 "failed deleting auth `%s' for user `%s'\n",
-				 spwd->sp_pwdp + 1, user_name));
-			fprintf (stderr,
-				 _("%s: error deleting authentication\n"),
-				 Prog);
-		} else {
-			SYSLOG ((LOG_INFO,
-				 "delete auth `%s' for user `%s'\n",
-				 spwd->sp_pwdp + 1, user_name));
-		}
-	}
-#endif				/* SHADOWPWD */
-	if ((pwd = pw_locate (user_name)) && pwd->pw_passwd[0] == '@') {
-		if (pw_auth
-		    (pwd->pw_passwd + 1, user_name, PW_DELETE,
-		     (char *) 0)) {
-			SYSLOG ((LOG_ERR,
-				 "failed deleting auth `%s' for user `%s'\n",
-				 pwd->pw_passwd + 1, user_name));
-			fprintf (stderr,
-				 _("%s: error deleting authentication\n"),
-				 Prog);
-		} else {
-		SYSLOG ((LOG_INFO,
-				 "delete auth `%s' for user `%s'\n",
-				 pwd->pw_passwd + 1, user_name);}
-			}
-#endif				/* AUTH_METHODS */
-			if (!pw_remove (user_name))
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting password entry\n"),
-				 Prog);
-#ifdef SHADOWPWD
-			if (is_shadow_pwd && !spw_remove (user_name))
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting shadow password entry\n"),
-				 Prog);
+	if (is_shadow_pwd && !spw_remove (user_name))
+		fprintf (stderr,
+			 _("%s: error deleting shadow password entry\n"),
+			 Prog);
 #endif
-#ifdef	HAVE_TCFS
-			if (tcfs_locate (user_name)) {
-			if (!tcfs_remove (user_name)) {
-			SYSLOG ((LOG_ERR,
-				 "failed deleting TCFS entry for user `%s'\n",
-				 user_name));
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting TCFS entry\n"),
-				 Prog);}
-			else {
-			SYSLOG ((LOG_INFO,
-				 "delete TCFS entry for user `%s'\n",
-				 user_name));}
-			}
-#endif				/* HAVE_TCFS */
 #ifdef NDBM
-			if (pw_dbm_present ()) {
-			if ((pwd = getpwnam (user_name))
-			    && !pw_dbm_remove (pwd))
+	if (pw_dbm_present ()) {
+		if ((pwd = getpwnam (user_name))
+		    && !pw_dbm_remove (pwd))
 			fprintf (stderr,
 				 _
 				 ("%s: error deleting password dbm entry\n"),
 				 Prog);
-			/*
-			 * If the user's UID is a
-			 * duplicate the duplicated
-			 * entry needs to be updated
-			 * so that a UID match can
-			 * be found in the DBM
-			 * files.
-			 */
-			for (pw_rewind (), pwd = pw_next (); pwd;
-			     pwd = pw_next ()) {
-			if (pwd->pw_uid == user_id) {
-			pw_dbm_update (pwd); break;}
-			}
-			}
-			}
+		/*
+		 * If the user's UID is a duplicate the duplicated
+		 * entry needs to be updated so that a UID match can
+		 * be found in the DBM files.
+		 */
+		for (pw_rewind (), pwd = pw_next (); pwd; pwd = pw_next ()) {
+			if (pwd->pw_uid == user_id)
+				pw_dbm_update (pwd);
+			break;
+		}
+	}
+}
+}
 
 #ifdef SHADOWPWD
-			if (is_shadow_pwd && sp_dbm_present ()
-			    && !sp_dbm_remove (user_name))
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting shadow passwd dbm entry\n"),
-				 Prog);
+if (is_shadow_pwd && sp_dbm_present ()
+    && !sp_dbm_remove (user_name))
+	fprintf (stderr, _("%s: error deleting shadow passwd dbm entry\n"), Prog);
 #endif
-			endpwent ();
+endpwent ();
 #endif				/* NDBM */
-			SYSLOG ((LOG_INFO, "delete user `%s'\n",
-				 user_name));}
+SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
+}
 
 /*
  * user_busy - see if user is logged in.
@@ -546,29 +452,40 @@ static void update_user (void)
  * as well (at least when changing username or uid).  --marekm
  */
 
-			static void user_busy (const char *name, uid_t uid) {
-			struct utmp *utent;
+static void user_busy (const char *name, uid_t uid)
+{
 
-			/*
-			 * We see if the user is logged in by looking for the user name
-			 * in the utmp file.
-			 */
-			setutent (); while ((utent = getutent ())) {
+/*
+ * We see if the user is logged in by looking for the user name
+ * in the utmp file.
+ */
+#if HAVE_UTMPX_H
+	struct utmpx *utent;
+
+	setutxent ();
+	while ((utent = getutxent ())) {
+#else
+	struct utmp *utent;
+
+	setutent ();
+	while ((utent = getutent ())) {
+#endif
 #ifdef USER_PROCESS
-			if (utent->ut_type != USER_PROCESS)
+		if (utent->ut_type != USER_PROCESS)
 			continue;
 #else
-			if (utent->ut_user[0] == '\0')
+		if (utent->ut_user[0] == '\0')
 			continue;
 #endif
-			if (strncmp
-			    (utent->ut_user, name, sizeof utent->ut_user))
+		if (strncmp (utent->ut_user, name, sizeof utent->ut_user))
 			continue;
-			fprintf (stderr,
-				 _
-				 ("%s: user %s is currently logged in\n"),
-				 Prog, name); exit (E_USER_BUSY);}
-			}
+		fprintf (stderr,
+			 _
+			 ("%s: user %s is currently logged in\n"),
+			 Prog, name);
+		exit (E_USER_BUSY);
+	}
+}
 
 /* 
  * user_cancel - cancel cron and at jobs
@@ -608,249 +525,298 @@ exit 0
 ==========
  */
 
-			static void user_cancel (const char *user) {
-			char *cmd;
-			int pid, wpid;
-			int status;
-			if (!(cmd = getdef_str ("USERDEL_CMD")))
-			return; pid = fork (); if (pid == 0) {
-			execl (cmd, cmd, user, (char *) 0);
-			if (errno == ENOENT) {
-			perror (cmd); _exit (127);}
-			else {
-			perror (cmd); _exit (126);}
-			}
-			else
-			if (pid == -1) {
-			perror ("fork"); return;}
+static void user_cancel (const char *user)
+{
+	char *cmd;
+	int pid, wpid;
+	int status;
 
-			do {
-			wpid = wait (&status);} while (wpid != pid
-						       && wpid != -1);}
+	if (!(cmd = getdef_str ("USERDEL_CMD")))
+		return;
+	pid = fork ();
+	if (pid == 0) {
+		execl (cmd, cmd, user, (char *) 0);
+		if (errno == ENOENT) {
+			perror (cmd);
+			_exit (127);
+		} else {
+			perror (cmd);
+			_exit (126);
+		}
+	} else if (pid == -1) {
+		perror ("fork");
+		return;
+	}
+	do {
+		wpid = wait (&status);
+	} while (wpid != pid && wpid != -1);
+}
 
 #ifdef EXTRA_CHECK_HOME_DIR
-			static int
-			path_prefix (const char *s1, const char *s2) {
-			return (strncmp (s2, s1, strlen (s1)) == 0);}
+static int path_prefix (const char *s1, const char *s2)
+{
+	return (strncmp (s2, s1, strlen (s1)) == 0);
+}
 #endif
 
-			static int is_owner (uid_t uid, const char *path) {
-			struct stat st; if (stat (path, &st))
-			return -1; return (st.st_uid == uid);}
+static int is_owner (uid_t uid, const char *path)
+{
+	struct stat st;
+
+	if (stat (path, &st))
+		return -1;
+	return (st.st_uid == uid);
+}
 
 #ifndef NO_REMOVE_MAILBOX
-			static void remove_mailbox (void) {
-			const char *maildir;
-			char mailfile[1024];
-			int i; maildir = getdef_str ("MAIL_DIR");
+static void remove_mailbox (void)
+{
+	const char *maildir;
+	char mailfile[1024];
+	int i;
+
+	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
-			if (!maildir && !getdef_str ("MAIL_FILE"))
-			maildir = MAIL_SPOOL_DIR;
+	if (!maildir && !getdef_str ("MAIL_FILE"))
+		maildir = MAIL_SPOOL_DIR;
 #endif
-			if (!maildir)
-			return;
-			snprintf (mailfile, sizeof mailfile,
-				  "%s/%s", maildir, user_name); if (fflg) {
-			unlink (mailfile);	/* always remove, ignore errors */
-			return;}
-			i = is_owner (user_id, mailfile); if (i == 0) {
-			fprintf (stderr,
-				 _
-				 ("%s: warning: %s not owned by %s, not removing\n"),
-				 Prog, mailfile, user_name); return;}
-			else
-			if (i == -1)
-			return;	/* mailbox doesn't exist */
-			if (unlink (mailfile)) {
-			fprintf (stderr,
-				 _("%s: warning: can't remove "),
-				 Prog); perror (mailfile);}
-			}
+	if (!maildir)
+		return;
+	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
+	if (fflg) {
+		unlink (mailfile);	/* always remove, ignore errors */
+		return;
+	}
+	i = is_owner (user_id, mailfile);
+	if (i == 0) {
+		fprintf (stderr,
+			 _
+			 ("%s: warning: %s not owned by %s, not removing\n"),
+			 Prog, mailfile, user_name);
+		return;
+	} else if (i == -1)
+		return;		/* mailbox doesn't exist */
+	if (unlink (mailfile)) {
+		fprintf (stderr, _("%s: warning: can't remove "), Prog);
+		perror (mailfile);
+	}
+}
 #endif
 
 #ifdef USE_PAM
-			static struct pam_conv conv = {
-			misc_conv, NULL};
+static struct pam_conv conv = {
+	misc_conv, NULL
+};
 #endif				/* USE_PAM */
 /*
  * main - userdel command
  */
-			int main (int argc, char **argv) {
-			struct passwd *pwd; int arg; int errors = 0;
+int main (int argc, char **argv)
+{
+	struct passwd *pwd;
+	int arg;
+	int errors = 0;
 
 #ifdef USE_PAM
-			pam_handle_t * pamh = NULL;
-			struct passwd *pampw; int retval;
+	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
+	int retval;
 #endif
-			/*
-			 * Get my name so that I can use it to report errors.
-			 */
-			Prog = Basename (argv[0]);
-			setlocale (LC_ALL, "");
-			bindtextdomain (PACKAGE, LOCALEDIR);
-			textdomain (PACKAGE);
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
 #ifdef USE_PAM
-			retval = PAM_SUCCESS;
-			pampw = getpwuid (getuid ()); if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;}
+	retval = PAM_SUCCESS;
+	pampw = getpwuid (getuid ());
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
 
-			if (retval == PAM_SUCCESS) {
-			retval =
-			pam_start ("shadow", pampw->pw_name, &conv,
-				   &pamh);}
+	if (retval == PAM_SUCCESS)
+		retval = pam_start ("shadow", pampw->pw_name, &conv,
+				    &pamh);
 
-			if (retval == PAM_SUCCESS) {
-			retval = pam_authenticate (pamh, 0);
-			if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);}
-			}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate (pamh, 0);
+		if (retval != PAM_SUCCESS)
+			pam_end (pamh, retval);
+	}
 
-			if (retval == PAM_SUCCESS) {
-			retval = pam_acct_mgmt (pamh, 0);
-			if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);}
-			}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt (pamh, 0);
+		if (retval != PAM_SUCCESS)
+			pam_end (pamh, retval);
+	}
 
-			if (retval != PAM_SUCCESS) {
-			fprintf (stderr,
-				 _
-				 ("%s: PAM authentication failed\n"),
-				 Prog); exit (1);}
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr,
+			 _("%s: PAM authentication failed\n"), Prog);
+		exit (1);
+	}
 #endif				/* USE_PAM */
 
-			OPENLOG (Prog);
+	OPENLOG (Prog);
 #ifdef SHADOWPWD
-			is_shadow_pwd = spw_file_present ();
+	is_shadow_pwd = spw_file_present ();
 #endif
 #ifdef SHADOWGRP
-			is_shadow_grp = sgr_file_present ();
+	is_shadow_grp = sgr_file_present ();
 #endif
-			/*
-			 * The open routines for the DBM files don't use read-write
-			 * as the mode, so we have to clue them in.
-			 */
+	/*
+	 * The open routines for the DBM files don't use read-write as the
+	 * mode, so we have to clue them in.
+	 */
 #ifdef	NDBM
-			pw_dbm_mode = O_RDWR;
+	pw_dbm_mode = O_RDWR;
 #ifdef	SHADOWPWD
-			sp_dbm_mode = O_RDWR;
+	sp_dbm_mode = O_RDWR;
 #endif
-			gr_dbm_mode = O_RDWR;
+	gr_dbm_mode = O_RDWR;
 #ifdef	SHADOWGRP
-			sg_dbm_mode = O_RDWR;
+	sg_dbm_mode = O_RDWR;
 #endif
 #endif
-			while ((arg = getopt (argc, argv, "fr")) != EOF) {
-			switch (arg) {
-case 'f':			/* force remove even if not owned by user */
-fflg++; break; case 'r':	/* remove home dir and mailbox */
-rflg++; break; default:
-			usage ();}
-			}
-
-			if (optind + 1 != argc)
+	while ((arg = getopt (argc, argv, "fr")) != EOF) {
+		switch (arg) {
+		case 'f':	/* force remove even if not owned by user */
+			fflg++;
+			break;
+		case 'r':	/* remove home dir and mailbox */
+			rflg++;
+			break;
+		default:
 			usage ();
-			/*
-			 * Start with a quick check to see if the user exists.
-			 */
-			user_name = argv[argc - 1];
-			if (!(pwd = getpwnam (user_name))) {
-			fprintf (stderr,
-				 _("%s: user %s does not exist\n"),
-				 Prog, user_name); exit (E_NOTFOUND);}
+		}
+	}
+
+	if (optind + 1 != argc)
+		usage ();
+	/*
+	 * Start with a quick check to see if the user exists.
+	 */
+	user_name = argv[argc - 1];
+	if (!(pwd = getpwnam (user_name))) {
+		fprintf (stderr, _("%s: user %s does not exist\n"),
+			 Prog, user_name);
+		exit (E_NOTFOUND);
+	}
 #ifdef	USE_NIS
 
-			/*
-			 * Now make sure it isn't an NIS user.
-			 */
+	/*
+	 * Now make sure it isn't an NIS user.
+	 */
 
-			if (__ispwNIS ()) {
-			char *nis_domain;
-			char *nis_master;
-			fprintf (stderr,
-				 _("%s: user %s is a NIS user\n"),
-				 Prog, user_name);
-			if (!yp_get_default_domain (&nis_domain)
-			    && !yp_master (nis_domain,
-					   "passwd.byname", &nis_master)) {
+	if (__ispwNIS ()) {
+		char *nis_domain;
+		char *nis_master;
+
+		fprintf (stderr,
+			 _("%s: user %s is a NIS user\n"),
+			 Prog, user_name);
+		if (!yp_get_default_domain (&nis_domain)
+		    && !yp_master (nis_domain,
+				   "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _("%s: %s is the NIS master\n"),
-				 Prog, nis_master);}
-			exit (E_NOTFOUND);}
+				 Prog, nis_master);
+		}
+		exit (E_NOTFOUND);
+	}
 #endif
-			user_id = pwd->pw_uid;
-			user_home = xstrdup (pwd->pw_dir);
-			/*
-			 * Check to make certain the user isn't logged in.
-			 */
-			user_busy (user_name, user_id);
-			/*
-			 * Do the hard stuff - open the files, create the user entries,
-			 * create the home directory, then close and update the files.
-			 */
-			open_files (); update_user (); update_groups ();
+	user_id = pwd->pw_uid;
+	user_home = xstrdup (pwd->pw_dir);
+	/*
+	 * Check to make certain the user isn't logged in.
+	 */
+	user_busy (user_name, user_id);
+	/*
+	 * Do the hard stuff - open the files, create the user entries,
+	 * create the home directory, then close and update the files.
+	 */
+	open_files ();
+	update_user ();
+	update_groups ();
+
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+#ifdef SHADOWPWD
+	nscd_flush_cache ("shadow");
+#endif
+
 #ifndef NO_REMOVE_MAILBOX
-			if (rflg)
-			remove_mailbox ();
+	if (rflg)
+		remove_mailbox ();
 #endif
-			if (rflg && !fflg
-			    && !is_owner (user_id, user_home)) {
-			fprintf (stderr,
-				 _
-				 ("%s: %s not owned by %s, not removing\n"),
-				 Prog, user_home, user_name);
-			rflg = 0; errors++;}
+	if (rflg && !fflg && !is_owner (user_id, user_home)) {
+		fprintf (stderr,
+			 _("%s: %s not owned by %s, not removing\n"),
+			 Prog, user_home, user_name);
+		rflg = 0;
+		errors++;
+	}
 
 /* This may be slow, the above should be good enough. */
 #ifdef EXTRA_CHECK_HOME_DIR
-			if (rflg && !fflg) {
-			/*
-			 * For safety, refuse to remove the home directory
-			 * if it would result in removing some other user's
-			 * home directory. Still not perfect so be careful,
-			 * but should prevent accidents if someone has /home
-			 * or / as home directory...  --marekm
-			 */
-			setpwent (); while ((pwd = getpwent ())) {
+	if (rflg && !fflg) {
+		/*
+		 * For safety, refuse to remove the home directory if it
+		 * would result in removing some other user's home
+		 * directory. Still not perfect so be careful, but should
+		 * prevent accidents if someone has /home or / as home
+		 * directory...  --marekm
+		 */
+		setpwent ();
+		while ((pwd = getpwent ())) {
 			if (strcmp (pwd->pw_name, user_name) == 0)
-			continue; if (path_prefix (user_home, pwd->pw_dir)) {
-			fprintf (stderr,
-				 _
-				 ("%s: not removing directory %s (would remove home of user %s)\n"),
-				 Prog, user_home, pwd->pw_name);
-			rflg = 0; errors++; break;}
+				continue;
+			if (path_prefix (user_home, pwd->pw_dir)) {
+				fprintf (stderr,
+					 _
+					 ("%s: not removing directory %s (would remove home of user %s)\n"),
+					 Prog, user_home, pwd->pw_name);
+				rflg = 0;
+				errors++;
+				break;
 			}
-			}
+		}
+	}
 #endif
 
-			if (rflg) {
-			if (remove_tree (user_home)
-			    || rmdir (user_home)) {
+	if (rflg) {
+		if (remove_tree (user_home)
+		    || rmdir (user_home)) {
 			fprintf (stderr,
-				 _
-				 ("%s: error removing directory %s\n"),
-				 Prog, user_home); errors++;}
-			}
+				 _("%s: error removing directory %s\n"),
+				 Prog, user_home);
+			errors++;
+		}
+	}
 
-			/*
-			 * Cancel any crontabs or at jobs. Have to do this before we
-			 * remove the entry from /etc/passwd.
-			 */
+	/*
+	 * Cancel any crontabs or at jobs. Have to do this before we remove
+	 * the entry from /etc/passwd.
+	 */
 
-			user_cancel (user_name); close_files ();
+	user_cancel (user_name);
+	close_files ();
 #ifdef USE_PAM
-			if (retval == PAM_SUCCESS) {
-			retval = pam_chauthtok (pamh, 0);
-			if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);}
-			}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_chauthtok (pamh, 0);
+		if (retval != PAM_SUCCESS)
+			pam_end (pamh, retval);
+	}
 
-			if (retval != PAM_SUCCESS) {
-			fprintf (stderr,
-				 _("%s: PAM chauthtok failed\n"),
-				 Prog); exit (1);}
+	if (retval != PAM_SUCCESS)
+		fprintf (stderr, _("%s: PAM chauthtok failed\n"), Prog);
+	exit (1);
 
-			if (retval == PAM_SUCCESS)
-			pam_end (pamh, PAM_SUCCESS);
+	if (retval == PAM_SUCCESS)
+		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
-			exit (errors ? E_HOMEDIR : E_SUCCESS);
-			/*NOTREACHED*/}
+	exit (errors ? E_HOMEDIR : E_SUCCESS);
+	/* NOT REACHED */
+}

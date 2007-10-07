@@ -38,7 +38,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: id.c,v 1.11 2002/01/31 09:23:57 kloczek Exp $")
+RCSID (PKG_VER "$Id: id.c,v 1.13 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -50,9 +50,9 @@ static void usage (void);
 static void usage (void)
 {
 #ifdef HAVE_GETGROUPS
-	fprintf (stderr, _("usage: id [-a]\n"));
+	fprintf (stderr, _("Usage: id [-a]\n"));
 #else
-	fprintf (stderr, _("usage: id\n"));
+	fprintf (stderr, _("Usage: id\n"));
 #endif
 	exit (1);
 }
@@ -187,4 +187,5 @@ static void usage (void)
 
 	putchar ('\n');
 	exit (0);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

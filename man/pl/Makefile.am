@@ -7,7 +7,6 @@ man_MANS = \
 	chfn.1 \
 	chpasswd.8 \
 	chsh.1 \
-	d_passwd.5 \
 	expiry.1 \
 	faillog.5 \
 	faillog.8 \
@@ -15,6 +14,7 @@ man_MANS = \
 	groupadd.8 \
 	groupdel.8 \
 	groupmod.8 \
+	groups.1 \
 	grpck.8 \
 	grpconv.8 \
 	grpunconv.8 \
@@ -44,12 +44,8 @@ man_MANS = \
 	vipw.8
 
 EXTRA_DIST = $(man_MANS) \
-	dialups.5 \
-	dpasswd.8 \
-	groups.1 \
 	id.1 \
 	pw_auth.3 \
-	pwauth.8 \
 	shadow.3 \
 	shadowconfig.8 \
 	sulogin.8

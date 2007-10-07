@@ -1,3 +1,4 @@
+.\"$Id: id.1,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,31 +26,32 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: id.1,v 1.2 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 2000 ISHIKAWA Keisuke
 .\"         all rights reserved.
 .\" Translated Thu Nov  9 23:17:10 JST 2000
 .\"         by ISHIKAWA Keisuke
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH ID 1
 .SH 名前
 id \- 現在のユーザ ID 名とグループ ID 名を表示する
 .SH 書式
-.B id
-.RB [ -a ]
+\fBid\fR [\fB-a\fR]
 .SH 説明
-.B id
-は、現在の実ユーザ ID、実効ユーザ ID、実グループ ID、実効グループ ID の名前または値を表示する。
-\fI/etc/passwd\fR に、その値に対応するエントリが存在しない場合は、対応する名前は表示されずに値だけが表示される。
-\fB-a\fR フラグ (オプション) を指定すると、ユーザを複数のグループのメンバーにできるシステムでのグループ・セットが表示される。
+\fBid\fRは、現在の実ユーザ ID、実効ユーザ ID、実グループ ID、
+実効グループ ID の名前または値を表示する。
+値に対応するエントリが \fI/etc/passwd\fR や
+\fI/etc/group\fR に存在しない場合は、
+対応する名前は表示されずに値だけが表示される。
+ユーザが同時に複数のグループのメンバーになれるシステムでは、
+\fB-a\fR オプションを指定するとグループの集合が表示される。
 .SH ファイル
-/etc/passwd \- ユーザーアカウント情報
+\fI/etc/passwd\fR \- ユーザーアカウント情報
 .br
-/etc/group \- グループ情報
+\fI/etc/group\fR \ - グループ情報
 .SH 関連項目
 .BR getgid (2),
 .BR getgroups (2),
 .BR getuid (2)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

@@ -4,1001 +4,899 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-20001016\n"
-"POT-Creation-Date: 2002-03-12 12:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-14 07:41+0100\n"
 "PO-Revision-Date: 2001-08-04 19:45+0200\n"
 "Last-Translator: Roman Festchook <roma@orta.zt.ua>\n"
 "Language-Team: Roman Festchook <roma@orta.zt.ua>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-u\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libmisc/addgrps.c:60
+#: libmisc/addgrps.c:56
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "Застереження: нев╕дома група %s\n"
+msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: п╫п╣п╡я√п╢п╬п╪п╟ пЁя─я┐п©п╟ %s\n"
 
-#: libmisc/addgrps.c:71
+#: libmisc/addgrps.c:68
 msgid "Warning: too many groups\n"
-msgstr "Застереження: занадто багато груп\n"
+msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: п╥п╟п╫п╟п╢я┌п╬ п╠п╟пЁп╟я┌п╬ пЁя─я┐п©\n"
 
-#: libmisc/age.c:77
+#: libmisc/age.c:72
 msgid "Your password has expired."
-msgstr "Ваш пароль прострочено."
+msgstr "п▓п╟я┬ п©п╟я─п╬п╩я▄ п©я─п╬я│я┌я─п╬я┤п╣п╫п╬."
 
-#: libmisc/age.c:80
+#: libmisc/age.c:75
 msgid "Your password is inactive."
-msgstr "Ваш пароль ╓ неактивним."
+msgstr "п▓п╟я┬ п©п╟я─п╬п╩я▄ я■ п╫п╣п╟п╨я┌п╦п╡п╫п╦п╪."
 
-#: libmisc/age.c:83
+#: libmisc/age.c:78
 msgid "Your login has expired."
-msgstr "Ваш лог╕н прострочено."
+msgstr "п▓п╟я┬ п╩п╬пЁя√п╫ п©я─п╬я│я┌я─п╬я┤п╣п╫п╬."
 
-#: libmisc/age.c:96
+#: libmisc/age.c:90
 msgid "  Contact the system administrator.\n"
-msgstr "  З'вяж╕ться з системним адм╕н╕стратором.\n"
+msgstr "  п≈'п╡я▐п╤я√я┌я▄я│я▐ п╥ я│п╦я│я┌п╣п╪п╫п╦п╪ п╟п╢п╪я√п╫я√я│я┌я─п╟я┌п╬я─п╬п╪.\n"
 
-#: libmisc/age.c:99
+#: libmisc/age.c:93
 msgid "  Choose a new password.\n"
-msgstr "  Вибер╕ть новий пароль.\n"
+msgstr "  п▓п╦п╠п╣я─я√я┌я▄ п╫п╬п╡п╦п╧ п©п╟я─п╬п╩я▄.\n"
 
-#: libmisc/age.c:176
+#: libmisc/age.c:168
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "Ваш пароль буде просторочено за %ld дн╕в.\n"
+msgstr "п▓п╟я┬ п©п╟я─п╬п╩я▄ п╠я┐п╢п╣ п©я─п╬я│я┌п╬я─п╬я┤п╣п╫п╬ п╥п╟ %ld п╢п╫я√п╡.\n"
 
-#: libmisc/age.c:178
+#: libmisc/age.c:172
 msgid "Your password will expire tomorrow.\n"
-msgstr "Ваш пароль буде прострочено завтра.\n"
+msgstr "п▓п╟я┬ п©п╟я─п╬п╩я▄ п╠я┐п╢п╣ п©я─п╬я│я┌я─п╬я┤п╣п╫п╬ п╥п╟п╡я┌я─п╟.\n"
 
-#: libmisc/age.c:180
+#: libmisc/age.c:174
 msgid "Your password will expire today.\n"
-msgstr "Ваш пароль буде прострочено сьогодн╕.\n"
+msgstr "п▓п╟я┬ п©п╟я─п╬п╩я▄ п╠я┐п╢п╣ п©я─п╬я│я┌я─п╬я┤п╣п╫п╬ я│я▄п╬пЁп╬п╢п╫я√.\n"
 
-#: libmisc/chowntty.c:113
+#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "Не можу зм╕нити tty %s"
+msgstr "п²п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ tty %s"
 
-#: libmisc/env.c:160
+#: libmisc/env.c:155
 msgid "Environment overflow\n"
-msgstr "Переповнення оточення\n"
+msgstr "п÷п╣я─п╣п©п╬п╡п╫п╣п╫п╫я▐ п╬я┌п╬я┤п╣п╫п╫я▐\n"
 
-#: libmisc/env.c:200
+#: libmisc/env.c:195
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Ви не можете зм╕нити $%s\n"
+msgstr "п▓п╦ п╫п╣ п╪п╬п╤п╣я┌п╣ п╥п╪я√п╫п╦я┌п╦ $%s\n"
 
-#: libmisc/failure.c:238
+#: libmisc/failure.c:230
 #, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
-msgstr "%d %s з часу останньго входу.  Останн╕й вх╕д: %s з %s.\n"
+msgstr "%d %s п╥ я┤п╟я│я┐ п╬я│я┌п╟п╫п╫я▄пЁп╬ п╡я┘п╬п╢я┐.  п·я│я┌п╟п╫п╫я√п╧ п╡я┘я√п╢: %s п╥ %s.\n"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failures"
-msgstr "помилки"
+msgstr "п©п╬п╪п╦п╩п╨п╦"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failure"
-msgstr "помилка"
+msgstr "п©п╬п╪п╦п╩п╨п╟"
 
-#: libmisc/limits.c:397
+#: libmisc/limits.c:396
 msgid "Too many logins.\n"
-msgstr "Занадто багато сес╕й.\n"
+msgstr "п≈п╟п╫п╟п╢я┌п╬ п╠п╟пЁп╟я┌п╬ я│п╣я│я√п╧.\n"
 
-#: libmisc/login_desrpc.c:63
+#: libmisc/login_desrpc.c:59
 #, c-format
 msgid "Password does not decrypt secret key for %s.\n"
-msgstr "Пароль не дешифру╓ та╓мний ключ для %s.\n"
+msgstr "п÷п╟я─п╬п╩я▄ п╫п╣ п╢п╣я┬п╦я└я─я┐я■ я┌п╟я■п╪п╫п╦п╧ п╨п╩я▌я┤ п╢п╩я▐ %s.\n"
 
-#: libmisc/login_desrpc.c:69
+#: libmisc/login_desrpc.c:66
 #, c-format
 msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
-msgstr "Не можу встановити та╓много ключа для %s: чи запущено сервер ключ╕в?\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╡я│я┌п╟п╫п╬п╡п╦я┌п╦ я┌п╟я■п╪п╫п╬пЁп╬ п╨п╩я▌я┤п╟ п╢п╩я▐ %s: я┤п╦ п╥п╟п©я┐я┴п╣п╫п╬ я│п╣я─п╡п╣я─ п╨п╩я▌я┤я√п╡?\n"
 
-#: libmisc/mail.c:62 libmisc/mail.c:77
+#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
-msgstr "Ви ма╓те нову почту."
+msgstr "п▓п╦ п╪п╟я■я┌п╣ п╫п╬п╡я┐ п©п╬я┤я┌я┐."
 
-#: libmisc/mail.c:73
+#: libmisc/mail.c:72
 msgid "No mail."
-msgstr "Почти не ма╓."
+msgstr "п÷п╬я┤я┌п╦ п╫п╣ п╪п╟я■."
 
-#: libmisc/mail.c:75
+#: libmisc/mail.c:74
 msgid "You have mail."
-msgstr "Ви ма╓те почту."
+msgstr "п▓п╦ п╪п╟я■я┌п╣ п©п╬я┤я┌я┐."
 
-#: libmisc/obscure.c:281 src/passwd.c:244
+#: libmisc/obscure.c:271 src/passwd.c:183
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "Поганий пароль: %s.  "
+msgstr "п÷п╬пЁп╟п╫п╦п╧ п©п╟я─п╬п╩я▄: %s.  "
 
-#: libmisc/pam_pass.c:42
+#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "passwd: pam_start() не виконано, помилка %d\n"
+msgstr "passwd: pam_start() п╫п╣ п╡п╦п╨п╬п╫п╟п╫п╬, п©п╬п╪п╦п╩п╨п╟ %d\n"
 
-#: libmisc/pam_pass.c:49
+#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#: libmisc/setupenv.c:211
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
-msgstr "Не можу перейти до теки \"%s\"\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п©п╣я─п╣п╧я┌п╦ п╢п╬ я┌п╣п╨п╦ \"%s\"\n"
 
-#: libmisc/setupenv.c:219
+#: libmisc/setupenv.c:216
 msgid "No directory, logging in with HOME=/"
-msgstr "Нема теки, в╕дкрива╓мо сесс╕ю з HOME=/"
+msgstr "п²п╣п╪п╟ я┌п╣п╨п╦, п╡я√п╢п╨я─п╦п╡п╟я■п╪п╬ я│п╣я│я│я√я▌ п╥ HOME=/"
 
-#: libmisc/shell.c:78
-#, c-format
-msgid "Executing shell %s\n"
-msgstr "Виконую shell %s\n"
-
-#.
-#. * Obviously something is really wrong - I can't figure out
-#. * how to execute this stupid shell, so I might as well give
-#. * up in disgust ...
-#.
-#: libmisc/shell.c:122
+#: libmisc/shell.c:119
 #, c-format
 msgid "Cannot execute %s"
-msgstr "Не можу виконати %s"
+msgstr "п²п╣ п╪п╬п╤я┐ п╡п╦п╨п╬п╫п╟я┌п╦ %s"
 
-#: libmisc/sub.c:61
+#: libmisc/sub.c:55
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
-msgstr "Нев╕рна коренева тека \"%s\"\n"
+msgstr "п²п╣п╡я√я─п╫п╟ п╨п╬я─п╣п╫п╣п╡п╟ я┌п╣п╨п╟ \"%s\"\n"
 
-#: libmisc/sub.c:73
+#: libmisc/sub.c:67
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
-msgstr "Не можу зм╕нити кореневу теку на \"%s\"\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ п╨п╬я─п╣п╫п╣п╡я┐ я┌п╣п╨я┐ п╫п╟ \"%s\"\n"
 
-#: libmisc/xmalloc.c:28
+#: libmisc/xmalloc.c:24
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) не виконано\n"
+msgstr "malloc(%d) п╫п╣ п╡п╦п╨п╬п╫п╟п╫п╬\n"
 
-#: lib/dialchk.c:71
-msgid "Dialup Password: "
-msgstr "Пароль на модемне п╕дключення: "
-
-#: lib/getdef.c:276
+#: lib/getdef.c:274
 msgid "Could not allocate space for config info.\n"
-msgstr "Не можу вид╕лити ресурси для конф╕гурац╕йних данних.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╡п╦п╢я√п╩п╦я┌п╦ я─п╣я│я┐я─я│п╦ п╢п╩я▐ п╨п╬п╫я└я√пЁя┐я─п╟я├я√п╧п╫п╦я┘ п╢п╟п╫п╫п╦я┘.\n"
 
-#.
-#. * Item was never found.
-#.
-#: lib/getdef.c:330
+#: lib/getdef.c:328
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
-"помилка у конф╕гурац╕╖ - нев╕дома позиц╕я '%s' (пов╕домте адм╕н╕стратора)\n"
+"п©п╬п╪п╦п╩п╨п╟ я┐ п╨п╬п╫я└я√пЁя┐я─п╟я├я√я≈ - п╫п╣п╡я√п╢п╬п╪п╟ п©п╬п╥п╦я├я√я▐ '%s' (п©п╬п╡я√п╢п╬п╪я┌п╣ п╟п╢п╪я√п╫я√я│я┌я─п╟я┌п╬я─п╟)\n"
 
-#: lib/getdef.c:417
-#, c-format
-msgid "error - lookup '%s' failed\n"
-msgstr "помилка - пошук '%s' не виконано\n"
-
-#: lib/getdef.c:425
-#, c-format
-msgid "%s not found\n"
-msgstr "%s не знайдено\n"
-
-#.
-#. * get the password from her, and set the salt for
-#. * the decryption from the group file.
-#.
-#: lib/pwauth.c:54 src/newgrp.c:348
+#: lib/pwauth.c:54 src/newgrp.c:343
 msgid "Password: "
-msgstr "Пароль: "
+msgstr "п÷п╟я─п╬п╩я▄: "
 
 #: lib/pwauth.c:56
 #, c-format
 msgid "%s's Password: "
-msgstr "Пароль користувача %s: "
+msgstr "п÷п╟я─п╬п╩я▄ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s: "
 
-#: lib/pwauth.c:270
+#: lib/pwauth.c:247
 msgid "(Echo on) "
 msgstr ""
 
 #: lib/strerror.c:20
 #, c-format
 msgid "Unknown error %d"
-msgstr "Нев╕дома помилка %d"
+msgstr "п²п╣п╡я√п╢п╬п╪п╟ п©п╬п╪п╦п╩п╨п╟ %d"
 
-#: src/chage.c:116
-#, c-format
+#: src/chage.c:118
 msgid ""
-"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-"\t[-I inactive] [-E expire] [-d last_day] user\n"
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"Використовуйте: %s [-l] [-m м╕н_дн╕в] [-M макс_дн╕в] [-W застереження]\n"
-"\t[-I неактивн╕сть] [-E простроченно] [-d останн╕й_день] користувач\n"
+"п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: chage [-l] [-m п╪я√п╫_п╢п╫я√п╡] [-M п╪п╟п╨я│_п╢п╫я√п╡] [-W п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐]\n"
+"                      [-I п╫п╣п╟п╨я┌п╦п╡п╫я√я│я┌я▄] [-E п©я─п╬я│я┌я─п╬я┤п╣п╫п╫п╬]\n"
+"                      [-d п╬я│я┌п╟п╫п╫я√п╧_п╢п╣п╫я▄] п╨п╬я─п╦я│я┌я┐п╡п╟я┤\n"
 
-#: src/chage.c:122
-#, c-format
-msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-msgstr ""
-"Використовуйте: %s [-l] [-m м╕н_дн╕в] [-M макс_дн╕в] [-d останн╕й_день] "
-"користувач\n"
-
-#: src/chage.c:157
+#: src/chage.c:152
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
-"Введ╕ть нове значення, або нажм╕ть ENTER для значення по замовчуванню\n"
+"п▓п╡п╣п╢я√я┌я▄ п╫п╬п╡п╣ п╥п╫п╟я┤п╣п╫п╫я▐, п╟п╠п╬ п╫п╟п╤п╪я√я┌я▄ ENTER п╢п╩я▐ п╥п╫п╟я┤п╣п╫п╫я▐ п©п╬ п╥п╟п╪п╬п╡я┤я┐п╡п╟п╫п╫я▌\n"
 "\n"
 
-#: src/chage.c:160
+#: src/chage.c:155
 msgid "Minimum Password Age"
-msgstr "М╕н╕мальний в╕к пароля"
+msgstr "п°я√п╫я√п╪п╟п╩я▄п╫п╦п╧ п╡я√п╨ п©п╟я─п╬п╩я▐"
 
-#: src/chage.c:166
+#: src/chage.c:161
 msgid "Maximum Password Age"
-msgstr "Макс╕мальний в╕к пароля"
+msgstr "п°п╟п╨я│я√п╪п╟п╩я▄п╫п╦п╧ п╡я√п╨ п©п╟я─п╬п╩я▐"
 
-#: src/chage.c:174
+#: src/chage.c:169
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "Остання зм╕на пароля (РРРР-ММ-ДД)"
+msgstr "п·я│я┌п╟п╫п╫я▐ п╥п╪я√п╫п╟ п©п╟я─п╬п╩я▐ (п═п═п═п═-п°п°-п■п■)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐ п©я─п╬ п©я─п╬я│я┌я─п╬я┤п╣п╫п╫я▐ п©п╟я─п╬п╩я▐"
 
 #: src/chage.c:183
-msgid "Password Expiration Warning"
-msgstr "Застереження про прострочення пароля"
-
-#: src/chage.c:189
 msgid "Password Inactive"
-msgstr "Пароль неактивний"
+msgstr "п÷п╟я─п╬п╩я▄ п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧"
 
-#: src/chage.c:197
+#: src/chage.c:191
 msgid "Account Expiration Date (YYYY-MM-DD)"
-msgstr "Дата прострочення рахунку (РРРР-ММ-ДД)"
+msgstr "п■п╟я┌п╟ п©я─п╬я│я┌я─п╬я┤п╣п╫п╫я▐ я─п╟я┘я┐п╫п╨я┐ (п═п═п═п═-п°п°-п■п■)"
 
-#.
-#. * Start with the easy numbers - the number of days before the
-#. * password can be changed, the number of days after which the
-#. * password must be chaged, the number of days before the password
-#. * expires that the user is told, and the number of days after the
-#. * password expires that the account becomes unusable.
-#.
-#: src/chage.c:248
+#: src/chage.c:241
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "М╕н╕мум:\t%ld\n"
+msgstr "п°я√п╫я√п╪я┐п╪:\t%ld\n"
 
-#: src/chage.c:249
+#: src/chage.c:242
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Макс╕мум:\t%ld\n"
+msgstr "п°п╟п╨я│я√п╪я┐п╪:\t%ld\n"
 
-#: src/chage.c:251
+#: src/chage.c:243
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Застереження:\t%ld\n"
+msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐:\t%ld\n"
 
-#: src/chage.c:252
+#: src/chage.c:244
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Неактивний:\t%ld\n"
+msgstr "п²п╣п╟п╨я┌п╦п╡п╫п╦п╧:\t%ld\n"
 
-#.
-#. * The "last change" date is either "Never" or the date the password
-#. * was last modified. The date is the number of days since 1/1/1970.
-#.
-#: src/chage.c:260
+#: src/chage.c:251
 msgid "Last Change:\t\t"
-msgstr "Остання зм╕на:\t\t"
+msgstr "п·я│я┌п╟п╫п╫я▐ п╥п╪я√п╫п╟:\t\t"
 
-#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+#: src/chage.c:253 src/chage.c:267 src/chage.c:283 src/chage.c:296
 msgid "Never\n"
-msgstr "Н╕коли\n"
+msgstr "п²я√п╨п╬п╩п╦\n"
 
-#.
-#. * The password expiration date is determined from the last change
-#. * date plus the number of days the password is valid for.
-#.
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Password Expires:\t"
-msgstr "Пароль простроченно:\t"
+msgstr "п÷п╟я─п╬п╩я▄ п©я─п╬я│я┌я─п╬я┤п╣п╫п╫п╬:\t"
 
-#.
-#. * The account becomes inactive if the password is expired for more
-#. * than "inactdays". The expiration date is calculated and the
-#. * number of inactive days is added. The resulting date is when the
-#. * active will be disabled.
-#.
-#: src/chage.c:290
+#: src/chage.c:280
 msgid "Password Inactive:\t"
-msgstr "Пароль неактивний:\t"
+msgstr "п÷п╟я─п╬п╩я▄ п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧:\t"
 
-#.
-#. * The account will expire on the given date regardless of the
-#. * password expiring or not.
-#.
-#: src/chage.c:304
+#: src/chage.c:294
 msgid "Account Expires:\t"
-msgstr "Рахунок прострочено:\t"
+msgstr "п═п╟я┘я┐п╫п╬п╨ п©я─п╬я│я┌я─п╬я┤п╣п╫п╬:\t"
 
-#: src/chage.c:468
+#: src/chage.c:445
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: не використовуйте \"l\" з ╕нш╕ми флагами\n"
+msgstr "%s: п╫п╣ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣ \"l\" п╥ я√п╫я┬я√п╪п╦ я└п╩п╟пЁп╟п╪п╦\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:518
+#: src/chage.c:458 src/chage.c:588 src/login.c:503
 #, c-format
 msgid "%s: permission denied\n"
-msgstr "%s: у доступ╕ в╕дмовлено\n"
+msgstr "%s: я┐ п╢п╬я│я┌я┐п©я√ п╡я√п╢п╪п╬п╡п╩п╣п╫п╬\n"
 
-#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
-#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
-#: src/usermod.c:1732
-#, fuzzy, c-format
-msgid "%s: PAM authentication failed\n"
-msgstr "%s: PAM аутентиф╕кац╕я не пройшла\n"
-
-#: src/chage.c:533 src/chpasswd.c:157
+#: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/usermod.c:1413
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: не можу заблокувати файл паролей\n"
+msgid "%s: PAM authentication failed\n"
+msgstr "%s: PAM п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я▐ п╫п╣ п©я─п╬п╧я┬п╩п╟\n"
 
-#: src/chage.c:544 src/chpasswd.c:162
+#: src/chage.c:510 src/chpasswd.c:159
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "%s: не можу в╕дкрити файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:552
+#: src/chage.c:518
 #, c-format
 msgid "%s: unknown user: %s\n"
-msgstr "%s: нев╕домий користувач: %s\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤: %s\n"
 
-#: src/chage.c:571
+#: src/chage.c:536
 #, fuzzy, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%s: не можу заблокувати файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:579
+#: src/chage.c:544
 #, fuzzy, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: не можу в╕дкрити файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:674
+#: src/chage.c:605
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Зм╕нюю в╕кову ╕нформац╕ю для %s\n"
+msgstr "п≈п╪я√п╫я▌я▌ п╡я√п╨п╬п╡я┐ я√п╫я└п╬я─п╪п╟я├я√я▌ п╢п╩я▐ %s\n"
 
-#: src/chage.c:677
+#: src/chage.c:608
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: помилка зам╕ни поля\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╥п╟п╪я√п╫п╦ п©п╬п╩я▐\n"
 
-#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#: src/chage.c:632 src/pwunconv.c:138
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "%s: не можу оновити файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:737 src/pwunconv.c:168
+#: src/chage.c:661 src/pwunconv.c:132
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s: не можу оновити файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
-#: src/passwd.c:747 src/passwd.c:859
+#: src/chage.c:676 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
 msgid "Error updating the DBM password entry.\n"
-msgstr "Помилка оновлення запису пароля у DBM.\n"
+msgstr "п÷п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п©п╟я─п╬п╩я▐ я┐ DBM.\n"
 
-#: src/chage.c:823
+#: src/chage.c:693
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: не можу переписати файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:838
+#: src/chage.c:707
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s: не можу переписати файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
-#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
-#: src/usermod.c:1811
+#: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
-msgstr "%s: не можу разблокувати файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я─п╟п╥п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩\n"
 
-#: src/chfn.c:83
+#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Використовуйт╓: %s [-f повне_╕м'я] [-r номер_к╕мнати] [-w робоч╕й_телефон]\n"
-"\t[-h домашн╕й_телефон] [-o ╕нше] [користувач]\n"
+"п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌я■: %s [-f п©п╬п╡п╫п╣_я√п╪'я▐] [-r п╫п╬п╪п╣я─_п╨я√п╪п╫п╟я┌п╦] [-w я─п╬п╠п╬я┤я√п╧_я┌п╣п╩п╣я└п╬п╫]\n"
+"\t[-h п╢п╬п╪п╟я┬п╫я√п╧_я┌п╣п╩п╣я└п╬п╫] [-o я√п╫я┬п╣] [п╨п╬я─п╦я│я┌я┐п╡п╟я┤]\n"
 
-#: src/chfn.c:88
+#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"Використовуйте: %s [-f повне_╕м'я] [-r номер_к╕мнати]\n"
-"\t[-w робоч╕й_телефон] [-h домашн╕й_телефон]\n"
+"п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-f п©п╬п╡п╫п╣_я√п╪'я▐] [-r п╫п╬п╪п╣я─_п╨я√п╪п╫п╟я┌п╦]\n"
+"\t[-w я─п╬п╠п╬я┤я√п╧_я┌п╣п╩п╣я└п╬п╫] [-h п╢п╬п╪п╟я┬п╫я√п╧_я┌п╣п╩п╣я└п╬п╫]\n"
 
-#: src/chfn.c:139
+#: src/chfn.c:140
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
-"Введ╕ть нове значення, або нажм╕ть ENTER, для значення по замовчуванню\n"
+"п▓п╡п╣п╢я√я┌я▄ п╫п╬п╡п╣ п╥п╫п╟я┤п╣п╫п╫я▐, п╟п╠п╬ п╫п╟п╤п╪я√я┌я▄ ENTER, п╢п╩я▐ п╥п╫п╟я┤п╣п╫п╫я▐ п©п╬ п╥п╟п╪п╬п╡я┤я┐п╡п╟п╫п╫я▌\n"
 
-#: src/chfn.c:142
+#: src/chfn.c:143
 msgid "Full Name"
-msgstr "Повне ╕м'я"
+msgstr "п÷п╬п╡п╫п╣ я√п╪'я▐"
 
-#: src/chfn.c:144
+#: src/chfn.c:145
 #, c-format
 msgid "\tFull Name: %s\n"
-msgstr "\tПовне ╕м'я: %s\n"
+msgstr "\tп÷п╬п╡п╫п╣ я√п╪'я▐: %s\n"
 
-#: src/chfn.c:147
+#: src/chfn.c:148
 msgid "Room Number"
-msgstr "Номер к╕мнати"
+msgstr "п²п╬п╪п╣я─ п╨я√п╪п╫п╟я┌п╦"
 
-#: src/chfn.c:149
+#: src/chfn.c:150
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\tНомер к╕мнати: %s\n"
+msgstr "\tп²п╬п╪п╣я─ п╨я√п╪п╫п╟я┌п╦: %s\n"
 
-#: src/chfn.c:152
+#: src/chfn.c:153
 msgid "Work Phone"
-msgstr "Робоч╕й телефон"
+msgstr "п═п╬п╠п╬я┤я√п╧ я┌п╣п╩п╣я└п╬п╫"
 
-#: src/chfn.c:154
+#: src/chfn.c:155
 #, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "\tРобоч╕й телефон: %s\n"
+msgstr "\tп═п╬п╠п╬я┤я√п╧ я┌п╣п╩п╣я└п╬п╫: %s\n"
 
-#: src/chfn.c:157
+#: src/chfn.c:158
 msgid "Home Phone"
-msgstr "Домашн╕й телефон"
+msgstr "п■п╬п╪п╟я┬п╫я√п╧ я┌п╣п╩п╣я└п╬п╫"
 
-#: src/chfn.c:159
+#: src/chfn.c:160
 #, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "\tДомашн╕й телефон: %s\n"
+msgstr "\tп■п╬п╪п╟я┬п╫я√п╧ я┌п╣п╩п╣я└п╬п╫: %s\n"
 
-#: src/chfn.c:162
+#: src/chfn.c:163
 msgid "Other"
-msgstr "╤нше"
+msgstr "п├п╫я┬п╣"
 
-#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
-#: src/chfn.c:379 src/passwd.c:1115
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
 #, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: У доступ╕ в╕дмовлено.\n"
+msgstr "%s: пё п╢п╬я│я┌я┐п©я√ п╡я√п╢п╪п╬п╡п╩п╣п╫п╬.\n"
 
-#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
 #, c-format
 msgid "%s: Unknown user %s\n"
-msgstr "%s: Нев╕домий користувач %s\n"
+msgstr "%s: п²п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s\n"
 
-#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Не можу визначити ваше ╕м'я користувача.\n"
+msgstr "%s: п²п╣ п╪п╬п╤я┐ п╡п╦п╥п╫п╟я┤п╦я┌п╦ п╡п╟я┬п╣ я√п╪'я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟.\n"
 
-#: src/chfn.c:358 src/chsh.c:215
+#: src/chfn.c:359 src/chsh.c:210
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: не можу зм╕нити користувача `%s' у кл╕╓нт╕ NIS.\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ `%s' я┐ п╨п╩я√я■п╫я┌я√ NIS.\n"
 
-#: src/chfn.c:366 src/chsh.c:223
+#: src/chfn.c:367 src/chsh.c:218
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' ╓ NIS сервер для цього кл╕╓нта.\n"
+msgstr "%s: `%s' я■ NIS я│п╣я─п╡п╣я─ п╢п╩я▐ я├я▄п╬пЁп╬ п╨п╩я√я■п╫я┌п╟.\n"
 
-#: src/chfn.c:441
+#: src/chfn.c:442
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "Зм╕на ╕нформац╕╖ про користувача %s\n"
+msgstr "п≈п╪я√п╫п╟ я√п╫я└п╬я─п╪п╟я├я√я≈ п©я─п╬ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s\n"
 
-#: src/chfn.c:450
+#: src/chfn.c:451
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: нев╕рне ╕м'я: \"%s\"\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╣ я√п╪'я▐: \"%s\"\n"
 
-#: src/chfn.c:456
+#: src/chfn.c:457
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: нев╕рний номер к╕мнати: \"%s\"\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ п╫п╬п╪п╣я─ п╨я√п╪п╫п╟я┌п╦: \"%s\"\n"
 
-#: src/chfn.c:462
+#: src/chfn.c:463
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: нев╕рний робочий телефон: \"%s\"\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ я─п╬п╠п╬я┤п╦п╧ я┌п╣п╩п╣я└п╬п╫: \"%s\"\n"
 
-#: src/chfn.c:468
+#: src/chfn.c:469
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: нев╕рний домашн╕й телефон: \"%s\"\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ п╢п╬п╪п╟я┬п╫я√п╧ я┌п╣п╩п╣я└п╬п╫: \"%s\"\n"
 
-#: src/chfn.c:475
+#: src/chfn.c:476
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" включа╓ заборонен╕ символи\n"
+msgstr "%s: \"%s\" п╡п╨п╩я▌я┤п╟я■ п╥п╟п╠п╬я─п╬п╫п╣п╫я√ я│п╦п╪п╡п╬п╩п╦\n"
 
-#: src/chfn.c:488
+#: src/chfn.c:489
 #, c-format
 msgid "%s: fields too long\n"
-msgstr "%s: поля занадто довг╕\n"
+msgstr "%s: п©п╬п╩я▐ п╥п╟п╫п╟п╢я┌п╬ п╢п╬п╡пЁя√\n"
 
-#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
 msgid "Cannot change ID to root.\n"
-msgstr "Не можу зм╕нити ID на root.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ ID п╫п╟ root.\n"
 
-#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "Не можу блокувати файл паролей; спробуйте п╕зн╕ше.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧; я│п©я─п╬п╠я┐п╧я┌п╣ п©я√п╥п╫я√я┬п╣.\n"
 
-#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
 msgid "Cannot open the password file.\n"
-msgstr "Не можу в╕дкрити файл паролей.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧.\n"
 
-#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s не знайдено у /etc/passwd\n"
+msgstr "%s: %s п╫п╣ п╥п╫п╟п╧п╢п╣п╫п╬ я┐ /etc/passwd\n"
 
-#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
 msgid "Error updating the password entry.\n"
-msgstr "Не можу оновити запис у файл╕ паролей.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©п╟я─п╬п╩п╣п╧.\n"
 
-#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
 msgid "Cannot commit password file changes.\n"
-msgstr "Не можу записати зм╕ни до файлу паролей.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╥п╟п©п╦я│п╟я┌п╦ п╥п╪я√п╫п╦ п╢п╬ я└п╟п╧п╩я┐ п©п╟я─п╬п╩п╣п╧.\n"
 
-#: src/chfn.c:592 src/chsh.c:404
+#: src/chfn.c:593 src/chsh.c:399
 msgid "Cannot unlock the password file.\n"
-msgstr "Не можу разблокувати файл паролей.\n"
+msgstr "п²п╣ п╪п╬п╤я┐ я─п╟п╥п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧.\n"
 
-#: src/chpasswd.c:66
+#: src/chpasswd.c:67
+#, fuzzy, c-format
+msgid "Usage: %s [-e]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-e]\n"
+
+#: src/chpasswd.c:154
 #, c-format
-msgid "usage: %s [-e]\n"
-msgstr "використовуйте: %s [-e]\n"
+msgid "%s: can't lock password file\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chpasswd.c:171 src/pwconv.c:94
+#: src/chpasswd.c:168 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: не можу заблокувати файл з прихованими паролями\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п╥ п©я─п╦я┘п╬п╡п╟п╫п╦п╪п╦ п©п╟я─п╬п╩я▐п╪п╦\n"
 
-#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
-#: src/pwunconv.c:108
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: не можу в╕дкрити файл з прихованими паролями\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п╥ п©я─п╦я┘п╬п╡п╟п╫п╦п╪п╦ п©п╟я─п╬п╩я▐п╪п╦\n"
 
-#: src/chpasswd.c:200 src/newusers.c:460
+#: src/chpasswd.c:197 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: рядок %d: рядок занадто довгий\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: я─я▐п╢п╬п╨ п╥п╟п╫п╟п╢я┌п╬ п╢п╬п╡пЁп╦п╧\n"
 
-#: src/chpasswd.c:220
+#: src/chpasswd.c:217
 #, c-format
 msgid "%s: line %d: missing new password\n"
-msgstr "%s: рядок %d: браку╓ нового пароля\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╠я─п╟п╨я┐я■ п╫п╬п╡п╬пЁп╬ п©п╟я─п╬п╩я▐\n"
 
-#: src/chpasswd.c:237
+#: src/chpasswd.c:234
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: рядок %d: нев╕домий користувач %s\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s\n"
 
-#: src/chpasswd.c:290
+#: src/chpasswd.c:280
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: рядок %d: не можу оновити запис у баз╕ паролей\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ я┐ п╠п╟п╥я√ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/chpasswd.c:307 src/newusers.c:588
+#: src/chpasswd.c:297 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: виявлено помилку, зм╕ни ╕гноруються\n"
+msgstr "%s: п╡п╦я▐п╡п╩п╣п╫п╬ п©п╬п╪п╦п╩п╨я┐, п╥п╪я√п╫п╦ я√пЁп╫п╬я─я┐я▌я┌я▄я│я▐\n"
 
-#: src/chpasswd.c:319
+#: src/chpasswd.c:309
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: помилка оновлення файлу з прихованими паролями\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ я└п╟п╧п╩я┐ п╥ п©я─п╦я┘п╬п╡п╟п╫п╦п╪п╦ п©п╟я─п╬п╩я▐п╪п╦\n"
 
-#: src/chpasswd.c:328
+#: src/chpasswd.c:318
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: помилка оновлення файлу з паролями\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ я└п╟п╧п╩я┐ п╥ п©п╟я─п╬п╩я▐п╪п╦\n"
 
-#: src/chsh.c:75
+#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Використовуйте: %s [-s shell] [╕м'я]\n"
-
-#: src/chsh.c:89
-msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"Введ╕ть нове значення, або нажм╕ть ENTER, для значення по замовчуванню\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-s shell] [я√п╪'я▐]\n"
 
 #: src/chsh.c:90
+msgid "Enter the new value, or press return for the default\n"
+msgstr ""
+"п▓п╡п╣п╢я√я┌я▄ п╫п╬п╡п╣ п╥п╫п╟я┤п╣п╫п╫я▐, п╟п╠п╬ п╫п╟п╤п╪я√я┌я▄ ENTER, п╢п╩я▐ п╥п╫п╟я┤п╣п╫п╫я▐ п©п╬ п╥п╟п╪п╬п╡я┤я┐п╡п╟п╫п╫я▌\n"
+
+#: src/chsh.c:91
 msgid "Login Shell"
 msgstr "Login Shell"
 
-#: src/chsh.c:239 src/chsh.c:253
+#: src/chsh.c:234 src/chsh.c:248
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Не можна зм╕нити shell для %s.\n"
+msgstr "п²п╣ п╪п╬п╤п╫п╟ п╥п╪я√п╫п╦я┌п╦ shell п╢п╩я▐ %s.\n"
 
-#: src/chsh.c:282
+#: src/chsh.c:277
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Зм╕нюю shell для %s\n"
+msgstr "п≈п╪я√п╫я▌я▌ shell п╢п╩я▐ %s\n"
 
-#: src/chsh.c:294
+#: src/chsh.c:289
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: Нев╕рний запис: %s\n"
+msgstr "%s: п²п╣п╡я√я─п╫п╦п╧ п╥п╟п©п╦я│: %s\n"
 
-#: src/chsh.c:301
+#: src/chsh.c:296
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "%s ╓ нев╕рний shell.\n"
-
-#: src/dpasswd.c:52
-#, c-format
-msgid "Usage: %s [-(a|d)] shell\n"
-msgstr "Використовуйте: %s [-(a|d)] shell\n"
-
-#: src/dpasswd.c:115
-msgid "Shell password: "
-msgstr "Shell пароль: "
-
-#: src/dpasswd.c:121
-msgid "re-enter Shell password: "
-msgstr "Повтор╕ть пароль для shell: "
-
-#: src/dpasswd.c:129
-#, c-format
-msgid "%s: Passwords do not match, try again.\n"
-msgstr "%s: Пароль не сп╕впада╓, спробуйте знову.\n"
-
-#: src/dpasswd.c:149
-#, c-format
-msgid "%s: can't create %s"
-msgstr "%s: не можу створити %s"
-
-#: src/dpasswd.c:155
-#, c-format
-msgid "%s: can't open %s"
-msgstr "%s: не можу в╕дкрити %s"
-
-#: src/dpasswd.c:183
-#, c-format
-msgid "%s: Shell %s not found.\n"
-msgstr "%s: Shell %s не знайдено.\n"
+msgstr "%s я■ п╫п╣п╡я√я─п╫п╦п╧ shell.\n"
 
 #: src/expiry.c:59
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Використовуйте: expiry {-f|-c}\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
 msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s: ЗАСТЕРЕЖЕННЯ! Програма повина бути SUID root!\n"
+msgstr "%s: п≈п░п║п╒п∙п═п∙п√п∙п²п²п╞! п÷я─п╬пЁя─п╟п╪п╟ п©п╬п╡п╦п╫п╟ п╠я┐я┌п╦ SUID root!\n"
 
 #: src/expiry.c:124
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s: нев╕домий користувач\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤\n"
 
 #: src/faillog.c:77
-#, c-format
-msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
 msgstr ""
-"використовуйте: %s [-a|-u користувач] [-m макс] [-r] [-t дн╕в] [-l лок_сек]\n"
+"п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-a|-u п╨п╬я─п╦я│я┌я┐п╡п╟я┤] [-m п╪п╟п╨я│] [-r] [-t п╢п╫я√п╡] [-l п╩п╬п╨_я│п╣п╨]\n"
 
 #: src/faillog.c:131 src/lastlog.c:96
 #, c-format
 msgid "Unknown User: %s\n"
-msgstr "Нев╕домий користувач: %s\n"
+msgstr "п²п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤: %s\n"
 
 #: src/faillog.c:212
 #, fuzzy
 msgid "Username   Failures  Maximum  Latest\n"
-msgstr "Користувач Помилок   Макс╕мум Остання\n"
+msgstr "п п╬я─п╦я│я┌я┐п╡п╟я┤ п÷п╬п╪п╦п╩п╬п╨   п°п╟п╨я│я√п╪я┐п╪ п·я│я┌п╟п╫п╫я▐\n"
 
 #: src/faillog.c:229
 #, c-format
 msgid "  %s on %s"
-msgstr "  %s на %s"
+msgstr "  %s п╫п╟ %s"
 
 #: src/faillog.c:233
 #, c-format
 msgid " [%lds left]"
-msgstr " [%lds залишилось]"
+msgstr " [%lds п╥п╟п╩п╦я┬п╦п╩п╬я│я▄]"
 
 #: src/faillog.c:237
 #, c-format
 msgid " [%lds lock]"
-msgstr " [%lds блоковано]"
+msgstr " [%lds п╠п╩п╬п╨п╬п╡п╟п╫п╬]"
 
 #: src/gpasswd.c:78
-#, c-format
-msgid "usage: %s [-r|-R] group\n"
-msgstr "використовуйте: %s [-r|-R] група\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-r|-R] пЁя─я┐п©п╟\n"
 
 #: src/gpasswd.c:79
 #, c-format
 msgid "       %s [-a user] group\n"
-msgstr "       %s [-a користувач] група\n"
+msgstr "       %s [-a п╨п╬я─п╦я│я┌я┐п╡п╟я┤] пЁя─я┐п©п╟\n"
 
 #: src/gpasswd.c:80
 #, c-format
 msgid "       %s [-d user] group\n"
-msgstr "       %s [-d користувач] група\n"
+msgstr "       %s [-d п╨п╬я─п╦я│я┌я┐п╡п╟я┤] пЁя─я┐п©п╟\n"
 
 #: src/gpasswd.c:83
 #, c-format
 msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A користувач,...] [-M користувач,...] група\n"
+msgstr "       %s [-A п╨п╬я─п╦я│я┌я┐п╡п╟я┤,...] [-M п╨п╬я─п╦я│я┌я┐п╡п╟я┤,...] пЁя─я┐п©п╟\n"
 
 #: src/gpasswd.c:85
 #, c-format
 msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M користувач,...] група\n"
+msgstr "       %s [-M п╨п╬я─п╦я│я┌я┐п╡п╟я┤,...] пЁя─я┐п©п╟\n"
 
 #: src/gpasswd.c:146 src/gpasswd.c:230
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: нев╕домий користувач %s\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s\n"
 
 #: src/gpasswd.c:157
 msgid "Permission denied.\n"
-msgstr "Доступ заборонено.\n"
+msgstr "п■п╬я│я┌я┐п© п╥п╟п╠п╬я─п╬п╫п╣п╫п╬.\n"
 
 #: src/gpasswd.c:243
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: прихован╕ парол╕ груп потр╕бн╕ для -A\n"
+msgstr "%s: п©я─п╦я┘п╬п╡п╟п╫я√ п©п╟я─п╬п╩я√ пЁя─я┐п© п©п╬я┌я─я√п╠п╫я√ п╢п╩я▐ -A\n"
 
 #: src/gpasswd.c:294
 msgid "Who are you?\n"
-msgstr "Ви хто?\n"
+msgstr "п▓п╦ я┘я┌п╬?\n"
 
-#: src/gpasswd.c:313 src/newgrp.c:297
+#: src/gpasswd.c:313 src/newgrp.c:292
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "нев╕дома група: %s\n"
+msgstr "п╫п╣п╡я√п╢п╬п╪п╟ пЁя─я┐п©п╟: %s\n"
 
 #: src/gpasswd.c:422
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "Додано нового користувача %s до групи %s\n"
+msgstr "п■п╬п╢п╟п╫п╬ п╫п╬п╡п╬пЁп╬ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s п╢п╬ пЁя─я┐п©п╦ %s\n"
 
 #: src/gpasswd.c:440
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "Видалено користувача %s з групи %s\n"
+msgstr "п▓п╦п╢п╟п╩п╣п╫п╬ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s п╥ пЁя─я┐п©п╦ %s\n"
 
 #: src/gpasswd.c:454
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: нев╕домий член %s\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╦п╧ я┤п╩п╣п╫ %s\n"
 
 #: src/gpasswd.c:501
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: Не ╓ tty\n"
+msgstr "%s: п²п╣ я■ tty\n"
 
-#.
-#. * A new password is to be entered and it must be encrypted, etc.
-#. * The password will be prompted for twice, and both entries must be
-#. * identical. There is no need to validate the old password since
-#. * the invoker is either the group owner, or root.
-#.
 #: src/gpasswd.c:522
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "Зм╕на пароля для групи %s\n"
+msgstr "п≈п╪я√п╫п╟ п©п╟я─п╬п╩я▐ п╢п╩я▐ пЁя─я┐п©п╦ %s\n"
 
 #: src/gpasswd.c:525
 msgid "New Password: "
-msgstr "Новий пароль: "
+msgstr "п²п╬п╡п╦п╧ п©п╟я─п╬п╩я▄: "
 
-#: src/gpasswd.c:530 src/passwd.c:365
+#: src/gpasswd.c:530 src/passwd.c:281
 msgid "Re-enter new password: "
-msgstr "Повтор╕ть новий пароль: "
+msgstr "п÷п╬п╡я┌п╬я─я√я┌я▄ п╫п╬п╡п╦п╧ п©п╟я─п╬п╩я▄: "
 
 #: src/gpasswd.c:542
 msgid "They don't match; try again"
-msgstr "не сп╕впада╓; спробуйте знову"
+msgstr "п╫п╣ я│п©я√п╡п©п╟п╢п╟я■; я│п©я─п╬п╠я┐п╧я┌п╣ п╥п╫п╬п╡я┐"
 
 #: src/gpasswd.c:546
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: Спробуйте знову п╕зн╕ше\n"
+msgstr "%s: п║п©я─п╬п╠я┐п╧я┌п╣ п╥п╫п╬п╡я┐ п©я√п╥п╫я√я┬п╣\n"
 
 #: src/gpasswd.c:578
 #, c-format
 msgid "%s: can't get lock\n"
-msgstr "%s: не можу заблокувати\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦\n"
 
 #: src/gpasswd.c:584
 #, c-format
 msgid "%s: can't get shadow lock\n"
-msgstr "%s: не можу заблокувати базу прихований паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ п╠п╟п╥я┐ п©я─п╦я┘п╬п╡п╟п╫п╦п╧ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/gpasswd.c:590
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s: не можу в╕дкрити файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩\n"
 
 #: src/gpasswd.c:602
 #, c-format
 msgid "%s: can't update entry\n"
-msgstr "%s: не можу оновити запис\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│\n"
 
 #: src/gpasswd.c:608
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s: не можу оновити запис у баз╕ прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ я┐ п╠п╟п╥я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/gpasswd.c:615
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: не можу переписати файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩\n"
 
 #: src/gpasswd.c:621
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: не можу переписати файл прихований паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦п╧ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/gpasswd.c:630
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s: не можу разблокувати файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я─п╟п╥п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩\n"
 
 #: src/gpasswd.c:635
 #, c-format
 msgid "%s: can't update DBM files\n"
-msgstr "%s: не можу оновити DBM файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ DBM я└п╟п╧п╩\n"
 
 #: src/gpasswd.c:642
 #, c-format
 msgid "%s: can't update DBM shadow files\n"
-msgstr "%s: не можу оновити DBM файл з прихованими паролями\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ DBM я└п╟п╧п╩ п╥ п©я─п╦я┘п╬п╡п╟п╫п╦п╪п╦ п©п╟я─п╬п╩я▐п╪п╦\n"
 
-#: src/groupadd.c:101
-msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "використовуйте: groupadd [-g gid [-o]] група\n"
+#: src/groupadd.c:102
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: groupadd [-g gid [-o]] [-f] пЁя─я┐п©п╟\n"
 
-#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
-#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: помилка додання нового запису у файл груп\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╫п╬п╡п╬пЁп╬ п╥п╟п©п╦я│я┐ я┐ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
-#: src/usermod.c:564 src/usermod.c:708
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
-msgstr "%s: помилка додання нового запису у файл груп dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╫п╬п╡п╬пЁп╬ п╥п╟п©п╦я│я┐ я┐ я└п╟п╧п╩ пЁя─я┐п© dbm\n"
 
-#: src/groupadd.c:255 src/useradd.c:1034
+#: src/groupadd.c:256 src/useradd.c:977
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s: ╕м'я %s не ╓ ун╕кальним\n"
+msgstr "%s: я√п╪'я▐ %s п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
-#: src/groupadd.c:270
+#: src/groupadd.c:271
 #, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid %u не ╓ ун╕кальним\n"
+msgstr "%s: uid %u п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
-#: src/groupadd.c:294
+#: src/groupadd.c:295
 #, c-format
 msgid "%s: can't get unique gid\n"
-msgstr "%s: не можу отримати ун╕кальний gid\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬я┌я─п╦п╪п╟я┌п╦ я┐п╫я√п╨п╟п╩я▄п╫п╦п╧ gid\n"
 
-#.
-#. * All invalid group names land here.
-#.
-#: src/groupadd.c:317 src/groupmod.c:341
+#: src/groupadd.c:318 src/groupmod.c:342
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
-msgstr "%s: %s: то не ╓ в╕рне ╕м'я групи\n"
+msgstr "%s: %s: я┌п╬ п╫п╣ я■ п╡я√я─п╫п╣ я√п╪'я▐ пЁя─я┐п©п╦\n"
 
-#: src/groupadd.c:346 src/groupmod.c:366
+#: src/groupadd.c:347 src/groupmod.c:367
 #, c-format
 msgid "%s: invalid group %s\n"
-msgstr "%s: нев╕рна група %s\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╟ пЁя─я┐п©п╟ %s\n"
 
-#: src/groupadd.c:363 src/useradd.c:1313
+#: src/groupadd.c:364 src/useradd.c:1173
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s: -O вимага╓ ЗМ╤ННА=ЗНАЧЕННЯ\n"
+msgstr "%s: -O п╡п╦п╪п╟пЁп╟я■ п≈п°п├п²п²п░=п≈п²п░п╖п∙п²п²п╞\n"
 
-#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
-#: src/userdel.c:312 src/usermod.c:576
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: не можу переписати файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
-#: src/userdel.c:319 src/usermod.c:722
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: не можу переписати файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: не можу заблокувати файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: не можу блокувати файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: не можу в╕дкрити файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/groupadd.c:562
+#: src/groupadd.c:563
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: група %s ╕сну╓\n"
+msgstr "%s: пЁя─я┐п©п╟ %s я√я│п╫я┐я■\n"
 
-#: src/groupdel.c:92
-msgid "usage: groupdel group\n"
-msgstr "використовуйте: groupdel група\n"
+#: src/groupdel.c:88
+#, fuzzy
+msgid "Usage: groupdel group\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: groupdel пЁя─я┐п©п╟\n"
 
-#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
 #, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s: помилка в╕далення запису з бази груп\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡я√п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ пЁя─я┐п©\n"
 
-#: src/groupdel.c:122 src/groupmod.c:204
+#: src/groupdel.c:119 src/groupmod.c:205
 #, c-format
 msgid "%s: error removing group dbm entry\n"
-msgstr "%s: помилка в╕далення запису з бази груп dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡я√п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ пЁя─я┐п© dbm\n"
 
-#: src/groupdel.c:137
+#: src/groupdel.c:135
 #, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s: помилка в╕далення запису з бази прихованих груп\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡я√п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/groupdel.c:150 src/groupmod.c:254
+#: src/groupdel.c:149 src/groupmod.c:255
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
-msgstr "%s: помилка в╕далення запису з бази прихованих груп dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡я√п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п© dbm\n"
 
-#.
-#. * Can't remove the group.
-#.
-#: src/groupdel.c:254
+#: src/groupdel.c:255
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: не можу видалити головну групу користувача.\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡п╦п╢п╟п╩п╦я┌п╦ пЁп╬п╩п╬п╡п╫я┐ пЁя─я┐п©я┐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟.\n"
 
-#: src/groupdel.c:355 src/groupmod.c:550
+#: src/groupdel.c:359 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: група %s не ╕сну╓\n"
+msgstr "%s: пЁя─я┐п©п╟ %s п╫п╣ я√я│п╫я┐я■\n"
 
-#: src/groupdel.c:369 src/groupmod.c:566
+#: src/groupdel.c:373 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s: група %s ╓ групою NIS\n"
+msgstr "%s: пЁя─я┐п©п╟ %s я■ пЁя─я┐п©п╬я▌ NIS\n"
 
-#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#: src/groupdel.c:378 src/groupmod.c:572 src/userdel.c:724 src/usermod.c:805
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s ╓ сервер NIS\n"
+msgstr "%s: %s я■ я│п╣я─п╡п╣я─ NIS\n"
 
 #: src/groupmems.c:95
 msgid "Member already exists\n"
@@ -1009,7 +907,7 @@ msgid "Member to remove could not be found\n"
 msgstr ""
 
 #: src/groupmems.c:158
-msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
 #: src/groupmems.c:201
@@ -1027,59 +925,60 @@ msgstr ""
 #: src/groupmems.c:215
 #, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "не можу заблокувати файл груп\n"
+msgstr "п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
 #: src/groupmems.c:220
 #, fuzzy
 msgid "Unable to open group file\n"
-msgstr "не можу в╕дкрити файл груп\n"
+msgstr "п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
 #: src/groupmems.c:240
 msgid "Cannot close group file\n"
-msgstr "не можу в╕дкрити файл груп\n"
+msgstr "п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/groupmod.c:103
-msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "використовуйте: groupmod [-g gid [-o]] [-n ╕м'я] група\n"
+#: src/groupmod.c:104
+#, fuzzy
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: groupmod [-g gid [-o]] [-n я√п╪'я▐] пЁя─я┐п©п╟\n"
 
-#: src/groupmod.c:161
+#: src/groupmod.c:162
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: %s не знайдено у /etc/passwd\n"
+msgstr "%s: %s п╫п╣ п╥п╫п╟п╧п╢п╣п╫п╬ я┐ /etc/passwd\n"
 
-#: src/groupmod.c:247
+#: src/groupmod.c:248
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
-msgstr "%s: не можу додати запис у базу прихованих груп dbm\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╢п╬п╢п╟я┌п╦ п╥п╟п©п╦я│ я┐ п╠п╟п╥я┐ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п© dbm\n"
 
-#: src/groupmod.c:300
+#: src/groupmod.c:301
 #, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %u не ╓ ун╕кальний gid\n"
+msgstr "%s: %u п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╧ gid\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:331
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s не ╓ ун╕кальне ╕м'я\n"
+msgstr "%s: %s п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╣ я√п╪'я▐\n"
 
 #: src/groups.c:59
 #, c-format
 msgid "unknown user %s\n"
-msgstr "нев╕домий користувач %s\n"
+msgstr "п╫п╣п╡я√п╢п╬п╪п╦п╧ п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s\n"
 
 #: src/grpck.c:87
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Використовуйте: %s [-r] [-s] [група [gshadow]]\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-r] [-s] [пЁя─я┐п©п╟ [gshadow]]\n"
 
 #: src/grpck.c:90
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Використовуйте: %s [-r] [-s] [група]\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-r] [-s] [пЁя─я┐п©п╟]\n"
 
 #: src/grpck.c:108 src/pwck.c:108
 msgid "No"
-msgstr "Н╕"
+msgstr "п²я√"
 
 #: src/grpck.c:192 src/pwck.c:175
 #, c-format
@@ -1089,254 +988,227 @@ msgstr ""
 #: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s: не можу заблокувати файл %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ %s\n"
 
 #: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:202 src/pwck.c:242
 #: src/pwck.c:251
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: не можу в╕дкрити файл %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ %s\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:311
 msgid "invalid group file entry\n"
-msgstr "нев╕рний запис у файл╕ груп\n"
+msgstr "п╫п╣п╡я√я─п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ пЁя─я┐п©\n"
 
 #: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
 #: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
 #: src/pwck.c:543
 #, c-format
 msgid "delete line `%s'? "
-msgstr "видалити запис `%s'? "
+msgstr "п╡п╦п╢п╟п╩п╦я┌п╦ п╥п╟п©п╦я│ `%s'? "
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:374
 msgid "duplicate group entry\n"
-msgstr "повторюючися записи у баз╕ груп\n"
+msgstr "п©п╬п╡я┌п╬я─я▌я▌я┤п╦я│я▐ п╥п╟п©п╦я│п╦ я┐ п╠п╟п╥я√ пЁя─я┐п©\n"
 
 #: src/grpck.c:391
 #, c-format
 msgid "invalid group name `%s'\n"
-msgstr "нев╕рне ╕м'я групи `%s'\n"
+msgstr "п╫п╣п╡я√я─п╫п╣ я√п╪'я▐ пЁя─я┐п©п╦ `%s'\n"
 
 #: src/grpck.c:418
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "група %s: не ма╓ користувач╕в %s\n"
+msgstr "пЁя─я┐п©п╟ %s: п╫п╣ п╪п╟я■ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡ %s\n"
 
 #: src/grpck.c:420 src/grpck.c:590
 #, c-format
 msgid "delete member `%s'? "
-msgstr "видалити члена `%s'? "
+msgstr "п╡п╦п╢п╟п╩п╦я┌п╦ я┤п╩п╣п╫п╟ `%s'? "
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:457
 msgid "invalid shadow group file entry\n"
-msgstr "нев╕рний запис у файл╕ прихованих груп\n"
+msgstr "п╫п╣п╡я√я─п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:520
 msgid "duplicate shadow group entry\n"
-msgstr "повторюючийся запис у файл╕ прихованих груп\n"
+msgstr "п©п╬п╡я┌п╬я─я▌я▌я┤п╦п╧я│я▐ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
 #: src/grpck.c:537
 msgid "no matching group file entry\n"
-msgstr "в╕дсутн╕й в╕дпов╕дний запис у файл╕ груп\n"
+msgstr "п╡я√п╢я│я┐я┌п╫я√п╧ п╡я√п╢п©п╬п╡я√п╢п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ пЁя─я┐п©\n"
 
 #: src/grpck.c:558
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "прихована група %s: не ма╓ адм╕н╕стратора %s\n"
+msgstr "п©я─п╦я┘п╬п╡п╟п╫п╟ пЁя─я┐п©п╟ %s: п╫п╣ п╪п╟я■ п╟п╢п╪я√п╫я√я│я┌я─п╟я┌п╬я─п╟ %s\n"
 
 #: src/grpck.c:560
 #, c-format
 msgid "delete administrative member `%s'? "
-msgstr "видалити адм╕н╕стратора `%s'? "
+msgstr "п╡п╦п╢п╟п╩п╦я┌п╦ п╟п╢п╪я√п╫я√я│я┌я─п╟я┌п╬я─п╟ `%s'? "
 
 #: src/grpck.c:588
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "прихована група %s: не ма╓ користувач╕в %s\n"
+msgstr "п©я─п╦я┘п╬п╡п╟п╫п╟ пЁя─я┐п©п╟ %s: п╫п╣ п╪п╟я■ п╨п╬я─п╦я│я┌я┐п╡п╟я┤я√п╡ %s\n"
 
 #: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
 #, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s: не можу оновити файл %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ %s\n"
 
 #: src/grpck.c:647 src/pwck.c:612
 #, c-format
 msgid "%s: the files have been updated; run mkpasswd\n"
-msgstr "%s: файли було оновлено; виконайте mkpasswd\n"
+msgstr "%s: я└п╟п╧п╩п╦ п╠я┐п╩п╬ п╬п╫п╬п╡п╩п╣п╫п╬; п╡п╦п╨п╬п╫п╟п╧я┌п╣ mkpasswd\n"
 
 #: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: без зм╕н\n"
+msgstr "%s: п╠п╣п╥ п╥п╪я√п╫\n"
 
 #: src/grpck.c:651 src/pwck.c:616
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: файли було оновлено\n"
+msgstr "%s: я└п╟п╧п╩п╦ п╠я┐п╩п╬ п╬п╫п╬п╡п╩п╣п╫п╬\n"
 
 #: src/grpconv.c:60 src/grpunconv.c:56
 #, c-format
 msgid "%s: can't lock group file\n"
-msgstr "%s: не можу блокувати файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
 #: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
 #: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: не можу блокувати файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
 #: src/grpconv.c:76 src/grpunconv.c:72
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: не можу в╕дкрити файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
 #: src/grpconv.c:94
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: не можу видалити приховану групу %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡п╦п╢п╟п╩п╦я┌п╦ п©я─п╦я┘п╬п╡п╟п╫я┐ пЁя─я┐п©я┐ %s\n"
 
-#: src/grpconv.c:138 src/pwconv.c:153
+#: src/grpconv.c:133 src/pwconv.c:154
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: не можу оновити прихований запис для %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п©я─п╦я┘п╬п╡п╟п╫п╦п╧ п╥п╟п©п╦я│ п╢п╩я▐ %s\n"
 
-#: src/grpconv.c:148 src/grpunconv.c:91
+#: src/grpconv.c:143 src/grpunconv.c:91
 #, c-format
 msgid "%s: can't update entry for group %s\n"
-msgstr "%s: не можу оновити запис для групи %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ п╢п╩я▐ пЁя─я┐п©п╦ %s\n"
 
-#: src/grpconv.c:155 src/grpunconv.c:99
+#: src/grpconv.c:150 src/grpunconv.c:99
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: не можу оновити файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/grpconv.c:160 src/grpunconv.c:105
+#: src/grpconv.c:155 src/grpunconv.c:105
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: не можу оновити файл груп\n"
-
-#: src/grpconv.c:175 src/grpunconv.c:127
-#, c-format
-msgid "%s: not configured for shadow group support.\n"
-msgstr "%s: не зконф╕гуровано для п╕дтримки прихованих груп.\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
 #: src/grpunconv.c:110
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: не можу видалити файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡п╦п╢п╟п╩п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
 #: src/id.c:53
-msgid "usage: id [-a]\n"
-msgstr "використовуйте: id [-a]\n"
+#, fuzzy
+msgid "Usage: id [-a]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: id [-a]\n"
 
 #: src/id.c:55
-msgid "usage: id\n"
-msgstr "використовуйте: id\n"
+#, fuzzy
+msgid "Usage: id\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: id\n"
 
-#.
-#. * Start off the group message. It will be of the format
-#. *
-#. *      groups=###(aaa),###(aaa),###(aaa)
-#. *
-#. * where "###" is a numerical value and "aaa" is the
-#. * corresponding name for each respective numerical value.
-#.
 #: src/id.c:169
 msgid " groups="
-msgstr " групи="
+msgstr " пЁя─я┐п©п╦="
 
 #: src/lastlog.c:110 src/lastlog.c:116
 #, c-format
-msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
 msgstr ""
 
 #: src/lastlog.c:181
 msgid "Username         Port     From             Latest\n"
-msgstr "Користувач       Консоль  Зв╕дки           Останн╕й вх╕д\n"
+msgstr "п п╬я─п╦я│я┌я┐п╡п╟я┤       п п╬п╫я│п╬п╩я▄  п≈п╡я√п╢п╨п╦           п·я│я┌п╟п╫п╫я√п╧ п╡я┘я√п╢\n"
 
 #: src/lastlog.c:183
 msgid "Username                Port     Latest\n"
-msgstr "Користувач             Порт     Останн╕й вх╕д\n"
+msgstr "п п╬я─п╦я│я┌я┐п╡п╟я┤             п÷п╬я─я┌     п·я│я┌п╟п╫п╫я√п╧ п╡я┘я√п╢\n"
 
-#: src/lastlog.c:197
+#: src/lastlog.c:198
 msgid "**Never logged in**"
-msgstr "**Н╕коли не входив**"
+msgstr "**п²я√п╨п╬п╩п╦ п╫п╣ п╡я┘п╬п╢п╦п╡**"
 
-#: src/login.c:185
-#, c-format
-msgid "usage: %s [-p] [name]\n"
-msgstr "використовуйте: %s [-p] [╕м'я]\n"
+#: src/login.c:175
+#, fuzzy, c-format
+msgid "Usage: %s [-p] [name]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-p] [я√п╪'я▐]\n"
 
-#: src/login.c:188
+#: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "       %s [-p] [-h хост] [-f ╕м'я]\n"
+msgstr "       %s [-p] [-h я┘п╬я│я┌] [-f я√п╪'я▐]\n"
 
-#: src/login.c:190
+#: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r хост\n"
+msgstr "       %s [-p] -r я┘п╬я│я┌\n"
 
-#: src/login.c:274
+#: src/login.c:259
 msgid "Invalid login time\n"
-msgstr "Нев╕рний час для входу\n"
+msgstr "п²п╣п╡я√я─п╫п╦п╧ я┤п╟я│ п╢п╩я▐ п╡я┘п╬п╢я┐\n"
 
-#: src/login.c:329
+#: src/login.c:314
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
 msgstr ""
 "\n"
-"Систему закрито для проф╕лактики.\n"
+"п║п╦я│я┌п╣п╪я┐ п╥п╟п╨я─п╦я┌п╬ п╢п╩я▐ п©я─п╬я└я√п╩п╟п╨я┌п╦п╨п╦.\n"
 
-#: src/login.c:340
+#: src/login.c:325
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
 msgstr ""
 "\n"
-"[Пройшло в╕дключення -- дозволено лише вх╕д root-a.]\n"
+"[п÷я─п╬п╧я┬п╩п╬ п╡я√п╢п╨п╩я▌я┤п╣п╫п╫я▐ -- п╢п╬п╥п╡п╬п╩п╣п╫п╬ п╩п╦я┬п╣ п╡я┘я√п╢ root-a.]\n"
 
-#: src/login.c:377
+#: src/login.c:362
 #, c-format
 msgid ""
 "\n"
 "Login timed out after %d seconds.\n"
 msgstr ""
 "\n"
-"Час лог╕ну вичерпано за %d секунд.\n"
+"п╖п╟я│ п╩п╬пЁя√п╫я┐ п╡п╦я┤п╣я─п©п╟п╫п╬ п╥п╟ %d я│п╣п╨я┐п╫п╢.\n"
 
-#: src/login.c:689
+#: src/login.c:648
 #, c-format
 msgid " on `%.100s' from `%.200s'"
-msgstr " на `%s.100s' з `%.200s'"
+msgstr " п╫п╟ `%s.100s' п╥ `%.200s'"
 
-#: src/login.c:693
+#: src/login.c:652
 #, c-format
 msgid " on `%.100s'"
-msgstr " на `%.100s'"
+msgstr " п╫п╟ `%.100s'"
 
-#: src/login.c:852
+#: src/login.c:811
 #, c-format
 msgid ""
 "\n"
@@ -1345,69 +1217,69 @@ msgstr ""
 "\n"
 "%s login: "
 
-#: src/login.c:855
+#: src/login.c:814
 msgid "login: "
 msgstr "login: "
 
-#: src/login.c:1071 src/sulogin.c:233
+#: src/login.c:1013 src/sulogin.c:205
 msgid "Login incorrect"
-msgstr "Нев╕рний лог╕н"
+msgstr "п²п╣п╡я√я─п╫п╦п╧ п╩п╬пЁя√п╫"
 
-#: src/login.c:1265
+#: src/login.c:1193
 msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Застереження: login поновлено п╕сля тимчасового блокування.\n"
+msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: login п©п╬п╫п╬п╡п╩п╣п╫п╬ п©я√я│п╩я▐ я┌п╦п╪я┤п╟я│п╬п╡п╬пЁп╬ п╠п╩п╬п╨я┐п╡п╟п╫п╫я▐.\n"
 
-#: src/login.c:1278
+#: src/login.c:1207
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "Останн╕й вх╕д в систему: %s на %s"
+msgstr "п·я│я┌п╟п╫п╫я√п╧ п╡я┘я√п╢ п╡ я│п╦я│я┌п╣п╪я┐: %s п╫п╟ %s"
 
-#: src/login.c:1281
+#: src/login.c:1210
 #, c-format
 msgid "Last login: %.19s on %s"
-msgstr "Останн╕й вх╕д в систему: %s на %s"
+msgstr "п·я│я┌п╟п╫п╫я√п╧ п╡я┘я√п╢ п╡ я│п╦я│я┌п╣п╪я┐: %s п╫п╟ %s"
 
-#: src/login.c:1287
+#: src/login.c:1216
 #, c-format
 msgid " from %.*s"
-msgstr " з %.*s"
+msgstr " п╥ %.*s"
 
-#: src/login.c:1364
+#: src/login.c:1293
 msgid "Starting rad_login\n"
-msgstr "Старту╓мо rad_login\n"
+msgstr "п║я┌п╟я─я┌я┐я■п╪п╬ rad_login\n"
 
 #: src/mkpasswd.c:47
 #, c-format
 msgid "%s: no DBM database on system - no action performed\n"
-msgstr "%s: не ма╓ DBM бази данних у систем╕ - н╕яких д╕й не виконано\n"
+msgstr "%s: п╫п╣ п╪п╟я■ DBM п╠п╟п╥п╦ п╢п╟п╫п╫п╦я┘ я┐ я│п╦я│я┌п╣п╪я√ - п╫я√я▐п╨п╦я┘ п╢я√п╧ п╫п╣ п╡п╦п╨п╬п╫п╟п╫п╬\n"
 
 #: src/mkpasswd.c:232 src/mkpasswd.c:237
 #, c-format
 msgid "%s: cannot overwrite file %s\n"
-msgstr "%s: не можу перезаписати файл %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п╥п╟п©п╦я│п╟я┌п╦ я└п╟п╧п╩ %s\n"
 
 #: src/mkpasswd.c:252
 #, c-format
 msgid "%s: cannot open DBM files for %s\n"
-msgstr "%s: не можу в╕дкрити файли DBM для %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩п╦ DBM п╢п╩я▐ %s\n"
 
 #: src/mkpasswd.c:287
 #, c-format
 msgid "%s: the beginning with "
-msgstr "%s: розпочина╓мо з "
+msgstr "%s: я─п╬п╥п©п╬я┤п╦п╫п╟я■п╪п╬ п╥ "
 
 #: src/mkpasswd.c:288
 msgid " is too long\n"
-msgstr " поля занадто довг╕\n"
+msgstr " п©п╬п╩я▐ п╥п╟п╫п╟п╢я┌п╬ п╢п╬п╡пЁя√\n"
 
 #: src/mkpasswd.c:315
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
-msgstr "%s: помилка обробки рядку \"%s\"\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╠я─п╬п╠п╨п╦ я─я▐п╢п╨я┐ \"%s\"\n"
 
 #: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
 msgid "adding record for name "
-msgstr "додано запис для ╕мен╕ "
+msgstr "п╢п╬п╢п╟п╫п╬ п╥п╟п©п╦я│ п╢п╩я▐ я√п╪п╣п╫я√ "
 
 #: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
 #: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
@@ -1417,406 +1289,346 @@ msgstr ""
 #: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
 #, c-format
 msgid "%s: error adding record for "
-msgstr "%s: помилка додання запису "
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╥п╟п©п╦я│я┐ "
 
 #: src/mkpasswd.c:378
 #, c-format
 msgid "added %d entries, longest was %d\n"
-msgstr "додано %d запис╕в, довжиною %d\n"
+msgstr "п╢п╬п╢п╟п╫п╬ %d п╥п╟п©п╦я│я√п╡, п╢п╬п╡п╤п╦п╫п╬я▌ %d\n"
 
 #: src/mkpasswd.c:392
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
-msgstr "Використовуйте: %s [-vf] [-p|g|sp|sg] файл\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-vf] [-p|g|sp|sg] я└п╟п╧п╩\n"
 
 #: src/mkpasswd.c:395
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
-msgstr "Використовуйте: %s [-vf] [-p|g|sp] файл\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-vf] [-p|g|sp] я└п╟п╧п╩\n"
 
 #: src/mkpasswd.c:398
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
-msgstr "Використовуйте: %s [-vf] [-p|g] файл\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-vf] [-p|g] я└п╟п╧п╩\n"
 
 #: src/newgrp.c:61
-msgid "usage: newgrp [-] [group]\n"
-msgstr "використовуйте: newgrp [-] [група]\n"
+#, fuzzy
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: newgrp [-] [пЁя─я┐п©п╟]\n"
 
 #: src/newgrp.c:63
-msgid "usage: sg group [[-c] command]\n"
-msgstr "використовуйте: sg група [[-c] команда]\n"
+#, fuzzy
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: sg пЁя─я┐п©п╟ [[-c] п╨п╬п╪п╟п╫п╢п╟]\n"
 
-#: src/newgrp.c:136
+#: src/newgrp.c:131
 #, c-format
 msgid "unknown uid: %u\n"
-msgstr "нев╕домий uid: %u\n"
+msgstr "п╫п╣п╡я√п╢п╬п╪п╦п╧ uid: %u\n"
 
-#: src/newgrp.c:219
+#: src/newgrp.c:214
 #, c-format
 msgid "unknown gid: %lu\n"
-msgstr "нев╕домий gid: %lu\n"
+msgstr "п╫п╣п╡я√п╢п╬п╪п╦п╧ gid: %lu\n"
 
-#: src/newgrp.c:365 src/newgrp.c:374
+#: src/newgrp.c:360 src/newgrp.c:369
 msgid "Sorry.\n"
-msgstr "Вибачте.\n"
+msgstr "п▓п╦п╠п╟я┤я┌п╣.\n"
 
-#: src/newgrp.c:472
+#: src/newgrp.c:469
 msgid "too many groups\n"
-msgstr "занадто багато груп\n"
+msgstr "п╥п╟п╫п╟п╢я┌п╬ п╠п╟пЁп╟я┌п╬ пЁя─я┐п©\n"
 
 #: src/newusers.c:78
 #, c-format
 msgid "Usage: %s [input]\n"
-msgstr "Використовуйте: %s [input]\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [input]\n"
 
-#: src/newusers.c:407
+#: src/newusers.c:388
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: не можу блокувати /etc/passwd.\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ /etc/passwd.\n"
 
-#: src/newusers.c:419
+#: src/newusers.c:400
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: не можу блокувати файли, спробуйте п╕зн╕ше\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩п╦, я│п©я─п╬п╠я┐п╧я┌п╣ п©я√п╥п╫я√я┬п╣\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:416
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: не можу в╕дкрити файл\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣п╡я√я─п╫п╦п╧ я─я▐п╢п╬п╨\n"
 
 #: src/newusers.c:480
 #, c-format
-msgid "%s: line %d: invalid line\n"
-msgstr "%s: рядок %d: нев╕рний рядок\n"
-
-#: src/newusers.c:499
-#, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s: рядок %d: не можу створити GID\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ GID\n"
 
-#: src/newusers.c:515
+#: src/newusers.c:496
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s: рядок %d: не можу створити UID\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ UID\n"
 
-#: src/newusers.c:528
+#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: рядок %d: не можу знайти користувача %s\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ п╥п╫п╟п╧я┌п╦ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s\n"
 
-#: src/newusers.c:537
+#: src/newusers.c:518
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: рядок %d: не можу оновити пароль\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п©п╟я─п╬п╩я▄\n"
 
-#: src/newusers.c:555
+#: src/newusers.c:536
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: рядок %d: mkdir не виконався\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: mkdir п╫п╣ п╡п╦п╨п╬п╫п╟п╡я│я▐\n"
 
-#: src/newusers.c:561
+#: src/newusers.c:542
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: рядок %d: chown не виконався\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: chown п╫п╣ п╡п╦п╨п╬п╫п╟п╡я│я▐\n"
 
-#: src/newusers.c:571
+#: src/newusers.c:552
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: рядок %d: не можу оновити запис\n"
+msgstr "%s: я─я▐п╢п╬п╨ %d: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│\n"
 
-#: src/newusers.c:603
+#: src/newusers.c:584
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: помилка оновлення файлу\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ я└п╟п╧п╩я┐\n"
 
-#: src/passwd.c:174
-#, c-format
-msgid "usage: %s [-f|-s] [name]\n"
-msgstr "використовуйте: %s [-f|-s] [╕м'я]\n"
+#: src/passwd.c:155
+#, fuzzy, c-format
+msgid "Usage: %s [-f|-s] [name]\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-f|-s] [я√п╪'я▐]\n"
 
-#: src/passwd.c:178
+#: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "       %s [-x макс] [-n мин] [-w застереження] [-i неактивний] ╕м'я\n"
+msgstr "       %s [-x п╪п╟п╨я│] [-n п╪п╦п╫] [-w п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐] [-i п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧] я√п╪'я▐\n"
 
-#: src/passwd.c:180
+#: src/passwd.c:161
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s {-l|-u|-d|-S|-e} ╕м'я\n"
+msgstr "       %s {-l|-u|-d|-S|-e} я√п╪'я▐\n"
 
-#: src/passwd.c:283
-#, c-format
-msgid "User %s has a TCFS key, his old password is required.\n"
-msgstr "Користувач %s ма╓ TCFS ключ, потр╕бен його старий пароль.\n"
-
-#: src/passwd.c:286
-msgid "You can use -t option to force the change.\n"
-msgstr "Ви ма╓те змогу використовувати ключ -t для прискорення зм╕н.\n"
-
-#: src/passwd.c:292
+#: src/passwd.c:216
 msgid "Old password: "
-msgstr "Старий пароль: "
+msgstr "п║я┌п╟я─п╦п╧ п©п╟я─п╬п╩я▄: "
 
-#: src/passwd.c:301
+#: src/passwd.c:225
 #, c-format
 msgid "Incorrect password for `%s'\n"
-msgstr "Нев╕рний пароль для `%s'\n"
+msgstr "п²п╣п╡я√я─п╫п╦п╧ п©п╟я─п╬п╩я▄ п╢п╩я▐ `%s'\n"
 
-#: src/passwd.c:314
-#, c-format
-msgid "Warning: user %s has a TCFS key.\n"
-msgstr "Застереження: користувач %s ма╓ TCFS ключ.\n"
-
-#: src/passwd.c:333
+#: src/passwd.c:249
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Введ╕ть новий пароль (в╕д %d до %d знак╕в)\n"
-"Зм╕шуйте велик╕ та мал╕ л╕тери та цифри.\n"
+"п▓п╡п╣п╢я√я┌я▄ п╫п╬п╡п╦п╧ п©п╟я─п╬п╩я▄ (п╡я√п╢ %d п╢п╬ %d п╥п╫п╟п╨я√п╡)\n"
+"п≈п╪я√я┬я┐п╧я┌п╣ п╡п╣п╩п╦п╨я√ я┌п╟ п╪п╟п╩я√ п╩я√я┌п╣я─п╦ я┌п╟ я├п╦я└я─п╦.\n"
 
-#: src/passwd.c:339
+#: src/passwd.c:255
 msgid "New password: "
-msgstr "Новий пароль: "
+msgstr "п²п╬п╡п╦п╧ п©п╟я─п╬п╩я▄: "
 
-#: src/passwd.c:350
+#: src/passwd.c:266
 msgid "Try again.\n"
-msgstr "Спробуй ще.\n"
+msgstr "п║п©я─п╬п╠я┐п╧ я┴п╣.\n"
 
-#: src/passwd.c:361
+#: src/passwd.c:277
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
 msgstr ""
 "\n"
-"Застереження: Поганий пароль (введ╕ть його знову, якщо все одно бажа╓те його "
-"використовувати).\n"
+"п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: п÷п╬пЁп╟п╫п╦п╧ п©п╟я─п╬п╩я▄ (п╡п╡п╣п╢я√я┌я▄ п╧п╬пЁп╬ п╥п╫п╬п╡я┐, я▐п╨я┴п╬ п╡я│п╣ п╬п╢п╫п╬ п╠п╟п╤п╟я■я┌п╣ п╧п╬пЁп╬ "
+"п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╡п╟я┌п╦).\n"
 
-#: src/passwd.c:371
+#: src/passwd.c:287
 msgid "They don't match; try again.\n"
-msgstr "Не сп╕впада╓; спробуйте знову.\n"
+msgstr "п²п╣ я│п©я√п╡п©п╟п╢п╟я■; я│п©я─п╬п╠я┐п╧я┌п╣ п╥п╫п╬п╡я┐.\n"
 
-#: src/passwd.c:451 src/passwd.c:469
+#: src/passwd.c:364 src/passwd.c:382
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "Пароль для %s не може бути зм╕нений.\n"
+msgstr "п÷п╟я─п╬п╩я▄ п╢п╩я▐ %s п╫п╣ п╪п╬п╤п╣ п╠я┐я┌п╦ п╥п╪я√п╫п╣п╫п╦п╧.\n"
 
-#: src/passwd.c:494
+#: src/passwd.c:396
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Вибачте, пароль для %s нге може бути зм╕нено зараз.\n"
+msgstr "п▓п╦п╠п╟я┤я┌п╣, п©п╟я─п╬п╩я▄ п╢п╩я▐ %s п╫пЁп╣ п╪п╬п╤п╣ п╠я┐я┌п╦ п╥п╪я√п╫п╣п╫п╬ п╥п╟я─п╟п╥.\n"
 
-#: src/passwd.c:614
+#: src/passwd.c:479
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: брак пам'ят╕\n"
+msgstr "%s: п╠я─п╟п╨ п©п╟п╪'я▐я┌я√\n"
 
-#: src/passwd.c:769
-msgid "Cannot lock the TCFS key database; try again later\n"
-msgstr "Не можу блокувати базу ключей TCFS; спробуйте п╕зн╕ше\n"
-
-#: src/passwd.c:777
-msgid "Cannot open the TCFS key database.\n"
-msgstr "Не можу в╕дкрити базу ключей TCFS.\n"
-
-#: src/passwd.c:785
-msgid "Error updating the TCFS key database.\n"
-msgstr "Не можу оновити базу ключей TCFS.\n"
-
-#: src/passwd.c:792
-msgid "Cannot commit TCFS changes.\n"
-msgstr "Не можу внести зм╕ни у базу ключей TCFS.\n"
-
-#: src/passwd.c:975
+#: src/passwd.c:730
 #, c-format
 msgid "%s: Cannot execute %s"
-msgstr "%s: Не можу виконати %s"
+msgstr "%s: п²п╣ п╪п╬п╤я┐ п╡п╦п╨п╬п╫п╟я┌п╦ %s"
 
-#: src/passwd.c:1077
+#: src/passwd.c:815
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: репозитор╕й %s не п╕дтриму╓ться\n"
+msgstr "%s: я─п╣п©п╬п╥п╦я┌п╬я─я√п╧ %s п╫п╣ п©я√п╢я┌я─п╦п╪я┐я■я┌я▄я│я▐\n"
 
-#: src/passwd.c:1152
+#: src/passwd.c:890
 #, c-format
 msgid "%s: Permission denied\n"
-msgstr "%s: Доступ заборонено\n"
+msgstr "%s: п■п╬я│я┌я┐п© п╥п╟п╠п╬я─п╬п╫п╣п╫п╬\n"
 
-#: src/passwd.c:1176
+#: src/passwd.c:914
 #, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "Ви не можете зм╕нити пароль для %s.\n"
+msgstr "п▓п╦ п╫п╣ п╪п╬п╤п╣я┌п╣ п╥п╪я√п╫п╦я┌п╦ п©п╟я─п╬п╩я▄ п╢п╩я▐ %s.\n"
 
-#: src/passwd.c:1242
+#: src/passwd.c:962
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "Зм╕на пароля для %s\n"
+msgstr "п≈п╪я√п╫п╟ п©п╟я─п╬п╩я▐ п╢п╩я▐ %s\n"
 
-#: src/passwd.c:1246
+#: src/passwd.c:966
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "Пароль для %s не зм╕нено.\n"
+msgstr "п÷п╟я─п╬п╩я▄ п╢п╩я▐ %s п╫п╣ п╥п╪я√п╫п╣п╫п╬.\n"
 
-#: src/passwd.c:1297
+#: src/passwd.c:1016
 msgid "Password changed.\n"
-msgstr "Пароль зм╕нено.\n"
+msgstr "п÷п╟я─п╬п╩я▄ п╥п╪я√п╫п╣п╫п╬.\n"
 
 #: src/pwck.c:87
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Використовуйте: %s [-q] [-r] [-s] [пароль [shadow]]\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-q] [-r] [-s] [п©п╟я─п╬п╩я▄ [shadow]]\n"
 
 #: src/pwck.c:90
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
-msgstr "Використовуйте: %s [-q] [-r] [-s] [пароль]\n"
+msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-q] [-r] [-s] [п©п╟я─п╬п╩я▄]\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:295
 msgid "invalid password file entry\n"
-msgstr "нев╕рний запис у файл╕ паролей\n"
+msgstr "п╫п╣п╡я√я─п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©п╟я─п╬п╩п╣п╧\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:357
 msgid "duplicate password entry\n"
-msgstr "дублюючий запис у файл╕ паролей\n"
+msgstr "п╢я┐п╠п╩я▌я▌я┤п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/pwck.c:373
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "нев╕рне ╕м'я користувача '%s'\n"
+msgstr "п╫п╣п╡я√я─п╫п╣ я√п╪'я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ '%s'\n"
 
-#.
-#. * No primary group, just give a warning
-#.
 #: src/pwck.c:388
 #, c-format
 msgid "user %s: no group %u\n"
-msgstr "користувач %s: не ма╓ групи %u\n"
+msgstr "п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s: п╫п╣ п╪п╟я■ пЁя─я┐п©п╦ %u\n"
 
 #: src/pwck.c:404
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "користувач %s: тека %s не ╕сну╓\n"
+msgstr "п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s: я┌п╣п╨п╟ %s п╫п╣ я√я│п╫я┐я■\n"
 
-#.
-#. * Login shell doesn't exist, give a warning
-#.
 #: src/pwck.c:420
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "користувач %s: програма %s не ╕сну╓\n"
+msgstr "п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s: п©я─п╬пЁя─п╟п╪п╟ %s п╫п╣ я√я│п╫я┐я■\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:456
 msgid "invalid shadow password file entry\n"
-msgstr "нев╕рний запис у файл╕ прихованих паролей\n"
+msgstr "п╫п╣п╡я√я─п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:518
 msgid "duplicate shadow password entry\n"
-msgstr "дублюючий запис у файл╕ прихованих паролей\n"
+msgstr "п╢я┐п╠п╩я▌я▌я┤п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#.
-#. * Tell the user this entry has no matching
-#. * /etc/passwd entry and ask them to delete it.
-#.
 #: src/pwck.c:542
 msgid "no matching password file entry\n"
-msgstr "в╕дсутн╕й в╕дпов╕дний запис у файл╕ паролей\n"
+msgstr "п╡я√п╢я│я┐я┌п╫я√п╧ п╡я√п╢п©п╬п╡я√п╢п╫п╦п╧ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/pwck.c:560
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "користувач %s: остання зм╕на пароля у майбутньому\n"
+msgstr "п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s: п╬я│я┌п╟п╫п╫я▐ п╥п╪я√п╫п╟ п©п╟я─п╬п╩я▐ я┐ п╪п╟п╧п╠я┐я┌п╫я▄п╬п╪я┐\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:93
+#: src/pwconv.c:85 src/pwunconv.c:79
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s: не можу блокувати файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:98
+#: src/pwconv.c:90 src/pwunconv.c:84
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: не можу в╕дкрити файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/pwconv.c:117
+#: src/pwconv.c:118
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: не можу в╕далити запис у файл╕ прихованих паролей для %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╟п╩п╦я┌п╦ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧ п╢п╩я▐ %s\n"
 
-#: src/pwconv.c:163
+#: src/pwconv.c:164
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: не можу оновити запис у файл╕ паролей для %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ я┐ я└п╟п╧п╩я√ п©п╟я─п╬п╩п╣п╧ п╢п╩я▐ %s\n"
 
-#: src/pwconv.c:170
+#: src/pwconv.c:171
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s: не можу оновити файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/pwconv.c:175
+#: src/pwconv.c:176
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s: не можу оновити файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/pwunconv.c:50
-#, c-format
-msgid "%s: Shadow passwords are not configured.\n"
-msgstr "%s: Прихован╕ парол╕ не зконф╕гуровано.\n"
-
-#: src/pwunconv.c:160
+#: src/pwunconv.c:124
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s: не можу оновити запис для користувача %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ п╢п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s\n"
 
-#: src/pwunconv.c:181
+#: src/pwunconv.c:145
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: не можу видалити файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡п╦п╢п╟п╩п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
 #: src/su.c:133
 msgid "Sorry."
-msgstr "Вибачте."
+msgstr "п▓п╦п╠п╟я┤я┌п╣."
 
 #: src/su.c:216
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: повино бути запущено з терм╕налу\n"
+msgstr "%s: п©п╬п╡п╦п╫п╬ п╠я┐я┌п╦ п╥п╟п©я┐я┴п╣п╫п╬ п╥ я┌п╣я─п╪я√п╫п╟п╩я┐\n"
 
 #: src/su.c:306
 #, c-format
 msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: помилка %d\n"
+msgstr "%s: pam_start: п©п╬п╪п╦п╩п╨п╟ %d\n"
 
 #: src/su.c:336
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "Нев╕домий id: %s\n"
+msgstr "п²п╣п╡я√п╢п╬п╪п╦п╧ id: %s\n"
 
 #: src/su.c:373 src/su.c:390
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Ви не авторизован╕ для su %s\n"
+msgstr "п▓п╦ п╫п╣ п╟п╡я┌п╬я─п╦п╥п╬п╡п╟п╫я√ п╢п╩я▐ su %s\n"
 
-#. require own password
 #: src/su.c:385
 msgid "(Enter your own password.)"
-msgstr "(Введ╕ть ваш пароль.)"
+msgstr "(п▓п╡п╣п╢я√я┌я▄ п╡п╟я┬ п©п╟я─п╬п╩я▄.)"
 
 #: src/su.c:419
 #, c-format
@@ -1825,615 +1637,669 @@ msgid ""
 "(Ignored)\n"
 msgstr ""
 "%s: %s\n"
-"(╤гнорую)\n"
+"(п├пЁп╫п╬я─я┐я▌)\n"
 
-#: src/su.c:626
+#: src/su.c:609
 msgid "No shell\n"
-msgstr "Нема╓ shell\n"
+msgstr "п²п╣п╪п╟я■ shell\n"
 
-#: src/suauth.c:100
+#: src/suauth.c:105
 msgid "Access to su to that account DENIED.\n"
-msgstr "Доступ цього користувача до su ЗАБОРОНЕНО.\n"
+msgstr "п■п╬я│я┌я┐п© я├я▄п╬пЁп╬ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ п╢п╬ su п≈п░п▒п·п═п·п²п∙п²п·.\n"
 
-#: src/suauth.c:107
+#: src/suauth.c:113
 msgid "Password authentication bypassed.\n"
-msgstr "Аутентиф╕кац╕ю пройдено.\n"
+msgstr "п░я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я▌ п©я─п╬п╧п╢п╣п╫п╬.\n"
 
-#: src/suauth.c:114
+#: src/suauth.c:122
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Будьласка введ╕ть ваш власний пароль для аутентиф╕кац╕╖.\n"
+msgstr "п▒я┐п╢я▄п╩п╟я│п╨п╟ п╡п╡п╣п╢я√я┌я▄ п╡п╟я┬ п╡п╩п╟я│п╫п╦п╧ п©п╟я─п╬п╩я▄ п╢п╩я▐ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я≈.\n"
 
-#. must be a password file!
-#: src/sulogin.c:132
+#: src/sulogin.c:118
 msgid "No password file\n"
-msgstr "Нема╓ файла паролей\n"
+msgstr "п²п╣п╪п╟я■ я└п╟п╧п╩п╟ п©п╟я─п╬п╩п╣п╧\n"
 
-#.
-#. * Fail secure
-#.
-#: src/sulogin.c:174
+#: src/sulogin.c:160
 msgid "No password entry for 'root'\n"
-msgstr "Браку╓ запису у баз╕ паролей для 'root'\n"
+msgstr "п▒я─п╟п╨я┐я■ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ п©п╟я─п╬п╩п╣п╧ п╢п╩я▐ 'root'\n"
 
-#: src/sulogin.c:190
+#: src/sulogin.c:176
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Натисн╕ть control-d для виконання звичайного завантаження,\n"
-"(або введ╕ть пароль адм╕н╕стратора для в╕дновлення системи):"
+"п²п╟я┌п╦я│п╫я√я┌я▄ control-d п╢п╩я▐ п╡п╦п╨п╬п╫п╟п╫п╫я▐ п╥п╡п╦я┤п╟п╧п╫п╬пЁп╬ п╥п╟п╡п╟п╫я┌п╟п╤п╣п╫п╫я▐,\n"
+"(п╟п╠п╬ п╡п╡п╣п╢я√я┌я▄ п©п╟я─п╬п╩я▄ п╟п╢п╪я√п╫я√я│я┌я─п╟я┌п╬я─п╟ п╢п╩я▐ п╡я√п╢п╫п╬п╡п╩п╣п╫п╫я▐ я│п╦я│я┌п╣п╪п╦):"
 
-#. make new environment active
-#: src/sulogin.c:243
+#: src/sulogin.c:212
 msgid "Entering System Maintenance Mode\n"
-msgstr "Входимо у режим в╕дновлення системи\n"
+msgstr "п▓я┘п╬п╢п╦п╪п╬ я┐ я─п╣п╤п╦п╪ п╡я√п╢п╫п╬п╡п╩п╣п╫п╫я▐ я│п╦я│я┌п╣п╪п╦\n"
 
-#: src/useradd.c:251
+#: src/useradd.c:234
 #, c-format
 msgid "%s: rebuild the group database\n"
-msgstr "%s: перестроюю базу груп\n"
+msgstr "%s: п©п╣я─п╣я│я┌я─п╬я▌я▌ п╠п╟п╥я┐ пЁя─я┐п©\n"
 
-#: src/useradd.c:260
+#: src/useradd.c:243
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
-msgstr "%s: перестроюю базу прихованих груп\n"
+msgstr "%s: п©п╣я─п╣я│я┌я─п╬я▌я▌ п╠п╟п╥я┐ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: нев╕рний числовий аргумент `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ я┤п╦я│п╩п╬п╡п╦п╧ п╟я─пЁя┐п╪п╣п╫я┌ `%s'\n"
 
-#: src/useradd.c:365
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
-msgstr "%s: нев╕домий gid %s\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╦п╧ gid %s\n"
 
-#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
-#: src/usermod.c:1128
+#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: нев╕дома група %s\n"
+msgstr "%s: п╫п╣п╡я√п╢п╬п╪п╟ пЁя─я┐п©п╟ %s\n"
 
-#: src/useradd.c:440
-#, c-format
-msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "група=%s,%u головна_тека=%s  skel=%s\n"
-
-#: src/useradd.c:444
-#, c-format
-msgid "shell=%s  "
-msgstr "shell=%s  "
-
-#: src/useradd.c:446
-#, c-format
-msgid "inactive=%ld  expire=%s"
-msgstr "неактивний=%ld  просторочений=%s"
-
-#: src/useradd.c:450
+#: src/useradd.c:419
 #, c-format
 msgid "GROUP=%u\n"
-msgstr "ГРУПА=%u\n"
+msgstr "п⌠п═пёп÷п░=%u\n"
 
-#: src/useradd.c:451
+#: src/useradd.c:420
 #, c-format
 msgid "HOME=%s\n"
-msgstr "ДОМАШНЯ_ТЕКА=%s\n"
+msgstr "п■п·п°п░п╗п²п╞_п╒п∙п п░=%s\n"
 
-#: src/useradd.c:453
+#: src/useradd.c:422
 #, c-format
 msgid "INACTIVE=%ld\n"
-msgstr "НЕАКТИВНИЙ=%ld\n"
+msgstr "п²п∙п░п п╒п≤п▓п²п≤п≥=%ld\n"
 
-#: src/useradd.c:454
+#: src/useradd.c:423
 #, c-format
 msgid "EXPIRE=%s\n"
-msgstr "ПРОСТРОЧЕНИЙ=%s\n"
+msgstr "п÷п═п·п║п╒п═п·п╖п∙п²п≤п≥=%s\n"
 
-#: src/useradd.c:456
+#: src/useradd.c:425
 #, c-format
 msgid "SHELL=%s\n"
 msgstr "SHELL=%s\n"
 
-#: src/useradd.c:457
+#: src/useradd.c:426
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:498
+#: src/useradd.c:462
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: не можу створити новий файл ╕з значеннями по замовчеванню\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ п╫п╬п╡п╦п╧ я└п╟п╧п╩ я√п╥ п╥п╫п╟я┤п╣п╫п╫я▐п╪п╦ п©п╬ п╥п╟п╪п╬п╡я┤п╣п╡п╟п╫п╫я▌\n"
 
-#: src/useradd.c:503
+#: src/useradd.c:467
 #, fuzzy, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: не можу створити новий файл ╕з значеннями по замовчеванню\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ п╫п╬п╡п╦п╧ я└п╟п╧п╩ я√п╥ п╥п╫п╟я┤п╣п╫п╫я▐п╪п╦ п©п╬ п╥п╟п╪п╬п╡я┤п╣п╡п╟п╫п╫я▌\n"
 
-#: src/useradd.c:596 src/useradd.c:608
+#: src/useradd.c:552 src/useradd.c:564
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s: перейменування: %s"
+msgstr "%s: п©п╣я─п╣п╧п╪п╣п╫я┐п╡п╟п╫п╫я▐: %s"
 
-#: src/useradd.c:697 src/usermod.c:281
+#: src/useradd.c:657 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: група `%s' ╓ групою NIS.\n"
+msgstr "%s: пЁя─я┐п©п╟ `%s' я■ пЁя─я┐п©п╬я▌ NIS.\n"
 
-#: src/useradd.c:706 src/usermod.c:290
+#: src/useradd.c:666 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: занадто багато груп вказанно (макс %d).\n"
+msgstr "%s: п╥п╟п╫п╟п╢я┌п╬ п╠п╟пЁп╟я┌п╬ пЁя─я┐п© п╡п╨п╟п╥п╟п╫п╫п╬ (п╪п╟п╨я│ %d).\n"
 
-#: src/useradd.c:738 src/usermod.c:322
-#, c-format
-msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "використовуйте: %s\t[-u uid [-o]] [-g група] [-G група,...] \n"
+#: src/useradd.c:698
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: useradd [-u uid [-o]] [-g пЁя─я┐п©п╟] [-G пЁя─я┐п©п╟,...] \n"
 
-#: src/useradd.c:742
-msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t[-d домашня_тека] [-s shell] [-c коментар] [-m [-k шаблон]]\n"
+#: src/useradd.c:701
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr ""
+"                        [-d п╢п╬п╪п╟я┬п╫я▐_я┌п╣п╨п╟] [-s shell] [-c п╨п╬п╪п╣п╫я┌п╟я─]\n"
+"                        [-m [-k я┬п╟п╠п╩п╬п╫]]\n"
 
-#: src/useradd.c:745 src/usermod.c:329
-msgid "[-f inactive] [-e expire ] "
-msgstr "[-f неактивний] [-e прострочений] "
+#: src/useradd.c:703 src/useradd.c:708
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "                 [-f п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧] [-e п©я─п╬я│я┌я─п╬я┤п╣п╫п╦п╧]\n"
 
-#: src/useradd.c:748
-msgid "[-A program] "
-msgstr "[-A програма] "
+#: src/useradd.c:706
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "         useradd -D [-g пЁя─я┐п©п╟] [-b п╠п╟п╥п╬п╡п╟_я┌п╣п╨п╟] [-s shell]\n"
 
-#: src/useradd.c:750
-msgid "[-p passwd] name\n"
-msgstr "[-p пароль] ╕м'я\n"
-
-#: src/useradd.c:753
-#, c-format
-msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "       %s\t-D [-g група] [-b базова_тека] [-s shell]\n"
-
-#: src/useradd.c:756
-msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f неактивний] [-e прострочений]\n"
-
-#: src/useradd.c:850 src/usermod.c:480
+#: src/useradd.c:793 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s: не можу заблокувати файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/useradd.c:855 src/usermod.c:486
+#: src/useradd.c:798 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/useradd.c:862 src/usermod.c:597
+#: src/useradd.c:805 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s: не можу заблокувати файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╟п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/useradd.c:867 src/usermod.c:603
+#: src/useradd.c:810 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s: не можу в╕дкрити файл прихованих груп\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
-#: src/useradd.c:1039
+#: src/useradd.c:982
 #, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: uid %u не ╓ ун╕кальним\n"
+msgstr "%s: uid %u п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
-#: src/useradd.c:1069
+#: src/useradd.c:1012
 #, c-format
 msgid "%s: can't get unique uid\n"
-msgstr "%s: не можу отримати ун╕кальн╕й uid\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬я┌я─п╦п╪п╟я┌п╦ я┐п╫я√п╨п╟п╩я▄п╫я√п╧ uid\n"
 
-#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
-#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
-#, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: нев╕рне поле `%s'\n"
-
-#: src/useradd.c:1189
+#: src/useradd.c:1049
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: нев╕рна базова тека `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╟ п╠п╟п╥п╬п╡п╟ я┌п╣п╨п╟ `%s'\n"
 
-#: src/useradd.c:1199
+#: src/useradd.c:1059
 #, c-format
 msgid "%s: invalid comment `%s'\n"
-msgstr "%s: нев╕рний коментар `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ п╨п╬п╪п╣п╫я┌п╟я─ `%s'\n"
 
-#: src/useradd.c:1210
+#: src/useradd.c:1070
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: нев╕рна домашня тека `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╟ п╢п╬п╪п╟я┬п╫я▐ я┌п╣п╨п╟ `%s'\n"
 
-#: src/useradd.c:1229 src/usermod.c:1110
+#: src/useradd.c:1089 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
-msgstr "%s: нев╕рна дата `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╟ п╢п╟я┌п╟ `%s'\n"
 
-#: src/useradd.c:1242
+#: src/useradd.c:1102
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: прихован╕ парол╕ потр╕бн╕ для -e\n"
+msgstr "%s: п©я─п╦я┘п╬п╡п╟п╫я√ п©п╟я─п╬п╩я√ п©п╬я┌я─я√п╠п╫я√ п╢п╩я▐ -e\n"
 
-#: src/useradd.c:1258
+#: src/useradd.c:1118
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: прихован╕ парол╕ потр╕бн╕ для -f\n"
+msgstr "%s: п©я─п╦я┘п╬п╡п╟п╫я√ п©п╟я─п╬п╩я√ п©п╬я┌я─я√п╠п╫я√ п╢п╩я▐ -f\n"
 
-#: src/useradd.c:1336
+#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╣ п©п╬п╩п╣ `%s'\n"
+
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid shell `%s'\n"
-msgstr "%s: нев╕рний shell `%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╦п╧ shell `%s'\n"
 
-#: src/useradd.c:1377
+#: src/useradd.c:1237
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: нев╕рне ╕м'я користувача '%s'\n"
+msgstr "%s: п╫п╣п╡я√я─п╫п╣ я√п╪'я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ '%s'\n"
 
-#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: не можу переписати файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: не можу переписати файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: не можу блокувати файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: не можу в╕дкрити файл паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: не можу блокувати файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: не можу в╕дкрити файл прихованих паролей\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1580 src/usermod.c:1405
-#, c-format
-msgid "%s: error adding authentication method\n"
-msgstr "%s: помилка додання методу аутентиф╕кац╕╖\n"
-
-#: src/useradd.c:1604
+#: src/useradd.c:1435
 #, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: помилка додання нового запису у базу паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╫п╬п╡п╬пЁп╬ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я┐ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1618
+#: src/useradd.c:1449
 #, c-format
 msgid "%s: error updating password dbm entry\n"
-msgstr "%s: помилка оновлення запису у баз╕ паролей dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ п©п╟я─п╬п╩п╣п╧ dbm\n"
 
-#: src/useradd.c:1634 src/usermod.c:1471
+#: src/useradd.c:1465 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: помилка додання нового запису у базу прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╫п╬п╡п╬пЁп╬ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я┐ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/useradd.c:1650 src/usermod.c:1488
+#: src/useradd.c:1481 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
-msgstr "%s: помилка оновлення запису у баз╕ прихованих паролей dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧ dbm\n"
 
-#: src/useradd.c:1682
+#: src/useradd.c:1513
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: не можу створити теку %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ я┌п╣п╨я┐ %s\n"
 
-#: src/useradd.c:1806 src/usermod.c:1233
+#: src/useradd.c:1634 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: користувач %s ╕сну╓\n"
+msgstr "%s: п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s я√я│п╫я┐я■\n"
 
-#: src/useradd.c:1821
+#: src/useradd.c:1649
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: група %s ╕сну╓ - якщо ви бажа╓те додати користувача до ц╕╓╖ групи, "
-"використовуйте -g.\n"
+"%s: пЁя─я┐п©п╟ %s я√я│п╫я┐я■ - я▐п╨я┴п╬ п╡п╦ п╠п╟п╤п╟я■я┌п╣ п╢п╬п╢п╟я┌п╦ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ п╢п╬ я├я√я■я≈ пЁя─я┐п©п╦, "
+"п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣ -g.\n"
 
-#: src/useradd.c:1854
+#: src/useradd.c:1687
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-msgstr "%s: застереження: CREATE_HOME не п╕дтриму╓ться, користуйтесь -m.\n"
+msgstr "%s: п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: CREATE_HOME п╫п╣ п©я√п╢я┌я─п╦п╪я┐я■я┌я▄я│я▐, п╨п╬я─п╦я│я┌я┐п╧я┌п╣я│я▄ -m.\n"
 
-#: src/userdel.c:129
-#, c-format
-msgid "usage: %s [-r] name\n"
-msgstr "використовуйте: %s [-r] ╕м'я\n"
+#: src/userdel.c:124
+#, fuzzy, c-format
+msgid "Usage: %s [-r] name\n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-r] я√п╪'я▐\n"
 
-#: src/userdel.c:181 src/userdel.c:267
+#: src/userdel.c:176 src/userdel.c:262
 #, c-format
 msgid "%s: error updating group entry\n"
-msgstr "%s: помилка оновлення запису у баз╕ груп\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ пЁя─я┐п©\n"
 
-#: src/userdel.c:191 src/userdel.c:276
+#: src/userdel.c:186 src/userdel.c:271
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
-msgstr "%s: помилка оновлення запису у баз╕ груп dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╬п╫п╬п╡п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ пЁя─я┐п© dbm\n"
 
-#: src/userdel.c:219
+#: src/userdel.c:214
 #, fuzzy, c-format
 msgid "%s: cannot remove dbm group entry\n"
-msgstr "%s: помилка видалення запису у баз╕ груп dbm\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ я┐ п╠п╟п╥я√ пЁя─я┐п© dbm\n"
 
-#: src/userdel.c:308
+#: src/userdel.c:379
 #, c-format
-msgid "%s: cannot rewrite TCFS key file\n"
-msgstr "%s: не можу переписати файл ключей TCFS\n"
+msgid "%s: cannot open group file\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ пЁя─я┐п©\n"
 
-#: src/userdel.c:392
+#: src/userdel.c:390
 #, c-format
-msgid "%s: cannot lock TCFS key file\n"
-msgstr "%s: не можу блокувати файл ключей TCFS\n"
-
-#: src/userdel.c:397
-#, c-format
-msgid "%s: cannot open TCFS key file\n"
-msgstr "%s: не можу в╕дкрити файл ключей TCFS\n"
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©\n"
 
 #: src/userdel.c:408
 #, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: не можу в╕дкрити файл груп\n"
-
-#: src/userdel.c:419
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: не можу в╕дкрити файл прихованих груп\n"
-
-#: src/userdel.c:451 src/userdel.c:468
-#, c-format
-msgid "%s: error deleting authentication\n"
-msgstr "%s: помилка видалення методу аутентиф╕кац╕╖\n"
-
-#: src/userdel.c:479
-#, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: помилка видалення запису з бази паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/userdel.c:485
+#: src/userdel.c:412
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: помилка видалення запису з бази прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/userdel.c:496
-#, c-format
-msgid "%s: error deleting TCFS entry\n"
-msgstr "%s: помилка видалення запису з бази TCFS\n"
-
-#: src/userdel.c:510
+#: src/userdel.c:421
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
-msgstr "%s: помилка видалення запису dbm з бази паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ dbm п╥ п╠п╟п╥п╦ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/userdel.c:533
+#: src/userdel.c:440
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
-msgstr "%s: помилка видалення запису dbm з бази прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ dbm п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/userdel.c:569
+#: src/userdel.c:484
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: користувач %s на данний момент у систем╕\n"
+msgstr "%s: п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s п╫п╟ п╢п╟п╫п╫п╦п╧ п╪п╬п╪п╣п╫я┌ я┐ я│п╦я│я┌п╣п╪я√\n"
 
-#: src/userdel.c:659
+#: src/userdel.c:594
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: застереження: %s не належить %s, не видалено\n"
+msgstr "%s: п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: %s п╫п╣ п╫п╟п╩п╣п╤п╦я┌я▄ %s, п╫п╣ п╡п╦п╢п╟п╩п╣п╫п╬\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:600
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: застереження: не можу видалити "
+msgstr "%s: п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: п╫п╣ п╪п╬п╤я┐ п╡п╦п╢п╟п╩п╦я┌п╦ "
 
-#: src/userdel.c:758 src/usermod.c:1023
+#: src/userdel.c:703 src/usermod.c:783
 #, c-format
 msgid "%s: user %s does not exist\n"
-msgstr "%s: коритстувач %s не ╕сну╓\n"
+msgstr "%s: п╨п╬я─п╦я┌я│я┌я┐п╡п╟я┤ %s п╫п╣ я√я│п╫я┐я■\n"
 
-#: src/userdel.c:770 src/usermod.c:1039
+#: src/userdel.c:718 src/usermod.c:799
 #, c-format
 msgid "%s: user %s is a NIS user\n"
-msgstr "%s: користувач %s ╓ користувач NIS\n"
+msgstr "%s: п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s я■ п╨п╬я─п╦я│я┌я┐п╡п╟я┤ NIS\n"
 
-#: src/userdel.c:799
+#: src/userdel.c:756
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s не належить %s, не видалено\n"
+msgstr "%s: %s п╫п╣ п╫п╟п╩п╣п╤п╦я┌я▄ %s, п╫п╣ п╡п╦п╢п╟п╩п╣п╫п╬\n"
 
-#: src/userdel.c:818
+#: src/userdel.c:779
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: не видалено теку %s (можна видалити домашню теку користувача %s)\n"
+msgstr "%s: п╫п╣ п╡п╦п╢п╟п╩п╣п╫п╬ я┌п╣п╨я┐ %s (п╪п╬п╤п╫п╟ п╡п╦п╢п╟п╩п╦я┌п╦ п╢п╬п╪п╟я┬п╫я▌ я┌п╣п╨я┐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s)\n"
 
-#: src/userdel.c:830
+#: src/userdel.c:793
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: помилка видалення теки %s\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ я┌п╣п╨п╦ %s\n"
 
-#: src/usermod.c:326
+#: src/usermod.c:306
+#, fuzzy, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s\t[-u uid [-o]] [-g пЁя─я┐п©п╟] [-G пЁя─я┐п©п╟,...] \n"
+
+#: src/usermod.c:310
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d домашня_тека [-m]] [-s shell] [-c коментар] [-l нове_╕м'я]\n"
+msgstr "\t\t[-d п╢п╬п╪п╟я┬п╫я▐_я┌п╣п╨п╟ [-m]] [-s shell] [-c п╨п╬п╪п╣п╫я┌п╟я─] [-l п╫п╬п╡п╣_я√п╪'я▐]\n"
 
-#: src/usermod.c:332
+#: src/usermod.c:313
 #, fuzzy
-msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {DEFAULT|program},...] "
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧] [-e п©я─п╬я│я┌я─п╬я┤п╣п╫п╦п╧] "
 
-#: src/usermod.c:334
+#: src/usermod.c:315
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p пароль] [-L|-U] ╕м'я\n"
+msgstr "[-p п©п╟я─п╬п╩я▄] [-L|-U] я√п╪'я▐\n"
 
-#: src/usermod.c:514
+#: src/usermod.c:495
 #, c-format
 msgid "%s: out of memory in update_group\n"
-msgstr "%s: браку╓ памят╕ у pdate_group\n"
+msgstr "%s: п╠я─п╟п╨я┐я■ п©п╟п╪я▐я┌я√ я┐ pdate_group\n"
 
-#: src/usermod.c:641
+#: src/usermod.c:622
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: браку╓ памят╕ у update_gshadow\n"
+msgstr "%s: п╠я─п╟п╨я┐я■ п©п╟п╪я▐я┌я√ я┐ update_gshadow\n"
 
-#: src/usermod.c:1210
+#: src/usermod.c:958
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: не подано флаг╕в\n"
+msgstr "%s: п╫п╣ п©п╬п╢п╟п╫п╬ я└п╩п╟пЁя√п╡\n"
 
-#: src/usermod.c:1217
+#: src/usermod.c:965
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: прихован╕ парол╕ потр╕бн╕ для -e ╕ -f\n"
+msgstr "%s: п©я─п╦я┘п╬п╡п╟п╫я√ п©п╟я─п╬п╩я√ п©п╬я┌я─я√п╠п╫я√ п╢п╩я▐ -e я√ -f\n"
 
-#: src/usermod.c:1239
+#: src/usermod.c:987
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %lu не ╓ ун╕кальним\n"
+msgstr "%s: uid %lu п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
-#: src/usermod.c:1392
-#, c-format
-msgid "%s: error deleting authentication method\n"
-msgstr "%s: помилка видалення методу аутентиф╕кац╕╖\n"
-
-#: src/usermod.c:1418
-#, c-format
-msgid "%s: error changing authentication method\n"
-msgstr "%s: помилка зам╕ни методу аутентиф╕кац╕╖\n"
-
-#: src/usermod.c:1436
+#: src/usermod.c:1116
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: помилка зм╕ни запису в баз╕ паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╥п╪я√п╫п╦ п╥п╟п©п╦я│я┐ п╡ п╠п╟п╥я√ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1442
+#: src/usermod.c:1122
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: помилка видалення запису з бази паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1451
+#: src/usermod.c:1131
 #, c-format
 msgid "%s: error adding password dbm entry\n"
-msgstr "%s: помилка додання запису dbm у базу прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╥п╟п©п╦я│я┐ dbm я┐ п╠п╟п╥я┐ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1459
+#: src/usermod.c:1139
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
-msgstr "%s: помилка видалення запису dbm з бази паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ dbm п╥ п╠п╟п╥п╦ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1478
+#: src/usermod.c:1158
 #, c-format
 msgid "%s: error removing shadow password entry\n"
-msgstr "%s: помилка видалення запису з бази прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1495
+#: src/usermod.c:1175
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
-msgstr "%s: помилка видалення запису dbm з бази прихованих паролей\n"
+msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ dbm п╥ п╠п╟п╥п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ п©п╟я─п╬п╩п╣п╧\n"
 
-#: src/usermod.c:1524
+#: src/usermod.c:1204
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: тека %s ╕сну╓\n"
+msgstr "%s: я┌п╣п╨п╟ %s я√я│п╫я┐я■\n"
 
-#: src/usermod.c:1533
+#: src/usermod.c:1213
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: не можу створити %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ %s\n"
 
-#: src/usermod.c:1539
+#: src/usermod.c:1219
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: не можу зм╕нити володаря %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ п╡п╬п╩п╬п╢п╟я─я▐ %s\n"
 
-#: src/usermod.c:1556
+#: src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: не можу перейменувати теку з %s на %s\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п╧п╪п╣п╫я┐п╡п╟я┌п╦ я┌п╣п╨я┐ п╥ %s п╫п╟ %s\n"
 
-#. better leave it alone
-#: src/usermod.c:1653
+#: src/usermod.c:1333
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: застереження: %s не належить %s\n"
+msgstr "%s: п╥п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: %s п╫п╣ п╫п╟п╩п╣п╤п╦я┌я▄ %s\n"
 
-#: src/usermod.c:1659
+#: src/usermod.c:1339
 msgid "failed to change mailbox owner"
-msgstr "не можу зм╕нити володаря поштово╖ скриньки"
+msgstr "п╫п╣ п╪п╬п╤я┐ п╥п╪я√п╫п╦я┌п╦ п╡п╬п╩п╬п╢п╟я─я▐ п©п╬я┬я┌п╬п╡п╬я≈ я│п╨я─п╦п╫я▄п╨п╦"
 
-#: src/usermod.c:1667
+#: src/usermod.c:1347
 msgid "failed to rename mailbox"
-msgstr "не можу перейменувати поштову скриньку"
+msgstr "п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п╧п╪п╣п╫я┐п╡п╟я┌п╦ п©п╬я┬я┌п╬п╡я┐ я│п╨я─п╦п╫я▄п╨я┐"
 
-#: src/vipw.c:104
+#: src/vipw.c:105
 #, c-format
 msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: %s ╓ незм╕нений\n"
+"%s: %s я■ п╫п╣п╥п╪я√п╫п╣п╫п╦п╧\n"
 
-#: src/vipw.c:132
+#: src/vipw.c:133
 #, fuzzy
 msgid "Couldn't lock file"
-msgstr "Не можу блокувати файл\n"
+msgstr "п²п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩\n"
 
-#: src/vipw.c:141
+#: src/vipw.c:142
 msgid "Couldn't make backup"
-msgstr "Не можу зробити резервну коп╕ю"
+msgstr "п²п╣ п╪п╬п╤я┐ п╥я─п╬п╠п╦я┌п╦ я─п╣п╥п╣я─п╡п╫я┐ п╨п╬п©я√я▌"
 
-#: src/vipw.c:206
+#: src/vipw.c:200
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: не можу в╕дновити %s: %s (ваш╕ зм╕ни у %s)\n"
+msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╫п╬п╡п╦я┌п╦ %s: %s (п╡п╟я┬я√ п╥п╪я√п╫п╦ я┐ %s)\n"
 
-#: src/vipw.c:244
+#: src/vipw.c:238
 msgid ""
 "Usage:\n"
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-"Використовуйте:\n"
-"`vipw' редагу╓ /etc/passwd      `vipw -s' редагу╓ /etc/shadow\n"
-"`vigr' редагу╓ /etc/group       `vigr -s' редагу╓ /etc/gshadow\n"
+"п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣:\n"
+"`vipw' я─п╣п╢п╟пЁя┐я■ /etc/passwd      `vipw -s' я─п╣п╢п╟пЁя┐я■ /etc/shadow\n"
+"`vigr' я─п╣п╢п╟пЁя┐я■ /etc/group       `vigr -s' я─п╣п╢п╟пЁя┐я■ /etc/gshadow\n"
+
+#, fuzzy
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╥п╟п©п╦я│ п╢п╩я▐ п╨п╬я─п╦я│я┌я┐п╡п╟я┤п╟ %s\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr "п п╬я─п╦я│я┌я┐п╡п╟я┤ %s п╪п╟я■ TCFS п╨п╩я▌я┤, п©п╬я┌я─я√п╠п╣п╫ п╧п╬пЁп╬ я│я┌п╟я─п╦п╧ п©п╟я─п╬п╩я▄.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr "п▓п╦ п╪п╟я■я┌п╣ п╥п╪п╬пЁя┐ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╡п╟я┌п╦ п╨п╩я▌я┤ -t п╢п╩я▐ п©я─п╦я│п╨п╬я─п╣п╫п╫я▐ п╥п╪я√п╫.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "п≈п╟я│я┌п╣я─п╣п╤п╣п╫п╫я▐: п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s п╪п╟я■ TCFS п╨п╩я▌я┤.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr "п²п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ п╠п╟п╥я┐ п╨п╩я▌я┤п╣п╧ TCFS; я│п©я─п╬п╠я┐п╧я┌п╣ п©я√п╥п╫я√я┬п╣\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "п²п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ п╠п╟п╥я┐ п╨п╩я▌я┤п╣п╧ TCFS.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "п²п╣ п╪п╬п╤я┐ п╬п╫п╬п╡п╦я┌п╦ п╠п╟п╥я┐ п╨п╩я▌я┤п╣п╧ TCFS.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "п²п╣ п╪п╬п╤я┐ п╡п╫п╣я│я┌п╦ п╥п╪я√п╫п╦ я┐ п╠п╟п╥я┐ п╨п╩я▌я┤п╣п╧ TCFS.\n"
+
+#~ msgid "%s: cannot rewrite TCFS key file\n"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ п©п╣я─п╣п©п╦я│п╟я┌п╦ я└п╟п╧п╩ п╨п╩я▌я┤п╣п╧ TCFS\n"
+
+#~ msgid "%s: cannot lock TCFS key file\n"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╠п╩п╬п╨я┐п╡п╟я┌п╦ я└п╟п╧п╩ п╨п╩я▌я┤п╣п╧ TCFS\n"
+
+#~ msgid "%s: cannot open TCFS key file\n"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ я└п╟п╧п╩ п╨п╩я▌я┤п╣п╧ TCFS\n"
+
+#~ msgid "%s: error deleting TCFS entry\n"
+#~ msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╥п╟п©п╦я│я┐ п╥ п╠п╟п╥п╦ TCFS\n"
+
+#~ msgid "               [-f inactive] [-e expire]"
+#~ msgstr "                        [-f п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧] [-e п©я─п╬я│я┌я─п╬я┤п╣п╫п╦п╧]"
+
+#~ msgid "%s: error deleting authentication\n"
+#~ msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╪п╣я┌п╬п╢я┐ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я≈\n"
+
+#, fuzzy
+#~ msgid "[-A {DEFAULT|program},...] "
+#~ msgstr "[-A {DEFAULT|program},...] "
+
+#~ msgid "%s: error deleting authentication method\n"
+#~ msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╡п╦п╢п╟п╩п╣п╫п╫я▐ п╪п╣я┌п╬п╢я┐ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я≈\n"
+
+#~ msgid "%s: error adding authentication method\n"
+#~ msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╢п╬п╢п╟п╫п╫я▐ п╪п╣я┌п╬п╢я┐ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я≈\n"
+
+#~ msgid "%s: error changing authentication method\n"
+#~ msgstr "%s: п©п╬п╪п╦п╩п╨п╟ п╥п╟п╪я√п╫п╦ п╪п╣я┌п╬п╢я┐ п╟я┐я┌п╣п╫я┌п╦я└я√п╨п╟я├я√я≈\n"
+
+#~ msgid "[-A program] "
+#~ msgstr "[-A п©я─п╬пЁя─п╟п╪п╟] "
+
+#~ msgid "[-p passwd] name\n"
+#~ msgstr "[-p п©п╟я─п╬п╩я▄] я√п╪'я▐\n"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "п©п╬п╪п╦п╩п╨п╟ - п©п╬я┬я┐п╨ '%s' п╫п╣ п╡п╦п╨п╬п╫п╟п╫п╬\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%s п╫п╣ п╥п╫п╟п╧п╢п╣п╫п╬\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: п╫п╣ п╥п╨п╬п╫я└я√пЁя┐я─п╬п╡п╟п╫п╬ п╢п╩я▐ п©я√п╢я┌я─п╦п╪п╨п╦ п©я─п╦я┘п╬п╡п╟п╫п╦я┘ пЁя─я┐п©.\n"
+
+#~ msgid "%s: Shadow passwords are not configured.\n"
+#~ msgstr "%s: п÷я─п╦я┘п╬п╡п╟п╫я√ п©п╟я─п╬п╩я√ п╫п╣ п╥п╨п╬п╫я└я√пЁя┐я─п╬п╡п╟п╫п╬.\n"
+
+#, fuzzy
+#~ msgid "Usage: %s [-l] user\n"
+#~ msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-e]\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "п▓п╦п╨п╬п╫я┐я▌ shell %s\n"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "п÷п╟я─п╬п╩я▄ п╫п╟ п╪п╬п╢п╣п╪п╫п╣ п©я√п╢п╨п╩я▌я┤п╣п╫п╫я▐: "
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr ""
+#~ "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-l] [-m п╪я√п╫_п╢п╫я√п╡] [-M п╪п╟п╨я│_п╢п╫я√п╡] [-d п╬я│я┌п╟п╫п╫я√п╧_п╢п╣п╫я▄] "
+#~ "п╨п╬я─п╦я│я┌я┐п╡п╟я┤\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "п▓п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s [-(a|d)] shell\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "Shell п©п╟я─п╬п╩я▄: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "п÷п╬п╡я┌п╬я─я√я┌я▄ п©п╟я─п╬п╩я▄ п╢п╩я▐ shell: "
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr "%s: п÷п╟я─п╬п╩я▄ п╫п╣ я│п©я√п╡п©п╟п╢п╟я■, я│п©я─п╬п╠я┐п╧я┌п╣ п╥п╫п╬п╡я┐.\n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ я│я┌п╡п╬я─п╦я┌п╦ %s"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: п╫п╣ п╪п╬п╤я┐ п╡я√п╢п╨я─п╦я┌п╦ %s"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: Shell %s п╫п╣ п╥п╫п╟п╧п╢п╣п╫п╬.\n"
+
+#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
+#~ msgstr "пЁя─я┐п©п╟=%s,%u пЁп╬п╩п╬п╡п╫п╟_я┌п╣п╨п╟=%s  skel=%s\n"
+
+#~ msgid "shell=%s  "
+#~ msgstr "shell=%s  "
+
+#~ msgid "inactive=%ld  expire=%s"
+#~ msgstr "п╫п╣п╟п╨я┌п╦п╡п╫п╦п╧=%ld  п©я─п╬я│я┌п╬я─п╬я┤п╣п╫п╦п╧=%s"
+
+#~ msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐п╧я┌п╣: %s\t[-u uid [-o]] [-g пЁя─я┐п©п╟] [-G пЁя─я┐п©п╟,...] \n"
 
 #~ msgid "%s: gid %ld is not unique\n"
-#~ msgstr "%s: gid %ld не ╓ ун╕кальним\n"
+#~ msgstr "%s: gid %ld п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
 #, fuzzy
 #~ msgid "unknown gid: %u\n"
-#~ msgstr "нев╕домий gid: %d\n"
+#~ msgstr "п╫п╣п╡я√п╢п╬п╪п╦п╧ gid: %d\n"
 
 #~ msgid "%s: uid %d is not unique\n"
-#~ msgstr "%s: uid %d не ╓ ун╕кальним\n"
+#~ msgstr "%s: uid %d п╫п╣ я■ я┐п╫я√п╨п╟п╩я▄п╫п╦п╪\n"
 
 #~ msgid "user %s: bad UID (%d)\n"
-#~ msgstr "користувач %s: поганий UID (%d)\n"
+#~ msgstr "п╨п╬я─п╦я│я┌я┐п╡п╟я┤ %s: п©п╬пЁп╟п╫п╦п╧ UID (%d)\n"
 
 #~ msgid "%s: no aging information present\n"
-#~ msgstr "%s: нема╓ ╕нформац╕╖ про в╕к\n"
+#~ msgstr "%s: п╫п╣п╪п╟я■ я√п╫я└п╬я─п╪п╟я├я√я≈ п©я─п╬ п╡я√п╨\n"
 
 #~ msgid "group %s: bad GID (%d)\n"
-#~ msgstr "група %s: ма╓ нев╕рний GID (%d)\n"
+#~ msgstr "пЁя─я┐п©п╟ %s: п╪п╟я■ п╫п╣п╡я√я─п╫п╦п╧ GID (%d)\n"
 
 #~ msgid "%s: permission denied (shell).\n"
-#~ msgstr "%s: доступ заборонено (shell).\n"
+#~ msgstr "%s: п╢п╬я│я┌я┐п© п╥п╟п╠п╬я─п╬п╫п╣п╫п╬ (shell).\n"
 
 #~ msgid "Incorrect password for %s.\n"
-#~ msgstr "Нев╕рний пароль для %s.\n"
+#~ msgstr "п²п╣п╡я√я─п╫п╦п╧ п©п╟я─п╬п╩я▄ п╢п╩я▐ %s.\n"
 
 #~ msgid "group not found\n"
-#~ msgstr "група не знайдена\n"
+#~ msgstr "пЁя─я┐п©п╟ п╫п╣ п╥п╫п╟п╧п╢п╣п╫п╟\n"

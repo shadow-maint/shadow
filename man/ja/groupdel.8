@@ -1,3 +1,4 @@
+.\"$Id: groupdel.8,v 1.6 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,33 +26,32 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupdel.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH GROUPDEL 8
 .SH 名前
-groupdel \- グループを消去する
+groupdel \- グループを削除する
 .SH 書式
-.B groupdel
-.I group
+\fBgroupdel\fR \fIgroup\fR
 .SH 説明
-\fBgroupdel\fRコマンドは、システムのアカウントファイルを変更し、
-\fIgroup\fRに属する全てのエントリーを削除する。
-指定されたグループは存在していなくてはならない。
+\fBgroupdel\fR コマンドは、システムアカウントファイルを修正し、
+グループ \fIgroup\fR に対応するすべてのエントリを削除する。
+指定されたグループは存在していなければならない。
 .PP
-全てのファイルシステム中に指定したグループのIDを持つファイルが残っていない
-ことを、手作業で確認しなくてはならない。
+全てのファイルシステムに、
+指定したグループの ID を持つファイルが残っていないことを、
+手作業で確認しなくてはならない。
 .SH 警告
 存在するユーザの主グループを削除してはならない。
-グループを削除する前にそのユーザを削除しなくてはならない。
+グループを削除する前にそのユーザを削除しなければならない。
 .SH ファイル
-/etc/group \- グループの情報
+\fI/etc/group\fR \- グループ情報
 .br
-/etc/gshadow \- グループの安全な情報
+\fI/etc/gshadow\fR \- 安全なグループ情報
 .SH 関連項目
 .BR chfn (1),
 .BR chsh (1),

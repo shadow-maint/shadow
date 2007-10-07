@@ -1,4 +1,4 @@
-.\"$Id: logoutd.8,v 1.7 2001/01/25 10:43:50 kloczek Exp $
+.\"$Id: logoutd.8,v 1.10 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,19 +31,16 @@ logoutd \- Enforce login time restrictions
 .SH SYNOPSIS
 .B logoutd
 .SH DESCRIPTION
-.B logoutd
-enforces the login time and port restrictions specified in
-.IR /etc/porttime .
-.B logoutd
-should be started from \fI/etc/rc\fR.
-The \fI/etc/utmp\fR file is scanned periodically and each user name
+\fBlogoutd\fR enforces the login time and port restrictions specified in
+\fI/etc/porttime\fR. \fBlogoutd\fR should be started from \fI/etc/rc\fR.
+The \fI/var/run/utmp\fR file is scanned periodically and each user name
 is checked to see if the named user is permitted on the named port
 at the current time.
 Any login session which is violating the restrictions in \fI/etc/porttime\fR
 is terminated.
 .SH FILES
-/etc/porttime \- login and port permissions
+\fI/etc/porttime\fR \	- login and port permissions
 .br
-/etc/utmp \- current login sessions
+\fI/var/run/utmp\fR \	- current login sessions
 .SH AUTHOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

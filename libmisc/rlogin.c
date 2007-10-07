@@ -32,92 +32,105 @@
 #ifdef RLOGIN
 
 #include "rcsid.h"
-RCSID("$Id: rlogin.c,v 1.5 1999/08/27 19:02:51 marekm Exp $")
-
+RCSID ("$Id: rlogin.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
-
 #include <stdio.h>
 #include <pwd.h>
-
-extern int ruserok();
+extern int ruserok ();
 
 static struct {
-	int	spd_name;
-	int	spd_baud;
-} speed_table [] = {
+	int spd_name;
+	int spd_baud;
+} speed_table[] =
+{
 #ifdef B50
-	{ B50, 50 },
+	{
+	B50, 50},
 #endif
 #ifdef B75
-	{ B75, 75 },
+	{
+	B75, 75},
 #endif
 #ifdef B110
-	{ B110, 110 },
+	{
+	B110, 110},
 #endif
 #ifdef B134
-	{ B134, 134 },
+	{
+	B134, 134},
 #endif
 #ifdef B150
-	{ B150, 150 },
+	{
+	B150, 150},
 #endif
 #ifdef B200
-	{ B200, 200 },
+	{
+	B200, 200},
 #endif
 #ifdef B300
-	{ B300, 300 },
+	{
+	B300, 300},
 #endif
 #ifdef B600
-	{ B600, 600 },
+	{
+	B600, 600},
 #endif
 #ifdef B1200
-	{ B1200, 1200 },
+	{
+	B1200, 1200},
 #endif
 #ifdef B1800
-	{ B1800, 1800 },
+	{
+	B1800, 1800},
 #endif
 #ifdef B2400
-	{ B2400, 2400 },
+	{
+	B2400, 2400},
 #endif
 #ifdef B4800
-	{ B4800, 4800 },
+	{
+	B4800, 4800},
 #endif
 #ifdef B9600
-	{ B9600, 9600 },
+	{
+	B9600, 9600},
 #endif
 #ifdef B19200
-	{ B19200, 19200 },
+	{
+	B19200, 19200},
 #endif
 #ifdef B38400
-	{ B38400, 38400 },
+	{
+	B38400, 38400},
 #endif
-	{ -1,	-1 }
+	{
+	-1, -1}
 };
 
-static void
-get_remote_string(char *buf, int size)
+static void get_remote_string (char *buf, int size)
 {
 	for (;;) {
 		if (read (0, buf, 1) != 1)
-  			exit (1);
+			exit (1);
 		if (*buf == '\0')
 			return;
 		if (--size > 0)
 			++buf;
 	}
-	/*NOTREACHED*/
-}
+ /*NOTREACHED*/}
 
 int
-do_rlogin(const char *remote_host, char *name, int namelen, char *term, int termlen)
+do_rlogin (const char *remote_host, char *name, int namelen, char *term,
+	   int termlen)
 {
-	struct	passwd	*pwd;
-	char	remote_name[32];
-	char	*cp;
-	int	remote_speed = 9600;
-	int	speed_name = B9600;
-	int	i;
-	TERMIO	termio;
+	struct passwd *pwd;
+	char remote_name[32];
+	char *cp;
+	int remote_speed = 9600;
+	int speed_name = B9600;
+	int i;
+	TERMIO termio;
 
 	get_remote_string (remote_name, sizeof remote_name);
 	get_remote_string (name, namelen);
@@ -126,12 +139,11 @@ do_rlogin(const char *remote_host, char *name, int namelen, char *term, int term
 	if ((cp = strchr (term, '/'))) {
 		*cp++ = '\0';
 
-		if (! (remote_speed = atoi (cp)))
+		if (!(remote_speed = atoi (cp)))
 			remote_speed = 9600;
 	}
-	for (i = 0;speed_table[i].spd_baud != remote_speed &&
-				speed_table[i].spd_name != -1;i++)
-		;
+	for (i = 0; speed_table[i].spd_baud != remote_speed &&
+	     speed_table[i].spd_name != -1; i++);
 
 	if (speed_table[i].spd_name != -1)
 		speed_name = speed_table[i].spd_name;
@@ -140,18 +152,18 @@ do_rlogin(const char *remote_host, char *name, int namelen, char *term, int term
 	 * Put the terminal in cooked mode with echo turned on.
 	 */
 
-	GTTY(0, &termio);
-	termio.c_iflag |= ICRNL|IXON;
-	termio.c_oflag |= OPOST|ONLCR;
-	termio.c_lflag |= ICANON|ECHO|ECHOE;
+	GTTY (0, &termio);
+	termio.c_iflag |= ICRNL | IXON;
+	termio.c_oflag |= OPOST | ONLCR;
+	termio.c_lflag |= ICANON | ECHO | ECHOE;
 #ifdef CBAUD
 	termio.c_cflag = (termio.c_cflag & ~CBAUD) | speed_name;
 #else
 	termio.c_cflag = (termio.c_cflag) | speed_name;
 #endif
-	STTY(0, &termio);
+	STTY (0, &termio);
 
-	if (! (pwd = getpwnam (name)))
+	if (!(pwd = getpwnam (name)))
 		return 0;
 
 	/*
@@ -165,7 +177,7 @@ do_rlogin(const char *remote_host, char *name, int namelen, char *term, int term
 	return 0;
 #else
 	return ruserok (remote_host, pwd->pw_uid == 0,
-				remote_name, name) == RUSEROK;
+			remote_name, name) == RUSEROK;
 #endif
 }
-#endif /* RLOGIN */
+#endif				/* RLOGIN */

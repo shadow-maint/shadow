@@ -1,3 +1,4 @@
+.\"$Id: mkpasswd.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,60 +26,62 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: mkpasswd.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
-.\" .TH MKPASSWD 1
 .TH MKPASSWD 8
 .SH 名前
-mkpasswd \- passwd及びgroupデータベースファイルを更新する
+mkpasswd \- passwd と group のデータベースファイルを更新する
 .SH 書式
 \fBmkpasswd\fR [\fB-fvgps\fR] \fIfile\fR
 .SH 説明
 .B mkpasswd
-はフラッグで与えられた書式にしたがってファイルを読み込み、
-対応するデータベースファイルの書式に変換する。
-作成されたデータベースファイルは、多くのユーザがいるシステムでのアクセス
-パフォーマンスを改善する為に用いられる。
-出力ファイルは\fIfile\fR.dir及び\fIfile\fR.pagとの名前が付けられる。
+はフラグで与えられた書式にしたがってファイルを読み込み、
+それをデータベースファイル形式に変換する。
+作成されたデータベースファイルは、
+多くのユーザがいるシステムでのアクセス性能を改善するために用いられる。
+出力ファイルの名前は
+\fIfile\fR.dir および \fIfile\fR.pagとなる。
 .PP
-\fB-f\fRオプションを指定すると、\fBmkpasswd\fRは既に出力ファイルが存在
-していても無視して上書きを行なう。
-通常は、出力ファイルが既に存在するとの警告を発して中途終了する。
+\fB-f\fR オプションを指定すると、
+\fBmkpasswd\fR は出力ファイルが存在していても無視して上書きする。
+通常は、出力ファイルが既に存在する旨の警告を発して終了する。
 .PP
-\fB-v\fRオプションを付けた場合、\fBmkpasswd\fRは変換を行なう毎に
-各レコードの情報を出力するとともに、最後に終了メッセージを表示する。
+\fB-v\fR オプションを指定すると、
+\fBmkpasswd\fR は変換を行なう毎に各レコードの情報を出力し、
+最後に終了メッセージを表示する。
 .PP
-\fB-g\fRオプションを指定した場合は、入力ファイルが\fI/etc/group\fR
-ファイルと同じ書式であるとして処理を行なう。
-\fB-s\fRオプションと組み合わせて用いた場合は、\fI/etc/gshadow\fRファイル
-の書式として扱う。
+\fB-g\fR オプションを指定すると、
+入力ファイルが \fI/etc/group\fR
+ファイルの書式であるとみなして処理を行なう。
+\fB-s\fR オプションと同時に用いた場合は、
+\fI/etc/gshadow\fR ファイルの書式が用いられる。
 .PP
-\fB-p\fRオプションを付けた場合は、入力ファイルの書式が\fB/etc/passwd\fR
-の形式であるとして処理する。
-ディフォルト。
-\fB-s\fRオプションと組み合わせた場合は、\fI/etc/shadow\fRファイルの
-書式として処理を行う。
+\fB-p\fR オプションを指定すると、
+入力ファイルが \fB/etc/passwd\fR
+ファイルの書式であるとみなして処理を行う。
+これがデフォルトの動作である。
+\fB-s\fR オプションと同時に用いた場合は、
+\fI/etc/shadow\fR ファイルの書式が用いられる。
 .SH 警告
-複数のデータベースファイルを使用することは、NDBMデータベースライブラリ
-が備わったシステムでのみ可能であり、全てのシステムで用いる事が出来る
-訳ではない。
+複数のデータベースファイルを使えるのは、
+NDBM データベースライブラリを備えたシステムのみであり、
+どんなシステムでも可能なわけではない。
 .SH 注意
-大抵のコマンドは変更を施した際にデータベースファイルを更新することが出来る
-ので、このコマンドは、誤って消去してしまった、または壊れたデータベース
-ファイルを再生する時にのみ必要になる。
+大抵のコマンドは変更の際にデータベースファイルを更新する機能を備えているので、
+このコマンドが必要になるのは、データベースを削除してしまった場合や、
+データベースが壊れた場合などに、再生成するときだけである。
 .SH ファイル
-/etc/passwd \- ユーザアカウントの情報
+\fI/etc/passwd\fR \ - ユーザアカウント情報
 .br
-/etc/shadow \- shadowしたユーザアカウントの情報
+\fI/etc/shadow\fR \ - shadow 化されたユーザ情報
 .br
-/etc/group \- グループ情報
+\fI/etc/group\fR \  - グループ情報
 .br
-/etc/gshadow \- shadowしたグループ情報
+\fI/etc/gshadow\fR \- shadow 化されたグループ情報
 .SH 関連項目
 .BR group (5),
 .BR passwd (5),

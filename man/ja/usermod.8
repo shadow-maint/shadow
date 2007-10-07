@@ -1,3 +1,4 @@
+.\"$Id: usermod.8,v 1.6 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,134 +26,111 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: usermod.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
 .\" Updated Tue Jan 23 17:21:08 JST 2001
 .\"         by Kentaro Shirakata <argrath@ub32.org>
+.\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
+.\"
+.\"WORD:        initial group           主グループ
+.\"WORD:        supplementary group     補助グループ
 .\"
 .TH USERMOD 8
 .SH 名前
-usermod \- ユーザアカウントを変更する
+usermod \- ユーザアカウントを修正する
 .SH 書式
-.TP 8
-.B usermod
-.\" .RB [ -A
-.\" .RI { method | \fBDEFAULT\fR "},... ]"
-.RB [ -c
-.IR comment ]
-.RB [ -d
-.IR home_dir " ["
-.BR -m ]]
+\fBusermod\fR [\fB-c\fR \fIcomment\fR] [\fB-d\fR \fIhome_dir\fR [\fB-m\fR]]
 .br
-.RB [ -e
-.IR expire_date ]
-.RB [ -f
-.IR inactive_time ]
+[\fB-e\fR \fIexpire_date\fR] [\fB-f\fR \fIinactive_time\fR]
 .br
-.RB [ -g
-.IR initial_group ]
-.RB [ -G
-.IR group [,...]]
+[\fB-g\fR \fIinitial_group\fR] [\fB-G\fR \fIgroup\fR [,...]]
 .br
-.RB [ -l
-.IR login_name ]
-.RB [ -p
-.IR passwd ]
+[\fB-l\fR \fIlogin_name\fR] [\fB-p\fR \fIpasswd\fR]
 .br
-.RB [ -s
-.IR shell ]
-.RB [ -u
-.IR uid " ["
-.BR -o ]]
-.RB [ -L | -U ]
-.I login
+[\fB-s\fR \fIshell\fR] [\fB-u\fR \fIuid\fR [\fB-o\fR]] [\fB-L\fR|\fB-U\fR]
+\fIlogin\fR
 .SH 説明
-\fBusermod\fRコマンドはコマンドライン上での指示にしたがって
-システムのアカウントファイルを変更する。
-\fBusermod\fRコマンドで使えるオプションは
-.\" .IP "\fB-A \fImethod\fR|\fBDEFAULT\fR"
-.\" ユーザの新しい認証方法。
-.\" ユーザの認証方法とは、ユーザが本人である事を確認する為のプログラム名である。
-.\" 文字列\fBDEFAULT\fRを用いてユーザの認証方法をシステム標準のパスワード方式に
-.\" 変更する事も出来る。
+\fBusermod\fR コマンドは、
+コマンドライン上での指定によって、
+システムアカウントファイルを修正する。
+\fBusermod\fR コマンドに指定できるオプションは次の通り。
 .IP "\fB-c \fIcomment\fR"
-パスワードファイルの新しいコメント欄の内容
-通常は\fBchfn\fR(1)ユーティリティを用いて変更される。
+パスワードファイルのコメントフィールドに与える新しい値。
+通常は
+.BR chfn (1)
+ユーティリティによって変更される。
 .IP "\fB-d \fIhome_dir\fR"
 新しいログインディレクトリ。
-\fB-m\fRオプションを用いた場合は現在のホームディレクトリの中身が
-新しいホームディレクトリに移動される。もし存在しない場合は新たに
-作られる。
+\fB-m\fR オプションを用いると、
+現在のホームディレクトリの中身が新しいホームディレクトリに移動される
+(後者が存在しない場合は新たに作成される)。
 .IP "\fB-e \fIexpire_date\fR"
-アカウントが使用不能になる日付。
-日付は\fIYYYY-MM-DD\fRという書式で指定する
-(YYYY, MM, DD はそれぞれ年、月、日を表す数字)。
+そのユーザアカウントが使用不能になる日付。
+日付は \fIYYYY-MM-DD\fR という書式で指定する。
 .IP "\fB-f \fIinactive_days\fR"
-パスワードの使用期限が切れてからアカウントが永久に使用不能になる
-までの日数。
-0とすると、パスワードの期限が切れると同時にこのアカウントは使用不可能
-になる。-1とするとこの機能が働かなくなる。
-デフォルト値は-1。
+パスワードの使用期限が切れてからアカウントが永久に使用不能になるまでの日数。
+0 にすると、
+パスワードの期限が切れると同時にこのアカウントは使用不能になる。
+-1 にするとこの機能が無効になる。デフォルト値は -1。
 .IP "\fB-g \fIinitial_group\fR"
-ログイン時の新しいグループ名またはID。
-このグループ名は既に存在していなくてはならない。
-また、グループ番号は既存のグループを参照していなくてはならない。
-デフォルトのグループ番号は1である。
+
+新たにそのユーザのログイン時初期グループとするグループ名または ID。
+グループ名は既に存在していなければならない。
+グループ番号は既存のグループを参照していなければならない。
+デフォルトのグループ番号は 1。
 .IP "\fB-G \fIgroup,[...]\fR"
-ユーザが属す、副グループのリスト。
-グループはコンマを用いて区切り、間に空白文字を入れては
-ならない。
-指定できるグループには\fB-g\fRオプションを用いる場合と
-同様の制限がある。
+ユーザが属する補助グループ (supplementary groups) のリスト。
+グループはコンマで区切り、間に空白文字を入れてはならない。
+指定できるグループには \fB-g\fR オプションと同様の制限がある。
+現在そのユーザが、
 新しいリストにないグループのメンバーになっている場合は、
 そのグループから削除される。
 .IP "\fB-l \fIlogin_name\fR"
-ユーザのログイン名を\fIlogin\fRから\fIlogin_name\fRに変更する。
-他は何も変更しない。
-特に、新しいログイン名に合わせてホームディレクトリ名を変更しなくては
-ならないだろう。
+ユーザのログイン名を \fIlogin\fR から \fIlogin_name\fR に変更する。
+他は何も変更しないので、
+おそらく新しいログイン名に合わせて
+ホームディレクトリの名前を変更する必要があるだろう。
 .IP "\fB-p \fIpasswd\fR"                                                
-\fBcrypt\fR(3)の返り値である暗号化されたパスワード。
+\fBcrypt\fR(3) の返り値である暗号化パスワード。
 .IP "\fB-s \fIshell\fR"
-新しいログインシェルの名前。
-この欄を空白にした場合はシステムがデフォルトのログインシェルを
-選択する。
+ユーザの新しいログインシェルの名前。
+このフィールドを空白にした場合は、
+システムがデフォルトのログインシェルを選択する。
 .IP "\fB-u \fIuid\fR"
-ユーザのID番号。
-この番号は他と重複していてはならない。\fI-o\fRオプションを用いた
-際はこの限りではない。
-また、非負値でなくてはならない。
-0から99迄の値は大抵システム用のアカウントのために予約されている。
-ホームディレクトリ以下の、そのユーザ所有の全てのファイルのユーザIDは、
+ユーザの ID 番号。
+この値は、\fB-o\fR オプションを用いる場合を除き、他と重複してはならない。
+また非負値でなくてはならない。
+0 から 99 までの値は、通常システムアカウント用に予約されている。
+ホームディレクトリ以下の、
+そのユーザ所有のすべてのファイルのユーザ ID は、
 自動的に新しい値に変更される。
-ホームディレクトリ以下にないファイルは手作業で変更しなくてはならない。
+ホームディレクトリ以下にないファイルは手作業で変更しなければならない。
 .IP "\fB-L\fR"
 ユーザのパスワードをロックする。
-これは暗号化されたパスワードの先頭に '!' を追加し、
-事実上パスワードを無効にする。
-このオプションは \fI-p\fR または \fI-U\fR と同時に用いることはできない。
+これは暗号化されたパスワードの前に '!' を追加し、
+実質的にパスワードを無効にする。
+このオプションを \fI-p\fR や \fI-U\fR と同時に用いることはできない。
 .IP "\fB-U\fR"
 ユーザのパスワードをアンロックする。
 これは暗号化されたパスワードの先頭の '!' を取り除く。
-このオプションは \fI-p\fR または \fI-L\fR と同時に用いることはできない。
+このオプションを \fI-p\fR や \fI-L\fR と同時に用いることはできない。
 .SH 警告
-\fBusermod\fRは現在ログインしているユーザの名前を変更する事は出来ない。
-このコマンドを使用してユーザのID番号を変更する際は、
-指定したユーザのプロセスが一つも実行されていない事を確認してから
-でなくてはならない。
-crontabファイルの所有者は手作業で変更しなくてはならない。
-また、atジョブの所有者も手作業で変更する必要がある。
-NISに関する作業はNISサーバ上で行なわなくてはならない。
+\fBusermod\fR
+は現在ログインしているユーザの名前を変更できない。
+このコマンドを使用してユーザの ID 番号を変更する際には、
+指定したユーザのプロセスが一つも実行されていないことを
+事前に確認しなければならない。
+crontab ファイルの所有者は手作業で変更しなければならない。
+at ジョブの所有者は手作業で変更しなければならない。
+NIS に関する作業は NIS サーバ上で行なわなければならない。
 .SH ファイル
-/etc/passwd \- ユーザアカウントの情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/shadow \- 安全なユーザアカウント情報
+\fI/etc/shadow\fR \- 安全なユーザアカウント情報
 .br
-/etc/group \- グループ情報
+\fI/etc/group\fR \ - グループ情報
 .SH 関連項目
 .BR chfn (1),
 .BR chsh (1),

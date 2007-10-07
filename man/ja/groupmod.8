@@ -1,3 +1,4 @@
+.\"$Id: groupmod.8,v 1.6 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,47 +26,45 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupmod.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH GROUPMOD 8
 .SH 名前
-groupmod \- グループに変更を加える
+groupmod \- グループを修正する
 .SH 書式
-.B groupmod
-[\fB-g\fI gid \fR[\fB-o\fR]]
-[\fB-n\fI group_name \fR]
-.I group
+\fBgroupmod\fR [\fB-g\fI gid \fR[\fB-o\fR]] [\fB-n\fI group_name \fR]
+\fIgroup\fR
 .SH 説明
-\fBgroupmod\fRコマンドは、コマンドライン上で指定した変更事項に即して
-システムのアカウントファイルを改変する。
-\fIgroupmod\fRコマンドに指定できるオプションは次の通り
+\fBgroupmod\fR コマンドは、
+コマンドラインからの指定によって、
+システムアカウントファイルを修正する。
+\fIgroupmod\fR コマンドに指定できるオプションは次の通り。
 .IP "\fB-g \fIgid\fR"
-変更を受けるグループのID番号。
-この値は、\fB-o\fRオプションを用いる場合以外は、他と重複してはならない。
-また、非負値でなくてはならない。
-ディフォルトでは、99より大きく且つ他の全ての既存グループのIDよりも
-大きなものの中で最小のものである。
-変更前のグループIDを持つ全てのファイルは、手作業で新しいグループIDへと
-変更しなくてはならない。
+変更を受けるグループの ID 番号。
+この値は、\fB-o\fR オプションを用いる場合を除き、他と重複してはならない。
+また非負値でなくてはならない。
+デフォルトは、99 および他のあらゆる既存グループの ID よりも大きい、
+最小の数値となる。
+変更前のグループ ID を持つ全てのファイルは、
+手作業で新しいグループ ID へと変更しなければならない。
 .IP "\fB-n \fIgroup_name\fR"
-グループの名前が\fIgroup\fRから\fIgroup_name\fRに変更される。
+グループの名前が \fIgroup\fR から \fIgroup_name\fR に変更される。
 .SH ファイル
-/etc/group \- グループの情報
+\fI/etc/group\fR \- グループ情報
 .br
-/etc/gshadow \- グループの安全な情報
+\fR/etc/gshadow\I \- 安全なグループ情報
 .SH 関連項目
 .BR chfn (1),
 .BR chsh (1),
 .BR passwd (1),
 .BR groupadd (8),
-.BR groupdel (8)
+.BR groupdel (8),
 .BR useradd (8),
 .BR userdel (8),
-.BR usermod (8),
+.BR usermod (8)
 .SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

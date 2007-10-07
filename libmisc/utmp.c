@@ -41,17 +41,16 @@
 #include <stdio.h>
 
 #include "rcsid.h"
-RCSID("$Id: utmp.c,v 1.10 2002/03/08 04:30:30 kloczek Exp $")
-
+RCSID ("$Id: utmp.c,v 1.14 2003/12/17 12:52:25 kloczek Exp $")
 #if HAVE_UTMPX_H
 struct utmpx utxent;
 #endif
 struct utmp utent;
 
-extern	struct	utmp	*getutent();
-extern	struct	utmp	*getutline();
-extern	void	setutent();
-extern	void	endutent();
+extern struct utmp *getutent ();
+extern struct utmp *getutline ();
+extern void setutent ();
+extern void endutent ();
 
 #define	NO_UTENT \
 	"No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
@@ -72,21 +71,21 @@ extern	void	endutent();
  *	command line flags.
  */
 
-#if defined(__linux__)  /* XXX */
+#if defined(__linux__)		/* XXX */
 
-void
-checkutmp(int picky)
+void checkutmp (int picky)
 {
 	char *line;
 	struct utmp *ut;
-	pid_t pid = getpid();
+	pid_t pid = getpid ();
 
-	setutent();
+	setutent ();
 
 	/* First, try to find a valid utmp entry for this process.  */
-	while ((ut = getutent()))
+	while ((ut = getutent ()))
 		if (ut->ut_pid == pid && ut->ut_line[0] && ut->ut_id[0] &&
-		    (ut->ut_type==LOGIN_PROCESS || ut->ut_type==USER_PROCESS))
+		    (ut->ut_type == LOGIN_PROCESS
+		     || ut->ut_type == USER_PROCESS))
 			break;
 
 	/* If there is one, just use it, otherwise create a new one.  */
@@ -94,54 +93,55 @@ checkutmp(int picky)
 		utent = *ut;
 	} else {
 		if (picky) {
-			puts(NO_UTENT);
-			exit(1);
+			puts (NO_UTENT);
+			exit (1);
 		}
-		line = ttyname(0);
+		line = ttyname (0);
 		if (!line) {
-			puts(NO_TTY);
-			exit(1);
+			puts (NO_TTY);
+			exit (1);
 		}
-		if (strncmp(line, "/dev/", 5) == 0)
+		if (strncmp (line, "/dev/", 5) == 0)
 			line += 5;
-		memset((void *) &utent, 0, sizeof utent);
+		memset ((void *) &utent, 0, sizeof utent);
 		utent.ut_type = LOGIN_PROCESS;
 		utent.ut_pid = pid;
-		strncpy(utent.ut_line, line, sizeof utent.ut_line);
+		strncpy (utent.ut_line, line, sizeof utent.ut_line);
 		/* XXX - assumes /dev/tty?? */
-		strncpy(utent.ut_id, utent.ut_line + 3, sizeof utent.ut_id);
-		strcpy(utent.ut_user, "LOGIN");
-		time(&utent.ut_time);
+		strncpy (utent.ut_id, utent.ut_line + 3,
+			 sizeof utent.ut_id);
+		strcpy (utent.ut_user, "LOGIN");
+		utent.ut_time = time (NULL);
 	}
 }
 
 #elif defined(LOGIN_PROCESS)
 
-void
-checkutmp(int picky)
+void checkutmp (int picky)
 {
 	char *line;
 	struct utmp *ut;
+
 #if HAVE_UTMPX_H
 	struct utmpx *utx;
 #endif
-	pid_t pid = getpid();
+	pid_t pid = getpid ();
 
 #if HAVE_UTMPX_H
-	setutxent();
+	setutxent ();
 #endif
-	setutent();
+	setutent ();
 
 	if (picky) {
 #if HAVE_UTMPX_H
-		while ((utx = getutxent()))
+		while ((utx = getutxent ()))
 			if (utx->ut_pid == pid)
 				break;
 
 		if (utx)
 			utxent = *utx;
 #endif
-		while ((ut = getutent()))
+		while ((ut = getutent ()))
 			if (ut->ut_pid == pid)
 				break;
 
@@ -149,13 +149,13 @@ checkutmp(int picky)
 			utent = *ut;
 
 #if HAVE_UTMPX_H
-		endutxent();
+		endutxent ();
 #endif
-		endutent();
+		endutent ();
 
 		if (!ut) {
- 			puts(NO_UTENT);
-			exit(1);
+			puts (NO_UTENT);
+			exit (1);
 		}
 #ifndef	UNIXPC
 
@@ -167,53 +167,64 @@ checkutmp(int picky)
 		 */
 
 		if (utent.ut_line[0] == '\0')
-#endif	/* !UNIXPC */
+#endif				/* !UNIXPC */
 		{
-			if (!(line = ttyname(0))) {
-				puts(NO_TTY);
-				exit(1);
+			if (!(line = ttyname (0))) {
+				puts (NO_TTY);
+				exit (1);
 			}
-			if (strncmp(line, "/dev/", 5) == 0)
+			if (strncmp (line, "/dev/", 5) == 0)
 				line += 5;
-			strncpy(utent.ut_line, line, sizeof utent.ut_line);
+			strncpy (utent.ut_line, line,
+				 sizeof utent.ut_line);
 #if HAVE_UTMPX_H
-			strncpy(utxent.ut_line, line, sizeof utxent.ut_line);
+			strncpy (utxent.ut_line, line,
+				 sizeof utxent.ut_line);
 #endif
 		}
 	} else {
-		if (!(line = ttyname(0))) {
-			puts(NO_TTY);
-			exit(1);
+		if (!(line = ttyname (0))) {
+			puts (NO_TTY);
+			exit (1);
 		}
-		if (strncmp(line, "/dev/", 5) == 0)
+		if (strncmp (line, "/dev/", 5) == 0)
 			line += 5;
 
- 		strncpy (utent.ut_line, line, sizeof utent.ut_line);
-		if ((ut = getutline(&utent)))
- 			strncpy(utent.ut_id, ut->ut_id, sizeof ut->ut_id);
+		strncpy (utent.ut_line, line, sizeof utent.ut_line);
+		if ((ut = getutline (&utent)))
+			strncpy (utent.ut_id, ut->ut_id, sizeof ut->ut_id);
 
-		strcpy(utent.ut_user, "LOGIN");
-		utent.ut_pid = getpid();
+		strcpy (utent.ut_user, "LOGIN");
+		utent.ut_pid = getpid ();
 		utent.ut_type = LOGIN_PROCESS;
-		time(&utent.ut_time);
+		utent.ut_time = time (NULL);
 #if HAVE_UTMPX_H
-		strncpy(utxent.ut_line, line, sizeof utxent.ut_line);
-		if ((utx = getutxline(&utxent)))
-			strncpy(utxent.ut_id, utx->ut_id, sizeof utxent.ut_id);
+		strncpy (utxent.ut_line, line, sizeof utxent.ut_line);
+		if ((utx = getutxline (&utxent)))
+			strncpy (utxent.ut_id, utx->ut_id,
+				 sizeof utxent.ut_id);
 
-		strcpy(utxent.ut_user, "LOGIN");
+		strcpy (utxent.ut_user, "LOGIN");
 		utxent.ut_pid = utent.ut_pid;
 		utxent.ut_type = utent.ut_type;
-		gettimeofday((struct timeval *) &utxent.ut_tv, NULL);
+		if (sizeof (utxent.ut_tv) == sizeof (struct timeval))
+			gettimeofday ((struct timeval *) &utxent.ut_tv,
+				      NULL);
+		else {
+			struct timeval tv;
+
+			gettimeofday (&tv, NULL);
+			utxent.ut_tv.tv_sec = tv.tv_sec;
+			utxent.ut_tv.tv_usec = tv.tv_usec;
+		}
 		utent.ut_time = utxent.ut_tv.tv_sec;
 #endif
 	}
 }
 
-#else	/* !USG */
+#else				/* !USG */
 
-void
-checkutmp(int picky)
+void checkutmp (int picky)
 {
 	char *line;
 
@@ -221,8 +232,8 @@ checkutmp(int picky)
 	 * Hand-craft a new utmp entry.
 	 */
 
-	memzero(&utent, sizeof utent);
-	if (! (line = ttyname (0))) {
+	memzero (&utent, sizeof utent);
+	if (!(line = ttyname (0))) {
 		puts (NO_TTY);
 		exit (1);
 	}
@@ -230,10 +241,10 @@ checkutmp(int picky)
 		line += 5;
 
 	(void) strncpy (utent.ut_line, line, sizeof utent.ut_line);
-	(void) time (&utent.ut_time);
+	utent.ut_time = time (NULL);
 }
 
-#endif	/* !USG */
+#endif				/* !USG */
 
 
 /*
@@ -242,34 +253,32 @@ checkutmp(int picky)
  */
 
 #ifndef HAVE_UPDWTMP
-static void
-updwtmp(const char *filename, const struct utmp *ut)
+static void updwtmp (const char *filename, const struct utmp *ut)
 {
 	int fd;
 
-	fd = open(filename, O_APPEND | O_WRONLY, 0);
+	fd = open (filename, O_APPEND | O_WRONLY, 0);
 	if (fd >= 0) {
-		write(fd, (const char *) ut, sizeof(*ut));
-		close(fd);
+		write (fd, (const char *) ut, sizeof (*ut));
+		close (fd);
 	}
 }
-#endif  /* ! HAVE_UPDWTMP */
+#endif				/* ! HAVE_UPDWTMP */
 
 #ifdef HAVE_UTMPX_H
 #ifndef HAVE_UPDWTMPX
-static void
-updwtmpx(const char *filename, const struct utmpx *utx)
+static void updwtmpx (const char *filename, const struct utmpx *utx)
 {
 	int fd;
 
-	fd = open(filename, O_APPEND | O_WRONLY, 0);
+	fd = open (filename, O_APPEND | O_WRONLY, 0);
 	if (fd >= 0) {
-		write(fd, (const char *) utx, sizeof(*utx));
-		close(fd);
+		write (fd, (const char *) utx, sizeof (*utx));
+		close (fd);
 	}
 }
-#endif  /* ! HAVE_UPDWTMPX */
-#endif  /* ! HAVE_UTMPX_H */
+#endif				/* ! HAVE_UPDWTMPX */
+#endif				/* ! HAVE_UTMPX_H */
 
 
 /*
@@ -279,30 +288,28 @@ updwtmpx(const char *filename, const struct utmpx *utx)
  *	USER_PROCESS.  the wtmp file will be updated as well.
  */
 
-#if defined(__linux__)  /* XXX */
+#if defined(__linux__)		/* XXX */
 
-void
-setutmp(const char *name, const char *line, const char *host)
+void setutmp (const char *name, const char *line, const char *host)
 {
 	utent.ut_type = USER_PROCESS;
-	strncpy(utent.ut_user, name, sizeof utent.ut_user);
-	time(&utent.ut_time);
+	strncpy (utent.ut_user, name, sizeof utent.ut_user);
+	utent.ut_time = time (NULL);
 	/* other fields already filled in by checkutmp above */
-	setutent();
-	pututline(&utent);
-	endutent();
-	updwtmp(_WTMP_FILE, &utent);
+	setutent ();
+	pututline (&utent);
+	endutent ();
+	updwtmp (_WTMP_FILE, &utent);
 }
 
 #elif HAVE_UTMPX_H
 
-void
-setutmp(const char *name, const char *line, const char *host)
+void setutmp (const char *name, const char *line, const char *host)
 {
-	struct	utmp	*utmp, utline;
-	struct	utmpx	*utmpx, utxline;
-	pid_t	pid = getpid ();
-	int	found_utmpx = 0, found_utmp = 0;
+	struct utmp *utmp, utline;
+	struct utmpx *utmpx, utxline;
+	pid_t pid = getpid ();
+	int found_utmpx = 0, found_utmp = 0;
 
 	/*
 	 * The canonical device name doesn't include "/dev/"; skip it
@@ -338,7 +345,7 @@ setutmp(const char *name, const char *line, const char *host)
 	 * entry with the device name in it.
 	 */
 
-	if (! found_utmpx) {
+	if (!found_utmpx) {
 		memset ((void *) &utxline, 0, sizeof utxline);
 		strncpy (utxline.ut_line, line, sizeof utxline.ut_line);
 		utxline.ut_pid = getpid ();
@@ -346,20 +353,20 @@ setutmp(const char *name, const char *line, const char *host)
 		utxline = *utmpx;
 		if (strncmp (utxline.ut_line, "/dev/", 5) == 0) {
 			memmove (utxline.ut_line, utxline.ut_line + 5,
-				sizeof utxline.ut_line - 5);
+				 sizeof utxline.ut_line - 5);
 			utxline.ut_line[sizeof utxline.ut_line - 5] = '\0';
 		}
 	}
-	if (! found_utmp) {
+	if (!found_utmp) {
 		memset ((void *) &utline, 0, sizeof utline);
 		strncpy (utline.ut_line, utxline.ut_line,
-			sizeof utline.ut_line);
+			 sizeof utline.ut_line);
 		utline.ut_pid = utxline.ut_pid;
 	} else {
 		utline = *utmp;
 		if (strncmp (utline.ut_line, "/dev/", 5) == 0) {
 			memmove (utline.ut_line, utline.ut_line + 5,
-				sizeof utline.ut_line - 5);
+				 sizeof utline.ut_line - 5);
 			utline.ut_line[sizeof utline.ut_line - 5] = '\0';
 		}
 	}
@@ -375,101 +382,28 @@ setutmp(const char *name, const char *line, const char *host)
 
 	utline.ut_type = utxline.ut_type = USER_PROCESS;
 
-	gettimeofday(&utxline.ut_tv, NULL);
+	if (sizeof (utxline.ut_tv) == sizeof (struct timeval))
+		gettimeofday ((struct timeval *) &utxline.ut_tv, NULL);
+	else {
+		struct timeval tv;
+
+		gettimeofday (&tv, NULL);
+		utxline.ut_tv.tv_sec = tv.tv_sec;
+		utxline.ut_tv.tv_usec = tv.tv_usec;
+	}
 	utline.ut_time = utxline.ut_tv.tv_sec;
 
-	strncpy(utxline.ut_host, host ? host : "", sizeof utxline.ut_host);
+	strncpy (utxline.ut_host, host ? host : "",
+		 sizeof utxline.ut_host);
 
 	pututxline (&utxline);
 	pututline (&utline);
 
-	updwtmpx(_WTMP_FILE "x", &utxline);
-	updwtmp(_WTMP_FILE, &utline);
+	updwtmpx (_WTMP_FILE "x", &utxline);
+	updwtmp (_WTMP_FILE, &utline);
 
 	utxent = utxline;
 	utent = utline;
 }
 
-#else /* !SVR4 */
-
-void
-setutmp(const char *name, const char *line)
-{
-	struct	utmp	utmp;
-	int	fd;
-	int	found = 0;
-
-	if ((fd = open(_UTMP_FILE, O_RDWR)) < 0)
-		return;
-
-#if !defined(SUN) && !defined(BSD) && !defined(SUN4)  /* XXX */
- 	while (!found && read(fd, (char *)&utmp, sizeof utmp) == sizeof utmp) {
- 		if (! strncmp (line, utmp.ut_line, (int) sizeof utmp.ut_line))
-			found++;
-	}
 #endif
-
-	if (! found) {
-
-		/*
-		 * This is a brand-new entry.  Clear it out and fill it in
-		 * later.
-		 */
-
-  		memzero(&utmp, sizeof utmp);
- 		strncpy(utmp.ut_line, line, (int) sizeof utmp.ut_line);
-	}
-
-	/*
-	 * Fill in the parts of the UTMP entry.  BSD has just the name,
-	 * while System V has the name, PID and a type.
-	 */
-
-	strncpy(utmp.ut_user, name, sizeof utent.ut_user);
-#ifdef USER_PROCESS
-	utmp.ut_type = USER_PROCESS;
-	utmp.ut_pid = getpid ();
-#endif
-
-	/*
-	 * Put in the current time (common to everyone)
-	 */
-
-	(void) time (&utmp.ut_time);
-
-#ifdef UT_HOST
-	/*
-	 * Update the host name field for systems with networking support
-	 */
-
-	(void) strncpy (utmp.ut_host, utent.ut_host, (int) sizeof utmp.ut_host);
-#endif
-
-	/*
-	 * Locate the correct position in the UTMP file for this
-	 * entry.
-	 */
-
-#ifdef HAVE_TTYSLOT
-	(void) lseek (fd, (off_t) (sizeof utmp) * ttyslot (), SEEK_SET);
-#else
-	if (found)	/* Back up a splot */
-		lseek (fd, (off_t) - sizeof utmp, SEEK_CUR);
-	else		/* Otherwise, go to the end of the file */
-		lseek (fd, (off_t) 0, SEEK_END);
-#endif
-
-	/*
-	 * Scribble out the new entry and close the file.  We're done
-	 * with UTMP, next we do WTMP (which is real easy, put it on
-	 * the end of the file.
-	 */
-
-	(void) write (fd, (char *) &utmp, sizeof utmp);
-	(void) close (fd);
-
-	updwtmp(_WTMP_FILE, &utmp);
- 	utent = utmp;
-}
-
-#endif /* SVR4 */

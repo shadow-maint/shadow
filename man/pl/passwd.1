@@ -1,4 +1,4 @@
-.\" $Id: passwd.1,v 1.9 2002/03/09 19:24:25 ankry Exp $
+.\" $Id: passwd.1,v 1.11 2003/04/28 17:52:15 kloczek Exp $
 .\" Translation (c) 1999 Wojtek Kotwica
 .\"             (c) 2002 Andrzej Krzysztofowicz
 .\" 
@@ -183,9 +183,26 @@ wygodnie.
 U¿ytkownicy mog± nie móc zmieniæ has³a w systemie przy w³±czonym NIS, je¶li
 nie s± zalogowani do serwera NIS.
 .SH PLIKI
-/etc/passwd \- informacja o kontach u¿ytkowników
+\fI/etc/passwd\fR	\- informacja o kontach u¿ytkowników
 .br
-/etc/shadow \- zakodowane has³a u¿ytkowników
+\fI/etc/shadow\fR	\- zakodowane has³a u¿ytkowników
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBpasswd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB1\fR	\- permission denied
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB3\fR	\- nieoczekiwanie niepowodzenie, nic nie zosta³o wykonane
+.br
+\fB4\fR	\- nieoczekiwanie niepowodzenie, brakuje pliku passwd
+.br
+\fB5\fR	\- passwd file busy, try again later
+.br
+\fB6\fR	\- niew³a¶ciwe parametry opcji
 .SH "ZOBACZ TAK¯E"
 .BR group (5),
 .BR passwd (5)

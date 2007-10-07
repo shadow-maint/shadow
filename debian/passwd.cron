@@ -1,8 +1,0 @@
-#!/bin/sh
-#
-# cron.daily script to check integrity of the password and group files
-
-test -f /usr/sbin/pwck || exit 0
-
-pwck -q -r
-grpck -r

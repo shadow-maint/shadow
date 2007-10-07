@@ -1,4 +1,4 @@
-.\"$Id: groups.1,v 1.10 2002/03/09 19:22:29 ankry Exp $
+.\"$Id: groups.1,v 1.12 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,7 +29,8 @@
 .SH NAME
 groups \- display current group names
 .SH SYNOPSIS
-\fBgroups\fR [\fIuser\fR]
+\fBgroups\fR
+[\fIuser\fR]
 .SH DESCRIPTION
 \fBgroups\fR displays the current group names or ID values. If the value
 does not have a corresponding entry in \fI/etc/group\fR, the value will be
@@ -41,7 +42,7 @@ from \fI/etc/group\fR reported.
 The user must use \fBnewgrp\fR or \fBsg\fR to change their current real and
 effective group ID.
 .SH FILES
-/etc/group \- group information
+\fI/etc/group\fR \	- group information
 .SH SEE ALSO
 .BR newgrp (1),
 .BR getgid (2),

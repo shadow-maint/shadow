@@ -30,38 +30,29 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: entry.c,v 1.4 2000/08/26 18:27:17 marekm Exp $")
-
+RCSID ("$Id: entry.c,v 1.6 2003/05/03 16:14:33 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
+extern struct passwd *fgetpwent ();
 
-extern struct	passwd	*fgetpwent ();
-
-void
-pw_entry(const char *name, struct passwd *pwent)
+void pw_entry (const char *name, struct passwd *pwent)
 {
-	struct	passwd	*passwd;
+	struct passwd *passwd;
+
 #ifdef	SHADOWPWD
-	struct	spwd	*spwd;
-#ifdef	ATT_AGE
-	char	*l64a ();
-	char	*cp;
-#endif
+	struct spwd *spwd;
 #endif
 
-	if (! (passwd = getpwnam (name))) {
+	if (!(passwd = getpwnam (name))) {
 		pwent->pw_name = (char *) 0;
 		return;
-	} else  {
+	} else {
 		pwent->pw_name = xstrdup (passwd->pw_name);
 		pwent->pw_uid = passwd->pw_uid;
 		pwent->pw_gid = passwd->pw_gid;
-#ifdef	ATT_COMMENT
-		pwent->pw_comment = xstrdup (passwd->pw_comment);
-#endif
 		pwent->pw_gecos = xstrdup (passwd->pw_gecos);
 		pwent->pw_dir = xstrdup (passwd->pw_dir);
 		pwent->pw_shell = xstrdup (passwd->pw_shell);
@@ -69,31 +60,11 @@ pw_entry(const char *name, struct passwd *pwent)
 		setspent ();
 		if ((spwd = getspnam (name))) {
 			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);
-#ifdef	ATT_AGE
-			pwent->pw_age = (char *) xmalloc (5);
-
-			if (spwd->sp_max > (63*7))
-				spwd->sp_max = (63*7);
-			if (spwd->sp_min > (63*7))
-				spwd->sp_min = (63*7);
-
-			pwent->pw_age[0] = i64c (spwd->sp_max / 7);
-			pwent->pw_age[1] = i64c (spwd->sp_min / 7);
-
-			cp = l64a (spwd->sp_lstchg / 7);
-			pwent->pw_age[2] = cp[0];
-			pwent->pw_age[3] = cp[1];
-
-			pwent->pw_age[4] = '\0';
-#endif
 			endspent ();
 			return;
 		}
 		endspent ();
 #endif
 		pwent->pw_passwd = xstrdup (passwd->pw_passwd);
-#ifdef	ATT_AGE
-		pwent->pw_age = xstrdup (passwd->pw_age);
-#endif
 	}
 }

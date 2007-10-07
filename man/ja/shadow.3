@@ -1,3 +1,4 @@
+.\"$Id: shadow.3,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,12 +26,11 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: shadow.3,v 1.2 2001/11/16 17:01:33 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" updated Tue 17 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SHADOW 3
 .SH 名前
@@ -63,82 +63,89 @@ shadow \- 暗号化されたパスワードファイル用ルーチン
 .B int ulckpwdf();
 .SH 説明
 .I shadow
-はshadowパスワードファイル\fI/etc/shadow\fRの内容を操作するルーチンである。
+は shadow パスワードファイル
+\fI/etc/shadow\fR の内容を操作するルーチンである。
+\fI#include\fR ファイルに与えられている構造体は以下の通り。
 .sp
 struct spwd {
 .in +.5i
 .br
-	char	*sp_namp; /* ユーザのログイン名 */
+	char	*sp_namp; /* user login name */
 .br
-	char	*sp_pwdp; /* 暗号化されたパスワード */
+	char	*sp_pwdp; /* encrypted password */
 .br
-	long	sp_lstchg; /* 最終パスワード変更日時 */
+	long	sp_lstchg; /* last password change */
 .br
-	int	sp_min; /* パスワード変更不能日数 */
+	int	sp_min; /* days until change allowed. */
 .br
-	int	sp_max; /* パスワード変更要求迄の日数 */
+	int	sp_max; /* days before change required */
 .br
-	int	sp_warn; /* パスワード期限満了警告日数 */
+	int	sp_warn; /* days warning for expiration */
 .br
-	int	sp_inact; /* アカウント無効までの日数 */
+	int	sp_inact; /* days before account inactive */
 .br
-	int	sp_expire; /* アカウント期限満了の日付 */
+	int	sp_expire; /* date when account expires */
 .br
-	int	sp_flag; /* 将来の使用に予約 */
+	int	sp_flag; /* reserved for future use */
 .br
 .in -.5i
 }
 .PP
-各欄の意味は
+各フィールドの意味は:
 .sp
-sp_namp \- ヌル終端のユーザ名へのポインタ
+sp_namp \- ヌル終端されたユーザ名文字列へのポインタ
 .br
-sp_pwdp \- ヌル終端のパスワードへのポインタ
+sp_pwdp \- ヌル終端されたパスワード文字列へのポインタ
 .br
 sp_lstchg \- 1970年1月1日からパスワード最終変更日時迄の日数
 .br
-sp_min \- パスワード変更が出来る様になるまでの日数
+sp_min \- パスワード変更が出来るようになるまでの日数
 .br
 sp_max \- パスワードを変更しなくても良い日数
 .br
-sp_warn \- パスワードが無効となるまでにユーザにパスワードが
-無効となりかかっているとの警告を出す日数
+sp_warn \- パスワードが期限切れになる前に、
+期限切れが近づいている旨の警告をユーザに出す期間の日数
 .br
-sp_inact \- パスワードが無効となってからアカウントが不能となり
-使用できなくなるまでの日数
+sp_inact \- パスワードが期限切れになってから、
+アカウントが不能となり使用できなくなるまでの日数
 .br
-sp_expire \- 1970年1月1からアカウント使用不能となる迄の日数
+sp_expire \- 1970年1月1からアカウントが使用不能となる日迄の日数
 .br
-sp_flag \- 将来の使用に予約
+sp_flag \- 将来使うときに向けて予約
 .SH 説明
-\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, 及び \fBsgetspent\fR
-は各々\fBstruct spwd\fRへのポインタを返す。
-\fBgetspent\fRはファイルから次のエントリを、\fBfgetspent\fRは
-指定されたストリームから次のエントリを返す。
-この際、ファイルは正しい書式である仮定している。
-\fBsgetspent\fRは入力として与えられた文字列を用いて\fBstruct spwd\fR
-へのポインタを返す。
-\fBgetspnam\fRはファイル中の現在の位置から\fBname\fRに符合するエントリ
-を探す。
+\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, \fBsgetspent\fR
+は、それぞれ \fBstruct spwd\fR へのポインタを返す。
+\fBgetspent\fR はファイルから次のエントリを、
+\fBfgetspent\fR は指定されたストリーム
+(正しい書式のファイルとみなされる)
+から次のエントリを返す。
+\fBsgetspent\fR は入力として与えられた文字列を用いて
+\fBstruct spwd\fR へのポインタを返す。
+\fBgetspnam\fR はファイル中の現在の位置から
+\fBname\fR にマッチするエントリを探す。
 .PP
-\fBsetspent\fR及び\fBendspent\fRはshadowしたパスワードファイルへの
-アクセスを夫々開始及び終了するために用いることが出来る。
+\fBsetspent\fR は
+shadow パスワードファイルへのアクセスを開始するために、
+\fBendspent\fR は終了するために用いられる。
 .PP
-\fB/etc/shadow\fRファイルに対する排他的なアクセスを保証するために、
-\fBlckpwdf\fR及び\fBulckpwdf\fRルーチンを用いなくてはならない。
-\fBlckpwdf\fRは\fBpw_lock\fRを用いて最大15秒間ロックをしようとする。
-そして、最初の15秒の残りを用いて二度目のロックをしようとし続ける。
-全部で15秒間の間にいずれかの試みが失敗した場合は、\fBlckpwdf\fRは-1を返す。
-いずれのロックも成功した場合は0が返される。
+\fI/etc/shadow\fR ファイルに対する排他的なアクセスを保証したい場合には、
+\fBlckpwdf\fR ルーチンと \fBulckpwdf\fR ルーチンを用いる。
+\fBlckpwdf\fR は \fBpw_lock\fR を用いて最大 15 秒間ロックを取得しようとする。
+そして最初の 15 秒の残りの間、
+\fBspw_lock\fR によって二度目のロックをしようと試み続ける。
+計 15 秒間の間にいずれかの試みが失敗した場合は、
+\fBlckpwdf\fR は -1 を返す。
+いずれのロックも成功した場合は 0 が返される。
 .SH 返り値
-これらのルーチンは、エントリが残っていない場合又は処理の過程で
-エラーが発生した場合にNULLを返す。
-返り値が\fBint\fRであるルーチンは、成功時には0を、失敗時には-1を返す。
+これらのルーチンは、エントリが残っていない場合や、
+処理の過程でエラーが発生した場合には NULL を返す。
+返り値が \fBint\fR であるルーチンは、
+成功したら 0 を、失敗したら -1 を返す。
 .SH 警告
 shadowされたパスワードファイルへのアクセスは制限されているので、
-これらのルーチンはスーパーユーザのみ用いることが出来る。
+これらのルーチンはスーパーユーザだけが利用できる。
 .SH ファイル
-/etc/shadow \- 暗号化されたユーザパスワード
+\fI/etc/shadow\fR \- 暗号化されたユーザパスワード
 .SH 関連項目
 .BR getpwent (3),
 .BR shadow (5)

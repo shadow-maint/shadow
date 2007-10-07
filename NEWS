@@ -1,4 +1,49 @@
-$Id: NEWS,v 1.31 2002/03/13 09:30:52 kloczek Exp $
+$Id: NEWS,v 1.57.2.1 2004/01/14 06:20:26 kloczek Exp $
+
+shadow-4.0.3 => shadow-4.0.4
+
+*** general:
+- added missing information about -f options in groupadd usage mesage
+  (document this also in man page),
+- removed TCFS support (tcfs is dead),
+- convert all po/*.po files to utf-8,
+- one TODO entry gone: fix nscd flushing databases on change (use
+  per service flushing method instead HUPing nscd process),
+- removed old AUTH_METHODS dependent code,
+- chage: now all code depend on SHADOWPWD. If shadow will not be configured
+  on autoconf level for using shadow possword chage is olny stub which
+  informs "chage not configured for shadow password support."
+- dpasswd: removed,
+- login: remove handle login.defs::DIALUPS_CHECK_ENAB code,
+- login: remove handle login.defs::NO_PASSWORD_CONSOLE code,
+- ALL tools, libraries: remove old SVR4, SVR4_SI86_EUA BSD_QUOTA and ATT_AGE
+  dependent code,
+- ALL: ready for gettext 0.11.5, automake 1.7.4, autoconf 2.57,
+- logoutd, userd: handle also utmpx if avalaile,
+- newgrp: fix for non-PAM version
+  Use CLOSE_SESSIONS depending code only when USE_PAM.
+  The problem was reported by Mattias Webjorn Eriksson using Slackware
+  8.1 and reproduced it using slackware-current (9.0beta) (fix submited by
+  Simon Williams <simon@no-dns-yet.org.uk>),
+- fix in too_many_failures() function: incorrect if() condition in non-PAM
+  dependent code in fail login handling (fixed by Krzysztof
+  Oledzki <ole@ans.pl>),
+*** documentation:
+- install groups(1) man page (moved from EXTRA_DIST to man_MANS),
+- removed pwauth(8), d_passwd(5), dialups(5) man pages,
+- remove text about password aging from passwd(5) (based on Debian changes),
+- document useradd and groupadd -M option in en and pl man pages
+  (by Jakub Mikusek <mick3y@o.k.pl>).
+- added ru passwd(1) man page from KSI resources,
+- added es man pages found in Conectiva distribution resources,
+- added chch(1), chfn(1) man pages from chinese man pages translation
+  project,
+- added id(1) man page czech man pages translation project,
+- updated ja man pages and added expiry(1),
+- removed old doc/ANNOUNCE,
+- updated german passwd(1), chsh(1) and login(1) man page and added chfn(1)
+  (by Josef Spillner <josef@ggzgamingzone.org>),
+- many other cleanups and unifications in man pages.
 
 shadow-4.0.2 => shadow-4.0.3
 

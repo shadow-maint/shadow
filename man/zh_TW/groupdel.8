@@ -1,0 +1,57 @@
+.\" Copyright 1991 - 1993, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: groupdel.8,v 1.2 2003/04/26 13:24:16 kloczek Exp $
+.\"
+.TH GROUPDEL 8
+.SH 名稱
+groupdel \- 刪除群組
+.SH 語法
+.B groupdel
+.I group
+.SH 描述
+\fBgroupdel\fR 命令會修改系統帳號檔，會刪除所有已經存在的\fIgroup\fR.
+群組名須存在。
+.PP
+你須手動確認一下所有的檔案系統確保有沒有檔案還是沒修正群組名變成群組ID。
+.SH 警告
+如果有任何一個群組的使用者在線上的話就不能移除該群組。
+最好先移除使用者後再移除群組。
+.SH 檔案
+\fI/etc/group\fR \- 群組資訊
+\fI/etc/gshadow\fR \- 群組資訊加密
+.SH 相關文件
+.BR chfn (1),
+.BR chsh (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.BR passwd (1),
+.BR groupadd (8),
+.BR groupmod (8)
+.SH 作者
+Julianne Frances Haugh (jfh@tab.com)

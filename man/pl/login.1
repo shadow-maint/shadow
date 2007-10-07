@@ -1,4 +1,4 @@
-.\" $Id: login.1,v 1.7 2002/03/09 19:24:25 ankry Exp $
+.\" $Id: login.1,v 1.9 2003/04/26 13:24:15 kloczek Exp $
 .\" {PTM/WK/1999-09-25}
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -119,29 +119,27 @@ czê¶æ bêdzie mieæ zastosowanie w danej instalacji.
 Po³o¿enie plików mo¿e byæ ró¿ne w zale¿no¶ci od konfiguracji systemu.
 .SH PLIKI
 .br
-/etc/utmp \- lista bie¿±cych sesji pracy
+\fI/var/run/utmp\fR \- lista bie¿±cych sesji pracy
 .br
-/etc/wtmp \- lista poprzednich sesji pracy
+\fI/var/log/wtmp\fR \- lista poprzednich sesji pracy
 .br
-/etc/passwd \- informacje o kontach u¿ytkowników
+\fI/etc/passwd\fR \- informacje o kontach u¿ytkowników
 .br
-/etc/shadow \- zakodowane has³a i informacje o ich wa¿no¶ci
+\fI/etc/shadow\fR \- zakodowane has³a i informacje o ich wa¿no¶ci
 .br
-/etc/motd \- plik 'wiadomo¶ci dnia'
+\fI/etc/motd\fR \- plik 'wiadomo¶ci dnia'
 .br
-/etc/nologin \- zapobiega logowaniu innych ni¿ root
+\fI/etc/nologin\fR \- zapobiega logowaniu innych ni¿ root
 .br
-/etc/ttytype \- lista typów terminali
+\fI/etc/ttytype\fR \- lista typów terminali
 .br
-$HOME/.profile \- skrypt startowy domy¶lnej pow³oki
 .br
-$HOME/.hushlogin \- zapobiega wy¶wietlaniu wiadomo¶ci dnia
+\fI$HOME/.hushlogin\fR \- zapobiega wy¶wietlaniu wiadomo¶ci dnia
 .SH ZOBACZ TAK¯E
 .BR mail (1),
 .BR passwd (1),
 .BR sh (1),
 .BR su (1),
-.\" .BR d_passwd (5),
 .BR login.defs (5),
 .BR nologin (5),
 .BR passwd (5),

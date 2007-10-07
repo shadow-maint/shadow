@@ -1,61 +1,55 @@
-.\"$Id: pwconv.8,v 1.10 2002/03/08 04:39:12 kloczek Exp $
+.\"$Id: pwconv.8,v 1.11 2003/05/01 18:17:39 kloczek Exp $
 .TH PWCONV 8 "26 Sep 1997"
 .SH NAME
 pwconv, pwunconv, grpconv, grpunconv \- convert to and from shadow passwords and groups.
 .SH SYNOPSIS
-.B pwconv
+\fBpwconv\fR
 .br
-.B pwunconv
+\fBpwunconv\fR
 .br
-.B grpconv
+\fBgrpconv\fR
 .br
-.B grpunconv
+\fBgrpunconv\fR
 .SH DESCRIPTION
-These four programs all operate on the normal and shadow password and
-group files:
-.IR /etc/passwd ", " /etc/group ", " /etc/shadow ", and " /etc/gshadow .
-
-.B pwconv
-.RI "creates " shadow " from " passwd " and an optionally existing " shadow .
-.B pwunconv
-.RI "creates " passwd " from " passwd " and " shadow " and then removes " shadow .
-.B grpconv
-.RI "creates " gshadow " from " group " and an optionally existing " gshadow .
-.B grpunconv
-.RI "creates " group " from " group " and " gshadow " and then removes " gshadow .
-
-Each program acquires the necessary locks before conversion.
-
-.BR pwconv " and " grpconv
-are similiar.  First, entries in the shadowed file which don't exist
-in the main file are removed.  Then, shadowed entries which don't have
-`x' as the password in the main file are updated.  Any missing
-shadowed entries are added.  Finally, passwords in the main file are
-replaced with `x'.  These programs can be used for initial conversion
-as well to update the shadowed file if the main file is edited by
-hand.
-
-.B pwconv
-will use the values of
-.BR PASS_MIN_DAYS ", " PASS_MAX_DAYS ", and " PASS_WARN_AGE
-from
-.I /etc/login.defs
-when adding new entries to
-.IR /etc/shadow .
-
-.RB "Likewise, " pwunconv " and " grpunconv
-are similiar.  Passwords in the main file are updated from the
-shadowed file.  Entries which exist in the main file but not in the
-shadowed file are left alone.  Finally, the shadowed file is removed.
-
-Some password aging information is lost by
-.BR pwunconv .
+\fBpwconv\fR creates \fIshadow\fR from \fIpasswd\fR and an optionally existing
+\fIshadow\fR.
+.PP
+\fBpwunconv\fR creates \fIpasswd\fR from \fIpasswd\fR and \fIshadow\fR and then
+removes \fIshadow\fR.
+.PP
+\fBgrpconv\fR creates \fIgshadow/fR from \fIgroup/fR and an optionally existing
+\fIgshadow\fR.
+.PP
+\fBgrpunconv\fR creates \fIgroup\fR from \fIgroup\fR and \fIgshadow\fR and then
+removes \fIgshadow\fR.
+.PP
+These four programs all operate on the normal and shadow password and group
+files: \fI/etc/passwd\fR, \fI/etc/group\fR, \fI/etc/shadow\fR, and
+\fI/etc/gshadow\fR.
+.PP
+.PP 
+Each program acquires the necessary locks before conversion. fBpwconv\fR and
+\fBgrpconv\fR are similiar. First, entries in the shadowed file which don't
+exist in the main file are removed. Then, shadowed entries which don't have
+`x' as the password in the main file are updated. Any missing shadowed
+entries are added. Finally, passwords in the main file are replaced with
+`x'. These programs can be used for initial conversion as well to update the
+shadowed file if the main file is edited by hand.
+.PP
+\fBpwconv\fR will use the values of fBPASS_MIN_DAYS\fR, \fBPASS_MAX_DAYS\fR,
+and \fBPASS_WARN_AGE\fR from fI/etc/login.defs\fR when adding new entries
+to \fI/etc/shadow\fR.
+.PP
+Likewise  \fBpwunconv\fR and \fBgrpunconv\fR are similiar. Passwords in the
+main file are updated from the shadowed file. Entries which exist in the
+main file but not in the shadowed file are left alone. Finally, the shadowed
+file is removed. Some password aging information is lost by fBpwunconv\fR.
 It will convert what it can.
 .SH "BUGS"
-Errors in the password or group files (such as invalid or duplicate
-entries) may cause these programs to loop forever or fail in other
-strange ways.  Please run \fBpwck\fR and \fBgrpck\fR to correct any
-such errors before converting to or from shadow passwords or groups.
+Errors in the password or group files (such as invalid or duplicate entries)
+may cause these programs to loop forever or fail in other strange ways. 
+Please run \fBpwck\fR and \fBgrpck\fR to correct any such errors before
+converting to or from shadow passwords or groups.
 .SH "SEE ALSO"
 .BR login.defs (5),
 .BR grpck (8),

@@ -30,8 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: failure.c,v 1.6 1998/12/28 20:34:46 marekm Exp $")
-
+RCSID ("$Id: failure.c,v 1.9 2003/04/25 21:11:08 kloczek Exp $")
 #include <fcntl.h>
 #include <stdio.h>
 #include "defines.h"
@@ -39,19 +38,14 @@ RCSID("$Id: failure.c,v 1.6 1998/12/28 20:34:46 marekm Exp $")
 #include "getdef.h"
 #include "failure.h"
 
-#include <utmp.h>
-
 #define	YEAR	(365L*DAY)
-
 /*
  * failure - make failure entry
  *
  *	failure() creates a new (struct faillog) entry or updates an
  *	existing one with the current failed login information.
  */
-
-void
-failure(uid_t uid, const char *tty, struct faillog *fl)
+void failure (uid_t uid, const char *tty, struct faillog *fl)
 {
 	int fd;
 
@@ -59,7 +53,7 @@ failure(uid_t uid, const char *tty, struct faillog *fl)
 	 * Don't do anything if failure logging isn't set up.
 	 */
 
-	if ((fd = open(FAILLOG_FILE, O_RDWR)) < 0)
+	if ((fd = open (FAILLOG_FILE, O_RDWR)) < 0)
 		return;
 
 	/*
@@ -68,9 +62,9 @@ failure(uid_t uid, const char *tty, struct faillog *fl)
 	 * share just about everything else ...
 	 */
 
-	lseek(fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	if (read(fd, (char *) fl, sizeof *fl) != sizeof *fl)
-		memzero(fl, sizeof *fl);
+	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
+	if (read (fd, (char *) fl, sizeof *fl) != sizeof *fl)
+		memzero (fl, sizeof *fl);
 
 	/*
 	 * Update the record.  We increment the failure count to log the
@@ -82,8 +76,8 @@ failure(uid_t uid, const char *tty, struct faillog *fl)
 	if (fl->fail_cnt + 1 > 0)
 		fl->fail_cnt++;
 
-	strncpy(fl->fail_line, tty, sizeof fl->fail_line);
-	time(&fl->fail_time);
+	strncpy (fl->fail_line, tty, sizeof fl->fail_line);
+	time (&fl->fail_time);
 
 	/*
 	 * Seek back to the correct position in the file and write the
@@ -92,13 +86,12 @@ failure(uid_t uid, const char *tty, struct faillog *fl)
 	 * seem that great.
 	 */
 
-	lseek(fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	write(fd, (char *) fl, sizeof *fl);
-	close(fd);
+	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
+	write (fd, (char *) fl, sizeof *fl);
+	close (fd);
 }
 
-static int
-too_many_failures(const struct faillog *fl)
+static int too_many_failures (const struct faillog *fl)
 {
 	time_t now;
 
@@ -106,11 +99,11 @@ too_many_failures(const struct faillog *fl)
 		return 0;
 
 	if (fl->fail_locktime == 0)
-		return 1;  /* locked until reset manually */
+		return 1;	/* locked until reset manually */
 
-	time(&now);
-	if (fl->fail_time + fl->fail_locktime > now)
-		return 0;  /* enough time since last failure */
+	time (&now);
+	if (fl->fail_time + fl->fail_locktime < now)
+		return 0;	/* enough time since last failure */
 
 	return 1;
 }
@@ -124,17 +117,16 @@ too_many_failures(const struct faillog *fl)
  *	the password is valid.
  */
 
-int
-failcheck(uid_t uid, struct faillog *fl, int failed)
+int failcheck (uid_t uid, struct faillog *fl, int failed)
 {
-	int	fd;
-	struct	faillog	fail;
+	int fd;
+	struct faillog fail;
 
 	/*
 	 * Suppress the check if the log file isn't there.
 	 */
 
-	if ((fd = open(FAILLOG_FILE, O_RDWR)) < 0)
+	if ((fd = open (FAILLOG_FILE, O_RDWR)) < 0)
 		return 1;
 
 	/*
@@ -150,13 +142,13 @@ failcheck(uid_t uid, struct faillog *fl, int failed)
 	 */
 
 	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	if (read(fd, (char *) fl, sizeof *fl) != sizeof *fl) {
-		close(fd);
+	if (read (fd, (char *) fl, sizeof *fl) != sizeof *fl) {
+		close (fd);
 		return 1;
 	}
 
-	if (too_many_failures(fl)) {
-		close(fd);
+	if (too_many_failures (fl)) {
+		close (fd);
 		return 0;
 	}
 
@@ -185,16 +177,16 @@ failcheck(uid_t uid, struct faillog *fl, int failed)
  *	message which is displayed at login time.
  */
 
-void
-failprint(const struct faillog *fail)
+void failprint (const struct faillog *fail)
 {
-	struct	tm	*tp;
+	struct tm *tp;
+
 #if HAVE_STRFTIME
-	char	lasttimeb[256];
-	char	*lasttime = lasttimeb;
+	char lasttimeb[256];
+	char *lasttime = lasttimeb;
 	const char *fmt;
 #else
-	char	*lasttime;
+	char *lasttime;
 #endif
 	time_t NOW;
 
@@ -202,7 +194,7 @@ failprint(const struct faillog *fail)
 		return;
 
 	tp = localtime (&(fail->fail_time));
-	time(&NOW);
+	time (&NOW);
 
 #if HAVE_STRFTIME
 	/*
@@ -216,7 +208,7 @@ failprint(const struct faillog *fail)
 		fmt = "%A %T";
 	else
 		fmt = "%T";
-	strftime(lasttimeb, sizeof lasttimeb, fmt, tp);
+	strftime (lasttimeb, sizeof lasttimeb, fmt, tp);
 #else
 
 	/*
@@ -236,7 +228,8 @@ failprint(const struct faillog *fail)
 		lasttime++;
 #endif
 	printf (_("%d %s since last login.  Last was %s on %s.\n"),
-		fail->fail_cnt, fail->fail_cnt > 1 ? _("failures"):_("failure"),
+		fail->fail_cnt,
+		fail->fail_cnt > 1 ? _("failures") : _("failure"),
 		lasttime, fail->fail_line);
 }
 
@@ -247,8 +240,7 @@ failprint(const struct faillog *fail)
  *	maintains a record of all login failures.
  */
 
-void
-failtmp(const struct utmp *failent)
+void failtmp (const struct utmp *failent)
 {
 	char *ftmp;
 	int fd;
@@ -258,7 +250,7 @@ failtmp(const struct utmp *failent)
 	 * in login.defs, don't do this.
 	 */
 
-	if (!(ftmp = getdef_str("FTMP_FILE")))
+	if (!(ftmp = getdef_str ("FTMP_FILE")))
 		return;
 
 	/*
@@ -266,13 +258,13 @@ failtmp(const struct utmp *failent)
 	 * feature to be used.
 	 */
 
-	if ((fd = open(ftmp, O_WRONLY|O_APPEND)) == -1)
+	if ((fd = open (ftmp, O_WRONLY | O_APPEND)) == -1)
 		return;
 
 	/*
 	 * Output the new failure record and close the log file.
 	 */
 
-	write(fd, (const char *) failent, sizeof *failent);
-	close(fd);
+	write (fd, (const char *) failent, sizeof *failent);
+	close (fd);
 }

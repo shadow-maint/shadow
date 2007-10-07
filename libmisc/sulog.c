@@ -30,8 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sulog.c,v 1.6 2001/08/23 23:17:37 kloczek Exp $")
-
+RCSID ("$Id: sulog.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -39,13 +38,11 @@ RCSID("$Id: sulog.c,v 1.6 2001/08/23 23:17:37 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
 /*
  * sulog - log a SU command execution result
  */
-
 void
-sulog(const char *tty, int success, const char *oldname, const char *name)
+sulog (const char *tty, int success, const char *oldname, const char *name)
 {
 	char *sulog_file;
 	time_t now;
@@ -53,22 +50,22 @@ sulog(const char *tty, int success, const char *oldname, const char *name)
 	FILE *fp;
 	mode_t oldmask;
 
-	if ((sulog_file = getdef_str("SULOG_FILE")) == (char *) 0)
+	if ((sulog_file = getdef_str ("SULOG_FILE")) == (char *) 0)
 		return;
 
-	oldmask = umask(077);
-	fp = fopen(sulog_file, "a+");
-	umask(oldmask);
+	oldmask = umask (077);
+	fp = fopen (sulog_file, "a+");
+	umask (oldmask);
 	if (fp == (FILE *) 0)
-		return;			/* can't open or create logfile */
+		return;		/* can't open or create logfile */
 
-	time(&now);
-	tm = localtime(&now);
+	time (&now);
+	tm = localtime (&now);
 
-	fprintf(fp, "SU %.02d/%.02d %.02d:%.02d %c %s %s-%s\n",
-		tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min,
-		success ? '+':'-', tty, oldname, name);
+	fprintf (fp, "SU %.02d/%.02d %.02d:%.02d %c %s %s-%s\n",
+		 tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min,
+		 success ? '+' : '-', tty, oldname, name);
 
-	fflush(fp);
-	fclose(fp);
+	fflush (fp);
+	fclose (fp);
 }

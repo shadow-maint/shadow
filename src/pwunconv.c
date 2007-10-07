@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: pwunconv.c,v 1.11 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: pwunconv.c,v 1.15 2003/06/19 18:11:01 kloczek Exp $")
 #include "defines.h"
 #include <sys/types.h>
 #include <stdio.h>
@@ -40,19 +40,8 @@ RCSID (PKG_VER "$Id: pwunconv.c,v 1.11 2002/01/05 15:41:44 kloczek Exp $")
 #include "prototypes.h"
 #include "pwio.h"
 #include "shadowio.h"
-#ifndef	SHADOWPWD
-int main (int argc, char **argv)
-{
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	fprintf (stderr, _("%s: Shadow passwords are not configured.\n"),
-		 argv[0]);
-	exit (1);
-}
-
-#else				/*{ */
+#include "nscd.h"
+#ifdef	SHADOWPWD
 char *l64a ();
 
 static int shadow_locked = 0, passwd_locked = 0;
@@ -76,9 +65,6 @@ int main (int argc, char **argv)
 	struct passwd pwent;
 	const struct spwd *spwd;
 
-#ifdef	ATT_AGE
-	char newage[5];
-#endif
 	char *Prog = argv[0];
 
 	setlocale (LC_ALL, "");
@@ -133,28 +119,6 @@ int main (int argc, char **argv)
 		 * to weeks and so on.
 		 */
 
-#ifdef	ATT_AGE
-		if (spwd->sp_max > (63 * WEEK / SCALE)
-		    && spwd->sp_max < 10000)
-			spwd->sp_max = (63 * WEEK / SCALE);	/* 10000 is infinity */
-
-		if (spwd->sp_min >= 0 && spwd->sp_min <= 63 * 7 &&
-		    spwd->sp_max >= 0 && spwd->sp_max <= 63 * 7) {
-			if (spwd->sp_lstchg == -1)
-				spwd->sp_lstchg = 0;
-
-			spwd->sp_max /= WEEK / SCALE;	/* turn it into weeks */
-			spwd->sp_min /= WEEK / SCALE;
-			spwd->sp_lstchg /= WEEK / SCALE;
-
-			strncpy (newage,
-				 l64a (spwd->sp_lstchg * (64L * 64L) +
-				       spwd->sp_min * (64L) +
-				       spwd->sp_max), 5);
-			pwent.pw_age = newage;
-		} else
-			pwent.pw_age = "";
-#endif				/* ATT_AGE */
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
 				 _("%s: can't update entry for user %s\n"),
@@ -185,6 +149,21 @@ int main (int argc, char **argv)
 
 	spw_unlock ();
 	pw_unlock ();
+
+	nscd_flush_cache ("passwd");
+#ifdef SHADOWPWD
+	nscd_flush_cache ("shadow");
+#endif
+
 	return 0;
 }
-#endif
+
+#else				/* !SHADOWPWD */
+int main (int argc, char **argv)
+{
+	fprintf (stderr,
+		 "%s: not configured for shadow password support.\n",
+		 argv[0]);
+	exit (1);
+}
+#endif				/* !SHADOWPWD */

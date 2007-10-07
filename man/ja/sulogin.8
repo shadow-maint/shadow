@@ -1,3 +1,4 @@
+.\"$Id: sulogin.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1989 - 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,70 +26,67 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: sulogin.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SULOGIN 8
 .SH 名前
-sulogin \- シングルユーザlogin
+sulogin \- シングルユーザ login
 .SH 書式
 \fBsulogin\fR [\fItty-device\fR]
 .SH 説明
 .B sulogin
-はシングルユーザモード時、ユーザがシステムにアクセス出来るように
-なる前に\fI/etc/init\fRによって起動される。
-この機能は、\fBinit\fRが適切に変更されているか、
-\fB/etc/inittab\fRにシングルユーザ用loginのエントリがある
-システムでのみ働かせる事が出来る。
+は、シングルユーザモードの時、
+ユーザがシステムにアクセス可能となる前に、
+\fI/etc/init\fR によって起動される。
+この機能は、\fBinit\fR が適切に変更されているシステムか、
+あるいは \fI/etc/inittab\fR にシングルユーザ login
+のエントリがあるシステムでのみ利用できる。
 .PP
-次の様に入力を促される
+次のようなプロンプトが出る。
 .IP "" .5i
 Type control-d to proceed with normal startup,
 .br
 (or give root password for system maintenance):
 .PP
-オプションのデバイス名引数を指定しなかった場合は、
-標準ファイルディスクリプタを用いて入出力を行なう。
+オプションのデバイス名引数が指定された場合を除き、
+標準のファイルディスクリプタを用いて入出力を行なう。
 .PP
-ユーザが正しいrootのパスワードを入力した場合は、
+ユーザが正しい root のパスワードを入力した場合は、
 ログインセッションが開始される。
-代わりに\fBEOF\fRが押された場合は、
+\fBEOF\fR が押された場合は、
 システムはマルチユーザモードに入る。
 .PP
-ユーザがシングルユーザシェルを抜けた場合、もしくは\fBEOF\fRを押した場合は
+ユーザがシングルユーザシェルを抜けた、
+あるいは (シェルに入る前に) \fBEOF\fR を押した後には、
 システムはマルチユーザモードに入るために必要な初期化処理を開始する。
 .SH 警告
-.PP
-このコマンドは、
-\fBinit\fRが\fB/bin/sh\fRではなく\fBsulogin\fRを呼ぶ様変更されているか、
-または\fIinittab\fR中でシングルユーザログインに対する設定がなされている
-場合にのみ使用できる。
+このコマンドが利用できるようにするには、
+\fBinit\fR が \fB/bin/sh\fR ではなく
+\fBsulogin\fR を呼ぶようになっているか、
+または
+\fIinittab\fR
+中にシングルユーザログインに対する設定がされている必要がある。
 例えば、
 .br
 .sp 1
 co:s:respawn:/etc/sulogin /dev/console
 .br
 .sp 1
-.\" should execute the sulogin command in single user mode.
-という行を記入しておく事により、シングルユーザモードではsulogin
-コマンドが実行される。
+という行を書いておけば、
+シングルユーザモードでは sulogin コマンドが実行される。
 .PP
 可能な限り完全な環境が提供される。
-.\" However, various devices may be unmounted or uninitialized and many 
-.\" of the user commands may be unavailable or nonfunctional as a result.
-しかしながら、様々なデバイスがマウントされていなかったり初期化されていな
-かったりするため、多くのユーザコマンドが使えなかったり機能しない
-かもしれない。
+しかし、
+様々なデバイスがマウントされていなかったり初期化されていなかったりするため、
+多くのユーザコマンドが使えなかったり機能しないかもしれない。
 .SH ファイル
-/etc/passwd \- ユーザアカウント情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/shadow \- 暗号化されたパスワード及びその有効期限情報
-.br
-/.profile \- シングルユーザシェル用の初期化スクリプト
+\fI/etc/shadow\fR \- 暗号化されたパスワードと有効期限の情報
 .SH 関連項目
 .BR login (1),
 .BR sh (1),

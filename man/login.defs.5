@@ -25,105 +25,86 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: login.defs.5,v 1.11 2002/03/08 04:39:11 kloczek Exp $
+.\"	$Id: login.defs.5,v 1.12 2003/05/01 18:17:39 kloczek Exp $
 .\"
 .TH LOGIN.DEFS 5
 .SH NAME
 /etc/login.defs \- shadow password suite configuration
 .SH DESCRIPTION
 The
-.I /etc/login.defs
-file defines the site-specific configuration for the shadow password
-suite.  This file is required.  Absence of this file will not prevent
-system operation, but will probably result in undesirable operation.
+\fI/etc/login.defs\fR file defines the site-specific configuration for the
+shadow password suite. This file is required. Absence of this file will
+not prevent system operation, but will probably result in undesirable
+operation.
 .PP
-This file is a readable text file, each line of the file describing
-one configuration parameter.  The lines consist of a configuration
-name and value, separated by whitespace.  Blank lines and comment
-lines are ignored.  Comments are introduced with a `#' pound sign and
-the pound sign must be the first non-white character of the line.
+This file is a readable text file, each line of the file describing one
+configuration parameter. The lines consist of a configuration name and
+value, separated by whitespace. Blank lines and comment lines are ignored. 
+Comments are introduced with a `#' pound sign and the pound sign must be the
+first non-white character of the line.
 .PP
-Parameter values may be of four types:  strings, booleans, numbers,
-and long numbers.  A string is comprised of any printable characters.
-A boolean should be either the value ``yes'' or ``no''.  An undefined
-boolean parameter or one with a value other than these will be given
-a ``no'' value.  Numbers (both regular and long) may be either decimal
-values, octal values (precede the value with ``0'') or hexadecimal
-values (precede the value with ``0x'').  The maximum value of the
-regular and long numeric parameters is machine-dependent.
+Parameter values may be of four types:  strings, booleans, numbers, and long
+numbers. A string is comprised of any printable characters. A boolean should
+be either the value ``yes'' or ``no''. An undefined boolean parameter or one
+with a value other than these will be given a ``no'' value. Numbers (both
+regular and long) may be either decimal values, octal values (precede the
+value with ``0'') or hexadecimal values (precede the value with ``0x''). 
+The maximum value of the regular and long numeric parameters is
+machine-dependent.
 .PP
 The following configuration items are provided:
 .\"
 .IP "CHFN_AUTH (boolean)"
-If
-.IR yes ,
-the
-.B chfn
-and
-.B chsh
-programs will require authentication before making any changes, unless
-run by the superuser.
+If \fIyes\fR, the \fBchfn\fR and \fBchsh\fR programs will require
+authentication before making any changes, unless run by the superuser.
 .\"
 .IP "CHFN_RESTRICT (string)"
-This parameter specifies which values in the
-.I gecos
-field of the
-.I passwd
-file may be changed by regular users using the
-.B chfn
-program.  It can be any combination of letters
-.IR f ,
-.IR r ,
-.IR w ,
-.IR h ,
-for Full name, Room number, Work phone, and Home phone, respectively.
-For backward compatibility, "yes" is equivalent to "rwh"
-and "no" is equivalent to "frwh".
-If not specified, only the superuser can make any changes.
-The most restrictive setting is better achieved by not installing chfn SUID.
+This parameter specifies which values in the fIgecos\fR field of the
+\fI/etc/passwd\fR file may be changed by regular users using the fBchfn\fR
+program. It can be any combination of letters \fIf\fR, \fIr\fR, \fIw\fR,
+\fIh\fR, for Full name, Room number, Work phone, and Home phone,
+respectively. For backward compatibility, "yes" is equivalent to "rwh" and
+"no" is equivalent to "frwh". If not specified, only the superuser can make
+any changes. The most restrictive setting is better achieved by not
+installing chfn SUID.
 .\"
 .IP "CREATE_HOME (boolean)"
 This defines whether useradd should create home directories for users by
-default.  This option is OR'ed with the -m flag on useradd command line.
+default. This option is OR'ed with the \fI-m\fR flag on useradd command line.
 .\"
 .IP "GID_MAX (number)"
 .IP "GID_MIN (number)"
-Range of group IDs to choose from for the
-.B useradd
-and
-.B groupadd
+Range of group IDs to choose from for the fBuseradd\fR and \fBgroupadd\fR
 programs.
 .\"
 .IP "MAIL_DIR (string)"
-The mail spool directory.  This is needed to manipulate the mailbox when
-its corresponding user account is modified or deleted.  If not specified,
-a compile-time default is used.
+The mail spool directory. This is needed to manipulate the mailbox when its
+corresponding user account is modified or deleted. If not specified, a
+compile-time default is used.
 .\"
 .IP "PASS_MAX_DAYS (number)"
-The maximum number of days a password may be used.  If the password is
-older than this, a password change will be forced.  If not specified, -1
-will be assumed (which disables the restriction).
+The maximum number of days a password may be used. If the password is older
+than this, a password change will be forced. If not specified, -1 will be
+assumed (which disables the restriction).
 .IP "PASS_MIN_DAYS (number)"
-The minimum number of days allowed between password changes.  Any password
-changes attempted sooner than this will be rejected.  If not specified, -1
+The minimum number of days allowed between password changes. Any password
+changes attempted sooner than this will be rejected. If not specified, -1
 will be assumed (which disables the restriction).
 .IP "PASS_WARN_AGE (number)"
-The number of days warning given before a password expires.  A zero means
-warning is given only upon the day of expiration, a negative value means
-no warning is given.  If not specified, no warning will be provided.
+The number of days warning given before a password expires. A zero means
+warning is given only upon the day of expiration, a negative value means no
+warning is given. If not specified, no warning will be provided.
 .PP
 PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE
-are only used at the time of account creation.  Any changes to these
+are only used at the time of account creation. Any changes to these
 settings won't affect existing accounts.
 .\"
 .IP "UID_MAX (number)"
 .IP "UID_MIN (number)"
-Range of user IDs to choose from for the
-.B useradd
-program.
+Range of user IDs to choose from for the \fBuseradd\fR program.
 .\"
 .IP "UMASK (number)"
-The permission mask is initialized to this value.  If not specified,
+The permission mask is initialized to this value. If not specified,
 the permission mask will be initialized to 077.
 .\"
 .IP "USERDEL_CMD (string)"
@@ -160,10 +141,8 @@ MAIL_DIR
 .ad
 .SH BUGS
 Much of the functionality that used to be provided by the shadow password
-suite is now handled by PAM.
-Thus,
-.I /etc/login.defs
-is no longer used by programs such as
+suite is now handled by PAM. Thus, \fI/etc/login.defs\fR is no longer used
+by programs such as
 .BR login (1),
 .BR passwd (1)
 and

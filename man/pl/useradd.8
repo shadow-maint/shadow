@@ -1,4 +1,4 @@
-.\" $Id: useradd.8,v 1.10 2002/03/09 11:16:23 ankry Exp $
+.\" $Id: useradd.8,v 1.15 2004/01/13 00:34:16 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -35,9 +35,9 @@ useradd - twórz nowego u¿ytkownika lub zmieñ domy¶ln± informacjê o nowym
 .br
 [\fB-e\fR \fIdata_wa¿no¶ci\fR] [\fB-f\fR \fIdni_nieaktywno¶ci\fR]
 .br
-[\fB-g\fR \fIgrupa_pocz±tkowa\fR] [\fB-G\fR \fIgrupa [,...]\fR]
+[\fB-g\fR \fIgrupa_pocz±tkowa\fR] [\fB-G\fR \fIgrupa\fR[,...]]
 .br
-[\fB-m\fR [\fB-k\fR \fIkatalog_wzorców\fR]] [\fB-o\fR] [\fB-p\fR \fIhas³o\fR]
+[[\fB-M\fR] \fB-m\fR [\fB-k\fR \fIkatalog_wzorców\fR]] [\fB-o\fR] [\fB-p\fR \fIhas³o\fR]
 .br
 [\fB-s\fR \fIpow³oka\fR] [\fB-u\fR \fIuid\fR] \fIlogin\fR
 .TP 8
@@ -90,6 +90,11 @@ Ka¿da grupa oddzielona jest od nastêpnej przecinkiem, bez wtr±conej spacji.
 Do grup odnosz± siê te same ograniczenia, które obowi±zuj± przy grupie podanej
 w opcji \fB-g\fR.
 Domy¶lnie u¿ytkownik nale¿y tylko do grupy pocz±tkowej.
+.IP \fB-M\fR
+RedHat doda³ opcjê CREATE_HOME w pliku login.defs w swojej wersji shadow-utils,
+która powodowa³a domy¶lne u¿ycie \fB-m\fR - ta opcja wy³±cza to. U¿ywanie jej 
+znajduje zastosowanie np. w skryptach, lecz mo¿e byæ powodem niezgodno¶ci
+z innymi wersjami shadow-utils.
 .IP \fB-m\fR
 Je¶li nie istnieje katalog domowy u¿ytkownika, to zostanie on utworzony.
 Je¶li pos³u¿ono siê opcj± \fB-k\fR, to bêd± do niego przekopiowane wzorcowe
@@ -149,15 +154,38 @@ plików u¿ytkownika w katalogu \fI/etc/skel\fR.
 Nie mo¿esz dodaæ u¿ytkownika do grupy NIS. Musi to zostaæ wykonane
 na serwerze NIS.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+\fI/etc/passwd\fR			\- informacja o kontach u¿ytkowników
 .br
-.IR /etc/shadow " - bezpieczna informacja o kontach u¿ytkowników"
+\fI/etc/shadow\fR			\- bezpieczna informacja o kontach u¿ytkowników
 .br
-.IR /etc/group " - informacja o grupach"
+\fI/etc/group\fR			\- informacja o grupach
 .br
-.IR /etc/default/useradd " - informacja o ustawieniach domy¶lnych"
+\fI/etc/default/useradd\fR	\- informacja o ustawieniach domy¶lnych
 .br
-.IR /etc/skel " - katalog zawieraj±cy pliki domy¶lne"
+\fI/etc/skel/\fR			\- katalog zawieraj±cy pliki domy¶lne
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBuseadd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB1\fR	\- nie mo¿na zaktualizowaæ pliku z has³ami
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB3\fR	\- niew³a¶ciwe parametry opcji
+.br
+\fB4\fR	\- uid jest ju¿ u¿ywany (i nie u¿yto opcji -o)
+.br
+\fB6\fR	\- podana grupa nie istnieje
+.br
+\fB9\fR	\- podany login jest ju¿ u¿ywany
+.br
+\fB10\fR	\- nie mo¿na zaktualizowaæ pliku z grupami
+.br
+\fB12\fR	\- nie mo¿na utworzyæ katalogu domowego
+.br
+\fB13\fR	\- nie mo¿na utworzyæ spoola pocztowego
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),
@@ -170,9 +198,3 @@ na serwerze NIS.
 .BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu
-shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami
-u¿ytkowników czy grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij
-siê, ¿e korzystasz z w³a¶ciwej dokumentacji.

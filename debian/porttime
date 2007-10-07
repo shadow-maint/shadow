@@ -1,8 +1,0 @@
-# /etc/porttime contains user time restrictions.
-# See porttime(5).
-
-# If you add restrictions to this file, be sure that
-# PORTTIME_CHECKS_ENAB is set to `yes' in /etc/login.defs. logoutd(8)
-# will be started automatically on bootup if this file contains
-# non-comment lines.  You may also start it manually with
-# `/etc/init.d/logoutd start'.

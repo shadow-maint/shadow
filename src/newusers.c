@@ -36,7 +36,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: newusers.c,v 1.15 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: newusers.c,v 1.18 2003/12/17 01:33:29 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
@@ -219,15 +219,6 @@ add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 
 	pwent.pw_name = xstrdup (name);
 	pwent.pw_passwd = "x";	/* XXX warning: const */
-#ifdef	ATT_AGE
-	pwent.pw_age = "";
-#endif
-#ifdef	ATT_COMMENT
-	pwent.pw_comment = "";
-#endif
-#ifdef	BSD_QUOTA
-	pwent.pw_quota = 0;
-#endif
 	pwent.pw_uid = i;
 	pwent.pw_gid = gid;
 	pwent.pw_gecos = "";	/* XXX warning: const */
@@ -241,16 +232,6 @@ add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 static void update_passwd (struct passwd *pwd, const char *passwd)
 {
 	pwd->pw_passwd = pw_encrypt (passwd, crypt_make_salt ());
-#ifdef ATT_AGE
-	if (strlen (pwd->pw_age) == 4) {
-		static char newage[5];
-		extern char *l64a ();
-
-		strcpy (newage, pwd->pw_age);
-		strcpy (newage + 2, l64a (time ((time_t *) 0) / WEEK));
-		pwd->pw_age = newage;
-	}
-#endif
 }
 
 /*
@@ -634,4 +615,5 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	exit (0);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

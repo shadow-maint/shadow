@@ -25,15 +25,13 @@
 .\"
 .\"
 .\"
-.\"	$Id: groupadd.8,v 1.2 2002/03/09 11:16:27 ankry Exp $
+.\"	$Id: groupadd.8,v 1.4 2004/01/05 01:08:34 kloczek Exp $
 .\"
 .TH GROUPADD 8
 .SH NOME
 groupadd \- Criar um novo grupo
 .SH SINOPSE
-.B groupadd
-[\fB-g\fI gid \fR[\fB-o\fR]] [\fB-r\fR] [\fB-f\fR]
-.I grupo
+\fBgroupadd\fR [\fB-g\fI gid \fR[\fB-o\fR]] [\fB-f\fR] \fIgrupo\fR
 .SH DESCRIÇÃO
 O comando \fBgroupadd\fR cria um novo grupo usando valores especificados na linha de comando e os valores padrões do sistema. O novo grupo será criado nos arquivos do sistema, conforme o requerido. As opções que aplicam-se ao comando \fBgroupadd\fR são
 .IP "\fB-g \fIgid\fR"
@@ -50,9 +48,9 @@ Este é o indicador \fIforce\fR . Ele não irá parar o processamento do \fBgroupad
 Esta opção também modifica o modo como a opção \fB-g\fR funciona. Ao solicitar um \fIgid\fR que não seja único e ao não informar a opção \fB-o\fR, a criação do grupo , a criação terá o comportamento padrão (adicionando um grupo como se as opções \fB-g\fR ou \fB-o\fR  \fBnão\fR fossem especificadas).
 .br
 .SH ARQUIVOS
-/etc/group \- informações sobre o grupo
+\fI/etc/group\fR \- informações sobre o grupo
 .br
-/etc/gshadow \- informações seguras sobre o grupo
+\fI/etc/gshadow\fR \- informações seguras sobre o grupo
 .br
 .SH VEJA TAMBÉM
 .BR chfn (1),

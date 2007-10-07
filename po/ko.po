@@ -5,705 +5,615 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
-"POT-Creation-Date: 2002-03-12 12:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-14 07:41+0100\n"
 "PO-Revision-Date: 2001-02-03 15:09+0900\n"
 "Last-Translator: Hwang, Sang-Jin <violiet@suse.de>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=euc-kr\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libmisc/addgrps.c:60
+#: libmisc/addgrps.c:56
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "°æ°í: ¾Ë ¼ö ¾ø´Â ±×·ì(%s)\n"
+msgstr "ê²½ê³ : ì•Œ ìˆ˜ ì—†ëŠ” ê·¸ë£¹(%s)\n"
 
-#: libmisc/addgrps.c:71
+#: libmisc/addgrps.c:68
 msgid "Warning: too many groups\n"
-msgstr "°æ°í: ±×·ì¼ö°¡ ³Ê¹« ¸¹À½\n"
+msgstr "ê²½ê³ : ê·¸ë£¹ìˆ˜ê°€ ë„ˆë¬´ ë§ìŒ\n"
 
-#: libmisc/age.c:77
+#: libmisc/age.c:72
 msgid "Your password has expired."
-msgstr "ÆĞ½º¿öµå »ç¿ë±âÇÑÀÌ Áö³µ½À´Ï´Ù."
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ê¸°í•œì´ ì§€ë‚¬ìŠµë‹ˆë‹¤."
 
-#: libmisc/age.c:80
+#: libmisc/age.c:75
 msgid "Your password is inactive."
-msgstr "ÆĞ½º¿öµå »ç¿ë±â°£ ÃÊ°ú·Î »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù."
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ê¸°ê°„ ì´ˆê³¼ë¡œ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
 
-#: libmisc/age.c:83
+#: libmisc/age.c:78
 msgid "Your login has expired."
-msgstr "·Î±×ÀÎ »ç¿ë±âÇÑÀÌ Áö³µ½À´Ï´Ù"
+msgstr "ë¡œê·¸ì¸ ì‚¬ìš©ê¸°í•œì´ ì§€ë‚¬ìŠµë‹ˆë‹¤"
 
-#: libmisc/age.c:96
+#: libmisc/age.c:90
 msgid "  Contact the system administrator.\n"
-msgstr "  ½Ã½ºÅÛ °ü¸®ÀÚ¿Í »ó´ãÇÏ½Ê½Ã¿À.\n"
+msgstr "  ì‹œìŠ¤í…œ ê´€ë¦¬ìì™€ ìƒë‹´í•˜ì‹­ì‹œì˜¤.\n"
 
-#: libmisc/age.c:99
+#: libmisc/age.c:93
 msgid "  Choose a new password.\n"
-msgstr "  »õ·Î¿î ÆĞ½º¿öµå¸¦ ¼±ÅÃÇÏ¼¼¿ä.\n"
+msgstr "  ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì„ íƒí•˜ì„¸ìš”.\n"
 
-#: libmisc/age.c:176
+#: libmisc/age.c:168
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "ÆĞ½º¿öµå »ç¿ë±âÇÑÀÌ %ldÀÏ¿¡ ³¡³³´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ê¸°í•œì´ %ldì¼ì— ëë‚©ë‹ˆë‹¤.\n"
 
-#: libmisc/age.c:178
+#: libmisc/age.c:172
 msgid "Your password will expire tomorrow.\n"
-msgstr "ÆĞ½º¿öµå »ç¿ë±âÇÑÀÌ ³»ÀÏ ³¡³³´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ê¸°í•œì´ ë‚´ì¼ ëë‚©ë‹ˆë‹¤.\n"
 
-#: libmisc/age.c:180
+#: libmisc/age.c:174
 msgid "Your password will expire today.\n"
-msgstr "ÆĞ½º¿öµå »ç¿ë±âÇÑÀÌ ¿À´Ã ³¡³³´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ê¸°í•œì´ ì˜¤ëŠ˜ ëë‚©ë‹ˆë‹¤.\n"
 
-#: libmisc/chowntty.c:113
+#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "tty(´Ü¸»ÅÍ¹Ì³Î) %s·Î º¯°æÇÒ ¼ö ¾øÀ½"
+msgstr "tty(ë‹¨ë§í„°ë¯¸ë„) %së¡œ ë³€ê²½í•  ìˆ˜ ì—†ìŒ"
 
-#: libmisc/env.c:160
+#: libmisc/env.c:155
 msgid "Environment overflow\n"
 msgstr ""
 
-#: libmisc/env.c:200
+#: libmisc/env.c:195
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "$%s´Â º¯°æµÇ¾î ÀÖÁö ¾ÊÀº°Í °°½À´Ï´Ù\n"
+msgstr "$%sëŠ” ë³€ê²½ë˜ì–´ ìˆì§€ ì•Šì€ê²ƒ ê°™ìŠµë‹ˆë‹¤\n"
 
-#: libmisc/failure.c:238
+#: libmisc/failure.c:230
 #, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
-msgstr "¸¶Áö¸· ·Î±×ÀÎÀ¸·ÎºÎÅÍ %dÈ¸ÀÇ %sÀÔ´Ï´Ù. ¸¶Áö¸· ·Î±×ÀÎÀº %s Àå¼Ò %s.\n"
+msgstr "ë§ˆì§€ë§‰ ë¡œê·¸ì¸ìœ¼ë¡œë¶€í„° %díšŒì˜ %sì…ë‹ˆë‹¤. ë§ˆì§€ë§‰ ë¡œê·¸ì¸ì€ %s ì¥ì†Œ %s.\n"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failures"
-msgstr "½ÇÆĞ"
+msgstr "ì‹¤íŒ¨"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failure"
-msgstr "½ÇÆĞ"
+msgstr "ì‹¤íŒ¨"
 
-#: libmisc/limits.c:397
+#: libmisc/limits.c:396
 msgid "Too many logins.\n"
-msgstr "·Î±×ÀÎ¼ö°¡ ¸¹½À´Ï´Ù.\n"
+msgstr "ë¡œê·¸ì¸ìˆ˜ê°€ ë§ìŠµë‹ˆë‹¤.\n"
 
-#: libmisc/login_desrpc.c:63
+#: libmisc/login_desrpc.c:59
 #, c-format
 msgid "Password does not decrypt secret key for %s.\n"
-msgstr "ÆĞ½º¿öµå°¡ %sÀÇ ºñ¹ĞÅ°¸¦ ÇØ¼®ÇÒ ¼ö ¾øÀ½.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œê°€ %sì˜ ë¹„ë°€í‚¤ë¥¼ í•´ì„í•  ìˆ˜ ì—†ìŒ.\n"
 
-#: libmisc/login_desrpc.c:69
+#: libmisc/login_desrpc.c:66
 #, c-format
 msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
-msgstr "%sÀÇ ºñ¹Ğ¿­¼è¸¦ ¼³Á¤ÇÒ ¼ö ¾ø½À´Ï´Ù: keyservµ¥¸óÀÌ ÇöÀç ½ÇÇàÁßÀÔ´Ï±î?\n"
+msgstr "%sì˜ ë¹„ë°€ì—´ì‡ ë¥¼ ì„¤ì •í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤: keyservë°ëª¬ì´ í˜„ì¬ ì‹¤í–‰ì¤‘ì…ë‹ˆê¹Œ?\n"
 
-#: libmisc/mail.c:62 libmisc/mail.c:77
+#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
-msgstr "»õ·Î¿î ¸ŞÀÏÀÌ µµÂøÇÏ¿´½À´Ï´Ù."
+msgstr "ìƒˆë¡œìš´ ë©”ì¼ì´ ë„ì°©í•˜ì˜€ìŠµë‹ˆë‹¤."
 
-#: libmisc/mail.c:73
+#: libmisc/mail.c:72
 msgid "No mail."
-msgstr "¸ŞÀÏ ¾øÀ½."
+msgstr "ë©”ì¼ ì—†ìŒ."
 
-#: libmisc/mail.c:75
+#: libmisc/mail.c:74
 msgid "You have mail."
-msgstr "¸ŞÀÏÀÌ ÀÖ½À´Ï´Ù."
+msgstr "ë©”ì¼ì´ ìˆìŠµë‹ˆë‹¤."
 
-#: libmisc/obscure.c:281 src/passwd.c:244
+#: libmisc/obscure.c:271 src/passwd.c:183
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "Àß¸øµÈ ÆĞ½º¿öµå: %s.  "
+msgstr "ì˜ëª»ëœ íŒ¨ìŠ¤ì›Œë“œ: %s.  "
 
-#: libmisc/pam_pass.c:42
+#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "ÆĞ½º¿öµå: pam_start()¿¡ ½ÇÆĞÇß½À´Ï´Ù, ¿À·ù %d\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ: pam_start()ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤, ì˜¤ë¥˜ %d\n"
 
-#: libmisc/pam_pass.c:49
+#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
-msgstr "ÆĞ½º¿öµå: %s\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ: %s\n"
 
-#: libmisc/setupenv.c:211
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
-msgstr "µğ·ºÅä¸®¸¦ \"%s\"·Î ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "ë””ë ‰í† ë¦¬ë¥¼ \"%s\"ë¡œ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: libmisc/setupenv.c:219
+#: libmisc/setupenv.c:216
 msgid "No directory, logging in with HOME=/"
-msgstr "µğ·ºÅä¸®°¡ ¾øÀ½, ·çÆ® µğ·ºÅä¸®(/)·Î ·Î±×ÀÎÇÕ´Ï´Ù"
+msgstr "ë””ë ‰í† ë¦¬ê°€ ì—†ìŒ, ë£¨íŠ¸ ë””ë ‰í† ë¦¬(/)ë¡œ ë¡œê·¸ì¸í•©ë‹ˆë‹¤"
 
-#: libmisc/shell.c:78
-#, c-format
-msgid "Executing shell %s\n"
-msgstr "%s ½©À» ½ÇÇàÇÕ´Ï´Ù\n"
-
-#.
-#. * Obviously something is really wrong - I can't figure out
-#. * how to execute this stupid shell, so I might as well give
-#. * up in disgust ...
-#.
-#: libmisc/shell.c:122
+#: libmisc/shell.c:119
 #, c-format
 msgid "Cannot execute %s"
-msgstr "%s¸¦ ½ÇÇàÇÒ ¼ö ¾øÀ½"
+msgstr "%së¥¼ ì‹¤í–‰í•  ìˆ˜ ì—†ìŒ"
 
-#: libmisc/sub.c:61
+#: libmisc/sub.c:55
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
-msgstr "È¨ µğ·ºÅä¸® \"%s\"°¡ Àß¸øµÇ¾ú½À´Ï´Ù\n"
+msgstr "í™ˆ ë””ë ‰í† ë¦¬ \"%s\"ê°€ ì˜ëª»ë˜ì—ˆìŠµë‹ˆë‹¤\n"
 
-#: libmisc/sub.c:73
+#: libmisc/sub.c:67
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
-msgstr "·çÆ® µğ·ºÅä¸®¸¦ \"%s\"·Î º¯°æÇÒ ¼ö ¾øÀ½\n"
+msgstr "ë£¨íŠ¸ ë””ë ‰í† ë¦¬ë¥¼ \"%s\"ë¡œ ë³€ê²½í•  ìˆ˜ ì—†ìŒ\n"
 
-#: libmisc/xmalloc.c:28
+#: libmisc/xmalloc.c:24
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "malloc(%d)¿¡ ½ÇÆĞÇßÀ½\n"
+msgstr "malloc(%d)ì— ì‹¤íŒ¨í–ˆìŒ\n"
 
-#: lib/dialchk.c:71
-msgid "Dialup Password: "
-msgstr "´ÙÀÌ¾ó¾÷ ÆĞ½º¿öµå: "
-
-#: lib/getdef.c:276
+#: lib/getdef.c:274
 msgid "Could not allocate space for config info.\n"
-msgstr "¼³Á¤ Á¤º¸¸¦ À§ÇÑ °ø°£ È®º¸¸¦ ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "ì„¤ì • ì •ë³´ë¥¼ ìœ„í•œ ê³µê°„ í™•ë³´ë¥¼ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#.
-#. * Item was never found.
-#.
-#: lib/getdef.c:330
+#: lib/getdef.c:328
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "¼³Á¤ ¿À·ù - ¾Ë ¼ö ¾ø´ÂÅ° '%s'°¡ ÀÖÀ½ (°ü¸®ÀÚ¿¡°Ô ¿¬¶ô¹Ù¶÷)\n"
+msgstr "ì„¤ì • ì˜¤ë¥˜ - ì•Œ ìˆ˜ ì—†ëŠ”í‚¤ '%s'ê°€ ìˆìŒ (ê´€ë¦¬ìì—ê²Œ ì—°ë½ë°”ëŒ)\n"
 
-#: lib/getdef.c:417
-#, c-format
-msgid "error - lookup '%s' failed\n"
-msgstr "¿À·ù - '%s'ÀÇ °Ë»ö¿¡ ½ÇÆĞ\n"
-
-#: lib/getdef.c:425
-#, c-format
-msgid "%s not found\n"
-msgstr "%s°¡ ¹ß°ßµÇÁö ¾ÊÀ½\n"
-
-#.
-#. * get the password from her, and set the salt for
-#. * the decryption from the group file.
-#.
-#: lib/pwauth.c:54 src/newgrp.c:348
+#: lib/pwauth.c:54 src/newgrp.c:343
 msgid "Password: "
-msgstr "ÆĞ½º¿öµå: "
+msgstr "íŒ¨ìŠ¤ì›Œë“œ: "
 
 #: lib/pwauth.c:56
 #, c-format
 msgid "%s's Password: "
-msgstr "%sÀÇ ÆĞ½º¿öµå: "
+msgstr "%sì˜ íŒ¨ìŠ¤ì›Œë“œ: "
 
-#: lib/pwauth.c:270
+#: lib/pwauth.c:247
 msgid "(Echo on) "
 msgstr ""
 
 #: lib/strerror.c:20
 #, c-format
 msgid "Unknown error %d"
-msgstr "¾Ë ¼ö ¾ø´Â ¿À·ù %d"
+msgstr "ì•Œ ìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ %d"
 
-#: src/chage.c:116
-#, c-format
+#: src/chage.c:118
 msgid ""
-"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-"\t[-I inactive] [-E expire] [-d last_day] user\n"
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"»ç¿ë¹ı: %s [-l] [-m ÃÖ¼ÒÀÏ¼ö] [-M ÃÖ´ëÀÏ¼ö] [-W °æ°íÀÏ¼ö]\n"
-"\t[-I ¹«È¿ÀÏ¼ö] [-E ¸¸·áÀÏ¼ö] [-d »õ ÆĞ½º¿öµå º¯°æÀÏ] »ç¿ëÀÚ¸í\n"
+"ì‚¬ìš©ë²•: chage [-l] [-m ìµœì†Œì¼ìˆ˜] [-M ìµœëŒ€ì¼ìˆ˜] [-W ê²½ê³ ì¼ìˆ˜]\n"
+"              [-I ë¬´íš¨ì¼ìˆ˜] [-E ë§Œë£Œì¼ìˆ˜] [-d ìƒˆ íŒ¨ìŠ¤ì›Œë“œ ë³€ê²½ì¼] ì‚¬ìš©ìëª…\n"
 
-#: src/chage.c:122
-#, c-format
-msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-msgstr "»ç¿ë¹ı: %s [-l] [-m ÃÖ¼ÒÀÏ¼ö] [-M ÃÖ´ëÀÏ¼ö] [-W °æ°íÀÏ¼ö] »ç¿ëÀÚ\n"
-
-#: src/chage.c:157
+#: src/chage.c:152
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
-"»õ·Î¿î °ªÀ» ³Ö°Å³ª, µğÆúÆ® °ªÀ» ¿øÇÑ´Ù¸é ENTERÅ°¸¦ Ä¡¼¼¿ä.\n"
+"ìƒˆë¡œìš´ ê°’ì„ ë„£ê±°ë‚˜, ë””í´íŠ¸ ê°’ì„ ì›í•œë‹¤ë©´ ENTERí‚¤ë¥¼ ì¹˜ì„¸ìš”.\n"
 "\n"
 
-#: src/chage.c:160
+#: src/chage.c:155
 msgid "Minimum Password Age"
-msgstr "ÃÖ¼Ò ÆĞ½º¿öµå ¿¬·É"
+msgstr "ìµœì†Œ íŒ¨ìŠ¤ì›Œë“œ ì—°ë ¹"
 
-#: src/chage.c:166
+#: src/chage.c:161
 msgid "Maximum Password Age"
-msgstr "ÃÖ´ë ÆĞ½º¿öµå ¿¬·É"
+msgstr "ìµœëŒ€ íŒ¨ìŠ¤ì›Œë“œ ì—°ë ¹"
 
-#: src/chage.c:174
+#: src/chage.c:169
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "¸¶Áö¸· ÆĞ½º¿öµå º¯°æ (YYYY-MM-DD)"
+msgstr "ë§ˆì§€ë§‰ íŒ¨ìŠ¤ì›Œë“œ ë³€ê²½ (YYYY-MM-DD)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì‚¬ìš©ë§Œê¸°ì¼ ì´ˆê³¼ ê²½ê³ "
 
 #: src/chage.c:183
-msgid "Password Expiration Warning"
-msgstr "ÆĞ½º¿öµå »ç¿ë¸¸±âÀÏ ÃÊ°ú °æ°í"
-
-#: src/chage.c:189
 msgid "Password Inactive"
-msgstr "ÆĞ½º¿öµå°¡ À¯È¿ÇÏÁö ¾ÊÀ½"
+msgstr "íŒ¨ìŠ¤ì›Œë“œê°€ ìœ íš¨í•˜ì§€ ì•ŠìŒ"
 
-#: src/chage.c:197
+#: src/chage.c:191
 msgid "Account Expiration Date (YYYY-MM-DD)"
-msgstr "°èÁ¤ »ç¿ëÀÏ ¸¸±â ÀÏ(YYYY-MM-DD)"
+msgstr "ê³„ì • ì‚¬ìš©ì¼ ë§Œê¸° ì¼(YYYY-MM-DD)"
 
-#.
-#. * Start with the easy numbers - the number of days before the
-#. * password can be changed, the number of days after which the
-#. * password must be chaged, the number of days before the password
-#. * expires that the user is told, and the number of days after the
-#. * password expires that the account becomes unusable.
-#.
-#: src/chage.c:248
+#: src/chage.c:241
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "ÃÖ¼Ò:\t%ld\n"
+msgstr "ìµœì†Œ:\t%ld\n"
 
-#: src/chage.c:249
+#: src/chage.c:242
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "ÃÖ´ë:\t%ld\n"
+msgstr "ìµœëŒ€:\t%ld\n"
 
-#: src/chage.c:251
+#: src/chage.c:243
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr "°æ°í:\t%ld\n"
+msgstr "ê²½ê³ :\t%ld\n"
 
-#: src/chage.c:252
+#: src/chage.c:244
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀ½:\t%ld\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•ŠìŒ:\t%ld\n"
 
-#.
-#. * The "last change" date is either "Never" or the date the password
-#. * was last modified. The date is the number of days since 1/1/1970.
-#.
-#: src/chage.c:260
+#: src/chage.c:251
 msgid "Last Change:\t\t"
-msgstr "¸¶Áö¸· º¯°æ:\t\t"
+msgstr "ë§ˆì§€ë§‰ ë³€ê²½:\t\t"
 
-#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+#: src/chage.c:253 src/chage.c:267 src/chage.c:283 src/chage.c:296
 msgid "Never\n"
-msgstr "ºÒ°¡\n"
+msgstr "ë¶ˆê°€\n"
 
-#.
-#. * The password expiration date is determined from the last change
-#. * date plus the number of days the password is valid for.
-#.
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Password Expires:\t"
-msgstr "ÆĞ½º¿öµå ¸¸±â:\t"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ë§Œê¸°:\t"
 
-#.
-#. * The account becomes inactive if the password is expired for more
-#. * than "inactdays". The expiration date is calculated and the
-#. * number of inactive days is added. The resulting date is when the
-#. * active will be disabled.
-#.
-#: src/chage.c:290
+#: src/chage.c:280
 msgid "Password Inactive:\t"
-msgstr "ÆĞ½º¿öµå°¡ À¯È¿ÇÏÁö ¾ÊÀ½:\t"
+msgstr "íŒ¨ìŠ¤ì›Œë“œê°€ ìœ íš¨í•˜ì§€ ì•ŠìŒ:\t"
 
-#.
-#. * The account will expire on the given date regardless of the
-#. * password expiring or not.
-#.
-#: src/chage.c:304
+#: src/chage.c:294
 msgid "Account Expires:\t"
-msgstr "°èÁ¤ ¸¸±â:\t"
+msgstr "ê³„ì • ë§Œê¸°:\t"
 
-#: src/chage.c:468
+#: src/chage.c:445
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: \"l\" ¿Í ÇÔ²² ´Ù¸¥ flags¸¦ Æ÷ÇÔÇÏÁö ¸»°Í\n"
+msgstr "%s: \"l\" ì™€ í•¨ê»˜ ë‹¤ë¥¸ flagsë¥¼ í¬í•¨í•˜ì§€ ë§ê²ƒ\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:518
+#: src/chage.c:458 src/chage.c:588 src/login.c:503
 #, c-format
 msgid "%s: permission denied\n"
-msgstr "%s: Á¢±Ù±ÇÇÑ ¾øÀ½\n"
+msgstr "%s: ì ‘ê·¼ê¶Œí•œ ì—†ìŒ\n"
 
-#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
-#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
-#: src/usermod.c:1732
+#: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: ÀÎÁõ¹æ¹ı Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì¸ì¦ë°©ë²• ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/chage.c:533 src/chpasswd.c:157
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» lockÇÒ ¼ö ¾ø½À´Ï´Ù\n"
-
-#: src/chage.c:544 src/chpasswd.c:162
+#: src/chage.c:510 src/chpasswd.c:159
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:552
+#: src/chage.c:518
 #, c-format
 msgid "%s: unknown user: %s\n"
-msgstr "¾Ë¼ö¾ø´Â »ç¿ëÀÚ: %s\n"
+msgstr "%s: ì•Œìˆ˜ì—†ëŠ” ì‚¬ìš©ì: %s\n"
 
-#: src/chage.c:571
-#, c-format
+#: src/chage.c:536
+#, fuzzy, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì ê¸€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:579
+#: src/chage.c:544
 #, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤"
 
-#: src/chage.c:674
+#: src/chage.c:605
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "%sÀÇ ¿¬·É¿¡ ´ëÇÑ Á¤º¸¸¦ °»½ÅÇÕ´Ï´Ù %s\n"
+msgstr "ì˜ ì—°ë ¹ì— ëŒ€í•œ ì •ë³´ë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤ %s\n"
 
-#: src/chage.c:677
+#: src/chage.c:608
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: Ç×¸ñÀ» ¹Ù²Ù´Â µµÁß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù\n"
+msgstr "%s: í•­ëª©ì„ ë°”ê¾¸ëŠ” ë„ì¤‘ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#: src/chage.c:632 src/pwunconv.c:138
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:737 src/pwunconv.c:168
+#: src/chage.c:661 src/pwunconv.c:132
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
-#: src/passwd.c:747 src/passwd.c:859
+#: src/chage.c:676 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
 msgid "Error updating the DBM password entry.\n"
-msgstr "DBM Æä½º¿öµå ÀÔ·ÂºÎºĞÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.\n"
+msgstr "DBM í˜ìŠ¤ì›Œë“œ ì…ë ¥ë¶€ë¶„ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.\n"
 
-#: src/chage.c:823
+#: src/chage.c:693
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» ´Ù½Ã ÀÛ¼ºÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ë‹¤ì‹œ ì‘ì„±í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:838
+#: src/chage.c:707
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» ´Ù½Ã ÀÛ¼ºÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ë‹¤ì‹œ ì‘ì„±í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
-#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
-#: src/usermod.c:1811
+#: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
-msgstr "%s: ÆÄÀÏ Àá±İÀ» Ç® ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ ì ê¸ˆì„ í’€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chfn.c:83
+#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"»ç¿ë¹ı: %s [-f ÀÌ¸§] [-r ¹æ_¹øÈ£] [-w Á÷Àå_ÀüÈ­¹øÈ£]\n"
-"\t[-h Áı_ÀüÈ­¹øÈ£] [-o ±âÅ¸] [»ç¿ëÀÚ]\n"
+"ì‚¬ìš©ë²•: %s [-f ì´ë¦„] [-r ë°©_ë²ˆí˜¸] [-w ì§ì¥_ì „í™”ë²ˆí˜¸]\n"
+"\t[-h ì§‘_ì „í™”ë²ˆí˜¸] [-o ê¸°íƒ€] [ì‚¬ìš©ì]\n"
 
-#: src/chfn.c:88
+#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"»ç¿ë¹ı: %s [-f ÀÌ¸§] [-r ¹æ_¹øÈ£] [-w Á÷Àå_ÀüÈ­¹øÈ£] [-h Áı_ÀüÈ­¹øÈ£]\n"
+"ì‚¬ìš©ë²•: %s [-f ì´ë¦„] [-r ë°©_ë²ˆí˜¸] [-w ì§ì¥_ì „í™”ë²ˆí˜¸] [-h ì§‘_ì „í™”ë²ˆí˜¸]\n"
 
-#: src/chfn.c:139
+#: src/chfn.c:140
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "»õ·Î¿î °ªÀ» ³Ö°Å³ª, µğÆúÆ®¸¦ ¿øÇÏ¸é ¿£ÅÍ¸¦ Ä¡¼¼¿ä\n"
+msgstr "ìƒˆë¡œìš´ ê°’ì„ ë„£ê±°ë‚˜, ë””í´íŠ¸ë¥¼ ì›í•˜ë©´ ì—”í„°ë¥¼ ì¹˜ì„¸ìš”\n"
 
-#: src/chfn.c:142
+#: src/chfn.c:143
 msgid "Full Name"
-msgstr "ÀÌ¸§"
+msgstr "ì´ë¦„"
 
-#: src/chfn.c:144
+#: src/chfn.c:145
 #, c-format
 msgid "\tFull Name: %s\n"
-msgstr "\tÀÌ¸§: %s\n"
+msgstr "\tì´ë¦„: %s\n"
 
-#: src/chfn.c:147
+#: src/chfn.c:148
 msgid "Room Number"
-msgstr "¹æ ¹øÈ£"
+msgstr "ë°© ë²ˆí˜¸"
 
-#: src/chfn.c:149
+#: src/chfn.c:150
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\t¹æ ¹øÈ£: %s\n"
+msgstr "\të°© ë²ˆí˜¸: %s\n"
 
-#: src/chfn.c:152
+#: src/chfn.c:153
 msgid "Work Phone"
-msgstr "Á÷Àå ¹øÈ­¹øÈ£"
+msgstr "ì§ì¥ ë²ˆí™”ë²ˆí˜¸"
 
-#: src/chfn.c:154
+#: src/chfn.c:155
 #, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "\tÁ÷Àå ÀüÈ­¹øÈ£: %s\n"
+msgstr "\tì§ì¥ ì „í™”ë²ˆí˜¸: %s\n"
 
-#: src/chfn.c:157
+#: src/chfn.c:158
 msgid "Home Phone"
-msgstr "Áı ÀüÈ­¹øÈ£"
+msgstr "ì§‘ ì „í™”ë²ˆí˜¸"
 
-#: src/chfn.c:159
+#: src/chfn.c:160
 #, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "\tÁı ÀüÈ­¹øÈ£: %s\n"
+msgstr "\tì§‘ ì „í™”ë²ˆí˜¸: %s\n"
 
-#: src/chfn.c:162
+#: src/chfn.c:163
 msgid "Other"
-msgstr "±âÅ¸"
+msgstr "ê¸°íƒ€"
 
-#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
-#: src/chfn.c:379 src/passwd.c:1115
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
 #, c-format
 msgid "%s: Permission denied.\n"
-msgstr "Á¢±Ù±ÇÇÑ ¾øÀ½.\n"
+msgstr "%s: ì ‘ê·¼ê¶Œí•œ ì—†ìŒ.\n"
 
-#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
 #, c-format
 msgid "%s: Unknown user %s\n"
-msgstr "¾Ë¼ö¾ø´Â »ç¿ëÀÚ %s\n"
+msgstr "%s: ì•Œìˆ˜ì—†ëŠ” ì‚¬ìš©ì %s\n"
 
-#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: »ç¿ëÀÚ ÀÌ¸§À» ÀÎ½ÄÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s: ì‚¬ìš©ì ì´ë¦„ì„ ì¸ì‹í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chfn.c:358 src/chsh.c:215
+#: src/chfn.c:359 src/chsh.c:210
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "NIS Å¬¶óÀÌ¾ğÆ®¿¡¼­ '%s'ÀÇ »ç¿ëÀÚ ÀÌ¸§À» º¯°æÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s: NIS í´ë¼ì´ì–¸íŠ¸ì—ì„œ '%s'ì˜ ì‚¬ìš©ì ì´ë¦„ì„ ë³€ê²½í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chfn.c:366 src/chsh.c:223
+#: src/chfn.c:367 src/chsh.c:218
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: ÇöÀçÀÇ Å¬¶óÀÌ¾ğÆ®¿¡ ´ëÇÏ¿© '%s'°¡ NIS ¸¶½ºÅÍÀÔ´Ï´Ù.\n"
+msgstr "%s: í˜„ì¬ì˜ í´ë¼ì´ì–¸íŠ¸ì— ëŒ€í•˜ì—¬ '%s'ê°€ NIS ë§ˆìŠ¤í„°ì…ë‹ˆë‹¤.\n"
 
-#: src/chfn.c:441
-#, c-format
+#: src/chfn.c:442
+#, fuzzy, c-format
 msgid "Changing the user information for %s\n"
-msgstr "%s¿¡ ´ëÇÏ¿© »ç¿ëÀÚÀÇ Á¤º¸¸¦ ¹Ù²ß´Ï´Ù\n"
+msgstr "ì˜ ì—°ë ¹ì— ëŒ€í•œ ì •ë³´ë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤ %s\n"
 
-#: src/chfn.c:450
+#: src/chfn.c:451
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾Ê´Â ÀÌ¸§: \"%s\"\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•ŠëŠ” ì´ë¦„: \"%s\"\n"
 
-#: src/chfn.c:456
+#: src/chfn.c:457
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "À¯È¿ÇÏÁö ¾Ê´Â ¹æ ¹øÈ£: \"%s\"\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•ŠëŠ” ë°© ë²ˆí˜¸: \"%s\"\n"
 
-#: src/chfn.c:462
+#: src/chfn.c:463
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "À¯È¿ÇÏÁö ¾Ê´Â Á÷Àå ÀüÈ­¹øÈ£: \"%s\"\n"
+msgstr "%s ìœ íš¨í•˜ì§€ ì•ŠëŠ” ì§ì¥ ì „í™”ë²ˆí˜¸: \"%s\"\n"
 
-#: src/chfn.c:468
+#: src/chfn.c:469
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾Ê´Â Áı ÀüÈ­¹øÈ£: \"%s\"\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•ŠëŠ” ì§‘ ì „í™”ë²ˆí˜¸: \"%s\"\n"
 
-#: src/chfn.c:475
+#: src/chfn.c:476
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\"Àº ÀûÀıÇÏÁö ¾Ê´Â ±ÛÀÚ¸¦ Æ÷ÇÔÇÏ°í ÀÖ½À´Ï´Ù\n"
+msgstr "%s: \"%s\"ì€ ì ì ˆí•˜ì§€ ì•ŠëŠ” ê¸€ìë¥¼ í¬í•¨í•˜ê³  ìˆìŠµë‹ˆë‹¤\n"
 
-#: src/chfn.c:488
+#: src/chfn.c:489
 #, c-format
 msgid "%s: fields too long\n"
-msgstr "%s: ÀÔ·Â¹üÀ§°¡ ³Ê¹« ±é´Ï´Ù\n"
+msgstr "%s: ì…ë ¥ë²”ìœ„ê°€ ë„ˆë¬´ ê¹ë‹ˆë‹¤\n"
 
-#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
 msgid "Cannot change ID to root.\n"
-msgstr "·çÆ®·Î ¾ÆÀÌµğ º¯°æÀÌ ºÒ°¡´É ÇÕ´Ï´Ù.\n"
+msgstr "ë£¨íŠ¸ë¡œ ì•„ì´ë”” ë³€ê²½ì´ ë¶ˆê°€ëŠ¥ í•©ë‹ˆë‹¤.\n"
 
-#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» lockÇÒ ¼ö ¾ø½À´Ï´Ù;  ³ªÁß¿¡ ´Ù½Ã ½ÃµµÇÏ½Ê½Ã¿À.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ lockí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤;  ë‚˜ì¤‘ì— ë‹¤ì‹œ ì‹œë„í•˜ì‹­ì‹œì˜¤.\n"
 
-#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
 msgid "Cannot open the password file.\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s°¡ /etc/passwd¿¡¼­ ¹ß°ßµÇÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: %sê°€ /etc/passwdì—ì„œ ë°œê²¬ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
 msgid "Error updating the password entry.\n"
-msgstr "ÆĞ½º¿öµå ÀÔ·ÂÀ» ¾÷µ¥ÀÌÆ®ÇÏ´Âµ¥ ¿À·ù¹ß»ı.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ì„ ì—…ë°ì´íŠ¸í•˜ëŠ”ë° ì˜¤ë¥˜ë°œìƒ.\n"
 
-#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
 msgid "Cannot commit password file changes.\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏ º¯°æÀ» Ã³¸®ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ë³€ê²½ì„ ì²˜ë¦¬í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chfn.c:592 src/chsh.c:404
+#: src/chfn.c:593 src/chsh.c:399
 msgid "Cannot unlock the password file.\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏÀ» lockÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ lockí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chpasswd.c:66
+#: src/chpasswd.c:67
+#, fuzzy, c-format
+msgid "Usage: %s [-e]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-e]\n"
+
+#: src/chpasswd.c:154
 #, c-format
-msgid "usage: %s [-e]\n"
-msgstr "»ç¿ë¹ı: %s [-e]\n"
+msgid "%s: can't lock password file\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ lockí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:171 src/pwconv.c:94
+#: src/chpasswd.c:168 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: ½¦µµ¿ì ÆÄÀÏÀ» lockÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒŒì¼ì„ lockí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
-#: src/pwunconv.c:108
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: ½¦µµ¿ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:200 src/newusers.c:460
+#: src/chpasswd.c:197 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: line %d: ³Ê¹« ±é´Ï´Ù\n"
+msgstr "%s: line %d: ë„ˆë¬´ ê¹ë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:220
+#: src/chpasswd.c:217
 #, c-format
 msgid "%s: line %d: missing new password\n"
-msgstr "%s: line %d: »õ·Î¿î ÆĞ½º¿öµå°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: line %d: ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:237
+#: src/chpasswd.c:234
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: line %d: ¾Ë ¼ö ¾ø´Â »ç¿ëÀÚ %s\n"
+msgstr "%s: line %d: ì•Œ ìˆ˜ ì—†ëŠ” ì‚¬ìš©ì %s\n"
 
-#: src/chpasswd.c:290
+#: src/chpasswd.c:280
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: line %d: ÆĞ½º¿öµå ÀÔ·ÂÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: line %d: íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:307 src/newusers.c:588
+#: src/chpasswd.c:297 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: ¿À·ù¹ß»ı, º¯°æÀÌ Ã³¸®µÇÁö ¾Ê¾Ò½À´Ï´Ù\n"
+msgstr "%s: ì˜¤ë¥˜ë°œìƒ, ë³€ê²½ì´ ì²˜ë¦¬ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n"
 
-#: src/chpasswd.c:319
+#: src/chpasswd.c:309
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: ½¦µµ¿ì ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿À·ù¹ß»ı\n"
+msgstr "%s: ì‰ë„ìš° íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜¤ë¥˜ë°œìƒ\n"
 
-#: src/chpasswd.c:328
+#: src/chpasswd.c:318
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿À·ù¹ß»ı\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜¤ë¥˜ë°œìƒ\n"
 
-#: src/chsh.c:75
+#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "»ç¿ë¹ı: %s [-s ½©] [ÀÌ¸§]\n"
-
-#: src/chsh.c:89
-#, fuzzy
-msgid "Enter the new value, or press return for the default\n"
-msgstr "»õ·Î¿î °ªÀ» ³Ö°Å³ª, µğÆúÆ®¸¦ ¿øÇÏ¸é ¿£ÅÍ¸¦ Ä¡¼¼¿ä\n"
+msgstr "ì‚¬ìš©ë²•: %s [-s ì‰˜] [ì´ë¦„]\n"
 
 #: src/chsh.c:90
-msgid "Login Shell"
-msgstr "·Î±ä ½©"
+#, fuzzy
+msgid "Enter the new value, or press return for the default\n"
+msgstr "ìƒˆë¡œìš´ ê°’ì„ ë„£ê±°ë‚˜, ë””í´íŠ¸ë¥¼ ì›í•˜ë©´ ì—”í„°ë¥¼ ì¹˜ì„¸ìš”\n"
 
-#: src/chsh.c:239 src/chsh.c:253
+#: src/chsh.c:91
+msgid "Login Shell"
+msgstr "ë¡œê¸´ ì‰˜"
+
+#: src/chsh.c:234 src/chsh.c:248
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "»ç¿ëÀÚ´Â %s¿¡ ´ëÇÑ ½©À» º¯°æÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "ì‚¬ìš©ìëŠ” %sì— ëŒ€í•œ ì‰˜ì„ ë³€ê²½í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/chsh.c:282
+#: src/chsh.c:277
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "%s¿¡ ´ëÇÑ ·Î±ä ½©À» º¯°æÇÏ°í ÀÖ½À´Ï´Ù\n"
+msgstr "%sì— ëŒ€í•œ ë¡œê¸´ ì‰˜ì„ ë³€ê²½í•˜ê³  ìˆìŠµë‹ˆë‹¤\n"
 
-#: src/chsh.c:294
+#: src/chsh.c:289
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: ºÎÀûÀıÇÑ ÀÔ·Â: %s\n"
+msgstr "%s: ë¶€ì ì ˆí•œ ì…ë ¥: %s\n"
 
-#: src/chsh.c:301
+#: src/chsh.c:296
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "%s´Â ºÎÀûÀıÇÑ ½©ÀÔ´Ï´Ù.\n"
-
-#: src/dpasswd.c:52
-#, c-format
-msgid "Usage: %s [-(a|d)] shell\n"
-msgstr "»ç¿ë¹ı: %s [-(a|d)] ½©\n"
-
-#: src/dpasswd.c:115
-msgid "Shell password: "
-msgstr "½© ÆĞ½º¿öµå: "
-
-#: src/dpasswd.c:121
-msgid "re-enter Shell password: "
-msgstr "½© ÆĞ½º¿öµå¸¦ ´Ù½Ã ÀÔ·Â: "
-
-#: src/dpasswd.c:129
-#, c-format
-msgid "%s: Passwords do not match, try again.\n"
-msgstr "%s: ÆĞ½º¿öµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä. \n"
-
-#: src/dpasswd.c:149
-#, c-format
-msgid "%s: can't create %s"
-msgstr "%s: %s¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù"
-
-#: src/dpasswd.c:155
-#, c-format
-msgid "%s: can't open %s"
-msgstr "%s: %s¸¦ ¿­¼ö°¡ ¾ø½À´Ï´Ù"
-
-#: src/dpasswd.c:183
-#, c-format
-msgid "%s: Shell %s not found.\n"
-msgstr "%s: %sÀÇ ½©ÀÌ ¹ß°ßµÇÁö ¾ø½À´Ï´Ù.\n"
+msgstr "%sëŠ” ë¶€ì ì ˆí•œ ì‰˜ì…ë‹ˆë‹¤.\n"
 
 #: src/expiry.c:59
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "»ç¿ë¹ı: ¸¸±â {-f|-c}\n"
+msgstr "ì‚¬ìš©ë²•: ë§Œê¸° {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
 msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s: °æ°í! ¹İµå½Ã ·çÆ®ÀÇ UID¸¦ ¸ÂÃâ°Í!\n"
+msgstr "%s: ê²½ê³ ! ë°˜ë“œì‹œ ë£¨íŠ¸ì˜ UIDë¥¼ ë§ì¶œê²ƒ!\n"
 
 #: src/expiry.c:124
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s: ¾Ë¼ö¾ø´Â »ç¿ëÀÚ\n"
+msgstr "%s: ì•Œìˆ˜ì—†ëŠ” ì‚¬ìš©ì\n"
 
 #: src/faillog.c:77
-#, c-format
-msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
-msgstr "»ç¿ë¹ı: %s [-a|-u »ç¿ëÀÚ] [-m ÃÖ´ë] [-r] [-t ³¯Â¥] [-l locksecs]\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-a|-u ì‚¬ìš©ì] [-m ìµœëŒ€] [-r] [-t ë‚ ì§œ] [-l locksecs]\n"
 
 #: src/faillog.c:131 src/lastlog.c:96
 #, c-format
 msgid "Unknown User: %s\n"
-msgstr "¾Ë¼ö¾ø´Â »ç¿ëÀÚ: %s\n"
+msgstr "ì•Œìˆ˜ì—†ëŠ” ì‚¬ìš©ì: %s\n"
 
 #: src/faillog.c:212
 msgid "Username   Failures  Maximum  Latest\n"
-msgstr "ÃÖ´ë ÀÔ·Â½Ã ±îÁö »ç¿ëÀÚ ÀÌ¸§ ÀÎÁõ ½ÇÆĞ\n"
+msgstr "ìµœëŒ€ ì…ë ¥ì‹œ ê¹Œì§€ ì‚¬ìš©ì ì´ë¦„ ì¸ì¦ ì‹¤íŒ¨\n"
 
 #: src/faillog.c:229
 #, c-format
 msgid "  %s on %s"
-msgstr "%s ÀÇ %s"
+msgstr "%s ì˜ %s"
 
 #: src/faillog.c:233
 #, c-format
@@ -716,283 +626,273 @@ msgid " [%lds lock]"
 msgstr " [%lds lock]"
 
 #: src/gpasswd.c:78
-#, c-format
-msgid "usage: %s [-r|-R] group\n"
-msgstr "»ç¿ë¹ı: %s [-r|-R] ±×·ì\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "ì‚¬ìš©ë²•: %s [-r|-R] ê·¸ë£¹\n"
 
 #: src/gpasswd.c:79
 #, c-format
 msgid "       %s [-a user] group\n"
-msgstr "       %s [-a »ç¿ëÀÚ] ±×·ì\n"
+msgstr "       %s [-a ì‚¬ìš©ì] ê·¸ë£¹\n"
 
 #: src/gpasswd.c:80
 #, c-format
 msgid "       %s [-d user] group\n"
-msgstr "       %s [-d »ç¿ëÀÚ] ±×·ì\n"
+msgstr "       %s [-d ì‚¬ìš©ì] ê·¸ë£¹\n"
 
 #: src/gpasswd.c:83
 #, c-format
 msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A »ç¿ëÀÚ,...] [-M »ç¿ëÀÚ,...] ±×·ì\n"
+msgstr "       %s [-A ì‚¬ìš©ì,...] [-M ì‚¬ìš©ì,...] ê·¸ë£¹\n"
 
 #: src/gpasswd.c:85
 #, c-format
 msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M »ç¿ëÀÚ,...] ±×·ì\n"
+msgstr "       %s [-M ì‚¬ìš©ì,...] ê·¸ë£¹\n"
 
 #: src/gpasswd.c:146 src/gpasswd.c:230
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: ¾Ë ¼ö ¾ø´Â »ç¿ëÀÚ %s\n"
+msgstr "%s: ì•Œ ìˆ˜ ì—†ëŠ” ì‚¬ìš©ì %s\n"
 
 #: src/gpasswd.c:157
 msgid "Permission denied.\n"
-msgstr "Á¢±Ù±ÇÇÑ ¾øÀ½.\n"
+msgstr "ì ‘ê·¼ê¶Œí•œ ì—†ìŒ.\n"
 
 #: src/gpasswd.c:243
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: -A¿¡ ´ëÇÏ¿© ½¦µµ¿ì ±×·ì ÆĞ½º¿öµå°¡ ÇÊ¿äÇÕ´Ï´Ù\n"
+msgstr "%s: -Aì— ëŒ€í•˜ì—¬ ì‰ë„ìš° ê·¸ë£¹ íŒ¨ìŠ¤ì›Œë“œê°€ í•„ìš”í•©ë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:294
 msgid "Who are you?\n"
-msgstr "´ç½ÅÀº ´©±¸½Ê´Ï±î?\n"
+msgstr "ë‹¹ì‹ ì€ ëˆ„êµ¬ì‹­ë‹ˆê¹Œ?\n"
 
-#: src/gpasswd.c:313 src/newgrp.c:297
+#: src/gpasswd.c:313 src/newgrp.c:292
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "¾Ë ¼ö ¾ø´Â ±×·ì: %s\n"
+msgstr "ì•Œ ìˆ˜ ì—†ëŠ” ê·¸ë£¹: %s\n"
 
 #: src/gpasswd.c:422
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "%s ±×·ì¿¡ %s »ç¿ëÀÚ µî·ÏÁß\n"
+msgstr "%s ê·¸ë£¹ì— %s ì‚¬ìš©ì ë“±ë¡ì¤‘\n"
 
 #: src/gpasswd.c:440
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "%s ±×·ì À¸·ÎºÎÅÍ %s »ç¿ëÀÚ »èÁ¦Áß\n"
+msgstr "%s ê·¸ë£¹ ìœ¼ë¡œë¶€í„° %s ì‚¬ìš©ì ì‚­ì œì¤‘\n"
 
 #: src/gpasswd.c:454
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: ¾Ë ¼ö ¾ø´Â ±×·ì¸â¹ö %s\n"
+msgstr "%s: ì•Œ ìˆ˜ ì—†ëŠ” ê·¸ë£¹ë©¤ë²„ %s\n"
 
 #: src/gpasswd.c:501
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: tty °¡ ¾Æ´Ô\n"
+msgstr "%s: tty ê°€ ì•„ë‹˜\n"
 
-#.
-#. * A new password is to be entered and it must be encrypted, etc.
-#. * The password will be prompted for twice, and both entries must be
-#. * identical. There is no need to validate the old password since
-#. * the invoker is either the group owner, or root.
-#.
 #: src/gpasswd.c:522
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "%s ±×·ì¿¡ ´ëÇÏ¿© ÆĞ½º¿öµå¸¦ º¯°æÁß\n"
+msgstr "%s ê·¸ë£¹ì— ëŒ€í•˜ì—¬ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë³€ê²½ì¤‘\n"
 
 #: src/gpasswd.c:525
 msgid "New Password: "
-msgstr "»õ·Î¿î ÆĞ½º¿öµå: "
+msgstr "ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œ: "
 
-#: src/gpasswd.c:530 src/passwd.c:365
+#: src/gpasswd.c:530 src/passwd.c:281
 msgid "Re-enter new password: "
-msgstr "»õ ÆĞ½º¿öµå¸¦ ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä: "
+msgstr "ìƒˆ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”: "
 
 #: src/gpasswd.c:542
 msgid "They don't match; try again"
-msgstr "ÀÔ·Â°ªÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù; ´Ù½Ã ½ÃµµÇÏ¼¼¿ä"
+msgstr "ì…ë ¥ê°’ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤; ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”"
 
 #: src/gpasswd.c:546
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: ³ªÁß¿¡ ´Ù½Ã ½ÃµµÇÏ¼¼¿ä\n"
+msgstr "%s: ë‚˜ì¤‘ì— ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”\n"
 
 #: src/gpasswd.c:578
 #, c-format
 msgid "%s: can't get lock\n"
-msgstr "%s: Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:584
 #, c-format
 msgid "%s: can't get shadow lock\n"
-msgstr "%s: ½¦µµ¿ì Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:590
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s: ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:602
 #, c-format
 msgid "%s: can't update entry\n"
-msgstr "%s: ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:608
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s: ½¦µµ¿ì ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:615
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: ÆÄÀÏÀ» ´Ù½Ã ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:621
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: ½¦µµ¿ì ÆÄÀÏÀ» ´Ù½Ã ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:630
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s: ÆÄÀÏ Àá±İÀ» Ç® ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ ì ê¸ˆì„ í’€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:635
 #, c-format
 msgid "%s: can't update DBM files\n"
-msgstr "%s: DBM ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: DBM íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/gpasswd.c:642
 #, c-format
 msgid "%s: can't update DBM shadow files\n"
-msgstr "%s: DBM ½¦µµ¿ì ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: DBM ì‰ë„ìš° íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:101
-msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "»ç¿ë¹ı: groupadd [-g gid(±×·ì ¾ÆÀÌµğ) [-o]] ±×·ì¸í\n"
+#: src/groupadd.c:102
+#, fuzzy
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "ì‚¬ìš©ë²•: groupadd [-g gid(ê·¸ë£¹ ì•„ì´ë””) [-o]] ê·¸ë£¹ëª…\n"
 
-#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
-#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: »õ·Î¿î ±×·ìÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ìƒˆë¡œìš´ ê·¸ë£¹ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
-#: src/usermod.c:564 src/usermod.c:708
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
-msgstr "%s: »õ·Î¿î dbm ±×·ì ÀÔ·Â°ªÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ìƒˆë¡œìš´ dbm ê·¸ë£¹ ì…ë ¥ê°’ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/groupadd.c:255 src/useradd.c:1034
+#: src/groupadd.c:256 src/useradd.c:977
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s: %s ¶õ ÀÌ¸§Àº ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: %s ë€ ì´ë¦„ì€ ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:270
+#: src/groupadd.c:271
 #, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid(»ç¿ëÀÚ ¾ÆÀÌµğ) %u ´Â ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: uid(ì‚¬ìš©ì ì•„ì´ë””) %u ëŠ” ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:294
+#: src/groupadd.c:295
 #, c-format
 msgid "%s: can't get unique gid\n"
-msgstr "%s: ÀûÀıÇÑ gid(±×·ì ¾ÆÀÌµğ)¸¦ ¾òÀ» ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì ì ˆí•œ gid(ê·¸ë£¹ ì•„ì´ë””)ë¥¼ ì–»ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#.
-#. * All invalid group names land here.
-#.
-#: src/groupadd.c:317 src/groupmod.c:341
+#: src/groupadd.c:318 src/groupmod.c:342
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
-msgstr "%s: %s ´Â À¯È¿ÇÑ ±×·ì¸íÀÌ ¾Æ´Õ´Ï´Ù\n"
+msgstr "%s: %s ëŠ” ìœ íš¨í•œ ê·¸ë£¹ëª…ì´ ì•„ë‹™ë‹ˆë‹¤\n"
 
-#: src/groupadd.c:346 src/groupmod.c:366
+#: src/groupadd.c:347 src/groupmod.c:367
 #, c-format
 msgid "%s: invalid group %s\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾ÊÀº ±×·ì %s\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•Šì€ ê·¸ë£¹ %s\n"
 
-#: src/groupadd.c:363 src/useradd.c:1313
+#: src/groupadd.c:364 src/useradd.c:1173
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s: NAME=VALUE ¸¦ À§ÇØ¼­´Â -O ¿É¼ÇÀÌ ÇÊ¿äÇÕ´Ï´Ù\n"
+msgstr "%s: NAME=VALUE ë¥¼ ìœ„í•´ì„œëŠ” -O ì˜µì…˜ì´ í•„ìš”í•©ë‹ˆë‹¤\n"
 
-#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
-#: src/userdel.c:312 src/usermod.c:576
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: ±×·ìÆÄÀÏÀ» ´Ù½Ã ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
-#: src/userdel.c:319 src/usermod.c:722
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» ´Ù½Ã ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupadd.c:562
+#: src/groupadd.c:563
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: ±×·ì %s ´Â Á¸ÀçÇÕ´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ %s ëŠ” ì¡´ì¬í•©ë‹ˆë‹¤\n"
 
-#: src/groupdel.c:92
-msgid "usage: groupdel group\n"
-msgstr "»ç¿ë¹ı: groupdel ±×·ì¸í\n"
+#: src/groupdel.c:88
+#, fuzzy
+msgid "Usage: groupdel group\n"
+msgstr "ì‚¬ìš©ë²•: groupdel ê·¸ë£¹ëª…\n"
 
-#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
 #, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s: ±×·ì ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/groupdel.c:122 src/groupmod.c:204
+#: src/groupdel.c:119 src/groupmod.c:205
 #, c-format
 msgid "%s: error removing group dbm entry\n"
-msgstr "%s: ±×·ì dbm ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ dbm ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/groupdel.c:137
+#: src/groupdel.c:135
 #, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/groupdel.c:150 src/groupmod.c:254
+#: src/groupdel.c:149 src/groupmod.c:255
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì dbm ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ dbm ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#.
-#. * Can't remove the group.
-#.
-#: src/groupdel.c:254
+#: src/groupdel.c:255
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: »ç¿ëÀÚÀÇ primary ±×·ìÀ» Á¦°ÅÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s: ì‚¬ìš©ìì˜ primary ê·¸ë£¹ì„ ì œê±°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/groupdel.c:355 src/groupmod.c:550
+#: src/groupdel.c:359 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: ±×·ì %s ´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ %s ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/groupdel.c:369 src/groupmod.c:566
+#: src/groupdel.c:373 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s: ±×·ì %s ´Â NIS ±×·ìÀÔ´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ %s ëŠ” NIS ê·¸ë£¹ì…ë‹ˆë‹¤\n"
 
-#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#: src/groupdel.c:378 src/groupmod.c:572 src/userdel.c:724 src/usermod.c:805
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s ´Â NIS ¸¶½ºÅÍ(master)ÀÔ´Ï´Ù\n"
+msgstr "%s: %s ëŠ” NIS ë§ˆìŠ¤í„°(master)ì…ë‹ˆë‹¤\n"
 
 #: src/groupmems.c:95
 msgid "Member already exists\n"
@@ -1003,7 +903,7 @@ msgid "Member to remove could not be found\n"
 msgstr ""
 
 #: src/groupmems.c:158
-msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
 #: src/groupmems.c:201
@@ -1020,58 +920,59 @@ msgstr ""
 
 #: src/groupmems.c:215
 msgid "Unable to lock group file\n"
-msgstr "±×·ì ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/groupmems.c:220
 msgid "Unable to open group file\n"
-msgstr "±×·ì ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/groupmems.c:240
 msgid "Cannot close group file\n"
-msgstr "±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupmod.c:103
-msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "»ç¿ë¹ı: groupmod [-g gid(±×·ì ¾ÆÀÌµğ) [-o]] [-n ÀÌ¸§] ±×·ì¸í\n"
+#: src/groupmod.c:104
+#, fuzzy
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "ì‚¬ìš©ë²•: groupmod [-g gid(ê·¸ë£¹ ì•„ì´ë””) [-o]] [-n ì´ë¦„] ê·¸ë£¹ëª…\n"
 
-#: src/groupmod.c:161
+#: src/groupmod.c:162
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: %s ´Â /etc/group ¿¡¼­ ¹ß°ßÀÌ µÇÁö ¾Ê¾Ò½À´Ï´Ù\n"
+msgstr "%s: %s ëŠ” /etc/group ì—ì„œ ë°œê²¬ì´ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n"
 
-#: src/groupmod.c:247
+#: src/groupmod.c:248
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
-msgstr "%s: »õ·Î¿î dbm ½¦µµ¿ì ±×·ì ÀÔ·Â°ªÀ» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ìƒˆë¡œìš´ dbm ì‰ë„ìš° ê·¸ë£¹ ì…ë ¥ê°’ì„ ì¶”ê°€í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/groupmod.c:300
+#: src/groupmod.c:301
 #, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: %u ´Â ÀûÀıÇÑ gid(±×·ì ¾ÆÀÌµğ)°¡ ¾Æ´Õ´Ï´Ù\n"
+msgstr "%s: %u ëŠ” ì ì ˆí•œ gid(ê·¸ë£¹ ì•„ì´ë””)ê°€ ì•„ë‹™ë‹ˆë‹¤\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:331
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s ´Â ÀûÀıÇÑ ÀÌ¸§ÀÌ ¾Æ´Õ´Ï´Ù\n"
+msgstr "%s: %s ëŠ” ì ì ˆí•œ ì´ë¦„ì´ ì•„ë‹™ë‹ˆë‹¤\n"
 
 #: src/groups.c:59
 #, c-format
 msgid "unknown user %s\n"
-msgstr "¾Ë¼ö¾ø´Â »ç¿ëÀÚ %s\n"
+msgstr "ì•Œìˆ˜ì—†ëŠ” ì‚¬ìš©ì %s\n"
 
 #: src/grpck.c:87
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "»ç¿ë¹ı: %s [-s] [-r] [group [gshadow]]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-s] [-r] [group [gshadow]]\n"
 
 #: src/grpck.c:90
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "»ç¿ë¹ı: %s [-s] [-r] [group]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-s] [-r] [group]\n"
 
 #: src/grpck.c:108 src/pwck.c:108
 msgid "No"
-msgstr "¾Æ´Ï¿À"
+msgstr "ì•„ë‹ˆì˜¤"
 
 #: src/grpck.c:192 src/pwck.c:175
 #, c-format
@@ -1081,327 +982,300 @@ msgstr ""
 #: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s: ÆÄÀÏ %s Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ %s ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:202 src/pwck.c:242
 #: src/pwck.c:251
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: ÆÄÀÏ %s ¸¦ ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ %s ë¥¼ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:311
 msgid "invalid group file entry\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ±×·ìÆÄÀÏ  ÀÔ·Â°ª\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ê·¸ë£¹íŒŒì¼  ì…ë ¥ê°’\n"
 
 #: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
 #: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
 #: src/pwck.c:543
 #, c-format
 msgid "delete line `%s'? "
-msgstr "¶óÀÎ '%s'¸¦ Áö¿ï±î¿ä? "
+msgstr "ë¼ì¸ '%s'ë¥¼ ì§€ìš¸ê¹Œìš”? "
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:374
 msgid "duplicate group entry\n"
-msgstr "±×·ì ÀÔ·Â°ª º¹Á¦\n"
+msgstr "ê·¸ë£¹ ì…ë ¥ê°’ ë³µì œ\n"
 
 #: src/grpck.c:391
 #, c-format
 msgid "invalid group name `%s'\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ±×·ì¸í '%s'\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ê·¸ë£¹ëª… '%s'\n"
 
 #: src/grpck.c:418
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "±×·ì %s: »ç¿ëÀÚ %s °¡ ¾ø½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ %s: ì‚¬ìš©ì %s ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:420 src/grpck.c:590
 #, c-format
 msgid "delete member `%s'? "
-msgstr "¸â¹ö '%s'¸¦ Áö¿ï±î¿ä? "
+msgstr "ë©¤ë²„ '%s'ë¥¼ ì§€ìš¸ê¹Œìš”? "
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:457
 msgid "invalid shadow group file entry\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ½¦µµ¿ì ±×·ìÆÄÀÏ ÀÔ·Â°ª\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ì‰ë„ìš° ê·¸ë£¹íŒŒì¼ ì…ë ¥ê°’\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:520
 msgid "duplicate shadow group entry\n"
-msgstr "½¦µµ¿ì ±×·ì ÀÔ·Â°ª º¹Á¦\n"
+msgstr "ì‰ë„ìš° ê·¸ë£¹ ì…ë ¥ê°’ ë³µì œ\n"
 
 #: src/grpck.c:537
 msgid "no matching group file entry\n"
-msgstr "±×·ì ÆÄÀÏ ÀÔ·Â°ªÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ íŒŒì¼ ì…ë ¥ê°’ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:558
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "½¦µµ¿ì ±×·ì %s: °ü¸®±ÇÇÑÀÌ ÀÖ´Â »ç¿ëÀÚ %s °¡ ¾ø½À´Ï´Ù\n"
+msgstr "ì‰ë„ìš° ê·¸ë£¹ %s: ê´€ë¦¬ê¶Œí•œì´ ìˆëŠ” ì‚¬ìš©ì %s ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:560
 #, c-format
 msgid "delete administrative member `%s'? "
-msgstr "°ü¸® ±ÇÇÑÀÌ ÀÖ´Â ¸â¹ö '%s' ¸¦ Áö¿ï±î¿ä? "
+msgstr "ê´€ë¦¬ ê¶Œí•œì´ ìˆëŠ” ë©¤ë²„ '%s' ë¥¼ ì§€ìš¸ê¹Œìš”? "
 
 #: src/grpck.c:588
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "½¦µµ¿ì ±×·ì %s: %s ¶õ »ç¿ëÀÚ°¡ ¾ø½À´Ï´Ù\n"
+msgstr "ì‰ë„ìš° ê·¸ë£¹ %s: %s ë€ ì‚¬ìš©ìê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
 #, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s: ÆÄÀÏ %s ¸¦ ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ %s ë¥¼ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:647 src/pwck.c:612
 #, c-format
 msgid "%s: the files have been updated; run mkpasswd\n"
-msgstr "%s: ÆÄÀÏÀÌ ¾÷µ¥ÀÌÆ® µÇ¾ú½À´Ï´Ù; mkpasswd ¸¦ ½ÇÇàÇÏ½Ê½Ã¿À\n"
+msgstr "%s: íŒŒì¼ì´ ì—…ë°ì´íŠ¸ ë˜ì—ˆìŠµë‹ˆë‹¤; mkpasswd ë¥¼ ì‹¤í–‰í•˜ì‹­ì‹œì˜¤\n"
 
 #: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: º¯°æÀÌ ¾È µÇ¾ú½À´Ï´Ù\n"
+msgstr "%s: ë³€ê²½ì´ ì•ˆ ë˜ì—ˆìŠµë‹ˆë‹¤\n"
 
 #: src/grpck.c:651 src/pwck.c:616
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: ÆÄÀÏÀÌ ¾÷µ¥ÀÌÆ® µÇ¾ú½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ì´ ì—…ë°ì´íŠ¸ ë˜ì—ˆìŠµë‹ˆë‹¤\n"
 
 #: src/grpconv.c:60 src/grpunconv.c:56
 #, c-format
 msgid "%s: can't lock group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpconv.c:76 src/grpunconv.c:72
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpconv.c:94
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì %s ¸¦ Á¦°ÅÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ %s ë¥¼ ì œê±°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/grpconv.c:138 src/pwconv.c:153
+#: src/grpconv.c:133 src/pwconv.c:154
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: %s ¿¡ ´ëÇÑ ½¦µµ¿ì ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ì— ëŒ€í•œ ì‰ë„ìš° ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/grpconv.c:148 src/grpunconv.c:91
+#: src/grpconv.c:143 src/grpunconv.c:91
 #, c-format
 msgid "%s: can't update entry for group %s\n"
-msgstr "%s: %s ±×·ì¿¡ ´ëÇÑ ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ê·¸ë£¹ì— ëŒ€í•œ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/grpconv.c:155 src/grpunconv.c:99
+#: src/grpconv.c:150 src/grpunconv.c:99
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/grpconv.c:160 src/grpunconv.c:105
+#: src/grpconv.c:155 src/grpunconv.c:105
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
-
-#: src/grpconv.c:175 src/grpunconv.c:127
-#, c-format
-msgid "%s: not configured for shadow group support.\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì Áö¿ø¿¡ ´ëÇÏ¿© Çü¼ºÀÌ µÇÁö ¾Ê¾Ò½À´Ï´Ù.\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/grpunconv.c:110
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» Áö¿ï¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ì§€ìš¸ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/id.c:53
-msgid "usage: id [-a]\n"
-msgstr "»ç¿ë¹ı: id [-a]\n"
+#, fuzzy
+msgid "Usage: id [-a]\n"
+msgstr "ì‚¬ìš©ë²•: id [-a]\n"
 
 #: src/id.c:55
-msgid "usage: id\n"
-msgstr "»ç¿ë¹ı: id\n"
+#, fuzzy
+msgid "Usage: id\n"
+msgstr "ì‚¬ìš©ë²•: id\n"
 
-#.
-#. * Start off the group message. It will be of the format
-#. *
-#. *      groups=###(aaa),###(aaa),###(aaa)
-#. *
-#. * where "###" is a numerical value and "aaa" is the
-#. * corresponding name for each respective numerical value.
-#.
 #: src/id.c:169
 msgid " groups="
-msgstr " ±×·ìµé="
+msgstr " ê·¸ë£¹ë“¤="
 
 #: src/lastlog.c:110 src/lastlog.c:116
 #, c-format
-msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
 msgstr ""
 
 #: src/lastlog.c:181
 msgid "Username         Port     From             Latest\n"
-msgstr "»ç¿ëÀÚ¸í\tÆ÷Æ®\t~·ÎºÎÅÍ\t\tÃÖ±ÙÁ¤º¸\n"
+msgstr "ì‚¬ìš©ìëª…\tí¬íŠ¸\t~ë¡œë¶€í„°\t\tìµœê·¼ì •ë³´\n"
 
 #: src/lastlog.c:183
 msgid "Username                Port     Latest\n"
-msgstr "»ç¿ëÀÚ¸í\t\tÆ÷Æ®\tÃÖ±ÙÁ¤º¸\n"
+msgstr "ì‚¬ìš©ìëª…\t\tí¬íŠ¸\tìµœê·¼ì •ë³´\n"
 
-#: src/lastlog.c:197
+#: src/lastlog.c:198
 msgid "**Never logged in**"
-msgstr "**ÇÑ¹øµµ ·Î±äÇÑÀûÀÌ ¾ø½À´Ï´Ù**"
+msgstr "**í•œë²ˆë„ ë¡œê¸´í•œì ì´ ì—†ìŠµë‹ˆë‹¤**"
 
-#: src/login.c:185
-#, c-format
-msgid "usage: %s [-p] [name]\n"
-msgstr "»ç¿ë¹ı: %s [-p] [ÀÌ¸§]\n"
+#: src/login.c:175
+#, fuzzy, c-format
+msgid "Usage: %s [-p] [name]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-p] [ì´ë¦„]\n"
 
-#: src/login.c:188
+#: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "\t%s [-p][-h È£½ºÆ®¸í][-f ÀÌ¸§]\n"
+msgstr "\t%s [-p][-h í˜¸ìŠ¤íŠ¸ëª…][-f ì´ë¦„]\n"
 
-#: src/login.c:190
+#: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "\t%s [-p] -r È£½ºÆ®\n"
+msgstr "\t%s [-p] -r í˜¸ìŠ¤íŠ¸\n"
 
-#: src/login.c:274
+#: src/login.c:259
 msgid "Invalid login time\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ·Î±ä ½Ã°£(ÇöÀç½Ã°£Àº ·Î±ä±ÇÇÑ ¾øÀ½)\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ë¡œê¸´ ì‹œê°„(í˜„ì¬ì‹œê°„ì€ ë¡œê¸´ê¶Œí•œ ì—†ìŒ)\n"
 
-#: src/login.c:329
+#: src/login.c:314
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
 msgstr ""
 "\n"
-"±Ù¿øÁöÀÇ Á¤ºñ¸¦ À§ÇØ ½Ã½ºÅÛÀÌ Á¾·áµÇ¾ú½À´Ï´Ù\n"
+"ê·¼ì›ì§€ì˜ ì •ë¹„ë¥¼ ìœ„í•´ ì‹œìŠ¤í…œì´ ì¢…ë£Œë˜ì—ˆìŠµë‹ˆë‹¤\n"
 
-#: src/login.c:340
+#: src/login.c:325
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
 msgstr ""
 "\n"
-"[Á¢¼ÓÇØÁ¦°¡ ¹«½ÃµÇ¾ú½À´Ï´Ù -- ·çÆ®¸¸ ·Î±äÀ» ÇÒ ¼ö ÀÖ½À´Ï´Ù]\n"
+"[ì ‘ì†í•´ì œê°€ ë¬´ì‹œë˜ì—ˆìŠµë‹ˆë‹¤ -- ë£¨íŠ¸ë§Œ ë¡œê¸´ì„ í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤]\n"
 
-#: src/login.c:377
+#: src/login.c:362
 #, c-format
 msgid ""
 "\n"
 "Login timed out after %d seconds.\n"
 msgstr ""
 "\n"
-"%d ÃÊÈÄ¿¡ ·Î±ä ½Ã°£ÀÌ ¿Ï·áµË´Ï´Ù.\n"
+"%d ì´ˆí›„ì— ë¡œê¸´ ì‹œê°„ì´ ì™„ë£Œë©ë‹ˆë‹¤.\n"
 
-#: src/login.c:689
+#: src/login.c:648
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " on `%.100s' from `%.200s'"
 
-#: src/login.c:693
+#: src/login.c:652
 #, c-format
 msgid " on `%.100s'"
 msgstr " on `%.100s'"
 
-#: src/login.c:852
+#: src/login.c:811
 #, c-format
 msgid ""
 "\n"
 "%s login: "
 msgstr ""
 "\n"
-"%s ·Î±ä: "
+"%s ë¡œê¸´: "
 
-#: src/login.c:855
+#: src/login.c:814
 msgid "login: "
-msgstr "·Î±ä: "
+msgstr "ë¡œê¸´: "
 
-#: src/login.c:1071 src/sulogin.c:233
+#: src/login.c:1013 src/sulogin.c:205
 msgid "Login incorrect"
-msgstr "·Î±ä¸íÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù"
+msgstr "ë¡œê¸´ëª…ì´ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤"
 
-#: src/login.c:1265
+#: src/login.c:1193
 msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "°æ°í: ÀÏ½ÃÀûÀ¸·Î Æä¼âµÈµÚ ´Ù½Ã ·Î±äÇÒ ¼ö ÀÖ½À´Ï´Ù.\n"
+msgstr "ê²½ê³ : ì¼ì‹œì ìœ¼ë¡œ í˜ì‡„ëœë’¤ ë‹¤ì‹œ ë¡œê¸´í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n"
 
-#: src/login.c:1278
+#: src/login.c:1207
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "¸¶Áö¸· ·Î±ä: %s on %s"
+msgstr "ë§ˆì§€ë§‰ ë¡œê¸´: %s on %s"
 
-#: src/login.c:1281
+#: src/login.c:1210
 #, c-format
 msgid "Last login: %.19s on %s"
-msgstr "¸¶Áö¸· ·Î±ä: %.19s on %s"
+msgstr "ë§ˆì§€ë§‰ ë¡œê¸´: %.19s on %s"
 
-#: src/login.c:1287
+#: src/login.c:1216
 #, c-format
 msgid " from %.*s"
 msgstr " from %.*s"
 
-#: src/login.c:1364
+#: src/login.c:1293
 msgid "Starting rad_login\n"
-msgstr "rad_login À» ½ÃÀÛÇÏ°í ÀÖ½À´Ï´Ù\n"
+msgstr "rad_login ì„ ì‹œì‘í•˜ê³  ìˆìŠµë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:47
 #, c-format
 msgid "%s: no DBM database on system - no action performed\n"
 msgstr ""
-"%s: ½Ã½ºÅÛ¿¡ DBM µ¥ÀÌÅÍº£ÀÌ½º°¡ ¾ø½À´Ï´Ù - µû¶ó¼­ ¾î¶»ÇÑ °Íµµ ½ÇÇàµÇÁö ¾Ê¾Ò½À"
-"´Ï´Ù\n"
+"%s: ì‹œìŠ¤í…œì— DBM ë°ì´í„°ë² ì´ìŠ¤ê°€ ì—†ìŠµë‹ˆë‹¤ - ë”°ë¼ì„œ ì–´ë–»í•œ ê²ƒë„ ì‹¤í–‰ë˜ì§€ ì•Šì•˜ìŠµ"
+"ë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:232 src/mkpasswd.c:237
 #, c-format
 msgid "%s: cannot overwrite file %s\n"
-msgstr "%s: ÆÄÀÏ %s ¸¦ °ãÃÄ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ %s ë¥¼ ê²¹ì³ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:252
 #, c-format
 msgid "%s: cannot open DBM files for %s\n"
-msgstr "%s: %s ¿¡ ´ëÇÑ DBM ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ì— ëŒ€í•œ DBM íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:287
 #, c-format
 msgid "%s: the beginning with "
-msgstr "%s: ~¿Í ÇÔ²² ½ÃÀÛ "
+msgstr "%s: ~ì™€ í•¨ê»˜ ì‹œì‘ "
 
 #: src/mkpasswd.c:288
 msgid " is too long\n"
-msgstr " ÀÔ·Â¹üÀ§°¡ ³Ê¹« ±é´Ï´Ù\n"
+msgstr " ì…ë ¥ë²”ìœ„ê°€ ë„ˆë¬´ ê¹ë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:315
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
-msgstr "%s: ¶óÀÎ \"%s\" À» ºĞ¼®ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ë¼ì¸ \"%s\" ì„ ë¶„ì„í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
 #: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
 msgid "adding record for name "
-msgstr "ÀÌ¸§¿¡ ´ëÇÑ ±â·ÏÀ» Ãß°¡ÇÏ°í ÀÖ½À´Ï´Ù "
+msgstr "ì´ë¦„ì— ëŒ€í•œ ê¸°ë¡ì„ ì¶”ê°€í•˜ê³  ìˆìŠµë‹ˆë‹¤ "
 
 #: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
 #: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
@@ -1411,406 +1285,345 @@ msgstr ""
 #: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
 #, c-format
 msgid "%s: error adding record for "
-msgstr "%s: ¿¡ ´ëÇÑ ±â·ÏÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù "
+msgstr "%s: ì— ëŒ€í•œ ê¸°ë¡ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜ "
 
 #: src/mkpasswd.c:378
 #, c-format
 msgid "added %d entries, longest was %d\n"
-msgstr "%d ÀÔ·Â°ªÀÌ Ãß°¡ µÇ¾ú½À´Ï´Ù, °¡Àå±ä°ÍÀº %d ÀÔ´Ï´Ù\n"
+msgstr "%d ì…ë ¥ê°’ì´ ì¶”ê°€ ë˜ì—ˆìŠµë‹ˆë‹¤, ê°€ì¥ê¸´ê²ƒì€ %d ì…ë‹ˆë‹¤\n"
 
 #: src/mkpasswd.c:392
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
-msgstr "»ç¿ë¹ı: %s [-vf] [-p|sp|sg] ÆÄÀÏ¸í\n"
+msgstr "ì‚¬ìš©ë²•: %s [-vf] [-p|sp|sg] íŒŒì¼ëª…\n"
 
 #: src/mkpasswd.c:395
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
-msgstr "»ç¿ë¹ı: %s [-vf][-p|g|sp] ÆÄÀÏ¸í\n"
+msgstr "ì‚¬ìš©ë²•: %s [-vf][-p|g|sp] íŒŒì¼ëª…\n"
 
 #: src/mkpasswd.c:398
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
-msgstr "»ç¿ë¹ı: %s [-vf][-p|g] ÆÄÀÏ¸í\n"
+msgstr "ì‚¬ìš©ë²•: %s [-vf][-p|g] íŒŒì¼ëª…\n"
 
 #: src/newgrp.c:61
-msgid "usage: newgrp [-] [group]\n"
-msgstr "»ç¿ë¹ı: newgrp [-] [±×·ì]\n"
+#, fuzzy
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "ì‚¬ìš©ë²•: newgrp [-] [ê·¸ë£¹]\n"
 
 #: src/newgrp.c:63
-msgid "usage: sg group [[-c] command]\n"
-msgstr "»ç¿ë¹ı: sg group [[-c] ¸í·É]\n"
+#, fuzzy
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "ì‚¬ìš©ë²•: sg group [[-c] ëª…ë ¹]\n"
 
-#: src/newgrp.c:136
+#: src/newgrp.c:131
 #, c-format
 msgid "unknown uid: %u\n"
-msgstr "¾Ë¼ö¾ø´Â uid(»ç¿ëÀÚ ¾ÆÀÌµğ): %u\n"
+msgstr "ì•Œìˆ˜ì—†ëŠ” uid(ì‚¬ìš©ì ì•„ì´ë””): %u\n"
 
-#: src/newgrp.c:219
+#: src/newgrp.c:214
 #, c-format
 msgid "unknown gid: %lu\n"
-msgstr "¾Ë¼ö¾ø´Â gid(±×·ì ¾ÆÀÌµğ): %lu\n"
+msgstr "ì•Œìˆ˜ì—†ëŠ” gid(ê·¸ë£¹ ì•„ì´ë””): %lu\n"
 
-#: src/newgrp.c:365 src/newgrp.c:374
+#: src/newgrp.c:360 src/newgrp.c:369
 msgid "Sorry.\n"
-msgstr "ÁË¼ÛÇÕ´Ï´Ù.\n"
+msgstr "ì£„ì†¡í•©ë‹ˆë‹¤.\n"
 
-#: src/newgrp.c:472
+#: src/newgrp.c:469
 msgid "too many groups\n"
-msgstr "±×·ìµéÀÌ ³Ê¹«³ª ¸¹½À´Ï´Ù\n"
+msgstr "ê·¸ë£¹ë“¤ì´ ë„ˆë¬´ë‚˜ ë§ìŠµë‹ˆë‹¤\n"
 
 #: src/newusers.c:78
 #, c-format
 msgid "Usage: %s [input]\n"
-msgstr "»ç¿ë¹ı:%s [ÀÔ·Â°ª]\n"
+msgstr "ì‚¬ìš©ë²•:%s [ì…ë ¥ê°’]\n"
 
-#: src/newusers.c:407
+#: src/newusers.c:388
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: /etc/passwd Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s: /etc/passwd ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/newusers.c:419
+#: src/newusers.c:400
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù, ³ªÁß¿¡ ´Ù½Ã ½ÃµµÇÏ¼¼¿ä\n"
+msgstr "%s: íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤, ë‚˜ì¤‘ì— ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:416
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: ÆÄÀÏÀ» ¿­¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒŒì¼ì„ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: ë¼ì¸ %d: ìœ íš¨í•˜ì§€ ì•Šì€ ë¼ì¸\n"
 
 #: src/newusers.c:480
 #, c-format
-msgid "%s: line %d: invalid line\n"
-msgstr "%s: ¶óÀÎ %d: À¯È¿ÇÏÁö ¾ÊÀº ¶óÀÎ\n"
-
-#: src/newusers.c:499
-#, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s: ¶óÀÎ %d: GID(±×·ì ¾ÆÀÌµğ)¸¦ ¸¸µé¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: GID(ê·¸ë£¹ ì•„ì´ë””)ë¥¼ ë§Œë“¤ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:515
+#: src/newusers.c:496
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s: ¶óÀÎ %d: UID(»ç¿ëÀÚ ¾ÆÀÌµğ)¸¦ ¸¸µé¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: UID(ì‚¬ìš©ì ì•„ì´ë””)ë¥¼ ë§Œë“¤ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:528
+#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: ¶óÀÎ %d: »ç¿ëÀÚ %s ¸¦ ¹ß°ßÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: ì‚¬ìš©ì %s ë¥¼ ë°œê²¬í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:537
+#: src/newusers.c:518
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: ¶óÀÎ %d: ÆĞ½º¿öµå¸¦ ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: íŒ¨ìŠ¤ì›Œë“œë¥¼ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:555
+#: src/newusers.c:536
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: ¶óÀÎ %d: µğ·ºÅä¸® ¸¸µé±â¸¦ ½ÇÆĞÇß½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: ë””ë ‰í† ë¦¬ ë§Œë“¤ê¸°ë¥¼ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:561
+#: src/newusers.c:542
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: ¶óÀÎ %d: chown À» ½ÇÆĞÇß½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: chown ì„ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:571
+#: src/newusers.c:552
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: ¶óÀÎ %d: ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë¼ì¸ %d: ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/newusers.c:603
+#: src/newusers.c:584
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/passwd.c:174
-#, c-format
-msgid "usage: %s [-f|-s] [name]\n"
-msgstr "»ç¿ë¹ı: %s [-f|-s][ÀÌ¸§]\n"
+#: src/passwd.c:155
+#, fuzzy, c-format
+msgid "Usage: %s [-f|-s] [name]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-f|-s][ì´ë¦„]\n"
 
-#: src/passwd.c:178
+#: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "\t%s [-x ÃÖ´ë][-n ÃÖ¼Ò][-w °æ°í][-i ºñÈ°¼ºÈ­] ÀÌ¸§\n"
+msgstr "\t%s [-x ìµœëŒ€][-n ìµœì†Œ][-w ê²½ê³ ][-i ë¹„í™œì„±í™”] ì´ë¦„\n"
 
-#: src/passwd.c:180
+#: src/passwd.c:161
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "\t%s {-l|-u|-d|-S|-e} ÀÌ¸§\n"
+msgstr "\t%s {-l|-u|-d|-S|-e} ì´ë¦„\n"
 
-#: src/passwd.c:283
-#, c-format
-msgid "User %s has a TCFS key, his old password is required.\n"
-msgstr ""
-"»ç¿ëÀÚ %s ´Â TCFS Å°¸¦ °¡Áö°í ÀÖ½À´Ï´Ù, ±×ÀÇ ¿¹Àü ÆĞ½º¿öµå°¡ ¿ä±¸µË´Ï´Ù.\n"
-
-#: src/passwd.c:286
-msgid "You can use -t option to force the change.\n"
-msgstr "°­Á¦·Î º¯°æÀ» ÇÏ±â À§ÇØ¼­´Â -t ¿É¼ÇÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.\n"
-
-#: src/passwd.c:292
+#: src/passwd.c:216
 msgid "Old password: "
-msgstr "¿¹Àü ÆĞ½º¿öµå: "
+msgstr "ì˜ˆì „ íŒ¨ìŠ¤ì›Œë“œ: "
 
-#: src/passwd.c:301
+#: src/passwd.c:225
 #, c-format
 msgid "Incorrect password for `%s'\n"
-msgstr "`%s' ¿¡ ´ëÇÏ¿© ÆĞ½º¿öµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù\n"
+msgstr "`%s' ì— ëŒ€í•˜ì—¬ íŒ¨ìŠ¤ì›Œë“œê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/passwd.c:314
-#, c-format
-msgid "Warning: user %s has a TCFS key.\n"
-msgstr "°æ°í: »ç¿ëÀÚ %s ´Â TCFS Å°¸¦ °¡Áö°í ÀÖ½À´Ï´Ù.\n"
-
-#: src/passwd.c:333
+#: src/passwd.c:249
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"»õ·Î¿î ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä (ÃÖ¼Ò %d, ÃÖ´ë %d ±ÛÀÚ)\n"
-"»óÇÏÀ§ ±ÛÀÚ¿Í ¼ıÀÚ¸¦ Á¶ÇÕÇÏ¿© »ç¿ëÇÏ¼¼¿ä.\n"
+"ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš” (ìµœì†Œ %d, ìµœëŒ€ %d ê¸€ì)\n"
+"ìƒí•˜ìœ„ ê¸€ìì™€ ìˆ«ìë¥¼ ì¡°í•©í•˜ì—¬ ì‚¬ìš©í•˜ì„¸ìš”.\n"
 
-#: src/passwd.c:339
+#: src/passwd.c:255
 msgid "New password: "
-msgstr "»õ·Î¿î ÆĞ½º¿öµå: "
+msgstr "ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œ: "
 
-#: src/passwd.c:350
+#: src/passwd.c:266
 msgid "Try again.\n"
-msgstr "´Ù½Ã ½ÃµµÇÏ¼¼¿ä.\n"
+msgstr "ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”.\n"
 
-#: src/passwd.c:361
+#: src/passwd.c:277
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
 msgstr ""
 "\n"
-"°æ°í: º¸¾È¼ºÀÌ ¾ø´Â ÆĞ½º¿öµå (±×·¡µµ »ç¿ëÇÏ±æ ¿øÇÑ´Ù¸é ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä).\n"
+"ê²½ê³ : ë³´ì•ˆì„±ì´ ì—†ëŠ” íŒ¨ìŠ¤ì›Œë“œ (ê·¸ë˜ë„ ì‚¬ìš©í•˜ê¸¸ ì›í•œë‹¤ë©´ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”).\n"
 
-#: src/passwd.c:371
+#: src/passwd.c:287
 msgid "They don't match; try again.\n"
-msgstr "ÀÔ·Â°ªÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù; ´Ù½Ã ½ÃµµÇÏ¼¼¿ä.\n"
+msgstr "ì…ë ¥ê°’ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤; ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”.\n"
 
-#: src/passwd.c:451 src/passwd.c:469
+#: src/passwd.c:364 src/passwd.c:382
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "%s ¿¡ ´ëÇÑ ÆĞ½º¿öµå´Â º¯°æµÉ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œëŠ” ë³€ê²½ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/passwd.c:494
+#: src/passwd.c:396
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "ÁË¼ÛÇÕ´Ï´Ù, %s ¿¡ ´ëÇÑ ÆĞ½º¿öµå°¡ ¾ÆÁ÷ º¯°æÀÌ µÉ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "ì£„ì†¡í•©ë‹ˆë‹¤, %s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œê°€ ì•„ì§ ë³€ê²½ì´ ë  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/passwd.c:614
+#: src/passwd.c:479
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: ¸Ş¸ğ¸® ºÎÁ·\n"
+msgstr "%s: ë©”ëª¨ë¦¬ ë¶€ì¡±\n"
 
-#: src/passwd.c:769
-msgid "Cannot lock the TCFS key database; try again later\n"
-msgstr "TCFS Å° µ¥ÀÌÅÍº£ÀÌ½º Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù; ³ªÁß¿¡ ´Ù½Ã ½ÃµµÇÏ¼¼¿ä\n"
-
-#: src/passwd.c:777
-msgid "Cannot open the TCFS key database.\n"
-msgstr "TCFS Å° µ¥ÀÌÅÍº£ÀÌ½º¸¦ ¿­¼ö°¡ ¾ø½À´Ï´Ù.\n"
-
-#: src/passwd.c:785
-msgid "Error updating the TCFS key database.\n"
-msgstr "TCFs Å° µ¥ÀÌÅÍº£ÀÌ½º ¾÷µ¥ÀÌÆ® Áß ¿À·ù.\n"
-
-#: src/passwd.c:792
-msgid "Cannot commit TCFS changes.\n"
-msgstr "TCFS º¯°æÀ» ½ÇÇàÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
-
-#: src/passwd.c:975
+#: src/passwd.c:730
 #, c-format
 msgid "%s: Cannot execute %s"
-msgstr "%s: %s ¸¦ ½ÇÇàÇÒ ¼ö ¾ø½À´Ï´Ù"
+msgstr "%s: %s ë¥¼ ì‹¤í–‰í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤"
 
-#: src/passwd.c:1077
+#: src/passwd.c:815
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: ÀúÀå¼Ò %s ´Â Áö¿øÀÌ µÇÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ì €ì¥ì†Œ %s ëŠ” ì§€ì›ì´ ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/passwd.c:1152
+#: src/passwd.c:890
 #, c-format
 msgid "%s: Permission denied\n"
-msgstr "%s: Á¢±Ù±ÇÇÑ ¾øÀ½\n"
+msgstr "%s: ì ‘ê·¼ê¶Œí•œ ì—†ìŒ\n"
 
-#: src/passwd.c:1176
+#: src/passwd.c:914
 #, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "%s ¿¡ ´ëÇÑ ÆĞ½º¿öµå¸¦ ´ç½ÅÀº º¯°æÇÒ ¼ö ¾ø½À´Ï´Ù.\n"
+msgstr "%s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë‹¹ì‹ ì€ ë³€ê²½í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
 
-#: src/passwd.c:1242
+#: src/passwd.c:962
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "%s ¿¡ ´ëÇÑ ÆĞ½º¿öµå¸¦ º¯°æÁß\n"
+msgstr "%s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë³€ê²½ì¤‘\n"
 
-#: src/passwd.c:1246
+#: src/passwd.c:966
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "%s ¿¡ ´ëÇÑ ÆĞ½º¿öµå°¡ º¯°æµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n"
+msgstr "%s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œê°€ ë³€ê²½ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n"
 
-#: src/passwd.c:1297
+#: src/passwd.c:1016
 msgid "Password changed.\n"
-msgstr "ÆĞ½º¿öµå°¡ º¯°æµÇ¾ú½À´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.\n"
 
 #: src/pwck.c:87
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "»ç¿ë¹ı: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #: src/pwck.c:90
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
-msgstr "»ç¿ë¹ı: %s [-q] [-r] [-s] [ÆĞ½º¿öµå]\n"
+msgstr "ì‚¬ìš©ë²•: %s [-q] [-r] [-s] [íŒ¨ìŠ¤ì›Œë“œ]\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:295
 msgid "invalid password file entry\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ÆĞ½º¿öµå ÆÄÀÏ ÀÔ·Â\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì…ë ¥\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:357
 msgid "duplicate password entry\n"
-msgstr "ÆĞ½º¿öµå ÀÔ·Â°ª º¹Á¦\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ ë³µì œ\n"
 
 #: src/pwck.c:373
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº »ç¿ëÀÚ¸í '%s'\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ì‚¬ìš©ìëª… '%s'\n"
 
-#.
-#. * No primary group, just give a warning
-#.
 #: src/pwck.c:388
 #, c-format
 msgid "user %s: no group %u\n"
-msgstr "»ç¿ëÀÚ %s: ±×·ìÀÌ ¾ø½À´Ï´Ù %u\n"
+msgstr "ì‚¬ìš©ì %s: ê·¸ë£¹ì´ ì—†ìŠµë‹ˆë‹¤ %u\n"
 
 #: src/pwck.c:404
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "»ç¿ëÀÚ %s: µğ·ºÅä¸® %s ´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "ì‚¬ìš©ì %s: ë””ë ‰í† ë¦¬ %s ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#.
-#. * Login shell doesn't exist, give a warning
-#.
 #: src/pwck.c:420
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "»ç¿ëÀÚ %s: ÇÁ·Î±×·¥ %s ´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "ì‚¬ìš©ì %s: í”„ë¡œê·¸ë¨ %s ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:456
 msgid "invalid shadow password file entry\n"
-msgstr "À¯È¿ÇÏÁö ¾ÊÀº ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏ ÀÔ·Â°ª\n"
+msgstr "ìœ íš¨í•˜ì§€ ì•Šì€ ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì…ë ¥ê°’\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:518
 msgid "duplicate shadow password entry\n"
-msgstr "½¦µµ¿ì ÆĞ½º¿öµå ÀÔ·Â°ª º¹Á¦\n"
+msgstr "ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ ë³µì œ\n"
 
-#.
-#. * Tell the user this entry has no matching
-#. * /etc/passwd entry and ask them to delete it.
-#.
 #: src/pwck.c:542
 msgid "no matching password file entry\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏ ÀÔ·Â°ªÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì…ë ¥ê°’ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
 #: src/pwck.c:560
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "»ç¿ëÀÚ %s: ¸¶Áö¸· ÆĞ½º¿öµå´Â ³ªÁß¿¡ º¯°æ\n"
+msgstr "ì‚¬ìš©ì %s: ë§ˆì§€ë§‰ íŒ¨ìŠ¤ì›Œë“œëŠ” ë‚˜ì¤‘ì— ë³€ê²½\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:93
+#: src/pwconv.c:85 src/pwunconv.c:79
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:98
+#: src/pwconv.c:90 src/pwunconv.c:84
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwconv.c:117
+#: src/pwconv.c:118
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: %s ¿¡ ´ëÇÑ ½¦µµ¿ì ÀÔ·Â°ªÀ» Á¦°ÅÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ì— ëŒ€í•œ ì‰ë„ìš° ì…ë ¥ê°’ì„ ì œê±°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwconv.c:163
+#: src/pwconv.c:164
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: %s ¿¡ ´ëÇÑ ÆĞ½º¿öµå ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwconv.c:170
+#: src/pwconv.c:171
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s: ½¦µµ¿ì ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwconv.c:175
+#: src/pwconv.c:176
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwunconv.c:50
-#, c-format
-msgid "%s: Shadow passwords are not configured.\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå°¡ Çü¼ºµÇÁö ¾Ê¾Ò½À´Ï´Ù.\n"
-
-#: src/pwunconv.c:160
+#: src/pwunconv.c:124
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s: »ç¿ëÀÚ %s ¿¡ ´ëÇÑ ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‚¬ìš©ì %s ì— ëŒ€í•œ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/pwunconv.c:181
+#: src/pwunconv.c:145
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» Áö¿ï ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì§€ìš¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/su.c:133
 msgid "Sorry."
-msgstr "ÁË¼ÛÇÕ´Ï´Ù."
+msgstr "ì£„ì†¡í•©ë‹ˆë‹¤."
 
 #: src/su.c:216
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: ÅÍ¹Ì³Î¿¡¼­ ¹Şµå½Ã ½ÇÇàÀÌ µÇ¾îÁ®¾ß ÇÕ´Ï´Ù\n"
+msgstr "%s: í„°ë¯¸ë„ì—ì„œ ë°›ë“œì‹œ ì‹¤í–‰ì´ ë˜ì–´ì ¸ì•¼ í•©ë‹ˆë‹¤\n"
 
 #: src/su.c:306
 #, c-format
 msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: ¿À·ù %d\n"
+msgstr "%s: pam_start: ì˜¤ë¥˜ %d\n"
 
 #: src/su.c:336
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "¾Ë¼ö¾ø´Â ¾ÆÀÌµğ: %s\n"
+msgstr "ì•Œìˆ˜ì—†ëŠ” ì•„ì´ë””: %s\n"
 
 #: src/su.c:373 src/su.c:390
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "´ç½ÅÀº su %s ¿¡°Ô ÀÎÁõÀÌ µÇÁö ¾Ê¾Ò½À´Ï´Ù\n"
+msgstr "ë‹¹ì‹ ì€ su %s ì—ê²Œ ì¸ì¦ì´ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n"
 
-#. require own password
 #: src/su.c:385
 msgid "(Enter your own password.)"
-msgstr "(ÀÚ½ÅÀÇ ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.)"
+msgstr "(ìì‹ ì˜ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”.)"
 
 #: src/su.c:419
 #, c-format
@@ -1819,610 +1632,665 @@ msgid ""
 "(Ignored)\n"
 msgstr ""
 "%s: %s\n"
-"(¹«½ÃµÊ)\n"
+"(ë¬´ì‹œë¨)\n"
 
-#: src/su.c:626
+#: src/su.c:609
 msgid "No shell\n"
-msgstr "½©ÀÌ ¾øÀ½\n"
+msgstr "ì‰˜ì´ ì—†ìŒ\n"
 
-#: src/suauth.c:100
+#: src/suauth.c:105
 msgid "Access to su to that account DENIED.\n"
-msgstr "ÀÌ ¾îÄ«¿îÆ®·Î su·Î Á¢±ÙÁ¦¾îÇÏ´Â Çã°¡°¡ ¾øÀ½.\n"
+msgstr "ì´ ì–´ì¹´ìš´íŠ¸ë¡œ suë¡œ ì ‘ê·¼ì œì–´í•˜ëŠ” í—ˆê°€ê°€ ì—†ìŒ.\n"
 
-#: src/suauth.c:107
+#: src/suauth.c:113
 msgid "Password authentication bypassed.\n"
-msgstr "ÆĞ½º¿öµå ÀÎÁõÀÌ ¹«½ÃµÇ¾ú½À´Ï´Ù.\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ ì¸ì¦ì´ ë¬´ì‹œë˜ì—ˆìŠµë‹ˆë‹¤.\n"
 
-#: src/suauth.c:114
+#: src/suauth.c:122
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "»ç¿ëÀÚ ÀÚ½ÅÀÇ ÆĞ½º¿öµå¸¦ ÀÎÁõÀ¸·Î½á ÀÔ·ÂÀ» ÇÏ½Ê½Ã¿À.\n"
+msgstr "ì‚¬ìš©ì ìì‹ ì˜ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì¸ì¦ìœ¼ë¡œì¨ ì…ë ¥ì„ í•˜ì‹­ì‹œì˜¤.\n"
 
-#. must be a password file!
-#: src/sulogin.c:132
+#: src/sulogin.c:118
 msgid "No password file\n"
-msgstr "ÆĞ½º¿öµå ÆÄÀÏ ¾øÀ½\n"
+msgstr "íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì—†ìŒ\n"
 
-#.
-#. * Fail secure
-#.
-#: src/sulogin.c:174
+#: src/sulogin.c:160
 msgid "No password entry for 'root'\n"
-msgstr "'·çÆ®'¿¡ ´ëÇÑ ÆĞ½º¿öµå ÆÄÀÏ ÀÔ·Â°ª ¾øÀ½\n"
+msgstr "'ë£¨íŠ¸'ì— ëŒ€í•œ íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì…ë ¥ê°’ ì—†ìŒ\n"
 
-#: src/sulogin.c:190
+#: src/sulogin.c:176
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"ÀÏ¹İÀûÀ¸·Î ½ÃÀÛ(normal startup)À» ÇÏ·Á¸é control-d ¸¦ ÀÔ·ÂÇÏ¼¼¿ä,\n"
-"(±×·¸Áö ¾ÊÀ¸¸é ½Ã½ºÅÛ Á¤ºñ¸¦ À§ÇÏ¿© ·çÆ® ÆĞ½º¿öµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä)"
+"ì¼ë°˜ì ìœ¼ë¡œ ì‹œì‘(normal startup)ì„ í•˜ë ¤ë©´ control-d ë¥¼ ì…ë ¥í•˜ì„¸ìš”,\n"
+"(ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì‹œìŠ¤í…œ ì •ë¹„ë¥¼ ìœ„í•˜ì—¬ ë£¨íŠ¸ íŒ¨ìŠ¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì„¸ìš”)"
 
-#. make new environment active
-#: src/sulogin.c:243
+#: src/sulogin.c:212
 msgid "Entering System Maintenance Mode\n"
-msgstr "½Ã½ºÅÛ Á¤ºñ ¸ğµå·Î µé¾î°¡°í ÀÖ½À´Ï´Ù\n"
+msgstr "ì‹œìŠ¤í…œ ì •ë¹„ ëª¨ë“œë¡œ ë“¤ì–´ê°€ê³  ìˆìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:251
+#: src/useradd.c:234
 #, c-format
 msgid "%s: rebuild the group database\n"
-msgstr "%s: ±×·ì µ¥ÀÌÅÍº£ÀÌ½º¸¦ ´Ù½Ã ¸¸µì´Ï´Ù\n"
+msgstr "%s: ê·¸ë£¹ ë°ì´í„°ë² ì´ìŠ¤ë¥¼ ë‹¤ì‹œ ë§Œë“­ë‹ˆë‹¤\n"
 
-#: src/useradd.c:260
+#: src/useradd.c:243
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì µ¥ÀÌÅÍº£ÀÌ½º¸¦ ´Ù½Ã ¸¸µì´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ ë°ì´í„°ë² ì´ìŠ¤ë¥¼ ë‹¤ì‹œ ë§Œë“­ë‹ˆë‹¤\n"
 
-#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾ÊÀº ¼ıÀÚ ÀÔ·Â°ª `%s'\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•Šì€ ìˆ«ì ì…ë ¥ê°’ `%s'\n"
 
-#: src/useradd.c:365
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
-msgstr "%s: ¾Ë¼ö¾ø´Â gid(±×·ì ¾ÆÀÌµğ) %s\n"
+msgstr "%s: ì•Œìˆ˜ì—†ëŠ” gid(ê·¸ë£¹ ì•„ì´ë””) %s\n"
 
-#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
-#: src/usermod.c:1128
+#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: ¾Ë¼ö¾ø´Â ±×·ì %s\n"
+msgstr "%s: ì•Œìˆ˜ì—†ëŠ” ê·¸ë£¹ %s\n"
 
-#: src/useradd.c:440
-#, c-format
-msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "±×·ì=%s,%u ÃÊ±â µğ·ºÅä¸®=%s skel=%s\n"
-
-#: src/useradd.c:444
-#, c-format
-msgid "shell=%s  "
-msgstr "½©=%s  "
-
-#: src/useradd.c:446
-#, c-format
-msgid "inactive=%ld  expire=%s"
-msgstr "ºñÈ°¼ºÈ­=%ld ¸¸±â=%s"
-
-#: src/useradd.c:450
+#: src/useradd.c:419
 #, c-format
 msgid "GROUP=%u\n"
-msgstr "±×·ì=%u\n"
+msgstr "ê·¸ë£¹=%u\n"
 
-#: src/useradd.c:451
+#: src/useradd.c:420
 #, c-format
 msgid "HOME=%s\n"
-msgstr "È¨µğ·ºÅä¸®=%s\n"
+msgstr "í™ˆë””ë ‰í† ë¦¬=%s\n"
 
-#: src/useradd.c:453
+#: src/useradd.c:422
 #, c-format
 msgid "INACTIVE=%ld\n"
-msgstr "ºñÈ°¼ºÈ­=%ld\n"
+msgstr "ë¹„í™œì„±í™”=%ld\n"
 
-#: src/useradd.c:454
+#: src/useradd.c:423
 #, c-format
 msgid "EXPIRE=%s\n"
-msgstr "¸¸±â=%s\n"
+msgstr "ë§Œê¸°=%s\n"
 
-#: src/useradd.c:456
+#: src/useradd.c:425
 #, c-format
 msgid "SHELL=%s\n"
-msgstr "½©=%s\n"
+msgstr "ì‰˜=%s\n"
 
-#: src/useradd.c:457
+#: src/useradd.c:426
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:498
+#: src/useradd.c:462
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: »õ·Î¿î µğÆúÆ® ÆÄÀÏÀ» ¸¸µé¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ìƒˆë¡œìš´ ë””í´íŠ¸ íŒŒì¼ì„ ë§Œë“¤ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:503
+#: src/useradd.c:467
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: »õ·Î¿î µğÆúÆ® ÆÄÀÏÀ» ¸¸µé¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ìƒˆë¡œìš´ ë””í´íŠ¸ íŒŒì¼ì„ ë§Œë“¤ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:596 src/useradd.c:608
+#: src/useradd.c:552 src/useradd.c:564
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s: ÀÌ¸§ Àç ¼³Á¤: %s"
+msgstr "%s: ì´ë¦„ ì¬ ì„¤ì •: %s"
 
-#: src/useradd.c:697 src/usermod.c:281
+#: src/useradd.c:657 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: ±×·ì `%s' ´Â NIS ±×·ìÀÔ´Ï´Ù.\n"
+msgstr "%s: ê·¸ë£¹ `%s' ëŠ” NIS ê·¸ë£¹ì…ë‹ˆë‹¤.\n"
 
-#: src/useradd.c:706 src/usermod.c:290
+#: src/useradd.c:666 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: ³Ê¹«³ª ¸¹Àº ±×·ìÀÌ ¸í½ÃµÇ¾ú½À´Ï´Ù (ÃÖ´ë %d).\n"
+msgstr "%s: ë„ˆë¬´ë‚˜ ë§ì€ ê·¸ë£¹ì´ ëª…ì‹œë˜ì—ˆìŠµë‹ˆë‹¤ (ìµœëŒ€ %d).\n"
 
-#: src/useradd.c:738 src/usermod.c:322
-#, c-format
-msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "»ç¿ë¹ı: %s\t[-u uid(»ç¿ëÀÚ ¾ÆÀÌµğ) [-o]] [-g ±×·ì¸í][-G ±×·ì,...]\n"
+#: src/useradd.c:698
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr ""
+"ì‚¬ìš©ë²•: useradd [-u uid(ì‚¬ìš©ì ì•„ì´ë””) [-o]] [-g ê·¸ë£¹ëª…][-G ê·¸ë£¹,...]\n"
 
-#: src/useradd.c:742
-msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t[-d È¨µğ·ºÅä¸®][-s ½©][-c Àû¿ä»çÇ×][-m [-k template]]\n"
+#: src/useradd.c:701
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr ""
+"                [-d í™ˆë””ë ‰í† ë¦¬][-s ì‰˜][-c ì ìš”ì‚¬í•­][-m [-k template]]\n"
 
-#: src/useradd.c:745 src/usermod.c:329
-msgid "[-f inactive] [-e expire ] "
-msgstr "[-f ºñÈ°¼ºÈ­] [-e ¸¸±â] "
+#: src/useradd.c:703 src/useradd.c:708
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "                [-f ë¹„í™œì„±í™”] [-e ë§Œê¸°]\n"
 
-#: src/useradd.c:748
-msgid "[-A program] "
-msgstr "[-A ÇÁ·Î±×·¥] "
+#: src/useradd.c:706
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "        useradd -D [-g ê·¸ë£¹ëª…][-b ì´ˆê¸°ë””ë ‰í† ë¦¬][-s ì‰˜]\n"
 
-#: src/useradd.c:750
-msgid "[-p passwd] name\n"
-msgstr "[-p ÆĞ½º¿öµå] ÀÌ¸§\n"
-
-#: src/useradd.c:753
-#, c-format
-msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "\t%s\t-D [-g ±×·ì¸í][-b ÃÊ±âµğ·ºÅä¸®][-s ½©]\n"
-
-#: src/useradd.c:756
-msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f ºñÈ°¼ºÈ­] [-e ¸¸±â]\n"
-
-#: src/useradd.c:850 src/usermod.c:480
+#: src/useradd.c:793 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏ Àá±İÀ» ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ ì ê¸ˆì„ í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:855 src/usermod.c:486
+#: src/useradd.c:798 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¿©´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—¬ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:862 src/usermod.c:597
+#: src/useradd.c:805 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ìÀ» Àá±×´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ì„ ì ê·¸ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:867 src/usermod.c:603
+#: src/useradd.c:810 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¿©´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—¬ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:1039
+#: src/useradd.c:982
 #, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: uid(»ç¿ëÀÚ ¾ÆÀÌµğ) %u ´Â ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: uid(ì‚¬ìš©ì ì•„ì´ë””) %u ëŠ” ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1069
+#: src/useradd.c:1012
 #, c-format
 msgid "%s: can't get unique uid\n"
-msgstr "%s: ÀûÀıÇÑ uid(»ç¿ëÀÚ ¾ÆÀÌµğ)¸¦ ¾òÀ» ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì ì ˆí•œ uid(ì‚¬ìš©ì ì•„ì´ë””)ë¥¼ ì–»ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
-#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
-#, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: `%s' ºÎºĞÀº À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù\n"
-
-#: src/useradd.c:1189
+#: src/useradd.c:1049
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: ±âº» µğ·ºÅä¸® `%s' ´Â À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ê¸°ë³¸ ë””ë ‰í† ë¦¬ `%s' ëŠ” ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1199
+#: src/useradd.c:1059
 #, c-format
 msgid "%s: invalid comment `%s'\n"
-msgstr "%s: Àû¿ä»çÇ× `%s' Àº À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ì ìš”ì‚¬í•­ `%s' ì€ ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1210
+#: src/useradd.c:1070
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: È¨ µğ·ºÅä¸® `%s' ´Â À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: í™ˆ ë””ë ‰í† ë¦¬ `%s' ëŠ” ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1229 src/usermod.c:1110
+#: src/useradd.c:1089 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
-msgstr "%s: ³¯Â¥ `%s' ´Â À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ë‚ ì§œ `%s' ëŠ” ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1242
+#: src/useradd.c:1102
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå°¡ -e ¿É¼ÇÀ» ¿ä±¸ÇÕ´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œê°€ -e ì˜µì…˜ì„ ìš”êµ¬í•©ë‹ˆë‹¤\n"
 
-#: src/useradd.c:1258
+#: src/useradd.c:1118
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå°¡ -f ¿É¼ÇÀ» ¿ä±¸ÇÕ´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œê°€ -f ì˜µì…˜ì„ ìš”êµ¬í•©ë‹ˆë‹¤\n"
 
-#: src/useradd.c:1336
+#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: `%s' ë¶€ë¶„ì€ ìœ íš¨í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
+
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid shell `%s'\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾ÊÀº ½© `%s'\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•Šì€ ì‰˜ `%s'\n"
 
-#: src/useradd.c:1377
+#: src/useradd.c:1237
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: À¯È¿ÇÏÁö ¾ÊÀº »ç¿ëÀÚ¸í `%s'\n"
+msgstr "%s: ìœ íš¨í•˜ì§€ ì•Šì€ ì‚¬ìš©ìëª… `%s'\n"
 
-#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» ´Ù½Ã ¾µ¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» ´Ù½Ã ¾µ¼ö°¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏ Àá±İÀ» ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» Àá±Û ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì ê¸€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1580 src/usermod.c:1405
-#, c-format
-msgid "%s: error adding authentication method\n"
-msgstr "%s: ÀÎÁõ¹æ¹ı Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
-
-#: src/useradd.c:1604
+#: src/useradd.c:1435
 #, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: »õ·Î¿î ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ìƒˆë¡œìš´ íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:1618
+#: src/useradd.c:1449
 #, c-format
 msgid "%s: error updating password dbm entry\n"
-msgstr "%s: ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ®ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:1634 src/usermod.c:1471
+#: src/useradd.c:1465 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: »õ·Î¿î ½¦µµ¿ì ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ìƒˆë¡œìš´ ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:1650 src/usermod.c:1488
+#: src/useradd.c:1481 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/useradd.c:1682
+#: src/useradd.c:1513
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: µğ·ºÅä¸® %s ¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë””ë ‰í† ë¦¬ %s ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/useradd.c:1806 src/usermod.c:1233
+#: src/useradd.c:1634 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: »ç¿ëÀÚ %s ´Â Á¸ÀçÇÕ´Ï´Ù\n"
+msgstr "%s: ì‚¬ìš©ì %s ëŠ” ì¡´ì¬í•©ë‹ˆë‹¤\n"
 
-#: src/useradd.c:1821
+#: src/useradd.c:1649
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:1854
+#: src/useradd.c:1687
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
-"%s:°æ°í: CREATE_HOME Àº Áö¿øµÇÁö ¾Ê½À´Ï´Ù, -m ¿É¼ÇÀ» ´ë½Å »ç¿ëÇÏ¼¼¿ä.\n"
+"%s:ê²½ê³ : CREATE_HOME ì€ ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤, -m ì˜µì…˜ì„ ëŒ€ì‹  ì‚¬ìš©í•˜ì„¸ìš”.\n"
 
-#: src/userdel.c:129
-#, c-format
-msgid "usage: %s [-r] name\n"
-msgstr "»ç¿ë¹ı: %s [-r] ÀÌ¸§\n"
+#: src/userdel.c:124
+#, fuzzy, c-format
+msgid "Usage: %s [-r] name\n"
+msgstr "ì‚¬ìš©ë²•: %s [-r] ì´ë¦„\n"
 
-#: src/userdel.c:181 src/userdel.c:267
+#: src/userdel.c:176 src/userdel.c:262
 #, c-format
 msgid "%s: error updating group entry\n"
-msgstr "%s: ±×·ì ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ®ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ê·¸ë£¹ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/userdel.c:191 src/userdel.c:276
+#: src/userdel.c:186 src/userdel.c:271
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
-msgstr "%s: dbm ±×·ì ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: dbm ê·¸ë£¹ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:219
+#: src/userdel.c:214
 #, fuzzy, c-format
 msgid "%s: cannot remove dbm group entry\n"
-msgstr "%s: dbm ±×·ì ÀÔ·Â°ªÀ» ¾÷µ¥ÀÌÆ® ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: dbm ê·¸ë£¹ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:308
+#: src/userdel.c:379
 #, c-format
-msgid "%s: cannot rewrite TCFS key file\n"
-msgstr "%s: TCFS Å° ÆÄÀÏÀ» ´Ù½Ã ¾µ ¼ö ¾ø½À´Ï´Ù\n"
+msgid "%s: cannot open group file\n"
+msgstr "%s: ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:392
+#: src/userdel.c:390
 #, c-format
-msgid "%s: cannot lock TCFS key file\n"
-msgstr "%s: TCFS Å° ÆÄÀÏÀ» Àá±Û ¼ö ¾ø½À´Ï´Ù\n"
-
-#: src/userdel.c:397
-#, c-format
-msgid "%s: cannot open TCFS key file\n"
-msgstr "%s: TCFS Å° ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
 #: src/userdel.c:408
 #, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: ±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
-
-#: src/userdel.c:419
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: ½¦µµ¿ì ±×·ì ÆÄÀÏÀ» ¿­ ¼ö ¾ø½À´Ï´Ù\n"
-
-#: src/userdel.c:451 src/userdel.c:468
-#, c-format
-msgid "%s: error deleting authentication\n"
-msgstr "%s: ÀÎÁõÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
-
-#: src/userdel.c:479
-#, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/userdel.c:485
+#: src/userdel.c:412
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/userdel.c:496
-#, c-format
-msgid "%s: error deleting TCFS entry\n"
-msgstr "%s: TCFS ÀÔ·Â°ªÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
-
-#: src/userdel.c:510
+#: src/userdel.c:421
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
-msgstr "%s: ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/userdel.c:533
+#: src/userdel.c:440
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/userdel.c:569
+#: src/userdel.c:484
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: »ç¿ëÀÚ %s ´Â ÇöÀç ·Î±äÇÑ »óÅÂ ÀÔ´Ï´Ù\n"
+msgstr "%s: ì‚¬ìš©ì %s ëŠ” í˜„ì¬ ë¡œê¸´í•œ ìƒíƒœ ì…ë‹ˆë‹¤\n"
 
-#: src/userdel.c:659
+#: src/userdel.c:594
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
 msgstr ""
-"%s: °æ°í: %s ´Â %s ¿¡ ¼ÒÀ¯µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù, µû¶ó¼­ Á¦°ÅµÇÁö ¾Ê½À´Ï´Ù\n"
+"%s: ê²½ê³ : %s ëŠ” %s ì— ì†Œìœ ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤, ë”°ë¼ì„œ ì œê±°ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:600
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: °æ°í: Á¦°ÅÇÒ ¼ö ¾ø½À´Ï´Ù "
+msgstr "%s: ê²½ê³ : ì œê±°í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤ "
 
-#: src/userdel.c:758 src/usermod.c:1023
+#: src/userdel.c:703 src/usermod.c:783
 #, c-format
 msgid "%s: user %s does not exist\n"
-msgstr "%s: »ç¿ëÀÚ %s ´Â Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ì‚¬ìš©ì %s ëŠ” ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:770 src/usermod.c:1039
+#: src/userdel.c:718 src/usermod.c:799
 #, c-format
 msgid "%s: user %s is a NIS user\n"
-msgstr "%s: »ç¿ëÀÚ %s ´Â NIS »ç¿ëÀÚ ÀÔ´Ï´Ù\n"
+msgstr "%s: ì‚¬ìš©ì %s ëŠ” NIS ì‚¬ìš©ì ì…ë‹ˆë‹¤\n"
 
-#: src/userdel.c:799
+#: src/userdel.c:756
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s ´Â %s ¿¡ ¼ÒÀ¯µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù, µû¶ó¼­ Á¦°ÅµÇÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: %s ëŠ” %s ì— ì†Œìœ ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤, ë”°ë¼ì„œ ì œê±°ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/userdel.c:818
+#: src/userdel.c:779
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: µğ·ºÅä¸® %s ´Â Á¦°ÅµÇÁö ¾Ê½À´Ï´Ù (»ç¿ëÀÚ %s ÀÇ È¨ µğ·ºÅä¸®°¡ Áö¿öÁú °ÍÀÔ"
-"´Ï´Ù)\n"
+"%s: ë””ë ‰í† ë¦¬ %s ëŠ” ì œê±°ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤ (ì‚¬ìš©ì %s ì˜ í™ˆ ë””ë ‰í† ë¦¬ê°€ ì§€ì›Œì§ˆ ê²ƒì…"
+"ë‹ˆë‹¤)\n"
 
-#: src/userdel.c:830
+#: src/userdel.c:793
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: µğ·ºÅä¸® %s ¸¦ Áö¿ì´Âµ¥ ¿À·ù\n"
+msgstr "%s: ë””ë ‰í† ë¦¬ %s ë¥¼ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:326
+#: src/usermod.c:306
+#, fuzzy, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "ì‚¬ìš©ë²•: %s\t[-u uid(ì‚¬ìš©ì ì•„ì´ë””) [-o]] [-g ê·¸ë£¹ëª…][-G ê·¸ë£¹,...]\n"
+
+#: src/usermod.c:310
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d È¨ µğ·ºÅä¸® [-m]] [-s ½©] [-c Àû¿ä»çÇ×] [-l »õ_ÀÌ¸§]\n"
+msgstr "\t\t[-d í™ˆ ë””ë ‰í† ë¦¬ [-m]] [-s ì‰˜] [-c ì ìš”ì‚¬í•­] [-l ìƒˆ_ì´ë¦„]\n"
 
-#: src/usermod.c:332
-msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {µğÆúÆ®|ÇÁ·Î±×·¥},...] "
+#: src/usermod.c:313
+#, fuzzy
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f ë¹„í™œì„±í™”] [-e ë§Œê¸°] "
 
-#: src/usermod.c:334
+#: src/usermod.c:315
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p ÆĞ½º¿öµå] -L|-U] ÀÌ¸§\n"
+msgstr "[-p íŒ¨ìŠ¤ì›Œë“œ] -L|-U] ì´ë¦„\n"
 
-#: src/usermod.c:514
+#: src/usermod.c:495
 #, c-format
 msgid "%s: out of memory in update_group\n"
-msgstr "%s: ¾÷µ¥ÀÌÆ®_±×·ì¿¡ ¸Ş¸ğ¸® ºÎÁ·\n"
+msgstr "%s: ì—…ë°ì´íŠ¸_ê·¸ë£¹ì— ë©”ëª¨ë¦¬ ë¶€ì¡±\n"
 
-#: src/usermod.c:641
+#: src/usermod.c:622
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: ¾÷µ¥ÀÌÆ®_±×·ì½¦µµ¿ì¿¡ ¸Ş¸ğ¸® ºÎÁ·\n"
+msgstr "%s: ì—…ë°ì´íŠ¸_ê·¸ë£¹ì‰ë„ìš°ì— ë©”ëª¨ë¦¬ ë¶€ì¡±\n"
 
-#: src/usermod.c:1210
+#: src/usermod.c:958
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: ÁÖ¾îÁø flag °¡ ¾ø½À´Ï´Ù\n"
+msgstr "%s: ì£¼ì–´ì§„ flag ê°€ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/usermod.c:1217
+#: src/usermod.c:965
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå°¡ -e ¿É¼Ç°ú -f ¿É¼ÇÀ» ¿ä±¸ÇÕ´Ï´Ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œê°€ -e ì˜µì…˜ê³¼ -f ì˜µì…˜ì„ ìš”êµ¬í•©ë‹ˆë‹¤\n"
 
-#: src/usermod.c:1239
+#: src/usermod.c:987
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid(»ç¿ëÀÚ ¾ÆÀÌµğ) %u ´Â ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: uid(ì‚¬ìš©ì ì•„ì´ë””) %lu ëŠ” ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/usermod.c:1392
-#, c-format
-msgid "%s: error deleting authentication method\n"
-msgstr "%s: ÀÎÁõ¹æ¹ıÀ» Áö¿ì´Âµ¥ ¿À·ù\n"
-
-#: src/usermod.c:1418
-#, c-format
-msgid "%s: error changing authentication method\n"
-msgstr "%s: ÀÎÁõ¹æ¹ıÀ» º¯°æÇÏ´Âµ¥ ¿À·ù\n"
-
-#: src/usermod.c:1436
+#: src/usermod.c:1116
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: ÆĞ½º¿öµå ÀÔ·Â°ªÀ» º¯°æÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ë³€ê²½í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1442
+#: src/usermod.c:1122
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1451
+#: src/usermod.c:1131
 #, c-format
 msgid "%s: error adding password dbm entry\n"
-msgstr "%s: ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1459
+#: src/usermod.c:1139
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
-msgstr "%s: ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1478
+#: src/usermod.c:1158
 #, c-format
 msgid "%s: error removing shadow password entry\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1495
+#: src/usermod.c:1175
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
-msgstr "%s: ½¦µµ¿ì ÆĞ½º¿öµå dbm ÀÔ·Â°ªÀ» Á¦°ÅÇÏ´Âµ¥ ¿À·ù\n"
+msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œ dbm ì…ë ¥ê°’ì„ ì œê±°í•˜ëŠ”ë° ì˜¤ë¥˜\n"
 
-#: src/usermod.c:1524
+#: src/usermod.c:1204
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: µğ·ºÅä¸® %s ´Â Á¸ÀçÇÕ´Ï´Ù\n"
+msgstr "%s: ë””ë ‰í† ë¦¬ %s ëŠ” ì¡´ì¬í•©ë‹ˆë‹¤\n"
 
-#: src/usermod.c:1533
+#: src/usermod.c:1213
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: %s ¸¦ ¸¸µé ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ë¥¼ ë§Œë“¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/usermod.c:1539
+#: src/usermod.c:1219
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: %s ¸¦ chown ÇÒ ¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: %s ë¥¼ chown í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#: src/usermod.c:1556
+#: src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: µğ·ºÅä¸® %s ¿¡¼­ %s ·Î ÀÌ¸§À» ¹Ù²Ü¼ö ¾ø½À´Ï´Ù\n"
+msgstr "%s: ë””ë ‰í† ë¦¬ %s ì—ì„œ %s ë¡œ ì´ë¦„ì„ ë°”ê¿€ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
 
-#. better leave it alone
-#: src/usermod.c:1653
+#: src/usermod.c:1333
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: °æ°í: %s ´Â %s ¿¡ ¼ÒÀ¯µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù\n"
+msgstr "%s: ê²½ê³ : %s ëŠ” %s ì— ì†Œìœ ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
-#: src/usermod.c:1659
+#: src/usermod.c:1339
 msgid "failed to change mailbox owner"
-msgstr "¸ŞÀÏ¹Ú½º ¼ÒÀ¯ÀÚ¸¦ º¯°æÇÏ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù"
+msgstr "ë©”ì¼ë°•ìŠ¤ ì†Œìœ ìë¥¼ ë³€ê²½í•˜ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤"
 
-#: src/usermod.c:1667
+#: src/usermod.c:1347
 msgid "failed to rename mailbox"
-msgstr "¸ŞÀÏ¹Ú½ºÀÇ ÀÌ¸§À» ¹Ù²Ù´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù"
+msgstr "ë©”ì¼ë°•ìŠ¤ì˜ ì´ë¦„ì„ ë°”ê¾¸ëŠ”ë° ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤"
 
-#: src/vipw.c:104
+#: src/vipw.c:105
 #, c-format
 msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: %s ´Â º¯°æµÇÁö ¾Ê¾Ò½À´Ï´Ù\n"
+"%s: %s ëŠ” ë³€ê²½ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤\n"
 
-#: src/vipw.c:132
+#: src/vipw.c:133
 msgid "Couldn't lock file"
-msgstr "ÆÄÀÏÀ» Àá±Û ¼ö ¾ø½À´Ï´Ù"
+msgstr "íŒŒì¼ì„ ì ê¸€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤"
 
-#: src/vipw.c:141
+#: src/vipw.c:142
 msgid "Couldn't make backup"
-msgstr "¹é¾÷À» ¸¸µé ¼ö ¾ø½À´Ï´Ù"
+msgstr "ë°±ì—…ì„ ë§Œë“¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤"
 
-#: src/vipw.c:206
+#: src/vipw.c:200
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
-"%s: %s ¸¦ º¹±¸½ÃÅ³ ¼ö ¾ø½À´Ï´Ù: %s (´ç½ÅÀÇ º¯°æ»çÇ×Àº %s ¿¡ ÀÖ½À´Ï´Ù)\n"
+"%s: %s ë¥¼ ë³µêµ¬ì‹œí‚¬ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: %s (ë‹¹ì‹ ì˜ ë³€ê²½ì‚¬í•­ì€ %s ì— ìˆìŠµë‹ˆë‹¤)\n"
 
-#: src/vipw.c:244
+#: src/vipw.c:238
 msgid ""
 "Usage:\n"
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-"»ç¿ë¹ı:\n"
-"`vipw' ´Â /etc/passwd ¸¦ ÆíÁıÇÕ´Ï´Ù\t`vipw -s' ´Â /etc/shadow¸¦ ÆíÁıÇÕ´Ï´Ù\n"
-"`vigr' Àº /etc/group À» ÆíÁıÇÕ´Ï´Ù\t`vigr -s' ´Â /etc/gshadow¸¦ ÆíÁıÇÕ´Ï´Ù\n"
+"ì‚¬ìš©ë²•:\n"
+"`vipw' ëŠ” /etc/passwd ë¥¼ í¸ì§‘í•©ë‹ˆë‹¤\t`vipw -s' ëŠ” /etc/shadowë¥¼ í¸ì§‘í•©ë‹ˆë‹¤\n"
+"`vigr' ì€ /etc/group ì„ í¸ì§‘í•©ë‹ˆë‹¤\t`vigr -s' ëŠ” /etc/gshadowë¥¼ í¸ì§‘í•©ë‹ˆë‹¤\n"
+
+#, fuzzy
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: ì‚¬ìš©ì %s ì— ëŒ€í•œ ì…ë ¥ê°’ì„ ì—…ë°ì´íŠ¸ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr ""
+#~ "ì‚¬ìš©ì %s ëŠ” TCFS í‚¤ë¥¼ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤, ê·¸ì˜ ì˜ˆì „ íŒ¨ìŠ¤ì›Œë“œê°€ ìš”êµ¬ë©ë‹ˆë‹¤.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr "ê°•ì œë¡œ ë³€ê²½ì„ í•˜ê¸° ìœ„í•´ì„œëŠ” -t ì˜µì…˜ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "ê²½ê³ : ì‚¬ìš©ì %s ëŠ” TCFS í‚¤ë¥¼ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr ""
+#~ "TCFS í‚¤ ë°ì´í„°ë² ì´ìŠ¤ ì ê¸ˆì„ í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤; ë‚˜ì¤‘ì— ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "TCFS í‚¤ ë°ì´í„°ë² ì´ìŠ¤ë¥¼ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "TCFs í‚¤ ë°ì´í„°ë² ì´ìŠ¤ ì—…ë°ì´íŠ¸ ì¤‘ ì˜¤ë¥˜.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "TCFS ë³€ê²½ì„ ì‹¤í–‰í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "%s: cannot rewrite TCFS key file\n"
+#~ msgstr "%s: TCFS í‚¤ íŒŒì¼ì„ ë‹¤ì‹œ ì“¸ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
+
+#~ msgid "%s: cannot lock TCFS key file\n"
+#~ msgstr "%s: TCFS í‚¤ íŒŒì¼ì„ ì ê¸€ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
+
+#~ msgid "%s: cannot open TCFS key file\n"
+#~ msgstr "%s: TCFS í‚¤ íŒŒì¼ì„ ì—´ ìˆ˜ ì—†ìŠµë‹ˆë‹¤\n"
+
+#~ msgid "%s: error deleting TCFS entry\n"
+#~ msgstr "%s: TCFS ì…ë ¥ê°’ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
+
+#~ msgid "               [-f inactive] [-e expire]"
+#~ msgstr "                [-f ë¹„í™œì„±í™”] [-e ë§Œê¸°] "
+
+#~ msgid "%s: error deleting authentication\n"
+#~ msgstr "%s: ì¸ì¦ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
+
+#, fuzzy
+#~ msgid "[-A {DEFAULT|program},...] "
+#~ msgstr "[-A {ë””í´íŠ¸|í”„ë¡œê·¸ë¨},...] "
+
+#~ msgid "%s: error deleting authentication method\n"
+#~ msgstr "%s: ì¸ì¦ë°©ë²•ì„ ì§€ìš°ëŠ”ë° ì˜¤ë¥˜\n"
+
+#~ msgid "%s: error adding authentication method\n"
+#~ msgstr "%s: ì¸ì¦ë°©ë²• ì¶”ê°€í•˜ëŠ”ë° ì˜¤ë¥˜\n"
+
+#~ msgid "%s: error changing authentication method\n"
+#~ msgstr "%s: ì¸ì¦ë°©ë²•ì„ ë³€ê²½í•˜ëŠ”ë° ì˜¤ë¥˜\n"
+
+#~ msgid "[-A program] "
+#~ msgstr "[-A í”„ë¡œê·¸ë¨] "
+
+#~ msgid "[-p passwd] name\n"
+#~ msgstr "[-p íŒ¨ìŠ¤ì›Œë“œ] ì´ë¦„\n"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "ì˜¤ë¥˜ - '%s'ì˜ ê²€ìƒ‰ì— ì‹¤íŒ¨\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%sê°€ ë°œê²¬ë˜ì§€ ì•ŠìŒ\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: ì‰ë„ìš° ê·¸ë£¹ ì§€ì›ì— ëŒ€í•˜ì—¬ í˜•ì„±ì´ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "%s: Shadow passwords are not configured.\n"
+#~ msgstr "%s: ì‰ë„ìš° íŒ¨ìŠ¤ì›Œë“œê°€ í˜•ì„±ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.\n"
+
+#, fuzzy
+#~ msgid "Usage: %s [-l] user\n"
+#~ msgstr "ì‚¬ìš©ë²•: %s [-e]\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "%s ì‰˜ì„ ì‹¤í–‰í•©ë‹ˆë‹¤\n"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "ë‹¤ì´ì–¼ì—… íŒ¨ìŠ¤ì›Œë“œ: "
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr "ì‚¬ìš©ë²•: %s [-l] [-m ìµœì†Œì¼ìˆ˜] [-M ìµœëŒ€ì¼ìˆ˜] [-W ê²½ê³ ì¼ìˆ˜] ì‚¬ìš©ì\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "ì‚¬ìš©ë²•: %s [-(a|d)] ì‰˜\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "ì‰˜ íŒ¨ìŠ¤ì›Œë“œ: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "ì‰˜ íŒ¨ìŠ¤ì›Œë“œë¥¼ ë‹¤ì‹œ ì…ë ¥: "
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr "%s: íŒ¨ìŠ¤ì›Œë“œê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš”. \n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: %së¥¼ ë§Œë“¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: %së¥¼ ì—´ìˆ˜ê°€ ì—†ìŠµë‹ˆë‹¤"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: %sì˜ ì‰˜ì´ ë°œê²¬ë˜ì§€ ì—†ìŠµë‹ˆë‹¤.\n"
+
+#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
+#~ msgstr "ê·¸ë£¹=%s,%u ì´ˆê¸° ë””ë ‰í† ë¦¬=%s skel=%s\n"
+
+#~ msgid "shell=%s  "
+#~ msgstr "ì‰˜=%s  "
+
+#~ msgid "inactive=%ld  expire=%s"
+#~ msgstr "ë¹„í™œì„±í™”=%ld ë§Œê¸°=%s"
+
+#~ msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "ì‚¬ìš©ë²•: %s\t[-u uid(ì‚¬ìš©ì ì•„ì´ë””) [-o]] [-g ê·¸ë£¹ëª…][-G ê·¸ë£¹,...]\n"
 
 #~ msgid "%s: gid %ld is not unique\n"
-#~ msgstr "%s: gid(±×·ì ¾ÆÀÌµğ) %ld ´Â ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+#~ msgstr "%s: gid(ê·¸ë£¹ ì•„ì´ë””) %ld ëŠ” ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
 #, fuzzy
 #~ msgid "unknown gid: %u\n"
-#~ msgstr "¾Ë¼ö¾ø´Â gid: %d\n"
+#~ msgstr "ì•Œìˆ˜ì—†ëŠ” gid: %d\n"
 
 #~ msgid "%s: uid %d is not unique\n"
-#~ msgstr "%s: uid(»ç¿ëÀÚ ¾ÆÀÌµğ) %d ´Â ÀûÀıÇÏÁö ¾Ê½À´Ï´Ù\n"
+#~ msgstr "%s: uid(ì‚¬ìš©ì ì•„ì´ë””) %d ëŠ” ì ì ˆí•˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
 #~ msgid "user %s: bad UID (%d)\n"
-#~ msgstr "»ç¿ëÀÚ %s: ÁÁÁö ¾ÊÀº UID(»ç¿ëÀÚ ¾ÆÀÌµğ) (%d)\n"
+#~ msgstr "ì‚¬ìš©ì %s: ì¢‹ì§€ ì•Šì€ UID(ì‚¬ìš©ì ì•„ì´ë””) (%d)\n"
 
 #~ msgid "%s: no aging information present\n"
-#~ msgstr "%s: ¿¬·É¿¡ ´ëÇÑ ¾î¶°ÇÑ Á¤º¸µµ ³ªÅ¸³ªÁö ¾Ê½À´Ï´Ù\n"
+#~ msgstr "%s: ì—°ë ¹ì— ëŒ€í•œ ì–´ë– í•œ ì •ë³´ë„ ë‚˜íƒ€ë‚˜ì§€ ì•ŠìŠµë‹ˆë‹¤\n"
 
 #~ msgid "group %s: bad GID (%d)\n"
-#~ msgstr "±×·ì %s: ÁÁÁö¾ÊÀº GID(±×·ì ¾ÆÀÌµğ) (%d)\n"
+#~ msgstr "ê·¸ë£¹ %s: ì¢‹ì§€ì•Šì€ GID(ê·¸ë£¹ ì•„ì´ë””) (%d)\n"
 
 #~ msgid "%s: permission denied (shell).\n"
-#~ msgstr "%s: Á¢±Ù±ÇÇÑ ¾øÀ½ (½©).\n"
+#~ msgstr "%s: ì ‘ê·¼ê¶Œí•œ ì—†ìŒ (ì‰˜).\n"

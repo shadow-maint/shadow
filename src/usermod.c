@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: usermod.c,v 1.25 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: usermod.c,v 1.31 2003/06/30 13:17:51 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -55,6 +55,7 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.25 2002/01/05 15:41:44 kloczek Exp $")
 #include "lastlog_.h"
 #endif
 #include "pwauth.h"
+#include "nscd.h"
 #include "getdef.h"
 /*
  * exit status values
@@ -66,12 +67,12 @@ RCSID (PKG_VER "$Id: usermod.c,v 1.25 2002/01/05 15:41:44 kloczek Exp $")
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* uid already in use (and no -o) */
-/* #define E_BAD_PWFILE	5 *//* passwd file contains errors */
+    /* #define E_BAD_PWFILE	5 *//* passwd file contains errors */
 #define E_NOTFOUND	6	/* specified user/group doesn't exist */
 #define E_USER_BUSY	8	/* user to modify is logged in */
 #define E_NAME_IN_USE	9	/* username already in use */
 #define E_GRP_UPDATE	10	/* can't update group file */
-/* #define E_NOSPACE	11 *//* insufficient space to move home dir */
+    /* #define E_NOSPACE	11 *//* insufficient space to move home dir */
 #define E_HOMEDIR	12	/* unable to complete home dir move */
 #define	VALID(s)	(strcspn (s, ":\n") == strlen (s))
 static char *user_name;
@@ -94,14 +95,6 @@ static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
 
 static char *Prog;
-
-#ifdef AUTH_METHODS
-static char *auth_arg;
-static char user_auth[BUFSIZ];
-static int Aflg = 0;		/* specify user defined authentication method */
-#else
-#define Aflg 0
-#endif
 
 static int
  uflg = 0,			/* specify new user ID */
@@ -169,15 +162,6 @@ static int update_gshadow (void);
 #endif
 static int grp_update (void);
 
-#ifdef AUTH_METHODS
-static char *get_password (const char *);
-static void split_auths (char *, char **);
-static void update_auths (const char *, const char *, char *);
-static void add_auths (const char *, const char *, char *);
-static void delete_auths (const char *, const char *, char *);
-static void convert_auth (char *, const char *, const char *);
-static int valid_auth (const char *);
-#endif
 static long get_number (const char *);
 static uid_t get_id (const char *);
 static void process_flags (int, char **);
@@ -319,17 +303,14 @@ static void usage (void)
 {
 	fprintf (stderr,
 		 _
-		 ("usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"),
+		 ("Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"),
 		 Prog);
 	fprintf (stderr,
 		 _
 		 ("\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"));
 	fprintf (stderr, "\t\t");
 #ifdef SHADOWPWD
-	fprintf (stderr, _("[-f inactive] [-e expire ] "));
-#endif
-#ifdef AUTH_METHODS
-	fprintf (stderr, _("[-A {DEFAULT|program},... ] "));
+	fprintf (stderr, _("[-f inactive] [-e expire] "));
 #endif
 	fprintf (stderr, _("[-p passwd] [-L|-U] name\n"));
 	exit (E_USAGE);
@@ -748,227 +729,6 @@ static int grp_update (void)
 	return ret;
 }
 
-#ifdef AUTH_METHODS
-/*
- * get_password - locate encrypted password in authentication list
- */
-
-static char *get_password (const char *list)
-{
-	char *cp, *end;
-	static char buf[257];
-
-	strcpy (buf, list);
-	for (cp = buf; cp; cp = end) {
-		if ((end = strchr (cp, ';')))
-			*end++ = 0;
-
-		if (cp[0] == '@')
-			continue;
-
-		return cp;
-	}
-	return (char *) 0;
-}
-
-/*
- * split_auths - break up comma list into (char *) array
- */
-
-static void split_auths (char *list, char **array)
-{
-	char *cp, *end;
-	int i = 0;
-
-	for (cp = list; cp; cp = end) {
-		if ((end = strchr (cp, ';')))
-			*end++ = '\0';
-
-		array[i++] = cp;
-	}
-	array[i] = 0;
-}
-
-/*
- * update_auths - find list of methods to update
- */
-
-static void update_auths (const char *old, const char *new, char *update)
-{
-	char oldbuf[257], newbuf[257];
-	char *oldv[32], *newv[32], *updatev[32];
-	int i, j, k;
-
-	strcpy (oldbuf, old);
-	split_auths (oldbuf, oldv);
-
-	strcpy (newbuf, new);
-	split_auths (newbuf, newv);
-
-	for (i = j = k = 0; oldv[i]; i++) {
-		for (j = 0; newv[j]; j++)
-			if (strcmp (oldv[i], newv[j]) != 0)
-				break;
-
-		if (newv[j] != (char *) 0)
-			updatev[k++] = oldv[i];
-	}
-	updatev[k] = 0;
-
-	update[0] = '\0';
-	for (i = 0; updatev[i]; i++) {
-		if (i)
-			strcat (update, ";");
-
-		strcat (update, updatev[i]);
-	}
-}
-
-/*
- * add_auths - find list of methods to add
- */
-
-static void add_auths (const char *old, const char *new, char *add)
-{
-	char oldbuf[257], newbuf[257];
-	char *oldv[32], *newv[32], *addv[32];
-	int i, j, k;
-
-	strcpy (oldbuf, old);
-	split_auths (oldbuf, oldv);
-
-	strcpy (newbuf, new);
-	split_auths (newbuf, newv);
-
-	for (i = j = k = 0; newv[i]; i++) {
-		for (j = 0; oldv[j]; j++)
-			if (strcmp (oldv[i], newv[j]) == 0)
-				break;
-
-		if (oldv[j] == (char *) 0)
-			addv[k++] = newv[i];
-	}
-	addv[k] = 0;
-
-	add[0] = '\0';
-	for (i = 0; addv[i]; i++) {
-		if (i)
-			strcat (add, ";");
-
-		strcat (add, addv[i]);
-	}
-}
-
-/*
- * delete_auths - find list of methods to delete
- */
-
-static void delete_auths (const char *old, const char *new, char *remove)
-{
-	char oldbuf[257], newbuf[257];
-	char *oldv[32], *newv[32], *removev[32];
-	int i, j, k;
-
-	strcpy (oldbuf, old);
-	split_auths (oldbuf, oldv);
-
-	strcpy (newbuf, new);
-	split_auths (newbuf, newv);
-
-	for (i = j = k = 0; oldv[i]; i++) {
-		for (j = 0; newv[j]; j++)
-			if (strcmp (oldv[i], newv[j]) == 0)
-				break;
-
-		if (newv[j] == (char *) 0)
-			removev[k++] = oldv[i];
-	}
-	removev[k] = 0;
-
-	remove[0] = '\0';
-	for (i = 0; removev[i]; i++) {
-		if (i)
-			strcat (remove, ";");
-
-		strcat (remove, removev[i]);
-	}
-}
-
-/*
- * convert_auth - convert the argument list to a authentication list
- */
-
-static void
-convert_auth (char *auths, const char *oldauths, const char *list)
-{
-	char *cp, *end;
-	char *old;
-	char buf[257];
-
-	/*
-	 * Copy each method. DEFAULT is replaced by an encrypted string if
-	 * one can be found in the current authentication list.
-	 */
-
-	strcpy (buf, list);
-	auths[0] = '\0';
-	for (cp = buf; cp; cp = end) {
-		if (auths[0])
-			strcat (auths, ";");
-
-		if ((end = strchr (cp, ',')))
-			*end++ = '\0';
-
-		if (strcmp (cp, "DEFAULT") == 0) {
-			if ((old = get_password (oldauths)))
-				strcat (auths, old);
-			else
-				strcat (auths, "!");
-		} else {
-			strcat (auths, "@");
-			strcat (auths, cp);
-		}
-	}
-}
-
-/*
- * valid_auth - check authentication list for validity
- */
-
-static int valid_auth (const char *methods)
-{
-	char *cp, *end;
-	char buf[257];
-	int default_cnt = 0;
-
-	/*
-	 * Cursory checks, length and illegal characters
-	 */
-
-	if ((int) strlen (methods) > 256)
-		return 0;
-
-	if (!VALID (methods))
-		return 0;
-
-	/*
-	 * Pick each method apart and check it.
-	 */
-
-	strcpy (buf, methods);
-	for (cp = buf; cp; cp = end) {
-		if ((end = strchr (cp, ',')))
-			*end++ = '\0';
-
-		if (strcmp (cp, "DEFAULT") == 0) {
-			if (default_cnt++ > 0)
-				return 0;
-		}
-	}
-	return 1;
-}
-#endif
-
 static long get_number (const char *cp)
 {
 	long val;
@@ -1068,18 +828,6 @@ static void process_flags (int argc, char **argv)
 	while ((arg = getopt (argc, argv, FLAGS)) != EOF) {
 #undef FLAGS
 		switch (arg) {
-#ifdef AUTH_METHODS
-		case 'A':
-			if (!valid_auth (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			auth_arg = optarg;
-			Aflg++;
-			break;
-#endif
 		case 'c':
 			if (!VALID (optarg)) {
 				fprintf (stderr,
@@ -1334,10 +1082,6 @@ static void usr_update (void)
 	struct spwd spent;
 	const struct spwd *spwd = NULL;
 #endif
-#ifdef AUTH_METHODS
-	char old_auth[BUFSIZ];
-	char auth_buf[BUFSIZ];
-#endif
 
 	/*
 	 * Locate the entry in /etc/passwd, which MUST exist.
@@ -1365,71 +1109,7 @@ static void usr_update (void)
 	}
 #endif
 
-#ifdef AUTH_METHODS
-
-#ifdef	SHADOWPWD
-	strcpy (old_auth, spwd ? spent.sp_pwdp : pwent.pw_passwd);
-#else
-	strcpy (old_auth, pwent.pw_passwd);
-#endif
-
-	if (Aflg)
-		convert_auth (user_auth, old_auth, auth_arg);
-
-	/*
-	 * XXX - this code needs some checking, changing the user name with
-	 * "usermod -l new old" clears the password for this user :-(. For
-	 * now, just don't define AUTH_METHODS and all will be well. Most
-	 * programs don't support "administrator defined authentication
-	 * methods" and PAM (when done) will be better anyway :-).  --marekm
-	 */
-	if (lflg || (Aflg && strcmp (old_auth, user_auth) != 0)) {
-		delete_auths (old_auth, user_auth, auth_buf);
-		if (auth_buf[0] && pw_auth (auth_buf, user_name,
-					    PW_DELETE, (char *) 0)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error deleting authentication method\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR, "error deleting auth for `%s'",
-				 user_name));
-			fail_exit (E_PW_UPDATE);
-		}
-		add_auths (old_auth, user_auth, auth_buf);
-		if (auth_buf[0] == '@' && pw_auth (auth_buf,
-						   lflg ? user_newname :
-						   user_name, PW_ADD,
-						   (char *) 0)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error adding authentication method\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR, "error adding auth for `%s'",
-				 lflg ? user_newname : user_name));
-			fail_exit (E_PW_UPDATE);
-		}
-		update_auths (old_auth, user_auth, auth_buf);
-		if (lflg && auth_buf[0] == '@' && pw_auth (auth_buf,
-							   user_newname,
-							   PW_CHANGE,
-							   user_name)) {
-			fprintf (stderr,
-				 _
-				 ("%s: error changing authentication method\n"),
-				 Prog);
-			SYSLOG ((LOG_ERR, "error changing auth for `%s'",
-				 lflg ? user_newname : user_name));
-			fail_exit (E_PW_UPDATE);
-		}
-#ifdef	SHADOWPWD
-		if (spwd)
-			spent.sp_pwdp = user_auth;
-		else
-#endif
-			pwent.pw_passwd = user_auth;
-	}
-#endif				/* AUTH_METHODS */
-	if (lflg || uflg || gflg || cflg || dflg || sflg || Aflg || pflg
+	if (lflg || uflg || gflg || cflg || dflg || sflg || pflg
 	    || Lflg || Uflg) {
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
@@ -1464,7 +1144,7 @@ static void usr_update (void)
 #endif
 	}
 #ifdef	SHADOWPWD
-	if (spwd && (lflg || eflg || fflg || Aflg || pflg || Lflg || Uflg)) {
+	if (spwd && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
 		if (!spw_update (&spent)) {
 			fprintf (stderr,
 				 _
@@ -1692,6 +1372,7 @@ int main (int argc, char **argv)
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups[0] = (char *) 0;
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1769,6 +1450,8 @@ int main (int argc, char **argv)
 	open_files ();
 
 	usr_update ();
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
 
 	close_files ();
 
@@ -1817,4 +1500,5 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	exit (E_SUCCESS);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: getdef.c,v 1.15 2002/01/06 14:08:00 kloczek Exp $")
+RCSID("$Id: getdef.c,v 1.18 2003/05/12 02:40:08 kloczek Exp $")
 
 #include "prototypes.h"
 #include "defines.h"
@@ -63,7 +63,6 @@ static struct itemdef def_table[] = {
 	{ "CRACKLIB_DICTPATH",		NULL },
 	{ "CREATE_HOME",		NULL },
 	{ "DEFAULT_HOME",		NULL },
-	{ "DIALUPS_CHECK_ENAB",		NULL },
 	{ "ENVIRON_FILE",		NULL },
 	{ "ENV_HZ",			NULL },
 	{ "ENV_PATH",			NULL },
@@ -94,7 +93,6 @@ static struct itemdef def_table[] = {
 	{ "MOTD_FILE",			NULL },
 	{ "NOLOGINS_FILE",		NULL },
 	{ "NOLOGIN_STR",		NULL },
-	{ "NO_PASSWORD_CONSOLE",	NULL },
 	{ "OBSCURE_CHECKS_ENAB",	NULL },
 	{ "PASS_ALWAYS_WARN",		NULL },
 	{ "PASS_CHANGE_TRIES",		NULL },
@@ -406,15 +404,11 @@ main(int argc, char **argv)
 	char *cp;
 	struct itemdef *d;
 
-	setlocale(LC_ALL, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
-
 	def_load ();
 
 	for (i = 0 ; i < NUMDEFS ; ++i) {
 		if ((d = def_find(def_table[i].name)) == NULL)
-			printf(_("error - lookup '%s' failed\n"), def_table[i].name);
+			printf("error - lookup '%s' failed\n", def_table[i].name);
 		else
 			printf("%4d %-24s %s\n", i+1, d->name, d->value);
 	}
@@ -422,7 +416,7 @@ main(int argc, char **argv)
 		if ((cp = getdef_str (argv[1])) != NULL)
 			printf ("%s `%s'\n", argv[1], cp);
 		else
-			printf (_("%s not found\n"), argv[1]);
+			printf ("%s not found\n", argv[1]);
 	}
 	exit(0);
 }

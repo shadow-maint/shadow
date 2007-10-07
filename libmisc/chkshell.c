@@ -30,18 +30,15 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chkshell.c,v 1.1 1997/12/07 23:27:00 marekm Exp $")
-
+RCSID ("$Id: chkshell.c,v 1.2 2003/04/22 10:59:21 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include "prototypes.h"
 #include "defines.h"
-
 #ifndef SHELLS_FILE
 #define SHELLS_FILE "/etc/shells"
 #endif
-
 /*
  * check_shell - see if the user's login shell is listed in /etc/shells
  *
@@ -52,35 +49,34 @@ RCSID("$Id: chkshell.c,v 1.1 1997/12/07 23:27:00 marekm Exp $")
  * If getusershell() is available (Linux, *BSD, possibly others), use it
  * instead of re-implementing it.
  */
-
-int
-check_shell(const char *sh)
+int check_shell (const char *sh)
 {
-	char	*cp;
+	char *cp;
 	int found = 0;
+
 #ifndef HAVE_GETUSERSHELL
-	char	buf[BUFSIZ];
-	FILE	*fp;
+	char buf[BUFSIZ];
+	FILE *fp;
 #endif
 
 #ifdef HAVE_GETUSERSHELL
-	setusershell();
-	while ((cp = getusershell())) {
+	setusershell ();
+	while ((cp = getusershell ())) {
 		if (*cp == '#')
 			continue;
 
-		if (strcmp(cp, sh) == 0) {
+		if (strcmp (cp, sh) == 0) {
 			found = 1;
 			break;
 		}
 	}
-	endusershell();
+	endusershell ();
 #else
 	if ((fp = fopen (SHELLS_FILE, "r")) == (FILE *) 0)
 		return 0;
 
-	while (fgets (buf, sizeof(buf), fp)) {
-		if ((cp = strrchr(buf, '\n')))
+	while (fgets (buf, sizeof (buf), fp)) {
+		if ((cp = strrchr (buf, '\n')))
 			*cp = '\0';
 
 		if (buf[0] == '#')
@@ -95,4 +91,3 @@ check_shell(const char *sh)
 #endif
 	return found;
 }
-

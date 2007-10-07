@@ -30,24 +30,20 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: hushed.c,v 1.4 2000/08/26 18:27:17 marekm Exp $")
-
+RCSID ("$Id: hushed.c,v 1.5 2003/04/22 10:59:22 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
 #include <pwd.h>
-
 /*
  * hushed - determine if a user receives login messages
  *
  * Look in the hushed-logins file (or user's home directory) to see
  * if the user is to receive the login-time messages.
  */
-
-int
-hushed(const struct passwd *pw)
+int hushed (const struct passwd *pw)
 {
 	char *hushfile;
 	char buf[BUFSIZ];
@@ -59,7 +55,7 @@ hushed(const struct passwd *pw)
 	 * defined, default to a noisy login.
 	 */
 
-	if ( (hushfile=getdef_str("HUSHLOGIN_FILE")) == NULL )
+	if ((hushfile = getdef_str ("HUSHLOGIN_FILE")) == NULL)
 		return 0;
 
 	/*
@@ -68,8 +64,9 @@ hushed(const struct passwd *pw)
 	 */
 
 	if (hushfile[0] != '/') {
-		snprintf(buf, sizeof(buf), "%s/%s", pw->pw_dir, hushfile);
-		return (access(buf, F_OK) == 0);
+		snprintf (buf, sizeof (buf), "%s/%s", pw->pw_dir,
+			  hushfile);
+		return (access (buf, F_OK) == 0);
 	}
 
 	/*
@@ -77,14 +74,15 @@ hushed(const struct passwd *pw)
 	 * and see if this user is in there.
 	 */
 
-	if ((fp = fopen(hushfile, "r")) == NULL)
+	if ((fp = fopen (hushfile, "r")) == NULL)
 		return 0;
 
-	for (found = 0;! found && fgets (buf, sizeof buf, fp);) {
+	for (found = 0; !found && fgets (buf, sizeof buf, fp);) {
 		buf[strlen (buf) - 1] = '\0';
-		found = ! strcmp (buf,
-			buf[0] == '/' ? pw->pw_shell:pw->pw_name);
+		found = !strcmp (buf,
+				 buf[0] ==
+				 '/' ? pw->pw_shell : pw->pw_name);
 	}
-	(void) fclose(fp);
+	(void) fclose (fp);
 	return found;
 }

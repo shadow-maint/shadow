@@ -27,7 +27,7 @@
 #include "sgroupio.h"
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpconv.c,v 1.12 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpconv.c,v 1.15 2003/06/19 18:11:01 kloczek Exp $")
 
 static int group_locked = 0;
 static int gshadow_locked = 0;
@@ -105,11 +105,6 @@ int main (int argc, char **argv)
 	while ((gr = gr_next ())) {
 		sg = sgr_locate (gr->gr_name);
 		if (sg) {
-#if 0				/* because of sg_mem, but see below */
-			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) ==
-			    0)
-				continue;
-#endif
 			/* update existing shadow group entry */
 			sgent = *sg;
 			if (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) !=
@@ -167,12 +162,8 @@ int main (int argc, char **argv)
 #else				/* !SHADOWGRP */
 int main (int argc, char **argv)
 {
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
 	fprintf (stderr,
-		 _("%s: not configured for shadow group support.\n"),
+		 "%s: not configured for shadow group support.\n",
 		 argv[0]);
 	exit (1);
 }

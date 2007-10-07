@@ -30,7 +30,7 @@
 /*
  * lastlog.h - structure of lastlog file
  *
- *	$Id: lastlog_.h,v 1.2 1997/05/01 23:14:42 marekm Exp $
+ *	$Id: lastlog_.h,v 1.3 2003/12/17 12:52:25 kloczek Exp $
  *
  *	This file defines a lastlog file structure which should be sufficient
  *	to hold the information required by login.  It should only be used if
@@ -40,8 +40,23 @@
 #ifndef __LASTLOG_H
 #define __LASTLOG_H
 
+#if defined(__GLIBC__)
+#error "glibc shall have fixed <lastlog.h> already, which is <utmp.h>"
+#endif
+
+#if __WORDSIZE == 64 && defined __WORDSIZE_COMPAT32
+/* Recent dietlibc will support those conditionnals */
+#define LASTLOG_NEEDS_32BIT_LL_TIME 1
+#elif defined(__x86_64__) || defined(__powerpc64__) || defined(__sparc_v9__)
+#error "I don't know what to do here, what kind of C library are you using?"
+#endif
+
 struct	lastlog	{
+#if LASTLOG_NEEDS_32BIT_LL_TIME
+    unsigned int ll_time;
+#else
 	time_t	ll_time;
+#endif
 	char	ll_line[12];
 	char	ll_host[16];
 };

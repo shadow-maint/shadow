@@ -1,4 +1,4 @@
-.\" $Id: groupdel.8,v 1.6 2002/03/09 11:16:18 ankry Exp $
+.\" $Id: groupdel.8,v 1.7 2003/04/28 17:52:15 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
@@ -42,10 +42,22 @@ nie pozosta³y ¿adne pliki, dla których wymieniona grupa jest grup± w³a¶cicieli.
 Nie mo¿esz usun±æ podstawowej grupy ¿adnego z istniej±cych u¿ytkowników.
 Musisz usun±æ u¿ytkownika przed usuniêciem takiej grupy.
 .SH PLIKI
-.IR /etc/group "   - informacja o grupach"
+\fI/etc/group\fR	\- informacja o grupach
 .br
-.IR /etc/gshadow " - bezpieczna informacja o grupach"
-.\" secure group information
+\fI/etc/gshadow\fR	\- bezpieczna informacja o grupach
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBgroupdel\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB6\fR	\- podana grupa nie istnieje
+.br
+\fB8\fR	\- nie mo¿na usun±æ grupy podstawowej u¿ytykownika
+.br
+\fB10\fR	\- nie mo¿na zaktualizowaæ pliku z grupami
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),
@@ -57,8 +69,3 @@ Musisz usun±æ u¿ytkownika przed usuniêciem takiej grupy.
 .BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
-grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
-z w³a¶ciwej dokumentacji.

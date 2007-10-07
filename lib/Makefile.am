@@ -2,22 +2,18 @@
 AUTOMAKE_OPTIONS = 1.0 foreign
 
 DEFS = 
-INCLUDES = -I$(top_srcdir)
+INCLUDES =
 
 lib_LTLIBRARIES = libshadow.la
 
 libshadow_la_LDFLAGS = -version-info 0:0:0
-libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBTCFS) $(LIBSKEY) $(LIBMD) \
+libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD) \
 	$(top_builddir)/libmisc/libmisc.la
 
 libshadow_la_SOURCES = \
 	commonio.c \
 	commonio.h \
 	defines.h \
-	dialchk.c \
-	dialchk.h \
-	dialup.c \
-	dialup.h \
 	encrypt.c \
 	faillog.h \
 	fputsx.c \
@@ -29,6 +25,8 @@ libshadow_la_SOURCES = \
 	gshadow.c \
 	lockpw.c \
 	md5.h \
+	nscd.c \
+	nscd.h \
 	pam_defs.h \
 	port.c \
 	port.h \
@@ -47,8 +45,6 @@ libshadow_la_SOURCES = \
 	shadowio.c \
 	shadowio.h \
 	snprintf.h \
-	tcfsio.c \
-	tcfsio.h \
 	utent.c
 
 EXTRA_libshadow_la_SOURCESS = grent.c pwent.c mkdir.c rename.c rmdir.c \

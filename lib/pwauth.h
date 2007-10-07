@@ -26,14 +26,10 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	$Id: pwauth.h,v 1.2 1997/05/01 23:14:44 marekm Exp $
+ *	$Id: pwauth.h,v 1.3 2003/05/12 06:08:31 kloczek Exp $
  */
 
-#if	__STDC__
-int pw_auth(const char *program,const char *user,int flag,const char *input);
-#else
-int	pw_auth ();
-#endif
+int pw_auth(const char *cipher,const char *user,int flag,const char *input);
 
 /*
  * Local access

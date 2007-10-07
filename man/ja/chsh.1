@@ -1,3 +1,4 @@
+.\"$Id: chsh.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,46 +26,47 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chsh.1,v 1.2 2001/11/16 17:01:32 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH CHSH 1
 .SH 名前
-chsh \- ログインシェルを変更する。
+chsh \- ログインシェルを変更する
 .SH 書式
 .TP 5
 \fBchsh\fR
 [\fB-s \fIlogin_shell\fR] [\fIuser\fR]
 .SH 説明
-\fBchsh\fRはユーザのログインシェルを変更する。
+\fBchsh\fR はユーザのログインシェルを変更する。
 これによって、ユーザがログインして最初に実行されるコマンドが決まる。
 一般ユーザは自分のアカウントのログインシェルのみを変更できる。
-スーパーユーザは全てのアカウントのログインシェルを変更することが出来る。
+スーパーユーザは全てのアカウントのログインシェルを変更できる。
 .PP
-ログインシェルは、コマンド名が\fI/etc/shells\fRに記載されていればなんでも良い。
+ログインシェルは、
+コマンド名が \fI/etc/shells\fR に記載されていればなんでも良い。
 スーパーユーザの場合はこの制限はなく、いかなる値でも指定できる。
 機能を制限されたログインシェルを用いているアカウントからは、
-ログインシェルを変更出来ない。
-この理由から、\fB/bin/rsh\fRを\fI/etc/shells\fRに書くことは勧められない。
-機能が制限されたシェルに誤って変更してしまった場合、どうやっても
-ログインシェルを元のものに戻すことが出来なくなってしまうからである。
+ログインシェルを変更できないかもしれない。
+この理由から、
+\fB/bin/rsh\fR は \fI/etc/shells\fR には書かないほうが良い。
+誤って機能が制限されたシェルに変更してしまうと、
+ログインシェルを元のものに戻せなくなってしまうからである。
 .PP
-\fB-s\fRオプションを指定しなかった場合は、
-\fBchsh\fRは対話的に動作し、各欄に対して現在の設定値を表示し、
-新しい値の入力を促す。
+\fB-s\fR オプションを指定しなかった場合は、
+\fBchsh\fR は対話的に動作する。
+ユーザの現在のログインシェルを表示し、新しい値の入力を促す。
 設定値を変更するなら新しい値を入力し、
-又は現在の値を使うなら空行のままリターンキーを押せばよい。
-現在の値は一対の \fB[ ]\fR 記号の間に表示される。
+現在の値を使うなら空行のままリターンキーを押せばよい。
+現在のシェルは \fB[ ]\fR 記号の間に表示される。
 .SH ファイル
-/etc/passwd \- ユーザのアカウント情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/shells \- 指定できるログインシェルのリスト
+\fI/etc/shells\fR \- 指定できるログインシェルのリスト
 .SH 関連項目
 .BR chfn (1),
 .BR passwd (5)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

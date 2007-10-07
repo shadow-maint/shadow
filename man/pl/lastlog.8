@@ -1,4 +1,4 @@
-.\" $Id: lastlog.8,v 1.5 2001/01/27 02:55:54 kloczek Exp $
+.\" $Id: lastlog.8,v 1.8 2003/04/28 06:38:54 kloczek Exp $
 .\" {PTM/WK/1999-09-18}
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
@@ -33,14 +33,14 @@
 lastlog \- sprawd¼ plik ostatnich logowañ (lastlog)
 .SH SK£ADNIA
 .TP 8
-\fBlastlog\fR [<\fB-u\fR|\fB--user\fR> \fIlogin-u¿ytkownika\fR]
-[<\fB-t\fR|\fB--time\fR> \fIdni\fR] [<\fB-h\fR|\fB--help\fR>]
+\fBlastlog\fR [(\fB-u\fR|\fB--user\fR) \fIlogin\fR]
+[(\fB-t\fR|\fB--time\fR) \fIdni\fR] [(\fB-h\fR|\fB--help\fR)]
 .SH OPIS
 \fBlastlog\fR formatuje i wy¶wietla zawarto¶æ dziennika ostatnich logowañ
 zapisanych w pliku \fI/var/log/lastlog\fR. Wy¶wietlone zostan± \fBnazwa
 u¿ytkownika\fR, \fBport\fR i \fBczas ostatniego logowania\fR. Domy¶lnie (bez
-flag) pozycje pliku wy¶wietlane s± w kolejno¶ci identyfikatorów u¿ytkowników
-(UID).
+flag) pozycje pliku wy¶wietlane s± w kolejno¶ci w jakiej s± w pliku
+\fB/etc/passwd\fR.
 .TP
 \fB-u\fR, \fB--user\fR \fIlogin-u¿ytkownika\fR spowoduje wy¶wietlenie tylko
 pozycji opisuj±cej ostatnie rozpoczêcie sesji tylko dla u¿ytkownika
@@ -58,7 +58,7 @@ Je¿eli u¿ytkownik nigdy siê nie logowa³ to zamiast portu i czasu logowania
 zostanie wy¶wietlony komunikat \fB"**Never logged in**"\fR (nigdy siê nie
 logowa³).
 .SH PLIKI
-\fI/var/log/lastlog\fR " - dziennik ostatnich logowañ"
+\fI/var/log/lastlog\fR \- dziennik ostatnich logowañ
 .SH PRZESTROGI
 Du¿e luki w numeracji UID powoduj±, ¿e program bêdzie pracowa³ d³u¿ej, nie
 wy¶wietlaj±c wyników (np. je¶li mmdf=800, za¶ ostatni uid=170, to program

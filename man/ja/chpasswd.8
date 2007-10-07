@@ -1,3 +1,4 @@
+.\"$Id: chpasswd.8,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,43 +26,45 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chpasswd.8,v 1.2 2001/11/16 17:01:32 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
 .\" Updated Wed Apr 26 18:06:10 JST 2000
 .\"         by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH CHPASSWD 8
 .SH 名前
 \fBchpasswd\fR \- パスワードファイルをバッチ処理で更新する
 .SH 書式
-\fBchpasswd [-e]\fR
+\fBchpasswd\fR [\fB-e\fR]
 .SH 説明
-\fBchpasswd\fRコマンドは標準入力からユーザ名とパスワード
-の組が記されているファイルを読み込み、その情報を用いて既存のユーザ群の
-パスワード情報を更新する。
--e オプションがない場合は、パスワードは平文と見なされる。
--e オプションがある場合は、パスワードは暗号化されていると見なされる。
-各行は
+\fBchpasswd\fR コマンドは
+標準入力からユーザ名とパスワードの組が記されているファイルを読み込み、
+その情報を用いて既存のユーザ群のパスワード情報を更新する。
+-e オプションがない場合は、パスワードは平文とみなされる。
+-e オプションがある場合は、パスワードは暗号化されているとみなされる。
+各行の書式は次の通り。
 .sp 1
 	  \fIuser_name\fR:\fIpassword\fR
 .sp 1
-という書式である。
-指定したユーザは既に存在していなくてはならない。
-与えられたパスワードは必要に応じて暗号化され、パスワードの有効期限が存在するなら
-それも更新される。
+指定したユーザは既に存在していなければならない。
+与えられたパスワードは必要に応じて暗号化され、
+パスワードの有効期限がある場合はそれも更新される。
 .PP
-このコマンドは、同時に大量のアカウントを作成する様な大規模なシステム環境
-で使用することを意図している。
+このコマンドは、同時に大量のアカウントを作成するような、
+大規模なシステム環境で用いるために作られた。
 .SH 警告
+.\" The \fBmkpasswd\fR command must be executed afterwards to update the
+.\" DBM password files.
 入力ファイルに暗号化されていないパスワードが記されている場合は、
-プロテクトをかけておかなくてはならない。
+適切に保護しておかなければならない。
+.\" This command may be discarded in favor of the newusers(8) command.
 .SH 関連項目
+.\" mkpasswd(8), passwd(1), useradd(1)
 .BR passwd (1),
-.BR useradd (8),
-.BR newusers (8)
+.BR newusers (8),
+.BR useradd (8)
 .SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

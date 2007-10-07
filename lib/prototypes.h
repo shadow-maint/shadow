@@ -6,7 +6,7 @@
  * Juha Virtanen, <jiivee@hut.fi>; November 1995
  */
 /*
- * $Id: prototypes.h,v 1.14 2000/08/26 18:27:17 marekm Exp $
+ * $Id: prototypes.h,v 1.15 2003/04/25 21:33:47 kloczek Exp $
  *
  * Added a macro to work around ancient (non-ANSI) compilers, just in case
  * someone ever tries to compile this with SunOS cc...  --marekm
@@ -16,7 +16,11 @@
 #define _PROTOTYPES_H
 
 #include <sys/stat.h>
+#if HAVE_UTMPX_H
+#include <utmpx.h>
+#else
 #include <utmp.h>
+#endif
 #include <pwd.h>
 #include <grp.h>
 

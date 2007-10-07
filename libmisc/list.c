@@ -33,11 +33,9 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: list.c,v 1.3 1997/12/07 23:27:05 marekm Exp $")
-
+RCSID ("$Id: list.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
-
 /*
  * add_list - add a member to a list of group members
  *
@@ -45,19 +43,17 @@ RCSID("$Id: list.c,v 1.3 1997/12/07 23:27:05 marekm Exp $")
  *	name, and if not present it is added to a freshly allocated
  *	list of users.
  */
-
-char **
-add_list(char **list, const char *member)
+char **add_list (char **list, const char *member)
 {
-	int	i;
-	char	**tmp;
+	int i;
+	char **tmp;
 
 	/*
 	 * Scan the list for the new name.  Return the original list
 	 * pointer if it is present.
 	 */
 
-	for (i = 0;list[i] != (char *) 0;i++)
+	for (i = 0; list[i] != (char *) 0; i++)
 		if (strcmp (list[i], member) == 0)
 			return list;
 
@@ -74,7 +70,7 @@ add_list(char **list, const char *member)
 	 * is returned to the invoker.
 	 */
 
-	for (i = 0;list[i] != (char *) 0;i++)
+	for (i = 0; list[i] != (char *) 0; i++)
 		tmp[i] = list[i];
 
 	tmp[i++] = xstrdup (member);
@@ -91,18 +87,17 @@ add_list(char **list, const char *member)
  *	list of users.
  */
 
-char **
-del_list(char **list, const char *member)
+char **del_list (char **list, const char *member)
 {
-	int	i, j;
-	char	**tmp;
+	int i, j;
+	char **tmp;
 
 	/*
 	 * Scan the list for the old name.  Return the original list
 	 * pointer if it is not present.
 	 */
 
-	for (i = j = 0;list[i] != (char *) 0;i++)
+	for (i = j = 0; list[i] != (char *) 0; i++)
 		if (strcmp (list[i], member))
 			j++;
 
@@ -122,7 +117,7 @@ del_list(char **list, const char *member)
 	 * is returned to the invoker.
 	 */
 
-	for (i = j = 0;list[i] != (char *) 0;i++)
+	for (i = j = 0; list[i] != (char *) 0; i++)
 		if (strcmp (list[i], member))
 			tmp[j++] = list[i];
 
@@ -131,30 +126,27 @@ del_list(char **list, const char *member)
 	return tmp;
 }
 
-char **
-dup_list(char * const *list)
+char **dup_list (char *const *list)
 {
 	int i;
 	char **tmp;
 
-	for (i = 0; list[i]; i++)
-		;
+	for (i = 0; list[i]; i++);
 
-	tmp = (char **) xmalloc((i + 1) * sizeof(char *));
+	tmp = (char **) xmalloc ((i + 1) * sizeof (char *));
 
 	i = 0;
 	while (*list)
-		tmp[i++] = xstrdup(*list++);
+		tmp[i++] = xstrdup (*list++);
 
 	tmp[i] = (char *) 0;
 	return tmp;
 }
 
-int
-is_on_list(char * const *list, const char *member)
+int is_on_list (char *const *list, const char *member)
 {
 	while (*list) {
-		if (strcmp(*list, member) == 0)
+		if (strcmp (*list, member) == 0)
 			return 1;
 		list++;
 	}
@@ -165,13 +157,12 @@ is_on_list(char * const *list, const char *member)
  * comma_to_list - convert comma-separated list to (char *) array
  */
 
-char **
-comma_to_list(const char *comma)
+char **comma_to_list (const char *comma)
 {
-	char	*members;
-	char	**array;
-	int	i;
-	char	*cp, *cp2;
+	char *members;
+	char **array;
+	int i;
+	char *cp, *cp2;
 
 	/*
 	 * Make a copy since we are going to be modifying the list
@@ -183,7 +174,7 @@ comma_to_list(const char *comma)
 	 * Count the number of commas in the list
 	 */
 
-	for (cp = members, i = 0;;i++)
+	for (cp = members, i = 0;; i++)
 		if ((cp2 = strchr (cp, ',')))
 			cp = cp2 + 1;
 		else
@@ -215,7 +206,7 @@ comma_to_list(const char *comma)
 	 * array of pointers.
 	 */
 
-	for (cp = members, i = 0;;i++) {
+	for (cp = members, i = 0;; i++) {
 		array[i] = cp;
 		if ((cp2 = strchr (cp, ','))) {
 			*cp2++ = '\0';

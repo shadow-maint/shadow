@@ -30,33 +30,30 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: env.c,v 1.9 1999/03/07 19:14:38 marekm Exp $")
-
+RCSID ("$Id: env.c,v 1.10 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "prototypes.h"
 #include "defines.h"
-
 /*
  * NEWENVP_STEP must be a power of two.  This is the number
  * of (char *) pointers to allocate at a time, to avoid using
  * realloc() too often.
- */ 
+ */
 #define NEWENVP_STEP 16
-
 size_t newenvc = 0;
 char **newenvp = NULL;
 extern char **environ;
 
 static const char *forbid[] = {
 	"_RLD_=",
-	"BASH_ENV=",	/* GNU creeping featurism strikes again... */
+	"BASH_ENV=",		/* GNU creeping featurism strikes again... */
 	"ENV=",
 	"HOME=",
 	"IFS=",
 	"KRB_CONF=",
-	"LD_",		/* anything with the LD_ prefix */
+	"LD_",			/* anything with the LD_ prefix */
 	"LIBPATH=",
 	"MAIL=",
 	"NLSPATH=",
@@ -71,33 +68,31 @@ static const char *forbid[] = {
 static const char *noslash[] = {
 	"LANG=",
 	"LANGUAGE=",
-	"LC_",		/* anything with the LC_ prefix */
+	"LC_",			/* anything with the LC_ prefix */
 	(char *) 0
 };
 
 /*
  * initenv() must be called once before using addenv().
  */
-void
-initenv(void)
+void initenv (void)
 {
-	newenvp = (char **)xmalloc(NEWENVP_STEP * sizeof(char *));
+	newenvp = (char **) xmalloc (NEWENVP_STEP * sizeof (char *));
 	*newenvp = NULL;
 }
 
 
-void
-addenv(const char *string, const char *value)
+void addenv (const char *string, const char *value)
 {
 	char *cp, *newstring;
 	size_t i;
 	size_t n;
 
 	if (value) {
-		newstring = xmalloc(strlen(string) + strlen(value) + 2);
-		sprintf(newstring, "%s=%s", string, value);
+		newstring = xmalloc (strlen (string) + strlen (value) + 2);
+		sprintf (newstring, "%s=%s", string, value);
 	} else {
-		newstring = xstrdup(string);
+		newstring = xstrdup (string);
 	}
 
 	/*
@@ -105,22 +100,22 @@ addenv(const char *string, const char *value)
 	 * just ignore the whole string.
 	 */
 
-	cp = strchr(newstring, '=');
+	cp = strchr (newstring, '=');
 	if (!cp) {
-		free(newstring);
+		free (newstring);
 		return;
 	}
 
-	n = (size_t)(cp - newstring);
+	n = (size_t) (cp - newstring);
 
 	for (i = 0; i < newenvc; i++) {
-		if (strncmp(newstring, newenvp[i], n) == 0 &&
+		if (strncmp (newstring, newenvp[i], n) == 0 &&
 		    (newenvp[i][n] == '=' || newenvp[i][n] == '\0'))
 			break;
 	}
 
 	if (i < newenvc) {
-		free(newenvp[i]);
+		free (newenvp[i]);
 		newenvp[i] = newstring;
 		return;
 	}
@@ -144,8 +139,8 @@ addenv(const char *string, const char *value)
 		 * happily go on, else print a message.
 		 */
 
-		newsize = (newenvc + NEWENVP_STEP) * sizeof(char *);
-		__newenvp = (char **)realloc(newenvp, newsize);
+		newsize = (newenvc + NEWENVP_STEP) * sizeof (char *);
+		__newenvp = (char **) realloc (newenvp, newsize);
 
 		if (__newenvp) {
 			/*
@@ -157,8 +152,8 @@ addenv(const char *string, const char *value)
 				environ = __newenvp;
 			newenvp = __newenvp;
 		} else {
-			fprintf(stderr, _("Environment overflow\n"));
-			free(newenvp[--newenvc]);
+			fprintf (stderr, _("Environment overflow\n"));
+			free (newenvp[--newenvc]);
 		}
 	}
 
@@ -173,35 +168,36 @@ addenv(const char *string, const char *value)
 /*
  * set_env - copy command line arguments into the environment
  */
-void
-set_env(int argc, char * const *argv)
+void set_env (int argc, char *const *argv)
 {
-	int	noname = 1;
-	char	variable[1024];
-	char	*cp;
+	int noname = 1;
+	char variable[1024];
+	char *cp;
 
-	for ( ; argc > 0; argc--, argv++) {
-		if (strlen(*argv) >= sizeof variable)
+	for (; argc > 0; argc--, argv++) {
+		if (strlen (*argv) >= sizeof variable)
 			continue;	/* ignore long entries */
 
-		if (! (cp = strchr (*argv, '='))) {
-			snprintf(variable, sizeof variable, "L%d", noname++);
-			addenv(variable, *argv);
+		if (!(cp = strchr (*argv, '='))) {
+			snprintf (variable, sizeof variable, "L%d",
+				  noname++);
+			addenv (variable, *argv);
 		} else {
 			const char **p;
 
 			for (p = forbid; *p; p++)
-				if (strncmp(*argv, *p, strlen(*p)) == 0)
+				if (strncmp (*argv, *p, strlen (*p)) == 0)
 					break;
 
 			if (*p) {
-				strncpy(variable, *argv, cp - *argv);
+				strncpy (variable, *argv, cp - *argv);
 				variable[cp - *argv] = '\0';
-				printf(_("You may not change $%s\n"), variable);
+				printf (_("You may not change $%s\n"),
+					variable);
 				continue;
 			}
 
-			addenv(*argv, NULL);
+			addenv (*argv, NULL);
 		}
 	}
 }
@@ -215,8 +211,7 @@ set_env(int argc, char * const *argv)
  * but... I feel better with that silly precaution. -j.
  */
 
-void
-sanitize_env(void)
+void sanitize_env (void)
 {
 	char **envp = environ;
 	const char **bad;
@@ -225,7 +220,7 @@ sanitize_env(void)
 
 	for (cur = envp; *cur; cur++) {
 		for (bad = forbid; *bad; bad++) {
-			if (strncmp(*cur, *bad, strlen(*bad)) == 0) {
+			if (strncmp (*cur, *bad, strlen (*bad)) == 0) {
 				for (move = cur; *move; move++)
 					*move = *(move + 1);
 				cur--;
@@ -236,10 +231,10 @@ sanitize_env(void)
 
 	for (cur = envp; *cur; cur++) {
 		for (bad = noslash; *bad; bad++) {
-			if (strncmp(*cur, *bad, strlen(*bad)) != 0)
+			if (strncmp (*cur, *bad, strlen (*bad)) != 0)
 				continue;
-			if (!strchr(*cur, '/'))
-				continue;  /* OK */
+			if (!strchr (*cur, '/'))
+				continue;	/* OK */
 			for (move = cur; *move; move++)
 				*move = *(move + 1);
 			cur--;
@@ -247,4 +242,3 @@ sanitize_env(void)
 		}
 	}
 }
-

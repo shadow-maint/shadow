@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chage.c,v 1.27 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: chage.c,v 1.32 2003/06/19 17:57:15 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -39,6 +39,7 @@ RCSID (PKG_VER "$Id: chage.c,v 1.27 2002/01/05 15:41:43 kloczek Exp $")
 #include <time.h>
 #include "prototypes.h"
 #include "defines.h"
+#ifdef SHADOWPWD
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
@@ -49,17 +50,23 @@ RCSID (PKG_VER "$Id: chage.c,v 1.27 2002/01/05 15:41:43 kloczek Exp $")
  */
 static char *Prog;
 
+static int
+ dflg = 0,			/* set last password change date */
+ Eflg = 0,			/* set account expiration date */
+ Iflg = 0,			/* set password inactive after expiration */
+ lflg = 0,			/* show account aging information */
+ mflg = 0,			/* set minimum number of days before password change */
+ Mflg = 0,			/* set maximim number of days before password change */
+ Wflg = 0;			/* set expiration warning days */
+
 static int locks;
 
 static long mindays;
 static long maxdays;
 static long lastday;
-
-#ifdef	SHADOWPWD
 static long warndays;
 static long inactdays;
 static long expdays;
-#endif
 
 /*
  * External identifiers
@@ -70,16 +77,11 @@ extern char *l64a ();
 
 #include "pwio.h"
 
-#ifdef	SHADOWPWD
 #include "shadowio.h"
-#endif
 
 #ifdef	NDBM
 extern int pw_dbm_mode;
-
-#ifdef	SHADOWPWD
 extern int sp_dbm_mode;
-#endif
 #endif
 
 #define	EPOCH		"1969-12-31"
@@ -111,17 +113,10 @@ int isnum (const char *s)
 
 static void usage (void)
 {
-#ifdef SHADOWPWD
-	fprintf (stderr,
-		 _("Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-		   "\t[-I inactive] [-E expire] [-d last_day] user\n"),
-		 Prog);
-#else
 	fprintf (stderr,
 		 _
-		 ("Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"),
-		 Prog);
-#endif
+		 ("Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+		  "             [-I inactive] [-E expire] [-d last_day] user\n"));
 	exit (1);
 }
 
@@ -178,7 +173,6 @@ static int new_fields (void)
 	else if ((lastday = strtoday (buf)) == -1)
 		return 0;
 
-#ifdef	SHADOWPWD
 	snprintf (buf, sizeof buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
 	if (((warndays = strtol (buf, &cp, 10)) == 0 && *cp)
@@ -200,7 +194,6 @@ static int new_fields (void)
 		expdays = -1;
 	else if ((expdays = strtoday (buf)) == -1)
 		return 0;
-#endif				/* SHADOWPWD */
 
 	return 1;
 }
@@ -247,10 +240,8 @@ static void list_fields (void)
 
 	printf (_("Minimum:\t%ld\n"), mindays);
 	printf (_("Maximum:\t%ld\n"), maxdays);
-#ifdef SHADOWPWD
 	printf (_("Warning:\t%ld\n"), warndays);
 	printf (_("Inactive:\t%ld\n"), inactdays);
-#endif
 
 	/*
 	 * The "last change" date is either "Never" or the date the password
@@ -279,7 +270,6 @@ static void list_fields (void)
 		print_date (expires);
 	}
 
-#ifdef	SHADOWPWD
 	/*
 	 * The account becomes inactive if the password is expired for more
 	 * than "inactdays". The expiration date is calculated and the
@@ -308,7 +298,6 @@ static void list_fields (void)
 		expires = expdays * SCALE;
 		print_date (expires);
 	}
-#endif
 }
 
 #ifdef USE_PAM
@@ -319,46 +308,49 @@ static struct pam_conv conv = {
 #endif				/* USE_PAM */
 
 /*
+ * cleanup - unlock any locked password files
+ */
+
+static void cleanup (int state)
+{
+	switch (state) {
+	case 2:
+		if (locks)
+			spw_unlock ();
+	case 1:
+		if (locks)
+			pw_unlock ();
+	case 0:
+		break;
+	}
+}
+
+/*
  * chage - change a user's password aging information
  *
  *	This command controls the password aging information.
  *
  *	The valid options are
  *
- *	-m	minimum number of days before password change (*)
- *	-M	maximim number of days before password change (*)
- *	-d	last password change date (*)
- *	-l	password aging information
- *	-W	expiration warning days (*)
- *	-I	password inactive after expiration (*)
- *	-E	account expiration date (*)
+ *	-m	set minimum number of days before password change (*)
+ *	-M	set maximim number of days before password change (*)
+ *	-d	set last password change date (*)
+ *	-l	show account aging information
+ *	-W	set expiration warning days (*)
+ *	-I	set password inactive after expiration (*)
+ *	-E	set account expiration date (*)
  *
  *	(*) requires root permission to execute.
  *
  *	All of the time fields are entered in the internal format which is
  *	either seconds or days.
- *
- *	The options -W, -I and -E all depend on the SHADOWPWD macro being
- *	defined.
  */
 
 int main (int argc, char **argv)
 {
 	int flag;
-	int lflg = 0;
-	int mflg = 0;
-	int Mflg = 0;
-	int dflg = 0;
-
-#ifdef	SHADOWPWD
-	int Wflg = 0;
-	int Iflg = 0;
-	int Eflg = 0;
 	const struct spwd *sp;
 	struct spwd spwd;
-#else
-	char new_age[5];
-#endif
 	uid_t ruid;
 	int amroot, pwrw;
 	const struct passwd *pw;
@@ -388,9 +380,7 @@ int main (int argc, char **argv)
 	OPENLOG ("chage");
 
 #ifdef	NDBM
-#ifdef	SHADOWPWD
 	sp_dbm_mode = O_RDWR;
-#endif
 	pw_dbm_mode = O_RDWR;
 #endif
 
@@ -402,13 +392,7 @@ int main (int argc, char **argv)
 	 * weeks.
 	 */
 
-#ifdef SHADOWPWD
-#define FLAGS "lm:M:W:I:E:d:"
-#else
-#define FLAGS "lm:M:d:"
-#endif
-	while ((flag = getopt (argc, argv, FLAGS)) != EOF) {
-#undef FLAGS
+	while ((flag = getopt (argc, argv, "lm:M:W:I:E:d:")) != EOF) {
 		switch (flag) {
 		case 'l':
 			lflg++;
@@ -428,7 +412,6 @@ int main (int argc, char **argv)
 			else
 				lastday = strtol (optarg, 0, 10);
 			break;
-#ifdef	SHADOWPWD
 		case 'W':
 			Wflg++;
 			warndays = strtol (optarg, 0, 10);
@@ -444,7 +427,6 @@ int main (int argc, char **argv)
 			else
 				expdays = strtol (optarg, 0, 10);
 			break;
-#endif
 		default:
 			usage ();
 		}
@@ -458,12 +440,7 @@ int main (int argc, char **argv)
 	if (argc != optind + 1)
 		usage ();
 
-#ifdef	SHADOWPWD
-	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg))
-#else
-	if (lflg && (mflg || Mflg || dflg))
-#endif
-	{
+	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
 		fprintf (stderr,
 			 _("%s: do not include \"l\" with other flags\n"),
 			 Prog);
@@ -528,18 +505,7 @@ int main (int argc, char **argv)
 	 * file entries into memory. Then we get a pointer to the password
 	 * file entry for the requested user.
 	 */
-#ifndef SHADOWPWD
-	if (locks && !pw_lock ()) {
-		fprintf (stderr, _("%s: can't lock password file\n"),
-			 Prog);
-		SYSLOG ((LOG_ERR, "failed locking %s", PASSWD_FILE));
-		closelog ();
-		exit (1);
-	}
-	pwrw = locks;
-#else
 	pwrw = 0;
-#endif
 	if (!pw_open (pwrw ? O_RDWR : O_RDONLY)) {
 		fprintf (stderr, _("%s: can't open password file\n"),
 			 Prog);
@@ -559,7 +525,6 @@ int main (int argc, char **argv)
 	pwent = *pw;
 	STRFCPY (name, pwent.pw_name);
 
-#ifdef	SHADOWPWD
 	/*
 	 * For shadow password files we have to lock the file and read in
 	 * the entries as was done for the password file. The user entries
@@ -612,35 +577,6 @@ int main (int argc, char **argv)
 		if (!Eflg)
 			expdays = spwd.sp_expire;
 	}
-#ifdef	ATT_AGE
-	else
-#endif				/* ATT_AGE */
-#endif				/* SHADOWPWD */
-#ifdef	ATT_AGE
-	{
-		if (pwent.pw_age && strlen (pwent.pw_age) >= 2) {
-			if (!Mflg)
-				maxdays =
-				    c64i (pwent.pw_age[0]) * (WEEK /
-							      SCALE);
-			if (!mflg)
-				mindays =
-				    c64i (pwent.pw_age[1]) * (WEEK /
-							      SCALE);
-			if (!dflg && strlen (pwent.pw_age) == 4)
-				lastday =
-				    a64l (pwent.pw_age +
-					  2) * (WEEK / SCALE);
-		} else {
-			mindays = 0;
-			maxdays = 10000L * (DAY / SCALE);
-			lastday = -1;
-		}
-#ifdef	SHADOWPWD
-		warndays = inactdays = expdays = -1;
-#endif				/* SHADOWPWD */
-	}
-#endif				/* ATT_AGE */
 
 	/*
 	 * Print out the expiration fields if the user has requested the
@@ -665,12 +601,7 @@ int main (int argc, char **argv)
 	 * user interactively change them.
 	 */
 
-#ifdef	SHADOWPWD
-	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg)
-#else
-	if (!mflg && !Mflg && !dflg)
-#endif
-	{
+	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg) {
 		printf (_("Changing the aging information for %s\n"),
 			name);
 		if (!new_fields ()) {
@@ -681,7 +612,6 @@ int main (int argc, char **argv)
 			exit (1);
 		}
 	}
-#ifdef	SHADOWPWD
 	/*
 	 * There was no shadow entry. The new entry will have the encrypted
 	 * password transferred from the normal password file along with the
@@ -697,9 +627,6 @@ int main (int argc, char **argv)
 		spwd.sp_flag = -1;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-#ifdef	ATT_AGE
-		pwent.pw_age = "";
-#endif
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
 				 _("%s: can't update password file\n"),
@@ -715,9 +642,6 @@ int main (int argc, char **argv)
 		endpwent ();
 #endif
 	}
-#endif				/* SHADOWPWD */
-
-#ifdef	SHADOWPWD
 
 	/*
 	 * Copy the fields back to the shadow file entry and write the
@@ -741,44 +665,7 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (1);
 	}
-#else				/* !SHADOWPWD */
-
-	/*
-	 * fill in the new_age string with the new values
-	 */
-
-	if (maxdays > (63 * 7) && mindays == 0) {
-		new_age[0] = '\0';
-	} else {
-		if (maxdays > (63 * 7))
-			maxdays = 63 * 7;
-
-		if (mindays > (63 * 7))
-			mindays = 63 * 7;
-
-		new_age[0] = i64c (maxdays / 7);
-		new_age[1] = i64c ((mindays + 6) / 7);
-
-		if (lastday == 0)
-			new_age[2] = '\0';
-		else
-			strcpy (new_age + 2, l64a (lastday / 7));
-
-	}
-	pwent.pw_age = new_age;
-
-	if (!pw_update (&pwent)) {
-		fprintf (stderr, _("%s: can't update password file\n"),
-			 Prog);
-		cleanup (2);
-		SYSLOG ((LOG_ERR, "failed updating %s", PASSWD_FILE));
-		closelog ();
-		exit (1);
-	}
-#endif				/* SHADOWPWD */
-
 #ifdef	NDBM
-#ifdef	SHADOWPWD
 
 	/*
 	 * See if the shadow DBM file exists and try to update it.
@@ -794,25 +681,8 @@ int main (int argc, char **argv)
 	}
 	endspent ();
 
-#else				/* !SHADOWPWD */
-
-	/*
-	 * See if the password DBM file exists and try to update it.
-	 */
-
-	if (pw_dbm_present () && !pw_dbm_update (&pwent)) {
-		fprintf (stderr,
-			 _("Error updating the DBM password entry.\n"));
-		cleanup (2);
-		SYSLOG ((LOG_ERR, "error updating DBM passwd entry"));
-		closelog ();
-		exit (1);
-	}
-	endpwent ();
-#endif				/* SHADOWPWD */
 #endif				/* NDBM */
 
-#ifdef	SHADOWPWD
 	/*
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
@@ -827,7 +697,6 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (1);
 	}
-#endif				/* SHADOWPWD */
 
 	/*
 	 * Close the password file. If any entries were modified, the file
@@ -844,6 +713,7 @@ int main (int argc, char **argv)
 	}
 	cleanup (2);
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", name));
+
 #ifdef USE_PAM
 	if (!lflg) {
 		if (retval == PAM_SUCCESS) {
@@ -862,30 +732,22 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS)
 		pam_end (pamh, PAM_SUCCESS);
+
 #endif				/* USE_PAM */
 
 	closelog ();
+
+
 	exit (0);
- /*NOTREACHED*/}
-
-/*
- * cleanup - unlock any locked password files
- */
-
-static void cleanup (int state)
-{
-	switch (state) {
-	case 2:
-#ifdef	SHADOWPWD
-		if (locks)
-			spw_unlock ();
-#endif
-	case 1:
-#ifndef SHADOWPWD
-		if (locks)
-			pw_unlock ();
-#endif
-	case 0:
-		break;
-	}
+	/* NOTREACHED */
 }
+
+#else				/* !SHADOWPWD */
+int main (int argc, char **argv)
+{
+	fprintf (stderr,
+		 "%s: not configured for shadow password support.\n",
+		 argv[0]);
+	exit (1);
+}
+#endif				/* !SHADOWPWD */

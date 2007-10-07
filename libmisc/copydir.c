@@ -30,36 +30,31 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: copydir.c,v 1.8 2001/06/28 18:27:29 marekm Exp $")
-
+RCSID ("$Id: copydir.c,v 1.9 2003/04/22 10:59:21 kloczek Exp $")
 
 #include <sys/stat.h>
-
 #include <sys/types.h>
 #include <fcntl.h>
 #include <stdio.h>
-
 #include "prototypes.h"
 #include "defines.h"
-
 static const char *src_orig;
 static const char *dst_orig;
 
-struct	link_name {
-	dev_t	ln_dev;
-	ino_t	ln_ino;
-	int	ln_count;
-	char	*ln_name;
-	struct	link_name *ln_next;
+struct link_name {
+	dev_t ln_dev;
+	ino_t ln_ino;
+	int ln_count;
+	char *ln_name;
+	struct link_name *ln_next;
 };
-static	struct	link_name *links;
+static struct link_name *links;
 
 /*
  * remove_link - delete a link from the link list
  */
 
-static void
-remove_link(struct link_name *ln)
+static void remove_link (struct link_name *ln)
 {
 	struct link_name *lp;
 
@@ -69,11 +64,11 @@ remove_link(struct link_name *ln)
 		free (ln);
 		return;
 	}
-	for (lp = links;lp;lp = lp->ln_next)
+	for (lp = links; lp; lp = lp->ln_next)
 		if (lp->ln_next == ln)
 			break;
 
-	if (! lp)
+	if (!lp)
 		return;
 
 	lp->ln_next = lp->ln_next->ln_next;
@@ -85,16 +80,16 @@ remove_link(struct link_name *ln)
  * check_link - see if a file is really a link
  */
 
-static struct link_name *
-check_link(const char *name, const struct stat *sb)
+static struct link_name *check_link (const char *name,
+				     const struct stat *sb)
 {
-	struct	link_name *lp;
-	int	src_len;
-	int	dst_len;
-	int	name_len;
+	struct link_name *lp;
+	int src_len;
+	int dst_len;
+	int name_len;
 	int len;
 
-	for (lp = links;lp;lp = lp->ln_next)
+	for (lp = links; lp; lp = lp->ln_next)
 		if (lp->ln_dev == sb->st_dev && lp->ln_ino == sb->st_ino)
 			return lp;
 
@@ -109,8 +104,8 @@ check_link(const char *name, const struct stat *sb)
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
 	len = name_len - src_len + dst_len + 1;
-	lp->ln_name = xmalloc(len);
-	snprintf(lp->ln_name, len, "%s%s", dst_orig, name + src_len);
+	lp->ln_name = xmalloc (len);
+	snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
 	lp->ln_next = links;
 	links = lp;
 
@@ -125,20 +120,21 @@ check_link(const char *name, const struct stat *sb)
  */
 
 int
-copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
+copy_tree (const char *src_root, const char *dst_root, uid_t uid,
+	   gid_t gid)
 {
-	char	src_name[1024];
-	char	dst_name[1024];
-	char	buf[1024];
-	int	ifd;
-	int	ofd;
-	int	err = 0;
-	int	cnt;
-	int	set_orig = 0;
-	struct	DIRECT	*ent;
-	struct	stat	sb;
-	struct	link_name *lp;
-	DIR	*dir;
+	char src_name[1024];
+	char dst_name[1024];
+	char buf[1024];
+	int ifd;
+	int ofd;
+	int err = 0;
+	int cnt;
+	int set_orig = 0;
+	struct DIRECT *ent;
+	struct stat sb;
+	struct link_name *lp;
+	DIR *dir;
 
 	/*
 	 * Make certain both directories exist.  This routine is called
@@ -146,7 +142,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * target is created.  It assumes the target directory exists.
 	 */
 
-	if (access(src_root, F_OK) != 0 || access(dst_root, F_OK) != 0)
+	if (access (src_root, F_OK) != 0 || access (dst_root, F_OK) != 0)
 		return -1;
 
 	/*
@@ -157,7 +153,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * is made set-ID.
 	 */
 
-	if (! (dir = opendir (src_root)))
+	if (!(dir = opendir (src_root)))
 		return -1;
 
 	if (src_orig == 0) {
@@ -172,7 +168,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 */
 
 		if (strcmp (ent->d_name, ".") == 0 ||
-				strcmp (ent->d_name, "..") == 0)
+		    strcmp (ent->d_name, "..") == 0)
 			continue;
 
 		/*
@@ -180,22 +176,26 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * destination files.
 		 */
 
-		if (strlen (src_root) + strlen (ent->d_name) + 2 > sizeof src_name) {
+		if (strlen (src_root) + strlen (ent->d_name) + 2 >
+		    sizeof src_name) {
 			err++;
 			break;
 		}
-		snprintf(src_name, sizeof src_name, "%s/%s", src_root, ent->d_name);
+		snprintf (src_name, sizeof src_name, "%s/%s", src_root,
+			  ent->d_name);
 
-		if (strlen (dst_root) + strlen (ent->d_name) + 2 > sizeof dst_name) {
+		if (strlen (dst_root) + strlen (ent->d_name) + 2 >
+		    sizeof dst_name) {
 			err++;
 			break;
 		}
-		snprintf(dst_name, sizeof dst_name, "%s/%s", dst_root, ent->d_name);
+		snprintf (dst_name, sizeof dst_name, "%s/%s", dst_root,
+			  ent->d_name);
 
-		if (LSTAT(src_name, &sb) == -1)
+		if (LSTAT (src_name, &sb) == -1)
 			continue;
 
-		if (S_ISDIR(sb.st_mode)) {
+		if (S_ISDIR (sb.st_mode)) {
 
 			/*
 			 * Create a new target directory, make it owned by
@@ -203,8 +203,9 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			 */
 
 			mkdir (dst_name, sb.st_mode & 0777);
-			chown (dst_name, uid == (uid_t) -1 ? sb.st_uid:uid,
-				gid == (gid_t) -1 ? sb.st_gid:gid);
+			chown (dst_name,
+			       uid == (uid_t) - 1 ? sb.st_uid : uid,
+			       gid == (gid_t) - 1 ? sb.st_gid : gid);
 
 			if (copy_tree (src_name, dst_name, uid, gid)) {
 				err++;
@@ -217,10 +218,10 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * Copy any symbolic links
 		 */
 
-		if (S_ISLNK(sb.st_mode)) {
-			char	oldlink[1024];
-			char	dummy[1024];
-			int	len;
+		if (S_ISLNK (sb.st_mode)) {
+			char oldlink[1024];
+			char dummy[1024];
+			int len;
 
 			/*
 			 * Get the name of the file which the link points
@@ -230,17 +231,21 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			 * destinateion directory name.
 			 */
 
-			if ((len = readlink(src_name, oldlink, sizeof(oldlink) - 1)) < 0) {
+			if ((len =
+			     readlink (src_name, oldlink,
+				       sizeof (oldlink) - 1)) < 0) {
 				err++;
 				break;
 			}
-			oldlink[len] = '\0';  /* readlink() does not NUL-terminate */
-			if (!strncmp(oldlink, src_orig, strlen(src_orig))) {
-				snprintf(dummy, sizeof dummy, "%s%s",
-					 dst_orig, oldlink + strlen(src_orig));
-				strcpy(oldlink, dummy);
+			oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
+			if (!strncmp
+			    (oldlink, src_orig, strlen (src_orig))) {
+				snprintf (dummy, sizeof dummy, "%s%s",
+					  dst_orig,
+					  oldlink + strlen (src_orig));
+				strcpy (oldlink, dummy);
 			}
-			if (symlink(oldlink, dst_name)) {
+			if (symlink (oldlink, dst_name)) {
 				err++;
 				break;
 			}
@@ -273,11 +278,13 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * would be nice to copy everything ...
 		 */
 
-		if (!S_ISREG(sb.st_mode)) {
-			if (mknod (dst_name, sb.st_mode & ~07777, sb.st_rdev) ||
-				chown (dst_name, uid == (uid_t) -1 ? sb.st_uid:uid,
-					gid == (gid_t) -1 ? sb.st_gid:gid) ||
-					chmod (dst_name, sb.st_mode & 07777)) {
+		if (!S_ISREG (sb.st_mode)) {
+			if (mknod
+			    (dst_name, sb.st_mode & ~07777, sb.st_rdev)
+			    || chown (dst_name,
+				      uid == (uid_t) - 1 ? sb.st_uid : uid,
+				      gid == (gid_t) - 1 ? sb.st_gid : gid)
+			    || chmod (dst_name, sb.st_mode & 07777)) {
 				err++;
 				break;
 			}
@@ -293,10 +300,12 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			err++;
 			break;
 		}
-		if ((ofd = open (dst_name, O_WRONLY|O_CREAT|O_TRUNC, 0)) < 0 ||
-			chown (dst_name, uid == (uid_t) -1 ? sb.st_uid:uid,
-					gid == (gid_t) -1 ? sb.st_gid:gid) ||
-				chmod (dst_name, sb.st_mode & 07777)) {
+		if ((ofd =
+		     open (dst_name, O_WRONLY | O_CREAT | O_TRUNC, 0)) < 0
+		    || chown (dst_name,
+			      uid == (uid_t) - 1 ? sb.st_uid : uid,
+			      gid == (gid_t) - 1 ? sb.st_gid : gid)
+		    || chmod (dst_name, sb.st_mode & 07777)) {
 			close (ifd);
 			err++;
 			break;
@@ -321,7 +330,7 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		src_orig = 0;
 		dst_orig = 0;
 	}
-	return err ? -1:0;
+	return err ? -1 : 0;
 }
 
 /*
@@ -331,20 +340,19 @@ copy_tree(const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
  *	and directories.
  */
 
-int
-remove_tree(const char *root)
+int remove_tree (const char *root)
 {
-	char	new_name[1024];
-	int	err = 0;
-	struct	DIRECT	*ent;
-	struct	stat	sb;
-	DIR	*dir;
+	char new_name[1024];
+	int err = 0;
+	struct DIRECT *ent;
+	struct stat sb;
+	DIR *dir;
 
 	/*
 	 * Make certain the directory exists.
 	 */
 
-	if (access(root, F_OK) != 0)
+	if (access (root, F_OK) != 0)
 		return -1;
 
 	/*
@@ -364,22 +372,24 @@ remove_tree(const char *root)
 		 */
 
 		if (strcmp (ent->d_name, ".") == 0 ||
-				strcmp (ent->d_name, "..") == 0)
+		    strcmp (ent->d_name, "..") == 0)
 			continue;
 
 		/*
 		 * Make the filename for the current entry.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name) {
+		if (strlen (root) + strlen (ent->d_name) + 2 >
+		    sizeof new_name) {
 			err++;
 			break;
 		}
-		snprintf(new_name, sizeof new_name, "%s/%s", root, ent->d_name);
-		if (LSTAT(new_name, &sb) == -1)
+		snprintf (new_name, sizeof new_name, "%s/%s", root,
+			  ent->d_name);
+		if (LSTAT (new_name, &sb) == -1)
 			continue;
 
-		if (S_ISDIR(sb.st_mode)) {
+		if (S_ISDIR (sb.st_mode)) {
 
 			/*
 			 * Recursively delete this directory.
@@ -399,5 +409,5 @@ remove_tree(const char *root)
 	}
 	closedir (dir);
 
-	return err ? -1:0;
+	return err ? -1 : 0;
 }

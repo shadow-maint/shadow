@@ -1,4 +1,4 @@
-.\" $Id: groupmod.8,v 1.6 2002/03/09 11:16:18 ankry Exp $
+.\" $Id: groupmod.8,v 1.7 2003/04/28 17:52:15 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -48,9 +48,26 @@ grupy pliku, wymagaj± rêcznej zmiany ID grupy.
 .BI -n " nazwa_grupy"
 Nazwa grupy zostanie zmieniona z \fIgrupa\fR na \fInazwa_grupy\fR.
 .SH PLIKI
-.IR /etc/group "   - informacja o grupach"
+\fI/etc/group\fR	\- informacja o grupach
 .br
-.IR /etc/gshadow " - bezpieczna informacja o grupach"
+\fI/etc/gshadow\fI	\- bezpieczna informacja o grupach
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBgroupmod\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB3\fR	\- niew³a¶ciwe parametry opcji
+.br
+\fB4\fR	\- gid jest ju¿ u¿ywany (i nie u¿yto opcji -o)
+.br
+\fB6\fR	\- podana grupa nie istnieje
+.br
+\fB9\fR	\- grupa jest ju¿ u¿ywana
+.br
+\fB10\fR	\- niemo¿liwa aktualizacja plików grup
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),
@@ -62,8 +79,3 @@ Nazwa grupy zostanie zmieniona z \fIgrupa\fR na \fInazwa_grupy\fR.
 .BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
-grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
-z w³a¶ciwej dokumentacji.

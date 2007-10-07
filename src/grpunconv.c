@@ -11,7 +11,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: grpunconv.c,v 1.11 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: grpunconv.c,v 1.13 2003/06/19 18:11:01 kloczek Exp $")
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -119,12 +119,8 @@ int main (int argc, char **argv)
 #else				/* !SHADOWGRP */
 int main (int argc, char **argv)
 {
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
 	fprintf (stderr,
-		 _("%s: not configured for shadow group support.\n"),
+		 "%s: not configured for shadow group support.\n",
 		 argv[0]);
 	exit (1);
 }

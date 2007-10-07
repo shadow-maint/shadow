@@ -1,4 +1,4 @@
-.\" $Id: userdel.8,v 1.8 2002/03/09 11:16:24 ankry Exp $
+.\" $Id: userdel.8,v 1.9 2003/04/28 17:52:15 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
@@ -42,11 +42,28 @@ Zostan± usuniête zarówno pliki w katalogu domowym u¿ytkownika jak
 i sam ten katalog.
 Pliki po³o¿one w innym systemie plików musz± byæ odszukane i usuniête rêcznie.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+\fI/etc/passwd\fR	\- informacja o kontach u¿ytkowników
 .br
-.IR /etc/shadow " - bezpieczna informacja o kontach u¿ytkowników"
+\fI/etc/shadow\fR	\- bezpieczna informacja o kontach u¿ytkowników
 .br
-.IR /etc/group "  - informacja o grupach"
+\fI/etc/group\fR	\- informacja o grupach
+.SH KOD ZAKOÑCZENIA
+.TP 2   
+Polecenie \fBuserdel\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB1\fR	\- nie mo¿na zaktualizowaæ pliku z has³ami
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB6\fR	\- podany u¿ytkownik nie istnieje
+.br
+\fB8\fR	\- u¿ytkownik jest aktualnie zalogowany
+.br
+\fB10\fR	\- nie mo¿na zaktualizowaæ pliku z grupami
+.br
+\fB12\fR	\- nie mo¿na usun±æ katalogu domowego
 .SH PRZESTROGI
 \fBuserdel\fR nie pozwoli na usuniêcie konta aktualnie zalogowanego
 u¿ytkownika. Musisz usun±æ wszystkie uruchomione procesy nale¿±ce
@@ -64,8 +81,3 @@ Musi to zostaæ wykonane na serwerze NIS.
 .BR usermod (8)
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
-grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
-z w³a¶ciwej dokumentacji.

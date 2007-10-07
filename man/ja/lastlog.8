@@ -1,3 +1,4 @@
+.\"$Id: lastlog.8,v 1.8 2003/04/28 06:38:54 kloczek Exp $
 .\" Copyright 1992, Phillip Street and Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -24,9 +25,7 @@
 .\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
-.\"
 .\"	@(#)lastlog.8	3.3	08:24:58	29 Sep 1993 (National Guard Release)
-.\"	$Id: lastlog.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
 .\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
@@ -34,41 +33,48 @@
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
 .\" Updated & Modified Thu Oct 14 1997 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\" Updated Fri Jan 12 2001 by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Mon Mar  4 2002 by kentaro Shirakata <argrath@ub32.org>
+.\" Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH LASTLOG 8
 .SH 名前
 lastlog \- lastlog ファイルを調べる
 .SH 書式
-.B lastlog
-.RB [ \-u
-.IR login-name ]
-.RB [ \-t
-.IR days ]
+.TP 8
+\fBlastlog\fR [(\fB-u\fR|\fB--user\fR) \fIlogin\fR]
+[(\fB-t\fR|\fB--time\fR) \fIdays\fR] [(\fB-h\fR|\fB--help\fR)]
 .SH 説明
 \fBlastlog\fR は最終ログインの記録ファイル
 \fI/var/log/lastlog\fR の内容を整形して表示する。
-\fBlogin-name\fR, \fBport\fR, \fBlast login time\fR が表示される。
-デフォルトでは (フラグを指定しなかった場合は) lastlog エントリを
-UID の数値でソートして表示する。
-\fB\-u \fIlogin-name\fR フラグを指定すると
-\fIlogin-name\fR の記録だけが表示される。
-\fB\-t \fIdays\fR と入力すると最近
-\fIdays\fR 日以内の最終ログインを表示する。
-\fB\-t\fR フラグを用いると \fB\-u\fR フラグの指定は無視される。
+\fBログイン名\fR・\fBポート\fR・\fB最終ログイン時刻\fR、が表示される。
+オプションを指定しなかった場合、デフォルトでは
+lastlog エントリを UID の数値でソートして表示する。
+.TP
+\fB-u\fR, \fB--user\fR \fIlogin-name\fR
+\fIlogin-name\fR の記録だけを表示する。
+.TP
+\fB-t\fR, \fB--time\fR \fIdays\fR
+最近 \fIdays\fR 日以内の最終ログインを表示する。
+.TP
+\fB-h\fR, \fB--help\fR
+オンラインヘルプを表示して終了する。
+.PP
+\fB-u\fR フラグを用いると \fB-t\fR は無視される。
+.\"nakano というのが実際の動作のように見えるのだが。
 .PP
 一度もログインしていないユーザに対しては、
 ポートと時刻の代わりに
 \fB"**Never logged in**"\fR
 というメッセージが表示される。
 .SH ファイル
-/var/log/lastlog \- lastlog 記録ファイル
+\fI/var/log/lastlog\fR \- lastlog 記録ファイル
 .SH 警告
-uid 番号に大きな飛びがあると、
-lastlog プログラムは長時間スクリーンに何も出力しないまま
-実行を続ける (つまり mmdf=800 で最後の uid=170の場合、
-uid 171-799 の間プログラムは何も出力しないので、
+UID 番号に大きな飛びがあると、
+lastlog プログラムは長時間画面に何も出力しないまま
+実行を続ける (例えば mmdf が 800 で最後の UID が 170 の場合、
+UID が 171-799 の間プログラムは何も出力しないので、
 ハングしたように見える)。
 .SH 著者
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.br
+.BR
 Phillip Street

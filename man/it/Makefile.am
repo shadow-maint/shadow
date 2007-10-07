@@ -26,5 +26,4 @@ man_MANS = \
 	usermod.8 \
 	vigr.8 \
 	vipw.8
-
-EXTRA_DIST = $(man_MANS)
+ 

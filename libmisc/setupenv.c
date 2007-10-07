@@ -34,51 +34,47 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: setupenv.c,v 1.11 2001/11/06 15:50:25 kloczek Exp $")
-
+RCSID ("$Id: setupenv.c,v 1.13 2003/05/05 21:44:15 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
-
 #include <stdio.h>
 #include <ctype.h>
-
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
-
 static void
-addenv_path(const char *varname, const char *dirname, const char *filename)
+addenv_path (const char *varname, const char *dirname,
+	     const char *filename)
 {
 	char *buf;
 
-	buf = xmalloc(strlen(dirname) + strlen(filename) + 2);
-	sprintf(buf, "%s/%s", dirname, filename);
-	addenv(varname, buf);
-	free(buf);
+	buf = xmalloc (strlen (dirname) + strlen (filename) + 2);
+	sprintf (buf, "%s/%s", dirname, filename);
+	addenv (varname, buf);
+	free (buf);
 }
 
 
 #ifndef USE_PAM
-static void
-read_env_file(const char *filename)
+static void read_env_file (const char *filename)
 {
 	FILE *fp;
 	char buf[1024];
 	char *cp, *name, *val;
 
-	fp = fopen(filename, "r");
+	fp = fopen (filename, "r");
 	if (!fp)
 		return;
-	while (fgets(buf, sizeof buf, fp) == buf) {
-		cp = strrchr(buf, '\n');
+	while (fgets (buf, sizeof buf, fp) == buf) {
+		cp = strrchr (buf, '\n');
 		if (!cp)
 			break;
 		*cp = '\0';
 
 		cp = buf;
 		/* ignore whitespace and comments */
-		while (*cp && isspace(*cp))
+		while (*cp && isspace (*cp))
 			cp++;
 		if (*cp == '\0' || *cp == '#')
 			continue;
@@ -87,14 +83,14 @@ read_env_file(const char *filename)
 		 * (for example, the "export NAME" shell commands)
 		 */
 		name = cp;
-		while (*cp && !isspace(*cp) && *cp != '=')
+		while (*cp && !isspace (*cp) && *cp != '=')
 			cp++;
 		if (*cp != '=')
 			continue;
 		/* NUL-terminate the name */
 		*cp++ = '\0';
 		val = cp;
-#if 0  /* XXX untested, and needs rewrite with fewer goto's :-) */
+#if 0				/* XXX untested, and needs rewrite with fewer goto's :-) */
 /*
  (state, char_type) -> (state, action)
 
@@ -102,28 +98,28 @@ read_env_file(const char *filename)
  char_type: normal, white, backslash, single, double
  action: remove_curr, remove_curr_skip_next, remove_prev, finish XXX
 */
-no_quote:
+	      no_quote:
 		if (*cp == '\\') {
 			/* remove the backslash */
-			remove_char(cp);
+			remove_char (cp);
 			/* skip over the next character */
 			if (*cp)
 				cp++;
 			goto no_quote;
 		} else if (*cp == '\'') {
 			/* remove the quote */
-			remove_char(cp);
+			remove_char (cp);
 			/* now within single quotes */
 			goto s_quote;
 		} else if (*cp == '"') {
 			/* remove the quote */
-			remove_char(cp);
+			remove_char (cp);
 			/* now within double quotes */
 			goto d_quote;
 		} else if (*cp == '\0') {
 			/* end of string */
 			goto finished;
-		} else if (isspace(*cp)) {
+		} else if (isspace (*cp)) {
 			/* unescaped whitespace - end of string */
 			*cp = '\0';
 			goto finished;
@@ -131,10 +127,10 @@ no_quote:
 			cp++;
 			goto no_quote;
 		}
-s_quote:
+	      s_quote:
 		if (*cp == '\'') {
 			/* remove the quote */
-			remove_char(cp);
+			remove_char (cp);
 			/* unquoted again */
 			goto no_quote;
 		} else if (*cp == '\0') {
@@ -145,10 +141,10 @@ s_quote:
 			cp++;
 			goto s_quote;
 		}
-d_quote:
+	      d_quote:
 		if (*cp == '\"') {
 			/* remove the quote */
-			remove_char(cp);
+			remove_char (cp);
 			/* unquoted again */
 			goto no_quote;
 		} else if (*cp == '\\') {
@@ -156,28 +152,29 @@ d_quote:
 			/* if backslash followed by double quote, remove backslash
 			   else skip over the backslash and following char */
 			if (*cp == '"')
-				remove_char(cp - 1);
+				remove_char (cp - 1);
 			else if (*cp)
 				cp++;
 			goto d_quote;
-		} eise if (*cp == '\0') {
+		}
+		eise if (*cp == '\0') {
 			/* end of string */
 			goto finished;
 		} else {
 			/* preserve everything within double quotes */
 			goto d_quote;
 		}
-finished:
-#endif /* 0 */
+	      finished:
+#endif				/* 0 */
 		/*
 		 * XXX - should handle quotes, backslash escapes, etc.
 		 * like the shell does.
 		 */
-		addenv(name, val);
+		addenv (name, val);
 	}
-	fclose(fp);
+	fclose (fp);
 }
-#endif /* USE_PAM */
+#endif				/* USE_PAM */
 
 
 /*
@@ -186,8 +183,7 @@ finished:
  *	variables.
  */
 
-void
-setup_env(struct passwd *info)
+void setup_env (struct passwd *info)
 {
 #ifndef USE_PAM
 	char *envf;
@@ -205,18 +201,19 @@ setup_env(struct passwd *info)
 	 * this a configurable option.  --marekm
 	 */
 
-	if (chdir(info->pw_dir) == -1) {
+	if (chdir (info->pw_dir) == -1) {
 		static char temp_pw_dir[] = "/";
-		if (!getdef_bool("DEFAULT_HOME") || chdir("/") == -1) {
-			fprintf(stderr, _("Unable to cd to \"%s\"\n"),
-				info->pw_dir);
-			SYSLOG((LOG_WARN,
-				"unable to cd to `%s' for user `%s'\n",
-				info->pw_dir, info->pw_name));
-			closelog();
+
+		if (!getdef_bool ("DEFAULT_HOME") || chdir ("/") == -1) {
+			fprintf (stderr, _("Unable to cd to \"%s\"\n"),
+				 info->pw_dir);
+			SYSLOG ((LOG_WARN,
+				 "unable to cd to `%s' for user `%s'\n",
+				 info->pw_dir, info->pw_name));
+			closelog ();
 			exit (1);
 		}
-		puts(_("No directory, logging in with HOME=/"));
+		puts (_("No directory, logging in with HOME=/"));
 		info->pw_dir = temp_pw_dir;
 	}
 
@@ -224,67 +221,64 @@ setup_env(struct passwd *info)
 	 * Create the HOME environmental variable and export it.
 	 */
 
-	addenv("HOME", info->pw_dir);
+	addenv ("HOME", info->pw_dir);
 
 	/*
 	 * Create the SHELL environmental variable and export it.
 	 */
 
-	if (info->pw_shell == (char *) 0 || ! *info->pw_shell) {
+	if (info->pw_shell == (char *) 0 || !*info->pw_shell) {
 		static char temp_pw_shell[] = "/bin/sh";
+
 		info->pw_shell = temp_pw_shell;
 	}
 
-	addenv("SHELL", info->pw_shell);
+	addenv ("SHELL", info->pw_shell);
 
 	/*
 	 * Create the PATH environmental variable and export it.
 	 */
 
-	cp = getdef_str((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
-#if 0
-	addenv(cp ? cp : "PATH=/bin:/usr/bin", NULL);
-#else
+	cp = getdef_str ((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (!cp) {
 		/* not specified, use a minimal default */
-		addenv("PATH=/bin:/usr/bin", NULL);
-	} else if (strchr(cp, '=')) {
+		addenv ("PATH=/bin:/usr/bin", NULL);
+	} else if (strchr (cp, '=')) {
 		/* specified as name=value (PATH=...) */
-		addenv(cp, NULL);
+		addenv (cp, NULL);
 	} else {
 		/* only value specified without "PATH=" */
-		addenv("PATH", cp);
+		addenv ("PATH", cp);
 	}
-#endif
 
 	/*
 	 * Export the user name.  For BSD derived systems, it's "USER", for
 	 * all others it's "LOGNAME".  We set both of them.
 	 */
 
-	addenv("USER", info->pw_name);
-	addenv("LOGNAME", info->pw_name);
+	addenv ("USER", info->pw_name);
+	addenv ("LOGNAME", info->pw_name);
 
 	/*
 	 * MAILDIR environment variable for Qmail
 	 */
-	if ((cp=getdef_str("QMAIL_DIR")))
-		addenv_path("MAILDIR", info->pw_dir, cp);
+	if ((cp = getdef_str ("QMAIL_DIR")))
+		addenv_path ("MAILDIR", info->pw_dir, cp);
 
 	/*
 	 * Create the MAIL environmental variable and export it.  login.defs
 	 * knows the prefix.
 	 */
 
-	if ((cp=getdef_str("MAIL_DIR")))
-		addenv_path("MAIL", cp, info->pw_name);
-	else if ((cp=getdef_str("MAIL_FILE")))
-		addenv_path("MAIL", info->pw_dir, cp);
+	if ((cp = getdef_str ("MAIL_DIR")))
+		addenv_path ("MAIL", cp, info->pw_name);
+	else if ((cp = getdef_str ("MAIL_FILE")))
+		addenv_path ("MAIL", info->pw_dir, cp);
 	else {
 #if defined(MAIL_SPOOL_FILE)
-		addenv_path("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
+		addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
 #elif defined(MAIL_SPOOL_DIR)
-		addenv_path("MAIL", MAIL_SPOOL_DIR, info->pw_name);
+		addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
 #endif
 	}
 
@@ -292,7 +286,7 @@ setup_env(struct passwd *info)
 	/*
 	 * Read environment from optional config file.  --marekm
 	 */
-	if ((envf = getdef_str("ENVIRON_FILE")))
-		read_env_file(envf);
+	if ((envf = getdef_str ("ENVIRON_FILE")))
+		read_env_file (envf);
 #endif
 }

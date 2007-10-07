@@ -30,13 +30,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: motd.c,v 1.3 1997/12/07 23:27:07 marekm Exp $")
-
+RCSID ("$Id: motd.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
 /*
  * motd -- output the /etc/motd file
  *
@@ -44,22 +42,21 @@ RCSID("$Id: motd.c,v 1.3 1997/12/07 23:27:07 marekm Exp $")
  * it to the user's terminal at login time.  The MOTD_FILE configuration
  * option is a colon-delimited list of filenames.
  */
-
-void
-motd(void)
+void motd (void)
 {
-	FILE	*fp;
-	char	motdlist[BUFSIZ], *motdfile, *mb;
-	register int	c;
+	FILE *fp;
+	char motdlist[BUFSIZ], *motdfile, *mb;
+	register int c;
 
-	if ((mb = getdef_str("MOTD_FILE")) == NULL)
+	if ((mb = getdef_str ("MOTD_FILE")) == NULL)
 		return;
 
-	strncpy(motdlist, mb, sizeof(motdlist));
-	motdlist[sizeof(motdlist)-1] = '\0';
+	strncpy (motdlist, mb, sizeof (motdlist));
+	motdlist[sizeof (motdlist) - 1] = '\0';
 
-	for (mb = motdlist ; (motdfile = strtok(mb,":")) != NULL ; mb = NULL) {
-		if ((fp = fopen(motdfile, "r")) != NULL) {
+	for (mb = motdlist; (motdfile = strtok (mb, ":")) != NULL;
+	     mb = NULL) {
+		if ((fp = fopen (motdfile, "r")) != NULL) {
 			while ((c = getc (fp)) != EOF)
 				putchar (c);
 			fclose (fp);

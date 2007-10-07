@@ -30,17 +30,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sub.c,v 1.6 1999/03/07 19:14:43 marekm Exp $")
-
+RCSID ("$Id: sub.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
-
 #include <pwd.h>
-
 #define	BAD_SUBROOT2	"invalid root `%s' for user `%s'\n"
 #define	NO_SUBROOT2	"no subsystem root `%s' for user `%s'\n"
-
 /*
  * subsystem - change to subsystem root
  *
@@ -49,18 +45,16 @@ RCSID("$Id: sub.c,v 1.6 1999/03/07 19:14:43 marekm Exp $")
  *	directory will be used as the root of a new filesystem which
  *	the user is actually logged into.
  */
-
-void
-subsystem(const struct passwd *pw)
+void subsystem (const struct passwd *pw)
 {
 	/*
 	 * The new root directory must begin with a "/" character.
 	 */
 
 	if (pw->pw_dir[0] != '/') {
-		printf(_("Invalid root directory \"%s\"\n"), pw->pw_dir);
-		SYSLOG((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
-		closelog();
+		printf (_("Invalid root directory \"%s\"\n"), pw->pw_dir);
+		SYSLOG ((LOG_WARN, BAD_SUBROOT2, pw->pw_dir, pw->pw_name));
+		closelog ();
 		exit (1);
 	}
 
@@ -70,9 +64,10 @@ subsystem(const struct passwd *pw)
 	 */
 
 	if (chdir (pw->pw_dir) || chroot (pw->pw_dir)) {
-		printf(_("Can't change root directory to \"%s\"\n"), pw->pw_dir);
-		SYSLOG((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
-		closelog();
+		printf (_("Can't change root directory to \"%s\"\n"),
+			pw->pw_dir);
+		SYSLOG ((LOG_WARN, NO_SUBROOT2, pw->pw_dir, pw->pw_name));
+		closelog ();
 		exit (1);
 	}
 }

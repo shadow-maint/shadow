@@ -30,41 +30,38 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: ttytype.c,v 1.5 1997/12/07 23:27:10 marekm Exp $")
-
+RCSID ("$Id: ttytype.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
-extern char *getenv();
+extern char *getenv ();
 
 /*
  * ttytype - set ttytype from port to terminal type mapping database
  */
 
-void
-ttytype(const char *line)
+void ttytype (const char *line)
 {
-	FILE	*fp;
-	char	buf[BUFSIZ];
-	char	*typefile;
-	char	*cp;
-	char	type[BUFSIZ];
-	char	port[BUFSIZ];
+	FILE *fp;
+	char buf[BUFSIZ];
+	char *typefile;
+	char *cp;
+	char type[BUFSIZ];
+	char port[BUFSIZ];
 
 	if (getenv ("TERM"))
 		return;
-	if ((typefile=getdef_str("TTYTYPE_FILE")) == NULL )
+	if ((typefile = getdef_str ("TTYTYPE_FILE")) == NULL)
 		return;
-	if (access(typefile, F_OK))
+	if (access (typefile, F_OK))
 		return;
 
-	if (! (fp = fopen (typefile, "r"))) {
+	if (!(fp = fopen (typefile, "r"))) {
 		perror (typefile);
 		return;
 	}
-	while (fgets(buf, sizeof buf, fp)) {
+	while (fgets (buf, sizeof buf, fp)) {
 		if (buf[0] == '#')
 			continue;
 
@@ -73,17 +70,17 @@ ttytype(const char *line)
 
 #if defined(SUN) || defined(BSD) || defined(SUN4)
 		if ((sscanf (buf, "%s \"%*[^\"]\" %s", port, type) == 2 ||
-				sscanf (buf, "%s %*s %s", port, type) == 2) &&
-				strcmp (line, port) == 0)
+		     sscanf (buf, "%s %*s %s", port, type) == 2) &&
+		    strcmp (line, port) == 0)
 			break;
-#else	/* USG */
+#else				/* USG */
 		if (sscanf (buf, "%s %s", type, port) == 2 &&
-				strcmp (line, port) == 0)
+		    strcmp (line, port) == 0)
 			break;
 #endif
 	}
-	if (! feof (fp) && ! ferror (fp))
-		addenv("TERM", type);
+	if (!feof (fp) && !ferror (fp))
+		addenv ("TERM", type);
 
 	fclose (fp);
 }

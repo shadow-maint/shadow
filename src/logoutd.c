@@ -30,21 +30,14 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: logoutd.c,v 1.18 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: logoutd.c,v 1.23 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <signal.h>
-#include <utmp.h>
 #include <fcntl.h>
 #include "prototypes.h"
 #include "defines.h"
-#ifdef	SVR4
-#include <libgen.h>
-#endif
-#ifdef	SVR4
-#define	signal	sigset
-#endif
 static char *Prog;
 
 #ifndef DEFAULT_HUP_MESG
@@ -55,14 +48,20 @@ static char *Prog;
 #define HUP_MESG_FILE "/etc/logoutd.mesg"
 #endif
 
-/* local function prototypes */
+#if HAVE_UTMPX_H
+static int check_login (const struct utmpx *);
+#else
 static int check_login (const struct utmp *);
-
+#endif
 
 /*
- * check_login - check if user (struct utmp) allowed to stay logged in
+ * check_login - check if user (struct utmpx/utmp) allowed to stay logged in
  */
+#if HAVE_UTMPX_H
+static int check_login (const struct utmpx *ut)
+#else
 static int check_login (const struct utmp *ut)
+#endif
 {
 	char user[sizeof (ut->ut_user) + 1];
 	time_t now;
@@ -80,17 +79,6 @@ static int check_login (const struct utmp *ut)
 	 */
 	if (!isttytime (user, ut->ut_line, now))
 		return 0;
-#if 0
-	/*
-	 * Check for how long they are allowed to stay logged in.
-	 * XXX - not implemented yet. Need to add a new field to
-	 * /etc/porttime (login time limit in minutes, or no limit,
-	 * based on username, tty, and time of login).
-	 */
-	if (now - ut->ut_time >
-	    get_time_limit (user, ut->ut_line, ut->ut_time))
-		return 0;
-#endif
 	return 1;
 }
 
@@ -139,7 +127,7 @@ static void send_mesg_to_tty (int tty_fd)
  *
  *	logoutd is started at system boot time and enforces the login
  *	time and port restrictions specified in /etc/porttime. The
- *	utmp file is periodically scanned and offending users are logged
+ *	utmpx/utmp file is periodically scanned and offending users are logged
  *	off from the system.
  */
 
@@ -148,7 +136,12 @@ int main (int argc, char **argv)
 	int i;
 	int status;
 	pid_t pid;
+
+#if HAVE_UTMPX_H
+	struct utmpx *ut;
+#else
 	struct utmp *ut;
+#endif
 	char user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
 	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
 	int tty_fd;
@@ -194,26 +187,34 @@ int main (int argc, char **argv)
 	OPENLOG (Prog);
 
 	/*
-	 * Scan the UTMP file once per minute looking for users that
+	 * Scan the utmpx/utmp file once per minute looking for users that
 	 * are not supposed to still be logged in.
 	 */
 
 	while (1) {
 
 		/* 
-		 * Attempt to re-open the utmp file. The file is only
+		 * Attempt to re-open the utmpx/utmp file. The file is only
 		 * open while it is being used.
 		 */
 
+#if HAVE_UTMPX_H
+		setutxent ();
+#else
 		setutent ();
+#endif
 
 		/*
-		 * Read all of the entries in the utmp file. The entries
+		 * Read all of the entries in the utmpx/utmp file. The entries
 		 * for login sessions will be checked to see if the user
 		 * is permitted to be signed on at this time.
 		 */
 
+#if HAVE_UTMPX_H
+		while ((ut = getutxent ())) {
+#else
 		while ((ut = getutent ())) {
+#endif
 #ifdef USER_PROCESS
 			if (ut->ut_type != USER_PROCESS)
 				continue;
@@ -289,7 +290,11 @@ int main (int argc, char **argv)
 			exit (0);
 		}
 
+#if HAVE_UTMPX_H
+		endutxent ();
+#else
 		endutent ();
+#endif
 
 #ifndef DEBUG
 		sleep (60);
@@ -300,5 +305,6 @@ int main (int argc, char **argv)
 
 		while (wait (&status) != -1);
 	}
-	return 1;		/* not reached */
+	return 1;
+	/* NOT REACHED */
 }

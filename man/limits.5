@@ -1,13 +1,11 @@
-.\"$Id: limits.5,v 1.5 2001/01/25 10:43:50 kloczek Exp $
+.\"$Id: limits.5,v 1.7 2003/05/01 18:17:39 kloczek Exp $
 .TH LIMITS 5
 .SH NAME
 limits \- Resource limits definition
 .SH DESCRIPTION
-The
-.I limits
-file (/etc/limits by default or LIMITS_FILE defined config.h)
-describes the resource limits you wish to impose.
-It should be owned by root and readable by root account only.
+The \fIlimits\fR file (/etc/limits by default or LIMITS_FILE defined
+config.h) describes the resource limits you wish to impose. It should be
+owned by root and readable by root account only.
 .PP
 By default no quotas are imposed on 'root'. In fact, there is no way to impose
 limits via this procedure to root-equiv accounts (accounts with UID 0).
@@ -54,21 +52,22 @@ username L2D2048N5
 .br
 username L2 D2048 N5
 .PP
-Be aware that after \fIusername\fP the rest of the line is considered a limit
-string, thus comments are not allowed. A invalid limits string will be
+Be aware that after \fIusername\fP the rest of the line is considered a
+limit string, thus comments are not allowed. A invalid limits string will be
 rejected (not considered) by the login program.
 .PP
-The default entry is denoted by username "\fB*\fP". If you have multiple \fIdefault\fP
-entries in your \fBLIMITS_FILE\fP, then the last one will be used as the default
-entry.
+The default entry is denoted by username "\fB*\fP". If you have multiple
+\fIdefault\fP entries in your \fBLIMITS_FILE\fP, then the last one will be
+used as the default entry.
 .PP
 To completely disable limits for a user, a single dash "\fB-\fP" will do.
 .PP
-Also, please note that all limit settings are set PER LOGIN.  They are
-not global, nor are they permanent.  Perhaps global limits will come, but
-for now this will have to do ;)
+Also, please note that all limit settings are set PER LOGIN. They are not
+global, nor are they permanent. Perhaps global limits will come, but for
+now this will have to do ;)
+
 .SH FILES
-/etc/limits
+\fI/etc/limits\fR
 .SH SEE ALSO
 .BR login (1),
 .BR setpriority (2),

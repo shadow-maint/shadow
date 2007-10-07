@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: su.c,v 1.22 2002/03/08 04:30:28 kloczek Exp $")
+RCSID (PKG_VER "$Id: su.c,v 1.26 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #ifdef USE_PAM
@@ -464,14 +464,6 @@ int main (int argc, char **argv)
 				 "Expired account %s", name));
 			su_failure (tty);
 		}
-#else
-#if defined(ATT_AGE)
-		if (pwent.pw_age[0] && isexpired (&pwent)) {
-			SYSLOG ((pwent.pw_uid ? LOG_WARN : LOG_CRIT,
-				 "Expired account %s", name));
-			su_failure (tty);
-		}
-#endif				/* ATT_AGE */
 #endif
 	}
 
@@ -494,9 +486,7 @@ int main (int argc, char **argv)
 
 	signal (SIGINT, SIG_DFL);
 	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
-#if 0
-	addenv (cp ? cp : "PATH=/bin:/usr/bin", NULL);
-#else
+
 	/* XXX very similar code duplicated in libmisc/setupenv.c */
 	if (!cp) {
 		addenv ("PATH=/bin:/usr/bin", NULL);
@@ -505,7 +495,6 @@ int main (int argc, char **argv)
 	} else {
 		addenv ("PATH", cp);
 	}
-#endif
 
 	environ = newenvp;	/* make new environment active */
 
@@ -597,12 +586,6 @@ int main (int argc, char **argv)
 	if (fakelogin) {
 		char *arg0;
 
-#if 0				/* XXX - GNU su doesn't do this.  --marekm */
-		if (!hushed (&pwent)) {
-			motd ();
-			mailcheck ();
-		}
-#endif
 		cp = getdef_str ("SU_NAME");
 		if (!cp)
 			cp = Basename (pwent.pw_shell);
@@ -630,5 +613,6 @@ int main (int argc, char **argv)
 	}
 
 	shell (pwent.pw_shell, cp);
-	 /*NOTREACHED*/ exit (1);
+	/* NOT REACHED */
+	exit (1);
 }

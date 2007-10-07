@@ -21,7 +21,6 @@ login:
 
 passwd:
  - administrator defined authentication methods
- - TCFS support
  - password expiration
  - password strength checks
 

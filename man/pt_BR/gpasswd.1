@@ -22,11 +22,11 @@
 .\" Foundation, Inc., 675 mass Ave, Cambridge, MA 02139 USA ou
 .\" em português na Conectiva Informática - http://www.conectiva.com.br
 .\"
-.\"	$Id: gpasswd.1,v 1.1 2001/01/31 07:06:23 kloczek Exp $
+.\"	$Id: gpasswd.1,v 1.2 2003/04/26 13:24:16 kloczek Exp $
 .\"
 .TH GPASSWD 1
 .SH NOME
-gpasswd \- administra o arquivo /etc/group
+gpasswd \- administra o arquivo \fI/etc/group\fR
 .br
 .SH SINOSPE
 .B gpasswd \fIgrupo\fR
@@ -57,11 +57,12 @@ gpasswd \- administra o arquivo /etc/group
 .SH DESCRIÇÃO
 O
 .B gpasswd
-é utilizado para administrar o arquivo /etc/group (e o arquivo /etc/gshadow,
-caso compilado com SHADOWGRP).
-Todos os grupos podem ter administradores, membros e uma senha. O administrador
-do sistema pode usar  a opção \fB-A\fR para definir o administrador do grupo e  \fB-M\fR para definir os membros e todos os seus direitos assim como os do
-administrador.
+é utilizado para administrar o arquivo \fI/etc/group\fR (e o arquivo
+\fI/etc/gshadow\fR, caso compilado com SHADOWGRP).
+Todos os grupos podem ter administradores, membros e uma senha. O
+administrador do sistema pode usar a opção \fB-A\fR para definir o
+administrador do grupo e \fB-M\fR para definir os membros e todos os seus
+direitos assim como os do administrador.
 .PP
 Administradores de grupos podem adicionar e excluir usuários utilizando as
 opções \fB-a\fR e \fB-d\fR respectivamente. Administradores podem usar a opção
@@ -81,9 +82,9 @@ solicitará a senha do grupo. Caso o comando
 esteja habilitado para outros usuários do grupo sem o uso de senha, não
 membros podem também executar o comando, informando porém a senha do grupo.
 .SH ARQUIVOS
-/etc/group \- informações do grupo
+\fI/etc/group\fR \- informações do grupo
 .br
-/etc/gshadow \- informações do grupo em arquivo shadow
+\fI/etc/gshadow\fR \- informações do grupo em arquivo shadow
 .SH VEJA TAMBÉM
 .BR newgrp (1),
 .BR groupadd (8),

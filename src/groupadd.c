@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupadd.c,v 1.22 2002/01/06 14:09:07 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupadd.c,v 1.27 2004/01/05 01:08:56 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -41,6 +41,7 @@ RCSID (PKG_VER "$Id: groupadd.c,v 1.22 2002/01/06 14:09:07 kloczek Exp $")
 #include "chkname.h"
 #include "getdef.h"
 #include "groupio.h"
+#include "nscd.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 #ifdef USE_PAM
@@ -59,7 +60,7 @@ static int is_shadow_grp;
 #define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_GID_IN_USE	4	/* gid not unique (when -o not used) */
-#define E_NAME_IN_USE	9	/* group name nut unique */
+#define E_NAME_IN_USE	9	/* group name not unique */
 #define E_GRP_UPDATE	10	/* can't update group file */
 
 static char *group_name;
@@ -98,7 +99,7 @@ static void fail_exit (int);
 
 static void usage (void)
 {
-	fprintf (stderr, _("usage: groupadd [-g gid [-o]] group\n"));
+	fprintf (stderr, _("Usage: groupadd [-g gid [-o]] [-f] group\n"));
 	exit (E_USAGE);
 }
 
@@ -208,7 +209,7 @@ static void grp_update (void)
 #endif				/* NDBM */
 #endif				/* SHADOWGRP */
 	SYSLOG ((LOG_INFO, "new group: name=%s, gid=%u",
-		 group_name, (unsigned int)group_id));
+		 group_name, (unsigned int) group_id));
 }
 
 /*
@@ -575,6 +576,7 @@ int main (int argc, char **argv)
 		find_new_gid ();
 
 	grp_update ();
+	nscd_flush_cache ("group");
 
 	close_files ();
 
@@ -595,4 +597,5 @@ int main (int argc, char **argv)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 	exit (E_SUCCESS);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

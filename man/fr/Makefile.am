@@ -8,6 +8,7 @@ man_MANS = \
 	chsh.1 \
 	faillog.5 \
 	gpasswd.1 \
+	groups.1 \
 	newgrp.1 \
 	passwd.1 \
 	passwd.5 \
@@ -15,6 +16,3 @@ man_MANS = \
 	useradd.8 \
 	userdel.8 \
 	usermod.8
-
-EXTRA_DIST = $(man_MANS) \
-	groups.1

@@ -1,4 +1,4 @@
-.\"$Id: grpck.8,v 1.9 2002/03/08 04:39:11 kloczek Exp $
+.\"$Id: grpck.8,v 1.12 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -33,11 +33,11 @@ grpck \- verify integrity of group files
 .SH DESCRIPTION
 \fBgrpck\fR verifies the integrity of the system authentication information.
 All entries in the \fI/etc/group\fR and \fI/etc/gshadow\fR are checked to
-see that the entry has the proper format and valid data in each field.
-The user is prompted to delete entries that are improperly formatted or
-which have other incorrectable errors.
-.P
-Checks are made to verify that each entry has
+see that the entry has the proper format and valid data in each field. The
+user is prompted to delete entries that are improperly formatted or which
+have other incorrectable errors.
+.PP
+Checks are made to verify that each entry has:
 .sp
 .in +.5i
 - the correct number of fields
@@ -47,56 +47,52 @@ Checks are made to verify that each entry has
 - a valid list of members and administrators
 .in -.5i
 .sp
-.P
-The checks for correct number of fields and unique group name are fatal.
-If the entry has the wrong number of fields, the user will be prompted to
-delete the entire line.
-If the user does not answer affirmatively, all further checks are bypassed.
-An entry with a duplicated group name is prompted for deletion, but the
-remaining checks will still be made.
-All other errors are warnings and the user is encouraged to run the
+.PP
+The checks for correct number of fields and unique group name are fatal. If
+the entry has the wrong number of fields, the user will be prompted to
+delete the entire line. If the user does not answer affirmatively, all
+further checks are bypassed. An entry with a duplicated group name is
+prompted for deletion, but the remaining checks will still be made. All
+other errors are warnings and the user is encouraged to run the
 \fBgroupmod\fR command to correct the error.
-.P
+.PP
 The commands which operate on the \fI/etc/group\fR file are not able to
-alter corrupted or duplicated entries.
-\fBgrpck\fR should be used in those circumstances to remove the offending
-entry.
+alter corrupted or duplicated entries. \fBgrpck\fR should be used in those
+circumstances to remove the offending entry.
 .SH OPTIONS
 By default, \fBgrpck\fR operates on the files \fI/etc/group\fR and
-\fI/etc/gshadow\fR.
-The user may select alternate files with the \fIgroup\fR and \fIshadow\fR
-parameters.
-Additionally, the user may execute the command in read-only mode by
-specifying the \fB-r\fR flag.
-This causes all questions regarding changes to be answered \fBno\fR
-without user intervention.
+\fI/etc/gshadow\fR. The user may select alternate files with the \fIgroup\fR
+and \fIshadow\fR parameters. Additionally, the user may execute the command
+in read-only mode by specifying the \fB-r\fR flag. This causes all questions
+regarding changes to be answered \fBno\fR without user intervention.
 \fBgrpck\fR can also sort entries in \fI/etc/group\fR and \fI/etc/gshadow\fR
 by GID. To run it in sort mode pass it \fB-s\fR flag. No checks are
 performed then, it just sorts.
 .SH FILES
-/etc/group \- group account information
+\fI/etc/group\fR \	- group account information
 .br
-/etc/gshadow \- encrypted passwords and group administrator information
+\fI/etc/gshadow\fR \	- encrypted passwords and group administrator information
 .br
-/etc/passwd \- user information
+\fI/etc/passwd\fR \	- user information
 .SH SEE ALSO
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5),
 .BR groupmod (8)
-.SH DIAGNOSTICS
+.SH EXIT VALUES
+.TP 2
 The \fBgrpck\fR command exits with the following values:
-.IP 0 5
-Success
-.IP 1 5
-Syntax Error
-.IP 2 5
-One or more bad group entries
-.IP 3 5
-Cannot open group files
-.IP 4 5
-Cannot lock group files
-.IP 5 5
-Cannot update group files
+.br
+\fB0\fR	\- success
+.br
+\fB1\fR	\- syntax Error
+.br
+\fB2\fR	\- one or more bad group entries
+.br
+\fB3\fR	\- can't open group files
+.br
+\fB4\fR	\- can't lock group files
+.br
+\fB5\fR	\- can't update group files
 .SH AUTHOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

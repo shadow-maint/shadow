@@ -1,4 +1,4 @@
-.\" $Id: groupadd.8,v 1.6 2002/03/09 11:16:18 ankry Exp $
+.\" $Id: groupadd.8,v 1.9 2004/01/05 01:08:32 kloczek Exp $
 .\" {PTM/WK/0.1/VIII-1999}
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
@@ -30,12 +30,12 @@
 .SH NAZWA
 groupadd - twórz now± grupê
 .SH SK£ADNIA
-\fBgroupadd\fR [\fB-g\fR \fIgid\fR [\fB-o\fR]] \fIgrupa\fR
+\fBgroupadd\fR [\fB-g\fR \fIgid\fR [\fB-o\fR]] [\fB-f\fR] \fIgrupa\fR
 .SH OPIS
 Polecenie \fBgroupadd\fR tworzy nowe konto grupy pos³uguj±c siê
 warto¶ciami podanymi w wierszu poleceñ i domy¶lnymi warto¶ciami z systemu.
 W razie potrzeby zostanie wprowadzona do systemu nowa grupa.
-Polecenie \fBgroupadd\fR posiada opcje:
+Polecenie \fBgroupadd\fR posiada nastêpuj±ce opcje:
 .TP
 .BI -g " gid"
 Numeryczna warto¶æ identyfikatora grupy. Warto¶æ ta musi byæ niepowtarzalna,
@@ -43,10 +43,30 @@ chyba ¿e u¿yto opcji \fB-o\fR. Warto¶æ ID grupy nie mo¿e byæ ujemna. Domy¶lnie
 u¿ywana jest najmniejsza warto¶æ identyfikatora wiêksza ni¿ 99 a wiêksza ni¿
 jakiejkolwiek innej grupy.
 Warto¶ci miêdzy 0 a 99 s± zwykle zarezerwowane dla kont systemowych.
+.TP
+.BI -f
+Ta opcja powoduje zakoñczenie programu ze statusem oznaczaj±cym sukces je¶li
+podana groupa ju¿ istnieje. Z opcj± \fB-g\fR, je¶li podany gid ju¿ istnieje,
+wybierany jest inny (unikalny) gid (czyli \fB-g\fR jest wy³±czane).
 .SH PLIKI
-.IR /etc/group "   - informacja o kontach grup"
+\fI/etc/group\fR	\- informacja o kontach grup
 .br
-.IR /etc/gshadow " - bezpieczna informacja o kontach grup"
+\fI/etc/gshadow\fR	\- bezpieczna informacja o kontach grup
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBgroupadd\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB2\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB3\fR	\- niew³a¶ciwe parametry opcji
+.br
+\fB4\fR	\- uid jest ju¿ u¿ywany (i nie u¿yto opcji -o)
+.br
+\fB9\fR	\- nazwa groupy nie jest unikalna
+.br
+\fB10\fR	\- niemo¿liwa aktualizacja plików grup
 .SH ZOBACZ TAK¯E
 .BR chfn (1),
 .BR chsh (1),
@@ -58,8 +78,3 @@ Warto¶ci miêdzy 0 a 99 s± zwykle zarezerwowane dla kont systemowych.
 .BR usermod (8),
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)
-.SH OD T£UMACZA
-Niniejsza dokumentacja opisuje polecenie wchodz±ce w sk³ad pakietu shadow.
-Istnieje wiele programów i skryptów do zarz±dzania kontami u¿ytkowników czy
-grup. Z uwagi na powtarzaj±ce siê nazwy poleceñ, upewnij siê, ¿e korzystasz
-z w³a¶ciwej dokumentacji.

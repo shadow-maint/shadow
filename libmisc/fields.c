@@ -30,13 +30,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: fields.c,v 1.5 1997/12/07 23:27:04 marekm Exp $")
-
+RCSID ("$Id: fields.c,v 1.6 2003/04/22 10:59:22 kloczek Exp $")
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
 #include "prototypes.h"
-
 /*
  * valid_field - insure that a field contains all legal characters
  *
@@ -44,14 +42,12 @@ RCSID("$Id: fields.c,v 1.5 1997/12/07 23:27:04 marekm Exp $")
  * characters.  If any illegal characters are found, valid_field
  * returns -1.  Zero is returned for success.
  */
-
-int
-valid_field(const char *field, const char *illegal)
+int valid_field (const char *field, const char *illegal)
 {
 	const char *cp;
 
-	for (cp = field; *cp && isprint(*cp & 0x7F) && !strchr(illegal, *cp); cp++)
-		;
+	for (cp = field;
+	     *cp && isprint (*cp & 0x7F) && !strchr (illegal, *cp); cp++);
 
 	if (*cp)
 		return -1;
@@ -66,20 +62,19 @@ valid_field(const char *field, const char *illegal)
  * current value.
  */
 
-void
-change_field(char *buf, size_t maxsize, const char *prompt)
+void change_field (char *buf, size_t maxsize, const char *prompt)
 {
 	char newf[200];
 	char *cp;
 
-	if (maxsize > sizeof(newf))
-		maxsize = sizeof(newf);
+	if (maxsize > sizeof (newf))
+		maxsize = sizeof (newf);
 
 	printf ("\t%s [%s]: ", prompt, buf);
-	if (fgets(newf, maxsize, stdin) != newf)
+	if (fgets (newf, maxsize, stdin) != newf)
 		return;
 
-	if (!(cp = strchr(newf, '\n')))
+	if (!(cp = strchr (newf, '\n')))
 		return;
 	*cp = '\0';
 
@@ -90,15 +85,14 @@ change_field(char *buf, size_t maxsize, const char *prompt)
 		 * entering a space.  --marekm
 		 */
 
-		while (--cp >= newf && isspace(*cp))
-			;
+		while (--cp >= newf && isspace (*cp));
 		*++cp = '\0';
 
 		cp = newf;
-		while (*cp && isspace(*cp))
+		while (*cp && isspace (*cp))
 			cp++;
 
-		strncpy(buf, cp, maxsize - 1);
+		strncpy (buf, cp, maxsize - 1);
 		buf[maxsize - 1] = '\0';
 	}
 }

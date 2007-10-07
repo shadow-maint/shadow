@@ -1,16 +1,16 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(lib/dialchk.c)
-AM_INIT_AUTOMAKE(shadow, 4.0.3)
-AM_CONFIG_HEADER(config.h)
+AC_INIT
+AM_INIT_AUTOMAKE(shadow, 4.0.4)
+AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
 test "$prefix" = "NONE" && prefix="/usr"
 test "$prefix" = "/usr" && exec_prefix=""
-test "$CFLAGS" = "" && CFLAGS="-O2 -Wall"
-test "$LDFLAGS" = "" && LDFLAGS="-s"
 
 AM_DISABLE_SHARED
 AM_ENABLE_STATIC
+
+AM_MAINTAINER_MODE
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -30,7 +30,7 @@ AC_HEADER_SYS_WAIT
 AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h utmpx.h \
 	termios.h termio.h sgtty.h sys/ioctl.h syslog.h paths.h \
 	utime.h ulimit.h sys/resource.h gshadow.h shadow.h lastlog.h \
-	rpc/key_prot.h)
+	locale.h rpc/key_prot.h)
 
 AC_CHECK_FUNCS(a64l fchmod fchown fsync getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
@@ -42,52 +42,36 @@ AC_TYPE_UID_T
 AC_TYPE_OFF_T
 AC_TYPE_PID_T
 AC_TYPE_MODE_T
-AC_STRUCT_ST_RDEV
 AC_HEADER_STAT
+AC_CHECK_MEMBERS([struct stat.st_rdev])
 AC_HEADER_TIME
 AC_STRUCT_TM
 
-AC_CACHE_CHECK(for pw_age in struct passwd,
-ac_cv_struct_passwd_pw_age, AC_TRY_COMPILE([#include <pwd.h>],
-[ struct passwd pw;  pw.pw_age = ""; ],
-ac_cv_struct_passwd_pw_age=yes, ac_cv_struct_passwd_pw_age=no))
-
-if test "$ac_cv_struct_passwd_pw_age" = "yes"; then
-	AC_DEFINE(ATT_AGE)
-fi
-
-AC_CACHE_CHECK(for pw_comment in struct passwd,
-ac_cv_struct_passwd_pw_comment, AC_TRY_COMPILE([#include <pwd.h>],
-[ struct passwd pw;  pw.pw_comment = ""; ],
-ac_cv_struct_passwd_pw_comment=yes, ac_cv_struct_passwd_pw_comment=no))
-
-if test "$ac_cv_struct_passwd_pw_comment" = "yes"; then
-	AC_DEFINE(ATT_COMMENT)
-fi
-
-AC_CACHE_CHECK(for pw_quota in struct passwd,
-ac_cv_struct_passwd_pw_quota, AC_TRY_COMPILE([#include <pwd.h>],
-[ struct passwd pw;  pw.pw_quota = 0; ],
-ac_cv_struct_passwd_pw_quota=yes, ac_cv_struct_passwd_pw_quota=no))
-
-if test "$ac_cv_struct_passwd_pw_quota" = "yes"; then
-	AC_DEFINE(BSD_QUOTA)
-fi
-
 if test "$ac_cv_header_utmp_h" = "yes"; then
 	AC_CACHE_CHECK(for ut_host in struct utmp,
-	ac_cv_struct_utmp_ut_host, AC_TRY_COMPILE([#include <utmp.h>],
-	[ struct utmp ut;  char *cp = ut.ut_host; ],
-	ac_cv_struct_utmp_ut_host=yes, ac_cv_struct_utmp_ut_host=no))
+		ac_cv_struct_utmp_ut_host,
+		AC_COMPILE_IFELSE(
+			[AC_LANG_PROGRAM([#include <utmp.h>],
+				[struct utmp ut; char *cp = ut.ut_host;]
+			)],
+			[ac_cv_struct_utmp_ut_host=yes],
+			[ac_cv_struct_utmp_ut_host=no]
+		)
+	)
 
 	if test "$ac_cv_struct_utmp_ut_host" = "yes"; then
 		AC_DEFINE(UT_HOST)
 	fi
 
 	AC_CACHE_CHECK(for ut_user in struct utmp,
-	ac_cv_struct_utmp_ut_user, AC_TRY_COMPILE([#include <utmp.h>],
-	[ struct utmp ut;  char *cp = ut.ut_user; ],
-	ac_cv_struct_utmp_ut_user=yes, ac_cv_struct_utmp_ut_user=no))
+		ac_cv_struct_utmp_ut_user,
+		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <utmp.h>],
+				[struct utmp ut; char *cp = ut.ut_user;]
+			)],
+			[ac_cv_struct_utmp_ut_user=yes],
+			[ac_cv_struct_utmp_ut_user=no]
+		)
+	)
 
 	if test "$ac_cv_struct_utmp_ut_user" = "no"; then
 		AC_DEFINE(ut_user, ut_name)
@@ -96,9 +80,14 @@ fi
 
 if test "$ac_cv_header_lastlog_h" = "yes"; then
 	AC_CACHE_CHECK(for ll_host in struct lastlog,
-	ac_cv_struct_lastlog_ll_host, AC_TRY_COMPILE([#include <lastlog.h>],
-	[ struct lastlog ll;  char *cp = ll.ll_host; ],
-	ac_cv_struct_lastlog_ll_host=yes, ac_cv_struct_lastlog_ll_host=no))
+		ac_cv_struct_lastlog_ll_host,
+		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <lastlog.h>],
+					[struct lastlog ll; char *cp = ll.ll_host;]
+				)],
+			[ac_cv_struct_lastlog_ll_host=yes],
+			[ac_cv_struct_lastlog_ll_host=no]
+		)
+	)
 
 	if test "$ac_cv_struct_lastlog_ll_host" = "yes"; then
 		AC_DEFINE(HAVE_LL_HOST)
@@ -120,17 +109,21 @@ AC_FUNC_SETPGRP
 
 if test "$ac_cv_header_shadow_h" = "yes"; then
 AC_CACHE_CHECK(for working shadow group support,
-ac_cv_libc_shadowgrp, AC_TRY_RUN(
-[
-#include <shadow.h>
-main()
-{
-	struct sgrp *sg = sgetsgent("test:x::");
-	/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
-	return !sg || !sg->sg_adm || !sg->sg_mem;
-}
-],
-ac_cv_libc_shadowgrp=yes,ac_cv_libc_shadowgrp=no,ac_cv_libc_shadowgrp=no))
+	ac_cv_libc_shadowgrp,
+	AC_RUN_IFELSE([AC_LANG_SOURCE([
+			#include <shadow.h>
+			main()
+			{
+				struct sgrp *sg = sgetsgent("test:x::");
+				/* NYS libc on Red Hat 3.0.3 has broken shadow group support */
+				return !sg || !sg->sg_adm || !sg->sg_mem;
+			}]
+		)],
+		[ac_cv_libc_shadowgrp=yes],
+		[ac_cv_libc_shadowgrp=no],
+		[ac_cv_libc_shadowgrp=no]
+	)
+)
 
 if test "$ac_cv_libc_shadowgrp" = "yes"; then
 	AC_DEFINE(HAVE_SHADOWGRP)
@@ -138,7 +131,7 @@ fi
 fi
 
 AC_MSG_CHECKING(location of shared mail directory)
-for maildir in /var/spool/mail /var/mail /usr/spool/mail /usr/mail NONE; do
+for maildir in /var/mail /var/spool/mail /usr/spool/mail /usr/mail NONE; do
 	if test "$maildir" = "NONE"; then
 		AC_MSG_RESULT(None)
 	elif test -d $maildir; then
@@ -210,7 +203,6 @@ AC_ARG_WITH(libcrypt, [  --with-libcrypt         try to use libcrypt (default if
 AC_ARG_WITH(libopie,  [  --with-libopie          use libopie for OPIE support])
 AC_ARG_WITH(libpam,   [  --with-libpam           use libpam for PAM support])
 AC_ARG_WITH(libskey,  [  --with-libskey          use libskey for S/Key support])
-AC_ARG_WITH(libtcfs,  [  --with-libtcfs          use libtcfs for TCFS support])
 
 dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
@@ -250,20 +242,15 @@ AC_SUBST(LIBSKEY)
 AC_SUBST(LIBMD)
 if test "$with_libskey" = "yes"; then
 	AC_CHECK_LIB(md, MD5Init, LIBMD=-lmd)
-	AC_CHECK_LIB(skey, skeychallenge, AC_DEFINE(SKEY) LIBSKEY=-lskey, , $LIBMD $LIBCRYPT)
+	AC_CHECK_LIB(skey, skeychallenge, AC_DEFINE(SKEY) LIBSKEY=-lskey, [], $LIBMD $LIBCRYPT)
 elif test "$with_libopie" = "yes"; then
-	AC_CHECK_LIB(opie, opiechallenge, AC_DEFINE(OPIE) LIBSKEY=-lopie, , $LIBCRYPT)
-fi
-
-AC_SUBST(LIBTCFS)
-if test "$with_libtcfs" = "yes"; then
-	AC_CHECK_LIB(tcfs, tcfs_encrypt_key, AC_DEFINE(HAVE_TCFS) AC_DEFINE(TCFS_GDBM_SUPPORT) LIBTCFS="-ltcfs -lgdbm", , -lgdbm)
+	AC_CHECK_LIB(opie, opiechallenge, AC_DEFINE(OPIE) LIBSKEY=-lopie, [], $LIBCRYPT)
 fi
 
 AC_SUBST(LIBPAM)
 if test "$with_libpam" = "yes"; then
 	AC_CHECK_LIB(pam, pam_start,
-		[AC_DEFINE(USE_PAM)
+		[AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
 		LIBPAM="-lpam"
 		AC_CHECK_LIB(pam_misc, main,
 			[LIBPAM="$LIBPAM -lpam_misc"],
@@ -282,17 +269,17 @@ else
 	AC_MSG_RESULT(yes)
 fi
 
-ALL_LINGUAS="cs de el fr ja ko pl sv uk"
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT_VERSION(0.12.1)
+AM_GNU_GETTEXT([external])
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 	Makefile
-	intl/Makefile
 	po/Makefile.in
 	doc/Makefile
 	man/Makefile
 	man/cs/Makefile
 	man/de/Makefile
+	man/es/Makefile
 	man/fr/Makefile
 	man/hu/Makefile
 	man/id/Makefile
@@ -301,11 +288,15 @@ AC_OUTPUT([
 	man/ko/Makefile
 	man/pl/Makefile
 	man/pt_BR/Makefile
+	man/ru/Makefile
+	man/zh_CN/Makefile
+	man/zh_TW/Makefile
 	libmisc/Makefile
 	lib/Makefile
 	src/Makefile
 	contrib/Makefile
-	debian/Makefile
 	etc/Makefile
 	etc/pam.d/Makefile
-	shadow.spec])
+	shadow.spec
+])
+AC_OUTPUT

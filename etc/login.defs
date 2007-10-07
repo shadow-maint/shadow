@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the login package.
 #
-#	$Id: login.defs,v 1.2 1997/05/01 23:14:35 marekm Exp $
+#	$Id: login.defs,v 1.5 2003/05/04 20:09:43 kloczek Exp $
 #
 # Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
 # If unspecified, some arbitrary (and possibly incorrect) value will
@@ -17,12 +17,7 @@
 FAIL_DELAY		5
 
 #
-# Enable additional passwords upon dialup lines specified in /etc/dialups.
-#
-DIALUPS_CHECK_ENAB	yes
-
-#
-# Enable logging and display of /usr/adm/faillog login failure info.
+# Enable logging and display of /var/log/faillog login failure info.
 #
 FAILLOG_ENAB		yes
 
@@ -32,7 +27,7 @@ FAILLOG_ENAB		yes
 LOG_UNKFAIL_ENAB	yes
 
 #
-# Enable logging and display of /usr/adm/lastlog login time info.
+# Enable logging and display of /var/log/lastlog login time info.
 #
 LASTLOG_ENAB		yes
 
@@ -74,7 +69,7 @@ CONSOLE		/etc/consoles
 #
 # If defined, all su activity is logged to this file.
 #
-SULOG_FILE	/usr/adm/sulog
+SULOG_FILE	/var/log/sulog
 
 #
 # If defined, ":" delimited list of "message of the day" files to
@@ -121,7 +116,7 @@ SU_NAME		su
 #   MAILDIR is for Qmail
 #
 #MAILDIR	Maildir
-MAIL_DIR	/usr/spool/mail
+MAIL_DIR	/var/mail
 #MAIL_FILE	.mail
 
 #
@@ -154,8 +149,8 @@ ENV_HZ		HZ=50
 #
 # *REQUIRED*  The default PATH settings, for superuser and normal users.
 #
-ENV_SUPATH	PATH=/etc/local:/etc:/local/bin:/usr/bin:/bin
-ENV_PATH	PATH=/local/bin:/usr/bin:/bin
+ENV_SUPATH	PATH=/sbin:/bin:/usr/sbin:/usr/bin
+ENV_PATH	PATH=/bin:/usr/bin
 
 #
 # Terminal permissions
@@ -212,3 +207,7 @@ SU_WHEEL_ONLY	no
 # If compiled with cracklib support, where are the dictionaries
 #
 #CRACKLIB_DICTPATH	/usr/share/lib/pw_dict
+
+# chkpasswd uses this one
+MD5_CRYPT_ENAB  yes
+

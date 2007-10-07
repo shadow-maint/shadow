@@ -1,0 +1,93 @@
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: groupadd.8,v 1.3 2004/01/05 01:08:36 kloczek Exp $
+.\"
+.TH GROUPADD 8
+.SH 名称
+groupadd \- 建 立 新 群 组
+.SH 语法
+.B groupadd
+[\fB-g\fI gid \fR[\fB-o\fR]] [\fB-r\fR] [\fB-f\fR] \fIgroup\fR
+.SH 描述
+\fBgroupadd\fR
+可 指 定 群 组 名 称 来 建 立 新 的 群 组 帐 号 。
+需 要 时 可 从 系 统 中 取 得 新 群 组 值 。
+\fBgroupadd\fR 有 下 列 选 项 可 用 。
+.IP "\fB-g \fIgid\fR"
+group's ID 值 。
+除  非 使 用 \fB-o\fR 参 数 不 然 该 值 必 须 是 唯 一 ， 不 可 相 同 。
+数 值 不 可 为 负 。
+预 设 为 最 小  不  得 小 于 500 而 逐 次 增 加 。 0~499 传 统 上
+是 保 留 给 \fI系统帐号\fR 使 用 。
+.IP \fB-r\fR
+
+
+此 参 数 是 用 来 建 立 \fI系统帐号\fR 。
+的  UID 会 比 定 义 在 系 统 档 上 /etc/login.defs.
+的 UID_MIN 来 的 小 。 注 意 useradd 此 用 法 所 建
+立  的 帐 号 不 会 建 立 使 用 者 目 录 ， 也 不 会
+在 乎 纪 录 在 /etc/login.defs. 的 定 义 值  。  如
+果  你 想 要 有 使 用 者 目 录 须 额 外 指 定 -m 参
+数 来 建 立 系 统 帐 号 。 这 是 RED HAT 额  外  增
+设 的 选 项 。
+它 会 自 动 帮 你 选 定 一 个 小 于 499 的 \fIgif\fR
+不 需 要 再 加 上 \fB-g\fR 参 数 。
+.br
+这 是 RED HAT 额  外  增 设 的 选 项 。
+
+.IP \fB-f\fR
+This is \fIforce\fR flag. 
+新 增 一 个 已 经 存 在 的 群 组 帐 号 ， 系 统 会 出
+现 错 误 讯 息 然 后 结 束 \fBgroupadd\fR 。
+ 如 果 是 这 样 的 情 况 ， 不 会 新 增 这 个 群 组 
+( 如 果 是 这 个 情 况 下 ， 系 统 不 会 再 新 增 一 次 )
+.br
+也 可 同 时 加 上 \fB-g\fR 选 项
+当 你 加 上 一 个 \fIgid\fR ， 此 时  \fIgid\fR
+就 不 用 是 唯 一 值 ， 可 不 加 \fB-o\fR 参 数 ，
+建 好 群 组 后 会 显 结 果  
+(adding a group as neither \fB-g\fR or \fB-o\fR options were
+specified).
+
+.br
+这 是 RED HAT 额  外  增 设 的 选 项 。
+.SH 档案
+\fI/etc/group\fR \- 群 组 资 讯
+.br
+\fI/etc/gshadow\fR \- 群 组 资 讯 加 密
+.SH 相关文件
+.BR chfn (1),
+.BR chsh (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.BR passwd (1),
+.BR groupdel (8),
+.BR groupmod (8)
+.SH 作者
+Julianne Frances Haugh (jfh@tab.com)

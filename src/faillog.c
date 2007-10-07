@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: faillog.c,v 1.11 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: faillog.c,v 1.12 2003/04/25 22:32:36 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -74,7 +74,7 @@ static void usage (void)
 {
 	fprintf (stderr,
 		 _
-		 ("usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"),
+		 ("Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"),
 		 Prog);
 	exit (1);
 }

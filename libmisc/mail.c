@@ -37,43 +37,41 @@
 #include "getdef.h"
 
 #include "rcsid.h"
-RCSID("$Id: mail.c,v 1.7 1998/12/28 20:34:49 marekm Exp $")
+RCSID ("$Id: mail.c,v 1.8 2003/04/22 10:59:22 kloczek Exp $")
 
-void
-mailcheck(void)
+void mailcheck (void)
 {
 	struct stat statbuf;
 	char *mailbox;
 
-	if (!getdef_bool("MAIL_CHECK_ENAB"))
+	if (!getdef_bool ("MAIL_CHECK_ENAB"))
 		return;
 
 	/*
 	 * Check incoming mail in Maildir format - J.
 	 */
-	if ((mailbox = getenv("MAILDIR"))) {
+	if ((mailbox = getenv ("MAILDIR"))) {
 		char *newmail;
 
-		newmail = xmalloc(strlen(mailbox) + 5);
-		sprintf(newmail, "%s/new", mailbox);
-		if (stat(newmail, &statbuf) != -1 && statbuf.st_size != 0) {
+		newmail = xmalloc (strlen (mailbox) + 5);
+		sprintf (newmail, "%s/new", mailbox);
+		if (stat (newmail, &statbuf) != -1 && statbuf.st_size != 0) {
 			if (statbuf.st_mtime > statbuf.st_atime) {
-				free(newmail);
-				puts(_("You have new mail."));
+				free (newmail);
+				puts (_("You have new mail."));
 				return;
 			}
 		}
-		free(newmail);
+		free (newmail);
 	}
 
-	if (!(mailbox = getenv("MAIL")))
+	if (!(mailbox = getenv ("MAIL")))
 		return;
 
-	if (stat(mailbox, &statbuf) == -1 || statbuf.st_size == 0)
-		puts(_("No mail."));
+	if (stat (mailbox, &statbuf) == -1 || statbuf.st_size == 0)
+		puts (_("No mail."));
 	else if (statbuf.st_atime > statbuf.st_mtime)
-		puts(_("You have mail."));
+		puts (_("You have mail."));
 	else
-		puts(_("You have new mail."));
+		puts (_("You have new mail."));
 }
-

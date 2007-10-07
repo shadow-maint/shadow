@@ -1,3 +1,4 @@
+.\"$Id: su.1,v 1.6 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,66 +26,63 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: su.1,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
-.\" Updated Wed Apr 26 16:46:14 JST 2000
-.\"         by Kentaro Shirakata <argrath@ub32.org>
-.\" Updated Fri Jan 12 03:35:18 JST 2001
-.\"         by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Wed Apr 26 JST 2000 by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Fri Jan 12 JST 2001 by Kentaro Shirakata <argrath@ub32.org>
+.\" Updated Mon Mar  4 JST 2002 by Kentaro Shirakata <argrath@ub32.org>
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SU 1
 .SH 名前
-su \- ユーザIDを変更する、又はスーパーユーザになる
+su \- ユーザIDを変更する。またはスーパーユーザになる
 .SH 書式
-.BR su " [" - ]
-.RI [ username " [" args ]]
+\fBsu\fR [\fB-\fR] [\fIusername\fR [\fIargs\fR]]
 .SH 説明
-.B su
-はログインセッション中に別のユーザに成りすますのに用いる。
+\fBsu\fR はログインセッション中に別のユーザになるために用いる。
 ユーザ名を指定せずに起動した場合、
-デフォルトではスーパーユーザのIDに変更する。
-オプション引数\fB\-\fRを用いると、
+デフォルトではスーパーユーザの ID に変更する。
+オプション引数 \fB\-\fR を用いると、
 直接ログインした場合と同じ環境に初期化される。
 .PP
 ユーザ名の後ろに追加の引数を与えることもでき、
-その場合の引数はユーザのログインシェルに渡される。
-特に、その引数の一つとして\fB-c\fRを渡した場合、
+その場合引数はユーザのログインシェルに渡される。
+特に、その引数の一つとして \fB-c\fR を渡した場合、
 それに続く引数は大部分のコマンドインタプリタにコマンドとして解釈される。
-そのコマンドは\fI/etc/passwd\fRで対象のユーザに指定されている
-シェルで実行される。
+コマンドはそのユーザに (\fI/etc/passwd\fR で)
+指定されているシェルで実行される。
 .PP
 必要な場合には、ユーザにはパスワードの入力が促される。
 間違ったパスワードが入力された場合にはエラーメッセージが出力される。
-\fIsu\fRしようとした場合は、システム破壊を検知するために、
+\fIsu\fRしようとした場合は、システムの濫用を検知するために、
 それが正しい場合も不正な場合も常に記録が残される。
 .PP
 現在の環境は新しいシェルに引き継がれる。
-\fB$PATH\fRの値は、通常のユーザの場合は\fB/bin:/usr/bin\fRに、
-スーパーユーザの場合は\fB/sbin:/bin:/usr/sbin:/usr/bin\fRに再設定される。
-これは\fI/etc/login.defs\fRの\fBENV_PATH\fRと\fBENV_SUPATH\fRで変更できる。
+ただし
+\fB$PATH\fR の値は、
+通常のユーザでは \fB/bin:/usr/bin\fR に、
+スーパーユーザでは \fB/sbin:/bin:/usr/sbin:/usr/bin\fR
+に再設定される。
+これは \fI/etc/login.defs\fR の
+\fBENV_PATH\fR と \fBENV_SUPATH\fR で変更できる。
 .PP
-サブシステムログインはログインシェルの最初の文字として
-"*" を置くことで指定する。
-与えられたホームディレクトリはユーザが実際にログインする
-新しいファイルシステムのルートとして扱われる。
+サブシステムログインでは、
+ログインシェルの最初の文字に "*" を置く。
+渡されたホームディレクトリは、
+ユーザが実際にログインする新しいファイルシステムのルートとして扱われる。
 .SH 警告
-.PP
-この版の\fBsu\fRには多くのコンパイル時オプションがあるが、
-サイトによっては、その一部しか設定されていないこともある。
+この版の \fBsu\fR には多くのコンパイル時オプションがあるが、
+サイトによってはこの一部しか設定されていないこともある。
 .SH ファイル
-/etc/passwd \- ユーザアカウントの情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/shadow \- 暗号化されたパスワード及び期限情報
-.br
-$HOME/.profile \- デフォルトシェル用の初期化スクリプト
+\fI/etc/shadow\fR \- 暗号化パスワードと有効期限情報
 .SH 関連項目
 .BR login (1),
 .BR sh (1),
 .BR login.defs (5),
 .BR suauth (5)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

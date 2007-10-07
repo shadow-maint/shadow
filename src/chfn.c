@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chfn.c,v 1.20 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: chfn.c,v 1.22 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -41,6 +41,7 @@ RCSID (PKG_VER "$Id: chfn.c,v 1.20 2002/01/05 15:41:43 kloczek Exp $")
 #include "pwio.h"
 #include "getdef.h"
 #include "pwauth.h"
+#include "nscd.h"
 #ifdef HAVE_SHADOW_H
 #include <shadow.h>
 #endif
@@ -595,6 +596,9 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 	SYSLOG ((LOG_INFO, "changed user `%s' information", user));
+
+	nscd_flush_cache ("passwd");
+
 	closelog ();
 	exit (0);
 }

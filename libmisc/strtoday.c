@@ -34,18 +34,13 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: strtoday.c,v 1.8 1999/03/07 19:14:42 marekm Exp $")
-
+RCSID ("$Id: strtoday.c,v 1.9 2003/04/22 10:59:22 kloczek Exp $")
 #include "defines.h"
-
 #ifndef USE_GETDATE
 #define USE_GETDATE 1
 #endif
-
 #if USE_GETDATE
-
 #include "getdate.h"
-
 /*
  * strtoday() now uses get_date() (borrowed from GNU shellutils)
  * which can handle many date formats, for example:
@@ -60,8 +55,7 @@ RCSID("$Id: strtoday.c,v 1.8 1999/03/07 19:14:42 marekm Exp $")
  *	24-sep-72
  *	24sep72
  */
-long
-strtoday(const char *str)
+long strtoday (const char *str)
 {
 	time_t t;
 
@@ -73,20 +67,18 @@ strtoday(const char *str)
 	if (!str || *str == '\0')
 		return -1;
 
-	t = get_date(str, (time_t *) 0);
-	if (t == (time_t) -1)
+	t = get_date (str, (time_t *) 0);
+	if (t == (time_t) - 1)
 		return -1;
 	/* convert seconds to days since 1970-01-01 */
-	return (t + DAY/2)/DAY;
+	return (t + DAY / 2) / DAY;
 }
 
-#else /* !USE_GETDATE */
+#else				/* !USE_GETDATE */
 /*
  * Old code, just in case get_date() doesn't work as expected...
  */
-
 #include <stdio.h>
-
 #ifdef HAVE_STRPTIME
 /*
  * for now we allow just one format, but we can define more later
@@ -102,14 +94,15 @@ static char *date_formats[] = {
  * current month, and the cummulative number of days in the preceding
  * months.  they are declared so that january is 1, not 0.
  */
+static short days[13] = { 0,
+	31, 28, 31, 30, 31, 30,	/* JAN - JUN */
+	31, 31, 30, 31, 30, 31
+};				/* JUL - DEC */
 
-static	short	days[13] = { 0,
-	31,	28,	31,	30,	31,	30,	/* JAN - JUN */
-	31,	31,	30,	31,	30,	31 };	/* JUL - DEC */
-
-static	short	juldays[13] = { 0,
-	0,	31,	59,	90,	120,	151,	/* JAN - JUN */
-	181,	212,	243,	273,	304,	334 };	/* JUL - DEC */
+static short juldays[13] = { 0,
+	0, 31, 59, 90, 120, 151,	/* JAN - JUN */
+	181, 212, 243, 273, 304, 334
+};				/* JUL - DEC */
 #endif
 
 /*
@@ -120,34 +113,33 @@ static	short	juldays[13] = { 0,
  * it having a day number of 0.
  */
 
-long
-strtoday(const char *str)
+long strtoday (const char *str)
 {
 #ifdef HAVE_STRPTIME
 	struct tm tp;
-	char * const *fmt;
+	char *const *fmt;
 	char *cp;
 	time_t result;
 
-	memzero(&tp, sizeof tp);
+	memzero (&tp, sizeof tp);
 	for (fmt = date_formats; *fmt; fmt++) {
-		cp = strptime((char *) str, *fmt, &tp);
+		cp = strptime ((char *) str, *fmt, &tp);
 		if (!cp || *cp != '\0')
 			continue;
 
-		result = mktime(&tp);
-		if (result == (time_t) -1)
+		result = mktime (&tp);
+		if (result == (time_t) - 1)
 			continue;
 
-		return result / DAY;  /* success */
+		return result / DAY;	/* success */
 	}
 	return -1;
 #else
-	char	slop[2];
-	int	month;
-	int	day;
-	int	year;
-	long	total;
+	char slop[2];
+	int month;
+	int day;
+	int year;
+	long total;
 
 	/*
 	 * start by separating the month, day and year.  the order
@@ -198,10 +190,11 @@ strtoday(const char *str)
 	 */
 
 	total = (long) ((year - 1970) * 365L) + (((year + 1) - 1970) / 4);
-	total += (long) juldays[month] + (month > 2 && (year % 4) == 0 ? 1:0);
+	total += (long) juldays[month] + (month > 2
+					  && (year % 4) == 0 ? 1 : 0);
 	total += (long) day - 1;
 
 	return total;
-#endif /* HAVE_STRPTIME */
+#endif				/* HAVE_STRPTIME */
 }
-#endif /* !USE_GETDATE */
+#endif				/* !USE_GETDATE */

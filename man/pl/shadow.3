@@ -1,4 +1,4 @@
-.\" $Id: shadow.3,v 1.3 2001/01/25 10:43:54 kloczek Exp $
+.\" $Id: shadow.3,v 1.4 2003/01/07 14:32:57 kloczek Exp $
 .\" {PTM/WK/1999-09-16}
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
@@ -63,23 +63,23 @@ Plik \fI#include\fR opisuje strukturê
 struct spwd {
 .in +.4i
 .br
-char	*sp_namp; /* nazwa u¿ytkownika (login) */
+	char			*sp_namp; /* nazwa u¿ytkownika (login) */
 .br
-char	*sp_pwdp; /* zakodowane has³o */
+	char			*sp_pwdp; /* zakodowane has³o */
 .br
-long	sp_lstchg; /* ostatnia zmiana has³a */
+	long int		sp_lstchg; /* ostatnia zmiana has³a */
 .br
-int	sp_min; /* dni do dozwolonej zmiany */
+	long int		sp_min; /* dni do dozwolonej zmiany */
 .br
-int	sp_max; /* dni przed wymagan± zmian± */
+	long int		sp_max; /* dni przed wymagan± zmian± */
 .br
-int	sp_warn; /* dni ostrze¿enia o wyga¶niêciu */
+	long int		sp_warn; /* dni ostrze¿enia o wyga¶niêciu */
 .br
-int	sp_inact; /* dni przed wy³±czeniem konta */
+	long int		sp_inact; /* dni przed wy³±czeniem konta */
 .br
-int	sp_expire; /* data wa¿no¶ci konta */
+	long int		sp_expire; /* data wa¿no¶ci konta */
 .br
-int	sp_flag; /* zarezerwowane do przysz³ego u¿ytku */
+	unsigned long int	sp_flag; /* zarezerwowane do przysz³ego u¿ytku */
 .br
 .in -.5i
 }

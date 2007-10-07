@@ -1,6 +1,0 @@
-/etc/login.defs
-/etc/login.access
-/etc/securetty
-/etc/porttime
-/etc/limits
-/etc/init.d/logoutd

@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: login.c,v 1.26 2002/03/08 04:30:28 kloczek Exp $")
+RCSID (PKG_VER "$Id: login.c,v 1.35 2003/12/17 12:52:25 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/stat.h>
@@ -38,11 +38,6 @@ RCSID (PKG_VER "$Id: login.c,v 1.26 2002/03/08 04:30:28 kloczek Exp $")
 #include <errno.h>
 #include <pwd.h>
 #include <grp.h>
-#if HAVE_UTMPX_H
-#include <utmpx.h>
-#else
-#include <utmp.h>
-#endif
 #include <signal.h>
 #if HAVE_LASTLOG_H
 #include <lastlog.h>
@@ -53,11 +48,6 @@ RCSID (PKG_VER "$Id: login.c,v 1.26 2002/03/08 04:30:28 kloczek Exp $")
 #include "failure.h"
 #include "pwauth.h"
 #include "getdef.h"
-#include "dialchk.h"
-#ifdef SVR4_SI86_EUA
-#include <sys/proc.h>
-#include <sys/sysi86.h>
-#endif
 #ifdef RADIUS
 /*
  * Support for RADIUS authentication based on a hacked util-linux login
@@ -182,7 +172,7 @@ static RETSIGTYPE alarm_handler (int);
 
 static void usage (void)
 {
-	fprintf (stderr, _("usage: %s [-p] [name]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-p] [name]\n"), Prog);
 	if (!amroot)
 		exit (1);
 	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
@@ -232,15 +222,10 @@ static void setup_tty (void)
 	termio.c_iflag &= ~IXANY;
 	termio.c_oflag |= (XTABS | OPOST | ONLCR);
 #endif
-#if 0
-	termio.c_cc[VERASE] = getdef_num ("ERASECHAR", '\b');
-	termio.c_cc[VKILL] = getdef_num ("KILLCHAR", '\025');
-#else
 	/* leave these values unchanged if not specified in login.defs */
 	termio.c_cc[VERASE] =
 	    getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
 	termio.c_cc[VKILL] = getdef_num ("KILLCHAR", termio.c_cc[VKILL]);
-#endif
 
 	/*
 	 * ttymon invocation prefers this, but these settings won't come into
@@ -636,36 +621,10 @@ int main (int argc, char **argv)
 			if (rflg || fflg)
 				usage ();
 
-#ifdef SVR4
-			/*
-			 * The "-h" option can't be used with a command-line username,
-			 * because telnetd invokes us as: login -h host TERM=...
-			 */
-
-			if (!hflg)
-#endif
-			{
-				STRFCPY (username, argv[optind]);
-				strzero (argv[optind]);
-				++optind;
-			}
+			STRFCPY (username, argv[optind]);
+			strzero (argv[optind]);
+			++optind;
 		}
-#ifdef SVR4
-		/*
-		 * check whether ttymon has done the prompt for us already
-		 */
-
-		{
-			char *ttymon_prompt;
-
-			if ((ttymon_prompt = getenv ("TTYPROMPT")) != NULL
-			    && (*ttymon_prompt != 0)) {
-				/* read name, without prompt */
-				login_prompt ((char *) 0, username,
-					      sizeof username);
-			}
-		}
-#endif				/* SVR4 */
 		if (optind < argc)	/* now set command line variables */
 			set_env (argc - optind, &argv[optind]);
 
@@ -911,19 +870,6 @@ int main (int argc, char **argv)
 		if (preauth_flag)
 			goto auth_ok;
 
-		/*
-		 * No password prompt if logging in from listed ttys (local
-		 * console). Passwords don't help much if you have physical
-		 * access to the hardware anyway...  Suggested by Pavel
-		 * Machek <pavel@bug.ucw.cz>.
-		 * NOTE: password still required for root logins!
-		 */
-		if (pwd && (pwent.pw_uid != 0)
-		    && is_listed ("NO_PASSWORD_CONSOLE", tty, 0)) {
-			temp_pw[0] = '\0';
-			pwent.pw_passwd = temp_pw;
-		}
-
 		if (pw_auth
 		    (pwent.pw_passwd, username, reason,
 		     (char *) 0) == 0)
@@ -974,18 +920,6 @@ int main (int argc, char **argv)
 		}
 #endif
 
-		if (getdef_bool ("DIALUPS_CHECK_ENAB")) {
-			alarm (30);
-
-			if (!dialcheck (tty, pwent.pw_shell[0] ?
-					pwent.pw_shell : "/bin/sh")) {
-				SYSLOG ((LOG_WARN,
-					 "invalid dialup password for `%s' on `%s'",
-					 username, tty));
-				failed = 1;
-			}
-		}
-
 		if (!failed && pwent.pw_name && pwent.pw_uid == 0
 		    && !is_console) {
 			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s",
@@ -1020,10 +954,18 @@ int main (int argc, char **argv)
 
 #if HAVE_UTMPX_H
 			failent = utxent;
-			gettimeofday (&(failent.ut_tv), NULL);
+			if (sizeof (failent.ut_tv) == sizeof (struct timeval))
+			  gettimeofday ((struct timeval *) &failent.ut_tv, NULL);
+			else
+			  {
+				struct timeval tv;
+				gettimeofday (&tv, NULL);
+				failent.ut_tv.tv_sec = tv.tv_sec;
+				failent.ut_tv.tv_usec = tv.tv_usec;
+			  }
 #else
 			failent = utent;
-			time (&failent.ut_time);
+			failent.ut_time = time (NULL);
 #endif
 			if (pwd) {
 				failent_user = pwent.pw_name;
@@ -1124,10 +1066,6 @@ int main (int argc, char **argv)
 			   hostname);
 #endif
 
-#ifdef SVR4_SI86_EUA
-	sysi86 (SI86LIMUSER, EUA_ADD_USER);	/* how do we test for fail? */
-#endif
-
 #ifndef USE_PAM			/* PAM handles this as well */
 	/*
 	 * Have to do this while we still have root privileges, otherwise we
@@ -1144,16 +1082,6 @@ int main (int argc, char **argv)
 				pwent = *pwd;
 		}
 	}
-#else
-#ifdef	ATT_AGE
-	if (pwent.pw_age && pwent.pw_age[0]) {
-		if (expire (&pwent)) {
-			pwd = getpwnam (username);
-			if (pwd)
-				pwent = *pwd;
-		}
-	}
-#endif				/* ATT_AGE */
 #endif				/* SHADOWPWD */
 
 #ifdef RADIUS
@@ -1271,18 +1199,19 @@ int main (int argc, char **argv)
 		}
 		if (getdef_bool ("LASTLOG_ENAB")
 		    && lastlog.ll_time != 0) {
+			time_t ll_time = lastlog.ll_time;
 #ifdef HAVE_STRFTIME
 			strftime (ptime, sizeof (ptime),
 				  "%a %b %e %H:%M:%S %z %Y",
-				  localtime (&lastlog.ll_time));
+				  localtime (&ll_time));
 			printf (_("Last login: %s on %s"),
 				ptime, lastlog.ll_line);
 #else
 			printf (_("Last login: %.19s on %s"),
-				ctime (&lastlog.ll_time),
+				ctime (&ll_time),
 				lastlog.ll_line);
 #endif
-#ifdef HAVE_LL_HOST		/* SVR4 || __linux__ || SUN4 */
+#ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
 			if (lastlog.ll_host[0])
 				printf (_(" from %.*s"),
 					(int) sizeof lastlog.
@@ -1370,5 +1299,6 @@ int main (int argc, char **argv)
 		shell (tmp, pwent.pw_shell);	/* fake shell */
 	}
 	shell (pwent.pw_shell, (char *) 0);	/* exec the shell finally. */
-	 /*NOTREACHED*/ return 0;
+	/* NOT REACHED */
+	return 0;
 }

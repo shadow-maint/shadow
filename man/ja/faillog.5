@@ -1,3 +1,4 @@
+.\"$Id: faillog.5,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,27 +26,26 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: faillog.5,v 1.2 2001/11/16 17:01:32 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Modified Tue 18 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH FAILLOG 5
 .SH 名前
 faillog \- ログイン失敗を記録するファイル
 .SH 説明
 .I faillog
-は個々のアカウントに対するログイン失敗回数とその限度を管理する。
-ファイルは固定長レコードであり、各レコードはUID番号で指定される。
-各レコードには、最後にログインに成功して以来何回ログインに失敗したか;
-アカウントが使用不能となるまでのログイン失敗可能回数;
-一番最近ログインに失敗したときの接続デバイス;
-一番最近ログインに失敗した日付、
+は個々のアカウントに対するログイン失敗回数とその限度を記録する。
+ファイルは固定長レコードであり、UID 番号でインデックス付けされている。
+各レコードには、最後にログインに成功して以降のログイン失敗回数、
+アカウントが使用不能となるまでに許されるログイン失敗回数、
+最後にログインに失敗したときの接続デバイス、
+最後にログインに失敗した日付、
 が記録されている。
 .PP
-このファイルの構造は以下の通りである
+このファイルの構造は以下の通り。
 .DS
 
         struct	faillog {
@@ -57,7 +57,7 @@ faillog \- ログイン失敗を記録するファイル
 
 .DE
 .SH ファイル
-/var/log/faillog \- ログイン失敗の記録
+\fI/var/log/faillog\fR \- ログイン失敗の記録
 .SH 関連項目
 .BR faillog (8)
 .SH 著者

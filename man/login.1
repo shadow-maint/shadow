@@ -1,4 +1,4 @@
-.\"$Id: login.1,v 1.11 2002/03/09 19:22:30 ankry Exp $
+.\"$Id: login.1,v 1.16 2003/06/19 18:17:05 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -35,48 +35,39 @@ login \- begin session on the system
 .br
 \fBlogin\fR [\fB-p\fR] \fB-r \fIhost\fR
 .SH DESCRIPTION
-.B login
-is used to establish a new session with the system.
-It is normally invoked automatically by responding to the
-.I login:
-prompt on the user\'s terminal.
-.B login
-may be special to the shell and may not be invoked as a sub-process.
-Typically,
-.B login
-is treated by the shell as \fBexec login\fR which causes the user
-to exit from the current shell.
-Attempting to execute \fBlogin\fR from any shell but the login shell
-will produce an error message.
+\fBlogin\fR is used to establish a new session with the system. It is
+normally invoked automatically by responding to the \fIlogin:\fR prompt on
+the user\'s terminal. fBlogin\fR may be special to the shell and may not be
+invoked as a sub-process. Typically, \fBlogin\fR is treated by the shell as
+\fBexec login\fR which causes the user to exit from the current shell.
+Attempting to execute \fBlogin\fR from any shell but the login shell will
+produce an error message.
 .PP
-When invoked from the \fIlogin:\fR prompt, the user may enter
-environmental variables after the username.
-These variables are entered in the form \fBNAME=VALUE\fR.
-Not all variables may be set in the fashion, notably \fBPATH\fR,
-\fBHOME\fR and \fBSHELL\fR.
-Additionally, \fBIFS\fR may be inhibited if the user\'s login
-shell is \fB/bin/sh\fR.
+
+When invoked from the \fIlogin:\fR prompt, the user may enter environmental
+variables after the username. These variables are entered in the form
+\fBNAME=VALUE\fR. Not all variables may be set in the fashion, notably
+\fBPATH\fR, \fBHOME\fR and \fBSHELL\fR. Additionally, \fBIFS\fR may be
+inhibited if the user\'s login shell is \fB/bin/sh\fR.
 .PP
-The user is then prompted for a password, where appropriate.
-Echoing is disabled to prevent revealing the password.
-Only a small number of password failures are permitted before
-\fBlogin\fR exits and the communications link is severed.
+The user is then prompted for a password, where appropriate. Echoing is
+disabled to prevent revealing the password. Only a small number of password
+failures are permitted before \fBlogin\fR exits and the communications link
+is severed.
 .PP
-If password aging has been enabled for your account, you may be
-prompted for a new password before proceeding.
-You will be forced to provide your old password and the new
-password before continuing.
-Please refer to \fBpasswd\fR(1) for more information.
+If password aging has been enabled for your account, you may be prompted for
+a new password before proceeding. You will be forced to provide your old
+password and the new password before continuing. Please refer to
+\fBpasswd\fR(1) for more information.
 .PP
-After a successful login,
-you will be informed of any system messages and the presence
-of mail.
-You may turn off the printing of the system message file,
-\fI/etc/motd\fR, by creating a zero-length file \fI.hushlogin\fR
-in your login directory.
-The mail message will be one of "\fBYou have new mail.\fR",
-"\fBYou have mail.\fR", or "\fBNo Mail.\fR" according to
-the condition of your mailbox.
+
+After a successful login, you will be informed of any system messages and
+the presence of mail. You may turn off the printing of the system message
+file, \fI/etc/motd\fR, by creating a zero-length file \fI.hushlogin\fR in
+your login directory. The mail message will be one of "\fBYou have new
+mail.\fR", "\fBYou have mail.\fR", or "\fBNo Mail.\fR" according to the
+condition of your mailbox.
+
 .PP
 Your user and group ID will be set according to their values in
 the \fI/etc/passwd\fR file.
@@ -99,17 +90,13 @@ A subsystem login is indicated by the presense of a "*" as the first
 character of the login shell. The given home directory will be used as
 the root of a new filesystem which the user is actually logged into.
 .SH OPTIONS
-.TP
-.B -p
+.IP "\fB-p\fR"
 Preserve environment.
-.TP
-.B -f
+.IP "\fB-f\fR"
 Do not perform authentication, user is preauthenticated.
-.TP
-.B -h
+.IP "\fB-h\fR"
 Name of the remote host for this login.
-.TP
-.B -r
+.IP "\fB-r\fR"
 Perform autologin protocol for rlogin.
 .PP
 The \fB-r\fP, \fB-h\fP and \fB-f\fP options are only used when \fBlogin\fP is
@@ -120,30 +107,26 @@ may be in use at any particular site.
 .PP
 The location of files is subject to differences in system configuration.
 .SH FILES
+\fI/var/run/utmp\fR \- list of current login sessions
 .br
-/etc/utmp \- list of current login sessions
+\fI/var/log/wtmp\fR \- list of previous login sessions
 .br
-/etc/wtmp \- list of previous login sessions
+\fI/etc/passwd\fR \- user account information
 .br
-/etc/passwd \- user account information
+\fI/etc/shadow\fR \- encrypted passwords and age information
 .br
-/etc/shadow \- encrypted passwords and age information
+\fI/etc/motd\fR \- system message file
 .br
-/etc/motd \- system message file
+\fI/etc/nologin\fR \- prevent non-root users from logging in
 .br
-/etc/nologin \- prevent non-root users from logging in
+\fI/etc/ttytype\fR \- list of terminal types
 .br
-/etc/ttytype \- list of terminal types
-.br
-$HOME/.profile \- initialization script for default shell
-.br
-$HOME/.hushlogin \- suppress printing of system messages
+\fI$HOME/.hushlogin\fR \- suppress printing of system messages
 .SH SEE ALSO
 .BR mail (1),
 .BR passwd (1),
 .BR sh (1),
 .BR su (1),
-.\" .BR d_passwd (5),
 .BR login.defs (5),
 .BR nologin (5),
 .BR passwd (5),

@@ -1,3 +1,4 @@
+.\"$Id: newgrp.1,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,59 +26,67 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: newgrp.1,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sun 3 Mar 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH NEWGRP 1
 .SH 名前
-newgrp \- グループIDを変更する
+newgrp \- 新しいグループにログインする
 .br
-sg \- 異なるグループIDでコマンドを実行する
+sg \- 別のグループ ID でコマンドを実行する
 .SH 書式
-.BR newgrp " [" - ]
-[\fIgroup\fR]
+\fBnewgrp\fR [\fB-\fR] [\fIgroup\fR]
 .br
-.BR sg " [" - ]
-[\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
+\fBsg\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
 .SH 説明
 .B newgrp
-はログインセッション中に現在のグループIDを変更するために用いられる。
-オプションとして\fB\-\fRフラグを与えた場合は、
+はログインセッション中に現在のグループ ID を変更するために用いられる。
+オプションとして \fB\-\fR フラグを与えた場合は、
 新たにログインしたのと同じ様に環境が再初期化される。
-そうでない場合は、作業ディレクトリを含めて、現在の環境は変化しない。
+そうでない場合は、現在の作業ディレクトリを含めて、
+現在の環境は変化しない。
 .PP
 .B newgrp
-は、現在の実際のグループIDを、指定したグループに、
-またグループ名を指定しなかった場合は\fI/etc/passwd\fRに記載された
-ディフォルトのグループに、変更する。
+は現在の実グループ ID を、指定したグループに
+(グループ名を指定しなかった場合は \fI/etc/passwd\fR
+に記載されたデフォルトのグループに) 変更する。
 ユーザにはパスワードがなくグループにはある場合、
-もしくは、メンバーであると設定されておらず、
-しかもグループにはパスワードがある場合には、
-パスワードの入力を求められる。
-グループのパスワードが設定されておらず、かつユーザがメンバーとして
-設定されていない場合は、アクセスを拒否される。
+あるいはユーザがグループのメンバーではなく
+グループにパスワードがある場合には、
+そのユーザはパスワードの入力を求められる。
+グループのパスワードが設定されておらず、
+かつユーザがグループのメンバーでない場合は、
+アクセスは拒否される。
 .PP
 .B sg
-コマンドは\fBnewgrp\fRと同様な働きをするが、
-ユーザのシェルは置き換わらない。
-従って、\fBsg\fRコマンドから抜けた場合は以前のグループIDに戻る。
+コマンドは
+.B newgrp
+と同様に動作するが、コマンドを受け付ける。
+このコマンドは Bourne シェルで実行される。
+コマンドが複数の単語からなる場合は、
+sg の実行元となるであろうシェルのほとんどにおいて、
+これらをクォートする必要があるだろう。
+.BR newgrp " と " sg
+のもう一つの違いは、
+特定のシェルが \fBnewgrp\fR を特別に扱う点にある。
+このようなシェルは、自分自身を
+.B newgrp
+が生成した新しい実体と置き換える。このようなことは
 .B sg
-はコマンドも受け付ける。
-コマンドはBourneシェルで実行され、引用符で囲まなくてはならない。
-.SH 警告
-この版の\fBnewgrp\fRには多くのコンパイル時オプションがあるが、
-サイトによっては、そのうちのいくつかしか設定されていないこともある。
+では起きないので、
+.B sg
+コマンドから戻った際には以前のグループ ID に戻る。
 .SH ファイル
-/etc/passwd \- ユーザのアカウント情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .br
-/etc/group \- グループ情報
+\fI/etc/group\fR \ - グループ情報
 .SH 関連項目
 .BR id (1),
 .BR login (1),
 .BR su (1)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

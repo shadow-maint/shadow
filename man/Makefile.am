@@ -1,6 +1,6 @@
 
 # subdirectories for translated manual pages
-SUBDIRS = cs de fr hu id it ja ko pl pt_BR
+SUBDIRS = cs de es fr hu id it ja ko pl pt_BR ru zh_CN zh_TW
 
 man_MANS = \
 	adduser.8 \
@@ -11,11 +11,11 @@ man_MANS = \
 	expiry.1 \
 	faillog.5 \
 	faillog.8 \
-	getspnam.3 \
 	gpasswd.1 \
 	groupadd.8 \
 	groupdel.8 \
 	groupmod.8 \
+	groups.1 \
 	grpck.8 \
 	grpconv.8 \
 	grpunconv.8 \
@@ -45,12 +45,8 @@ man_MANS = \
 	vipw.8
 
 EXTRA_DIST = $(man_MANS) \
-	dpasswd.8 \
-	getspnam.3 \
-	groups.1 \
 	id.1 \
 	pw_auth.3 \
-	pwauth.8 \
 	shadow.3 \
 	shadowconfig.8 \
 	sulogin.8

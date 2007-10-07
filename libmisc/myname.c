@@ -11,18 +11,15 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: myname.c,v 1.2 1997/12/07 23:27:07 marekm Exp $")
-
+RCSID ("$Id: myname.c,v 1.3 2003/04/22 10:59:22 kloczek Exp $")
 #include "defines.h"
 #include <pwd.h>
 #include "prototypes.h"
-
-struct passwd *
-get_my_pwent(void)
+struct passwd *get_my_pwent (void)
 {
 	struct passwd *pw;
-	const char *cp = getlogin();
-	uid_t ruid = getuid();
+	const char *cp = getlogin ();
+	uid_t ruid = getuid ();
 
 	/*
 	 * Try getlogin() first - if it fails or returns a non-existent
@@ -34,8 +31,8 @@ get_my_pwent(void)
 	 * XXX - when running from su, will return the current user (not
 	 * the original user, like getlogin() does).  Does this matter?
 	 */
-	if (cp && *cp && (pw = getpwnam(cp)) && pw->pw_uid == ruid)
+	if (cp && *cp && (pw = getpwnam (cp)) && pw->pw_uid == ruid)
 		return pw;
 
-	return getpwuid(ruid);
+	return getpwuid (ruid);
 }

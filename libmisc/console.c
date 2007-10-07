@@ -33,15 +33,14 @@
 #include "getdef.h"
 
 #include "rcsid.h"
-RCSID("$Id: console.c,v 1.5 1998/12/28 20:34:44 marekm Exp $")
+RCSID ("$Id: console.c,v 1.6 2003/04/22 10:59:21 kloczek Exp $")
 
 /*
  * This is now rather generic function which decides if "tty" is listed
  * under "cfgin" in config (directly or indirectly). Fallback to default if
  * something is bad.
  */
-int
-is_listed(const char *cfgin, const char *tty, int def)
+int is_listed (const char *cfgin, const char *tty, int def)
 {
 	FILE *fp;
 	char buf[200], *cons, *s;
@@ -51,7 +50,7 @@ is_listed(const char *cfgin, const char *tty, int def)
 	 * fallback to default.
 	 */
 
-	if ((cons = getdef_str(cfgin)) == NULL)
+	if ((cons = getdef_str (cfgin)) == NULL)
 		return def;
 
 	/*
@@ -60,9 +59,9 @@ is_listed(const char *cfgin, const char *tty, int def)
 	 */
 
 	if (*cons != '/') {
-		cons = strcpy(buf, cons);
-		while ((s = strtok(cons, ":")) != NULL) {
-			if (strcmp(s, tty) == 0)
+		cons = strcpy (buf, cons);
+		while ((s = strtok (cons, ":")) != NULL) {
+			if (strcmp (s, tty) == 0)
 				return 1;
 
 			cons = NULL;
@@ -75,17 +74,17 @@ is_listed(const char *cfgin, const char *tty, int def)
 	 * console - otherwise root will never be allowed to login.
 	 */
 
-	if ((fp = fopen(cons, "r")) == NULL)
+	if ((fp = fopen (cons, "r")) == NULL)
 		return def;
 
 	/*
 	 * See if this tty is listed in the console file.
 	 */
 
-	while (fgets(buf, sizeof(buf), fp) != NULL) {
-		buf[strlen(buf) - 1] = '\0';
-		if (strcmp(buf, tty) == 0) {
-			(void) fclose(fp);
+	while (fgets (buf, sizeof (buf), fp) != NULL) {
+		buf[strlen (buf) - 1] = '\0';
+		if (strcmp (buf, tty) == 0) {
+			(void) fclose (fp);
 			return 1;
 		}
 	}
@@ -94,7 +93,7 @@ is_listed(const char *cfgin, const char *tty, int def)
 	 * This tty isn't a console.
 	 */
 
-	(void) fclose(fp);
+	(void) fclose (fp);
 	return 0;
 }
 
@@ -108,8 +107,7 @@ is_listed(const char *cfgin, const char *tty, int def)
  * that would allow an unauthorized root login.
  */
 
-int
-console(const char *tty)
+int console (const char *tty)
 {
-	return is_listed("CONSOLE", tty, 1);
+	return is_listed ("CONSOLE", tty, 1);
 }

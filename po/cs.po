@@ -1,707 +1,616 @@
 # Czech translation of shadow-utils.
-# Jiøí Pavlovskı <pavlovsk@ff.cuni.cz>, 1999-2000
+# JiÅ™Ã­ PavlovskÃ½ <pavlovsk@ff.cuni.cz>, 1999-2000
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-utils-20000902\n"
-"POT-Creation-Date: 2002-03-12 12:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-14 07:41+0100\n"
 "PO-Revision-Date: 2000-09-23 19:58+0200\n"
-"Last-Translator: Jiøí Pavlovskı <pavlovsk@ff.cuni.cz>\n"
+"Last-Translator: JiÅ™Ã­ PavlovskÃ½ <pavlovsk@ff.cuni.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libmisc/addgrps.c:60
+#: libmisc/addgrps.c:56
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "Varování: skupina %s je neznámá\n"
+msgstr "VarovÃ¡nÃ­: skupina %s je neznÃ¡mÃ¡\n"
 
-#: libmisc/addgrps.c:71
+#: libmisc/addgrps.c:68
 msgid "Warning: too many groups\n"
-msgstr "Varování: pøíli¹ mnoho skupin\n"
+msgstr "VarovÃ¡nÃ­: pÅ™Ã­liÅ¡ mnoho skupin\n"
 
-#: libmisc/age.c:77
+#: libmisc/age.c:72
 msgid "Your password has expired."
-msgstr "Platnost va¹eho hesla vypr¹ela."
+msgstr "Platnost vaÅ¡eho hesla vyprÅ¡ela."
 
-#: libmisc/age.c:80
+#: libmisc/age.c:75
 msgid "Your password is inactive."
-msgstr "Va¹e heslo je vypnuto."
+msgstr "VaÅ¡e heslo je vypnuto."
 
-#: libmisc/age.c:83
+#: libmisc/age.c:78
 msgid "Your login has expired."
-msgstr "Platnost va¹eho úètu vypr¹ela."
+msgstr "Platnost vaÅ¡eho ÃºÄtu vyprÅ¡ela."
 
-#: libmisc/age.c:96
+#: libmisc/age.c:90
 msgid "  Contact the system administrator.\n"
-msgstr "  Kontaktujte správce systému.\n"
+msgstr "  Kontaktujte sprÃ¡vce systÃ©mu.\n"
 
-#: libmisc/age.c:99
+#: libmisc/age.c:93
 msgid "  Choose a new password.\n"
-msgstr "  Zvolte nové heslo.\n"
+msgstr "  Zvolte novÃ© heslo.\n"
 
-#: libmisc/age.c:176
+#: libmisc/age.c:168
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "Platnost va¹eho heslo vypr¹í za %ld dnù.\n"
+msgstr "Platnost vaÅ¡eho heslo vyprÅ¡Ã­ za %ld dnÅ¯.\n"
 
-#: libmisc/age.c:178
+#: libmisc/age.c:172
 msgid "Your password will expire tomorrow.\n"
-msgstr "Platnost va¹eho heslo vypr¹í zítra.\n"
+msgstr "Platnost vaÅ¡eho heslo vyprÅ¡Ã­ zÃ­tra.\n"
 
-#: libmisc/age.c:180
+#: libmisc/age.c:174
 msgid "Your password will expire today.\n"
-msgstr "Platnost va¹eho heslo vypr¹í dnes.\n"
+msgstr "Platnost vaÅ¡eho heslo vyprÅ¡Ã­ dnes.\n"
 
-#: libmisc/chowntty.c:113
+#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "TTY %s nelze zmìnit."
+msgstr "TTY %s nelze zmÄ›nit"
 
-#: libmisc/env.c:160
+#: libmisc/env.c:155
 msgid "Environment overflow\n"
-msgstr "Pøeteèení prostøedí\n"
+msgstr "PÅ™eteÄenÃ­ prostÅ™edÃ­\n"
 
-#: libmisc/env.c:200
+#: libmisc/env.c:195
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Nemù¾ete zmìnit $%s\n"
+msgstr "NemÅ¯Å¾ete zmÄ›nit $%s\n"
 
-#: libmisc/failure.c:238
+#: libmisc/failure.c:230
 #, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
-msgstr "Poèet %2$s od posledního pøihlá¹ení: %1$d. Poslední: %3$s na %4$s\n"
+msgstr "PoÄet %2$s od poslednÃ­ho pÅ™ihlÃ¡Å¡enÃ­: %1$d. PoslednÃ­: %3$s na %4$s.\n"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failures"
-msgstr "selhání"
+msgstr "selhÃ¡nÃ­"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failure"
-msgstr "selhání"
+msgstr "selhÃ¡nÃ­"
 
-#: libmisc/limits.c:397
+#: libmisc/limits.c:396
 msgid "Too many logins.\n"
-msgstr "Pøíli¹ mnoho soubì¾nıch pøihlá¹ení.\n"
+msgstr "PÅ™Ã­liÅ¡ mnoho soubÄ›Å¾nÃ½ch pÅ™ihlÃ¡Å¡enÃ­.\n"
 
-#: libmisc/login_desrpc.c:63
+#: libmisc/login_desrpc.c:59
 #, c-format
 msgid "Password does not decrypt secret key for %s.\n"
-msgstr "Tímto heslem nelze de¹ifrovat tajnı klíè pro %s.\n"
+msgstr "TÃ­mto heslem nelze deÅ¡ifrovat tajnÃ½ klÃ­Ä pro %s.\n"
 
-#: libmisc/login_desrpc.c:69
+#: libmisc/login_desrpc.c:66
 #, c-format
 msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
-msgstr "Tajnı klíè pro %s nelze nastavit. Je keyserv démon v provozu?\n"
+msgstr "TajnÃ½ klÃ­Ä pro %s nelze nastavit. Je keyserv dÃ©mon v provozu?\n"
 
-#: libmisc/mail.c:62 libmisc/mail.c:77
+#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
-msgstr "Máte novou po¹tu."
+msgstr "MÃ¡te novou poÅ¡tu."
 
-#: libmisc/mail.c:73
+#: libmisc/mail.c:72
 msgid "No mail."
-msgstr "Nemáte ¾ádnou po¹tu."
+msgstr "NemÃ¡te Å¾Ã¡dnou poÅ¡tu."
 
-#: libmisc/mail.c:75
+#: libmisc/mail.c:74
 msgid "You have mail."
-msgstr "Máte po¹tu."
+msgstr "MÃ¡te poÅ¡tu."
 
-#: libmisc/obscure.c:281 src/passwd.c:244
+#: libmisc/obscure.c:271 src/passwd.c:183
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "Heslo %s je chybné. "
+msgstr "Heslo %s je chybnÃ©. "
 
-#: libmisc/pam_pass.c:42
+#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "passwd: volání pam_start() selhalo, chyba %d\n"
+msgstr "passwd: volÃ¡nÃ­ pam_start() selhalo, chyba %d\n"
 
-#: libmisc/pam_pass.c:49
+#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#: libmisc/setupenv.c:211
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
-msgstr "Nelze nastavit aktuální adresáø na \"%s\".\n"
+msgstr "Nelze nastavit aktuÃ¡lnÃ­ adresÃ¡Å™ na \"%s\"\n"
 
-#: libmisc/setupenv.c:219
+#: libmisc/setupenv.c:216
 msgid "No directory, logging in with HOME=/"
-msgstr "®ádnı adresáø, nastavuji HOME na /"
+msgstr "Å½Ã¡dnÃ½ adresÃ¡Å™, nastavuji HOME na /"
 
-#: libmisc/shell.c:78
-#, c-format
-msgid "Executing shell %s\n"
-msgstr "Spou¹tím shell %s.\n"
-
-#.
-#. * Obviously something is really wrong - I can't figure out
-#. * how to execute this stupid shell, so I might as well give
-#. * up in disgust ...
-#.
-#: libmisc/shell.c:122
+#: libmisc/shell.c:119
 #, c-format
 msgid "Cannot execute %s"
-msgstr "%s nelze spustit."
+msgstr "%s nelze spustit"
 
-#: libmisc/sub.c:61
+#: libmisc/sub.c:55
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
-msgstr "Chybnı koøenovı adresáø \"%s\"\n"
+msgstr "ChybnÃ½ koÅ™enovÃ½ adresÃ¡Å™ \"%s\"\n"
 
-#: libmisc/sub.c:73
+#: libmisc/sub.c:67
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
-msgstr "Nelze nastavit koøenovı adresáø na \"%s\".\n"
+msgstr "Nelze nastavit koÅ™enovÃ½ adresÃ¡Å™ na \"%s\"\n"
 
-#: libmisc/xmalloc.c:28
+#: libmisc/xmalloc.c:24
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "volání malloc(%d) selhalo\n"
+msgstr "volÃ¡nÃ­ malloc(%d) selhalo\n"
 
-#: lib/dialchk.c:71
-msgid "Dialup Password: "
-msgstr "Heslo pro pøístup vytáèenou linkou:"
-
-#: lib/getdef.c:276
+#: lib/getdef.c:274
 msgid "Could not allocate space for config info.\n"
-msgstr "Nemohu alokovat dostatek místa pro konfiguraèní údaje.\n"
+msgstr "Nemohu alokovat dostatek mÃ­sta pro konfiguraÄnÃ­ Ãºdaje.\n"
 
-#.
-#. * Item was never found.
-#.
-#: lib/getdef.c:330
+#: lib/getdef.c:328
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
-"konfiguraèní chyba - neznámı pøedmìt '%s' (informujte správce systému)\n"
+"konfiguraÄnÃ­ chyba - neznÃ¡mÃ½ pÅ™edmÄ›t '%s' (informujte sprÃ¡vce systÃ©mu)\n"
 
-#: lib/getdef.c:417
-#, c-format
-msgid "error - lookup '%s' failed\n"
-msgstr "chyba - hledání '%s' bylo neúspì¹né\n"
-
-#: lib/getdef.c:425
-#, c-format
-msgid "%s not found\n"
-msgstr "%s nenalezeno\n"
-
-#.
-#. * get the password from her, and set the salt for
-#. * the decryption from the group file.
-#.
-#: lib/pwauth.c:54 src/newgrp.c:348
+#: lib/pwauth.c:54 src/newgrp.c:343
 msgid "Password: "
 msgstr "Heslo: "
 
 #: lib/pwauth.c:56
 #, c-format
 msgid "%s's Password: "
-msgstr "Heslo u¾ivatele %s:"
+msgstr "Heslo uÅ¾ivatele %s:"
 
-#: lib/pwauth.c:270
+#: lib/pwauth.c:247
 msgid "(Echo on) "
 msgstr "(Echo zapnuto)"
 
 #: lib/strerror.c:20
 #, c-format
 msgid "Unknown error %d"
-msgstr "Neznámá chyba %d"
+msgstr "NeznÃ¡mÃ¡ chyba %d"
 
-#: src/chage.c:116
-#, c-format
+#: src/chage.c:118
 msgid ""
-"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-"\t[-I inactive] [-E expire] [-d last_day] user\n"
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"Pou¾ití: %s [-l] [-m min_dnù] [-M max_dnù] [-W varování]\n"
-"\t[-I vypnutí] [-E vypr¹ení] [-d poslední den] u¾ivatel\n"
+"PouÅ¾itÃ­: chage [-l] [-m min_dnÅ¯] [-M max_dnÅ¯] [-W varovÃ¡nÃ­]\n"
+"               [-I vypnutÃ­] [-E vyprÅ¡enÃ­] [-d poslednÃ­ den] uÅ¾ivatel\n"
 
-#: src/chage.c:122
-#, c-format
-msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-msgstr ""
-"Pou¾ití: %s [-l] [-m min_dnù] [-M max_dnù] [-d poslední den] u¾ivatel\n"
-
-#: src/chage.c:157
+#: src/chage.c:152
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
-"Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
+"Zadejte novou hodnotu, nebo stisknÄ›te ENTER pro pouÅ¾itÃ­ implicitnÃ­ hodnoty\n"
 "\n"
 
-#: src/chage.c:160
+#: src/chage.c:155
 msgid "Minimum Password Age"
-msgstr "Minimální stáøí hesla"
+msgstr "MinimÃ¡lnÃ­ stÃ¡Å™Ã­ hesla"
 
-#: src/chage.c:166
+#: src/chage.c:161
 msgid "Maximum Password Age"
-msgstr "maximální stáøí hesla"
+msgstr "maximÃ¡lnÃ­ stÃ¡Å™Ã­ hesla"
 
-#: src/chage.c:174
+#: src/chage.c:169
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "Poslední zmìna hesla (YYYY-MM-DD)"
+msgstr "PoslednÃ­ zmÄ›na hesla (YYYY-MM-DD)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "VarovÃ¡nÃ­ o vyprÅ¡enÃ­ platnosti hesla"
 
 #: src/chage.c:183
-msgid "Password Expiration Warning"
-msgstr "Varování o vypr¹ení platnosti hesla"
-
-#: src/chage.c:189
 msgid "Password Inactive"
-msgstr "Vypnuté heslo"
+msgstr "VypnutÃ© heslo"
 
-#: src/chage.c:197
+#: src/chage.c:191
 msgid "Account Expiration Date (YYYY-MM-DD)"
-msgstr "Vypr¹ení platnosti úètu (YYYY-MM-DD)"
+msgstr "VyprÅ¡enÃ­ platnosti ÃºÄtu (YYYY-MM-DD)"
 
-#.
-#. * Start with the easy numbers - the number of days before the
-#. * password can be changed, the number of days after which the
-#. * password must be chaged, the number of days before the password
-#. * expires that the user is told, and the number of days after the
-#. * password expires that the account becomes unusable.
-#.
-#: src/chage.c:248
+#: src/chage.c:241
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum:\t%ld\n"
 
-#: src/chage.c:249
+#: src/chage.c:242
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maximum:\t%ld\n"
 
-#: src/chage.c:251
+#: src/chage.c:243
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Varování:\t%ld\n"
+msgstr "VarovÃ¡nÃ­:\t%ld\n"
 
-#: src/chage.c:252
+#: src/chage.c:244
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Vypnutí:\t%ld\n"
+msgstr "VypnutÃ­:\t%ld\n"
 
-#.
-#. * The "last change" date is either "Never" or the date the password
-#. * was last modified. The date is the number of days since 1/1/1970.
-#.
-#: src/chage.c:260
+#: src/chage.c:251
 msgid "Last Change:\t\t"
-msgstr "Poslední zmìna:\t\t"
+msgstr "PoslednÃ­ zmÄ›na:\t\t"
 
-#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+#: src/chage.c:253 src/chage.c:267 src/chage.c:283 src/chage.c:296
 msgid "Never\n"
 msgstr "Nikdy\n"
 
-#.
-#. * The password expiration date is determined from the last change
-#. * date plus the number of days the password is valid for.
-#.
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Password Expires:\t"
-msgstr "Platnost hesla vypr¹í:\t"
+msgstr "Platnost hesla vyprÅ¡Ã­:\t"
 
-#.
-#. * The account becomes inactive if the password is expired for more
-#. * than "inactdays". The expiration date is calculated and the
-#. * number of inactive days is added. The resulting date is when the
-#. * active will be disabled.
-#.
-#: src/chage.c:290
+#: src/chage.c:280
 msgid "Password Inactive:\t"
-msgstr "Vypnuté heslo:\t"
+msgstr "VypnutÃ© heslo:\t"
 
-#.
-#. * The account will expire on the given date regardless of the
-#. * password expiring or not.
-#.
-#: src/chage.c:304
+#: src/chage.c:294
 msgid "Account Expires:\t"
-msgstr "Platnost hesla vypr¹í:\t"
+msgstr "Platnost hesla vyprÅ¡Ã­:\t"
 
-#: src/chage.c:468
+#: src/chage.c:445
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: nepou¾ívejte \"l\" s ostatními pøíznaky\n"
+msgstr "%s: nepouÅ¾Ã­vejte \"l\" s ostatnÃ­mi pÅ™Ã­znaky\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:518
+#: src/chage.c:458 src/chage.c:588 src/login.c:503
 #, c-format
 msgid "%s: permission denied\n"
-msgstr "%s: pøístup odmítnut\n"
+msgstr "%s: pÅ™Ã­stup odmÃ­tnut\n"
 
-#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
-#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
-#: src/usermod.c:1732
+#: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: chyba pøi vytváøení ovìøovací metody\n"
+msgstr "%s: chyba pÅ™i vytvÃ¡Å™enÃ­ ovÄ›Å™ovacÃ­ metody\n"
 
-#: src/chage.c:533 src/chpasswd.c:157
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: soubor s hesly nelze zamknout\n"
-
-#: src/chage.c:544 src/chpasswd.c:162
+#: src/chage.c:510 src/chpasswd.c:159
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "%s: soubor s hesly nelze otevøít\n"
+msgstr "%s: soubor s hesly nelze otevÅ™Ã­t\n"
 
-#: src/chage.c:552
+#: src/chage.c:518
 #, c-format
 msgid "%s: unknown user: %s\n"
-msgstr "%s: u¾ivatel %s je neznámı\n"
+msgstr "%s: uÅ¾ivatel %s je neznÃ¡mÃ½\n"
 
-#: src/chage.c:571
+#: src/chage.c:536
 #, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%s: soubor se stínovımi hesly nelze zamknout"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze zamknout"
 
-#: src/chage.c:579
+#: src/chage.c:544
 #, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: soubor se stínovımi hesly nelze otevøít"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze otevÅ™Ã­t"
 
-#: src/chage.c:674
+#: src/chage.c:605
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Mìním informace o u¾ivateli %s.\n"
+msgstr "MÄ›nÃ­m informace o uÅ¾ivateli %s\n"
 
-#: src/chage.c:677
+#: src/chage.c:608
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: chyba pøi zmìnì polo¾ek\n"
+msgstr "%s: chyba pÅ™i zmÄ›nÄ› poloÅ¾ek\n"
 
-#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#: src/chage.c:632 src/pwunconv.c:138
 #, c-format
 msgid "%s: can't update password file\n"
 msgstr "%s: soubor s hesly nelze aktualizovat\n"
 
-#: src/chage.c:737 src/pwunconv.c:168
+#: src/chage.c:661 src/pwunconv.c:132
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s: soubor se stínovımi hesly nelze aktualizovat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze aktualizovat\n"
 
-#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
-#: src/passwd.c:747 src/passwd.c:859
+#: src/chage.c:676 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
 msgid "Error updating the DBM password entry.\n"
-msgstr "Chyba pøi aktualizaci DBM databáze hesel.\n"
+msgstr "Chyba pÅ™i aktualizaci DBM databÃ¡ze hesel.\n"
 
-#: src/chage.c:823
+#: src/chage.c:693
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: soubor se stínovımi hesly nelze pøepsat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze pÅ™epsat\n"
 
-#: src/chage.c:838
+#: src/chage.c:707
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s: soubor s hesly nelze pøepsat\n"
+msgstr "%s: soubor s hesly nelze pÅ™epsat\n"
 
-#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
-#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
-#: src/usermod.c:1811
+#: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s: nelze odemknout soubor\n"
 
-#: src/chfn.c:83
+#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Pou¾ití: %s [-f jméno] [-r èíslo místnosti] [-w telefon do zamìstnání]\n"
-"\t[-h telefon domù] [-o ostatní] [u¾ivatel]\n"
+"PouÅ¾itÃ­: %s [-f jmÃ©no] [-r ÄÃ­slo mÃ­stnosti] [-w telefon do zamÄ›stnÃ¡nÃ­]\n"
+"\t[-h telefon domÅ¯] [-o ostatnÃ­] [uÅ¾ivatel]\n"
 
-#: src/chfn.c:88
+#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"Pou¾ití: %s [-f jméno] [-r èíslo místnosti] [-w telefon do zamìstnání]\n"
-"\t[-h telefon domù]\n"
+"PouÅ¾itÃ­: %s [-f jmÃ©no] [-r ÄÃ­slo mÃ­stnosti] [-w telefon do zamÄ›stnÃ¡nÃ­]\n"
+"\t[-h telefon domÅ¯]\n"
 
-#: src/chfn.c:139
+#: src/chfn.c:140
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
-"Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
+"Zadejte novou hodnotu, nebo stisknÄ›te ENTER pro pouÅ¾itÃ­ implicitnÃ­ hodnoty\n"
 
-#: src/chfn.c:142
+#: src/chfn.c:143
 msgid "Full Name"
-msgstr "Celé jméno"
+msgstr "CelÃ© jmÃ©no"
 
-#: src/chfn.c:144
+#: src/chfn.c:145
 #, c-format
 msgid "\tFull Name: %s\n"
-msgstr "\tCelé jméno: %s\n"
+msgstr "\tCelÃ© jmÃ©no: %s\n"
 
-#: src/chfn.c:147
+#: src/chfn.c:148
 msgid "Room Number"
-msgstr "Èíslo místnosti"
+msgstr "ÄŒÃ­slo mÃ­stnosti"
 
-#: src/chfn.c:149
+#: src/chfn.c:150
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\tÈíslo místnosti: %s\n"
+msgstr "\tÄŒÃ­slo mÃ­stnosti: %s\n"
 
-#: src/chfn.c:152
+#: src/chfn.c:153
 msgid "Work Phone"
-msgstr "Telefon do zamìstnání"
+msgstr "Telefon do zamÄ›stnÃ¡nÃ­"
 
-#: src/chfn.c:154
+#: src/chfn.c:155
 #, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "\tTelefon do zamìstnání: %s\n"
+msgstr "\tTelefon do zamÄ›stnÃ¡nÃ­: %s\n"
 
-#: src/chfn.c:157
+#: src/chfn.c:158
 msgid "Home Phone"
-msgstr "Telefon domù"
+msgstr "Telefon domÅ¯"
 
-#: src/chfn.c:159
+#: src/chfn.c:160
 #, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "\tTelefon domù: %s\n"
+msgstr "\tTelefon domÅ¯: %s\n"
 
-#: src/chfn.c:162
+#: src/chfn.c:163
 msgid "Other"
-msgstr "Ostatní"
+msgstr "OstatnÃ­"
 
-#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
-#: src/chfn.c:379 src/passwd.c:1115
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
 #, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: pøístup odmítnut\n"
+msgstr "%s: pÅ™Ã­stup odmÃ­tnut.\n"
 
-#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
 #, c-format
 msgid "%s: Unknown user %s\n"
-msgstr "%s: u¾ivatel %s je neznámı\n"
+msgstr "%s: uÅ¾ivatel %s je neznÃ¡mÃ½\n"
 
-#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: va¹e u¾ivatelské jméno nelze zjistit\n"
+msgstr "%s: vaÅ¡e uÅ¾ivatelskÃ© jmÃ©no nelze zjistit.\n"
 
-#: src/chfn.c:358 src/chsh.c:215
+#: src/chfn.c:359 src/chsh.c:210
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: u¾ivatele `%s' nelze na NIS klientu zmìnit\n"
+msgstr "%s: uÅ¾ivatele `%s' nelze na NIS klientu zmÄ›nit.\n"
 
-#: src/chfn.c:366 src/chsh.c:223
+#: src/chfn.c:367 src/chsh.c:218
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' je hlavním NIS serverem pro tohoto klienta\n"
+msgstr "%s: `%s' je hlavnÃ­m NIS serverem pro tohoto klienta.\n"
 
-#: src/chfn.c:441
+#: src/chfn.c:442
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "Mìním informace o u¾ivateli %s\n"
+msgstr "MÄ›nÃ­m informace o uÅ¾ivateli %s\n"
 
-#: src/chfn.c:450
+#: src/chfn.c:451
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: jméno (\"%s\") je chybné\n"
+msgstr "%s: jmÃ©no (\"%s\") je chybnÃ©\n"
 
-#: src/chfn.c:456
+#: src/chfn.c:457
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: èíslo místnosti (\"%s\") je chybné\n"
+msgstr "%s: ÄÃ­slo mÃ­stnosti (\"%s\") je chybnÃ©\n"
 
-#: src/chfn.c:462
+#: src/chfn.c:463
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: telefonní èíslo do zamìstnání (\"%s\") je chybné\n"
+msgstr "%s: telefonnÃ­ ÄÃ­slo do zamÄ›stnÃ¡nÃ­ (\"%s\") je chybnÃ©\n"
 
-#: src/chfn.c:468
+#: src/chfn.c:469
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: telefonní èíslo domù (\"%s\") je chybné\n"
+msgstr "%s: telefonnÃ­ ÄÃ­slo domÅ¯ (\"%s\") je chybnÃ©\n"
 
-#: src/chfn.c:475
+#: src/chfn.c:476
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" obsahuje chybné znaky\n"
+msgstr "%s: \"%s\" obsahuje chybnÃ© znaky\n"
 
-#: src/chfn.c:488
+#: src/chfn.c:489
 #, c-format
 msgid "%s: fields too long\n"
-msgstr "%s: polo¾ka je pøíli¹ dlouhá\n"
+msgstr "%s: poloÅ¾ka je pÅ™Ã­liÅ¡ dlouhÃ¡\n"
 
-#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
 msgid "Cannot change ID to root.\n"
-msgstr "Nelze zmìnit ID na root.\n"
+msgstr "Nelze zmÄ›nit ID na root.\n"
 
-#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "Nelze zamknout soubor s hesly; zkuste to pozdìji.\n"
+msgstr "Nelze zamknout soubor s hesly; zkuste to pozdÄ›ji.\n"
 
-#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
 msgid "Cannot open the password file.\n"
-msgstr "Soubor s hesly nelze otevøít.\n"
+msgstr "Soubor s hesly nelze otevÅ™Ã­t.\n"
 
-#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s se v /etc/passwd nenalézá\n"
+msgstr "%s: %s se v /etc/passwd nenalÃ©zÃ¡\n"
 
-#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
 msgid "Error updating the password entry.\n"
-msgstr "Chyba pøi aktualizaci polo¾ky v souboru s hesly.\n"
+msgstr "Chyba pÅ™i aktualizaci poloÅ¾ky v souboru s hesly.\n"
 
-#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
 msgid "Cannot commit password file changes.\n"
-msgstr "Nelze provést zmìny v souboru s hesly.\n"
+msgstr "Nelze provÃ©st zmÄ›ny v souboru s hesly.\n"
 
-#: src/chfn.c:592 src/chsh.c:404
+#: src/chfn.c:593 src/chsh.c:399
 msgid "Cannot unlock the password file.\n"
 msgstr "Soubor s hesly nelze odemknout.\n"
 
-#: src/chpasswd.c:66
+#: src/chpasswd.c:67
 #, c-format
-msgid "usage: %s [-e]\n"
-msgstr "Pou¾ití: %s [-e]\n"
+msgid "Usage: %s [-e]\n"
+msgstr "PouÅ¾itÃ­: %s [-e]\n"
 
-#: src/chpasswd.c:171 src/pwconv.c:94
+#: src/chpasswd.c:154
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: soubor s hesly nelze zamknout\n"
+
+#: src/chpasswd.c:168 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: soubor se stínovımi hesly nelze zamknout\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze zamknout\n"
 
-#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
-#: src/pwunconv.c:108
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: soubor se stínovımi hesly nelze otevøít\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze otevÅ™Ã­t\n"
 
-#: src/chpasswd.c:200 src/newusers.c:460
+#: src/chpasswd.c:197 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: øádek %d je pøíli¹ dlouhı\n"
+msgstr "%s: Å™Ã¡dek %d je pÅ™Ã­liÅ¡ dlouhÃ½\n"
 
-#: src/chpasswd.c:220
+#: src/chpasswd.c:217
 #, c-format
 msgid "%s: line %d: missing new password\n"
-msgstr "%s: øádek %d: chybí nové heslo\n"
+msgstr "%s: Å™Ã¡dek %d: chybÃ­ novÃ© heslo\n"
 
-#: src/chpasswd.c:237
+#: src/chpasswd.c:234
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: øádek %d: u¾ivatel %s je neznámı\n"
+msgstr "%s: Å™Ã¡dek %d: uÅ¾ivatel %s je neznÃ¡mÃ½\n"
 
-#: src/chpasswd.c:290
+#: src/chpasswd.c:280
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: øádek %d: polo¾ku v souboru s hesly nelze aktualizovat\n"
+msgstr "%s: Å™Ã¡dek %d: poloÅ¾ku v souboru s hesly nelze aktualizovat\n"
 
-#: src/chpasswd.c:307 src/newusers.c:588
+#: src/chpasswd.c:297 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: chyba, zmìny budou ignorovány\n"
+msgstr "%s: chyba, zmÄ›ny budou ignorovÃ¡ny\n"
 
-#: src/chpasswd.c:319
+#: src/chpasswd.c:309
 #, c-format
 msgid "%s: error updating shadow file\n"
-msgstr "%s: chyba pøi aktualizaci souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i aktualizaci souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/chpasswd.c:328
+#: src/chpasswd.c:318
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: chyba pøi aktualizaci souboru s hesly\n"
+msgstr "%s: chyba pÅ™i aktualizaci souboru s hesly\n"
 
-#: src/chsh.c:75
+#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Pou¾ití: %s [-s shell] [jméno]\n"
-
-#: src/chsh.c:89
-msgid "Enter the new value, or press return for the default\n"
-msgstr ""
-"Zadejte novou hodnotu, nebo stisknìte ENTER pro pou¾ití implicitní hodnoty\n"
+msgstr "PouÅ¾itÃ­: %s [-s shell] [jmÃ©no]\n"
 
 #: src/chsh.c:90
-msgid "Login Shell"
-msgstr "Implicitní shell"
+msgid "Enter the new value, or press return for the default\n"
+msgstr ""
+"Zadejte novou hodnotu, nebo stisknÄ›te ENTER pro pouÅ¾itÃ­ implicitnÃ­ hodnoty\n"
 
-#: src/chsh.c:239 src/chsh.c:253
+#: src/chsh.c:91
+msgid "Login Shell"
+msgstr "ImplicitnÃ­ shell"
+
+#: src/chsh.c:234 src/chsh.c:248
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Nemù¾ete zmìnit shell pro %s.\n"
+msgstr "NemÅ¯Å¾ete zmÄ›nit shell pro %s.\n"
 
-#: src/chsh.c:282
+#: src/chsh.c:277
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Mìním implicitní shell pro %s\n"
+msgstr "MÄ›nÃ­m implicitnÃ­ shell pro %s\n"
 
-#: src/chsh.c:294
+#: src/chsh.c:289
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: chybná polo¾ka %s\n"
+msgstr "%s: chybnÃ¡ poloÅ¾ka %s\n"
 
-#: src/chsh.c:301
+#: src/chsh.c:296
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "Shell %s je chybnı.\n"
-
-#: src/dpasswd.c:52
-#, c-format
-msgid "Usage: %s [-(a|d)] shell\n"
-msgstr "Pou¾ití: %s [-(ald)] shell\n"
-
-#: src/dpasswd.c:115
-msgid "Shell password: "
-msgstr "Heslo shellu: "
-
-#: src/dpasswd.c:121
-msgid "re-enter Shell password: "
-msgstr "zadejte znovu heslo shellu: "
-
-#: src/dpasswd.c:129
-#, c-format
-msgid "%s: Passwords do not match, try again.\n"
-msgstr "%s: hesla se li¹í, zkuste to znovu\n"
-
-#: src/dpasswd.c:149
-#, c-format
-msgid "%s: can't create %s"
-msgstr "%s: %s nelze vytvoøit"
-
-#: src/dpasswd.c:155
-#, c-format
-msgid "%s: can't open %s"
-msgstr "%s: %s nelze otevøít"
-
-#: src/dpasswd.c:183
-#, c-format
-msgid "%s: Shell %s not found.\n"
-msgstr "%s: Shell %s nebyl nalezen.\n"
+msgstr "Shell %s je chybnÃ½.\n"
 
 #: src/expiry.c:59
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Pou¾ití: expiry {-f|-c}\n"
+msgstr "PouÅ¾itÃ­: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
 msgid "%s: WARNING!  Must be set-UID root!\n"
-msgstr "%s: VAROVÁNÍ! Musí mít oprávnìní superu¾ivatele!\n"
+msgstr "%s: VAROVÃNÃ! MusÃ­ mÃ­t oprÃ¡vnÄ›nÃ­ superuÅ¾ivatele!\n"
 
 #: src/expiry.c:124
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s: neznámı u¾ivatel\n"
+msgstr "%s: neznÃ¡mÃ½ uÅ¾ivatel\n"
 
 #: src/faillog.c:77
 #, c-format
-msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
-msgstr "Pou¾ití: %s [-a|-u u¾ivatel] [-m max] [-r] [-t dny] [-l zamkn sek]\n"
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgstr "PouÅ¾itÃ­: %s [-a|-u uÅ¾ivatel] [-m max] [-r] [-t dny] [-l zamkn sek]\n"
 
 #: src/faillog.c:131 src/lastlog.c:96
 #, c-format
 msgid "Unknown User: %s\n"
-msgstr "U¾ivatel %s je neznámı.\n"
+msgstr "NeznÃ¡mÃ½ uÅ¾ivatel: %s\n"
 
 #: src/faillog.c:212
 msgid "Username   Failures  Maximum  Latest\n"
-msgstr "Jméno      Chyb      Maximum  Poslední\n"
+msgstr "JmÃ©no      Chyb      Maximum  PoslednÃ­\n"
 
 #: src/faillog.c:229
 #, c-format
@@ -716,138 +625,132 @@ msgstr " [%lds zbylo]"
 #: src/faillog.c:237
 #, c-format
 msgid " [%lds lock]"
-msgstr " [%lds zámek]"
+msgstr " [%lds zÃ¡mek]"
 
 #: src/gpasswd.c:78
 #, c-format
-msgid "usage: %s [-r|-R] group\n"
-msgstr "Pou¾ití: %s [r|-R] skupina\n"
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "PouÅ¾itÃ­: %s [r|-R] skupina\n"
 
 #: src/gpasswd.c:79
 #, c-format
 msgid "       %s [-a user] group\n"
-msgstr "       %s [-a u¾ivatel] skupina\n"
+msgstr "       %s [-a uÅ¾ivatel] skupina\n"
 
 #: src/gpasswd.c:80
 #, c-format
 msgid "       %s [-d user] group\n"
-msgstr "       %s [-d u¾ivatel] skupina\n"
+msgstr "       %s [-d uÅ¾ivatel] skupina\n"
 
 #: src/gpasswd.c:83
 #, c-format
 msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A u¾ivatel,...] [-M u¾ivatel,...] skupina\n"
+msgstr "       %s [-A uÅ¾ivatel,...] [-M uÅ¾ivatel,...] skupina\n"
 
 #: src/gpasswd.c:85
 #, c-format
 msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M u¾ivatel,...] skupina\n"
+msgstr "       %s [-M uÅ¾ivatel,...] skupina\n"
 
 #: src/gpasswd.c:146 src/gpasswd.c:230
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: u¾ivatel %s je neznámı\n"
+msgstr "%s: uÅ¾ivatel %s je neznÃ¡mÃ½\n"
 
 #: src/gpasswd.c:157
 msgid "Permission denied.\n"
-msgstr "Pøístup odmítnut.\n"
+msgstr "PÅ™Ã­stup odmÃ­tnut.\n"
 
 #: src/gpasswd.c:243
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: pøepínaè -A funguje pouze se stínovımi hesly skupin\n"
+msgstr "%s: pÅ™epÃ­naÄ -A funguje pouze se stÃ­novÃ½mi hesly skupin\n"
 
 #: src/gpasswd.c:294
 msgid "Who are you?\n"
 msgstr "Kdo jste?\n"
 
-#: src/gpasswd.c:313 src/newgrp.c:297
+#: src/gpasswd.c:313 src/newgrp.c:292
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "skupina %s je neznámá\n"
+msgstr "skupina %s je neznÃ¡mÃ¡\n"
 
 #: src/gpasswd.c:422
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "Pøidávám u¾ivatele %s do skupiny %s.\n"
+msgstr "PÅ™idÃ¡vÃ¡m uÅ¾ivatele %s do skupiny %s\n"
 
 #: src/gpasswd.c:440
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "Odstraòuji u¾ivatele %s ze skupiny %s\n"
+msgstr "OdstraÅˆuji uÅ¾ivatele %s ze skupiny %s\n"
 
 #: src/gpasswd.c:454
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: èlen %s je neznámı\n"
+msgstr "%s: Älen %s je neznÃ¡mÃ½\n"
 
 #: src/gpasswd.c:501
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: Nejedná se o tty\n"
+msgstr "%s: NejednÃ¡ se o tty\n"
 
-#.
-#. * A new password is to be entered and it must be encrypted, etc.
-#. * The password will be prompted for twice, and both entries must be
-#. * identical. There is no need to validate the old password since
-#. * the invoker is either the group owner, or root.
-#.
 #: src/gpasswd.c:522
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "Mìním heslo skupiny %s\n"
+msgstr "MÄ›nÃ­m heslo skupiny %s\n"
 
 #: src/gpasswd.c:525
 msgid "New Password: "
-msgstr "Nové heslo: "
+msgstr "NovÃ© heslo: "
 
-#: src/gpasswd.c:530 src/passwd.c:365
+#: src/gpasswd.c:530 src/passwd.c:281
 msgid "Re-enter new password: "
-msgstr "Zadejte opìt nové heslo: "
+msgstr "Zadejte opÄ›t novÃ© heslo: "
 
 #: src/gpasswd.c:542
 msgid "They don't match; try again"
-msgstr "Neshodují se; zkuste to opìt"
+msgstr "NeshodujÃ­ se; zkuste to opÄ›t"
 
 #: src/gpasswd.c:546
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: Zkuste to pozdìji\n"
+msgstr "%s: Zkuste to pozdÄ›ji\n"
 
 #: src/gpasswd.c:578
 #, c-format
 msgid "%s: can't get lock\n"
-msgstr "%s: nelze získat zámek\n"
+msgstr "%s: nelze zÃ­skat zÃ¡mek\n"
 
 #: src/gpasswd.c:584
 #, c-format
 msgid "%s: can't get shadow lock\n"
-msgstr "%s: nelze získat zámek pro soubor se stínovımi hesly\n"
+msgstr "%s: nelze zÃ­skat zÃ¡mek pro soubor se stÃ­novÃ½mi hesly\n"
 
 #: src/gpasswd.c:590
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s: nelze otevøít soubor\n"
+msgstr "%s: nelze otevÅ™Ã­t soubor\n"
 
 #: src/gpasswd.c:602
 #, c-format
 msgid "%s: can't update entry\n"
-msgstr "%s: nelze aktualizovat polo¾ku\n"
+msgstr "%s: nelze aktualizovat poloÅ¾ku\n"
 
 #: src/gpasswd.c:608
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s: nelze aktualizovat polo¾ku souboru se stínovımi hesly\n"
+msgstr "%s: nelze aktualizovat poloÅ¾ku souboru se stÃ­novÃ½mi hesly\n"
 
 #: src/gpasswd.c:615
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: nelze pøepsat soubor\n"
+msgstr "%s: nelze pÅ™epsat soubor\n"
 
 #: src/gpasswd.c:621
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: nelze pøepsat soubor se stínovımi hesly\n"
+msgstr "%s: nelze pÅ™epsat soubor se stÃ­novÃ½mi hesly\n"
 
 #: src/gpasswd.c:630
 #, c-format
@@ -857,147 +760,141 @@ msgstr "%s: nelze odemknout soubor\n"
 #: src/gpasswd.c:635
 #, c-format
 msgid "%s: can't update DBM files\n"
-msgstr "%s: nelze aktualizovat soubory s DBM databázemi\n"
+msgstr "%s: nelze aktualizovat soubory s DBM databÃ¡zemi\n"
 
 #: src/gpasswd.c:642
 #, c-format
 msgid "%s: can't update DBM shadow files\n"
-msgstr "%s: nelze aktualizovat soubory s DBM databázemi stínovıch hesel\n"
+msgstr "%s: nelze aktualizovat soubory s DBM databÃ¡zemi stÃ­novÃ½ch hesel\n"
 
-#: src/groupadd.c:101
-msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "Pou¾ití: groupadd [-g gid [-o]] skupina\n"
+#: src/groupadd.c:102
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "PouÅ¾itÃ­: groupadd [-g gid [-o]] [-f] skupina\n"
 
-#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
-#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: chyba pøi pøidávání polo¾ky souboru se skupinami\n"
+msgstr "%s: chyba pÅ™i pÅ™idÃ¡vÃ¡nÃ­ poloÅ¾ky souboru se skupinami\n"
 
-#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
-#: src/usermod.c:564 src/usermod.c:708
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
-msgstr "%s: nelze pøidat polo¾ku do souboru s dbm databází skupin\n"
+msgstr "%s: nelze pÅ™idat poloÅ¾ku do souboru s dbm databÃ¡zÃ­ skupin\n"
 
-#: src/groupadd.c:255 src/useradd.c:1034
+#: src/groupadd.c:256 src/useradd.c:977
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s: jméno %s není jedineèné\n"
+msgstr "%s: jmÃ©no %s nenÃ­ jedineÄnÃ©\n"
 
-#: src/groupadd.c:270
+#: src/groupadd.c:271
 #, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: uid %u není jedineèné\n"
+msgstr "%s: uid %u nenÃ­ jedineÄnÃ©\n"
 
-#: src/groupadd.c:294
+#: src/groupadd.c:295
 #, c-format
 msgid "%s: can't get unique gid\n"
-msgstr "%s: nelze vytvoøit jedineèné gid\n"
+msgstr "%s: nelze vytvoÅ™it jedineÄnÃ© gid\n"
 
-#.
-#. * All invalid group names land here.
-#.
-#: src/groupadd.c:317 src/groupmod.c:341
+#: src/groupadd.c:318 src/groupmod.c:342
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
-msgstr "%s: %s není platnım jménem skupiny\n"
+msgstr "%s: %s nenÃ­ platnÃ½m jmÃ©nem skupiny\n"
 
-#: src/groupadd.c:346 src/groupmod.c:366
+#: src/groupadd.c:347 src/groupmod.c:367
 #, c-format
 msgid "%s: invalid group %s\n"
-msgstr "%s: chybná skupina %s\n"
+msgstr "%s: chybnÃ¡ skupina %s\n"
 
-#: src/groupadd.c:363 src/useradd.c:1313
+#: src/groupadd.c:364 src/useradd.c:1173
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s: pøepínaè -O vy¾aduje argument typu JMÉNO=HODNOTA\n"
+msgstr "%s: pÅ™epÃ­naÄ -O vyÅ¾aduje argument typu JMÃ‰NO=HODNOTA\n"
 
-#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
-#: src/userdel.c:312 src/usermod.c:576
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: soubor se skupinami nelze pøepsat\n"
+msgstr "%s: soubor se skupinami nelze pÅ™epsat\n"
 
-#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
-#: src/userdel.c:319 src/usermod.c:722
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze pøepsat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze pÅ™epsat\n"
 
-#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
 #, c-format
 msgid "%s: unable to lock group file\n"
 msgstr "%s: soubor se skupinami nelze zamknout\n"
 
-#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: soubor se skupinami nelze otevøít\n"
+msgstr "%s: soubor se skupinami nelze otevÅ™Ã­t\n"
 
-#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze zamknout\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze zamknout\n"
 
-#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze otevøít\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze otevÅ™Ã­t\n"
 
-#: src/groupadd.c:562
+#: src/groupadd.c:563
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: skupina %s ji¾ existuje\n"
+msgstr "%s: skupina %s jiÅ¾ existuje\n"
 
-#: src/groupdel.c:92
-msgid "usage: groupdel group\n"
-msgstr "Pou¾ití: groupdel skupina\n"
+#: src/groupdel.c:88
+msgid "Usage: groupdel group\n"
+msgstr "PouÅ¾itÃ­: groupdel skupina\n"
 
-#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
 #, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru se skupinami\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru se skupinami\n"
 
-#: src/groupdel.c:122 src/groupmod.c:204
+#: src/groupdel.c:119 src/groupmod.c:205
 #, c-format
 msgid "%s: error removing group dbm entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru s dbm databází skupin\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru s dbm databÃ¡zÃ­ skupin\n"
 
-#: src/groupdel.c:137
+#: src/groupdel.c:135
 #, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru se stínovımi skupinami\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru se stÃ­novÃ½mi skupinami\n"
 
-#: src/groupdel.c:150 src/groupmod.c:254
+#: src/groupdel.c:149 src/groupmod.c:255
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
 msgstr ""
-"%s: chyba pøi odstraòování polo¾ky ze souboru s dbm databází stínovıch "
+"%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru s dbm databÃ¡zÃ­ stÃ­novÃ½ch "
 "skupin\n"
 
-#.
-#. * Can't remove the group.
-#.
-#: src/groupdel.c:254
+#: src/groupdel.c:255
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: primární skupinu u¾ivatele nelze odstranit\n"
+msgstr "%s: primÃ¡rnÃ­ skupinu uÅ¾ivatele nelze odstranit.\n"
 
-#: src/groupdel.c:355 src/groupmod.c:550
+#: src/groupdel.c:359 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
 msgstr "%s: skupina %s neexistuje\n"
 
-#: src/groupdel.c:369 src/groupmod.c:566
+#: src/groupdel.c:373 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
 msgstr "%s: skupina %s je NIS skupinou\n"
 
-#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#: src/groupdel.c:378 src/groupmod.c:572 src/userdel.c:724 src/usermod.c:805
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: %s je hlavním NIS serverem\n"
+msgstr "%s: %s je hlavnÃ­m NIS serverem\n"
 
 #: src/groupmems.c:95
 msgid "Member already exists\n"
@@ -1008,7 +905,7 @@ msgid "Member to remove could not be found\n"
 msgstr ""
 
 #: src/groupmems.c:158
-msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
 #: src/groupmems.c:201
@@ -1029,46 +926,46 @@ msgstr "Soubor se skupinami nelze zamknout\n"
 
 #: src/groupmems.c:220
 msgid "Unable to open group file\n"
-msgstr "Soubor se skupinami nelze otevøít\n"
+msgstr "Soubor se skupinami nelze otevÅ™Ã­t\n"
 
 #: src/groupmems.c:240
 msgid "Cannot close group file\n"
-msgstr "Soubor se skupinami nelze otevøít\n"
+msgstr "Soubor se skupinami nelze otevÅ™Ã­t\n"
 
-#: src/groupmod.c:103
-msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Pou¾ití: groupmod [-g gid [-o]] [-n jméno] skupina\n"
+#: src/groupmod.c:104
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "PouÅ¾itÃ­: groupmod [-g gid [-o]] [-n jmÃ©no] skupina\n"
 
-#: src/groupmod.c:161
+#: src/groupmod.c:162
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: %s se v /etc/group nenalézá\n"
+msgstr "%s: %s se v /etc/group nenalÃ©zÃ¡\n"
 
-#: src/groupmod.c:247
+#: src/groupmod.c:248
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
-msgstr "%s: nelze pøidat polo¾ku do souboru s dbm databází stínovıch skupin\n"
+msgstr "%s: nelze pÅ™idat poloÅ¾ku do souboru s dbm databÃ¡zÃ­ stÃ­novÃ½ch skupin\n"
 
-#: src/groupmod.c:300
+#: src/groupmod.c:301
 #, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: gid %u není jedineèné\n"
+msgstr "%s: gid %u nenÃ­ jedineÄnÃ©\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:331
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: jméno %s není jedineèné\n"
+msgstr "%s: jmÃ©no %s nenÃ­ jedineÄnÃ©\n"
 
 #: src/groups.c:59
 #, c-format
 msgid "unknown user %s\n"
-msgstr "u¾ivatel %s je neznámı\n"
+msgstr "uÅ¾ivatel %s je neznÃ¡mÃ½\n"
 
 #: src/grpck.c:87
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
 msgstr ""
-"Pou¾ití: %s [-r] [-s] [soubor se skupinami [soubor se stínovımi skupinami]]\n"
+"PouÅ¾itÃ­: %s [-r] [-s] [soubor se skupinami [soubor se stÃ­novÃ½mi skupinami]]\n"
 
 #: src/grpck.c:90
 #, c-format
@@ -1093,80 +990,64 @@ msgstr "%s: soubor %s nelze zamknout\n"
 #: src/pwck.c:251
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: soubor %s nelze otevøít\n"
+msgstr "%s: soubor %s nelze otevÅ™Ã­t\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:311
 msgid "invalid group file entry\n"
-msgstr "chybná polo¾ka v souboru se skupinami\n"
+msgstr "chybnÃ¡ poloÅ¾ka v souboru se skupinami\n"
 
 #: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
 #: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
 #: src/pwck.c:543
 #, c-format
 msgid "delete line `%s'? "
-msgstr "smazat øádek `%s'?"
+msgstr "smazat Å™Ã¡dek `%s'?"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:374
 msgid "duplicate group entry\n"
-msgstr "tato polo¾ka se v souboru se skupinami vyskytuje vícekrát\n"
+msgstr "tato poloÅ¾ka se v souboru se skupinami vyskytuje vÃ­cekrÃ¡t\n"
 
 #: src/grpck.c:391
 #, c-format
 msgid "invalid group name `%s'\n"
-msgstr "jméno skupiny `%s' je chybné\n"
+msgstr "jmÃ©no skupiny `%s' je chybnÃ©\n"
 
 #: src/grpck.c:418
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "skupina %s: u¾ivatel %s neexistuje\n"
+msgstr "skupina %s: uÅ¾ivatel %s neexistuje\n"
 
 #: src/grpck.c:420 src/grpck.c:590
 #, c-format
 msgid "delete member `%s'? "
-msgstr "smazat èlena `%s'? "
+msgstr "smazat Älena `%s'? "
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:457
 msgid "invalid shadow group file entry\n"
-msgstr "chybná polo¾ka v souboru se stínovımi skupinami\n"
+msgstr "chybnÃ¡ poloÅ¾ka v souboru se stÃ­novÃ½mi skupinami\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:520
 msgid "duplicate shadow group entry\n"
-msgstr "duplikovaná polo¾ka v souboru se stínovımi skupinami\n"
+msgstr "duplikovanÃ¡ poloÅ¾ka v souboru se stÃ­novÃ½mi skupinami\n"
 
 #: src/grpck.c:537
 msgid "no matching group file entry\n"
-msgstr "v souboru se skupinami neexistuje odpovídající polo¾ka\n"
+msgstr "v souboru se skupinami neexistuje odpovÃ­dajÃ­cÃ­ poloÅ¾ka\n"
 
 #: src/grpck.c:558
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "stínová skupina %s: administrátor %s neexistuje\n"
+msgstr "stÃ­novÃ¡ skupina %s: administrÃ¡tor %s neexistuje\n"
 
 #: src/grpck.c:560
 #, c-format
 msgid "delete administrative member `%s'? "
-msgstr "smazat administrátora `%s'? "
+msgstr "smazat administrÃ¡tora `%s'? "
 
 #: src/grpck.c:588
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "stínová skupina %s: u¾ivatel %s neexistuje\n"
+msgstr "stÃ­novÃ¡ skupina %s: uÅ¾ivatel %s neexistuje\n"
 
 #: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
 #, c-format
@@ -1176,17 +1057,17 @@ msgstr "%s: soubor %s nelze aktualizovat\n"
 #: src/grpck.c:647 src/pwck.c:612
 #, c-format
 msgid "%s: the files have been updated; run mkpasswd\n"
-msgstr "%s: soubory byly aktualizovány; spus»te mkpasswd\n"
+msgstr "%s: soubory byly aktualizovÃ¡ny; spusÅ¥te mkpasswd\n"
 
 #: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: ¾ádné zmìny nebyly provedeny\n"
+msgstr "%s: Å¾Ã¡dnÃ© zmÄ›ny nebyly provedeny\n"
 
 #: src/grpck.c:651 src/pwck.c:616
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: soubory byly aktualizovány\n"
+msgstr "%s: soubory byly aktualizovÃ¡ny\n"
 
 #: src/grpconv.c:60 src/grpunconv.c:56
 #, c-format
@@ -1196,216 +1077,203 @@ msgstr "%s: soubor se skupinami nelze zamknout\n"
 #: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: soubor se skupinami nelze otevøít\n"
+msgstr "%s: soubor se skupinami nelze otevÅ™Ã­t\n"
 
 #: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze zamknout\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze zamknout\n"
 
 #: src/grpconv.c:76 src/grpunconv.c:72
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze otevøít\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze otevÅ™Ã­t\n"
 
 #: src/grpconv.c:94
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: polo¾ku stínové skupiny %s nelze odstranit\n"
+msgstr "%s: poloÅ¾ku stÃ­novÃ© skupiny %s nelze odstranit\n"
 
-#: src/grpconv.c:138 src/pwconv.c:153
+#: src/grpconv.c:133 src/pwconv.c:154
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: polo¾ku %s souboru se stínovımi hesly nelze aktualizovat\n"
+msgstr "%s: poloÅ¾ku %s souboru se stÃ­novÃ½mi hesly nelze aktualizovat\n"
 
-#: src/grpconv.c:148 src/grpunconv.c:91
+#: src/grpconv.c:143 src/grpunconv.c:91
 #, c-format
 msgid "%s: can't update entry for group %s\n"
-msgstr "%s: polo¾ku skupiny %s nelze odstranit\n"
+msgstr "%s: poloÅ¾ku skupiny %s nelze odstranit\n"
 
-#: src/grpconv.c:155 src/grpunconv.c:99
+#: src/grpconv.c:150 src/grpunconv.c:99
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: soubor se stínovımi hesly nelze aktualizovat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze aktualizovat\n"
 
-#: src/grpconv.c:160 src/grpunconv.c:105
+#: src/grpconv.c:155 src/grpunconv.c:105
 #, c-format
 msgid "%s: can't update group file\n"
 msgstr "%s: soubor s hesly nelze aktualizovat\n"
 
-#: src/grpconv.c:175 src/grpunconv.c:127
-#, c-format
-msgid "%s: not configured for shadow group support.\n"
-msgstr "%s: podpora pro stínová hesla skupin není nakonfigurována\n"
-
 #: src/grpunconv.c:110
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: soubor se stínovımi hesly skupin nelze smazat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly skupin nelze smazat\n"
 
 #: src/id.c:53
-msgid "usage: id [-a]\n"
-msgstr "Pou¾ití: id [-a]\n"
+msgid "Usage: id [-a]\n"
+msgstr "PouÅ¾itÃ­: id [-a]\n"
 
 #: src/id.c:55
-msgid "usage: id\n"
-msgstr "Pou¾ití: id\n"
+msgid "Usage: id\n"
+msgstr "PouÅ¾itÃ­: id\n"
 
-#.
-#. * Start off the group message. It will be of the format
-#. *
-#. *      groups=###(aaa),###(aaa),###(aaa)
-#. *
-#. * where "###" is a numerical value and "aaa" is the
-#. * corresponding name for each respective numerical value.
-#.
 #: src/id.c:169
 msgid " groups="
 msgstr " skupiny="
 
 #: src/lastlog.c:110 src/lastlog.c:116
 #, c-format
-msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
 msgstr ""
 
 #: src/lastlog.c:181
 msgid "Username         Port     From             Latest\n"
-msgstr "U¾ivatel         Port     Z                Naposledy\n"
+msgstr "UÅ¾ivatel         Port     Z                Naposledy\n"
 
 #: src/lastlog.c:183
 msgid "Username                Port     Latest\n"
-msgstr "U¾ivatel                Port     Naposledy\n"
+msgstr "UÅ¾ivatel                Port     Naposledy\n"
 
-#: src/lastlog.c:197
+#: src/lastlog.c:198
 msgid "**Never logged in**"
-msgstr "**Nikdy nebyl pøihlá¹en**"
+msgstr "**Nikdy nebyl pÅ™ihlÃ¡Å¡en**"
 
-#: src/login.c:185
+#: src/login.c:175
 #, c-format
-msgid "usage: %s [-p] [name]\n"
-msgstr "Pou¾ití: %s [-p] jméno\n"
+msgid "Usage: %s [-p] [name]\n"
+msgstr "PouÅ¾itÃ­: %s [-p] jmÃ©no\n"
 
-#: src/login.c:188
+#: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "       %s [-p] [-h poèítaè] [-f jméno]\n"
+msgstr "       %s [-p] [-h poÄÃ­taÄ] [-f jmÃ©no]\n"
 
-#: src/login.c:190
+#: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r poèítaè\n"
+msgstr "       %s [-p] -r poÄÃ­taÄ\n"
 
-#: src/login.c:274
+#: src/login.c:259
 msgid "Invalid login time\n"
-msgstr "Chybnı èas pøihlá¹ení\n"
+msgstr "ChybnÃ½ Äas pÅ™ihlÃ¡Å¡enÃ­\n"
 
-#: src/login.c:329
+#: src/login.c:314
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
 msgstr ""
 "\n"
-"Systém byl uzavøen kvùli pravidelné údr¾bì.\n"
+"SystÃ©m byl uzavÅ™en kvÅ¯li pravidelnÃ© ÃºdrÅ¾bÄ›.\n"
 
-#: src/login.c:340
+#: src/login.c:325
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
 msgstr ""
 "\n"
-"[Odpojení pøeskoèeno -- u¾ivatel root smí bıt pøihlá¹en.]\n"
+"[OdpojenÃ­ pÅ™eskoÄeno -- uÅ¾ivatel root smÃ­ bÃ½t pÅ™ihlÃ¡Å¡en.]\n"
 
-#: src/login.c:377
+#: src/login.c:362
 #, c-format
 msgid ""
 "\n"
 "Login timed out after %d seconds.\n"
 msgstr ""
 "\n"
-"Vypr¹el èasovı limit (%d vteøin) pro pøihlá¹ení.\n"
+"VyprÅ¡el ÄasovÃ½ limit (%d vteÅ™in) pro pÅ™ihlÃ¡Å¡enÃ­.\n"
 
-#: src/login.c:689
+#: src/login.c:648
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " na `%.100s' z `%.200s'"
 
-#: src/login.c:693
+#: src/login.c:652
 #, c-format
 msgid " on `%.100s'"
 msgstr " na `%.100s'"
 
-#: src/login.c:852
+#: src/login.c:811
 #, c-format
 msgid ""
 "\n"
 "%s login: "
 msgstr ""
 "\n"
-"Pøihla¹ovací jméno na %s: "
+"PÅ™ihlaÅ¡ovacÃ­ jmÃ©no na %s: "
 
-#: src/login.c:855
+#: src/login.c:814
 msgid "login: "
-msgstr "Pøihla¹ovací jméno: "
+msgstr "PÅ™ihlaÅ¡ovacÃ­ jmÃ©no: "
 
-#: src/login.c:1071 src/sulogin.c:233
+#: src/login.c:1013 src/sulogin.c:205
 msgid "Login incorrect"
-msgstr "Chybné pøihlá¹ení"
+msgstr "ChybnÃ© pÅ™ihlÃ¡Å¡enÃ­"
 
-#: src/login.c:1265
+#: src/login.c:1193
 msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Varování: po doèasném zákazu je pøihla¹ování opìt povoleno\n"
+msgstr "VarovÃ¡nÃ­: po doÄasnÃ©m zÃ¡kazu je pÅ™ihlaÅ¡ovÃ¡nÃ­ opÄ›t povoleno.\n"
 
-#: src/login.c:1278
+#: src/login.c:1207
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "Poslední pøihlá¹ení: %s na %s"
+msgstr "PoslednÃ­ pÅ™ihlÃ¡Å¡enÃ­: %s na %s"
 
-#: src/login.c:1281
+#: src/login.c:1210
 #, c-format
 msgid "Last login: %.19s on %s"
-msgstr "Poslední pøihlá¹ení: %.19s na %s"
+msgstr "PoslednÃ­ pÅ™ihlÃ¡Å¡enÃ­: %.19s na %s"
 
-#: src/login.c:1287
+#: src/login.c:1216
 #, c-format
 msgid " from %.*s"
 msgstr " z %.*s"
 
-#: src/login.c:1364
+#: src/login.c:1293
 msgid "Starting rad_login\n"
-msgstr "Spou¹tím rad_login\n"
+msgstr "SpouÅ¡tÃ­m rad_login\n"
 
 #: src/mkpasswd.c:47
 #, c-format
 msgid "%s: no DBM database on system - no action performed\n"
-msgstr "%s: systém neobsahuje ¾ádnou DBM databázi - není co dìlat\n"
+msgstr "%s: systÃ©m neobsahuje Å¾Ã¡dnou DBM databÃ¡zi - nenÃ­ co dÄ›lat\n"
 
 #: src/mkpasswd.c:232 src/mkpasswd.c:237
 #, c-format
 msgid "%s: cannot overwrite file %s\n"
-msgstr "%s: soubor %s nelze pøepsat\n"
+msgstr "%s: soubor %s nelze pÅ™epsat\n"
 
 #: src/mkpasswd.c:252
 #, c-format
 msgid "%s: cannot open DBM files for %s\n"
-msgstr "%s: soubory s DBM databázemi pro %s nelze otevøít\n"
+msgstr "%s: soubory s DBM databÃ¡zemi pro %s nelze otevÅ™Ã­t\n"
 
 #: src/mkpasswd.c:287
 #, c-format
 msgid "%s: the beginning with "
-msgstr "%s: zaèátek s "
+msgstr "%s: zaÄÃ¡tek s "
 
 #: src/mkpasswd.c:288
 msgid " is too long\n"
-msgstr " polo¾ka je pøíli¹ dlouhá\n"
+msgstr " poloÅ¾ka je pÅ™Ã­liÅ¡ dlouhÃ¡\n"
 
 #: src/mkpasswd.c:315
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
-msgstr "%s: chyba pøi zpracování øádku \"%s\"\n"
+msgstr "%s: chyba pÅ™i zpracovÃ¡nÃ­ Å™Ã¡dku \"%s\"\n"
 
 #: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
 msgid "adding record for name "
-msgstr "pøidávám záznam pro jméno"
+msgstr "pÅ™idÃ¡vÃ¡m zÃ¡znam pro jmÃ©no"
 
 #: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
 #: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
@@ -1415,377 +1283,316 @@ msgstr ""
 #: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
 #, c-format
 msgid "%s: error adding record for "
-msgstr "%s: chyba pøi zadávání záznamu pro jméno "
+msgstr "%s: chyba pÅ™i zadÃ¡vÃ¡nÃ­ zÃ¡znamu pro jmÃ©no "
 
 #: src/mkpasswd.c:378
 #, c-format
 msgid "added %d entries, longest was %d\n"
-msgstr "poèet pøidanıch polo¾ek: %d; délka nejvìt¹í: %d\n"
+msgstr "poÄet pÅ™idanÃ½ch poloÅ¾ek: %d; dÃ©lka nejvÄ›tÅ¡Ã­: %d\n"
 
 #: src/mkpasswd.c:392
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
-msgstr "Pou¾ití: %s [-vf] [-p|g|sp|sg] soubor\n"
+msgstr "PouÅ¾itÃ­: %s [-vf] [-p|g|sp|sg] soubor\n"
 
 #: src/mkpasswd.c:395
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
-msgstr "Pou¾ití: %s [-vf] [-p|g|sp] soubor\n"
+msgstr "PouÅ¾itÃ­: %s [-vf] [-p|g|sp] soubor\n"
 
 #: src/mkpasswd.c:398
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
-msgstr "Pou¾ití: %s [-vf] [-p|g] soubor\n"
+msgstr "PouÅ¾itÃ­: %s [-vf] [-p|g] soubor\n"
 
 #: src/newgrp.c:61
-msgid "usage: newgrp [-] [group]\n"
-msgstr "Pou¾ití: newgrp [-] [skupina]\n"
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "PouÅ¾itÃ­: newgrp [-] [skupina]\n"
 
 #: src/newgrp.c:63
-msgid "usage: sg group [[-c] command]\n"
-msgstr "Pou¾ití: sg skupina [[-c] pøíkaz]\n"
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "PouÅ¾itÃ­: sg skupina [[-c] pÅ™Ã­kaz]\n"
 
-#: src/newgrp.c:136
+#: src/newgrp.c:131
 #, c-format
 msgid "unknown uid: %u\n"
-msgstr "uid %u je neznámé\n"
+msgstr "uid %u je neznÃ¡mÃ©\n"
 
-#: src/newgrp.c:219
+#: src/newgrp.c:214
 #, c-format
 msgid "unknown gid: %lu\n"
-msgstr "gid %lu je neznámé\n"
+msgstr "gid %lu je neznÃ¡mÃ©\n"
 
-#: src/newgrp.c:365 src/newgrp.c:374
+#: src/newgrp.c:360 src/newgrp.c:369
 msgid "Sorry.\n"
 msgstr "Lituji.\n"
 
-#: src/newgrp.c:472
+#: src/newgrp.c:469
 msgid "too many groups\n"
-msgstr "pøíli¹ mnoho skupin\n"
+msgstr "pÅ™Ã­liÅ¡ mnoho skupin\n"
 
 #: src/newusers.c:78
 #, c-format
 msgid "Usage: %s [input]\n"
-msgstr "Pou¾ití: %s [vstup]\n"
+msgstr "PouÅ¾itÃ­: %s [vstup]\n"
 
-#: src/newusers.c:407
+#: src/newusers.c:388
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: soubor /etc/passwd nelze zamknout\n"
+msgstr "%s: soubor /etc/passwd nelze zamknout.\n"
 
-#: src/newusers.c:419
+#: src/newusers.c:400
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: soubory nelze zamknout. Zkuste to opìt pozdìji.\n"
+msgstr "%s: soubory nelze zamknout. Zkuste to opÄ›t pozdÄ›ji.\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:416
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: soubory nelze otevøít\n"
+msgstr "%s: soubory nelze otevÅ™Ã­t\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: Å™Ã¡dek %d: chybnÃ½ Å™Ã¡dek\n"
 
 #: src/newusers.c:480
 #, c-format
-msgid "%s: line %d: invalid line\n"
-msgstr "%s: øádek %d: chybnı øádek\n"
-
-#: src/newusers.c:499
-#, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s: øádek %d: nelze vytvoøit GID\n"
+msgstr "%s: Å™Ã¡dek %d: nelze vytvoÅ™it GID\n"
 
-#: src/newusers.c:515
+#: src/newusers.c:496
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s: øádek %d: nelze vytvoøit UID\n"
+msgstr "%s: Å™Ã¡dek %d: nelze vytvoÅ™it UID\n"
 
-#: src/newusers.c:528
+#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: øádek %d: u¾ivatele %s nelze nalézt\n"
+msgstr "%s: Å™Ã¡dek %d: uÅ¾ivatele %s nelze nalÃ©zt\n"
 
-#: src/newusers.c:537
+#: src/newusers.c:518
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: øádek %d: heslo nelze aktualizovat\n"
+msgstr "%s: Å™Ã¡dek %d: heslo nelze aktualizovat\n"
 
-#: src/newusers.c:555
+#: src/newusers.c:536
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: øádek %d: volání mkdir selhalo\n"
+msgstr "%s: Å™Ã¡dek %d: volÃ¡nÃ­ mkdir selhalo\n"
 
-#: src/newusers.c:561
+#: src/newusers.c:542
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: øádek %d: volání chown selhalo\n"
+msgstr "%s: Å™Ã¡dek %d: volÃ¡nÃ­ chown selhalo\n"
 
-#: src/newusers.c:571
+#: src/newusers.c:552
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: øádek %d: polo¾ku nelze aktualizovat\n"
+msgstr "%s: Å™Ã¡dek %d: poloÅ¾ku nelze aktualizovat\n"
 
-#: src/newusers.c:603
+#: src/newusers.c:584
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: chyba pøi aktualizaci souborù\n"
+msgstr "%s: chyba pÅ™i aktualizaci souborÅ¯\n"
 
-#: src/passwd.c:174
+#: src/passwd.c:155
 #, c-format
-msgid "usage: %s [-f|-s] [name]\n"
-msgstr "Pou¾ití: %s [-f|-s] [jméno]\n"
+msgid "Usage: %s [-f|-s] [name]\n"
+msgstr "PouÅ¾itÃ­: %s [-f|-s] [jmÃ©no]\n"
 
-#: src/passwd.c:178
+#: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "       %s [-x max] [-n min] [-w varování] [-i vypnutí] jméno\n"
+msgstr "       %s [-x max] [-n min] [-w varovÃ¡nÃ­] [-i vypnutÃ­] jmÃ©no\n"
 
-#: src/passwd.c:180
+#: src/passwd.c:161
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s {-l|-u|-d|-S|-e} jméno\n"
+msgstr "       %s {-l|-u|-d|-S|-e} jmÃ©no\n"
 
-#: src/passwd.c:283
-#, c-format
-msgid "User %s has a TCFS key, his old password is required.\n"
-msgstr "U¾ivatel %s má TCFS klíè, je tøeba jeho staré heslo.\n"
-
-#: src/passwd.c:286
-msgid "You can use -t option to force the change.\n"
-msgstr "Mù¾ete pou¾ít pøepínaè -t pro vynucení zmìny.\n"
-
-#: src/passwd.c:292
+#: src/passwd.c:216
 msgid "Old password: "
-msgstr "Staré heslo: "
+msgstr "StarÃ© heslo: "
 
-#: src/passwd.c:301
+#: src/passwd.c:225
 #, c-format
 msgid "Incorrect password for `%s'\n"
-msgstr "Chybné heslo pro `%s'\n"
+msgstr "ChybnÃ© heslo pro `%s'\n"
 
-#: src/passwd.c:314
-#, c-format
-msgid "Warning: user %s has a TCFS key.\n"
-msgstr "Varování: u¾ivatele %s má TCFS klíè.\n"
-
-#: src/passwd.c:333
+#: src/passwd.c:249
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Zadejte nové heslo (poèet znakù v intervalu %d a¾ %d).\n"
-"Pou¾ijte kombinaci velkıch a malıch písmen s èíslicemi.\n"
+"Zadejte novÃ© heslo (poÄet znakÅ¯ v intervalu %d aÅ¾ %d).\n"
+"PouÅ¾ijte kombinaci velkÃ½ch a malÃ½ch pÃ­smen s ÄÃ­slicemi.\n"
 
-#: src/passwd.c:339
+#: src/passwd.c:255
 msgid "New password: "
-msgstr "Nové heslo: "
+msgstr "NovÃ© heslo: "
 
-#: src/passwd.c:350
+#: src/passwd.c:266
 msgid "Try again.\n"
 msgstr "Zkuste to znovu.\n"
 
-#: src/passwd.c:361
+#: src/passwd.c:277
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
 msgstr ""
 "\n"
-"Varování: slabé heslo (pokud jej opravdu chcete pou¾ít, zadejte jej znovu).\n"
+"VarovÃ¡nÃ­: slabÃ© heslo (pokud jej opravdu chcete pouÅ¾Ã­t, zadejte jej znovu).\n"
 
-#: src/passwd.c:371
+#: src/passwd.c:287
 msgid "They don't match; try again.\n"
-msgstr "Neshodují se; zkuste to znovu.\n"
+msgstr "NeshodujÃ­ se; zkuste to znovu.\n"
 
-#: src/passwd.c:451 src/passwd.c:469
+#: src/passwd.c:364 src/passwd.c:382
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "Heslo pro %s nelze zmìnit.\n"
+msgstr "Heslo pro %s nelze zmÄ›nit.\n"
 
-#: src/passwd.c:494
+#: src/passwd.c:396
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Lituji, ale heslo pro %s nelze je¹tì zmìnit.\n"
+msgstr "Lituji, ale heslo pro %s nelze jeÅ¡tÄ› zmÄ›nit.\n"
 
-#: src/passwd.c:614
+#: src/passwd.c:479
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: do¹la pamì»\n"
+msgstr "%s: doÅ¡la pamÄ›Å¥\n"
 
-#: src/passwd.c:769
-msgid "Cannot lock the TCFS key database; try again later\n"
-msgstr "Nelze zamknout databázi TCFS klíèù. Zkuste to pozdìji.\n"
-
-#: src/passwd.c:777
-msgid "Cannot open the TCFS key database.\n"
-msgstr "Nelze otevøít databázi TCFS klíèù.\n"
-
-#: src/passwd.c:785
-msgid "Error updating the TCFS key database.\n"
-msgstr "Chyba pøi aktualizaci databáze TCFS klíèù.\n"
-
-#: src/passwd.c:792
-msgid "Cannot commit TCFS changes.\n"
-msgstr "Nelze zmìnit TCFS databázi.\n"
-
-#: src/passwd.c:975
+#: src/passwd.c:730
 #, c-format
 msgid "%s: Cannot execute %s"
 msgstr "%s: %s nelze spustit"
 
-#: src/passwd.c:1077
+#: src/passwd.c:815
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: úlo¾na %s není podporována\n"
+msgstr "%s: ÃºloÅ¾na %s nenÃ­ podporovÃ¡na\n"
 
-#: src/passwd.c:1152
+#: src/passwd.c:890
 #, c-format
 msgid "%s: Permission denied\n"
-msgstr "%s: pøístup odmítnut\n"
+msgstr "%s: pÅ™Ã­stup odmÃ­tnut\n"
 
-#: src/passwd.c:1176
+#: src/passwd.c:914
 #, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "Nesmíte zmìnit heslo pro %s.\n"
+msgstr "NesmÃ­te zmÄ›nit heslo pro %s.\n"
 
-#: src/passwd.c:1242
+#: src/passwd.c:962
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "Mìním heslo u¾ivatele %s\n"
+msgstr "MÄ›nÃ­m heslo uÅ¾ivatele %s\n"
 
-#: src/passwd.c:1246
+#: src/passwd.c:966
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "Heslo u¾ivatele %s nebylo zmìnìno.\n"
+msgstr "Heslo uÅ¾ivatele %s nebylo zmÄ›nÄ›no.\n"
 
-#: src/passwd.c:1297
+#: src/passwd.c:1016
 msgid "Password changed.\n"
-msgstr "Heslo bylo zmìnìno.\n"
+msgstr "Heslo bylo zmÄ›nÄ›no.\n"
 
 #: src/pwck.c:87
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
-"Pou¾ití: %s [-q] [-r] [-s] [soubor s hesly [soubor se stínovımi hesly]]\n"
+"PouÅ¾itÃ­: %s [-q] [-r] [-s] [soubor s hesly [soubor se stÃ­novÃ½mi hesly]]\n"
 
 #: src/pwck.c:90
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
-msgstr "Pou¾ití: %s [-q] [-r] [-s] [soubor s hesly]\n"
+msgstr "PouÅ¾itÃ­: %s [-q] [-r] [-s] [soubor s hesly]\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:295
 msgid "invalid password file entry\n"
-msgstr "chybná polo¾ka v souboru s hesly\n"
+msgstr "chybnÃ¡ poloÅ¾ka v souboru s hesly\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:357
 msgid "duplicate password entry\n"
-msgstr "duplikovaná polo¾ka v souboru s hesly\n"
+msgstr "duplikovanÃ¡ poloÅ¾ka v souboru s hesly\n"
 
 #: src/pwck.c:373
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "chybné u¾ivatelské jméno '%s'\n"
+msgstr "chybnÃ© uÅ¾ivatelskÃ© jmÃ©no '%s'\n"
 
-#.
-#. * No primary group, just give a warning
-#.
 #: src/pwck.c:388
 #, c-format
 msgid "user %s: no group %u\n"
-msgstr "u¾ivatel %s: skupina %u neexistuje\n"
+msgstr "uÅ¾ivatel %s: skupina %u neexistuje\n"
 
 #: src/pwck.c:404
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "u¾ivatel %s: adresáø %s neexistuje\n"
+msgstr "uÅ¾ivatel %s: adresÃ¡Å™ %s neexistuje\n"
 
-#.
-#. * Login shell doesn't exist, give a warning
-#.
 #: src/pwck.c:420
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "u¾ivatel %s: program %s neexistuje\n"
+msgstr "uÅ¾ivatel %s: program %s neexistuje\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:456
 msgid "invalid shadow password file entry\n"
-msgstr "chybná polo¾ka v souboru se stínovımi hesly\n"
+msgstr "chybnÃ¡ poloÅ¾ka v souboru se stÃ­novÃ½mi hesly\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:518
 msgid "duplicate shadow password entry\n"
-msgstr "duplikovaná polo¾ka v souboru se stínovımi hesly\n"
+msgstr "duplikovanÃ¡ poloÅ¾ka v souboru se stÃ­novÃ½mi hesly\n"
 
-#.
-#. * Tell the user this entry has no matching
-#. * /etc/passwd entry and ask them to delete it.
-#.
 #: src/pwck.c:542
 msgid "no matching password file entry\n"
-msgstr "chybí polo¾ka v souboru s hesly\n"
+msgstr "chybÃ­ poloÅ¾ka v souboru s hesly\n"
 
 #: src/pwck.c:560
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "u¾ivatel %s: poslední zmìna hesla v budoucnosti\n"
+msgstr "uÅ¾ivatel %s: poslednÃ­ zmÄ›na hesla v budoucnosti\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:93
+#: src/pwconv.c:85 src/pwunconv.c:79
 #, c-format
 msgid "%s: can't lock passwd file\n"
 msgstr "%s: soubor s hesly nelze zamknout\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:98
+#: src/pwconv.c:90 src/pwunconv.c:84
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: soubor s hesly nelze otevøít\n"
+msgstr "%s: soubor s hesly nelze otevÅ™Ã­t\n"
 
-#: src/pwconv.c:117
+#: src/pwconv.c:118
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: polo¾ku souboru s hesly pro u¾ivatele %s nelze odstranit\n"
+msgstr "%s: poloÅ¾ku souboru s hesly pro uÅ¾ivatele %s nelze odstranit\n"
 
-#: src/pwconv.c:163
+#: src/pwconv.c:164
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: polo¾ku souboru s hesly pro u¾ivatele %s nelze aktualizovat\n"
+msgstr "%s: poloÅ¾ku souboru s hesly pro uÅ¾ivatele %s nelze aktualizovat\n"
 
-#: src/pwconv.c:170
+#: src/pwconv.c:171
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s: soubor se stínovımi hesly nelze aktualizovat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze aktualizovat\n"
 
-#: src/pwconv.c:175
+#: src/pwconv.c:176
 #, c-format
 msgid "%s: can't update passwd file\n"
 msgstr "%s: soubor s hesly nelze aktualizovat\n"
 
-#: src/pwunconv.c:50
-#, c-format
-msgid "%s: Shadow passwords are not configured.\n"
-msgstr "%s: stínová hesla nejsou nakonfigurována\n"
-
-#: src/pwunconv.c:160
+#: src/pwunconv.c:124
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s: polo¾ku pro u¾ivatele %s nelze aktualizovat\n"
+msgstr "%s: poloÅ¾ku pro uÅ¾ivatele %s nelze aktualizovat\n"
 
-#: src/pwunconv.c:181
+#: src/pwunconv.c:145
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: nemù¾ete smazat soubor se stínovımi hesly\n"
+msgstr "%s: nemÅ¯Å¾ete smazat soubor se stÃ­novÃ½mi hesly\n"
 
 #: src/su.c:133
 msgid "Sorry."
@@ -1794,7 +1601,7 @@ msgstr "Lituji."
 #: src/su.c:216
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: musí bıt spu¹tìno z terminálu\n"
+msgstr "%s: musÃ­ bÃ½t spuÅ¡tÄ›no z terminÃ¡lu\n"
 
 #: src/su.c:306
 #, c-format
@@ -1804,17 +1611,16 @@ msgstr "%s: pam_start: chyba %d\n"
 #: src/su.c:336
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "Id %s je neznámé.\n"
+msgstr "Id %s je neznÃ¡mÃ©.\n"
 
 #: src/su.c:373 src/su.c:390
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Nejste oprávnìn pou¾ívat su %s\n"
+msgstr "Nejste oprÃ¡vnÄ›n pouÅ¾Ã­vat su %s\n"
 
-#. require own password
 #: src/su.c:385
 msgid "(Enter your own password.)"
-msgstr "(Zadejte va¹e heslo.)"
+msgstr "(Zadejte vaÅ¡e heslo.)"
 
 #: src/su.c:419
 #, c-format
@@ -1825,605 +1631,658 @@ msgstr ""
 "%s: %s\n"
 "(Ignoruji)\n"
 
-#: src/su.c:626
+#: src/su.c:609
 msgid "No shell\n"
-msgstr "®ádnı shell\n"
+msgstr "Å½Ã¡dnÃ½ shell\n"
 
-#: src/suauth.c:100
+#: src/suauth.c:105
 msgid "Access to su to that account DENIED.\n"
-msgstr "Z tohoto úètu je pøístup k su ZAKÁZÁN.\n"
+msgstr "Z tohoto ÃºÄtu je pÅ™Ã­stup k su ZAKÃZÃN.\n"
 
-#: src/suauth.c:107
+#: src/suauth.c:113
 msgid "Password authentication bypassed.\n"
-msgstr "Ovìøování heslem vynecháno.\n"
+msgstr "OvÄ›Å™ovÃ¡nÃ­ heslem vynechÃ¡no.\n"
 
-#: src/suauth.c:114
+#: src/suauth.c:122
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Pro ovìøení zadejte VA©E vlastní heslo.\n"
+msgstr "Pro ovÄ›Å™enÃ­ zadejte VAÅ E vlastnÃ­ heslo.\n"
 
-#. must be a password file!
-#: src/sulogin.c:132
+#: src/sulogin.c:118
 msgid "No password file\n"
 msgstr "Soubor s hesly neexistuje\n"
 
-#.
-#. * Fail secure
-#.
-#: src/sulogin.c:174
+#: src/sulogin.c:160
 msgid "No password entry for 'root'\n"
-msgstr "V databázi není polo¾ka pro u¾ivatele 'root'\n"
+msgstr "V databÃ¡zi nenÃ­ poloÅ¾ka pro uÅ¾ivatele 'root'\n"
 
-#: src/sulogin.c:190
+#: src/sulogin.c:176
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Stisknìte control-d pro normální spu¹tìní systému,\n"
-"(nebo zadejte heslo u¾ivatele root pro údr¾bu systému):"
+"StisknÄ›te control-d pro normÃ¡lnÃ­ spuÅ¡tÄ›nÃ­ systÃ©mu,\n"
+"(nebo zadejte heslo uÅ¾ivatele root pro ÃºdrÅ¾bu systÃ©mu):"
 
-#. make new environment active
-#: src/sulogin.c:243
+#: src/sulogin.c:212
 msgid "Entering System Maintenance Mode\n"
-msgstr "Vstupuji do re¾imu údr¾by systému\n"
+msgstr "Vstupuji do reÅ¾imu ÃºdrÅ¾by systÃ©mu\n"
 
-#: src/useradd.c:251
+#: src/useradd.c:234
 #, c-format
 msgid "%s: rebuild the group database\n"
-msgstr "%s: vytvoøte znovu databázi skupin\n"
+msgstr "%s: vytvoÅ™te znovu databÃ¡zi skupin\n"
 
-#: src/useradd.c:260
+#: src/useradd.c:243
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
-msgstr "%s: vytvoøte znovu databázi stínovıch skupin\n"
+msgstr "%s: vytvoÅ™te znovu databÃ¡zi stÃ­novÃ½ch skupin\n"
 
-#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: chybnı numerickı argument `%s'\n"
+msgstr "%s: chybnÃ½ numerickÃ½ argument `%s'\n"
 
-#: src/useradd.c:365
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
-msgstr "%s: gid %s je neznámé\n"
+msgstr "%s: gid %s je neznÃ¡mÃ©\n"
 
-#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
-#: src/usermod.c:1128
+#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: skupina %s je neznámá\n"
+msgstr "%s: skupina %s je neznÃ¡mÃ¡\n"
 
-#: src/useradd.c:440
-#, c-format
-msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "skupina=%s,%u základ. adr.=%s skel=%s\n"
-
-#: src/useradd.c:444
-#, c-format
-msgid "shell=%s  "
-msgstr "shell=%s  "
-
-#: src/useradd.c:446
-#, c-format
-msgid "inactive=%ld  expire=%s"
-msgstr "vypnutí=%ld   vypr¹ení=%s"
-
-#: src/useradd.c:450
+#: src/useradd.c:419
 #, c-format
 msgid "GROUP=%u\n"
 msgstr "SKUPINA=%u\n"
 
-#: src/useradd.c:451
+#: src/useradd.c:420
 #, c-format
 msgid "HOME=%s\n"
-msgstr "DOMÁCÍ ADRESÁØ=%s\n"
+msgstr "DOMÃCÃ ADRESÃÅ˜=%s\n"
 
-#: src/useradd.c:453
+#: src/useradd.c:422
 #, c-format
 msgid "INACTIVE=%ld\n"
-msgstr "VYPNUTÍ=%ld\n"
+msgstr "VYPNUTÃ=%ld\n"
 
-#: src/useradd.c:454
+#: src/useradd.c:423
 #, c-format
 msgid "EXPIRE=%s\n"
-msgstr "VYPR©ENÍ=%s\n"
+msgstr "VYPRÅ ENÃ=%s\n"
 
-#: src/useradd.c:456
+#: src/useradd.c:425
 #, c-format
 msgid "SHELL=%s\n"
-msgstr "INTERPRET PØÍKAZÙ=%s\n"
+msgstr "INTERPRET PÅ˜ÃKAZÅ®=%s\n"
 
-#: src/useradd.c:457
+#: src/useradd.c:426
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKELETON=%s\n"
 
-#: src/useradd.c:498
+#: src/useradd.c:462
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: nemohu vytvoøit novı soubor s implicitními hodnotami\n"
+msgstr "%s: nemohu vytvoÅ™it novÃ½ soubor s implicitnÃ­mi hodnotami\n"
 
-#: src/useradd.c:503
-#, fuzzy, c-format
+#: src/useradd.c:467
+#, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: nemohu vytvoøit novı soubor s implicitními hodnotami\n"
+msgstr "%s: nemohu vytvoÅ™it novÃ½ soubor s implicitnÃ­mi hodnotami\n"
 
-#: src/useradd.c:596 src/useradd.c:608
+#: src/useradd.c:552 src/useradd.c:564
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s: pøejmenovat: %s"
+msgstr "%s: pÅ™ejmenovat: %s"
 
-#: src/useradd.c:697 src/usermod.c:281
+#: src/useradd.c:657 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
 msgstr "%s: skupina `%s' je NIS skupinou\n"
 
-#: src/useradd.c:706 src/usermod.c:290
+#: src/useradd.c:666 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: zadáno pøíli¹ mnoho skupin (max %d).\n"
+msgstr "%s: zadÃ¡no pÅ™Ã­liÅ¡ mnoho skupin (max %d).\n"
 
-#: src/useradd.c:738 src/usermod.c:322
-#, c-format
-msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "Pou¾ití: %s [-u uid [-o]] [-g skupina [-G skupina,...] \n"
+#: src/useradd.c:698
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "PouÅ¾itÃ­: useradd [-u uid [-o]] [-g skupina [-G skupina,...] \n"
 
-#: src/useradd.c:742
-msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t [-d domácí adr.] [-s shell] [-c komentáø] [-m [-k ¹ablona]]\n"
+#: src/useradd.c:701
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr ""
+"                 [-d domÃ¡cÃ­ adr.] [-s shell] [-c komentÃ¡Å™]\n"
+"                 [-m [-k Å¡ablona]]\n"
 
-#: src/useradd.c:745 src/usermod.c:329
-#, fuzzy
-msgid "[-f inactive] [-e expire ] "
-msgstr " [-f vypnutí] [-e vypr¹ení] "
+#: src/useradd.c:703 src/useradd.c:708
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "                 [-f vypnutÃ­] [-e vyprÅ¡enÃ­]\n"
 
-#: src/useradd.c:748
-msgid "[-A program] "
-msgstr "[-A program] "
+#: src/useradd.c:706
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "         useradd -D [-g skupina [-b zÃ¡kladnÃ­ adr.] [-s shell]\n"
 
-#: src/useradd.c:750
-msgid "[-p passwd] name\n"
-msgstr "[-p heslo]  jméno\n"
-
-#: src/useradd.c:753
-#, c-format
-msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "         %s -D [-g skupina [-b základní adr.] [-s shell]\n"
-
-#: src/useradd.c:756
-#, fuzzy
-msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t [-f vypnutí] [-e vypr¹ení]\n"
-
-#: src/useradd.c:850 src/usermod.c:480
+#: src/useradd.c:793 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s: chyba pøi zamykání souboru se skupinami\n"
+msgstr "%s: chyba pÅ™i zamykÃ¡nÃ­ souboru se skupinami\n"
 
-#: src/useradd.c:855 src/usermod.c:486
+#: src/useradd.c:798 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s: chyba pøi otevírání souboru se skupinami\n"
+msgstr "%s: chyba pÅ™i otevÃ­rÃ¡nÃ­ souboru se skupinami\n"
 
-#: src/useradd.c:862 src/usermod.c:597
+#: src/useradd.c:805 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s: chyba pøi zamykání souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i zamykÃ¡nÃ­ souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/useradd.c:867 src/usermod.c:603
+#: src/useradd.c:810 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s: chyba pøi otevírání souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i otevÃ­rÃ¡nÃ­ souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/useradd.c:1039
+#: src/useradd.c:982
 #, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s uid %u není jedineèné\n"
+msgstr "%s uid %u nenÃ­ jedineÄnÃ©\n"
 
-#: src/useradd.c:1069
+#: src/useradd.c:1012
 #, c-format
 msgid "%s: can't get unique uid\n"
-msgstr "%s: nemohu získat jedineèné uid\n"
+msgstr "%s: nemohu zÃ­skat jedineÄnÃ© uid\n"
 
-#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
-#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
-#, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: chybná polo¾ka `%s'\n"
-
-#: src/useradd.c:1189
+#: src/useradd.c:1049
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: chybnı základní adresáø `%s'\n"
+msgstr "%s: chybnÃ½ zÃ¡kladnÃ­ adresÃ¡Å™ `%s'\n"
 
-#: src/useradd.c:1199
+#: src/useradd.c:1059
 #, c-format
 msgid "%s: invalid comment `%s'\n"
-msgstr "%s: chybnı komentáø `%s'\n"
+msgstr "%s: chybnÃ½ komentÃ¡Å™ `%s'\n"
 
-#: src/useradd.c:1210
+#: src/useradd.c:1070
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: chybnı domácí adresáø `%s'\n"
+msgstr "%s: chybnÃ½ domÃ¡cÃ­ adresÃ¡Å™ `%s'\n"
 
-#: src/useradd.c:1229 src/usermod.c:1110
+#: src/useradd.c:1089 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
-msgstr "%s: chybné datum `%s'\n"
+msgstr "%s: chybnÃ© datum `%s'\n"
 
-#: src/useradd.c:1242
+#: src/useradd.c:1102
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: pøepínaè -e vy¾aduje stínová hesla\n"
+msgstr "%s: pÅ™epÃ­naÄ -e vyÅ¾aduje stÃ­novÃ¡ hesla\n"
 
-#: src/useradd.c:1258
+#: src/useradd.c:1118
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: pøepínaè -f vy¾aduje stínová hesla\n"
+msgstr "%s: pÅ™epÃ­naÄ -f vyÅ¾aduje stÃ­novÃ¡ hesla\n"
 
-#: src/useradd.c:1336
+#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: chybnÃ¡ poloÅ¾ka `%s'\n"
+
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid shell `%s'\n"
-msgstr "%s: chybnı shell `%s'\n"
+msgstr "%s: chybnÃ½ shell `%s'\n"
 
-#: src/useradd.c:1377
+#: src/useradd.c:1237
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: chybné u¾ivatelské jméno `%s'\n"
+msgstr "%s: chybnÃ© uÅ¾ivatelskÃ© jmÃ©no `%s'\n"
 
-#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: soubor s hesly nelze pøepsat\n"
+msgstr "%s: soubor s hesly nelze pÅ™epsat\n"
 
-#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: soubor se stínovımi hesly nelze pøepsat\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze pÅ™epsat\n"
 
-#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: soubor s hesly nelze zamknout\n"
 
-#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: soubor s hesly nelze otevøít\n"
+msgstr "%s: soubor s hesly nelze otevÅ™Ã­t\n"
 
-#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: soubor se stínovımi hesly nelze zamknout\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze zamknout\n"
 
-#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: soubor se stínovımi hesly nelze otevøít\n"
+msgstr "%s: soubor se stÃ­novÃ½mi hesly nelze otevÅ™Ã­t\n"
 
-#: src/useradd.c:1580 src/usermod.c:1405
-#, c-format
-msgid "%s: error adding authentication method\n"
-msgstr "%s: chyba pøi vytváøení ovìøovací metody\n"
-
-#: src/useradd.c:1604
+#: src/useradd.c:1435
 #, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: chyba pøi vytváøení nové polo¾ky v souboru s hesly\n"
+msgstr "%s: chyba pÅ™i vytvÃ¡Å™enÃ­ novÃ© poloÅ¾ky v souboru s hesly\n"
 
-#: src/useradd.c:1618
+#: src/useradd.c:1449
 #, c-format
 msgid "%s: error updating password dbm entry\n"
-msgstr "%s: chyba pøi aktualizaci polo¾ky dbm databáze hesel\n"
+msgstr "%s: chyba pÅ™i aktualizaci poloÅ¾ky dbm databÃ¡ze hesel\n"
 
-#: src/useradd.c:1634 src/usermod.c:1471
+#: src/useradd.c:1465 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: chyba pøi vytváøení nové polo¾ky v souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i vytvÃ¡Å™enÃ­ novÃ© poloÅ¾ky v souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/useradd.c:1650 src/usermod.c:1488
+#: src/useradd.c:1481 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
-msgstr "%s: chyba pøi aktualizaci polo¾ky dbm databáze stínovıch hesel\n"
+msgstr "%s: chyba pÅ™i aktualizaci poloÅ¾ky dbm databÃ¡ze stÃ­novÃ½ch hesel\n"
 
-#: src/useradd.c:1682
+#: src/useradd.c:1513
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: adresáø %s nelze vytvoøit\n"
+msgstr "%s: adresÃ¡Å™ %s nelze vytvoÅ™it\n"
 
-#: src/useradd.c:1806 src/usermod.c:1233
+#: src/useradd.c:1634 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: u¾ivatel %s ji¾ existuje\n"
+msgstr "%s: uÅ¾ivatel %s jiÅ¾ existuje\n"
 
-#: src/useradd.c:1821
+#: src/useradd.c:1649
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:1854
+#: src/useradd.c:1687
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-msgstr "%s: varování: CREATE_HOME není podporováno, pou¾ijte pøepínaè -m\n"
+msgstr "%s: varovÃ¡nÃ­: CREATE_HOME nenÃ­ podporovÃ¡no, pouÅ¾ijte pÅ™epÃ­naÄ -m\n"
 
-#: src/userdel.c:129
+#: src/userdel.c:124
 #, c-format
-msgid "usage: %s [-r] name\n"
-msgstr "Pou¾ití: %s [-r] jméno\n"
+msgid "Usage: %s [-r] name\n"
+msgstr "PouÅ¾itÃ­: %s [-r] jmÃ©no\n"
 
-#: src/userdel.c:181 src/userdel.c:267
+#: src/userdel.c:176 src/userdel.c:262
 #, c-format
 msgid "%s: error updating group entry\n"
-msgstr "%s: polo¾ku souboru se skupinami nelze aktualizovat\n"
+msgstr "%s: poloÅ¾ku souboru se skupinami nelze aktualizovat\n"
 
-#: src/userdel.c:191 src/userdel.c:276
+#: src/userdel.c:186 src/userdel.c:271
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
-msgstr "%s: polo¾ku dbm databáze skupin nelze aktualizovat\n"
+msgstr "%s: poloÅ¾ku dbm databÃ¡ze skupin nelze aktualizovat\n"
 
-#: src/userdel.c:219
+#: src/userdel.c:214
 #, c-format
 msgid "%s: cannot remove dbm group entry\n"
-msgstr "%s: polo¾ku dbm databáze skupin nelze odstranit\n"
+msgstr "%s: poloÅ¾ku dbm databÃ¡ze skupin nelze odstranit\n"
 
-#: src/userdel.c:308
+#: src/userdel.c:379
 #, c-format
-msgid "%s: cannot rewrite TCFS key file\n"
-msgstr "%s: soubor s TCFS klíèi nelze pøepsat\n"
+msgid "%s: cannot open group file\n"
+msgstr "%s: soubor se skupinami nelze otevÅ™Ã­t\n"
 
-#: src/userdel.c:392
+#: src/userdel.c:390
 #, c-format
-msgid "%s: cannot lock TCFS key file\n"
-msgstr "%s: soubor s TCFS klíèi nelze zamknout\n"
-
-#: src/userdel.c:397
-#, c-format
-msgid "%s: cannot open TCFS key file\n"
-msgstr "%s: soubor s TCFS klíèi nelze otevøít\n"
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: soubor se stÃ­novÃ½mi skupinami nelze otevÅ™Ã­t\n"
 
 #: src/userdel.c:408
 #, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: soubor se skupinami nelze otevøít\n"
-
-#: src/userdel.c:419
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: soubor se stínovımi skupinami nelze otevøít\n"
-
-#: src/userdel.c:451 src/userdel.c:468
-#, c-format
-msgid "%s: error deleting authentication\n"
-msgstr "%s: chyba pøi odstraòování ovìøovací metody\n"
-
-#: src/userdel.c:479
-#, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru s hesly\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru s hesly\n"
 
-#: src/userdel.c:485
+#: src/userdel.c:412
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/userdel.c:496
-#, c-format
-msgid "%s: error deleting TCFS entry\n"
-msgstr "%s: chyba pøi odstraòování TCFS polo¾ky\n"
-
-#: src/userdel.c:510
+#: src/userdel.c:421
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky z dbm databáze hesel\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky z dbm databÃ¡ze hesel\n"
 
-#: src/userdel.c:533
+#: src/userdel.c:440
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky z dbm databáze stínovıch hesel\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky z dbm databÃ¡ze stÃ­novÃ½ch hesel\n"
 
-#: src/userdel.c:569
+#: src/userdel.c:484
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: u¾ivatel %s je právì pøihlá¹en\n"
+msgstr "%s: uÅ¾ivatel %s je prÃ¡vÄ› pÅ™ihlÃ¡Å¡en\n"
 
-#: src/userdel.c:659
+#: src/userdel.c:594
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: varování: vlastníkem %s není %s, nema¾u jej\n"
+msgstr "%s: varovÃ¡nÃ­: vlastnÃ­kem %s nenÃ­ %s, nemaÅ¾u jej\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:600
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: varování: nemohu smazat "
+msgstr "%s: varovÃ¡nÃ­: nemohu smazat "
 
-#: src/userdel.c:758 src/usermod.c:1023
+#: src/userdel.c:703 src/usermod.c:783
 #, c-format
 msgid "%s: user %s does not exist\n"
-msgstr "%s: u¾ivatel %s neexistuje\n"
+msgstr "%s: uÅ¾ivatel %s neexistuje\n"
 
-#: src/userdel.c:770 src/usermod.c:1039
+#: src/userdel.c:718 src/usermod.c:799
 #, c-format
 msgid "%s: user %s is a NIS user\n"
-msgstr "%s: u¾ivatel %s je NIS u¾ivatelem\n"
+msgstr "%s: uÅ¾ivatel %s je NIS uÅ¾ivatelem\n"
 
-#: src/userdel.c:799
+#: src/userdel.c:756
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: vlastníkem %s není %s, nema¾u jej\n"
+msgstr "%s: vlastnÃ­kem %s nenÃ­ %s, nemaÅ¾u jej\n"
 
-#: src/userdel.c:818
+#: src/userdel.c:779
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: adresáø %s nebudu mazat (je to domácí adresáø u¾ivatele %s)\n"
+msgstr "%s: adresÃ¡Å™ %s nebudu mazat (je to domÃ¡cÃ­ adresÃ¡Å™ uÅ¾ivatele %s)\n"
 
-#: src/userdel.c:830
+#: src/userdel.c:793
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: chyba pøi mazání adresáøe %s\n"
+msgstr "%s: chyba pÅ™i mazÃ¡nÃ­ adresÃ¡Å™e %s\n"
 
-#: src/usermod.c:326
+#: src/usermod.c:306
+#, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "PouÅ¾itÃ­: %s [-u uid [-o]] [-g skupina [-G skupina,...] \n"
+
+#: src/usermod.c:310
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
-msgstr "\t\t[-d domácí adr. [-m]] [-s shell] [-c komentáø] [-l nové jméno]\n"
+msgstr "\t\t[-d domÃ¡cÃ­ adr. [-m]] [-s shell] [-c komentÃ¡Å™] [-l novÃ© jmÃ©no]\n"
 
-#: src/usermod.c:332
-msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {DEFAULT|program},...] "
+#: src/usermod.c:313
+#, fuzzy
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f vypnutÃ­] [-e vyprÅ¡enÃ­] "
 
-#: src/usermod.c:334
+#: src/usermod.c:315
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p heslo] [-L|-U] jméno\n"
+msgstr "[-p heslo] [-L|-U] jmÃ©no\n"
 
-#: src/usermod.c:514
+#: src/usermod.c:495
 #, c-format
 msgid "%s: out of memory in update_group\n"
-msgstr "%s nedostatek pamìti v update_group\n"
+msgstr "%s nedostatek pamÄ›ti v update_group\n"
 
-#: src/usermod.c:641
+#: src/usermod.c:622
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: nedostatek pamìti v update_gshadow\n"
+msgstr "%s: nedostatek pamÄ›ti v update_gshadow\n"
 
-#: src/usermod.c:1210
+#: src/usermod.c:958
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: ¾ádné pøepínaèe\n"
+msgstr "%s: Å¾Ã¡dnÃ© pÅ™epÃ­naÄe\n"
 
-#: src/usermod.c:1217
+#: src/usermod.c:965
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: pøepínaèe -e a -f vy¾adují stínová hesla\n"
+msgstr "%s: pÅ™epÃ­naÄe -e a -f vyÅ¾adujÃ­ stÃ­novÃ¡ hesla\n"
 
-#: src/usermod.c:1239
+#: src/usermod.c:987
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s uid %lu není jedineèné\n"
+msgstr "%s uid %lu nenÃ­ jedineÄnÃ©\n"
 
-#: src/usermod.c:1392
-#, c-format
-msgid "%s: error deleting authentication method\n"
-msgstr "%s: chyba pøi odstraòování ovìøovací metody\n"
-
-#: src/usermod.c:1418
-#, c-format
-msgid "%s: error changing authentication method\n"
-msgstr "%s: chyba pøi zmìnì ovìøovací metody\n"
-
-#: src/usermod.c:1436
+#: src/usermod.c:1116
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: chyba pøi zmìnì polo¾ky v souboru s hesly\n"
+msgstr "%s: chyba pÅ™i zmÄ›nÄ› poloÅ¾ky v souboru s hesly\n"
 
-#: src/usermod.c:1442
+#: src/usermod.c:1122
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru s hesly\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru s hesly\n"
 
-#: src/usermod.c:1451
+#: src/usermod.c:1131
 #, c-format
 msgid "%s: error adding password dbm entry\n"
-msgstr "%s: chyba pøi pøidávání polo¾ky do dbm databáze hesel\n"
+msgstr "%s: chyba pÅ™i pÅ™idÃ¡vÃ¡nÃ­ poloÅ¾ky do dbm databÃ¡ze hesel\n"
 
-#: src/usermod.c:1459
+#: src/usermod.c:1139
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky z dbm databáze hesel\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky z dbm databÃ¡ze hesel\n"
 
-#: src/usermod.c:1478
+#: src/usermod.c:1158
 #, c-format
 msgid "%s: error removing shadow password entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky ze souboru se stínovımi hesly\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky ze souboru se stÃ­novÃ½mi hesly\n"
 
-#: src/usermod.c:1495
+#: src/usermod.c:1175
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
-msgstr "%s: chyba pøi odstraòování polo¾ky z dbm databáze stínovıch hesel\n"
+msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ poloÅ¾ky z dbm databÃ¡ze stÃ­novÃ½ch hesel\n"
 
-#: src/usermod.c:1524
+#: src/usermod.c:1204
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: adresáø %s ji¾ existuje\n"
+msgstr "%s: adresÃ¡Å™ %s jiÅ¾ existuje\n"
 
-#: src/usermod.c:1533
+#: src/usermod.c:1213
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: %s nelze vytvoøit\n"
+msgstr "%s: %s nelze vytvoÅ™it\n"
 
-#: src/usermod.c:1539
+#: src/usermod.c:1219
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: volání chown pro %s selhalo\n"
+msgstr "%s: volÃ¡nÃ­ chown pro %s selhalo\n"
 
-#: src/usermod.c:1556
+#: src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: adresáø %s nelze na %s pøejmenovat\n"
+msgstr "%s: adresÃ¡Å™ %s nelze na %s pÅ™ejmenovat\n"
 
-#. better leave it alone
-#: src/usermod.c:1653
+#: src/usermod.c:1333
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: varování: vlastníkem %s není %s\n"
+msgstr "%s: varovÃ¡nÃ­: vlastnÃ­kem %s nenÃ­ %s\n"
 
-#: src/usermod.c:1659
+#: src/usermod.c:1339
 msgid "failed to change mailbox owner"
-msgstr "chyba pøi zmìnì vlastníka schránky"
+msgstr "chyba pÅ™i zmÄ›nÄ› vlastnÃ­ka schrÃ¡nky"
 
-#: src/usermod.c:1667
+#: src/usermod.c:1347
 msgid "failed to rename mailbox"
-msgstr "chyba pøi pøejmenovávání schránky"
+msgstr "chyba pÅ™i pÅ™ejmenovÃ¡vÃ¡nÃ­ schrÃ¡nky"
 
-#: src/vipw.c:104
+#: src/vipw.c:105
 #, c-format
 msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: %s je beze zmìny\n"
+"%s: %s je beze zmÄ›ny\n"
 
-#: src/vipw.c:132
+#: src/vipw.c:133
 msgid "Couldn't lock file"
 msgstr "Soubor nelze zamknout"
 
-#: src/vipw.c:141
+#: src/vipw.c:142
 msgid "Couldn't make backup"
-msgstr "Zálohování nelze provést."
+msgstr "ZÃ¡lohovÃ¡nÃ­ nelze provÃ©st."
 
-#: src/vipw.c:206
+#: src/vipw.c:200
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: %s nelze obnovit: %s (zmìny jsou v %s)\n"
+msgstr "%s: %s nelze obnovit: %s (zmÄ›ny jsou v %s)\n"
 
-#: src/vipw.c:244
+#: src/vipw.c:238
 msgid ""
 "Usage:\n"
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-"Pou¾ití:\n"
+"PouÅ¾itÃ­:\n"
 "`vipw' edituje /etc/passwd        `vipw -s' edituje /etc/shadow\n"
 "`vigr' edituje /etc/group         `vigr -s' edituje /etc/gshadow\n"
 
+#, fuzzy
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: poloÅ¾ku pro uÅ¾ivatele %s nelze aktualizovat\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr "UÅ¾ivatel %s mÃ¡ TCFS klÃ­Ä, je tÅ™eba jeho starÃ© heslo.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr "MÅ¯Å¾ete pouÅ¾Ã­t pÅ™epÃ­naÄ -t pro vynucenÃ­ zmÄ›ny.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "VarovÃ¡nÃ­: uÅ¾ivatele %s mÃ¡ TCFS klÃ­Ä.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr "Nelze zamknout databÃ¡zi TCFS klÃ­ÄÅ¯. Zkuste to pozdÄ›ji.\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "Nelze otevÅ™Ã­t databÃ¡zi TCFS klÃ­ÄÅ¯.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "Chyba pÅ™i aktualizaci databÃ¡ze TCFS klÃ­ÄÅ¯.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "Nelze zmÄ›nit TCFS databÃ¡zi.\n"
+
+#~ msgid "%s: cannot rewrite TCFS key file\n"
+#~ msgstr "%s: soubor s TCFS klÃ­Äi nelze pÅ™epsat\n"
+
+#~ msgid "%s: cannot lock TCFS key file\n"
+#~ msgstr "%s: soubor s TCFS klÃ­Äi nelze zamknout\n"
+
+#~ msgid "%s: cannot open TCFS key file\n"
+#~ msgstr "%s: soubor s TCFS klÃ­Äi nelze otevÅ™Ã­t\n"
+
+#~ msgid "%s: error deleting TCFS entry\n"
+#~ msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ TCFS poloÅ¾ky\n"
+
+#~ msgid "               [-f inactive] [-e expire]"
+#~ msgstr "                 [-f vypnutÃ­] [-e vyprÅ¡enÃ­]"
+
+#~ msgid "%s: error deleting authentication\n"
+#~ msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ ovÄ›Å™ovacÃ­ metody\n"
+
+#, fuzzy
+#~ msgid "[-A {DEFAULT|program},...] "
+#~ msgstr "[-A {DEFAULT|program},...] "
+
+#~ msgid "%s: error deleting authentication method\n"
+#~ msgstr "%s: chyba pÅ™i odstraÅˆovÃ¡nÃ­ ovÄ›Å™ovacÃ­ metody\n"
+
+#~ msgid "%s: error adding authentication method\n"
+#~ msgstr "%s: chyba pÅ™i vytvÃ¡Å™enÃ­ ovÄ›Å™ovacÃ­ metody\n"
+
+#~ msgid "%s: error changing authentication method\n"
+#~ msgstr "%s: chyba pÅ™i zmÄ›nÄ› ovÄ›Å™ovacÃ­ metody\n"
+
+#~ msgid "[-A program] "
+#~ msgstr "[-A program] "
+
+#~ msgid "[-p passwd] name\n"
+#~ msgstr "[-p heslo]  jmÃ©no\n"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "chyba - hledÃ¡nÃ­ '%s' bylo neÃºspÄ›Å¡nÃ©\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%s nenalezeno\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: podpora pro stÃ­novÃ¡ hesla skupin nenÃ­ nakonfigurovÃ¡na\n"
+
+#~ msgid "%s: Shadow passwords are not configured.\n"
+#~ msgstr "%s: stÃ­novÃ¡ hesla nejsou nakonfigurovÃ¡na\n"
+
+#, fuzzy
+#~ msgid "Usage: %s [-l] user\n"
+#~ msgstr "PouÅ¾itÃ­: %s [-e]\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "SpouÅ¡tÃ­m shell %s\n"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "Heslo pro pÅ™Ã­stup vytÃ¡Äenou linkou:"
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr ""
+#~ "PouÅ¾itÃ­: %s [-l] [-m min_dnÅ¯] [-M max_dnÅ¯] [-d poslednÃ­ den] uÅ¾ivatel\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "PouÅ¾itÃ­: %s [-(ald)] shell\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "Heslo shellu: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "zadejte znovu heslo shellu: "
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr "%s: hesla se liÅ¡Ã­, zkuste to znovu.\n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: %s nelze vytvoÅ™it"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: %s nelze otevÅ™Ã­t"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: Shell %s nebyl nalezen.\n"
+
+#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
+#~ msgstr "skupina=%s,%u zÃ¡klad. adr.=%s skel=%s\n"
+
+#~ msgid "shell=%s  "
+#~ msgstr "shell=%s  "
+
+#~ msgid "inactive=%ld  expire=%s"
+#~ msgstr "vypnutÃ­=%ld   vyprÅ¡enÃ­=%s"
+
+#, fuzzy
+#~ msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "PouÅ¾itÃ­: %s [-u uid [-o]] [-g skupina [-G skupina,...] \n"
+
 #~ msgid "%s: gid %ld is not unique\n"
-#~ msgstr "%s: gid %ld není jedineèné\n"
+#~ msgstr "%s: gid %ld nenÃ­ jedineÄnÃ©\n"
 
 #, fuzzy
 #~ msgid "unknown gid: %u\n"
-#~ msgstr "gid %d je neznámé\n"
+#~ msgstr "gid %d je neznÃ¡mÃ©\n"
 
 #~ msgid "%s: uid %d is not unique\n"
-#~ msgstr "%s: uid %d není jedineèné\n"
+#~ msgstr "%s: uid %d nenÃ­ jedineÄnÃ©\n"
 
 #~ msgid "user %s: bad UID (%d)\n"
-#~ msgstr "u¾ivatel %s: chybné UID (%d)\n"
+#~ msgstr "uÅ¾ivatel %s: chybnÃ© UID (%d)\n"
 
 #~ msgid "%s: no aging information present\n"
-#~ msgstr "%s: chybí informace\n"
+#~ msgstr "%s: chybÃ­ informace\n"
 
 #~ msgid "group %s: bad GID (%d)\n"
-#~ msgstr "skupina %s: chybné GID (%d)\n"
+#~ msgstr "skupina %s: chybnÃ© GID (%d)\n"
 
 #~ msgid "%s: permission denied (shell).\n"
-#~ msgstr "%s: pøístup odmítnut (shell)\n"
+#~ msgstr "%s: pÅ™Ã­stup odmÃ­tnut (shell)\n"

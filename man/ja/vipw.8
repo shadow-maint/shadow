@@ -1,36 +1,37 @@
-.\" $Id: vipw.8,v 1.2 2002/03/09 11:16:16 ankry Exp $
-.\"
+.\"$Id: vipw.8,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\"
 .\" Japanese Version Copyright (c) 2001 Maki KURODA
 .\"     all right reserved,
 .\" Translated Tue Oct 30 11:55:56 JST 2001
-.\" by Maki KURODA <mkuroda@aisys-jp.com>
-.\"
+.\"     by Maki KURODA <mkuroda@aisys-jp.com>
+.\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH VIPW 8 "26 Sep 1997"
 .SH 名前
-vipw, vigr \- password、 group、 shadow-password、shadow-group ファイルを編集する。
+vipw, vigr \- password, group とそれぞれの shadow ファイルを編集する
 .SH 書式
-.BR vipw " [-s]"
+\fBvipw\fR [\fB-s\fR]
 .br
-.BR vigr " [-s]"
+\fBvigr\fR [\fB-s\fR]
 .SH 説明
 .BR vipw " と " vigr
-は
-.IR /etc/passwd と /etc/group
-をそれぞれ編集する。
+は、それぞれ
+\fI/etc/passwd\fR " と " \fI/etc/group\fR
+を編集する。
 .B -s
-フラグが指定されている場合、それらのファイルの shadow バージョンである
-.IR /etc/shadow と /etc/gshadow
+フラグが指定されると、これらのファイルの shadow 化版である
+\fI/etc/shadow\fR と \fI/etc/gshadow\fR
 をそれぞれ編集する。
-プログラムはファイルの改変を防ぐための適切なロックを設定する。
-使われるエディタは、環境変数
-.BR VISUAL 、
+これらのプログラムはファイルが壊れないよう適切なロックを設定する。
+
+これらのプログラムは、利用するエディタとしてまず
 環境変数
-.BR EDITOR 、
-デフォルトのエディタ
+.BR VISUAL ,
+環境変数
+.BR EDITOR ,
+を順に試し、最後にデフォルトのエディタである
 .BR vi 
-の順である。
+を用いようとする。
 .SH 関連項目
 .BR group (5),
 .BR passwd (5),

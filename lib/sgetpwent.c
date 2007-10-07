@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: sgetpwent.c,v 1.5 1998/04/02 21:51:46 marekm Exp $")
+RCSID("$Id: sgetpwent.c,v 1.6 2003/05/03 16:14:23 kloczek Exp $")
 
 #include <sys/types.h>
 #include "defines.h"
@@ -112,23 +112,7 @@ sgetpwent(const char *buf)
 		((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && *ep)) {
 		return 0;
 	}
-#ifdef	ATT_AGE
-	cp = pwent.pw_passwd;
-	while (*cp && *cp != ',')
-		++cp;
-
-	if (*cp) {
-		*cp++ = '\0';
-		pwent.pw_age = cp;
-	} else {
-		cp = 0;
-		pwent.pw_age = "";
-	}
-#endif
 	pwent.pw_gecos = fields[4];
-#ifdef	ATT_COMMENT
-	pwent.pw_comment = "";
-#endif
 	pwent.pw_dir = fields[5];
 	pwent.pw_shell = fields[6];
 

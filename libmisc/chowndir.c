@@ -30,38 +30,35 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chowndir.c,v 1.6 2000/08/26 18:27:17 marekm Exp $")
-
+RCSID ("$Id: chowndir.c,v 1.7 2003/04/22 10:59:21 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "prototypes.h"
 #include "defines.h"
-
 #include <fcntl.h>
 #include <stdio.h>
-
 /*
  * chown_tree - change ownership of files in a directory tree
  *
  *	chown_dir() walks a directory tree and changes the ownership
  *	of all files owned by the provided user ID.
  */
-
 int
-chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t new_gid)
+chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
+	    gid_t new_gid)
 {
-	char	new_name[1024];
-	int	rc = 0;
-	struct	DIRECT	*ent;
-	struct	stat	sb;
-	DIR	*dir;
+	char new_name[1024];
+	int rc = 0;
+	struct DIRECT *ent;
+	struct stat sb;
+	DIR *dir;
 
 	/*
 	 * Make certain the directory exists.  This routine is called
 	 * directory by the invoker, or recursively.
 	 */
 
-	if (access(root, F_OK) != 0)
+	if (access (root, F_OK) != 0)
 		return -1;
 
 	/*
@@ -71,7 +68,7 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 	 * old user ID.
 	 */
 
-	if (! (dir = opendir (root)))
+	if (!(dir = opendir (root)))
 		return -1;
 
 	while ((ent = readdir (dir))) {
@@ -81,7 +78,7 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 		 */
 
 		if (strcmp (ent->d_name, ".") == 0 ||
-				strcmp (ent->d_name, "..") == 0)
+		    strcmp (ent->d_name, "..") == 0)
 			continue;
 
 		/*
@@ -89,16 +86,18 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 		 * destination files.
 		 */
 
-		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name)
+		if (strlen (root) + strlen (ent->d_name) + 2 >
+		    sizeof new_name)
 			break;
 
-		snprintf(new_name, sizeof new_name, "%s/%s", root, ent->d_name);
+		snprintf (new_name, sizeof new_name, "%s/%s", root,
+			  ent->d_name);
 
 		/* Don't follow symbolic links! */
-		if (LSTAT(new_name, &sb) == -1)
+		if (LSTAT (new_name, &sb) == -1)
 			continue;
 
-		if (S_ISDIR(sb.st_mode) && !S_ISLNK(sb.st_mode)) {
+		if (S_ISDIR (sb.st_mode) && !S_ISLNK (sb.st_mode)) {
 
 			/*
 			 * Do the entire subdirectory.
@@ -110,12 +109,13 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 		}
 #ifndef HAVE_LCHOWN
 		/* don't use chown (follows symbolic links!) */
-		if (S_ISLNK(sb.st_mode))
+		if (S_ISLNK (sb.st_mode))
 			continue;
 #endif
 		if (sb.st_uid == old_uid)
-			LCHOWN(new_name, new_uid,
-				sb.st_gid == old_gid ? new_gid:sb.st_gid);
+			LCHOWN (new_name, new_uid,
+				sb.st_gid ==
+				old_gid ? new_gid : sb.st_gid);
 	}
 	closedir (dir);
 
@@ -123,10 +123,11 @@ chown_tree(const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid, gid_t 
 	 * Now do the root of the tree
 	 */
 
-	if (! stat (root, &sb)) {
+	if (!stat (root, &sb)) {
 		if (sb.st_uid == old_uid)
-			LCHOWN(root, new_uid,
-				sb.st_gid == old_gid ? new_gid:sb.st_gid);
+			LCHOWN (root, new_uid,
+				sb.st_gid ==
+				old_gid ? new_gid : sb.st_gid);
 	}
 	return rc;
 }

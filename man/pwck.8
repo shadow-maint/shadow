@@ -1,4 +1,4 @@
-.\"$Id: pwck.8,v 1.9 2002/03/08 04:39:12 kloczek Exp $
+.\"$Id: pwck.8,v 1.12 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -53,56 +53,52 @@ Checks are made to verify that each entry has
 - a valid login shell
 .in -.5i
 .sp
-.P
-The checks for correct number of fields and unique user name are fatal.
-If the entry has the wrong number of fields, the user will be prompted to
-delete the entire line.
-If the user does not answer affirmatively, all further checks are bypassed.
-An entry with a duplicated user name is prompted for deletion, but the
-remaining checks will still be made.
-All other errors are warning and the user is encouraged to run the
+.PP
+The checks for correct number of fields and unique user name are fatal. If
+the entry has the wrong number of fields, the user will be prompted to
+delete the entire line. If the user does not answer affirmatively, all
+further checks are bypassed. An entry with a duplicated user name is
+prompted for deletion, but the remaining checks will still be made. All
+other errors are warning and the user is encouraged to run the
 \fBusermod\fR command to correct the error.
-.P
+.PP
 The commands which operate on the \fI/etc/passwd\fR file are not able to
 alter corrupted or duplicated entries.
 \fBpwck\fR should be used in those circumstances to remove the offending
 entry.
 .SH OPTIONS
 By default, \fBpwck\fR operates on the files \fI/etc/passwd\fR and
-\fI/etc/shadow\fR.
-The user may select alternate files with the \fIpasswd\fR and \fIshadow\fR
-parameters.
-Additionally, the user may execute the command in read-only mode by
-specifying the \fB-r\fR flag.
-This causes all questions regarding changes to be answered \fBno\fR
-without user intervention.
+\fI/etc/shadow\fR. The user may select alternate files with the \fIpasswd\fR
+and \fIshadow\fR parameters. Additionally, the user may execute the command
+in read-only mode by specifying the \fB-r\fR flag. This causes all questions
+regarding changes to be answered \fBno\fR without user intervention.
 \fBpwck\fR can also sort entries in \fI/etc/passwd\fR and \fI/etc/shadow\fR
 by UID. To run it in sort mode pass it \fB-s\fR flag. No checks are
 performed then, it just sorts.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR	\- user account information
 .br
-/etc/shadow \- encrypted password information
+\fI/etc/shadow\fR	\- encrypted password information
 .br
-/etc/group \- group information
+\fI/etc/group\fR	\- group information
 .SH SEE ALSO
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5),
 .BR usermod (8)
-.SH DIAGNOSTICS
+.SH EXIT VALUES
+.TP 2
 The \fBpwck\fR command exits with the following values:
-.IP 0 5
-Success
-.IP 1 5
-Syntax Error
-.IP 2 5
-One or more bad password entries
-.IP 3 5
-Cannot open password files
-.IP 4 5
-Cannot lock password files
-.IP 5 5
-Cannot update password files
+\fB0\fR	\- success
+.br
+\fB1\fR	\- invalid command syntax
+.br
+\fB2\fR	\- one or more bad password entries
+.br
+\fB3\fR	\- can't open password files
+.br
+\fB4\fR	\- can't lock password files
+.br
+\fB5\fR	\- can't update password files
 .SH AUTHOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

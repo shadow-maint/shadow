@@ -1,4 +1,4 @@
-.\" $Id: pwck.8,v 1.4 2001/08/14 21:11:19 malekith Exp $
+.\" $Id: pwck.8,v 1.5 2003/04/28 17:52:15 kloczek Exp $
 .\" {PTM/WK/1999-09-14}
 .\" Copyright 1992, Julianne Frances Haugh
 .\" All rights reserved.
@@ -39,7 +39,7 @@ i poprawne dane w ka¿dym z pól. U¿ytkownik monitowany jest o usuniêcie
 pozycji, które s± sformatowane niepoprawnie lub posiadaj± inne nie daj±ce
 siê skorygowaæ b³êdy.
 .P
-Kontrolowane jest czy ka¿da pozycja posiada
+Kontrolowane jest czy ka¿da pozycja posiada:
 .sp
 .in +.5i
 - w³a¶ciw± liczbê pól
@@ -81,30 +81,30 @@ u¿ytkownika, u¿yta odpowied¼ \fBnie\fR.
 oraz \fI/etc/shadow\fR wed³ug UID. By w³±czyæ tryb sortowania nale¿y przekazaæ
 opcjê \fB-s\fR. Nie s± wtedy przeprowadzane ¿adne kontrole, tylko sortowanie.
 .SH PLIKI
-.IR /etc/passwd " - informacja o kontach u¿ytkowników"
+\fI/etc/passwd\fR	\- informacja o kontach u¿ytkowników
 .br
-.IR /etc/shadow " - zakodowana informacja o has³ach"
+\fI/etc/shadow\fR	\- zakodowana informacja o has³ach
 .br
-.IR /etc/group "  - informacja o grupach"
+\fI/etc/group\fR	\- informacja o grupach
+.SH KOD ZAKOÑCZENIA
+.TP 2
+Polecenie \fBpwck\fR koñczy dzia³anie z nastêpuj±cymi warto¶ciami kodów zakoñczenia:
+.br
+\fB0\fR	\- powodzenie
+.br
+\fB1\fR	\- niew³a¶ciwa sk³adnia parametrów polecenia
+.br
+\fB2\fR	\- jedna lub wiêcej z³ych pozycji pliku hase³
+.br
+\fB3\fR	\- niemo¿liwe otwarcie plików hase³
+.br
+\fB4\fR	\- niemo¿liwa blokada plików hase³
+.br
+\fB5\fR	\- niemo¿liwa aktualizacja plików hase³
 .SH ZOBACZ TAK¯E
 .BR usermod (8),
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5)
-.SH DIAGNOSTYKA
-Polecenie \fBpwck\fR koñczy pracê z nastêpuj±cymi warto¶ciami kodów
-zakoñczenia:
-.IP 0 5
-Powodzenie
-.IP 1 5
-B³±d sk³adni
-.IP 2 5
-Jedna lub wiêcej z³ych pozycji pliku hase³
-.IP 3 5
-Niemo¿liwe otwarcie plików hase³
-.IP 4 5
-Niemo¿liwa blokada plików hase³
-.IP 5 5
-Niemo¿liwa aktualizacja plików hase³
 .SH AUTOR
 Julianne Frances Haugh (jockgrrl@ix.netcom.com)

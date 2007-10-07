@@ -1,7 +1,7 @@
 #
 # /etc/login.defs - Configuration control definitions for the login package.
 #
-#	$Id: login.defs.linux,v 1.12 2000/08/26 18:27:10 marekm Exp $
+#	$Id: login.defs.linux,v 1.14 2003/05/04 20:09:43 kloczek Exp $
 #
 # Three items must be defined:  MAIL_DIR, ENV_SUPATH, and ENV_PATH.
 # If unspecified, some arbitrary (and possibly incorrect) value will
@@ -16,11 +16,6 @@
 # Delay in seconds before being allowed another attempt after a login failure
 #
 FAIL_DELAY		3
-
-#
-# Enable additional passwords upon dialup lines specified in /etc/dialups.
-#
-DIALUPS_CHECK_ENAB	yes
 
 #
 # Enable logging and display of /var/log/faillog login failure info.
@@ -330,13 +325,6 @@ ENVIRON_FILE	/etc/environment
 # the user to be removed (passed as the first argument).
 #
 #USERDEL_CMD	/usr/sbin/userdel_local
-
-#
-# If defined, either full pathname of a file containing device names or
-# a ":" delimited list of device names.  No password is required to log in
-# as a non-root user on these devices.
-#
-#NO_PASSWORD_CONSOLE tty1:tty2:tty3:tty4:tty5:tty6
 
 #
 # When prompting for password without echo, getpass() can optionally

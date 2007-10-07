@@ -30,14 +30,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: valid.c,v 1.4 1999/03/07 19:14:44 marekm Exp $")
-
+RCSID ("$Id: valid.c,v 1.5 2003/04/22 10:59:22 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-
 /*
  * valid - compare encrypted passwords
  *
@@ -48,9 +46,7 @@ RCSID("$Id: valid.c,v 1.4 1999/03/07 19:14:44 marekm Exp $")
  *	is used to indicate that a dummy salt must be used to encrypt the
  *	password anyway.
  */
-
-int
-valid(const char *password, const struct passwd *ent)
+int valid (const char *password, const struct passwd *ent)
 {
 	const char *encrypted;
 	const char *salt;
@@ -62,8 +58,8 @@ valid(const char *password, const struct passwd *ent)
 	 * routine is meant to waste CPU time.
 	 */
 
-	if (ent->pw_name && ! ent->pw_passwd[0]) {
-		if (! password[0])
+	if (ent->pw_name && !ent->pw_passwd[0]) {
+		if (!password[0])
 			return (1);	/* user entered nothing */
 		else
 			return (0);	/* user entered something! */
@@ -86,7 +82,7 @@ valid(const char *password, const struct passwd *ent)
 	 * looking at execution time.
 	 */
 
-	encrypted = pw_encrypt(password, salt);
+	encrypted = pw_encrypt (password, salt);
 
 	/*
 	 * One last time we must deal with there being no password file
@@ -94,7 +90,7 @@ valid(const char *password, const struct passwd *ent)
 	 * cause non-existent users to not be validated.
 	 */
 
-	if (ent->pw_name && strcmp(encrypted, ent->pw_passwd) == 0)
+	if (ent->pw_name && strcmp (encrypted, ent->pw_passwd) == 0)
 		return (1);
 	else
 		return (0);

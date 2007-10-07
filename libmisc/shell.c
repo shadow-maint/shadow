@@ -30,14 +30,11 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: shell.c,v 1.7 1998/12/28 20:34:53 marekm Exp $")
-
+RCSID ("$Id: shell.c,v 1.9 2003/05/05 21:49:56 kloczek Exp $")
 #include <stdio.h>
 #include <errno.h>
 #include "prototypes.h"
 #include "defines.h"
-
-
 extern char **newenvp;
 extern size_t newenvc;
 
@@ -54,8 +51,7 @@ extern size_t newenvc;
  *	the file.  If all that fails, give up in disgust ...
  */
 
-void
-shell(const char *file, const char *arg)
+void shell (const char *file, const char *arg)
 {
 	char arg0[1024];
 	int err;
@@ -71,11 +67,12 @@ shell(const char *file, const char *arg)
 	 */
 
 	if (arg == (char *) 0) {
-		snprintf(arg0, sizeof arg0, "-%s", Basename((char *) file));
+		snprintf (arg0, sizeof arg0, "-%s",
+			  Basename ((char *) file));
 		arg = arg0;
 	}
 #ifdef DEBUG
-	printf (_("Executing shell %s\n"), file);
+	printf ("Executing shell %s\n", file);
 #endif
 
 	/*
@@ -98,7 +95,7 @@ shell(const char *file, const char *arg)
 	 */
 
 	if (err == ENOEXEC) {
-		FILE	*fp;
+		FILE *fp;
 
 		if ((fp = fopen (file, "r"))) {
 			if (getc (fp) == '#' && getc (fp) == '!') {
@@ -119,8 +116,8 @@ shell(const char *file, const char *arg)
 	 * up in disgust ...
 	 */
 
-	snprintf(arg0, sizeof arg0, _("Cannot execute %s"), file);
+	snprintf (arg0, sizeof arg0, _("Cannot execute %s"), file);
 	errno = err;
-	perror(arg0);
-	exit(1);
+	perror (arg0);
+	exit (1);
 }

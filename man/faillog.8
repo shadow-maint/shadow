@@ -1,4 +1,4 @@
-.\"$Id: faillog.8,v 1.10 2001/01/27 02:55:52 kloczek Exp $
+.\"$Id: faillog.8,v 1.13 2003/05/06 23:06:35 kloczek Exp $
 .\" Copyright 1989 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,61 +31,49 @@
 .SH NAME
 faillog \- examine faillog and set login failure limits
 .SH SYNOPSIS
-.TP 8
+.TP 6
 \fBfaillog\fR [\fB-u\fR \fIlogin-name\fR] [\fB-a\fR] [\fB-t\fR \fIdays\fR]
 [\fB-m\fR \fImax\fR] [\fB-pr\fR] 
 .SH DESCRIPTION
 \fBfaillog\fR formats the contents of the failure log,
 \fI/var/log/faillog\fR, and maintains failure counts and
-limits.
-The order of the arguments to \fBfaillog\fR is significant.
-Each argument is processed immediately in the order given.
+limits. The order of the arguments to \fBfaillog\fR is significant. Each
+argument is processed immediately in the order given.
 .PP
-The \fB-p\fR flag causes failure entries to be printed in UID
-order.
-Entering \fB-u \fIlogin-name\fR flag will
-cause the failure record for \fIlogin-name\fR only to be printed.
-Entering \fB-t \fIdays\fR will cause only the
-failures more recent than \fIdays\fR to be printed.
-The \fB-t\fR flag overrides the use of \fB-u\fR.
-The \fB-a\fR flag causes all users to be selected.
-When used with the \fB-p\fR flag, this option selects all users
-who have ever had a login failure.
-It is meaningless with the \fB-r\fR flag.
+The \fB-p\fR flag causes failure entries to be printed in UID order.
+Entering \fB-u \fIlogin-name\fR flag will cause the failure record for
+\fIlogin-name\fR only to be printed. Entering \fB-t \fIdays\fR will cause
+only the failures more recent than \fIdays\fR to be printed. The \fB-t\fR
+flag overrides the use of \fB-u\fR. The \fB-a\fR flag causes all users to be
+selected. When used with the \fB-p\fR flag, this option selects all users
+who have ever had a login failure. It is meaningless with the \fB-r\fR flag.
 .PP
-The \fB-r\fR flag is used to reset the count of login failures.
-Write access to \fI/var/log/faillog\fR is required for
-this option.
-Entering \fB-u \fIlogin-name\fR will cause only the failure count
-for \fIlogin-name\fR to be reset.
+The \fB-r\fR flag is used to reset the count of login failures. Write access
+to \fI/var/log/faillog\fR is required for this option. Entering \fB-u
+\fIlogin-name\fR will cause only the failure count for \fIlogin-name\fR to
+be reset.
 .PP
-The \fB-m\fR flag is used to set the maximum number of login
-failures before the account is disabled.
-Write access to \fI/var/log/faillog\fR is required for this
-option.
-Entering \fB-m \fImax\fR will cause all accounts to be disabled
-after \fImax\fR failed logins occur.
-This may be modified with \fB-u \fIlogin-name\fR to limit this
-function to \fIlogin-name\fR only.
-Selecting a \fImax\fR value of 0 has the effect of not placing
-a limit on the number of failed logins.
-The maximum failure count
-should always be 0 for \fBroot\fR to prevent
-a denial of services attack against the system.
+The \fB-m\fR flag is used to set the maximum number of login failures before
+the account is disabled. Write access to \fI/var/log/faillog\fR is required
+for this option. Entering \fB-m \fImax\fR will cause all accounts to be
+disabled after \fImax\fR failed logins occur. This may be modified with
+\fB-u \fIlogin-name\fR to limit this function to \fIlogin-name\fR only.
+Selecting a \fImax\fR value of 0 has the effect of not placing a limit on
+the number of failed logins. The maximum failure count should always be 0
+for \fBroot\fR to prevent a denial of services attack against the system.
 .PP
-Options may be combined in virtually any fashion.
-Each \fB-p\fR, \fB-r\fR, and \fB-m\fR option will cause
-immediate execution using any \fB-u\fR or \fB-t\fR modifier.
+Options may be combined in virtually any fashion. Each \fB-p\fR, \fB-r\fR,
+and \fB-m\fR option will cause immediate execution using any \fB-u\fR or
+\fB-t\fR modifier.
 .SH CAVEATS
-\fBfaillog\fR only prints out users with no successful login since
-the last failure.
-To print out a user who has had a successful login since their last
-failure, you must explicitly request the user with the \fB-u\fR flag,
-or print out all users with the \fB-a\fR flag.
+\fBfaillog\fR only prints out users with no successful login since the last
+failure. To print out a user who has had a successful login since their last
+failure, you must explicitly request the user with the \fB-u\fR flag, or
+print out all users with the \fB-a\fR flag.
 .PP
 Some systems may replace /var/log with /var/adm or /usr/adm.
 .SH FILES
-/var/log/faillog \- failure logging file
+\fI/var/log/faillog\fR \	- failure logging file
 .SH SEE ALSO
 .BR login (1),
 .BR faillog (5)

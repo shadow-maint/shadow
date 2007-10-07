@@ -1,3 +1,4 @@
+.\"$Id: porttime.5,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,48 +26,50 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: porttime.5,v 1.2 2001/11/16 17:01:33 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Modified Tue 18 Sep 2002 by NAKNAO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH PORTTIME 5
 .SH 名前
 porttime \- ポートアクセス時間設定ファイル
 .SH 説明
 .I porttime
-にはttyデバイス、ユーザ名及びログイン可能時間のリストが記されている。
+は tty デバイス・ユーザ名・ログイン可能時間、のリストからなる。
 .PP
-個々のエントリーはコロンで区切られた三つの欄からなる。
-最初の欄はコンマで区切られたttyデバイスのリスト、又は全てのttyデバイスが
-符合するようにアスタリスクを記す。
-二番目の欄にはコンマで区切られたユーザ名のリスト、又は全てのユーザが符合
-するようにアスタリスクを記す。
-三番目の欄にはコンマで区切られたログインを許可する時間のリストを記す。
+それぞれのエントリは、コロンで区切られた三つのフィールドからなる。
+最初のフィールドはコンマで区切られた tty デバイスのリストで、
+アスタリスクを指定した場合はあらゆる tty デバイスにマッチする。
+二番目のフィールドはコンマで区切られたユーザ名のリストで、
+アスタリスクを指定した場合はあらゆるユーザにマッチする。
+三番目のフィールドは、
+コンマで区切られたログインを許可時間のリストである。
 .PP
-アクセスタイムの各エントリは、
-\fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR, 及び \fBSa\fR
-と略記されたゼロ個以上の曜日と、それに続くハイフンで隔てられた時間の組
-からなる。
-月曜日から金曜日までを指定するために\fBWk\fRを、
-全ての日を指定するために\fBAl\fRという略記法を用いることも出来る。
-曜日の指定が無い場合は、\fBAl\fRだとみなす。
+アクセス時間の各エントリは、
+\fBSu\fR, \fBMo\fR, \fBTu\fR, \fBWe\fR, \fBTh\fR, \fBFr\fR, \fBSa\fR
+で略記されたゼロ個以上の曜日と、
+ハイフンで区切られた 2 つの時刻とからなる。
+月曜日から金曜日までを指定する \fBWk\fR や、
+全ての日を指定する \fBAl\fR という略記法を用いることもできる。
+曜日の指定が無い場合は \fBAl\fR だとみなされる。
 .SH 例
-以下の例では、ユーザ\fBjfh\fRが平日の午前9時から午後5時まで
-全てのポートからアクセスする事を許可している。
+次のエントリは、ユーザ \fBjfh\fR が平日の午前9時から午後5時まで、
+全てのポートからアクセス可能であることを示す。
 .br
 .sp 1
 	*:jfh:Wk0900-1700
 .br
 .sp 1
-以下のエントリでは、\fBroot\fR及び\fBoper\fR以外のユーザには如何なる時間でも
-/dev/consoleからのアクセスを許可していない。
-この例から\fI/etc/porttime\fRファイルがアクセスタイムのリストとして
-どの様な順序で処理されるかが分かる。
-他の全てのユーザは二番目のエントリに符合し、従ってconsoleからのアクセスは
-許可されない。
+次のエントリは、
+\fBroot\fR と \fBoper\fR 以外のユーザには、どの時間帯にも
+/dev/console からのアクセスを許可しない。
+この例は、\fI/etc/porttime\fR
+ファイルがアクセス可能時間のリストを
+どういう順序で扱うかも示している。
+他の全てのユーザは二番目のエントリにマッチし、
+したがって console からのアクセスは許可されない。
 .br
 .sp 1
 	console:root,oper:Al0000-2400
@@ -74,15 +77,16 @@ porttime \- ポートアクセス時間設定ファイル
 	console:*:
 .br
 .sp 1
-以下のエントリでは、ユーザ\fBgames\fRは就業時間外なら如何なるポートからも
-アクセス出来る様に指定している。
+次のエントリは、
+ユーザ \fBgames\fR が、就業時間外なら
+あらゆるポートからアクセスできるように指定している。
 .br
 .sp 1
 	*:games:Wk1700-0900,SaSu0000-2400
 .br
 .sp 1
 .SH ファイル
-/etc/porttime \- ポートへのアクセス可能時間を記したファイル
+\fI/etc/porttime\fR \- ポートへのアクセス可能時間を記したファイル
 .SH 関連項目
 .BR login (1)
 .SH 著者

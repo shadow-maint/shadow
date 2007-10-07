@@ -1,12 +1,12 @@
 
-EXTRA_DOST = .indent.pro
+EXTRA_DIST = .indent.pro
 
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
 
 DEFS = -D_HAVE_CONFIG_H -DLOCALEDIR=\"$(datadir)/locale\"
 
-INCLUDES = -I${top_srcdir} \
+INCLUDES = \
 	-I${top_srcdir}/lib \
 	-I$(top_srcdir)/libmisc
 
@@ -23,9 +23,24 @@ INCLUDES = -I${top_srcdir} \
 
 bin_PROGRAMS = groups login su
 ubin_PROGRAMS = faillog lastlog chage chfn chsh expiry gpasswd newgrp passwd
-usbin_PROGRAMS = chpasswd dpasswd groupadd groupdel groupmod \
-	logoutd mkpasswd newusers useradd userdel usermod grpck \
-	pwck vipw grpconv grpunconv pwconv pwunconv
+usbin_PROGRAMS = \
+	chpasswd \
+	groupadd \
+	groupdel \
+	groupmod \
+	grpck \
+	grpconv \
+	grpunconv \
+	logoutd \
+	mkpasswd \
+	newusers \
+	pwck \
+	pwconv \
+	pwunconv \
+	useradd \
+	userdel \
+	usermod \
+	vipw
 
 noinst_PROGRAMS = id sulogin
 
@@ -55,7 +70,7 @@ usermod_LDADD  = $(LDADD) $(LIBPAM)
 
 install-exec-hook:
 	ln -sf newgrp	$(DESTDIR)$(bindir)/sg
-	ln -sf vigr	$(DESTDIR)$(bindir)/vipw
+	ln -sf vipw	$(DESTDIR)$(bindir)/vigr
 	for i in $(suidbins); do \
 		chmod 4755 $(DESTDIR)$(bindir)/$$i; \
 	done

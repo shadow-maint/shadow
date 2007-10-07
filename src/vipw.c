@@ -23,7 +23,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: vipw.c,v 1.3 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: vipw.c,v 1.6 2003/06/19 18:11:01 kloczek Exp $")
 #include "defines.h"
 #include <errno.h>
 #include <sys/stat.h>
@@ -38,6 +38,7 @@ RCSID (PKG_VER "$Id: vipw.c,v 1.3 2002/01/05 15:41:44 kloczek Exp $")
 #include "shadowio.h"
 #include "groupio.h"
 #include "sgroupio.h"
+#include "nscd.h"
 static const char *progname, *filename, *fileeditname;
 static int filelocked = 0, createedit = 0;
 static int (*unlock) (void);
@@ -150,12 +151,6 @@ vipwedit (const char *file, int (*file_lock) (void),
 	if ((pid = fork ()) == -1)
 		vipwexit ("fork", 1, 1);
 	else if (!pid) {
-#if 0
-		execlp (editor, editor, fileedit, (char *) 0);
-		fprintf (stderr, "%s: %s: %s\n", progname, editor,
-			 strerror (errno));
-		exit (1);
-#else
 		/* use the system() call to invoke the editor so that it accepts
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
@@ -171,7 +166,6 @@ vipwedit (const char *file, int (*file_lock) (void),
 			exit (1);
 		} else
 			exit (0);
-#endif
 	}
 
 	for (;;) {
@@ -265,5 +259,10 @@ int main (int argc, char **argv)
 			vipwedit (GROUP_FILE, gr_lock, gr_unlock);
 	}
 
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+#ifdef SHADOWPWD
+	nscd_flush_cache ("shadow");
+#endif
 	return 0;
 }

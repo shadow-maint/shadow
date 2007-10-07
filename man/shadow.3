@@ -1,4 +1,4 @@
-.\"$Id: shadow.3,v 1.7 2001/01/25 10:43:51 kloczek Exp $
+.\"$Id: shadow.3,v 1.10 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1989 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -63,23 +63,23 @@ The structure in the \fI#include\fR file is
 struct spwd {
 .in +.5i
 .br
-	char	*sp_namp; /* user login name */
+	char			*sp_namp; /* user login name */
 .br
-	char	*sp_pwdp; /* encrypted password */
+	char			*sp_pwdp; /* encrypted password */
 .br
-	long	sp_lstchg; /* last password change */
+	long int		sp_lstchg; /* last password change */
 .br
-	int	sp_min; /* days until change allowed. */
+	long int		sp_min; /* days until change allowed. */
 .br
-	int	sp_max; /* days before change required */
+	long int		sp_max; /* days before change required */
 .br
-	int	sp_warn; /* days warning for expiration */
+	long int		sp_warn; /* days warning for expiration */
 .br
-	int	sp_inact; /* days before account inactive */
+	long int		sp_inact; /* days before account inactive */
 .br
-	int	sp_expire; /* date when account expires */
+	long int		sp_expire; /* date when account expires */
 .br
-	int	sp_flag; /* reserved for future use */
+	unsigned long int	sp_flag; /* reserved for future use */
 .br
 .in -.5i
 }
@@ -106,39 +106,33 @@ sp_expire \- days since Jan 1, 1970 when account will be disabled.
 .br
 sp_flag \- reserved for future use.
 .SH DESCRIPTION
-\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, and \fBsgetspent\fR
-each return a pointer to a \fBstruct spwd\fR.
-\fBgetspent\fR returns the
-next entry from the file, and \fBfgetspent\fR returns the next
-entry from the given stream, which is assumed to be a file of
-the proper format.
+\fBgetspent\fR, \fBgetspname\fR, \fBfgetspent\fR, and \fBsgetspent\fR each
+return a pointer to a \fBstruct spwd\fR. \fBgetspent\fR returns the next
+entry from the file, and \fBfgetspent\fR returns the next entry from the
+given stream, which is assumed to be a file of the proper format.
 \fBsgetspent\fR returns a pointer to a \fBstruct spwd\fR using the
-provided string as input.
-\fBgetspnam\fR searches from the current position in the file for
-an entry matching \fBname\fR.
+provided string as input. \fBgetspnam\fR searches from the current position
+in the file for an entry matching \fBname\fR.
 .PP
 \fBsetspent\fR and \fBendspent\fR may be used to begin and end,
 respectively, access to the shadow password file.
 .PP
-The \fBlckpwdf\fR and \fBulckpwdf\fR routines should be used to
-insure exclusive access to the \fI/etc/shadow\fR file.
-\fBlckpwdf\fR attempts to acquire a lock using \fBpw_lock\fR for
-up to 15 seconds.
-It continues by attempting to acquire a second lock using \fBspw_lock\fR
-for the remainder of the initial 15 seconds.
-Should either attempt fail after a total of 15 seconds, \fBlckpwdf\fR
-returns -1.
-When both locks are acquired 0 is returned.
+The \fBlckpwdf\fR and \fBulckpwdf\fR routines should be used to insure
+exclusive access to the \fI/etc/shadow\fR file. \fBlckpwdf\fR attempts to
+acquire a lock using \fBpw_lock\fR for up to 15 seconds. It continues by
+attempting to acquire a second lock using \fBspw_lock\fR for the remainder
+of the initial 15 seconds. Should either attempt fail after a total of 15
+seconds, \fBlckpwdf\fR returns -1. When both locks are acquired 0 is
+returned.
 .SH DIAGNOSTICS
-Routines return NULL if no more entries are available or if an
-error occurs during processing.
-Routines which have \fBint\fR as the return value return 0 for
-success and -1 for failure.
+Routines return NULL if no more entries are available or if an error occurs
+during processing. Routines which have \fBint\fR as the return value return
+0 for success and -1 for failure.
 .SH CAVEATS
-These routines may only be used by the super user as access to
-the shadow password file is restricted.
+These routines may only be used by the super user as access to the shadow
+password file is restricted.
 .SH FILES
-/etc/shadow \- encrypted user passwords
+\fI/etc/shadow\fR \	- encrypted user passwords
 .SH SEE ALSO
 .BR getpwent (3),
 .BR shadow (5)

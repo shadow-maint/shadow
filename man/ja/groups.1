@@ -1,3 +1,4 @@
+.\"$Id: groups.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1991 - 1994, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,36 +26,40 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\" $Id: groups.1,v 1.2 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 2001 Maki KURODA
 .\"     all right reserved,
 .\" Translated Tue Oct 30 11:58:18 JST 2001
 .\" by Maki KURODA <mkuroda@aisys-jp.com>
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
+.\"
+.\"WORD:	concurrent group set	同時所属グループ集合
+.\"WORD:	real group ID		実グループ ID
+.\"WORD:	effective group ID	実効グループ ID
 .\"
 .TH GROUPS 1
 .SH 名前
-groups \- 現在のグループ ID 名の表示
+groups \- 現在のグループ名の表示
 .SH 書式
-.B groups
-.RI [ user ]
+\fBgroups\fR [\fIuser\fR]
 .SH 説明
 .B groups
-は現在のグループ ID 名または値を表示する。
-その値が \fI/etc/group\fR に登録されていなければ、
-その値は数値グループ ID として表示される。
-\fIuser\fR オプションパラメタは \fIuser\fR が所属するグループ名を表示する。
+は現在のグループの名前または ID 値を表示する。
+ID 値に対応する名前が \fI/etc/group\fR に登録されていなければ、
+数値のグループ ID で表示される。
+パラメータとして \fIuser\fR を与えると、
+指定した \fIuser\fR が所属するグループ名を表示する。
 .SH 注意
-共同グループがサポートされていないシステムは \fI/etc/group\fR に
-報告されている情報を設定する。
-ユーザは現在の real や effective グループ ID を変更するために \fBnewgrp\fR または \fBsg\fR を
-使用しなければならない。
+同時所属グループ集合 (concurrent group set)
+をサポートしていないシステムでは、
+\fI/etc/group\fR の情報が報告される。
+ユーザが現在の実グループ ID や実効グループ ID を変更するには、
+\fBnewgrp\fR や \fBsg\fR を使用しなければならない。
 .SH ファイル
 /etc/group \- グループ情報
 .SH 関連項目
 .BR newgrp (1),
+.BR getuid (2),
 .BR getgid (2),
-.BR getgroups (2),
-.BR getuid (2)
+.BR getgroups (2)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

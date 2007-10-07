@@ -10,18 +10,14 @@
 #include <errno.h>
 
 #include "rcsid.h"
-RCSID("$Id: addgrps.c,v 1.5 2001/09/01 04:19:15 kloczek Exp $")
-
+RCSID ("$Id: addgrps.c,v 1.6 2003/04/22 10:59:21 kloczek Exp $")
 #define SEP ",:"
-
 /*
  * Add groups with names from LIST (separated by commas or colons)
  * to the supplementary group set.  Silently ignore groups which are
  * already there.  Warning: uses strtok().
  */
-
-int
-add_groups(const char *list)
+int add_groups (const char *list)
 {
 	GETGROUPS_T *grouplist, *tmp;
 	int i, ngroups, added;
@@ -29,51 +25,54 @@ add_groups(const char *list)
 	char *token;
 	char buf[1024];
 
-	if (strlen(list) >= sizeof(buf)) {
+	if (strlen (list) >= sizeof (buf)) {
 		errno = EINVAL;
 		return -1;
 	}
-	strcpy(buf, list);
+	strcpy (buf, list);
 
 	i = 16;
 	for (;;) {
-		grouplist = malloc(i * sizeof(GETGROUPS_T));
+		grouplist = malloc (i * sizeof (GETGROUPS_T));
 		if (!grouplist)
 			return -1;
-		ngroups = getgroups(i, grouplist);
+		ngroups = getgroups (i, grouplist);
 		if (i > ngroups)
 			break;
 		/* not enough room, so try allocating a larger buffer */
-		free(grouplist);
+		free (grouplist);
 		i *= 2;
 	}
 	if (ngroups < 0) {
-		free(grouplist);
+		free (grouplist);
 		return -1;
 	}
 
 	added = 0;
-	for (token = strtok(buf, SEP); token; token = strtok(NULL, SEP)) {
+	for (token = strtok (buf, SEP); token; token = strtok (NULL, SEP)) {
 
-		grp = getgrnam(token);
+		grp = getgrnam (token);
 		if (!grp) {
-			fprintf(stderr, _("Warning: unknown group %s\n"), token);
+			fprintf (stderr, _("Warning: unknown group %s\n"),
+				 token);
 			continue;
 		}
 
-		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid; i++)
-			;
+		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid;
+		     i++);
 
 		if (i < ngroups)
 			continue;
 
-		if (ngroups >= sysconf(_SC_NGROUPS_MAX)) {
-			fprintf(stderr, _("Warning: too many groups\n"));
+		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
+			fprintf (stderr, _("Warning: too many groups\n"));
 			break;
 		}
-		tmp = realloc(grouplist, (ngroups + 1) * sizeof(GETGROUPS_T));
+		tmp =
+		    realloc (grouplist,
+			     (ngroups + 1) * sizeof (GETGROUPS_T));
 		if (!tmp) {
-			free(grouplist);
+			free (grouplist);
 			return -1;
 		}
 		tmp[ngroups++] = grp->gr_gid;
@@ -82,7 +81,7 @@ add_groups(const char *list)
 	}
 
 	if (added)
-		return setgroups(ngroups, grouplist);
+		return setgroups (ngroups, grouplist);
 
 	return 0;
 }

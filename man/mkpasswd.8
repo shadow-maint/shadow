@@ -1,4 +1,4 @@
-.\"$Id: mkpasswd.8,v 1.8 2002/03/08 04:39:11 kloczek Exp $
+.\"$Id: mkpasswd.8,v 1.10 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,46 +31,41 @@ mkpasswd \- Update passwd and group database files
 .SH SYNOPSIS
 \fBmkpasswd\fR [\fB-fvgps\fR] \fIfile\fR
 .SH DESCRIPTION
-.B mkpasswd
-reads the file in the format given by the flags and converts it to the
-corresponding database file format.
-These database files are used to improve access performance on systems
-with large numbers of users.
-The output files will be named \fIfile\fR.dir and \fIfile\fR.pag.
+\fBmkpasswd\fR reads the file in the format given by the flags and converts
+it to the corresponding database file format. These database files are used
+to improve access performance on systems with large numbers of users. The
+output files will be named \fIfile\fR.dir and \fIfile\fR.pag.
 .PP
 The \fB-f\fR option causes \fBmkpasswd\fR to ignore any existing output
-files and overwrite them.
-Normally \fBmkpasswd\fR complains about existing output files and quits.
+files and overwrite them. Normally \fBmkpasswd\fR complains about existing
+output files and quits.
 .PP
-The \fB-v\fR option causes \fBmkpasswd\fR to output information about
-each record as it is converted, with a final message at the very end.
+The \fB-v\fR option causes \fBmkpasswd\fR to output information about each
+record as it is converted, with a final message at the very end.
 .PP
 The \fB-g\fR option treats the input file as though it were in
-\fI/etc/group\fR file format.
-When combined with the \fB-s\fR option, the \fI/etc/gshadow\fR file
-format is used instead.
+\fI/etc/group\fR file format. When combined with the \fB-s\fR option, the
+\fI/etc/gshadow\fR file format is used instead.
 .PP
 The \fB-p\fR option treats the input file as though it were in
-\fI/etc/passwd\fR file format.
-This is the default.
-When combined with the \fB-s\fR option, the \fI/etc/shadow\fR file
-format is used instead.
+\fI/etc/passwd\fR file format. This is the default. When combined with the
+\fB-s\fR option, the \fI/etc/shadow\fR file format is used instead.
 .SH CAVEATS
-The use of more than one database file is limited to systems which
-include the NDBM database library and therefore may not be available
-on every system.
+The use of more than one database file is limited to systems which include
+the NDBM database library and therefore may not be available on every
+system.
 .SH NOTE
-Since most commands are capable of updating the database files as
-changes are made, this command need only be used when re-creating a
-deleted or corrupted database file.
+Since most commands are capable of updating the database files as changes
+are made, this command need only be used when re-creating a deleted or
+corrupted database file.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR \	- user account information
 .br
-/etc/shadow \- shadow user information
+\fI/etc/shadow\fR \	- shadow user information
 .br
-/etc/group \- group information
+\fI/etc/group\fR \	- group information
 .br
-/etc/gshadow \- shadow group information
+\fI/etc/gshadow\fR \	- shadow group information
 .SH SEE ALSO
 .BR group (5),
 .BR passwd (5),

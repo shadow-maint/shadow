@@ -1,3 +1,4 @@
+.\"$Id: groupadd.8,v 1.7 2004/01/05 01:08:29 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,36 +26,35 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: groupadd.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH GROUPADD 8
 .SH 名前
 groupadd \- 新しいグループを作成する
 .SH 書式
-.B groupadd
-[\fB-g\fI gid \fR[\fB-o\fR]]
-.I group
+\fBgroupadd\fR [\fB-g\fI gid \fR[\fB-o\fR]] [\fB-f\fR] \fIgroup\fR
 .SH 説明
-\fBgroupadd\fRコマンドはコマンドライン上で指定された値及び
-システムのディフォルト値を用いて新しいグループを作成する。
-新しいグループは必要となった際にシステムファイルに記入される。
-\fBgroupadd\fRコマンドに指定できるオプションは次のものである
+\fBgroupadd\fR コマンドは、
+コマンドライン上で指定された値と
+システムのデフォルト値とを用いて新しいグループを作成する。
+新しいグループが必要に応じてシステムファイルに記入される。
+\fBgroupadd\fR コマンドに指定できるオプションは次の通り。
 .IP "\fB-g \fIgid\fR"
-新規グループのID番号。
-この値は、\fB-o\fRオプションを用いない限りは、他と重複してはならない。
-また、非負値でなくてはならない。
-ディフォルトは、99より大きく且つ他の全ての既存グループのIDよりも
-大きなものの中で最小のものである。
-0から99迄の値は大抵システム用のアカウントに予約されている。
+新規グループの ID 番号。
+この値は、\fB-o\fR オプションを用いる場合を除き、他と重複してはならない。
+また非負値でなければならない。
+デフォルトでは、99 および他のあらゆる既存グループの ID よりも大きい、
+最小の数値となる。
+0 から 99 までの値は、
+通常システム用のアカウントに予約されている。
 .SH ファイル
-/etc/group \- グループのアカウント情報
+\fI/etc/group\fR \- グループアカウント情報
 .br
-/etc/gshadow \- グループの安全なアカウント情報
+\fI/etc/gshadow\fR \- 安全なグループアカウント情報
 .SH 関連項目
 .BR chfn (1),
 .BR chsh (1),

@@ -33,7 +33,7 @@
 #if defined(SHADOWPWD) && !defined(HAVE_GETSPNAM)	/*{*/
 
 #include "rcsid.h"
-RCSID("$Id: shadow.c,v 1.6 1998/01/29 23:22:32 marekm Exp $")
+RCSID("$Id: shadow.c,v 1.7 2003/05/03 16:14:24 kloczek Exp $")
 
 #include <sys/types.h>
 #include "prototypes.h"
@@ -199,12 +199,6 @@ my_sgetspent(const char *string)
 			*cp++ = '\0';
 	}
 
-	/*
-	 * It is acceptable for the last SVR4 field to be blank.  This
-	 * results in the loop being terminated early.  In which case,
-	 * we just make the last field be blank and be done with it.
-	 */
-
 	if (i == (FIELDS-1))
 		fields[i++] = cp;
 
@@ -280,23 +274,12 @@ my_sgetspent(const char *string)
 	 * formatted file), initialize the other field members to -1.
 	 */
 
-#if 0  /* SVR4 */
-	if (i == OFIELDS)
-		return 0;
-#else
 	if (i == OFIELDS) {
 		spwd.sp_warn = spwd.sp_inact = spwd.sp_expire =
 			spwd.sp_flag = -1;
 
 		return &spwd;
 	}
-#endif
-
-	/*
-	 * The rest of the fields are mandatory for SVR4, but optional
-	 * for anything else.  However, if one is present the others
-	 * must be as well.
-	 */
 
 	/*
 	 * Get the number of days of password expiry warning.

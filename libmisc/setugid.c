@@ -34,35 +34,29 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: setugid.c,v 1.6 1998/07/23 22:13:16 marekm Exp $")
-
+RCSID ("$Id: setugid.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include <grp.h>
-
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-
 #include "getdef.h"
-
 /*
  * setup_uid_gid() split in two functions for PAM support -
  * pam_setcred() needs to be called after initgroups(), but
  * before setuid().
  */
-
-int
-setup_groups(const struct passwd *info)
+int setup_groups (const struct passwd *info)
 {
 	/*
 	 * Set the real group ID to the primary group ID in the password
 	 * file.
 	 */
 	if (setgid (info->pw_gid) == -1) {
-		perror("setgid");
-		SYSLOG((LOG_ERR, "bad group ID `%d' for user `%s': %m\n",
-			info->pw_gid, info->pw_name));
-		closelog();
+		perror ("setgid");
+		SYSLOG ((LOG_ERR, "bad group ID `%d' for user `%s': %m\n",
+			 info->pw_gid, info->pw_name));
+		closelog ();
 		return -1;
 	}
 #ifdef HAVE_INITGROUPS
@@ -70,33 +64,32 @@ setup_groups(const struct passwd *info)
 	 * For systems which support multiple concurrent groups, go get
 	 * the group set from the /etc/group file.
 	 */
-	if (initgroups(info->pw_name, info->pw_gid) == -1) {
-		perror("initgroups");
-		SYSLOG((LOG_ERR, "initgroups failed for user `%s': %m\n",
-			info->pw_name));
-		closelog();
+	if (initgroups (info->pw_name, info->pw_gid) == -1) {
+		perror ("initgroups");
+		SYSLOG ((LOG_ERR, "initgroups failed for user `%s': %m\n",
+			 info->pw_name));
+		closelog ();
 		return -1;
 	}
 #endif
 	return 0;
 }
 
-int
-change_uid(const struct passwd *info)
+int change_uid (const struct passwd *info)
 {
 	/*
 	 * Set the real UID to the UID value in the password file.
 	 */
 #ifndef	BSD
-	if (setuid(info->pw_uid))
+	if (setuid (info->pw_uid))
 #else
-	if (setreuid(info->pw_uid, info->pw_uid))
+	if (setreuid (info->pw_uid, info->pw_uid))
 #endif
 	{
-		perror("setuid");
-		SYSLOG((LOG_ERR, "bad user ID `%d' for user `%s': %m\n",
-			(int) info->pw_uid, info->pw_name));
-		closelog();
+		perror ("setuid");
+		SYSLOG ((LOG_ERR, "bad user ID `%d' for user `%s': %m\n",
+			 (int) info->pw_uid, info->pw_name));
+		closelog ();
 		return -1;
 	}
 	return 0;
@@ -113,21 +106,21 @@ change_uid(const struct passwd *info)
  *	Returns 0 on success, or -1 on failure.
  */
 
-int
-setup_uid_gid(const struct passwd *info, int is_console)
+int setup_uid_gid (const struct passwd *info, int is_console)
 {
-	if (setup_groups(info) < 0)
+	if (setup_groups (info) < 0)
 		return -1;
 
 #ifdef HAVE_INITGROUPS
 	if (is_console) {
-		char *cp = getdef_str("CONSOLE_GROUPS");
-		if (cp && add_groups(cp))
-			perror("Warning: add_groups");
-	}
-#endif /* HAVE_INITGROUPS */
+		char *cp = getdef_str ("CONSOLE_GROUPS");
 
-	if (change_uid(info) < 0)
+		if (cp && add_groups (cp))
+			perror ("Warning: add_groups");
+	}
+#endif				/* HAVE_INITGROUPS */
+
+	if (change_uid (info) < 0)
 		return -1;
 
 	return 0;

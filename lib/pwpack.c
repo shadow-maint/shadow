@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwpack.c,v 1.4 1998/04/16 19:57:42 marekm Exp $")
+RCSID("$Id: pwpack.c,v 1.6 2003/12/17 01:33:28 kloczek Exp $")
 
 #include <sys/types.h>
 #include "defines.h"
@@ -53,12 +53,6 @@ pw_pack(const struct passwd *passwd, char *buf)
 	cp += strlen (cp) + 1;
 
 	strcpy (cp, passwd->pw_passwd);
-#ifdef	ATT_AGE
-	if (passwd->pw_age[0]) {
-		*cp++ = ',';
-		strcat (cp, passwd->pw_age);
-	}
-#endif
 	cp += strlen (cp) + 1;
 
 	memcpy (cp, (const char *) &passwd->pw_uid, sizeof passwd->pw_uid);
@@ -66,17 +60,7 @@ pw_pack(const struct passwd *passwd, char *buf)
 
 	memcpy (cp, (const char *) &passwd->pw_gid, sizeof passwd->pw_gid);
 	cp += sizeof passwd->pw_gid;
-#ifdef	BSD_QUOTA
-	memcpy (cp, (const char *) &passwd->pw_quota, sizeof passwd->pw_quota);
-	cp += sizeof passwd->pw_quota;
-#endif
-#ifdef	ATT_COMMENT
-	if (passwd->pw_comment) {
-		strcpy (cp, passwd->pw_comment);
-		cp += strlen (cp) + 1;
-	} else
-		*cp++ = '\0';
-#endif
+
 	strcpy (cp, passwd->pw_gecos);
 	cp += strlen (cp) + 1;
 
@@ -97,9 +81,6 @@ int
 pw_unpack(char *buf, int len, struct passwd *passwd)
 {
 	char	*org = buf;
-#ifdef	ATT_AGE
-	char	*cp;
-#endif
 
 	memzero(passwd, sizeof *passwd);
 
@@ -113,14 +94,6 @@ pw_unpack(char *buf, int len, struct passwd *passwd)
 	if (buf - org > len)
 		return -1;
 
-#ifdef	ATT_AGE
-	if (cp = strchr (passwd->pw_passwd, ',')) {
-		*cp++ = '\0';
-		passwd->pw_age = cp;
-	} else
-		passwd->pw_age = "";
-#endif
-
 	memcpy ((void *) &passwd->pw_uid, (void *) buf, sizeof passwd->pw_uid);
 	buf += sizeof passwd->pw_uid;
 	if (buf - org > len)
@@ -131,19 +104,6 @@ pw_unpack(char *buf, int len, struct passwd *passwd)
 	if (buf - org > len)
 		return -1;
 
-#ifdef	BSD_QUOTA
-	memcpy ((void *) &passwd->pw_quota, (void *) buf,
-		sizeof passwd->pw_quota);
-	buf += sizeof passwd->pw_quota;
-	if (buf - org > len)
-		return -1;
-#endif
-#ifdef	ATT_COMMENT
-	passwd->pw_comment = buf;
-	buf += strlen (buf) + 1;
-	if (buf - org > len)
-		return -1;
-#endif
 	passwd->pw_gecos = buf;
 	buf += strlen (buf) + 1;
 	if (buf - org > len)

@@ -30,19 +30,16 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: loginprompt.c,v 1.6 2000/08/26 18:27:17 marekm Exp $")
-
+RCSID ("$Id: loginprompt.c,v 1.7 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
 #include <signal.h>
 #include <ctype.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-
-static void
-login_exit(int sig)
+static void login_exit (int sig)
 {
-	exit(1);
+	exit (1);
 }
 
 /*
@@ -52,19 +49,20 @@ login_exit(int sig)
  * is set in login.defs, this file is displayed before the prompt.
  */
 
-void
-login_prompt(const char *prompt, char *name, int namesize)
+void login_prompt (const char *prompt, char *name, int namesize)
 {
-	char	buf[1024];
+	char buf[1024];
+
 #define MAX_ENV 32
-	char	*envp[MAX_ENV];
-	int	envc;
-	char	*cp;
-	int	i;
-	FILE	*fp;
-	RETSIGTYPE	(*sigquit)(int);
+	char *envp[MAX_ENV];
+	int envc;
+	char *cp;
+	int i;
+	FILE *fp;
+
+	RETSIGTYPE (*sigquit) (int);
 #ifdef	SIGTSTP
-	RETSIGTYPE	(*sigtstp)(int);
+	RETSIGTYPE (*sigtstp) (int);
 #endif
 
 	/*
@@ -74,9 +72,9 @@ login_prompt(const char *prompt, char *name, int namesize)
 	 * thing for that signal.
 	 */
 
-	sigquit = signal(SIGQUIT, login_exit);
+	sigquit = signal (SIGQUIT, login_exit);
 #ifdef	SIGTSTP
-	sigtstp = signal(SIGTSTP, login_exit);
+	sigtstp = signal (SIGTSTP, login_exit);
 #endif
 
 	/*
@@ -85,16 +83,16 @@ login_prompt(const char *prompt, char *name, int namesize)
 	 */
 
 	if (prompt) {
-		cp = getdef_str("ISSUE_FILE");
-		if (cp && (fp = fopen(cp, "r"))) {
-			while ((i = getc(fp)) != EOF)
-				putc(i, stdout);
+		cp = getdef_str ("ISSUE_FILE");
+		if (cp && (fp = fopen (cp, "r"))) {
+			while ((i = getc (fp)) != EOF)
+				putc (i, stdout);
 
-			fclose(fp);
+			fclose (fp);
 		}
-		gethostname(buf, sizeof buf);
-		printf(prompt, buf);
-		fflush(stdout);
+		gethostname (buf, sizeof buf);
+		printf (prompt, buf);
+		fflush (stdout);
 	}
 
 	/* 
@@ -102,14 +100,14 @@ login_prompt(const char *prompt, char *name, int namesize)
 	 * removed.
 	 */
 
-	memzero(buf, sizeof buf);
-	if (fgets(buf, sizeof buf, stdin) != buf)
-		exit(1);
+	memzero (buf, sizeof buf);
+	if (fgets (buf, sizeof buf, stdin) != buf)
+		exit (1);
 
-	cp = strchr(buf, '\n');
+	cp = strchr (buf, '\n');
 	if (!cp)
-		exit(1);
-	*cp = '\0';	/* remove \n [ must be there ] */
+		exit (1);
+	*cp = '\0';		/* remove \n [ must be there ] */
 
 	/*
 	 * Skip leading whitespace.  This makes "  username" work right.
@@ -117,12 +115,10 @@ login_prompt(const char *prompt, char *name, int namesize)
 	 * character into the username.
 	 */
 
-	for (cp = buf;*cp == ' ' || *cp == '\t';cp++)
-		;
+	for (cp = buf; *cp == ' ' || *cp == '\t'; cp++);
 
-	for (i = 0; i < namesize - 1 && isgraph(*cp); name[i++] = *cp++)
-		;
-	while (isgraph(*cp))
+	for (i = 0; i < namesize - 1 && isgraph (*cp); name[i++] = *cp++);
+	while (isgraph (*cp))
 		cp++;
 
 	if (*cp)
@@ -136,30 +132,31 @@ login_prompt(const char *prompt, char *name, int namesize)
 	 * to do this, and I just take the easy way out.
 	 */
 
-	if (*cp != '\0') {		/* process new variables */
+	if (*cp != '\0') {	/* process new variables */
 		char *nvar;
 		int count = 1;
 
 		for (envc = 0; envc < MAX_ENV; envc++) {
-			nvar = strtok(envc ? (char *)0 : cp, " \t,");
+			nvar = strtok (envc ? (char *) 0 : cp, " \t,");
 			if (!nvar)
 				break;
-			if (strchr(nvar, '=')) {
+			if (strchr (nvar, '=')) {
 				envp[envc] = nvar;
 			} else {
-				envp[envc] = xmalloc(strlen(nvar) + 32);
-				sprintf(envp[envc], "L%d=%s", count++, nvar);
+				envp[envc] = xmalloc (strlen (nvar) + 32);
+				sprintf (envp[envc], "L%d=%s", count++,
+					 nvar);
 			}
 		}
-		set_env(envc, envp);
+		set_env (envc, envp);
 	}
 
 	/*
 	 * Set the SIGQUIT handler back to its original value
 	 */
 
-	signal(SIGQUIT, sigquit);
+	signal (SIGQUIT, sigquit);
 #ifdef	SIGTSTP
-	signal(SIGTSTP, sigtstp);
+	signal (SIGTSTP, sigtstp);
 #endif
 }

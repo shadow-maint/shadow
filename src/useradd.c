@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: useradd.c,v 1.32 2002/01/10 13:01:28 kloczek Exp $")
+RCSID (PKG_VER "$Id: useradd.c,v 1.46.2.2 2004/01/14 06:41:06 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "chkname.h"
@@ -55,6 +55,7 @@ RCSID (PKG_VER "$Id: useradd.c,v 1.32 2002/01/10 13:01:28 kloczek Exp $")
 #include "lastlog_.h"
 #endif
 #include "faillog.h"
+#include "nscd.h"
 #ifndef SKEL_DIR
 #define SKEL_DIR "/etc/skel"
 #endif
@@ -108,26 +109,20 @@ static int do_grp_update = 0;	/* group files need to be updated */
 static char *Prog;
 
 static int
- bflg = 0,	/* new default root of home directory */
- cflg = 0,	/* comment (GECOS) field for new account */
- dflg = 0,	/* home directory for new account */
- Dflg = 0,	/* set/show new user default values */
- eflg = 0,	/* days since 1970-01-01 when account is locked */
- fflg = 0,	/* days until account with expired password is locked */
- gflg = 0,	/* primary group ID for new account */
- Gflg = 0,	/* secondary group set for new account */
- kflg = 0,	/* specify a directory to fill new user directory */
- mflg = 0,	/* create user's home directory if it doesn't exist */
- nflg = 0,	/* create a group having the same name as the user */
- oflg = 0,	/* permit non-unique user ID to be specified with -u */
- sflg = 0,	/* shell program for new account */
- uflg = 0;	/* specify user ID for new account */
-
-#ifdef AUTH_METHODS
-static int Aflg = 0;		/* specify authentication method for user */
-static char user_auth[1024];
-static char *auth_arg;
-#endif
+ bflg = 0,			/* new default root of home directory */
+ cflg = 0,			/* comment (GECOS) field for new account */
+ dflg = 0,			/* home directory for new account */
+ Dflg = 0,			/* set/show new user default values */
+ eflg = 0,			/* days since 1970-01-01 when account is locked */
+ fflg = 0,			/* days until account with expired password is locked */
+ gflg = 0,			/* primary group ID for new account */
+ Gflg = 0,			/* secondary group set for new account */
+ kflg = 0,			/* specify a directory to fill new user directory */
+ mflg = 0,			/* create user's home directory if it doesn't exist */
+ nflg = 0,			/* create a group having the same name as the user */
+ oflg = 0,			/* permit non-unique user ID to be specified with -u */
+ sflg = 0,			/* shell program for new account */
+ uflg = 0;			/* specify user ID for new account */
 
 extern char *optarg;
 extern int optind;
@@ -138,6 +133,7 @@ extern int pw_dbm_mode;
 #ifdef	SHADOWPWD
 extern int sp_dbm_mode;
 #endif
+
 extern int gr_dbm_mode;
 
 #ifdef	SHADOWGRP
@@ -178,7 +174,7 @@ static int sg_dbm_added;
  */
 #define E_SUCCESS	0	/* success */
 #define E_PW_UPDATE	1	/* can't update password file */
-#define E_USAGE		2	/* bad command syntax */
+#define E_USAGE		2	/* invalid command syntax */
 #define E_BAD_ARG	3	/* invalid argument to option */
 #define E_UID_IN_USE	4	/* uid already in use (and no -o) */
 #define E_NOTFOUND	6	/* specified group doesn't exist */
@@ -186,21 +182,12 @@ static int sg_dbm_added;
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't create home directory */
 
-#ifdef SVR4
-#define DGROUP	"defgroup="
-#define HOME	"defparent="
-#define SHELL	"defshell="
-#define INACT	"definact="
-#define EXPIRE	"defexpire="
-#define SKEL	"defskel="
-#else
-#define DGROUP	"GROUP="
-#define HOME	"HOME="
-#define SHELL	"SHELL="
-#define INACT	"INACTIVE="
-#define EXPIRE	"EXPIRE="
-#define SKEL	"SKEL="
-#endif
+#define DGROUP			"GROUP="
+#define HOME			"HOME="
+#define SHELL			"SHELL="
+#define INACT			"INACTIVE="
+#define EXPIRE			"EXPIRE="
+#define SKEL			"SKEL="
 
 /* local function prototypes */
 static void fail_exit (int);
@@ -221,10 +208,6 @@ static void new_spent (struct spwd *);
 static void grp_update (void);
 static void find_new_uid (void);
 
-#ifdef AUTH_METHODS
-static void convert_auth (char *, const char *);
-static int valid_auth (const char *);
-#endif
 static void process_flags (int argc, char **argv);
 static void close_files (void);
 static void open_files (void);
@@ -354,7 +337,8 @@ static void get_defaults (void)
 		 */
 
 		if (MATCH (buf, DGROUP)) {
-			unsigned int val = (unsigned int) strtoul (cp, &ep, 10);
+			unsigned int val =
+			    (unsigned int) strtoul (cp, &ep, 10);
 
 			if (*cp != '\0' && *ep == '\0') {	/* valid number */
 				def_group = val;
@@ -378,7 +362,6 @@ static void get_defaults (void)
 		/*
 		 * Default HOME filesystem
 		 */
-
 		else if (MATCH (buf, HOME)) {
 			def_home = xstrdup (cp);
 		}
@@ -386,15 +369,14 @@ static void get_defaults (void)
 		/*
 		 * Default Login Shell command
 		 */
-
 		else if (MATCH (buf, SHELL)) {
 			def_shell = xstrdup (cp);
 		}
 #ifdef SHADOWPWD
+
 		/*
 		 * Default Password Inactive value
 		 */
-
 		else if (MATCH (buf, INACT)) {
 			long val = strtol (cp, &ep, 10);
 
@@ -407,7 +389,6 @@ static void get_defaults (void)
 		/*
 		 * Default account expiration date
 		 */
-
 		else if (MATCH (buf, EXPIRE)) {
 			def_expire = xstrdup (cp);
 		}
@@ -416,7 +397,6 @@ static void get_defaults (void)
 		/*
 		 * Default Skeleton information
 		 */
-
 		else if (MATCH (buf, SKEL)) {
 			if (*cp == '\0')
 				cp = SKEL_DIR;	/* XXX warning: const */
@@ -436,17 +416,6 @@ static void get_defaults (void)
 
 static void show_defaults (void)
 {
-#ifdef SVR4
-	printf (_("group=%s,%u  basedir=%s  skel=%s\n"),
-		def_gname, (unsigned int) def_group, def_home,
-		def_template);
-
-	printf (_("shell=%s  "), def_shell);
-#ifdef SHADOWPWD
-	printf (_("inactive=%ld  expire=%s"), def_inactive, def_expire);
-#endif
-	printf ("\n");
-#else				/* !SVR4 */
 	printf (_("GROUP=%u\n"), (unsigned int) def_group);
 	printf (_("HOME=%s\n"), def_home);
 #ifdef SHADOWPWD
@@ -455,7 +424,6 @@ static void show_defaults (void)
 #endif
 	printf (_("SHELL=%s\n"), def_shell);
 	printf (_("SKEL=%s\n"), def_template);
-#endif				/* !SVR4 */
 }
 
 /*
@@ -480,10 +448,6 @@ static int set_defaults (void)
 	int out_expire = 0;
 	int out_shell = 0;
 	int out_skel = 0;
-
-#ifdef	SVR4
-	int out_gname = 0;
-#endif
 
 	/*
 	 * Create a temporary file to copy the new output to.
@@ -524,14 +488,7 @@ static int set_defaults (void)
 			fprintf (ofp, DGROUP "%u\n",
 				 (unsigned int) def_group);
 			out_group++;
-		}
-#ifdef	SVR4
-		else if (!out_gname && MATCH (buf, "defgname=")) {
-			fprintf (ofp, "defgname=%s\n", def_gname);
-			out_gname++;
-		}
-#endif
-		else if (!out_home && MATCH (buf, HOME)) {
+		} else if (!out_home && MATCH (buf, HOME)) {
 			fprintf (ofp, HOME "%s\n", def_home);
 			out_home++;
 #ifdef	SHADOWPWD
@@ -541,9 +498,8 @@ static int set_defaults (void)
 		} else if (!out_expire && MATCH (buf, EXPIRE)) {
 			fprintf (ofp, EXPIRE "%s\n", def_expire);
 			out_expire++;
-		}
 #endif
-		else if (!out_shell && MATCH (buf, SHELL)) {
+		} else if (!out_shell && MATCH (buf, SHELL)) {
 			fprintf (ofp, SHELL "%s\n", def_shell);
 			out_shell++;
 		} else if (!out_skel && MATCH (buf, SKEL)) {
@@ -612,12 +568,16 @@ static int set_defaults (void)
 	}
 #ifdef SHADOWPWD
 	SYSLOG ((LOG_INFO,
-		 "defaults: group=%u, home=%s, inactive=%ld, expire=%s",
-		 (unsigned int) def_group, def_home, def_inactive,
-		 def_expire));
+		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
+		 "EXPIRE=%s, SKEL=%s",
+		 (unsigned int) def_group, def_home, def_shell,
+		 def_inactive, def_expire, def_template));
 #else
-	SYSLOG ((LOG_INFO, "defaults: group=%u, home=%s",
-		 (unsigned int) def_group, def_home));
+	SYSLOG ((LOG_INFO,
+		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, "
+		 "SKEL=%s",
+		 (unsigned int) def_group, def_home, def_shell,
+		 def_template));
 #endif
 	return 0;
 }
@@ -735,25 +695,17 @@ static void usage (void)
 {
 	fprintf (stderr,
 		 _
-		 ("usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"),
-		 Prog);
+		 ("Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"));
 	fprintf (stderr,
 		 _
-		 ("\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"));
-	fprintf (stderr, "\t\t");
+		 ("               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"));
 #ifdef SHADOWPWD
-	fprintf (stderr, _("[-f inactive] [-e expire ] "));
+	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
 #endif
-#ifdef AUTH_METHODS
-	fprintf (stderr, _("[-A program] "));
-#endif
-	fprintf (stderr, _("[-p passwd] name\n"));
-
 	fprintf (stderr,
-		 _("       %s\t-D [-g group] [-b base] [-s shell]\n"),
-		 Prog);
+		 _("       useradd -D [-g group] [-b base] [-s shell]\n"));
 #ifdef SHADOWPWD
-	fprintf (stderr, _("\t\t[-f inactive] [-e expire ]\n"));
+	fprintf (stderr, _("               [-f inactive] [-e expire]\n"));
 #endif
 
 	exit (E_USAGE);
@@ -777,18 +729,9 @@ static void new_pwent (struct passwd *pwent)
 #endif
 		pwent->pw_passwd = (char *) user_pass;
 
-#ifdef ATT_AGE
-	pwent->pw_age = (char *) "";
-#endif
 	pwent->pw_uid = user_id;
 	pwent->pw_gid = user_gid;
 	pwent->pw_gecos = (char *) user_comment;
-#ifdef	ATT_COMMENT
-	pwent->pw_comment = (char *) "";
-#endif
-#ifdef BSD_QUOTA
-	pwent->pw_quota = 0;
-#endif
 	pwent->pw_dir = (char *) user_home;
 	pwent->pw_shell = (char *) user_shell;
 }
@@ -1073,77 +1016,6 @@ static void find_new_uid (void)
 	}
 }
 
-#ifdef AUTH_METHODS
-/*
- * convert_auth - convert the argument list to a authentication list
- */
-
-static void convert_auth (char *auths, const char *list)
-{
-	char *cp, *end;
-	char buf[257];
-
-	/*
-	 * Copy each method. DEFAULT is replaced by an encrypted string
-	 * if one can be found in the current authentication list.
-	 */
-
-	strcpy (buf, list);
-	auths[0] = '\0';
-	for (cp = buf; cp; cp = end) {
-		if (auths[0])
-			strcat (auths, ";");
-
-		if ((end = strchr (cp, ',')))
-			*end++ = '\0';
-
-		if (strcmp (cp, "DEFAULT") == 0) {
-			strcat (auths, user_pass);
-		} else {
-			strcat (auths, "@");
-			strcat (auths, cp);
-		}
-	}
-}
-
-/*
- * valid_auth - check authentication list for validity
- */
-
-static int valid_auth (const char *methods)
-{
-	char *cp, *end;
-	char buf[257];
-	int default_cnt = 0;
-
-	/*
-	 * Cursory checks, length and illegal characters
-	 */
-
-	if ((int) strlen (methods) > 256)
-		return 0;
-
-	if (!VALID (methods))
-		return 0;
-
-	/*
-	 * Pick each method apart and check it.
-	 */
-
-	strcpy (buf, methods);
-	for (cp = buf; cp; cp = end) {
-		if ((end = strchr (cp, ',')))
-			*end++ = '\0';
-
-		if (strcmp (cp, "DEFAULT") == 0) {
-			if (default_cnt++ > 0)
-				return 0;
-		}
-	}
-	return 1;
-}
-#endif				/* AUTH_METHODS */
-
 /*
  * process_flags - perform command line argument setting
  *
@@ -1167,18 +1039,6 @@ static void process_flags (int argc, char **argv)
 	while ((arg = getopt (argc, argv, FLAGS)) != EOF) {
 #undef FLAGS
 		switch (arg) {
-#ifdef AUTH_METHODS
-		case 'A':
-			if (!valid_auth (optarg)) {
-				fprintf (stderr,
-					 _("%s: invalid field `%s'\n"),
-					 Prog, optarg);
-				exit (E_BAD_ARG);
-			}
-			auth_arg = optarg;
-			Aflg++;
-			break;
-#endif
 		case 'b':
 			if (!Dflg)
 				usage ();
@@ -1534,13 +1394,6 @@ static void usr_update (void)
 	if (!oflg)
 		find_new_uid ();
 
-#ifdef AUTH_METHODS
-	if (Aflg) {
-		convert_auth (user_auth, auth_arg);
-		user_pass = user_auth;
-	}
-#endif
-
 	/*
 	 * Fill in the password structure with any new fields, making
 	 * copies of strings.
@@ -1556,32 +1409,10 @@ static void usr_update (void)
 	 * happens so we know what we were trying to accomplish.
 	 */
 
-#ifdef AUTH_METHODS
-	SYSLOG ((LOG_INFO,
-		 "new user: name=%s, uid=%u, gid=%u, home=%s, shell=%s, auth=%s",
-		 user_name, (unsigned int) user_id, (unsigned int) user_gid, 
-		 user_home, user_shell, Aflg ? auth_arg : "DEFAULT"));
-#else
 	SYSLOG ((LOG_INFO,
 		 "new user: name=%s, uid=%u, gid=%u, home=%s, shell=%s",
-		 user_name, (unsigned int) user_id, (unsigned int) user_gid, 
-		 user_home, user_shell));
-#endif
-
-#ifdef AUTH_METHODS
-	/*
-	 * Attempt to add the new user to any authentication programs
-	 * which have been requested. Since this is more likely to fail
-	 * than the update of the password file, we do this first.
-	 */
-
-	if (Aflg && pw_auth (user_auth, pwent.pw_name, PW_ADD, (char *) 0)) {
-		fprintf (stderr,
-			 _("%s: error adding authentication method\n"),
-			 Prog);
-		fail_exit (E_PW_UPDATE);	/* XXX */
-	}
-#endif				/* AUTH_METHODS */
+		 user_name, (unsigned int) user_id,
+		 (unsigned int) user_gid, user_home, user_shell));
 
 	/*
 	 * Initialize faillog and lastlog entries for this UID in case
@@ -1684,11 +1515,7 @@ static void create_home (void)
 			fail_exit (E_HOMEDIR);
 		}
 		chown (user_home, user_id, user_gid);
-#if 1
-		chmod (user_home, 0777 & ~getdef_num ("UMASK", 077));
-#else
-		chmod (user_home, 0755);
-#endif
+		chmod (user_home, 0777 & ~getdef_num ("UMASK", 022));
 		home_added++;
 	}
 }
@@ -1717,6 +1544,7 @@ int main (int argc, char **argv)
 
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 	user_groups = malloc ((1 + sys_ngroups) * sizeof (char *));
+	user_groups[0] = (char *) 0;
 	Prog = Basename (argv[0]);
 
 	setlocale (LC_ALL, "");
@@ -1825,8 +1653,13 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * Do the hard stuff - open the files, create the user entries,
-	 * create the home directory, then close and update the files.
+	 * Do the hard stuff:
+	 * - open the files,
+	 * - create the user entries,
+	 * - create the home directory,
+	 * - create user mail spoll,
+	 * - flush nscd caches for passwd and group services,
+	 * - then close and update the files.
 	 */
 
 	open_files ();
@@ -1855,6 +1688,9 @@ int main (int argc, char **argv)
 			 Prog);
 	}
 
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+
 	close_files ();
 
 #ifdef USE_PAM
@@ -1875,4 +1711,5 @@ int main (int argc, char **argv)
 #endif				/* USE_PAM */
 
 	exit (E_SUCCESS);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

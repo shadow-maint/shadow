@@ -1,4 +1,4 @@
-.\"$Id: newgrp.1,v 1.12 2002/03/09 19:22:30 ankry Exp $
+.\"$Id: newgrp.1,v 1.14 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -36,10 +36,9 @@ sg \- execute command as different group ID
 \fBsg\fR [\fB-\fR] [\fIgroup\fR [[\fB-c\fR] \fIcommand\fR]]
 .SH DESCRIPTION
 \fBnewgrp\fR is used to change the current group ID during a login session.
-If the optional \fB\-\fR flag is given, the user's environment
-will be reinitialized as though the user had logged in, otherwise
-the current environment, including current working directory,
-remains unchanged.
+If the optional \fB\-\fR flag is given, the user's environment will be
+reinitialized as though the user had logged in, otherwise the current
+environment, including current working directory, remains unchanged.
 .PP
 \fBnewgrp\fR changes the current real group ID to the named group, or to the
 default group listed in \fI/etc/passwd\fR if no group name is given. The
@@ -49,16 +48,16 @@ password. The user will be denied access if the group password is empty and
 the user is not listed as a member.
 .PP
 The \fBsg\fR command works similiar to \fBnewgrp\fR but accepts a command.
-The command will be executed with the Bourne shell.  With most shells you
+The command will be executed with the Bourne shell. With most shells you
 may run \fBsg\fR from, you need to enclose multi-word commands in quotes.
 Another difference between \fBnewgrp\fR and \fBsg\fR is that some shells
-treat \fBnewgrp\fR specially, replacing themselves with a new instance of
-a shell that \fBnewgrp\fR creates.  This doesn't happen with \fBsg\fR, so
-upon exit from a \fBsg\fR command you are returned to your previous group ID.
+treat \fBnewgrp\fR specially, replacing themselves with a new instance of a
+shell that \fBnewgrp\fR creates. This doesn't happen with \fBsg\fR, so upon
+exit from a \fBsg\fR command you are returned to your previous group ID.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR \- user account information
 .br
-/etc/group \- group information
+\fI/etc/group\fR \- group information
 .SH SEE ALSO
 .BR id (1),
 .BR login (1),

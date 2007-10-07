@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: groupmod.c,v 1.19 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: groupmod.c,v 1.22 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <grp.h>
@@ -45,6 +45,7 @@ RCSID (PKG_VER "$Id: groupmod.c,v 1.19 2002/01/05 15:41:43 kloczek Exp $")
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
+#include "nscd.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
 static int is_shadow_grp;
@@ -100,7 +101,7 @@ static void open_files (void);
 static void usage (void)
 {
 	fprintf (stderr,
-		 _("usage: groupmod [-g gid [-o]] [-n name] group\n"));
+		 _("Usage: groupmod [-g gid [-o]] [-n name] group\n"));
 	exit (E_USAGE);
 }
 
@@ -589,6 +590,7 @@ int main (int argc, char **argv)
 	open_files ();
 
 	grp_update ();
+	nscd_flush_cache ("group");
 
 	close_files ();
 
@@ -609,4 +611,5 @@ int main (int argc, char **argv)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 	exit (E_SUCCESS);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

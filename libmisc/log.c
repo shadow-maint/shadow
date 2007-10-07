@@ -30,8 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: log.c,v 1.5 1998/04/16 19:57:44 marekm Exp $")
-
+RCSID ("$Id: log.c,v 1.7 2003/12/17 12:52:25 kloczek Exp $")
 #include <sys/types.h>
 #include <pwd.h>
 #include <fcntl.h>
@@ -42,7 +41,6 @@ RCSID("$Id: log.c,v 1.5 1998/04/16 19:57:44 marekm Exp $")
 #else
 #include "lastlog_.h"
 #endif
-
 /* 
  * dolastlog - create lastlog entry
  *
@@ -50,19 +48,20 @@ RCSID("$Id: log.c,v 1.5 1998/04/16 19:57:44 marekm Exp $")
  *	UID is extracted from the global (struct passwd) entry and the
  *	TTY information is gotten from the (struct utmp).
  */
-
 void
-dolastlog(struct lastlog *ll, const struct passwd *pw, const char *line, const char *host)
+dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
+	   const char *host)
 {
-	int	fd;
-	off_t	offset;
-	struct	lastlog	newlog;
+	int fd;
+	off_t offset;
+	struct lastlog newlog;
+	time_t ll_time;
 
 	/*
 	 * If the file does not exist, don't create it.
 	 */
 
-	if ((fd = open(LASTLOG_FILE, O_RDWR)) == -1)
+	if ((fd = open (LASTLOG_FILE, O_RDWR)) == -1)
 		return;
 
 	/*
@@ -72,8 +71,8 @@ dolastlog(struct lastlog *ll, const struct passwd *pw, const char *line, const c
 
 	offset = (unsigned long) pw->pw_uid * sizeof newlog;
 
-	if (lseek(fd, offset, SEEK_SET) != offset) {
-		close(fd);
+	if (lseek (fd, offset, SEEK_SET) != offset) {
+		close (fd);
 		return;
 	}
 
@@ -83,18 +82,18 @@ dolastlog(struct lastlog *ll, const struct passwd *pw, const char *line, const c
 	 * the way we read the old one in.
 	 */
 
-	if (read(fd, (char *) &newlog, sizeof newlog) != sizeof newlog)
-		memzero(&newlog, sizeof newlog);
+	if (read (fd, (char *) &newlog, sizeof newlog) != sizeof newlog)
+		memzero (&newlog, sizeof newlog);
 	if (ll)
 		*ll = newlog;
 
-	time(&newlog.ll_time);
-	strncpy(newlog.ll_line, line, sizeof newlog.ll_line);
+	ll_time = newlog.ll_time;
+	time (&ll_time);
+	strncpy (newlog.ll_line, line, sizeof newlog.ll_line);
 #if HAVE_LL_HOST
-	strncpy(newlog.ll_host, host, sizeof newlog.ll_host);
+	strncpy (newlog.ll_host, host, sizeof newlog.ll_host);
 #endif
-	if (lseek(fd, offset, SEEK_SET) == offset)
-		write(fd, (char *) &newlog, sizeof newlog);
-	close(fd);
+	if (lseek (fd, offset, SEEK_SET) == offset)
+		write (fd, (char *) &newlog, sizeof newlog);
+	close (fd);
 }
-

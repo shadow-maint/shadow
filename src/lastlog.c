@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: lastlog.c,v 1.11 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: lastlog.c,v 1.13 2003/12/17 12:52:25 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -107,13 +107,13 @@ int main (int argc, char **argv)
 		case 'h':
 			fprintf (stdout,
 				 _
-				 ("Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"),
+				 ("Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"),
 				 argv[0]);
 			exit (0);
 		default:
 			fprintf (stdout,
 				 _
-				 ("Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"),
+				 ("Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"),
 				 argv[0]);
 			exit (1);
 		}
@@ -167,7 +167,7 @@ static void print_one (const struct passwd *pw)
 	static int once;
 	char *cp;
 	struct tm *tm;
-
+	time_t ll_time;
 #ifdef HAVE_STRFTIME
 	char ptime[80];
 #endif
@@ -184,7 +184,8 @@ static void print_one (const struct passwd *pw)
 #endif
 		once++;
 	}
-	tm = localtime (&lastlog.ll_time);
+	ll_time = lastlog.ll_time;
+	tm = localtime (&ll_time);
 #ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
 	cp = ptime;

@@ -30,12 +30,10 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: setup.c,v 1.3 1997/12/07 23:27:09 marekm Exp $")
-
+RCSID ("$Id: setup.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-
 /*
  * setup - initialize login environment
  *
@@ -49,24 +47,22 @@ RCSID("$Id: setup.c,v 1.3 1997/12/07 23:27:09 marekm Exp $")
  *	set the HOME, SHELL, MAIL, PATH, and LOGNAME or USER environmental
  *	variables.
  */
-
-void
-setup(struct passwd *info)
+void setup (struct passwd *info)
 {
 	/*
 	 * Set resource limits.
 	 */
-	setup_limits(info);
+	setup_limits (info);
 
 	/*
 	 * Set the real group ID, do initgroups, and set the real user ID
 	 * to the value in the password file.
 	 */
-	if (setup_uid_gid(info, 0))
-		exit(1);
+	if (setup_uid_gid (info, 0))
+		exit (1);
 
 	/*
 	 * Change to the home directory, and set up environment.
 	 */
-	setup_env(info);
+	setup_env (info);
 }

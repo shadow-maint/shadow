@@ -6,195 +6,169 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 19990709\n"
-"POT-Creation-Date: 2002-03-12 12:16+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-14 07:41+0100\n"
 "PO-Revision-Date: 2002-03-11 12:02-0100\n"
 "Last-Translator: Frank Schmid <frank@cs-schmid.de>\n"
 "Language-Team: Frank Schmid <frank@cs-schmid.de>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: libmisc/addgrps.c:60
+#: libmisc/addgrps.c:56
 #, c-format
 msgid "Warning: unknown group %s\n"
 msgstr "Warnung: Gruppe %s ist unbekannt\n"
 
-#: libmisc/addgrps.c:71
+#: libmisc/addgrps.c:68
 msgid "Warning: too many groups\n"
 msgstr "Warnung: zu viele Gruppen\n"
 
-#: libmisc/age.c:77
+#: libmisc/age.c:72
 msgid "Your password has expired."
 msgstr "Ihr Kennwort ist abgelaufen."
 
-#: libmisc/age.c:80
+#: libmisc/age.c:75
 msgid "Your password is inactive."
 msgstr "Ihr Kennwort ist inaktiv."
 
-#: libmisc/age.c:83
+#: libmisc/age.c:78
 msgid "Your login has expired."
 msgstr "Ihr Account ist abgelaufen."
 
-#: libmisc/age.c:96
+#: libmisc/age.c:90
 msgid "  Contact the system administrator.\n"
-msgstr "  Verständigen Sie den Systemadministrator.\n"
+msgstr "  VerstÃ¤ndigen Sie den Systemadministrator.\n"
 
-#: libmisc/age.c:99
+#: libmisc/age.c:93
 msgid "  Choose a new password.\n"
-msgstr "  Wählen Sie ein neues Kennwort.\n"
+msgstr "  WÃ¤hlen Sie ein neues Kennwort.\n"
 
-#: libmisc/age.c:176
+#: libmisc/age.c:168
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "Ihr Kennwort läuft in %ld Tagen ab.\n"
+msgstr "Ihr Kennwort lÃ¤uft in %ld Tagen ab.\n"
 
-#: libmisc/age.c:178
+#: libmisc/age.c:172
 msgid "Your password will expire tomorrow.\n"
-msgstr "Ihr Kennwort läuft morgen ab.\n"
+msgstr "Ihr Kennwort lÃ¤uft morgen ab.\n"
 
-#: libmisc/age.c:180
+#: libmisc/age.c:174
 msgid "Your password will expire today.\n"
-msgstr "Ihr Kennwort läuft heute ab.\n"
+msgstr "Ihr Kennwort lÃ¤uft heute ab.\n"
 
-#: libmisc/chowntty.c:113
+#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "tty %s kann nicht geändert werden"
+msgstr "tty %s kann nicht geÃ¤ndert werden"
 
-#: libmisc/env.c:160
+#: libmisc/env.c:155
 msgid "Environment overflow\n"
-msgstr "Umgebungsüberlauf\n"
+msgstr "UmgebungsÃ¼berlauf\n"
 
-#: libmisc/env.c:200
+#: libmisc/env.c:195
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Sie können $%s nicht ändern\n"
+msgstr "Sie kÃ¶nnen $%s nicht Ã¤ndern\n"
 
-#: libmisc/failure.c:238
+#: libmisc/failure.c:230
 #, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
 msgstr "%d %s seit letzter Verbindung. Die letzte war am %s auf %s.\n"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failures"
 msgstr "Fehlanmeldungen"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failure"
 msgstr "Fehlanmeldung"
 
-#: libmisc/limits.c:397
+#: libmisc/limits.c:396
 msgid "Too many logins.\n"
 msgstr "Zu viele Verbindungen.\n"
 
-#: libmisc/login_desrpc.c:63
+#: libmisc/login_desrpc.c:59
 #, c-format
 msgid "Password does not decrypt secret key for %s.\n"
-msgstr "Kennwort entschlüsselt den Schlüssel für %s nicht.\n"
+msgstr "Kennwort entschlÃ¼sselt den SchlÃ¼ssel fÃ¼r %s nicht.\n"
 
-#: libmisc/login_desrpc.c:69
+#: libmisc/login_desrpc.c:66
 #, c-format
 msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
-msgstr "Kann den Schlüssel von %s nicht setzen: läuft der keyserv-Dienst ?\n"
+msgstr "Kann den SchlÃ¼ssel von %s nicht setzen: lÃ¤uft der keyserv-Dienst ?\n"
 
-#: libmisc/mail.c:62 libmisc/mail.c:77
+#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
 msgstr "Sie haben neue Post."
 
-#: libmisc/mail.c:73
+#: libmisc/mail.c:72
 msgid "No mail."
 msgstr "Keine Post vorhanden."
 
-#: libmisc/mail.c:75
+#: libmisc/mail.c:74
 msgid "You have mail."
 msgstr "Sie haben Post."
 
-#: libmisc/obscure.c:281 src/passwd.c:244
+#: libmisc/obscure.c:271 src/passwd.c:183
 #, c-format
 msgid "Bad password: %s.  "
 msgstr "Schlechtes Kennwort: %s.  "
 
-#: libmisc/pam_pass.c:42
+#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
 msgstr "passwd: pam_start() fehlgeschlagen, Fehler %d\n"
 
-#: libmisc/pam_pass.c:49
+#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
 
-#: libmisc/setupenv.c:211
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
 msgstr "Kann nicht in Verzeichnis \"%s\" wechseln\n"
 
-#: libmisc/setupenv.c:219
+#: libmisc/setupenv.c:216
 msgid "No directory, logging in with HOME=/"
 msgstr "Kein Verzeichnis, Anmeldung mit HOME=/"
 
-#: libmisc/shell.c:78
-#, c-format
-msgid "Executing shell %s\n"
-msgstr "Führe shell %s aus\n"
-
-#.
-#. * Obviously something is really wrong - I can't figure out
-#. * how to execute this stupid shell, so I might as well give
-#. * up in disgust ...
-#.
-#: libmisc/shell.c:122
+#: libmisc/shell.c:119
 #, c-format
 msgid "Cannot execute %s"
-msgstr "Kann %s nicht ausführen"
+msgstr "Kann %s nicht ausfÃ¼hren"
 
-#: libmisc/sub.c:61
+#: libmisc/sub.c:55
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
-msgstr "Ungültiges Basis-Verzeichnis \"%s\"\n"
+msgstr "UngÃ¼ltiges Basis-Verzeichnis \"%s\"\n"
 
-#: libmisc/sub.c:73
+#: libmisc/sub.c:67
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
-msgstr "Kann Basisverzeichnis nicht nach \"%s\" ändern\n"
+msgstr "Kann Basisverzeichnis nicht nach \"%s\" Ã¤ndern\n"
 
-#: libmisc/xmalloc.c:28
+#: libmisc/xmalloc.c:24
 #, c-format
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) fehlgeschlagen\n"
 
-#: lib/dialchk.c:71
-msgid "Dialup Password: "
-msgstr "Anwahl-Kennwort: "
-
-#: lib/getdef.c:276
+#: lib/getdef.c:274
 msgid "Could not allocate space for config info.\n"
-msgstr "Kann keinen Speicherplatz für Konfigurationsinformation reservieren.\n"
+msgstr "Kann keinen Speicherplatz fÃ¼r Konfigurationsinformation reservieren.\n"
 
-#.
-#. * Item was never found.
-#.
-#: lib/getdef.c:330
+#: lib/getdef.c:328
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
-"Konfigurationsfehler - Element '%s' unbekannt (Administrator verständigen)\n"
+"Konfigurationsfehler - Element '%s' unbekannt (Administrator verstÃ¤ndigen)\n"
 
-#: lib/getdef.c:417
-#, c-format
-msgid "error - lookup '%s' failed\n"
-msgstr "Fehler - Kann '%s' nicht finden\n"
-
-#: lib/getdef.c:425
-#, c-format
-msgid "%s not found\n"
-msgstr "%s nicht gefunden\n"
-
-#.
-#. * get the password from her, and set the salt for
-#. * the decryption from the group file.
-#.
-#: lib/pwauth.c:54 src/newgrp.c:348
+#: lib/pwauth.c:54 src/newgrp.c:343
 msgid "Password: "
 msgstr "Kennwort: "
 
@@ -203,7 +177,7 @@ msgstr "Kennwort: "
 msgid "%s's Password: "
 msgstr "Kennwort von %s: "
 
-#: lib/pwauth.c:270
+#: lib/pwauth.c:247
 msgid "(Echo on) "
 msgstr "(Echo an) "
 
@@ -212,204 +186,167 @@ msgstr "(Echo an) "
 msgid "Unknown error %d"
 msgstr "Unbekannter Fehler %d"
 
-#: src/chage.c:116
-#, c-format
+#: src/chage.c:118
 msgid ""
-"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-"\t[-I inactive] [-E expire] [-d last_day] user\n"
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"Syntax: %s [-l] [-m min_tage] [-M max_tage] [-W warnung]\n"
-"\t[-I inaktiv] [-E ablauf] [-d letzter_tag] Benutzer\n"
+"Syntax: chage [-l] [-m min_tage] [-M max_tage] [-W warnung]\n"
+"              [-I inaktiv] [-E ablauf] [-d letzter_tag] Benutzer\n"
 
-#: src/chage.c:122
-#, c-format
-msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-msgstr ""
-"Syntax: %s [-l] [-m min_tage] [-M max_tage] [-d letzter_tag] Benutzer\n"
-
-#: src/chage.c:157
+#: src/chage.c:152
 #, fuzzy
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
-"Geben Sie einen neuen Wert an oder ENTER für den Standardwert\n"
+"Geben Sie einen neuen Wert an oder ENTER fÃ¼r den Standardwert\n"
 "\n"
 
-#: src/chage.c:160
+#: src/chage.c:155
 msgid "Minimum Password Age"
 msgstr "Minimales Kennwortalter"
 
-#: src/chage.c:166
+#: src/chage.c:161
 msgid "Maximum Password Age"
 msgstr "Maximales Kennwortalter"
 
-#: src/chage.c:174
+#: src/chage.c:169
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "Letzte Kennwortänderung (JJJJ-MM-TT)"
+msgstr "Letzte KennwortÃ¤nderung (JJJJ-MM-TT)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "Warnung falls Kennwort ablÃ¤uft"
 
 #: src/chage.c:183
-msgid "Password Expiration Warning"
-msgstr "Warnung falls Kennwort abläuft"
-
-#: src/chage.c:189
 msgid "Password Inactive"
 msgstr "Kennwort inaktiv"
 
-#: src/chage.c:197
+#: src/chage.c:191
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Ablaufdatum des Accounts (JJJJ-MM-TT)"
 
-#.
-#. * Start with the easy numbers - the number of days before the
-#. * password can be changed, the number of days after which the
-#. * password must be chaged, the number of days before the password
-#. * expires that the user is told, and the number of days after the
-#. * password expires that the account becomes unusable.
-#.
-#: src/chage.c:248
+#: src/chage.c:241
 #, c-format
 msgid "Minimum:\t%ld\n"
 msgstr "Minimum :\t%ld\n"
 
-#: src/chage.c:249
+#: src/chage.c:242
 #, c-format
 msgid "Maximum:\t%ld\n"
 msgstr "Maximum :\t%ld\n"
 
-#: src/chage.c:251
+#: src/chage.c:243
 #, c-format
 msgid "Warning:\t%ld\n"
 msgstr "Warnung :\t%ld\n"
 
-#: src/chage.c:252
+#: src/chage.c:244
 #, c-format
 msgid "Inactive:\t%ld\n"
 msgstr "Inaktiv :\t%ld\n"
 
-#.
-#. * The "last change" date is either "Never" or the date the password
-#. * was last modified. The date is the number of days since 1/1/1970.
-#.
-#: src/chage.c:260
+#: src/chage.c:251
 msgid "Last Change:\t\t"
-msgstr "Letzte Änderung :\t\t"
+msgstr "Letzte Ã„nderung :\t\t"
 
-#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+#: src/chage.c:253 src/chage.c:267 src/chage.c:283 src/chage.c:296
 msgid "Never\n"
 msgstr "Nie\n"
 
-#.
-#. * The password expiration date is determined from the last change
-#. * date plus the number of days the password is valid for.
-#.
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Password Expires:\t"
-msgstr "Kennwort läuft ab :\t"
+msgstr "Kennwort lÃ¤uft ab :\t"
 
-#.
-#. * The account becomes inactive if the password is expired for more
-#. * than "inactdays". The expiration date is calculated and the
-#. * number of inactive days is added. The resulting date is when the
-#. * active will be disabled.
-#.
-#: src/chage.c:290
+#: src/chage.c:280
 msgid "Password Inactive:\t"
 msgstr "Kennwort inaktiv:\t"
 
-#.
-#. * The account will expire on the given date regardless of the
-#. * password expiring or not.
-#.
-#: src/chage.c:304
+#: src/chage.c:294
 msgid "Account Expires:\t"
-msgstr "Account läuft ab:\t"
+msgstr "Account lÃ¤uft ab:\t"
 
-#: src/chage.c:468
+#: src/chage.c:445
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s : benutzen Sie nicht \"l\" mit anderen Optionen\n"
+msgstr "%s: benutzen Sie nicht \"l\" mit anderen Optionen\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:518
+#: src/chage.c:458 src/chage.c:588 src/login.c:503
 #, c-format
 msgid "%s: permission denied\n"
-msgstr "%s : Zugriff verweigert\n"
+msgstr "%s: Zugriff verweigert\n"
 
-#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
-#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
-#: src/usermod.c:1732
+#: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s : PAM-Authentifizierung fehlgeschlagen\n"
+msgstr "%s: PAM-Authentifizierung fehlgeschlagen\n"
 
-#: src/chage.c:533 src/chpasswd.c:157
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: kann Kennwortdatei nicht sperren\n"
-
-#: src/chage.c:544 src/chpasswd.c:162
+#: src/chage.c:510 src/chpasswd.c:159
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "%s: Kann Kennwortdatei nicht öffnen\n"
+msgstr "%s: Kann Kennwortdatei nicht Ã¶ffnen\n"
 
-#: src/chage.c:552
+#: src/chage.c:518
 #, c-format
 msgid "%s: unknown user: %s\n"
 msgstr "%s: unbekannter Benutzer: %s\n"
 
-#: src/chage.c:571
+#: src/chage.c:536
 #, c-format
 msgid "%s: can't lock shadow password file"
 msgstr "%s: Kann Shadow-Datei nicht sperren"
 
-#: src/chage.c:579
+#: src/chage.c:544
 #, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s : Kann Shadow-Datei nicht öffnen"
+msgstr "%s: Kann Shadow-Datei nicht Ã¶ffnen"
 
-#: src/chage.c:674
+#: src/chage.c:605
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Ändere die Kennwortalterung für %s\n"
+msgstr "Ã„ndere die Kennwortalterung fÃ¼r %s\n"
 
-#: src/chage.c:677
+#: src/chage.c:608
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s : Fehler beim ändern der Felder\n"
+msgstr "%s: Fehler beim Ã¤ndern der Felder\n"
 
-#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#: src/chage.c:632 src/pwunconv.c:138
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "%s : Kann Kennwortdatei nicht aktualisieren\n"
+msgstr "%s: Kann Kennwortdatei nicht aktualisieren\n"
 
-#: src/chage.c:737 src/pwunconv.c:168
+#: src/chage.c:661 src/pwunconv.c:132
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s : Kann Shadow-Datei nicht aktualisieren\n"
+msgstr "%s: Kann Shadow-Datei nicht aktualisieren\n"
 
-#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
-#: src/passwd.c:747 src/passwd.c:859
+#: src/chage.c:676 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
 msgid "Error updating the DBM password entry.\n"
 msgstr "Fehler beim aktualisieren des DBM-Kennworteintrags.\n"
 
-#: src/chage.c:823
+#: src/chage.c:693
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s : Kann die Shadow-Datei nicht neu erstellen\n"
+msgstr "%s: Kann die Shadow-Datei nicht neu erstellen\n"
 
-#: src/chage.c:838
+#: src/chage.c:707
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s : Kann die Kennwortdatei nicht neu erstellen\n"
+msgstr "%s: Kann die Kennwortdatei nicht neu erstellen\n"
 
-#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
-#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
-#: src/usermod.c:1811
+#: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
 msgstr "%s: PAM chauthtok fehlgeschlagen\n"
 
-#: src/chfn.c:83
+#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
@@ -418,268 +355,239 @@ msgstr ""
 "Syntax: %s [-f name] [-r raum] [-w tel_gesch]\n"
 "\t[-h tel_privat] [-o sonstiges] [Benutzer]\n"
 
-#: src/chfn.c:88
+#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr "Syntax: %s [-f name] [-r raum] [-w tel_gesch] [-h tel_privat]\n"
 
-#: src/chfn.c:139
+#: src/chfn.c:140
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Geben Sie einen neuen Wert an oder ENTER für den Standardwert\n"
+msgstr "Geben Sie einen neuen Wert an oder ENTER fÃ¼r den Standardwert\n"
 
-#: src/chfn.c:142
+#: src/chfn.c:143
 msgid "Full Name"
 msgstr "Name"
 
-#: src/chfn.c:144
+#: src/chfn.c:145
 #, c-format
 msgid "\tFull Name: %s\n"
-msgstr "\tName : %s\n"
+msgstr "\tName: %s\n"
 
-#: src/chfn.c:147
+#: src/chfn.c:148
 msgid "Room Number"
 msgstr "Raum"
 
-#: src/chfn.c:149
+#: src/chfn.c:150
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\tRaum : %s\n"
+msgstr "\tRaum: %s\n"
 
-#: src/chfn.c:152
+#: src/chfn.c:153
 msgid "Work Phone"
-msgstr "Telefon geschäftlich"
+msgstr "Telefon geschÃ¤ftlich"
 
-#: src/chfn.c:154
+#: src/chfn.c:155
 #, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "\tTelefon geschäftlich : %s\n"
+msgstr "\tTelefon geschÃ¤ftlich: %s\n"
 
-#: src/chfn.c:157
+#: src/chfn.c:158
 msgid "Home Phone"
 msgstr "Telefon privat"
 
-#: src/chfn.c:159
+#: src/chfn.c:160
 #, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "\tTelefon privat : %s\n"
+msgstr "\tTelefon privat: %s\n"
 
-#: src/chfn.c:162
+#: src/chfn.c:163
 msgid "Other"
 msgstr "Sonstiges"
 
-#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
-#: src/chfn.c:379 src/passwd.c:1115
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
 #, c-format
 msgid "%s: Permission denied.\n"
 msgstr "%s: Zugriff verweigert.\n"
 
-#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
 #, c-format
 msgid "%s: Unknown user %s\n"
 msgstr "%s: Benutzer %s unbekannt\n"
 
-#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s: Kann Ihren Benutzernamen nicht feststellen.\n"
 
-#: src/chfn.c:358 src/chsh.c:215
+#: src/chfn.c:359 src/chsh.c:210
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: Kann den Benutzer `%' nicht auf dem NIS-Client ändern.\n"
+msgstr "%s: Kann den Benutzer `%s' nicht auf dem NIS-Client Ã¤ndern.\n"
 
-#: src/chfn.c:366 src/chsh.c:223
+#: src/chfn.c:367 src/chsh.c:218
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' ist der NIS-Master für diesen Client.\n"
+msgstr "%s: `%s' ist der NIS-Master fÃ¼r diesen Client.\n"
 
-#: src/chfn.c:441
+#: src/chfn.c:442
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "Ändere Benutzerinformationen für %s\n"
+msgstr "Ã„ndere Benutzerinformationen fÃ¼r %s\n"
 
-#: src/chfn.c:450
+#: src/chfn.c:451
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s : Name ungültig: \"%s\"\n"
+msgstr "%s: Name ungÃ¼ltig: \"%s\"\n"
 
-#: src/chfn.c:456
+#: src/chfn.c:457
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s : Raumnummer ungültig: \"%s\"\n"
+msgstr "%s: Raumnummer ungÃ¼ltig: \"%s\"\n"
 
-#: src/chfn.c:462
+#: src/chfn.c:463
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s : Telefon (geschäftlich) ungültig: \"%s\"\n"
+msgstr "%s: Telefon (geschÃ¤ftlich) ungÃ¼ltig: \"%s\"\n"
 
-#: src/chfn.c:468
+#: src/chfn.c:469
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s : Telefon (privat) ungültig: \"%s\"\n"
+msgstr "%s: Telefon (privat) ungÃ¼ltig: \"%s\"\n"
 
-#: src/chfn.c:475
+#: src/chfn.c:476
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s : \"%s\" enthält ungültige Zeichen\n"
+msgstr "%s: \"%s\" enthÃ¤lt ungÃ¼ltige Zeichen\n"
 
-#: src/chfn.c:488
+#: src/chfn.c:489
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: Feld zu lang\n"
 
-#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
 msgid "Cannot change ID to root.\n"
-msgstr "Kann ID nicht zu root ändern.\n"
+msgstr "Kann ID nicht zu root Ã¤ndern.\n"
 
-#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
 msgid "Cannot lock the password file; try again later.\n"
 msgstr ""
-"Kann die Kennwortdatei nicht sperren; versuchen Sie es später nocheinmal.\n"
+"Kann die Kennwortdatei nicht sperren; versuchen Sie es spÃ¤ter nocheinmal.\n"
 
-#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
 msgid "Cannot open the password file.\n"
-msgstr "Kann die Kennwortdatei nicht öffnen.\n"
+msgstr "Kann die Kennwortdatei nicht Ã¶ffnen.\n"
 
-#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
 msgstr "%s: %s nicht in /etc/passwd gefunden\n"
 
-#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
 msgid "Error updating the password entry.\n"
 msgstr "Fehler beim aktualisieren des Kennworteintrags.\n"
 
-#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
 msgid "Cannot commit password file changes.\n"
-msgstr "Kann Änderungen in der Kennwortdatei nicht schreiben.\n"
+msgstr "Kann Ã„nderungen in der Kennwortdatei nicht schreiben.\n"
 
-#: src/chfn.c:592 src/chsh.c:404
+#: src/chfn.c:593 src/chsh.c:399
 msgid "Cannot unlock the password file.\n"
 msgstr "Kann die Kennwortdatei nicht entsperren.\n"
 
-#: src/chpasswd.c:66
+#: src/chpasswd.c:67
 #, c-format
-msgid "usage: %s [-e]\n"
+msgid "Usage: %s [-e]\n"
 msgstr "Syntax: %s [-e]\n"
 
-#: src/chpasswd.c:171 src/pwconv.c:94
+#: src/chpasswd.c:154
+#, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: kann Kennwortdatei nicht sperren\n"
+
+#: src/chpasswd.c:168 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
 msgstr "%s: Kann die Shadow-Datei nicht sperren\n"
 
-#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
-#: src/pwunconv.c:108
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: Kann die Shadow-Datei nicht öffnen\n"
+msgstr "%s: Kann die Shadow-Datei nicht Ã¶ffnen\n"
 
-#: src/chpasswd.c:200 src/newusers.c:460
+#: src/chpasswd.c:197 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: Zeile %d: Zeile zu lang\n"
 
-#: src/chpasswd.c:220
+#: src/chpasswd.c:217
 #, c-format
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: Zeile %d: Neues Kennwort fehlt\n"
 
-#: src/chpasswd.c:237
+#: src/chpasswd.c:234
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: Zeile %d: Benutzer %s unbekannt\n"
 
-#: src/chpasswd.c:290
+#: src/chpasswd.c:280
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
 msgstr "%s: Zeile %d: Kann Kennworteintrag nicht aktualisieren\n"
 
-#: src/chpasswd.c:307 src/newusers.c:588
+#: src/chpasswd.c:297 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: Fehler entdeckt, Änderungen werden verworfen\n"
+msgstr "%s: Fehler entdeckt, Ã„nderungen werden verworfen\n"
 
-#: src/chpasswd.c:319
+#: src/chpasswd.c:309
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr "%s: Fehler beim aktualisieren der Shadow-Datei\n"
 
-#: src/chpasswd.c:328
+#: src/chpasswd.c:318
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: Fehler beim Aktualisieren der Kennwortdatei\n"
 
-#: src/chsh.c:75
+#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
 msgstr "Syntax: %s [-s shell] [Name]\n"
 
-#: src/chsh.c:89
+#: src/chsh.c:90
 #, fuzzy
 msgid "Enter the new value, or press return for the default\n"
-msgstr "Geben Sie einen neuen Wert ein oder ENTER für den Standardwert\n"
+msgstr "Geben Sie einen neuen Wert ein oder ENTER fÃ¼r den Standardwert\n"
 
-#: src/chsh.c:90
+#: src/chsh.c:91
 msgid "Login Shell"
 msgstr "Login-Shell"
 
-#: src/chsh.c:239 src/chsh.c:253
+#: src/chsh.c:234 src/chsh.c:248
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Sie dürfen die Shell für %s nicht ändern.\n"
+msgstr "Sie dÃ¼rfen die Shell fÃ¼r %s nicht Ã¤ndern.\n"
 
-#: src/chsh.c:282
+#: src/chsh.c:277
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Ändere die Login-Shell für %s\n"
+msgstr "Ã„ndere die Login-Shell fÃ¼r %s\n"
 
-#: src/chsh.c:294
+#: src/chsh.c:289
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: Ungültiger Eintrag : %s\n"
+msgstr "%s: UngÃ¼ltiger Eintrag: %s\n"
 
-#: src/chsh.c:301
+#: src/chsh.c:296
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "%s ist eine ungültige Shell.\n"
-
-#: src/dpasswd.c:52
-#, c-format
-msgid "Usage: %s [-(a|d)] shell\n"
-msgstr "Syntax: %s [-(a|d)] shell\n"
-
-#: src/dpasswd.c:115
-msgid "Shell password: "
-msgstr "Shell-Kennwort : "
-
-#: src/dpasswd.c:121
-msgid "re-enter Shell password: "
-msgstr "Bestätigen die das Shell-Kennwort : "
-
-#: src/dpasswd.c:129
-#, c-format
-msgid "%s: Passwords do not match, try again.\n"
-msgstr ""
-"%s : Die Kennwörter stimmen nicht überein; versuchen Sie es nocheinmal.\n"
-
-#: src/dpasswd.c:149
-#, c-format
-msgid "%s: can't create %s"
-msgstr "%s: Kann %s nicht erstellen"
-
-#: src/dpasswd.c:155
-#, c-format
-msgid "%s: can't open %s"
-msgstr "%s : Kann %s nicht öffnen"
-
-#: src/dpasswd.c:183
-#, c-format
-msgid "%s: Shell %s not found.\n"
-msgstr "%s : Shell %s nicht gefunden.\n"
+msgstr "%s ist eine ungÃ¼ltige Shell.\n"
 
 #: src/expiry.c:59
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Syntax : expiry {-f|-c}\n"
+msgstr "Syntax: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
@@ -689,11 +597,11 @@ msgstr "%s: WARNUNG!  Muss set-UID root sein\n"
 #: src/expiry.c:124
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s : Unbekannter Benutzer\n"
+msgstr "%s: Unbekannter Benutzer\n"
 
 #: src/faillog.c:77
 #, c-format
-msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
 msgstr "Syntax: %s [-a|-u Benutzer] [-m max] [-r] [-t tage] [-l sek_sperre]\n"
 
 #: src/faillog.c:131 src/lastlog.c:96
@@ -713,7 +621,7 @@ msgstr "  %s an %s"
 #: src/faillog.c:233
 #, c-format
 msgid " [%lds left]"
-msgstr " [%lds übrig]"
+msgstr " [%lds Ã¼brig]"
 
 #: src/faillog.c:237
 #, c-format
@@ -722,7 +630,7 @@ msgstr " [%lds Sperre]"
 
 #: src/gpasswd.c:78
 #, c-format
-msgid "usage: %s [-r|-R] group\n"
+msgid "Usage: %s [-r|-R] group\n"
 msgstr "Syntax: %s [-r|-R] Gruppe\n"
 
 #: src/gpasswd.c:79
@@ -748,7 +656,7 @@ msgstr "       %s [-M Benutzer,...] Gruppe\n"
 #: src/gpasswd.c:146 src/gpasswd.c:230
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s : Benutzer %s unbekannt\n"
+msgstr "%s: Benutzer %s unbekannt\n"
 
 #: src/gpasswd.c:157
 msgid "Permission denied.\n"
@@ -757,21 +665,21 @@ msgstr "Zugriff verweigert.\n"
 #: src/gpasswd.c:243
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s : Shadow-Gruppen-Kennwörter für -A benötigt\n"
+msgstr "%s: Shadow-Gruppen-KennwÃ¶rter fÃ¼r -A benÃ¶tigt\n"
 
 #: src/gpasswd.c:294
 msgid "Who are you?\n"
 msgstr "Wer sind Sie?\n"
 
-#: src/gpasswd.c:313 src/newgrp.c:297
+#: src/gpasswd.c:313 src/newgrp.c:292
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "Unbekannte Gruppe : %s\n"
+msgstr "Unbekannte Gruppe: %s\n"
 
 #: src/gpasswd.c:422
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "Füge Benutzer %s zu Gruppe %s hinzu\n"
+msgstr "FÃ¼ge Benutzer %s zu Gruppe %s hinzu\n"
 
 #: src/gpasswd.c:440
 #, c-format
@@ -781,223 +689,211 @@ msgstr "Entferne Benutzer %s aus der Gruppe %s\n"
 #: src/gpasswd.c:454
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s : Mitglied %s unbekannt\n"
+msgstr "%s: Mitglied %s unbekannt\n"
 
 #: src/gpasswd.c:501
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s : Kein tty\n"
+msgstr "%s: Kein tty\n"
 
-#.
-#. * A new password is to be entered and it must be encrypted, etc.
-#. * The password will be prompted for twice, and both entries must be
-#. * identical. There is no need to validate the old password since
-#. * the invoker is either the group owner, or root.
-#.
 #: src/gpasswd.c:522
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "Ändere Kennwort für die Gruppe %s\n"
+msgstr "Ã„ndere Kennwort fÃ¼r die Gruppe %s\n"
 
 #: src/gpasswd.c:525
 msgid "New Password: "
 msgstr "Neues Kennwort: "
 
-#: src/gpasswd.c:530 src/passwd.c:365
+#: src/gpasswd.c:530 src/passwd.c:281
 msgid "Re-enter new password: "
 msgstr "Kennwort wiederholen: "
 
 #: src/gpasswd.c:542
 msgid "They don't match; try again"
-msgstr "Keine Übereinstimmung; versuchen Sie es nocheinmal"
+msgstr "Keine Ãœbereinstimmung; versuchen Sie es nocheinmal"
 
 #: src/gpasswd.c:546
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: Versuchen Sie es später nocheinmal\n"
+msgstr "%s: Versuchen Sie es spÃ¤ter nocheinmal\n"
 
 #: src/gpasswd.c:578
 #, c-format
 msgid "%s: can't get lock\n"
-msgstr "%s : Kann Sperre nicht lesen\n"
+msgstr "%s: Kann Sperre nicht lesen\n"
 
 #: src/gpasswd.c:584
 #, c-format
 msgid "%s: can't get shadow lock\n"
-msgstr "%s : Kann Sperre nicht aus Shadow-Datei lesen\n"
+msgstr "%s: Kann Sperre nicht aus Shadow-Datei lesen\n"
 
 #: src/gpasswd.c:590
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s : Kann Datei nicht öffnen\n"
+msgstr "%s: Kann Datei nicht Ã¶ffnen\n"
 
 #: src/gpasswd.c:602
 #, c-format
 msgid "%s: can't update entry\n"
-msgstr "%s : Eintrag kann nicht aktualisiert werden\n"
+msgstr "%s: Eintrag kann nicht aktualisiert werden\n"
 
 #: src/gpasswd.c:608
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s : Shadow-Eintrag kann nicht aktualisiert werden\n"
+msgstr "%s: Shadow-Eintrag kann nicht aktualisiert werden\n"
 
 #: src/gpasswd.c:615
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s : Datei kann nicht neu erstellt werden\n"
+msgstr "%s: Datei kann nicht neu erstellt werden\n"
 
 #: src/gpasswd.c:621
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s : Shadow-Datei kann nicht neu erstellt werden\n"
+msgstr "%s: Shadow-Datei kann nicht neu erstellt werden\n"
 
 #: src/gpasswd.c:630
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s : Datei kann nicht entsperrt werden\n"
+msgstr "%s: Datei kann nicht entsperrt werden\n"
 
 #: src/gpasswd.c:635
 #, c-format
 msgid "%s: can't update DBM files\n"
-msgstr "%s : DBM-Dateien können nicht aktualisiert werden\n"
+msgstr "%s: DBM-Dateien kÃ¶nnen nicht aktualisiert werden\n"
 
 #: src/gpasswd.c:642
 #, c-format
 msgid "%s: can't update DBM shadow files\n"
-msgstr "%s : DBM-Shadow-Dateien können nicht aktualisiert werden\n"
+msgstr "%s: DBM-Shadow-Dateien kÃ¶nnen nicht aktualisiert werden\n"
 
-#: src/groupadd.c:101
-msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "Syntax: groupadd [-g gid [-o]] Gruppe\n"
+#: src/groupadd.c:102
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "Syntax: groupadd [-g gid [-o]] [-f] Gruppe\n"
 
-#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
-#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s : Fehler beim Hinzufügen eines neuen Gruppeneintrags\n"
+msgstr "%s: Fehler beim HinzufÃ¼gen eines neuen Gruppeneintrags\n"
 
-#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
-#: src/usermod.c:564 src/usermod.c:708
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
-msgstr "%s : Kann keinen neuen DBM-Gruppen-Eintrag hinzufügen\n"
+msgstr "%s: Kann keinen neuen DBM-Gruppen-Eintrag hinzufÃ¼gen\n"
 
-#: src/groupadd.c:255 src/useradd.c:1034
+#: src/groupadd.c:256 src/useradd.c:977
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s : Name %s ist nicht eindeutig\n"
+msgstr "%s: Name %s ist nicht eindeutig\n"
 
-#: src/groupadd.c:270
+#: src/groupadd.c:271
 #, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s : GID %u ist nicht eindeutig\n"
+msgstr "%s: GID %u ist nicht eindeutig\n"
 
-#: src/groupadd.c:294
+#: src/groupadd.c:295
 #, c-format
 msgid "%s: can't get unique gid\n"
-msgstr "%s : Kann keine eindeutige GID feststellen\n"
+msgstr "%s: Kann keine eindeutige GID feststellen\n"
 
-#.
-#. * All invalid group names land here.
-#.
-#: src/groupadd.c:317 src/groupmod.c:341
+#: src/groupadd.c:318 src/groupmod.c:342
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
-msgstr "%s : %s ist kein gültiger Gruppenname\n"
+msgstr "%s: %s ist kein gÃ¼ltiger Gruppenname\n"
 
-#: src/groupadd.c:346 src/groupmod.c:366
+#: src/groupadd.c:347 src/groupmod.c:367
 #, c-format
 msgid "%s: invalid group %s\n"
-msgstr "%s : Ungültige Gruppe %s\n"
+msgstr "%s: UngÃ¼ltige Gruppe %s\n"
 
-#: src/groupadd.c:363 src/useradd.c:1313
+#: src/groupadd.c:364 src/useradd.c:1173
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s : -O benötigt NAME=WERT\n"
+msgstr "%s: -O benÃ¶tigt NAME=WERT\n"
 
-#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
-#: src/userdel.c:312 src/usermod.c:576
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s : Kann Gruppendatei nicht neu erstellen\n"
+msgstr "%s: Kann Gruppendatei nicht neu erstellen\n"
 
-#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
-#: src/userdel.c:319 src/usermod.c:722
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s : Kann Shadow-Gruppendatei nicht neu erstellen\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht neu erstellen\n"
 
-#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s : Kann Gruppendatei nicht sperren\n"
+msgstr "%s: Kann Gruppendatei nicht sperren\n"
 
-#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s : Kann Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Gruppendatei nicht Ã¶ffnen\n"
 
-#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s : Kann Shadow-Gruppendatei nicht sperren\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht sperren\n"
 
-#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s : Kann Shadow-Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht Ã¶ffnen\n"
 
-#: src/groupadd.c:562
+#: src/groupadd.c:563
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s : Gruppe %s bereits vorhanden\n"
+msgstr "%s: Gruppe %s bereits vorhanden\n"
 
-#: src/groupdel.c:92
-msgid "usage: groupdel group\n"
+#: src/groupdel.c:88
+msgid "Usage: groupdel group\n"
 msgstr "Syntax: groupdel Gruppe\n"
 
-#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
 #, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s : Fehler beim Entfernen des Gruppeneintrags\n"
+msgstr "%s: Fehler beim Entfernen des Gruppeneintrags\n"
 
-#: src/groupdel.c:122 src/groupmod.c:204
+#: src/groupdel.c:119 src/groupmod.c:205
 #, c-format
 msgid "%s: error removing group dbm entry\n"
-msgstr "%s : Fehler beim Entfernen des DBM-Gruppeneintrags\n"
+msgstr "%s: Fehler beim Entfernen des DBM-Gruppeneintrags\n"
 
-#: src/groupdel.c:137
+#: src/groupdel.c:135
 #, c-format
 msgid "%s: error removing shadow group entry\n"
-msgstr "%s : Fehler beim Entfernen des Shadow-Gruppeneintrags\n"
+msgstr "%s: Fehler beim Entfernen des Shadow-Gruppeneintrags\n"
 
-#: src/groupdel.c:150 src/groupmod.c:254
+#: src/groupdel.c:149 src/groupmod.c:255
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
-msgstr "%s : Fehler beim Entfernen des DBM-Shadow-Gruppeneintrags\n"
+msgstr "%s: Fehler beim Entfernen des DBM-Shadow-Gruppeneintrags\n"
 
-#.
-#. * Can't remove the group.
-#.
-#: src/groupdel.c:254
+#: src/groupdel.c:255
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s : Kann die primäre Gruppe des Benutzers nicht entfernen.\n"
+msgstr "%s: Kann die primÃ¤re Gruppe des Benutzers nicht entfernen.\n"
 
-#: src/groupdel.c:355 src/groupmod.c:550
+#: src/groupdel.c:359 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s : Gruppe %s existiert nicht\n"
+msgstr "%s: Gruppe %s existiert nicht\n"
 
-#: src/groupdel.c:369 src/groupmod.c:566
+#: src/groupdel.c:373 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s : Gruppe %s ist eine NIS-Gruppe\n"
+msgstr "%s: Gruppe %s ist eine NIS-Gruppe\n"
 
-#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#: src/groupdel.c:378 src/groupmod.c:572 src/userdel.c:724 src/usermod.c:805
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s : %s ist der NIS-Master\n"
+msgstr "%s: %s ist der NIS-Master\n"
 
 #: src/groupmems.c:95
 msgid "Member already exists\n"
@@ -1008,16 +904,16 @@ msgid "Member to remove could not be found\n"
 msgstr "Zu entfernendes Mitglied nicht gefunden\n"
 
 #: src/groupmems.c:158
-msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr "Syntax: groupmems -a Benutzer | -d Benutzer | -D | -l [-g Gruppe]\n"
 
 #: src/groupmems.c:201
 msgid "Only root can add members to different groups\n"
-msgstr "Nur root kann Mitglieder zu verschiedenen Gruppen hinzufügen\n"
+msgstr "Nur root kann Mitglieder zu verschiedenen Gruppen hinzufÃ¼gen\n"
 
 #: src/groupmems.c:206
 msgid "Group access is required\n"
-msgstr "Gruppen-Zugriff benötigt\n"
+msgstr "Gruppen-Zugriff benÃ¶tigt\n"
 
 #: src/groupmems.c:210
 msgid "Not primary owner of current group\n"
@@ -1029,35 +925,35 @@ msgstr "Kann Gruppendatei nicht sperren\n"
 
 #: src/groupmems.c:220
 msgid "Unable to open group file\n"
-msgstr "Kann Gruppendatei nicht öffnen\n"
+msgstr "Kann Gruppendatei nicht Ã¶ffnen\n"
 
 #: src/groupmems.c:240
 msgid "Cannot close group file\n"
-msgstr "Kann Gruppendatei nicht schließen\n"
+msgstr "Kann Gruppendatei nicht schlieÃŸen\n"
 
-#: src/groupmod.c:103
-msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "Syntax : groupmod [-g gid [-o]] [-n Name] Gruppe\n"
+#: src/groupmod.c:104
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "Syntax: groupmod [-g gid [-o]] [-n Name] Gruppe\n"
 
-#: src/groupmod.c:161
+#: src/groupmod.c:162
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s : %s nicht in /etc/group gefunden\n"
+msgstr "%s: %s nicht in /etc/group gefunden\n"
 
-#: src/groupmod.c:247
+#: src/groupmod.c:248
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
-msgstr "%s : Kann DBM-Shadow-Gruppeneintrag nicht hinzufügen\n"
+msgstr "%s: Kann DBM-Shadow-Gruppeneintrag nicht hinzufÃ¼gen\n"
 
-#: src/groupmod.c:300
+#: src/groupmod.c:301
 #, c-format
 msgid "%s: %u is not a unique gid\n"
 msgstr "%s: %u ist keine eindeutige GID\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:331
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s : %s ist kein eindeutiger Name\n"
+msgstr "%s: %s ist kein eindeutiger Name\n"
 
 #: src/groups.c:59
 #, c-format
@@ -1086,33 +982,25 @@ msgstr ""
 #: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s : Kann Datei %s nicht sperren\n"
+msgstr "%s: Kann Datei %s nicht sperren\n"
 
 #: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:202 src/pwck.c:242
 #: src/pwck.c:251
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s : Kann Datei %s nicht öffnen\n"
+msgstr "%s: Kann Datei %s nicht Ã¶ffnen\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:311
 msgid "invalid group file entry\n"
-msgstr "Ungültiger Eintrag in Gruppendatei\n"
+msgstr "UngÃ¼ltiger Eintrag in Gruppendatei\n"
 
 #: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
 #: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
 #: src/pwck.c:543
 #, c-format
 msgid "delete line `%s'? "
-msgstr "Zeile `%s' löschen? "
+msgstr "Zeile `%s' lÃ¶schen? "
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:374
 msgid "duplicate group entry\n"
 msgstr "Doppelter Gruppeneintrag\n"
@@ -1120,30 +1008,22 @@ msgstr "Doppelter Gruppeneintrag\n"
 #: src/grpck.c:391
 #, c-format
 msgid "invalid group name `%s'\n"
-msgstr "Gruppenname `%s' ungültig\n"
+msgstr "Gruppenname `%s' ungÃ¼ltig\n"
 
 #: src/grpck.c:418
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "Gruppe %s : Kein Benutzer %s\n"
+msgstr "Gruppe %s: Kein Benutzer %s\n"
 
 #: src/grpck.c:420 src/grpck.c:590
 #, c-format
 msgid "delete member `%s'? "
-msgstr "Mitglied `%s' löschen? "
+msgstr "Mitglied `%s' lÃ¶schen? "
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:457
 msgid "invalid shadow group file entry\n"
-msgstr "Ungültiger Shadow-Gruppeneintrag\n"
+msgstr "UngÃ¼ltiger Shadow-Gruppeneintrag\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:520
 msgid "duplicate shadow group entry\n"
 msgstr "Doppelter Shadow-Gruppeneintrag\n"
@@ -1155,32 +1035,32 @@ msgstr "Kein passender Gruppeneintrag\n"
 #: src/grpck.c:558
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "Shadow-Gruppe %s : Benutzer %s ist kein Administrator\n"
+msgstr "Shadow-Gruppe %s: Benutzer %s ist kein Administrator\n"
 
 #: src/grpck.c:560
 #, c-format
 msgid "delete administrative member `%s'? "
-msgstr "Administratives Mitglied `%s' löschen?"
+msgstr "Administratives Mitglied `%s' lÃ¶schen?"
 
 #: src/grpck.c:588
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "Shadow-Gruppe %s : kein Benutzer %s\n"
+msgstr "Shadow-Gruppe %s: kein Benutzer %s\n"
 
 #: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
 #, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s : Kann Datei %s nicht aktualisieren\n"
+msgstr "%s: Kann Datei %s nicht aktualisieren\n"
 
 #: src/grpck.c:647 src/pwck.c:612
 #, c-format
 msgid "%s: the files have been updated; run mkpasswd\n"
-msgstr "%s : Die Dateien wurden aktualisiert; starten Sie mkpasswd\n"
+msgstr "%s: Die Dateien wurden aktualisiert; starten Sie mkpasswd\n"
 
 #: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: keine Änderungen\n"
+msgstr "%s: keine Ã„nderungen\n"
 
 #: src/grpck.c:651 src/pwck.c:616
 #, c-format
@@ -1195,7 +1075,7 @@ msgstr "%s: Kann Gruppendatei nicht sperren\n"
 #: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: Kann Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Gruppendatei nicht Ã¶ffnen\n"
 
 #: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
@@ -1205,68 +1085,54 @@ msgstr "%s: Kann Shadow-Gruppendatei nicht sperren\n"
 #: src/grpconv.c:76 src/grpunconv.c:72
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: Kann Shadow-Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht Ã¶ffnen\n"
 
 #: src/grpconv.c:94
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr "%s: Kann Shadow-Gruppe %s nicht entfernen\n"
 
-#: src/grpconv.c:138 src/pwconv.c:153
+#: src/grpconv.c:133 src/pwconv.c:154
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: Kann Shadow-Eintrag für %s nicht aktualisieren\n"
+msgstr "%s: Kann Shadow-Eintrag fÃ¼r %s nicht aktualisieren\n"
 
-#: src/grpconv.c:148 src/grpunconv.c:91
+#: src/grpconv.c:143 src/grpunconv.c:91
 #, c-format
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: Kann Gruppeneintrag %s nicht aktualisieren\n"
 
-#: src/grpconv.c:155 src/grpunconv.c:99
+#: src/grpconv.c:150 src/grpunconv.c:99
 #, c-format
 msgid "%s: can't update shadow group file\n"
 msgstr "%s: Kann Shadow-Gruppendatei nicht aktualisieren\n"
 
-#: src/grpconv.c:160 src/grpunconv.c:105
+#: src/grpconv.c:155 src/grpunconv.c:105
 #, c-format
 msgid "%s: can't update group file\n"
 msgstr "%s: Kann Gruppendatei nicht aktualisieren\n"
 
-#: src/grpconv.c:175 src/grpunconv.c:127
-#, c-format
-msgid "%s: not configured for shadow group support.\n"
-msgstr "%s: Shadow-Gruppen-Unterstützung nicht konfiguriert.\n"
-
 #: src/grpunconv.c:110
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: Kann Shadow-Gruppendatei nicht löschen\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht lÃ¶schen\n"
 
 #: src/id.c:53
-msgid "usage: id [-a]\n"
+msgid "Usage: id [-a]\n"
 msgstr "Syntax: id [-a]\n"
 
 #: src/id.c:55
-msgid "usage: id\n"
+msgid "Usage: id\n"
 msgstr "Syntax: id\n"
 
-#.
-#. * Start off the group message. It will be of the format
-#. *
-#. *      groups=###(aaa),###(aaa),###(aaa)
-#. *
-#. * where "###" is a numerical value and "aaa" is the
-#. * corresponding name for each respective numerical value.
-#.
 #: src/id.c:169
 msgid " groups="
 msgstr " Gruppen="
 
 #: src/lastlog.c:110 src/lastlog.c:116
-#, c-format
-msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
-msgstr ""
-"Syntax: %s [<-u|--login> Login-Name] [<-t|--time> Tage] [<-h|--help>]\n"
+#, fuzzy, c-format
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
+msgstr "Syntax: %s [(-u|--login) Login] [(-t|--time) Tage] [(-h|--help)]\n"
 
 #: src/lastlog.c:181
 msgid "Username         Port     From             Latest\n"
@@ -1276,30 +1142,30 @@ msgstr "Benutzer         Port     Von              Letzter\n"
 msgid "Username                Port     Latest\n"
 msgstr "Benutzer                Port     Letzter\n"
 
-#: src/lastlog.c:197
+#: src/lastlog.c:198
 msgid "**Never logged in**"
 msgstr "**Nie angemeldet **"
 
-#: src/login.c:185
+#: src/login.c:175
 #, c-format
-msgid "usage: %s [-p] [name]\n"
+msgid "Usage: %s [-p] [name]\n"
 msgstr "Syntax: %s [-p] [Name]\n"
 
-#: src/login.c:188
+#: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
 msgstr "       %s [-p] [-h Host] [-f Name]\n"
 
-#: src/login.c:190
+#: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r Host\n"
 
-#: src/login.c:274
+#: src/login.c:259
 msgid "Invalid login time\n"
-msgstr "Ungültige Anmeldezeit\n"
+msgstr "UngÃ¼ltige Anmeldezeit\n"
 
-#: src/login.c:329
+#: src/login.c:314
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1307,7 +1173,7 @@ msgstr ""
 "\n"
 "System wegen Wartungsarbeiten geschlossen\n"
 
-#: src/login.c:340
+#: src/login.c:325
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1315,7 +1181,7 @@ msgstr ""
 "\n"
 "[Trennung abgebrochen -- root-Login erlaubt.]\n"
 
-#: src/login.c:377
+#: src/login.c:362
 #, c-format
 msgid ""
 "\n"
@@ -1324,17 +1190,17 @@ msgstr ""
 "\n"
 "Login: Timeout nach %d Sekunden.\n"
 
-#: src/login.c:689
+#: src/login.c:648
 #, c-format
 msgid " on `%.100s' from `%.200s'"
 msgstr " an `%.100s' von `%.200s'"
 
-#: src/login.c:693
+#: src/login.c:652
 #, c-format
 msgid " on `%.100s'"
 msgstr " an `%.100s'"
 
-#: src/login.c:852
+#: src/login.c:811
 #, c-format
 msgid ""
 "\n"
@@ -1343,51 +1209,51 @@ msgstr ""
 "\n"
 "%s login: "
 
-#: src/login.c:855
+#: src/login.c:814
 msgid "login: "
 msgstr "login: "
 
-#: src/login.c:1071 src/sulogin.c:233
+#: src/login.c:1013 src/sulogin.c:205
 msgid "Login incorrect"
 msgstr "Login fehlerhaft"
 
-#: src/login.c:1265
+#: src/login.c:1193
 msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Warnung: Login reaktiviert nach temporärer Sperre.\n"
+msgstr "Warnung: Login reaktiviert nach temporÃ¤rer Sperre.\n"
 
-#: src/login.c:1278
+#: src/login.c:1207
 #, c-format
 msgid "Last login: %s on %s"
 msgstr "Letzte Verbindung: %s an %s"
 
-#: src/login.c:1281
+#: src/login.c:1210
 #, c-format
 msgid "Last login: %.19s on %s"
 msgstr "Letzte Verbindung: %.19s an %s"
 
-#: src/login.c:1287
+#: src/login.c:1216
 #, c-format
 msgid " from %.*s"
 msgstr " von %.*s"
 
-#: src/login.c:1364
+#: src/login.c:1293
 msgid "Starting rad_login\n"
 msgstr "Starte rad_login\n"
 
 #: src/mkpasswd.c:47
 #, c-format
 msgid "%s: no DBM database on system - no action performed\n"
-msgstr "%s : Keine DBM-Datenbank gefunden - Aktion abgebrochen\n"
+msgstr "%s: Keine DBM-Datenbank gefunden - Aktion abgebrochen\n"
 
 #: src/mkpasswd.c:232 src/mkpasswd.c:237
 #, c-format
 msgid "%s: cannot overwrite file %s\n"
-msgstr "%s : Kann Datei %s nicht überschreiben\n"
+msgstr "%s: Kann Datei %s nicht Ã¼berschreiben\n"
 
 #: src/mkpasswd.c:252
 #, c-format
 msgid "%s: cannot open DBM files for %s\n"
-msgstr "%s : Kann DBM-Dateien für %s nicht öffnen\n"
+msgstr "%s: Kann DBM-Dateien fÃ¼r %s nicht Ã¶ffnen\n"
 
 #: src/mkpasswd.c:287
 #, c-format
@@ -1401,11 +1267,11 @@ msgstr " ist zu lang\n"
 #: src/mkpasswd.c:315
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
-msgstr "%s : Fehler beim Einlesen von Zeile \"%s\"\n"
+msgstr "%s: Fehler beim Einlesen von Zeile \"%s\"\n"
 
 #: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
 msgid "adding record for name "
-msgstr "Hinzufügen von "
+msgstr "HinzufÃ¼gen von "
 
 #: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
 #: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
@@ -1415,17 +1281,17 @@ msgstr ""
 #: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
 #, c-format
 msgid "%s: error adding record for "
-msgstr "%s: Fehler beim Hinzufügen von "
+msgstr "%s: Fehler beim HinzufÃ¼gen von "
 
 #: src/mkpasswd.c:378
 #, c-format
 msgid "added %d entries, longest was %d\n"
-msgstr "%d Einträge hinzugefügt, der längste war %d\n"
+msgstr "%d EintrÃ¤ge hinzugefÃ¼gt, der lÃ¤ngste war %d\n"
 
 #: src/mkpasswd.c:392
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
-msgstr "Syntax: %s [-vf ] [-p|g|sp|sg] Datei\n"
+msgstr "Syntax: %s [-vf] [-p|g|sp|sg] Datei\n"
 
 #: src/mkpasswd.c:395
 #, c-format
@@ -1438,28 +1304,28 @@ msgid "Usage: %s [-vf] [-p|g] file\n"
 msgstr "Syntax: %s [-vf] [-p|g] Datei\n"
 
 #: src/newgrp.c:61
-msgid "usage: newgrp [-] [group]\n"
+msgid "Usage: newgrp [-] [group]\n"
 msgstr "Syntax: newgrp [-] [Gruppe]\n"
 
 #: src/newgrp.c:63
-msgid "usage: sg group [[-c] command]\n"
+msgid "Usage: sg group [[-c] command]\n"
 msgstr "Syntax: sg Gruppe [[-c] Befehl]\n"
 
-#: src/newgrp.c:136
+#: src/newgrp.c:131
 #, c-format
 msgid "unknown uid: %u\n"
 msgstr "Unbekannte UID: %u\n"
 
-#: src/newgrp.c:219
+#: src/newgrp.c:214
 #, c-format
 msgid "unknown gid: %lu\n"
 msgstr "Unbekannte GID: %lu\n"
 
-#: src/newgrp.c:365 src/newgrp.c:374
+#: src/newgrp.c:360 src/newgrp.c:369
 msgid "Sorry.\n"
 msgstr "Entschuldigung.\n"
 
-#: src/newgrp.c:472
+#: src/newgrp.c:469
 msgid "too many groups\n"
 msgstr "zu viele Gruppen\n"
 
@@ -1468,124 +1334,109 @@ msgstr "zu viele Gruppen\n"
 msgid "Usage: %s [input]\n"
 msgstr "Syntax: %s [Eingabe]\n"
 
-#: src/newusers.c:407
+#: src/newusers.c:388
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s : Kann /etc/passwd nicht sperren.\n"
+msgstr "%s: Kann /etc/passwd nicht sperren.\n"
 
-#: src/newusers.c:419
+#: src/newusers.c:400
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s : Kann Dateien nicht sperren, versuchen Sie es später nocheinmal\n"
+msgstr "%s: Kann Dateien nicht sperren, versuchen Sie es spÃ¤ter nocheinmal\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:416
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s : Kann Dateien nicht öffnen\n"
+msgstr "%s: Kann Dateien nicht Ã¶ffnen\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: Zeile %d: UngÃ¼ltige Zeile\n"
 
 #: src/newusers.c:480
 #, c-format
-msgid "%s: line %d: invalid line\n"
-msgstr "%s : Zeile %d : Ungültige Zeile\n"
-
-#: src/newusers.c:499
-#, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s : Zeile %d : Kann GID nicht erstellen\n"
+msgstr "%s: Zeile %d: Kann GID nicht erstellen\n"
 
-#: src/newusers.c:515
+#: src/newusers.c:496
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s : Zeile %d : Kann UID nicht erstellen\n"
+msgstr "%s: Zeile %d: Kann UID nicht erstellen\n"
 
-#: src/newusers.c:528
+#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s : Zeile %d : Kann Benutzer %s nicht finden\n"
+msgstr "%s: Zeile %d: Kann Benutzer %s nicht finden\n"
 
-#: src/newusers.c:537
+#: src/newusers.c:518
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s : Zeile %d : Kann Kennwort nicht aktualisieren\n"
+msgstr "%s: Zeile %d: Kann Kennwort nicht aktualisieren\n"
 
-#: src/newusers.c:555
+#: src/newusers.c:536
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s : Zeile %d : mkdir fehlgeschlagen\n"
+msgstr "%s: Zeile %d: mkdir fehlgeschlagen\n"
 
-#: src/newusers.c:561
+#: src/newusers.c:542
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s : Zeile %d : chown fehlgeschlagen\n"
+msgstr "%s: Zeile %d: chown fehlgeschlagen\n"
 
-#: src/newusers.c:571
+#: src/newusers.c:552
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s : Zeile %d : Kann Eintrag nicht aktualisieren\n"
+msgstr "%s: Zeile %d: Kann Eintrag nicht aktualisieren\n"
 
-#: src/newusers.c:603
+#: src/newusers.c:584
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s : Fehler beim Aktualisieren von Dateien\n"
+msgstr "%s: Fehler beim Aktualisieren von Dateien\n"
 
-#: src/passwd.c:174
+#: src/passwd.c:155
 #, c-format
-msgid "usage: %s [-f|-s] [name]\n"
+msgid "Usage: %s [-f|-s] [name]\n"
 msgstr "Syntax: %s [-f|-s] [Name]\n"
 
-#: src/passwd.c:178
+#: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
 msgstr "       %s [-x max] [-n min] [-w Warnung] [-i Inaktiv] Name\n"
 
-#: src/passwd.c:180
+#: src/passwd.c:161
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
 msgstr "       %s {-l|-u|-d|-S|-e} Name\n"
 
-#: src/passwd.c:283
-#, c-format
-msgid "User %s has a TCFS key, his old password is required.\n"
-msgstr ""
-"Benutzer besitzt einen TCFS-Schlüssel, sein altes Kennwort wird benötigt.\n"
-
-#: src/passwd.c:286
-msgid "You can use -t option to force the change.\n"
-msgstr "Sie können die -t Option benutzen um die Änderungen durchzuführen.\n"
-
-#: src/passwd.c:292
+#: src/passwd.c:216
 msgid "Old password: "
 msgstr "Altes Kennwort: "
 
-#: src/passwd.c:301
+#: src/passwd.c:225
 #, c-format
 msgid "Incorrect password for `%s'\n"
-msgstr "Falsches Kennwort für `%s'\n"
+msgstr "Falsches Kennwort fÃ¼r `%s'\n"
 
-#: src/passwd.c:314
-#, c-format
-msgid "Warning: user %s has a TCFS key.\n"
-msgstr "Warnung: Benutzer %s besitzt einen TCFS-Schlüssel.\n"
-
-#: src/passwd.c:333
+#: src/passwd.c:249
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Geben Sie das neue Kennwort ein (mindestens %d, höchstens %d Zeichen)\n"
-"Bitte benutzen Sie eine Kombination von Groß-/Kleinbuchstaben und\n"
+"Geben Sie das neue Kennwort ein (mindestens %d, hÃ¶chstens %d Zeichen)\n"
+"Bitte benutzen Sie eine Kombination von GroÃŸ-/Kleinbuchstaben und\n"
 "Ziffern.\n"
 
-#: src/passwd.c:339
+#: src/passwd.c:255
 msgid "New password: "
 msgstr "Neues Kennwort: "
 
-#: src/passwd.c:350
+#: src/passwd.c:266
 msgid "Try again.\n"
 msgstr "Versuchen Sie es nocheinmal...\n"
 
-#: src/passwd.c:361
+#: src/passwd.c:277
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1594,76 +1445,58 @@ msgstr ""
 "Warnung: Schlechtes Kennwort (Geben Sie es nocheinmal ein, um\n"
 "es trotzdem zu verwenden).\n"
 
-#: src/passwd.c:371
+#: src/passwd.c:287
 msgid "They don't match; try again.\n"
 msgstr "Sie sind nicht identisch; versuchen Sie es nocheinmal...\n"
 
-#: src/passwd.c:451 src/passwd.c:469
+#: src/passwd.c:364 src/passwd.c:382
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "Das Kennwort für %s kann nicht geändert werden.\n"
+msgstr "Das Kennwort fÃ¼r %s kann nicht geÃ¤ndert werden.\n"
 
-#: src/passwd.c:494
+#: src/passwd.c:396
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Das Kennwort für %s kan z.Zt. nicht geändert werden.\n"
+msgstr "Das Kennwort fÃ¼r %s kan z.Zt. nicht geÃ¤ndert werden.\n"
 
-#: src/passwd.c:614
+#: src/passwd.c:479
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s : Zu wenig Speicher\n"
+msgstr "%s: Zu wenig Speicher\n"
 
-#: src/passwd.c:769
-msgid "Cannot lock the TCFS key database; try again later\n"
-msgstr ""
-"Kann die TCFS-Datenbank nicht sperren; versuchen Sie es\n"
-"später nocheinmal\n"
-
-#: src/passwd.c:777
-msgid "Cannot open the TCFS key database.\n"
-msgstr "Kann die TCFS-Datenbank nicht öffnen.\n"
-
-#: src/passwd.c:785
-msgid "Error updating the TCFS key database.\n"
-msgstr "Fehler beim Aktualisieren der TCFS-Datenbank.\n"
-
-#: src/passwd.c:792
-msgid "Cannot commit TCFS changes.\n"
-msgstr "Kann die TCFS-Änderungen nicht schreiben.\n"
-
-#: src/passwd.c:975
+#: src/passwd.c:730
 #, c-format
 msgid "%s: Cannot execute %s"
-msgstr "%s : Kann %s nicht ausführen"
+msgstr "%s: Kann %s nicht ausfÃ¼hren"
 
-#: src/passwd.c:1077
+#: src/passwd.c:815
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: Speicher %s nicht unterstützt\n"
+msgstr "%s: Speicher %s nicht unterstÃ¼tzt\n"
 
-#: src/passwd.c:1152
+#: src/passwd.c:890
 #, c-format
 msgid "%s: Permission denied\n"
-msgstr "%s : Zugriff verweigert\n"
+msgstr "%s: Zugriff verweigert\n"
 
-#: src/passwd.c:1176
+#: src/passwd.c:914
 #, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "Sie dürfen das Kennwort für %s nicht ändern.\n"
+msgstr "Sie dÃ¼rfen das Kennwort fÃ¼r %s nicht Ã¤ndern.\n"
 
-#: src/passwd.c:1242
+#: src/passwd.c:962
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "Ändere Kennwort für %s\n"
+msgstr "Ã„ndere Kennwort fÃ¼r %s\n"
 
-#: src/passwd.c:1246
+#: src/passwd.c:966
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "Das Kennwort für %s wurde nicht geändert.\n"
+msgstr "Das Kennwort fÃ¼r %s wurde nicht geÃ¤ndert.\n"
 
-#: src/passwd.c:1297
+#: src/passwd.c:1016
 msgid "Password changed.\n"
-msgstr "Kennwort geändert.\n"
+msgstr "Kennwort geÃ¤ndert.\n"
 
 #: src/pwck.c:87
 #, c-format
@@ -1675,18 +1508,10 @@ msgstr "Syntax: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
 msgstr "Syntax: %s [-q] [-r] [-s] [passwd]\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:295
 msgid "invalid password file entry\n"
-msgstr "Ungültiger Eintrag in Kennwortdatei\n"
+msgstr "UngÃ¼ltiger Eintrag in Kennwortdatei\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:357
 msgid "duplicate password entry\n"
 msgstr "Doppelter Kennworteintrag\n"
@@ -1694,11 +1519,8 @@ msgstr "Doppelter Kennworteintrag\n"
 #: src/pwck.c:373
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "Ungültiger Benutzername '%s'\n"
+msgstr "UngÃ¼ltiger Benutzername '%s'\n"
 
-#.
-#. * No primary group, just give a warning
-#.
 #: src/pwck.c:388
 #, c-format
 msgid "user %s: no group %u\n"
@@ -1707,36 +1529,21 @@ msgstr "Benutzer %s: Keine Gruppe %u\n"
 #: src/pwck.c:404
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "Benutzer %s : Verzeichnis %s nicht vorhanden\n"
+msgstr "Benutzer %s: Verzeichnis %s nicht vorhanden\n"
 
-#.
-#. * Login shell doesn't exist, give a warning
-#.
 #: src/pwck.c:420
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "Benutzer %s : Programm %s nicht vorhanden\n"
+msgstr "Benutzer %s: Programm %s nicht vorhanden\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:456
 msgid "invalid shadow password file entry\n"
-msgstr "Ungültiger Shadow-Kennworteintrag\n"
+msgstr "UngÃ¼ltiger Shadow-Kennworteintrag\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:518
 msgid "duplicate shadow password entry\n"
 msgstr "Doppelter Shadow-Kennworteintrag\n"
 
-#.
-#. * Tell the user this entry has no matching
-#. * /etc/passwd entry and ask them to delete it.
-#.
 #: src/pwck.c:542
 msgid "no matching password file entry\n"
 msgstr "Kein passender Kennworteintrag gefunden\n"
@@ -1744,52 +1551,47 @@ msgstr "Kein passender Kennworteintrag gefunden\n"
 #: src/pwck.c:560
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "Benutzer %s : Letzte Kennwortänderung liegt in der Zukunft\n"
+msgstr "Benutzer %s: Letzte KennwortÃ¤nderung liegt in der Zukunft\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:93
+#: src/pwconv.c:85 src/pwunconv.c:79
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s : Kann Kennwortdatei nicht sperren\n"
+msgstr "%s: Kann Kennwortdatei nicht sperren\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:98
+#: src/pwconv.c:90 src/pwunconv.c:84
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s : Kann Kennwortdatei nicht öffnen\n"
+msgstr "%s: Kann Kennwortdatei nicht Ã¶ffnen\n"
 
-#: src/pwconv.c:117
+#: src/pwconv.c:118
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s : Kann Shadow-Eintrag für %s nicht löschen\n"
+msgstr "%s: Kann Shadow-Eintrag fÃ¼r %s nicht lÃ¶schen\n"
 
-#: src/pwconv.c:163
+#: src/pwconv.c:164
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s : Kann Kennworteintrag für %s nicht aktualisieren\n"
+msgstr "%s: Kann Kennworteintrag fÃ¼r %s nicht aktualisieren\n"
 
-#: src/pwconv.c:170
+#: src/pwconv.c:171
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s : Kann Shadow-Datei nicht aktualisieren\n"
+msgstr "%s: Kann Shadow-Datei nicht aktualisieren\n"
 
-#: src/pwconv.c:175
+#: src/pwconv.c:176
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s : Kann Kennwortdatei nicht aktualisieren\n"
+msgstr "%s: Kann Kennwortdatei nicht aktualisieren\n"
 
-#: src/pwunconv.c:50
-#, c-format
-msgid "%s: Shadow passwords are not configured.\n"
-msgstr "%s : Shadow-Kennwörter sind nicht konfiguriert.\n"
-
-#: src/pwunconv.c:160
+#: src/pwunconv.c:124
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s : Kann Eintrag für Benutzer %s nicht aktualisieren\n"
+msgstr "%s: Kann Eintrag fÃ¼r Benutzer %s nicht aktualisieren\n"
 
-#: src/pwunconv.c:181
+#: src/pwunconv.c:145
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s : Kann Shadow-Datei nicht löschen\n"
+msgstr "%s: Kann Shadow-Datei nicht lÃ¶schen\n"
 
 #: src/su.c:133
 msgid "Sorry."
@@ -1798,12 +1600,12 @@ msgstr "Entschuldigung."
 #: src/su.c:216
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s : Muss von einem Terminal gestartet werden\n"
+msgstr "%s: Muss von einem Terminal gestartet werden\n"
 
 #: src/su.c:306
 #, c-format
 msgid "%s: pam_start: error %d\n"
-msgstr "%s : pam_start : Fehler %d\n"
+msgstr "%s: pam_start: Fehler %d\n"
 
 #: src/su.c:336
 #, c-format
@@ -1814,10 +1616,9 @@ msgstr "Unbekannte ID: %s\n"
 #, fuzzy, c-format
 msgid "You are not authorized to su %s\n"
 msgstr ""
-"Sie dürfen su %s nicht\n"
+"Sie dÃ¼rfen su %s nicht\n"
 " "
 
-#. require own password
 #: src/su.c:385
 msgid "(Enter your own password.)"
 msgstr "(Geben Sie Ihr eigenes Kennwort an.)"
@@ -1831,35 +1632,31 @@ msgstr ""
 "%s: %s\n"
 "(Ignoriert)\n"
 
-#: src/su.c:626
+#: src/su.c:609
 msgid "No shell\n"
 msgstr "Keine Shell\n"
 
-#: src/suauth.c:100
+#: src/suauth.c:105
 msgid "Access to su to that account DENIED.\n"
 msgstr "Zugriff auf su zu diesem Account VERWEIGERT.\n"
 
-#: src/suauth.c:107
+#: src/suauth.c:113
 msgid "Password authentication bypassed.\n"
 msgstr "Kennwort-Authentifizierung umgangen.\n"
 
-#: src/suauth.c:114
+#: src/suauth.c:122
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Bitte geben Sie Ihr EIGENES Kennwort als Authentifizierung an.\n"
 
-#. must be a password file!
-#: src/sulogin.c:132
+#: src/sulogin.c:118
 msgid "No password file\n"
 msgstr "Keine Kennwortdatei\n"
 
-#.
-#. * Fail secure
-#.
-#: src/sulogin.c:174
+#: src/sulogin.c:160
 msgid "No password entry for 'root'\n"
-msgstr "Kein Kennworteintrag für 'root'\n"
+msgstr "Kein Kennworteintrag fÃ¼r 'root'\n"
 
-#: src/sulogin.c:190
+#: src/sulogin.c:176
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
@@ -1867,547 +1664,482 @@ msgid ""
 msgstr ""
 "\n"
 "Geben Sie Strg-D ein, um normal zu starten\n"
-"(oder geben Sie das root-Kennwort ein zur Systemwartung) : "
+"(oder geben Sie das root-Kennwort ein zur Systemwartung): "
 
-#. make new environment active
-#: src/sulogin.c:243
+#: src/sulogin.c:212
 msgid "Entering System Maintenance Mode\n"
 msgstr "Starte im Systemwartungs-Modus\n"
 
-#: src/useradd.c:251
+#: src/useradd.c:234
 #, c-format
 msgid "%s: rebuild the group database\n"
-msgstr "%s : Baue die Gruppendatenbank neu auf\n"
+msgstr "%s: Baue die Gruppendatenbank neu auf\n"
 
-#: src/useradd.c:260
+#: src/useradd.c:243
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
-msgstr "%s : Baue die Shadow-Gruppendatenbank neu auf\n"
+msgstr "%s: Baue die Shadow-Gruppendatenbank neu auf\n"
 
-#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s : Ungültiges nummerisches Argument `%s'\n"
+msgstr "%s: UngÃ¼ltiges nummerisches Argument `%s'\n"
 
-#: src/useradd.c:365
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
-msgstr "%s : GID %s unbekannt\n"
+msgstr "%s: GID %s unbekannt\n"
 
-#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
-#: src/usermod.c:1128
+#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s : Gruppe %s unbekannt\n"
+msgstr "%s: Gruppe %s unbekannt\n"
 
-#: src/useradd.c:440
-#, c-format
-msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "Gruppe=%s,%u  Basisverzeichnis=%s  Vorlage=%s\n"
-
-#: src/useradd.c:444
-#, c-format
-msgid "shell=%s  "
-msgstr "Shell=%s  "
-
-#: src/useradd.c:446
-#, c-format
-msgid "inactive=%ld  expire=%s"
-msgstr "Inaktiv=%ld  Ablauf=%s"
-
-#: src/useradd.c:450
+#: src/useradd.c:419
 #, c-format
 msgid "GROUP=%u\n"
 msgstr "GROUP=%u\n"
 
-#: src/useradd.c:451
+#: src/useradd.c:420
 #, c-format
 msgid "HOME=%s\n"
 msgstr "HOME=%s\n"
 
-#: src/useradd.c:453
+#: src/useradd.c:422
 #, c-format
 msgid "INACTIVE=%ld\n"
 msgstr "INACTIVE=%ld\n"
 
-#: src/useradd.c:454
+#: src/useradd.c:423
 #, c-format
 msgid "EXPIRE=%s\n"
 msgstr "EXPIRE=%s\n"
 
-#: src/useradd.c:456
+#: src/useradd.c:425
 #, c-format
 msgid "SHELL=%s\n"
 msgstr "SHELL=%s\n"
 
-#: src/useradd.c:457
+#: src/useradd.c:426
 #, c-format
 msgid "SKEL=%s\n"
 msgstr "SKEL=%s\n"
 
-#: src/useradd.c:498
+#: src/useradd.c:462
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s : Kann keine neue Datei mit Standardwerten erstellen\n"
+msgstr "%s: Kann keine neue Datei mit Standardwerten erstellen\n"
 
-#: src/useradd.c:503
+#: src/useradd.c:467
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: Kann die neue Datei mit Standardwerten nicht öffnen\n"
+msgstr "%s: Kann die neue Datei mit Standardwerten nicht Ã¶ffnen\n"
 
-#: src/useradd.c:596 src/useradd.c:608
+#: src/useradd.c:552 src/useradd.c:564
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s : Umbenennen: %s"
+msgstr "%s: Umbenennen: %s"
 
-#: src/useradd.c:697 src/usermod.c:281
+#: src/useradd.c:657 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s : Die Gruppe `%s' ist eine NIS-Gruppe.\n"
+msgstr "%s: Die Gruppe `%s' ist eine NIS-Gruppe.\n"
 
-#: src/useradd.c:706 src/usermod.c:290
+#: src/useradd.c:666 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s : Zu viele Gruppen angegeben (max %d).\n"
+msgstr "%s: Zu viele Gruppen angegeben (max %d).\n"
 
-#: src/useradd.c:738 src/usermod.c:322
-#, c-format
-msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "Syntax: %s\t[-u uid [-o]] [-g Gruppe] [-G Gruppe,...] \n"
+#: src/useradd.c:698
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Syntax: useradd [-u uid [-o]] [-g Gruppe] [-G Gruppe,...] \n"
 
-#: src/useradd.c:742
-msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
-msgstr "\t\t[-d home] [-s Shell] [-c Kommentar] [-m [-k Vorlage]]\n"
+#: src/useradd.c:701
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+msgstr ""
+"                [-d home] [-s Shell] [-c Kommentar] [-m [-k Vorlage]]\n"
 
-#: src/useradd.c:745 src/usermod.c:329
-msgid "[-f inactive] [-e expire ] "
-msgstr "[-f inaktiv] [-e Ablauf ] "
+#: src/useradd.c:703 src/useradd.c:708
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "                [-f inaktiv] [-e Ablauf]\n"
 
-#: src/useradd.c:748
-msgid "[-A program] "
-msgstr "[-A Programm] "
+#: src/useradd.c:706
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "        useradd -D [-g Gruppe] [-b Basis] [-s Shell]\n"
 
-#: src/useradd.c:750
-msgid "[-p passwd] name\n"
-msgstr "[-p Kennwort] Name\n"
-
-#: src/useradd.c:753
-#, c-format
-msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "       %s\t-D [-g Gruppe] [-b Basis] [-s Shell]\n"
-
-#: src/useradd.c:756
-msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f inaktiv] [-e Ablauf ]\n"
-
-#: src/useradd.c:850 src/usermod.c:480
+#: src/useradd.c:793 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s : Kann Gruppendatei nicht sperren\n"
+msgstr "%s: Kann Gruppendatei nicht sperren\n"
 
-#: src/useradd.c:855 src/usermod.c:486
+#: src/useradd.c:798 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s : Kann Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Gruppendatei nicht Ã¶ffnen\n"
 
-#: src/useradd.c:862 src/usermod.c:597
+#: src/useradd.c:805 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s : Kann Shadow-Gruppendatei nicht sperren\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht sperren\n"
 
-#: src/useradd.c:867 src/usermod.c:603
+#: src/useradd.c:810 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s : Kann Shadow-Gruppendatei nicht öffnen\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht Ã¶ffnen\n"
 
-#: src/useradd.c:1039
+#: src/useradd.c:982
 #, c-format
 msgid "%s: uid %u is not unique\n"
 msgstr "%s: UID %u ist nicht eindeutig\n"
 
-#: src/useradd.c:1069
+#: src/useradd.c:1012
 #, c-format
 msgid "%s: can't get unique uid\n"
 msgstr "%s: Kann keine eindeutige UID finden\n"
 
-#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
-#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
-#, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: Feld `%s' ungültig\n"
-
-#: src/useradd.c:1189
+#: src/useradd.c:1049
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: Ungültiges Basisverzeichnis `%s'\n"
+msgstr "%s: UngÃ¼ltiges Basisverzeichnis `%s'\n"
 
-#: src/useradd.c:1199
+#: src/useradd.c:1059
 #, c-format
 msgid "%s: invalid comment `%s'\n"
-msgstr "%s: Kommentar `%s' ungültig\n"
+msgstr "%s: Kommentar `%s' ungÃ¼ltig\n"
 
-#: src/useradd.c:1210
+#: src/useradd.c:1070
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: Homeverzeichnis `%s' ungültig\n"
+msgstr "%s: Homeverzeichnis `%s' ungÃ¼ltig\n"
 
-#: src/useradd.c:1229 src/usermod.c:1110
+#: src/useradd.c:1089 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
-msgstr "%s: Datum `%s' ungültig\n"
+msgstr "%s: Datum `%s' ungÃ¼ltig\n"
 
-#: src/useradd.c:1242
+#: src/useradd.c:1102
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: Shadow-Kennwörter für -e benötigt\n"
+msgstr "%s: Shadow-KennwÃ¶rter fÃ¼r -e benÃ¶tigt\n"
 
-#: src/useradd.c:1258
+#: src/useradd.c:1118
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: Shadow-Kennwörter für -f benötigt\n"
+msgstr "%s: Shadow-KennwÃ¶rter fÃ¼r -f benÃ¶tigt\n"
 
-#: src/useradd.c:1336
+#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: Feld `%s' ungÃ¼ltig\n"
+
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid shell `%s'\n"
-msgstr "%s: Shell `%s' ist ungültig\n"
+msgstr "%s: Shell `%s' ist ungÃ¼ltig\n"
 
-#: src/useradd.c:1377
+#: src/useradd.c:1237
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: Benutzername `%s' ungültig\n"
+msgstr "%s: Benutzername `%s' ungÃ¼ltig\n"
 
-#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
 msgstr "%s: Kann Kennwortdatei nicht neu erstellen\n"
 
-#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: Kann Shadow-Kennwortdatei nicht neu erstellen\n"
 
-#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
 msgstr "%s: Kann Kennwortdatei nicht sperren\n"
 
-#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: Kann Kennwortdatei nicht öffnen\n"
+msgstr "%s: Kann Kennwortdatei nicht Ã¶ffnen\n"
 
-#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr "%s: Kann Shadow-Kennwortdatei nicht sperren\n"
 
-#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: Kann Shadow-Kennwortdatei nicht öffnen\n"
+msgstr "%s: Kann Shadow-Kennwortdatei nicht Ã¶ffnen\n"
 
-#: src/useradd.c:1580 src/usermod.c:1405
-#, c-format
-msgid "%s: error adding authentication method\n"
-msgstr "%s: Fehler beim Hinzufügen der Authentifizierungs-Methode\n"
-
-#: src/useradd.c:1604
+#: src/useradd.c:1435
 #, c-format
 msgid "%s: error adding new password entry\n"
-msgstr "%s: Fehler beim Hinzufügen eines neuen Kennworteintrags\n"
+msgstr "%s: Fehler beim HinzufÃ¼gen eines neuen Kennworteintrags\n"
 
-#: src/useradd.c:1618
+#: src/useradd.c:1449
 #, c-format
 msgid "%s: error updating password dbm entry\n"
 msgstr "%s: Fehler beim Aktualisieren des DBM-Kennworteintrags\n"
 
-#: src/useradd.c:1634 src/usermod.c:1471
+#: src/useradd.c:1465 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: Fehler beim Hinzufügen des neuen Shadow-Kennworteintrags\n"
+msgstr "%s: Fehler beim HinzufÃ¼gen des neuen Shadow-Kennworteintrags\n"
 
-#: src/useradd.c:1650 src/usermod.c:1488
+#: src/useradd.c:1481 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
 msgstr "%s: Fehler beim Aktualisieren des Shadow-DBM-Kennworteintrags\n"
 
-#: src/useradd.c:1682
+#: src/useradd.c:1513
 #, c-format
 msgid "%s: cannot create directory %s\n"
 msgstr "%s: Kann Verzeichnis %s nicht erstellen\n"
 
-#: src/useradd.c:1806 src/usermod.c:1233
+#: src/useradd.c:1634 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s: Benutzer %s vorhanden\n"
 
-#: src/useradd.c:1821
+#: src/useradd.c:1649
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: Gruppe %s vorhanden - Wenn Sie den Benutzer zur Gruppe\n"
-"hinzufügen wollen, benutzen Sie -g.\n"
+"hinzufÃ¼gen wollen, benutzen Sie -g.\n"
 
-#: src/useradd.c:1854
+#: src/useradd.c:1687
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
-"%s: Warnung: CREATE_HOME nicht unterstützt, verwenden Sie stattdessen -m.\n"
+"%s: Warnung: CREATE_HOME nicht unterstÃ¼tzt, verwenden Sie stattdessen -m.\n"
 
-#: src/userdel.c:129
+#: src/userdel.c:124
 #, c-format
-msgid "usage: %s [-r] name\n"
+msgid "Usage: %s [-r] name\n"
 msgstr "Syntax: %s [-r] Name\n"
 
-#: src/userdel.c:181 src/userdel.c:267
+#: src/userdel.c:176 src/userdel.c:262
 #, c-format
 msgid "%s: error updating group entry\n"
 msgstr "%s: Fehler beim Aktualisieren des Gruppeneintrags\n"
 
-#: src/userdel.c:191 src/userdel.c:276
+#: src/userdel.c:186 src/userdel.c:271
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
 msgstr "%s: Kann DBM-Gruppeneintrag nicht aktualisieren\n"
 
-#: src/userdel.c:219
+#: src/userdel.c:214
 #, c-format
 msgid "%s: cannot remove dbm group entry\n"
 msgstr "%s: Kann DBM-Gruppeneintrag nicht entfernen\n"
 
-#: src/userdel.c:308
+#: src/userdel.c:379
 #, c-format
-msgid "%s: cannot rewrite TCFS key file\n"
-msgstr "%s: Kann TCFS-Datei nicht neu erstellen\n"
+msgid "%s: cannot open group file\n"
+msgstr "%s: Kann Gruppendatei nicht Ã¶ffnen\n"
 
-#: src/userdel.c:392
+#: src/userdel.c:390
 #, c-format
-msgid "%s: cannot lock TCFS key file\n"
-msgstr "%s: Kann TCFS-Datei nicht sperren\n"
-
-#: src/userdel.c:397
-#, c-format
-msgid "%s: cannot open TCFS key file\n"
-msgstr "%s: Kann TCFS-Datei nicht öffnen\n"
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: Kann Shadow-Gruppendatei nicht Ã¶ffnen\n"
 
 #: src/userdel.c:408
 #, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: Kann Gruppendatei nicht öffnen\n"
-
-#: src/userdel.c:419
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: Kann Shadow-Gruppendatei nicht öffnen\n"
-
-#: src/userdel.c:451 src/userdel.c:468
-#, c-format
-msgid "%s: error deleting authentication\n"
-msgstr "%s: Fehler beim Löschen der Authentifizierung\n"
-
-#: src/userdel.c:479
-#, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: Fehler beim Löschen des Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des Kennworteintrags\n"
 
-#: src/userdel.c:485
+#: src/userdel.c:412
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s : Fehler beim Löschen des Shadow-Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des Shadow-Kennworteintrags\n"
 
-#: src/userdel.c:496
-#, c-format
-msgid "%s: error deleting TCFS entry\n"
-msgstr "%s: Fehler beim Löschen des TCFS-Eintrags\n"
-
-#: src/userdel.c:510
+#: src/userdel.c:421
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
-msgstr "%s: Fehler beim Löschen des DBM-Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des DBM-Kennworteintrags\n"
 
-#: src/userdel.c:533
+#: src/userdel.c:440
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
-msgstr "%s: Fehler beim Löschen des Shadow-DBM-Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des Shadow-DBM-Kennworteintrags\n"
 
-#: src/userdel.c:569
+#: src/userdel.c:484
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: Benutzer %s ist z.Zt. angemeldet\n"
 
-#: src/userdel.c:659
+#: src/userdel.c:594
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: Warnung: %s nicht in Besitz von %s, Löschen abgebrochen\n"
+msgstr "%s: Warnung: %s nicht in Besitz von %s, LÃ¶schen abgebrochen\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:600
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: Warnung: Kann nicht löschen "
+msgstr "%s: Warnung: Kann nicht lÃ¶schen "
 
-#: src/userdel.c:758 src/usermod.c:1023
+#: src/userdel.c:703 src/usermod.c:783
 #, c-format
 msgid "%s: user %s does not exist\n"
 msgstr "%s: Benutzer %s nicht vorhanden\n"
 
-#: src/userdel.c:770 src/usermod.c:1039
+#: src/userdel.c:718 src/usermod.c:799
 #, c-format
 msgid "%s: user %s is a NIS user\n"
 msgstr "%s: Benutzer %s ist ein NIS-Benutzer\n"
 
-#: src/userdel.c:799
+#: src/userdel.c:756
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s nicht im Besitz von %s, Löschen abgebrochen\n"
+msgstr "%s: %s nicht im Besitz von %s, LÃ¶schen abgebrochen\n"
 
-#: src/userdel.c:818
+#: src/userdel.c:779
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: Verzeichnis %s wird nicht gelöscht (würde das Homeverzeichnis des\n"
-"Benutzers %s löschen\n"
+"%s: Verzeichnis %s wird nicht gelÃ¶scht (wÃ¼rde das Homeverzeichnis des\n"
+"Benutzers %s lÃ¶schen\n"
 
-#: src/userdel.c:830
+#: src/userdel.c:793
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: Fehler beim Löschen des Verzeichnisses %s\n"
+msgstr "%s: Fehler beim LÃ¶schen des Verzeichnisses %s\n"
 
-#: src/usermod.c:326
+#: src/usermod.c:306
+#, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Syntax: %s\t[-u uid [-o]] [-g Gruppe] [-G Gruppe,...] \n"
+
+#: src/usermod.c:310
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr "\t\t[-d Home [-m]] [-s Shell] [-c Kommentar] [-l Neuer_Name]\n"
 
-#: src/usermod.c:332
-msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {DEFAULT|Programm},... ] "
+#: src/usermod.c:313
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f inaktiv] [-e Ablauf] "
 
-#: src/usermod.c:334
+#: src/usermod.c:315
 msgid "[-p passwd] [-L|-U] name\n"
 msgstr "[-p Kennwort] [-L|-U] Name\n"
 
-#: src/usermod.c:514
+#: src/usermod.c:495
 #, c-format
 msgid "%s: out of memory in update_group\n"
 msgstr "%s: Zu wenig Speicher in update_group\n"
 
-#: src/usermod.c:641
+#: src/usermod.c:622
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
 msgstr "%s: Zu wenig Speicher in update_gshadow\n"
 
-#: src/usermod.c:1210
+#: src/usermod.c:958
 #, c-format
 msgid "%s: no flags given\n"
 msgstr "%s: Keine Optionen angegeben\n"
 
-#: src/usermod.c:1217
+#: src/usermod.c:965
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: Shadow-Kennwörter für -e und -f benötigt\n"
+msgstr "%s: Shadow-KennwÃ¶rter fÃ¼r -e und -f benÃ¶tigt\n"
 
-#: src/usermod.c:1239
+#: src/usermod.c:987
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s : UID %lu ist nicht eindeutig\n"
+msgstr "%s: UID %lu ist nicht eindeutig\n"
 
-#: src/usermod.c:1392
-#, c-format
-msgid "%s: error deleting authentication method\n"
-msgstr "%s: Fehler beim Löschen der Authentifizierungs-Methode\n"
-
-#: src/usermod.c:1418
-#, c-format
-msgid "%s: error changing authentication method\n"
-msgstr "%s: Fehler beim Ändern der Authentifizierungs-Methode\n"
-
-#: src/usermod.c:1436
+#: src/usermod.c:1116
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: Fehler beim Ändern des Kennworteintrags\n"
+msgstr "%s: Fehler beim Ã„ndern des Kennworteintrags\n"
 
-#: src/usermod.c:1442
+#: src/usermod.c:1122
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: Fehler beim Löschen des Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des Kennworteintrags\n"
 
-#: src/usermod.c:1451
+#: src/usermod.c:1131
 #, c-format
 msgid "%s: error adding password dbm entry\n"
-msgstr "%s: Fehler beim Hinzufügen des DBM-Kennworteintrags\n"
+msgstr "%s: Fehler beim HinzufÃ¼gen des DBM-Kennworteintrags\n"
 
-#: src/usermod.c:1459
+#: src/usermod.c:1139
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
-msgstr "%s: Fehler beim Löschen des DBM-Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des DBM-Kennworteintrags\n"
 
-#: src/usermod.c:1478
+#: src/usermod.c:1158
 #, c-format
 msgid "%s: error removing shadow password entry\n"
-msgstr "%s: Fehler beim Löschen des Shadow-Kennworteintrags\n"
+msgstr "%s: Fehler beim LÃ¶schen des Shadow-Kennworteintrags\n"
 
-#: src/usermod.c:1495
+#: src/usermod.c:1175
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
 msgstr "%s: Fehler beim Entfernen des Shadow-DBM-Kennworteintrags\n"
 
-#: src/usermod.c:1524
+#: src/usermod.c:1204
 #, c-format
 msgid "%s: directory %s exists\n"
 msgstr "%s: Verzeichnis %s vorhanden\n"
 
-#: src/usermod.c:1533
+#: src/usermod.c:1213
 #, c-format
 msgid "%s: can't create %s\n"
 msgstr "%s: Kann %s nicht erstellen\n"
 
-#: src/usermod.c:1539
+#: src/usermod.c:1219
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: Kann den Besitzer von %s nicht ändern\n"
+msgstr "%s: Kann den Besitzer von %s nicht Ã¤ndern\n"
 
-#: src/usermod.c:1556
+#: src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: Kann das Verzeichnis %s nicht nach %s umbenennen\n"
 
-#. better leave it alone
-#: src/usermod.c:1653
+#: src/usermod.c:1333
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: Warnung: %s nicht im Besitz von %s\n"
 
-#: src/usermod.c:1659
+#: src/usermod.c:1339
 msgid "failed to change mailbox owner"
-msgstr "Fehler beim Ändern des Postfach-Besitzers"
+msgstr "Fehler beim Ã„ndern des Postfach-Besitzers"
 
-#: src/usermod.c:1667
+#: src/usermod.c:1347
 msgid "failed to rename mailbox"
 msgstr "Fehler beim Umbenennen des Postfachs"
 
-#: src/vipw.c:104
+#: src/vipw.c:105
 #, c-format
 msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: %s wurde nicht geändert\n"
+"%s: %s wurde nicht geÃ¤ndert\n"
 
-#: src/vipw.c:132
+#: src/vipw.c:133
 msgid "Couldn't lock file"
 msgstr "Datei konnte nicht gesperrt werden"
 
-#: src/vipw.c:141
+#: src/vipw.c:142
 msgid "Couldn't make backup"
 msgstr "Sicherung konnte nicht erstellt werden"
 
-#: src/vipw.c:206
+#: src/vipw.c:200
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
 "%s: Wiederherstellung von %s fehlgeschlagen: %s\n"
-"(Ihre Änderungen befinden sich in %s)\n"
+"(Ihre Ã„nderungen befinden sich in %s)\n"
 
-#: src/vipw.c:244
+#: src/vipw.c:238
 msgid ""
 "Usage:\n"
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
@@ -2417,6 +2149,133 @@ msgstr ""
 "`vipw' bearbeitet /etc/passwd        `vipw -s' bearbeitet /etc/shadow\n"
 "`vigr' bearbeitet /etc/group         `vigr -s' bearbeitet /etc/gshadow\n"
 
+#, fuzzy
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: Kann Eintrag fÃ¼r Benutzer %s nicht aktualisieren\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr ""
+#~ "Benutzer %s besitzt einen TCFS-SchlÃ¼ssel, sein altes Kennwort wird "
+#~ "benÃ¶tigt.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr ""
+#~ "Sie kÃ¶nnen die -t Option benutzen um die Ã„nderungen durchzufÃ¼hren.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "Warnung: Benutzer %s besitzt einen TCFS-SchlÃ¼ssel.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr ""
+#~ "Kann die TCFS-Datenbank nicht sperren; versuchen Sie es\n"
+#~ "spÃ¤ter nocheinmal\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "Kann die TCFS-Datenbank nicht Ã¶ffnen.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "Fehler beim Aktualisieren der TCFS-Datenbank.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "Kann die TCFS-Ã„nderungen nicht schreiben.\n"
+
+#~ msgid "%s: cannot rewrite TCFS key file\n"
+#~ msgstr "%s: Kann TCFS-Datei nicht neu erstellen\n"
+
+#~ msgid "%s: cannot lock TCFS key file\n"
+#~ msgstr "%s: Kann TCFS-Datei nicht sperren\n"
+
+#~ msgid "%s: cannot open TCFS key file\n"
+#~ msgstr "%s: Kann TCFS-Datei nicht Ã¶ffnen\n"
+
+#~ msgid "%s: error deleting TCFS entry\n"
+#~ msgstr "%s: Fehler beim LÃ¶schen des TCFS-Eintrags\n"
+
+#~ msgid "               [-f inactive] [-e expire]"
+#~ msgstr "                [-f inaktiv] [-e Ablauf] "
+
+#~ msgid "%s: error deleting authentication\n"
+#~ msgstr "%s: Fehler beim LÃ¶schen der Authentifizierung\n"
+
+#~ msgid "[-A {DEFAULT|program},...] "
+#~ msgstr "[-A {DEFAULT|Programm},...] "
+
+#~ msgid "%s: error deleting authentication method\n"
+#~ msgstr "%s: Fehler beim LÃ¶schen der Authentifizierungs-Methode\n"
+
+#~ msgid "%s: error adding authentication method\n"
+#~ msgstr "%s: Fehler beim HinzufÃ¼gen der Authentifizierungs-Methode\n"
+
+#~ msgid "%s: error changing authentication method\n"
+#~ msgstr "%s: Fehler beim Ã„ndern der Authentifizierungs-Methode\n"
+
+#~ msgid "[-A program] "
+#~ msgstr "[-A Programm] "
+
+#~ msgid "[-p passwd] name\n"
+#~ msgstr "[-p Kennwort] Name\n"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "Fehler - Kann '%s' nicht finden\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%s nicht gefunden\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: Shadow-Gruppen-UnterstÃ¼tzung nicht konfiguriert.\n"
+
+#~ msgid "%s: Shadow passwords are not configured.\n"
+#~ msgstr "%s: Shadow-KennwÃ¶rter sind nicht konfiguriert.\n"
+
+#, fuzzy
+#~ msgid "Usage: %s [-l] user\n"
+#~ msgstr "Syntax: %s [-e]\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "FÃ¼hre shell %s aus\n"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "Anwahl-Kennwort: "
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr ""
+#~ "Syntax: %s [-l] [-m min_tage] [-M max_tage] [-d letzter_tag] Benutzer\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "Syntax: %s [-(a|d)] shell\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "Shell-Kennwort: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "BestÃ¤tigen die das Shell-Kennwort: "
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr ""
+#~ "%s: Die KennwÃ¶rter stimmen nicht Ã¼berein; versuchen Sie es nocheinmal.\n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: Kann %s nicht erstellen"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: Kann %s nicht Ã¶ffnen"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: Shell %s nicht gefunden.\n"
+
+#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
+#~ msgstr "Gruppe=%s,%u  Basisverzeichnis=%s  Vorlage=%s\n"
+
+#~ msgid "shell=%s  "
+#~ msgstr "Shell=%s  "
+
+#~ msgid "inactive=%ld  expire=%s"
+#~ msgstr "Inaktiv=%ld  Ablauf=%s"
+
+#, fuzzy
+#~ msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "Syntax: %s\t[-u uid [-o]] [-g Gruppe] [-G Gruppe,...] \n"
+
 #~ msgid "%s: gid %ld is not unique\n"
 #~ msgstr "%s: GID %ld ist nicht eindeutig\n"
 
@@ -2425,7 +2284,7 @@ msgstr ""
 #~ msgstr "GID unbekannt: %d\n"
 
 #~ msgid "%s: uid %d is not unique\n"
-#~ msgstr "%s : UID %d ist nicht eindeutig\n"
+#~ msgstr "%s: UID %d ist nicht eindeutig\n"
 
 #~ msgid "user %s: bad UID (%d)\n"
 #~ msgstr "Benutzer %s: fehlerhafte UID (%d)\n"

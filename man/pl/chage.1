@@ -1,4 +1,4 @@
-.\" $Id: chage.1,v 1.5 2002/03/09 19:24:25 ankry Exp $
+.\" $Id: chage.1,v 1.7 2003/05/06 22:55:11 kloczek Exp $
 .\" {PTM/WK/1999-09-16}
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
@@ -46,40 +46,38 @@ u¿ytkownik musi zmieniæ has³o.
 Polecenia \fBchage\fR mo¿e u¿yæ tylko u¿ytkownik root, za wyj±tkiem
 opcji \fB-l\fR. Mo¿e siê ni± pos³u¿yæ siê u¿ytkownik nieuprzywilejowany
 do stwierdzenia, kiedy wygasa jego w³asne has³o lub konto.
-.PP
-Opcja \fB-m\fR ustawia minimaln± liczbê dni pomiêdzy zmianami has³a na warto¶æ
-\fImindni\fR. Warto¶æ zerowa oznacza, ¿e u¿ytkownik mo¿e je zmieniaæ
-w dowolnym czasie.
-.PP
-Opcja \fB-M\fR ustawia maksymaln± liczbê dni, przez jakie has³o jest wa¿ne
-na warto¶æ \fImaxdni\fR.
-Gdy \fImaxdni\fR plus \fIostatni\fR jest mniejsze ni¿ bie¿±cy dzieñ,
-u¿ytkownik musi zmieniæ swoje has³a, zanim bêdzie móg³ skorzystaæ z konta.
-Zdarzenie to mo¿e byæ zaplanowane z wyprzedzeniem przez wykorzystanie
-opcji \fB-W\fR, ostrzegaj±cej zawczasu u¿ytkownika o zbli¿aj±cym siê terminie
-zmiany.
-.PP
-Opcja \fB-d\fR ustawia liczbê dni od 1 stycznia 1970 do dnia kiedy ostatnio
-zmieniono has³o na \fIostatni\fR. Data mo¿e równie¿ zostaæ podana w postaci
-RRRR-MM-DD (lub postaci powszechniej u¿ywanej w danym regionie).
-.PP
-Opcja \fB-E\fR s³u¿y do ustawiania daty, pocz±wszy od której konto u¿ytkownika
-nie bêdzie ju¿ dostêpne.
+Polecenie \fBchage\fR posiada nastêpuj±ce opcje:
+.IP "\fB-m\fR \fImindni\fR"
+Utawia minimaln± liczbê dni pomiêdzy zmianami has³a na warto¶æ fImindni\fR.
+Warto¶æ zerowa oznacza, ¿e u¿ytkownik mo¿e je zmieniaæ w dowolnym czasie.
+.IP "\fB-M\fR \fImaxdni\fR"
+Ustawia maksymaln± liczbê dni, przez jakie has³o jest wa¿ne na warto¶æ
+\fImaxdni\fR. Gdy \fImaxdni\fR plus \fIostatni\fR jest mniejsze ni¿ bie¿±cy
+dzieñ, u¿ytkownik musi zmieniæ swoje has³a, zanim bêdzie móg³ skorzystaæ z
+konta. Zdarzenie to mo¿e byæ zaplanowane z wyprzedzeniem przez wykorzystanie
+opcji \fB-W\fR, ostrzegaj±cej zawczasu u¿ytkownika o zbli¿aj±cym siê
+terminie zmiany.
+.IP "\fB-M\fR \fIostatni\fR"
+Ustawia liczbê dni od 1 stycznia 1970 do dnia kiedy ostatnio zmieniono has³o
+na \fIostatni\fR. Data mo¿e równie¿ zostaæ podana w postaci RRRR-MM-DD (lub
+postaci powszechniej u¿ywanej w danym regionie).
+.IP "\fB-E\fR \fIdata_wa¿no¶ci\fR"
+Ustawia datê, pocz±wszy od której konto u¿ytkownika nie bêdzie ju¿ dostêpne.
 \fIdata_wa¿no¶ci\fR jest liczb± dni od 1 stycznia 1970, od której konto jest
 blokowane. Data mo¿e byæ te¿ wyra¿ona w postaci RRRR-MM-DD (lub innej,
 powszechniej u¿ywanej w danym regionie).
 U¿ytkownik, którego konto jest zablokowane musi skontaktowaæ siê
 z administratorem systemu zanim bêdzie móg³ z niego ponownie skorzystaæ.
-.PP
+.IP "\fB-I\fR \fInieaktywne\fR"
 Opcja \fB-I\fR s³u¿y do ustawiania czasu nieaktywno¶ci po wyga¶niêciu
 has³a, po którym konto jest blokowane. Parametr \fInieaktywne\fR podaje
 liczbê dni nieaktywno¶ci. Warto¶æ 0 wy³±cza tê funkcjê.
 U¿ytkownik, którego konto jest zablokowane musi skontaktowaæ siê
 z administratorem systemu zanim bêdzie móg³ z niego ponownie skorzystaæ.
-.PP
-Opcja \fB-W\fR s³u¿y do ustawiania ostrzegania przed wymagan± zmian± has³a.
-Parametr \fIdni_ostrzegania\fR jest liczb± dni przed up³ywem wa¿no¶ci has³a;
-od tego dnia u¿ytkownik bêdzie ostrzegany o nadchodz±cym terminie.
+.IP "\fB-W\fR \fIdni_ostrzegania\fR"
+Ustawia na \fIdni_ostrzegania\fR liczbê dni przed up³ywem wa¿no¶ci has³a.
+Od tego dnia u¿ytkownik bêdzie ostrzegany o nadchodz±cym terminie zmiany
+has³a.
 .PP
 Je¶li nie podano ¿adnej opcji, to \fBchage\fR dzia³a w trybie interaktywnym,
 proponuj±c u¿ytkownikowi warto¶ci bie¿±ce dla ka¿dego z pól. Wprowadzenie
@@ -91,9 +89,9 @@ Program \fBchage\fR wymaga do dzia³ania chronionego pliku hase³ u¿ytkowników
 (shadow). Je¶li has³a u¿ytkowników s± przechowywane w pliku passwd,
 funkcjonalno¶æ programu \fBchage\fR jest niedostêpna.
 .SH PLIKI
-/etc/passwd \- informacje o kontach u¿ytkowników
+\fI/etc/passwd\fR \- informacje o kontach u¿ytkowników
 .br
-/etc/shadow \- chronione informacje o kontach u¿ytkowników
+\fI/etc/shadow\fR \- chronione informacje o kontach u¿ytkowników
 .SH ZOBACZ TAK¯E
 .BR passwd (5),
 .BR shadow (5)

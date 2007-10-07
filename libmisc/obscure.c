@@ -30,34 +30,28 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: obscure.c,v 1.9 1999/03/07 19:14:40 marekm Exp $")
+RCSID ("$Id: obscure.c,v 1.11 2003/05/05 21:44:15 kloczek Exp $")
 
 /*
  * This version of obscure.c contains modifications to support "cracklib"
  * by Alec Muffet (alec.muffett@uk.sun.com).  You must obtain the Cracklib
  * library source code for this function to operate.
  */
-
 #include <ctype.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-
 #include "getdef.h"
-
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
  */
-
-/*ARGSUSED*/
-static int
-palindrome(const char *old, const char *new)
+ /*ARGSUSED*/ static int palindrome (const char *old, const char *new)
 {
-	int	i, j;
+	int i, j;
 
 	i = strlen (new);
 
-	for (j = 0;j < i;j++)
+	for (j = 0; j < i; j++)
 		if (new[i - j - 1] != new[j])
 			return 0;
 
@@ -68,9 +62,7 @@ palindrome(const char *old, const char *new)
  * more than half of the characters are different ones.
  */
 
-/*ARGSUSED*/
-static int
-similar(const char *old, const char *new)
+ /*ARGSUSED*/ static int similar (const char *old, const char *new)
 {
 	int i, j;
 
@@ -80,11 +72,11 @@ similar(const char *old, const char *new)
 	 * the new password is long enough.  Please feel free to suggest
 	 * something better...  --marekm
 	 */
-	if (strlen(new) >= 8)
+	if (strlen (new) >= 8)
 		return 0;
 
 	for (i = j = 0; new[i] && old[i]; i++)
-		if (strchr(new, old[i]))
+		if (strchr (new, old[i]))
 			j++;
 
 	if (i >= j * 2)
@@ -97,18 +89,16 @@ similar(const char *old, const char *new)
  * a nice mix of characters.
  */
 
-/*ARGSUSED*/
-static int
-simple(const char *old, const char *new)
+ /*ARGSUSED*/ static int simple (const char *old, const char *new)
 {
-	int	digits = 0;
-	int	uppers = 0;
-	int	lowers = 0;
-	int	others = 0;
-	int	size;
-	int	i;
+	int digits = 0;
+	int uppers = 0;
+	int lowers = 0;
+	int others = 0;
+	int size;
+	int i;
 
-	for (i = 0;new[i];i++) {
+	for (i = 0; new[i]; i++) {
 		if (isdigit (new[i]))
 			digits++;
 		else if (isupper (new[i]))
@@ -125,10 +115,14 @@ simple(const char *old, const char *new)
 	 */
 
 	size = 9;
-	if (digits) size--;
-	if (uppers) size--;
-	if (lowers) size--;
-	if (others) size--;
+	if (digits)
+		size--;
+	if (uppers)
+		size--;
+	if (lowers)
+		size--;
+	if (others)
+		size--;
 
 	if (size <= i)
 		return 0;
@@ -136,52 +130,53 @@ simple(const char *old, const char *new)
 	return 1;
 }
 
-static char *
-str_lower(char *string)
+static char *str_lower (char *string)
 {
 	char *cp;
 
 	for (cp = string; *cp; cp++)
-		*cp = tolower(*cp);
+		*cp = tolower (*cp);
 	return string;
 }
 
-static const char *
-password_check(const char *old, const char *new, const struct passwd *pwdp)
+static const char *password_check (const char *old, const char *new,
+				   const struct passwd *pwdp)
 {
 	const char *msg = NULL;
 	char *oldmono, *newmono, *wrapped;
+
 #ifdef HAVE_LIBCRACK
 	char *dictpath;
+
 #ifdef HAVE_LIBCRACK_PW
-	char *FascistCheckPw();
+	char *FascistCheckPw ();
 #else
-	char *FascistCheck();
+	char *FascistCheck ();
 #endif
 #endif
 
-	if (strcmp(new, old) == 0)
+	if (strcmp (new, old) == 0)
 		return "no change";
 
-	newmono = str_lower(xstrdup(new));
-	oldmono = str_lower(xstrdup(old));
-	wrapped = xmalloc(strlen(oldmono) * 2 + 1);
+	newmono = str_lower (xstrdup (new));
+	oldmono = str_lower (xstrdup (old));
+	wrapped = xmalloc (strlen (oldmono) * 2 + 1);
 	strcpy (wrapped, oldmono);
 	strcat (wrapped, oldmono);
 
-	if (palindrome(oldmono, newmono))
+	if (palindrome (oldmono, newmono))
 		msg = "a palindrome";
 
-	if (!msg && strcmp(oldmono, newmono) == 0)
+	if (!msg && strcmp (oldmono, newmono) == 0)
 		msg = "case changes only";
 
-	if (!msg && similar(oldmono, newmono))
+	if (!msg && similar (oldmono, newmono))
 		msg = "too similar";
 
-	if (!msg && simple(old, new))
+	if (!msg && simple (old, new))
 		msg = "too simple";
 
-	if (!msg && strstr(wrapped, newmono))
+	if (!msg && strstr (wrapped, newmono))
 		msg = "rotated";
 
 #ifdef HAVE_LIBCRACK
@@ -189,49 +184,44 @@ password_check(const char *old, const char *new, const struct passwd *pwdp)
 	 * Invoke Alec Muffett's cracklib routines.
 	 */
 
-	if (!msg && (dictpath = getdef_str("CRACKLIB_DICTPATH")))
+	if (!msg && (dictpath = getdef_str ("CRACKLIB_DICTPATH")))
 #ifdef HAVE_LIBCRACK_PW
-		msg = FascistCheckPw(new, dictpath, pwdp);
+		msg = FascistCheckPw (new, dictpath, pwdp);
 #else
-		msg = FascistCheck(new, dictpath);
+		msg = FascistCheck (new, dictpath);
 #endif
 #endif
-	strzero(newmono);
-	strzero(oldmono);
-	strzero(wrapped);
-	free(newmono);
-	free(oldmono);
-	free(wrapped);
+	strzero (newmono);
+	strzero (oldmono);
+	strzero (wrapped);
+	free (newmono);
+	free (oldmono);
+	free (wrapped);
 
 	return msg;
 }
 
-/*ARGSUSED*/
-static const char *
-obscure_msg(const char *old, const char *new, const struct passwd *pwdp)
+ /*ARGSUSED*/
+    static const char *obscure_msg (const char *old, const char *new,
+				    const struct passwd *pwdp)
 {
 	int maxlen, oldlen, newlen;
 	char *new1, *old1;
 	const char *msg;
 
-	oldlen = strlen(old);
-	newlen = strlen(new);
+	oldlen = strlen (old);
+	newlen = strlen (new);
 
-#if 0  /* why not check the password when set for the first time?  --marekm */
-	if (old[0] == '\0')
-		return NULL;
-#endif
-
-	if ( newlen < getdef_num("PASS_MIN_LEN", 0) )
+	if (newlen < getdef_num ("PASS_MIN_LEN", 0))
 		return "too short";
 
 	/*
 	 * Remaining checks are optional.
 	 */
-	if (!getdef_bool("OBSCURE_CHECKS_ENAB"))
+	if (!getdef_bool ("OBSCURE_CHECKS_ENAB"))
 		return NULL;
 
-	msg = password_check(old, new, pwdp);
+	msg = password_check (old, new, pwdp);
 	if (msg)
 		return msg;
 
@@ -241,26 +231,26 @@ obscure_msg(const char *old, const char *new, const struct passwd *pwdp)
 	   Example: "password$%^&*123".  So check it again, this time
 	   truncated to the maximum length.  Idea from npasswd.  --marekm */
 
-	if (getdef_bool("MD5_CRYPT_ENAB"))
-		return NULL;  /* unlimited password length */
+	if (getdef_bool ("MD5_CRYPT_ENAB"))
+		return NULL;	/* unlimited password length */
 
-	maxlen = getdef_num("PASS_MAX_LEN", 8);
+	maxlen = getdef_num ("PASS_MAX_LEN", 8);
 	if (oldlen <= maxlen && newlen <= maxlen)
 		return NULL;
 
-	new1 = xstrdup(new);
-	old1 = xstrdup(old);
+	new1 = xstrdup (new);
+	old1 = xstrdup (old);
 	if (newlen > maxlen)
 		new1[maxlen] = '\0';
 	if (oldlen > maxlen)
 		old1[maxlen] = '\0';
 
-	msg = password_check(old1, new1, pwdp);
+	msg = password_check (old1, new1, pwdp);
 
-	memzero(new1, newlen);
-	memzero(old1, oldlen);
-	free(new1);
-	free(old1);
+	memzero (new1, newlen);
+	memzero (old1, oldlen);
+	free (new1);
+	free (old1);
 
 	return msg;
 }
@@ -273,14 +263,13 @@ obscure_msg(const char *old, const char *new, const struct passwd *pwdp)
  *	check passwords.
  */
 
-int
-obscure(const char *old, const char *new, const struct passwd *pwdp)
+int obscure (const char *old, const char *new, const struct passwd *pwdp)
 {
-	const char *msg = obscure_msg(old, new, pwdp);
+	const char *msg = obscure_msg (old, new, pwdp);
+
 	if (msg) {
-		printf(_("Bad password: %s.  "), msg);
+		printf (_("Bad password: %s.  "), msg);
 		return 0;
 	}
 	return 1;
 }
-

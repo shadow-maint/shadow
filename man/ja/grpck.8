@@ -1,3 +1,4 @@
+.\"$Id: grpck.8,v 1.5 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1992 - 1993, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,77 +26,86 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: grpck.8,v 1.3 2002/03/09 11:16:16 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Updated & Modified Sat 21 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
-.TH GRPCK 1
+.TH GRPCK 8
 .SH 名前
-grpck \- グループファイルの完全性を検証する
+grpck \- グループファイルが正しいかどうか検査する
 .SH 書式
 \fBgrpck\fR [\fB-r\fR] [\fIgroup\fR \fIshadow\fR]
 .SH 説明
-\fBgrpck\fRコマンドはシステムの認証情報が完全なものかどうかの検証を行う。
-\fI/etc/group\fR及び\fI/etc/gshadow\fRファイル中の全てのエントリーに対して、
-書式が正しいか、及び各欄に記されているデータは有効なものかどうかの検証が
-行なわれる。
-書式が正しくなかったり訂正不能な誤りを含むエントリーは削除を促される。
+\fBgrpck\fR コマンドはシステムの認証情報が正しいかどうか検査する。
+\fI/etc/group\fR と \fI/etc/gshadow\fR
+各ファイルの全てのエントリに対し、
+各フィールドの書式が正しいか、
+そのデータが有効なものかどうかを検証する。
+書式が正しくないエントリや、
+修正不能な誤りを含むエントリは削除するようプロンプトを出す。
 .P
-各々のエントリーに対して
+各々のエントリに対して
 .sp
 .in +.5i
-- 欄の数が正しいか
+- フィールドの数が正しいか
 .br
 - グループ名に重複がないか
 .br
-- メンバー及び管理者のリストが正しいか
+- メンバーのリストと管理者のリストが正しいか
 .in -.5i
-等のチェックが行われる。
 .sp
+がチェックされる。
 .P
-欄の数が正しいこと及びグループ名の重複がないことが最も重要である。
-欄の数が正しくない場合、その行のエントリーを削除するよう促される。
-削除に同意しなかった場合は、それ以降のチェックは無視される。
-重複したグループ名があった場合も削除を促されるが、この場合は
-削除しなくてもそれ以降のチェックは続行される。
-他の全てのエラーに対しては警告がなされるのみであり、その場合は
-誤りを訂正するために\fBgroupmod\fRコマンドを実行するよう勧められる。
+フィールドの数が間違っていたり、
+グループ名が重複しているのは致命的なエラーである。
+フィールドの数が正しくない場合、
+ユーザーはそのエントリ行を削除するよう促される。
+削除に同意しなかった場合は、それ以降のチェックは行われない。
+重複したグループ名があった場合も削除を促されるが、
+この場合は削除しなくてもそれ以降のチェックは続行される。
+他の全てのエラーに対しては警告がなされる。
+\fBgroupmod\fR コマンドを実行してそのエラーを修正すると良いだろう。
 .P
-\fI/etc/group\fRファイルに作用するコマンドは、壊れたもしくは
-重複したエントリーを変更することは出来ない。
-そのような際に誤りのあるエントリーを削除するためには
-\fBgrpck\fRを用いなくてはならない。
+\fI/etc/group\fR ファイルを操作するコマンドは、
+壊れたエントリや重複したエントリを変更できない。
+そのような際に誤りのあるエントリを削除するには
+\fBgrpck\fR を用いるとよい。
 .SH オプション
-ディフォルトでは、\fBgrpck\fRは\fI/etc/group\fRファイル及び
-\fI/etc/gshadow\fRに作用する。
-\fIgroup\fR及び\fIshadow\fRパラメータを用いて別のファイルを選択する
-事もできる。
-加えて、\fB-r\fRフラッグを指定することにより、
+デフォルトでは \fBgrpck\fR は \fI/etc/group\fR ファイルと
+\fI/etc/gshadow\fR に対して動作する。
+\fIgroup\fR パラメータと \fIshadow\fR パラメータを用いて、
+別のファイルを選択することもできる。
+さらに \fB-r\fR フラグを指定すれば、
 リードオンリーモードでコマンドを実行することもできる。
-この場合は、変更を行うかどうかの質問に対していちいち答えなくとも、
-自動的に\fBno\fRと回答される。
+この場合、変更を行うかどうかはユーザへ問い合わされず、
+自動的に \fBno\fR と回答される。
+.B grpck
+は
+\fI/etc/group\fR と \fI/etc/gshadow\fR
+のエントリを GID でソートすることもできる。
+ソートモードで動作させるには \fB-s\fR フラグを与える。
+この場合チェックは行われず、単にソートするだけである。
 .SH ファイル
-/etc/group \- グループアカウントに関する情報
+\fI/etc/group\fR \  - グループアカウント情報
 .br
-/etc/gshadow \- 暗号化されたパスワード、及びグループ管理者の情報
+\fI/etc/gshadow\fR \- 暗号化されたパスワードとグループ管理者情報
 .br
-/etc/passwd \- ユーザに関する情報
+\fI/etc/passwd\fR \ - ユーザー情報
 .SH 関連項目
 .BR group (5),
 .BR passwd (5),
 .BR shadow (5),
 .BR groupmod (8)
 .SH 返り値
-\fBgrpck\fRコマンドは以下の戻り値を返して終了する:
+\fBgrpck\fR コマンドは終了時に以下の値を返す:
 .IP 0 5
 成功
 .IP 1 5
 構文エラー
 .IP 2 5
-誤りのあるグループエントリーが存在する
+誤ったグループエントリが存在する
 .IP 3 5
 グループファイルをオープンできない
 .IP 4 5

@@ -1,4 +1,4 @@
-.\"$Id: sulogin.8,v 1.8 2002/03/08 04:39:12 kloczek Exp $
+.\"$Id: sulogin.8,v 1.10 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1989 - 1992, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,11 +31,9 @@ sulogin \- Single-user login
 .SH SYNTAX
 \fBsulogin\fR [\fItty-device\fR]
 .SH DESCRIPTION
-.B sulogin
-is invoked by \fBinit\fR prior to allowing the user
-access to the system when in single user mode.
-This feature may only be available on certain systems where
-\fBinit\fR has been modified accordingly, or where the
+\fBsulogin\fR is invoked by \fBinit\fR prior to allowing the user access to
+the system when in single user mode. This feature may only be available on
+certain systems where \fBinit\fR has been modified accordingly, or where the
 \fB/etc/inittab\fR has an entry for a single user login.
 .PP
 The user is prompted
@@ -44,13 +42,11 @@ Type control-d to proceed with normal startup,
 .br
 (or give root password for system maintenance):
 .PP
-Input and output will be performed with the standard file
-descriptors unless the optional device name argument is provided.
+Input and output will be performed with the standard file descriptors unless
+the optional device name argument is provided.
 .PP
-If the user enters the correct root password, a login session
-is initiated.
-When \fBEOF\fR is pressed instead, the system enters multi-user
-mode.
+If the user enters the correct root password, a login session is initiated.
+When \fBEOF\fR is pressed instead, the system enters multi-user mode.
 .PP
 After the user exits the single-user shell, or presses \fBEOF\fR,
 the system begins the initialization process required to enter
@@ -58,10 +54,8 @@ multi-user mode.
 .SH CAVEATS
 .PP
 This command can only be used if \fBinit\fR has been modified to call
-\fBsulogin\fR instead of \fB/bin/sh\fR,
-or if the user has set the \fIinittab\fR to support a single user
-login.
-For example, the line
+\fBsulogin\fR instead of \fB/bin/sh\fR, or if the user has set the
+\fIinittab\fR to support a single user login. For example, the line
 .br
 .sp 1
 co:s:respawn:/etc/sulogin /dev/console
@@ -69,15 +63,13 @@ co:s:respawn:/etc/sulogin /dev/console
 .sp 1
 should execute the sulogin command in single user mode.
 .PP
-As complete an environment as possible is created.
-However, various devices may be unmounted or uninitialized and many 
-of the user commands may be unavailable or nonfunctional as a result.
+As complete an environment as possible is created. However, various devices
+may be unmounted or uninitialized and many of the user commands may be
+unavailable or nonfunctional as a result.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR \	- user account information
 .br
-/etc/shadow \- encrypted passwords and age information
-.br
-/.profile \- initialization script for single user shell
+\fI/etc/shadow\fR \	- encrypted passwords and age information
 .SH SEE ALSO
 .BR login (1),
 .BR sh (1),

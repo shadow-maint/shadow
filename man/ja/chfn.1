@@ -1,3 +1,4 @@
+.\"$Id: chfn.1,v 1.4 2003/04/28 02:14:00 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -25,16 +26,15 @@
 .\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 .\" SUCH DAMAGE.
 .\"
-.\"	$Id: chfn.1,v 1.2 2001/11/16 17:01:32 ankry Exp $
-.\"
 .\" Japanese Version Copyright (c) 1997 Kazuyoshi Furutaka
 .\"         all rights reserved.
 .\" Translated Fri Feb 14 23:06:00 JST 1997
 .\"         by Kazuyoshi Furutaka <furutaka@Flux.tokai.jaeri.go.jp>
+.\" Modified Tue 16 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH CHFN 1
 .SH 名前
-chfn \- ユーザの名前等の情報を変更する。
+chfn \- ユーザの氏名や情報を変更する。
 .SH 書式
 .TP 5
 \fBchfn\fR
@@ -43,29 +43,31 @@ chfn \- ユーザの名前等の情報を変更する。
 [\fB-w \fIwork_ph\fR] [\fB-h \fIhome_ph\fR] [\fB-o \fIother\fR]
 [\fIuser\fR]
 .SH 説明
-\fBchfn\fR は、ユーザのフルネーム、オフィスの部屋番号及び内線番号、
+\fBchfn\fR は、ユーザのフルネーム・オフィスの部屋番号・内線番号・
 自宅の電話番号といったアカウント情報を変更する。
-この情報は \fBfinger\fR(1) やそれと類似のプログラムによって表示される。
-一般ユーザは自分自身のアカウントの情報の変更のみ行うことが出来る。
-スーパーユーザは全てのアカウントに対して情報の変更が出来る。
-また、\fB-o\fR オプションを用いて GCOS 欄の未定義部分の変更を行えるのも
-スーパーユーザだけである。
+この情報は \fBfinger\fR(1) のようなプログラムによって表示される。
+一般ユーザは自分自身のアカウント情報のみを変更できる。
+スーパーユーザは全てのアカウントに対して情報を変更できる。
+また \fB-o\fR オプションを用いて
+GECOS 欄の未定義部分を変更できるのもスーパーユーザだけである。
 .PP
-各欄には、コントロール文字及び、コンマ、コロン、等号以外の全ての文字を
-書くことが出来る。
-\fIother\fR 欄に対してはこの制限はないので、他のアプリケーションが用いる
-アカウンティング情報を記録しておく事が出来る。
+各フィールドに書く内容に関する制限は、
+コントロール文字・コンマ・コロン・等号を含んでいてはならない、
+ということのみである。
+\fIother\fR 欄に対してはこの制限はないので、
+他のアプリケーションが用いるアカウンティング情報の記録に利用される。
 .PP
-いずれのオプションも選択されなかった場合は、\fBchfn\fR は対話的に動作し、
-全ての欄に対して、各々現在の設定値を表示し、新しい値の入力を促す。
-新しい値を設定する場合はそれを入力し、または現在の値を使うなら空行のまま
-リターンキーを押せばよい。
-現在の値は一対の \fB[ ]\fR 記号の間に表示される。
-オプションを指定しなかった場合、chfn はそれを起動したユーザのアカウントに
-対して働く。
+いずれのオプションも指定されないと
+\fBchfn\fR は対話的に動作する。
+全ての欄に対して各々現在の設定値を表示し、新しい値の入力を促す。
+新しい値を設定する場合はそれを入力し、
+現在の値を使うなら空行のままリターンキーを押せばよい。
+現在の値は \fB[ ]\fR 記号の間に表示される。
+オプションを指定しなかった場合、
+chfn は現在のユーザアカウントに対して動作する。
 .SH ファイル
-/etc/passwd \- ユーザのアカウント情報
+\fI/etc/passwd\fR \- ユーザアカウント情報
 .SH 関連項目
 .BR passwd (5)
 .SH 著者
-Julianne Frances Haugh (jockgrrl@ix.netcom.com)
+Julianne Frances Haugh <jockgrrl@ix.netcom.com>

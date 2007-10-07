@@ -1,0 +1,68 @@
+.\" Copyright 1991, Julianne Frances Haugh
+.\" All rights reserved.
+.\"
+.\" Redistribution and use in source and binary forms, with or without
+.\" modification, are permitted provided that the following conditions
+.\" are met:
+.\" 1. Redistributions of source code must retain the above copyright
+.\"    notice, this list of conditions and the following disclaimer.
+.\" 2. Redistributions in binary form must reproduce the above copyright
+.\"    notice, this list of conditions and the following disclaimer in the
+.\"    documentation and/or other materials provided with the distribution.
+.\" 3. Neither the name of Julianne F. Haugh nor the names of its contributors
+.\"    may be used to endorse or promote products derived from this software
+.\"    without specific prior written permission.
+.\"
+.\" THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
+.\" ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+.\" IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+.\" ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+.\" FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+.\" DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+.\" OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+.\" HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+.\" LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+.\" OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+.\" SUCH DAMAGE.
+.\"
+.\"	$Id: groupmod.8,v 1.2 2003/04/26 13:24:16 kloczek Exp $
+.\"
+.TH GROUPMOD 8
+.SH 名称
+groupmod \- 修 改 群 组
+.SH 语法
+.B groupmod
+[\fB-g\fI gid \fR[\fB-o\fR]]
+[\fB-n\fI group_name \fR]
+.I group
+.SH 描述
+
+\fBgroupmod\fR 命 令 会 参 照 你 命 令 列 上 指 定 的 部 份 
+修 改 系 统 帐 号 档 。 下 列 为 \fIgroupmod\fR 可 选 用 的 参 数 。
+
+.IP "\fB-g \fIgid\fR"
+群 组 I D 值 。
+必 须 为 唯 一 的 ID 值 ， 除 非 用 -o 选 项 。
+数 字 不 可 为 负 值。预 设 为 最
+小 不 得 小 于 99 而 逐 次 增 加 。 0~99 传 统 上
+是 保 留 给 系 统 帐 号 使 用 。
+如 果 有 档 案 使 用 旧 的 群 组 ID ， 而 这 时 候 你 新 增 的 群 组 ID
+恰 好 与 旧 的 相 同 ， 这 样 的 话
+你 要 手 动 改 一 下 这 些 档 案 的 群 组 ID 。
+.IP "\fB-n \fIgroup_name\fR"
+更 改 群 组 名 。
+.SH 档案
+\fI/etc/group\fR \- 群 组 资 讯 
+.br
+\fI/etc/gshadow\fR \- 群 组 资 讯 加 密
+.SH 相关文件
+.BR chfn (1),
+.BR chsh (1),
+.BR useradd (8),
+.BR userdel (8),
+.BR usermod (8),
+.BR passwd (1),
+.BR groupadd (8),
+.BR groupdel (8)
+.SH 作者
+Julianne Frances Haugh (jfh@tab.com)

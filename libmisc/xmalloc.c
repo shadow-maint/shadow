@@ -10,29 +10,24 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: xmalloc.c,v 1.3 1998/12/28 20:34:56 marekm Exp $")
-
+RCSID ("$Id: xmalloc.c,v 1.4 2003/04/22 10:59:22 kloczek Exp $")
 #include <stdio.h>
-
 #include "defines.h"
+extern char *malloc ();
 
-extern char *malloc();
-
-char *
-xmalloc(size_t size)
+char *xmalloc (size_t size)
 {
 	char *ptr;
 
-	ptr = malloc(size);
+	ptr = malloc (size);
 	if (!ptr && size) {
-		fprintf(stderr, _("malloc(%d) failed\n"), (int) size);
-		exit(13);
+		fprintf (stderr, _("malloc(%d) failed\n"), (int) size);
+		exit (13);
 	}
 	return ptr;
 }
 
-char *
-xstrdup(const char *str)
+char *xstrdup (const char *str)
 {
-	return strcpy(xmalloc(strlen(str) + 1), str);
+	return strcpy (xmalloc (strlen (str) + 1), str);
 }

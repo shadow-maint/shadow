@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: gpasswd.c,v 1.19 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: gpasswd.c,v 1.21 2003/06/19 18:11:01 kloczek Exp $")
 #include <sys/types.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -75,7 +75,7 @@ static int check_list (const char *);
 
 static void usage (void)
 {
-	fprintf (stderr, _("usage: %s [-r|-R] group\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-r|-R] group\n"), Prog);
 	fprintf (stderr, _("       %s [-a user] group\n"), Prog);
 	fprintf (stderr, _("       %s [-d user] group\n"), Prog);
 #ifdef	SHADOWGRP
@@ -649,4 +649,5 @@ int main (int argc, char **argv)
 #endif
 #endif
 	exit (0);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

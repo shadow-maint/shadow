@@ -1,25 +1,31 @@
+.\"$Id: shadowconfig.8,v 1.4 2003/04/28 02:14:00 kloczek Exp $
+.\"
+.\" Japanese Version Copyright (c) 2001 Maki KURODA
 .\"     all right reserved,
 .\" Translated Tue Oct 30 11:59:11 JST 2001
-.\" by Maki KURODA <mkuroda@aisys-jp.com>
+.\"     by Maki KURODA <mkuroda@aisys-jp.com>
+.\" Modified Sun 22 Sep 2002 by NAKANO Takeo <nakano@apm.seikei.ac.jp>
 .\"
 .TH SHADOWCONFIG 8 "19 Apr 1997" "Debian GNU/Linux"
 .SH 名前
-shadowconfig \- shadow パスワードの設定をオン及びオフに切替える
+shadowconfig \- shadow パスワードを有効・無効にする
 .SH 書式
 .B "shadowconfig"
 .IR on " | " off
 .SH 説明
-.PP
 .B shadowconfig on
 は shadow パスワードを有効にする。
 .B shadowconfig off
 は shadow パスワードを無効にする。
+何か間違いがあると、
 .B shadowconfig
-は何らかの間違いがあると、エラーメッセージを表示し、
-ゼロではない返り値を返す。
-もしそのようなことが起こった場合、エラーを修正し、再度実行しなければならない。
-shadow パスワードの設定がすでにオンの場合にオンに設定したり、
-すでにオフの場合にオフに設定しても、何の影響もない。
+はエラーメッセージを表示し、ゼロ以外の返り値を返す。
+そのようなことが起こった場合は、
+エラーを修正して再度実行しなければならない。
 
-.I /usr/doc/passwd/README.debian.gz
-には shadow パスワードとそれに関する特徴の簡単な紹介が書かれている。
+shadow パスワードがすでに有効になっているときに再度有効にしたり、
+無効になっているときに再度無効にしても、何の影響もない。
+
+\fI/usr/share/doc/passwd/README.debian.gz\fR
+には shadow パスワードや関連機能に関する
+簡単な説明が書かれている。

@@ -1,4 +1,4 @@
-.\"$Id: expiry.1,v 1.3 2002/03/09 19:22:29 ankry Exp $
+.\"$Id: expiry.1,v 1.5 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1990 - 1994 Julianne Frances Haugh
 .\" All rights reserved.
 .\" Modified for expiry by Ben Collins <bcollins@debian.org>, 1999
@@ -34,12 +34,12 @@ expiry \- check and enforce password expiration policy
 .TP 6
 \fBexpiry\fR [\fB-c\fR] [\fB-f\fR]
 .SH DESCRIPTION
-\fBexpiry\fR checks (\fB-c\fR) the current password expiration and forces (\fB-f\fR)
-changes when required.  It is callable as a normal user command. 
+\fBexpiry\fR checks (\fB-c\fR) the current password expiration and forces
+(\fB-f\fR) changes when required. It is callable as a normal user command.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR \	- user account information
 .br
-/etc/shadow \- shadow user account information
+\fI/etc/shadow\fR \	- shadow user account information
 .SH SEE ALSO
 .BR passwd (5),
 .BR shadow (5)

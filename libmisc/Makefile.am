@@ -3,7 +3,7 @@ EXTRA_DOST = .indent.pro
 
 DEFS = -DHAVE_CONFIG_H
 
-INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/lib
+INCLUDES = -I$(top_srcdir)/lib
 
 lib_LTLIBRARIES = libmisc.la
 
@@ -36,7 +36,6 @@ libmisc_la_SOURCES = \
 	mail.c \
 	motd.c \
 	myname.c \
-	nscd.c \
 	obscure.c \
 	pam_pass.c \
 	pwd2spwd.c \

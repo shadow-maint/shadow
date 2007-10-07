@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: passwd.c,v 1.24 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: passwd.c,v 1.30 2003/12/17 09:43:30 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include <sys/types.h>
@@ -50,14 +50,11 @@ RCSID (PKG_VER "$Id: passwd.c,v 1.24 2002/01/05 15:41:43 kloczek Exp $")
 #endif
 #include <pwd.h>
 #include "pwauth.h"
-#ifdef HAVE_TCFS
-#include <tcfslib.h>
-#include "tcfsio.h"
-#endif
 #ifdef SHADOWPWD
 #include "shadowio.h"
 #endif
 #include "pwio.h"
+#include "nscd.h"
 #include "getdef.h"
 /*
  * exit status values
@@ -113,18 +110,9 @@ static char crypt_passwd[128];	/* The "old-style" password, if present */
 static int do_update_pwd = 0;
 #endif
 
-#ifdef HAVE_TCFS
-static struct tcfspwd *tcfspword;
-static int tcfs_force = 0;
-#endif
-
 /*
  * External identifiers
  */
-
-#ifdef ATT_AGE
-extern char *l64a ();
-#endif
 
 #ifdef	NDBM
 extern int sp_dbm_mode;
@@ -135,10 +123,6 @@ extern int pw_dbm_mode;
 static void usage (int);
 
 #ifndef USE_PAM
-#ifdef AUTH_METHODS
-static char *get_password (const char *);
-static int uses_default_method (const char *);
-#endif				/* AUTH_METHODS */
 static int reuse (const char *, const struct passwd *);
 static int new_password (const struct passwd *);
 
@@ -160,9 +144,6 @@ static void update_noshadow (void);
 #ifdef SHADOWPWD
 static void update_shadow (void);
 #endif
-#ifdef HAVE_TCFS
-static void update_tcfs (void);
-#endif
 static long getnumber (const char *);
 
 /*
@@ -171,7 +152,7 @@ static long getnumber (const char *);
 
 static void usage (int status)
 {
-	fprintf (stderr, _("usage: %s [-f|-s] [name]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-f|-s] [name]\n"), Prog);
 	if (amroot) {
 		fprintf (stderr,
 			 _
@@ -184,48 +165,6 @@ static void usage (int status)
 }
 
 #ifndef USE_PAM
-#ifdef AUTH_METHODS
-/*
- * get_password - locate encrypted password in authentication list
- */
-
-static char *get_password (const char *list)
-{
-	char *cp, *end;
-	static char buf[257];
-
-	STRFCPY (buf, list);
-	for (cp = buf; cp; cp = end) {
-		if ((end = strchr (cp, ';')))
-			*end++ = 0;
-
-		if (cp[0] == '@')
-			continue;
-
-		return cp;
-	}
-	return (char *) 0;
-}
-
-/*
- * uses_default_method - determine if "old-style" password present
- *
- *	uses_default_method determines if a "old-style" password is present
- *	in the authentication string, and if one is present it extracts it.
- */
-
-static int uses_default_method (const char *methods)
-{
-	char *cp;
-
-	if ((cp = get_password (methods))) {
-		STRFCPY (crypt_passwd, cp);
-		return 1;
-	}
-	return 0;
-}
-#endif				/* AUTH_METHODS */
-
 static int reuse (const char *pass, const struct passwd *pw)
 {
 #ifdef HAVE_LIBCRACK_HIST
@@ -273,22 +212,7 @@ static int reuse (const char *pass, const struct passwd *pw)
 	 * password.
 	 */
 
-#ifdef HAVE_TCFS
-	tcfs_force = tcfs_force && amroot;
-
-	if ((tcfs_locate (name) && !tcfs_force)
-	    || (!amroot && crypt_passwd[0])) {
-		if (amroot) {
-			printf (_
-				("User %s has a TCFS key, his old password is required.\n"),
-				name);
-			printf (_
-				("You can use -t option to force the change.\n"));
-		}
-#else
 	if (!amroot && crypt_passwd[0]) {
-#endif
-
 		if (!(clear = getpass (_("Old password: "))))
 			return -1;
 
@@ -303,17 +227,9 @@ static int reuse (const char *pass, const struct passwd *pw)
 			return -1;
 		}
 		STRFCPY (orig, clear);
-#ifdef HAVE_TCFS
-		STRFCPY (tcfspword->tcfsorig, clear);
-#endif
 		strzero (clear);
 		strzero (cipher);
 	} else {
-#ifdef HAVE_TCFS
-		if (tcfs_locate (name))
-			printf (_("Warning: user %s has a TCFS key.\n"),
-				name);
-#endif
 		orig[0] = '\0';
 	}
 
@@ -380,9 +296,6 @@ Please use a combination of upper and lower case letters and numbers.\n"), getde
 		memzero (pass, sizeof pass);
 		return -1;
 	}
-#ifdef HAVE_TCFS
-	STRFCPY (tcfspword->tcfspass, pass);
-#endif
 
 	/*
 	 * Encrypt the password, then wipe the cleartext password.
@@ -473,20 +386,9 @@ static void check_password (const struct passwd *pw)
 		closelog ();
 		exit (E_NOPERM);
 	}
-#ifdef ATT_AGE
-	/*
-	 * Can always be changed if there is no age info
-	 */
 
-	if (!pw->pw_age[0])
-		return;
-
-	last = a64l (pw->pw_age + 2) * WEEK;
-	ok = last + c64i (pw->pw_age[1]) * WEEK;
-#else				/* !ATT_AGE */
 	last = 0;
 	ok = 0;
-#endif				/* !ATT_AGE */
 #endif				/* !SHADOWPWD */
 	if (now < ok) {
 		fprintf (stderr,
@@ -506,30 +408,6 @@ static void check_password (const struct passwd *pw)
  */
 static char *insert_crypt_passwd (const char *string, const char *passwd)
 {
-#ifdef AUTH_METHODS
-	if (string && *string) {
-		char *cp, *result;
-
-		result = xmalloc (strlen (string) + strlen (passwd) + 1);
-		cp = result;
-		while (*string) {
-			if (string[0] == ';') {
-				*cp++ = *string++;
-			} else if (string[0] == '@') {
-				while (*string && *string != ';')
-					*cp++ = *string++;
-			} else {
-				while (*passwd)
-					*cp++ = *passwd++;
-
-				while (*string && *string != ';')
-					string++;
-			}
-		}
-		*cp = '\0';
-		return result;
-	}
-#endif
 	return xstrdup (passwd);
 }
 #endif				/* !USE_PAM */
@@ -582,17 +460,7 @@ static void print_status (const struct passwd *pw)
 	} else
 #endif
 	{
-#ifdef ATT_AGE
-		printf ("%s %s %s %d %d\n",
-			pw->pw_name,
-			pw_status (pw->pw_passwd),
-			date_to_str (strlen (pw->pw_age) > 2 ?
-				     a64l (pw->pw_age + 2) * WEEK : 0L),
-			pw->pw_age[0] ? c64i (pw->pw_age[1]) * 7 : 0,
-			pw->pw_age[0] ? c64i (pw->pw_age[0]) * 7 : 10000);
-#else
 		printf ("%s %s\n", pw->pw_name, pw_status (pw->pw_passwd));
-#endif
 	}
 }
 
@@ -602,9 +470,6 @@ static void fail_exit (int status)
 	pw_unlock ();
 #ifdef SHADOWPWD
 	spw_unlock ();
-#endif
-#ifdef HAVE_TCFS
-	tcfs_unlock ();
 #endif
 	exit (status);
 }
@@ -644,12 +509,6 @@ static void update_noshadow (void)
 	const struct passwd *pw;
 	struct passwd *npw;
 
-#ifdef ATT_AGE
-	char age[5];
-	long week = time ((time_t *) 0) / WEEK;
-	char *cp;
-#endif
-
 	if (!pw_lock ()) {
 		fprintf (stderr,
 			 _
@@ -672,69 +531,6 @@ static void update_noshadow (void)
 	if (!npw)
 		oom ();
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
-#ifdef ATT_AGE
-	memzero (age, sizeof (age));
-	STRFCPY (age, npw->pw_age);
-
-	/*
-	 * Just changing the password - update the last change date if there
-	 * is one, otherwise the age just disappears.
-	 */
-	if (do_update_age) {
-		if (strlen (age) > 2) {
-			cp = l64a (week);
-			age[2] = cp[0];
-			age[3] = cp[1];
-		} else {
-			age[0] = '\0';
-		}
-	}
-
-	if (xflg) {
-		if (age_max > 0)
-			age[0] = i64c ((age_max + 6) / 7);
-		else
-			age[0] = '.';
-
-		if (age[1] == '\0')
-			age[1] = '.';
-	}
-	if (nflg) {
-		if (age[0] == '\0')
-			age[0] = 'z';
-
-		if (age_min > 0)
-			age[1] = i64c ((age_min + 6) / 7);
-		else
-			age[1] = '.';
-	}
-	/*
-	 * The last change date is added by -n or -x if it's not already
-	 * there.
-	 */
-	if ((nflg || xflg) && strlen (age) <= 2) {
-		cp = l64a (week);
-		age[2] = cp[0];
-		age[3] = cp[1];
-	}
-
-	/*
-	 * Force password change - if last change date is present, it will
-	 * be set to (today - max - 1 week). Otherwise, just set min = max
-	 * = 0 (will disappear when password is changed).
-	 */
-	if (eflg) {
-		if (strlen (age) > 2) {
-			cp = l64a (week - c64i (age[0]) - 1);
-			age[2] = cp[0];
-			age[3] = cp[1];
-		} else {
-			strcpy (age, "..");
-		}
-	}
-
-	npw->pw_age = age;
-#endif
 	if (!pw_update (npw)) {
 		fprintf (stderr,
 			 _("Error updating the password entry.\n"));
@@ -758,46 +554,6 @@ static void update_noshadow (void)
 	}
 	pw_unlock ();
 }
-
-#ifdef HAVE_TCFS
-static void update_tcfs (void)
-{
-	if (!tcfs_force) {
-		if (!tcfs_lock ()) {
-			fprintf (stderr,
-				 _
-				 ("Cannot lock the TCFS key database; try again later\n"));
-			SYSLOG ((LOG_WARN,
-				 "can't lock TCFS key database"));
-			exit (E_PWDBUSY);
-		}
-		if (!tcfs_open (O_RDWR)) {
-			fprintf (stderr,
-				 _
-				 ("Cannot open the TCFS key database.\n"));
-			SYSLOG ((LOG_WARN,
-				 "can't open TCFS key database"));
-			fail_exit (E_MISSING);
-		}
-		if (!tcfs_update (name, tcfspword)) {
-			fprintf (stderr,
-				 _
-				 ("Error updating the TCFS key database.\n"));
-			SYSLOG ((LOG_ERR,
-				 "error updating TCFS key database"));
-			fail_exit (E_FAILURE);
-		}
-		if (!tcfs_close ()) {
-			fprintf (stderr,
-				 _("Cannot commit TCFS changes.\n"));
-			SYSLOG ((LOG_ERR,
-				 "can't rewrite TCFS key database"));
-			fail_exit (E_FAILURE);
-		}
-		tcfs_unlock ();
-	}
-}
-#endif				/* HAVE_TCFS */
 
 #ifdef SHADOWPWD
 static void update_shadow (void)
@@ -904,7 +660,6 @@ static long getnumber (const char *str)
  *	-f	execute chfn command to interpret flags
  *	-s	execute chsh command to interpret flags
  *	-k	change password only if expired
- *	-t	force 'passwd' to change the password regardless of TCFS
  *
  *	(*) requires root permission to execute.
  *
@@ -990,31 +745,14 @@ int main (int argc, char **argv)
 	 */
 
 #ifdef SHADOWPWD
-
 #define FLAGS "adlqr:uSekn:x:i:w:"
-#ifdef HAVE_TCFS
-#undef FLAGS
-#define FLAGS "adlqr:uSekn:x:i:w:t"
-#endif
-
 #else
-
-#define FLAGS "adlqr:uS"
-#ifdef HAVE_TCFS
-#undef FLAGS
-#define FLAGS "adlqr:uSt"
-#endif
-
+# define FLAGS "adlqr:uS"
 #endif
 
 	while ((flag = getopt (argc, argv, FLAGS)) != EOF) {
 #undef FLAGS
 		switch (flag) {
-#ifdef	HAVE_TCFS
-		case 't':
-			tcfs_force = 1;
-			break;
-#endif
 #ifdef	SHADOWPWD
 		case 'x':
 			age_max = getnumber (optarg);
@@ -1204,21 +942,7 @@ int main (int argc, char **argv)
 	 */
 
 	if (!anyflag) {
-#ifdef AUTH_METHODS
-		if (strchr (cp, '@')) {
-			if (pw_auth (cp, name, PW_CHANGE, (char *) 0)) {
-				SYSLOG ((LOG_INFO,
-					 "password for `%s' changed by `%s'",
-					 name));
-				closelog ();
-				exit (E_NOPERM);
-			} else if (!uses_default_method (cp)) {
-				do_update_age = 1;
-				goto done;
-			}
-		} else
-#endif
-			STRFCPY (crypt_passwd, cp);
+		STRFCPY (crypt_passwd, cp);
 
 		/*
 		 * See if the user is permitted to change the password. 
@@ -1231,10 +955,6 @@ int main (int argc, char **argv)
 		check_password (pw);
 #endif
 
-#ifdef HAVE_TCFS
-		tcfspword =
-		    (struct tcfspwd *) calloc (1, sizeof (struct tcfspwd));
-#endif
 		/*
 		 * Let the user know whose password is being changed.
 		 */
@@ -1251,9 +971,6 @@ int main (int argc, char **argv)
 		do_update_pwd = 1;
 		do_update_age = 1;
 	}
-#ifdef AUTH_METHODS
-      done:
-#endif
 #endif				/* !USE_PAM */
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
@@ -1286,14 +1003,17 @@ int main (int argc, char **argv)
 #endif
 		update_noshadow ();
 
-#ifdef HAVE_TCFS
-	if (tcfs_locate (name) && tcfs_file_present ())
-		update_tcfs ();
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
+#ifdef SHADOWPWD
+	nscd_flush_cache ("shadow");
 #endif
+
 	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name,
 		 myname));
 	closelog ();
 	if (!qflg)
 		printf (_("Password changed.\n"));
 	exit (E_SUCCESS);
- /*NOTREACHED*/}
+	/* NOT REACHED */
+}

@@ -32,14 +32,12 @@
 #ifdef SHADOWPWD
 
 #include "rcsid.h"
-RCSID("$Id: pwd2spwd.c,v 1.3 1997/12/07 23:27:07 marekm Exp $")
-
+RCSID ("$Id: pwd2spwd.c,v 1.5 2003/05/03 16:14:34 kloczek Exp $")
 #include <sys/types.h>
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-
-extern	time_t	time ();
+extern time_t time ();
 
 /*
  * pwd_to_spwd - create entries for new spwd structure
@@ -48,8 +46,7 @@ extern	time_t	time ();
  *	information in the pointed-to (struct passwd).
  */
 
-struct spwd *
-pwd_to_spwd(const struct passwd *pw)
+struct spwd *pwd_to_spwd (const struct passwd *pw)
 {
 	static struct spwd sp;
 
@@ -60,33 +57,13 @@ pwd_to_spwd(const struct passwd *pw)
 	sp.sp_namp = pw->pw_name;
 	sp.sp_pwdp = pw->pw_passwd;
 
-#ifdef ATT_AGE
-	/*
-	 * AT&T-style password aging maps the sp_min, sp_max, and
-	 * sp_lstchg information from the pw_age field, which appears
-	 * after the encrypted password.
-	 */
-	if (pw->pw_age[0]) {
-		sp.sp_max = (c64i(pw->pw_age[0]) * WEEK) / SCALE;
-
-		if (pw->pw_age[1])
-			sp.sp_min = (c64i(pw->pw_age[1]) * WEEK) / SCALE;
-		else
-			sp.sp_min = (10000L * DAY) / SCALE;
-
-		if (pw->pw_age[1] && pw->pw_age[2])
-			sp.sp_lstchg = (a64l(pw->pw_age + 2) * WEEK) / SCALE;
-		else
-			sp.sp_lstchg = time((time_t *) 0) / SCALE;
-	} else
-#endif
 	{
 		/*
 		 * Defaults used if there is no pw_age information.
 		 */
 		sp.sp_min = 0;
 		sp.sp_max = (10000L * DAY) / SCALE;
-		sp.sp_lstchg = time((time_t *) 0) / SCALE;
+		sp.sp_lstchg = time ((time_t *) 0) / SCALE;
 	}
 
 	/*
@@ -100,4 +77,4 @@ pwd_to_spwd(const struct passwd *pw)
 
 	return &sp;
 }
-#endif  /* SHADOWPWD */
+#endif				/* SHADOWPWD */

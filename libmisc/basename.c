@@ -8,15 +8,12 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: basename.c,v 1.2 1997/12/07 23:27:00 marekm Exp $")
-
+RCSID ("$Id: basename.c,v 1.3 2003/04/22 10:59:21 kloczek Exp $")
 #include "defines.h"
 #include "prototypes.h"
-
-char *
-Basename(char *str)
+char *Basename (char *str)
 {
-	char *cp = strrchr(str, '/');
+	char *cp = strrchr (str, '/');
 
-	return cp ? cp+1 : str;
+	return cp ? cp + 1 : str;
 }

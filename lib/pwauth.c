@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: pwauth.c,v 1.11 2000/08/26 18:27:17 marekm Exp $")
+RCSID("$Id: pwauth.c,v 1.14 2003/05/12 04:58:56 kloczek Exp $")
 
 #include <sys/types.h>
 #include <signal.h>
@@ -59,42 +59,19 @@ static const char *PROMPT = gettext_noop("%s's Password: ");
 extern char *getpass();
 extern char *getpass_with_echo();
 
-#ifdef AUTH_METHODS
-/*
- * Look-up table for bound-in methods.  Put the name that the
- * method is known by in the password field as "name" and a
- * pointer to the function
- */
-
-struct	method	{
-	char	*name;
-	int	(*func)(const char *, int, const char *);
-};
-
-#ifdef PAD_AUTH
-int pad_auth();
-#endif
-static struct method methods[] = {
-#ifdef PAD_AUTH
-	{ "pad", pad_auth },
-#endif
-	{ "",	0 }
-};
-#endif  /* AUTH_METHODS */
-
 int wipe_clear_pass = 1;
 char *clear_pass = NULL;
 
 /*
- * _old_auth - perform getpass/crypt authentication
+ * pw_auth - perform getpass/crypt authentication
  *
- *	_old_auth gets the user's cleartext password and encrypts it
- *	using the salt in the encrypted password.  The results are
+ *	pw_auth gets the user's cleartext password and encrypts it
+ *	using the salt in the encrypted password. The results are
  *	compared.
  */
 
-static int
-_old_auth(const char *cipher, const char *user, int reason, const char *input)
+int
+pw_auth(const char *cipher, const char *user, int reason, const char *input)
 {
 	char	prompt[1024];
 	char	*clear = NULL;
@@ -283,12 +260,8 @@ _old_auth(const char *cipher, const char *user, int reason, const char *input)
 	if (retval && use_skey) {
 		int passcheck = -1;
 
-#if 0  /* some skey libs don't have skey_passcheck.  --marekm */
-		passcheck = skey_passcheck(user, input);
-#else
 		if (skeyverify(&skey, input) == 0)
 			passcheck = skey.n;
-#endif /* if 0 */
 		if (passcheck > 0)
 			retval = 0;
 	}
@@ -312,267 +285,4 @@ _old_auth(const char *cipher, const char *user, int reason, const char *input)
 	if (wipe_clear_pass && clear && *clear)
 		strzero(clear);
 	return retval;
-}
-
-#ifdef AUTH_METHODS
-/*
- * _pw_auth - perform alternate password authentication
- *
- *	pw_auth executes the alternate password authentication method
- *	described in the user's password entry.  _pw_auth does the real
- *	work, pw_auth splits the authentication string into individual
- *	command names.
- */
-
-static int
-_pw_auth(const char *command, const char *user, int reason, const char *input)
-{
-	RETSIGTYPE (*sigint)();
-	RETSIGTYPE (*sigquit)();
-#ifdef	SIGTSTP
-	RETSIGTYPE	(*sigtstp)();
-#endif
-	int	pid;
-	int	status;
-	int	i;
-	char	* const argv[5];
-	int	argc = 0;
-	int	pipes[2];
-	char	*empty_env = NULL;
-	int	use_pipe;
-
-	/*
-	 * Start with a quick sanity check.  ALL command names must
-	 * be fully-qualified path names.
-	 */
-
-	if (command[0] != '/')
-		return -1;
-
-	/*
-	 * Set the keyboard signals to be ignored.  When the user kills
-	 * the child we don't want the parent dying as well.
-	 */
-
-	sigint = signal (SIGINT, SIG_IGN);
-	sigquit = signal (SIGQUIT, SIG_IGN);
-#ifdef	SIGTSTP
-	sigtstp = signal (SIGTSTP, SIG_IGN);
-#endif
-
-	/* 
-	 * FTP and REXEC reasons don't give the program direct access
-	 * to the user.  This means that the program can only get input
-	 * from this function.  So we set up a pipe for that purpose.
-	 */
-
-	use_pipe = (reason == PW_FTP || reason == PW_REXEC);
-	if (use_pipe)
-		if (pipe (pipes))
-			return -1;
-
-	/*
-	 * The program will be forked off with the parent process waiting
-	 * on the child to tell it how successful it was.
-	 */
-
-	switch (pid = fork ()) {
-
-		/*
-		 * The fork() failed completely.  Clean up as needed and
-		 * return to the caller.
-		 */
-		case -1:
-			if (use_pipe) {
-				close (pipes[0]);
-				close (pipes[1]);
-			}
-			return -1;
-		case 0:
-
-			/*
-			 * Let the child catch the SIGINT and SIGQUIT
-			 * signals.  The parent, however, will continue
-			 * to ignore them.
-			 */
-			signal (SIGINT, SIG_DFL);
-			signal (SIGQUIT, SIG_DFL);
-
-			/*
-			 * Set up the command line.  The first argument is
-			 * the name of the command being executed.  The
-			 * second is the command line option for the reason,
-			 * and the third is the user name.
-			 */
-			argv[argc++] = command;
-			switch (reason) {
-				case PW_SU:	argv[argc++] = "-s"; break;
-				case PW_LOGIN:	argv[argc++] = "-l"; break;
-				case PW_ADD:	argv[argc++] = "-a"; break;
-				case PW_CHANGE:	argv[argc++] = "-c"; break;
-				case PW_DELETE:	argv[argc++] = "-d"; break;
-				case PW_TELNET:	argv[argc++] = "-t"; break;
-				case PW_RLOGIN:	argv[argc++] = "-r"; break;
-				case PW_FTP:	argv[argc++] = "-f"; break;
-				case PW_REXEC:	argv[argc++] = "-x"; break;
-			}
-			if (reason == PW_CHANGE && input)
-				argv[argc++] = input;
-
-			argv[argc++] = user;
-			argv[argc] = (char *) 0;
-
-			/*
-			 * The FTP and REXEC reasons use a pipe to communicate
-			 * with the parent.  The other standard I/O descriptors
-			 * are closed and re-opened as /dev/null.
-			 */
-			if (use_pipe) {
-				close (0);
-				close (1);
-				close (2);
-
-				if (dup (pipes[0]) != 0)
-					exit (1);
-
-				close (pipes[0]);
-				close (pipes[1]);
-
-				if (open ("/dev/null", O_WRONLY) != 1)
-					exit (1);
-
-				if (open ("/dev/null", O_WRONLY) != 2)
-					exit (1);
-			}
-
-			/*
-			 * Now we execute the command directly.
-			 * Do it with empty environment for safety.  --marekm
-			 */
-			execve(command, argv, &empty_env);
-			_exit((errno == ENOENT) ? 127 : 126);
-			/*NOTREACHED*/
-		default:
-			/* 
-			 * FTP and REXEC cause a single line of text to be
-			 * sent to the child over a pipe that was set up
-			 * earlier.
-			 */
-			if (use_pipe) {
-				close (pipes[0]);
-
-				if (input)
-					write (pipes[1], input, strlen (input));
-
-				write (pipes[1], "\n", 1);
-				close (pipes[1]);
-			}
-
-			/*
-			 * Wait on the child to die.  When it does you will
-			 * get the exit status and use that to determine if
-			 * the authentication program was successful.
-			 */
-			while ((i = wait (&status)) != pid && i != -1)
-				;
-
-			/*
-			 * Re-set the signals to their earlier values.
-			 */
-			signal (SIGINT, sigint);
-			signal (SIGQUIT, sigquit);
-#ifdef	SIGTSTP
-			signal (SIGTSTP, sigtstp);
-#endif
-
-			/*
-			 * Make sure we found the right process!
-			 */
-			if (i == -1)
-				return -1;
-
-			if (status == 0)
-				return 0;
-			else
-				return -1;
-	}
-	/*NOTREACHED*/
-}
-
-/*
- * _builtin_auth - lookup routine in table and execute
- */
-
-static int
-_builtin_auth(const char *command, const char *user, int reason, const char *input)
-{
-	int	i;
-
-	/*
-	 * Scan the table, looking for a match.  If we fall off
-	 * the end, it must mean that this method isn't supported,
-	 * so we fail the authentication.
-	 */
-
-	for (i = 0;methods[i].name[0];i++) {
-		if (! strcmp (command, methods[i].name))
-			break;
-	}
-	if (methods[i].name[0] == '\0')
-		return -1;
-
-	/*
-	 * Call the pointed to function with the other three
-	 * arguments.
-	 */
-
-	return (methods[i].func) (user, reason, input);
-}
-#endif  /* AUTH_METHODS */
-
-/*
- * This function does the real work.  It splits the list of program names
- * up into individual programs and executes them one at a time.
- */
-
-int
-pw_auth(const char *command, const char *user, int reason, const char *input)
-{
-#ifdef AUTH_METHODS
-	char	buf[256];
-	char	*cmd, *end;
-	int	rc;
-
-	/* 
-	 * Quick little sanity check ...
-	 */
-
-	if (strlen (command) >= sizeof buf)
-		return -1;
-
-	strcpy(buf, command); /* safe (because of the above check) --marekm */
-
-	/*
-	 * Find each command and make sure it is NUL-terminated.  Then
-	 * invoke _pw_auth to actually run the program.  The first
-	 * failing program ends the whole mess.
-	 */
-
-	for (cmd = buf;cmd;cmd = end) {
-		if ((end = strchr (cmd, ';')))
-			*end++ = '\0';
-
-		if (cmd[0] != '@')
-			rc = _old_auth (cmd, user, reason, input);
-		else if (cmd[1] == '/')
-			rc = _pw_auth (cmd + 1, user, reason, input);
-		else
-			rc = _builtin_auth (cmd + 1, user, reason, input);
-		if (rc)
-			return -1;
-	}
-	return 0;
-#else
-	return _old_auth(command, user, reason, input);
-#endif
 }

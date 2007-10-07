@@ -30,15 +30,10 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: sulogin.c,v 1.13 2002/01/05 15:41:44 kloczek Exp $")
+RCSID (PKG_VER "$Id: sulogin.c,v 1.17 2003/05/12 04:39:17 kloczek Exp $")
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-#if HAVE_UTMPX_H
-#include <utmpx.h>
-#else
-#include <utmp.h>
-#endif
 #include <signal.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -48,15 +43,6 @@ static char name[BUFSIZ];
 static char pass[BUFSIZ];
 
 static struct passwd pwent;
-
-#if 0
-#if HAVE_UTMPX_H
-static struct utmpx utent;
-#else
-static struct utmp utent;
-#endif
-#endif
-
 
 extern char **newenvp;
 extern size_t newenvc;
@@ -209,20 +195,6 @@ static RETSIGTYPE catch (int sig)
 			STRFCPY (pass, cp);
 			strzero (cp);
 		}
-#ifdef AUTH_METHODS
-		if (pwent.pw_name && pwent.pw_passwd[0] == '@') {
-			if (pw_auth
-			    (pwent.pw_passwd + 1, name, PW_LOGIN,
-			     (char *) 0)) {
-#ifdef	USE_SYSLOG
-				syslog (LOG_WARN,
-					"Incorrect root authentication");
-#endif
-				continue;
-			}
-			goto auth_done;
-		}
-#endif
 		if (valid (pass, &pwent))	/* check encrypted passwords ... */
 			break;	/* ... encrypted passwords matched */
 
@@ -232,9 +204,6 @@ static RETSIGTYPE catch (int sig)
 		sleep (2);
 		puts (_("Login incorrect"));
 	}
-#ifdef AUTH_METHODS
-      auth_done:
-#endif
 	strzero (pass);
 	alarm (0);
 	signal (SIGALRM, SIG_DFL);
@@ -243,26 +212,6 @@ static RETSIGTYPE catch (int sig)
 	puts (_("Entering System Maintenance Mode\n"));
 #ifdef	USE_SYSLOG
 	syslog (LOG_INFO, "System Maintenance Mode\n");
-#endif
-
-#if 0				/* do we need all this? we are logging in as root anyway...  --marekm */
-	/*
-	 * Normally there would be a utmp entry for login to mung on to get
-	 * the tty name, date, etc. from. We don't need all that stuff
-	 * because we won't update the utmp or wtmp files. BUT!, we do need
-	 * the tty name so we can set the permissions and ownership.
-	 */
-
-	if ((cp = ttyname (0))) {	/* found entry in /dev/ */
-		if (strncmp (cp, "/dev/", 5) == 0)
-			cp += 5;
-
-		strncpy (utent.ut_line, cp, sizeof utent.ut_line);
-	}
-	if (getenv ("IFS"))	/* don't export user IFS ... */
-		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
-
-	setup (&pwent, 0);	/* set UID, GID, HOME, etc ... */
 #endif
 
 #ifdef	USE_SYSLOG

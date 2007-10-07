@@ -30,28 +30,22 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID("$Id: chowntty.c,v 1.9 2001/06/23 11:09:02 marekm Exp $")
-
+RCSID ("$Id: chowntty.c,v 1.10 2003/04/22 10:59:21 kloczek Exp $")
 #include <sys/types.h>
 #include <sys/stat.h>
-
 #include <stdio.h>
 #include <errno.h>
 #include <grp.h>
-
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
-
 /*
  * is_my_tty -- determine if "tty" is the same as TTY stdin is using
  */
-
-static int
-is_my_tty(const char *tty)
+static int is_my_tty (const char *tty)
 {
-	struct	stat	by_name, by_fd;
+	struct stat by_name, by_fd;
 
 	if (stat (tty, &by_name) || fstat (0, &by_fd))
 		return 0;
@@ -67,12 +61,11 @@ is_my_tty(const char *tty)
  *	with TTYPERM modes
  */
 
-void
-chown_tty(const char *tty, const struct passwd *info)
+void chown_tty (const char *tty, const struct passwd *info)
 {
 	char buf[200], full_tty[200];
-	char	*group;		/* TTY group name or number */
-	struct	group	*grent;
+	char *group;		/* TTY group name or number */
+	struct group *grent;
 	gid_t gid;
 
 	/*
@@ -80,7 +73,7 @@ chown_tty(const char *tty, const struct passwd *info)
 	 * ID.  Otherwise, use the user's primary group ID.
 	 */
 
-	if (! (group = getdef_str ("TTYGROUP")))
+	if (!(group = getdef_str ("TTYGROUP")))
 		gid = info->pw_gid;
 	else if (group[0] >= '0' && group[0] <= '9')
 		gid = atoi (group);
@@ -95,31 +88,32 @@ chown_tty(const char *tty, const struct passwd *info)
 	 */
 
 	if (*tty != '/') {
-		snprintf(full_tty, sizeof full_tty, "/dev/%s", tty);
+		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
 		tty = full_tty;
 	}
 
-	if (! is_my_tty (tty)) {
-		SYSLOG((LOG_WARN, "unable to determine TTY name, got %s\n",
-			tty));
-		closelog();
+	if (!is_my_tty (tty)) {
+		SYSLOG ((LOG_WARN,
+			 "unable to determine TTY name, got %s\n", tty));
+		closelog ();
 		exit (1);
 	}
-	
-	if (chown(tty, info->pw_uid, gid) ||
-			chmod(tty, getdef_num("TTYPERM", 0600))) {
+
+	if (chown (tty, info->pw_uid, gid) ||
+	    chmod (tty, getdef_num ("TTYPERM", 0600))) {
 		int err = errno;
 
-		snprintf(buf, sizeof buf, _("Unable to change tty %s"), tty);
-		perror(buf);
-		SYSLOG((LOG_WARN, "unable to change tty `%s' for user `%s'\n",
-			tty, info->pw_name));
-		closelog();
+		snprintf (buf, sizeof buf, _("Unable to change tty %s"),
+			  tty);
+		perror (buf);
+		SYSLOG ((LOG_WARN,
+			 "unable to change tty `%s' for user `%s'\n", tty,
+			 info->pw_name));
+		closelog ();
 
 		if (!(err == EROFS && info->pw_uid == 0))
-			exit(1);
+			exit (1);
 	}
-
 #ifdef __linux__
 	/*
 	 * Please don't add code to chown /dev/vcs* to the user logging in -

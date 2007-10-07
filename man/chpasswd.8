@@ -1,4 +1,4 @@
-.\"$Id: chpasswd.8,v 1.10 2002/03/08 04:39:11 kloczek Exp $
+.\"$Id: chpasswd.8,v 1.11 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1991, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -31,28 +31,23 @@
 .SH SYNOPSIS
 \fBchpasswd\fR [\fB-e\fR]
 .SH DESCRIPTION
-\fBchpasswd\fR reads a file of user name and password pairs
-from standard input and uses this information
-to update a group of existing users. Without the -e switch, the
-passwords are expected to be cleartext. With the -e switch, the
-passwords are expected to be in encrypted form.
-Each line is of the format
+\fBchpasswd\fR reads a file of user name and password pairs from standard
+input and uses this information to update a group of existing users. Without
+the \fB-e\fR switch, the passwords are expected to be cleartext. With the
+\fB-e\fR switch, the passwords are expected to be in encrypted form. Each
+line is of the format:
 .sp 1
 	  \fIuser_name\fR:\fIpassword\fR
 .sp 1
-The named user must exist.
-The supplied password will be encrypted as necessary, and the password age
-updated, if present.
+The named user must exist. The supplied password will be encrypted as
+necessary, and the password age updated, if present.
+
 .PP
-This command is intended to be used in a large system environment where
-many accounts are created at a single time.
+This command is intended to be used in a large system environment where many
+accounts are created at a single time.
 .SH CAVEATS
-.\" The \fBmkpasswd\fR command must be executed afterwards to update the
-.\" DBM password files.
 The input file must be protected if it contains unencrypted passwords.
-.\" This command may be discarded in favor of the newusers(8) command.
 .SH SEE ALSO
-.\" mkpasswd(8), passwd(1), useradd(1)
 .BR passwd (1),
 .BR newusers (8),
 .BR useradd (8)

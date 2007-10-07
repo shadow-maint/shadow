@@ -30,7 +30,7 @@
 #include <config.h>
 
 #include "rcsid.h"
-RCSID (PKG_VER "$Id: chpasswd.c,v 1.14 2002/01/05 15:41:43 kloczek Exp $")
+RCSID (PKG_VER "$Id: chpasswd.c,v 1.18 2003/06/19 18:11:01 kloczek Exp $")
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
@@ -40,6 +40,7 @@ RCSID (PKG_VER "$Id: chpasswd.c,v 1.14 2002/01/05 15:41:43 kloczek Exp $")
 #ifdef	SHADOWPWD
 #include "shadowio.h"
 #endif
+#include "nscd.h"
 #ifdef USE_PAM
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
@@ -63,7 +64,7 @@ static void usage (void);
 
 static void usage (void)
 {
-	fprintf (stderr, _("usage: %s [-e]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [-e]\n"), Prog);
 	exit (1);
 }
 
@@ -87,10 +88,6 @@ int main (int argc, char **argv)
 #endif
 	const struct passwd *pw;
 	struct passwd newpw;
-
-#ifdef ATT_AGE
-	char newage[5];
-#endif
 	int errors = 0;
 	int line = 0;
 	long now = time ((long *) 0) / (24L * 3600L);
@@ -262,13 +259,6 @@ int main (int argc, char **argv)
 		{
 			newpw = *pw;
 			newpw.pw_passwd = cp;
-#ifdef	ATT_AGE
-			if (newpw.pw_age[0]) {
-				strcpy (newage, newpw.pw_age);
-				strcpy (newage + 2, l64a (now / 7));
-				newpw.pw_age = newage;
-			}
-#endif
 		}
 
 		/* 
@@ -329,6 +319,9 @@ int main (int argc, char **argv)
 			 Prog);
 		exit (1);
 	}
+
+	nscd_flush_cache ("passwd");
+
 	pw_unlock ();
 
 #ifdef USE_PAM

@@ -1,4 +1,4 @@
-.\"$Id: passwd.5,v 1.8 2002/03/08 04:39:11 kloczek Exp $
+.\"$Id: passwd.5,v 1.11 2003/05/01 18:17:39 kloczek Exp $
 .\" Copyright 1989 - 1990, Julianne Frances Haugh
 .\" All rights reserved.
 .\"
@@ -29,9 +29,8 @@
 .SH NAME
 passwd \- The password file
 .SH DESCRIPTION
-.I passwd
-contains various pieces of information for each user account.
-Included is
+\fI\etc\passwd\fR contains various pieces of information for each user
+account. Included is:
 .IP "" .5i
 Login name
 .IP "" .5i
@@ -47,33 +46,16 @@ User home directory
 .IP "" .5i
 User command interpreter
 .PP
-The password field may not be filled if shadow passwords
-have been enabled.
-If shadow passwords are being used, the encrypted password will
-be found in \fI/etc/shadow\fR.
-The encryped password consists of 13 characters from the
-64 character alphabet
-a thru z, A thru Z, 0 thru 9, \. and /.
-Refer to \fBcrypt\fR(3) for details on how this string is
-interpreted.
-.PP
-An optional password age string may follow the encrypted
-password, separated by a comma, from the same alphabet
-as the password itself.
-The first character gives the number of weeks during which the
-password is valid.
-The second character gives the number of weeks which must pass
-before the user is permitted to change the password.
-The last two characters give the week since Jan 1970 when the
-password was last changed.
-When the number of weeks during which the password is valid
-have passed, the user will be required to provide a new
-password.
+The password field may not be filled if shadow passwords have been enabled.
+If shadow passwords are being used, the encrypted password will be found in
+\fI/etc/shadow\fR. The encryped password consists of 13 characters from the
+64 character alphabet a thru z, A thru Z, 0 thru 9, \. and /. Refer to
+\fBcrypt\fR(3) for details on how this string is interpreted.
 .PP
 The comment field is used by various system utilities, such as
-\fBfinger\fR(1).
-Three additional values may be present in the comment field.
-They are
+\fBfinger\fR(1). Three additional values may be present in the comment
+field.
+They are:
 .IP "" .5i
 pri= \- set initial value of nice
 .IP "" .5i
@@ -81,22 +63,20 @@ umask= \- set initial value of umask
 .IP "" .5i
 ulimit= \- set initial value of ulimit
 .PP
-These fields are separated from each other and from any other
-comment field by a comma.
+These fields are separated from each other and from any other comment field
+by a comma.
 .PP
-The home directory field provides the name of the initial
-working directory.
+The home directory field provides the name of the initial working directory.
 \fBLogin\fR uses this information to set the value of
 the \fBHOME\fR environmental variable.
 .PP
-The command interpreter field provides the name of the user's
-command language interpreter, or the name of the initial program
-to execute.
+The command interpreter field provides the name of the user's command
+language interpreter, or the name of the initial program to execute.
 \fBLogin\fR uses this information to set the value of the
 \fBSHELL\fR environmental variable.
 If this field is empty, it defaults to the value \fB/bin/sh\fR.
 .SH FILES
-/etc/passwd \- user account information
+\fI/etc/passwd\fR \	- user account information
 .SH SEE ALSO
 .BR login (1),
 .BR passwd (1),

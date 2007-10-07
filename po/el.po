@@ -5,1007 +5,905 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Shadow 980726\n"
-"POT-Creation-Date: 2002-03-12 12:16+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-01-14 07:41+0100\n"
+"PO-Revision-Date: 1998-12-28 20:35:31+0100\n"
 "Last-Translator: Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>\n"
 "Language-Team: Hellenic <el@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-7\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: libmisc/addgrps.c:60
+#: libmisc/addgrps.c:56
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "Προειδοποίηση: άγνωστη ομάδα %s\n"
+msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„Ξ· ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
-#: libmisc/addgrps.c:71
+#: libmisc/addgrps.c:68
 msgid "Warning: too many groups\n"
-msgstr "Προειδοποίηση: Πολλές ομάδες\n"
+msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ ΞΏΞ»Ξ»Ξ­Ο‚ ΞΏΞΌΞ¬Ξ΄ΞµΟ‚\n"
 
-#: libmisc/age.c:77
+#: libmisc/age.c:72
 msgid "Your password has expired."
-msgstr "Το συνθηματικό σας έχει λήξει."
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ ΟƒΞ±Ο‚ Ξ­Ο‡ΞµΞΉ Ξ»Ξ®ΞΎΞµΞΉ."
 
-#: libmisc/age.c:80
+#: libmisc/age.c:75
 msgid "Your password is inactive."
-msgstr "Το συνθηματικό σας είναι ανενεργό."
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ ΟƒΞ±Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο."
 
-#: libmisc/age.c:83
+#: libmisc/age.c:78
 msgid "Your login has expired."
-msgstr "Ο κωδικός εισόδου σας έχει λήξει."
+msgstr "Ξ ΞΊΟ‰Ξ΄ΞΉΞΊΟΟ‚ ΞµΞΉΟƒΟΞ΄ΞΏΟ… ΟƒΞ±Ο‚ Ξ­Ο‡ΞµΞΉ Ξ»Ξ®ΞΎΞµΞΉ."
 
-#: libmisc/age.c:96
+#: libmisc/age.c:90
 msgid "  Contact the system administrator.\n"
-msgstr "  Επικοινωνήστε με τον διαχειριστή του συστήματος.\n"
+msgstr "  Ξ•Ο€ΞΉΞΊΞΏΞΉΞ½Ο‰Ξ½Ξ®ΟƒΟ„Ξµ ΞΌΞµ Ο„ΞΏΞ½ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ® Ο„ΞΏΟ… ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚.\n"
 
-#: libmisc/age.c:99
+#: libmisc/age.c:93
 msgid "  Choose a new password.\n"
-msgstr "   Επιλέξτε ένα νέο συνθηματικό.\n"
+msgstr "   Ξ•Ο€ΞΉΞ»Ξ­ΞΎΟ„Ξµ Ξ­Ξ½Ξ± Ξ½Ξ­ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ.\n"
 
-#: libmisc/age.c:176
+#: libmisc/age.c:168
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "Το συνθηματικό σας θα λήξει σε %ld μέρες.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ ΟƒΞ±Ο‚ ΞΈΞ± Ξ»Ξ®ΞΎΞµΞΉ ΟƒΞµ %ld ΞΌΞ­ΟΞµΟ‚.\n"
 
-#: libmisc/age.c:178
+#: libmisc/age.c:172
 msgid "Your password will expire tomorrow.\n"
-msgstr "Το συνθηματικό σας θα λήξει αύριο.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ ΟƒΞ±Ο‚ ΞΈΞ± Ξ»Ξ®ΞΎΞµΞΉ Ξ±ΟΟΞΉΞΏ.\n"
 
-#: libmisc/age.c:180
+#: libmisc/age.c:174
 msgid "Your password will expire today.\n"
-msgstr "Το συνθηματικό σας θα λήξει σήμερα.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ ΟƒΞ±Ο‚ ΞΈΞ± Ξ»Ξ®ΞΎΞµΞΉ ΟƒΞ®ΞΌΞµΟΞ±.\n"
 
-#: libmisc/chowntty.c:113
+#: libmisc/chowntty.c:106
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "Αδυναμία αλλαγής tty %s"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ tty %s"
 
-#: libmisc/env.c:160
+#: libmisc/env.c:155
 msgid "Environment overflow\n"
-msgstr "Υπερχείλιση περιβάλλοντος\n"
+msgstr "Ξ¥Ο€ΞµΟΟ‡ΞµΞ―Ξ»ΞΉΟƒΞ· Ο€ΞµΟΞΉΞ²Ξ¬Ξ»Ξ»ΞΏΞ½Ο„ΞΏΟ‚\n"
 
-#: libmisc/env.c:200
+#: libmisc/env.c:195
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Δεν μπορείτε να αλλάξετε το $%s\n"
+msgstr "Ξ”ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± Ξ±Ξ»Ξ»Ξ¬ΞΎΞµΟ„Ξµ Ο„ΞΏ $%s\n"
 
-#: libmisc/failure.c:238
+#: libmisc/failure.c:230
 #, c-format
 msgid "%d %s since last login.  Last was %s on %s.\n"
-msgstr "%d %s από την τελευταία είσοδο. Η τελευταία ήταν στις %s στο %s.\n"
+msgstr "%d %s Ξ±Ο€Ο Ο„Ξ·Ξ½ Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± ΞµΞ―ΟƒΞΏΞ΄ΞΏ. Ξ— Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± Ξ®Ο„Ξ±Ξ½ ΟƒΟ„ΞΉΟ‚ %s ΟƒΟ„ΞΏ %s.\n"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failures"
-msgstr "αποτυχίες"
+msgstr "Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―ΞµΟ‚"
 
-#: libmisc/failure.c:239
+#: libmisc/failure.c:232
 msgid "failure"
-msgstr "αποτυχία"
+msgstr "Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ±"
 
-#: libmisc/limits.c:397
+#: libmisc/limits.c:396
 msgid "Too many logins.\n"
-msgstr "Πολλές είσοδοι στο σύστημα.\n"
+msgstr "Ξ ΞΏΞ»Ξ»Ξ­Ο‚ ΞµΞ―ΟƒΞΏΞ΄ΞΏΞΉ ΟƒΟ„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ±.\n"
 
-#: libmisc/login_desrpc.c:63
+#: libmisc/login_desrpc.c:59
 #, c-format
 msgid "Password does not decrypt secret key for %s.\n"
-msgstr "Το συνθηματικό δεν αποκωδικοποιεί το μυστικό κλειδί για το(ν) %s.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ΄ΞµΞ½ Ξ±Ο€ΞΏΞΊΟ‰Ξ΄ΞΉΞΊΞΏΟ€ΞΏΞΉΞµΞ― Ο„ΞΏ ΞΌΟ…ΟƒΟ„ΞΉΞΊΟ ΞΊΞ»ΞµΞΉΞ΄Ξ― Ξ³ΞΉΞ± Ο„ΞΏ(Ξ½) %s.\n"
 
-#: libmisc/login_desrpc.c:69
+#: libmisc/login_desrpc.c:66
 #, c-format
 msgid "Could not set %s's secret key: is the keyserv daemon running?\n"
 msgstr ""
-"Δεν είναι δυνατόν να τεθεί το μυστικό κλειδί του %s: Εκτελείται ο\n"
-"διακομιστής κλειδιών;\n"
+"Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ Ξ½Ξ± Ο„ΞµΞΈΞµΞ― Ο„ΞΏ ΞΌΟ…ΟƒΟ„ΞΉΞΊΟ ΞΊΞ»ΞµΞΉΞ΄Ξ― Ο„ΞΏΟ… %s: Ξ•ΞΊΟ„ΞµΞ»ΞµΞ―Ο„Ξ±ΞΉ ΞΏ\n"
+"Ξ΄ΞΉΞ±ΞΊΞΏΞΌΞΉΟƒΟ„Ξ®Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½;\n"
 
-#: libmisc/mail.c:62 libmisc/mail.c:77
+#: libmisc/mail.c:61 libmisc/mail.c:76
 msgid "You have new mail."
-msgstr "Έχετε νέα γράμματα."
+msgstr "ΞΟ‡ΞµΟ„Ξµ Ξ½Ξ­Ξ± Ξ³ΟΞ¬ΞΌΞΌΞ±Ο„Ξ±."
 
-#: libmisc/mail.c:73
+#: libmisc/mail.c:72
 msgid "No mail."
-msgstr "Κανένα γράμμα."
+msgstr "ΞΞ±Ξ½Ξ­Ξ½Ξ± Ξ³ΟΞ¬ΞΌΞΌΞ±."
 
-#: libmisc/mail.c:75
+#: libmisc/mail.c:74
 msgid "You have mail."
-msgstr "Έχετε γράμματα."
+msgstr "ΞΟ‡ΞµΟ„Ξµ Ξ³ΟΞ¬ΞΌΞΌΞ±Ο„Ξ±."
 
-#: libmisc/obscure.c:281 src/passwd.c:244
+#: libmisc/obscure.c:271 src/passwd.c:183
 #, c-format
 msgid "Bad password: %s.  "
-msgstr "Κακό συνθηματικό: %s.  "
+msgstr "ΞΞ±ΞΊΟ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: %s.  "
 
-#: libmisc/pam_pass.c:42
+#: libmisc/pam_pass.c:38
 #, c-format
 msgid "passwd: pam_start() failed, error %d\n"
-msgstr "συνθηματικό: pam_start() απέτυχε, σφάλμα %d\n"
+msgstr "ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: pam_start() Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ, ΟƒΟ†Ξ¬Ξ»ΞΌΞ± %d\n"
 
-#: libmisc/pam_pass.c:49
+#: libmisc/pam_pass.c:44
 #, c-format
 msgid "passwd: %s\n"
-msgstr "συνθηματικό: %s\n"
+msgstr "ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: %s\n"
 
-#: libmisc/setupenv.c:211
+#: libmisc/pam_pass.c:50
+msgid "passwd: password updated successfully\n"
+msgstr ""
+
+#: libmisc/setupenv.c:208
 #, c-format
 msgid "Unable to cd to \"%s\"\n"
-msgstr "Αδυναμία αλλαγής καταλόγου στον \"%s\"\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… ΟƒΟ„ΞΏΞ½ \"%s\"\n"
 
-#: libmisc/setupenv.c:219
+#: libmisc/setupenv.c:216
 msgid "No directory, logging in with HOME=/"
-msgstr "Χωρίς κατάλογο, εισαγωγή με ΜΗΤΡΙΚΟ_ΚΑΤΑΛΟΓΟ=/"
+msgstr "Ξ§Ο‰ΟΞ―Ο‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏ, ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ® ΞΌΞµ ΞΞ—Ξ¤Ξ΅Ξ™ΞΞ_ΞΞ‘Ξ¤Ξ‘Ξ›ΞΞ“Ξ=/"
 
-#: libmisc/shell.c:78
-#, c-format
-msgid "Executing shell %s\n"
-msgstr "Εκτέλεση φλοιού %s\n"
-
-#.
-#. * Obviously something is really wrong - I can't figure out
-#. * how to execute this stupid shell, so I might as well give
-#. * up in disgust ...
-#.
-#: libmisc/shell.c:122
+#: libmisc/shell.c:119
 #, c-format
 msgid "Cannot execute %s"
-msgstr "Αδυναμία εκτέλεσης %s"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·Ο‚ %s"
 
-#: libmisc/sub.c:61
+#: libmisc/sub.c:55
 #, c-format
 msgid "Invalid root directory \"%s\"\n"
-msgstr "Μη έγκυρος πρωταρχικός κατάλογος \"%s\"\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ Ο€ΟΟ‰Ο„Ξ±ΟΟ‡ΞΉΞΊΟΟ‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ \"%s\"\n"
 
-#: libmisc/sub.c:73
+#: libmisc/sub.c:67
 #, c-format
 msgid "Can't change root directory to \"%s\"\n"
-msgstr "Αδυναμία αλλαγής του πρωταρχικού καταλόγου σε \"%s\"\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ Ο„ΞΏΟ… Ο€ΟΟ‰Ο„Ξ±ΟΟ‡ΞΉΞΊΞΏΟ ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… ΟƒΞµ \"%s\"\n"
 
-#: libmisc/xmalloc.c:28
+#: libmisc/xmalloc.c:24
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "Η κλήση malloc(%d) απέτυχε\n"
+msgstr "Ξ— ΞΊΞ»Ξ®ΟƒΞ· malloc(%d) Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ\n"
 
-#: lib/dialchk.c:71
-msgid "Dialup Password: "
-msgstr "Συνθηματικό τηλεφωνικής σύνδεσης: "
-
-#: lib/getdef.c:276
+#: lib/getdef.c:274
 msgid "Could not allocate space for config info.\n"
-msgstr "Αδυναμία δέσμευσης χώρου για πληροφορίες διαμόρφωσης.\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ­ΟƒΞΌΞµΟ…ΟƒΞ·Ο‚ Ο‡ΟΟΞΏΟ… Ξ³ΞΉΞ± Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚ Ξ΄ΞΉΞ±ΞΌΟΟΟ†Ο‰ΟƒΞ·Ο‚.\n"
 
-#.
-#. * Item was never found.
-#.
-#: lib/getdef.c:330
+#: lib/getdef.c:328
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
-"σφάλμα διαμόρφωσης - άγνωστο αντικείμενο '%s' (ειδοποιείστε τον "
-"διαχειριστή)\n"
+"ΟƒΟ†Ξ¬Ξ»ΞΌΞ± Ξ΄ΞΉΞ±ΞΌΟΟΟ†Ο‰ΟƒΞ·Ο‚ - Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ Ξ±Ξ½Ο„ΞΉΞΊΞµΞ―ΞΌΞµΞ½ΞΏ '%s' (ΞµΞΉΞ΄ΞΏΟ€ΞΏΞΉΞµΞ―ΟƒΟ„Ξµ Ο„ΞΏΞ½ "
+"Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®)\n"
 
-#: lib/getdef.c:417
-#, c-format
-msgid "error - lookup '%s' failed\n"
-msgstr "σφάλμα - η αναζήτηση '%s' απέτυχε\n"
-
-#: lib/getdef.c:425
-#, c-format
-msgid "%s not found\n"
-msgstr "%s δεν βρέθηκε\n"
-
-#.
-#. * get the password from her, and set the salt for
-#. * the decryption from the group file.
-#.
-#: lib/pwauth.c:54 src/newgrp.c:348
+#: lib/pwauth.c:54 src/newgrp.c:343
 msgid "Password: "
-msgstr "Συνθηματικό: "
+msgstr "Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
 #: lib/pwauth.c:56
 #, c-format
 msgid "%s's Password: "
-msgstr "Του %s το Συνθηματικό: "
+msgstr "Ξ¤ΞΏΟ… %s Ο„ΞΏ Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
-#: lib/pwauth.c:270
+#: lib/pwauth.c:247
 msgid "(Echo on) "
 msgstr ""
 
 #: lib/strerror.c:20
 #, c-format
 msgid "Unknown error %d"
-msgstr "Αγνωστο σφάλμα %d"
+msgstr "Ξ‘Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ ΟƒΟ†Ξ¬Ξ»ΞΌΞ± %d"
 
-#: src/chage.c:116
-#, c-format
+#: src/chage.c:118
 msgid ""
-"Usage: %s [-l] [-m min_days] [-M max_days] [-W warn]\n"
-"\t[-I inactive] [-E expire] [-d last_day] user\n"
+"Usage: chage [-l] [-m min_days] [-M max_days] [-W warn]\n"
+"             [-I inactive] [-E expire] [-d last_day] user\n"
 msgstr ""
-"Χρήση: %s [-l] [-m ελαχ_μέρες] [-M μεγ_μέρες] [-W προειδ.]\n"
-"\t[-I ανενεργό] [-E λήξη] [-d τελευταία_μέρα] χρήστης\n"
+"Ξ§ΟΞ®ΟƒΞ·: chage [-l] [-m ΞµΞ»Ξ±Ο‡_ΞΌΞ­ΟΞµΟ‚] [-M ΞΌΞµΞ³_ΞΌΞ­ΟΞµΟ‚] [-W Ο€ΟΞΏΞµΞΉΞ΄.]\n"
+"             [-I Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο] [-E Ξ»Ξ®ΞΎΞ·] [-d Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±_ΞΌΞ­ΟΞ±] Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚\n"
 
-#: src/chage.c:122
-#, c-format
-msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
-msgstr ""
-"Χρήση: %s [-l] [-m ελάχ_μέρες] [-M μεγ_μέρες] [-d τελευταία_μέρα] χρήστης\n"
-
-#: src/chage.c:157
+#: src/chage.c:152
 msgid ""
 "Enter the new value, or press ENTER for the default\n"
 "\n"
 msgstr ""
-"Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+"Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„Ξ·Ξ½ Ξ½Ξ­Ξ± Ο„ΞΉΞΌΞ®, Ξ® Ο€ΞΉΞ­ΟƒΟ„Ξµ ENTER Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ο€ΟΞΏΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ξ·\n"
 "\n"
 
-#: src/chage.c:160
+#: src/chage.c:155
 msgid "Minimum Password Age"
-msgstr "Μικρότερη διάρκεια συνθηματικού"
+msgstr "ΞΞΉΞΊΟΟΟ„ΞµΟΞ· Ξ΄ΞΉΞ¬ΟΞΊΞµΞΉΞ± ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ"
 
-#: src/chage.c:166
+#: src/chage.c:161
 msgid "Maximum Password Age"
-msgstr "Μέγιστη διάρκεια συνθηματικού"
+msgstr "ΞΞ­Ξ³ΞΉΟƒΟ„Ξ· Ξ΄ΞΉΞ¬ΟΞΊΞµΞΉΞ± ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ"
 
-#: src/chage.c:174
+#: src/chage.c:169
 msgid "Last Password Change (YYYY-MM-DD)"
-msgstr "Τελευταία αλλαγή συνθηματικού (ΧΧΧΧ-ΜΜ-ΗΗ)"
+msgstr "Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ (Ξ§Ξ§Ξ§Ξ§-ΞΞ-Ξ—Ξ—)"
+
+#: src/chage.c:177
+msgid "Password Expiration Warning"
+msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ξ»Ξ®ΞΎΞ·Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ"
 
 #: src/chage.c:183
-msgid "Password Expiration Warning"
-msgstr "Προειδοποίηση λήξης συνθηματικού"
-
-#: src/chage.c:189
 msgid "Password Inactive"
-msgstr "Ανενεργό συνθηματικό"
+msgstr "Ξ‘Ξ½ΞµΞ½ΞµΟΞ³Ο ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ"
 
-#: src/chage.c:197
+#: src/chage.c:191
 msgid "Account Expiration Date (YYYY-MM-DD)"
-msgstr "Ημερομηνία Λήξης Λογαριασμού (ΧΧΧΧ-ΜΜ-ΗΗ)"
+msgstr "Ξ—ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ± Ξ›Ξ®ΞΎΞ·Ο‚ Ξ›ΞΏΞ³Ξ±ΟΞΉΞ±ΟƒΞΌΞΏΟ (Ξ§Ξ§Ξ§Ξ§-ΞΞ-Ξ—Ξ—)"
 
-#.
-#. * Start with the easy numbers - the number of days before the
-#. * password can be changed, the number of days after which the
-#. * password must be chaged, the number of days before the password
-#. * expires that the user is told, and the number of days after the
-#. * password expires that the account becomes unusable.
-#.
-#: src/chage.c:248
+#: src/chage.c:241
 #, c-format
 msgid "Minimum:\t%ld\n"
-msgstr "Ελάχιστο:\t%ld\n"
+msgstr "Ξ•Ξ»Ξ¬Ο‡ΞΉΟƒΟ„ΞΏ:\t%ld\n"
 
-#: src/chage.c:249
+#: src/chage.c:242
 #, c-format
 msgid "Maximum:\t%ld\n"
-msgstr "Μέγιστο:\t%ld\n"
+msgstr "ΞΞ­Ξ³ΞΉΟƒΟ„ΞΏ:\t%ld\n"
 
-#: src/chage.c:251
+#: src/chage.c:243
 #, c-format
 msgid "Warning:\t%ld\n"
-msgstr "Προειδοποίηση:\t%ld\n"
+msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·:\t%ld\n"
 
-#: src/chage.c:252
+#: src/chage.c:244
 #, c-format
 msgid "Inactive:\t%ld\n"
-msgstr "Ανενεργός:\t%ld\n"
+msgstr "Ξ‘Ξ½ΞµΞ½ΞµΟΞ³ΟΟ‚:\t%ld\n"
 
-#.
-#. * The "last change" date is either "Never" or the date the password
-#. * was last modified. The date is the number of days since 1/1/1970.
-#.
-#: src/chage.c:260
+#: src/chage.c:251
 msgid "Last Change:\t\t"
-msgstr "Τελευταία αλλαγή:\t\t"
+msgstr "Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®:\t\t"
 
-#: src/chage.c:262 src/chage.c:276 src/chage.c:293 src/chage.c:306
+#: src/chage.c:253 src/chage.c:267 src/chage.c:283 src/chage.c:296
 msgid "Never\n"
-msgstr "Ποτέ\n"
+msgstr "Ξ ΞΏΟ„Ξ­\n"
 
-#.
-#. * The password expiration date is determined from the last change
-#. * date plus the number of days the password is valid for.
-#.
-#: src/chage.c:273
+#: src/chage.c:264
 msgid "Password Expires:\t"
-msgstr "Το συνθηματικό λήγει:\t"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ»Ξ®Ξ³ΞµΞΉ:\t"
 
-#.
-#. * The account becomes inactive if the password is expired for more
-#. * than "inactdays". The expiration date is calculated and the
-#. * number of inactive days is added. The resulting date is when the
-#. * active will be disabled.
-#.
-#: src/chage.c:290
+#: src/chage.c:280
 msgid "Password Inactive:\t"
-msgstr "Ανενεργό συνθηματικό:\t"
+msgstr "Ξ‘Ξ½ΞµΞ½ΞµΟΞ³Ο ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ:\t"
 
-#.
-#. * The account will expire on the given date regardless of the
-#. * password expiring or not.
-#.
-#: src/chage.c:304
+#: src/chage.c:294
 msgid "Account Expires:\t"
-msgstr "Το συνθηματικό λήγει:\t"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ»Ξ®Ξ³ΞµΞΉ:\t"
 
-#: src/chage.c:468
+#: src/chage.c:445
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: Να μην συμπεριλαμβάνετε το \"l\" με τις άλλες ενδείξεις\n"
+msgstr "%s: ΞΞ± ΞΌΞ·Ξ½ ΟƒΟ…ΞΌΟ€ΞµΟΞΉΞ»Ξ±ΞΌΞ²Ξ¬Ξ½ΞµΟ„Ξµ Ο„ΞΏ \"l\" ΞΌΞµ Ο„ΞΉΟ‚ Ξ¬Ξ»Ξ»ΞµΟ‚ ΞµΞ½Ξ΄ΞµΞ―ΞΎΞµΞΉΟ‚\n"
 
-#: src/chage.c:481 src/chage.c:652 src/login.c:518
+#: src/chage.c:458 src/chage.c:588 src/login.c:503
 #, c-format
 msgid "%s: permission denied\n"
-msgstr "%s: άδεια απορρίφθηκε\n"
+msgstr "%s: Ξ¬Ξ΄ΞµΞΉΞ± Ξ±Ο€ΞΏΟΟΞ―Ο†ΞΈΞ·ΞΊΞµ\n"
 
-#: src/chage.c:512 src/chpasswd.c:139 src/groupadd.c:529 src/groupdel.c:322
-#: src/groupmod.c:520 src/newusers.c:381 src/useradd.c:1754 src/userdel.c:717
-#: src/usermod.c:1732
+#: src/chage.c:489 src/chpasswd.c:136 src/groupadd.c:530 src/groupdel.c:325
+#: src/groupmod.c:521 src/newusers.c:362 src/useradd.c:1582 src/userdel.c:657
+#: src/usermod.c:1413
 #, fuzzy, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: Σφάλμα κατά την προσθήκη μεθόδου εξακρίβωσης\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· ΞΌΞµΞΈΟΞ΄ΞΏΟ… ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚\n"
 
-#: src/chage.c:533 src/chpasswd.c:157
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
-
-#: src/chage.c:544 src/chpasswd.c:162
+#: src/chage.c:510 src/chpasswd.c:159
 #, c-format
 msgid "%s: can't open password file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:552
+#: src/chage.c:518
 #, c-format
 msgid "%s: unknown user: %s\n"
-msgstr "%s: άγνωστος χρήστης: %s\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚: %s\n"
 
-#: src/chage.c:571
+#: src/chage.c:536
 #, fuzzy, c-format
 msgid "%s: can't lock shadow password file"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:579
+#: src/chage.c:544
 #, fuzzy, c-format
 msgid "%s: can't open shadow password file"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:674
+#: src/chage.c:605
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Αλλαγή πληροφοριών χρόνου για τον %s\n"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞΉΟΞ½ Ο‡ΟΟΞ½ΞΏΟ… Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s\n"
 
-#: src/chage.c:677
+#: src/chage.c:608
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: Σφάλμα κατά την αλλαγή πεδίων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® Ο€ΞµΞ΄Ξ―Ο‰Ξ½\n"
 
-#: src/chage.c:705 src/chage.c:771 src/pwunconv.c:174
+#: src/chage.c:632 src/pwunconv.c:138
 #, c-format
 msgid "%s: can't update password file\n"
-msgstr "%s: αδυναμία ανανέωσης αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:737 src/pwunconv.c:168
+#: src/chage.c:661 src/pwunconv.c:132
 #, c-format
 msgid "%s: can't update shadow password file\n"
-msgstr "%s: αδυναμία ανανέωσης του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:789 src/chage.c:805 src/chfn.c:570 src/chsh.c:382
-#: src/passwd.c:747 src/passwd.c:859
+#: src/chage.c:676 src/chfn.c:571 src/chsh.c:377 src/passwd.c:543
+#: src/passwd.c:615
 msgid "Error updating the DBM password entry.\n"
 msgstr ""
-"Σφάλμα κατά την ανανέωση της καταχώρησης στο dbm αρχείο συνθηματικών.\n"
+"Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· Ο„Ξ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½.\n"
 
-#: src/chage.c:823
+#: src/chage.c:693
 #, c-format
 msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:838
+#: src/chage.c:707
 #, c-format
 msgid "%s: can't rewrite password file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chage.c:857 src/chpasswd.c:343 src/groupadd.c:590 src/groupdel.c:409
-#: src/groupmod.c:604 src/newusers.c:628 src/useradd.c:1869 src/userdel.c:849
-#: src/usermod.c:1811
+#: src/chage.c:727 src/chpasswd.c:336 src/groupadd.c:592 src/groupdel.c:413
+#: src/groupmod.c:606 src/newusers.c:609 src/useradd.c:1705 src/userdel.c:814
+#: src/usermod.c:1494
 #, fuzzy, c-format
 msgid "%s: PAM chauthtok failed\n"
-msgstr "%s: αδυναμία ξεκλειδώματος αρχείου\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΎΞµΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 
-#: src/chfn.c:83
+#: src/chfn.c:84
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Usage: %s [-f πλήρες_όνομα] [-r αρίθμ_δωματίου] [-w τηλ_εργασίας]\n"
-"\t[-h τηλ_οικίας] [-o άλλο] [χρήστης]\n"
+"Usage: %s [-f Ο€Ξ»Ξ®ΟΞµΟ‚_ΟΞ½ΞΏΞΌΞ±] [-r Ξ±ΟΞ―ΞΈΞΌ_Ξ΄Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…] [-w Ο„Ξ·Ξ»_ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚]\n"
+"\t[-h Ο„Ξ·Ξ»_ΞΏΞΉΞΊΞ―Ξ±Ο‚] [-o Ξ¬Ξ»Ξ»ΞΏ] [Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚]\n"
 
-#: src/chfn.c:88
+#: src/chfn.c:89
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"Χρήση: %s [-f πλήρες_όνομα] [-r αριθμ_δωματίου] [-w τηλ_δωματίου]\n"
-"[-h τηλ_οικίας]\n"
+"Ξ§ΟΞ®ΟƒΞ·: %s [-f Ο€Ξ»Ξ®ΟΞµΟ‚_ΟΞ½ΞΏΞΌΞ±] [-r Ξ±ΟΞΉΞΈΞΌ_Ξ΄Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…] [-w Ο„Ξ·Ξ»_Ξ΄Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…]\n"
+"[-h Ο„Ξ·Ξ»_ΞΏΞΉΞΊΞ―Ξ±Ο‚]\n"
 
-#: src/chfn.c:139
+#: src/chfn.c:140
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+msgstr "Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„Ξ·Ξ½ Ξ½Ξ­Ξ± Ο„ΞΉΞΌΞ®, Ξ® Ο€ΞΉΞ­ΟƒΟ„Ξµ ENTER Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ο€ΟΞΏΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ξ·\n"
 
-#: src/chfn.c:142
+#: src/chfn.c:143
 msgid "Full Name"
-msgstr "Πλήρες όνομα"
+msgstr "Ξ Ξ»Ξ®ΟΞµΟ‚ ΟΞ½ΞΏΞΌΞ±"
 
-#: src/chfn.c:144
+#: src/chfn.c:145
 #, c-format
 msgid "\tFull Name: %s\n"
-msgstr "\tΠλήρες Όνομα: %s\n"
+msgstr "\tΞ Ξ»Ξ®ΟΞµΟ‚ ΞΞ½ΞΏΞΌΞ±: %s\n"
 
-#: src/chfn.c:147
+#: src/chfn.c:148
 msgid "Room Number"
-msgstr "Αριθμός δωματίου"
+msgstr "Ξ‘ΟΞΉΞΈΞΌΟΟ‚ Ξ΄Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…"
 
-#: src/chfn.c:149
+#: src/chfn.c:150
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\tΑριθμός Δωματίου: %s\n"
+msgstr "\tΞ‘ΟΞΉΞΈΞΌΟΟ‚ Ξ”Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…: %s\n"
 
-#: src/chfn.c:152
+#: src/chfn.c:153
 msgid "Work Phone"
-msgstr "Τηλέφωνο Εργασίας"
+msgstr "Ξ¤Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ Ξ•ΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚"
 
-#: src/chfn.c:154
+#: src/chfn.c:155
 #, c-format
 msgid "\tWork Phone: %s\n"
-msgstr "\tΤηλέφωνο Εργασίας: %s\n"
+msgstr "\tΞ¤Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ Ξ•ΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚: %s\n"
 
-#: src/chfn.c:157
+#: src/chfn.c:158
 msgid "Home Phone"
-msgstr "Τηλέφωνο Οικίας"
+msgstr "Ξ¤Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ ΞΞΉΞΊΞ―Ξ±Ο‚"
 
-#: src/chfn.c:159
+#: src/chfn.c:160
 #, c-format
 msgid "\tHome Phone: %s\n"
-msgstr "\tΤηλέφωνο οικίας: %s\n"
+msgstr "\tΞ¤Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ ΞΏΞΉΞΊΞ―Ξ±Ο‚: %s\n"
 
-#: src/chfn.c:162
+#: src/chfn.c:163
 msgid "Other"
-msgstr "Αλλο"
+msgstr "Ξ‘Ξ»Ξ»ΞΏ"
 
-#: src/chfn.c:271 src/chfn.c:281 src/chfn.c:291 src/chfn.c:301 src/chfn.c:311
-#: src/chfn.c:379 src/passwd.c:1115
+#: src/chfn.c:272 src/chfn.c:282 src/chfn.c:292 src/chfn.c:302 src/chfn.c:312
+#: src/chfn.c:380 src/passwd.c:853
 #, c-format
 msgid "%s: Permission denied.\n"
-msgstr "%s: ¶δεια απορρίφθηκε.\n"
+msgstr "%s: Ξ†Ξ΄ΞµΞΉΞ± Ξ±Ο€ΞΏΟΟΞ―Ο†ΞΈΞ·ΞΊΞµ.\n"
 
-#: src/chfn.c:332 src/chsh.c:190 src/passwd.c:1165
+#: src/chfn.c:333 src/chsh.c:185 src/passwd.c:903
 #, c-format
 msgid "%s: Unknown user %s\n"
-msgstr "%s: Αγνωστος ο χρήστης %s\n"
+msgstr "%s: Ξ‘Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ ΞΏ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
-#: src/chfn.c:341 src/chsh.c:198 src/passwd.c:1096
+#: src/chfn.c:342 src/chsh.c:193 src/passwd.c:834
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Δεν είναι δυνατόν να καθοριστεί το όνομα χρήστη σας.\n"
+msgstr "%s: Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ Ξ½Ξ± ΞΊΞ±ΞΈΞΏΟΞΉΟƒΟ„ΞµΞ― Ο„ΞΏ ΟΞ½ΞΏΞΌΞ± Ο‡ΟΞ®ΟƒΟ„Ξ· ΟƒΞ±Ο‚.\n"
 
-#: src/chfn.c:358 src/chsh.c:215
+#: src/chfn.c:359 src/chsh.c:210
 #, c-format
 msgid "%s: cannot change user `%s' on NIS client.\n"
-msgstr "%s: αδυναμία αλλαγής χρήστη `%s' στον NIS εξυπηρετούμενο.\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ· `%s' ΟƒΟ„ΞΏΞ½ NIS ΞµΞΎΟ…Ο€Ξ·ΟΞµΟ„ΞΏΟΞΌΞµΞ½ΞΏ.\n"
 
-#: src/chfn.c:366 src/chsh.c:223
+#: src/chfn.c:367 src/chsh.c:218
 #, c-format
 msgid "%s: `%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' είναι ο κύριος διακομιστής NIS γι'αυτόν τον εξυπηρετούμενο.\n"
+msgstr "%s: `%s' ΞµΞ―Ξ½Ξ±ΞΉ ΞΏ ΞΊΟΟΞΉΞΏΟ‚ Ξ΄ΞΉΞ±ΞΊΞΏΞΌΞΉΟƒΟ„Ξ®Ο‚ NIS Ξ³ΞΉ'Ξ±Ο…Ο„ΟΞ½ Ο„ΞΏΞ½ ΞµΞΎΟ…Ο€Ξ·ΟΞµΟ„ΞΏΟΞΌΞµΞ½ΞΏ.\n"
 
-#: src/chfn.c:441
+#: src/chfn.c:442
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "Αλλαγή πληροφοριών χρήστη για τον %s\n"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞΉΟΞ½ Ο‡ΟΞ®ΟƒΟ„Ξ· Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s\n"
 
-#: src/chfn.c:450
+#: src/chfn.c:451
 #, c-format
 msgid "%s: invalid name: \"%s\"\n"
-msgstr "%s: Μη έγκυρο όνομα: `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ±: `%s'\n"
 
-#: src/chfn.c:456
+#: src/chfn.c:457
 #, c-format
 msgid "%s: invalid room number: \"%s\"\n"
-msgstr "%s: Μη έγκυρος αριθμός δωματίου: `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ Ξ±ΟΞΉΞΈΞΌΟΟ‚ Ξ΄Ο‰ΞΌΞ±Ο„Ξ―ΞΏΟ…: `%s'\n"
 
-#: src/chfn.c:462
+#: src/chfn.c:463
 #, c-format
 msgid "%s: invalid work phone: \"%s\"\n"
-msgstr "%s: Μη έγκυρο τηλέφωνο εργασίας: `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ Ο„Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ ΞµΟΞ³Ξ±ΟƒΞ―Ξ±Ο‚: `%s'\n"
 
-#: src/chfn.c:468
+#: src/chfn.c:469
 #, c-format
 msgid "%s: invalid home phone: \"%s\"\n"
-msgstr "%s: Μη έγκυρο τηλέφωνο οικίας: `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ Ο„Ξ·Ξ»Ξ­Ο†Ο‰Ξ½ΞΏ ΞΏΞΉΞΊΞ―Ξ±Ο‚: `%s'\n"
 
-#: src/chfn.c:475
+#: src/chfn.c:476
 #, c-format
 msgid "%s: \"%s\" contains illegal characters\n"
-msgstr "%s: \"%s\" περιέχει μη έγκυρους χαρακτήρες\n"
+msgstr "%s: \"%s\" Ο€ΞµΟΞΉΞ­Ο‡ΞµΞΉ ΞΌΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ…Ο‚ Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚\n"
 
-#: src/chfn.c:488
+#: src/chfn.c:489
 #, c-format
 msgid "%s: fields too long\n"
-msgstr "%s: Πολύ μακριά πεδία\n"
+msgstr "%s: Ξ ΞΏΞ»Ο ΞΌΞ±ΞΊΟΞΉΞ¬ Ο€ΞµΞ΄Ξ―Ξ±\n"
 
-#: src/chfn.c:504 src/chsh.c:316 src/gpasswd.c:570 src/passwd.c:1277
+#: src/chfn.c:505 src/chsh.c:311 src/gpasswd.c:570 src/passwd.c:994
 msgid "Cannot change ID to root.\n"
-msgstr "Αδυναμία αλλαγής ταυτότητας χρήστη σε root.\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ Ο„Ξ±Ο…Ο„ΟΟ„Ξ·Ο„Ξ±Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ· ΟƒΞµ root.\n"
 
-#: src/chfn.c:519 src/chsh.c:331 src/passwd.c:656 src/passwd.c:811
+#: src/chfn.c:520 src/chsh.c:326 src/passwd.c:515 src/passwd.c:567
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "Αδυναμία κλειδώματος του αρχείου συνθηματικών. Δοκιμάστε αργότερα.\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½. Ξ”ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ Ξ±ΟΞ³ΟΟ„ΞµΟΞ±.\n"
 
-#: src/chfn.c:525 src/chsh.c:337 src/passwd.c:661 src/passwd.c:816
+#: src/chfn.c:526 src/chsh.c:332 src/passwd.c:520 src/passwd.c:572
 msgid "Cannot open the password file.\n"
-msgstr "Αδυναμία ανοίγματος του αρχείου συνθηματικών.\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½.\n"
 
-#: src/chfn.c:542 src/chsh.c:352 src/passwd.c:667 src/usermod.c:1348
+#: src/chfn.c:543 src/chsh.c:347 src/passwd.c:526 src/usermod.c:1092
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: Ο %s δεν βρέθηκε στο /etc/passwd\n"
+msgstr "%s: Ξ %s Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ ΟƒΟ„ΞΏ /etc/passwd\n"
 
-#: src/chfn.c:561 src/chsh.c:373 src/passwd.c:740 src/passwd.c:852
+#: src/chfn.c:562 src/chsh.c:368 src/passwd.c:536 src/passwd.c:608
 msgid "Error updating the password entry.\n"
-msgstr "Σφάλμα κατά την ανανέωση καταχώρησης στο αρχείο συνθηματικών.\n"
+msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½.\n"
 
-#: src/chfn.c:585 src/chsh.c:397 src/passwd.c:755 src/passwd.c:867
+#: src/chfn.c:586 src/chsh.c:392 src/passwd.c:551 src/passwd.c:623
 msgid "Cannot commit password file changes.\n"
-msgstr "Αδυναμία εισαγωγής των αλλαγών στο αρχείο συνθηματικών.\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΞΉΟƒΞ±Ξ³Ο‰Ξ³Ξ®Ο‚ Ο„Ο‰Ξ½ Ξ±Ξ»Ξ»Ξ±Ξ³ΟΞ½ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½.\n"
 
-#: src/chfn.c:592 src/chsh.c:404
+#: src/chfn.c:593 src/chsh.c:399
 msgid "Cannot unlock the password file.\n"
-msgstr "Αδυναμία ξεκλειδώματος του αρχείου συνθηματικών\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΎΞµΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chpasswd.c:66
+#: src/chpasswd.c:67
+#, fuzzy, c-format
+msgid "Usage: %s [-e]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-e]\n"
+
+#: src/chpasswd.c:154
 #, c-format
-msgid "usage: %s [-e]\n"
-msgstr "χρήση: %s [-e]\n"
+msgid "%s: can't lock password file\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chpasswd.c:171 src/pwconv.c:94
+#: src/chpasswd.c:168 src/pwconv.c:95
 #, c-format
 msgid "%s: can't lock shadow file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chpasswd.c:177 src/gpasswd.c:596 src/pwconv.c:99 src/pwunconv.c:103
-#: src/pwunconv.c:108
+#: src/chpasswd.c:174 src/gpasswd.c:596 src/pwconv.c:100 src/pwunconv.c:89
+#: src/pwunconv.c:94
 #, c-format
 msgid "%s: can't open shadow file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chpasswd.c:200 src/newusers.c:460
+#: src/chpasswd.c:197 src/newusers.c:441
 #, c-format
 msgid "%s: line %d: line too long\n"
-msgstr "%s: γραμμή %d: πολύ μεγάλη γραμμή\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ο€ΞΏΞ»Ο ΞΌΞµΞ³Ξ¬Ξ»Ξ· Ξ³ΟΞ±ΞΌΞΌΞ®\n"
 
-#: src/chpasswd.c:220
+#: src/chpasswd.c:217
 #, c-format
 msgid "%s: line %d: missing new password\n"
-msgstr "%s: γραμμή %d: έλλειψη νέου συνθηματικού\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ­Ξ»Ξ»ΞµΞΉΟΞ· Ξ½Ξ­ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ\n"
 
-#: src/chpasswd.c:237
+#: src/chpasswd.c:234
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: γραμμή %d: άγνωστος χρήστης %s\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
-#: src/chpasswd.c:290
+#: src/chpasswd.c:280
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης συνθηματικού\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ\n"
 
-#: src/chpasswd.c:307 src/newusers.c:588
+#: src/chpasswd.c:297 src/newusers.c:569
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: Ανιχνέυτηκε σφάλμα, οι αλλαγές αγνοήθηκαν\n"
+msgstr "%s: Ξ‘Ξ½ΞΉΟ‡Ξ½Ξ­Ο…Ο„Ξ·ΞΊΞµ ΟƒΟ†Ξ¬Ξ»ΞΌΞ±, ΞΏΞΉ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ­Ο‚ Ξ±Ξ³Ξ½ΞΏΞ®ΞΈΞ·ΞΊΞ±Ξ½\n"
 
-#: src/chpasswd.c:319
+#: src/chpasswd.c:309
 #, c-format
 msgid "%s: error updating shadow file\n"
 msgstr ""
-"%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο αρχείο σκιωδών συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞµΟ‰Ξ½ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chpasswd.c:328
+#: src/chpasswd.c:318
 #, c-format
 msgid "%s: error updating password file\n"
-msgstr "%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο αρχείο συνθηματικών\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞµΟ‰Ξ½ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/chsh.c:75
+#: src/chsh.c:76
 #, c-format
 msgid "Usage: %s [-s shell] [name]\n"
-msgstr "Χρήση: %s [-s φλοιός] [όνομα]\n"
-
-#: src/chsh.c:89
-msgid "Enter the new value, or press return for the default\n"
-msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-s Ο†Ξ»ΞΏΞΉΟΟ‚] [ΟΞ½ΞΏΞΌΞ±]\n"
 
 #: src/chsh.c:90
-msgid "Login Shell"
-msgstr "Κέλυφος Εισόδου"
+msgid "Enter the new value, or press return for the default\n"
+msgstr "Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„Ξ·Ξ½ Ξ½Ξ­Ξ± Ο„ΞΉΞΌΞ®, Ξ® Ο€ΞΉΞ­ΟƒΟ„Ξµ ENTER Ξ³ΞΉΞ± Ο„Ξ·Ξ½ Ο€ΟΞΏΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ξ·\n"
 
-#: src/chsh.c:239 src/chsh.c:253
+#: src/chsh.c:91
+msgid "Login Shell"
+msgstr "ΞΞ­Ξ»Ο…Ο†ΞΏΟ‚ Ξ•ΞΉΟƒΟΞ΄ΞΏΟ…"
+
+#: src/chsh.c:234 src/chsh.c:248
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Δεν μπορείτε να αλλάξετε το φλοιό για το(ν) %s.\n"
+msgstr "Ξ”ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± Ξ±Ξ»Ξ»Ξ¬ΞΎΞµΟ„Ξµ Ο„ΞΏ Ο†Ξ»ΞΏΞΉΟ Ξ³ΞΉΞ± Ο„ΞΏ(Ξ½) %s.\n"
 
-#: src/chsh.c:282
+#: src/chsh.c:277
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Αλλάγή του φλοιού για τον %s\n"
+msgstr "Ξ‘Ξ»Ξ»Ξ¬Ξ³Ξ® Ο„ΞΏΟ… Ο†Ξ»ΞΏΞΉΞΏΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s\n"
 
-#: src/chsh.c:294
+#: src/chsh.c:289
 #, c-format
 msgid "%s: Invalid entry: %s\n"
-msgstr "%s: Μη έγκυρη καταχώρηση: %s\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·: %s\n"
 
-#: src/chsh.c:301
+#: src/chsh.c:296
 #, c-format
 msgid "%s is an invalid shell.\n"
-msgstr "%s δεν είναι έγκυρος φλοιός.\n"
-
-#: src/dpasswd.c:52
-#, c-format
-msgid "Usage: %s [-(a|d)] shell\n"
-msgstr "Χρήση: %s [-(ald)] φλοιός\n"
-
-#: src/dpasswd.c:115
-msgid "Shell password: "
-msgstr "Συνθηματικό φλοιού: "
-
-#: src/dpasswd.c:121
-msgid "re-enter Shell password: "
-msgstr "Επανεισάγετε το συνθηματικό φλοιού: "
-
-#: src/dpasswd.c:129
-#, c-format
-msgid "%s: Passwords do not match, try again.\n"
-msgstr "%s: Τα συνθηματικά δεν ταιριάζουν, δοκιμάστε ξανά.\n"
-
-#: src/dpasswd.c:149
-#, c-format
-msgid "%s: can't create %s"
-msgstr "%s: αδυναμία δημιουργίας του %s"
-
-#: src/dpasswd.c:155
-#, c-format
-msgid "%s: can't open %s"
-msgstr "%s: αδυναμία ανοίγματος του %s"
-
-#: src/dpasswd.c:183
-#, c-format
-msgid "%s: Shell %s not found.\n"
-msgstr "%s: Ο φλοιός %s δεν βρέθηκε.\n"
+msgstr "%s Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ Ο†Ξ»ΞΏΞΉΟΟ‚.\n"
 
 #: src/expiry.c:59
 msgid "Usage: expiry {-f|-c}\n"
-msgstr "Χρήση: expiry {-f|-c}\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: expiry {-f|-c}\n"
 
 #: src/expiry.c:113
 #, c-format
 msgid "%s: WARNING!  Must be set-UID root!\n"
 msgstr ""
-"%s: ΠΡΟΣΟΧΗ!  Πρέπει να έχει τεθεί το bit παραχώρησης ταυτότητας root!\n"
+"%s: Ξ Ξ΅ΞΞ£ΞΞ§Ξ—!  Ξ ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± Ξ­Ο‡ΞµΞΉ Ο„ΞµΞΈΞµΞ― Ο„ΞΏ bit Ο€Ξ±ΟΞ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ο„Ξ±Ο…Ο„ΟΟ„Ξ·Ο„Ξ±Ο‚ root!\n"
 
 #: src/expiry.c:124
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s: άγνωστος χρήστης\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚\n"
 
 #: src/faillog.c:77
-#, c-format
-msgid "usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-a|-u user] [-m max] [-r] [-t days] [-l locksecs]\n"
 msgstr ""
-"χρήση: %s [-a|-u χρήστης] [-m μεγ] [-r] [-t μέρες] [-l δευτερόλεπτα_κλειδ]\n"
+"Ο‡ΟΞ®ΟƒΞ·: %s [-a|-u Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚] [-m ΞΌΞµΞ³] [-r] [-t ΞΌΞ­ΟΞµΟ‚] [-l Ξ΄ΞµΟ…Ο„ΞµΟΟΞ»ΞµΟ€Ο„Ξ±_ΞΊΞ»ΞµΞΉΞ΄]\n"
 
 #: src/faillog.c:131 src/lastlog.c:96
 #, c-format
 msgid "Unknown User: %s\n"
-msgstr "Αγνωστος χρήστης: %s\n"
+msgstr "Ξ‘Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚: %s\n"
 
 #: src/faillog.c:212
 msgid "Username   Failures  Maximum  Latest\n"
-msgstr "Όνομα_Χρήστη Αποτυχίες Μέγιστο Τελευταία\n"
+msgstr "ΞΞ½ΞΏΞΌΞ±_Ξ§ΟΞ®ΟƒΟ„Ξ· Ξ‘Ο€ΞΏΟ„Ο…Ο‡Ξ―ΞµΟ‚ ΞΞ­Ξ³ΞΉΟƒΟ„ΞΏ Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±\n"
 
 #: src/faillog.c:229
 #, c-format
 msgid "  %s on %s"
-msgstr "  %s στο %s"
+msgstr "  %s ΟƒΟ„ΞΏ %s"
 
 #: src/faillog.c:233
 #, c-format
 msgid " [%lds left]"
-msgstr " [%lds απέμειναν]"
+msgstr " [%lds Ξ±Ο€Ξ­ΞΌΞµΞΉΞ½Ξ±Ξ½]"
 
 #: src/faillog.c:237
 #, c-format
 msgid " [%lds lock]"
-msgstr " [%lds κλείδωμα]"
+msgstr " [%lds ΞΊΞ»ΞµΞ―Ξ΄Ο‰ΞΌΞ±]"
 
 #: src/gpasswd.c:78
-#, c-format
-msgid "usage: %s [-r|-R] group\n"
-msgstr "χρήση: %s [-r|-R] ομάδα\n"
+#, fuzzy, c-format
+msgid "Usage: %s [-r|-R] group\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-r|-R] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
 #: src/gpasswd.c:79
 #, c-format
 msgid "       %s [-a user] group\n"
-msgstr "       %s [-a χρήστης] ομάδα\n"
+msgstr "       %s [-a Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
 #: src/gpasswd.c:80
 #, c-format
 msgid "       %s [-d user] group\n"
-msgstr "       %s [-d χρήστης] ομάδα\n"
+msgstr "       %s [-d Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
 #: src/gpasswd.c:83
 #, c-format
 msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A χρήστης,...] [-M χρήστης,...] ομάδα\n"
+msgstr "       %s [-A Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚,...] [-M Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚,...] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
 #: src/gpasswd.c:85
 #, c-format
 msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M χρήστης,...] ομάδα\n"
+msgstr "       %s [-M Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚,...] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
 #: src/gpasswd.c:146 src/gpasswd.c:230
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: άγνωστος χρήστης %s\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
 #: src/gpasswd.c:157
 msgid "Permission denied.\n"
-msgstr "¶δεια απορρίφθηκε.\n"
+msgstr "Ξ†Ξ΄ΞµΞΉΞ± Ξ±Ο€ΞΏΟΟΞ―Ο†ΞΈΞ·ΞΊΞµ.\n"
 
 #: src/gpasswd.c:243
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
-msgstr "%s: σκιώδη συνθηματικά ομάδων απαιτούνται για το -A\n"
+msgstr "%s: ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞ½Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„ΞΏ -A\n"
 
 #: src/gpasswd.c:294
 msgid "Who are you?\n"
-msgstr "Ποιος είσαι;\n"
+msgstr "Ξ ΞΏΞΉΞΏΟ‚ ΞµΞ―ΟƒΞ±ΞΉ;\n"
 
-#: src/gpasswd.c:313 src/newgrp.c:297
+#: src/gpasswd.c:313 src/newgrp.c:292
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "άγνωστη ομάδα: %s\n"
+msgstr "Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„Ξ· ΞΏΞΌΞ¬Ξ΄Ξ±: %s\n"
 
 #: src/gpasswd.c:422
 #, c-format
 msgid "Adding user %s to group %s\n"
-msgstr "Προσθήκη του χρήστη %s στην ομάδα %s\n"
+msgstr "Ξ ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ο„ΞΏΟ… Ο‡ΟΞ®ΟƒΟ„Ξ· %s ΟƒΟ„Ξ·Ξ½ ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
 #: src/gpasswd.c:440
 #, c-format
 msgid "Removing user %s from group %s\n"
-msgstr "Διαγράφη του χρήστη %s από την ομάδα %s\n"
+msgstr "Ξ”ΞΉΞ±Ξ³ΟΞ¬Ο†Ξ· Ο„ΞΏΟ… Ο‡ΟΞ®ΟƒΟ„Ξ· %s Ξ±Ο€Ο Ο„Ξ·Ξ½ ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
 #: src/gpasswd.c:454
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: άγνωστο μέλος %s\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ ΞΌΞ­Ξ»ΞΏΟ‚ %s\n"
 
 #: src/gpasswd.c:501
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: Δεν είναι tty\n"
+msgstr "%s: Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ tty\n"
 
-#.
-#. * A new password is to be entered and it must be encrypted, etc.
-#. * The password will be prompted for twice, and both entries must be
-#. * identical. There is no need to validate the old password since
-#. * the invoker is either the group owner, or root.
-#.
 #: src/gpasswd.c:522
 #, c-format
 msgid "Changing the password for group %s\n"
-msgstr "Αλλαγή του συνθήματος για την ομάδα %s\n"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο„ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ®ΞΌΞ±Ο„ΞΏΟ‚ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
 #: src/gpasswd.c:525
 msgid "New Password: "
-msgstr "Νέο Συνθηματικό: "
+msgstr "ΞΞ­ΞΏ Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
-#: src/gpasswd.c:530 src/passwd.c:365
+#: src/gpasswd.c:530 src/passwd.c:281
 msgid "Re-enter new password: "
-msgstr "Επανεισάγετε το νέο συνθηματικό: "
+msgstr "Ξ•Ο€Ξ±Ξ½ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„ΞΏ Ξ½Ξ­ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
 #: src/gpasswd.c:542
 msgid "They don't match; try again"
-msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά"
+msgstr "Ξ”ΞµΞ½ Ο„Ξ±ΞΉΟΞΉΞ¬Ξ¶ΞΏΟ…Ξ½. Ξ”ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬"
 
 #: src/gpasswd.c:546
 #, c-format
 msgid "%s: Try again later\n"
-msgstr "%s: Ξαναδοκιμάστε αργότερα\n"
+msgstr "%s: ΞΞ±Ξ½Ξ±Ξ΄ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ Ξ±ΟΞ³ΟΟ„ΞµΟΞ±\n"
 
 #: src/gpasswd.c:578
 #, c-format
 msgid "%s: can't get lock\n"
-msgstr "%s: Αδυναμία δημιουργίας κλειδώματος\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚\n"
 
 #: src/gpasswd.c:584
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr ""
-"%s: Αδυναμία δημιουργίας κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
+"%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
 #: src/gpasswd.c:590
 #, c-format
 msgid "%s: can't open file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 
 #: src/gpasswd.c:602
 #, c-format
 msgid "%s: can't update entry\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚\n"
 
 #: src/gpasswd.c:608
 #, c-format
 msgid "%s: can't update shadow entry\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
 #: src/gpasswd.c:615
 #, c-format
 msgid "%s: can't re-write file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 
 #: src/gpasswd.c:621
 #, c-format
 msgid "%s: can't re-write shadow file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
 #: src/gpasswd.c:630
 #, c-format
 msgid "%s: can't unlock file\n"
-msgstr "%s: αδυναμία ξεκλειδώματος αρχείου\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΎΞµΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 
 #: src/gpasswd.c:635
 #, c-format
 msgid "%s: can't update DBM files\n"
-msgstr "%s: αδυναμία ανανέωσης των DBM αρχείων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ DBM Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½\n"
 
 #: src/gpasswd.c:642
 #, c-format
 msgid "%s: can't update DBM shadow files\n"
-msgstr "%s: αδυναμία ανανέωσης των DBM αρχείων σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ DBM Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/groupadd.c:101
-msgid "usage: groupadd [-g gid [-o]] group\n"
-msgstr "χρήση: groupadd [-g gid [-o]] ομάδα\n"
+#: src/groupadd.c:102
+msgid "Usage: groupadd [-g gid [-o]] [-f] group\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: groupadd [-g gid [-o]] [-f] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
-#: src/groupadd.c:167 src/groupadd.c:192 src/groupmod.c:179 src/groupmod.c:228
-#: src/useradd.c:970 src/usermod.c:552 src/usermod.c:695
+#: src/groupadd.c:168 src/groupadd.c:193 src/groupmod.c:180 src/groupmod.c:229
+#: src/useradd.c:913 src/usermod.c:533 src/usermod.c:676
 #, c-format
 msgid "%s: error adding new group entry\n"
-msgstr "%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ½Ξ­Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:178 src/groupadd.c:203 src/groupmod.c:197 src/useradd.c:981
-#: src/usermod.c:564 src/usermod.c:708
+#: src/groupadd.c:179 src/groupadd.c:204 src/groupmod.c:198 src/useradd.c:924
+#: src/usermod.c:545 src/usermod.c:689
 #, c-format
 msgid "%s: cannot add new dbm group entry\n"
-msgstr "%s: αδυναμία προσθήκης νέας dbm καταχώρησης στο αρχείο ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ·Ο‚ Ξ½Ξ­Ξ±Ο‚ dbm ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:255 src/useradd.c:1034
+#: src/groupadd.c:256 src/useradd.c:977
 #, c-format
 msgid "%s: name %s is not unique\n"
-msgstr "%s: Το όνομα %s δεν είναι μοναδικό\n"
+msgstr "%s: Ξ¤ΞΏ ΟΞ½ΞΏΞΌΞ± %s Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
-#: src/groupadd.c:270
+#: src/groupadd.c:271
 #, c-format
 msgid "%s: gid %u is not unique\n"
-msgstr "%s: Το uid %u δεν είναι μοναδικό\n"
+msgstr "%s: Ξ¤ΞΏ uid %u Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
-#: src/groupadd.c:294
+#: src/groupadd.c:295
 #, c-format
 msgid "%s: can't get unique gid\n"
-msgstr "%s: αδυναμία εύρεσης μοναδικού gid\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟΟΞµΟƒΞ·Ο‚ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΞΏΟ gid\n"
 
-#.
-#. * All invalid group names land here.
-#.
-#: src/groupadd.c:317 src/groupmod.c:341
+#: src/groupadd.c:318 src/groupmod.c:342
 #, c-format
 msgid "%s: %s is a not a valid group name\n"
-msgstr "%s: Το %s δεν είναι έγκυρο όνομα ομάδας\n"
+msgstr "%s: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚\n"
 
-#: src/groupadd.c:346 src/groupmod.c:366
+#: src/groupadd.c:347 src/groupmod.c:367
 #, c-format
 msgid "%s: invalid group %s\n"
-msgstr "%s: Μη έγκυρη ομάδα `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΏΞΌΞ¬Ξ΄Ξ± `%s'\n"
 
-#: src/groupadd.c:363 src/useradd.c:1313
+#: src/groupadd.c:364 src/useradd.c:1173
 #, c-format
 msgid "%s: -O requires NAME=VALUE\n"
-msgstr "%s: -O απαιτεί ΌΝΟΜΑ=ΤΙΜΗ\n"
+msgstr "%s: -O Ξ±Ο€Ξ±ΞΉΟ„ΞµΞ― ΞΞΞΞΞ‘=Ξ¤Ξ™ΞΞ—\n"
 
-#: src/groupadd.c:407 src/groupdel.c:173 src/groupmod.c:401 src/useradd.c:1428
-#: src/userdel.c:312 src/usermod.c:576
+#: src/groupadd.c:408 src/groupdel.c:171 src/groupmod.c:402 src/useradd.c:1288
+#: src/userdel.c:302 src/usermod.c:557
 #, c-format
 msgid "%s: cannot rewrite group file\n"
-msgstr "%s: αδυναμία επανεγγραφής του αρχείου ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:415 src/groupdel.c:179 src/groupmod.c:409 src/useradd.c:1437
-#: src/userdel.c:319 src/usermod.c:722
+#: src/groupadd.c:416 src/groupdel.c:179 src/groupmod.c:410 src/useradd.c:1297
+#: src/userdel.c:309 src/usermod.c:703
 #, c-format
 msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: αδυναμία επανεγγραφής του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:433 src/groupdel.c:198 src/groupmod.c:427 src/userdel.c:403
+#: src/groupadd.c:434 src/groupdel.c:197 src/groupmod.c:428 src/userdel.c:374
 #, c-format
 msgid "%s: unable to lock group file\n"
-msgstr "%s: Αδυναμία κλειδώματος του αρχείου ομάδων\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:438 src/groupdel.c:202 src/groupmod.c:432
+#: src/groupadd.c:439 src/groupdel.c:202 src/groupmod.c:433
 #, c-format
 msgid "%s: unable to open group file\n"
-msgstr "%s: Αδυναμία ανοίγματος του αρχείου ομάδων\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:445 src/groupdel.c:207 src/groupmod.c:439 src/userdel.c:414
+#: src/groupadd.c:446 src/groupdel.c:209 src/groupmod.c:440 src/userdel.c:385
 #, c-format
 msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: Αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:451 src/groupdel.c:212 src/groupmod.c:445
+#: src/groupadd.c:452 src/groupdel.c:215 src/groupmod.c:446
 #, c-format
 msgid "%s: unable to open shadow group file\n"
-msgstr "%s: Αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupadd.c:562
+#: src/groupadd.c:563
 #, c-format
 msgid "%s: group %s exists\n"
-msgstr "%s: Η ομάδα %s υπάρχει\n"
+msgstr "%s: Ξ— ΞΏΞΌΞ¬Ξ΄Ξ± %s Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#: src/groupdel.c:92
-msgid "usage: groupdel group\n"
-msgstr "χρήση: groupdel ομάδα\n"
+#: src/groupdel.c:88
+#, fuzzy
+msgid "Usage: groupdel group\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: groupdel ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
-#: src/groupdel.c:110 src/groupmod.c:184 src/groupmod.c:233
+#: src/groupdel.c:105 src/groupmod.c:185 src/groupmod.c:234
 #, c-format
 msgid "%s: error removing group entry\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή καταχώρησης ομάδας\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚\n"
 
-#: src/groupdel.c:122 src/groupmod.c:204
+#: src/groupdel.c:119 src/groupmod.c:205
 #, c-format
 msgid "%s: error removing group dbm entry\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή καταχώρησης στο dbm αρχείο ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupdel.c:137
+#: src/groupdel.c:135
 #, c-format
 msgid "%s: error removing shadow group entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την αφαίρεση καταχώρησης στο αρχείο σκιωδών συνθηματικών "
-"ομάδων\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ "
+"ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupdel.c:150 src/groupmod.c:254
+#: src/groupdel.c:149 src/groupmod.c:255
 #, c-format
 msgid "%s: error removing shadow group dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την αφαίρεση καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#.
-#. * Can't remove the group.
-#.
-#: src/groupdel.c:254
+#: src/groupdel.c:255
 #, c-format
 msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: αδυναμία αφαίρεσης της πρωταρχικής ομάδας του χρήστη.\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ·Ο‚ Ο„Ξ·Ο‚ Ο€ΟΟ‰Ο„Ξ±ΟΟ‡ΞΉΞΊΞ®Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚ Ο„ΞΏΟ… Ο‡ΟΞ®ΟƒΟ„Ξ·.\n"
 
-#: src/groupdel.c:355 src/groupmod.c:550
+#: src/groupdel.c:359 src/groupmod.c:551
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: Η ομάδα %s δεν υπάρχει\n"
+msgstr "%s: Ξ— ΞΏΞΌΞ¬Ξ΄Ξ± %s Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#: src/groupdel.c:369 src/groupmod.c:566
+#: src/groupdel.c:373 src/groupmod.c:567
 #, c-format
 msgid "%s: group %s is a NIS group\n"
-msgstr "%s: Η ομάδα %s είναι NIS ομάδα\n"
+msgstr "%s: Ξ— ΞΏΞΌΞ¬Ξ΄Ξ± %s ΞµΞ―Ξ½Ξ±ΞΉ NIS ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
-#: src/groupdel.c:375 src/groupmod.c:571 src/userdel.c:776 src/usermod.c:1045
+#: src/groupdel.c:378 src/groupmod.c:572 src/userdel.c:724 src/usermod.c:805
 #, c-format
 msgid "%s: %s is the NIS master\n"
-msgstr "%s: Ο %s είναι ο κύριος διακομιστής NIS\n"
+msgstr "%s: Ξ %s ΞµΞ―Ξ½Ξ±ΞΉ ΞΏ ΞΊΟΟΞΉΞΏΟ‚ Ξ΄ΞΉΞ±ΞΊΞΏΞΌΞΉΟƒΟ„Ξ®Ο‚ NIS\n"
 
 #: src/groupmems.c:95
 msgid "Member already exists\n"
@@ -1016,7 +914,7 @@ msgid "Member to remove could not be found\n"
 msgstr ""
 
 #: src/groupmems.c:158
-msgid "usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
 #: src/groupmems.c:201
@@ -1034,62 +932,63 @@ msgstr ""
 #: src/groupmems.c:215
 #, fuzzy
 msgid "Unable to lock group file\n"
-msgstr "Αδυναμία κλειδώματος του αρχείου ομάδων\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/groupmems.c:220
 #, fuzzy
 msgid "Unable to open group file\n"
-msgstr "Αδυναμία ανοίγματος του αρχείου ομάδων\n"
+msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/groupmems.c:240
 #, fuzzy
 msgid "Cannot close group file\n"
-msgstr "αδυναμία ανοίγματος αρχείου ομάδων\n"
+msgstr "Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupmod.c:103
-msgid "usage: groupmod [-g gid [-o]] [-n name] group\n"
-msgstr "χρήση: groupmod [-g gid [-o]] [-n όνομα] ομάδα\n"
+#: src/groupmod.c:104
+#, fuzzy
+msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: groupmod [-g gid [-o]] [-n ΟΞ½ΞΏΞΌΞ±] ΞΏΞΌΞ¬Ξ΄Ξ±\n"
 
-#: src/groupmod.c:161
+#: src/groupmod.c:162
 #, fuzzy, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: Ο %s δεν βρέθηκε στο /etc/passwd\n"
+msgstr "%s: Ξ %s Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ ΟƒΟ„ΞΏ /etc/passwd\n"
 
-#: src/groupmod.c:247
+#: src/groupmod.c:248
 #, c-format
 msgid "%s: cannot add new dbm shadow group entry\n"
 msgstr ""
-"%s: αδυναμία προσθήκης νέας dbm καταχώρησης στο αρχείο σκιωδών συνθηματικών "
-"ομάδων\n"
+"%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ·Ο‚ Ξ½Ξ­Ξ±Ο‚ dbm ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ "
+"ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/groupmod.c:300
+#: src/groupmod.c:301
 #, fuzzy, c-format
 msgid "%s: %u is not a unique gid\n"
-msgstr "%s: Το %ld δεν είναι μοναδικό gid\n"
+msgstr "%s: Ξ¤ΞΏ %ld Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ gid\n"
 
-#: src/groupmod.c:330
+#: src/groupmod.c:331
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: Το %s δεν είναι μοναδικό όνομα\n"
+msgstr "%s: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ ΟΞ½ΞΏΞΌΞ±\n"
 
 #: src/groups.c:59
 #, c-format
 msgid "unknown user %s\n"
-msgstr "άγνωστος χρήστης: %s\n"
+msgstr "Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚: %s\n"
 
 #: src/grpck.c:87
 #, fuzzy, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Χρήση: %s [-r] [-s] [group [gshadow]]\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-r] [-s] [group [gshadow]]\n"
 
 #: src/grpck.c:90
 #, fuzzy, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
-msgstr "Χρήση: %s [-r] [-s] [group]\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-r] [-s] [group]\n"
 
 #: src/grpck.c:108 src/pwck.c:108
 msgid "No"
-msgstr "Οχι"
+msgstr "ΞΟ‡ΞΉ"
 
 #: src/grpck.c:192 src/pwck.c:175
 #, c-format
@@ -1099,259 +998,232 @@ msgstr ""
 #: src/grpck.c:232 src/grpck.c:242 src/pwck.c:215 src/pwck.c:225
 #, c-format
 msgid "%s: cannot lock file %s\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s\n"
 
 #: src/grpck.c:259 src/grpck.c:268 src/mkpasswd.c:202 src/pwck.c:242
 #: src/pwck.c:251
 #, c-format
 msgid "%s: cannot open file %s\n"
-msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:311
 msgid "invalid group file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο ομάδων\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpck.c:312 src/grpck.c:375 src/grpck.c:458 src/grpck.c:521
 #: src/grpck.c:538 src/pwck.c:296 src/pwck.c:358 src/pwck.c:457 src/pwck.c:519
 #: src/pwck.c:543
 #, c-format
 msgid "delete line `%s'? "
-msgstr "διαγραφή γραμμής `%s'; "
+msgstr "Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ `%s'; "
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:374
 msgid "duplicate group entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο ομάδων\n"
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpck.c:391
 #, c-format
 msgid "invalid group name `%s'\n"
-msgstr "Μη έγκυρο όνομα ομάδας `%s'\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚ `%s'\n"
 
 #: src/grpck.c:418
 #, c-format
 msgid "group %s: no user %s\n"
-msgstr "ομάδα %s: δεν υπάρχει χρήστης %s\n"
+msgstr "ΞΏΞΌΞ¬Ξ΄Ξ± %s: Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
 #: src/grpck.c:420 src/grpck.c:590
 #, c-format
 msgid "delete member `%s'? "
-msgstr "διαγραφή μέλους `%s'; "
+msgstr "Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΌΞ­Ξ»ΞΏΟ…Ο‚ `%s'; "
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/grpck.c:457
 msgid "invalid shadow group file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών ομάδων\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/grpck.c:520
 msgid "duplicate shadow group entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών ομάδων\n"
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpck.c:537
 msgid "no matching group file entry\n"
-msgstr "Δεν βρέθηκε καταχώρηση στο αρχείο ομάδων που να ταιριάζει\n"
+msgstr "Ξ”ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½ Ο€ΞΏΟ… Ξ½Ξ± Ο„Ξ±ΞΉΟΞΉΞ¬Ξ¶ΞµΞΉ\n"
 
 #: src/grpck.c:558
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "σκιώδης ομάδα %s: Δεν υπάρχει διαχειριστής χρήστης %s\n"
+msgstr "ΟƒΞΊΞΉΟΞ΄Ξ·Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ± %s: Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
 #: src/grpck.c:560
 #, c-format
 msgid "delete administrative member `%s'? "
-msgstr "διαγραφή διαχειριστικού μέλους `%s'; "
+msgstr "Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® Ξ΄ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„ΞΉΞΊΞΏΟ ΞΌΞ­Ξ»ΞΏΟ…Ο‚ `%s'; "
 
 #: src/grpck.c:588
 #, c-format
 msgid "shadow group %s: no user %s\n"
-msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
+msgstr "ΟƒΞΊΞΉΟΞ΄Ξ·Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ± %s: Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s\n"
 
 #: src/grpck.c:616 src/grpck.c:622 src/pwck.c:577 src/pwck.c:585
 #, c-format
 msgid "%s: cannot update file %s\n"
-msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… %s\n"
 
 #: src/grpck.c:647 src/pwck.c:612
 #, c-format
 msgid "%s: the files have been updated; run mkpasswd\n"
-msgstr "%s: τα αρχεία ανανεώθηκαν. Εκτελέστε mkpasswd\n"
+msgstr "%s: Ο„Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ± Ξ±Ξ½Ξ±Ξ½ΞµΟΞΈΞ·ΞΊΞ±Ξ½. Ξ•ΞΊΟ„ΞµΞ»Ξ­ΟƒΟ„Ξµ mkpasswd\n"
 
 #: src/grpck.c:648 src/grpck.c:652 src/pwck.c:613 src/pwck.c:617
 #, c-format
 msgid "%s: no changes\n"
-msgstr "%s: καμιά αλλαγή\n"
+msgstr "%s: ΞΊΞ±ΞΌΞΉΞ¬ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®\n"
 
 #: src/grpck.c:651 src/pwck.c:616
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: τα αρχεία ανανεώθηκαν\n"
+msgstr "%s: Ο„Ξ± Ξ±ΟΟ‡ΞµΞ―Ξ± Ξ±Ξ½Ξ±Ξ½ΞµΟΞΈΞ·ΞΊΞ±Ξ½\n"
 
 #: src/grpconv.c:60 src/grpunconv.c:56
 #, c-format
 msgid "%s: can't lock group file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpconv.c:65 src/grpunconv.c:61
 #, c-format
 msgid "%s: can't open group file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpconv.c:70 src/grpunconv.c:66
 #, c-format
 msgid "%s: can't lock shadow group file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpconv.c:76 src/grpunconv.c:72
 #, c-format
 msgid "%s: can't open shadow group file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpconv.c:94
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
 msgstr ""
-"%s: αδυναμία αφαίρεσης  της ομάδας %s, από το αρχείο σκιωδών συνθηματικών\n"
-"ομάδων\n"
+"%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ·Ο‚  Ο„Ξ·Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚ %s, Ξ±Ο€Ο Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
+"ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/grpconv.c:138 src/pwconv.c:153
+#: src/grpconv.c:133 src/pwconv.c:154
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
 msgstr ""
-"%s: αδυναμία ανανέωσης καταχώρησης στο αρχείο σκιωδών συνθηματικών για τον %"
+"%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %"
 "s\n"
 
-#: src/grpconv.c:148 src/grpunconv.c:91
+#: src/grpconv.c:143 src/grpunconv.c:91
 #, c-format
 msgid "%s: can't update entry for group %s\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης για την ομάδα %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± Ο„Ξ·Ξ½ ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
-#: src/grpconv.c:155 src/grpunconv.c:99
+#: src/grpconv.c:150 src/grpunconv.c:99
 #, c-format
 msgid "%s: can't update shadow group file\n"
-msgstr "%s: αδυναμία ανανέωσης του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/grpconv.c:160 src/grpunconv.c:105
+#: src/grpconv.c:155 src/grpunconv.c:105
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: αδυναμία ανανέωσης για το αρχείο ομάδων\n"
-
-#: src/grpconv.c:175 src/grpunconv.c:127
-#, c-format
-msgid "%s: not configured for shadow group support.\n"
-msgstr "%s: Δεν είναι διαμορφωμένο για σκιώδη συνθηματικά ομάδων.\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ξ³ΞΉΞ± Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/grpunconv.c:110
 #, c-format
 msgid "%s: can't delete shadow group file\n"
 msgstr ""
-"%s: Δεν είναι δυνατόν να διαγραφεί το αρχείο σκιωδών συνθηματικών ομάδων\n"
+"%s: Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ Ξ½Ξ± Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†ΞµΞ― Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/id.c:53
-msgid "usage: id [-a]\n"
-msgstr "χρήση: id [-a]\n"
+#, fuzzy
+msgid "Usage: id [-a]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: id [-a]\n"
 
 #: src/id.c:55
-msgid "usage: id\n"
-msgstr "χρήση: id\n"
+#, fuzzy
+msgid "Usage: id\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: id\n"
 
-#.
-#. * Start off the group message. It will be of the format
-#. *
-#. *      groups=###(aaa),###(aaa),###(aaa)
-#. *
-#. * where "###" is a numerical value and "aaa" is the
-#. * corresponding name for each respective numerical value.
-#.
 #: src/id.c:169
 msgid " groups="
-msgstr " ομάδες="
+msgstr " ΞΏΞΌΞ¬Ξ΄ΞµΟ‚="
 
 #: src/lastlog.c:110 src/lastlog.c:116
 #, c-format
-msgid "Usage: %s [<-u|--login> login-name] [<-t|--time> days] [<-h|--help>]\n"
+msgid "Usage: %s [{-u|--login} login] [{-t|--time} days] [{-h|--help}]\n"
 msgstr ""
 
 #: src/lastlog.c:181
 msgid "Username         Port     From             Latest\n"
-msgstr "Όνομα_Χρήστη     Θύρα     Από              Τελευταία\n"
+msgstr "ΞΞ½ΞΏΞΌΞ±_Ξ§ΟΞ®ΟƒΟ„Ξ·     ΞΟΟΞ±     Ξ‘Ο€Ο              Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±\n"
 
 #: src/lastlog.c:183
 msgid "Username                Port     Latest\n"
-msgstr "Όνομα_Χρήστη            Θύρα     Τελευταία\n"
+msgstr "ΞΞ½ΞΏΞΌΞ±_Ξ§ΟΞ®ΟƒΟ„Ξ·            ΞΟΟΞ±     Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±\n"
 
-#: src/lastlog.c:197
+#: src/lastlog.c:198
 msgid "**Never logged in**"
-msgstr "**Καμιά είσοδος στο σύστημα**"
+msgstr "**ΞΞ±ΞΌΞΉΞ¬ ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ ΟƒΟ„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ±**"
 
-#: src/login.c:185
-#, c-format
-msgid "usage: %s [-p] [name]\n"
-msgstr "χρήση: %s [-p] [όνομα]\n"
+#: src/login.c:175
+#, fuzzy, c-format
+msgid "Usage: %s [-p] [name]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-p] [ΟΞ½ΞΏΞΌΞ±]\n"
 
-#: src/login.c:188
+#: src/login.c:178
 #, c-format
 msgid "       %s [-p] [-h host] [-f name]\n"
-msgstr "       %s [-p] [-h σύστημα] [-f όνομα]\n"
+msgstr "       %s [-p] [-h ΟƒΟΟƒΟ„Ξ·ΞΌΞ±] [-f ΟΞ½ΞΏΞΌΞ±]\n"
 
-#: src/login.c:190
+#: src/login.c:180
 #, c-format
 msgid "       %s [-p] -r host\n"
-msgstr "       %s [-p] -r σύστημα\n"
+msgstr "       %s [-p] -r ΟƒΟΟƒΟ„Ξ·ΞΌΞ±\n"
 
-#: src/login.c:274
+#: src/login.c:259
 msgid "Invalid login time\n"
-msgstr "Εσφαλμένη ώρα εισόδου\n"
+msgstr "Ξ•ΟƒΟ†Ξ±Ξ»ΞΌΞ­Ξ½Ξ· ΟΟΞ± ΞµΞΉΟƒΟΞ΄ΞΏΟ…\n"
 
-#: src/login.c:329
+#: src/login.c:314
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
 msgstr ""
 "\n"
-"Το σύστημα έκλεισε για συντήρηση ρουτίνας\n"
+"Ξ¤ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ± Ξ­ΞΊΞ»ΞµΞΉΟƒΞµ Ξ³ΞΉΞ± ΟƒΟ…Ξ½Ο„Ξ®ΟΞ·ΟƒΞ· ΟΞΏΟ…Ο„Ξ―Ξ½Ξ±Ο‚\n"
 
-#: src/login.c:340
+#: src/login.c:325
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
 msgstr ""
 "\n"
-"[Παράκαμψη αποσύνδεσης -- Η είσοδος του root επετράπη.]\n"
+"[Ξ Ξ±ΟΞ¬ΞΊΞ±ΞΌΟΞ· Ξ±Ο€ΞΏΟƒΟΞ½Ξ΄ΞµΟƒΞ·Ο‚ -- Ξ— ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ Ο„ΞΏΟ… root ΞµΟ€ΞµΟ„ΟΞ¬Ο€Ξ·.]\n"
 
-#: src/login.c:377
+#: src/login.c:362
 #, c-format
 msgid ""
 "\n"
 "Login timed out after %d seconds.\n"
 msgstr ""
 "\n"
-"Η διαδικασία εισόδου τερματίστηκε μετά από %d δευτερόλεπτα.\n"
+"Ξ— Ξ΄ΞΉΞ±Ξ΄ΞΉΞΊΞ±ΟƒΞ―Ξ± ΞµΞΉΟƒΟΞ΄ΞΏΟ… Ο„ΞµΟΞΌΞ±Ο„Ξ―ΟƒΟ„Ξ·ΞΊΞµ ΞΌΞµΟ„Ξ¬ Ξ±Ο€Ο %d Ξ΄ΞµΟ…Ο„ΞµΟΟΞ»ΞµΟ€Ο„Ξ±.\n"
 
-#: src/login.c:689
+#: src/login.c:648
 #, c-format
 msgid " on `%.100s' from `%.200s'"
-msgstr " στο `%.100s' από `%.200s'"
+msgstr " ΟƒΟ„ΞΏ `%.100s' Ξ±Ο€Ο `%.200s'"
 
-#: src/login.c:693
+#: src/login.c:652
 #, c-format
 msgid " on `%.100s'"
-msgstr " στο `%.100s'"
+msgstr " ΟƒΟ„ΞΏ `%.100s'"
 
-#: src/login.c:852
+#: src/login.c:811
 #, c-format
 msgid ""
 "\n"
@@ -1360,73 +1232,73 @@ msgstr ""
 "\n"
 "%s login: "
 
-#: src/login.c:855
+#: src/login.c:814
 msgid "login: "
 msgstr "login: "
 
-#: src/login.c:1071 src/sulogin.c:233
+#: src/login.c:1013 src/sulogin.c:205
 msgid "Login incorrect"
-msgstr "Διαδικασία εισόδου απέτυχε"
+msgstr "Ξ”ΞΉΞ±Ξ΄ΞΉΞΊΞ±ΟƒΞ―Ξ± ΞµΞΉΟƒΟΞ΄ΞΏΟ… Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ"
 
-#: src/login.c:1265
+#: src/login.c:1193
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr ""
-"Προειδοποίηση: Η είσοδος επανενεργοποιήθηκε μετά από προσωρινό αποκλεισμό.\n"
+"Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ— ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚ ΞµΟ€Ξ±Ξ½ΞµΞ½ΞµΟΞ³ΞΏΟ€ΞΏΞΉΞ®ΞΈΞ·ΞΊΞµ ΞΌΞµΟ„Ξ¬ Ξ±Ο€Ο Ο€ΟΞΏΟƒΟ‰ΟΞΉΞ½Ο Ξ±Ο€ΞΏΞΊΞ»ΞµΞΉΟƒΞΌΟ.\n"
 
-#: src/login.c:1278
+#: src/login.c:1207
 #, c-format
 msgid "Last login: %s on %s"
-msgstr "Τελευταία είσοδος: %s στο %s"
+msgstr "Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚: %s ΟƒΟ„ΞΏ %s"
 
-#: src/login.c:1281
+#: src/login.c:1210
 #, c-format
 msgid "Last login: %.19s on %s"
-msgstr "Τελευταία είσοδος: %.19s στο %s"
+msgstr "Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚: %.19s ΟƒΟ„ΞΏ %s"
 
-#: src/login.c:1287
+#: src/login.c:1216
 #, c-format
 msgid " from %.*s"
-msgstr " από %.*s"
+msgstr " Ξ±Ο€Ο %.*s"
 
-#: src/login.c:1364
+#: src/login.c:1293
 msgid "Starting rad_login\n"
-msgstr "Έναρξη rad_login\n"
+msgstr "ΞΞ½Ξ±ΟΞΎΞ· rad_login\n"
 
 #: src/mkpasswd.c:47
 #, c-format
 msgid "%s: no DBM database on system - no action performed\n"
 msgstr ""
-"%s: Δεν υπάρχει DBM βάση δεδομένων στο σύστημα - καμιά ενέργεια δεν "
-"εκτελείται\n"
+"%s: Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ DBM Ξ²Ξ¬ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ ΟƒΟ„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ± - ΞΊΞ±ΞΌΞΉΞ¬ ΞµΞ½Ξ­ΟΞ³ΞµΞΉΞ± Ξ΄ΞµΞ½ "
+"ΞµΞΊΟ„ΞµΞ»ΞµΞ―Ο„Ξ±ΞΉ\n"
 
 #: src/mkpasswd.c:232 src/mkpasswd.c:237
 #, c-format
 msgid "%s: cannot overwrite file %s\n"
-msgstr "%s: αδυναμία εγγραφής πάνω από το αρχείο %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο€Ξ¬Ξ½Ο‰ Ξ±Ο€Ο Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ %s\n"
 
 #: src/mkpasswd.c:252
 #, c-format
 msgid "%s: cannot open DBM files for %s\n"
-msgstr "%s: αδυναμία ανοίγματος DBM αρχείων για το %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ DBM Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½ Ξ³ΞΉΞ± Ο„ΞΏ %s\n"
 
 #: src/mkpasswd.c:287
 #, c-format
 msgid "%s: the beginning with "
-msgstr "%s: η αρχή με "
+msgstr "%s: Ξ· Ξ±ΟΟ‡Ξ® ΞΌΞµ "
 
 #: src/mkpasswd.c:288
 #, fuzzy
 msgid " is too long\n"
-msgstr " Πολύ μακριά πεδία\n"
+msgstr " Ξ ΞΏΞ»Ο ΞΌΞ±ΞΊΟΞΉΞ¬ Ο€ΞµΞ΄Ξ―Ξ±\n"
 
 #: src/mkpasswd.c:315
 #, c-format
 msgid "%s: error parsing line \"%s\"\n"
-msgstr "%s: Σφάλμα κατά την επεξεργασία της γραμμής \"%s\"\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΟ€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± Ο„Ξ·Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ®Ο‚ \"%s\"\n"
 
 #: src/mkpasswd.c:323 src/mkpasswd.c:328 src/mkpasswd.c:333 src/mkpasswd.c:338
 msgid "adding record for name "
-msgstr "προσθήκη καταχώρησης για όνομα "
+msgstr "Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± ΟΞ½ΞΏΞΌΞ± "
 
 #: src/mkpasswd.c:324 src/mkpasswd.c:329 src/mkpasswd.c:334 src/mkpasswd.c:339
 #: src/mkpasswd.c:345 src/mkpasswd.c:351 src/mkpasswd.c:356 src/mkpasswd.c:361
@@ -1436,410 +1308,348 @@ msgstr ""
 #: src/mkpasswd.c:344 src/mkpasswd.c:350 src/mkpasswd.c:355 src/mkpasswd.c:360
 #, c-format
 msgid "%s: error adding record for "
-msgstr "%s: Σφάλμα κατά την προσθήκη καταχώρησης για "
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± "
 
 #: src/mkpasswd.c:378
 #, c-format
 msgid "added %d entries, longest was %d\n"
-msgstr "προστέθηκαν %d καταχωρήσεις, η μεγαλύτερη ήταν %d\n"
+msgstr "Ο€ΟΞΏΟƒΟ„Ξ­ΞΈΞ·ΞΊΞ±Ξ½ %d ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞµΞΉΟ‚, Ξ· ΞΌΞµΞ³Ξ±Ξ»ΟΟ„ΞµΟΞ· Ξ®Ο„Ξ±Ξ½ %d\n"
 
 #: src/mkpasswd.c:392
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp|sg] file\n"
-msgstr "Χρήση: %s [-vf] [-p|g|sp|sg] αρχείο\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-vf] [-p|g|sp|sg] Ξ±ΟΟ‡ΞµΞ―ΞΏ\n"
 
 #: src/mkpasswd.c:395
 #, c-format
 msgid "Usage: %s [-vf] [-p|g|sp] file\n"
-msgstr "Χρήση: %s [-vf] [-p|g|sp] αρχείο\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-vf] [-p|g|sp] Ξ±ΟΟ‡ΞµΞ―ΞΏ\n"
 
 #: src/mkpasswd.c:398
 #, c-format
 msgid "Usage: %s [-vf] [-p|g] file\n"
-msgstr "Χρήση: %s [-vf] [-p|g] αρχείο\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-vf] [-p|g] Ξ±ΟΟ‡ΞµΞ―ΞΏ\n"
 
 #: src/newgrp.c:61
-msgid "usage: newgrp [-] [group]\n"
-msgstr "χρήση: newgrp [-] [ομάδα]\n"
+#, fuzzy
+msgid "Usage: newgrp [-] [group]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: newgrp [-] [ΞΏΞΌΞ¬Ξ΄Ξ±]\n"
 
 #: src/newgrp.c:63
-msgid "usage: sg group [[-c] command]\n"
-msgstr "χρήση: sg ομάδα [[-c] εντολή]\n"
+#, fuzzy
+msgid "Usage: sg group [[-c] command]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: sg ΞΏΞΌΞ¬Ξ΄Ξ± [[-c] ΞµΞ½Ο„ΞΏΞ»Ξ®]\n"
 
-#: src/newgrp.c:136
+#: src/newgrp.c:131
 #, c-format
 msgid "unknown uid: %u\n"
-msgstr "άγνωστο uid: %u\n"
+msgstr "Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ uid: %u\n"
 
-#: src/newgrp.c:219
+#: src/newgrp.c:214
 #, c-format
 msgid "unknown gid: %lu\n"
-msgstr "άγνωστο gid: %lu\n"
+msgstr "Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ gid: %lu\n"
 
-#: src/newgrp.c:365 src/newgrp.c:374
+#: src/newgrp.c:360 src/newgrp.c:369
 msgid "Sorry.\n"
-msgstr "Λυπάμαι.\n"
+msgstr "Ξ›Ο…Ο€Ξ¬ΞΌΞ±ΞΉ.\n"
 
-#: src/newgrp.c:472
+#: src/newgrp.c:469
 msgid "too many groups\n"
-msgstr "πάρα πολλές ομάδες\n"
+msgstr "Ο€Ξ¬ΟΞ± Ο€ΞΏΞ»Ξ»Ξ­Ο‚ ΞΏΞΌΞ¬Ξ΄ΞµΟ‚\n"
 
 #: src/newusers.c:78
 #, c-format
 msgid "Usage: %s [input]\n"
-msgstr "Χρήση: %s [είσοδος]\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [ΞµΞ―ΟƒΞΏΞ΄ΞΏΟ‚]\n"
 
-#: src/newusers.c:407
+#: src/newusers.c:388
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: αδυναμία κλειδώματος του /etc/passwd.\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… /etc/passwd.\n"
 
-#: src/newusers.c:419
+#: src/newusers.c:400
 #, c-format
 msgid "%s: can't lock files, try again later\n"
-msgstr "%s: αδυναμία κλειδώματος αρχείων, ξαναδοκιμάστε αργότερα\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½, ΞΎΞ±Ξ½Ξ±Ξ΄ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ Ξ±ΟΞ³ΟΟ„ΞµΟΞ±\n"
 
-#: src/newusers.c:435
+#: src/newusers.c:416
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: αδυναμία ανοίγματος των αρχείων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„Ο‰Ξ½ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½\n"
+
+#: src/newusers.c:461
+#, c-format
+msgid "%s: line %d: invalid line\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: ΞΌΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· Ξ³ΟΞ±ΞΌΞΌΞ®\n"
 
 #: src/newusers.c:480
 #, c-format
-msgid "%s: line %d: invalid line\n"
-msgstr "%s: γραμμή %d: μη έγκυρη γραμμή\n"
-
-#: src/newusers.c:499
-#, c-format
 msgid "%s: line %d: can't create GID\n"
-msgstr "%s: γραμμή %d: αδυναμία δημιουργίας GID\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ GID\n"
 
-#: src/newusers.c:515
+#: src/newusers.c:496
 #, c-format
 msgid "%s: line %d: can't create UID\n"
-msgstr "%s: γραμμή %d: αδυναμία δημιουργίας UID\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ UID\n"
 
-#: src/newusers.c:528
+#: src/newusers.c:509
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: γραμμή %d: αδυναμία εύρεσης χρήστη %s\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟΟΞµΟƒΞ·Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ· %s\n"
 
-#: src/newusers.c:537
+#: src/newusers.c:518
 #, c-format
 msgid "%s: line %d: can't update password\n"
-msgstr "%s: γραμμή %d: αδυναμία ανανέωση συνθηματικού\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ\n"
 
-#: src/newusers.c:555
+#: src/newusers.c:536
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: γραμμή %d: αποτυχία δημιουργίας καταλόγου(mkdir)\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ…(mkdir)\n"
 
-#: src/newusers.c:561
+#: src/newusers.c:542
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: γραμμή %d: αποτυχία αλλαγής ιδιοκτήτη(chown)\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ ΞΉΞ΄ΞΉΞΏΞΊΟ„Ξ®Ο„Ξ·(chown)\n"
 
-#: src/newusers.c:571
+#: src/newusers.c:552
 #, c-format
 msgid "%s: line %d: can't update entry\n"
-msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης\n"
+msgstr "%s: Ξ³ΟΞ±ΞΌΞΌΞ® %d: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚\n"
 
-#: src/newusers.c:603
+#: src/newusers.c:584
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: Σφάλμα κατά την ενημέρωση αρχείων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ ΞµΞ½Ξ·ΞΌΞ­ΟΟ‰ΟƒΞ· Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½\n"
 
-#: src/passwd.c:174
-#, c-format
-msgid "usage: %s [-f|-s] [name]\n"
-msgstr "χρήση: %s [-f|-s] [όνομα]\n"
+#: src/passwd.c:155
+#, fuzzy, c-format
+msgid "Usage: %s [-f|-s] [name]\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-f|-s] [ΟΞ½ΞΏΞΌΞ±]\n"
 
-#: src/passwd.c:178
+#: src/passwd.c:159
 #, c-format
 msgid "       %s [-x max] [-n min] [-w warn] [-i inact] name\n"
-msgstr "       %s [-x μεγ.] [-n ελάχ.] [-w προειδ.] [-i ανενεργό] όνομα\n"
+msgstr "       %s [-x ΞΌΞµΞ³.] [-n ΞµΞ»Ξ¬Ο‡.] [-w Ο€ΟΞΏΞµΞΉΞ΄.] [-i Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο] ΟΞ½ΞΏΞΌΞ±\n"
 
-#: src/passwd.c:180
+#: src/passwd.c:161
 #, c-format
 msgid "       %s {-l|-u|-d|-S|-e} name\n"
-msgstr "       %s {-l|-u|-d|-S|-e} όνομα\n"
+msgstr "       %s {-l|-u|-d|-S|-e} ΟΞ½ΞΏΞΌΞ±\n"
 
-#: src/passwd.c:283
-#, c-format
-msgid "User %s has a TCFS key, his old password is required.\n"
-msgstr "Ο χρήστης %s έχει κλειδί TCFS, απαιτείται το παλιό συνθηματικό.\n"
-
-#: src/passwd.c:286
-msgid "You can use -t option to force the change.\n"
-msgstr ""
-"Μπορείτε να χρησιμοποιήσετε την -t παράμετρο για να εξαναγκάσετε την\n"
-"πραγματοποίηση της αλλαγής.\n"
-
-#: src/passwd.c:292
+#: src/passwd.c:216
 msgid "Old password: "
-msgstr "Παλιό Συνθηματικό: "
+msgstr "Ξ Ξ±Ξ»ΞΉΟ Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
-#: src/passwd.c:301
+#: src/passwd.c:225
 #, c-format
 msgid "Incorrect password for `%s'\n"
-msgstr "Εσφαλμένο συνθηματικό για τον `%s'\n"
+msgstr "Ξ•ΟƒΟ†Ξ±Ξ»ΞΌΞ­Ξ½ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ `%s'\n"
 
-#: src/passwd.c:314
-#, c-format
-msgid "Warning: user %s has a TCFS key.\n"
-msgstr "Προειδοποίηση: Ο χρήστης %s έχει κλειδί TCFS.\n"
-
-#: src/passwd.c:333
+#: src/passwd.c:249
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Εισάγετε το νέο συνθηματικό (ελάχιστο %d, μέγιστο %d χαρακτήρες)\n"
-"Παρακαλώ χρησιμοποιήστε ένα συνδυασμό από κεφαλαία και μικρά γράμματα\n"
-"καθώς και αριθμούς.\n"
+"Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„ΞΏ Ξ½Ξ­ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ (ΞµΞ»Ξ¬Ο‡ΞΉΟƒΟ„ΞΏ %d, ΞΌΞ­Ξ³ΞΉΟƒΟ„ΞΏ %d Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ®ΟΞµΟ‚)\n"
+"Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΟ„Ξµ Ξ­Ξ½Ξ± ΟƒΟ…Ξ½Ξ΄Ο…Ξ±ΟƒΞΌΟ Ξ±Ο€Ο ΞΊΞµΟ†Ξ±Ξ»Ξ±Ξ―Ξ± ΞΊΞ±ΞΉ ΞΌΞΉΞΊΟΞ¬ Ξ³ΟΞ¬ΞΌΞΌΞ±Ο„Ξ±\n"
+"ΞΊΞ±ΞΈΟΟ‚ ΞΊΞ±ΞΉ Ξ±ΟΞΉΞΈΞΌΞΏΟΟ‚.\n"
 
-#: src/passwd.c:339
+#: src/passwd.c:255
 msgid "New password: "
-msgstr "Νέο Συνθηματικό: "
+msgstr "ΞΞ­ΞΏ Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ: "
 
-#: src/passwd.c:350
+#: src/passwd.c:266
 msgid "Try again.\n"
-msgstr "Ξαναδοκιμάστε.\n"
+msgstr "ΞΞ±Ξ½Ξ±Ξ΄ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ.\n"
 
-#: src/passwd.c:361
+#: src/passwd.c:277
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
 msgstr ""
 "\n"
-"Προσοχή: αδύναμο συνθηματικό (εισάγετέ το πάλι για να το χρησιμοποιήσετε).\n"
+"Ξ ΟΞΏΟƒΞΏΟ‡Ξ®: Ξ±Ξ΄ΟΞ½Ξ±ΞΌΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ (ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξ­ Ο„ΞΏ Ο€Ξ¬Ξ»ΞΉ Ξ³ΞΉΞ± Ξ½Ξ± Ο„ΞΏ Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΟ„Ξµ).\n"
 
-#: src/passwd.c:371
+#: src/passwd.c:287
 msgid "They don't match; try again.\n"
-msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά.\n"
+msgstr "Ξ”ΞµΞ½ Ο„Ξ±ΞΉΟΞΉΞ¬Ξ¶ΞΏΟ…Ξ½. Ξ”ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬.\n"
 
-#: src/passwd.c:451 src/passwd.c:469
+#: src/passwd.c:364 src/passwd.c:382
 #, c-format
 msgid "The password for %s cannot be changed.\n"
-msgstr "Το συνθηματικό για τον %s δεν μπορεί να αλλάξει.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ±Ξ»Ξ»Ξ¬ΞΎΞµΞΉ.\n"
 
-#: src/passwd.c:494
+#: src/passwd.c:396
 #, c-format
 msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Συγνώμη, το συνθηματικό για τον %s δεν μπορεί να αλλάξει ακόμη.\n"
+msgstr "Ξ£Ο…Ξ³Ξ½ΟΞΌΞ·, Ο„ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s Ξ΄ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ±Ξ»Ξ»Ξ¬ΞΎΞµΞΉ Ξ±ΞΊΟΞΌΞ·.\n"
 
-#: src/passwd.c:614
+#: src/passwd.c:479
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: δεν υπάρχει ελεύθερη μνήμη\n"
+msgstr "%s: Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ ΞµΞ»ΞµΟΞΈΞµΟΞ· ΞΌΞ½Ξ®ΞΌΞ·\n"
 
-#: src/passwd.c:769
-msgid "Cannot lock the TCFS key database; try again later\n"
-msgstr "Αδυναμία κλειδώματος της βάσης κλειδιών του TCFS. Δοκιμάστε αργότερα\n"
-
-#: src/passwd.c:777
-msgid "Cannot open the TCFS key database.\n"
-msgstr "Αδυναμία ανοίγματος της βάσης κλειδιών του TCFS.\n"
-
-#: src/passwd.c:785
-msgid "Error updating the TCFS key database.\n"
-msgstr "Σφάλμα κατά την ανανέωση της βάσης κλειδιών του TCFS.\n"
-
-#: src/passwd.c:792
-msgid "Cannot commit TCFS changes.\n"
-msgstr "Αδυναμία υλοποίησης των αλλαγών στο TCFS.\n"
-
-#: src/passwd.c:975
+#: src/passwd.c:730
 #, c-format
 msgid "%s: Cannot execute %s"
-msgstr "%s: Αδυναμία εκτέλεσης του %s"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΞΊΟ„Ξ­Ξ»ΞµΟƒΞ·Ο‚ Ο„ΞΏΟ… %s"
 
-#: src/passwd.c:1077
+#: src/passwd.c:815
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s: η αποθήκη %s δεν υποστηρίζεται\n"
+msgstr "%s: Ξ· Ξ±Ο€ΞΏΞΈΞ®ΞΊΞ· %s Ξ΄ΞµΞ½ Ο…Ο€ΞΏΟƒΟ„Ξ·ΟΞ―Ξ¶ΞµΟ„Ξ±ΞΉ\n"
 
-#: src/passwd.c:1152
+#: src/passwd.c:890
 #, c-format
 msgid "%s: Permission denied\n"
-msgstr "%s: ¶δεια απορρίφθηκε\n"
+msgstr "%s: Ξ†Ξ΄ΞµΞΉΞ± Ξ±Ο€ΞΏΟΟΞ―Ο†ΞΈΞ·ΞΊΞµ\n"
 
-#: src/passwd.c:1176
+#: src/passwd.c:914
 #, c-format
 msgid "You may not change the password for %s.\n"
-msgstr "Δεν μπορείτε να αλλάξετε το συνθηματικό για το(ν) %s.\n"
+msgstr "Ξ”ΞµΞ½ ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± Ξ±Ξ»Ξ»Ξ¬ΞΎΞµΟ„Ξµ Ο„ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏ(Ξ½) %s.\n"
 
-#: src/passwd.c:1242
+#: src/passwd.c:962
 #, c-format
 msgid "Changing password for %s\n"
-msgstr "Αλλαγή συνθηματικού για τον %s\n"
+msgstr "Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s\n"
 
-#: src/passwd.c:1246
+#: src/passwd.c:966
 #, c-format
 msgid "The password for %s is unchanged.\n"
-msgstr "Το συνθηματικό για τον %s δεν άλλαξε.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s Ξ΄ΞµΞ½ Ξ¬Ξ»Ξ»Ξ±ΞΎΞµ.\n"
 
-#: src/passwd.c:1297
+#: src/passwd.c:1016
 msgid "Password changed.\n"
-msgstr "Το συνθηματικό άλλαξε.\n"
+msgstr "Ξ¤ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ¬Ξ»Ξ»Ξ±ΞΎΞµ.\n"
 
 #: src/pwck.c:87
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
 #: src/pwck.c:90
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd]\n"
-msgstr "Χρήση: %s [-q] [-r] [-s] [passwd]\n"
+msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-q] [-r] [-s] [passwd]\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:295
 msgid "invalid password file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο συνθηματικών\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:357
 msgid "duplicate password entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο συνθηματικών\n"
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
 #: src/pwck.c:373
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "Μη έγκυρο όνομα χρήστη '%s'\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± Ο‡ΟΞ®ΟƒΟ„Ξ· '%s'\n"
 
-#.
-#. * No primary group, just give a warning
-#.
 #: src/pwck.c:388
 #, c-format
 msgid "user %s: no group %u\n"
-msgstr "χρήστης %s: καμιά ομάδα %u\n"
+msgstr "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s: ΞΊΞ±ΞΌΞΉΞ¬ ΞΏΞΌΞ¬Ξ΄Ξ± %u\n"
 
 #: src/pwck.c:404
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "χρήστης %s: ο κατάλογος %s δεν υπάρχει\n"
+msgstr "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s: ΞΏ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ %s Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#.
-#. * Login shell doesn't exist, give a warning
-#.
 #: src/pwck.c:420
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "χρήστης %s: το πρόγραμμα %s δεν υπάρχει\n"
+msgstr "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s: Ο„ΞΏ Ο€ΟΟΞ³ΟΞ±ΞΌΞΌΞ± %s Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#.
-#. * Tell the user this entire line is bogus and ask
-#. * them to delete it.
-#.
 #: src/pwck.c:456
 msgid "invalid shadow password file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών\n"
+msgstr "ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#.
-#. * Tell the user this entry is a duplicate of
-#. * another and ask them to delete it.
-#.
 #: src/pwck.c:518
 msgid "duplicate shadow password entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+msgstr "Ξ±Ξ½Ο„ΞΉΞ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#.
-#. * Tell the user this entry has no matching
-#. * /etc/passwd entry and ask them to delete it.
-#.
 #: src/pwck.c:542
 msgid "no matching password file entry\n"
-msgstr "Δεν βρέθηκε καταχώρηση στο αρχείο συνθηματικών που να ταιρίαζει\n"
+msgstr "Ξ”ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ Ο€ΞΏΟ… Ξ½Ξ± Ο„Ξ±ΞΉΟΞ―Ξ±Ξ¶ΞµΞΉ\n"
 
 #: src/pwck.c:560
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "χρήστης %s: τελευταία αλλαγή συνθηματικού στο μέλλον\n"
+msgstr "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s: Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ ΟƒΟ„ΞΏ ΞΌΞ­Ξ»Ξ»ΞΏΞ½\n"
 
-#: src/pwconv.c:84 src/pwunconv.c:93
+#: src/pwconv.c:85 src/pwunconv.c:79
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/pwconv.c:89 src/pwunconv.c:98
+#: src/pwconv.c:90 src/pwunconv.c:84
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/pwconv.c:117
-#, c-format
+#: src/pwconv.c:118
+#, fuzzy, c-format
 msgid "%s: can't remove shadow entry for %s\n"
 msgstr ""
-"αδυναμία αφαίρεσης καταχώρησης για τον %s, από το αρχείο σκιωδών "
-"συνθηματικών\n"
+"%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %"
+"s\n"
 
-#: src/pwconv.c:163
+#: src/pwconv.c:164
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης συνθηματικού για τον %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s\n"
 
-#: src/pwconv.c:170
+#: src/pwconv.c:171
 #, c-format
 msgid "%s: can't update shadow file\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/pwconv.c:175
+#: src/pwconv.c:176
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s: αδυναμία ανανέωσης αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/pwunconv.c:50
-#, c-format
-msgid "%s: Shadow passwords are not configured.\n"
-msgstr "%s: Τα σκιώδη συνθηματικά δεν έχουν διαμορφωθεί.\n"
-
-#: src/pwunconv.c:160
+#: src/pwunconv.c:124
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης για τον χρήστη %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± Ο„ΞΏΞ½ Ο‡ΟΞ®ΟƒΟ„Ξ· %s\n"
 
-#: src/pwunconv.c:181
+#: src/pwunconv.c:145
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: Δεν είναι δυνατόν να διαγραφεί το αρχείο σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄Ο…Ξ½Ξ±Ο„ΟΞ½ Ξ½Ξ± Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†ΞµΞ― Ο„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
 #: src/su.c:133
 msgid "Sorry."
-msgstr "Λυπάμαι."
+msgstr "Ξ›Ο…Ο€Ξ¬ΞΌΞ±ΞΉ."
 
 #: src/su.c:216
 #, c-format
 msgid "%s: must be run from a terminal\n"
-msgstr "%s: πρέπει να εκτελεστεί από τερματικό\n"
+msgstr "%s: Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± ΞµΞΊΟ„ΞµΞ»ΞµΟƒΟ„ΞµΞ― Ξ±Ο€Ο Ο„ΞµΟΞΌΞ±Ο„ΞΉΞΊΟ\n"
 
 #: src/su.c:306
 #, c-format
 msgid "%s: pam_start: error %d\n"
-msgstr "%s: pam_start: σφάλμα %d\n"
+msgstr "%s: pam_start: ΟƒΟ†Ξ¬Ξ»ΞΌΞ± %d\n"
 
 #: src/su.c:336
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "Αγνωστη ταυτότητα: %s\n"
+msgstr "Ξ‘Ξ³Ξ½Ο‰ΟƒΟ„Ξ· Ο„Ξ±Ο…Ο„ΟΟ„Ξ·Ο„Ξ±: %s\n"
 
 #: src/su.c:373 src/su.c:390
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Δεν έχετε άδεια για su %s\n"
+msgstr "Ξ”ΞµΞ½ Ξ­Ο‡ΞµΟ„Ξµ Ξ¬Ξ΄ΞµΞΉΞ± Ξ³ΞΉΞ± su %s\n"
 
-#. require own password
 #: src/su.c:385
 msgid "(Enter your own password.)"
-msgstr "(Εισάγετε το δικό σας συνθηματικό.)"
+msgstr "(Ξ•ΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„ΞΏ Ξ΄ΞΉΞΊΟ ΟƒΞ±Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ.)"
 
 #: src/su.c:419
 #, c-format
@@ -1848,633 +1658,688 @@ msgid ""
 "(Ignored)\n"
 msgstr ""
 "%s: %s\n"
-"(Αγνοήθηκε)\n"
+"(Ξ‘Ξ³Ξ½ΞΏΞ®ΞΈΞ·ΞΊΞµ)\n"
 
-#: src/su.c:626
+#: src/su.c:609
 msgid "No shell\n"
-msgstr "Δεν υπάρχει φλοιός\n"
+msgstr "Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ο†Ξ»ΞΏΞΉΟΟ‚\n"
 
-#: src/suauth.c:100
+#: src/suauth.c:105
 msgid "Access to su to that account DENIED.\n"
-msgstr "Πρόσβαση στη su σε αυτόν τον λογαριασμό ΑΡΝΗΘΗΚΕ.\n"
+msgstr "Ξ ΟΟΟƒΞ²Ξ±ΟƒΞ· ΟƒΟ„Ξ· su ΟƒΞµ Ξ±Ο…Ο„ΟΞ½ Ο„ΞΏΞ½ Ξ»ΞΏΞ³Ξ±ΟΞΉΞ±ΟƒΞΌΟ Ξ‘Ξ΅ΞΞ—ΞΞ—ΞΞ•.\n"
 
-#: src/suauth.c:107
+#: src/suauth.c:113
 msgid "Password authentication bypassed.\n"
-msgstr "Παράκαμψη εξακρίβωσης με συνθηματικό.\n"
+msgstr "Ξ Ξ±ΟΞ¬ΞΊΞ±ΞΌΟΞ· ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚ ΞΌΞµ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ.\n"
 
-#: src/suauth.c:114
+#: src/suauth.c:122
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Παρακαλώ εισάγετε το ΔΙΚΟ σας συνθηματικό για εξακρίβωση.\n"
+msgstr "Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»Ο ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„ΞΏ Ξ”Ξ™ΞΞ ΟƒΞ±Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·.\n"
 
-#. must be a password file!
-#: src/sulogin.c:132
+#: src/sulogin.c:118
 msgid "No password file\n"
-msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
+msgstr "Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#.
-#. * Fail secure
-#.
-#: src/sulogin.c:174
+#: src/sulogin.c:160
 msgid "No password entry for 'root'\n"
-msgstr "Δεν υπάρχει καταχώρηση συνθηματικού για τον 'root'\n"
+msgstr "Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ 'root'\n"
 
-#: src/sulogin.c:190
+#: src/sulogin.c:176
 msgid ""
 "\n"
 "Type control-d to proceed with normal startup,\n"
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Πληκτρολογήστε control-d για να συνεχίσετε με την κανονική έναρξη,\n"
-"(ή δώστε το συνθηματικό του root για συντήρηση του συστήματος):"
+"Ξ Ξ»Ξ·ΞΊΟ„ΟΞΏΞ»ΞΏΞ³Ξ®ΟƒΟ„Ξµ control-d Ξ³ΞΉΞ± Ξ½Ξ± ΟƒΟ…Ξ½ΞµΟ‡Ξ―ΟƒΞµΟ„Ξµ ΞΌΞµ Ο„Ξ·Ξ½ ΞΊΞ±Ξ½ΞΏΞ½ΞΉΞΊΞ® Ξ­Ξ½Ξ±ΟΞΎΞ·,\n"
+"(Ξ® Ξ΄ΟΟƒΟ„Ξµ Ο„ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ο„ΞΏΟ… root Ξ³ΞΉΞ± ΟƒΟ…Ξ½Ο„Ξ®ΟΞ·ΟƒΞ· Ο„ΞΏΟ… ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚):"
 
-#. make new environment active
-#: src/sulogin.c:243
+#: src/sulogin.c:212
 msgid "Entering System Maintenance Mode\n"
-msgstr "Έναρξη Κατάστασης Συντήρησης Συστήματος\n"
+msgstr "ΞΞ½Ξ±ΟΞΎΞ· ΞΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ·Ο‚ Ξ£Ο…Ξ½Ο„Ξ®ΟΞ·ΟƒΞ·Ο‚ Ξ£Ο…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚\n"
 
-#: src/useradd.c:251
+#: src/useradd.c:234
 #, c-format
 msgid "%s: rebuild the group database\n"
-msgstr "%s: επανακτίστε την βάση δεδομένων ομάδων\n"
+msgstr "%s: ΞµΟ€Ξ±Ξ½Ξ±ΞΊΟ„Ξ―ΟƒΟ„Ξµ Ο„Ξ·Ξ½ Ξ²Ξ¬ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:260
+#: src/useradd.c:243
 #, c-format
 msgid "%s: rebuild the shadow group database\n"
-msgstr "%s: επανακτίστε την βάση δεδομένων των σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: ΞµΟ€Ξ±Ξ½Ξ±ΞΊΟ„Ξ―ΟƒΟ„Ξµ Ο„Ξ·Ξ½ Ξ²Ξ¬ΟƒΞ· Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½ Ο„Ο‰Ξ½ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:295 src/useradd.c:309 src/usermod.c:981 src/usermod.c:995
+#: src/useradd.c:278 src/useradd.c:292 src/usermod.c:741 src/usermod.c:755
 #, c-format
 msgid "%s: invalid numeric argument `%s'\n"
-msgstr "%s: Μη έγκυρη αριθμητική παράμετρος `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· Ξ±ΟΞΉΞΈΞΌΞ·Ο„ΞΉΞΊΞ® Ο€Ξ±ΟΞ¬ΞΌΞµΟ„ΟΞΏΟ‚ `%s'\n"
 
-#: src/useradd.c:365
+#: src/useradd.c:349
 #, c-format
 msgid "%s: unknown gid %s\n"
-msgstr "%s: άγνωστο gid %s\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ gid %s\n"
 
-#: src/useradd.c:373 src/useradd.c:676 src/useradd.c:1269 src/usermod.c:260
-#: src/usermod.c:1128
+#: src/useradd.c:357 src/useradd.c:636 src/useradd.c:1129 src/usermod.c:244
+#: src/usermod.c:876
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: άγνωστη ομάδα %s\n"
+msgstr "%s: Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„Ξ· ΞΏΞΌΞ¬Ξ΄Ξ± %s\n"
 
-#: src/useradd.c:440
-#, c-format
-msgid "group=%s,%u  basedir=%s  skel=%s\n"
-msgstr "ομάδα=%s,%u  βασικός_καταλ=%s  σκελ=%s\n"
-
-#: src/useradd.c:444
-#, c-format
-msgid "shell=%s  "
-msgstr "φλοιός=%s  "
-
-#: src/useradd.c:446
-#, c-format
-msgid "inactive=%ld  expire=%s"
-msgstr "ανενεργό=%ld  λήξη=%s"
-
-#: src/useradd.c:450
+#: src/useradd.c:419
 #, c-format
 msgid "GROUP=%u\n"
-msgstr "ΟΜΑΔΑ=%u\n"
+msgstr "ΞΞΞ‘Ξ”Ξ‘=%u\n"
 
-#: src/useradd.c:451
+#: src/useradd.c:420
 #, c-format
 msgid "HOME=%s\n"
-msgstr "ΜΗΤΡΙΚΟΣ_ΚΑΤΑΛΟΓΟΣ=%s\n"
+msgstr "ΞΞ—Ξ¤Ξ΅Ξ™ΞΞΞ£_ΞΞ‘Ξ¤Ξ‘Ξ›ΞΞ“ΞΞ£=%s\n"
 
-#: src/useradd.c:453
+#: src/useradd.c:422
 #, c-format
 msgid "INACTIVE=%ld\n"
-msgstr "ΑΝΕΝΕΡΓΟΣ=%ld\n"
+msgstr "Ξ‘ΞΞ•ΞΞ•Ξ΅Ξ“ΞΞ£=%ld\n"
 
-#: src/useradd.c:454
+#: src/useradd.c:423
 #, c-format
 msgid "EXPIRE=%s\n"
-msgstr "ΛΗΞΗ=%s\n"
+msgstr "Ξ›Ξ—ΞΞ—=%s\n"
 
-#: src/useradd.c:456
+#: src/useradd.c:425
 #, c-format
 msgid "SHELL=%s\n"
-msgstr "ΚΕΛΥΦΟΣ=%s\n"
+msgstr "ΞΞ•Ξ›Ξ¥Ξ¦ΞΞ£=%s\n"
 
-#: src/useradd.c:457
+#: src/useradd.c:426
 #, c-format
 msgid "SKEL=%s\n"
-msgstr "ΣΚΕΛ=%s\n"
+msgstr "Ξ£ΞΞ•Ξ›=%s\n"
 
-#: src/useradd.c:498
+#: src/useradd.c:462
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: αδυναμία δημιουργίας νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ½Ξ­ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ο‰Ξ½ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½\n"
 
-#: src/useradd.c:503
+#: src/useradd.c:467
 #, fuzzy, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: αδυναμία δημιουργίας νέου αρχείου προκαθορισμένων ρυθμίσεων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ξ½Ξ­ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… Ο€ΟΞΏΞΊΞ±ΞΈΞΏΟΞΉΟƒΞΌΞ­Ξ½Ο‰Ξ½ ΟΟ…ΞΈΞΌΞ―ΟƒΞµΟ‰Ξ½\n"
 
-#: src/useradd.c:596 src/useradd.c:608
+#: src/useradd.c:552 src/useradd.c:564
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s: μετονομασία: %s"
+msgstr "%s: ΞΌΞµΟ„ΞΏΞ½ΞΏΞΌΞ±ΟƒΞ―Ξ±: %s"
 
-#: src/useradd.c:697 src/usermod.c:281
+#: src/useradd.c:657 src/usermod.c:265
 #, c-format
 msgid "%s: group `%s' is a NIS group.\n"
-msgstr "%s: Η ομάδα `%s' είναι NIS ομάδα.\n"
+msgstr "%s: Ξ— ΞΏΞΌΞ¬Ξ΄Ξ± `%s' ΞµΞ―Ξ½Ξ±ΞΉ NIS ΞΏΞΌΞ¬Ξ΄Ξ±.\n"
 
-#: src/useradd.c:706 src/usermod.c:290
+#: src/useradd.c:666 src/usermod.c:274
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: Προσδιορίστηκαν υπερβολικές ομάδες (μεγ. %d).\n"
+msgstr "%s: Ξ ΟΞΏΟƒΞ΄ΞΉΞΏΟΞ―ΟƒΟ„Ξ·ΞΊΞ±Ξ½ Ο…Ο€ΞµΟΞ²ΞΏΞ»ΞΉΞΊΞ­Ο‚ ΞΏΞΌΞ¬Ξ΄ΞµΟ‚ (ΞΌΞµΞ³. %d).\n"
 
-#: src/useradd.c:738 src/usermod.c:322
-#, c-format
-msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
-msgstr "χρήση: %s\t[-u uid [-o]] [-g ομάδα] [-G ομάδα,...] \n"
+#: src/useradd.c:698
+msgid "Usage: useradd [-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: useradd [-u uid [-o]] [-g ΞΏΞΌΞ¬Ξ΄Ξ±] [-G ΞΏΞΌΞ¬Ξ΄Ξ±,...] \n"
 
-#: src/useradd.c:742
-msgid "\t\t[-d home] [-s shell] [-c comment] [-m [-k template]]\n"
+#: src/useradd.c:701
+msgid "               [-d home] [-s shell] [-c comment] [-m [-k template]]\n"
 msgstr ""
-"\t\t[-d μητρικός_κατάλογος] [-s φλοιός] [-c σχόλιο]\n"
-"\t\t[-m [-k κανόνας]]\n"
+"               [-d ΞΌΞ·Ο„ΟΞΉΞΊΟΟ‚_ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚] [-s Ο†Ξ»ΞΏΞΉΟΟ‚] [-c ΟƒΟ‡ΟΞ»ΞΉΞΏ]\n"
+"               [-m [-k ΞΊΞ±Ξ½ΟΞ½Ξ±Ο‚]]\n"
 
-#: src/useradd.c:745 src/usermod.c:329
-msgid "[-f inactive] [-e expire ] "
-msgstr "[-f ανενεργό] [-e λήξη] "
+#: src/useradd.c:703 src/useradd.c:708
+msgid "               [-f inactive] [-e expire]\n"
+msgstr "               [-f Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο] [-e Ξ»Ξ®ΞΎΞ·]\n"
 
-#: src/useradd.c:748
-msgid "[-A program] "
-msgstr "[-A πρόγραμμα] "
+#: src/useradd.c:706
+msgid "       useradd -D [-g group] [-b base] [-s shell]\n"
+msgstr "       useradd -D [-g ΞΏΞΌΞ¬Ξ΄Ξ±] [-b Ξ²Ξ¬ΟƒΞ·] [-s Ο†Ξ»ΞΏΞΉΟΟ‚]\n"
 
-#: src/useradd.c:750
-msgid "[-p passwd] name\n"
-msgstr "[-p συνθηματικό] όνομα\n"
-
-#: src/useradd.c:753
-#, c-format
-msgid "       %s\t-D [-g group] [-b base] [-s shell]\n"
-msgstr "       %s\t-D [-g ομάδα] [-b βάση] [-s φλοιός]\n"
-
-#: src/useradd.c:756
-msgid "\t\t[-f inactive] [-e expire ]\n"
-msgstr "\t\t[-f ανενεργό] [-e λήξη]\n"
-
-#: src/useradd.c:850 src/usermod.c:480
+#: src/useradd.c:793 src/usermod.c:461
 #, c-format
 msgid "%s: error locking group file\n"
-msgstr "%s: Σφάλμα κατά το κλείδωμα του αρχείου ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„ΞΏ ΞΊΞ»ΞµΞ―Ξ΄Ο‰ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:855 src/usermod.c:486
+#: src/useradd.c:798 src/usermod.c:467
 #, c-format
 msgid "%s: error opening group file\n"
-msgstr "%s: Σφάλμα κατά το άνοιγμα του αρχείου ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:862 src/usermod.c:597
+#: src/useradd.c:805 src/usermod.c:578
 #, c-format
 msgid "%s: error locking shadow group file\n"
-msgstr "%s: Σφάλμα κατά το κλείδωμα του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„ΞΏ ΞΊΞ»ΞµΞ―Ξ΄Ο‰ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:867 src/usermod.c:603
+#: src/useradd.c:810 src/usermod.c:584
 #, c-format
 msgid "%s: error opening shadow group file\n"
-msgstr "%s: Σφάλμα κατά το άνοιγμα του αρχείου σκιωδών συνθηματικών ομάδων\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„ΞΏ Ξ¬Ξ½ΞΏΞΉΞ³ΞΌΞ± Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/useradd.c:1039
+#: src/useradd.c:982
 #, c-format
 msgid "%s: uid %u is not unique\n"
-msgstr "%s: Το uid %ld δεν είναι μοναδικό\n"
+msgstr "%s: Ξ¤ΞΏ uid %u Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
-#: src/useradd.c:1069
+#: src/useradd.c:1012
 #, c-format
 msgid "%s: can't get unique uid\n"
-msgstr "%s: αδυναμία ευρεσης μοναδικού uid\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ…ΟΞµΟƒΞ·Ο‚ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΞΏΟ uid\n"
 
-#: src/useradd.c:1174 src/useradd.c:1325 src/usermod.c:1075 src/usermod.c:1086
-#: src/usermod.c:1096 src/usermod.c:1143 src/usermod.c:1187
-#, c-format
-msgid "%s: invalid field `%s'\n"
-msgstr "%s: Μη έγκυρο πεδίο `%s'\n"
-
-#: src/useradd.c:1189
+#: src/useradd.c:1049
 #, c-format
 msgid "%s: invalid base directory `%s'\n"
-msgstr "%s: Μη έγκυρος κατάλογος βάσης `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ Ξ²Ξ¬ΟƒΞ·Ο‚ `%s'\n"
 
-#: src/useradd.c:1199
+#: src/useradd.c:1059
 #, c-format
 msgid "%s: invalid comment `%s'\n"
-msgstr "%s: Μη έγκυρο σχόλιο `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟƒΟ‡ΟΞ»ΞΉΞΏ `%s'\n"
 
-#: src/useradd.c:1210
+#: src/useradd.c:1070
 #, c-format
 msgid "%s: invalid home directory `%s'\n"
-msgstr "%s: Μη έγκυρος μητρικός κατάλογος χρήστη `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ ΞΌΞ·Ο„ΟΞΉΞΊΟΟ‚ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ Ο‡ΟΞ®ΟƒΟ„Ξ· `%s'\n"
 
-#: src/useradd.c:1229 src/usermod.c:1110
+#: src/useradd.c:1089 src/usermod.c:858
 #, c-format
 msgid "%s: invalid date `%s'\n"
-msgstr "%s: Μη έγκυρη ημερομηνία `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞ· Ξ·ΞΌΞµΟΞΏΞΌΞ·Ξ½Ξ―Ξ± `%s'\n"
 
-#: src/useradd.c:1242
+#: src/useradd.c:1102
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: σκιώδη συνθηματικά απαιτούνται για το -e\n"
+msgstr "%s: ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞ½Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„ΞΏ -e\n"
 
-#: src/useradd.c:1258
+#: src/useradd.c:1118
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: σκιώδη συνθηματικά απαιτούνται για -f\n"
+msgstr "%s: ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞ½Ο„Ξ±ΞΉ Ξ³ΞΉΞ± -f\n"
 
-#: src/useradd.c:1336
+#: src/useradd.c:1185 src/usermod.c:834 src/usermod.c:844 src/usermod.c:891
+#: src/usermod.c:935
+#, c-format
+msgid "%s: invalid field `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ Ο€ΞµΞ΄Ξ―ΞΏ `%s'\n"
+
+#: src/useradd.c:1196
 #, c-format
 msgid "%s: invalid shell `%s'\n"
-msgstr "%s: Μη έγκυρος φλοιός `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏΟ‚ Ο†Ξ»ΞΏΞΉΟΟ‚ `%s'\n"
 
-#: src/useradd.c:1377
+#: src/useradd.c:1237
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s: Μη έγκυρο όνομα χρήστη `%s'\n"
+msgstr "%s: ΞΞ· Ξ­Ξ³ΞΊΟ…ΟΞΏ ΟΞ½ΞΏΞΌΞ± Ο‡ΟΞ®ΟƒΟ„Ξ· `%s'\n"
 
-#: src/useradd.c:1413 src/userdel.c:298 src/usermod.c:1255
+#: src/useradd.c:1273 src/userdel.c:293 src/usermod.c:1003
 #, c-format
 msgid "%s: cannot rewrite password file\n"
-msgstr "%s: αδυναμία επανεγγραφής του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1420 src/userdel.c:303 src/usermod.c:1262
+#: src/useradd.c:1280 src/userdel.c:298 src/usermod.c:1010
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: αδυναμία επανεγγραφής του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1461 src/userdel.c:367 src/usermod.c:1296
+#: src/useradd.c:1321 src/userdel.c:350 src/usermod.c:1044
 #, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: Αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1466 src/userdel.c:372 src/usermod.c:1301
+#: src/useradd.c:1326 src/userdel.c:355 src/usermod.c:1049
 #, c-format
 msgid "%s: unable to open password file\n"
-msgstr "%s: Αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1474 src/userdel.c:379 src/usermod.c:1308
+#: src/useradd.c:1334 src/userdel.c:362 src/usermod.c:1056
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1481 src/userdel.c:385 src/usermod.c:1314
+#: src/useradd.c:1341 src/userdel.c:368 src/usermod.c:1062
 #, c-format
 msgid "%s: cannot open shadow password file\n"
-msgstr "%s: αδυναμία ανοίγματος αρχείου σκιωδών συνθηματικών\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1580 src/usermod.c:1405
-#, c-format
-msgid "%s: error adding authentication method\n"
-msgstr "%s: Σφάλμα κατά την προσθήκη μεθόδου εξακρίβωσης\n"
-
-#: src/useradd.c:1604
+#: src/useradd.c:1435
 #, c-format
 msgid "%s: error adding new password entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ½Ξ­Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1618
+#: src/useradd.c:1449
 #, c-format
 msgid "%s: error updating password dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο dbm αρχείο συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞµΟ‰Ξ½ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1634 src/usermod.c:1471
+#: src/useradd.c:1465 src/usermod.c:1151
 #, c-format
 msgid "%s: error adding new shadow password entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο σκιωδών "
-"συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ½Ξ­Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ "
+"ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1650 src/usermod.c:1488
+#: src/useradd.c:1481 src/usermod.c:1168
 #, c-format
 msgid "%s: error updating shadow passwd dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο dbm αρχείο σκιωδών "
-"συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞµΟ‰Ξ½ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ "
+"ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/useradd.c:1682
+#: src/useradd.c:1513
 #, c-format
 msgid "%s: cannot create directory %s\n"
-msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… %s\n"
 
-#: src/useradd.c:1806 src/usermod.c:1233
+#: src/useradd.c:1634 src/usermod.c:981
 #, c-format
 msgid "%s: user %s exists\n"
-msgstr "%s: Ο χρήστης %s υπάρχει\n"
+msgstr "%s: Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#: src/useradd.c:1821
+#: src/useradd.c:1649
 #, c-format
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 
-#: src/useradd.c:1854
+#: src/useradd.c:1687
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
 
-#: src/userdel.c:129
-#, c-format
-msgid "usage: %s [-r] name\n"
-msgstr "χρήση: %s [-r] όνομα\n"
+#: src/userdel.c:124
+#, fuzzy, c-format
+msgid "Usage: %s [-r] name\n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-r] ΟΞ½ΞΏΞΌΞ±\n"
 
-#: src/userdel.c:181 src/userdel.c:267
+#: src/userdel.c:176 src/userdel.c:262
 #, c-format
 msgid "%s: error updating group entry\n"
-msgstr "%s: Σφάλμα κατά την ανανέωση καταχωρήσης ομάδας\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡Ο‰ΟΞ®ΟƒΞ·Ο‚ ΞΏΞΌΞ¬Ξ΄Ξ±Ο‚\n"
 
-#: src/userdel.c:191 src/userdel.c:276
+#: src/userdel.c:186 src/userdel.c:271
 #, c-format
 msgid "%s: cannot update dbm group entry\n"
-msgstr "%s: αδυναμία ανανέωσης της dbm καταχώρησης στο αρχείο ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„Ξ·Ο‚ dbm ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/userdel.c:219
+#: src/userdel.c:214
 #, fuzzy, c-format
 msgid "%s: cannot remove dbm group entry\n"
-msgstr "%s: αδυναμία ανανέωσης της dbm καταχώρησης στο αρχείο ομάδων\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ Ο„Ξ·Ο‚ dbm ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/userdel.c:308
+#: src/userdel.c:379
 #, c-format
-msgid "%s: cannot rewrite TCFS key file\n"
-msgstr "%s: αδυναμία επανεγγραφής του αρχείου κλειδιών του TCFS\n"
+msgid "%s: cannot open group file\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
-#: src/userdel.c:392
+#: src/userdel.c:390
 #, c-format
-msgid "%s: cannot lock TCFS key file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου κλειδιών του TCFS\n"
-
-#: src/userdel.c:397
-#, c-format
-msgid "%s: cannot open TCFS key file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου κλειδιών του TCFS\n"
+msgid "%s: cannot open shadow group file\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½\n"
 
 #: src/userdel.c:408
 #, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: αδυναμία ανοίγματος αρχείου ομάδων\n"
-
-#: src/userdel.c:419
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: αδυναμία ανοίγματος αρχείου σκιωδών συνθηματικών ομάδων\n"
-
-#: src/userdel.c:451 src/userdel.c:468
-#, c-format
-msgid "%s: error deleting authentication\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή εξακρίβωσης\n"
-
-#: src/userdel.c:479
-#, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή καταχώρησης στο αρχείο συνθηματικών\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/userdel.c:485
+#: src/userdel.c:412
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την διαγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/userdel.c:496
-#, c-format
-msgid "%s: error deleting TCFS entry\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή καταχώρησης του TCFS\n"
-
-#: src/userdel.c:510
+#: src/userdel.c:421
 #, c-format
 msgid "%s: error deleting password dbm entry\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή καταχώρησης στο dbm αρχείο συνθηματικών\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/userdel.c:533
+#: src/userdel.c:440
 #, c-format
 msgid "%s: error deleting shadow passwd dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την διαγραφή καταχώρησης στο dbm αρχείο σκιωδών "
-"συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ "
+"ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/userdel.c:569
+#: src/userdel.c:484
 #, c-format
 msgid "%s: user %s is currently logged in\n"
-msgstr "%s: Ο χρήστης %s βρίσκεται στο σύστημα\n"
+msgstr "%s: Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s Ξ²ΟΞ―ΟƒΞΊΞµΟ„Ξ±ΞΉ ΟƒΟ„ΞΏ ΟƒΟΟƒΟ„Ξ·ΞΌΞ±\n"
 
-#: src/userdel.c:659
+#: src/userdel.c:594
 #, c-format
 msgid "%s: warning: %s not owned by %s, not removing\n"
-msgstr "%s: προειδοποίηση: Το %s δεν ανήκει στον %s, δεν διαγράφεται\n"
+msgstr "%s: Ο€ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ Ξ±Ξ½Ξ®ΞΊΞµΞΉ ΟƒΟ„ΞΏΞ½ %s, Ξ΄ΞµΞ½ Ξ΄ΞΉΞ±Ξ³ΟΞ¬Ο†ΞµΟ„Ξ±ΞΉ\n"
 
-#: src/userdel.c:666
+#: src/userdel.c:600
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: προειδοποίηση: αδυναμία διαγραφής "
+msgstr "%s: Ο€ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ®Ο‚ "
 
-#: src/userdel.c:758 src/usermod.c:1023
+#: src/userdel.c:703 src/usermod.c:783
 #, c-format
 msgid "%s: user %s does not exist\n"
-msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
+msgstr "%s: Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#: src/userdel.c:770 src/usermod.c:1039
+#: src/userdel.c:718 src/usermod.c:799
 #, c-format
 msgid "%s: user %s is a NIS user\n"
-msgstr "%s: Ο χρήστης %s είναι NIS χρήστης\n"
+msgstr "%s: Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s ΞµΞ―Ξ½Ξ±ΞΉ NIS Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚\n"
 
-#: src/userdel.c:799
+#: src/userdel.c:756
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: Το %s δεν ανήκει στον %s, δεν αφαιρείται\n"
+msgstr "%s: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ Ξ±Ξ½Ξ®ΞΊΞµΞΉ ΟƒΟ„ΞΏΞ½ %s, Ξ΄ΞµΞ½ Ξ±Ο†Ξ±ΞΉΟΞµΞ―Ο„Ξ±ΞΉ\n"
 
-#: src/userdel.c:818
+#: src/userdel.c:779
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: Δεν διαγράφεται ο κατάλογος %s (θα αφαιρούσε τον μητρικό κατάλογο του "
-"χρήστη %s)\n"
+"%s: Ξ”ΞµΞ½ Ξ΄ΞΉΞ±Ξ³ΟΞ¬Ο†ΞµΟ„Ξ±ΞΉ ΞΏ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ %s (ΞΈΞ± Ξ±Ο†Ξ±ΞΉΟΞΏΟΟƒΞµ Ο„ΞΏΞ½ ΞΌΞ·Ο„ΟΞΉΞΊΟ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏ Ο„ΞΏΟ… "
+"Ο‡ΟΞ®ΟƒΟ„Ξ· %s)\n"
 
-#: src/userdel.c:830
+#: src/userdel.c:793
 #, c-format
 msgid "%s: error removing directory %s\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή του καταλόγου %s\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® Ο„ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… %s\n"
 
-#: src/usermod.c:326
+#: src/usermod.c:306
+#, fuzzy, c-format
+msgid "Usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+msgstr "Ο‡ΟΞ®ΟƒΞ·: %s\t[-u uid [-o]] [-g ΞΏΞΌΞ¬Ξ΄Ξ±] [-G ΞΏΞΌΞ¬Ξ΄Ξ±,...] \n"
+
+#: src/usermod.c:310
 msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
 msgstr ""
-"\t\t[-d μητρικός_κατάλογος [-m]] [-s φλοιός] [-c σχόλιο]\n"
-"\t\t[-l νέο_όνομα]\n"
+"\t\t[-d ΞΌΞ·Ο„ΟΞΉΞΊΟΟ‚_ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ [-m]] [-s Ο†Ξ»ΞΏΞΉΟΟ‚] [-c ΟƒΟ‡ΟΞ»ΞΉΞΏ]\n"
+"\t\t[-l Ξ½Ξ­ΞΏ_ΟΞ½ΞΏΞΌΞ±]\n"
 
-#: src/usermod.c:332
+#: src/usermod.c:313
 #, fuzzy
-msgid "[-A {DEFAULT|program},... ] "
-msgstr "[-A {DEFAULT|πρόγραμμα},...] "
+msgid "[-f inactive] [-e expire] "
+msgstr "[-f Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο] [-e Ξ»Ξ®ΞΎΞ·] "
 
-#: src/usermod.c:334
+#: src/usermod.c:315
 msgid "[-p passwd] [-L|-U] name\n"
-msgstr "[-p συνθηματικό] [-L|-U] όνομα\n"
+msgstr "[-p ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ] [-L|-U] ΟΞ½ΞΏΞΌΞ±\n"
 
-#: src/usermod.c:514
+#: src/usermod.c:495
 #, c-format
 msgid "%s: out of memory in update_group\n"
-msgstr "%s: δεν υπάρχει ελεύθερη μνήμη στο update_group\n"
+msgstr "%s: Ξ΄ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ ΞµΞ»ΞµΟΞΈΞµΟΞ· ΞΌΞ½Ξ®ΞΌΞ· ΟƒΟ„ΞΏ update_group\n"
 
-#: src/usermod.c:641
+#: src/usermod.c:622
 #, c-format
 msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s:  στο update_gshadow\n"
+msgstr "%s:  ΟƒΟ„ΞΏ update_gshadow\n"
 
-#: src/usermod.c:1210
+#: src/usermod.c:958
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: Δεν δόθηκαν ενδείξεις\n"
+msgstr "%s: Ξ”ΞµΞ½ Ξ΄ΟΞΈΞ·ΞΊΞ±Ξ½ ΞµΞ½Ξ΄ΞµΞ―ΞΎΞµΞΉΟ‚\n"
 
-#: src/usermod.c:1217
+#: src/usermod.c:965
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
-msgstr "%s: σκιώδη συνθηματικά απαιτούνται για το -e και -f\n"
+msgstr "%s: ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ±Ο€Ξ±ΞΉΟ„ΞΏΟΞ½Ο„Ξ±ΞΉ Ξ³ΞΉΞ± Ο„ΞΏ -e ΞΊΞ±ΞΉ -f\n"
 
-#: src/usermod.c:1239
+#: src/usermod.c:987
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: Το uid %lu δεν είναι μοναδικό\n"
+msgstr "%s: Ξ¤ΞΏ uid %lu Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
-#: src/usermod.c:1392
-#, c-format
-msgid "%s: error deleting authentication method\n"
-msgstr "%s: Σφάλμα κατά την διαγραφή μεθόδου εξακρίβωσης\n"
-
-#: src/usermod.c:1418
-#, c-format
-msgid "%s: error changing authentication method\n"
-msgstr "%s: Σφάλμα κατά την αλλαγή μεθόδου εξακρίβωσης\n"
-
-#: src/usermod.c:1436
+#: src/usermod.c:1116
 #, c-format
 msgid "%s: error changing password entry\n"
-msgstr "%s: Σφάλμα κατά την αλλαγή καταχώρησης συνθηματικού\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞΏΟ\n"
 
-#: src/usermod.c:1442
+#: src/usermod.c:1122
 #, c-format
 msgid "%s: error removing password entry\n"
-msgstr "%s: Σφάλμα κατά την αφαίρεση καταχώρησης στο αρχείο συνθηματικών\n"
+msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/usermod.c:1451
+#: src/usermod.c:1131
 #, c-format
 msgid "%s: error adding password dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο dbm αρχείο συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· Ξ½Ξ­Ξ±Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/usermod.c:1459
+#: src/usermod.c:1139
 #, c-format
 msgid "%s: error removing passwd dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την αφαίρεση καταχώρησης από το dbm αρχείο συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ±Ο€Ο Ο„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/usermod.c:1478
+#: src/usermod.c:1158
 #, c-format
 msgid "%s: error removing shadow password entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την αφαίρεση καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/usermod.c:1495
+#: src/usermod.c:1175
 #, c-format
 msgid "%s: error removing shadow passwd dbm entry\n"
 msgstr ""
-"%s: Σφάλμα κατά την αφαίρεση καταχώρησης στο dbm αρχείο σκιωδών "
-"συνθηματικών\n"
+"%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ο†Ξ±Ξ―ΟΞµΟƒΞ· ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ ΟƒΟ„ΞΏ dbm Ξ±ΟΟ‡ΞµΞ―ΞΏ ΟƒΞΊΞΉΟ‰Ξ΄ΟΞ½ "
+"ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟΞ½\n"
 
-#: src/usermod.c:1524
+#: src/usermod.c:1204
 #, c-format
 msgid "%s: directory %s exists\n"
-msgstr "%s: ο κατάλογος %s υπάρχει\n"
+msgstr "%s: ΞΏ ΞΊΞ±Ο„Ξ¬Ξ»ΞΏΞ³ΞΏΟ‚ %s Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ\n"
 
-#: src/usermod.c:1533
+#: src/usermod.c:1213
 #, c-format
 msgid "%s: can't create %s\n"
-msgstr "%s: αδυναμία δημιουργίας του %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ο„ΞΏΟ… %s\n"
 
-#: src/usermod.c:1539
+#: src/usermod.c:1219
 #, c-format
 msgid "%s: can't chown %s\n"
-msgstr "%s: Αδυναμία αλλαγής ιδιοκτήτη(chown) του %s\n"
+msgstr "%s: Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ ΞΉΞ΄ΞΉΞΏΞΊΟ„Ξ®Ο„Ξ·(chown) Ο„ΞΏΟ… %s\n"
 
-#: src/usermod.c:1556
+#: src/usermod.c:1236
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
-msgstr "%s: αδυναμία μετονομασίας του καταλόγου %s σε %s\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΌΞµΟ„ΞΏΞ½ΞΏΞΌΞ±ΟƒΞ―Ξ±Ο‚ Ο„ΞΏΟ… ΞΊΞ±Ο„Ξ±Ξ»ΟΞ³ΞΏΟ… %s ΟƒΞµ %s\n"
 
-#. better leave it alone
-#: src/usermod.c:1653
+#: src/usermod.c:1333
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%s: προειδοποίηση: Το %s δεν ανήκει στον %s\n"
+msgstr "%s: Ο€ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ Ξ±Ξ½Ξ®ΞΊΞµΞΉ ΟƒΟ„ΞΏΞ½ %s\n"
 
-#: src/usermod.c:1659
+#: src/usermod.c:1339
 msgid "failed to change mailbox owner"
-msgstr "αποτυχία αλλαγής του ιδιοκτήτη του γραμματοκιβωτίου"
+msgstr "Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ± Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚ Ο„ΞΏΟ… ΞΉΞ΄ΞΉΞΏΞΊΟ„Ξ®Ο„Ξ· Ο„ΞΏΟ… Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΞΊΞΉΞ²Ο‰Ο„Ξ―ΞΏΟ…"
 
-#: src/usermod.c:1667
+#: src/usermod.c:1347
 msgid "failed to rename mailbox"
-msgstr "αποτυχία μετονομασίας γραμματοκιβωτίου"
+msgstr "Ξ±Ο€ΞΏΟ„Ο…Ο‡Ξ―Ξ± ΞΌΞµΟ„ΞΏΞ½ΞΏΞΌΞ±ΟƒΞ―Ξ±Ο‚ Ξ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΏΞΊΞΉΞ²Ο‰Ο„Ξ―ΞΏΟ…"
 
-#: src/vipw.c:104
+#: src/vipw.c:105
 #, c-format
 msgid ""
 "\n"
 "%s: %s is unchanged\n"
 msgstr ""
 "\n"
-"%s: Το %s δεν άλλαξε\n"
+"%s: Ξ¤ΞΏ %s Ξ΄ΞµΞ½ Ξ¬Ξ»Ξ»Ξ±ΞΎΞµ\n"
 
-#: src/vipw.c:132
+#: src/vipw.c:133
 #, fuzzy
 msgid "Couldn't lock file"
-msgstr "αδυναμία ξεκλειδώματος αρχείου\n"
+msgstr "Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΎΞµΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ξ±ΟΟ‡ΞµΞ―ΞΏΟ…\n"
 
-#: src/vipw.c:141
+#: src/vipw.c:142
 msgid "Couldn't make backup"
 msgstr ""
 
-#: src/vipw.c:206
+#: src/vipw.c:200
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½Ξ±Ο†ΞΏΟΞ¬Ο‚ %s: %s (ΞΏΞΉ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ­Ο‚ ΞµΞ―Ξ½Ξ±ΞΉ ΟƒΟ„ΞΏ %s)\n"
 
-#: src/vipw.c:244
+#: src/vipw.c:238
 msgid ""
 "Usage:\n"
 "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
 "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
 msgstr ""
-"Χρήση:\n"
-"`vipw' σύντασει το /etc/passwd        `vipw -s' συντάσσει το /etc/shadow\n"
-"`vigr' σύντασει το /etc/group         `vigr -s' συντάσσει το /etc/gshadow\n"
+"Ξ§ΟΞ®ΟƒΞ·:\n"
+"`vipw' ΟƒΟΞ½Ο„Ξ±ΟƒΞµΞΉ Ο„ΞΏ /etc/passwd        `vipw -s' ΟƒΟ…Ξ½Ο„Ξ¬ΟƒΟƒΞµΞΉ Ο„ΞΏ /etc/shadow\n"
+"`vigr' ΟƒΟΞ½Ο„Ξ±ΟƒΞµΞΉ Ο„ΞΏ /etc/group         `vigr -s' ΟƒΟ…Ξ½Ο„Ξ¬ΟƒΟƒΞµΞΉ Ο„ΞΏ /etc/gshadow\n"
+
+#, fuzzy
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ·Ο‚ ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ξ³ΞΉΞ± Ο„ΞΏΞ½ Ο‡ΟΞ®ΟƒΟ„Ξ· %s\n"
+
+#~ msgid "User %s has a TCFS key, his old password is required.\n"
+#~ msgstr "Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s Ξ­Ο‡ΞµΞΉ ΞΊΞ»ΞµΞΉΞ΄Ξ― TCFS, Ξ±Ο€Ξ±ΞΉΟ„ΞµΞ―Ο„Ξ±ΞΉ Ο„ΞΏ Ο€Ξ±Ξ»ΞΉΟ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ.\n"
+
+#~ msgid "You can use -t option to force the change.\n"
+#~ msgstr ""
+#~ "ΞΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± Ο‡ΟΞ·ΟƒΞΉΞΌΞΏΟ€ΞΏΞΉΞ®ΟƒΞµΟ„Ξµ Ο„Ξ·Ξ½ -t Ο€Ξ±ΟΞ¬ΞΌΞµΟ„ΟΞΏ Ξ³ΞΉΞ± Ξ½Ξ± ΞµΞΎΞ±Ξ½Ξ±Ξ³ΞΊΞ¬ΟƒΞµΟ„Ξµ Ο„Ξ·Ξ½\n"
+#~ "Ο€ΟΞ±Ξ³ΞΌΞ±Ο„ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ· Ο„Ξ·Ο‚ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ®Ο‚.\n"
+
+#~ msgid "Warning: user %s has a TCFS key.\n"
+#~ msgstr "Ξ ΟΞΏΞµΞΉΞ΄ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·: Ξ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s Ξ­Ο‡ΞµΞΉ ΞΊΞ»ΞµΞΉΞ΄Ξ― TCFS.\n"
+
+#~ msgid "Cannot lock the TCFS key database; try again later\n"
+#~ msgstr ""
+#~ "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„Ξ·Ο‚ Ξ²Ξ¬ΟƒΞ·Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS. Ξ”ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ Ξ±ΟΞ³ΟΟ„ΞµΟΞ±\n"
+
+#~ msgid "Cannot open the TCFS key database.\n"
+#~ msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„Ξ·Ο‚ Ξ²Ξ¬ΟƒΞ·Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS.\n"
+
+#~ msgid "Error updating the TCFS key database.\n"
+#~ msgstr "Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ½Ξ±Ξ½Ξ­Ο‰ΟƒΞ· Ο„Ξ·Ο‚ Ξ²Ξ¬ΟƒΞ·Ο‚ ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS.\n"
+
+#~ msgid "Cannot commit TCFS changes.\n"
+#~ msgstr "Ξ‘Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ο…Ξ»ΞΏΟ€ΞΏΞ―Ξ·ΟƒΞ·Ο‚ Ο„Ο‰Ξ½ Ξ±Ξ»Ξ»Ξ±Ξ³ΟΞ½ ΟƒΟ„ΞΏ TCFS.\n"
+
+#~ msgid "%s: cannot rewrite TCFS key file\n"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞµΟ€Ξ±Ξ½ΞµΞ³Ξ³ΟΞ±Ο†Ξ®Ο‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS\n"
+
+#~ msgid "%s: cannot lock TCFS key file\n"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± ΞΊΞ»ΞµΞΉΞ΄ΟΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS\n"
+
+#~ msgid "%s: cannot open TCFS key file\n"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… Ξ±ΟΟ‡ΞµΞ―ΞΏΟ… ΞΊΞ»ΞµΞΉΞ΄ΞΉΟΞ½ Ο„ΞΏΟ… TCFS\n"
+
+#~ msgid "%s: error deleting TCFS entry\n"
+#~ msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΊΞ±Ο„Ξ±Ο‡ΟΟΞ·ΟƒΞ·Ο‚ Ο„ΞΏΟ… TCFS\n"
+
+#~ msgid "               [-f inactive] [-e expire]"
+#~ msgstr "               [-f Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο] [-e Ξ»Ξ®ΞΎΞ·] "
+
+#~ msgid "%s: error deleting authentication\n"
+#~ msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚\n"
+
+#, fuzzy
+#~ msgid "[-A {DEFAULT|program},...] "
+#~ msgstr "[-A {DEFAULT|Ο€ΟΟΞ³ΟΞ±ΞΌΞΌΞ±},...] "
+
+#~ msgid "%s: error deleting authentication method\n"
+#~ msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ΄ΞΉΞ±Ξ³ΟΞ±Ο†Ξ® ΞΌΞµΞΈΟΞ΄ΞΏΟ… ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚\n"
+
+#~ msgid "%s: error adding authentication method\n"
+#~ msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ο€ΟΞΏΟƒΞΈΞ®ΞΊΞ· ΞΌΞµΞΈΟΞ΄ΞΏΟ… ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚\n"
+
+#~ msgid "%s: error changing authentication method\n"
+#~ msgstr "%s: Ξ£Ο†Ξ¬Ξ»ΞΌΞ± ΞΊΞ±Ο„Ξ¬ Ο„Ξ·Ξ½ Ξ±Ξ»Ξ»Ξ±Ξ³Ξ® ΞΌΞµΞΈΟΞ΄ΞΏΟ… ΞµΞΎΞ±ΞΊΟΞ―Ξ²Ο‰ΟƒΞ·Ο‚\n"
+
+#~ msgid "[-A program] "
+#~ msgstr "[-A Ο€ΟΟΞ³ΟΞ±ΞΌΞΌΞ±] "
+
+#~ msgid "[-p passwd] name\n"
+#~ msgstr "[-p ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ] ΟΞ½ΞΏΞΌΞ±\n"
+
+#~ msgid "error - lookup '%s' failed\n"
+#~ msgstr "ΟƒΟ†Ξ¬Ξ»ΞΌΞ± - Ξ· Ξ±Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ· '%s' Ξ±Ο€Ξ­Ο„Ο…Ο‡Ξµ\n"
+
+#~ msgid "%s not found\n"
+#~ msgstr "%s Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ\n"
+
+#~ msgid "%s: not configured for shadow group support.\n"
+#~ msgstr "%s: Ξ”ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ Ξ΄ΞΉΞ±ΞΌΞΏΟΟ†Ο‰ΞΌΞ­Ξ½ΞΏ Ξ³ΞΉΞ± ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ ΞΏΞΌΞ¬Ξ΄Ο‰Ξ½.\n"
+
+#~ msgid "%s: Shadow passwords are not configured.\n"
+#~ msgstr "%s: Ξ¤Ξ± ΟƒΞΊΞΉΟΞ΄Ξ· ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ΄ΞµΞ½ Ξ­Ο‡ΞΏΟ…Ξ½ Ξ΄ΞΉΞ±ΞΌΞΏΟΟ†Ο‰ΞΈΞµΞ―.\n"
+
+#, fuzzy
+#~ msgid "Usage: %s [-l] user\n"
+#~ msgstr "Ο‡ΟΞ®ΟƒΞ·: %s [-e]\n"
+
+#~ msgid "Executing shell %s\n"
+#~ msgstr "Ξ•ΞΊΟ„Ξ­Ξ»ΞµΟƒΞ· Ο†Ξ»ΞΏΞΉΞΏΟ %s\n"
+
+#~ msgid "Dialup Password: "
+#~ msgstr "Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ο„Ξ·Ξ»ΞµΟ†Ο‰Ξ½ΞΉΞΊΞ®Ο‚ ΟƒΟΞ½Ξ΄ΞµΟƒΞ·Ο‚: "
+
+#~ msgid "Usage: %s [-l] [-m min_days] [-M max_days] [-d last_day] user\n"
+#~ msgstr ""
+#~ "Ξ§ΟΞ®ΟƒΞ·: %s [-l] [-m ΞµΞ»Ξ¬Ο‡_ΞΌΞ­ΟΞµΟ‚] [-M ΞΌΞµΞ³_ΞΌΞ­ΟΞµΟ‚] [-d Ο„ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ±_ΞΌΞ­ΟΞ±] "
+#~ "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚\n"
+
+#~ msgid "Usage: %s [-(a|d)] shell\n"
+#~ msgstr "Ξ§ΟΞ®ΟƒΞ·: %s [-(ald)] Ο†Ξ»ΞΏΞΉΟΟ‚\n"
+
+#~ msgid "Shell password: "
+#~ msgstr "Ξ£Ο…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ο†Ξ»ΞΏΞΉΞΏΟ: "
+
+#~ msgid "re-enter Shell password: "
+#~ msgstr "Ξ•Ο€Ξ±Ξ½ΞµΞΉΟƒΞ¬Ξ³ΞµΟ„Ξµ Ο„ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ο†Ξ»ΞΏΞΉΞΏΟ: "
+
+#~ msgid "%s: Passwords do not match, try again.\n"
+#~ msgstr "%s: Ξ¤Ξ± ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΞ¬ Ξ΄ΞµΞ½ Ο„Ξ±ΞΉΟΞΉΞ¬Ξ¶ΞΏΟ…Ξ½, Ξ΄ΞΏΞΊΞΉΞΌΞ¬ΟƒΟ„Ξµ ΞΎΞ±Ξ½Ξ¬.\n"
+
+#~ msgid "%s: can't create %s"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ο„ΞΏΟ… %s"
+
+#~ msgid "%s: can't open %s"
+#~ msgstr "%s: Ξ±Ξ΄Ο…Ξ½Ξ±ΞΌΞ―Ξ± Ξ±Ξ½ΞΏΞ―Ξ³ΞΌΞ±Ο„ΞΏΟ‚ Ο„ΞΏΟ… %s"
+
+#~ msgid "%s: Shell %s not found.\n"
+#~ msgstr "%s: Ξ Ο†Ξ»ΞΏΞΉΟΟ‚ %s Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ.\n"
+
+#~ msgid "group=%s,%u  basedir=%s  skel=%s\n"
+#~ msgstr "ΞΏΞΌΞ¬Ξ΄Ξ±=%s,%u  Ξ²Ξ±ΟƒΞΉΞΊΟΟ‚_ΞΊΞ±Ο„Ξ±Ξ»=%s  ΟƒΞΊΞµΞ»=%s\n"
+
+#~ msgid "shell=%s  "
+#~ msgstr "Ο†Ξ»ΞΏΞΉΟΟ‚=%s  "
+
+#~ msgid "inactive=%ld  expire=%s"
+#~ msgstr "Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο=%ld  Ξ»Ξ®ΞΎΞ·=%s"
+
+#~ msgid "usage: %s\t[-u uid [-o]] [-g group] [-G group,...] \n"
+#~ msgstr "Ο‡ΟΞ®ΟƒΞ·: %s\t[-u uid [-o]] [-g ΞΏΞΌΞ¬Ξ΄Ξ±] [-G ΞΏΞΌΞ¬Ξ΄Ξ±,...] \n"
 
 #~ msgid "%s: gid %ld is not unique\n"
-#~ msgstr "%s: Το gid %ld δεν είναι μοναδικό\n"
+#~ msgstr "%s: Ξ¤ΞΏ gid %ld Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
 #, fuzzy
 #~ msgid "unknown gid: %u\n"
-#~ msgstr "άγνωστο gid: %d\n"
+#~ msgstr "Ξ¬Ξ³Ξ½Ο‰ΟƒΟ„ΞΏ gid: %d\n"
 
 #~ msgid "%s: uid %d is not unique\n"
-#~ msgstr "%s: Το uid %d δεν είναι μοναδικό\n"
+#~ msgstr "%s: Ξ¤ΞΏ uid %d Ξ΄ΞµΞ½ ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΏΞ½Ξ±Ξ΄ΞΉΞΊΟ\n"
 
 #~ msgid "user %s: bad UID (%d)\n"
-#~ msgstr "χρήστης %s: λανθασμένο UID (%d)\n"
+#~ msgstr "Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ %s: Ξ»Ξ±Ξ½ΞΈΞ±ΟƒΞΌΞ­Ξ½ΞΏ UID (%d)\n"
 
 #~ msgid "%s: no aging information present\n"
-#~ msgstr "%s: Δεν υπάρχουν πληροφορίες γήρανσης\n"
+#~ msgstr "%s: Ξ”ΞµΞ½ Ο…Ο€Ξ¬ΟΟ‡ΞΏΟ…Ξ½ Ο€Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚ Ξ³Ξ®ΟΞ±Ξ½ΟƒΞ·Ο‚\n"
 
 #~ msgid "group %s: bad GID (%d)\n"
-#~ msgstr "ομάδα %s: λάθος GID (%d)\n"
+#~ msgstr "ΞΏΞΌΞ¬Ξ΄Ξ± %s: Ξ»Ξ¬ΞΈΞΏΟ‚ GID (%d)\n"
 
 #~ msgid "%s: permission denied (shell).\n"
-#~ msgstr "%s: άδεια απορρίφθηκε (φλοιός)\n"
+#~ msgstr "%s: Ξ¬Ξ΄ΞµΞΉΞ± Ξ±Ο€ΞΏΟΟΞ―Ο†ΞΈΞ·ΞΊΞµ (Ο†Ξ»ΞΏΞΉΟΟ‚)\n"
 
 #~ msgid "Incorrect password for %s.\n"
-#~ msgstr "Εσφαλμένο συνθηματικό για τον %s.\n"
+#~ msgstr "Ξ•ΟƒΟ†Ξ±Ξ»ΞΌΞ­Ξ½ΞΏ ΟƒΟ…Ξ½ΞΈΞ·ΞΌΞ±Ο„ΞΉΞΊΟ Ξ³ΞΉΞ± Ο„ΞΏΞ½ %s.\n"
 
 #~ msgid "group not found\n"
-#~ msgstr "η ομάδα δεν βρέθηκε\n"
+#~ msgstr "Ξ· ΞΏΞΌΞ¬Ξ΄Ξ± Ξ΄ΞµΞ½ Ξ²ΟΞ­ΞΈΞ·ΞΊΞµ\n"
