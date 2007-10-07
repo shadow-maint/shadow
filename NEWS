@@ -782,7 +782,7 @@ shadow-20001016 => shadow-4.0.0						 06-01-2002
 shadow-20001012 -> shadow-20001016:
 - conditionaly disabled body reload_nscd() because not every
   version of nscd can handle it (this can be enabled by define
-  ENABLE_NSCD_SIGHUP) (Marek Micha¿kiewicz  <marekm@linux.org.pl>)
+  ENABLE_NSCD_SIGHUP) (Marek MichaÅ‚kiewicz  <marekm@linux.org.pl>)
 - fixes on autoconf/automake level for dist target,
 - Julianne F. Haugh new contact adress.
 
@@ -796,7 +796,7 @@ shadow-20000902 => shadow-20001012
   added PAM support for all other small tools like chpasswd, groupadd,
   groupdel, groupmod, newusers, useradd, userdel, usermod (bind to common 
   "shadow" PAM config file) - this modificaytions mainly based on
-  modifications prepared by Janek Rêkojarski <baggins@pld.org.pl>,
+  modifications prepared by Janek RÄ™kojarski <baggins@pld.org.pl>,
 - many small fixes and improvments in automake (mow "make dist"
   works correctly),
 - added cs translation (Jiri Pavlovsky <Jiri.Pavlovsky@ff.cuni.cz>).
@@ -845,7 +845,7 @@ shadow-19990709 => shadow-19990827
 
 - upgrade to autoconf-2.13, automake-1.4, libtool-1.3.3
 - i18n: added French translation by Vincent Renardias <vincent@ldsol.com>
-- i18n: added Swedish translation by Kristoffer Brånemyr <ztion@swipnet.se>
+- i18n: added Swedish translation by Kristoffer BrÃ¥nemyr <ztion@swipnet.se>
 - logoutd no longer reads /etc/logoutd.mesg at startup - instead, read
   it when sending to luser's tty (no need to reload with SIGHUP)
 - added support for "usergroups" feature often found in Linux distributions

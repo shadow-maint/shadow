@@ -1,15 +1,20 @@
-2007-02-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2007-10-07  Nicolas Fran√ßois  <nicolas.francois@centraliens.net>
+
+	* NEWS, Changelog: Convert the Changelog and NEWS files to UTF-8
+	(it was partially ISO-8859-2).
+
+2007-02-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/groupadd.8.xml, man/groupmod.8.xml, man/login.1.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml:
 	groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
 	mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>).
 
-2007-01-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2007-01-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/usermod.c:
 	fixed handle -a option in usermod (by Benno Schulenberg <bensberg@justemail.net>).
 
-2006-12-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-12-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/sv/sv.po:
 	more UTF8 fixe (by Mikael Magnusson <mikma@users.sourceforge.net>).
@@ -17,12 +22,12 @@
 	* man/sv/sv.po:
 	UTF8 fixes (by Mikael Magnusson <mikma@users.sourceforge.net>).
 
-2006-11-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-11-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/Makefile.am, man/pl/chgpassw.8, man/pl/chpasswd.8, man/pl/pl.po:
 	translation chpasswd.8 and chgpassw.8 finished.
 
-2006-11-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-11-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/pl.po: resolve fuzzy entries.
 
@@ -44,14 +49,14 @@
 	* man/Makefile.am:
 	added de to LINGUAS but man/de/de.po still need many work.
 
-2006-11-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-11-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c: indent code.
 
 	* NEWS, src/useradd.c:
 	improved auditing support (https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=211659).
 
-2006-11-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-11-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	run "make update-po".
@@ -62,12 +67,12 @@
 	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po:
 	"make update-po".
 
-2006-11-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-11-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/su.1.xml:
 	added sg(1) to the SEE ALSO section (Debian Bug#396690).
 
-2006-10-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-10-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/newusers.8.xml: clarify pw_gid fileld content description.
 
@@ -77,7 +82,7 @@
 	* po/nl.po:
 	fixed https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=212892
 
-2006-10-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-10-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/newusers.8.xml: there is no pw_age fileld in passwd.
 
@@ -89,29 +94,29 @@
 
 	* man/pl/pl.po: typos.
 
-2006-10-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-10-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: cleanups.
 
-2006-10-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-10-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/pl.po: more translations.
 
 	* NEWS:
 	UTF-8 corrections (by Benno Schulenberg <bensberg@justemail.net>).
 
-2006-10-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-10-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/groupdel.8.xml: added description for exit code 6.
 
-2006-08-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/de/de.po: copy & paste some msgid to msgstr.
 
 	* man/de/de.po:
-	kill some fuzzy (by Nicolas FranÁois <nicolas.francois@centraliens.net>).
+	kill some fuzzy (by Nicolas Fran√ßois <nicolas.francois@centraliens.net>).
 
-2006-08-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po, man/passwd.1.xml:
 	s/change password/password change/ in passwd(1) (by Simon Brandmair <sbrandmair@gmx.net>).
@@ -123,15 +128,15 @@
 	* NEWS, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/useradd.c, src/userdel.c, src/usermod.c:
 	flush nscd cashes after close /etc/{group,passwd} files.
 
-2006-08-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/tl.po: updated (by Eric Pareja <xenos@upm.edu.ph>).
 
-2006-08-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/ja.po: updated (by Takeo Nakano <nakano@webmasters.gr.jp>).
 
-2006-08-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/fr/Makefile.am:
 	removed whitespaces following trailing backslashes.
@@ -147,7 +152,7 @@
 	* configure.in:
 	typo s/followig/following/ (by Johannes Winkelmann <jw@smts.ch>).
 
-2006-08-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-08-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: release date corrected.
 
@@ -155,7 +160,7 @@
 	fixed set enviroment too early when using PAM, so move it to !USE_PAM
 	(patch submitted by Mike Frysinger <vapier@gentoo.org>).
 
-2006-07-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/fr/chage.1, man/fr/chfn.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/expiry.1, man/fr/faillog.5, man/fr/faillog.8, man/fr/gpasswd.1, man/fr/groupadd.8, man/fr/groupdel.8, man/fr/groupmod.8, man/fr/groups.1, man/fr/grpck.8, man/fr/gshadow.5, man/fr/lastlog.8, man/fr/limits.5, man/fr/login.1, man/fr/login.access.5, man/fr/login.defs.5, man/fr/logoutd.8, man/fr/newgrp.1, man/fr/newusers.8, man/fr/passwd.1, man/fr/passwd.5, man/fr/porttime.5, man/fr/pwck.8, man/fr/pwconv.8, man/fr/sg.1, man/fr/shadow.3, man/fr/shadow.5, man/fr/su.1, man/fr/suauth.5, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/fr/vipw.8, NEWS:
 	fr man pages are now up to date.
@@ -166,7 +171,7 @@
 	* man/fr/fr.po:
 	updated for 4.0.18 (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
-2006-07-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po:
 	updated.
@@ -181,11 +186,11 @@
 	* src/groupadd.c, src/groupmod.c:
 	fixed GID overflow (fixed http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=198920).
 
-2006-07-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/.cvsignore: groupmems added.
 
-2006-07-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po:
 	updated for 4.0.18 (by ean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
@@ -200,7 +205,7 @@
 
 	* NEWS: sv man pages are partially translated.
 
-2006-07-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groupmems.c: fix compilation warnings.
 
@@ -208,13 +213,13 @@
 
 	* po/nl.po: break lines longer than 80 cols and add missing \n.
 
-2006-07-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ru/faillog.5: regenerated.
 
 	* po/ko.po: updated for 4.0.18 (by Changwoo Ryu <cwryu@debian.org>).
 
-2006-07-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/faillog.5.xml, man/fr/fr.po, man/pl/pl.po, man/ru/ru.po, man/sv/sv.po:
 	added <refmiscinfo class="sectdesc"> tag for faillog.5.xml.
@@ -238,7 +243,7 @@
 
 	* po/pl.po: updated for 4.0.18.
 
-2006-07-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pt.po:
 	updated for 4.0.18 (by Miguel Figueiredo <mfigueiredo@gmail.com>).
@@ -264,7 +269,7 @@
 	* NEWS, po/ca.po:
 	updated for 4.0.18 (by Guillem Jover <guillem@debian.org>).
 
-2006-07-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/hu.po: cleanups.
 
@@ -292,7 +297,7 @@
 
 	* NEWS, configure.in: start prepare for 4.0.18.
 
-2006-07-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	run "make update-po" and some cleanups (added missing \n and use tabs instead spaces).
@@ -304,7 +309,7 @@
 
 	* po/tr.po: updated (by Murat ≈ûenel <muratasenel@gmail.com>).
 
-2006-07-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/fr/fr.po, man/pl/pl.po, man/ru/ru.po: updated.
 
@@ -313,7 +318,7 @@
 	* etc/login.defs:
 	removed GETPASS_ASTERISKS (patch by Mike Frysinger <vapier@gentoo.org>).
 
-2006-07-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/pl/chsh.1, man/pl/pl.po: pl chage(1): translation finished.
 
@@ -324,7 +329,7 @@
 	S/Key: removed assign getpass() to libshadow_getpass() on autoconf level
 	(fix by Mike Frysinger <vapier@gentoo.org>).
 
-2006-07-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/vipw.8.xml: make options <replaceable> in SYNOPSIS.
 
@@ -343,7 +348,7 @@
 
 	* po/pl.po: kill fuzzy.
 
-2006-07-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chsh.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/dz.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/km.po, po/ko.po, po/nb.po, po/ne.po:
 	one \t more in help message.
@@ -353,7 +358,7 @@
 
 	* NEWS, src/chsh.c: chsh rewrited for use getopt_long().
 
-2006-07-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/groupmod.8, man/pl/pl.po: finish translation groupmod(8).
 
@@ -367,7 +372,7 @@
 	* man/fr/fr.po, man/groupmod.8.xml, man/pl/pl.po, man/ru/ru.po:
 	updated groupmod man page.
 
-2006-07-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groupmod.c: too many \t in help message.
 
@@ -385,7 +390,7 @@
 
 	* NEWS, src/groupmod.c: groupmod rewrited for use getopt_log().
 
-2006-07-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/sv.po:
 	added missing \n in help messages and few other minor cleanups.
@@ -402,20 +407,20 @@
 	* src/login.c, src/logoutd.c, src/userdel.c, libmisc/limits.c:
 	remove USER_PROCESS conditionsi (code simplifications).
 
-2006-07-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/km.po: kill all fuzzy (Sokhem <khoemsokhem@khmeros.info>).
 
-2006-07-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/de.po: kill fuzzy (by Holger Wansing <linux@wansing-online.de>).
 
-2006-07-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-07-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am: removed duplicated all target.
 
 	* NEWS, po/LINGUAS, po/ne.po:
-	new Nepali translation (by Paras pradhan <pradhanparas@gmail.com>).
+	new Nepali translation (by Paras Pradhan <pradhanparas@gmail.com>).
 
 	* NEWS, po/LINGUAS, po/dz.po: new Dzongkha translation.
 
@@ -425,7 +430,7 @@
 	* NEWS, po/nl.po:
 	updated for 4.0.17 (by "cobaco (aka Bart Cornelis)" <cobaco@skolelinux.no>)
 
-2006-06-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ko.po: cleanups (by darehanl <darehanl@gmail.com>).
 
@@ -442,7 +447,7 @@
 	* po/ro.po, NEWS:
 	updated for 4.0.17 (by Sorin Batariuc <sorin@bonbon.net>).
 
-2006-06-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: cleanups.
 
@@ -494,7 +499,7 @@
 	updated for 4.0.17 (by Claus Hindsgaul <claus.hindsgaul@gmail.com>).
 
 	* po/pl.po:
-	s/tw√≥≈º/tw√≥rz/ (fix by Micha≈Ç ≈Åomnicki <michal.lomnicki@gmail.com>).
+	s/twƒÇ≈Çƒπ≈∫/twƒÇ≈Çrz/ (fix by Micha≈Ç ≈Åomnicki <michal.lomnicki@gmail.com>).
 
 	* NEWS, po/pt.po:
 	updated for 4.0.17 (by Miguel Figueiredo <mfigueiredo@gmail.com>).
@@ -514,7 +519,7 @@
 	* NEWS, po/ko.po:
 	updated for 4.0.17 (by Changwoo Ryu <cwryu@debian.org>).
 
-2006-06-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: schedule release 40.17 on 26-06-2006.
 
@@ -526,7 +531,7 @@
 	fixed mail spool file creation (bug cached by Frans Pop <elendil@planet.nl>,
 	fixed http://bugs.debian.org/374705).
 
-2006-06-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chage.c, src/chgpasswd.c, src/chpasswd.c, src/faillog.c, src/groupadd.c, src/lastlog.c, src/passwd.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c:
 	better looking help messages output. Added one empty line at end of help message.
@@ -538,7 +543,7 @@
 
 	* po/pl.po: cleanups.
 
-2006-06-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/vipw.8:
 	regenerated using fixed DocBook XSL Stylesheets v1.70.1 (I must submit my
@@ -563,7 +568,7 @@
 	added missing information about fail_locktime element of faillog struct
 	in faillog(5) man page (by Thorsten Kukuk <kukuk@suse.de>).
 
-2006-06-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ru/chage.1, man/ru/chfn.1, man/ru/chgpasswd.8, man/ru/chpasswd.8, man/ru/chsh.1, man/ru/expiry.1, man/ru/faillog.5, man/ru/faillog.8, man/ru/gpasswd.1, man/ru/groupadd.8, man/ru/groupdel.8, man/ru/groupmems.8, man/ru/groupmod.8, man/ru/groups.1, man/ru/grpck.8, man/ru/gshadow.5, man/ru/lastlog.8, man/ru/limits.5, man/ru/login.1, man/ru/login.access.5, man/ru/login.defs.5, man/ru/logoutd.8, man/ru/newgrp.1, man/ru/newusers.8, man/ru/nologin.8, man/ru/passwd.1, man/ru/passwd.5, man/ru/porttime.5, man/ru/pwck.8, man/ru/pwconv.8, man/ru/sg.1, man/ru/shadow.3, man/ru/shadow.5, man/ru/su.1, man/ru/suauth.5, man/ru/useradd.8, man/ru/userdel.8, man/ru/usermod.8, man/ru/vipw.8:
 	fully regenerated man pages.
@@ -572,11 +577,11 @@
 	hack for generate translated xml files with lang="<lang> in <refentry> tag.
 	Now is possible testing correctnes of XSLT sheets languages definition.
 
-2006-06-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/eu.po: updated (by Piarres Beobide <pi@beobide.net>).
 
-2006-06-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/zh_TW.po, po/da.po, po/el.po, po/es.po, po/eu.po, po/id.po, po/ja.po, po/ko.po, po/nb.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/tr.po, po/uk.po, po/zh_CN.po:
 	s/ \\n"/\\n"/ in translated strings.
@@ -613,19 +618,19 @@
 	* po/nb.po, po/nl.po, po/pt.po, po/uk.po, po/cs.po, po/el.po, po/eu.po, po/fi.po, po/hu.po:
 	s/\\\t /\\\t/
 
-2006-06-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/Makefile.am:
 	reverte using docbook.sourceforge.net in XSLT url.
 
 	* po/pl.po: cleanups.
 
-2006-06-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am:
 	improved gen-xmls target: now this target generates only missing xml files.
 
-2006-06-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/sk.po:
 	updated for 4.0.16 (by Peter Mann <Peter.Mann@tuke.sk>).
@@ -643,7 +648,7 @@
 	* NEWS, po/cs.po:
 	updated for 4.0.16 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
 
-2006-06-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-06-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/Makefile.am:
 	regenerate roff man pages using docbook-style-xsl-1.70.1.
@@ -656,7 +661,7 @@
 
 	* man/chgpasswd.8.xml: removed <!DOCTYPE> tag (isn't neccessary).
 
-2006-05-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/pl.po: chage(1) translation.
 
@@ -670,7 +675,7 @@
 
 	* po/pl.po: s/_DAYS/_DNI/
 
-2006-05-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: s/OWL/Owl/
 
@@ -693,7 +698,7 @@
 	* po/fr.po:
 	updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
-2006-05-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am:
 	simplifications in update-po target and fixes in dist-po-files target.
@@ -701,7 +706,7 @@
 	* NEWS, po/eu.po:
 	updated for 4.0.16 (by Piarres Beobide <pi@beobide.net>).
 
-2006-05-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ru/ru.po, NEWS, man/chfn.1.xml, man/faillog.8.xml, man/fr/fr.po, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupmems.8.xml, man/limits.5.xml, man/login.1.xml, man/login.defs.5.xml, man/newgrp.1.xml, man/passwd.1.xml, man/passwd.5.xml, man/pl/pl.po, man/su.1.xml:
 	bunch of cleanups in chfn(1), faillog(8), gpasswd(1), groupadd(8),
@@ -712,7 +717,7 @@
 
 	* po/ru.po: updated for 4.0.16 (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2006-05-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/fr/fr.po, man/pl/pl.po, man/chage.1.xml, man/passwd.1.xml:
 	s/-n/-m/ in passwd(1). Improved -m, --mindays description in chage(1) and passwd(1).
@@ -723,21 +728,21 @@
 	* NEWS, po/hu.po:
 	updated for 4.0.16 (by Gabor Kelemen <kelemeng@gnome.hu>).
 
-2006-05-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/cs/Makefile.am, man/it/Makefile.am, man/ru/Makefile.am:
 	id and sulogin executables are not installed by "make install",
 	but a few translated man pages are still installed.
 	(patch by Lasse Collin <lasse.collin@tukaani.org>)
 
-2006-05-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/vi.po:
 	updates for 4.0.16 (by Clytie Siddall <clytie@riverland.net.au>).
 
 	* po/gl.po: updated for 4.0.16 (by Jacobo Tarrio <jtarrio@debian.org>).
 
-2006-05-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: more cleanups.
 
@@ -794,7 +799,7 @@
 	* src/chgpasswd.c:
 	reverte struct group newgr declaration but use them only conditionaly (#ifndef SHADOWGRP).
 
-2006-05-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: schedule release 4.0.16 to 29.05.06.
 
@@ -810,7 +815,7 @@
 	Use in userdel login.defs::MAIL_DIR instead hardcoded /var/mail on created
 	mailbox path (based on OWL fixes submited by Solar Designer <solar@openwall.com>).
 
-2006-05-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/.cvsignore: added *.[1358]
 
@@ -827,7 +832,7 @@
 
 	* NEWS, po/pt.po: updated (by Miguel Figueiredo <elmig@debianpt.org>).
 
-2006-05-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Makefile.am, man/ja/Attic/pw_auth.3, man/ja/Makefile.am, man/pl/Attic/pw_auth.3, man/pl/Makefile.am, man/ru/Attic/pw_auth.3, man/ru/Makefile.am:
 	pw_auth(3) man page removed (outdated).
@@ -863,7 +868,7 @@
 	* lib/pwauth.c:
 	added #include <unistd.h> and remove localy defined getpass() prototype.
 
-2006-05-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am: removed dupplicated sulogin.8.xml from EXTRA_DIST.
 
@@ -874,7 +879,7 @@
 	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/hu.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/userdel.c, po/bs.po:
 	typo (s/removel/removal/)
 
-2006-05-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/userdel.8.xml:
 	updated (after add getopt_log() support for userdel).
@@ -888,12 +893,12 @@
 
 	* etc/pam.d/Makefile.am, etc/pam.d/chgpasswd: new file.
 
-2006-05-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/da.po:
 	updated (by Claus Hindsgaul <claus.hindsgaul@gmail.com>).
 
-2006-05-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
 
@@ -909,7 +914,7 @@
 
 	* NEWS, po/gl.po: updated (by Jacobo Tarrio <jtarrio@trasno.net>).
 
-2006-05-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/fr.po:
 	updated (by Christian Perrier <bubulle@kheops.frmug.org>).
@@ -951,36 +956,36 @@
 	the -c option (fixes for http://bugs.debian.org/317264 and
 	http://bugs.debian.org/276419).
 
-2006-05-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-05-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/passwd.1.xml:
 	better document how password strength is checked (fixed http://bugs.debian.org/115380).
 
-2006-04-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/usermod.8.xml:
 	added missing -a option description (by Christian Perrier <bubulle@debian.org>).
 
-2006-04-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/hu/chsh.1, man/hu/login.1, man/hu/newgrp.1:
 	fixed typos (by Koblinger Egmont <egmont@uhulinux.hu>).
 
-2006-04-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/LINGUAS, po/hu.po:
-	new hu translation (by SZERV√ëC Attila <sas@321.hu>).
+	new hu translation (by SZERV√ÅC Attila <sas@321.hu>).
 
-2006-04-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/userdel.8.xml:
 	minior fixes for the note under the -f option (Mike Frysinger <vapier@gentoo.org>).
 
-2006-04-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/id.po: updatd (by Parlin Imanuel <pimanuel@gmail.com>).
 
-2006-04-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-04-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/su.c: indent code.
 
@@ -992,7 +997,7 @@
 	* README:
 	simple patch to fixup grammar and Gentoo distfile URL (by Mike Frysinger <vapier@gentoo.org>).
 
-2006-03-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/pw_auth.3.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newgrp.1.xml, man/newusers.8.xml, man/nologin.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/sg.1.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
 	removed <!DOCTYPE> tag (require strict DocBook XML V4.3//EN DTD isn't neccessary).
@@ -1008,13 +1013,13 @@
 	* NEWS, man/login.defs.5.xml:
 	CREATE_HOME is not supported by useradd (patch by Mike Frysinger <vapier@gentoo.org>).
 
-2006-03-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/nl.po:
 	s/wachtwoord is mes succes aangepast/wachtwoord is met succes aangepast/
 	(typo reported by Wim De Smet <wdesmet@yucom.be>).
 
-2006-03-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/passwd.c:
 	removed GPASSWD_PROGRAM, CHFN_PROGRAM CHFN_PROGRAM #defines (not used now).
@@ -1022,27 +1027,27 @@
 	* NEWS, man/Makefile.am, man/chgpasswd.8.xml:
 	chgpasswd(8): new man page.
 
-2006-03-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/vigr.8, man/Attic/vipw.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/getspnam.3, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/grpconv.8, man/Attic/grpunconv.8, man/Attic/gshadow.5, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/nologin.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/pwunconv.8, man/Attic/sg.1, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	remove english roff man pages from repo.
 
-2006-03-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/chgpasswd.c:
 	fixes for build correctly with --disable-shadowgrp
 	(patch by Johannes Winkelmann <jw@tks6.net>)
 
-2006-03-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/chage.1: fixed typo.
 
-2006-03-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/it.po:
 	updated for 4.0.15 (by Danilo Piazzalunga <danilopiazza@gmail.com>).
 
-2006-03-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/nb.po:
 	updated for 4.0.15 (by Bj√∏rn Steensrud <bjornst@powertech.no>).
@@ -1060,7 +1065,7 @@
 	* po/fr.po:
 	updated for 4.0.15 (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
-2006-03-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, lib/pwauth.c:
 	added fixes for detect BSD's S/Key with updated the skeychallenge() function
@@ -1086,7 +1091,7 @@
 	ru man pages: added new nologin(8) and updated all other man pages
 	(by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2006-03-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/nl.po:
 	updated for 4.0.15 (by cobaco (aka Bart Cornelis) <cobaco@linux.be>).
@@ -1097,21 +1102,21 @@
 	* po/sv.po:
 	updated for 4.0.15 (by Daniel Nylander <po@danielnylander.se>).
 
-2006-03-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/eu.po: updated for 4.0.15 (by pi <pi@beobide.net>).
 
 	* po/ro.po: cleanups.
 
 	* NEWS, po/tl.po:
-	updated for 4.0.15 (by eric pareja <xenos@upm.edu.ph>).
+	updated for 4.0.15 (by Eric Pareja <xenos@upm.edu.ph>).
 
 	* po/ro.po: updated for 4.0.15 (by Sorin B. <sorin@bonbon.net>).
 
 	* NEWS, po/es.po:
 	updated for 4.0.15 (by Ruben Porras <nahoo82@gmail.com>).
 
-2006-03-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/da.po:
 	updated for 4.0.15 (by Claus Hindsgaul <claus.hindsgaul@gmail.com>).
@@ -1135,7 +1140,7 @@
 	* src/useradd.c, NEWS, lib/getdef.h, man/Attic/login.defs.5, man/login.defs.5.xml, src/login.c, src/newusers.c:
 	default UMASK if not specified in login.defs is 022.
 
-2006-03-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: updated for 4.0.15.
 
@@ -1144,14 +1149,14 @@
 
 	* NEWS, configure.in: schedule release 4.0.15 to 13-03-2006.
 
-2006-03-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typo (s/onas Meurer/Jonas Meurer/)
 
 	* src/.cvsignore: added chgpasswd.
 
 	* po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/Makefile.am, src/chgpasswd.c, NEWS, po/POTFILES.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po:
-	chgpasswd: new tool (by onas Meurer <mejo@debian.org>).
+	chgpasswd: new tool (by Jonas Meurer <mejo@debian.org>).
 
 	* src/lastlog.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	s/Unexpected/unexpected/
@@ -1160,21 +1165,21 @@
 	print the usage and exit if an additional argument is profided to
 	lastlog (merge 488_laslog_verify_arguments Debian patch).
 
-2006-03-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-03-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chpasswd.8, man/chpasswd.8.xml:
 	fixed CAVEATS section (by Justin Pryzby <justinpryzby@users.sourceforge.net>)
 
-2006-02-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	fixed SYNOPSIS section (http://bugs.debian.org/352136).
 
-2006-02-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ro.po: updated (by Sorin Batariuc <sorin@bonbon.net>).
 
-2006-02-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, lib/Makefile.am, src/Makefile.am:
 	login, nologin, su: do not link with libselinux
@@ -1190,7 +1195,7 @@
 
 	* NEWS, po/ca.po: updated (by Jordi Mallach <jordi@debian.org>).
 
-2006-02-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/gpasswd.1.xml, man/passwd.1.xml, man/passwd.5.xml, man/pwck.8.xml, man/sg.1.xml, man/useradd.8.xml:
 	cleanups.
@@ -1200,7 +1205,7 @@
 	* NEWS, po/pt.po:
 	updated (by Miguel Figueiredo <mfigueiredo@gmail.com>).
 
-2006-02-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/it.po:
 	update (by Danilo Piazzalunga <danilopiazza@gmail.com>).
@@ -1209,7 +1214,7 @@
 
 	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
 
-2006-02-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po: updated (by Christian Perrier <bubulle@kheops.frmug.org>).
 
@@ -1222,7 +1227,7 @@
 
 	* po/eu.po: update (by ^pi^ <pi@beobide.net>).
 
-2006-02-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/login.c:
 	merge 433_login_more_LOG_UNKFAIL_ENAB Debian patch:
@@ -1248,7 +1253,7 @@
 
 	* src/su.c: /su_catch_sig/chatch_signals/
 
-2006-02-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/id.c, src/groups.c, libmisc/getdate.y: lint code using CC=g++.
 
@@ -1280,39 +1285,39 @@
 	* man/Attic/limits.5, man/limits.5.xml:
 	fixed example limits string (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2006-02-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/chage.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po:
 	added missing \n on display password status if password must be chaged.
 
-2006-02-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c, NEWS:
 	fixed allow non-unique UID (http://bugs.debian.org/351281).
 
-2006-02-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-02-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/cs.po: updated (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
 
-2006-01-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/vi.po:
 	updated (by Clytie Siddall <clytie@riverland.net.au>).
 
-2006-01-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po:
 	typo (fixed by Christian Perrier <bubulle@kheops.frmug.org>).
 
 	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>).
 
-2006-01-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/grpck.8, man/pl/login.defs.5, man/pl/passwd.1, man/pl/pwck.8, man/de/passwd.1, man/es/login.1, man/es/vipw.8, man/fi/passwd.1, man/hu/passwd.1, man/id/login.1, man/it/grpck.8, man/it/pwck.8, man/ja/grpck.8, man/ja/passwd.1, man/ja/pwck.8, man/ko/login.1, man/ko/su.1:
 	fixes some issues that cause warnings when the manpages are
 	displayed (by Nicolas Fran√ßois <nicolas.francois@centraliens.net>).
 
-2006-01-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/eu.po: updated (by pi <pi@beobide.net>).
 
@@ -1320,19 +1325,19 @@
 	fixes after linting code using CC=g++: cast {m,re}alloc() return value to
 	proper type.
 
-2006-01-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/passwd.5, man/Attic/su.1, man/Attic/useradd.8, man/chage.1.xml, man/passwd.5.xml, man/su.1.xml, man/useradd.8.xml:
 	uniformity and grammar fixes (by Christine Spang <spangarang@twcny.rr.com>).
 
 	* NEWS, po/ru.po: updated (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2006-01-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, NEWS:
 	updated (by Christian Perrier <bubulle@kheops.frmug.org>).
 
-2006-01-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/setupenv.c, src/chage.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/login.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/usermod.c, src/vipw.c:
 	variouse code cleanups for make possible compilation of shadow with
@@ -1348,13 +1353,13 @@
 	* NEWS, po/el.po:
 	updated (by Konstantinos Margaritis <markos@debian.org>).
 
-2006-01-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/exitcodes.h: new #defines:
 	#define E_CMD_NOEXEC           126     /* can't run command/shell */
 	#define E_CMD_NOTFOUND         127     /* can't find command/shell to run */
 
-2006-01-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	fixes after reviewed for grammatical and other small errors that detract from the
@@ -1366,7 +1371,7 @@
 
 	* po/it.po: updated (by Danilo Piazzalunga <danilopiazza@gmail.com>).
 
-2006-01-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: updated.
 
@@ -1375,20 +1380,20 @@
 	* po/LINGUAS, po/gl.po, NEWS:
 	added new gl translation (by Jacobo Tarrio <jtarrio@trasno.net>).
 
-2006-01-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/eu.po: small update (by pi <pi@beobide.net>).
 
-2006-01-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/su.c: fixed compilation error.
 
-2006-01-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>)
 	http://bugs.debian.org/346449
 
-2006-01-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/useradd.8, man/useradd.8.xml:
 	better document useradd -d option: will not add the user's home directory
@@ -1408,7 +1413,7 @@
 	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>)
 	http://bugs.debian.org/346376
 
-2006-01-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/id.po: updated (by Parlin Imanuel <parlin_i@yahoo.com>)
 	http://bugs.debian.org/345514
@@ -1416,14 +1421,14 @@
 	* NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/login.c:
 	added translate login prompt string (suggested by Evgeniy Dushistov).
 
-2006-01-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: start work on 4.1.0.
 
 	* po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
 	http://bugs.debian.org/346017
 
-2006-01-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: correct 4.0.14 release date (03-01-2006).
 
@@ -1439,7 +1444,7 @@
 	* configure.in:
 	s/libpam_misc is missing/libpam_misc is missing for enable PAM support/
 
-2006-01-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2006-01-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* etc/pam.d/.cvsignore: added.
 
@@ -1479,21 +1484,21 @@
 	* man/Attic/lastlog.8, man/Attic/useradd.8, man/lastlog.8.xml, man/useradd.8.xml:
 	s/uid/UID/
 
-2005-12-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
-	* po/tl.po: updated for 4.0.14 (by eric pareja <xenos@upm.edu.ph>).
+	* po/tl.po: updated for 4.0.14 (by Eric Pareja <xenos@upm.edu.ph>).
 
-2005-12-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/ca.po:
 	updated for 4.0.14 (by Guillem Jover <guillem@debian.org>).
 
-2005-12-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/el.po:
 	updated for 4.0.14 (by Konstantinos Margaritis <markos@debian.org>).
 
-2005-12-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* doc/.cvsignore, etc/.cvsignore, lib/.cvsignore, po/.cvsignore, src/.cvsignore, .cvsignore, contrib/.cvsignore:
 	added a lot of generated files they are not listed in .cvsignore files
@@ -1509,14 +1514,14 @@
 	* man/Attic/useradd.8, man/useradd.8.xml:
 	s/group/user/ (cached by Nicolas Fran√ßois).
 
-2005-12-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ko/vigr.8: added.
 
 	* po/it.po:
 	updated for 4.0.14 (by Danilo Piazzalunga <danilopiazza@gmail.com>).
 
-2005-12-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/pt.po:
 	updated for 4.0.14 (by Miguel Figueiredo <mfigueiredo@gmail.com>).
@@ -1533,7 +1538,7 @@
 	updated man page after change su for use getopt_long()
 	(by Nicolas Fran√ßois <nicolas.francois@centraliens.net>)
 
-2005-12-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/fi.po:
 	updated for 4.0.14 (by Tommi Vainikainen <thv+debian@iki.fi>).
@@ -1567,7 +1572,7 @@
 	* NEWS, po/vi.po:
 	updated vi.po fo 4.0.14 (by Clytie Siddall <clytie@riverland.net.au>).
 
-2005-12-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: set release day for 4.0.14 to 19-12-2005.
 
@@ -1584,7 +1589,7 @@
 	added es, ko vigr(8) and vipw(8), hu lastlog(8), ko vipw(8), zh_CN su(1),
 	zh_TW chpasswd(8) and su(1),
 
-2005-12-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* doc/Attic/LICENSE, doc/Makefile.am, COPYING:
 	move doc/LICENSE to COPYING.
@@ -1593,7 +1598,7 @@
 
 	* doc/Attic/README.nls, doc/Attic/README.pam, doc/Makefile.am: removed.
 
-2005-12-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	run "make update-po" (merge changes in su messages).
@@ -1615,11 +1620,11 @@
 	* po/it.po:
 	cosmetic fixes (by Danilo Piazzalunga <danilopiazza@gmail.com>).
 
-2005-12-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/es/Makefile.am: s/patches/passwd/
 
-2005-12-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/Makefile.am, man/tr/.cvsignore, man/tr/Makefile.am, man/tr/chage.1, man/tr/chfn.1, man/tr/groupadd.8, man/tr/groupdel.8, man/tr/groupmod.8, man/tr/login.1, man/tr/passwd.1, man/tr/passwd.5, man/tr/shadow.5, man/tr/su.1, man/tr/useradd.8, man/tr/userdel.8, man/tr/usermod.8:
 	added tr man pages.
@@ -1637,7 +1642,7 @@
 	* man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/vipw.8, man/Makefile.am, man/fr/Makefile.am, man/fr/chage.1, man/fr/chfn.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/expiry.1, man/fr/faillog.5, man/fr/faillog.8, man/fr/getspnam.3, man/fr/gpasswd.1, man/fr/groupadd.8, man/fr/groupdel.8, man/fr/groupmod.8, man/fr/groups.1, man/fr/grpck.8, man/fr/grpconv.8, man/fr/grpunconv.8, man/fr/gshadow.5, man/fr/lastlog.8, man/fr/limits.5, man/fr/login.1, man/fr/login.access.5, man/fr/login.defs.5, man/fr/logoutd.8, man/fr/newgrp.1, man/fr/newusers.8, man/fr/passwd.1, man/fr/passwd.5, man/fr/porttime.5, man/fr/pwck.8, man/fr/pwconv.8, man/fr/pwunconv.8, man/fr/sg.1, man/fr/shadow.3, man/fr/shadow.5, man/fr/su.1, man/fr/suauth.5, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/fr/vigr.8, man/fr/vipw.8, NEWS:
 	added full set (up to date) fr man pages (by Nicolas Fran√ßois <nicolas.francois@centraliens.net>).
 
-2005-12-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ca.po, po/cs.po, po/da.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/it.po, po/nl.po, po/ro.po, po/sk.po, po/sv.po:
 	cleanups.
@@ -1659,7 +1664,7 @@
 	* po/it.po:
 	updated for 4.0.14 (by Danilo Piazzalunga <danilopiazza@gmail.com>).
 
-2005-12-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po: updated (by Christian Perrier <bubulle@kheops.frmug.org>).
 
@@ -1668,7 +1673,7 @@
 	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/su.c, src/usermod.c, po/bs.po:
 	s/LOGIN/login/ in usage() output.
 
-2005-12-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/vipw.c, NEWS, man/Attic/vipw.8, man/vipw.8.xml, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po:
 	rewrited vipw for use getopt_long().
@@ -1677,7 +1682,7 @@
 
 	* man/ko/Makefile.am: commented newgrp.1 (must be updated).
 
-2005-12-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am: update-po target added.
 
@@ -1701,7 +1706,7 @@
 	fix chage display when the last change field is set to 0.
 	This is consistent with PAM (merge 427_chage_expiry_0 Debian patch).
 
-2005-12-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-12-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: added man/fi/Makefile to AC_CONFIG_FILES().
 
@@ -1717,7 +1722,7 @@
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po:
 	update by some informations about translators (by Christian Perrier) and run "make update-po".
 
-2005-11-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/su.c:
 	if an password is expired, su should propose to change this password
@@ -1737,7 +1742,7 @@
 
 	* NEWS, src/useradd.c: merge PUG fixes from RedHat patch.
 
-2005-11-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/it.po:
 	updated (by Danilo Piazzalunga <danilopiazza@gmail.com>).
@@ -1745,17 +1750,17 @@
 	* man/ru/pwconv.8, man/ru/pwunconv.8, man/ru/sg.1, man/ru/shadow.3, man/ru/shadow.5, man/ru/su.1, man/ru/suauth.5, man/ru/sulogin.8, man/ru/useradd.8, man/ru/userdel.8, man/ru/usermod.8, man/ru/vigr.8, man/ru/vipw.8, NEWS, man/ru/Attic/pw_auth.3, man/ru/Makefile.am, man/ru/chage.1, man/ru/chfn.1, man/ru/chpasswd.8, man/ru/chsh.1, man/ru/expiry.1, man/ru/faillog.5, man/ru/faillog.8, man/ru/getspnam.3, man/ru/gpasswd.1, man/ru/groupadd.8, man/ru/groupdel.8, man/ru/groupmems.8, man/ru/groupmod.8, man/ru/groups.1, man/ru/grpck.8, man/ru/grpconv.8, man/ru/grpunconv.8, man/ru/gshadow.5, man/ru/id.1, man/ru/lastlog.8, man/ru/limits.5, man/ru/login.1, man/ru/login.access.5, man/ru/login.defs.5, man/ru/logoutd.8, man/ru/newgrp.1, man/ru/newusers.8, man/ru/passwd.1, man/ru/passwd.5, man/ru/porttime.5, man/ru/pwck.8:
 	added full set of ru man pages (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2005-11-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/Makefile.am, src/nologin.c: added nologin program.
 
 	* NEWS, src/su.c: rewrited for use getopt_long().
 
-2005-11-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/zh_CN.po: updated (by Ming Hua <minghua@rice.edu>).
 
-2005-11-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/usermod.8, man/usermod.8.xml:
 	rewrited for document long options.
@@ -1775,7 +1780,7 @@
 	* NEWS, po/fr.po:
 	updated (by Christian Perrier <bubulle@kheops.frmug.org>).
 
-2005-11-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/Makefile.am, src/newgrp.c:
 	added auditing support for newgrp (by Steve Grubb <sgrubb@redhat.com>).
@@ -1785,11 +1790,11 @@
 
 	* README: typo.
 
-2005-11-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po: updated (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2005-11-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	s/logdir/shadow_cv_logdir/ fix wrong var name (by Mike Frysinger <vapier@gentoo.org>).
@@ -1803,11 +1808,11 @@
 	remove the user's group unless it is not really a user-private group
 	(based on FC patch).
 
-2005-11-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/usermod.c: fix long name options name in long_options[].
 
-2005-11-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-11-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/userdel.c: indent source code.
 
@@ -1840,12 +1845,12 @@
 
 	* man/pt_BR/gpasswd.1: merge 204_pt_BR-manpages Debian patch.
 
-2005-10-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/porttime.5, man/Attic/pwck.8, man/Attic/shadow.3, man/porttime.5.xml, man/pwck.8.xml:
 	improvements by Yuri Kozlov <kozlov.y@gmail.com>.
 
-	* NEWS, po/tl.po: updated (by eric pareja <xenos@upm.edu.ph>).
+	* NEWS, po/tl.po: updated (by Eric Pareja <xenos@upm.edu.ph>).
 
 	* po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, src/su.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po:
 	remove "." from su message.
@@ -1860,16 +1865,16 @@
 	* NEWS, src/usermod.c:
 	rewrited for use getopt_long() (Christian Perrier <bubulle@kheops.frmug.org>).
 
-2005-10-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/uk.po: updated (by Eugeniy Meshcheryakov <eugen@univ.kiev.ua>).
 
-2005-10-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/faillog.5, man/Attic/groupmems.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/chpasswd.8.xml, man/groupmems.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/Attic/chpasswd.8:
 	bunch of cleanups (Yuri Kozlov <kozlov.y@gmail.com>).
 
-2005-10-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/userdel.c, src/usermod.c, lib/pam_defs.h, libmisc/pam_pass.c, libmisc/pwdcheck.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/login.c, src/newusers.c, src/su.c, src/useradd.c:
 	Simplifications: move all per shadow tool declared struct pam_conv conv
@@ -1881,24 +1886,24 @@
 	fixed grpck segmentation fault on using -s when /etc/gshadow is empty (fix by
 	Tomasz Lemiech <szpajder@staszic.waw.pl>).
 
-2005-10-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/faillog.5, man/faillog.5.xml:
 	typos (by A Costa <agcosta@gis.net>).
 
-2005-10-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chpasswd.8, man/chage.1.xml, man/chpasswd.8.xml:
 	typos (by A Costa <agcosta@gis.net>).
 
 	* NEWS, po/sv.po: updated (by Daniel Nylander <yeager@lidkoping.net>).
 
-2005-10-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/de/newgrp.1, man/es/Makefile.am, man/es/newgrp.1, man/zh_CN/Makefile.am, man/zh_CN/newgrp.1, man/zh_TW/Makefile.am, man/zh_TW/newgrp.1, NEWS, man/de/Makefile.am:
 	newgrp(1): added de, es, zh_CN, zh_TW translations.
 
-2005-10-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/gpasswd.1, man/gpasswd.1.xml:
 	move "Notes about group passwords" section from passwd man page.
@@ -1926,11 +1931,11 @@
 	* man/Attic/newgrp.1, man/Attic/sg.1, man/newgrp.1.xml, man/sg.1.xml:
 	added <refmiscinfo class="sectdesc">User Commands</refmiscinfo> tag.
 
-2005-10-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: start work on 4.0.14.
 
-2005-10-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: move release 4.0.13 date to 10-10-2005.
 
@@ -1949,7 +1954,7 @@
 	* man/Attic/newgrp.1, man/newgrp.1.xml:
 	better newgrp description (http://bugs.debian.org/325558).
 
-2005-10-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/newusers.c, src/useradd.c, src/userdel.c, src/usermod.c:
 	remove using pam_chauthtok().
@@ -1969,18 +1974,18 @@
 
 	* src/chfn.c: finish PAM support.
 
-2005-10-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chfn.1, man/Attic/chsh.1, man/chfn.1.xml, man/chsh.1.xml:
 	cleanups (by  Alexander Gattin <xrgtn@yandex.ru>).
 
-2005-10-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/userdel.c:
 	userdel should not remove the group which is primary for someone else (fix
 	by Nicolas Fran√ßois <nicolas.francois@centraliens.net> http://bugs.debian.org/295416)
 
-2005-10-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-10-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/vipw.8.xml, man/Attic/chage.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/faillog.8, man/Attic/grpck.8, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/passwd.1, man/Attic/porttime.5, man/Attic/pw_auth.3.xml, man/Attic/shadow.3, man/Attic/su.1, man/Attic/suauth.5, man/chage.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/faillog.8.xml, man/groupmems.8.xml, man/grpck.8.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/passwd.1.xml, man/porttime.5.xml, man/shadow.3.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml:
 	s/<emphasis remap='B'>/<emphasis>/
@@ -2000,7 +2005,7 @@
 
 	* po/ru.po: updated for 4.0.13 (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2005-09-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: cleanups.
 
@@ -2013,13 +2018,13 @@
 	during the changes on libmisc/setupenv.c, a piece of code was moved
 	without its comment (merge 449_comment_missplaced Debian patch).
 
-2005-09-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chfn.1, man/Attic/chsh.1, man/Attic/groupadd.8, man/Attic/newusers.8, man/Attic/pwconv.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/chfn.1.xml, man/chsh.1.xml, man/groupadd.8.xml, man/newusers.8.xml, man/pwconv.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, NEWS:
 	added missing references to /etc/login.defs and login.defs(5)
 	(Christian Perrier <bubulle@kheops.frmug.org>).
 
-2005-09-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: s/XSL/XSLT/
 
@@ -2032,7 +2037,7 @@
 	* po/cs.po:
 	updated for 4.0.13 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
 
-2005-09-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: updated.
 
@@ -2046,7 +2051,7 @@
 
 	* po/es.po: updated for 4.0.13 (by Ruben Porras <nahoo@inicia.es>).
 
-2005-09-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/failure.c:
 	use "%c" in strftime() output (based on patch from
@@ -2060,7 +2065,7 @@
 	* man/Attic/sg.1, man/Makefile.am, man/sg.1.xml:
 	added separated sg(1) man page.
 
-2005-09-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/commonio.c, NEWS:
 	don't assume selinux is enabled if is_selinux_enabled() returns -1
@@ -2068,11 +2073,11 @@
 
 	* po/ro.po: updated (by Sorin Batariuc <sorin@bonbon.net>).
 
-2005-09-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: schedule release 4.0.13 to 03-10-2005.
 
-2005-09-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/gshadow.5, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8:
 	regenerate all roff man pages using DocBook XSL Stylesheets 1.69.1.
@@ -2087,17 +2092,17 @@
 
 	* man/login.access.5.xml: cleanups.
 
-2005-09-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/passwd.5, man/passwd.5.xml:
 	rewrited based on work by Greg Wooledge <greg@wooledge.org>
 	http://bugs.debian.org/328113
 
-2005-09-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ro.po: updates (by Sorin Batariuc <sorin@bonbon.net>).
 
-2005-09-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/id.c, src/login.c, src/login_nopam.c, src/logoutd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/suauth.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c:
 	remove empty lines after comment.
@@ -2107,13 +2112,13 @@
 	* po/fr.po:
 	updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
-2005-09-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/gpasswd.c: remove exit(1) after failure().
 
 	* src/usermod.c: consolidate few #ifdef WITH_AUDIT .. #endif sections.
 
-2005-09-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Makefile.am: added missing $(LDADD) in gpasswd_LDADD.
 
@@ -2161,11 +2166,11 @@
 
 	* po/pt.po: finish update (by Christian Perrier <bubulle@debian.org>).
 
-2005-09-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pt.po, NEWS: updated (by Miguel Figueiredo <elmig@debianpt.org>).
 
-2005-09-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/passwd.c:
 	fix warning (initialization makes pointer from integer without a cast) in
@@ -2174,7 +2179,7 @@
 	* po/fr.po, NEWS:
 	partialy updated (by Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>).
 
-2005-09-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chage.c: indent source sode.
 
@@ -2182,7 +2187,7 @@
 	change to use new selinux API for selinux_check_passwd_access()
 	(patch from Fedora by Dan Walsh <dwalsh@redhat.com>).
 
-2005-09-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-09-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/newgrp.1, man/newgrp.1.xml: finished rewrite.
 
@@ -2199,7 +2204,7 @@
 
 	* etc/login.defs: s/chkpasswd/chpasswd/
 
-2005-08-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am, man/chsh.1.xml, man/limits.5.xml, man/login.access.5.xml, man/newgrp.1.xml, man/newusers.8.xml:
 	fixed id= in <refentry>.
@@ -2227,7 +2232,7 @@
 	* man/Makefile.am: added support for regenerate roff files from XML.
 	Added depeing shadow-man-pages.pot on $(man_XMANS).
 
-2005-08-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/login.1, man/login.1.xml, NEWS:
 	added securetty(5) to SEE ALSO section (fixed Debian bug http://bugs.debian.org/325773).
@@ -2259,7 +2264,7 @@
 
 	* po/pl.po: partialy updated.
 
-2005-08-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/exitcodes.h, src/chage.c:
 	s/E_NOT_SHADOWED/E_SHADOW_NOTFOUND/ and change value of this exit code to 14.
@@ -2287,7 +2292,7 @@
 	* man/id/chsh.1:
 	fix .SH (fix merged from 207_id-manpages debian patch).
 
-2005-08-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* acinclude.m4: add aclocal macros (based on acinclude.m4 from glib):
 	JH_PATH_XML_CATALOG: checks the location of the XML Catalog,
@@ -2319,7 +2324,7 @@
 	* po/ru.po, NEWS:
 	update ru translations (by Yuri Kozlov <kozlov.y@gmail.com>).
 
-2005-08-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	removed "Account maintenance" section.
@@ -2361,14 +2366,14 @@
 	fixed for use login.defs::MD5_CRYPT_ENAB only if PAM support
 	is disabled (fix by John Gatewood Ham <zappaman@buraphalinux.org>).
 
-2005-08-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	use AC_HELP_STRING() in AC_ARG_ENABLE() and AC_ARG_WITH().
 	Exit with error message if configure was runed --with-selinux
 	and libselinux not found.
 
-2005-08-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/chkname.c, NEWS, man/Attic/groupadd.8, man/Attic/useradd.8, man/groupadd.8.xml, man/useradd.8.xml:
 	documents in CAVEATS section the limitations shadow places on user and
@@ -2377,7 +2382,7 @@
 	* src/passwd.c, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po:
 	added missing -i, --inactive in usage() output.
 
-2005-08-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, src/passwd.c, NEWS:
 	passwd rewrited for use getopt_long().
@@ -2398,7 +2403,7 @@
 	otherwise e.g. bash's "suspend" command won't work.
 	Fixed Debian http://bugs.debian.org/314727
 
-2005-08-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: typo.
 
@@ -2407,19 +2412,19 @@
 
 	* NEWS, configure.in: start work on 4.0.13.
 
-2005-08-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po: updated for 4.0.12 (by Yuri Kozlov <yuray@id.ru>).
 
 	* NEWS, po/sk.po:
 	updated for 4.0.12 (by Peter Mann <Peter.Mann@tuke.sk>).
 
-2005-08-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/nl.po, NEWS:
 	updated for 4.0.12 (by cobaco (aka Bart Cornelis) <cobaco@linux.be>).
 
-2005-08-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/fi.po:
 	updated for 4.0.12 (by Tommi Vainikainen <thv+debian@iki.fi>).
@@ -2430,7 +2435,7 @@
 	* po/pt.po, NEWS:
 	updated for 4.0.12 (by Miguel Figueiredo <elmig@debianpt.org>).
 
-2005-08-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/cs.po:
 	updated for 4.0.12 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
@@ -2454,7 +2459,7 @@
 	* lib/getdef.c, src/login.c, src/newgrp.c, NEWS:
 	remove using login.defs::CLOSE_SESSIONS variable and allways close PAM session.
 
-2005-08-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in:
 	realy enable shadow group support by default (pointed by
@@ -2484,7 +2489,7 @@
 
 	* po/POTFILES.in: added missing libmisc/pwdcheck.c. Sorted.
 
-2005-08-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: s/22-07-2005/22-08-2005/
 
@@ -2525,7 +2530,7 @@
 	https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=109499
 	https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=137498
 
-2005-08-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po:
 	do not copy files from skel directory if home directory exist and write
@@ -2537,18 +2542,18 @@
 
 	* po/pl.po: updated.
 
-2005-08-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c:
 	s/spoll/spool/ (spoted by Nicolas Fran√ßois <nicolas.francois@centraliens.net>).
 
-2005-08-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/su.c:
 	ignore SIGINT while authenticating. A ^C could defeat the waiting
 	period and permit brute-force attacks (fixed http://bugs.debian.org/288827).
 
-2005-08-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/defines.h, NEWS, configure.in:
 	added require ngettext (added [need-ngettext] to AM_GNU_GETTEXT() parameters)
@@ -2564,7 +2569,7 @@
 	* src/chage.c, src/chpasswd.c, src/newusers.c, src/passwd.c, src/pwunconv.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c, NEWS:
 	remove flushing shadow nscd cache (nscd do not caches shadow map).
 
-2005-08-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-08-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, NEWS:
 	rewrited groupadd for use getopt_long().
@@ -2601,16 +2606,16 @@
 
 	* lib/prototypes.h: removed outdated prototypes from lib/pwdbm.c.
 
-2005-07-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/usermod.c: added flushing NSS shadow map.
 
-2005-07-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/chage.1.xml:
 	typo (s/passwordchanges/password changes/).
 
-2005-07-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/getdef.c, src/su.c:
 	ENV_SUPATH and ENV_PATH must be used independently to PAM.
@@ -2621,11 +2626,11 @@
 
 	* lib/getdef.c: remove ENV_ROOTPATH def_table[] (not used).
 
-2005-07-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chsh.c: start use exitcodes.h.
 
-2005-07-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, po/Makevars, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po:
 	added --no-location to po/Makevars::XGETTEXT_OPTIONS: shorter .po files.
@@ -2636,12 +2641,12 @@
 	lines printed in some messages
 	(fixes by Alexander Gattin <arg@online.com.ua>)
 
-2005-07-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/Makevars: added:
 	MSGID_BUGS_ADDRESS = kloczek@pld.org.pl
 
-2005-07-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chfn.c: start use #include "exitcodes.h",
 
@@ -2659,7 +2664,7 @@
 
 	* NEWS, configure.in: start work on 4.0.12.
 
-2005-07-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, configure.in, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po:
 	4.0.11.1 will be released tmorrow (21-07-2005).
@@ -2672,15 +2677,15 @@
 
 	* po/sv.po: partialy updated (by Per Olofsson <pelle@dsv.su.se>).
 
-2005-07-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: start work on 4.0.12.
 
-2005-07-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/sub.c:
 	fixed compilation warning about incompatible implicit declaration of built-in
-	function ‚Äòprintf‚Äô: added "#include <stdio.h>".
+	function printf: added "#include <stdio.h>".
 
 	* src/groupadd.c:
 	move #ifdef USE_PAM .. #endif #includes outside #ifdef SHADOWGRP .. #endif.
@@ -2696,27 +2701,27 @@
 
 	* po/pl.po, NEWS: updated pl translation.
 
-2005-07-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/sk.po:
 	updated for 4.0.11 (by Peter Mann <Peter.Mann@tuke.sk>).
 
-2005-07-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/cs.po:
 	updated for 4.0.11 (by Miroslav Kure <kurem@upcase.inf.upol.cz>).
 
-2005-07-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/de.po, NEWS:
 	updated for 4.0.11 (by Frank Schmid <frank@cs-schmid.de>).
 
-2005-07-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/pt.po:
 	updated for 4.0.11 (by Miguel Figueiredo <elmig@debianpt.org>).
 
-2005-07-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/stats: reorder gsub().
 
@@ -2725,7 +2730,7 @@
 	* po/ru.po, NEWS:
 	updated for 4.0.11 (by Yuri Kozlov <yucoz@yandex.ru>).
 
-2005-07-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/getdef.c:
 	move MAIL_DIR variable from def_table[] to part independent to USE_PAM
@@ -2751,7 +2756,7 @@
 	* NEWS, po/ro.po:
 	- updated for 4.0.11 (by Sorin B. <sorin@bonbon.net>).
 
-2005-07-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/lastlog.8, man/lastlog.8.xml:
 	document that lastlog is a sparse file, and don't need to be rotated.
@@ -2769,7 +2774,7 @@
 
 	* NEWS: release 4.0.11 is sheduled to 18-06-2005.
 
-2005-07-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/login.1, man/login.1.xml, NEWS:
 	better explain the respective roles of login, init and getty with regards
@@ -2797,7 +2802,7 @@
 
 	* po/stats: more gsub().
 
-2005-07-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/newgrp.c:
 	indent source code and use fix for handle splitted groups unconditionaly.
@@ -2819,7 +2824,7 @@
 	merge nscd-socket-path patch from Fedora: newer glibc's have a different nscd socket
 	location (/var/run/nscd/socket instead /var/run/.nscd_socket).
 
-2005-07-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/stats: improved.
 
@@ -2872,7 +2877,7 @@
 	* libmisc/Attic/chkshell.c, libmisc/Makefile.am, src/Attic/chsh_chkshell.c, src/Makefile.am:
 	move libmisc/chkshell.c to src/chsh_chkshell.c. check_shell() is used only by chsh.
 
-2005-07-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* Attic/acconfig.h, NEWS, configure.in:
 	finish move all autoheader templates from acconfig.h to configure.in.
@@ -2914,7 +2919,7 @@
 	fixed erroneous warning messages about some login.defs variables when used with PAM
 	(fix by DJ Lucas <dj@linuxfromscratch.org>)
 
-2005-07-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in, libmisc/getdate.y, libmisc/utmp.c, src/logoutd.c:
 	remove non-USG code.
@@ -2929,17 +2934,17 @@
 
 	* src/login.c: fixed use SYSLOG macro.
 
-2005-07-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/login_nopam.c: fixed use SYSLOG macro.
 
-2005-07-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-07-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/login.c:
 	setup limits and umask (using login.defs ULIMITS and UMASK variables) only when
 	PAM support is disabled (it is task for pam_limits and pam_umask modules).
 
-2005-06-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/sulogin.c, src/login.c, src/login_nopam.c, NEWS:
 	use SYSLOG macro instead syslog() which saves the locale, sets the locale to C,
@@ -2951,7 +2956,7 @@
 
 	* NEWS, configure.in: start work on 4.0.11.
 
-2005-06-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: +1 day release 4.0.10 date.
 
@@ -2959,17 +2964,17 @@
 
 	* po/de.po: partial update by Frank Schmid <frank@cs-schmid.de>.
 
-2005-06-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ca.po: run "make update-po".
 
 	* po/sk.po: updated sk translation by Peter Mann <Peter.Mann@tuke.sk>.
 
-2005-06-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typo.
 
-2005-06-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: typo.
 
@@ -2984,7 +2989,7 @@
 	* po/ca.po, po/cs.po, po/da.po, po/fi.po, NEWS:
 	translations updated by maintainers.
 
-2005-06-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chage.c, po/zh_TW.po, po/vi.po, po/zh_CN.po, po/tl.po, po/tr.po, po/uk.po, po/sk.po, po/sq.po, po/sv.po, po/ro.po, po/ru.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/eu.po, po/fi.po, po/fr.po, po/de.po, po/el.po, po/es.po, po/ca.po, po/cs.po, po/da.po, po/bs.po (usage):
 	s/EXPIRE/EXPIRE_DATE/.
@@ -3020,12 +3025,12 @@
 
 	* man/shadow.3.xml: cleanups.
 
-2005-06-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ja/Attic/mkpasswd.8, man/ja/Makefile.am, man/pl/Attic/mkpasswd.8, man/pl/Makefile.am:
 	remove ja and pl mkpasswd.8 man pages.
 
-2005-06-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pwck.8.xml, man/useradd.8.xml, man/userdel.8.xml:
 	correctly code EXIT VALUES section.
@@ -3099,14 +3104,14 @@
 	the rmdir() fails. Patch prepared by Timo Lindfors <lindi-spamtrap@newmail.com>.
 	http://bugs.debian.org/166369
 
-2005-06-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/login.c: indent.
 
 	* man/Attic/pw_auth.3.xml, man/Attic/shadowconfig.8.xml, man/chage.1.xml, man/faillog.8.xml, man/groupmems.8.xml, man/gshadow.5.xml, man/login.1.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
 	cleanups.
 
-2005-06-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/faillog.5.xml:
 	cleanups.
@@ -3119,7 +3124,7 @@
 
 	* man/chfn.1.xml, man/expiry.1.xml, man/gpasswd.1.xml: cleanups.
 
-2005-06-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS:
 	last patch for UTMPX was submited by by Nicolas Fran√ßois <nicolas.francois@centraliens.net>
@@ -3135,7 +3140,7 @@
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	s/compatiblity/compatibility/ (fix by Christian Perrier <bubulle@kheops.frmug.org>).
 
-2005-06-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/Attic/chfn.1, man/chfn.1.xml:
 	give more details about the influence of login.defs on what's allowed to
@@ -3158,7 +3163,7 @@
 	s/inactive_time/inactive_days/ in -f parameter in SYNOPSIS (fix by Christian
 	Perrier <bubulle@debian.org>).
 
-2005-06-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/grpck.8, man/grpck.8.xml:
 	typo: s/incorrectable/uncorrectable/ (by A Costa <agcosta@gis.net>).
@@ -3171,7 +3176,7 @@
 	typos: s/encryped/encrypted/; s/supercedes/supersedes/
 	(by A Costa <agcosta@gis.net>)
 
-2005-06-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/login.c, NEWS:
 	check for hushed login and pass PAM_SILENT if true.
@@ -3181,7 +3186,7 @@
 	fixed loggin of username on succesful login (was using the normal username,
 	when it should have used pam_user) http://bugs.debian.org/47819
 
-2005-06-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-06-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/zh_TW.po: updated (by Tetralet <tetralet@pchome.com.tw>).
 
@@ -3190,7 +3195,7 @@
 	* man/de/passwd.1:
 	added small comment with marker usefull for translators.
 
-2005-05-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Attic/mkpasswd.c, src/chpasswd.c, src/faillog.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/su.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/encrypt.c, lib/getdef.c, lib/gshadow.c, lib/pwauth.h, lib/shadow.c, libmisc/failure.c, libmisc/isexpired.c, libmisc/salt.c:
 	indent all.
@@ -3199,18 +3204,18 @@
 	remove using SHADOWPWD #define so now shadow is allways builded with shadow
 	password support.
 
-2005-05-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/chage.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/vi.po, po/zh_CN.po, po/zh_TW.po, NEWS, man/Attic/chage.1, man/chage.1.xml:
 	rewrite for use getopt_long().
 
-2005-05-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: start working on 4.0.10.
 
 	* man/Makefile.am: remove shadow-man-pages.pot target from all.
 
-2005-05-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/encrypt.c, NEWS:
 	fixed passwd segfault in non-PAM connfiguration (submited by Greg Schafer <gschafer@zip.com.au>).
@@ -3224,26 +3229,26 @@
 	* man/Attic/su.1, man/pwconv.8.xml, man/su.1.xml, man/Attic/pwconv.8:
 	fixed typo (s,similiar,similar,).
 
-2005-05-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/ro.po: updated by Sorin B. <sorin@bonbon.net>.
 
 	* po/ru.po, NEWS: updated by yu-koz <yu-koz@yandex.ru>.
 
-2005-05-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ro.po: few updates by Sorin Batariuc <sorin@bonbon.net>.
 
-2005-05-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po: updated (by Yuri Kozlov <yuray@id.ru>).
 
-2005-05-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/vi.po:
 	completed translations for HEAD (by Clytie Siddall <clytie@riverland.net.au>).
 
-2005-05-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-05-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/LINGUAS, po/vi.po: added new vi translation.
 
@@ -3254,11 +3259,11 @@
 	* man/Attic/passwd.1, man/passwd.1.xml:
 	make bold passwd and chfn commands.
 
-2005-04-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/usermod.8.xml, man/vipw.8.xml: cleanups.
 
-2005-04-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/shadowconfig.8.xml, man/gpasswd.1.xml, man/groups.1.xml, man/grpck.8.xml, man/login.defs.5.xml, man/passwd.1.xml, man/pwck.8.xml, man/sulogin.8.xml, man/useradd.8.xml:
 	replace <emphasis remap='B'></emphasis> by <command></command>.
@@ -3277,7 +3282,7 @@
 	http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=260636).
 	s,VISUAL,$VISUAL; s,EDITOR,$EDITOR,
 
-2005-04-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/login.1.xml: fixed bold (use <command></command>). Cleanups.
 
@@ -3311,7 +3316,7 @@
 
 	* man/Attic/pwconv.8, man/Attic/su.1: typo in bold.
 
-2005-04-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: start work on 4.0.9.
 
@@ -3333,7 +3338,7 @@
 
 	* src/faillog.c: typo (s,maiximum,maximum,).
 
-2005-04-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/chage.1.xml, man/chfn.1.xml, man/chsh.1.xml, man/expiry.1.xml, man/gpasswd.1.xml, man/groups.1.xml, man/id.1.xml, man/login.1.xml, man/passwd.1.xml, man/su.1.xml:
 	added <refmiscinfo class="sectdesc">User Commands</refmiscinfo> in <refmeta></refmeta>.
@@ -3344,7 +3349,7 @@
 	* man/userdel.8.xml, man/usermod.8.xml, man/vigr.8.xml, man/vipw.8.xml, man/Attic/mkpasswd.8.xml, man/Attic/pw_auth.3.xml, man/Attic/shadowconfig.8.xml, man/chage.1.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml:
 	better formation using "xmlindent -l 80 -d 2".
 
-2005-04-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/it/Attic/shadowconfig.8, man/it/chsh.1, man/it/expiry.1, man/it/faillog.5, man/it/faillog.8, man/it/getspnam.3, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/logoutd.8, man/it/newgrp.1, man/it/porttime.5, man/it/pwck.8, man/it/shadow.3, man/it/shadow.5, man/it/su.1, man/it/vipw.8, NEWS, man/it/Makefile.am, man/it/chage.1, man/it/chfn.1, man/it/chpasswd.8:
 	updated it man pages: chfn.1, chsh.1, groups.1, grpck.8, grpconv.8, grpunconv.8,
@@ -3359,7 +3364,7 @@
 	* man/Attic/chage.1, man/Attic/mkpasswd.8.xml, man/Attic/pw_auth.3.xml, man/Attic/shadowconfig.8.xml, man/chfn.1.xml, man/chpasswd.8.xml, man/chsh.1.xml, man/expiry.1.xml, man/faillog.5.xml, man/faillog.8.xml, man/gpasswd.1.xml, man/groupadd.8.xml, man/groupdel.8.xml, man/groupmems.8.xml, man/groupmod.8.xml, man/groups.1.xml, man/grpck.8.xml, man/gshadow.5.xml, man/id.1.xml, man/lastlog.8.xml, man/limits.5.xml, man/login.1.xml, man/login.access.5.xml, man/login.defs.5.xml, man/logoutd.8.xml, man/newusers.8.xml, man/passwd.1.xml, man/passwd.5.xml, man/porttime.5.xml, man/pwck.8.xml, man/pwconv.8.xml, man/shadow.3.xml, man/shadow.5.xml, man/su.1.xml, man/suauth.5.xml, man/sulogin.8.xml, man/useradd.8.xml, man/userdel.8.xml, man/usermod.8.xml, man/vipw.8.xml:
 	reformated using xemacs.
 
-2005-04-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, NEWS:
 	updated for 4.0.8 (by Christian Perrier <bubulle@kheops.frmug.org>).
@@ -3380,7 +3385,7 @@
 
 	* po/fi.po: kill one fuzzy (by Tommi Vainikainen <thv+debian@iki.fi>).
 
-2005-04-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/chpasswd.8.xml: Rewrited by hand & xemacs.
 
@@ -3393,7 +3398,7 @@
 
 	* po/es.po, NEWS: updated (by Ruben Porras <nahoo@inicia.es>).
 
-2005-04-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/useradd.8:
 	fixed typos in useadd syntax (in SYNOPSIS section) catched using doclifter.
@@ -3414,7 +3419,7 @@
 	* NEWS, po/it.po:
 	updated it translation (by Danilo Piazzalunga <danilopiazza@libero.it>).
 
-2005-04-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po:
 	cleanups.
@@ -3450,7 +3455,7 @@
 	* src/chage.c:
 	use E_SUCCESS/E_NOPERM #defines instead 0/1 in exit() arguments.
 
-2005-04-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/passwd.c:
 	adjust also syslog message on usage -S option without permission.
@@ -3467,7 +3472,7 @@
 	new translation by Simon Brandmair <sbrandmair@gmx.net> with merged all
 	changes between revision 1.2 a 1.5.
 
-2005-04-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/passwd.1, man/pl/passwd.1: bold passwd and chage commands.
 
@@ -3482,7 +3487,7 @@
 	add info about what mean -1 passed n expiredate parameter (based on #304542
 	Debian bug; submited by Federico Grau <grauf@rfa.org>).
 
-2005-04-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fi.po, NEWS:
 	updated translation (by Tommi Vainikainen <tvainikan@cc.hut.fi>).
@@ -3490,7 +3495,7 @@
 	* man/hu/passwd.1, man/it/passwd.1, man/ja/passwd.1, man/pl/passwd.1, man/Attic/passwd.1, man/de/passwd.1, man/es/passwd.1:
 	cleanups and unifications in SEE ALSO section.
 
-2005-04-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	Info documentation says about AC_GNU_SOURCE: "should be called before any
@@ -3544,16 +3549,16 @@
 	Use ngettext instead of string concatenation and static number of cases.
 	Patch by Tommi Vainikainen <tvainika@cc.hut.fi>.
 
-2005-04-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/cs.po:
 	new translation maintainer: Miroslav Kure <kurem@debian.cz>.
 
-2005-04-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: updated for 4.0.8.
 
-2005-04-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tl.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, src/faillog.c:
 	changed faillog records display format for allow fit in 80 columns all
@@ -3578,7 +3583,7 @@
 
 	* man/Attic/gpasswd.1: typo (s,fB,\fB,).
 
-2005-04-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/ja/login.1:
 	updated ja man page for Debian #95213 bug (by Kenshi Muto <kmuto@debian.org>).
@@ -3615,7 +3620,7 @@
 	* src/chage.c:
 	remove prototypes for a64l() and *l64a() and add #include <stdlib.h>.
 
-2005-04-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ru/passwd.5, man/zh_CN/chfn.1, man/zh_CN/chpasswd.8, man/zh_CN/chsh.1, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8, man/ko/chfn.1, man/ko/chsh.1, man/ko/groups.1, man/ko/id.1, man/ko/login.1, man/ko/passwd.5, man/ko/su.1, man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/ja/Attic/mkpasswd.8, man/ja/Attic/pw_auth.3, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/expiry.1, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/limits.5, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/newgrp.1, man/ja/passwd.1, man/ja/porttime.5, man/ja/pwck.8, man/ja/shadow.3, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, man/hu/chfn.1, man/hu/chsh.1, man/hu/gpasswd.1, man/hu/groups.1, man/hu/id.1, man/hu/login.1, man/hu/newgrp.1, man/hu/passwd.1, man/hu/su.1, man/id/chsh.1, man/id/login.1, man/id/useradd.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/passwd.5, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/it/usermod.8, man/it/vipw.8, man/de/chfn.1, man/de/chsh.1, man/de/login.1, man/de/passwd.1, man/de/passwd.5, man/de/su.1, man/de/vipw.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/cs/groups.1, man/cs/id.1, man/cs/lastlog.8, man/cs/passwd.5, man/cs/shadow.5, man/cs/su.1, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/expiry.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/vipw.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/expiry.1, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/grpck.8, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/newgrp.1, man/Attic/passwd.1, man/Attic/porttime.5, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/usermod.8, man/Attic/vipw.8:
 	more replaces "-" by "\-" (s,\\-,-,g; s,-,\\-,g).
@@ -3629,7 +3634,7 @@
 	fixes by Nicolas Nicolas Fran√ßois <nicolas.francois@centraliens.net> (not all
 	commited).
 
-2005-04-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/login.1, man/Attic/login.access.5, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/gshadow.5, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5:
 	replace all "-" by "\-" (s,\\-,-,; s,-,\\-,).
@@ -3680,7 +3685,7 @@
 
 	* man/it/chfn.1: cleanups.
 
-2005-04-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-04-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in:
 	fixed UTMP path detection (by Kelledin <kelledin@users.sf.net>).
@@ -3699,7 +3704,7 @@
 	* man/Attic/gpasswd.1, man/Attic/gshadow.5, man/Makefile.am, NEWS:
 	added new file (by Nicolas Nicolas Fran√ßois <nicolas.francois@centraliens.net>).
 
-2005-03-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/chage.1, man/pl/chfn.1, man/pl/chsh.1, man/pl/gpasswd.1:
 	added missing \fR.
@@ -3747,7 +3752,7 @@
 
 	* src/userdel.c (update_user): removed redundant closing }.
 
-2005-03-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/getdef.c:
 	move PASS_MAX_DAYS, PASS_MIN_DAYS and PASS_WARN_AGE to part PAM not dependent
@@ -3762,7 +3767,7 @@
 
 	* doc/Attic/README.sun4, doc/Makefile.am: removed outdated README.sun4.
 
-2005-03-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: put mine data in Last-Translator: field.
 
@@ -3819,22 +3824,22 @@
 	fix compilation warning: replace #include <unistd.h> by #include <netdb.h>
 	where ruserok() is declared.
 
-2005-03-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: kill one fuzzy entry.
 
-2005-03-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/log.c:
 	fixed create lastlog entry fo users never loged in on non-PAM
 	variant of login (fix by <oracular@ziplip.com>).
 
-2005-03-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-03-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, etc/Attic/login.defs.linux, etc/login.defs, lib/getdef.c, man/pl/login.defs.5:
 	remove handle login.defs::NOLOGIN_STR (never used).
 
-2005-02-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-02-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/shadow.5:
 	added missing '\&' in line starting with '\.', which causes groff to skip
@@ -3842,7 +3847,7 @@
 
 	* TODO: cleanups.
 
-2005-02-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-02-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c, NEWS:
 	useradd: fixes a potential security problem when mailbox is created in
@@ -3855,12 +3860,12 @@
 	fchmod() is executed. (Actually, we could also pass the final "mode" to
 	the open() call and then save the consequent fchmod().)
 
-2005-02-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-02-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/LINGUAS, po/tl.po:
 	added tl translation (fron Debian resources).
 
-2005-02-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-02-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/chage.c, src/chfn.c, src/chsh.c, src/passwd.c:
 	SELinux changes: added changes in chage, chfn, chsh, passwd for allow
@@ -3868,27 +3873,27 @@
 	policies level. Patch originally based on RH changes (submited by Chris
 	PeBenito <pebenito@gentoo.org>)
 
-2005-02-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-02-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, NEWS:
 	updated translation (by Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>) from
 	Debian resources.
 
-2005-01-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: open work on 4.0.8.
 
-2005-01-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/zh_TW.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po:
 	"make update-po".
 
-2005-01-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, po/it.po:
 	updated it translations (by Danilo Piazzalunga <danilopiazza@libero.it>).
 
-2005-01-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/rlogin.c: remove ruserok() prototyle and #include <unistd.h>.
 
@@ -3900,7 +3905,7 @@
 	* NEWS, po/fi.po:
 	updated fi translation (by Tommi Vainikainen <thv+debian@iki.fi>).
 
-2005-01-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/da.po, po/es.po, po/pl.po, po/pt.po: kill fuzzy entries.
 
@@ -3921,7 +3926,7 @@
 	<thv+debian@iki.fi> (make all text begining from lower case .. not upper).
 	This patch cuts i18n entries in each po/*po file from 420 to 402.
 
-2005-01-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: added pt to updated translations.
 
@@ -3930,7 +3935,7 @@
 	* po/pt.po:
 	updated translation by Miguel Figueiredo <elmig@debianpt.org>.
 
-2005-01-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typo.
 
@@ -3956,24 +3961,24 @@
 
 	* NEWS: typo.
 
-2005-01-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2005-01-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/faillog.c, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ro.po, po/ru.po, po/sk.po, po/sq.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, NEWS:
 	switch faillog ro use getopt_long().
 
 	* etc/pam.d/su: aded line with "session required pam_env.so".
 
-2004-12-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/de/Makefile.am, man/de/vigr.8, man/de/vipw.8, NEWS:
 	added de vigr(8), vipw(8) man pages (from Debian resources).
 
-2004-12-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/LINGUAS, po/ro.po, po/sq.po, NEWS:
 	added ro, sq translations (from Debian resources).
 
-2004-12-20  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-20  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	added checing is fseeko() function is avalaibabe in system: added fseeko to
@@ -4002,15 +4007,15 @@
 
 	* src/faillog.c: fixed typo in usage().
 
-2004-12-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/newgrp.1: fixed typo in bold macro.
 
-2004-12-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/chpasswd.8: remove bold from NAZWA section.
 
-2004-12-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/faillog.c: remove using Prog variable.
 
@@ -4037,7 +4042,7 @@
 
 	* man/Attic/chpasswd.8: more cleanups.
 
-2004-12-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/suauth.5, man/Attic/useradd.8:
 	Fixed varoiuse typos and misspeling based partialy on patch from Bug#141322
@@ -4058,7 +4063,7 @@
 	move main() to the end of file and reorder rest functions. Now declararion
 	finction prototypes can be removed.
 
-2004-12-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: updated.
 
@@ -4083,7 +4088,7 @@
 	* src/chpasswd.c:
 	Added handle -h|--help option. Improved and updated ussage() output.
 
-2004-12-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-12-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/tr.po, po/uk.po, po/zh_CN.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/da.po, po/de.po, po/el.po, po/bs.po, po/ca.po, po/cs.po:
 	"make update-po" and resolve fuzzy with last change in src/chpasswd.c.
@@ -4094,7 +4099,7 @@
 
 	* NEWS, configure.in: start work on 4.0.7.
 
-2004-11-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-11-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: cleanups.
 
@@ -4113,7 +4118,7 @@
 	* src/useradd.c, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, NEWS, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po:
 	do not translate variable names from /etc/default/useradd during "useradd -D".
 
-2004-11-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-11-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/zh_CN/groupadd.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/usermod.8, man/zh_TW/groupadd.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/usermod.8, man/it/groupadd.8, man/it/groupmod.8, man/it/useradd.8, man/it/usermod.8, man/ja/groupadd.8, man/ja/groupmod.8, man/ja/useradd.8, man/ja/usermod.8, man/pl/groupadd.8, man/pl/groupmod.8, man/pl/useradd.8, man/pl/usermod.8, man/pt_BR/groupadd.8, man/pt_BR/groupmod.8, man/Attic/groupadd.8, man/Attic/groupmod.8, man/Attic/useradd.8, man/fr/useradd.8, man/fr/usermod.8, man/id/useradd.8:
 	correction: groups/users with gid/uid 0 and 999 are reserved for system accounts.
@@ -4121,7 +4126,7 @@
 	* man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/usermod.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/usermod.8, man/id/useradd.8, man/it/groupadd.8, man/it/groupmod.8, man/it/useradd.8, man/it/usermod.8, man/ja/groupadd.8, man/ja/groupmod.8, man/ja/useradd.8, man/ja/usermod.8, man/pl/groupadd.8, man/pl/groupmod.8, man/pl/useradd.8, man/pl/usermod.8, man/pt_BR/groupmod.8, man/Attic/groupadd.8, man/Attic/groupmod.8, man/Attic/useradd.8, man/fr/useradd.8, man/fr/usermod.8:
 	zgroups/users with gid/uid 0 and 499 are typically reserved for system accounts.
 
-2004-11-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-11-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/Attic/mkpasswd.8, man/pl/chage.1, man/pl/chsh.1, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/lastlog.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/Attic/chage.1, man/Attic/chsh.1, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/lastlog.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8:
 	separated OPTIONS section.
@@ -4132,7 +4137,7 @@
 	one word fix .. ommited "else" was removed. Now security bug which allow
 	unauthorized account properties modification is realy closed.
 
-2004-10-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/commonio.c:
 	add matchpathcon to create the files correctly when they do not exist (based
@@ -4146,14 +4151,14 @@
 
 	* etc/pam.d/chfn, etc/pam.d/chsh, etc/pam.d/userdel: - fixed header
 
-2004-10-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* etc/pam.d/chfn, etc/pam.d/chsh, etc/pam.d/userdel:
 	added missing template/example PAM service config files for chfn, chsh, userdel.
 
 	* NEWS, configure.in: start 4.0.6.
 
-2004-10-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/Attic/adduser.8, man/pl/Makefile.am, man/Attic/adduser.8, man/Makefile.am, man/fr/Attic/adduser.8, man/fr/Makefile.am, man/id/Attic/adduser.8, man/id/Makefile.am, man/it/Attic/adduser.8, man/it/Makefile.am, man/ja/Attic/adduser.8, man/ja/Makefile.am, NEWS:
 	remove adduser(8) roff include man page to useradd(8).
@@ -4183,7 +4188,7 @@
 
 	* po/pl.po: - pl translation fixes/updates by Jakub Bogusz
 
-2004-10-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* etc/pam.d/chage, etc/pam.d/chpasswd, etc/pam.d/groupadd, etc/pam.d/groupdel, etc/pam.d/groupmod, etc/pam.d/newusers, etc/pam.d/useradd, etc/pam.d/usermod:
 	use default path to PAM modules.
@@ -4202,7 +4207,7 @@
 	propagate $DISPLAY and $XAUTHORITY enviroment variables.
 	Based on http://www.gentoo.org/cgi-bin/viewcvs.cgi/sys-apps/shadow/files/shadow-4.0.4.1-su-pam_open_session.patch?rev=1.1
 
-2004-10-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: cleanups.
 
@@ -4213,7 +4218,7 @@
 
 	* man/fr/Makefile.am: - killed non-existent manpage
 
-2004-10-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/copydir.c, NEWS:
 	when placing symlinks into /etc/skel copy_tree of libmisc/copydir.c will
@@ -4223,7 +4228,7 @@
 	into /etc/skel/public_html for example.
 	http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=66819
 
-2004-10-11  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-11  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Makefile.am:
 	seems I foud CorrectWay(tm) for add some symlinks on install target.
@@ -4262,24 +4267,24 @@
 
 	* man/fr/Makefile.am (man_MANS): added getspnam.3.
 
-2004-10-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pt.po, po/pt_BR.po, po/ru.po, po/sk.po, po/sv.po, po/tr.po, po/uk.po, po/zh_CN.po, po/bs.po, po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po, po/eu.po, po/fi.po, po/fr.po, po/he.po, po/id.po, po/it.po, po/ja.po, po/ko.po, po/nb.po, po/nl.po, po/nn.po, po/pl.po, src/groupadd.c, src/groupmod.c:
 	English grammar fix: s/is a not a valid group name/is not a valid group name/
 	(pointed by Mike Frysinger <vapier@gentoo.org>).
 
-2004-10-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-10-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/userdel.c:
 	When removing a user with userdel, userdel always exits 1 (fixed).
 	Based on http://bugs.gentoo.org/show_bug.cgi?id=66687.
 
-2004-08-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-08-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	Use AC_SEARCH_LIBS() for inet_ntoa(), socket(), gethostbyname() probing (instead AC_CHECK_FUNC()).
 
-2004-08-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-08-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am: shadow(3) man page moved to man_MANS.
 
@@ -4290,7 +4295,7 @@
 
 	* man/it/vigr.8: Fixed typo (s/wipw/vipw/).
 
-2004-08-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-08-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: Typo.
 
@@ -4308,7 +4313,7 @@
 	* man/Attic/grpck.8, man/Attic/mkpasswd.8, man/Attic/pwck.8, man/pl/Attic/mkpasswd.8, man/pl/grpck.8, man/pl/pwck.8:
 	Corrected section number.
 
-2004-08-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-08-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/zh_TW/chfn.1, man/zh_TW/chsh.1, man/zh_TW/groupadd.8, man/id/chsh.1, man/id/login.1, man/it/chfn.1, man/pl/chage.1, man/pl/groupadd.8, man/pl/groupmems.8, man/pl/lastlog.8, man/pl/login.1, man/pt_BR/groupadd.8, man/zh_CN/chfn.1, man/zh_CN/chsh.1, man/de/login.1, man/de/su.1, man/fr/chsh.1, man/fr/passwd.1, man/fr/usermod.8, man/hu/chfn.1, man/Attic/chage.1, man/Attic/groupadd.8, man/Attic/groupmems.8, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/usermod.8:
 	Options description in alphabetical order.
@@ -4318,13 +4323,13 @@
 	Torkelsson <Bjorn.Torkelsson@hpc2n.umu.se>: add support for PAM account
 	management to restrict access using pam_access when login is invoked with -f.
 
-2004-06-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-06-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/getspnam.3: added roff link to shadow(3).
 
 	* man/Makefile.am (man_MANS): added getspnam.3.
 
-2004-06-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-06-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, lib/commonio.c, lib/getdef.c, src/vipw.c:
 	Applied OWL shadow-4.0.4.1-owl-check-reads.diff patch by Solar Designer.
@@ -4343,20 +4348,20 @@
 	Affected tools: chfn and chsh.
 	Bug was discovered by Martin Schulze <joey@infodrom.org>.
 
-2004-05-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-05-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typo.
 
 	* NEWS, po/LINGUAS, po/it.po:
 	added it translation (by Danilo Piazzalunga <danilopiazza@libero.it>).
 
-2004-05-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-05-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typos.
 
 	* po/sk.po: updated (by Peter Mann <Peter.Mann@tuke.sk>).
 
-2004-05-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-05-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/sk.po: run "make update-po".
 
@@ -4364,13 +4369,13 @@
 	added sk translation (by Mann <Peter.Mann@tuke.sk>, submited by Christian
 	Perrier <bubulle@kheops.frmug.org>).
 
-2004-05-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-05-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	Use autoconf cache variables for file and directory location tests (by
 	Maciej W. Rozycki  <macro@ds2.pg.gda.pl>).
 
-2004-05-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-05-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/passwd.5:
 	Correct path directory delimiters (by Maciej W. Rozycki <macro@ds2.pg.gda.pl>).
@@ -4378,7 +4383,7 @@
 	* libmisc/xmalloc.c (malloc):
 	Remove the declaration (by Maciej W. Rozycki <macro@ds2.pg.gda.pl>).
 
-2004-04-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-04-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/login.c, NEWS:
 	Fixed handle -f option: now it works correctly without specify "-h
@@ -4387,12 +4392,12 @@
 
 	* po/es.po: Updated (by Ruben Porras <nahoo82@telefonica.net>).
 
-2004-04-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-04-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/cs.po, po/de.po, po/el.po, po/fi.po, po/fr.po, po/ja.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po:
 	Run "update-po".
 
-2004-04-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-04-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/es.po: Updated to current (by run "update-po").
 
@@ -4403,16 +4408,16 @@
 	* po/es.po, NEWS:
 	Added es translation (by Ruben Porras <nahoo82@telefonica.net>).
 
-2004-04-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-04-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/ko.po, NEWS:
 	Updated ko translations (by Changwoo Ryu <cwryu@debian.org>).
 
-2004-04-02  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-04-02  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fi.po: iconv -f iso8859-9 -t utf8
 
-2004-03-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-03-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/age.c:
 	Use endsgent() conditionaly depending on SHADOWGRP (fix submited by Gabor Z.
@@ -4423,7 +4428,7 @@
 
 	* README: Fixed shadow and shadow-commit lists on-line archives URLs.
 
-2004-01-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-01-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in, man/fr/Makefile.am, man/hu/Makefile.am, man/it/Makefile.am:
 	New version 4.0.4.1
@@ -4440,27 +4445,27 @@
 
 	* configure.in: Fixed checking is avalaible st_rdev in struct stat.
 
-2004-01-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-01-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: Typo.
 
 	* man/pl/useradd.8: Cleanups in SYNOPSIS.
 
-2004-01-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-01-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: Cleanups.
 
-2004-01-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-01-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: Cleanups after autoupdate.
 
-2004-01-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2004-01-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groupadd.c, po/sv.po, po/uk.po, po/ru.po, po/ko.po, po/pl.po, po/fr.po, po/ja.po, po/el.po, po/cs.po, po/de.po, man/zh_TW/groupadd.8, man/zh_CN/groupadd.8, man/pt_BR/groupadd.8, man/pl/groupadd.8, man/ja/groupadd.8, man/it/groupadd.8, man/Attic/groupadd.8, NEWS:
 	Added missing information about -f options in groupadd usage mesage (document
 	this also in man page).
 
-2003-12-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-12-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/Attic/lastlog_.h, libmisc/log.c, libmisc/utmp.c, src/lastlog.c, src/login.c:
 	More time() or gettimeofday() prevention overwrite memory on 64bit arch
@@ -4486,7 +4491,7 @@
 	* src/newusers.c, src/useradd.c, Attic/acconfig.h, autogen.sh, lib/Attic/pwpack.c, NEWS:
 	Remove all old BSD_QUOTA dependent code.
 
-2003-12-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-12-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am, libmisc/Makefile.am, src/Makefile.am:
 	Removed -I$(top_srcdir) from INCLUDES (isn't neccessary becaus this is in
@@ -4508,20 +4513,20 @@
 	* po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po:
 	"make update-po".
 
-2003-12-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-12-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/LINGUAS: Languages list for gettext 1.12.x.
 
-2003-10-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-10-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: Kill fuzzy entries.
 
-2003-10-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-10-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/usermod.8:
 	Typo: missing "." on end of sentence (submited by Stepan Kasal <kasal@ucw.cz>).
 
-2003-09-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-09-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po, po/cs.po, po/de.po, po/el.po, NEWS:
 	convert all po/*.po files to utf-8.
@@ -4530,7 +4535,7 @@
 
 	* po/ru.po: - fixed header
 
-2003-07-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-07-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po, po/ru.po, po/sv.po, po/uk.po, libmisc/pam_pass.c, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
 	Otput "passwd: password updated successfully\n" message on successfull
@@ -4538,7 +4543,7 @@
 
 	* src/newgrp.c: Remove work around for unsecure gettext.
 
-2003-06-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-06-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c, src/usermod.c:
 	Added initializing memory in variables when get_groups() function is not called,
@@ -4549,7 +4554,7 @@
 	root.
 	Problem reported and fixed by Alexey Voinov <voins@altlinux.ru>.
 
-2003-06-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-06-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/login.1: Fixed FILES section.
 
@@ -4560,7 +4565,7 @@
 
 	* Attic/acconfig.h: Comment for USG.
 
-2003-05-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/de/chfn.1, man/de/login.1:
 	Fixed section name (s/NAME/BEZEICHNUNG/).
@@ -4579,7 +4584,7 @@
 
 	* NEWS: Added info about remove d_passwd(5), dialups(5) man pags.
 
-2003-05-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, TODO, src/chfn.c, src/chpasswd.c, src/chsh.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/passwd.c, src/pwunconv.c, src/useradd.c, src/userdel.c, src/usermod.c, src/vipw.c:
 	One TODO entry gone: fix nscd flushing databases on change (use
@@ -4632,7 +4637,7 @@
 
 	* NEWS: Cleanups.
 
-2003-05-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c, man/pl/useradd.8, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/ru.po, po/sv.po, po/uk.po, NEWS, TODO, etc/useradd, man/Attic/useradd.8:
 	Added handle by useradd /etc/defaults/useradd::CREATE_MAIL_SPOOL={yes|no}.
@@ -4654,7 +4659,7 @@
 	Rewrite for use claissic list form options descriptions.
 
 	* man/pl/groupadd.8:
-	s/Polecenie groupadd posiada opcje:/Polecenie groupadd posiada nastÍpuj±ce opcje:/
+	s/Polecenie groupadd posiada opcje:/Polecenie groupadd posiada nastƒôpujƒÖce opcje:/
 
 	* TODO: ALL:
 	move base passwd/shadow/group/gshadow operation to module for allow write
@@ -4676,7 +4681,7 @@
 
 	* man/Attic/groupadd.8, man/Attic/groupmems.8: Minor cleanups.
 
-2003-05-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/grpconv.c, src/grpunconv.c, src/pwconv.c, src/pwunconv.c:
 	Move non-SHADOWPWD stub code to end of file (like in chage.c) and do not use
@@ -4709,7 +4714,7 @@
 
 	* po/POTFILES.in: Removed lib/{dialchk,dialup}.c and src/dpasswd.c.
 
-2003-05-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/shell.c (shell): do not gettexitize DEBUG message.
 
@@ -4733,7 +4738,7 @@
 	Removed dead code (#if 0 .. #endif) with call motd() and mailcheck()
 	(was commnted because GNU su doesn't do this).
 
-2003-05-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Attic/dpasswd.c, src/login.c, src/Makefile.am, man/pl/Attic/dpasswd.8, man/pl/Makefile.am, man/ja/Attic/dpasswd.8, man/ja/Makefile.am, man/Attic/dpasswd.8, man/Makefile.am, lib/Attic/dialchk.c, lib/Attic/dialchk.h, lib/Attic/dialup.c, lib/Attic/dialup.h, lib/Makefile.am, lib/getdef.c, etc/Attic/login.defs.linux, etc/login.defs, NEWS:
 	Removed old dpasswd and DIALUPS_CHECK_ENAB login.defs handling code from login.
@@ -4743,7 +4748,7 @@
 	* src/login.c, lib/getdef.c, etc/Attic/login.defs.linux, NEWS:
 	Remove NO_PASSWORD_CONSOLE code.
 
-2003-05-03  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-03  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/pwd2spwd.c, libmisc/utmp.c, libmisc/entry.c, libmisc/isexpired.c, lib/sgetspent.c, lib/shadow.c, lib/Attic/putpwent.c, lib/Attic/pwent.c, lib/Attic/pwpack.c, lib/defines.h, lib/pwio.c, lib/sgetpwent.c, Attic/acconfig.h, configure.in:
 	Remove old SVR4, ATT_AGE, ATT_COMMENT dependent code.
@@ -4752,7 +4757,7 @@
 	Remove some ageing code which was not used if SHADOWPWD isn't defined.
 	Now handling mindays, maxdays and lastday also depends on SHADOWPWD.
 
-2003-05-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-05-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/expiry.1, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/limits.5, man/Attic/login.1, man/Attic/login.access.5, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/shadowconfig.8, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8:
 	Reformated.
@@ -4765,7 +4770,7 @@
 	* old/Attic/Makefile.am, old/Attic/Makefile.linux, old/Attic/Makefile.sun4, old/Attic/Makefile.svr4, old/Attic/Makefile.xenix, old/Attic/config.h.linux, old/Attic/config.h.sun4, old/Attic/config.h.svr4, old/Attic/config.h.xenix, old/Attic/orig-config.h, old/Attic/pwconv-old.8, old/Attic/pwconv-old.c, old/Attic/pwconv.8, old/Attic/pwd.h.m4, old/Attic/pwunconv-old.8, old/Attic/pwunconv-old.c, old/Attic/pwunconv.8, old/Attic/scologin.c, old/Attic/vipw.8:
 	Removed old stuff.
 
-2003-04-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po, po/ru.po, po/sv.po, po/uk.po, po/cs.po, po/de.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
 	make update-po
@@ -4779,7 +4784,7 @@
 
 	* po/pl.po: Fix chage and lastlog messages.
 
-2003-04-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/limits.c, src/logoutd.c:
 	More utmp/utmpx fixes: use endutend() or endutxend() depending on HAVE_UTMPX_H.
@@ -4791,9 +4796,9 @@
 	Remove old SVR4 and SVR4_SI86_EUA dependent code from login, useradd and
 	logoutd.
 
-2003-04-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
-	* man/pl/usermod.8: Remove "OD T£UMACZA" section.
+	* man/pl/usermod.8: Remove "OD T≈ÅUMACZA" section.
 
 	* man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/grpck.8, man/pl/passwd.1, man/pl/pwck.8, man/pl/useradd.8, man/pl/userdel.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/grpck.8, man/Attic/passwd.1, man/Attic/pwck.8, man/Attic/useradd.8, man/Attic/userdel.8:
 	Added EXIT VALUES section with full description exit codes.
@@ -4825,7 +4830,7 @@
 
 	* man/ru/Makefile.am: man_MANS: s#passwd.1#passwd.5#
 
-	* po/pl.po: s/nie mogÍ/nie moøna/
+	* po/pl.po: s/nie mogƒô/nie mo≈ºna/
 
 	* po/fr.po: Emoticon removed.
 
@@ -4851,7 +4856,7 @@
 	* man/hu/Makefile.am, man/hu/su.1:
 	Added su(1) man page from hungarian man pages translation project.
 
-2003-04-26  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-26  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: Ready for gettext 0.11.5, automake 1.7.4, autoconf 2.57.
 	Many cleanups and unifications in man pages.
@@ -4871,7 +4876,7 @@
 	* src/logoutd.c, src/userdel.c, NEWS:
 	Handle also utmpx if avalaile in userdel and logoutd.
 
-2003-04-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/sulogin.c: Remove unused utent declaration.
 
@@ -4887,7 +4892,7 @@
 	* configure.in:
 	On detect mail spool directory location try first /var/mail.
 
-2003-04-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/Attic/getdate.c, libmisc/Attic/login_access.c, libmisc/Attic/login_desrpc.c, libmisc/Attic/login_krb.c, libmisc/Attic/nscd.c, libmisc/Attic/setup.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/pwdcheck.c, libmisc/rlogin.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/Attic/chkshell.c, libmisc/addgrps.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c:
 	Indent all using current .indent.pro settings.
@@ -4900,7 +4905,7 @@
 	Fixes after filtering gettext 0.11.5 (missing headers elements, inforrect
 	format strings).
 
-2003-04-21  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-04-21  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, man/de/passwd.1:
 	updated german passwd(1) man page (by Josef Spillner <josef@ggzgamingzone.org>)
@@ -4909,7 +4914,7 @@
 
 	* po/pl.po: - updated; terminology unification
 
-2003-02-28  Pawe≥ Go≥aszewski  <blues@pld.org.pl>
+2003-02-28  Pawe≈Ç Go≈Çaszewski  <blues@pld.org.pl>
 
 	* etc/login.defs: - missing "MD5_CRYPT_ENAB  yes" added
 
@@ -4920,19 +4925,19 @@
 	* man/Makefile.am, man/zh_CN/Makefile.am, man/zh_CN/chpasswd.8, man/zh_CN/groupadd.8, man/zh_CN/groupdel.8, man/zh_CN/groupmod.8, man/zh_CN/useradd.8, man/zh_CN/userdel.8, man/zh_CN/usermod.8, man/zh_TW/Makefile.am, man/zh_TW/groupadd.8, man/zh_TW/groupdel.8, man/zh_TW/groupmod.8, man/zh_TW/useradd.8, man/zh_TW/userdel.8, man/zh_TW/usermod.8:
 	- added zh man pages from MDK (2 x 6) and from cman (1)
 
-2003-01-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2003-01-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ja/shadow.3, man/pl/shadow.3, man/Attic/shadow.3:
 	sync spwd structure declaration with current glibc declaration (tahnks for
 	point this bug to Michael Kerrisk <michael.kerrisk@gmx.net>).
 
-	* man/pl/faillog.5: s/konsolÍ/terminal/
+	* man/pl/faillog.5: s/konsolƒô/terminal/
 
-2002-12-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-12-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Makefile.am: typo (s/EXTRA_DOST/EXTRA_DIST/).
 
-2002-10-14  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-10-14  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Makefile.am:
 	fixed making vigr symlink to vipw (not vipw to vigr) in install-exec-hook (fix submited by
@@ -4941,7 +4946,7 @@
 	* debian/Attic/login.copyright, debian/Attic/login.postinst, debian/Attic/login.postrm, debian/Attic/login.preinst, debian/Attic/login.prerm, debian/Attic/logoutd.init, debian/Attic/passwd.conffiles, debian/Attic/passwd.copyright, debian/Attic/passwd.cron, debian/Attic/passwd.init, debian/Attic/passwd.postinst, debian/Attic/passwd.postrm, debian/Attic/porttime, debian/Attic/rules, debian/Attic/secure-su.README, debian/Attic/secure-su.conffiles, debian/Attic/secure-su.copyright, debian/Attic/secure-su.postrm, debian/Attic/secure-su.preinst, debian/Attic/securetty, debian/Attic/shadowconfig.sh, debian/Attic/Makefile.am, debian/Attic/changelog, debian/Attic/checksums, debian/Attic/control, debian/Attic/control.gnu, debian/Attic/control.linux, debian/Attic/login.conffiles, Makefile.am, configure.in:
 	removed debian directory.
 
-2002-10-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-10-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, src/newgrp.c:
 	Use CLOSE_SESSIONS depending code only when USE_PAM.
@@ -4949,20 +4954,20 @@
 	8.1 and reproduced it using slackware-current (9.0beta) (fix submited by
 	Simon Williams <simon@no-dns-yet.org.uk>).
 
-2002-10-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-10-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ja/login.1, man/ja/logoutd.8, man/pl/login.1, man/pl/logoutd.8, man/Attic/login.1, man/Attic/logoutd.8, man/hu/login.1:
 	changed utmp and wtmp files paths (s#/etc/utmp/#/var/run/utmp#; s#/etc/wtmp#/var/log/wtmp#)
 
 	* po/ru.po, configure.in: added ru translation (from KSI resources).
 
-2002-09-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-09-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, libmisc/failure.c:
 	libbmisc/failure.c (too_many_failures): incorrect if() condition in non-PAM
 	dependent code in fail login handling (fixed by Krzysztof Oledzki <ole@ans.pl>).
 
-2002-08-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-08-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/useradd.8, man/Attic/useradd.8, NEWS:
 	document useradd and groupadd -M option in en and pl man pages
@@ -4979,7 +4984,7 @@
 
 	* TODO: - remove already done pl man updates from the list
 
-2002-03-13  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-13  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ko/.cvsignore, man/ko/Makefile.am, man/ko/chfn.1, man/ko/chsh.1, man/ko/groups.1, man/ko/id.1, man/ko/login.1, man/ko/newgrp.1, man/ko/passwd.5, man/ko/su.1:
 	added ko man pages.
@@ -4992,7 +4997,7 @@
 	* man/it/.cvsignore, man/it/Makefile.am, man/id/.cvsignore, man/id/Attic/adduser.8, man/id/Makefile.am, man/id/useradd.8, man/Makefile.am, man/cs/.cvsignore, man/cs/Makefile.am, man/fr/.cvsignore, man/fr/Makefile.am, configure.in, NEWS:
 	added cs, de, fr, id, it, ko man pages to ac/am.
 
-2002-03-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/de.po, po/el.po:
 	"make update-po"
@@ -5002,7 +5007,7 @@
 
 	* NEWS: added info about Solar patch for man pages.
 
-2002-03-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/it/usermod.8, man/it/vigr.8, man/it/vipw.8, man/it/Attic/adduser.8, man/it/chfn.1, man/it/chsh.1, man/it/gpasswd.1, man/it/groupadd.8, man/it/groupdel.8, man/it/groupmod.8, man/it/groups.1, man/it/grpck.8, man/it/grpconv.8, man/it/grpunconv.8, man/it/id.1, man/it/lastlog.8, man/it/login.1, man/it/newgrp.1, man/it/passwd.1, man/it/passwd.5, man/it/pwconv.8, man/it/pwunconv.8, man/it/shadow.5, man/it/useradd.8, man/it/userdel.8, man/id/Attic/adduser.8, man/id/chsh.1, man/id/login.1, man/fr/Attic/adduser.8, man/fr/chage.1, man/fr/chpasswd.8, man/fr/chsh.1, man/fr/faillog.5, man/fr/gpasswd.1, man/fr/groups.1, man/fr/id.1, man/fr/newgrp.1, man/fr/passwd.1, man/fr/passwd.5, man/fr/shadow.5, man/fr/su.1, man/fr/useradd.8, man/fr/userdel.8, man/fr/usermod.8, man/es/login.1, man/es/passwd.1, man/es/su.1, man/de/chsh.1, man/de/groups.1, man/de/login.1, man/de/passwd.1, man/de/su.1, man/cs/passwd.5, man/cs/shadow.5:
 	added some raw cs, de, es, fr, id, it man pages from national
@@ -5037,7 +5042,7 @@
 	* man/Attic/login.1, man/Attic/newgrp.1, man/Attic/passwd.1, man/Attic/su.1, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chsh.1, man/Attic/expiry.1, man/Attic/gpasswd.1, man/Attic/groups.1, man/Attic/id.1:
 	- update to chage.1; formatting/typo fixes
 
-2002-03-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/uk.po, po/ko.po, po/pl.po, po/sv.po, po/ja.po, po/cs.po, po/el.po, po/fr.po:
 	"make update-po"
@@ -5047,7 +5052,7 @@
 	* man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, man/pl/userdel.8, man/pl/usermod.8, man/pl/sulogin.8, man/pl/useradd.8, man/pl/pwconv.8, man/pl/su.1, man/pl/Attic/mkpasswd.8, man/pl/Attic/pwauth.8, man/pl/newgrp.1, man/pl/passwd.5, man/pl/login.defs.5, man/pl/chpasswd.8, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmems.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/login.1, man/hu/groups.1, man/hu/newgrp.1, man/ja/Attic/mkpasswd.8, man/ja/Attic/pw_auth.3, man/ja/Attic/pwauth.8, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/groups.1, man/ja/grpck.8, man/ja/id.1, man/ja/lastlog.8, man/ja/login.1, man/ja/login.defs.5, man/ja/newgrp.1, man/ja/passwd.5, man/ja/pwck.8, man/ja/shadow.5, man/ja/su.1, man/ja/sulogin.8, man/ja/useradd.8, man/ja/userdel.8, man/ja/usermod.8, man/ja/vipw.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8:
 	- further "SEE ALSO" references sorting
 
-2002-03-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/vipw.8, man/Attic/chpasswd.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Makefile.am:
 	merged shadow-4.0.0-owl-man.patch by Solar Designer <solar@openwall.com>.
@@ -5058,7 +5063,7 @@
 	swapped utent dnd pwent efinition/extern and now shadow source can be configured
 	--with-shared (fix by Dimitar Zhekov <jimmy@is-vn.bg>).
 
-2002-03-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-03-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: start prepare 4.0.3.
 
@@ -5090,11 +5095,11 @@
 	- useradd "usage" formatting fixes
 	- fix translation in uk.po
 
-2002-02-18  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-02-18  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: release 4.0.2.
 
-2002-02-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-02-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* Attic/shadow-utils.spec.in, Makefile.am, configure.in, shadow.spec.in:
 	rename spec file s/shadow-utils.spec/shadow.spec/
@@ -5104,14 +5109,14 @@
 
 	* po/ko.po, po/pl.po: cleanups.
 
-2002-02-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-02-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/Attic/adduser.8, man/pl/grpconv.8, man/pl/grpunconv.8, man/pl/pwunconv.8, man/pl/sg.1, man/pl/vigr.8, man/ja/Attic/adduser.8, man/ja/grpconv.8, man/ja/grpunconv.8, man/ja/pwunconv.8, man/ja/sg.1, man/ja/vigr.8, man/hu/sg.1, man/Attic/adduser.8, man/Attic/grpconv.8, man/Attic/grpunconv.8, man/Attic/pwunconv.8, man/Attic/sg.1, man/Attic/vigr.8:
 	placa ".so man<level>/<man_page>.<level>" in roff .so includes (seems some
 	man page viewers do not handles correctly man documents without subdirectory
 	name in roff .so incude).
 
-2002-01-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/fr.po, po/ja.po, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, NEWS:
 	resolve many fuzzy translations also all this which may cause problems on
@@ -5120,11 +5125,11 @@
 	* src/id.c, po/ko.po, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po:
 	drop translate some messages in id output (about {,e}{u,g}id).
 
-2002-01-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* README: s#password: cvs#password: [empty password]#
 
-2002-01-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: two new entries.
 
@@ -5136,13 +5141,13 @@
 	* src/pwck.c, src/useradd.c, po/pl.po, po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po:
 	s/invalid user name `%s'/invalid user name '%s'/
 
-2002-01-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in:
 	fix in libpam_misc detection (removed one "," AC_CHECK_LIB()).
 	Thanks to Silvan Minghetti for report this.
 
-2002-01-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: start prepare to 4.0.2.
 
@@ -5173,7 +5178,7 @@
 
 	* etc/Makefile.am: useradd config file added to EXTRA_DIST.
 
-2002-01-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2002-01-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/sv.po, po/uk.po, po/cs.po, po/el.po, po/fr.po, po/ja.po, po/ko.po, po/pl.po:
 	update.
@@ -5184,7 +5189,7 @@
 
 	* NEWS: s/SuSe/SuSE/
 
-2001-12-22  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-12-22  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/useradd.8, man/Attic/useradd.8: documment -o option.
 
@@ -5223,7 +5228,7 @@
 	* man/ja/Attic/adduser.8, man/ja/Makefile.am, man/ja/limits.5, man/ja/pwconv.8:
 	- updated to man-pages-ja-20011215
 
-2001-11-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/grpck.c:
 	remove check for a Slackware bug (make sure GID is not -1; it was special
@@ -5239,7 +5244,7 @@
 	which in some cases dissallow compile correctly shadow (thanks for
 	Silvan Minghetti <bullet@users.sourceforge.net>).
 
-2001-11-17  Micha≥ Moskal  <malekith@pld.org.pl>
+2001-11-17  Micha≈Ç Moskal  <malekith@pld.org.pl>
 
 	* NEWS:
 	- mention fix for SEGV when using pwck -s on /etc/passwd file with
@@ -5249,7 +5254,7 @@
 	- installed fix for SEGV when using pwck -s on /etc/passwd file with
 	  empty lines in it
 
-2001-11-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/chkname.c, NEWS:
 	next merge from Solar patches (shadow-4.0.0-owl-check_names.diff) but only
@@ -5257,7 +5262,7 @@
 	string isn't longer than possible probably it will be good prepare using
 	_POSIX_LOGIN_NAME_MAX from <bits/posix1_lim.h>
 
-2001-11-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: typos.
 
@@ -5291,7 +5296,7 @@
 
 	* man/ja/vipw.8: 0cb8db0f1f19de7690f0ef9baeceb919  vipw.8
 
-2001-11-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/Attic/getpass.c:
 	one fix warning from Solar shadow-4.0.0-owl-warnings.diff.
@@ -5328,14 +5333,14 @@
 
 	* man/pl/expiry.1, man/pl/groupmems.8: - translated pages
 
-2001-11-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/Makefile.am:
 	fix building with cracklib enabled: $(LIBCRACK) added to libmisc_la_LIBADD.
 
 	* src/useradd.c: typo.
 
-2001-11-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-11-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Attic/dpasswd.c, src/gpasswd.c, src/groupadd.c, src/groupmod.c, src/grpck.c, src/lastlog.c, src/login.c, src/passwd.c, src/pwck.c, src/userdel.c, src/usermod.c, src/chage.c, src/chfn.c, src/chsh.c, libmisc/utmp.c:
 	removed prototypes which are defined in libc header files
@@ -5349,7 +5354,7 @@
 	fixed warnings "not used but defined" on compile using gcc 3.0.x
 	by bulletpr00ph <bullet@users.sourceforge.net>.
 
-2001-10-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-10-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: New entries for 4.0.1.
 
@@ -5361,13 +5366,13 @@
 	* po/ja.po, po/ko.po, configure.in:
 	added ja, ko translations found in SuSe.
 
-2001-10-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-10-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c: sort alphabetically *flg variables.
 
 	* debian/Attic/Makefile.am, debian/Attic/tar.c: removed.
 
-2001-10-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-10-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/ja/Makefile.am, man/ja/sg.1, man/pl/Makefile.am, man/pl/sg.1, man/pl/vigr.8, man/Attic/sg.1, man/Attic/vigr.8, man/Makefile.am:
 	added vigr(1) man page as roff .so link to vipw(1),                                                                             - added sg(1) man page as roff .so link to newgrp(1).
@@ -5375,7 +5380,7 @@
 	* src/Makefile.am:
 	added install symlinks newgrp -> sg, vipw -> vigr in install-exec-hook target.
 
-2001-10-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-10-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* lib/Makefile.am (libshadow_la_SOURCES):
 	reverte last change and added rcsid.h,
@@ -5389,7 +5394,7 @@
 	* lib/Makefile.am:
 	added missing shadow_.h file to libshadow_la_SOURCES.
 
-2001-09-08  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-09-08  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* Makefile.am (AUTOMAKE_OPTIONS):
 	version changed to 1.5 and added dist-bzip2.
@@ -5399,7 +5404,7 @@
 
 	* etc/Makefile.am, etc/useradd: add example /etc/defaults/useradd.
 
-2001-09-07  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-09-07  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* TODO: last touch.
 
@@ -5420,7 +5425,7 @@
 		   NUM=$NUM+1
 		done
 
-2001-09-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-09-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groups.c, src/id.c, src/newgrp.c, src/useradd.c, src/usermod.c, libmisc/addgrps.c, NEWS:
 	remove limit 32 to groups per user (the same user can belong to
@@ -5429,11 +5434,11 @@
 	NOTE: it probably need testing on other system for add some conditionals
 	for using sysconf(_SC_NGROUPS_MAX) or NGROUPS_MAX constant.
 
-2001-08-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-08-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* etc/pam.d/Makefile.am, etc/pam.d/useradd: added file for useradd.
 
-2001-08-24  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-08-24  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c (set_defaults):
 	handle correctly error open/create useradd default config
@@ -5454,15 +5459,15 @@
 
 	* po/.cvsignore, po/Attic/ChangeLog: removed ChangeLog.
 
-2001-08-18  Micha≥ Moskal  <malekith@pld.org.pl>
+2001-08-18  Micha≈Ç Moskal  <malekith@pld.org.pl>
 
 	* src/grpck.c: - fixed getopt() call, thnx to arekm
 
-2001-08-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-08-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: - include last changes to list changes in version 4.0.0.
 
-2001-08-14  Micha≥ Moskal  <malekith@pld.org.pl>
+2001-08-14  Micha≈Ç Moskal  <malekith@pld.org.pl>
 
 	* NEWS: - mention new -s options
 
@@ -5477,7 +5482,7 @@
 	* lib/commonio.c, lib/commonio.h:
 	- added commonio_sort{,_wrt} functions
 
-2001-08-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-08-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/Attic/ChangeLog, po/uk.po, configure.in:
 	added uk translation (Roman Festchook <roma@polesye.net>).
@@ -5486,16 +5491,16 @@
 	s/ut->ut_libe/ut->ut_user/ on prepare strin with user name for syslog
 	line (reported by Roman Festchook <roma@polesye.net>).
 
-2001-07-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-07-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* Attic/acconfig.h: - added missing USG.
 
-2001-07-04  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2001-07-04  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* lib/commonio.c:
 	fix buffer overflow (not a security hole) in commonio_setname
 
-2001-06-28  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-28  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS: entry about dropping support one argument pam_strerror().
 
@@ -5513,11 +5518,11 @@
 	add them to $LIBPAM. Othervise exit fron autoconf script with error message.
 	Now shadow compiles if pam support is enabled.
 
-2001-06-28  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2001-06-28  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* libmisc/copydir.c: fix overwriting existing file (add O_TRUNC)
 
-2001-06-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* configure.in: remove intl/po2tbl.sed from AC_OUTPUT().
 
@@ -5536,7 +5541,7 @@
 	  sorry .. no way this is plain linking procedure bug),
 	- use AC_DEFINE(LOGIN_ACCES) only when PAM isn't used.
 
-2001-06-23  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2001-06-23  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/Makefile.am:
 	add LDADD for groupmod and usermod, as they use PAM too
@@ -5544,26 +5549,26 @@
 	* src/login.c, src/su.c: fix uninitialized variable failcount
 	skip '*' in pw_shell for subsystem root
 
-2001-06-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/login.c: use "extern int login_access()" only if !USE_PAM.
 
 	* src/Makefile.am:
 	added LDADD rules for programs which uses PAM and cracklib.
 
-2001-06-23  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2001-06-23  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* libmisc/chowntty.c:
 	allow root login even on read-only root filesystem
 
 	* libmisc/Makefile.am: add -DHAVE_CONFIG_H to DEFS
 
-2001-06-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* autogen.sh: run configure by default with --disable-desrpc,
 	fix: --with-libpam (not --with-pam).
 
-2001-06-23  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2001-06-23  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* libmisc/chowntty.c:
 	libmisc/chowntty.c (chown_tty): move perror() before syslog() call
@@ -5572,20 +5577,20 @@
 	* man/pl/login.defs.5, man/Attic/login.defs.5:
 	(UMASK): Default value is 077, not 0 - see NEWS for shadow-3.3.2-951106.
 
-2001-06-23  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-23  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* NEWS, configure.in: prepare for release 4.0.0 version.
 
 	* configure.in: remove commented line.
 
-2001-06-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-06-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/pl.po: fixed charset (must be iso-8859-2).
 
 	* man/Makefile.am, man/ja/.cvsignore, man/ja/Attic/dpasswd.8, man/ja/Attic/mkpasswd.8, man/ja/Attic/pw_auth.3, man/ja/Attic/pwauth.8, man/ja/Makefile.am, man/ja/chage.1, man/ja/chfn.1, man/ja/chpasswd.8, man/ja/chsh.1, man/ja/faillog.5, man/ja/faillog.8, man/ja/gpasswd.1, man/ja/groupadd.8, man/ja/groupdel.8, man/ja/groupmod.8, man/ja/grpck.8, man/ja/lastlog.8, man/ja/login.1, man/ja/login.access.5, man/ja/login.defs.5, man/ja/logoutd.8, man/ja/newgrp.1, man/ja/passwd.1, man/ja/passwd.5, man/ja/porttime.5, man/ja/pwck.8, man/ja/pwconv.8, man/ja/shadow.3, man/ja/shadow.5, man/ja/su.1, man/ja/suauth.5, man/ja/sulogin.8, man/ja/userdel.8, man/ja/usermod.8, configure.in, NEWS:
 	added ja man pages.
 
-2001-05-30  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-05-30  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/Attic/shadowconfig.sh, src/Makefile.am, debian/Attic/Makefile.am, debian/Attic/shadowconfig.sh:
 	move shadowconfig.sh to debian/
@@ -5597,7 +5602,7 @@
 	* libmisc/Makefile.am:
 	empty DEFS and INCLUDES="-I$(top_srcdir) -I$(top_srcdir)/lib".
 
-2001-03-05  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-03-05  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/.indent.pro, lib/.indent.pro, libmisc/.indent.pro:
 	directory indent config file is -kr -i8 -bad (indent open this file and
@@ -5607,7 +5612,7 @@
 
 	* NEWS: start complette next release information.
 
-2001-02-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-02-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* shlib/Attic/Makefile.am, shlib/Attic/Makefile.in.saved: - removed.
 
@@ -5622,24 +5627,24 @@
 
 	* Makefile.am (SUBDIRS): reorder libmisc must be before lib.
 
-2001-02-01  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-02-01  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pt_BR/Makefile.am: - added man_MANS to EXTRA_DIST.
 
-2001-01-31  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-01-31  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/Makefile.am, man/pt_BR/Makefile.am, man/pt_BR/gpasswd.1, man/pt_BR/groupadd.8, man/pt_BR/groupdel.8, man/pt_BR/groupmod.8, man/pt_BR/shadow.5, configure.in:
 	include pt_BR man pages for gpasswd(1), groupadd(1), groupdel(8),
 	groupmod(8), shadow(5).
 
-2001-01-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-01-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* TODO: - updated.
 
 	* man/pl/Attic/dpasswd.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/su.1, man/pl/useradd.8, man/pl/userdel.8, man/pl/vipw.8, man/Attic/dpasswd.8, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmems.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/su.1, man/Attic/useradd.8, man/Attic/usermod.8, man/Attic/vipw.8:
 	many small cleanups, fixes also removed commented obsoleted texts.
 
-2001-01-25  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2001-01-25  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* autogen.sh: add to conf_flags --disable-shared.
 
@@ -5656,7 +5661,7 @@
 
 	* src/Makefile.am: move groups to bin_PROGRAMS.
 
-2000-12-19  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-12-19  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/su.c: Based on Debian modyfications:
 	(main): #endif /* USE_PAM */ #ifdef USE_PAM replaced by #else,
@@ -5670,14 +5675,14 @@
 	* man/Attic/passwd.1:
 	Removed SEE ALSO to passwd(3) and commented shadow(3).
 
-2000-12-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-12-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/useradd.c (main):
 	use "useradd" instead "shadow in pam_start() parameters - this
 	allow use separated pam config file for useradd (for example for allow
 	specified non-root user for add user).
 
-2000-11-29  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-11-29  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* TODO: remove write expiry(1) man page.
 
@@ -5698,7 +5703,7 @@
 	instead getopt() for add handling --help, --user, --time switches and
 	dipslay useage message on -h, --help and as default action.
 
-2000-11-17  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-11-17  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* src/groupmems.c, po/el.po, po/fr.po, po/pl.po, po/sv.po, po/POTFILES.in, po/cs.po:
 	added i18n support for src/groupmems.c.
@@ -5711,7 +5716,7 @@
 	* src/useradd.c: * (set_defaults): use mkstemp() instead mktemp(),
 	* (mani): fix compilation error in previouse RH patch (removed using nflg).
 
-2000-11-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-11-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* TODO: - groupmems need some work on add PAM and i18n support.
 
@@ -5724,11 +5729,11 @@
 	patchlevel.h, Makefile.am: removed patchlevel.h file,
 	Makefile.am: removed bindir, sbindir (this comes with autoconf).
 
-2000-11-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-11-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* TODO: - write expire man page.
 
-2000-10-16  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-16  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* old/Attic/pwconv-old.8, old/Attic/pwconv.8, old/Attic/pwunconv-old.8, old/Attic/pwunconv.8, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/pwauth.8, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/porttime.5, man/pl/pwck.8, man/pl/shadow.3, man/pl/su.1, man/pl/sulogin.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/Attic/dpasswd.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/login.1, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, debian/Attic/login.copyright, debian/Attic/passwd.copyright, debian/Attic/secure-su.copyright, doc/Attic/ANNOUNCE, doc/Attic/LSM, doc/Attic/README, doc/Attic/README.linux:
 	Julianne F. Haugh new contact adress.
@@ -5740,25 +5745,25 @@
 
 	* configure.in: - release 20001016.
 
-2000-10-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/Makefile.am, man/Makefile.am: fixes in man/{,po}/Makefile.am:
 	- $(man_MANS) added to EXTRA_DISTS,
 	- do not install by default groups.1, id.1, pw_auth.3, shadow.3, pwauth.8,
 	  sulogin.8, dpasswd.8 (moved to EXTRA_DISTS),
 
-2000-10-15  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2000-10-15  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* lib/commonio.c (reload_nscd): Disable for now because not every
 	version of nscd can handle it, unless ENABLE_NSCD_SIGHUP defined.
 
-2000-10-15  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-15  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* libmisc/pwdcheck.c, libmisc/Makefile.am: - added missing pwdcheck.c.
 
 	* configure.in: - removed old/Makefile from AC_OUTPUT list.
 
-2000-10-12  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-12  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* README: - fixed information about RO cvs access.
 
@@ -5778,15 +5783,15 @@
 
 	* doc/Makefile.am: - removed CHANGES (this file was moved to ../NEWS).
 
-2000-10-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/Attic/ChangeLog: - add empty file (gettext requires this).
 
-2000-10-10  Arkadiusz Mi∂kiewicz  <misiek@pld.org.pl>
+2000-10-10  Arkadiusz Mi≈õkiewicz  <misiek@pld.org.pl>
 
 	* README: typos fixed
 
-2000-10-10  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-10  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* Makefile.am: - added shadow-utils.spec.in to EXTR_DIST.
 
@@ -5813,7 +5818,7 @@
 
 	* doc/Attic/CHANGES, NEWS: - rename doc/CHANGES -> NEWS.
 
-2000-10-09  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-09  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, Attic/shadow-utils.spec.in, Makefile.am, configure.in:
 	- remove redhat/ directory with obsoleted files.
@@ -5859,12 +5864,12 @@
 
 	* src/chage.c: - added PAM support.
 
-2000-10-06  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-06  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* autogen.sh:
 	- added autogen.sh script which prepare raw source code from cvs to use.
 
-2000-10-04  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-10-04  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, man/pl/vipw.8:
 	- merged changes from PTM.
@@ -5872,156 +5877,156 @@
 	* man/pl/Makefile.am:
 	- simplified: use only man_MANS and remaped $(mandir) variable.
 
-2000-09-27  Tomasz K≥oczko  <kloczek@pld.org.pl>
+2000-09-27  Tomasz K≈Çoczko  <kloczek@pld.org.pl>
 
 	* po/cs.po, configure.in:
 	- added cs translation (Jiri Pavlovsky <Jiri.Pavlovsky@ff.cuni.cz>).
 
-2000-09-05  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2000-09-05  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* man/pl/sulogin.8, man/pl/vipw.8, po/el.po, po/fr.po, po/pl.po, po/sv.po, man/pl/Attic/d_passwd.5, man/pl/Attic/dialups.5, man/pl/Attic/dpasswd.8, man/pl/Attic/mkpasswd.8, man/pl/Attic/pw_auth.3, man/pl/Attic/pwauth.8, man/pl/Attic/shadowconfig.8, man/pl/chage.1, man/pl/chfn.1, man/pl/chpasswd.8, man/pl/chsh.1, man/pl/faillog.5, man/pl/faillog.8, man/pl/gpasswd.1, man/pl/groups.1, man/pl/grpck.8, man/pl/id.1, man/pl/lastlog.8, man/pl/limits.5, man/pl/login.1, man/pl/login.access.5, man/pl/login.defs.5, man/pl/logoutd.8, man/pl/newgrp.1, man/pl/newusers.8, man/pl/passwd.1, man/pl/passwd.5, man/pl/porttime.5, man/pl/pwck.8, man/pl/pwconv.8, man/pl/shadow.3, man/pl/shadow.5, man/pl/su.1, man/pl/suauth.5:
 	*** empty log message ***
 
-2000-09-02  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2000-09-02  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/groupmod.c, src/grpck.c, src/login.c, src/logoutd.c, src/newgrp.c, src/passwd.c, src/pwck.c, src/su.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/commonio.h, lib/defines.h, lib/groupio.c, lib/pwio.c, lib/sgroupio.c, lib/shadowio.c, man/Attic/usermod.8, po/el.po, po/fr.po, po/pl.po, po/sv.po, redhat/Attic/shadow-utils.spec.in, src/Attic/dpasswd.c, src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, configure.in, debian/Attic/rules, doc/Attic/CHANGES, doc/Attic/LSM, lib/commonio.c:
 	*** empty log message ***
 
-2000-08-26  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+2000-08-26  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* contrib/Makefile.am, contrib/groupmems.shar, doc/Attic/LSM, po/el.po, po/fr.po, po/pl.po, po/sv.po, doc/Attic/README.mirrors, src/vipw.c, src/Attic/dpasswd.c, src/Attic/mkpasswd.c, src/Makefile.am, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/logoutd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/usermod.c, lib/Attic/dialchk.h, lib/Attic/dialup.h, lib/Attic/rad64.c, lib/Attic/tcfsio.h, lib/Makefile.am, lib/commonio.c, lib/commonio.h, lib/defines.h, lib/encrypt.c, lib/getdef.c, lib/getdef.h, lib/groupio.c, lib/groupio.h, lib/prototypes.h, lib/pwauth.c, lib/pwio.c, lib/pwio.h, lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.h, libmisc/Attic/suauth.c, libmisc/chkname.h, libmisc/chowndir.c, libmisc/copydir.c, libmisc/entry.c, libmisc/failure.h, libmisc/getdate.h, libmisc/hushed.c, libmisc/loginprompt.c, libmisc/setupenv.c, libmisc/sulog.c, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Makefile.am, man/pl/Makefile.am, man/pl/groupadd.8, man/pl/groupdel.8, man/pl/groupmod.8, man/pl/useradd.8, man/pl/userdel.8, man/pl/usermod.8, etc/Attic/login.defs.hurd, etc/Attic/login.defs.linux, doc/Attic/ANNOUNCE, doc/Attic/CHANGES, doc/Attic/README, doc/Attic/README.linux, doc/Attic/README.pam, doc/WISHLIST, debian/Attic/login.copyright, debian/Attic/passwd.copyright, debian/Attic/secure-su.copyright, Attic/mkinstalldirs, configure.in, Makefile.am:
 	*** empty log message ***
 
-1999-08-27  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1999-08-27  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* doc/Attic/LSM, po/el.po, po/fr.po, po/pl.po, po/sv.po, debian/Attic/passwd.postinst, lib/Attic/dialchk.c, lib/Attic/getpass.c, lib/getdef.c, lib/pwauth.c, libmisc/limits.c, libmisc/rlogin.c, man/Attic/limits.5, man/Attic/newgrp.1, src/Attic/dpasswd.c, src/chage.c, src/gpasswd.c, src/login.c, src/logoutd.c, src/newgrp.c, src/passwd.c, src/sulogin.c, Attic/acconfig.h, configure.in, debian/Attic/Makefile.am, debian/Attic/changelog, debian/Attic/control.gnu, debian/Attic/control.linux, debian/Attic/login.postrm, debian/Attic/logoutd, debian/Attic/logoutd.init, debian/Attic/passwd.conffiles, debian/Attic/passwd.cron, debian/Attic/passwd.init, debian/Attic/passwd.postrm, debian/Attic/rules, doc/Attic/CHANGES, doc/Attic/README.mirrors, doc/WISHLIST, etc/Attic/login.defs.hurd, etc/Attic/login.defs.linux, etc/Makefile.am, lib/defines.h:
 	*** empty log message ***
 
-1999-07-09  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1999-07-09  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* configure.in, contrib/Makefile.am, debian/Attic/changelog, doc/Attic/CHANGES, doc/Attic/LSM, doc/WISHLIST, lib/Attic/strcasecmp.c, lib/prototypes.h, libmisc/Makefile.am, man/Attic/faillog.8, po/el.po, po/pl.po, src/Makefile.am, src/chfn.c, src/chsh.c, src/faillog.c, src/groupmod.c, src/grpconv.c, src/grpunconv.c, src/newgrp.c, src/passwd.c, src/vipw.c:
 	*** empty log message ***
 
-1999-06-07  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1999-06-07  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* redhat/Attic/shadow-utils.spec.in, src/Attic/dpasswd.c, src/Attic/mkpasswd.c, src/Makefile.am, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/logoutd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/usermod.c, contrib/Makefile.am, contrib/README, contrib/udbachk.tgz, debian/Attic/changelog, debian/Attic/rules, doc/Attic/CHANGES, doc/Attic/LSM, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/README.platforms, doc/WISHLIST, lib/Attic/getpass.c, lib/Attic/rcsid.h, lib/Makefile.am, lib/fputsx.c, lib/pam_defs.h, lib/prototypes.h, libmisc/Attic/login_desrpc.c, libmisc/pam_pass.c, libmisc/utmp.c, man/Attic/login.1, po/el.po, po/pl.po, Attic/acconfig.h, configure.in:
 	*** empty log message ***
 
-1999-03-07  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1999-03-07  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* po/pl.po, po/el.po, doc/Attic/LSM, src/useradd.c, src/su.c, src/pwconv.c, src/pwck.c, src/passwd.c, src/newusers.c, src/newgrp.c, src/logoutd.c, src/login.c, src/grpconv.c, src/grpck.c, src/groupadd.c, src/gpasswd.c, src/Attic/dpasswd.c, src/chfn.c, src/chage.c, man/Attic/usermod.8, man/Attic/useradd.8, man/Attic/limits.5, man/Attic/chage.1, libmisc/valid.c, libmisc/sub.c, libmisc/strtoday.c, libmisc/setupenv.c, libmisc/obscure.c, libmisc/limits.c, libmisc/env.c, lib/Attic/snprintf.h, lib/getdef.c, lib/encrypt.c, lib/defines.h, etc/Attic/login.defs.linux, doc/WISHLIST, doc/Attic/README.nls, doc/Attic/README.pam, doc/README.platforms, doc/Attic/README.mirrors, doc/Attic/README.linux, doc/Makefile.am, doc/Attic/CHANGES, debian/Attic/tar.c, debian/Attic/rules, debian/Attic/logoutd, debian/Attic/control, debian/Attic/changelog, configure.in:
 	*** empty log message ***
 
-1998-12-28  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-12-28  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/usermod.c, src/userdel.c, src/useradd.c, src/sulogin.c, src/su.c, src/pwunconv.c, src/pwconv.c, src/pwck.c, src/passwd.c, src/newusers.c, src/newgrp.c, src/Attic/mkpasswd.c, src/logoutd.c, src/login.c, src/lastlog.c, src/id.c, src/grpunconv.c, src/grpconv.c, src/grpck.c, src/groups.c, src/groupmod.c, src/groupdel.c, src/groupadd.c, src/gpasswd.c, src/faillog.c, src/expiry.c, src/Attic/dpasswd.c, src/chsh.c, src/chpasswd.c, src/chfn.c, src/chage.c, po/Attic/doit, po/POTFILES.in, po/el.po, src/Makefile.am, man/Attic/usermod.8, man/Attic/userdel.8, man/Attic/useradd.8, man/Attic/sulogin.8, man/Attic/su.1, man/Attic/shadow.5, man/Attic/shadow.3, man/Attic/pwck.8, man/Attic/pwauth.8, man/Attic/pw_auth.3, man/Attic/porttime.5, man/Attic/passwd.5, man/Attic/passwd.1, man/Attic/newusers.8, man/Attic/newgrp.1, man/Attic/mkpasswd.8, man/Attic/logoutd.8, man/Attic/login.defs.5, man/Attic/login.1, man/Attic/lastlog.8, man/Attic/id.1, man/Attic/grpck.8, man/Attic/groups.1, man/Attic/groupmod.8, man/Attic/groupdel.8, man/Attic/groupadd.8, man/Attic/faillog.8, man/Attic/faillog.5, man/Attic/dpasswd.8, man/Attic/chsh.1, man/Attic/chpasswd.8, man/Attic/chfn.1, man/Attic/chage.1, libmisc/xmalloc.c, libmisc/sub.c, libmisc/Attic/suauth.c, libmisc/shell.c, libmisc/setupenv.c, libmisc/pam_pass.c, libmisc/obscure.c, libmisc/mail.c, libmisc/Attic/login_desrpc.c, libmisc/limits.c, libmisc/failure.c, libmisc/env.c, libmisc/console.c, libmisc/chowntty.c, libmisc/age.c, libmisc/addgrps.c, libmisc/Makefile.am, lib/Attic/strerror.c, lib/pwauth.c, lib/prototypes.h, lib/Attic/getpass.c, lib/getdef.c, lib/Attic/dialchk.c, lib/defines.h, lib/Makefile.am, doc/WISHLIST, doc/README.platforms, doc/Attic/README.mirrors, doc/Attic/README.linux, doc/Attic/README, doc/Attic/LSM, doc/Attic/CHANGES, debian/Attic/secure-su.copyright, debian/Attic/passwd.copyright, debian/Attic/login.copyright, debian/Attic/control, debian/Attic/changelog, configure.in, Attic/acconfig.h, Makefile.am:
 	*** empty log message ***
 
-1998-07-24  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-07-24  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/passwd.c, src/su.c, src/userdel.c, src/Makefile.am, src/chage.c, src/faillog.c, src/login.c, lib/Attic/tcfsio.c, lib/Attic/tcfsio.h, lib/pwauth.c, libmisc/chowntty.c, libmisc/pam_pass.c, libmisc/setugid.c, etc/pam.d/passwd, etc/pam.d/su, lib/Makefile.am, lib/commonio.c, lib/defines.h, lib/prototypes.h, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/Makefile.am, doc/README.platforms, doc/WISHLIST, etc/Makefile.am, etc/pam.d/Makefile.am, doc/Attic/CHANGES, debian/Attic/changelog, configure.in, Attic/acconfig.h:
 	*** empty log message ***
 
-1998-06-26  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-06-26  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/passwd.c, src/usermod.c, man/Attic/faillog.8, man/Attic/pwconv.8, src/logoutd.c, lib/Attic/getpass.c, libmisc/copydir.c, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/WISHLIST, lib/commonio.c, debian/Attic/changelog, doc/Attic/CHANGES, configure.in:
 	*** empty log message ***
 
-1998-05-29  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-05-29  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* man/Attic/lastlog.8, man/Attic/login.1, src/usermod.c, doc/Attic/CHANGES, doc/Attic/README.linux, etc/Attic/login.defs.linux, lib/defines.h, debian/Attic/changelog, debian/Attic/login.copyright, debian/Attic/login.postinst, debian/Attic/passwd.copyright, debian/Attic/rules, debian/Attic/secure-su.copyright, configure.in, contrib/Makefile.am, contrib/shadow-anonftp.patch:
 	*** empty log message ***
 
-1998-04-16  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-04-16  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/useradd.c, src/userdel.c, src/usermod.c, src/passwd.c, src/sulogin.c, src/groupdel.c, src/login.c, src/logoutd.c, src/newgrp.c, src/Attic/dpasswd.c, src/chage.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, redhat/Attic/shadow-970616-rh.patch, redhat/Attic/shadow-970616-utuser.patch, redhat/Attic/shadow-970616.login.defs, redhat/Attic/shadow-970616.useradd, redhat/Attic/shadow-utils-970616.spec, src/Makefile.am, libmisc/utmp.c, redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970616-fix.patch, redhat/Attic/shadow-970616-glibc.patch, libmisc/Attic/login_desrpc.c, libmisc/limits.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/obscure.c, libmisc/strtoday.c, libmisc/chkname.c, libmisc/chowndir.c, libmisc/copydir.c, libmisc/failure.c, lib/Attic/dialchk.c, lib/Attic/pwpack.c, lib/defines.h, lib/pwauth.c, doc/Attic/CHANGES, doc/Attic/README.linux, doc/WISHLIST, doc/cracklib26.diff, lib/commonio.c, Attic/acconfig.h, configure.in, debian/Attic/tar.c:
 	*** empty log message ***
 
-1998-04-02  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-04-02  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/groupmod.c, libmisc/sulog.c, lib/sgetspent.c, lib/sgetpwent.c, lib/sgetgrent.c, lib/Attic/putgrent.c, lib/gshadow.c, lib/getdef.c, lib/fputsx.c, lib/commonio.c, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/Attic/CHANGES, configure.in:
 	*** empty log message ***
 
-1998-01-30  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-01-30  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* Attic/install-sh, src/userdel.c, src/usermod.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/useradd.c, src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c, src/groupmod.c, src/login.c, src/logoutd.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/expiry.c, redhat/Attic/README, redhat/Attic/shadow-utils.spec.in, src/Makefile.am, src/chage.c, man/Attic/login.defs.5, man/Attic/useradd.8, man/Attic/usermod.8, redhat/Attic/Makefile.am, libmisc/pam_pass.c, libmisc/strtoday.c, libmisc/tz.c, libmisc/Attic/login_access.c, libmisc/Attic/login_desrpc.c, libmisc/Attic/login_krb.c, libmisc/obscure.c, libmisc/age.c, libmisc/env.c, libmisc/limits.c, lib/Attic/strstr.c, lib/shadow.c, lib/shadowio.c, lib/shadowio.h, lib/utent.c, lib/Attic/rmdir.c, lib/pwio.c, lib/pwio.h, lib/sgetspent.c, lib/sgroupio.c, lib/Attic/mkdir.c, lib/Attic/putgrent.c, lib/prototypes.h, lib/pwauth.c, lib/Attic/md5crypt.c, lib/Attic/getpass.c, lib/groupio.c, lib/gshadow.c, lib/lockpw.c, lib/commonio.h, lib/defines.h, lib/encrypt.c, lib/getdef.c, lib/getdef.h, doc/Attic/README.mirrors, doc/Attic/automake-1.0.diff, doc/WISHLIST, lib/Makefile.am, lib/commonio.c, doc/Attic/ANNOUNCE, doc/Attic/CHANGES, doc/Attic/README.linux, doc/Makefile.am, doc/README.limits, debian/Attic/Makefile.am, debian/Attic/changelog, debian/Attic/login.copyright, debian/Attic/rules, Attic/mkinstalldirs, Attic/shadow-utils.spec, contrib/README, Attic/acconfig.h, Attic/aclocal.m4, configure.in, Makefile.am:
 	*** empty log message ***
 
-1998-01-25  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1998-01-25  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* Attic/acconfig.h: *** empty log message ***
 
-1997-12-14  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-12-14  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* doc/Attic/CHANGES, debian/Attic/checksums, debian/Attic/rules, debian/Attic/Makefile.am, src/Makefile.am, src/userdel.c, src/usermod.c, src/pwck.c, src/useradd.c, src/Attic/mkpasswd.c, src/gpasswd.c, src/grpck.c, src/login.c, src/chage.c, src/chfn.c, src/chsh.c, man/Attic/shadowconfig.8, man/Attic/vipw.8, old/Attic/Makefile.am, old/Attic/pwunconv.8, man/Attic/login.defs.5, man/Attic/pwconv.8, man/Attic/pwunconv.8, man/Makefile.am, libmisc/limits.c, libmisc/rlogin.c, lib/Attic/pwdbm.c, lib/Attic/pwent.c, lib/prototypes.h, lib/shadow.c, doc/Attic/LSM, doc/WISHLIST, etc/limits, lib/Attic/grent.c, Attic/shadow-utils.spec, debian/Attic/changelog, configure.in:
 	*** empty log message ***
 
-1997-12-08  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-12-08  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/userdel.c, src/usermod.c, src/Attic/shadowconfig.sh, src/su.c, src/sulogin.c, src/useradd.c, src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c, src/newgrp.c, src/newusers.c, src/Attic/mkpasswd.c, src/logoutd.c, src/grpconv.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/grpck.c, src/Attic/dpasswd.c, src/chsh.c, src/expiry.c, src/faillog.c, src/gpasswd.c, src/Makefile.am, src/chage.c, src/chfn.c, src/chpasswd.c, old/Attic/Makefile.am, old/Attic/pwconv.8, old/Attic/vipw.8, man/Attic/limits.5, man/Attic/pwconv.8, man/Attic/shadowconfig.8, man/Attic/vipw.8, man/Makefile.am, libmisc/tz.c, libmisc/ulimit.c, libmisc/utmp.c, libmisc/valid.c, libmisc/xmalloc.c, libmisc/Attic/suauth.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/Attic/setup.c, libmisc/salt.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/rlogin.c, libmisc/motd.c, libmisc/myname.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/pwd2spwd.c, libmisc/pwd_init.c, libmisc/Attic/login_access.c, libmisc/Attic/login_desrpc.c, libmisc/Attic/login_krb.c, libmisc/loginprompt.c, libmisc/mail.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/Attic/getdate.c, libmisc/failure.h, libmisc/fields.c, libmisc/getdate.h, libmisc/getdate.y, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, libmisc/Attic/chkshell.c, libmisc/age.c, libmisc/basename.c, libmisc/chkname.c, libmisc/chkname.h, lib/Attic/strdup.c, lib/Attic/strerror.c, lib/Attic/strstr.c, lib/utent.c, libmisc/Makefile.am, libmisc/addgrps.c, lib/Attic/spdbm.c, lib/Attic/sppack.c, lib/sgroupio.c, lib/shadow.c, lib/shadowio.c, lib/Attic/rename.c, lib/Attic/rmdir.c, lib/sgetgrent.c, lib/sgetpwent.c, lib/sgetspent.c, lib/Attic/rad64.c, lib/Attic/pwdbm.c, lib/Attic/pwent.c, lib/Attic/pwpack.c, lib/pwauth.c, lib/pwio.c, lib/Attic/mkdir.c, lib/Attic/putgrent.c, lib/Attic/putpwent.c, lib/Attic/putspent.c, lib/port.c, lib/prototypes.h, lib/Attic/gsdbm.c, lib/Attic/gspack.c, lib/Attic/md5.c, lib/Attic/md5crypt.c, lib/gshadow.c, lib/lockpw.c, lib/Attic/grdbm.c, lib/Attic/grent.c, lib/Attic/grpack.c, lib/groupio.c, lib/Attic/getpass.c, lib/Attic/dialup.c, lib/encrypt.c, lib/fputsx.c, lib/getdef.c, lib/Attic/dialchk.c, lib/Attic/dialchk.h, lib/commonio.c, lib/commonio.h, lib/defines.h, doc/Attic/automake-1.0.diff, etc/Attic/login.defs.linux, etc/limits, lib/Makefile.am, doc/Attic/CHANGES, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/WISHLIST, debian/Attic/login.conffiles, debian/Attic/login.postinst, debian/Attic/passwd.postinst, debian/Attic/porttime, debian/Attic/rules, debian/Attic/secure-su.README, debian/Attic/securetty, contrib/pwdauth.c, debian/Attic/changelog, debian/Attic/control, Attic/acconfig.h, Attic/aclocal.m4, Attic/shadow-utils.spec, configure.in, Makefile.am:
 	*** empty log message ***
 
-1997-10-01  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-10-01  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* debian/Attic/changelog, src/chpasswd.c, libmisc/Attic/login_access.c, lib/commonio.h, lib/sgroupio.c, lib/shadowio.c, etc/Attic/login.defs.linux, doc/Attic/CHANGES, doc/Attic/LSM, doc/Attic/README.mirrors, doc/WISHLIST, Attic/shadow-utils.spec:
 	*** empty log message ***
 
-1997-09-30  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-09-30  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/useradd.c, src/userdel.c, src/usermod.c, src/pwconv.c, src/pwunconv.c, src/su.c, src/newusers.c, src/passwd.c, src/pwck.c, src/grpck.c, src/grpconv.c, src/grpunconv.c, src/login.c, src/groupmod.c, src/Attic/dpasswd.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/Makefile.am, old/Attic/install-sh, old/Attic/pwconv-old.8, old/Attic/pwunconv-old.8, old/Attic/Makefile.am, man/Attic/pwconv.8, man/Attic/pwunconv.8, libmisc/setugid.c, libmisc/shell.c, libmisc/utmp.c, libmisc/mail.c, libmisc/obscure.c, libmisc/pam_pass.c, libmisc/salt.c, libmisc/Attic/login_access.c, libmisc/isexpired.c, libmisc/env.c, libmisc/fields.c, libmisc/addgrps.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, libmisc/copydir.c, lib/Attic/strerror.c, lib/Attic/snprintf.c, lib/Attic/snprintf.h, lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.c, lib/shadowio.h, lib/Attic/putgrent.c, lib/Attic/pwent.c, lib/pwauth.c, lib/Attic/getpass.c, lib/Attic/grent.c, lib/prototypes.h, lib/commonio.c, lib/commonio.h, lib/defines.h, lib/encrypt.c, lib/getdef.c, lib/Makefile.am, etc/Attic/login.defs.linux, doc/Attic/README.linux, doc/Attic/README.mirrors, doc/WISHLIST, doc/Attic/CHANGES, doc/Attic/LSM, doc/Makefile.am, debian/Attic/rules, debian/Attic/changelog, contrib/adduser.c, configure.in, Attic/acconfig.h:
 	*** empty log message ***
 
-1997-09-29  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-09-29  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* man/Attic/chpasswd.8, man/Attic/pwconv.8, man/Attic/pwunconv.8, man/Attic/su.1, man/Makefile.am:
 	*** empty log message ***
 
-1997-06-16  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-06-16  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* doc/Attic/console.c.spec, doc/Makefile.am, doc/WISHLIST, doc/console.c.spec.txt, doc/Attic/CHANGES, debian/Attic/changelog, src/Attic/shadowconfig.sh, redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970502-config.patch, redhat/Attic/shadow-utils.spec, doc/Attic/README.mirrors, doc/Attic/README.shadow-paper, doc/Attic/README.linux, debian/Attic/login.copyright, debian/Attic/passwd.copyright, debian/Attic/secure-su.copyright, Attic/shadow-utils.spec, Makefile.am, configure.in:
 	*** empty log message ***
 
-1997-06-01  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-06-01  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* debian/Attic/changelog, src/userdel.c, src/usermod.c, src/pwck.c, src/pwunconv.c, src/useradd.c, src/grpunconv.c, src/newusers.c, src/passwd.c, src/expiry.c, src/grpconv.c, src/chage.c, src/chfn.c, src/chpasswd.c, src/chsh.c, src/Makefile.am, redhat/Attic/Makefile.am, redhat/Attic/README, redhat/Attic/shadow-970502-config.patch, redhat/Attic/shadow-utils.spec, libmisc/mail.c, libmisc/Attic/login_desrpc.c, lib/pwio.h, lib/shadowio.c, lib/shadowio.h, lib/prototypes.h, lib/pwauth.c, lib/pwio.c, lib/commonio.c, lib/defines.h, doc/Attic/README.linux, doc/WISHLIST, doc/Attic/CHANGES, doc/Attic/INSTALL, Attic/install-sh, Attic/mkinstalldirs, Attic/acconfig.h, Makefile.am, configure.in:
 	*** empty log message ***
 
-1997-05-02  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-05-02  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/Attic/shadowconfig.sh, src/Makefile.am, man/Makefile.am, libmisc/mail.c, libmisc/salt.c, lib/sgroupio.c, lib/shadowio.c, lib/groupio.c, lib/pwio.c, etc/Makefile.am, doc/WISHLIST, doc/Attic/CHANGES, debian/Attic/shadowconfig, debian/Attic/Makefile.am, debian/Attic/changelog, debian/Attic/control, debian/Attic/rules, configure.in, Attic/configure, shlib/Attic/Makefile.in, man/Attic/Makefile.in, libmisc/Attic/Makefile.in, lib/Attic/Makefile.in, etc/Attic/Makefile.in, doc/Attic/Makefile.in, contrib/Attic/Makefile.in, Attic/Makefile.in, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/shadow.5, man/Attic/su.1, man/Attic/sulogin.8, man/Attic/useradd.8, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/pwunconv.8, man/Attic/shadow.3, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/limits.5, man/Attic/login.1, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/faillog.5, man/Attic/faillog.8, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, libmisc/valid.c, libmisc/sulog.c, libmisc/ttytype.c, libmisc/tz.c, libmisc/utmp.c, libmisc/Attic/setup.c, libmisc/setupenv.c, libmisc/shell.c, libmisc/strtoday.c, libmisc/sub.c, libmisc/setugid.c, libmisc/obscure.c, libmisc/pwd2spwd.c, libmisc/rlogin.c, libmisc/Attic/login_access.c, libmisc/loginprompt.c, libmisc/motd.c, libmisc/hushed.c, libmisc/isexpired.c, libmisc/limits.c, libmisc/list.c, libmisc/log.c, libmisc/copydir.c, libmisc/entry.c, libmisc/env.c, libmisc/failure.c, libmisc/fields.c, libmisc/age.c, libmisc/chowndir.c, libmisc/chowntty.c, libmisc/console.c, lib/utent.c, lib/Attic/shadow_.h, lib/Attic/spdbm.c, lib/Attic/sppack.c, lib/Attic/strstr.c, lib/shadow.c, lib/sgetpwent.c, lib/sgetspent.c, lib/Attic/pwpack.c, lib/Attic/rad64.c, lib/Attic/rename.c, lib/Attic/rmdir.c, lib/sgetgrent.c, lib/Attic/pwdbm.c, lib/Attic/pwent.c, lib/pwauth.h, lib/Attic/putgrent.c, lib/Attic/putpwent.c, lib/Attic/putspent.c, lib/port.h, lib/pwauth.c, lib/Attic/lastlog_.h, lib/Attic/mkdir.c, lib/lockpw.c, lib/port.c, lib/Attic/grpack.c, lib/Attic/gsdbm.c, lib/Attic/gspack.c, lib/gshadow.c, lib/gshadow_.h, lib/Attic/getpass.c, lib/Attic/grdbm.c, lib/Attic/grent.c, lib/getdef.c, lib/Attic/dialup.h, lib/encrypt.c, lib/faillog.h, lib/fputsx.c, lib/Attic/dialchk.c, lib/Attic/dialup.c, lib/commonio.c, lib/defines.h, etc/Attic/login.defs.linux, etc/login.defs, doc/Attic/README.linux, doc/Attic/LICENSE, doc/Attic/README, doc/Makefile.am, doc/HOWTO, doc/Attic/ANNOUNCE, debian/Attic/secure-su.README, debian/Attic/secure-su.conffiles, debian/Attic/secure-su.copyright, debian/Attic/secure-su.postrm, debian/Attic/secure-su.preinst, debian/Attic/securetty, debian/Attic/passwd.conffiles, debian/Attic/passwd.copyright, debian/Attic/passwd.postinst, debian/Attic/porttime, debian/Attic/login.conffiles, debian/Attic/login.copyright, debian/Attic/login.postinst, debian/Attic/login.postrm, debian/Attic/login.preinst, debian/Attic/login.prerm, debian/Attic/logoutd, Attic/acconfig.h, Attic/config.h.in, Makefile.am, old/Attic/Makefile.in, old/Attic/scologin.c, old/Attic/orig-config.h, old/Attic/pwconv-old.c, old/Attic/pwd.h.m4, old/Attic/pwunconv-old.c, old/Attic/config.h.sun4, old/Attic/config.h.svr4, old/Attic/config.h.xenix, old/Attic/config.h.linux, old/Attic/Makefile.sun4, old/Attic/Makefile.svr4, old/Attic/Makefile.xenix, old/Attic/Makefile.am, old/Attic/Makefile.linux, src/Attic/Makefile.in, src/pwconv.c, src/userdel.c, src/usermod.c, src/useradd.c, src/su.c, src/sulogin.c, src/Attic/pwconv5.c, src/Attic/scologin.c, src/pwck.c, src/pwunconv.c, src/Attic/patchlevel.h, src/newusers.c, src/passwd.c, src/Attic/mkpasswd.c, src/logoutd.c, src/newgrp.c, src/grpunconv.c, src/id.c, src/lastlog.c, src/login.c, src/grpck.c, src/grpconv.c, src/groupdel.c, src/groupmod.c, src/groups.c, src/faillog.c, src/gpasswd.c, src/groupadd.c, src/Attic/dpasswd.c, src/chsh.c, src/expiry.c, src/chfn.c, src/chpasswd.c, src/chage.c:
 	*** empty log message ***
 
-1997-02-11  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-02-11  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/groupadd.c, src/useradd.c, libmisc/setupenv.c, lib/sgroupio.c, lib/shadowio.c, lib/groupio.c, lib/pwio.c, lib/Makefile.am, lib/commonio.c, doc/Attic/CHANGES, doc/HOWTO, README, configure.in:
 	*** empty log message ***
 
-1997-01-08  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1997-01-08  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/groupadd.c, lib/commonio.c, README, src/useradd.c, src/userdel.c, src/usermod.c, src/Attic/pwconv5.c, src/pwconv.c, src/su.c, src/passwd.c, src/pwck.c, src/grpunconv.c, src/login.c, src/logoutd.c, src/newgrp.c, src/grpck.c, src/grpconv.c, src/faillog.c, src/gpasswd.c, src/groupmod.c, src/chage.c, src/chfn.c, src/chsh.c, src/expiry.c, libmisc/ttytype.c, libmisc/utmp.c, libmisc/Attic/suauth.c, libmisc/strtoday.c, libmisc/shell.c, libmisc/failure.c, libmisc/log.c, libmisc/loginprompt.c, libmisc/myname.c, lib/shadowio.h, libmisc/Makefile.am, libmisc/chkname.c, lib/sgetpwent.c, lib/sgroupio.c, lib/sgroupio.h, lib/shadow.c, lib/shadowio.c, lib/Attic/pwent.c, lib/pwio.c, lib/pwio.h, lib/Attic/putgrent.c, lib/groupio.c, lib/groupio.h, lib/gshadow.c, lib/prototypes.h, lib/defines.h, lib/faillog.h, lib/getdef.c, doc/Attic/README.linux, doc/WISHLIST, etc/Attic/login.defs.linux, lib/Makefile.am, doc/Attic/CHANGES, doc/HOWTO, Attic/acconfig.h, configure.in:
 	*** empty log message ***
 
-1996-10-27  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1996-10-27  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/usermod.c, src/grpck.c, src/useradd.c, src/userdel.c, src/chsh.c, src/gpasswd.c, libmisc/isexpired.c, libmisc/limits.c, lib/sgroupio.c, lib/shadowio.c, lib/commonio.c, lib/groupio.c, lib/pwio.c, doc/Attic/CHANGES, doc/Attic/README.linux, doc/WISHLIST, Attic/configure, configure.in:
 	*** empty log message ***
 
-1996-09-25  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1996-09-25  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/usermod.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/su.c, src/Attic/pwconv5.c, src/newgrp.c, src/passwd.c, src/pwck.c, src/grpck.c, src/login.c, src/logoutd.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmod.c, src/chfn.c, src/chsh.c, src/chage.c, libmisc/strtoday.c, libmisc/env.c, libmisc/fields.c, libmisc/isexpired.c, libmisc/setupenv.c, lib/Attic/rad64.c, lib/getdef.c, lib/prototypes.h, lib/defines.h, etc/Attic/login.defs.linux, doc/Attic/README.linux, doc/WISHLIST, doc/Attic/CHANGES, Attic/configure, configure.in, Attic/config.h.in:
 	*** empty log message ***
 
-1996-09-20  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1996-09-20  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/usermod.c, src/su.c, src/sulogin.c, src/useradd.c, src/userdel.c, src/newusers.c, src/passwd.c, src/pwck.c, src/grpck.c, src/login.c, src/logoutd.c, src/newgrp.c, src/groupdel.c, src/groupmod.c, src/Attic/dpasswd.c, src/chsh.c, src/gpasswd.c, src/groupadd.c, src/Attic/Makefile.in, src/chage.c, src/chfn.c, src/Makefile.am, libmisc/Attic/suauth.c, libmisc/shell.c, libmisc/sub.c, libmisc/ttytype.c, libmisc/env.c, libmisc/setugid.c, libmisc/setupenv.c, libmisc/chowntty.c, lib/prototypes.h, lib/getdef.c, doc/Attic/CHANGES, doc/WISHLIST:
 	*** empty log message ***
 
-1996-09-10  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1996-09-10  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* src/su.c, src/sulogin.c, src/usermod.c, src/logoutd.c, src/newgrp.c, src/passwd.c, src/pwconv.c, src/Attic/Makefile.in, src/chfn.c, src/chsh.c, src/grpunconv.c, src/login.c, src/Makefile.am, man/Attic/useradd.8, man/Attic/userdel.8, man/Attic/usermod.8, man/Attic/shadow.3, man/Attic/shadow.5, man/Attic/su.1, man/Attic/suauth.5, man/Attic/sulogin.8, man/Attic/pw_auth.3, man/Attic/pwauth.8, man/Attic/pwck.8, man/Attic/pwconv.8, man/Attic/pwunconv.8, man/Attic/newusers.8, man/Attic/passwd.1, man/Attic/passwd.5, man/Attic/porttime.5, man/Attic/login.defs.5, man/Attic/logoutd.8, man/Attic/mkpasswd.8, man/Attic/newgrp.1, man/Attic/groups.1, man/Attic/grpck.8, man/Attic/id.1, man/Attic/lastlog.8, man/Attic/login.1, man/Attic/login.access.5, man/Attic/faillog.8, man/Attic/gpasswd.1, man/Attic/groupadd.8, man/Attic/groupdel.8, man/Attic/groupmod.8, man/Attic/chage.1, man/Attic/chfn.1, man/Attic/chpasswd.8, man/Attic/chsh.1, man/Attic/dpasswd.8, man/Attic/faillog.5, libmisc/isexpired.c, libmisc/obscure.c, libmisc/setupenv.c, libmisc/utmp.c, libmisc/age.c, lib/Attic/getpass.c, lib/defines.h, lib/getdef.c, etc/Attic/login.defs.linux, etc/limits, etc/login.access, doc/Attic/CHANGES, doc/Attic/README.linux, doc/WISHLIST, contrib/Attic/Makefile.in, contrib/Makefile.am, Attic/configure, configure.in:
 	*** empty log message ***
 
-1996-08-10  Marek Micha≥kiewicz  <marekm@pld.org.pl>
+1996-08-10  Marek Micha≈Çkiewicz  <marekm@pld.org.pl>
 
 	* old/Attic/Makefile.am, old/Attic/Makefile.linux, old/Attic/Makefile.sun4, old/Attic/Makefile.svr4, old/Attic/Makefile.xenix, old/Attic/config.h.linux, old/Attic/config.h.sun4, old/Attic/config.h.svr4, old/Attic/config.h.xenix, old/Attic/install-sh, old/Attic/orig-config.h, old/Attic/pwd.h.m4, shlib/Attic/Makefile.am, shlib/Attic/Makefile.in, shlib/Attic/Makefile.in.saved:
 	New file.
