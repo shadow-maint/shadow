@@ -1,6 +1,6 @@
 $Id: NEWS,v 1.492 2007/02/01 20:49:25 kloczek Exp $
 
-shadow-4.0.18.1 -> shadow-4.0.18.2					09-08-2006
+shadow-4.0.18.1 -> shadow-4.0.18.2					13-10-2007
 
 *** general:
 - usermod: fixed handle -a option (by Benno Schulenberg
@@ -9,6 +9,9 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					09-08-2006
   (https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=211659),
 - groupadd, groupdel, groupmod, useradd, userdel, usermod: flush nscd cashes
   after close /etc/{group,passwd} files,
+- su: If compiled without PAM support, enforce the limits from /etc/limits
+  when one of the -, -l, or --login options is set, even if called by root.
+*** documentation:
 - updated translations: ja, nl, tl.
 - groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
   mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>),

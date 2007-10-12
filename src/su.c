@@ -790,8 +790,9 @@ int main (int argc, char **argv)
 	}
 #else				/* !USE_PAM */
 	environ = newenvp;	/* make new environment active */
-	
-	if (!amroot)		/* no limits if su from root */
+
+	/* no limits if su from root (unless su must fake login's behavior) */
+	if (!amroot || fakelogin)
 		setup_limits (&pwent);
 
 	if (setup_uid_gid (&pwent, is_console))

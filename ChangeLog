@@ -1,3 +1,9 @@
+2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/su.c: If compiled without PAM support, enforce the
+	limits from /etc/limits when one of the -, -l, or --login options
+	is set, even if called by root. Thanks to Justin Bronder.
+
 2007-10-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, Changelog: Convert the Changelog and NEWS files to UTF-8
