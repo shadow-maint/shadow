@@ -20,6 +20,8 @@
 	Simon Brandmair
 	* src/usermod.c: Clarify the online help of usermod for "-a"
 	Imported from Debian's patch 402-clarify_usermod_usage
+	* man/shadow.5.xml: fix spelling error. Imported from Debian's
+	patch 433_shadow.5-typo_312430
 
 2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
 
