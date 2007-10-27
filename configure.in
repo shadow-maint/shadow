@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT
-AM_INIT_AUTOMAKE(shadow, 4.0.18.1)
+AM_INIT_AUTOMAKE(shadow, 4.0.18.2)
 AC_CONFIG_HEADERS([config.h])
 
 dnl Some hacks...
@@ -331,7 +331,7 @@ if test "$with_skey" = "yes"; then
 	],[AC_DEFINE(SKEY_BSD_STYLE, 1, [Define to support newer BSD S/Key API])])
 fi
 
-AM_GNU_GETTEXT_VERSION(0.12.1)
+AM_GNU_GETTEXT_VERSION(0.16)
 AM_GNU_GETTEXT([external], [need-ngettext])
 AM_CONDITIONAL(USE_NLS, test "x$USE_NLS" = "xyes")
 
