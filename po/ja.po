@@ -84,9 +84,6 @@ msgid_plural ""
 msgstr[0] ""
 "最後のログインから %d 回失敗。\n"
 "最後のログインは %s (マシン %s)。\n"
-msgstr[1] ""
-"最後のログインから %d 回失敗。\n"
-"最後のログインは %s (マシン %s)。\n"
 
 #, c-format
 msgid "Too many logins.\n"

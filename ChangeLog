@@ -1,3 +1,8 @@
+2007-10-28  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/ja.po: Remove a plural form. nplurals=1 for japanese.
+	Moreover, msgstr[0] was identical to msgstr[1].
+
 2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/limits.c, man/limits.5.xml, etc/limits: Apply patch sent
