@@ -7,6 +7,10 @@
 	102_de-fix-sorry
 	* man/fr/fr.po: fix a translation error. Imported from Debian's
 	patch 201_fix_man_su_fr
+	* man/it/it.po, man/Makefile.am, man/it/Makefile.am:
+	Use gettext for the Italian man pages translation. Imported from
+	Debian's patch 202_it_man_uses_gettext. Thanks to Giuseppe
+	Sacco who contributed the Italian translation.
 
 2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
 
