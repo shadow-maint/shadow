@@ -2,25 +2,25 @@ Shadow SITES
 ============
 
 FTP site
-	ftp://ftp.pld.org.pl/software/shadow
+	ftp://pkg-shadow.alioth.debian.org/pub/pkg-shadow
 
-CVS repository
-	anonymous read only access :pserver:cvs@anoncvs.pld.org.pl:/cvsroot
-	module: shadow
-	password: [empty password]
+SVN repository
+	anonymous read only access: svn://svn.debian.org/pkg-shadow/
 
-CVS web interface
-	http://cvsweb.pld.org.pl/index.cgi/shadow/
-	http://cvs.pld.org.pl/shadow/
+SVN web interface
+	http://svn.debian.org/wsvn/pkg-shadow
 
 Mailing lists
-	for general discuss: shadow@pld.org.pl
-		subscribe by send empty mail to shadow-subscribe@pld.org.pl
-	cvs commit list: shadow-commit@pld.org.pl
+	for general discuss: pkg-shadow-devel@lists.alioth.debian.org
+	commit list: pkg-shadow-commits@lists.alioth.debian.org
+
+Mailing lists subscription
+	http://lists.alioth.debian.org/mailman/listinfo/pkg-shadow-devel
+	http://lists.alioth.debian.org/mailman/listinfo/pkg-shadow-commits
 
 Mailing lists archives:
-	shadow@pld.org.pl - http://mail.pld.org.pl/mailman/pipermail/shadow/
-	shadow-commit@pld.org.pl - http://mail.pld.org.pl/mailman/pipermail/shadow-commit/
+	http://lists.alioth.debian.org/pipermail/pkg-shadow-devel/
+	http://lists.alioth.debian.org/pipermail/pkg-shadow-commits/
 
 S/Key support:
 	Shadow can be built with S/Key support using the S/Key package from:
@@ -99,8 +99,8 @@ Timo Karjalainen <timok@iki.fi>
 Ulisses Alonso Camaro <ulisses@pusa.eleinf.uv.es>
 Werner Fink <werner@suse.de>
 
-Maintainer contact
-==================
+Maintainers
+===========
 
-Tomasz Kłoczko <kloczek@pld.org.pl>
+Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2006)
 

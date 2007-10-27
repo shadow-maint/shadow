@@ -24,4 +24,4 @@ COPYRIGHT_HOLDER = Free Software Foundation, Inc.
 # message catalogs shall be used.  It is usually empty.
 EXTRA_LOCALE_CATEGORIES =
 
-MSGID_BUGS_ADDRESS = kloczek@pld.org.pl
+MSGID_BUGS_ADDRESS = pkg-shadow-devel@lists.alioth.debian.org
