@@ -1204,7 +1204,7 @@ msgid "unknown GID: %lu\n"
 msgstr "Unbekannte GID: %lu\n"
 
 msgid "Sorry.\n"
-msgstr "Entschuldigung.\n"
+msgstr " \n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1471,7 +1471,7 @@ msgid "Please enter your OWN password as authentication.\n"
 msgstr "Bitte geben Sie Ihr EIGENES Kennwort als Authentifizierung ein.\n"
 
 msgid "Sorry."
-msgstr "Entschuldigung."
+msgstr " "
 
 #, c-format
 msgid "%s: %s\n"
