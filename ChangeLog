@@ -1,3 +1,10 @@
+2007-10-27  Christian Perrier  <bubulle@debian.org
+
+	* src/newgrp.c,	src/passwd.c, src/su.c:
+	No longer 'apologize' to users when they use incorrect passwords
+	Remove "Sorry" from programs display
+	Imported from Debian's patch 413_no-sorry-in-passwd
+
 2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, po/zh_CN.po: Updated Chinese translation. Imported from

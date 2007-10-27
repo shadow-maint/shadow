@@ -397,7 +397,7 @@ int main (int argc, char **argv)
 			 * there is no password, print out "Sorry" and give up
 			 */
 			sleep (1);
-			fputs (_("Sorry.\n"), stderr);
+			fputs (_("No password.\n"), stderr);
 			goto failure;
 		}
 
@@ -406,7 +406,6 @@ int main (int argc, char **argv)
 				 "Invalid password for group `%s' from `%s'",
 				 group, name));
 			sleep (1);
-			fputs (_("Sorry.\n"), stderr);
 			goto failure;
 		}
 	}

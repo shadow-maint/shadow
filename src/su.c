@@ -140,7 +140,6 @@ static void su_failure (const char *tty)
 			 oldname[0] ? oldname : "???", name[0] ? name : "???"));
 	closelog ();
 #endif
-	puts (_("Sorry."));
 	exit (1);
 }
 
