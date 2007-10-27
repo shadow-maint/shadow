@@ -4,6 +4,8 @@
 	No longer 'apologize' to users when they use incorrect passwords
 	Remove "Sorry" from programs display
 	Imported from Debian's patch 413_no-sorry-in-passwd
+	* man/fr/fr.po: fix a translation error. Imported from Debian's
+	patch 201_fix_man_su_fr
 
 2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
 

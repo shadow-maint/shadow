@@ -1773,8 +1773,8 @@ msgstr ""
 "Si l'utilisateur cible possède un interpréteur de commande restreint (par "
 "exemple, le champ de l'interpréteur de commande dans <filename>/etc/passwd</"
 "filename> n'est pas renseigné dans <filename>/etc/shell</filename>), alors, "
-"l'option <option>--shell</option> de la variable d'environnement <envar>"
-"$SHELL</envar> ne sera pas prise en compte à moins que <command>su</command> "
+"ni l'option <option>--shell</option> ni la variable d'environnement <envar>"
+"$SHELL</envar> ne seront prises en compte à moins que <command>su</command> "
 "ne soit appelé par le superutilisateur."
 
 #: su.1.xml:152(term)
