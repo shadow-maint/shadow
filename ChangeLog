@@ -9,8 +9,8 @@
 	Remove "Sorry" from programs display
 	Imported from Debian's patch 413_no-sorry-in-passwd and
 	102_de-fix-sorry
-	* man/fr/fr.po: fix a translation error. Imported from Debian's
-	patch 201_fix_man_su_fr
+	* man/fr/fr.po: fix translation errors. Imported from Debian's
+	patch 201_fix_man_su_fr and 416_man-fr_newgrp
 	* man/it/it.po, man/Makefile.am, man/it/Makefile.am:
 	Use gettext for the Italian man pages translation. Imported from
 	Debian's patch 202_it_man_uses_gettext. Thanks to Giuseppe
