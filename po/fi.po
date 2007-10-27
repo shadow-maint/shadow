@@ -1,13 +1,13 @@
 # Finnish translation for shadow.
-# Copyright (C) 2004-2006 Free Software Foundation, Inc.
-# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2006.
+# Copyright (C) 2004-2007 Free Software Foundation, Inc.
+# Tommi Vainikainen <Tommi.Vainikainen@iki.fi>, 2004-2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.16\n"
+"Project-Id-Version: shadow 4.0.18.1\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
-"PO-Revision-Date: 2006-06-03 19:29+0300\n"
+"POT-Creation-Date: 2006-07-26 22:30+0200\n"
+"PO-Revision-Date: 2007-10-27 14:31+0300\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,7 +81,7 @@ msgid_plural ""
 "%d failures since last login.\n"
 "Last was %s on %s.\n"
 msgstr[0] ""
-"Edellisen kirjautumisen jälkeen %d epäonnistunut yritystä.\n"
+"Edellisen kirjautumisen jälkeen %d epäonnistunut yritys.\n"
 "Viimeisin oli %s päätteellä %s.\n"
 msgstr[1] ""
 "Edellisen kirjautumisen jälkeen %d epäonnistunutta yritystä.\n"
@@ -535,7 +535,7 @@ msgstr "%s: varjotiedostoa ei voi lukita\n"
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: rivi %d: tuntematon käyttäjä %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -544,13 +544,11 @@ msgid ""
 "  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
 "\n"
 msgstr ""
-"Käyttö: userdel [valitsimet] TUNNUS\n"
+"Käyttö: chsh [valitsimet] [TUNNUS]\n"
 "\n"
 "Valitsimet:\n"
-"  -f, --force\t\t\tPakota tiedostojen poisto vaikkei niitä\n"
-"\t\t\t\tomistaisikaan käyttäjä\n"
 "  -h, --help\t\t\tNäytä tämä ohje ja poistu\n"
-"  -r, --remove\t\t\tPoista kotihakemistoja ja postilaatikko\n"
+"  -s, --shell KUORI\t\tAseta uusi sisäänkirjautumiskuori käyttäjälle\n"
 "\n"
 
 msgid "Login Shell"
@@ -726,7 +724,7 @@ msgstr "%s: varjotiedostoa ei voi uudelleenkirjoittaa\n"
 msgid "%s: can't unlock file\n"
 msgstr "%s: tiedoston lukkoa ei voi avata\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -740,7 +738,7 @@ msgid ""
 "\t\t\t\t(non-unique) GID\n"
 "\n"
 msgstr ""
-"Käyttö: groupadd [valitsimet] ryhmä\n"
+"Käyttö: groupadd [valitsimet] RYHMÄ\n"
 "\n"
 "Valitsimet:\n"
 "  -f, --force\t\t\tpoistu onnistuneella arvolla vaikka annettu\n"
@@ -838,45 +836,45 @@ msgstr "%s: isäntä %s on NIS-palvelin\n"
 
 #, c-format
 msgid "Member already exists\n"
-msgstr ""
+msgstr "Jäsen on jo olemassa\n"
 
 #, c-format
 msgid "Member to remove could not be found\n"
-msgstr ""
+msgstr "Poistettavaa jäsentä ei löytynyt\n"
 
 #, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr ""
+msgstr "Käyttö: groupmems -a tunnus | -d tunnus | -D | -l [-g ryhmännimi]\n"
 
 #, c-format
 msgid "Only root can add members to different groups\n"
-msgstr ""
+msgstr "Vain pääkäyttäjä voi lisätä jäseniä eri ryhmiin\n"
 
 #, c-format
 msgid "Group access is required\n"
-msgstr ""
+msgstr "Ryhmäoikeus vaaditaan\n"
 
 #, c-format
 msgid "Not primary owner of current group\n"
-msgstr ""
+msgstr "Et ole nykyisen ryhmän ensisijainen omistaja\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "PAM authentication failed for\n"
-msgstr "%s: PAM-todennus epäonnistui\n"
+msgstr "PAM-todennus epäonnistui\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to lock group file\n"
-msgstr "%s: ryhmätiedostoa ei voi lukita\n"
+msgstr "Ryhmätiedostoa ei voi lukita\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open group file\n"
-msgstr "%s: ryhmätiedostoa ei voi avata\n"
+msgstr "Ryhmätiedostoa ei voi avata\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot close group file\n"
-msgstr "%s: ryhmätiedostoa ei voi avata\n"
+msgstr "Ryhmätiedostoa ei voi avata\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -887,16 +885,13 @@ msgid ""
 "  -o, --non-unique\t\tallow using duplicate (non-unique) GID by GROUP\n"
 "\n"
 msgstr ""
-"Käyttö: groupadd [valitsimet] ryhmä\n"
+"Käyttö: groupmod [valitsimet] RYHMÄ\n"
 "\n"
 "Valitsimet:\n"
-"  -f, --force\t\t\tpoistu onnistuneella arvolla vaikka annettu\n"
-"\t\t\t\tryhmä olisikin jo olemassa\n"
-"  -g, --gid RYHMÄID\t\tkäytä RYHMÄID:tä uudelle ryhmälle\n"
+"  -g, --gid RYHMÄID\t\tkäytä RYHMÄID:tä tälle ryhmälle\n"
 "  -h, --help\t\t\tnäytä tämä ohjeviesti ja poistu\n"
-"  -K, --key AVAIN=ARVO\t\tohita /etc/login.defs:n oletusarvot\n"
-"  -o, --non-unique\t\tsalli ryhmän luominen (ei-uniikilla)\n"
-"\t\t\t\tkopio-RYHMÄID:llä\n"
+"  -n, --new-name UUSI_RYHMÄ\taseta UUSI_RYHMÄ nimeksi RYHMÄlle\n"
+"  -o, --non-unique\t\tsalli saman RYHMÄID:n käyttäminen RYHMÄlle\n"
 "\n"
 
 #, c-format
@@ -1259,7 +1254,7 @@ msgstr "%s: rivi %d: tietuetta ei voi päivittää\n"
 msgid "%s: error updating files\n"
 msgstr "%s: virhe päivitettäessä tiedostoja\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1283,7 +1278,7 @@ msgid ""
 "\t\t\t\tchange to MAX_DAYS\n"
 "\n"
 msgstr ""
-"Käyttö: passwd [valitsimet] [tunnus]\n"
+"Käyttö: passwd [valitsimet] [TUNNUS]\n"
 "\n"
 "Valitsimet:\n"
 "  -a, --all\t\t\tIlmoita jokaisen tunnuksen salasanatilanne\n"
@@ -1471,7 +1466,7 @@ msgstr "Pahoittelen."
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1485,7 +1480,7 @@ msgid ""
 "  -s, --shell SHELL\t\tuse SHELL instead of the default in passwd\n"
 "\n"
 msgstr ""
-"Käyttö: su [valitsimet] [tunnus]\n"
+"Käyttö: su [valitsimet] [TUNNUS]\n"
 "\n"
 "Valitsimet:\n"
 "  -c, --command KOMENTO\tVälitä KOMENTO käynnistyvälle kuorelle\n"
@@ -1840,7 +1835,7 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: virhe poistettaessa hakemistoa %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1870,6 +1865,7 @@ msgstr ""
 "\n"
 "Valitsimet:\n"
 "  -a, --append RYHMÄ\t\tLisää käyttäjä ryhmään RYHMÄ\n"
+"                                (käytetään vain valitsimen -G kanssa)\n"
 "  -c, --comment KOMMENTTI\tAseta GECOS-kenttään uusi arvo\n"
 "  -d, --home KOTIHAK\t\tKäyttäjätunnuksen uusi kotihakemisto\n"
 "  -e, --expiredate VANH_PVM\tAseta tilin vanhenemispäiväykseksi VANH_PVM\n"

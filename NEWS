@@ -12,7 +12,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					13-10-2007
 - su: If compiled without PAM support, enforce the limits from /etc/limits
   when one of the -, -l, or --login options is set, even if called by root.
 *** documentation:
-- updated translations: ja, nl, tl.
+- updated translations: fi, ja, nl, tl.
 - groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar
   mistakes and other correctstions (by Schulenberg <bensberg@justemail.net>),
 
