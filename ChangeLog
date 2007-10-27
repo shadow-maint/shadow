@@ -1,3 +1,7 @@
+2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* README, po/Makevars: Update contact information.
+
 2007-10-27  Christian Perrier  <bubulle@debian.org
 
 	* src/newgrp.c,	src/passwd.c, src/su.c:
@@ -17,7 +21,7 @@
 	* src/usermod.c: Clarify the online help of usermod for "-a"
 	Imported from Debian's patch 402-clarify_usermod_usage
 
-2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
+2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, po/zh_CN.po: Updated Chinese translation. Imported from
 	Debian's patch 105_zh_CN. Thanks to Ming Hua for the update.
