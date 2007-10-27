@@ -169,7 +169,7 @@ static int check_logins (const char *name, const char *maxlogins)
  * by Cristian Gafton - gafton@sorosis.ro
  *
  * We are passed a string of the form ('BASH' constants for ulimit)
- *     [Aa][Cc][Dd][Ff][Mm][Nn][Rr][Ss][Tt][Uu][Ll][Pp]
+ *     [Aa][Cc][Dd][Ff][Mm][Nn][Rr][Ss][Tt][Uu][Ll][Pp][Ii][Oo]
  *     (eg. 'C2F256D2048N5' or 'C2 F256 D2048 N5')
  * where:
  * [Aa]: a = RLIMIT_AS		max address space (KB)
@@ -185,6 +185,8 @@ static int check_logins (const char *name, const char *maxlogins)
  * [Kk]: k = file creation masK (umask)
  * [Ll]: l = max number of logins for this user
  * [Pp]: p = process priority -20..20 (negative = high, positive = low)
+ * [Ii]: i = RLIMIT_NICE    max nice value (0..39 translates to 20..-19)
+ * [Oo]: o = RLIMIT_RTPRIO  max real time priority (linux/sched.h 0..MAX_RT_PRIO)
  *
  * Return value:
  *		0 = okay, of course
@@ -273,6 +275,20 @@ static int do_user_limits (const char *buf, const char *name)
 			retval |= setrlimit_value (RLIMIT_STACK, pp, 1024);
 			break;
 #endif
+#ifdef RLIMIT_NICE
+		case 'i':
+		case 'I':
+			/* RLIMIT_NICE - max scheduling priority (0..39) */
+			retval |= setrlimit_value (RLIMIT_NICE, pp, 1);
+			break;
+#endif
+#ifdef RLIMIT_RTPRIO
+		case 'o':
+		case 'O':
+			/* RLIMIT_RTPRIO - max real time priority (0..MAX_RT_PRIO) */
+			retval |= setrlimit_value (RLIMIT_RTPRIO, pp, 1);
+			break;
+#endif
 		case 'k':
 		case 'K':
 			retval |= set_umask (pp);
@@ -328,7 +344,7 @@ static int setup_user_limits (const char *uname)
 		 * Imposing a limit should be done with care, so a wrong
 		 * entry means no care anyway :-). A '-' as a limits
 		 * strings means no limits --cristiang */
-		if (sscanf (buf, "%s%[ACDFMNRSTULPacdfmnrstulp0-9 \t-]",
+		if (sscanf (buf, "%s%[ACDFMNRSTULPIOacdfmnrstulpio0-9 \t-]",
 			    name, tempbuf) == 2) {
 			if (strcmp (name, uname) == 0) {
 				strcpy (limits, tempbuf);

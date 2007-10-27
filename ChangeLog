@@ -1,5 +1,13 @@
 2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c, man/limits.5.xml, etc/limits: Apply patch sent
+	by Justin Bronder <jsbronder@gmail.com>. See Debian bug #442334.
+	This adds support to 2 new resource limits: max nice value, and
+	max real time priority. This is only used when shadow is not
+	compiled with PAM support.
+
+2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/gpasswd.1.xml: Describe the options separately in the
 	OPTIONS section. Simplify the synopsis.
 

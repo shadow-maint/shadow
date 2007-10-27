@@ -11,6 +11,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					13-10-2007
   after close /etc/{group,passwd} files,
 - su: If compiled without PAM support, enforce the limits from /etc/limits
   when one of the -, -l, or --login options is set, even if called by root.
+- limits: Support for 2 new resource limits: max nice value, and max real
+  time priority. The resource limits are not used when compiled with PAM.
 *** documentation:
 - updated translations: fi, ja, nl, tl, zh_CN.
 - groupadd.8, groupmod.8, login.1, useradd.8, userdel.8, usermod.8: grammar

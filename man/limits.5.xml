@@ -64,6 +64,9 @@
 	  <refentrytitle>setpriority</refentrytitle><manvolnum>2</manvolnum>
 	</citerefentry>.</para>
       </listitem>
+      <listitem><para>I: max nice value (0..39 which translates to
+      20..-19)</para></listitem>
+      <listitem><para>O: max real time priority</para></listitem>
     </itemizedlist>
 
     <para>

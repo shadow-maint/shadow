@@ -18,10 +18,12 @@
 # T: max CPU time (MIN)
 # U: max number of processes
 # L: max number of logins for this user
+# I: max nice value (0..39 translates to 20..-19)
+# O: max real time priority (0..MAX_RT_PRIO)
 #
 # Examples:
 # the default entry
-#* L2 D6144 R2048 S2048 U32 N32 F16384 T5 C0
+#* L2 D6144 R2048 S2048 U32 N32 F16384 T5 C0 I20 O0
 # another way of suspending a user login
 #guest   L0
 # this account has no limits
