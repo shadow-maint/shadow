@@ -1,3 +1,8 @@
+2007-10-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, po/zh_CN.po: Updated Chinese translation. Imported from
+	Debian's patch 105_zh_CN. Thanks to Ming Hua for the update.
+
 2007-10-13  Tommi Vainikainen  <thv+debian@iki.fi>
 
 	* NEWS, po/fi.po: Updated Finish translation (400t).

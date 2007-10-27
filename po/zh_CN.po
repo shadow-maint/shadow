@@ -1,7 +1,7 @@
 # Simplified Chinese translation to shadow
 # This file is distributed under the same license as the shadow package.
 # Copyright:
-# Ming Hua <minghua@rice.edu>, 2005.
+# Ming Hua <minghua@ubuntu.com>, 2005,2006,2007.
 # Carlos Z.F. Liu <carlosliu@users.sourceforge.net>, 2004,2006.
 #
 msgid ""
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
 "POT-Creation-Date: 2006-11-03 18:51+0100\n"
-"PO-Revision-Date: 2006-03-11 00:35+1300\n"
-"Last-Translator: Carlos Z.F. Liu <carlosliu@users.sourceforge.net>\n"
+"PO-Revision-Date: 2007-07-01 06:36-0500\n"
+"Last-Translator: Ming Hua <minghua@ubuntu.com>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,9 +139,9 @@ msgstr "passwd：已成功更新密码\n"
 msgid "Incorrect password for %s.\n"
 msgstr "%s 的密码不正确。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to cd to '%s'\n"
-msgstr "无法进入“%s”目录\n"
+msgstr "无法 cd 进入“%s”\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "没有目录，将以 HOME=/ 登录"
@@ -150,11 +150,11 @@ msgstr "没有目录，将以 HOME=/ 登录"
 msgid "Cannot execute %s"
 msgstr "无法执行 %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root directory '%s'\n"
 msgstr "无效的根目录“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Can't change root directory to '%s'\n"
 msgstr "无法将根目录改变为“%s”\n"
 
@@ -373,11 +373,11 @@ msgstr "其它"
 msgid "%s: Cannot determine your user name.\n"
 msgstr "%s：无法确定您的用户名。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr "%s：不能在 NIS 客户端上修改用户“%s”。\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
 msgstr "%s：“%s”是此客户端的 NIS 管理员。\n"
 
@@ -385,23 +385,23 @@ msgstr "%s：“%s”是此客户端的 NIS 管理员。\n"
 msgid "Changing the user information for %s\n"
 msgstr "正在改变 %s 的用户信息\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s：无效的名称：“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid room number: '%s'\n"
 msgstr "%s：无效的房间号码：“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid work phone: '%s'\n"
 msgstr "%s：无效的工作电话：“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s：无效的家庭电话：“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s：“%s”包含非法字符\n"
 
@@ -540,6 +540,11 @@ msgid ""
 "  -s, --shell SHELL\t\t\tnew login shell for the user account\n"
 "\n"
 msgstr ""
+"用法：chsh [选项] [LOGIN]\n"
+"\n"
+"选项：\n"
+"  -h, --help\t\t\t\t显示此帮助信息并退出\n"
+"  -s, --shell SHELL\t\t\t该用户帐号的新登录 shell\n"
 
 msgid "Login Shell"
 msgstr "登录 Shell"
@@ -779,7 +784,7 @@ msgstr "%s：无法锁定影子组文件\n"
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s：无法打开影子组文件\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s：无效的数字参数“%s”\n"
 
@@ -821,19 +826,19 @@ msgstr "%s：%s 是 NIS 管理员\n"
 
 #, c-format
 msgid "Member already exists\n"
-msgstr ""
+msgstr "成员已经存在\n"
 
 #, c-format
 msgid "Member to remove could not be found\n"
-msgstr ""
+msgstr "没有找到要删除的成员\n"
 
 #, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr ""
+msgstr "用法：groupmems -a 用户名 | -d 用户名 | -D | -l [-g 组名]\n"
 
 #, c-format
 msgid "Only root can add members to different groups\n"
-msgstr ""
+msgstr "只有 root 能向不同的组里添加成员\n"
 
 #, c-format
 msgid "Group access is required\n"
@@ -843,21 +848,21 @@ msgstr ""
 msgid "Not primary owner of current group\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "PAM authentication failed for\n"
-msgstr "%s：PAM 验证失败\n"
+msgstr "PAM 验证失败于\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to lock group file\n"
-msgstr "%s：无法锁定组文件\n"
+msgstr "无法锁定组文件\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to open group file\n"
-msgstr "%s：无法打开组文件\n"
+msgstr "无法打开组文件\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot close group file\n"
-msgstr "%s：无法打开组文件\n"
+msgstr "无法关闭组文件\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -920,15 +925,15 @@ msgstr "%s：无法打开文件 %s\n"
 msgid "invalid group file entry\n"
 msgstr "无效的组文件条目\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete line '%s'? "
-msgstr "删除“%s”行？"
+msgstr "删除“%s”一行？"
 
 #, c-format
 msgid "duplicate group entry\n"
 msgstr "复制组条目\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid group name '%s'\n"
 msgstr "无效的组名“%s”\n"
 
@@ -936,13 +941,13 @@ msgstr "无效的组名“%s”\n"
 msgid "group %s: no user %s\n"
 msgstr "%s 组：无用户 %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "delete member '%s'? "
-msgstr "删除用户成员“%s”吗？"
+msgstr "删除成员“%s”吗？"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "没有找到匹配的组文件条目\n"
+msgstr "在 %s 中没有找到匹配的组文件条目\n"
 
 #, fuzzy, c-format
 msgid "add group '%s' in %s ?"
@@ -1378,13 +1383,13 @@ msgstr "用户 %s：目录 %s 不存在\n"
 msgid "user %s: program %s does not exist\n"
 msgstr "用户 %s：程序 %s 不存在\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "无匹配的密码文件项\n"
+msgstr "在 %s 中没有匹配的密码文件项\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "add user '%s' in %s? "
-msgstr "%s 影子组：无用户 %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
@@ -1545,7 +1550,7 @@ msgstr "%s：无法打开新的默认文件\n"
 msgid "%s: rename: %s"
 msgstr "%s：改名：%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: group '%s' is a NIS group.\n"
 msgstr "%s：“%s”组是一个 NIS 组。\n"
 
@@ -1616,17 +1621,17 @@ msgstr "%s：无法获取独有的 UID\n"
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s：无效的主目录“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid comment '%s'\n"
-msgstr "%s：无效注释“%s”\n"
+msgstr "%s：无效的注释“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr "%s：无效的主目录“%s”\n"
+msgstr "%s：无效的家目录“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid date '%s'\n"
-msgstr "%s：无效日期“%s”\n"
+msgstr "%s：无效的日期“%s”\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1636,17 +1641,17 @@ msgstr "%s：-e 参数需要有影子密码\n"
 msgid "%s: shadow passwords required for -f\n"
 msgstr "%s：-f 参数需要有影子密码\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid field '%s'\n"
-msgstr "%s：无效字段 “%s”\n"
+msgstr "%s：无效的字段“%s”\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s：无效 shell“%s”\n"
+msgstr "%s：无效的 shell“%s”\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
-msgstr "%s：无效用户名“%s”\n"
+msgstr "%s：无效的用户名“%s”\n"
 
 #, c-format
 msgid "%s: cannot rewrite password file\n"
@@ -1701,15 +1706,15 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s：无法创建目录 %s\n"
 
 msgid "Creating mailbox file"
-msgstr ""
+msgstr "正在创建信箱文件"
 
 #, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
-msgstr ""
+msgstr "没有找到“mail”组。以 0600 权限模式创建用户的信箱文件。\n"
 
 msgid "Setting mailbox file permissions"
-msgstr ""
+msgstr "正在设置信箱文件访问权限"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1947,3 +1952,59 @@ msgstr "无法备份"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：无法恢复 %s：%s (您的修改在 %s 中)\n"
+
+#~ msgid "Usage: %s [-s shell] [name]\n"
+#~ msgstr "用法：%s [-s shell] [名称]\n"
+
+#~ msgid "%s: invalid group %s\n"
+#~ msgstr "%s：无效组名 %s\n"
+
+#~ msgid "Usage: groupmod [-g gid [-o]] [-n name] group\n"
+#~ msgstr "用法：groupmod [-g gid [-o]] [-n 名称] 组\n"
+
+#~ msgid ""
+#~ "No group named \"mail\" exists, creating mail spool with mode 0600.\n"
+#~ msgstr "不存在叫做“mail”的组，将以 0600 的文件权限创建邮件 spool。\n"
+
+#~ msgid "Can't create mail spool for user %s.\n"
+#~ msgstr "不能为用户 %s 创建邮件 spool。\n"
+
+#~ msgid "Usage: %s [-r] name\n"
+#~ msgstr "用法：%s [-r] 名称\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Login incorrect\n"
+#~ msgstr ""
+#~ "\n"
+#~ "登录错误\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage:\n"
+#~ "`vipw' edits /etc/passwd        `vipw -s' edits /etc/shadow\n"
+#~ "`vigr' edits /etc/group         `vigr -s' edits /etc/gshadow\n"
+#~ "`{vipw|vigr} -q' quiet mode\n"
+#~ msgstr ""
+#~ "用法：\n"
+#~ "“vipw” 编辑 /etc/passwd      “vipw -s” 编辑 /etc/shadow\n"
+#~ "“vigr” 编辑 /etc/group       “vigr -s” 编辑 /etc/gshadow\n"
+
+#~ msgid "%s: PAM chauthtok failed\n"
+#~ msgstr "%s：PAM chauthtok 失败\n"
+
+#~ msgid "%s: Cannot execute %s"
+#~ msgstr "%s：无法执行 %s"
+
+#, fuzzy
+#~ msgid "Usage: %s\t[-u uid [-o]] [-g group] [[-G group,...] [-a]] \n"
+#~ msgstr "用法：%s\t[-u uid [-o]] [-g 组] [-G 组,...] \n"
+
+#~ msgid "\t\t[-d home [-m]] [-s shell] [-c comment] [-l new_name]\n"
+#~ msgstr "\t\t[-d 主目录 [-m]] [-s shell] [-c 注释] [-l 新名称]\n"
+
+#~ msgid "[-f inactive] [-e expire] "
+#~ msgstr "[-f 失效日] [-e 过期日] "
+
+#~ msgid "[-p passwd] [-L|-U] name\n"
+#~ msgstr "[-p 密码] [-L|-U] 名称\n"
