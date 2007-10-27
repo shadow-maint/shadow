@@ -1,5 +1,10 @@
 2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gpasswd.1.xml: Describe the options separately in the
+	OPTIONS section. Simplify the synopsis.
+
+2007-10-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* README, po/Makevars: Update contact information.
 
 2007-10-27  Christian Perrier  <bubulle@debian.org

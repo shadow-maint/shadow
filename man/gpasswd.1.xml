@@ -14,33 +14,12 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>gpasswd</command>
+      <arg choice='opt'>
+	<replaceable>option</replaceable>
+      </arg>
       <arg choice='plain'>
 	<replaceable>group</replaceable>
       </arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>gpasswd</command>
-      <arg choice='plain'>-a <replaceable>user</replaceable></arg>
-      <arg choice='plain'><replaceable>group</replaceable></arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>gpasswd</command>
-      <arg choice='plain'>-d <replaceable>user</replaceable></arg>
-      <arg choice='plain'><replaceable>group</replaceable></arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>gpasswd</command>
-      <arg choice='plain'>-R <replaceable>group</replaceable></arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>gpasswd</command>
-      <arg choice='plain'>-r <replaceable>group</replaceable></arg>
-    </cmdsynopsis>
-    <cmdsynopsis>
-      <command>gpasswd</command>
-      <arg choice='opt' rep='repeat'>-A <replaceable>user,</replaceable></arg>
-      <arg choice='opt' rep='repeat'>-M <replaceable>user,</replaceable></arg>
-      <arg choice='plain'><replaceable>group</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
 
@@ -51,9 +30,17 @@
       <filename>/etc/group</filename> file (and
       <filename>/etc/gshadow</filename> file if compiled with SHADOWGRP
       defined). Every group can have administrators, members and a password. 
-      System administrator can use <option>-A</option> option to define
-      group administrator(s) and <option>-M</option> option to define
+      System administrator can use the <option>-A</option> option to define
+      group administrator(s) and the <option>-M</option> option to define
       members and has all rights of group administrators and members.
+    </para>
+    <para>
+      <command>gpasswd</command> called by a group administrator with a group
+      name only prompts for the group password. If a password is set the
+      members can still <citerefentry>
+      <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry> without a password, and non-members must supply the
+      password.
     </para>
 
     <refsect2 id='notes_about_group_passwords'>
@@ -70,23 +57,90 @@
   <refsect1 id='options'>
     <title>OPTIONS</title>
     <para>
-      Group administrator can add and delete users using <option>-a</option>
-      and <option>-d</option> options respectively. Administrators can use
-      <option>-r</option> option to remove group password. When no password
-      is set only group members can use <command>newgrp</command> to join
-      the group. Option <option>-R</option> disables access via a password
-      to the group through <command>newgrp</command> command (however
-      members will still be able to switch to this group).
+      Except for the <option>-A</option> and <option>-M</option> options,
+      the options cannot be combined.
+      The options which apply to the <command>gpasswd</command> command are:
     </para>
-
-    <para>
-      <command>gpasswd</command> called by a group administrator with group
-      name only prompts for the group password. If password is set the
-      members can still <citerefentry>
-      <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry> without a password, non-members must supply the
-      password.
-    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-a</option> <replaceable>user</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Add the <replaceable>user</replaceable> to the named
+	    <replaceable>group</replaceable>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-d</option> <replaceable>user</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    Remove the <replaceable>user</replaceable> from the named
+	    <replaceable>group</replaceable>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-r</option>
+	</term>
+	<listitem>
+	  <para>
+	    Remove the password from the named <replaceable>group</replaceable>.
+	    Only group members will be allowed to use
+	    <command>newgrp</command> to join the named
+	    <replaceable>group</replaceable>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-R</option>
+	</term>
+	<listitem>
+	  <para>
+	    Restrict the access to the named <replaceable>group</replaceable>.
+	    Only group members will be allowed to use
+	    <command>newgrp</command> to join the named
+	    <replaceable>group</replaceable>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-A</option> <replaceable>user</replaceable>,...
+	</term>
+	<listitem>
+	  <para>
+	    Set the list of administrative users.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term>
+	  <option>-M</option> <replaceable>user</replaceable>,...
+	</term>
+	<listitem>
+	  <para>
+	    Set the list of group members.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>
