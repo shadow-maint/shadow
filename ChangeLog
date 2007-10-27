@@ -3,7 +3,8 @@
 	* src/newgrp.c,	src/passwd.c, src/su.c:
 	No longer 'apologize' to users when they use incorrect passwords
 	Remove "Sorry" from programs display
-	Imported from Debian's patch 413_no-sorry-in-passwd
+	Imported from Debian's patch 413_no-sorry-in-passwd and
+	102_de-fix-sorry
 	* man/fr/fr.po: fix a translation error. Imported from Debian's
 	patch 201_fix_man_su_fr
 
