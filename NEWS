@@ -6,6 +6,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - useradd: Allow non numerical group identifier to be specified with
   useradd's -g option. Applied Debian patch 397_non_numerical_identifier.
   Thanks also to Greg Schafer <gschafer@zip.com.au>.
+- chgpasswd, chpasswd: Fix chpasswd and chgpasswd stack overflow. Based on
+  Fedora's shadow-4.0.18.1-overflow.patch.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

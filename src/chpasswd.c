@@ -239,9 +239,13 @@ int main (int argc, char **argv)
 		newpwd = cp;
 		if (!eflg) {
 			if (md5flg) {
-				char salt[12] = "$1$";
+				char tmp[12];
+				char salt[15] = "";
 
-				strcat (salt, crypt_make_salt ());
+				strcat (tmp, crypt_make_salt ());
+				if (!strncmp (tmp, "$1$", 3))
+					strcat (salt, "$1$");
+				strcat (salt, tmp);
 				cp = pw_encrypt (newpwd, salt);
 			} else
 				cp = pw_encrypt (newpwd, crypt_make_salt ());
