@@ -1,3 +1,10 @@
+2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/useradd.c: allow non numerical group identifier to be
+	specified with useradd's -g option. Applied Debian patch
+	397_non_numerical_identifier. Thanks also to Greg Schafer
+	<gschafer@zip.com.au>.
+
 2007-10-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* configure.in: Prepare the next release: 4.0.18.2. The gettext

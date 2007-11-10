@@ -204,12 +204,8 @@ static struct group *getgr_nam_gid (const char *grname)
 	char *errptr;
 
 	gid = strtol (grname, &errptr, 10);
-	if (*errptr || errno == ERANGE || gid < 0) {
-		fprintf (stderr,
-			 _("%s: invalid numeric argument '%s'\n"), Prog,
-			 grname);
-		exit (E_BAD_ARG);
-	}
+	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && gid >= 0)
+		return getgrgid (gid);
 	return getgrnam (grname);
 }
 
