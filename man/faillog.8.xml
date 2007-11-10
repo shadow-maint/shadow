@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='faillog.8'>
-  <!--  $Id: faillog.8.xml,v 1.21 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!--  $Id$ -->
   <refmeta>
     <refentrytitle>faillog</refentrytitle>
     <manvolnum>8</manvolnum>

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: newgrp.c,v 1.44 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <grp.h>

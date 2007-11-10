@@ -28,7 +28,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwconv.c,v 1.22 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>

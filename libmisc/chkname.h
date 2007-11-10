@@ -1,4 +1,4 @@
-/* $Id: chkname.h,v 1.3 2005/03/31 05:14:50 kloczek Exp $ */
+/* $Id$ */
 #ifndef _CHKNAME_H_
 #define _CHKNAME_H_
 

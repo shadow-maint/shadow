@@ -7,7 +7,7 @@
 
 #include <config.h>
 
-#ident "$Id: basename.c,v 1.4 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 #include "defines.h"
 #include "prototypes.h"

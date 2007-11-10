@@ -23,7 +23,7 @@
 
 #include <config.h>
 
-#ident "$Id: nologin.c,v 1.1 2005/11/25 03:27:06 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <syslog.h>

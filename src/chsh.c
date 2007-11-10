@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chsh.c,v 1.42 2006/07/13 21:26:35 kloczek Exp $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <getopt.h>

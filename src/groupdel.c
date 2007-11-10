@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupdel.c,v 1.32 2006/08/15 17:25:58 kloczek Exp $"
+#ident "$Id$"
 
 #include <ctype.h>
 #include <fcntl.h>

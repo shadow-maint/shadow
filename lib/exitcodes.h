@@ -1,4 +1,4 @@
-/* $Id: exitcodes.h,v 1.8 2006/01/17 22:06:03 kloczek Exp $ */
+/* $Id$ */
 
 /*
  * Exit codes used by shadow programs

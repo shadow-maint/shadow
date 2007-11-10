@@ -35,7 +35,7 @@
 
 #include <config.h>
 
-#ident "$Id: newusers.c,v 1.33 2006/03/07 15:47:32 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include <sys/stat.h>

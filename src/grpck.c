@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpck.c,v 1.32 2006/05/07 17:44:39 kloczek Exp $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <grp.h>

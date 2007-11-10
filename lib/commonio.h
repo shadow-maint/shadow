@@ -1,4 +1,4 @@
-/* $Id: commonio.h,v 1.9 2005/03/31 05:14:49 kloczek Exp $ */
+/* $Id$ */
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>

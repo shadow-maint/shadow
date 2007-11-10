@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='logoutd.8'>
-  <!-- $Id: logoutd.8.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>logoutd</refentrytitle>
     <manvolnum>8</manvolnum>

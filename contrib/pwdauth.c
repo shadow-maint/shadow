@@ -30,7 +30,7 @@
  * If you improve it, please send me your changes.
  */
 
-static char rcsid[] = "$Id: pwdauth.c,v 1.2 1997/12/07 23:26:45 marekm Exp $";
+static char rcsid[] = "$Id$";
 
 /*
  * Define USE_SYSLOG to use syslog() to log successful and failed

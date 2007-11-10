@@ -1,6 +1,6 @@
 #include <config.h>
 
-#ident "$Id: pwdcheck.c,v 1.9 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id$"
 
 #include <pwd.h>
 #include <stdio.h>

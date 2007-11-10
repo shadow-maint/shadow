@@ -2,7 +2,7 @@
 
 #ifdef USE_PAM
 
-#ident "$Id: pam_pass.c,v 1.12 2005/10/19 15:21:07 kloczek Exp $"
+#ident "$Id$"
 
 
 /*

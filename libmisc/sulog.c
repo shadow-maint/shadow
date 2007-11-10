@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sulog.c,v 1.10 2005/11/02 16:21:29 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include <sys/stat.h>

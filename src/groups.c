@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: groups.c,v 1.15 2006/02/07 22:41:56 kloczek Exp $"
+#ident "$Id$"
 
 #include <grp.h>
 #include <pwd.h>

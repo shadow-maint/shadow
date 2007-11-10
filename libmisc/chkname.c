@@ -5,7 +5,7 @@
 
 #include <config.h>
 
-#ident "$Id: chkname.c,v 1.11 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 #include <ctype.h>
 #include "defines.h"

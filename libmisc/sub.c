@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sub.c,v 1.10 2006/05/07 16:12:16 kloczek Exp $"
+#ident "$Id$"
 
 #include <pwd.h>
 #include <stdio.h>

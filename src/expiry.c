@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: expiry.c,v 1.19 2006/02/08 10:53:16 kloczek Exp $"
+#ident "$Id$"
 
 #include <pwd.h>
 #include <signal.h>

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: lastlog.c,v 1.26 2006/06/20 20:00:04 kloczek Exp $"
+#ident "$Id$"
 
 #include <getopt.h>
 #include <lastlog.h>

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sulogin.c,v 1.26 2006/05/12 22:32:14 kloczek Exp $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <pwd.h>

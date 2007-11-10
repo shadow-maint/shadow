@@ -1,4 +1,4 @@
-$Id: console.c.spec.txt,v 1.1 1997/06/16 00:02:41 marekm Exp $
+$Id$
 
 Specification for console.c source file --
 

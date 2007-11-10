@@ -40,7 +40,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-#ident "$Id: utmp.c,v 1.18 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #if HAVE_UTMPX_H
 struct utmpx utxent;

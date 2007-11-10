@@ -9,7 +9,7 @@
 #include <grp.h>
 #include <errno.h>
 
-#ident "$Id: addgrps.c,v 1.9 2006/01/23 09:46:30 kloczek Exp $"
+#ident "$Id$"
 
 #define SEP ",:"
 /*

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: logoutd.c,v 1.31 2006/07/10 04:11:32 kloczek Exp $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <signal.h>

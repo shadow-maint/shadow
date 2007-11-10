@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: encrypt.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include <unistd.h>
 #include "prototypes.h"

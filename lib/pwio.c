@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwio.c,v 1.16 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

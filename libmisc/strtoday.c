@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: strtoday.c,v 1.11 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #include "defines.h"
 #ifndef USE_GETDATE

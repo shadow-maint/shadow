@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwunconv.c,v 1.21 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id$"
 
 #include <fcntl.h>
 #include <pwd.h>

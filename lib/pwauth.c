@@ -30,7 +30,7 @@
 #include <config.h>
 
 #ifndef USE_PAM
-#ident "$Id: pwauth.c,v 1.23 2006/06/24 13:17:18 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>

@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	$Id: gshadow_.h,v 1.3 2005/03/31 05:14:49 kloczek Exp $
+ *	$Id$
  */
 
 #ifndef	_H_GSHADOW

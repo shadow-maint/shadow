@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: loginprompt.c,v 1.9 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <signal.h>

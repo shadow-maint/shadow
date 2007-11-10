@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: groupio.c,v 1.13 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

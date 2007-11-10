@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='chsh.1'>
-  <!-- $Id: chsh.1.xml,v 1.24 2006/11/12 19:20:34 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>chsh</refentrytitle>
     <manvolnum>1</manvolnum>

@@ -7,7 +7,7 @@
 
 #include <config.h>
 
-#ident "$Id: salt.c,v 1.10 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/time.h>
 #include <stdlib.h>

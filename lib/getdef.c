@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: getdef.c,v 1.40 2006/06/24 13:17:18 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

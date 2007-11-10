@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: sgetpwent.c,v 1.8 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include "defines.h"

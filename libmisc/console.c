@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include "getdef.h"
 
-#ident "$Id: console.c,v 1.7 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 
 /*

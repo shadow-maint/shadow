@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: chage.c,v 1.73 2006/07/11 13:15:41 kloczek Exp $"
+#ident "$Id$"
 
 #include <ctype.h>
 #include <fcntl.h>

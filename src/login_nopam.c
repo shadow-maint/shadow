@@ -22,7 +22,7 @@
 #endif
 
 #ifndef USE_PAM
-#ident "$Id: login_nopam.c,v 1.8 2005/09/07 15:00:45 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
     /*

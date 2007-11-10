@@ -30,7 +30,7 @@
 /*
  * faillog.h - login failure logging file format
  *
- *	$Id: faillog.h,v 1.4 2005/03/31 05:14:49 kloczek Exp $
+ *	$Id$
  *
  * The login failure file is maintained by login(1) and faillog(8)
  * Each record in the file represents a separate UID and the file

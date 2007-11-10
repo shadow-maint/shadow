@@ -36,7 +36,7 @@
 
 #ifndef USE_PAM
 
-#ident "$Id: limits.c,v 1.21 2006/07/10 04:11:31 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include <sys/stat.h>

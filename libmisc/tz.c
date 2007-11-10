@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: tz.c,v 1.7 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <string.h>

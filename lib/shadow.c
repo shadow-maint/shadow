@@ -32,7 +32,7 @@
 /* Newer versions of Linux libc already have shadow support.  */
 #ifndef HAVE_GETSPNAM
 
-#ident "$Id: shadow.c,v 1.12 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include "prototypes.h"

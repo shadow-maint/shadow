@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: pwd_init.c,v 1.3 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #include "defines.h"
 #include <signal.h>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='expiry.1'>
-  <!-- $Id: expiry.1.xml,v 1.16 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>expiry</refentrytitle>
     <manvolnum>1</manvolnum>

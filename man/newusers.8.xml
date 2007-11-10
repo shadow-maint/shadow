@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='newusers.8'>
-  <!-- $Id: newusers.8.xml,v 1.20 2006/11/12 19:08:12 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>newusers</refentrytitle>
     <manvolnum>8</manvolnum>

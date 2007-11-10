@@ -30,7 +30,7 @@
 /*
  * port.h - structure of /etc/porttime
  *
- *	$Id: port.h,v 1.3 2005/03/31 05:14:49 kloczek Exp $
+ *	$Id$
  *
  *	Each entry in /etc/porttime consists of a TTY device
  *	name or "*" to indicate all TTY devices, followed by

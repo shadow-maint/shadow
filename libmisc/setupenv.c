@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ident "$Id: setupenv.c,v 1.24 2006/05/12 23:11:13 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/types.h>
 #include <sys/stat.h>

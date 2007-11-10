@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: faillog.c,v 1.28 2006/06/25 13:08:25 kloczek Exp $"
+#ident "$Id$"
 
 #include <getopt.h>
 #include <pwd.h>

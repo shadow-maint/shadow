@@ -1,5 +1,5 @@
 # shadow-utils.spec generated automatically from shadow-utils.spec.in
-# $Id: shadow.spec.in,v 1.1 2002/02/17 20:58:34 kloczek Exp $
+# $Id$
 
 Summary:	Shadow password file utilities for Linux
 Name:		shadow-utils

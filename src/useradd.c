@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: useradd.c,v 1.103 2006/11/04 00:55:00 kloczek Exp $"
+#ident "$Id$"
 
 #include <ctype.h>
 #include <errno.h>

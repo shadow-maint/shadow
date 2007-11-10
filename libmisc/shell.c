@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: shell.c,v 1.13 2006/01/18 19:38:27 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <errno.h>

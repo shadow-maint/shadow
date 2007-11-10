@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='groupmod.8'>
-  <!-- $Id: groupmod.8.xml,v 1.20 2007/02/01 20:49:25 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>groupmod</refentrytitle>
     <manvolnum>8</manvolnum>

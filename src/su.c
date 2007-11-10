@@ -47,7 +47,7 @@
 
 #include <config.h>
 
-#ident "$Id: su.c,v 1.74 2006/08/01 10:30:02 kloczek Exp $"
+#ident "$Id$"
 
 #include <getopt.h>
 #include <grp.h>

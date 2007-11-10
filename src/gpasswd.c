@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: gpasswd.c,v 1.36 2006/02/08 10:58:46 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='lastlog.8'>
-  <!-- $Id: lastlog.8.xml,v 1.26 2006/06/19 20:19:24 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>lastlog</refentrytitle>
     <manvolnum>8</manvolnum>

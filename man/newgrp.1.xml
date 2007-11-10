@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <refentry id='newgrp.1'>
-  <!-- $Id: newgrp.1.xml,v 1.16 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>newgrp</refentrytitle>
     <manvolnum>1</manvolnum>

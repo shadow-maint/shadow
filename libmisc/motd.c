@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: motd.c,v 1.6 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include "prototypes.h"

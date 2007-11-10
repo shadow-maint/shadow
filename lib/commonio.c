@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: commonio.c,v 1.32 2006/05/07 18:32:51 kloczek Exp $"
+#ident "$Id$"
 
 #include "defines.h"
 #include <sys/stat.h>

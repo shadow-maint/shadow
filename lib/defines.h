@@ -1,4 +1,4 @@
-/* $Id: defines.h,v 1.29 2005/09/05 16:22:03 kloczek Exp $ */
+/* $Id$ */
 /* some useful defines */
 
 #ifndef _DEFINES_H_

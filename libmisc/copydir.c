@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: copydir.c,v 1.15 2006/07/10 04:35:56 kloczek Exp $"
+#ident "$Id$"
 
 #include <sys/stat.h>
 #include <sys/types.h>

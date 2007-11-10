@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='gpasswd.1'>
-  <!-- $Id: gpasswd.1.xml,v 1.21 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>gpasswd</refentrytitle>
     <manvolnum>1</manvolnum>

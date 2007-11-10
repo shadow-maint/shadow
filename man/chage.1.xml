@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='chage.1'>
-  <!--  $Id: chage.1.xml,v 1.35 2006/07/11 13:34:47 kloczek Exp $  -->
+  <!--  $Id$  -->
   <refmeta>
     <refentrytitle>chage</refentrytitle>
     <manvolnum>1</manvolnum>

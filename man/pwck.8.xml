@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='pwck.8'>
-  <!-- $Id: pwck.8.xml,v 1.20 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>pwck</refentrytitle>
     <manvolnum>8</manvolnum>

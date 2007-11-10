@@ -1,4 +1,4 @@
-/* $Id: failure.h,v 1.4 2005/06/10 18:35:17 kloczek Exp $ */
+/* $Id$ */
 #ifndef _FAILURE_H_
 #define _FAILURE_H_
 

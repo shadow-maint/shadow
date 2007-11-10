@@ -31,7 +31,7 @@
 
 #ifndef HAVE_LCKPWDF
 
-#ident "$Id: lockpw.c,v 1.7 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include "defines.h"
 
-#ident "$Id: fputsx.c,v 1.7 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 
 char *fgetsx (char *buf, int cnt, FILE * f)

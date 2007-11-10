@@ -6,6 +6,18 @@
 	man/es/, man/ko/, man/it/, etc/, etc/pam.d/, po/: Restore the
 	ignore patterns from the previous repository.
 
+	* libmisc/*.c, libmisc/*.h, libmisc/getdate.y, shadow.spec.in,
+	src/*.c, contrib/groupmems.shar, contrib/pwdauth.c,
+	doc/README.platforms, doc/WISHLIST, doc/console.c.spec.txt,
+	lib/*.c, lib/*.h, COPYING, man/*.xml, man/sv/*.[1358],
+	man/de/*.[1358], man/ja/*.[1358], man/fi/*.[1358],
+	man/fr/*.[1358], man/pt_BR/*.[1358], man/pl/*.[1358],
+	man/hu/*.[1358], man/tr/*.[1358], man/ru/*.[1358],
+	man/zh_TW/*.[1358], man/id/*.[1358], man/zh_CN/*.[1358],
+	man/cs/*.[1358], man/es/*.[1358], man/ko/*.[1358],
+	man/it/*.[1358], etc/login.access, etc/login.defs, NEWS: Added the
+	subversion svn:keywords property (Id) for proper identification.
+
 2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/sv/sv.po, man/de/de.po, man/fr/fr.po, man/pl/pl.po,

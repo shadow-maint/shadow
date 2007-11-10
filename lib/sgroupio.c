@@ -3,7 +3,7 @@
 
 #ifdef SHADOWGRP
 
-#ident "$Id: sgroupio.c,v 1.14 2005/08/31 17:24:56 kloczek Exp $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

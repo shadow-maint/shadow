@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='porttime.5'>
-  <!--  $Id: porttime.5.xml,v 1.17 2006/05/20 12:11:38 kloczek Exp $ -->
+  <!--  $Id$ -->
   <refmeta>
     <refentrytitle>porttime</refentrytitle>
     <manvolnum>5</manvolnum>

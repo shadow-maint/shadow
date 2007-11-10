@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: passwd.c,v 1.61 2006/07/28 17:40:15 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>

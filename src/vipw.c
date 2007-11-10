@@ -22,7 +22,7 @@
 
 #include <config.h>
 
-#ident "$Id: vipw.c,v 1.22 2006/06/20 20:00:04 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <getopt.h>

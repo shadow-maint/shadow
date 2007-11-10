@@ -37,7 +37,7 @@
 
 #include <config.h>
 
-#ident "$Id: id.c,v 1.19 2006/02/07 22:55:41 kloczek Exp $"
+#ident "$Id$"
 
 #include <grp.h>
 #include <pwd.h>

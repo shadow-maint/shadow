@@ -10,7 +10,7 @@
 
 #include <config.h>
 
-#ident "$Id: grpunconv.c,v 1.18 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include <stdlib.h>

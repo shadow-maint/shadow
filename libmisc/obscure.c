@@ -31,7 +31,7 @@
 
 #ifndef USE_PAM
 
-#ident "$Id: obscure.c,v 1.14 2005/08/31 17:24:57 kloczek Exp $"
+#ident "$Id$"
 
 
 /*

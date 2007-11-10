@@ -39,7 +39,7 @@
 #include <pwd.h>
 #include <grp.h>
 
-#ident "$Id: age.c,v 1.13 2006/01/18 19:38:27 kloczek Exp $"
+#ident "$Id$"
 
 #ifndef PASSWD_PROGRAM
 #define PASSWD_PROGRAM "/bin/passwd"

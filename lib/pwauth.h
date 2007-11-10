@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- *	$Id: pwauth.h,v 1.6 2005/05/25 19:31:50 kloczek Exp $
+ *	$Id$
  */
 
 #ifndef USE_PAM

@@ -9,7 +9,7 @@
 
 #include <config.h>
 
-#ident "$Id: xmalloc.c,v 1.8 2006/01/23 09:46:30 kloczek Exp $"
+#ident "$Id$"
 
 #include <stdio.h>
 #include "defines.h"

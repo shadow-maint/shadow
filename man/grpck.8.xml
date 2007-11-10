@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='grpck.8'>
-  <!-- $Id: grpck.8.xml,v 1.19 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>grpck</refentrytitle>
     <manvolnum>8</manvolnum>

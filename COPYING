@@ -8,7 +8,7 @@ This document is freely plagiarised from the 'Artistic Licence',
 distributed as part of the Perl v4.0 kit by Larry Wall, which is
 available from most major archive sites.  I stole it from CrackLib.
 
-	$Id: COPYING,v 1.1 2005/12/11 16:55:40 kloczek Exp $
+	$Id$
 *)
 
 This documents purpose is to state the conditions under which this

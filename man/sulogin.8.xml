@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='sulogin.8'>
-  <!--  $Id: sulogin.8.xml,v 1.18 2006/10/28 12:29:04 kloczek Exp $ -->
+  <!--  $Id$ -->
   <refmeta>
     <refentrytitle>sulogin</refentrytitle>
     <manvolnum>8</manvolnum>

@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id: usermod.c,v 1.74 2007/01/16 12:51:50 kloczek Exp $"
+#ident "$Id$"
 
 #include <ctype.h>
 #include <errno.h>

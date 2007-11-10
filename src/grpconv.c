@@ -9,7 +9,7 @@
  */
 
 #include <config.h>
-#ident "$Id: grpconv.c,v 1.20 2006/01/18 19:55:15 kloczek Exp $"
+#ident "$Id$"
 
 #include <errno.h>
 #include <fcntl.h>

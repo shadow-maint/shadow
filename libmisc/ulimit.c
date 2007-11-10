@@ -1,6 +1,6 @@
 #include <config.h>
 
-#ident "$Id: ulimit.c,v 1.4 2005/08/31 17:24:58 kloczek Exp $"
+#ident "$Id$"
 
 #if HAVE_ULIMIT_H
 #include <ulimit.h>

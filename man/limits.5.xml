@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='limits.5'>
-  <!-- $Id: limits.5.xml,v 1.21 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>limits</refentrytitle>
     <manvolnum>5</manvolnum>

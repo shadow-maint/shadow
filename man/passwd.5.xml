@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <refentry id='passwd.5'>
-  <!-- $Id: passwd.5.xml,v 1.19 2006/05/28 16:17:36 kloczek Exp $ -->
+  <!-- $Id$ -->
   <refmeta>
     <refentrytitle>passwd</refentrytitle>
     <manvolnum>5</manvolnum>
