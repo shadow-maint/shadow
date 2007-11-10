@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-07-18 23:27+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -1202,8 +1202,9 @@ msgstr "UID descoñecido: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "GID descoñecido: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "Perdón.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "Non é un ficheiro de contrasinais\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1342,9 +1343,9 @@ msgstr "Non coinciden; volva tentalo.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "Non se pode cambiar o contrasinal de %s.\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Aínda non se pode cambiar o contrasinal de %s.\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "Non se pode cambiar o contrasinal de %s.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1465,9 +1466,6 @@ msgstr "Omitiuse a autenticación por contrasinal.\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Introduza O SEU PROPIO contrasinal para autenticación.\n"
-
-msgid "Sorry."
-msgstr "Perdón."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1842,13 +1840,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: erro ao borrar o directorio %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1856,6 +1852,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -1999,3 +1998,12 @@ msgstr "Non se puido facer unha copia de seguridade"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: non se pode restaurar %s: %s (os seus cambios están en %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "Perdón.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "Aínda non se pode cambiar o contrasinal de %s.\n"
+
+#~ msgid "Sorry."
+#~ msgstr "Perdón."

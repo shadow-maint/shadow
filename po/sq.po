@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.3\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2004-11-20 03:28+0100\n"
 "Last-Translator: Elian Myftiu <pinguini AT fastwebnet DOT it>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
@@ -1100,8 +1100,9 @@ msgstr "Kujdes: grup i panjohur %s\n"
 msgid "unknown GID: %lu\n"
 msgstr ""
 
-msgid "Sorry.\n"
-msgstr ""
+#, fuzzy
+msgid "No password.\n"
+msgstr "   Zgjidh një fjalëkalim të ri.\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1215,7 +1216,7 @@ msgid "The password for %s cannot be changed.\n"
 msgstr ""
 
 #, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgid "The password for %s cannot be changed yet.\n"
 msgstr ""
 
 #, c-format
@@ -1336,9 +1337,6 @@ msgstr ""
 
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
-msgstr ""
-
-msgid "Sorry."
 msgstr ""
 
 #, c-format
@@ -1659,8 +1657,6 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1668,6 +1664,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"

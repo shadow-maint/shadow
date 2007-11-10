@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -1099,8 +1099,9 @@ msgstr "nepoznata grupa: %s\n"
 msgid "unknown GID: %lu\n"
 msgstr "nepoznata grupa: %s\n"
 
-msgid "Sorry.\n"
-msgstr ""
+#, fuzzy
+msgid "No password.\n"
+msgstr "Nova šifra:"
 
 #, c-format
 msgid "too many groups\n"
@@ -1216,7 +1217,7 @@ msgid "The password for %s cannot be changed.\n"
 msgstr ""
 
 #, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
+msgid "The password for %s cannot be changed yet.\n"
 msgstr ""
 
 #, c-format
@@ -1338,9 +1339,6 @@ msgstr ""
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr ""
-
-msgid "Sorry."
-msgstr "Žalim."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1661,8 +1659,6 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1670,6 +1666,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -1777,3 +1776,6 @@ msgstr ""
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
+
+#~ msgid "Sorry."
+#~ msgstr "Žalim."

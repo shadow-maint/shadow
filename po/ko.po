@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-07-22 00:05+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -1195,8 +1195,9 @@ msgstr "알 수 없는 UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "알 수 없는 GID: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "죄송합니다.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "열쇠글 파일 없음\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1334,9 +1335,9 @@ msgstr "입력값이 일치하지 않습니다. 다시 시도하십시오.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "%s의 열쇠글은 바꿀 수 없습니다.\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "죄송합니다, %s의 열쇠글은 아직 바꿀 수 없습니다.\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "%s의 열쇠글은 바꿀 수 없습니다.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1457,9 +1458,6 @@ msgstr "열쇠글 인증이 무시되었습니다.\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "인증하기 위해 본인의 열쇠글을 입력하십시오.\n"
-
-msgid "Sorry."
-msgstr "죄송합니다."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1826,13 +1824,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: 디렉토리 %s을(를) 지우는 데 오류가 발생했습니다\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1840,6 +1836,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -1983,3 +1982,12 @@ msgstr "백업을 만들 수 없습니다"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s을(를) 복구시킬 수 없습니다: %s (바뀐 사항은 %s에 있습니다)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "죄송합니다.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "죄송합니다, %s의 열쇠글은 아직 바꿀 수 없습니다.\n"
+
+#~ msgid "Sorry."
+#~ msgstr "죄송합니다."

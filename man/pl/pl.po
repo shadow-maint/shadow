@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: man pages for shadow 4.0.16\n"
-"POT-Creation-Date: 2006-11-19 22:01+0100\n"
+"POT-Creation-Date: 2007-11-10 23:24+0100\n"
 "PO-Revision-Date: 2006-05-20 02:21+0200\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -16,7 +16,7 @@ msgid "vipw"
 msgstr "vipw"
 
 #: vipw.8.xml:6(manvolnum) usermod.8.xml:6(manvolnum)
-#: userdel.8.xml:6(manvolnum) userdel.8.xml:147(replaceable)
+#: userdel.8.xml:6(manvolnum) userdel.8.xml:148(replaceable)
 #: useradd.8.xml:6(manvolnum) pwconv.8.xml:6(manvolnum)
 #: pwck.8.xml:6(manvolnum) nologin.8.xml:6(manvolnum)
 #: newusers.8.xml:6(manvolnum) logoutd.8.xml:6(manvolnum)
@@ -70,7 +70,7 @@ msgstr "opcje"
 #: login.access.5.xml:15(title) login.1.xml:36(title) limits.5.xml:16(title)
 #: lastlog.8.xml:24(title) gshadow.5.xml:15(title) grpck.8.xml:25(title)
 #: groups.1.xml:24(title) groupmod.8.xml:25(title) groupmems.8.xml:27(title)
-#: groupdel.8.xml:24(title) groupadd.8.xml:30(title) gpasswd.1.xml:48(title)
+#: groupdel.8.xml:24(title) groupadd.8.xml:30(title) gpasswd.1.xml:27(title)
 #: faillog.8.xml:24(title) faillog.5.xml:15(title) expiry.1.xml:23(title)
 #: chsh.1.xml:27(title) chpasswd.8.xml:24(title) chgpasswd.8.xml:24(title)
 #: chfn.1.xml:27(title) chage.1.xml:26(title)
@@ -103,10 +103,10 @@ msgstr ""
 "citerefentry>."
 
 #: vipw.8.xml:51(title) usermod.8.xml:33(title) userdel.8.xml:33(title)
-#: useradd.8.xml:47(title) su.1.xml:74(title) pwck.8.xml:96(title)
+#: useradd.8.xml:48(title) su.1.xml:74(title) pwck.8.xml:96(title)
 #: passwd.1.xml:140(title) login.1.xml:119(title) lastlog.8.xml:36(title)
 #: grpck.8.xml:69(title) groupmod.8.xml:34(title) groupmems.8.xml:42(title)
-#: groupadd.8.xml:39(title) gpasswd.1.xml:71(title) faillog.8.xml:35(title)
+#: groupadd.8.xml:39(title) gpasswd.1.xml:58(title) faillog.8.xml:35(title)
 #: chsh.1.xml:38(title) chpasswd.8.xml:46(title) chgpasswd.8.xml:45(title)
 #: chage.1.xml:36(title)
 msgid "OPTIONS"
@@ -129,16 +129,16 @@ msgstr "<option>-g</option>, <option>--group</option>"
 msgid "Edit group database."
 msgstr "Edycja bazy grup."
 
-#: vipw.8.xml:64(term) userdel.8.xml:62(term) useradd.8.xml:153(term)
-#: passwd.1.xml:180(term) lastlog.8.xml:52(term) groupmod.8.xml:57(term)
-#: groupadd.8.xml:72(term) faillog.8.xml:48(term) chsh.1.xml:44(term)
+#: vipw.8.xml:64(term) userdel.8.xml:63(term) useradd.8.xml:164(term)
+#: passwd.1.xml:180(term) lastlog.8.xml:52(term) groupmod.8.xml:60(term)
+#: groupadd.8.xml:74(term) faillog.8.xml:48(term) chsh.1.xml:44(term)
 #: chpasswd.8.xml:59(term) chgpasswd.8.xml:58(term) chage.1.xml:74(term)
 msgid "<option>-h</option>, <option>--help</option>"
 msgstr "<option>-h</option>, <option>--help</option>"
 
-#: vipw.8.xml:66(para) userdel.8.xml:64(para) useradd.8.xml:155(para)
-#: passwd.1.xml:182(para) lastlog.8.xml:56(para) groupmod.8.xml:59(para)
-#: groupadd.8.xml:74(para) faillog.8.xml:50(para) chsh.1.xml:46(para)
+#: vipw.8.xml:66(para) userdel.8.xml:65(para) useradd.8.xml:166(para)
+#: passwd.1.xml:182(para) lastlog.8.xml:56(para) groupmod.8.xml:62(para)
+#: groupadd.8.xml:76(para) faillog.8.xml:50(para) chsh.1.xml:46(para)
 #: chpasswd.8.xml:61(para) chgpasswd.8.xml:60(para) chage.1.xml:76(para)
 msgid "Display help message and exit."
 msgstr "Wyświetlenie komunikatu pomocy i zakończenie działania."
@@ -167,56 +167,56 @@ msgstr "<option>-s</option>, <option>--shadow</option>"
 msgid "Edit shadow or gshadow database."
 msgstr "Edycja bazy shadow lub gshadow."
 
-#: vipw.8.xml:91(title) usermod.8.xml:246(title) userdel.8.xml:88(title)
-#: useradd.8.xml:363(title) suauth.5.xml:139(title) su.1.xml:176(title)
+#: vipw.8.xml:91(title) usermod.8.xml:246(title) userdel.8.xml:89(title)
+#: useradd.8.xml:370(title) suauth.5.xml:139(title) su.1.xml:176(title)
 #: sg.1.xml:43(title) shadow.5.xml:105(title) shadow.3.xml:172(title)
 #: pwconv.8.xml:109(title) pwck.8.xml:145(title) porttime.5.xml:76(title)
 #: passwd.5.xml:87(title) passwd.1.xml:322(title) newusers.8.xml:90(title)
 #: newgrp.1.xml:54(title) logoutd.8.xml:35(title) login.access.5.xml:66(title)
-#: login.1.xml:198(title) limits.5.xml:107(title) lastlog.8.xml:113(title)
+#: login.1.xml:198(title) limits.5.xml:110(title) lastlog.8.xml:113(title)
 #: gshadow.5.xml:61(title) grpck.8.xml:87(title) groups.1.xml:46(title)
-#: groupmod.8.xml:89(title) groupmems.8.xml:103(title)
-#: groupdel.8.xml:43(title) groupadd.8.xml:112(title) gpasswd.1.xml:93(title)
+#: groupmod.8.xml:92(title) groupmems.8.xml:103(title)
+#: groupdel.8.xml:43(title) groupadd.8.xml:114(title) gpasswd.1.xml:147(title)
 #: faillog.8.xml:132(title) faillog.5.xml:38(title) expiry.1.xml:32(title)
 #: chsh.1.xml:85(title) chfn.1.xml:60(title) chage.1.xml:177(title)
 msgid "FILES"
 msgstr "PLIKI"
 
 #: vipw.8.xml:94(filename) usermod.8.xml:249(filename)
-#: userdel.8.xml:91(filename) useradd.8.xml:378(filename)
+#: userdel.8.xml:92(filename) useradd.8.xml:385(filename)
 #: sg.1.xml:58(filename) pwck.8.xml:148(filename) newgrp.1.xml:69(filename)
 #: gshadow.5.xml:64(filename) grpck.8.xml:90(filename)
-#: groups.1.xml:49(filename) groupmod.8.xml:92(filename)
+#: groups.1.xml:49(filename) groupmod.8.xml:95(filename)
 #: groupmems.8.xml:106(filename) groupdel.8.xml:46(filename)
-#: groupadd.8.xml:115(filename) gpasswd.1.xml:11(filename)
-#: gpasswd.1.xml:96(filename)
+#: groupadd.8.xml:117(filename) gpasswd.1.xml:11(filename)
+#: gpasswd.1.xml:150(filename)
 msgid "/etc/group"
 msgstr "/etc/group"
 
-#: vipw.8.xml:96(para) usermod.8.xml:251(para) userdel.8.xml:93(para)
-#: useradd.8.xml:380(para) sg.1.xml:60(para) pwck.8.xml:150(para)
+#: vipw.8.xml:96(para) usermod.8.xml:251(para) userdel.8.xml:94(para)
+#: useradd.8.xml:387(para) sg.1.xml:60(para) pwck.8.xml:150(para)
 #: newgrp.1.xml:71(para) gshadow.5.xml:66(para) grpck.8.xml:92(para)
-#: groups.1.xml:51(para) groupmod.8.xml:94(para) groupmems.8.xml:108(para)
-#: groupdel.8.xml:48(para) groupadd.8.xml:117(para) gpasswd.1.xml:98(para)
+#: groups.1.xml:51(para) groupmod.8.xml:97(para) groupmems.8.xml:108(para)
+#: groupdel.8.xml:48(para) groupadd.8.xml:119(para) gpasswd.1.xml:152(para)
 msgid "Group account information."
 msgstr "Informacje o grupach użytkowników."
 
 #: vipw.8.xml:100(filename) sg.1.xml:64(filename) newgrp.1.xml:75(filename)
 #: gshadow.5.xml:70(filename) grpck.8.xml:96(filename)
-#: groupmod.8.xml:98(filename) groupmems.8.xml:112(filename)
-#: groupdel.8.xml:52(filename) groupadd.8.xml:121(filename)
-#: gpasswd.1.xml:102(filename)
+#: groupmod.8.xml:101(filename) groupmems.8.xml:112(filename)
+#: groupdel.8.xml:52(filename) groupadd.8.xml:123(filename)
+#: gpasswd.1.xml:156(filename)
 msgid "/etc/gshadow"
 msgstr "/etc/gshadow"
 
 #: vipw.8.xml:102(para) sg.1.xml:66(para) newgrp.1.xml:77(para)
-#: gshadow.5.xml:72(para) grpck.8.xml:98(para) groupmod.8.xml:100(para)
-#: groupdel.8.xml:54(para) groupadd.8.xml:123(para) gpasswd.1.xml:104(para)
+#: gshadow.5.xml:72(para) grpck.8.xml:98(para) groupmod.8.xml:103(para)
+#: groupdel.8.xml:54(para) groupadd.8.xml:125(para) gpasswd.1.xml:158(para)
 msgid "Secure group account information."
 msgstr "Informacje chronione o grupach użytkowników."
 
 #: vipw.8.xml:106(filename) usermod.8.xml:255(filename)
-#: userdel.8.xml:103(filename) useradd.8.xml:366(filename)
+#: userdel.8.xml:104(filename) useradd.8.xml:373(filename)
 #: su.1.xml:179(filename) sg.1.xml:46(filename) shadow.5.xml:108(filename)
 #: pwck.8.xml:154(filename) passwd.5.xml:90(filename)
 #: passwd.1.xml:325(filename) newgrp.1.xml:57(filename)
@@ -226,8 +226,8 @@ msgstr "Informacje chronione o grupach użytkowników."
 msgid "/etc/passwd"
 msgstr "/etc/passwd"
 
-#: vipw.8.xml:108(para) usermod.8.xml:257(para) userdel.8.xml:105(para)
-#: useradd.8.xml:368(para) su.1.xml:181(para) sg.1.xml:48(para)
+#: vipw.8.xml:108(para) usermod.8.xml:257(para) userdel.8.xml:106(para)
+#: useradd.8.xml:375(para) su.1.xml:181(para) sg.1.xml:48(para)
 #: shadow.5.xml:110(para) pwck.8.xml:156(para) passwd.5.xml:92(para)
 #: passwd.1.xml:327(para) newgrp.1.xml:59(para) login.1.xml:215(para)
 #: grpck.8.xml:104(para) expiry.1.xml:37(para) chsh.1.xml:90(para)
@@ -236,7 +236,7 @@ msgid "User account information."
 msgstr "Informacja o kontach użytkowników."
 
 #: vipw.8.xml:112(filename) usermod.8.xml:261(filename)
-#: userdel.8.xml:109(filename) useradd.8.xml:372(filename)
+#: userdel.8.xml:110(filename) useradd.8.xml:379(filename)
 #: su.1.xml:185(filename) sg.1.xml:52(filename) shadow.5.xml:114(filename)
 #: shadow.3.xml:175(filename) pwck.8.xml:160(filename)
 #: passwd.5.xml:96(filename) passwd.1.xml:331(filename)
@@ -245,25 +245,25 @@ msgstr "Informacja o kontach użytkowników."
 msgid "/etc/shadow"
 msgstr "/etc/shadow"
 
-#: vipw.8.xml:114(para) usermod.8.xml:263(para) userdel.8.xml:111(para)
-#: useradd.8.xml:374(para) su.1.xml:187(para) sg.1.xml:54(para)
+#: vipw.8.xml:114(para) usermod.8.xml:263(para) userdel.8.xml:112(para)
+#: useradd.8.xml:381(para) su.1.xml:187(para) sg.1.xml:54(para)
 #: shadow.5.xml:116(para) shadow.3.xml:177(para) pwck.8.xml:162(para)
 #: passwd.1.xml:333(para) newgrp.1.xml:65(para) login.1.xml:221(para)
 #: expiry.1.xml:43(para) chage.1.xml:192(para)
 msgid "Secure user account information."
 msgstr "Informacje chronione o użytkownikach."
 
-#: vipw.8.xml:120(title) usermod.8.xml:270(title) userdel.8.xml:190(title)
-#: useradd.8.xml:474(title) suauth.5.xml:168(title) su.1.xml:194(title)
+#: vipw.8.xml:120(title) usermod.8.xml:270(title) userdel.8.xml:191(title)
+#: useradd.8.xml:481(title) suauth.5.xml:168(title) su.1.xml:194(title)
 #: sg.1.xml:73(title) shadow.5.xml:123(title) shadow.3.xml:184(title)
 #: pwconv.8.xml:121(title) pwck.8.xml:169(title) porttime.5.xml:88(title)
 #: passwd.5.xml:105(title) passwd.1.xml:391(title) nologin.8.xml:35(title)
 #: newusers.8.xml:102(title) newgrp.1.xml:84(title)
 #: login.defs.5.xml:256(title) login.access.5.xml:78(title)
-#: login.1.xml:252(title) limits.5.xml:117(title) gshadow.5.xml:79(title)
-#: grpck.8.xml:111(title) groups.1.xml:58(title) groupmod.8.xml:158(title)
+#: login.1.xml:252(title) limits.5.xml:120(title) gshadow.5.xml:79(title)
+#: grpck.8.xml:111(title) groups.1.xml:58(title) groupmod.8.xml:161(title)
 #: groupmems.8.xml:121(title) groupdel.8.xml:100(title)
-#: groupadd.8.xml:199(title) gpasswd.1.xml:111(title) faillog.8.xml:144(title)
+#: groupadd.8.xml:197(title) gpasswd.1.xml:165(title) faillog.8.xml:144(title)
 #: faillog.5.xml:50(title) expiry.1.xml:50(title) chsh.1.xml:109(title)
 #: chpasswd.8.xml:85(title) chgpasswd.8.xml:84(title) chfn.1.xml:78(title)
 #: chage.1.xml:232(title)
@@ -330,7 +330,7 @@ msgstr ""
 "Dodaj użytkownika do dodatkowej grupy lub grup. Może być użyte tylko z opcją "
 "<option>-G</option>."
 
-#: usermod.8.xml:51(term) useradd.8.xml:52(term)
+#: usermod.8.xml:51(term) useradd.8.xml:53(term)
 msgid ""
 "<option>-c</option>, <option>--comment</option><replaceable>COMMENT</"
 "replaceable>"
@@ -348,7 +348,7 @@ msgstr ""
 "jest zmieniana przy pomocy polecenia <citerefentry><refentrytitle>chfn</"
 "refentrytitle><manvolnum>1</manvolnum></citerefentry>."
 
-#: usermod.8.xml:65(term) useradd.8.xml:80(term)
+#: usermod.8.xml:65(term) useradd.8.xml:91(term)
 msgid ""
 "<option>-d</option>, <option>--home</option><replaceable>HOME_DIR</"
 "replaceable>"
@@ -366,7 +366,7 @@ msgstr ""
 "zawartość aktualnego katalogu domowego zostanie przesunięta do nowego "
 "katalogu. Nowy katalog domowy jest tworzony jeśli nie istnieje."
 
-#: usermod.8.xml:79(term) useradd.8.xml:97(term) useradd.8.xml:281(term)
+#: usermod.8.xml:79(term) useradd.8.xml:108(term) useradd.8.xml:293(term)
 msgid ""
 "<option>-e</option>, <option>--expiredate</option><replaceable>EXPIRE_DATE</"
 "replaceable>"
@@ -374,7 +374,7 @@ msgstr ""
 "<option>-e</option>, <option>--expiredate</option><replaceable>DATA_WAŻN</"
 "replaceable>"
 
-#: usermod.8.xml:84(para) useradd.8.xml:102(para)
+#: usermod.8.xml:84(para) useradd.8.xml:113(para)
 msgid ""
 "The date on which the user account will be disabled. The date is specified "
 "in the format <emphasis remap=\"I\">YYYY-MM-DD</emphasis>."
@@ -382,7 +382,7 @@ msgstr ""
 "Data, od której konto danego użytkownika zostanie wyłączone. Data podawana "
 "jest w formacie <emphasis remap=\"I\">MM/DD/RR</emphasis>."
 
-#: usermod.8.xml:91(term) useradd.8.xml:109(term) useradd.8.xml:290(term)
+#: usermod.8.xml:91(term) useradd.8.xml:120(term) useradd.8.xml:302(term)
 msgid ""
 "<option>-f</option>, <option>--inactive</option><replaceable>INACTIVE</"
 "replaceable>"
@@ -390,7 +390,7 @@ msgstr ""
 "<option>-f</option>, <option>--inactive</option><replaceable>NIEAKTYWNE</"
 "replaceable>"
 
-#: usermod.8.xml:96(para) useradd.8.xml:114(para)
+#: usermod.8.xml:96(para) useradd.8.xml:125(para)
 msgid ""
 "The number of days after a password expires until the account is permanently "
 "disabled. A value of 0 disables the account as soon as the password has "
@@ -400,7 +400,7 @@ msgstr ""
 "wyłącza konto natychmiast po przeterminowaniu hasła, zaś wartość -1 wyłącza "
 "tę cechę. Domyślną wartością jest -1."
 
-#: usermod.8.xml:105(term) useradd.8.xml:123(term) useradd.8.xml:302(term)
+#: usermod.8.xml:105(term) useradd.8.xml:134(term) useradd.8.xml:314(term)
 msgid ""
 "<option>-g</option>, <option>--gid</option><replaceable>GROUP</replaceable>"
 msgstr ""
@@ -416,7 +416,7 @@ msgstr ""
 "istnieć. Numer grupy musi odnosić się do już istniejącej grupy. Domyślnym "
 "numerem grupy jest 1."
 
-#: usermod.8.xml:118(term) useradd.8.xml:137(term)
+#: usermod.8.xml:118(term) useradd.8.xml:148(term)
 msgid ""
 "<option>-G</option>, <option>--groups</option><replaceable>GROUP1</"
 "replaceable>[<emphasis remap=\"I\">,GROUP2,...</emphasis>[<emphasis remap=\"I"
@@ -427,14 +427,15 @@ msgstr ""
 "\">,GRUPAN</emphasis>]]]"
 
 #: usermod.8.xml:123(para)
+#, fuzzy
 msgid ""
 "A list of supplementary groups which the user is also a member of. Each "
 "group is separated from the next by a comma, with no intervening whitespace. "
 "The groups are subject to the same restrictions as the group given with the "
 "<option>-g</option> option. If the user is currently a member of a group "
 "which is not listed, the user will be removed from the group. This behaviour "
-"can be changed via <option>-a</option> option, which appends user to the "
-"current supplementary group list."
+"can be changed via the <option>-a</option> option, which appends the user to "
+"the current supplementary group list."
 msgstr ""
 "Lista dodatkowych grup, do których również należy użytkownik. Każda grupa "
 "oddzielona jest od następnej przecinkiem, bez wtrąconej spacji. Do grup "
@@ -451,11 +452,12 @@ msgstr ""
 "replaceable>"
 
 #: usermod.8.xml:141(para)
+#, fuzzy
 msgid ""
 "The name of the user will be changed from <emphasis remap=\"I\">LOGIN</"
 "emphasis> to <emphasis remap=\"I\">NEW_LOGIN</emphasis>. Nothing else is "
 "changed. In particular, the user's home directory name should probably be "
-"changed to reflect the new login name."
+"changed manually to reflect the new login name."
 msgstr ""
 "Nazwa użytkownika zostanie zmieniona z <emphasis remap=\"I\">LOGIN</"
 "emphasis> na <emphasis remap=\"I\">NOWY_LOGIN</emphasis>. Nic więcej nie "
@@ -477,7 +479,7 @@ msgstr ""
 "zakodowanego hasła. Opcji tej nie można używać z opcjami <option>-p</option> "
 "or <option>-U</option>."
 
-#: usermod.8.xml:164(term) useradd.8.xml:206(term) groupmod.8.xml:75(term)
+#: usermod.8.xml:164(term) useradd.8.xml:217(term) groupmod.8.xml:78(term)
 msgid "<option>-o</option>, <option>--non-unique</option>"
 msgstr "<option>-o</option>, <option>--non-unique</option>"
 
@@ -487,7 +489,7 @@ msgid ""
 "the user ID to a non-unique value."
 msgstr ""
 
-#: usermod.8.xml:175(term) useradd.8.xml:214(term)
+#: usermod.8.xml:175(term) useradd.8.xml:225(term)
 msgid ""
 "<option>-p</option>, <option>--password</option><replaceable>PASSWORD</"
 "replaceable>"
@@ -501,7 +503,7 @@ msgid ""
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>."
 msgstr ""
 
-#: usermod.8.xml:188(term) useradd.8.xml:227(term) useradd.8.xml:315(term)
+#: usermod.8.xml:188(term) useradd.8.xml:238(term) useradd.8.xml:327(term)
 #: su.1.xml:108(term) chsh.1.xml:50(term)
 msgid ""
 "<option>-s</option>, <option>--shell</option><replaceable>SHELL</replaceable>"
@@ -516,7 +518,7 @@ msgstr ""
 "Nazwa nowej powłoki (shell) użytkownika. Ustawienie tego pola na puste "
 "powoduje, że system wybierze domyślną powłokę logowania."
 
-#: usermod.8.xml:200(term) useradd.8.xml:240(term)
+#: usermod.8.xml:200(term) useradd.8.xml:251(term)
 msgid ""
 "<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
 msgstr ""
@@ -546,10 +548,10 @@ msgstr ""
 "zakodowanego hasła. Opcji tej nie można używać z opcjami <option>-p</option> "
 "lub <option>-L</option>."
 
-#: usermod.8.xml:233(title) userdel.8.xml:169(title) useradd.8.xml:343(title)
+#: usermod.8.xml:233(title) userdel.8.xml:170(title) useradd.8.xml:350(title)
 #: su.1.xml:168(title) shadow.3.xml:164(title) passwd.1.xml:311(title)
 #: newusers.8.xml:82(title) login.1.xml:164(title) lastlog.8.xml:125(title)
-#: groupdel.8.xml:36(title) groupadd.8.xml:136(title) faillog.8.xml:121(title)
+#: groupdel.8.xml:36(title) groupadd.8.xml:138(title) faillog.8.xml:121(title)
 #: chpasswd.8.xml:77(title) chgpasswd.8.xml:76(title)
 msgid "CAVEATS"
 msgstr "OSTRZEŻENIA"
@@ -620,11 +622,14 @@ msgid "delete a user account and related files"
 msgstr "plik chroniony informacji o użytkownikach"
 
 #: userdel.8.xml:25(para)
+#, fuzzy
 msgid ""
 "The <command>userdel</command> command modifies the system account files, "
-"deleting all entries that refer to <emphasis remap=\"I\">login_name</"
-"emphasis>. The named user must exist."
+"deleting all entries that refer to the user name <emphasis remap=\"I"
+"\">LOGIN</emphasis>. The named user must exist."
 msgstr ""
+"Polecenie <command>usermod</command> zmienia systemowe pliki kont, "
+"odzwierciedlając zmiany podane w wierszu poleceń."
 
 #: userdel.8.xml:34(para)
 msgid "The options which apply to the <command>userdel</command> command are:"
@@ -636,73 +641,73 @@ msgstr "<option>-f</option>, <option>--force</option>"
 
 #: userdel.8.xml:43(para)
 msgid ""
-"This option forces the removal of the user, even if she is still logged in. "
-"It also forces <command>userdel</command> to remove the user's home "
-"directory or her mail spool, even if another user uses the same home "
-"directory or if the mail spool is not owned by the specified user. If "
+"This option forces the removal of the user account, even if the user is "
+"still logged in. It also forces <command>userdel</command> to remove the "
+"user's home directory and mail spool, even if another user uses the same "
+"home directory or if the mail spool is not owned by the specified user. If "
 "<emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis remap=\"I"
 "\">yes</emphasis> in <filename>/etc/login.defs</filename> and if a group "
 "exists with the same name as the deleted user, then this group will be "
 "removed, even if it is still the primary group of another user."
 msgstr ""
 
-#: userdel.8.xml:55(para)
+#: userdel.8.xml:56(para)
 msgid ""
 "<emphasis>Note:</emphasis> This option is dangerous and may leave your "
 "system in an inconsistent state."
 msgstr ""
 
-#: userdel.8.xml:68(term)
+#: userdel.8.xml:69(term)
 msgid "<option>-r</option>, <option>--remove</option>"
 msgstr "<option>-r</option>, <option>--remove</option>"
 
-#: userdel.8.xml:72(para)
+#: userdel.8.xml:73(para)
 msgid ""
 "Files in the user's home directory will be removed along with the home "
 "directory itself and the user's mail spool. Files located in other file "
 "systems will have to be searched for and deleted manually."
 msgstr ""
 
-#: userdel.8.xml:78(para)
+#: userdel.8.xml:79(para)
 msgid ""
 "The mail spool is defined by the <emphasis>MAIL_DIR</emphasis> variable in "
 "the <filename>login.defs</filename> file."
 msgstr ""
 
-#: userdel.8.xml:97(filename) useradd.8.xml:396(filename)
+#: userdel.8.xml:98(filename) useradd.8.xml:403(filename)
 #: pwconv.8.xml:112(filename) newusers.8.xml:93(filename)
-#: login.access.5.xml:69(filename) groupadd.8.xml:127(filename)
+#: login.access.5.xml:69(filename) groupadd.8.xml:129(filename)
 #: chsh.1.xml:100(filename) chfn.1.xml:63(filename)
 msgid "/etc/login.defs"
 msgstr "/etc/login.defs"
 
-#: userdel.8.xml:99(para) useradd.8.xml:398(para) pwconv.8.xml:114(para)
+#: userdel.8.xml:100(para) useradd.8.xml:405(para) pwconv.8.xml:114(para)
 #: newusers.8.xml:95(para) login.access.5.xml:71(para)
-#: groupadd.8.xml:129(para) chsh.1.xml:102(para) chfn.1.xml:65(para)
+#: groupadd.8.xml:131(para) chsh.1.xml:102(para) chfn.1.xml:65(para)
 msgid "Shadow password suite configuration."
 msgstr "Konfiguracja pakietu shadow."
 
-#: userdel.8.xml:118(title) useradd.8.xml:405(title) pwck.8.xml:186(title)
-#: passwd.1.xml:340(title) grpck.8.xml:129(title) groupmod.8.xml:107(title)
-#: groupdel.8.xml:61(title) groupadd.8.xml:154(title) chage.1.xml:199(title)
+#: userdel.8.xml:119(title) useradd.8.xml:412(title) pwck.8.xml:186(title)
+#: passwd.1.xml:340(title) grpck.8.xml:129(title) groupmod.8.xml:110(title)
+#: groupdel.8.xml:61(title) groupadd.8.xml:152(title) chage.1.xml:199(title)
 msgid "EXIT VALUES"
 msgstr "KOD ZAKOŃCZENIA"
 
-#: userdel.8.xml:123(replaceable) useradd.8.xml:410(replaceable)
+#: userdel.8.xml:124(replaceable) useradd.8.xml:417(replaceable)
 #: pwck.8.xml:191(replaceable) passwd.1.xml:345(replaceable)
-#: grpck.8.xml:134(replaceable) groupmod.8.xml:112(replaceable)
-#: groupdel.8.xml:66(replaceable) groupadd.8.xml:159(replaceable)
+#: grpck.8.xml:134(replaceable) groupmod.8.xml:115(replaceable)
+#: groupdel.8.xml:66(replaceable) groupadd.8.xml:157(replaceable)
 #: chage.1.xml:204(replaceable)
 msgid "0"
 msgstr "0"
 
-#: userdel.8.xml:125(para) useradd.8.xml:412(para) pwck.8.xml:193(para)
-#: passwd.1.xml:347(para) grpck.8.xml:136(para) groupmod.8.xml:114(para)
-#: groupdel.8.xml:68(para) groupadd.8.xml:161(para) chage.1.xml:206(para)
+#: userdel.8.xml:126(para) useradd.8.xml:419(para) pwck.8.xml:193(para)
+#: passwd.1.xml:347(para) grpck.8.xml:136(para) groupmod.8.xml:117(para)
+#: groupdel.8.xml:68(para) groupadd.8.xml:159(para) chage.1.xml:206(para)
 msgid "success"
 msgstr "poprawne zakończenie działania programu"
 
-#: userdel.8.xml:129(replaceable) useradd.8.xml:416(replaceable)
+#: userdel.8.xml:130(replaceable) useradd.8.xml:423(replaceable)
 #: su.1.xml:6(manvolnum) sg.1.xml:6(manvolnum) pwck.8.xml:197(replaceable)
 #: passwd.1.xml:6(manvolnum) passwd.1.xml:351(replaceable)
 #: newgrp.1.xml:6(manvolnum) login.1.xml:6(manvolnum)
@@ -713,58 +718,58 @@ msgstr "poprawne zakończenie działania programu"
 msgid "1"
 msgstr "1"
 
-#: userdel.8.xml:131(para) useradd.8.xml:418(para)
+#: userdel.8.xml:132(para) useradd.8.xml:425(para)
 msgid "can't update password file"
 msgstr "nie można zaktualizować pliku z hasłami"
 
-#: userdel.8.xml:135(replaceable) useradd.8.xml:422(replaceable)
+#: userdel.8.xml:136(replaceable) useradd.8.xml:429(replaceable)
 #: pwck.8.xml:203(replaceable) passwd.1.xml:357(replaceable)
-#: grpck.8.xml:146(replaceable) groupmod.8.xml:118(replaceable)
-#: groupdel.8.xml:72(replaceable) groupadd.8.xml:165(replaceable)
+#: grpck.8.xml:146(replaceable) groupmod.8.xml:121(replaceable)
+#: groupdel.8.xml:72(replaceable) groupadd.8.xml:163(replaceable)
 #: chage.1.xml:216(replaceable)
 msgid "2"
 msgstr "2"
 
-#: userdel.8.xml:137(para) useradd.8.xml:424(para) pwck.8.xml:199(para)
-#: grpck.8.xml:142(para) groupmod.8.xml:120(para) groupdel.8.xml:74(para)
-#: groupadd.8.xml:167(para) chage.1.xml:218(para)
+#: userdel.8.xml:138(para) useradd.8.xml:431(para) pwck.8.xml:199(para)
+#: grpck.8.xml:142(para) groupmod.8.xml:123(para) groupdel.8.xml:74(para)
+#: groupadd.8.xml:165(para) chage.1.xml:218(para)
 msgid "invalid command syntax"
 msgstr "niepoprawna składnia polecenia"
 
-#: userdel.8.xml:141(replaceable) useradd.8.xml:440(replaceable)
-#: passwd.1.xml:381(replaceable) groupmod.8.xml:136(replaceable)
+#: userdel.8.xml:142(replaceable) useradd.8.xml:447(replaceable)
+#: passwd.1.xml:381(replaceable) groupmod.8.xml:139(replaceable)
 #: groupdel.8.xml:78(replaceable)
 msgid "6"
 msgstr "6"
 
-#: userdel.8.xml:143(para)
+#: userdel.8.xml:144(para)
 msgid "specified user doesn't exist"
 msgstr ""
 
-#: userdel.8.xml:149(para)
+#: userdel.8.xml:150(para)
 msgid "user currently logged in"
 msgstr ""
 
-#: userdel.8.xml:153(replaceable) useradd.8.xml:452(replaceable)
-#: groupmod.8.xml:148(replaceable) groupdel.8.xml:90(replaceable)
-#: groupadd.8.xml:189(replaceable)
+#: userdel.8.xml:154(replaceable) useradd.8.xml:459(replaceable)
+#: groupmod.8.xml:151(replaceable) groupdel.8.xml:90(replaceable)
+#: groupadd.8.xml:187(replaceable)
 msgid "10"
 msgstr "10"
 
-#: userdel.8.xml:155(para) useradd.8.xml:454(para) groupmod.8.xml:150(para)
-#: groupdel.8.xml:92(para) groupadd.8.xml:191(para)
+#: userdel.8.xml:156(para) useradd.8.xml:461(para) groupmod.8.xml:153(para)
+#: groupdel.8.xml:92(para) groupadd.8.xml:189(para)
 msgid "can't update group file"
 msgstr "nie można zaktualizować pliku z grupami"
 
-#: userdel.8.xml:159(replaceable) useradd.8.xml:458(replaceable)
+#: userdel.8.xml:160(replaceable) useradd.8.xml:465(replaceable)
 msgid "12"
 msgstr "12"
 
-#: userdel.8.xml:161(para)
+#: userdel.8.xml:162(para)
 msgid "can't remove home directory"
 msgstr ""
 
-#: userdel.8.xml:119(para)
+#: userdel.8.xml:120(para)
 msgid ""
 "The <command>userdel</command> command exits with the following values: "
 "<placeholder-1/>"
@@ -772,20 +777,20 @@ msgstr ""
 "Polecenie <command>userdel</command> kończy działanie z następującymi "
 "wartościami kodów zakończenia: <placeholder-1/>"
 
-#: userdel.8.xml:170(para)
+#: userdel.8.xml:171(para)
 msgid ""
 "<command>userdel</command> will not allow you to remove an account if the "
 "user is currently logged in. You must kill any running processes which "
 "belong to an account that you are deleting."
 msgstr ""
 
-#: userdel.8.xml:175(para)
+#: userdel.8.xml:176(para)
 msgid ""
 "You may not remove any NIS attributes on a NIS client. This must be "
 "performed on the NIS server."
 msgstr ""
 
-#: userdel.8.xml:178(para)
+#: userdel.8.xml:179(para)
 msgid ""
 "If <emphasis>USERGROUPS_ENAB</emphasis> is defined to <emphasis remap=\"I"
 "\">yes</emphasis> in <filename>/etc/login.defs</filename>, <command>userdel</"
@@ -796,7 +801,7 @@ msgid ""
 "<option>-f</option> option can force the deletion of this group."
 msgstr ""
 
-#: userdel.8.xml:191(para)
+#: userdel.8.xml:192(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -840,7 +845,7 @@ msgstr "useradd"
 msgid "create a new user or update default new user information"
 msgstr ""
 
-#: useradd.8.xml:23(arg) useradd.8.xml:27(arg)
+#: useradd.8.xml:23(arg) useradd.8.xml:27(arg) useradd.8.xml:82(option)
 msgid "-D"
 msgstr "-D"
 
@@ -848,22 +853,23 @@ msgstr "-D"
 msgid ""
 "When invoked without the <option>-D</option> option, the <command>useradd</"
 "command> command creates a new user account using the values specified on "
-"the command line and the default values from the system. Depending on "
-"command line options, the useradd command will update system files and may "
-"also create the new user's home directory and copy initial files."
+"the command line plus the default values from the system. Depending on "
+"command line options, the <command>useradd</command> command will update "
+"system files and may also create the new user's home directory and copy "
+"initial files."
 msgstr ""
 
-#: useradd.8.xml:48(para)
+#: useradd.8.xml:49(para)
 msgid "The options which apply to the <command>useradd</command> command are:"
 msgstr "Polecenie <command>useradd</command> posiada następujące opcje:"
 
-#: useradd.8.xml:57(para)
+#: useradd.8.xml:58(para)
 msgid ""
 "Any text string. It is generally a short description of the login, and is "
 "currently used as the field for the user's full name."
 msgstr ""
 
-#: useradd.8.xml:65(term) useradd.8.xml:266(term)
+#: useradd.8.xml:66(term) useradd.8.xml:278(term)
 msgid ""
 "<option>-b</option>, <option>--base-dir</option><replaceable>BASE_DIR</"
 "replaceable>"
@@ -871,7 +877,7 @@ msgstr ""
 "<option>-b</option>, <option>--base-dir</option><replaceable>KAT_BAZOWY</"
 "replaceable>"
 
-#: useradd.8.xml:70(para)
+#: useradd.8.xml:71(para)
 msgid ""
 "The default base directory for the system if <option>-d</option> dir is not "
 "specified. <replaceable>BASE_DIR</replaceable> is concatenated with the "
@@ -880,6 +886,10 @@ msgid ""
 msgstr ""
 
 #: useradd.8.xml:85(para)
+msgid "See below, the subsection \"Changing the default values\"."
+msgstr ""
+
+#: useradd.8.xml:96(para)
 msgid ""
 "The new user will be created using <replaceable>HOME_DIR</replaceable> as "
 "the value for the user's login directory. The default is to append the "
@@ -889,7 +899,7 @@ msgid ""
 "created if it is missing."
 msgstr ""
 
-#: useradd.8.xml:128(para)
+#: useradd.8.xml:139(para)
 msgid ""
 "The group name or number of the user's initial login group. The group name "
 "must exist. A group number must refer to an already existing group. The "
@@ -897,7 +907,7 @@ msgid ""
 "useradd</filename>."
 msgstr ""
 
-#: useradd.8.xml:142(para)
+#: useradd.8.xml:153(para)
 msgid ""
 "A list of supplementary groups which the user is also a member of. Each "
 "group is separated from the next by a comma, with no intervening whitespace. "
@@ -906,11 +916,11 @@ msgid ""
 "the initial group."
 msgstr ""
 
-#: useradd.8.xml:159(term)
+#: useradd.8.xml:170(term)
 msgid "<option>-m</option>, <option>--create-home</option>"
 msgstr "<option>-m</option>, <option>--create-home</option>"
 
-#: useradd.8.xml:163(para)
+#: useradd.8.xml:174(para)
 msgid ""
 "The user's home directory will be created if it does not exist. The files "
 "contained in <replaceable>SKEL_DIR</replaceable> will be copied to the home "
@@ -923,7 +933,7 @@ msgid ""
 "to not copy any files."
 msgstr ""
 
-#: useradd.8.xml:179(term)
+#: useradd.8.xml:190(term)
 msgid ""
 "<option>-K</option>, <option>--key</option><replaceable>KEY</"
 "replaceable>=<replaceable>VALUE</replaceable>"
@@ -931,7 +941,7 @@ msgstr ""
 "<option>-K</option>, <option>--key</option><replaceable>KLUCZ</"
 "replaceable>=<replaceable>WARTOŚĆ</replaceable>"
 
-#: useradd.8.xml:184(para)
+#: useradd.8.xml:195(para)
 msgid ""
 "Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK, PASS_MAX_DAYS "
 "and others). <placeholder-1/> Example: <option>-K </"
@@ -944,31 +954,31 @@ msgid ""
 "replaceable>=<replaceable>499</replaceable>"
 msgstr ""
 
-#: useradd.8.xml:198(para)
+#: useradd.8.xml:209(para)
 msgid ""
 "Note: <option>-K </option><replaceable>UID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>UID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
 
-#: useradd.8.xml:210(para)
+#: useradd.8.xml:221(para)
 msgid "Allow the creation of a user account with a duplicate (non-unique) UID."
 msgstr ""
 
-#: useradd.8.xml:219(para)
+#: useradd.8.xml:230(para)
 msgid ""
 "The encrypted password, as returned by <citerefentry><refentrytitle>crypt</"
 "refentrytitle><manvolnum>3</manvolnum></citerefentry>. The default is to "
 "disable the account."
 msgstr ""
 
-#: useradd.8.xml:232(para)
+#: useradd.8.xml:243(para)
 msgid ""
 "The name of the user's login shell. The default is to leave this field "
 "blank, which causes the system to select the default login shell."
 msgstr ""
 
-#: useradd.8.xml:245(para)
+#: useradd.8.xml:256(para)
 msgid ""
 "The numerical value of the user's ID. This value must be unique, unless the "
 "<option>-o</option> option is used. The value must be non-negative. The "
@@ -977,148 +987,141 @@ msgid ""
 "accounts."
 msgstr ""
 
-#: useradd.8.xml:257(title)
+#: useradd.8.xml:268(title)
 msgid "Changing the default values"
 msgstr ""
 
-#: useradd.8.xml:258(para)
+#: useradd.8.xml:269(para)
 msgid ""
-"When invoked with the <option>-D</option> option, <command>useradd</command> "
-"will either display the current default values, or update the default values "
-"from the command line. The valid options are"
+"When invoked with only the <option>-D</option> option, <command>useradd</"
+"command> will display the current default values. When invoked with <option>-"
+"D</option> plus other options, <command>useradd</command> will update the "
+"default values for the specified options. Valid default-changing options are:"
 msgstr ""
 
-#: useradd.8.xml:271(para)
+#: useradd.8.xml:283(para)
 msgid ""
-"The initial path prefix for a new user's home directory. The user's name "
-"will be affixed to the end of <replaceable>HOME_DIR</replaceable> to create "
-"the new directory name if the <option>-d</option> option is not used when "
-"creating a new account."
+"The path prefix for a new user's home directory. The user's name will be "
+"affixed to the end of <replaceable>BASE_DIR</replaceable> to form the new "
+"user's home directory name, if the <option>-d</option> option is not used "
+"when creating a new account."
 msgstr ""
 
-#: useradd.8.xml:286(para)
+#: useradd.8.xml:298(para)
 msgid "The date on which the user account is disabled."
 msgstr ""
 
-#: useradd.8.xml:295(para)
+#: useradd.8.xml:307(para)
 msgid ""
 "The number of days after a password has expired before the account will be "
 "disabled."
 msgstr ""
 
-#: useradd.8.xml:307(para)
+#: useradd.8.xml:319(para)
 msgid ""
 "The group name or ID for a new user's initial group. The named group must "
 "exist, and a numerical group ID must have an existing entry."
 msgstr ""
 
-#: useradd.8.xml:320(para)
-msgid ""
-"The name of the new user's login shell. The named program will be used for "
-"all future new user accounts."
+#: useradd.8.xml:332(para)
+msgid "The name of a new user's login shell."
 msgstr ""
 
-#: useradd.8.xml:328(para)
-msgid ""
-"If no options are specified, <command>useradd</command> displays the current "
-"default values."
-msgstr ""
-
-#: useradd.8.xml:336(title)
+#: useradd.8.xml:343(title)
 msgid "NOTES"
 msgstr "UWAGI"
 
-#: useradd.8.xml:337(para)
+#: useradd.8.xml:344(para)
 msgid ""
 "The system administrator is responsible for placing the default user files "
 "in the <filename>/etc/skel/</filename> directory."
 msgstr ""
 
-#: useradd.8.xml:344(para)
+#: useradd.8.xml:351(para)
 msgid ""
 "You may not add a user to a NIS group. This must be performed on the NIS "
 "server."
 msgstr ""
 
-#: useradd.8.xml:349(para)
+#: useradd.8.xml:356(para)
 msgid ""
 "Similarly, if the username already exists in an external user database such "
 "as NIS, <command>useradd</command> will deny the user account creation "
 "request."
 msgstr ""
 
-#: useradd.8.xml:355(para)
+#: useradd.8.xml:362(para)
 msgid ""
 "Usernames must begin with a lower case letter or an underscore, and only "
 "lower case letters, underscores, dashes, and dollar signs may follow. In "
 "regular expression terms: [a-z_][a-z0-9_-]*[$]"
 msgstr ""
 
-#: useradd.8.xml:384(filename)
+#: useradd.8.xml:391(filename)
 msgid "/etc/default/useradd"
 msgstr "/etc/default/useradd"
 
-#: useradd.8.xml:386(para)
+#: useradd.8.xml:393(para)
 msgid "Default values for account creation."
 msgstr ""
 
-#: useradd.8.xml:390(filename)
+#: useradd.8.xml:397(filename)
 msgid "/etc/skel/"
 msgstr "/etc/skel/"
 
-#: useradd.8.xml:392(para)
+#: useradd.8.xml:399(para)
 msgid "Directory containing default files."
 msgstr ""
 
-#: useradd.8.xml:428(replaceable) shadow.3.xml:6(manvolnum)
+#: useradd.8.xml:435(replaceable) shadow.3.xml:6(manvolnum)
 #: pwck.8.xml:209(replaceable) passwd.1.xml:363(replaceable)
-#: grpck.8.xml:152(replaceable) groupmod.8.xml:124(replaceable)
-#: groupadd.8.xml:171(replaceable)
+#: grpck.8.xml:152(replaceable) groupmod.8.xml:127(replaceable)
+#: groupadd.8.xml:169(replaceable)
 msgid "3"
 msgstr "3"
 
-#: useradd.8.xml:430(para) passwd.1.xml:383(para) groupmod.8.xml:126(para)
-#: groupadd.8.xml:173(para)
+#: useradd.8.xml:437(para) passwd.1.xml:383(para) groupmod.8.xml:129(para)
+#: groupadd.8.xml:171(para)
 msgid "invalid argument to option"
 msgstr "nieprawidłowy argument opcji"
 
-#: useradd.8.xml:434(replaceable) pwck.8.xml:215(replaceable)
+#: useradd.8.xml:441(replaceable) pwck.8.xml:215(replaceable)
 #: passwd.1.xml:369(replaceable) grpck.8.xml:158(replaceable)
-#: groupmod.8.xml:130(replaceable) groupadd.8.xml:177(replaceable)
+#: groupmod.8.xml:133(replaceable) groupadd.8.xml:175(replaceable)
 msgid "4"
 msgstr "4"
 
-#: useradd.8.xml:436(para)
+#: useradd.8.xml:443(para)
 msgid "UID already in use (and no <option>-o</option>)"
 msgstr "UID juz jest używany (i nie uzyto opcji <option>-o</option>)"
 
-#: useradd.8.xml:442(para) groupmod.8.xml:132(para) groupmod.8.xml:138(para)
+#: useradd.8.xml:449(para) groupmod.8.xml:135(para) groupmod.8.xml:141(para)
 #: groupdel.8.xml:80(para)
 msgid "specified group doesn't exist"
 msgstr ""
 
-#: useradd.8.xml:446(replaceable) groupmod.8.xml:142(replaceable)
-#: groupadd.8.xml:183(replaceable)
+#: useradd.8.xml:453(replaceable) groupmod.8.xml:145(replaceable)
+#: groupadd.8.xml:181(replaceable)
 msgid "9"
 msgstr "9"
 
-#: useradd.8.xml:448(para)
+#: useradd.8.xml:455(para)
 msgid "username already in use"
 msgstr ""
 
-#: useradd.8.xml:460(para)
+#: useradd.8.xml:467(para)
 msgid "can't create home directory"
 msgstr ""
 
-#: useradd.8.xml:464(replaceable)
+#: useradd.8.xml:471(replaceable)
 msgid "13"
 msgstr "13"
 
-#: useradd.8.xml:466(para)
+#: useradd.8.xml:473(para)
 msgid "can't create mail spool"
 msgstr ""
 
-#: useradd.8.xml:406(para)
+#: useradd.8.xml:413(para)
 msgid ""
 "The <command>useradd</command> command exits with the following values: "
 "<placeholder-1/>"
@@ -1126,7 +1129,7 @@ msgstr ""
 "Polecenie <command>useradd</command> kończy działanie z następującymi "
 "wartościami kodów zakończenia: <placeholder-1/>"
 
-#: useradd.8.xml:475(para)
+#: useradd.8.xml:482(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -1640,7 +1643,7 @@ msgstr ""
 #: shadow.5.xml:51(para)
 msgid ""
 "The password field must be filled. The encrypted password consists of 13 to "
-"24 characters from the 64 characters alphabet a thru z, A thru Z, 0 thru 9, "
+"24 characters from the 64 character alphabet a thru z, A thru Z, 0 thru 9, "
 "\\. and /. Optionally it can start with a \"$\" character. This means the "
 "encrypted password was generated using another (not DES) algorithm. For "
 "example if it starts with \"$1$\" it means the MD5-based algorithm was used."
@@ -2056,7 +2059,7 @@ msgid "passwd"
 msgstr "passwd"
 
 #: pwck.8.xml:31(arg) pwck.8.xml:114(option) login.1.xml:148(option)
-#: grpck.8.xml:16(arg)
+#: grpck.8.xml:16(arg) gpasswd.1.xml:93(option)
 msgid "-r"
 msgstr "-r"
 
@@ -2857,9 +2860,7 @@ msgstr ""
 
 #: newgrp.1.xml:17(replaceable) grpck.8.xml:18(replaceable)
 #: groupdel.8.xml:18(replaceable) groupadd.8.xml:24(replaceable)
-#: gpasswd.1.xml:18(replaceable) gpasswd.1.xml:24(replaceable)
-#: gpasswd.1.xml:29(replaceable) gpasswd.1.xml:33(replaceable)
-#: gpasswd.1.xml:37(replaceable) gpasswd.1.xml:43(replaceable)
+#: gpasswd.1.xml:21(replaceable)
 msgid "group"
 msgstr "group"
 
@@ -3305,7 +3306,7 @@ msgstr "-h <placeholder-1/>"
 msgid "-f <placeholder-1/>"
 msgstr "-f <placeholder-1/>"
 
-#: login.1.xml:31(arg) gpasswd.1.xml:37(arg) chfn.1.xml:18(arg)
+#: login.1.xml:31(arg) chfn.1.xml:18(arg)
 msgid "-r <placeholder-1/>"
 msgstr "-r <placeholder-1/>"
 
@@ -3430,10 +3431,10 @@ msgstr ""
 
 #: login.1.xml:186(para)
 msgid ""
-"As any program, <command>login</command> appearance could be faked. If non-"
-"trusted users have a physical access to the machine, an attacker could use "
-"this to obtain the password of the next person sitting in front of the "
-"machine. Under Linux, the SAK mecanism can be used by users to initiate of a "
+"As with any program, <command>login</command>'s appearance can be faked. If "
+"non-trusted users have physical access to a machine, an attacker could use "
+"this to obtain the password of the next person coming to sit in front of the "
+"machine. Under Linux, the SAK mechanism can be used by users to initiate a "
 "trusted path and prevent this kind of attack."
 msgstr ""
 
@@ -3604,14 +3605,22 @@ msgid ""
 "refentrytitle><manvolnum>2</manvolnum></citerefentry>."
 msgstr ""
 
+#: limits.5.xml:67(para)
+msgid "I: max nice value (0..39 which translates to 20..-19)"
+msgstr ""
+
 #: limits.5.xml:69(para)
+msgid "O: max real time priority"
+msgstr ""
+
+#: limits.5.xml:72(para)
 msgid ""
 "For example, <emphasis remap=\"I\">L2D2048N5</emphasis> is a valid "
 "<emphasis>LIMITS_STRING </emphasis>. For reading convenience, the following "
 "entries are equivalent:"
 msgstr ""
 
-#: limits.5.xml:75(programlisting)
+#: limits.5.xml:78(programlisting)
 #, no-wrap
 msgid ""
 "\n"
@@ -3624,7 +3633,7 @@ msgstr ""
 "      username L2 D2048 N5\n"
 "    "
 
-#: limits.5.xml:80(para)
+#: limits.5.xml:83(para)
 msgid ""
 "Be aware that after <emphasis remap=\"I\">username</emphasis> the rest of "
 "the line is considered a limit string, thus comments are not allowed. A "
@@ -3632,7 +3641,7 @@ msgid ""
 "<command>login</command> program."
 msgstr ""
 
-#: limits.5.xml:87(para)
+#: limits.5.xml:90(para)
 msgid ""
 "The default entry is denoted by username \"<emphasis>*</emphasis>\". If you "
 "have multiple <emphasis remap=\"I\">default</emphasis> entries in your "
@@ -3640,24 +3649,24 @@ msgid ""
 "default entry."
 msgstr ""
 
-#: limits.5.xml:94(para)
+#: limits.5.xml:97(para)
 msgid ""
 "To completely disable limits for a user, a single dash \"<emphasis>-</"
 "emphasis>\" will do."
 msgstr ""
 
-#: limits.5.xml:99(para)
+#: limits.5.xml:102(para)
 msgid ""
 "Also, please note that all limit settings are set PER LOGIN. They are not "
 "global, nor are they permanent. Perhaps global limits will come, but for now "
 "this will have to do ;)"
 msgstr ""
 
-#: limits.5.xml:110(filename)
+#: limits.5.xml:113(filename)
 msgid "/etc/limits"
 msgstr "/etc/limits"
 
-#: limits.5.xml:118(para)
+#: limits.5.xml:121(para)
 msgid ""
 "<citerefentry><refentrytitle>login</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>setpriority</"
@@ -3966,8 +3975,8 @@ msgstr "groups"
 msgid "display current group names"
 msgstr ""
 
-#: groups.1.xml:18(replaceable) gpasswd.1.xml:23(replaceable)
-#: gpasswd.1.xml:28(replaceable) chfn.1.xml:22(replaceable)
+#: groups.1.xml:18(replaceable) gpasswd.1.xml:67(replaceable)
+#: gpasswd.1.xml:80(replaceable) chfn.1.xml:22(replaceable)
 msgid "user"
 msgstr ""
 
@@ -4038,13 +4047,15 @@ msgstr ""
 "<option>-g</option>, <option>--gid</option><replaceable>GID</replaceable>"
 
 #: groupmod.8.xml:45(para)
+#, fuzzy
 msgid ""
-"Specify the new group ID for the <replaceable>GROUP</replaceable>. The "
-"numerical value of the <replaceable>GID</replaceable> must be a non-negative "
-"decimal integer. This value must be unique, unless the <option>-o</option> "
-"option is used. Values between 0 and 999 are typically reserved for system "
-"groups. Any files which the old group ID is the file group ID must have the "
-"file group ID changed manually."
+"The group ID of the given <replaceable>GROUP</replaceable> will be changed "
+"to <replaceable>GID</replaceable>. The value of <replaceable>GID</"
+"replaceable> must be a non-negative decimal integer. This value must be "
+"unique, unless the <option>-o</option> option is used. Values between 0 and "
+"999 are typically reserved for system groups. Any files that have the old "
+"group ID and must continue to belong to <replaceable>GROUP</replaceable>, "
+"must have their group ID changed manually."
 msgstr ""
 "Nowa wartość ID grupy <replaceable>GRUPA</replaceable>. Numeryczna wartość "
 "<replaceable>GID</replaceable> musi mieć nieujemną wartość całkowitą. "
@@ -4053,7 +4064,7 @@ msgstr ""
 "Pliki, dla których stary identyfikator jest identyfikatorem grupy pliku, "
 "wymagają ręcznej zmiany ID grupy."
 
-#: groupmod.8.xml:63(term)
+#: groupmod.8.xml:66(term)
 msgid ""
 "<option>-n</option>, <option>--new-name</option><replaceable>NEW_GROUP</"
 "replaceable>"
@@ -4061,7 +4072,7 @@ msgstr ""
 "<option>-a</option>, <option>--append</option><replaceable>NOWA_GRUPA</"
 "replaceable>"
 
-#: groupmod.8.xml:68(para)
+#: groupmod.8.xml:71(para)
 msgid ""
 "The name of the group will be changed from <replaceable>GROUP</replaceable> "
 "to <replaceable>NEW_GROUP</replaceable> name."
@@ -4069,19 +4080,20 @@ msgstr ""
 "Nazwa grupy zostanie zmieniona z <replaceable>GRUPA</replaceable> na nazwę "
 "<replaceable>NOWA_GRUPA</replaceable>."
 
-#: groupmod.8.xml:79(para)
+#: groupmod.8.xml:82(para)
+#, fuzzy
 msgid ""
-"When used with the <option>-g</option> option allow to change the group "
-"<replaceable>GID</replaceable> to non-unique value."
+"When used with the <option>-g</option> option, allow to change the group "
+"<replaceable>GID</replaceable> to a non-unique value."
 msgstr ""
 "Użyte z opcją <option>-g</option> umożliwia zmiane <replaceable>GID</"
 "replaceable> grupy na wartość nieunikalną."
 
-#: groupmod.8.xml:144(para)
+#: groupmod.8.xml:147(para)
 msgid "group name already in use"
 msgstr "nazwa grupy już jest w użyciu"
 
-#: groupmod.8.xml:108(para)
+#: groupmod.8.xml:111(para)
 msgid ""
 "The <command>groupmod</command> command exits with the following values: "
 "<placeholder-1/>"
@@ -4089,7 +4101,7 @@ msgstr ""
 "Polecenie <command>groupmod</command> kończy działanie z następującymi "
 "wartościami kodów zakończenia: <placeholder-1/>"
 
-#: groupmod.8.xml:159(para)
+#: groupmod.8.xml:162(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -4135,11 +4147,11 @@ msgstr ""
 msgid "user_name"
 msgstr "user_name"
 
-#: groupmems.8.xml:18(arg) gpasswd.1.xml:23(arg)
+#: groupmems.8.xml:18(arg)
 msgid "-a <placeholder-1/>"
 msgstr "-a <placeholder-1/>"
 
-#: groupmems.8.xml:19(arg) gpasswd.1.xml:28(arg)
+#: groupmems.8.xml:19(arg)
 msgid "-d <placeholder-1/>"
 msgstr "-d <placeholder-1/>"
 
@@ -4174,7 +4186,7 @@ msgid ""
 "The options which apply to the <command>groupmems</command> command are:"
 msgstr "Polecenie <command>groupmems</command> posiada następujące opcje:"
 
-#: groupmems.8.xml:49(option)
+#: groupmems.8.xml:49(option) gpasswd.1.xml:67(option)
 msgid "-a"
 msgstr "-a"
 
@@ -4182,7 +4194,7 @@ msgstr "-a"
 msgid "Add a new user to the group membership list."
 msgstr ""
 
-#: groupmems.8.xml:55(option)
+#: groupmems.8.xml:55(option) gpasswd.1.xml:80(option)
 msgid "-d"
 msgstr "-d"
 
@@ -4194,7 +4206,7 @@ msgstr ""
 msgid "Purge all users from the group membership list."
 msgstr ""
 
-#: groupmems.8.xml:67(option) groupadd.8.xml:59(option)
+#: groupmems.8.xml:67(option) groupadd.8.xml:61(option)
 msgid "-g"
 msgstr "-g"
 
@@ -4344,30 +4356,30 @@ msgstr ""
 msgid "create a new group"
 msgstr "twółrz nową grupę"
 
-#: groupadd.8.xml:18(replaceable) groupadd.8.xml:59(replaceable)
+#: groupadd.8.xml:18(replaceable) groupadd.8.xml:61(replaceable)
 msgid "GID"
 msgstr "GID"
 
-#: groupadd.8.xml:19(arg) groupadd.8.xml:100(option)
+#: groupadd.8.xml:19(arg) groupadd.8.xml:102(option)
 msgid "-o"
 msgstr "-o"
 
-#: groupadd.8.xml:22(replaceable) groupadd.8.xml:79(replaceable)
+#: groupadd.8.xml:22(replaceable) groupadd.8.xml:81(replaceable)
 msgid "KEY"
 msgstr "KLUCZ"
 
-#: groupadd.8.xml:22(replaceable) groupadd.8.xml:79(replaceable)
+#: groupadd.8.xml:22(replaceable) groupadd.8.xml:81(replaceable)
 msgid "VALUE"
 msgstr "WARTOŚĆ"
 
-#: groupadd.8.xml:22(arg) groupadd.8.xml:79(option)
+#: groupadd.8.xml:22(arg) groupadd.8.xml:81(option)
 msgid "-K <placeholder-1/>=<placeholder-2/>"
 msgstr "-K <placeholder-1/>=<placeholder-2/>"
 
 #: groupadd.8.xml:31(para)
 msgid ""
 "The <command>groupadd</command> command creates a new group account using "
-"the values specified on the command line and the default values from the "
+"the values specified on the command line plus the default values from the "
 "system. The new group will be entered into the system files as needed."
 msgstr ""
 
@@ -4377,12 +4389,13 @@ msgstr "Polecenie <command>groupadd</command> posiada następujące opcje:"
 
 #: groupadd.8.xml:50(para)
 msgid ""
-"This option causes to just exit with success status if the specified group "
-"already exists. With <option>-g</option>, if specified GID already exists, "
-"other (unique) GID is chosen (i.e. <option>-g</option> is turned off)."
+"This option causes the command to simply exit with success status if the "
+"specified group already exists. When used with <option>-g</option>, and the "
+"specified GID already exists, another (unique) GID is chosen (i.e. <option>-"
+"g</option> is turned off)."
 msgstr ""
 
-#: groupadd.8.xml:62(para)
+#: groupadd.8.xml:64(para)
 msgid ""
 "The numerical value of the group's ID. This value must be unique, unless the "
 "<option>-o</option> option is used. The value must be non-negative. The "
@@ -4391,39 +4404,35 @@ msgid ""
 "system accounts."
 msgstr ""
 
-#: groupadd.8.xml:82(para)
+#: groupadd.8.xml:84(para)
 msgid ""
 "Overrides <filename>/etc/login.defs</filename> defaults (GID_MIN, GID_MAX "
 "and others). Multiple <option>-K</option> options can be specified."
 msgstr ""
 
-#: groupadd.8.xml:87(para)
+#: groupadd.8.xml:89(para)
 msgid ""
 "Example: <option>-K </option><replaceable>GID_MIN</"
 "replaceable>=<replaceable>100</replaceable><option> -K </"
 "option><replaceable>GID_MAX</replaceable>=<replaceable>499</replaceable>"
 msgstr ""
 
-#: groupadd.8.xml:91(para)
+#: groupadd.8.xml:93(para)
 msgid ""
 "Note: <option>-K </option><replaceable>GID_MIN</"
 "replaceable>=<replaceable>10</replaceable>,<replaceable>GID_MAX</"
 "replaceable>=<replaceable>499</replaceable> doesn't work yet."
 msgstr ""
 
-#: groupadd.8.xml:103(para)
-msgid "This option permits to add group with non-unique GID."
+#: groupadd.8.xml:105(para)
+msgid "This option permits to add a group with a non-unique GID."
 msgstr ""
 
-#: groupadd.8.xml:137(para)
+#: groupadd.8.xml:139(para)
 msgid ""
 "Groupnames must begin with a lower case letter or an underscore, and only "
 "lower case letters, underscores, dashes, and dollar signs may follow. In "
 "regular expression terms: [a-z_][a-z0-9_-]*[$]"
-msgstr ""
-
-#: groupadd.8.xml:141(para) groupadd.8.xml:149(para)
-msgid "Groupnames may only be up to 16 characters long."
 msgstr ""
 
 #: groupadd.8.xml:143(para)
@@ -4432,15 +4441,19 @@ msgid ""
 "<command>groupadd</command> will deny the group creation request."
 msgstr ""
 
-#: groupadd.8.xml:179(para)
+#: groupadd.8.xml:148(para)
+msgid "Groupnames may only be up to 16 characters long."
+msgstr ""
+
+#: groupadd.8.xml:177(para)
 msgid "GID not unique (when <option>-o</option> not used)"
 msgstr ""
 
-#: groupadd.8.xml:185(para)
+#: groupadd.8.xml:183(para)
 msgid "group name not unique"
 msgstr ""
 
-#: groupadd.8.xml:155(para)
+#: groupadd.8.xml:153(para)
 msgid ""
 "The <command>groupadd</command> command exits with the following values: "
 "<placeholder-1/>"
@@ -4448,7 +4461,7 @@ msgstr ""
 "Polecenie <command>groupadd</command> kończy działanie z następującymi "
 "wartościami kodów zakończenia: <placeholder-1/>"
 
-#: groupadd.8.xml:200(para)
+#: groupadd.8.xml:198(para)
 msgid ""
 "<citerefentry><refentrytitle>chfn</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>chsh</"
@@ -4483,9 +4496,7 @@ msgstr ""
 "refentrytitle><manvolnum>8</manvolnum></citerefentry>."
 
 #: gpasswd.1.xml:5(refentrytitle) gpasswd.1.xml:10(refname)
-#: gpasswd.1.xml:16(command) gpasswd.1.xml:22(command)
-#: gpasswd.1.xml:27(command) gpasswd.1.xml:32(command)
-#: gpasswd.1.xml:36(command) gpasswd.1.xml:40(command)
+#: gpasswd.1.xml:16(command)
 msgid "gpasswd"
 msgstr "gpasswd"
 
@@ -4493,64 +4504,106 @@ msgstr "gpasswd"
 msgid "administer the <placeholder-1/> file"
 msgstr ""
 
-#: gpasswd.1.xml:33(arg)
-msgid "-R <placeholder-1/>"
-msgstr "-R <placeholder-1/>"
+#: gpasswd.1.xml:18(replaceable)
+#, fuzzy
+msgid "option"
+msgstr "opcje"
 
-#: gpasswd.1.xml:41(replaceable) gpasswd.1.xml:42(replaceable)
-msgid "user,"
-msgstr ""
-
-#: gpasswd.1.xml:41(arg)
-msgid "-A <placeholder-1/>"
-msgstr "-A <placeholder-1/>"
-
-#: gpasswd.1.xml:42(arg)
-msgid "-M <placeholder-1/>"
-msgstr "-M <placeholder-1/>"
-
-#: gpasswd.1.xml:49(para)
+#: gpasswd.1.xml:28(para)
 msgid ""
 "The <command>gpasswd</command> command is used to administer the <filename>/"
 "etc/group</filename> file (and <filename>/etc/gshadow</filename> file if "
 "compiled with SHADOWGRP defined). Every group can have administrators, "
-"members and a password. System administrator can use <option>-A</option> "
-"option to define group administrator(s) and <option>-M</option> option to "
-"define members and has all rights of group administrators and members."
+"members and a password. System administrator can use the <option>-A</option> "
+"option to define group administrator(s) and the <option>-M</option> option "
+"to define members and has all rights of group administrators and members."
 msgstr ""
 
-#: gpasswd.1.xml:60(title)
+#: gpasswd.1.xml:37(para)
+msgid ""
+"<command>gpasswd</command> called by a group administrator with a group name "
+"only prompts for the group password. If a password is set the members can "
+"still <citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
+"manvolnum></citerefentry> without a password, and non-members must supply "
+"the password."
+msgstr ""
+
+#: gpasswd.1.xml:47(title)
 msgid "Notes about group passwords"
 msgstr ""
 
-#: gpasswd.1.xml:61(para)
+#: gpasswd.1.xml:48(para)
 msgid ""
 "Group passwords are an inherent security problem since more than one person "
 "is permitted to know the password. However, groups are a useful tool for "
 "permitting co-operation between different users."
 msgstr ""
 
-#: gpasswd.1.xml:72(para)
+#: gpasswd.1.xml:59(para)
 msgid ""
-"Group administrator can add and delete users using <option>-a</option> and "
-"<option>-d</option> options respectively. Administrators can use <option>-r</"
-"option> option to remove group password. When no password is set only group "
-"members can use <command>newgrp</command> to join the group. Option <option>-"
-"R</option> disables access via a password to the group through "
-"<command>newgrp</command> command (however members will still be able to "
-"switch to this group)."
+"Except for the <option>-A</option> and <option>-M</option> options, the "
+"options cannot be combined. The options which apply to the <command>gpasswd</"
+"command> command are:"
 msgstr ""
 
-#: gpasswd.1.xml:82(para)
+#: gpasswd.1.xml:70(para)
+#, fuzzy
 msgid ""
-"<command>gpasswd</command> called by a group administrator with group name "
-"only prompts for the group password. If password is set the members can "
-"still <citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</"
-"manvolnum></citerefentry> without a password, non-members must supply the "
-"password."
+"Add the <replaceable>user</replaceable> to the named <replaceable>group</"
+"replaceable>."
+msgstr ""
+"Nazwa grupy zostanie zmieniona z <replaceable>GRUPA</replaceable> na nazwę "
+"<replaceable>NOWA_GRUPA</replaceable>."
+
+#: gpasswd.1.xml:83(para)
+#, fuzzy
+msgid ""
+"Remove the <replaceable>user</replaceable> from the named "
+"<replaceable>group</replaceable>."
+msgstr ""
+"Nazwa grupy zostanie zmieniona z <replaceable>GRUPA</replaceable> na nazwę "
+"<replaceable>NOWA_GRUPA</replaceable>."
+
+#: gpasswd.1.xml:96(para)
+msgid ""
+"Remove the password from the named <replaceable>group</replaceable>. Only "
+"group members will be allowed to use <command>newgrp</command> to join the "
+"named <replaceable>group</replaceable>."
 msgstr ""
 
-#: gpasswd.1.xml:112(para)
+#: gpasswd.1.xml:108(option)
+#, fuzzy
+msgid "-R"
+msgstr "-"
+
+#: gpasswd.1.xml:111(para)
+msgid ""
+"Restrict the access to the named <replaceable>group</replaceable>. Only "
+"group members will be allowed to use <command>newgrp</command> to join the "
+"named <replaceable>group</replaceable>."
+msgstr ""
+
+#: gpasswd.1.xml:122(term)
+#, fuzzy
+msgid "<option>-A</option><replaceable>user</replaceable>,..."
+msgstr ""
+"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+
+#: gpasswd.1.xml:126(para)
+msgid "Set the list of administrative users."
+msgstr ""
+
+#: gpasswd.1.xml:134(term)
+#, fuzzy
+msgid "<option>-M</option><replaceable>user</replaceable>,..."
+msgstr ""
+"<option>-u</option>, <option>--uid</option><replaceable>UID</replaceable>"
+
+#: gpasswd.1.xml:138(para)
+msgid "Set the list of group members."
+msgstr ""
+
+#: gpasswd.1.xml:166(para)
 msgid ""
 "<citerefentry><refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum></"
 "citerefentry>, <citerefentry><refentrytitle>gshadow</"
@@ -5261,3 +5314,12 @@ msgstr ""
 #: chage.1.xml:0(None)
 msgid "translator-credits"
 msgstr "Tomasz Kłoczko <kloczek@pld.org.pl>, 2006"
+
+#~ msgid "-R <placeholder-1/>"
+#~ msgstr "-R <placeholder-1/>"
+
+#~ msgid "-A <placeholder-1/>"
+#~ msgstr "-A <placeholder-1/>"
+
+#~ msgid "-M <placeholder-1/>"
+#~ msgstr "-M <placeholder-1/>"

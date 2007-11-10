@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1202,8 +1202,9 @@ msgstr "មិន​ស្គាល់​ UID ៖ %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "មិន​ស្គាល់​ GID ៖ %lu\n"
 
-msgid "Sorry.\n"
-msgstr "សូមអភ័យទោស ។\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "គ្មាន​ឯកសារ​ពាក្យ​សម្ងាត់ឡើយ​\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1341,9 +1342,9 @@ msgstr "ពួកវាមិនផ្គូរផ្គងគ្នាទេ �
 msgid "The password for %s cannot be changed.\n"
 msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s បានឡើយ ។\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "សូមអភ័យទោស ពាក្យ​សម្ងាត់​សម្រាប់​ %s មិន​ទាន់​ប្តូរ​នូវ​ឡើយ​ទេ​ ។\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s បានឡើយ ។\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1464,9 +1465,6 @@ msgstr "ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹ
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "សូម​បញ្ចូល​ពាក្យ​សម្ងាត់ផ្ទាល់ខ្លួន​របស់អ្នក​ ជា​ការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ​ ។\n"
-
-msgid "Sorry."
-msgstr "សូមអភ័យទោស​ ។"
 
 #, c-format
 msgid "%s: %s\n"
@@ -1838,8 +1836,6 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1847,6 +1843,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -1987,3 +1986,12 @@ msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប្ដូរ​របស់អ្នក​គឺនៅក្នុង​ %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "សូមអភ័យទោស ។\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "សូមអភ័យទោស ពាក្យ​សម្ងាត់​សម្រាប់​ %s មិន​ទាន់​ប្តូរ​នូវ​ឡើយ​ទេ​ ។\n"
+
+#~ msgid "Sorry."
+#~ msgstr "សូមអភ័យទោស​ ។"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1165,8 +1165,9 @@ msgstr "未知的 GID：%lu\n"
 msgid "unknown GID: %lu\n"
 msgstr "未知的 GID：%lu\n"
 
-msgid "Sorry.\n"
-msgstr "抱歉。\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "沒有密碼檔案\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1295,9 +1296,9 @@ msgstr "他們並不匹配﹔請重試。\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "無法更改 %s 的密碼。\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "抱歉，無法更改 %s 的密碼。\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "無法更改 %s 的密碼。\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1418,9 +1419,6 @@ msgstr "忽略密碼認証\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "請輸入您自己的密碼作為驗証。\n"
-
-msgid "Sorry."
-msgstr "抱歉"
 
 #, fuzzy, c-format
 msgid "%s: %s\n"
@@ -1746,8 +1744,6 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1755,6 +1751,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -1864,3 +1863,12 @@ msgstr "無法備份"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "抱歉。\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "抱歉，無法更改 %s 的密碼。\n"
+
+#~ msgid "Sorry."
+#~ msgstr "抱歉"

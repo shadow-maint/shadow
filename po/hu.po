@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-07-18 21:33+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -1205,8 +1205,9 @@ msgstr "ismeretlen UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "ismeretlen GID: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "Bocs.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "Nincs jelszófájl\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1344,9 +1345,9 @@ msgstr "Nem egyeznek; próbáld újra\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "%s jelszava nem változtatható\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Bocsi, %s jelszava még nem változtatható...\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "%s jelszava nem változtatható\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1467,9 +1468,6 @@ msgstr "Jelszó hitelesítés átlépve.\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Add meg SAJÁT jelszavad a hitelesítéshez.\n"
-
-msgid "Sorry."
-msgstr "Bocs."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1852,13 +1850,11 @@ msgid "%s: error removing directory %s\n"
 msgstr "%s: hiba %s könyvtár törlésekor\n"
 
 # FIXME
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1866,6 +1862,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -2012,3 +2011,12 @@ msgstr "Nem tudtam biztonsági másolatot készíteni"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "Bocs.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "Bocsi, %s jelszava még nem változtatható...\n"
+
+#~ msgid "Sorry."
+#~ msgstr "Bocs."

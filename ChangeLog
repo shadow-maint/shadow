@@ -1,5 +1,19 @@
 2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/sv/sv.po, man/de/de.po, man/fr/fr.po, man/pl/pl.po,
+	man/ru/ru.po, man/it/it.po: Run "make update-po" in the man
+	directory.
+
+	* po/ne.po, po/bs.po, po/cs.po, po/pt_BR.po, po/km.po, po/es.po,
+	po/eu.po, po/ko.po, po/hu.po, po/sk.po, po/vi.po, po/uk.po,
+	po/ro.po, po/sq.po, po/ru.po, po/id.po, po/nb.po, po/el.po,
+	po/gl.po, po/fr.po, po/nl.po, po/pl.po, po/nn.po, po/it.po,
+	po/dz.po, po/tl.po, po/pt.po, po/ca.po, po/da.po, po/tr.po,
+	po/sv.po, po/de.po, po/ja.po, po/zh_TW.po, po/he.po, po/fi.po,
+	po/zh_CN.po: Run "make update-po" in the po directory.
+
+2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newgrp.c: Don't ask for a password if there are no
 	group passwords. Just directly give up. This comes from the
 	Fedora's patch shadow-4.0.13-newgrpPwd.patch, and seems to be the

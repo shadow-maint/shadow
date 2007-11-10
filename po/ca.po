@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-07-19 04:40+0300\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -1204,8 +1204,9 @@ msgstr "El UID és desconegut: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "El GID és desconegut: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "Disculpeu.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "No hi ha fitxer de contrasenyes\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1348,9 +1349,9 @@ msgstr "No coincideixen; intenteu-ho de nou.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "No es pot canviar la contrasenya per a %s.\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Disculpeu, la contrasenya per a %s encara no es pot canviar.\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "No es pot canviar la contrasenya per a %s.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1471,9 +1472,6 @@ msgstr "S'ha evitat l'autenticació de contrasenya.\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Si us plau introduïu la VOSTRA contrasenya com a autenticació.\n"
-
-msgid "Sorry."
-msgstr "Disculpeu."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1856,13 +1854,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: s'ha produït un error en eliminar el directori %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1870,6 +1866,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -2015,3 +2014,12 @@ msgstr "No s'ha pogut fer una còpia de seguretat"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "Disculpeu.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "Disculpeu, la contrasenya per a %s encara no es pot canviar.\n"
+
+#~ msgid "Sorry."
+#~ msgstr "Disculpeu."

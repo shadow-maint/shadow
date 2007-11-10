@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-07-19 22:14+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -1223,8 +1223,9 @@ msgstr "không biết UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "không biết GID: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "Rất tiếc.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "Không có tập tin mật khẩu\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1362,9 +1363,9 @@ msgstr "Hai mật khẩu không trùng: hãy thử lại.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "Không thể thay đổi mật khẩu cho %s.\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Tiếc là chưa có thể thay đổi mật khẩu cho %s.\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "Không thể thay đổi mật khẩu cho %s.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1488,9 +1489,6 @@ msgstr "Việc xác thức mật khẩu bị vòng.\n"
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Hãy gõ mật khẩu MÌNH để xác thức.\n"
-
-msgid "Sorry."
-msgstr "Rất tiếc."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1870,13 +1868,11 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: gặp lỗi khi gỡ bỏ thư mục %s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1884,6 +1880,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -2030,3 +2029,12 @@ msgstr "Không thể lưu trữ"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn ở trong %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "Rất tiếc.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "Tiếc là chưa có thể thay đổi mật khẩu cho %s.\n"
+
+#~ msgid "Sorry."
+#~ msgstr "Rất tiếc."

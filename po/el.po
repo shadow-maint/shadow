@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
-"Report-Msgid-Bugs-To: kloczek@pld.org.pl\n"
-"POT-Creation-Date: 2006-11-03 18:51+0100\n"
+"Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
+"POT-Creation-Date: 2007-10-28 19:15+0100\n"
 "PO-Revision-Date: 2006-01-18 16:16+0200\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1220,8 +1220,9 @@ msgstr "άγνωστο UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "άγνωστο GID: %lu\n"
 
-msgid "Sorry.\n"
-msgstr "Λυπάμαι.\n"
+#, fuzzy
+msgid "No password.\n"
+msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1365,9 +1366,9 @@ msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "Το συνθηματικό για τον %s δεν μπορεί να αλλάξει.\n"
 
-#, c-format
-msgid "Sorry, the password for %s cannot be changed yet.\n"
-msgstr "Συγνώμη, το συνθηματικό για τον %s δεν μπορεί να αλλάξει ακόμη.\n"
+#, fuzzy, c-format
+msgid "The password for %s cannot be changed yet.\n"
+msgstr "Το συνθηματικό για τον %s δεν μπορεί να αλλάξει.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1489,9 +1490,6 @@ msgstr "Παράκαμψη εξακρίβωσης με συνθηματικό.\n
 #, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Παρακαλώ εισάγετε το ΔΙΚΟ σας συνθηματικό για εξακρίβωση.\n"
-
-msgid "Sorry."
-msgstr "Λυπάμαι."
 
 #, c-format
 msgid "%s: %s\n"
@@ -1876,8 +1874,6 @@ msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
 "Options:\n"
-"  -a, --append\t\t\tappend the user to the supplemental GROUPS\n"
-"\t\t\t\t(use only with -G)\n"
 "  -c, --comment COMMENT\t\tnew value of the GECOS field\n"
 "  -d, --home HOME_DIR\t\tnew home directory for the user account\n"
 "  -e, --expiredate EXPIRE_DATE\tset account expiration date to EXPIRE_DATE\n"
@@ -1885,6 +1881,9 @@ msgid ""
 "\t\t\t\tto INACTIVE\n"
 "  -g, --gid GROUP\t\tforce use GROUP as new primary group\n"
 "  -G, --groups GROUPS\t\tnew list of supplementary GROUPS\n"
+"  -a, --append\t\tappend the user to the supplemental GROUPS\n"
+"\t\t\t\tmentioned by the -G option without removing\n"
+"\t\t\t\thim/her from other groups\n"
 "  -h, --help\t\t\tdisplay this help message and exit\n"
 "  -l, --login NEW_LOGIN\t\tnew value of the login name\n"
 "  -L, --lock\t\t\tlock the user account\n"
@@ -2033,3 +2032,12 @@ msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλ�
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#~ msgid "Sorry.\n"
+#~ msgstr "Λυπάμαι.\n"
+
+#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
+#~ msgstr "Συγνώμη, το συνθηματικό για τον %s δεν μπορεί να αλλάξει ακόμη.\n"
+
+#~ msgid "Sorry."
+#~ msgstr "Λυπάμαι."
