@@ -1,5 +1,13 @@
 2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* ./, libmisc/, src/, contrib/, doc/, lib/, man/, man/sv/,
+	man/de/, man/ja/, man/fi/, man/pt_BR/, man/fr/, man/pl/, man/hu/,
+	man/tr/, man/ru/, man/zh_TW/, man/id/, man/zh_CN/, man/cs/,
+	man/es/, man/ko/, man/it/, etc/, etc/pam.d/, po/: Restore the
+	ignore patterns from the previous repository.
+
+2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/sv/sv.po, man/de/de.po, man/fr/fr.po, man/pl/pl.po,
 	man/ru/ru.po, man/it/it.po: Run "make update-po" in the man
 	directory.
