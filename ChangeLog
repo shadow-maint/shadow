@@ -1,5 +1,12 @@
 2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newgrp.c: Don't ask for a password if there are no
+	group passwords. Just directly give up. This comes from the
+	Fedora's patch shadow-4.0.13-newgrpPwd.patch, and seems to be the
+	only part with an effect.
+
+2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/chgpasswd.c, src/chpasswd.c: Fix chpasswd and
 	chgpasswd stack overflow. Based on Fedora's
 	shadow-4.0.18.1-overflow.patch.
