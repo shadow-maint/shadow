@@ -10,6 +10,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   Fedora's shadow-4.0.18.1-overflow.patch.
 - newgrp: Don't ask for a password if there are no group passwords. Just
   directly give up.
+- The permissions of the suid binaries is now configurable in
+  src/Makefile.am. Note that changing the permissions is not recommended.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

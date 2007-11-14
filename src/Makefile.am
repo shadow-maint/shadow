@@ -4,6 +4,7 @@ EXTRA_DIST = \
 
 ubindir = ${prefix}/bin
 usbindir = ${prefix}/sbin
+suidperms = 4755
 
 INCLUDES = \
 	-I${top_srcdir}/lib \
@@ -91,8 +92,8 @@ install-am: all-am
 	ln -sf newgrp	$(DESTDIR)$(ubindir)/sg
 	ln -sf vipw	$(DESTDIR)$(usbindir)/vigr
 	for i in $(suidbins); do \
-		chmod -f 4755 $(DESTDIR)$(bindir)/$$i; \
+		chmod -f $(suidperms) $(DESTDIR)$(bindir)/$$i; \
 	done
 	for i in $(suidubins); do \
-		chmod -f 4755 $(DESTDIR)$(ubindir)/$$i; \
+		chmod -f $(suidperms) $(DESTDIR)$(ubindir)/$$i; \
 	done
