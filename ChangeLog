@@ -1,5 +1,10 @@
 2007-11-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c, NEWS: Declare the child and pid variable at the
+	beginning of a block. This fixes a compilation issue with gcc 2.95.
+
+2007-11-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/Makefile, NEWS: Add a suidperms variable. This should ease
 	the change of permission of suid binaries for distributors (not
 	recommended).

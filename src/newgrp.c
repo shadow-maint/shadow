@@ -454,6 +454,7 @@ int main (int argc, char **argv)
 		 * avoid any possibility of the parent being stopped when it
 		 * receives SIGCHLD from the terminating subshell.  -- JWP
 		 */
+		{
 		pid_t child, pid;
 
 		signal (SIGINT, SIG_IGN);
@@ -502,6 +503,7 @@ int main (int argc, char **argv)
 		signal (SIGTSTP, SIG_DFL);
 		signal (SIGTTIN, SIG_DFL);
 		signal (SIGTTOU, SIG_DFL);
+		}
 #endif				/* USE_PAM */
 	}
 #endif				/* USE_SYSLOG */
