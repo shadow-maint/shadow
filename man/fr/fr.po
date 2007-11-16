@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2007-11-10 23:24+0100\n"
-"PO-Revision-Date: 2006-07-30 08:23+0200\n"
+"PO-Revision-Date: 2007-11-16 14:26+0100\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -5556,7 +5556,7 @@ msgstr "gpasswd"
 
 #: gpasswd.1.xml:11(refpurpose)
 msgid "administer the <placeholder-1/> file"
-msgstr "Administrer le fichier <placeholder-1>"
+msgstr "Administrer le fichier <placeholder-1/>"
 
 #: gpasswd.1.xml:18(replaceable)
 #, fuzzy
