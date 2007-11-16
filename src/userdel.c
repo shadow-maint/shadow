@@ -150,6 +150,9 @@ static void update_groups (void)
 		 */
 		ngrp = __gr_dup (grp);
 		if (!ngrp) {
+			fprintf (stderr,
+				 _("%s: Out of memory. Cannot update the group database.\n"),
+				 Prog);
 			exit (13);	/* XXX */
 		}
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
@@ -245,6 +248,9 @@ static void update_groups (void)
 
 		nsgrp = __sgr_dup (sgrp);
 		if (!nsgrp) {
+			fprintf (stderr,
+				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
+				 Prog);
 			exit (13);	/* XXX */
 		}
 

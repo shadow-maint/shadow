@@ -1,5 +1,10 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c, src/usermod.c, src/useradd.c: Inform the user if
+	out of memory while updating a group database.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/usermod.c: Update the group database before flushing
 	the nscd caches.
 

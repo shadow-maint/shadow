@@ -727,6 +727,9 @@ static void grp_update (void)
 		 */
 		ngrp = __gr_dup (grp);
 		if (!ngrp) {
+			fprintf (stderr,
+				 _("%s: Out of memory. Cannot update the group database.\n"),
+				 Prog);
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -775,6 +778,9 @@ static void grp_update (void)
 		 */
 		nsgrp = __sgr_dup (sgrp);
 		if (!nsgrp) {
+			fprintf (stderr,
+				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
+				 Prog);
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 

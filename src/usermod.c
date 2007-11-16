@@ -574,7 +574,7 @@ static int update_group (void)
 		ngrp = __gr_dup (grp);
 		if (!ngrp) {
 			fprintf (stderr,
-				 _("%s: out of memory in update_group\n"),
+				 _("%s: Out of memory. Cannot update the group database.\n"),
 				 Prog);
 			gr_unlock ();
 			return -1;
@@ -696,8 +696,7 @@ static int update_gshadow (void)
 		nsgrp = __sgr_dup (sgrp);
 		if (!nsgrp) {
 			fprintf (stderr,
-				 _
-				 ("%s: out of memory in update_gshadow\n"),
+				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
 				 Prog);
 			sgr_unlock ();
 			return -1;
