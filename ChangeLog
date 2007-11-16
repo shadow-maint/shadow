@@ -1,5 +1,11 @@
 2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Check if the l64a function exists instead of a64l
+	which we do not use.
+	* libmisc/salt.c: Add support for uClibc with no l64a().
+
+2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: Check if the netdb.h header file and the innetgr
 	function exist.
 	* src/login_nopam.c, NEWS: Add support for systems with no

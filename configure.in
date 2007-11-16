@@ -34,7 +34,7 @@ AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 	utime.h ulimit.h sys/resource.h gshadow.h shadow.h lastlog.h \
 	locale.h rpc/key_prot.h netdb.h)
 
-AC_CHECK_FUNCS(a64l fchmod fchown fsync getgroups gethostname getspnam \
+AC_CHECK_FUNCS(l64a fchmod fchown fsync getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
 	memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr)
 AC_SYS_LARGEFILE

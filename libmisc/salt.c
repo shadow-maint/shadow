@@ -3,6 +3,8 @@
  *
  * Written by Marek Michalkiewicz <marekm@i17linuxb.ists.pwr.wroc.pl>,
  * public domain.
+ *
+ * l64a was Written by J.T. Conklin <jtc@netbsd.org>. Public domain.
  */
 
 #include <config.h>
@@ -14,6 +16,42 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+
+#ifndef HAVE_L64A
+char *l64a(long value)
+{
+	static char buf[8];
+	char *s = buf;
+	int digit;
+	int i;
+
+	if (value < 0) {
+		errno = EINVAL;
+		return(NULL);
+	}
+
+	for (i = 0; value != 0 && i < 6; i++) {
+		digit = value & 0x3f;
+
+		if (digit < 2) 
+			*s = digit + '.';
+		else if (digit < 12)
+			*s = digit + '0' - 2;
+		else if (digit < 38)
+			*s = digit + 'A' - 12;
+		else
+			*s = digit + 'a' - 38;
+
+		value >>= 6;
+		s++;
+	}
+
+	*s = '\0';
+
+	return(buf);
+}
+#endif /* !HAVE_L64A */
+
 /*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
  * in /etc/login.defs is "yes", the salt string will be prefixed by "$1$"

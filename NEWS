@@ -19,6 +19,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   systems, username with an @ will be treated like any other username
   (i.e. lookup in the local database for an user with an @). Thanks to
   Mike Frysinger for the patch.
+- Add support for uClibc with no l64a().
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 
