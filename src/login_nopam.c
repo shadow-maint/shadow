@@ -37,7 +37,9 @@
 #include <stdio.h>
 #include <syslog.h>
 #include <ctype.h>
+#ifdef HAVE_NETDB_H
 #include <netdb.h>
+#endif
 #include <grp.h>
 #ifdef PRIMARY_GROUP_MATCH
 #include <pwd.h>
@@ -49,8 +51,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>		/* for inet_ntoa() */
-extern struct group *getgrnam ();
-extern int innetgr ();
 
 #if !defined(MAXHOSTNAMELEN) || (MAXHOSTNAMELEN < 64)
 #undef MAXHOSTNAMELEN
@@ -178,6 +178,7 @@ static char *myhostname (void)
 	return (name);
 }
 
+#if HAVE_INNETGR
 /* netgroup_match - match group against machine or user */
 static int
 netgroup_match (const char *group, const char *machine, const char *user)
@@ -193,6 +194,7 @@ netgroup_match (const char *group, const char *machine, const char *user)
 
 	return innetgr (group, machine, user, mydomain);
 }
+#endif
 
 /* user_match - match a username against one token */
 static int user_match (const char *tok, const char *string)
@@ -214,8 +216,10 @@ static int user_match (const char *tok, const char *string)
 		*at = 0;
 		return (user_match (tok, string)
 			&& from_match (at + 1, myhostname ()));
+#if HAVE_INNETGR
 	} else if (tok[0] == '@') {	/* netgroup */
 		return (netgroup_match (tok + 1, (char *) 0, string));
+#endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
 		return (YES);
 	} else if ((group = getgrnam (tok))) {	/* try group membership */
@@ -271,9 +275,12 @@ static int from_match (const char *tok, const char *string)
 	 * contain a "." character. If the token is a network number, return YES
 	 * if it matches the head of the string.
 	 */
+#if HAVE_INNETGR
 	if (tok[0] == '@') {	/* netgroup */
 		return (netgroup_match (tok + 1, string, (char *) 0));
-	} else if (string_match (tok, string)) {	/* ALL or exact match */
+	} else
+#endif
+	if (string_match (tok, string)) {	/* ALL or exact match */
 		return (YES);
 	} else if (tok[0] == '.') {	/* domain: match last fields */
 		if ((str_len = strlen (string)) > (tok_len = strlen (tok))
