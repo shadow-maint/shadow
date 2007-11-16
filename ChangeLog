@@ -1,3 +1,12 @@
+2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/salt.c: Make sure the salt string is terminated at the
+	right place (either 8th, or 11th position).
+	* NEWS, src/chgpasswd.c, src/chpasswd.c: The protocol + salt does
+	not need 15 chars. No need for a temporary buffer.
+	This change the fix committed on 2007-11-10. The salt provided to
+	pw_encrypt could have been too long.
+
 2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/fr/fr.po: Fix typo: missing / in <placeholder-1/>. This

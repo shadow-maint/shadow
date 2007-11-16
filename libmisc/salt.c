@@ -62,11 +62,13 @@ char *crypt_make_salt (void)
 {
 	struct timeval tv;
 	static char result[40];
+	int max_salt_len = 8;
 
 	result[0] = '\0';
 #ifndef USE_PAM
 	if (getdef_bool ("MD5_CRYPT_ENAB")) {
 		strcpy (result, "$1$");	/* magic for the new MD5 crypt() */
+		max_salt_len += 3;
 	}
 #endif
 
@@ -77,8 +79,8 @@ char *crypt_make_salt (void)
 	strcat (result, l64a (tv.tv_usec));
 	strcat (result, l64a (tv.tv_sec + getpid () + clock ()));
 
-	if (strlen (result) > 3 + 8)	/* magic+salt */
-		result[11] = '\0';
+	if (strlen (result) > max_salt_len)	/* magic+salt */
+		result[max_salt_len] = '\0';
 
 	return result;
 }
