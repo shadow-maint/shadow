@@ -1,3 +1,7 @@
+2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Indentation fix.
+
 2007-11-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c, NEWS: Declare the child and pid variable at the

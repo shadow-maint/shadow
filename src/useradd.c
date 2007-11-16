@@ -114,7 +114,7 @@ static int do_grp_update = 0;	/* group files need to be updated */
 static char *Prog;
 
 static int
- bflg = 0,			/* new default root of home directory */
+    bflg = 0,			/* new default root of home directory */
     cflg = 0,			/* comment (GECOS) field for new account */
     dflg = 0,			/* home directory for new account */
     Dflg = 0,			/* set/show new user default values */
