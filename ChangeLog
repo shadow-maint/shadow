@@ -1,4 +1,4 @@
-2007-11-10  Nicolas François  <nicolas.francois@centraliens.net>
+2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/salt.c: Make sure the salt string is terminated at the
 	right place (either 8th, or 11th position).
