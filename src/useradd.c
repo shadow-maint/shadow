@@ -706,30 +706,6 @@ static void grp_update (void)
 	struct sgrp *nsgrp;
 #endif
 
-	/*
-	 * Test for unique entries of user_groups in /etc/group
-	 * pvrabec@redhat.com
-	 */
-	char **user_groups_tmp = user_groups;
-
-	while (*user_groups_tmp) {
-		int count = 0;
-
-		for (gr_rewind (), grp = gr_next (); grp && count < 2;
-		     grp = gr_next ()) {
-			if (strcmp (*user_groups_tmp, grp->gr_name) == 0) {
-				count++;
-			}
-		}
-		if (count > 1) {
-			fprintf (stderr,
-				 "%s: error not unique group names in group file\n",
-				 Prog);
-			fail_exit (E_GRP_UPDATE);
-		}
-		user_groups_tmp++;
-	}
-
 	/* Locking and opening of the group files moved to open_files() --gafton */
 
 	/*

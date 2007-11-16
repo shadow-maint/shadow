@@ -1,3 +1,9 @@
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: It is no more needed to check that the user's
+	groups are specified only once in the group file. This is checked
+	by gr_update().
+
 2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/commonio.c (next_entry_by_name): New function.
