@@ -153,9 +153,11 @@ static void update_groups (void)
 			exit (13);	/* XXX */
 		}
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
-		if (!gr_update (ngrp))
+		if (!gr_update (ngrp)) {
 			fprintf (stderr,
 				 _("%s: error updating group entry\n"), Prog);
+			exit (E_GRP_UPDATE);
+		}
 
 		/*
 		 * Update the DBM group file with the new entry as well.
@@ -252,9 +254,11 @@ static void update_groups (void)
 		if (was_admin)
 			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
 
-		if (!sgr_update (nsgrp))
+		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
 				 _("%s: error updating group entry\n"), Prog);
+			exit (E_GRP_UPDATE);
+		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			      "deleting user from shadow group", user_name,
@@ -411,12 +415,16 @@ static void open_files (void)
  */
 static void update_user (void)
 {
-	if (!pw_remove (user_name))
+	if (!pw_remove (user_name)) {
 		fprintf (stderr,
 			 _("%s: error deleting password entry\n"), Prog);
-	if (is_shadow_pwd && !spw_remove (user_name))
+		fail_exit (E_PW_UPDATE);
+	}
+	if (is_shadow_pwd && !spw_remove (user_name)) {
 		fprintf (stderr,
 			 _("%s: error deleting shadow password entry\n"), Prog);
+		fail_exit (E_PW_UPDATE);
+	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user entries",
 		      user_name, user_id, 1);

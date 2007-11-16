@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/userdel.c: Abort if an error is found while updating the
+	user or group database. No changes will be written in the
+	databases.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: It is no more needed to check that the user's
 	groups are specified only once in the group file. This is checked
 	by gr_update().
