@@ -21,6 +21,10 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   (i.e. lookup in the local database for an user with an @). Thanks to
   Mike Frysinger for the patch.
 - Add support for uClibc with no l64a().
+- userdel/usermod: Fix infinite loop caused by erroneous group file
+  containing two entries with the same name. (The fix strategy differs
+  from 
+  (https://bugzilla.redhat.com/show_bug.cgi?id=240915)
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

@@ -1,5 +1,14 @@
 2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c (next_entry_by_name): New function.
+	* NEWS, lib/commonio.c (commonio_update): When an entry is updated, make
+	sure that there are no other entry with the same name. This fixes
+	an infinite loop in userdel and usermod when an (erroneous) group
+	file contains two entries with the same name.
+	(https://bugzilla.redhat.com/show_bug.cgi?id=240915)
+
+2007-11-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: Make sure the salt string is terminated at the
 	right place (either 8th, or 11th position).
 	* NEWS, src/chgpasswd.c, src/chpasswd.c: The protocol + salt does

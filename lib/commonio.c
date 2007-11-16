@@ -35,6 +35,9 @@ static int name_is_nis (const char *);
 static int write_all (const struct commonio_db *);
 static struct commonio_entry *find_entry_by_name (struct commonio_db *,
 						  const char *);
+static struct commonio_entry *next_entry_by_name (struct commonio_db *,
+                                                  struct commonio_entry *pos,
+                                                  const char *);
 
 static int lock_count = 0;
 static int nscd_need_reload = 0;
@@ -761,19 +764,28 @@ int commonio_close (struct commonio_db *db)
 	return errors == 0;
 }
 
-
-static struct commonio_entry *find_entry_by_name (struct commonio_db *db,
-						  const char *name)
+static struct commonio_entry *next_entry_by_name (struct commonio_db *db,
+                                                  struct commonio_entry *pos,
+                                                  const char *name)
 {
 	struct commonio_entry *p;
 	void *ep;
 
-	for (p = db->head; p; p = p->next) {
+	if (NULL == pos)
+		return NULL;
+
+	for (p = pos; p; p = p->next) {
 		ep = p->eptr;
 		if (ep && strcmp (db->ops->getname (ep), name) == 0)
 			break;
 	}
 	return p;
+}
+
+static struct commonio_entry *find_entry_by_name (struct commonio_db *db,
+						  const char *name)
+{
+	return next_entry_by_name(db, db->head, name);
 }
 
 
@@ -792,6 +804,11 @@ int commonio_update (struct commonio_db *db, const void *eptr)
 	}
 	p = find_entry_by_name (db, db->ops->getname (eptr));
 	if (p) {
+		if (next_entry_by_name (db, p->next, db->ops->getname (eptr)))
+		{
+			fprintf (stderr, _("Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"), db->ops->getname (eptr), db->filename);
+			return 0;
+		}
 		db->ops->free (p->eptr);
 		p->eptr = nentry;
 		p->changed = 1;
