@@ -27,6 +27,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   (https://bugzilla.redhat.com/show_bug.cgi?id=240915)
 - userdel: Abort if an error is detected while updating the passwd or group
   databases. The passwd or group files will not be written.
+- usermod: Update the group database before flushing the nscd caches.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

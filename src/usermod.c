@@ -1529,11 +1529,11 @@ int main (int argc, char **argv)
 	usr_update ();
 	close_files ();
 
-	nscd_flush_cache ("passwd");
-	nscd_flush_cache ("group");
-
 	if (Gflg || lflg)
 		grp_err = grp_update ();
+
+	nscd_flush_cache ("passwd");
+	nscd_flush_cache ("group");
 
 	if (mflg)
 		move_home ();
