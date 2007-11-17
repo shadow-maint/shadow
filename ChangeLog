@@ -1,5 +1,10 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Use the same error message for the below errors.
+	(option working ONLY if another is specified).
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Make usermod -o and -u work independently of the
 	argument order.
 

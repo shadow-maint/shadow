@@ -1038,8 +1038,8 @@ static void process_flags (int argc, char **argv)
 
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
-			 _("%s: -a flag is ONLY allowed with the -G flag\n"),
-			 Prog);
+			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 Prog, "-a", "-G");
 		usage ();
 		exit (E_USAGE);
 	}
@@ -1054,16 +1054,16 @@ static void process_flags (int argc, char **argv)
 
 	if (oflg && !uflg) {
 		fprintf (stderr,
-			 _("%s: -o flag is ONLY allowed with the -u flag\n"),
-			 Prog);
+			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 Prog, "-o", "-u");
 		usage ();
 		exit (E_USAGE);
 	}
 
 	if (mflg && !dflg) {
 		fprintf (stderr,
-			 _("%s: -m flag is ONLY allowed with the -d flag\n"),
-			 Prog);
+			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 Prog, "-m", "-d");
 		usage ();
 		exit (E_USAGE);
 	}
