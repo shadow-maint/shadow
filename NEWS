@@ -9,8 +9,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - chgpasswd, chpasswd: Fix chpasswd and chgpasswd stack overflow. Based on
   the Fedora's shadow-4.0.18.1-overflow.patch and Debian's
   495_salt_stack_smash patches.
-- newgrp: Don't ask for a password if there are no group passwords. Just
-  directly give up.
+- newgrp: Do not give an indication that the group has no password. Ask
+  for the password, as if there were a password.
 - The permissions of the suid binaries is now configurable in
   src/Makefile.am. Note that changing the permissions is not recommended.
 - newgrp.c: Declare the child and pid variable at the beginning of a block.
@@ -41,6 +41,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   were always missing.
 - su: Avoid terminating the PAM library in the forked child. This is done
   later in the parent after closing the PAM session.
+- userdel: Fix the homedir prefix checking.
 - passwd, usermod: Refuse to unlock an account when it would result in a
   passwordless account.
 

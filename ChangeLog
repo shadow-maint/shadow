@@ -18,7 +18,7 @@
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/newgrp.c: Do not give an indication that the group has no
+	* NEWS, src/newgrp.c: Do not give an indication that the group has no
 	password.
 	* src/newgrp.c: Do not only bail on syslog if the password is not
 	valid. Also give an indication to the user on stderr.
