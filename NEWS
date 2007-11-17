@@ -30,6 +30,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - usermod: Update the group database before flushing the nscd caches.
 - usermod: Make sure the group modifications will be allowed before
   writing the passwd files.
+- Flush the nscd tables using nscd -i instead of the private glibc socket.
+  (RedHat patches shadow-4.0.16-nscd.c and shadow-4.0.17-notInheritFd.patch)
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

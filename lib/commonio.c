@@ -460,6 +460,10 @@ int commonio_open (struct commonio_db *db, int mode)
 		}
 		return 0;
 	}
+
+	/* Do not inherit fd in spawned processes (e.g. nscd) */
+	fcntl(fileno(db->fp), F_SETFD, FD_CLOEXEC);
+
 #ifdef WITH_SELINUX
 	db->scontext = NULL;
 	if ((is_selinux_enabled () > 0) && (!db->readonly)) {
