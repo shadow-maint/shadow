@@ -438,8 +438,16 @@ static char *update_crypt_pw (char *cp)
 	if (dflg)
 		cp = "";	/* XXX warning: const */
 
-	if (uflg && *cp == '!')
-		cp++;
+	if (uflg && *cp == '!') {
+		if (cp[1] == '\0') {
+			fprintf (stderr,
+				 _("%s: unlocking the user would result in a passwordless account.\n"
+				   "You should set a password with usermod -p to unlock this user account.\n"),
+				 Prog);
+		} else {
+			cp++;
+		}
+        }
 
 	if (lflg && *cp != '!') {
 		char *newpw = xmalloc (strlen (cp) + 2);

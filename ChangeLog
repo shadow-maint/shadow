@@ -3,6 +3,7 @@
 	* NEWS, src/usermod.c: Refuse to unlock an account when it would
 	result in a passwordless account.  Based on Openwall's patch
 	shadow-4.0.4.1-owl-usermod-unlock.diff.
+	* NEWS, src/passwd.c: Likewise.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -21,7 +21,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   (i.e. lookup in the local database for an user with an @). Thanks to
   Mike Frysinger for the patch.
 - Add support for uClibc with no l64a().
-- userdel/usermod: Fix infinite loop caused by erroneous group file
+- userdel, usermod: Fix infinite loop caused by erroneous group file
   containing two entries with the same name. (The fix strategy differs
   from 
   (https://bugzilla.redhat.com/show_bug.cgi?id=240915)
@@ -41,7 +41,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   were always missing.
 - su: Avoid terminating the PAM library in the forked child. This is done
   later in the parent after closing the PAM session.
-- usermod: Refuse to unlock an account when it would result in a
+- passwd, usermod: Refuse to unlock an account when it would result in a
   passwordless account.
 
 *** documentation:
