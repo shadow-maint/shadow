@@ -123,18 +123,11 @@ getspnam.3: shadow.3
 
 vigr.8: vipw.8
 
-CLEANFILES = $(man_MANS) $(ALL_TRANSLATED_XMLS)
+CLEANFILES = $(man_MANS)
 
 POFILES = $(foreach lang, $(LINGUAS), $(lang)/$(lang).po)
-ALL_TRANSLATED_XMLS = $(foreach dir, $(LINGUAS), $(foreach xmlfile, $(man_XMANS), $(dir)/$(xmlfile)))
 
-all: $(POFILES) $(ALL_TRANSLATED_XMLS)
-
-gen-xmls: $(ALL_TRANSLATED_XMLS)
-
-$(ALL_TRANSLATED_XMLS): $(man_XMANS)
-	xml2po -l $(strip $(subst /,, $(dir $@))) -p $(strip $(subst /,, $(dir $@)))/$(strip $(subst /,, $(dir $@))).po -o $@ $(notdir $@)
-	sed -i 's:\(^<refentry .*\)>:\1 lang="$(strip $(subst /,, $(dir $@)))">:' $@
+all: $(POFILES)
 
 $(POFILES): shadow-man-pages.pot
 

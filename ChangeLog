@@ -13,6 +13,16 @@
 	* man/Makefile.am: Replace the individual rules for the generation
 	of the manpages (from XML) by a generic Makefile rule an
 	dependencies for the linked manpages.
+	* man/generate_translations.mak: Generic rules for all the
+	generated translated manpages (if ENABLE_REGENERATE_MAN).
+	* man/Makefile.am: Removed rules for all the generated translated
+	manpages.
+	* man/sv/Makefile.am, man/de/Makefile.am, man/fr/Makefile.am,
+	man/pl/Makefile.am, man/ru/Makefile.am, man/it/Makefile.am:
+	Include generate_translations.mak to handle the generated
+	translations (XML and roff files).
+	* man/Makefile.am: Translated XML files moved from the CLEANFILES
+	variable of man/Makefile.am to the various languages Makefiles.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -54,3 +54,6 @@ EXTRA_DIST = \
 	id.1 \
 	shadow.3 \
 	sulogin.8
+
+include ../generate_translations.mak
+

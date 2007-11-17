@@ -49,3 +49,5 @@ EXTRA_DIST = \
 	$(man_nopam) \
 	id.1
 
+include ../generate_translations.mak
+

@@ -58,3 +58,6 @@ EXTRA_DIST = \
 	$(man_nopam) \
 	id.1 \
 	sulogin.8
+
+include ../generate_translations.mak
+

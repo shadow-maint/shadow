@@ -13,3 +13,6 @@ man_MANS = \
 	vipw.8
 
 EXTRA_DIST = $(man_MANS)
+
+include ../generate_translations.mak
+
