@@ -1,5 +1,12 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Do not give an indication that the group has no
+	password.
+	* src/newgrp.c: Do not only bail on syslog if the password is not
+	valid. Also give an indication to the user on stderr.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Fixes from Openwall patch shadow-4.0.4.1-owl-chage-drop-priv.diff:
 	* src/chage.c: Remove cleanup(). pw_lock is never called. Replace
 	cleanup(2) by spw_unlock and remove the calls to cleanup(1).

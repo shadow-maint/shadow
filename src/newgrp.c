@@ -377,16 +377,6 @@ int main (int argc, char **argv)
 	 * of the tests above.
 	 */
 	if (getuid () != 0 && needspasswd) {
-		if (grp->gr_passwd[0] == '\0') {
-			/*
-			 * there is no password, print out "No password."
-			 * and give up
-			 */
-			sleep (1);
-			fputs (_("No password.\n"), stderr);
-			goto failure;
-		}
-
 		/*
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
@@ -402,11 +392,13 @@ int main (int argc, char **argv)
 		cpasswd = pw_encrypt (cp, grp->gr_passwd);
 		strzero (cp);
 
-		if (strcmp (cpasswd, grp->gr_passwd) != 0) {
+		if (grp->gr_passwd[0] == '\0' ||
+		    strcmp (cpasswd, grp->gr_passwd) != 0) {
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group `%s' from `%s'",
 				 group, name));
 			sleep (1);
+			fputs (_("Invalid password."), stderr);
 			goto failure;
 		}
 	}
