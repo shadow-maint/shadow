@@ -33,6 +33,10 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - Flush the nscd tables using nscd -i instead of the private glibc socket.
   (RedHat patches shadow-4.0.16-nscd.c and shadow-4.0.17-notInheritFd.patch)
 - usermod: Make usermod options independent of the argument order.
+- newgrp: Do not request a password when a user uses newgrp to switch to
+  her primary group.  Debian patch 497_newgrp_primary_group.
+- passwd: -l/-u options: edit the shadow account expiry field *in
+  addition* to editing the password field.  Debian patch 494_passwd_lock.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 
