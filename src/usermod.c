@@ -326,6 +326,14 @@ static char *new_pw_passwd (char *pw_pass, const char *pw_name)
 	} else if (Uflg && pw_pass[0] == '!') {
 		char *s;
 
+		if (pw_pass[1] == '\0') {
+			fprintf (stderr,
+				 _("%s: unlocking the user would result in a passwordless account.\n"
+				   "You should set a password with usermod -p to unlock this user account.\n"),
+				 Prog);
+			return pw_pass;
+		}
+
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating password",
 			      user_newname, user_newid, 0);

@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/usermod.c: Refuse to unlock an account when it would
+	result in a passwordless account.  Based on Openwall's patch
+	shadow-4.0.4.1-owl-usermod-unlock.diff.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c (path_prefix): Make sure that the prefix is the
 	name of a directory (not only the beginning of a directory).
 	Openwall patch shadow-4.0.4.1-owl-userdel-path_prefix.diff.

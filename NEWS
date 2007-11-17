@@ -41,6 +41,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   were always missing.
 - su: Avoid terminating the PAM library in the forked child. This is done
   later in the parent after closing the PAM session.
+- usermod: Refuse to unlock an account when it would result in a
+  passwordless account.
 
 *** documentation:
 - Generate the translated manpages from PO at build time.
