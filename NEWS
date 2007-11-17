@@ -4,18 +4,14 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 
 *** general:
 - useradd: Allow non numerical group identifier to be specified with
-  useradd's -g option. Applied Debian patch 397_non_numerical_identifier.
-  Thanks also to Greg Schafer <gschafer@zip.com.au>.
-- chgpasswd, chpasswd: Fix chpasswd and chgpasswd stack overflow. Based on
-  the Fedora's shadow-4.0.18.1-overflow.patch and Debian's
-  495_salt_stack_smash patches.
+  useradd's -g option.
+- chgpasswd, chpasswd: Fix chpasswd and chgpasswd stack overflow.
 - newgrp: Do not give an indication that the group has no password. Ask
   for the password, as if there were a password.
 - The permissions of the suid binaries is now configurable in
   src/Makefile.am. Note that changing the permissions is not recommended.
 - newgrp.c: Declare the child and pid variable at the beginning of a block.
-  This fixes a compilation issue with gcc 2.95. The intent is the same as
-  Gentoo's patch shadow-4.0.12-gcc2.patch.
+  This fixes a compilation issue with gcc 2.95.
 - login_nopam: Add support for systems with no innetgr().  On those
   systems, username with an @ will be treated like any other username
   (i.e. lookup in the local database for an user with an @). Thanks to
@@ -31,12 +27,11 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - usermod: Make sure the group modifications will be allowed before
   writing the passwd files.
 - Flush the nscd tables using nscd -i instead of the private glibc socket.
-  (RedHat patches shadow-4.0.16-nscd.c and shadow-4.0.17-notInheritFd.patch)
 - usermod: Make usermod options independent of the argument order.
 - newgrp: Do not request a password when a user uses newgrp to switch to
-  her primary group.  Debian patch 497_newgrp_primary_group.
+  her primary group.
 - passwd: -l/-u options: edit the shadow account expiry field *in
-  addition* to editing the password field.  Debian patch 494_passwd_lock.
+  addition* to editing the password field.
 - pwck: Remove the SHADOWPWD preprocessor check. Some check for /etc/shadow
   were always missing.
 - su: Avoid terminating the PAM library in the forked child. This is done

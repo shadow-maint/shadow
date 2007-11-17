@@ -244,6 +244,7 @@
 
 	* src/newgrp.c, NEWS: Declare the child and pid variable at the
 	beginning of a block. This fixes a compilation issue with gcc 2.95.
+	The intent is the same as Gentoo's patch shadow-4.0.12-gcc2.patch.
 
 2007-11-14  Nicolas François  <nicolas.francois@centraliens.net>
 
