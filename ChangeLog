@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chpasswd.8.xml: Document that chpasswd does not use PAM to
+	update the passwords. This fixes http://bugs.debian.org/396726.
+	Debian patch 411_chpasswd_document_no_pam.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/su.c: Avoid terminating the PAM library in the forked
 	child.  This is done later in the parent after closing the PAM
 	session. This fixes http://bugs.debian.org/412061.
