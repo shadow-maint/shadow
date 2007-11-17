@@ -1,8 +1,8 @@
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
-  diffrent backend modules for db, NIS, LDAP and others. Default backend it
-  will be goot if will be choosen depending on /etc/nsswitch.conf and allow
-  overwride this by -r <repository> options (where the <repository> can be
+  different backend modules for db, NIS, LDAP and others. Default backend it
+  will be goot if will be chosen depending on /etc/nsswitch.conf and allow
+  override this by -r <repository> options (where the <repository> can be
   file, db, nis nisplus, ldap .. like on /etc/nsswitch.conf in service column).
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
@@ -12,15 +12,15 @@ ALL:
   - add handle create user mail spool in maildir format.
 
 - add handle -n switch in groups and id command for allow query is
-  group/user with specified id/gid exist - this will be very useable
-  on automation in packages for quoery/check is group/user exist in system
+  group/user with specified id/gid exist - this will be very usable
+  on automation in packages for query/check is group/user exist in system
   or not,
 
 - groupmems: 
   - need some work on add PAM and i18n support.
 
 - userdel:
-  - add backup option on remomove user resources,
+  - add backup option for the removal of user resources,
   - add lookop and remove per user group.
 
 - passwd:
@@ -28,6 +28,6 @@ ALL:
 
 Documentation:
 
-- documment in pt_BR, ja man pages -s {pw,grp}ck option,
+- document the -s option of {pw,grp}ck in the pt_BR, and ja man pages
 
 - document -o option in ja man page,
