@@ -136,16 +136,23 @@
 
    <refsect1 id='caveats'>
      <title>CAVEATS</title>
-     <para>Groupnames must begin with a lower case letter or an underscore, and 
-       only lower case letters, underscores, dashes, and dollar signs may 
-       follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
+     <para>
+       Groupnames must begin with a lower case letter or an underscore,
+       and only lower case letters, underscores, dashes, and dollar signs
+       may follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
      </para>
      <para>
-       If the groupname already exists in an external group database
-       such as NIS, <command>groupadd</command> will deny the group
+       Groupnames may only be up to 16 characters long.
+     </para>
+     <para>
+       You may not add a NIS or LDAP group. This must be performed on the
+       corresponding server.
+     </para>
+     <para>
+       If the groupname already exists in an external group database such
+       as NIS or LDAP, <command>groupadd</command> will deny the group
        creation request.
      </para>
-     <para>Groupnames may only be up to 16 characters long.</para>
    </refsect1>
 
   <refsect1 id='exit_values'>

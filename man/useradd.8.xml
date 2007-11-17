@@ -350,13 +350,13 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      You may not add a user to a NIS group. This must be performed on the
-      NIS server.
+      You may not add a user to a NIS or LDAP group. This must be
+      performed on the corresponding server.
     </para>
 
     <para>
       Similarly, if the username already exists in an external user
-      database such as NIS, <command>useradd</command> will deny
+      database such as NIS or LDAP, <command>useradd</command> will deny
       the user account creation request.
     </para>
 

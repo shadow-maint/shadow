@@ -1,5 +1,21 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Fixes from Openwall patch shadow-4.0.4.1-alt-man.diff:
+	* man/useradd.8.xml: Indicate that the NIS caveats is also valid
+	for any external database as LDAP.
+	* man/groupadd.8.xml: Likewise.
+	* man/groupadd.8.xml: Reorder and reformat the caveats bullets.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS: Applied Debian patch 409_man_generate_from_PO to
+	automatically generate the translated manpages from the POs.
+	* man/Makefile.am: Replace the individual rules for the generation
+	of the manpages (from XML) by a generic Makefile rule an
+	dependencies for the linked manpages.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chpasswd.8.xml: Document that chpasswd does not use PAM to
 	update the passwords. This fixes http://bugs.debian.org/396726.
 	Debian patch 411_chpasswd_document_no_pam.
