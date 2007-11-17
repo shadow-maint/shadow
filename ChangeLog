@@ -1,5 +1,10 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: Differentiate failure to update a group entry and
+	failure to update a shadow group entry.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c, src/usermod.c, src/useradd.c: Inform the user if
 	out of memory while updating a group database.
 

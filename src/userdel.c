@@ -262,7 +262,7 @@ static void update_groups (void)
 
 		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
-				 _("%s: error updating group entry\n"), Prog);
+				 _("%s: error updating shadow group entry\n"), Prog);
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
