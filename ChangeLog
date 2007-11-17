@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Make usermod -d and -m work independant of the
+	argument order. Thanks to Justin Pryzby <jpryzby+d@quoininc.com>
+	for the patch. This fixes Debian's bug #451518.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, lib/nscd.c: Execute nscd -i instead of using the private
 	glibc socket to flush the nscd tables. This comes from the RedHat
 	patch shadow-4.0.16-nscd.c.

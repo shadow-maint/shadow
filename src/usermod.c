@@ -987,9 +987,6 @@ static void process_flags (int argc, char **argv)
 				Lflg++;
 				break;
 			case 'm':
-				if (!dflg)
-					usage ();
-
 				mflg++;
 				break;
 			case 'o':
@@ -1054,6 +1051,14 @@ static void process_flags (int argc, char **argv)
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
 			 _("%s: -a flag is ONLY allowed with the -G flag\n"),
+			 Prog);
+		usage ();
+		exit (E_USAGE);
+	}
+
+	if (mflg && !dflg) {
+		fprintf (stderr,
+			 _("%s: -m flag is ONLY allowed with the -d flag\n"),
 			 Prog);
 		usage ();
 		exit (E_USAGE);
