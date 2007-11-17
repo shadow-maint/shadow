@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Fix typo: the warndays option was called warning.
+	This is now warndays, as documented in the manpage and usage.
+	Debian patch 417_passwd_warndays.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/pwck.c: Remove the preprocessor check SHADOWPWD. The
 	variable is no more defined (and always assumed).
 	Debian patch 493_pwck_no_SHADOWPWD.

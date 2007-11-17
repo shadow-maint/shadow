@@ -654,7 +654,7 @@ int main (int argc, char **argv)
 			{"repository", required_argument, NULL, 'r'},
 			{"status", no_argument, NULL, 'S'},
 			{"unlock", no_argument, NULL, 'u'},
-			{"warning", required_argument, NULL, 'w'},
+			{"warndays", required_argument, NULL, 'w'},
 			{"maxdays", required_argument, NULL, 'x'},
 			{NULL, 0, NULL, '\0'}
 		};
