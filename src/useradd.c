@@ -695,6 +695,11 @@ static void new_spent (struct spwd *spent)
  *
  *	grp_update() takes the secondary group set given in user_groups
  *	and adds the user to each group given by that set.
+ *
+ *	The group files are opened and locked in open_files().
+ *
+ *	close_files() should be called afterwards to commit the changes
+ *	and unlocking the group files.
  */
 static void grp_update (void)
 {
@@ -705,8 +710,6 @@ static void grp_update (void)
 	const struct sgrp *sgrp;
 	struct sgrp *nsgrp;
 #endif
-
-	/* Locking and opening of the group files moved to open_files() --gafton */
 
 	/*
 	 * Scan through the entire group file looking for the groups that
