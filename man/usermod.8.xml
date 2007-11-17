@@ -158,6 +158,12 @@
 	    can't use this option with <option>-p</option> or
 	    <option>-U</option>.
 	  </para>
+	  <para>
+	    Note: if you wish to lock the account (not only access with a
+	    password), you should also set the
+	    <replaceable>EXPIRE_DATE</replaceable> to
+	    <replaceable>1</replaceable>.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -223,6 +229,14 @@
 	    Unlock a user's password. This removes the '!' in front of the
 	    encrypted password. You can't use this option with
 	    <option>-p</option> or <option>-L</option>.
+	  </para>
+	  <para>
+	    Note: if you wish to unlock the account (not only access with a
+	    password), you should also set the
+	    <replaceable>EXPIRE_DATE</replaceable> (for example to
+	    <replaceable>99999</replaceable>, or to the
+	    <replaceable>EXPIRE</replaceable> value from
+	    <filename>/etc/default/useradd</filename>).
 	  </para>
 	</listitem>
       </varlistentry>
