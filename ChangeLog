@@ -1,9 +1,12 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Fixes from Openwall patch shadow-4.0.4.1-owl-chage-drop-priv.diff:
 	* src/chage.c: Remove cleanup(). pw_lock is never called. Replace
 	cleanup(2) by spw_unlock and remove the calls to cleanup(1).
 	* src/chage.c: Remove variable pwrw. It is always set to 0. The
 	password database is always read only.
+	* src/chage.c: Make chage -l also drop the saved GID.
+	* src/chage.c: Prefer setregid/setreuid to setgid/setuid.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 

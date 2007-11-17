@@ -322,6 +322,7 @@ int main (int argc, char **argv)
 	const struct spwd *sp;
 	struct spwd spwd;
 	uid_t ruid;
+	gid_t rgid;
 	int amroot;
 	const struct passwd *pw;
 	struct passwd pwent;
@@ -342,6 +343,7 @@ int main (int argc, char **argv)
 	textdomain (PACKAGE);
 
 	ruid = getuid ();
+	rgid = getgid ();
 	amroot = (ruid == 0);
 #ifdef WITH_SELINUX
 	if (amroot && is_selinux_enabled () > 0)
@@ -547,7 +549,7 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 
-	if (lflg && (setgid (getgid ()) || setuid (ruid))) {
+	if (lflg && (setregid (rgid, rgid) || setreuid (ruid, ruid))) {
 		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
 			 Prog, strerror (errno));
 #ifdef WITH_AUDIT
