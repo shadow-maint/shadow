@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c, man/passwd.1.xml: -l/-u options: edit the
+	shadow account expiry field *in addition* to editing the password
+	field.  Debian patch 494_passwd_lock.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Do not request a password when a user uses newgrp
 	to switch to her primary group.
 	Debian patch 497_newgrp_primary_group.

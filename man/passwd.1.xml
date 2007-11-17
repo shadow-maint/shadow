@@ -214,7 +214,8 @@
 	<listitem>
 	  <para>
 	    Lock the named account. This option disables an account by changing
-	    the password to a value which matches no possible encrypted value.
+	    the password to a value which matches no possible encrypted value,
+	    and by setting the account expiry field to 1.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -275,7 +276,8 @@
 	  <para>
 	    Unlock the named account. This option re-enables an account by
 	    changing the password back to its previous value (to value before
-	    using <option>-l</option> option).
+	    using <option>-l</option> option), and by resetting the account
+	    expiry field.
 	  </para>
 	</listitem>
       </varlistentry>

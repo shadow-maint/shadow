@@ -531,6 +531,15 @@ static void update_shadow (void)
 		nsp->sp_inact = (inact * DAY) / SCALE;
 	if (do_update_age)
 		nsp->sp_lstchg = time ((time_t *) 0) / SCALE;
+	if (lflg) {
+		/* Set the account expiry field to 1.
+		 * Some PAM implementation consider zero as a non expired
+		 * account.
+		 */
+		nsp->sp_expire = 1;
+	}
+	if (uflg)
+		nsp->sp_expire = -1;
 
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris
