@@ -23,6 +23,9 @@ ALL:
   - add backup option on remomove user resources,
   - add lookop and remove per user group.
 
+- passwd:
+  - check combination of options (e.g. -u/-l)
+
 Documentation:
 
 - documment in pt_BR, ja man pages -s {pw,grp}ck option,
