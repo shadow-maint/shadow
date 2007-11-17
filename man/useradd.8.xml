@@ -70,7 +70,8 @@
 	<listitem>
 	  <para>
 	    The default base directory for the system if <option>-d</option>
-	    dir is not specified. <replaceable>BASE_DIR</replaceable> is
+	    <replaceable>HOME_DIR</replaceable> is not specified.
+	    <replaceable>BASE_DIR</replaceable> is
 	    concatenated with the account name to define the home directory. 
 	    If the <option>-m</option> option is not used,
 	    <replaceable>BASE_DIR</replaceable> must exist.
