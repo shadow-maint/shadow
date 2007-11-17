@@ -739,16 +739,22 @@ int main (int argc, char **argv)
 		    pam_get_item (pamh, PAM_USER, (const void **) &pam_user);
 		setpwent ();
 		pwd = getpwnam (pam_user);
+		if (!pwd) {
+			SYSLOG ((LOG_ERR, "getpwnam(%s) failed",
+				 getdef_bool ("LOG_UNKFAIL_ENAB") ?
+				 pam_user : "UNKNOWN"));
+			exit (1);
+		}
 
 		if (fflg) {
 			retcode = pam_acct_mgmt (pamh, 0);
 			PAM_FAIL_CHECK;
 		}
 
-		if (!pwd || setup_groups (pwd))
+		if (setup_groups (pwd)) {
 			exit (1);
-		else
-			pwent = *pwd;
+
+		pwent = *pwd;
 
 		retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 		PAM_FAIL_CHECK;

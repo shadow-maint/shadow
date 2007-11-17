@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Log an error if the password entry could not be
+	found (respect LOG_UNKFAIL_ENAB to avoid logging a password). This
+	fixes the Debian bug http://bugs.debian.org/451521
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/useradd.8.xml: -b documenation: Use the same notation for
 	the -d argument as in the -d documentation.
 
