@@ -83,7 +83,6 @@ static void date_to_str (char *, size_t, time_t);
 static int new_fields (void);
 static void print_date (time_t);
 static void list_fields (void);
-static void cleanup (int);
 
 /*
  * isnum - determine whether or not a string is a number
@@ -298,24 +297,6 @@ static void list_fields (void)
 }
 
 /*
- * cleanup - unlock any locked password files
- */
-
-static void cleanup (int state)
-{
-	switch (state) {
-	case 2:
-		if (locks)
-			spw_unlock ();
-	case 1:
-		if (locks)
-			pw_unlock ();
-	case 0:
-		break;
-	}
-}
-
-/*
  * chage - change a user's password aging information
  *
  *	This command controls the password aging information.
@@ -341,7 +322,7 @@ int main (int argc, char **argv)
 	const struct spwd *sp;
 	struct spwd spwd;
 	uid_t ruid;
-	int amroot, pwrw;
+	int amroot;
 	const struct passwd *pw;
 	struct passwd pwent;
 	char name[BUFSIZ];
@@ -511,10 +492,8 @@ int main (int argc, char **argv)
 	 * file entries into memory. Then we get a pointer to the password
 	 * file entry for the requested user.
 	 */
-	pwrw = 0;
-	if (!pw_open (pwrw ? O_RDWR : O_RDONLY)) {
+	if (!pw_open (O_RDONLY)) {
 		fprintf (stderr, _("%s: can't open password file\n"), Prog);
-		cleanup (1);
 		SYSLOG ((LOG_ERR, "failed opening %s", PASSWD_FILE));
 		closelog ();
 		exit (E_NOPERM);
@@ -522,7 +501,6 @@ int main (int argc, char **argv)
 	if (!(pw = pw_locate (argv[optind]))) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 			 argv[optind]);
-		cleanup (1);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -548,7 +526,6 @@ int main (int argc, char **argv)
 	if (locks && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: can't lock shadow password file\n"), Prog);
-		cleanup (1);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
@@ -560,7 +537,7 @@ int main (int argc, char **argv)
 	if (!spw_open (locks ? O_RDWR : O_RDONLY)) {
 		fprintf (stderr,
 			 _("%s: can't open shadow password file\n"), Prog);
-		cleanup (2);
+		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed opening %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
@@ -666,7 +643,7 @@ int main (int argc, char **argv)
 			      pw->pw_name, pw->pw_uid, 1);
 #endif
 		list_fields ();
-		cleanup (2);
+		spw_unlock ();
 		closelog ();
 		exit (E_SUCCESS);
 	}
@@ -680,7 +657,7 @@ int main (int argc, char **argv)
 		if (!new_fields ()) {
 			fprintf (stderr, _("%s: error changing fields\n"),
 				 Prog);
-			cleanup (2);
+			spw_unlock ();
 			closelog ();
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
@@ -712,7 +689,7 @@ int main (int argc, char **argv)
 		if (!pw_update (&pwent)) {
 			fprintf (stderr,
 				 _("%s: can't update password file\n"), Prog);
-			cleanup (2);
+			spw_unlock ();
 			SYSLOG ((LOG_ERR, "failed updating %s", PASSWD_FILE));
 			closelog ();
 #ifdef WITH_AUDIT
@@ -738,7 +715,7 @@ int main (int argc, char **argv)
 	if (!spw_update (&spwd)) {
 		fprintf (stderr,
 			 _("%s: can't update shadow password file\n"), Prog);
-		cleanup (2);
+		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed updating %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
@@ -755,7 +732,7 @@ int main (int argc, char **argv)
 	if (!spw_close ()) {
 		fprintf (stderr,
 			 _("%s: can't rewrite shadow password file\n"), Prog);
-		cleanup (2);
+		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
@@ -771,7 +748,7 @@ int main (int argc, char **argv)
 	 */
 	if (!pw_close ()) {
 		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
-		cleanup (2);
+		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
@@ -780,7 +757,7 @@ int main (int argc, char **argv)
 #endif
 		exit (E_NOPERM);
 	}
-	cleanup (2);
+	spw_unlock ();
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", name));
 
 #ifdef USE_PAM

@@ -1,5 +1,12 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: Remove cleanup(). pw_lock is never called. Replace
+	cleanup(2) by spw_unlock and remove the calls to cleanup(1).
+	* src/chage.c: Remove variable pwrw. It is always set to 0. The
+	password database is always read only.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Fixes from Openwall patch shadow-4.0.4.1-alt-man.diff:
 	* man/useradd.8.xml: Indicate that the NIS caveats is also valid
 	for any external database as LDAP.
