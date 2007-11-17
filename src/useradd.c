@@ -1005,9 +1005,6 @@ static void process_flags (int argc, char **argv)
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
-				if (!Dflg)
-					usage ();
-
 				if (!VALID (optarg)
 				    || optarg[0] != '/') {
 					fprintf (stderr,

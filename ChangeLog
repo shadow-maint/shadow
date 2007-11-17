@@ -1,5 +1,9 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Allow the -b option even without the -D option.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Use the same error message for the below errors.
 	(option working ONLY if another is specified).
 
