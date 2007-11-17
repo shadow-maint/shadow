@@ -79,6 +79,7 @@
 	newgrp to switch to her primary group.
 	This fixes http://bugs.debian.org/396691.
 	Debian patch 497_newgrp_primary_group.
+	* src/newgrp.c: Remove a comment which states otherwise.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 

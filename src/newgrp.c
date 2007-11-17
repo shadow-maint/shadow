@@ -371,13 +371,10 @@ int main (int argc, char **argv)
 		needspasswd = 1;
 
 	/*
-	 * Now i see about letting her into the group she requested. If she
-	 * is the root user, i'll let her in without having to prompt for
-	 * the password. Otherwise i ask for a password if she flunked one
+	 * Now I see about letting her into the group she requested. If she
+	 * is the root user, I'll let her in without having to prompt for
+	 * the password. Otherwise I ask for a password if she flunked one
 	 * of the tests above.
-	 *
-	 * Note that she now has to provide the password to her own group,
-	 * unless she is listed as a member.  -- JWP
 	 */
 	if (getuid () != 0 && needspasswd) {
 		if (grp->gr_passwd[0] == '\0') {
