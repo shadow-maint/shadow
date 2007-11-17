@@ -37,6 +37,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   her primary group.  Debian patch 497_newgrp_primary_group.
 - passwd: -l/-u options: edit the shadow account expiry field *in
   addition* to editing the password field.  Debian patch 494_passwd_lock.
+- pwck: Remove the SHADOWPWD preprocessor check. Some check for /etc/shadow
+  were always missing.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

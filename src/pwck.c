@@ -368,7 +368,7 @@ int main (int argc, char **argv)
 				pwd->pw_name, pwd->pw_shell);
 			errors++;
 		}
-#ifdef SHADOWPWD
+
 		/*
 		 * Make sure this entry exists in the /etc/gshadow file.
 		 */
@@ -421,7 +421,6 @@ int main (int argc, char **argv)
 				}
 			}
 		}
-#endif
 	}
 
 	if (!is_shadow)

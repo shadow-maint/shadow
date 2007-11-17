@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/pwck.c: Remove the preprocessor check SHADOWPWD. The
+	variable is no more defined (and always assumed).
+	Debian patch 493_pwck_no_SHADOWPWD.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/passwd.c, man/passwd.1.xml: -l/-u options: edit the
 	shadow account expiry field *in addition* to editing the password
 	field.  Debian patch 494_passwd_lock.
