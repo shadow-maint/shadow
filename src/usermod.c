@@ -105,7 +105,7 @@ static long user_newinactive;	/* Audit */
 static char *Prog;
 
 static int
- aflg = 0,			/* append to existing secondary group set */
+    aflg = 0,			/* append to existing secondary group set */
     cflg = 0,			/* new comment (GECOS) field */
     dflg = 0,			/* new home directory */
     eflg = 0,			/* days since 1970-01-01 when account becomes expired */
@@ -127,6 +127,13 @@ static int is_shadow_pwd;
 static int is_shadow_grp;
 #endif
 
+static int pw_locked  = 0;
+static int spw_locked = 0;
+static int gr_locked  = 0;
+#ifdef SHADOWGRP
+static int sgr_locked = 0;
+#endif
+
 
 /* local function prototypes */
 static int get_groups (char *);
@@ -135,12 +142,12 @@ static void new_pwent (struct passwd *);
 
 static void new_spent (struct spwd *);
 static void fail_exit (int);
-static int update_group (void);
+static void update_group (void);
 
 #ifdef SHADOWGRP
-static int update_gshadow (void);
+static void update_gshadow (void);
 #endif
-static int grp_update (void);
+static void grp_update (void);
 
 static long get_number (const char *);
 static uid_t get_id (const char *);
@@ -514,14 +521,17 @@ static void new_spent (struct spwd *spent)
  */
 static void fail_exit (int code)
 {
-	(void) gr_unlock ();
+	if (gr_locked)
+		gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp)
+	if (sgr_locked)
 		sgr_unlock ();
 #endif
-	if (is_shadow_pwd)
+	if (spw_locked)
 		spw_unlock ();
-	(void) pw_unlock ();
+	if (pw_locked)
+		pw_unlock ();
+
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying account",
 		      user_name, -1, 0);
@@ -530,29 +540,13 @@ static void fail_exit (int code)
 }
 
 
-static int update_group (void)
+static void update_group (void)
 {
 	int is_member;
 	int was_member;
 	int changed;
 	const struct group *grp;
 	struct group *ngrp;
-
-	/*
-	 * Lock and open the group file. This will load all of the group
-	 * entries.
-	 */
-	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: error locking group file\n"), Prog);
-		SYSLOG ((LOG_ERR, "error locking group file"));
-		return -1;
-	}
-	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: error opening group file\n"), Prog);
-		SYSLOG ((LOG_ERR, "error opening group file"));
-		gr_unlock ();
-		return -1;
-	}
 
 	changed = 0;
 
@@ -576,8 +570,7 @@ static int update_group (void)
 			fprintf (stderr,
 				 _("%s: Out of memory. Cannot update the group database.\n"),
 				 Prog);
-			gr_unlock ();
-			return -1;
+			fail_exit (E_GRP_UPDATE);
 		}
 
 		if (was_member && (!Gflg || is_member)) {
@@ -627,23 +620,16 @@ static int update_group (void)
 		if (!gr_update (ngrp)) {
 			fprintf (stderr,
 				 _("%s: error adding new group entry\n"), Prog);
-			SYSLOG ((LOG_ERR, "error adding group entry"));
-			gr_unlock ();
-			return -1;
+			SYSLOG ((LOG_ERR, "error adding new group entry"));
+			fail_exit (E_GRP_UPDATE);
 		}
 	}
 
-	if (!gr_close ()) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
-		gr_unlock ();
-		return -1;
-	}
-	gr_unlock ();
 	return 0;
 }
 
 #ifdef SHADOWGRP
-static int update_gshadow (void)
+static void update_gshadow (void)
 {
 	int is_member;
 	int was_member;
@@ -651,20 +637,6 @@ static int update_gshadow (void)
 	int changed;
 	const struct sgrp *sgrp;
 	struct sgrp *nsgrp;
-
-	if (!sgr_lock ()) {
-		fprintf (stderr,
-			 _("%s: error locking shadow group file\n"), Prog);
-		SYSLOG ((LOG_ERR, "error locking shadow group file"));
-		return -1;
-	}
-	if (!sgr_open (O_RDWR)) {
-		fprintf (stderr,
-			 _("%s: error opening shadow group file\n"), Prog);
-		SYSLOG ((LOG_ERR, "error opening shadow group file"));
-		sgr_unlock ();
-		return -1;
-	}
 
 	changed = 0;
 
@@ -698,8 +670,7 @@ static int update_gshadow (void)
 			fprintf (stderr,
 				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
 				 Prog);
-			sgr_unlock ();
-			return -1;
+			fail_exit (E_GRP_UPDATE);
 		}
 
 		if (was_admin && lflg) {
@@ -767,21 +738,11 @@ static int update_gshadow (void)
 		 */
 		if (!sgr_update (nsgrp)) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"), Prog);
+				 _("%s: error adding new shadow group entry\n"), Prog);
 			SYSLOG ((LOG_ERR, "error adding shadow group entry"));
-			sgr_unlock ();
-			return -1;
+			fail_exit (E_GRP_UPDATE);
 		}
 	}
-
-	if (!sgr_close ()) {
-		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"), Prog);
-		sgr_unlock ();
-		return -1;
-	}
-	sgr_unlock ();
-	return 0;
 }
 #endif				/* SHADOWGRP */
 
@@ -791,16 +752,13 @@ static int update_gshadow (void)
  *	grp_update() takes the secondary group set given in user_groups and
  *	adds the user to each group given by that set.
  */
-static int grp_update (void)
+static void grp_update (void)
 {
-	int ret;
-
-	ret = update_group ();
+	update_group ();
 #ifdef SHADOWGRP
-	if (!ret && is_shadow_grp)
-		ret = update_gshadow ();
+	if (is_shadow_grp)
+		update_gshadow ();
 #endif
-	return ret;
 }
 
 static long get_number (const char *numstr)
@@ -1138,9 +1096,34 @@ static void close_files (void)
 			 _("%s: cannot rewrite shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
+
+	if (Gflg || lflg) {
+		if (!gr_close ()) {
+			fprintf (stderr, _("%s: cannot rewrite group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+#ifdef SHADOWGRP
+		if (is_shadow_grp && !sgr_close ()) {
+			fprintf (stderr,
+				 _("%s: cannot rewrite shadow group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		if (is_shadow_grp)
+			sgr_unlock ();
+#endif
+		gr_unlock ();
+	}
+
 	if (is_shadow_pwd)
 		spw_unlock ();
-	(void) pw_unlock ();
+	pw_unlock ();
+
+	pw_locked = 0;
+	spw_locked = 0;
+	gr_locked = 0;
+	sgr_locked = 0;
 
 	/*
 	 * Close the DBM and/or flat files
@@ -1162,8 +1145,9 @@ static void open_files (void)
 {
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
-		exit (E_PW_UPDATE);
+		fail_exit (E_PW_UPDATE);
 	}
+	pw_locked = 1;
 	if (!pw_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
@@ -1173,11 +1157,48 @@ static void open_files (void)
 			 _("%s: cannot lock shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
+	spw_locked = 1;
 	if (is_shadow_pwd && !spw_open (O_RDWR)) {
 		fprintf (stderr,
 			 _("%s: cannot open shadow password file\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
+
+	if (Gflg || lflg) {
+		/*
+		 * Lock and open the group file. This will load all of the
+		 * group entries.
+		 */
+		if (!gr_lock ()) {
+			fprintf (stderr, _("%s: error locking group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		gr_locked = 1;
+		if (!gr_open (O_RDWR)) {
+			fprintf (stderr, _("%s: error opening group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+#ifdef SHADOWGRP
+		if (is_shadow_grp && !sgr_lock ()) {
+			fprintf (stderr,
+				 _("%s: error locking shadow group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		sgr_locked = 1;
+		if (is_shadow_grp && !sgr_open (O_RDWR)) {
+			fprintf (stderr,
+				 _("%s: error opening shadow group file\n"),
+				 Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+#endif
+	}
+
+
+
 }
 
 /*
@@ -1454,8 +1475,6 @@ static void move_mailbox (void)
  */
 int main (int argc, char **argv)
 {
-	int grp_err = 0;
-
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	struct passwd *pampw;
@@ -1526,10 +1545,9 @@ int main (int argc, char **argv)
 	 */
 	open_files ();
 	usr_update ();
-	close_files ();
-
 	if (Gflg || lflg)
-		grp_err = grp_update ();
+		grp_update ();
+	close_files ();
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
@@ -1553,9 +1571,6 @@ int main (int argc, char **argv)
 			    user_id, user_newid,
 			    user_gid, gflg ? user_newgid : user_gid);
 	}
-
-	if (grp_err)
-		exit (E_GRP_UPDATE);
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)

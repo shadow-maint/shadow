@@ -1,5 +1,23 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c (fail_exit): Add static variables pw_locked,
+	spw_locked, gr_locked, and sgr_locked to indicate which files must
+	be unlocked.
+	* src/usermod.c (open_files, close_files): Open and close the
+	group files as well as the passwd files. This permit to check if
+	the group files modification are allowed before writing the passwd
+	files.
+	* src/usermod.c (grp_update, update_gshadow, update_group): Do not
+	return a status code, but call fail_exit() in case of error. The
+	group files are no more opened and closed in update_gshadow() and
+	update_group().
+	* src/usermod.c (main): move the call to grp_update between
+	open_files and close_files.
+	* src/usermod.c: Differentiate failure to add a group entry and
+	failure to add a shadow group entry.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: Differentiate failure to update a group entry and
 	failure to update a shadow group entry.
 
