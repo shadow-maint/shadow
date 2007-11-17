@@ -39,6 +39,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   addition* to editing the password field.  Debian patch 494_passwd_lock.
 - pwck: Remove the SHADOWPWD preprocessor check. Some check for /etc/shadow
   were always missing.
+- su: Avoid terminating the PAM library in the forked child. This is done
+  later in the parent after closing the PAM session.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

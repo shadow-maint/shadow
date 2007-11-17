@@ -1,5 +1,12 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/su.c: Avoid terminating the PAM library in the forked
+	child.  This is done later in the parent after closing the PAM
+	session. This fixes http://bugs.debian.org/412061.
+	Debian patch 405_su_no_pam_end_before_exec.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newgrp.1.xml: Mention sg in the newgrp manpage.
 	Debian patch 410_newgrp_man_mention_sg.
 
