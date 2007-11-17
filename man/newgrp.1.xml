@@ -93,6 +93,9 @@
 	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
+	<refentrytitle>sg</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>gpasswd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>

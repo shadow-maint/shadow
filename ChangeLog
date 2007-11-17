@@ -1,5 +1,10 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newgrp.1.xml: Mention sg in the newgrp manpage.
+	Debian patch 410_newgrp_man_mention_sg.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Fix typo: the warndays option was called warning.
 	This is now warndays, as documented in the manpage and usage.
 	Debian patch 417_passwd_warndays.
