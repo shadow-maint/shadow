@@ -542,7 +542,8 @@ static void user_cancel (const char *user)
 #ifdef EXTRA_CHECK_HOME_DIR
 static int path_prefix (const char *s1, const char *s2)
 {
-	return (strncmp (s2, s1, strlen (s1)) == 0);
+	return (strncmp (s2, s1, strlen (s1)) == 0 &&
+		(s2[strlen (s1)] == '\0' || s2[strlen (s1)] == '/'));
 }
 #endif
 

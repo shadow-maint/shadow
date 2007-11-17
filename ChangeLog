@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c (path_prefix): Make sure that the prefix is the
+	name of a directory (not only the beginning of a directory).
+	Openwall patch shadow-4.0.4.1-owl-userdel-path_prefix.diff.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Do not give an indication that the group has no
 	password.
 	* src/newgrp.c: Do not only bail on syslog if the password is not
