@@ -624,8 +624,6 @@ static void update_group (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
-
-	return 0;
 }
 
 #ifdef SHADOWGRP
