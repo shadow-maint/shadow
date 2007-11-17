@@ -32,6 +32,7 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   writing the passwd files.
 - Flush the nscd tables using nscd -i instead of the private glibc socket.
   (RedHat patches shadow-4.0.16-nscd.c and shadow-4.0.17-notInheritFd.patch)
+- usermod: Make usermod options independent of the argument order.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 

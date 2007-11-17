@@ -1,12 +1,17 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Make usermod -o and -u work independently of the
+	argument order.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Validate that two of the -L, -p, and -U options
 	are not used at the same time after the parsing of options. -U
 	used to be allowed after -p or -L, but not before.
 
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c: Make usermod -d and -m work independent of the
+	* src/usermod.c: Make usermod -d and -m work independently of the
 	argument order. Thanks to Justin Pryzby <jpryzby+d@quoininc.com>
 	for the patch. This fixes Debian's bug #451518.
 

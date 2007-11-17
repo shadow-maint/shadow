@@ -987,9 +987,6 @@ static void process_flags (int argc, char **argv)
 				mflg++;
 				break;
 			case 'o':
-				if (!uflg)
-					usage ();
-
 				oflg++;
 				break;
 			case 'p':
@@ -1050,6 +1047,14 @@ static void process_flags (int argc, char **argv)
 	if ((Lflg && (pflg || Uflg)) || (pflg && Uflg)) {
 		fprintf (stderr,
 			 _("%s: the -L, -p, and -U flags are exclusive\n"),
+			 Prog);
+		usage ();
+		exit (E_USAGE);
+	}
+
+	if (oflg && !uflg) {
+		fprintf (stderr,
+			 _("%s: -o flag is ONLY allowed with the -u flag\n"),
 			 Prog);
 		usage ();
 		exit (E_USAGE);
