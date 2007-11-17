@@ -981,9 +981,6 @@ static void process_flags (int argc, char **argv)
 				user_newname = optarg;
 				break;
 			case 'L':
-				if (Uflg || pflg)
-					usage ();
-
 				Lflg++;
 				break;
 			case 'm':
@@ -996,9 +993,6 @@ static void process_flags (int argc, char **argv)
 				oflg++;
 				break;
 			case 'p':
-				if (Lflg || Uflg)
-					usage ();
-
 				user_pass = optarg;
 				pflg++;
 				break;
@@ -1021,9 +1015,6 @@ static void process_flags (int argc, char **argv)
 				uflg++;
 				break;
 			case 'U':
-				if (Lflg && pflg)
-					usage ();
-
 				Uflg++;
 				break;
 			default:
@@ -1051,6 +1042,14 @@ static void process_flags (int argc, char **argv)
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
 			 _("%s: -a flag is ONLY allowed with the -G flag\n"),
+			 Prog);
+		usage ();
+		exit (E_USAGE);
+	}
+
+	if ((Lflg && (pflg || Uflg)) || (pflg && Uflg)) {
+		fprintf (stderr,
+			 _("%s: the -L, -p, and -U flags are exclusive\n"),
 			 Prog);
 		usage ();
 		exit (E_USAGE);
