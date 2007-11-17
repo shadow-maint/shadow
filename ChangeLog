@@ -1,5 +1,11 @@
 2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Do not request a password when a user uses newgrp
+	to switch to her primary group.
+	Debian patch 497_newgrp_primary_group.
+
+2007-11-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Log an error if the password entry could not be
 	found (respect LOG_UNKFAIL_ENAB to avoid logging a password). This
 	fixes the Debian bug http://bugs.debian.org/451521

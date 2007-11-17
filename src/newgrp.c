@@ -348,12 +348,15 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * see if she is a member of this group. If she isn't a member, she
-	 * needs to provide the group password. If there is no group
-	 * password, she will be denied access anyway.
+	 * see if she is a member of this group (i.e. in the list of
+	 * members of the group, or if the group is her primary group).
+	 *
+	 * If she isn't a member, she needs to provide the group password.
+	 * If there is no group password, she will be denied access
+	 * anyway.
 	 *
 	 */
-	if (!is_on_list (grp->gr_mem, name))
+	if (grp->gr_gid != pwd->pw_gid && !is_on_list (grp->gr_mem, name))
 		needspasswd = 1;
 
 	/*
