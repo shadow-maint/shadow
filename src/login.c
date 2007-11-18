@@ -751,7 +751,7 @@ int main (int argc, char **argv)
 			PAM_FAIL_CHECK;
 		}
 
-		if (setup_groups (pwd)) {
+		if (setup_groups (pwd))
 			exit (1);
 
 		pwent = *pwd;
