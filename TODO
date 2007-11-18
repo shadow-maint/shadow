@@ -30,6 +30,8 @@ ALL:
 
 - groupmems: check reason for isgroup
 
+- chgpasswd: uses chpasswd's pam
+
 Documentation:
 
 - document the -s option of {pw,grp}ck in the pt_BR, and ja man pages
