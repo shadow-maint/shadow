@@ -647,7 +647,7 @@ int main (int argc, char **argv)
 					(const void **) &pam_user);
 
 			  if (pam_user && pam_user[0]) {
-			    pwd = getpwnam(pam_user);
+			    pwd = xgetpwnam(pam_user);
 			    if (pwd) {
 			      pwent = *pwd;
 			      failent_user = pwent.pw_name;
@@ -693,6 +693,7 @@ int main (int argc, char **argv)
 					char buf[64];
 
 					audit_fd = audit_open ();
+					/* local, no need for xgetpwnam */
 					pw = getpwnam (username);
 					if (pw) {
 						snprintf (buf, sizeof (buf),
@@ -738,9 +739,9 @@ int main (int argc, char **argv)
 		retcode =
 		    pam_get_item (pamh, PAM_USER, (const void **) &pam_user);
 		setpwent ();
-		pwd = getpwnam (pam_user);
+		pwd = xgetpwnam (pam_user);
 		if (!pwd) {
-			SYSLOG ((LOG_ERR, "getpwnam(%s) failed",
+			SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
 				 getdef_bool ("LOG_UNKFAIL_ENAB") ?
 				 pam_user : "UNKNOWN"));
 			exit (1);
@@ -779,10 +780,10 @@ int main (int argc, char **argv)
 #endif				/* ! USE_PAM */
 
 #ifdef USE_PAM
-		if (!(pwd = getpwnam (pam_user))) {
+		if (!(pwd = xgetpwnam (pam_user))) {
 			pwent.pw_name = pam_user;
 #else
-		if (!(pwd = getpwnam (username))) {
+		if (!(pwd = xgetpwnam (username))) {
 			pwent.pw_name = username;
 #endif
 			strcpy (temp_pw, "!");
@@ -797,6 +798,7 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 		spwd = NULL;
 		if (pwd && strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
+			/* !USE_PAM, no need for xgetspnam */
 			spwd = getspnam (username);
 			if (spwd)
 				pwent.pw_passwd = spwd->sp_pwdp;
@@ -996,7 +998,9 @@ int main (int argc, char **argv)
 	 */
 	if (spwd) {		/* check for age of password */
 		if (expire (&pwent, spwd)) {
+			/* !USE_PAM, no need for xgetpwnam */
 			pwd = getpwnam (username);
+			/* !USE_PAM, no need for xgetspnam */
 			spwd = getspnam (username);
 			if (pwd)
 				pwent = *pwd;

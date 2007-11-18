@@ -19,6 +19,7 @@ libshadow_la_SOURCES = \
 	getdef.c \
 	getdef.h \
 	groupio.c \
+	groupmem.c \
 	groupio.h \
 	gshadow.c \
 	lockpw.c \
@@ -32,6 +33,7 @@ libshadow_la_SOURCES = \
 	pwauth.h \
 	pwio.c \
 	pwio.h \
+	pwmem.c \
 	sgetgrent.c \
 	sgetpwent.c \
 	sgroupio.c \
@@ -39,6 +41,7 @@ libshadow_la_SOURCES = \
 	shadow.c \
 	shadowio.c \
 	shadowio.h \
+	shadowmem.c \
 	utent.c
 
 # These files are unneeded for some reason, listed in

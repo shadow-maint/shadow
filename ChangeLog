@@ -10,7 +10,7 @@
 	available.
 	* libmisc/limits.c, libmisc/entry.c, libmisc/chowntty.c,
 	libmisc/addgrps.c, libmisc/myname.c, libmisc/rlogin.c,
-	libmisc/pwdcheck.c, src/newgrp.c, src/login_nopam.c,
+	libmisc/pwdcheck.c, src/newgrp.c, src/login_nopam.c, src/login.c,
 	src/userdel.c, src/lastlog.c, src/grpck.c, src/gpasswd.c,
 	src/newusers.c, src/chpasswd.c, src/chfn.c, src/groupmems.c,
 	src/usermod.c, src/expiry.c, src/groupdel.c, src/chgpasswd.c,
@@ -30,7 +30,7 @@
 	Note: the getpwent/getgrent calls should probably be checked also.
 	* src/groupdel.c, src/expiry.c: Fix typos in comments.
 	* src/groupmod.c: Re-indent.
-	* libmisc/Makefile.am, lib/groupmem.c, lib/groupio.c, lib/pwmem.c,
+	* lib/Makefile.am, lib/groupmem.c, lib/groupio.c, lib/pwmem.c,
 	lib/pwio.c, lib/shadowmem.c, lib/shadowio.c: Move the __<xx>_dup
 	functions (used by the xget... functions) from the <xx>io.c files
 	to the new <xx>mem.c files. This avoid linking some utils against
