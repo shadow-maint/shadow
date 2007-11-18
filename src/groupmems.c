@@ -76,14 +76,16 @@ static int isroot (void)
 static int isgroup (void)
 {
 	gid_t g = getgid ();
-	struct group *grp = getgrgid (g);
+	struct group *grp = getgrgid (g); /* local, no need for xgetgrgid */
 
 	return TRUE;
 }
 
 static char *whoami (void)
 {
+	/* local, no need for xgetgrgid */
 	struct group *grp = getgrgid (getgid ());
+	/* local, no need for xgetpwuid */
 	struct passwd *usr = getpwuid (getuid ());
 
 	if (0 == strcmp (usr->pw_name, grp->gr_name)) {
@@ -173,7 +175,6 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -239,13 +240,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("groupmod", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {

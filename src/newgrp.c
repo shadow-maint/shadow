@@ -240,7 +240,7 @@ int main (int argc, char **argv)
 			 * Perhaps in the past, but the default behavior now depends on the
 			 * group entry, so it had better exist.  -- JWP
 			 */
-			if (!(grp = getgrgid (pwd->pw_gid))) {
+			if (!(grp = xgetgrgid (pwd->pw_gid))) {
 				fprintf (stderr, _("unknown GID: %lu\n"),
 					 (unsigned long) pwd->pw_gid);
 				SYSLOG ((LOG_CRIT, "unknown GID: %lu",
@@ -319,7 +319,7 @@ int main (int argc, char **argv)
 	 * including the user's name in the member list of the user's login
 	 * group.  -- JWP
 	 */
-	if (!(grp = getgrnam (group))) {
+	if (!(grp = getgrnam (group))) { /* local, no need for xgetgrnam */
 		fprintf (stderr, _("unknown group: %s\n"), group);
 		goto failure;
 	}
@@ -338,7 +338,7 @@ int main (int argc, char **argv)
 		 *
 		 * Re-read the group entry for further processing.
 		 */
-		grp = getgrnam (group);
+		grp = xgetgrnam (group);
 	}
 #ifdef SHADOWGRP
 	if ((sgrp = getsgnam (group))) {
@@ -364,7 +364,7 @@ int main (int argc, char **argv)
 	 * password, and the group has a password, she needs to give the
 	 * group password.
 	 */
-	if ((spwd = getspnam (name)))
+	if ((spwd = xgetspnam (name)))
 		pwd->pw_passwd = spwd->sp_pwdp;
 
 	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
@@ -480,6 +480,7 @@ int main (int argc, char **argv)
 				}
 			} while ((pid == child && WIFSTOPPED (cst)) ||
 				 (pid != child && errno == EINTR));
+			/* local, no need for xgetgrgid */
 			SYSLOG ((LOG_INFO,
 				 "user `%s' (login `%s' on %s) returned to group `%s'",
 				 name, loginname, tty,

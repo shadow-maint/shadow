@@ -31,8 +31,9 @@ struct passwd *get_my_pwent (void)
 	 * XXX - when running from su, will return the current user (not
 	 * the original user, like getlogin() does).  Does this matter?
 	 */
-	if (cp && *cp && (pw = getpwnam (cp)) && pw->pw_uid == ruid)
+	if (cp && *cp && (pw = xgetpwnam (cp)) && pw->pw_uid == ruid)
 		return pw;
 
-	return getpwuid (ruid);
+	return xgetpwuid (ruid);
 }
+

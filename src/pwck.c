@@ -331,6 +331,7 @@ int main (int argc, char **argv)
 		/*
 		 * Make sure the primary group exists
 		 */
+		/* local, no need for xgetgrgid */
 		if (!quiet && !getgrgid (pwd->pw_gid)) {
 
 			/*

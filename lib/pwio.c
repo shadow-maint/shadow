@@ -12,26 +12,6 @@
 extern struct passwd *sgetpwent (const char *);
 extern int putpwent (const struct passwd *, FILE *);
 
-struct passwd *__pw_dup (const struct passwd *pwent)
-{
-	struct passwd *pw;
-
-	if (!(pw = (struct passwd *) malloc (sizeof *pw)))
-		return NULL;
-	*pw = *pwent;
-	if (!(pw->pw_name = strdup (pwent->pw_name)))
-		return NULL;
-	if (!(pw->pw_passwd = strdup (pwent->pw_passwd)))
-		return NULL;
-	if (!(pw->pw_gecos = strdup (pwent->pw_gecos)))
-		return NULL;
-	if (!(pw->pw_dir = strdup (pwent->pw_dir)))
-		return NULL;
-	if (!(pw->pw_shell = strdup (pwent->pw_shell)))
-		return NULL;
-	return pw;
-}
-
 static void *passwd_dup (const void *ent)
 {
 	const struct passwd *pw = ent;

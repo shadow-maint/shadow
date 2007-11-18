@@ -93,7 +93,7 @@ static void print_one (const struct faillog *fl, uid_t uid)
 			("Login       Failures Maximum Latest                   On\n"));
 		once++;
 	}
-	pwent = getpwuid (uid);
+	pwent = getpwuid (uid); /* local, no need for xgetpwuid */
 	time (&now);
 	tm = localtime (&fl->fail_time);
 #ifdef HAVE_STRFTIME
@@ -291,7 +291,6 @@ static void set_locktime (long locktime)
 int main (int argc, char **argv)
 {
 	int anyflag = 0;
-	struct passwd *pwent;
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
@@ -350,9 +349,12 @@ int main (int argc, char **argv)
 				tflg++;
 				break;
 			case 'u':
+			{
+				struct passwd *pwent;
 				if (aflg)
 					usage ();
 
+				/* local, no need for xgetpwnam */
 				pwent = getpwnam (optarg);
 				if (!pwent) {
 					fprintf (stderr,
@@ -363,6 +365,7 @@ int main (int argc, char **argv)
 				uflg++;
 				user = pwent->pw_uid;
 				break;
+			}
 			default:
 				usage ();
 			}

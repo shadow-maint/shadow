@@ -59,6 +59,7 @@ static void print_groups (const char *member)
 
 	setgrent ();
 
+	/* local, no need for xgetpwnam */
 	if ((pwd = getpwnam (member)) == 0) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog, member);
 		exit (1);
@@ -73,6 +74,7 @@ static void print_groups (const char *member)
 				flag = 1;
 		}
 	}
+	/* local, no need for xgetgrgid */
 	if (!flag && (grp = getgrgid (pwd->pw_gid))) {
 		if (groups++)
 			putchar (' ');
@@ -95,7 +97,6 @@ int main (int argc, char **argv)
 	GETGROUPS_T *groups;
 	int pri_grp;
 	int i;
-	struct group *gr;
 #else
 	char *logname;
 	char *getlogin ();
@@ -150,6 +151,8 @@ int main (int argc, char **argv)
 		 * values.
 		 */
 		if (pri_grp != -1) {
+			struct group *gr;
+			/* local, no need for xgetgrgid */
 			if ((gr = getgrgid (pri_grp)))
 				printf ("%s", gr->gr_name);
 			else
@@ -157,9 +160,11 @@ int main (int argc, char **argv)
 		}
 
 		for (i = 0; i < ngroups; i++) {
+			struct group *gr;
 			if (i || pri_grp != -1)
 				putchar (' ');
 
+			/* local, no need for xgetgrgid */
 			if ((gr = getgrgid (groups[i])))
 				printf ("%s", gr->gr_name);
 			else

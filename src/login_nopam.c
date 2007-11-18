@@ -222,6 +222,7 @@ static int user_match (const char *tok, const char *string)
 #endif
 	} else if (string_match (tok, string)) {	/* ALL or exact match */
 		return (YES);
+	/* local, no need for xgetgrnam */
 	} else if ((group = getgrnam (tok))) {	/* try group membership */
 		for (i = 0; group->gr_mem[i]; i++)
 			if (strcasecmp (string, group->gr_mem[i]) == 0)
@@ -235,6 +236,7 @@ static int user_match (const char *tok, const char *string)
 		 * XXX - disabled by default for now.  Need to verify that
 		 * getpwnam() doesn't have some nasty side effects.  --marekm
 		 */
+		/* local, no need for xgetpwnam */
 		if ((userinf = getpwnam (string)))
 			if (userinf->pw_gid == group->gr_gid)
 				return (YES);

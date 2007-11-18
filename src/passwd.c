@@ -399,7 +399,7 @@ static void print_status (const struct passwd *pw)
 {
 	struct spwd *sp;
 
-	sp = getspnam (pw->pw_name);
+	sp = getspnam (pw->pw_name); /* local, no need for xgetspnam */
 	if (sp) {
 		printf ("%s %s %s %ld %ld %ld %ld\n",
 			pw->pw_name,
@@ -803,7 +803,7 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 
-	pw = getpwnam (name);
+	pw = xgetpwnam (name);
 	if (!pw) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog, name);
 		exit (E_NOPERM);
@@ -843,7 +843,7 @@ int main (int argc, char **argv)
 	/*
 	 * The user name is valid, so let's get the shadow file entry.
 	 */
-	sp = getspnam (name);
+	sp = getspnam (name); /* !USE_PAM, no need for xgetspnam */
 	if (!sp)
 		sp = pwd_to_spwd (pw);
 

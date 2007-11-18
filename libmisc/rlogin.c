@@ -162,7 +162,7 @@ do_rlogin (const char *remote_host, char *name, int namelen, char *term,
 #endif
 	STTY (0, &termio);
 
-	if (!(pwd = getpwnam (name)))
+	if (!(pwd = getpwnam (name))) /* local, no need for xgetpwnam */
 		return 0;
 
 	/*

@@ -140,7 +140,7 @@ static int check_list (const char *users)
 		 * This user must exist.
 		 */
 
-		if (!getpwnam (username)) {
+		if (!getpwnam (username)) { /* local, no need for xgetpwnam */
 			fprintf (stderr, _("%s: unknown user %s\n"),
 				 Prog, username);
 			errors++;
@@ -217,6 +217,7 @@ int main (int argc, char **argv)
 		switch (flag) {
 		case 'a':	/* add a user */
 			user = optarg;
+			/* local, no need for xgetpwnam */
 			if (!getpwnam (user)) {
 				fprintf (stderr,
 					 _("%s: unknown user %s\n"), Prog,
@@ -320,7 +321,7 @@ int main (int argc, char **argv)
 	if (!(group = argv[optind]))
 		usage ();
 
-	if (!(gr = getgrnam (group))) {
+	if (!(gr = getgrnam (group))) { /* dup, no need for xgetgrnam */
 		fprintf (stderr, _("unknown group: %s\n"), group);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "group lookup", group,

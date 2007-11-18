@@ -125,7 +125,7 @@ static int iswheel (const char *username)
 {
 	struct group *grp;
 
-	grp = getgrnam ("wheel");;
+	grp = getgrnam ("wheel"); /* !USE_PAM, no need for xgetgrnam */
 	if (!grp || !grp->gr_mem)
 		return 0;
 	return is_on_list (grp->gr_mem, username);
@@ -472,7 +472,7 @@ int main (int argc, char **argv)
 	 * Sort out the password of user calling su, in case needed later
 	 * -- chris
 	 */
-	if ((spwd = getspnam (oldname)))
+	if ((spwd = getspnam (oldname))) /* !USE_PAM, no need for xgetspnam */
 		pw->pw_passwd = spwd->sp_pwdp;
 	oldpass = xstrdup (pw->pw_passwd);
 #endif				/* SU_ACCESS */
@@ -507,7 +507,7 @@ int main (int argc, char **argv)
 	 * The password file entries for the user is gotten and the account
 	 * validated.
 	 */
-	if (!(pw = getpwnam (name))) {
+	if (!(pw = xgetpwnam (name))) {
 		(void) fprintf (stderr, _("Unknown id: %s\n"), name);
 		closelog ();
 		exit (1);
@@ -515,7 +515,7 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 	spwd = NULL;
 	if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0
-	    && (spwd = getspnam (name)))
+	    && (spwd = getspnam (name))) /* !USE_PAM, no need for xgetspnam */
 		pw->pw_passwd = spwd->sp_pwdp;
 #endif				/* !USE_PAM */
 	pwent = *pw;
@@ -696,8 +696,10 @@ int main (int argc, char **argv)
 			spwd = pwd_to_spwd (&pwent);
 
 		if (expire (&pwent, spwd)) {
+			/* !USE_PAM, no need for xgetpwnam */
 			struct passwd *pwd = getpwnam (name);
 
+			/* !USE_PAM, no need for xgetspnam */
 			spwd = getspnam (name);
 			if (pwd)
 				pwent = *pwd;

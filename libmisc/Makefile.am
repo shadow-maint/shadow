@@ -1,5 +1,5 @@
 
-EXTRA_DIST = .indent.pro
+EXTRA_DIST = .indent.pro xgetXXbyYY.c
 
 INCLUDES = -I$(top_srcdir)/lib
 
@@ -49,4 +49,9 @@ libmisc_a_SOURCES = \
 	ulimit.c \
 	utmp.c \
 	valid.c \
+	xgetpwnam.c \
+	xgetpwuid.c \
+	xgetgrnam.c \
+	xgetgrgid.c \
+	xgetspnam.c \
 	xmalloc.c

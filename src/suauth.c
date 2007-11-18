@@ -201,7 +201,7 @@ int isgrp (const char *name, const char *group)
 {
 	struct group *grp;
 
-	grp = getgrnam (group);
+	grp = getgrnam (group); /* local, no need for xgetgrnam */
 
 	if (!grp || !grp->gr_mem)
 		return 0;

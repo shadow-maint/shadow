@@ -229,7 +229,6 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -317,7 +316,7 @@ int main (int argc, char **argv)
 	 */
 	if (optind < argc) {
 		user = argv[optind];
-		pw = getpwnam (user);
+		pw = xgetpwnam (user);
 		if (!pw) {
 			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 				 user);
@@ -394,13 +393,17 @@ int main (int argc, char **argv)
 #else				/* !USE_PAM */
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("chfn", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("chfn", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {

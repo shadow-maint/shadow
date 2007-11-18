@@ -23,6 +23,7 @@
 #endif
 #include <pwd.h>
 #include <grp.h>
+#include "shadowio.h"
 
 #include "defines.h"
 
@@ -178,5 +179,16 @@ extern int valid (const char *, const struct passwd *);
 /* xmalloc.c */
 extern char *xmalloc (size_t);
 extern char *xstrdup (const char *);
+
+/* xgetpwnam.c */
+extern struct passwd *xgetpwnam (const char *);
+/* xgetpwuid.c */
+extern struct passwd *xgetpwuid (uid_t);
+/* xgetgrnam.c */
+extern struct group *xgetgrnam (const char *);
+/* xgetgrgid.c */
+extern struct group *xgetgrgid (gid_t);
+/* xgetspnam.c */
+extern struct spwd *xgetspnam(const char *);
 
 #endif				/* _PROTOTYPES_H */

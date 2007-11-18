@@ -77,7 +77,7 @@ void chown_tty (const char *tty, const struct passwd *info)
 		gid = info->pw_gid;
 	else if (group[0] >= '0' && group[0] <= '9')
 		gid = atoi (group);
-	else if ((grent = getgrnam (group)))
+	else if ((grent = getgrnam (group))) /* local, no need for xgetgrnam */
 		gid = grent->gr_gid;
 	else
 		gid = info->pw_gid;

@@ -43,7 +43,7 @@ void pw_entry (const char *name, struct passwd *pwent)
 
 	struct spwd *spwd;
 
-	if (!(passwd = getpwnam (name))) {
+	if (!(passwd = getpwnam (name))) { /* local, no need for xgetpwnam */
 		pwent->pw_name = (char *) 0;
 		return;
 	} else {
@@ -55,6 +55,7 @@ void pw_entry (const char *name, struct passwd *pwent)
 		pwent->pw_shell = xstrdup (passwd->pw_shell);
 #if !defined(AUTOSHADOW)
 		setspent ();
+		/* local, no need for xgetspnam */
 		if ((spwd = getspnam (name))) {
 			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);
 			endspent ();

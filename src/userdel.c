@@ -179,7 +179,7 @@ static void update_groups (void)
 	 * now if they have a group with the same name as their
 	 * user name, with no members, we delete it.
 	 */
-	grp = getgrnam (user_name);
+	grp = xgetgrnam (user_name);
 	if (grp && getdef_bool ("USERGROUPS_ENAB")
 	    && (grp->gr_mem[0] == NULL)) {
 
@@ -608,12 +608,10 @@ static void remove_mailbox (void)
  */
 int main (int argc, char **argv)
 {
-	struct passwd *pwd;
 	int errors = 0;
 
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -663,13 +661,19 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
 
-	if (retval == PAM_SUCCESS)
-		retval = pam_start ("userdel", pampw->pw_name, &conv, &pamh);
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
+
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("userdel", pampw->pw_name,
+					    &conv, &pamh);
+		}
+	}
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
@@ -698,14 +702,20 @@ int main (int argc, char **argv)
 	 * Start with a quick check to see if the user exists.
 	 */
 	user_name = argv[argc - 1];
-	if (!(pwd = getpwnam (user_name))) {
-		fprintf (stderr, _("%s: user %s does not exist\n"),
-			 Prog, user_name);
+	{
+		struct passwd *pwd;
+		/* local, no need for xgetpwnam */
+		if (!(pwd = getpwnam (user_name))) {
+			fprintf (stderr, _("%s: user %s does not exist\n"),
+				 Prog, user_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting user not found", user_name, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting user not found", user_name, -1, 0);
 #endif
-		exit (E_NOTFOUND);
+			exit (E_NOTFOUND);
+		}
+		user_id = pwd->pw_uid;
+		user_home = xstrdup (pwd->pw_dir);
 	}
 #ifdef	USE_NIS
 
@@ -727,8 +737,6 @@ int main (int argc, char **argv)
 		exit (E_NOTFOUND);
 	}
 #endif
-	user_id = pwd->pw_uid;
-	user_home = xstrdup (pwd->pw_dir);
 	/*
 	 * Check to make certain the user isn't logged in.
 	 */
@@ -755,6 +763,7 @@ int main (int argc, char **argv)
 #ifdef EXTRA_CHECK_HOME_DIR
 	/* This may be slow, the above should be good enough. */
 	if (rflg && !fflg) {
+		struct passwd *pwd;
 		/*
 		 * For safety, refuse to remove the home directory if it
 		 * would result in removing some other user's home

@@ -377,6 +377,7 @@ int main (int argc, char **argv)
 		 * Make sure each member exists
 		 */
 		for (i = 0; grp->gr_mem[i]; i++) {
+			/* local, no need for xgetpwnam */
 			if (getpwnam (grp->gr_mem[i]))
 				continue;
 			/*
@@ -597,6 +598,7 @@ int main (int argc, char **argv)
 		 * Make sure each administrator exists
 		 */
 		for (i = 0; sgr->sg_adm[i]; i++) {
+			/* local, no need for xgetpwnam */
 			if (getpwnam (sgr->sg_adm[i]))
 				continue;
 			/*
@@ -626,6 +628,7 @@ int main (int argc, char **argv)
 		 * Make sure each member exists
 		 */
 		for (i = 0; sgr->sg_mem[i]; i++) {
+			/* local, no need for xgetpwnam */
 			if (getpwnam (sgr->sg_mem[i]))
 				continue;
 

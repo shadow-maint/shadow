@@ -1,5 +1,50 @@
 2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h, configure.in, libmisc/Makefile.am,
+	libmisc/xgetXXbyYY.c, libmisc/xgetpwnam.c, libmisc/xgetpwuid.c,
+	libmisc/xgetgrnam.c, libmisc/xgetgrgid.c, libmisc/xgetspnam.c:
+	Added functions xgetpwnam(), xgetpwuid(), xgetgrnam(),
+	xgetgrgid(), and xgetspnam(). They allocate memory for the
+	returned structure and are more robust to successive calls. They
+	are implemented with the libc's getxxyyy_r() functions if
+	available.
+	* libmisc/limits.c, libmisc/entry.c, libmisc/chowntty.c,
+	libmisc/addgrps.c, libmisc/myname.c, libmisc/rlogin.c,
+	libmisc/pwdcheck.c, src/newgrp.c, src/login_nopam.c,
+	src/userdel.c, src/lastlog.c, src/grpck.c, src/gpasswd.c,
+	src/newusers.c, src/chpasswd.c, src/chfn.c, src/groupmems.c,
+	src/usermod.c, src/expiry.c, src/groupdel.c, src/chgpasswd.c,
+	src/su.c, src/useradd.c, src/groupmod.c, src/passwd.c, src/pwck.c,
+	src/groupadd.c, src/chage.c, src/login.c, src/suauth.c,
+	src/faillog.c, src/groups.c, src/chsh.c, src/id.c: Review all the
+	usage of one of the getpwnam(), getpwuid(), getgrnam(),
+	getgrgid(), and getspnam() functions. It was noticed on
+	http://bugs.debian.org/341230 that chfn and chsh use a passwd
+	structure after calling a pam function, which result in using
+	information from the passwd structure requested by pam, not the
+	original one. It is much easier to use the new xget... functions
+	to avoid these issues. I've checked which call to the original
+	get... functions could be left (reducing the scope of the
+	structure if possible), and I've left comments to ease future
+	reviews (e.g. /* local, no need for xgetpwnam */).
+	Note: the getpwent/getgrent calls should probably be checked also.
+	* src/groupdel.c, src/expiry.c: Fix typos in comments.
+	* src/groupmod.c: Re-indent.
+	* libmisc/Makefile.am, lib/groupmem.c, lib/groupio.c, lib/pwmem.c,
+	lib/pwio.c, lib/shadowmem.c, lib/shadowio.c: Move the __<xx>_dup
+	functions (used by the xget... functions) from the <xx>io.c files
+	to the new <xx>mem.c files. This avoid linking some utils against
+	the SELinux library.
+
+2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/pl/pl.po: Fix typo: chgpassw -> chgpasswd.
+	* man/pl/Makefile.am: Fix typo: chgpassw -> chgpasswd.
+	* man/de/de.po: groups shall not be translated (for command,
+	refname, or refentrytitle).
+
+2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Fix typo introduced while fixing
 	http://bugs.debian.org/451521 (compile fix).
 

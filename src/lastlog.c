@@ -199,7 +199,7 @@ int main (int argc, char **argv)
 				bflg++;
 				break;
 			case 'u':
-				pwent = getpwnam (optarg);
+				pwent = xgetpwnam (optarg);
 				if (!pwent) {
 					fprintf (stderr,
 						 _("Unknown User: %s\n"),

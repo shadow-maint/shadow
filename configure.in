@@ -36,7 +36,8 @@ AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 
 AC_CHECK_FUNCS(l64a fchmod fchown fsync getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
-	memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr)
+	memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
+	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.

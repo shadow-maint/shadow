@@ -259,6 +259,7 @@ static void find_new_gid (void)
 			if (!grp)
 				break;
 #else
+			/* local, no need for xgetgrgid */
 			if (!getgrgid (group_id))
 				break;
 #endif
@@ -395,7 +396,6 @@ int main (int argc, char **argv)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -490,13 +490,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("groupadd", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -526,7 +530,7 @@ int main (int argc, char **argv)
 	/*
 	 * Start with a quick check to see if the group exists.
 	 */
-	if (getgrnam (group_name)) {
+	if (getgrnam (group_name)) { /* local, no need for xgetgrnam */
 		if (fflg) {
 			exit (E_SUCCESS);
 		}

@@ -188,7 +188,7 @@ static void group_busy (gid_t gid)
 	endpwent ();
 
 	/*
-	 * If pwd isn't NULL, it stopped becaues the gid's matched.
+	 * If pwd isn't NULL, it stopped because the gid's matched.
 	 */
 
 	if (pwd == (struct passwd *) 0)
@@ -213,11 +213,8 @@ static void group_busy (gid_t gid)
 
 int main (int argc, char **argv)
 {
-	struct group *grp;
-
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -245,13 +242,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("groupdel", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("groupdel", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -278,20 +279,25 @@ int main (int argc, char **argv)
 	is_shadow_grp = sgr_file_present ();
 #endif
 
-	/*
-	 * Start with a quick check to see if the group exists.
-	 */
-	if (!(grp = getgrnam (group_name))) {
-		fprintf (stderr, _("%s: group %s does not exist\n"),
-			 Prog, group_name);
+	{
+		struct group *grp;
+		/*
+		 * Start with a quick check to see if the group exists.
+		 */
+		/* local, no need for xgetgrnam */
+		if (!(grp = getgrnam (group_name))) {
+			fprintf (stderr, _("%s: group %s does not exist\n"),
+				 Prog, group_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
-			      group_name, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "deleting group",
+				      group_name, -1, 0);
 #endif
-		exit (E_NOTFOUND);
-	}
+			exit (E_NOTFOUND);
+		}
 
-	group_id = grp->gr_gid;	/* LAUS */
+		group_id = grp->gr_gid;	/* LAUS */
+	}
 
 #ifdef	USE_NIS
 	/*
@@ -321,7 +327,7 @@ int main (int argc, char **argv)
 	 * Now check to insure that this isn't the primary group of
 	 * anyone.
 	 */
-	group_busy (grp->gr_gid);
+	group_busy (group_id);
 
 	/*
 	 * Do the hard stuff - open the files, delete the group entries,

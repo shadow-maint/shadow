@@ -21,7 +21,6 @@ int add_groups (const char *list)
 {
 	GETGROUPS_T *grouplist, *tmp;
 	int i, ngroups, added;
-	struct group *grp;
 	char *token;
 	char buf[1024];
 
@@ -50,8 +49,9 @@ int add_groups (const char *list)
 
 	added = 0;
 	for (token = strtok (buf, SEP); token; token = strtok (NULL, SEP)) {
+		struct group *grp;
 
-		grp = getgrnam (token);
+		grp = getgrnam (token); /* local, no need for xgetgrnam */
 		if (!grp) {
 			fprintf (stderr, _("Warning: unknown group %s\n"),
 				 token);

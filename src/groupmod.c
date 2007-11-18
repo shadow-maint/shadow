@@ -73,7 +73,7 @@ static gid_t group_newid;
 static char *Prog;
 
 static int
- oflg = 0,			/* permit non-unique group ID to be specified with -g */
+    oflg = 0,			/* permit non-unique group ID to be specified with -g */
     gflg = 0,			/* new ID value for the group */
     nflg = 0;			/* a new name has been specified for the group */
 
@@ -257,7 +257,7 @@ static void check_new_gid (void)
 		return;
 	}
 
-	if (oflg || !getgrgid (group_newid))
+	if (oflg || !getgrgid (group_newid)) /* local, no need for xgetgrgid */
 		return;
 
 	/*
@@ -292,6 +292,7 @@ static void check_new_name (void)
 		/*
 		 * If the entry is found, too bad.
 		 */
+		/* local, no need for xgetgrnam */
 		if (getgrnam (group_newname)) {
 			fprintf (stderr,
 				 _("%s: %s is not a unique name\n"), Prog,
@@ -457,11 +458,8 @@ static void open_files (void)
  */
 int main (int argc, char **argv)
 {
-	struct group *grp;
-
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -485,13 +483,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("groupmod", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -517,19 +519,23 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
-	/*
-	 * Start with a quick check to see if the group exists.
-	 */
-	if (!(grp = getgrnam (group_name))) {
-		fprintf (stderr, _("%s: group %s does not exist\n"),
-			 Prog, group_name);
+	{
+		struct group *grp;
+		/*
+		 * Start with a quick check to see if the group exists.
+		 */
+		/* local, no need for xgetgrnam */
+		if (!(grp = getgrnam (group_name))) {
+			fprintf (stderr, _("%s: group %s does not exist\n"),
+				 Prog, group_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
-			      group_name, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				      "modifying group", group_name, -1, 0);
 #endif
-		exit (E_NOTFOUND);
-	} else
-		group_id = grp->gr_gid;
+			exit (E_NOTFOUND);
+		} else
+			group_id = grp->gr_gid;
+	}
 
 #ifdef WITH_AUDIT
 	/* Set new name/id to original if not specified on command line */

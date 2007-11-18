@@ -205,8 +205,8 @@ static struct group *getgr_nam_gid (const char *grname)
 
 	gid = strtol (grname, &errptr, 10);
 	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && gid >= 0)
-		return getgrgid (gid);
-	return getgrnam (grname);
+		return xgetgrgid (gid);
+	return xgetgrnam (grname);
 }
 
 static long get_number (const char *numstr)
@@ -252,7 +252,6 @@ static void get_defaults (void)
 	FILE *fp;
 	char buf[1024];
 	char *cp, *ep;
-	const struct group *grp;
 
 	/*
 	 * Open the defaults file for reading.
@@ -279,9 +278,11 @@ static void get_defaults (void)
 		 */
 		if (MATCH (buf, DGROUP)) {
 			unsigned int val = (unsigned int) strtoul (cp, &ep, 10);
+			const struct group *grp;
 
-			if (*cp != '\0' && *ep == '\0') {	/* valid number */
+			if (*cp != '\0' && *ep == '\0') { /* valid number */
 				def_group = val;
+				/* local, no need for xgetgrgid */
 				if ((grp = getgrgid (def_group))) {
 					def_gname = xstrdup (grp->gr_name);
 				} else {
@@ -289,6 +290,7 @@ static void get_defaults (void)
 						 _("%s: unknown GID %s\n"),
 						 Prog, cp);
 				}
+			/* local, no need for xgetgrnam */
 			} else if ((grp = getgrnam (cp))) {
 				def_group = grp->gr_gid;
 				def_gname = xstrdup (cp);
@@ -837,7 +839,7 @@ static void find_new_uid (void)
 #ifdef NO_GETPWENT
 	pw_rewind ();
 	while ((pwd = pw_next ())) {
-#else				/* using getpwent() we can check against NIS users etc. */
+#else		/* using getpwent() we can check against NIS users etc. */
 	setpwent ();
 	while ((pwd = getpwent ())) {
 #endif
@@ -881,6 +883,7 @@ static void find_new_uid (void)
 			if (!pwd)
 				break;
 #else
+			/* local, no need for xgetpwuid */
 			if (!getpwuid (user_id))
 				break;
 #endif
@@ -940,7 +943,7 @@ static void find_new_gid ()
 #ifndef NO_GETGRENT		/* glibc does have this, so ... */
 	/* A quick test gets here: if the UID is available
 	 * as a GID, go ahead and use it */
-	if (!getgrgid (user_id)) {
+	if (!getgrgid (user_id)) { /* local, no need for xgetgrgid */
 		user_gid = user_id;
 		return;
 	}
@@ -953,6 +956,7 @@ static void find_new_gid ()
 			if (!grp)
 				break;
 #else
+			/* local, no need for xgetgrgid */
 			if (!getgrgid (user_gid))
 				break;
 #endif
@@ -1497,6 +1501,7 @@ static void usr_update (void)
 	 * no user with this UID exists yet (entries for shared UIDs
 	 * are left unchanged).  --marekm
 	 */
+	/* local, no need for xgetpwuid */
 	if (!getpwuid (user_id)) {
 		faillog_reset (user_id);
 		lastlog_reset (user_id);
@@ -1596,7 +1601,7 @@ static void create_mail (void)
 			return;
 		}
 
-		gr = getgrnam ("mail");
+		gr = getgrnam ("mail"); /* local, no need for xgetgrnam */
 		if (!gr) {
 			fprintf (stderr,
 				 _
@@ -1622,7 +1627,6 @@ int main (int argc, char **argv)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -1661,13 +1665,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("useradd", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("useradd", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -1705,7 +1713,7 @@ int main (int argc, char **argv)
 	/*
 	 * Start with a quick check to see if the user exists.
 	 */
-	if (getpwnam (user_name)) {
+	if (getpwnam (user_name)) { /* local, no need for xgetpwnam */
 		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
@@ -1721,7 +1729,7 @@ int main (int argc, char **argv)
 	 * --bero
 	 */
 	if (!gflg) {
-		if (getgrnam (user_name)) {
+		if (getgrnam (user_name)) { /* local, no need for xgetgrnam */
 			fprintf (stderr,
 				 _
 				 ("%s: group %s exists - if you want to add this user to that group, use -g.\n"),

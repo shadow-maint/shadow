@@ -61,7 +61,7 @@ static void usage (void)
 /* 
  * expiry - check and enforce password expiration policy
  *
- *	expiry checks (-c) the current password expiraction and forces (-f)
+ *	expiry checks (-c) the current password expiration and forces (-f)
  *	changes when required. It is callable as a normal user command.
  */
 int main (int argc, char **argv)
@@ -101,7 +101,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: unknown user\n"), Prog);
 		exit (10);
 	}
-	spwd = getspnam (pwd->pw_name);
+	spwd = getspnam (pwd->pw_name); /* !USE_PAM, No need for xgetspnam */
 
 	/*
 	 * If checking accounts, use agecheck() function.

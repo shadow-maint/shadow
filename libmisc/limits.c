@@ -377,6 +377,7 @@ static void setup_usergroups (const struct passwd *info)
  *	(examples: 022 -> 002, 077 -> 007).
  */
 	if (info->pw_uid != 0 && info->pw_uid == info->pw_gid) {
+		/* local, no need for xgetgrgid */
 		grp = getgrgid (info->pw_gid);
 		if (grp && (strcmp (info->pw_name, grp->gr_name) == 0)) {
 			oldmask = umask (0777);

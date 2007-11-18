@@ -118,13 +118,13 @@ static void usage (void)
 	 * does not exist, just give the numerical value.
 	 */
 
-	pw = getpwuid (ruid);
+	pw = getpwuid (ruid); /* local, no need for xgetpwuid */
 	if (pw)
 		printf ("UID=%u(%s)", ruid, pw->pw_name);
 	else
 		printf ("UID=%u", ruid);
 
-	gr = getgrgid (rgid);
+	gr = getgrgid (rgid);; /* local, no need for xgetgrgid */
 	if (gr)
 		printf (" GID=%u(%s)", rgid, gr->gr_name);
 	else
@@ -136,14 +136,14 @@ static void usage (void)
 	 */
 
 	if (ruid != euid) {
-		pw = getpwuid (euid);
+		pw = getpwuid (euid); /* local, no need for xgetpwuid */
 		if (pw)
 			printf (" EUID=%u(%s)", euid, pw->pw_name);
 		else
 			printf (" EUID=%u", euid);
 	}
 	if (rgid != egid) {
-		gr = getgrgid (egid);
+		gr = getgrgid (egid); /* local, no need for xgetgrgid */
 		if (gr)
 			printf (" EGID=%u(%s)", egid, gr->gr_name);
 		else
@@ -169,6 +169,7 @@ static void usage (void)
 			if (i)
 				putchar (',');
 
+			/* local, no need for xgetgrgid */
 			gr = getgrgid (groups[i]);
 			if (gr)
 				printf ("%u(%s)", groups[i], gr->gr_name);

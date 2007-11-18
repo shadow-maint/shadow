@@ -174,8 +174,8 @@ static struct group *getgr_nam_gid (const char *grname)
 
 	val = strtol (grname, &errptr, 10);
 	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && val >= 0)
-		return getgrgid (val);
-	return getgrnam (grname);
+		return xgetgrgid (val);
+	return xgetgrnam (grname);
 }
 
 /*
@@ -805,26 +805,28 @@ static uid_t get_id (const char *uidstr)
 static void process_flags (int argc, char **argv)
 {
 	const struct group *grp;
-	const struct passwd *pwd;
 
-	const struct spwd *spwd = NULL;
 	int anyflag = 0;
 
 	if (argc == 1 || argv[argc - 1][0] == '-')
 		usage ();
 
-	if (!(pwd = getpwnam (argv[argc - 1]))) {
-		fprintf (stderr, _("%s: user %s does not exist\n"),
-			 Prog, argv[argc - 1]);
-		exit (E_NOTFOUND);
-	}
+	{
+		const struct passwd *pwd;
+		/* local, no need for xgetpwnam */
+		if (!(pwd = getpwnam (argv[argc - 1]))) {
+			fprintf (stderr, _("%s: user %s does not exist\n"),
+				 Prog, argv[argc - 1]);
+			exit (E_NOTFOUND);
+		}
 
-	user_name = argv[argc - 1];
-	user_id = pwd->pw_uid;
-	user_gid = pwd->pw_gid;
-	user_comment = xstrdup (pwd->pw_gecos);
-	user_home = xstrdup (pwd->pw_dir);
-	user_shell = xstrdup (pwd->pw_shell);
+		user_name = argv[argc - 1];
+		user_id = pwd->pw_uid;
+		user_gid = pwd->pw_gid;
+		user_comment = xstrdup (pwd->pw_gecos);
+		user_home = xstrdup (pwd->pw_dir);
+		user_shell = xstrdup (pwd->pw_shell);
+	}
 #ifdef WITH_AUDIT
 	user_newname = user_name;
 	user_newid = user_id;
@@ -854,13 +856,17 @@ static void process_flags (int argc, char **argv)
 	}
 #endif
 
-	if (is_shadow_pwd && (spwd = getspnam (user_name))) {
-		user_expire = spwd->sp_expire;
-		user_inactive = spwd->sp_inact;
+	{
+		const struct spwd *spwd = NULL;
+		/* local, no need for xgetspnam */
+		if (is_shadow_pwd && (spwd = getspnam (user_name))) {
+			user_expire = spwd->sp_expire;
+			user_inactive = spwd->sp_inact;
 #ifdef WITH_AUDIT
-		user_newexpire = user_expire;
-		user_newinactive = user_inactive;
+			user_newexpire = user_expire;
+			user_newinactive = user_inactive;
 #endif
+		}
 	}
 
 	{
@@ -923,7 +929,7 @@ static void process_flags (int argc, char **argv)
 #ifdef WITH_AUDIT
 					user_newexpire = strtoday (optarg);
 					if (user_newexpire == -1) {
-#else
+#else /* } */
 					user_expire = strtoday (optarg);
 					if (user_expire == -1) {
 #endif
@@ -1082,11 +1088,13 @@ static void process_flags (int argc, char **argv)
 	if (uflg && user_id == user_newid)
 		uflg = oflg = 0;
 
+	/* local, no need for xgetpwnam */
 	if (lflg && getpwnam (user_newname)) {
 		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_newname);
 		exit (E_NAME_IN_USE);
 	}
 
+	/* local, no need for xgetpwuid */
 	if (uflg && !oflg && getpwuid (user_newid)) {
 		fprintf (stderr, _("%s: uid %lu is not unique\n"),
 			 Prog, (unsigned long) user_newid);
@@ -1211,9 +1219,6 @@ static void open_files (void)
 		}
 #endif
 	}
-
-
-
 }
 
 /*
@@ -1492,7 +1497,6 @@ int main (int argc, char **argv)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -1525,13 +1529,17 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	pampw = getpwuid (getuid ());
-	if (pampw == NULL) {
-		retval = PAM_USER_UNKNOWN;
-	}
+	{
+		struct passwd *pampw;
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (pampw == NULL) {
+			retval = PAM_USER_UNKNOWN;
+		}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("usermod", pampw->pw_name, &conv, &pamh);
+		if (retval == PAM_SUCCESS) {
+			retval = pam_start ("usermod", pampw->pw_name,
+					    &conv, &pamh);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
