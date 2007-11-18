@@ -1,5 +1,10 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/pl/chgpassw.8: Remove chgpassw.8 since the real manpage
+	should be named chgpasswd.8.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/vigr.8.xml: Remove file. The vigr man page is generated from
 	the vipw XML file.
 
