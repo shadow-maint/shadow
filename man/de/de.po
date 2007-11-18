@@ -4901,7 +4901,7 @@ msgstr ""
 #: groups.1.xml:5(refentrytitle) groups.1.xml:10(refname)
 #: groups.1.xml:16(command)
 msgid "groups"
-msgstr "Gruppen"
+msgstr "groups"
 
 #: groups.1.xml:11(refpurpose)
 msgid "display current group names"

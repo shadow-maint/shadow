@@ -4973,7 +4973,7 @@ msgstr ""
 #: chgpasswd.8.xml:5(refentrytitle) chgpasswd.8.xml:10(refname)
 #: chgpasswd.8.xml:16(command)
 msgid "chgpasswd"
-msgstr "chgpassw"
+msgstr "chgpasswd"
 
 #: chgpasswd.8.xml:11(refpurpose)
 msgid "update group passwords in batch mode"
