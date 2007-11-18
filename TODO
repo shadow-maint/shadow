@@ -26,6 +26,10 @@ ALL:
 - passwd:
   - check combination of options (e.g. -u/-l)
 
+- newgrp: check the USE_PAM section.
+
+- groupmems: check reason for isgroup
+
 Documentation:
 
 - document the -s option of {pw,grp}ck in the pt_BR, and ja man pages
