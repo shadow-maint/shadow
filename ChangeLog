@@ -1,5 +1,9 @@
 2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/Makefile.am: Fix typo: EXTRA_DOST -> EXTRA_DIST.
+
+2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login_nopam.c: Fix a typo in a comment.
 
 2007-11-18  Nicolas François  <nicolas.francois@centraliens.net>

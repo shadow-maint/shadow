@@ -1,5 +1,5 @@
 
-EXTRA_DOST = .indent.pro
+EXTRA_DIST = .indent.pro
 
 INCLUDES = -I$(top_srcdir)/lib
 
