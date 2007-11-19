@@ -98,7 +98,7 @@
 	returned structure and are more robust to successive calls. They
 	are implemented with the libc's getxxyyy_r() functions if
 	available.
-	* libmisc/limits.c, libmisc/entry.c, libmisc/chowntty.c,
+	* NEWS, libmisc/limits.c, libmisc/entry.c, libmisc/chowntty.c,
 	libmisc/addgrps.c, libmisc/myname.c, libmisc/rlogin.c,
 	libmisc/pwdcheck.c, src/newgrp.c, src/login_nopam.c, src/login.c,
 	src/userdel.c, src/lastlog.c, src/grpck.c, src/gpasswd.c,

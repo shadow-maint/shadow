@@ -39,6 +39,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - userdel: Fix the homedir prefix checking.
 - passwd, usermod: Refuse to unlock an account when it would result in a
   passwordless account.
+- Full review of the usage of getpwnam(), getpwuid(), getgrnam(),
+  getgrgid(), and getspnam(). There should be no functional changes.
 
 *** documentation:
 - Generate the translated manpages from PO at build time.
