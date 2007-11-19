@@ -190,7 +190,10 @@ static int new_password (const struct passwd *pw)
 	char pass[200];		/* New password */
 	int i;			/* Counter for retries */
 	int warned;
-	int pass_max_len;
+	int pass_max_len = -1;
+#ifdef ENCRYPTMETHOD_SELECT
+	char *method;
+#endif
 
 #ifdef HAVE_LIBCRACK_HIST
 	int HistUpdate (const char *, const char *);
@@ -228,15 +231,34 @@ static int new_password (const struct passwd *pw)
 	 * for strength, unless it is the root user. This provides an escape
 	 * for initial login passwords.
 	 */
-	if (getdef_bool ("MD5_CRYPT_ENAB"))
-		pass_max_len = 127;
-	else
-		pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
-
-	if (!qflg)
-		printf (_("\
-Enter the new password (minimum of %d, maximum of %d characters)\n\
-Please use a combination of upper and lower case letters and numbers.\n"), getdef_num ("PASS_MIN_LEN", 5), pass_max_len);
+#ifdef ENCRYPTMETHOD_SELECT
+	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
+#endif
+		if (!getdef_bool ("MD5_CRYPT_ENAB"))
+			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
+#ifdef ENCRYPTMETHOD_SELECT
+	} else {
+		if (!strncmp (method, "MD5"   , 3) ||
+		    !strncmp (method, "SHA256", 6) ||
+		    !strncmp (method, "SHA512", 6))
+			pass_max_len = -1;
+		else
+			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
+	}
+#endif
+	if (!qflg) {
+		if (pass_max_len == -1) {
+			printf (_(
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"),
+				getdef_num ("PASS_MIN_LEN", 5));
+		} else {
+			printf (_(
+"Enter the new password (minimum of %d, maximum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"),
+				getdef_num ("PASS_MIN_LEN", 5), pass_max_len);
+		}
+	}
 
 	warned = 0;
 	for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {

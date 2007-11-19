@@ -1,5 +1,15 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, libmisc/obscure.c, libmisc/salt.c, src/passwd.c,
+	lib/getdef.c, etc/login.defs: Add support for SHA256 and SHA512
+	encrypt methods. Apply RedHat's patch shadow-4.0.18.1-sha256.patch.
+	Thanks to Peter Vrabec. Hardly no changes except re-indent and
+	changes related to recent modifications (max_salt_len in
+	crypt_make_salt). Changes in lib/defines.h not applied (definition
+	of ENCRYPTMETHOD_SELECT). I will add a configure check or flag.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/de/Makefile.am: Add su.1 to the generated manpages.
 	* man/fr/Makefile.am: Add id.1 to EXTRA_DIST. It will be
 	generated.

@@ -84,6 +84,7 @@ static struct itemdef def_table[] = {
 	{"CHFN_AUTH", NULL},
 	{"CHSH_AUTH", NULL},
 	{"CRACKLIB_DICTPATH", NULL},
+	{"ENCRYPT_METHOD", NULL},
 	{"ENV_HZ", NULL},
 	{"ENVIRON_FILE", NULL},
 	{"ENV_TZ", NULL},

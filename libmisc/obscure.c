@@ -210,6 +210,9 @@ static const char *password_check (const char *old, const char *new,
 	int maxlen, oldlen, newlen;
 	char *new1, *old1;
 	const char *msg;
+#ifdef ENCRYPTMETHOD_SELECT
+	char *result;
+#endif
 
 	oldlen = strlen (old);
 	newlen = strlen (new);
@@ -227,15 +230,28 @@ static const char *password_check (const char *old, const char *new,
 	if (msg)
 		return msg;
 
+#ifdef ENCRYPTMETHOD_SELECT
+	if ((result = getdef_str ("ENCRYPT_METHOD")) == NULL) {
+#endif
 	/* The traditional crypt() truncates passwords to 8 chars.  It is
 	   possible to circumvent the above checks by choosing an easy
 	   8-char password and adding some random characters to it...
 	   Example: "password$%^&*123".  So check it again, this time
 	   truncated to the maximum length.  Idea from npasswd.  --marekm */
 
-	if (getdef_bool ("MD5_CRYPT_ENAB"))
-		return NULL;	/* unlimited password length */
+		if (getdef_bool ("MD5_CRYPT_ENAB"))
+			return NULL;
 
+#ifdef ENCRYPTMETHOD_SELECT
+	} else {
+
+		if (!strncmp (result, "MD5"   , 3) ||
+		    !strncmp (result, "SHA256", 6) ||
+		    !strncmp (result, "SHA512", 6))
+			return NULL;
+
+	}
+#endif
 	maxlen = getdef_num ("PASS_MAX_LEN", 8);
 	if (oldlen <= maxlen && newlen <= maxlen)
 		return NULL;

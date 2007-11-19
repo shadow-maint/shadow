@@ -3,6 +3,8 @@ $Id$
 shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 
 *** general:
+- Add support for SHA256 and SHA512 encrypt methods (supported by new
+  libc).
 - useradd: Allow non numerical group identifier to be specified with
   useradd's -g option.
 - chgpasswd, chpasswd: Fix chpasswd and chgpasswd stack overflow.

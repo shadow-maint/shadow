@@ -58,20 +58,44 @@ char *l64a(long value)
  * (magic) and pw_encrypt() will execute the MD5-based FreeBSD-compatible
  * version of crypt() instead of the standard one.
  */
+
+#define MAGNUM(array,ch) (array)[0]= (array)[2] = '$',(array)[1]=(ch)
+
 char *crypt_make_salt (void)
 {
 	struct timeval tv;
 	static char result[40];
 	int max_salt_len = 8;
+	char *method;
 
-	result[0] = '\0';
 #ifndef USE_PAM
-	if (getdef_bool ("MD5_CRYPT_ENAB")) {
-		strcpy (result, "$1$");	/* magic for the new MD5 crypt() */
 		max_salt_len += 3;
-	}
+#ifdef ENCRYPTMETHOD_SELECT
+	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
 #endif
-
+		if (getdef_bool ("MD5_CRYPT_ENAB")) {
+			MAGNUM(result,'1');
+			max_salt_len = 11;
+		} else
+			result[0] = '\0';
+#ifdef ENCRYPTMETHOD_SELECT
+	} else {
+		if (!strncmp (method, "MD5", 3)) {
+			MAGNUM(result, '1');
+			max_salt_len = 11;
+		} else if (!strncmp (method, "SHA256", 6)) {
+			MAGNUM(result, '5');
+			max_salt_len = 11; /* XXX: should not be fixed */
+		} else if (!strncmp (method, "SHA512", 6)) {
+			MAGNUM(result, '6');
+			max_salt_len = 11; /* XXX: should not be fixed */
+		} else if (!strncmp (method, "DES", 3))
+			result[0] = '\0';
+		else
+			result[0] = '\0';
+	}
+#endif				/* ENCRYPTMETHOD_SELECT */
+#endif				/* USE_PAM */
 	/*
 	 * Generate 8 chars of salt, the old crypt() will use only first 2.
 	 */

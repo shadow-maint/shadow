@@ -279,6 +279,16 @@ CHFN_RESTRICT		rwh
 #MD5_CRYPT_ENAB	no
 
 #
+# Only works if compiled with ENCRYPTMETHOD_SELECT defined:
+# If set to MD5 , MD5-based algorithm will be used for encrypting password
+# If set to SHA256, SHA256-based algorithm will be used for encrypting password
+# If set to SHA512, SHA512-based algorithm will be used for encrypting password
+# If set to DES, DES-based algorithm will be used for encrypting password (default)
+# Overrides the MD5_CRYPT_ENAB option
+#
+#ENCRYPT_METHOD DES
+
+#
 # List of groups to add to the user's supplementary group set
 # when logging in on the console (as determined by the CONSOLE
 # setting).  Default is none.
