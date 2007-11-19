@@ -52,7 +52,8 @@ endif
 
 EXTRA_DIST = \
 	$(man_MANS) \
-	$(man_nopam)
+	$(man_nopam) \
+	id.1
 
 include ../generate_translations.mak
 

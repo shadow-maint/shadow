@@ -1,5 +1,16 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/de/Makefile.am: Add su.1 to the generated manpages.
+	* man/fr/Makefile.am: Add id.1 to EXTRA_DIST. It will be
+	generated.
+	* man/pl/Makefile.am: Add groupmems.8 to the generated manpages.
+	* man/it/Makefile.am: Add logoutd.8 to EXTRA_DIST. It will be
+	generated.
+	* man/de/su.1, man/fr/id.1, man/pl/groupmems.8, man/it/logoutd.8:
+	Removed, since auto-generated.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Fix some compilation warnings:
 	* src/login.c: "dereferencing type-punned pointer will break
 	strict-aliasing rules", add a variable indirection: ptr_pam_user.

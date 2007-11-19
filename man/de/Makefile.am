@@ -9,6 +9,7 @@ man_MANS = \
 	newgrp.1 \
 	passwd.1 \
 	passwd.5 \
+	su.1 \
 	vigr.8 \
 	vipw.8
 
