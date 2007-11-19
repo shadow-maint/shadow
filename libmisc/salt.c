@@ -69,7 +69,6 @@ char *crypt_make_salt (void)
 	char *method;
 
 #ifndef USE_PAM
-		max_salt_len += 3;
 #ifdef ENCRYPTMETHOD_SELECT
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
 #endif
