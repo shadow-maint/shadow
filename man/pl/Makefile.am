@@ -51,6 +51,7 @@ endif
 EXTRA_DIST = \
 	$(man_MANS) \
 	$(man_nopam) \
+	getspnam.3 \
 	id.1 \
 	shadow.3 \
 	sulogin.8

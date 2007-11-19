@@ -1,5 +1,12 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/pl/Makefile.am: Add getspnam.3 to EXTRA_DIST since it is
+	generated with shadow.3.
+	* man/generate_translations.mak: Clean all the manpages, based on
+	$(EXTRA_DIST), not $(man_MANS).
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/sv/getspnam.3, man/sv/faillog.5, man/sv/faillog.8,
 	man/sv/grpconv.8, man/sv/chsh.1, man/sv/shadow.3,
 	man/sv/grpunconv.8, man/sv/shadow.5, man/sv/newgrp.1,

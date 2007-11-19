@@ -15,6 +15,6 @@ getspnam.3: shadow.3
 
 vigr.8: vipw.8
 
-CLEANFILES = .xml2po.mo $(man_MANS) $(addsuffix .xml,$(man_MANS))
+CLEANFILES = .xml2po.mo $(EXTRA_DIST) $(addsuffix .xml,$(EXTRA_DIST))
 
 endif
