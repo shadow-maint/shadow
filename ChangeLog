@@ -66,9 +66,10 @@
 	man/it/groupdel.8, man/it/vipw.8, man/it/useradd.8,
 	man/it/passwd.1, man/it/groupmod.8, man/it/passwd.5,
 	man/it/porttime.5, man/it/chage.1, man/it/login.1, man/it/pwck.8,
-	man/it/groupadd.8, man/it/vigr.8, man/it/groups.1: Remove
-	generated translated manpages. They are still distributed with the
-	shadow tarballs.
+	man/it/groupadd.8, man/it/vigr.8, man/it/groups.1,
+	man/pl/shadow.3, man/pl/sulogin.8, man/pl/id.1, man/ru/sulogin.8,
+	man/ru/id.1, man/it/id.1: Remove generated translated manpages.
+	They are still distributed with the shadow tarballs.
 
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
