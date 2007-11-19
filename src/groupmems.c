@@ -126,7 +126,8 @@ static void rmfromgroup (char *user, char **members)
 	}
 
 	while (found && NULL != members[i]) {
-		members[i] = members[++i];
+		members[i] = members[i+1];
+		i++;
 	}
 
 	if (!found) {

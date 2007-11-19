@@ -64,6 +64,9 @@ static struct commonio_db passwd_db = {
 	PASSWD_FILE,		/* filename */
 	&passwd_ops,		/* ops */
 	NULL,			/* fp */
+#ifdef WITH_SELINUX
+	NULL,			/* scontext */
+#endif
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */

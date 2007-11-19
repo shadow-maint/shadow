@@ -107,6 +107,9 @@ static struct commonio_db gshadow_db = {
 	SGROUP_FILE,		/* filename */
 	&gshadow_ops,		/* ops */
 	NULL,			/* fp */
+#ifdef WITH_SELINUX
+	NULL,			/* scontext */
+#endif
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */

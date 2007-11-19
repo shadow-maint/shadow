@@ -45,7 +45,7 @@ char *tz (const char *fname)
 {
 	FILE *fp = 0;
 	static char tzbuf[BUFSIZ];
-	const char *def_tz;
+	const char *def_tz = "TZ=CST6CDT";
 
 	if ((fp = fopen (fname, "r")) == NULL ||
 	    fgets (tzbuf, sizeof (tzbuf), fp) == NULL) {

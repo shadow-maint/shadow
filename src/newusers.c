@@ -116,11 +116,11 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	if (gid[0] == '\0') {
 		i = 100;
 		for (pw_rewind (); (pwd = pw_next ());) {
-			if (pwd->pw_uid >= i)
+			if (pwd->pw_uid >= (unsigned int)i)
 				i = pwd->pw_uid + 1;
 		}
 		for (gr_rewind (); (grp = gr_next ());) {
-			if (grp->gr_gid == i) {
+			if (grp->gr_gid == (unsigned int)i) {
 				i = -1;
 				break;
 			}
@@ -133,7 +133,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 		 */
 		i = atoi (gid);
 		for (gr_rewind (); (grp = gr_next ());)
-			if (grp->gr_gid == i)
+			if (grp->gr_gid == (unsigned int)i)
 				goto add_member;
 	} else
 		/*
@@ -149,7 +149,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 */
 	if (i == -1) {
 		for (i = 100, gr_rewind (); (grp = gr_next ());)
-			if (grp->gr_gid >= i)
+			if (grp->gr_gid >= (unsigned int)i)
 				i = grp->gr_gid + 1;
 	}
 

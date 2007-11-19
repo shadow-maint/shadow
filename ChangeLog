@@ -1,5 +1,23 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Fix some compilation warnings:
+	* src/login.c: "dereferencing type-punned pointer will break
+	strict-aliasing rules", add a variable indirection: ptr_pam_user.
+	* lib/commonio.c: do not initialize the sb stat structure.
+	* lib/pwio.c, lib/shadowio.c, lib/sgroupio.c, lib/groupio.c:
+	initialize the security context if WITH_SELINUX.
+	* lib/nscd.c: The service argument is not const (used in the exec*
+	parameters). This matches with the prototype definition.
+	* src/groupmems.c: Avoid ++i when i is also used in the same line.
+	* src/newusers.c: i is positive every time it is compared. Add
+	cast to unsigned int.
+	* src/nologin.c: Use a main() prototype with no arguments.
+	* libmisc/getdate.y: Initialize the type and value fields of the
+	terminating entry for each TABLE.
+	* libmisc/tz.c: Use "TZ=CST6CDT" as the default timezone.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/pl/Makefile.am: Add getspnam.3 to EXTRA_DIST since it is
 	generated with shadow.3.
 	* man/generate_translations.mak: Clean all the manpages, based on

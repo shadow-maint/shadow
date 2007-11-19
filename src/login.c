@@ -348,6 +348,7 @@ int main (int argc, char **argv)
 	int retcode;
 	pid_t child;
 	char *pam_user;
+	char **ptr_pam_user = &pam_user;
 #else
 	struct spwd *spwd = NULL;
 #endif
@@ -620,7 +621,7 @@ int main (int argc, char **argv)
 			/* if we didn't get a user on the command line,
 			   set it to NULL */
 			pam_get_item (pamh, PAM_USER,
-				      (const void **) &pam_user);
+				      (const void **)ptr_pam_user);
 			if (pam_user[0] == '\0')
 				pam_set_item (pamh, PAM_USER, NULL);
 
@@ -644,7 +645,7 @@ int main (int argc, char **argv)
 			  retcode = pam_authenticate (pamh, 0);
 
 			  pam_get_item (pamh, PAM_USER,
-					(const void **) &pam_user);
+					(const void **) ptr_pam_user);
 
 			  if (pam_user && pam_user[0]) {
 			    pwd = xgetpwnam(pam_user);
@@ -737,7 +738,7 @@ int main (int argc, char **argv)
 		   First get the username that we are actually using, though.
 		 */
 		retcode =
-		    pam_get_item (pamh, PAM_USER, (const void **) &pam_user);
+		    pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
 		setpwent ();
 		pwd = xgetpwnam (pam_user);
 		if (!pwd) {

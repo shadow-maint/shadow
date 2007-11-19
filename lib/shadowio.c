@@ -61,6 +61,9 @@ static struct commonio_db shadow_db = {
 	SHADOW_FILE,		/* filename */
 	&shadow_ops,		/* ops */
 	NULL,			/* fp */
+#ifdef WITH_SELINUX
+	NULL,			/* scontext */
+#endif
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */

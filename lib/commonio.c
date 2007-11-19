@@ -53,7 +53,7 @@ int lrename (const char *old, const char *new)
 	int res;
 
 #if defined(S_ISLNK)
-	struct stat sb = { 0 };
+	struct stat sb;
 	if (lstat (new, &sb) == 0 && S_ISLNK (sb.st_mode)) {
 		if (realpath (new, resolved_path) == NULL) {
 			perror ("realpath in lrename()");

@@ -63,6 +63,9 @@ static struct commonio_db group_db = {
 	GROUP_FILE,		/* filename */
 	&group_ops,		/* ops */
 	NULL,			/* fp */
+#ifdef WITH_SELINUX
+	NULL,			/* scontext */
+#endif
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
