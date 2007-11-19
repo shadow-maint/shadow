@@ -59,7 +59,9 @@ char *l64a(long value)
  * version of crypt() instead of the standard one.
  */
 
-#define MAGNUM(array,ch) (array)[0]= (array)[2] = '$',(array)[1]=(ch)
+#define MAGNUM(array,ch)	(array)[0]= (array)[2] = '$',\
+				(array)[1]=(ch),\
+				(array)[2]='\0'
 
 char *crypt_make_salt (void)
 {
@@ -68,6 +70,8 @@ char *crypt_make_salt (void)
 	int max_salt_len = 8;
 	char *method;
 
+	result[0] = '\0';
+
 #ifndef USE_PAM
 #ifdef ENCRYPTMETHOD_SELECT
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
@@ -75,8 +79,7 @@ char *crypt_make_salt (void)
 		if (getdef_bool ("MD5_CRYPT_ENAB")) {
 			MAGNUM(result,'1');
 			max_salt_len = 11;
-		} else
-			result[0] = '\0';
+		}
 #ifdef ENCRYPTMETHOD_SELECT
 	} else {
 		if (!strncmp (method, "MD5", 3)) {
@@ -88,10 +91,13 @@ char *crypt_make_salt (void)
 		} else if (!strncmp (method, "SHA512", 6)) {
 			MAGNUM(result, '6');
 			max_salt_len = 11; /* XXX: should not be fixed */
-		} else if (!strncmp (method, "DES", 3))
+		} else if (0 != strncmp (method, "DES", 3)) {
+			fprintf (stderr,
+				 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
+				   "Defaulting to DES.\n"),
+				 method);
 			result[0] = '\0';
-		else
-			result[0] = '\0';
+		}
 	}
 #endif				/* ENCRYPTMETHOD_SELECT */
 #endif				/* USE_PAM */

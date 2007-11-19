@@ -1,5 +1,14 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c (MAGNUM): Terminate the array with nul (the array
+	is then used with strcat).
+	* libmisc/salt.c (crypt_make_salt): Initialize result[0] to nul at
+	the beginning (was not initialized when USE_PAM).
+	* libmisc/salt.c (crypt_make_salt): Check that ENCRYPT_METHOD is a
+	valid crypt method.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, libmisc/obscure.c, libmisc/salt.c, src/passwd.c,
 	lib/getdef.c, etc/login.defs: Add support for SHA256 and SHA512
 	encrypt methods. Apply RedHat's patch shadow-4.0.18.1-sha256.patch.
