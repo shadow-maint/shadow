@@ -607,7 +607,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	cp = pw_encrypt (pass, crypt_make_salt ());
+	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
 	if (is_shadowgrp)

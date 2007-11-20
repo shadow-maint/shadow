@@ -1,3 +1,17 @@
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h, libmisc/salt.c: Add parameters to
+	crypt_make_salt to force the crypt method and number of rounds.
+	* libmisc/salt.c: Add parameter to SHA_salt_rounds to force the
+	number of rounds.
+	* libmisc/salt.c, lib/getdef.c: ENCRYPT_METHOD and MD5_CRYPT_ENAB
+	are needed also when USE_PAM (e.g. for chpasswd).
+	* src/newusers.c, src/gpasswd.c: Use the new crypt_make_salt prototype
+	* src/chpasswd.c, src/chgpasswd.c: Add option -c, --crypt-method
+	and -s, --sha-rounds to specify the crypt method and number of
+	rounds in case of one of the SHA methods. The new prototype of
+	crypt_make_salt simplifies the handling of -m, --md5.
+
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/salt.c: The salt has a random size (between 8 and 16

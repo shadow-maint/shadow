@@ -49,8 +49,13 @@
  * Global variables
  */
 static char *Prog;
+static int cflg = 0;
 static int eflg = 0;
 static int md5flg = 0;
+static int sflg = 0;
+
+static char *crypt_method = NULL;
+static int sha_rounds = 5000;
 
 static int is_shadow_pwd;
 
@@ -65,12 +70,34 @@ static void usage (void)
 	fprintf (stderr, _("Usage: chpasswd [options]\n"
 			   "\n"
 			   "Options:\n"
+			   "  -c, --crypt-method	the crypt method (one of %s)\n"
 			   "  -e, --encrypted	supplied passwords are encrypted\n"
 			   "  -h, --help		display this help message and exit\n"
 			   "  -m, --md5		use MD5 encryption instead DES when the supplied\n"
 			   "			passwords are not encrypted\n"
-			   "\n"));
+			   "\n"),
+#ifndef ENCRYPTMETHOD_SELECT
+			 "DES MD5"
+#else
+			 "DES MD5 SHA256 SHA512"
+#endif
+			 );
 	exit (E_USAGE);
+}
+
+static long getnumber (const char *numstr)
+{
+	long val;
+	char *errptr;
+
+	val = strtol (numstr, &errptr, 10);
+	if (*errptr || errno == ERANGE) {
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
+		         numstr);
+		exit (1);
+	}
+
+	return val;
 }
 
 int main (int argc, char **argv)
@@ -105,16 +132,22 @@ int main (int argc, char **argv)
 		int option_index = 0;
 		int c;
 		static struct option long_options[] = {
+			{"crypt-method", required_argument, NULL, 'c'},
 			{"encrypted", no_argument, NULL, 'e'},
 			{"help", no_argument, NULL, 'h'},
 			{"md5", no_argument, NULL, 'm'},
+			{"sha-rounds", required_argument, NULL, 's'},
 			{NULL, 0, NULL, '\0'}
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "ehm", long_options,
+			getopt_long (argc, argv, "c:ehms:", long_options,
 				     &option_index)) != -1) {
 			switch (c) {
+			case 'c':
+				cflg = 1;
+				crypt_method = optarg;
+				break;
 			case 'e':
 				eflg = 1;
 				break;
@@ -124,6 +157,10 @@ int main (int argc, char **argv)
 			case 'm':
 				md5flg = 1;
 				break;
+			case 's':
+				sflg = 1;
+				sha_rounds = getnumber(optarg);
+				break;
 			case 0:
 				/* long option */
 				break;
@@ -131,6 +168,34 @@ int main (int argc, char **argv)
 				usage ();
 				break;
 			}
+		}
+	}
+
+	/* validate options */
+	if (sflg && !cflg) {
+		fprintf (stderr,
+			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 Prog, "-s", "-c");
+		usage ();
+	}
+	if (md5flg && cflg) {
+		fprintf (stderr,
+			 _("%s: the -m and -c flags are exclusive\n"),
+			 Prog);
+		usage ();
+	}
+	if (cflg) {
+		if (0 != strcmp (method, "DES") &&
+		    0 != strcmp (method, "MD5") &&
+#ifdef ENCRYPTMETHOD_SELECT
+		    0 != strcmp (method, "SHA256") &&
+		    0 != strcmp (method, "SHA512")
+#endif
+		    ) {
+			fprintf (stderr,
+			 _("%s: unsupported crypt method: %s\n"),
+			 Prog, method);
+			usage ();
 		}
 	}
 
@@ -241,18 +306,16 @@ int main (int argc, char **argv)
 		}
 		newpwd = cp;
 		if (!eflg) {
-			if (md5flg) {
-				char md5salt[12] = "$1$";
-				char *salt = crypt_make_salt ();
-
-				if (strncmp (salt, "$1$", 3) == 0) {
-					strncpy (md5salt, salt, 11);
-				} else {
-					strncat (md5salt, salt, 8);
-				}
-				cp = pw_encrypt (newpwd, salt);
+			void *arg = NULL;
+			if (md5flg)
+				crypt_method = "MD5";
+			else if (crypt_method != NULL) {
+				if (sflg)
+					arg = &sha_rounds;
 			} else
-				cp = pw_encrypt (newpwd, crypt_make_salt ());
+				crypt_method = "DES";
+			cp = pw_encrypt (newpwd,
+			                 crypt_make_salt(crypt_method, arg));
 		}
 
 		/*

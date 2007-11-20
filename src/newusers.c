@@ -214,7 +214,7 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 
 static void update_passwd (struct passwd *pwd, const char *passwd)
 {
-	pwd->pw_passwd = pw_encrypt (passwd, crypt_make_salt ());
+	pwd->pw_passwd = pw_encrypt (passwd, crypt_make_salt (NULL, NULL));
 }
 
 /*
@@ -241,7 +241,8 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 */
 	if ((sp = spw_locate (pwd->pw_name))) {
 		spent = *sp;
-		spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt ());
+		spent.sp_pwdp = pw_encrypt (passwd,
+		                            crypt_make_salt (NULL, NULL));
 		return !spw_update (&spent);
 	}
 
@@ -261,7 +262,7 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * shadow password file entry.
 	 */
 	spent.sp_namp = pwd->pw_name;
-	spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt ());
+	spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt (NULL, NULL));
 	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
 	spent.sp_min = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */

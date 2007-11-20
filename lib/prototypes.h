@@ -132,7 +132,7 @@ extern void pwd_init (void);
 extern int do_rlogin (const char *, char *, int, char *, int);
 
 /* salt.c */
-extern char *crypt_make_salt (void);
+extern char *crypt_make_salt (char *meth, void *arg);
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *);

@@ -85,28 +85,32 @@ static unsigned int SHA_salt_size (void)
 /*
  * Return a salt prefix specifying the rounds number for the SHA crypt methods.
  */
-static char *SHA_salt_rounds (void)
+static char *SHA_salt_rounds (int *prefered_rounds)
 {
-	static char *rounds_prefix[18];
-	long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
-	long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+	static char rounds_prefix[18];
 	long rounds;
 
-	if (-1 == min_rounds && -1 == max_rounds)
+	if (NULL == prefered_rounds) {
+		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
+		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+
+		if (-1 == min_rounds && -1 == max_rounds)
+			return "";
+
+		if (-1 == min_rounds)
+			min_rounds = max_rounds;
+
+		if (-1 == max_rounds)
+			max_rounds = min_rounds;
+
+		if (min_rounds > max_rounds)
+			max_rounds = min_rounds;
+
+		srand (time (NULL));
+		rounds = min_rounds +
+		         (double)rand () * (max_rounds-min_rounds+1)/RAND_MAX;
+	} else if (0 == *prefered_rounds)
 		return "";
-
-	if (-1 == min_rounds)
-		min_rounds = max_rounds;
-
-	if (-1 == max_rounds)
-		max_rounds = min_rounds;
-
-	if (min_rounds > max_rounds)
-		max_rounds = min_rounds;
-
-	srand (time (NULL));
-	rounds = min_rounds +
-	         (double)rand () * (max_rounds-min_rounds+1)/RAND_MAX;
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
@@ -133,8 +137,16 @@ static char *SHA_salt_rounds (void)
  * (magic) and pw_encrypt() will execute the MD5-based FreeBSD-compatible
  * version of crypt() instead of the standard one.
  * Other methods can be set with ENCRYPT_METHOD
+ *
+ * The method can be forced with the meth parameter.
+ * If NULL, the method will be defined according to the MD5_CRYPT_ENAB and
+ * ENCRYPT_METHOD login.defs variables.
+ *
+ * If meth is specified, an additional parameter can be provided.
+ *  * For the SHA256 and SHA512 method, this specifies the number of rounds
+ *    (if not NULL).
  */
-char *crypt_make_salt (void)
+char *crypt_make_salt (char *meth, void *arg)
 {
 	struct timeval tv;
 	/* Max result size for the SHA methods:
@@ -145,41 +157,39 @@ char *crypt_make_salt (void)
 	 */
 	static char result[40];
 	int max_salt_len = 8;
-	char *method;
+	char *method = "DES";
 
 	result[0] = '\0';
 
-#ifndef USE_PAM
+	if (NULL != meth)
+		method = meth;
+	else
 #ifdef ENCRYPTMETHOD_SELECT
-	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
+	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL)
 #endif
-		if (getdef_bool ("MD5_CRYPT_ENAB")) {
-			MAGNUM(result,'1');
-			max_salt_len = 11;
-		}
+		if (getdef_bool ("MD5_CRYPT_ENAB"))
+			method = "MD5";
+
+	if (!strncmp (method, "MD5", 3)) {
+		MAGNUM(result, '1');
+		max_salt_len = 11;
 #ifdef ENCRYPTMETHOD_SELECT
-	} else {
-		if (!strncmp (method, "MD5", 3)) {
-			MAGNUM(result, '1');
-			max_salt_len = 11;
-		} else if (!strncmp (method, "SHA256", 6)) {
-			MAGNUM(result, '5');
-			strcat(result, SHA_salt_rounds());
-			max_salt_len = strlen(result) + SHA_salt_size();
-		} else if (!strncmp (method, "SHA512", 6)) {
-			MAGNUM(result, '6');
-			strcat(result, SHA_salt_rounds());
-			max_salt_len = strlen(result) + SHA_salt_size();
-		} else if (0 != strncmp (method, "DES", 3)) {
-			fprintf (stderr,
-				 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
-				   "Defaulting to DES.\n"),
-				 method);
-			result[0] = '\0';
-		}
+	} else if (!strncmp (method, "SHA256", 6)) {
+		MAGNUM(result, '5');
+		strcat(result, SHA_salt_rounds((int *)arg));
+		max_salt_len = strlen(result) + SHA_salt_size();
+	} else if (!strncmp (method, "SHA512", 6)) {
+		MAGNUM(result, '6');
+		strcat(result, SHA_salt_rounds((int *)arg));
+		max_salt_len = strlen(result) + SHA_salt_size();
+#endif
+	} else if (0 != strncmp (method, "DES", 3)) {
+		fprintf (stderr,
+			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
+			   "Defaulting to DES.\n"),
+			 method);
+		result[0] = '\0';
 	}
-#endif				/* ENCRYPTMETHOD_SELECT */
-#endif				/* USE_PAM */
 
 	/*
 	 * Concatenate a pseudo random salt.
