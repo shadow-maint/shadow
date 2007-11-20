@@ -116,6 +116,9 @@ int main (int argc, char **argv)
 #endif
 
 	const struct group *gr;
+#ifndef SHADOWGRP
+	struct group newgr;
+#endif
 	int errors = 0;
 	int line = 0;
 	int ok;
@@ -123,9 +126,6 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
-#endif
-#ifndef SHADOWGRP
-	struct group newgr;
 #endif
 
 	Prog = Basename (argv[0]);
@@ -336,7 +336,10 @@ int main (int argc, char **argv)
 			continue;
 		}
 #ifdef SHADOWGRP
-		sg = sgr_locate (name);
+		if (is_shadow_grp)
+			sg = sgr_locate (name);
+		else
+			sg = NULL;
 #endif
 
 		/*
@@ -345,12 +348,15 @@ int main (int argc, char **argv)
 		 * date is set to the current date.
 		 */
 #ifdef SHADOWGRP
-		newsg = *sg;
-		newsg.sg_passwd = cp;
-#else
-		newgr = *gr;
-		newgr.gr_passwd = cp;
+		if (sg) {
+			newsg = *sg;
+			newsg.sg_passwd = cp;
+		} else
 #endif
+		{
+			newgr = *gr;
+			newgr.gr_passwd = cp;
+		}
 
 		/* 
 		 * The updated password file entry is then put back and will
@@ -358,10 +364,11 @@ int main (int argc, char **argv)
 		 * other entries have been updated as well.
 		 */
 #ifdef SHADOWGRP
-		ok = sgr_update (&newsg);
-#else
-		ok = gr_update (&newgr);
+		if (sg)
+			ok = sgr_update (&newsg);
+		else
 #endif
+			ok = gr_update (&newgr);
 
 		if (!ok) {
 			fprintf (stderr,

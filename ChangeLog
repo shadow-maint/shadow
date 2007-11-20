@@ -1,5 +1,11 @@
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c: If the shadow group file is not present, do not
+	try to locate the group entry from /etc/gshadow, and set the
+	password in /etc/group.
+
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/obscure.c, libmisc/salt.c, src/passwd.c: Match DES, MD5,
 	SHA256, and SHA512 exactly (not only the first 3/6 chars).
 	* libmisc/salt.c (SHA_salt_rounds): Set rounds to the specified
