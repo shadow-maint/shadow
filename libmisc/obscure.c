@@ -245,9 +245,9 @@ static const char *password_check (const char *old, const char *new,
 #ifdef ENCRYPTMETHOD_SELECT
 	} else {
 
-		if (!strncmp (result, "MD5"   , 3) ||
-		    !strncmp (result, "SHA256", 6) ||
-		    !strncmp (result, "SHA512", 6))
+		if (!strcmp (result, "MD5") ||
+		    !strcmp (result, "SHA256") ||
+		    !strcmp (result, "SHA512"))
 			return NULL;
 
 	}

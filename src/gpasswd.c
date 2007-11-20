@@ -121,7 +121,7 @@ static int check_list (const char *users)
 	const char *start, *end;
 	char username[32];
 	int errors = 0;
-	int len;
+	size_t len;
 
 	for (start = users; start && *start; start = end) {
 		if ((end = strchr (start, ','))) {

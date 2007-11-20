@@ -111,6 +111,8 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 		         (double)rand () * (max_rounds-min_rounds+1)/RAND_MAX;
 	} else if (0 == *prefered_rounds)
 		return "";
+	else
+		rounds = *prefered_rounds;
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
@@ -156,7 +158,7 @@ char *crypt_make_salt (char *meth, void *arg)
 	 *  +1		\0
 	 */
 	static char result[40];
-	int max_salt_len = 8;
+	size_t max_salt_len = 8;
 	char *method = "DES";
 
 	result[0] = '\0';
@@ -170,20 +172,20 @@ char *crypt_make_salt (char *meth, void *arg)
 		if (getdef_bool ("MD5_CRYPT_ENAB"))
 			method = "MD5";
 
-	if (!strncmp (method, "MD5", 3)) {
+	if (!strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
 		max_salt_len = 11;
 #ifdef ENCRYPTMETHOD_SELECT
-	} else if (!strncmp (method, "SHA256", 6)) {
+	} else if (!strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		strcat(result, SHA_salt_rounds((int *)arg));
 		max_salt_len = strlen(result) + SHA_salt_size();
-	} else if (!strncmp (method, "SHA512", 6)) {
+	} else if (!strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		strcat(result, SHA_salt_rounds((int *)arg));
 		max_salt_len = strlen(result) + SHA_salt_size();
 #endif
-	} else if (0 != strncmp (method, "DES", 3)) {
+	} else if (0 != strcmp (method, "DES")) {
 		fprintf (stderr,
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"
 			   "Defaulting to DES.\n"),

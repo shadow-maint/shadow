@@ -185,7 +185,7 @@ int main (int argc, char **argv)
 		usage ();
 	}
 	if ((eflg && (md5flg || cflg)) ||
-	    md5flg && cflg) {
+	    (md5flg && cflg)) {
 		fprintf (stderr,
 			 _("%s: the -c, -e, and -m flags are exclusive\n"),
 			 Prog);

@@ -1,5 +1,15 @@
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/obscure.c, libmisc/salt.c, src/passwd.c: Match DES, MD5,
+	SHA256, and SHA512 exactly (not only the first 3/6 chars).
+	* libmisc/salt.c (SHA_salt_rounds): Set rounds to the specified
+	prefered_rounds value, if specified.
+	* src/gpasswd.c, libmisc/salt.c: Fix compilation warnings (use
+	size_t for lengths).
+	* src/chpasswd.c, src/chgpasswd.c: Add missing parenthesis.
+
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/sv, man/de, man/fr, man/pl, man/ru, man/it: Ignore the
 	generated manpages. Add *.[1358] to the svn:ignore property.
 

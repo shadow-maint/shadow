@@ -251,9 +251,9 @@ static int new_password (const struct passwd *pw)
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
 #ifdef ENCRYPTMETHOD_SELECT
 	} else {
-		if (!strncmp (method, "MD5"   , 3) ||
-		    !strncmp (method, "SHA256", 6) ||
-		    !strncmp (method, "SHA512", 6))
+		if (!strcmp (method, "MD5") ||
+		    !strcmp (method, "SHA256") ||
+		    !strcmp (method, "SHA512"))
 			pass_max_len = -1;
 		else
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
