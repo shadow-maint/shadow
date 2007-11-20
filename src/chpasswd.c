@@ -185,16 +185,16 @@ int main (int argc, char **argv)
 		usage ();
 	}
 	if (cflg) {
-		if (0 != strcmp (method, "DES") &&
-		    0 != strcmp (method, "MD5") &&
+		if (0 != strcmp (crypt_method, "DES") &&
+		    0 != strcmp (crypt_method, "MD5") &&
 #ifdef ENCRYPTMETHOD_SELECT
-		    0 != strcmp (method, "SHA256") &&
-		    0 != strcmp (method, "SHA512")
+		    0 != strcmp (crypt_method, "SHA256") &&
+		    0 != strcmp (crypt_method, "SHA512")
 #endif
 		    ) {
 			fprintf (stderr,
 			 _("%s: unsupported crypt method: %s\n"),
-			 Prog, method);
+			 Prog, crypt_method);
 			usage ();
 		}
 	}
