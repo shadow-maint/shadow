@@ -6,7 +6,8 @@
 	number of rounds.
 	* libmisc/salt.c, lib/getdef.c: ENCRYPT_METHOD and MD5_CRYPT_ENAB
 	are needed also when USE_PAM (e.g. for chpasswd).
-	* src/newusers.c, src/gpasswd.c: Use the new crypt_make_salt prototype
+	* src/passwd.c, src/newusers.c, src/gpasswd.c: Use the new
+	crypt_make_salt prototype
 	* src/chpasswd.c, src/chgpasswd.c: Add option -c, --crypt-method
 	and -s, --sha-rounds to specify the crypt method and number of
 	rounds in case of one of the SHA methods. The new prototype of
