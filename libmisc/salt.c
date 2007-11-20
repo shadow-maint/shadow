@@ -52,6 +52,7 @@ char *l64a(long value)
 }
 #endif /* !HAVE_L64A */
 
+#ifdef ENCRYPTMETHOD_SELECT
 /*
  * Add the salt prefix.
  */
@@ -66,7 +67,8 @@ char *l64a(long value)
  */
 static unsigned int SHA_salt_size (void)
 {
-	return 8 + 8*rand ()/(RAND_MAX+1);
+	srand (time (NULL));
+	return 8 + (double)rand () * 9 / RAND_MAX;
 }
 
 /* ! Arguments evaluated twice ! */
@@ -102,7 +104,9 @@ static char *SHA_salt_rounds (void)
 	if (min_rounds > max_rounds)
 		max_rounds = min_rounds;
 
-	rounds = min_rounds + (max_rounds - min_rounds)*rand ()/(RAND_MAX+1);
+	srand (time (NULL));
+	rounds = min_rounds +
+	         (double)rand () * (max_rounds-min_rounds+1)/RAND_MAX;
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
@@ -121,6 +125,7 @@ static char *SHA_salt_rounds (void)
 
 	return rounds_prefix;
 }
+#endif
 
 /*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
@@ -180,9 +185,9 @@ char *crypt_make_salt (void)
 	 * Concatenate a pseudo random salt.
 	 */
 	gettimeofday (&tv, (struct timezone *) 0);
-	strncat (result, sizeof(result), l64a (tv.tv_usec));
-	strncat (result, sizeof(result),
-		 l64a (tv.tv_sec + getpid () + clock ()));
+	strncat (result, l64a (tv.tv_usec), sizeof(result));
+	strncat (result, l64a (tv.tv_sec + getpid () + clock ()),
+	         sizeof(result));
 
 	if (strlen (result) > max_salt_len)	/* magic+salt */
 		result[max_salt_len] = '\0';
