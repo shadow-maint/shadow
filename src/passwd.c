@@ -96,7 +96,20 @@ static long inact = 0;		/* Days without change before locked */
 static int do_update_age = 0;
 
 #ifndef USE_PAM
-static char crypt_passwd[128];	/* The "old-style" password, if present */
+/*
+ * Size of the biggest passwd:
+ *   $6$	3
+ *   rounds=	7
+ *   999999999	9
+ *   $		1
+ *   salt	16
+ *   $		1
+ *   SHA512	123
+ *   nul	1
+ *
+ *   total	161
+ */
+static char crypt_passwd[256];
 static int do_update_pwd = 0;
 #endif
 

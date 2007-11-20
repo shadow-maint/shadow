@@ -1,5 +1,10 @@
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Increase the size of crypt_passwd from 128 to 256
+	to avoid overflow in case of SHA512 (161 should be sufficient).
+
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, libmisc/salt.c: Add parameters to
 	crypt_make_salt to force the crypt method and number of rounds.
 	* libmisc/salt.c: Add parameter to SHA_salt_rounds to force the
