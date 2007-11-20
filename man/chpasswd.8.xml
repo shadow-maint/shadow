@@ -37,6 +37,12 @@
       present.
     </para>
     <para>
+      The default encryption algorithm can be defined for the system with
+      the ENCRYPT_METHOD variable of <filename>/etc/login.defs</filename>,
+      and can be overwiten with the <option>-e</option>,
+      <option>-m</option>, or <option>-c</option> options.
+    </para>
+    <para>
       This command is intended to be used in a large system environment
       where many accounts are created at a single time.
     </para>
@@ -49,6 +55,16 @@
       are:
     </para>
     <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-c</option>, <option>--crypt-method</option></term>
+	<listitem>
+	  <para>Use the specified method to encrypt the passwords.</para>
+	  <para>
+	    The available methods are DES, MD5, and SHA256 or SHA512
+	    if compiled with the ENCRYPTMETHOD_SELECT flag.
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term><option>-e</option>, <option>--encrypted</option></term>
 	<listitem>
@@ -67,6 +83,31 @@
 	  <para>
 	    Use MD5 encryption instead of DES when the supplied passwords are
 	    not encrypted.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-s</option>, <option>--sha-rounds</option></term>
+	<listitem>
+	  <para>
+	    Use the specified number of rounds to encrypt the passwords.
+	  </para>
+	  <para>
+	    The value 0 means that the system will choose the default
+	    number of rounds for the crypt method (5000).
+	  </para>
+	  <para>
+	    A minimal value of 1000 and a maximal value of 999,999,999
+	    will be enforced.
+	  </para>
+	  <para>
+	    You can only use this option with the SHA256 or SHA512
+	    crypt method.
+	  </para>
+	  <para>
+	    By default, the number of rounds is defined by the
+	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
+	    <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -99,6 +140,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>useradd</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>login.defs</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>

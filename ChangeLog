@@ -1,5 +1,17 @@
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chpasswd.8.xml, man/chgpasswd.8.xml: Document how the
+	encryption algorithm is chosen for the passwords. Document the new
+	-c and -s options. Add a reference to login.defs(5).
+	* man/login.defs.5.xml: Document the ENCRYPT_METHOD,
+	MD5_CRYPT_ENAB, SHA_CRYPT_MIN_ROUNDS, and SHA_CRYPT_MAX_ROUNDS
+	variables.
+	* etc/login.defs: Indicate that MD5_CRYPT_ENAB is deprecated.
+	Document the relationship with PAM for MD5_CRYPT_ENAB and
+	ENCRYPT_METHOD.
+
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Increase the size of crypt_passwd from 128 to 256
 	to avoid overflow in case of SHA512 (161 should be sufficient).
 

@@ -276,6 +276,11 @@ CHFN_RESTRICT		rwh
 # Set to "no" if you need to copy encrypted passwords to other systems
 # which don't understand the new algorithm.  Default is "no".
 #
+# Note: If you use PAM, it is recommended to use a value consistent with
+# the PAM modules configuration.
+#
+# This variable is deprecated. You should use ENCRYPT_METHOD.
+#
 #MD5_CRYPT_ENAB	no
 
 #
@@ -285,6 +290,9 @@ CHFN_RESTRICT		rwh
 # If set to SHA512, SHA512-based algorithm will be used for encrypting password
 # If set to DES, DES-based algorithm will be used for encrypting password (default)
 # Overrides the MD5_CRYPT_ENAB option
+#
+# Note: If you use PAM, it is recommended to use a value consistent with
+# the PAM modules configuration.
 #
 #ENCRYPT_METHOD DES
 

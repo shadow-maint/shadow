@@ -73,6 +73,34 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term>ENCRYPT_METHOD (string)</term>
+	<listitem>
+	  <para>
+	    If set to MD5, the MD5-based algorithm will be used for
+	    encrypting passwords.
+	  </para>
+	  <para>
+	    If set to SHA256, the SHA256-based algorithm will be used for
+	    encrypting passwords.
+	  </para>
+	  <para>
+	    If set to SHA512, the SHA512-based algorithm will be used for
+	    encrypting passwords.
+	  </para>
+	  <para>
+	    If set to DES, the DES-based algorithm will be used for
+	    encrypting passwords. It is the default algorithm.
+	  </para>
+	  <para>
+	    Note: this parameter overrides the MD5_CRYPT_ENAB option.
+	  </para>
+	  <para>
+	    Note: if you use PAM, it is recommended to set this variable
+	    consistently with the PAM modules configuration.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>GID_MAX (number)</term>
 	<term>GID_MIN (number)</term>
 	<listitem>
@@ -90,6 +118,27 @@
 	    The mail spool directory. This is needed to manipulate the
 	    mailbox when its corresponding user account is modified or
 	    deleted. If not specified, a compile-time default is used.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>MD5_CRYPT_ENAB (boolean)</term>
+	<listitem>
+	  <para>
+	    Indicate if passwords must be encrypted using the MD5-based
+	    algorithm. If set to "yes", new passwords will be encrypted
+	    using the MD5-based algorithm compatible with the one used by
+	    recent releases of FreeBSD. It supports passwords of
+	    unlimited length and longer salt strings. Set to "no" if you
+	    need to copy encrypted passwords to other systems which don't
+	    understand the new algorithm. Default is "no".
+	  </para>
+	  <para>
+	    This variable is deprecated. You should use ENCRYPT_METHOD.
+	  </para>
+	  <para>
+	    Note: if you use PAM, it is recommended to set this variable
+	    consistently with the PAM modules configuration.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -134,6 +183,35 @@
       existing accounts.
     </para>
     <variablelist remap='IP'>
+      <varlistentry>
+	<term>SHA_CRYPT_MIN_ROUNDS (number)</term>
+	<term>SHA_CRYPT_MAX_ROUNDS (number)</term>
+	<listitem>
+	  <para>
+	    When ENCRYPT_METHOD is set to SHA256 or SHA512, this defines
+	    the number of SHA rounds used by the encryption algorithm.
+	  </para>
+	  <para>
+	    With a lot of rounds, it is more difficult to brute forcing
+	    the password. But note also that more CPU resources will be
+	    needed to authenticate users.
+	  </para>
+	  <para>
+	    If not specified, the libc will choose the default number of rounds
+	    (5000).
+	  </para>
+	  <para>
+	    The values must be inside the 1000-999999999 range.
+	  </para>
+	  <para>
+	    If only one of the MIN or MAX values is set, then this value will be
+	    used.
+	  </para>
+	  <para>
+	    If MIN &gt; MAX, the highest value will be used.
+	  </para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term>UID_MAX (number)</term>
 	<term>UID_MIN (number)</term>
