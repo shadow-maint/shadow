@@ -1,5 +1,10 @@
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c, src/chpasswd.c: The -c, -e, and -m options are
+	exclusives.
+
+2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chpasswd.8.xml, man/chgpasswd.8.xml: Document how the
 	encryption algorithm is chosen for the passwords. Document the new
 	-c and -s options. Add a reference to login.defs(5).
