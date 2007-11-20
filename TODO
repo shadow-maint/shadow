@@ -1,3 +1,7 @@
+check differences between chpasswd and chgpasswd
+
+check IS_ISLNK in lib/defines.h
+
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
   different backend modules for db, NIS, LDAP and others. Default backend it
@@ -7,6 +11,9 @@ ALL:
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
   user databases by well known tools.
+- Add/check support for split group
+  Maybe that feature can be supported in gr_open/gr_close, with a variable
+  in login.defs.
 
 - useradd:
   - add handle create user mail spool in maildir format.
@@ -22,6 +29,7 @@ ALL:
 - userdel:
   - add backup option for the removal of user resources,
   - add lookop and remove per user group.
+  - user_busy: check that the user is not running any processes.
 
 - passwd:
   - check combination of options (e.g. -u/-l)
@@ -31,6 +39,8 @@ ALL:
 - groupmems: check reason for isgroup
 
 - chgpasswd: uses chpasswd's pam
+
+- groupconv: i = 100; no a nice initial value, use login.defs
 
 Documentation:
 
