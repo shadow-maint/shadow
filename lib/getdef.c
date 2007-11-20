@@ -104,6 +104,8 @@ static struct itemdef def_table[] = {
 	{"PASS_MIN_LEN", NULL},
 	{"PORTTIME_CHECKS_ENAB", NULL},
 	{"QUOTAS_ENAB", NULL},
+	{"SHA_CRYPT_MAX_ROUNDS", NULL},
+	{"SHA_CRYPT_MIN_ROUNDS", NULL},
 	{"SU_WHEEL_ONLY", NULL},
 	{"ULIMIT", NULL},
 #endif

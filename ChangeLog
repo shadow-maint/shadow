@@ -1,5 +1,14 @@
 2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c: The salt has a random size (between 8 and 16
+	bytes).
+	* lib/getdef.c, etc/login.defs: Add definitions for
+	SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS.
+	* libmisc/salt.c: Use SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS
+	to add a random number of rounds if needed.
+
+2007-11-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c (MAGNUM): Terminate the array with nul (the array
 	is then used with strcat).
 	* libmisc/salt.c (crypt_make_salt): Initialize result[0] to nul at
