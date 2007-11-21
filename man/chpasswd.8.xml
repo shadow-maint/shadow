@@ -121,12 +121,35 @@
       unencrypted files by other users.
     </para>
     <para>
-      <command>chpasswd</command> does not use PAM to update the passwords.
-      Thus, It only updates the passwords from the
-      <filename>/etc/passwd</filename> and <filename>/etc/shadow</filename>
-      databases, and does not support the various checks provided by PAM
-      modules.
+      PAM is not used to update the passwords.
+      Thus, only <filename>/etc/passwd</filename> and
+      <filename>/etc/shadow</filename> are updated, and the various checks
+      or options provided by PAM modules are not used.
     </para>
+  </refsect1>
+
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/passwd</filename></term>
+	<listitem>
+	  <para>User account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/shadow</filename></term>
+	<listitem>
+	  <para>Secure user account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='see_also'>

@@ -121,6 +121,30 @@
     </para>
   </refsect1>
 
+  <refsect1 id='files'>
+    <title>FILES</title>
+    <variablelist>
+      <varlistentry>
+	<term><filename>/etc/group</filename></term>
+	<listitem>
+	  <para>Group account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>Secure group account information.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><filename>/etc/login.defs</filename></term>
+	<listitem>
+	  <para>Shadow password suite configuration.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para>

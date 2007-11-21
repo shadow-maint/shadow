@@ -1,5 +1,18 @@
 2007-11-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/newusers.8.xml: Added /etc/gshadow, /etc/group, /etc/shadow,
+	and /etc/passwd to section FILES.
+	* man/newusers.8.xml: Mentions that PAM is not used to set the
+	passwords.
+	* man/chpasswd.8.xml: Added section FILES (/etc/passwd,
+	/etc/shadow, /etc/login.defs).
+	* man/chpasswd.8.xml: Use the same paragraph as in newusers.8.xml
+	to indicate that PAM is not used.
+	* man/chgpasswd.8.xml: Added section FILES (/etc/group,
+	/etc/gshadow, /etc/login.defs).
+
+2007-11-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Try harder to get the GID equal to the UID.
 	This was not the case when the GID is not specified, and a GID
 	exist with an ID higher than the all the UIDs.
