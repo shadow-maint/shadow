@@ -1,3 +1,10 @@
+2007-11-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newusers.c: Try harder to get the GID equal to the UID.
+	This was not the case when the GID is not specified, and a GID
+	exist with an ID higher than the all the UIDs.
+	* src/newusers.c: Typo in comment: contrained -> constrained.
+
 2007-11-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chgpasswd.c: If the shadow group file is not present, do not

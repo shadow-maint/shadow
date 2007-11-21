@@ -189,7 +189,9 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	} else if (uid[0] && (pwd = pw_locate (uid))) {
 		i = pwd->pw_uid;
 	} else {
-		i = 100;
+		/* Start with gid, either the specified GID, or an ID
+		 * greater than all the group and user IDs */
+		i = gid;
 		for (pw_rewind (); (pwd = pw_next ());)
 			if (pwd->pw_uid >= i)
 				i = pwd->pw_uid + 1;
@@ -378,7 +380,7 @@ int main (int argc, char **argv)
 
 	/*
 	 * Read each line. The line has the same format as a password file
-	 * entry, except that certain fields are not contrained to be
+	 * entry, except that certain fields are not constrained to be
 	 * numerical values. If a group ID is entered which does not already
 	 * exist, an attempt is made to allocate the same group ID as the
 	 * numerical user ID. Should that fail, the next available group ID
