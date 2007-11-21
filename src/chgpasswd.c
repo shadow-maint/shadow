@@ -116,9 +116,7 @@ int main (int argc, char **argv)
 #endif
 
 	const struct group *gr;
-#ifndef SHADOWGRP
 	struct group newgr;
-#endif
 	int errors = 0;
 	int line = 0;
 	int ok;
