@@ -6,8 +6,20 @@ LANG=$(notdir $(CURDIR))
 	xml2po -l $(LANG) -p $(LANG).po -o $@ ../$@
 	sed -i 's:\(^<refentry .*\)>:\1 lang="$(LANG)">:' $@
 
+if USE_PAM
+PAM_COND=pam
+else
+PAM_COND=no_pam
+endif
+if SHADOWGRP
+SHADOWGRP_COND=gshadow
+else
+SHADOWGRP_COND=no_gshadow
+endif
+
 %: %.xml
-	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND)" \
+	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 
 grpconv.8 grpunconv.8 pwunconv.8: pwconv.8
 

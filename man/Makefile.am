@@ -119,10 +119,15 @@ PAM_COND=pam
 else
 PAM_COND=no_pam
 endif
-TUTU_COND=tutu
+
+if SHADOWGRP
+SHADOWGRP_COND=gshadow
+else
+SHADOWGRP_COND=no_gshadow
+endif
 
 %: %.xml
-	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(TUTU_COND)" \
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND)" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 
 grpconv.8 grpunconv.8 pwunconv.8: pwconv.8

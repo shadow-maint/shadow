@@ -240,6 +240,7 @@ AC_SEARCH_LIBS(gethostbyname, nsl)
 if test "$enable_shadowgrp" = "yes"; then
 	AC_DEFINE(SHADOWGRP, 1, [Define to support the shadow group file.])
 fi
+AM_CONDITIONAL(SHADOWGRP, test "x$enable_shadowgrp" = "xyes")
 
 if test "$enable_man" = "yes"; then
 	dnl

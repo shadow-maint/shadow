@@ -8,7 +8,12 @@
   </refmeta>
   <refnamediv id='name'>
     <refname>gpasswd</refname>
-    <refpurpose>administer the <filename>/etc/group</filename> file</refpurpose>
+    <refpurpose>
+      administer the <filename>/etc/group</filename>
+      <phrase condition="gshadow">and <filename>/etc/gshadow</filename>
+      files</phrase>
+      <phrase condition="no_gshadow">file</phrase>
+    </refpurpose>
   </refnamediv>
   <!-- body begins here -->
   <refsynopsisdiv id='synopsis'>
@@ -26,18 +31,27 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      The <command>gpasswd</command> command is used to administer the
-      <filename>/etc/group</filename> file (and
-      <filename>/etc/gshadow</filename> file if compiled with SHADOWGRP
-      defined). Every group can have administrators, members and a password. 
+      The <command>gpasswd</command> command is used to administer
+      <filename>/etc/group</filename><phrase condition="gshadow">,
+      and <filename>/etc/gshadow</filename></phrase>.
+      Every group can have
+      <phrase condition="gshadow">administrators,</phrase>
+      members and a password.
+    </para>
+    <para condition="gshadow">
       System administrator can use the <option>-A</option> option to define
       group administrator(s) and the <option>-M</option> option to define
       members and has all rights of group administrators and members.
     </para>
     <para>
-      <command>gpasswd</command> called by a group administrator with a group
-      name only prompts for the group password. If a password is set the
-      members can still <citerefentry>
+      <command>gpasswd</command> called by
+      <phrase condition="gshadow">a group administrator</phrase>
+      <phrase condition="no_gshadow">a system administrator</phrase>
+      with a group name only prompts for the new password of the
+      <replaceable>group</replaceable>.
+    </para>
+    <para>
+      If a password is set the members can still <citerefentry>
       <refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry> without a password, and non-members must supply the
       password.
@@ -56,9 +70,14 @@
 
   <refsect1 id='options'>
     <title>OPTIONS</title>
-    <para>
+    <para condition="gshadow">
       Except for the <option>-A</option> and <option>-M</option> options,
       the options cannot be combined.
+    </para>
+    <para condition="no_gshadow">
+      The options cannot be combined.
+    </para>
+    <para>
       The options which apply to the <command>gpasswd</command> command are:
     </para>
     <variablelist remap='IP'>
@@ -117,7 +136,7 @@
 	</listitem>
       </varlistentry>
     </variablelist>
-    <variablelist remap='IP'>
+    <variablelist remap='IP' condition="gshadow">
       <varlistentry>
 	<term>
 	  <option>-A</option> <replaceable>user</replaceable>,...
@@ -143,6 +162,18 @@
     </variablelist>
   </refsect1>
 
+  <refsect1 id='caveats'>
+    <title>CAVEATS</title>
+    <para>
+      This tool only operates on the <filename>/etc/group</filename>
+      <phrase condition="gshadow"> and <filename>/etc/gshadow</filename>
+      files.</phrase>
+      <phrase condition="no_gshadow">file.</phrase>
+      Thus you cannot change any NIS or LDAP group. This must be performed
+      on the corresponding server.
+    </para>
+  </refsect1>
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
@@ -152,7 +183,7 @@
 	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
 	  <para>Secure group account information.</para>
@@ -168,9 +199,6 @@
 	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>,
-      <citerefentry>
 	<refentrytitle>groupadd</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
@@ -184,7 +212,10 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
-      </citerefentry>.
+      </citerefentry><phrase condition="gshadow">,
+      <citerefentry>
+	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry></phrase>.
     </para>
   </refsect1>
 </refentry>

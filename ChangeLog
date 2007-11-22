@@ -1,5 +1,16 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: SHADOWGRP added to AM_CONDITIONAL for the
+	generation of manpages.
+	* man/generate_translations.mak: Added pam/no_pam condition (like
+	in man/Makefile.am).
+	* man/Makefile.am, man/generate_translations.mak: Added
+	gshadow/no_gshadow condition.
+	* man/gpasswd.1.xml: Use the gshadow/no_gshadow condition to
+	change the manpage depending on the shadow group support.
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/ru.po: Updated to 399t. Thanks to Yuri Kozlov <kozlov.y@gmail.com>.
 	* man/po/ru.po: Updated to 757t. Thanks also to Yuri Kozlov
 	<kozlov.y@gmail.com>.
