@@ -171,12 +171,12 @@ int main (int argc, char **argv)
 	char *cp;
 	int amroot;
 	int retries;
-	struct group *gr = NULL;
+	struct group const*gr = NULL;
 	struct group grent;
 	static char pass[BUFSIZ];
 
 #ifdef	SHADOWGRP
-	struct sgrp *sg = NULL;
+	struct sgrp const*sg = NULL;
 	struct sgrp sgent;
 	char *admins = NULL;
 #endif
@@ -314,14 +314,20 @@ int main (int argc, char **argv)
 	 * will be completely replicated so it may be modified later on.
 	 */
 
-	/*
-	 * XXX - should get the entry using gr_locate() and modify that,
-	 * getgrnam() could give us a NIS group.  --marekm
-	 */
 	if (!(group = argv[optind]))
 		usage ();
 
-	if (!(gr = getgrnam (group))) { /* dup, no need for xgetgrnam */
+	if (!gr_open (O_RDONLY)) {
+		fprintf (stderr, _("%s: can't open file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening /etc/group",
+			      group, -1, 0);
+#endif
+		exit (1);
+	}
+
+	if (!(gr = gr_locate (group))) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "group lookup", group,
@@ -334,8 +340,26 @@ int main (int argc, char **argv)
 	grent.gr_passwd = xstrdup (gr->gr_passwd);
 
 	grent.gr_mem = dup_list (gr->gr_mem);
+	if (!gr_close ()) {
+		fprintf (stderr, _("%s: can't close file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "closing /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
 #ifdef	SHADOWGRP
-	if ((sg = getsgnam (group))) {
+	if (!sgr_open (O_RDONLY)) {
+		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "opening /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+	if ((sg = sgr_locate (group))) {
 		sgent = *sg;
 		sgent.sg_name = xstrdup (sg->sg_name);
 		sgent.sg_passwd = xstrdup (sg->sg_passwd);
@@ -359,6 +383,15 @@ int main (int argc, char **argv)
 			sgent.sg_adm[0] = 0;
 
 		sg = &sgent;
+	}
+	if (!sgr_close ()) {
+		fprintf (stderr, _("%s: can't close shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			      "closing /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
 	}
 
 	/*

@@ -1,5 +1,14 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/gpasswd.c: Read the group and shadow groups using
+	gr_locate and sgr_locate. gpasswd write in the file database. Thus
+	it should read information from the file database, not using
+	getgrnam. The change to sgr_locate is just for consistency. This
+	requires opening the group databases (read only) using
+	gr_open/sgr_open.
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: SHADOWGRP added to AM_CONDITIONAL for the
 	generation of manpages.
 	* man/generate_translations.mak: Added pam/no_pam condition (like
@@ -8,6 +17,8 @@
 	gshadow/no_gshadow condition.
 	* man/gpasswd.1.xml: Use the gshadow/no_gshadow condition to
 	change the manpage depending on the shadow group support.
+	* NEWS: Indicate that manpages should be re-generated if configure
+	option are changed, due to conditions.
 
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 

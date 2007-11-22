@@ -43,9 +43,15 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   passwordless account.
 - Full review of the usage of getpwnam(), getpwuid(), getgrnam(),
   getgrgid(), and getspnam(). There should be no functional changes.
+- gpasswd: Only read information from the local file group database. It
+  writes the changes in /etc/group and/or /etc/gshadow, but used to read
+  information from getgrnam (hence possibly from another group database).
 
 *** documentation:
 - Generate the translated manpages from PO at build time.
+- The generated manpages will change depending on the configure options.
+  If you use different options than the one used for the distributed
+  archive, you should re-generate the manpages.
 
 shadow-4.0.18.1 -> shadow-4.0.18.2					28-10-2007
 
