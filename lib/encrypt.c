@@ -49,29 +49,6 @@ char *pw_encrypt (const char *clear, const char *salt)
 		perror ("crypt");
 		exit (1);
 	}
-	if (salt && salt[0] == '$' && strlen (cp) <= 13)
-	{
-		/* The crypt algorithm was not recognized by libcrypt */
-		char *method = "$1$";
-		switch (salt[1])
-		{
-			case '1':
-				method = "MD5";
-				break;
-			case '5':
-				method = "SHA256";
-				break;
-			case '6':
-				method = "SHA512";
-				break;
-			default:
-				method[1] = salt[1];
-		}
-		fprintf (stderr,
-			 _("Unknown crypt method (%s)\n"),
-			  method);
-		exit (1);
-	}
 	if (strlen (cp) != 13)
 		return cp;	/* nonstandard crypt() in libc, better bail out */
 	strcpy (cipher, cp);
