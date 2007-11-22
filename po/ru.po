@@ -1,25 +1,22 @@
-# translation of shadow_po_ru.po to Russian
-# translation of po_ru.po to Russian
-# translation of ru.po to Russian
-# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
+# translation of shadow_1:4.0.18.2-1_ru.po to Russian
+# Copyright (C) 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+#
 # Nikolai Prokoschenko <nikolai@prokoschenko.de>, 2004.
 # Eugene Konev <ejka@imfi.kspu.ru>, 2004.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006.
-#
+# Yuri Kozlov <kozlov.y@gmail.com>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.18\n"
+"Project-Id-Version: 1:4.0.18.2-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2007-10-28 19:15+0100\n"
-"PO-Revision-Date: 2006-07-19 21:01+0300\n"
+"PO-Revision-Date: 2007-11-21 21:02+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -27,8 +24,7 @@ msgstr "Не удалось выделить память для загрузк�
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-"Ошибка конфигурации: неизвестный элемент '%s' (сообщите администратору)\n"
+msgstr "Ошибка конфигурации: неизвестный элемент '%s' (сообщите администратору)\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -153,8 +149,7 @@ msgid "Unable to cd to '%s'\n"
 msgstr "Невозможно перейти в каталог '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
-msgstr ""
-"Каталог отсутствует или недоступен, вход в систему выполняется с HOME=/"
+msgstr "Каталог отсутствует или недоступен, вход в систему выполняется с HOME=/"
 
 #, c-format
 msgid "Cannot execute %s"
@@ -169,8 +164,7 @@ msgid "Can't change root directory to '%s'\n"
 msgstr "Не удалось изменить корневой каталог на '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Нет записи в utmp. Вы запускать \"login\" из самого первого уровня \"sh\""
+msgstr "Нет записи в utmp. Вы запускать \"login\" из самого первого уровня \"sh\""
 
 msgid "Unable to determine your tty name."
 msgstr "Не удалось определить название вашего tty."
@@ -224,8 +218,7 @@ msgstr ""
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr ""
-"Введите новое значение или нажмите ВВОД для выбора значения по умолчанию\n"
+msgstr "Введите новое значение или нажмите ВВОД для выбора значения по умолчанию\n"
 
 msgid "Minimum Password Age"
 msgstr "Минимальный срок действия пароля (дней)"
@@ -279,8 +272,7 @@ msgstr "Максимальное количество дней между сме
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr ""
-"Количество дней с предупреждением перед деактивированием пароля\t: %ld\n"
+msgstr "Количество дней с предупреждением перед деактивированием пароля\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -1214,9 +1206,8 @@ msgstr "неизвестный GID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "неизвестный GID: %lu\n"
 
-#, fuzzy
 msgid "No password.\n"
-msgstr "Отсутствует файл паролей\n"
+msgstr "Нет пароля.\n"
 
 #, c-format
 msgid "too many groups\n"
@@ -1356,9 +1347,9 @@ msgstr "Пароли не совпадают, попробуйте ещё раз
 msgid "The password for %s cannot be changed.\n"
 msgstr "Пароль пользователя %s не может быть изменён.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "The password for %s cannot be changed yet.\n"
-msgstr "Пароль пользователя %s не может быть изменён.\n"
+msgstr "Пароль для %s пока не может быть изменён.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
@@ -1390,8 +1381,7 @@ msgstr "Срок действия пароля истёк.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr ""
-"Использование: %s [-q] [-r] [-s] [файл паролей [теневой файл паролей]]\n"
+msgstr "Использование: %s [-q] [-r] [-s] [файл паролей [теневой файл паролей]]\n"
 
 #, c-format
 msgid "invalid password file entry\n"
@@ -1754,8 +1744,7 @@ msgid "Creating mailbox file"
 msgstr "Создание почтового ящика"
 
 #, c-format
-msgid ""
-"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Не найдена группа 'mail'. Создаётся пользовательский почтовый ящик с правами "
 "0600.\n"
@@ -1768,8 +1757,7 @@ msgid "%s: user %s exists\n"
 msgstr "%s: пользователь %s существует\n"
 
 #, c-format
-msgid ""
-"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: группа %s существует -- для добавления в неё этого пользователя, "
 "используйте -g.\n"
@@ -1852,14 +1840,13 @@ msgstr "%s: пользователь %s является пользовател�
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr ""
-"%s: каталог %s не удалён (является домашним каталогом пользователя %s)\n"
+msgstr "%s: каталог %s не удалён (является домашним каталогом пользователя %s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: не удалось удалить каталог %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1886,12 +1873,10 @@ msgid ""
 "  -U, --unlock\t\t\tunlock the user account\n"
 "\n"
 msgstr ""
-"Использование: usermod [параметры] пользователь\n"
+"Использование: usermod [параметры] ПОЛЬЗОВАТЕЛЬ\n"
 "\n"
 "Параметры:\n"
-"  -a, --append ГРУППА\t\tдобавить пользователя в дополнительную ГРУППУ\n"
-"\t\t\t\t(использовать только вместе с -G)\n"
-"  -c, --comment КОММЕНТАРИЙ\t\tзаполнить поле GECOS учётной записи\n"
+"  -c, --comment КОММЕНТАРИЙ\t\tновое значение поля GECOS\n"
 "  -d, --home ДОМ_КАТ\tновый домашний каталог учётной записи\n"
 "  -e, --expiredate EXPIRE_DATE\tустановить дату окончания действия\n"
 "\t\t\t\tучётной записи в EXPIRE_DATE\n"
@@ -1899,6 +1884,9 @@ msgstr ""
 "\t\t\t\tзаписи в INACTIVE\n"
 "  -g, --gid ГРУППА\t\tпринудительно назначить первичную ГРУППУ\n"
 "  -G, --groups ГРУППЫ\t\tсписок дополнительных ГРУПП\n"
+"  -a, --append\t\tдобавить пользователя в дополнительные ГРУППЫ,\n"
+"\t\t\t\tуказанные в параметре -G не удаляя пользователя\n"
+"\t\t\t\tиз других групп\n"
 "  -h, --help\t\t\tпоказать данное сообщение и закончить работу\n"
 "  -l, --login НОВОЕ_ИМЯ\t\tновое значение имени учётной записи\n"
 "  -L, --lock\t\t\tзаблокировать учётную запись\n"
@@ -2021,11 +2009,3 @@ msgstr "Не удалось создать резервную копию"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: не удалось восстановить %s: %s (ваши изменения в %s)\n"
 
-#~ msgid "Sorry.\n"
-#~ msgstr "Извините.\n"
-
-#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
-#~ msgstr "Извините, но пароль пользователя %s пока не может быть изменён.\n"
-
-#~ msgid "Sorry."
-#~ msgstr "Извините."
