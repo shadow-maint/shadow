@@ -114,8 +114,16 @@ EXTRA_DIST = \
 
 if ENABLE_REGENERATE_MAN
 
+if USE_PAM
+PAM_COND=pam
+else
+PAM_COND=no_pam
+endif
+TUTU_COND=tutu
+
 %: %.xml
-	$(XSLTPROC) -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(TUTU_COND)" \
+	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 
 grpconv.8 grpunconv.8 pwunconv.8: pwconv.8
 

@@ -1,3 +1,9 @@
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/Makefile.am: Add support for conditionally including
+	paragraphs. (e.g. to support the documentation of PAM and !PAM
+	features).
+
 2007-11-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/newusers.8.xml: Added /etc/gshadow, /etc/group, /etc/shadow,
