@@ -1,5 +1,11 @@
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c: Move the srandom call to gensalt.
+	* libmisc/salt.c (gensalt): Replace the test on salt_size by an
+	assert.
+
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Patch contributed by Dan Kopecek <dkopecek@redhat.com>
 	* src/chpasswd.c, src/chgpasswd.c, src/newusers.c: Fix compilation
 	when ENCRYPTMETHOD_SELECT is not defined.

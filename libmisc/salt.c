@@ -143,14 +143,14 @@ char *gensalt (unsigned int salt_size) {
  
   salt[0] = '\0';
   
-  if (salt_size >= MIN_SALT_SIZE &&
-      salt_size <= MAX_SALT_SIZE) {
+	assert (salt_size >= MIN_SALT_SIZE &&
+	        salt_size <= MAX_SALT_SIZE);
+	srandom ((unsigned int)time(NULL));
     strcat (salt, l64a (random()));
     do {
       strcat (salt, l64a (random()));
     } while (strlen (salt) < salt_size);
     salt[salt_size] = '\0';
-  }
   
   return salt;
 }
@@ -217,7 +217,6 @@ char *crypt_make_salt (char *meth, void *arg)
 	 * Concatenate a pseudo random salt.
 	 */
 	assert (sizeof (result) > strlen (result) + salt_len);
-	srandom ((unsigned int)time(NULL));
 	strncat (result, gensalt (salt_len),
 		 sizeof (result) - strlen (result) - 1);
 
