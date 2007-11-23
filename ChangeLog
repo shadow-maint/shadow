@@ -1,5 +1,18 @@
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Patch contributed by Dan Kopecek <dkopecek@redhat.com>
+	* src/chpasswd.c, src/chgpasswd.c, src/newusers.c: Fix compilation
+	when ENCRYPTMETHOD_SELECT is not defined.
+	* libmisc/salt.c (MAGNUM): The nul char was put on (array)[2]
+	instead of (array)[3].
+	* libmisc/salt.c: MAGNUM should be defined even if
+	ENCRYPTMETHOD_SELECT is not defined.
+	* libmisc/salt.c: Use random instead of rand.
+	* libmisc/salt.c (gensalt): New function to generate a salt
+	(instead of using gettimeofday).
+
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newusers.c: New options -c/--crypt-method
 	-s/--sha-rounds.
 

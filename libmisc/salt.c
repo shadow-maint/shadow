@@ -13,6 +13,7 @@
 
 #include <sys/time.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -52,14 +53,12 @@ char *l64a(long value)
 }
 #endif /* !HAVE_L64A */
 
-#ifdef ENCRYPTMETHOD_SELECT
 /*
  * Add the salt prefix.
  */
-#define MAGNUM(array,ch)	(array)[0]= (array)[2] = '$',\
-				(array)[1]=(ch),\
-				(array)[2]='\0'
+#define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
 
+#ifdef ENCRYPTMETHOD_SELECT
 /*
  * Return the salt size.
  * The size of the salt string is between 8 and 16 bytes for the SHA crypt
@@ -67,8 +66,8 @@ char *l64a(long value)
  */
 static unsigned int SHA_salt_size (void)
 {
-	srand (time (NULL));
-	return 8 + (double)rand () * 9 / RAND_MAX;
+	srandom ((unsigned int)time (NULL));
+	return 8 + (double)random () * 9 / RAND_MAX;
 }
 
 /* ! Arguments evaluated twice ! */
@@ -134,6 +133,29 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 #endif
 
 /*
+ *  Generate salt of size salt_size.
+ */
+#define MAX_SALT_SIZE 16
+#define MIN_SALT_SIZE 8
+
+char *gensalt (unsigned int salt_size) {
+  static char salt[32];
+ 
+  salt[0] = '\0';
+  
+  if (salt_size >= MIN_SALT_SIZE &&
+      salt_size <= MAX_SALT_SIZE) {
+    strcat (salt, l64a (random()));
+    do {
+      strcat (salt, l64a (random()));
+    } while (strlen (salt) < salt_size);
+    salt[salt_size] = '\0';
+  }
+  
+  return salt;
+}
+
+/*
  * Generate 8 base64 ASCII characters of random salt.  If MD5_CRYPT_ENAB
  * in /etc/login.defs is "yes", the salt string will be prefixed by "$1$"
  * (magic) and pw_encrypt() will execute the MD5-based FreeBSD-compatible
@@ -150,7 +172,6 @@ static char *SHA_salt_rounds (int *prefered_rounds)
  */
 char *crypt_make_salt (char *meth, void *arg)
 {
-	struct timeval tv;
 	/* Max result size for the SHA methods:
 	 *  +3		$5$
 	 *  +17		rounds=999999999$
@@ -158,7 +179,7 @@ char *crypt_make_salt (char *meth, void *arg)
 	 *  +1		\0
 	 */
 	static char result[40];
-	size_t max_salt_len = 8;
+	size_t salt_len = 8;
 	char *method = "DES";
 
 	result[0] = '\0';
@@ -174,16 +195,15 @@ char *crypt_make_salt (char *meth, void *arg)
 
 	if (!strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
-		max_salt_len = 11;
 #ifdef ENCRYPTMETHOD_SELECT
 	} else if (!strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		strcat(result, SHA_salt_rounds((int *)arg));
-		max_salt_len = strlen(result) + SHA_salt_size();
+		salt_len = SHA_salt_size();
 	} else if (!strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		strcat(result, SHA_salt_rounds((int *)arg));
-		max_salt_len = strlen(result) + SHA_salt_size();
+		salt_len = SHA_salt_size();
 #endif
 	} else if (0 != strcmp (method, "DES")) {
 		fprintf (stderr,
@@ -196,13 +216,10 @@ char *crypt_make_salt (char *meth, void *arg)
 	/*
 	 * Concatenate a pseudo random salt.
 	 */
-	gettimeofday (&tv, (struct timezone *) 0);
-	strncat (result, l64a (tv.tv_usec), sizeof(result));
-	strncat (result, l64a (tv.tv_sec + getpid () + clock ()),
-	         sizeof(result));
-
-	if (strlen (result) > max_salt_len)	/* magic+salt */
-		result[max_salt_len] = '\0';
+	assert (sizeof (result) > strlen (result) + salt_len);
+	srandom ((unsigned int)time(NULL));
+	strncat (result, gensalt (salt_len),
+		 sizeof (result) - strlen (result) - 1);
 
 	return result;
 }

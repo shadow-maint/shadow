@@ -379,12 +379,12 @@ int main (int argc, char **argv)
 		usage ();
 	}
 	if (cflg) {
-		if (0 != strcmp (crypt_method, "DES") &&
-		    0 != strcmp (crypt_method, "MD5") &&
-		    0 != strcmp (crypt_method, "NONE") &&
+		if (   0 != strcmp (crypt_method, "DES")
+		    && 0 != strcmp (crypt_method, "MD5")
+		    && 0 != strcmp (crypt_method, "NONE")
 #ifdef ENCRYPTMETHOD_SELECT
-		    0 != strcmp (crypt_method, "SHA256") &&
-		    0 != strcmp (crypt_method, "SHA512")
+		    && 0 != strcmp (crypt_method, "SHA256")
+		    && 0 != strcmp (crypt_method, "SHA512")
 #endif
 		    ) {
 			fprintf (stderr,
