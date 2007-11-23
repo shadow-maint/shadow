@@ -50,6 +50,11 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   better support for split groups. Be careful when using this variable:
   not all tools support well split groups (in or out of the shadow
   tool suite). It fixes gpasswd and chgpasswd when split groups are used.
+- Use MD5_CRYPT_ENAB, ENCRYPT_METHOD, SHA_CRYPT_MIN_ROUNDS, and
+  SHA_CRYPT_MAX_ROUNDS to define the default encryption algorithm for the
+  passwords.
+- chpaswd, chgpasswd, newusers: New options -c/--crypt-method and
+  -s/--sha-rounds to supersede the system default encryption algorithm.
 
 *** documentation:
 - Generate the translated manpages from PO at build time.

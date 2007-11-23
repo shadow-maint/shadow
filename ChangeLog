@@ -1,5 +1,10 @@
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c: New options -c/--crypt-method
+	-s/--sha-rounds.
+
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chpasswd.c: Added crypt method: NONE.
 	* src/chpasswd.c: Added --sha-rounds to the usage().
 	* libmisc/Makefile.am, libmisc/getlong.c, src/chgpasswd.c,

@@ -43,6 +43,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <fcntl.h>
+#include <getopt.h>
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
@@ -57,6 +58,11 @@
  * Global variables
  */
 static char *Prog;
+static int cflg = 0;
+static int sflg = 0;
+
+static char *crypt_method = NULL;
+static long sha_rounds = 5000;
 
 static int is_shadow;
 
@@ -72,7 +78,19 @@ static int add_passwd (struct passwd *, const char *);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [input]\n"), Prog);
+	fprintf (stderr, _("Usage: %s [options] [input]\n"
+	                   "\n"
+			   "  -c, --crypt-method	the crypt method (one of %s)\n"
+			   "%s"
+			   "\n"),
+			 Prog,
+#ifndef ENCRYPTMETHOD_SELECT
+			 "NONE DES MD5", ""
+#else
+			 "NONE DES MD5 SHA256 SHA512",
+			 _("  -s, --sha-rounds		number of SHA rounds for the SHA* crypt algorithms\n")
+#endif
+			 );
 	exit (1);
 }
 
@@ -216,7 +234,19 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 
 static void update_passwd (struct passwd *pwd, const char *passwd)
 {
-	pwd->pw_passwd = pw_encrypt (passwd, crypt_make_salt (NULL, NULL));
+	void *arg = NULL;
+	if (crypt_method != NULL) {
+		if (sflg)
+			arg = &sha_rounds;
+	}
+
+	if (crypt_method != NULL && 0 == strcmp(crypt_method, "NONE")) {
+		pwd->pw_passwd = (char *)passwd;
+	} else {
+		pwd->pw_passwd = pw_encrypt (passwd,
+		                             crypt_make_salt (crypt_method,
+		                                              arg));
+	}
 }
 
 /*
@@ -301,8 +331,77 @@ int main (int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
-	if (argc > 1 && argv[1][0] == '-')
+	{
+		int option_index = 0;
+		int c;
+		static struct option long_options[] = {
+			{"crypt-method", required_argument, NULL, 'c'},
+			{"help", no_argument, NULL, 'h'},
+			{"sha-rounds", required_argument, NULL, 's'},
+			{NULL, 0, NULL, '\0'}
+		};
+
+		while ((c =
+			getopt_long (argc, argv, "c:hs:", long_options,
+			             &option_index)) != -1) {
+			switch (c) {
+			case 'c':
+				cflg = 1;
+				crypt_method = optarg;
+				break;
+			case 'h':
+				usage ();
+				break;
+			case 's':
+				sflg = 1;
+				if (!getlong(optarg, &sha_rounds)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage ();
+				}
+				break;
+			case 0:
+				/* long option */
+				break;
+			default:
+				usage ();
+				break;
+			}
+		}
+	}
+
+	/* validate options */
+	if (sflg && !cflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         Prog, "-s", "-c");
 		usage ();
+	}
+	if (cflg) {
+		if (0 != strcmp (crypt_method, "DES") &&
+		    0 != strcmp (crypt_method, "MD5") &&
+		    0 != strcmp (crypt_method, "NONE") &&
+#ifdef ENCRYPTMETHOD_SELECT
+		    0 != strcmp (crypt_method, "SHA256") &&
+		    0 != strcmp (crypt_method, "SHA512")
+#endif
+		    ) {
+			fprintf (stderr,
+			         _("%s: unsupported crypt method: %s\n"),
+			         Prog, crypt_method);
+			usage ();
+		}
+	}
+
+	if (argv[optind] != NULL) {
+		if (!freopen (argv[optind], "r", stdin)) {
+			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
+			perror (buf);
+			exit (1);
+		}
+	}
+
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -339,14 +438,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
-
-	if (argc == 2) {
-		if (!freopen (argv[1], "r", stdin)) {
-			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
-			perror (buf);
-			exit (1);
-		}
-	}
 
 	/*
 	 * Lock the password files and open them for update. This will bring
