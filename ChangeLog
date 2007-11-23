@@ -1,5 +1,11 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chpasswd.8.xml: Document the variables used by chpasswd.
+	The definitions are copied from login.defs. I should try to use a
+	less error prone process for this.
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.5.xml: Use <replaceable> for the values set by
 	users. (was sometimes <emphasis remap='I'>)
 	* man/login.defs.5.xml: Use <option> vor the variable names. This
