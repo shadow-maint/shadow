@@ -180,18 +180,18 @@ char *crypt_make_salt (char *meth, void *arg)
 	 */
 	static char result[40];
 	size_t salt_len = 8;
-	char *method = "DES";
+	char *method;
 
 	result[0] = '\0';
 
 	if (NULL != meth)
 		method = meth;
-	else
+	else {
 #ifdef ENCRYPTMETHOD_SELECT
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL)
 #endif
-		if (getdef_bool ("MD5_CRYPT_ENAB"))
-			method = "MD5";
+		method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
+	}
 
 	if (!strcmp (method, "MD5")) {
 		MAGNUM(result, '1');

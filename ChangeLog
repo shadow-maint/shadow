@@ -1,3 +1,9 @@
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/salt.c: Make sure method is not NULL, defaulting to DES.
+	Thanks to Dan Kopecek <dkopecek@redhat.com>.
+
+
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/salt.c: Move the srandom call to gensalt.
