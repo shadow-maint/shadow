@@ -1,7 +1,7 @@
 
 #include <config.h>
 
-#ident "$Id: shadowio.c 1342 2007-11-10 23:46:11Z nekral-guest $"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"

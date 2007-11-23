@@ -1,5 +1,10 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadowmem.c, lib/groupmem.c, lib/pwmem.c:
+	svn propset svn:keywords Id
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, lib/getdef.c, man/login.defs.5.xml: New login.defs
 	variable: MAX_MEMBERS_PER_GROUP. Used for the split groups support.
 	* lib/commonio.c, lib/commonio.h: Add an open_hook and close_hook
