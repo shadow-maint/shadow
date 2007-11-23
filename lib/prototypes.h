@@ -70,6 +70,9 @@ extern void sanitize_env (void);
 extern void change_field (char *, size_t, const char *);
 extern int valid_field (const char *, const char *);
 
+/* getlong.c */
+extern int getlong(const char *numstr, long int *result);
+
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
