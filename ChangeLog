@@ -1,5 +1,13 @@
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chpasswd.c: Added crypt method: NONE.
+	* src/chpasswd.c: Added --sha-rounds to the usage().
+	* libmisc/Makefile.am, libmisc/getlong.c, src/chgpasswd.c,
+	src/chpasswd.c: New getlong function. Replace chpasswd's and
+	chgpasswd's getnumber.
+
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: Removed unused variable 'member'.
 
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>

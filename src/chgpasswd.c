@@ -56,7 +56,7 @@ static int md5flg = 0;
 static int sflg = 0;
 
 static char *crypt_method = NULL;
-static int sha_rounds = 5000;
+static long sha_rounds = 5000;
 
 #ifdef SHADOWGRP
 static int is_shadow_grp;
@@ -70,37 +70,25 @@ static void usage (void);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: chgpasswd [options]\n"
+	fprintf (stderr, _("Usage: %s [options]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -c, --crypt-method	the crypt method (one of %s)\n"
 			   "  -e, --encrypted	supplied passwords are encrypted\n"
 			   "  -h, --help		display this help message and exit\n"
-			   "  -m, --md5		use MD5 encryption instead DES when the supplied\n"
+			   "  -m, --md5		use MD5 encryption instead of DES when the supplied\n"
 			   "			passwords are not encrypted\n"
+			   "%s"
 			   "\n"),
+			 Prog,
 #ifndef ENCRYPTMETHOD_SELECT
-			 "DES MD5"
+			 "NONE DES MD5", ""
 #else
-			 "DES MD5 SHA256 SHA512"
+			 "NONE DES MD5 SHA256 SHA512",
+			 _("  -s, --sha-rounds	number of SHA rounds for the SHA* crypt algorithms\n")
 #endif
 			 );
 	exit (1);
-}
-
-static long getnumber (const char *numstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (numstr, &errptr, 10);
-	if (*errptr || errno == ERANGE) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-		         numstr);
-		exit (1);
-	}
-
-	return val;
 }
 
 int main (int argc, char **argv)
@@ -163,7 +151,12 @@ int main (int argc, char **argv)
 				break;
 			case 's':
 				sflg = 1;
-				sha_rounds = getnumber(optarg);
+				if (!getlong(optarg, &sha_rounds)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage ();
+				}
 				break;
 			case 0:
 				/* long option */
@@ -192,14 +185,15 @@ int main (int argc, char **argv)
 	if (cflg) {
 		if (0 != strcmp (crypt_method, "DES") &&
 		    0 != strcmp (crypt_method, "MD5") &&
+		    0 != strcmp (crypt_method, "NONE") &&
 #ifdef ENCRYPTMETHOD_SELECT
 		    0 != strcmp (crypt_method, "SHA256") &&
 		    0 != strcmp (crypt_method, "SHA512")
 #endif
 		    ) {
 			fprintf (stderr,
-			 _("%s: unsupported crypt method: %s\n"),
-			 Prog, crypt_method);
+			         _("%s: unsupported crypt method: %s\n"),
+			         Prog, crypt_method);
 			usage ();
 		}
 	}
@@ -308,7 +302,9 @@ int main (int argc, char **argv)
 			continue;
 		}
 		newpwd = cp;
-		if (!eflg) {
+		if (!eflg &&
+		    (NULL == crypt_method ||
+		     0 != strcmp(crypt_method, "NONE"))) {
 			void *arg = NULL;
 			if (md5flg)
 				crypt_method = "MD5";
