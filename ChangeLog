@@ -1,5 +1,17 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.5.xml: Use <replaceable> for the values set by
+	users. (was sometimes <emphasis remap='I'>)
+	* man/login.defs.5.xml: Use <option> vor the variable names. This
+	makes the manpage much more readable.
+	* man/login.defs.5.xml (ENCRYPT_METHOD, MD5_CRYPT_ENAB,
+	SHA_CRYPT_MIN_ROUNDS, SHA_CRYPT_MAX_ROUNDS): Mention that command
+	line option may supersede the system setting.
+	* man/login.defs.5.xml: Document the variables used by chpasswd
+	and chgpasswd.
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadowmem.c, lib/groupmem.c, lib/pwmem.c:
 	svn propset svn:keywords Id
 
