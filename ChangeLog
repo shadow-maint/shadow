@@ -1,5 +1,19 @@
 2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, lib/getdef.c, man/login.defs.5.xml: New login.defs
+	variable: MAX_MEMBERS_PER_GROUP. Used for the split groups support.
+	* lib/commonio.c, lib/commonio.h: Add an open_hook and close_hook
+	operation. They are called after the database is actually opened
+	and parse, or before it is closed.
+	* lib/groupio.c: Add an open_hook to merge split groups, and an
+	close group to split groups if MAX_MEMBERS_PER_GROUP is set.
+	This fixes gpasswd and chgpasswd when split groups are used.
+	* lib/sgroupio.c, lib/shadowio.c, lib/pwio.c: No open or close
+	hooks for these databases. (unsure about what should be the gshadow
+	behavior for split groups)
+
+2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/gpasswd.c: Read the group and shadow groups using
 	gr_locate and sgr_locate. gpasswd write in the file database. Thus
 	it should read information from the file database, not using

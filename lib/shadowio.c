@@ -54,7 +54,9 @@ static struct commonio_ops shadow_ops = {
 	shadow_parse,
 	shadow_put,
 	fgets,
-	fputs
+	fputs,
+	NULL,			/* open_hook */
+	NULL			/* close_hook */
 };
 
 static struct commonio_db shadow_db = {

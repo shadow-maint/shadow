@@ -100,7 +100,9 @@ static struct commonio_ops gshadow_ops = {
 	gshadow_parse,
 	gshadow_put,
 	fgetsx,
-	fputsx
+	fputsx,
+	NULL,			/* open_hook */
+	NULL			/* close_hook */
 };
 
 static struct commonio_db gshadow_db = {

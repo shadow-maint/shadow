@@ -520,6 +520,9 @@ int commonio_open (struct commonio_db *db, int mode)
 	if (ferror (db->fp))
 		goto cleanup_errno;
 
+	if (db->ops->open_hook && !db->ops->open_hook ())
+		goto cleanup_errno;
+
 	db->isopen = 1;
 	return 1;
 
@@ -668,6 +671,9 @@ int commonio_close (struct commonio_db *db)
 		db->fp = NULL;
 		goto success;
 	}
+
+	if (db->ops->close_hook && !db->ops->close_hook ())
+		goto fail;
 
 	memzero (&sb, sizeof sb);
 	if (db->fp) {

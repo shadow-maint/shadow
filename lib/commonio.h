@@ -52,6 +52,15 @@ struct commonio_ops {
 	 */
 	char *(*fgets) (char *, int, FILE *);
 	int (*fputs) (const char *, FILE *);
+
+	/*
+	 * open_hook and close_hook.
+	 * If non NULL, these functions will be called after the database
+	 * is open or before it is closed.
+	 * They return 0 on failure and 1 on success.
+	 */
+	int (*open_hook) (void);
+	int (*close_hook) (void);
 };
 
 /*

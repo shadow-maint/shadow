@@ -46,6 +46,10 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
 - gpasswd: Only read information from the local file group database. It
   writes the changes in /etc/group and/or /etc/gshadow, but used to read
   information from getgrnam (hence possibly from another group database).
+- New login.defs variable: MAX_MEMBERS_PER_GROUP. It should provide a
+  better support for split groups. Be careful when using this variable:
+  not all tools support well split groups (in or out of the shadow
+  tool suite). It fixes gpasswd and chgpasswd when split groups are used.
 
 *** documentation:
 - Generate the translated manpages from PO at build time.
