@@ -239,7 +239,6 @@ static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
 {
 	struct group *gptr1;
 	struct group *gptr2;
-	char *member;
 	char **new_members;
 	int members = 0;
 	char *new_line;

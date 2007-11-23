@@ -1,10 +1,14 @@
-2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/groupio.c: Removed unused variable 'member'.
+
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/chpasswd.8.xml: Document the variables used by chpasswd.
 	The definitions are copied from login.defs. I should try to use a
 	less error prone process for this.
 
-2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.5.xml: Use <replaceable> for the values set by
 	users. (was sometimes <emphasis remap='I'>)
@@ -16,7 +20,7 @@
 	* man/login.defs.5.xml: Document the variables used by chpasswd
 	and chgpasswd.
 
-2007-11-22  Nicolas François  <nicolas.francois@centraliens.net>
+2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/shadowmem.c, lib/groupmem.c, lib/pwmem.c:
 	svn propset svn:keywords Id
