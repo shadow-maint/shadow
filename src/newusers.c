@@ -80,7 +80,7 @@ static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [options] [input]\n"
 	                   "\n"
-			   "  -c, --crypt-method	the crypt method (one of %s)\n"
+			   "  -c, --crypt-method            the crypt method (one of %s)\n"
 			   "%s"
 			   "\n"),
 			 Prog,
@@ -88,7 +88,8 @@ static void usage (void)
 			 "NONE DES MD5", ""
 #else
 			 "NONE DES MD5 SHA256 SHA512",
-			 _("  -s, --sha-rounds		number of SHA rounds for the SHA* crypt algorithms\n")
+			 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+			   "                                crypt algorithms\n")
 #endif
 			 );
 	exit (1);

@@ -70,10 +70,11 @@ static void usage (void)
 	fprintf (stderr, _("Usage: %s [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -c, --crypt-method	the crypt method (one of %s)\n"
-			   "  -e, --encrypted	supplied passwords are encrypted\n"
-			   "  -h, --help		display this help message and exit\n"
-			   "  -m, --md5		encrypt the clear text password using the MD5 algorithm\n"
+			   "  -c, --crypt-method            the crypt method (one of %s)\n"
+			   "  -e, --encrypted               supplied passwords are encrypted\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -m, --md5                     encrypt the clear text password using\n"
+			   "                                the MD5 algorithm\n"
 			   "%s"
 			   "\n"),
 			 Prog,
@@ -81,7 +82,8 @@ static void usage (void)
 			 "NONE DES MD5", ""
 #else
 			 "NONE DES MD5 SHA256 SHA512",
-			 _("  -s, --sha-rounds	number of SHA rounds for the SHA* crypt algorithms\n")
+			 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+			   "                                crypt algorithms\n")
 #endif
 			 );
 	exit (E_USAGE);

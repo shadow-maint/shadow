@@ -71,10 +71,10 @@ static void usage (void)
 	fprintf (stdout, _("Usage: lastlog [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -b, --before DAYS	print only lastlog records older than DAYS\n"
-			   "  -h, --help		display this help message and exit\n"
-			   "  -t, --time DAYS	print only lastlog records more recent than DAYS\n"
-			   "  -u, --user LOGIN	print lastlog record for user with specified LOGIN\n"
+			   "  -b, --before DAYS             print only lastlog records older than DAYS\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
+			   "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 			   "\n"));
 	exit (1);
 }

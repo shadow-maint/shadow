@@ -1,5 +1,19 @@
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c, src/lastlog.c, src/newusers.c, src/chpasswd.c,
+	src/usermod.c, src/chgpasswd.c, src/vipw.c, src/useradd.c,
+	src/su.c, src/groupmod.c, src/passwd.c, src/groupadd.c,
+	src/chage.c, src/faillog.c, src/chsh.c: Do not use tabulations in
+	Usage strings.
+	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po,
+	po/eu.po, po/fi.po, po/fr.po:
+	Unfuzzy previous changes.
+	* po/bs.po: No Usage string translated. Just updated PO.
+	* po/dz.po: It would be too error prone for me to unfuzzy these
+	ones. Updated PO.
+
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/ne.po, po/bs.po, po/cs.po, po/pt_BR.po, po/km.po, po/es.po,
 	po/eu.po, po/ko.po, po/hu.po, po/sk.po, po/vi.po, po/uk.po,
 	po/ro.po, po/sq.po, po/ru.po, po/id.po, po/nb.po, po/el.po,

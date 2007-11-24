@@ -98,13 +98,13 @@ static void usage (void)
 	fprintf (stderr, _("Usage: groupadd [options] GROUP\n"
 			   "\n"
 			   "Options:\n"
-			   "  -f, --force			force exit with success status if the specified\n"
-			   "				group already exists\n"
-			   "  -g, --gid GID			use GID for the new group\n"
-			   "  -h, --help			display this help message and exit\n"
-			   "  -K, --key KEY=VALUE		overrides /etc/login.defs defaults\n"
-			   "  -o, --non-unique		allow create group with duplicate\n"
-			   "				(non-unique) GID\n"
+			   "  -f, --force                   force exit with success status if the\n"
+			   "                                specified group already exists\n"
+			   "  -g, --gid GID                 use GID for the new group\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+			   "  -o, --non-unique              allow create group with duplicate\n"
+			   "                                (non-unique) GID\n"
 			   "\n"));
 	exit (E_USAGE);
 }

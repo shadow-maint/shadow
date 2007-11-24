@@ -63,11 +63,11 @@ static void usage (void)
 	fprintf (stderr, _("Usage: vipw [options]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -g, --group			edit group database\n"
-			   "  -h, --help			display this help message and exit\n"
-			   "  -p, --passwd			edit passwd database\n"
-			   "  -q, --quiet			quiet mode\n"
-			   "  -s, --shadow			edit shadow or gshadow database\n"
+			   "  -g, --group                   edit group database\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -p, --passwd                  edit passwd database\n"
+			   "  -q, --quiet                   quiet mode\n"
+			   "  -s, --shadow                  edit shadow or gshadow database\n"
 			   "\n"));
 	exit (E_USAGE);
 }

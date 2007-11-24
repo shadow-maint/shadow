@@ -80,8 +80,8 @@ static void usage (void)
 	fprintf (stderr, _("Usage: chsh [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
-			   "  -h, --help				display this help message and exit\n"
-			   "  -s, --shell SHELL			new login shell for the user account\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -s, --shell SHELL             new login shell for the user account\n"
 			   "\n"));
 	exit (E_USAGE);
 }

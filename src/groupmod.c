@@ -101,10 +101,10 @@ static void usage (void)
 	fprintf (stderr, _("Usage: groupmod [options] GROUP\n"
 			   "\n"
 			   "Options:\n"
-			   "  -g, --gid GID			force use new GID by GROUP\n"
-			   "  -h, --help			display this help message and exit\n"
-			   "  -n, --new-name NEW_GROUP	force use NEW_GROUP name by GROUP\n"
-			   "  -o, --non-unique		allow using duplicate (non-unique) GID by GROUP\n"
+			   "  -g, --gid GID                 force use new GID by GROUP\n"
+			   "  -h, --help                    display this help message and exit\n"
+			   "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
+			   "  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
 			   "\n"));
 	exit (E_USAGE);
 }
