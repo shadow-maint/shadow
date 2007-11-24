@@ -34,7 +34,7 @@ char *l64a(long value)
 	for (i = 0; value != 0 && i < 6; i++) {
 		digit = value & 0x3f;
 
-		if (digit < 2) 
+		if (digit < 2)
 			*s = digit + '.';
 		else if (digit < 12)
 			*s = digit + '0' - 2;
@@ -139,20 +139,20 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 #define MIN_SALT_SIZE 8
 
 char *gensalt (unsigned int salt_size) {
-  static char salt[32];
- 
-  salt[0] = '\0';
-  
+	static char salt[32];
+
+	salt[0] = '\0';
+
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
 	srandom ((unsigned int)time(NULL));
-    strcat (salt, l64a (random()));
-    do {
-      strcat (salt, l64a (random()));
-    } while (strlen (salt) < salt_size);
-    salt[salt_size] = '\0';
-  
-  return salt;
+	strcat (salt, l64a (random()));
+	do {
+		strcat (salt, l64a (random()));
+	} while (strlen (salt) < salt_size);
+	salt[salt_size] = '\0';
+
+	return salt;
 }
 
 /*
