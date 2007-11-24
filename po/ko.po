@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-07-22 00:05+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -15,6 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -137,6 +146,12 @@ msgstr "passwd: 열쇠글을 성공적으로 업데이트했습니다\n"
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "'%s'의 열쇠글이 맞지 않습니다.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -440,25 +455,45 @@ msgstr "열쇠글 파일의 바뀐 점을 적용할 수 없습니다.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "열쇠글 파일의 잠금상태를 해제할 수 없습니다.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
 "사용법: chpasswd [옵션]\n"
 "\n"
 "옵션:\n"
 "  -e, --encrypted\t입력하는 열쇠글이 암호화되어 있습니다\n"
 "  -h, --help\t\t이 도움말 메세지를 표시하고 끝냅니다\n"
-"  -m, --md5\t\t입력하는 열쇠글이 암호화되어 있지 않으면 \n"
+"  -m, --md5\t\t입력하는 열쇠글이 암호화되어 있지 않으면\n"
 "\t\t\tDES 대신 MD5 암호화를 사용합니다\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: 잘못된 숫자 인자 '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -a 플래그는 -G 플래그와 함께 사용해야 합니다\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -503,26 +538,6 @@ msgstr "%s: 셰도우 파일을 업데이트하는 데 오류 발생\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: 열쇠글 파일을 업데이트하는 데 오류 발생\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"사용법: chpasswd [옵션]\n"
-"\n"
-"옵션:\n"
-"  -e, --encrypted\t입력하는 열쇠글이 암호화되어 있습니다\n"
-"  -h, --help\t\t이 도움말 메세지를 표시하고 끝냅니다\n"
-"  -m, --md5\t\t입력하는 열쇠글이 암호화되어 있지 않으면\n"
-"\t\t\tDES 대신 MD5 암호화를 사용합니다\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -654,8 +669,20 @@ msgid "Who are you?\n"
 msgstr "누구십니까?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: 파일을 열 수 없습니다\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "알 수 없는 그룹: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: 파일을 열 수 없습니다\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: 셰도우 파일을 열 수 없습니다\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -697,10 +724,6 @@ msgstr "%s: 잠금을 할 수 없습니다\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: 셰도우 잠금을 할 수 없습니다\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: 파일을 열 수 없습니다\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -791,10 +814,6 @@ msgstr "%s: 셰도우 그룹 파일 잠글 수 없습니다\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: 셰도우 그룹 파일을 열 수 없습니다\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: 잘못된 숫자 인자 '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1196,16 +1215,24 @@ msgid "unknown GID: %lu\n"
 msgstr "알 수 없는 GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "열쇠글 파일 없음\n"
+msgid "Invalid password."
+msgstr "예전 열쇠글: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "그룹이 너무 많습니다\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "사용법: %s [입력값]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1304,6 +1331,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "예전 열쇠글: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"새 열쇠글을 입력하십시오(최소 %d, 최대 %d 글자)\n"
+"영어 대소문자와 숫자를 조합하여 사용하십시오.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1342,6 +1377,12 @@ msgstr "%s의 열쇠글은 바꿀 수 없습니다.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: 메모리 부족\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1621,6 +1662,14 @@ msgstr ""
 "  -u, --uid <UID>\t\t\t지정된 사용자 계정의 새 <UID> 값을 지정합니다\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: 업데이트_그룹에서 메모리 부족\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: 업데이트_그룹셰도우에서 메모리 부족\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u번은 유일하지 않습니다\n"
@@ -1778,6 +1827,10 @@ msgstr "%s: 그룹 입력값을 업데이트하는 데 오류가 발생했습니
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr "%s: %s 그룹은 다른 사용자의 주요 그룹이므로 지울 수 없습니다.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: 그룹 입력값을 업데이트하는 데 오류가 발생했습니다\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: 그룹 파일을 열 수 없습니다\n"
@@ -1876,13 +1929,9 @@ msgstr ""
 "  -U, --unlock\t\t\t사용자 계정의 잠금을 해제합니다\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: 업데이트_그룹에서 메모리 부족\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: 업데이트_그룹셰도우에서 메모리 부족\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: 새 그룹을 더하는 데 오류가 발생했습니다\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1893,8 +1942,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s:  -e 옵션과 -f 옵션은 셰도우 열쇠글을 요구합니다\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a 플래그는 -G 플래그와 함께 사용해야 합니다\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1982,6 +2031,32 @@ msgstr "백업을 만들 수 없습니다"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s을(를) 복구시킬 수 없습니다: %s (바뀐 사항은 %s에 있습니다)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "사용법: chpasswd [옵션]\n"
+#~ "\n"
+#~ "옵션:\n"
+#~ "  -e, --encrypted\t입력하는 열쇠글이 암호화되어 있습니다\n"
+#~ "  -h, --help\t\t이 도움말 메세지를 표시하고 끝냅니다\n"
+#~ "  -m, --md5\t\t입력하는 열쇠글이 암호화되어 있지 않으면 \n"
+#~ "\t\t\tDES 대신 MD5 암호화를 사용합니다\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "열쇠글 파일 없음\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "사용법: %s [입력값]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "죄송합니다.\n"

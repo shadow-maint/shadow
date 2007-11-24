@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-07-18 21:31+0200\n"
 "Last-Translator: Claus Hindsgaul <claus.hindsgaul@gmail.com>\n"
 "Language-Team: Danish\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -142,6 +151,12 @@ msgstr "passwd: adgangskoden blev opdateret\n"
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Ugyldig adgangskode for %s.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -444,18 +459,18 @@ msgstr "Kan ikke skrive ændringerne til adgangskodefilen.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Kan ikke låse adgangskodefilen op.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
-"Brug: chgpasswd [tilvalg]\n"
+"Brug: chpasswd [tilvalg]\n"
 "\n"
 "Tilvalg:\n"
 "  -e, --encrypted\tde angivne adgangskoder er krypterede\n"
@@ -463,6 +478,26 @@ msgstr ""
 "  -m, --md5\t\tbrug MD5-kryptering i stedet for DES, når de angivne\n"
 "\t\t\tadgangskoder ikke er krypterede\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ugyldigt numerisk parameter '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: flaget -a er KUN tilladt sammen med -G\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -507,26 +542,6 @@ msgstr "%s: fejl under opdatering af skyggefil\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: fejl under opdatering af adgangskodefil\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Brug: chpasswd [tilvalg]\n"
-"\n"
-"Tilvalg:\n"
-"  -e, --encrypted\tde angivne adgangskoder er krypterede\n"
-"  -h, --help\t\tvis denne hjælpetekst og afslut\n"
-"  -m, --md5\t\tbrug MD5-kryptering i stedet for DES, når de angivne\n"
-"\t\t\tadgangskoder ikke er krypterede\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -661,8 +676,20 @@ msgid "Who are you?\n"
 msgstr "Hvem er du?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: kan ikke åbne fil\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "ukendt gruppe: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: kan ikke åbne fil\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: Kan ikke åbne skyggefilen\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -704,10 +731,6 @@ msgstr "%s: Kan ikke opnå lås\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: Kan ikke opnå skyggelås\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: kan ikke åbne fil\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -798,10 +821,6 @@ msgstr "%s: kan ikke låse skyggegruppefil\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: kan ikke åbne skyggegruppefil\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: ugyldigt numerisk parameter '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1203,16 +1222,24 @@ msgid "unknown GID: %lu\n"
 msgstr "ukendt GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Ingen adgangskodefil\n"
+msgid "Invalid password."
+msgstr "Gammel adgangskode: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Brug: %s [inddata]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1311,6 +1338,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "Gammel adgangskode: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Angiv ny adgangskode (mindst %d, højst %d tegn)\n"
+"Brug en kombination af små og store bogstaver samt tal.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1349,6 +1384,12 @@ msgstr "Adgangskoden for %s kan ikke ændres.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: hukommelse opbrugt\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1630,6 +1671,14 @@ msgstr ""
 "\t\t\t\tbrugerkonto\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: løbet tør for hukommelse i update_group\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: løbet tør for hukommelse i update_gshadow\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u er ikke unikt\n"
@@ -1790,6 +1839,10 @@ msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr ""
 "%s: Kan ikke fjerne gruppen %s, som er primærgruppe for en anden bruger.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: fejl under opdatering af gruppelinje\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: kan ikke åbne gruppefilen\n"
@@ -1886,13 +1939,9 @@ msgstr ""
 "  -U, --unlock\t\t\tfjern lås fra brugerkontoen\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: løbet tør for hukommelse i update_group\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: løbet tør for hukommelse i update_gshadow\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: fejl under tilføjelse af gruppelinje\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1903,8 +1952,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: skyggeadgangskoder kræves for e og -f\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: flaget -a er KUN tilladt sammen med -G\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1991,6 +2040,32 @@ msgstr "kunne ikke lave sikkerhedskopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kunne ikke genskabe %s: %s (dine ændringer er i %s)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Brug: chgpasswd [tilvalg]\n"
+#~ "\n"
+#~ "Tilvalg:\n"
+#~ "  -e, --encrypted\tde angivne adgangskoder er krypterede\n"
+#~ "  -h, --help\t\tvis denne hjælpetekst og afslut\n"
+#~ "  -m, --md5\t\tbrug MD5-kryptering i stedet for DES, når de angivne\n"
+#~ "\t\t\tadgangskoder ikke er krypterede\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Ingen adgangskodefil\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Brug: %s [inddata]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Beklager.\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -15,6 +15,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -137,6 +146,12 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Feil passord for «%s»\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "Unable to cd to '%s'\n"
@@ -425,14 +440,34 @@ msgstr "Klarer ikkje låsa opp passordfila.\n"
 
 #, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ugyldig nummerisk argument «%s»\n"
+
+#, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr ""
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
 #, c-format
@@ -478,18 +513,6 @@ msgstr "%s: feil ved oppdatering av skuggepassordfila\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: feil ved oppdatering av passordfila\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -602,8 +625,20 @@ msgid "Who are you?\n"
 msgstr "Kven er du?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: klarer ikkje opna fil\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "ukjent gruppe: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: klarer ikkje opna fil\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: klarer ikkje opna skuggepassordfila\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -645,10 +680,6 @@ msgstr "%s: klarer ikkje få lås\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: klarer ikkje få lås på skuggefil\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: klarer ikkje opna fil\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -728,10 +759,6 @@ msgstr "%s: klarer ikkje låsa skuggegruppefil\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: klarer ikkje opna skuggegruppefil\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: ugyldig nummerisk argument «%s»\n"
 
 #, fuzzy, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1117,16 +1144,24 @@ msgid "unknown GID: %lu\n"
 msgstr "ukjent GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Inga passordfil\n"
+msgid "Invalid password."
+msgstr "Gamalt passord:"
 
 #, c-format
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Bruk: %s [inndata]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1204,6 +1239,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "Gamalt passord:"
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Skriv inn det nye passordet (minimum %d, maksimum %d teikn)\n"
+"Bruk ein kombinasjon av store og små bokstavar og tal.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1243,6 +1286,12 @@ msgstr "Passordet for %s kan ikkje endrast.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: tomt for minne\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1490,6 +1539,14 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: slapp opp for minne i update_group\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: slapp opp for minne i update_gshadow\n"
+
+#, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: gid %u er ikkje unikt\n"
 
@@ -1636,6 +1693,10 @@ msgstr "%s: feil ved oppdatering av gruppeoppføring\n"
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr "%s: klarer ikkje fjerna primærgruppa til brukaren.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: feil ved oppdatering av gruppeoppføring\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: klarer ikkje opna gruppefila\n"
@@ -1709,13 +1770,9 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: slapp opp for minne i update_group\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: slapp opp for minne i update_gshadow\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: feil ved oppretting av ny gruppeoppføring\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1726,7 +1783,7 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: skuggepassord krevst for -e og -f\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
 #, c-format
@@ -1805,6 +1862,13 @@ msgstr "Klarte ikkje laga reservekopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Inga passordfil\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Bruk: %s [inndata]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Årsak.\n"

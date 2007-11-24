@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-01-18 16:16+0200\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -18,6 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -144,6 +153,12 @@ msgstr "passwd: το συνθηματικό ενημερώθηκε επιτυχ�
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Εσφαλμένο συνθηματικό για %s.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "Unable to cd to '%s'\n"
@@ -453,14 +468,14 @@ msgstr "Αδυναμία ξεκλειδώματος του αρχείου συν
 
 #, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
 "Χρήση: chpasswd [options]\n"
 "\n"
@@ -470,6 +485,26 @@ msgstr ""
 "  -m, --md5\t\tχρήση κρυπτογράφησης MD5 αντί για DES όταν τα παρεχόμενα\n"
 "\t\t\tσυνθηματικά δεν είναι κρυπτογραφημένα\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: Μη έγκυρη αριθμητική παράμετρος `%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -επιτρέπεται ΜΟΝΟ μια σημαία με τη -G flag\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -515,26 +550,6 @@ msgstr ""
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο αρχείο συνθηματικών\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Χρήση: chpasswd [options]\n"
-"\n"
-"Επιλογές:\n"
-"  -e, --encrypted\tτα παρεχόμενα συνθηματικά είναι κρυπτογραφημένα\n"
-"  -h, --help\t\tπροβολή αυτού του μηνύματος βοήθειας και έξοδος\n"
-"  -m, --md5\t\tχρήση κρυπτογράφησης MD5 αντί για DES όταν τα παρεχόμενα\n"
-"\t\t\tσυνθηματικά δεν είναι κρυπτογραφημένα\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -665,8 +680,20 @@ msgid "Who are you?\n"
 msgstr "Ποιος είσαι;\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "άγνωστη ομάδα: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -709,10 +736,6 @@ msgstr "%s: Αδυναμία δημιουργίας κλειδώματος\n"
 msgid "%s: can't get shadow lock\n"
 msgstr ""
 "%s: Αδυναμία δημιουργίας κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -804,10 +827,6 @@ msgstr "%s: Αδυναμία κλειδώματος του αρχείου σκι
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: Αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών ομάδων\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: Μη έγκυρη αριθμητική παράμετρος `%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1221,16 +1240,24 @@ msgid "unknown GID: %lu\n"
 msgstr "άγνωστο GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
+msgid "Invalid password."
+msgstr "Παλιό Συνθηματικό: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "πάρα πολλές ομάδες\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Χρήση: %s [είσοδος]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1334,6 +1361,15 @@ msgstr ""
 msgid "Old password: "
 msgstr "Παλιό Συνθηματικό: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Εισάγετε το νέο συνθηματικό (ελάχιστο %d, μέγιστο %d χαρακτήρες)\n"
+"Παρακαλώ χρησιμοποιήστε ένα συνδυασμό από κεφαλαία και μικρά γράμματα\n"
+"καθώς και αριθμούς.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1373,6 +1409,12 @@ msgstr "Το συνθηματικό για τον %s δεν μπορεί να α
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: δεν υπάρχει ελεύθερη μνήμη\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1666,6 +1708,14 @@ msgstr ""
 "\t\t\t\tχρήστη\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: δεν υπάρχει ελεύθερη μνήμη στο update_group\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s:  στο update_gshadow\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: Το UID %u δεν είναι μοναδικό\n"
@@ -1822,6 +1872,10 @@ msgstr ""
 "%s: Αδυναμία αφαίρεσης της ομάδας %s ή οποία είναι πρωταρχική ομάδα για άλλο "
 "χρήστη.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: Σφάλμα κατά την ανανέωση καταχώρισης ομάδας\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: αδυναμία ανοίγματος αρχείου ομάδων\n"
@@ -1924,13 +1978,9 @@ msgstr ""
 "  -U, --unlock\t\t\tξεκλείδωμα του λογαριασμού χρήστη\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: δεν υπάρχει ελεύθερη μνήμη στο update_group\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s:  στο update_gshadow\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο ομάδων\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1941,8 +1991,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: σκιώδη συνθηματικά απαιτούνται για το -e και -f\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -επιτρέπεται ΜΟΝΟ μια σημαία με τη -G flag\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -2032,6 +2082,33 @@ msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλ�
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Χρήση: chpasswd [options]\n"
+#~ "\n"
+#~ "Επιλογές:\n"
+#~ "  -e, --encrypted\tτα παρεχόμενα συνθηματικά είναι κρυπτογραφημένα\n"
+#~ "  -h, --help\t\tπροβολή αυτού του μηνύματος βοήθειας και έξοδος\n"
+#~ "  -m, --md5\t\tχρήση κρυπτογράφησης MD5 αντί για DES όταν τα παρεχόμενα\n"
+#~ "\t\t\tσυνθηματικά δεν είναι κρυπτογραφημένα\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Χρήση: %s [είσοδος]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Λυπάμαι.\n"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -20,6 +20,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -145,6 +154,12 @@ msgstr "ពាក្យសម្ងាត់ ៖ ពាក្យ​សម្ង
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ​សម្រាប់​ %s ។\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -445,25 +460,45 @@ msgstr "មិនអាច​ដាក់ស្នើ​ការផ្លាស
 msgid "Cannot unlock the password file.\n"
 msgstr "មិន​អាច​ដោះសោ​ឯកសារ​ពាក្យ​សម្ងាត់បានឡើយ​ ។\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
-"របៀបប្រើ ៖ chgpasswd [ជម្រើស]\n"
+"របៀបប្រើ ៖ chpasswd [ជម្រើស]\n"
 "\n"
 "ជម្រើស ៖\n"
-"  -e, --encrypted\tពាក្យ​សម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
-"  -h, --help\t\tបង្ហា​ញសារ​ជំនួយ​នេះ និង​ចេញ\n"
-"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​បាន​ផ្ដល់​ឲ្យ\n"
-"\t\t\tពាក្យសម្ងាត់​មិន​ត្រូវបាន​អ៊ិនគ្រីប\n"
+"  -e, --encrypted\tពាក្យសម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
+"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​​នេះ និង​ចេញ\n"
+"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​ដែល​ពាក្យសម្ងាត់\n"
+"\t\t\tដែល​បាន​ផ្ដល់​មិន​ត្រូវបាន​អ៊ិនគ្រីប​ទេ\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s ៖ អាគុយម៉ង់​ជាលេខ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: ទង់ -a គឺត្រូវបានអនុញ្ញាត​បានតែជាមួយទង់ -G ប៉ុណ្ណោះ\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -508,26 +543,6 @@ msgstr "%s ៖ មានកំហុស​ក្នុងការ​ធ្វ�
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s ៖ កំហុស​ក្នុងការធ្វើឲ្យ​ឯកសារពាក្យសម្ងាត់ទាន់សម័យ\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"របៀបប្រើ ៖ chpasswd [ជម្រើស]\n"
-"\n"
-"ជម្រើស ៖\n"
-"  -e, --encrypted\tពាក្យសម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
-"  -h, --help\t\tបង្ហាញ​សារ​ជំនួយ​​នេះ និង​ចេញ\n"
-"  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​ដែល​ពាក្យសម្ងាត់\n"
-"\t\t\tដែល​បាន​ផ្ដល់​មិន​ត្រូវបាន​អ៊ិនគ្រីប​ទេ\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -660,8 +675,20 @@ msgid "Who are you?\n"
 msgstr "តើអ្នក​ជា​នណា​ ?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s ៖ មិន​អាច​បើក​​ឯកសារ​បានទេ\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "មិន​ស្គាល់​ក្រុម​ ​ ៖ %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s ៖ មិន​អាច​បើក​​ឯកសារ​បានទេ\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ស្រមោល​បានទេ\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -703,10 +730,6 @@ msgstr "%s ៖ មិនអាច​ចាក់សោ​បានឡើយ\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s ៖ មិនអាច​ចាក់សោ​ស្រមោល​បានឡើយ​\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s ៖ មិន​អាច​បើក​​ឯកសារ​បានទេ\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -797,10 +820,6 @@ msgstr "%s ៖ មិនអាច​ចាក់សោ​ឯកសារក្�
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s ៖ មិនអាច​បើក​ឯកសារក្រុម​ស្រមោល​បានទេ​\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s ៖ អាគុយម៉ង់​ជាលេខ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1203,16 +1222,24 @@ msgid "unknown GID: %lu\n"
 msgstr "មិន​ស្គាល់​ GID ៖ %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "គ្មាន​ឯកសារ​ពាក្យ​សម្ងាត់ឡើយ​\n"
+msgid "Invalid password."
+msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "ច្រើន​ក្រុមពេក​\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "របៀបប្រើ ៖ %s [input]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1311,6 +1338,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"បញ្ចូល​ពាក្យ​សម្ងាត់​ថ្មី​ (តួអក្សរ​​អប្បបរមានៃ​ %d អតិបរមានៃ %d)\n"
+"សូម​ប្រើ​អក្សរ​ធំ​ អក្សរ​តូច​ ​និង លេខ​ចូល​គ្នា​ ។\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1349,6 +1384,12 @@ msgstr "មិនអាចប្ដូរ​ពាក្យ​សម្ងាត
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s ៖ អស់​សតិ​\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1633,6 +1674,14 @@ msgstr ""
 "  -u, --uid UID\t\t\tបង្ខំឲ្យប្រើ UID សម្រាប់​គណនី​អ្នកប្រើ​ថ្មី\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: អស់​សតិ​ក្នុង​ក្នុងការធ្វើឲ្យ​ក្រុមទាន់សម័យ\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s ៖ អស់​សតិ​ក្នុងការធ្វើឲ្យ gshadow ទាន់សម័៧\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s ៖ UID %u មិន​មែន​មាន​តែមួយទេ​\n"
@@ -1787,6 +1836,10 @@ msgstr "%s  ៖ មានកំហុស​ក្នុងការ​ធ្វ
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr "%s ៖ មិនអាច​យកក្រុម %s ដែលជា​ក្រុម​ចម្បង​សម្រាប់​អ្នកប្រើដទៃទៀតចេញបានទេ ។\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s  ៖ មានកំហុស​ក្នុងការ​ធ្វើឲ្យ​ធាតុ​បញ្ចូល​ក្រុម​​ទាន់សម័យ\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s ៖ មិនអាចបើក​ឯកសារក្រុម​បានឡើយ​\n"
@@ -1881,13 +1934,9 @@ msgstr ""
 "  -U, --unlock\t\t\tដោះសោ​គណនី​អ្នកប្រើ\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: អស់​សតិ​ក្នុង​ក្នុងការធ្វើឲ្យ​ក្រុមទាន់សម័យ\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s ៖ អស់​សតិ​ក្នុងការធ្វើឲ្យ gshadow ទាន់សម័៧\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s ៖ កំហុស​ក្នុងការ​បន្ថែម​ធាតុបញ្ចូល​​ក្រុម​ថ្មី​\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1898,8 +1947,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s ៖ ពាក្យ​សម្ងាត់​ស្រមោល​បានត្រូវការ​​ -e និង -f\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: ទង់ -a គឺត្រូវបានអនុញ្ញាត​បានតែជាមួយទង់ -G ប៉ុណ្ណោះ\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1986,6 +2035,32 @@ msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប្ដូរ​របស់អ្នក​គឺនៅក្នុង​ %s)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "របៀបប្រើ ៖ chgpasswd [ជម្រើស]\n"
+#~ "\n"
+#~ "ជម្រើស ៖\n"
+#~ "  -e, --encrypted\tពាក្យ​សម្ងាត់​ដែល​បាន​ផ្ដល់​ត្រូវ​បាន​អ៊ិនគ្រីប\n"
+#~ "  -h, --help\t\tបង្ហា​ញសារ​ជំនួយ​នេះ និង​ចេញ\n"
+#~ "  -m, --md5\t\tប្រើ​ការ​អ៊ិនគ្រីប MD5 ជំនួស​ឲ្យ DES នៅ​ពេល​បាន​ផ្ដល់​ឲ្យ\n"
+#~ "\t\t\tពាក្យសម្ងាត់​មិន​ត្រូវបាន​អ៊ិនគ្រីប\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "គ្មាន​ឯកសារ​ពាក្យ​សម្ងាត់ឡើយ​\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "របៀបប្រើ ៖ %s [input]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "សូមអភ័យទោស ។\n"

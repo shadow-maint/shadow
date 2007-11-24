@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1:4.0.18.2-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2007-11-21 21:02+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -16,7 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -24,7 +34,8 @@ msgstr "Не удалось выделить память для загрузк�
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "Ошибка конфигурации: неизвестный элемент '%s' (сообщите администратору)\n"
+msgstr ""
+"Ошибка конфигурации: неизвестный элемент '%s' (сообщите администратору)\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -145,11 +156,18 @@ msgid "Incorrect password for %s.\n"
 msgstr "Неверный пароль для %s.\n"
 
 #, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
+
+#, c-format
 msgid "Unable to cd to '%s'\n"
 msgstr "Невозможно перейти в каталог '%s'\n"
 
 msgid "No directory, logging in with HOME=/"
-msgstr "Каталог отсутствует или недоступен, вход в систему выполняется с HOME=/"
+msgstr ""
+"Каталог отсутствует или недоступен, вход в систему выполняется с HOME=/"
 
 #, c-format
 msgid "Cannot execute %s"
@@ -164,7 +182,8 @@ msgid "Can't change root directory to '%s'\n"
 msgstr "Не удалось изменить корневой каталог на '%s'\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr "Нет записи в utmp. Вы запускать \"login\" из самого первого уровня \"sh\""
+msgstr ""
+"Нет записи в utmp. Вы запускать \"login\" из самого первого уровня \"sh\""
 
 msgid "Unable to determine your tty name."
 msgstr "Не удалось определить название вашего tty."
@@ -218,7 +237,8 @@ msgstr ""
 
 #, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Введите новое значение или нажмите ВВОД для выбора значения по умолчанию\n"
+msgstr ""
+"Введите новое значение или нажмите ВВОД для выбора значения по умолчанию\n"
 
 msgid "Minimum Password Age"
 msgstr "Минимальный срок действия пароля (дней)"
@@ -272,7 +292,8 @@ msgstr "Максимальное количество дней между сме
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
-msgstr "Количество дней с предупреждением перед деактивированием пароля\t: %ld\n"
+msgstr ""
+"Количество дней с предупреждением перед деактивированием пароля\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -447,16 +468,16 @@ msgstr "Не удалось сохранить изменения в файле 
 msgid "Cannot unlock the password file.\n"
 msgstr "Не удалось разблокировать файл паролей.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
 "Использование: chpasswd [параметры]\n"
 "\n"
@@ -464,8 +485,28 @@ msgstr ""
 "  -e, --encrypted\tвводится уже шифрованный пароль\n"
 "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
 "  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
-"\t\t\tвводится нешифрованным\n"
+"\t\t\tвводится не шифрованным\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: неверный числовой параметр '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: флаг -a используется ТОЛЬКО вместе с флагом -G\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -510,26 +551,6 @@ msgstr "%s: не удалось обновить теневой файл пар�
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: не удалось обновить файл паролей\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Использование: chpasswd [параметры]\n"
-"\n"
-"Параметры:\n"
-"  -e, --encrypted\tвводится уже шифрованный пароль\n"
-"  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
-"  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
-"\t\t\tвводится не шифрованным\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -665,8 +686,20 @@ msgid "Who are you?\n"
 msgstr "Вы кто?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: не удалось открыть файл\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "неизвестная группа: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: не удалось открыть файл\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: не удалось открыть теневой файл паролей\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -708,10 +741,6 @@ msgstr "%s: не удалось осуществить блокировку\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: не удалось осуществить файла shadow\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: не удалось открыть файл\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -802,10 +831,6 @@ msgstr "%s: не удалось заблокировать теневой фай
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: не удалось открыть теневой файл групп\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: неверный числовой параметр '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1206,16 +1231,25 @@ msgstr "неизвестный GID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "неизвестный GID: %lu\n"
 
-msgid "No password.\n"
-msgstr "Нет пароля.\n"
+#, fuzzy
+msgid "Invalid password."
+msgstr "Старый пароль: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "слишком много групп\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Использование: %s [файл]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1315,6 +1349,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "Старый пароль: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Введите новый пароль (минимальная длина %d, максимальная длина %d символов)\n"
+" Используйте комбинацию из символов в верхнем и нижнем регистре и цифр.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1356,6 +1398,12 @@ msgid "%s: out of memory\n"
 msgstr "%s: нехватка памяти\n"
 
 #, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
+
+#, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: хранилище %s не поддерживается\n"
 
@@ -1381,7 +1429,8 @@ msgstr "Срок действия пароля истёк.\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
-msgstr "Использование: %s [-q] [-r] [-s] [файл паролей [теневой файл паролей]]\n"
+msgstr ""
+"Использование: %s [-q] [-r] [-s] [файл паролей [теневой файл паролей]]\n"
 
 #, c-format
 msgid "invalid password file entry\n"
@@ -1644,6 +1693,14 @@ msgstr ""
 "\t\t\t\tучётной записи\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: недостаточно памяти в update_group\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: недостаточно памяти в update_gshadow\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u уже существует\n"
@@ -1744,7 +1801,8 @@ msgid "Creating mailbox file"
 msgstr "Создание почтового ящика"
 
 #, c-format
-msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Не найдена группа 'mail'. Создаётся пользовательский почтовый ящик с правами "
 "0600.\n"
@@ -1757,7 +1815,8 @@ msgid "%s: user %s exists\n"
 msgstr "%s: пользователь %s существует\n"
 
 #, c-format
-msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: группа %s существует -- для добавления в неё этого пользователя, "
 "используйте -g.\n"
@@ -1802,6 +1861,10 @@ msgstr ""
 "%s: невозможно удалить группу %s, так как она является первичной для другого "
 "пользователя.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: не удалось обновить запись в файле групп\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: не удалось открыть файл групп\n"
@@ -1840,7 +1903,8 @@ msgstr "%s: пользователь %s является пользовател�
 
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
-msgstr "%s: каталог %s не удалён (является домашним каталогом пользователя %s)\n"
+msgstr ""
+"%s: каталог %s не удалён (является домашним каталогом пользователя %s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
@@ -1902,13 +1966,9 @@ msgstr ""
 "  -U, --unlock\t\t\tразблокировать учётную запись\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: недостаточно памяти в update_group\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: недостаточно памяти в update_gshadow\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: не удалось добавить новую группу\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1919,8 +1979,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: для -e и -f требуется поддержка теневых файлов паролей\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: флаг -a используется ТОЛЬКО вместе с флагом -G\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -2009,3 +2069,27 @@ msgstr "Не удалось создать резервную копию"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: не удалось восстановить %s: %s (ваши изменения в %s)\n"
 
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Использование: chpasswd [параметры]\n"
+#~ "\n"
+#~ "Параметры:\n"
+#~ "  -e, --encrypted\tвводится уже шифрованный пароль\n"
+#~ "  -h, --help\t\tпоказать это сообщение и завершить работу программы\n"
+#~ "  -m, --md5\t\tиспользовать шифрование MD5 вместо DES, если пароль\n"
+#~ "\t\t\tвводится нешифрованным\n"
+#~ "\n"
+
+#~ msgid "No password.\n"
+#~ msgstr "Нет пароля.\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Использование: %s [файл]\n"

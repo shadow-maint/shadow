@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-03-12 12:33-0300\n"
 "Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
@@ -14,6 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -140,6 +149,12 @@ msgstr "passwd: senha atualizada com sucesso\n"
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Senha incorreta para %s.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "Unable to cd to '%s'\n"
@@ -448,25 +463,45 @@ msgstr "Não foi possível gravar as mudanças no arquivo de senhas.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Não foi possível remover o locak do arquivo de senhas.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
-"Uso: chgpasswd [opções]\n"
+"Uso: chpasswd [opções]\n"
 "\n"
 "Opções:\n"
 "  -e, --encrypted\tsenhas fornecidas estão encriptadas\n"
 "  -h, --help\t\texibir esta mensagem de ajuda e finalizar\n"
-"  -m, --md5\t\tutilizar encriptação MD5 ao invés de DES quando as\n"
+"  -m, --md5\t\tutilizar ecriptação MD5 ao invés de DES quando as\n"
 "\t\t\tsenhas fornecidas não estiverem encriptadas\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s : argumento numérico `%s' inválido\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: flag -a é permitida SOMENTE com a flag -G\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -511,26 +546,6 @@ msgstr "%s : erro atualizando arquivo shadow\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s : erro atualizando arquivo de senhas\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Uso: chpasswd [opções]\n"
-"\n"
-"Opções:\n"
-"  -e, --encrypted\tsenhas fornecidas estão encriptadas\n"
-"  -h, --help\t\texibir esta mensagem de ajuda e finalizar\n"
-"  -m, --md5\t\tutilizar ecriptação MD5 ao invés de DES quando as\n"
-"\t\t\tsenhas fornecidas não estiverem encriptadas\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -656,8 +671,20 @@ msgid "Who are you?\n"
 msgstr "Quem é você ?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s : não foi possível abrir arquivo\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "grupo desconhecido : %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s : não foi possível abrir arquivo\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s : não foi possível abrir arquivo shadow\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -699,10 +726,6 @@ msgstr "%s : não foi possível obter lock\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s : nõ foi possível obter lock shadow\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s : não foi possível abrir arquivo\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -793,10 +816,6 @@ msgstr "%s : não foi possível obter lock em arquivo de grupo shadow\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s : não foi possível abrir arquivo de grupo shadow\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s : argumento numérico `%s' inválido\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1200,16 +1219,24 @@ msgid "unknown GID: %lu\n"
 msgstr "GID desconhecido : %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Sem arquivo de senhas\n"
+msgid "Invalid password."
+msgstr "Senha antiga : "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "muitos grupos\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Uso : %s [entrada]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1310,6 +1337,15 @@ msgstr ""
 msgid "Old password: "
 msgstr "Senha antiga : "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Informe a nova senha (mínimo de %d, máximo de %d caracteres)\n"
+"Por favor, use uma combinação de letras em maiúsculas e minúsculas\n"
+"e de números.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1349,6 +1385,12 @@ msgstr "A senha para %s não pode ser modificada.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s : sem memória\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1637,6 +1679,14 @@ msgstr ""
 "  -u, --uid UID\t\t\tforça o uso de UID para a nova conta de usuário\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s : sem memória em update_group\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s : sem memória em update_gshadow\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s : UID %u não é único\n"
@@ -1788,6 +1838,10 @@ msgstr ""
 "%s : Não foi possível remover grupo %s, o qual é um grupo primário de outro "
 "usuário.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s : erro atualizando entrada de grupo\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s : não foi possível abrir arquivo de grupo\n"
@@ -1884,13 +1938,9 @@ msgstr ""
 "  -U, --unlock\t\t\tdestravar a conta de usuário\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s : sem memória em update_group\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s : sem memória em update_gshadow\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s : erro adicionando nova entrada de grupo\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1901,8 +1951,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s : senhas shadow necessárias para -e e -f\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: flag -a é permitida SOMENTE com a flag -G\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1989,6 +2039,32 @@ msgstr "Não foi possível fazer backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s : não foi possível restaurar %s : %s (suas mudanças estão em %s)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Uso: chgpasswd [opções]\n"
+#~ "\n"
+#~ "Opções:\n"
+#~ "  -e, --encrypted\tsenhas fornecidas estão encriptadas\n"
+#~ "  -h, --help\t\texibir esta mensagem de ajuda e finalizar\n"
+#~ "  -m, --md5\t\tutilizar encriptação MD5 ao invés de DES quando as\n"
+#~ "\t\t\tsenhas fornecidas não estiverem encriptadas\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Sem arquivo de senhas\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Uso : %s [entrada]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Desculpe.\n"

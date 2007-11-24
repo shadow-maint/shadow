@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-06-01 15:28+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -18,6 +18,15 @@ msgstr ""
 "X-Poedit-Language: dzongkha\n"
 "X-Poedit-Country: bhutan\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -145,6 +154,12 @@ msgstr "ཆོག་ཡིག་:ཆོག་ཡིག་འདི་མཐར�
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "%s གི་དོན་ལུ་ བདེན་མེད་ཀྱི་ཆོག་ཡིག\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -448,25 +463,45 @@ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་བསྒྱུར་
 msgid "Cannot unlock the password file.\n"
 msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
-"ལག་ལེན་:chgpasswd [གདམ་ཁ་ཚུ་]\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བ་བཟོ་ཡོདཔ།\n"
-"  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ མཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -m, --md5\t\t བཀྲམ་སྟོན་\n"
-"འབད་ཡོད་པའི་\t\t\t ཆོག་ཡིག་ཚུ་གསང་བཟོས་མེན་པ་ཅིན་ ཌི་ཨི་ཨེསི་གི་ཚབ་ལུ་ ཨེམ་ཌི་ ༥ གསང་ ལག་ལེན་"
-"འཐབ།\n"
+"ལག་ལེན་: chpasswd [གདམ་ཁ་ཚུ་]\n"
 "\n"
+"གདམ་ཁ་ཚུ་:\n"
+"  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་འབད་ཡོདཔ།\n"
+"  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+"  -m, --md5\t\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་\t\t\tཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་ཡིན་པའི་སྐབས་ལུ་ ཌི་ཨི་"
+"ཨེསི་གི་ཚབ་ལུ་ ཨེབ་ཌི་ ༥ གསང་བཟོ་ ལག་ལེན་འཐབ།\n"
+"\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ནུས་མེད་ཨང་གྲངས་སྒྲུབ་རྟགས་ '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -a ཟུར་རྟགས་འདི་ -Gཟུར་རྟགས་དང་གཅིག་ཁར་རྐྱངམ་ཅིག་ཆོག\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -511,26 +546,6 @@ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་དུས་�
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"ལག་ལེན་: chpasswd [གདམ་ཁ་ཚུ་]\n"
-"\n"
-"གདམ་ཁ་ཚུ་:\n"
-"  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་འབད་ཡོདཔ།\n"
-"  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ བཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
-"  -m, --md5\t\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་\t\t\tཆོག་ཡིག་ཚུ་ གསང་བཟོས་མ་ཡིན་པའི་སྐབས་ལུ་ ཌི་ཨི་"
-"ཨེསི་གི་ཚབ་ལུ་ ཨེབ་ཌི་ ༥ གསང་བཟོ་ ལག་ལེན་འཐབ།\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -666,8 +681,20 @@ msgid "Who are you?\n"
 msgstr "ཁྱོད་ག་སྨོ?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "མ་ཤེས་པའི་སྡེ་ཚན་:%s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -709,10 +736,6 @@ msgstr "%s: ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: གྱིབ་མ་ལྡེ་མིག་ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -804,10 +827,6 @@ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣ�
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: ནུས་མེད་ཨང་གྲངས་སྒྲུབ་རྟགས་ '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1212,16 +1231,24 @@ msgid "unknown GID: %lu\n"
 msgstr "མ་ཤེས་པའི་ ཇི་ཨའི་ཌི་:%lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "ཆོག་ཡིག་ཡིག་སྣོད་མེད།\n"
+msgid "Invalid password."
+msgstr "ཆོག་ཡིག་རྙིངམ་:"
 
 #, c-format
 msgid "too many groups\n"
 msgstr "སྡེ་ཚན་མང་དྲགས་པ།\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1320,6 +1347,12 @@ msgstr ""
 msgid "Old password: "
 msgstr "ཆོག་ཡིག་རྙིངམ་:"
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr "ཆོག་ཡིག་གསརཔ་བཙུགས་(%d གི་ཉུང་མཐའ་ %dཡིག་འབྲུའི་མང་མཐའ་)།\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1356,6 +1389,12 @@ msgstr "%sགི་དོན་ལུ་ ཆོག་ཡིག་སོར་མ
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1644,6 +1683,14 @@ msgstr ""
 "འཐབ།\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: དུས་མཐུན་སྡེ་ཚན་ནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: དུས་མཐུན་gshadowནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: ཡུ་ཨའི་ཌི་ %uའདི་ ཐུན་མོང་མེན།\n"
@@ -1803,6 +1850,10 @@ msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr ""
 "%s: ལག་ལེན་པ་གཞན་གྱི་དོན་ལུ་ གཞི་རིམ་སྡེ་ཚན་ཅིག་ཨིན་མི་སྡེ་ཚན་ %sའདི་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
@@ -1899,13 +1950,9 @@ msgstr ""
 "  -U, --unlock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་ཕྱེ།\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: དུས་མཐུན་སྡེ་ཚན་ནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: དུས་མཐུན་gshadowནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1916,8 +1963,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: -e aདང་ -f གཉིས་ལུ་དངོས་མཁོ་ཡོད་པའི་གྱིབ་མའི་ཆོག་ཡིག་ཚུ།\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a ཟུར་རྟགས་འདི་ -Gཟུར་རྟགས་དང་གཅིག་ཁར་རྐྱངམ་ཅིག་ཆོག\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -2005,6 +2052,32 @@ msgstr "རྒྱབ་ཐག་བཟོ་མ་ཚུགས།"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %sསོར་ཆུད་འབད་མ་ཚུགས་: %s (ཁྱོད་ཀྱི་བསྒྱུར་བཅོས་ཚུ་ %sནང་ཨིན་)།\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "ལག་ལེན་:chgpasswd [གདམ་ཁ་ཚུ་]\n"
+#~ "གདམ་ཁ་ཚུ་:\n"
+#~ "  -e, --encrypted\t བཀྲམ་སྤེལ་འབད་ཡོད་པའི་ཆོག་ཡིག་ཚུ་ གསང་བ་བཟོ་ཡོདཔ།\n"
+#~ "  -h, --help\t\t གྲོགས་རམ་འཕྲིན་དོན་འདི་ མཀྲམ་སྟོན་འབད་ཞིནམ་ལས་ ཕྱིར་འཐོན་འབད།\n"
+#~ "  -m, --md5\t\t བཀྲམ་སྟོན་\n"
+#~ "འབད་ཡོད་པའི་\t\t\t ཆོག་ཡིག་ཚུ་གསང་བཟོས་མེན་པ་ཅིན་ ཌི་ཨི་ཨེསི་གི་ཚབ་ལུ་ ཨེམ་ཌི་ ༥ གསང་ ལག་"
+#~ "ལེན་འཐབ།\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་མེད།\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "ལག་ལེན་: %s [ཨིན་པུཊི་]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "དགོངསམ་མ་ཁྲེལ།\n"

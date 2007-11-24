@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-07-18 21:33+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -14,6 +14,15 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Generator: KBabel 1.11.2\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -136,6 +145,12 @@ msgstr "passwd: a jelszó sikeresen frissült\n"
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "Hibás jelszó ehhez: %s.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -443,18 +458,18 @@ msgstr "Nem tudom megtenni a jelszófájl módosításokat.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Nem tudom feloldani a jelszófájl zárolását.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
-"Használat: chgpasswd [kapcsolók]\n"
+"Használat: chpasswd [kapcsolók]\n"
 "\n"
 "Kapcsolók:\n"
 "  -e, --encrypted\ta megadott jelszavak titkosítottak\n"
@@ -462,6 +477,26 @@ msgstr ""
 "  -m, --md5\t\tMD5 titkosítás használata DES helyett,ha a megadott\n"
 "\t\t\tjelszavak nem titkosítottak\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: érvénytelen numerikus argumentum: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -a kapcsoló CSAK -G-vel megy\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -506,26 +541,6 @@ msgstr "%s: hiba az árnyék fájl frissítésekor\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: hiba a jelszófájl frissítésekor\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Használat: chpasswd [kapcsolók]\n"
-"\n"
-"Kapcsolók:\n"
-"  -e, --encrypted\ta megadott jelszavak titkosítottak\n"
-"  -h, --help\t\tezen súgó megjelenítése és kilépés\n"
-"  -m, --md5\t\tMD5 titkosítás használata DES helyett,ha a megadott\n"
-"\t\t\tjelszavak nem titkosítottak\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -662,8 +677,20 @@ msgid "Who are you?\n"
 msgstr "Ki vagy?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: nem tudom megnyitni a fájlt\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "ismeretlen csoport: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: nem tudom megnyitni a fájlt\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: nem tudom megnyitni a 'gshadow' fájlt\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -705,10 +732,6 @@ msgstr "%s: nem szerezhető zár\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: nem szerezhető árnyékzár\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: nem tudom megnyitni a fájlt\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -800,10 +823,6 @@ msgstr "%s: nem tudom zárolni az árnyék csoport fájlt\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: nem tudom megnyitni az árnyék csoport fájlt\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: érvénytelen numerikus argumentum: \"%s\"\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1206,16 +1225,24 @@ msgid "unknown GID: %lu\n"
 msgstr "ismeretlen GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Nincs jelszófájl\n"
+msgid "Invalid password."
+msgstr "Régi jelszó: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "túl sok csoport\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Használat: %s [bemenet]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1314,6 +1341,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "Régi jelszó: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Add meg az új jelszót (minimum %d, maximum %d karakter)\n"
+"Biztonság: kérlek használj vegyesen Nagy és kisbetűket és számokat.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1352,6 +1387,12 @@ msgstr "%s jelszava nem változtatható\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: a memória elfogyott\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1643,6 +1684,14 @@ msgstr ""
 "\t\t\t\tfelhasználói fiókhoz\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: elfogyott a memória az update_group során\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: elfogyott a memória az update_gshadow során\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u nem egyedi\n"
@@ -1805,6 +1854,10 @@ msgstr ""
 "%s: Nem tudom %s csoportot törölni, ami egy másik felhasználó elsődleges "
 "csoportja.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: Hiba a csoport bejegyzés frissítésekor\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: nem tudom megnyitni a csoport fájlt\n"
@@ -1906,13 +1959,9 @@ msgstr ""
 "  -U, --unlock\t\t\ta felhasználói fiók zárolásának feloldása\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: elfogyott a memória az update_group során\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: elfogyott a memória az update_gshadow során\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: hiba az új csoport bejegyzés hozzáadásakor\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1923,8 +1972,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: -e és -f árnyék jelszavakat vár\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a kapcsoló CSAK -G-vel megy\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -2011,6 +2060,32 @@ msgstr "Nem tudtam biztonsági másolatot készíteni"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nem tudom visszaállítani %s-t: %s (módosításaid itt vannak: %s)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Használat: chgpasswd [kapcsolók]\n"
+#~ "\n"
+#~ "Kapcsolók:\n"
+#~ "  -e, --encrypted\ta megadott jelszavak titkosítottak\n"
+#~ "  -h, --help\t\tezen súgó megjelenítése és kilépés\n"
+#~ "  -m, --md5\t\tMD5 titkosítás használata DES helyett,ha a megadott\n"
+#~ "\t\t\tjelszavak nem titkosítottak\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Nincs jelszófájl\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Használat: %s [bemenet]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Bocs.\n"

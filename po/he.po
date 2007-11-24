@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -136,6 +145,12 @@ msgstr ""
 
 #, c-format
 msgid "Incorrect password for %s.\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -423,14 +438,34 @@ msgstr "לא יכול לשחרר נעילה של קובץ הסיסמאות.\n"
 
 #, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr ""
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
 #, c-format
@@ -476,18 +511,6 @@ msgstr "%s: שגיאה בעדכון קובץ צל\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: שגיאה בעדכון קובץ סיסמאות\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -600,8 +623,20 @@ msgid "Who are you?\n"
 msgstr ""
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr ""
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: לא יכול לנעול קובץ צל\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: לא יכול לפתוח קובץ צל\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -642,10 +677,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: can't get shadow lock\n"
-msgstr ""
-
-#, c-format
-msgid "%s: can't open file\n"
 msgstr ""
 
 #, c-format
@@ -726,10 +757,6 @@ msgstr ""
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1102,15 +1129,23 @@ msgid "unknown GID: %lu\n"
 msgstr ""
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "  בחר סיסמה חדשה.\n"
+msgid "Invalid password."
+msgstr "סיסמה לא טובה: %s.  "
 
 #, c-format
 msgid "too many groups\n"
 msgstr ""
 
 #, c-format
-msgid "Usage: %s [input]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
 msgstr ""
 
 #, c-format
@@ -1191,6 +1226,12 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+
+#, c-format
+msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
@@ -1222,6 +1263,12 @@ msgstr ""
 
 #, c-format
 msgid "%s: out of memory\n"
+msgstr ""
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
 msgstr ""
 
 #, c-format
@@ -1464,6 +1511,14 @@ msgid ""
 "\n"
 msgstr ""
 
+#, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
@@ -1609,6 +1664,10 @@ msgstr ""
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: שגיאה בעדכון קובץ צל\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr ""
@@ -1681,13 +1740,9 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr ""
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: שגיאה בעדכון קובץ צל\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1698,7 +1753,7 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr ""
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
 #, c-format
@@ -1775,3 +1830,7 @@ msgstr ""
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "  בחר סיסמה חדשה.\n"

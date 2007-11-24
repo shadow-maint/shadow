@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-06-12 23:00+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale <librezale@librezale.org>\n"
@@ -16,6 +16,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: KBabel 1.11.2\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -143,6 +152,12 @@ msgstr "passwd: pasahitza ongi eguneratu da\n"
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr "%s(r)en pasahitz okerra.\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -446,16 +461,16 @@ msgstr "Ezin izan da pasahitzen fitxategiko aldaketak bidali.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Ezin izan da pasahitzen fitxategia desblokeatu.\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
 "Erabilera: chpasswd [aukerak]\n"
 "\n"
@@ -465,6 +480,26 @@ msgstr ""
 "  -m, --md5\t\terabili MD5 enkriptatze mota (DES-en ordez),\n"
 "\t\t\tpasahitzak enkriptatuta ez daudenean\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s:baliogabeko zenbakizko '%s' argumentoa\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -a bandera -G banderarekin batera bakarrik onartzen da\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -509,26 +544,6 @@ msgstr "%s: errorea 'shadow' fitxategia eguneratzean\n"
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: errorea pasahitzen fitxategia eguneratzean\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"Erabilera: chpasswd [aukerak]\n"
-"\n"
-"Aukerak:\n"
-"  -e, .- encrypted\temandako pasahitzak enkripatzen dira\n"
-"  -h, --help\t\tlaguntzako mezu hau erakutsi eta irten egiten da\n"
-"  -m, --md5\t\terabili MD5 enkriptatze mota (DES-en ordez),\n"
-"\t\t\tpasahitzak enkriptatuta ez daudenean\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -665,8 +680,20 @@ msgid "Who are you?\n"
 msgstr "Zer moduz zaude?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: ezin da fitxategia ireki\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "talde ezezaguna: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: ezin da fitxategia ireki\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s ezin da 'shadow' fitxategia ireki\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -708,10 +735,6 @@ msgstr "%s: ezin da blokeatu\n"
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: ezin da 'shadow' blokeatu\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: ezin da fitxategia ireki\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -802,10 +825,6 @@ msgstr "%s: ezin da itzalpeko talde-fitxategia blokeatu\n"
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: ezin da itzalpeko talde-fitxategia ireki\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s:baliogabeko zenbakizko '%s' argumentoa\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1212,16 +1231,24 @@ msgid "unknown GID: %lu\n"
 msgstr "GID ezezaguna: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "Ez dago pasahitz-fitxategirik\n"
+msgid "Invalid password."
+msgstr "Pasahitz zaharra: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "talde gehiegi\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "Erabilera: %s [sarrera]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1321,6 +1348,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "Pasahitz zaharra: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"Sartu pasahitz berria (gutxienez %d eta gehienez %d karaktere)\n"
+"Erabili maiuskulen, minuskulen eta zenbakien arteko konbinazioa.\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1359,6 +1394,12 @@ msgstr "%s(r)en pasahitzak ezin dira aldatu.\n"
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: memoriarik ez\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1638,6 +1679,14 @@ msgstr ""
 "\t\t\t\tsortu\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: memoriarik ez 'update_group'en\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: memoriarik ez 'update_gshadow'-en\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: %u UID-a ez da bakarra\n"
@@ -1798,6 +1847,10 @@ msgstr ""
 "%s: ezin da %s taldea ezabatu beste erabiltzaile baten talde nagusia bait "
 "da.\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: errorea taldearen sarrera eguneratzean\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: ezin da talde-fitxategia ireki\n"
@@ -1896,13 +1949,9 @@ msgstr ""
 "  -U, --unlock\t\t\terabiltzaile kontua desblokeatu\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: memoriarik ez 'update_group'en\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: memoriarik ez 'update_gshadow'-en\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: errorea talde sarrera berria gehitzean\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1913,8 +1962,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s:  -e eta -f aukerek itzalpeko pasahitzak eskatzen dute\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a bandera -G banderarekin batera bakarrik onartzen da\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -2001,6 +2050,32 @@ msgstr "Ezin izan da babeskopiarik egin"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Erabilera: chpasswd [aukerak]\n"
+#~ "\n"
+#~ "Aukerak:\n"
+#~ "  -e, .- encrypted\temandako pasahitzak enkripatzen dira\n"
+#~ "  -h, --help\t\tlaguntzako mezu hau erakutsi eta irten egiten da\n"
+#~ "  -m, --md5\t\terabili MD5 enkriptatze mota (DES-en ordez),\n"
+#~ "\t\t\tpasahitzak enkriptatuta ez daudenean\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "Ez dago pasahitz-fitxategirik\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "Erabilera: %s [sarrera]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "Barkatu.\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-10-28 19:15+0100\n"
+"POT-Creation-Date: 2007-11-24 12:26+0100\n"
 "PO-Revision-Date: 2006-06-16 14:30+0545\n"
 "Last-Translator: Shiva Pokharel <pokharelshiva@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -17,6 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2;plural=(n!=1)\n"
 "X-Generator: KBabel 1.10.2\n"
+
+#, c-format
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+
+#, c-format
+msgid "crypt method not supported by libcrypt? (%s)\n"
+msgstr ""
 
 #, c-format
 msgid "Could not allocate space for config info.\n"
@@ -142,6 +151,12 @@ msgstr "पासवर्ड: पासवर्ड सफलतापूर्
 #, c-format
 msgid "Incorrect password for %s.\n"
 msgstr " %s को लागि गलत पासवर्ड ।\n"
+
+#, c-format
+msgid ""
+"Invalid ENCRYPT_METHOD value: '%s'.\n"
+"Defaulting to DES.\n"
+msgstr ""
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
@@ -446,16 +461,16 @@ msgstr "पासवर्ड फाइल परिवर्तनहरू क
 msgid "Cannot unlock the password file.\n"
 msgstr "पासवर्ड फाइलबाट ताल्चा हटाउन सकिदैन ।\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Usage: chgpasswd [options]\n"
+"Usage: %s [options]\n"
 "\n"
 "Options:\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
 "  -e, --encrypted\tsupplied passwords are encrypted\n"
 "  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
+"  -m, --md5\t\tencrypt the clear text password using the MD5 algorithm\n"
+"%s\n"
 msgstr ""
 "उपयोग: पासवर्ड परिवर्तन गर्नुहोस् [options]\n"
 "\n"
@@ -465,6 +480,26 @@ msgstr ""
 "  -m, --md5\t\tले DES को सट्टामा MD5 प्रयोग गर्छ जब आपूर्ति भएको\n"
 "\t\t\tपासवर्डहरू गुप्तिकृत भएको हुदैन\n"
 "\n"
+
+msgid ""
+"  -s, --sha-rounds\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: अवैध संख्यात्मक तर्क '%s'\n"
+
+#, fuzzy, c-format
+msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgstr "%s: -a फ्ल्याग -G फ्ल्याग संग मात्र अनुमति छ\n"
+
+#, c-format
+msgid "%s: the -c, -e, and -m flags are exclusive\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unsupported crypt method: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -509,26 +544,6 @@ msgstr "%s: स्याडो फाइल अद्यावधिक गर�
 #, c-format
 msgid "%s: error updating password file\n"
 msgstr "%s: पासवर्ड फाइल अद्यावधिक गर्दा त्रुटि\n"
-
-#, c-format
-msgid ""
-"Usage: chpasswd [options]\n"
-"\n"
-"Options:\n"
-"  -e, --encrypted\tsupplied passwords are encrypted\n"
-"  -h, --help\t\tdisplay this help message and exit\n"
-"  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-"\t\t\tpasswords are not encrypted\n"
-"\n"
-msgstr ""
-"उपयोग: पासवर्ड परिवर्तन गर्नुहोस् [options]\n"
-"\n"
-"विकल्पहरू:\n"
-"  -e, --गुप्तिकृत\tआपूर्ति भएका पासवर्डहरू गुप्तिकृत छन\n"
-"  -h, --मद्दत\t\tले यो मद्दत संदेशलाई प्रदर्शित र बन्द गर्छ\n"
-"  -m, --md5\t\tले DES को सट्टामा MD5 प्रयोग गर्छ जब आपूर्ति भएको\n"
-"\t\t\tपासवर्डहरू गुप्तिकृत भएको हुदैन\n"
-"\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
@@ -661,8 +676,20 @@ msgid "Who are you?\n"
 msgstr "तपाईँ को हो ?\n"
 
 #, c-format
+msgid "%s: can't open file\n"
+msgstr "%s: फाइल खोल्न सकिएन\n"
+
+#, c-format
 msgid "unknown group: %s\n"
 msgstr "अज्ञात समूह: %s\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close file\n"
+msgstr "%s: फाइल खोल्न सकिएन\n"
+
+#, fuzzy, c-format
+msgid "%s: can't close shadow file\n"
+msgstr "%s: स्याडो फाइल खोल्न सकिएन\n"
 
 #, c-format
 msgid "Adding user %s to group %s\n"
@@ -704,10 +731,6 @@ msgstr "%s: ताल्चा प्राप्त गर्न सकिए�
 #, c-format
 msgid "%s: can't get shadow lock\n"
 msgstr "%s: स्याडो ताल्चा प्राप्त गर्न सकिएन\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: फाइल खोल्न सकिएन\n"
 
 #, c-format
 msgid "%s: can't update entry\n"
@@ -798,10 +821,6 @@ msgstr "%s: स्याडो समूह फाइल ताल्चा म�
 #, c-format
 msgid "%s: unable to open shadow group file\n"
 msgstr "%s: स्याडो समूह फाइल खोल्न असक्षम भयो\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: अवैध संख्यात्मक तर्क '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
@@ -1203,16 +1222,24 @@ msgid "unknown GID: %lu\n"
 msgstr "अज्ञात GID: %lu\n"
 
 #, fuzzy
-msgid "No password.\n"
-msgstr "पासवर्ड फाइल होइन\n"
+msgid "Invalid password."
+msgstr "पुरानो पासवर्ड: "
 
 #, c-format
 msgid "too many groups\n"
 msgstr "अति धेरै समूहहरू\n"
 
 #, c-format
-msgid "Usage: %s [input]\n"
-msgstr "उपयोग: %s [आगत]\n"
+msgid ""
+"Usage: %s [options] [input]\n"
+"\n"
+"  -c, --crypt-method\tthe crypt method (one of %s)\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -s, --sha-rounds\t\tnumber of SHA rounds for the SHA* crypt algorithms\n"
+msgstr ""
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
@@ -1311,6 +1338,14 @@ msgstr ""
 msgid "Old password: "
 msgstr "पुरानो पासवर्ड: "
 
+#, fuzzy, c-format
+msgid ""
+"Enter the new password (minimum of %d characters)\n"
+"Please use a combination of upper and lower case letters and numbers.\n"
+msgstr ""
+"नयाँ पासवर्ड प्रविष्ट गर्नुहोस् (%d को न्युनतम, %d को अधिक्तम क्यारेक्टरहरू)\n"
+"कृपया सानो र ठूलो अक्षरहरू र नम्बरहरुको मिलान प्रयोग गर्नुहोस् ।\n"
+
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
@@ -1349,6 +1384,12 @@ msgstr "%s को लागि पासवर्ड परिवर्तन �
 #, c-format
 msgid "%s: out of memory\n"
 msgstr "%s: स्मृति भन्दा बाहिर\n"
+
+#, c-format
+msgid ""
+"%s: unlocking the user would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user account.\n"
+msgstr ""
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1633,6 +1674,14 @@ msgstr ""
 "  -u, --uid UID\t\t\t नयाँ प्रयोगकर्ता खाताको लागि UID प्रयोग गर्न जोड दिन्छ\n"
 "\n"
 
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the group database.\n"
+msgstr "%s: update_group मा स्मृति भन्दा बाहिर\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+msgstr "%s: gshadow_group मा स्मृति भन्दा बाहिर\n"
+
 #, c-format
 msgid "%s: UID %u is not unique\n"
 msgstr "%s: UID %u अद्वितिय होइन\n"
@@ -1789,6 +1838,10 @@ msgstr "%s: समूह प्रविष्टि अद्यावधिक
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
 msgstr "%s: समूह %s हटाउन सकिदैन जुन अर्को प्रयोगकर्ताको लागि प्राथमिक समूह हो ।\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating shadow group entry\n"
+msgstr "%s: समूह प्रविष्टि अद्यावधिक गर्दा त्रुटि\n"
+
 #, c-format
 msgid "%s: cannot open group file\n"
 msgstr "%s: समूह फाइल खोल्न सकिदैन\n"
@@ -1884,13 +1937,9 @@ msgstr ""
 "  -U, --unlock\t\t\tप्रयोगकर्ता खाताको ताल्चा खोल्नुहोस्\n"
 "\n"
 
-#, c-format
-msgid "%s: out of memory in update_group\n"
-msgstr "%s: update_group मा स्मृति भन्दा बाहिर\n"
-
-#, c-format
-msgid "%s: out of memory in update_gshadow\n"
-msgstr "%s: gshadow_group मा स्मृति भन्दा बाहिर\n"
+#, fuzzy, c-format
+msgid "%s: error adding new shadow group entry\n"
+msgstr "%s: नयाँ समूह प्रविष्टि थप गर्दा त्रुटि\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1901,8 +1950,8 @@ msgid "%s: shadow passwords required for -e and -f\n"
 msgstr "%s: -e र -f को लागि स्याडो पासवर्डहरुको आवश्यक छ\n"
 
 #, c-format
-msgid "%s: -a flag is ONLY allowed with the -G flag\n"
-msgstr "%s: -a फ्ल्याग -G फ्ल्याग संग मात्र अनुमति छ\n"
+msgid "%s: the -L, -p, and -U flags are exclusive\n"
+msgstr ""
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1989,6 +2038,32 @@ msgstr "जगेडा बनाउँन सकिदैन"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: पुन:भण्डारण गर्न सकिदैन %s: %s (तपाईँको परिवर्तनहरू %s मा छ)\n"
+
+#~ msgid ""
+#~ "Usage: chgpasswd [options]\n"
+#~ "\n"
+#~ "Options:\n"
+#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
+#~ "  -h, --help\t\tdisplay this help message and exit\n"
+#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
+#~ "\t\t\tpasswords are not encrypted\n"
+#~ "\n"
+#~ msgstr ""
+#~ "उपयोग: पासवर्ड परिवर्तन गर्नुहोस् [options]\n"
+#~ "\n"
+#~ "विकल्पहरू:\n"
+#~ "  -e, --गुप्तिकृत\tआपूर्ति भएका पासवर्डहरू गुप्तिकृत छन\n"
+#~ "  -h, --मद्दत\t\tले यो मद्दत संदेशलाई प्रदर्शित र बन्द गर्छ\n"
+#~ "  -m, --md5\t\tले DES को सट्टामा MD5 प्रयोग गर्छ जब आपूर्ति भएको\n"
+#~ "\t\t\tपासवर्डहरू गुप्तिकृत भएको हुदैन\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "No password.\n"
+#~ msgstr "पासवर्ड फाइल होइन\n"
+
+#~ msgid "Usage: %s [input]\n"
+#~ msgstr "उपयोग: %s [आगत]\n"
 
 #~ msgid "Sorry.\n"
 #~ msgstr "माफ दिनुहोस् ।\n"
