@@ -1,5 +1,12 @@
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Provide the crypt method to all the
+	crypt_make_salt invocations.
+	* src/newusers.c: Tag the ENCRYPTMETHOD_SELECT dependent code
+	accordingly.
+
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: Make sure method is not NULL, defaulting to DES.
 	Thanks to Dan Kopecek <dkopecek@redhat.com>.
 	* src/chpasswd.c, src/chgpasswd.c: Do not use DES by default, but

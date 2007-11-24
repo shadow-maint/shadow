@@ -234,10 +234,10 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 
 static void update_passwd (struct passwd *pwd, const char *passwd)
 {
-	void *arg = NULL;
+	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
 		if (sflg)
-			arg = &sha_rounds;
+			crypt_arg = &sha_rounds;
 	}
 
 	if (crypt_method != NULL && 0 == strcmp(crypt_method, "NONE")) {
@@ -245,7 +245,7 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 	} else {
 		pwd->pw_passwd = pw_encrypt (passwd,
 		                             crypt_make_salt (crypt_method,
-		                                              arg));
+		                                              crypt_arg));
 	}
 }
 
@@ -256,6 +256,11 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 {
 	const struct spwd *sp;
 	struct spwd spent;
+	void *crypt_arg = NULL;
+	if (crypt_method != NULL) {
+		if (sflg)
+			crypt_arg = &sha_rounds;
+	}
 
 	/*
 	 * In the case of regular password files, this is real easy - pwd
@@ -274,7 +279,8 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	if ((sp = spw_locate (pwd->pw_name))) {
 		spent = *sp;
 		spent.sp_pwdp = pw_encrypt (passwd,
-		                            crypt_make_salt (NULL, NULL));
+		                            crypt_make_salt (crypt_method,
+		                                             crypt_arg));
 		return !spw_update (&spent);
 	}
 
@@ -294,7 +300,8 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * shadow password file entry.
 	 */
 	spent.sp_namp = pwd->pw_name;
-	spent.sp_pwdp = pw_encrypt (passwd, crypt_make_salt (NULL, NULL));
+	spent.sp_pwdp = pw_encrypt (passwd,
+	                            crypt_make_salt (crypt_method, crypt_arg));
 	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
 	spent.sp_min = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */
@@ -337,12 +344,20 @@ int main (int argc, char **argv)
 		static struct option long_options[] = {
 			{"crypt-method", required_argument, NULL, 'c'},
 			{"help", no_argument, NULL, 'h'},
+#ifdef ENCRYPTMETHOD_SELECT
 			{"sha-rounds", required_argument, NULL, 's'},
+#endif
 			{NULL, 0, NULL, '\0'}
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "c:hs:", long_options,
+			getopt_long (argc, argv,
+#ifdef ENCRYPTMETHOD_SELECT
+			             "c:hs:",
+#else
+			             "c:h",
+#endif
+			             long_options,
 			             &option_index)) != -1) {
 			switch (c) {
 			case 'c':
@@ -352,6 +367,7 @@ int main (int argc, char **argv)
 			case 'h':
 				usage ();
 				break;
+#ifdef ENCRYPTMETHOD_SELECT
 			case 's':
 				sflg = 1;
 				if (!getlong(optarg, &sha_rounds)) {
@@ -361,6 +377,7 @@ int main (int argc, char **argv)
 					usage ();
 				}
 				break;
+#endif
 			case 0:
 				/* long option */
 				break;
