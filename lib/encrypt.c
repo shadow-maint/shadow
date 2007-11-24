@@ -49,6 +49,32 @@ char *pw_encrypt (const char *clear, const char *salt)
 		perror ("crypt");
 		exit (1);
 	}
+
+	/* The GNU crypt does not return NULL if the algorithm is not
+	 * supported, and return a DES encrypted password. */
+	if (salt && salt[0] == '$' && strlen (cp) <= 13)
+	{
+		char *method = "$1$";
+		switch (salt[1])
+		{
+			case '1':
+				method = "MD5";
+				break;
+			case '5':
+				method = "SHA256";
+				break;
+			case '6':
+				method = "SHA512";
+				break;
+			default:
+				method[1] = salt[1];
+		}
+		fprintf (stderr,
+			 _("crypt method not supported by libcrypt? (%s)\n"),
+			  method);
+		exit (1);
+	}
+
 	if (strlen (cp) != 13)
 		return cp;	/* nonstandard crypt() in libc, better bail out */
 	strcpy (cipher, cp);

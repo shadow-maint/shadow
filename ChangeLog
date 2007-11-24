@@ -1,5 +1,12 @@
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/encrypt.c: If we requested a non DES encryption, make sure
+	crypt returned a encrypted password longer than 13 chars. This
+	protects against the GNU crypt() which does not return NULL if the
+	algorithm is not supported, and return a DES encrypted password.
+
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: Add missing #include "getdef.h"
 
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
