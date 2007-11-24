@@ -228,6 +228,14 @@ AC_ARG_WITH(skey,
 AC_ARG_WITH(libcrack,
 	[AC_HELP_STRING([--with-libcrack], [use libcrack @<:@default=yes if found and if PAM not enabled@:>@])],
 	[with_libcrack=$withval], [with_libcrack=no])
+AC_ARG_WITH(sha-crypt,
+	[AC_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
+	[with_sha_crypt=$withval], [with_sha_crypt=yes])
+
+AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
+if test "$with_sha_crypt" = "yes"; then
+		AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
+fi
 
 dnl Check for some functions in libc first, only if not found check for
 dnl other libraries.  This should prevent linking libnsl if not really
@@ -378,4 +386,5 @@ echo "	PAM support:			$with_libpam"
 echo "	SELinux support:		$with_selinux"
 echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
+echo "	SHA passwords encryption:	$with_sha_crypt"
 echo

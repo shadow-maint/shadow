@@ -58,7 +58,7 @@ char *l64a(long value)
  */
 #define MAGNUM(array,ch)	(array)[0]=(array)[2]='$',(array)[1]=(ch),(array)[3]='\0'
 
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 /*
  * Return the salt size.
  * The size of the salt string is between 8 and 16 bytes for the SHA crypt
@@ -187,15 +187,13 @@ char *crypt_make_salt (char *meth, void *arg)
 	if (NULL != meth)
 		method = meth;
 	else {
-#ifdef ENCRYPTMETHOD_SELECT
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL)
-#endif
 		method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
 	}
 
 	if (!strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 	} else if (!strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		strcat(result, SHA_salt_rounds((int *)arg));

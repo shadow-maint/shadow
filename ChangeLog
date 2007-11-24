@@ -1,5 +1,21 @@
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: New configure option: --with-sha-crypt enabled by
+	default. Keeping the feature enabled is safe. Disabling it permits
+	to disable the references to the SHA256 and SHA512 password
+	encryption algorithms from the usage help and manuals (in addition
+	to the support for these algorithms in the code).
+	* libmisc/obscure.c, libmisc/salt.c, src/newusers.c,
+	src/chpasswd.c, src/chgpasswd.c, src/passwd.c: ENCRYPT_METHOD is
+	always supported in login.defs. Remove the ENCRYPTMETHOD_SELECT
+	preprocessor condition.
+	* libmisc/obscure.c, libmisc/salt.c, src/newusers.c,
+	src/chpasswd.c, src/chgpasswd.c, src/passwd.c: Disable SHA256 and
+	SHA512 if USE_SHA_CRYPT is not defined (this corresponds to a
+	subset of the ENCRYPTMETHOD_SELECT sections).
+
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/encrypt.c: If we requested a non DES encryption, make sure
 	crypt returned a encrypted password longer than 13 chars. This
 	protects against the GNU crypt() which does not return NULL if the

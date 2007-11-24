@@ -77,7 +77,7 @@ static void usage (void)
 			   "%s"
 			   "\n"),
 			 Prog,
-#ifndef ENCRYPTMETHOD_SELECT
+#ifndef USE_SHA_CRYPT
 			 "NONE DES MD5", ""
 #else
 			 "NONE DES MD5 SHA256 SHA512",
@@ -123,7 +123,7 @@ int main (int argc, char **argv)
 			{"encrypted", no_argument, NULL, 'e'},
 			{"help", no_argument, NULL, 'h'},
 			{"md5", no_argument, NULL, 'm'},
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			{"sha-rounds", required_argument, NULL, 's'},
 #endif
 			{NULL, 0, NULL, '\0'}
@@ -131,7 +131,7 @@ int main (int argc, char **argv)
 
 		while ((c =
 			getopt_long (argc, argv,
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			             "c:ehms:",
 #else
 			             "c:ehm",
@@ -152,7 +152,7 @@ int main (int argc, char **argv)
 			case 'm':
 				md5flg = 1;
 				break;
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			case 's':
 				sflg = 1;
 				if (!getlong(optarg, &sha_rounds)) {
@@ -191,7 +191,7 @@ int main (int argc, char **argv)
 		if (   0 != strcmp (crypt_method, "DES")
 		    && 0 != strcmp (crypt_method, "MD5")
 		    && 0 != strcmp (crypt_method, "NONE")
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 		    && 0 != strcmp (crypt_method, "SHA256")
 		    && 0 != strcmp (crypt_method, "SHA512")
 #endif

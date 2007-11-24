@@ -204,9 +204,7 @@ static int new_password (const struct passwd *pw)
 	int i;			/* Counter for retries */
 	int warned;
 	int pass_max_len = -1;
-#ifdef ENCRYPTMETHOD_SELECT
 	char *method;
-#endif
 
 #ifdef HAVE_LIBCRACK_HIST
 	int HistUpdate (const char *, const char *);
@@ -244,21 +242,20 @@ static int new_password (const struct passwd *pw)
 	 * for strength, unless it is the root user. This provides an escape
 	 * for initial login passwords.
 	 */
-#ifdef ENCRYPTMETHOD_SELECT
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
-#endif
 		if (!getdef_bool ("MD5_CRYPT_ENAB"))
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
-#ifdef ENCRYPTMETHOD_SELECT
 	} else {
-		if (!strcmp (method, "MD5") ||
-		    !strcmp (method, "SHA256") ||
-		    !strcmp (method, "SHA512"))
+		if (   !strcmp (method, "MD5")
+#ifdef USE_SHA_CRYPT
+		    || !strcmp (method, "SHA256")
+		    || !strcmp (method, "SHA512")
+#endif
+		    )
 			pass_max_len = -1;
 		else
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
 	}
-#endif
 	if (!qflg) {
 		if (pass_max_len == -1) {
 			printf (_(

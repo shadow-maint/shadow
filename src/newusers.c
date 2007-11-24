@@ -84,7 +84,7 @@ static void usage (void)
 			   "%s"
 			   "\n"),
 			 Prog,
-#ifndef ENCRYPTMETHOD_SELECT
+#ifndef USE_SHA_CRYPT
 			 "NONE DES MD5", ""
 #else
 			 "NONE DES MD5 SHA256 SHA512",
@@ -344,7 +344,7 @@ int main (int argc, char **argv)
 		static struct option long_options[] = {
 			{"crypt-method", required_argument, NULL, 'c'},
 			{"help", no_argument, NULL, 'h'},
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			{"sha-rounds", required_argument, NULL, 's'},
 #endif
 			{NULL, 0, NULL, '\0'}
@@ -352,7 +352,7 @@ int main (int argc, char **argv)
 
 		while ((c =
 			getopt_long (argc, argv,
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			             "c:hs:",
 #else
 			             "c:h",
@@ -367,7 +367,7 @@ int main (int argc, char **argv)
 			case 'h':
 				usage ();
 				break;
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 			case 's':
 				sflg = 1;
 				if (!getlong(optarg, &sha_rounds)) {
@@ -399,7 +399,7 @@ int main (int argc, char **argv)
 		if (   0 != strcmp (crypt_method, "DES")
 		    && 0 != strcmp (crypt_method, "MD5")
 		    && 0 != strcmp (crypt_method, "NONE")
-#ifdef ENCRYPTMETHOD_SELECT
+#ifdef USE_SHA_CRYPT
 		    && 0 != strcmp (crypt_method, "SHA256")
 		    && 0 != strcmp (crypt_method, "SHA512")
 #endif
