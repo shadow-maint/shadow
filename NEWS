@@ -55,6 +55,8 @@ shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
   passwords.
 - chpaswd, chgpasswd, newusers: New options -c/--crypt-method and
   -s/--sha-rounds to supersede the system default encryption algorithm.
+- chpaswd, chgpasswd, newusers: DES is no more the default algorithm. They
+  will respect the system default configured in /etc/login.defs
 
 *** documentation:
 - Generate the translated manpages from PO at build time.

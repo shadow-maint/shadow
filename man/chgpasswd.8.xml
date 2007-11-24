@@ -32,8 +32,8 @@
       remap='I'>password</emphasis>
     </para>
     <para>
-      By default the supplied password must be in clear-text. Default
-      encryption algorithm is DES.
+      By default the supplied password must be in clear-text, and is
+      encrypted by <command>chgpasswd</command>.
     </para>
     <para>
       The default encryption algorithm can be defined for the system with

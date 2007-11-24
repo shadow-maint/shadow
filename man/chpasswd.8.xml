@@ -32,9 +32,9 @@
       remap='I'>password</emphasis>
     </para>
     <para>
-      By default the supplied password must be in clear-text. Default
-      encryption algorithm is DES. Also the password age will be updated, if
-      present.
+      By default the supplied password must be in clear-text, and is
+      encrypted by <command>chpasswd</command>.
+      Also the password age will be updated, if present.
     </para>
     <para>
       The default encryption algorithm can be defined for the system with

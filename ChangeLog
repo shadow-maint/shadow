@@ -2,7 +2,13 @@
 
 	* libmisc/salt.c: Make sure method is not NULL, defaulting to DES.
 	Thanks to Dan Kopecek <dkopecek@redhat.com>.
-
+	* src/chpasswd.c, src/chgpasswd.c: Do not use DES by default, but
+	the system default define in /Etc/login.defs. Thanks to Dan
+	Kopecek <dkopecek@redhat.com>.
+	* NEWS, man/chpasswd.8.xml, man/chgpasswd.8.xml: Do not mention
+	DES as the default algorithm.
+	* src/chpasswd.c, src/chgpasswd.c: Tag the ENCRYPTMETHOD_SELECT
+	dependent code accordingly.
 
 2007-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 

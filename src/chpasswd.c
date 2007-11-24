@@ -73,8 +73,7 @@ static void usage (void)
 			   "  -c, --crypt-method	the crypt method (one of %s)\n"
 			   "  -e, --encrypted	supplied passwords are encrypted\n"
 			   "  -h, --help		display this help message and exit\n"
-			   "  -m, --md5		use MD5 encryption instead of DES when the supplied\n"
-			   "			passwords are not encrypted\n"
+			   "  -m, --md5		encrypt the clear text password using the MD5 algorithm\n"
 			   "%s"
 			   "\n"),
 			 Prog,
@@ -124,12 +123,20 @@ int main (int argc, char **argv)
 			{"encrypted", no_argument, NULL, 'e'},
 			{"help", no_argument, NULL, 'h'},
 			{"md5", no_argument, NULL, 'm'},
+#ifdef ENCRYPTMETHOD_SELECT
 			{"sha-rounds", required_argument, NULL, 's'},
+#endif
 			{NULL, 0, NULL, '\0'}
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "c:ehms:", long_options,
+			getopt_long (argc, argv,
+#ifdef ENCRYPTMETHOD_SELECT
+			             "c:ehms:",
+#else
+			             "c:ehm",
+#endif
+			             long_options,
 				     &option_index)) != -1) {
 			switch (c) {
 			case 'c':
@@ -145,6 +152,7 @@ int main (int argc, char **argv)
 			case 'm':
 				md5flg = 1;
 				break;
+#ifdef ENCRYPTMETHOD_SELECT
 			case 's':
 				sflg = 1;
 				if (!getlong(optarg, &sha_rounds)) {
@@ -154,6 +162,7 @@ int main (int argc, char **argv)
 					usage ();
 				}
 				break;
+#endif
 			case 0:
 				/* long option */
 				break;
@@ -310,7 +319,7 @@ int main (int argc, char **argv)
 				if (sflg)
 					arg = &sha_rounds;
 			} else
-				crypt_method = "DES";
+				crypt_method = NULL;
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt(crypt_method, arg));
 		}
