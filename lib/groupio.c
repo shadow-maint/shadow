@@ -6,6 +6,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
+#include "getdef.h"
 #include "groupio.h"
 extern int putgrent (const struct group *, FILE *);
 extern struct group *sgetgrent (const char *);

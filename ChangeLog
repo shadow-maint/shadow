@@ -1,5 +1,9 @@
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Add missing #include "getdef.h"
+
+2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Provide the crypt method to all the
 	crypt_make_salt invocations.
 	* src/newusers.c: Tag the ENCRYPTMETHOD_SELECT dependent code
