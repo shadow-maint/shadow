@@ -86,7 +86,7 @@
     </para>
     <para>
       PAM is not used to update the passwords.
-      Thus, only <filename>/etc/passwd</filename> and
+      Only <filename>/etc/passwd</filename> and
       <filename>/etc/shadow</filename> are updated, and the various checks
       or options provided by PAM modules are not used.
     </para>
