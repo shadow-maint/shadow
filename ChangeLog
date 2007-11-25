@@ -1,5 +1,11 @@
 2007-11-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/LINGUAS: Added missing LINGUAS.
+	* man/po/de.po, man/po/fr.po, man/po/it.po, man/po/pl.po,
+	man/po/ru.po, man/po/sv.po: Updated.
+
+2007-11-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in, man/po/Makefile.in.in, man/po/Makevars,
 	man/po/POTFILES.in, man/Makefile.am: Generate the PO files for the
 	manpages in the man/po directory (instead of man/<lang>). Use a
