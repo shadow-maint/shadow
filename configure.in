@@ -350,6 +350,7 @@ AC_CONFIG_FILES([
 	po/Makefile.in
 	doc/Makefile
 	man/Makefile
+	man/po/Makefile.in
 	man/cs/Makefile
 	man/de/Makefile
 	man/es/Makefile

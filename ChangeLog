@@ -1,3 +1,19 @@
+2007-11-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in, man/po/Makefile.in.in, man/po/Makevars,
+	man/po/POTFILES.in, man/Makefile.am: Generate the PO files for the
+	manpages in the man/po directory (instead of man/<lang>). Use a
+	Makefile.in.in based on gettext's one. This ensure that the PO are
+	generated before being used in the <lang> directories.
+	* man/generate_mans.mak, man/generate_translations.mak,
+	man/Makefile.am: New makefile for the generation of manpages from
+	XML (generate_mans.mak). This avoid duplicate chunks in
+	generate_translations.mak and Makefile.am
+	* man/de/de.po, man/fr/fr.po, man/it/it.po, man/pl/pl.po,
+	man/ru/ru.po, man/sv/sv.po: Moved to...
+	* man/po/de.po, man/po/fr.po, man/po/it.po, man/po/pl.po,
+	man/po/ru.po, man/po/sv.po: ... here.
+
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/userdel.c, src/lastlog.c, src/newusers.c, src/chpasswd.c,
