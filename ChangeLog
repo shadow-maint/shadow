@@ -6,11 +6,14 @@
 	src/chage.c, src/faillog.c, src/chsh.c: Do not use tabulations in
 	Usage strings.
 	* po/ca.po, po/cs.po, po/da.po, po/de.po, po/el.po, po/es.po,
-	po/eu.po, po/fi.po, po/fr.po:
+	po/eu.po, po/fi.po, po/fr.po, po/gl.po, po/hu.po, po/id.po,
+	po/it.po, po/ja.po, po/nb.po, po/pl.po:
 	Unfuzzy previous changes.
-	* po/bs.po: No Usage string translated. Just updated PO.
-	* po/dz.po: It would be too error prone for me to unfuzzy these
-	ones. Updated PO.
+	* po/bs.po, po/he.po, po/nn.po:
+	No Usage string translated. Just updated PO.
+	* po/dz.po, po/km.po, po/ko.po, po/ne.po, po/nl.po:
+	It would be too error prone for me to unfuzzy these ones. Updated
+	PO. (km and ne should be reviewed: options are translated).
 
 2007-11-24  Nicolas François  <nicolas.francois@centraliens.net>
 
