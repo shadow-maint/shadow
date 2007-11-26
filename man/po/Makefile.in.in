@@ -90,9 +90,9 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 $(DOMAIN).pot-update: $(POTFILES) $(srcdir)/POTFILES.in remove-potcdate.sed
 	@tmpdir=`pwd`; \
 	echo -n "cd $(top_srcdir)/man && "; \
-	echo "xml2po -o $(tmpdir)/$(DOMAIN).po $(notdir $(POTFILES))"; \
+	echo "xml2po --expand-all-entities -o $(tmpdir)/$(DOMAIN).po $(notdir $(POTFILES))"; \
 	cd $(top_srcdir)/man; \
-	xml2po -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES)); \
+	xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES)); \
 	cd $$tmpdir
 	test ! -f $(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \

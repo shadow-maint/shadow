@@ -1,5 +1,11 @@
 2007-11-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/generate_translations.mak, man/po/Makefile.in.in: Add
+	--expand-all-entities to the call to xml2po to avoid translating
+	the external entities separately.
+
+2007-11-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/, man/login.defs.d/CHFN_RESTRICT.xml,
 	man/login.defs.d/MAIL_DIR.xml, man/login.defs.d/PASS_MAX_DAYS.xml,
 	man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml,
