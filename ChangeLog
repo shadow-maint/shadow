@@ -1,3 +1,7 @@
+2007-11-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/stats: Do not generate gmo files.
+
 2007-11-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/LINGUAS: Added missing LINGUAS.
