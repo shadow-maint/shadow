@@ -3,6 +3,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY CHFN_AUTH             SYSTEM "login.defs.d/CHFN_AUTH.xml">
 <!ENTITY CHFN_RESTRICT         SYSTEM "login.defs.d/CHFN_RESTRICT.xml">
+<!ENTITY CHSH_AUTH             SYSTEM "login.defs.d/CHSH_AUTH.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
@@ -67,6 +68,7 @@
     <variablelist remap='IP'>
       &CHFN_AUTH;
       &CHFN_RESTRICT;
+      &CHSH_AUTH;
       &ENCRYPT_METHOD;
       &GID_MAX; <!--document also GID_MIN-->
       &LOGIN_STRING;
@@ -91,10 +93,10 @@
     </variablelist>
   </refsect1>
 
-  <refsect1 id='cross_reference'>
-    <title>CROSS REFERENCE</title>
+  <refsect1 id='cross_references'>
+    <title>CROSS REFERENCES</title>
     <para>
-      The following cross reference shows which programs in the shadow
+      The following cross references show which programs in the shadow
       password suite use which parameters.
     </para>
     <!-- .na -->
@@ -104,7 +106,8 @@
 	<term>chfn</term>
 	<listitem>
 	  <para>
-	    CHFN_AUTH CHFN_RESTRICT
+	    <phrase condition="no_pam">CHFN_AUTH</phrase>
+	    CHFN_RESTRICT
 	    <phrase condition="no_pam">LOGIN_STRING</phrase>
 	  </para>
 	</listitem>
@@ -127,21 +130,15 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term>chsh</term>
 	<listitem>
 	  <para>
-	    CHFN_AUTH
-	    <phrase condition="no_pam">LOGIN_STRING</phrase>
+	    CHSH_AUTH LOGIN_STRING
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="no_pam">
-	<term>expiry</term>
-	<listitem>
-	  <para>CONSOLE_GROUPS</para>
-	</listitem>
-      </varlistentry>
+      <!-- expiry: no variables (CONSOLE_GROUPS linked, but not used) -->
       <!-- faillog: no variables -->
       <varlistentry>
 	<term>gpasswd</term>

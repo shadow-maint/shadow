@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
+<!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+]>
+
 <refentry id='gpasswd.1'>
   <!-- $Id$ -->
   <refmeta>
@@ -172,6 +180,21 @@
       Thus you cannot change any NIS or LDAP group. This must be performed
       on the corresponding server.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &ENCRYPT_METHOD;
+      &MAX_MEMBERS_PER_GROUP;
+      &MD5_CRYPT_ENAB;
+      &SHA_CRYPT_MIN_ROUNDS; <!--This also document SHA_CRYPT_MAX_ROUNDS-->
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

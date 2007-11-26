@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!--ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml"-->
+<!-- A call to CONSOLE_GROUPS is linked, but not used -->
+]>
+
 <refentry id='expiry.1'>
   <!-- $Id$ -->
   <refmeta>

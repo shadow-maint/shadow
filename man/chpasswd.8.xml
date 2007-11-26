@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
+<!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+]>
+
 <refentry id='chpasswd.8'>
   <!-- $Id$ -->
   <refmeta>
@@ -135,112 +142,10 @@
       <filename>/etc/login.defs</filename> change the behavior of this
       tool:
     </para>
-    <!--********************************************************************
-      **                                                                  **
-      **             Definitions copied from login.def.5.xml              **
-      **                                                                  **
-      ********************************************************************-->
     <variablelist>
-      <varlistentry>
-	<term><option>MD5_CRYPT_ENAB</option> (boolean)</term>
-	<listitem>
-	  <para>
-	    Indicate if passwords must be encrypted using the MD5-based
-	    algorithm. If set to <replaceable>yes</replaceable>, new
-	    passwords will be encrypted
-	    using the MD5-based algorithm compatible with the one used by
-	    recent releases of FreeBSD. It supports passwords of
-	    unlimited length and longer salt strings. Set to
-	    <replaceable>no</replaceable> if you
-	    need to copy encrypted passwords to other systems which don't
-	    understand the new algorithm. Default is
-	    <replaceable>no</replaceable>.
-	  </para>
-	  <para>
-	    This variable is superceded by the
-	    <option>ENCRYPT_METHOD</option> variable or by any command
-	    line option.
-	  </para>
-	  <para>
-	   This variable is deprecated. You should use
-	   <option>ENCRYPT_METHOD</option>.
-	  </para>
-	  <para>
-	    Note: if you use PAM, it is recommended to set this variable
-	    consistently with the PAM modules configuration.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>ENCRYPT_METHOD</option> (string)</term>
-	<listitem>
-	  <para>
-	    This defines the system default encryption algorithm for
-	    encrypting passwords (if no algorithm are specified on the
-	    command line).
-	  </para>
-	  <para>
-	    It can take one of these values:
-	    <itemizedlist>
-	      <listitem>
-		<para><replaceable>DES</replaceable> (default)</para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>MD5</replaceable></para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>SHA256</replaceable></para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>SHA512</replaceable></para>
-	      </listitem>
-	    </itemizedlist>
-	  </para>
-	  <para>
-	    Note: this parameter overrides the
-	    <option>MD5_CRYPT_ENAB</option> variable.
-	  </para>
-	  <para>
-	    Note: if you use PAM, it is recommended to set this variable
-	    consistently with the PAM modules configuration.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>SHA_CRYPT_MIN_ROUNDS</option> (number)</term>
-	<term><option>SHA_CRYPT_MAX_ROUNDS</option> (number)</term>
-	<listitem>
-	  <para>
-	    When <option>ENCRYPT_METHOD</option> is set to
-	    <replaceable>SHA256</replaceable> or
-	    <replaceable>SHA512</replaceable>, this defines the number of
-	    SHA rounds used by the encryption algorithm by default (when
-	    the number of rounds is not specified on the command line).
-	  </para>
-	  <para>
-	    With a lot of rounds, it is more difficult to brute forcing
-	    the password. But note also that more CPU resources will be
-	    needed to authenticate users.
-	  </para>
-	  <para>
-	    If not specified, the libc will choose the default number of
-	    rounds (5000).
-	  </para>
-	  <para>
-	    The values must be inside the 1000-999999999 range.
-	  </para>
-	  <para>
-	    If only one of the <option>SHA_CRYPT_MIN_ROUNDS</option> or
-	    <option>SHA_CRYPT_MAX_ROUNDS</option> values is set, then this
-	    value will be used.
-	  </para>
-	  <para>
-	    If <option>SHA_CRYPT_MIN_ROUNDS</option> &gt;
-	    <option>SHA_CRYPT_MAX_ROUNDS</option>, the highest value will
-	    be used.
-	  </para>
-	</listitem>
-      </varlistentry>
+      &ENCRYPT_METHOD;
+      &MD5_CRYPT_ENAB;
+      &SHA_CRYPT_MIN_ROUNDS; <!--documents also SHA_CRYPT_MAX_ROUNDS-->
     </variablelist>
   </refsect1>
 

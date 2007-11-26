@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY CHSH_AUTH             SYSTEM "login.defs.d/CHSH_AUTH.xml">
+<!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+]>
+
 <refentry id='chsh.1'>
   <!-- $Id$ -->
   <refmeta>
@@ -79,6 +85,19 @@
       changing to a restricted shell would prevent the user from ever
       changing her login shell back to its original value.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration' condition="no_pam">
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &CHSH_AUTH;
+      &LOGIN_STRING;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

@@ -1,8 +1,8 @@
 <varlistentry condition="no_pam">
-  <term><option>CHFN_AUTH</option> (boolean)</term>
+  <term><option>CHSH_AUTH</option> (boolean)</term>
   <listitem>
     <para>
-      If <replaceable>yes</replaceable>, the <command>chfn</command>
+      If <replaceable>yes</replaceable>, the <command>chsh</command>
       program will require authentication before making any changes,
       unless run by the superuser.
     </para>

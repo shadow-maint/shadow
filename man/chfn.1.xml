@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY CHFN_AUTH             SYSTEM "login.defs.d/CHFN_AUTH.xml">
+<!ENTITY CHFN_RESTRICT         SYSTEM "login.defs.d/CHFN_RESTRICT.xml">
+<!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+]>
+
 <refentry id='chfn.1'>
   <!-- $Id$ -->
   <refmeta>
@@ -54,6 +61,20 @@
       ]</emphasis> marks. Without options, <command>chfn</command>
       prompts for the current user account.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &CHFN_AUTH;
+      &CHFN_RESTRICT;
+      &LOGIN_STRING;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

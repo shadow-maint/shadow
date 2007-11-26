@@ -1,3 +1,26 @@
+2007-11-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/chfn.1.xml: Uses CHFN_AUTH, CHFN_RESTRICT, LOGIN_STRING.
+	* man/chgpasswd.8.xml: Uses ENCRYPT_METHOD, MAX_MEMBERS_PER_GROUP,
+	MD5_CRYPT_ENAB, SHA_CRYPT_MIN_ROUNDS (SHA_CRYPT_MAX_ROUNDS).
+	* man/chpasswd.8.xml: Switch to using entities for ENCRYPT_METHOD,
+	MD5_CRYPT_ENAB, SHA_CRYPT_MIN_ROUNDS (SHA_CRYPT_MAX_ROUNDS).
+	* man/chsh.1.xml: Uses CHSH_AUTH, LOGIN_STRING.
+	* man/expiry.1.xml: Does not use any login.defs parameter.
+	* man/gpasswd.1.xml: Uses ENCRYPT_METHOD, MAX_MEMBERS_PER_GROUP,
+	MD5_CRYPT_ENAB, SHA_CRYPT_MIN_ROUNDS.
+	* man/login.defs.5.xml: Added CHSH_AUTH.
+	* man/login.defs.5.xml: Cross reference -> cross references.
+	* man/login.defs.5.xml: chfn only uses CHFN_AUTH when no_pam.
+	* man/login.defs.5.xml: chsh uses CHSH_AUTH, not CHFN_AUTH.
+	* man/login.defs.d/CHSH_AUTH.xml: Added.
+	* man/login.defs.5.xml: chsh uses parameters only when no_pam.
+	* man/login.defs.5.xml: expiry does not use CONSOLE_GROUPS, even
+	if linked in the binary.
+	* man/newusers.8.xml: Uses ENCRYPT_METHOD, MAX_MEMBERS_PER_GROUP,
+	MD5_CRYPT_ENAB, PASS_MAX_DAYS, PASS_MIN_DAYS, PASS_WARN_AGE,
+	SHA_CRYPT_MIN_ROUNDS, UMASK.
+
 2007-11-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/generate_translations.mak, man/po/Makefile.in.in: Add
