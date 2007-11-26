@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>MAIL_DIR</option> (string)</term>
+  <listitem>
+    <para>
+      The mail spool directory. This is needed to manipulate the mailbox
+      when its corresponding user account is modified or deleted. If not
+      specified, a compile-time default is used.
+    </para>
+  </listitem>
+</varlistentry>

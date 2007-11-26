@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>UID_MAX</option> (number)</term>
+  <term><option>UID_MIN</option> (number)</term>
+  <listitem>
+    <para>
+      Range of user IDs to choose from for the <command>useradd</command>
+      program.
+    </para>
+  </listitem>
+</varlistentry>

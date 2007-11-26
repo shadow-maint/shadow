@@ -1,0 +1,9 @@
+<varlistentry>
+  <term><option>UMASK</option> (number)</term>
+  <listitem>
+    <para>
+      The permission mask is initialized to this value. If not specified,
+      the permission mask will be initialized to 022.
+    </para>
+  </listitem>
+</varlistentry>

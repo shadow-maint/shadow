@@ -1,0 +1,11 @@
+<varlistentry>
+  <term><option>PASS_WARN_AGE</option> (number)</term>
+  <listitem>
+    <para>
+      The number of days warning given before a password expires. A zero
+      means warning is given only upon the day of expiration, a negative
+      value means no warning is given. If not specified, no warning will
+      be provided.
+    </para>
+  </listitem>
+</varlistentry>

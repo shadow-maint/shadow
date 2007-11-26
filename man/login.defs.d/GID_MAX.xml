@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>GID_MAX</option> (number)</term>
+  <term><option>GID_MIN</option> (number)</term>
+  <listitem>
+    <para>
+      Range of group IDs to choose from for the <command>useradd</command>
+      and <command>groupadd</command> programs.
+    </para>
+  </listitem>
+</varlistentry>

@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>PASS_MIN_DAYS</option> (number)</term>
+  <listitem>
+    <para>
+      The minimum number of days allowed between password changes.  Any
+      password changes attempted sooner than this will be rejected. If not
+      specified, -1 will be assumed (which disables the restriction).
+    </para>
+  </listitem>
+</varlistentry>

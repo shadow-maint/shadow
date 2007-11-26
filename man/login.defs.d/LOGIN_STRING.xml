@@ -1,0 +1,10 @@
+<varlistentry confition="no_pam">
+  <term><option>LOGIN_STRING</option> (string)</term>
+  <listitem>
+    <para>
+      The string used for prompting a password. The default is to use
+      "Password: ", or a translation of that string. If you set this
+      variable, the prompt will no be translated.
+    </para>
+  </listitem>
+</varlistentry>

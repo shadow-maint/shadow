@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>CHFN_AUTH</option> (boolean)</term>
+  <listitem>
+    <para>
+      If <replaceable>yes</replaceable>, the <command>chfn</command> and
+      <command>chsh</command> programs will require authentication before
+      making any changes, unless run by the superuser.
+    </para>
+  </listitem>
+</varlistentry>

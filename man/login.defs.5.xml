@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN" 
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY CHFN_AUTH             SYSTEM "login.defs.d/CHFN_AUTH.xml">
+<!ENTITY CHFN_RESTRICT         SYSTEM "login.defs.d/CHFN_RESTRICT.xml">
+<!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
+<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
+<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
+<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
+<!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY USERDEL_CMD           SYSTEM "login.defs.d/USERDEL_CMD.xml">
+]>
+
 <refentry id='login.defs.5'>
   <!--  $Id$ -->
   <refmeta>
@@ -46,190 +65,18 @@
     <para>The following configuration items are provided:</para>
 
     <variablelist remap='IP'>
-      <varlistentry>
-	<term><option>CHFN_AUTH</option> (boolean)</term>
-	<listitem>
-	  <para>
-	    If <replaceable>yes</replaceable>, the
-	    <command>chfn</command> and <command>chsh</command> programs
-	    will require authentication before making any changes, unless
-	    run by the superuser.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>CHFN_RESTRICT</option> (string)</term>
-	<listitem>
-	  <para>
-	    This parameter specifies which values in the <emphasis
-	    remap='I'>gecos</emphasis> field of the
-	    <filename>/etc/passwd</filename> file may be changed by regular
-	    users using the <command>chfn</command> program. It can be any
-	    combination of letters <replaceable>f</replaceable>,
-	    <replaceable>r</replaceable>, <replaceable>w</replaceable>,
-	    <replaceable>h</replaceable>, for Full name, Room number,
-	    Work phone, and Home phone, respectively. For backward
-	    compatibility, <replaceable>yes</replaceable> is equivalent to
-	    <replaceable>rwh</replaceable> and
-	    <replaceable>no</replaceable> is
-	    equivalent to <replaceable>frwh</replaceable>. If not specified,
-	    only the superuser can
-	    make any changes. The most restrictive setting is better
-	    achieved by not installing <command>chfn</command> SUID.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>ENCRYPT_METHOD</option> (string)</term>
-	<listitem>
-	  <para>
-	    This defines the system default encryption algorithm for
-	    encrypting passwords (if no algorithm are specified on the
-	    command line).
-	  </para>
-	  <para>
-	    It can take one of these values:
-	    <itemizedlist>
-	      <listitem>
-		<para><replaceable>DES</replaceable> (default)</para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>MD5</replaceable></para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>SHA256</replaceable></para>
-	      </listitem>
-	      <listitem>
-		<para><replaceable>SHA512</replaceable></para>
-	      </listitem>
-	    </itemizedlist>
-	  </para>
-	  <para>
-	    Note: this parameter overrides the
-	    <option>MD5_CRYPT_ENAB</option> variable.
-	  </para>
-	  <para>
-	    Note: if you use PAM, it is recommended to set this variable
-	    consistently with the PAM modules configuration.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>GID_MAX</option> (number)</term>
-	<term><option>GID_MIN</option> (number)</term>
-	<listitem>
-	  <para>
-	    Range of group IDs to choose from for the
-	    <command>useradd</command> and <command>groupadd</command>
-	    programs.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>MAIL_DIR</option> (string)</term>
-	<listitem>
-	  <para>
-	    The mail spool directory. This is needed to manipulate the
-	    mailbox when its corresponding user account is modified or
-	    deleted. If not specified, a compile-time default is used.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>MAX_MEMBERS_PER_GROUP</option> (number)</term>
-	<listitem>
-	  <para>
-	    Maximum members per group entry. When the maximum is reached,
-	    a new group entry (line) is started in
-	    <filename>/etc/group</filename> (with the same name, same
-	    password, and same GID).
-	  </para>
-	  <para>
-	    The default value is 0, meaning that there are no limits in
-	    the number of members in a group.
-	  </para>
-	  <!-- Note: on HP, split groups have the same ID, but different
-	             names. -->
-	  <para>
-	    This feature (split group) permits to limit the length of
-	    lines in the group file. This is useful to make sure that
-	    lines for NIS groups are not larger than 1024 characters.
-	  </para>
-	  <para>
-	    If you need to enforce such limit, you can use 25.
-	  </para>
-	  <para>
-	    Note: split groups may not be supported by all tools (even in
-	    the Shadow toolsuite. You should not use this variable unless
-	    you really need it.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>MD5_CRYPT_ENAB</option> (boolean)</term>
-	<listitem>
-	  <para>
-	    Indicate if passwords must be encrypted using the MD5-based
-	    algorithm. If set to <replaceable>yes</replaceable>, new
-	    passwords will be encrypted
-	    using the MD5-based algorithm compatible with the one used by
-	    recent releases of FreeBSD. It supports passwords of
-	    unlimited length and longer salt strings. Set to
-	    <replaceable>no</replaceable> if you
-	    need to copy encrypted passwords to other systems which don't
-	    understand the new algorithm. Default is
-	    <replaceable>no</replaceable>.
-	  </para>
-	  <para>
-	    This variable is superceded by the
-	    <option>ENCRYPT_METHOD</option> variable or by any command
-	    line option used to configure the encryption algorithm.
-	  </para>
-	  <para>
-	   This variable is deprecated. You should use
-	   <option>ENCRYPT_METHOD</option>.
-	  </para>
-	  <para>
-	    Note: if you use PAM, it is recommended to set this variable
-	    consistently with the PAM modules configuration.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>PASS_MAX_DAYS</option> (number)</term>
-	<listitem>
-	  <para>
-	    The maximum number of days a password may be used. If the
-	    password is older than this, a password change will be forced. 
-	    If not specified, -1 will be assumed (which disables the
-	    restriction).
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>PASS_MIN_DAYS</option> (number)</term>
-	<listitem>
-	  <para>
-	    The minimum number of days allowed between password changes. 
-	    Any password changes attempted sooner than this will be
-	    rejected. If not specified, -1 will be assumed (which disables
-	    the restriction).
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>PASS_WARN_AGE</option> (number)</term>
-	<listitem>
-	  <para>
-	    The number of days warning given before a password expires. A
-	    zero means warning is given only upon the day of expiration, a
-	    negative value means no warning is given. If not specified, no
-	    warning will be provided.
-	  </para>
-	</listitem>
-      </varlistentry>
+      &CHFN_AUTH;
+      &CHFN_RESTRICT;
+      &ENCRYPT_METHOD;
+      &GID_MAX; <!--document also GID_MIN-->
+      &LOGIN_STRING;
+      &MAIL_DIR;
+      &MAX_MEMBERS_PER_GROUP;
+      &MD5_CRYPT_ENAB;
+      &PASS_MAX_DAYS;
+      &PASS_MIN_DAYS;
+      &PASS_WARN_AGE;
     </variablelist>
-
     <para> 
       <option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> and
       <option>PASS_WARN_AGE</option> are only used at the
@@ -237,70 +84,10 @@
       existing accounts.
     </para>
     <variablelist remap='IP'>
-      <varlistentry>
-	<term><option>SHA_CRYPT_MIN_ROUNDS</option> (number)</term>
-	<term><option>SHA_CRYPT_MAX_ROUNDS</option> (number)</term>
-	<listitem>
-	  <para>
-	    When <option>ENCRYPT_METHOD</option> is set to
-	    <replaceable>SHA256</replaceable> or
-	    <replaceable>SHA512</replaceable>, this defines the number of
-	    SHA rounds used by the encryption algorithm by default (when
-	    the number of rounds is not specified on the command line).
-	  </para>
-	  <para>
-	    With a lot of rounds, it is more difficult to brute forcing
-	    the password. But note also that more CPU resources will be
-	    needed to authenticate users.
-	  </para>
-	  <para>
-	    If not specified, the libc will choose the default number of
-	    rounds (5000).
-	  </para>
-	  <para>
-	    The values must be inside the 1000-999999999 range.
-	  </para>
-	  <para>
-	    If only one of the <option>SHA_CRYPT_MIN_ROUNDS</option> or
-	    <option>SHA_CRYPT_MAX_ROUNDS</option> values is set, then this
-	    value will be used.
-	  </para>
-	  <para>
-	    If <option>SHA_CRYPT_MIN_ROUNDS</option> &gt;
-	    <option>SHA_CRYPT_MAX_ROUNDS</option>, the highest value will
-	    be used.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>UID_MAX</option> (number)</term>
-	<term><option>UID_MIN</option> (number)</term>
-	<listitem>
-	  <para>
-	    Range of user IDs to choose from for the
-	    <command>useradd</command> program.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>UMASK</option> (number)</term>
-	<listitem>
-	  <para>
-	    The permission mask is initialized to this value. If not
-	    specified, the permission mask will be initialized to 022.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term><option>USERDEL_CMD</option> (string)</term>
-	<listitem>
-	  <para>
-	    If defined, this command is run when removing a user. It should
-	    remove any at/cron/print jobs etc. owned by the user to be
-	    removed (passed as the first argument).
-	  </para>
-	</listitem>
-      </varlistentry>
+      &SHA_CRYPT_MIN_ROUNDS; <!--document also SHA_CRYPT_MAX_ROUNDS-->
+      &UID_MAX; <!--document also UID_MIN-->
+      &UMASK;
+      &USERDEL_CMD;
     </variablelist>
   </refsect1>
 
@@ -312,18 +99,22 @@
     </para>
     <!-- .na -->
     <variablelist remap='IP'>
+      <!-- chage: no variables -->
       <varlistentry>
 	<term>chfn</term>
 	<listitem>
-	  <para>CHFN_AUTH CHFN_RESTRICT</para>
+	  <para>
+	    CHFN_AUTH CHFN_RESTRICT
+	    <phrase condition="no_pam">LOGIN_STRING</phrase>
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>chgpasswd</term>
 	<listitem>
 	  <para>
-	    MD5_CRYPT_ENAB ENCRYPT_METHOD SHA_CRYPT_MIN_ROUNDS
-	    SHA_CRYPT_MAX_ROUNDS MAX_MEMBERS_PER_GROUP
+	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
 	  </para>
 	</listitem>
       </varlistentry>
@@ -331,28 +122,125 @@
 	<term>chpasswd</term>
 	<listitem>
 	  <para>
-	    MD5_CRYPT_ENAB ENCRYPT_METHOD SHA_CRYPT_MIN_ROUNDS
-	    SHA_CRYPT_MAX_ROUNDS
+	    ENCRYPT_METHOD MD5_CRYPT_ENAB SHA_CRYPT_MAX_ROUNDS
+	    SHA_CRYPT_MIN_ROUNDS
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>chsh</term>
 	<listitem>
-	  <para>CHFN_AUTH</para>
+	  <para>
+	    CHFN_AUTH
+	    <phrase condition="no_pam">LOGIN_STRING</phrase>
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="no_pam">
+	<term>expiry</term>
+	<listitem>
+	  <para>CONSOLE_GROUPS</para>
+	</listitem>
+      </varlistentry>
+      <!-- faillog: no variables -->
+      <varlistentry>
+	<term>gpasswd</term>
+	<listitem>
+	  <para>
+	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>groupadd</term>
 	<listitem>
-	  <para>GID_MAX GID_MIN</para>
+	  <para>GID_MAX GID_MIN MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>groupdel</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>groupmod</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <!-- groups: no variables -->
+      <varlistentry>
+	<term>grpck</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>grpconv</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>grpunconv</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <!-- id: no variables -->
+      <!-- lastlog: no variables -->
+      <varlistentry>
+	<term>login</term>
+	<listitem>
+	  <para>
+	    CONSOLE CONSOLE_GROUPS DEFAULT_HOME ENV_HZ ENV_PATH ENV_SUPATH
+	    ENV_TZ ENVIRON_FILE ERASECHAR FAIL_DELAY FAILLOG_ENAB
+	    FAKE_SHELL FTMP_FILE HUSHLOGIN_FILE ISSUE_FILE KILLCHAR
+	    LASTLOG_ENAB LOGIN_RETRIES LOGIN_STRING LOGIN_TIMEOUT
+	    LOG_OK_LOGINS LOG_UNKFAIL_ENAB MAIL_CHECK_ENAB MAIL_DIR
+	    MAIL_FILE MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB
+	    QUOTAS_ENAB TTYGROUP TTYPERM TTYTYPE_FILE ULIMIT UMASK
+	    USERGROUPS_ENAB
+	  </para>
+	</listitem>
+      </varlistentry>
+      <!-- logoutd: no variables -->
+      <varlistentry>
+	<term>newgrp</term>
+	<listitem>
+	  <para>
+	    SYSLOG_SG_ENAB
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>newusers</term>
 	<listitem>
 	  <para>
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE UMASK
+	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
+	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SHA_CRYPT_MIN_ROUNDS
+	    UMASK
+	  </para>
+	</listitem>
+      </varlistentry>
+      <!-- nologin: no variables -->
+      <varlistentry>
+	<term>passwd</term>
+	<listitem>
+	  <para>
+	    ENCRYPT_METHOD MD5_CRYPT_ENAB OBSCURE_CHECKS_ENAB
+	    PASS_ALWAYS_WARN PASS_CHANGE_TRIES PASS_MAX_LEN PASS_MIN_LEN
+	    SHA_CRYPT_MAX_ROUNDS SHA_CRYPT_MIN_ROUNDS
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>pwck</term>
+	<listitem>
+	  <para>
+	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	  </para>
 	</listitem>
       </varlistentry>
@@ -362,6 +250,7 @@
 	  <para>PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE</para>
 	</listitem>
       </varlistentry>
+      <!-- pwunconv: no variables -->
       <varlistentry>
 	<term>useradd</term>
 	<listitem>

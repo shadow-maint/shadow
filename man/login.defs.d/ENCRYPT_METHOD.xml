@@ -1,0 +1,34 @@
+<varlistentry>
+  <term><option>ENCRYPT_METHOD</option> (string)</term>
+  <listitem>
+    <para>
+      This defines the system default encryption algorithm for encrypting
+      passwords (if no algorithm are specified on the command line).
+    </para>
+    <para>
+      It can take one of these values:
+      <itemizedlist>
+        <listitem>
+          <para><replaceable>DES</replaceable> (default)</para>
+        </listitem>
+        <listitem>
+          <para><replaceable>MD5</replaceable></para>
+        </listitem>
+        <listitem>
+          <para><replaceable>SHA256</replaceable></para>
+        </listitem>
+        <listitem>
+          <para><replaceable>SHA512</replaceable></para>
+        </listitem>
+      </itemizedlist>
+    </para>
+    <para>
+      Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option>
+      variable.
+    </para>
+    <para>
+      Note: if you use PAM, it is recommended to set this variable
+      consistently with the PAM modules configuration.
+    </para>
+  </listitem>
+</varlistentry>

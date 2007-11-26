@@ -1,0 +1,28 @@
+<varlistentry>
+  <term><option>MD5_CRYPT_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Indicate if passwords must be encrypted using the MD5-based
+      algorithm. If set to <replaceable>yes</replaceable>, new passwords
+      will be encrypted using the MD5-based algorithm compatible with the
+      one used by recent releases of FreeBSD. It supports passwords of
+      unlimited length and longer salt strings. Set to
+      <replaceable>no</replaceable> if you need to copy encrypted
+      passwords to other systems which don't understand the new algorithm.
+      Default is <replaceable>no</replaceable>.
+    </para>
+    <para>
+      This variable is superceded by the <option>ENCRYPT_METHOD</option>
+      variable or by any command line option used to configure the
+      encryption algorithm.
+    </para>
+    <para>
+      This variable is deprecated. You should use
+      <option>ENCRYPT_METHOD</option>.
+    </para>
+    <para>
+      Note: if you use PAM, it is recommended to set this variable
+      consistently with the PAM modules configuration.
+    </para>
+  </listitem>
+</varlistentry>

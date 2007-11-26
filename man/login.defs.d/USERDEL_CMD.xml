@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>USERDEL_CMD</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, this command is run when removing a user. It should
+      remove any at/cron/print jobs etc. owned by the user to be removed
+      (passed as the first argument).
+    </para>
+  </listitem>
+</varlistentry>
