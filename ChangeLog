@@ -17,6 +17,8 @@
 	man/login.defs.d/MAX_MEMBERS_PER_GROUP.xml, man/login.defs.5.xml:
 	Put each variable description in an external entities. This will permit
 	to reference them in the various utils manpages.
+	* man/login.defs.5.xml: Describe the usage of variables by each
+	tools when compiled without PAM support.
 
 2007-11-26  Nicolas François  <nicolas.francois@centraliens.net>
 
