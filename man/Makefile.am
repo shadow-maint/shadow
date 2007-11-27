@@ -99,9 +99,28 @@ man_XMANS = \
 	usermod.8.xml \
 	vipw.8.xml
 
+login_defs_v = \
+	CHFN_AUTH.xml \
+	CHFN_RESTRICT.xml \
+	CHSH_AUTH.xml \
+	ENCRYPT_METHOD.xml \
+	GID_MAX.xml \
+	LOGIN_STRING.xml \
+	MAIL_DIR.xml \
+	MAX_MEMBERS_PER_GROUP.xml \
+	MD5_CRYPT_ENAB.xml \
+	PASS_MAX_DAYS.xml \
+	PASS_MIN_DAYS.xml \
+	PASS_WARN_AGE.xml \
+	SHA_CRYPT_MIN_ROUNDS.xml \
+	UID_MAX.xml \
+	UMASK.xml \
+	USERDEL_CMD.xml
+
 EXTRA_DIST = \
 	$(man_MANS) \
 	$(man_XMANS) \
+	$(addprefix login.defs.d/,$(login_defs_v)) \
 	$(man_nopam) \
 	id.1 \
 	id.1.xml \

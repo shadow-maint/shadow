@@ -1,5 +1,10 @@
 2007-11-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/Makefile.am: Added the login.defs variables description to
+	the man's EXTRA_DIST.
+
+2007-11-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chfn.1.xml: Uses CHFN_AUTH, CHFN_RESTRICT, LOGIN_STRING.
 	* man/chgpasswd.8.xml: Uses ENCRYPT_METHOD, MAX_MEMBERS_PER_GROUP,
 	MD5_CRYPT_ENAB, SHA_CRYPT_MIN_ROUNDS (SHA_CRYPT_MAX_ROUNDS).
