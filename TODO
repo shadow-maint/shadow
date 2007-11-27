@@ -1,6 +1,10 @@
-check differences between chpasswd and chgpasswd
+Check for all tools which variables are used.
 
-check IS_ISLNK in lib/defines.h
+Check all the expiry semantics
+
+Add options --crypt-method and --sha-rounds to gpasswd
+
+method => algorithm in manpages
 
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
@@ -38,9 +42,18 @@ ALL:
 
 - groupmems: check reason for isgroup
 
-- chgpasswd: uses chpasswd's pam
+- chgpasswd: uses chpasswd's pam config file. Why?
 
-- groupconv: i = 100; no a nice initial value, use login.defs
+- newusers: i = 100; no a nice initial value, use login.defs
+
+- newusers: doc for pw_gid not clear. Differentiate
+            pw_gid specified and exist
+            pw_gid specified but does not exist
+             * name
+             * number
+            pw_gid not specified.
+- newusers: document what happens when no uid is specified.
+- newusers: add option --system?
 
 Documentation:
 
