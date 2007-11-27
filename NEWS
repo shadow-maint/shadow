@@ -1,6 +1,6 @@
 $Id$
 
-shadow-4.0.18.1 -> shadow-4.0.18.2					UNRELEASED
+shadow-4.0.18.2 -> shadow-4.1.0-rc1					UNRELEASED
 
 *** general:
 - Add support for SHA256 and SHA512 encrypt methods (supported by new
