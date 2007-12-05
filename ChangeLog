@@ -1,3 +1,8 @@
+2007-12-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/gshadow.5.xml: Fix the newgrp section in the gshadow.5
+	manpage. Thanks to Andre Majorel <aym-naibed@teaser.fr>.
+
 2007-11-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/Makefile.am: Added the login.defs variables description to

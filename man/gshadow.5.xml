@@ -85,7 +85,7 @@
 	<refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>newgrp</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>
