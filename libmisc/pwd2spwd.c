@@ -35,7 +35,7 @@
 #include "prototypes.h"
 #include "defines.h"
 #include <pwd.h>
-extern time_t time ();
+extern time_t time (time_t *);
 
 /*
  * pwd_to_spwd - create entries for new spwd structure

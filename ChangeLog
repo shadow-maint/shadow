@@ -1,3 +1,7 @@
+2007-12-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/pwd2spwd.c: Fix time() prototype.
+
 2007-12-08  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/CONSOLE_GROUPS.xml,
