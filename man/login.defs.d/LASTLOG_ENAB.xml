@@ -1,0 +1,8 @@
+<varlistentry condition="no_pam">
+  <term><option>LASTLOG_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable logging and display of /var/log/lastlog login time info.
+    </para>
+  </listitem>
+</varlistentry>

@@ -1,0 +1,8 @@
+<varlistentry>
+  <term><option>LOG_OK_LOGINS</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable logging of successful logins.
+    </para>
+  </listitem>
+</varlistentry>

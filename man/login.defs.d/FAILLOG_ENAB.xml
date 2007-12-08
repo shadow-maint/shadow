@@ -1,0 +1,9 @@
+<varlistentry condition="no_pam">
+  <term><option>FAILLOG_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable logging and display of <filename>/var/log/faillog</filename>
+      login failure info.
+    </para>
+  </listitem>
+</varlistentry>

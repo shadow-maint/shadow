@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+]>
 <refentry id='vipw.8'>
   <!--  $Id$  -->
   <refmeta>
@@ -87,6 +91,18 @@
     </variablelist>
   </refsect1>
 
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &MAX_MEMBERS_PER_GROUP;
+    </variablelist>
+  </refsect1>
+
   <refsect1 id='files'>
     <title>FILES</title>
     <variablelist>
@@ -116,6 +132,7 @@
       </varlistentry>
     </variablelist>
   </refsect1>
+
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
     <para>

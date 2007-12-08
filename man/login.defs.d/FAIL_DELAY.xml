@@ -1,0 +1,9 @@
+<varlistentry>
+  <term><option>FAIL_DELAY</option> (number)</term>
+  <listitem>
+    <para>
+      Delay in seconds before being allowed another attempt after a login
+      failure.
+    </para>
+  </listitem>
+</varlistentry>

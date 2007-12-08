@@ -1,0 +1,9 @@
+<varlistentry condition="no_pam">
+  <term><option>PASS_CHANGE_TRIES</option> (number)</term>
+  <listitem>
+    <para>
+      Maximum number of attempts to change password if rejected (too
+      easy).
+    </para>
+  </listitem>
+</varlistentry>

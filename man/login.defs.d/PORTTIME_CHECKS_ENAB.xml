@@ -1,0 +1,8 @@
+<varlistentry condition="no_pam">
+  <term><option>PORTTIME_CHECKS_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable checking of time restrictions specified in /etc/porttime.
+    </para>
+  </listitem>
+</varlistentry>

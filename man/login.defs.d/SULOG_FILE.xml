@@ -1,0 +1,8 @@
+<varlistentry>
+  <term><option>SULOG_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, all su activity is logged to this file.
+    </para>
+  </listitem>
+</varlistentry>

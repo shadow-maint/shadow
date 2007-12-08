@@ -1,0 +1,13 @@
+<varlistentry>
+  <term><option>LOG_UNKFAIL_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable display of unknown usernames when login failures are
+      recorded.
+    </para>
+    <para>
+      Note: logging unknown usernames may be a security issue if an user
+      enter her password instead of her login name.
+    </para>
+  </listitem>
+</varlistentry>

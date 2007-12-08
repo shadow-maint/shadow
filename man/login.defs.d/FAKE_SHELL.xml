@@ -1,0 +1,9 @@
+<varlistentry>
+  <term><option>FAKE_SHELL</option> (string)</term>
+  <listitem>
+    <para>
+      If set, <command>login</command> will execute this shell instead of
+      the users' shell specified in <filename>/etc/passwd</filename>.
+    </para>
+  </listitem>
+</varlistentry>

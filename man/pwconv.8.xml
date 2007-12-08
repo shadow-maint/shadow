@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
+<!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
+<!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+]>
 <refentry id='pwconv.8'>
   <!-- $Id$ -->
   <refmeta>
@@ -103,6 +110,28 @@
       <command>grpck</command> to correct any such errors before converting
       to or from shadow passwords or groups.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variable in
+      <filename>/etc/login.defs</filename> change the behavior of
+      <command>grpconv</command> and <command>grpunconv</command>:
+    </para>
+    <variablelist>
+      &MAX_MEMBERS_PER_GROUP;
+    </variablelist>
+    <para>
+      The following configuration variable in
+      <filename>/etc/login.defs</filename> change the behavior of
+      <command>pwconv</command>:
+    </para>
+    <variablelist>
+      &PASS_MAX_DAYS;
+      &PASS_MIN_DAYS;
+      &PASS_WARN_AGE;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

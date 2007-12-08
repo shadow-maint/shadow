@@ -1,0 +1,13 @@
+<varlistentry condition="no_pam">
+  <term><option>ENV_PATH</option> (string)</term>
+  <listitem>
+    <para>
+      If set, it will be used to define the PATH environment variable when
+      the superuser login. The value can be preceded by
+      <replaceable>PATH=</replaceable>, or a colon separated list of paths
+      (for example <replaceable>/bin:/usr/bin</replaceable>). The default
+      value is <replaceable>PATH=/bin:/usr/bin</replaceable>.
+    </para>
+    <!-- TODO: it can in fact be used to set any other variable-->
+  </listitem>
+</varlistentry>

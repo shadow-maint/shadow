@@ -1,0 +1,13 @@
+<varlistentry condition="no_pam">
+  <term><option>ERASECHAR</option> (number)</term>
+  <listitem>
+    <para>
+      Terminal ERASE character (<replaceable>010</replaceable> =
+      backspace, <replaceable>0177</replaceable> = DEL).
+    </para>
+    <para>
+      The value can be prefixed "0" for an octal value, or "0x" for an
+      hexadecimal value.
+    </para>
+  </listitem>
+</varlistentry>

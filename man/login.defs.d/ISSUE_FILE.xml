@@ -1,0 +1,8 @@
+<varlistentry condition="no_pam">
+  <term><option>ISSUE_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, this file will be displayed before each login prompt.
+    </para>
+  </listitem>
+</varlistentry>

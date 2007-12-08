@@ -4,19 +4,50 @@
 <!ENTITY CHFN_AUTH             SYSTEM "login.defs.d/CHFN_AUTH.xml">
 <!ENTITY CHFN_RESTRICT         SYSTEM "login.defs.d/CHFN_RESTRICT.xml">
 <!ENTITY CHSH_AUTH             SYSTEM "login.defs.d/CHSH_AUTH.xml">
+<!ENTITY CONSOLE               SYSTEM "login.defs.d/CONSOLE.xml">
+<!ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml">
+<!ENTITY DEFAULT_HOME          SYSTEM "login.defs.d/DEFAULT_HOME.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
+<!ENTITY ENV_PATH              SYSTEM "login.defs.d/ENV_PATH.xml">
+<!ENTITY ENV_SUPATH            SYSTEM "login.defs.d/ENV_SUPATH.xml">
+<!ENTITY ENV_TZ                SYSTEM "login.defs.d/ENV_TZ.xml">
+<!ENTITY ENVIRON_FILE          SYSTEM "login.defs.d/ENVIRON_FILE.xml">
+<!ENTITY ERASECHAR             SYSTEM "login.defs.d/ERASECHAR.xml">
+<!ENTITY FAIL_DELAY            SYSTEM "login.defs.d/FAIL_DELAY.xml">
+<!ENTITY FAILLOG_ENAB          SYSTEM "login.defs.d/FAILLOG_ENAB.xml">
+<!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
+<!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
+<!ENTITY HUSHLOGIN_FILE        SYSTEM "login.defs.d/HUSHLOGIN_FILE.xml">
+<!ENTITY ISSUE_FILE            SYSTEM "login.defs.d/ISSUE_FILE.xml">
+<!ENTITY KILLCHAR              SYSTEM "login.defs.d/KILLCHAR.xml">
+<!ENTITY LASTLOG_ENAB          SYSTEM "login.defs.d/LASTLOG_ENAB.xml">
+<!ENTITY LOG_OK_LOGINS         SYSTEM "login.defs.d/LOG_OK_LOGINS.xml">
+<!ENTITY LOG_UNKFAIL_ENAB      SYSTEM "login.defs.d/LOG_UNKFAIL_ENAB.xml">
+<!ENTITY LOGIN_RETRIES         SYSTEM "login.defs.d/LOGIN_RETRIES.xml">
 <!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!ENTITY LOGIN_TIMEOUT         SYSTEM "login.defs.d/LOGIN_TIMEOUT.xml">
+<!ENTITY MAIL_CHECK_ENAB       SYSTEM "login.defs.d/MAIL_CHECK_ENAB.xml">
 <!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
+<!ENTITY MOTD_FILE             SYSTEM "login.defs.d/MOTD_FILE.xml">
+<!ENTITY NOLOGINS_FILE         SYSTEM "login.defs.d/NOLOGINS_FILE.xml">
+<!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
+<!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!ENTITY TTYGROUP              SYSTEM "login.defs.d/TTYGROUP.xml">
+<!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
+<!ENTITY ULIMIT                SYSTEM "login.defs.d/ULIMIT.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
 <!ENTITY USERDEL_CMD           SYSTEM "login.defs.d/USERDEL_CMD.xml">
+<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 ]>
 
 <refentry id='login.defs.5'>
@@ -69,27 +100,64 @@
       &CHFN_AUTH;
       &CHFN_RESTRICT;
       &CHSH_AUTH;
+      &CONSOLE;
+      &CONSOLE_GROUPS;
+      &DEFAULT_HOME;
       &ENCRYPT_METHOD;
-      &GID_MAX; <!--document also GID_MIN-->
+      &ENV_HZ;
+      &ENV_PATH;
+      &ENV_SUPATH;
+      &ENV_TZ;
+      &ENVIRON_FILE;
+      &ERASECHAR;
+      &FAIL_DELAY;
+      &FAILLOG_ENAB;
+      &FAKE_SHELL;
+      &FTMP_FILE;
+      &GID_MAX; <!-- documents also GID_MIN -->
+      &HUSHLOGIN_FILE;
+      &ISSUE_FILE;
+      &KILLCHAR;
+      &LASTLOG_ENAB;
+      &LOG_OK_LOGINS;
+      &LOG_UNKFAIL_ENAB;
+      &LOGIN_RETRIES;
       &LOGIN_STRING;
+      &LOGIN_TIMEOUT;
+      &MAIL_CHECK_ENAB;
       &MAIL_DIR;
       &MAX_MEMBERS_PER_GROUP;
       &MD5_CRYPT_ENAB;
+      &MOTD_FILE;
+      &NOLOGINS_FILE;
+      &OBSCURE_CHECKS_ENAB;
+      &PASS_ALWAYS_WARN;
+      &PASS_CHANGE_TRIES;
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
-    </variablelist>
-    <para> 
-      <option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> and
-      <option>PASS_WARN_AGE</option> are only used at the
-      time of account creation. Any changes to these settings won't affect
-      existing accounts.
-    </para>
-    <variablelist remap='IP'>
-      &SHA_CRYPT_MIN_ROUNDS; <!--document also SHA_CRYPT_MAX_ROUNDS-->
-      &UID_MAX; <!--document also UID_MIN-->
+      <para> 
+        <option>PASS_MAX_DAYS</option>, <option>PASS_MIN_DAYS</option> and
+        <option>PASS_WARN_AGE</option> are only used at the
+        time of account creation. Any changes to these settings won't affect
+        existing accounts.
+      </para>
+      &PASS_MAX_LEN; <!-- documents also PASS_MIN_LEN -->
+      &PORTTIME_CHECKS_ENAB;
+      &QUOTAS_ENAB;
+      &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS -->
+      &SULOG_FILE;
+      &SU_NAME;
+      &SU_WHEEL_ONLY;
+      &SYSLOG_SG_ENAB;
+      &SYSLOG_SU_ENAB;
+      &TTYGROUP;
+      &TTYTYPE_FILE;
+      &UID_MAX; <!-- documents also UID_MIN -->
+      &ULIMIT;
       &UMASK;
       &USERDEL_CMD;
+      &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>
 
@@ -162,6 +230,12 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term>groupmems</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>groupmod</term>
 	<listitem>
 	  <para>MAX_MEMBERS_PER_GROUP</para>
@@ -192,13 +266,26 @@
 	<term>login</term>
 	<listitem>
 	  <para>
-	    CONSOLE CONSOLE_GROUPS DEFAULT_HOME ENV_HZ ENV_PATH ENV_SUPATH
-	    ENV_TZ ENVIRON_FILE ERASECHAR FAIL_DELAY FAILLOG_ENAB
-	    FAKE_SHELL FTMP_FILE HUSHLOGIN_FILE ISSUE_FILE KILLCHAR
-	    LASTLOG_ENAB LOGIN_RETRIES LOGIN_STRING LOGIN_TIMEOUT
-	    LOG_OK_LOGINS LOG_UNKFAIL_ENAB MAIL_CHECK_ENAB MAIL_DIR
-	    MAIL_FILE MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB
-	    QUOTAS_ENAB TTYGROUP TTYPERM TTYTYPE_FILE ULIMIT UMASK
+	    <phrase condition="no_pam">CONSOLE</phrase>
+	    CONSOLE_GROUPS DEFAULT_HOME
+	    <phrase condition="no_pam">ENV_HZ ENV_PATH ENV_SUPATH
+	    ENV_TZ</phrase>
+	    ENVIRON_FILE ERASECHAR FAIL_DELAY
+	    <phrase condition="no_pam">FAILLOG_ENAB</phrase>
+	    FAKE_SHELL
+	    <phrase condition="no_pam">FTMP_FILE</phrase>
+	    HUSHLOGIN_FILE
+	    <phrase condition="no_pam">ISSUE_FILE</phrase>
+	    KILLCHAR
+	    <phrase condition="no_pam">LASTLOG_ENAB</phrase>
+	    LOGIN_RETRIES
+	    <phrase condition="no_pam">LOGIN_STRING</phrase>
+	    LOGIN_TIMEOUT LOG_OK_LOGINS LOG_UNKFAIL_ENAB
+	    <phrase condition="no_pam">MAIL_CHECK_ENAB MAIL_DIR MAIL_FILE
+	    MOTD_FILE NOLOGINS_FILE PORTTIME_CHECKS_ENAB
+	    QUOTAS_ENAB</phrase>
+	    TTYGROUP TTYPERM TTYTYPE_FILE
+	    <phrase condition="no_pam">ULIMIT UMASK</phrase>
 	    USERGROUPS_ENAB
 	  </para>
 	</listitem>
@@ -217,13 +304,13 @@
 	<listitem>
 	  <para>
 	    ENCRYPT_METHOD MAX_MEMBERS_PER_GROUP MD5_CRYPT_ENAB
-	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SHA_CRYPT_MIN_ROUNDS
-	    UMASK
+	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE SHA_CRYPT_MAX_ROUNDS
+	    SHA_CRYPT_MIN_ROUNDS UMASK
 	  </para>
 	</listitem>
       </varlistentry>
       <!-- nologin: no variables -->
-      <varlistentry>
+      <varlistentry condition="no_pam">
 	<term>passwd</term>
 	<listitem>
 	  <para>
@@ -249,10 +336,38 @@
       </varlistentry>
       <!-- pwunconv: no variables -->
       <varlistentry>
+	<term>su</term>
+	<listitem>
+	  <para>
+	    <phrase condition="no_pam">CONSOLE</phrase>
+	    CONSOLE_GROUPS DEFAULT_HOME
+	    <phrase condition="no_pam">ENV_HZ</phrase>
+	    ENVIRON_FILE ENV_PATH ENV_SUPATH
+	    <phrase condition="no_pam">ENV_TZ LOGIN_STRING MAIL_CHECK_ENAB
+	    MAIL_DIR MAIL_FILE QUOTAS_ENAB</phrase>
+	    SULOG_FILE SU_NAME
+	    <phrase condition="no_pam">SU_WHEEL_ONLY</phrase>
+	    SYSLOG_SU_ENAB
+	    <phrase condition="no_pam">USERGROUPS_ENAB</phrase>
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="no_pam">
+	<term>sulogin</term>
+	<listitem>
+	  <para>
+	    ENV_HZ
+	    <phrase condition="no_pam">ENV_TZ</phrase>
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>useradd</term>
 	<listitem>
 	  <para>
+	    <!-- RedHat: CREATE_HOME-->
 	    GID_MAX GID_MIN
+	    MAIL_DIR MAX_MEMBERS_PER_GROUP
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
 	    UID_MAX UID_MIN
 	    UMASK
@@ -262,22 +377,30 @@
       <varlistentry>
 	<term>userdel</term>
 	<listitem>
-	  <para>MAIL_DIR
-	    USERDEL_CMD
+	  <para>
+	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP USERDEL_CMD
+	    USERGROUPS_ENAB
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>usermod</term>
 	<listitem>
-	  <para>MAIL_DIR</para>
-	  <!-- .ad -->
+	  <para>
+	    MAIL_DIR MAIL_FILE MAX_MEMBERS_PER_GROUP
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>vipw</term>
+	<listitem>
+	  <para>MAX_MEMBERS_PER_GROUP</para>
 	</listitem>
       </varlistentry>
     </variablelist>
   </refsect1>
 
-  <refsect1 id='bugs'>
+  <refsect1 id='bugs' condition="pam">
     <title>BUGS</title>
     <para>
       Much of the functionality that used to be provided by the shadow

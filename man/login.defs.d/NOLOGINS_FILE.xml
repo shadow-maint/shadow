@@ -1,0 +1,10 @@
+<varlistentry condition="no_pam">
+  <term><option>NOLOGINS_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, name of file whose presence will inhibit non-root
+      logins.  The contents of this file should be a message indicating
+      why logins are inhibited.
+    </para>
+  </listitem>
+</varlistentry>

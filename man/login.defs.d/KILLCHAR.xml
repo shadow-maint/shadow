@@ -1,0 +1,12 @@
+<varlistentry condition="no_pam">
+  <term><option>KILLCHAR</option> (number)</term>
+  <listitem>
+    <para>
+      Terminal KILL character (<replaceable>025</replaceable> = CTRL/U).
+    </para>
+    <para>
+      The value can be prefixed "0" for an octal value, or "0x" for an
+      hexadecimal value.
+    </para>
+  </listitem>
+</varlistentry>

@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY CONSOLE               SYSTEM "login.defs.d/CONSOLE.xml">
+<!ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml">
+<!ENTITY DEFAULT_HOME          SYSTEM "login.defs.d/DEFAULT_HOME.xml">
+<!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
+<!ENTITY ENVIRON_FILE          SYSTEM "login.defs.d/ENVIRON_FILE.xml">
+<!ENTITY ENV_PATH              SYSTEM "login.defs.d/ENV_PATH.xml">
+<!ENTITY ENV_SUPATH            SYSTEM "login.defs.d/ENV_SUPATH.xml">
+<!ENTITY ENV_TZ                SYSTEM "login.defs.d/ENV_TZ.xml">
+<!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!ENTITY MAIL_CHECK_ENAB       SYSTEM "login.defs.d/MAIL_CHECK_ENAB.xml">
+<!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
+<!ENTITY SULOG_FILE            SYSTEM "login.defs.d/SULOG_FILE.xml">
+<!ENTITY SU_NAME               SYSTEM "login.defs.d/SU_NAME.xml">
+<!ENTITY SU_WHEEL_ONLY         SYSTEM "login.defs.d/SU_WHEEL_ONLY.xml">
+<!ENTITY SYSLOG_SU_ENAB        SYSTEM "login.defs.d/SYSLOG_SU_ENAB.xml">
+<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+]>
 <refentry id='su.1'>
   <!--  $Id$ -->
   <refmeta>
@@ -170,6 +190,34 @@
       This version of <command>su</command> has many compilation options,
       only some of which may be in use at any particular site.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &CONSOLE;
+      &CONSOLE_GROUPS;
+      &DEFAULT_HOME;
+      &ENV_HZ;
+      &ENVIRON_FILE;
+      &ENV_PATH;
+      &ENV_SUPATH;
+      &ENV_TZ;
+      &LOGIN_STRING;
+      &MAIL_CHECK_ENAB;
+      &MAIL_DIR;
+      &QUOTAS_ENAB;
+      &SULOG_FILE;
+      &SU_NAME;
+      &SU_WHEEL_ONLY;
+      &SYSLOG_SU_ENAB;
+      &USERGROUPS_ENAB;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

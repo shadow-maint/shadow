@@ -1,0 +1,13 @@
+<varlistentry condition="no_pam">
+  <term><option>CONSOLE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, either full pathname of a file containing device names
+      or a ":" delimited list of device names.  Root logins will be
+      allowed only upon these devices.
+    </para>
+    <para>
+      If not defined, root will be allowed on any device.
+    </para>
+  </listitem>
+</varlistentry>

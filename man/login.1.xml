@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY CONSOLE               SYSTEM "login.defs.d/CONSOLE.xml">
+<!ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml">
+<!ENTITY DEFAULT_HOME          SYSTEM "login.defs.d/DEFAULT_HOME.xml">
+<!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
+<!ENTITY ENV_PATH              SYSTEM "login.defs.d/ENV_PATH.xml">
+<!ENTITY ENV_SUPATH            SYSTEM "login.defs.d/ENV_SUPATH.xml">
+<!ENTITY ENV_TZ                SYSTEM "login.defs.d/ENV_TZ.xml">
+<!ENTITY ENVIRON_FILE          SYSTEM "login.defs.d/ENVIRON_FILE.xml">
+<!ENTITY ERASECHAR             SYSTEM "login.defs.d/ERASECHAR.xml">
+<!ENTITY FAIL_DELAY            SYSTEM "login.defs.d/FAIL_DELAY.xml">
+<!ENTITY FAILLOG_ENAB          SYSTEM "login.defs.d/FAILLOG_ENAB.xml">
+<!ENTITY FAKE_SHELL            SYSTEM "login.defs.d/FAKE_SHELL.xml">
+<!ENTITY FTMP_FILE             SYSTEM "login.defs.d/FTMP_FILE.xml">
+<!ENTITY HUSHLOGIN_FILE        SYSTEM "login.defs.d/HUSHLOGIN_FILE.xml">
+<!ENTITY ISSUE_FILE            SYSTEM "login.defs.d/ISSUE_FILE.xml">
+<!ENTITY KILLCHAR              SYSTEM "login.defs.d/KILLCHAR.xml">
+<!ENTITY LASTLOG_ENAB          SYSTEM "login.defs.d/LASTLOG_ENAB.xml">
+<!ENTITY LOGIN_RETRIES         SYSTEM "login.defs.d/LOGIN_RETRIES.xml">
+<!ENTITY LOGIN_STRING          SYSTEM "login.defs.d/LOGIN_STRING.xml">
+<!ENTITY LOGIN_TIMEOUT         SYSTEM "login.defs.d/LOGIN_TIMEOUT.xml">
+<!ENTITY LOG_OK_LOGINS         SYSTEM "login.defs.d/LOG_OK_LOGINS.xml">
+<!ENTITY LOG_UNKFAIL_ENAB      SYSTEM "login.defs.d/LOG_UNKFAIL_ENAB.xml">
+<!ENTITY MAIL_CHECK_ENAB       SYSTEM "login.defs.d/MAIL_CHECK_ENAB.xml">
+<!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY MOTD_FILE             SYSTEM "login.defs.d/MOTD_FILE.xml">
+<!ENTITY NOLOGINS_FILE         SYSTEM "login.defs.d/NOLOGINS_FILE.xml">
+<!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
+<!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
+<!ENTITY TTYGROUP              SYSTEM "login.defs.d/TTYGROUP.xml">
+<!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
+<!ENTITY ULIMIT                SYSTEM "login.defs.d/ULIMIT.xml">
+<!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY USERGROUPS_ENAB         SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+]>
 <refentry id='login.1'>
   <!--  $Id$ -->
   <refmeta>
@@ -192,6 +228,50 @@
       attack.
     </para>
 
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &CONSOLE;
+      &CONSOLE_GROUPS;
+      &DEFAULT_HOME;
+      &ENV_HZ;
+      &ENV_PATH;
+      &ENV_SUPATH;
+      &ENV_TZ;
+      &ENVIRON_FILE;
+      &ERASECHAR;
+      &FAIL_DELAY;
+      &FAILLOG_ENAB;
+      &FAKE_SHELL;
+      &FTMP_FILE;
+      &HUSHLOGIN_FILE;
+      &ISSUE_FILE;
+      &KILLCHAR;
+      &LASTLOG_ENAB;
+      &LOGIN_RETRIES;
+      &LOGIN_STRING;
+      &LOGIN_TIMEOUT;
+      &LOG_OK_LOGINS;
+      &LOG_UNKFAIL_ENAB;
+      &MAIL_CHECK_ENAB;
+      &MAIL_DIR;
+      &MOTD_FILE;
+      &NOLOGINS_FILE;
+      &PORTTIME_CHECKS_ENAB;
+      &QUOTAS_ENAB;
+      &TTYGROUP; <!-- documents also TTYPERM -->
+      &TTYTYPE_FILE;
+      &ULIMIT;
+      &UMASK;
+      &USERGROUPS_ENAB;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

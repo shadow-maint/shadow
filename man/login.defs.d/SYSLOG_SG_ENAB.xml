@@ -1,0 +1,8 @@
+<varlistentry>
+  <term><option>SYSLOG_SG_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable "syslog" logging of <command>sg</command> activity.
+    </para>
+  </listitem>
+</varlistentry>

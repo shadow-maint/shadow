@@ -1,0 +1,9 @@
+<varlistentry condition="no_pam">
+  <term><option>MOTD_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, ":" delimited list of "message of the day" files to be
+      displayed upon login.
+    </para>
+  </listitem>
+</varlistentry>

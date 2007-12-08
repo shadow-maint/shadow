@@ -1,0 +1,8 @@
+<varlistentry condition="no_pam">
+  <term><option>OBSCURE_CHECKS_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable additional checks upon password changes.
+    </para>
+  </listitem>
+</varlistentry>

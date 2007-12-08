@@ -1,0 +1,8 @@
+<varlistentry>
+  <term><option>LOGIN_TIMEOUT</option> (number)</term>
+  <listitem>
+    <para>
+      Max time in seconds for login.
+    </para>
+  </listitem>
+</varlistentry>

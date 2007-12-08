@@ -1,0 +1,9 @@
+<varlistentry>
+  <term><option>TTYTYPE_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If defined, file which maps tty line to TERM environment parameter.
+      Each line of the file is in a format something like "vt100  tty01".
+    </para>
+  </listitem>
+</varlistentry>

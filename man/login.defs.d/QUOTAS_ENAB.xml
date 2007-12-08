@@ -1,0 +1,9 @@
+<varlistentry condition="no_pam">
+  <term><option>QUOTAS_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable setting of ulimit, umask, and niceness from passwd gecos
+      field.
+    </para>
+  </listitem>
+</varlistentry>

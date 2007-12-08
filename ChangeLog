@@ -1,3 +1,47 @@
+2007-12-08  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/login.defs.d/CONSOLE_GROUPS.xml,
+	man/login.defs.d/CONSOLE.xml, man/login.defs.d/DEFAULT_HOME.xml,
+	man/login.defs.d/ENV_HZ.xml, man/login.defs.d/ENVIRON_FILE.xml,
+	man/login.defs.d/ENV_PATH.xml, man/login.defs.d/ENV_SUPATH.xml,
+	man/login.defs.d/ENV_TZ.xml, man/login.defs.d/ERASECHAR.xml,
+	man/login.defs.d/FAIL_DELAY.xml,
+	man/login.defs.d/FAILLOG_ENAB.xml,
+	man/login.defs.d/FAKE_SHELL.xml, man/login.defs.d/FTMP_FILE.xml,
+	man/login.defs.d/HUSHLOGIN_FILE.xml,
+	man/login.defs.d/ISSUE_FILE.xml, man/login.defs.d/KILLCHAR.xml,
+	man/login.defs.d/LASTLOG_ENAB.xml, man/login.defs.d/LOGIN_RETRIES.xml,
+	man/login.defs.d/LOGIN_TIMEOUT.xml, man/login.defs.d/LOG_OK_LOGINS.xml,
+	man/login.defs.d/LOG_UNKFAIL_ENAB.xml,
+	man/login.defs.d/MAIL_CHECK_ENAB.xml, man/login.defs.d/MOTD_FILE.xml,
+	man/login.defs.d/NOLOGINS_FILE.xml,
+	man/login.defs.d/OBSCURE_CHECKS_ENAB.xml,
+	man/login.defs.d/PASS_ALWAYS_WARN.xml,
+	man/login.defs.d/PASS_CHANGE_TRIES.xml,
+	man/login.defs.d/PASS_MAX_LEN.xml,
+	man/login.defs.d/PORTTIME_CHECKS_ENAB.xml,
+	man/login.defs.d/QUOTAS_ENAB.xml, man/login.defs.d/SULOG_FILE.xml,
+	man/login.defs.d/SU_NAME.xml, man/login.defs.d/SU_WHEEL_ONLY.xml,
+	man/login.defs.d/SYSLOG_SG_ENAB.xml,
+	man/login.defs.d/SYSLOG_SU_ENAB.xml,
+	man/login.defs.d/TTYGROUP.xml, man/login.defs.d/TTYTYPE_FILE.xml,
+	man/login.defs.d/ULIMIT.xml, man/login.defs.d/USERGROUPS_ENAB.xml:
+	New documentation of login.defs variables.
+	* man/login.defs.d/MAIL_DIR.xml: Updated. It now contains the
+	MAIL_FILE documentation.
+	* man/login.defs.d/LOGIN_STRING.xml: Updated. Mentions %s.
+	* man/pwconv.8.xml, man/groupmems.8.xml, man/groupdel.8.xml,
+	man/useradd.8.xml, man/pwck.8.xml, man/groupadd.8.xml,
+	man/sulogin.8.xml, man/newgrp.1.xml, man/usermod.8.xml,
+	man/su.1.xml, man/vipw.8.xml, man/passwd.1.xml,
+	man/groupmod.8.xml, man/login.1.xml, man/userdel.8.xml,
+	man/grpck.8.xml: Added CONFIGURATION section.
+	* man/generate_mans.mak: The generations of manpages depends on
+	the variables from the Makefiles. Add the dependency on Makefile.
+	* man/login.defs.5.xml: New login.defs variable documented.
+	* man/Makefile.am: Added XML variable documentation to the
+	distributed files.
+
 2007-12-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/gshadow.5.xml: Fix the newgrp section in the gshadow.5

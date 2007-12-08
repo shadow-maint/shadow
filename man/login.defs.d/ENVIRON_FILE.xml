@@ -1,0 +1,9 @@
+<varlistentry condition="no_pam">
+  <term><option>ENVIRON_FILE</option> (string)</term>
+  <listitem>
+    <para>
+      If this file exists and is readable, login environment will be
+      read from it.  Every line should be in the form name=value.
+    </para>
+  </listitem>
+</varlistentry>

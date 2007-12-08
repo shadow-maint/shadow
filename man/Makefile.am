@@ -103,19 +103,58 @@ login_defs_v = \
 	CHFN_AUTH.xml \
 	CHFN_RESTRICT.xml \
 	CHSH_AUTH.xml \
+	CONSOLE.xml \
+	CONSOLE_GROUPS.xml \
+	DEFAULT_HOME.xml \
 	ENCRYPT_METHOD.xml \
+	ENV_HZ.xml \
+	ENVIRON_FILE.xml \
+	ENV_PATH.xml \
+	ENV_SUPATH.xml \
+	ENV_TZ.xml \
+	ERASECHAR.xml \
+	FAIL_DELAY.xml \
+	FAILLOG_ENAB.xml \
+	FAKE_SHELL.xml \
+	FTMP_FILE.xml \
 	GID_MAX.xml \
+	HUSHLOGIN_FILE.xml \
+	ISSUE_FILE.xml \
+	KILLCHAR.xml \
+	LASTLOG_ENAB.xml \
+	LOGIN_RETRIES.xml \
 	LOGIN_STRING.xml \
+	LOGIN_TIMEOUT.xml \
+	LOG_OK_LOGINS.xml \
+	LOG_UNKFAIL_ENAB.xml \
+	MAIL_CHECK_ENAB.xml \
 	MAIL_DIR.xml \
 	MAX_MEMBERS_PER_GROUP.xml \
 	MD5_CRYPT_ENAB.xml \
+	MOTD_FILE.xml \
+	NOLOGINS_FILE.xml \
+	OBSCURE_CHECKS_ENAB.xml \
+	PASS_ALWAYS_WARN.xml \
+	PASS_CHANGE_TRIES.xml \
 	PASS_MAX_DAYS.xml \
+	PASS_MAX_LEN.xml \
 	PASS_MIN_DAYS.xml \
 	PASS_WARN_AGE.xml \
+	PORTTIME_CHECKS_ENAB.xml \
+	QUOTAS_ENAB.xml \
 	SHA_CRYPT_MIN_ROUNDS.xml \
+	SULOG_FILE.xml \
+	SU_NAME.xml \
+	SU_WHEEL_ONLY.xml \
+	SYSLOG_SG_ENAB.xml \
+	SYSLOG_SU_ENAB.xml \
+	TTYGROUP.xml \
+	TTYTYPE_FILE.xml \
 	UID_MAX.xml \
+	ULIMIT.xml \
 	UMASK.xml \
-	USERDEL_CMD.xml
+	USERDEL_CMD.xml \
+	USERGROUPS_ENAB.xml
 
 EXTRA_DIST = \
 	$(man_MANS) \

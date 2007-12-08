@@ -1,0 +1,9 @@
+<varlistentry>
+  <term><option>SYSLOG_SU_ENAB</option> (boolean)</term>
+  <listitem>
+    <para>
+      Enable "syslog" logging of <command>su</command> activity - in
+      addition to sulog file logging.
+    </para>
+  </listitem>
+</varlistentry>

@@ -17,7 +17,7 @@ else
 SHA_CRYPT_COND=no_sha_crypt
 endif
 
-%: %.xml
+%: %.xml Makefile
 	$(XSLTPROC) --stringparam profile.condition "$(PAM_COND);$(SHADOWGRP_COND);$(SHA_CRYPT_COND)" \
 	            -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/profile-docbook.xsl $<
 

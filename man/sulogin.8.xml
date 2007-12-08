@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
+<!ENTITY ENV_TZ                SYSTEM "login.defs.d/ENV_TZ.xml">
+]>
 <refentry id='sulogin.8'>
   <!--  $Id$ -->
   <refmeta>
@@ -72,6 +77,19 @@
       devices may be unmounted or uninitialized and many of the user
       commands may be unavailable or nonfunctional as a result.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &ENV_HZ;
+      &ENV_TZ;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

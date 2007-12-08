@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY MAIL_DIR              SYSTEM "login.defs.d/MAIL_DIR.xml">
+<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY USERDEL_CMD           SYSTEM "login.defs.d/USERDEL_CMD.xml">
+<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
+]>
 <refentry id='userdel.8'>
   <!-- $Id$ -->
   <refmeta>
@@ -82,6 +89,21 @@
 	  </para>
 	</listitem>
       </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &MAIL_DIR; <!-- documents also MAIL_FILE -->
+      &MAX_MEMBERS_PER_GROUP;
+      &USERDEL_CMD;
+      &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>
 

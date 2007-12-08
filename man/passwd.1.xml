@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
+<!ENTITY OBSCURE_CHECKS_ENAB   SYSTEM "login.defs.d/OBSCURE_CHECKS_ENAB.xml">
+<!ENTITY PASS_ALWAYS_WARN      SYSTEM "login.defs.d/PASS_ALWAYS_WARN.xml">
+<!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
+<!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
+<!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+]>
 <refentry id='passwd.1'>
   <!--  $Id$ -->
   <refmeta>
@@ -318,6 +328,24 @@
       change their password on a system if NIS is enabled and they are not 
       logged into the NIS server.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration' condition="no_pam">
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &ENCRYPT_METHOD;
+      &MD5_CRYPT_ENAB;
+      &OBSCURE_CHECKS_ENAB;
+      &PASS_ALWAYS_WARN;
+      &PASS_CHANGE_TRIES;
+      &PASS_MAX_LEN; <!-- documents also PASS_MIN_LEN -->
+      &SHA_CRYPT_MIN_ROUNDS;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

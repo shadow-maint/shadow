@@ -1,0 +1,14 @@
+<varlistentry>
+  <term><option>DEFAULT_HOME</option> (boolean)</term>
+  <listitem>
+    <para>
+      Indicate if login is allowed if we can't cd to the home directory.
+      Default in no.
+    </para>
+    <para>
+      If set to <replaceable>yes</replaceable>, the user will login in
+      the root (<filename>/</filename>) directory if it is not possible to
+      cd to her home directory.
+    </para>
+  </listitem>
+</varlistentry>
