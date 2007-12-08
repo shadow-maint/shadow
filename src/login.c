@@ -334,7 +334,9 @@ int main (int argc, char **argv)
 	int failed;
 	int flag;
 	int subroot = 0;
+#ifndef USE_PAM
 	int is_console;
+#endif
 	int err;
 	const char *cp;
 	char *tmp;
@@ -440,7 +442,9 @@ int main (int argc, char **argv)
 	 */
 	checkutmp (!amroot);
 	STRFCPY (tty, utent.ut_line);
+#ifndef USE_PAM
 	is_console = console (tty);
+#endif
 
 	if (rflg || hflg) {
 #ifdef UT_ADDR
