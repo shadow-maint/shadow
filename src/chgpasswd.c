@@ -220,7 +220,7 @@ int main (int argc, char **argv)
 		}
 
 		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("chpasswd", pampw->pw_name,
+			retval = pam_start ("chgpasswd", pampw->pw_name,
 					    &conv, &pamh);
 		}
 	}
