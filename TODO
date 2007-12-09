@@ -1,3 +1,5 @@
+depends rules for the manpages
+
 Check for all tools which variables are used.
 
 Check all the expiry semantics
