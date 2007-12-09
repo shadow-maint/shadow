@@ -1,12 +1,8 @@
 depends rules for the manpages
 
-Check for all tools which variables are used.
-
 Check all the expiry semantics
 
 Add options --crypt-method and --sha-rounds to gpasswd
-
-method => algorithm in manpages
 
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
@@ -17,9 +13,6 @@ ALL:
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
   user databases by well known tools.
-- Add/check support for split group
-  Maybe that feature can be supported in gr_open/gr_close, with a variable
-  in login.defs.
 
 - useradd:
   - add handle create user mail spool in maildir format.
@@ -44,9 +37,7 @@ ALL:
 
 - groupmems: check reason for isgroup
 
-- chgpasswd: uses chpasswd's pam config file. Why?
-
-- newusers: i = 100; no a nice initial value, use login.defs
+- newusers: i = 100; not a nice initial value, use login.defs
 
 - newusers: doc for pw_gid not clear. Differentiate
             pw_gid specified and exist
