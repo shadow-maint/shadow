@@ -1,4 +1,4 @@
-<varlistentry condition="no_pam">
+<varlistentry>
   <term><option>ERASECHAR</option> (number)</term>
   <listitem>
     <para>

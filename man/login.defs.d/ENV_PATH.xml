@@ -1,4 +1,4 @@
-<varlistentry condition="no_pam">
+<varlistentry>
   <term><option>ENV_PATH</option> (string)</term>
   <listitem>
     <para>

@@ -67,8 +67,8 @@
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
 	  <para>
-	    The available methods are DES, MD5, and SHA256 or SHA512
-	    if compiled with the ENCRYPTMETHOD_SELECT flag.
+	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
+	    if your libc support these methods.
 	  </para>
 	</listitem>
       </varlistentry>

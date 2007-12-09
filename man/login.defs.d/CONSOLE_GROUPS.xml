@@ -1,4 +1,4 @@
-<varlistentry condition="no_pam">
+<varlistentry>
   <term><option>CONSOLE_GROUPS</option> (string)</term>
   <listitem>
     <para>

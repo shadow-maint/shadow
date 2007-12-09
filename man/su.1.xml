@@ -203,20 +203,20 @@
       &CONSOLE;
       &CONSOLE_GROUPS;
       &DEFAULT_HOME;
-      &ENV_HZ;
+      <phrase condition="no_pam">&ENV_HZ;</phrase>
       &ENVIRON_FILE;
       &ENV_PATH;
       &ENV_SUPATH;
       &ENV_TZ;
-      &LOGIN_STRING;
+      <phrase condition="no_pam">&LOGIN_STRING;</phrase>
       &MAIL_CHECK_ENAB;
-      &MAIL_DIR;
+      <phrase condition="no_pam">&MAIL_DIR;</phrase>
       &QUOTAS_ENAB;
       &SULOG_FILE;
       &SU_NAME;
       &SU_WHEEL_ONLY;
       &SYSLOG_SU_ENAB;
-      &USERGROUPS_ENAB;
+      <phrase condition="no_pam">&USERGROUPS_ENAB;</phrase>
     </variablelist>
   </refsect1>
 

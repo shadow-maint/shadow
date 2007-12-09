@@ -1,4 +1,4 @@
-<varlistentry confition="no_pam">
+<varlistentry condition="no_pam">
   <term><option>LOGIN_STRING</option> (string)</term>
   <listitem>
     <para>

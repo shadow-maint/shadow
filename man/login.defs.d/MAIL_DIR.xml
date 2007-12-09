@@ -16,6 +16,7 @@
     </para>
   </listitem>
 </varlistentry>
+<!-- FIXME: MAIL_FILE not used in useradd -->
 <para>
   The <option>MAIL_DIR</option> and <option>MAIL_FILE</option> variables
   are used by <command>useradd</command>, <command>usermod</command>, and

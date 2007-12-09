@@ -34,6 +34,9 @@
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY MOTD_FILE             SYSTEM "login.defs.d/MOTD_FILE.xml">
 <!ENTITY NOLOGINS_FILE         SYSTEM "login.defs.d/NOLOGINS_FILE.xml">
+<!ENTITY OBSCURE_CHECKS_ENAB   SYSTEM "login.defs.d/OBSCURE_CHECKS_ENAB.xml">
+<!ENTITY PASS_ALWAYS_WARN      SYSTEM "login.defs.d/PASS_ALWAYS_WARN.xml">
+<!ENTITY PASS_CHANGE_TRIES     SYSTEM "login.defs.d/PASS_CHANGE_TRIES.xml">
 <!ENTITY PASS_MAX_LEN          SYSTEM "login.defs.d/PASS_MAX_LEN.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
@@ -41,6 +44,11 @@
 <!ENTITY PORTTIME_CHECKS_ENAB  SYSTEM "login.defs.d/PORTTIME_CHECKS_ENAB.xml">
 <!ENTITY QUOTAS_ENAB           SYSTEM "login.defs.d/QUOTAS_ENAB.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!ENTITY SULOG_FILE            SYSTEM "login.defs.d/SULOG_FILE.xml">
+<!ENTITY SU_NAME               SYSTEM "login.defs.d/SU_NAME.xml">
+<!ENTITY SU_WHEEL_ONLY         SYSTEM "login.defs.d/SU_WHEEL_ONLY.xml">
+<!ENTITY SYSLOG_SG_ENAB        SYSTEM "login.defs.d/SYSLOG_SG_ENAB.xml">
+<!ENTITY SYSLOG_SU_ENAB        SYSTEM "login.defs.d/SYSLOG_SU_ENAB.xml">
 <!ENTITY TTYGROUP              SYSTEM "login.defs.d/TTYGROUP.xml">
 <!ENTITY TTYTYPE_FILE          SYSTEM "login.defs.d/TTYTYPE_FILE.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
@@ -269,8 +277,8 @@
 	    <phrase condition="no_pam">CONSOLE</phrase>
 	    CONSOLE_GROUPS DEFAULT_HOME
 	    <phrase condition="no_pam">ENV_HZ ENV_PATH ENV_SUPATH
-	    ENV_TZ</phrase>
-	    ENVIRON_FILE ERASECHAR FAIL_DELAY
+	    ENV_TZ ENVIRON_FILE</phrase>
+	    ERASECHAR FAIL_DELAY
 	    <phrase condition="no_pam">FAILLOG_ENAB</phrase>
 	    FAKE_SHELL
 	    <phrase condition="no_pam">FTMP_FILE</phrase>
@@ -341,8 +349,8 @@
 	  <para>
 	    <phrase condition="no_pam">CONSOLE</phrase>
 	    CONSOLE_GROUPS DEFAULT_HOME
-	    <phrase condition="no_pam">ENV_HZ</phrase>
-	    ENVIRON_FILE ENV_PATH ENV_SUPATH
+	    <phrase condition="no_pam">ENV_HZ ENVIRON_FILE</phrase>
+	    ENV_PATH ENV_SUPATH
 	    <phrase condition="no_pam">ENV_TZ LOGIN_STRING MAIL_CHECK_ENAB
 	    MAIL_DIR MAIL_FILE QUOTAS_ENAB</phrase>
 	    SULOG_FILE SU_NAME
@@ -352,7 +360,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry condition="no_pam">
+      <varlistentry>
 	<term>sulogin</term>
 	<listitem>
 	  <para>

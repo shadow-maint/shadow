@@ -241,9 +241,9 @@
       &CONSOLE;
       &CONSOLE_GROUPS;
       &DEFAULT_HOME;
-      &ENV_HZ;
-      &ENV_PATH;
-      &ENV_SUPATH;
+      <phrase condition="no_pam">&ENV_HZ;</phrase>
+      <phrase condition="no_pam">&ENV_PATH;</phrase>
+      <phrase condition="no_pam">&ENV_SUPATH;</phrase>
       &ENV_TZ;
       &ENVIRON_FILE;
       &ERASECHAR;
@@ -261,7 +261,7 @@
       &LOG_OK_LOGINS;
       &LOG_UNKFAIL_ENAB;
       &MAIL_CHECK_ENAB;
-      &MAIL_DIR;
+      <phrase condition="no_pam">&MAIL_DIR;</phrase>
       &MOTD_FILE;
       &NOLOGINS_FILE;
       &PORTTIME_CHECKS_ENAB;
@@ -269,7 +269,7 @@
       &TTYGROUP; <!-- documents also TTYPERM -->
       &TTYTYPE_FILE;
       &ULIMIT;
-      &UMASK;
+      <phrase condition="no_pam">&UMASK;</phrase>
       &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>

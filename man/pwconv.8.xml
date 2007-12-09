@@ -116,14 +116,14 @@
     <title>CONFIGURATION</title>
     <para>
       The following configuration variable in
-      <filename>/etc/login.defs</filename> change the behavior of
+      <filename>/etc/login.defs</filename> changes the behavior of
       <command>grpconv</command> and <command>grpunconv</command>:
     </para>
     <variablelist>
       &MAX_MEMBERS_PER_GROUP;
     </variablelist>
     <para>
-      The following configuration variable in
+      The following configuration variables in
       <filename>/etc/login.defs</filename> change the behavior of
       <command>pwconv</command>:
     </para>

@@ -1,4 +1,5 @@
-<varlistentry condition="no_pam">
+<varlistentry>
+  <!-- XXX: When compiled with PAM support, only sulogin uses ENV_HZ -->
   <term><option>ENV_HZ</option> (string)</term>
   <listitem>
     <para>
@@ -6,6 +7,10 @@
       a user login. The value must be preceded by
       <replaceable>HZ=</replaceable>. A common value on Linux is
       <replaceable>HZ=100</replaceable>.
+    </para>
+    <para condition="pam">
+      The <envar>HZ</envar> environment variable is only set when the user
+      (the superuser) logs in with <command>sulogin</command>.
     </para>
     <!-- TODO: it can in fact be used to set any other variable-->
   </listitem>

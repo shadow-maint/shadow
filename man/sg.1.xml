@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
+  "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY SYSLOG_SG_ENAB        SYSTEM "login.defs.d/SYSLOG_SG_ENAB.xml">
+]>
 <refentry id='sg.1'>
   <!-- $Id$ -->
   <refmeta>
@@ -37,6 +41,18 @@
       <command>sg</command> command you are returned to your previous group
       ID.
     </para>
+  </refsect1>
+
+  <refsect1 id='configuration'>
+    <title>CONFIGURATION</title>
+    <para>
+      The following configuration variables in
+      <filename>/etc/login.defs</filename> change the behavior of this
+      tool:
+    </para>
+    <variablelist>
+      &SYSLOG_SG_ENAB;
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>

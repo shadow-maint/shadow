@@ -1,5 +1,36 @@
 2007-12-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/pwconv.8.xml: Fix typos.
+	* man/chpasswd.8.xml, man/chgpasswd.8.xml: Document the NONE crypt
+	method.
+	* man/login.defs.d/MAIL_DIR.xml: Add comment regarding useradd not
+	using MAIL_FILE.
+	* man/login.defs.d/ERASECHAR.xml, man/login.defs.d/KILLCHAR.xml,
+	man/login.defs.d/CONSOLE_GROUPS.xml, man/login.defs.d/ENV_HZ.xml,
+	man/login.defs.d/ENV_PATH.xml, man/login.defs.d/ENV_SUPATH.xml:
+	These variables are also used by some tools when compiled with PAM
+	support.
+	* man/login.defs.d/ENV_HZ.xml: Add note that it is only used by
+	sulogin when compiled with PAM support.
+	* man/login.defs.d/ENV_SUPATH.xml: Typos: ENV_PATH -> ENV_SUPATH,
+	and mention sbin in the path.
+	* man/login.defs.d/LOGIN_STRING.xml: Fix typo: confition ->
+	condition.
+	* man/sg.1.xml: Add CONFIGURATION section (SYSLOG_SG_ENAB).
+	* man/su.1.xml: ENV_HZ, LOGIN_STRING, MAIL_DIR, USERGROUPS_ENAB
+	are only used when su is compiled without PAM support.
+	* man/login.defs.5.xml: Added variables: OBSCURE_CHECKS_ENAB
+	PASS_ALWAYS_WARN PASS_CHANGE_TRIES SULOG_FILE SU_NAME
+	SU_WHEEL_ONLY SYSLOG_SG_ENAB SYSLOG_SU_ENAB.
+	* man/login.defs.5.xml: ENVIRON_FILE is only used when compiled
+	without PAM support.
+	* man/login.defs.5.xml: sulogin uses variables even when compiled
+	with PAM support.
+	* man/login.1.xml: ENV_HZ ENV_PATH ENV_SUPATH MAIL_DIR UMASK are
+	only used when login is not compiled with PAM support.
+
+2007-12-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Make sure is_console is only defined when USE_PAM
 	is not defined.
 
