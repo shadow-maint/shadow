@@ -1,5 +1,11 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 412_lastlog_-u_numerical_range
+	* NEWS, src/lastlog.c, man/lastlog.8.xml: Accept numerical user, or
+	ranges with the -u option.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 466_fflush-prompt
 	* libmisc/Makefile.am, lib/prototypes.h, libmisc/yesno.c, src/grpck.c,
 	src/pwck.c: move yes_or_no() from grpck/pwck to a separate

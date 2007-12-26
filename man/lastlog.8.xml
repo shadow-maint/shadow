@@ -71,22 +71,20 @@
       <varlistentry>
 	<term>
 	  <option>-u</option>, <option>--user</option>
-	  <replaceable>LOGIN</replaceable>
+	  <replaceable>LOGIN</replaceable>|<replaceable>RANGE</replaceable>
 	</term>
 	<listitem>
-	  <para>Print the lastlog record for user with specified
-	    <emphasis remap='I'>LOGIN</emphasis> only.
+	  <para>
+	    Print the lastlog record of the specified user(s).
 	  </para>
-	</listitem>
-      </varlistentry>
-    </variablelist>
-    <variablelist remap='TP'>
-      <varlistentry>
-	<term>
-	  The <option>-t</option> flag overrides the use of <option>-u</option>.
-	</term>
-	<listitem>
-	  <para></para>
+	  <para>
+	    The users can be specified by a login name, a numerical user ID,
+	    or a <replaceable>RANGE</replaceable> of users. This
+	    <replaceable>RANGE</replaceable> of users can be specified with a
+	    min and max values (<replaceable>UID_MIN-UID_MAX</replaceable>), a
+	    max value (<replaceable>-UID_MAX</replaceable>), or a min value
+	    (<replaceable>UID_MIN-</replaceable>).
+	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>

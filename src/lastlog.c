@@ -50,14 +50,15 @@
  * Global variables
  */
 static FILE *lastlogfile;	/* lastlog file stream */
-static off_t user;		/* one single user, specified on command line */
+static long umin;		/* if uflg, only display users with uid >= umin */
+static long umax;		/* if uflg, only display users with uid <= umax */
 static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
 static int inverse_days;	/* number of days to consider for print command */
 static time_t inverse_seconds;	/* that number of days in seconds */
 
 
-static int uflg = 0;		/* set if user is a valid user id */
+static int uflg = 0;		/* print only an user of range of users */
 static int tflg = 0;		/* print is restricted to most recent days */
 static int bflg = 0;		/* print excludes most recent days */
 static struct lastlog lastlog;	/* scratch structure to play with ... */
@@ -127,26 +128,14 @@ static void print (void)
 {
 	off_t offset;
 
-	if (uflg) {
-		offset = user * sizeof lastlog;
-
-		if (fstat (fileno (lastlogfile), &statbuf)) {
-			perror (LASTLOG_FILE);
-			return;
-		}
-		if (offset >= statbuf.st_size)
-			return;
-
-		fseeko (lastlogfile, offset, SEEK_SET);
-		if (fread ((char *) &lastlog, sizeof lastlog, 1,
-			   lastlogfile) == 1)
-			print_one (pwent);
-		else
-			perror (LASTLOG_FILE);
-	} else {
+	{
 		setpwent ();
 		while ((pwent = getpwent ())) {
 			user = pwent->pw_uid;
+			if (uflg &&
+			    ((umin != -1 && user < umin) ||
+			     (umax != -1 && user > umax)))
+				continue;
 			offset = user * sizeof lastlog;
 
 			fseeko (lastlogfile, offset, SEEK_SET);
@@ -199,15 +188,46 @@ int main (int argc, char **argv)
 				bflg++;
 				break;
 			case 'u':
-				pwent = xgetpwnam (optarg);
-				if (!pwent) {
-					fprintf (stderr,
-						 _("Unknown User: %s\n"),
-						 optarg);
-					exit (1);
-				}
+				/*
+				 * The user can be:
+				 *  - a login name
+				 *  - numerical
+				 *  - a numerical login ID
+				 *  - a range (-x, x-, x-y)
+				 */
 				uflg++;
-				user = pwent->pw_uid;
+				pwent = xgetpwnam (optarg);
+				if (NULL != pwent) {
+					umin = pwent->pw_uid;
+					umax = umin;
+				} else {
+					char *endptr = NULL;
+					user = strtol(optarg, &endptr, 10);
+					if (*optarg != '\0' && *endptr == '\0') {
+						if (user < 0) {
+							/* -<userid> */
+							umin = -1;
+							umax = -user;
+						} else {
+							/* <userid> */
+							umin = user;
+							umax = user;
+						}
+					} else if (endptr[0] == '-' && endptr[1] == '\0') {
+						/* <userid>- */
+						umin = user;
+						umax = -1;
+					} else if (*endptr == '-') {
+						/* <userid>-<userid> */
+						umin = user;
+						umax = atol(endptr+1);
+					} else {
+						fprintf (stderr,
+							 _("Unknown user or range: %s\n"),
+							 optarg);
+						exit (1);
+					}
+				}
 				break;
 			default:
 				usage ();

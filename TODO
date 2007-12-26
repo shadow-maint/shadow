@@ -1,3 +1,6 @@
+faillog
+ - accept numerical user and range of users
+
 Document when/where option appeared, document whether an option is standard
 or not.
 
