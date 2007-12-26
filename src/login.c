@@ -41,6 +41,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
@@ -1039,6 +1040,12 @@ int main (int argc, char **argv)
 	}
 	/* child */
 #endif
+	/* If we were init, we need to start a new session */
+	if (getppid() == 1) {
+		setsid();
+		if (ioctl(0, TIOCSCTTY, 1))
+			fprintf(stderr,_("TIOCSCTTY failed on %s"),tty);
+	}
 
 	/* We call set_groups() above because this clobbers pam_groups.so */
 #ifndef USE_PAM

@@ -1,5 +1,10 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 496_login_init_session
+	* src/login.c, src/sulogin.c: If started as init, start a new session.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 408_passwd_check_arguments
 	* NEWS, src/passwd.c: Make sure that no more than one username
 	argument was provided.

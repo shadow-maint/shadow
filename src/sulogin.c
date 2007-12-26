@@ -35,6 +35,7 @@
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
+#include <sys/ioctl.h>
 #include "defines.h"
 #include "getdef.h"
 #include "prototypes.h"
@@ -141,6 +142,12 @@ static RETSIGTYPE catch_signals (int sig)
 		closelog ();
 #endif
 		exit (1);	/* must be a terminal */
+	}
+	/* If we were init, we need to start a new session */
+	if (getppid() == 1) {
+		setsid();
+		if (ioctl(0, TIOCSCTTY, 1))
+			fprintf(stderr,_("TIOCSCTTY failed"));
 	}
 	while (*envp)		/* add inherited environment, */
 		addenv (*envp++, NULL);	/* some variables change later */
