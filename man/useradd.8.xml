@@ -226,6 +226,19 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
+	<term><option>-l</option></term>
+	<listitem>
+	  <para>
+	    Do not add the user to the lastlog and faillog databases.
+	  </para>
+	  <para>
+	    By default, the user's entries in the lastlog and faillog
+	    databases are resetted to avoid reusing the entry from a previously
+	    deleted user.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
 	<term>
 	  <option>-o</option>, <option>--non-unique</option>
 	</term>

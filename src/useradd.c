@@ -123,6 +123,7 @@ static int
     gflg = 0,			/* primary group ID for new account */
     Gflg = 0,			/* secondary group set for new account */
     kflg = 0,			/* specify a directory to fill new user directory */
+    lflg = 0,			/* do not add user to lastlog database file */
     mflg = 0,			/* create user's home directory if it doesn't exist */
     nflg = 0,			/* create a group having the same name as the user */
     oflg = 0,			/* permit non-unique user ID to be specified with -u */
@@ -630,6 +631,8 @@ static void usage (void)
 			   "  -h, --help                    display this help message and exit\n"
 			   "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 			   "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+			   "  -l,                           do not add the user to the lastlog and\n"
+			   "                                faillog databases\n"
 			   "  -m, --create-home             create home directory for the new user\n"
 			   "                                account\n"
 			   "  -o, --non-unique              allow create user with duplicate\n"
@@ -974,7 +977,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:mMop:s:u:",
+			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMop:s:u:",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -1107,6 +1110,9 @@ static void process_flags (int argc, char **argv)
 				*cp++ = '\0';
 				if (putdef_str (optarg, cp) < 0)
 					exit (E_BAD_ARG);
+				break;
+			case 'l':
+				lflg++;
 				break;
 			case 'm':
 				mflg++;
@@ -1468,7 +1474,7 @@ static void usr_update (void)
 	 * are left unchanged).  --marekm
 	 */
 	/* local, no need for xgetpwuid */
-	if (!getpwuid (user_id)) {
+	if ((!lflg) && (getpwuid (user_id) == NULL)) {
 		faillog_reset (user_id);
 		lastlog_reset (user_id);
 	}

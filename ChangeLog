@@ -1,5 +1,10 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/useradd.c, man/useradd.8.xml: Add option -l to avoid adding
+	the user to the lastlog and faillog databases.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c, src/groupadd.c: NO_GETPWENT is no more supported. Remove
 	associated chunks of code.
 
