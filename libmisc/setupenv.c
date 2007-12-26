@@ -186,8 +186,8 @@ void setup_env (struct passwd *info)
 {
 #ifndef USE_PAM
 	char *envf;
-	char *cp;
 #endif
+	char *cp;
 
 	/*
 	 * Change the current working directory to be the home directory
@@ -242,7 +242,6 @@ void setup_env (struct passwd *info)
 	addenv ("USER", info->pw_name);
 	addenv ("LOGNAME", info->pw_name);
 
-#ifndef USE_PAM
 	/*
 	 * Create the PATH environmental variable and export it.
 	 */
@@ -260,6 +259,7 @@ void setup_env (struct passwd *info)
 		addenv ("PATH", cp);
 	}
 
+#ifndef USE_PAM
 	/*
 	 * Create the MAIL environmental variable and export it.  login.defs
 	 * knows the prefix.

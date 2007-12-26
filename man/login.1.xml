@@ -242,8 +242,8 @@
       &CONSOLE_GROUPS;
       &DEFAULT_HOME;
       <phrase condition="no_pam">&ENV_HZ;</phrase>
-      <phrase condition="no_pam">&ENV_PATH;</phrase>
-      <phrase condition="no_pam">&ENV_SUPATH;</phrase>
+      <phrase>&ENV_PATH;</phrase>
+      <phrase>&ENV_SUPATH;</phrase>
       &ENV_TZ;
       &ENVIRON_FILE;
       &ERASECHAR;

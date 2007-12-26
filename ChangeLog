@@ -1,5 +1,11 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 451_login_PATH
+	* NEWS, libmisc/setupenv.c: Export PATH according to ENV_PATH and
+	ENV_SUPATH, as for su. This impacts login.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 496_login_init_session
 	* src/login.c, src/sulogin.c: If started as init, start a new session.
 
