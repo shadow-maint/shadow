@@ -1,5 +1,35 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Cleanups:
+	* src/useradd.c (find_new_gid): Check that gflg is not set (assert).
+	* src/useradd.c (find_new_gid): Do not check the group name uniqueness
+	(already checked in main).
+	* src/useradd.c (find_new_gid): Avoid a "continue" in the loop.
+	* src/useradd.c (find_new_gid): Remove irrelevant comments.
+	* src/useradd.c (find_new_gid): Fix the function definition's comment.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Merge RedHat's patch shadow-4.0.18.1-findNewUidOnce.patch:
+	* src/useradd.c (usr_update): Do not call find_new_uid(). The UID was
+	already either specified or found by another call to find_new_uid().
+	* src/useradd.c (find_new_uid): Always start with uid_min (find_new_uid()
+	is never called when user_id was already specified).
+	* src/useradd.c (find_new_uid): Fix the comments (find_new_uid() is not
+	called when the UID is specified (uflg)).
+	* src/useradd.c (main): Only call find_new_uid() if (!oflg) and (!uflg).
+	If uflg is set (but not oflg), check the UID uniqueness.
+	* src/useradd.c (find_new_uid): Don't check the uid and user name
+	uniqueness in find_new_uid(). The user name uniqueness is already checked
+	during the parameter validation. UID uniqueness is also checked (see
+	above).
+	* src/useradd.c (find_new_uid): Don't check uflg in find_new_uid().
+	* src/useradd.c (find_new_uid): Make sure that find_new_uid() is not
+	called when uflg is set (assert).
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Merge RedHat's patch shadow-4.1.0-lOption.patch
 	* NEWS, src/useradd.c, man/useradd.8.xml: Add option -l to avoid adding
 	the user to the lastlog and faillog databases.
 
@@ -15,6 +45,7 @@
 
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge RedHat's patch shadow-4.0.3-noinst.patch
 	* NEWS, lib/Makefile.am: Do not install the shadow library per default.
 	lib_LTLIBRARIES changed to noinst_LTLIBRARIES.
 

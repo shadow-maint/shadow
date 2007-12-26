@@ -31,6 +31,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -816,52 +817,31 @@ static void grp_update (void)
  * find_new_uid - find the next available UID
  *
  *	find_new_uid() locates the next highest unused UID in the password
- *	file, or checks the given user ID against the existing ones for
- *	uniqueness.
+ *	file.
  */
 static void find_new_uid (void)
 {
 	const struct passwd *pwd;
 	uid_t uid_min, uid_max;
 
+	/*
+	 * It doesn't make sense to use find_new_uid(),
+	 * if an UID is specified via "-u" option.
+	 */
+	assert (!uflg);
+
 	uid_min = getdef_unum ("UID_MIN", 1000);
 	uid_max = getdef_unum ("UID_MAX", 60000);
 
-	/*
-	 * Start with some UID value if the user didn't provide us with
-	 * one already.
-	 */
-	if (!uflg)
-		user_id = uid_min;
+	user_id = uid_min;
 
 	/*
-	 * Search the entire password file, either looking for this
-	 * UID (if the user specified one with -u) or looking for the
-	 * largest unused value.
+	 * Search the entire password file,
+	 * looking for the largest unused value.
 	 */
 	setpwent ();
-	while ((pwd = getpwent ())) {
-		if (strcmp (user_name, pwd->pw_name) == 0) {
-			fprintf (stderr, _("%s: name %s is not unique\n"),
-				 Prog, user_name);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
-				      user_name, user_id, 0);
-#endif
-			exit (E_NAME_IN_USE);
-		}
-		if (uflg && user_id == pwd->pw_uid) {
-			fprintf (stderr, _("%s: UID %u is not unique\n"),
-				 Prog, (unsigned int) user_id);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
-				      user_name, user_id, 0);
-#endif
-			exit (E_UID_IN_USE);
-		}
-		if (!uflg && pwd->pw_uid >= user_id) {
-			if (pwd->pw_uid > uid_max)
-				continue;
+	while ((pwd = getpwent ()) != NULL) {
+		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
 			user_id = pwd->pw_uid + 1;
 		}
 	}
@@ -872,39 +852,39 @@ static void find_new_uid (void)
 	 * free UID starting with UID_MIN (it's O(n*n) but can be avoided
 	 * by not having users with UID equal to UID_MAX).  --marekm
 	 */
-	if (!uflg && user_id == uid_max + 1) {
+	if (user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
 			/* local, no need for xgetpwuid */
 			if (!getpwuid (user_id))
 				break;
 		}
 		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: can't get unique UID\n"), Prog);
+			fprintf (stderr, _("%s: can't get unique UID (run out of UIDs)\n"), Prog);
 			fail_exit (E_UID_IN_USE);
 		}
 	}
 }
 
- /*
-  * find_new_gid - find the next available GID
-  *
-  *     find_new_gid() locates the next highest unused GID in the group
-  *     file, or checks the given group ID against the existing ones for
-  *     uniqueness.
-  */
-
+/*
+ * find_new_gid - find the next available GID
+ *
+ *	find_new_gid() locates the next highest unused GID in the group
+ *	file
+ */
 static void find_new_gid ()
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max;
 
+	/*
+	 * It doesn't make sense to use find_new_gid(),
+	 * if a group is specified via "-g" option.
+	 */
+	assert (!gflg);
+
 	gid_min = getdef_num ("GID_MIN", 500);
 	gid_max = getdef_num ("GID_MAX", 60000);
 
-	/*
-	 * Start with some GID value if the user didn't provide us with
-	 * one already.
-	 */
 	user_gid = gid_min;
 
 	/*
@@ -914,13 +894,7 @@ static void find_new_gid ()
 	 */
 	setgrent ();
 	while ((grp = getgrent ())) {
-		if (strcmp (user_name, grp->gr_name) == 0) {
-			user_gid = grp->gr_gid;
-			return;
-		}
-		if (grp->gr_gid >= user_gid) {
-			if (grp->gr_gid > gid_max)
-				continue;
+		if ((grp->gr_gid >= user_gid) && (grp->gr_gid <= gid_max)) {
 			user_gid = grp->gr_gid + 1;
 		}
 	}
@@ -1448,9 +1422,6 @@ static void usr_update (void)
 	struct passwd pwent;
 	struct spwd spent;
 
-	if (!oflg)
-		find_new_uid ();
-
 	/*
 	 * Fill in the password structure with any new fields, making
 	 * copies of strings.
@@ -1729,7 +1700,17 @@ int main (int argc, char **argv)
 		/* first, seek for a valid uid to use for this user.
 		 * We do this because later we can use the uid we found as
 		 * gid too ... --gafton */
-		find_new_uid ();
+		if (!uflg)
+			find_new_uid ();
+		else {
+			if (getpwuid (user_id) != NULL) {
+				fprintf (stderr, _("%s: UID %u is not unique\n"), Prog, (unsigned int) user_id);
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, user_id, 0);
+#endif
+				exit (E_UID_IN_USE);
+			}
+		}
 	}
 
 	/* do we have to add a group for that user? This is why we need to
