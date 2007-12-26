@@ -362,19 +362,9 @@ int main (int argc, char **argv)
 		};
 
 		while ((c =
-			getopt_long (argc, argv, "-c:hlmps:", long_options,
+			getopt_long (argc, argv, "c:hlmps:", long_options,
 				     &option_index)) != -1) {
 			switch (c) {
-			case 1:
-				/* this is not an su option */
-				/* The next arguments are either '-', the
-				 * target name, or arguments to be passed
-				 * to the shell.
-				 */
-				/* rewind the (not yet handled) option */
-				optind--;
-				goto end_su_options;
-				break;	/* NOT REACHED */
 			case 'c':
 				command = optarg;
 				break;
@@ -399,7 +389,7 @@ int main (int argc, char **argv)
 				usage ();	/* NOT REACHED */
 			}
 		}
-	      end_su_options:
+
 		if (optind < argc && !strcmp (argv[optind], "-")) {
 			fakelogin = 1;
 			optind++;

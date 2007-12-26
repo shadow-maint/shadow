@@ -10,6 +10,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.
+- su
+  * su's arguments are now reordered. If needed, use -- to separate su's
+    options from the shell's options.
 
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 

@@ -1,5 +1,10 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 480_getopt_args_reorder
+	* NEWS, src/su.c: su's arguments are now reordered.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge RedHat's patch shadow-4.0.18.1-mtime.patch:
 	* NEWS: Document that usermod will now preserve user's file modification
 	and access time.
