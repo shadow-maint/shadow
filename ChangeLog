@@ -3,6 +3,8 @@
 	Merge Debian's patch 451_login_PATH
 	* NEWS, libmisc/setupenv.c: Export PATH according to ENV_PATH and
 	ENV_SUPATH, as for su. This impacts login.
+	* man/login.1.xml: PATH and SUPATH are now used both when PAM support
+	is disabled and enabled.
 
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
