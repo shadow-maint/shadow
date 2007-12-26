@@ -789,6 +789,12 @@ int main (int argc, char **argv)
 		name = myname;
 
 	/*
+	 * Make sure that at most one username was specified.
+	 */
+	if (argc > optind+1)
+		usage (E_USAGE);
+
+	/*
 	 * The -a flag requires -S, no other flags, no username, and
 	 * you must be root.  --marekm
 	 */

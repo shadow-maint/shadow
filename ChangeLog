@@ -1,5 +1,11 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 408_passwd_check_arguments
+	* NEWS, src/passwd.c: Make sure that no more than one username
+	argument was provided.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 412_lastlog_-u_numerical_range
 	* NEWS, src/lastlog.c, man/lastlog.8.xml: Accept numerical user, or
 	ranges with the -u option.
