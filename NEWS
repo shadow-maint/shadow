@@ -1,5 +1,11 @@
 $Id$
 
+shadow-4.0.18.2 -> shadow-4.1.0						UNRELEASED
+
+*** general:
+- packaging
+  Do not install the shadow library per default.
+
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 
 *** security:

@@ -1,3 +1,8 @@
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, lib/Makefile.am: Do not install the shadow library per default.
+	lib_LTLIBRARIES changed to noinst_LTLIBRARIES.
+
 2007-12-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Prepare the 4.1.0 release.

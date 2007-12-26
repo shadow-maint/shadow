@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS = 1.0 foreign
 
 DEFS = 
 
-lib_LTLIBRARIES = libshadow.la
+noinst_LTLIBRARIES = libshadow.la
 
 libshadow_la_LDFLAGS = -version-info 0:0:0
 libshadow_la_LIBADD = $(INTLLIBS) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
