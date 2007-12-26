@@ -128,29 +128,27 @@ static void print (void)
 {
 	off_t offset;
 
-	{
-		setpwent ();
-		while ((pwent = getpwent ())) {
-			user = pwent->pw_uid;
-			if (uflg &&
-			    ((umin != -1 && user < umin) ||
-			     (umax != -1 && user > umax)))
-				continue;
-			offset = user * sizeof lastlog;
+	setpwent ();
+	while ((pwent = getpwent ())) {
+		user = pwent->pw_uid;
+		if (uflg &&
+		    ((umin != -1 && user < umin) ||
+		     (umax != -1 && user > umax)))
+			continue;
+		offset = user * sizeof lastlog;
 
-			fseeko (lastlogfile, offset, SEEK_SET);
-			if (fread ((char *) &lastlog, sizeof lastlog, 1,
-				   lastlogfile) != 1)
-				continue;
+		fseeko (lastlogfile, offset, SEEK_SET);
+		if (fread ((char *) &lastlog, sizeof lastlog, 1,
+			   lastlogfile) != 1)
+			continue;
 
-			if (tflg && NOW - lastlog.ll_time > seconds)
-				continue;
+		if (tflg && NOW - lastlog.ll_time > seconds)
+			continue;
 
-			if (bflg && NOW - lastlog.ll_time < inverse_seconds)
-				continue;
+		if (bflg && NOW - lastlog.ll_time < inverse_seconds)
+			continue;
 
-			print_one (pwent);
-		}
+		print_one (pwent);
 	}
 }
 
