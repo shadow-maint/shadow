@@ -7,6 +7,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Do not install the shadow library per default.
 - useradd
   * New option -l to avoid adding the user to the lastlog and faillog databases.
+- usermod
+  * Keep the access and modification time of files when moving an user's home
+    directory.
 
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 

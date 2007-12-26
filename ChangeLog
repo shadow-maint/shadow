@@ -1,5 +1,16 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge RedHat's patch shadow-4.0.18.1-mtime.patch:
+	* NEWS: Document that usermod will now preserve user's file modification
+	and access time.
+	* libmisc/copydir.c: Preserve the access and modification time of copied
+	files. This is important for usermod. This will also impact useradd, for
+	the skeleton files, but this is not important.
+	* libmisc/copydir.c: Stop and return an error if a file could not be
+	closed after during a copy.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Cleanups:
 	* src/useradd.c (find_new_gid): Check that gflg is not set (assert).
 	* src/useradd.c (find_new_gid): Do not check the group name uniqueness

@@ -33,6 +33,7 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include "prototypes.h"
@@ -154,6 +155,7 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	struct DIRECT *ent;
 	struct stat sb;
 	struct link_name *lp;
+	struct timeval mt[2];
 	DIR *dir;
 
 	/*
@@ -215,6 +217,18 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		if (LSTAT (src_name, &sb) == -1)
 			continue;
 
+#if  defined(_BSD_SOURCE) || defined(_SVID_SOURCE)
+		mt[0].tv_sec  = sb.st_atim.tv_sec;
+		mt[0].tv_usec = sb.st_atim.tv_nsec / 1000;
+		mt[1].tv_sec  = sb.st_mtim.tv_sec;
+		mt[1].tv_usec = sb.st_mtim.tv_nsec / 1000;
+#else
+		mt[0].tv_sec  = sb.st_atime;
+		mt[0].tv_usec = sb.st_atimensec / 1000;
+		mt[1].tv_sec  = sb.st_mtime;
+		mt[1].tv_usec = sb.st_mtimensec / 1000;
+#endif
+
 		if (S_ISDIR (sb.st_mode)) {
 
 			/*
@@ -230,10 +244,12 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 				      uid == (uid_t) - 1 ? sb.st_uid : uid,
 				      gid == (gid_t) - 1 ? sb.st_gid : gid)
 			    || chmod (dst_name, sb.st_mode)
-			    || copy_tree (src_name, dst_name, uid, gid)) {
+			    || copy_tree (src_name, dst_name, uid, gid)
+			    || utimes (dst_name, mt)) {
 				err++;
 				break;
 			}
+
 			continue;
 		}
 #ifdef	S_IFLNK
@@ -270,13 +286,21 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 #ifdef WITH_SELINUX
 			selinux_file_context (dst_name);
 #endif
-			if (symlink (oldlink, dst_name) ||
-			    lchown (dst_name,
+			if (symlink (oldlink, dst_name)
+			    || lchown (dst_name,
 				    uid == (uid_t) - 1 ? sb.st_uid : uid,
 				    gid == (gid_t) - 1 ? sb.st_gid : gid)) {
 				err++;
 				break;
 			}
+
+			/* 2007-10-18: We don't care about
+			 *  exit status of lutimes because
+			 *  it returns ENOSYS on many system
+			 *  - not implemented
+			 */
+			lutimes (dst_name, mt);
+
 			continue;
 		}
 #endif
@@ -314,10 +338,12 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			    || chown (dst_name,
 				      uid == (uid_t) - 1 ? sb.st_uid : uid,
 				      gid == (gid_t) - 1 ? sb.st_gid : gid)
-			    || chmod (dst_name, sb.st_mode & 07777)) {
+			    || chmod (dst_name, sb.st_mode & 07777)
+			    || utimes (dst_name, mt)) {
 				err++;
 				break;
 			}
+
 			continue;
 		}
 
@@ -343,14 +369,25 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 			err++;
 			break;
 		}
+
 		while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
 			if (write (ofd, buf, cnt) != cnt) {
 				cnt = -1;
 				break;
 			}
 		}
+
 		close (ifd);
-		close (ofd);
+
+		if (futimes (ofd, mt) != 0) {
+			err++;
+			break;
+		}
+
+		if (close (ofd) != 0) {
+			err++;
+			break;
+		}
 
 		if (cnt == -1) {
 			err++;
