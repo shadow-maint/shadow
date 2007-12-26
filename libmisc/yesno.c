@@ -1,5 +1,5 @@
 /*
- * Copyright 1990, Julianne Frances Haugh
+ * Copyright 1992 - 1994, Julianne Frances Haugh
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -17,7 +17,7 @@
  * THIS SOFTWARE IS PROVIDED BY JULIE HAUGH AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED. IN NO EVENT SHALL JULIE HAUGH OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -27,73 +27,49 @@
  * SUCH DAMAGE.
  */
 
-#include <config.h>
+/*
+ * Common code for yes/no prompting
+ *
+ * Used by pwck.c and grpck.c
+ */
+
+#include "config.h"
 
 #ident "$Id$"
 
-#include <ctype.h>
-#include <string.h>
 #include <stdio.h>
 #include "prototypes.h"
+
 /*
- * valid_field - insure that a field contains all legal characters
+ * yes_or_no - get answer to question from the user
  *
- * The supplied field is scanned for non-printing and other illegal
- * characters.  If any illegal characters are found, valid_field
- * returns -1.  Zero is returned for success.
+ *	It returns 0 if no.
+ *
+ *	If the read_only flag is set, it will print No, and will return 0.
  */
-int valid_field (const char *field, const char *illegal)
+int yes_or_no (int read_only)
 {
-	const char *cp;
+	char buf[80];
 
-	for (cp = field;
-	     *cp && isprint (*cp & 0x7F) && !strchr (illegal, *cp); cp++);
-
-	if (*cp)
-		return -1;
-	else
+	/*
+	 * In read-only mode all questions are answered "no".
+	 */
+	if (read_only) {
+		printf (_("No\n"));
 		return 0;
-}
-
-/*
- * change_field - change a single field if a new value is given.
- *
- * prompt the user with the name of the field being changed and the
- * current value.
- */
-
-void change_field (char *buf, size_t maxsize, const char *prompt)
-{
-	char newf[200];
-	char *cp;
-
-	if (maxsize > sizeof (newf))
-		maxsize = sizeof (newf);
-
-	printf ("\t%s [%s]: ", prompt, buf);
-	fflush (stdout);
-	if (fgets (newf, maxsize, stdin) != newf)
-		return;
-
-	if (!(cp = strchr (newf, '\n')))
-		return;
-	*cp = '\0';
-
-	if (newf[0]) {
-		/*
-		 * Remove leading and trailing whitespace.  This also
-		 * makes it possible to change the field to empty, by
-		 * entering a space.  --marekm
-		 */
-
-		while (--cp >= newf && isspace (*cp));
-		*++cp = '\0';
-
-		cp = newf;
-		while (*cp && isspace (*cp))
-			cp++;
-
-		strncpy (buf, cp, maxsize - 1);
-		buf[maxsize - 1] = '\0';
 	}
+
+	/*
+	 * Typically, there's a prompt on stdout, sometimes unflushed.
+	 */
+	fflush (stdout);
+
+	/*
+	 * Get a line and see what the first character is.
+	 */
+	/* TODO: use gettext */
+	if (fgets (buf, sizeof buf, stdin))
+		return buf[0] == 'y' || buf[0] == 'Y';
+
+	return 0;
 }

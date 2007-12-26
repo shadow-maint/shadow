@@ -73,7 +73,6 @@ static int quiet = 0;		/* don't report warnings, only errors */
 
 /* local function prototypes */
 static void usage (void);
-static int yes_or_no (void);
 
 /*
  * usage - print syntax message and exit
@@ -83,31 +82,6 @@ static void usage (void)
 	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
 		 Prog);
 	exit (E_USAGE);
-}
-
-/*
- * yes_or_no - get answer to question from the user
- */
-static int yes_or_no (void)
-{
-	char buf[80];
-
-	/*
-	 * In read-only mode all questions are answered "no".
-	 */
-
-	if (read_only) {
-		printf (_("No\n"));
-		return 0;
-	}
-
-	/*
-	 * Get a line and see what the first character is.
-	 */
-	if (fgets (buf, sizeof buf, stdin))
-		return buf[0] == 'y' || buf[0] == 'Y';
-
-	return 0;
 }
 
 /*
@@ -261,7 +235,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			/*
@@ -316,7 +290,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_pw;
 		}
 
@@ -383,7 +357,7 @@ int main (int argc, char **argv)
 				printf (_("add user '%s' in %s? "),
 					pwd->pw_name, spw_file);
 				errors++;
-				if (yes_or_no ()) {
+				if (yes_or_no (read_only)) {
 					struct spwd sp;
 					struct passwd pw;
 
@@ -462,7 +436,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			/*
@@ -517,7 +491,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_spw;
 		}
 
@@ -538,7 +512,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_spw;
 		}
 

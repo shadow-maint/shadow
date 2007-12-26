@@ -194,4 +194,7 @@ extern struct group *xgetgrgid (gid_t);
 /* xgetspnam.c */
 extern struct spwd *xgetspnam(const char *);
 
+/* yesno.c */
+extern int yes_or_no (int read_only);
+
 #endif				/* _PROTOTYPES_H */

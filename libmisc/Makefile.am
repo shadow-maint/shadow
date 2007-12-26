@@ -55,4 +55,5 @@ libmisc_a_SOURCES = \
 	xgetgrnam.c \
 	xgetgrgid.c \
 	xgetspnam.c \
-	xmalloc.c
+	xmalloc.c \
+	yesno.c

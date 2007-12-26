@@ -74,7 +74,6 @@ static int read_only = 0;
 
 /* local function prototypes */
 static void usage (void);
-static int yes_or_no (void);
 static void delete_member (char **, const char *);
 
 /*
@@ -88,30 +87,6 @@ static void usage (void)
 	fprintf (stderr, _("Usage: %s [-r] [-s] [group]\n"), Prog);
 #endif
 	exit (E_USAGE);
-}
-
-/*
- * yes_or_no - get answer to question from the user
- */
-static int yes_or_no (void)
-{
-	char buf[80];
-
-	/*
-	 * In read-only mode all questions are answered "no".
-	 */
-	if (read_only) {
-		printf (_("No\n"));
-		return 0;
-	}
-
-	/*
-	 * Get a line and see what the first character is.
-	 */
-	if (fgets (buf, sizeof buf, stdin))
-		return buf[0] == 'y' || buf[0] == 'Y';
-
-	return 0;
 }
 
 /*
@@ -296,7 +271,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			/*
@@ -352,7 +327,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_gr;
 		}
 
@@ -389,7 +364,7 @@ int main (int argc, char **argv)
 				grp->gr_name, grp->gr_mem[i]);
 			printf (_("delete member '%s'? "), grp->gr_mem[i]);
 
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			SYSLOG ((LOG_INFO, "delete member '%s' group '%s'",
@@ -414,7 +389,7 @@ int main (int argc, char **argv)
 				printf (_("add group '%s' in %s ?"),
 					grp->gr_name, sgr_file);
 				errors++;
-				if (yes_or_no ()) {
+				if (yes_or_no (read_only)) {
 					struct sgrp sg;
 					struct group gr;
 					static char *empty = NULL;
@@ -501,7 +476,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			/*
@@ -557,7 +532,7 @@ int main (int argc, char **argv)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_sg;
 		}
 
@@ -570,7 +545,7 @@ int main (int argc, char **argv)
 				grp_file);
 			printf (_("delete line '%s'? "), sge->line);
 			errors++;
-			if (yes_or_no ())
+			if (yes_or_no (read_only))
 				goto delete_sg;
 		} else {
 			/**
@@ -612,7 +587,7 @@ int main (int argc, char **argv)
 			printf (_("delete administrative member '%s'? "),
 				sgr->sg_adm[i]);
 
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			SYSLOG ((LOG_INFO,
@@ -640,7 +615,7 @@ int main (int argc, char **argv)
 				sgr->sg_name, sgr->sg_mem[i]);
 			printf (_("delete member '%s'? "), sgr->sg_mem[i]);
 
-			if (!yes_or_no ())
+			if (!yes_or_no (read_only))
 				continue;
 
 			SYSLOG ((LOG_INFO,

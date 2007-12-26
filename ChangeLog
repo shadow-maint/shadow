@@ -1,5 +1,14 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Merge Debian's patch 466_fflush-prompt
+	* libmisc/Makefile.am, lib/prototypes.h, libmisc/yesno.c, src/grpck.c,
+	src/pwck.c: move yes_or_no() from grpck/pwck to a separate
+	libmisc/yesno.c (with a read_only argument).
+	* libmisc/fields.c, libmisc/yesno.c: Make sure stdout is flushed before
+	reading the user's answer.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 480_getopt_args_reorder
 	* NEWS, src/su.c: su's arguments are now reordered.
 
