@@ -41,6 +41,12 @@
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
+
+#define MSG_WARN_EDIT_OTHER_FILE _( \
+	"You have modified %s.\n"\
+	"You may need to modify %s for consistency.\n"\
+	"Please use the command `%s' to do so.\n")
+
 /*
  * Global variables
  */
@@ -285,17 +291,41 @@ int main (int argc, char **argv)
 	}
 
 	if (do_vipw) {
-		if (editshadow)
+		if (editshadow) {
 			vipwedit (SHADOW_FILE, spw_lock, spw_unlock);
-		else
+			printf (MSG_WARN_EDIT_OTHER_FILE,
+			        SHADOW_FILE,
+			        PASSWD_FILE,
+			        "vipw");
+		} else {
 			vipwedit (PASSWD_FILE, pw_lock, pw_unlock);
+			if (spw_file_present ()) {
+				printf (MSG_WARN_EDIT_OTHER_FILE,
+				        PASSWD_FILE,
+				        SHADOW_FILE,
+				        "vipw -s");
+			}
+		}
 	} else {
 #ifdef SHADOWGRP
-		if (editshadow)
+		if (editshadow) {
 			vipwedit (SGROUP_FILE, sgr_lock, sgr_unlock);
-		else
+			printf (MSG_WARN_EDIT_OTHER_FILE,
+			        SGROUP_FILE,
+			        GROUP_FILE,
+			        "vigr");
+		} else {
 #endif
 			vipwedit (GROUP_FILE, gr_lock, gr_unlock);
+#ifdef SHADOWGRP
+			if (sgr_file_present ()) {
+				printf (MSG_WARN_EDIT_OTHER_FILE,
+				        GROUP_FILE,
+				        SGROUP_FILE,
+				        "vigr -s");
+			}
+#endif
+		}
 	}
 
 	nscd_flush_cache ("passwd");

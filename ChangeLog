@@ -1,3 +1,9 @@
+2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Merge Debian's patch 462_warn_to_edit_shadow
+	* NEW, src/vipw.c: Recommend editing the shadowed (resp. regular) file
+	if the regular (resp. shadowed) file was edited.
+
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Merge Debian's patch 451_login_PATH
