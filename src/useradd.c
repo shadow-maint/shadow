@@ -836,13 +836,8 @@ static void find_new_uid (void)
 	 * UID (if the user specified one with -u) or looking for the
 	 * largest unused value.
 	 */
-#ifdef NO_GETPWENT
-	pw_rewind ();
-	while ((pwd = pw_next ())) {
-#else		/* using getpwent() we can check against NIS users etc. */
 	setpwent ();
 	while ((pwd = getpwent ())) {
-#endif
 		if (strcmp (user_name, pwd->pw_name) == 0) {
 			fprintf (stderr, _("%s: name %s is not unique\n"),
 				 Prog, user_name);
@@ -876,17 +871,9 @@ static void find_new_uid (void)
 	 */
 	if (!uflg && user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
-#ifdef NO_GETPWENT
-			pw_rewind ();
-			while ((pwd = pw_next ())
-			       && pwd->pw_uid != user_id);
-			if (!pwd)
-				break;
-#else
 			/* local, no need for xgetpwuid */
 			if (!getpwuid (user_id))
 				break;
-#endif
 		}
 		if (user_id == uid_max) {
 			fprintf (stderr, _("%s: can't get unique UID\n"), Prog);
@@ -922,14 +909,8 @@ static void find_new_gid ()
 	 * GID (if the user specified one with -g) or looking for the
 	 * largest unused value.
 	 */
-#ifdef NO_GETGRENT
-	gr_rewind ();
-	while ((grp = gr_next ()))
-#else
 	setgrent ();
-	while ((grp = getgrent ()))
-#endif
-	{
+	while ((grp = getgrent ())) {
 		if (strcmp (user_name, grp->gr_name) == 0) {
 			user_gid = grp->gr_gid;
 			return;
@@ -940,26 +921,11 @@ static void find_new_gid ()
 			user_gid = grp->gr_gid + 1;
 		}
 	}
-#ifndef NO_GETGRENT		/* glibc does have this, so ... */
-	/* A quick test gets here: if the UID is available
-	 * as a GID, go ahead and use it */
-	if (!getgrgid (user_id)) { /* local, no need for xgetgrgid */
-		user_gid = user_id;
-		return;
-	}
-#endif
 	if (user_gid == gid_max + 1) {
 		for (user_gid = gid_min; user_gid < gid_max; user_gid++) {
-#ifdef NO_GETGRENT
-			gr_rewind ();
-			while ((grp = gr_next ()) && grp->gr_gid != user_gid);
-			if (!grp)
-				break;
-#else
 			/* local, no need for xgetgrgid */
 			if (!getgrgid (user_gid))
 				break;
-#endif
 		}
 		if (user_gid == gid_max) {
 			fprintf (stderr,

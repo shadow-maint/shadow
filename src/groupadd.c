@@ -214,13 +214,8 @@ static void find_new_gid (void)
 	 * user specified one with -g) or looking for the largest unused
 	 * value.
 	 */
-#ifdef NO_GETGRENT
-	gr_rewind ();
-	while ((grp = gr_next ())) {
-#else
 	setgrent ();
 	while ((grp = getgrent ())) {
-#endif
 		if (strcmp (group_name, grp->gr_name) == 0) {
 			if (fflg) {
 				fail_exit (E_SUCCESS);
@@ -233,11 +228,7 @@ static void find_new_gid (void)
 			if (fflg) {
 				/* turn off -g and search again */
 				gflg = 0;
-#ifdef NO_GETGRENT
-				gr_rewind ();
-#else
 				setgrent ();
-#endif
 				continue;
 			}
 			fprintf (stderr, _("%s: GID %u is not unique\n"),
@@ -252,17 +243,9 @@ static void find_new_gid (void)
 	}
 	if (!gflg && group_id == gid_max + 1) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
-#ifdef NO_GETGRENT
-			gr_rewind ();
-			while ((grp = gr_next ())
-			       && grp->gr_gid != group_id);
-			if (!grp)
-				break;
-#else
 			/* local, no need for xgetgrgid */
 			if (!getgrgid (group_id))
 				break;
-#endif
 		}
 		if (group_id == gid_max) {
 			fprintf (stderr, _("%s: can't get unique GID\n"), Prog);

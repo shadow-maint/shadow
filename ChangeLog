@@ -1,5 +1,10 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c, src/groupadd.c: NO_GETPWENT is no more supported. Remove
+	associated chunks of code.
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupadd.8.xml: Document the long options (--force, --gid, --key,
 	--non-unique).
 
