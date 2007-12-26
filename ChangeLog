@@ -1,5 +1,10 @@
 2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupadd.8.xml: Document the long options (--force, --gid, --key,
+	--non-unique).
+
+2007-12-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, lib/Makefile.am: Do not install the shadow library per default.
 	lib_LTLIBRARIES changed to noinst_LTLIBRARIES.
 
