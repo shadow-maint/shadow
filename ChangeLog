@@ -1,5 +1,12 @@
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	gpasswd cleanup
+	* src/gpasswd.c: Add argument name to the internal function
+	prototypes.
+	* src/gpasswd.c: Document global variables.
+
+2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Merge Debian's patch 462_warn_to_edit_shadow
 	* NEW, src/vipw.c: Recommend editing the shadowed (resp. regular) file
 	if the regular (resp. shadowed) file was edited.

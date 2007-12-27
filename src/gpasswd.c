@@ -49,25 +49,30 @@
 /*
  * Global variables
  */
+/* The name of this command, as it is invoked */
 static char *Prog;
 
 #ifdef SHADOWGRP
+/* Indicate if shadow groups are enabled on the system
+ * (/etc/gshadow present) */
 static int is_shadowgrp;
 #endif
 
 static int
  aflg = 0, Aflg = 0, dflg = 0, Mflg = 0, rflg = 0, Rflg = 0;
 
-unsigned int bywho = -1;
+/* The UID of the caller */
+unsigned long bywho = -1;
 
+/* The number of retries for th user to provide and repeat a new password */
 #ifndef	RETRIES
 #define	RETRIES	3
 #endif
 
 /* local function prototypes */
 static void usage (void);
-static RETSIGTYPE catch_signals (int);
-static int check_list (const char *);
+static RETSIGTYPE catch_signals (int killed);
+static int check_list (const char *users);
 
 /*
  * usage - display usage message
