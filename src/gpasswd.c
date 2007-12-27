@@ -161,7 +161,8 @@ static int check_list (const char *users)
 	size_t len;
 
 	for (start = users; start && *start; start = end) {
-		if ((end = strchr (start, ','))) {
+		end = strchr (start, ',');
+		if (NULL != end) {
 			len = end - start;
 			end++;
 		} else {
@@ -315,7 +316,7 @@ static void open_files (void)
 #endif
 		exit (1);
 	}
-#ifdef  SHADOWGRP
+#ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_lock () == 0)) {
 		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
 		SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
@@ -335,7 +336,7 @@ static void open_files (void)
 #endif
 		exit (1);
 	}
-#ifdef  SHADOWGRP
+#ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
@@ -366,7 +367,7 @@ static void close_files (void)
 #endif
 		exit (1);
 	}
-#ifdef  SHADOWGRP
+#ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_close () == 0)) {
 		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
@@ -517,7 +518,8 @@ static void get_group (struct group *gr)
 		exit (1);
 	}
 
-	if (!(tmpgr = gr_locate (group))) {
+	tmpgr = gr_locate (group);
+	if (NULL == tmpgr) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -551,7 +553,8 @@ static void get_group (struct group *gr)
 #endif
 		exit (1);
 	}
-	if ((tmpsg = sgr_locate (group))) {
+	tmpsg = sgr_locate (group);
+	if (NULL != tmpsg) {
 		*sg = *tmpsg;
 		sg->sg_name = xstrdup (tmpsg->sg_name);
 		sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
@@ -616,13 +619,15 @@ static void change_passwd (struct group *gr)
 	printf (_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
-		if (!(cp = getpass (_("New Password: ")))) {
+		cp = getpass (_("New Password: "));
+		if (NULL == cp) {
 			exit (1);
 		}
 
 		STRFCPY (pass, cp);
 		strzero (cp);
-		if (!(cp = getpass (_("Re-enter new password: ")))) {
+		cp = getpass (_("Re-enter new password: "));
+		if (NULL == cp) {
 			exit (1);
 		}
 
