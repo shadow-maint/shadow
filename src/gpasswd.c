@@ -150,6 +150,8 @@ static RETSIGTYPE catch_signals (int killed)
  *
  *	check_list scans a comma-separated list of user names and checks
  *	that each listed name exists.
+ *
+ *	It returns 0 on success.
  */
 static int check_list (const char *users)
 {
