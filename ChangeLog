@@ -11,6 +11,7 @@
 	function.
 	* src/gpasswd.c: New functions: check_perms(), get_group(),
 	change_passwd(), check_flags(). Split out of main() to simplify main().
+	* src/gpasswd.c: Avoid implicit brackets.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

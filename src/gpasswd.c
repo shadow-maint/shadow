@@ -132,10 +132,11 @@ static RETSIGTYPE catch_signals (int killed)
 {
 	static TERMIO sgtty;
 
-	if (killed)
+	if (killed) {
 		STTY (0, &sgtty);
-	else
+	} else {
 		GTTY (0, &sgtty);
+	}
 
 	if (killed) {
 		putchar ('\n');
@@ -165,8 +166,9 @@ static int check_list (const char *users)
 			len = strlen (start);
 		}
 
-		if (len > sizeof (username) - 1)
+		if (len > sizeof (username) - 1) {
 			len = sizeof (username) - 1;
+		}
 		strncpy (username, start, len);
 		username[len] = '\0';
 
@@ -176,7 +178,7 @@ static int check_list (const char *users)
 
 		if (!getpwnam (username)) { /* local, no need for xgetpwnam */
 			fprintf (stderr, _("%s: unknown user %s\n"),
-				 Prog, username);
+			         Prog, username);
 			errors++;
 		}
 	}
@@ -231,8 +233,9 @@ static void process_flags (int argc, char **argv)
 				exit (2);
 			}
 			admins = optarg;
-			if (check_list (admins))
+			if (check_list (admins)) {
 				exit (1);
+			}
 			Aflg++;
 			break;
 #endif
@@ -252,8 +255,9 @@ static void process_flags (int argc, char **argv)
 				failure ();
 			}
 			members = optarg;
-			if (check_list (members))
+			if (check_list (members)) {
 				exit (1);
+			}
 			Mflg++;
 			break;
 		case 'r':	/* remove group password */
@@ -281,8 +285,9 @@ static void check_flags (int argc, int opt_index)
 	/*
 	 * Make sure exclusive flags are exclusive
 	 */
-	if (aflg + dflg + rflg + Rflg + (Aflg || Mflg) > 1)
+	if (aflg + dflg + rflg + Rflg + (Aflg || Mflg) > 1) {
 		usage ();
+	}
 
 	/*
 	 * Make sure one (and only one) group was provided
@@ -307,7 +312,7 @@ static void open_files (void)
 		              "locking /etc/group", group, -1, 0);
 #endif
 		exit (1);
-        }
+	}
 #ifdef  SHADOWGRP
 	if (is_shadowgrp && (sgr_lock () == 0)) {
 		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
@@ -399,7 +404,7 @@ static void check_perms (const struct group *gr)
 #ifdef SHADOWGRP
 	/*
 	 * The policy here for changing a group is that 1) you must be root
-	 * or 2). you must be listed as an administrative member. 
+	 * or 2). you must be listed as an administrative member.
 	 * Administrative members can do anything to a group that the root
 	 * user can.
 	 */
@@ -565,7 +570,9 @@ static void get_group (struct group *gr)
 			sg->sg_adm[1] = 0;
 		} else
 #endif
+		{
 			sg->sg_adm[0] = 0;
+		}
 
 	}
 	if (!sgr_close ()) {
@@ -607,13 +614,15 @@ static void change_passwd (struct group *gr)
 	printf (_("Changing the password for group %s\n"), group);
 
 	for (retries = 0; retries < RETRIES; retries++) {
-		if (!(cp = getpass (_("New Password: "))))
+		if (!(cp = getpass (_("New Password: ")))) {
 			exit (1);
+		}
 
 		STRFCPY (pass, cp);
 		strzero (cp);
-		if (!(cp = getpass (_("Re-enter new password: "))))
+		if (!(cp = getpass (_("Re-enter new password: ")))) {
 			exit (1);
+		}
 
 		if (strcmp (pass, cp) == 0) {
 			strzero (cp);
@@ -640,11 +649,13 @@ static void change_passwd (struct group *gr)
 	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
 	memzero (pass, sizeof pass);
 #ifdef SHADOWGRP
-	if (is_shadowgrp)
+	if (is_shadowgrp) {
 		sg->sg_passwd = cp;
-	else
+	} else
 #endif
+	{
 		gr->gr_passwd = cp;
+	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 	              "changing password", group, -1, 1);
@@ -840,8 +851,9 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_INFO, "set administrators of %s to %s",
 			 group, admins));
 		sgent.sg_adm = comma_to_list (admins);
-		if (!Mflg)
+		if (!Mflg) {
 			goto output;
+		}
 	}
 #endif
 
