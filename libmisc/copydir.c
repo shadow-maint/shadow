@@ -86,15 +86,22 @@ static int selinux_file_context (const char *dst_name)
 {
 	security_context_t scontext = NULL;
 
-	if (selinux_enabled < 0)
+	if (selinux_enabled < 0) {
 		selinux_enabled = is_selinux_enabled () > 0;
+	}
 	if (selinux_enabled) {
-		if (matchpathcon (dst_name, 0, &scontext) < 0)
-			if (security_getenforce ())
+		/* Get the default security context for this file */
+		if (matchpathcon (dst_name, 0, &scontext) < 0) {
+			if (security_getenforce ()) {
 				return 1;
-		if (setfscreatecon (scontext) < 0)
-			if (security_getenforce ())
+			}
+		}
+		/* Set the security context for the next created file */
+		if (setfscreatecon (scontext) < 0) {
+			if (security_getenforce ()) {
 				return 1;
+			}
+		}
 		freecon (scontext);
 	}
 	return 0;
@@ -114,12 +121,15 @@ static void remove_link (struct link_name *ln)
 		free (ln);
 		return;
 	}
-	for (lp = links; lp; lp = lp->ln_next)
-		if (lp->ln_next == ln)
+	for (lp = links; lp; lp = lp->ln_next) {
+		if (lp->ln_next == ln) {
 			break;
+		}
+	}
 
-	if (!lp)
+	if (!lp) {
 		return;
+	}
 
 	lp->ln_next = lp->ln_next->ln_next;
 	free (ln->ln_name);
@@ -138,12 +148,15 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	int name_len;
 	int len;
 
-	for (lp = links; lp; lp = lp->ln_next)
-		if (lp->ln_dev == sb->st_dev && lp->ln_ino == sb->st_ino)
+	for (lp = links; lp; lp = lp->ln_next) {
+		if (lp->ln_dev == sb->st_dev && lp->ln_ino == sb->st_ino) {
 			return lp;
+		}
+	}
 
-	if (sb->st_nlink == 1)
+	if (sb->st_nlink == 1) {
 		return 0;
+	}
 
 	lp = (struct link_name *) xmalloc (sizeof *lp);
 	src_len = strlen (src_orig);
@@ -167,7 +180,6 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
  *	copy_tree() walks a directory tree and copies ordinary files
  *	as it goes.
  */
-
 int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 {
 	char src_name[1024];
@@ -183,8 +195,9 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * target is created.  It assumes the target directory exists.
 	 */
 
-	if (access (src_root, F_OK) != 0 || access (dst_root, F_OK) != 0)
+	if (access (src_root, F_OK) != 0 || access (dst_root, F_OK) != 0) {
 		return -1;
+	}
 
 	/*
 	 * Open the source directory and read each entry.  Every file
@@ -194,8 +207,9 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * is made set-ID.
 	 */
 	dir = opendir (src_root);
-	if (NULL == dir)
+	if (NULL == dir) {
 		return -1;
+	}
 
 	if (src_orig == 0) {
 		src_orig = src_root;
@@ -209,8 +223,9 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 */
 
 		if (strcmp (ent->d_name, ".") == 0 ||
-		    strcmp (ent->d_name, "..") == 0)
+		    strcmp (ent->d_name, "..") == 0) {
 			continue;
+		}
 
 		/*
 		 * Make the filename for both the source and the
@@ -357,9 +372,8 @@ static int copy_symlink (const char *src, const char *dst,
 	 * destination directory name.
 	 */
 
-	if ((len =
-	     readlink (src, oldlink,
-		       sizeof (oldlink) - 1)) < 0) {
+	len = readlink (src, oldlink, sizeof (oldlink) - 1);
+	if (len < 0) {
 		return -1;
 	}
 	oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
@@ -401,8 +415,9 @@ static int copy_hardlink (const char *src, const char *dst,
 	if (unlink (src)) {
 		return -1;
 	}
-	if (--lp->ln_count <= 0)
+	if (--lp->ln_count <= 0) {
 		remove_link (lp);
+	}
 
 	return 0;
 }
@@ -494,8 +509,9 @@ int remove_tree (const char *root)
 	 * Make certain the directory exists.
 	 */
 
-	if (access (root, F_OK) != 0)
+	if (access (root, F_OK) != 0) {
 		return -1;
+	}
 
 	/*
 	 * Open the source directory and read each entry.  Every file
@@ -505,8 +521,9 @@ int remove_tree (const char *root)
 	 * is made set-ID.
 	 */
 	dir = opendir (root);
-	if (NULL == dir)
+	if (NULL == dir) {
 		return -1;
+	}
 
 	while ((ent = readdir (dir))) {
 
@@ -515,8 +532,9 @@ int remove_tree (const char *root)
 		 */
 
 		if (strcmp (ent->d_name, ".") == 0 ||
-		    strcmp (ent->d_name, "..") == 0)
+		    strcmp (ent->d_name, "..") == 0) {
 			continue;
+		}
 
 		/*
 		 * Make the filename for the current entry.
@@ -528,8 +546,9 @@ int remove_tree (const char *root)
 		}
 		snprintf (new_name, sizeof new_name, "%s/%s", root,
 			  ent->d_name);
-		if (LSTAT (new_name, &sb) == -1)
+		if (LSTAT (new_name, &sb) == -1) {
 			continue;
+		}
 
 		if (S_ISDIR (sb.st_mode)) {
 
@@ -553,3 +572,4 @@ int remove_tree (const char *root)
 
 	return err;
 }
+
