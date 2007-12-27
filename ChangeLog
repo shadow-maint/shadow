@@ -7,6 +7,7 @@
 	* libmisc/copydir.c: -1 is used to indicate an error, directly set err
 	to -1, instead of incrementing it, and checking if not nul at the
 	end.
+	* libmisc/copydir.c: Avoid assignment in comparisons.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

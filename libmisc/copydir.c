@@ -185,8 +185,8 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * regular files (and directories ...) are copied, and no file
 	 * is made set-ID.
 	 */
-
-	if (!(dir = opendir (src_root)))
+	dir = opendir (src_root);
+	if (NULL == dir)
 		return -1;
 
 	if (src_orig == 0) {
@@ -431,14 +431,15 @@ static int copy_file (const char *src, const char *dst,
 	char buf[1024];
 	int cnt;
 
-	if ((ifd = open (src, O_RDONLY)) < 0) {
+	ifd = open (src, O_RDONLY);
+	if (ifd < 0) {
 		return -1;
 	}
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
 #endif
-	if ((ofd =
-	     open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0)) < 0
+	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0);
+	if ((ofd < 0)
 	    || chown (dst,
 	              uid == (uid_t) - 1 ? statp->st_uid : uid,
 	              gid == (gid_t) - 1 ? statp->st_gid : gid)
@@ -495,8 +496,8 @@ int remove_tree (const char *root)
 	 * regular files (and directories ...) are copied, and no file
 	 * is made set-ID.
 	 */
-
-	if (!(dir = opendir (root)))
+	dir = opendir (root);
+	if (NULL == dir)
 		return -1;
 
 	while ((ent = readdir (dir))) {
