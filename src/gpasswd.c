@@ -91,8 +91,10 @@ static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
+static void check_perms (const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 #else
+static void check_perms (const struct group *gr);
 static void update_group (struct group *gr);
 #endif
 
@@ -353,6 +355,77 @@ static void close_files (void)
 	}
 }
 
+/*
+ * check_perms - check if the user is allowed to change the password of
+ *               the specified group.
+ *
+ *	It only returns if the user is allowed.
+ */
+#ifdef SHADOWGRP
+static void check_perms (const struct sgrp *sg)
+#else
+static void check_perms (const struct group *gr)
+#endif
+{
+#ifdef SHADOWGRP
+	/*
+	 * The policy here for changing a group is that 1) you must be root
+	 * or 2). you must be listed as an administrative member. 
+	 * Administrative members can do anything to a group that the root
+	 * user can.
+	 */
+	if (!amroot && !is_on_list (sg->sg_adm, myname)) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "modify group", group, -1, 0);
+#endif
+		failure ();
+	}
+#else				/* ! SHADOWGRP */
+
+#ifdef FIRST_MEMBER_IS_ADMIN
+	/*
+	 * The policy here for changing a group is that 1) you must bes root
+	 * or 2) you must be the first listed member of the group. The
+	 * first listed member of a group can do anything to that group that
+	 * the root user can. The rationale for this hack is that the FIRST
+	 * user is probably the most important user in this entire group.
+	 */
+	if (!amroot) {
+		if (gr->gr_mem[0] == (char *) 0) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "modifying group", group, -1, 0);
+#endif
+			failure ();
+		}
+
+		if (strcmp (gr->gr_mem[0], myname) != 0) {
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "modifying group", myname, -1, 0);
+#endif
+			failure ();
+		}
+	}
+#else
+	/*
+	 * This feature enabled by default could be a security problem when
+	 * installed on existing systems where the first group member might
+	 * be just a normal user.  --marekm
+	 */
+	if (!amroot) {
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "modifying group", group, -1, 0);
+#endif
+		failure ();
+	}
+#endif
+#endif				/* SHADOWGRP */
+}
+
+
 #ifdef SHADOWGRP
 static void update_group (struct group *gr, struct sgrp *sg)
 #else
@@ -546,61 +619,13 @@ int main (int argc, char **argv)
 	}
 
 	/*
-	 * The policy here for changing a group is that 1) you must be root
-	 * or 2). you must be listed as an administrative member. 
-	 * Administrative members can do anything to a group that the root
-	 * user can.
+	 * Check if the user is allowed to change the password of this group.
 	 */
-	if (!amroot && !is_on_list (sgent.sg_adm, myname)) {
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify group", group,
-			      -1, 0);
-#endif
-		failure ();
-	}
-#else				/* ! SHADOWGRP */
-
-#ifdef FIRST_MEMBER_IS_ADMIN
-	/*
-	 * The policy here for changing a group is that 1) you must bes root
-	 * or 2) you must be the first listed member of the group. The
-	 * first listed member of a group can do anything to that group that
-	 * the root user can. The rationale for this hack is that the FIRST
-	 * user is probably the most important user in this entire group.
-	 */
-	if (!amroot) {
-		if (grent.gr_mem[0] == (char *) 0) {
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "modifying group", group, -1, 0);
-#endif
-			failure ();
-		}
-
-		if (strcmp (grent.gr_mem[0], myname) != 0) {
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "modifying group", myname, -1, 0);
-#endif
-			failure ();
-		}
-	}
+#ifdef SHADOWGRP
+	check_perms (&sgent);
 #else
-	/*
-	 * This feature enabled by default could be a security problem when
-	 * installed on existing systems where the first group member might
-	 * be just a normal user.  --marekm
-	 */
-	if (!amroot) {
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
-			      group, -1, 0);
+	check_perms (&grent);
 #endif
-		failure ();
-	}
-#endif
-
-#endif				/* SHADOWGRP */
 
 	/*
 	 * Removing a password is straight forward. Just set the password
