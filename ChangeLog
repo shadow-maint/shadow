@@ -13,6 +13,7 @@
 	change_passwd(), check_flags(). Split out of main() to simplify main().
 	* src/gpasswd.c: Avoid implicit brackets.
 	* src/gpasswd.c: Avoid assignment in comparisons.
+	* src/gpasswd.c: Avoid implicit conversions to booleans.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

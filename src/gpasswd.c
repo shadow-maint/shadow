@@ -160,7 +160,7 @@ static int check_list (const char *users)
 	int errors = 0;
 	size_t len;
 
-	for (start = users; start && *start; start = end) {
+	for (start = users; (NULL != start) && ('\0' != *start); start = end) {
 		end = strchr (start, ',');
 		if (NULL != end) {
 			len = end - start;
@@ -179,7 +179,8 @@ static int check_list (const char *users)
 		 * This user must exist.
 		 */
 
-		if (!getpwnam (username)) { /* local, no need for xgetpwnam */
+		/* local, no need for xgetpwnam */
+		if (getpwnam (username) == NULL) {
 			fprintf (stderr, _("%s: unknown user %s\n"),
 			         Prog, username);
 			errors++;
@@ -206,7 +207,7 @@ static void process_flags (int argc, char **argv)
 		case 'a':	/* add a user */
 			user = optarg;
 			/* local, no need for xgetpwnam */
-			if (!getpwnam (user)) {
+			if (getpwnam (user) == NULL) {
 				fprintf (stderr,
 					 _("%s: unknown user %s\n"), Prog,
 					 user);
@@ -236,7 +237,7 @@ static void process_flags (int argc, char **argv)
 				exit (2);
 			}
 			admins = optarg;
-			if (check_list (admins)) {
+			if (check_list (admins) != 0) {
 				exit (1);
 			}
 			Aflg++;
@@ -258,7 +259,7 @@ static void process_flags (int argc, char **argv)
 				failure ();
 			}
 			members = optarg;
-			if (check_list (members)) {
+			if (check_list (members) != 0) {
 				exit (1);
 			}
 			Mflg++;
@@ -471,7 +472,7 @@ static void update_group (struct group *gr, struct sgrp *sg)
 static void update_group (struct group *gr)
 #endif
 {
-	if (!gr_update (gr)) {
+	if (gr_update (gr) == 0) {
 		fprintf (stderr, _("%s: can't update entry\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
 #ifdef WITH_AUDIT
@@ -481,7 +482,7 @@ static void update_group (struct group *gr)
 		exit (1);
 	}
 #ifdef SHADOWGRP
-	if (is_shadowgrp && !sgr_update (sg)) {
+	if (is_shadowgrp && (sgr_update (sg) == 0)) {
 		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
 #ifdef WITH_AUDIT
@@ -508,7 +509,7 @@ static void get_group (struct group *gr)
 	struct group const*tmpgr = NULL;
 	struct sgrp const*tmpsg = NULL;
 
-	if (!gr_open (O_RDONLY)) {
+	if (gr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: can't open file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
 #ifdef WITH_AUDIT
@@ -533,7 +534,7 @@ static void get_group (struct group *gr)
 	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: can't close file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
 #ifdef WITH_AUDIT
@@ -544,7 +545,7 @@ static void get_group (struct group *gr)
 	}
 
 #ifdef SHADOWGRP
-	if (!sgr_open (O_RDONLY)) {
+	if (sgr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
 #ifdef WITH_AUDIT
@@ -572,15 +573,15 @@ static void get_group (struct group *gr)
 #ifdef FIRST_MEMBER_IS_ADMIN
 		if (sg->sg_mem[0]) {
 			sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
-			sg->sg_adm[1] = 0;
+			sg->sg_adm[1] = NULL;
 		} else
 #endif
 		{
-			sg->sg_adm[0] = 0;
+			sg->sg_adm[0] = NULL;
 		}
 
 	}
-	if (!sgr_close ()) {
+	if (sgr_close () == 0) {
 		fprintf (stderr, _("%s: can't close shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
 #ifdef WITH_AUDIT
@@ -727,7 +728,7 @@ int main (int argc, char **argv)
 	 */
 
 	pw = get_my_pwent ();
-	if (!pw) {
+	if (NULL == pw) {
 		fprintf (stderr, _("Who are you?\n"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "user lookup", NULL,
@@ -887,7 +888,7 @@ int main (int argc, char **argv)
 	 * be a tty. The typical keyboard signals are caught so the termio
 	 * modes can be restored.
 	 */
-	if (!isatty (0) || !isatty (1)) {
+	if ((isatty (0) == 0) || (isatty (1) == 0)) {
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
@@ -920,7 +921,7 @@ int main (int argc, char **argv)
 	 * output, etc.
 	 */
       output:
-	if (setuid (0)) {
+	if (setuid (0) != 0) {
 		fprintf (stderr, _("Cannot change ID to root.\n"));
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 #ifdef WITH_AUDIT
