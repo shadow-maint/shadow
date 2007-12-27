@@ -58,11 +58,25 @@ static char *Prog;
 static int is_shadowgrp;
 #endif
 
+/* Flags set by options */
 static int
  aflg = 0, Aflg = 0, dflg = 0, Mflg = 0, rflg = 0, Rflg = 0;
-
+/* The name of the group that is being affected */
+static char *group = NULL;
+/* The name of the user being added (-a) or removed (-d) from group */
+static char *user = NULL;
+/* The new list of members set with -M */
+static char *members = NULL;
+#ifdef SHADOWGRP
+/* The new list of group administrators set with -A */
+static char*admins = NULL;
+#endif
+/* The name of the caller */
+static char *myname = NULL;
 /* The UID of the caller */
-unsigned long bywho = -1;
+static unsigned long bywho = -1;
+/* Indicate if gpasswd was called by root */
+#define amroot	(0 == bywho)
 
 /* The number of retries for th user to provide and repeat a new password */
 #ifndef	RETRIES
@@ -73,6 +87,7 @@ unsigned long bywho = -1;
 static void usage (void);
 static RETSIGTYPE catch_signals (int killed);
 static int check_list (const char *users);
+static void process_flags (int argc, char **argv);
 
 /*
  * usage - display usage message
@@ -161,63 +176,12 @@ static void failure (void)
 }
 
 /*
- * gpasswd - administer the /etc/group file
- *
- *	-a user		add user to the named group
- *	-d user		remove user from the named group
- *	-r		remove password from the named group
- *	-R		restrict access to the named group
- *	-A user,...	make list of users the administrative users
- *	-M user,...	make list of users the group members
+ * process_flags - process the command line options and arguments
  */
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
 	int flag;
-	char *cp;
-	int amroot;
-	int retries;
-	struct group const*gr = NULL;
-	struct group grent;
-	static char pass[BUFSIZ];
 
-#ifdef	SHADOWGRP
-	struct sgrp const*sg = NULL;
-	struct sgrp sgent;
-	char *admins = NULL;
-#endif
-	struct passwd *pw = NULL;
-	char *myname;
-	char *user = NULL;
-	char *group = NULL;
-	char *members = NULL;
-
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-
-	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	/*
-	 * Make a note of whether or not this command was invoked by root.
-	 * This will be used to bypass certain checks later on. Also, set
-	 * the real user ID to match the effective user ID. This will
-	 * prevent the invoker from issuing signals which would interfer
-	 * with this command.
-	 */
-	amroot = getuid () == 0;
-	bywho = getuid ();
-	Prog = Basename (argv[0]);
-
-	OPENLOG ("gpasswd");
-	setbuf (stdout, NULL);
-	setbuf (stderr, NULL);
-
-#ifdef SHADOWGRP
-	is_shadowgrp = sgr_file_present ();
-#endif
 	while ((flag = getopt (argc, argv, "a:A:d:gM:rR")) != EOF) {
 		switch (flag) {
 		case 'a':	/* add a user */
@@ -288,6 +252,61 @@ int main (int argc, char **argv)
 			usage ();
 		}
 	}
+}
+
+/*
+ * gpasswd - administer the /etc/group file
+ *
+ *	-a user		add user to the named group
+ *	-d user		remove user from the named group
+ *	-r		remove password from the named group
+ *	-R		restrict access to the named group
+ *	-A user,...	make list of users the administrative users
+ *	-M user,...	make list of users the group members
+ */
+int main (int argc, char **argv)
+{
+	char *cp;
+	int retries;
+	struct group const*gr = NULL;
+	struct group grent;
+	static char pass[BUFSIZ];
+
+#ifdef	SHADOWGRP
+	struct sgrp const*sg = NULL;
+	struct sgrp sgent;
+#endif
+	struct passwd *pw = NULL;
+
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+
+	sanitize_env ();
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	/*
+	 * Make a note of whether or not this command was invoked by root.
+	 * This will be used to bypass certain checks later on. Also, set
+	 * the real user ID to match the effective user ID. This will
+	 * prevent the invoker from issuing signals which would interfer
+	 * with this command.
+	 */
+	bywho = getuid ();
+	Prog = Basename (argv[0]);
+
+	OPENLOG ("gpasswd");
+	setbuf (stdout, NULL);
+	setbuf (stderr, NULL);
+
+#ifdef SHADOWGRP
+	is_shadowgrp = sgr_file_present ();
+#endif
+
+	/* Parse the options */
+	process_flags (argc, argv);
 
 	/*
 	 * Make sure exclusive flags are exclusive

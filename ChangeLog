@@ -4,6 +4,8 @@
 	* src/gpasswd.c: Add argument name to the internal function
 	prototypes.
 	* src/gpasswd.c: Document global variables.
+	* src/gpasswd.c: New function: process_flags(). Split the processing
+	of options out of main().
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 
