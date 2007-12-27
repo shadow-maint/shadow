@@ -155,7 +155,7 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	}
 
 	if (sb->st_nlink == 1) {
-		return 0;
+		return NULL;
 	}
 
 	lp = (struct link_name *) xmalloc (sizeof *lp);
@@ -171,7 +171,7 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	lp->ln_next = links;
 	links = lp;
 
-	return 0;
+	return NULL;
 }
 
 /*
