@@ -88,6 +88,7 @@ static void usage (void);
 static RETSIGTYPE catch_signals (int killed);
 static int check_list (const char *users);
 static void process_flags (int argc, char **argv);
+static void check_flags (int argc, int opt_index);
 static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
@@ -264,6 +265,30 @@ static void process_flags (int argc, char **argv)
 		default:
 			usage ();
 		}
+	}
+
+	/* Get the name of the group that is being affected. */
+	group = argv[optind];
+
+	check_flags (argc, optind);
+}
+
+/*
+ * check_flags - check the validity of options
+ */
+static void check_flags (int argc, int opt_index)
+{
+	/*
+	 * Make sure exclusive flags are exclusive
+	 */
+	if (aflg + dflg + rflg + Rflg + (Aflg || Mflg) > 1)
+		usage ();
+
+	/*
+	 * Make sure one (and only one) group was provided
+	 */
+	if ((argc != (opt_index+1)) || (NULL == group)) {
+		usage ();
 	}
 }
 
@@ -677,13 +702,6 @@ int main (int argc, char **argv)
 	process_flags (argc, argv);
 
 	/*
-	 * Make sure exclusive flags are exclusive
-	 */
-
-	if (aflg + dflg + rflg + Rflg + (Aflg || Mflg) > 1)
-		usage ();
-
-	/*
 	 * Determine the name of the user that invoked this command. This
 	 * is really hit or miss because there are so many ways that command
 	 * can be executed and so many ways to trip up the routines that
@@ -700,14 +718,6 @@ int main (int argc, char **argv)
 		failure ();
 	}
 	myname = xstrdup (pw->pw_name);
-
-	/*
-	 * Get the name of the group that is being affected. The group entry
-	 * will be completely replicated so it may be modified later on.
-	 */
-
-	if (!(group = argv[optind]))
-		usage ();
 
 	/*
 	 * Replicate the group so it can be modified later on.
