@@ -91,11 +91,15 @@ static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
+static void get_group (struct group *gr, struct sgrp *sg);
 static void check_perms (const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
+static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
+static void get_group (struct group *gr);
 static void check_perms (const struct group *gr);
 static void update_group (struct group *gr);
+static void change_passwd (struct group *gr);
 #endif
 
 /*
@@ -425,7 +429,9 @@ static void check_perms (const struct group *gr)
 #endif				/* SHADOWGRP */
 }
 
-
+/*
+ * update_group - Update the group information in the databases
+ */
 #ifdef SHADOWGRP
 static void update_group (struct group *gr, struct sgrp *sg)
 #else
@@ -455,6 +461,174 @@ static void update_group (struct group *gr)
 }
 
 /*
+ * get_group - get the current information for the group
+ *
+ *	The information are copied in group structure(s) so that they can be
+ *	modified later.
+ */
+#ifdef SHADOWGRP
+static void get_group (struct group *gr, struct sgrp *sg)
+#else
+static void get_group (struct group *gr)
+#endif
+{
+	struct group const*tmpgr = NULL;
+	struct sgrp const*tmpsg = NULL;
+
+	if (!gr_open (O_RDONLY)) {
+		fprintf (stderr, _("%s: can't open file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
+
+	if (!(tmpgr = gr_locate (group))) {
+		fprintf (stderr, _("unknown group: %s\n"), group);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "group lookup", group, -1, 0);
+#endif
+		failure ();
+	}
+
+	*gr = *tmpgr;
+	gr->gr_name = xstrdup (tmpgr->gr_name);
+	gr->gr_passwd = xstrdup (tmpgr->gr_passwd);
+	gr->gr_mem = dup_list (tmpgr->gr_mem);
+
+	if (!gr_close ()) {
+		fprintf (stderr, _("%s: can't close file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "closing /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
+
+#ifdef SHADOWGRP
+	if (!sgr_open (O_RDONLY)) {
+		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+	if ((tmpsg = sgr_locate (group))) {
+		*sg = *tmpsg;
+		sg->sg_name = xstrdup (tmpsg->sg_name);
+		sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
+
+		sg->sg_mem = dup_list (tmpsg->sg_mem);
+		sg->sg_adm = dup_list (tmpsg->sg_adm);
+	} else {
+		sg->sg_name = xstrdup (group);
+		sg->sg_passwd = gr->gr_passwd;
+		gr->gr_passwd = "!";	/* XXX warning: const */
+
+		sg->sg_mem = dup_list (gr->gr_mem);
+
+		sg->sg_adm = (char **) xmalloc (sizeof (char *) * 2);
+#ifdef FIRST_MEMBER_IS_ADMIN
+		if (sg->sg_mem[0]) {
+			sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
+			sg->sg_adm[1] = 0;
+		} else
+#endif
+			sg->sg_adm[0] = 0;
+
+	}
+	if (!sgr_close ()) {
+		fprintf (stderr, _("%s: can't close shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "closing /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+#endif				/* SHADOWGRP */
+}
+
+/*
+ * change_passwd - change the group's password
+ *
+ *	Get the new password from the user and update the password in the
+ *	group's structure.
+ *
+ *	It will call exit in case of error.
+ */
+#ifdef SHADOWGRP
+static void change_passwd (struct group *gr, struct sgrp *sg)
+#else
+static void change_passwd (struct group *gr)
+#endif
+{
+	char *cp;
+	static char pass[BUFSIZ];
+	int retries;
+
+	/*
+	 * A new password is to be entered and it must be encrypted, etc.
+	 * The password will be prompted for twice, and both entries must be
+	 * identical. There is no need to validate the old password since
+	 * the invoker is either the group owner, or root.
+	 */
+	printf (_("Changing the password for group %s\n"), group);
+
+	for (retries = 0; retries < RETRIES; retries++) {
+		if (!(cp = getpass (_("New Password: "))))
+			exit (1);
+
+		STRFCPY (pass, cp);
+		strzero (cp);
+		if (!(cp = getpass (_("Re-enter new password: "))))
+			exit (1);
+
+		if (strcmp (pass, cp) == 0) {
+			strzero (cp);
+			break;
+		}
+
+		strzero (cp);
+		memzero (pass, sizeof pass);
+
+		if (retries + 1 < RETRIES) {
+			puts (_("They don't match; try again"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "changing password", group, -1, 0);
+#endif
+		}
+	}
+
+	if (retries == RETRIES) {
+		fprintf (stderr, _("%s: Try again later\n"), Prog);
+		exit (1);
+	}
+
+	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
+	memzero (pass, sizeof pass);
+#ifdef SHADOWGRP
+	if (is_shadowgrp)
+		sg->sg_passwd = cp;
+	else
+#endif
+		gr->gr_passwd = cp;
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "changing password", group, -1, 1);
+#endif
+	SYSLOG ((LOG_INFO, "change the password for group %s by %s", group,
+	        myname));
+}
+
+/*
  * gpasswd - administer the /etc/group file
  *
  *	-a user		add user to the named group
@@ -466,14 +640,8 @@ static void update_group (struct group *gr)
  */
 int main (int argc, char **argv)
 {
-	char *cp;
-	int retries;
-	struct group const*gr = NULL;
 	struct group grent;
-	static char pass[BUFSIZ];
-
 #ifdef SHADOWGRP
-	struct sgrp const*sg = NULL;
 	struct sgrp sgent;
 #endif
 	struct passwd *pw = NULL;
@@ -541,82 +709,14 @@ int main (int argc, char **argv)
 	if (!(group = argv[optind]))
 		usage ();
 
-	if (!gr_open (O_RDONLY)) {
-		fprintf (stderr, _("%s: can't open file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening /etc/group",
-			      group, -1, 0);
-#endif
-		exit (1);
-	}
-
-	if (!(gr = gr_locate (group))) {
-		fprintf (stderr, _("unknown group: %s\n"), group);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "group lookup", group,
-			      -1, 0);
-#endif
-		failure ();
-	}
-	grent = *gr;
-	grent.gr_name = xstrdup (gr->gr_name);
-	grent.gr_passwd = xstrdup (gr->gr_passwd);
-
-	grent.gr_mem = dup_list (gr->gr_mem);
-	if (!gr_close ()) {
-		fprintf (stderr, _("%s: can't close file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "closing /etc/group", group, -1, 0);
-#endif
-		exit (1);
-	}
+	/*
+	 * Replicate the group so it can be modified later on.
+	 */
 #ifdef SHADOWGRP
-	if (!sgr_open (O_RDONLY)) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening /etc/gshadow", group, -1, 0);
+	get_group (&grent, &sgent);
+#else
+	get_group (&grent);
 #endif
-		exit (1);
-	}
-	if ((sg = sgr_locate (group))) {
-		sgent = *sg;
-		sgent.sg_name = xstrdup (sg->sg_name);
-		sgent.sg_passwd = xstrdup (sg->sg_passwd);
-
-		sgent.sg_mem = dup_list (sg->sg_mem);
-		sgent.sg_adm = dup_list (sg->sg_adm);
-	} else {
-		sgent.sg_name = xstrdup (group);
-		sgent.sg_passwd = grent.gr_passwd;
-		grent.gr_passwd = "!";	/* XXX warning: const */
-
-		sgent.sg_mem = dup_list (grent.gr_mem);
-
-		sgent.sg_adm = (char **) xmalloc (sizeof (char *) * 2);
-#ifdef FIRST_MEMBER_IS_ADMIN
-		if (sgent.sg_mem[0]) {
-			sgent.sg_adm[0] = xstrdup (sgent.sg_mem[0]);
-			sgent.sg_adm[1] = 0;
-		} else
-#endif
-			sgent.sg_adm[0] = 0;
-
-		sg = &sgent;
-	}
-	if (!sgr_close ()) {
-		fprintf (stderr, _("%s: can't close shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "closing /etc/gshadow", group, -1, 0);
-#endif
-		exit (1);
-	}
 
 	/*
 	 * Check if the user is allowed to change the password of this group.
@@ -777,59 +877,12 @@ int main (int argc, char **argv)
 	signal (SIGTSTP, catch_signals);
 #endif
 
-	/*
-	 * A new password is to be entered and it must be encrypted, etc.
-	 * The password will be prompted for twice, and both entries must be
-	 * identical. There is no need to validate the old password since
-	 * the invoker is either the group owner, or root.
-	 */
-	printf (_("Changing the password for group %s\n"), group);
-
-	for (retries = 0; retries < RETRIES; retries++) {
-		if (!(cp = getpass (_("New Password: "))))
-			exit (1);
-
-		STRFCPY (pass, cp);
-		strzero (cp);
-		if (!(cp = getpass (_("Re-enter new password: "))))
-			exit (1);
-
-		if (strcmp (pass, cp) == 0) {
-			strzero (cp);
-			break;
-		}
-
-		strzero (cp);
-		memzero (pass, sizeof pass);
-
-		if (retries + 1 < RETRIES) {
-			puts (_("They don't match; try again"));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "changing password", group, -1, 0);
-#endif
-		}
-	}
-
-	if (retries == RETRIES) {
-		fprintf (stderr, _("%s: Try again later\n"), Prog);
-		exit (1);
-	}
-
-	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
-	memzero (pass, sizeof pass);
+	/* Prompt for the new password */
 #ifdef SHADOWGRP
-	if (is_shadowgrp)
-		sgent.sg_passwd = cp;
-	else
+	change_passwd (&grent, &sgent);
+#else
+	change_passwd (&grent);
 #endif
-		grent.gr_passwd = cp;
-#ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password", group,
-		      -1, 1);
-#endif
-	SYSLOG ((LOG_INFO, "change the password for group %s by %s", group,
-		 myname));
 
 	/*
 	 * This is the common arrival point to output the new group file.
