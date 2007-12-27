@@ -6,6 +6,9 @@
 	* src/gpasswd.c: Document global variables.
 	* src/gpasswd.c: New function: process_flags(). Split the processing
 	of options out of main().
+	* src/gpasswd.c: New functions: open_files(), close_files(),
+	update_group(). Split out from main() to simplify this (too) big
+	function.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

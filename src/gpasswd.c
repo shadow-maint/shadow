@@ -43,7 +43,7 @@
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 #include "sgroupio.h"
 #endif
 /*
@@ -69,7 +69,7 @@ static char *user = NULL;
 static char *members = NULL;
 #ifdef SHADOWGRP
 /* The new list of group administrators set with -A */
-static char*admins = NULL;
+static char *admins = NULL;
 #endif
 /* The name of the caller */
 static char *myname = NULL;
@@ -88,6 +88,13 @@ static void usage (void);
 static RETSIGTYPE catch_signals (int killed);
 static int check_list (const char *users);
 static void process_flags (int argc, char **argv);
+static void open_files (void);
+static void close_files (void);
+#ifdef SHADOWGRP
+static void update_group (struct group *gr, struct sgrp *sg);
+#else
+static void update_group (struct group *gr);
+#endif
 
 /*
  * usage - display usage message
@@ -97,7 +104,7 @@ static void usage (void)
 	fprintf (stderr, _("Usage: %s [-r|-R] group\n"), Prog);
 	fprintf (stderr, _("       %s [-a user] group\n"), Prog);
 	fprintf (stderr, _("       %s [-d user] group\n"), Prog);
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 	fprintf (stderr,
 		 _("       %s [-A user,...] [-M user,...] group\n"), Prog);
 #else
@@ -255,6 +262,126 @@ static void process_flags (int argc, char **argv)
 }
 
 /*
+ * open_files - lock and open the group databases
+ *
+ *	It will call exit in case of error.
+ */
+static void open_files (void)
+{
+	if (gr_lock () == 0) {
+		fprintf (stderr, _("%s: can't get lock\n"), Prog);
+		SYSLOG ((LOG_WARN, "failed to get lock for /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "locking /etc/group", group, -1, 0);
+#endif
+		exit (1);
+        }
+#ifdef  SHADOWGRP
+	if (is_shadowgrp && (sgr_lock () == 0)) {
+		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
+		SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "locking /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+#endif
+	if (gr_open (O_RDWR) == 0) {
+		fprintf (stderr, _("%s: can't open file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
+#ifdef  SHADOWGRP
+	if (is_shadowgrp && (sgr_open (O_RDWR) == 0)) {
+		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+#endif
+}
+
+/*
+ * close_files - close and unlock the group databases
+ *
+ *	This cause any changes in the databases to be committed.
+ *
+ *	It will call exit in case of error.
+ */
+static void close_files (void)
+{
+	if (gr_close () == 0) {
+		fprintf (stderr, _("%s: can't re-write file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot re-write /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "rewriting /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
+#ifdef  SHADOWGRP
+	if (is_shadowgrp && (sgr_close () == 0)) {
+		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "rewriting /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+	if (is_shadowgrp) {
+		/* TODO: same logging as in open_files & for /etc/group */
+		sgr_unlock ();
+	}
+#endif
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file", group, -1, 0);
+#endif
+		exit (1);
+	}
+}
+
+#ifdef SHADOWGRP
+static void update_group (struct group *gr, struct sgrp *sg)
+#else
+static void update_group (struct group *gr)
+#endif
+{
+	if (!gr_update (gr)) {
+		fprintf (stderr, _("%s: can't update entry\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "updating /etc/group", group, -1, 0);
+#endif
+		exit (1);
+	}
+#ifdef SHADOWGRP
+	if (is_shadowgrp && !sgr_update (sg)) {
+		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "updating /etc/gshadow", group, -1, 0);
+#endif
+		exit (1);
+	}
+#endif
+}
+
+/*
  * gpasswd - administer the /etc/group file
  *
  *	-a user		add user to the named group
@@ -272,7 +399,7 @@ int main (int argc, char **argv)
 	struct group grent;
 	static char pass[BUFSIZ];
 
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 	struct sgrp const*sg = NULL;
 	struct sgrp sgent;
 #endif
@@ -373,7 +500,7 @@ int main (int argc, char **argv)
 #endif
 		exit (1);
 	}
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 	if (!sgr_open (O_RDONLY)) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
@@ -481,7 +608,7 @@ int main (int argc, char **argv)
 	 */
 	if (rflg) {
 		grent.gr_passwd = "";	/* XXX warning: const */
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 		sgent.sg_passwd = "";	/* XXX warning: const */
 #endif
 #ifdef WITH_AUDIT
@@ -497,7 +624,7 @@ int main (int argc, char **argv)
 		 * field to "!".
 		 */
 		grent.gr_passwd = "!";	/* XXX warning: const */
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 		sgent.sg_passwd = "!";	/* XXX warning: const */
 #endif
 #ifdef WITH_AUDIT
@@ -516,7 +643,7 @@ int main (int argc, char **argv)
 	if (aflg) {
 		printf (_("Adding user %s to group %s\n"), user, group);
 		grent.gr_mem = add_list (grent.gr_mem, user);
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 		sgent.sg_mem = add_list (sgent.sg_mem, user);
 #endif
 #ifdef WITH_AUDIT
@@ -541,7 +668,7 @@ int main (int argc, char **argv)
 			removed = 1;
 			grent.gr_mem = del_list (grent.gr_mem, user);
 		}
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 		if (is_on_list (sgent.sg_mem, user)) {
 			removed = 1;
 			sgent.sg_mem = del_list (sgent.sg_mem, user);
@@ -564,7 +691,7 @@ int main (int argc, char **argv)
 			 user, group, myname));
 		goto output;
 	}
-#ifdef	SHADOWGRP
+#ifdef SHADOWGRP
 	/*
 	 * Replacing the entire list of administators is simple. Check the
 	 * list to make sure everyone is a real user. Then slap the new list
@@ -621,7 +748,7 @@ int main (int argc, char **argv)
 	signal (SIGINT, catch_signals);
 	signal (SIGQUIT, catch_signals);
 	signal (SIGTERM, catch_signals);
-#ifdef	SIGTSTP
+#ifdef SIGTSTP
 	signal (SIGTSTP, catch_signals);
 #endif
 
@@ -698,96 +825,15 @@ int main (int argc, char **argv)
 	}
 	pwd_init ();
 
-	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: can't get lock\n"), Prog);
-		SYSLOG ((LOG_WARN, "failed to get lock for /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking /etc/group",
-			      group, -1, 0);
+	open_files ();
+
+#ifdef SHADOWGRP
+	update_group (&grent, &sgent);
+#else
+	update_group (&grent);
 #endif
-		exit (1);
-	}
-#ifdef	SHADOWGRP
-	if (is_shadowgrp && !sgr_lock ()) {
-		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
-		SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking /etc/gshadow", group, -1, 0);
-#endif
-		exit (1);
-	}
-#endif
-	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: can't open file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening /etc/group",
-			      group, -1, 0);
-#endif
-		exit (1);
-	}
-#ifdef	SHADOWGRP
-	if (is_shadowgrp && !sgr_open (O_RDWR)) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening /etc/gshadow", group, -1, 0);
-#endif
-		exit (1);
-	}
-#endif
-	if (!gr_update (&grent)) {
-		fprintf (stderr, _("%s: can't update entry\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating /etc/group",
-			      group, -1, 0);
-#endif
-		exit (1);
-	}
-#ifdef	SHADOWGRP
-	if (is_shadowgrp && !sgr_update (&sgent)) {
-		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "updating /etc/gshadow", group, -1, 0);
-#endif
-		exit (1);
-	}
-#endif
-	if (!gr_close ()) {
-		fprintf (stderr, _("%s: can't re-write file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot re-write /etc/group"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "rewriting /etc/group", group, -1, 0);
-#endif
-		exit (1);
-	}
-#ifdef	SHADOWGRP
-	if (is_shadowgrp && !sgr_close ()) {
-		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "rewriting /etc/gshadow", group, -1, 0);
-#endif
-		exit (1);
-	}
-	if (is_shadowgrp)
-		sgr_unlock ();
-#endif
-	if (!gr_unlock ()) {
-		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "unlocking group file", group, -1, 0);
-#endif
-		exit (1);
-	}
+
+	close_files ();
 
 	nscd_flush_cache ("group");
 
