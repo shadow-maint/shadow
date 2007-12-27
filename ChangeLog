@@ -8,6 +8,7 @@
 	to -1, instead of incrementing it, and checking if not nul at the
 	end.
 	* libmisc/copydir.c: Avoid assignment in comparisons.
+	* libmisc/copydir.c: Document selinux_file_context.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

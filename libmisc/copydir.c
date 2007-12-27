@@ -74,6 +74,14 @@ static int copy_file (const char *src, const char *dst,
                       uid_t uid, gid_t gid);
 
 #ifdef WITH_SELINUX
+/*
+ * selinux_file_context - Set the security context before any file or
+ *                        directory creation.
+ *
+ *	selinux_file_context () should be called before any creation of file,
+ *	symlink, directory, ...
+ *
+ */
 static int selinux_file_context (const char *dst_name)
 {
 	security_context_t scontext = NULL;
