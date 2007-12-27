@@ -1,5 +1,15 @@
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	libmisc/copydir.c cleanup
+	* libmisc/copydir.c: Split copy_tree() in more maintainable functions:
+	copy_entry(), copy_dir(), copy_symlink(), copy_hardlink(),
+	copy_special(), and copy_file().
+	* libmisc/copydir.c: -1 is used to indicate an error, directly set err
+	to -1, instead of incrementing it, and checking if not nul at the
+	end.
+
+2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	gpasswd cleanup
 	* src/gpasswd.c: Add argument name to the internal function
 	prototypes.

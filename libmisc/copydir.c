@@ -54,6 +54,25 @@ struct link_name {
 };
 static struct link_name *links;
 
+static int copy_entry (const char *src, const char *dst,
+                       uid_t uid, gid_t gid);
+static int copy_dir (const char *src, const char *dst,
+                     const struct stat *statp, const struct timeval mt[2],
+                     uid_t uid, gid_t gid);
+#ifdef	S_IFLNK
+static int copy_symlink (const char *src, const char *dst,
+                         const struct stat *statp, const struct timeval mt[2],
+                         uid_t uid, gid_t gid);
+#endif
+static int copy_hardlink (const char *src, const char *dst,
+                          struct link_name *lp);
+static int copy_special (const char *src, const char *dst,
+                         const struct stat *statp, const struct timeval mt[2],
+                         uid_t uid, gid_t gid);
+static int copy_file (const char *src, const char *dst,
+                      const struct stat *statp, const struct timeval mt[2],
+                      uid_t uid, gid_t gid);
+
 #ifdef WITH_SELINUX
 static int selinux_file_context (const char *dst_name)
 {
@@ -77,7 +96,6 @@ static int selinux_file_context (const char *dst_name)
 /*
  * remove_link - delete a link from the link list
  */
-
 static void remove_link (struct link_name *ln)
 {
 	struct link_name *lp;
@@ -146,16 +164,9 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 {
 	char src_name[1024];
 	char dst_name[1024];
-	char buf[1024];
-	int ifd;
-	int ofd;
 	int err = 0;
-	int cnt;
 	int set_orig = 0;
 	struct DIRECT *ent;
-	struct stat sb;
-	struct link_name *lp;
-	struct timeval mt[2];
 	DIR *dir;
 
 	/*
@@ -200,7 +211,7 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 
 		if (strlen (src_root) + strlen (ent->d_name) + 2 >
 		    sizeof src_name) {
-			err++;
+			err = -1;
 			break;
 		}
 		snprintf (src_name, sizeof src_name, "%s/%s", src_root,
@@ -208,15 +219,34 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 
 		if (strlen (dst_root) + strlen (ent->d_name) + 2 >
 		    sizeof dst_name) {
-			err++;
+			err = -1;
 			break;
 		}
 		snprintf (dst_name, sizeof dst_name, "%s/%s", dst_root,
 			  ent->d_name);
 
-		if (LSTAT (src_name, &sb) == -1)
-			continue;
+		err = copy_entry (src_name, dst_name, uid, gid);
+	}
+	closedir (dir);
 
+	if (set_orig) {
+		src_orig = 0;
+		dst_orig = 0;
+	}
+	return err;
+}
+
+static int copy_entry (const char *src, const char *dst,
+                       uid_t uid, gid_t gid)
+{
+	int err = 0;
+	struct stat sb;
+	struct link_name *lp;
+	struct timeval mt[2];
+
+	if (LSTAT (src, &sb) == -1) {
+		/* If we cannot stat the file, do not care. */
+	} else {
 #if  defined(_BSD_SOURCE) || defined(_SVID_SOURCE)
 		mt[0].tv_sec  = sb.st_atim.tv_sec;
 		mt[0].tv_usec = sb.st_atim.tv_nsec / 1000;
@@ -230,78 +260,16 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 #endif
 
 		if (S_ISDIR (sb.st_mode)) {
-
-			/*
-			 * Create a new target directory, make it owned by
-			 * the user and then recursively copy that directory.
-			 */
-
-#ifdef WITH_SELINUX
-			selinux_file_context (dst_name);
-#endif
-			if (mkdir (dst_name, sb.st_mode)
-			    || chown (dst_name,
-				      uid == (uid_t) - 1 ? sb.st_uid : uid,
-				      gid == (gid_t) - 1 ? sb.st_gid : gid)
-			    || chmod (dst_name, sb.st_mode)
-			    || copy_tree (src_name, dst_name, uid, gid)
-			    || utimes (dst_name, mt)) {
-				err++;
-				break;
-			}
-
-			continue;
+			err = copy_dir (src, dst, &sb, mt, uid, gid);
 		}
+
 #ifdef	S_IFLNK
 		/*
 		 * Copy any symbolic links
 		 */
 
-		if (S_ISLNK (sb.st_mode)) {
-			char oldlink[1024];
-			char dummy[1024];
-			int len;
-
-			/*
-			 * Get the name of the file which the link points
-			 * to.  If that name begins with the original
-			 * source directory name, that part of the link
-			 * name will be replaced with the original
-			 * destinateion directory name.
-			 */
-
-			if ((len =
-			     readlink (src_name, oldlink,
-				       sizeof (oldlink) - 1)) < 0) {
-				err++;
-				break;
-			}
-			oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
-			if (!strncmp (oldlink, src_orig, strlen (src_orig))) {
-				snprintf (dummy, sizeof dummy, "%s%s",
-					  dst_orig,
-					  oldlink + strlen (src_orig));
-				strcpy (oldlink, dummy);
-			}
-#ifdef WITH_SELINUX
-			selinux_file_context (dst_name);
-#endif
-			if (symlink (oldlink, dst_name)
-			    || lchown (dst_name,
-				    uid == (uid_t) - 1 ? sb.st_uid : uid,
-				    gid == (gid_t) - 1 ? sb.st_gid : gid)) {
-				err++;
-				break;
-			}
-
-			/* 2007-10-18: We don't care about
-			 *  exit status of lutimes because
-			 *  it returns ENOSYS on many system
-			 *  - not implemented
-			 */
-			lutimes (dst_name, mt);
-
-			continue;
+		else if (S_ISLNK (sb.st_mode)) {
+			err = copy_symlink (src, dst, &sb, mt, uid, gid);
 		}
 #endif
 
@@ -309,19 +277,8 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * See if this is a previously copied link
 		 */
 
-		if ((lp = check_link (src_name, &sb))) {
-			if (link (lp->ln_name, dst_name)) {
-				err++;
-				break;
-			}
-			if (unlink (src_name)) {
-				err++;
-				break;
-			}
-			if (--lp->ln_count <= 0)
-				remove_link (lp);
-
-			continue;
+		else if ((lp = check_link (src, &sb))) {
+			err = copy_hardlink (src, dst, lp);
 		}
 
 		/*
@@ -330,21 +287,8 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * would be nice to copy everything ...
 		 */
 
-		if (!S_ISREG (sb.st_mode)) {
-#ifdef WITH_SELINUX
-			selinux_file_context (dst_name);
-#endif
-			if (mknod (dst_name, sb.st_mode & ~07777, sb.st_rdev)
-			    || chown (dst_name,
-				      uid == (uid_t) - 1 ? sb.st_uid : uid,
-				      gid == (gid_t) - 1 ? sb.st_gid : gid)
-			    || chmod (dst_name, sb.st_mode & 07777)
-			    || utimes (dst_name, mt)) {
-				err++;
-				break;
-			}
-
-			continue;
+		else if (!S_ISREG (sb.st_mode)) {
+			err = copy_special (src, dst, &sb, mt, uid, gid);
 		}
 
 		/*
@@ -352,55 +296,174 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		 * file will be owned by the provided UID and GID values.
 		 */
 
-		if ((ifd = open (src_name, O_RDONLY)) < 0) {
-			err++;
-			break;
+		else {
+			err = copy_file (src, dst, &sb, mt, uid, gid);
 		}
+	}
+
+	return err;
+}
+
+static int copy_dir (const char *src, const char *dst,
+                     const struct stat *statp, const struct timeval mt[2],
+                     uid_t uid, gid_t gid)
+{
+	int err = 0;
+
+	/*
+	 * Create a new target directory, make it owned by
+	 * the user and then recursively copy that directory.
+	 */
+
 #ifdef WITH_SELINUX
-		selinux_file_context (dst_name);
+	selinux_file_context (dst);
 #endif
-		if ((ofd =
-		     open (dst_name, O_WRONLY | O_CREAT | O_TRUNC, 0)) < 0
-		    || chown (dst_name,
-			      uid == (uid_t) - 1 ? sb.st_uid : uid,
-			      gid == (gid_t) - 1 ? sb.st_gid : gid)
-		    || chmod (dst_name, sb.st_mode & 07777)) {
-			close (ifd);
-			err++;
-			break;
-		}
+	if (mkdir (dst, statp->st_mode)
+	    || chown (dst,
+	              uid == (uid_t) - 1 ? statp->st_uid : uid,
+	              gid == (gid_t) - 1 ? statp->st_gid : gid)
+	    || chmod (dst, statp->st_mode)
+	    || copy_tree (src, dst, uid, gid)
+	    || utimes (dst, mt)) {
+		err = -1;
+	}
 
-		while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
-			if (write (ofd, buf, cnt) != cnt) {
-				cnt = -1;
-				break;
-			}
-		}
+	return err;
+}
 
+#ifdef	S_IFLNK
+static int copy_symlink (const char *src, const char *dst,
+                         const struct stat *statp, const struct timeval mt[2],
+                         uid_t uid, gid_t gid)
+{
+	char oldlink[1024];
+	char dummy[1024];
+	int len;
+	int err = 0;
+
+	/*
+	 * Get the name of the file which the link points
+	 * to.  If that name begins with the original
+	 * source directory name, that part of the link
+	 * name will be replaced with the original
+	 * destination directory name.
+	 */
+
+	if ((len =
+	     readlink (src, oldlink,
+		       sizeof (oldlink) - 1)) < 0) {
+		return -1;
+	}
+	oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
+	if (!strncmp (oldlink, src_orig, strlen (src_orig))) {
+		snprintf (dummy, sizeof dummy, "%s%s",
+		          dst_orig,
+		          oldlink + strlen (src_orig));
+		strcpy (oldlink, dummy);
+	}
+#ifdef WITH_SELINUX
+	selinux_file_context (dst);
+#endif
+	if (symlink (oldlink, dst)
+	    || lchown (dst,
+	               uid == (uid_t) - 1 ? statp->st_uid : uid,
+	               gid == (gid_t) - 1 ? statp->st_gid : gid)) {
+		return -1;
+	}
+
+	/* 2007-10-18: We don't care about
+	 *  exit status of lutimes because
+	 *  it returns ENOSYS on many system
+	 *  - not implemented
+	 */
+	lutimes (dst, mt);
+
+	return err;
+}
+#endif
+
+static int copy_hardlink (const char *src, const char *dst,
+                          struct link_name *lp)
+{
+	/* TODO: selinux needed? */
+
+	if (link (lp->ln_name, dst)) {
+		return -1;
+	}
+	if (unlink (src)) {
+		return -1;
+	}
+	if (--lp->ln_count <= 0)
+		remove_link (lp);
+
+	return 0;
+}
+
+static int copy_special (const char *src, const char *dst,
+                         const struct stat *statp, const struct timeval mt[2],
+                         uid_t uid, gid_t gid)
+{
+	int err = 0;
+
+#ifdef WITH_SELINUX
+	selinux_file_context (dst);
+#endif
+
+	if (mknod (dst, statp->st_mode & ~07777, statp->st_rdev)
+	    || chown (dst,
+	              uid == (uid_t) - 1 ? statp->st_uid : uid,
+	              gid == (gid_t) - 1 ? statp->st_gid : gid)
+	    || chmod (dst, statp->st_mode & 07777)
+	    || utimes (dst, mt)) {
+		err = -1;
+	}
+
+	return err;
+}
+
+static int copy_file (const char *src, const char *dst,
+                      const struct stat *statp, const struct timeval mt[2],
+                      uid_t uid, gid_t gid)
+{
+	int err = 0;
+	int ifd;
+	int ofd;
+	char buf[1024];
+	int cnt;
+
+	if ((ifd = open (src, O_RDONLY)) < 0) {
+		return -1;
+	}
+#ifdef WITH_SELINUX
+	selinux_file_context (dst);
+#endif
+	if ((ofd =
+	     open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0)) < 0
+	    || chown (dst,
+	              uid == (uid_t) - 1 ? statp->st_uid : uid,
+	              gid == (gid_t) - 1 ? statp->st_gid : gid)
+	    || chmod (dst, statp->st_mode & 07777)) {
 		close (ifd);
+		return -1;
+	}
 
-		if (futimes (ofd, mt) != 0) {
-			err++;
-			break;
-		}
-
-		if (close (ofd) != 0) {
-			err++;
-			break;
-		}
-
-		if (cnt == -1) {
-			err++;
-			break;
+	while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
+		if (write (ofd, buf, cnt) != cnt) {
+			return -1;
 		}
 	}
-	closedir (dir);
 
-	if (set_orig) {
-		src_orig = 0;
-		dst_orig = 0;
+	close (ifd);
+
+	if (futimes (ofd, mt) != 0) {
+		return -1;
 	}
-	return err ? -1 : 0;
+
+	if (close (ofd) != 0) {
+		return -1;
+	}
+
+	return err;
 }
 
 /*
@@ -451,7 +514,7 @@ int remove_tree (const char *root)
 		 */
 
 		if (strlen (root) + strlen (ent->d_name) + 2 > sizeof new_name) {
-			err++;
+			err = -1;
 			break;
 		}
 		snprintf (new_name, sizeof new_name, "%s/%s", root,
@@ -466,11 +529,11 @@ int remove_tree (const char *root)
 			 */
 
 			if (remove_tree (new_name)) {
-				err++;
+				err = -1;
 				break;
 			}
 			if (rmdir (new_name)) {
-				err++;
+				err = -1;
 				break;
 			}
 			continue;
@@ -479,5 +542,5 @@ int remove_tree (const char *root)
 	}
 	closedir (dir);
 
-	return err ? -1 : 0;
+	return err;
 }
