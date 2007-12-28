@@ -78,18 +78,19 @@ static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
 
 /* local function prototypes */
 static void usage (void);
-static void new_grent (struct group *);
+static void new_grent (struct group *grent);
 
 #ifdef SHADOWGRP
-static void new_sgent (struct sgrp *);
+static void new_sgent (struct sgrp *sgent);
 #endif
 static void grp_update (void);
 static void find_new_gid (void);
 static void check_new_name (void);
 static void close_files (void);
 static void open_files (void);
-static void fail_exit (int);
+static void fail_exit (int code);
 static gid_t get_gid (const char *gidstr);
+static void process_flags (int argc, char **argv);
 
 /*
  * usage - display usage message and exit
@@ -326,6 +327,7 @@ static void fail_exit (int code)
 		sgr_unlock ();
 	}
 #endif
+
 #ifdef WITH_AUDIT
 	if (code != E_SUCCESS) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
@@ -353,12 +355,15 @@ static gid_t get_gid (const char *gidstr)
 }
 
 /*
- * process_args - parse the command line options
+ * process_flags - parse the command line options
  *
  *	It will not return if an error is encountered.
  */
-static void process_args (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
+	/*
+	 * Parse the command line options.
+	 */
 	char *cp;
 	int option_index = 0;
 	int c;
@@ -420,6 +425,9 @@ static void process_args (int argc, char **argv)
 		}
 	}
 
+	/*
+	 * Check the flags consistency
+	 */
 	if (oflg && !gflg) {
 		usage ();
 	}
@@ -431,6 +439,43 @@ static void process_args (int argc, char **argv)
 	group_name = argv[optind];
 
 	check_new_name ();
+
+	/*
+	 * Check if the group already exist.
+	 */
+	/* local, no need for xgetgrnam */
+	if (getgrnam (group_name)) {
+		/* The group already exist */
+		if (fflg) {
+			/* OK, no need to do anything */
+			exit (E_SUCCESS);
+		}
+		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding group", group_name, -1, 0);
+#endif
+		exit (E_NAME_IN_USE);
+	}
+
+	if (gflg && (getgrgid (group_id) != NULL)) {
+		/* A GID was specified, and a group already exist with that GID
+		 *  - either we will use this GID anyway (-o)
+		 *  - either we ignore the specified GID and
+		 *    we will use another one(-f)
+		 *  - either it is a failure
+		 */
+		if (oflg) {
+			/* Continue with this GID */
+		} else if (fflg) {
+			/* Turn off -g, we can use any GID */
+			gflg = 0;
+		} else {
+			fprintf (stderr, _("%s: GID %u is not unique\n"),
+			         Prog, (unsigned int) group_id);
+			fail_exit (E_GID_IN_USE);
+		}
+	}
 }
 
 /*
@@ -460,7 +505,7 @@ int main (int argc, char **argv)
 	/*
 	 * Parse the command line options.
 	 */
-	process_args (argc, argv);
+	process_flags (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -501,21 +546,6 @@ int main (int argc, char **argv)
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
 #endif
-
-	/*
-	 * Start with a quick check to see if the group exists.
-	 */
-	if (getgrnam (group_name)) { /* local, no need for xgetgrnam */
-		if (fflg) {
-			exit (E_SUCCESS);
-		}
-		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
-			      group_name, -1, 0);
-#endif
-		exit (E_NAME_IN_USE);
-	}
 
 	/*
 	 * Do the hard stuff - open the files, create the group entries,

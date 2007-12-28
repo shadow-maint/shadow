@@ -14,7 +14,9 @@
 	the return code was E_SUCCESS, fail_exit() wouldn't have exited. Fix
 	the scope of #idef WITH_AUDIT.
 	* src/groupadd.c: Avoid implicit brackets.
-	* src/groupadd.c: Split the processing of options out of main().
+	* src/groupadd.c: Split the processing and checking of options out of
+	main() (process_flags).
+	* src/groupadd.c: Add the parameters' names in the prototypes.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 
