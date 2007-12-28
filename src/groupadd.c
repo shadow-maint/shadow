@@ -532,7 +532,7 @@ int main (int argc, char **argv)
 	 */
 	open_files ();
 
-	if (!gflg || !oflg) {
+	if (!gflg) {
 		find_new_gid ();
 	}
 
