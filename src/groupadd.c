@@ -91,6 +91,7 @@ static void open_files (void);
 static void fail_exit (int code);
 static gid_t get_gid (const char *gidstr);
 static void process_flags (int argc, char **argv);
+static void check_perms (void);
 
 /*
  * usage - display usage message and exit
@@ -480,48 +481,28 @@ static void process_flags (int argc, char **argv)
 }
 
 /*
- * main - groupadd command
+ * check_perms - check if the caller is allowed to add a group
+ *
+ *	With PAM support, the setuid bit can be set on groupadd to allow
+ *	non-root users to groups.
+ *	Without PAM support, only users who can write in the group databases
+ *	can add groups.
  */
-int main (int argc, char **argv)
+static void check_perms (void)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
+	int retval = PAM_SUCCESS;
+	struct passwd *pampw;
 
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	OPENLOG ("groupadd");
-
-	/*
-	 * Parse the command line options.
-	 */
-	process_flags (argc, argv);
-
-#ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("groupadd", pampw->pw_name,
-			                    &conv, &pamh);
-		}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("groupadd", pampw->pw_name,
+		                    &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -543,6 +524,33 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
+}
+
+/*
+ * main - groupadd command
+ */
+int main (int argc, char **argv)
+{
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	OPENLOG ("groupadd");
+
+	/*
+	 * Parse the command line options.
+	 */
+	process_flags (argc, argv);
+
+	check_perms ();
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

@@ -10,6 +10,8 @@
 	an explicit call to audit_logger().
 	* src/groupadd.c (main): Before pam_end(), the return value of the
 	previous pam API was already checked. No need to validate it again.
+	* src/groupadd.c (main, check_perms): New function check_perms().
+	Split the validation of the user's permissions out of main()
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
