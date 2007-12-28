@@ -10,6 +10,7 @@
 	* libmisc/copydir.c: Avoid assignment in comparisons.
 	* libmisc/copydir.c: Document selinux_file_context.
 	* libmisc/copydir.c: Avoid implicit brackets.
+	* libmisc/copydir.c: Avoid implicit conversions to booleans.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

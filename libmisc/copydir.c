@@ -92,13 +92,13 @@ static int selinux_file_context (const char *dst_name)
 	if (selinux_enabled) {
 		/* Get the default security context for this file */
 		if (matchpathcon (dst_name, 0, &scontext) < 0) {
-			if (security_getenforce ()) {
+			if (security_getenforce () != 0) {
 				return 1;
 			}
 		}
 		/* Set the security context for the next created file */
 		if (setfscreatecon (scontext) < 0) {
-			if (security_getenforce ()) {
+			if (security_getenforce () != 0) {
 				return 1;
 			}
 		}
@@ -121,13 +121,13 @@ static void remove_link (struct link_name *ln)
 		free (ln);
 		return;
 	}
-	for (lp = links; lp; lp = lp->ln_next) {
+	for (lp = links; NULL !=lp; lp = lp->ln_next) {
 		if (lp->ln_next == ln) {
 			break;
 		}
 	}
 
-	if (!lp) {
+	if (NULL == lp) {
 		return;
 	}
 
@@ -149,7 +149,7 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	int len;
 
 	for (lp = links; lp; lp = lp->ln_next) {
-		if (lp->ln_dev == sb->st_dev && lp->ln_ino == sb->st_ino) {
+		if ((lp->ln_dev == sb->st_dev) && (lp->ln_ino == sb->st_ino)) {
 			return lp;
 		}
 	}
@@ -195,7 +195,8 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	 * target is created.  It assumes the target directory exists.
 	 */
 
-	if (access (src_root, F_OK) != 0 || access (dst_root, F_OK) != 0) {
+	if (   (access (src_root, F_OK) != 0)
+	    || (access (dst_root, F_OK) != 0)) {
 		return -1;
 	}
 
@@ -300,7 +301,7 @@ static int copy_entry (const char *src, const char *dst,
 		 * See if this is a previously copied link
 		 */
 
-		else if ((lp = check_link (src, &sb))) {
+		else if ((lp = check_link (src, &sb)) != NULL) {
 			err = copy_hardlink (src, dst, lp);
 		}
 
@@ -341,13 +342,13 @@ static int copy_dir (const char *src, const char *dst,
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
 #endif
-	if (mkdir (dst, statp->st_mode)
-	    || chown (dst,
-	              uid == (uid_t) - 1 ? statp->st_uid : uid,
-	              gid == (gid_t) - 1 ? statp->st_gid : gid)
-	    || chmod (dst, statp->st_mode)
-	    || copy_tree (src, dst, uid, gid)
-	    || utimes (dst, mt)) {
+	if (   (mkdir (dst, statp->st_mode) != 0)
+	    || (chown (dst,
+	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
+	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	    || (chmod (dst, statp->st_mode) != 0)
+	    || (copy_tree (src, dst, uid, gid) != 0)
+	    || (utimes (dst, mt) != 0)) {
 		err = -1;
 	}
 
@@ -386,10 +387,10 @@ static int copy_symlink (const char *src, const char *dst,
 #ifdef WITH_SELINUX
 	selinux_file_context (dst);
 #endif
-	if (symlink (oldlink, dst)
-	    || lchown (dst,
-	               uid == (uid_t) - 1 ? statp->st_uid : uid,
-	               gid == (gid_t) - 1 ? statp->st_gid : gid)) {
+	if (   (symlink (oldlink, dst) != 0)
+	    || (lchown (dst,
+	                uid == (uid_t) - 1 ? statp->st_uid : uid,
+	                gid == (gid_t) - 1 ? statp->st_gid : gid) != 0)) {
 		return -1;
 	}
 
@@ -409,10 +410,10 @@ static int copy_hardlink (const char *src, const char *dst,
 {
 	/* TODO: selinux needed? */
 
-	if (link (lp->ln_name, dst)) {
+	if (link (lp->ln_name, dst) != 0) {
 		return -1;
 	}
-	if (unlink (src)) {
+	if (unlink (src) != 0) {
 		return -1;
 	}
 	if (--lp->ln_count <= 0) {
@@ -432,12 +433,12 @@ static int copy_special (const char *src, const char *dst,
 	selinux_file_context (dst);
 #endif
 
-	if (mknod (dst, statp->st_mode & ~07777, statp->st_rdev)
-	    || chown (dst,
-	              uid == (uid_t) - 1 ? statp->st_uid : uid,
-	              gid == (gid_t) - 1 ? statp->st_gid : gid)
-	    || chmod (dst, statp->st_mode & 07777)
-	    || utimes (dst, mt)) {
+	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
+	    || (chown (dst,
+	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
+	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	    || (chmod (dst, statp->st_mode & 07777) != 0)
+	    || (utimes (dst, mt) != 0)) {
 		err = -1;
 	}
 
@@ -462,11 +463,11 @@ static int copy_file (const char *src, const char *dst,
 	selinux_file_context (dst);
 #endif
 	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0);
-	if ((ofd < 0)
-	    || chown (dst,
-	              uid == (uid_t) - 1 ? statp->st_uid : uid,
-	              gid == (gid_t) - 1 ? statp->st_gid : gid)
-	    || chmod (dst, statp->st_mode & 07777)) {
+	if (   (ofd < 0)
+	    || (chown (dst,
+	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
+	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	    || (chmod (dst, statp->st_mode & 07777) != 0)) {
 		close (ifd);
 		return -1;
 	}
