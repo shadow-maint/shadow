@@ -346,8 +346,8 @@ static void fail_exit (int code)
 	if (is_shadow_grp)
 		sgr_unlock ();
 #endif
-	if (code != E_SUCCESS)
 #ifdef WITH_AUDIT
+	if (code != E_SUCCESS)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
 			      group_name, -1, 0);
 #endif

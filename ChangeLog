@@ -1,5 +1,12 @@
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	src/groupadd.c cleanup
+	* src/groupadd.c (fail_exit): When compiled without AUDIT support, if
+	the return code was E_SUCCESS, fail_exit() wouldn't have exited. Fix
+	the scope of #idef WITH_AUDIT.
+
+2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	libmisc/copydir.c cleanup
 	* libmisc/copydir.c: Split copy_tree() in more maintainable functions:
 	copy_entry(), copy_dir(), copy_symlink(), copy_hardlink(),
