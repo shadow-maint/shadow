@@ -76,24 +76,24 @@ static void close_files (void);
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [options]\n"
-			   "\n"
-			   "Options:\n"
-			   "  -c, --crypt-method            the crypt method (one of %s)\n"
-			   "  -e, --encrypted               supplied passwords are encrypted\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -m, --md5                     encrypt the clear text password using\n"
-			   "                                the MD5 algorithm\n"
-			   "%s"
-			   "\n"),
-			 Prog,
+	                   "\n"
+	                   "Options:\n"
+	                   "  -c, --crypt-method            the crypt method (one of %s)\n"
+	                   "  -e, --encrypted               supplied passwords are encrypted\n"
+	                   "  -h, --help                    display this help message and exit\n"
+	                   "  -m, --md5                     encrypt the clear text password using\n"
+	                   "                                the MD5 algorithm\n"
+	                   "%s"
+	                   "\n"),
+	                 Prog,
 #ifndef USE_SHA_CRYPT
-			 "NONE DES MD5", ""
+	                 "NONE DES MD5", ""
 #else
-			 "NONE DES MD5 SHA256 SHA512",
-			 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-			   "                                crypt algorithms\n")
+	                 "NONE DES MD5 SHA256 SHA512",
+	                 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+	                   "                                crypt algorithms\n")
 #endif
-			 );
+	                 );
 	exit (1);
 }
 
@@ -171,16 +171,16 @@ static void check_flags (void)
 {
 	if (sflg && !cflg) {
 		fprintf (stderr,
-			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
-			 Prog, "-s", "-c");
+		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         Prog, "-s", "-c");
 		usage ();
 	}
 
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
 		fprintf (stderr,
-			 _("%s: the -c, -e, and -m flags are exclusive\n"),
-			 Prog);
+		         _("%s: the -c, -e, and -m flags are exclusive\n"),
+		         Prog);
 		usage ();
 	}
 
@@ -272,13 +272,13 @@ static void open_files (void)
 	if (is_shadow_grp) {
 		if (!sgr_lock ()) {
 			fprintf (stderr, _("%s: can't lock gshadow file\n"),
-				 Prog);
+			         Prog);
 			gr_unlock ();
 			exit (1);
 		}
 		if (!sgr_open (O_RDWR)) {
 			fprintf (stderr, _("%s: can't open shadow file\n"),
-				 Prog);
+			         Prog);
 			gr_unlock ();
 			sgr_unlock ();
 			exit (1);
@@ -296,7 +296,7 @@ static void close_files (void)
 	if (is_shadow_grp) {
 		if (!sgr_close ()) {
 			fprintf (stderr,
-				 _("%s: error updating shadow file\n"), Prog);
+			         _("%s: error updating shadow file\n"), Prog);
 			gr_unlock ();
 			exit (1);
 		}
@@ -354,7 +354,7 @@ int main (int argc, char **argv)
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
-				 Prog, line);
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -373,8 +373,8 @@ int main (int argc, char **argv)
 			*cp++ = '\0';
 		} else {
 			fprintf (stderr,
-				 _("%s: line %d: missing new password\n"),
-				 Prog, line);
+			         _("%s: line %d: missing new password\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -401,8 +401,8 @@ int main (int argc, char **argv)
 		gr = gr_locate (name);
 		if (!gr) {
 			fprintf (stderr,
-				 _("%s: line %d: unknown group %s\n"), Prog,
-				 line, name);
+			         _("%s: line %d: unknown group %s\n"), Prog,
+			         line, name);
 			errors++;
 			continue;
 		}
@@ -443,9 +443,9 @@ int main (int argc, char **argv)
 
 		if (!ok) {
 			fprintf (stderr,
-				 _
-				 ("%s: line %d: cannot update password entry\n"),
-				 Prog, line);
+			         _
+			         ("%s: line %d: cannot update password entry\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -460,7 +460,7 @@ int main (int argc, char **argv)
 	 */
 	if (errors) {
 		fprintf (stderr,
-			 _("%s: error detected, changes ignored\n"), Prog);
+		         _("%s: error detected, changes ignored\n"), Prog);
 #ifdef SHADOWGRP
 		if (is_shadow_grp)
 			sgr_unlock ();
@@ -479,3 +479,4 @@ int main (int argc, char **argv)
 
 	return (0);
 }
+
