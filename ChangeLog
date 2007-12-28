@@ -3,7 +3,7 @@
 	* src/groupadd.c (find_new_gid): A group with the specified name
 	cannot exist at that time. Remove the check.
 	* src/groupadd.c (find_new_gid): If oflg is set, gflg is also set.
-	Use (!gflg), which is cleared than (!gflg || !oflg).
+	Use (!gflg), which is clearer than (!gflg || !oflg).
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
