@@ -64,6 +64,11 @@ static int is_shadow_grp;
 
 /* local function prototypes */
 static void usage (void);
+static void process_flags (int argc, char **argv);
+static void check_flags (void);
+static void check_perms (void);
+static void open_files (void);
+static void close_files (void);
 
 /*
  * usage - display usage message and exit
@@ -92,100 +97,85 @@ static void usage (void)
 	exit (1);
 }
 
-int main (int argc, char **argv)
+/*
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
 {
-	char buf[BUFSIZ];
-	char *name;
-	char *newpwd;
-	char *cp;
-
-#ifdef	SHADOWGRP
-	const struct sgrp *sg;
-	struct sgrp newsg;
-#endif
-
-	const struct group *gr;
-	struct group newgr;
-	int errors = 0;
-	int line = 0;
-	int ok;
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
-
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	{
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"crypt-method", required_argument, NULL, 'c'},
-			{"encrypted", no_argument, NULL, 'e'},
-			{"help", no_argument, NULL, 'h'},
-			{"md5", no_argument, NULL, 'm'},
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"crypt-method", required_argument, NULL, 'c'},
+		{"encrypted", no_argument, NULL, 'e'},
+		{"help", no_argument, NULL, 'h'},
+		{"md5", no_argument, NULL, 'm'},
 #ifdef USE_SHA_CRYPT
-			{"sha-rounds", required_argument, NULL, 's'},
+		{"sha-rounds", required_argument, NULL, 's'},
 #endif
-			{NULL, 0, NULL, '\0'}
-		};
+		{NULL, 0, NULL, '\0'}
+	};
 
-		while ((c =
-			getopt_long (argc, argv,
+	while ((c = getopt_long (argc, argv,
 #ifdef USE_SHA_CRYPT
-			             "c:ehms:",
+	                         "c:ehms:",
 #else
-			             "c:ehm",
+	                         "c:ehm",
 #endif
-			             long_options,
-				     &option_index)) != -1) {
-			switch (c) {
-			case 'c':
-				cflg = 1;
-				crypt_method = optarg;
-				break;
-			case 'e':
-				eflg = 1;
-				break;
-			case 'h':
-				usage ();
-				break;
-			case 'm':
-				md5flg = 1;
-				break;
+	                         long_options, &option_index)) != -1) {
+		switch (c) {
+		case 'c':
+			cflg = 1;
+			crypt_method = optarg;
+			break;
+		case 'e':
+			eflg = 1;
+			break;
+		case 'h':
+			usage ();
+			break;
+		case 'm':
+			md5flg = 1;
+			break;
 #ifdef USE_SHA_CRYPT
-			case 's':
-				sflg = 1;
-				if (!getlong(optarg, &sha_rounds)) {
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					usage ();
-				}
-				break;
-#endif
-			case 0:
-				/* long option */
-				break;
-			default:
+		case 's':
+			sflg = 1;
+			if (!getlong(optarg, &sha_rounds)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
 				usage ();
-				break;
 			}
+			break;
+#endif
+		case 0:
+			/* long option */
+			break;
+		default:
+			usage ();
+			break;
 		}
 	}
 
 	/* validate options */
+	check_flags ();
+}
+
+/*
+ * check_flags - check flags and parameters consistency
+ *
+ *	It will not return if an error is encountered.
+ */
+static void check_flags (void)
+{
 	if (sflg && !cflg) {
 		fprintf (stderr,
 			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
 			 Prog, "-s", "-c");
 		usage ();
 	}
+
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
 		fprintf (stderr,
@@ -193,6 +183,7 @@ int main (int argc, char **argv)
 			 Prog);
 		usage ();
 	}
+
 	if (cflg) {
 		if (   0 != strcmp (crypt_method, "DES")
 		    && 0 != strcmp (crypt_method, "MD5")
@@ -208,21 +199,32 @@ int main (int argc, char **argv)
 			usage ();
 		}
 	}
+}
 
+/*
+ * check_perms - check if the caller is allowed to add a group
+ *
+ *	With PAM support, the setuid bit can be set on groupadd to allow
+ *	non-root users to groups.
+ *	Without PAM support, only users who can write in the group databases
+ *	can add groups.
+ *
+ *	It will not return if the user is not allowed.
+ */
+static void check_perms (void)
+{
 #ifdef USE_PAM
-	retval = PAM_SUCCESS;
+	pam_handle_t *pamh = NULL;
+	int retval = PAM_SUCCESS;
 
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
+	struct passwd *pampw;
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
 
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("chgpasswd", pampw->pw_name,
-					    &conv, &pamh);
-		}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chgpasswd", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -244,10 +246,16 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
+}
 
+/*
+ * open_files - lock and open the group databases
+ */
+static void open_files (void)
+{
 	/*
-	 * Lock the group file and open it for reading. This will bring
-	 * all of the entries into memory where they may be updated.
+	 * Lock the group file and open it for reading and writing. This will
+	 * bring all of the entries into memory where they may be updated.
 	 */
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
@@ -258,8 +266,9 @@ int main (int argc, char **argv)
 		gr_unlock ();
 		exit (1);
 	}
+
 #ifdef SHADOWGRP
-	is_shadow_grp = sgr_file_present ();
+	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_grp) {
 		if (!sgr_lock ()) {
 			fprintf (stderr, _("%s: can't lock gshadow file\n"),
@@ -276,6 +285,63 @@ int main (int argc, char **argv)
 		}
 	}
 #endif
+}
+
+/*
+ * close_files - close and unlock the group databases
+ */
+static void close_files (void)
+{
+#ifdef SHADOWGRP
+	if (is_shadow_grp) {
+		if (!sgr_close ()) {
+			fprintf (stderr,
+				 _("%s: error updating shadow file\n"), Prog);
+			gr_unlock ();
+			exit (1);
+		}
+		sgr_unlock ();
+	}
+#endif
+
+	if (!gr_close ()) {
+		fprintf (stderr, _("%s: error updating password file\n"), Prog);
+		exit (1);
+	}
+	gr_unlock ();
+}
+
+int main (int argc, char **argv)
+{
+	char buf[BUFSIZ];
+	char *name;
+	char *newpwd;
+	char *cp;
+
+#ifdef	SHADOWGRP
+	const struct sgrp *sg;
+	struct sgrp newsg;
+#endif
+
+	const struct group *gr;
+	struct group newgr;
+	int errors = 0;
+	int line = 0;
+	int ok;
+
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	process_flags(argc, argv);
+
+	check_perms ();
+
+	is_shadow_grp = sgr_file_present ();
+
+	open_files ();
 
 	/*
 	 * Read each line, separating the group name from the password. The
@@ -402,29 +468,13 @@ int main (int argc, char **argv)
 		gr_unlock ();
 		exit (1);
 	}
-#ifdef SHADOWGRP
-	if (is_shadow_grp) {
-		if (!sgr_close ()) {
-			fprintf (stderr,
-				 _("%s: error updating shadow file\n"), Prog);
-			gr_unlock ();
-			exit (1);
-		}
-		sgr_unlock ();
-	}
-#endif
-	if (!gr_close ()) {
-		fprintf (stderr, _("%s: error updating password file\n"), Prog);
-		exit (1);
-	}
+
+	close_files ();
 
 	nscd_flush_cache ("group");
 
-	gr_unlock ();
-
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return (0);
