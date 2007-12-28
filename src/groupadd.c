@@ -217,14 +217,6 @@ static void find_new_gid (void)
 	 */
 	setgrent ();
 	while ((grp = getgrent ())) {
-		if (strcmp (group_name, grp->gr_name) == 0) {
-			if (fflg) {
-				fail_exit (E_SUCCESS);
-			}
-			fprintf (stderr, _("%s: name %s is not unique\n"),
-				 Prog, group_name);
-			fail_exit (E_NAME_IN_USE);
-		}
 		if (gflg && (group_id == grp->gr_gid)) {
 			if (fflg) {
 				/* turn off -g and search again */

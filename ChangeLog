@@ -1,4 +1,9 @@
-2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
+2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupadd.c (find_new_gid): A group with the specified name
+	cannot exist at that time. Remove the check.
+
+2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	src/groupadd.c cleanup
 	* src/groupadd.c (fail_exit): When compiled without AUDIT support, if
