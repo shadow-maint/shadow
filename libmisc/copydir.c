@@ -255,6 +255,21 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 	return err;
 }
 
+/*
+ * copy_entry - copy the entry of a directory
+ *
+ *	Copy the entry src to dst.
+ *	Depending on the type of entry, this function will forward the
+ *	request to copy_dir(), copy_symlink(), copy_hardlink(),
+ *	copy_special(), or copy_file().
+ *
+ *	The access and modification time will not be modified.
+ *
+ *	The permissions will be set to uid/gid.
+ *
+ *	If uid (resp. gid) is equal to -1, the user (resp. group) will
+ *	not be modified.
+ */
 static int copy_entry (const char *src, const char *dst,
                        uid_t uid, gid_t gid)
 {
@@ -323,6 +338,16 @@ static int copy_entry (const char *src, const char *dst,
 	return err;
 }
 
+/*
+ * copy_dir - copy a directory
+ *
+ *	Copy a directory (recursively) from src to dst.
+ *
+ *	statp, mt, uid, gid are used to set the access and modification and the
+ *	access rights.
+ *
+ *	Return 0 on success, -1 on error.
+ */
 static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[2],
                      uid_t uid, gid_t gid)
@@ -351,6 +376,16 @@ static int copy_dir (const char *src, const char *dst,
 }
 
 #ifdef	S_IFLNK
+/*
+ * copy_symlink - copy a symlink
+ *
+ *	Copy a symlink from src to dst.
+ *
+ *	statp, mt, uid, gid are used to set the access and modification and the
+ *	access rights.
+ *
+ *	Return 0 on success, -1 on error.
+ */
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
                          uid_t uid, gid_t gid)
@@ -400,6 +435,13 @@ static int copy_symlink (const char *src, const char *dst,
 }
 #endif
 
+/*
+ * copy_hardlink - copy a hardlink
+ *
+ *	Copy a hardlink from src to dst.
+ *
+ *	Return 0 on success, -1 on error.
+ */
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp)
 {
@@ -422,6 +464,16 @@ static int copy_hardlink (const char *src, const char *dst,
 	return 0;
 }
 
+/*
+ * copy_special - copy a special file
+ *
+ *	Copy a special file from src to dst.
+ *
+ *	statp, mt, uid, gid are used to set the access and modification and the
+ *	access rights.
+ *
+ *	Return 0 on success, -1 on error.
+ */
 static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
                          uid_t uid, gid_t gid)
@@ -444,6 +496,16 @@ static int copy_special (const char *src, const char *dst,
 	return err;
 }
 
+/*
+ * copy_file - copy a file
+ *
+ *	Copy a file from src to dst.
+ *
+ *	statp, mt, uid, gid are used to set the access and modification and the
+ *	access rights.
+ *
+ *	Return 0 on success, -1 on error.
+ */
 static int copy_file (const char *src, const char *dst,
                       const struct stat *statp, const struct timeval mt[2],
                       uid_t uid, gid_t gid)
