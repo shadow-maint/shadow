@@ -4,6 +4,7 @@
 	* src/groupadd.c (fail_exit): When compiled without AUDIT support, if
 	the return code was E_SUCCESS, fail_exit() wouldn't have exited. Fix
 	the scope of #idef WITH_AUDIT.
+	* src/groupadd.c: Avoid implicit brackets.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
 

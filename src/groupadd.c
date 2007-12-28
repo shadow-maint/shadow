@@ -206,8 +206,9 @@ static void find_new_gid (void)
 	 * one already.
 	 */
 
-	if (!gflg)
+	if (!gflg) {
 		group_id = gid_min;
+	}
 
 	/*
 	 * Search the entire group file, either looking for this GID (if the
@@ -224,7 +225,7 @@ static void find_new_gid (void)
 				 Prog, group_name);
 			fail_exit (E_NAME_IN_USE);
 		}
-		if (gflg && group_id == grp->gr_gid) {
+		if (gflg && (group_id == grp->gr_gid)) {
 			if (fflg) {
 				/* turn off -g and search again */
 				gflg = 0;
@@ -235,17 +236,18 @@ static void find_new_gid (void)
 				 Prog, (unsigned int) group_id);
 			fail_exit (E_GID_IN_USE);
 		}
-		if (!gflg && grp->gr_gid >= group_id) {
+		if (!gflg && (grp->gr_gid >= group_id)) {
 			if (grp->gr_gid > gid_max)
 				continue;
 			group_id = grp->gr_gid + 1;
 		}
 	}
-	if (!gflg && group_id == gid_max + 1) {
+	if (!gflg && (group_id == (gid_max + 1))) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
 			/* local, no need for xgetgrgid */
-			if (!getgrgid (group_id))
+			if (!getgrgid (group_id)) {
 				break;
+			}
 		}
 		if (group_id == gid_max) {
 			fprintf (stderr, _("%s: can't get unique GID\n"), Prog);
@@ -262,8 +264,9 @@ static void find_new_gid (void)
  */
 static void check_new_name (void)
 {
-	if (check_group_name (group_name))
+	if (check_group_name (group_name)) {
 		return;
+	}
 
 	/*
 	 * All invalid group names land here.
@@ -294,8 +297,9 @@ static void close_files (void)
 			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp)
+	if (is_shadow_grp) {
 		sgr_unlock ();
+	}
 #endif				/* SHADOWGRP */
 }
 
@@ -343,13 +347,15 @@ static void fail_exit (int code)
 {
 	(void) gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp)
+	if (is_shadow_grp) {
 		sgr_unlock ();
+	}
 #endif
 #ifdef WITH_AUDIT
-	if (code != E_SUCCESS)
+	if (code != E_SUCCESS) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
 			      group_name, -1, 0);
+	}
 #endif
 	exit (code);
 }
@@ -363,7 +369,7 @@ static gid_t get_gid (const char *gidstr)
 	char *errptr;
 
 	val = strtol (gidstr, &errptr, 10);
-	if (*errptr || errno == ERANGE || val < 0) {
+	if (('\0' != *errptr) || (errno == ERANGE) || (val < 0)) {
 		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
 			 gidstr);
 		exit (E_BAD_ARG);
@@ -449,8 +455,9 @@ int main (int argc, char **argv)
 				}
 				/* terminate name, point to value */
 				*cp++ = '\0';
-				if (putdef_str (optarg, cp) < 0)
+				if (putdef_str (optarg, cp) < 0) {
 					exit (E_BAD_ARG);
+				}
 				break;
 			case 'o':
 				oflg++;
@@ -461,11 +468,13 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (oflg && !gflg)
+	if (oflg && !gflg) {
 		usage ();
+	}
 
-	if (optind != argc - 1)
+	if (optind != argc - 1) {
 		usage ();
+	}
 
 	group_name = argv[argc - 1];
 	check_new_name ();
@@ -531,8 +540,9 @@ int main (int argc, char **argv)
 	 */
 	open_files ();
 
-	if (!gflg || !oflg)
+	if (!gflg || !oflg) {
 		find_new_gid ();
+	}
 
 	grp_update ();
 	close_files ();
@@ -540,9 +550,11 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
+	if (retval == PAM_SUCCESS) {
 		pam_end (pamh, PAM_SUCCESS);
+	}
 #endif				/* USE_PAM */
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }
+
