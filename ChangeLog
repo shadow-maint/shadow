@@ -1,5 +1,10 @@
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chpasswd.c: Before pam_end(), the return value of the previous
+	pam API was already checked. No need to validate it again.
+
+2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupadd.c (find_new_gid): A group with the specified name
 	cannot exist at that time. Remove the check.
 	* src/groupadd.c (find_new_gid): If oflg is set, gflg is also set.

@@ -411,8 +411,7 @@ int main (int argc, char **argv)
 	pw_unlock ();
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return (0);
