@@ -453,14 +453,10 @@ static void process_flags (int argc, char **argv)
 		/* The group already exist */
 		if (fflg) {
 			/* OK, no need to do anything */
-			exit (E_SUCCESS);
+			fail_exit (E_SUCCESS);
 		}
 		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "adding group", group_name, -1, 0);
-#endif
-		exit (E_NAME_IN_USE);
+		fail_exit (E_NAME_IN_USE);
 	}
 
 	if (gflg && (getgrgid (group_id) != NULL)) {

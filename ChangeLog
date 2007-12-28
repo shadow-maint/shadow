@@ -6,6 +6,8 @@
 	Use (!gflg), which is clearer than (!gflg || !oflg).
 	* src/groupadd.c (find_new_gid): find_new_gid is never called when an
 	GID is specified with -g. Simplify find_new_gid accordingly.
+	* src/groupadd.c (process_flags): prefer fail_exit to exit. This avoid
+	an explicit call to audit_logger().
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
