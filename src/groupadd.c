@@ -31,6 +31,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include <ctype.h>
 #include <fcntl.h>
 #include <getopt.h>
@@ -190,51 +191,33 @@ static void grp_update (void)
  * find_new_gid - find the next available GID
  *
  *	find_new_gid() locates the next highest unused GID in the group
- *	file, or checks the given group ID against the existing ones for
- *	uniqueness.
+ *	file.
  */
 static void find_new_gid (void)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max;
 
+	/*
+	 * It doesn't make sense to use find_new_uid(),
+	 * if a GID is specified via "-g" option.
+	 */
+	assert (!gflg);
+
 	gid_min = getdef_unum ("GID_MIN", 1000);
 	gid_max = getdef_unum ("GID_MAX", 60000);
 
 	/*
-	 * Start with some GID value if the user didn't provide us with
-	 * one already.
-	 */
-
-	if (!gflg) {
-		group_id = gid_min;
-	}
-
-	/*
-	 * Search the entire group file, either looking for this GID (if the
-	 * user specified one with -g) or looking for the largest unused
+	 * Search the entire group file, looking for the largest unused
 	 * value.
 	 */
 	setgrent ();
 	while ((grp = getgrent ())) {
-		if (gflg && (group_id == grp->gr_gid)) {
-			if (fflg) {
-				/* turn off -g and search again */
-				gflg = 0;
-				setgrent ();
-				continue;
-			}
-			fprintf (stderr, _("%s: GID %u is not unique\n"),
-				 Prog, (unsigned int) group_id);
-			fail_exit (E_GID_IN_USE);
-		}
-		if (!gflg && (grp->gr_gid >= group_id)) {
-			if (grp->gr_gid > gid_max)
-				continue;
+		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
 			group_id = grp->gr_gid + 1;
 		}
 	}
-	if (!gflg && (group_id == (gid_max + 1))) {
+	if (group_id == (gid_max + 1)) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
 			/* local, no need for xgetgrgid */
 			if (!getgrgid (group_id)) {

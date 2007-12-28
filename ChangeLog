@@ -4,6 +4,8 @@
 	cannot exist at that time. Remove the check.
 	* src/groupadd.c (find_new_gid): If oflg is set, gflg is also set.
 	Use (!gflg), which is clearer than (!gflg || !oflg).
+	* src/groupadd.c (find_new_gid): find_new_gid is never called when an
+	GID is specified with -g. Simplify find_new_gid accordingly.
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
