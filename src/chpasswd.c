@@ -382,13 +382,15 @@ int main (int argc, char **argv)
 		    (NULL == crypt_method ||
 		     0 != strcmp(crypt_method, "NONE"))) {
 			void *arg = NULL;
-			if (md5flg)
+			if (md5flg) {
 				crypt_method = "MD5";
-			else if (crypt_method != NULL) {
-				if (sflg)
+			} else if (crypt_method != NULL) {
+				if (sflg) {
 					arg = &sha_rounds;
-			} else
+				}
+			} else {
 				crypt_method = NULL;
+			}
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt(crypt_method, arg));
 		}
@@ -405,10 +407,11 @@ int main (int argc, char **argv)
 			errors++;
 			continue;
 		}
-		if (is_shadow_pwd)
+		if (is_shadow_pwd) {
 			sp = spw_locate (name);
-		else
+		} else {
 			sp = NULL;
+		}
 
 		/*
 		 * The freshly encrypted new password is merged into the
@@ -429,10 +432,11 @@ int main (int argc, char **argv)
 		 * be written to the password file later, after all the
 		 * other entries have been updated as well.
 		 */
-		if (sp)
+		if (sp) {
 			ok = spw_update (&newsp);
-		else
+		} else {
 			ok = pw_update (&newpw);
+		}
 
 		if (!ok) {
 			fprintf (stderr,
@@ -454,8 +458,9 @@ int main (int argc, char **argv)
 	if (errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
-		if (is_shadow_pwd)
+		if (is_shadow_pwd) {
 			spw_unlock ();
+		}
 		pw_unlock ();
 		exit (1);
 	}

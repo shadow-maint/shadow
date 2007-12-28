@@ -8,6 +8,7 @@
 	This force flushing the password database after the password file is
 	unlocked.
 	* src/chpasswd.c: Avoid assignments in comparisons.
+	* src/chpasswd.c: Avoid implicit brackets.
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
