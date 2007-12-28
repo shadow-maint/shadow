@@ -217,7 +217,7 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		dst_orig = dst_root;
 		set_orig++;
 	}
-	while ((ent = readdir (dir))) {
+	while ((0 == err) && (ent = readdir (dir)) != NULL) {
 
 		/*
 		 * Skip the "." and ".." entries
