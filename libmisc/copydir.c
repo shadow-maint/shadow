@@ -109,7 +109,7 @@ static int selinux_file_context (const char *dst_name)
 #endif
 
 /*
- * remove_link - delete a link from the link list
+ * remove_link - delete a link from the linked list
  */
 static void remove_link (struct link_name *ln)
 {
@@ -218,38 +218,33 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
 		set_orig++;
 	}
 	while ((0 == err) && (ent = readdir (dir)) != NULL) {
-
 		/*
 		 * Skip the "." and ".." entries
 		 */
+		if ((strcmp (ent->d_name, ".") != 0) &&
+		    (strcmp (ent->d_name, "..") != 0)) {
+			/*
+			 * Make sure the resulting source and destination
+			 * filenames will fit in their buffers.
+			 */
+			if (   (strlen (src_root) + strlen (ent->d_name) + 2 >
+			        sizeof src_name)
+			    || (strlen (dst_root) + strlen (ent->d_name) + 2 >
+			        sizeof dst_name)) {
+				err = -1;
+			} else {
+				/*
+				 * Build the filename for both the source and
+				 * the destination files.
+				 */
+				snprintf (src_name, sizeof src_name, "%s/%s",
+				          src_root, ent->d_name);
+				snprintf (dst_name, sizeof dst_name, "%s/%s",
+				          dst_root, ent->d_name);
 
-		if (strcmp (ent->d_name, ".") == 0 ||
-		    strcmp (ent->d_name, "..") == 0) {
-			continue;
+				err = copy_entry (src_name, dst_name, uid, gid);
+			}
 		}
-
-		/*
-		 * Make the filename for both the source and the
-		 * destination files.
-		 */
-
-		if (strlen (src_root) + strlen (ent->d_name) + 2 >
-		    sizeof src_name) {
-			err = -1;
-			break;
-		}
-		snprintf (src_name, sizeof src_name, "%s/%s", src_root,
-			  ent->d_name);
-
-		if (strlen (dst_root) + strlen (ent->d_name) + 2 >
-		    sizeof dst_name) {
-			err = -1;
-			break;
-		}
-		snprintf (dst_name, sizeof dst_name, "%s/%s", dst_root,
-			  ent->d_name);
-
-		err = copy_entry (src_name, dst_name, uid, gid);
 	}
 	closedir (dir);
 
@@ -389,8 +384,8 @@ static int copy_symlink (const char *src, const char *dst,
 #endif
 	if (   (symlink (oldlink, dst) != 0)
 	    || (lchown (dst,
-	                uid == (uid_t) - 1 ? statp->st_uid : uid,
-	                gid == (gid_t) - 1 ? statp->st_gid : gid) != 0)) {
+	                (uid == (uid_t) - 1) ? statp->st_uid : uid,
+	                (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)) {
 		return -1;
 	}
 
@@ -417,6 +412,8 @@ static int copy_hardlink (const char *src, const char *dst,
 		return -1;
 	}
 
+	/* If the file could be unlinked, decrement the links counter,
+	 * and delete the file if it was the last reference */
 	lp->ln_count--;
 	if (lp->ln_count <= 0) {
 		remove_link (lp);
