@@ -268,13 +268,13 @@ static void open_files (void)
 	if (is_shadow_pwd) {
 		if (!spw_lock ()) {
 			fprintf (stderr, _("%s: can't lock shadow file\n"),
-				 Prog);
+			         Prog);
 			pw_unlock ();
 			exit (1);
 		}
 		if (!spw_open (O_RDWR)) {
 			fprintf (stderr, _("%s: can't open shadow file\n"),
-				 Prog);
+			         Prog);
 			pw_unlock ();
 			spw_unlock ();
 			exit (1);
@@ -290,7 +290,7 @@ static void close_files (void)
 	if (is_shadow_pwd) {
 		if (!spw_close ()) {
 			fprintf (stderr,
-				 _("%s: error updating shadow file\n"), Prog);
+			         _("%s: error updating shadow file\n"), Prog);
 			pw_unlock ();
 			exit (1);
 		}
@@ -351,7 +351,7 @@ int main (int argc, char **argv)
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
-				 Prog, line);
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -372,8 +372,8 @@ int main (int argc, char **argv)
 			cp++;
 		} else {
 			fprintf (stderr,
-				 _("%s: line %d: missing new password\n"),
-				 Prog, line);
+			         _("%s: line %d: missing new password\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -400,8 +400,8 @@ int main (int argc, char **argv)
 		pw = pw_locate (name);
 		if (!pw) {
 			fprintf (stderr,
-				 _("%s: line %d: unknown user %s\n"), Prog,
-				 line, name);
+			         _("%s: line %d: unknown user %s\n"), Prog,
+			         line, name);
 			errors++;
 			continue;
 		}
@@ -436,9 +436,9 @@ int main (int argc, char **argv)
 
 		if (!ok) {
 			fprintf (stderr,
-				 _
-				 ("%s: line %d: cannot update password entry\n"),
-				 Prog, line);
+			         _
+			         ("%s: line %d: cannot update password entry\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -453,7 +453,7 @@ int main (int argc, char **argv)
 	 */
 	if (errors) {
 		fprintf (stderr,
-			 _("%s: error detected, changes ignored\n"), Prog);
+		         _("%s: error detected, changes ignored\n"), Prog);
 		if (is_shadow_pwd)
 			spw_unlock ();
 		pw_unlock ();
@@ -470,3 +470,4 @@ int main (int argc, char **argv)
 
 	return (0);
 }
+
