@@ -64,6 +64,8 @@ static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
+static void open_files (void);
+static void close_files (void);
 
 /*
  * usage - display usage message and exit
@@ -243,6 +245,66 @@ static void check_perms (void)
 #endif				/* USE_PAM */
 }
 
+/*
+ * open_files - lock and open the password databases
+ */
+static void open_files (void)
+{
+	/*
+	 * Lock the password file and open it for reading and writing. This
+	 * will bring all of the entries into memory where they may be updated.
+	 */
+	if (!pw_lock ()) {
+		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
+		exit (1);
+	}
+	if (!pw_open (O_RDWR)) {
+		fprintf (stderr, _("%s: can't open password file\n"), Prog);
+		pw_unlock ();
+		exit (1);
+	}
+
+	/* Do the same for the shadowed database, if it exist */
+	if (is_shadow_pwd) {
+		if (!spw_lock ()) {
+			fprintf (stderr, _("%s: can't lock shadow file\n"),
+				 Prog);
+			pw_unlock ();
+			exit (1);
+		}
+		if (!spw_open (O_RDWR)) {
+			fprintf (stderr, _("%s: can't open shadow file\n"),
+				 Prog);
+			pw_unlock ();
+			spw_unlock ();
+			exit (1);
+		}
+	}
+}
+
+/*
+ * close_files - close and unlock the password databases
+ */
+static void close_files (void)
+{
+	if (is_shadow_pwd) {
+		if (!spw_close ()) {
+			fprintf (stderr,
+				 _("%s: error updating shadow file\n"), Prog);
+			pw_unlock ();
+			exit (1);
+		}
+		spw_unlock ();
+	}
+
+	if (!pw_close ()) {
+		fprintf (stderr, _("%s: error updating password file\n"), Prog);
+		exit (1);
+	}
+	pw_unlock ();
+
+}
+
 int main (int argc, char **argv)
 {
 	char buf[BUFSIZ];
@@ -270,36 +332,9 @@ int main (int argc, char **argv)
 
 	check_perms ();
 
-	/*
-	 * Lock the password file and open it for reading. This will bring
-	 * all of the entries into memory where they may be updated.
-	 */
-	if (!pw_lock ()) {
-		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
-		exit (1);
-	}
-	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("%s: can't open password file\n"), Prog);
-		pw_unlock ();
-		exit (1);
-	}
-
 	is_shadow_pwd = spw_file_present ();
-	if (is_shadow_pwd) {
-		if (!spw_lock ()) {
-			fprintf (stderr, _("%s: can't lock shadow file\n"),
-				 Prog);
-			pw_unlock ();
-			exit (1);
-		}
-		if (!spw_open (O_RDWR)) {
-			fprintf (stderr, _("%s: can't open shadow file\n"),
-				 Prog);
-			pw_unlock ();
-			spw_unlock ();
-			exit (1);
-		}
-	}
+
+	open_files ();
 
 	/*
 	 * Read each line, separating the user name from the password. The
@@ -421,23 +456,10 @@ int main (int argc, char **argv)
 		pw_unlock ();
 		exit (1);
 	}
-	if (is_shadow_pwd) {
-		if (!spw_close ()) {
-			fprintf (stderr,
-				 _("%s: error updating shadow file\n"), Prog);
-			pw_unlock ();
-			exit (1);
-		}
-		spw_unlock ();
-	}
-	if (!pw_close ()) {
-		fprintf (stderr, _("%s: error updating password file\n"), Prog);
-		exit (1);
-	}
+
+	close_files ();
 
 	nscd_flush_cache ("passwd");
-
-	pw_unlock ();
 
 #ifdef USE_PAM
 	pam_end (pamh, PAM_SUCCESS);
