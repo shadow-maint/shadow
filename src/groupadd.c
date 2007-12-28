@@ -91,6 +91,7 @@ static void open_files (void);
 static void fail_exit (int code);
 static gid_t get_gid (const char *gidstr);
 static void process_flags (int argc, char **argv);
+static void check_flags (void);
 static void check_perms (void);
 
 /*
@@ -434,15 +435,20 @@ static void process_flags (int argc, char **argv)
 	/*
 	 * Check the flags consistency
 	 */
-	if (oflg && !gflg) {
-		usage ();
-	}
-
 	if (optind != argc - 1) {
 		usage ();
 	}
-
 	group_name = argv[optind];
+
+	check_flags ();
+}
+
+static void check_flags (void)
+{
+	/* -o does not make sense without -g */
+	if (oflg && !gflg) {
+		usage ();
+	}
 
 	check_new_name ();
 
