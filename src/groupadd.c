@@ -353,9 +353,89 @@ static gid_t get_gid (const char *gidstr)
 }
 
 /*
+ * process_args - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_args (int argc, char **argv)
+{
+	char *cp;
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"force", no_argument, NULL, 'f'},
+		{"gid", required_argument, NULL, 'g'},
+		{"help", no_argument, NULL, 'h'},
+		{"key", required_argument, NULL, 'K'},
+		{"non-unique", required_argument, NULL, 'o'},
+		{NULL, 0, NULL, '\0'}
+	};
+
+	while ((c =
+		getopt_long (argc, argv, "fg:hK:o", long_options,
+			     &option_index)) != -1) {
+		switch (c) {
+		case 'f':
+			/*
+			 * "force" - do nothing, just exit(0), if the
+			 * specified group already exists. With -g, if
+			 * specified gid already exists, choose another
+			 * (unique) gid (turn off -g). Based on the RedHat's
+			 * patch from shadow-utils-970616-9.
+			 */
+			fflg++;
+			break;
+		case 'g':
+			gflg++;
+			group_id = get_gid (optarg);
+			break;
+		case 'h':
+			usage ();
+			break;
+		case 'K':
+			/*
+			 * override login.defs defaults (-K name=value)
+			 * example: -K GID_MIN=100 -K GID_MAX=499
+			 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
+			 */
+			cp = strchr (optarg, '=');
+			if (!cp) {
+				fprintf (stderr,
+					 _
+					 ("%s: -K requires KEY=VALUE\n"),
+					 Prog);
+				exit (E_BAD_ARG);
+			}
+			/* terminate name, point to value */
+			*cp++ = '\0';
+			if (putdef_str (optarg, cp) < 0) {
+				exit (E_BAD_ARG);
+			}
+			break;
+		case 'o':
+			oflg++;
+			break;
+		default:
+			usage ();
+		}
+	}
+
+	if (oflg && !gflg) {
+		usage ();
+	}
+
+	if (optind != argc - 1) {
+		usage ();
+	}
+
+	group_name = argv[optind];
+
+	check_new_name ();
+}
+
+/*
  * main - groupadd command
  */
-
 int main (int argc, char **argv)
 {
 #ifdef USE_PAM
@@ -377,82 +457,10 @@ int main (int argc, char **argv)
 
 	OPENLOG ("groupadd");
 
-	{
-		/*
-		 * Parse the command line options.
-		 */
-		char *cp;
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"force", no_argument, NULL, 'f'},
-			{"gid", required_argument, NULL, 'g'},
-			{"help", no_argument, NULL, 'h'},
-			{"key", required_argument, NULL, 'K'},
-			{"non-unique", required_argument, NULL, 'o'},
-			{NULL, 0, NULL, '\0'}
-		};
-
-		while ((c =
-			getopt_long (argc, argv, "fg:hK:o", long_options,
-				     &option_index)) != -1) {
-			switch (c) {
-			case 'f':
-				/*
-				 * "force" - do nothing, just exit(0), if the
-				 * specified group already exists. With -g, if
-				 * specified gid already exists, choose another
-				 * (unique) gid (turn off -g). Based on the RedHat's
-				 * patch from shadow-utils-970616-9.
-				 */
-				fflg++;
-				break;
-			case 'g':
-				gflg++;
-				group_id = get_gid (optarg);
-				break;
-			case 'h':
-				usage ();
-				break;
-			case 'K':
-				/*
-				 * override login.defs defaults (-K name=value)
-				 * example: -K GID_MIN=100 -K GID_MAX=499
-				 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
-				 */
-				cp = strchr (optarg, '=');
-				if (!cp) {
-					fprintf (stderr,
-						 _
-						 ("%s: -K requires KEY=VALUE\n"),
-						 Prog);
-					exit (E_BAD_ARG);
-				}
-				/* terminate name, point to value */
-				*cp++ = '\0';
-				if (putdef_str (optarg, cp) < 0) {
-					exit (E_BAD_ARG);
-				}
-				break;
-			case 'o':
-				oflg++;
-				break;
-			default:
-				usage ();
-			}
-		}
-	}
-
-	if (oflg && !gflg) {
-		usage ();
-	}
-
-	if (optind != argc - 1) {
-		usage ();
-	}
-
-	group_name = argv[argc - 1];
-	check_new_name ();
+	/*
+	 * Parse the command line options.
+	 */
+	process_args (argc, argv);
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
