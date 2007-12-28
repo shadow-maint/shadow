@@ -346,7 +346,8 @@ int main (int argc, char **argv)
 	 */
 	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
 		line++;
-		if ((cp = strrchr (buf, '\n'))) {
+		cp = strrchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
@@ -365,8 +366,10 @@ int main (int argc, char **argv)
 		 */
 
 		name = buf;
-		if ((cp = strchr (name, ':'))) {
-			*cp++ = '\0';
+		cp = strchr (name, ':');
+		if (NULL != cp) {
+			*cp = '\0';
+			cp++;
 		} else {
 			fprintf (stderr,
 				 _("%s: line %d: missing new password\n"),

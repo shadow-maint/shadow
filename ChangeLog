@@ -7,6 +7,7 @@
 	* src/chpasswd.c: Other new functions: open_files(), close_files().
 	This force flushing the password database after the password file is
 	unlocked.
+	* src/chpasswd.c: Avoid assignments in comparisons.
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -45,7 +46,7 @@
 	* libmisc/copydir.c: -1 is used to indicate an error, directly set err
 	to -1, instead of incrementing it, and checking if not nul at the
 	end.
-	* libmisc/copydir.c: Avoid assignment in comparisons.
+	* libmisc/copydir.c: Avoid assignments in comparisons.
 	* libmisc/copydir.c: Document selinux_file_context.
 	* libmisc/copydir.c: Avoid implicit brackets.
 	* libmisc/copydir.c: Avoid implicit conversions to booleans.
@@ -64,7 +65,7 @@
 	* src/gpasswd.c: New functions: check_perms(), get_group(),
 	change_passwd(), check_flags(). Split out of main() to simplify main().
 	* src/gpasswd.c: Avoid implicit brackets.
-	* src/gpasswd.c: Avoid assignment in comparisons.
+	* src/gpasswd.c: Avoid assignments in comparisons.
 	* src/gpasswd.c: Avoid implicit conversions to booleans.
 
 2007-12-27  Nicolas François  <nicolas.francois@centraliens.net>
