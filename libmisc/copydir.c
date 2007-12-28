@@ -416,7 +416,9 @@ static int copy_hardlink (const char *src, const char *dst,
 	if (unlink (src) != 0) {
 		return -1;
 	}
-	if (--lp->ln_count <= 0) {
+
+	lp->ln_count--;
+	if (lp->ln_count <= 0) {
 		remove_link (lp);
 	}
 
