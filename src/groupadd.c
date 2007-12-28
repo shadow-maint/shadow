@@ -98,16 +98,16 @@ static void process_flags (int argc, char **argv);
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: groupadd [options] GROUP\n"
-			   "\n"
-			   "Options:\n"
-			   "  -f, --force                   force exit with success status if the\n"
-			   "                                specified group already exists\n"
-			   "  -g, --gid GID                 use GID for the new group\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-			   "  -o, --non-unique              allow create group with duplicate\n"
-			   "                                (non-unique) GID\n"
-			   "\n"));
+	                   "\n"
+	                   "Options:\n"
+	                   "  -f, --force                   force exit with success status if the\n"
+	                   "                                specified group already exists\n"
+	                   "  -g, --gid GID                 use GID for the new group\n"
+	                   "  -h, --help                    display this help message and exit\n"
+	                   "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+	                   "  -o, --non-unique              allow create group with duplicate\n"
+	                   "                                (non-unique) GID\n"
+	                   "\n"));
 	exit (E_USAGE);
 }
 
@@ -182,10 +182,10 @@ static void grp_update (void)
 #endif				/* SHADOWGRP */
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group", group_name,
-		      group_id, 1);
+	              group_id, 1);
 #endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
-		 group_name, (unsigned int) group_id));
+	        group_name, (unsigned int) group_id));
 }
 
 /*
@@ -254,7 +254,7 @@ static void check_new_name (void)
 	 */
 
 	fprintf (stderr, _("%s: %s is not a valid group name\n"),
-		 Prog, group_name);
+	         Prog, group_name);
 
 	exit (E_BAD_ARG);
 }
@@ -275,7 +275,7 @@ static void close_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ()) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"), Prog);
+		         _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp) {
@@ -295,7 +295,7 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
-			      group_name, -1, 0);
+		              group_name, -1, 0);
 #endif
 		exit (E_GRP_UPDATE);
 	}
@@ -303,19 +303,19 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
-			      group_name, -1, 0);
+		              group_name, -1, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_lock ()) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"), Prog);
+		         _("%s: unable to lock shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && !sgr_open (O_RDWR)) {
 		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"), Prog);
+		         _("%s: unable to open shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -336,7 +336,7 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 	if (code != E_SUCCESS) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
-			      group_name, -1, 0);
+		              group_name, -1, 0);
 	}
 #endif
 	exit (code);
@@ -352,8 +352,8 @@ static gid_t get_gid (const char *gidstr)
 
 	val = strtol (gidstr, &errptr, 10);
 	if (('\0' != *errptr) || (errno == ERANGE) || (val < 0)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 gidstr);
+		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"),
+		         Prog, gidstr);
 		exit (E_BAD_ARG);
 	}
 	return val;
@@ -383,7 +383,7 @@ static void process_flags (int argc, char **argv)
 
 	while ((c =
 		getopt_long (argc, argv, "fg:hK:o", long_options,
-			     &option_index)) != -1) {
+		             &option_index)) != -1) {
 		switch (c) {
 		case 'f':
 			/*
@@ -411,9 +411,9 @@ static void process_flags (int argc, char **argv)
 			cp = strchr (optarg, '=');
 			if (NULL == cp) {
 				fprintf (stderr,
-					 _
-					 ("%s: -K requires KEY=VALUE\n"),
-					 Prog);
+				         _
+				         ("%s: -K requires KEY=VALUE\n"),
+				         Prog);
 				exit (E_BAD_ARG);
 			}
 			/* terminate name, point to value */
@@ -520,7 +520,7 @@ int main (int argc, char **argv)
 
 		if (retval == PAM_SUCCESS) {
 			retval = pam_start ("groupadd", pampw->pw_name,
-					    &conv, &pamh);
+			                    &conv, &pamh);
 		}
 	}
 
