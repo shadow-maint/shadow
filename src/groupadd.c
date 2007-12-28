@@ -209,6 +209,11 @@ static void find_new_gid (void)
 	gid_max = getdef_unum ("GID_MAX", 60000);
 
 	/*
+	 * Start with the lowest GID.
+	 */
+	group_id = gid_min;
+
+	/*
 	 * Search the entire group file, looking for the largest unused
 	 * value.
 	 */
@@ -404,7 +409,7 @@ static void process_flags (int argc, char **argv)
 			 * note: -K GID_MIN=10,GID_MAX=499 doesn't work yet
 			 */
 			cp = strchr (optarg, '=');
-			if (!cp) {
+			if (NULL == cp) {
 				fprintf (stderr,
 					 _
 					 ("%s: -K requires KEY=VALUE\n"),
@@ -444,7 +449,7 @@ static void process_flags (int argc, char **argv)
 	 * Check if the group already exist.
 	 */
 	/* local, no need for xgetgrnam */
-	if (getgrnam (group_name)) {
+	if (getgrnam (group_name) != NULL) {
 		/* The group already exist */
 		if (fflg) {
 			/* OK, no need to do anything */
