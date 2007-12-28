@@ -564,10 +564,9 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		pam_end (pamh, PAM_SUCCESS);
-	}
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
+
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }
