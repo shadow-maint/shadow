@@ -257,11 +257,11 @@ static void open_files (void)
 	 * Lock the group file and open it for reading and writing. This will
 	 * bring all of the entries into memory where they may be updated.
 	 */
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
 		exit (1);
 	}
-	if (!gr_open (O_RDWR)) {
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open group file\n"), Prog);
 		gr_unlock ();
 		exit (1);
@@ -270,13 +270,13 @@ static void open_files (void)
 #ifdef SHADOWGRP
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_grp) {
-		if (!sgr_lock ()) {
+		if (sgr_lock () == 0) {
 			fprintf (stderr, _("%s: can't lock gshadow file\n"),
 			         Prog);
 			gr_unlock ();
 			exit (1);
 		}
-		if (!sgr_open (O_RDWR)) {
+		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr, _("%s: can't open shadow file\n"),
 			         Prog);
 			gr_unlock ();
@@ -294,9 +294,9 @@ static void close_files (void)
 {
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
-		if (!sgr_close ()) {
+		if (sgr_close () == 0) {
 			fprintf (stderr,
-			         _("%s: error updating shadow file\n"), Prog);
+			         _("%s: error updating gshadow file\n"), Prog);
 			gr_unlock ();
 			exit (1);
 		}
@@ -304,8 +304,8 @@ static void close_files (void)
 	}
 #endif
 
-	if (!gr_close ()) {
-		fprintf (stderr, _("%s: error updating password file\n"), Prog);
+	if (gr_close () == 0) {
+		fprintf (stderr, _("%s: error updating group file\n"), Prog);
 		exit (1);
 	}
 	gr_unlock ();
@@ -345,12 +345,13 @@ int main (int argc, char **argv)
 
 	/*
 	 * Read each line, separating the group name from the password. The
-	 * password entry for each group will be looked up in the appropriate
+	 * group entry for each group will be looked up in the appropriate
 	 * file (gshadow or group) and the password changed.
 	 */
 	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
 		line++;
-		if ((cp = strrchr (buf, '\n'))) {
+		cp = strrchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
@@ -360,8 +361,8 @@ int main (int argc, char **argv)
 		}
 
 		/*
-		 * The groupname is the first field. It is separated from the
-		 * password with a ":" character which is replaced with a
+		 * The group's name is the first field. It is separated from
+		 * the password with a ":" character which is replaced with a
 		 * NUL to give the new password. The new password will then
 		 * be encrypted in the normal fashion with a new salt
 		 * generated, unless the '-e' is given, in which case it is
@@ -369,8 +370,10 @@ int main (int argc, char **argv)
 		 */
 
 		name = buf;
-		if ((cp = strchr (name, ':'))) {
-			*cp++ = '\0';
+		cp = strchr (name, ':');
+		if (NULL != cp) {
+			*cp = '\0';
+			cp++;
 		} else {
 			fprintf (stderr,
 			         _("%s: line %d: missing new password\n"),
@@ -383,23 +386,25 @@ int main (int argc, char **argv)
 		    (NULL == crypt_method ||
 		     0 != strcmp(crypt_method, "NONE"))) {
 			void *arg = NULL;
-			if (md5flg)
+			if (md5flg) {
 				crypt_method = "MD5";
-			else if (crypt_method != NULL) {
-				if (sflg)
+			} else if (crypt_method != NULL) {
+				if (sflg) {
 					arg = &sha_rounds;
-			} else
+				}
+			} else {
 				crypt_method = NULL;
+			}
 			cp = pw_encrypt (newpwd,
 			                 crypt_make_salt(crypt_method, arg));
 		}
 
 		/*
-		 * Get the password file entry for this user. The user must
+		 * Get the group file entry for this group. The group must
 		 * already exist.
 		 */
 		gr = gr_locate (name);
-		if (!gr) {
+		if (NULL == gr) {
 			fprintf (stderr,
 			         _("%s: line %d: unknown group %s\n"), Prog,
 			         line, name);
@@ -407,19 +412,19 @@ int main (int argc, char **argv)
 			continue;
 		}
 #ifdef SHADOWGRP
-		if (is_shadow_grp)
+		if (is_shadow_grp) {
 			sg = sgr_locate (name);
-		else
+		} else {
 			sg = NULL;
+		}
 #endif
 
 		/*
 		 * The freshly encrypted new password is merged into the
-		 * user's password file entry and the last password change
-		 * date is set to the current date.
+		 * group's entry.
 		 */
 #ifdef SHADOWGRP
-		if (sg) {
+		if (NULL != sg) {
 			newsg = *sg;
 			newsg.sg_passwd = cp;
 		} else
@@ -430,21 +435,23 @@ int main (int argc, char **argv)
 		}
 
 		/* 
-		 * The updated password file entry is then put back and will
-		 * be written to the password file later, after all the
+		 * The updated group file entry is then put back and will
+		 * be written to the group file later, after all the
 		 * other entries have been updated as well.
 		 */
 #ifdef SHADOWGRP
-		if (sg)
+		if (NULL != sg) {
 			ok = sgr_update (&newsg);
-		else
+		} else
 #endif
+		{
 			ok = gr_update (&newgr);
+		}
 
 		if (!ok) {
 			fprintf (stderr,
 			         _
-			         ("%s: line %d: cannot update password entry\n"),
+			         ("%s: line %d: cannot update group entry\n"),
 			         Prog, line);
 			errors++;
 			continue;
@@ -453,7 +460,7 @@ int main (int argc, char **argv)
 
 	/*
 	 * Any detected errors will cause the entire set of changes to be
-	 * aborted. Unlocking the password file will cause all of the
+	 * aborted. Unlocking the group file will cause all of the
 	 * changes to be ignored. Otherwise the file is closed, causing the
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
@@ -462,8 +469,9 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
 #ifdef SHADOWGRP
-		if (is_shadow_grp)
+		if (is_shadow_grp) {
 			sgr_unlock ();
+		}
 #endif
 		gr_unlock ();
 		exit (1);

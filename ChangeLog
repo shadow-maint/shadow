@@ -1,8 +1,14 @@
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Same changes for chgpasswd:
-	* src/chpasswd.c: main() split in process_flags(), check_flags(),
+	* src/chgpasswd.c: Before pam_end(), the return value of the previous
+	pam API was already checked. No need to validate it again.
+	* src/chgpasswd.c: main() split in process_flags(), check_flags(),
 	check_perms(), open_files(), and close_files().
+	* src/chgpasswd.c: Avoid assignments in comparisons.
+	* src/chgpasswd.c: Avoid implicit brackets.
+	* src/chgpasswd.c: Fix comments to match chgpasswd (group instead of
+	user's passwords are changed).
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
