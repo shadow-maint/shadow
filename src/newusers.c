@@ -115,7 +115,8 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 * Start by seeing if the named group already exists. This will be
 	 * very easy to deal with if it does.
 	 */
-	if ((grp = gr_locate (gid))) {
+	grp = gr_locate (gid);
+	if (NULL != grp) {
 	      add_member:
 		grent = *grp;
 		*ngid = grent.gr_gid;
@@ -209,7 +210,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
  */
 static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 {
-	const struct passwd *pwd;
+	const struct passwd *pwd = NULL;
 	struct passwd pwent;
 	uid_t i;
 
@@ -219,15 +220,21 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	 */
 	if ((uid[0] >= '0') && (uid[0] <= '9')) {
 		i = atoi (uid);
-	} else if (('\0' != uid[0]) && (pwd = pw_locate (uid))) {
-		i = pwd->pw_uid;
 	} else {
-		/* Start with gid, either the specified GID, or an ID
-		 * greater than all the group and user IDs */
-		i = gid;
-		for (pw_rewind (); (pwd = pw_next ());) {
-			if (pwd->pw_uid >= i) {
-				i = pwd->pw_uid + 1;
+		if ('\0' != uid[0]) {
+			pwd = pw_locate (uid);
+		}
+
+		if (NULL != pwd) {
+			i = pwd->pw_uid;
+		} else {
+			/* Start with gid, either the specified GID, or an ID
+			 * greater than all the group and user IDs */
+			i = gid;
+			for (pw_rewind (); (pwd = pw_next ());) {
+				if (pwd->pw_uid >= i) {
+					i = pwd->pw_uid + 1;
+				}
 			}
 		}
 	}
@@ -295,7 +302,8 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * Do the first and easiest shadow file case. The user already
 	 * exists in the shadow password file.
 	 */
-	if ((sp = spw_locate (pwd->pw_name))) {
+	sp = spw_locate (pwd->pw_name);
+	if (NULL != sp) {
 		spent = *sp;
 		spent.sp_pwdp = pw_encrypt (passwd,
 		                            crypt_make_salt (crypt_method,
@@ -573,7 +581,8 @@ int main (int argc, char **argv)
 	 */
 	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
 		line++;
-		if ((cp = strrchr (buf, '\n'))) {
+		cp = strrchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
@@ -589,7 +598,8 @@ int main (int argc, char **argv)
 		 */
 		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
 			fields[nfields] = cp;
-			if ((cp = strchr (cp, ':'))) {
+			cp = strchr (cp, ':');
+			if (NULL != cp) {
 				*cp++ = '\0';
 			} else {
 				break;
@@ -611,8 +621,9 @@ int main (int argc, char **argv)
 		 * new group, if that group ID exists, a whole new group ID
 		 * will be made up.
 		 */
-		if (!(pw = pw_locate (fields[0])) &&
-		    add_group (fields[0], fields[3], &gid)) {
+		pw = pw_locate (fields[0]);
+		if (   (NULL == pw)
+		    && (add_group (fields[0], fields[3], &gid) != 0)) {
 			fprintf (stderr,
 			         _("%s: line %d: can't create GID\n"),
 			         Prog, line);
@@ -640,7 +651,8 @@ int main (int argc, char **argv)
 		 * The password, gecos field, directory, and shell fields
 		 * all come next.
 		 */
-		if (!(pw = pw_locate (fields[0]))) {
+		pw = pw_locate (fields[0]);
+		if (NULL == pw) {
 			fprintf (stderr,
 			         _("%s: line %d: cannot find user %s\n"),
 			         Prog, line, fields[0]);
