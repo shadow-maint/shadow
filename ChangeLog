@@ -5,6 +5,7 @@
 	check_flags(), check_perms(), open_files(), and close_files().
 	* src/newusers.c: Before pam_end(), the return value of the previous
 	pam API was already checked. No need to validate it again.
+	* src/newusers.c: Avoid implicit brackets.
 
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
 

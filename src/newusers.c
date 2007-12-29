@@ -85,18 +85,18 @@ static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [options] [input]\n"
 	                   "\n"
-			   "  -c, --crypt-method            the crypt method (one of %s)\n"
-			   "%s"
-			   "\n"),
-			 Prog,
+	                   "  -c, --crypt-method            the crypt method (one of %s)\n"
+	                   "%s"
+	                   "\n"),
+	                 Prog,
 #ifndef USE_SHA_CRYPT
-			 "NONE DES MD5", ""
+	                 "NONE DES MD5", ""
 #else
-			 "NONE DES MD5 SHA256 SHA512",
-			 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
-			   "                                crypt algorithms\n")
+	                 "NONE DES MD5 SHA256 SHA512",
+	                 _("  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
+	                   "                                crypt algorithms\n")
 #endif
-			 );
+	                 );
 	exit (1);
 }
 
@@ -119,9 +119,11 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	      add_member:
 		grent = *grp;
 		*ngid = grent.gr_gid;
-		for (i = 0; grent.gr_mem[i] != (char *) 0; i++)
-			if (strcmp (grent.gr_mem[i], name) == 0)
+		for (i = 0; grent.gr_mem[i] != (char *) 0; i++) {
+			if (strcmp (grent.gr_mem[i], name) == 0) {
 				return 0;
+			}
+		}
 
 		grent.gr_mem = (char **) xmalloc (sizeof (char *) * (i + 2));
 		memcpy (grent.gr_mem, grp->gr_mem, sizeof (char *) * (i + 2));
@@ -140,8 +142,9 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	if (gid[0] == '\0') {
 		i = 100;
 		for (pw_rewind (); (pwd = pw_next ());) {
-			if (pwd->pw_uid >= (unsigned int)i)
+			if (pwd->pw_uid >= (unsigned int)i) {
 				i = pwd->pw_uid + 1;
+			}
 		}
 		for (gr_rewind (); (grp = gr_next ());) {
 			if (grp->gr_gid == (unsigned int)i) {
@@ -149,17 +152,19 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 				break;
 			}
 		}
-	} else if (gid[0] >= '0' && gid[0] <= '9') {
+	} else if ((gid[0] >= '0') && (gid[0] <= '9')) {
 		/*
 		 * The GID is a number, which means either this is a brand
 		 * new group, or an existing group. For existing groups I
 		 * just add myself as a member, just like I did earlier.
 		 */
 		i = atoi (gid);
-		for (gr_rewind (); (grp = gr_next ());)
-			if (grp->gr_gid == (unsigned int)i)
+		for (gr_rewind (); (grp = gr_next ());) {
+			if (grp->gr_gid == (unsigned int)i) {
 				goto add_member;
-	} else
+			}
+		}
+	} else {
 		/*
 		 * The last alternative is that the GID is a name which is
 		 * not already the name of an existing group, and I need to
@@ -167,23 +172,27 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 		 * have.
 		 */
 		i = -1;
+	}
 
 	/*
 	 * If I don't have a group ID by now, I'll go get the next one.
 	 */
 	if (i == -1) {
-		for (i = 100, gr_rewind (); (grp = gr_next ());)
-			if (grp->gr_gid >= (unsigned int)i)
+		for (i = 100, gr_rewind (); (grp = gr_next ());) {
+			if (grp->gr_gid >= (unsigned int)i) {
 				i = grp->gr_gid + 1;
+			}
+		}
 	}
 
 	/*
 	 * Now I have all of the fields required to create the new group.
 	 */
-	if (gid[0] && (gid[0] <= '0' || gid[0] >= '9'))
+	if (('\0' != gid[0]) && ((gid[0] <= '0') || (gid[0] >= '9'))) {
 		grent.gr_name = xstrdup (gid);
-	else
+	} else {
 		grent.gr_name = xstrdup (name);
+	}
 
 	grent.gr_passwd = "x";	/* XXX warning: const */
 	grent.gr_gid = i;
@@ -208,17 +217,19 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	 * The first guess for the UID is either the numerical UID that the
 	 * caller provided, or the next available UID.
 	 */
-	if (uid[0] >= '0' && uid[0] <= '9') {
+	if ((uid[0] >= '0') && (uid[0] <= '9')) {
 		i = atoi (uid);
-	} else if (uid[0] && (pwd = pw_locate (uid))) {
+	} else if (('\0' != uid[0]) && (pwd = pw_locate (uid))) {
 		i = pwd->pw_uid;
 	} else {
 		/* Start with gid, either the specified GID, or an ID
 		 * greater than all the group and user IDs */
 		i = gid;
-		for (pw_rewind (); (pwd = pw_next ());)
-			if (pwd->pw_uid >= i)
+		for (pw_rewind (); (pwd = pw_next ());) {
+			if (pwd->pw_uid >= i) {
 				i = pwd->pw_uid + 1;
+			}
+		}
 	}
 
 	/*
@@ -242,11 +253,12 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 {
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
-		if (sflg)
+		if (sflg) {
 			crypt_arg = &sha_rounds;
+		}
 	}
 
-	if (crypt_method != NULL && 0 == strcmp(crypt_method, "NONE")) {
+	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
 		pwd->pw_passwd = (char *)passwd;
 	} else {
 		pwd->pw_passwd = pw_encrypt (passwd,
@@ -264,8 +276,9 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	struct spwd spent;
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
-		if (sflg)
+		if (sflg) {
 			crypt_arg = &sha_rounds;
+		}
 	}
 
 	/*
@@ -401,12 +414,12 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (   0 != strcmp (crypt_method, "DES")
-		    && 0 != strcmp (crypt_method, "MD5")
-		    && 0 != strcmp (crypt_method, "NONE")
+		if (   (0 != strcmp (crypt_method, "DES"))
+		    && (0 != strcmp (crypt_method, "MD5"))
+		    && (0 != strcmp (crypt_method, "NONE"))
 #ifdef USE_SHA_CRYPT
-		    && 0 != strcmp (crypt_method, "SHA256")
-		    && 0 != strcmp (crypt_method, "SHA512")
+		    && (0 != strcmp (crypt_method, "SHA256"))
+		    && (0 != strcmp (crypt_method, "SHA512"))
 #endif
 		    ) {
 			fprintf (stderr,
@@ -482,18 +495,20 @@ static void open_files (void)
 
 	if ((is_shadow && !spw_lock ()) || !gr_lock ()) {
 		fprintf (stderr,
-			 _("%s: can't lock files, try again later\n"), Prog);
+		         _("%s: can't lock files, try again later\n"), Prog);
 		(void) pw_unlock ();
-		if (is_shadow)
+		if (is_shadow) {
 			spw_unlock ();
+		}
 		exit (1);
 	}
 	if (!pw_open (O_RDWR) || (is_shadow && !spw_open (O_RDWR))
 	    || !gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: can't open files\n"), Prog);
 		(void) pw_unlock ();
-		if (is_shadow)
+		if (is_shadow) {
 			spw_unlock ();
+		}
 		(void) gr_unlock ();
 		exit (1);
 	}
@@ -507,14 +522,16 @@ static void close_files (void)
 	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ()) {
 		fprintf (stderr, _("%s: error updating files\n"), Prog);
 		(void) gr_unlock ();
-		if (is_shadow)
+		if (is_shadow) {
 			spw_unlock ();
+		}
 		(void) pw_unlock ();
 		exit (1);
 	}
 	(void) gr_unlock ();
-	if (is_shadow)
+	if (is_shadow) {
 		(void) spw_unlock ();
+	}
 	(void) pw_unlock ();
 }
 
@@ -560,7 +577,7 @@ int main (int argc, char **argv)
 			*cp = '\0';
 		} else {
 			fprintf (stderr, _("%s: line %d: line too long\n"),
-				 Prog, line);
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -572,14 +589,15 @@ int main (int argc, char **argv)
 		 */
 		for (cp = buf, nfields = 0; nfields < 7; nfields++) {
 			fields[nfields] = cp;
-			if ((cp = strchr (cp, ':')))
+			if ((cp = strchr (cp, ':'))) {
 				*cp++ = '\0';
-			else
+			} else {
 				break;
+			}
 		}
 		if (nfields != 6) {
 			fprintf (stderr, _("%s: line %d: invalid line\n"),
-				 Prog, line);
+			         Prog, line);
 			continue;
 		}
 
@@ -596,8 +614,8 @@ int main (int argc, char **argv)
 		if (!(pw = pw_locate (fields[0])) &&
 		    add_group (fields[0], fields[3], &gid)) {
 			fprintf (stderr,
-				 _("%s: line %d: can't create GID\n"),
-				 Prog, line);
+			         _("%s: line %d: can't create GID\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -609,10 +627,11 @@ int main (int argc, char **argv)
 		 * available user ID is computed and used. After this there
 		 * will at least be a (struct passwd) for the user.
 		 */
-		if (!pw && add_user (fields[0], fields[2], &uid, gid)) {
+		if (   (NULL == pw)
+		    && (add_user (fields[0], fields[2], &uid, gid) != 0)) {
 			fprintf (stderr,
-				 _("%s: line %d: can't create UID\n"),
-				 Prog, line);
+			         _("%s: line %d: can't create UID\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -623,8 +642,8 @@ int main (int argc, char **argv)
 		 */
 		if (!(pw = pw_locate (fields[0]))) {
 			fprintf (stderr,
-				 _("%s: line %d: cannot find user %s\n"),
-				 Prog, line, fields[0]);
+			         _("%s: line %d: cannot find user %s\n"),
+			         Prog, line, fields[0]);
 			errors++;
 			continue;
 		}
@@ -632,32 +651,36 @@ int main (int argc, char **argv)
 
 		if (add_passwd (&newpw, fields[1])) {
 			fprintf (stderr,
-				 _("%s: line %d: can't update password\n"),
-				 Prog, line);
+			         _("%s: line %d: can't update password\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
-		if (fields[4][0])
+		if (fields[4][0]) {
 			newpw.pw_gecos = fields[4];
+		}
 
-		if (fields[5][0])
+		if (fields[5][0]) {
 			newpw.pw_dir = fields[5];
+		}
 
-		if (fields[6][0])
+		if (fields[6][0]) {
 			newpw.pw_shell = fields[6];
+		}
 
 		if (newpw.pw_dir[0] && access (newpw.pw_dir, F_OK)) {
 			if (mkdir (newpw.pw_dir,
-				   0777 & ~getdef_num ("UMASK",
-						       GETDEF_DEFAULT_UMASK)))
+			           0777 & ~getdef_num ("UMASK",
+			                               GETDEF_DEFAULT_UMASK))) {
 				fprintf (stderr,
-					 _("%s: line %d: mkdir failed\n"), Prog,
-					 line);
-			else if (chown
-				 (newpw.pw_dir, newpw.pw_uid, newpw.pw_gid))
+				         _("%s: line %d: mkdir failed\n"), Prog,
+				         line);
+			} else if (chown
+				   (newpw.pw_dir, newpw.pw_uid, newpw.pw_gid)) {
 				fprintf (stderr,
-					 _("%s: line %d: chown failed\n"), Prog,
-					 line);
+				         _("%s: line %d: chown failed\n"), Prog,
+				         line);
+			}
 		}
 
 		/*
@@ -665,8 +688,8 @@ int main (int argc, char **argv)
 		 */
 		if (!pw_update (&newpw)) {
 			fprintf (stderr,
-				 _("%s: line %d: can't update entry\n"),
-				 Prog, line);
+			         _("%s: line %d: can't update entry\n"),
+			         Prog, line);
 			errors++;
 			continue;
 		}
@@ -681,10 +704,11 @@ int main (int argc, char **argv)
 	 */
 	if (errors) {
 		fprintf (stderr,
-			 _("%s: error detected, changes ignored\n"), Prog);
+		         _("%s: error detected, changes ignored\n"), Prog);
 		(void) gr_unlock ();
-		if (is_shadow)
+		if (is_shadow) {
 			spw_unlock ();
+		}
 		(void) pw_unlock ();
 		exit (1);
 	}
