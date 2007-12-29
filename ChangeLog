@@ -8,6 +8,8 @@
 	* src/chage.c: Avoid using a variable with the same name as a type.
 	* src/chage.c: Remove dead code. It was probably put here to add more
 	information to the audit_logger.
+	* src/chage.c: Avoid implicit brackets.
+	* src/chage.c: Avoid implicit conversion to booleans.
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 

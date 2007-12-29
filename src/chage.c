@@ -93,9 +93,10 @@ static void close_files (void);
  */
 int isnum (const char *s)
 {
-	while (*s) {
-		if (!isdigit (*s))
+	while ('\0' != *s) {
+		if (!isdigit (*s)) {
 			return 0;
+		}
 		s++;
 	}
 	return 1;
@@ -156,46 +157,52 @@ static int new_fields (void)
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	if (((mindays = strtol (buf, &cp, 10)) == 0 && *cp)
-	    || mindays < -1)
+	if (((mindays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	    || (mindays < -1)) {
 		return 0;
+	}
 
 	snprintf (buf, sizeof buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	if (((maxdays = strtol (buf, &cp, 10)) == 0 && *cp)
-	    || maxdays < -1)
+	if (((maxdays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	    || (maxdays < -1)) {
 		return 0;
+	}
 
 	date_to_str (buf, sizeof buf, lastday * SCALE);
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
-	if (strcmp (buf, EPOCH) == 0)
+	if (strcmp (buf, EPOCH) == 0) {
 		lastday = -1;
-	else if ((lastday = strtoday (buf)) == -1)
+	} else if ((lastday = strtoday (buf)) == -1) {
 		return 0;
+	}
 
 	snprintf (buf, sizeof buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	if (((warndays = strtol (buf, &cp, 10)) == 0 && *cp)
-	    || warndays < -1)
+	if (((warndays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	    || (warndays < -1)) {
 		return 0;
+	}
 
 	snprintf (buf, sizeof buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	if (((inactdays = strtol (buf, &cp, 10)) == 0 && *cp)
-	    || inactdays < -1)
+	if (((inactdays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	    || (inactdays < -1)) {
 		return 0;
+	}
 
 	date_to_str (buf, sizeof buf, expdays * SCALE);
 
 	change_field (buf, sizeof buf,
 		      _("Account Expiration Date (YYYY-MM-DD)"));
 
-	if (strcmp (buf, EPOCH) == 0)
+	if (strcmp (buf, EPOCH) == 0) {
 		expdays = -1;
-	else if ((expdays = strtoday (buf)) == -1)
+	} else if ((expdays = strtoday (buf)) == -1) {
 		return 0;
+	}
 
 	return 1;
 }
@@ -250,8 +257,8 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 	printf (_("Password expires\t\t\t\t\t: "));
-	if (lastday <= 0 || maxdays >= 10000 * (DAY / SCALE)
-	    || maxdays < 0) {
+	if ((lastday <= 0) || (maxdays >= (10000 * (DAY / SCALE)))
+	    || (maxdays < 0)) {
 		printf (_("never\n"));
 	} else {
 		expires = changed + maxdays * SCALE;
@@ -265,8 +272,8 @@ static void list_fields (void)
 	 * active will be disabled.
 	 */
 	printf (_("Password inactive\t\t\t\t\t: "));
-	if (lastday <= 0 || inactdays < 0 ||
-	    maxdays >= 10000 * (DAY / SCALE) || maxdays < 0) {
+	if ((lastday <= 0) || (inactdays < 0) ||
+	    (maxdays >= (10000 * (DAY / SCALE))) || (maxdays < 0)) {
 		printf (_("never\n"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
@@ -325,17 +332,19 @@ static void process_flags (int argc, char **argv)
 		switch (c) {
 		case 'd':
 			dflg++;
-			if (!isnum (optarg))
+			if (!isnum (optarg)) {
 				lastday = strtoday (optarg);
-			else
+			} else {
 				lastday = strtol (optarg, 0, 10);
+			}
 			break;
 		case 'E':
 			Eflg++;
-			if (!isnum (optarg))
+			if (!isnum (optarg)) {
 				expdays = strtoday (optarg);
-			else
+			} else {
 				expdays = strtol (optarg, 0, 10);
+			}
 			break;
 		case 'h':
 			usage ();
@@ -455,7 +464,7 @@ static void open_files (int readonly)
 	 * file entries into memory. Then we get a pointer to the password
 	 * file entry for the requested user.
 	 */
-	if (!pw_open (O_RDONLY)) {
+	if (pw_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: can't open password file\n"), Prog);
 		SYSLOG ((LOG_ERR, "failed opening %s", PASSWD_FILE));
 		closelog ();
@@ -468,7 +477,7 @@ static void open_files (int readonly)
 	 * does not have to exist in this case; a new entry will be created
 	 * for this user if one does not exist already.
 	 */
-	if (!readonly && !spw_lock ()) {
+	if (!readonly && (spw_lock () == 0)) {
 		fprintf (stderr,
 			 _("%s: can't lock shadow password file\n"), Prog);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
@@ -479,7 +488,7 @@ static void open_files (int readonly)
 #endif
 		exit (E_NOPERM);
 	}
-	if (!spw_open (readonly ? O_RDONLY: O_RDWR)) {
+	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr,
 			 _("%s: can't open shadow password file\n"), Prog);
 		spw_unlock ();
@@ -499,7 +508,7 @@ static void close_files (void)
 	 * Now close the shadow password file, which will cause all of the
 	 * entries to be re-written.
 	 */
-	if (!spw_close ()) {
+	if (spw_close () == 0) {
 		fprintf (stderr,
 			 _("%s: can't rewrite shadow password file\n"), Prog);
 		spw_unlock ();
@@ -516,7 +525,7 @@ static void close_files (void)
 	 * Close the password file. If any entries were modified, the file
 	 * will be re-written.
 	 */
-	if (!pw_close ()) {
+	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
 		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
@@ -573,8 +582,9 @@ int main (int argc, char **argv)
 	rgid = getgid ();
 	amroot = (ruid == 0);
 #ifdef WITH_SELINUX
-	if (amroot && is_selinux_enabled () > 0)
+	if (amroot && (is_selinux_enabled () > 0)) {
 		amroot = (selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
+	}
 #endif
 
 	/*
@@ -626,44 +636,53 @@ int main (int argc, char **argv)
 	 * Set the fields that aren't being set from the command line from
 	 * the password file.
 	 */
-	if (sp) {
+	if (NULL != sp) {
 		spwent = *sp;
 
-		if (!Mflg)
+		if (!Mflg) {
 			maxdays = spwent.sp_max;
-		if (!mflg)
+		}
+		if (!mflg) {
 			mindays = spwent.sp_min;
-		if (!dflg)
+		}
+		if (!dflg) {
 			lastday = spwent.sp_lstchg;
-		if (!Wflg)
+		}
+		if (!Wflg) {
 			warndays = spwent.sp_warn;
-		if (!Iflg)
+		}
+		if (!Iflg) {
 			inactdays = spwent.sp_inact;
-		if (!Eflg)
+		}
+		if (!Eflg) {
 			expdays = spwent.sp_expire;
+		}
 #ifdef WITH_AUDIT
-		if (Mflg)
-
+		if (Mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change max age", pw->pw_name, pw->pw_uid,
 				      1);
-		if (mflg)
+		}
+		if (mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change min age", pw->pw_name, pw->pw_uid,
 				      1);
+		}
 		if (dflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change last change date", pw->pw_name,
 				      pw->pw_uid, 1);
 		}
-		if (Wflg)
+		if (Wflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change passwd warning", pw->pw_name,
 				      pw->pw_uid, 1);
-		if (Iflg)
+		}
+		if (Iflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change inactive days", pw->pw_name,
 				      pw->pw_uid, 1);
+		}
 		if (Eflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change passwd expiration", pw->pw_name,
@@ -703,7 +722,7 @@ int main (int argc, char **argv)
 	 */
 	if (!mflg && !Mflg && !dflg && !Wflg && !Iflg && !Eflg) {
 		printf (_("Changing the aging information for %s\n"), name);
-		if (!new_fields ()) {
+		if (new_fields () == 0) {
 			fprintf (stderr, _("%s: error changing fields\n"),
 				 Prog);
 			spw_unlock ();
@@ -715,10 +734,11 @@ int main (int argc, char **argv)
 			exit (E_NOPERM);
 		}
 #ifdef WITH_AUDIT
-		else
+		else {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change all aging information",
 				      pw->pw_name, getuid (), 1);
+		}
 #endif
 	}
 	/*
@@ -726,7 +746,7 @@ int main (int argc, char **argv)
 	 * password transferred from the normal password file along with the
 	 * aging information.
 	 */
-	if (sp == 0) {
+	if (NULL == sp) {
 		sp = &spwent;
 		memzero (&spwent, sizeof spwent);
 
@@ -735,7 +755,7 @@ int main (int argc, char **argv)
 		spwent.sp_flag = -1;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-		if (!pw_update (&pwent)) {
+		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 				 _("%s: can't update password file\n"), Prog);
 			spw_unlock ();
@@ -761,7 +781,7 @@ int main (int argc, char **argv)
 	spwent.sp_inact = inactdays;
 	spwent.sp_expire = expdays;
 
-	if (!spw_update (&spwent)) {
+	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
 			 _("%s: can't update shadow password file\n"), Prog);
 		spw_unlock ();
