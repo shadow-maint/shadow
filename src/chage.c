@@ -554,7 +554,7 @@ static void close_files (void)
 int main (int argc, char **argv)
 {
 	const struct spwd *sp;
-	struct spwd spwd;
+	struct spwd spwent;
 	uid_t ruid;
 	gid_t rgid;
 	const struct passwd *pw;
@@ -627,20 +627,20 @@ int main (int argc, char **argv)
 	 * the password file.
 	 */
 	if (sp) {
-		spwd = *sp;
+		spwent = *sp;
 
 		if (!Mflg)
-			maxdays = spwd.sp_max;
+			maxdays = spwent.sp_max;
 		if (!mflg)
-			mindays = spwd.sp_min;
+			mindays = spwent.sp_min;
 		if (!dflg)
-			lastday = spwd.sp_lstchg;
+			lastday = spwent.sp_lstchg;
 		if (!Wflg)
-			warndays = spwd.sp_warn;
+			warndays = spwent.sp_warn;
 		if (!Iflg)
-			inactdays = spwd.sp_inact;
+			inactdays = spwent.sp_inact;
 		if (!Eflg)
-			expdays = spwd.sp_expire;
+			expdays = spwent.sp_expire;
 #ifdef WITH_AUDIT
 		if (Mflg)
 
@@ -741,12 +741,12 @@ int main (int argc, char **argv)
 	 * aging information.
 	 */
 	if (sp == 0) {
-		sp = &spwd;
-		memzero (&spwd, sizeof spwd);
+		sp = &spwent;
+		memzero (&spwent, sizeof spwent);
 
-		spwd.sp_namp = xstrdup (pwent.pw_name);
-		spwd.sp_pwdp = xstrdup (pwent.pw_passwd);
-		spwd.sp_flag = -1;
+		spwent.sp_namp = xstrdup (pwent.pw_name);
+		spwent.sp_pwdp = xstrdup (pwent.pw_passwd);
+		spwent.sp_flag = -1;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (!pw_update (&pwent)) {
@@ -768,14 +768,14 @@ int main (int argc, char **argv)
 	 * modified entry back to the shadow file. Closing the shadow and
 	 * password files will commit any changes that have been made.
 	 */
-	spwd.sp_max = maxdays;
-	spwd.sp_min = mindays;
-	spwd.sp_lstchg = lastday;
-	spwd.sp_warn = warndays;
-	spwd.sp_inact = inactdays;
-	spwd.sp_expire = expdays;
+	spwent.sp_max = maxdays;
+	spwent.sp_min = mindays;
+	spwent.sp_lstchg = lastday;
+	spwent.sp_warn = warndays;
+	spwent.sp_inact = inactdays;
+	spwent.sp_expire = expdays;
 
-	if (!spw_update (&spwd)) {
+	if (!spw_update (&spwent)) {
 		fprintf (stderr,
 			 _("%s: can't update shadow password file\n"), Prog);
 		spw_unlock ();

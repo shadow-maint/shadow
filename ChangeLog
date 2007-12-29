@@ -5,6 +5,7 @@
 	pam API was already checked. No need to validate it again.
 	* src/chage.c: main() split in new functions: process_flags(),
 	check_flags(), check_perms(), open_files(), and close_files().
+	* src/chage.c: Avoid using a variable with the same name as a type.
 
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
