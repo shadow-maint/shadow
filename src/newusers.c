@@ -72,6 +72,11 @@ static int add_group (const char *, const char *, gid_t *);
 static int add_user (const char *, const char *, uid_t *, gid_t);
 static void update_passwd (struct passwd *, const char *);
 static int add_passwd (struct passwd *, const char *);
+static void process_flags (int argc, char **argv);
+static void check_flags (void);
+static void check_perms (void);
+static void open_files (void);
+static void close_files (void);
 
 /*
  * usage - display usage message and exit
@@ -315,87 +320,86 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	return !spw_update (&spent);
 }
 
-int main (int argc, char **argv)
+/*
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
 {
-	char buf[BUFSIZ];
-	char *fields[8];
-	int nfields;
-	char *cp;
-	const struct passwd *pw;
-	struct passwd newpw;
-	int errors = 0;
-	int line = 0;
-	uid_t uid;
-	gid_t gid;
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
-
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	{
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"crypt-method", required_argument, NULL, 'c'},
-			{"help", no_argument, NULL, 'h'},
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"crypt-method", required_argument, NULL, 'c'},
+		{"help", no_argument, NULL, 'h'},
 #ifdef USE_SHA_CRYPT
-			{"sha-rounds", required_argument, NULL, 's'},
+		{"sha-rounds", required_argument, NULL, 's'},
 #endif
-			{NULL, 0, NULL, '\0'}
-		};
+		{NULL, 0, NULL, '\0'}
+	};
 
-		while ((c =
-			getopt_long (argc, argv,
+	while ((c = getopt_long (argc, argv,
 #ifdef USE_SHA_CRYPT
-			             "c:hs:",
+	                     "c:hs:",
 #else
-			             "c:h",
+	                     "c:h",
 #endif
-			             long_options,
-			             &option_index)) != -1) {
-			switch (c) {
-			case 'c':
-				cflg = 1;
-				crypt_method = optarg;
-				break;
-			case 'h':
-				usage ();
-				break;
+	                     long_options, &option_index)) != -1) {
+		switch (c) {
+		case 'c':
+			cflg = 1;
+			crypt_method = optarg;
+			break;
+		case 'h':
+			usage ();
+			break;
 #ifdef USE_SHA_CRYPT
-			case 's':
-				sflg = 1;
-				if (!getlong(optarg, &sha_rounds)) {
-					fprintf (stderr,
-					         _("%s: invalid numeric argument '%s'\n"),
-					         Prog, optarg);
-					usage ();
-				}
-				break;
-#endif
-			case 0:
-				/* long option */
-				break;
-			default:
+		case 's':
+			sflg = 1;
+			if (!getlong(optarg, &sha_rounds)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
 				usage ();
-				break;
 			}
+			break;
+#endif
+		case 0:
+			/* long option */
+			break;
+		default:
+			usage ();
+			break;
+		}
+	}
+
+	if (argv[optind] != NULL) {
+		if (!freopen (argv[optind], "r", stdin)) {
+			char buf[BUFSIZ];
+			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
+			perror (buf);
+			exit (1);
 		}
 	}
 
 	/* validate options */
+	check_flags ();
+}
+
+/*
+ * check_flags - check flags and parameters consistency
+ *
+ *	It will not return if an error is encountered.
+ */
+static void check_flags (void)
+{
 	if (sflg && !cflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
+
 	if (cflg) {
 		if (   0 != strcmp (crypt_method, "DES")
 		    && 0 != strcmp (crypt_method, "MD5")
@@ -411,30 +415,32 @@ int main (int argc, char **argv)
 			usage ();
 		}
 	}
+}
 
-	if (argv[optind] != NULL) {
-		if (!freopen (argv[optind], "r", stdin)) {
-			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
-			perror (buf);
-			exit (1);
-		}
+/*
+ * check_perms - check if the caller is allowed to add a group
+ *
+ *	With PAM support, the setuid bit can be set on groupadd to allow
+ *	non-root users to groups.
+ *	Without PAM support, only users who can write in the group databases
+ *	can add groups.
+ *
+ *	It will not return if the user is not allowed.
+ */
+static void check_perms (void)
+{
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	int retval = PAM_SUCCESS;
+	struct passwd *pampw;
+
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
 	}
 
-
-#ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("newusers", pampw->pw_name,
-					    &conv, &pamh);
-		}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -456,7 +462,13 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
+}
 
+/*
+ * open_files - lock and open the password, group and shadow databases
+ */
+static void open_files (void)
+{
 	/*
 	 * Lock the password files and open them for update. This will bring
 	 * all of the entries into memory where they may be searched for an
@@ -467,7 +479,6 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
 		exit (1);
 	}
-	is_shadow = spw_file_present ();
 
 	if ((is_shadow && !spw_lock ()) || !gr_lock ()) {
 		fprintf (stderr,
@@ -486,6 +497,53 @@ int main (int argc, char **argv)
 		(void) gr_unlock ();
 		exit (1);
 	}
+}
+
+/*
+ * close_files - close and unlock the password, group and shadow databases
+ */
+static void close_files (void)
+{
+	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ()) {
+		fprintf (stderr, _("%s: error updating files\n"), Prog);
+		(void) gr_unlock ();
+		if (is_shadow)
+			spw_unlock ();
+		(void) pw_unlock ();
+		exit (1);
+	}
+	(void) gr_unlock ();
+	if (is_shadow)
+		(void) spw_unlock ();
+	(void) pw_unlock ();
+}
+
+int main (int argc, char **argv)
+{
+	char buf[BUFSIZ];
+	char *fields[8];
+	int nfields;
+	char *cp;
+	const struct passwd *pw;
+	struct passwd newpw;
+	int errors = 0;
+	int line = 0;
+	uid_t uid;
+	gid_t gid;
+
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	process_flags (argc, argv);
+
+	check_perms ();
+
+	is_shadow = spw_file_present ();
+
+	open_files ();
 
 	/*
 	 * Read each line. The line has the same format as a password file
@@ -630,22 +688,11 @@ int main (int argc, char **argv)
 		(void) pw_unlock ();
 		exit (1);
 	}
-	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ()) {
-		fprintf (stderr, _("%s: error updating files\n"), Prog);
-		(void) gr_unlock ();
-		if (is_shadow)
-			spw_unlock ();
-		(void) pw_unlock ();
-		exit (1);
-	}
+
+	close_files ();
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-
-	(void) gr_unlock ();
-	if (is_shadow)
-		spw_unlock ();
-	(void) pw_unlock ();
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)
@@ -655,3 +702,4 @@ int main (int argc, char **argv)
 	exit (0);
 	/* NOT REACHED */
 }
+
