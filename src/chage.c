@@ -108,20 +108,20 @@ int isnum (const char *s)
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: chage [options] [LOGIN]\n"
-			   "\n"
-			   "Options:\n"
-			   "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
-			   "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -I, --inactive INACTIVE       set password inactive after expiration\n"
-			   "                                to INACTIVE\n"
-			   "  -l, --list                    show account aging information\n"
-			   "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
-			   "                                change to MIN_DAYS\n"
-			   "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
-			   "                                change to MAX_DAYS\n"
-			   "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-			   "\n"));
+	                   "\n"
+	                   "Options:\n"
+	                   "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+	                   "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
+	                   "  -h, --help                    display this help message and exit\n"
+	                   "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+	                   "                                to INACTIVE\n"
+	                   "  -l, --list                    show account aging information\n"
+	                   "  -m, --mindays MIN_DAYS        set minimum number of days before password\n"
+	                   "                                change to MIN_DAYS\n"
+	                   "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
+	                   "                                change to MAX_DAYS\n"
+	                   "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+	                   "\n"));
 	exit (E_USAGE);
 }
 
@@ -134,7 +134,7 @@ static void date_to_str (char *buf, size_t maxsize, time_t date)
 	strftime (buf, maxsize, "%Y-%m-%d", tp);
 #else
 	snprintf (buf, maxsize, "%04d-%02d-%02d",
-		  tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
+	          tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
 #endif				/* HAVE_STRFTIME */
 }
 
@@ -196,7 +196,7 @@ static int new_fields (void)
 	date_to_str (buf, sizeof buf, expdays * SCALE);
 
 	change_field (buf, sizeof buf,
-		      _("Account Expiration Date (YYYY-MM-DD)"));
+	              _("Account Expiration Date (YYYY-MM-DD)"));
 
 	if (strcmp (buf, EPOCH) == 0) {
 		expdays = -1;
@@ -300,11 +300,11 @@ static void list_fields (void)
 	 * password expires that the account becomes unusable.
 	 */
 	printf (_("Minimum number of days between password change\t\t: %ld\n"),
-		mindays);
+	        mindays);
 	printf (_("Maximum number of days between password change\t\t: %ld\n"),
-		maxdays);
+	        maxdays);
 	printf (_("Number of days of warning before password expires\t: %ld\n"),
-		warndays);
+	        warndays);
 }
 
 static void process_flags (int argc, char **argv)
@@ -391,8 +391,8 @@ static void check_flags (int argc, int opt_index)
 
 	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
 		fprintf (stderr,
-			 _("%s: do not include \"l\" with other flags\n"),
-			 Prog);
+		         _("%s: do not include \"l\" with other flags\n"),
+		         Prog);
 		usage ();
 	}
 }
@@ -402,6 +402,7 @@ static void check_perms (void)
 {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
+	struct passwd *pampw;
 	int retval;
 #endif
 
@@ -415,7 +416,7 @@ static void check_perms (void)
 		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age", NULL,
-			      getuid (), 0);
+		              getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
@@ -423,17 +424,13 @@ static void check_perms (void)
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
 
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("chage", pampw->pw_name,
-					    &conv, &pamh);
-		}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -479,24 +476,24 @@ static void open_files (int readonly)
 	 */
 	if (!readonly && (spw_lock () == 0)) {
 		fprintf (stderr,
-			 _("%s: can't lock shadow password file\n"), Prog);
+		         _("%s: can't lock shadow password file\n"), Prog);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age", name,
-			      getuid (), 0);
+		              getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
 	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr,
-			 _("%s: can't open shadow password file\n"), Prog);
+		         _("%s: can't open shadow password file\n"), Prog);
 		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed opening %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age", name,
-			      getuid (), 0);
+		              getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
@@ -510,13 +507,13 @@ static void close_files (void)
 	 */
 	if (spw_close () == 0) {
 		fprintf (stderr,
-			 _("%s: can't rewrite shadow password file\n"), Prog);
+		         _("%s: can't rewrite shadow password file\n"), Prog);
 		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-			      pw->pw_name, getuid (), 0);
+		              pw->pw_name, getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
@@ -532,7 +529,7 @@ static void close_files (void)
 		closelog ();
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-			      pw->pw_name, getuid (), 0);
+		              pw->pw_name, getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
@@ -600,8 +597,8 @@ int main (int argc, char **argv)
 
 	if (!spw_file_present ()) {
 		fprintf (stderr,
-			 _("%s: the shadow password file is not present\n"),
-			 Prog);
+		         _("%s: the shadow password file is not present\n"),
+		         Prog);
 		SYSLOG ((LOG_ERR, "can't find the shadow password file"));
 		closelog ();
 		exit (E_SHADOW_NOTFOUND);
@@ -611,7 +608,7 @@ int main (int argc, char **argv)
 
 	if (!(pw = pw_locate (argv[optind]))) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
-			 argv[optind]);
+		         argv[optind]);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -622,10 +619,10 @@ int main (int argc, char **argv)
 	/* Drop privileges */
 	if (lflg && (setregid (rgid, rgid) || setreuid (ruid, ruid))) {
 		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
-			 Prog, strerror (errno));
+		         Prog, strerror (errno));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age", name,
-			      getuid (), 0);
+		              getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
@@ -660,33 +657,33 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 		if (Mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change max age", pw->pw_name, pw->pw_uid,
-				      1);
+			              "change max age", pw->pw_name, pw->pw_uid,
+			              1);
 		}
 		if (mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change min age", pw->pw_name, pw->pw_uid,
-				      1);
+			              "change min age", pw->pw_name, pw->pw_uid,
+			              1);
 		}
 		if (dflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change last change date", pw->pw_name,
-				      pw->pw_uid, 1);
+			              "change last change date", pw->pw_name,
+			              pw->pw_uid, 1);
 		}
 		if (Wflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change passwd warning", pw->pw_name,
-				      pw->pw_uid, 1);
+			              "change passwd warning", pw->pw_name,
+			              pw->pw_uid, 1);
 		}
 		if (Iflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change inactive days", pw->pw_name,
-				      pw->pw_uid, 1);
+			              "change inactive days", pw->pw_name,
+			              pw->pw_uid, 1);
 		}
 		if (Eflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change passwd expiration", pw->pw_name,
-				      pw->pw_uid, 1);
+			              "change passwd expiration", pw->pw_name,
+			              pw->pw_uid, 1);
 		}
 #endif
 	}
@@ -700,7 +697,7 @@ int main (int argc, char **argv)
 		if (!amroot && (ruid != pwent.pw_uid)) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-				      pw->pw_name, pw->pw_uid, 0);
+			              pw->pw_name, pw->pw_uid, 0);
 #endif
 			fprintf (stderr, _("%s: Permission denied.\n"), Prog);
 			closelog ();
@@ -708,7 +705,7 @@ int main (int argc, char **argv)
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "display aging info",
-			      pw->pw_name, pw->pw_uid, 1);
+		              pw->pw_name, pw->pw_uid, 1);
 #endif
 		list_fields ();
 		spw_unlock ();
@@ -724,20 +721,20 @@ int main (int argc, char **argv)
 		printf (_("Changing the aging information for %s\n"), name);
 		if (new_fields () == 0) {
 			fprintf (stderr, _("%s: error changing fields\n"),
-				 Prog);
+			         Prog);
 			spw_unlock ();
 			closelog ();
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-				      pw->pw_name, getuid (), 0);
+			              pw->pw_name, getuid (), 0);
 #endif
 			exit (E_NOPERM);
 		}
 #ifdef WITH_AUDIT
 		else {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "change all aging information",
-				      pw->pw_name, getuid (), 1);
+			              "change all aging information",
+			              pw->pw_name, getuid (), 1);
 		}
 #endif
 	}
@@ -757,13 +754,13 @@ int main (int argc, char **argv)
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-				 _("%s: can't update password file\n"), Prog);
+			         _("%s: can't update password file\n"), Prog);
 			spw_unlock ();
 			SYSLOG ((LOG_ERR, "failed updating %s", PASSWD_FILE));
 			closelog ();
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-				      pw->pw_name, getuid (), 0);
+			              pw->pw_name, getuid (), 0);
 #endif
 			exit (E_NOPERM);
 		}
@@ -783,13 +780,13 @@ int main (int argc, char **argv)
 
 	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
-			 _("%s: can't update shadow password file\n"), Prog);
+		         _("%s: can't update shadow password file\n"), Prog);
 		spw_unlock ();
 		SYSLOG ((LOG_ERR, "failed updating %s", SHADOW_FILE));
 		closelog ();
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-			      pw->pw_name, getuid (), 0);
+		              pw->pw_name, getuid (), 0);
 #endif
 		exit (E_NOPERM);
 	}
