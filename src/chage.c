@@ -157,14 +157,16 @@ static int new_fields (void)
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	if (((mindays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	mindays = strtol (buf, &cp, 10);
+	if (   ((mindays == 0) && ('\0' != *cp))
 	    || (mindays < -1)) {
 		return 0;
 	}
 
 	snprintf (buf, sizeof buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	if (((maxdays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	maxdays = strtol (buf, &cp, 10);
+	if (   ((maxdays == 0) && ('\0' != *cp))
 	    || (maxdays < -1)) {
 		return 0;
 	}
@@ -175,20 +177,25 @@ static int new_fields (void)
 
 	if (strcmp (buf, EPOCH) == 0) {
 		lastday = -1;
-	} else if ((lastday = strtoday (buf)) == -1) {
-		return 0;
+	} else {
+		lastday = strtoday (buf);
+		if (lastday == -1) {
+			return 0;
+		}
 	}
 
 	snprintf (buf, sizeof buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	if (((warndays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	warndays = strtol (buf, &cp, 10);
+	if (   ((warndays == 0) && ('\0' != *cp))
 	    || (warndays < -1)) {
 		return 0;
 	}
 
 	snprintf (buf, sizeof buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	if (((inactdays = strtol (buf, &cp, 10)) == 0 && ('\0' != *cp))
+	inactdays = strtol (buf, &cp, 10);
+	if (   ((inactdays == 0) && ('\0' != *cp))
 	    || (inactdays < -1)) {
 		return 0;
 	}
@@ -200,8 +207,11 @@ static int new_fields (void)
 
 	if (strcmp (buf, EPOCH) == 0) {
 		expdays = -1;
-	} else if ((expdays = strtoday (buf)) == -1) {
-		return 0;
+	} else {
+		expdays = strtoday (buf);
+		if (expdays == -1) {
+			return 0;
+		}
 	}
 
 	return 1;
@@ -606,7 +616,8 @@ int main (int argc, char **argv)
 
 	open_files (lflg);
 
-	if (!(pw = pw_locate (argv[optind]))) {
+	pw = pw_locate (argv[optind]);
+	if (NULL == pw) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 		         argv[optind]);
 		closelog ();
