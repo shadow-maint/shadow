@@ -65,8 +65,7 @@ static int
     mflg = 0,			/* set minimum number of days before password change */
     Mflg = 0,			/* set maximim number of days before password change */
     Wflg = 0;			/* set expiration warning days */
-
-static int locks;
+static int amroot = 0;
 
 static long mindays;
 static long maxdays;
@@ -83,6 +82,11 @@ static void date_to_str (char *, size_t, time_t);
 static int new_fields (void);
 static void print_date (time_t);
 static void list_fields (void);
+static void process_flags (int argc, char **argv);
+static void check_flags (int argc, int opt_index);
+static void check_perms (void);
+static void open_files (int readonly);
+static void close_files (void);
 
 /*
  * isnum - determine whether or not a string is a number
@@ -296,135 +300,85 @@ static void list_fields (void)
 		warndays);
 }
 
-/*
- * chage - change a user's password aging information
- *
- *	This command controls the password aging information.
- *
- *	The valid options are
- *
- *	-d	set last password change date (*)
- *	-E	set account expiration date (*)
- *	-I	set password inactive after expiration (*)
- *	-l	show account aging information
- *	-M	set maximim number of days before password change (*)
- *	-m	set minimum number of days before password change (*)
- *	-W	set expiration warning days (*)
- *
- *	(*) requires root permission to execute.
- *
- *	All of the time fields are entered in the internal format which is
- *	either seconds or days.
- */
-
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
-	const struct spwd *sp;
-	struct spwd spwd;
-	uid_t ruid;
-	gid_t rgid;
-	int amroot;
-	const struct passwd *pw;
-	struct passwd pwent;
-	char name[BUFSIZ];
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
-
-#ifdef WITH_AUDIT
-	audit_help_open ();
-#endif
-	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	ruid = getuid ();
-	rgid = getgid ();
-	amroot = (ruid == 0);
-#ifdef WITH_SELINUX
-	if (amroot && is_selinux_enabled () > 0)
-		amroot = (selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
-#endif
-
 	/*
-	 * Get the program name so that error messages can use it.
+	 * Parse the command line options.
 	 */
-	Prog = Basename (argv[0]);
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"lastday", required_argument, NULL, 'd'},
+		{"expiredate", required_argument, NULL, 'E'},
+		{"help", no_argument, NULL, 'h'},
+		{"inactive", required_argument, NULL, 'I'},
+		{"list", no_argument, NULL, 'l'},
+		{"mindays", required_argument, NULL, 'm'},
+		{"maxdays", required_argument, NULL, 'M'},
+		{"warndays", required_argument, NULL, 'W'},
+		{NULL, 0, NULL, '\0'}
+	};
 
-	{
-		/*
-		 * Parse the command line options.
-		 */
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"lastday", required_argument, NULL, 'd'},
-			{"expiredate", required_argument, NULL, 'E'},
-			{"help", no_argument, NULL, 'h'},
-			{"inactive", required_argument, NULL, 'I'},
-			{"list", no_argument, NULL, 'l'},
-			{"mindays", required_argument, NULL, 'm'},
-			{"maxdays", required_argument, NULL, 'M'},
-			{"warndays", required_argument, NULL, 'W'},
-			{NULL, 0, NULL, '\0'}
-		};
-
-		while ((c =
-			getopt_long (argc, argv, "d:E:hI:lm:M:W:", long_options,
-				     &option_index)) != -1) {
-			switch (c) {
-			case 'd':
-				dflg++;
-				if (!isnum (optarg))
-					lastday = strtoday (optarg);
-				else
-					lastday = strtol (optarg, 0, 10);
-				break;
-			case 'E':
-				Eflg++;
-				if (!isnum (optarg))
-					expdays = strtoday (optarg);
-				else
-					expdays = strtol (optarg, 0, 10);
-				break;
-			case 'h':
-				usage ();
-				break;
-			case 'I':
-				Iflg++;
-				inactdays = strtol (optarg, 0, 10);
-				break;
-			case 'l':
-				lflg++;
-				break;
-			case 'm':
-				mflg++;
-				mindays = strtol (optarg, 0, 10);
-				break;
-			case 'M':
-				Mflg++;
-				maxdays = strtol (optarg, 0, 10);
-				break;
-			case 'W':
-				Wflg++;
-				warndays = strtol (optarg, 0, 10);
-				break;
-			default:
-				usage ();
-			}
+	while ((c =
+		getopt_long (argc, argv, "d:E:hI:lm:M:W:", long_options,
+			     &option_index)) != -1) {
+		switch (c) {
+		case 'd':
+			dflg++;
+			if (!isnum (optarg))
+				lastday = strtoday (optarg);
+			else
+				lastday = strtol (optarg, 0, 10);
+			break;
+		case 'E':
+			Eflg++;
+			if (!isnum (optarg))
+				expdays = strtoday (optarg);
+			else
+				expdays = strtol (optarg, 0, 10);
+			break;
+		case 'h':
+			usage ();
+			break;
+		case 'I':
+			Iflg++;
+			inactdays = strtol (optarg, 0, 10);
+			break;
+		case 'l':
+			lflg++;
+			break;
+		case 'm':
+			mflg++;
+			mindays = strtol (optarg, 0, 10);
+			break;
+		case 'M':
+			Mflg++;
+			maxdays = strtol (optarg, 0, 10);
+			break;
+		case 'W':
+			Wflg++;
+			warndays = strtol (optarg, 0, 10);
+			break;
+		default:
+			usage ();
 		}
 	}
+
+	check_flags (argc, optind);
+}
+
+
+static void check_flags (int argc, int opt_index)
+{
 
 	/*
 	 * Make certain the flags do not conflict and that there is a user
 	 * name on the command line.
 	 */
 
-	if (argc != optind + 1)
+	if (argc != opt_index + 1) {
 		usage ();
+	}
 
 	if (lflg && (mflg || Mflg || dflg || Wflg || Iflg || Eflg)) {
 		fprintf (stderr,
@@ -432,6 +386,15 @@ int main (int argc, char **argv)
 			 Prog);
 		usage ();
 	}
+}
+
+/* Additional check done later */
+static void check_perms (void)
+{
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	int retval;
+#endif
 
 	/*
 	 * An unprivileged user can ask for their own aging information, but
@@ -447,8 +410,6 @@ int main (int argc, char **argv)
 #endif
 		exit (E_NOPERM);
 	}
-
-	OPENLOG ("chage");
 
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
@@ -485,15 +446,12 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 #endif				/* USE_PAM */
+}
 
+static void open_files (int readonly)
+{
 	/*
-	 * We use locks for read-write accesses only (locks implies amroot,
-	 * but amroot doesn't imply locks).
-	 */
-	locks = !lflg;
-
-	/*
-	 * Lock and open the password file. This loads all of the password
+	 * open the password file. This loads all of the password
 	 * file entries into memory. Then we get a pointer to the password
 	 * file entry for the requested user.
 	 */
@@ -503,24 +461,6 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (!(pw = pw_locate (argv[optind]))) {
-		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
-			 argv[optind]);
-		closelog ();
-		exit (E_NOPERM);
-	}
-
-	pwent = *pw;
-	STRFCPY (name, pwent.pw_name);
-
-	if (!spw_file_present ()) {
-		fprintf (stderr,
-			 _("%s: the shadow password file is not present\n"),
-			 Prog);
-		SYSLOG ((LOG_ERR, "can't find the shadow password file"));
-		closelog ();
-		exit (E_SHADOW_NOTFOUND);
-	}
 
 	/*
 	 * For shadow password files we have to lock the file and read in
@@ -528,7 +468,7 @@ int main (int argc, char **argv)
 	 * does not have to exist in this case; a new entry will be created
 	 * for this user if one does not exist already.
 	 */
-	if (locks && !spw_lock ()) {
+	if (!readonly && !spw_lock ()) {
 		fprintf (stderr,
 			 _("%s: can't lock shadow password file\n"), Prog);
 		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
@@ -539,7 +479,7 @@ int main (int argc, char **argv)
 #endif
 		exit (E_NOPERM);
 	}
-	if (!spw_open (locks ? O_RDWR : O_RDONLY)) {
+	if (!spw_open (readonly ? O_RDONLY: O_RDWR)) {
 		fprintf (stderr,
 			 _("%s: can't open shadow password file\n"), Prog);
 		spw_unlock ();
@@ -551,7 +491,125 @@ int main (int argc, char **argv)
 #endif
 		exit (E_NOPERM);
 	}
+}
 
+static void close_files (void)
+{
+	/*
+	 * Now close the shadow password file, which will cause all of the
+	 * entries to be re-written.
+	 */
+	if (!spw_close ()) {
+		fprintf (stderr,
+			 _("%s: can't rewrite shadow password file\n"), Prog);
+		spw_unlock ();
+		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
+		closelog ();
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
+			      pw->pw_name, getuid (), 0);
+#endif
+		exit (E_NOPERM);
+	}
+
+	/*
+	 * Close the password file. If any entries were modified, the file
+	 * will be re-written.
+	 */
+	if (!pw_close ()) {
+		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
+		spw_unlock ();
+		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
+		closelog ();
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
+			      pw->pw_name, getuid (), 0);
+#endif
+		exit (E_NOPERM);
+	}
+	spw_unlock ();
+}
+
+/*
+ * chage - change a user's password aging information
+ *
+ *	This command controls the password aging information.
+ *
+ *	The valid options are
+ *
+ *	-d	set last password change date (*)
+ *	-E	set account expiration date (*)
+ *	-I	set password inactive after expiration (*)
+ *	-l	show account aging information
+ *	-M	set maximim number of days before password change (*)
+ *	-m	set minimum number of days before password change (*)
+ *	-W	set expiration warning days (*)
+ *
+ *	(*) requires root permission to execute.
+ *
+ *	All of the time fields are entered in the internal format which is
+ *	either seconds or days.
+ */
+
+int main (int argc, char **argv)
+{
+	const struct spwd *sp;
+	struct spwd spwd;
+	uid_t ruid;
+	gid_t rgid;
+	const struct passwd *pw;
+	struct passwd pwent;
+	char name[BUFSIZ];
+
+#ifdef WITH_AUDIT
+	audit_help_open ();
+#endif
+	sanitize_env ();
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	ruid = getuid ();
+	rgid = getgid ();
+	amroot = (ruid == 0);
+#ifdef WITH_SELINUX
+	if (amroot && is_selinux_enabled () > 0)
+		amroot = (selinux_check_passwd_access (PASSWD__ROOTOK) == 0);
+#endif
+
+	/*
+	 * Get the program name so that error messages can use it.
+	 */
+	Prog = Basename (argv[0]);
+
+	process_flags (argc, argv);
+
+	OPENLOG ("chage");
+
+	check_perms ();
+
+	if (!spw_file_present ()) {
+		fprintf (stderr,
+			 _("%s: the shadow password file is not present\n"),
+			 Prog);
+		SYSLOG ((LOG_ERR, "can't find the shadow password file"));
+		closelog ();
+		exit (E_SHADOW_NOTFOUND);
+	}
+
+	open_files (lflg);
+
+	if (!(pw = pw_locate (argv[optind]))) {
+		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
+			 argv[optind]);
+		closelog ();
+		exit (E_NOPERM);
+	}
+
+	pwent = *pw;
+	STRFCPY (name, pwent.pw_name);
+
+	/* Drop privileges */
 	if (lflg && (setregid (rgid, rgid) || setreuid (ruid, ruid))) {
 		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
 			 Prog, strerror (errno));
@@ -730,46 +788,15 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 
-	/*
-	 * Now close the shadow password file, which will cause all of the
-	 * entries to be re-written.
-	 */
-	if (!spw_close ()) {
-		fprintf (stderr,
-			 _("%s: can't rewrite shadow password file\n"), Prog);
-		spw_unlock ();
-		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
-		closelog ();
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-			      pw->pw_name, getuid (), 0);
-#endif
-		exit (E_NOPERM);
-	}
+	close_files ();
 
-	/*
-	 * Close the password file. If any entries were modified, the file
-	 * will be re-written.
-	 */
-	if (!pw_close ()) {
-		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
-		spw_unlock ();
-		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
-		closelog ();
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-			      pw->pw_name, getuid (), 0);
-#endif
-		exit (E_NOPERM);
-	}
-	spw_unlock ();
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", name));
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);
 }
+

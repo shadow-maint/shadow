@@ -1,3 +1,11 @@
+2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
+
+	chage cleanups
+	* src/chage.c: Before pam_end(), the return value of the previous
+	pam API was already checked. No need to validate it again.
+	* src/chage.c: main() split in new functions: process_flags(),
+	check_flags(), check_perms(), open_files(), and close_files().
+
 2007-12-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Same changes for chgpasswd:
