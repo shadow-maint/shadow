@@ -256,7 +256,7 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	return !pw_update (&pwent);
 }
 
-static void update_passwd (struct passwd *pwd, const char *passwd)
+static void update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
@@ -266,9 +266,9 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 	}
 
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
-		pwd->pw_passwd = (char *)passwd;
+		pwd->pw_passwd = (char *)password;
 	} else {
-		pwd->pw_passwd = pw_encrypt (passwd,
+		pwd->pw_passwd = pw_encrypt (password,
 		                             crypt_make_salt (crypt_method,
 		                                              crypt_arg));
 	}
@@ -277,7 +277,7 @@ static void update_passwd (struct passwd *pwd, const char *passwd)
 /*
  * add_passwd - add or update the encrypted password
  */
-static int add_passwd (struct passwd *pwd, const char *passwd)
+static int add_passwd (struct passwd *pwd, const char *password)
 {
 	const struct spwd *sp;
 	struct spwd spent;
@@ -294,7 +294,7 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * harder since there are zillions of things to do ...
 	 */
 	if (!is_shadow) {
-		update_passwd (pwd, passwd);
+		update_passwd (pwd, password);
 		return 0;
 	}
 
@@ -305,7 +305,7 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	sp = spw_locate (pwd->pw_name);
 	if (NULL != sp) {
 		spent = *sp;
-		spent.sp_pwdp = pw_encrypt (passwd,
+		spent.sp_pwdp = pw_encrypt (password,
 		                            crypt_make_salt (crypt_method,
 		                                             crypt_arg));
 		return !spw_update (&spent);
@@ -318,7 +318,7 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * the password set someplace else.
 	 */
 	if (strcmp (pwd->pw_passwd, "x") != 0) {
-		update_passwd (pwd, passwd);
+		update_passwd (pwd, password);
 		return 0;
 	}
 
@@ -327,7 +327,7 @@ static int add_passwd (struct passwd *pwd, const char *passwd)
 	 * shadow password file entry.
 	 */
 	spent.sp_namp = pwd->pw_name;
-	spent.sp_pwdp = pw_encrypt (passwd,
+	spent.sp_pwdp = pw_encrypt (password,
 	                            crypt_make_salt (crypt_method, crypt_arg));
 	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
 	spent.sp_min = getdef_num ("PASS_MIN_DAYS", 0);

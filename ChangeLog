@@ -7,6 +7,7 @@
 	pam API was already checked. No need to validate it again.
 	* src/newusers.c: Avoid implicit brackets.
 	* src/newusers.c: Avoid assignments in comparisons.
+	* src/newusers.c: Avoid variables with the name of a type.
 
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
 
