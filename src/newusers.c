@@ -108,7 +108,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	const struct passwd *pwd;
 	const struct group *grp;
 	struct group grent;
-	char *members[2];
+	char *members[1];
 	int i;
 
 	/*
@@ -117,21 +117,9 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 */
 	grp = gr_locate (gid);
 	if (NULL != grp) {
-	      add_member:
-		grent = *grp;
-		*ngid = grent.gr_gid;
-		for (i = 0; grent.gr_mem[i] != (char *) 0; i++) {
-			if (strcmp (grent.gr_mem[i], name) == 0) {
-				return 0;
-			}
-		}
-
-		grent.gr_mem = (char **) xmalloc (sizeof (char *) * (i + 2));
-		memcpy (grent.gr_mem, grp->gr_mem, sizeof (char *) * (i + 2));
-		grent.gr_mem[i] = xstrdup (name);
-		grent.gr_mem[i + 1] = (char *) 0;
-
-		return !gr_update (&grent);
+		/* The user will use this ID for her primary group */
+		*ngid = grp->gr_gid;
+		return 0;
 	}
 
 	/*
@@ -156,13 +144,15 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	} else if ((gid[0] >= '0') && (gid[0] <= '9')) {
 		/*
 		 * The GID is a number, which means either this is a brand
-		 * new group, or an existing group. For existing groups I
-		 * just add myself as a member, just like I did earlier.
+		 * new group, or an existing group.
 		 */
 		i = atoi (gid);
 		for (gr_rewind (); (grp = gr_next ());) {
 			if (grp->gr_gid == (unsigned int)i) {
-				goto add_member;
+				/* The user will use this ID for her
+				 * primary group */
+				*ngid = grp->gr_gid;
+				return 0;
 			}
 		}
 	} else {
@@ -197,8 +187,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 
 	grent.gr_passwd = "x";	/* XXX warning: const */
 	grent.gr_gid = i;
-	members[0] = xstrdup (name);
-	members[1] = (char *) 0;
+	members[0] = NULL;
 	grent.gr_mem = members;
 
 	*ngid = grent.gr_gid;
@@ -615,7 +604,10 @@ int main (int argc, char **argv)
 		 * Now the fields are processed one by one. The first field
 		 * to be processed is the group name. A new group will be
 		 * created if the group name is non-numeric and does not
-		 * already exist. The named user will be the only member. If
+		 * already exist. If the group name is a number (which is not
+		 * an existing GID), a group with the same name as the user
+		 * will be created, with the given GID. The given or created
+		 * group will be the primary group of the user. If
 		 * there is no named group to be a member of, the UID will
 		 * be figured out and that value will be a candidate for a
 		 * new group, if that group ID exists, a whole new group ID

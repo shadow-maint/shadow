@@ -28,6 +28,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - vipw/vigr
   * Recommend editing the shadowed (resp. regular) file if the regular (resp.
     shadowed) file was edited.
+- newusers
+  * The new users are no more added to the list of members of their groups
+    because the membership is already set by their primary group.
 
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 

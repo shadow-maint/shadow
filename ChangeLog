@@ -1,5 +1,11 @@
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c: Do not add the new user to the group's
+	members, because the group is already the primary group of the new
+	user.
+
+2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	newusers cleanups
 	* src/newusers.c: main() split in new functions: process_flags(),
 	check_flags(), check_perms(), open_files(), and close_files().
