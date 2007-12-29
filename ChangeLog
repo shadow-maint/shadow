@@ -1,5 +1,9 @@
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c: Added support for gshadow.
+
+2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newusers.c: Do not add the new user to the group's
 	members, because the group is already the primary group of the new
 	user.

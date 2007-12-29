@@ -53,6 +53,7 @@
 #include "groupio.h"
 #include "nscd.h"
 #include "pwio.h"
+#include "sgroupio.h"
 #include "shadowio.h"
 /*
  * Global variables
@@ -65,6 +66,9 @@ static char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
 static int is_shadow;
+#ifdef SHADOWGRP
+static int is_shadow_grp;
+#endif
 
 /* local function prototypes */
 static void usage (void);
@@ -110,6 +114,9 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	struct group grent;
 	char *members[1];
 	int i;
+#ifdef SHADOWGRP
+	const struct sgrp *sg;
+#endif
 
 	/*
 	 * Start by seeing if the named group already exists. This will be
@@ -119,6 +126,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	if (NULL != grp) {
 		/* The user will use this ID for her primary group */
 		*ngid = grp->gr_gid;
+		/* Don't check gshadow */
 		return 0;
 	}
 
@@ -152,6 +160,7 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 				/* The user will use this ID for her
 				 * primary group */
 				*ngid = grp->gr_gid;
+				/* Don't check gshadow */
 				return 0;
 			}
 		}
@@ -191,7 +200,42 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	grent.gr_mem = members;
 
 	*ngid = grent.gr_gid;
-	return !gr_update (&grent);
+
+#ifdef SHADOWGRP
+	if (is_shadow_grp) {
+		sg = sgr_locate (grp->gr_name);
+
+		if (NULL != sg) {
+			fprintf (stderr,
+			         _("%s: group %s is a shadow group, but does not exist in /etc/group\n"),
+			         Prog, grp->gr_name);
+			return -1;
+		}
+	}
+#endif
+
+	if (gr_update (&grent) == 0) {
+		return -1;
+	}
+
+#ifdef SHADOWGRP
+	if (is_shadow_grp) {
+		struct sgrp sgrent;
+		sgrent.sg_name = grent.gr_name;
+		sgrent.sg_passwd = "*";	/* XXX warning: const */
+		sgrent.sg_adm = NULL;
+		sgrent.sg_mem = members;
+
+		if (sgr_update (&sgrent) == 0) {
+			fprintf (stderr,
+			         _("%s: group %s created, failure during the creation of the corresponding gshadow group\n"),
+			         Prog, grent.gr_name);
+			return -1;
+		}
+	}
+#endif
+
+	return 0;
 }
 
 /*
@@ -556,6 +600,10 @@ int main (int argc, char **argv)
 	check_perms ();
 
 	is_shadow = spw_file_present ();
+
+#ifdef SHADOWGRP
+	is_shadow_grp = sgr_file_present ();
+#endif
 
 	open_files ();
 
