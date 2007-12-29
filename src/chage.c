@@ -652,14 +652,6 @@ int main (int argc, char **argv)
 				      "change min age", pw->pw_name, pw->pw_uid,
 				      1);
 		if (dflg) {
-			char new_lastchg[200];
-			char old_lastchg[200];
-
-			date_to_str (new_lastchg, sizeof new_lastchg,
-				     lastday * DAY);
-			date_to_str (old_lastchg, sizeof old_lastchg,
-				     spwd.sp_lstchg * DAY);
-
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change last change date", pw->pw_name,
 				      pw->pw_uid, 1);
@@ -673,12 +665,6 @@ int main (int argc, char **argv)
 				      "change inactive days", pw->pw_name,
 				      pw->pw_uid, 1);
 		if (Eflg) {
-			char new_exp[200];
-			char old_exp[200];
-
-			date_to_str (new_exp, sizeof new_exp, expdays * DAY);
-			date_to_str (old_exp, sizeof old_exp,
-				     spwd.sp_expire * DAY);
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "change passwd expiration", pw->pw_name,
 				      pw->pw_uid, 1);
