@@ -534,23 +534,39 @@ static void open_files (void)
 		exit (1);
 	}
 
-	if ((is_shadow && !spw_lock ()) || !gr_lock ()) {
+	if (   (is_shadow && !spw_lock ())
+	    || (!gr_lock ())
+#ifdef SHADOWGRP
+	    || (is_shadow_grp && !sgr_lock())
+#endif
+	   ) {
 		fprintf (stderr,
 		         _("%s: can't lock files, try again later\n"), Prog);
 		(void) pw_unlock ();
 		if (is_shadow) {
-			spw_unlock ();
+			(void) spw_unlock ();
 		}
+		(void) gr_unlock ();
 		exit (1);
 	}
-	if (!pw_open (O_RDWR) || (is_shadow && !spw_open (O_RDWR))
-	    || !gr_open (O_RDWR)) {
+	if (   (!pw_open (O_RDWR))
+	    || (is_shadow && !spw_open (O_RDWR))
+	    || !gr_open (O_RDWR)
+#ifdef SHADOWGRP
+	    || (is_shadow_grp && !sgr_open(O_RDWR))
+#endif
+	   ) {
 		fprintf (stderr, _("%s: can't open files\n"), Prog);
 		(void) pw_unlock ();
 		if (is_shadow) {
 			spw_unlock ();
 		}
 		(void) gr_unlock ();
+#ifdef SHADOWGRP
+		if (is_shadow_grp) {
+			(void) sgr_unlock();
+		}
+#endif
 		exit (1);
 	}
 }
@@ -560,15 +576,31 @@ static void open_files (void)
  */
 static void close_files (void)
 {
-	if (!pw_close () || (is_shadow && !spw_close ()) || !gr_close ()) {
+	if (   (!pw_close ())
+	    || (is_shadow && !spw_close ())
+	    || !gr_close ()
+#ifdef SHADOWGRP
+	    || (is_shadow_grp && !sgr_close())
+#endif
+	   ) {
 		fprintf (stderr, _("%s: error updating files\n"), Prog);
+#ifdef SHADOWGRP
+		if (is_shadow_grp) {
+			(void) sgr_unlock();
+		}
+#endif
 		(void) gr_unlock ();
 		if (is_shadow) {
-			spw_unlock ();
+			(void) spw_unlock ();
 		}
 		(void) pw_unlock ();
 		exit (1);
 	}
+#ifdef SHADOWGRP
+	if (is_shadow_grp) {
+		(void) sgr_unlock();
+	}
+#endif
 	(void) gr_unlock ();
 	if (is_shadow) {
 		(void) spw_unlock ();
