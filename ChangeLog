@@ -1,5 +1,9 @@
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Compilation fix for non-gshadow support.
+
+2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newusers.c: Added support for gshadow.
 
 2007-12-29  Nicolas François  <nicolas.francois@centraliens.net>

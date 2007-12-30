@@ -324,8 +324,8 @@ int main (int argc, char **argv)
 				        SGROUP_FILE,
 				        "vigr -s");
 			}
-#endif
 		}
+#endif
 	}
 
 	nscd_flush_cache ("passwd");
