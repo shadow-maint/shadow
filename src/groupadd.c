@@ -76,6 +76,10 @@ static int oflg = 0;		/* permit non-unique group ID to be specified with -g */
 static int gflg = 0;		/* ID value for the new group */
 static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
 
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
+
 /* local function prototypes */
 static void usage (void);
 static void new_grent (struct group *grent);
@@ -341,6 +345,15 @@ static void fail_exit (int code)
 		              group_name, -1, 0);
 	}
 #endif
+
+#ifdef USE_PAM
+	if (NULL != pamh) {
+		/* If there is a PAM error, fail_exit is not called.
+		 * We always end the pam transaction with PAM_SUCCESS here.
+		 */
+		pam_end (pamh, PAM_SUCCESS);
+	}
+#endif
 	exit (code);
 }
 
@@ -443,6 +456,11 @@ static void process_flags (int argc, char **argv)
 	check_flags ();
 }
 
+/*
+ * check_flags - check flags and parameters consistency
+ *
+ *	It will not return if an error is encountered.
+ */
 static void check_flags (void)
 {
 	/* -o does not make sense without -g */
@@ -493,11 +511,12 @@ static void check_flags (void)
  *	non-root users to groups.
  *	Without PAM support, only users who can write in the group databases
  *	can add groups.
+ *
+ *	It will not return if the user is not allowed.
  */
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
 	struct passwd *pampw;
 
