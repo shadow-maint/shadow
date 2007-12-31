@@ -235,10 +235,11 @@ static void check_perms (const struct passwd *pw)
 	 * UID of the user matches the current real UID.
 	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", pw->pw_name));
 		closelog ();
 		fprintf (stderr,
-		         _("You may not change the shell for %s.\n"), user);
+		         _("You may not change the shell for %s.\n"),
+		         pw->pw_name);
 		exit (1);
 	}
 
@@ -247,10 +248,11 @@ static void check_perms (const struct passwd *pw)
 	 * is not a restricted one.
 	 */
 	if (!amroot && restricted_shell (pw->pw_shell)) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", pw->pw_name));
 		closelog ();
 		fprintf (stderr,
-		         _("You may not change the shell for %s.\n"), user);
+		         _("You may not change the shell for %s.\n"),
+		         pw->pw_name);
 		exit (1);
 	}
 #ifdef WITH_SELINUX
@@ -261,10 +263,11 @@ static void check_perms (const struct passwd *pw)
 	if ((pw->pw_uid != getuid ())
 	    && (is_selinux_enabled () > 0)
 	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", pw->pw_name));
 		closelog ();
 		fprintf (stderr,
-		         _("You may not change the shell for %s.\n"), user);
+		         _("You may not change the shell for %s.\n"),
+		         pw->pw_name);
 		exit (1);
 	}
 #endif
