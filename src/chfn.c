@@ -94,13 +94,13 @@ static void usage (void)
 {
 	if (amroot) {
 		fprintf (stderr,
-			 _("Usage: %s [-f full_name] [-r room_no] "
-			   "[-w work_ph]\n"
-			   "\t[-h home_ph] [-o other] [user]\n"), Prog);
+		         _("Usage: %s [-f full_name] [-r room_no] "
+		           "[-w work_ph]\n"
+		           "\t[-h home_ph] [-o other] [user]\n"), Prog);
 	} else {
 		fprintf (stderr,
-			 _("Usage: %s [-f full_name] [-r room_no] "
-			   "[-w work_ph] [-h home_ph]\n"), Prog);
+		         _("Usage: %s [-f full_name] [-r room_no] "
+		           "[-w work_ph] [-h home_ph]\n"), Prog);
 	}
 	exit (E_USAGE);
 }
@@ -256,7 +256,7 @@ static void process_flags (int argc, char **argv)
 		case 'f':
 			if (!may_change_field ('f')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
+				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
 			fflg++;
@@ -265,7 +265,7 @@ static void process_flags (int argc, char **argv)
 		case 'h':
 			if (!may_change_field ('h')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
+				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
 			hflg++;
@@ -274,7 +274,7 @@ static void process_flags (int argc, char **argv)
 		case 'r':
 			if (!may_change_field ('r')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
+				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
 			rflg++;
@@ -283,7 +283,7 @@ static void process_flags (int argc, char **argv)
 		case 'o':
 			if (!amroot) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
+				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
 			oflg++;
@@ -292,7 +292,7 @@ static void process_flags (int argc, char **argv)
 		case 'w':
 			if (!may_change_field ('w')) {
 				fprintf (stderr,
-					 _("%s: Permission denied.\n"), Prog);
+				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
 			wflg++;
@@ -418,8 +418,8 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (pw_lock () == 0) {
 		fprintf (stderr,
-			 _
-			 ("Cannot lock the password file; try again later.\n"));
+		         _
+		         ("Cannot lock the password file; try again later.\n"));
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
 		exit (E_NOPERM);
@@ -442,7 +442,7 @@ static void update_gecos (const char *user, char *gecos)
 	if (NULL == pw) {
 		pw_unlock ();
 		fprintf (stderr,
-			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
+		         _("%s: %s not found in /etc/passwd\n"), Prog, user);
 		exit (E_NOPERM);
 	}
 
@@ -547,26 +547,26 @@ static void check_fields (void)
 	}
 	if (valid_field (roomno, ":,=")) {
 		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
-			 Prog, roomno);
+		         Prog, roomno);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (workph, ":,=")) {
 		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
-			 Prog, workph);
+		         Prog, workph);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (homeph, ":,=")) {
 		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
-			 Prog, homeph);
+		         Prog, homeph);
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (valid_field (slop, ":")) {
 		fprintf (stderr,
-			 _("%s: '%s' contains illegal characters\n"),
-			 Prog, slop);
+		         _("%s: '%s' contains illegal characters\n"),
+		         Prog, slop);
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -625,16 +625,16 @@ int main (int argc, char **argv)
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
 			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
-				 user);
+			         user);
 			exit (E_NOPERM);
 		}
 	} else {
 		pw = get_my_pwent ();
 		if (NULL == pw) {
 			fprintf (stderr,
-				 _
-				 ("%s: Cannot determine your user name.\n"),
-				 Prog);
+			         _
+			         ("%s: Cannot determine your user name.\n"),
+			         Prog);
 			exit (E_NOPERM);
 		}
 		user = xstrdup (pw->pw_name);
@@ -649,15 +649,15 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: cannot change user '%s' on NIS client.\n"),
-			 Prog, user);
+		         _("%s: cannot change user '%s' on NIS client.\n"),
+		         Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
-				 _
-				 ("%s: '%s' is the NIS master for this client.\n"),
-				 Prog, nis_master);
+			         _
+			         ("%s: '%s' is the NIS master for this client.\n"),
+			         Prog, nis_master);
 		}
 		exit (E_NOPERM);
 	}
