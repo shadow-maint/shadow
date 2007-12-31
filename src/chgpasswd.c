@@ -62,6 +62,10 @@ static long sha_rounds = 5000;
 static int is_shadow_grp;
 #endif
 
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
+
 /* local function prototypes */
 static void usage (void);
 static void process_flags (int argc, char **argv);
@@ -214,10 +218,9 @@ static void check_flags (void)
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
-
 	struct passwd *pampw;
+
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (pampw == NULL) {
 		retval = PAM_USER_UNKNOWN;

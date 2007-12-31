@@ -70,6 +70,10 @@ static int is_shadow;
 static int is_shadow_grp;
 #endif
 
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
+
 /* local function prototypes */
 static void usage (void);
 static int add_group (const char *, const char *, gid_t *);
@@ -484,7 +488,6 @@ static void check_flags (void)
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
 	struct passwd *pampw;
 

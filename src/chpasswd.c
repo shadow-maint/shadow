@@ -59,6 +59,10 @@ static long sha_rounds = 5000;
 
 static int is_shadow_pwd;
 
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
+
 /* local function prototypes */
 static void usage (void);
 static void process_flags (int argc, char **argv);
@@ -164,7 +168,7 @@ static void process_flags (int argc, char **argv)
  *
  *	It will not return if an error is encountered.
  */
-static void check_flags ()
+static void check_flags (void)
 {
 	if (sflg && !cflg) {
 		fprintf (stderr,
@@ -211,7 +215,6 @@ static void check_flags ()
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
 
 	struct passwd *pampw;
@@ -254,11 +257,11 @@ static void open_files (void)
 	 * Lock the password file and open it for reading and writing. This
 	 * will bring all of the entries into memory where they may be updated.
 	 */
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
 		exit (1);
 	}
-	if (!pw_open (O_RDWR)) {
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open password file\n"), Prog);
 		pw_unlock ();
 		exit (1);
@@ -266,13 +269,13 @@ static void open_files (void)
 
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_pwd) {
-		if (!spw_lock ()) {
+		if (spw_lock () == 0) {
 			fprintf (stderr, _("%s: can't lock shadow file\n"),
 			         Prog);
 			pw_unlock ();
 			exit (1);
 		}
-		if (!spw_open (O_RDWR)) {
+		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr, _("%s: can't open shadow file\n"),
 			         Prog);
 			pw_unlock ();
@@ -288,7 +291,7 @@ static void open_files (void)
 static void close_files (void)
 {
 	if (is_shadow_pwd) {
-		if (!spw_close ()) {
+		if (spw_close () == 0) {
 			fprintf (stderr,
 			         _("%s: error updating shadow file\n"), Prog);
 			pw_unlock ();
@@ -297,12 +300,11 @@ static void close_files (void)
 		spw_unlock ();
 	}
 
-	if (!pw_close ()) {
+	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: error updating password file\n"), Prog);
 		exit (1);
 	}
 	pw_unlock ();
-
 }
 
 int main (int argc, char **argv)
@@ -400,7 +402,7 @@ int main (int argc, char **argv)
 		 * already exist.
 		 */
 		pw = pw_locate (name);
-		if (!pw) {
+		if (NULL == pw) {
 			fprintf (stderr,
 			         _("%s: line %d: unknown user %s\n"), Prog,
 			         line, name);
@@ -418,7 +420,7 @@ int main (int argc, char **argv)
 		 * user's password file entry and the last password change
 		 * date is set to the current date.
 		 */
-		if (sp) {
+		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
 			newsp.sp_lstchg = now;
@@ -432,7 +434,7 @@ int main (int argc, char **argv)
 		 * be written to the password file later, after all the
 		 * other entries have been updated as well.
 		 */
-		if (sp) {
+		if (NULL != sp) {
 			ok = spw_update (&newsp);
 		} else {
 			ok = pw_update (&newpw);

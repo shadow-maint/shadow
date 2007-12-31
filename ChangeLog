@@ -1,5 +1,13 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Compilation fix for PAM support (pamh needs to be
+	global since the function split).
+	* src/chpasswd.c: Likewise.
+	* src/chgpasswd.c: Likewise.
+	* src/chpasswd.c: Avoid implicit conversions to booleans.
+
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chage.c: Fix typo: s/maximim/maximum/
 	* src/chage.c: New function: fail_exit(). Change most of the exit()
 	to a fail_exit, which makes sure the files are unlocked (new global
