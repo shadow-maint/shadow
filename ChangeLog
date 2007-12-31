@@ -8,6 +8,7 @@
 	pam API was already checked. No need to validate it again.
 	* src/chfn.c: Avoid implicit brackets.
 	* src/chfn.c: Document may_change_field().
+	* src/chfn.c: Avoid implicit conversions to booleans.
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 

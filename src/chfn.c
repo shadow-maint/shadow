@@ -141,7 +141,7 @@ static int may_change_field (int field)
 	}
 
 	cp = getdef_str ("CHFN_RESTRICT");
-	if (!cp) {
+	if (NULL == cp) {
 		cp = "";
 	} else if (strcmp (cp, "yes") == 0) {
 		cp = "rwh";
@@ -149,7 +149,7 @@ static int may_change_field (int field)
 		cp = "frwh";
 	}
 
-	if (strchr (cp, field)) {
+	if (strchr (cp, field) != NULL) {
 		return 1;
 	}
 
@@ -209,17 +209,17 @@ static char *copy_field (char *in, char *out, char *extra)
 {
 	char *cp = NULL;
 
-	while (in) {
-		if ((cp = strchr (in, ','))) {
+	while (NULL != in) {
+		if ((cp = strchr (in, ',')) != NULL) {
 			*cp++ = '\0';
 		}
 
-		if (!strchr (in, '=')) {
+		if (strchr (in, '=') == NULL) {
 			break;
 		}
 
-		if (extra) {
-			if (extra[0]) {
+		if (NULL != extra) {
+			if ('\0' != extra[0]) {
 				strcat (extra, ",");
 			}
 
@@ -227,7 +227,7 @@ static char *copy_field (char *in, char *out, char *extra)
 		}
 		in = cp;
 	}
-	if (in && out) {
+	if ((NULL != in) && (NULL != out)) {
 		strcpy (out, in);
 	}
 
@@ -403,7 +403,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * against unexpected signals. Any keyboard signals are set to be
 	 * ignored.
 	 */
-	if (setuid (0)) {
+	if (setuid (0) != 0) {
 		fprintf (stderr, _("Cannot change ID to root.\n"));
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
@@ -415,7 +415,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * The passwd entry is now ready to be committed back to the
 	 * password file. Get a lock on the file and open it.
 	 */
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr,
 			 _
 			 ("Cannot lock the password file; try again later.\n"));
@@ -423,7 +423,7 @@ static void update_gecos (const char *user, char *gecos)
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (!pw_open (O_RDWR)) {
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("Cannot open the password file.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
@@ -438,7 +438,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * AUTOSHADOW (or SHADOW_COMPAT in libc).  --marekm
 	 */
 	pw = pw_locate (user);
-	if (!pw) {
+	if (NULL == pw) {
 		pw_unlock ();
 		fprintf (stderr,
 			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
@@ -456,7 +456,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * Update the passwd file entry. If there is a DBM file, update that
 	 * entry as well.
 	 */
-	if (!pw_update (&pwent)) {
+	if (pw_update (&pwent) == 0) {
 		fprintf (stderr, _("Error updating the password entry.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
@@ -467,14 +467,14 @@ static void update_gecos (const char *user, char *gecos)
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
-	if (!pw_close ()) {
+	if (pw_close () == 0) {
 		fprintf (stderr, _("Cannot commit password file changes.\n"));
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (!pw_unlock ()) {
+	if (pw_unlock () == 0) {
 		fprintf (stderr, _("Cannot unlock the password file.\n"));
 		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
 		closelog ();
@@ -502,29 +502,29 @@ static void get_old_fields (const char *gecos)
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
-	if (cp) {
+	if (NULL != cp) {
 		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
 	}
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
-	if (cp) {
+	if (NULL != cp) {
 		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
 	}
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
-	if (cp) {
+	if (NULL != cp) {
 		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
 	}
 
 	/*
 	 * Anything left over is "slop".
 	 */
-	if (cp && !oflg) {
-		if (slop[0]) {
+	if ((NULL != cp) && !oflg) {
+		if ('\0' != slop[0]) {
 			strcat (slop, ",");
 		}
 
@@ -622,14 +622,14 @@ int main (int argc, char **argv)
 	if (optind < argc) {
 		user = argv[optind];
 		pw = xgetpwnam (user);
-		if (!pw) {
+		if (NULL == pw) {
 			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
 				 user);
 			exit (E_NOPERM);
 		}
 	} else {
 		pw = get_my_pwent ();
-		if (!pw) {
+		if (NULL == pw) {
 			fprintf (stderr,
 				 _
 				 ("%s: Cannot determine your user name.\n"),
@@ -688,8 +688,8 @@ int main (int argc, char **argv)
 	 * Build the new GECOS field by plastering all the pieces together,
 	 * if they will fit ...
 	 */
-	if (strlen (fullnm) + strlen (roomno) + strlen (workph) +
-	    strlen (homeph) + strlen (slop) > (unsigned int) 80) {
+	if ((strlen (fullnm) + strlen (roomno) + strlen (workph) +
+	     strlen (homeph) + strlen (slop)) > (unsigned int) 80) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
 		closelog ();
 		exit (E_NOPERM);
@@ -711,3 +711,4 @@ int main (int argc, char **argv)
 	closelog ();
 	exit (E_SUCCESS);
 }
+
