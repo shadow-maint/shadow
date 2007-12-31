@@ -65,6 +65,9 @@ static int amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */
 static int sflg = 0;		/* -s - set shell from command line  */
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
 
 /* external identifiers */
 
@@ -231,7 +234,6 @@ static void process_flags (int argc, char **argv)
 static void check_perms (const struct passwd *pw)
 {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
 	int retval;
 	struct passwd *pampw;
 #endif
