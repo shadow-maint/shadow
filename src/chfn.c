@@ -63,6 +63,15 @@ static char workph[BUFSIZ];
 static char homeph[BUFSIZ];
 static char slop[BUFSIZ];
 static int amroot;
+/* Flags */
+static int fflg = 0;		/* -f - set full name                */
+static int rflg = 0;		/* -r - set room number              */
+static int wflg = 0;		/* -w - set work phone number        */
+static int hflg = 0;		/* -h - set home phone number        */
+static int oflg = 0;		/* -o - set other information        */
+#ifdef USE_PAM
+static pam_handle_t *pamh = NULL;
+#endif
 
 /*
  * External identifiers
@@ -73,6 +82,10 @@ static void usage (void);
 static int may_change_field (int);
 static void new_fields (void);
 static char *copy_field (char *, char *, char *);
+static void process_flags (int argc, char **argv);
+static void check_perms (const struct passwd *pw);
+static void update_gecos (const char *user, char *gecos);
+static void get_old_fields (const char *gecos);
 
 /*
  * usage - print command line syntax and exit
@@ -197,59 +210,13 @@ static char *copy_field (char *in, char *out, char *extra)
 }
 
 /*
- * chfn - change a user's password file information
+ * process_flags - parse the command line options
  *
- *	This command controls the GECOS field information in the password
- *	file entry.
- *
- *	The valid options are
- *
- *	-f	full name
- *	-r	room number
- *	-w	work phone number
- *	-h	home phone number
- *	-o	other information (*)
- *
- *	(*) requires root permission to execute.
+ *	It will not return if an error is encountered.
  */
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
-	char *cp;		/* temporary character pointer       */
-	const struct passwd *pw;	/* password file entry               */
-	struct passwd pwent;	/* modified password file entry      */
-	char old_gecos[BUFSIZ];	/* buffer for old GECOS fields       */
-	char new_gecos[BUFSIZ];	/* buffer for new GECOS fields       */
 	int flag;		/* flag currently being processed    */
-	int fflg = 0;		/* -f - set full name                */
-	int rflg = 0;		/* -r - set room number              */
-	int wflg = 0;		/* -w - set work phone number        */
-	int hflg = 0;		/* -h - set home phone number        */
-	int oflg = 0;		/* -o - set other information        */
-	char *user;
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
-
-	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	/*
-	 * This command behaves different for root and non-root
-	 * users.
-	 */
-	amroot = (getuid () == 0);
-
-	/*
-	 * Get the program name. The program name is used as a
-	 * prefix to most error messages.
-	 */
-	Prog = Basename (argv[0]);
-
-	OPENLOG ("chfn");
 
 	/* 
 	 * The remaining arguments will be processed one by one and executed
@@ -309,52 +276,23 @@ int main (int argc, char **argv)
 			usage ();
 		}
 	}
+}
 
-	/*
-	 * Get the name of the user to check. It is either the command line
-	 * name, or the name getlogin() returns.
-	 */
-	if (optind < argc) {
-		user = argv[optind];
-		pw = xgetpwnam (user);
-		if (!pw) {
-			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
-				 user);
-			exit (E_NOPERM);
-		}
-	} else {
-		pw = get_my_pwent ();
-		if (!pw) {
-			fprintf (stderr,
-				 _
-				 ("%s: Cannot determine your user name.\n"),
-				 Prog);
-			exit (E_NOPERM);
-		}
-		user = xstrdup (pw->pw_name);
-	}
-
-#ifdef	USE_NIS
-	/*
-	 * Now we make sure this is a LOCAL password entry for this user ...
-	 */
-	if (__ispwNIS ()) {
-		char *nis_domain;
-		char *nis_master;
-
-		fprintf (stderr,
-			 _("%s: cannot change user '%s' on NIS client.\n"),
-			 Prog, user);
-
-		if (!yp_get_default_domain (&nis_domain) &&
-		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr,
-				 _
-				 ("%s: '%s' is the NIS master for this client.\n"),
-				 Prog, nis_master);
-		}
-		exit (E_NOPERM);
-	}
+/*
+ * check_perms - check if the caller is allowed to add a group
+ *
+ *	Non-root users are only allowed to change their gecos field.
+ *	(see also may_change_field())
+ *
+ *	Non-root users must be authenticated.
+ *
+ *	It will not return if the user is not allowed.
+ */
+static void check_perms (const struct passwd *pw)
+{
+#ifdef USE_PAM
+	int retval;
+	struct passwd *pampw;
 #endif
 
 	/*
@@ -393,17 +331,13 @@ int main (int argc, char **argv)
 #else				/* !USE_PAM */
 	retval = PAM_SUCCESS;
 
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
 
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("chfn", pampw->pw_name,
-					    &conv, &pamh);
-		}
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chfn", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (retval == PAM_SUCCESS) {
@@ -425,98 +359,17 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 #endif				/* USE_PAM */
+}
 
-	/*
-	 * Now get the full name. It is the first comma separated field in
-	 * the GECOS field.
-	 */
-	STRFCPY (old_gecos, pw->pw_gecos);
-	cp = copy_field (old_gecos, fflg ? (char *) 0 : fullnm, slop);
-
-	/*
-	 * Now get the room number. It is the next comma separated field,
-	 * if there is indeed one.
-	 */
-	if (cp)
-		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
-
-	/*
-	 * Now get the work phone number. It is the third field.
-	 */
-	if (cp)
-		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
-
-	/*
-	 * Now get the home phone number. It is the fourth field.
-	 */
-	if (cp)
-		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
-
-	/*
-	 * Anything left over is "slop".
-	 */
-	if (cp && !oflg) {
-		if (slop[0])
-			strcat (slop, ",");
-
-		strcat (slop, cp);
-	}
-
-	/*
-	 * If none of the fields were changed from the command line, let the
-	 * user interactively change them.
-	 */
-	if (!fflg && !rflg && !wflg && !hflg && !oflg) {
-		printf (_("Changing the user information for %s\n"), user);
-		new_fields ();
-	}
-
-	/*
-	 * Check all of the fields for valid information
-	 */
-	if (valid_field (fullnm, ":,=")) {
-		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
-		closelog ();
-		exit (E_NOPERM);
-	}
-	if (valid_field (roomno, ":,=")) {
-		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
-			 Prog, roomno);
-		closelog ();
-		exit (E_NOPERM);
-	}
-	if (valid_field (workph, ":,=")) {
-		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
-			 Prog, workph);
-		closelog ();
-		exit (E_NOPERM);
-	}
-	if (valid_field (homeph, ":,=")) {
-		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
-			 Prog, homeph);
-		closelog ();
-		exit (E_NOPERM);
-	}
-	if (valid_field (slop, ":")) {
-		fprintf (stderr,
-			 _("%s: '%s' contains illegal characters\n"),
-			 Prog, slop);
-		closelog ();
-		exit (E_NOPERM);
-	}
-
-	/*
-	 * Build the new GECOS field by plastering all the pieces together,
-	 * if they will fit ...
-	 */
-	if (strlen (fullnm) + strlen (roomno) + strlen (workph) +
-	    strlen (homeph) + strlen (slop) > (unsigned int) 80) {
-		fprintf (stderr, _("%s: fields too long\n"), Prog);
-		closelog ();
-		exit (E_NOPERM);
-	}
-	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
-		  fullnm, roomno, workph, homeph, slop[0] ? "," : "", slop);
+/*
+ * update_gecos - update the gecos fields in the password database
+ *
+ *	Commit the user's entry after changing her gecos field.
+ */
+static void update_gecos (const char *user, char *gecos)
+{
+	const struct passwd *pw;	/* The user's password file entry */
+	struct passwd pwent;		/* modified password file entry */
 
 	/*
 	 * Before going any further, raise the ulimit to prevent colliding
@@ -571,7 +424,7 @@ int main (int argc, char **argv)
 	 * fields remain unchanged.
 	 */
 	pwent = *pw;
-	pwent.pw_gecos = new_gecos;
+	pwent.pw_gecos = gecos;
 
 	/*
 	 * Update the passwd file entry. If there is a DBM file, update that
@@ -601,13 +454,228 @@ int main (int argc, char **argv)
 		closelog ();
 		exit (E_NOPERM);
 	}
+}
+
+/*
+ * get_old_fields - parse the old gecos and use the old value for the fields
+ *                  which are not set on the command line
+ */
+static void get_old_fields (const char *gecos)
+{
+	char *cp;		/* temporary character pointer       */
+	char old_gecos[BUFSIZ];	/* buffer for old GECOS fields       */
+	STRFCPY (old_gecos, gecos);
+
+	/*
+	 * Now get the full name. It is the first comma separated field in
+	 * the GECOS field.
+	 */
+	cp = copy_field (old_gecos, fflg ? (char *) 0 : fullnm, slop);
+
+	/*
+	 * Now get the room number. It is the next comma separated field,
+	 * if there is indeed one.
+	 */
+	if (cp)
+		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
+
+	/*
+	 * Now get the work phone number. It is the third field.
+	 */
+	if (cp)
+		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
+
+	/*
+	 * Now get the home phone number. It is the fourth field.
+	 */
+	if (cp)
+		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
+
+	/*
+	 * Anything left over is "slop".
+	 */
+	if (cp && !oflg) {
+		if (slop[0])
+			strcat (slop, ",");
+
+		strcat (slop, cp);
+	}
+}
+
+/*
+ * check_fields - check all of the fields for valid information
+ *
+ *	It will not return if a field is not valid.
+ */
+static void check_fields (void)
+{
+	if (valid_field (fullnm, ":,=")) {
+		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
+		closelog ();
+		exit (E_NOPERM);
+	}
+	if (valid_field (roomno, ":,=")) {
+		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
+			 Prog, roomno);
+		closelog ();
+		exit (E_NOPERM);
+	}
+	if (valid_field (workph, ":,=")) {
+		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
+			 Prog, workph);
+		closelog ();
+		exit (E_NOPERM);
+	}
+	if (valid_field (homeph, ":,=")) {
+		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
+			 Prog, homeph);
+		closelog ();
+		exit (E_NOPERM);
+	}
+	if (valid_field (slop, ":")) {
+		fprintf (stderr,
+			 _("%s: '%s' contains illegal characters\n"),
+			 Prog, slop);
+		closelog ();
+		exit (E_NOPERM);
+	}
+}
+
+/*
+ * chfn - change a user's password file information
+ *
+ *	This command controls the GECOS field information in the password
+ *	file entry.
+ *
+ *	The valid options are
+ *
+ *	-f	full name
+ *	-r	room number
+ *	-w	work phone number
+ *	-h	home phone number
+ *	-o	other information (*)
+ *
+ *	(*) requires root permission to execute.
+ */
+int main (int argc, char **argv)
+{
+	const struct passwd *pw;	/* password file entry               */
+	char new_gecos[BUFSIZ];	/* buffer for new GECOS fields       */
+	char *user;
+
+	sanitize_env ();
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	/*
+	 * This command behaves different for root and non-root
+	 * users.
+	 */
+	amroot = (getuid () == 0);
+
+	/*
+	 * Get the program name. The program name is used as a
+	 * prefix to most error messages.
+	 */
+	Prog = Basename (argv[0]);
+
+	OPENLOG ("chfn");
+
+	/* parse the command line options */
+	process_flags (argc, argv);
+
+	/*
+	 * Get the name of the user to check. It is either the command line
+	 * name, or the name getlogin() returns.
+	 */
+	if (optind < argc) {
+		user = argv[optind];
+		pw = xgetpwnam (user);
+		if (!pw) {
+			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
+				 user);
+			exit (E_NOPERM);
+		}
+	} else {
+		pw = get_my_pwent ();
+		if (!pw) {
+			fprintf (stderr,
+				 _
+				 ("%s: Cannot determine your user name.\n"),
+				 Prog);
+			exit (E_NOPERM);
+		}
+		user = xstrdup (pw->pw_name);
+	}
+
+#ifdef	USE_NIS
+	/*
+	 * Now we make sure this is a LOCAL password entry for this user ...
+	 */
+	if (__ispwNIS ()) {
+		char *nis_domain;
+		char *nis_master;
+
+		fprintf (stderr,
+			 _("%s: cannot change user '%s' on NIS client.\n"),
+			 Prog, user);
+
+		if (!yp_get_default_domain (&nis_domain) &&
+		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
+			fprintf (stderr,
+				 _
+				 ("%s: '%s' is the NIS master for this client.\n"),
+				 Prog, nis_master);
+		}
+		exit (E_NOPERM);
+	}
+#endif
+
+	/* Check that the caller is allowed to change the gecos of the
+	 * specified user */
+	check_perms (pw);
+
+	/* If some fields were not set on the command line, load the value from
+	 * the old gecos fields. */
+	get_old_fields (pw->pw_gecos);
+
+	/*
+	 * If none of the fields were changed from the command line, let the
+	 * user interactively change them.
+	 */
+	if (!fflg && !rflg && !wflg && !hflg && !oflg) {
+		printf (_("Changing the user information for %s\n"), user);
+		new_fields ();
+	}
+
+	/*
+	 * Check all of the fields for valid information
+	 */
+	check_fields ();
+
+	/*
+	 * Build the new GECOS field by plastering all the pieces together,
+	 * if they will fit ...
+	 */
+	if (strlen (fullnm) + strlen (roomno) + strlen (workph) +
+	    strlen (homeph) + strlen (slop) > (unsigned int) 80) {
+		fprintf (stderr, _("%s: fields too long\n"), Prog);
+		closelog ();
+		exit (E_NOPERM);
+	}
+	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
+		  fullnm, roomno, workph, homeph, slop[0] ? "," : "", slop);
+
+	/* Rewrite the user's gecos in the passwd file */
+	update_gecos (user, new_gecos);
+
 	SYSLOG ((LOG_INFO, "changed user `%s' information", user));
 
 	nscd_flush_cache ("passwd");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();

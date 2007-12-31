@@ -1,5 +1,14 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chfn.c: New function: process_flags() split out of main().
+	The flags variables are now global.
+	* src/chfn.c: New functions: check_perms(), update_gecos(),
+	get_old_fields(), and check_fields() split out of main().
+	* src/chfn.c: Before pam_end(), the return value of the previous
+	pam API was already checked. No need to validate it again.
+
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Compilation fix for PAM support (pamh needs to be
 	global since the function split).
 	* src/chpasswd.c: Likewise.
