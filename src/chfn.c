@@ -210,7 +210,8 @@ static char *copy_field (char *in, char *out, char *extra)
 	char *cp = NULL;
 
 	while (NULL != in) {
-		if ((cp = strchr (in, ',')) != NULL) {
+		cp = strchr (in, ',');
+		if (NULL != cp) {
 			*cp++ = '\0';
 		}
 
