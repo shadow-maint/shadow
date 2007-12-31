@@ -63,6 +63,8 @@
 static char *Prog;		/* Program name */
 static int amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
+/* command line options */
+static int sflg = 0;		/* -s - set shell from command line  */
 
 /* external identifiers */
 
@@ -417,7 +419,6 @@ static void update_shell (const char *user, char *loginsh)
 int main (int argc, char **argv)
 {
 	char *user;		/* User name                         */
-	int sflg = 0;		/* -s - set shell from command line  */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 
 	sanitize_env ();
