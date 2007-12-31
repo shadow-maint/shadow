@@ -92,15 +92,16 @@ static void get_old_fields (const char *gecos);
  */
 static void usage (void)
 {
-	if (amroot)
+	if (amroot) {
 		fprintf (stderr,
 			 _("Usage: %s [-f full_name] [-r room_no] "
 			   "[-w work_ph]\n"
 			   "\t[-h home_ph] [-o other] [user]\n"), Prog);
-	else
+	} else {
 		fprintf (stderr,
 			 _("Usage: %s [-f full_name] [-r room_no] "
 			   "[-w work_ph] [-h home_ph]\n"), Prog);
+	}
 	exit (E_USAGE);
 }
 
@@ -126,17 +127,23 @@ static int may_change_field (int field)
 	 * "no" is equivalent to "frwh". Only root can change anything
 	 * if the string is empty or not defined at all.
 	 */
-	if (amroot)
+	if (amroot) {
 		return 1;
+	}
+
 	cp = getdef_str ("CHFN_RESTRICT");
-	if (!cp)
+	if (!cp) {
 		cp = "";
-	else if (strcmp (cp, "yes") == 0)
+	} else if (strcmp (cp, "yes") == 0) {
 		cp = "rwh";
-	else if (strcmp (cp, "no") == 0)
+	} else if (strcmp (cp, "no") == 0) {
 		cp = "frwh";
-	if (strchr (cp, field))
+	}
+
+	if (strchr (cp, field)) {
 		return 1;
+	}
+
 	return 0;
 }
 
@@ -150,28 +157,33 @@ static void new_fields (void)
 {
 	printf (_("Enter the new value, or press ENTER for the default\n"));
 
-	if (may_change_field ('f'))
+	if (may_change_field ('f')) {
 		change_field (fullnm, sizeof fullnm, _("Full Name"));
-	else
+	} else {
 		printf (_("\tFull Name: %s\n"), fullnm);
+	}
 
-	if (may_change_field ('r'))
+	if (may_change_field ('r')) {
 		change_field (roomno, sizeof roomno, _("Room Number"));
-	else
+	} else {
 		printf (_("\tRoom Number: %s\n"), roomno);
+	}
 
-	if (may_change_field ('w'))
+	if (may_change_field ('w')) {
 		change_field (workph, sizeof workph, _("Work Phone"));
-	else
+	} else {
 		printf (_("\tWork Phone: %s\n"), workph);
+	}
 
-	if (may_change_field ('h'))
+	if (may_change_field ('h')) {
 		change_field (homeph, sizeof homeph, _("Home Phone"));
-	else
+	} else {
 		printf (_("\tHome Phone: %s\n"), homeph);
+	}
 
-	if (amroot)
+	if (amroot) {
 		change_field (slop, sizeof slop, _("Other"));
+	}
 }
 
 /*
@@ -189,22 +201,26 @@ static char *copy_field (char *in, char *out, char *extra)
 	char *cp = NULL;
 
 	while (in) {
-		if ((cp = strchr (in, ',')))
+		if ((cp = strchr (in, ','))) {
 			*cp++ = '\0';
+		}
 
-		if (!strchr (in, '='))
+		if (!strchr (in, '=')) {
 			break;
+		}
 
 		if (extra) {
-			if (extra[0])
+			if (extra[0]) {
 				strcat (extra, ",");
+			}
 
 			strcat (extra, in);
 		}
 		in = cp;
 	}
-	if (in && out)
+	if (in && out) {
 		strcpy (out, in);
+	}
 
 	return cp;
 }
@@ -325,8 +341,9 @@ static void check_perms (const struct passwd *pw)
 	 * any changes can be made. Idea from util-linux chfn/chsh. 
 	 * --marekm
 	 */
-	if (!amroot && getdef_bool ("CHFN_AUTH"))
+	if (!amroot && getdef_bool ("CHFN_AUTH")) {
 		passwd_check (pw->pw_name, pw->pw_passwd, "chfn");
+	}
 
 #else				/* !USE_PAM */
 	retval = PAM_SUCCESS;
@@ -476,27 +493,31 @@ static void get_old_fields (const char *gecos)
 	 * Now get the room number. It is the next comma separated field,
 	 * if there is indeed one.
 	 */
-	if (cp)
+	if (cp) {
 		cp = copy_field (cp, rflg ? (char *) 0 : roomno, slop);
+	}
 
 	/*
 	 * Now get the work phone number. It is the third field.
 	 */
-	if (cp)
+	if (cp) {
 		cp = copy_field (cp, wflg ? (char *) 0 : workph, slop);
+	}
 
 	/*
 	 * Now get the home phone number. It is the fourth field.
 	 */
-	if (cp)
+	if (cp) {
 		cp = copy_field (cp, hflg ? (char *) 0 : homeph, slop);
+	}
 
 	/*
 	 * Anything left over is "slop".
 	 */
 	if (cp && !oflg) {
-		if (slop[0])
+		if (slop[0]) {
 			strcat (slop, ",");
+		}
 
 		strcat (slop, cp);
 	}

@@ -6,6 +6,7 @@
 	get_old_fields(), and check_fields() split out of main().
 	* src/chfn.c: Before pam_end(), the return value of the previous
 	pam API was already checked. No need to validate it again.
+	* src/chfn.c: Avoid implicit brackets.
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
