@@ -153,11 +153,14 @@ static int check_shell (const char *sh)
 	}
 	endusershell ();
 #else
-	if ((fp = fopen (SHELLS_FILE, "r")) == (FILE *) 0)
+	fp = fopen (SHELLS_FILE, "r");
+	if (NULL == fp) {
 		return 0;
+	}
 
 	while (fgets (buf, sizeof (buf), fp)) {
-		if ((cp = strrchr (buf, '\n'))) {
+		cp = strrchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
 		}
 
