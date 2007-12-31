@@ -83,11 +83,11 @@ static void update_shell (const char *user, char *loginsh);
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: chsh [options] [LOGIN]\n"
-			   "\n"
-			   "Options:\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -s, --shell SHELL             new login shell for the user account\n"
-			   "\n"));
+	                   "\n"
+	                   "Options:\n"
+	                   "  -h, --help                    display this help message and exit\n"
+	                   "  -s, --shell SHELL             new login shell for the user account\n"
+	                   "\n"));
 	exit (E_USAGE);
 }
 
@@ -356,8 +356,8 @@ static void update_shell (const char *user, char *loginsh)
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
 		fprintf (stderr,
-			 _
-			 ("Cannot lock the password file; try again later.\n"));
+		         _
+		         ("Cannot lock the password file; try again later.\n"));
 		exit (1);
 	}
 	if (pw_open (O_RDWR) == 0) {
@@ -378,7 +378,7 @@ static void update_shell (const char *user, char *loginsh)
 	if (NULL == pw) {
 		pw_unlock ();
 		fprintf (stderr,
-			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
+		         _("%s: %s not found in /etc/passwd\n"), Prog, user);
 		exit (1);
 	}
 
@@ -461,16 +461,16 @@ int main (int argc, char **argv)
 		pw = xgetpwnam (user);
 		if (!pw) {
 			fprintf (stderr,
-				 _("%s: unknown user %s\n"), Prog, user);
+			         _("%s: unknown user %s\n"), Prog, user);
 			exit (1);
 		}
 	} else {
 		pw = get_my_pwent ();
 		if (!pw) {
 			fprintf (stderr,
-				 _
-				 ("%s: Cannot determine your user name.\n"),
-				 Prog);
+			         _
+			         ("%s: Cannot determine your user name.\n"),
+			         Prog);
 			exit (1);
 		}
 		user = xstrdup (pw->pw_name);
@@ -485,15 +485,15 @@ int main (int argc, char **argv)
 		char *nis_master;
 
 		fprintf (stderr,
-			 _("%s: cannot change user '%s' on NIS client.\n"),
-			 Prog, user);
+		         _("%s: cannot change user '%s' on NIS client.\n"),
+		         Prog, user);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
-				 _
-				 ("%s: '%s' is the NIS master for this client.\n"),
-				 Prog, nis_master);
+			         _
+			         ("%s: '%s' is the NIS master for this client.\n"),
+			         Prog, nis_master);
 		}
 		exit (1);
 	}
