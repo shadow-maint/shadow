@@ -10,7 +10,7 @@ struct commonio_entry {
 	char *line;
 	void *eptr;		/* struct passwd, struct spwd, ... */
 	struct commonio_entry *prev, *next;
-	int changed:1;
+	unsigned int changed:1;
 };
 
 /*
@@ -93,10 +93,10 @@ struct commonio_db {
 	/*
 	 * Various flags.
 	 */
-	int changed:1;
-	int isopen:1;
-	int locked:1;
-	int readonly:1;
+	unsigned int changed:1;
+	unsigned int isopen:1;
+	unsigned int locked:1;
+	unsigned int readonly:1;
 };
 
 extern int commonio_setname (struct commonio_db *, const char *);

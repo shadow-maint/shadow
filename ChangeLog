@@ -1,5 +1,10 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.h: Fix the type of the bitfields in the commonio_entry
+	and commonio_db structures to unsigned int (instead of int).
+
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chsh.c: Split process_flags(), check_perms(), and update_shell()
 	out of main().
 	* src/chsh.c: Before pam_end(), the return value of the previous
