@@ -73,6 +73,7 @@ static int check_shell (const char *);
 static int restricted_shell (const char *);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
+static void update_shell (const char *user, char *loginsh);
 
 /*
  * usage - print command line syntax and exit
@@ -311,6 +312,103 @@ static void check_perms (const struct passwd *pw)
 }
 
 /*
+ * update_shell - update the user's shell in the passwd database
+ *
+ *	Commit the user's entry after changing her shell field.
+ *
+ *	It will not return in case of error.
+ */
+static void update_shell (const char *user, char *loginsh)
+{
+	const struct passwd *pw;	/* Password entry from /etc/passwd   */
+	struct passwd pwent;		/* New password entry                */
+
+	/*
+	 * Before going any further, raise the ulimit to prevent
+	 * colliding into a lowered ulimit, and set the real UID
+	 * to root to protect against unexpected signals. Any
+	 * keyboard signals are set to be ignored.
+	 */
+	if (setuid (0) != 0) {
+		SYSLOG ((LOG_ERR, "can't setuid(0)"));
+		closelog ();
+		fprintf (stderr, _("Cannot change ID to root.\n"));
+		exit (1);
+	}
+	pwd_init ();
+
+	/*
+	 * The passwd entry is now ready to be committed back to
+	 * the password file. Get a lock on the file and open it.
+	 */
+	if (pw_lock () == 0) {
+		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
+		closelog ();
+		fprintf (stderr,
+			 _
+			 ("Cannot lock the password file; try again later.\n"));
+		exit (1);
+	}
+	if (pw_open (O_RDWR) == 0) {
+		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
+		closelog ();
+		fprintf (stderr, _("Cannot open the password file.\n"));
+		pw_unlock ();
+		exit (1);
+	}
+
+	/*
+	 * Get the entry to update using pw_locate() - we want the real
+	 * one from /etc/passwd, not the one from getpwnam() which could
+	 * contain the shadow password if (despite the warnings) someone
+	 * enables AUTOSHADOW (or SHADOW_COMPAT in libc).  --marekm
+	 */
+	pw = pw_locate (user);
+	if (NULL == pw) {
+		pw_unlock ();
+		fprintf (stderr,
+			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
+		exit (1);
+	}
+
+	/*
+	 * Make a copy of the entry, then change the shell field. The other
+	 * fields remain unchanged.
+	 */
+	pwent = *pw;
+	pwent.pw_shell = loginsh;
+
+	/*
+	 * Update the passwd file entry. If there is a DBM file, update
+	 * that entry as well.
+	 */
+	if (pw_update (&pwent) == 0) {
+		SYSLOG ((LOG_ERR, "error updating passwd entry"));
+		closelog ();
+		fprintf (stderr, _("Error updating the password entry.\n"));
+		pw_unlock ();
+		exit (1);
+	}
+
+	/*
+	 * Changes have all been made, so commit them and unlock the file.
+	 */
+	if (pw_close () == 0) {
+		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
+		closelog ();
+		fprintf (stderr, _("Cannot commit password file changes.\n"));
+		pw_unlock ();
+		exit (1);
+	}
+	if (pw_unlock () == 0) {
+		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
+		closelog ();
+		fprintf (stderr, _("Cannot unlock the password file.\n"));
+		exit (1);
+	}
+}
+
+/*
  * chsh - this command controls changes to the user's shell
  *
  *	The only supported option is -s which permits the the login shell to
@@ -321,7 +419,6 @@ int main (int argc, char **argv)
 	char *user;		/* User name                         */
 	int sflg = 0;		/* -s - set shell from command line  */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
-	struct passwd pwent;	/* New password entry                */
 
 	sanitize_env ();
 
@@ -427,89 +524,8 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	/*
-	 * Before going any further, raise the ulimit to prevent
-	 * colliding into a lowered ulimit, and set the real UID
-	 * to root to protect against unexpected signals. Any
-	 * keyboard signals are set to be ignored.
-	 */
-	if (setuid (0)) {
-		SYSLOG ((LOG_ERR, "can't setuid(0)"));
-		closelog ();
-		fprintf (stderr, _("Cannot change ID to root.\n"));
-		exit (1);
-	}
-	pwd_init ();
+	update_shell (user, loginsh);
 
-	/*
-	 * The passwd entry is now ready to be committed back to
-	 * the password file. Get a lock on the file and open it.
-	 */
-	if (!pw_lock ()) {
-		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
-		closelog ();
-		fprintf (stderr,
-			 _
-			 ("Cannot lock the password file; try again later.\n"));
-		exit (1);
-	}
-	if (!pw_open (O_RDWR)) {
-		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
-		closelog ();
-		fprintf (stderr, _("Cannot open the password file.\n"));
-		pw_unlock ();
-		exit (1);
-	}
-
-	/*
-	 * Get the entry to update using pw_locate() - we want the real
-	 * one from /etc/passwd, not the one from getpwnam() which could
-	 * contain the shadow password if (despite the warnings) someone
-	 * enables AUTOSHADOW (or SHADOW_COMPAT in libc).  --marekm
-	 */
-	pw = pw_locate (user);
-	if (!pw) {
-		pw_unlock ();
-		fprintf (stderr,
-			 _("%s: %s not found in /etc/passwd\n"), Prog, user);
-		exit (1);
-	}
-
-	/*
-	 * Make a copy of the entry, then change the shell field. The other
-	 * fields remain unchanged.
-	 */
-	pwent = *pw;
-	pwent.pw_shell = loginsh;
-
-	/*
-	 * Update the passwd file entry. If there is a DBM file, update
-	 * that entry as well.
-	 */
-	if (!pw_update (&pwent)) {
-		SYSLOG ((LOG_ERR, "error updating passwd entry"));
-		closelog ();
-		fprintf (stderr, _("Error updating the password entry.\n"));
-		pw_unlock ();
-		exit (1);
-	}
-
-	/*
-	 * Changes have all been made, so commit them and unlock the file.
-	 */
-	if (!pw_close ()) {
-		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
-		closelog ();
-		fprintf (stderr, _("Cannot commit password file changes.\n"));
-		pw_unlock ();
-		exit (1);
-	}
-	if (!pw_unlock ()) {
-		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
-		closelog ();
-		fprintf (stderr, _("Cannot unlock the password file.\n"));
-		exit (1);
-	}
 	SYSLOG ((LOG_INFO, "changed user `%s' shell to `%s'", user, loginsh));
 
 	nscd_flush_cache ("passwd");
