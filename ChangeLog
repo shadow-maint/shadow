@@ -1,6 +1,8 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/chsh.c: Split process_flags() out of main().
+	* src/chsh.c: Split process_flags(), and check_perms() out of main().
+	* src/chsh.c: Before pam_end(), the return value of the previous
+	pam API was already checked. No need to validate it again.
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 

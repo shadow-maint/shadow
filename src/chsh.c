@@ -72,6 +72,7 @@ static void new_fields (void);
 static int check_shell (const char *);
 static int restricted_shell (const char *);
 static void process_flags (int argc, char **argv);
+static void check_perms (const struct passwd *pw);
 
 /*
  * usage - print command line syntax and exit
@@ -209,6 +210,107 @@ static void process_flags (int argc, char **argv)
 }
 
 /*
+ * check_perms - check if the caller is allowed to add a group
+ *
+ *	Non-root users are only allowed to change their shell, if their current
+ *	shell is not a restricted shell.
+ *
+ *	Non-root users must be authenticated.
+ *
+ *	It will not return if the user is not allowed.
+ */
+static void check_perms (const struct passwd *pw)
+{
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	int retval;
+	struct passwd *pampw;
+#endif
+
+	/*
+	 * Non-privileged users are only allowed to change the shell if the
+	 * UID of the user matches the current real UID.
+	 */
+	if (!amroot && pw->pw_uid != getuid ()) {
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		closelog ();
+		fprintf (stderr,
+		         _("You may not change the shell for %s.\n"), user);
+		exit (1);
+	}
+
+	/*
+	 * Non-privileged users are only allowed to change the shell if it
+	 * is not a restricted one.
+	 */
+	if (!amroot && restricted_shell (pw->pw_shell)) {
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		closelog ();
+		fprintf (stderr,
+		         _("You may not change the shell for %s.\n"), user);
+		exit (1);
+	}
+#ifdef WITH_SELINUX
+	/*
+	 * If the UID of the user does not match the current real UID,
+	 * check if the change is allowed by SELinux policy.
+	 */
+	if ((pw->pw_uid != getuid ())
+	    && (is_selinux_enabled () > 0)
+	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
+		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
+		closelog ();
+		fprintf (stderr,
+		         _("You may not change the shell for %s.\n"), user);
+		exit (1);
+	}
+#endif
+
+#ifndef USE_PAM
+	/*
+	 * Non-privileged users are optionally authenticated (must enter
+	 * the password of the user whose information is being changed)
+	 * before any changes can be made. Idea from util-linux
+	 * chfn/chsh.  --marekm
+	 */
+	if (!amroot && getdef_bool ("CHSH_AUTH")) {
+		passwd_check (pw->pw_name, pw->pw_passwd, "chsh");
+        }
+
+#else				/* !USE_PAM */
+	retval = PAM_SUCCESS;
+
+	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+	if (pampw == NULL) {
+		retval = PAM_USER_UNKNOWN;
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_start ("chsh", pampw->pw_name, &conv, &pamh);
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_authenticate (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval == PAM_SUCCESS) {
+		retval = pam_acct_mgmt (pamh, 0);
+		if (retval != PAM_SUCCESS) {
+			pam_end (pamh, retval);
+		}
+	}
+
+	if (retval != PAM_SUCCESS) {
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+		exit (E_NOPERM);
+	}
+#endif				/* USE_PAM */
+}
+
+/*
  * chsh - this command controls changes to the user's shell
  *
  *	The only supported option is -s which permits the the login shell to
@@ -220,11 +322,6 @@ int main (int argc, char **argv)
 	int sflg = 0;		/* -s - set shell from command line  */
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;	/* New password entry                */
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
 
 	sanitize_env ();
 
@@ -295,90 +392,7 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	/*
-	 * Non-privileged users are only allowed to change the shell if the
-	 * UID of the user matches the current real UID.
-	 */
-	if (!amroot && pw->pw_uid != getuid ()) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
-		closelog ();
-		fprintf (stderr,
-			 _("You may not change the shell for %s.\n"), user);
-		exit (1);
-	}
-
-	/*
-	 * Non-privileged users are only allowed to change the shell if it
-	 * is not a restricted one.
-	 */
-	if (!amroot && restricted_shell (pw->pw_shell)) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
-		closelog ();
-		fprintf (stderr,
-			 _("You may not change the shell for %s.\n"), user);
-		exit (1);
-	}
-#ifdef WITH_SELINUX
-	/*
-	 * If the UID of the user does not match the current real UID,
-	 * check if the change is allowed by SELinux policy.
-	 */
-	if ((pw->pw_uid != getuid ())
-	    && (is_selinux_enabled () > 0)
-	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
-		SYSLOG ((LOG_WARN, "can't change shell for `%s'", user));
-		closelog ();
-		fprintf (stderr,
-			 _("You may not change the shell for %s.\n"), user);
-		exit (1);
-	}
-#endif
-
-#ifndef USE_PAM
-	/*
-	 * Non-privileged users are optionally authenticated (must enter
-	 * the password of the user whose information is being changed)
-	 * before any changes can be made. Idea from util-linux
-	 * chfn/chsh.  --marekm
-	 */
-	if (!amroot && getdef_bool ("CHSH_AUTH"))
-		passwd_check (pw->pw_name, pw->pw_passwd, "chsh");
-
-#else				/* !USE_PAM */
-	retval = PAM_SUCCESS;
-
-	{
-		struct passwd *pampw;
-		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-		if (pampw == NULL) {
-			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (retval == PAM_SUCCESS) {
-			retval = pam_start ("chsh", pampw->pw_name,
-					    &conv, &pamh);
-		}
-	}
-
-	if (retval == PAM_SUCCESS) {
-		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval == PAM_SUCCESS) {
-		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
-	}
-
-	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (E_NOPERM);
-	}
-#endif				/* USE_PAM */
+	check_perms (pw);
 
 	/*
 	 * Now get the login shell. Either get it from the password
@@ -501,8 +515,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();
