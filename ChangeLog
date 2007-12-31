@@ -1,3 +1,24 @@
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chage.c: Fix typo: s/maximim/maximum/
+	* src/chage.c: New function: fail_exit(). Change most of the exit()
+	to a fail_exit, which makes sure the files are unlocked (new global
+	variables: pw_locked, spw_locked), the PAM transaction is ended, and
+	the failure is logged to libaudit (use a global user_name and user_uid
+	for logging).
+	* src/chage.c: Compilation fix for PAM support (pamh needs to be
+	global since the function split).
+	* src/chage.c: Document process_flags(), check_flags(), check_perms(),
+	open_files(), and close_files().
+	* src/chage.c: Split update_age() and get_defaults() out of main()
+	* src/chage.c: Drop the privileges just after opening the files.
+	* src/chage.c: Do not log to audit only if the user has an entry in
+	the shadow file.
+	* NEWS, src/chage.c (open_files): Also open the password file for
+	writing. This fix chage when the user only has a password entry (and
+	no shadow entries). Use default values that don't change the behavior
+	of the account for the fields that are not specified.
+
 2007-12-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupadd.c: Compilation fix for PAM support (pamh needs to be

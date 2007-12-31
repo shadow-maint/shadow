@@ -32,6 +32,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * The new users are no more added to the list of members of their groups
     because the membership is already set by their primary group.
   * Added support for gshadow.
+- chage
+  * Fix bug which forbid to set the aging information of an account with a
+    passwd entry, but no shadow entry.
 
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 
