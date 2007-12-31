@@ -127,6 +127,7 @@ static void print_one (const struct passwd *pw)
 static void print (void)
 {
 	off_t offset;
+	uid_t user;
 
 	setpwent ();
 	while ((pwent = getpwent ())) {
@@ -200,7 +201,7 @@ int main (int argc, char **argv)
 					umax = umin;
 				} else {
 					char *endptr = NULL;
-					user = strtol(optarg, &endptr, 10);
+					uid_t user = strtol(optarg, &endptr, 10);
 					if (*optarg != '\0' && *endptr == '\0') {
 						if (user < 0) {
 							/* -<userid> */
