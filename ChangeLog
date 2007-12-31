@@ -9,6 +9,7 @@
 	* src/chfn.c: Avoid implicit brackets.
 	* src/chfn.c: Document may_change_field().
 	* src/chfn.c: Avoid implicit conversions to booleans.
+	* src/chfn.c: Avoid assignments in comparisons.
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
