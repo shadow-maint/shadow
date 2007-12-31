@@ -142,8 +142,9 @@ static int check_shell (const char *sh)
 #ifdef HAVE_GETUSERSHELL
 	setusershell ();
 	while ((cp = getusershell ())) {
-		if (*cp == '#')
+		if (*cp == '#') {
 			continue;
+		}
 
 		if (strcmp (cp, sh) == 0) {
 			found = 1;
@@ -156,11 +157,13 @@ static int check_shell (const char *sh)
 		return 0;
 
 	while (fgets (buf, sizeof (buf), fp)) {
-		if ((cp = strrchr (buf, '\n')))
+		if ((cp = strrchr (buf, '\n'))) {
 			*cp = '\0';
+		}
 
-		if (buf[0] == '#')
+		if (buf[0] == '#') {
 			continue;
+		}
 
 		if (strcmp (buf, sh) == 0) {
 			found = 1;
@@ -499,8 +502,9 @@ int main (int argc, char **argv)
 	 * Now get the login shell. Either get it from the password
 	 * file, or use the value from the command line.
 	 */
-	if (!sflg)
+	if (!sflg) {
 		STRFCPY (loginsh, pw->pw_shell);
+	}
 
 	/*
 	 * If the login shell was not set on the command line, let the user
@@ -541,3 +545,4 @@ int main (int argc, char **argv)
 	closelog ();
 	exit (E_SUCCESS);
 }
+
