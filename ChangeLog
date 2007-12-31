@@ -1,5 +1,9 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chsh.c: Split process_flags() out of main().
+
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chfn.c: New function: process_flags() split out of main().
 	The flags variables are now global.
 	* src/chfn.c: New functions: check_perms(), update_gecos(),

@@ -71,6 +71,7 @@ static void usage (void);
 static void new_fields (void);
 static int check_shell (const char *);
 static int restricted_shell (const char *);
+static void process_flags (int argc, char **argv);
 
 /*
  * usage - print command line syntax and exit
@@ -168,6 +169,46 @@ static int check_shell (const char *sh)
 }
 
 /*
+ *  * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
+ */
+static void process_flags (int argc, char **argv)
+{
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"help", no_argument, NULL, 'h'},
+		{"shell", required_argument, NULL, 's'},
+		{NULL, 0, NULL, '\0'}
+	};
+
+	while ((c =
+		getopt_long (argc, argv, "hs:", long_options,
+		             &option_index)) != -1) {
+		switch (c) {
+		case 'h':
+			usage ();
+			break;
+		case 's':
+			sflg++;
+			STRFCPY (loginsh, optarg);
+			break;
+		default:
+			usage ();
+		}
+	}
+
+	/*
+	 * There should be only one remaining argument at most and it should
+	 * be the user's name.
+	 */
+	if (argc > (optind + 1)) {
+		usage ();
+	}
+}
+
+/*
  * chsh - this command controls changes to the user's shell
  *
  *	The only supported option is -s which permits the the login shell to
@@ -204,42 +245,8 @@ int main (int argc, char **argv)
 
 	OPENLOG ("chsh");
 
-	/*
-	 * There is only one option, but use getopt() anyway to
-	 * keep things consistent.
-	 */
-	{
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"help", no_argument, NULL, 'h'},
-			{"shell", required_argument, NULL, 's'},
-			{NULL, 0, NULL, '\0'}
-		};
-
-		while ((c =
-			getopt_long (argc, argv, "hs:", long_options,
-				     &option_index)) != -1) {
-			switch (c) {
-			case 'h':
-				usage ();
-				break;
-			case 's':
-				sflg++;
-				STRFCPY (loginsh, optarg);
-				break;
-			default:
-				usage ();
-			}
-		}
-	}
-
-	/*
-	 * There should be only one remaining argument at most and it should
-	 * be the user's name.
-	 */
-	if (argc > optind + 1)
-		usage ();
+	/* parse the command line options */
+	process_flags (argc, argv);
 
 	/*
 	 * Get the name of the user to check. It is either the command line
