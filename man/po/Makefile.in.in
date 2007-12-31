@@ -49,6 +49,9 @@ POTFILES = \
 .SUFFIXES:
 .SUFFIXES: .po .sed .sin .nop .po-create .po-update
 
+remove-potcdate.sin: ../../po/remove-potcdate.sin
+	cp ../../po/remove-potcdate.sin .
+
 .sin.sed:
 	sed -e '/^#/d' $< > t-$@
 	mv t-$@ $@

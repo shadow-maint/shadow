@@ -1,5 +1,11 @@
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/Makefile.in.in: If remove-potcdate.sin does not exist,
+	use the one from teh po directory (it is not installed
+	automatically by autopoint.
+
+2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.h: Fix the type of the bitfields in the commonio_entry
 	and commonio_db structures to unsigned int (instead of int).
 
