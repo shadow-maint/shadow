@@ -16,8 +16,10 @@
 	the shadow file.
 	* NEWS, src/chage.c (open_files): Also open the password file for
 	writing. This fix chage when the user only has a password entry (and
-	no shadow entries). Use default values that don't change the behavior
-	of the account for the fields that are not specified.
+	no shadow entries).
+	* src/chage.c (get_defaults): Use default values that don't change the
+	behavior of the account for the fields that are not specified when the
+	user has no shadow entry.
 
 2007-12-30  Nicolas François  <nicolas.francois@centraliens.net>
 
