@@ -5,36 +5,35 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 *** general:
 - packaging
   * Do not install the shadow library per default.
+- chage
+  * Fix bug which forbid to set the aging information of an account with a
+    passwd entry, but no shadow entry.
+- login
+  * Use PATH and SUPATH to set the PATH environment variable, even when
+    support for PAM is enabled.
+- lastlog
+  * Accept users specified as a numerical UID, or ranges of users (-user,
+    user-, user1-user2).
+- newusers
+  * The new users are no more added to the list of members of their groups
+    because the membership is already set by their primary group.
+  * Added support for gshadow.
+- passwd
+  * Make sure that no more than one username argument was provided.
+- su
+  * su's arguments are now reordered. If needed, use -- to separate su's
+    options from the shell's options.
+  * If started as init, start a new session.
+- sulogin
+  * If started as init, start a new session.
 - useradd
   * New option -l to avoid adding the user to the lastlog and faillog databases.
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.
-- su
-  * su's arguments are now reordered. If needed, use -- to separate su's
-    options from the shell's options.
-- lastlog
-  * Accept users specified as a numerical UID, or ranges of users (-user,
-    user-, user1-user2).
-- passwd
-  * Make sure that no more than one username argument was provided.
-- su
-  * If started as init, start a new session.
-- sulogin
-  * If started as init, start a new session.
-- login
-  * Use PATH and SUPATH to set the PATH environment variable, even when
-    support for PAM is enabled.
 - vipw/vigr
   * Recommend editing the shadowed (resp. regular) file if the regular (resp.
     shadowed) file was edited.
-- newusers
-  * The new users are no more added to the list of members of their groups
-    because the membership is already set by their primary group.
-  * Added support for gshadow.
-- chage
-  * Fix bug which forbid to set the aging information of an account with a
-    passwd entry, but no shadow entry.
 
 shadow-4.0.18.2 -> shadow-4.1.0						09-12-2008
 
