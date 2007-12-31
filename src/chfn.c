@@ -105,7 +105,16 @@ static void usage (void)
 	exit (E_USAGE);
 }
 
-
+/*
+ * may_change_field - indicate if the user is allowed to change a given field
+ *                    of her gecos information
+ *
+ *	root can change any field.
+ *
+ *	field should be one of 'f', 'r', 'w', 'h'
+ *
+ *	Return 1 if the user can change the field and 0 otherwise.
+ */
 static int may_change_field (int field)
 {
 	const char *cp;
