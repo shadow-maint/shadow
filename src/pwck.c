@@ -388,7 +388,7 @@ static void check_pw_file (int *errors, int *changed)
 		}
 
 		/*
-		 * Make sure this entry exists in the /etc/gshadow file.
+		 * Make sure this entry exists in the /etc/shadow file.
 		 */
 
 		if (is_shadow) {
@@ -455,7 +455,7 @@ static void check_spw_file (int *errors, int *changed)
 	 */
 	for (spe = __spw_get_head (); spe; spe = spe->next) {
 		/*
-		 * Do not treat lines which were missing in gshadow
+		 * Do not treat lines which were missing in shadow
 		 * and were added earlier.
 		 */
 		if (spe->line == NULL)
