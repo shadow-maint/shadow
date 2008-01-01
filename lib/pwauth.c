@@ -207,4 +207,6 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 		strzero (clear);
 	return retval;
 }
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif				/* !USE_PAM */
