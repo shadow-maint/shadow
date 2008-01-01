@@ -55,6 +55,9 @@ static int is_newgrp;
 
 /* local function prototypes */
 static void usage (void);
+static void check_perms (const struct group *grp,
+                         struct passwd *pwd,
+                         const char *groupname);
 
 /*
  * usage - print command usage message
@@ -97,25 +100,109 @@ static struct group *find_matching_group (const char *name, gid_t gid)
 }
 
 /*
+ * check_perms - check if the user is allowed to switch to this group
+ *
+ *	If needed, the user will be authenticated.
+ *
+ *	It will not return if the user could not be authenticated.
+ */
+static void check_perms (const struct group *grp,
+                         struct passwd *pwd,
+                         const char *groupname)
+{
+	int needspasswd = 0;
+	struct spwd *spwd;
+	char *cp;
+	const char *cpasswd;
+
+	/*
+	 * see if she is a member of this group (i.e. in the list of
+	 * members of the group, or if the group is her primary group).
+	 *
+	 * If she isn't a member, she needs to provide the group password.
+	 * If there is no group password, she will be denied access
+	 * anyway.
+	 *
+	 */
+	if (grp->gr_gid != pwd->pw_gid && !is_on_list (grp->gr_mem, pwd->pw_name))
+		needspasswd = 1;
+
+	/*
+	 * If she does not have either a shadowed password, or a regular
+	 * password, and the group has a password, she needs to give the
+	 * group password.
+	 */
+	spwd = xgetspnam (pwd->pw_name);
+	if (NULL != spwd)
+		pwd->pw_passwd = spwd->sp_pwdp;
+
+	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
+		needspasswd = 1;
+
+	/*
+	 * Now I see about letting her into the group she requested. If she
+	 * is the root user, I'll let her in without having to prompt for
+	 * the password. Otherwise I ask for a password if she flunked one
+	 * of the tests above.
+	 */
+	if (getuid () != 0 && needspasswd) {
+		/*
+		 * get the password from her, and set the salt for
+		 * the decryption from the group file.
+		 */
+		cp = getpass (_("Password: "));
+		if (NULL == cp)
+			goto failure;
+
+		/*
+		 * encrypt the key she gave us using the salt from the
+		 * password in the group file. The result of this encryption
+		 * must match the previously encrypted value in the file.
+		 */
+		cpasswd = pw_encrypt (cp, grp->gr_passwd);
+		strzero (cp);
+
+		if (grp->gr_passwd[0] == '\0' ||
+		    strcmp (cpasswd, grp->gr_passwd) != 0) {
+			SYSLOG ((LOG_INFO,
+				 "Invalid password for group `%s' from `%s'",
+				 groupname, pwd->pw_name));
+			sleep (1);
+			fputs (_("Invalid password."), stderr);
+			goto failure;
+		}
+	}
+
+	return;
+
+failure:
+	/* The closelog is probably unnecessary, but it does no
+	 * harm.  -- JWP
+	 */
+	closelog ();
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 0);
+#endif
+	exit (1);
+}
+
+/*
  * newgrp - change the invokers current real and effective group id
  */
 int main (int argc, char **argv)
 {
 	int initflag = 0;
-	int needspasswd = 0;
 	int i;
 	int cflag = 0;
 	int err = 0;
 	gid_t gid;
 	char *cp;
-	const char *cpasswd, *name, *prog;
+	const char *name, *prog;
 	char *group = NULL;
 	char *command = NULL;
 	char **envp = environ;
 	struct passwd *pwd;
 	struct group *grp;
-
-	struct spwd *spwd;
 
 #ifdef SHADOWGRP
 	struct sgrp *sgrp;
@@ -351,62 +438,9 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * see if she is a member of this group (i.e. in the list of
-	 * members of the group, or if the group is her primary group).
-	 *
-	 * If she isn't a member, she needs to provide the group password.
-	 * If there is no group password, she will be denied access
-	 * anyway.
-	 *
+	 * Check if the user is allowed to access this group.
 	 */
-	if (grp->gr_gid != pwd->pw_gid && !is_on_list (grp->gr_mem, name))
-		needspasswd = 1;
-
-	/*
-	 * If she does not have either a shadowed password, or a regular
-	 * password, and the group has a password, she needs to give the
-	 * group password.
-	 */
-	spwd = xgetspnam (name);
-	if (NULL != spwd)
-		pwd->pw_passwd = spwd->sp_pwdp;
-
-	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
-		needspasswd = 1;
-
-	/*
-	 * Now I see about letting her into the group she requested. If she
-	 * is the root user, I'll let her in without having to prompt for
-	 * the password. Otherwise I ask for a password if she flunked one
-	 * of the tests above.
-	 */
-	if (getuid () != 0 && needspasswd) {
-		/*
-		 * get the password from her, and set the salt for
-		 * the decryption from the group file.
-		 */
-		cp = getpass (_("Password: "));
-		if (NULL == cp)
-			goto failure;
-
-		/*
-		 * encrypt the key she gave us using the salt from the
-		 * password in the group file. The result of this encryption
-		 * must match the previously encrypted value in the file.
-		 */
-		cpasswd = pw_encrypt (cp, grp->gr_passwd);
-		strzero (cp);
-
-		if (grp->gr_passwd[0] == '\0' ||
-		    strcmp (cpasswd, grp->gr_passwd) != 0) {
-			SYSLOG ((LOG_INFO,
-				 "Invalid password for group `%s' from `%s'",
-				 group, name));
-			sleep (1);
-			fputs (_("Invalid password."), stderr);
-			goto failure;
-		}
-	}
+	check_perms (grp, pwd, group);
 
 	/*
 	 * all successful validations pass through this point. The group id
