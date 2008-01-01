@@ -66,13 +66,18 @@ extern struct commonio_entry *__spw_get_head (void);
 
 static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
-
 static const char *spw_file = SHADOW_FILE;
+
+static int is_shadow = 0;
+
+/* Options */
 static int read_only = 0;
+static int sort_mode = 0;
 static int quiet = 0;		/* don't report warnings, only errors */
 
 /* local function prototypes */
 static void usage (void);
+static void process_flags (int argc, char **argv);
 
 /*
  * usage - print syntax message and exit
@@ -85,31 +90,13 @@ static void usage (void)
 }
 
 /*
- * pwck - verify password file integrity
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
  */
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
 	int arg;
-	int errors = 0;
-	int changed = 0;
-	struct commonio_entry *pfe, *tpfe;
-	struct passwd *pwd;
-	int sort_mode = 0;
-
-	struct commonio_entry *spe, *tspe;
-	struct spwd *spw;
-	int is_shadow = 0;
-
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	OPENLOG ("pwck");
 
 	/*
 	 * Parse the command line arguments
@@ -156,6 +143,34 @@ int main (int argc, char **argv)
 		is_shadow = 1;
 	} else if (optind == argc)
 		is_shadow = spw_file_present ();
+}
+
+/*
+ * pwck - verify password file integrity
+ */
+int main (int argc, char **argv)
+{
+	int errors = 0;
+	int changed = 0;
+	struct commonio_entry *pfe, *tpfe;
+	struct passwd *pwd;
+
+	struct commonio_entry *spe, *tspe;
+	struct spwd *spw;
+
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	OPENLOG ("pwck");
+
+	/* Parse the command line arguments */
+	process_flags (argc, argv);
 
 	/*
 	 * Lock the files if we aren't in "read-only" mode

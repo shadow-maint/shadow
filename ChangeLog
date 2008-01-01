@@ -1,5 +1,10 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Split process_flags() out of main(). New global
+	variables is_shadow, sort_mode.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/xgetXXbyYY.c: De-comment code (duplicate the entry when
 	the _R function is not present on the system).
 
