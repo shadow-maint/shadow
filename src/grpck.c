@@ -260,11 +260,67 @@ static void close_files (int changed)
 	(void) gr_unlock ();
 }
 
+static int check_members (const char *groupname,
+                          char **members,
+                          const char *fmt_info,
+                          const char *fmt_prompt,
+                          const char *fmt_syslog,
+                          int *errors)
+{
+	int i;
+	int members_changed = 0;
+
+	/*
+	 * Make sure each member exists
+	 */
+	for (i = 0; members[i]; i++) {
+		/* local, no need for xgetpwnam */
+		if (getpwnam (members[i]))
+			continue;
+		/*
+		 * Can't find this user. Remove them
+		 * from the list.
+		 */
+		*errors += 1;
+		printf (fmt_info, groupname, members[i]);
+		printf (fmt_prompt, members[i]);
+
+		if (!yes_or_no (read_only))
+			continue;
+
+		SYSLOG ((LOG_INFO, fmt_syslog, members[i], groupname));
+		members_changed = 1;
+		delete_member (members, members[i]);
+	}
+
+	return members_changed;
+}
+
+static void compare_members_lists (const char *groupname,
+                                   char **members,
+                                   char **other_members,
+                                   const char *file,
+                                   const char *other_file)
+{
+	char **pmem, **other_pmem;
+
+	for (pmem = members; *pmem; pmem++) {
+		for (other_pmem = other_members; *other_pmem; other_pmem++) {
+			if (strcmp (*pmem, *other_pmem) == 0)
+				break;
+		}
+		if (*other_pmem == NULL) {
+			printf
+			    ("'%s' is a member of the '%s' group in %s but not in %s\n",
+			     *pmem, groupname, file, other_file);
+		}
+	}
+}
+
 static void check_grp_file (int *errors, int *changed)
 {
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
-	int i;
 #ifdef SHADOWGRP
 	struct sgrp *sgr;
 #endif
@@ -375,29 +431,12 @@ static void check_grp_file (int *errors, int *changed)
 		    && *(grp->gr_mem[0]) == '\0')
 			grp->gr_mem[0] = (char *) 0;
 
-		/*
-		 * Make sure each member exists
-		 */
-		for (i = 0; grp->gr_mem[i]; i++) {
-			/* local, no need for xgetpwnam */
-			if (getpwnam (grp->gr_mem[i]))
-				continue;
-			/*
-			 * Can't find this user. Remove them
-			 * from the list.
-			 */
-			*errors += 1;
-			printf (_("group %s: no user %s\n"),
-				grp->gr_name, grp->gr_mem[i]);
-			printf (_("delete member '%s'? "), grp->gr_mem[i]);
-
-			if (!yes_or_no (read_only))
-				continue;
-
-			SYSLOG ((LOG_INFO, "delete member '%s' group '%s'",
-				 grp->gr_mem[i], grp->gr_name));
+		if (check_members (grp->gr_name, grp->gr_mem,
+		                   _("group %s: no user %s\n"),
+		                   _("delete member '%s'? "),
+		                   "delete member `%s' from group `%s'",
+		                   errors) == 1) {
 			*changed = 1;
-			delete_member (grp->gr_mem, grp->gr_mem[i]);
 			gre->changed = 1;
 			__gr_set_changed ();
 		}
@@ -450,26 +489,12 @@ static void check_grp_file (int *errors, int *changed)
 				}
 			} else {
 				/**
-				 * Verify that the all members defined in /etc/group are also
+				 * Verify that all the members defined in /etc/group are also
 				 * present in /etc/gshadow.
 				 */
-				char **pgrp_mem, **psgr_mem;
-
-				for (pgrp_mem = grp->gr_mem; *pgrp_mem;
-				     pgrp_mem++) {
-					for (psgr_mem = sgr->sg_mem; *psgr_mem;
-					     psgr_mem++) {
-						if (strcmp
-						    (*pgrp_mem, *psgr_mem) == 0)
-							break;
-					}
-					if (*psgr_mem == NULL) {
-						printf
-						    ("'%s' is a member of the '%s' group in %s but not in %s\n",
-						     *pgrp_mem, sgr->sg_name,
-						     grp_file, sgr_file);
-					}
-				}
+				compare_members_lists (grp->gr_name,
+				                       grp->gr_mem, sgr->sg_mem,
+				                       grp_file, sgr_file);
 			}
 		}
 #endif
@@ -483,7 +508,6 @@ static void check_sgr_file (int *errors, int *changed)
 	struct group *grp;
 	struct commonio_entry *sge, *tsge;
 	struct sgrp *sgr;
-	int i;
 
 	/*
 	 * Loop through the entire shadow group file.
@@ -584,49 +608,20 @@ static void check_sgr_file (int *errors, int *changed)
 			 * Verify that the all members defined in /etc/gshadow are also
 			 * present in /etc/group.
 			 */
-			char **pgrp_mem, **psgr_mem;
-
-			for (psgr_mem = sgr->sg_mem; *psgr_mem; psgr_mem++) {
-				for (pgrp_mem = grp->gr_mem; *pgrp_mem;
-				     pgrp_mem++) {
-					if (strcmp (*pgrp_mem, *psgr_mem) == 0)
-						break;
-				}
-				if (*pgrp_mem == NULL) {
-					printf
-					    ("'%s' is a member of the '%s' group in %s but not in %s\n",
-					     *psgr_mem, sgr->sg_name, sgr_file,
-					     grp_file);
-				}
-			}
+			compare_members_lists (sgr->sg_name,
+			                       sgr->sg_mem, grp->gr_mem,
+			                       sgr_file, grp_file);
 		}
 
 		/*
 		 * Make sure each administrator exists
 		 */
-		for (i = 0; sgr->sg_adm[i]; i++) {
-			/* local, no need for xgetpwnam */
-			if (getpwnam (sgr->sg_adm[i]))
-				continue;
-			/*
-			 * Can't find this user. Remove them
-			 * from the list.
-			 */
-			*errors += 1;
-			printf (_
-				("shadow group %s: no administrative user %s\n"),
-				sgr->sg_name, sgr->sg_adm[i]);
-			printf (_("delete administrative member '%s'? "),
-				sgr->sg_adm[i]);
-
-			if (!yes_or_no (read_only))
-				continue;
-
-			SYSLOG ((LOG_INFO,
-				 "delete admin `%s' from shadow group `%s'",
-				 sgr->sg_adm[i], sgr->sg_name));
+		if (check_members (sgr->sg_name, sgr->sg_adm,
+		                   _("shadow group %s: no administrative user %s\n"),
+		                   _("delete administrative member '%s'? "),
+		                   "delete admin `%s' from shadow group `%s'",
+		                   errors) == 1) {
 			*changed = 1;
-			delete_member (sgr->sg_adm, sgr->sg_adm[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
 		}
@@ -634,27 +629,12 @@ static void check_sgr_file (int *errors, int *changed)
 		/*
 		 * Make sure each member exists
 		 */
-		for (i = 0; sgr->sg_mem[i]; i++) {
-			/* local, no need for xgetpwnam */
-			if (getpwnam (sgr->sg_mem[i]))
-				continue;
-
-			/*
-			 * Can't find this user. Remove them from the list.
-			 */
-			*errors += 1;
-			printf (_("shadow group %s: no user %s\n"),
-				sgr->sg_name, sgr->sg_mem[i]);
-			printf (_("delete member '%s'? "), sgr->sg_mem[i]);
-
-			if (!yes_or_no (read_only))
-				continue;
-
-			SYSLOG ((LOG_INFO,
-				 "delete member `%s' from shadow group `%s'",
-				 sgr->sg_mem[i], sgr->sg_name));
+		if (check_members (sgr->sg_name, sgr->sg_mem,
+		                   _("shadow group %s: no user %s\n"),
+		                   _("delete member '%s'? "),
+		                   "delete member `%s' from shadow group `%s'",
+		                   errors) == 1) {
 			*changed = 1;
-			delete_member (sgr->sg_mem, sgr->sg_mem[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
 		}

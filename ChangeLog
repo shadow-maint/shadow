@@ -5,6 +5,8 @@
 	sort_mode, use_system_grp_file, and use_system_sgr_file.
 	* src/grpck.c: Split check_grp_file() and check_sgr_file() out of
 	main().
+	* src/grpck.c: Split check_members() out of check_grp_file() and
+	check_sgr_file().
 
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
