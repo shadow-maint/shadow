@@ -1535,7 +1535,10 @@ static void create_mail (void)
 	mode_t mode;
 
 	if (strcasecmp (create_mail_spool, "yes") == 0) {
-		spool = getdef_str ("MAIL_DIR") ? : "/var/mail";
+		spool = getdef_str ("MAIL_DIR");
+		if (NULL == spool) {
+			spool = "/var/mail";
+		}
 		file = alloca (strlen (spool) + strlen (user_name) + 2);
 		sprintf (file, "%s/%s", spool, user_name);
 		fd = open (file, O_CREAT | O_WRONLY | O_TRUNC | O_EXCL, 0);

@@ -1,5 +1,9 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Avoid ?: construct without the middle term.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c, src/usermod.c, lib/prototypes.h: The uid and
 	gid parameters can be set to -1 to indicate that the original
 	owners must be kept. Change the types from uid_t/gid_t to a
