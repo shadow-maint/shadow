@@ -329,9 +329,9 @@ static int check_members (const char *groupname,
 	/*
 	 * Make sure each member exists
 	 */
-	for (i = 0; members[i]; i++) {
+	for (i = 0; NULL != members[i]; i++) {
 		/* local, no need for xgetpwnam */
-		if (getpwnam (members[i])) {
+		if (getpwnam (members[i]) != NULL) {
 			continue;
 		}
 		/*
@@ -372,8 +372,8 @@ static void compare_members_lists (const char *groupname,
 {
 	char **pmem, **other_pmem;
 
-	for (pmem = members; *pmem; pmem++) {
-		for (other_pmem = other_members; *other_pmem; other_pmem++) {
+	for (pmem = members; NULL != *pmem; pmem++) {
+		for (other_pmem = other_members; NULL != *other_pmem; other_pmem++) {
 			if (strcmp (*pmem, *other_pmem) == 0) {
 				break;
 			}
@@ -400,7 +400,7 @@ static void check_grp_file (int *errors, int *changed)
 	/*
 	 * Loop through the entire group file.
 	 */
-	for (gre = __gr_get_head (); gre; gre = gre->next) {
+	for (gre = __gr_get_head (); NULL != gre; gre = gre->next) {
 		/*
 		 * Skip all NIS entries.
 		 */
@@ -414,7 +414,7 @@ static void check_grp_file (int *errors, int *changed)
 		 * have no (struct group) entry because they couldn't be
 		 * parsed properly.
 		 */
-		if (!gre->eptr) {
+		if (NULL == gre->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and ask
@@ -454,7 +454,7 @@ static void check_grp_file (int *errors, int *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tgre = __gr_get_head (); tgre; tgre = tgre->next) {
+		for (tgre = __gr_get_head (); NULL != tgre; tgre = tgre->next) {
 
 			const struct group *ent = tgre->eptr;
 
@@ -468,7 +468,7 @@ static void check_grp_file (int *errors, int *changed)
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent) {
+			if (NULL == ent) {
 				continue;
 			}
 
@@ -505,9 +505,10 @@ static void check_grp_file (int *errors, int *changed)
 		 * groups with no members are returned as groups with one
 		 * member "", causing grpck to fail.  --marekm
 		 */
-		if (grp->gr_mem[0] && !grp->gr_mem[1]
-		    && *(grp->gr_mem[0]) == '\0') {
-			grp->gr_mem[0] = (char *) 0;
+		if (   (NULL != grp->gr_mem[0])
+		    && (NULL == grp->gr_mem[1])
+		    && ('\0' == grp->gr_mem[0][0])) {
+			grp->gr_mem[0] = NULL;
 		}
 
 		if (check_members (grp->gr_name, grp->gr_mem,
@@ -548,7 +549,7 @@ static void check_grp_file (int *errors, int *changed)
 					         grp->gr_name, sgr_file));
 					*changed = 1;
 
-					if (!sgr_update (&sg)) {
+					if (sgr_update (&sg) == 0) {
 						fprintf (stderr,
 						         _
 						         ("%s: can't update shadow entry for %s\n"),
@@ -558,7 +559,7 @@ static void check_grp_file (int *errors, int *changed)
 					/* remove password from /etc/group */
 					gr = *grp;
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-					if (!gr_update (&gr)) {
+					if (gr_update (&gr) == 0) {
 						fprintf (stderr,
 						         _
 						         ("%s: can't update entry for group %s\n"),
@@ -594,14 +595,14 @@ static void check_sgr_file (int *errors, int *changed)
 	/*
 	 * Loop through the entire shadow group file.
 	 */
-	for (sge = __sgr_get_head (); sge; sge = sge->next) {
+	for (sge = __sgr_get_head (); NULL != sge; sge = sge->next) {
 
 		/*
 		 * Start with the entries that are completely corrupt. They
 		 * have no (struct sgrp) entry because they couldn't be
 		 * parsed properly.
 		 */
-		if (!sge->eptr) {
+		if (NULL == sge->eptr) {
 
 			/*
 			 * Tell the user this entire line is bogus and ask
@@ -641,7 +642,7 @@ static void check_sgr_file (int *errors, int *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tsge = __sgr_get_head (); tsge; tsge = tsge->next) {
+		for (tsge = __sgr_get_head (); NULL != tsge; tsge = tsge->next) {
 
 			const struct sgrp *ent = tsge->eptr;
 
@@ -655,7 +656,7 @@ static void check_sgr_file (int *errors, int *changed)
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent) {
+			if (NULL == ent) {
 				continue;
 			}
 
@@ -779,7 +780,7 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors) {
+	if (errors != 0) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
