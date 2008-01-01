@@ -119,13 +119,17 @@ static void delete_member (char **list, const char *member)
 {
 	int i;
 
-	for (i = 0; list[i]; i++)
-		if (list[i] == member)
+	for (i = 0; list[i]; i++) {
+		if (list[i] == member) {
 			break;
+		}
+	}
 
-	if (list[i])
-		for (; list[i]; i++)
+	if (list[i]) {
+		for (; list[i]; i++) {
 			list[i] = list[i + 1];
+		}
+	}
 }
 
 /*
@@ -327,8 +331,9 @@ static int check_members (const char *groupname,
 	 */
 	for (i = 0; members[i]; i++) {
 		/* local, no need for xgetpwnam */
-		if (getpwnam (members[i]))
+		if (getpwnam (members[i])) {
 			continue;
+		}
 		/*
 		 * Can't find this user. Remove them
 		 * from the list.
@@ -337,8 +342,9 @@ static int check_members (const char *groupname,
 		printf (fmt_info, groupname, members[i]);
 		printf (fmt_prompt, members[i]);
 
-		if (!yes_or_no (read_only))
+		if (!yes_or_no (read_only)) {
 			continue;
+		}
 
 		SYSLOG ((LOG_INFO, fmt_syslog, members[i], groupname));
 		members_changed = 1;
@@ -368,8 +374,9 @@ static void compare_members_lists (const char *groupname,
 
 	for (pmem = members; *pmem; pmem++) {
 		for (other_pmem = other_members; *other_pmem; other_pmem++) {
-			if (strcmp (*pmem, *other_pmem) == 0)
+			if (strcmp (*pmem, *other_pmem) == 0) {
 				break;
+			}
 		}
 		if (*other_pmem == NULL) {
 			printf
@@ -398,8 +405,9 @@ static void check_grp_file (int *errors, int *changed)
 		 * Skip all NIS entries.
 		 */
 
-		if (gre->line[0] == '+' || gre->line[0] == '-')
+		if ((gre->line[0] == '+') || (gre->line[0] == '-')) {
 			continue;
+		}
 
 		/*
 		 * Start with the entries that are completely corrupt. They
@@ -419,8 +427,9 @@ static void check_grp_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only))
+			if (!yes_or_no (read_only)) {
 				continue;
+			}
 
 			/*
 			 * All group file deletions wind up here. This code
@@ -452,17 +461,20 @@ static void check_grp_file (int *errors, int *changed)
 			/*
 			 * Don't check this entry
 			 */
-			if (tgre == gre)
+			if (tgre == gre) {
 				continue;
+			}
 
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent)
+			if (!ent) {
 				continue;
+			}
 
-			if (strcmp (grp->gr_name, ent->gr_name) != 0)
+			if (strcmp (grp->gr_name, ent->gr_name) != 0) {
 				continue;
+			}
 
 			/*
 			 * Tell the user this entry is a duplicate of
@@ -475,8 +487,9 @@ static void check_grp_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_gr;
+			}
 		}
 
 		/*
@@ -493,8 +506,9 @@ static void check_grp_file (int *errors, int *changed)
 		 * member "", causing grpck to fail.  --marekm
 		 */
 		if (grp->gr_mem[0] && !grp->gr_mem[1]
-		    && *(grp->gr_mem[0]) == '\0')
+		    && *(grp->gr_mem[0]) == '\0') {
 			grp->gr_mem[0] = (char *) 0;
+		}
 
 		if (check_members (grp->gr_name, grp->gr_mem,
 		                   _("group %s: no user %s\n"),
@@ -600,8 +614,9 @@ static void check_sgr_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only))
+			if (!yes_or_no (read_only)) {
 				continue;
+			}
 
 			/*
 			 * All shadow group file deletions wind up here. 
@@ -633,17 +648,20 @@ static void check_sgr_file (int *errors, int *changed)
 			/*
 			 * Don't check this entry
 			 */
-			if (tsge == sge)
+			if (tsge == sge) {
 				continue;
+			}
 
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent)
+			if (!ent) {
 				continue;
+			}
 
-			if (strcmp (sgr->sg_name, ent->sg_name) != 0)
+			if (strcmp (sgr->sg_name, ent->sg_name) != 0) {
 				continue;
+			}
 
 			/*
 			 * Tell the user this entry is a duplicate of
@@ -656,8 +674,9 @@ static void check_sgr_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_sg;
+			}
 		}
 
 		/*
@@ -669,8 +688,9 @@ static void check_sgr_file (int *errors, int *changed)
 				grp_file);
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_sg;
+			}
 		} else {
 			/**
 			 * Verify that the all members defined in /etc/gshadow are also
@@ -737,8 +757,9 @@ int main (int argc, char **argv)
 	if (sort_mode) {
 		gr_sort ();
 #ifdef	SHADOWGRP
-		if (is_shadow)
+		if (is_shadow) {
 			sgr_sort ();
+		}
 		changed = 1;
 #endif
 	} else {
@@ -758,10 +779,12 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors)
+	if (errors) {
 		printf (changed ?
 			_("%s: the files have been updated\n") :
 			_("%s: no changes\n"), Prog);
+	}
 
 	exit (errors ? E_BAD_ENTRY : E_OKAY);
 }
+
