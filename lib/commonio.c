@@ -395,6 +395,9 @@ static int name_is_nis (const char *n)
 #if KEEP_NIS_AT_END
 static void add_one_entry_nis (struct commonio_db *, struct commonio_entry *);
 
+/*
+ * Insert an entry between the regular entries, and the NIS entries.
+ */
 static void
 add_one_entry_nis (struct commonio_db *db, struct commonio_entry *newp)
 {
@@ -633,6 +636,11 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
 	return 0;
 }
 
+/*
+ * write_all - Write the database to its file.
+ *
+ * It returns 0 if all the entries could be writen correctly.
+ */
 static int write_all (const struct commonio_db *db)
 {
 	const struct commonio_entry *p;
@@ -868,7 +876,9 @@ void commonio_del_entry (struct commonio_db *db, const struct commonio_entry *p)
 	db->changed = 1;
 }
 
-
+/*
+ * commonio_remove - Remove the entry of the given name from the database.
+ */
 int commonio_remove (struct commonio_db *db, const char *name)
 {
 	struct commonio_entry *p;
@@ -894,7 +904,15 @@ int commonio_remove (struct commonio_db *db, const char *name)
 	return 1;
 }
 
-
+/*
+ * commonio_locate - Find the first entry with the specified name in
+ *                   the database.
+ *
+ *	If found, it returns the entry and set the cursor of the database to
+ *	that entry.
+ *
+ *	Otherwise, it returns NULL.
+ */
 const void *commonio_locate (struct commonio_db *db, const char *name)
 {
 	struct commonio_entry *p;
@@ -912,7 +930,11 @@ const void *commonio_locate (struct commonio_db *db, const char *name)
 	return p->eptr;
 }
 
-
+/*
+ * commonio_rewind - Restore the database cursor to the first entry.
+ *
+ * It returns 0 on error, 1 on success.
+ */
 int commonio_rewind (struct commonio_db *db)
 {
 	if (!db->isopen) {
@@ -923,7 +945,11 @@ int commonio_rewind (struct commonio_db *db)
 	return 1;
 }
 
-
+/*
+ * commonio_next - Return the next entry of the specified database
+ *
+ * It returns the next entry, or NULL if no other entries could be found.
+ */
 const void *commonio_next (struct commonio_db *db)
 {
 	void *eptr;

@@ -1,5 +1,10 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: Document add_one_entry_nis(), write_all(),
+	commonio_remove(), commonio_locate(), and commonio_rewind().
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Avoid implicit brackets.
 	* src/pwck.c: Avoid implicit conversions to booleans.
 
