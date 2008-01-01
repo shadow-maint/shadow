@@ -82,6 +82,8 @@ static void usage (void);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
 static void close_files (int changed);
+static void check_pw_file (int *errors, int *changed);
+static void check_spw_file (int *errors, int *changed);
 
 /*
  * usage - print syntax message and exit
@@ -240,41 +242,13 @@ static void close_files (int changed)
 }
 
 /*
- * pwck - verify password file integrity
+ * check_pw_file - check the content of the passwd file
  */
-int main (int argc, char **argv)
+static void check_pw_file (int *errors, int *changed)
 {
-	int errors = 0;
-	int changed = 0;
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
-
-	struct commonio_entry *spe, *tspe;
 	struct spwd *spw;
-
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	OPENLOG ("pwck");
-
-	/* Parse the command line arguments */
-	process_flags (argc, argv);
-
-	open_files ();
-
-	if (sort_mode) {
-		pw_sort ();
-		if (is_shadow)
-			spw_sort ();
-		changed = 1;
-		goto write_and_bye;
-	}
 
 	/*
 	 * Loop through the entire password file.
@@ -299,7 +273,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("invalid password file entry\n"));
 			printf (_("delete line '%s'? "), pfe->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -316,7 +290,7 @@ int main (int argc, char **argv)
 		      delete_pw:
 			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
 				 pfe->line));
-			changed++;
+			*changed = 1;
 
 			__pw_del_entry (pfe);
 			continue;
@@ -354,7 +328,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("duplicate password entry\n"));
 			printf (_("delete line '%s'? "), pfe->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -368,7 +342,7 @@ int main (int argc, char **argv)
 		 */
 		if (!check_user_name (pwd->pw_name)) {
 			printf (_("invalid user name '%s'\n"), pwd->pw_name);
-			errors++;
+			*errors += 1;
 		}
 
 		/*
@@ -383,7 +357,7 @@ int main (int argc, char **argv)
 
 			printf (_("user %s: no group %u\n"),
 				pwd->pw_name, pwd->pw_gid);
-			errors++;
+			*errors += 1;
 		}
 
 		/*
@@ -396,7 +370,7 @@ int main (int argc, char **argv)
 			printf (_
 				("user %s: directory %s does not exist\n"),
 				pwd->pw_name, pwd->pw_dir);
-			errors++;
+			*errors += 1;
 		}
 
 		/*
@@ -410,7 +384,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("user %s: program %s does not exist\n"),
 				pwd->pw_name, pwd->pw_shell);
-			errors++;
+			*errors += 1;
 		}
 
 		/*
@@ -425,7 +399,7 @@ int main (int argc, char **argv)
 					spw_file);
 				printf (_("add user '%s' in %s? "),
 					pwd->pw_name, spw_file);
-				errors++;
+				*errors += 1;
 				if (yes_or_no (read_only)) {
 					struct spwd sp;
 					struct passwd pw;
@@ -443,7 +417,7 @@ int main (int argc, char **argv)
 					sp.sp_flag = -1;
 					sp.sp_lstchg =
 					    time ((time_t *) 0) / (24L * 3600L);
-					changed++;
+					*changed = 1;
 
 					if (!spw_update (&sp)) {
 						fprintf (stderr,
@@ -466,9 +440,15 @@ int main (int argc, char **argv)
 			}
 		}
 	}
+}
 
-	if (!is_shadow)
-		goto shadow_done;
+/*
+ * check_spw_file - check the content of the shadowed password file (shadow)
+ */
+static void check_spw_file (int *errors, int *changed)
+{
+	struct commonio_entry *spe, *tspe;
+	struct spwd *spw;
 
 	/*
 	 * Loop through the entire shadow password file.
@@ -500,7 +480,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("invalid shadow password file entry\n"));
 			printf (_("delete line '%s'? "), spe->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -517,7 +497,7 @@ int main (int argc, char **argv)
 		      delete_spw:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 spe->line));
-			changed++;
+			*changed = 1;
 
 			__spw_del_entry (spe);
 			continue;
@@ -555,7 +535,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("duplicate shadow password entry\n"));
 			printf (_("delete line '%s'? "), spe->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -576,7 +556,7 @@ int main (int argc, char **argv)
 			printf (_("no matching password file entry in %s\n"),
 				pwd_file);
 			printf (_("delete line '%s'? "), spe->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -592,9 +572,49 @@ int main (int argc, char **argv)
 			printf (_
 				("user %s: last password change in the future\n"),
 				spw->sp_namp);
-			errors++;
+			*errors += 1;
 		}
 	}
+}
+
+/*
+ * pwck - verify password file integrity
+ */
+int main (int argc, char **argv)
+{
+	int errors = 0;
+	int changed = 0;
+
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	OPENLOG ("pwck");
+
+	/* Parse the command line arguments */
+	process_flags (argc, argv);
+
+	open_files ();
+
+	if (sort_mode) {
+		pw_sort ();
+		if (is_shadow)
+			spw_sort ();
+		changed = 1;
+		goto write_and_bye;
+	}
+
+	check_pw_file (&errors, &changed);
+
+	if (!is_shadow)
+		goto shadow_done;
+
+	check_spw_file (&errors, &changed);
 
       shadow_done:
 
