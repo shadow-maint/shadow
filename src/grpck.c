@@ -274,13 +274,13 @@ static void close_files (int changed)
 	if (changed) {
 		if (gr_close () == 0) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, grp_file);
+			         Prog, grp_file);
 			exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_close () == 0)) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, sgr_file);
+			         Prog, sgr_file);
 			exit (E_CANT_UPDATE);
 		}
 #endif
@@ -439,7 +439,7 @@ static void check_grp_file (int *errors, int *changed)
 			 */
 		      delete_gr:
 			SYSLOG ((LOG_INFO, "delete group line `%s'",
-				 gre->line));
+			         gre->line));
 			*changed = 1;
 
 			__gr_del_entry (gre);
@@ -529,10 +529,10 @@ static void check_grp_file (int *errors, int *changed)
 			sgr = (struct sgrp *) sgr_locate (grp->gr_name);
 			if (sgr == NULL) {
 				printf (_
-					("no matching group file entry in %s\n"),
-					sgr_file);
+				        ("no matching group file entry in %s\n"),
+				        sgr_file);
 				printf (_("add group '%s' in %s ?"),
-					grp->gr_name, sgr_file);
+				        grp->gr_name, sgr_file);
 				*errors += 1;
 				if (yes_or_no (read_only)) {
 					struct sgrp sg;
@@ -544,15 +544,15 @@ static void check_grp_file (int *errors, int *changed)
 					sg.sg_adm = &empty;
 					sg.sg_mem = grp->gr_mem;
 					SYSLOG ((LOG_INFO,
-						 "add group `%s' to `%s'",
-						 grp->gr_name, sgr_file));
+					         "add group `%s' to `%s'",
+					         grp->gr_name, sgr_file));
 					*changed = 1;
 
 					if (!sgr_update (&sg)) {
 						fprintf (stderr,
-							 _
-							 ("%s: can't update shadow entry for %s\n"),
-							 Prog, sg.sg_name);
+						         _
+						         ("%s: can't update shadow entry for %s\n"),
+						         Prog, sg.sg_name);
 						exit (E_CANT_UPDATE);
 					}
 					/* remove password from /etc/group */
@@ -560,9 +560,9 @@ static void check_grp_file (int *errors, int *changed)
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (!gr_update (&gr)) {
 						fprintf (stderr,
-							 _
-							 ("%s: can't update entry for group %s\n"),
-							 Prog, gr.gr_name);
+						         _
+						         ("%s: can't update entry for group %s\n"),
+						         Prog, gr.gr_name);
 						exit (E_CANT_UPDATE);
 					}
 				}
@@ -626,7 +626,7 @@ static void check_sgr_file (int *errors, int *changed)
 			 */
 		      delete_sg:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
-				 sge->line));
+			         sge->line));
 			*changed = 1;
 
 			__sgr_del_entry (sge);
@@ -685,7 +685,7 @@ static void check_sgr_file (int *errors, int *changed)
 		grp = (struct group *) gr_locate (sgr->sg_name);
 		if (grp == NULL) {
 			printf (_("no matching group file entry in %s\n"),
-				grp_file);
+			        grp_file);
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
 			if (yes_or_no (read_only)) {
@@ -781,8 +781,8 @@ int main (int argc, char **argv)
 	 */
 	if (errors) {
 		printf (changed ?
-			_("%s: the files have been updated\n") :
-			_("%s: no changes\n"), Prog);
+		        _("%s: the files have been updated\n") :
+		        _("%s: no changes\n"), Prog);
 	}
 
 	exit (errors ? E_BAD_ENTRY : E_OKAY);
