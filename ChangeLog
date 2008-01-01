@@ -1,6 +1,7 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwck.c: Avoid implicit brackets.
+	* src/pwck.c: Avoid implicit conversions to booleans.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

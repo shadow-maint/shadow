@@ -145,7 +145,7 @@ static void process_flags (int argc, char **argv)
 		pw_name (pwd_file);
 		use_system_pw_file = 0;
 	}
-	if (optind + 2 == argc) {
+	if ((optind + 2) == argc) {
 		spw_file = argv[optind + 1];
 		spw_name (spw_file);
 		is_shadow = 1;
@@ -167,7 +167,7 @@ static void open_files (void)
 	 * Lock the files if we aren't in "read-only" mode
 	 */
 	if (!read_only) {
-		if (!pw_lock ()) {
+		if (pw_lock () == 0) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 			         Prog, pwd_file);
 			if (use_system_pw_file) {
@@ -176,7 +176,7 @@ static void open_files (void)
 			closelog ();
 			exit (E_CANTLOCK);
 		}
-		if (is_shadow && !spw_lock ()) {
+		if (is_shadow && (spw_lock () == 0)) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 			         Prog, spw_file);
 			if (use_system_spw_file) {
@@ -191,7 +191,7 @@ static void open_files (void)
 	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
 	 * otherwise.
 	 */
-	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
+	if (pw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 		         Prog, pwd_file);
 		if (use_system_pw_file) {
@@ -200,7 +200,7 @@ static void open_files (void)
 		closelog ();
 		exit (E_CANTOPEN);
 	}
-	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
+	if (is_shadow && (spw_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 		         Prog, spw_file);
 		if (use_system_spw_file) {
@@ -225,14 +225,14 @@ static void close_files (int changed)
 	 * changes to the files.
 	 */
 	if (changed) {
-		if (!pw_close ()) {
+		if (pw_close () == 0) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
 			         Prog, pwd_file);
 			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
 			closelog ();
 			exit (E_CANTUPDATE);
 		}
-		if (is_shadow && !spw_close ()) {
+		if (is_shadow && (spw_close () == 0)) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
 			         Prog, spw_file);
 			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
@@ -262,12 +262,12 @@ static void check_pw_file (int *errors, int *changed)
 	/*
 	 * Loop through the entire password file.
 	 */
-	for (pfe = __pw_get_head (); pfe; pfe = pfe->next) {
+	for (pfe = __pw_get_head (); NULL != pfe; pfe = pfe->next) {
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (pfe->line[0] == '+' || pfe->line[0] == '-') {
+		if ((pfe->line[0] == '+') || (pfe->line[0] == '-')) {
 			continue;
 		}
 
@@ -276,7 +276,7 @@ static void check_pw_file (int *errors, int *changed)
 		 * have no (struct passwd) entry because they couldn't be
 		 * parsed properly.
 		 */
-		if (!pfe->eptr) {
+		if (NULL == pfe->eptr) {
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
@@ -315,7 +315,7 @@ static void check_pw_file (int *errors, int *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tpfe = __pw_get_head (); tpfe; tpfe = tpfe->next) {
+		for (tpfe = __pw_get_head (); NULL != tpfe; tpfe = tpfe->next) {
 			const struct passwd *ent = tpfe->eptr;
 
 			/*
@@ -328,7 +328,7 @@ static void check_pw_file (int *errors, int *changed)
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent) {
+			if (NULL == ent) {
 				continue;
 			}
 
@@ -364,7 +364,7 @@ static void check_pw_file (int *errors, int *changed)
 		 * Make sure the primary group exists
 		 */
 		/* local, no need for xgetgrgid */
-		if (!quiet && !getgrgid (pwd->pw_gid)) {
+		if (!quiet && (NULL == getgrgid (pwd->pw_gid))) {
 
 			/*
 			 * No primary group, just give a warning
@@ -378,7 +378,7 @@ static void check_pw_file (int *errors, int *changed)
 		/*
 		 * Make sure the home directory exists
 		 */
-		if (!quiet && access (pwd->pw_dir, F_OK)) {
+		if (!quiet && (access (pwd->pw_dir, F_OK) != 0)) {
 			/*
 			 * Home directory doesn't exist, give a warning
 			 */
@@ -390,8 +390,9 @@ static void check_pw_file (int *errors, int *changed)
 		/*
 		 * Make sure the login shell is executable
 		 */
-		if (!quiet && pwd->pw_shell[0]
-		    && access (pwd->pw_shell, F_OK)) {
+		if (   !quiet
+		    && ('\0' != pwd->pw_shell[0])
+		    && (access (pwd->pw_shell, F_OK) != 0)) {
 
 			/*
 			 * Login shell doesn't exist, give a warning
@@ -432,7 +433,7 @@ static void check_pw_file (int *errors, int *changed)
 					    time ((time_t *) 0) / (24L * 3600L);
 					*changed = 1;
 
-					if (!spw_update (&sp)) {
+					if (spw_update (&sp) == 0) {
 						fprintf (stderr,
 						         _("%s: can't update shadow entry for %s\n"),
 						         Prog, sp.sp_namp);
@@ -441,7 +442,7 @@ static void check_pw_file (int *errors, int *changed)
 					/* remove password from /etc/passwd */
 					pw = *pwd;
 					pw.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-					if (!pw_update (&pw)) {
+					if (pw_update (&pw) == 0) {
 						fprintf (stderr,
 						         _("%s: can't update passwd entry for %s\n"),
 						         Prog, pw.pw_name);
@@ -464,7 +465,7 @@ static void check_spw_file (int *errors, int *changed)
 	/*
 	 * Loop through the entire shadow password file.
 	 */
-	for (spe = __spw_get_head (); spe; spe = spe->next) {
+	for (spe = __spw_get_head (); NULL != spe; spe = spe->next) {
 		/*
 		 * Do not treat lines which were missing in shadow
 		 * and were added earlier.
@@ -477,7 +478,7 @@ static void check_spw_file (int *errors, int *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (spe->line[0] == '+' || spe->line[0] == '-') {
+		if ((spe->line[0] == '+') || (spe->line[0] == '-')) {
 			continue;
 		}
 
@@ -486,7 +487,7 @@ static void check_spw_file (int *errors, int *changed)
 		 * have no (struct spwd) entry because they couldn't be
 		 * parsed properly.
 		 */
-		if (!spe->eptr) {
+		if (NULL == spe->eptr) {
 			/*
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
@@ -525,7 +526,7 @@ static void check_spw_file (int *errors, int *changed)
 		/*
 		 * Make sure this entry has a unique name.
 		 */
-		for (tspe = __spw_get_head (); tspe; tspe = tspe->next) {
+		for (tspe = __spw_get_head (); NULL != tspe; tspe = tspe->next) {
 			const struct spwd *ent = tspe->eptr;
 
 			/*
@@ -538,7 +539,7 @@ static void check_spw_file (int *errors, int *changed)
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent) {
+			if (NULL == ent) {
 				continue;
 			}
 
@@ -566,7 +567,7 @@ static void check_spw_file (int *errors, int *changed)
 		 * Make sure this entry exists in the /etc/passwd
 		 * file.
 		 */
-		if (!pw_locate (spw->sp_namp)) {
+		if (pw_locate (spw->sp_namp) == NULL) {
 			/*
 			 * Tell the user this entry has no matching
 			 * /etc/passwd entry and ask them to delete it.
@@ -587,7 +588,8 @@ static void check_spw_file (int *errors, int *changed)
 		/*
 		 * Warn if last password change in the future.  --marekm
 		 */
-		if (!quiet && spw->sp_lstchg > time ((time_t *) 0) / SCALE) {
+		if (!quiet
+		    && (spw->sp_lstchg > time ((time_t *) 0) / SCALE)) {
 			printf (_("user %s: last password change in the future\n"),
 			        spw->sp_namp);
 			*errors += 1;
@@ -640,7 +642,7 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors) {
+	if (errors != 0) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
