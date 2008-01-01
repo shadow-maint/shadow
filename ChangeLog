@@ -1,5 +1,10 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/xgetXXbyYY.c: De-comment code (duplicate the entry when
+	the _R function is not present on the system).
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: Remove statbuf, not used.
 	* src/lastlog.c: Fix types, cast umin and umax to uid_t.
 	* src/lastlog.c: (option -u) user needs to be a signed long, not

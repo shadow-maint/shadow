@@ -95,7 +95,7 @@ LOOKUP_TYPE *XFUNCTION_NAME (ARG_TYPE ARG_NAME)
 	LOOKUP_TYPE *result = FUNCTION_NAME(ARG_NAME);
 
 	if (result) {
-//		result = DUP_FUNCTION(result);
+		result = DUP_FUNCTION(result);
 		if (NULL == result) {
 			fprintf (stderr, _("%s: out of memory\n"),
 			         "x" STRINGIZE(FUNCTION_NAME));
