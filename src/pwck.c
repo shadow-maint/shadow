@@ -91,7 +91,7 @@ static void check_spw_file (int *errors, int *changed);
 static void usage (void)
 {
 	fprintf (stderr, _("Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"),
-		 Prog);
+	         Prog);
 	exit (E_USAGE);
 }
 
@@ -167,7 +167,7 @@ static void open_files (void)
 	if (!read_only) {
 		if (!pw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, pwd_file);
+			         Prog, pwd_file);
 			if (use_system_pw_file)
 				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
 			closelog ();
@@ -175,7 +175,7 @@ static void open_files (void)
 		}
 		if (is_shadow && !spw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, spw_file);
+			         Prog, spw_file);
 			if (use_system_spw_file)
 				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
 			closelog ();
@@ -189,7 +189,7 @@ static void open_files (void)
 	 */
 	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
-			 Prog, pwd_file);
+		         Prog, pwd_file);
 		if (use_system_pw_file)
 			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
 		closelog ();
@@ -197,7 +197,7 @@ static void open_files (void)
 	}
 	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
-			 Prog, spw_file);
+		         Prog, spw_file);
 		if (use_system_spw_file)
 			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
 		closelog ();
@@ -221,14 +221,14 @@ static void close_files (int changed)
 	if (changed) {
 		if (!pw_close ()) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, pwd_file);
+			         Prog, pwd_file);
 			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
 			closelog ();
 			exit (E_CANTUPDATE);
 		}
 		if (is_shadow && !spw_close ()) {
 			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, spw_file);
+			         Prog, spw_file);
 			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
 			closelog ();
 			exit (E_CANTUPDATE);
@@ -291,7 +291,7 @@ static void check_pw_file (int *errors, int *changed)
 			 */
 		      delete_pw:
 			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
-				 pfe->line));
+			         pfe->line));
 			*changed = 1;
 
 			__pw_del_entry (pfe);
@@ -358,7 +358,7 @@ static void check_pw_file (int *errors, int *changed)
 			 */
 
 			printf (_("user %s: no group %u\n"),
-				pwd->pw_name, pwd->pw_gid);
+			        pwd->pw_name, pwd->pw_gid);
 			*errors += 1;
 		}
 
@@ -369,9 +369,8 @@ static void check_pw_file (int *errors, int *changed)
 			/*
 			 * Home directory doesn't exist, give a warning
 			 */
-			printf (_
-				("user %s: directory %s does not exist\n"),
-				pwd->pw_name, pwd->pw_dir);
+			printf (_("user %s: directory %s does not exist\n"),
+			        pwd->pw_name, pwd->pw_dir);
 			*errors += 1;
 		}
 
@@ -385,7 +384,7 @@ static void check_pw_file (int *errors, int *changed)
 			 * Login shell doesn't exist, give a warning
 			 */
 			printf (_("user %s: program %s does not exist\n"),
-				pwd->pw_name, pwd->pw_shell);
+			        pwd->pw_name, pwd->pw_shell);
 			*errors += 1;
 		}
 
@@ -396,11 +395,10 @@ static void check_pw_file (int *errors, int *changed)
 		if (is_shadow) {
 			spw = (struct spwd *) spw_locate (pwd->pw_name);
 			if (spw == NULL) {
-				printf (_
-					("no matching password file entry in %s\n"),
-					spw_file);
+				printf (_("no matching password file entry in %s\n"),
+				        spw_file);
 				printf (_("add user '%s' in %s? "),
-					pwd->pw_name, spw_file);
+				        pwd->pw_name, spw_file);
 				*errors += 1;
 				if (yes_or_no (read_only)) {
 					struct spwd sp;
@@ -423,9 +421,8 @@ static void check_pw_file (int *errors, int *changed)
 
 					if (!spw_update (&sp)) {
 						fprintf (stderr,
-							 _
-							 ("%s: can't update shadow entry for %s\n"),
-							 Prog, sp.sp_namp);
+						         _("%s: can't update shadow entry for %s\n"),
+						         Prog, sp.sp_namp);
 						exit (E_CANTUPDATE);
 					}
 					/* remove password from /etc/passwd */
@@ -433,9 +430,8 @@ static void check_pw_file (int *errors, int *changed)
 					pw.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (!pw_update (&pw)) {
 						fprintf (stderr,
-							 _
-							 ("%s: can't update passwd entry for %s\n"),
-							 Prog, pw.pw_name);
+						         _("%s: can't update passwd entry for %s\n"),
+						         Prog, pw.pw_name);
 						exit (E_CANTUPDATE);
 					}
 				}
@@ -498,7 +494,7 @@ static void check_spw_file (int *errors, int *changed)
 			 */
 		      delete_spw:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
-				 spe->line));
+			         spe->line));
 			*changed = 1;
 
 			__spw_del_entry (spe);
@@ -556,7 +552,7 @@ static void check_spw_file (int *errors, int *changed)
 			 * /etc/passwd entry and ask them to delete it.
 			 */
 			printf (_("no matching password file entry in %s\n"),
-				pwd_file);
+			        pwd_file);
 			printf (_("delete line '%s'? "), spe->line);
 			*errors += 1;
 
@@ -571,9 +567,8 @@ static void check_spw_file (int *errors, int *changed)
 		 * Warn if last password change in the future.  --marekm
 		 */
 		if (!quiet && spw->sp_lstchg > time ((time_t *) 0) / SCALE) {
-			printf (_
-				("user %s: last password change in the future\n"),
-				spw->sp_namp);
+			printf (_("user %s: last password change in the future\n"),
+			        spw->sp_namp);
 			*errors += 1;
 		}
 	}
@@ -625,9 +620,10 @@ int main (int argc, char **argv)
 	 */
 	if (errors)
 		printf (changed ?
-			_("%s: the files have been updated\n") :
-			_("%s: no changes\n"), Prog);
+		        _("%s: the files have been updated\n") :
+		        _("%s: no changes\n"), Prog);
 
 	closelog ();
 	exit (errors ? E_BADENTRY : E_OKAY);
 }
+
