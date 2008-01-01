@@ -441,4 +441,6 @@ void setup_limits (const struct passwd *info)
 	}
 }
 
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif				/* !USE_PAM */

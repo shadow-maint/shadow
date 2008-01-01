@@ -289,4 +289,6 @@ int obscure (const char *old, const char *new, const struct passwd *pwdp)
 	return 1;
 }
 
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif				/* !USE_PAM */

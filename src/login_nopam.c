@@ -245,8 +245,8 @@ static int user_match (const char *tok, const char *string)
 	return (NO);
 }
 
-static char *resolve_hostname (string)
-char *string;
+static const char *resolve_hostname (string)
+const char *string;
 {
 	/*
 	 * Resolve hostname to numeric IP address, as suggested
@@ -314,4 +314,6 @@ static int string_match (const char *tok, const char *string)
 	return (NO);
 }
 
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif				/* !USE_PAM */
