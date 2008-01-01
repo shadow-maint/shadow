@@ -66,11 +66,16 @@ extern struct commonio_entry *__sgr_get_head (void);
  */
 static char *Prog;
 static const char *grp_file = GROUP_FILE;
+static int use_system_grp_file = 1;
 
 #ifdef	SHADOWGRP
 static const char *sgr_file = SGROUP_FILE;
+static int use_system_sgr_file = 1;
+static int is_shadow = 0;
 #endif
+/* Options */
 static int read_only = 0;
+static int sort_mode = 0;
 
 /* local function prototypes */
 static void usage (void);
@@ -106,34 +111,11 @@ static void delete_member (char **list, const char *member)
 }
 
 /*
- * grpck - verify group file integrity
+ * process_flags - 
  */
-int main (int argc, char **argv)
+static void process_flags (int argc, char **argv)
 {
 	int arg;
-	int errors = 0;
-	int changed = 0;
-	int i;
-	struct commonio_entry *gre, *tgre;
-	struct group *grp;
-	int sort_mode = 0;
-
-#ifdef	SHADOWGRP
-	struct commonio_entry *sge, *tsge;
-	struct sgrp *sgr;
-	int is_shadow = 0;
-#endif
-
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	OPENLOG ("grpck");
 
 	/*
 	 * Parse the command line arguments
@@ -163,11 +145,13 @@ int main (int argc, char **argv)
 	 * Make certain we have the right number of arguments
 	 */
 #ifdef	SHADOWGRP
-	if (optind != argc && optind + 1 != argc && optind + 2 != argc)
+	if ((argc < optind) || (argc > (optind + 2)))
 #else
-	if (optind != argc && optind + 1 != argc)
+	if ((argc < optind) || (argc > (optind + 1)))
 #endif
+	{
 		usage ();
+	}
 
 	/*
 	 * If there are two left over filenames, use those as the group and
@@ -176,34 +160,42 @@ int main (int argc, char **argv)
 	if (optind != argc) {
 		grp_file = argv[optind];
 		gr_name (grp_file);
+		use_system_grp_file = 0;
 	}
 #ifdef	SHADOWGRP
-	if (optind + 2 == argc) {
+	if ((optind + 2) == argc) {
 		sgr_file = argv[optind + 1];
 		sgr_name (sgr_file);
 		is_shadow = 1;
-	} else if (optind == argc)
+		use_system_sgr_file = 0;
+	} else if (optind == argc) {
 		is_shadow = sgr_file_present ();
+	}
 #endif
+}
 
+static void open_files ()
+{
 	/*
 	 * Lock the files if we aren't in "read-only" mode
 	 */
 	if (!read_only) {
-		if (!gr_lock ()) {
+		if (gr_lock () == 0) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, grp_file);
-			if (optind == argc)
+			         Prog, grp_file);
+			if (use_system_grp_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", grp_file));
+			}
 			closelog ();
 			exit (E_CANT_LOCK);
 		}
 #ifdef	SHADOWGRP
-		if (is_shadow && !sgr_lock ()) {
+		if (is_shadow && (sgr_lock () == 0)) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, sgr_file);
-			if (optind == argc)
+			         Prog, sgr_file);
+			if (use_system_sgr_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", sgr_file));
+			}
 			closelog ();
 			exit (E_CANT_LOCK);
 		}
@@ -214,24 +206,91 @@ int main (int argc, char **argv)
 	 * Open the files. Use O_RDONLY if we are in read_only mode,
 	 * O_RDWR otherwise.
 	 */
-	if (!gr_open (read_only ? O_RDONLY : O_RDWR)) {
+	if (gr_open (read_only ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open file %s\n"), Prog,
-			 grp_file);
-		if (optind == argc)
+		         grp_file);
+		if (use_system_grp_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", grp_file));
+		}
 		closelog ();
 		exit (E_CANT_OPEN);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow && !sgr_open (read_only ? O_RDONLY : O_RDWR)) {
+	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"), Prog,
-			 sgr_file);
-		if (optind == argc)
+		         sgr_file);
+		if (use_system_sgr_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_file));
+		}
 		closelog ();
 		exit (E_CANT_OPEN);
 	}
 #endif
+}
+
+static void close_files (int changed)
+{
+	/*
+	 * All done. If there were no change we can just abandon any
+	 * changes to the files.
+	 */
+	if (changed) {
+		if (gr_close () == 0) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, grp_file);
+			exit (E_CANT_UPDATE);
+		}
+#ifdef	SHADOWGRP
+		if (is_shadow && (sgr_close () == 0)) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, sgr_file);
+			exit (E_CANT_UPDATE);
+		}
+#endif
+	}
+
+	/*
+	 * Don't be anti-social - unlock the files when you're done.
+	 */
+#ifdef	SHADOWGRP
+	if (is_shadow) {
+		sgr_unlock ();
+	}
+#endif
+	(void) gr_unlock ();
+}
+
+/*
+ * grpck - verify group file integrity
+ */
+int main (int argc, char **argv)
+{
+	int errors = 0;
+	int changed = 0;
+	int i;
+	struct commonio_entry *gre, *tgre;
+	struct group *grp;
+
+#ifdef	SHADOWGRP
+	struct commonio_entry *sge, *tsge;
+	struct sgrp *sgr;
+#endif
+
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	OPENLOG ("grpck");
+
+	/* Parse the command line arguments */
+	process_flags (argc, argv);
+
+	open_files ();
 
 	if (sort_mode) {
 		gr_sort ();
@@ -631,34 +690,9 @@ int main (int argc, char **argv)
       shadow_done:
 #endif				/* SHADOWGRP */
 
-	/*
-	 * All done. If there were no change we can just abandon any
-	 * changes to the files.
-	 */
-	if (changed) {
-	      write_and_bye:
-		if (!gr_close ()) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, grp_file);
-			exit (E_CANT_UPDATE);
-		}
-#ifdef	SHADOWGRP
-		if (is_shadow && !sgr_close ()) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, sgr_file);
-			exit (E_CANT_UPDATE);
-		}
-#endif
-	}
-
-	/*
-	 * Don't be anti-social - unlock the files when you're done.
-	 */
-#ifdef	SHADOWGRP
-	if (is_shadow)
-		sgr_unlock ();
-#endif
-	(void) gr_unlock ();
+      write_and_bye:
+	/* Commit the change in the database if needed */
+	close_files (changed);
 
 	nscd_flush_cache ("group");
 

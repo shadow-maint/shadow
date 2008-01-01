@@ -1,3 +1,9 @@
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/grpck.c: Split process_flags(), open_files(), and
+	close_files() out of main(). New global variables is_shadow,
+	sort_mode, use_system_grp_file, and use_system_sgr_file.
+
 2007-12-31  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/Makefile.in.in: If remove-potcdate.sin does not exist,
