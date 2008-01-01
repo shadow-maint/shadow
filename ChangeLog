@@ -1,5 +1,9 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Remove duplicate logging to syslog.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Avoid assignments in conditionals.
 	* src/newgrp.c: Split check_perms() out of main().
 

@@ -447,9 +447,6 @@ int main (int argc, char **argv)
 	 * will be set, and the group added to the concurrent groupset.
 	 */
 #ifdef	USE_SYSLOG
-	if (getdef_bool ("SYSLOG_SG_ENAB"))
-		SYSLOG ((LOG_INFO, "user `%s' switched to group `%s'",
-			 name, group));
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
 		char *loginname = getlogin ();
 		char *tty = ttyname (0);
