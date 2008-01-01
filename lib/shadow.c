@@ -135,7 +135,8 @@ static struct spwd *my_sgetspent (const char *string)
 		return 0;
 	strcpy (spwbuf, string);
 
-	if ((cp = strrchr (spwbuf, '\n')))
+	cp = strrchr (spwbuf, '\n');
+	if (NULL != cp)
 		*cp = '\0';
 
 	/*
@@ -178,7 +179,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * incorrectly formatted number, unless we are using NIS.
 	 */
 
-	if ((spwd.sp_lstchg = strtol (fields[2], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_lstchg = strtol (fields[2], &cpp, 10);
+	if ((spwd.sp_lstchg == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -194,7 +196,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * Get the minimum period between password changes.
 	 */
 
-	if ((spwd.sp_min = strtol (fields[3], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_min = strtol (fields[3], &cpp, 10);
+	if ((spwd.sp_min == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -210,7 +213,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * Get the maximum number of days a password is valid.
 	 */
 
-	if ((spwd.sp_max = strtol (fields[4], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_max = strtol (fields[4], &cpp, 10);
+	if ((spwd.sp_max == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -238,7 +242,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * Get the number of days of password expiry warning.
 	 */
 
-	if ((spwd.sp_warn = strtol (fields[5], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_warn = strtol (fields[5], &cpp, 10);
+	if ((spwd.sp_warn == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -255,7 +260,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * disabled.
 	 */
 
-	if ((spwd.sp_inact = strtol (fields[6], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_inact = strtol (fields[6], &cpp, 10);
+	if ((spwd.sp_inact == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -272,7 +278,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * set to expire.
 	 */
 
-	if ((spwd.sp_expire = strtol (fields[7], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_expire = strtol (fields[7], &cpp, 10);
+	if ((spwd.sp_expire == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -289,7 +296,8 @@ static struct spwd *my_sgetspent (const char *string)
 	 * to have anything other than a valid integer in it.
 	 */
 
-	if ((spwd.sp_flag = strtol (fields[8], &cpp, 10)) == 0 && *cpp) {
+	spwd.sp_flag = strtol (fields[8], &cpp, 10);
+	if ((spwd.sp_flag == 0) && *cpp) {
 #ifdef	USE_NIS
 		if (!nis_used)
 			return 0;
@@ -322,7 +330,8 @@ struct spwd *fgetspent (FILE * fp)
 	if (fgets (buf, sizeof buf, fp) != (char *) 0)
 #endif
 	{
-		if ((cp = strchr (buf, '\n')))
+		cp = strchr (buf, '\n');
+		if (NULL != cp)
 			*cp = '\0';
 #ifdef	USE_NIS
 		if (nis_ignore && IS_NISCHAR (buf[0]))
@@ -360,7 +369,8 @@ struct spwd *getspent (void)
 		 * right away if there is none.
 		 */
 
-		if (!(val = fgetspent (shadow)))
+		val = fgetspent (shadow);
+		if (NULL == val)
 			return 0;
 
 		/*
@@ -456,11 +466,13 @@ struct spwd *getspnam (const char *name)
 		if (yp_match (nis_domain, "shadow.byname", name,
 			      strlen (name), &nis_val, &nis_vallen) == 0) {
 
-			if (cp = strchr (nis_val, '\n'))
+			cp = strchr (nis_val, '\n');
+			if (NULL != cp)
 				*cp = '\0';
 
 			nis_state = middle;
-			if ((sp = my_sgetspent (nis_val))) {
+			sp = my_sgetspent (nis_val);
+			if (NULL != sp) {
 				strcpy (save_name, sp->sp_namp);
 				nis_key = save_name;
 				nis_keylen = strlen (save_name);
