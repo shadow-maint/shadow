@@ -62,7 +62,6 @@ static int uflg = 0;		/* print only an user of range of users */
 static int tflg = 0;		/* print is restricted to most recent days */
 static int bflg = 0;		/* print excludes most recent days */
 static struct lastlog lastlog;	/* scratch structure to play with ... */
-static struct stat statbuf;	/* fstat buffer for file size */
 static struct passwd *pwent;
 
 #define	NOW	(time ((time_t *) 0))
@@ -133,8 +132,8 @@ static void print (void)
 	while ((pwent = getpwent ())) {
 		user = pwent->pw_uid;
 		if (uflg &&
-		    ((umin != -1 && user < umin) ||
-		     (umax != -1 && user > umax)))
+		    ((umin != -1 && user < (uid_t)umin) ||
+		     (umax != -1 && user > (uid_t)umax)))
 			continue;
 		offset = user * sizeof lastlog;
 
@@ -201,7 +200,8 @@ int main (int argc, char **argv)
 					umax = umin;
 				} else {
 					char *endptr = NULL;
-					uid_t user = strtol(optarg, &endptr, 10);
+					long int user;
+					user = strtol(optarg, &endptr, 10);
 					if (*optarg != '\0' && *endptr == '\0') {
 						if (user < 0) {
 							/* -<userid> */
