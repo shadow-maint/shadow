@@ -142,11 +142,13 @@ static void process_flags (int argc, char **argv)
 	if (optind != argc) {
 		pwd_file = argv[optind];
 		pw_name (pwd_file);
+		use_system_pw_file = 0;
 	}
 	if (optind + 2 == argc) {
 		spw_file = argv[optind + 1];
 		spw_name (spw_file);
 		is_shadow = 1;
+		use_system_spw_file = 0;
 	} else if (optind == argc)
 		is_shadow = spw_file_present ();
 }
