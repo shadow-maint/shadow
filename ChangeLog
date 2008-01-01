@@ -1,5 +1,9 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c (split_groups): Test the pointer returned by malloc.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Document add_one_entry_nis(), write_all(),
 	commonio_remove(), commonio_locate(), and commonio_rewind().
 

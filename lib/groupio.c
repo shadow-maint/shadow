@@ -332,6 +332,10 @@ static int split_groups (unsigned int max_members)
 			continue;
 
 		new = (struct commonio_entry *) malloc (sizeof *new);
+		if (NULL == new) {
+			errno = ENOMEM;
+			return 0;
+		}
 		new->eptr = group_dup(gr->eptr);
 		if (NULL == new->eptr) {
 			errno = ENOMEM;
