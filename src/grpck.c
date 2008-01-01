@@ -80,6 +80,24 @@ static int sort_mode = 0;
 /* local function prototypes */
 static void usage (void);
 static void delete_member (char **, const char *);
+static void process_flags (int argc, char **argv);
+static void open_files ();
+static void close_files (int changed);
+static int check_members (const char *groupname,
+                          char **members,
+                          const char *fmt_info,
+                          const char *fmt_prompt,
+                          const char *fmt_syslog,
+                          int *errors);
+static void compare_members_lists (const char *groupname,
+                                   char **members,
+                                   char **other_members,
+                                   const char *file,
+                                   const char *other_file);
+static void check_grp_file (int *errors, int *changed);
+#ifdef SHADOWGRP
+static void check_sgr_file (int *errors, int *changed);
+#endif
 
 /*
  * usage - print syntax message and exit
@@ -111,7 +129,9 @@ static void delete_member (char **list, const char *member)
 }
 
 /*
- * process_flags - 
+ * process_flags - parse the command line options
+ *
+ *	It will not return if an error is encountered.
  */
 static void process_flags (int argc, char **argv)
 {
@@ -174,6 +194,12 @@ static void process_flags (int argc, char **argv)
 #endif
 }
 
+/*
+ * open_files - open the shadow database
+ *
+ *	In read-only mode, the databases are not locked and are opened
+ *	only for reading.
+ */
 static void open_files ()
 {
 	/*
@@ -228,6 +254,13 @@ static void open_files ()
 #endif
 }
 
+/*
+ * close_files - close and unlock the password/shadow databases
+ *
+ *	If changed is not set, the databases are not closed, and no
+ *	changes are committed in the databases. The databases are
+ *	unlocked anyway.
+ */
 static void close_files (int changed)
 {
 	/*
@@ -260,6 +293,25 @@ static void close_files (int changed)
 	(void) gr_unlock ();
 }
 
+/*
+ * check_members - check that every members of a group exist
+ *
+ *	If an error is detected, *errors is incremented.
+ *
+ *	The user will be prompted for the removal of the non-existent
+ *	user.
+ *
+ *	If any changes are performed, the return value will be 1,
+ *	otherwise check_members() returns 0.
+ *
+ *	fmt_info, fmt_prompt, and fmt_syslog are used for logging.
+ *	  * fmt_info must contain two string flags (%s): for the group's
+ *	    name and the missing member.
+ *	  * fmt_prompt must contain one string flags (%s): the missing
+ *	    member.
+ *	  * fmt_syslog must contain two string flags (%s): for the
+ *	    group's name and the missing member.
+ */
 static int check_members (const char *groupname,
                           char **members,
                           const char *fmt_info,
@@ -296,6 +348,16 @@ static int check_members (const char *groupname,
 	return members_changed;
 }
 
+/*
+ * compare_members_lists - make sure the list of members is contained in
+ *                         another list.
+ *
+ *	compare_members_lists() checks that all the members of members are
+ *	also in other_members.
+ *	file and other_file are used for logging.
+ *
+ *	TODO: No changes are performed on the lists.
+ */
 static void compare_members_lists (const char *groupname,
                                    char **members,
                                    char **other_members,
@@ -317,6 +379,9 @@ static void compare_members_lists (const char *groupname,
 	}
 }
 
+/*
+ * check_grp_file - check the content of the group file
+ */
 static void check_grp_file (int *errors, int *changed)
 {
 	struct commonio_entry *gre, *tgre;
@@ -503,6 +568,9 @@ static void check_grp_file (int *errors, int *changed)
 }
 
 #ifdef SHADOWGRP
+/*
+ * check_sgr_file - check the content of the shadowed group file (gshadow)
+ */
 static void check_sgr_file (int *errors, int *changed)
 {
 	struct group *grp;
