@@ -205,7 +205,7 @@ static void check_flags (void)
 /*
  * check_perms - check if the caller is allowed to add a group
  *
- *	With PAM support, the setuid bit can be set on groupadd to allow
+ *	With PAM support, the setuid bit can be set on chpasswd to allow
  *	non-root users to groups.
  *	Without PAM support, only users who can write in the group databases
  *	can add groups.
