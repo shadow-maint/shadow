@@ -1,7 +1,8 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/pwck.c: Split process_flags() out of main(). New global
-	variables is_shadow, sort_mode.
+	* src/pwck.c: Split process_flags(), open_files(), and
+	close_files() out of main(). New global variables is_shadow,
+	sort_mode, use_system_pw_file, and use_system_spw_file.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -66,7 +66,9 @@ extern struct commonio_entry *__spw_get_head (void);
 
 static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
+static int use_system_pw_file = 1;
 static const char *spw_file = SHADOW_FILE;
+static int use_system_spw_file = 1;
 
 static int is_shadow = 0;
 
@@ -78,6 +80,8 @@ static int quiet = 0;		/* don't report warnings, only errors */
 /* local function prototypes */
 static void usage (void);
 static void process_flags (int argc, char **argv);
+static void open_files (void);
+static void close_files (int changed);
 
 /*
  * usage - print syntax message and exit
@@ -146,6 +150,96 @@ static void process_flags (int argc, char **argv)
 }
 
 /*
+ * open_files - open the shadow database
+ *
+ *	In read-only mode, the databases are not locked and are opened
+ *	only for reading.
+ */
+static void open_files (void)
+{
+	/*
+	 * Lock the files if we aren't in "read-only" mode
+	 */
+	if (!read_only) {
+		if (!pw_lock ()) {
+			fprintf (stderr, _("%s: cannot lock file %s\n"),
+				 Prog, pwd_file);
+			if (use_system_pw_file)
+				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
+			closelog ();
+			exit (E_CANTLOCK);
+		}
+		if (is_shadow && !spw_lock ()) {
+			fprintf (stderr, _("%s: cannot lock file %s\n"),
+				 Prog, spw_file);
+			if (use_system_spw_file)
+				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
+			closelog ();
+			exit (E_CANTLOCK);
+		}
+	}
+
+	/*
+	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
+	 * otherwise.
+	 */
+	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
+		fprintf (stderr, _("%s: cannot open file %s\n"),
+			 Prog, pwd_file);
+		if (use_system_pw_file)
+			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
+		closelog ();
+		exit (E_CANTOPEN);
+	}
+	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
+		fprintf (stderr, _("%s: cannot open file %s\n"),
+			 Prog, spw_file);
+		if (use_system_spw_file)
+			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
+		closelog ();
+		exit (E_CANTOPEN);
+	}
+}
+
+/*
+ * close_files - close and unlock the password/shadow databases
+ *
+ *	If changed is not set, the databases are not closed, and no
+ *	changes are committed in the databases. The databases are
+ *	unlocked anyway.
+ */
+static void close_files (int changed)
+{
+	/*
+	 * All done. If there were no change we can just abandon any
+	 * changes to the files.
+	 */
+	if (changed) {
+		if (!pw_close ()) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, pwd_file);
+			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
+			closelog ();
+			exit (E_CANTUPDATE);
+		}
+		if (is_shadow && !spw_close ()) {
+			fprintf (stderr, _("%s: cannot update file %s\n"),
+				 Prog, spw_file);
+			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
+			closelog ();
+			exit (E_CANTUPDATE);
+		}
+	}
+
+	/*
+	 * Don't be anti-social - unlock the files when you're done.
+	 */
+	if (is_shadow)
+		spw_unlock ();
+	(void) pw_unlock ();
+}
+
+/*
  * pwck - verify password file integrity
  */
 int main (int argc, char **argv)
@@ -172,53 +266,13 @@ int main (int argc, char **argv)
 	/* Parse the command line arguments */
 	process_flags (argc, argv);
 
-	/*
-	 * Lock the files if we aren't in "read-only" mode
-	 */
-	if (!read_only) {
-		if (!pw_lock ()) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, pwd_file);
-			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
-			closelog ();
-			exit (E_CANTLOCK);
-		}
-		if (is_shadow && !spw_lock ()) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
-				 Prog, spw_file);
-			if (optind == argc)
-				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
-			closelog ();
-			exit (E_CANTLOCK);
-		}
-	}
-
-	/*
-	 * Open the files. Use O_RDONLY if we are in read_only mode, O_RDWR
-	 * otherwise.
-	 */
-	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
-		fprintf (stderr, _("%s: cannot open file %s\n"),
-			 Prog, pwd_file);
-		if (optind == argc)
-			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
-		closelog ();
-		exit (E_CANTOPEN);
-	}
-	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
-		fprintf (stderr, _("%s: cannot open file %s\n"),
-			 Prog, spw_file);
-		if (optind == argc)
-			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
-		closelog ();
-		exit (E_CANTOPEN);
-	}
+	open_files ();
 
 	if (sort_mode) {
 		pw_sort ();
 		if (is_shadow)
 			spw_sort ();
+		changed = 1;
 		goto write_and_bye;
 	}
 
@@ -544,34 +598,8 @@ int main (int argc, char **argv)
 
       shadow_done:
 
-	/*
-	 * All done. If there were no change we can just abandon any
-	 * changes to the files.
-	 */
-	if (changed) {
-	      write_and_bye:
-		if (!pw_close ()) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, pwd_file);
-			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
-			closelog ();
-			exit (E_CANTUPDATE);
-		}
-		if (is_shadow && !spw_close ()) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
-				 Prog, spw_file);
-			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
-			closelog ();
-			exit (E_CANTUPDATE);
-		}
-	}
-
-	/*
-	 * Don't be anti-social - unlock the files when you're done.
-	 */
-	if (is_shadow)
-		spw_unlock ();
-	(void) pw_unlock ();
+      write_and_bye:
+	close_files (changed);
 
 	nscd_flush_cache ("passwd");
 
