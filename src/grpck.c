@@ -260,46 +260,14 @@ static void close_files (int changed)
 	(void) gr_unlock ();
 }
 
-/*
- * grpck - verify group file integrity
- */
-int main (int argc, char **argv)
+static void check_grp_file (int *errors, int *changed)
 {
-	int errors = 0;
-	int changed = 0;
-	int i;
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
-
-#ifdef	SHADOWGRP
-	struct commonio_entry *sge, *tsge;
+	int i;
+#ifdef SHADOWGRP
 	struct sgrp *sgr;
 #endif
-
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
-
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	OPENLOG ("grpck");
-
-	/* Parse the command line arguments */
-	process_flags (argc, argv);
-
-	open_files ();
-
-	if (sort_mode) {
-		gr_sort ();
-#ifdef	SHADOWGRP
-		if (is_shadow)
-			sgr_sort ();
-#endif
-		goto write_and_bye;
-	}
 
 	/*
 	 * Loop through the entire group file.
@@ -325,7 +293,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("invalid group file entry\n"));
 			printf (_("delete line '%s'? "), gre->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -342,7 +310,7 @@ int main (int argc, char **argv)
 		      delete_gr:
 			SYSLOG ((LOG_INFO, "delete group line `%s'",
 				 gre->line));
-			changed++;
+			*changed = 1;
 
 			__gr_del_entry (gre);
 			continue;
@@ -381,7 +349,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("duplicate group entry\n"));
 			printf (_("delete line '%s'? "), gre->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -394,7 +362,7 @@ int main (int argc, char **argv)
 		 * Check for invalid group names.  --marekm
 		 */
 		if (!check_group_name (grp->gr_name)) {
-			errors++;
+			*errors += 1;
 			printf (_("invalid group name '%s'\n"), grp->gr_name);
 		}
 
@@ -418,7 +386,7 @@ int main (int argc, char **argv)
 			 * Can't find this user. Remove them
 			 * from the list.
 			 */
-			errors++;
+			*errors += 1;
 			printf (_("group %s: no user %s\n"),
 				grp->gr_name, grp->gr_mem[i]);
 			printf (_("delete member '%s'? "), grp->gr_mem[i]);
@@ -428,7 +396,7 @@ int main (int argc, char **argv)
 
 			SYSLOG ((LOG_INFO, "delete member '%s' group '%s'",
 				 grp->gr_mem[i], grp->gr_name));
-			changed++;
+			*changed = 1;
 			delete_member (grp->gr_mem, grp->gr_mem[i]);
 			gre->changed = 1;
 			__gr_set_changed ();
@@ -447,7 +415,7 @@ int main (int argc, char **argv)
 					sgr_file);
 				printf (_("add group '%s' in %s ?"),
 					grp->gr_name, sgr_file);
-				errors++;
+				*errors += 1;
 				if (yes_or_no (read_only)) {
 					struct sgrp sg;
 					struct group gr;
@@ -460,7 +428,7 @@ int main (int argc, char **argv)
 					SYSLOG ((LOG_INFO,
 						 "add group `%s' to `%s'",
 						 grp->gr_name, sgr_file));
-					changed++;
+					*changed = 1;
 
 					if (!sgr_update (&sg)) {
 						fprintf (stderr,
@@ -507,10 +475,15 @@ int main (int argc, char **argv)
 #endif
 
 	}
+}
 
-#ifdef	SHADOWGRP
-	if (!is_shadow)
-		goto shadow_done;
+#ifdef SHADOWGRP
+static void check_sgr_file (int *errors, int *changed)
+{
+	struct group *grp;
+	struct commonio_entry *sge, *tsge;
+	struct sgrp *sgr;
+	int i;
 
 	/*
 	 * Loop through the entire shadow group file.
@@ -530,7 +503,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("invalid shadow group file entry\n"));
 			printf (_("delete line '%s'? "), sge->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -547,7 +520,7 @@ int main (int argc, char **argv)
 		      delete_sg:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 				 sge->line));
-			changed++;
+			*changed = 1;
 
 			__sgr_del_entry (sge);
 			continue;
@@ -586,7 +559,7 @@ int main (int argc, char **argv)
 			 */
 			printf (_("duplicate shadow group entry\n"));
 			printf (_("delete line '%s'? "), sge->line);
-			errors++;
+			*errors += 1;
 
 			/*
 			 * prompt the user to delete the entry or not
@@ -603,7 +576,7 @@ int main (int argc, char **argv)
 			printf (_("no matching group file entry in %s\n"),
 				grp_file);
 			printf (_("delete line '%s'? "), sge->line);
-			errors++;
+			*errors += 1;
 			if (yes_or_no (read_only))
 				goto delete_sg;
 		} else {
@@ -639,7 +612,7 @@ int main (int argc, char **argv)
 			 * Can't find this user. Remove them
 			 * from the list.
 			 */
-			errors++;
+			*errors += 1;
 			printf (_
 				("shadow group %s: no administrative user %s\n"),
 				sgr->sg_name, sgr->sg_adm[i]);
@@ -652,7 +625,7 @@ int main (int argc, char **argv)
 			SYSLOG ((LOG_INFO,
 				 "delete admin `%s' from shadow group `%s'",
 				 sgr->sg_adm[i], sgr->sg_name));
-			changed++;
+			*changed = 1;
 			delete_member (sgr->sg_adm, sgr->sg_adm[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
@@ -669,7 +642,7 @@ int main (int argc, char **argv)
 			/*
 			 * Can't find this user. Remove them from the list.
 			 */
-			errors++;
+			*errors += 1;
 			printf (_("shadow group %s: no user %s\n"),
 				sgr->sg_name, sgr->sg_mem[i]);
 			printf (_("delete member '%s'? "), sgr->sg_mem[i]);
@@ -680,17 +653,55 @@ int main (int argc, char **argv)
 			SYSLOG ((LOG_INFO,
 				 "delete member `%s' from shadow group `%s'",
 				 sgr->sg_mem[i], sgr->sg_name));
-			changed++;
+			*changed = 1;
 			delete_member (sgr->sg_mem, sgr->sg_mem[i]);
 			sge->changed = 1;
 			__sgr_set_changed ();
 		}
 	}
-
-      shadow_done:
+}
 #endif				/* SHADOWGRP */
 
-      write_and_bye:
+/*
+ * grpck - verify group file integrity
+ */
+int main (int argc, char **argv)
+{
+	int errors = 0;
+	int changed = 0;
+
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	setlocale (LC_ALL, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	OPENLOG ("grpck");
+
+	/* Parse the command line arguments */
+	process_flags (argc, argv);
+
+	open_files ();
+
+	if (sort_mode) {
+		gr_sort ();
+#ifdef	SHADOWGRP
+		if (is_shadow)
+			sgr_sort ();
+		changed = 1;
+#endif
+	} else {
+		check_grp_file (&errors, &changed);
+#ifdef	SHADOWGRP
+		if (is_shadow) {
+			check_sgr_file (&errors, &changed);
+		}
+#endif
+	}
+
 	/* Commit the change in the database if needed */
 	close_files (changed);
 
