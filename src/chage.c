@@ -466,7 +466,7 @@ static void check_flags (int argc, int opt_index)
  *	(we will later make sure that the user is only listing her aging
  *	information)
  *
- *	With PAM support, the setuid bit can be set on groupadd to allow
+ *	With PAM support, the setuid bit can be set on chage to allow
  *	non-root users to groups.
  *	Without PAM support, only users who can write in the group databases
  *	can add groups.
