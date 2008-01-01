@@ -81,7 +81,7 @@ static int sort_mode = 0;
 static void usage (void);
 static void delete_member (char **, const char *);
 static void process_flags (int argc, char **argv);
-static void open_files ();
+static void open_files (void);
 static void close_files (int changed);
 static int check_members (const char *groupname,
                           char **members,
@@ -200,7 +200,7 @@ static void process_flags (int argc, char **argv)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files ()
+static void open_files (void)
 {
 	/*
 	 * Lock the files if we aren't in "read-only" mode
@@ -255,7 +255,7 @@ static void open_files ()
 }
 
 /*
- * close_files - close and unlock the password/shadow databases
+ * close_files - close and unlock the group/gshadow databases
  *
  *	If changed is not set, the databases are not closed, and no
  *	changes are committed in the databases. The databases are
