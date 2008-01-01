@@ -606,19 +606,14 @@ int main (int argc, char **argv)
 		if (is_shadow)
 			spw_sort ();
 		changed = 1;
-		goto write_and_bye;
+	} else {
+		check_pw_file (&errors, &changed);
+
+		if (is_shadow) {
+			check_spw_file (&errors, &changed);
+		}
 	}
 
-	check_pw_file (&errors, &changed);
-
-	if (!is_shadow)
-		goto shadow_done;
-
-	check_spw_file (&errors, &changed);
-
-      shadow_done:
-
-      write_and_bye:
 	close_files (changed);
 
 	nscd_flush_cache ("passwd");
