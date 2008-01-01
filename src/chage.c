@@ -528,8 +528,7 @@ static void check_perms (void)
 /*
  * open_files - open the shadow database
  *
- *	The password database is also needed (only for reading).
- *	In read-only mode, the shadow database is not locked and is opened
+ *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
 static void open_files (int readonly)
