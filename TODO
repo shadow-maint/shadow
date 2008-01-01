@@ -1,3 +1,6 @@
+newusers
+ - add logging to SYSLOG & AUDIT
+
 faillog
  - accept numerical user and range of users
 
