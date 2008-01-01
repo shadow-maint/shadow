@@ -240,7 +240,8 @@ int main (int argc, char **argv)
 			 * Perhaps in the past, but the default behavior now depends on the
 			 * group entry, so it had better exist.  -- JWP
 			 */
-			if (!(grp = xgetgrgid (pwd->pw_gid))) {
+			grp = xgetgrgid (pwd->pw_gid);
+			if (NULL == grp) {
 				fprintf (stderr, _("unknown GID: %lu\n"),
 					 (unsigned long) pwd->pw_gid);
 				SYSLOG ((LOG_CRIT, "unknown GID: %lu",
@@ -319,7 +320,8 @@ int main (int argc, char **argv)
 	 * including the user's name in the member list of the user's login
 	 * group.  -- JWP
 	 */
-	if (!(grp = getgrnam (group))) { /* local, no need for xgetgrnam */
+	grp = getgrnam (group); /* local, no need for xgetgrnam */
+	if (NULL == grp) {
 		fprintf (stderr, _("unknown group: %s\n"), group);
 		goto failure;
 	}
@@ -341,7 +343,8 @@ int main (int argc, char **argv)
 		grp = xgetgrnam (group);
 	}
 #ifdef SHADOWGRP
-	if ((sgrp = getsgnam (group))) {
+	sgrp = getsgnam (group);
+	if (NULL != sgrp) {
 		grp->gr_passwd = sgrp->sg_passwd;
 		grp->gr_mem = sgrp->sg_mem;
 	}
@@ -364,7 +367,8 @@ int main (int argc, char **argv)
 	 * password, and the group has a password, she needs to give the
 	 * group password.
 	 */
-	if ((spwd = xgetspnam (name)))
+	spwd = xgetspnam (name);
+	if (NULL != spwd)
 		pwd->pw_passwd = spwd->sp_pwdp;
 
 	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
@@ -381,7 +385,8 @@ int main (int argc, char **argv)
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
 		 */
-		if (!(cp = getpass (_("Password: "))))
+		cp = getpass (_("Password: "));
+		if (NULL == cp)
 			goto failure;
 
 		/*

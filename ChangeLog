@@ -1,5 +1,9 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Avoid assignments in conditionals.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadow.c: Avoid assignments in conditionals.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
