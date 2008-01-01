@@ -5,7 +5,7 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c: Avoid assignments in conditionals.
-	* src/newgrp.c: Split check_perms() out of main().
+	* src/newgrp.c: Split check_perms(), syslog_sg() out of main().
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

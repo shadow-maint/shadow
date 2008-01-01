@@ -186,6 +186,104 @@ failure:
 	exit (1);
 }
 
+#ifdef USE_SYSLOG
+/*
+ * syslog_sg - log the change of group to syslog
+ *
+ *	The loggout will also be logged when the user will quit the
+ *	sg/newgrp session.
+ */
+static void syslog_sg (gid_t gid, const char *name, const char *group)
+{
+	char *loginname = getlogin ();
+	char *tty = ttyname (0);
+
+	if (loginname != NULL)
+		loginname = xstrdup (loginname);
+	if (tty != NULL)
+		tty = xstrdup (tty);
+
+	if (loginname == NULL)
+		loginname = "???";
+	if (tty == NULL)
+		tty = "???";
+	else if (strncmp (tty, "/dev/", 5) == 0)
+		tty += 5;
+	SYSLOG ((LOG_INFO,
+		 "user `%s' (login `%s' on %s) switched to group `%s'",
+		 name, loginname, tty, group));
+#ifdef USE_PAM
+	/*
+	 * We want to fork and exec the new shell in the child, leaving the
+	 * parent waiting to log the session close.
+	 *
+	 * The parent must ignore signals generated from the console
+	 * (SIGINT, SIGQUIT, SIGHUP) which might make the parent terminate
+	 * before its child. When bash is exec'ed as the subshell, it
+	 * generates a new process group id for itself, and consequently
+	 * only SIGHUP, which is sent to all process groups in the session,
+	 * can reach the parent. However, since arbitrary programs can be
+	 * specified as login shells, there is no such guarantee in general.
+	 * For the same reason, we must also ignore stop signals generated
+	 * from the console (SIGTSTP, SIGTTIN, and SIGTTOU) in order to
+	 * avoid any possibility of the parent being stopped when it
+	 * receives SIGCHLD from the terminating subshell.  -- JWP
+	 */
+	{
+		pid_t child, pid;
+
+		signal (SIGINT, SIG_IGN);
+		signal (SIGQUIT, SIG_IGN);
+		signal (SIGHUP, SIG_IGN);
+		signal (SIGTSTP, SIG_IGN);
+		signal (SIGTTIN, SIG_IGN);
+		signal (SIGTTOU, SIG_IGN);
+		child = fork ();
+		if (child < 0) {
+			/* error in fork() */
+			fprintf (stderr, _("%s: failure forking: %s"),
+				 is_newgrp ? "newgrp" : "sg", strerror (errno));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_START, Prog, "changing",
+				      NULL, getuid (), 0);
+#endif
+			exit (1);
+		} else if (child) {
+			/* parent - wait for child to finish, then log session close */
+			int cst = 0;
+
+			do {
+				errno = 0;
+				pid = waitpid (child, &cst, WUNTRACED);
+				if (pid == child && WIFSTOPPED (cst)) {
+					/* stop when child stops */
+					raise (SIGSTOP);
+					/* wake child when resumed */
+					kill (child, SIGCONT);
+				}
+			} while ((pid == child && WIFSTOPPED (cst)) ||
+				 (pid != child && errno == EINTR));
+			/* local, no need for xgetgrgid */
+			SYSLOG ((LOG_INFO,
+				 "user `%s' (login `%s' on %s) returned to group `%s'",
+				 name, loginname, tty,
+				 getgrgid (gid)->gr_name));
+			closelog ();
+			exit (0);
+		}
+
+		/* child - restore signals to their default state */
+		signal (SIGINT, SIG_DFL);
+		signal (SIGQUIT, SIG_DFL);
+		signal (SIGHUP, SIG_DFL);
+		signal (SIGTSTP, SIG_DFL);
+		signal (SIGTTIN, SIG_DFL);
+		signal (SIGTTOU, SIG_DFL);
+	}
+#endif				/* USE_PAM */
+}
+#endif				/* USE_SYSLOG */
+
 /*
  * newgrp - change the invokers current real and effective group id
  */
@@ -448,92 +546,7 @@ int main (int argc, char **argv)
 	 */
 #ifdef	USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
-		char *loginname = getlogin ();
-		char *tty = ttyname (0);
-
-		if (loginname != NULL)
-			loginname = xstrdup (loginname);
-		if (tty != NULL)
-			tty = xstrdup (tty);
-
-		if (loginname == NULL)
-			loginname = "???";
-		if (tty == NULL)
-			tty = "???";
-		else if (strncmp (tty, "/dev/", 5) == 0)
-			tty += 5;
-		SYSLOG ((LOG_INFO,
-			 "user `%s' (login `%s' on %s) switched to group `%s'",
-			 name, loginname, tty, group));
-#ifdef USE_PAM
-		/*
-		 * We want to fork and exec the new shell in the child, leaving the
-		 * parent waiting to log the session close.
-		 *
-		 * The parent must ignore signals generated from the console
-		 * (SIGINT, SIGQUIT, SIGHUP) which might make the parent terminate
-		 * before its child. When bash is exec'ed as the subshell, it
-		 * generates a new process group id for itself, and consequently
-		 * only SIGHUP, which is sent to all process groups in the session,
-		 * can reach the parent. However, since arbitrary programs can be
-		 * specified as login shells, there is no such guarantee in general.
-		 * For the same reason, we must also ignore stop signals generated
-		 * from the console (SIGTSTP, SIGTTIN, and SIGTTOU) in order to
-		 * avoid any possibility of the parent being stopped when it
-		 * receives SIGCHLD from the terminating subshell.  -- JWP
-		 */
-		{
-		pid_t child, pid;
-
-		signal (SIGINT, SIG_IGN);
-		signal (SIGQUIT, SIG_IGN);
-		signal (SIGHUP, SIG_IGN);
-		signal (SIGTSTP, SIG_IGN);
-		signal (SIGTTIN, SIG_IGN);
-		signal (SIGTTOU, SIG_IGN);
-		child = fork ();
-		if (child < 0) {
-			/* error in fork() */
-			fprintf (stderr, _("%s: failure forking: %s"),
-				 is_newgrp ? "newgrp" : "sg", strerror (errno));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_START, Prog, "changing",
-				      NULL, getuid (), 0);
-#endif
-			exit (1);
-		} else if (child) {
-			/* parent - wait for child to finish, then log session close */
-			int cst = 0;
-
-			do {
-				errno = 0;
-				pid = waitpid (child, &cst, WUNTRACED);
-				if (pid == child && WIFSTOPPED (cst)) {
-					/* stop when child stops */
-					raise (SIGSTOP);
-					/* wake child when resumed */
-					kill (child, SIGCONT);
-				}
-			} while ((pid == child && WIFSTOPPED (cst)) ||
-				 (pid != child && errno == EINTR));
-			/* local, no need for xgetgrgid */
-			SYSLOG ((LOG_INFO,
-				 "user `%s' (login `%s' on %s) returned to group `%s'",
-				 name, loginname, tty,
-				 getgrgid (gid)->gr_name));
-			closelog ();
-			exit (0);
-		}
-
-		/* child - restore signals to their default state */
-		signal (SIGINT, SIG_DFL);
-		signal (SIGQUIT, SIG_DFL);
-		signal (SIGHUP, SIG_DFL);
-		signal (SIGTSTP, SIG_DFL);
-		signal (SIGTTIN, SIG_DFL);
-		signal (SIGTTOU, SIG_DFL);
-		}
-#endif				/* USE_PAM */
+		syslog_sg (gid, name, group);
 	}
 #endif				/* USE_SYSLOG */
 
