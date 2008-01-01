@@ -58,6 +58,7 @@ static void usage (void);
 static void check_perms (const struct group *grp,
                          struct passwd *pwd,
                          const char *groupname);
+static void syslog_sg (gid_t gid, const char *name, const char *group);
 
 /*
  * usage - print command usage message
