@@ -1,5 +1,13 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: No functional changes were introduced by the previous pwck
+	and grpck changes, except for the following bug fix: no syslog
+	logging if a passwd or group file was specified on the command
+	line without a shadowed database file, even if the system shadowed
+	database was changed).
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Fix typos in comments (gshadow/shadow).
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>

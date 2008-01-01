@@ -8,6 +8,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - chage
   * Fix bug which forbid to set the aging information of an account with a
     passwd entry, but no shadow entry.
+- grpck
+  * Fix logging of changes to syslog when a group file is provided,
+    without a gshadow file.
 - login
   * Use PATH and SUPATH to set the PATH environment variable, even when
     support for PAM is enabled.
@@ -20,6 +23,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Added support for gshadow.
 - passwd
   * Make sure that no more than one username argument was provided.
+- pwck
+  * Fix logging of changes to syslog when a passwd file is provided,
+    without a shadow file.
 - su
   * su's arguments are now reordered. If needed, use -- to separate su's
     options from the shell's options.
