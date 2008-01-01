@@ -132,8 +132,9 @@ static void process_flags (int argc, char **argv)
 	/*
 	 * Make certain we have the right number of arguments
 	 */
-	if (optind != argc && optind + 1 != argc && optind + 2 != argc)
+	if ((argc < optind) || (argc > (optind + 2))) {
 		usage ();
+	}
 
 	/*
 	 * If there are two left over filenames, use those as the password
@@ -149,8 +150,9 @@ static void process_flags (int argc, char **argv)
 		spw_name (spw_file);
 		is_shadow = 1;
 		use_system_spw_file = 0;
-	} else if (optind == argc)
+	} else if (optind == argc) {
 		is_shadow = spw_file_present ();
+	}
 }
 
 /*
@@ -168,16 +170,18 @@ static void open_files (void)
 		if (!pw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 			         Prog, pwd_file);
-			if (use_system_pw_file)
+			if (use_system_pw_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
+			}
 			closelog ();
 			exit (E_CANTLOCK);
 		}
 		if (is_shadow && !spw_lock ()) {
 			fprintf (stderr, _("%s: cannot lock file %s\n"),
 			         Prog, spw_file);
-			if (use_system_spw_file)
+			if (use_system_spw_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
+			}
 			closelog ();
 			exit (E_CANTLOCK);
 		}
@@ -190,16 +194,18 @@ static void open_files (void)
 	if (!pw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 		         Prog, pwd_file);
-		if (use_system_pw_file)
+		if (use_system_pw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
+		}
 		closelog ();
 		exit (E_CANTOPEN);
 	}
 	if (is_shadow && !spw_open (read_only ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: cannot open file %s\n"),
 		         Prog, spw_file);
-		if (use_system_spw_file)
+		if (use_system_spw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
+		}
 		closelog ();
 		exit (E_CANTOPEN);
 	}
@@ -238,8 +244,9 @@ static void close_files (int changed)
 	/*
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
-	if (is_shadow)
+	if (is_shadow) {
 		spw_unlock ();
+	}
 	(void) pw_unlock ();
 }
 
@@ -260,8 +267,9 @@ static void check_pw_file (int *errors, int *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (pfe->line[0] == '+' || pfe->line[0] == '-')
+		if (pfe->line[0] == '+' || pfe->line[0] == '-') {
 			continue;
+		}
 
 		/*
 		 * Start with the entries that are completely corrupt.  They
@@ -280,8 +288,9 @@ static void check_pw_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only))
+			if (!yes_or_no (read_only)) {
 				continue;
+			}
 
 			/*
 			 * All password file deletions wind up here. This
@@ -312,17 +321,20 @@ static void check_pw_file (int *errors, int *changed)
 			/*
 			 * Don't check this entry
 			 */
-			if (tpfe == pfe)
+			if (tpfe == pfe) {
 				continue;
+			}
 
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent)
+			if (!ent) {
 				continue;
+			}
 
-			if (strcmp (pwd->pw_name, ent->pw_name) != 0)
+			if (strcmp (pwd->pw_name, ent->pw_name) != 0) {
 				continue;
+			}
 
 			/*
 			 * Tell the user this entry is a duplicate of
@@ -335,8 +347,9 @@ static void check_pw_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_pw;
+			}
 		}
 
 		/*
@@ -456,15 +469,17 @@ static void check_spw_file (int *errors, int *changed)
 		 * Do not treat lines which were missing in shadow
 		 * and were added earlier.
 		 */
-		if (spe->line == NULL)
+		if (spe->line == NULL) {
 			continue;
+		}
 
 		/*
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if (spe->line[0] == '+' || spe->line[0] == '-')
+		if (spe->line[0] == '+' || spe->line[0] == '-') {
 			continue;
+		}
 
 		/*
 		 * Start with the entries that are completely corrupt. They
@@ -483,8 +498,9 @@ static void check_spw_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (!yes_or_no (read_only))
+			if (!yes_or_no (read_only)) {
 				continue;
+			}
 
 			/*
 			 * All shadow file deletions wind up here. This code
@@ -515,17 +531,20 @@ static void check_spw_file (int *errors, int *changed)
 			/*
 			 * Don't check this entry
 			 */
-			if (tspe == spe)
+			if (tspe == spe) {
 				continue;
+			}
 
 			/*
 			 * Don't check invalid entries.
 			 */
-			if (!ent)
+			if (!ent) {
 				continue;
+			}
 
-			if (strcmp (spw->sp_namp, ent->sp_namp) != 0)
+			if (strcmp (spw->sp_namp, ent->sp_namp) != 0) {
 				continue;
+			}
 
 			/*
 			 * Tell the user this entry is a duplicate of
@@ -538,8 +557,9 @@ static void check_spw_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_spw;
+			}
 		}
 
 		/*
@@ -559,8 +579,9 @@ static void check_spw_file (int *errors, int *changed)
 			/*
 			 * prompt the user to delete the entry or not
 			 */
-			if (yes_or_no (read_only))
+			if (yes_or_no (read_only)) {
 				goto delete_spw;
+			}
 		}
 
 		/*
@@ -600,8 +621,9 @@ int main (int argc, char **argv)
 
 	if (sort_mode) {
 		pw_sort ();
-		if (is_shadow)
+		if (is_shadow) {
 			spw_sort ();
+		}
 		changed = 1;
 	} else {
 		check_pw_file (&errors, &changed);
@@ -618,10 +640,11 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors)
+	if (errors) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
+	}
 
 	closelog ();
 	exit (errors ? E_BADENTRY : E_OKAY);
