@@ -51,8 +51,9 @@ extern int console (const char *);
 extern int is_listed (const char *, const char *, int);
 
 /* copydir.c */
-extern int copy_tree (const char *, const char *, uid_t, gid_t);
-extern int remove_tree (const char *);
+extern int copy_tree (const char *src_root, const char *dst_root,
+                      long int uid, long int gid);
+extern int remove_tree (const char *root);
 
 /* encrypt.c */
 extern char *pw_encrypt (const char *, const char *);

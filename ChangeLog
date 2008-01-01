@@ -1,5 +1,17 @@
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c, src/usermod.c, lib/prototypes.h: The uid and
+	gid parameters can be set to -1 to indicate that the original
+	owners must be kept. Change the types from uid_t/gid_t to a
+	long int (signed).
+	* libmisc/copydir.c: Change the copy_entry(), copy_dir(),
+	copy_symlink(), copy_special(), and copy_file() prototypes
+	accordingly.
+	* lib/prototypes.h: Add the parameters' name for the
+	libmisc/copydir.c functions.
+
+2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/limits.c, libmisc/obscure.c, src/login_nopam.c,
 	lib/pwauth.c: Avoid empty file when USE_PAM is set.
 	* libmisc/audit_help.c: Avoid empty file when WITH_AUDIT is not set.

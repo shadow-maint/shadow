@@ -1328,8 +1328,8 @@ static void move_home (void)
 					fail_exit (E_HOMEDIR);
 				}
 				if (copy_tree (user_home, user_newhome,
-					       uflg ? user_newid : -1,
-					       gflg ? user_newgid : -1) == 0) {
+					       uflg ? (long int)user_newid : -1,
+					       gflg ? (long int)user_newgid : -1) == 0) {
 					if (remove_tree (user_home) != 0 ||
 					    rmdir (user_home) != 0)
 						fprintf (stderr,

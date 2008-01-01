@@ -55,23 +55,23 @@ struct link_name {
 static struct link_name *links;
 
 static int copy_entry (const char *src, const char *dst,
-                       uid_t uid, gid_t gid);
+                       long int uid, long int gid);
 static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[2],
-                     uid_t uid, gid_t gid);
+                     long int uid, long int gid);
 #ifdef	S_IFLNK
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
-                         uid_t uid, gid_t gid);
+                         long int uid, long int gid);
 #endif
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp);
 static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
-                         uid_t uid, gid_t gid);
+                         long int uid, long int gid);
 static int copy_file (const char *src, const char *dst,
                       const struct stat *statp, const struct timeval mt[2],
-                      uid_t uid, gid_t gid);
+                      long int uid, long int gid);
 
 #ifdef WITH_SELINUX
 /*
@@ -180,7 +180,8 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
  *	copy_tree() walks a directory tree and copies ordinary files
  *	as it goes.
  */
-int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
+int copy_tree (const char *src_root, const char *dst_root,
+               long int uid, long int gid)
 {
 	char src_name[1024];
 	char dst_name[1024];
@@ -271,7 +272,7 @@ int copy_tree (const char *src_root, const char *dst_root, uid_t uid, gid_t gid)
  *	not be modified.
  */
 static int copy_entry (const char *src, const char *dst,
-                       uid_t uid, gid_t gid)
+                       long int uid, long int gid)
 {
 	int err = 0;
 	struct stat sb;
@@ -350,7 +351,7 @@ static int copy_entry (const char *src, const char *dst,
  */
 static int copy_dir (const char *src, const char *dst,
                      const struct stat *statp, const struct timeval mt[2],
-                     uid_t uid, gid_t gid)
+                     long int uid, long int gid)
 {
 	int err = 0;
 
@@ -364,8 +365,8 @@ static int copy_dir (const char *src, const char *dst,
 #endif
 	if (   (mkdir (dst, statp->st_mode) != 0)
 	    || (chown (dst,
-	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
-	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	               (uid == - 1) ? statp->st_uid : (uid_t) uid,
+	               (gid == - 1) ? statp->st_gid : (gid_t) gid) != 0)
 	    || (chmod (dst, statp->st_mode) != 0)
 	    || (copy_tree (src, dst, uid, gid) != 0)
 	    || (utimes (dst, mt) != 0)) {
@@ -388,7 +389,7 @@ static int copy_dir (const char *src, const char *dst,
  */
 static int copy_symlink (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
-                         uid_t uid, gid_t gid)
+                         long int uid, long int gid)
 {
 	char oldlink[1024];
 	char dummy[1024];
@@ -419,8 +420,8 @@ static int copy_symlink (const char *src, const char *dst,
 #endif
 	if (   (symlink (oldlink, dst) != 0)
 	    || (lchown (dst,
-	                (uid == (uid_t) - 1) ? statp->st_uid : uid,
-	                (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)) {
+	                (uid == -1) ? statp->st_uid : (uid_t) uid,
+	                (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)) {
 		return -1;
 	}
 
@@ -476,7 +477,7 @@ static int copy_hardlink (const char *src, const char *dst,
  */
 static int copy_special (const char *src, const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
-                         uid_t uid, gid_t gid)
+                         long int uid, long int gid)
 {
 	int err = 0;
 
@@ -486,8 +487,8 @@ static int copy_special (const char *src, const char *dst,
 
 	if (   (mknod (dst, statp->st_mode & ~07777, statp->st_rdev) != 0)
 	    || (chown (dst,
-	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
-	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	               (uid == -1) ? statp->st_uid : (uid_t) uid,
+	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
 	    || (chmod (dst, statp->st_mode & 07777) != 0)
 	    || (utimes (dst, mt) != 0)) {
 		err = -1;
@@ -508,7 +509,7 @@ static int copy_special (const char *src, const char *dst,
  */
 static int copy_file (const char *src, const char *dst,
                       const struct stat *statp, const struct timeval mt[2],
-                      uid_t uid, gid_t gid)
+                      long int uid, long int gid)
 {
 	int err = 0;
 	int ifd;
@@ -526,8 +527,8 @@ static int copy_file (const char *src, const char *dst,
 	ofd = open (dst, O_WRONLY | O_CREAT | O_TRUNC, 0);
 	if (   (ofd < 0)
 	    || (chown (dst,
-	               (uid == (uid_t) - 1) ? statp->st_uid : uid,
-	               (gid == (gid_t) - 1) ? statp->st_gid : gid) != 0)
+	               (uid == -1) ? statp->st_uid : (uid_t) uid,
+	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
 	    || (chmod (dst, statp->st_mode & 07777) != 0)) {
 		close (ifd);
 		return -1;
