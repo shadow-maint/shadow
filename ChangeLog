@@ -2,6 +2,7 @@
 
 	* libmisc/limits.c, libmisc/obscure.c, src/login_nopam.c,
 	lib/pwauth.c: Avoid empty file when USE_PAM is set.
+	* libmisc/audit_help.c: Avoid empty file when WITH_AUDIT is not set.
 	* src/login_nopam.c: Fix warnings: resolve_hostname takes and
 	returns a constant string.
 

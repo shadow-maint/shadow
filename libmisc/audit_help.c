@@ -78,4 +78,6 @@ void audit_logger (int type, const char *pgname, const char *op,
 					NULL, NULL, NULL, result);
 }
 
+#else				/* WITH_AUDIT */
+extern int errno;	/* warning: ANSI C forbids an empty source file */
 #endif				/* WITH_AUDIT */
