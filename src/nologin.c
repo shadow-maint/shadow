@@ -30,7 +30,7 @@
 #include <unistd.h>
 #include "exitcodes.h"
 
-int main ()
+int main (void)
 {
 	const char *user, *tty;
 
