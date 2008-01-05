@@ -331,7 +331,7 @@ static void check_perms (const struct passwd *pw)
  *
  *	It will not return in case of error.
  */
-static void update_shell (const char *user, char *loginsh)
+static void update_shell (const char *user, char *newshell)
 {
 	const struct passwd *pw;	/* Password entry from /etc/passwd   */
 	struct passwd pwent;		/* New password entry                */
@@ -389,7 +389,7 @@ static void update_shell (const char *user, char *loginsh)
 	 * fields remain unchanged.
 	 */
 	pwent = *pw;
-	pwent.pw_shell = loginsh;
+	pwent.pw_shell = newshell;
 
 	/*
 	 * Update the passwd file entry. If there is a DBM file, update
