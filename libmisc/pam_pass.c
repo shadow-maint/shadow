@@ -18,7 +18,10 @@
 #include "defines.h"
 #include "pam_defs.h"
 
-void do_pam_passwd (const char *user, int silent, int change_expired)
+/* local function prototypes */
+static void do_pam_passwd (const char *user, int silent, int change_expired);
+
+static void do_pam_passwd (const char *user, int silent, int change_expired)
 {
 	pam_handle_t *pamh = NULL;
 	int flags = 0, ret;

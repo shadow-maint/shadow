@@ -87,6 +87,7 @@ static pam_handle_t *pamh = NULL;
 #define	EPOCH		"1969-12-31"
 
 /* local function prototypes */
+static int isnum (const char *s);
 static void usage (void);
 static void date_to_str (char *, size_t, time_t);
 static int new_fields (void);
@@ -135,7 +136,7 @@ static void fail_exit (int code)
 /*
  * isnum - determine whether or not a string is a number
  */
-int isnum (const char *s)
+static int isnum (const char *s)
 {
 	while ('\0' != *s) {
 		if (!isdigit (*s)) {

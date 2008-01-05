@@ -12,6 +12,11 @@
 	prototype.
 	* libmisc/xgetXXbyYY.c, libmisc/yesno.c: Include config.h as a
 	system include, as recommended by the autoconf documentation.
+	* libmisc/pam_pass.c: Define do_pam_passwd() as static and add its
+	prototype.
+	* libmisc/log.c: Define dolastlog() as static and add its
+	prototype.
+	* src/chage.c: Define isnum() as static and add its prototype.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
