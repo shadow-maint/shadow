@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "defines.h"
+#include "prototypes.h"
 #include "getdef.h"
 /*
  * tz - return local timezone name

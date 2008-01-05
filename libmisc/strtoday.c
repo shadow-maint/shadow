@@ -36,6 +36,8 @@
 #ident "$Id$"
 
 #include "defines.h"
+#include "prototypes.h"
+
 #ifndef USE_GETDATE
 #define USE_GETDATE 1
 #endif

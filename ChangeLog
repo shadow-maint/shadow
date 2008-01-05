@@ -4,6 +4,10 @@
 	putgrent prototype.
 	* lib/prototypes.h: "shadowio.h" was included for the definition
 	of the spwd structure. Replace this include by <shadow.h>
+	* libmisc/xmalloc.c, libmisc/utmp.c, libmisc/strtoday.c,
+	libmisc/pwd_init.c, libmisc/tz.c, lib/port.c, lib/fputsx.c:
+	Include "prototypes.h" to make sure the exported prototypes are
+	the ones used for the definition of functions.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

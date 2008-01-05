@@ -35,6 +35,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include "defines.h"
+#include "prototypes.h"
 #include "port.h"
 extern int errno;
 

@@ -10,6 +10,9 @@
 #ifdef HAVE_SYS_RESOURCE_H
 #include <sys/resource.h>
 #endif
+
+#include "prototypes.h"
+
 /*
  * pwd_init - ignore signals, and set resource limits to safe
  * values.  Call this before modifying password files, so that

@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include "defines.h"
+#include "prototypes.h"
+
 char *xmalloc (size_t size)
 {
 	char *ptr;

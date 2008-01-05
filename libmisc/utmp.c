@@ -30,6 +30,7 @@
 #include <config.h>
 
 #include "defines.h"
+#include "prototypes.h"
 
 #include <utmp.h>
 
