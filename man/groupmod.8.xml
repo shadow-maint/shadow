@@ -89,6 +89,19 @@
 	  </para>
 	</listitem>
       </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-p</option>, <option>--password</option>
+	  <replaceable>PASSWORD</replaceable>
+	</term>
+	<listitem>
+	  <para>
+	    The encrypted password, as returned by <citerefentry>
+	    <refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+	    </citerefentry>. The default is to disable the password.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
   </refsect1>
 
