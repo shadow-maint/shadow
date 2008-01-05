@@ -45,9 +45,6 @@ static char **admins = NULL;
 static size_t nadmins = 0;
 static struct sgrp sgroup;
 
-extern char *fgetsx ();
-extern int fputsx ();
-
 #define	FIELDS	4
 
 #ifdef	USE_NIS
@@ -92,7 +89,7 @@ static int bind_nis (void)
 }
 #endif
 
-static char **list (char *s, char **list[], size_t * nlist)
+static char **build_list (char *s, char **list[], size_t * nlist)
 {
 	char **ptr = *list;
 	size_t nelem = *nlist, size;
@@ -184,8 +181,8 @@ struct sgrp *sgetsgent (const char *string)
 		free (members);
 		members = NULL;
 	}
-	sgroup.sg_adm = list (fields[2], &admins, &nadmins);
-	sgroup.sg_mem = list (fields[3], &members, &nmembers);
+	sgroup.sg_adm = build_list (fields[2], &admins, &nadmins);
+	sgroup.sg_mem = build_list (fields[3], &members, &nmembers);
 
 	return &sgroup;
 }

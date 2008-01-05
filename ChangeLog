@@ -25,6 +25,9 @@
 	loginprompt for the internal variable.
 	* src/chsh.c: loginsh is a global variable, use newshell for the
 	update_shell()'s parameter.
+	* lib/gshadow.c: The prototypes of fgetsx() and fputsx() are
+	already defined in prototypes.h. Remove the declaration of these
+	functions.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
