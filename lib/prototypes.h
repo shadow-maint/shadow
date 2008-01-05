@@ -23,7 +23,7 @@
 #endif
 #include <pwd.h>
 #include <grp.h>
-#include "shadowio.h"
+#include <shadow.h>
 
 #include "defines.h"
 

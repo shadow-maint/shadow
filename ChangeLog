@@ -2,6 +2,8 @@
 
 	* lib/prototypes.h: grent.c does not exist anymore. Remove the
 	putgrent prototype.
+	* lib/prototypes.h: "shadowio.h" was included for the definition
+	of the spwd structure. Replace this include by <shadow.h>
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
