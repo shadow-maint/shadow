@@ -31,6 +31,8 @@
 	* lib/gshdow.c: list() is an external function. DO not shadow it
 	with a static function. The internal list() was renamed
 	build_list().
+	* lib/commonio.c: stat shadows another stat variable. Remove this
+	variable, and directly check the result of getfscreatecon().
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -692,9 +692,7 @@ int commonio_close (struct commonio_db *db)
 		}
 #ifdef WITH_SELINUX
 		if (db->scontext != NULL) {
-			int stat = getfscreatecon (&old_context);
-
-			if (stat < 0) {
+			if (getfscreatecon (&old_context) < 0) {
 				errors++;
 				goto fail;
 			}
