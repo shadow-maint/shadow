@@ -1,3 +1,8 @@
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h: grent.c does not exist anymore. Remove the
+	putgrent prototype.
+
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c: Remove duplicate logging to syslog.

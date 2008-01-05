@@ -78,9 +78,6 @@ extern int getlong(const char *numstr, long int *result);
 extern char *fgetsx (char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
 
-/* grent.c */
-extern int putgrent (const struct group *, FILE *);
-
 /* hushed.c */
 extern int hushed (const struct passwd *);
 
