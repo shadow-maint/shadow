@@ -41,9 +41,6 @@
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>
 #endif
-#ifdef HAVE_SHADOW_H
-#include <shadow.h>
-#endif
 #include "defines.h"
 #include "exitcodes.h"
 #include "getdef.h"

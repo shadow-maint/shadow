@@ -36,9 +36,6 @@
 #include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
-#ifdef HAVE_SHADOW_H
-#include <shadow.h>
-#endif
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #include <selinux/av_permissions.h>

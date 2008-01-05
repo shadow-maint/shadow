@@ -12,11 +12,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <signal.h>
-#include <pwd.h>
-#include <nscd.h>
-#ifdef HAVE_SHADOW_H
-#include <shadow.h>
-#endif
+#include "nscd.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 static security_context_t old_context = NULL;

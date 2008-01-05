@@ -101,19 +101,11 @@ char *strchr (), *strrchr (), *strtok ();
  * Possible cases:
  * - /usr/include/shadow.h exists and includes the shadow group stuff.
  * - /usr/include/shadow.h exists, but we use our own gshadow.h.
- * - /usr/include/shadow.h doesn't exist, use our own shadow.h and gshadow.h.
  */
-#if HAVE_SHADOW_H
 #include <shadow.h>
 #if defined(SHADOWGRP) && !defined(GSHADOW)
 #include "gshadow_.h"
 #endif
-#else				/* not HAVE_SHADOW_H */
-#include "shadow_.h"
-#ifdef SHADOWGRP
-#include "gshadow_.h"
-#endif
-#endif				/* not HAVE_SHADOW_H */
 
 #include <limits.h>
 

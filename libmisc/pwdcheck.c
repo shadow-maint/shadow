@@ -2,16 +2,14 @@
 
 #ident "$Id$"
 
-#include <pwd.h>
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-#include "pwauth.h"
-#ifdef HAVE_SHADOW_H
-#include <shadow.h>
-#endif
 #ifdef USE_PAM
 #include "pam_defs.h"
+#else
+#include <shadow.h>
+#include "pwauth.h"
 #endif
 #define WRONGPWD2	"incorrect password for `%s'"
 void passwd_check (const char *user, const char *passwd, const char *progname)

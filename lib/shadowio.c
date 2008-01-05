@@ -5,9 +5,7 @@
 
 #include "prototypes.h"
 #include "defines.h"
-#ifdef HAVE_SHADOW_H
-# include <shadow.h>
-#endif
+#include <shadow.h>
 #include <stdio.h>
 #include "commonio.h"
 #include "shadowio.h"

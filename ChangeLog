@@ -1,5 +1,21 @@
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/pwdcheck.c: Do not include <pwd.h>. Include <shadow.h>
+	and "pwauth.h" only when compiled without PAM support.
+	* src/chfn.c, src/chsh.c: Do not include <shadow.h>
+	* lib/commonio.c: Do not include <shadow.h>. Do not include
+	<pwd.h>. Include "nscd.h" instead of <nscd.h>.
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in: Do not check if shadow.h exist, but make sure it
+	exists.
+	* libmisc/pwdcheck.c, src/chfn.c, src/chsh.c, lib/defines.h,
+	lib/shadowmem.c, lib/shadowio.c, lib/commonio.c:
+	HAVE_SHADOW_H is no more needed (shadow.h should always exist).
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: Remove prototype of putgrent(), add parameter's
 	name of sgetgrent().
 	* lib/prototypes.h: Fix the do_pam_passwd() prototype (it returns
