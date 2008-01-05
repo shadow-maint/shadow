@@ -17,6 +17,8 @@
 	* libmisc/log.c: Define dolastlog() as static and add its
 	prototype.
 	* src/chage.c: Define isnum() as static and add its prototype.
+	* libmisc/xgetspnam.c: Add missing include "shadowio.h". (This was
+	OK as long as prototypes.h included this file.)
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
