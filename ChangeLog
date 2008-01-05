@@ -8,6 +8,8 @@
 	libmisc/pwd_init.c, libmisc/tz.c, lib/port.c, lib/fputsx.c:
 	Include "prototypes.h" to make sure the exported prototypes are
 	the ones used for the definition of functions.
+	* libmisc/console.c: Define is_listed() as static and add its
+	prototype.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
