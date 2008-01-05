@@ -112,10 +112,6 @@ static int timeout;
 
 extern char **newenvp;
 extern size_t newenvc;
-
-extern void dolastlog (struct lastlog *, const struct passwd *,
-		       const char *, const char *);
-
 extern char **environ;
 
 #ifndef	ALARM

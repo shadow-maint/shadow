@@ -1,5 +1,11 @@
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Add the dolastlog() prototype.
+	* lib/prototypes.h: Typo: login.c -> loginprompt.c
+	* src/login.c: Remove declaration of dolastlog().
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/pwdcheck.c: Do not include <pwd.h>. Include <shadow.h>
 	and "pwauth.h" only when compiled without PAM support.
 	* src/chfn.c, src/chsh.c: Do not include <shadow.h>
@@ -34,15 +40,13 @@
 	of the spwd structure. Replace this include by <shadow.h>
 	* libmisc/xmalloc.c, libmisc/utmp.c, libmisc/strtoday.c,
 	libmisc/pwd_init.c, libmisc/tz.c, lib/port.c, lib/fputsx.c,
-	libmisc/pam_pass.c: Include "prototypes.h" to make sure the
-	exported prototypes are the ones used for the definition of
-	functions.
+	libmisc/pam_pass.c, libmisc/log.c: Include "prototypes.h" to make
+	sure the exported prototypes are the ones used for the definition
+	of functions.
 	* libmisc/console.c: Define is_listed() as static and add its
 	prototype.
 	* libmisc/xgetXXbyYY.c, libmisc/yesno.c: Include config.h as a
 	system include, as recommended by the autoconf documentation.
-	* libmisc/log.c: Define dolastlog() as static and add its
-	prototype.
 	* src/chage.c: Define isnum() as static and add its prototype.
 	* libmisc/xgetspnam.c: Add missing include "shadowio.h". (This was
 	OK as long as prototypes.h included this file.)

@@ -99,7 +99,13 @@ extern char **dup_list (char *const *);
 extern int is_on_list (char *const *, const char *);
 extern char **comma_to_list (const char *);
 
-/* login.c */
+/* log.c */
+extern void dolastlog (struct lastlog *ll,
+                       const struct passwd *pw,
+                       const char *line,
+                       const char *host);
+
+/* loginprompt.c */
 extern void login_prompt (const char *, char *, int);
 
 /* mail.c */

@@ -37,12 +37,7 @@
 #include <time.h>
 #include "defines.h"
 #include <lastlog.h>
-
-/* local function prototypes */
-static void dolastlog (struct lastlog *ll,
-                       const struct passwd *pw,
-                       const char *line,
-                       const char *host);
+#include "prototypes.h"
 
 /* 
  * dolastlog - create lastlog entry
@@ -51,7 +46,7 @@ static void dolastlog (struct lastlog *ll,
  *	UID is extracted from the global (struct passwd) entry and the
  *	TTY information is gotten from the (struct utmp).
  */
-static void
+void
 dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	   const char *host)
 {
