@@ -28,6 +28,9 @@
 	* lib/gshadow.c: The prototypes of fgetsx() and fputsx() are
 	already defined in prototypes.h. Remove the declaration of these
 	functions.
+	* lib/gshdow.c: list() is an external function. DO not shadow it
+	with a static function. The internal list() was renamed
+	build_list().
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
