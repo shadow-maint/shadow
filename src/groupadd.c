@@ -179,7 +179,7 @@ static void grp_update (void)
 #ifdef	SHADOWGRP
 	new_sgent (&sgrp);
 	if (is_shadow_grp && pflg) {
-		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+		grp.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 	}
 #endif				/* SHADOWGRP */
 
@@ -455,7 +455,7 @@ static void process_flags (int argc, char **argv)
 			oflg++;
 			break;
 		case 'p':
-			pglf++;
+			pflg++;
 			group_passwd = optarg;
 			break;
 		default:
