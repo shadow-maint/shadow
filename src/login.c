@@ -608,19 +608,19 @@ int main (int argc, char **argv)
 		if (!fflg || (getuid () != 0)) {
 			int failcount = 0;
 			char hostn[256];
-			char login_prompt[256];	/* That's one hell of a prompt :) */
+			char loginprompt[256];	/* That's one hell of a prompt :) */
 
 			/* Make the login prompt look like we want it */
 			if (!gethostname (hostn, sizeof (hostn)))
-				snprintf (login_prompt,
-					  sizeof (login_prompt),
+				snprintf (loginprompt,
+					  sizeof (loginprompt),
 					  _("%s login: "), hostn);
 			else
-				snprintf (login_prompt,
-					  sizeof (login_prompt), _("login: "));
+				snprintf (loginprompt,
+					  sizeof (loginprompt), _("login: "));
 
 			retcode =
-			    pam_set_item (pamh, PAM_USER_PROMPT, login_prompt);
+			    pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
 			PAM_FAIL_CHECK;
 
 			/* if we didn't get a user on the command line,

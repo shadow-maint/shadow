@@ -21,6 +21,8 @@
 	OK as long as prototypes.h included this file.)
 	* src/nologin.c: Make a proper prototype for the main() function
 	declaration. (add void)
+	* src/login.c: login_prompt is the name of a function, use
+	loginprompt for the internal variable.
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 
