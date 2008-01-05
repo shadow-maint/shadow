@@ -5,6 +5,7 @@
 	* src/login.c: Remove declaration of dolastlog().
 	* lib/prototypes.h: Include <lastlog.h> for the declaration of
 	struct lastlog.
+	* lib/prototypes.h: Remove old comments in the header.
 
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 

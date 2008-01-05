@@ -1,15 +1,10 @@
 /*
  * prototypes.h
  *
- * Missing function prototypes
+ * lib and libmisc function prototypes
  *
- * Juha Virtanen, <jiivee@hut.fi>; November 1995
- */
-/*
  * $Id$
  *
- * Added a macro to work around ancient (non-ANSI) compilers, just in case
- * someone ever tries to compile this with SunOS cc...  --marekm
  */
 
 #ifndef _PROTOTYPES_H
