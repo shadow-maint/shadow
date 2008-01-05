@@ -20,6 +20,8 @@
  * This file provide wrapper to the getpwnam or getpwnam_r functions.
  */
 
+#include "shadowio.h"
+
 #define LOOKUP_TYPE	struct spwd
 #define FUNCTION_NAME	getspnam
 #define ARG_TYPE	const char *
