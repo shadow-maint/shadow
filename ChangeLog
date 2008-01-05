@@ -33,6 +33,9 @@
 	build_list().
 	* lib/commonio.c: stat shadows another stat variable. Remove this
 	variable, and directly check the result of getfscreatecon().
+	* libmisc/utmp.c: Remove the declaration of getutent(),
+	getutline(), setutent(), and endutent() which are declared in
+	<utmp.h>
 
 2008-01-01  Nicolas François  <nicolas.francois@centraliens.net>
 

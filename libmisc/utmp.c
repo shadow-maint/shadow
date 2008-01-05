@@ -48,11 +48,6 @@ struct utmpx utxent;
 #endif
 struct utmp utent;
 
-extern struct utmp *getutent ();
-extern struct utmp *getutline ();
-extern void setutent ();
-extern void endutent ();
-
 #define	NO_UTENT \
 	_("No utmp entry.  You must exec \"login\" from the lowest level \"sh\"")
 #define	NO_TTY \
