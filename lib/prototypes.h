@@ -24,6 +24,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <shadow.h>
+#include <lastlog.h>
 
 #include "defines.h"
 
