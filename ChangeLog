@@ -1,5 +1,10 @@
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Fix find_new_gid() prototype. Add a void
+	parameter.
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h: Add the dolastlog() prototype.
 	* lib/prototypes.h: Typo: login.c -> loginprompt.c
 	* src/login.c: Remove declaration of dolastlog().

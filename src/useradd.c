@@ -871,7 +871,7 @@ static void find_new_uid (void)
  *	find_new_gid() locates the next highest unused GID in the group
  *	file
  */
-static void find_new_gid ()
+static void find_new_gid (void)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max;
