@@ -17,11 +17,9 @@
 #include <sys/types.h>
 #include "defines.h"
 #include "pam_defs.h"
+#include "prototypes.h"
 
-/* local function prototypes */
-static void do_pam_passwd (const char *user, int silent, int change_expired);
-
-static void do_pam_passwd (const char *user, int silent, int change_expired)
+void do_pam_passwd (const char *user, int silent, int change_expired)
 {
 	pam_handle_t *pamh = NULL;
 	int flags = 0, ret;
