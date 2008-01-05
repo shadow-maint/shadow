@@ -67,6 +67,7 @@ static int is_shadow_grp;
 #endif
 static char *group_name;
 static char *group_newname;
+static char *group_passwd;
 static gid_t group_id;
 static gid_t group_newid;
 
@@ -75,7 +76,8 @@ static char *Prog;
 static int
     oflg = 0,			/* permit non-unique group ID to be specified with -g */
     gflg = 0,			/* new ID value for the group */
-    nflg = 0;			/* a new name has been specified for the group */
+    nflg = 0,			/* a new name has been specified for the group */
+    pflg = 0;			/* new encrypted password */
 
 /* local function prototypes */
 static void usage (void);
@@ -105,6 +107,7 @@ static void usage (void)
 			   "  -h, --help                    display this help message and exit\n"
 			   "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 			   "  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
+			   "  -p, --password PASSWORD       use encrypted password for the new password\n"
 			   "\n"));
 	exit (E_USAGE);
 }
@@ -122,6 +125,9 @@ static void new_grent (struct group *grent)
 
 	if (gflg)
 		grent->gr_gid = group_newid;
+
+	if (pflg)
+		grent->gr_passwd = group_passwd;
 }
 
 #ifdef	SHADOWGRP
@@ -135,6 +141,9 @@ static void new_sgent (struct sgrp *sgent)
 {
 	if (nflg)
 		sgent->sg_name = xstrdup (group_newname);
+
+	if (pflg)
+		sgent->sg_passwd = group_passwd;
 }
 #endif				/* SHADOWGRP */
 
@@ -173,6 +182,8 @@ static void grp_update (void)
 	if (is_shadow_grp && (osgrp = sgr_locate (group_name))) {
 		sgrp = *osgrp;
 		new_sgent (&sgrp);
+		if (pflg)
+			grp.gr_passwd = SHADOW_PASSWD_STRING;
 	}
 #endif				/* SHADOWGRP */
 
@@ -208,7 +219,7 @@ static void grp_update (void)
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-	if (!sgr_update (&sgrp)) {
+	if (is_shadow_grp && !sgr_update (&sgrp)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
@@ -216,7 +227,7 @@ static void grp_update (void)
 #endif
 		exit (E_GRP_UPDATE);
 	}
-	if (nflg && !sgr_remove (group_name)) {
+	if (is_shadow_grp && nflg && !sgr_remove (group_name)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
@@ -354,6 +365,7 @@ static void process_flags (int argc, char **argv)
 			{"help", no_argument, NULL, 'h'},
 			{"new-name", required_argument, NULL, 'n'},
 			{"non-unique", no_argument, NULL, 'o'},
+			{"password", required_argument, NULL, 'p'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
@@ -375,6 +387,10 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'o':
 				oflg++;
+				break;
+			case 'p':
+				group_passwd = optarg;
+				pflg++;
 				break;
 			default:
 				usage ();

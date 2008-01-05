@@ -1,5 +1,10 @@
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmod.c, src/groupadd.c: Add option --password to
+	groupadd and groupmod (similar to useradd and usermod).
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h: grent.c does not exist anymore. Remove the
 	putgrent prototype.
 	* lib/prototypes.h: "shadowio.h" was included for the definition

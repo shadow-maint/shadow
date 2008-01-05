@@ -8,6 +8,10 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - chage
   * Fix bug which forbid to set the aging information of an account with a
     passwd entry, but no shadow entry.
+- groupadd
+  * New option -p/--password to specify an encrypted password.
+- groupmod
+  * New option -p/--password to specify an encrypted password.
 - grpck
   * Fix logging of changes to syslog when a group file is provided,
     without a gshadow file.

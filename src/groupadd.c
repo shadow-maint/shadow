@@ -68,6 +68,7 @@ static int is_shadow_grp;
  */
 static char *group_name;
 static gid_t group_id;
+static char *group_passwd;
 static char *empty_list = NULL;
 
 static char *Prog;
@@ -75,6 +76,7 @@ static char *Prog;
 static int oflg = 0;		/* permit non-unique group ID to be specified with -g */
 static int gflg = 0;		/* ID value for the new group */
 static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
+static int pflg = 0;		/* new encrypted password */
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -127,7 +129,11 @@ static void new_grent (struct group *grent)
 {
 	memzero (grent, sizeof *grent);
 	grent->gr_name = group_name;
-	grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	if (pflg) {
+		grent->gr_passwd = group_passwd;
+	} else {
+		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	}
 	grent->gr_gid = group_id;
 	grent->gr_mem = &empty_list;
 }
@@ -143,7 +149,11 @@ static void new_sgent (struct sgrp *sgent)
 {
 	memzero (sgent, sizeof *sgent);
 	sgent->sg_name = group_name;
-	sgent->sg_passwd = "!";	/* XXX warning: const */
+	if (pflg) {
+		sgent->sg_passwd = group_passwd;
+	} else {
+		sgent->sg_passwd = "!";	/* XXX warning: const */
+	}
 	sgent->sg_adm = &empty_list;
 	sgent->sg_mem = &empty_list;
 }
@@ -168,6 +178,9 @@ static void grp_update (void)
 	new_grent (&grp);
 #ifdef	SHADOWGRP
 	new_sgent (&sgrp);
+	if (is_shadow_grp && pflg) {
+		grent->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
+	}
 #endif				/* SHADOWGRP */
 
 	/*
@@ -393,6 +406,7 @@ static void process_flags (int argc, char **argv)
 		{"help", no_argument, NULL, 'h'},
 		{"key", required_argument, NULL, 'K'},
 		{"non-unique", required_argument, NULL, 'o'},
+		{"password", required_argument, NULL, 'p'},
 		{NULL, 0, NULL, '\0'}
 	};
 
@@ -439,6 +453,10 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'o':
 			oflg++;
+			break;
+		case 'p':
+			pglf++;
+			group_passwd = optarg;
 			break;
 		default:
 			usage ();
