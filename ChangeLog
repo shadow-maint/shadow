@@ -2,6 +2,8 @@
 
 	* lib/groupio.c: Remove prototype of putgrent(), add parameter's
 	name of sgetgrent().
+	* lib/prototypes.h: Fix the do_pam_passwd() prototype (it returns
+	void).
 
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
@@ -15,15 +17,14 @@
 	* lib/prototypes.h: "shadowio.h" was included for the definition
 	of the spwd structure. Replace this include by <shadow.h>
 	* libmisc/xmalloc.c, libmisc/utmp.c, libmisc/strtoday.c,
-	libmisc/pwd_init.c, libmisc/tz.c, lib/port.c, lib/fputsx.c:
-	Include "prototypes.h" to make sure the exported prototypes are
-	the ones used for the definition of functions.
+	libmisc/pwd_init.c, libmisc/tz.c, lib/port.c, lib/fputsx.c,
+	libmisc/pam_pass.c: Include "prototypes.h" to make sure the
+	exported prototypes are the ones used for the definition of
+	functions.
 	* libmisc/console.c: Define is_listed() as static and add its
 	prototype.
 	* libmisc/xgetXXbyYY.c, libmisc/yesno.c: Include config.h as a
 	system include, as recommended by the autoconf documentation.
-	* libmisc/pam_pass.c: Define do_pam_passwd() as static and add its
-	prototype.
 	* libmisc/log.c: Define dolastlog() as static and add its
 	prototype.
 	* src/chage.c: Define isnum() as static and add its prototype.

@@ -115,7 +115,7 @@ extern struct passwd *get_my_pwent (void);
 extern int obscure (const char *, const char *, const struct passwd *);
 
 /* pam_pass.c */
-extern int do_pam_passwd (const char *, int, int);
+extern void do_pam_passwd (const char *, int, int);
 
 /* port.c */
 extern int isttytime (const char *, const char *, time_t);
