@@ -8,8 +8,8 @@
 #include "commonio.h"
 #include "getdef.h"
 #include "groupio.h"
-extern int putgrent (const struct group *, FILE *);
-extern struct group *sgetgrent (const char *);
+
+extern struct group *sgetgrent (const char *buf);
 
 static struct commonio_entry *merge_group_entries (struct commonio_entry *,
                                                    struct commonio_entry *);

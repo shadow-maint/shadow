@@ -1,5 +1,10 @@
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Remove prototype of putgrent(), add parameter's
+	name of sgetgrent().
+
+2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmod.c, src/groupadd.c: Add option --password to
 	groupadd and groupmod (similar to useradd and usermod).
 
