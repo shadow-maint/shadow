@@ -33,7 +33,7 @@
  * Used by pwck.c and grpck.c
  */
 
-#include "config.h"
+#include <config.h>
 
 #ident "$Id$"
 
