@@ -126,6 +126,8 @@
 	* lib/groupio.c: Remove prototype for sgetgrent().
 	* lib/groupio.c: Add the name of the parameters for
 	merge_group_entries() and split_groups().
+	* lib/groupio.h: Remove prototypes for __gr_dup() and
+	__gr_set_changed().
 
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 

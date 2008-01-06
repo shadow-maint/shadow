@@ -1,5 +1,3 @@
-extern struct group *__gr_dup (const struct group *);
-extern void __gr_set_changed (void);
 extern int gr_close (void);
 extern const struct group *gr_locate (const char *);
 extern int gr_lock (void);
