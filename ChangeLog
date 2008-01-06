@@ -115,6 +115,9 @@
 	__gr_get_head(), __sgr_del_entry(), and __sgr_get_head().
 	* src/pwck.c: Remove prototypes for __pw_del_entry(),
 	__pw_get_head(), __spw_del_entry(), and __spw_get_head().
+	* lib/groupio.c: Remove prototype for sgetgrent().
+	* lib/groupio.c: Add the name of the parameters for
+	merge_group_entries() and split_groups().
 
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 

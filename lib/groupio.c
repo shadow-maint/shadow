@@ -9,11 +9,9 @@
 #include "getdef.h"
 #include "groupio.h"
 
-extern struct group *sgetgrent (const char *buf);
-
-static struct commonio_entry *merge_group_entries (struct commonio_entry *,
-                                                   struct commonio_entry *);
-static int split_groups (unsigned int);
+static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
+                                                   struct commonio_entry *gr2);
+static int split_groups (unsigned int max_members);
 static int group_open_hook (void);
 
 static void *group_dup (const void *ent)
