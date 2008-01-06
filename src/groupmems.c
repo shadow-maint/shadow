@@ -59,8 +59,6 @@
 /*
  * Global variables
  */
-extern int optind;
-extern char *optarg;
 static char *adduser = NULL;
 static char *deluser = NULL;
 static char *thisgroup = NULL;

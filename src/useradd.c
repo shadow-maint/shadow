@@ -131,9 +131,6 @@ static int
     sflg = 0,			/* shell program for new account */
     uflg = 0;			/* specify user ID for new account */
 
-extern char *optarg;
-extern int optind;
-
 static int home_added;
 
 /*
