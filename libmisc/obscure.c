@@ -47,7 +47,7 @@
 /*
  * can't be a palindrome - like `R A D A R' or `M A D A M'
  */
- /*ARGSUSED*/ static int palindrome (const char *old, const char *new)
+static int palindrome (unused const char *old, const char *new)
 {
 	int i, j;
 
@@ -64,7 +64,7 @@
  * more than half of the characters are different ones.
  */
 
- /*ARGSUSED*/ static int similar (const char *old, const char *new)
+static int similar (const char *old, const char *new)
 {
 	int i, j;
 
@@ -91,7 +91,7 @@
  * a nice mix of characters.
  */
 
- /*ARGSUSED*/ static int simple (const char *old, const char *new)
+static int simple (unused const char *old, const char *new)
 {
 	int digits = 0;
 	int uppers = 0;

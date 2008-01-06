@@ -164,7 +164,7 @@ static void su_failure (const char *tty)
 
 #ifdef USE_PAM
 /* Signal handler for parent process later */
-static void catch_signals (int sig)
+static void catch_signals (unused int sig)
 {
 	++caught;
 }
@@ -316,7 +316,7 @@ int main (int argc, char **argv)
 #else				/* !USE_PAM */
 	int err = 0;
 
-	RETSIGTYPE (*oldsig) ();
+	RETSIGTYPE (*oldsig) (int);
 	int is_console = 0;
 
 	struct spwd *spwd = 0;

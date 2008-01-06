@@ -290,7 +290,7 @@ static void init_env (void)
 }
 
 
-static RETSIGTYPE alarm_handler (int sig)
+static RETSIGTYPE alarm_handler (unused int sig)
 {
 	fprintf (stderr, _("\nLogin timed out after %d seconds.\n"), timeout);
 	exit (0);

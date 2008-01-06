@@ -44,7 +44,7 @@ static void usage (void);
 /*
  * catch_signals - signal catcher
  */
-static RETSIGTYPE catch_signals (int sig)
+static RETSIGTYPE catch_signals (unused int sig)
 {
 	exit (10);
 }

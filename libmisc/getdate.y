@@ -112,8 +112,8 @@
 #define yytable  gd_yytable
 #define yycheck  gd_yycheck
 
-static int yylex ();
-static int yyerror (char *s);
+static int yylex (void);
+static int yyerror (const char *s);
 
 #define EPOCH		1970
 #define HOUR(x)		((x) * 60)
@@ -595,8 +595,7 @@ static TABLE const MilitaryTable[] = {
 
 
 
-/* ARGSUSED */
-static int yyerror (char *s)
+static int yyerror (unused const char *s)
 {
   return 0;
 }
@@ -762,7 +761,7 @@ static int LookupWord (char *buff)
 }
 
 static int
-yylex ()
+yylex (void)
 {
   register char c;
   register char *p;

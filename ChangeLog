@@ -1,5 +1,24 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/obscure.c: Tag the `old' parameter of palindrome(),
+	similar(), and simple() as unused.
+	* libmisc/loginprompt.c: Tag the `sig' parameter of login_exit()
+	as unused.
+	* src/expiry.c: Tag the `sig' parameter of catch_signals() as
+	unused.
+	* src/su.c: Tag the `sig' parameter of catch_signals() as unused.
+	* src/su.c: Add int parameter to the prototype of oldsig().
+	* src/login.c: Tag the `sig' parameter of alarm_handler() as
+	unused.
+	* src/sulogin.c: Tag the `sig' parameter of catch_signals() as
+	unused.
+	* libmisc/getdate.y: Tag the `string' parameter of yyerror() as
+	unused.
+	* libmisc/getdate.y: The string provided to yyerror() is const.
+	* libmisc/getdate.y: Fix the prototypes of yylex() and yyerror().
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Remove teh macro definition of SETXXENT_TYPE,
 	SETXXENT_RET, and SETXXENT_TEST. They were used by the now
 	removed pwent.c and grent.c.

@@ -37,7 +37,8 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
-static void login_exit (int sig)
+
+static void login_exit (unused int sig)
 {
 	exit (1);
 }

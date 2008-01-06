@@ -61,7 +61,7 @@ extern char **environ;
 /* local function prototypes */
 static RETSIGTYPE catch_signals (int);
 
-static RETSIGTYPE catch_signals (int sig)
+static RETSIGTYPE catch_signals (unused int sig)
 {
 	exit (1);
 }
