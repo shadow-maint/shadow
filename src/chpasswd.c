@@ -54,7 +54,7 @@ static int eflg = 0;
 static int md5flg = 0;
 static int sflg = 0;
 
-static char *crypt_method = NULL;
+static const char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
 static int is_shadow_pwd;
