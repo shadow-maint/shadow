@@ -18,8 +18,18 @@
 #include "defines.h"
 #include "getdef.h"
 
+/* local function prototypes */
 #ifndef HAVE_L64A
-char *l64a(long value)
+char *l64a(long value);
+#endif
+static char *gensalt (unsigned int salt_size);
+#ifdef USE_SHA_CRYPT
+static unsigned int SHA_salt_size (void);
+static const char *SHA_salt_rounds (int *prefered_rounds);
+#endif
+
+#ifndef HAVE_L64A
+static char *l64a(long value)
 {
 	static char buf[8];
 	char *s = buf;
@@ -66,8 +76,9 @@ char *l64a(long value)
  */
 static unsigned int SHA_salt_size (void)
 {
-	srandom ((unsigned int)time (NULL));
-	return 8 + (double)random () * 9 / RAND_MAX;
+	double rand_rounds = 9 * random ();
+	rand_rounds /= RAND_MAX;
+	return 8 + rand_rounds;
 }
 
 /* ! Arguments evaluated twice ! */
@@ -84,7 +95,7 @@ static unsigned int SHA_salt_size (void)
 /*
  * Return a salt prefix specifying the rounds number for the SHA crypt methods.
  */
-static char *SHA_salt_rounds (int *prefered_rounds)
+static const char *SHA_salt_rounds (int *prefered_rounds)
 {
 	static char rounds_prefix[18];
 	long rounds;
@@ -92,6 +103,7 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 	if (NULL == prefered_rounds) {
 		long min_rounds = getdef_long ("SHA_CRYPT_MIN_ROUNDS", -1);
 		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
+		double rand_rounds;
 
 		if (-1 == min_rounds && -1 == max_rounds)
 			return "";
@@ -106,8 +118,9 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 			max_rounds = min_rounds;
 
 		srand (time (NULL));
-		rounds = min_rounds +
-		         (double)rand () * (max_rounds-min_rounds+1)/RAND_MAX;
+		rand_rounds = (max_rounds-min_rounds+1) * random ();
+		rand_rounds /= RAND_MAX;
+		rounds = min_rounds + rand_rounds;
 	} else if (0 == *prefered_rounds)
 		return "";
 	else
@@ -138,7 +151,8 @@ static char *SHA_salt_rounds (int *prefered_rounds)
 #define MAX_SALT_SIZE 16
 #define MIN_SALT_SIZE 8
 
-char *gensalt (unsigned int salt_size) {
+static char *gensalt (unsigned int salt_size)
+{
 	static char salt[32];
 
 	salt[0] = '\0';
@@ -170,7 +184,7 @@ char *gensalt (unsigned int salt_size) {
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
  */
-char *crypt_make_salt (char *meth, void *arg)
+char *crypt_make_salt (const char *meth, void *arg)
 {
 	/* Max result size for the SHA methods:
 	 *  +3		$5$
@@ -180,7 +194,7 @@ char *crypt_make_salt (char *meth, void *arg)
 	 */
 	static char result[40];
 	size_t salt_len = 8;
-	char *method;
+	const char *method;
 
 	result[0] = '\0';
 
@@ -220,3 +234,4 @@ char *crypt_make_salt (char *meth, void *arg)
 
 	return result;
 }
+

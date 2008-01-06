@@ -1,5 +1,16 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c: Add prototype for l64a(), gensalt(),
+	SHA_salt_size(), and SHA_salt_rounds().
+	* libmisc/salt.c: l64a() and gensalt() are static.
+	* libmisc/salt.c: The `meth' parameter of crypt_make_salt() is a
+	const. (ditto for the method variable).
+	* libmisc/salt.c: SHA_salt_rounds returns a const string.
+	* libmisc/salt.c: Avoid warnings with cast of random() to double.
+	* libmisc/salt.c: Replace rand() by random().
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/Makefile.am: Do not link libshadow.la with the intl, crypt,
 	skey and md libraries...
 	* src/Makefile.am: ...Specify for each binary which library is
