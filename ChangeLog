@@ -1,5 +1,10 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/fr.po: Fix typo: s/rend compte indiqué/rend le compte
+	indiqué/
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/suauth.c: Remove prototype of check_su_auth(). It is
 	redundant with prototypes.h.
 	* src/suauth.c: isgrp() is static.
