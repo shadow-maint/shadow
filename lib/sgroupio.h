@@ -1,5 +1,3 @@
-extern struct sgrp *__sgr_dup (const struct sgrp *);
-extern void __sgr_set_changed (void);
 extern int sgr_close (void);
 extern int sgr_file_present (void);
 extern const struct sgrp *sgr_locate (const char *);

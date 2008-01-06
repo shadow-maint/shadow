@@ -16,6 +16,8 @@
 /* XXX - is the above ok or should it be <time.h> on ultrix? */
 #include <sys/resource.h>
 #endif
+#include "prototypes.h"
+
 void set_filesize_limit (int blocks)
 {
 #if HAVE_ULIMIT_H

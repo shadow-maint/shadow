@@ -9,8 +9,6 @@
 #include "defines.h"
 #include "commonio.h"
 #include "sgroupio.h"
-extern int putsgent (const struct sgrp *, FILE *);
-extern struct sgrp *sgetsgent (const char *);
 
 struct sgrp *__sgr_dup (const struct sgrp *sgent)
 {
@@ -194,8 +192,6 @@ void __sgr_del_entry (const struct commonio_entry *ent)
 /* Sort with respect to group ordering. */
 int sgr_sort ()
 {
-	extern struct commonio_db *__gr_get_db ();
-
 	return commonio_sort_wrt (&gshadow_db, __gr_get_db ());
 }
 #else

@@ -1,7 +1,7 @@
 /*
  * prototypes.h
  *
- * lib and libmisc function prototypes
+ * prototypes of libmisc functions, and private lib functions.
  *
  * $Id$
  *
@@ -22,6 +22,7 @@
 #include <lastlog.h>
 
 #include "defines.h"
+#include "commonio.h"
 
 /* addgrps.c */
 extern int add_groups (const char *);
@@ -44,7 +45,6 @@ extern void chown_tty (const char *, const struct passwd *);
 
 /* console.c */
 extern int console (const char *);
-extern int is_listed (const char *, const char *, int);
 
 /* copydir.c */
 extern int copy_tree (const char *src_root, const char *dst_root,
@@ -73,6 +73,15 @@ extern int getlong(const char *numstr, long int *result);
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
+
+/* groupio.c */
+extern void __gr_del_entry (const struct commonio_entry *ent);
+extern struct commonio_db *__gr_get_db (void);
+extern struct commonio_entry *__gr_get_head (void);
+extern void __gr_set_changed (void);
+
+/* groupmem.c */
+extern struct group *__gr_dup (const struct group *grent);
 
 /* hushed.c */
 extern int hushed (const struct passwd *);
@@ -131,11 +140,19 @@ extern void passwd_check (const char *, const char *, const char *);
 /* pwd_init.c */
 extern void pwd_init (void);
 
+/* pwio.c */
+extern void __pw_del_entry (const struct commonio_entry *ent);
+extern struct commonio_db *__pw_get_db (void);
+extern struct commonio_entry *__pw_get_head (void);
+
+/* pwmem.c */
+extern struct passwd *__pw_dup (const struct passwd *pwent);
+
 /* rlogin.c */
 extern int do_rlogin (const char *, char *, int, char *, int);
 
 /* salt.c */
-extern char *crypt_make_salt (char *meth, void *arg);
+extern char *crypt_make_salt (const char *meth, void *arg);
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *);
@@ -148,6 +165,25 @@ extern void setup (struct passwd *);
 /* setupenv.c */
 extern void setup_env (struct passwd *);
 
+/* sgetgrent.c */
+extern struct group *sgetgrent (const char *buf);
+
+/* sgetpwent.c */
+extern struct passwd *sgetpwent (const char *buf);
+
+/* sgroupio.c */
+extern void __sgr_del_entry (const struct commonio_entry *ent);
+extern struct sgrp *__sgr_dup (const struct sgrp *sgent);
+extern struct commonio_entry *__sgr_get_head (void);
+extern void __sgr_set_changed (void);
+
+/* shadowio.c */
+extern struct commonio_entry *__spw_get_head (void);
+extern void __spw_del_entry (const struct commonio_entry *ent);
+
+/* shadowmem.c */
+extern struct spwd *__spw_dup (const struct spwd *spent);
+
 /* shell.c */
 extern int shell (const char *, const char *, char *const *);
 
@@ -155,7 +191,7 @@ extern int shell (const char *, const char *, char *const *);
 extern long strtoday (const char *);
 
 /* suauth.c */
-extern int check_su_auth (const char *, const char *);
+extern int check_su_auth (const char *actual_id, const char *wanted_id);
 
 /* sulog.c */
 extern void sulog (const char *, int, const char *, const char *);

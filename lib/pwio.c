@@ -9,8 +9,6 @@
 #include <stdio.h>
 #include "commonio.h"
 #include "pwio.h"
-extern struct passwd *sgetpwent (const char *);
-extern int putpwent (const struct passwd *, FILE *);
 
 static void *passwd_dup (const void *ent)
 {

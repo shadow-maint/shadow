@@ -141,7 +141,5 @@ void __spw_del_entry (const struct commonio_entry *ent)
 /* Sort with respect to passwd ordering. */
 int spw_sort ()
 {
-	extern struct commonio_db *__pw_get_db ();
-
 	return commonio_sort_wrt (&shadow_db, __pw_get_db ());
 }

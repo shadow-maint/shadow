@@ -1,5 +1,3 @@
-extern struct spwd *__spw_dup (const struct spwd *);
-extern void __spw_set_changed (void);
 extern int spw_close (void);
 extern int spw_file_present (void);
 extern const struct spwd *spw_locate (const char *);

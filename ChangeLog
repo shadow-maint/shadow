@@ -1,3 +1,33 @@
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/console.c, libmisc/ulimit.c, lib/sgetgrent.c,
+	lib/sgetpwent.c: Include "prototypes.h" to make
+	sure the exported prototypes are the ones used for the definition
+	of functions.
+	* lib/prototypes.h: Added prototypes for __gr_del_entry(),
+	__gr_get_db(), __gr_get_head(), __gr_set_changed(), __gr_dup(),
+	__pw_del_entry(), __pw_get_db(), __pw_get_head(), __pw_dup(),
+	sgetgrent(), sgetpwent(), __sgr_del_entry(), __sgr_dup(),
+	__sgr_get_head(), __sgr_set_changed(), __spw_get_head(),
+	__spw_del_entry(), __spw_dup().
+	* lib/prototypes.h: Removed prototype for is_listed().
+	* lib/prototypes.h: Added name of the check_su_auth()'s parameters.
+	* lib/groupio.h: Removed prototypes for __gr_dup() and
+	__gr_set_changed().
+	* lib/sgroupio.c: Removed prototypes for putsgent(), sgetsgent(),
+	and __gr_get_db().
+	* lib/sgroupio.h: Removed prototypes for __sgr_dup() and
+	__sgr_set_changed().
+	* lib/shadowio.c: Removed prototype for __pw_get_db().
+	* lib/pwio.c: Removed prototype for sgetpwent() and putpwent().
+	* lib/shadowio.h: Removed prototypes for __spw_dup() and
+	__spw_set_changed().
+	* lib/pwio.h: Removed prototypes for __pw_dup() and
+	__pw_set_changed().
+	* lib/commonio.h: Add protection against multiple inclusions.
+	* lib/prototypes.h: Include commonio.h (needed for the
+	__xx_del_entry() functions).
+
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/groupadd.8.xml, man/groupmod.8.xml: Add documentation for

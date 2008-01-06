@@ -1,5 +1,3 @@
-extern struct passwd *__pw_dup (const struct passwd *);
-extern void __pw_set_changed (void);
 extern int pw_close (void);
 extern const struct passwd *pw_locate (const char *);
 extern int pw_lock (void);

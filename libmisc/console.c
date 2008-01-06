@@ -31,6 +31,7 @@
 #include "defines.h"
 #include <stdio.h>
 #include "getdef.h"
+#include "prototypes.h"
 
 #ident "$Id$"
 

@@ -35,7 +35,10 @@
 #include "defines.h"
 #include <stdio.h>
 #include <pwd.h>
+#include "prototypes.h"
+
 #define	NFIELDS	7
+
 /*
  * sgetpwent - convert a string to a (struct passwd)
  *

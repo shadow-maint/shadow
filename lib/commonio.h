@@ -1,4 +1,6 @@
 /* $Id$ */
+#ifndef _COMMONIO_H
+#define _COMMONIO_H
 
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
@@ -117,3 +119,5 @@ extern int commonio_sort_wrt (struct commonio_db *shadow,
 			      struct commonio_db *passwd);
 extern int commonio_sort (struct commonio_db *db,
 			  int (*cmp) (const void *, const void *));
+
+#endif

@@ -34,7 +34,10 @@
 #include <stdio.h>
 #include <grp.h>
 #include "defines.h"
+#include "prototypes.h"
+
 #define	NFIELDS	4
+
 /*
  * list - turn a comma-separated string into an array of (char *)'s
  *
