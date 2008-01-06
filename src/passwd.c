@@ -468,7 +468,7 @@ static char *update_crypt_pw (char *cp)
 #endif
 
 	if (dflg)
-		cp = "";	/* XXX warning: const */
+		*cp = '\0';
 
 	if (uflg && *cp == '!') {
 		if (cp[1] == '\0') {
