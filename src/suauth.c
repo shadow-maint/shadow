@@ -28,8 +28,7 @@ struct passwd pwent;
  */
 static int applies (const char *, char *);
 
-int check_su_auth (const char *, const char *);
-int isgrp (const char *, const char *);
+static int isgrp (const char *, const char *);
 
 static int lines = 0;
 
@@ -197,7 +196,7 @@ static int applies (const char *single, char *list)
 	return 0;
 }
 
-int isgrp (const char *name, const char *group)
+static int isgrp (const char *name, const char *group)
 {
 	struct group *grp;
 
