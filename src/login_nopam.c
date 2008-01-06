@@ -58,7 +58,6 @@
 #endif
 
  /* Path name of the access control file. */
-
 #ifndef	TABLE
 #define TABLE	"/etc/login.access"
 #endif
@@ -71,10 +70,11 @@ static char sep[] = ", \t";	/* list-element separator */
 #define YES             1
 #define NO              0
 
-static int list_match ();
-static int user_match ();
-static int from_match ();
-static int string_match ();
+static int list_match (char *list, const char *item, int (*match_fn) (const char *, const char *));
+static int user_match (const char *tok, const char *string);
+static int from_match (const char *tok, const char *string);
+static int string_match (const char *tok, const char *string);
+static const char *resolve_hostname (const char *string);
 
 /* login_access - match username/group and host/tty with access control file */
 int login_access (const char *user, const char *from)
@@ -137,7 +137,7 @@ int login_access (const char *user, const char *from)
 }
 
 /* list_match - match an item against a list of tokens with exceptions */
-static int list_match (char *list, const char *item, int (*match_fn) ())
+static int list_match (char *list, const char *item, int (*match_fn) (const char *, const char*))
 {
 	char *tok;
 	int match = NO;
@@ -245,8 +245,7 @@ static int user_match (const char *tok, const char *string)
 	return (NO);
 }
 
-static const char *resolve_hostname (string)
-const char *string;
+static const char *resolve_hostname (const char *string)
 {
 	/*
 	 * Resolve hostname to numeric IP address, as suggested
