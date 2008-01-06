@@ -1,5 +1,10 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: Remove the src parameter of copy_special().
+	The entry's information are taken from the stat structure.
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/console.c, libmisc/ulimit.c, lib/sgetgrent.c,
 	lib/sgetpwent.c: Include "prototypes.h" to make
 	sure the exported prototypes are the ones used for the definition

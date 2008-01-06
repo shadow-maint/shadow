@@ -66,7 +66,7 @@ static int copy_symlink (const char *src, const char *dst,
 #endif
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp);
-static int copy_special (const char *src, const char *dst,
+static int copy_special (const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
                          long int uid, long int gid);
 static int copy_file (const char *src, const char *dst,
@@ -323,7 +323,7 @@ static int copy_entry (const char *src, const char *dst,
 		 */
 
 		else if (!S_ISREG (sb.st_mode)) {
-			err = copy_special (src, dst, &sb, mt, uid, gid);
+			err = copy_special (dst, &sb, mt, uid, gid);
 		}
 
 		/*
@@ -475,7 +475,7 @@ static int copy_hardlink (const char *src, const char *dst,
  *
  *	Return 0 on success, -1 on error.
  */
-static int copy_special (const char *src, const char *dst,
+static int copy_special (const char *dst,
                          const struct stat *statp, const struct timeval mt[2],
                          long int uid, long int gid)
 {
