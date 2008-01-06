@@ -43,11 +43,6 @@
 #include "shadowio.h"
 #include "getdef.h"
 #include "nscd.h"
-extern void __pw_del_entry (const struct commonio_entry *);
-extern struct commonio_entry *__pw_get_head (void);
-
-extern void __spw_del_entry (const struct commonio_entry *);
-extern struct commonio_entry *__spw_get_head (void);
 
 /*
  * Exit codes
