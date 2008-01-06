@@ -37,7 +37,6 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "port.h"
-extern int errno;
 
 static FILE *ports;
 
