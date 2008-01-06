@@ -54,7 +54,7 @@ char *pw_encrypt (const char *clear, const char *salt)
 	 * supported, and return a DES encrypted password. */
 	if (salt && salt[0] == '$' && strlen (cp) <= 13)
 	{
-		char *method = "$1$";
+		const char *method;
 		switch (salt[1])
 		{
 			case '1':
@@ -67,7 +67,11 @@ char *pw_encrypt (const char *clear, const char *salt)
 				method = "SHA512";
 				break;
 			default:
-				method[1] = salt[1];
+			{
+				static char nummethod[4] = "$x$";
+				nummethod[1] = salt[1];
+				method = &nummethod[0];
+			}
 		}
 		fprintf (stderr,
 			 _("crypt method not supported by libcrypt? (%s)\n"),
