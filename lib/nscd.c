@@ -11,12 +11,12 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-
+#include "nscd.h"
 
 /*
  * nscd_flush_cache - flush specified service buffer in nscd cache
  */
-int nscd_flush_cache (char *service)
+int nscd_flush_cache (const char *service)
 {
 	pid_t pid, termpid;
 	int err, status;

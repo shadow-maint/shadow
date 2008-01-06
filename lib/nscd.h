@@ -4,6 +4,6 @@
 /*
  * nscd_flush_cache - flush specified service buffer in nscd cache
  */
-extern int nscd_flush_cache (char *service);
+extern int nscd_flush_cache (const char *service);
 
 #endif
