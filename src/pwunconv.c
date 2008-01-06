@@ -46,8 +46,6 @@
  */
 static int shadow_locked = 0, passwd_locked = 0;
 
-char *l64a ();
-
 /* local function prototypes */
 static void fail_exit (int);
 
