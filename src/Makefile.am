@@ -50,16 +50,17 @@ noinst_PROGRAMS = id sulogin
 suidbins       = su
 suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
 
-LDADD 	       = $(top_builddir)/libmisc/libmisc.a \
+LDADD          = $(INTLLIBS) \
+		 $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
 chage_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
-chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX)
-chgpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
-chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX)
-chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
-gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX)
+chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
+chgpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
+chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
+chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
+gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT)
 groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
@@ -67,21 +68,22 @@ groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD    = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD  = $(LDADD) $(LIBSELINUX)
 grpunconv_LDADD = $(LDADD) $(LIBSELINUX)
-login_SOURCES	= \
+login_SOURCES  = \
 	login.c \
 	login_nopam.c
-login_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-newgrp_LDADD   = $(LDADD) $(LIBPAM) $(LIBAUDIT)
-newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
+login_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
+newgrp_LDADD   = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT)
+newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
 nologin_LDADD  =
-passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT) $(LIBSELINUX)
+passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT)
 pwck_LDADD     = $(LDADD) $(LIBSELINUX)
 pwconv_LDADD   = $(LDADD) $(LIBSELINUX)
 pwunconv_LDADD = $(LDADD) $(LIBSELINUX)
 su_SOURCES     = \
 	su.c \
 	suauth.c
-su_LDADD       = $(LDADD) $(LIBPAM)
+su_LDADD       = $(LDADD) $(LIBPAM) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
+sulogin_LDADD  = $(LDADD) $(LIBCRYPT)
 useradd_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 userdel_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
 usermod_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
