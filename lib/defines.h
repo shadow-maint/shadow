@@ -262,19 +262,6 @@ char *strchr (), *strrchr (), *strtok ();
 #define STRFCPY(A,B) \
 	(strncpy((A), (B), sizeof(A) - 1), (A)[sizeof(A) - 1] = '\0')
 
-/* get rid of a few ugly repeated #ifdefs in pwent.c and grent.c */
-/* XXX - this is ugly too, configure should test it and not check for
-   any hardcoded system names, if possible.  --marekm */
-#if defined(AIX) || defined(__linux__)
-#define SETXXENT_TYPE void
-#define SETXXENT_RET(x) return
-#define SETXXENT_TEST(x) x; if (0)	/* compiler should optimize this away */
-#else
-#define SETXXENT_TYPE int
-#define SETXXENT_RET(x) return(x)
-#define SETXXENT_TEST(x) if (x)
-#endif
-
 #ifndef PASSWD_FILE
 #define PASSWD_FILE "/etc/passwd"
 #endif
@@ -293,11 +280,6 @@ char *strchr (), *strrchr (), *strtok ();
 #endif
 #endif
 
-#define PASSWD_PAG_FILE  PASSWD_FILE ".pag"
-#define GROUP_PAG_FILE   GROUP_FILE  ".pag"
-#define SHADOW_PAG_FILE  SHADOW_FILE ".pag"
-#define SGROUP_PAG_FILE  SGROUP_FILE ".pag"
-
 #ifndef NULL
 #define NULL ((void *) 0)
 #endif
@@ -308,10 +290,6 @@ extern int fputs ();
 extern char *strdup ();
 extern char *strerror ();
 # endif
-#endif
-
-#ifndef HAVE_SNPRINTF
-#include "snprintf.h"
 #endif
 
 /*
@@ -332,6 +310,13 @@ extern char *strerror ();
 #endif
 
 #include <libaudit.h>
+#endif
+
+/* To be used for verified unused parameters */
+#if defined(__GNUC__) && !defined(__STRICT_ANSI__)
+# define unused __attribute__((unused))
+#else
+# define unused
 #endif
 
 #endif				/* _DEFINES_H_ */

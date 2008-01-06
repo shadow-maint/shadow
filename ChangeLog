@@ -1,5 +1,17 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Remove teh macro definition of SETXXENT_TYPE,
+	SETXXENT_RET, and SETXXENT_TEST. They were used by the now
+	removed pwent.c and grent.c.
+	* lib/defines.h: Remove the definition of PASSWD_PAG_FILE,
+	GROUP_PAG_FILE, SHADOW_PAG_FILE, and SGROUP_PAG_FILE. They are
+	never used.
+	* lib/defines.h: Don't include "snprintf.h". The file does not
+	exist in shadow.
+	* lib/defines.h: Add new macro unused to tag unused parameters.
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c, src/groupmems.c: Assume optarg and optind are
 	declared in <getopt.h>.
 
