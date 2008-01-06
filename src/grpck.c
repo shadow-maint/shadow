@@ -41,13 +41,9 @@
 #include "groupio.h"
 #include "nscd.h"
 #include "prototypes.h"
-extern void __gr_del_entry (const struct commonio_entry *);
-extern struct commonio_entry *__gr_get_head (void);
 
 #ifdef SHADOWGRP
 #include "sgroupio.h"
-extern void __sgr_del_entry (const struct commonio_entry *);
-extern struct commonio_entry *__sgr_get_head (void);
 #endif
 
 /*

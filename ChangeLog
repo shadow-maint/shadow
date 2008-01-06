@@ -42,6 +42,8 @@
 	* lib/commonio.h: Add protection against multiple inclusions.
 	* lib/prototypes.h: Include commonio.h (needed for the
 	__xx_del_entry() functions).
+	* src/grpck.c: Remove prototypes for __gr_del_entry(),
+	__gr_get_head(), __sgr_del_entry(), and __sgr_get_head().
 
 2008-01-05  Nicolas François  <nicolas.francois@centraliens.net>
 
