@@ -1,5 +1,11 @@
 2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Remove the pw_name argument of new_pw_passwd. Use
+	the user_newname global variable instead. This avoid using a
+	parameter with the same name as a function.
+
+2008-01-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Removed unused gid parameter of syslog_sg().
 	* src/newgrp.c: The loginname and tty buffers are never changed.
 	Add the const qualifier.

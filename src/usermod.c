@@ -310,7 +310,7 @@ static void usage (void)
  * update encrypted password string (for both shadow and non-shadow
  * passwords)
  */
-static char *new_pw_passwd (char *pw_pass, const char *pw_name)
+static char *new_pw_passwd (char *pw_pass)
 {
 	if (Lflg && pw_pass[0] != '!') {
 		char *buf = xmalloc (strlen (pw_pass) + 2);
@@ -319,7 +319,7 @@ static char *new_pw_passwd (char *pw_pass, const char *pw_name)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating passwd",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "lock user `%s' password", pw_name));
+		SYSLOG ((LOG_INFO, "lock user `%s' password", user_newname));
 		strcpy (buf, "!");
 		strcat (buf, pw_pass);
 		pw_pass = buf;
@@ -338,7 +338,7 @@ static char *new_pw_passwd (char *pw_pass, const char *pw_name)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating password",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "unlock user `%s' password", pw_name));
+		SYSLOG ((LOG_INFO, "unlock user `%s' password", user_newname));
 		s = pw_pass;
 		while (*s) {
 			*s = *(s + 1);
@@ -349,7 +349,7 @@ static char *new_pw_passwd (char *pw_pass, const char *pw_name)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
 			      user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user `%s' password", pw_name));
+		SYSLOG ((LOG_INFO, "change user `%s' password", user_newname));
 		pw_pass = xstrdup (user_pass);
 	}
 	return pw_pass;
@@ -374,7 +374,7 @@ static void new_pwent (struct passwd *pwent)
 	}
 	if (!is_shadow_pwd)
 		pwent->pw_passwd =
-		    new_pw_passwd (pwent->pw_passwd, pwent->pw_name);
+		    new_pw_passwd (pwent->pw_passwd);
 
 	if (uflg) {
 #ifdef WITH_AUDIT
@@ -519,7 +519,7 @@ static void new_spent (struct spwd *spent)
 		spent->sp_expire = user_expire;
 #endif
 	}
-	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp, spent->sp_namp);
+	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 	if (pflg)
 		spent->sp_lstchg = time ((time_t *) 0) / SCALE;
 }
