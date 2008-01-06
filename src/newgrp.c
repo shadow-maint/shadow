@@ -58,7 +58,7 @@ static void usage (void);
 static void check_perms (const struct group *grp,
                          struct passwd *pwd,
                          const char *groupname);
-static void syslog_sg (gid_t gid, const char *name, const char *group);
+static void syslog_sg (const char *name, const char *group);
 
 /*
  * usage - print command usage message
@@ -194,10 +194,10 @@ failure:
  *	The loggout will also be logged when the user will quit the
  *	sg/newgrp session.
  */
-static void syslog_sg (gid_t gid, const char *name, const char *group)
+static void syslog_sg (const char *name, const char *group)
 {
-	char *loginname = getlogin ();
-	char *tty = ttyname (0);
+	const char *loginname = getlogin ();
+	const char *tty = ttyname (0);
 
 	if (loginname != NULL)
 		loginname = xstrdup (loginname);
@@ -547,7 +547,7 @@ int main (int argc, char **argv)
 	 */
 #ifdef	USE_SYSLOG
 	if (getdef_bool ("SYSLOG_SG_ENAB")) {
-		syslog_sg (gid, name, group);
+		syslog_sg (name, group);
 	}
 #endif				/* USE_SYSLOG */
 
