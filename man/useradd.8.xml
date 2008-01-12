@@ -91,7 +91,7 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-D</option>
+	  <option>-D</option>, <option>--defaults</option>
 	</term>
 	<listitem>
 	  <para>

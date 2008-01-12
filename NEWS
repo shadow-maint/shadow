@@ -5,6 +5,11 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 *** general:
 - packaging
   * Do not install the shadow library per default.
+- adduser
+  * Fix the handling of the --defaults option (it required an argument,
+    but should behave as -D)
+  * Document the --defaults option, which was already described in the
+    useradd's Usage information.
 - chage
   * Fix bug which forbid to set the aging information of an account with a
     passwd entry, but no shadow entry.

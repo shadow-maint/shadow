@@ -932,7 +932,7 @@ static void process_flags (int argc, char **argv)
 			{"base-dir", required_argument, NULL, 'b'},
 			{"comment", required_argument, NULL, 'c'},
 			{"home-dir", required_argument, NULL, 'd'},
-			{"defaults", required_argument, NULL, 'D'},
+			{"defaults", no_argument, NULL, 'D'},
 			{"expiredate", required_argument, NULL, 'e'},
 			{"inactive", required_argument, NULL, 'f'},
 			{"gid", required_argument, NULL, 'g'},
