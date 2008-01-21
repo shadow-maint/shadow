@@ -169,7 +169,7 @@ static void check_perms (const struct group *grp,
 				 "Invalid password for group `%s' from `%s'",
 				 groupname, pwd->pw_name));
 			sleep (1);
-			fputs (_("Invalid password."), stderr);
+			fputs (_("Invalid password.\n"), stderr);
 			goto failure;
 		}
 	}
@@ -252,6 +252,8 @@ static void syslog_sg (const char *name, const char *group)
 		} else if (child) {
 			/* parent - wait for child to finish, then log session close */
 			int cst = 0;
+			gid_t gid = getgid();
+			struct group *grp = getgrgid (gid);
 
 			do {
 				errno = 0;
@@ -265,10 +267,22 @@ static void syslog_sg (const char *name, const char *group)
 			} while ((pid == child && WIFSTOPPED (cst)) ||
 				 (pid != child && errno == EINTR));
 			/* local, no need for xgetgrgid */
-			SYSLOG ((LOG_INFO,
-				 "user `%s' (login `%s' on %s) returned to group `%s'",
-				 name, loginname, tty,
-				 getgrgid (gid)->gr_name));
+			if (NULL != grp) {
+				SYSLOG ((LOG_INFO,
+				         "user `%s' (login `%s' on %s) returned to group `%s'",
+				         name, loginname, tty, grp->gr_name));
+			} else {
+				SYSLOG ((LOG_INFO,
+				         "user `%s' (login `%s' on %s) returned to group `%d'",
+				         name, loginname, tty, gid));
+				/* Either the user's passwd entry has a
+				 * GID that does not match with any group,
+				 * or the group was deleted while the user
+				 * was in a newgrp session.*/
+				SYSLOG ((LOG_WARN,
+				         "unknown GID `%u' used by user `%s'",
+				         gid, name));
+			}
 			closelog ();
 			exit (0);
 		}

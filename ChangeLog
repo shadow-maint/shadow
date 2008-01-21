@@ -1,3 +1,12 @@
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/newgrp.c: Fix segfault when an user returns to an
+	unknown GID (either the user was deleted during the user's newgrp
+	session or the user's passwd entry referenced an invalid group).
+	Add a syslog warning in that case.
+	* src/newgrp.c: Add an end of line when reporting an invalid
+	password.
+
 2008-01-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/useradd.c: Fix the handling of the --defaults option
