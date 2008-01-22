@@ -1,5 +1,9 @@
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Fix typo in comment: s/find_new_uid/find_new_gid/
+
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: s/gid/GID/ in message string.
 	* src/useradd.c: Set this string for translation.
 

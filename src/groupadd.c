@@ -219,7 +219,7 @@ static void find_new_gid (void)
 	gid_t gid_min, gid_max;
 
 	/*
-	 * It doesn't make sense to use find_new_uid(),
+	 * It doesn't make sense to use find_new_gid(),
 	 * if a GID is specified via "-g" option.
 	 */
 	assert (!gflg);
