@@ -2,6 +2,10 @@
 
 	* man/grpck.8.xml: Fix typo. Remove "the" from "All entries in the
 	<filename></filename> are checked [...]"
+	* man/grpck.8.xml: Conditionally include the parts mentioning the
+	gshadow file (based on SHADOWGRP).
+	* man/grpck.8.xml: Add reference to the gshadow(5) manpage
+	(conditionally included).
 
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 

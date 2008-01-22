@@ -41,7 +41,8 @@
     <para>
       The <command>grpck</command> command verifies the integrity of the
       system authentication information. All entries in
-      <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
+      <filename>/etc/group</filename> <phrase condition="gshadow">and
+      <filename>/etc/gshadow</filename></phrase>
       are checked to see that the entry has the proper format and valid data
       in each field. The user is prompted to delete entries that are
       improperly formatted or which have other uncorrectable errors.
@@ -100,18 +101,23 @@
 	<term><option>-s</option></term>
 	<listitem>
 	  <para>
-	    Sort entries in <filename>/etc/group</filename> and
-	    <filename>/etc/gshadow</filename> by GID.
+	    Sort entries in <filename>/etc/group</filename>
+	    <phrase condition="gshadow">and
+	    <filename>/etc/gshadow</filename></phrase>
+	    by GID.
 	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
     <para>
-      By default, <command>grpck</command> operates on the files
-      <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>. 
+      By default, <command>grpck</command> operates on
+      <filename>/etc/group</filename><phrase condition="gshadow"> and
+      <filename>/etc/gshadow</filename></phrase>.
       The user may select alternate files with the <emphasis
-      remap='I'>group</emphasis> and <emphasis remap='I'>shadow</emphasis>
-      parameters.
+      remap='I'>group</emphasis>
+      <phrase condition="no_gshadow">parameter.</phrase>
+      <phrase condition="gshadow">and <emphasis remap='I'>shadow</emphasis>
+      parameters.</phrase>
     </para>
   </refsect1>
 
@@ -136,7 +142,7 @@
 	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
 	  <para>Secure group account information.</para>
@@ -157,6 +163,9 @@
       <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
+      <citerefentry condition="gshadow">
+	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>,
+      </citerefentry>
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
