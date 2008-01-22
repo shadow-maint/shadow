@@ -1,5 +1,10 @@
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/grpck.8.xml: Fix typo. Remove "the" from "All entries in the
+	<filename></filename> are checked [...]"
+
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/grpck.8.xml, man/pwck.8.xml: Indicate that the shadow
 	parameter is optional (i.e. a passwd file can be specified without
 	a shadow file, and the group file can be specified without the

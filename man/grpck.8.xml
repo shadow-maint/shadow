@@ -40,7 +40,7 @@
     <title>DESCRIPTION</title>
     <para>
       The <command>grpck</command> command verifies the integrity of the
-      system authentication information. All entries in the
+      system authentication information. All entries in
       <filename>/etc/group</filename> and <filename>/etc/gshadow</filename>
       are checked to see that the entry has the proper format and valid data
       in each field. The user is prompted to delete entries that are
