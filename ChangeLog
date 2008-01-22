@@ -1,5 +1,10 @@
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: s/gid/GID/ in message string.
+	* src/useradd.c: Set this string for translation.
+
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/grpck.8.xml: Fix typo. Remove "the" from "All entries in the
 	<filename></filename> are checked [...]"
 	* man/grpck.8.xml: Conditionally include the parts mentioning the

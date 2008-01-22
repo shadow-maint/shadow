@@ -903,7 +903,7 @@ static void find_new_gid (void)
 		}
 		if (user_gid == gid_max) {
 			fprintf (stderr,
-				 "%s: can't get unique gid (run out of GIDs)\n",
+				 _("%s: can't get unique GID (run out of GIDs)\n"),
 				 Prog);
 			fail_exit (4);
 		}
