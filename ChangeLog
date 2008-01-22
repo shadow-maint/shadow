@@ -1,5 +1,12 @@
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/grpck.8.xml, man/pwck.8.xml: Indicate that the shadow
+	parameter is optional (i.e. a passwd file can be specified without
+	a shadow file, and the group file can be specified without the
+	gshadow file).
+
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/grpck.8.xml: Document the options with a list of options,
 	as in the pwck(8) manpage.
 
