@@ -1,5 +1,10 @@
 2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/grpck.8.xml: Document the options with a list of options,
+	as in the pwck(8) manpage.
+
+2008-01-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/newgrp.c: Fix segfault when an user returns to an
 	unknown GID (either the user was deleted during the user's newgrp
 	session or the user's passwd entry referenced an invalid group).
