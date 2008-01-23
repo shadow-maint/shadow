@@ -319,7 +319,8 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating passwd",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "lock user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "lock user `%s' password",
+		         lflg ? user_newname : user_name));
 		strcpy (buf, "!");
 		strcat (buf, pw_pass);
 		pw_pass = buf;
@@ -338,7 +339,8 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating password",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "unlock user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "unlock user `%s' password",
+		         lflg ? user_newname : user_name));
 		s = pw_pass;
 		while (*s) {
 			*s = *(s + 1);
@@ -349,7 +351,8 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
 			      user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "change user `%s' password",
+		         lflg ? user_newname : user_name));
 		pw_pass = xstrdup (user_pass);
 	}
 	return pw_pass;
