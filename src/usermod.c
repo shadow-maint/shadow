@@ -930,15 +930,7 @@ static void process_flags (int argc, char **argv)
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-
-				/*
-				 * If the name does not really change, we mustn't
-				 * set the flag as this will cause rather serious
-				 * problems later!
-				 */
-				if (strcmp (user_name, optarg))
-					lflg++;
-
+				lflg++;
 				user_newname = optarg;
 				break;
 			case 'L':
@@ -982,6 +974,38 @@ static void process_flags (int argc, char **argv)
 		fprintf (stderr, _("%s: no flags given\n"), Prog);
 		exit (E_USAGE);
 	}
+
+	if (user_newid == user_id) {
+		uflg = 0;
+	}
+	if (user_newgid == user_gid) {
+		gflg = 0;
+	}
+	if (strcmp (user_newshell, user_shell) == 0) {
+		sflg = 0;
+	}
+	if (strcmp (user_newname, user_name) == 0) {
+		lflg = 0;
+	}
+	if (user_newinactive == user_inactive) {
+		fflg = 0;
+	}
+	if (user_newexpire == user_expire) {
+		eflg = 0;
+	}
+	if (strcmp (user_newhome, user_home) == 0) {
+		dflg = 0;
+	}
+	if (strcmp (user_newcomment, user_comment) == 0) {
+		cflg = 0;
+	}
+
+	if (Uflg + uflg + sflg + pflg + oflg + mflg + Lflg + lflg + Gflg +
+	    gflg + fflg + eflg + dflg + cflg == 0) {
+		fprintf (stderr, _("%s: no changes\n"), Prog);
+		exit (E_SUCCESS);
+	}
+
 	if (!is_shadow_pwd && (eflg || fflg)) {
 		fprintf (stderr,
 			 _

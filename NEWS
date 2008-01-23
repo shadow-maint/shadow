@@ -50,6 +50,11 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.
+  * Check that the new fields set with -u, -s, -l, -g, -f, -e, -d, and -c
+    differ from the old ones. If a requested new value is equal to the old
+    one, no changes will be performed for that field. If no fields are
+    changed, usermod will exist successfully with a warning. This avoids
+    logging changes to syslog when there are actually no changes.
 - vipw/vigr
   * Recommend editing the shadowed (resp. regular) file if the regular (resp.
     shadowed) file was edited.
