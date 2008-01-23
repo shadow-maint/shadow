@@ -1,5 +1,13 @@
 2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Always define user_newcomment, user_newshell,
+	user_newexpire, and user_newinactive. It is more simple to always
+	have user_<x> as the old field, and user_new<x> as the new field
+	(even if the field did not change) instead of changing the
+	algorithm depending on WITH_AUDIT.
+
+2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: user_newname can only be used in WITH_AUDIT code
 	or when lflg is set. This issue was introduced in the code
 	refactoring of usermod.

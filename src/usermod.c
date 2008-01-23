@@ -87,20 +87,17 @@ static uid_t user_newid;
 static gid_t user_gid;
 static gid_t user_newgid;
 static char *user_comment;
+static char *user_newcomment;
 static char *user_home;
 static char *user_newhome;
 static char *user_shell;
+static char *user_newshell;
 static long user_expire;
+static long user_newexpire;
 static long user_inactive;
+static long user_newinactive;
 static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
-
-#ifdef WITH_AUDIT
-static char *user_newcomment;	/* Audit */
-static char *user_newshell;	/* Audit */
-static long user_newexpire;	/* Audit */
-static long user_newinactive;	/* Audit */
-#endif
 
 static char *Prog;
 
@@ -319,8 +316,7 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating passwd",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "lock user `%s' password",
-		         lflg ? user_newname : user_name));
+		SYSLOG ((LOG_INFO, "lock user `%s' password", user_newname));
 		strcpy (buf, "!");
 		strcat (buf, pw_pass);
 		pw_pass = buf;
@@ -339,8 +335,7 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "updating password",
 			      user_newname, user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "unlock user `%s' password",
-		         lflg ? user_newname : user_name));
+		SYSLOG ((LOG_INFO, "unlock user `%s' password", user_newname));
 		s = pw_pass;
 		while (*s) {
 			*s = *(s + 1);
@@ -351,8 +346,7 @@ static char *new_pw_passwd (char *pw_pass)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
 			      user_newname, user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user `%s' password",
-		         lflg ? user_newname : user_name));
+		SYSLOG ((LOG_INFO, "change user `%s' password", user_newname));
 		pw_pass = xstrdup (user_pass);
 	}
 	return pw_pass;
@@ -404,10 +398,8 @@ static void new_pwent (struct passwd *pwent)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing comment",
 			      user_newname, user_newid, 1);
-		pwent->pw_gecos = user_newcomment;
-#else
-		pwent->pw_gecos = user_comment;
 #endif
+		pwent->pw_gecos = user_newcomment;
 	}
 
 	if (dflg) {
@@ -425,15 +417,10 @@ static void new_pwent (struct passwd *pwent)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing user shell",
 			      user_newname, user_newid, 1);
+#endif
 		SYSLOG ((LOG_INFO, "change user `%s' shell from `%s' to `%s'",
 			 pwent->pw_name, pwent->pw_shell, user_newshell));
 		pwent->pw_shell = user_newshell;
-#else
-		SYSLOG ((LOG_INFO,
-			 "change user `%s' shell from `%s' to `%s'",
-			 pwent->pw_name, pwent->pw_shell, user_shell));
-		pwent->pw_shell = user_shell;
-#endif
 	}
 }
 
@@ -453,17 +440,11 @@ static void new_spent (struct spwd *spent)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			      "changing inactive days", user_newname,
 			      user_newid, 1);
+#endif
 		SYSLOG ((LOG_INFO,
 			 "change user `%s' inactive from `%ld' to `%ld'",
 			 spent->sp_namp, spent->sp_inact, user_newinactive));
 		spent->sp_inact = user_newinactive;
-#else
-
-		SYSLOG ((LOG_INFO,
-			 "change user `%s' inactive from `%ld' to `%ld'",
-			 spent->sp_namp, spent->sp_inact, user_inactive));
-		spent->sp_inact = user_inactive;
-#endif
 	}
 	if (eflg) {
 		/* XXX - dates might be better than numbers of days.  --marekm */
@@ -510,17 +491,11 @@ static void new_spent (struct spwd *spent)
 				      "changing expiration date", user_newname,
 				      user_newid, 1);
 		}
-
+#endif
 		SYSLOG ((LOG_INFO,
 			 "change user `%s' expiration from `%ld' to `%ld'",
 			 spent->sp_namp, spent->sp_expire, user_newexpire));
 		spent->sp_expire = user_newexpire;
-#else
-		SYSLOG ((LOG_INFO,
-			 "change user `%s' expiration from `%ld' to `%ld'",
-			 spent->sp_namp, spent->sp_expire, user_expire));
-		spent->sp_expire = user_expire;
-#endif
 	}
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 	if (pflg)
@@ -612,17 +587,14 @@ static void update_group (void)
 			SYSLOG ((LOG_INFO, "delete `%s' from group `%s'",
 				 user_name, ngrp->gr_name));
 		} else if (!was_member && Gflg && is_member) {
-			ngrp->gr_mem = add_list (ngrp->gr_mem,
-						 lflg ? user_newname :
-						 user_name);
+			ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
 			changed = 1;
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "adding user to group", user_name, -1, 1);
 #endif
 			SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
-				 lflg ? user_newname : user_name,
-				 ngrp->gr_name));
+			         user_newname, ngrp->gr_name));
 		}
 		if (!changed)
 			continue;
@@ -724,9 +696,7 @@ static void update_gshadow (void)
 				 "delete `%s' from shadow group `%s'",
 				 user_name, nsgrp->sg_name));
 		} else if (!was_member && Gflg && is_member) {
-			nsgrp->sg_mem = add_list (nsgrp->sg_mem,
-						  lflg ? user_newname :
-						  user_name);
+			nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
 			changed = 1;
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -734,8 +704,7 @@ static void update_gshadow (void)
 				      user_newname, -1, 1);
 #endif
 			SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
-				 lflg ? user_newname : user_name,
-				 nsgrp->sg_name));
+			         user_newname, nsgrp->sg_name));
 		}
 		if (!changed)
 			continue;
@@ -830,14 +799,12 @@ static void process_flags (int argc, char **argv)
 		user_home = xstrdup (pwd->pw_dir);
 		user_shell = xstrdup (pwd->pw_shell);
 	}
-#ifdef WITH_AUDIT
 	user_newname = user_name;
 	user_newid = user_id;
 	user_newgid = user_gid;
 	user_newcomment = user_comment;
 	user_newhome = user_home;
 	user_newshell = user_shell;
-#endif
 
 #ifdef	USE_NIS
 	/*
@@ -865,10 +832,8 @@ static void process_flags (int argc, char **argv)
 		if (is_shadow_pwd && (spwd = getspnam (user_name))) {
 			user_expire = spwd->sp_expire;
 			user_inactive = spwd->sp_inact;
-#ifdef WITH_AUDIT
 			user_newexpire = user_expire;
 			user_newinactive = user_inactive;
-#endif
 		}
 	}
 
@@ -910,11 +875,7 @@ static void process_flags (int argc, char **argv)
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-#ifdef WITH_AUDIT
 				user_newcomment = optarg;
-#else
-				user_comment = optarg;
-#endif
 				cflg++;
 				break;
 			case 'd':
@@ -929,38 +890,21 @@ static void process_flags (int argc, char **argv)
 				break;
 			case 'e':
 				if (*optarg) {
-#ifdef WITH_AUDIT
 					user_newexpire = strtoday (optarg);
 					if (user_newexpire == -1) {
-#else /* } */
-					user_expire = strtoday (optarg);
-					if (user_expire == -1) {
-#endif
 						fprintf (stderr,
 							 _
 							 ("%s: invalid date '%s'\n"),
 							 Prog, optarg);
 						exit (E_BAD_ARG);
 					}
-#ifdef WITH_AUDIT
 					user_newexpire *= DAY / SCALE;
-#else
-					user_expire *= DAY / SCALE;
-#endif
 				} else
-#ifdef WITH_AUDIT
 					user_newexpire = -1;
-#else
-					user_expire = -1;
-#endif
 				eflg++;
 				break;
 			case 'f':
-#ifdef WITH_AUDIT
 				user_newinactive = get_number (optarg);
-#else
-				user_inactive = get_number (optarg);
-#endif
 				fflg++;
 				break;
 			case 'g':
@@ -1017,11 +961,7 @@ static void process_flags (int argc, char **argv)
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
-#ifdef WITH_AUDIT
 				user_newshell = optarg;
-#else
-				user_shell = optarg;
-#endif
 				sflg++;
 				break;
 			case 'u':
