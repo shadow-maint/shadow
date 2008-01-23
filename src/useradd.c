@@ -856,7 +856,7 @@ static void find_new_uid (void)
 				break;
 		}
 		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: can't get unique UID (run out of UIDs)\n"), Prog);
+			fprintf (stderr, _("%s: can't get unique UID (no more available UIDs)\n"), Prog);
 			fail_exit (E_UID_IN_USE);
 		}
 	}
@@ -903,7 +903,7 @@ static void find_new_gid (void)
 		}
 		if (user_gid == gid_max) {
 			fprintf (stderr,
-				 _("%s: can't get unique GID (run out of GIDs)\n"),
+				 _("%s: can't get unique GID (no more available GIDs)\n"),
 				 Prog);
 			fail_exit (4);
 		}

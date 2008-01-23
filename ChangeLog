@@ -1,5 +1,10 @@
 2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Strings improvement s/can't get unique/no more
+	available/.
+
+2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/usermod.c: Check that the new fields set with -u, -s,
 	-l, -g, -f, -e, -d, and -c differ from the old ones. If a
 	requested new value is equal to the old one, no changes will
