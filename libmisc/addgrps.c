@@ -64,7 +64,7 @@ int add_groups (const char *list)
 			continue;
 
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fprintf (stderr, _("Warning: too many groups\n"));
+			fputs (_("Warning: too many groups\n"), stderr);
 			break;
 		}
 		tmp = (gid_t *) realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));

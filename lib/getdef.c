@@ -257,8 +257,8 @@ int putdef_str (const char *name, const char *value)
 	 * Save off the value.
 	 */
 	if ((cp = strdup (value)) == NULL) {
-		fprintf (stderr,
-			 _("Could not allocate space for config info.\n"));
+		fputs (_("Could not allocate space for config info.\n"),
+		       stderr);
 		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
 		return -1;
 	}

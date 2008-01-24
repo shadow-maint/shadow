@@ -5,9 +5,10 @@
 	src/userdel.c, src/lastlog.c, src/groupmems.c, src/usermod.c,
 	src/expiry.c, src/groupdel.c, src/useradd.c, src/su.c,
 	src/groupmod.c, src/passwd.c, src/groupadd.c, src/login.c,
-	src/suauth.c, src/faillog.c, src/id.c: Replace
-	printf by puts for fixed strings. This would avoid issues caused
-	by formats introduced in translated strings.
+	src/suauth.c, src/faillog.c, src/id.c, libmisc/limits.c,
+	libmisc/addgrps.c, libmisc/env.c, libmisc/age.c, libmisc/yesno.c,
+	lib/getdef.c: Replace printf by puts for fixed strings. This would
+	avoid issues caused by formats introduced in translated strings.
 
 2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
 

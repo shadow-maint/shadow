@@ -152,7 +152,7 @@ void addenv (const char *string, const char *value)
 				environ = __newenvp;
 			newenvp = __newenvp;
 		} else {
-			fprintf (stderr, _("Environment overflow\n"));
+			fputs (_("Environment overflow\n"), stderr);
 			free (newenvp[--newenvc]);
 		}
 	}

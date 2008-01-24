@@ -410,7 +410,7 @@ void setup_limits (const struct passwd *info)
 		if (info->pw_uid != 0)
 			if (setup_user_limits (info->pw_name) &
 			    LOGIN_ERROR_LOGIN) {
-				fprintf (stderr, _("Too many logins.\n"));
+				fputs (_("Too many logins.\n"), stderr);
 				sleep (2);
 				exit (1);
 			}
