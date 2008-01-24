@@ -1,6 +1,7 @@
 2008-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/gpasswd.c, src/chfn.c, src/chage.c, src/chsh.c: Replace
+	* src/gpasswd.c, src/chfn.c, src/chage.c, src/chsh.c, src/grpck.c,
+	src/vipw.c, src/pwck.c, src/sulogin.c: Replace
 	printf by puts for fixed strings. This would avoid issues caused
 	by formats introduced in translated strings.
 

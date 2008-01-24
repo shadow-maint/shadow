@@ -66,7 +66,7 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: vipw [options]\n"
+	fputs (_("Usage: vipw [options]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -g, --group                   edit group database\n"
@@ -74,7 +74,7 @@ static void usage (void)
 			   "  -p, --passwd                  edit passwd database\n"
 			   "  -q, --quiet                   quiet mode\n"
 			   "  -s, --shadow                  edit shadow or gshadow database\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 

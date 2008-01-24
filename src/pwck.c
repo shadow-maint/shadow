@@ -276,7 +276,7 @@ static void check_pw_file (int *errors, int *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			printf (_("invalid password file entry\n"));
+			puts (_("invalid password file entry\n"));
 			printf (_("delete line '%s'? "), pfe->line);
 			*errors += 1;
 
@@ -335,7 +335,7 @@ static void check_pw_file (int *errors, int *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			printf (_("duplicate password entry\n"));
+			puts (_("duplicate password entry\n"));
 			printf (_("delete line '%s'? "), pfe->line);
 			*errors += 1;
 
@@ -487,7 +487,7 @@ static void check_spw_file (int *errors, int *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			printf (_("invalid shadow password file entry\n"));
+			puts (_("invalid shadow password file entry\n"));
 			printf (_("delete line '%s'? "), spe->line);
 			*errors += 1;
 
@@ -546,7 +546,7 @@ static void check_spw_file (int *errors, int *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			printf (_("duplicate shadow password entry\n"));
+			puts (_("duplicate shadow password entry\n"));
 			printf (_("delete line '%s'? "), spe->line);
 			*errors += 1;
 

@@ -121,7 +121,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		}
 	}
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
-		printf (_("No password file\n"));
+		puts (_("No password file\n"));
 #ifdef	USE_SYSLOG
 		SYSLOG (LOG_WARN, "No password file\n");
 		closelog ();
@@ -147,7 +147,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	if (getppid() == 1) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1))
-			fprintf(stderr,_("TIOCSCTTY failed"));
+			fputs (_("TIOCSCTTY failed"), stderr);
 	}
 	while (*envp)		/* add inherited environment, */
 		addenv (*envp++, NULL);	/* some variables change later */
@@ -171,7 +171,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 			/*
 			 * Fail secure
 			 */
-			printf (_("No password entry for 'root'\n"));
+			puts (_("No password entry for 'root'\n"));
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_WARN, "No password entry for 'root'\n");
 			closelog ();
