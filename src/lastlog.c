@@ -68,14 +68,14 @@ static struct passwd *pwent;
 
 static void usage (void)
 {
-	fprintf (stdout, _("Usage: lastlog [options]\n"
+	fputs (_("Usage: lastlog [options]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 			   "  -h, --help                    display this help message and exit\n"
 			   "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
 			   "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (1);
 }
 
@@ -95,10 +95,9 @@ static void print_one (const struct passwd *pw)
 
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		printf (_
-			("Username         Port     From             Latest\n"));
+		puts (_("Username         Port     From             Latest\n"));
 #else
-		printf (_("Username                Port     Latest\n"));
+		puts (_("Username                Port     Latest\n"));
 #endif
 		once++;
 	}

@@ -54,7 +54,7 @@ static RETSIGTYPE catch_signals (unused int sig)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: expiry {-f|-c}\n"));
+	fputs (_("Usage: expiry {-f|-c}\n"), stderr);
 	exit (10);
 }
 

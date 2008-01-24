@@ -60,7 +60,7 @@ static struct stat statbuf;	/* fstat buffer for file size */
 
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: faillog [options]\n"
+	fputs (_("Usage: faillog [options]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -a, --all                     display faillog records for all users\n"
@@ -72,7 +72,7 @@ static void usage (void)
 			   "  -u, --user LOGIN              display faillog record or maintains failure\n"
 			   "                                counters and limits (if used with -r, -m or -l\n"
 			   "                                options) only for user with LOGIN\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 
@@ -89,8 +89,7 @@ static void print_one (const struct faillog *fl, uid_t uid)
 #endif
 
 	if (!once) {
-		printf (_
-			("Login       Failures Maximum Latest                   On\n"));
+		puts (_("Login       Failures Maximum Latest                   On\n"));
 		once++;
 	}
 	pwent = getpwuid (uid); /* local, no need for xgetpwuid */

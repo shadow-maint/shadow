@@ -99,7 +99,7 @@ static void addtogroup (char *user, char **members)
 
 	for (i = 0; NULL != members[i]; i++) {
 		if (0 == strcmp (user, members[i])) {
-			fprintf (stderr, _("Member already exists\n"));
+			fputs (_("Member already exists\n"), stderr);
 			exit (EXIT_MEMBER_EXISTS);
 		}
 	}
@@ -129,7 +129,7 @@ static void rmfromgroup (char *user, char **members)
 	}
 
 	if (!found) {
-		fprintf (stderr, _("Member to remove could not be found\n"));
+		fputs (_("Member to remove could not be found\n"), stderr);
 		exit (EXIT_NOT_MEMBER);
 	}
 }
@@ -160,9 +160,7 @@ static void members (char **members)
 
 static void usage (void)
 {
-	fprintf (stderr,
-		 _
-		 ("Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"));
+	fputs (_("Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"), stderr);
 	exit (EXIT_USAGE);
 }
 
@@ -224,16 +222,16 @@ int main (int argc, char **argv)
 	}
 
 	if (!isroot () && NULL != thisgroup) {
-		fprintf (stderr,
-			 _("Only root can add members to different groups\n"));
+		fputs (_("Only root can add members to different groups\n"),
+		       stderr);
 		exit (EXIT_NOT_ROOT);
 	} else if (isroot () && NULL != thisgroup) {
 		name = thisgroup;
 	} else if (!isgroup ()) {
-		fprintf (stderr, _("Group access is required\n"));
+		fputs (_("Group access is required\n"), stderr);
 		exit (EXIT_NOT_EROOT);
 	} else if (NULL == (name = whoami ())) {
-		fprintf (stderr, _("Not primary owner of current group\n"));
+		fputs (_("Not primary owner of current group\n"), stderr);
 		exit (EXIT_NOT_PRIMARY);
 	}
 #ifdef USE_PAM
@@ -267,18 +265,18 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fprintf (stderr, _("PAM authentication failed for\n"));
+		fputs (_("PAM authentication failed for\n"), stderr);
 		exit (1);
 	}
 #endif
 
 	if (!gr_lock ()) {
-		fprintf (stderr, _("Unable to lock group file\n"));
+		fputs (_("Unable to lock group file\n"), stderr);
 		exit (EXIT_GROUP_FILE);
 	}
 
 	if (!gr_open (O_RDWR)) {
-		fprintf (stderr, _("Unable to open group file\n"));
+		fputs (_("Unable to open group file\n"), stderr);
 		exit (EXIT_GROUP_FILE);
 	}
 
@@ -298,7 +296,7 @@ int main (int argc, char **argv)
 	}
 
 	if (!gr_close ()) {
-		fprintf (stderr, _("Cannot close group file\n"));
+		fputs (_("Cannot close group file\n"), stderr);
 		exit (EXIT_GROUP_FILE);
 	}
 

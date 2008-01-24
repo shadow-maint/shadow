@@ -99,14 +99,14 @@ static void remove_mailbox (void);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: userdel [options] LOGIN\n"
+	fputs (_("Usage: userdel [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
 			   "  -f, --force                   force removal of files,\n"
 			   "                                even if not owned by user\n"
 			   "  -h, --help                    display this help message and exit\n"
 			   "  -r, --remove                  remove home directory and mail spool\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 

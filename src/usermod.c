@@ -276,7 +276,7 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: usermod [options] LOGIN\n"
+	fputs (_("Usage: usermod [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
 			   "  -c, --comment COMMENT         new value of the GECOS field\n"
@@ -299,7 +299,7 @@ static void usage (void)
 			   "  -s, --shell SHELL             new login shell for the user account\n"
 			   "  -u, --uid UID                 new UID for the user account\n"
 			   "  -U, --unlock                  unlock the user account\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 

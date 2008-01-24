@@ -100,25 +100,23 @@ int check_su_auth (const char *actual_id, const char *wanted_id)
 			SYSLOG ((pwent.pw_uid ? LOG_NOTICE : LOG_WARN,
 				 "DENIED su from `%s' to `%s' (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
-			fprintf (stderr,
-				 _("Access to su to that account DENIED.\n"));
+			fputs (_("Access to su to that account DENIED.\n"),
+			       stderr);
 			fclose (authfile_fd);
 			return DENY;
 		} else if (!strcmp (action, "NOPASS")) {
 			SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
 				 "NO password asked for su from `%s' to `%s' (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
-			fprintf (stderr,
-				 _("Password authentication bypassed.\n"));
+			fputs (_("Password authentication bypassed.\n"),stderr);
 			fclose (authfile_fd);
 			return NOPWORD;
 		} else if (!strcmp (action, "OWNPASS")) {
 			SYSLOG ((pwent.pw_uid ? LOG_INFO : LOG_NOTICE,
 				 "su from `%s' to `%s': asking for user's own password (%s)\n",
 				 actual_id, wanted_id, SUAUTHFILE));
-			fprintf (stderr,
-				 _
-				 ("Please enter your OWN password as authentication.\n"));
+			fputs (_("Please enter your OWN password as authentication.\n"),
+			       stderr);
 			fclose (authfile_fd);
 			return OWNPWORD;
 		} else {

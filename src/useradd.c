@@ -611,7 +611,7 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: useradd [options] LOGIN\n"
+	fputs (_("Usage: useradd [options] LOGIN\n"
 			   "\n"
 			   "Options:\n"
 			   "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
@@ -639,7 +639,7 @@ static void usage (void)
 			   "                                account\n"
 			   "  -s, --shell SHELL             the login shell for the new user account\n"
 			   "  -u, --uid UID                 force use the UID for the new user account\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 
@@ -1546,9 +1546,8 @@ static void create_mail (void)
 
 		gr = getgrnam ("mail"); /* local, no need for xgetgrnam */
 		if (!gr) {
-			fprintf (stderr,
-				 _
-				 ("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"));
+			fputs (_("Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"),
+			       stderr);
 			gid = user_gid;
 			mode = 0600;
 		} else {

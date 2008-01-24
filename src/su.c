@@ -274,7 +274,7 @@ static void run_shell (const char *shellstr, char *args[], int doshell,
   */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: su [options] [LOGIN]\n"
+	fputs (_("Usage: su [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -c, --command COMMAND         pass COMMAND to the invoked shell\n"
@@ -284,7 +284,7 @@ static void usage (void)
 			   "  --preserve-environment        do not reset environment variables, and\n"
 			   "                                keep the same shell\n"
 			   "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (E_USAGE);
 }
 
@@ -868,7 +868,7 @@ int main (int argc, char **argv)
 #ifndef USE_PAM
 		(void) execve (shellstr, &argv[-1], environ);
 		err = errno;
-		(void) fprintf (stderr, _("No shell\n"));
+		(void) fputs (_("No shell\n"), stderr);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
 		exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);

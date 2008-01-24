@@ -66,9 +66,9 @@ static void syslog_sg (const char *name, const char *group);
 static void usage (void)
 {
 	if (is_newgrp)
-		fprintf (stderr, _("Usage: newgrp [-] [group]\n"));
+		fputs (_("Usage: newgrp [-] [group]\n"), stderr);
 	else
-		fprintf (stderr, _("Usage: sg group [[-c] command]\n"));
+		fputs (_("Usage: sg group [[-c] command]\n"), stderr);
 }
 
 /*
@@ -580,7 +580,7 @@ int main (int argc, char **argv)
 	}
 	if (i == ngroups) {
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fprintf (stderr, _("too many groups\n"));
+			fputs (_("too many groups\n"), stderr);
 		} else {
 			grouplist[ngroups++] = gid;
 			if (setgroups (ngroups, grouplist)) {

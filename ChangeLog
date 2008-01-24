@@ -1,7 +1,11 @@
 2008-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/gpasswd.c, src/chfn.c, src/chage.c, src/chsh.c, src/grpck.c,
-	src/vipw.c, src/pwck.c, src/sulogin.c: Replace
+	src/vipw.c, src/pwck.c, src/sulogin.c, src/newgrp.c,
+	src/userdel.c, src/lastlog.c, src/groupmems.c, src/usermod.c,
+	src/expiry.c, src/groupdel.c, src/useradd.c, src/su.c,
+	src/groupmod.c, src/passwd.c, src/groupadd.c, src/login.c,
+	src/suauth.c, src/faillog.c, src/id.c: Replace
 	printf by puts for fixed strings. This would avoid issues caused
 	by formats introduced in translated strings.
 

@@ -189,7 +189,7 @@ static void setup_tty (void)
  */
 static void bad_time_notify (void)
 {
-	printf (_("Invalid login time\n"));
+	puts (_("Invalid login time\n"));
 	fflush (stdout);
 }
 
@@ -223,7 +223,7 @@ static void check_nologin (void)
 			fflush (stdout);
 			fclose (nlfp);
 		} else
-			printf (_("\nSystem closed for routine maintenance\n"));
+			puts (_("\nSystem closed for routine maintenance\n"));
 		/*
 		 * Non-root users must exit. Root gets the message, but
 		 * gets to login.
@@ -233,7 +233,7 @@ static void check_nologin (void)
 			closelog ();
 			exit (0);
 		}
-		printf (_("\n[Disconnect bypassed -- root login allowed.]\n"));
+		puts (_("\n[Disconnect bypassed -- root login allowed.]\n"));
 	}
 }
 #endif				/* !USE_PAM */
@@ -675,7 +675,7 @@ int main (int argc, char **argv)
 			    exit(0);
 			  } else if (retcode == PAM_ABORT) {
 			    /* Serious problems, quit now */
-			    fprintf(stderr,_("login: abort requested by PAM\n"));
+			    fputs (_("login: abort requested by PAM\n"),stderr);
 			    SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
 			    PAM_END;
 			    exit(99);

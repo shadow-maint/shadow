@@ -80,7 +80,7 @@ static void group_busy (gid_t);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: groupdel group\n"));
+	fputs (_("Usage: groupdel group\n"), stderr);
 	exit (E_USAGE);
 }
 

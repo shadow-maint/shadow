@@ -143,7 +143,7 @@ static long getnumber (const char *);
  */
 static void usage (int status)
 {
-	fprintf (stderr, _("Usage: passwd [options] [LOGIN]\n"
+	fputs (_("Usage: passwd [options] [LOGIN]\n"
 			   "\n"
 			   "Options:\n"
 			   "  -a, --all                     report password status on all accounts\n"
@@ -163,7 +163,7 @@ static void usage (int status)
 			   "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 			   "  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
 			   "                                change to MAX_DAYS\n"
-			   "\n"));
+			   "\n"), stderr);
 	exit (status);
 }
 
@@ -282,7 +282,7 @@ static int new_password (const struct passwd *pw)
 		strzero (cp);
 
 		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
-			printf (_("Try again.\n"));
+			puts (_("Try again.\n"));
 			continue;
 		}
 
@@ -293,8 +293,7 @@ static int new_password (const struct passwd *pw)
 		 */
 		if (amroot && !warned && getdef_bool ("PASS_ALWAYS_WARN")
 		    && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
-			printf (_
-				("\nWarning: weak password (enter it again to use it anyway).\n"));
+			puts (_("\nWarning: weak password (enter it again to use it anyway).\n"));
 			warned++;
 			continue;
 		}
@@ -303,7 +302,7 @@ static int new_password (const struct passwd *pw)
 			return -1;
 		}
 		if (strcmp (cp, pass))
-			fprintf (stderr, _("They don't match; try again.\n"));
+			fputs (_("They don't match; try again.\n"), stderr);
 		else {
 			strzero (cp);
 			break;
@@ -498,14 +497,13 @@ static void update_noshadow (void)
 	struct passwd *npw;
 
 	if (!pw_lock ()) {
-		fprintf (stderr,
-			 _
-			 ("Cannot lock the password file; try again later.\n"));
+		fputs (_("Cannot lock the password file; try again later.\n"),
+		       stderr);
 		SYSLOG ((LOG_WARN, "can't lock password file"));
 		exit (E_PWDBUSY);
 	}
 	if (!pw_open (O_RDWR)) {
-		fprintf (stderr, _("Cannot open the password file.\n"));
+		fputs (_("Cannot open the password file.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't open password file"));
 		fail_exit (E_MISSING);
 	}
@@ -520,12 +518,12 @@ static void update_noshadow (void)
 		oom ();
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
 	if (!pw_update (npw)) {
-		fprintf (stderr, _("Error updating the password entry.\n"));
+		fputs (_("Error updating the password entry.\n"), stderr);
 		SYSLOG ((LOG_ERR, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
 	if (!pw_close ()) {
-		fprintf (stderr, _("Cannot commit password file changes.\n"));
+		fputs (_("Cannot commit password file changes.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't rewrite password file"));
 		fail_exit (E_FAILURE);
 	}
@@ -538,14 +536,13 @@ static void update_shadow (void)
 	struct spwd *nsp;
 
 	if (!spw_lock ()) {
-		fprintf (stderr,
-			 _
-			 ("Cannot lock the password file; try again later.\n"));
+		fputs (_("Cannot lock the password file; try again later.\n"),
+		       stderr);
 		SYSLOG ((LOG_WARN, "can't lock password file"));
 		exit (E_PWDBUSY);
 	}
 	if (!spw_open (O_RDWR)) {
-		fprintf (stderr, _("Cannot open the password file.\n"));
+		fputs (_("Cannot open the password file.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't open password file"));
 		fail_exit (E_FAILURE);
 	}
@@ -590,12 +587,12 @@ static void update_shadow (void)
 		nsp->sp_lstchg = 0;
 
 	if (!spw_update (nsp)) {
-		fprintf (stderr, _("Error updating the password entry.\n"));
+		fputs (_("Error updating the password entry.\n"), stderr);
 		SYSLOG ((LOG_ERR, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
 	if (!spw_close ()) {
-		fprintf (stderr, _("Cannot commit password file changes.\n"));
+		fputs (_("Cannot commit password file changes.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't rewrite password file"));
 		fail_exit (E_FAILURE);
 	}
@@ -934,7 +931,7 @@ int main (int argc, char **argv)
 	}
 #endif				/* USE_PAM */
 	if (setuid (0)) {
-		fprintf (stderr, _("Cannot change ID to root.\n"));
+		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
 		exit (E_NOPERM);
@@ -951,9 +948,9 @@ int main (int argc, char **argv)
 	closelog ();
 	if (!qflg) {
 		if (!eflg)
-			printf (_("Password changed.\n"));
+			puts (_("Password changed.\n"));
 		else
-			printf (_("Password set to expire.\n"));
+			puts (_("Password set to expire.\n"));
 	}
 	exit (E_SUCCESS);
 	/* NOT REACHED */

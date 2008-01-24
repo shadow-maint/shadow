@@ -50,9 +50,9 @@ static void usage (void);
 static void usage (void)
 {
 #ifdef HAVE_GETGROUPS
-	fprintf (stderr, _("Usage: id [-a]\n"));
+	fputs (_("Usage: id [-a]\n"), stderr);
 #else
-	fprintf (stderr, _("Usage: id\n"));
+	fputs (_("Usage: id\n"), stderr);
 #endif
 	exit (1);
 }
@@ -164,7 +164,7 @@ static void usage (void)
 		 * where "###" is a numerical value and "aaa" is the
 		 * corresponding name for each respective numerical value.
 		 */
-		printf (_(" groups="));
+		puts (_(" groups="));
 		for (i = 0; i < ngroups; i++) {
 			if (i)
 				putchar (',');

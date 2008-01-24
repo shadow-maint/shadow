@@ -105,7 +105,7 @@ static void check_perms (void);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: groupadd [options] GROUP\n"
+	fputs (_("Usage: groupadd [options] GROUP\n"
 	                   "\n"
 	                   "Options:\n"
 	                   "  -f, --force                   force exit with success status if the\n"
@@ -115,7 +115,7 @@ static void usage (void)
 	                   "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 	                   "  -o, --non-unique              allow create group with duplicate\n"
 	                   "                                (non-unique) GID\n"
-	                   "\n"));
+	                   "\n"), stderr);
 	exit (E_USAGE);
 }
 
