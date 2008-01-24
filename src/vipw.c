@@ -67,14 +67,14 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
 static void usage (void)
 {
 	fputs (_("Usage: vipw [options]\n"
-			   "\n"
-			   "Options:\n"
-			   "  -g, --group                   edit group database\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -p, --passwd                  edit passwd database\n"
-			   "  -q, --quiet                   quiet mode\n"
-			   "  -s, --shadow                  edit shadow or gshadow database\n"
-			   "\n"), stderr);
+	         "\n"
+	         "Options:\n"
+	         "  -g, --group                   edit group database\n"
+	         "  -h, --help                    display this help message and exit\n"
+	         "  -p, --passwd                  edit passwd database\n"
+	         "  -q, --quiet                   quiet mode\n"
+	         "  -s, --shadow                  edit shadow or gshadow database\n"
+	         "\n"), stderr);
 	exit (E_USAGE);
 }
 
