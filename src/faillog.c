@@ -61,18 +61,18 @@ static struct stat statbuf;	/* fstat buffer for file size */
 static void usage (void)
 {
 	fputs (_("Usage: faillog [options]\n"
-			   "\n"
-			   "Options:\n"
-			   "  -a, --all                     display faillog records for all users\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -l, --lock-time SEC           after failed login lock accout to SEC seconds\n"
-			   "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
-			   "  -r, --reset                   reset the counters of login failures\n"
-			   "  -t, --time DAYS               display faillog records more recent than DAYS\n"
-			   "  -u, --user LOGIN              display faillog record or maintains failure\n"
-			   "                                counters and limits (if used with -r, -m or -l\n"
-			   "                                options) only for user with LOGIN\n"
-			   "\n"), stderr);
+	         "\n"
+	         "Options:\n"
+	         "  -a, --all                     display faillog records for all users\n"
+	         "  -h, --help                    display this help message and exit\n"
+	         "  -l, --lock-time SEC           after failed login lock accout to SEC seconds\n"
+	         "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
+	         "  -r, --reset                   reset the counters of login failures\n"
+	         "  -t, --time DAYS               display faillog records more recent than DAYS\n"
+	         "  -u, --user LOGIN              display faillog record or maintains failure\n"
+	         "                                counters and limits (if used with -r, -m or -l\n"
+	         "                                options) only for user with LOGIN\n"
+	         "\n"), stderr);
 	exit (E_USAGE);
 }
 

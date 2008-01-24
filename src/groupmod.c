@@ -101,14 +101,14 @@ static gid_t get_gid (const char *gidstr);
 static void usage (void)
 {
 	fputs (_("Usage: groupmod [options] GROUP\n"
-			   "\n"
-			   "Options:\n"
-			   "  -g, --gid GID                 force use new GID by GROUP\n"
-			   "  -h, --help                    display this help message and exit\n"
-			   "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
-			   "  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
-			   "  -p, --password PASSWORD       use encrypted password for the new password\n"
-			   "\n"), stderr);
+	         "\n"
+	         "Options:\n"
+	         "  -g, --gid GID                 force use new GID by GROUP\n"
+	         "  -h, --help                    display this help message and exit\n"
+	         "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
+	         "  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
+	         "  -p, --password PASSWORD       use encrypted password for the new password\n"
+	         "\n"), stderr);
 	exit (E_USAGE);
 }
 
