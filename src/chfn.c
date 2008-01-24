@@ -161,7 +161,7 @@ static int may_change_field (int field)
  */
 static void new_fields (void)
 {
-	printf (_("Enter the new value, or press ENTER for the default\n"));
+	puts (_("Enter the new value, or press ENTER for the default\n"));
 
 	if (may_change_field ('f')) {
 		change_field (fullnm, sizeof fullnm, _("Full Name"));
@@ -402,7 +402,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * ignored.
 	 */
 	if (setuid (0) != 0) {
-		fprintf (stderr, _("Cannot change ID to root.\n"));
+		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
 		exit (E_NOPERM);
@@ -414,15 +414,14 @@ static void update_gecos (const char *user, char *gecos)
 	 * password file. Get a lock on the file and open it.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr,
-		         _
-		         ("Cannot lock the password file; try again later.\n"));
+		fputs (_("Cannot lock the password file; try again later.\n"),
+		       stderr);
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("Cannot open the password file.\n"));
+		fputs (_("Cannot open the password file.\n"), stderr);
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
 		closelog ();
@@ -455,7 +454,7 @@ static void update_gecos (const char *user, char *gecos)
 	 * entry as well.
 	 */
 	if (pw_update (&pwent) == 0) {
-		fprintf (stderr, _("Error updating the password entry.\n"));
+		fputs (_("Error updating the password entry.\n"), stderr);
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
@@ -466,14 +465,14 @@ static void update_gecos (const char *user, char *gecos)
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
 	if (pw_close () == 0) {
-		fprintf (stderr, _("Cannot commit password file changes.\n"));
+		fputs (_("Cannot commit password file changes.\n"), stderr);
 		pw_unlock ();
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (pw_unlock () == 0) {
-		fprintf (stderr, _("Cannot unlock the password file.\n"));
+		fputs (_("Cannot unlock the password file.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
 		closelog ();
 		exit (E_NOPERM);

@@ -1,3 +1,9 @@
+2008-01-24  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/gpasswd.c, src/chfn.c, src/chage.c, src/chsh.c: Replace
+	printf by puts for fixed strings. This would avoid issues caused
+	by formats introduced in translated strings.
+
 2008-01-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Strings improvement s/can't get unique/no more

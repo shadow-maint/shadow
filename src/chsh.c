@@ -82,12 +82,12 @@ static void update_shell (const char *user, char *loginsh);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: chsh [options] [LOGIN]\n"
+	fputs (_("Usage: chsh [options] [LOGIN]\n"
 	                   "\n"
 	                   "Options:\n"
 	                   "  -h, --help                    display this help message and exit\n"
 	                   "  -s, --shell SHELL             new login shell for the user account\n"
-	                   "\n"));
+	                   "\n"), stderr);
 	exit (E_USAGE);
 }
 
@@ -99,7 +99,7 @@ static void usage (void)
  */
 static void new_fields (void)
 {
-	printf (_("Enter the new value, or press ENTER for the default\n"));
+	puts (_("Enter the new value, or press ENTER for the default\n"));
 	change_field (loginsh, sizeof loginsh, _("Login Shell"));
 }
 
@@ -342,7 +342,7 @@ static void update_shell (const char *user, char *newshell)
 	if (setuid (0) != 0) {
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 		closelog ();
-		fprintf (stderr, _("Cannot change ID to root.\n"));
+		fputs (_("Cannot change ID to root.\n"), stderr);
 		exit (1);
 	}
 	pwd_init ();
@@ -354,15 +354,14 @@ static void update_shell (const char *user, char *newshell)
 	if (pw_lock () == 0) {
 		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
 		closelog ();
-		fprintf (stderr,
-		         _
-		         ("Cannot lock the password file; try again later.\n"));
+		fputs (_("Cannot lock the password file; try again later.\n"),
+		       stderr);
 		exit (1);
 	}
 	if (pw_open (O_RDWR) == 0) {
 		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
 		closelog ();
-		fprintf (stderr, _("Cannot open the password file.\n"));
+		fputs (_("Cannot open the password file.\n"), stderr);
 		pw_unlock ();
 		exit (1);
 	}
@@ -395,7 +394,7 @@ static void update_shell (const char *user, char *newshell)
 	if (pw_update (&pwent) == 0) {
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
 		closelog ();
-		fprintf (stderr, _("Error updating the password entry.\n"));
+		fputs (_("Error updating the password entry.\n"), stderr);
 		pw_unlock ();
 		exit (1);
 	}
@@ -406,14 +405,14 @@ static void update_shell (const char *user, char *newshell)
 	if (pw_close () == 0) {
 		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
 		closelog ();
-		fprintf (stderr, _("Cannot commit password file changes.\n"));
+		fputs (_("Cannot commit password file changes.\n"), stderr);
 		pw_unlock ();
 		exit (1);
 	}
 	if (pw_unlock () == 0) {
 		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
 		closelog ();
-		fprintf (stderr, _("Cannot unlock the password file.\n"));
+		fputs (_("Cannot unlock the password file.\n"), stderr);
 		exit (1);
 	}
 }

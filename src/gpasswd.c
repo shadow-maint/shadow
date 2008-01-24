@@ -729,7 +729,7 @@ int main (int argc, char **argv)
 
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fprintf (stderr, _("Who are you?\n"));
+		fputs (_("Who are you?\n"), stderr);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "user lookup", NULL,
 			      bywho, 0);
@@ -922,7 +922,7 @@ int main (int argc, char **argv)
 	 */
       output:
 	if (setuid (0) != 0) {
-		fprintf (stderr, _("Cannot change ID to root.\n"));
+		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing id to root",

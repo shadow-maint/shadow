@@ -152,7 +152,7 @@ static int isnum (const char *s)
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: chage [options] [LOGIN]\n"
+	fputs (_("Usage: chage [options] [LOGIN]\n"
 	                   "\n"
 	                   "Options:\n"
 	                   "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
@@ -166,7 +166,7 @@ static void usage (void)
 	                   "  -M, --maxdays MAX_DAYS        set maximim number of days before password\n"
 	                   "                                change to MAX_DAYS\n"
 	                   "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	                   "\n"));
+	                   "\n"), stderr);
 	exit (E_USAGE);
 }
 
@@ -197,8 +197,8 @@ static int new_fields (void)
 	char buf[200];
 	char *cp;
 
-	printf (_("Enter the new value, or press ENTER for the default\n"));
-	printf ("\n");
+	puts (_("Enter the new value, or press ENTER for the default\n"));
+	puts ("\n");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
@@ -297,11 +297,11 @@ static void list_fields (void)
 	 * The "last change" date is either "never" or the date the password
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
-	printf (_("Last password change\t\t\t\t\t: "));
+	puts (_("Last password change\t\t\t\t\t: "));
 	if (lastday < 0) {
-		printf (_("never\n"));
+		puts (_("never\n"));
 	} else if (lastday == 0) {
-		printf (_("password must be changed\n"));
+		puts (_("password must be changed\n"));
 	} else {
 		changed = lastday * SCALE;
 		print_date (changed);
@@ -311,10 +311,10 @@ static void list_fields (void)
 	 * The password expiration date is determined from the last change
 	 * date plus the number of days the password is valid for.
 	 */
-	printf (_("Password expires\t\t\t\t\t: "));
+	puts (_("Password expires\t\t\t\t\t: "));
 	if ((lastday <= 0) || (maxdays >= (10000 * (DAY / SCALE)))
 	    || (maxdays < 0)) {
-		printf (_("never\n"));
+		puts (_("never\n"));
 	} else {
 		expires = changed + maxdays * SCALE;
 		print_date (expires);
@@ -326,10 +326,10 @@ static void list_fields (void)
 	 * number of inactive days is added. The resulting date is when the
 	 * active will be disabled.
 	 */
-	printf (_("Password inactive\t\t\t\t\t: "));
+	puts (_("Password inactive\t\t\t\t\t: "));
 	if ((lastday <= 0) || (inactdays < 0) ||
 	    (maxdays >= (10000 * (DAY / SCALE))) || (maxdays < 0)) {
-		printf (_("never\n"));
+		puts (_("never\n"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
 		print_date (expires);
@@ -339,9 +339,9 @@ static void list_fields (void)
 	 * The account will expire on the given date regardless of the
 	 * password expiring or not.
 	 */
-	printf (_("Account expires\t\t\t\t\t\t: "));
+	puts (_("Account expires\t\t\t\t\t\t: "));
 	if (expdays < 0) {
-		printf (_("never\n"));
+		puts (_("never\n"));
 	} else {
 		expires = expdays * SCALE;
 		print_date (expires);
