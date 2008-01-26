@@ -342,7 +342,9 @@ int main (int argc, char **argv)
 
 	check_perms ();
 
+#ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
+#endif
 
 	open_files ();
 

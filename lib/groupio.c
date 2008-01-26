@@ -3,6 +3,8 @@
 
 #ident "$Id$"
 
+#include <stdio.h>
+
 #include "prototypes.h"
 #include "defines.h"
 #include "commonio.h"
@@ -230,7 +232,7 @@ static int group_open_hook (void)
  * same name, password and gid.
  *
  * It merge the members of the second entry in the first one, and return
- * the modified first entry on success, or NUll on failure (with errno
+ * the modified first entry on success, or NULL on failure (with errno
  * set).
  */
 static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,

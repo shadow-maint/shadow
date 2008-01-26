@@ -1,3 +1,15 @@
+2008-01-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Fix build failures with --disable-shadowgrp. Thanks to Jürgen
+	Daubert for the patch.
+	* libmisc/salt.c: Include <stdio.h>, needed for stderr and printf
+	functions.
+	* lib/encrypt.c: Include <stdio.h>, needed for perror, stderr and
+	printf functions
+	* src/usermod.c: sgr_locked exists only if SHADOWGRP is defined.
+	* src/chgpasswd.c: Only check is the gshadow file exists if
+	SHADOWGRP is defined.
+
 2008-01-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/gpasswd.c, src/chfn.c, src/chage.c, src/chsh.c, src/grpck.c,

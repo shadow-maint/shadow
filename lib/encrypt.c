@@ -32,8 +32,11 @@
 #ident "$Id$"
 
 #include <unistd.h>
+#include <stdio.h>
+
 #include "prototypes.h"
 #include "defines.h"
+
 char *pw_encrypt (const char *clear, const char *salt)
 {
 	static char cipher[128];

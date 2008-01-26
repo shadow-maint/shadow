@@ -13,6 +13,7 @@
 
 #include <sys/time.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <assert.h>
 #include "prototypes.h"
 #include "defines.h"

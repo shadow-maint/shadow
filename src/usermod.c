@@ -1113,7 +1113,9 @@ static void close_files (void)
 	pw_locked = 0;
 	spw_locked = 0;
 	gr_locked = 0;
+#ifdef	SHADOWGRP
 	sgr_locked = 0;
+#endif
 
 	/*
 	 * Close the DBM and/or flat files
