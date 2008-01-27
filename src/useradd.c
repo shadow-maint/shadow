@@ -171,6 +171,7 @@ static long scale_age (long);
 static void new_spent (struct spwd *);
 static void grp_update (void);
 static void find_new_uid (void);
+static void find_new_gid (void);
 
 static void process_flags (int argc, char **argv);
 static void close_files (void);
@@ -885,9 +886,8 @@ static void find_new_gid (void)
 	user_gid = gid_min;
 
 	/*
-	 * Search the entire group file, either looking for this
-	 * GID (if the user specified one with -g) or looking for the
-	 * largest unused value.
+	 * Search the entire group file,
+	 * looking for the largest unused value.
 	 */
 	setgrent ();
 	while ((grp = getgrent ())) {
