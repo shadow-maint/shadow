@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-11-24 16:15+0100\n"
+"POT-Creation-Date: 2008-02-02 18:05+0100\n"
 "PO-Revision-Date: 2006-06-16 14:30+0545\n"
 "Last-Translator: Shiva Pokharel <pokharelshiva@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -27,7 +27,6 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
-#, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "कनफिगरेसन सूचनाको लागि खाली ठाऊँ बाँड्न सकिदैन ।\n"
 
@@ -39,19 +38,15 @@ msgstr "कन्फिगरेसन त्रुटि - अज्ञात �
 msgid "Warning: unknown group %s\n"
 msgstr "चेतावनी: अज्ञात समूह %s\n"
 
-#, c-format
 msgid "Warning: too many groups\n"
 msgstr "चेतावनी: अति धेरै समूहहरू\n"
 
-#, c-format
 msgid "Your password has expired."
 msgstr "तपाईँको पासवर्डको म्याद समाप्त भएको छ।"
 
-#, c-format
 msgid "Your password is inactive."
 msgstr "तपाईँको पासवर्ड निष्क्रिय छ।"
 
-#, c-format
 msgid "Your login has expired."
 msgstr "तपाईँको लगइनको म्याद समाप्त भएको छ।"
 
@@ -65,11 +60,9 @@ msgstr "  नयाँ पासवर्ड रोज्नुहोस् ।\
 msgid "Your password will expire in %ld days.\n"
 msgstr "तपाईँको पासवर्डको म्याद %ld दिनमा समाप्त हुन्छ ।\n"
 
-#, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "तपाईँको पासवर्डको म्याद भोली समाप्त हुनेछ ।\n"
 
-#, c-format
 msgid "Your password will expire today.\n"
 msgstr "तपाईँको पासवर्डको म्याद आज समाप्त हुनेछ ।\n"
 
@@ -77,7 +70,6 @@ msgstr "तपाईँको पासवर्डको म्याद आज
 msgid "Unable to change tty %s"
 msgstr "tty %s लाई परिवर्तन गर्न असक्षम भयो"
 
-#, c-format
 msgid "Environment overflow\n"
 msgstr "परिवेशको अतिप्रवाह\n"
 
@@ -99,7 +91,6 @@ msgstr[1] ""
 "%d अन्तिम लगइन देखिअसफल भयो ।\n"
 "अन्तिम %s मा %s थियो ।\n"
 
-#, c-format
 msgid "Too many logins.\n"
 msgstr "अति धेरै लगइनहरू ।\n"
 
@@ -196,7 +187,7 @@ msgstr "पासवर्ड: "
 msgid "%s's Password: "
 msgstr "'%s' को पासवर्ड: "
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -232,7 +223,6 @@ msgstr ""
 "\t\t\t\tगर्दछ\n"
 "\n"
 
-#, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "नयाँ मान प्रविष्टि गर्नुहोस्, वा पूर्वनिर्धारितको लागि ENTER थिच्नुहोस्\n"
 
@@ -254,27 +244,21 @@ msgstr "पासवर्ड निष्क्रिय"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "लेखा समाप्ति मिति (YYYY-MM-DD)"
 
-#, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "अन्तिम पासवर्ड परिवर्तन भयो\t\t\t\t\t: "
 
-#, c-format
 msgid "never\n"
 msgstr "कहिल्यै पनि\n"
 
-#, c-format
 msgid "password must be changed\n"
 msgstr "पासवर्ड परिवर्तन हुनुपर्छ\n"
 
-#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "पासवर्ड समाप्त हुन्छ\t\t\t\t\t: "
 
-#, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "पासवर्ड निष्क्रिय पार्नुहोस्\t\t\t\t\t: "
 
-#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "लेखा समाप्त हुन्छ\t\t\t\t\t\t: "
 
@@ -303,16 +287,12 @@ msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM आधिकरण असफल भयो\n"
 
 #, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: पासवर्ड फाइलमा ताल्चा मार्न सकिदैन\n"
+
+#, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: पासवर्ड फाइल खोल्न सकिएन\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: अज्ञात प्रयोगकर्ता %s\n"
-
-#, c-format
-msgid "%s: the shadow password file is not present\n"
-msgstr "%s: स्याडो पासवर्ड फाइल प्रस्तुत भएको छैन\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -323,16 +303,12 @@ msgid "%s: can't open shadow password file\n"
 msgstr "%s: स्याडो पासवर्ड फाइल खोल्न सकिएन\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: स्याडो पासवर्ड फाइल पुन:लेखन गर्न सकिएन\n"
 
 #, c-format
-msgid "Changing the aging information for %s\n"
-msgstr "%s का लागि अवधि सूचना परिवर्तन गरिदैछ\n"
-
-#, c-format
-msgid "%s: error changing fields\n"
-msgstr "%s: त्रुटि परिवर्तन फाँट\n"
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: पासवर्ड फाइल पुन:लेखन गर्न सकिएन\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
@@ -343,12 +319,24 @@ msgid "%s: can't update shadow password file\n"
 msgstr "%s: स्याडो पासवर्ड फाइल अद्यावधिक गर्न सकिएन\n"
 
 #, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: स्याडो पासवर्ड फाइल पुन:लेखन गर्न सकिएन\n"
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: स्याडो पासवर्ड फाइल प्रस्तुत भएको छैन\n"
 
 #, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: पासवर्ड फाइल पुन:लेखन गर्न सकिएन\n"
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: विशेषधिकारहरू छोड्न असफल भयो (%s)\n"
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: अज्ञात प्रयोगकर्ता %s\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "%s का लागि अवधि सूचना परिवर्तन गरिदैछ\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: त्रुटि परिवर्तन फाँट\n"
 
 #, c-format
 msgid ""
@@ -393,21 +381,27 @@ msgstr "\tगृह फोन: %s\n"
 msgid "Other"
 msgstr "अन्य"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: तपाईँको प्रयोगकर्ता नाम निर्धारण गर्न सकिएन ।\n"
+msgid "Cannot change ID to root.\n"
+msgstr "ID लाई मूलमा परिवर्तन गर्न सकिदैन ।\n"
+
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "पासवर्ड फाइल ताल्चा मार्न सकिएन; फेरी पछि प्रयास गर्नुहोस् ।\n"
+
+msgid "Cannot open the password file.\n"
+msgstr "पासवर्ड फाइल खोल्न सकिएन ।\n"
 
 #, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: NIS ग्राहकमा प्रयोगकर्ता '%s' परिवर्तन गर्न सकिदैन ।\n"
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s /etc/passwd मा फेला परेन\n"
 
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s' यो ग्राहकको लागि NIS मास्टर हो ।\n"
+msgid "Error updating the password entry.\n"
+msgstr "पासवर्ड प्रविष्टिमा त्रुटि अद्यावधिक गरिदैछ ।\n"
 
-#, c-format
-msgid "Changing the user information for %s\n"
-msgstr " %s को लागि प्रयोगकर्ता सूचना परिवर्तन गरिदैछ\n"
+msgid "Cannot commit password file changes.\n"
+msgstr "पासवर्ड फाइल परिवर्तनहरू कमिट गर्नु सकिएन ।\n"
+
+msgid "Cannot unlock the password file.\n"
+msgstr "पासवर्ड फाइलबाट ताल्चा हटाउन सकिदैन ।\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -430,36 +424,24 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' ले गैरकानूनी क्यारेक्टरहरू समाविष्ट गर्दछ\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: तपाईँको प्रयोगकर्ता नाम निर्धारण गर्न सकिएन ।\n"
+
+#, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: NIS ग्राहकमा प्रयोगकर्ता '%s' परिवर्तन गर्न सकिदैन ।\n"
+
+#, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' यो ग्राहकको लागि NIS मास्टर हो ।\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr " %s को लागि प्रयोगकर्ता सूचना परिवर्तन गरिदैछ\n"
+
+#, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: अति लामो फाँट\n"
-
-#, c-format
-msgid "Cannot change ID to root.\n"
-msgstr "ID लाई मूलमा परिवर्तन गर्न सकिदैन ।\n"
-
-#, c-format
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "पासवर्ड फाइल ताल्चा मार्न सकिएन; फेरी पछि प्रयास गर्नुहोस् ।\n"
-
-#, c-format
-msgid "Cannot open the password file.\n"
-msgstr "पासवर्ड फाइल खोल्न सकिएन ।\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s /etc/passwd मा फेला परेन\n"
-
-#, c-format
-msgid "Error updating the password entry.\n"
-msgstr "पासवर्ड प्रविष्टिमा त्रुटि अद्यावधिक गरिदैछ ।\n"
-
-#, c-format
-msgid "Cannot commit password file changes.\n"
-msgstr "पासवर्ड फाइल परिवर्तनहरू कमिट गर्नु सकिएन ।\n"
-
-#, c-format
-msgid "Cannot unlock the password file.\n"
-msgstr "पासवर्ड फाइलबाट ताल्चा हटाउन सकिदैन ।\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -519,6 +501,14 @@ msgstr "%s: जि स्याडो फाइल ताल्चा मार�
 msgid "%s: can't open shadow file\n"
 msgstr "%s: स्याडो फाइल खोल्न सकिएन\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating gshadow file\n"
+msgstr "%s: स्याडो फाइल अद्यावधिक गर्दा त्रुटि\n"
+
+#, fuzzy, c-format
+msgid "%s: error updating group file\n"
+msgstr "%s: समूह प्रविष्टि अद्यावधिक गर्दा त्रुटि\n"
+
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: रेखा %d: अति लामो रेखा\n"
@@ -531,13 +521,17 @@ msgstr "%s: रेखा %d: नयाँ पासवर्ड हराइर�
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: रेखा %d: अज्ञात समूह %s\n"
 
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: रेखा %d: पासवर्ड प्रविष्टि अद्यावधिक गर्न सकिदैन\n"
+#, fuzzy, c-format
+msgid "%s: line %d: cannot update group entry\n"
+msgstr "%s: रेखा %d: प्रविष्टि अद्यावधिक गर्न सकिएन\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: त्रुटि पत्ता लाग्यो, परिवर्तनहरू उपेक्षा गरियो\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: स्याडो फाइल ताल्चा मार्न सकिएन\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
@@ -548,18 +542,14 @@ msgid "%s: error updating password file\n"
 msgstr "%s: पासवर्ड फाइल अद्यावधिक गर्दा त्रुटि\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: पासवर्ड फाइलमा ताल्चा मार्न सकिदैन\n"
-
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: स्याडो फाइल ताल्चा मार्न सकिएन\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: रेखा %d: अज्ञात प्रयोगकर्ता %s\n"
 
-#, fuzzy, c-format
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: रेखा %d: पासवर्ड प्रविष्टि अद्यावधिक गर्न सकिदैन\n"
+
+#, fuzzy
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -595,7 +585,6 @@ msgstr "%s: अवैध प्रविष्टि: %s\n"
 msgid "%s is an invalid shell.\n"
 msgstr "%s अवैध शेल हो ।\n"
 
-#, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "उपयोग: अवधि {-f|-c}\n"
 
@@ -603,7 +592,7 @@ msgstr "उपयोग: अवधि {-f|-c}\n"
 msgid "%s: unknown user\n"
 msgstr "%s: अज्ञात प्रयोगकर्ता\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -636,7 +625,6 @@ msgstr ""
 "\t\t\t\tप्रयोगकर्ताको लागि LOGIN संगै \n"
 "\n"
 
-#, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "सबैभन्दा पछि                  असफल भएको                           लगइन\n"
 
@@ -677,12 +665,36 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: स्याडो समूह पासवर्डहरुलाई -A को आवश्यक छ\n"
 
 #, c-format
-msgid "Who are you?\n"
-msgstr "तपाईँ को हो ?\n"
+msgid "%s: can't get lock\n"
+msgstr "%s: ताल्चा प्राप्त गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: स्याडो ताल्चा प्राप्त गर्न सकिएन\n"
 
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: फाइल खोल्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: फाइल पुन:लेखन गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: स्याडो फाइल पुन:लेखन गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: फाइल अनलग गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: प्रविष्टि अद्यावधिक गर्न सकिएन\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: स्याडो प्रविष्टि अद्यावधिक गर्न सकिएन\n"
 
 #, c-format
 msgid "unknown group: %s\n"
@@ -695,22 +707,6 @@ msgstr "%s: फाइल खोल्न सकिएन\n"
 #, fuzzy, c-format
 msgid "%s: can't close shadow file\n"
 msgstr "%s: स्याडो फाइल खोल्न सकिएन\n"
-
-#, c-format
-msgid "Adding user %s to group %s\n"
-msgstr "समूह %s मा प्रयोगकर्ता %s थप गरिदैछ\n"
-
-#, c-format
-msgid "Removing user %s from group %s\n"
-msgstr "समूह %s बाट प्रयोगकर्ता %s हटाइदैछ\n"
-
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: अज्ञात सदस्य %s\n"
-
-#, c-format
-msgid "%s: Not a tty\n"
-msgstr "%s: tty होइन\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -729,35 +725,26 @@ msgstr "तिनीहरू मेल खाँदैनन्, फेरी �
 msgid "%s: Try again later\n"
 msgstr "%s: पछि फेरी प्रयास गर्नुहोस्\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: ताल्चा प्राप्त गर्न सकिएन\n"
+msgid "Who are you?\n"
+msgstr "तपाईँ को हो ?\n"
 
 #, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: स्याडो ताल्चा प्राप्त गर्न सकिएन\n"
+msgid "Adding user %s to group %s\n"
+msgstr "समूह %s मा प्रयोगकर्ता %s थप गरिदैछ\n"
 
 #, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: प्रविष्टि अद्यावधिक गर्न सकिएन\n"
+msgid "Removing user %s from group %s\n"
+msgstr "समूह %s बाट प्रयोगकर्ता %s हटाइदैछ\n"
 
 #, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: स्याडो प्रविष्टि अद्यावधिक गर्न सकिएन\n"
+msgid "%s: unknown member %s\n"
+msgstr "%s: अज्ञात सदस्य %s\n"
 
 #, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: फाइल पुन:लेखन गर्न सकिएन\n"
+msgid "%s: Not a tty\n"
+msgstr "%s: tty होइन\n"
 
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: स्याडो फाइल पुन:लेखन गर्न सकिएन\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: फाइल अनलग गर्न सकिएन\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -786,14 +773,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: नयाँ समूह प्रविष्टि थप गर्दा त्रुटि\n"
-
-#, c-format
-msgid "%s: name %s is not unique\n"
-msgstr "%s: नाम %s अद्वितिय होइन\n"
-
-#, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: GID %u अद्वितिय होइन\n"
 
 #, c-format
 msgid "%s: can't get unique GID\n"
@@ -836,6 +815,9 @@ msgid "%s: group %s exists\n"
 msgstr "%s: समूह %s अवस्थित छ\n"
 
 #, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s: GID %u अद्वितिय होइन\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "उपयोग: groupdel समूह नाम\n"
 
@@ -863,47 +845,41 @@ msgstr "%s: समूह %s NIS समूह हो\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s NIS मास्टर हो\n"
 
-#, c-format
 msgid "Member already exists\n"
 msgstr ""
 
-#, c-format
 msgid "Member to remove could not be found\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
-#, c-format
 msgid "Only root can add members to different groups\n"
 msgstr ""
 
-#, c-format
 msgid "Group access is required\n"
 msgstr ""
 
-#, c-format
 msgid "Not primary owner of current group\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "PAM authentication failed for\n"
 msgstr "%s: PAM आधिकरण असफल भयो\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to lock group file\n"
 msgstr "%s: समूह फाइल ताल्चा मार्न असक्षम भयो\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to open group file\n"
 msgstr "%s: समूह फाइल खोल्न असक्षम भयो\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Cannot close group file\n"
 msgstr "%s: समूह फाइल खोल्न सकिदैन\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -913,6 +889,7 @@ msgid ""
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 "GROUP\n"
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
 "उपयोग: groupadd [विकल्प] समूह\n"
@@ -948,10 +925,6 @@ msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "उपयोग: %s [-r] [-s] [group]\n"
 
 #, c-format
-msgid "No\n"
-msgstr "होइन\n"
-
-#, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s र -r मिल्दोजुल्दो छैन\n"
 
@@ -964,6 +937,9 @@ msgid "%s: cannot open file %s\n"
 msgstr "%s: फाइल %s खोल्न सकिएन\n"
 
 #, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: फाइल %s अद्यावधिक गर्न सकिएन\n"
+
 msgid "invalid group file entry\n"
 msgstr "अवैध समूह फाइल प्रविष्टि\n"
 
@@ -971,7 +947,6 @@ msgstr "अवैध समूह फाइल प्रविष्टि\n"
 msgid "delete line '%s'? "
 msgstr "लाइन '%s' मेट्नुहुन्छ ? "
 
-#, c-format
 msgid "duplicate group entry\n"
 msgstr "नक्कली समूह प्रविष्टि\n"
 
@@ -1003,11 +978,9 @@ msgstr "%s: यस %s का लागि स्याडो प्रविष�
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: यस %s समूहका लागि प्रविष्टि अद्यावधिक गर्न सकिएन\n"
 
-#, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "अवैध स्याडो समूह फाइल प्रविष्टि\n"
 
-#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "नक्कली स्याडो समूह प्रविष्टि\n"
 
@@ -1022,10 +995,6 @@ msgstr "प्रशासनिक सदस्य '%s' मेट्नुह�
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "स्याडो समूह %s: प्रयोगकर्ता छैन %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: फाइल %s अद्यावधिक गर्न सकिएन\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -1059,19 +1028,16 @@ msgstr "%s: समूह फाइल अद्यावधिक गर्न �
 msgid "%s: can't delete shadow group file\n"
 msgstr "%s: स्याडो समूह फाइल मेट्न सकिएन\n"
 
-#, c-format
 msgid "Usage: id [-a]\n"
 msgstr "उपयोग: id [-a]\n"
 
-#, c-format
 msgid "Usage: id\n"
 msgstr "उपयोग: id\n"
 
-#, c-format
 msgid " groups="
 msgstr " समूहहरू="
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -1092,16 +1058,18 @@ msgstr ""
 "  -u, --प्रयोगकर्ता LOGIN\t निर्दिष्ट गरिएको LOGIN संगै अन्तिम लग रेकर्डहरू मुद्रण गर्दछ\n"
 "\n"
 
-#, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "सबै भन्दा पछिल्लो        बाट                पोर्ट        प्रयोगकर्ता नाम\n"
 
-#, c-format
 msgid "Username                Port     Latest\n"
 msgstr "सबैभन्दा पछिल्लो              पोर्ट            प्रयोगकर्ता नाम\n"
 
 msgid "**Never logged in**"
 msgstr "**Never logged in**"
+
+#, fuzzy, c-format
+msgid "Unknown user or range: %s\n"
+msgstr "अज्ञात प्रयोगकर्ता: %s\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
@@ -1119,11 +1087,9 @@ msgstr "       %s [-p] [-h host] [-f name]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r host\n"
 
-#, c-format
 msgid "Invalid login time\n"
 msgstr "अवैध लगइन समय\n"
 
-#, c-format
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1131,7 +1097,6 @@ msgstr ""
 "\n"
 "रुटिन संभारको लागि प्रणाली बन्द गरियो\n"
 
-#, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1171,7 +1136,6 @@ msgstr "लगइन: "
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr "बढेको प्रयासहरको अधिक्तम संख्या (%d)\n"
 
-#, c-format
 msgid "login: abort requested by PAM\n"
 msgstr "लगइन: PAM द्वारा अनुरोध गरिएको परित्याग\n"
 
@@ -1189,6 +1153,10 @@ msgstr "लगइन गलत छ"
 #, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s: फोर्क गर्दा असफल: %s"
+
+#, c-format
+msgid "TIOCSCTTY failed on %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "चेतावनी: अस्थायी लगआउट पछि लगइन पुन: सक्षम गर्नुहोस् ।\n"
@@ -1212,13 +1180,15 @@ msgstr ""
 "लगइन समय बढ्यो\n"
 "\n"
 
-#, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "उपयोग: newgrp [-] [group]\n"
 
-#, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "उपयोग: sg group [[-c] आदेश]\n"
+
+#, fuzzy
+msgid "Invalid password.\n"
+msgstr "पुरानो पासवर्ड: "
 
 #, c-format
 msgid "unknown UID: %u\n"
@@ -1228,11 +1198,6 @@ msgstr "अज्ञात UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "अज्ञात GID: %lu\n"
 
-#, fuzzy
-msgid "Invalid password."
-msgstr "पुरानो पासवर्ड: "
-
-#, c-format
 msgid "too many groups\n"
 msgstr "अति धेरै समूहहरू\n"
 
@@ -1242,6 +1207,16 @@ msgid ""
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
 "%s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+msgstr "%s: समूह %s अवस्थित छैन\n"
+
+#, c-format
+msgid ""
+"%s: group %s created, failure during the creation of the corresponding "
+"gshadow group\n"
 msgstr ""
 
 #, c-format
@@ -1255,6 +1230,10 @@ msgstr "%s: फाइलहरू ताल्चा मार्न सकि�
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: फाइलहरू खओल्न सकिएन\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: फाइलहरू अद्यावधिक गर्दा त्रुटि\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1288,11 +1267,7 @@ msgstr "%s: रेखा %d: chown असफल भयो\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: रेखा %d: प्रविष्टि अद्यावधिक गर्न सकिएन\n"
 
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: फाइलहरू अद्यावधिक गर्दा त्रुटि\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1361,11 +1336,9 @@ msgstr ""
 msgid "New password: "
 msgstr "नयाँ पासवर्ड : "
 
-#, c-format
 msgid "Try again.\n"
 msgstr "फेरी प्रयास गर्नुहोस् ।\n"
 
-#, c-format
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1373,7 +1346,6 @@ msgstr ""
 "\n"
 "चेतावनी: कम्जोर पासवर्ड (जे भए पनि यसलाई प्रयोग गर्न फेरी यसलाई प्रविष्ट गर्नुहोस्) ।\n"
 
-#, c-format
 msgid "They don't match; try again.\n"
 msgstr "तिनीहरू मेल खाँदैनन्; फेरी प्रयास गर्नुहोस् ।\n"
 
@@ -1412,11 +1384,9 @@ msgstr "%s को लागि पासवर्ड परिवर्तन �
 msgid "The password for %s is unchanged.\n"
 msgstr "%s को लागि पासवर्ड परिवर्तन हुन सकिदैन ।\n"
 
-#, c-format
 msgid "Password changed.\n"
 msgstr "पासवर्ड परिवर्तन भयो ।\n"
 
-#, c-format
 msgid "Password set to expire.\n"
 msgstr "समाप्तिलाई पासवर्ड सेट गरियो ।\n"
 
@@ -1424,11 +1394,9 @@ msgstr "समाप्तिलाई पासवर्ड सेट गरि
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "उपयोग: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-#, c-format
 msgid "invalid password file entry\n"
 msgstr "अवैध पासवर्ड फाइल प्रविष्टि\n"
 
-#, c-format
 msgid "duplicate password entry\n"
 msgstr "नक्कली पासवर्ड प्रविष्टि\n"
 
@@ -1460,11 +1428,9 @@ msgstr "'%s' मा %s प्रयोगकर्ता थप्नुहु�
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: %s को लागि पासवर्ड प्रविष्टि अद्यावधिक गर्न सकिएन\n"
 
-#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "अवैध स्याडो पासवर्ड फाइल प्रविष्टि\n"
 
-#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "नक्कलि स्याडो पासवर्ड प्रविष्टि\n"
 
@@ -1500,15 +1466,12 @@ msgstr "%s: प्रयोगकर्ता %s का लागि प्र�
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: स्याडो पासवर्ड फाइल मेट्न सकिएन\n"
 
-#, c-format
 msgid "Access to su to that account DENIED.\n"
 msgstr "su बाट त्यो खातामा पहुँच गर्न अस्वीकार गरियो ।\n"
 
-#, c-format
 msgid "Password authentication bypassed.\n"
 msgstr "पासवर्ड प्रमाणीकरण बाइपास गरियो ।\n"
 
-#, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr " कृपया प्रमाणीकरणको रुपमा तपाईँको आफ्नो पासवर्ड प्रविष्ट गर्नुहोस् ।\n"
 
@@ -1516,7 +1479,7 @@ msgstr " कृपया प्रमाणीकरणको रुपमा �
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1569,15 +1532,15 @@ msgstr ""
 "%s: %s\n"
 "(उपेक्षा गरियो)\n"
 
-#, c-format
 msgid "No shell\n"
 msgstr "शेल होइन\n"
 
-#, c-format
 msgid "No password file\n"
 msgstr "पासवर्ड फाइल होइन\n"
 
-#, c-format
+msgid "TIOCSCTTY failed"
+msgstr ""
+
 msgid "No password entry for 'root'\n"
 msgstr "मूलको लागि पासवर्ड प्रविष्टि छैन'\n"
 
@@ -1621,7 +1584,7 @@ msgstr "%s: समूह '%s' NIS समूह हो ।\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: अति धेरै समूहरू निर्दिष्ट गरिएको छ (max %d) ।\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1642,6 +1605,8 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+"  -l,                           do not add the user to the lastlog and\n"
+"                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1687,13 +1652,13 @@ msgstr "%s: update_group मा स्मृति भन्दा बाहि�
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: gshadow_group मा स्मृति भन्दा बाहिर\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
-msgstr "%s: UID %u अद्वितिय होइन\n"
-
-#, c-format
-msgid "%s: can't get unique UID\n"
+#, fuzzy, c-format
+msgid "%s: can't get unique UID (no more available UIDs)\n"
 msgstr "%s: अद्वितिय UID प्राप्त गर्न सकिएन\n"
+
+#, fuzzy, c-format
+msgid "%s: can't get unique GID (no more available GIDs)\n"
+msgstr "%s: अद्वितिय GID प्राप्त गर्न सकिएन\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1786,7 +1751,6 @@ msgstr "%s: डाइरेकट्री सिर्जना गर्न �
 msgid "Creating mailbox file"
 msgstr "मेल बाकस फाइल सिर्जना गर्दै"
 
-#, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr "समूह मेल फेला परेन । ०६०० मोड द्वारा प्रयोगकर्ता मेल बाकस फाइल सिर्जना गर्दैछ ।\n"
@@ -1806,6 +1770,10 @@ msgstr ""
 "प्रयोग गर्नुहोस् ।\n"
 
 #, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s: UID %u अद्वितिय होइन\n"
+
+#, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
@@ -1817,7 +1785,7 @@ msgstr ""
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: चेतावनी: CREATE_HOME समर्थित छैन, कृपया सट्टामा -m प्रयोग गर्नुहोस् ।\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: userdel [options] LOGIN\n"
 "\n"
@@ -1892,7 +1860,7 @@ msgstr "%s: हट्ने डाइरेक्ट्री होइन %s (�
 msgid "%s: error removing directory %s\n"
 msgstr "%s: डाइरेक्ट्री हटाउँदा त्रुटि %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -2005,7 +1973,14 @@ msgstr "मेलबक्स प्रापक परिवर्तन गर
 msgid "failed to rename mailbox"
 msgstr "मेल बक्सलाई पुन:नामकरण गर्न असफल भयो"
 
-#, fuzzy, c-format
+#, c-format
+msgid ""
+"You have modified %s.\n"
+"You may need to modify %s for consistency.\n"
+"Please use the command `%s' to do so.\n"
+msgstr ""
+
+#, fuzzy
 msgid ""
 "Usage: vipw [options]\n"
 "\n"
@@ -2044,6 +2019,12 @@ msgstr "जगेडा बनाउँन सकिदैन"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: पुन:भण्डारण गर्न सकिदैन %s: %s (तपाईँको परिवर्तनहरू %s मा छ)\n"
+
+#~ msgid "%s: name %s is not unique\n"
+#~ msgstr "%s: नाम %s अद्वितिय होइन\n"
+
+#~ msgid "No\n"
+#~ msgstr "होइन\n"
 
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"

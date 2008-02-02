@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-11-24 16:15+0100\n"
+"POT-Creation-Date: 2008-02-02 18:05+0100\n"
 "PO-Revision-Date: 2007-11-26 20:45+0100\n"
 "Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -22,7 +22,6 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
-#, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Na konfiguračné údaje sa nedá vyhradiť dostatok miesta.\n"
 
@@ -35,19 +34,15 @@ msgstr ""
 msgid "Warning: unknown group %s\n"
 msgstr "Upozornenie: skupina %s je neznáma\n"
 
-#, c-format
 msgid "Warning: too many groups\n"
 msgstr "Upozornenie: príliš mnoho skupín\n"
 
-#, c-format
 msgid "Your password has expired."
 msgstr "Uplynula platnosť vášho hesla."
 
-#, c-format
 msgid "Your password is inactive."
 msgstr "Vaše heslo je nečinné."
 
-#, c-format
 msgid "Your login has expired."
 msgstr "Uplynula platnosť vášho účtu."
 
@@ -61,11 +56,9 @@ msgstr "  Zvoľte nové heslo.\n"
 msgid "Your password will expire in %ld days.\n"
 msgstr "Za %ld dní uplynie platnosť vášho hesla.\n"
 
-#, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "Zajtra uplynie platnosť vášho hesla.\n"
 
-#, c-format
 msgid "Your password will expire today.\n"
 msgstr "Dnes uplynie platnosť vášho hesla.\n"
 
@@ -73,7 +66,6 @@ msgstr "Dnes uplynie platnosť vášho hesla.\n"
 msgid "Unable to change tty %s"
 msgstr "Nedá sa zmeniť TTY %s"
 
-#, c-format
 msgid "Environment overflow\n"
 msgstr "Preplnenie prostredia\n"
 
@@ -98,7 +90,6 @@ msgstr[2] ""
 "%d chybných pokusov o prihlásenie od posledného prihlásenia.\n"
 "Posledné bolo %s na %s.\n"
 
-#, c-format
 msgid "Too many logins.\n"
 msgstr "Príliš mnoho prihlásení.\n"
 
@@ -194,7 +185,7 @@ msgstr "Heslo: "
 msgid "%s's Password: "
 msgstr "Heslo používateľa %s:"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -231,7 +222,6 @@ msgstr ""
 "UPOZ_DNÍ\n"
 "\n"
 
-#, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr ""
 "Zadajte novú hodnotu alebo stlačte ENTER pre použitie predvolenej hodnoty\n"
@@ -254,27 +244,21 @@ msgstr "Nečinné heslo"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Uplynutie platnosti účtu (YYYY-MM-DD)"
 
-#, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Posledná zmena hesla\t\t\t\t\t: "
 
-#, c-format
 msgid "never\n"
 msgstr "nikdy\n"
 
-#, c-format
 msgid "password must be changed\n"
 msgstr "heslo sa musí zmeniť\n"
 
-#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Platnosť hesla uplynie\t\t\t\t\t: "
 
-#, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Nečinné heslo\t\t\t\t\t: "
 
-#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Platnosť účtu uplynie\t\t\t\t\t\t: "
 
@@ -304,16 +288,12 @@ msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM autentifikácia zlyhala\n"
 
 #, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: súbor s heslami sa nedá zamknúť\n"
+
+#, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: súbor s heslami sa nedá otvoriť\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: používateľ %s je neznámy\n"
-
-#, c-format
-msgid "%s: the shadow password file is not present\n"
-msgstr "%s: súbor s tieňovými heslami nie je dostupný\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -324,16 +304,12 @@ msgid "%s: can't open shadow password file\n"
 msgstr "%s: súbor s tieňovými heslami sa nedá otvoriť\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: súbor s tieňovými heslami sa nedá prepísať\n"
 
 #, c-format
-msgid "Changing the aging information for %s\n"
-msgstr "Mením časové informácie pre používateľa %s\n"
-
-#, c-format
-msgid "%s: error changing fields\n"
-msgstr "%s: chyba pri zmene položiek\n"
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: súbor s heslami sa nedá prepísať\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
@@ -344,12 +320,24 @@ msgid "%s: can't update shadow password file\n"
 msgstr "%s: súbor s tieňovými heslami sa nedá aktualizovať\n"
 
 #, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: súbor s tieňovými heslami sa nedá prepísať\n"
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: súbor s tieňovými heslami nie je dostupný\n"
 
 #, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: súbor s heslami sa nedá prepísať\n"
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: zlyhalo odstránenie právomocí (%s)\n"
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: používateľ %s je neznámy\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Mením časové informácie pre používateľa %s\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: chyba pri zmene položiek\n"
 
 #, c-format
 msgid ""
@@ -398,21 +386,27 @@ msgstr "\tTelefón domov: %s\n"
 msgid "Other"
 msgstr "Ostatné"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
+msgid "Cannot change ID to root.\n"
+msgstr "ID sa nedá zmeniť na root.\n"
+
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Nedá sa zamknúť súbor s heslami; skúste to neskôr.\n"
+
+msgid "Cannot open the password file.\n"
+msgstr "Súbor s heslami sa nedá otvoriť.\n"
 
 #, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: na NIC klientovi sa nedá zmeniť používateľ '%s'.\n"
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s sa nenachádza v /etc/passwd\n"
 
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s' je hlavným NIS serverom pre tohto klienta.\n"
+msgid "Error updating the password entry.\n"
+msgstr "Chyba pri aktualizácii záznamu hesla.\n"
 
-#, c-format
-msgid "Changing the user information for %s\n"
-msgstr "Mením informácie o používateľovi %s\n"
+msgid "Cannot commit password file changes.\n"
+msgstr "Nedajú sa vykonať zmeny v súbore s heslami.\n"
+
+msgid "Cannot unlock the password file.\n"
+msgstr "Súbor s heslami sa nedá odomknúť.\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -435,36 +429,24 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' obsahuje chybné znaky\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: vaše používateľské meno sa nedá zistiť.\n"
+
+#, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: na NIC klientovi sa nedá zmeniť používateľ '%s'.\n"
+
+#, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' je hlavným NIS serverom pre tohto klienta.\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Mením informácie o používateľovi %s\n"
+
+#, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: položka je príliš dlhá\n"
-
-#, c-format
-msgid "Cannot change ID to root.\n"
-msgstr "ID sa nedá zmeniť na root.\n"
-
-#, c-format
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "Nedá sa zamknúť súbor s heslami; skúste to neskôr.\n"
-
-#, c-format
-msgid "Cannot open the password file.\n"
-msgstr "Súbor s heslami sa nedá otvoriť.\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s sa nenachádza v /etc/passwd\n"
-
-#, c-format
-msgid "Error updating the password entry.\n"
-msgstr "Chyba pri aktualizácii záznamu hesla.\n"
-
-#, c-format
-msgid "Cannot commit password file changes.\n"
-msgstr "Nedajú sa vykonať zmeny v súbore s heslami.\n"
-
-#, c-format
-msgid "Cannot unlock the password file.\n"
-msgstr "Súbor s heslami sa nedá odomknúť.\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -524,6 +506,14 @@ msgstr "%s: súbor s tieňovými heslami skupín sa nedá zamknúť\n"
 msgid "%s: can't open shadow file\n"
 msgstr "%s: súbor s tieňovými heslami sa nedá otvoriť\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating gshadow file\n"
+msgstr "%s: chyba pri aktualizácii súboru s tieňovými heslami\n"
+
+#, fuzzy, c-format
+msgid "%s: error updating group file\n"
+msgstr "%s: položka súboru so skupinami sa nedá aktualizovať\n"
+
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: riadok %d je príliš dlhý\n"
@@ -536,13 +526,17 @@ msgstr "%s: riadok %d: chýba nové heslo\n"
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: riadok %d: skupina %s je neznáma\n"
 
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: riadok %d: záznam hesla sa nedá aktualizovať\n"
+#, fuzzy, c-format
+msgid "%s: line %d: cannot update group entry\n"
+msgstr "%s: riadok %d: položka sa nedá aktualizovať\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: zistená chyba, zmeny budú zamietnuté\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: súbor s tieňovými heslami sa nedá zamknúť\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
@@ -553,18 +547,14 @@ msgid "%s: error updating password file\n"
 msgstr "%s: chyba pri aktualizácii súboru s heslami\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: súbor s heslami sa nedá zamknúť\n"
-
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: súbor s tieňovými heslami sa nedá zamknúť\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: riadok %d: používateľ %s je neznámy\n"
 
-#, fuzzy, c-format
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: riadok %d: záznam hesla sa nedá aktualizovať\n"
+
+#, fuzzy
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -601,7 +591,6 @@ msgstr "%s: Chybná položka: %s\n"
 msgid "%s is an invalid shell.\n"
 msgstr "Shell %s je neplatný.\n"
 
-#, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Použitie: expiry {-f|-c}\n"
 
@@ -609,7 +598,6 @@ msgstr "Použitie: expiry {-f|-c}\n"
 msgid "%s: unknown user\n"
 msgstr "%s: neznámy používateľ\n"
 
-#, c-format
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -643,7 +631,6 @@ msgstr ""
 "                        -r, -m or -l) pre používateľa s loginom LOGIN\n"
 "\n"
 
-#, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Login       Chybné   Najviac Posledné                 Na\n"
 
@@ -684,12 +671,36 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: prepínač -A funguje iba s tieňovými heslami skupín\n"
 
 #, c-format
-msgid "Who are you?\n"
-msgstr "Kto ste?\n"
+msgid "%s: can't get lock\n"
+msgstr "%s: nedá sa získať zámok\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: nedá sa získať zámok pre súbor s tieňovými heslami\n"
 
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: nedá sa otvoriť súbor\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: súbor sa nedá prepísať\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: súbor s tieňovými heslami sa nedá prepísať\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: súbor sa nedá odomknúť\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: položka sa nedá aktualizovať\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: položka súboru s tieňovými heslami sa nedá aktualizovať\n"
 
 #, c-format
 msgid "unknown group: %s\n"
@@ -702,22 +713,6 @@ msgstr "%s: nedá sa otvoriť súbor\n"
 #, fuzzy, c-format
 msgid "%s: can't close shadow file\n"
 msgstr "%s: súbor s tieňovými heslami sa nedá otvoriť\n"
-
-#, c-format
-msgid "Adding user %s to group %s\n"
-msgstr "Pridávam používateľa %s do skupiny %s.\n"
-
-#, c-format
-msgid "Removing user %s from group %s\n"
-msgstr "Odstraňujem používateľa %s zo skupiny %s\n"
-
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: člen %s je neznámy\n"
-
-#, c-format
-msgid "%s: Not a tty\n"
-msgstr "%s: Nejedná sa o tty\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -736,35 +731,26 @@ msgstr "Nezhodujú sa; skúste to znova"
 msgid "%s: Try again later\n"
 msgstr "%s: Skúste to neskôr\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: nedá sa získať zámok\n"
+msgid "Who are you?\n"
+msgstr "Kto ste?\n"
 
 #, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: nedá sa získať zámok pre súbor s tieňovými heslami\n"
+msgid "Adding user %s to group %s\n"
+msgstr "Pridávam používateľa %s do skupiny %s.\n"
 
 #, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: položka sa nedá aktualizovať\n"
+msgid "Removing user %s from group %s\n"
+msgstr "Odstraňujem používateľa %s zo skupiny %s\n"
 
 #, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: položka súboru s tieňovými heslami sa nedá aktualizovať\n"
+msgid "%s: unknown member %s\n"
+msgstr "%s: člen %s je neznámy\n"
 
 #, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: súbor sa nedá prepísať\n"
+msgid "%s: Not a tty\n"
+msgstr "%s: Nejedná sa o tty\n"
 
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: súbor s tieňovými heslami sa nedá prepísať\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: súbor sa nedá odomknúť\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -794,14 +780,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: chyba pri pridávaní položky do súboru so skupinami\n"
-
-#, c-format
-msgid "%s: name %s is not unique\n"
-msgstr "%s: meno %s nie je jedinečné\n"
-
-#, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: GID %u nie je jedinečný\n"
 
 #, c-format
 msgid "%s: can't get unique GID\n"
@@ -844,6 +822,9 @@ msgid "%s: group %s exists\n"
 msgstr "%s: skupina %s už existuje\n"
 
 #, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s: GID %u nie je jedinečný\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "Použitie: groupdel skupina\n"
 
@@ -871,48 +852,42 @@ msgstr "%s: skupina %s je NIS skupinou\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s je hlavným NIS serverom\n"
 
-#, c-format
 msgid "Member already exists\n"
 msgstr ""
 
-#, c-format
 msgid "Member to remove could not be found\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
-#, c-format
 msgid "Only root can add members to different groups\n"
 msgstr ""
 
-#, c-format
 msgid "Group access is required\n"
 msgstr ""
 
-#, c-format
 msgid "Not primary owner of current group\n"
 msgstr ""
 
 #  c-format
-#, fuzzy, c-format
+#, fuzzy
 msgid "PAM authentication failed for\n"
 msgstr "%s: PAM autentifikácia zlyhala\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to lock group file\n"
 msgstr "%s: súbor so skupinami sa nedá zamknúť\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to open group file\n"
 msgstr "%s: súbor so skupinami sa nedá otvoriť\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Cannot close group file\n"
 msgstr "%s: súbor so skupinami sa nedá otvoriť\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -922,6 +897,7 @@ msgid ""
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 "GROUP\n"
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
 "Použitie: groupadd [voľby] skupina\n"
@@ -959,10 +935,6 @@ msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Použitie: %s [-r] [-s] [súbor_so_skupinami]\n"
 
 #, c-format
-msgid "No\n"
-msgstr "Nie\n"
-
-#, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s a -r nie sú zlučiteľné\n"
 
@@ -975,6 +947,9 @@ msgid "%s: cannot open file %s\n"
 msgstr "%s: súbor %s sa nedá otvoriť\n"
 
 #, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: súbor %s sa nedá aktualizovať\n"
+
 msgid "invalid group file entry\n"
 msgstr "chybná položka v súbore so skupinami\n"
 
@@ -982,7 +957,6 @@ msgstr "chybná položka v súbore so skupinami\n"
 msgid "delete line '%s'? "
 msgstr "zmazať riadok '%s'? "
 
-#, c-format
 msgid "duplicate group entry\n"
 msgstr "v súbore so skupinami sa vyskytuje zdvojená položka\n"
 
@@ -1014,11 +988,9 @@ msgstr "%s: položka %s súboru s tieňovými heslami sa nedá aktualizovať\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: položka skupiny %s sa nedá odstrániť\n"
 
-#, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "chybná položka v súbore s tieňovými skupinami\n"
 
-#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "v súbore s tieňovými skupinami sa vyskytuje zdvojená položka\n"
 
@@ -1033,10 +1005,6 @@ msgstr "zmazať administrátora '%s'? "
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "tieňová skupina %s: používateľ %s neexistuje\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: súbor %s sa nedá aktualizovať\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -1070,19 +1038,15 @@ msgstr "%s: súbor s heslami sa nedá aktualizovať\n"
 msgid "%s: can't delete shadow group file\n"
 msgstr "%s: súbor s tieňovými heslami skupín sa nedá zmazať\n"
 
-#, c-format
 msgid "Usage: id [-a]\n"
 msgstr "Použitie: id [-a]\n"
 
-#, c-format
 msgid "Usage: id\n"
 msgstr "Použitie: id\n"
 
-#, c-format
 msgid " groups="
 msgstr " skupiny="
 
-#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -1104,16 +1068,18 @@ msgstr ""
 "  -u, --user LOGIN      vypíše posledné prihlásenia používateľa uvedeného\n"
 "                        ako LOGIN\n"
 
-#, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Používateľ       Port     Z                Naposledy\n"
 
-#, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Používateľ              Port     Naposledy\n"
 
 msgid "**Never logged in**"
 msgstr "**Nebol nikdy prihlásený**"
+
+#, fuzzy, c-format
+msgid "Unknown user or range: %s\n"
+msgstr "Používateľ %s je neznámy.\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
@@ -1131,11 +1097,9 @@ msgstr "          %s [-p] [-h počítač] [-f meno]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "          %s [-p] -r počítač\n"
 
-#, c-format
 msgid "Invalid login time\n"
 msgstr "Chybný čas prihlásenia\n"
 
-#, c-format
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1143,7 +1107,6 @@ msgstr ""
 "\n"
 "Systém je uzavretý kvôli pravidelnej údržbe.\n"
 
-#, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1183,7 +1146,6 @@ msgstr "Prihlasovacie meno: "
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr "Prekročený maximálny počet pokusov (%d)\n"
 
-#, c-format
 msgid "login: abort requested by PAM\n"
 msgstr "prihlásenie: PAM prerušenie\n"
 
@@ -1201,6 +1163,10 @@ msgstr "Chybné prihlásenie"
 #, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s: chybné vetvenie: %s"
+
+#, c-format
+msgid "TIOCSCTTY failed on %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Upozornenie: po dočasnom zákaze je prihlasovanie opäť povolené.\n"
@@ -1224,13 +1190,15 @@ msgstr ""
 "čas na prihlásenie uplynul\n"
 "\n"
 
-#, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Použitie: newgrp [-] [skupina]\n"
 
-#, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Použitie: sg skupina [[-c] príkaz]\n"
+
+#, fuzzy
+msgid "Invalid password.\n"
+msgstr "Staré heslo: "
 
 #, c-format
 msgid "unknown UID: %u\n"
@@ -1240,11 +1208,6 @@ msgstr "neznámy UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "neznámy GID %lu\n"
 
-#, fuzzy
-msgid "Invalid password."
-msgstr "Staré heslo: "
-
-#, c-format
 msgid "too many groups\n"
 msgstr "príliš mnoho skupín\n"
 
@@ -1254,6 +1217,16 @@ msgid ""
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
 "%s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+msgstr "%s: skupina %s neexistuje\n"
+
+#, c-format
+msgid ""
+"%s: group %s created, failure during the creation of the corresponding "
+"gshadow group\n"
 msgstr ""
 
 #, c-format
@@ -1267,6 +1240,10 @@ msgstr "%s: súbory sa nedajú zamknúť, skúste to neskôr znova\n"
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: súbory sa nedajú otvoriť\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: chyba pri aktualizácii súborov\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1300,11 +1277,7 @@ msgstr "%s: riadok %d: volanie chown zlyhalo\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: riadok %d: položka sa nedá aktualizovať\n"
 
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: chyba pri aktualizácii súborov\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1375,11 +1348,9 @@ msgstr ""
 msgid "New password: "
 msgstr "Nové heslo: "
 
-#, c-format
 msgid "Try again.\n"
 msgstr "Skúste to znova.\n"
 
-#, c-format
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1387,7 +1358,6 @@ msgstr ""
 "\n"
 "Upozornenie: slabé heslo (ak ho chcete naozaj použiť, znova ho zadajte).\n"
 
-#, c-format
 msgid "They don't match; try again.\n"
 msgstr "Nezhodujú sa; skúste to znova.\n"
 
@@ -1425,11 +1395,9 @@ msgstr "Mením heslo používateľovi %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Heslo používateľa %s nebolo zmenené.\n"
 
-#, c-format
 msgid "Password changed.\n"
 msgstr "Heslo bolo zmenené.\n"
 
-#, c-format
 msgid "Password set to expire.\n"
 msgstr "Uplynula platnosť vášho hesla.\n"
 
@@ -1438,11 +1406,9 @@ msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 "Použitie: %s [-q] [-r] [-s] [súbor_s_heslami [súbor_s_tieňovými_heslami]]\n"
 
-#, c-format
 msgid "invalid password file entry\n"
 msgstr "chybná položka v súbore s heslami\n"
 
-#, c-format
 msgid "duplicate password entry\n"
 msgstr "duplikovaná položka v súbore s heslami\n"
 
@@ -1474,11 +1440,9 @@ msgstr "pridať používateľa '%s' do %s? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: položka súboru s heslami pre používateľe %s sa nedá aktualizovať\n"
 
-#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "chybná položka v súbore s tieňovými heslami\n"
 
-#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "duplikovaná položka v súbore s tieňovými heslami\n"
 
@@ -1514,15 +1478,12 @@ msgstr "%s: položka pre používateľa %s sa nedá aktualizovať\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: nemôžete zmazať súbor s tieňovými heslami\n"
 
-#, c-format
 msgid "Access to su to that account DENIED.\n"
 msgstr "Z tohto účtu je prístup k su ZAKÁZANÝ.\n"
 
-#, c-format
 msgid "Password authentication bypassed.\n"
 msgstr "Overenie hesla vynechané.\n"
 
-#, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Pre overenie zadajte VAŠE vlastné heslo.\n"
 
@@ -1530,7 +1491,7 @@ msgstr "Pre overenie zadajte VAŠE vlastné heslo.\n"
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1584,15 +1545,15 @@ msgstr ""
 "%s: %s\n"
 "(Ignorujem)\n"
 
-#, c-format
 msgid "No shell\n"
 msgstr "Žiadny shell\n"
 
-#, c-format
 msgid "No password file\n"
 msgstr "Súbor s heslami neexistuje\n"
 
-#, c-format
+msgid "TIOCSCTTY failed"
+msgstr ""
+
 msgid "No password entry for 'root'\n"
 msgstr "V databáze nie je položka pre používateľa 'root'\n"
 
@@ -1636,7 +1597,7 @@ msgstr "%s: skupina '%s' je NIS skupinou.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: bolo zadaných príliš veľa skupín (max %d).\n"
 
-#, c-format
+#, fuzzy
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1657,6 +1618,8 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+"  -l,                           do not add the user to the lastlog and\n"
+"                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1705,13 +1668,13 @@ msgstr "%s nedostatok pamäti v update_group\n"
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: nedostatok pamäti v update_gshadow\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
-msgstr "%s: UID %u nie je jedinečný\n"
-
-#, c-format
-msgid "%s: can't get unique UID\n"
+#, fuzzy, c-format
+msgid "%s: can't get unique UID (no more available UIDs)\n"
 msgstr "%s: nedá sa vytvoriť jedinečný UID\n"
+
+#, fuzzy, c-format
+msgid "%s: can't get unique GID (no more available GIDs)\n"
+msgstr "%s: nedá sa vytvoriť jedinečný GID\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1804,7 +1767,6 @@ msgstr "%s: nedá sa vytvoriť adresár %s\n"
 msgid "Creating mailbox file"
 msgstr "Vytvára sa mailbox súbor"
 
-#, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
@@ -1826,6 +1788,10 @@ msgstr ""
 "skupiny, použijte -g.\n"
 
 #, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s: UID %u nie je jedinečný\n"
+
+#, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
@@ -1837,7 +1803,6 @@ msgstr ""
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: varovanie: CREATE_HOME nie je podporované, použijte prepínač -m.\n"
 
-#, c-format
 msgid ""
 "Usage: userdel [options] LOGIN\n"
 "\n"
@@ -1915,7 +1880,7 @@ msgstr "%s: adresár %s nebudem mazať (je to domovský adresár používateľa 
 msgid "%s: error removing directory %s\n"
 msgstr "%s: chyba pri mazaní adresára %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -2038,6 +2003,12 @@ msgstr "chyba pri premenovaní schránky"
 
 #, c-format
 msgid ""
+"You have modified %s.\n"
+"You may need to modify %s for consistency.\n"
+"Please use the command `%s' to do so.\n"
+msgstr ""
+
+msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
@@ -2075,6 +2046,12 @@ msgstr "Nedá sa vytvoriť záloha"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s sa nedá obnoviť: %s (zmeny sú v %s)\n"
+
+#~ msgid "%s: name %s is not unique\n"
+#~ msgstr "%s: meno %s nie je jedinečné\n"
+
+#~ msgid "No\n"
+#~ msgstr "Nie\n"
 
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"

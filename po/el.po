@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-11-24 16:15+0100\n"
+"POT-Creation-Date: 2008-02-02 18:05+0100\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -28,7 +28,6 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
-#, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Αδυναμία δέσμευσης χώρου για πληροφορίες διαμόρφωσης.\n"
 
@@ -41,19 +40,15 @@ msgstr ""
 msgid "Warning: unknown group %s\n"
 msgstr "Προειδοποίηση: άγνωστη ομάδα %s\n"
 
-#, c-format
 msgid "Warning: too many groups\n"
 msgstr "Προειδοποίηση: Πολλές ομάδες\n"
 
-#, c-format
 msgid "Your password has expired."
 msgstr "Το συνθηματικό σας έχει λήξει."
 
-#, c-format
 msgid "Your password is inactive."
 msgstr "Το συνθηματικό σας είναι ανενεργό."
 
-#, c-format
 msgid "Your login has expired."
 msgstr "Ο κωδικός εισόδου σας έχει λήξει."
 
@@ -67,11 +62,9 @@ msgstr "   Επιλέξτε ένα νέο συνθηματικό.\n"
 msgid "Your password will expire in %ld days.\n"
 msgstr "Το συνθηματικό σας θα λήξει σε %ld μέρες.\n"
 
-#, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "Το συνθηματικό σας θα λήξει αύριο.\n"
 
-#, c-format
 msgid "Your password will expire today.\n"
 msgstr "Το συνθηματικό σας θα λήξει σήμερα.\n"
 
@@ -79,7 +72,6 @@ msgstr "Το συνθηματικό σας θα λήξει σήμερα.\n"
 msgid "Unable to change tty %s"
 msgstr "Αδυναμία αλλαγής tty %s"
 
-#, c-format
 msgid "Environment overflow\n"
 msgstr "Υπερχείλιση περιβάλλοντος\n"
 
@@ -101,7 +93,6 @@ msgstr[1] ""
 "%d αποτυχίες από την τελευταία είσοδο.\n"
 " Η τελευταία ήταν στις %s στο %s.\n"
 
-#, c-format
 msgid "Too many logins.\n"
 msgstr "Πολλές είσοδοι στο σύστημα.\n"
 
@@ -198,7 +189,6 @@ msgstr "Συνθηματικό: "
 msgid "%s's Password: "
 msgstr "Του %s το Συνθηματικό: "
 
-#, c-format
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -236,7 +226,6 @@ msgstr ""
 "                                WARN_DAYS\n"
 "\n"
 
-#, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
 
@@ -258,27 +247,21 @@ msgstr "Ανενεργό συνθηματικό"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Ημερομηνία Λήξης Λογαριασμού (ΧΧΧΧ-ΜΜ-ΗΗ)"
 
-#, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Τελευταία αλλαγή συνθηματικού \t\t\t\t\t: "
 
-#, c-format
 msgid "never\n"
 msgstr "Ποτέ\n"
 
-#, c-format
 msgid "password must be changed\n"
 msgstr "το συνθηματικό πρέπει να αλλαχθεί\n"
 
-#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Το συνθηματικό λήγει\t\t\t\t\t: "
 
-#, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Ανενεργό συνθηματικό\t\t\t\t\t: "
 
-#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Ο λογαριασμός λήγει\t\t\t\t\t\t: "
 
@@ -307,16 +290,12 @@ msgid "%s: PAM authentication failed\n"
 msgstr "%s: Αποτυχία εξακρίβωσης PAM\n"
 
 #, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
+
+#, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: άγνωστος χρήστης %s\n"
-
-#, c-format
-msgid "%s: the shadow password file is not present\n"
-msgstr "%s: Το αρχείο σκιωδών συνθηματικών δεν υπάρχει\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -327,16 +306,12 @@ msgid "%s: can't open shadow password file\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
-msgid "Changing the aging information for %s\n"
-msgstr "Αλλαγή πληροφοριών χρόνου για τον %s\n"
-
-#, c-format
-msgid "%s: error changing fields\n"
-msgstr "%s: Σφάλμα κατά την αλλαγή πεδίων\n"
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: αδυναμία επανεγγραφής αρχείου συνθηματικών\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
@@ -347,12 +322,24 @@ msgid "%s: can't update shadow password file\n"
 msgstr "%s: αδυναμία ανανέωσης του αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: Το αρχείο σκιωδών συνθηματικών δεν υπάρχει\n"
 
 #, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου συνθηματικών\n"
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s: αποτυχία απόρριψης προνομίων (%s)\n"
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: άγνωστος χρήστης %s\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Αλλαγή πληροφοριών χρόνου για τον %s\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: Σφάλμα κατά την αλλαγή πεδίων\n"
 
 #, c-format
 msgid ""
@@ -399,21 +386,27 @@ msgstr "\tΤηλέφωνο Οικίας: %s\n"
 msgid "Other"
 msgstr "Άλλο"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Δεν είναι δυνατόν να καθοριστεί το όνομα χρήστη σας.\n"
+msgid "Cannot change ID to root.\n"
+msgstr "Αδυναμία αλλαγής ταυτότητας χρήστη σε root.\n"
 
-#, fuzzy, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: αδυναμία αλλαγής χρήστη `%s' στον NIS εξυπηρετούμενο.\n"
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Αδυναμία κλειδώματος του αρχείου συνθηματικών. Δοκιμάστε αργότερα.\n"
 
-#, fuzzy, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: `%s' είναι ο κύριος διακομιστής NIS γι'αυτόν τον εξυπηρετούμενο.\n"
+msgid "Cannot open the password file.\n"
+msgstr "Αδυναμία ανοίγματος του αρχείου συνθηματικών.\n"
 
 #, c-format
-msgid "Changing the user information for %s\n"
-msgstr "Αλλαγή πληροφοριών χρήστη για τον %s\n"
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: Ο %s δεν βρέθηκε στο /etc/passwd\n"
+
+msgid "Error updating the password entry.\n"
+msgstr "Σφάλμα κατά την ανανέωση καταχώρησης στο αρχείο συνθηματικών.\n"
+
+msgid "Cannot commit password file changes.\n"
+msgstr "Αδυναμία εισαγωγής των αλλαγών στο αρχείο συνθηματικών.\n"
+
+msgid "Cannot unlock the password file.\n"
+msgstr "Αδυναμία ξεκλειδώματος του αρχείου συνθηματικών\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -436,36 +429,24 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: \"%s\" περιέχει μη έγκυρους χαρακτήρες\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Δεν είναι δυνατόν να καθοριστεί το όνομα χρήστη σας.\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: αδυναμία αλλαγής χρήστη `%s' στον NIS εξυπηρετούμενο.\n"
+
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: `%s' είναι ο κύριος διακομιστής NIS γι'αυτόν τον εξυπηρετούμενο.\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Αλλαγή πληροφοριών χρήστη για τον %s\n"
+
+#, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: Πολύ μακριά πεδία\n"
-
-#, c-format
-msgid "Cannot change ID to root.\n"
-msgstr "Αδυναμία αλλαγής ταυτότητας χρήστη σε root.\n"
-
-#, c-format
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "Αδυναμία κλειδώματος του αρχείου συνθηματικών. Δοκιμάστε αργότερα.\n"
-
-#, c-format
-msgid "Cannot open the password file.\n"
-msgstr "Αδυναμία ανοίγματος του αρχείου συνθηματικών.\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: Ο %s δεν βρέθηκε στο /etc/passwd\n"
-
-#, c-format
-msgid "Error updating the password entry.\n"
-msgstr "Σφάλμα κατά την ανανέωση καταχώρησης στο αρχείο συνθηματικών.\n"
-
-#, c-format
-msgid "Cannot commit password file changes.\n"
-msgstr "Αδυναμία εισαγωγής των αλλαγών στο αρχείο συνθηματικών.\n"
-
-#, c-format
-msgid "Cannot unlock the password file.\n"
-msgstr "Αδυναμία ξεκλειδώματος του αρχείου συνθηματικών\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -528,6 +509,15 @@ msgstr "%s: αδυναμία κλειδώματος του αρχείου σκι
 msgid "%s: can't open shadow file\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating gshadow file\n"
+msgstr ""
+"%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο αρχείο σκιωδών συνθηματικών\n"
+
+#, fuzzy, c-format
+msgid "%s: error updating group file\n"
+msgstr "%s: Σφάλμα κατά την ανανέωση καταχώρισης ομάδας\n"
+
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: γραμμή %d: πολύ μεγάλη γραμμή\n"
@@ -540,13 +530,17 @@ msgstr "%s: γραμμή %d: έλλειψη νέου συνθηματικού\n"
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: γραμμή %d: άγνωστος χρήστης %s\n"
 
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης συνθηματικού\n"
+#, fuzzy, c-format
+msgid "%s: line %d: cannot update group entry\n"
+msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: Ανιχνεύτηκε σφάλμα, οι αλλαγές αγνοήθηκαν\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
@@ -558,18 +552,13 @@ msgid "%s: error updating password file\n"
 msgstr "%s: Σφάλμα κατά την ανανέωση καταχωρήσεων στο αρχείο συνθηματικών\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
-
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: αδυναμία κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: γραμμή %d: άγνωστος χρήστης %s\n"
 
 #, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης συνθηματικού\n"
+
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -598,7 +587,6 @@ msgstr "%s: Μη έγκυρη καταχώρηση: %s\n"
 msgid "%s is an invalid shell.\n"
 msgstr "%s δεν είναι έγκυρος φλοιός.\n"
 
-#, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Χρήση: expiry {-f|-c}\n"
 
@@ -606,7 +594,6 @@ msgstr "Χρήση: expiry {-f|-c}\n"
 msgid "%s: unknown user\n"
 msgstr "%s: άγνωστος χρήστης\n"
 
-#, c-format
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -647,7 +634,6 @@ msgstr ""
 "                                για το χρήστη με LOGIN\n"
 "\n"
 
-#, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Login       Αποτυχίες Μέγιστο Τελευταία                   Στις\n"
 
@@ -688,12 +674,37 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: σκιώδη συνθηματικά ομάδων απαιτούνται για το -A\n"
 
 #, c-format
-msgid "Who are you?\n"
-msgstr "Ποιος είσαι;\n"
+msgid "%s: can't get lock\n"
+msgstr "%s: Αδυναμία δημιουργίας κλειδώματος\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr ""
+"%s: Αδυναμία δημιουργίας κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
 
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: αδυναμία επανεγγραφής αρχείου\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: αδυναμία ξεκλειδώματος αρχείου\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: αδυναμία ανανέωσης καταχώρησης\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: αδυναμία ανανέωσης καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
 
 #, c-format
 msgid "unknown group: %s\n"
@@ -706,22 +717,6 @@ msgstr "%s: αδυναμία ανοίγματος του αρχείου\n"
 #, fuzzy, c-format
 msgid "%s: can't close shadow file\n"
 msgstr "%s: αδυναμία ανοίγματος του αρχείου σκιωδών συνθηματικών\n"
-
-#, c-format
-msgid "Adding user %s to group %s\n"
-msgstr "Προσθήκη του χρήστη %s στην ομάδα %s\n"
-
-#, c-format
-msgid "Removing user %s from group %s\n"
-msgstr "Διαγραφή του χρήστη %s από την ομάδα %s\n"
-
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: άγνωστο μέλος %s\n"
-
-#, c-format
-msgid "%s: Not a tty\n"
-msgstr "%s: Δεν είναι tty\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -740,36 +735,26 @@ msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά"
 msgid "%s: Try again later\n"
 msgstr "%s: Ξαναδοκιμάστε αργότερα\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: Αδυναμία δημιουργίας κλειδώματος\n"
+msgid "Who are you?\n"
+msgstr "Ποιος είσαι;\n"
 
 #, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr ""
-"%s: Αδυναμία δημιουργίας κλειδώματος του αρχείου σκιωδών συνθηματικών\n"
+msgid "Adding user %s to group %s\n"
+msgstr "Προσθήκη του χρήστη %s στην ομάδα %s\n"
 
 #, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης\n"
+msgid "Removing user %s from group %s\n"
+msgstr "Διαγραφή του χρήστη %s από την ομάδα %s\n"
 
 #, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: αδυναμία ανανέωσης καταχώρησης στο αρχείο σκιωδών συνθηματικών\n"
+msgid "%s: unknown member %s\n"
+msgstr "%s: άγνωστο μέλος %s\n"
 
 #, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου\n"
+msgid "%s: Not a tty\n"
+msgstr "%s: Δεν είναι tty\n"
 
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: αδυναμία επανεγγραφής αρχείου σκιωδών συνθηματικών\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: αδυναμία ξεκλειδώματος αρχείου\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -799,14 +784,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο ομάδων\n"
-
-#, c-format
-msgid "%s: name %s is not unique\n"
-msgstr "%s: Το όνομα %s δεν είναι μοναδικό\n"
-
-#, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: Το GID %u δεν είναι μοναδικό\n"
 
 #, c-format
 msgid "%s: can't get unique GID\n"
@@ -849,6 +826,9 @@ msgid "%s: group %s exists\n"
 msgstr "%s: Η ομάδα %s υπάρχει\n"
 
 #, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s: Το GID %u δεν είναι μοναδικό\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "Χρήση: groupdel ομάδα\n"
 
@@ -878,47 +858,41 @@ msgstr "%s: Η ομάδα %s είναι NIS ομάδα\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: Ο %s είναι ο κύριος διακομιστής NIS\n"
 
-#, c-format
 msgid "Member already exists\n"
 msgstr ""
 
-#, c-format
 msgid "Member to remove could not be found\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
-#, c-format
 msgid "Only root can add members to different groups\n"
 msgstr ""
 
-#, c-format
 msgid "Group access is required\n"
 msgstr ""
 
-#, c-format
 msgid "Not primary owner of current group\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "PAM authentication failed for\n"
 msgstr "%s: Αποτυχία εξακρίβωσης PAM\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to lock group file\n"
 msgstr "%s: Αδυναμία κλειδώματος του αρχείου ομάδων\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to open group file\n"
 msgstr "%s: Αδυναμία ανοίγματος του αρχείου ομάδων\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Cannot close group file\n"
 msgstr "%s: αδυναμία ανοίγματος αρχείου ομάδων\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -928,6 +902,7 @@ msgid ""
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 "GROUP\n"
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
 "Χρήση: groupadd [options] group\n"
@@ -964,10 +939,6 @@ msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Χρήση: %s [-r] [-s] [group]\n"
 
 #, c-format
-msgid "No\n"
-msgstr "Όχι\n"
-
-#, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s και -r είναι ασύμβατα\n"
 
@@ -980,6 +951,9 @@ msgid "%s: cannot open file %s\n"
 msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
 
 #, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
+
 msgid "invalid group file entry\n"
 msgstr "Μη έγκυρη καταχώρηση στο αρχείο ομάδων\n"
 
@@ -987,7 +961,6 @@ msgstr "Μη έγκυρη καταχώρηση στο αρχείο ομάδων\
 msgid "delete line '%s'? "
 msgstr "διαγραφή γραμμής `%s'; "
 
-#, c-format
 msgid "duplicate group entry\n"
 msgstr "αντιγραφή καταχώρησης στο αρχείο ομάδων\n"
 
@@ -1021,11 +994,9 @@ msgstr ""
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: αδυναμία ανανέωσης καταχώρησης για την ομάδα %s\n"
 
-#, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών ομάδων\n"
 
-#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "αντιγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών ομάδων\n"
 
@@ -1040,10 +1011,6 @@ msgstr "διαγραφή διαχειριστικού μέλους `%s'; "
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -1080,19 +1047,15 @@ msgid "%s: can't delete shadow group file\n"
 msgstr ""
 "%s: Δεν είναι δυνατόν να διαγραφεί το αρχείο σκιωδών συνθηματικών ομάδων\n"
 
-#, c-format
 msgid "Usage: id [-a]\n"
 msgstr "Χρήση: id [-a]\n"
 
-#, c-format
 msgid "Usage: id\n"
 msgstr "Χρήση: id\n"
 
-#, c-format
 msgid " groups="
 msgstr " ομάδες="
 
-#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -1117,16 +1080,18 @@ msgstr ""
 "                                χρήστη με καθορισμένο LOGIN\n"
 "\n"
 
-#, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Όνομα_Χρήστη     Θύρα     Από              Τελευταία\n"
 
-#, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Όνομα_Χρήστη            Θύρα     Τελευταία\n"
 
 msgid "**Never logged in**"
 msgstr "**Καμιά είσοδος στο σύστημα**"
+
+#, fuzzy, c-format
+msgid "Unknown user or range: %s\n"
+msgstr "Άγνωστος χρήστης: %s\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
@@ -1144,11 +1109,9 @@ msgstr "       %s [-p] [-h σύστημα] [-f όνομα]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r σύστημα\n"
 
-#, c-format
 msgid "Invalid login time\n"
 msgstr "Εσφαλμένη ώρα εισόδου\n"
 
-#, c-format
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1156,7 +1119,6 @@ msgstr ""
 "\n"
 "Το σύστημα έκλεισε για συντήρηση ρουτίνας\n"
 
-#, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1196,7 +1158,6 @@ msgstr "login: "
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr "Μέγιστος αριθμός ημερών μεταξύ των αλλαγών συνθηματικού\t\t: %ld\n"
 
-#, c-format
 msgid "login: abort requested by PAM\n"
 msgstr ""
 
@@ -1214,6 +1175,10 @@ msgstr "Διαδικασία εισόδου απέτυχε"
 #, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s: αποτυχία διχάλωσης: %s"
+
+#, c-format
+msgid "TIOCSCTTY failed on %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr ""
@@ -1238,13 +1203,15 @@ msgstr ""
 "υπέρβαση ορίου χρόνου εισόδου\n"
 "\n"
 
-#, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Χρήση: newgrp [-] [ομάδα]\n"
 
-#, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Χρήση: sg ομάδα [[-c] εντολή]\n"
+
+#, fuzzy
+msgid "Invalid password.\n"
+msgstr "Παλιό Συνθηματικό: "
 
 #, c-format
 msgid "unknown UID: %u\n"
@@ -1254,11 +1221,6 @@ msgstr "άγνωστο UID: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "άγνωστο GID: %lu\n"
 
-#, fuzzy
-msgid "Invalid password."
-msgstr "Παλιό Συνθηματικό: "
-
-#, c-format
 msgid "too many groups\n"
 msgstr "πάρα πολλές ομάδες\n"
 
@@ -1268,6 +1230,16 @@ msgid ""
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
 "%s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+msgstr "%s: Η ομάδα %s δεν υπάρχει\n"
+
+#, c-format
+msgid ""
+"%s: group %s created, failure during the creation of the corresponding "
+"gshadow group\n"
 msgstr ""
 
 #, c-format
@@ -1281,6 +1253,10 @@ msgstr "%s: αδυναμία κλειδώματος αρχείων, ξαναδο
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: αδυναμία ανοίγματος των αρχείων\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: Σφάλμα κατά την ενημέρωση αρχείων\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1314,11 +1290,7 @@ msgstr "%s: γραμμή %d: αποτυχία αλλαγής ιδιοκτήτη(
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: γραμμή %d: αδυναμία ανανέωσης καταχώρησης\n"
 
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: Σφάλμα κατά την ενημέρωση αρχείων\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1396,11 +1368,9 @@ msgstr ""
 msgid "New password: "
 msgstr "Νέο Συνθηματικό: "
 
-#, c-format
 msgid "Try again.\n"
 msgstr "Ξαναδοκιμάστε.\n"
 
-#, c-format
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1408,7 +1378,6 @@ msgstr ""
 "\n"
 "Προσοχή: αδύναμο συνθηματικό (εισάγετε το πάλι για να το χρησιμοποιήσετε).\n"
 
-#, c-format
 msgid "They don't match; try again.\n"
 msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά.\n"
 
@@ -1446,11 +1415,9 @@ msgstr "Αλλαγή συνθηματικού για τον %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Το συνθηματικό για τον %s δεν άλλαξε.\n"
 
-#, c-format
 msgid "Password changed.\n"
 msgstr "Το συνθηματικό άλλαξε.\n"
 
-#, c-format
 msgid "Password set to expire.\n"
 msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει.\n"
 
@@ -1458,11 +1425,9 @@ msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει.
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-#, c-format
 msgid "invalid password file entry\n"
 msgstr "Μη έγκυρη καταχώρηση στο αρχείο συνθηματικών\n"
 
-#, c-format
 msgid "duplicate password entry\n"
 msgstr "διπλότυπη καταχώριση στο αρχείο συνθηματικών\n"
 
@@ -1494,11 +1459,9 @@ msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: αδυναμία ανανέωσης καταχώρησης συνθηματικού για τον %s\n"
 
-#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "Μη έγκυρη καταχώριση στο αρχείο σκιωδών συνθηματικών\n"
 
-#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "διπλότυπη καταχώριση στο αρχείο σκιωδών συνθηματικών\n"
 
@@ -1535,15 +1498,12 @@ msgstr "%s: αδυναμία ανανέωσης καταχώρησης για τ
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: Δεν είναι δυνατόν να διαγραφεί το αρχείο σκιωδών συνθηματικών\n"
 
-#, c-format
 msgid "Access to su to that account DENIED.\n"
 msgstr "Πρόσβαση στη su σε αυτόν τον λογαριασμό ΑΡΝΗΘΗΚΕ.\n"
 
-#, c-format
 msgid "Password authentication bypassed.\n"
 msgstr "Παράκαμψη εξακρίβωσης με συνθηματικό.\n"
 
-#, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Παρακαλώ εισάγετε το ΔΙΚΟ σας συνθηματικό για εξακρίβωση.\n"
 
@@ -1551,7 +1511,7 @@ msgstr "Παρακαλώ εισάγετε το ΔΙΚΟ σας συνθηματ�
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1606,15 +1566,15 @@ msgstr ""
 "%s: %s\n"
 "(Αγνοήθηκε)\n"
 
-#, c-format
 msgid "No shell\n"
 msgstr "Δεν υπάρχει φλοιός\n"
 
-#, c-format
 msgid "No password file\n"
 msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
 
-#, c-format
+msgid "TIOCSCTTY failed"
+msgstr ""
+
 msgid "No password entry for 'root'\n"
 msgstr "Δεν υπάρχει καταχώρηση συνθηματικού για τον 'root'\n"
 
@@ -1658,7 +1618,7 @@ msgstr "%s: Η ομάδα `%s' είναι NIS ομάδα.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: Προσδιορίστηκαν υπερβολικές ομάδες (μεγ. %d).\n"
 
-#, c-format
+#, fuzzy
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1679,6 +1639,8 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+"  -l,                           do not add the user to the lastlog and\n"
+"                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1732,13 +1694,13 @@ msgstr "%s: δεν υπάρχει ελεύθερη μνήμη στο update_grou
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s:  στο update_gshadow\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
-msgstr "%s: Το UID %u δεν είναι μοναδικό\n"
-
-#, c-format
-msgid "%s: can't get unique UID\n"
+#, fuzzy, c-format
+msgid "%s: can't get unique UID (no more available UIDs)\n"
 msgstr "%s: αδυναμία λήψης μοναδικού UID\n"
+
+#, fuzzy, c-format
+msgid "%s: can't get unique GID (no more available GIDs)\n"
+msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1834,7 +1796,6 @@ msgstr "%s: αδυναμία δημιουργίας καταλόγου %s\n"
 msgid "Creating mailbox file"
 msgstr ""
 
-#, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
@@ -1854,6 +1815,10 @@ msgstr ""
 "ομάδα, χρησιμοποιήστε -g.\n"
 
 #, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s: Το UID %u δεν είναι μοναδικό\n"
+
+#, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
@@ -1867,7 +1832,6 @@ msgstr ""
 "%s: προειδοποίηση: το CREATE_HOME δεν υποστηρίζεται, παρακαλώ χρησιμοποιήστε "
 "το -m.\n"
 
-#, c-format
 msgid ""
 "Usage: userdel [options] LOGIN\n"
 "\n"
@@ -1940,7 +1904,7 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: Σφάλμα κατά την διαγραφή του καταλόγου %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -2064,6 +2028,12 @@ msgstr "αποτυχία μετονομασίας mailbox"
 
 #, c-format
 msgid ""
+"You have modified %s.\n"
+"You may need to modify %s for consistency.\n"
+"Please use the command `%s' to do so.\n"
+msgstr ""
+
+msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
@@ -2102,6 +2072,12 @@ msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλ�
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#~ msgid "%s: name %s is not unique\n"
+#~ msgstr "%s: Το όνομα %s δεν είναι μοναδικό\n"
+
+#~ msgid "No\n"
+#~ msgstr "Όχι\n"
 
 #, fuzzy
 #~ msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-11-24 16:15+0100\n"
+"POT-Creation-Date: 2008-02-02 18:05+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -25,7 +25,6 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
-#, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Klarte ikkje finna plass for oppsettsinformasjon.\n"
 
@@ -37,19 +36,15 @@ msgstr "oppsettsfeil - ukjent element «%s» (gje melding til administrator)\n"
 msgid "Warning: unknown group %s\n"
 msgstr "Åtvaring: ukjent gruppe %s\n"
 
-#, c-format
 msgid "Warning: too many groups\n"
 msgstr "Åtvaring: for mange grupper\n"
 
-#, c-format
 msgid "Your password has expired."
 msgstr "Passordet ditt er utgått."
 
-#, c-format
 msgid "Your password is inactive."
 msgstr "Passordet ditt er inaktivt."
 
-#, c-format
 msgid "Your login has expired."
 msgstr "Innlogginga di er utgått."
 
@@ -63,11 +58,9 @@ msgstr "  Lag eit nytt passord.\n"
 msgid "Your password will expire in %ld days.\n"
 msgstr "Passordet ditt vil utgå om %ld dagar.\n"
 
-#, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "Passordet ditt vil utgå i morgon.\n"
 
-#, c-format
 msgid "Your password will expire today.\n"
 msgstr "Passordet ditt vil utgå i dag.\n"
 
@@ -75,7 +68,6 @@ msgstr "Passordet ditt vil utgå i dag.\n"
 msgid "Unable to change tty %s"
 msgstr "Klarer ikkje skifta tty %s"
 
-#, c-format
 msgid "Environment overflow\n"
 msgstr "Miljø overflyt\n"
 
@@ -93,7 +85,6 @@ msgid_plural ""
 msgstr[0] "%d %s sidan førre innlogging. Førre var %s på %s.\n"
 msgstr[1] "%d %s sidan førre innlogging. Førre var %s på %s.\n"
 
-#, c-format
 msgid "Too many logins.\n"
 msgstr "For mange innloggingar.\n"
 
@@ -190,7 +181,6 @@ msgstr "Passord: "
 msgid "%s's Password: "
 msgstr "%s sitt passord: "
 
-#, c-format
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -209,7 +199,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Skriv inn den nye verdien eller trykk Enter for standard\n"
 
@@ -231,27 +220,26 @@ msgstr "Passord inaktivt"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Dato for når kontoen utgår (ÅÅÅÅ-MM-DD)"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Førre passordendring (ÅÅÅÅ-MM-DD)"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "never\n"
 msgstr "Aldri\n"
 
-#, c-format
 msgid "password must be changed\n"
 msgstr "Passord er endra\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Passord utgår:\t"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Passord inaktiv:\t"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Konto utgår:\t"
 
@@ -280,16 +268,12 @@ msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM-autentisering feila\n"
 
 #, c-format
-msgid "%s: can't open password file\n"
-msgstr "%s: klarer ikkje opna passordfil\n"
+msgid "%s: can't lock password file\n"
+msgstr "%s: klarer ikkje låsa passordfil\n"
 
 #, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: ukjend brukar %s\n"
-
-#, fuzzy, c-format
-msgid "%s: the shadow password file is not present\n"
-msgstr "%s: klarer ikkje opna skuggepassordfila\n"
+msgid "%s: can't open password file\n"
+msgstr "%s: klarer ikkje opna passordfil\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -300,16 +284,12 @@ msgid "%s: can't open shadow password file\n"
 msgstr "%s: klarer ikkje opna skuggepassordfila\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr ""
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: klarer ikkje skriva ny skuggepassordfil\n"
 
 #, c-format
-msgid "Changing the aging information for %s\n"
-msgstr "Endrar aldringsformasjonen for %s\n"
-
-#, c-format
-msgid "%s: error changing fields\n"
-msgstr "%s: feil ved endring av felt\n"
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: klarer ikkje skriva ny passordfil\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
@@ -319,13 +299,25 @@ msgstr "%s: klarer ikkje oppdatere passordfil\n"
 msgid "%s: can't update shadow password file\n"
 msgstr "%s: klarer ikkje oppdatere skuggepassordfil\n"
 
-#, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: klarer ikkje skriva ny skuggepassordfil\n"
+#, fuzzy, c-format
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: klarer ikkje opna skuggepassordfila\n"
 
 #, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: klarer ikkje skriva ny passordfil\n"
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: ukjend brukar %s\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Endrar aldringsformasjonen for %s\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: feil ved endring av felt\n"
 
 #, c-format
 msgid ""
@@ -370,21 +362,27 @@ msgstr "Telefon, heime"
 msgid "Other"
 msgstr "Anna"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Klarer ikkje avgjere brukarnamnet ditt.\n"
+msgid "Cannot change ID to root.\n"
+msgstr "Klarer ikkje endra ID til root.\n"
 
-#, fuzzy, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: klarer ikkje endra brukar «%s» på NIS-klient.\n"
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Klarer ikkje låsa passordfila, prøv igjen seinare.\n"
 
-#, fuzzy, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: «%s» er NIS-hovud for denne klienten.\n"
+msgid "Cannot open the password file.\n"
+msgstr "Klarer ikkje opna passordfila.\n"
 
 #, c-format
-msgid "Changing the user information for %s\n"
-msgstr "Endrar brukarinformasjon for %s\n"
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s ikkje funne i /etc/passwd\n"
+
+msgid "Error updating the password entry.\n"
+msgstr "Feil ved oppdatering av passordet.\n"
+
+msgid "Cannot commit password file changes.\n"
+msgstr "Klarer ikkje utføra endringar i passordfila.\n"
+
+msgid "Cannot unlock the password file.\n"
+msgstr "Klarer ikkje låsa opp passordfila.\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -407,36 +405,24 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: «%s» inneheld ulovlege teikn\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Klarer ikkje avgjere brukarnamnet ditt.\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: klarer ikkje endra brukar «%s» på NIS-klient.\n"
+
+#, fuzzy, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: «%s» er NIS-hovud for denne klienten.\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Endrar brukarinformasjon for %s\n"
+
+#, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: felta er for lange\n"
-
-#, c-format
-msgid "Cannot change ID to root.\n"
-msgstr "Klarer ikkje endra ID til root.\n"
-
-#, c-format
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "Klarer ikkje låsa passordfila, prøv igjen seinare.\n"
-
-#, c-format
-msgid "Cannot open the password file.\n"
-msgstr "Klarer ikkje opna passordfila.\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s ikkje funne i /etc/passwd\n"
-
-#, c-format
-msgid "Error updating the password entry.\n"
-msgstr "Feil ved oppdatering av passordet.\n"
-
-#, c-format
-msgid "Cannot commit password file changes.\n"
-msgstr "Klarer ikkje utføra endringar i passordfila.\n"
-
-#, c-format
-msgid "Cannot unlock the password file.\n"
-msgstr "Klarer ikkje låsa opp passordfila.\n"
 
 #, c-format
 msgid ""
@@ -488,6 +474,14 @@ msgstr "%s: klarer ikkje låsa skuggepassordfila\n"
 msgid "%s: can't open shadow file\n"
 msgstr "%s: klarer ikkje opna skuggepassordfila\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating gshadow file\n"
+msgstr "%s: feil ved oppdatering av skuggepassordfila\n"
+
+#, fuzzy, c-format
+msgid "%s: error updating group file\n"
+msgstr "%s: feil ved oppdatering av gruppeoppføring\n"
+
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: linje %d: linja er for lang\n"
@@ -500,13 +494,17 @@ msgstr "%s: linje %d: manglar nytt passord\n"
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: linje %d: ukjent brukar %s\n"
 
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linje %d: klarer ikkje oppdatere passordet\n"
+#, fuzzy, c-format
+msgid "%s: line %d: cannot update group entry\n"
+msgstr "%s: linje %d: kan ikkje oppdatere oppføring\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: feil funne, endringar er ikkje utført\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: klarer ikkje låsa skuggepassordfila\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
@@ -517,18 +515,13 @@ msgid "%s: error updating password file\n"
 msgstr "%s: feil ved oppdatering av passordfila\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: klarer ikkje låsa passordfil\n"
-
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: klarer ikkje låsa skuggepassordfila\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linje %d: ukjent brukar %s\n"
 
 #, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linje %d: klarer ikkje oppdatere passordet\n"
+
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -557,7 +550,6 @@ msgstr "%s: Ugyldig inntasting: %s\n"
 msgid "%s is an invalid shell.\n"
 msgstr "%s er eit ugyldig skal.\n"
 
-#, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Bruk: expiry {-f|-c}\n"
 
@@ -565,7 +557,6 @@ msgstr "Bruk: expiry {-f|-c}\n"
 msgid "%s: unknown user\n"
 msgstr "%s: ukjent brukar\n"
 
-#, c-format
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -585,7 +576,6 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr ""
 
@@ -626,12 +616,36 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: skuggepassord for gruppe krevst for -A\n"
 
 #, c-format
-msgid "Who are you?\n"
-msgstr "Kven er du?\n"
+msgid "%s: can't get lock\n"
+msgstr "%s: klarer ikkje få lås\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: klarer ikkje få lås på skuggefil\n"
 
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: klarer ikkje opna fil\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: klarer ikkje skriva ny fila\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: klarer ikkje skriva ny skuggefil\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: klarer ikkje låsa opp fil\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: klarer ikkje oppdatere oppføring\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: klarer ikkje oppdatere skuggeoppføring\n"
 
 #, c-format
 msgid "unknown group: %s\n"
@@ -644,22 +658,6 @@ msgstr "%s: klarer ikkje opna fil\n"
 #, fuzzy, c-format
 msgid "%s: can't close shadow file\n"
 msgstr "%s: klarer ikkje opna skuggepassordfila\n"
-
-#, c-format
-msgid "Adding user %s to group %s\n"
-msgstr "Legg brukaren %s til gruppa %s\n"
-
-#, c-format
-msgid "Removing user %s from group %s\n"
-msgstr "Fjernar brukaren %s frå gruppa %s\n"
-
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: ukjent medlem %s\n"
-
-#, c-format
-msgid "%s: Not a tty\n"
-msgstr "%s: Ikkje ein tty\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -678,35 +676,25 @@ msgstr "Passorda er ikkje like, prøv igjen"
 msgid "%s: Try again later\n"
 msgstr "%s: Prøv igjen seinare\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: klarer ikkje få lås\n"
+msgid "Who are you?\n"
+msgstr "Kven er du?\n"
 
 #, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: klarer ikkje få lås på skuggefil\n"
+msgid "Adding user %s to group %s\n"
+msgstr "Legg brukaren %s til gruppa %s\n"
 
 #, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: klarer ikkje oppdatere oppføring\n"
+msgid "Removing user %s from group %s\n"
+msgstr "Fjernar brukaren %s frå gruppa %s\n"
 
 #, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: klarer ikkje oppdatere skuggeoppføring\n"
+msgid "%s: unknown member %s\n"
+msgstr "%s: ukjent medlem %s\n"
 
 #, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: klarer ikkje skriva ny fila\n"
+msgid "%s: Not a tty\n"
+msgstr "%s: Ikkje ein tty\n"
 
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: klarer ikkje skriva ny skuggefil\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: klarer ikkje låsa opp fil\n"
-
-#, c-format
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -724,14 +712,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: feil ved oppretting av ny gruppeoppføring\n"
-
-#, c-format
-msgid "%s: name %s is not unique\n"
-msgstr "%s: namn %s er ikkje unikt\n"
-
-#, fuzzy, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: gid %u er ikkje unikt\n"
 
 #, fuzzy, c-format
 msgid "%s: can't get unique GID\n"
@@ -773,7 +753,10 @@ msgstr "%s: -O krev NAME=VERDI\n"
 msgid "%s: group %s exists\n"
 msgstr "%s: gruppa %s finst allereie\n"
 
-#, c-format
+#, fuzzy, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s: gid %u er ikkje unikt\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "Bruk: goupdel gruppe\n"
 
@@ -801,47 +784,40 @@ msgstr "%s: gruppe %s er ei NIS-gruppe\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s er NIS-hovudet\n"
 
-#, c-format
 msgid "Member already exists\n"
 msgstr ""
 
-#, c-format
 msgid "Member to remove could not be found\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
-#, c-format
 msgid "Only root can add members to different groups\n"
 msgstr ""
 
-#, c-format
 msgid "Group access is required\n"
 msgstr ""
 
-#, c-format
 msgid "Not primary owner of current group\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "PAM authentication failed for\n"
 msgstr "%s: PAM-autentisering feila\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to lock group file\n"
 msgstr "%s: klarer ikkje låsa gruppefil\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to open group file\n"
 msgstr "%s: klarer ikkje opna gruppefil\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Cannot close group file\n"
 msgstr "%s: klarer ikkje opna gruppefila\n"
 
-#, c-format
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -851,6 +827,7 @@ msgid ""
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 "GROUP\n"
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
 
@@ -874,10 +851,6 @@ msgstr "Bruk: %s [-r] [-s] [gruppe [gskugge]]\n"
 msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Bruk: %s [-r] [-s] [gruppe]\n"
 
-#, fuzzy, c-format
-msgid "No\n"
-msgstr "Nei"
-
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s og -r er inkompatible\n"
@@ -891,6 +864,9 @@ msgid "%s: cannot open file %s\n"
 msgstr "%s: klarer ikkje opna fila %s\n"
 
 #, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: klarer ikkje oppdatere fila %s\n"
+
 msgid "invalid group file entry\n"
 msgstr "ugyldig oppføring for gruppefil\n"
 
@@ -898,7 +874,6 @@ msgstr "ugyldig oppføring for gruppefil\n"
 msgid "delete line '%s'? "
 msgstr "slett linja «%s»? "
 
-#, c-format
 msgid "duplicate group entry\n"
 msgstr "duplisert gruppeoppføring\n"
 
@@ -930,11 +905,9 @@ msgstr "%s: klarer ikkje oppdatere skuggeoppføring for %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: klarer ikkje oppdatere oppføring for gruppa %s\n"
 
-#, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "ugyldig oppføring av skuggegruppefil\n"
 
-#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "duplisert oppføring for skuggegruppe\n"
 
@@ -949,10 +922,6 @@ msgstr "slett administratormedlem «%s»?"
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "skuggegruppe %s: ingen brukar %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: klarer ikkje oppdatere fila %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -986,19 +955,15 @@ msgstr "%s: klarer ikkje oppdatere gruppefil\n"
 msgid "%s: can't delete shadow group file\n"
 msgstr "%s: klan ikkje slette skuggegruppefil\n"
 
-#, c-format
 msgid "Usage: id [-a]\n"
 msgstr "Bruk: id [-a]\n"
 
-#, c-format
 msgid "Usage: id\n"
 msgstr "Bruk: id\n"
 
-#, c-format
 msgid " groups="
 msgstr " grupper="
 
-#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -1011,16 +976,18 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Brukarnamn       Port     Frå              Siste\n"
 
-#, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Brukarnamn              Port     Siste\n"
 
 msgid "**Never logged in**"
 msgstr "**Aldri vore innlogga**"
+
+#, fuzzy, c-format
+msgid "Unknown user or range: %s\n"
+msgstr "Ukjent brukar: %s\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
@@ -1038,11 +1005,9 @@ msgstr "      %s [-p] [-h vert] [-f namn]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "      %s [-p] -r vert\n"
 
-#, c-format
 msgid "Invalid login time\n"
 msgstr "Ugyldig innloggingstid\n"
 
-#, c-format
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1050,7 +1015,6 @@ msgstr ""
 "\n"
 "Systemet stengt for rutinemessig vedlikehald\n"
 
-#, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1094,7 +1058,6 @@ msgstr ""
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr ""
 
-#, c-format
 msgid "login: abort requested by PAM\n"
 msgstr ""
 
@@ -1111,6 +1074,10 @@ msgstr "Feil innlogging"
 
 #, c-format
 msgid "%s: failure forking: %s"
+msgstr ""
+
+#, c-format
+msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
@@ -1134,13 +1101,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Bruk: newgrp [-] [gruppe]\n"
 
-#, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Bruk: sg gruppe [[-c] kommando]\n"
+
+#, fuzzy
+msgid "Invalid password.\n"
+msgstr "Gamalt passord:"
 
 #, fuzzy, c-format
 msgid "unknown UID: %u\n"
@@ -1150,11 +1119,6 @@ msgstr "ukjent GID: %lu\n"
 msgid "unknown GID: %lu\n"
 msgstr "ukjent GID: %lu\n"
 
-#, fuzzy
-msgid "Invalid password."
-msgstr "Gamalt passord:"
-
-#, c-format
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
 
@@ -1164,6 +1128,16 @@ msgid ""
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
 "%s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+msgstr "%s: gruppe %s eksisterer ikkje\n"
+
+#, c-format
+msgid ""
+"%s: group %s created, failure during the creation of the corresponding "
+"gshadow group\n"
 msgstr ""
 
 #, c-format
@@ -1177,6 +1151,10 @@ msgstr "%s: klarer ikkje låsa filer, prøv igjen seinare\n"
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: klarer ikkje opna filer\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: feil ved oppdatering av filer\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1210,11 +1188,6 @@ msgstr "%s: linje %d: chown feila\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linje %d: kan ikkje oppdatere oppføring\n"
 
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: feil ved oppdatering av filer\n"
-
-#, c-format
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1262,11 +1235,9 @@ msgstr ""
 msgid "New password: "
 msgstr "Nytt passord: "
 
-#, c-format
 msgid "Try again.\n"
 msgstr "Prøv igjen.\n"
 
-#, c-format
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1275,7 +1246,6 @@ msgstr ""
 "Åtvaring: Svakt passord (skriv det inn ein gong til for å bruka det "
 "likevel).\n"
 
-#, c-format
 msgid "They don't match; try again.\n"
 msgstr "Passorda er ikkje like, prøv igjen.\n"
 
@@ -1313,11 +1283,10 @@ msgstr "Enrar passord for %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Passordet til %s er ikkje endra.\n"
 
-#, c-format
 msgid "Password changed.\n"
 msgstr "Passord er endra.\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Password set to expire.\n"
 msgstr "Passordet ditt er utgått."
 
@@ -1325,11 +1294,9 @@ msgstr "Passordet ditt er utgått."
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Bruk: %s [-q] [-r] [-s] [passord [skugge]]\n"
 
-#, c-format
 msgid "invalid password file entry\n"
 msgstr "Ugyldig oppføring i passordfila\n"
 
-#, c-format
 msgid "duplicate password entry\n"
 msgstr "duplisert oppføring i passordfila\n"
 
@@ -1361,11 +1328,9 @@ msgstr "skuggegruppe %s: ingen brukar %s\n"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: klarer ikkje oppdatere oppføring i passordfila for %s\n"
 
-#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "ugyldig oppføring i skuggepassordfila\n"
 
-#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "duplisert oppføring i skuggepassordfila\n"
 
@@ -1401,15 +1366,12 @@ msgstr "%s: klarer ikkje oppdatere oppføring for brukar %s\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: klarer ikkje sletta skuggepassordfil\n"
 
-#, c-format
 msgid "Access to su to that account DENIED.\n"
 msgstr "Tilgang til su for den kontoen er AVVIST.\n"
 
-#, c-format
 msgid "Password authentication bypassed.\n"
 msgstr "Passordautentisering er forbigått.\n"
 
-#, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Oppgje ditt EIGE passord for autentisering.\n"
 
@@ -1417,7 +1379,6 @@ msgstr "Oppgje ditt EIGE passord for autentisering.\n"
 msgid "%s: %s\n"
 msgstr "passwd: %s\n"
 
-#, c-format
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1459,15 +1420,15 @@ msgstr ""
 "%s: %s\n"
 "(Ignorert)\n"
 
-#, c-format
 msgid "No shell\n"
 msgstr "Ingen skal\n"
 
-#, c-format
 msgid "No password file\n"
 msgstr "Inga passordfil\n"
 
-#, c-format
+msgid "TIOCSCTTY failed"
+msgstr ""
+
 msgid "No password entry for 'root'\n"
 msgstr "Inga passordoppføring for «root»\n"
 
@@ -1511,7 +1472,6 @@ msgstr "%s: gruppe «%s» er ei NIS-gruppe.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: for mange grupper spesifisert (maks %d).\n"
 
-#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1532,6 +1492,8 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+"  -l,                           do not add the user to the lastlog and\n"
+"                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1552,11 +1514,11 @@ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: slapp opp for minne i update_gshadow\n"
 
 #, fuzzy, c-format
-msgid "%s: UID %u is not unique\n"
-msgstr "%s: gid %u er ikkje unikt\n"
+msgid "%s: can't get unique UID (no more available UIDs)\n"
+msgstr "%s: klarer ikkje få unikt gid\n"
 
 #, fuzzy, c-format
-msgid "%s: can't get unique UID\n"
+msgid "%s: can't get unique GID (no more available GIDs)\n"
 msgstr "%s: klarer ikkje få unikt gid\n"
 
 #, fuzzy, c-format
@@ -1650,7 +1612,6 @@ msgstr "%s: kan ikkje oppretta mappa %s\n"
 msgid "Creating mailbox file"
 msgstr ""
 
-#, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
@@ -1669,6 +1630,10 @@ msgstr ""
 "%s: gruppa %s finst - viss du ønskjer å leggja brukaren til denne gruppa, "
 "bruk -g.\n"
 
+#, fuzzy, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s: gid %u er ikkje unikt\n"
+
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
@@ -1679,7 +1644,6 @@ msgstr ""
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: åtvaring: CREATE_HOME ikkje støtta, bruk -m istaden.\n"
 
-#, c-format
 msgid ""
 "Usage: userdel [options] LOGIN\n"
 "\n"
@@ -1748,7 +1712,6 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: feil ved fjerning av mappe %s\n"
 
-#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1840,6 +1803,12 @@ msgstr "klarte ikkje endra namn på mailbox"
 
 #, c-format
 msgid ""
+"You have modified %s.\n"
+"You may need to modify %s for consistency.\n"
+"Please use the command `%s' to do so.\n"
+msgstr ""
+
+msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
@@ -1868,6 +1837,13 @@ msgstr "Klarte ikkje laga reservekopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
+
+#~ msgid "%s: name %s is not unique\n"
+#~ msgstr "%s: namn %s er ikkje unikt\n"
+
+#, fuzzy
+#~ msgid "No\n"
+#~ msgstr "Nei"
 
 #, fuzzy
 #~ msgid "No password.\n"

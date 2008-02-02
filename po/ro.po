@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2007-11-24 16:15+0100\n"
+"POT-Creation-Date: 2008-02-02 18:05+0100\n"
 "PO-Revision-Date: 2007-11-26 18:18+0100\n"
 "Last-Translator: Sorin Batariuc <sorin@bonbon.net>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -26,7 +26,6 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
-#, c-format
 msgid "Could not allocate space for config info.\n"
 msgstr "Nu pot aloca spaţiu pentru informaţiile despre configurare.\n"
 
@@ -39,19 +38,15 @@ msgstr ""
 msgid "Warning: unknown group %s\n"
 msgstr "Avertisment: grup necunoscut %s\n"
 
-#, c-format
 msgid "Warning: too many groups\n"
 msgstr "Avertisment: prea multe grupuri\n"
 
-#, c-format
 msgid "Your password has expired."
 msgstr "Parola dvs a expirat."
 
-#, c-format
 msgid "Your password is inactive."
 msgstr "Parola dvs este inactivă."
 
-#, c-format
 msgid "Your login has expired."
 msgstr "Autentificarea dvs a expirat."
 
@@ -65,11 +60,9 @@ msgstr "  Alegeţi o parolă nouă.\n"
 msgid "Your password will expire in %ld days.\n"
 msgstr "Parola dvs va expira în %ld zile.\n"
 
-#, c-format
 msgid "Your password will expire tomorrow.\n"
 msgstr "Parola dvs va expira mâine.\n"
 
-#, c-format
 msgid "Your password will expire today.\n"
 msgstr "Parola dvs va expira azi.\n"
 
@@ -77,7 +70,6 @@ msgstr "Parola dvs va expira azi.\n"
 msgid "Unable to change tty %s"
 msgstr "Nu pot schimba tty %s"
 
-#, c-format
 msgid "Environment overflow\n"
 msgstr "Inundaţie de mediu\n"
 
@@ -99,7 +91,6 @@ msgstr[1] ""
 "%d eşuări de la ultima autentificare.\n"
 "Ultima oară a fost %s în %s.\n"
 
-#, c-format
 msgid "Too many logins.\n"
 msgstr "Prea multe autentificări.\n"
 
@@ -196,7 +187,7 @@ msgstr "Parola: "
 msgid "%s's Password: "
 msgstr "Parola pentru %s: "
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
@@ -234,7 +225,6 @@ msgstr ""
 "                                 expirare la AVERTIZ_ZILE\n"
 "\n"
 
-#, c-format
 msgid "Enter the new value, or press ENTER for the default\n"
 msgstr "Introduceţi noua valoare, sau apăsaţi ENTER pentru cea implicită\n"
 
@@ -256,27 +246,21 @@ msgstr "Parolă inactivă"
 msgid "Account Expiration Date (YYYY-MM-DD)"
 msgstr "Data expirării contului (AAAA-LL-ZZ)"
 
-#, c-format
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Ultima schimbare de parolă\t\t\t\t\t: "
 
-#, c-format
 msgid "never\n"
 msgstr "Niciodată\n"
 
-#, c-format
 msgid "password must be changed\n"
 msgstr "parola trebuie schimbată\n"
 
-#, c-format
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Parola expiră\t\t\t\t\t: "
 
-#, c-format
 msgid "Password inactive\t\t\t\t\t: "
 msgstr "Parolă inactivă\t\t\t\t\t: "
 
-#, c-format
 msgid "Account expires\t\t\t\t\t\t: "
 msgstr "Contul expiră\t\t\t\t\t: "
 
@@ -305,16 +289,12 @@ msgid "%s: PAM authentication failed\n"
 msgstr "%s: autentificare PAM eşuată\n"
 
 #, c-format
+msgid "%s: can't lock password file\n"
+msgstr "%s: nu pot închide fişierul passwd\n"
+
+#, c-format
 msgid "%s: can't open password file\n"
 msgstr "%s: nu pot deschide fişierul passwd\n"
-
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: utilizator necunoscut %s\n"
-
-#, c-format
-msgid "%s: the shadow password file is not present\n"
-msgstr "%s: fişierul shadow nu este prezent\n"
 
 #, c-format
 msgid "%s: can't lock shadow password file\n"
@@ -325,16 +305,12 @@ msgid "%s: can't open shadow password file\n"
 msgstr "%s: nu pot deschide fişierul shadow\n"
 
 #, c-format
-msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s : eşuare în abandonarea privilegiilor (%s)\n"
+msgid "%s: can't rewrite shadow password file\n"
+msgstr "%s: nu pot rescrie fişierul shadow\n"
 
 #, c-format
-msgid "Changing the aging information for %s\n"
-msgstr "Modific informaţia de temporalitate pentru %s\n"
-
-#, c-format
-msgid "%s: error changing fields\n"
-msgstr "%s: eroare la modificarea câmpurilor\n"
+msgid "%s: can't rewrite password file\n"
+msgstr "%s: nu pot rescrie fişierul passwd\n"
 
 #, c-format
 msgid "%s: can't update password file\n"
@@ -345,12 +321,24 @@ msgid "%s: can't update shadow password file\n"
 msgstr "%s: nu pot actualiza fişierul shadow\n"
 
 #, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: nu pot rescrie fişierul shadow\n"
+msgid "%s: the shadow password file is not present\n"
+msgstr "%s: fişierul shadow nu este prezent\n"
 
 #, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: nu pot rescrie fişierul passwd\n"
+msgid "%s: failed to drop privileges (%s)\n"
+msgstr "%s : eşuare în abandonarea privilegiilor (%s)\n"
+
+#, c-format
+msgid "%s: unknown user %s\n"
+msgstr "%s: utilizator necunoscut %s\n"
+
+#, c-format
+msgid "Changing the aging information for %s\n"
+msgstr "Modific informaţia de temporalitate pentru %s\n"
+
+#, c-format
+msgid "%s: error changing fields\n"
+msgstr "%s: eroare la modificarea câmpurilor\n"
 
 #, c-format
 msgid ""
@@ -397,21 +385,27 @@ msgstr "\tTelefon acasă: %s\n"
 msgid "Other"
 msgstr "Altele"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Nu vă pot determina numele de utilizator.\n"
+msgid "Cannot change ID to root.\n"
+msgstr "Nu pot schimba identificatorul la root.\n"
+
+msgid "Cannot lock the password file; try again later.\n"
+msgstr "Nu pot încuia fişierul passwd; încercaţi mai târziu.\n"
+
+msgid "Cannot open the password file.\n"
+msgstr "Nu pot deschide fişierul passwd.\n"
 
 #, c-format
-msgid "%s: cannot change user '%s' on NIS client.\n"
-msgstr "%s: nu pot schimba utilizatorul '%s' pe un client NIS.\n"
+msgid "%s: %s not found in /etc/passwd\n"
+msgstr "%s: %s negăsit în /etc/passwd\n"
 
-#, c-format
-msgid "%s: '%s' is the NIS master for this client.\n"
-msgstr "%s: '%s' este stăpânul NIS pentru acest client.\n"
+msgid "Error updating the password entry.\n"
+msgstr "Eroare la actualizarea intrării în passwd.\n"
 
-#, c-format
-msgid "Changing the user information for %s\n"
-msgstr "Modificare informaţii utilizator pentru %s\n"
+msgid "Cannot commit password file changes.\n"
+msgstr "Nu pot face modificările în fişierul passwd.\n"
+
+msgid "Cannot unlock the password file.\n"
+msgstr "Nu pot debloca fişierul passwd.\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -434,36 +428,24 @@ msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' conţine caractere ilegale\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Nu vă pot determina numele de utilizator.\n"
+
+#, c-format
+msgid "%s: cannot change user '%s' on NIS client.\n"
+msgstr "%s: nu pot schimba utilizatorul '%s' pe un client NIS.\n"
+
+#, c-format
+msgid "%s: '%s' is the NIS master for this client.\n"
+msgstr "%s: '%s' este stăpânul NIS pentru acest client.\n"
+
+#, c-format
+msgid "Changing the user information for %s\n"
+msgstr "Modificare informaţii utilizator pentru %s\n"
+
+#, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: câmpuri prea lungi\n"
-
-#, c-format
-msgid "Cannot change ID to root.\n"
-msgstr "Nu pot schimba identificatorul la root.\n"
-
-#, c-format
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "Nu pot încuia fişierul passwd; încercaţi mai târziu.\n"
-
-#, c-format
-msgid "Cannot open the password file.\n"
-msgstr "Nu pot deschide fişierul passwd.\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s negăsit în /etc/passwd\n"
-
-#, c-format
-msgid "Error updating the password entry.\n"
-msgstr "Eroare la actualizarea intrării în passwd.\n"
-
-#, c-format
-msgid "Cannot commit password file changes.\n"
-msgstr "Nu pot face modificările în fişierul passwd.\n"
-
-#, c-format
-msgid "Cannot unlock the password file.\n"
-msgstr "Nu pot debloca fişierul passwd.\n"
 
 #, fuzzy, c-format
 msgid ""
@@ -524,6 +506,14 @@ msgstr "%s: nu pot închide fişierul gshadow\n"
 msgid "%s: can't open shadow file\n"
 msgstr "%s: nu pot deschide fişierul shadow\n"
 
+#, fuzzy, c-format
+msgid "%s: error updating gshadow file\n"
+msgstr "%s: eroare la actualizarea fişierului shadow\n"
+
+#, fuzzy, c-format
+msgid "%s: error updating group file\n"
+msgstr "%s: eroare la actualizarea intrărilor de grupuri\n"
+
 #, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: linia %d: linie prea lungă\n"
@@ -536,13 +526,17 @@ msgstr "%s: linia %d: lipseşte noua parolă\n"
 msgid "%s: line %d: unknown group %s\n"
 msgstr "%s: linia %d: grup necunoscut %s\n"
 
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linia %d: nu pot actualiza intrarea în passwd\n"
+#, fuzzy, c-format
+msgid "%s: line %d: cannot update group entry\n"
+msgstr "%s: linia %d: nu pot actualiza intrarea\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: a fost detectată o eroare, schimbările sunt ignorate\n"
+
+#, c-format
+msgid "%s: can't lock shadow file\n"
+msgstr "%s: nu pot închide fişierul shadow\n"
 
 #, c-format
 msgid "%s: error updating shadow file\n"
@@ -553,18 +547,14 @@ msgid "%s: error updating password file\n"
 msgstr "%s: eroare la actualizarea fişierului passwd\n"
 
 #, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: nu pot închide fişierul passwd\n"
-
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: nu pot închide fişierul shadow\n"
-
-#, c-format
 msgid "%s: line %d: unknown user %s\n"
 msgstr "%s: linia %d: utilizator necunoscut %s\n"
 
-#, fuzzy, c-format
+#, c-format
+msgid "%s: line %d: cannot update password entry\n"
+msgstr "%s: linia %d: nu pot actualiza intrarea în passwd\n"
+
+#, fuzzy
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
 "\n"
@@ -602,7 +592,6 @@ msgstr "%s: Intrare nevalidă: %s\n"
 msgid "%s is an invalid shell.\n"
 msgstr "%s este o consolă nevalidă.\n"
 
-#, c-format
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Utilizare: expiry {-f|-c}\n"
 
@@ -610,7 +599,6 @@ msgstr "Utilizare: expiry {-f|-c}\n"
 msgid "%s: unknown user\n"
 msgstr "%s: utilizator necunoscut\n"
 
-#, c-format
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
@@ -648,7 +636,6 @@ msgstr ""
 "                                -l) doar pentru utilizatorul LOGIN\n"
 "\n"
 
-#, c-format
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Autentificare       Eşuări Maximum Ultima dată                   La\n"
 
@@ -689,12 +676,36 @@ msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: sunt cerute parole criptate de grup pentru -A\n"
 
 #, c-format
-msgid "Who are you?\n"
-msgstr "Cine sunteţi?\n"
+msgid "%s: can't get lock\n"
+msgstr "%s: nu pot obţine închiderea\n"
+
+#, c-format
+msgid "%s: can't get shadow lock\n"
+msgstr "%s: nu pot obţine închiderea shadow\n"
 
 #, c-format
 msgid "%s: can't open file\n"
 msgstr "%s: nu pot deschide fişierul\n"
+
+#, c-format
+msgid "%s: can't re-write file\n"
+msgstr "%s: nu pot rescrie fişierul\n"
+
+#, c-format
+msgid "%s: can't re-write shadow file\n"
+msgstr "%s: nu pot rescrie fişierul shadow\n"
+
+#, c-format
+msgid "%s: can't unlock file\n"
+msgstr "%s: nu pot descuia fişierul\n"
+
+#, c-format
+msgid "%s: can't update entry\n"
+msgstr "%s: nu pot actualiza intrarea\n"
+
+#, c-format
+msgid "%s: can't update shadow entry\n"
+msgstr "%s: nu pot actualiza intrarea shadow\n"
 
 #, c-format
 msgid "unknown group: %s\n"
@@ -707,22 +718,6 @@ msgstr "%s: nu pot deschide fişierul\n"
 #, fuzzy, c-format
 msgid "%s: can't close shadow file\n"
 msgstr "%s: nu pot deschide fişierul shadow\n"
-
-#, c-format
-msgid "Adding user %s to group %s\n"
-msgstr "Adaug utilizatorul %s la grupul %s\n"
-
-#, c-format
-msgid "Removing user %s from group %s\n"
-msgstr "Şterg utilizatorul %s din grupul %s\n"
-
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: membru necunoscut %s\n"
-
-#, c-format
-msgid "%s: Not a tty\n"
-msgstr "%s: nu este un tty\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -741,35 +736,26 @@ msgstr "Acestea nu se potrivesc, mai încercaţi odată"
 msgid "%s: Try again later\n"
 msgstr "%s: Mai încercaţi mai târziu\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: nu pot obţine închiderea\n"
+msgid "Who are you?\n"
+msgstr "Cine sunteţi?\n"
 
 #, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: nu pot obţine închiderea shadow\n"
+msgid "Adding user %s to group %s\n"
+msgstr "Adaug utilizatorul %s la grupul %s\n"
 
 #, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: nu pot actualiza intrarea\n"
+msgid "Removing user %s from group %s\n"
+msgstr "Şterg utilizatorul %s din grupul %s\n"
 
 #, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: nu pot actualiza intrarea shadow\n"
+msgid "%s: unknown member %s\n"
+msgstr "%s: membru necunoscut %s\n"
 
 #, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: nu pot rescrie fişierul\n"
+msgid "%s: Not a tty\n"
+msgstr "%s: nu este un tty\n"
 
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: nu pot rescrie fişierul shadow\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: nu pot descuia fişierul\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -799,14 +785,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: eroare la adăugarea unei noi intrări de grup\n"
-
-#, c-format
-msgid "%s: name %s is not unique\n"
-msgstr "%s: numele %s nu este unic\n"
-
-#, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: GID %u nu este unic\n"
 
 #, c-format
 msgid "%s: can't get unique GID\n"
@@ -849,6 +827,9 @@ msgid "%s: group %s exists\n"
 msgstr "%s: grupul %s există\n"
 
 #, c-format
+msgid "%s: GID %u is not unique\n"
+msgstr "%s: GID %u nu este unic\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "Utilizare: groupdel grup\n"
 
@@ -876,47 +857,41 @@ msgstr "%s: grupul %s este un grup NIS\n"
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s este stăpân NIS\n"
 
-#, c-format
 msgid "Member already exists\n"
 msgstr ""
 
-#, c-format
 msgid "Member to remove could not be found\n"
 msgstr ""
 
-#, c-format
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
 msgstr ""
 
-#, c-format
 msgid "Only root can add members to different groups\n"
 msgstr ""
 
-#, c-format
 msgid "Group access is required\n"
 msgstr ""
 
-#, c-format
 msgid "Not primary owner of current group\n"
 msgstr ""
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "PAM authentication failed for\n"
 msgstr "%s: autentificare PAM eşuată\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to lock group file\n"
 msgstr "%s: nu pot încuia fişierul de grupuri\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Unable to open group file\n"
 msgstr "%s: nu pot deschide fişierul de grupuri\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid "Cannot close group file\n"
 msgstr "%s: nu pot deschide fişierul de grupuri\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -926,6 +901,7 @@ msgid ""
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
 "  -o, --non-unique              allow using duplicate (non-unique) GID by "
 "GROUP\n"
+"  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
 "Utilizare: groupadd [opţiuni] grup\n"
@@ -961,10 +937,6 @@ msgid "Usage: %s [-r] [-s] [group]\n"
 msgstr "Utilizare: %s [-r] [-s] [grup]\n"
 
 #, c-format
-msgid "No\n"
-msgstr "Nu\n"
-
-#, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s şi -r sunt incompatibile\n"
 
@@ -977,6 +949,9 @@ msgid "%s: cannot open file %s\n"
 msgstr "%s: nu pot deschide fişierul %s\n"
 
 #, c-format
+msgid "%s: cannot update file %s\n"
+msgstr "%s: nu pot actualiza fişierul %s\n"
+
 msgid "invalid group file entry\n"
 msgstr "intrare nevalidă în fişierul de grupuri\n"
 
@@ -984,7 +959,6 @@ msgstr "intrare nevalidă în fişierul de grupuri\n"
 msgid "delete line '%s'? "
 msgstr "şterg linia '%s'? "
 
-#, c-format
 msgid "duplicate group entry\n"
 msgstr "intrare de grup duplicată\n"
 
@@ -1016,11 +990,9 @@ msgstr "%s: nu pot actualiza intrarea parolei criptate pentru %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: nu pot actualiza intrarea pentru grupul %s\n"
 
-#, c-format
 msgid "invalid shadow group file entry\n"
 msgstr "intrare nevalidă în fişierul gshadow\n"
 
-#, c-format
 msgid "duplicate shadow group entry\n"
 msgstr "intrare duplicată în gshadow\n"
 
@@ -1035,10 +1007,6 @@ msgstr "şterg membrul administrativ '%s'? "
 #, c-format
 msgid "shadow group %s: no user %s\n"
 msgstr "gshadow %s: nici un utilizator %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: nu pot actualiza fişierul %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
@@ -1072,19 +1040,15 @@ msgstr "%s: nu pot actualiza fişierul de grupuri\n"
 msgid "%s: can't delete shadow group file\n"
 msgstr "%s: nu pot şterge fişierul gshadow\n"
 
-#, c-format
 msgid "Usage: id [-a]\n"
 msgstr "Utilizare: id [-a]\n"
 
-#, c-format
 msgid "Usage: id\n"
 msgstr "Utilizare: id\n"
 
-#, c-format
 msgid " groups="
 msgstr " grupuri="
 
-#, c-format
 msgid ""
 "Usage: lastlog [options]\n"
 "\n"
@@ -1109,16 +1073,18 @@ msgstr ""
 "                                utilizatorul cu autentificarea specificată\n"
 "\n"
 
-#, c-format
 msgid "Username         Port     From             Latest\n"
 msgstr "Nume utilizator       Port      De la          Cel mai recent\n"
 
-#, c-format
 msgid "Username                Port     Latest\n"
 msgstr "Nume utilizator                Port      Cel mai recent\n"
 
 msgid "**Never logged in**"
 msgstr "**Niciodată autentificat**"
+
+#, fuzzy, c-format
+msgid "Unknown user or range: %s\n"
+msgstr "Utilizator necunoscut: %s\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
@@ -1136,11 +1102,9 @@ msgstr "       %s [-p] [-h gazdă] [-f nume]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r gazdă\n"
 
-#, c-format
 msgid "Invalid login time\n"
 msgstr "Timp de autentificare nevalid\n"
 
-#, c-format
 msgid ""
 "\n"
 "System closed for routine maintenance\n"
@@ -1148,7 +1112,6 @@ msgstr ""
 "\n"
 "Sistem închis pentru întreţinere de rutină\n"
 
-#, c-format
 msgid ""
 "\n"
 "[Disconnect bypassed -- root login allowed.]\n"
@@ -1188,7 +1151,6 @@ msgstr "autentificare: "
 msgid "Maximum number of tries exceeded (%d)\n"
 msgstr "Numărul maxim de încercări a depăşit (%d)\n"
 
-#, c-format
 msgid "login: abort requested by PAM\n"
 msgstr "autentificare: renunţare cerută de PAM\n"
 
@@ -1206,6 +1168,10 @@ msgstr "Autentificare incorectă"
 #, c-format
 msgid "%s: failure forking: %s"
 msgstr "%s : eşuare la bifurcare: %s"
+
+#, c-format
+msgid "TIOCSCTTY failed on %s"
+msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout.\n"
 msgstr "Avertisment: autentificare reactivată după blocarea temporară.\n"
@@ -1229,13 +1195,15 @@ msgstr ""
 "depăşirea timpului de autentificare\n"
 "\n"
 
-#, c-format
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Utilizare: newgrp [-] [grup]\n"
 
-#, c-format
 msgid "Usage: sg group [[-c] command]\n"
 msgstr "Utilizare: sg grup [[-c] comanda]\n"
+
+#, fuzzy
+msgid "Invalid password.\n"
+msgstr "Parola veche: "
 
 #, c-format
 msgid "unknown UID: %u\n"
@@ -1245,11 +1213,6 @@ msgstr "UID necunoscut: %u\n"
 msgid "unknown GID: %lu\n"
 msgstr "GID necunoscut: %lu\n"
 
-#, fuzzy
-msgid "Invalid password."
-msgstr "Parola veche: "
-
-#, c-format
 msgid "too many groups\n"
 msgstr "prea multe grupuri\n"
 
@@ -1259,6 +1222,16 @@ msgid ""
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
 "%s\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
+msgstr "%s: grupul %s nu există\n"
+
+#, c-format
+msgid ""
+"%s: group %s created, failure during the creation of the corresponding "
+"gshadow group\n"
 msgstr ""
 
 #, c-format
@@ -1272,6 +1245,10 @@ msgstr "%s: nu pot încuia fişierele, încercaţi mai târziu\n"
 #, c-format
 msgid "%s: can't open files\n"
 msgstr "%s: nu pot deschide fişierele\n"
+
+#, c-format
+msgid "%s: error updating files\n"
+msgstr "%s: eroare la actualizarea fişierelor\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1305,11 +1282,7 @@ msgstr "%s: linia %d: eşuare chown\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linia %d: nu pot actualiza intrarea\n"
 
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: eroare la actualizarea fişierelor\n"
-
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1382,11 +1355,9 @@ msgstr ""
 msgid "New password: "
 msgstr "Parola nouă: "
 
-#, c-format
 msgid "Try again.\n"
 msgstr "Mai încercaţi.\n"
 
-#, c-format
 msgid ""
 "\n"
 "Warning: weak password (enter it again to use it anyway).\n"
@@ -1395,7 +1366,6 @@ msgstr ""
 "Avertisment: parolă slabă (mai introduceţi-o odată pentru a o folosi "
 "oricum).\n"
 
-#, c-format
 msgid "They don't match; try again.\n"
 msgstr "Nu se potrivesc, mai încercaţi odată.\n"
 
@@ -1434,11 +1404,9 @@ msgstr "Schimbare parolă pentru %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Parola pentru %s este neschimbată.\n"
 
-#, c-format
 msgid "Password changed.\n"
 msgstr "Parolă schimbată.\n"
 
-#, c-format
 msgid "Password set to expire.\n"
 msgstr "Parola setata pentru expirare.\n"
 
@@ -1446,11 +1414,9 @@ msgstr "Parola setata pentru expirare.\n"
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Folosire: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-#, c-format
 msgid "invalid password file entry\n"
 msgstr "intrare nevalidă în fişierul passwd\n"
 
-#, c-format
 msgid "duplicate password entry\n"
 msgstr "intrare duplicată în passwd\n"
 
@@ -1482,11 +1448,9 @@ msgstr "adaug utilizatorul '%s' în '%s'?"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: nu pot actualiza intrarea passwd pentru %s\n"
 
-#, c-format
 msgid "invalid shadow password file entry\n"
 msgstr "intrare nevalidă în fişierul shadow\n"
 
-#, c-format
 msgid "duplicate shadow password entry\n"
 msgstr "intrare duplicată în shadow\n"
 
@@ -1522,15 +1486,12 @@ msgstr "%s: nu pot actualiza intrarea pentru utilizatorul %s\n"
 msgid "%s: can't delete shadow password file\n"
 msgstr "%s: nu pot şterge fişierul shadow\n"
 
-#, c-format
 msgid "Access to su to that account DENIED.\n"
 msgstr "Acces INTERZIS către su spre acest cont.\n"
 
-#, c-format
 msgid "Password authentication bypassed.\n"
 msgstr "Autentificare cu parolă ocolită.\n"
 
-#, c-format
 msgid "Please enter your OWN password as authentication.\n"
 msgstr "Vă rog introduceţi PROPRIA parolă pentru autentificare.\n"
 
@@ -1538,7 +1499,7 @@ msgstr "Vă rog introduceţi PROPRIA parolă pentru autentificare.\n"
 msgid "%s: %s\n"
 msgstr "%s: %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: su [options] [LOGIN]\n"
 "\n"
@@ -1592,15 +1553,15 @@ msgstr ""
 "%s: %s\n"
 "(Ignorat)\n"
 
-#, c-format
 msgid "No shell\n"
 msgstr "Fără consolă\n"
 
-#, c-format
 msgid "No password file\n"
 msgstr "Fără fişier passwd\n"
 
-#, c-format
+msgid "TIOCSCTTY failed"
+msgstr ""
+
 msgid "No password entry for 'root'\n"
 msgstr "Fără intrare în passwd pentru 'root'\n"
 
@@ -1644,7 +1605,7 @@ msgstr "%s: grupul '%s' este un grup NIS.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: prea multe grupuri specificate (maximum %d).\n"
 
-#, c-format
+#, fuzzy
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1665,6 +1626,8 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
+"  -l,                           do not add the user to the lastlog and\n"
+"                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1718,13 +1681,13 @@ msgstr "%s: nu mai este memorie pentru update_group\n"
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: nu mai este memorie pentru update_gshadow\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
-msgstr "%s: UID %u nu este unic\n"
-
-#, c-format
-msgid "%s: can't get unique UID\n"
+#, fuzzy, c-format
+msgid "%s: can't get unique UID (no more available UIDs)\n"
 msgstr "%s: nu pot prelua UID\n"
+
+#, fuzzy, c-format
+msgid "%s: can't get unique GID (no more available GIDs)\n"
+msgstr "%s: nu pot prelua GID unic\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1817,7 +1780,6 @@ msgstr "%s: nu pot crea directorul %s\n"
 msgid "Creating mailbox file"
 msgstr "Crearea fişierului căsuţă pentru mesaje"
 
-#, c-format
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
@@ -1839,6 +1801,10 @@ msgstr ""
 "folosiţi -g.\n"
 
 #, c-format
+msgid "%s: UID %u is not unique\n"
+msgstr "%s: UID %u nu este unic\n"
+
+#, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
@@ -1850,7 +1816,6 @@ msgstr ""
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr "%s: avertisment: CREATE_HOME nu este suportat, vă rog folosiţi -m.\n"
 
-#, c-format
 msgid ""
 "Usage: userdel [options] LOGIN\n"
 "\n"
@@ -1930,7 +1895,7 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s: eroare la ştergerea directorului %s\n"
 
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -2050,6 +2015,12 @@ msgstr "eşuare în redenumirea căsuţei poştale"
 
 #, c-format
 msgid ""
+"You have modified %s.\n"
+"You may need to modify %s for consistency.\n"
+"Please use the command `%s' to do so.\n"
+msgstr ""
+
+msgid ""
 "Usage: vipw [options]\n"
 "\n"
 "Options:\n"
@@ -2087,6 +2058,12 @@ msgstr "N-am putut face o copie de rezervă"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nu pot reface %s: %s (schimbările dvs. sunt în %s)\n"
+
+#~ msgid "%s: name %s is not unique\n"
+#~ msgstr "%s: numele %s nu este unic\n"
+
+#~ msgid "No\n"
+#~ msgstr "Nu\n"
 
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"
