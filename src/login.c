@@ -560,10 +560,10 @@ int main (int argc, char **argv)
 
 		if (*cp)
 			snprintf (fromhost, sizeof fromhost,
-				  _(" on '%.100s' from '%.200s'"), tty, cp);
+			          " on '%.100s' from '%.200s'", tty, cp);
 		else
 			snprintf (fromhost, sizeof fromhost,
-				  _(" on '%.100s'"), tty);
+			          " on '%.100s'", tty);
 
 	      top:
 		/* only allow ALARM sec. for login */
