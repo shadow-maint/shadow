@@ -1,3 +1,8 @@
+2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/pwio.c, lib/pwio.h: New function to find an user by
+	its UID on the local database.
+
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/*.po: Updated PO files.

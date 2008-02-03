@@ -96,6 +96,18 @@ const struct passwd *pw_locate (const char *name)
 	return commonio_locate (&passwd_db, name);
 }
 
+const struct passwd *pw_locate_uid (uid_t uid)
+{
+	const struct passwd *pwd;
+
+	pw_rewind ();
+	while (   ((pwd = pw_next ()) != NULL)
+	       && (pwd->pw_uid != uid)) {
+	}
+
+	return pwd;
+}
+
 int pw_update (const struct passwd *pw)
 {
 	return commonio_update (&passwd_db, (const void *) pw);
