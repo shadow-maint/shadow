@@ -166,7 +166,7 @@ static void date_to_str (char *buf, size_t maxsize,
 {
 	struct tm *tp;
 
-	if ((negatif != NULL) && (date < 0)) {
+	if ((negativ != NULL) && (date < 0)) {
 		strncpy (buf, negativ, maxsize);
 	} else {
 		time_t t = date;
