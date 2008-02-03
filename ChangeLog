@@ -18,6 +18,8 @@
 	done regarding the data in memory).
 	* po/POTFILES.in: The new libmisc/find_new_ids.c file contains
 	translatable strings.
+	* libmisc/Makefile.am: Add libmisc/find_new_ids.c to the sources
+	of the libmisc library.
 
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 
