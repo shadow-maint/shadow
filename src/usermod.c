@@ -470,9 +470,9 @@ static void new_spent (struct spwd *spent)
 	if (eflg) {
 		/* log dates rather than numbers of days. */
 		char new_exp[16], old_exp[16];
-		date_to_str (new_exp, sizeof(16),
+		date_to_str (new_exp, sizeof(new_exp),
 		             user_newexpire * DAY, "never");
-		date_to_str (old_exp, sizeof(16),
+		date_to_str (old_exp, sizeof(old_exp),
 		             user_expire * DAY, "never");
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
