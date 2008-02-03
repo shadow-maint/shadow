@@ -4,6 +4,18 @@
 	its UID on the local database.
 	* lib/groupio.c, lib/groupio.h: New function to find a group by
 	its GID on the local database.
+	* libmisc/find_new_ids.c, lib/prototypes.h: Add new generic
+	functions to find the next user or group ID available:
+	find_new_uid() and find_new_gid(). They work the same way as the
+	functions with the same name of useradd or groupadd, except that
+	they check in the local database to make sure an ID was not
+	reserved in an uncommitted change (this is needed to be used in
+	newusers), they report a status instead of calling exit(), and
+	they can receive a preferred ID. They should later support system
+	IDs. This should be a little bit slower, but not too much (if the
+	database is not open the checks against the local database will
+	exit immediately, and if it is already open, all the checks will be
+	done regarding the data in memory).
 
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -67,6 +67,10 @@ extern void sanitize_env (void);
 extern void change_field (char *, size_t, const char *);
 extern int valid_field (const char *, const char *);
 
+/* find_new_ids.c */
+extern int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid);
+extern int find_new_gid (int sys_group, gid_t *gid, gid_t const *preferred_gid);
+
 /* getlong.c */
 extern int getlong(const char *numstr, long int *result);
 
