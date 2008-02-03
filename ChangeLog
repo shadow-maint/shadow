@@ -1,5 +1,12 @@
 2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, lib/defines.h: Switch to the C locale before sending
+	messages to syslog. The messages sent by shadow were not
+	translated, but error messages from PAM returned by pam_strerror()
+	were translated in the users's locale.
+
+2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS: newusers will behave more like useradd.
 	* src/newusers.c: The user's ID must be found before the group ID
 	to mimic useradd's behavior choices of UID and GID.
