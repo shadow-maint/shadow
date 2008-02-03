@@ -2,6 +2,8 @@
 
 	* lib/pwio.c, lib/pwio.h: New function to find an user by
 	its UID on the local database.
+	* lib/groupio.c, lib/groupio.h: New function to find a group by
+	its GID on the local database.
 
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 

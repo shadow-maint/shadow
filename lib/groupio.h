@@ -1,5 +1,7 @@
+#include <grp.h>
 extern int gr_close (void);
 extern const struct group *gr_locate (const char *);
+extern const struct group *gr_locate_gid (gid_t gid);
 extern int gr_lock (void);
 extern int gr_name (const char *);
 extern const struct group *gr_next (void);

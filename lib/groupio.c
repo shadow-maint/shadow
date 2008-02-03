@@ -113,6 +113,18 @@ const struct group *gr_locate (const char *name)
 	return commonio_locate (&group_db, name);
 }
 
+const struct group *gr_locate_gid (gid_t gid)
+{
+	const struct group *grp;
+
+	gr_rewind ();
+	while (   ((grp = gr_next ()) != NULL)
+	       && (grp->gr_gid != gid)) {
+	}
+
+	return grp;
+}
+
 int gr_update (const struct group *gr)
 {
 	return commonio_update (&group_db, (const void *) gr);
