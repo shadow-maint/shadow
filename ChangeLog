@@ -16,6 +16,8 @@
 	database is not open the checks against the local database will
 	exit immediately, and if it is already open, all the checks will be
 	done regarding the data in memory).
+	* po/POTFILES.in: The new libmisc/find_new_ids.c file contains
+	translatable strings.
 
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -19,6 +19,7 @@ libmisc/entry.c
 libmisc/env.c
 libmisc/failure.c
 libmisc/fields.c
+libmisc/find_new_ids.c
 libmisc/hushed.c
 libmisc/isexpired.c
 libmisc/limits.c
