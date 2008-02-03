@@ -1,3 +1,7 @@
+testsuite
+ - newgrp
+   - test with unknown user's GID
+
 newusers
  - add logging to SYSLOG & AUDIT
 
