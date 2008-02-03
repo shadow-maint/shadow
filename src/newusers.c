@@ -44,6 +44,7 @@
 #include <grp.h>
 #include <fcntl.h>
 #include <getopt.h>
+#include <ctype.h>
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
@@ -55,6 +56,7 @@
 #include "pwio.h"
 #include "sgroupio.h"
 #include "shadowio.h"
+#include "chkname.h"
 /*
  * Global variables
  */
@@ -76,8 +78,9 @@ static pam_handle_t *pamh = NULL;
 
 /* local function prototypes */
 static void usage (void);
-static int add_group (const char *, const char *, gid_t *);
-static int add_user (const char *, const char *, uid_t *, gid_t);
+static int add_group (const char *, const char *, gid_t *, gid_t);
+static int get_uid (const char *, uid_t *);
+static int add_user (const char *, uid_t, gid_t);
 static void update_passwd (struct passwd *, const char *);
 static int add_passwd (struct passwd *, const char *);
 static void process_flags (int argc, char **argv);
@@ -111,13 +114,11 @@ static void usage (void)
 /*
  * add_group - create a new group or add a user to an existing group
  */
-static int add_group (const char *name, const char *gid, gid_t * ngid)
+static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 {
-	const struct passwd *pwd;
 	const struct group *grp;
 	struct group grent;
 	char *members[1];
-	int i;
 #ifdef SHADOWGRP
 	const struct sgrp *sg;
 #endif
@@ -126,7 +127,10 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	 * Start by seeing if the named group already exists. This will be
 	 * very easy to deal with if it does.
 	 */
-	grp = gr_locate (gid);
+	grp = getgrnam (gid);
+	if (NULL == grp) {
+		grp = gr_locate (gid);
+	}
 	if (NULL != grp) {
 		/* The user will use this ID for her primary group */
 		*ngid = grp->gr_gid;
@@ -134,72 +138,56 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 		return 0;
 	}
 
-	/*
-	 * The group did not exist, so I try to figure out what the GID is
-	 * going to be. The gid parameter is probably "", meaning I figure
-	 * out the GID from the password file. I want the UID and GID to
-	 * match, unless the GID is already used.
-	 */
-	if (gid[0] == '\0') {
-		i = 100;
-		for (pw_rewind (); (pwd = pw_next ());) {
-			if (pwd->pw_uid >= (unsigned int)i) {
-				i = pwd->pw_uid + 1;
-			}
-		}
-		for (gr_rewind (); (grp = gr_next ());) {
-			if (grp->gr_gid == (unsigned int)i) {
-				i = -1;
-				break;
-			}
-		}
-	} else if ((gid[0] >= '0') && (gid[0] <= '9')) {
+	if (isdigit (gid[0])) {
 		/*
 		 * The GID is a number, which means either this is a brand
 		 * new group, or an existing group.
 		 */
-		i = atoi (gid);
-		for (gr_rewind (); (grp = gr_next ());) {
-			if (grp->gr_gid == (unsigned int)i) {
-				/* The user will use this ID for her
-				 * primary group */
-				*ngid = grp->gr_gid;
-				/* Don't check gshadow */
-				return 0;
-			}
+		char *endptr;
+		long int i = strtoul (gid, &endptr, 10);
+		if ((*endptr != '\0') && (errno != ERANGE)) {
+			fprintf (stderr,
+			         _("%s: group ID `%s' is not valid\n"),
+			         Prog, gid);
+			return -1;
 		}
+		if (   (getgrgid (i) != NULL)
+		    || (gr_locate_gid (i) != NULL)) {
+			/* The user will use this ID for her
+			 * primary group */
+			*ngid = i;
+			return 0;
+		}
+		grent.gr_gid = i;
 	} else {
-		/*
-		 * The last alternative is that the GID is a name which is
-		 * not already the name of an existing group, and I need to
-		 * figure out what group ID that group name is going to
-		 * have.
+		/* The gid parameter can be "" or a name which is not
+		 * already the name of an existing group.
+		 * In both cases, figure out what group ID can be used.
 		 */
-		i = -1;
-	}
-
-	/*
-	 * If I don't have a group ID by now, I'll go get the next one.
-	 */
-	if (i == -1) {
-		for (i = 100, gr_rewind (); (grp = gr_next ());) {
-			if (grp->gr_gid >= (unsigned int)i) {
-				i = grp->gr_gid + 1;
-			}
+		if (find_new_gid(0, &grent.gr_gid, &uid) < 0) {
+			return -1;
 		}
 	}
 
 	/*
 	 * Now I have all of the fields required to create the new group.
 	 */
-	if (('\0' != gid[0]) && ((gid[0] <= '0') || (gid[0] >= '9'))) {
+	if (('\0' != gid[0]) && (!isdigit (gid[0]))) {
 		grent.gr_name = xstrdup (gid);
 	} else {
 		grent.gr_name = xstrdup (name);
 	}
 
+	/* Check if this is a valid group name */
+	if (check_group_name (grent.gr_name) == 0) {
+		fprintf (stderr,
+		         _("%s: invalid group name `%s'\n"),
+		         Prog, grent.gr_name);
+		free (grent.gr_name);
+		return -1;
+	}
+
 	grent.gr_passwd = "x";	/* XXX warning: const */
-	grent.gr_gid = i;
 	members[0] = NULL;
 	grent.gr_mem = members;
 
@@ -207,12 +195,12 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
-		sg = sgr_locate (grp->gr_name);
+		sg = sgr_locate (grent.gr_name);
 
 		if (NULL != sg) {
 			fprintf (stderr,
 			         _("%s: group %s is a shadow group, but does not exist in /etc/group\n"),
-			         Prog, grp->gr_name);
+			         Prog, grent.gr_name);
 			return -1;
 		}
 	}
@@ -225,9 +213,11 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
 		struct sgrp sgrent;
+		char *admins[1];
 		sgrent.sg_name = grent.gr_name;
 		sgrent.sg_passwd = "*";	/* XXX warning: const */
-		sgrent.sg_adm = NULL;
+		admins[0] = NULL;
+		sgrent.sg_adm = admins;
 		sgrent.sg_mem = members;
 
 		if (sgr_update (&sgrent) == 0) {
@@ -242,38 +232,62 @@ static int add_group (const char *name, const char *gid, gid_t * ngid)
 	return 0;
 }
 
-/*
- * add_user - create a new user ID
- */
-static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
-{
+static int get_uid (const char *uid, uid_t *nuid) {
 	const struct passwd *pwd = NULL;
-	struct passwd pwent;
-	uid_t i;
 
 	/*
 	 * The first guess for the UID is either the numerical UID that the
 	 * caller provided, or the next available UID.
 	 */
-	if ((uid[0] >= '0') && (uid[0] <= '9')) {
-		i = atoi (uid);
+	if (isdigit (uid[0])) {
+		char *endptr;
+		long int i = strtoul (uid, &endptr, 10);
+		if ((*endptr != '\0') && (errno != ERANGE)) {
+			fprintf (stderr,
+			         _("%s: user ID `%s' is not valid\n"),
+			         Prog, uid);
+			return -1;
+		}
+		*nuid = i;
 	} else {
 		if ('\0' != uid[0]) {
-			pwd = pw_locate (uid);
-		}
+			/* local, no need for xgetpwnam */
+			pwd = getpwnam (uid);
+			if (NULL == pwd) {
+				pwd = pw_locate (uid);
+			}
 
-		if (NULL != pwd) {
-			i = pwd->pw_uid;
+			if (NULL != pwd) {
+				*nuid = pwd->pw_uid;
+			} else {
+				fprintf (stderr,
+				         _("%s: user `%s' does not exist\n"),
+				         Prog, uid);
+				return -1;
+			}
 		} else {
-			/* Start with gid, either the specified GID, or an ID
-			 * greater than all the group and user IDs */
-			i = gid;
-			for (pw_rewind (); (pwd = pw_next ());) {
-				if (pwd->pw_uid >= i) {
-					i = pwd->pw_uid + 1;
-				}
+			if (find_new_uid (0, nuid, NULL) < 0) {
+				return -1;
 			}
 		}
+	}
+
+	return 0;
+}
+
+/*
+ * add_user - create a new user ID
+ */
+static int add_user (const char *name, uid_t uid, gid_t gid)
+{
+	struct passwd pwent;
+
+	/* Check if this is a valid user name */
+	if (check_user_name (name) == 0) {
+		fprintf (stderr,
+		         _("%s: invalid user name `%s'\n"),
+		         Prog, name);
+		return -1;
 	}
 
 	/*
@@ -282,14 +296,13 @@ static int add_user (const char *name, const char *uid, uid_t * nuid, gid_t gid)
 	 * in the parts that I have.
 	 */
 	pwent.pw_name = xstrdup (name);
+	pwent.pw_uid = uid;
 	pwent.pw_passwd = "x";	/* XXX warning: const */
-	pwent.pw_uid = i;
 	pwent.pw_gid = gid;
 	pwent.pw_gecos = "";	/* XXX warning: const */
 	pwent.pw_dir = "";	/* XXX warning: const */
 	pwent.pw_shell = "";	/* XXX warning: const */
 
-	*nuid = i;
 	return !pw_update (&pwent);
 }
 
@@ -342,9 +355,14 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	sp = spw_locate (pwd->pw_name);
 	if (NULL != sp) {
 		spent = *sp;
-		spent.sp_pwdp = pw_encrypt (password,
-		                            crypt_make_salt (crypt_method,
-		                                             crypt_arg));
+		if (   (crypt_method != NULL)
+		    && (0 == strcmp(crypt_method, "NONE"))) {
+			spent.sp_pwdp = (char *)password;
+		} else {
+			const char *salt = crypt_make_salt (crypt_method,
+			                                    crypt_arg);
+			spent.sp_pwdp = pw_encrypt (password, salt);
+		}
 		return !spw_update (&spent);
 	}
 
@@ -364,8 +382,12 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 * shadow password file entry.
 	 */
 	spent.sp_namp = pwd->pw_name;
-	spent.sp_pwdp = pw_encrypt (password,
-	                            crypt_make_salt (crypt_method, crypt_arg));
+	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
+		pwd->pw_passwd = (char *)password;
+	} else {
+		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
+		spent.sp_pwdp = pw_encrypt (password, salt);
+	}
 	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
 	spent.sp_min = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */
@@ -684,8 +706,28 @@ int main (int argc, char **argv)
 		}
 
 		/*
-		 * Now the fields are processed one by one. The first field
-		 * to be processed is the group name. A new group will be
+		 * First check if we have to create of update an user
+		 */
+		pw = pw_locate (fields[0]);
+		/* local, no need for xgetpwnam */
+		if (   (NULL == pw)
+		    && (getpwnam (fields[0]) != NULL)) {
+			fprintf (stderr, _("%s: cannot update the entry of user %s (not in the passwd database)\n"), Prog, fields[0]);
+			errors++;
+			continue;
+		}
+
+		if (   (NULL == pw)
+		    && (get_uid (fields[2], &uid) != 0)) {
+			fprintf (stderr,
+			         _("%s: line %d: can't create user\n"),
+			         Prog, line);
+			errors++;
+			continue;
+		}
+
+		/*
+		 * Processed is the group name. A new group will be
 		 * created if the group name is non-numeric and does not
 		 * already exist. If the group name is a number (which is not
 		 * an existing GID), a group with the same name as the user
@@ -696,11 +738,10 @@ int main (int argc, char **argv)
 		 * new group, if that group ID exists, a whole new group ID
 		 * will be made up.
 		 */
-		pw = pw_locate (fields[0]);
 		if (   (NULL == pw)
-		    && (add_group (fields[0], fields[3], &gid) != 0)) {
+		    && (add_group (fields[0], fields[3], &gid, uid) != 0)) {
 			fprintf (stderr,
-			         _("%s: line %d: can't create GID\n"),
+			         _("%s: line %d: can't create group\n"),
 			         Prog, line);
 			errors++;
 			continue;
@@ -714,9 +755,9 @@ int main (int argc, char **argv)
 		 * will at least be a (struct passwd) for the user.
 		 */
 		if (   (NULL == pw)
-		    && (add_user (fields[0], fields[2], &uid, gid) != 0)) {
+		    && (add_user (fields[0], uid, gid) != 0)) {
 			fprintf (stderr,
-			         _("%s: line %d: can't create UID\n"),
+			         _("%s: line %d: can't create user\n"),
 			         Prog, line);
 			errors++;
 			continue;
