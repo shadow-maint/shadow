@@ -475,11 +475,9 @@ static void new_spent (struct spwd *spent)
 		date_to_str (old_exp, sizeof(16),
 		             user_expire * DAY, "never");
 #ifdef WITH_AUDIT
-		if (audit_fd >= 0) {
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "changing expiration date", user_newname,
-				      user_newid, 1);
-		}
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "changing expiration date", user_newname,
+		              user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
 			 "change user `%s' expiration from `%s' to `%s'",

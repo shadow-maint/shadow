@@ -4,6 +4,8 @@
 	/etc/shadow to human readable dates.
 	* src/usermod.c: Really log the expiration date change as human
 	readable strings instead of integers.
+	* src/usermod.c: No need to check audit_fd, audit_logger() will
+	take care of this.
 
 2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
 
