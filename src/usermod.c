@@ -468,23 +468,22 @@ static void new_spent (struct spwd *spent)
 		spent->sp_inact = user_newinactive;
 	}
 	if (eflg) {
-		/* XXX - dates might be better than numbers of days.  --marekm */
+		/* log dates rather than numbers of days. */
+		char new_exp[16], old_exp[16];
+		date_to_str (new_exp, sizeof(16),
+		             user_newexpire * DAY, "never");
+		date_to_str (old_exp, sizeof(16),
+		             user_expire * DAY, "never");
 #ifdef WITH_AUDIT
 		if (audit_fd >= 0) {
-			char new_exp[16], old_exp[16];
-			date_to_str (new_exp, sizeof(16),
-			             user_newexpire * DAY, "never");
-			date_to_str (old_exp, sizeof(16),
-			             user_expire * DAY, "never");
-
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "changing expiration date", user_newname,
 				      user_newid, 1);
 		}
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' expiration from `%ld' to `%ld'",
-			 spent->sp_namp, spent->sp_expire, user_newexpire));
+			 "change user `%s' expiration from `%s' to `%s'",
+			 spent->sp_namp, old_exp, new_exp));
 		spent->sp_expire = user_newexpire;
 	}
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
