@@ -20,6 +20,8 @@
 	translatable strings.
 	* libmisc/Makefile.am: Add libmisc/find_new_ids.c to the sources
 	of the libmisc library.
+	* src/useradd.c, src/groupadd.c: Use the find_new_uid() and
+	find_new_gid() from the library instead of the local functions.
 
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 

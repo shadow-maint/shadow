@@ -170,8 +170,6 @@ static void new_pwent (struct passwd *);
 static long scale_age (long);
 static void new_spent (struct spwd *);
 static void grp_update (void);
-static void find_new_uid (void);
-static void find_new_gid (void);
 
 static void process_flags (int argc, char **argv);
 static void close_files (void);
@@ -809,105 +807,6 @@ static void grp_update (void)
 			 user_name, nsgrp->sg_name));
 	}
 #endif				/* SHADOWGRP */
-}
-
-/*
- * find_new_uid - find the next available UID
- *
- *	find_new_uid() locates the next highest unused UID in the password
- *	file.
- */
-static void find_new_uid (void)
-{
-	const struct passwd *pwd;
-	uid_t uid_min, uid_max;
-
-	/*
-	 * It doesn't make sense to use find_new_uid(),
-	 * if an UID is specified via "-u" option.
-	 */
-	assert (!uflg);
-
-	uid_min = getdef_unum ("UID_MIN", 1000);
-	uid_max = getdef_unum ("UID_MAX", 60000);
-
-	user_id = uid_min;
-
-	/*
-	 * Search the entire password file,
-	 * looking for the largest unused value.
-	 */
-	setpwent ();
-	while ((pwd = getpwent ()) != NULL) {
-		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
-			user_id = pwd->pw_uid + 1;
-		}
-	}
-
-	/*
-	 * If a user with UID equal to UID_MAX exists, the above algorithm
-	 * will give us UID_MAX+1 even if not unique. Search for the first
-	 * free UID starting with UID_MIN (it's O(n*n) but can be avoided
-	 * by not having users with UID equal to UID_MAX).  --marekm
-	 */
-	if (user_id == uid_max + 1) {
-		for (user_id = uid_min; user_id < uid_max; user_id++) {
-			/* local, no need for xgetpwuid */
-			if (!getpwuid (user_id))
-				break;
-		}
-		if (user_id == uid_max) {
-			fprintf (stderr, _("%s: can't get unique UID (no more available UIDs)\n"), Prog);
-			fail_exit (E_UID_IN_USE);
-		}
-	}
-}
-
-/*
- * find_new_gid - find the next available GID
- *
- *	find_new_gid() locates the next highest unused GID in the group
- *	file
- */
-static void find_new_gid (void)
-{
-	const struct group *grp;
-	gid_t gid_min, gid_max;
-
-	/*
-	 * It doesn't make sense to use find_new_gid(),
-	 * if a group is specified via "-g" option.
-	 */
-	assert (!gflg);
-
-	gid_min = getdef_num ("GID_MIN", 500);
-	gid_max = getdef_num ("GID_MAX", 60000);
-
-	user_gid = gid_min;
-
-	/*
-	 * Search the entire group file,
-	 * looking for the largest unused value.
-	 */
-	setgrent ();
-	while ((grp = getgrent ())) {
-		if ((grp->gr_gid >= user_gid) && (grp->gr_gid <= gid_max)) {
-			user_gid = grp->gr_gid + 1;
-		}
-	}
-	if (user_gid == gid_max + 1) {
-		for (user_gid = gid_min; user_gid < gid_max; user_gid++) {
-			/* local, no need for xgetgrgid */
-			if (!getgrgid (user_gid))
-				break;
-		}
-		if (user_gid == gid_max) {
-			fprintf (stderr,
-				 _("%s: can't get unique GID (no more available GIDs)\n"),
-				 Prog);
-			fail_exit (4);
-		}
-	}
 }
 
 /*
@@ -1699,9 +1598,12 @@ int main (int argc, char **argv)
 		/* first, seek for a valid uid to use for this user.
 		 * We do this because later we can use the uid we found as
 		 * gid too ... --gafton */
-		if (!uflg)
-			find_new_uid ();
-		else {
+		if (!uflg) {
+			if (find_new_uid (0, &user_id, NULL) < 0) {
+				fprintf (stderr, _("%s: can't create user\n"), Prog);
+				fail_exit (E_UID_IN_USE);
+			}
+		} else {
 			if (getpwuid (user_id) != NULL) {
 				fprintf (stderr, _("%s: UID %u is not unique\n"), Prog, (unsigned int) user_id);
 #ifdef WITH_AUDIT
@@ -1715,7 +1617,12 @@ int main (int argc, char **argv)
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */
 	if (!(nflg || gflg)) {
-		find_new_gid ();
+		if (find_new_gid (0, &user_gid, &user_id) < 0) {
+			fprintf (stderr,
+				 _("%s: can't create group\n"),
+				 Prog);
+			fail_exit (4);
+		}
 		grp_add ();
 	}
 

@@ -90,7 +90,6 @@ static void new_grent (struct group *grent);
 static void new_sgent (struct sgrp *sgent);
 #endif
 static void grp_update (void);
-static void find_new_gid (void);
 static void check_new_name (void);
 static void close_files (void);
 static void open_files (void);
@@ -205,55 +204,6 @@ static void grp_update (void)
 #endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 	        group_name, (unsigned int) group_id));
-}
-
-/*
- * find_new_gid - find the next available GID
- *
- *	find_new_gid() locates the next highest unused GID in the group
- *	file.
- */
-static void find_new_gid (void)
-{
-	const struct group *grp;
-	gid_t gid_min, gid_max;
-
-	/*
-	 * It doesn't make sense to use find_new_gid(),
-	 * if a GID is specified via "-g" option.
-	 */
-	assert (!gflg);
-
-	gid_min = getdef_unum ("GID_MIN", 1000);
-	gid_max = getdef_unum ("GID_MAX", 60000);
-
-	/*
-	 * Start with the lowest GID.
-	 */
-	group_id = gid_min;
-
-	/*
-	 * Search the entire group file, looking for the largest unused
-	 * value.
-	 */
-	setgrent ();
-	while ((grp = getgrent ())) {
-		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
-			group_id = grp->gr_gid + 1;
-		}
-	}
-	if (group_id == (gid_max + 1)) {
-		for (group_id = gid_min; group_id < gid_max; group_id++) {
-			/* local, no need for xgetgrgid */
-			if (!getgrgid (group_id)) {
-				break;
-			}
-		}
-		if (group_id == gid_max) {
-			fprintf (stderr, _("%s: can't get unique GID\n"), Prog);
-			fail_exit (E_GID_IN_USE);
-		}
-	}
 }
 
 /*
@@ -606,7 +556,10 @@ int main (int argc, char **argv)
 	open_files ();
 
 	if (!gflg) {
-		find_new_gid ();
+		if (find_new_gid (0, &group_id, NULL) < 0) {
+			fprintf (stderr, _("%s: can't create group\n"), Prog);
+			fail_exit (E_GID_IN_USE);
+		}
 	}
 
 	grp_update ();
