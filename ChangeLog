@@ -1,5 +1,13 @@
 2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, libmisc/salt.c: Do not seed the random number generator
+	each time, and use the time in microseconds to avoid having the
+	same salt for different passwords generated in the same second.
+	This permits to avoid using the same salt for different passwords
+	in newusers.
+
+2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/pwio.c, lib/pwio.h: New function to find an user by
 	its UID on the local database.
 	* lib/groupio.c, lib/groupio.h: New function to find a group by

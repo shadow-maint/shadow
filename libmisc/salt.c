@@ -23,6 +23,7 @@
 #ifndef HAVE_L64A
 char *l64a(long value);
 #endif
+static void seedRNG (void);
 static char *gensalt (unsigned int salt_size);
 #ifdef USE_SHA_CRYPT
 static unsigned int SHA_salt_size (void);
@@ -63,6 +64,18 @@ static char *l64a(long value)
 	return(buf);
 }
 #endif /* !HAVE_L64A */
+
+static void seedRNG (void)
+{
+	struct timeval tv;
+	static int seeded = 0;
+
+	if (0 == seeded) {
+		gettimeofday(&tv, NULL);
+		srandom (tv.tv_sec + tv.tv_usec);
+		seeded = 1;
+	}
+}
 
 /*
  * Add the salt prefix.
@@ -160,7 +173,7 @@ static char *gensalt (unsigned int salt_size)
 
 	assert (salt_size >= MIN_SALT_SIZE &&
 	        salt_size <= MAX_SALT_SIZE);
-	srandom ((unsigned int)time(NULL));
+	seedRNG ();
 	strcat (salt, l64a (random()));
 	do {
 		strcat (salt, l64a (random()));

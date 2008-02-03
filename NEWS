@@ -3,6 +3,10 @@ $Id$
 shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 
 *** general:
+- security
+  * Do not seed the random number generator each time, and use the time in
+    microseconds to avoid having the same salt for different passwords
+    generated in the same second.
 - packaging
   * Do not install the shadow library per default.
 - chage
@@ -29,6 +33,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * The new users are no more added to the list of members of their groups
     because the membership is already set by their primary group.
   * Added support for gshadow.
+  * Avoid using the same salt for different passwords.
 - passwd
   * Make sure that no more than one username argument was provided.
 - pwck
