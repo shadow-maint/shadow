@@ -133,6 +133,8 @@ static int sgr_locked = 0;
 
 
 /* local function prototypes */
+static void date_to_str (char *buf, size_t maxsize,
+                         long int date, const char *negativ);
 static int get_groups (char *);
 static void usage (void);
 static void new_pwent (struct passwd *);
@@ -159,6 +161,25 @@ static void update_files (void);
 static void move_mailbox (void);
 #endif
 
+static void date_to_str (char *buf, size_t maxsize,
+                         long int date, const char *negativ)
+{
+	struct tm *tp;
+
+	if ((negatif != NULL) && (date < 0)) {
+		strncpy (buf, negativ, maxsize);
+	} else {
+		time_t t = date;
+		tp = gmtime (&t);
+#ifdef HAVE_STRFTIME
+		strftime (buf, maxsize, "%Y-%m-%d", tp);
+#else
+		snprintf (buf, maxsize, "%04d-%02d-%02d",
+		          tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
+#endif				/* HAVE_STRFTIME */
+	}
+	buf[maxsize - 1] = '\0';
+}
 /*
  * Had to move this over from useradd.c since we have groups named
  * "56k-family"... ergh.
@@ -450,43 +471,12 @@ static void new_spent (struct spwd *spent)
 		/* XXX - dates might be better than numbers of days.  --marekm */
 #ifdef WITH_AUDIT
 		if (audit_fd >= 0) {
-			time_t exp_t;
-			struct tm *exp_tm;
 			char new_exp[16], old_exp[16];
+			date_to_str (new_exp, sizeof(16),
+			             user_newexpire * DAY, "never");
+			date_to_str (old_exp, sizeof(16),
+			             user_expire * DAY, "never");
 
-			if (user_newexpire == -1)
-				new_exp[0] = '\0';
-			else {
-				exp_t = user_newexpire * DAY;
-				exp_tm = gmtime (&exp_t);
-#ifdef HAVE_STRFTIME
-				strftime (new_exp, sizeof (new_exp), "%Y-%m-%d",
-					  exp_tm);
-#else
-				memset (new_exp, 0, sizeof (new_exp));
-				snprintf (new_exp, sizeof (new_exp) - 1,
-					  "%04i-%02i-%02i",
-					  exp_tm->tm_year + 1900,
-					  exp_tm->tm_mon + 1, exp_tm->tm_mday);
-#endif
-			}
-
-			if (user_expire == -1)
-				old_exp[0] = '\0';
-			else {
-				exp_t = user_expire * DAY;
-				exp_tm = gmtime (&exp_t);
-#ifdef HAVE_STRFTIME
-				strftime (old_exp, sizeof (old_exp), "%Y-%m-%d",
-					  exp_tm);
-#else
-				memset (old_exp, 0, sizeof (old_exp));
-				snprintf (old_exp, sizeof (old_exp) - 1,
-					  "%04i-%02i-%02i",
-					  exp_tm->tm_year + 1900,
-					  exp_tm->tm_mon + 1, exp_tm->tm_mday);
-#endif
-			}
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "changing expiration date", user_newname,
 				      user_newid, 1);

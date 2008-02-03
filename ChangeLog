@@ -1,5 +1,10 @@
 2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Use a function to convert the dates from
+	/etc/shadow to human readable dates.
+
+2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Do not translate the fromhost variable. It is
 	always used for syslog messages.
 
