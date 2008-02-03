@@ -50,8 +50,6 @@ ALL:
 
 - groupmems: check reason for isgroup
 
-- newusers: i = 100; not a nice initial value, use login.defs
-
 - newusers: doc for pw_gid not clear. Differentiate
             pw_gid specified and exist
             pw_gid specified but does not exist
@@ -61,8 +59,5 @@ ALL:
 - newusers: document what happens when no uid is specified.
 - newusers: add option --system?
 
-Documentation:
-
-- document the -s option of {pw,grp}ck in the pt_BR, and ja man pages
-
-- document -o option in ja man page,
+-Documentation:
+ * document when options were added.
