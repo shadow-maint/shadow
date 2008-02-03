@@ -197,8 +197,8 @@ static int new_fields (void)
 	char buf[200];
 	char *cp;
 
-	puts (_("Enter the new value, or press ENTER for the default\n"));
-	puts ("\n");
+	puts (_("Enter the new value, or press ENTER for the default"));
+	puts ("");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
@@ -297,11 +297,11 @@ static void list_fields (void)
 	 * The "last change" date is either "never" or the date the password
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
-	puts (_("Last password change\t\t\t\t\t: "));
+	fputs (_("Last password change\t\t\t\t\t: "), stdout);
 	if (lastday < 0) {
-		puts (_("never\n"));
+		puts (_("never"));
 	} else if (lastday == 0) {
-		puts (_("password must be changed\n"));
+		puts (_("password must be changed"));
 	} else {
 		changed = lastday * SCALE;
 		print_date (changed);
@@ -311,10 +311,10 @@ static void list_fields (void)
 	 * The password expiration date is determined from the last change
 	 * date plus the number of days the password is valid for.
 	 */
-	puts (_("Password expires\t\t\t\t\t: "));
+	fputs (_("Password expires\t\t\t\t\t: "), stdout);
 	if ((lastday <= 0) || (maxdays >= (10000 * (DAY / SCALE)))
 	    || (maxdays < 0)) {
-		puts (_("never\n"));
+		puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
 		print_date (expires);
@@ -326,10 +326,10 @@ static void list_fields (void)
 	 * number of inactive days is added. The resulting date is when the
 	 * active will be disabled.
 	 */
-	puts (_("Password inactive\t\t\t\t\t: "));
+	fputs (_("Password inactive\t\t\t\t\t: "), stdout);
 	if ((lastday <= 0) || (inactdays < 0) ||
 	    (maxdays >= (10000 * (DAY / SCALE))) || (maxdays < 0)) {
-		puts (_("never\n"));
+		puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
 		print_date (expires);
@@ -339,9 +339,9 @@ static void list_fields (void)
 	 * The account will expire on the given date regardless of the
 	 * password expiring or not.
 	 */
-	puts (_("Account expires\t\t\t\t\t\t: "));
+	fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
 	if (expdays < 0) {
-		puts (_("never\n"));
+		puts (_("never"));
 	} else {
 		expires = expdays * SCALE;
 		print_date (expires);

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-26 22:32+0100\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -48,21 +48,21 @@ msgstr "Mật khẩu bạn không hoạt động."
 msgid "Your login has expired."
 msgstr "Đăng nhập bạn đã hết hạn."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Hãy liên lạc quản trị hệ thống.\n"
+msgid "  Contact the system administrator."
+msgstr "  Hãy liên lạc quản trị hệ thống."
 
-msgid "  Choose a new password.\n"
-msgstr "  Hãy chọn mật khẩu mới.\n"
+msgid "  Choose a new password."
+msgstr "  Hãy chọn mật khẩu mới."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Mật khẩu bạn sẽ hết hạn sau %ld ngày.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Mật khẩu bạn sễ hết hạn vào ngày mai.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Mật khẩu bạn sễ hết hạn vào ngày mai."
 
-msgid "Your password will expire today.\n"
-msgstr "Mật khẩu bạn sẽ hết hạn vào hôm nay.\n"
+msgid "Your password will expire today."
+msgstr "Mật khẩu bạn sẽ hết hạn vào hôm nay."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -217,8 +217,8 @@ msgstr ""
 "hạn\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Hãy gõ giá trị mới, hoạc bấm phím Enter để chọn mặc định\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Hãy gõ giá trị mới, hoạc bấm phím Enter để chọn mặc định"
 
 msgid "Minimum Password Age"
 msgstr "Thời gian hoát động tối thiểu cho mật khẩu"
@@ -241,11 +241,11 @@ msgstr "Ngày hết hạn dùng tài khoản (NNNN-TT-Ng)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Thay đổi mặt khẩu cuối cùng\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "chưa bao giờ\n"
+msgid "never"
+msgstr "chưa bao giờ"
 
-msgid "password must be changed\n"
-msgstr "phải thay đổi mật khẩu\n"
+msgid "password must be changed"
+msgstr "phải thay đổi mật khẩu"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Mật khẩu hết hạn dùng:\t\t\t\t\t: "
@@ -947,15 +947,15 @@ msgstr "%s: không thể mở tập tin %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: không thể cập nhật tập tin %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "mục nhập tập tin nhóm không hợp lệ\n"
+msgid "invalid group file entry"
+msgstr "mục nhập tập tin nhóm không hợp lệ"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "xóa bỏ dòng « %s » chứ? "
 
-msgid "duplicate group entry\n"
-msgstr "mục nhập nhóm trùng\n"
+msgid "duplicate group entry"
+msgstr "mục nhập nhóm trùng"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -985,11 +985,11 @@ msgstr "%s: không thể cập nhật mục nhập bóng cho %s.\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: không thể cập nhật mục nhập cho nhóm %s.\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "mục nhập tập tin nhóm bóng không hợp lệ\n"
+msgid "invalid shadow group file entry"
+msgstr "mục nhập tập tin nhóm bóng không hợp lệ"
 
-msgid "duplicate shadow group entry\n"
-msgstr "mục nhập nhóm bóng trùng\n"
+msgid "duplicate shadow group entry"
+msgstr "mục nhập nhóm bóng trùng"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1068,11 +1068,11 @@ msgstr ""
 "  -u, --user TÊN_DÙNG   hiển thị mục ghi lastlog cho _người dùng_ tên này\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Tên dùng\t\t Cổng    Từ\t\tGần nhất\n"
+msgid "Username         Port     From             Latest"
+msgstr "Tên dùng\t\t Cổng    Từ\t\tGần nhất"
 
-msgid "Username                Port     Latest\n"
-msgstr "Tên dùng\t\t\t Cổng   Gần nhất\n"
+msgid "Username                Port     Latest"
+msgstr "Tên dùng\t\t\t Cổng   Gần nhất"
 
 msgid "**Never logged in**"
 msgstr "**Chưa bao giờ đăng nhập**"
@@ -1097,22 +1097,22 @@ msgstr "       %s [-p] [-h máy] [-f tên]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r máy\n"
 
-msgid "Invalid login time\n"
-msgstr "Thời gian đăng nhập không hợp lệ\n"
+msgid "Invalid login time"
+msgstr "Thời gian đăng nhập không hợp lệ"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Hệ thông bị tắt với lý do bảo dưỡng theo thủ tục.\n"
+"Hệ thông bị tắt với lý do bảo dưỡng theo thủ tục."
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Kết nối bị ngắt đã bị vòng: cho phép người chủ đăng nhập.]\n"
+"[Kết nối bị ngắt đã bị vòng: cho phép người chủ đăng nhập.]"
 
 #, c-format
 msgid ""
@@ -1168,8 +1168,8 @@ msgstr "%s: việc tạo tiến trình con bị lỗi: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Cảnh báo: đăng nhập đã bật lại sau bị khóa ra tạm thời.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Cảnh báo: đăng nhập đã bật lại sau bị khóa ra tạm thời."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1350,15 +1350,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Mật khẩu mới: "
 
-msgid "Try again.\n"
-msgstr "Hãy thử lại.\n"
+msgid "Try again."
+msgstr "Hãy thử lại."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Cảnh báo: mật khẩu yếu (hãy gõ lại để chọn nó dù sao)\n"
+"Cảnh báo: mật khẩu yếu (hãy gõ lại để chọn nó dù sao)"
 
 msgid "They don't match; try again.\n"
 msgstr "Hai mật khẩu không trùng: hãy thử lại.\n"
@@ -1397,11 +1397,11 @@ msgstr "Đang thay đổi mật khẩu cho %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Mật khẩu cho %s chưa thay đổi.\n"
 
-msgid "Password changed.\n"
-msgstr "Mật khẩu được thay đổi.\n"
+msgid "Password changed."
+msgstr "Mật khẩu được thay đổi."
 
-msgid "Password set to expire.\n"
-msgstr "Mật khẩu được lập để hết hạn dùng.\n"
+msgid "Password set to expire."
+msgstr "Mật khẩu được lập để hết hạn dùng."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
@@ -1410,11 +1410,11 @@ msgstr ""
 "[passwd: mật khẩu\n"
 "shadow: bóng]\n"
 
-msgid "invalid password file entry\n"
-msgstr "Mục nhập tập tin mật khẩu không hợp lệ\n"
+msgid "invalid password file entry"
+msgstr "Mục nhập tập tin mật khẩu không hợp lệ"
 
-msgid "duplicate password entry\n"
-msgstr "mục nhập mật khẩu trùng\n"
+msgid "duplicate password entry"
+msgstr "mục nhập mật khẩu trùng"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1444,11 +1444,11 @@ msgstr "thêm người dùng « %s » trong %s chứ?"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: không thể cập nhật mục nhập passwd (mật khẩu) cho %s.\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "mục nhập tập tin mật khẩu bóng không hợp lệ\n"
+msgid "invalid shadow password file entry"
+msgstr "mục nhập tập tin mật khẩu bóng không hợp lệ"
 
-msgid "duplicate shadow password entry\n"
-msgstr "mục nhập tập tin mật khẩu bóng trùng\n"
+msgid "duplicate shadow password entry"
+msgstr "mục nhập tập tin mật khẩu bóng trùng"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1553,14 +1553,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Không có hệ vỏ\n"
 
-msgid "No password file\n"
-msgstr "Không có tập tin mật khẩu\n"
+msgid "No password file"
+msgstr "Không có tập tin mật khẩu"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Không có mục nhập mật khẩu cho « root » (người chủ)\n"
+msgid "No password entry for 'root'"
+msgstr "Không có mục nhập mật khẩu cho « root » (người chủ)"
 
 msgid ""
 "\n"
@@ -1571,8 +1571,8 @@ msgstr ""
 "Hãy gõ hai tổ hợp phím Ctrl-D để tiếp tục khởi động cách thường,\n"
 "(hoặc gõ mật khẩu chủ để bảo dưỡng hệ thống):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Đang vào Chế độ Bảo dưỡng Hệ thống\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Đang vào Chế độ Bảo dưỡng Hệ thống"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

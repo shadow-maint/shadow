@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -53,20 +53,24 @@ msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នកអ
 msgid "Your login has expired."
 msgstr "ការចូល​របស់អ្នក​បាន​ផុត​កំណត់ហើយ​ ។"
 
-msgid "  Contact the system administrator.\n"
+#, fuzzy
+msgid "  Contact the system administrator."
 msgstr "  ទាក់ទងទៅ​អ្នកគ្រប់គ្រងប្រព័ន្ធ​ ។\n"
 
-msgid "  Choose a new password.\n"
+#, fuzzy
+msgid "  Choose a new password."
 msgstr "  ជ្រើស​ពាក្យ​សម្ងាត់​មួយ ។\n"
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹង​ផុត​កំណត់ក្នុងពេល​ %ld ថ្ងៃ ។\n"
 
-msgid "Your password will expire tomorrow.\n"
+#, fuzzy
+msgid "Your password will expire tomorrow."
 msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹងផុត​កំណត់នៅ​ថ្ងៃ​ស្អែក​ ។​\n"
 
-msgid "Your password will expire today.\n"
+#, fuzzy
+msgid "Your password will expire today."
 msgstr "ពាក្យ​សម្ងាត់​របស់​អ្នក​នឹងផុត​កំណត់នៅ​ថ្ងៃ​នេះ ។\n"
 
 #, c-format
@@ -222,7 +226,8 @@ msgstr ""
 "  -W, --ថ្ងៃព្រមាន WARN_DAYS\tកំណត់ការព្រមាន​ថ្ងៃ​ផុត​កំណត់​ទៅជា​ WARN_DAYS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
+#, fuzzy
+msgid "Enter the new value, or press ENTER for the default"
 msgstr "បញ្ចូល​តម្លៃ​ថ្មី​ ឬ ​សង្កត់​ បញ្ចូល សម្រាប់​លំនាំដើម​\n"
 
 msgid "Minimum Password Age"
@@ -246,10 +251,12 @@ msgstr "កាលបរិច្ឆេទ​ការផុត​កំណត់
 msgid "Last password change\t\t\t\t\t: "
 msgstr "ការប្តូរ​ពាក្យ​សម្ងាត់​លើកចុង​ក្រោយ​\t\t\t\t\t ៖ "
 
-msgid "never\n"
+#, fuzzy
+msgid "never"
 msgstr "កុំ\n"
 
-msgid "password must be changed\n"
+#, fuzzy
+msgid "password must be changed"
 msgstr "ពាក្យ​សម្ងាត់​ត្រូវ​តែ​ប្តូរ​\n"
 
 msgid "Password expires\t\t\t\t\t: "
@@ -939,14 +946,16 @@ msgstr "%s ៖ មិនអាច​បើក​ឯកសារ​ %s បាន
 msgid "%s: cannot update file %s\n"
 msgstr "%s ៖ មិនអាច​ធ្វើឲ្យឯកសារ %s ទាន់សម័យ​បានទេ\n"
 
-msgid "invalid group file entry\n"
+#, fuzzy
+msgid "invalid group file entry"
 msgstr "ធាតុបញ្ចូល​ឯកសារក្រុម​មិនត្រឹមត្រូវ​\n"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "លុប​បន្ទាត់​ '%s' ឬ ? "
 
-msgid "duplicate group entry\n"
+#, fuzzy
+msgid "duplicate group entry"
 msgstr "ធាតុបញ្ចូល​​ក្រុម​ស្ទួន​\n"
 
 #, c-format
@@ -977,10 +986,12 @@ msgstr "%s ៖ មិន​អាច​ធ្វើ​ឲ្យ​ធាតុ�
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s ៖ មិនអាច​ធ្វើឲ្យធាតុ​បញ្ចូល​សម្រាប់ក្រុម​ %s ទាន់សម័យ​បានទេ\n"
 
-msgid "invalid shadow group file entry\n"
+#, fuzzy
+msgid "invalid shadow group file entry"
 msgstr "ធាតុ​ឯកសារ​ក្រុម​ស្រមោល​មិន​ត្រឹមត្រូវ\n"
 
-msgid "duplicate shadow group entry\n"
+#, fuzzy
+msgid "duplicate shadow group entry"
 msgstr "ធាតុ​ក្រុម​ស្រមោល​ស្ទួន​\n"
 
 #, c-format
@@ -1058,10 +1069,12 @@ msgstr ""
 "បញ្ជាក់\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
+#, fuzzy
+msgid "Username         Port     From             Latest"
 msgstr "ឈ្មោះ​អ្នក​ប្រើ         ច្រក     ពី             ចុង​ក្រោយ​បំផុត\n"
 
-msgid "Username                Port     Latest\n"
+#, fuzzy
+msgid "Username                Port     Latest"
 msgstr "ឈ្មោះ​អ្នក​ប្រើ                ច្រក     ចុង​ក្រោយ​បំផុត​\n"
 
 msgid "**Never logged in**"
@@ -1087,19 +1100,22 @@ msgstr "       %s [-p] [-h ម៉ាស៊ីន] [-f ឈ្មោះ]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r ម៉ាស៊ីន​\n"
 
-msgid "Invalid login time\n"
+#, fuzzy
+msgid "Invalid login time"
 msgstr "ពេលវេលា​ចូល​មិន​ត្រឹមត្រូវ​\n"
 
+#, fuzzy
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
 "ប្រព័ន្ធ​បាន​បិទ​សម្រាប់​តំហែទាំ​ទម្រង់ការ\n"
 
+#, fuzzy
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
 "[បាន​វៀង​ការ​ផ្ដាច់ -- បាន​អនុញ្ញាត​ការ​ចូល​ជា root ។]\n"
@@ -1158,7 +1174,8 @@ msgstr "%s ៖ ការចែកជាពីរវិធី​​បានប�
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+#, fuzzy
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr "ការព្រមាន ៖ បាន​អនុញ្ញាតឲ្យចូល​ម្តង​ទៀត​បន្ទាប់​ពី ចេញ​បណ្តោះអាសន្ន​​\n"
 
 #, c-format
@@ -1336,12 +1353,14 @@ msgstr ""
 msgid "New password: "
 msgstr "ពាក្យ​សម្ងាត់​ថ្មី​ ៖ "
 
-msgid "Try again.\n"
+#, fuzzy
+msgid "Try again."
 msgstr "សូមព្យាយាម​ម្តង​ទៀត​ ។\n"
 
+#, fuzzy
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
 "ការព្រមាន ៖ ពាក្យ​សម្ងាត់មិនសូវមានសុវត្ថិភាព​ (សូម​បញ្ចូល​វា​ម្តង​ទៀត​​ដើម្បី​ប្រើវា​) ។\n"
@@ -1383,20 +1402,24 @@ msgstr "កំពុង​ប្តូរ​ពាក្យ​សម្ងាត
 msgid "The password for %s is unchanged.\n"
 msgstr "មិនបានប្ដូរ​ពាក្យ​សម្ងាត់​សម្រាប់​ %s ឡើយ ។\n"
 
-msgid "Password changed.\n"
+#, fuzzy
+msgid "Password changed."
 msgstr "ពាក្យ​សម្ងាត់​បាន​ប្តូរ​ ។\n"
 
-msgid "Password set to expire.\n"
+#, fuzzy
+msgid "Password set to expire."
 msgstr "កំណត់​ពាក្យ​សម្ងាត់​ឲ្យ​ផុត​កំណត់​ ។\n"
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "របៀបប្រើ ៖ %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
+#, fuzzy
+msgid "invalid password file entry"
 msgstr "ធាតុបញ្ចូល​ឯកសារ​ពាក្យសម្ងាត់​មិនត្រឹមត្រូវ\n"
 
-msgid "duplicate password entry\n"
+#, fuzzy
+msgid "duplicate password entry"
 msgstr "ធាតុបញ្ចូល​ពាក្យ​សម្ងាត់​ស្ទួន​\n"
 
 #, c-format
@@ -1427,10 +1450,12 @@ msgstr "បន្ថែម​អ្នក​ប្រើ​ '%s'ក្នុង�
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s ៖ មិនអាច​ធ្វើឲ្យ​ធាតុបញ្ចូលពាក្យសម្ងាត់​ទាន់សម័យ​សម្រាប់​​ %s បានឡើយ\n"
 
-msgid "invalid shadow password file entry\n"
+#, fuzzy
+msgid "invalid shadow password file entry"
 msgstr "ធាតុបញ្ចូល​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោល​មិនត្រឹមត្រូវ​\n"
 
-msgid "duplicate shadow password entry\n"
+#, fuzzy
+msgid "duplicate shadow password entry"
 msgstr "ធាតុ​បញ្ចូល​ពាក្យសម្ងាត់​ស្រមោល​ស្ទួន​\n"
 
 #, c-format
@@ -1534,13 +1559,15 @@ msgstr ""
 msgid "No shell\n"
 msgstr "គ្មានសែល​\n"
 
-msgid "No password file\n"
+#, fuzzy
+msgid "No password file"
 msgstr "គ្មាន​ឯកសារ​ពាក្យ​សម្ងាត់ឡើយ​\n"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
+#, fuzzy
+msgid "No password entry for 'root'"
 msgstr "គ្មាន​ធាតុ​ពាក្យ​សម្ងាត់​សម្រាប់ 'root'​ ឡើយ\n"
 
 msgid ""
@@ -1552,7 +1579,8 @@ msgstr ""
 "ចុចគ្រាប់ចុច បញ្ជា-d ដើម្បី​បន្ត​ជាមួយ​ការ​ចាប់ផ្ដើម​ធម្មតា\n"
 "(ឬ ផ្ដល់​ពាក្យសម្ងាត់ root ដើម្បី​ជួសជុល​ប្រព័ន្ធ) ៖"
 
-msgid "Entering System Maintenance Mode\n"
+#, fuzzy
+msgid "Entering System Maintenance Mode"
 msgstr "កំពុង​បញ្ចូល​របៀប​តំហែទាំ​ប្រព័ន្ធ​\n"
 
 #, c-format

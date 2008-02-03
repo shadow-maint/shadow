@@ -95,9 +95,9 @@ static void print_one (const struct passwd *pw)
 
 	if (!once) {
 #ifdef HAVE_LL_HOST
-		puts (_("Username         Port     From             Latest\n"));
+		puts (_("Username         Port     From             Latest"));
 #else
-		puts (_("Username                Port     Latest\n"));
+		puts (_("Username                Port     Latest"));
 #endif
 		once++;
 	}

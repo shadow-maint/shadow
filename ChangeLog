@@ -1,6 +1,10 @@
 2008-02-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/*.po: Updated PO files.
+	* libmisc/age.c, libmisc/yesno.c, src/lastlog.c, src/grpck.c,
+	src/chfn.c, src/passwd.c, src/chage.c, src/login.c, src/sulogin.c,
+	src/chsh.c: Fix call to puts (remove end of line, or use fputs).
+	* po/*.po: Unfuzzy PO files according to above change.
 
 2008-01-26  Nicolas François  <nicolas.francois@centraliens.net>
 

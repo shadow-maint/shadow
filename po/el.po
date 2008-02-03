@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -52,21 +52,21 @@ msgstr "Το συνθηματικό σας είναι ανενεργό."
 msgid "Your login has expired."
 msgstr "Ο κωδικός εισόδου σας έχει λήξει."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Επικοινωνήστε με τον διαχειριστή του συστήματος.\n"
+msgid "  Contact the system administrator."
+msgstr "  Επικοινωνήστε με τον διαχειριστή του συστήματος."
 
-msgid "  Choose a new password.\n"
-msgstr "   Επιλέξτε ένα νέο συνθηματικό.\n"
+msgid "  Choose a new password."
+msgstr "   Επιλέξτε ένα νέο συνθηματικό."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Το συνθηματικό σας θα λήξει σε %ld μέρες.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Το συνθηματικό σας θα λήξει αύριο.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Το συνθηματικό σας θα λήξει αύριο."
 
-msgid "Your password will expire today.\n"
-msgstr "Το συνθηματικό σας θα λήξει σήμερα.\n"
+msgid "Your password will expire today."
+msgstr "Το συνθηματικό σας θα λήξει σήμερα."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -226,8 +226,8 @@ msgstr ""
 "                                WARN_DAYS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Εισάγετε την νέα τιμή, ή πιέστε ENTER για την προκαθορισμένη"
 
 msgid "Minimum Password Age"
 msgstr "Μικρότερη διάρκεια συνθηματικού"
@@ -250,11 +250,11 @@ msgstr "Ημερομηνία Λήξης Λογαριασμού (ΧΧΧΧ-ΜΜ-Η
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Τελευταία αλλαγή συνθηματικού \t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "Ποτέ\n"
+msgid "never"
+msgstr "Ποτέ"
 
-msgid "password must be changed\n"
-msgstr "το συνθηματικό πρέπει να αλλαχθεί\n"
+msgid "password must be changed"
+msgstr "το συνθηματικό πρέπει να αλλαχθεί"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Το συνθηματικό λήγει\t\t\t\t\t: "
@@ -954,15 +954,15 @@ msgstr "%s: αδυναμία ανοίγματος αρχείου %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: αδυναμία ανανέωσης αρχείου %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο ομάδων\n"
+msgid "invalid group file entry"
+msgstr "Μη έγκυρη καταχώρηση στο αρχείο ομάδων"
 
 #, fuzzy, c-format
 msgid "delete line '%s'? "
 msgstr "διαγραφή γραμμής `%s'; "
 
-msgid "duplicate group entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο ομάδων\n"
+msgid "duplicate group entry"
+msgstr "αντιγραφή καταχώρησης στο αρχείο ομάδων"
 
 #, fuzzy, c-format
 msgid "invalid group name '%s'\n"
@@ -994,11 +994,11 @@ msgstr ""
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: αδυναμία ανανέωσης καταχώρησης για την ομάδα %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών ομάδων\n"
+msgid "invalid shadow group file entry"
+msgstr "Μη έγκυρη καταχώρηση στο αρχείο σκιωδών συνθηματικών ομάδων"
 
-msgid "duplicate shadow group entry\n"
-msgstr "αντιγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών ομάδων\n"
+msgid "duplicate shadow group entry"
+msgstr "αντιγραφή καταχώρησης στο αρχείο σκιωδών συνθηματικών ομάδων"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1080,11 +1080,11 @@ msgstr ""
 "                                χρήστη με καθορισμένο LOGIN\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Όνομα_Χρήστη     Θύρα     Από              Τελευταία\n"
+msgid "Username         Port     From             Latest"
+msgstr "Όνομα_Χρήστη     Θύρα     Από              Τελευταία"
 
-msgid "Username                Port     Latest\n"
-msgstr "Όνομα_Χρήστη            Θύρα     Τελευταία\n"
+msgid "Username                Port     Latest"
+msgstr "Όνομα_Χρήστη            Θύρα     Τελευταία"
 
 msgid "**Never logged in**"
 msgstr "**Καμιά είσοδος στο σύστημα**"
@@ -1109,22 +1109,22 @@ msgstr "       %s [-p] [-h σύστημα] [-f όνομα]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r σύστημα\n"
 
-msgid "Invalid login time\n"
-msgstr "Εσφαλμένη ώρα εισόδου\n"
+msgid "Invalid login time"
+msgstr "Εσφαλμένη ώρα εισόδου"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Το σύστημα έκλεισε για συντήρηση ρουτίνας\n"
+"Το σύστημα έκλεισε για συντήρηση ρουτίνας"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Παράκαμψη αποσύνδεσης -- Η είσοδος του root επετράπη.]\n"
+"[Παράκαμψη αποσύνδεσης -- Η είσοδος του root επετράπη.]"
 
 #, c-format
 msgid ""
@@ -1180,9 +1180,9 @@ msgstr "%s: αποτυχία διχάλωσης: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
-"Προειδοποίηση: Η είσοδος επανενεργοποιήθηκε μετά από προσωρινό αποκλεισμό.\n"
+"Προειδοποίηση: Η είσοδος επανενεργοποιήθηκε μετά από προσωρινό αποκλεισμό."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1368,15 +1368,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Νέο Συνθηματικό: "
 
-msgid "Try again.\n"
-msgstr "Ξαναδοκιμάστε.\n"
+msgid "Try again."
+msgstr "Ξαναδοκιμάστε."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Προσοχή: αδύναμο συνθηματικό (εισάγετε το πάλι για να το χρησιμοποιήσετε).\n"
+"Προσοχή: αδύναμο συνθηματικό (εισάγετε το πάλι για να το χρησιμοποιήσετε)."
 
 msgid "They don't match; try again.\n"
 msgstr "Δεν ταιριάζουν. Δοκιμάστε ξανά.\n"
@@ -1415,21 +1415,21 @@ msgstr "Αλλαγή συνθηματικού για τον %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Το συνθηματικό για τον %s δεν άλλαξε.\n"
 
-msgid "Password changed.\n"
-msgstr "Το συνθηματικό άλλαξε.\n"
+msgid "Password changed."
+msgstr "Το συνθηματικό άλλαξε."
 
-msgid "Password set to expire.\n"
-msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει.\n"
+msgid "Password set to expire."
+msgstr "Το συνθηματικό έχει ρυθμιστεί να λήξει."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Χρήση: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "Μη έγκυρη καταχώρηση στο αρχείο συνθηματικών\n"
+msgid "invalid password file entry"
+msgstr "Μη έγκυρη καταχώρηση στο αρχείο συνθηματικών"
 
-msgid "duplicate password entry\n"
-msgstr "διπλότυπη καταχώριση στο αρχείο συνθηματικών\n"
+msgid "duplicate password entry"
+msgstr "διπλότυπη καταχώριση στο αρχείο συνθηματικών"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1459,11 +1459,11 @@ msgstr "σκιώδης ομάδα %s: δεν υπάρχει χρήστης %s\n"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: αδυναμία ανανέωσης καταχώρησης συνθηματικού για τον %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "Μη έγκυρη καταχώριση στο αρχείο σκιωδών συνθηματικών\n"
+msgid "invalid shadow password file entry"
+msgstr "Μη έγκυρη καταχώριση στο αρχείο σκιωδών συνθηματικών"
 
-msgid "duplicate shadow password entry\n"
-msgstr "διπλότυπη καταχώριση στο αρχείο σκιωδών συνθηματικών\n"
+msgid "duplicate shadow password entry"
+msgstr "διπλότυπη καταχώριση στο αρχείο σκιωδών συνθηματικών"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1569,14 +1569,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Δεν υπάρχει φλοιός\n"
 
-msgid "No password file\n"
-msgstr "Δεν υπάρχει αρχείο συνθηματικών\n"
+msgid "No password file"
+msgstr "Δεν υπάρχει αρχείο συνθηματικών"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Δεν υπάρχει καταχώρηση συνθηματικού για τον 'root'\n"
+msgid "No password entry for 'root'"
+msgstr "Δεν υπάρχει καταχώρηση συνθηματικού για τον 'root'"
 
 msgid ""
 "\n"
@@ -1587,8 +1587,8 @@ msgstr ""
 "Πληκτρολογήστε control-d για να συνεχίσετε με την κανονική έναρξη,\n"
 "(ή δώστε το συνθηματικό του root για συντήρηση του συστήματος):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Έναρξη Κατάστασης Συντήρησης Συστήματος\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Έναρξη Κατάστασης Συντήρησης Συστήματος"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-24 17:34+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -48,21 +48,21 @@ msgstr "La vostra contrasenya està inactiva."
 msgid "Your login has expired."
 msgstr "El vostre accés ha caducat."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Contacteu amb l'administrador del sistema.\n"
+msgid "  Contact the system administrator."
+msgstr "  Contacteu amb l'administrador del sistema."
 
-msgid "  Choose a new password.\n"
-msgstr "  Escolliu una nova contrasenya.\n"
+msgid "  Choose a new password."
+msgstr "  Escolliu una nova contrasenya."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "La vostra contrasenya caduca en %ld dies.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "La vostra contrasenya caduca demà.\n"
+msgid "Your password will expire tomorrow."
+msgstr "La vostra contrasenya caduca demà."
 
-msgid "Your password will expire today.\n"
-msgstr "La vostra contrasenya caduca avui.\n"
+msgid "Your password will expire today."
+msgstr "La vostra contrasenya caduca avui."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -221,8 +221,8 @@ msgstr ""
 "                                   a DIES_AVÍS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Introduïu el nou valor, o premeu ENTER per al predeterminat\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Introduïu el nou valor, o premeu ENTER per al predeterminat"
 
 msgid "Minimum Password Age"
 msgstr "Duració mínima de la contrasenya"
@@ -245,11 +245,11 @@ msgstr "Data de caducitat per al compte (AAAA-MM-YY)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Últim canvi de contrasenya\t\t\t\t: "
 
-msgid "never\n"
-msgstr "mai\n"
+msgid "never"
+msgstr "mai"
 
-msgid "password must be changed\n"
-msgstr "s'ha de canviar la contrasenya\n"
+msgid "password must be changed"
+msgstr "s'ha de canviar la contrasenya"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "La contrasenya caduca\t\t\t\t\t: "
@@ -939,15 +939,15 @@ msgstr "%s: no es pot obrir el fitxer %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: no es pot actualitzar el fitxer %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "l'entrada del fitxer de grup no és vàlida\n"
+msgid "invalid group file entry"
+msgstr "l'entrada del fitxer de grup no és vàlida"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "voleu eliminar la línia «%s»? "
 
-msgid "duplicate group entry\n"
-msgstr "l'entrada de grup està duplicada\n"
+msgid "duplicate group entry"
+msgstr "l'entrada de grup està duplicada"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -977,11 +977,11 @@ msgstr "%s: no es pot actualitzar l'entrada ombra per a %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: no es pot actualitzar l'entrada per al grup %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "l'entrada del fitxer de grup ombra no és vàlida\n"
+msgid "invalid shadow group file entry"
+msgstr "l'entrada del fitxer de grup ombra no és vàlida"
 
-msgid "duplicate shadow group entry\n"
-msgstr "l'entrada de grup ombra està duplicada\n"
+msgid "duplicate shadow group entry"
+msgstr "l'entrada de grup ombra està duplicada"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1059,11 +1059,11 @@ msgstr ""
 "                                l'usuari amb USUARI especific\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Usuari           Port     Des de           Últim\n"
+msgid "Username         Port     From             Latest"
+msgstr "Usuari           Port     Des de           Últim"
 
-msgid "Username                Port     Latest\n"
-msgstr "Usuari                  Port     Últim\n"
+msgid "Username                Port     Latest"
+msgstr "Usuari                  Port     Últim"
 
 msgid "**Never logged in**"
 msgstr "**No ha entrat mai**"
@@ -1088,22 +1088,22 @@ msgstr "       %s [-p] [-h ordinador] [-f nom]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r ordinador\n"
 
-msgid "Invalid login time\n"
-msgstr "El temps d'accés no és vàlid\n"
+msgid "Invalid login time"
+msgstr "El temps d'accés no és vàlid"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Sistema tancat per a manteniment rutinari\n"
+"Sistema tancat per a manteniment rutinari"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[S'ha evitat la desconnexió -- l'accés de root està permès].\n"
+"[S'ha evitat la desconnexió -- l'accés de root està permès]."
 
 #, c-format
 msgid ""
@@ -1159,8 +1159,8 @@ msgstr "%s: fallada al fer fork: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Avís: accés reactivat després d'un bloqueig temporal.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Avís: accés reactivat després d'un bloqueig temporal."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1343,15 +1343,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Contrasenya nova:"
 
-msgid "Try again.\n"
-msgstr "Intenteu-ho de nou.\n"
+msgid "Try again."
+msgstr "Intenteu-ho de nou."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Avís: contrasenya feble (introduïu-la de nou per fer-la servir igualment).\n"
+"Avís: contrasenya feble (introduïu-la de nou per fer-la servir igualment)."
 
 msgid "They don't match; try again.\n"
 msgstr "No coincideixen; intenteu-ho de nou.\n"
@@ -1390,21 +1390,21 @@ msgstr "S'està canviant la contrasenya per a %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "No s'ha canviat la contrasenya per a %s.\n"
 
-msgid "Password changed.\n"
-msgstr "S'ha canviat la contrasenya.\n"
+msgid "Password changed."
+msgstr "S'ha canviat la contrasenya."
 
-msgid "Password set to expire.\n"
-msgstr "S'ha establert la contrasenya a caducada.\n"
+msgid "Password set to expire."
+msgstr "S'ha establert la contrasenya a caducada."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Forma d'ús: %s [-q] [-r] [-s] [contrasenya [ombra]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "l'entrada del fitxer de contrasenyes no és vàlida\n"
+msgid "invalid password file entry"
+msgstr "l'entrada del fitxer de contrasenyes no és vàlida"
 
-msgid "duplicate password entry\n"
-msgstr "l'entrada de contrasenya està duplicada\n"
+msgid "duplicate password entry"
+msgstr "l'entrada de contrasenya està duplicada"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1434,11 +1434,11 @@ msgstr "voleu afegir l'usuari «%s» a %s? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: no es pot actualitzar l'entrada de la contrasenya per a %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "l'entrada del fitxer de contrasenyes ombra no és vàlida\n"
+msgid "invalid shadow password file entry"
+msgstr "l'entrada del fitxer de contrasenyes ombra no és vàlida"
 
-msgid "duplicate shadow password entry\n"
-msgstr "entrada de contrasenya ombra duplicada\n"
+msgid "duplicate shadow password entry"
+msgstr "entrada de contrasenya ombra duplicada"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1542,14 +1542,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "No hi ha intèrpret d'ordres\n"
 
-msgid "No password file\n"
-msgstr "No hi ha fitxer de contrasenyes\n"
+msgid "No password file"
+msgstr "No hi ha fitxer de contrasenyes"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "No hi ha entrada de contrasenya per a «root»\n"
+msgid "No password entry for 'root'"
+msgstr "No hi ha entrada de contrasenya per a «root»"
 
 msgid ""
 "\n"
@@ -1560,8 +1560,8 @@ msgstr ""
 "Pitgeu «control-d» per a continuar amb l'inici normal de sistema,\n"
 "(o introduïu la contrasenya de «root» per a manteniment del sistema):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "S'està entrant en mode de manteniment del sistema\n"
+msgid "Entering System Maintenance Mode"
+msgstr "S'està entrant en mode de manteniment del sistema"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

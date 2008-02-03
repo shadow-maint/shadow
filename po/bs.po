@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -48,21 +48,21 @@ msgstr "Vaša šifra je neaktivna."
 msgid "Your login has expired."
 msgstr "Vaš račun je istekao."
 
-msgid "  Contact the system administrator.\n"
+msgid "  Contact the system administrator."
 msgstr ""
 
-msgid "  Choose a new password.\n"
-msgstr "  Izaberite novu šifru.\n"
+msgid "  Choose a new password."
+msgstr "  Izaberite novu šifru."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Vaša šifra ističe za in %ld dana.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Vaša šifra ističe sutra.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Vaša šifra ističe sutra."
 
-msgid "Your password will expire today.\n"
-msgstr "Vaša šifra ističe danas.\n"
+msgid "Your password will expire today."
+msgstr "Vaša šifra ističe danas."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -197,7 +197,7 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Enter the new value, or press ENTER for the default\n"
+msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
 
 msgid "Minimum Password Age"
@@ -222,10 +222,10 @@ msgid "Last password change\t\t\t\t\t: "
 msgstr ""
 
 #, fuzzy
-msgid "never\n"
-msgstr "Nikad\n"
+msgid "never"
+msgstr "Nikad"
 
-msgid "password must be changed\n"
+msgid "password must be changed"
 msgstr ""
 
 #, fuzzy
@@ -857,15 +857,16 @@ msgstr ""
 msgid "%s: cannot update file %s\n"
 msgstr ""
 
-msgid "invalid group file entry\n"
+msgid "invalid group file entry"
 msgstr ""
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr ""
 
-msgid "duplicate group entry\n"
-msgstr ""
+#, fuzzy
+msgid "duplicate group entry"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -895,10 +896,10 @@ msgstr ""
 msgid "%s: can't update entry for group %s\n"
 msgstr ""
 
-msgid "invalid shadow group file entry\n"
+msgid "invalid shadow group file entry"
 msgstr ""
 
-msgid "duplicate shadow group entry\n"
+msgid "duplicate shadow group entry"
 msgstr ""
 
 #, c-format
@@ -966,10 +967,10 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Username         Port     From             Latest\n"
+msgid "Username         Port     From             Latest"
 msgstr ""
 
-msgid "Username                Port     Latest\n"
+msgid "Username                Port     Latest"
 msgstr ""
 
 msgid "**Never logged in**"
@@ -995,17 +996,17 @@ msgstr ""
 msgid "       %s [-p] -r host\n"
 msgstr ""
 
-msgid "Invalid login time\n"
+msgid "Invalid login time"
 msgstr ""
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 
 #, c-format
@@ -1058,7 +1059,7 @@ msgstr ""
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
 
 #, c-format
@@ -1208,15 +1209,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Nova šifra:"
 
-msgid "Try again.\n"
-msgstr "Pokušajte ponovo.\n"
+msgid "Try again."
+msgstr "Pokušajte ponovo."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Upozorenje: slaba šifra (unesite je ponovo ako je ipak želite koristiti).\n"
+"Upozorenje: slaba šifra (unesite je ponovo ako je ipak želite koristiti)."
 
 msgid "They don't match; try again.\n"
 msgstr "One se ne slažu; pokušajte ponovo\n"
@@ -1255,21 +1256,23 @@ msgstr ""
 msgid "The password for %s is unchanged.\n"
 msgstr ""
 
-msgid "Password changed.\n"
-msgstr ""
+#, fuzzy
+msgid "Password changed."
+msgstr "Šifra:"
 
 #, fuzzy
-msgid "Password set to expire.\n"
+msgid "Password set to expire."
 msgstr "Vaša šifra je istekla."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 
-msgid "invalid password file entry\n"
-msgstr ""
+#, fuzzy
+msgid "invalid password file entry"
+msgstr "Stara šifra:"
 
-msgid "duplicate password entry\n"
+msgid "duplicate password entry"
 msgstr ""
 
 #, c-format
@@ -1300,10 +1303,10 @@ msgstr ""
 msgid "%s: can't update passwd entry for %s\n"
 msgstr ""
 
-msgid "invalid shadow password file entry\n"
+msgid "invalid shadow password file entry"
 msgstr ""
 
-msgid "duplicate shadow password entry\n"
+msgid "duplicate shadow password entry"
 msgstr ""
 
 #, c-format
@@ -1394,13 +1397,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr ""
 
-msgid "No password file\n"
-msgstr ""
+#, fuzzy
+msgid "No password file"
+msgstr "Nova šifra:"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
+msgid "No password entry for 'root'"
 msgstr ""
 
 msgid ""
@@ -1409,7 +1413,7 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 
-msgid "Entering System Maintenance Mode\n"
+msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, fuzzy, c-format

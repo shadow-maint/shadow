@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-24 18:00+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
@@ -49,21 +49,21 @@ msgstr "Vaše heslo je vypnuto."
 msgid "Your login has expired."
 msgstr "Platnost vašeho účtu vypršela."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Kontaktujte správce systému.\n"
+msgid "  Contact the system administrator."
+msgstr "  Kontaktujte správce systému."
 
-msgid "  Choose a new password.\n"
-msgstr "  Zvolte nové heslo.\n"
+msgid "  Choose a new password."
+msgstr "  Zvolte nové heslo."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Platnost vašeho hesla vyprší za %ld dnů.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Platnost vašeho hesla vyprší zítra.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Platnost vašeho hesla vyprší zítra."
 
-msgid "Your password will expire today.\n"
-msgstr "Platnost vašeho hesla vyprší dnes.\n"
+msgid "Your password will expire today."
+msgstr "Platnost vašeho hesla vyprší dnes."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -221,9 +221,9 @@ msgstr ""
 "  -W, --warndays VAR_DNŮ        nastaví varování o expiraci na VAR_DNŮ\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
+msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
-"Zadejte novou hodnotu, nebo stiskněte ENTER pro použití implicitní hodnoty\n"
+"Zadejte novou hodnotu, nebo stiskněte ENTER pro použití implicitní hodnoty"
 
 msgid "Minimum Password Age"
 msgstr "Minimální stáří hesla"
@@ -246,11 +246,11 @@ msgstr "Vypršení platnosti účtu (RRRR-MM-DD)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Poslední změna hesla\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "nikdy\n"
+msgid "never"
+msgstr "nikdy"
 
-msgid "password must be changed\n"
-msgstr "heslo musí být změněno\n"
+msgid "password must be changed"
+msgstr "heslo musí být změněno"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Platnost hesla vyprší\t\t\t\t\t: "
@@ -936,15 +936,15 @@ msgstr "%s: soubor %s nelze otevřít\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: soubor %s nelze aktualizovat\n"
 
-msgid "invalid group file entry\n"
-msgstr "chybná položka v souboru se skupinami\n"
+msgid "invalid group file entry"
+msgstr "chybná položka v souboru se skupinami"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "smazat řádek \"%s\"?"
 
-msgid "duplicate group entry\n"
-msgstr "tato položka se v souboru se skupinami vyskytuje vícekrát\n"
+msgid "duplicate group entry"
+msgstr "tato položka se v souboru se skupinami vyskytuje vícekrát"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -974,11 +974,11 @@ msgstr "%s: položku %s souboru se stínovými hesly nelze aktualizovat\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: položku skupiny %s nelze odstranit\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "chybná položka v souboru se stínovými skupinami\n"
+msgid "invalid shadow group file entry"
+msgstr "chybná položka v souboru se stínovými skupinami"
 
-msgid "duplicate shadow group entry\n"
-msgstr "duplikovaná položka v souboru se stínovými skupinami\n"
+msgid "duplicate shadow group entry"
+msgstr "duplikovaná položka v souboru se stínovými skupinami"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1053,11 +1053,11 @@ msgstr ""
 "  -u, --user ÚČET               zobrazí záznamy lastlogu pro uživatele ÚČET\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Uživatel         Port     Z                Naposledy\n"
+msgid "Username         Port     From             Latest"
+msgstr "Uživatel         Port     Z                Naposledy"
 
-msgid "Username                Port     Latest\n"
-msgstr "Uživatel                Port     Naposledy\n"
+msgid "Username                Port     Latest"
+msgstr "Uživatel                Port     Naposledy"
 
 msgid "**Never logged in**"
 msgstr "**Nikdy nebyl přihlášen**"
@@ -1082,22 +1082,22 @@ msgstr "         %s [-p] [-h počítač] [-f jméno]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "         %s [-p] -r počítač\n"
 
-msgid "Invalid login time\n"
-msgstr "Chybný čas přihlášení\n"
+msgid "Invalid login time"
+msgstr "Chybný čas přihlášení"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Systém byl uzavřen kvůli pravidelné údržbě.\n"
+"Systém byl uzavřen kvůli pravidelné údržbě."
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Odpojení přeskočeno -- uživatel root smí být přihlášen.]\n"
+"[Odpojení přeskočeno -- uživatel root smí být přihlášen.]"
 
 #, c-format
 msgid ""
@@ -1153,8 +1153,8 @@ msgstr "%s: chyba rozdvojení: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Varování: po dočasném zákazu je přihlašování opět povoleno.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Varování: po dočasném zákazu je přihlašování opět povoleno."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1331,15 +1331,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Nové heslo: "
 
-msgid "Try again.\n"
-msgstr "Zkuste to znovu.\n"
+msgid "Try again."
+msgstr "Zkuste to znovu."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Varování: slabé heslo (chcete-li jej opravdu použít, zadejte jej znovu).\n"
+"Varování: slabé heslo (chcete-li jej opravdu použít, zadejte jej znovu)."
 
 msgid "They don't match; try again.\n"
 msgstr "Neshodují se; zkuste to znovu.\n"
@@ -1378,22 +1378,22 @@ msgstr "Měním heslo uživatele %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Heslo uživatele %s nebylo změněno.\n"
 
-msgid "Password changed.\n"
-msgstr "Heslo bylo změněno.\n"
+msgid "Password changed."
+msgstr "Heslo bylo změněno."
 
-msgid "Password set to expire.\n"
-msgstr "Heslu byla nastavena vypršená platnost.\n"
+msgid "Password set to expire."
+msgstr "Heslu byla nastavena vypršená platnost."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 "Použití: %s [-q] [-r] [-s] [soubor s hesly [soubor se stínovými hesly]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "chybná položka v souboru s hesly\n"
+msgid "invalid password file entry"
+msgstr "chybná položka v souboru s hesly"
 
-msgid "duplicate password entry\n"
-msgstr "duplikovaná položka v souboru s hesly\n"
+msgid "duplicate password entry"
+msgstr "duplikovaná položka v souboru s hesly"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1423,11 +1423,11 @@ msgstr "přidat uživatele \"%s\" do %s? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: položku souboru s hesly pro uživatele %s nelze aktualizovat\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "chybná položka v souboru se stínovými hesly\n"
+msgid "invalid shadow password file entry"
+msgstr "chybná položka v souboru se stínovými hesly"
 
-msgid "duplicate shadow password entry\n"
-msgstr "duplikovaná položka v souboru se stínovými hesly\n"
+msgid "duplicate shadow password entry"
+msgstr "duplikovaná položka v souboru se stínovými hesly"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1530,14 +1530,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Žádný shell\n"
 
-msgid "No password file\n"
-msgstr "Soubor s hesly neexistuje\n"
+msgid "No password file"
+msgstr "Soubor s hesly neexistuje"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "V databázi není položka pro uživatele 'root'\n"
+msgid "No password entry for 'root'"
+msgstr "V databázi není položka pro uživatele 'root'"
 
 msgid ""
 "\n"
@@ -1548,8 +1548,8 @@ msgstr ""
 "Stiskněte control-d pro normální spuštění systému,\n"
 "(nebo zadejte heslo uživatele root pro údržbu systému):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Vstupuji do režimu údržby systému\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Vstupuji do režimu údržby systému"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

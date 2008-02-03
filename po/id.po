@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-25 20:58+0100\n"
 "Last-Translator: Parlin Imanuel Toh <parlin_i@yahoo.com>\n"
 "Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
@@ -47,21 +47,21 @@ msgstr "Kata sandi anda tidak aktif."
 msgid "Your login has expired."
 msgstr "Login anda telah kadaluarsa."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Hubungi administrator sistem.\n"
+msgid "  Contact the system administrator."
+msgstr "  Hubungi administrator sistem."
 
-msgid "  Choose a new password.\n"
-msgstr "  Pilih sebuah kata sandi baru.\n"
+msgid "  Choose a new password."
+msgstr "  Pilih sebuah kata sandi baru."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Kata sandi anda akan kadaluarsa dalam %ld hari.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Kata sandi anda akan kadaluarsa besok.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Kata sandi anda akan kadaluarsa besok."
 
-msgid "Your password will expire today.\n"
-msgstr "Kata sandi anda akan kadaluarsa hari ini.\n"
+msgid "Your password will expire today."
+msgstr "Kata sandi anda akan kadaluarsa hari ini."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -217,8 +217,8 @@ msgstr ""
 "                                WARN_DAYS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Masukkan nilai baru atau tekan ENTER untuk nilai bawaan\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Masukkan nilai baru atau tekan ENTER untuk nilai bawaan"
 
 msgid "Minimum Password Age"
 msgstr "Umur Kata Sandi Minimal"
@@ -241,11 +241,11 @@ msgstr "Waktu Kadaluarsa Akun (TTTT-MM-HH)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Penggantian kata sandi terakhir\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "tak pernah\n"
+msgid "never"
+msgstr "tak pernah"
 
-msgid "password must be changed\n"
-msgstr "password mesti diubah\n"
+msgid "password must be changed"
+msgstr "password mesti diubah"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Kata sandi kadaluarsa\t\t\t\t\t: "
@@ -930,15 +930,15 @@ msgstr "%s: tidak dapat membuka berkas %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: tidak dapat memperbaharui berkas %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "entri berkas grup tidak sah\n"
+msgid "invalid group file entry"
+msgstr "entri berkas grup tidak sah"
 
 #, fuzzy, c-format
 msgid "delete line '%s'? "
 msgstr "hapus baris `%s'? "
 
-msgid "duplicate group entry\n"
-msgstr "entri grup berulang\n"
+msgid "duplicate group entry"
+msgstr "entri grup berulang"
 
 #, fuzzy, c-format
 msgid "invalid group name '%s'\n"
@@ -968,11 +968,11 @@ msgstr "%s: tidak dapat memperbaharui entri bayangan untuk %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: tidak dapat memperbaharui entri untuk grup %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "entri berkas grup bayangan tidak sah\n"
+msgid "invalid shadow group file entry"
+msgstr "entri berkas grup bayangan tidak sah"
 
-msgid "duplicate shadow group entry\n"
-msgstr "entri grup bayangan berulang\n"
+msgid "duplicate shadow group entry"
+msgstr "entri grup bayangan berulang"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1049,11 +1049,11 @@ msgstr ""
 "NAMA\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Nama pengguna    Port     Dari             Terakhir\n"
+msgid "Username         Port     From             Latest"
+msgstr "Nama pengguna    Port     Dari             Terakhir"
 
-msgid "Username                Port     Latest\n"
-msgstr "Nama pengguna           Port     Terakhir\n"
+msgid "Username                Port     Latest"
+msgstr "Nama pengguna           Port     Terakhir"
 
 msgid "**Never logged in**"
 msgstr "**Tak pernah log in**"
@@ -1078,22 +1078,22 @@ msgstr "            %s [-p] [-h host] [-f nama]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "            %s [-p] -r host\n"
 
-msgid "Invalid login time\n"
-msgstr "Waktu login tidak sah\n"
+msgid "Invalid login time"
+msgstr "Waktu login tidak sah"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Sistem ditutup untuk pengelolaan rutin\n"
+"Sistem ditutup untuk pengelolaan rutin"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Pemutusan hubungan diabaikan -- login root diperbolehkan.]\n"
+"[Pemutusan hubungan diabaikan -- login root diperbolehkan.]"
 
 #, c-format
 msgid ""
@@ -1149,8 +1149,8 @@ msgstr "%s: gagal membuat proses: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Perhatian: login dibolehkan setelah penguncian sementara.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Perhatian: login dibolehkan setelah penguncian sementara."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1332,15 +1332,15 @@ msgstr ""
 msgid "New password: "
 msgstr "kata sandi baru: "
 
-msgid "Try again.\n"
-msgstr "Coba lagi.\n"
+msgid "Try again."
+msgstr "Coba lagi."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Kata sandi lemah (masukkan lagi untuk tetap menggunakannya).\n"
+"Kata sandi lemah (masukkan lagi untuk tetap menggunakannya)."
 
 msgid "They don't match; try again.\n"
 msgstr "Kata sandi tidak sama; coba lagi.\n"
@@ -1379,21 +1379,21 @@ msgstr "Mengganti kata sandi untuk %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Kata sandi untuk %s tidak diubah.\n"
 
-msgid "Password changed.\n"
-msgstr "Password telah diubah.\n"
+msgid "Password changed."
+msgstr "Password telah diubah."
 
-msgid "Password set to expire.\n"
-msgstr "Kata sandi dibuat kadaluarsa.\n"
+msgid "Password set to expire."
+msgstr "Kata sandi dibuat kadaluarsa."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Penggunaan: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "entri kata sandi tak sah\n"
+msgid "invalid password file entry"
+msgstr "entri kata sandi tak sah"
 
-msgid "duplicate password entry\n"
-msgstr "entri kata sandi berduplikat\n"
+msgid "duplicate password entry"
+msgstr "entri kata sandi berduplikat"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1423,11 +1423,11 @@ msgstr "grup bayangan %s: tak ada pengguna %s\n"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: tak dapat menghapus entri passwd untuk %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "entri kata sandi bayangan tak sah\n"
+msgid "invalid shadow password file entry"
+msgstr "entri kata sandi bayangan tak sah"
 
-msgid "duplicate shadow password entry\n"
-msgstr "entri kata sandi bayangan terduplikasi\n"
+msgid "duplicate shadow password entry"
+msgstr "entri kata sandi bayangan terduplikasi"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1532,14 +1532,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Tak ada shell\n"
 
-msgid "No password file\n"
-msgstr "Tak ada berkas kata sandi\n"
+msgid "No password file"
+msgstr "Tak ada berkas kata sandi"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Tak ada entri kata sandi untuk 'root'\n"
+msgid "No password entry for 'root'"
+msgstr "Tak ada entri kata sandi untuk 'root'"
 
 msgid ""
 "\n"
@@ -1550,8 +1550,8 @@ msgstr ""
 "Ketikkan control-d untuk melanjutkan startup normal,\n"
 "(atau berikan kata sandi root untuk pengelolaan sistem):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Memasuki Mode Pengelolaan Sistem\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Memasuki Mode Pengelolaan Sistem"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

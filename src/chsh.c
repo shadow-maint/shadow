@@ -99,7 +99,7 @@ static void usage (void)
  */
 static void new_fields (void)
 {
-	puts (_("Enter the new value, or press ENTER for the default\n"));
+	puts (_("Enter the new value, or press ENTER for the default"));
 	change_field (loginsh, sizeof loginsh, _("Login Shell"));
 }
 

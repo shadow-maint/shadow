@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -48,21 +48,21 @@ msgstr "Passordet ditt er inaktivt."
 msgid "Your login has expired."
 msgstr "Innlogginga di er utgått."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Ta kontakt med systemadministrator.\n"
+msgid "  Contact the system administrator."
+msgstr "  Ta kontakt med systemadministrator."
 
-msgid "  Choose a new password.\n"
-msgstr "  Lag eit nytt passord.\n"
+msgid "  Choose a new password."
+msgstr "  Lag eit nytt passord."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Passordet ditt vil utgå om %ld dagar.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Passordet ditt vil utgå i morgon.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Passordet ditt vil utgå i morgon."
 
-msgid "Your password will expire today.\n"
-msgstr "Passordet ditt vil utgå i dag.\n"
+msgid "Your password will expire today."
+msgstr "Passordet ditt vil utgå i dag."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -199,8 +199,8 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Skriv inn den nye verdien eller trykk Enter for standard\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Skriv inn den nye verdien eller trykk Enter for standard"
 
 msgid "Minimum Password Age"
 msgstr "Minimum alder på passord"
@@ -225,11 +225,11 @@ msgid "Last password change\t\t\t\t\t: "
 msgstr "Førre passordendring (ÅÅÅÅ-MM-DD)"
 
 #, fuzzy
-msgid "never\n"
-msgstr "Aldri\n"
+msgid "never"
+msgstr "Aldri"
 
-msgid "password must be changed\n"
-msgstr "Passord er endra\n"
+msgid "password must be changed"
+msgstr "Passord er endra"
 
 #, fuzzy
 msgid "Password expires\t\t\t\t\t: "
@@ -867,15 +867,15 @@ msgstr "%s: klarer ikkje opna fila %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: klarer ikkje oppdatere fila %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "ugyldig oppføring for gruppefil\n"
+msgid "invalid group file entry"
+msgstr "ugyldig oppføring for gruppefil"
 
 #, fuzzy, c-format
 msgid "delete line '%s'? "
 msgstr "slett linja «%s»? "
 
-msgid "duplicate group entry\n"
-msgstr "duplisert gruppeoppføring\n"
+msgid "duplicate group entry"
+msgstr "duplisert gruppeoppføring"
 
 #, fuzzy, c-format
 msgid "invalid group name '%s'\n"
@@ -905,11 +905,11 @@ msgstr "%s: klarer ikkje oppdatere skuggeoppføring for %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: klarer ikkje oppdatere oppføring for gruppa %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "ugyldig oppføring av skuggegruppefil\n"
+msgid "invalid shadow group file entry"
+msgstr "ugyldig oppføring av skuggegruppefil"
 
-msgid "duplicate shadow group entry\n"
-msgstr "duplisert oppføring for skuggegruppe\n"
+msgid "duplicate shadow group entry"
+msgstr "duplisert oppføring for skuggegruppe"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -976,11 +976,11 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Brukarnamn       Port     Frå              Siste\n"
+msgid "Username         Port     From             Latest"
+msgstr "Brukarnamn       Port     Frå              Siste"
 
-msgid "Username                Port     Latest\n"
-msgstr "Brukarnamn              Port     Siste\n"
+msgid "Username                Port     Latest"
+msgstr "Brukarnamn              Port     Siste"
 
 msgid "**Never logged in**"
 msgstr "**Aldri vore innlogga**"
@@ -1005,22 +1005,22 @@ msgstr "      %s [-p] [-h vert] [-f namn]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "      %s [-p] -r vert\n"
 
-msgid "Invalid login time\n"
-msgstr "Ugyldig innloggingstid\n"
+msgid "Invalid login time"
+msgstr "Ugyldig innloggingstid"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Systemet stengt for rutinemessig vedlikehald\n"
+"Systemet stengt for rutinemessig vedlikehald"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Fråkopling omgått -- innlogging av root er tillete.]\n"
+"[Fråkopling omgått -- innlogging av root er tillete.]"
 
 #, c-format
 msgid ""
@@ -1080,9 +1080,9 @@ msgstr ""
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
-"Åtvaring: innlogging gjort mogeleg igjen etter mellombels utestenging.\n"
+"Åtvaring: innlogging gjort mogeleg igjen etter mellombels utestenging."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1235,16 +1235,16 @@ msgstr ""
 msgid "New password: "
 msgstr "Nytt passord: "
 
-msgid "Try again.\n"
-msgstr "Prøv igjen.\n"
+msgid "Try again."
+msgstr "Prøv igjen."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
 "Åtvaring: Svakt passord (skriv det inn ein gong til for å bruka det "
-"likevel).\n"
+"likevel)."
 
 msgid "They don't match; try again.\n"
 msgstr "Passorda er ikkje like, prøv igjen.\n"
@@ -1283,22 +1283,22 @@ msgstr "Enrar passord for %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Passordet til %s er ikkje endra.\n"
 
-msgid "Password changed.\n"
-msgstr "Passord er endra.\n"
+msgid "Password changed."
+msgstr "Passord er endra."
 
 #, fuzzy
-msgid "Password set to expire.\n"
+msgid "Password set to expire."
 msgstr "Passordet ditt er utgått."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Bruk: %s [-q] [-r] [-s] [passord [skugge]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "Ugyldig oppføring i passordfila\n"
+msgid "invalid password file entry"
+msgstr "Ugyldig oppføring i passordfila"
 
-msgid "duplicate password entry\n"
-msgstr "duplisert oppføring i passordfila\n"
+msgid "duplicate password entry"
+msgstr "duplisert oppføring i passordfila"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1328,11 +1328,11 @@ msgstr "skuggegruppe %s: ingen brukar %s\n"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: klarer ikkje oppdatere oppføring i passordfila for %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "ugyldig oppføring i skuggepassordfila\n"
+msgid "invalid shadow password file entry"
+msgstr "ugyldig oppføring i skuggepassordfila"
 
-msgid "duplicate shadow password entry\n"
-msgstr "duplisert oppføring i skuggepassordfila\n"
+msgid "duplicate shadow password entry"
+msgstr "duplisert oppføring i skuggepassordfila"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1423,14 +1423,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Ingen skal\n"
 
-msgid "No password file\n"
-msgstr "Inga passordfil\n"
+msgid "No password file"
+msgstr "Inga passordfil"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Inga passordoppføring for «root»\n"
+msgid "No password entry for 'root'"
+msgstr "Inga passordoppføring for «root»"
 
 msgid ""
 "\n"
@@ -1441,8 +1441,8 @@ msgstr ""
 "Trykk Ctrl-d for å halda fram med normal oppstart,\n"
 "(eller oppgje root-passord for systemvedlikehald):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Startar modus for systemvedlikehald\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Startar modus for systemvedlikehald"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

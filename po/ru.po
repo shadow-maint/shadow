@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1:4.0.18.2-1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-26 20:19+0100\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -52,21 +52,21 @@ msgstr "Действие вашего пароля приостановлено.
 msgid "Your login has expired."
 msgstr "Срок действия вашей учётной записи истёк."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Обратитесь к системному администратору.\n"
+msgid "  Contact the system administrator."
+msgstr "  Обратитесь к системному администратору."
 
-msgid "  Choose a new password.\n"
-msgstr "  Выберите и введите новый пароль.\n"
+msgid "  Choose a new password."
+msgstr "  Выберите и введите новый пароль."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Срок действия вашего пароля истекает через %ld дней.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Срок действия вашего пароля истекает завтра.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Срок действия вашего пароля истекает завтра."
 
-msgid "Your password will expire today.\n"
-msgstr "Срок действия вашего пароля истекает сегодня.\n"
+msgid "Your password will expire today."
+msgstr "Срок действия вашего пароля истекает сегодня."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -226,9 +226,9 @@ msgstr ""
 "                                предупреждения в WARN_DAYS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
+msgid "Enter the new value, or press ENTER for the default"
 msgstr ""
-"Введите новое значение или нажмите ВВОД для выбора значения по умолчанию\n"
+"Введите новое значение или нажмите ВВОД для выбора значения по умолчанию"
 
 msgid "Minimum Password Age"
 msgstr "Минимальный срок действия пароля (дней)"
@@ -251,11 +251,11 @@ msgstr "Дата истечения срока действия учётной �
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Последний раз пароль был изменён\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "никогда\n"
+msgid "never"
+msgstr "никогда"
 
-msgid "password must be changed\n"
-msgstr "пароль должен быть изменён\n"
+msgid "password must be changed"
+msgstr "пароль должен быть изменён"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Срок действия пароля истекает\t\t\t\t\t: "
@@ -944,15 +944,15 @@ msgstr "%s: не удалось открыть файл %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: не удалось обновить файл %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "неверная запись в файле групп\n"
+msgid "invalid group file entry"
+msgstr "неверная запись в файле групп"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "удалить строку '%s'? "
 
-msgid "duplicate group entry\n"
-msgstr "повторяющаяся запись в файле групп\n"
+msgid "duplicate group entry"
+msgstr "повторяющаяся запись в файле групп"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -982,11 +982,11 @@ msgstr "%s: не удалось обновить запись в теневом 
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: не удалось обновить запись для группы %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "неверная запись в теневом файле групп\n"
+msgid "invalid shadow group file entry"
+msgstr "неверная запись в теневом файле групп"
 
-msgid "duplicate shadow group entry\n"
-msgstr "повторяющаяся запись в теневом файле групп\n"
+msgid "duplicate shadow group entry"
+msgstr "повторяющаяся запись в теневом файле групп"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1061,11 +1061,11 @@ msgstr ""
 "  -u, --user ИМЯ        показать запись lastlog для учётной записи ИМЯ\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Пользователь     Порт     С                Последний раз\n"
+msgid "Username         Port     From             Latest"
+msgstr "Пользователь     Порт     С                Последний раз"
 
-msgid "Username                Port     Latest\n"
-msgstr "Пользователь            Порт     Последний раз\n"
+msgid "Username                Port     Latest"
+msgstr "Пользователь            Порт     Последний раз"
 
 msgid "**Never logged in**"
 msgstr "**Никогда не входил в систему**"
@@ -1090,22 +1090,22 @@ msgstr "                    %s [-p] [-h имя хоста] [-f имя польз
 msgid "       %s [-p] -r host\n"
 msgstr "                    %s [-p] -r имя хоста\n"
 
-msgid "Invalid login time\n"
-msgstr "Вход в систему сейчас запрещён\n"
+msgid "Invalid login time"
+msgstr "Вход в систему сейчас запрещён"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Система закрыта для проведения технического обслуживания\n"
+"Система закрыта для проведения технического обслуживания"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Отключение не выполнено -- вход в систему для суперпользователя разрешён.]\n"
+"[Отключение не выполнено -- вход в систему для суперпользователя разрешён.]"
 
 #, c-format
 msgid ""
@@ -1161,8 +1161,8 @@ msgstr "%s: ошибка при вызове fork: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Внимание: вход в систему снова возможен.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Внимание: вход в систему снова возможен."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1343,16 +1343,16 @@ msgstr ""
 msgid "New password: "
 msgstr "Новый пароль: "
 
-msgid "Try again.\n"
-msgstr "Попробуйте ещё раз.\n"
+msgid "Try again."
+msgstr "Попробуйте ещё раз."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
 "Внимание: слишком простой пароль (чтобы всё равно использовать этот пароль, "
-"введите его ещё раз).\n"
+"введите его ещё раз)."
 
 msgid "They don't match; try again.\n"
 msgstr "Пароли не совпадают, попробуйте ещё раз.\n"
@@ -1391,22 +1391,22 @@ msgstr "Изменение пароля для %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Пароль для %s не был изменён.\n"
 
-msgid "Password changed.\n"
-msgstr "Пароль изменён.\n"
+msgid "Password changed."
+msgstr "Пароль изменён."
 
-msgid "Password set to expire.\n"
-msgstr "Срок действия пароля истёк.\n"
+msgid "Password set to expire."
+msgstr "Срок действия пароля истёк."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 "Использование: %s [-q] [-r] [-s] [файл паролей [теневой файл паролей]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "неверная запись в файле паролей\n"
+msgid "invalid password file entry"
+msgstr "неверная запись в файле паролей"
 
-msgid "duplicate password entry\n"
-msgstr "повторяющаяся запись в файле паролей\n"
+msgid "duplicate password entry"
+msgstr "повторяющаяся запись в файле паролей"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1436,11 +1436,11 @@ msgstr "добавить пользователя '%s' в %s ? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: не удалось обновить запись в файле паролей для %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "неверная запись в теневом файле паролей\n"
+msgid "invalid shadow password file entry"
+msgstr "неверная запись в теневом файле паролей"
 
-msgid "duplicate shadow password entry\n"
-msgstr "повторяющаяся запись в теневом файле паролей\n"
+msgid "duplicate shadow password entry"
+msgstr "повторяющаяся запись в теневом файле паролей"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1545,14 +1545,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Отсутствует командная оболочка\n"
 
-msgid "No password file\n"
-msgstr "Отсутствует файл паролей\n"
+msgid "No password file"
+msgstr "Отсутствует файл паролей"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Отсутствует запись для суперпользователя в файле паролей\n"
+msgid "No password entry for 'root'"
+msgstr "Отсутствует запись для суперпользователя в файле паролей"
 
 msgid ""
 "\n"
@@ -1564,8 +1564,8 @@ msgstr ""
 "(или введите пароль суперпользователя для выполнения системного "
 "обслуживания):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Вход в режим системного обслуживания\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Вход в режим системного обслуживания"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

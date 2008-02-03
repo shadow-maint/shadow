@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2008-02-03 07:19+0100\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -52,21 +52,21 @@ msgstr "Votre mot de passe est désactivé."
 msgid "Your login has expired."
 msgstr "Votre compte est arrivé en fin de validité."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Contactez l'administrateur du système.\n"
+msgid "  Contact the system administrator."
+msgstr "  Contactez l'administrateur du système."
 
-msgid "  Choose a new password.\n"
-msgstr "  Choisissez un nouveau mot de passe.\n"
+msgid "  Choose a new password."
+msgstr "  Choisissez un nouveau mot de passe."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Votre mot de passe arrivera en fin de validité dans %ld jours.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Votre mot de passe arrivera demain en fin de validité.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Votre mot de passe arrivera demain en fin de validité."
 
-msgid "Your password will expire today.\n"
-msgstr "Votre mot de passe arrive aujourd'hui en fin de validité.\n"
+msgid "Your password will expire today."
+msgstr "Votre mot de passe arrive aujourd'hui en fin de validité."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -226,8 +226,8 @@ msgstr ""
 "                                de fin de validité à JOURS_AVERT\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Entrez la nouvelle valeur ou « Entrée » pour conserver la valeur proposée\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Entrez la nouvelle valeur ou « Entrée » pour conserver la valeur proposée"
 
 msgid "Minimum Password Age"
 msgstr "Durée minimale de validité du mot de passe"
@@ -250,11 +250,11 @@ msgstr "Date de fin de validité du compte (AAAA-MM-JJ)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Dernier changement de mot de passe\t\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "jamais\n"
+msgid "never"
+msgstr "jamais"
 
-msgid "password must be changed\n"
-msgstr "Le mot de passe doit être changé\n"
+msgid "password must be changed"
+msgstr "Le mot de passe doit être changé"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Fin de validité du mot de passe\t\t\t\t\t\t\t: "
@@ -972,15 +972,15 @@ msgstr "%s : impossible d'ouvrir le fichier %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s : impossible de mettre à jour le fichier %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "entrée non valable dans le fichier /etc/group\n"
+msgid "invalid group file entry"
+msgstr "entrée non valable dans le fichier /etc/group"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "effacer la ligne « %s » ? "
 
-msgid "duplicate group entry\n"
-msgstr "entrée de groupe dupliquée\n"
+msgid "duplicate group entry"
+msgstr "entrée de groupe dupliquée"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -1010,11 +1010,11 @@ msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/group\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/gshadow\n"
+msgid "invalid shadow group file entry"
+msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/gshadow"
 
-msgid "duplicate shadow group entry\n"
-msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/gshadow\n"
+msgid "duplicate shadow group entry"
+msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/gshadow"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1098,11 +1098,11 @@ msgstr ""
 "                                l'utilisateur dont le compte est LOGIN\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Utilisateur      Port     Venant de        Dernière\n"
+msgid "Username         Port     From             Latest"
+msgstr "Utilisateur      Port     Venant de        Dernière"
 
-msgid "Username                Port     Latest\n"
-msgstr "Utilisateur             Port     Dernière\n"
+msgid "Username                Port     Latest"
+msgstr "Utilisateur             Port     Dernière"
 
 msgid "**Never logged in**"
 msgstr "**Jamais connecté**"
@@ -1127,22 +1127,22 @@ msgstr "       %s [-p] [-h hôte] [-f nom]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r hôte\n"
 
-msgid "Invalid login time\n"
-msgstr "Heure de connexion non valable\n"
+msgid "Invalid login time"
+msgstr "Heure de connexion non valable"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Système fermé pour maintenance\n"
+"Système fermé pour maintenance"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Déconnexion court-circuitée -- accès superutilisateur autorisé].\n"
+"[Déconnexion court-circuitée -- accès superutilisateur autorisé]."
 
 #, c-format
 msgid ""
@@ -1198,10 +1198,10 @@ msgstr "%s : échec lors du clonage (« forking » : %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr "échec de TIOCSCTTY sur %s"
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
 "Attention : identifiant de connexion réactivé après une désactivation "
-"temporaire.\n"
+"temporaire."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1381,16 +1381,16 @@ msgstr ""
 msgid "New password: "
 msgstr "Nouveau mot de passe : "
 
-msgid "Try again.\n"
-msgstr "Réessayez...\n"
+msgid "Try again."
+msgstr "Réessayez..."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
 "Attention : mot de passe trop simple (entrez-le à nouveau pour l'utiliser\n"
-"quand même).\n"
+"quand même)."
 
 msgid "They don't match; try again.\n"
 msgstr "Mots de passe différents, recommencez...\n"
@@ -1431,21 +1431,21 @@ msgstr "Changement du mot de passe de %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Le mot de passe pour %s est inchangé.\n"
 
-msgid "Password changed.\n"
-msgstr "Mot de passe changé.\n"
+msgid "Password changed."
+msgstr "Mot de passe changé."
 
-msgid "Password set to expire.\n"
-msgstr "Le mot de passe est configuré pour une validité limitée.\n"
+msgid "Password set to expire."
+msgstr "Le mot de passe est configuré pour une validité limitée."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Syntaxe : %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "entrée non valable dans le fichier des mots de passe\n"
+msgid "invalid password file entry"
+msgstr "entrée non valable dans le fichier des mots de passe"
 
-msgid "duplicate password entry\n"
-msgstr "entrée dupliquée dans le fichier des mots de passe\n"
+msgid "duplicate password entry"
+msgstr "entrée dupliquée dans le fichier des mots de passe"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1475,11 +1475,11 @@ msgstr "ajouter l'utilisateur « %s » dans %s ? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s : impossible de mettre à jour l'entrée %s dans /etc/shadow\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/shadow\n"
+msgid "invalid shadow password file entry"
+msgstr "entrée non valable dans le fichier des mots de passe cachés /etc/shadow"
 
-msgid "duplicate shadow password entry\n"
-msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/shadow\n"
+msgid "duplicate shadow password entry"
+msgstr "entrée dupliquée dans le fichier des mots de passe cachés /etc/shadow"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1588,14 +1588,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Pas d'interpréteur de commandes\n"
 
-msgid "No password file\n"
-msgstr "Pas de fichier des mots de passe\n"
+msgid "No password file"
+msgstr "Pas de fichier des mots de passe"
 
 msgid "TIOCSCTTY failed"
 msgstr "échec de TIOCSCTTY"
 
-msgid "No password entry for 'root'\n"
-msgstr "Pas de mot de passe pour « root »\n"
+msgid "No password entry for 'root'"
+msgstr "Pas de mot de passe pour « root »"
 
 msgid ""
 "\n"
@@ -1607,8 +1607,8 @@ msgstr ""
 "(ou donnez le mot de passe du superutilisateur pour la maintenance du "
 "système) :"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Entrée dans le mode de maintenance du système\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Entrée dans le mode de maintenance du système"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
@@ -1693,6 +1693,8 @@ msgstr ""
 "  -k, --skel REP_SQEL           définir un autre répertoire « skel »\n"
 "  -K, --key CLÉ=VALEUR          remplacer les valeurs par défaut de\n"
 "                                /etc/login.defs\n"
+"  -l,                           ne pas ajouter l'utilisateur aux bases de\n"
+"                                données lastlog et faillog\n"
 "  -m, --create-home             créer le répertoire personnel pour le\n"
 "                                compte du nouvel utilisateur\n"
 "  -o, --non-unique              autoriser la création d'un utilisateur\n"
@@ -2115,4 +2117,3 @@ msgstr "Impossible d'effectuer une sauvegarde"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s : impossible de restaurer %s : %s (vos modifications sont dans %s)\n"
-

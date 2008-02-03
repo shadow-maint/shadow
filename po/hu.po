@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -47,21 +47,21 @@ msgstr "A jelszó inaktív"
 msgid "Your login has expired."
 msgstr "A bejelentkezés lejárt"
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Fordulj a rendszergazdához.\n"
+msgid "  Contact the system administrator."
+msgstr "  Fordulj a rendszergazdához."
 
-msgid "  Choose a new password.\n"
-msgstr "  Adj új jelszót\n"
+msgid "  Choose a new password."
+msgstr "  Adj új jelszót"
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "A jelszó %ld nap múlva lejár.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Jelszavad már csak holnapig érvényes\n"
+msgid "Your password will expire tomorrow."
+msgstr "Jelszavad már csak holnapig érvényes"
 
-msgid "Your password will expire today.\n"
-msgstr "Jelszavad érvényessége ma lejár\n"
+msgid "Your password will expire today."
+msgstr "Jelszavad érvényessége ma lejár"
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -219,8 +219,8 @@ msgstr ""
 "                                   számának beállítása FIGYELM_NAPOK-ra\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Add meg az új értéket vagy üss ENTER-t az alapértelmezetthez\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Add meg az új értéket vagy üss ENTER-t az alapértelmezetthez"
 
 msgid "Minimum Password Age"
 msgstr "Minimum jelszó-kor"
@@ -243,11 +243,11 @@ msgstr "Hozzáférés elévülési dátum (ÉÉÉÉ-HH-NN)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Utolsó jelszóváltás\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "soha\n"
+msgid "never"
+msgstr "soha"
 
-msgid "password must be changed\n"
-msgstr "jelszóváltás kötelező\n"
+msgid "password must be changed"
+msgstr "jelszóváltás kötelező"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Jelszó lejár\t\t\t\t\t: "
@@ -939,15 +939,15 @@ msgstr "%s: %s fájl nem nyitható meg\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: %s fájl nem frissíthető\n"
 
-msgid "invalid group file entry\n"
-msgstr "érvénytelen csoport fájl bejegyzés\n"
+msgid "invalid group file entry"
+msgstr "érvénytelen csoport fájl bejegyzés"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "törlöd a következő sort: `%s'? "
 
-msgid "duplicate group entry\n"
-msgstr "dupla csoport bejegyzés\n"
+msgid "duplicate group entry"
+msgstr "dupla csoport bejegyzés"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -977,11 +977,11 @@ msgstr "%s: nem tudom frissíteni %s árnyék bejegyzését\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: nem tudom frissíteni %s csoport bejegyzését\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "érvénytelen árnyék csoport fájl bejegyzés\n"
+msgid "invalid shadow group file entry"
+msgstr "érvénytelen árnyék csoport fájl bejegyzés"
 
-msgid "duplicate shadow group entry\n"
-msgstr "dupla árnyék csoport bejegyzés\n"
+msgid "duplicate shadow group entry"
+msgstr "dupla árnyék csoport bejegyzés"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1059,11 +1059,11 @@ msgstr ""
 "                                rekordjainak kiírása\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Felhasználónév   Port     Innen            Legutóbb\n"
+msgid "Username         Port     From             Latest"
+msgstr "Felhasználónév   Port     Innen            Legutóbb"
 
-msgid "Username                Port     Latest\n"
-msgstr "Felhasználónév          Port     Legutóbb\n"
+msgid "Username                Port     Latest"
+msgstr "Felhasználónév          Port     Legutóbb"
 
 msgid "**Never logged in**"
 msgstr "**Sosem lépett be**"
@@ -1088,22 +1088,22 @@ msgstr "       %s [-p] [-h host] [-f név]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r host\n"
 
-msgid "Invalid login time\n"
-msgstr "Érvénytelen bejelentkezési idő\n"
+msgid "Invalid login time"
+msgstr "Érvénytelen bejelentkezési idő"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Rendszer lezárva rutin karbantartásra\n"
+"Rendszer lezárva rutin karbantartásra"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Leválasztás átlépve -- root bejelentkezés engedélyezett]\n"
+"[Leválasztás átlépve -- root bejelentkezés engedélyezett]"
 
 #, c-format
 msgid ""
@@ -1159,8 +1159,8 @@ msgstr "%s: hiba a következő indításakor: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Figyelem: a bejelentkezés ismét lehetséges az átmeneti kizárás után.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Figyelem: a bejelentkezés ismét lehetséges az átmeneti kizárás után."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1337,15 +1337,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Új jelszó: "
 
-msgid "Try again.\n"
-msgstr "Próbáld újra\n"
+msgid "Try again."
+msgstr "Próbáld újra"
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Figyelem: Gyenge jelszó! (add meg újra, ha tényleg ezt akarod).\n"
+"Figyelem: Gyenge jelszó! (add meg újra, ha tényleg ezt akarod)."
 
 msgid "They don't match; try again.\n"
 msgstr "Nem egyeznek; próbáld újra\n"
@@ -1384,21 +1384,21 @@ msgstr "%s jelszavának cseréje\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s jelszava változatlan.\n"
 
-msgid "Password changed.\n"
-msgstr "Jelszó módosítva.\n"
+msgid "Password changed."
+msgstr "Jelszó módosítva."
 
-msgid "Password set to expire.\n"
-msgstr "Jelszó lejárata beállítva.\n"
+msgid "Password set to expire."
+msgstr "Jelszó lejárata beállítva."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Használat: %s [-q] [-r] [-s] [jelszó [árnyék]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "Érvénytelen jelszófájl bejegyzés\n"
+msgid "invalid password file entry"
+msgstr "Érvénytelen jelszófájl bejegyzés"
 
-msgid "duplicate password entry\n"
-msgstr "dupla jelszó bejegyzés\n"
+msgid "duplicate password entry"
+msgstr "dupla jelszó bejegyzés"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1428,11 +1428,11 @@ msgstr "hozzáadja \"%s\" felhasználót a következőbe: %s? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: nem tudom frissíteni %s jelszó bejegyzését\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "érvénytelen árnyék jelszófájl bejegyzés\n"
+msgid "invalid shadow password file entry"
+msgstr "érvénytelen árnyék jelszófájl bejegyzés"
 
-msgid "duplicate shadow password entry\n"
-msgstr "dupla árnyék jelszó bejegyzés\n"
+msgid "duplicate shadow password entry"
+msgstr "dupla árnyék jelszó bejegyzés"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1536,14 +1536,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Nincs héj\n"
 
-msgid "No password file\n"
-msgstr "Nincs jelszófájl\n"
+msgid "No password file"
+msgstr "Nincs jelszófájl"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Nincs 'root' jelszó bejegyzés\n"
+msgid "No password entry for 'root'"
+msgstr "Nincs 'root' jelszó bejegyzés"
 
 msgid ""
 "\n"
@@ -1554,8 +1554,8 @@ msgstr ""
 "Üsd le a control-d a szokásos indítás továbblépéséhez\n"
 "(vagy add meg a root jelszót a rendszer karbantartásához):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Belépés a rendszerkarbantartó módba\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Belépés a rendszerkarbantartó módba"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

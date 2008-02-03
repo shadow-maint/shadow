@@ -161,7 +161,7 @@ static int may_change_field (int field)
  */
 static void new_fields (void)
 {
-	puts (_("Enter the new value, or press ENTER for the default\n"));
+	puts (_("Enter the new value, or press ENTER for the default"));
 
 	if (may_change_field ('f')) {
 		change_field (fullnm, sizeof fullnm, _("Full Name"));

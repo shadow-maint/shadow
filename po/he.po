@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -49,21 +49,21 @@ msgstr "הסיסמה שלך אינה פעילה."
 msgid "Your login has expired."
 msgstr "תוקף הכניסה שלך למערכת פג."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  צור קשר עם מנהל המערכת.\n"
+msgid "  Contact the system administrator."
+msgstr "  צור קשר עם מנהל המערכת."
 
-msgid "  Choose a new password.\n"
-msgstr "  בחר סיסמה חדשה.\n"
+msgid "  Choose a new password."
+msgstr "  בחר סיסמה חדשה."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "תוקף הסיסמה שלך יפוג בתוך %ld ימים.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "תוקף הסיסמה שלך יפוג מחר.\n"
+msgid "Your password will expire tomorrow."
+msgstr "תוקף הסיסמה שלך יפוג מחר."
 
-msgid "Your password will expire today.\n"
-msgstr "תוקף הסיסמה שלך פג היום.\n"
+msgid "Your password will expire today."
+msgstr "תוקף הסיסמה שלך פג היום."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -199,8 +199,8 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "הכנס ערך חדש, או לחץ ENTER לברירת המחדל\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "הכנס ערך חדש, או לחץ ENTER לברירת המחדל"
 
 msgid "Minimum Password Age"
 msgstr "גיל סיסמה מינימלי"
@@ -225,10 +225,10 @@ msgid "Last password change\t\t\t\t\t: "
 msgstr "שינוי סיסמה אחרון (YYYY-MM-DD)"
 
 #, fuzzy
-msgid "never\n"
-msgstr "אף פעם\n"
+msgid "never"
+msgstr "אף פעם"
 
-msgid "password must be changed\n"
+msgid "password must be changed"
 msgstr ""
 
 #, fuzzy
@@ -864,15 +864,17 @@ msgstr ""
 msgid "%s: cannot update file %s\n"
 msgstr ""
 
-msgid "invalid group file entry\n"
-msgstr ""
+#, fuzzy
+msgid "invalid group file entry"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr ""
 
-msgid "duplicate group entry\n"
-msgstr ""
+#, fuzzy
+msgid "duplicate group entry"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, fuzzy, c-format
 msgid "invalid group name '%s'\n"
@@ -902,11 +904,13 @@ msgstr ""
 msgid "%s: can't update entry for group %s\n"
 msgstr ""
 
-msgid "invalid shadow group file entry\n"
-msgstr ""
+#, fuzzy
+msgid "invalid shadow group file entry"
+msgstr "%s: שגיאה בעדכון קובץ צל\n"
 
-msgid "duplicate shadow group entry\n"
-msgstr ""
+#, fuzzy
+msgid "duplicate shadow group entry"
+msgstr "%s: שגיאה בעדכון קובץ צל\n"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -973,10 +977,10 @@ msgid ""
 "\n"
 msgstr ""
 
-msgid "Username         Port     From             Latest\n"
+msgid "Username         Port     From             Latest"
 msgstr ""
 
-msgid "Username                Port     Latest\n"
+msgid "Username                Port     Latest"
 msgstr ""
 
 msgid "**Never logged in**"
@@ -1002,17 +1006,17 @@ msgstr ""
 msgid "       %s [-p] -r host\n"
 msgstr ""
 
-msgid "Invalid login time\n"
+msgid "Invalid login time"
 msgstr ""
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 
 #, c-format
@@ -1065,7 +1069,7 @@ msgstr ""
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
 
 #, c-format
@@ -1215,12 +1219,12 @@ msgstr ""
 msgid "New password: "
 msgstr ""
 
-msgid "Try again.\n"
+msgid "Try again."
 msgstr ""
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 
 msgid "They don't match; try again.\n"
@@ -1260,22 +1264,25 @@ msgstr ""
 msgid "The password for %s is unchanged.\n"
 msgstr ""
 
-msgid "Password changed.\n"
-msgstr ""
+#, fuzzy
+msgid "Password changed."
+msgstr "סיסמה: "
 
 #, fuzzy
-msgid "Password set to expire.\n"
+msgid "Password set to expire."
 msgstr "תוקף הסיסמה שלך פג."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr ""
 
-msgid "invalid password file entry\n"
-msgstr ""
+#, fuzzy
+msgid "invalid password file entry"
+msgstr "לא יכול לנעול קובץ סיסמאות; נסה שוב מאוחר יותר"
 
-msgid "duplicate password entry\n"
-msgstr ""
+#, fuzzy
+msgid "duplicate password entry"
+msgstr "שגיאה בעדכון רשומת הסיסמה."
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1305,11 +1312,13 @@ msgstr ""
 msgid "%s: can't update passwd entry for %s\n"
 msgstr ""
 
-msgid "invalid shadow password file entry\n"
-msgstr ""
+#, fuzzy
+msgid "invalid shadow password file entry"
+msgstr "%s: לא יכול לנעול קובץ סיסמאות צל"
 
-msgid "duplicate shadow password entry\n"
-msgstr ""
+#, fuzzy
+msgid "duplicate shadow password entry"
+msgstr "%s: לא יכול לעדכן קובץ סיסמאות צל"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1398,13 +1407,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr ""
 
-msgid "No password file\n"
-msgstr ""
+#, fuzzy
+msgid "No password file"
+msgstr "  בחר סיסמה חדשה.\n"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
+msgid "No password entry for 'root'"
 msgstr ""
 
 msgid ""
@@ -1413,7 +1423,7 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 
-msgid "Entering System Maintenance Mode\n"
+msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, fuzzy, c-format

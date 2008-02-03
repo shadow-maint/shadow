@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2006-07-22 00:05+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -48,21 +48,21 @@ msgstr "열쇠글이 사용기간 초과로 비활성화 되었습니다."
 msgid "Your login has expired."
 msgstr "로그인 사용기한이 지났습니다."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  시스템 관리자와 상담하십시오.\n"
+msgid "  Contact the system administrator."
+msgstr "  시스템 관리자와 상담하십시오."
 
-msgid "  Choose a new password.\n"
-msgstr "  새로운 열쇠글를 선택하십시오.\n"
+msgid "  Choose a new password."
+msgstr "  새로운 열쇠글를 선택하십시오."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "열쇠글 사용기한이 %ld일 후에 끝납니다.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "열쇠글 사용기한이 내일 끝납니다.\n"
+msgid "Your password will expire tomorrow."
+msgstr "열쇠글 사용기한이 내일 끝납니다."
 
-msgid "Your password will expire today.\n"
-msgstr "열쇠글 사용기한이 오늘 끝납니다.\n"
+msgid "Your password will expire today."
+msgstr "열쇠글 사용기한이 오늘 끝납니다."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -216,8 +216,8 @@ msgstr ""
 "  -W, --warndays <경고날수>\t만료 경고 기간을 <경고날수>으로 합니다.\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "새로운 값을 넣거나, 기본값을 원하시면 엔터를 치세요\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "새로운 값을 넣거나, 기본값을 원하시면 엔터를 치세요"
 
 msgid "Minimum Password Age"
 msgstr "열쇠글의 최소 유효 기간"
@@ -240,11 +240,11 @@ msgstr "계정 사용만료일(YYYY-MM-DD)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "마지막으로 열쇠글을 바꾼 날\t\t\t\t\t:"
 
-msgid "never\n"
-msgstr "안함\n"
+msgid "never"
+msgstr "안함"
 
-msgid "password must be changed\n"
-msgstr "열쇠글을 바꿔야 합니다\n"
+msgid "password must be changed"
+msgstr "열쇠글을 바꿔야 합니다"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "열쇠글 만료\t\t\t\t\t:"
@@ -929,15 +929,15 @@ msgstr "%s: %s 파일을 열 수 없습니다\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: %s 파일을 업데이트 할 수 없습니다\n"
 
-msgid "invalid group file entry\n"
-msgstr "허용되지 않는 그룹 파일 입력값입니다\n"
+msgid "invalid group file entry"
+msgstr "허용되지 않는 그룹 파일 입력값입니다"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "'%s' 줄을 지울까요?"
 
-msgid "duplicate group entry\n"
-msgstr "그룹 입력값 복제\n"
+msgid "duplicate group entry"
+msgstr "그룹 입력값 복제"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -967,11 +967,11 @@ msgstr "%s: %s의 셰도우 입력값을 업데이트 할 수 없습니다\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: %s 그룹 입력값을 업데이트 할 수 없습니다\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "허용되지 않은 셰도우 그룹파일 입력값\n"
+msgid "invalid shadow group file entry"
+msgstr "허용되지 않은 셰도우 그룹파일 입력값"
 
-msgid "duplicate shadow group entry\n"
-msgstr "셰도우 그룹 입력값 복제\n"
+msgid "duplicate shadow group entry"
+msgstr "셰도우 그룹 입력값 복제"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1047,11 +1047,11 @@ msgstr ""
 "  -u, --user <로그인>\t<로그인> 사용자의 lastlog 기록만 표시합니다\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "사용자명         포트     ~로부터          최근정보\n"
+msgid "Username         Port     From             Latest"
+msgstr "사용자명         포트     ~로부터          최근정보"
 
-msgid "Username                Port     Latest\n"
-msgstr "사용자이름              포트     최근정보\n"
+msgid "Username                Port     Latest"
+msgstr "사용자이름              포트     최근정보"
 
 msgid "**Never logged in**"
 msgstr "**한번도 로그인한 적이 없습니다**"
@@ -1076,22 +1076,22 @@ msgstr "       %s [-p] [-h 호스트명] [-f 이름]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r 호스트\n"
 
-msgid "Invalid login time\n"
-msgstr "잘못된 로그인 시간\n"
+msgid "Invalid login time"
+msgstr "잘못된 로그인 시간"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"정기 점검을 위해 시스템이 종료되었습니다\n"
+"정기 점검을 위해 시스템이 종료되었습니다"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[접속해제가 무시되었습니다 -- 루트 로그인 허용.]\n"
+"[접속해제가 무시되었습니다 -- 루트 로그인 허용.]"
 
 #, c-format
 msgid ""
@@ -1147,8 +1147,8 @@ msgstr "%s: fork 실패: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "경고: 로그인이 일시적으로 폐쇄된 후 다시 로그인을 허용합니다.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "경고: 로그인이 일시적으로 폐쇄된 후 다시 로그인을 허용합니다."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1325,15 +1325,15 @@ msgstr ""
 msgid "New password: "
 msgstr "새 열쇠글: "
 
-msgid "Try again.\n"
-msgstr "다시 시도하십시오.\n"
+msgid "Try again."
+msgstr "다시 시도하십시오."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"경고: 보안성이 없는 열쇠글 (그래도 사용하길 원하신다면 다시 입력하십시오).\n"
+"경고: 보안성이 없는 열쇠글 (그래도 사용하길 원하신다면 다시 입력하십시오)."
 
 msgid "They don't match; try again.\n"
 msgstr "입력값이 일치하지 않습니다. 다시 시도하십시오.\n"
@@ -1372,21 +1372,21 @@ msgstr "%s에 대한 열쇠글을 변경 중\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s의 열쇠글을 바꾸지 않았습니다.\n"
 
-msgid "Password changed.\n"
-msgstr "열쇠글을 바꿨습니다.\n"
+msgid "Password changed."
+msgstr "열쇠글을 바꿨습니다."
 
-msgid "Password set to expire.\n"
-msgstr "열쇠글이 만기되도록 설정하였습니다.\n"
+msgid "Password set to expire."
+msgstr "열쇠글이 만기되도록 설정하였습니다."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "사용법: %s [-q] [-r] [-s] [열쇠글 [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "유효하지 않은 열쇠글 파일 입력\n"
+msgid "invalid password file entry"
+msgstr "유효하지 않은 열쇠글 파일 입력"
 
-msgid "duplicate password entry\n"
-msgstr "열쇠글 입력값 복제\n"
+msgid "duplicate password entry"
+msgstr "열쇠글 입력값 복제"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1416,11 +1416,11 @@ msgstr "사용자 '%s'을(를) %s에 더할까요?"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: %s의 열쇠글 입력값을 업데이트 할 수 없습니다\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "허용되지 않는 셰도우 열쇠글 파일 입력값입니다\n"
+msgid "invalid shadow password file entry"
+msgstr "허용되지 않는 셰도우 열쇠글 파일 입력값입니다"
 
-msgid "duplicate shadow password entry\n"
-msgstr "셰도우 열쇠글 입력값 복제\n"
+msgid "duplicate shadow password entry"
+msgstr "셰도우 열쇠글 입력값 복제"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1523,14 +1523,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "쉘이 없음\n"
 
-msgid "No password file\n"
-msgstr "열쇠글 파일 없음\n"
+msgid "No password file"
+msgstr "열쇠글 파일 없음"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "'루트'에 대한 열쇠글 파일 입력값이 없음\n"
+msgid "No password entry for 'root'"
+msgstr "'루트'에 대한 열쇠글 파일 입력값이 없음"
 
 msgid ""
 "\n"
@@ -1541,8 +1541,8 @@ msgstr ""
 "일반적으로 시작(normal startup)을 하려면 control-d를 입력하십시오,\n"
 "(그렇지 않으면 시스템 정비를 위하여 루트 열쇠글을 입력하십시오)"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "시스템 정비 모드로 들어가고 있습니다\n"
+msgid "Entering System Maintenance Mode"
+msgstr "시스템 정비 모드로 들어가고 있습니다"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

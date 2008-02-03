@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2006-07-18 23:27+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -49,21 +49,21 @@ msgstr "O seu contrasinal está inactivo."
 msgid "Your login has expired."
 msgstr "O seu identificador de usuario caducou."
 
-msgid "  Contact the system administrator.\n"
-msgstr " Póñase en contacto co administrador do sistema.\n"
+msgid "  Contact the system administrator."
+msgstr " Póñase en contacto co administrador do sistema."
 
-msgid "  Choose a new password.\n"
-msgstr " Escolla un novo contrasinal.\n"
+msgid "  Choose a new password."
+msgstr " Escolla un novo contrasinal."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "O seu contrasinal ha caducar en %ld días.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "O seu contrasinal ha caducar mañá.\n"
+msgid "Your password will expire tomorrow."
+msgstr "O seu contrasinal ha caducar mañá."
 
-msgid "Your password will expire today.\n"
-msgstr "O seu contrasinal ha caducar hoxe.\n"
+msgid "Your password will expire today."
+msgstr "O seu contrasinal ha caducar hoxe."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -222,8 +222,8 @@ msgstr ""
 "\t\t\t\ta AVISO\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Introduza o novo valor ou prema Intro para o valor por defecto\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Introduza o novo valor ou prema Intro para o valor por defecto"
 
 msgid "Minimum Password Age"
 msgstr "Idade mínima do contrasinal"
@@ -246,11 +246,11 @@ msgstr "Data de caducidade da conta (AAAA-MM-DD)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Último cambio de contrasinal\t\t\t\t: "
 
-msgid "never\n"
-msgstr "nunca\n"
+msgid "never"
+msgstr "nunca"
 
-msgid "password must be changed\n"
-msgstr "debe cambiarse o contrasinal\n"
+msgid "password must be changed"
+msgstr "debe cambiarse o contrasinal"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "O contrasinal caduca\t\t\t\t\t: "
@@ -934,15 +934,15 @@ msgstr "%s: non se pode abrir o ficheiro %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: non se pode actualizar o ficheiro %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "entrada do ficheiro de grupos non válida\n"
+msgid "invalid group file entry"
+msgstr "entrada do ficheiro de grupos non válida"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "¿borrar a liña \"%s\"? "
 
-msgid "duplicate group entry\n"
-msgstr "entrada de grupo duplicada\n"
+msgid "duplicate group entry"
+msgstr "entrada de grupo duplicada"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -972,11 +972,11 @@ msgstr "%s: non se pode actualizar a entrada shadow para %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: non se pode actualizar a entrada do grupo %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "entrada do ficheiro de grupos shadow non válida\n"
+msgid "invalid shadow group file entry"
+msgstr "entrada do ficheiro de grupos shadow non válida"
 
-msgid "duplicate shadow group entry\n"
-msgstr "entrada de grupo shadow duplicada\n"
+msgid "duplicate shadow group entry"
+msgstr "entrada de grupo shadow duplicada"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1054,11 +1054,11 @@ msgstr ""
 "  -u, --user USUARIO\tamosa o rexistro de última entrada do USUARIO\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Usuario          Porto    Desde            Última\n"
+msgid "Username         Port     From             Latest"
+msgstr "Usuario          Porto    Desde            Última"
 
-msgid "Username                Port     Latest\n"
-msgstr "Usuario                 Porto    Última\n"
+msgid "Username                Port     Latest"
+msgstr "Usuario                 Porto    Última"
 
 msgid "**Never logged in**"
 msgstr "**Nunca entrou**"
@@ -1083,22 +1083,22 @@ msgstr "         %s [-p] [-h servidor] [-f nome]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "         %s [-p] -r servidor\n"
 
-msgid "Invalid login time\n"
-msgstr "Hora de entrada non válida\n"
+msgid "Invalid login time"
+msgstr "Hora de entrada non válida"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"O sistema está pechado por mantemento rutinario\n"
+"O sistema está pechado por mantemento rutinario"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Omitida a desconexión -- permítese a entrada coma root.]\n"
+"[Omitida a desconexión -- permítese a entrada coma root.]"
 
 #, c-format
 msgid ""
@@ -1154,8 +1154,8 @@ msgstr "%s: fallo ao lanzar o proceso: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Aviso: vólvese permitir a entrada despois do bloqueo temporal.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Aviso: vólvese permitir a entrada despois do bloqueo temporal."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1333,15 +1333,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Novo contrasinal: "
 
-msgid "Try again.\n"
-msgstr "Volva tentalo.\n"
+msgid "Try again."
+msgstr "Volva tentalo."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Aviso: contrasinal feble (introdúzao outra vez para o empregar igualmente).\n"
+"Aviso: contrasinal feble (introdúzao outra vez para o empregar igualmente)."
 
 msgid "They don't match; try again.\n"
 msgstr "Non coinciden; volva tentalo.\n"
@@ -1380,21 +1380,21 @@ msgstr "A cambiar o contrasinal de %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "Non se cambiou o contrasinal de %s\n"
 
-msgid "Password changed.\n"
-msgstr "Cambiouse o contrasinal.\n"
+msgid "Password changed."
+msgstr "Cambiouse o contrasinal."
 
-msgid "Password set to expire.\n"
-msgstr "Vai caducar o contrasinal.\n"
+msgid "Password set to expire."
+msgstr "Vai caducar o contrasinal."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Emprego: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "entrada do ficheiro de contrasinais non válida\n"
+msgid "invalid password file entry"
+msgstr "entrada do ficheiro de contrasinais non válida"
 
-msgid "duplicate password entry\n"
-msgstr "entrada de contrasinal duplicada\n"
+msgid "duplicate password entry"
+msgstr "entrada de contrasinal duplicada"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1424,11 +1424,11 @@ msgstr "¿engadir o usuario \"%s\" en %s? "
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: non se pode actualizar a entrada de contrasinal para %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "entrada do ficheiro de contrasinais shadow non válida\n"
+msgid "invalid shadow password file entry"
+msgstr "entrada do ficheiro de contrasinais shadow non válida"
 
-msgid "duplicate shadow password entry\n"
-msgstr "entrada de contrasinal shadow duplicada\n"
+msgid "duplicate shadow password entry"
+msgstr "entrada de contrasinal shadow duplicada"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1531,14 +1531,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Non hai un intérprete de ordes\n"
 
-msgid "No password file\n"
-msgstr "Non é un ficheiro de contrasinais\n"
+msgid "No password file"
+msgstr "Non é un ficheiro de contrasinais"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Non hai unha entrada de contrasinal para \"root\"\n"
+msgid "No password entry for 'root'"
+msgstr "Non hai unha entrada de contrasinal para \"root\""
 
 msgid ""
 "\n"
@@ -1549,8 +1549,8 @@ msgstr ""
 "Escriba control-d para seguir co inicio normal,\n"
 "(ou escriba o contrasinal de root para o mantemento do sistema):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "A entrar no modo de mantemento do sistema\n"
+msgid "Entering System Maintenance Mode"
+msgstr "A entrar no modo de mantemento do sistema"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

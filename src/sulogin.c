@@ -121,7 +121,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		}
 	}
 	if (access (PASSWD_FILE, F_OK) == -1) {	/* must be a password file! */
-		puts (_("No password file\n"));
+		puts (_("No password file"));
 #ifdef	USE_SYSLOG
 		SYSLOG (LOG_WARN, "No password file\n");
 		closelog ();
@@ -171,7 +171,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 			/*
 			 * Fail secure
 			 */
-			puts (_("No password entry for 'root'\n"));
+			puts (_("No password entry for 'root'"));
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_WARN, "No password entry for 'root'\n");
 			closelog ();
@@ -200,7 +200,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 			SYSLOG (LOG_INFO, "Normal startup\n");
 			closelog ();
 #endif
-			puts ("\n");
+			puts ("");
 #ifdef	TELINIT
 			execl (PATH_TELINIT, "telinit", RUNLEVEL, (char *) 0);
 #endif
@@ -223,7 +223,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
 
-	puts (_("Entering System Maintenance Mode\n"));
+	puts (_("Entering System Maintenance Mode"));
 #ifdef	USE_SYSLOG
 	SYSLOG (LOG_INFO, "System Maintenance Mode\n");
 #endif

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-24 22:20+0100\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale <librezale@librezale.org>\n"
@@ -51,21 +51,21 @@ msgstr "Pasahitza ezgaitua dago."
 msgid "Your login has expired."
 msgstr "Erabiltzaile-izena iraungi egin da."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Jarri harremanetan sistema administratzailearekin.\n"
+msgid "  Contact the system administrator."
+msgstr "  Jarri harremanetan sistema administratzailearekin."
 
-msgid "  Choose a new password.\n"
-msgstr "  Aukeratu pasahitz berria.\n"
+msgid "  Choose a new password."
+msgstr "  Aukeratu pasahitz berria."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Pasahitza %ld egun barru iraungi egingo da.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Pasahitza bihar iraungi egingo da.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Pasahitza bihar iraungi egingo da."
 
-msgid "Your password will expire today.\n"
-msgstr "Pasahitza gaur iraungi egingo da.\n"
+msgid "Your password will expire today."
+msgstr "Pasahitza gaur iraungi egingo da."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -222,8 +222,8 @@ msgstr ""
 "  -W, --warndays ABISU_EGUN         iraungitze abisua ABISU_EGUN-era ezarri\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Idatzi balio berria, edo sakatu 'Sartu' tekla lehenetsirako\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Idatzi balio berria, edo sakatu 'Sartu' tekla lehenetsirako"
 
 msgid "Minimum Password Age"
 msgstr "Pasahitzaren gutxiengo iraupena"
@@ -246,11 +246,11 @@ msgstr "Kontuaren iraungitze data (UUUU-HH-EE)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Azken pasahitz aldaketa\t\t\t\t\t: "
 
-msgid "never\n"
-msgstr "Inoiz ere ez\n"
+msgid "never"
+msgstr "Inoiz ere ez"
 
-msgid "password must be changed\n"
-msgstr "Pasahitza aldatu egin behar da\n"
+msgid "password must be changed"
+msgstr "Pasahitza aldatu egin behar da"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Pasahitz iraungitze data\t\t\t\t\t: "
@@ -942,15 +942,15 @@ msgstr "%s: ezin da %s fitxategia ireki\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: ezin da %s fitxategia eguneratu\n"
 
-msgid "invalid group file entry\n"
-msgstr "baliogabeko talde-fitxategiko sarrera\n"
+msgid "invalid group file entry"
+msgstr "baliogabeko talde-fitxategiko sarrera"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "'%s' lerroa ezabatu? "
 
-msgid "duplicate group entry\n"
-msgstr "bikoiztu taldearen sarrera\n"
+msgid "duplicate group entry"
+msgstr "bikoiztu taldearen sarrera"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -980,11 +980,11 @@ msgstr "%s: ezin da %s-ren itzalpeko sarrera eguneratu\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: ezin da %s taldearen sarrera eguneratu\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "Baliogabeko itzalpeko talde-fitxategiko sarrera\n"
+msgid "invalid shadow group file entry"
+msgstr "Baliogabeko itzalpeko talde-fitxategiko sarrera"
 
-msgid "duplicate shadow group entry\n"
-msgstr "bikoiztutako itzalpeko taldearen sarrera\n"
+msgid "duplicate shadow group entry"
+msgstr "bikoiztutako itzalpeko taldearen sarrera"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1063,11 +1063,11 @@ msgstr ""
 "                                erregistroa bistaratzen du\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Erabiltzaile-izena        Ataka      Nondik           Azkena\n"
+msgid "Username         Port     From             Latest"
+msgstr "Erabiltzaile-izena        Ataka      Nondik           Azkena"
 
-msgid "Username                Port     Latest\n"
-msgstr "Erabiltzaile-izena           Ataka          Azkena\n"
+msgid "Username                Port     Latest"
+msgstr "Erabiltzaile-izena           Ataka          Azkena"
 
 msgid "**Never logged in**"
 msgstr "**Inoiz ez du saiorik hasi**"
@@ -1092,22 +1092,22 @@ msgstr "           %s [-p] [-h ostalaria] [-f izena]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "           %s [-p] -r ostalaria\n"
 
-msgid "Invalid login time\n"
-msgstr "Baliogabeko saio-hasieraren denbora\n"
+msgid "Invalid login time"
+msgstr "Baliogabeko saio-hasieraren denbora"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Sistema aldiko mantenuagatik itxita\n"
+"Sistema aldiko mantenuagatik itxita"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Deskonexioa saltatuta -- root-ek saio-hastea baimenduta.]\n"
+"[Deskonexioa saltatuta -- root-ek saio-hastea baimenduta.]"
 
 #, c-format
 msgid ""
@@ -1163,10 +1163,9 @@ msgstr "%s: huts zaitzerakoan: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
+msgid "Warning: login re-enabled after temporary lockout."
 msgstr ""
-"Abisua: saio-hasiera berriru gaitu egingo da aldi bateko blokeoaren "
-"ondoren.\n"
+"Abisua: saio-hasiera berriru gaitu egingo da aldi bateko blokeoaren ondoren."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1348,15 +1347,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Pasahitz berria: "
 
-msgid "Try again.\n"
-msgstr "Saiatu berriro.\n"
+msgid "Try again."
+msgstr "Saiatu berriro."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Oharra: pasahitza ahula da (sartu berriro erabiltzen jarraitzeko).\n"
+"Oharra: pasahitza ahula da (sartu berriro erabiltzen jarraitzeko)."
 
 msgid "They don't match; try again.\n"
 msgstr "Ez dira berdinak, saiatu berriro.\n"
@@ -1395,21 +1394,21 @@ msgstr "%s(r)en pasahitza aldatzen\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "%s(r)en pasahitza aldatu gabe dago.\n"
 
-msgid "Password changed.\n"
-msgstr "Pasahitza aldatuta.\n"
+msgid "Password changed."
+msgstr "Pasahitza aldatuta."
 
-msgid "Password set to expire.\n"
-msgstr "Pasahitza iraungi egin da.\n"
+msgid "Password set to expire."
+msgstr "Pasahitza iraungi egin da."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Erabilera: %s [-q] [-r] [-s] [pasahitza [itzalpekoa]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "Baliogabeko pasahitzen fitxategiko sarrera\n"
+msgid "invalid password file entry"
+msgstr "Baliogabeko pasahitzen fitxategiko sarrera"
 
-msgid "duplicate password entry\n"
-msgstr "bikoiztutako pasahitz sarrera\n"
+msgid "duplicate password entry"
+msgstr "bikoiztutako pasahitz sarrera"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1439,11 +1438,11 @@ msgstr "'%s' erabiltzailea %s(e)n gehitu?"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: ezin da %s(r)en pasahitzaren sarrera eguneratu\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "baliogabeko itzalpeko pasahitz-fitxategiko sarrera\n"
+msgid "invalid shadow password file entry"
+msgstr "baliogabeko itzalpeko pasahitz-fitxategiko sarrera"
 
-msgid "duplicate shadow password entry\n"
-msgstr "bikoiztutako itzalpeko pasahitz-fitxategiko sarrera\n"
+msgid "duplicate shadow password entry"
+msgstr "bikoiztutako itzalpeko pasahitz-fitxategiko sarrera"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1546,14 +1545,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Ez dago shell-a\n"
 
-msgid "No password file\n"
-msgstr "Ez dago pasahitz-fitxategirik\n"
+msgid "No password file"
+msgstr "Ez dago pasahitz-fitxategirik"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "Ez dago 'root'-en pasahitzik\n"
+msgid "No password entry for 'root'"
+msgstr "Ez dago 'root'-en pasahitzik"
 
 msgid ""
 "\n"
@@ -1564,8 +1563,8 @@ msgstr ""
 "Sakatu Kontrol+d teklak hasiera arrunta erabiltzeko,\n"
 "(edo idatzi root-en pasahitza sistemaren mantentze-lanetarako):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Sistemaren mantentze-lanetako moduan sartzen\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Sistemaren mantentze-lanetako moduan sartzen"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

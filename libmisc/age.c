@@ -68,13 +68,13 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 	case 0:
 		return 0;
 	case 1:
-		puts (_("Your password has expired."));
+		fputs (_("Your password has expired."), stdout);
 		break;
 	case 2:
-		puts (_("Your password is inactive."));
+		fputs (_("Your password is inactive."), stdout);
 		break;
 	case 3:
-		puts (_("Your login has expired."));
+		fputs (_("Your login has expired."), stdout);
 		break;
 	}
 
@@ -86,10 +86,10 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 	 */
 
 	if (status > 1 || sp->sp_max < sp->sp_min) {
-		puts (_("  Contact the system administrator.\n"));
+		puts (_("  Contact the system administrator."));
 		exit (1);
 	}
-	puts (_("  Choose a new password.\n"));
+	puts (_("  Choose a new password."));
 	fflush (stdout);
 
 	/*
@@ -168,8 +168,8 @@ void agecheck (const struct passwd *pw, const struct spwd *sp)
 				("Your password will expire in %ld days.\n"),
 				remain);
 		else if (remain == 1)
-			puts (_("Your password will expire tomorrow.\n"));
+			puts (_("Your password will expire tomorrow."));
 		else if (remain == 0)
-			puts (_("Your password will expire today.\n"));
+			puts (_("Your password will expire today."));
 	}
 }

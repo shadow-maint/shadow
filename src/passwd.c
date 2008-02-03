@@ -282,7 +282,7 @@ static int new_password (const struct passwd *pw)
 		strzero (cp);
 
 		if (!amroot && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
-			puts (_("Try again.\n"));
+			puts (_("Try again."));
 			continue;
 		}
 
@@ -293,7 +293,7 @@ static int new_password (const struct passwd *pw)
 		 */
 		if (amroot && !warned && getdef_bool ("PASS_ALWAYS_WARN")
 		    && (!obscure (orig, pass, pw) || reuse (pass, pw))) {
-			puts (_("\nWarning: weak password (enter it again to use it anyway).\n"));
+			puts (_("\nWarning: weak password (enter it again to use it anyway)."));
 			warned++;
 			continue;
 		}
@@ -948,9 +948,9 @@ int main (int argc, char **argv)
 	closelog ();
 	if (!qflg) {
 		if (!eflg)
-			puts (_("Password changed.\n"));
+			puts (_("Password changed."));
 		else
-			puts (_("Password set to expire.\n"));
+			puts (_("Password set to expire."));
 	}
 	exit (E_SUCCESS);
 	/* NOT REACHED */

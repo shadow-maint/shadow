@@ -55,7 +55,7 @@ int yes_or_no (int read_only)
 	 * In read-only mode all questions are answered "no".
 	 */
 	if (read_only) {
-		puts (_("No\n"));
+		puts (_("No"));
 		return 0;
 	}
 

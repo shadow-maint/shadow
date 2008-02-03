@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-02 18:05+0100\n"
+"POT-Creation-Date: 2008-02-03 12:12+0100\n"
 "PO-Revision-Date: 2007-11-25 21:23+0100\n"
 "Last-Translator: Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -49,21 +49,21 @@ msgstr "Su contraseña está inactiva."
 msgid "Your login has expired."
 msgstr "Su acceso ha caducado."
 
-msgid "  Contact the system administrator.\n"
-msgstr "  Contacte con el administrador.\n"
+msgid "  Contact the system administrator."
+msgstr "  Contacte con el administrador."
 
-msgid "  Choose a new password.\n"
-msgstr "  Elija una contraseña nueva.\n"
+msgid "  Choose a new password."
+msgstr "  Elija una contraseña nueva."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Su contraseña caducará en %ld días.\n"
 
-msgid "Your password will expire tomorrow.\n"
-msgstr "Su contraseña caducará mañana.\n"
+msgid "Your password will expire tomorrow."
+msgstr "Su contraseña caducará mañana."
 
-msgid "Your password will expire today.\n"
-msgstr "Su contraseña caducará hoy.\n"
+msgid "Your password will expire today."
+msgstr "Su contraseña caducará hoy."
 
 #, c-format
 msgid "Unable to change tty %s"
@@ -220,8 +220,8 @@ msgstr ""
 "  -W, --warndays DÍAS_AVISO     set expiration warning days to WARN_DAYS\n"
 "\n"
 
-msgid "Enter the new value, or press ENTER for the default\n"
-msgstr "Introduzca el nuevo valor, o presione ENTER para el predeterminado\n"
+msgid "Enter the new value, or press ENTER for the default"
+msgstr "Introduzca el nuevo valor, o presione ENTER para el predeterminado"
 
 msgid "Minimum Password Age"
 msgstr "Duración mínima de la contraseña"
@@ -244,11 +244,11 @@ msgstr "Fecha de caducidad de la cuenta (AAAA-MM-DD)"
 msgid "Last password change\t\t\t\t\t: "
 msgstr "Último cambio de contraseña\t\t\t\t\t:"
 
-msgid "never\n"
-msgstr "nunca\n"
+msgid "never"
+msgstr "nunca"
 
-msgid "password must be changed\n"
-msgstr "Contraseña cambiada\n"
+msgid "password must be changed"
+msgstr "Contraseña cambiada"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "La contraseña caduca\t\t\t\t\t: "
@@ -947,15 +947,15 @@ msgstr "%s: no se puede abrir el fichero %s\n"
 msgid "%s: cannot update file %s\n"
 msgstr "%s: no se puede actualizar el fichero %s\n"
 
-msgid "invalid group file entry\n"
-msgstr "entrada del fichero de grupos inválida\n"
+msgid "invalid group file entry"
+msgstr "entrada del fichero de grupos inválida"
 
 #, c-format
 msgid "delete line '%s'? "
 msgstr "¿eliminar la línea «%s»? "
 
-msgid "duplicate group entry\n"
-msgstr "entrada de grupo duplicada\n"
+msgid "duplicate group entry"
+msgstr "entrada de grupo duplicada"
 
 #, c-format
 msgid "invalid group name '%s'\n"
@@ -985,11 +985,11 @@ msgstr "%s: no se puede actualizar la entrada oculta (shadow) para %s\n"
 msgid "%s: can't update entry for group %s\n"
 msgstr "%s: no se puede actualizar la entrada para el grupo %s\n"
 
-msgid "invalid shadow group file entry\n"
-msgstr "entrada del fichero de grupos oculto (shadow) inválida\n"
+msgid "invalid shadow group file entry"
+msgstr "entrada del fichero de grupos oculto (shadow) inválida"
 
-msgid "duplicate shadow group entry\n"
-msgstr "entrada del fichero de grupos oculto (shadow) duplicada\n"
+msgid "duplicate shadow group entry"
+msgstr "entrada del fichero de grupos oculto (shadow) duplicada"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
@@ -1066,11 +1066,11 @@ msgstr ""
 "  -u, --user USUARIO            muestra el registro lastlog para el usuario\n"
 "\n"
 
-msgid "Username         Port     From             Latest\n"
-msgstr "Nombre           Puerto   De               Último\n"
+msgid "Username         Port     From             Latest"
+msgstr "Nombre           Puerto   De               Último"
 
-msgid "Username                Port     Latest\n"
-msgstr "Nombre                  Puerto   Último\n"
+msgid "Username                Port     Latest"
+msgstr "Nombre                  Puerto   Último"
 
 msgid "**Never logged in**"
 msgstr "**Nunca ha entrado**"
@@ -1095,22 +1095,22 @@ msgstr "       %s [-p] [-h puesto] [-f nombre]\n"
 msgid "       %s [-p] -r host\n"
 msgstr "       %s [-p] -r puesto\n"
 
-msgid "Invalid login time\n"
-msgstr "Tiempo de acceso inválido\n"
+msgid "Invalid login time"
+msgstr "Tiempo de acceso inválido"
 
 msgid ""
 "\n"
-"System closed for routine maintenance\n"
+"System closed for routine maintenance"
 msgstr ""
 "\n"
-"Sistema cerrado para mantenimiento rutinario\n"
+"Sistema cerrado para mantenimiento rutinario"
 
 msgid ""
 "\n"
-"[Disconnect bypassed -- root login allowed.]\n"
+"[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Desconexión evitada -- acceso del superusuario permitido.]\n"
+"[Desconexión evitada -- acceso del superusuario permitido.]"
 
 #, c-format
 msgid ""
@@ -1166,8 +1166,8 @@ msgstr "%s: fallo en la llamada a fork: %s"
 msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
-msgid "Warning: login re-enabled after temporary lockout.\n"
-msgstr "Aviso: acceso reestablecido después de un lockout temporal.\n"
+msgid "Warning: login re-enabled after temporary lockout."
+msgstr "Aviso: acceso reestablecido después de un lockout temporal."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1349,15 +1349,15 @@ msgstr ""
 msgid "New password: "
 msgstr "Nueva contraseña: "
 
-msgid "Try again.\n"
-msgstr "Vuelva a intentarlo.\n"
+msgid "Try again."
+msgstr "Vuelva a intentarlo."
 
 msgid ""
 "\n"
-"Warning: weak password (enter it again to use it anyway).\n"
+"Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Aviso: contraseña débil (introdúzcala otra vez para usarla de todos modos).\n"
+"Aviso: contraseña débil (introdúzcala otra vez para usarla de todos modos)."
 
 msgid "They don't match; try again.\n"
 msgstr "No concuerdan, pruebe de nuevo.\n"
@@ -1396,21 +1396,21 @@ msgstr "Cambiando la contraseña para %s\n"
 msgid "The password for %s is unchanged.\n"
 msgstr "La contraseña para %s no se ha modificado.\n"
 
-msgid "Password changed.\n"
-msgstr "Contraseña cambiada.\n"
+msgid "Password changed."
+msgstr "Contraseña cambiada."
 
-msgid "Password set to expire.\n"
-msgstr "Contraseña caducada.\n"
+msgid "Password set to expire."
+msgstr "Contraseña caducada."
 
 #, c-format
 msgid "Usage: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 msgstr "Modo de uso: %s [-q] [-r] [-s] [passwd [shadow]]\n"
 
-msgid "invalid password file entry\n"
-msgstr "entrada del fichero de contraseñas inválida\n"
+msgid "invalid password file entry"
+msgstr "entrada del fichero de contraseñas inválida"
 
-msgid "duplicate password entry\n"
-msgstr "entrada de contraseña duplicada\n"
+msgid "duplicate password entry"
+msgstr "entrada de contraseña duplicada"
 
 #, c-format
 msgid "invalid user name '%s'\n"
@@ -1440,11 +1440,11 @@ msgstr "¿añadir usuario «%s» a «%s»?"
 msgid "%s: can't update passwd entry for %s\n"
 msgstr "%s: no se puede actualizar la entrada de la contraseña para %s\n"
 
-msgid "invalid shadow password file entry\n"
-msgstr "entrada de contraseña oculta (shadow) inválida\n"
+msgid "invalid shadow password file entry"
+msgstr "entrada de contraseña oculta (shadow) inválida"
 
-msgid "duplicate shadow password entry\n"
-msgstr "entrada de contraseña oculta (shadow) duplicada\n"
+msgid "duplicate shadow password entry"
+msgstr "entrada de contraseña oculta (shadow) duplicada"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
@@ -1549,14 +1549,14 @@ msgstr ""
 msgid "No shell\n"
 msgstr "Sin shell\n"
 
-msgid "No password file\n"
-msgstr "No hay fichero de contraseñas\n"
+msgid "No password file"
+msgstr "No hay fichero de contraseñas"
 
 msgid "TIOCSCTTY failed"
 msgstr ""
 
-msgid "No password entry for 'root'\n"
-msgstr "No hay entrada de contraseña para 'root'\n"
+msgid "No password entry for 'root'"
+msgstr "No hay entrada de contraseña para 'root'"
 
 msgid ""
 "\n"
@@ -1567,8 +1567,8 @@ msgstr ""
 "Teclee control-d para continuar con un arranque normal del sistema,\n"
 "(o introduzca la contraseña del superusuario para mantenimiento del sistema):"
 
-msgid "Entering System Maintenance Mode\n"
-msgstr "Entrando en el Modo de Mantenimiento del Sistema\n"
+msgid "Entering System Maintenance Mode"
+msgstr "Entrando en el Modo de Mantenimiento del Sistema"
 
 #, c-format
 msgid "%s: unknown GID %s\n"

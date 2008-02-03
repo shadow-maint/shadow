@@ -416,7 +416,7 @@ static void check_grp_file (int *errors, int *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid group file entry\n"));
+			puts (_("invalid group file entry"));
 			printf (_("delete line '%s'? "), gre->line);
 			*errors += 1;
 
@@ -476,7 +476,7 @@ static void check_grp_file (int *errors, int *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate group entry\n"));
+			puts (_("duplicate group entry"));
 			printf (_("delete line '%s'? "), gre->line);
 			*errors += 1;
 
@@ -604,7 +604,7 @@ static void check_sgr_file (int *errors, int *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid shadow group file entry\n"));
+			puts (_("invalid shadow group file entry"));
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
 
@@ -664,7 +664,7 @@ static void check_sgr_file (int *errors, int *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate shadow group entry\n"));
+			puts (_("duplicate shadow group entry"));
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
 

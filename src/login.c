@@ -189,7 +189,7 @@ static void setup_tty (void)
  */
 static void bad_time_notify (void)
 {
-	puts (_("Invalid login time\n"));
+	puts (_("Invalid login time"));
 	fflush (stdout);
 }
 
@@ -223,7 +223,7 @@ static void check_nologin (void)
 			fflush (stdout);
 			fclose (nlfp);
 		} else
-			puts (_("\nSystem closed for routine maintenance\n"));
+			puts (_("\nSystem closed for routine maintenance"));
 		/*
 		 * Non-root users must exit. Root gets the message, but
 		 * gets to login.
@@ -233,7 +233,7 @@ static void check_nologin (void)
 			closelog ();
 			exit (0);
 		}
-		puts (_("\n[Disconnect bypassed -- root login allowed.]\n"));
+		puts (_("\n[Disconnect bypassed -- root login allowed.]"));
 	}
 }
 #endif				/* !USE_PAM */
@@ -1084,7 +1084,7 @@ int main (int argc, char **argv)
 			if (faillog.fail_max &&
 			    faillog.fail_cnt >= faillog.fail_max) {
 				puts (_
-				      ("Warning: login re-enabled after temporary lockout.\n"));
+				      ("Warning: login re-enabled after temporary lockout."));
 				SYSLOG ((LOG_WARN,
 					 "login `%s' re-enabled after temporary lockout (%d failures)",
 					 username, (int) faillog.fail_cnt));
