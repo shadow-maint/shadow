@@ -1,5 +1,11 @@
 2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/usermod.c: Fix the handling of -a when a user is being
+	renamed (with -l). The new name of the user was used for the new
+	supplementary groups, but not in the existing ones.
+
+2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Set the shadow's password instead of the
 	passwd's password. Fix wrong cut&paste.
 

@@ -65,6 +65,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     one, no changes will be performed for that field. If no fields are
     changed, usermod will exist successfully with a warning. This avoids
     logging changes to syslog when there are actually no changes.
+  * Fix the handling of -a when a user is being renamed (with -l)
 - vipw/vigr
   * Recommend editing the shadowed (resp. regular) file if the regular (resp.
     shadowed) file was edited.

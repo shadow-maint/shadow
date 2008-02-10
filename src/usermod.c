@@ -533,7 +533,8 @@ static void update_group (void)
 		 * concurrent groups.
 		 */
 		was_member = is_on_list (grp->gr_mem, user_name);
-		is_member = Gflg && is_on_list (user_groups, grp->gr_name);
+		is_member = Gflg && (   (was_member && aflg)
+		                     || is_on_list (user_groups, grp->gr_name));
 
 		if (!was_member && !is_member)
 			continue;
@@ -629,6 +630,8 @@ static void update_gshadow (void)
 		 * concurrent groups.
 		 */
 		is_member = Gflg && is_on_list (user_groups, sgrp->sg_name);
+		is_member = Gflg && (   (was_member && aflg)
+		                     || is_on_list (user_groups, sgrp->sg_name));
 
 		if (!was_member && !was_admin && !is_member)
 			continue;
