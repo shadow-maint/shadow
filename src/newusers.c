@@ -383,7 +383,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	 */
 	spent.sp_namp = pwd->pw_name;
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
-		pwd->pw_passwd = (char *)password;
+		spent.sp_pwdp = (char *)password;
 	} else {
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		spent.sp_pwdp = pw_encrypt (password, salt);

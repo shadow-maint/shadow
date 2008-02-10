@@ -1,3 +1,8 @@
+2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newusers.c: Set the shadow's password instead of the
+	passwd's password. Fix wrong cut&paste.
+
 2008-02-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Use a function to convert the dates from
