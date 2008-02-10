@@ -967,6 +967,7 @@ static void process_flags (int argc, char **argv)
 
 	if (user_newid == user_id) {
 		uflg = 0;
+		oflg = 0;
 	}
 	if (user_newgid == user_gid) {
 		gflg = 0;
@@ -985,6 +986,7 @@ static void process_flags (int argc, char **argv)
 	}
 	if (strcmp (user_newhome, user_home) == 0) {
 		dflg = 0;
+		mflg = 0;
 	}
 	if (strcmp (user_newcomment, user_comment) == 0) {
 		cflg = 0;
@@ -1038,12 +1040,6 @@ static void process_flags (int argc, char **argv)
 		usage ();
 		exit (E_USAGE);
 	}
-
-	if (dflg && strcmp (user_home, user_newhome) == 0)
-		dflg = mflg = 0;
-
-	if (uflg && user_id == user_newid)
-		uflg = oflg = 0;
 
 	/* local, no need for xgetpwnam */
 	if (lflg && getpwnam (user_newname)) {

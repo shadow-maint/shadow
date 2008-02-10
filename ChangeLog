@@ -1,5 +1,12 @@
 2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Reset oflg with uflg if the new UID is equal to
+	the old one.
+	* src/usermod.c: Reset mflg with dflg if the new home directory is
+	the same as the old one.
+
+2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/usermod.c: Fix the handling of -a when a user is being
 	renamed (with -l). The new name of the user was used for the new
 	supplementary groups, but not in the existing ones.
