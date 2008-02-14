@@ -245,8 +245,15 @@ static void syslog_sg (const char *name, const char *group)
 			fprintf (stderr, _("%s: failure forking: %s"),
 				 is_newgrp ? "newgrp" : "sg", strerror (errno));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_START, Prog, "changing",
-				      NULL, getuid (), 0);
+			if (group) {
+				snprintf (audit_buf, sizeof(audit_buf),
+				          "changing new-group=%s", group);
+				audit_logger (AUDIT_CHGRP_ID, Prog,
+				              audit_buf, NULL, getuid (), 0);
+			} else {
+				audit_logger (AUDIT_CHGRP_ID, Prog, "changing",
+				              NULL, getuid (), 0);
+			}
 #endif
 			exit (1);
 		} else if (child) {
@@ -322,6 +329,8 @@ int main (int argc, char **argv)
 #endif
 
 #ifdef WITH_AUDIT
+	char audit_buf[80];
+
 	audit_help_open ();
 #endif
 	setlocale (LC_ALL, "");
@@ -364,7 +373,7 @@ int main (int argc, char **argv)
 	if (!pwd) {
 		fprintf (stderr, _("unknown UID: %u\n"), getuid ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_START, Prog, "changing", NULL,
+		audit_logger (AUDIT_CHGRP_ID, Prog, "changing", NULL,
 			      getuid (), 0);
 #endif
 		SYSLOG ((LOG_WARN, "unknown UID %u", getuid ()));
@@ -473,8 +482,15 @@ int main (int argc, char **argv)
 	if (ngroups < 0) {
 		perror ("getgroups");
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_START, Prog,
-			      "changing", NULL, getuid (), 0);
+		if (group) {
+			snprintf (audit_buf, sizeof(audit_buf),
+			          "changing new-group=%s", group);
+			audit_logger (AUDIT_CHGRP_ID, Prog,
+			              audit_buf, NULL, getuid (), 0);
+		} else {
+			audit_logger (AUDIT_CHGRP_ID, Prog,
+			              "changing", NULL, getuid (), 0);
+		}
 #endif
 		exit (1);
 	}
@@ -595,14 +611,24 @@ int main (int argc, char **argv)
 	 * to the real UID. For root, this also sets the real GID to the
 	 * new group id.
 	 */
-	if (setgid (gid))
+	if (setgid (gid)) {
 		perror ("setgid");
+#ifdef WITH_AUDIT
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "changing new-gid=%d", gid);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              audit_buf, NULL, getuid (), 0);
+#endif
+		exit (1);
+	}
 
 	if (setuid (getuid ())) {
 		perror ("setuid");
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_START, Prog, "changing",
-			      NULL, getuid (), 0);
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "changing new-gid=%d", gid);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              audit_buf, NULL, getuid (), 0);
 #endif
 		exit (1);
 	}
@@ -615,8 +641,10 @@ int main (int argc, char **argv)
 		closelog ();
 		execl ("/bin/sh", "sh", "-c", command, (char *) 0);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_START, Prog, "changing",
-			      NULL, getuid (), 0);
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "changing new-gid=%d", gid);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              audit_buf, NULL, getuid (), 0);
 #endif
 		perror ("/bin/sh");
 		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
@@ -682,7 +710,8 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 1);
+	snprintf (audit_buf, sizeof(audit_buf), "changing new-gid=%d", gid);
+	audit_logger (AUDIT_CHGRP_ID, Prog, audit_buf, NULL, getuid (), 1);
 #endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
@@ -705,7 +734,15 @@ int main (int argc, char **argv)
 	 */
 	closelog ();
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 0);
+	if (group) {
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "changing new-group=%s", group);
+		audit_logger (AUDIT_CHGRP_ID, Prog, 
+		              audit_buf, NULL, getuid (), 0);
+	} else {
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              "changing", NULL, getuid (), 0);
+	}
 #endif
 	exit (1);
 }

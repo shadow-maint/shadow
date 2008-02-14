@@ -32,6 +32,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Fix segfault when an user returns to an unknown GID (either the user
     was deleted during the user's newgrp session or the user's passwd
     entry referenced an invalid group). Add a syslog warning in that case.
+  * Use the correct AUDIT_CHGRP_ID event instead of AUDIT_USER_START, when
+    changing the user space group ID with newgrp or sg.
 - newusers
   * The new users are no more added to the list of members of their groups
     because the membership is already set by their primary group.

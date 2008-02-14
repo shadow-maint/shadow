@@ -1,3 +1,9 @@
+2008-02-14  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/newgrp.c: Use the correct AUDIT_CHGRP_ID event instead of
+	AUDIT_USER_START, when changing the user space group ID with
+	newgrp or sg. Thanks to sgrubb@redhat.com for the patch.
+
 2008-02-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Reset oflg with uflg if the new UID is equal to
