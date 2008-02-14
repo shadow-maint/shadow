@@ -182,7 +182,15 @@ failure:
 	 */
 	closelog ();
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_START, Prog, "changing", NULL, getuid (), 0);
+	if (groupname) {
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "changing new-group=%s", groupname);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              audit_buf, NULL, getuid (), 0);
+	} else {
+		audit_logger (AUDIT_CHGRP_ID, Prog, "changing",
+		              NULL, getuid (), 0);
+	}
 #endif
 	exit (1);
 }
