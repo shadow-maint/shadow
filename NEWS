@@ -12,6 +12,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - general
   * Do not translate the messages sent to syslog. This avoids logging
     PAM error messages in the users's locale.
+- etc/useradd
+  * /etc/default/useradd now defines HOME as /home to match FHS.
 - chage
   * Fix bug which forbid to set the aging information of an account with a
     passwd entry, but no shadow entry.

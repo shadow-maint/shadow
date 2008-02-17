@@ -1,6 +1,6 @@
 # useradd defaults file
 GROUP=1000
-HOME=/home/users
+HOME=/home
 INACTIVE=-1
 EXPIRE=
 SHELL=/bin/bash
