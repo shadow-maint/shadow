@@ -19,6 +19,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     passwd entry, but no shadow entry.
 - groupadd
   * New option -p/--password to specify an encrypted password.
+- groupmems
+  * Fix buffer overflow when adding an user to a group. Thanks to Peter Vrabec.
 - groupmod
   * New option -p/--password to specify an encrypted password.
 - grpck

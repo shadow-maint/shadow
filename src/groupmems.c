@@ -104,7 +104,7 @@ static void addtogroup (char *user, char **members)
 		}
 	}
 
-	members = (char **) realloc (members, sizeof (char *) * i);
+	members = (char **) realloc (members, sizeof (char *) * (i+2));
 	members[i] = user;
 	members[i + 1] = NULL;
 }
