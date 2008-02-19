@@ -34,6 +34,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - login
   * Use PATH and SUPATH to set the PATH environment variable, even when
     support for PAM is enabled.
+  * If started as init, start a new session.
 - lastlog
   * Accept users specified as a numerical UID, or ranges of users (-user,
     user-, user1-user2).
@@ -60,7 +61,6 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - su
   * su's arguments are now reordered. If needed, use -- to separate su's
     options from the shell's options.
-  * If started as init, start a new session.
 - sulogin
   * If started as init, start a new session.
 - useradd
