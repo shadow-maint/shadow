@@ -1,5 +1,9 @@
 2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Add missing 'p' to the getopt_long's optstring.
+
+2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, etc/login.defs: Set GID_MIN to the same value as UID_MIN
 	by default (1000).
 	* NEWS, etc/login.defs: Added variables SYS_UID_MIN (100),

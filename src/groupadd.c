@@ -364,7 +364,7 @@ static void process_flags (int argc, char **argv)
 	};
 
 	while ((c =
-		getopt_long (argc, argv, "fg:hK:or", long_options,
+		getopt_long (argc, argv, "fg:hK:op:r", long_options,
 		             &option_index)) != -1) {
 		switch (c) {
 		case 'f':
