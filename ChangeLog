@@ -3,6 +3,8 @@
 	* src/groupadd.c: Add missing 'p' to the getopt_long's optstring.
 	* src/groupadd.c: Fix --non-unique's has_arg field to no_argument
 	instead of required_argument.
+	* src/groupadd.c: Add missing -p, --password description to the
+	Usage message.
 
 2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
 

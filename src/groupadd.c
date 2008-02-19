@@ -115,6 +115,7 @@ static void usage (void)
 	         "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 	         "  -o, --non-unique              allow create group with duplicate\n"
 	         "                                (non-unique) GID\n"
+	         "  -p, --password PASSWORD       use encrypted password for the new group\n"
 	         "  -r, --system                  create a system account\n"
 	         "\n"), stderr);
 	exit (E_USAGE);
