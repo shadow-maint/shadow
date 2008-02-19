@@ -1,6 +1,8 @@
 2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupadd.c: Add missing 'p' to the getopt_long's optstring.
+	* src/groupadd.c: Fix --non-unique's has_arg field to no_argument
+	instead of required_argument.
 
 2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
 

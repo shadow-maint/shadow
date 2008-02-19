@@ -357,7 +357,7 @@ static void process_flags (int argc, char **argv)
 		{"gid", required_argument, NULL, 'g'},
 		{"help", no_argument, NULL, 'h'},
 		{"key", required_argument, NULL, 'K'},
-		{"non-unique", required_argument, NULL, 'o'},
+		{"non-unique", no_argument, NULL, 'o'},
 		{"password", required_argument, NULL, 'p'},
 		{"system", no_argument, NULL, 'r'},
 		{NULL, 0, NULL, '\0'}
