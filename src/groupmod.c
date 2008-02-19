@@ -369,7 +369,7 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "g:hn:o",
+			getopt_long (argc, argv, "g:hn:op:",
 				     long_options, &option_index)) != -1) {
 			switch (c) {
 			case 'g':
