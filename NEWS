@@ -12,6 +12,10 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - general
   * Do not translate the messages sent to syslog. This avoids logging
     PAM error messages in the users's locale.
+- etc/login.defs
+  * Set GID_MIN to the same value as UID_MIN by default (1000).
+  * Added variables SYS_UID_MIN (100), SYS_UID_MAX (999), SYS_GID_MIN (100),
+    SYS_GID_MAX (999) for system accounts.
 - etc/useradd
   * /etc/default/useradd now defines HOME as /home to match FHS.
 - chage
@@ -19,6 +23,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     passwd entry, but no shadow entry.
 - groupadd
   * New option -p/--password to specify an encrypted password.
+  * New option -r, --system for system accounts.
 - groupmems
   * Fix buffer overflow when adding an user to a group. Thanks to Peter Vrabec.
 - groupmod
@@ -46,6 +51,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Fix support for the NONE crypt method.
   * newusers will behave more like useradd regarding the choice of UID or
     GID or regarding the validity of user and group names.
+  * New option -r, --system for system accounts.
 - passwd
   * Make sure that no more than one username argument was provided.
 - pwck
@@ -63,6 +69,7 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     but should behave as -D)
   * Document the --defaults option, which was already described in the
     useradd's Usage information.
+  * New option -r, --system for system accounts.
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.

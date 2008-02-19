@@ -62,6 +62,7 @@
  */
 static char *Prog;
 static int cflg = 0;
+static int rflg = 0;	/* create a system account */
 static int sflg = 0;
 
 static char *crypt_method = NULL;
@@ -97,6 +98,7 @@ static void usage (void)
 	fprintf (stderr, _("Usage: %s [options] [input]\n"
 	                   "\n"
 	                   "  -c, --crypt-method            the crypt method (one of %s)\n"
+	                   "  -r, --system                  create system accounts\n"
 	                   "%s"
 	                   "\n"),
 	                 Prog,
@@ -164,7 +166,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		 * already the name of an existing group.
 		 * In both cases, figure out what group ID can be used.
 		 */
-		if (find_new_gid(0, &grent.gr_gid, &uid) < 0) {
+		if (find_new_gid(rflg, &grent.gr_gid, &uid) < 0) {
 			return -1;
 		}
 	}
@@ -266,7 +268,7 @@ static int get_uid (const char *uid, uid_t *nuid) {
 				return -1;
 			}
 		} else {
-			if (find_new_uid (0, nuid, NULL) < 0) {
+			if (find_new_uid (rflg, nuid, NULL) < 0) {
 				return -1;
 			}
 		}

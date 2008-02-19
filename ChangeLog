@@ -1,3 +1,16 @@
+2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, etc/login.defs: Set GID_MIN to the same value as UID_MIN
+	by default (1000).
+	* NEWS, etc/login.defs: Added variables SYS_UID_MIN (100),
+	SYS_UID_MAX (999), SYS_GID_MIN (100), SYS_GID_MAX (999) for system
+	accounts.
+	* libmisc/find_new_ids.c: Added support for system accounts in
+	find_new_uid() and find_new_gid().
+	* NEWS, src/newusers.c, src/useradd.c, src/groupadd.c: Added new
+	option -r, --system for system accounts in useradd, groupadd, and
+	newusers.
+
 2008-02-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/groupmems.c: Fix buffer overflow when adding an user

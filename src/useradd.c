@@ -128,6 +128,7 @@ static int
     mflg = 0,			/* create user's home directory if it doesn't exist */
     nflg = 0,			/* create a group having the same name as the user */
     oflg = 0,			/* permit non-unique user ID to be specified with -u */
+    rflg = 0,			/* create a system account */
     sflg = 0,			/* shell program for new account */
     uflg = 0;			/* specify user ID for new account */
 
@@ -636,6 +637,7 @@ static void usage (void)
 	         "                                (non-unique) UID\n"
 	         "  -p, --password PASSWORD       use encrypted password for the new user\n"
 	         "                                account\n"
+	         "  -r, --system                  create a system account\n"
 	         "  -s, --shell SHELL             the login shell for the new user account\n"
 	         "  -u, --uid UID                 force use the UID for the new user account\n"
 	         "\n"), stderr);
@@ -684,11 +686,19 @@ static void new_spent (struct spwd *spent)
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = time ((time_t *) 0) / SCALE;
+	if (!rflg) {
 	spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
 	spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));
 	spent->sp_warn = scale_age (getdef_num ("PASS_WARN_AGE", -1));
 	spent->sp_inact = scale_age (def_inactive);
 	spent->sp_expire = scale_age (user_expire);
+	} else {
+		spent->sp_min = scale_age (-1);
+		spent->sp_max = scale_age (-1);
+		spent->sp_warn = scale_age (-1);
+		spent->sp_inact = scale_age (-1);
+		spent->sp_expire = scale_age (-1);
+	}
 	spent->sp_flag = -1;
 }
 
@@ -842,12 +852,13 @@ static void process_flags (int argc, char **argv)
 			{"create-home", no_argument, NULL, 'm'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
+			{"system", no_argument, NULL, 'r'},
 			{"shell", required_argument, NULL, 's'},
 			{"uid", required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMop:s:u:",
+			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMop:rs:u:",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -999,6 +1010,9 @@ static void process_flags (int argc, char **argv)
 					exit (E_BAD_ARG);
 				}
 				user_pass = optarg;
+				break;
+			case 'r':
+				rflg++;
 				break;
 			case 's':
 				if (!VALID (optarg)
@@ -1599,7 +1613,7 @@ int main (int argc, char **argv)
 		 * We do this because later we can use the uid we found as
 		 * gid too ... --gafton */
 		if (!uflg) {
-			if (find_new_uid (0, &user_id, NULL) < 0) {
+			if (find_new_uid (rflg, &user_id, NULL) < 0) {
 				fprintf (stderr, _("%s: can't create user\n"), Prog);
 				fail_exit (E_UID_IN_USE);
 			}
@@ -1617,7 +1631,7 @@ int main (int argc, char **argv)
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */
 	if (!(nflg || gflg)) {
-		if (find_new_gid (0, &user_gid, &user_id) < 0) {
+		if (find_new_gid (rflg, &user_gid, &user_id) < 0) {
 			fprintf (stderr,
 				 _("%s: can't create group\n"),
 				 Prog);

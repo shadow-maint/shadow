@@ -76,6 +76,7 @@ static char *Prog;
 static int oflg = 0;		/* permit non-unique group ID to be specified with -g */
 static int gflg = 0;		/* ID value for the new group */
 static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
+static int rflg = 0;		/* create a system account */
 static int pflg = 0;		/* new encrypted password */
 
 #ifdef USE_PAM
@@ -114,6 +115,7 @@ static void usage (void)
 	         "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 	         "  -o, --non-unique              allow create group with duplicate\n"
 	         "                                (non-unique) GID\n"
+	         "  -r, --system                  create a system account\n"
 	         "\n"), stderr);
 	exit (E_USAGE);
 }
@@ -357,11 +359,12 @@ static void process_flags (int argc, char **argv)
 		{"key", required_argument, NULL, 'K'},
 		{"non-unique", required_argument, NULL, 'o'},
 		{"password", required_argument, NULL, 'p'},
+		{"system", no_argument, NULL, 'r'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	while ((c =
-		getopt_long (argc, argv, "fg:hK:o", long_options,
+		getopt_long (argc, argv, "fg:hK:or", long_options,
 		             &option_index)) != -1) {
 		switch (c) {
 		case 'f':
@@ -407,6 +410,9 @@ static void process_flags (int argc, char **argv)
 		case 'p':
 			pflg++;
 			group_passwd = optarg;
+			break;
+		case 'r':
+			rflg++;
 			break;
 		default:
 			usage ();
@@ -556,7 +562,7 @@ int main (int argc, char **argv)
 	open_files ();
 
 	if (!gflg) {
-		if (find_new_gid (0, &group_id, NULL) < 0) {
+		if (find_new_gid (rflg, &group_id, NULL) < 0) {
 			fprintf (stderr, _("%s: can't create group\n"), Prog);
 			fail_exit (E_GID_IN_USE);
 		}
