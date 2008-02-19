@@ -462,7 +462,7 @@ static void check_flags (void)
 		/* A GID was specified, and a group already exist with that GID
 		 *  - either we will use this GID anyway (-o)
 		 *  - either we ignore the specified GID and
-		 *    we will use another one(-f)
+		 *    we will use another one (-f)
 		 *  - either it is a failure
 		 */
 		if (oflg) {
