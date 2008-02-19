@@ -26,8 +26,8 @@ int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid)
 	assert (uid != NULL);
 
 	if (sys_user == 0) {
-	uid_min = getdef_unum ("UID_MIN", 1000);
-	uid_max = getdef_unum ("UID_MAX", 60000);
+		uid_min = getdef_unum ("UID_MIN", 1000);
+		uid_max = getdef_unum ("UID_MAX", 60000);
 	} else {
 		uid_min = getdef_unum ("SYS_UID_MIN", 1);
 		uid_max = getdef_unum ("UID_MIN", 1000) - 1;
@@ -108,8 +108,8 @@ int find_new_gid (int sys_group, gid_t *gid, gid_t const *preferred_gid)
 	assert (gid != NULL);
 
 	if (sys_group == 0) {
-	gid_min = getdef_unum ("GID_MIN", 1000);
-	gid_max = getdef_unum ("GID_MAX", 60000);
+		gid_min = getdef_unum ("GID_MIN", 1000);
+		gid_max = getdef_unum ("GID_MAX", 60000);
 	} else {
 		gid_min = getdef_unum ("SYS_GID_MIN", 1);
 		gid_max = getdef_unum ("GID_MIN", 1000) - 1;
