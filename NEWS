@@ -31,13 +31,13 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - grpck
   * Fix logging of changes to syslog when a group file is provided,
     without a gshadow file.
+- lastlog
+  * Accept users specified as a numerical UID, or ranges of users (-user,
+    user-, user1-user2).
 - login
   * Use PATH and SUPATH to set the PATH environment variable, even when
     support for PAM is enabled.
   * If started as init, start a new session.
-- lastlog
-  * Accept users specified as a numerical UID, or ranges of users (-user,
-    user-, user1-user2).
 - newgrp
   * Fix segfault when an user returns to an unknown GID (either the user
     was deleted during the user's newgrp session or the user's passwd
