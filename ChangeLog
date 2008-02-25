@@ -1,5 +1,10 @@
 2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/Makefile.in.in: Use --previous when merging PO files of
+	the manpages.
+
+2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.d/SYS_UID_MAX.xml, man/login.defs.d/SYS_GID_MAX.xml:
 	Document new variables.
 	* man/newusers.8.xml, man/login.defs.5.xml,
