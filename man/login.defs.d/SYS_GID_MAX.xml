@@ -1,0 +1,11 @@
+<varlistentry>
+  <term><option>SYS_GID_MAX</option> (number)</term>
+  <term><option>SYS_GID_MIN</option> (number)</term>
+  <listitem>
+    <para>
+      Range of group IDs used for the creation of system groups by
+      <command>useradd</command>, <command>groupadd</command>, or
+      <command>newusers</command>.
+    </para>
+  </listitem>
+</varlistentry>

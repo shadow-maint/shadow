@@ -3,8 +3,9 @@
   <term><option>GID_MIN</option> (number)</term>
   <listitem>
     <para>
-      Range of group IDs to choose from for the <command>useradd</command>
-      and <command>groupadd</command> programs.
+      Range of group IDs used for the creation of regular groups by
+      <command>useradd</command>, <command>useradd</command>, or
+      <command>newusers</command>.
     </para>
   </listitem>
 </varlistentry>

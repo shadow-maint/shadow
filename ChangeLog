@@ -1,5 +1,18 @@
 2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/SYS_UID_MAX.xml, man/login.defs.d/SYS_GID_MAX.xml:
+	Document new variables.
+	* man/newusers.8.xml, man/login.defs.5.xml,
+	man/login.defs.d/GID_MAX.xml, man/login.defs.d/UID_MAX.xml:
+	newusers uses now the GID_MAX, GID_MIN, UID_MAX, UID_MIN,
+	SYS_GID_MAX, SYS_GID_MIN, SYS_UID_MAX, and SYS_UID_MIN variables.
+	* man/groupadd.8.xml, man/login.defs.5.xml: groupadd uses now the
+	SYS_GID_MAX, and SYS_GID_MIN variables.
+	* man/login.defs.5.xml: useradd uses now the SYS_GID_MAX,
+	SYS_GID_MIN, SYS_UID_MAX, and SYS_UID_MIN variables.
+
+2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/getdef.c: Added missing SYS_GID_MAX, SYS_GID_MIN,
 	SYS_UID_MAX, and SYS_UID_MIN.
 

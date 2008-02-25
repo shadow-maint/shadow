@@ -1,0 +1,10 @@
+<varlistentry>
+  <term><option>SYS_UID_MAX</option> (number)</term>
+  <term><option>SYS_UID_MIN</option> (number)</term>
+  <listitem>
+    <para>
+      Range of user IDs used for the creation of system users by
+      <command>useradd</command> or <command>newusers</command>.
+    </para>
+  </listitem>
+</varlistentry>

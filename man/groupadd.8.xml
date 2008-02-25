@@ -3,6 +3,7 @@
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
+<!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
 ]>
 <refentry id='groupadd.8'>
   <!-- $Id$ -->
@@ -138,6 +139,7 @@
     <variablelist>
       &GID_MAX; <!-- documents also GID_MIN -->
       &MAX_MEMBERS_PER_GROUP;
+      &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
     </variablelist>
   </refsect1>
 

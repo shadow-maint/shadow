@@ -2,12 +2,16 @@
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
+<!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY MD5_CRYPT_ENAB        SYSTEM "login.defs.d/MD5_CRYPT_ENAB.xml">
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
 <!ENTITY SHA_CRYPT_MIN_ROUNDS  SYSTEM "login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml">
+<!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
+<!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
+<!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
 ]>
 
@@ -113,12 +117,16 @@
     </para>
     <variablelist>
       &ENCRYPT_METHOD;
+      &GID_MAX; <!-- documents also GID_MIN -->
       &MAX_MEMBERS_PER_GROUP;
       &MD5_CRYPT_ENAB;
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
-      &SHA_CRYPT_MIN_ROUNDS; <!--This also document SHA_CRYPT_MAX_ROUNDS-->
+      &SHA_CRYPT_MIN_ROUNDS; <!-- documents also SHA_CRYPT_MAX_ROUNDS-->
+      &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
+      &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
+      &UID_MAX; <!-- documents also UID_MIN -->
       &UMASK;
     </variablelist>
   </refsect1>

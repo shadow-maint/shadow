@@ -3,8 +3,8 @@
   <term><option>UID_MIN</option> (number)</term>
   <listitem>
     <para>
-      Range of user IDs to choose from for the <command>useradd</command>
-      program.
+      Range of user IDs used for the creation of regular users by
+      <command>useradd</command> or <command>newusers</command>.
     </para>
   </listitem>
 </varlistentry>
