@@ -1,11 +1,15 @@
 2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.c: Added missing SYS_GID_MAX, SYS_GID_MIN,
+	SYS_UID_MAX, and SYS_UID_MIN.
+
+2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/useradd.c, man/useradd.8.xml: Added options
 	--user-group (-U, Uflg) and --no-user-group (-N, Nflg) to replace
 	nflg.
 	* man/login.defs.d/USERGROUPS_ENAB.xml: useradd now also uses
 	USERGROUPS_ENAB.
-
 
 2008-02-19  Nicolas François  <nicolas.francois@centraliens.net>
 
