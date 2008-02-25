@@ -15,6 +15,7 @@
 	SYS_GID_MAX, and SYS_GID_MIN variables.
 	* man/login.defs.5.xml: useradd uses now the SYS_GID_MAX,
 	SYS_GID_MIN, SYS_UID_MAX, and SYS_UID_MIN variables.
+	* man/Makefile.am: Add the new XML documentation files to EXTRA_DIST.
 
 2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
 

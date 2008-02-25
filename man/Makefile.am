@@ -154,7 +154,9 @@ login_defs_v = \
 	ULIMIT.xml \
 	UMASK.xml \
 	USERDEL_CMD.xml \
-	USERGROUPS_ENAB.xml
+	USERGROUPS_ENAB.xml \
+	SYS_GID_MAX.xml \
+	SYS_UID_MAX.xml
 
 EXTRA_DIST = \
 	$(man_MANS) \
