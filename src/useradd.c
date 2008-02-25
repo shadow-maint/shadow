@@ -126,11 +126,12 @@ static int
     kflg = 0,			/* specify a directory to fill new user directory */
     lflg = 0,			/* do not add user to lastlog database file */
     mflg = 0,			/* create user's home directory if it doesn't exist */
-    nflg = 0,			/* create a group having the same name as the user */
+    Nflg = 0,			/* do not create a group having the same name as the user, but add the user to def_group (or the group specified with -g) */
     oflg = 0,			/* permit non-unique user ID to be specified with -u */
     rflg = 0,			/* create a system account */
     sflg = 0,			/* shell program for new account */
-    uflg = 0;			/* specify user ID for new account */
+    uflg = 0,			/* specify user ID for new account */
+    Uflg = 0;			/* create a group having the same name as the user */
 
 static int home_added;
 
@@ -633,6 +634,8 @@ static void usage (void)
 	         "                                faillog databases\n"
 	         "  -m, --create-home             create home directory for the new user\n"
 	         "                                account\n"
+	         "  -N, --no-user-group           do not create a group with the same name as\n"
+	         "                                the user\n"
 	         "  -o, --non-unique              allow create user with duplicate\n"
 	         "                                (non-unique) UID\n"
 	         "  -p, --password PASSWORD       use encrypted password for the new user\n"
@@ -640,6 +643,7 @@ static void usage (void)
 	         "  -r, --system                  create a system account\n"
 	         "  -s, --shell SHELL             the login shell for the new user account\n"
 	         "  -u, --uid UID                 force use the UID for the new user account\n"
+	         "  -U, --user-group              create a group with the same name as the user\n"
 	         "\n"), stderr);
 	exit (E_USAGE);
 }
@@ -850,15 +854,17 @@ static void process_flags (int argc, char **argv)
 			{"skel", required_argument, NULL, 'k'},
 			{"key", required_argument, NULL, 'K'},
 			{"create-home", no_argument, NULL, 'm'},
+			{"no-user-group", no_argument, NULL, 'N'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
 			{"system", no_argument, NULL, 'r'},
 			{"shell", required_argument, NULL, 's'},
 			{"uid", required_argument, NULL, 'u'},
+			{"user-group", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
-			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMop:rs:u:",
+			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -998,6 +1004,9 @@ static void process_flags (int argc, char **argv)
 			case 'm':
 				mflg++;
 				break;
+			case 'N':
+				Nflg++;
+				break;
 			case 'o':
 				oflg++;
 				break;
@@ -1033,6 +1042,9 @@ static void process_flags (int argc, char **argv)
 				user_id = get_uid (optarg);
 				uflg++;
 				break;
+			case 'U':
+				Uflg++;
+				break;
 			default:
 				usage ();
 			}
@@ -1040,12 +1052,39 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
+	if (!gflg && !Nflg && ! Uflg) {
+		/* Get the settings from login.defs */
+		Uflg = getdef_bool ("USERGROUPS_ENAB");
+	}
+
 	/*
 	 * Certain options are only valid in combination with others.
 	 * Check it here so that they can be specified in any order.
 	 */
-	if ((oflg && !uflg) || (kflg && !mflg))
+	if (oflg && !uflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         Prog, "-o", "-u");
 		usage ();
+	}
+	if (kflg && !mflg) {
+		fprintf (stderr,
+		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         Prog, "-k", "-m");
+		usage ();
+	}
+	if (Uflg && gflg) {
+		fprintf (stderr,
+		         _("%s: options %s and %s conflict\n"),
+		         Prog, "-U", "-g");
+		usage ();
+	}
+	if (Uflg && Nflg) {
+		fprintf (stderr,
+		         _("%s: options %s and %s conflict\n"),
+		         Prog, "-U", "-N");
+		usage ();
+	}
 
 	/*
 	 * Either -D or username is required. Defaults can be set with -D
@@ -1583,7 +1622,7 @@ int main (int argc, char **argv)
 	 * to that group, use useradd -g username username.
 	 * --bero
 	 */
-	if (!gflg) {
+	if (Uflg) {
 		if (getgrnam (user_name)) { /* local, no need for xgetgrnam */
 			fprintf (stderr,
 				 _
@@ -1630,7 +1669,7 @@ int main (int argc, char **argv)
 
 	/* do we have to add a group for that user? This is why we need to
 	 * open the group files in the open_files() function  --gafton */
-	if (!(nflg || gflg)) {
+	if (Uflg) {
 		if (find_new_gid (rflg, &user_gid, &user_id) < 0) {
 			fprintf (stderr,
 				 _("%s: can't create group\n"),

@@ -70,6 +70,10 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Document the --defaults option, which was already described in the
     useradd's Usage information.
   * New option -r, --system for system accounts.
+  * New options -U, --user-group and -N, --no-user-group. These options
+    should replace nflg from the previous versions. Please set any -n
+    option to deprecated because its meaning differs from one distribution
+    to the other.
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.

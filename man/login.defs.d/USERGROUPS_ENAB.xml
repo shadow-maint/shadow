@@ -7,8 +7,10 @@
       the same as gid, and username is the same as the primary group name.
     <para>
     </para>
-      If set to <replaceable>yes</replaceable>, userdel will remove the
-      user's group if it contains no more members.
+      If set to <replaceable>yes</replaceable>, <command>userdel</command>
+      will remove the user's group if it contains no more members, and
+      <command>useradd</command> will create by default a group with the
+      name of the user.
     </para>
   </listitem>
 </varlistentry>

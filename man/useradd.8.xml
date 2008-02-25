@@ -7,8 +7,11 @@
 <!ENTITY PASS_MAX_DAYS         SYSTEM "login.defs.d/PASS_MAX_DAYS.xml">
 <!ENTITY PASS_MIN_DAYS         SYSTEM "login.defs.d/PASS_MIN_DAYS.xml">
 <!ENTITY PASS_WARN_AGE         SYSTEM "login.defs.d/PASS_WARN_AGE.xml">
+<!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
+<!ENTITY SYS_UID_MAX           SYSTEM "login.defs.d/SYS_UID_MAX.xml">
 <!ENTITY UID_MAX               SYSTEM "login.defs.d/UID_MAX.xml">
 <!ENTITY UMASK                 SYSTEM "login.defs.d/UMASK.xml">
+<!ENTITY USERGROUPS_ENAB       SYSTEM "login.defs.d/USERGROUPS_ENAB.xml">
 ]>
 <refentry id='useradd.8'>
   <!--  $Id$ -->
@@ -240,6 +243,25 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-N</option>, <option>--no-user-group</option>
+	</term>
+	<listitem>
+	  <para>
+	    Do not create a group with the same name as the user, but
+	    add the user to the group specified by the <option>-g</option>
+	    option or by the GROUP variable in
+	    <filename>/etc/default/useradd</filename>.
+	  </para>
+	  <para>
+	    The default behavior (if the <option>-g</option>,
+	    <option>-N</option>, and <option>-U</option> options are not
+	    specified) is defined by the <option>USERGROUPS_ENAB</option>
+	    variable in <filename>login.defs</filename>.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-o</option>, <option>--non-unique</option>
 	</term>
 	<listitem>
@@ -284,6 +306,23 @@
 	    non-negative. The default is to use the smallest ID value
 	    greater than 999 and greater than every other user. Values
 	    between 0 and 999 are typically reserved for system accounts.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-U</option>, <option>--user-group</option>
+	</term>
+	<listitem>
+	  <para>
+	    Create a group with the same name as the user, and
+	    add the user to this group.
+	  </para>
+	  <para>
+	    The default behavior (if the <option>-g</option>,
+	    <option>-N</option>, and <option>-U</option> options are not
+	    specified) is defined by the <option>USERGROUPS_ENAB</option>
+	    variable in <filename>login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -405,8 +444,11 @@
       &PASS_MAX_DAYS;
       &PASS_MIN_DAYS;
       &PASS_WARN_AGE;
+      &SYS_GID_MAX; <!-- documents also SYS_GID_MIN -->
+      &SYS_UID_MAX; <!-- documents also SYS_UID_MIN -->
       &UID_MAX; <!-- documents also UID_MIN -->
       &UMASK;
+      &USERGROUPS_ENAB;
     </variablelist>
   </refsect1>
 
