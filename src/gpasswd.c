@@ -574,7 +574,7 @@ static void get_group (struct group *gr)
 		} else {
 			sg->sg_name = xstrdup (group);
 			sg->sg_passwd = gr->gr_passwd;
-			gr->gr_passwd = "!";	/* XXX warning: const */
+			gr->gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 
 			sg->sg_mem = dup_list (gr->gr_mem);
 

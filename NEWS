@@ -23,6 +23,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     passwd entry, but no shadow entry.
 - gpasswd
   * Fix failures when the gshadow file is not present.
+  * When a password is moved to the gshadow file, use "x" instead of "x"
+    to indicate that the password is shadowed (consistency with grpconv).
 - groupadd
   * New option -p/--password to specify an encrypted password.
   * New option -r, --system for system accounts.

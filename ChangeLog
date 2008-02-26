@@ -1,5 +1,11 @@
 2008-02-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: When a password is moved to the gshadow file, use
+	"x" instead of "x" to indicate that the password is shadowed
+	(consistency with grpconv).
+
+2008-02-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS: Fix failures when the gshadow file is not present. Thanks
 	to Christian Henz (http://bugs.debian.org/467488)
 	* src/gpasswd.c (get_group): Do not fail if gshadow is not present. Just use
