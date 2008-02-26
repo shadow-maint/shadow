@@ -1,5 +1,18 @@
 2008-02-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Fix failures when the gshadow file is not present. Thanks
+	to Christian Henz (http://bugs.debian.org/467488)
+	* src/gpasswd.c (get_group): Do not fail if gshadow is not present. Just use
+	the group file and set the grent structure
+	* src/gpasswd.c (check_perms): The permissions should be checked
+	using both the gshadow and group file. Add a <struct group *>
+	parameter, and check if the gshadow file exists (is_shadowgrp).
+	* src/gpasswd.c (main): Do not use sgent.sg_mem or sgent.sg_adm if
+	the gshadow file is not present (sgent is not initialized in that
+	case). The fields of sgent can be set, but not used.
+
+2008-02-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Fix typo in comment.
 	* src/gpasswd.c: Move comment regarding FIRST_MEMBER_IS_ADMIN to
 	where it belongs.

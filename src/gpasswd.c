@@ -93,7 +93,7 @@ static void open_files (void);
 static void close_files (void);
 #ifdef SHADOWGRP
 static void get_group (struct group *gr, struct sgrp *sg);
-static void check_perms (const struct sgrp *sg);
+static void check_perms (const struct group *gr, const struct sgrp *sg);
 static void update_group (struct group *gr, struct sgrp *sg);
 static void change_passwd (struct group *gr, struct sgrp *sg);
 #else
@@ -400,12 +400,13 @@ static void close_files (void)
  *	It only returns if the user is allowed.
  */
 #ifdef SHADOWGRP
-static void check_perms (const struct sgrp *sg)
+static void check_perms (const struct group *gr, const struct sgrp *sg)
 #else
 static void check_perms (const struct group *gr)
 #endif
 {
 #ifdef SHADOWGRP
+	if (is_shadowgrp) {
 	/*
 	 * The policy here for changing a group is that 1) you must be root
 	 * or 2). you must be listed as an administrative member.
@@ -419,8 +420,9 @@ static void check_perms (const struct group *gr)
 #endif
 		failure ();
 	}
-#else				/* ! SHADOWGRP */
-
+	} else
+#endif				/* ! SHADOWGRP */
+	{
 #ifdef FIRST_MEMBER_IS_ADMIN
 	/*
 	 * The policy here for changing a group is that 1) you must be root
@@ -460,7 +462,7 @@ static void check_perms (const struct group *gr)
 		failure ();
 	}
 #endif
-#endif				/* SHADOWGRP */
+	}
 }
 
 /*
@@ -499,6 +501,8 @@ static void update_group (struct group *gr)
  *
  *	The information are copied in group structure(s) so that they can be
  *	modified later.
+ *
+ *	Note: If !is_shadowgrp, *sg will not be initialized.
  */
 #ifdef SHADOWGRP
 static void get_group (struct group *gr, struct sgrp *sg)
@@ -545,6 +549,7 @@ static void get_group (struct group *gr)
 	}
 
 #ifdef SHADOWGRP
+	if (is_shadowgrp) {
 	if (sgr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
@@ -589,6 +594,7 @@ static void get_group (struct group *gr)
 		              "closing /etc/gshadow", group, -1, 0);
 #endif
 		exit (1);
+	}
 	}
 #endif				/* SHADOWGRP */
 }
@@ -751,7 +757,7 @@ int main (int argc, char **argv)
 	 * Check if the user is allowed to change the password of this group.
 	 */
 #ifdef SHADOWGRP
-	check_perms (&sgent);
+	check_perms (&grent, &sgent);
 #else
 	check_perms (&grent);
 #endif
@@ -798,7 +804,9 @@ int main (int argc, char **argv)
 		printf (_("Adding user %s to group %s\n"), user, group);
 		grent.gr_mem = add_list (grent.gr_mem, user);
 #ifdef SHADOWGRP
+		if (is_shadowgrp) {
 		sgent.sg_mem = add_list (sgent.sg_mem, user);
+		}
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group member",
@@ -823,9 +831,11 @@ int main (int argc, char **argv)
 			grent.gr_mem = del_list (grent.gr_mem, user);
 		}
 #ifdef SHADOWGRP
+		if (is_shadowgrp) {
 		if (is_on_list (sgent.sg_mem, user)) {
 			removed = 1;
 			sgent.sg_mem = del_list (sgent.sg_mem, user);
+		}
 		}
 #endif
 		if (!removed) {
