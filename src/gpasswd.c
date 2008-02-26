@@ -423,11 +423,16 @@ static void check_perms (const struct group *gr)
 
 #ifdef FIRST_MEMBER_IS_ADMIN
 	/*
-	 * The policy here for changing a group is that 1) you must bes root
+	 * The policy here for changing a group is that 1) you must be root
 	 * or 2) you must be the first listed member of the group. The
 	 * first listed member of a group can do anything to that group that
 	 * the root user can. The rationale for this hack is that the FIRST
 	 * user is probably the most important user in this entire group.
+	 */
+	/*
+	 * This feature enabled by default could be a security problem when
+	 * installed on existing systems where the first group member might
+	 * be just a normal user.  --marekm
 	 */
 	if (!amroot) {
 		if (gr->gr_mem[0] == (char *) 0) {
@@ -446,12 +451,7 @@ static void check_perms (const struct group *gr)
 			failure ();
 		}
 	}
-#else
-	/*
-	 * This feature enabled by default could be a security problem when
-	 * installed on existing systems where the first group member might
-	 * be just a normal user.  --marekm
-	 */
+#else				/* ! FIRST_MEMBER_IS_ADMIN */
 	if (!amroot) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,

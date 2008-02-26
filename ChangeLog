@@ -1,3 +1,11 @@
+2008-02-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/gpasswd.c: Fix typo in comment.
+	* src/gpasswd.c: Move comment regarding FIRST_MEMBER_IS_ADMIN to
+	where it belongs.
+	* src/gpasswd.c: Indicate the end of the #ifdef FIRST_MEMBER_IS_ADMIN
+	section.
+
 2008-02-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/po/Makefile.in.in: Use --previous when merging PO files of
