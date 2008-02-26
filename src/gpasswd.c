@@ -407,60 +407,63 @@ static void check_perms (const struct group *gr)
 {
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-	/*
-	 * The policy here for changing a group is that 1) you must be root
-	 * or 2). you must be listed as an administrative member.
-	 * Administrative members can do anything to a group that the root
-	 * user can.
-	 */
-	if (!amroot && !is_on_list (sg->sg_adm, myname)) {
+		/*
+		 * The policy here for changing a group is that
+		 * 1) you must be root or
+		 * 2) you must be listed as an administrative member.
+		 * Administrative members can do anything to a group that
+		 * the root user can.
+		 */
+		if (!amroot && !is_on_list (sg->sg_adm, myname)) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "modify group", group, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "modify group", group, -1, 0);
 #endif
-		failure ();
-	}
+			failure ();
+		}
 	} else
 #endif				/* ! SHADOWGRP */
 	{
 #ifdef FIRST_MEMBER_IS_ADMIN
-	/*
-	 * The policy here for changing a group is that 1) you must be root
-	 * or 2) you must be the first listed member of the group. The
-	 * first listed member of a group can do anything to that group that
-	 * the root user can. The rationale for this hack is that the FIRST
-	 * user is probably the most important user in this entire group.
-	 */
-	/*
-	 * This feature enabled by default could be a security problem when
-	 * installed on existing systems where the first group member might
-	 * be just a normal user.  --marekm
-	 */
-	if (!amroot) {
-		if (gr->gr_mem[0] == (char *) 0) {
+		/*
+		 * The policy here for changing a group is that
+		 * 1) you must be root or
+		 * 2) you must be the first listed member of the group.
+		 * The first listed member of a group can do anything to
+		 * that group that the root user can. The rationale for
+		 * this hack is that the FIRST user is probably the most
+		 * important user in this entire group.
+		 *
+		 * This feature enabled by default could be a security
+		 * problem when installed on existing systems where the
+		 * first group member might be just a normal user.
+		 * --marekm
+		 */
+		if (!amroot) {
+			if (gr->gr_mem[0] == (char *) 0) {
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "modifying group", group, -1, 0);
+#endif
+				failure ();
+			}
+
+			if (strcmp (gr->gr_mem[0], myname) != 0) {
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "modifying group", myname, -1, 0);
+#endif
+				failure ();
+			}
+		}
+#else				/* ! FIRST_MEMBER_IS_ADMIN */
+		if (!amroot) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "modifying group", group, -1, 0);
 #endif
 			failure ();
 		}
-
-		if (strcmp (gr->gr_mem[0], myname) != 0) {
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "modifying group", myname, -1, 0);
-#endif
-			failure ();
-		}
-	}
-#else				/* ! FIRST_MEMBER_IS_ADMIN */
-	if (!amroot) {
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "modifying group", group, -1, 0);
-#endif
-		failure ();
-	}
 #endif
 	}
 }
@@ -550,51 +553,53 @@ static void get_group (struct group *gr)
 
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
-	if (sgr_open (O_RDONLY) == 0) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+		if (sgr_open (O_RDONLY) == 0) {
+			fprintf (stderr,
+			         _("%s: can't open shadow file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening /etc/gshadow", group, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "opening /etc/gshadow", group, -1, 0);
 #endif
-		exit (1);
-	}
-	tmpsg = sgr_locate (group);
-	if (NULL != tmpsg) {
-		*sg = *tmpsg;
-		sg->sg_name = xstrdup (tmpsg->sg_name);
-		sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
-
-		sg->sg_mem = dup_list (tmpsg->sg_mem);
-		sg->sg_adm = dup_list (tmpsg->sg_adm);
-	} else {
-		sg->sg_name = xstrdup (group);
-		sg->sg_passwd = gr->gr_passwd;
-		gr->gr_passwd = "!";	/* XXX warning: const */
-
-		sg->sg_mem = dup_list (gr->gr_mem);
-
-		sg->sg_adm = (char **) xmalloc (sizeof (char *) * 2);
-#ifdef FIRST_MEMBER_IS_ADMIN
-		if (sg->sg_mem[0]) {
-			sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
-			sg->sg_adm[1] = NULL;
-		} else
-#endif
-		{
-			sg->sg_adm[0] = NULL;
+			exit (1);
 		}
+		tmpsg = sgr_locate (group);
+		if (NULL != tmpsg) {
+			*sg = *tmpsg;
+			sg->sg_name = xstrdup (tmpsg->sg_name);
+			sg->sg_passwd = xstrdup (tmpsg->sg_passwd);
 
-	}
-	if (sgr_close () == 0) {
-		fprintf (stderr, _("%s: can't close shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "closing /etc/gshadow", group, -1, 0);
+			sg->sg_mem = dup_list (tmpsg->sg_mem);
+			sg->sg_adm = dup_list (tmpsg->sg_adm);
+		} else {
+			sg->sg_name = xstrdup (group);
+			sg->sg_passwd = gr->gr_passwd;
+			gr->gr_passwd = "!";	/* XXX warning: const */
+
+			sg->sg_mem = dup_list (gr->gr_mem);
+
+			sg->sg_adm = (char **) xmalloc (sizeof (char *) * 2);
+#ifdef FIRST_MEMBER_IS_ADMIN
+			if (sg->sg_mem[0]) {
+				sg->sg_adm[0] = xstrdup (sg->sg_mem[0]);
+				sg->sg_adm[1] = NULL;
+			} else
 #endif
-		exit (1);
-	}
+			{
+				sg->sg_adm[0] = NULL;
+			}
+
+		}
+		if (sgr_close () == 0) {
+			fprintf (stderr,
+			         _("%s: can't close shadow file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "closing /etc/gshadow", group, -1, 0);
+#endif
+			exit (1);
+		}
 	}
 #endif				/* SHADOWGRP */
 }
@@ -738,7 +743,7 @@ int main (int argc, char **argv)
 		fputs (_("Who are you?\n"), stderr);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "user lookup", NULL,
-			      bywho, 0);
+		              bywho, 0);
 #endif
 		failure ();
 	}
@@ -773,10 +778,10 @@ int main (int argc, char **argv)
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting group password", group, -1, 1);
+		              "deleting group password", group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "remove password from group %s by %s",
-			 group, myname));
+		         group, myname));
 		goto output;
 	} else if (Rflg) {
 		/*
@@ -789,7 +794,7 @@ int main (int argc, char **argv)
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "restrict access to group", group, -1, 1);
+		              "restrict access to group", group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "restrict access to group %s by %s",
 			 group, myname));
@@ -805,15 +810,15 @@ int main (int argc, char **argv)
 		grent.gr_mem = add_list (grent.gr_mem, user);
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
-		sgent.sg_mem = add_list (sgent.sg_mem, user);
+			sgent.sg_mem = add_list (sgent.sg_mem, user);
 		}
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group member",
-			      user, -1, 1);
+		              user, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add member %s to group %s by %s", user,
-			 group, myname));
+		         group, myname));
 		goto output;
 	}
 
@@ -832,27 +837,27 @@ int main (int argc, char **argv)
 		}
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
-		if (is_on_list (sgent.sg_mem, user)) {
-			removed = 1;
-			sgent.sg_mem = del_list (sgent.sg_mem, user);
-		}
+			if (is_on_list (sgent.sg_mem, user)) {
+				removed = 1;
+				sgent.sg_mem = del_list (sgent.sg_mem, user);
+			}
 		}
 #endif
 		if (!removed) {
 			fprintf (stderr, _("%s: unknown member %s\n"),
-				 Prog, user);
+			         Prog, user);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting member", user, -1, 0);
+			              "deleting member", user, -1, 0);
 #endif
 			exit (1);
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting member",
-			      user, -1, 1);
+		              user, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "remove member %s from group %s by %s",
-			 user, group, myname));
+		         user, group, myname));
 		goto output;
 	}
 #ifdef SHADOWGRP
@@ -864,10 +869,10 @@ int main (int argc, char **argv)
 	if (Aflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "setting group admin",
-			      group, -1, 1);
+		              group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "set administrators of %s to %s",
-			 group, admins));
+		         group, admins));
 		sgent.sg_adm = comma_to_list (admins);
 		if (!Mflg) {
 			goto output;
@@ -883,7 +888,7 @@ int main (int argc, char **argv)
 	if (Mflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "setting group members", group, -1, 1);
+		              "setting group members", group, -1, 1);
 #endif
 		SYSLOG ((LOG_INFO, "set members of %s to %s", group, members));
 #ifdef SHADOWGRP
@@ -902,7 +907,7 @@ int main (int argc, char **argv)
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
-			      group, -1, 0);
+		              group, -1, 0);
 #endif
 		exit (1);
 	}
@@ -936,7 +941,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing id to root",
-			      group, -1, 0);
+		              group, -1, 0);
 #endif
 		closelog ();
 		exit (1);
