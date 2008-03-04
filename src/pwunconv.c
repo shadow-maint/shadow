@@ -86,7 +86,7 @@ int main (int argc, char **argv)
 	}
 
 	if (!spw_lock ()) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		fprintf (stderr, _("%s: can't lock shadow file\n"), Prog);
 		fail_exit (5);
 	}
 	shadow_locked++;
