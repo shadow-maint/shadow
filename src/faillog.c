@@ -163,8 +163,14 @@ static void reset (void)
 
 	if (uflg)
 		reset_one (user);
-	else
-		for (uid = 0; reset_one (uid); uid++);
+	else {
+		struct passwd *pwent;
+
+		setpwent ();
+		while ( pwent = getpwent () ) {
+			reset_one (pwent->pw_uid);
+		}
+	}
 }
 
 static void print (void)

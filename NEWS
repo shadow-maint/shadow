@@ -21,6 +21,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - chage
   * Fix bug which forbid to set the aging information of an account with a
     passwd entry, but no shadow entry.
+- faillog
+  * faillog -r now only reset the entries of existing users. This makes
+    faillog faster.
 - gpasswd
   * Fix failures when the gshadow file is not present.
   * When a password is moved to the gshadow file, use "x" instead of "x"
