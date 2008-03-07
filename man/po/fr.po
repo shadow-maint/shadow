@@ -6039,7 +6039,7 @@ msgid ""
 "replaceable>"
 msgstr ""
 "<option>-n</option>, <option>--new-name</"
-"option><replaceable>NOUVEAU_NOM_GROUPE</replaceable>"
+"option> <replaceable>NOUVEAU_NOM_GROUPE</replaceable>"
 
 #: groupmod.8.xml:75(para)
 msgid ""
