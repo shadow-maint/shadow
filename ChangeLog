@@ -1,3 +1,9 @@
+2008-03-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newgrp.c: Add missing end of line in message.
+	* src/newgrp.c: Add audit events for the authentication
+	(AUDIT_GRP_AUTH). Thansk to Peter Vrabec.
+
 2008-03-05  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/faillog.c: Only reset the entries of existing users

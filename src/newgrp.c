@@ -165,6 +165,12 @@ static void check_perms (const struct group *grp,
 
 		if (grp->gr_passwd[0] == '\0' ||
 		    strcmp (cpasswd, grp->gr_passwd) != 0) {
+#ifdef WITH_AUDIT
+			snprintf (audit_buf, sizeof(audit_buf),
+			          "authentication new-gid=%d", grp->gr_gid);
+			audit_logger (AUDIT_GRP_AUTH, Prog,
+			              audit_buf, NULL, getuid (), 0);
+#endif
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group `%s' from `%s'",
 				 groupname, pwd->pw_name));
@@ -172,6 +178,12 @@ static void check_perms (const struct group *grp,
 			fputs (_("Invalid password.\n"), stderr);
 			goto failure;
 		}
+#ifdef WITH_AUDIT
+		snprintf (audit_buf, sizeof(audit_buf),
+		          "authentication new-gid=%d", grp->gr_gid);
+		audit_logger (AUDIT_GRP_AUTH, Prog,
+		              audit_buf, NULL, getuid (), 1);
+#endif
 	}
 
 	return;
@@ -250,7 +262,7 @@ static void syslog_sg (const char *name, const char *group)
 		child = fork ();
 		if (child < 0) {
 			/* error in fork() */
-			fprintf (stderr, _("%s: failure forking: %s"),
+			fprintf (stderr, _("%s: failure forking: %s\n"),
 				 is_newgrp ? "newgrp" : "sg", strerror (errno));
 #ifdef WITH_AUDIT
 			if (group) {
