@@ -1,5 +1,13 @@
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c (commonio_remove): Fail when the name to be
+	removed is used by different entries (like commonio_update does).
+	* NEWS: This fix the behavior of groupdel when the system is not
+	configured to support split group but different group entries
+	have the name of the group to be deleted.
+
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/useradd.c: Make sure the passwd, group, shadow, and
 	gshadow files are unlocked on exit. Unlock locked files in
 	fail_exit(). Prefer fail_exit() over exit().
