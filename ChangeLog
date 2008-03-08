@@ -1,5 +1,10 @@
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/gpasswd.c: Make sure the group and gshadow files are
+	unlocked on exit. Add function fail_exit().
+
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupdel.c: Do not rewrite the group and gshadow file
 	in case of error.
 

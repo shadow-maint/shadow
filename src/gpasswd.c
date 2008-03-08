@@ -56,7 +56,9 @@ static char *Prog;
 /* Indicate if shadow groups are enabled on the system
  * (/etc/gshadow present) */
 static int is_shadowgrp;
+static int gshadow_locked = 0;
 #endif
+static int group_locked = 0;
 
 /* Flags set by options */
 static int
@@ -86,6 +88,7 @@ static unsigned long bywho = -1;
 /* local function prototypes */
 static void usage (void);
 static RETSIGTYPE catch_signals (int killed);
+static void fail_exit (int status);
 static int check_list (const char *users);
 static void process_flags (int argc, char **argv);
 static void check_flags (int argc, int opt_index);
@@ -141,8 +144,23 @@ static RETSIGTYPE catch_signals (int killed)
 	if (killed) {
 		putchar ('\n');
 		fflush (stdout);
-		exit (killed);
+		fail_exit (killed);
 	}
+}
+
+/*
+ * fail_exit - undo as much as possible
+ */
+static void fail_exit (int status)
+{
+	if (group_locked) {
+		gr_unlock ();
+	}
+	if (gshadow_locked) {
+		sgr_unlock ();
+	}
+
+	exit (status);
 }
 
 /*
@@ -192,7 +210,7 @@ static int check_list (const char *users)
 static void failure (void)
 {
 	fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-	exit (1);
+	fail_exit (1);
 }
 
 /*
@@ -215,7 +233,7 @@ static void process_flags (int argc, char **argv)
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 					      "adding to group", user, -1, 0);
 #endif
-				exit (1);
+				fail_exit (1);
 			}
 			aflg++;
 			break;
@@ -234,11 +252,11 @@ static void process_flags (int argc, char **argv)
 					 _
 					 ("%s: shadow group passwords required for -A\n"),
 					 Prog);
-				exit (2);
+				fail_exit (2);
 			}
 			admins = optarg;
 			if (check_list (admins) != 0) {
-				exit (1);
+				fail_exit (1);
 			}
 			Aflg++;
 			break;
@@ -260,7 +278,7 @@ static void process_flags (int argc, char **argv)
 			}
 			members = optarg;
 			if (check_list (members) != 0) {
-				exit (1);
+				fail_exit (1);
 			}
 			Mflg++;
 			break;
@@ -315,17 +333,22 @@ static void open_files (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
+	group_locked++;
 #ifdef SHADOWGRP
-	if (is_shadowgrp && (sgr_lock () == 0)) {
-		fprintf (stderr, _("%s: can't get shadow lock\n"), Prog);
-		SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
+	if (is_shadowgrp) {
+		if (sgr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: can't get shadow lock\n"), Prog);
+			SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "locking /etc/gshadow", group, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "locking /etc/gshadow", group, -1, 0);
 #endif
-		exit (1);
+			fail_exit (1);
+		}
+		gshadow_locked++;
 	}
 #endif
 	if (gr_open (O_RDWR) == 0) {
@@ -335,7 +358,7 @@ static void open_files (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_open (O_RDWR) == 0)) {
@@ -345,7 +368,7 @@ static void open_files (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/gshadow", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 #endif
 }
@@ -366,7 +389,7 @@ static void close_files (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewriting /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_close () == 0)) {
@@ -376,11 +399,12 @@ static void close_files (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewriting /etc/gshadow", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 	if (is_shadowgrp) {
 		/* TODO: same logging as in open_files & for /etc/group */
 		sgr_unlock ();
+		gshadow_locked--;
 	}
 #endif
 	if (gr_unlock () == 0) {
@@ -391,6 +415,7 @@ static void close_files (void)
 #endif
 		exit (1);
 	}
+	group_locked--;
 }
 
 /*
@@ -484,7 +509,7 @@ static void update_group (struct group *gr)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
@@ -494,7 +519,7 @@ static void update_group (struct group *gr)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/gshadow", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 #endif
 }
@@ -523,7 +548,7 @@ static void get_group (struct group *gr)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 
 	tmpgr = gr_locate (group);
@@ -548,7 +573,7 @@ static void get_group (struct group *gr)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "closing /etc/group", group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 
 #ifdef SHADOWGRP
@@ -561,7 +586,7 @@ static void get_group (struct group *gr)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "opening /etc/gshadow", group, -1, 0);
 #endif
-			exit (1);
+			fail_exit (1);
 		}
 		tmpsg = sgr_locate (group);
 		if (NULL != tmpsg) {
@@ -598,7 +623,7 @@ static void get_group (struct group *gr)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "closing /etc/gshadow", group, -1, 0);
 #endif
-			exit (1);
+			fail_exit (1);
 		}
 	}
 #endif				/* SHADOWGRP */
@@ -633,14 +658,14 @@ static void change_passwd (struct group *gr)
 	for (retries = 0; retries < RETRIES; retries++) {
 		cp = getpass (_("New Password: "));
 		if (NULL == cp) {
-			exit (1);
+			fail_exit (1);
 		}
 
 		STRFCPY (pass, cp);
 		strzero (cp);
 		cp = getpass (_("Re-enter new password: "));
 		if (NULL == cp) {
-			exit (1);
+			fail_exit (1);
 		}
 
 		if (strcmp (pass, cp) == 0) {
@@ -662,7 +687,7 @@ static void change_passwd (struct group *gr)
 
 	if (retries == RETRIES) {
 		fprintf (stderr, _("%s: Try again later\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
 
 	cp = pw_encrypt (pass, crypt_make_salt (NULL, NULL));
@@ -850,7 +875,7 @@ int main (int argc, char **argv)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "deleting member", user, -1, 0);
 #endif
-			exit (1);
+			fail_exit (1);
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting member",
@@ -909,7 +934,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
 		              group, -1, 0);
 #endif
-		exit (1);
+		fail_exit (1);
 	}
 
 	catch_signals (0);	/* save tty modes */
@@ -944,7 +969,7 @@ int main (int argc, char **argv)
 		              group, -1, 0);
 #endif
 		closelog ();
-		exit (1);
+		fail_exit (1);
 	}
 	pwd_init ();
 
