@@ -340,9 +340,10 @@ int main (int argc, char **argv)
 	open_files ();
 
 	grp_update ();
-	close_files ();
-
-	nscd_flush_cache ("group");
+	if (errors == 0) {
+		close_files ();
+		nscd_flush_cache ("group");
+	}
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS)
