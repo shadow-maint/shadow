@@ -64,6 +64,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * newusers will behave more like useradd regarding the choice of UID or
     GID or regarding the validity of user and group names.
   * New option -r, --system for system accounts.
+  * Make sure the passwd, group, shadow, and gshadow files are unlocked on
+    exit.
 - passwd
   * Make sure that no more than one username argument was provided.
 - pwck

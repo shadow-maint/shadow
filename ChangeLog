@@ -1,7 +1,14 @@
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c: Make sure the passwd, group, shadow, and
+	gshadow files are unlocked on exit. Add function fail_exit(). Use
+	fail_exit() instead of exit().
+
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/gpasswd.c: Make sure the group and gshadow files are
-	unlocked on exit. Add function fail_exit().
+	unlocked on exit. Add function fail_exit(). Use fail_exit()
+	instead of exit().
 
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -71,7 +71,11 @@ static long sha_rounds = 5000;
 static int is_shadow;
 #ifdef SHADOWGRP
 static int is_shadow_grp;
+static int gshadow_locked = 0;
 #endif
+static int passwd_locked = 0;
+static int group_locked = 0;
+static int shadow_locked = 0;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -79,6 +83,7 @@ static pam_handle_t *pamh = NULL;
 
 /* local function prototypes */
 static void usage (void);
+static void fail_exit (int);
 static int add_group (const char *, const char *, gid_t *, gid_t);
 static int get_uid (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
@@ -111,6 +116,29 @@ static void usage (void)
 #endif
 	                 );
 	exit (1);
+}
+
+/*
+ * fail_exit - undo as much as possible
+ */
+static void fail_exit (int code)
+{
+	if (shadow_locked) {
+		spw_unlock ();
+	}
+	if (passwd_locked) {
+		pw_unlock ();
+	}
+	if (group_locked) {
+		gr_unlock ();
+	}
+#ifdef	SHADOWGRP
+	if (gshadow_locked) {
+		sgr_unlock ();
+	}
+#endif
+
+	exit (code);
 }
 
 /*
@@ -460,7 +488,7 @@ static void process_flags (int argc, char **argv)
 			char buf[BUFSIZ];
 			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
-			exit (1);
+			fail_exit (1);
 		}
 	}
 
@@ -540,7 +568,7 @@ static void check_perms (void)
 
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
 #endif				/* USE_PAM */
 }
@@ -558,24 +586,27 @@ static void open_files (void)
 	 */
 	if (!pw_lock ()) {
 		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
-
-	if (   (is_shadow && !spw_lock ())
-	    || (!gr_lock ())
+	passwd_locked++;
+	if (is_shadow && !spw_lock ()) {
+		fprintf (stderr, _("%s: can't lock /etc/shadow.\n"), Prog);
+		fail_exit (1);
+	}
+	shadow_locked++;
+	if (!gr_lock ()) {
+		fprintf (stderr, _("%s: can't lock /etc/group.\n"), Prog);
+		fail_exit (1);
+	}
+	group_locked++;
 #ifdef SHADOWGRP
-	    || (is_shadow_grp && !sgr_lock())
-#endif
-	   ) {
-		fprintf (stderr,
-		         _("%s: can't lock files, try again later\n"), Prog);
-		(void) pw_unlock ();
-		if (is_shadow) {
-			(void) spw_unlock ();
-		}
-		(void) gr_unlock ();
-		exit (1);
+	if (is_shadow_grp && !sgr_lock ()) {
+		fprintf (stderr, _("%s: can't lock /etc/gshadow.\n"), Prog);
+		fail_exit (1);
 	}
+	gshadow_locked++;
+#endif
+
 	if (   (!pw_open (O_RDWR))
 	    || (is_shadow && !spw_open (O_RDWR))
 	    || !gr_open (O_RDWR)
@@ -584,17 +615,7 @@ static void open_files (void)
 #endif
 	   ) {
 		fprintf (stderr, _("%s: can't open files\n"), Prog);
-		(void) pw_unlock ();
-		if (is_shadow) {
-			spw_unlock ();
-		}
-		(void) gr_unlock ();
-#ifdef SHADOWGRP
-		if (is_shadow_grp) {
-			(void) sgr_unlock();
-		}
-#endif
-		exit (1);
+		fail_exit (1);
 	}
 }
 
@@ -611,28 +632,22 @@ static void close_files (void)
 #endif
 	   ) {
 		fprintf (stderr, _("%s: error updating files\n"), Prog);
-#ifdef SHADOWGRP
-		if (is_shadow_grp) {
-			(void) sgr_unlock();
-		}
-#endif
-		(void) gr_unlock ();
-		if (is_shadow) {
-			(void) spw_unlock ();
-		}
-		(void) pw_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
 		(void) sgr_unlock();
+		gshadow_locked--;
 	}
 #endif
 	(void) gr_unlock ();
+	group_locked--;
 	if (is_shadow) {
 		(void) spw_unlock ();
+		shadow_locked--;
 	}
 	(void) pw_unlock ();
+	passwd_locked--;
 }
 
 int main (int argc, char **argv)
@@ -840,7 +855,7 @@ int main (int argc, char **argv)
 			spw_unlock ();
 		}
 		(void) pw_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 	close_files ();
@@ -852,7 +867,6 @@ int main (int argc, char **argv)
 	pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
-	exit (0);
-	/* NOT REACHED */
+	return 0;
 }
 
