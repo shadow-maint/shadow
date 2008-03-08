@@ -357,3 +357,13 @@ ENVIRON_FILE	/etc/environment
 #
 USERGROUPS_ENAB yes
 
+#
+# If set to a non-nul number, the shadow utilities will make sure that
+# groups never have more than this number of users on one line.
+# This permit to support split groups (groups split into multiple lines,
+# with the same group ID, to avoid limitation of the line length in the
+# group file).
+#
+# 0 is the default value and disables this feature.
+#
+#MAX_MEMBERS_PER_GROUP	0

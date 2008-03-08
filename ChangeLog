@@ -1,3 +1,7 @@
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* etc/login.defs: Document MAX_MEMBERS_PER_GROUP.
+
 2008-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newgrp.c: Add missing end of line in message.
