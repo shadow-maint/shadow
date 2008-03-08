@@ -108,11 +108,6 @@ static void grp_update (void)
 		}
 	}
 #endif				/* SHADOWGRP */
-#ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group", group_name,
-		      group_id, 1);
-#endif
-	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
 	return;
 }
 
@@ -124,6 +119,12 @@ static void grp_update (void)
  */
 static void close_files (void)
 {
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group", group_name,
+	              group_id, 1);
+#endif
+	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
+
 	if (!gr_close ()) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		errors++;

@@ -1,5 +1,10 @@
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupdel.c: Do not log that the group was deleted if an
+	error occurred.
+
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupdel.c: Do not raise an error if the group does not
 	exist in the gshadow file.
 
