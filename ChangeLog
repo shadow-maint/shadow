@@ -1,5 +1,14 @@
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmod.c: Make sure the passwd, group, and gshadow
+	files are unlocked on exit. Unlock locked files in fail_exit().
+	Prefer fail_exit() over exit().
+	* NEWS, src/groupmod.c: When the GID of a group is changed, update
+	also the GID of the passwd entries of the users whose primary
+	group is the group being modified.
+
+2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c (commonio_remove): Fail when the name to be
 	removed is used by different entries (like commonio_update does).
 	* NEWS: This fix the behavior of groupdel when the system is not

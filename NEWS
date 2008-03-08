@@ -42,6 +42,9 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
   * Fix buffer overflow when adding an user to a group. Thanks to Peter Vrabec.
 - groupmod
   * New option -p/--password to specify an encrypted password.
+  * Make sure the group and gshadow files are unlocked on exit.
+  * When the GID of a group is changed, update also the GID of the passwd
+    entries of the users whose primary group is the group being modified.
 - grpck
   * Fix logging of changes to syslog when a group file is provided,
     without a gshadow file.

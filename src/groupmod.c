@@ -44,6 +44,7 @@
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
+#include "pwio.h"
 #include "nscd.h"
 #include "prototypes.h"
 #ifdef	SHADOWGRP
@@ -64,7 +65,10 @@
  */
 #ifdef	SHADOWGRP
 static int is_shadow_grp;
+static int gshadow_locked = 0;
 #endif
+static int group_locked = 0;
+static int passwd_locked = 0;
 static char *group_name;
 static char *group_newname;
 static char *group_passwd;
@@ -81,6 +85,7 @@ static int
 
 /* local function prototypes */
 static void usage (void);
+static void fail_exit (int);
 static void new_grent (struct group *);
 
 #ifdef SHADOWGRP
@@ -93,6 +98,7 @@ static void process_flags (int, char **);
 static void close_files (void);
 static void open_files (void);
 static gid_t get_gid (const char *gidstr);
+static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 /*
  * usage - display usage message and exit
@@ -110,6 +116,20 @@ static void usage (void)
 	         "  -p, --password PASSWORD       use encrypted password for the new password\n"
 	         "\n"), stderr);
 	exit (E_USAGE);
+}
+
+static void fail_exit (int status)
+{
+	if (group_locked) {
+		gr_unlock ();
+	}
+	if (gshadow_locked) {
+		sgr_unlock ();
+	}
+	if (passwd_locked) {
+		pw_unlock();
+	}
+	exit (status);
 }
 
 /*
@@ -174,7 +194,7 @@ static void grp_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
 			      group_name, -1, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	grp = *ogrp;
 	new_grent (&grp);
@@ -187,6 +207,10 @@ static void grp_update (void)
 	}
 #endif				/* SHADOWGRP */
 
+	if (gflg) {
+		update_primary_groups (ogrp->gr_gid, group_newid);
+	}
+
 	/*
 	 * Write out the new group file entry.
 	 */
@@ -196,7 +220,7 @@ static void grp_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
 			      group_name, -1, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	if (nflg && !gr_remove (group_name)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
@@ -204,7 +228,7 @@ static void grp_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
 			      group_name, -1, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 
@@ -225,7 +249,7 @@ static void grp_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
 			      group_name, -1, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && nflg && !sgr_remove (group_name)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
@@ -233,7 +257,7 @@ static void grp_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
 			      group_name, -1, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
       out:
 #endif				/* SHADOWGRP */
@@ -246,9 +270,10 @@ static void grp_update (void)
 		SYSLOG ((LOG_INFO, "change group `%s' to `%s'",
 			 group_name, group_newname));
 
-	if (gflg)
+	if (gflg) {
 		SYSLOG ((LOG_INFO, "change GID for `%s' to %u",
 			 nflg ? group_newname : group_name, group_newid));
+	}
 }
 
 /*
@@ -279,7 +304,7 @@ static void check_new_gid (void)
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify gid", NULL,
 		      group_newid, 0);
 #endif
-	exit (E_GID_IN_USE);
+	fail_exit (E_GID_IN_USE);
 }
 
 /*
@@ -312,7 +337,7 @@ static void check_new_name (void)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "modifying group", group_name, -1, 0);
 #endif
-			exit (E_NAME_IN_USE);
+			fail_exit (E_NAME_IN_USE);
 		}
 		return;
 	}
@@ -327,7 +352,7 @@ static void check_new_name (void)
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group", group_name,
 		      -1, 0);
 #endif
-	exit (E_BAD_ARG);
+	fail_exit (E_BAD_ARG);
 }
 
 /*
@@ -342,7 +367,7 @@ static gid_t get_gid (const char *gidstr)
 	if (*errptr || errno == ERANGE || val < 0) {
 		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
 			 gidstr);
-		exit (E_BAD_ARG);
+		fail_exit (E_BAD_ARG);
 	}
 	return val;
 }
@@ -417,18 +442,30 @@ static void close_files (void)
 {
 	if (!gr_close ()) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
+	group_locked--;
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && !sgr_close ()) {
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow group file\n"), Prog);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp)
+	if (is_shadow_grp) {
 		sgr_unlock ();
+		gshadow_locked--;
+	}
 #endif				/* SHADOWGRP */
+	if (gflg) {
+		if (!pw_close ()) {
+			fprintf (stderr,
+			         _("%s: cannot rewrite passwd file\n"), Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		pw_unlock();
+		passwd_locked--;
+	}
 }
 
 /*
@@ -440,24 +477,74 @@ static void open_files (void)
 {
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
+	group_locked++;
 	if (!gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
-		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"), Prog);
-		exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
-		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"), Prog);
-		exit (E_GRP_UPDATE);
+	if (is_shadow_grp) {
+		if (!sgr_lock ()) {
+			fprintf (stderr,
+			         _("%s: unable to lock shadow group file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		gshadow_locked++;
+		if (!sgr_open (O_RDWR)) {
+			fprintf (stderr,
+			         _("%s: unable to open shadow group file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif				/* SHADOWGRP */
+	if (gflg) {
+		if (!pw_lock ()) {
+			fprintf (stderr,
+			         _("%s: unable to lock password file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		passwd_locked++;
+		if (!pw_open (O_RDWR)) {
+			fprintf (stderr,
+			         _("%s: unable to open password file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+	}
+}
+
+void update_primary_groups (gid_t ogid, gid_t ngid)
+{
+	struct passwd *pwd;
+
+	setpwent ();
+	while ((pwd = getpwent ()) != NULL) {
+		if (pwd->pw_gid == ogid) {
+			const struct passwd *lpwd;
+			struct passwd npwd;
+			lpwd = pw_locate (pwd->pw_name);
+			if (NULL == lpwd) {
+				fprintf (stderr,
+				         _("%s: cannot change the primary group of user '%s' from %u to %u, since it is not in the passwd file.\n"),
+				         Prog, pwd->pw_name, ogid, ngid);
+				fail_exit (E_GRP_UPDATE);
+			} else {
+				npwd = *lpwd;
+				npwd.pw_gid = ngid;
+				if (!pw_update (&npwd)) {
+					fprintf (stderr,
+					         _("%s: cannot change the primary group of user '%s' from %u to %u.\n"),
+					         Prog, pwd->pw_name, ogid, ngid);
+					fail_exit (E_GRP_UPDATE);
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -528,7 +615,7 @@ int main (int argc, char **argv)
 
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
 #endif				/* USE_PAM */
 
@@ -548,7 +635,7 @@ int main (int argc, char **argv)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "modifying group", group_name, -1, 0);
 #endif
-			exit (E_NOTFOUND);
+			fail_exit (E_NOTFOUND);
 		} else
 			group_id = grp->gr_gid;
 	}
@@ -581,7 +668,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: %s is the NIS master\n"),
 				 Prog, nis_master);
 		}
-		exit (E_NOTFOUND);
+		fail_exit (E_NOTFOUND);
 	}
 #endif
 
@@ -598,6 +685,7 @@ int main (int argc, char **argv)
 	open_files ();
 
 	grp_update ();
+
 	close_files ();
 
 	nscd_flush_cache ("group");
@@ -609,3 +697,4 @@ int main (int argc, char **argv)
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }
+
