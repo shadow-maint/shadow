@@ -52,7 +52,6 @@
  */
 static char *group_name;
 static char *Prog;
-static int errors;
 static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP
