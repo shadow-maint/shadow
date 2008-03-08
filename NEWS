@@ -88,6 +88,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     should replace nflg from the previous versions. Please set any -n
     option to deprecated because its meaning differs from one distribution
     to the other.
+  * Make sure the passwd, group, shadow, and gshadow files are unlocked on
+    exit.
 - usermod
   * Keep the access and modification time of files when moving an user's home
     directory.

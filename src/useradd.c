@@ -107,7 +107,11 @@ static int is_shadow_pwd;
 
 #ifdef SHADOWGRP
 static int is_shadow_grp;
+static int gshadow_locked = 0;
 #endif
+static int passwd_locked = 0;
+static int group_locked = 0;
+static int shadow_locked = 0;
 static char **user_groups;	/* NULL-terminated list */
 static long sys_ngroups;
 static int do_grp_update = 0;	/* group files need to be updated */
@@ -189,6 +193,21 @@ static void fail_exit (int code)
 {
 	if (home_added)
 		rmdir (user_home);
+
+	if (shadow_locked) {
+		spw_unlock ();
+	}
+	if (passwd_locked) {
+		pw_unlock ();
+	}
+	if (group_locked) {
+		gr_unlock ();
+	}
+#ifdef	SHADOWGRP
+	if (gshadow_locked) {
+		sgr_unlock ();
+	}
+#endif
 
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, -1,
@@ -1170,13 +1189,19 @@ static void close_files (void)
 		}
 #endif
 	}
-	if (is_shadow_pwd)
+	if (is_shadow_pwd) {
 		spw_unlock ();
+		shadow_locked--;
+	}
 	pw_unlock ();
+	passwd_locked--;
 	gr_unlock ();
+	group_locked--;
 #ifdef	SHADOWGRP
-	if (is_shadow_grp)
+	if (is_shadow_grp) {
 		sgr_unlock ();
+		gshadow_locked--;
+	}
 #endif
 }
 
@@ -1195,60 +1220,68 @@ static void open_files (void)
 #endif
 		exit (E_PW_UPDATE);
 	}
+	passwd_locked++;
 	if (!pw_open (O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			      "opening password file", user_name, user_id, 0);
 #endif
-		pw_unlock ();
-		exit (E_PW_UPDATE);
+		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && !spw_lock ()) {
-		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"), Prog);
+	if (is_shadow_pwd) {
+		if (!spw_lock ()) {
+			fprintf (stderr,
+			         _("%s: cannot lock shadow password file\n"),
+			         Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking shadow password file", user_name,
-			      user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "locking shadow password file", user_name,
+			              user_id, 0);
 #endif
-		pw_unlock ();
-		exit (E_PW_UPDATE);
-	}
-	if (is_shadow_pwd && !spw_open (O_RDWR)) {
-		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"), Prog);
+			fail_exit (E_PW_UPDATE);
+		}
+		shadow_locked++;
+		if (!spw_open (O_RDWR)) {
+			fprintf (stderr,
+			         _("%s: cannot open shadow password file\n"),
+			         Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening shadow password file", user_name,
-			      user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "opening shadow password file", user_name,
+			              user_id, 0);
 #endif
-		spw_unlock ();
-		pw_unlock ();
-		exit (E_PW_UPDATE);
+			fail_exit (E_PW_UPDATE);
+		}
 	}
+
 	/*
 	 * Lock and open the group file.
 	 */
-
 	if (!gr_lock ()) {
 		fprintf (stderr, _("%s: error locking group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
+	group_locked++;
 	if (!gr_open (O_RDWR)) {
 		fprintf (stderr, _("%s: error opening group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef  SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
-		fprintf (stderr,
-			 _("%s: error locking shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
-		fprintf (stderr,
-			 _("%s: error opening shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
+	if (is_shadow_grp) {
+		if (!sgr_lock ()) {
+			fprintf (stderr,
+			         _("%s: error locking shadow group file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		gshadow_locked++;
+		if (!sgr_open (O_RDWR)) {
+			fprintf (stderr,
+			         _("%s: error opening shadow group file\n"),
+			         Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif
 }
@@ -1405,7 +1438,7 @@ static void usr_update (void)
 	if (!pw_update (&pwent)) {
 		fprintf (stderr,
 			 _("%s: error adding new password entry\n"), Prog);
-		exit (E_PW_UPDATE);
+		fail_exit (E_PW_UPDATE);
 	}
 
 	/*
@@ -1420,7 +1453,7 @@ static void usr_update (void)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			      "adding shadow password", user_name, user_id, 0);
 #endif
-		exit (E_PW_UPDATE);
+		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name,
@@ -1588,7 +1621,7 @@ int main (int argc, char **argv)
 
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
 #endif				/* USE_PAM */
 
@@ -1613,7 +1646,7 @@ int main (int argc, char **argv)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
 			      user_name, -1, 0);
 #endif
-		exit (E_NAME_IN_USE);
+		fail_exit (E_NAME_IN_USE);
 	}
 
 	/*
@@ -1632,7 +1665,7 @@ int main (int argc, char **argv)
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				      "adding group", user_name, -1, 0);
 #endif
-			exit (E_NAME_IN_USE);
+			fail_exit (E_NAME_IN_USE);
 		}
 	}
 
@@ -1662,7 +1695,7 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, user_id, 0);
 #endif
-				exit (E_UID_IN_USE);
+				fail_exit (E_UID_IN_USE);
 			}
 		}
 	}
@@ -1723,6 +1756,5 @@ int main (int argc, char **argv)
 		pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
-	exit (E_SUCCESS);
-	/* NOT REACHED */
+	return E_SUCCESS;
 }
