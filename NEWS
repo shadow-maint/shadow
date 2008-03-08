@@ -31,6 +31,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
 - groupadd
   * New option -p/--password to specify an encrypted password.
   * New option -r, --system for system accounts.
+- groupdel
+  * Do not fail if the group does not exist in the gshadow file.
 - groupmems
   * Fix buffer overflow when adding an user to a group. Thanks to Peter Vrabec.
 - groupmod

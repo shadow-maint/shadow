@@ -99,10 +99,13 @@ static void grp_update (void)
 	/*
 	 * Delete the shadow group entries as well.
 	 */
-	if (is_shadow_grp && !sgr_remove (group_name)) {
-		fprintf (stderr,
-			 _("%s: error removing shadow group entry\n"), Prog);
-		errors++;
+	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
+		if (!sgr_remove (group_name)) {
+			fprintf (stderr,
+			         _("%s: error removing shadow group entry\n"),
+			         Prog);
+			errors++;
+		}
 	}
 #endif				/* SHADOWGRP */
 #ifdef WITH_AUDIT
