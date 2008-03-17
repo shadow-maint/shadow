@@ -66,7 +66,7 @@
 #ifdef	SHADOWGRP
 static int is_shadow_grp;
 static int gshadow_locked = 0;
-#endif
+#endif				/* SHADOWGRP */
 static int group_locked = 0;
 static int passwd_locked = 0;
 static char *group_name;
@@ -123,9 +123,11 @@ static void fail_exit (int status)
 	if (group_locked) {
 		gr_unlock ();
 	}
+#ifdef	SHADOWGRP
 	if (gshadow_locked) {
 		sgr_unlock ();
 	}
+#endif				/* SHADOWGRP */
 	if (passwd_locked) {
 		pw_unlock();
 	}

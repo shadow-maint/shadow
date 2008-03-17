@@ -156,9 +156,11 @@ static void fail_exit (int status)
 	if (group_locked) {
 		gr_unlock ();
 	}
+#ifdef SHADOWGRP
 	if (gshadow_locked) {
 		sgr_unlock ();
 	}
+#endif
 
 	exit (status);
 }

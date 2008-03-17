@@ -1,5 +1,10 @@
 2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c, src/groupmod.c: Compilation fix. gshadow_locked
+	should only be used if SHADOWGRP is defined.
+
+2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpck.c: Fix some warnings. compare_members_lists() is only
 	used if SHADOWGRP is defined.
 
