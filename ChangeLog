@@ -1,3 +1,8 @@
+2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/grpck.c: Fix some warnings. compare_members_lists() is only
+	used if SHADOWGRP is defined.
+
 2008-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/groupmod.c: Make sure the passwd, group, and gshadow

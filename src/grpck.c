@@ -85,13 +85,13 @@ static int check_members (const char *groupname,
                           const char *fmt_prompt,
                           const char *fmt_syslog,
                           int *errors);
+static void check_grp_file (int *errors, int *changed);
+#ifdef SHADOWGRP
 static void compare_members_lists (const char *groupname,
                                    char **members,
                                    char **other_members,
                                    const char *file,
                                    const char *other_file);
-static void check_grp_file (int *errors, int *changed);
-#ifdef SHADOWGRP
 static void check_sgr_file (int *errors, int *changed);
 #endif
 
@@ -350,6 +350,7 @@ static int check_members (const char *groupname,
 	return members_changed;
 }
 
+#ifdef SHADOWGRP
 /*
  * compare_members_lists - make sure the list of members is contained in
  *                         another list.
@@ -381,6 +382,7 @@ static void compare_members_lists (const char *groupname,
 		}
 	}
 }
+#endif				/* SHADOWGRP */
 
 /*
  * check_grp_file - check the content of the group file
