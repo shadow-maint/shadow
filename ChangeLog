@@ -1,5 +1,10 @@
 2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.5.xml: Fix manpages generation. The SYS_GID_MAX
+	and SYS_UID_MAX entities were not defined.
+
+2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: Fix minor compilation warning (assignment used as
 	a comparison).
 
