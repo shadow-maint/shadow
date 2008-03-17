@@ -114,6 +114,9 @@ extern void dolastlog (struct lastlog *ll,
                        const char *line,
                        const char *host);
 
+/* login_nopam.c */
+extern int login_access (const char *user, const char *from);
+
 /* loginprompt.c */
 extern void login_prompt (const char *, char *, int);
 

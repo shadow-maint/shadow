@@ -128,8 +128,6 @@ static void setup_tty (void);
 static void check_flags (int, char *const *);
 
 #ifndef USE_PAM
-extern int login_access (const char *, const char *);
-
 static struct faillog faillog;
 
 static void bad_time_notify (void);
