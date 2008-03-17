@@ -1,5 +1,10 @@
 2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: Fix minor compilation warning (assignment used as
+	a comparison).
+
+2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, src/login.c: login_access() is used in
 	src/login.c, and defined in src/login_nopam.c (which lacks a
 	prototype). Move its prototype from src/login.c to

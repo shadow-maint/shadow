@@ -167,7 +167,7 @@ static void reset (void)
 		struct passwd *pwent;
 
 		setpwent ();
-		while ( pwent = getpwent () ) {
+		while ( (pwent = getpwent ()) != NULL ) {
 			reset_one (pwent->pw_uid);
 		}
 	}
