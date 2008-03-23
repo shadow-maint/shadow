@@ -1,3 +1,11 @@
+2008-03-23  Miguel Figueiredo  <elmig@debianpt.org>
+
+	* po/pt.po: updated to 431t
+
+2008-03-21  Changwoo Ryu  <cwryu@debian.org>
+
+	* po/ko.po: updated to 431t
+
 2008-03-17  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.5.xml: Fix manpages generation. The SYS_GID_MAX
