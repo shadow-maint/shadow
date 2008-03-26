@@ -74,6 +74,8 @@ shadow-4.1.0 -> shadow-4.1.1						UNRELEASED
     exit.
 - passwd
   * Make sure that no more than one username argument was provided.
+  * Make SE Linux tests more strict, when the real UID is 0 SE Linux
+    checks will be performed.
 - pwck
   * Fix logging of changes to syslog when a passwd file is provided,
     without a shadow file.

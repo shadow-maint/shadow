@@ -40,7 +40,9 @@
 #include <sys/types.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
+#include <selinux/flask.h>
 #include <selinux/av_permissions.h>
+#include <selinux/context.h>
 #endif
 #include <time.h>
 #include "defines.h"
@@ -613,6 +615,49 @@ static long getnumber (const char *numstr)
 	return val;
 }
 
+#ifdef WITH_SELINUX
+int
+check_selinux_access(const char *change_user, int change_uid, unsigned int access)
+{
+	int status = -1;
+	security_context_t user_context;
+	const char *user;
+
+	/* if in permissive mode then allow the operation */
+	if (security_getenforce() == 0)
+		return 0;
+
+	/* get the context of the process which executed passwd */
+	if (getprevcon(&user_context))
+		return -1;
+
+	/* get the "user" portion of the context (the part before the first
+	   colon) */
+	context_t c;
+	c = context_new(user_context);
+	user = context_user_get(c);
+
+	/* if changing a password for an account with UID==0 or for an account
+	   where the identity matches then return success */
+	if (change_uid != 0 && strcmp(change_user, user) == 0) {
+		status = 0;
+	} else {
+		struct av_decision avd;
+		int retval;
+		retval = security_compute_av(user_context, user_context,
+				SECCLASS_PASSWD, access, &avd);
+		if ((retval == 0) &&
+    			((access & avd.allowed) == access)) {
+			status = 0;
+		}
+	}
+	context_free(c);
+	freecon(user_context);
+	return status;
+}
+
+#endif
+
 /*
  * passwd - change a user's password file information
  *
@@ -844,21 +889,32 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
-	/*
-	 * If the UID of the user does not match the current real UID,
-	 * check if the change is allowed by SELinux policy.
-	 */
-	if ((pw->pw_uid != getuid ())
-	    && (is_selinux_enabled () > 0 ?
-		(selinux_check_passwd_access (PASSWD__PASSWD) != 0) :
-		!amroot)) {
-#else
+	/* only do this check when getuid()==0 because it's a pre-condition for
+	   changing a password without entering the old one */
+	if ((is_selinux_enabled() > 0) && (getuid() == 0) &&
+	  (check_selinux_access(name, pw->pw_uid, PASSWD__PASSWD) != 0))
+	{
+		security_context_t user_context;
+		if (getprevcon(&user_context) < 0) {
+			user_context = strdup("Unknown user context");
+		}
+		syslog(LOG_ALERT,
+		"%s is not authorized to change the password of %s",
+		user_context, name);
+		fprintf(stderr, _("%s: %s is not authorized to change the "
+			"password of %s\n"),
+		Prog, user_context, name);
+		freecon(user_context);
+		exit(1);
+	}
+
+#endif
+
 	/*
 	 * If the UID of the user does not match the current real UID,
 	 * check if I'm root.
 	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
-#endif
 		fprintf (stderr,
 			 _
 			 ("%s: You may not view or modify password information for %s.\n"),

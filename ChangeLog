@@ -1,3 +1,12 @@
+2008-03-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* TODO: Added entries regarding SE Linux.
+
+2008-03-26  Russell Coker  <russell@coker.com.au>
+
+	* src/passwd.c, NEWS: Make SE Linux tests more strict, when the
+	real UID is 0 SE Linux checks will be performed.
+
 2008-03-24  Yuri Kozlov  <kozlov.y@gmail.com>
 
 	* po/ru.po: updated to 431t
