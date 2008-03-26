@@ -1,3 +1,11 @@
+man useradd
+	document default behavior for GROUP
+	remove "The default group number is 1 or whatever is..."
+
+useradd manpage
+  - add -k option
+  - mention that -o require -u
+
 testsuite
  - newgrp
    - test with unknown user's GID
