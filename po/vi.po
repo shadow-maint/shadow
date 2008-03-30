@@ -1,90 +1,94 @@
 # Vietnamese translation for Shadow.
-# Copyright © 2006 Free Software Foundation, Inc.
-# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# Copyright © 2008 Free Software Foundation, Inc.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2008.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: shadow 4.0.18\n"
+"Project-Id-Version: shadow 4.1.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
-"PO-Revision-Date: 2007-11-26 22:32+0100\n"
+"POT-Creation-Date: 2008-03-18 00:08+0100\n"
+"PO-Revision-Date: 2008-03-30 19:53+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.6b4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.7b3\n"
 
 #, c-format
 msgid ""
 "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
+msgstr "Có nhiều mục nhập tên « %s » trong %s. Hãy sửa chữa trường hợp này, dùng pwck hoặc grpck.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
+msgstr "Phương pháp mã hoá không được libcrypt hỗ trợ ? (%s)\n"
 
 msgid "Could not allocate space for config info.\n"
-msgstr "Không thể phân chia chỗ cho thông tin cấu hình.\n"
+msgstr "Không thể cấp phát sức chứa cho thông tin cấu hình.\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr "lỗi cấu hình: không biết mục « %s » (báo quản trị).\n"
+msgstr "lỗi cấu hình: không rõ mục « %s » (báo quản trị).\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
-msgstr "Cảnh báo: không biết nhóm %s.\n"
+msgstr "Cảnh báo : không rõ nhóm %s.\n"
 
 msgid "Warning: too many groups\n"
-msgstr "Cảnh báo: quá nhiều nhóm\n"
+msgstr "Cảnh báo : quá nhiều nhóm\n"
 
 msgid "Your password has expired."
-msgstr "Mật khẩu bạn đã hết hạn."
+msgstr "Mật khẩu của bạn đã hết hạn dùng."
 
 msgid "Your password is inactive."
-msgstr "Mật khẩu bạn không hoạt động."
+msgstr "Mật khẩu của bạn không phải hoạt động."
 
 msgid "Your login has expired."
-msgstr "Đăng nhập bạn đã hết hạn."
+msgstr "Đăng nhập của bạn đã hết hạn dùng."
 
 msgid "  Contact the system administrator."
-msgstr "  Hãy liên lạc quản trị hệ thống."
+msgstr "  Hãy liên lạc với quản trị hệ thống."
 
 msgid "  Choose a new password."
 msgstr "  Hãy chọn mật khẩu mới."
 
 #, c-format
 msgid "Your password will expire in %ld days.\n"
-msgstr "Mật khẩu bạn sẽ hết hạn sau %ld ngày.\n"
+msgstr "Mật khẩu của bạn sẽ hết hạn sau %ld ngày.\n"
 
 msgid "Your password will expire tomorrow."
-msgstr "Mật khẩu bạn sễ hết hạn vào ngày mai."
+msgstr "Mật khẩu của bạn sễ hết hạn vào ngày mai."
 
 msgid "Your password will expire today."
-msgstr "Mật khẩu bạn sẽ hết hạn vào hôm nay."
+msgstr "Mật khẩu của bạn sẽ hết hạn vào hôm nay."
 
 #, c-format
 msgid "Unable to change tty %s"
-msgstr "Không thể thay đổi tty %s."
+msgstr "Không thể thay đổi TTY %s."
 
 msgid "Environment overflow\n"
-msgstr "Môi trường bị tràn.\n"
+msgstr "Tràn môi trường\n"
 
 #, c-format
 msgid "You may not change $%s\n"
-msgstr "Không cho phép bạn thay đổi $%s.\n"
+msgstr "Không cho phép bạn thay đổi $%s\n"
 
 #, c-format
 msgid ""
 "%d failure since last login.\n"
 "Last was %s on %s.\n"
-msgid_plural ""
-"%d failures since last login.\n"
+msgid_plural "%d failures since last login.\n"
 "Last was %s on %s.\n"
-msgstr[0] ""
-"%d lần bị lỗi sau khi đăng nhập cuối cùng.\n"
+msgstr[0] "%d lần bị lỗi sau khi đăng nhập cuối cùng.\n"
 "Lần gần nhất là %s vào %s.\n"
+
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "Không thể lấy UID duy nhất (không còn có UID sẵn sàng lại)\n"
+
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "Không thể lấy GID duy nhất (không còn có GID sẵn sàng lại)\n"
 
 msgid "Too many logins.\n"
 msgstr "Quá nhiều việc đăng nhập.\n"
@@ -105,7 +109,7 @@ msgid "a palindrome"
 msgstr "từ đọc xuôi ngược đều giống như nhau"
 
 msgid "case changes only"
-msgstr "chỉ thay đổi chữ thường/hoa thôi"
+msgstr "chỉ thay đổi chữ thường/hoa"
 
 msgid "too similar"
 msgstr "quá tương tự"
@@ -136,17 +140,18 @@ msgstr "passwd: mật khẩu đã được cập nhật\n"
 
 #, c-format
 msgid "Incorrect password for %s.\n"
-msgstr "Mật khẩu không đúng cho « %s ».\n"
+msgstr "Mật khẩu không đúng cho %s .\n"
 
 #, c-format
 msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
-msgstr ""
+msgstr "Phương pháp mã hoá (ENCRYPT_METHOD) không hợp lệ: « %s »\n"
+"nên hoàn nguyên về giá trị mặc định: DES.\n"
 
 #, c-format
 msgid "Unable to cd to '%s'\n"
-msgstr "Không thể cd (lệnh chuyển đổi thư mục) sang « %s ».\n"
+msgstr "Không thể cd (chuyển đổi thư mục) sang « %s ».\n"
 
 msgid "No directory, logging in with HOME=/"
 msgstr "Không có thư mục nên đăng nhập với « HOME=/ »"
@@ -165,15 +170,14 @@ msgstr "Không thể thay đổi thư mục gốc thành « %s »\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
 msgstr ""
-"Không có mục nhập utmp. Vì thế bạn phải thực hiện « login » (đăng nhập) từ « "
-"sh » (hệ vỏ) lớp thấp nhất."
+"Không có mục nhập utmp. Vì thế bạn cần phải thực hiện « login » (đăng nhập) từ « sh » (trình bao) cấp dưới cùng."
 
 msgid "Unable to determine your tty name."
-msgstr "Không thể quyết định tên tty của bạn."
+msgstr "Không thể quyết định tên TTY của bạn."
 
 #, c-format
 msgid "malloc(%d) failed\n"
-msgstr "malloc(%d) (phân chia bộ nhớ) đã thất bại.\n"
+msgstr "malloc(%d) (cấp phát bộ nhớ) bị lỗi\n"
 
 msgid "Password: "
 msgstr "Mật khẩu : "
@@ -199,7 +203,7 @@ msgid ""
 "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 "\n"
 msgstr ""
-"Cách sử dụng: chage [tùy_chọn...] người_dùng\n"
+"Sử dụng: chage [tùy_chọn...] ĐĂNG_NHẬP\n"
 "\n"
 "Tùy chọn:\n"
 "  -d, --lastday NGÀY    lập lần thay đổi mật khẩu cuối cùng thành ngày này\n"
@@ -218,10 +222,10 @@ msgstr ""
 "\n"
 
 msgid "Enter the new value, or press ENTER for the default"
-msgstr "Hãy gõ giá trị mới, hoạc bấm phím Enter để chọn mặc định"
+msgstr "Nhập giá trị mới, hoạc bấm phím Enter đặt chọn giá trị mặc định"
 
 msgid "Minimum Password Age"
-msgstr "Thời gian hoát động tối thiểu cho mật khẩu"
+msgstr "Thời gian hoạt động tối thiểu cho mật khẩu"
 
 msgid "Maximum Password Age"
 msgstr "Thời gian hoạt động tối đa cho mật khẩu"
@@ -245,7 +249,7 @@ msgid "never"
 msgstr "chưa bao giờ"
 
 msgid "password must be changed"
-msgstr "phải thay đổi mật khẩu"
+msgstr "mật khẩu phải thay đổi"
 
 msgid "Password expires\t\t\t\t\t: "
 msgstr "Mật khẩu hết hạn dùng:\t\t\t\t\t: "
@@ -270,7 +274,7 @@ msgstr "Số ngày cảnh báo trước khi mật khẩu hết hạn\t: %ld\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
-msgstr "%s: đừng bao gồm « l » cùng với cờ khác nào\n"
+msgstr "%s: đừng dùng « l » cùng với cờ khác\n"
 
 #, c-format
 msgid "%s: Permission denied.\n"
@@ -278,11 +282,11 @@ msgstr "%s: không đủ quyền.\n"
 
 #, c-format
 msgid "%s: PAM authentication failed\n"
-msgstr "%s: việc xác thức kiểu PAM bị lỗi\n"
+msgstr "%s: lỗi xác thực PAM\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
-msgstr "%s: không thể khóa tập tin mật khẩu\n"
+msgstr "%s: không thể khoá tập tin mật khẩu\n"
 
 #, c-format
 msgid "%s: can't open password file\n"
@@ -318,32 +322,32 @@ msgstr "%s: không có tập tin mật khẩu bóng\n"
 
 #, c-format
 msgid "%s: failed to drop privileges (%s)\n"
-msgstr "%s: việc bỏ quyền bị lỗi (%s)\n"
+msgstr "%s: lỗi bỏ quyền truy cập (%s)\n"
 
 #, c-format
 msgid "%s: unknown user %s\n"
-msgstr "%s: không biết người dùng %s\n"
+msgstr "%s: không rõ người dùng %s\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
-msgstr "Đang thay đổi thông tin thời gian hoạt động cho %s\n"
+msgstr "Đang thay đổi thông tin về thời gian hoạt động đối với %s\n"
 
 #, c-format
 msgid "%s: error changing fields\n"
-msgstr "%s: gặp lỗi khi chuyển trường\n"
+msgstr "%s: gặp lỗi khi thay đổi trường\n"
 
 #, c-format
 msgid ""
 "Usage: %s [-f full_name] [-r room_no] [-w work_ph]\n"
 "\t[-h home_ph] [-o other] [user]\n"
 msgstr ""
-"Cách sử dụng: %s [-f họ_tên] [-r số_phòng] [-w điện_thoại_chỗ_làm]\n"
+"Sử dụng: %s [-f họ_tên] [-r số_phòng] [-w điện_thoại_chỗ_làm]\n"
 "\t[-h điện_thoại_ở_nhà] [-o khác] [người_dùng]\n"
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
 msgstr ""
-"Cách sử dụng: %s [-f họ_tên] [-r số_phòng] [-w điện_thoại_chỗ_làm]\n"
+"Sử dụng: %s [-f họ_tên] [-r số_phòng] [-w điện_thoại_chỗ_làm]\n"
 "\t[-h điện_thoại_ở_nhà]\n"
 
 msgid "Full Name"
@@ -354,11 +358,11 @@ msgid "\tFull Name: %s\n"
 msgstr "\tHọ tên: %s\n"
 
 msgid "Room Number"
-msgstr "Số phòng"
+msgstr "Số thứ tự phòng"
 
 #, c-format
 msgid "\tRoom Number: %s\n"
-msgstr "\tSố phòng: %s\n"
+msgstr "\tSố thứ tự phòng: %s\n"
 
 msgid "Work Phone"
 msgstr "Điện thoại chỗ làm"
@@ -378,17 +382,17 @@ msgid "Other"
 msgstr "Khác"
 
 msgid "Cannot change ID to root.\n"
-msgstr "Không thể thay đổi thông tin nhận biết (ID) thành người chủ (root).\n"
+msgstr "Không thể thay đổi mã số thành người chủ (root).\n"
 
 msgid "Cannot lock the password file; try again later.\n"
-msgstr "Không thể khóa tập tin mật khẩu; hãy thử lại sau.\n"
+msgstr "Không thể khoá tập tin mật khẩu ; hãy thử lại sau.\n"
 
 msgid "Cannot open the password file.\n"
 msgstr "Không thể mở tập tin mật khẩu.\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: không tìm thấy %s trong </etc/passwd>\n"
+msgstr "%s: không tìm thấy %s trong « /etc/passwd »\n"
 
 msgid "Error updating the password entry.\n"
 msgstr "Gặp lỗi khi cập nhật mục nhập mật khẩu.\n"
@@ -397,7 +401,7 @@ msgid "Cannot commit password file changes.\n"
 msgstr "Không thể đệ trình các thay đổi về tập tin mật khẩu.\n"
 
 msgid "Cannot unlock the password file.\n"
-msgstr "Không thể bỏ khóa tập tin mật khẩu.\n"
+msgstr "Không thể bỏ khoá tập tin mật khẩu.\n"
 
 #, c-format
 msgid "%s: invalid name: '%s'\n"
@@ -405,7 +409,7 @@ msgstr "%s: tên không hợp lệ: « %s »\n"
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
-msgstr "%s: số phòng không hợp lệ: « %s »\n"
+msgstr "%s: số thứ tự phòng không hợp lệ: « %s »\n"
 
 #, c-format
 msgid "%s: invalid work phone: '%s'\n"
@@ -417,7 +421,7 @@ msgstr "%s: số điện thoại ở nhà không hợp lệ: « %s »\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
-msgstr "%s: « %s » chứa ký tự sai\n"
+msgstr "%s: « %s » chứa ký tự cấm\n"
 
 #, c-format
 msgid "%s: Cannot determine your user name.\n"
@@ -426,7 +430,7 @@ msgstr "%s: không thể quyết định tên người dùng của bạn.\n"
 #, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
 msgstr ""
-"%s: không thể thay đổi người dùng « %s » trên ứng dụng khách kiểu NIS.\n"
+"%s: không thể thay đổi người dùng « %s » trên ứng dụng khách NIS.\n"
 
 #, c-format
 msgid "%s: '%s' is the NIS master for this client.\n"
@@ -434,13 +438,13 @@ msgstr "%s: « %s » là NIS cái cho ứng dụng khách này.\n"
 
 #, c-format
 msgid "Changing the user information for %s\n"
-msgstr "Đang thay đổi thông tin người dùng cho %s\n"
+msgstr "Đang thay đổi thông tin về người dùng đối với %s\n"
 
 #, c-format
 msgid "%s: fields too long\n"
 msgstr "%s: trường quá dài\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [options]\n"
 "\n"
@@ -452,38 +456,35 @@ msgid ""
 "                                the MD5 algorithm\n"
 "%s\n"
 msgstr ""
-"Cách sử dụng: chpasswd [tùy_chọn...]\n"
-"\n"
-"[chpasswd: thay đổi mật khẩu]\n"
+"Sử dụng: %s [tùy_chọn]\n"
 "\n"
 "Tùy chọn:\n"
-"  -e, --encrypted               mọi mật khẩu đã cung cấp cũng đã _được mật "
-"mã_\n"
-"  -h, --help                    hiển thị _trợ giúp_ này rồi thoát\n"
-"  -m, --md5                     sử dụng mật mã MD5 thay vào DES khi các\n"
-"                                mật khẩu đã cung cấp chưa được mật mã\n"
-"\n"
+"  -c, --crypt-method            phương pháp mã hoá (một của %s)\n"
+"  -e, --encrypted               mã hoá mỗi mật khẩu đã cung cấp\n"
+"  -h, --help                    hiển thị trợ giúp này rồi thoát\n"
+"  -m, --md5           mã hoá mật khẩu nhập thô, dùng thuật toán MD5\n"
+"%s\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
-msgstr ""
+msgstr "  -s, --sha-rounds              số vòng SHA cho thuật toán mã hoá SHA*\n"
 
 #, c-format
 msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: đối số thuộc số không hợp lệ « %s »\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s flag is ONLY allowed with the %s flag\n"
-msgstr "%s: cho phép cờ CHỈ với cờ « -G » thôi\n"
+msgstr "%s: cho phép cờ %s CHỈ với cờ %s\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
-msgstr ""
+msgstr "%s: các cờ « -c », « -e » và « -m » loại từ lẫn nhau\n"
 
 #, c-format
 msgid "%s: unsupported crypt method: %s\n"
-msgstr ""
+msgstr "%s: phương pháp mã hoá không được hỗ trợ : %s\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -501,13 +502,13 @@ msgstr "%s: không thể khóa tập tin gshadow\n"
 msgid "%s: can't open shadow file\n"
 msgstr "%s: không thể mở tập tin bóng\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error updating gshadow file\n"
-msgstr "%s: gặp lỗi khi cập nhật tập tin bóng\n"
+msgstr "%s: gặp lỗi khi cập nhật tập tin gshadow\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error updating group file\n"
-msgstr "%s: gặp lỗi khi cập nhật mục nhập nhóm.\n"
+msgstr "%s: gặp lỗi khi cập nhật tập tin nhóm\n"
 
 #, c-format
 msgid "%s: line %d: line too long\n"
@@ -519,15 +520,15 @@ msgstr "%s: dòng %d: thiếu mật khẩu mới\n"
 
 #, c-format
 msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: dòng %d: không biết nhóm %s\n"
+msgstr "%s: dòng %d: không rõ nhóm %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: line %d: cannot update group entry\n"
-msgstr "%s: dòng %d: không thể cập nhật mục nhập\n"
+msgstr "%s: dòng %d: không thể cập nhật mục nhập nhóm\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
-msgstr "%s: gặp lỗi nên các thay đổi bị bỏ qua\n"
+msgstr "%s: gặp lỗi nên bỏ qua các thay đổi\n"
 
 #, c-format
 msgid "%s: can't lock shadow file\n"
@@ -543,7 +544,7 @@ msgstr "%s: gặp lỗi khi cập nhật tập tin mật khẩu\n"
 
 #, c-format
 msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: dòng %d: không biết người dùng %s\n"
+msgstr "%s: dòng %d: không rõ người dùng %s\n"
 
 #, c-format
 msgid "%s: line %d: cannot update password entry\n"
@@ -557,24 +558,24 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "\n"
 msgstr ""
-"Cách sử dụng: chsh [tùy_chọn...] [tên_người_dùng]\n"
+"Sử dụng: chsh [tùy_chọn...] [ĐĂNG_NHẬP]\n"
 "\n"
 "Tùy chọn:\n"
 "  -h, --help                    hiện _trợ giúp_ này rồi thoát\n"
-"  -s, --shell TRÌNH_BAO         rình bao đăng nhập mới cho tài khoản người\n"
-"                                dùng\n"
+"  -s, --shell TRÌNH_BAO        trình bao đăng nhập mới\n"
+"						cho tài khoản người dùng\n"
 "\n"
 
 msgid "Login Shell"
-msgstr "Hệ vỏ đăng nhập"
+msgstr "Trình bao Đăng nhập"
 
 #, c-format
 msgid "You may not change the shell for %s.\n"
-msgstr "Không cho phép bạn thay đổi hệ vỏ cho %s.\n"
+msgstr "Không cho phép bạn thay đổi trình bao đối với %s.\n"
 
 #, c-format
 msgid "Changing the login shell for %s\n"
-msgstr "Đang thay đổi hệ vỏ đăng nhập cho %s\n"
+msgstr "Đang thay đổi trình bao đăng nhập đối với %s\n"
 
 #, c-format
 msgid "%s: Invalid entry: %s\n"
@@ -586,12 +587,12 @@ msgstr "%s là hệ vỏ không hợp lệ.\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr ""
-"Cách sử dụng: expiry {-f|-c}\n"
-"[expiry: sự mãn hạn]\n"
+"Sử dụng: expiry {-f|-c}\n"
+"[expiry: mãn hạn]\n"
 
 #, c-format
 msgid "%s: unknown user\n"
-msgstr "%s: không biết người dùng\n"
+msgstr "%s: không rõ người dùng\n"
 
 msgid ""
 "Usage: faillog [options]\n"
@@ -611,7 +612,7 @@ msgid ""
 "                                options) only for user with LOGIN\n"
 "\n"
 msgstr ""
-"Cách sử dụng: faillog [tùy_chọn...]\n"
+"Sử dụng: faillog [tùy_chọn...]\n"
 "\n"
 "[faillog: bản ghi việc bị lỗi]\n"
 "\n"
@@ -619,20 +620,19 @@ msgstr ""
 "  -a, --all             hiển thị các mục ghi faillog cho _mọi_ người dùng\n"
 "  -h, --help            hiển thị _trợ giúp_ này rồi thoát\n"
 "  -l, --lock-time SỐ    sau việc đăng nhập bị lỗi\n"
-"                        hì khóa tài khoản tại số giây này (_thời gian "
-"khóa_)\n"
+"                        thì khoá tài khoản tại số giây này (_thời gian khoá_)\n"
 "  -m, --maximum SỐ      lập số việc đăng nhập bị lỗi _tối đa_ thành số này\n"
-"  -r, --reset           _lập lại_ số việc đăng nhập bị lỗi\n"
+"  -r, --reset           _lập lại_ số đếm việc đăng nhập bị lỗi\n"
 "  -t, --time SỐ         hiển thị các mục ghi faillog mới hơn số ngày này\n"
 "                        (_thời gian_)\n"
-"  -u, --user TÊN_DÙNG   hiển thị mục ghi faillog\n"
+"  -u, --user ĐĂNG_NHẬP   hiển thị mục ghi faillog\n"
 "                        hoặc bảo quản số đếm việc bị lỗi và sự hạn chế\n"
 "                        (nếu dùng với tùy chọn -r, -m hay -l) chỉ cho người\n"
 "                        dùng này\n"
 "\n"
 
 msgid "Login       Failures Maximum Latest                   On\n"
-msgstr "Tên dùng\t\tBị lỗi\tTối đa\tMới nhất        Vào\n"
+msgstr "Đăng nhập\t\tBị lỗi\tTối đa\tMới nhất        Vào\n"
 
 #, c-format
 msgid " [%lds left]"
@@ -704,15 +704,15 @@ msgstr "%s: không thể cập nhật mục nhập bóng\n"
 
 #, c-format
 msgid "unknown group: %s\n"
-msgstr "không biết nhóm: %s\n"
+msgstr "không rõ nhóm: %s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't close file\n"
-msgstr "%s: không thể mở tập tin\n"
+msgstr "%s: không thể đóng tập tin\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: can't close shadow file\n"
-msgstr "%s: không thể mở tập tin bóng\n"
+msgstr "%s: không thể đóng tập tin bóng\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -722,7 +722,7 @@ msgid "New Password: "
 msgstr "Mật khẩu mới: "
 
 msgid "Re-enter new password: "
-msgstr "Hãy gõ lại mật khẩu mới: "
+msgstr "Nhập lại mật khẩu mới: "
 
 msgid "They don't match; try again"
 msgstr "Hai mật khẩu không trùng thì háy thử lại."
@@ -744,11 +744,11 @@ msgstr "Đang gỡ bỏ người dùng %s khỏi nhóm %s\n"
 
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s: không biết thành viên %s\n"
+msgstr "%s: không rõ thành viên %s\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
-msgstr "%s: không phải là tty\n"
+msgstr "%s: không phải là TTY\n"
 
 msgid ""
 "Usage: groupadd [options] GROUP\n"
@@ -761,29 +761,27 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
-"Cách sử dụng: groupadd [tùy_chọn...] nhóm\n"
-"\n"
-"[groupadd: thêm nhóm]\n"
+"Sử dụng: groupadd [tùy_chọn] NHÓM\n"
 "\n"
 "Tùy chọn:\n"
-"  -f, --force                   _buộc_ thoát với trạng thái thành công\n"
-"                                nếu nhóm đã gõ có phải tồn tại\n"
-"  -g, --gid GID                 gán GID (mã nhóm) này cho nhóm mới\n"
-"  -h, --help                    thiển thị _trợ giúp_ này rồi thoát\n"
-"  -K, --key KHÓA=GIÁ_TRỊ        đè các mặc định của </etc/login.defs>\n"
-"  -o, --non-unique              cho phép tạo nhóm có GID trùng\n"
-"                                (_không phải độc nhất_)\n"
+"  -f, --force                  ép buộc thoát với trạng thái thành công\n"
+"					nếu nhóm đã ghi rõ đã có"
+"  -g, --gid GID                 dùng GID này cho nhóm mới\n"
+"  -h, --help                    hiển thị trạng thái này rồi thoát\n"
+"  -K, --key KHOÁ=GIÁ_TRỊ          ghi đè lên các giá trị mặc định\n"
+"							của « /etc/login.defs »\n"
+"  -o, --non-unique        cho phép tạo nhóm có GID trùng (không duy nhất)\n"
+"  -p, --password MẬT_KHẨU       dùng mật khẩu đã mã hoá cho nhóm mới\n"
+"  -r, --system                  tạo một tài khoản hệ thống\n"
 "\n"
 
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: gặp lỗi khi thêm mục nhập nhóm mới\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: không thể lấy GID độc nhất\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -815,7 +813,7 @@ msgstr "%s: không thể mở tập tin nhóm bóng\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
-msgstr "%s: -K cần đến KHÓA=GIÁ_TRỊ\n"
+msgstr "%s: -K cần thiết cú pháp KHÓA=GIÁ_TRỊ\n"
 
 #, c-format
 msgid "%s: group %s exists\n"
@@ -823,12 +821,16 @@ msgstr "%s: nhóm %s đã có\n"
 
 #, c-format
 msgid "%s: GID %u is not unique\n"
-msgstr "%s: GID %u không phải là độc nhất\n"
+msgstr "%s: GID %u không phải duy nhất\n"
+
+#, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: không thể tạo nhóm\n"
 
 msgid "Usage: groupdel group\n"
 msgstr ""
-"Cách sử dụng: groupdel nhóm\n"
-"[groupdel: xóa bỏ nhóm]\n"
+"Sử dụng: groupdel nhóm\n"
+"[groupdel: xóa nhóm]\n"
 
 #, c-format
 msgid "%s: error removing group entry\n"
@@ -844,7 +846,7 @@ msgstr "%s: không thể gỡ bỏ nhóm chính của người dùng.\n"
 
 #, c-format
 msgid "%s: group %s does not exist\n"
-msgstr "%s: chưa có nhóm %s\n"
+msgstr "%s: nhóm %s không tồn tại\n"
 
 #, c-format
 msgid "%s: group %s is a NIS group\n"
@@ -866,13 +868,13 @@ msgstr ""
 "tên_nhóm]\n"
 
 msgid "Only root can add members to different groups\n"
-msgstr "Chỉ người chủ có khả năng thêm thành viên vào nhóm khác nhau\n"
+msgstr "Chỉ người chủ có quyền thêm thành viên vào nhóm khác nhau\n"
 
 msgid "Group access is required\n"
-msgstr "Yêu cầu quyền truy cập nhóm\n"
+msgstr "Cần thiết quyền truy cập nhóm\n"
 
 msgid "Not primary owner of current group\n"
-msgstr "Không phải là người chính sở hữu nhóm hiện thời\n"
+msgstr "Không phải chủ của nhóm hiện thời\n"
 
 msgid "PAM authentication failed for\n"
 msgstr "Lỗi xác thực PAM đối với\n"
@@ -886,7 +888,6 @@ msgstr "Không thể mở tập tin nhóm\n"
 msgid "Cannot close group file\n"
 msgstr "Không thể đóng tập tin nhóm\n"
 
-#, fuzzy
 msgid ""
 "Usage: groupmod [options] GROUP\n"
 "\n"
@@ -899,33 +900,57 @@ msgid ""
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
-"Cách sử dụng: groupmod [tùy_chọn...] NHÓM\n"
+"Sử dụng: groupmod [tùy_chọn...] NHÓM\n"
 "\n"
 "[groupmod: sửa đổi nhóm]\n"
 "\n"
 "Tùy chọn:\n"
-"  -g, --gid GID                 ép buộc NHÓM dùng GID (mã hiệu nhóm) mới\n"
-"  -h, --help                    hiển thị _trợ giúp_ này rồi thoát\n"
-"  -n, --new-name NHÓM_MỚI       ép buộc NHÓM dùng tên NHÓM_MỚI\n"
+"  -g, --gid GID                 ép buộc NHÓM dùng GID mới\n"
+"  -h, --help                    hiển thị trợ giúp này rồi thoát\n"
+"  -n, --new-name TÊN       ép buộc NHÓM dùng TÊN nhóm mới\n"
 "  -o, --non-unique              cho phép NHÓM dùng GID trùng\n"
-"                                (_không phải độc nhất_)\n"
+"                                (_không phải duy nhất_)\n"
+" -p, --password MẬT_KHẨU       mật khẩu mới cũng được má hoá\n"
 "\n"
 
 #, c-format
 msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: không tìm thấy %s trong </etc/group>\n"
+msgstr "%s: không tìm thấy %s trong « /etc/group »\n"
 
 #, c-format
 msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u không phải là GID độc nhất\n"
+msgstr "%s: %u không phải GID duy nhất\n"
 
 #, c-format
 msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s không phải là tên độc nhất\n"
+msgstr "%s: %s không phải tên duy nhất\n"
+
+#, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: không thể ghi lại tập tin mật khẩu passwd\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: không thể khoá tập tin mật khẩu\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: không thể mở tập tin mật khẩu\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr "%s: không thể thay đổi nhóm chính của người dùng « %s » từ %u thành %u, vì nó không nằm trong tập tin mật khẩu passwd.\n"
+
+#, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr ""
+"%s: không thể thay đổi nhóm chính của người dùng « %s » từ %u thành %u.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
-msgstr "Cách sử dụng: %s [-r] [-s] [nhóm [nhóm_bóng]]\n"
+msgstr "Sử dụng: %s [-r] [-s] [nhóm [gshadow]]\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group]\n"
@@ -952,7 +977,7 @@ msgstr "mục nhập tập tin nhóm không hợp lệ"
 
 #, c-format
 msgid "delete line '%s'? "
-msgstr "xóa bỏ dòng « %s » chứ? "
+msgstr "xóa dòng « %s » không? "
 
 msgid "duplicate group entry"
 msgstr "mục nhập nhóm trùng"
@@ -967,23 +992,23 @@ msgstr "nhóm %s: không có người dùng %s\n"
 
 #, c-format
 msgid "delete member '%s'? "
-msgstr "xóa bỏ thành viên « %s » chứ? "
+msgstr "xóa thành viên « %s » không? "
 
 #, c-format
 msgid "no matching group file entry in %s\n"
-msgstr "không có mục nhập tập tin nhóm có khớp được trong %s\n"
+msgstr "không có mục nhập tập tin nhóm tương ứng trong %s\n"
 
 #, c-format
 msgid "add group '%s' in %s ?"
-msgstr "thêm nhóm « %s » trong %s chứ?"
+msgstr "thêm nhóm « %s » trong %s không?"
 
 #, c-format
 msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: không thể cập nhật mục nhập bóng cho %s.\n"
+msgstr "%s: không thể cập nhật mục nhập bóng đối với %s.\n"
 
 #, c-format
 msgid "%s: can't update entry for group %s\n"
-msgstr "%s: không thể cập nhật mục nhập cho nhóm %s.\n"
+msgstr "%s: không thể cập nhật mục nhập đối với nhóm %s.\n"
 
 msgid "invalid shadow group file entry"
 msgstr "mục nhập tập tin nhóm bóng không hợp lệ"
@@ -993,11 +1018,11 @@ msgstr "mục nhập nhóm bóng trùng"
 
 #, c-format
 msgid "shadow group %s: no administrative user %s\n"
-msgstr "nhóm bóng %s: không có người dùng quản lý %s\n"
+msgstr "nhóm bóng %s: không có người dùng quản trị %s\n"
 
 #, c-format
 msgid "delete administrative member '%s'? "
-msgstr "xóa bỏ thành viên quản lý « %s » chứ? "
+msgstr "xóa thành viên quản trị « %s » không? "
 
 #, c-format
 msgid "shadow group %s: no user %s\n"
@@ -1005,7 +1030,7 @@ msgstr "nhóm bóng %s: không có người dùng %s\n"
 
 #, c-format
 msgid "%s: the files have been updated\n"
-msgstr "%s: những tập tin đã được cập nhật\n"
+msgstr "%s: các tập tin đã được cập nhật\n"
 
 #, c-format
 msgid "%s: no changes\n"
@@ -1021,7 +1046,7 @@ msgstr "%s: không thể mở tập tin nhóm bóng\n"
 
 #, c-format
 msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: không thể gỡ bỏ nhóm bóng %s.\n"
+msgstr "%s: không thể gỡ bỏ nhóm bóng %s\n"
 
 #, c-format
 msgid "%s: can't update shadow group file\n"
@@ -1029,11 +1054,11 @@ msgstr "%s: không thể cập nhật tập tin nhóm bóng\n"
 
 #, c-format
 msgid "%s: can't update group file\n"
-msgstr "%s: không thể cập nhật tập tin nhóm.\n"
+msgstr "%s: không thể cập nhật tập tin nhóm\n"
 
 #, c-format
 msgid "%s: can't delete shadow group file\n"
-msgstr "%s: không thể xóa bỏ tập tin nhóm bóng\n"
+msgstr "%s: không thể xóa tập tin nhóm bóng\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "Cách sử dụng: id [-a]\n"
@@ -1055,7 +1080,7 @@ msgid ""
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 "\n"
 msgstr ""
-"Cách sử dụng: lastlog [tùy_chọn...]\n"
+"Sử dụng: lastlog [tùy_chọn...]\n"
 "\n"
 "[lastlog: bản ghi cuối cùng]\n"
 "\n"
@@ -1065,7 +1090,7 @@ msgstr ""
 "  -h, --help            hiển thị _trợ giúp_ này rồi thoát\n"
 "  -t, --time SỐ         hiển thị chỉ những mục ghi lastlog\n"
 "                        mới hơn số ngày này (_thời gian_)\n"
-"  -u, --user TÊN_DÙNG   hiển thị mục ghi lastlog cho _người dùng_ tên này\n"
+"  -u, --user ĐĂNG_NHẬP   hiển thị mục ghi lastlog cho _người dùng_ tên này\n"
 "\n"
 
 msgid "Username         Port     From             Latest"
@@ -1077,13 +1102,13 @@ msgstr "Tên dùng\t\t\t Cổng   Gần nhất"
 msgid "**Never logged in**"
 msgstr "**Chưa bao giờ đăng nhập**"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Unknown user or range: %s\n"
-msgstr "Không biết người dùng: %s\n"
+msgstr "Không rõ người dùng hoặc phạm vi: %s\n"
 
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
-msgstr "lastlog: đối số bất ngờ : %s\n"
+msgstr "lastlog: đối số bất thường: %s\n"
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1112,7 +1137,7 @@ msgid ""
 "[Disconnect bypassed -- root login allowed.]"
 msgstr ""
 "\n"
-"[Kết nối bị ngắt đã bị vòng: cho phép người chủ đăng nhập.]"
+"[Chức năng ngắt kết nối đã bị vòng: cho phép người chủ đăng nhập.]"
 
 #, c-format
 msgid ""
@@ -1120,19 +1145,11 @@ msgid ""
 "Login timed out after %d seconds.\n"
 msgstr ""
 "\n"
-"Đăng nhập quá giờ sau %d giây.\n"
-
-#, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " vào « %.100s » từ « %.200s »"
-
-#, c-format
-msgid " on '%.100s'"
-msgstr " vào « %.100s »"
+"Đăng nhập đã quá hạn sau %d giây.\n"
 
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
-msgstr "login: (đăng nhập) PAM bị lỗi nên hủy bỏ: %s\n"
+msgstr "login: (đăng nhập) PAM bị lỗi nên hủy bỏ : %s\n"
 
 #, c-format
 msgid "%s login: "
@@ -1144,7 +1161,7 @@ msgstr "đăng nhập: "
 
 #, c-format
 msgid "Maximum number of tries exceeded (%d)\n"
-msgstr "Vượt quá số lần thử lại tối đa (%d)\n"
+msgstr "Vượt quá số tối đa các lần thử lại (%d)\n"
 
 msgid "login: abort requested by PAM\n"
 msgstr "login: (đăng nhập) PAM đã yêu cầu hủy bỏ\n"
@@ -1162,14 +1179,14 @@ msgstr "Đăng nhập không đúng"
 
 #, c-format
 msgid "%s: failure forking: %s"
-msgstr "%s: việc tạo tiến trình con bị lỗi: %s"
+msgstr "%s: lỗi tạo tiến trình con: %s"
 
 #, c-format
 msgid "TIOCSCTTY failed on %s"
-msgstr ""
+msgstr "TIOCSCTTY bị lỗi vào %s"
 
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr "Cảnh báo: đăng nhập đã bật lại sau bị khóa ra tạm thời."
+msgstr "Cảnh báo : đăng nhập đã bật lại sau bị khoá ra tạm thời."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1187,7 +1204,7 @@ msgid ""
 "login time exceeded\n"
 "\n"
 msgstr ""
-"thời gian đăng nhập bị vượt trội\n"
+"vượt quá thời gian đăng nhập\n"
 "\n"
 
 msgid "Usage: newgrp [-] [group]\n"
@@ -1200,17 +1217,20 @@ msgstr ""
 "Cách sử dụng: sg group [[-c] lệnh]\n"
 "[group: nhóm]\n"
 
-#, fuzzy
 msgid "Invalid password.\n"
-msgstr "Mật khẩu cũ : "
+msgstr "Mật khẩu không hợp lệ.\n"
+
+#, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: lỗi tạo tiến trình con: %s\n"
 
 #, c-format
 msgid "unknown UID: %u\n"
-msgstr "không biết UID: %u\n"
+msgstr "không rõ UID: %u\n"
 
 #, c-format
 msgid "unknown GID: %lu\n"
-msgstr "không biết GID: %lu\n"
+msgstr "không rõ GID: %lu\n"
 
 msgid "too many groups\n"
 msgstr "quá nhiều nhóm\n"
@@ -1220,46 +1240,83 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
-msgstr ""
+msgstr "Sử dụng: %s [tùy_chọn] [dữ_liệu_nhập]\n"
+"\n"
+"  -c, --crypt-method            phương pháp mã hoá (một của %s)\n"
+"  -r, --system                  tạo tài khoản hệ thống\n"
+"%s\n"
 
-#, fuzzy, c-format
+#, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: mã số nhóm (GID) « %s » không phải hợp lệ\n"
+
+#, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "%s: tên nhóm không hợp lệ « %s »\n"
+
+#, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: chưa có nhóm %s\n"
+msgstr "%s: nhóm %s là một nhóm bóng, nhưng không tồn tại trong « /etc/group »\n"
 
 #, c-format
 msgid ""
 "%s: group %s created, failure during the creation of the corresponding "
 "gshadow group\n"
-msgstr ""
+msgstr "%s: nhóm %s đã được tạo, nhưng không thành công khi tạo nhóm gshadow tương ứng\n"
+
+#, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: mã số người dùng (UID) « %s » không phải hợp lệ\n"
+
+#, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: người dùng « %s » không tồn tại\n"
+
+#, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: tên người dùng không hợp lệ « %s »\n"
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: không thể khóa </etc/passwd>.\n"
+msgstr "%s: không thể khoá « /etc/passwd ».\n"
 
 #, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: không thể khóa tập tin; hãy thư lại sau\n"
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: không thể khoá « /etc/shadow ».\n"
+
+#, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: không thể khoá « /etc/group ».\n"
+
+#, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: không thể khoá « /etc/gshadow ».\n"
 
 #, c-format
 msgid "%s: can't open files\n"
-msgstr "%s: không thể mở các tập tin\n"
+msgstr "%s: không thể mở tập tin\n"
 
 #, c-format
 msgid "%s: error updating files\n"
-msgstr "%s: gặp lỗi khi cập nhật các tập tin\n"
+msgstr "%s: gặp lỗi khi cập nhật tập tin\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: dòng %d: dòng không hợp lệ\n"
 
 #, c-format
-msgid "%s: line %d: can't create GID\n"
-msgstr "%s: dòng %d: không thể tạo GID\n"
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: không thể cập nhật mục nhập của người dùng %s (không có trong cơ sở dữ liệu mật khẩu passwd)\n"
 
 #, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: dòng %d: không thể tạo UID\n"
+msgid "%s: line %d: can't create user\n"
+msgstr "%s: dòng %d: không thể tạo người dùng\n"
+
+#, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: dòng %d: không thể tạo nhóm\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1271,11 +1328,11 @@ msgstr "%s: dòng %d: không thể cập nhật mật khẩu\n"
 
 #, c-format
 msgid "%s: line %d: mkdir failed\n"
-msgstr "%s: dòng %d: việc mkdir (tạo thư mục) bị lỗi\n"
+msgstr "%s: dòng %d: lỗi mkdir (tạo thư mục)\n"
 
 #, c-format
 msgid "%s: line %d: chown failed\n"
-msgstr "%s: dòng %d: việc chown (thay đổi quyền sở hữu) bị lỗi\n"
+msgstr "%s: dòng %d: lỗi chown (thay đổi quyền sở hữu)\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
@@ -1305,25 +1362,25 @@ msgid ""
 "                                change to MAX_DAYS\n"
 "\n"
 msgstr ""
-"Cách sử dụng: passwd [tùy_chọn...] [tên_người_dùng]\n"
+"Sử dụng: passwd [tùy_chọn...] [tên_người_dùng]\n"
 "\n"
 "[passwd: mật khẩu]\n"
 "\n"
 "Tùy chọn:\n"
 "  -a, --all             thông báo trạng thái mật khẩu về _mọi_ tài khoản\n"
-"  -d, --delete          _xóa bỏ_ mật khẩu cho tài khoản tên này\n"
+"  -d, --delete          _xóa_ mật khẩu cho tài khoản tên này\n"
 "  -e, --expire          buộc _hết hạn dùng_ tài khoản tên này\n"
 "  -h, --help            hiển thị _trợ giúp_ này rồi thoát\n"
 "  -k, --keep-tokens     thay đổi mật khẩu chỉ nếu bị hết hạn thôi\n"
 "                        (_giữ hiệu bài_)\n"
 "  -i, --inactive CHUỖI  lập mật khẩu mới _không hoạt động_ thành chuỗi này\n"
-"  -l, --lock            _khóa_ tài khoản tên này\n"
+"  -l, --lock            _khoá_ tài khoản tên này\n"
 "  -n, --mindays SỐ      lập số _ngày tối thiểu_ trước khi thay đổi mật khẩu\n"
 "  -q, --quiet           chế độ _im_ (không hiển thị chi tiết)\n"
 "  -r, --repository KHO  thay đổi mật khẩu của kho này\n"
 "  -S, --status          thông báo _trạng thái_ mật khẩu của tài khoản tên "
 "này\n"
-"  -u, --unlock          _bỏ khóa_ tài khoản tên này\n"
+"  -u, --unlock          _bỏ khoá_ tài khoản tên này\n"
 "  -w, --warndays SỐ     lập số _ngày_ trước khi _cảnh báo_ về sự mãn hạn\n"
 "  -x, --maxdays SỐ      lập số _ngày tối đa_ trước khi thay đổi mật khẩu\n"
 "\n"
@@ -1331,21 +1388,21 @@ msgstr ""
 msgid "Old password: "
 msgstr "Mật khẩu cũ : "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Enter the new password (minimum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Hãy gõ mật khẩu mới (ký tự tối thiểu %d, tối đa %d).\n"
-"Cần phải gõ phối hợp chữ thường/hoa và số.\n"
+"Nhập mật khẩu mới (số ký tự tối thiểu %d).\n"
+"Hãy tổ hợp các chữ hoa, chữ thường và chữ số để tạo một mật khẩu mạnh.\n"
 
 #, c-format
 msgid ""
 "Enter the new password (minimum of %d, maximum of %d characters)\n"
 "Please use a combination of upper and lower case letters and numbers.\n"
 msgstr ""
-"Hãy gõ mật khẩu mới (ký tự tối thiểu %d, tối đa %d).\n"
-"Cần phải gõ phối hợp chữ thường/hoa và số.\n"
+"Nhập mật khẩu mới (số ký tự tối thiểu %d, tối đa %d).\n"
+"Hãy tổ hợp các chữ hoa, chữ thường và chữ số để tạo một mật khẩu mạnh.\n"
 
 msgid "New password: "
 msgstr "Mật khẩu mới: "
@@ -1358,7 +1415,7 @@ msgid ""
 "Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Cảnh báo: mật khẩu yếu (hãy gõ lại để chọn nó dù sao)"
+"Cảnh báo : mật khẩu yếu (nhập lại để vẫn chọn)"
 
 msgid "They don't match; try again.\n"
 msgstr "Hai mật khẩu không trùng: hãy thử lại.\n"
@@ -1367,27 +1424,28 @@ msgstr "Hai mật khẩu không trùng: hãy thử lại.\n"
 msgid "The password for %s cannot be changed.\n"
 msgstr "Không thể thay đổi mật khẩu cho %s.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "The password for %s cannot be changed yet.\n"
-msgstr "Không thể thay đổi mật khẩu cho %s.\n"
+msgstr "Chưa có thể thay đổi mật khẩu cho %s.\n"
 
 #, c-format
 msgid "%s: out of memory\n"
-msgstr "%s: hết bộ nhớ\n"
+msgstr "%s: tràn bộ nhớ\n"
 
 #, c-format
 msgid ""
 "%s: unlocking the user would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user account.\n"
-msgstr ""
+msgstr "%s: bỏ khoá người dùng thì gây ra một tài khoản không có mật khẩu.\n"
+"Khuyên bạn đặt một mật khẩu, dùng « usermod -p », để bỏ khoá tài khoản người dùng này.\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
-msgstr "%s chưa hỗ trợ kho %s\n"
+msgstr "%s: kho lưu %s không được hỗ trợ\n"
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr "%s: không cho phép bạn xem hoặc sửa đổi thông tin mật khẩu cho %s.\n"
+msgstr "%s: không cho phép bạn xem hoặc sửa đổi thông tin mật khẩu đối với %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1398,7 +1456,7 @@ msgid "The password for %s is unchanged.\n"
 msgstr "Mật khẩu cho %s chưa thay đổi.\n"
 
 msgid "Password changed."
-msgstr "Mật khẩu được thay đổi."
+msgstr "Mật khẩu đã thay đổi."
 
 msgid "Password set to expire."
 msgstr "Mật khẩu được lập để hết hạn dùng."
@@ -1418,7 +1476,7 @@ msgstr "mục nhập mật khẩu trùng"
 
 #, c-format
 msgid "invalid user name '%s'\n"
-msgstr "tên dùng không hợp lệ « %s »\n"
+msgstr "tên người dùng không hợp lệ « %s »\n"
 
 #, c-format
 msgid "user %s: no group %u\n"
@@ -1426,45 +1484,45 @@ msgstr "người dùng %s: không có nhóm %u\n"
 
 #, c-format
 msgid "user %s: directory %s does not exist\n"
-msgstr "người dùng %s: chưa có thư mục %s\n"
+msgstr "người dùng %s: thư mục %s không tồn tại\n"
 
 #, c-format
 msgid "user %s: program %s does not exist\n"
-msgstr "người dùng %s: chưa có chương trình %s\n"
+msgstr "người dùng %s: chương trình %s không tồn tại\n"
 
 #, c-format
 msgid "no matching password file entry in %s\n"
-msgstr "không có mục nhập tập tin mật khẩu có khớp được trong %s\n"
+msgstr "không có mục nhập tập tin mật khẩu tương ứng trong %s\n"
 
 #, c-format
 msgid "add user '%s' in %s? "
-msgstr "thêm người dùng « %s » trong %s chứ?"
+msgstr "thêm người dùng « %s » trong %s không?"
 
 #, c-format
 msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: không thể cập nhật mục nhập passwd (mật khẩu) cho %s.\n"
+msgstr "%s: không thể cập nhật mục nhập mật khẩu passwd đối với %s.\n"
 
 msgid "invalid shadow password file entry"
 msgstr "mục nhập tập tin mật khẩu bóng không hợp lệ"
 
 msgid "duplicate shadow password entry"
-msgstr "mục nhập tập tin mật khẩu bóng trùng"
+msgstr "mục nhập mật khẩu bóng trùng"
 
 #, c-format
 msgid "user %s: last password change in the future\n"
-msgstr "người dùng %s: lần thay đổi mật khẩu cuối cùng có trong tương lai\n"
+msgstr "người dùng %s: lần thay đổi mật khẩu cuối cùng nằm trong tương lai\n"
 
 #, c-format
 msgid "%s: can't lock passwd file\n"
-msgstr "%s: không thể khóa tập tin passwd (mật khẩu)\n"
+msgstr "%s: không thể khoá tập tin mật khẩu passwd\n"
 
 #, c-format
 msgid "%s: can't open passwd file\n"
-msgstr "%s: không thể mở tập tin passwd (mật khẩu)\n"
+msgstr "%s: không thể mở tập tin mật khẩu passwd\n"
 
 #, c-format
 msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: không thể gỡ bỏ mục nhập bóng cho %s\n"
+msgstr "%s: không thể gỡ bỏ mục nhập bóng đối với %s\n"
 
 #, c-format
 msgid "%s: can't update shadow file\n"
@@ -1472,24 +1530,24 @@ msgstr "%s: không thể cập nhật tập tin bóng\n"
 
 #, c-format
 msgid "%s: can't update passwd file\n"
-msgstr "%s: không thể cập nhật tập passwd (mật khẩu)\n"
+msgstr "%s: không thể cập nhật tập tin mật khẩu passwd\n"
 
 #, c-format
 msgid "%s: can't update entry for user %s\n"
-msgstr "%s: không thể cập nhật mục nhập cho người dùng %s\n"
+msgstr "%s: không thể cập nhật mục nhập đối với người dùng %s\n"
 
 #, c-format
 msgid "%s: can't delete shadow password file\n"
-msgstr "%s: không thể xóa bỏ tập tin mật khẩu bóng\n"
+msgstr "%s: không thể xóa tập tin mật khẩu bóng\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "Truy cập « su » vào tài khoản đó BỊ TỪ CHỐI.\n"
 
 msgid "Password authentication bypassed.\n"
-msgstr "Việc xác thức mật khẩu bị vòng.\n"
+msgstr "Xác thực mật khẩu bị đi vòng.\n"
 
 msgid "Please enter your OWN password as authentication.\n"
-msgstr "Hãy gõ mật khẩu MÌNH để xác thức.\n"
+msgstr "Hãy nhập mật khẩu của MÌNH để xác thực.\n"
 
 #, c-format
 msgid "%s: %s\n"
@@ -1508,18 +1566,18 @@ msgid ""
 "  -s, --shell SHELL             use SHELL instead of the default in passwd\n"
 "\n"
 msgstr ""
-"Cách sử dụng: su [tùy_chọn...] [tên_dùng]\n"
+"Sử dụng: su [tùy_chọn...] [đăng_nhập]\n"
 "\n"
 "[su: siêu người dùng]\n"
 "\n"
 "Tùy chọn:\n"
-"  -c, --command LỆNH        gởi lệnh này qua cho hệ vỏ đã gọi\n"
+"  -c, --command LỆNH        gởi lệnh này qua cho trình bao đã gọi\n"
 "  -h, --help                hiển thị _trợ giúp_ này rồi thoát\n"
-"  -, -l, --login            lập hệ vỏ là hệ vỏ _đăng nhập_\n"
+"  -, -l, --login            lập trình bao là trình bao _đăng nhập_\n"
 "  -m, -p,\n"
 "  --preserve-environment    đừng lập lại các biến _môi trường_, và _giữ_\n"
-"                            hệ vỏ hiện có\n"
-"  -s, --shell HỆ_VỎ         sử dụng hệ vỏ này thay vào mặc định trong "
+"                            trình bao hiện có\n"
+"  -s, --shell TRÌNH_BAO         sử dụng trình bao này thay cho trình mặc định trong "
 "passwd\n"
 "\n"
 
@@ -1533,14 +1591,14 @@ msgstr "%s: pam_start: (pam bắt đầu) lỗi %d\n"
 
 #, c-format
 msgid "Unknown id: %s\n"
-msgstr "Không biết ID: %s\n"
+msgstr "Không rõ mã số : %s\n"
 
 #, c-format
 msgid "You are not authorized to su %s\n"
-msgstr "Bạn không đủ quyền sử dụng lệnh « su » với %s.\n"
+msgstr "Bạn không có quyền sử dụng lệnh « su » (siêu người dùng) với %s.\n"
 
 msgid "(Enter your own password)"
-msgstr "(Hãy gõ mật khẩu mình)"
+msgstr "(Nhập mật khẩu của mình)"
 
 #, c-format
 msgid ""
@@ -1557,7 +1615,7 @@ msgid "No password file"
 msgstr "Không có tập tin mật khẩu"
 
 msgid "TIOCSCTTY failed"
-msgstr ""
+msgstr "TIOCSCTTY bị lỗi"
 
 msgid "No password entry for 'root'"
 msgstr "Không có mục nhập mật khẩu cho « root » (người chủ)"
@@ -1568,19 +1626,19 @@ msgid ""
 "(or give root password for system maintenance):"
 msgstr ""
 "\n"
-"Hãy gõ hai tổ hợp phím Ctrl-D để tiếp tục khởi động cách thường,\n"
-"(hoặc gõ mật khẩu chủ để bảo dưỡng hệ thống):"
+"Hãy gõ tổ hợp phím Ctrl-D để tiếp tục khởi động bình thường,\n"
+"(hoặc nhập mật khẩu người chủ để bảo dưỡng hệ thống):"
 
 msgid "Entering System Maintenance Mode"
 msgstr "Đang vào Chế độ Bảo dưỡng Hệ thống"
 
 #, c-format
 msgid "%s: unknown GID %s\n"
-msgstr "%s: không biết GID %s\n"
+msgstr "%s: không rõ GID %s\n"
 
 #, c-format
 msgid "%s: unknown group %s\n"
-msgstr "%s: không biết nhóm %s\n"
+msgstr "%s: không rõ nhóm %s\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -1592,7 +1650,7 @@ msgstr "%s: không thể mở tập tin mặc định mới\n"
 
 #, c-format
 msgid "%s: rename: %s"
-msgstr "%s: đổi tên: %s"
+msgstr "%s: thay tên: %s"
 
 #, c-format
 msgid "%s: group '%s' is a NIS group.\n"
@@ -1600,9 +1658,8 @@ msgstr "%s: nhóm « %s » là nhóm kiểu NIS.\n"
 
 #, c-format
 msgid "%s: too many groups specified (max %d).\n"
-msgstr "%s: quá nhiều nhóm đã gõ (tối đa %d).\n"
+msgstr "%s: ghi rõ quá nhiều nhóm (tối đa %d).\n"
 
-#, fuzzy
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1627,15 +1684,20 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
-"Cách sử dụng: useradd [tùy_chon] TÊN_DÙNG\n"
+"Sử dụng: useradd [tùy_chon] ĐĂNG_NHẬP\n"
 "\n"
 "[useradd: thêm người dùng]\n"
 "\n"
@@ -1656,34 +1718,26 @@ msgstr ""
 "                            dùng mới\n"
 "  -h, --help                hiển thị _trợ giúp_ này rồi thoát\n"
 "  -k, --skel THƯ_MỤC        ghi rõ thư mục « skel » thay thế\n"
-"  -K, --key KHÓA=GIÁ_TRỊ    đè các mặc định của </etc/login.defs> (_khóa_)\n"
-"  -m, --create-home         _tạo thư mục chính_ cho tài khoản người dùng "
-"mới\n"
-"  -o, --non-unique          cho phép tạo người dùng có UID trùng (_không "
-"độc\n"
-"                            nhất_)\n"
-"  -p, --password MẬT_KHẨU   sử dụng _mật khẩu_ mật mã\n"
+"  -K, --key KHÓA=GIÁ_TRỊ    đè các mặc định của « /etc/login.defs » (_khóa_)\n"
+"  -m, --create-home     _tạo thư mục chính_ cho tài khoản người dùng mới\n"
+"  -N, --no-user-group   đừng tạo một nhóm có cùng một tên với người dùng\n"
+"  -o, --non-unique          cho phép tạo người dùng có UID trùng\n"
+"					(_không duy nhất_)\n"
+"  -p, --password MẬT_KHẨU   sử dụng _mật khẩu_ đã mã hoá\n"
 "                            cho tài khoản người dùng mới\n"
-"  -s, --shell HỆ_VỎ         _hệ vỏ_ đăng nhập cho tài khoản người dùng mới\n"
-"  -u, --uid UID             tbuộc sử dụng UID này cho tài khoản người dùng "
-"mới\n"
+"  -r, --system                  tạo một tài khoản hệ thống\n"
+"  -s, --shell TRÌNH_BAO         _trình bao_ đăng nhập cho tài khoản người dùng mới\n"
+"  -u, --uid UID             buộc sử dụng UID này cho tài khoản người dùng mới\n"
+" -U, --user-group              tạo một nhóm có cùng một tên với người dùng\n"
 "\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Out of memory. Cannot update the group database.\n"
-msgstr "%s: hết bộ nhớ trong « update_group » (cập nhật nhóm)\n"
+msgstr "%s: tràn bộ nhớ nên không thể cập nhật cơ sở dữ liệu nhóm.\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-msgstr "%s: hết bộ nhớ trong « update_shadow » (cập nhật bóng)\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: Không thể lấy UID độc nhất\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: không thể lấy GID độc nhất\n"
+msgstr "%s: tràn bộ nhớ nên không thể cập nhật cơ sở dữ liệu nhóm bóng.\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1703,11 +1757,11 @@ msgstr "%s: ngày không hợp lệ « %s »\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
-msgstr "%s: cần đến mật khẩu bóng cho tùy chọn « -e »\n"
+msgstr "%s: cần thiết mật khẩu bóng cho tùy chọn « -e »\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -f\n"
-msgstr "%s: cần đến mật khẩu bóng cho tùy chọn « -f »\n"
+msgstr "%s: cần thiết mật khẩu bóng cho tùy chọn « -f »\n"
 
 #, c-format
 msgid "%s: invalid field '%s'\n"
@@ -1715,7 +1769,11 @@ msgstr "%s: trường không hợp lệ « %s »\n"
 
 #, c-format
 msgid "%s: invalid shell '%s'\n"
-msgstr "%s: hệ vỏ không hợp lệ « %s »\n"
+msgstr "%s: trình bao không hợp lệ « %s »\n"
+
+#, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: hai tùy chọn %s và %s xung đột với nhau\n"
 
 #, c-format
 msgid "%s: invalid user name '%s'\n"
@@ -1728,14 +1786,6 @@ msgstr "%s: không thể ghi lại tập tin mật khẩu\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: không thể ghi lại tập tin mật khẩu bóng\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: không thể khóa tập tin mật khẩu\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: không thể mở tập tin mật khẩu\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1774,16 +1824,16 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s: không thể tạo thư mục %s\n"
 
 msgid "Creating mailbox file"
-msgstr "Đang tạo tập tin hộp thư..."
+msgstr "Đang tạo tập tin hộp thư"
 
 msgid ""
 "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
-"Không tìm thấy « thư » nhóm. Như thế thì đang tạo tập tin hộp thư người dùng "
-"với chế độ 0600...\n"
+"Không tìm thấy nhóm « mail » (thư tín). Vì thế đang tạo tập tin hộp thư người dùng "
+"với chế độ 0600.\n"
 
 msgid "Setting mailbox file permissions"
-msgstr "Đang đặt quyền truy cập tập tin hộp thư..."
+msgstr "Đang đặt quyền truy cập tập tin hộp thư"
 
 #, c-format
 msgid "%s: user %s exists\n"
@@ -1793,26 +1843,29 @@ msgstr "%s: người dùng %s đã có\n"
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
-"%s: nhóm %s đã có.  Nếu bạn muốn thêm họ vào nhóm đó\n"
-"\t\t\t\t\tthì hãy sử dụng tùy chọn « -g ».\n"
+"%s: nhóm %s đã có.  Muốn thêm họ vào nhóm đó thì dùng tùy chọn « -g ».\n"
+
+#, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: không thể tạo người dùng\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
-msgstr "%s: UID %u không phải độc nhất\n"
+msgstr "%s: UID %u không phải duy nhất\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
-"%s: cảnh báo: thư mục chính đã có.\n"
-"Như thế thì không sao chép tập tin nào từ thư mục « skel » sang nó.\n"
+"%s: cảnh báo : thư mục chính đã có.\n"
+"Vì vậy không sao chép vào nó tập tin nào từ thư mục « skel ».\n"
 
 #, c-format
 msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
 msgstr ""
-"%s: cảnh báo: chưa hỗ trợ « CREATE_HOME » (tạo thư mục chính)\n"
-"nên hãy sử dụng tùy chọn « -m » thay vào đó.\n"
+"%s: cảnh báo : « CREATE_HOME » (tạo thư mục chính) không được hỗ trợ\n"
+"nên dùng tùy chọn « -m » thay vào đó.\n"
 
 msgid ""
 "Usage: userdel [options] LOGIN\n"
@@ -1839,11 +1892,11 @@ msgstr "%s: gặp lỗi khi cập nhật mục nhập nhóm.\n"
 
 #, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr "%s: không thể gỡ bỏ %s mà là nhóm chính cho người dùng khác.\n"
+msgstr "%s: không thể gỡ bỏ nhóm %s (nhóm chính cho người dùng khác).\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error updating shadow group entry\n"
-msgstr "%s: gặp lỗi khi cập nhật mục nhập nhóm.\n"
+msgstr "%s: gặp lỗi khi cập nhật mục nhập nhóm bóng\n"
 
 #, c-format
 msgid "%s: cannot open group file\n"
@@ -1855,11 +1908,11 @@ msgstr "%s: không thể mở tập tin nhóm bóng\n"
 
 #, c-format
 msgid "%s: error deleting password entry\n"
-msgstr "%s: gặp lỗi khi xóa bỏ mục nhập mật khẩu\n"
+msgstr "%s: gặp lỗi khi xóa mục nhập mật khẩu\n"
 
 #, c-format
 msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: gặp lỗi khi xóa bỏ mục nhập mật khẩu bóng\n"
+msgstr "%s: gặp lỗi khi xóa mục nhập mật khẩu bóng\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
@@ -1867,15 +1920,15 @@ msgstr "%s: người dùng %s hiện thời đã đăng nhập\n"
 
 #, c-format
 msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%1$s: %3$s không sở hữu %2$s thì sẽ không gỡ bỏ nó.\n"
+msgstr "%s: %s không phải được %s sở hữu nên không gỡ bỏ nó\n"
 
 #, c-format
 msgid "%s: warning: can't remove "
-msgstr "%s: cảnh báo: không thể gỡ bỏ "
+msgstr "%s: cảnh báo : không thể gỡ bỏ "
 
 #, c-format
 msgid "%s: user %s does not exist\n"
-msgstr "%s: không có người dùng %s\n"
+msgstr "%s: người dùng %s không tồn tại\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1884,14 +1937,12 @@ msgstr "%s: người dùng %s là người dùng kiểu NIS\n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: không thể gỡ bỏ thư mục %s\n"
-"\t(sẽ gỡ bỏ thư mục chính của người dùng %s)\n"
+"%s: sẽ không gỡ bỏ thư mục %s (vì cũng gỡ bỏ thư mục chính của người dùng %s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
 msgstr "%s: gặp lỗi khi gỡ bỏ thư mục %s\n"
 
-#, fuzzy
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1918,13 +1969,11 @@ msgid ""
 "  -U, --unlock                  unlock the user account\n"
 "\n"
 msgstr ""
-"Cách sử dụng: usermod [tùy_chọn...] tên_dùng\n"
+"Sử dụng: usermod [tùy_chọn...] ĐĂNG_NHẬP\n"
 "\n"
 "[usermod: sửa đổi người dùng]\n"
 "\n"
 "Tùy chọn:\n"
-"  -a, --append              _phụ thêm_ người dùng vào những nhóm phụ\n"
-"                            (dùng chỉ với « -G »)\n"
 "  -c, --comment CHUỖI       giá trị mới trong trường GECOS (_ghi chú_)\n"
 "  -d, --home THƯ_MỤC_CHÍNH\n"
 "                            thư mục chính mới cho tài khoản người dùng\n"
@@ -1934,29 +1983,32 @@ msgstr ""
 "                            dùng thành chuỗi này\n"
 "  -g, --gid NHÓM            buộc gán nhóm này là nhóm chính mới\n"
 "  -G, --groups NHÓM         danh sách mới _các nhóm_ phụ\n"
+"-a, --append                phụ thêm người dùng vào các NHÓM phụ\n"
+"					được ghi rõ với tùy chọn « -G », mà không\n"
+"					gỡ bỏ họ khỏi nhóm khác\n"
 "  -h, --help                hiển thị _trợ giúp_ này rồi thoát\n"
 "  -l, --login TÊN_ĐĂNG_NHẬP\n"
 "                            tên _đăng nhập_ mới\n"
-"  -L, --lock                l_khóa_ tài khoản người dùng\n"
+"  -L, --lock                l_khoá_ tài khoản người dùng\n"
 "  -m, --move-home           _di chuyển_ nội dụng của _thư mục chính_\n"
 "                            sang địa điểm mới (chỉ dùng với tùy chọn « -d »)\n"
-"  -o, --non-unique          cho phép sử dụng UID trùng (_không độc nhất_)\n"
+"  -o, --non-unique          cho phép sử dụng UID trùng (_không duy nhất_)\n"
 "  -p, --password MẬT_KHẨU   sử dụng _mật khẩu_ đã mật mã cho mật\n"
 "                            khẩu mới\n"
 "  -s, --shell TRÌNH_BAO     _trình bao_ đăng nhập mới cho tài khoản\n"
 "                            người dùng\n"
 "  -u, --uid UID             _mã hiệu người dùng_ mới cho tài khoản người "
 "dùng\n"
-"  -U, --unlock              _mở khóa_ tài khoản người dùng\n"
+"  -U, --unlock              _mở khoá_ tài khoản người dùng\n"
 "\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: error adding new shadow group entry\n"
-msgstr "%s: gặp lỗi khi thêm mục nhập nhóm mới\n"
+msgstr "%s: gặp lỗi khi thêm mục nhập nhóm bóng mới\n"
 
 #, c-format
 msgid "%s: no flags given\n"
-msgstr "%s: chưa gõ cờ nào\n"
+msgstr "%s: chưa đưa ra cờ\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e and -f\n"
@@ -1964,11 +2016,11 @@ msgstr "%s: mật khẩu bóng cần thiết cho hai tùy chọn « -e » và «
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
-msgstr ""
+msgstr "%s: các cờ « -L », « -p » và « -U » loại từ lẫn nhau\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
-msgstr "%s: UID %lu không phải độc nhất\n"
+msgstr "%s: UID %lu không phải duy nhất\n"
 
 #, c-format
 msgid "%s: error changing password entry\n"
@@ -1996,7 +2048,7 @@ msgstr "%s: không thể chown (thay đổi quyền sở hữu) %s\n"
 
 #, c-format
 msgid "%s: warning: failed to completely remove old home directory %s"
-msgstr "%s: cảnh báo: việc gỡ bỏ toàn bộ thư mục chính %s bị lỗi."
+msgstr "%s: cảnh báo : lỗi gỡ bỏ hoàn toàn thư mục chính cũ %s"
 
 #, c-format
 msgid "%s: cannot rename directory %s to %s\n"
@@ -2004,20 +2056,22 @@ msgstr "%s: không thể thay đổi lại tên thư mục %s thành %s\n"
 
 #, c-format
 msgid "%s: warning: %s not owned by %s\n"
-msgstr "%1$s: cảnh báo: %3$s không sở hữu %2$s\n"
+msgstr "%s: cảnh báo : %s không phải được %s sở hữu\n"
 
 msgid "failed to change mailbox owner"
-msgstr "việc thay đổi người sở hữu hộp thư bị lỗi"
+msgstr "lỗi thay đổi chủ hộp thư"
 
 msgid "failed to rename mailbox"
-msgstr "việc thay đổi tên hộp thư bị lỗi"
+msgstr "lỗi thay đổi tên của hộp thư"
 
 #, c-format
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
 "Please use the command `%s' to do so.\n"
-msgstr ""
+msgstr "Bạn đã sửa đổi %s.\n"
+"Để thống nhất thì bạn cũng có thể cần phải sửa đổi %s.\n"
+"Hãy sử dụng câu lệnh « %s » để làm như thế.\n"
 
 msgid ""
 "Usage: vipw [options]\n"
@@ -2030,7 +2084,7 @@ msgid ""
 "  -s, --shadow                  edit shadow or gshadow database\n"
 "\n"
 msgstr ""
-"Cách sử dụng: vipw [tùy_chọn...]\n"
+"Sử dụng: vipw [tùy_chọn...]\n"
 "\n"
 "Tùy chọn:\n"
 "  -g, --group                   sửa đổi cơ sở dữ liệu _nhóm_\n"
@@ -2049,54 +2103,11 @@ msgstr ""
 "%s: %s chưa thay đổi\n"
 
 msgid "Couldn't lock file"
-msgstr "Không thể khóa tập tin"
+msgstr "Không thể khoá tập tin"
 
 msgid "Couldn't make backup"
-msgstr "Không thể lưu trữ"
+msgstr "Không thể sao lưu"
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
-msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn ở trong %s)\n"
-
-#~ msgid "%s: name %s is not unique\n"
-#~ msgstr "%s: tên %s không phải là độc nhất\n"
-
-#~ msgid "No\n"
-#~ msgstr "Không\n"
-
-#~ msgid ""
-#~ "Usage: chgpasswd [options]\n"
-#~ "\n"
-#~ "Options:\n"
-#~ "  -e, --encrypted\tsupplied passwords are encrypted\n"
-#~ "  -h, --help\t\tdisplay this help message and exit\n"
-#~ "  -m, --md5\t\tuse MD5 encryption instead DES when the supplied\n"
-#~ "\t\t\tpasswords are not encrypted\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Cách sử dụng: chgpasswd [tùy_chọn...]\n"
-#~ "\n"
-#~ "[chgpasswd: thay đổi mật khẩu]\n"
-#~ "\n"
-#~ "Tùy chọn:\n"
-#~ "  -e, --encrypted\tmọi mật khẩu đã cung cấp cũng đã _được mật mã_\n"
-#~ "  -h, --help\t\thiển thị _trợ giúp_ này rồi thoát\n"
-#~ "  -m, --md5\t\tsử dụng mật mã MD5 thay vào DES khi các\n"
-#~ "\t\t\tmật khẩu đã cung cấp chưa được mật mã\n"
-#~ "\n"
-
-#, fuzzy
-#~ msgid "No password.\n"
-#~ msgstr "Không có tập tin mật khẩu\n"
-
-#~ msgid "Usage: %s [input]\n"
-#~ msgstr "Cách sử dụng: %s [nhập_thứ]\n"
-
-#~ msgid "Sorry.\n"
-#~ msgstr "Rất tiếc.\n"
-
-#~ msgid "Sorry, the password for %s cannot be changed yet.\n"
-#~ msgstr "Tiếc là chưa có thể thay đổi mật khẩu cho %s.\n"
-
-#~ msgid "Sorry."
-#~ msgstr "Rất tiếc."
+msgstr "%s: không thể phục hồi %s: %s (các thay đổi của bạn nằm trong %s)\n"
