@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
-"PO-Revision-Date: 2007-11-26 11:23+0100\n"
-"Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
+"POT-Creation-Date: 2008-03-18 00:08+0100\n"
+"PO-Revision-Date: 2008-03-20 12:40-0300\n"
+"Last-Translator: leoblink182 <leorock182@gmail.com>\n"
 "Language-Team: Debian-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,21 +16,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, c-format
-msgid ""
-"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr ""
+msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr "Cadastro de nome multiplos '%s' in %s. Por Favor conserte-o com pwck ou grpck.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
-msgstr ""
+msgstr "metodo de encriptacao não suportado por libcrypt? (%s)\n"
 
 msgid "Could not allocate space for config info.\n"
 msgstr "Não foi possível alocar espaço para a informação de configuração.\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
-msgstr ""
-"erro de configuração - item '%s' desconhecido (notifique o administrador)\n"
+msgstr "erro de configuração - item '%s' desconhecido (notifique o administrador)\n"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -89,6 +87,14 @@ msgstr[1] ""
 "%d falhas desde o último login.\n"
 "O último foi %s em %s.\n"
 
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s : não foi possível obter UID único\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s : não foi possível obter GID único\n"
+
 msgid "Too many logins.\n"
 msgstr "Muitos logins.\n"
 
@@ -146,6 +152,8 @@ msgid ""
 "Invalid ENCRYPT_METHOD value: '%s'.\n"
 "Defaulting to DES.\n"
 msgstr ""
+"inválido ENCRYPT_METHOD valor: '%s'.\n"
+"falta de DES.\n"
 
 #, fuzzy, c-format
 msgid "Unable to cd to '%s'\n"
@@ -167,9 +175,7 @@ msgid "Can't change root directory to '%s'\n"
 msgstr "Não foi possível mudar o diretório raíz para \"%s\"\n"
 
 msgid "No utmp entry.  You must exec \"login\" from the lowest level \"sh\""
-msgstr ""
-"Nenhuma entrada utmp. Voce deve executar \"login\" do \"sh\" de nívelmais "
-"baixo"
+msgstr "Nenhuma entrada utmp. Voce deve executar \"login\" do \"sh\" de nível mais baixo"
 
 msgid "Unable to determine your tty name."
 msgstr "Não foi possível determinar o nome de seu tty."
@@ -206,8 +212,7 @@ msgstr ""
 "Uso: chage [opções] usuário\n"
 "\n"
 "Opções:\n"
-"  -d, --lastday ULTIMO_DIA         define última mudança de senha para "
-"ULTIMO_DIA\n"
+"  -d, --lastday ULTIMO_DIA         define última mudança de senha para ULTIMO_DIA\n"
 "  -E, --expiredate DATA_EXPIRAÇÂO  define data de expiração de senha para\n"
 "                                   DATA_EXPIRAÇÂO\n"
 "  -h, --help                       exibe esta mensagem de ajuda e finaliza\n"
@@ -347,9 +352,7 @@ msgstr ""
 
 #, c-format
 msgid "Usage: %s [-f full_name] [-r room_no] [-w work_ph] [-h home_ph]\n"
-msgstr ""
-"Uso : %s [-f nome_completo] [-r número_sala] [-w fone_rabalho] [-h "
-"fone_doméstico]\n"
+msgstr "Uso : %s [-f nome_completo] [-r número_sala] [-w fone_rabalho] [-h fone_doméstico]\n"
 
 msgid "Full Name"
 msgstr "Nome Completo"
@@ -386,9 +389,7 @@ msgid "Cannot change ID to root.\n"
 msgstr "Não foi possível mudar o ID para root.\n"
 
 msgid "Cannot lock the password file; try again later.\n"
-msgstr ""
-"Não foi possível fazer local em arquivo de senhas; tente novamente mais "
-"tarde.\n"
+msgstr "Não foi possível fazer local em arquivo de senhas; tente novamente mais tarde.\n"
 
 msgid "Cannot open the password file.\n"
 msgstr "Não foi possível abrir arquivo de senhas.\n"
@@ -463,16 +464,16 @@ msgstr ""
 "Opções:\n"
 "  -e, --encrypted               senhas fornecidas estão encriptadas\n"
 "  -h, --help                    exibir esta mensagem de ajuda e finalizar\n"
-"  -m, --md5                     utilizar ecriptação MD5 ao invés de DES "
-"quando\n"
-"                                as senhas fornecidas não estiverem "
-"encriptadas\n"
+"  -m, --md5                     utilizar ecriptação MD5 ao invés de DES quando\n"
+"                                as senhas fornecidas não estiverem encriptadas\n"
 "\n"
 
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
 msgstr ""
+"-s, --sha-rounds              Numeros de SHA rodadas para a SHA *\n"
+"                                algoritmos encriptados\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid numeric argument '%s'\n"
@@ -484,11 +485,11 @@ msgstr "%s: flag -a é permitida SOMENTE com a flag -G\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
-msgstr ""
+msgstr "%s: the -c, -e, and -m flags são exclusivos\n"
 
 #, c-format
 msgid "%s: unsupported crypt method: %s\n"
-msgstr ""
+msgstr "%s: metodo de encriptação não suportado : %s\n"
 
 #, c-format
 msgid "%s: can't lock group file\n"
@@ -562,6 +563,12 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "\n"
 msgstr ""
+"Use: chsh [options] [LOGIN]\n"
+"\n"
+"Options:\n"
+"  -h, --help                    exibir a mensagem de ajuda e sair\n"
+"  -s, --shell SHELL             novo login shell para conta de usuario\n"
+"\n"
 
 msgid "Login Shell"
 msgstr "Shell de Login"
@@ -595,15 +602,12 @@ msgid ""
 "Options:\n"
 "  -a, --all                     display faillog records for all users\n"
 "  -h, --help                    display this help message and exit\n"
-"  -l, --lock-time SEC           after failed login lock accout to SEC "
-"seconds\n"
+"  -l, --lock-time SEC           after failed login lock accout to SEC seconds\n"
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 "  -r, --reset                   reset the counters of login failures\n"
-"  -t, --time DAYS               display faillog records more recent than "
-"DAYS\n"
+"  -t, --time DAYS               display faillog records more recent than DAYS\n"
 "  -u, --user LOGIN              display faillog record or maintains failure\n"
-"                                counters and limits (if used with -r, -m or -"
-"l\n"
+"                                counters and limits (if used with -r, -m or -l\n"
 "                                options) only for user with LOGIN\n"
 "\n"
 msgstr ""
@@ -734,7 +738,7 @@ msgstr "Removendo usuário %s do grupo %s\n"
 
 #, c-format
 msgid "%s: unknown member %s\n"
-msgstr "%s : membro %s desconecido\n"
+msgstr "%s : membro %s desconhecido\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -752,6 +756,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "Uso: groupadd [opções] grupo\n"
@@ -769,10 +775,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s : erro adicionando nova entrada de grupo\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s : não foi possível obter GID único\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -814,6 +816,10 @@ msgstr "%s : grupo %s existe\n"
 msgid "%s: GID %u is not unique\n"
 msgstr "%s : GID %u não é único\n"
 
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s : não foi possível criar %s\n"
+
 msgid "Usage: groupdel group\n"
 msgstr "Uso : groupdel grupo\n"
 
@@ -842,22 +848,22 @@ msgid "%s: %s is the NIS master\n"
 msgstr "%s : %s é o mestre NIS\n"
 
 msgid "Member already exists\n"
-msgstr ""
+msgstr "Membros já existem\n"
 
 msgid "Member to remove could not be found\n"
-msgstr ""
+msgstr "Não foi possivel encontrar membro para remover\n"
 
 msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
-msgstr ""
+msgstr "Uso :  membrosdogrupo -a nomedousuario | -d nomedousuario | -D | -l [-g nomedogrupo]\n"
 
 msgid "Only root can add members to different groups\n"
-msgstr ""
+msgstr "Somente o root pode adicionar membros para diferentes grupos\n"
 
 msgid "Group access is required\n"
-msgstr ""
+msgstr "Acesso ao grupo é necessário\n"
 
 msgid "Not primary owner of current group\n"
-msgstr ""
+msgstr "proprietario do grupo atual\n"
 
 #, fuzzy
 msgid "PAM authentication failed for\n"
@@ -883,8 +889,7 @@ msgid ""
 "  -g, --gid GID                 force use new GID by GROUP\n"
 "  -h, --help                    display this help message and exit\n"
 "  -n, --new-name NEW_GROUP      force use NEW_GROUP name by GROUP\n"
-"  -o, --non-unique              allow using duplicate (non-unique) GID by "
-"GROUP\n"
+"  -o, --non-unique              allow using duplicate (non-unique) GID by GROUP\n"
 "  -p, --password PASSWORD       use encrypted password for the new password\n"
 "\n"
 msgstr ""
@@ -911,6 +916,26 @@ msgstr "%s : %u não é um GID único\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s : %s não é um nome único\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s : não foi possível reescrever arquivo de senhas\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s : não foi possível obter lock em arquivo de senhas\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s : não foi possível abrir arquivo de senhas\n"
+
+#, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u, since it is not in the passwd file.\n"
+msgstr "%s: não foi possivel mudar o grupo primário do usuario '%s' de %u para %u, uma vez que  não se encontra no arquivo passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s : não foi possível mudar o usuário `%s' no cliente NIS.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1039,8 +1064,7 @@ msgid ""
 "Options:\n"
 "  -b, --before DAYS             print only lastlog records older than DAYS\n"
 "  -h, --help                    display this help message and exit\n"
-"  -t, --time DAYS               print only lastlog records more recent than "
-"DAYS\n"
+"  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
 "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 "\n"
 msgstr ""
@@ -1110,14 +1134,6 @@ msgstr ""
 "\n"
 "Login falhou após %d segundos de espera.\n"
 
-#, fuzzy, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " em `%.100s' de `%.200s'"
-
-#, fuzzy, c-format
-msgid " on '%.100s'"
-msgstr " em `%.100s'"
-
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: Falha do PAM, abortando: %s\n"
@@ -1154,7 +1170,7 @@ msgstr "%s: falha iniciando: %s"
 
 #, c-format
 msgid "TIOCSCTTY failed on %s"
-msgstr ""
+msgstr "TIOCSCTTY falha na %s"
 
 msgid "Warning: login re-enabled after temporary lockout."
 msgstr "Aviso : login rehabilitado após travamento temporário."
@@ -1188,6 +1204,10 @@ msgstr "Uso : sg group [[-c] comando]\n"
 msgid "Invalid password.\n"
 msgstr "Senha antiga : "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: falha iniciando: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "GID desconhecido : %u\n"
@@ -1204,27 +1224,58 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+"Use: %s [opções] [input]\n"
+"\n"
+"  -c, --crypt-method            metodo de criptacao (um de %s)\n"
+"  -r, --system                  criar sistema de contas\n"
+"%s\n"
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s : grupo %s não existe\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "nome de grupo `%s' inválido\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s : grupo %s não existe\n"
 
 #, c-format
-msgid ""
-"%s: group %s created, failure during the creation of the corresponding "
-"gshadow group\n"
-msgstr ""
+msgid "%s: group %s created, failure during the creation of the corresponding gshadow group\n"
+msgstr "%s: grupo %s criado, falha durante a criação do grupo correspondente ao gshadow\n"
+
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s : usuário %s não existe\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s : usuário %s não existe\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s : nome de usuário '%s' inválido\n"
 
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s : não foi possível obter de /etc/passwd.\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr ""
-"%s : não foi possível obter lock de arquivos, tente novamente mais tarde\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s : não foi possível obter de /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s : não foi possível obter de /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s : não foi possível obter de /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1238,13 +1289,17 @@ msgstr "%s : erro atualizando arquivos\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s : linha %d : linha inválida\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s : não foi possível atualizar entrada para usuário %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s : linha %d : não foi possível criar GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s : linha %d : não foi possível criar UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s : linha %d : não foi possível criar GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1273,8 +1328,7 @@ msgid ""
 "Options:\n"
 "  -a, --all                     report password status on all accounts\n"
 "  -d, --delete                  delete the password for the named account\n"
-"  -e, --expire                  force expire the password for the named "
-"account\n"
+"  -e, --expire                  force expire the password for the named account\n"
 "  -h, --help                    display this help message and exit\n"
 "  -k, --keep-tokens             change password only if expired\n"
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
@@ -1296,8 +1350,7 @@ msgstr ""
 "Opções:\n"
 "  -a, --all                     reportar estado de senhas em toda as contas\n"
 "  -d, --delete                  remover a senha para a conta indicada\n"
-"  -e, --expire                  forcçar expiração da senha para a conta "
-"indicada\n"
+"  -e, --expire                  forcçar expiração da senha para a conta indicada\n"
 "  -h, --help                    exibir esta mensagem de ajuda e finalizar\n"
 "  -k, --keep-tokens             mudar senha somente caso expirada\n"
 "  -i, --inactive INATIVO        definir senha inativa após expiração para\n"
@@ -1307,8 +1360,7 @@ msgstr ""
 "                                de senhas para MIN_DIAS\n"
 "  -q, --quiet                   modo quieto\n"
 "  -r, --repository REPOSITÓRIO  mudar senha no repositório REPOSITÓRIO\n"
-"  -S, --status                  reportar estado de senha para a conta "
-"indicada\n"
+"  -S, --status                  reportar estado de senha para a conta indicada\n"
 "  -u, --unlock                  destravar a conta indicada\n"
 "  -w, --warndays DIAS_AVISO     define dias de aviso de expiração para\n"
 "                                DIAS_AVISO\n"
@@ -1370,6 +1422,8 @@ msgid ""
 "%s: unlocking the user would result in a passwordless account.\n"
 "You should set a password with usermod -p to unlock this user account.\n"
 msgstr ""
+"%s: Desbloqueio de usuario mostrará resultado em passwordless account.\n"
+"Você deve arrumar a senha com usermod-p  para desbloquear esta conta.\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
@@ -1377,8 +1431,7 @@ msgstr "%s : repositório %s não suportado\n"
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
-msgstr ""
-"%s: Você não pode visualizar ou modificar informações de senha para %s.\n"
+msgstr "%s: Você não pode visualizar ou modificar informações de senha para %s.\n"
 
 #, c-format
 msgid "Changing password for %s\n"
@@ -1543,7 +1596,7 @@ msgid "No password file"
 msgstr "Sem arquivo de senhas"
 
 msgid "TIOCSCTTY failed"
-msgstr ""
+msgstr "TIOCSCTTY falhou"
 
 msgid "No password entry for 'root'"
 msgstr "Nenhuma entrada de senha para 'root'"
@@ -1595,8 +1648,7 @@ msgid ""
 "Options:\n"
 "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
 "                                home directory\n"
-"  -c, --comment COMMENT         set the GECOS field for the new user "
-"account\n"
+"  -c, --comment COMMENT         set the GECOS field for the new user account\n"
 "  -d, --home-dir HOME_DIR       home directory for the new user account\n"
 "  -D, --defaults                print or save modified default useradd\n"
 "                                configuration\n"
@@ -1613,12 +1665,16 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the user\n"
 "\n"
 msgstr ""
 "Uso: useradd [opções] LOGIN\n"
@@ -1664,14 +1720,6 @@ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s : sem memória em update_gshadow\n"
 
 #, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s : não foi possível obter UID único\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s : não foi possível obter GID único\n"
-
-#, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s : diretório base `%s'inválido\n"
 
@@ -1704,6 +1752,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s : shell `%s' inválida\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr "%s: opções %s e %s conflito\n"
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s : nome de usuário '%s' inválido\n"
 
@@ -1714,14 +1766,6 @@ msgstr "%s : não foi possível reescrever arquivo de senhas\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s : não foi possível reescrever arquivo de senhas shadow\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s : não foi possível obter lock em arquivo de senhas\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s : não foi possível abrir arquivo de senhas\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1760,25 +1804,27 @@ msgid "%s: cannot create directory %s\n"
 msgstr "%s : não foi possível criar diretório %s\n"
 
 msgid "Creating mailbox file"
-msgstr ""
+msgstr "Criando caixa-postal"
 
-msgid ""
-"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
-msgstr ""
+msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgstr "Grupo 'mail' não encontrado.Criando o usuário caixa-postal arquivo no modo 0600.\n"
 
 msgid "Setting mailbox file permissions"
-msgstr ""
+msgstr "Configurando caixa-postal arquivos de permissao"
 
 #, c-format
 msgid "%s: user %s exists\n"
 msgstr "%s : usuário %s existe\n"
 
 #, c-format
-msgid ""
-"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s : grupo %s existe - caso você ueira adicionar esse usuário a esse\n"
 "grupo, utilize -g.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s : não foi possível criar %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1806,6 +1852,13 @@ msgid ""
 "  -r, --remove                  remove home directory and mail spool\n"
 "\n"
 msgstr ""
+"Uso: userdel [options] LOGIN\n"
+"\n"
+"Opções:\n"
+" -f, --force                   força remoção dos arquivos,\n"
+"                                mesmo senão forem do usuário\n"
+" -h, --help                    exibi a mensagem de ajudar e sai\n"
+"-r, --remove                remove o diretorio home e spool\n"
 
 #, c-format
 msgid "%s: error updating group entry\n"
@@ -1813,9 +1866,7 @@ msgstr "%s : erro atualizando entrada de grupo\n"
 
 #, c-format
 msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
-msgstr ""
-"%s : Não foi possível remover grupo %s, o qual é um grupo primário de outro "
-"usuário.\n"
+msgstr "%s : Não foi possível remover grupo %s, o qual é um grupo primário de outro usuário.\n"
 
 #, fuzzy, c-format
 msgid "%s: error updating shadow group entry\n"
@@ -1897,8 +1948,7 @@ msgstr ""
 "Opções:\n"
 "  -a, --append GRUPO            inserir o usuário no grup suplementar GRUPO\n"
 "  -c, --comment COMENTÁRIO      novo valor do campo GECOS\n"
-"  -d, --home DIR_PESSOAL        novo diretório de login para a nova conta "
-"de\n"
+"  -d, --home DIR_PESSOAL        novo diretório de login para a nova conta de\n"
 "                                usuário\n"
 "  -e, --expiredate DATA_EXPIRA  define data de expiração de conta para\n"
 "                                DATA_EXPIRA\n"
@@ -1933,7 +1983,7 @@ msgstr "%s : senhas shadow necessárias para -e e -f\n"
 
 #, c-format
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
-msgstr ""
+msgstr "%s: the -L, -p, and -U flags são exclusivas\n"
 
 #, c-format
 msgid "%s: uid %lu is not unique\n"
@@ -1987,6 +2037,9 @@ msgid ""
 "You may need to modify %s for consistency.\n"
 "Please use the command `%s' to do so.\n"
 msgstr ""
+"Você modificou %s.\n"
+"Talvez você precise modificar %s para ter coerência.\n"
+"Por favor use o comando  '%s' para faze-lo.\n"
 
 msgid ""
 "Usage: vipw [options]\n"
@@ -2027,12 +2080,25 @@ msgstr "Não foi possível fazer backup"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s : não foi possível restaurar %s : %s (suas mudanças estão em %s)\n"
 
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s : não foi possível obter GID único\n"
+
+#, fuzzy
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " em `%.100s' de `%.200s'"
+
+#, fuzzy
+#~ msgid " on '%.100s'"
+#~ msgstr " em `%.100s'"
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr ""
+#~ "%s : não foi possível obter lock de arquivos, tente novamente mais tarde\n"
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s : linha %d : não foi possível criar UID\n"
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s : o nome %s não é único\n"
-
 #~ msgid "No\n"
 #~ msgstr "Não\n"
-
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"
 #~ "\n"
@@ -2055,15 +2121,12 @@ msgstr "%s : não foi possível restaurar %s : %s (suas mudanças estão em %s)\
 #, fuzzy
 #~ msgid "No password.\n"
 #~ msgstr "Sem arquivo de senhas\n"
-
 #~ msgid "Usage: %s [input]\n"
 #~ msgstr "Uso : %s [entrada]\n"
-
 #~ msgid "Sorry.\n"
 #~ msgstr "Desculpe.\n"
-
 #~ msgid "Sorry, the password for %s cannot be changed yet.\n"
 #~ msgstr "Desculpe, a senha para %s ainda não pode ser modificada.\n"
-
 #~ msgid "Sorry."
 #~ msgstr "Desculpe."
+
