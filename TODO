@@ -1,3 +1,9 @@
+WITH_SELINUX
+  - review all tools to check that the strategies are consistent
+
+chage, chfn, chsh: same change needed as in passwd.
+  - probably need moving check_selinux_access to a separate file.
+
 man useradd
 	document default behavior for GROUP
 	remove "The default group number is 1 or whatever is..."
