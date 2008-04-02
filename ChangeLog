@@ -1,5 +1,10 @@
 2008-04-02  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, configure.in: Prepare release 4.1.1
+	* NEWS: Fix the release date of 4.1.0. Was in 2007, not 2008.
+
+2008-04-02  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/fr.po: Update according to the file under review.
 	Thanks to Jean-Luc Coulon.
 
