@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-03-18 00:08+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2008-03-21 00:32+0000\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
@@ -88,10 +88,12 @@ msgstr[0] "%d falha desde o último login. O último foi %s em %s.\n"
 msgstr[1] "%d falhas desde o último login. O último foi %s em %s.\n"
 
 msgid "Can't get unique UID (no more available UIDs)\n"
-msgstr "Não foi possível obter um UID único (não existem mais UIDs disponíveis)\n"
+msgstr ""
+"Não foi possível obter um UID único (não existem mais UIDs disponíveis)\n"
 
 msgid "Can't get unique GID (no more available GIDs)\n"
-msgstr "Não foi possível obter um GID único (não existem mais GIDs disponíveis)\n"
+msgstr ""
+"Não foi possível obter um GID único (não existem mais GIDs disponíveis)\n"
 
 msgid "Too many logins.\n"
 msgstr "Demasiados logins.\n"
@@ -294,7 +296,8 @@ msgstr "%s: A autenticação PAM falhou\n"
 
 #, c-format
 msgid "%s: can't lock password file\n"
-msgstr "%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe\n"
+msgstr ""
+"%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe\n"
 
 #, c-format
 msgid "%s: can't open password file\n"
@@ -303,7 +306,8 @@ msgstr "%s: não é possível abrir o ficheiro de palavras-passe\n"
 #, c-format
 msgid "%s: can't lock shadow password file\n"
 msgstr ""
-"%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe shadow\n"
+"%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe "
+"shadow\n"
 
 #, c-format
 msgid "%s: can't open shadow password file\n"
@@ -410,7 +414,8 @@ msgstr "Erro ao actualizar a entrada da palavra-passe.\n"
 
 msgid "Cannot commit password file changes.\n"
 msgstr ""
-"Não é possível gravar as alteração efectuadas ao ficheiro de palavras-passe.\n"
+"Não é possível gravar as alteração efectuadas ao ficheiro de palavras-"
+"passe.\n"
 
 msgid "Cannot unlock the password file.\n"
 msgstr "Não é possível libertar o ficheiro de palavras-passe.\n"
@@ -471,7 +476,8 @@ msgstr ""
 "\n"
 "Opções:\n"
 "  -e, --crypt-method            o método de encriptação (um de %s)\n"
-"  -e, --encrypted               as palavras-passe fornecidas são encriptadas\n"
+"  -e, --encrypted               as palavras-passe fornecidas são "
+"encriptadas\n"
 "  -h, --help                    mostrar esta mensagem de ajuda e terminar\n"
 "  -m, --md5                     encriptar a palavra-passe de texto visível\n"
 "                                com o algoritmo MD5\n"
@@ -944,7 +950,8 @@ msgstr "%s: não foi possível sobreescrever o ficheiro passwd\n"
 
 #, c-format
 msgid "%s: unable to lock password file\n"
-msgstr "%s: não foi possível obter acesso exclusivo ao ficheiro de palavras-passe\n"
+msgstr ""
+"%s: não foi possível obter acesso exclusivo ao ficheiro de palavras-passe\n"
 
 #, c-format
 msgid "%s: unable to open password file\n"
@@ -955,12 +962,14 @@ msgid ""
 "%s: cannot change the primary group of user '%s' from %u to %u, since it is "
 "not in the passwd file.\n"
 msgstr ""
-"%s: não foi possível mudar o grupo primário do utilizador '%s' de %u para %u, "
-"já que não está no ficheiro passwd.\n"
+"%s: não foi possível mudar o grupo primário do utilizador '%s' de %u para %"
+"u, já que não está no ficheiro passwd.\n"
 
 #, c-format
 msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
-msgstr "%s: não é possível alterar o grupo primário do utilizador '%s' de %u para %u.\n"
+msgstr ""
+"%s: não é possível alterar o grupo primário do utilizador '%s' de %u para %"
+"u.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1321,7 +1330,9 @@ msgstr "%s: linha %d: linha inválida\n"
 
 #, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
-msgstr "%s: não é possível actualizar a entrada do utilizador %s (não está na base de dados passwd)\n"
+msgstr ""
+"%s: não é possível actualizar a entrada do utilizador %s (não está na base "
+"de dados passwd)\n"
 
 #, c-format
 msgid "%s: line %d: can't create user\n"
@@ -1380,11 +1391,14 @@ msgstr ""
 "Opções:\n"
 "  -a, --all                     reportar o estado das palavras-passe de\n"
 "                                todas as contas\n"
-"  -d, --delete                  apagar a palavra-passe para a conta indicada\n"
-"  -e, --expire                  forçar que a palavra-passe caduque para a conta\n"
+"  -d, --delete                  apagar a palavra-passe para a conta "
+"indicada\n"
+"  -e, --expire                  forçar que a palavra-passe caduque para a "
+"conta\n"
 "                                indicada\n"
 "  -h, --help                    mostrar esta mensagem de ajuda e sair\n"
-"  -k, --keep-tokens             apenas mudar a palavra-passe se tiver caducado\n"
+"  -k, --keep-tokens             apenas mudar a palavra-passe se tiver "
+"caducado\n"
 "  -i, --inactive INACTIVA       definir para INACTIVA o número de dias após\n"
 "                                os quais uma palavra-passe caducada passa\n"
 "                                a inactiva\n"
@@ -1392,7 +1406,8 @@ msgstr ""
 "  -n, --mindays MIN_DIAS        definir para MIN_DIAS o número de dias\n"
 "                                antes de alterar a palavra-passe\n"
 "  -q, --quiet                   modo discreto\n"
-"  -r, --repository REPOSITÓRIO  mudar a palavra-passe no repositório REPOSITÓRIO\n"
+"  -r, --repository REPOSITÓRIO  mudar a palavra-passe no repositório "
+"REPOSITÓRIO\n"
 "  -S, --status                  reportar estado da palavra-passe na conta\n"
 "                                indicada\n"
 "  -u, --unlock                  desbloquear a conta indicada\n"
@@ -1463,6 +1478,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: o repositório %s não é suportado\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1657,11 +1676,13 @@ msgstr "%s: grupo %s desconhecido\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
-msgstr "%s: não é possível criar um novo ficheiro de configurações pré-definidas\n"
+msgstr ""
+"%s: não é possível criar um novo ficheiro de configurações pré-definidas\n"
 
 #, c-format
 msgid "%s: cannot open new defaults file\n"
-msgstr "%s: não é possível abrir um novo ficheiro de configurações pré-definidas\n"
+msgstr ""
+"%s: não é possível abrir um novo ficheiro de configurações pré-definidas\n"
 
 #, c-format
 msgid "%s: rename: %s"
@@ -1723,12 +1744,14 @@ msgstr ""
 "                                utilizador\n"
 "  -D, --defaults                mostrar ou gravar a configuração\n"
 "                                pré-definida alterada do useradd\n"
-"  -e, --expiredate EXPIRE_DATE  define para EXPIRE_DATE a data de caducidade\n"
+"  -e, --expiredate EXPIRE_DATE  define para EXPIRE_DATE a data de "
+"caducidade\n"
 "                                da conta\n"
 "  -f, --inactive INACTIVA       definir para INACTIVA o número de dias após\n"
 "                                os quais uma palavra-passe caducada passa\n"
 "                                a inactiva\n"
-"  -g, --gid GRUPO               forçar a utilização do GRUPO para a conta do\n"
+"  -g, --gid GRUPO               forçar a utilização do GRUPO para a conta "
+"do\n"
 "                                novo utilizador\n"
 "  -G, --groups GRUPOS           lista de grupos adicionais para a conta\n"
 "                                do novo utilizador\n"
@@ -1748,16 +1771,20 @@ msgstr ""
 "utilizador\n"
 "  -u, --uid UID                 força a utilização do UID para a conta do\n"
 "                                novo utilizador\n"
-"  -U, --user-group              criar um grupo com o mesmo nome do utilizador\n"
+"  -U, --user-group              criar um grupo com o mesmo nome do "
+"utilizador\n"
 "\n"
 
 #, c-format
 msgid "%s: Out of memory. Cannot update the group database.\n"
-msgstr "%s: Memória esgotada. Não foi possível actualizar a base de dados group.\n"
+msgstr ""
+"%s: Memória esgotada. Não foi possível actualizar a base de dados group.\n"
 
 #, c-format
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-msgstr "%s: Memória esgotada. Não foi possível actualizar a base de dados shadow group\n"
+msgstr ""
+"%s: Memória esgotada. Não foi possível actualizar a base de dados shadow "
+"group\n"
 
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1805,12 +1832,14 @@ msgstr "%s: não foi possível reescrever o ficheiro de palavras-passe\n"
 
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: não foi possível reescrever o ficheiro de shadow de palavras-passe\n"
+msgstr ""
+"%s: não foi possível reescrever o ficheiro de shadow de palavras-passe\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
 msgstr ""
-"%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe shadow\n"
+"%s: não é possível obter acesso exclusivo ao ficheiro de palavras-passe "
+"shadow\n"
 
 #, c-format
 msgid "%s: cannot open shadow password file\n"
@@ -1960,7 +1989,8 @@ msgstr "%s: o utilizador %s é um utilizador NIS\n"
 #, c-format
 msgid "%s: not removing directory %s (would remove home of user %s)\n"
 msgstr ""
-"%s: o directório %s não será removido (iria remover a home do utilizador %s)\n"
+"%s: o directório %s não será removido (iria remover a home do utilizador %"
+"s)\n"
 
 #, c-format
 msgid "%s: error removing directory %s\n"
@@ -2006,7 +2036,8 @@ msgstr ""
 "  -g, --gid GRUPO               forçar a utilização do GRUPO como novo\n"
 "                                grupo primário\n"
 "  -G, --groups GRUPOS           nova lista de grupos adicionais\n"
-"  -a, --append                  juntar o utilizador aos GRUPOS suplementares\n"
+"  -a, --append                  juntar o utilizador aos GRUPOS "
+"suplementares\n"
 "                                mencionados pela opção -G sem o/a remover\n"
 "                                dos outros grupos\n"
 "  -h, --help                    mostrar esta mensagem de ajuda e sair\n"

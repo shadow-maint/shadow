@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-07-01 06:36-0500\n"
 "Last-Translator: Ming Hua <minghua@ubuntu.com>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
@@ -86,6 +86,14 @@ msgid_plural ""
 msgstr[0] ""
 "自上一次登录以来已有 %d 次登录失败。\n"
 "最后一次是 %s 在 %s 上。\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s：无法获取独有的 UID\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s：无法获取独有的 GID\n"
 
 msgid "Too many logins.\n"
 msgstr "过多登录数量。\n"
@@ -744,6 +752,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "用法：groupadd [选项] 组\n"
@@ -759,10 +769,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s：增加新组条目时出错\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s：无法获取独有的 GID\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -803,6 +809,10 @@ msgstr "%s：%s 组已存在\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s：GID %u 并不唯一\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s：无法创建 %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "用法：groupdel 组\n"
@@ -895,6 +905,28 @@ msgstr "%s：%u 不是一个独有的 GID\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s：%s 不是一个独有的名称\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s：无法重写密码文件\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s：无法锁定密码文件\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s：无法打开密码文件\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s：不能在 NIS 客户端上修改用户“%s”。\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1092,14 +1124,6 @@ msgstr ""
 "\n"
 "登录超时 %d 秒\n"
 
-#, fuzzy, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " 在“%.100s”上，来自“%.200s”"
-
-#, fuzzy, c-format
-msgid " on '%.100s'"
-msgstr "在“%.100s”上"
-
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM 错误，正在退出：%s\n"
@@ -1170,6 +1194,10 @@ msgstr "用法：sg 组 [[-c] 命令]\n"
 msgid "Invalid password.\n"
 msgstr "旧密码："
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s：fork 失败：%s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "未知的 UID：%u\n"
@@ -1186,8 +1214,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s：%s 组不存在\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "无效的组名“%s”\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1199,13 +1236,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s：用户 %s 不存在\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s：用户 %s 不存在\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s：无效的用户名“%s”\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s：无法锁定 /etc/passwd。\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s：无法锁定文件，请稍后再试。\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s：无法锁定 /etc/passwd。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s：无法锁定 /etc/passwd。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s：无法锁定 /etc/passwd。\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1219,13 +1276,17 @@ msgstr "%s：更新文件出错\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s：第 %d 行：无效行\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s：不能更新用户 %s 的条目\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s：第 %d 行：无法创建 GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s：第 %d 行：无法创建 UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s：第 %d 行：无法创建 GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1349,6 +1410,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s：不支持 %s 存储。\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1586,12 +1651,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "用法：useradd [选项] 用户名\n"
@@ -1622,14 +1692,6 @@ msgstr "%s：update_group 内存溢出\n"
 #, fuzzy, c-format
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s：update_gshadow 内存溢出\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s：无法获取独有的 UID\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s：无法获取独有的 GID\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1664,6 +1726,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s：无效的 shell“%s”\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s：无效的用户名“%s”\n"
 
@@ -1674,14 +1740,6 @@ msgstr "%s：无法重写密码文件\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s：无法重写影子密码文件\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s：无法锁定密码文件\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s：无法打开密码文件\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1737,6 +1795,10 @@ msgstr "%s：用户 %s 已存在\n"
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr "%s：%s 组已经存在 - 如果您想将此用户加入到该组，请使用 -g 参数。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s：无法创建 %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1977,6 +2039,23 @@ msgstr "无法备份"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：无法恢复 %s：%s (您的修改在 %s 中)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s：无法获取独有的 GID\n"
+
+#, fuzzy
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " 在“%.100s”上，来自“%.200s”"
+
+#, fuzzy
+#~ msgid " on '%.100s'"
+#~ msgstr "在“%.100s”上"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s：无法锁定文件，请稍后再试。\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s：第 %d 行：无法创建 UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s：名称 %s 并不唯一\n"

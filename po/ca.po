@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-11-24 17:34+0100\n"
 "Last-Translator: Guillem Jover <guillem@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -88,6 +88,14 @@ msgstr[0] ""
 msgstr[1] ""
 "S'han produït %d fallades des de l'últim accés.\n"
 "L'ultim va ser %s en %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: no es pot obtenir un UID únic\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: no es pot obtenir un GID únic\n"
 
 msgid "Too many logins.\n"
 msgstr "Massa accessos.\n"
@@ -749,6 +757,7 @@ msgstr "%s: El membre %s és desconegut\n"
 msgid "%s: Not a tty\n"
 msgstr "%s: No és una tty\n"
 
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -760,6 +769,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "Forma d'ús: groupadd [opcions] GRUP\n"
@@ -778,10 +789,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: s'ha produït un error en afegir la nova entrada de grup\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: no es pot obtenir un GID únic\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -822,6 +829,10 @@ msgstr "%s: el grup %s existeix\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: el GID %u no és únic\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: no es pot crear %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Forma d'ús: groupdel grup\n"
@@ -914,6 +925,28 @@ msgstr "%s: %u no és un GID únic\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s no és un nom únic\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: no es pot reescriure el fitxer de contrasenyes\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: no es pot blocar el fitxer de contrasenyes\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: no es pot d'obrir el fitxer de contrasenyes\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: no s'ha pogut canviar l'usuari «%s» al client NIS.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1114,14 +1147,6 @@ msgstr ""
 "L'accés ha caducat després de %d segons.\n"
 
 #, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " a «%.100s» des de «%.200s»"
-
-#, c-format
-msgid " on '%.100s'"
-msgstr " a «%.100s»"
-
-#, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: fallada de PAM, s'està avortant: %s\n"
 
@@ -1191,6 +1216,10 @@ msgstr "Forma d'ús: sg grup [[-c] ordre]\n"
 msgid "Invalid password.\n"
 msgstr "Contrasenya antiga: "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: fallada al fer fork: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "El UID és desconegut: %u\n"
@@ -1207,8 +1236,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: el grup %s no existeix\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "el nom de grup «%s» no és vàlid\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1220,13 +1258,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: l'usuari %s no existeix\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: l'usuari %s no existeix\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: no es pot blocar «/etc/passwd».\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: no es poden blocar els fitxers, intenteu-ho més tard\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: no es pot blocar «/etc/passwd».\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: no es pot blocar «/etc/passwd».\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: no es pot blocar «/etc/passwd».\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1240,13 +1298,17 @@ msgstr "%s: s'ha produït un error en actualitzar el fitxer\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: línia %d: la línia no és vàlida\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: no es pot actualitzar l'entrada per a l'usuari %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: línia %d: no es pot crear el GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: línia %d: no es pot crear el UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: línia %d: no es pot crear el GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1377,6 +1439,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: el repositori %s no està suportat\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1616,12 +1682,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "Forma d'ús: useradd [opcions] USUARI\n"
@@ -1668,14 +1739,6 @@ msgstr "%s: sense memòria a update_group\n"
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: sense memòria a update_gshadow\n"
 
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: no es pot obtenir un UID únic\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: no es pot obtenir un GID únic\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: el directori base «%s» no és vàlid\n"
@@ -1709,6 +1772,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: l'intèrpret «%s» no és vàlid\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: el nom d'usuari «%s» no és vàlid\n"
 
@@ -1719,14 +1786,6 @@ msgstr "%s: no es pot reescriure el fitxer de contrasenyes\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: no es pot reescriure el fitxer de contrasenyes ombra\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: no es pot blocar el fitxer de contrasenyes\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: no es pot d'obrir el fitxer de contrasenyes\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1787,6 +1846,10 @@ msgid ""
 msgstr ""
 "%s: el grup %s existeix, si voleu afegir aquest usuari a aquest grup, useu «-"
 "g».\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: no es pot crear %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2049,6 +2112,21 @@ msgstr "No s'ha pogut fer una còpia de seguretat"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: no es pot restaurar %s: %s (els seus canvis estan a %s)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: no es pot obtenir un GID únic\n"
+
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " a «%.100s» des de «%.200s»"
+
+#~ msgid " on '%.100s'"
+#~ msgstr " a «%.100s»"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: no es poden blocar els fitxers, intenteu-ho més tard\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: línia %d: no es pot crear el UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: el nom %s no és únic\n"

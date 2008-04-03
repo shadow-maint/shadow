@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-03-18 00:08+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2008-03-31 12:50+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -18,8 +18,11 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 
 #, c-format
-msgid "Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
-msgstr "'%s' izeneko sarrera anitz %s-en. Mesedez konpondu pwck edo grpck erabiliaz.\n"
+msgid ""
+"Multiple entries named '%s' in %s. Please fix this with pwck or grpck.\n"
+msgstr ""
+"'%s' izeneko sarrera anitz %s-en. Mesedez konpondu pwck edo grpck "
+"erabiliaz.\n"
 
 #, c-format
 msgid "crypt method not supported by libcrypt? (%s)\n"
@@ -784,7 +787,8 @@ msgstr ""
 "  -K, --key KEY=BALIO           /etc/login.defs lehenespenak gainidatzi\n"
 "  -o, --non-unique              onartu bikoizutiko (ez bakarra) GID-a duen\n"
 "                                taldea sortzea\n"
-"  -p, --password PASSWORD       enkriptatutako pasahitza erabili talde berrirako\n"
+"  -p, --password PASSWORD       enkriptatutako pasahitza erabili talde "
+"berrirako\n"
 "  -r, --system                  sistema kontu bat sortu\n"
 "\n"
 
@@ -914,9 +918,10 @@ msgstr ""
 "  -h, --help                    laguntza hau bistarazi eta irten\n"
 "  -K, --new-name TALDE_BERRIA   Taldearentzat TALDE_BERRI izena\n"
 "                                erabiltzea indartu\n"
-"  -o, --non-unique              onartu TALDEAK bikoizutiko (ez bakarra) GID-a "
-"erabiltzea\n"
-"  -p, --password PASSWORD       enkriptatutako pasahitza erabili pasahitz berrirako\n"
+"  -o, --non-unique              onartu TALDEAK bikoizutiko (ez bakarra) GID-"
+"a erabiltzea\n"
+"  -p, --password PASSWORD       enkriptatutako pasahitza erabili pasahitz "
+"berrirako\n"
 "\n"
 
 #, c-format
@@ -948,8 +953,8 @@ msgid ""
 "%s: cannot change the primary group of user '%s' from %u to %u, since it is "
 "not in the passwd file.\n"
 msgstr ""
-"%s: Ezin da '%s' erabiltzailearen talde nagusia %u-tik %u-ra aldatu, berau ez dago "
-"passwd fitxategian eta.\n"
+"%s: Ezin da '%s' erabiltzailearen talde nagusia %u-tik %u-ra aldatu, berau "
+"ez dago passwd fitxategian eta.\n"
 
 #, c-format
 msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
@@ -1193,7 +1198,8 @@ msgid "TIOCSCTTY failed on %s"
 msgstr "TIOCSCTTY huts %s-en"
 
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr "Abisua: saio-hasiera berriro gaitu egingo da aldi bateko blokeoaren ondoren."
+msgstr ""
+"Abisua: saio-hasiera berriro gaitu egingo da aldi bateko blokeoaren ondoren."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1312,7 +1318,9 @@ msgstr "%s: %d lerroa: lerro baliogabea\n"
 
 #, c-format
 msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
-msgstr "%s: ezin da %s erabiltzailearen sarrera eguneratu (ez dago pasahitz datubasean)\n"
+msgstr ""
+"%s: ezin da %s erabiltzailearen sarrera eguneratu (ez dago pasahitz "
+"datubasean)\n"
 
 #, c-format
 msgid "%s: line %d: can't create user\n"
@@ -1390,7 +1398,8 @@ msgstr ""
 "  -u, --unlock                     emandako kontuaren blokeoa kendu\n"
 "  -w, --warndays ABISU_EGUN        ezarri iraungitze abisu data ABISU_EGUN-"
 "era\n"
-"  -x, --maxdays GEHI_EGUN          ezarri pasahitz aldatu aurretik gehienezko\n"
+"  -x, --maxdays GEHI_EGUN          ezarri pasahitz aldatu aurretik "
+"gehienezko\n"
 "                                   egun kopurua GEHI_EGUN-era\n"
 "\n"
 
@@ -1447,11 +1456,16 @@ msgid ""
 "You should set a password with usermod -p to unlock this user account.\n"
 msgstr ""
 "%s: taldea desblokeatzeak pasahitz gabeko kontu baten emaitza izan dezake\n"
-"Erabiltzaile hau desblokeatzeko usermod -p erabiliaz pasahitz bat ezarri behar duzu.\n"
+"Erabiltzaile hau desblokeatzeko usermod -p erabiliaz pasahitz bat ezarri "
+"behar duzu.\n"
 
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: %s biltegia ez da onartzen\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1728,12 +1742,16 @@ msgstr ""
 "                                talde bat\n"
 "  -o, --non-unique              onartu erabiltzailea sortzea bikoizturiko\n"
 "                                (ez-bakarra) UIDa erabiliaz\n"
-"  -p, --password PASSWORD       enkriptatutako pasahitza erabili erabiltzaile\n"
+"  -p, --password PASSWORD       enkriptatutako pasahitza erabili "
+"erabiltzaile\n"
 "                                berri kontuarentzat\n"
 "  -r, --system                  sistema kontu bat sortu\n"
-"  -s, --shell SHELL             Erabiltzaile kontu berriaren sarrera shell-a\n"
-"  -u, --uid UID                 behartu UID erabiltzea erabiltzaile kontu berriarentzat\n"
-"  -U, --user-group              sortu erabiltzailearen izen berdineko talde bat\n"
+"  -s, --shell SHELL             Erabiltzaile kontu berriaren sarrera shell-"
+"a\n"
+"  -u, --uid UID                 behartu UID erabiltzea erabiltzaile kontu "
+"berriarentzat\n"
+"  -U, --user-group              sortu erabiltzailearen izen berdineko talde "
+"bat\n"
 "\n"
 
 #, c-format
@@ -1831,7 +1849,8 @@ msgstr "%s: ezin da %s direktorioa sortu\n"
 msgid "Creating mailbox file"
 msgstr "Postakutxa fitxategia sortzen"
 
-msgid "Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
+msgid ""
+"Group 'mail' not found. Creating the user mailbox file with 0600 mode.\n"
 msgstr ""
 "Ez da 'mail' taldea aurkitu. Erabiltzaile postakutxa fitxategia 0600 moduan\n"
 "sortzen.\n"
@@ -1844,8 +1863,10 @@ msgid "%s: user %s exists\n"
 msgstr "%s: %s erabiltzailea badago dagoeneko\n"
 
 #, c-format
-msgid "%s: group %s exists - if you want to add this user to that group, use -g.\n"
-msgstr "%s: %s taldea badago - erabiltzaile hau talde honetan gehiteko erabili '-g'\n"
+msgid ""
+"%s: group %s exists - if you want to add this user to that group, use -g.\n"
+msgstr ""
+"%s: %s taldea badago - erabiltzaile hau talde honetan gehiteko erabili '-g'\n"
 
 #, c-format
 msgid "%s: can't create user\n"
@@ -2107,4 +2128,3 @@ msgstr "Ezin izan da babeskopiarik egin"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: ezin da %s leheneratu: %s (zure aldaketak %s(e)n daude)\n"
-

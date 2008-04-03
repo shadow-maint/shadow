@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -84,6 +84,14 @@ msgid_plural ""
 "Last was %s on %s.\n"
 msgstr[0] "%d %s sidan førre innlogging. Førre var %s på %s.\n"
 msgstr[1] "%d %s sidan førre innlogging. Førre var %s på %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: klarer ikkje få unikt gid\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: klarer ikkje få unikt gid\n"
 
 msgid "Too many logins.\n"
 msgstr "For mange innloggingar.\n"
@@ -706,16 +714,14 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: feil ved oppretting av ny gruppeoppføring\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: klarer ikkje få unikt gid\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -756,6 +762,10 @@ msgstr "%s: gruppa %s finst allereie\n"
 #, fuzzy, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: gid %u er ikkje unikt\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: kan ikkje oppretta %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Bruk: goupdel gruppe\n"
@@ -842,6 +852,28 @@ msgstr "%s: %u er ikkje ein unik gid\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s er ikkje eit unikt namn\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: klarer ikkje skriva ny passordfil\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: klarer ikkje låsa passordfil\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: klarer ikkje opna passordfil\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: klarer ikkje endra brukar «%s» på NIS-klient.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1030,14 +1062,6 @@ msgstr ""
 "\n"
 "Innlogging gjekk ut på tid etter %d sekund.\n"
 
-#, fuzzy, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " på «%.100s» frå «%.200s»"
-
-#, fuzzy, c-format
-msgid " on '%.100s'"
-msgstr " på «%.100s»"
-
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr ""
@@ -1081,8 +1105,7 @@ msgid "TIOCSCTTY failed on %s"
 msgstr ""
 
 msgid "Warning: login re-enabled after temporary lockout."
-msgstr ""
-"Åtvaring: innlogging gjort mogeleg igjen etter mellombels utestenging."
+msgstr "Åtvaring: innlogging gjort mogeleg igjen etter mellombels utestenging."
 
 #, c-format
 msgid "Last login: %s on %s"
@@ -1112,6 +1135,10 @@ msgid "Invalid password.\n"
 msgstr "Gamalt passord:"
 
 #, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: ugyldig telefonnummer, arbeid: «%s»\n"
+
+#, fuzzy, c-format
 msgid "unknown UID: %u\n"
 msgstr "ukjent GID: %lu\n"
 
@@ -1127,8 +1154,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: gruppe %s eksisterer ikkje\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "ugyldig gruppenamn «%s»\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1140,13 +1176,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: brukar %s finst ikkje\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: brukar %s finst ikkje\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: ugyldig brukarnamn «%s»\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: klarer ikkje låsa /etc/passwd.\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: klarer ikkje låsa filer, prøv igjen seinare\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: klarer ikkje låsa /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: klarer ikkje låsa /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: klarer ikkje låsa /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1160,13 +1216,17 @@ msgstr "%s: feil ved oppdatering av filer\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: linje %d: ugyldig linje\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: klarer ikkje oppdatere oppføring for brukar %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: linje %d: klarer ikkje laga GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: linje %d: klarer ikkje laga UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: linje %d: klarer ikkje laga GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1243,8 +1303,7 @@ msgid ""
 "Warning: weak password (enter it again to use it anyway)."
 msgstr ""
 "\n"
-"Åtvaring: Svakt passord (skriv det inn ein gong til for å bruka det "
-"likevel)."
+"Åtvaring: Svakt passord (skriv det inn ein gong til for å bruka det likevel)."
 
 msgid "They don't match; try again.\n"
 msgstr "Passorda er ikkje like, prøv igjen.\n"
@@ -1270,6 +1329,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: arkiv %s er ikkje støtta\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1496,12 +1559,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 
@@ -1512,14 +1580,6 @@ msgstr "%s: slapp opp for minne i update_group\n"
 #, fuzzy, c-format
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: slapp opp for minne i update_gshadow\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: klarer ikkje få unikt gid\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: klarer ikkje få unikt gid\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1554,6 +1614,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: ugyldig skal «%s»\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: ugyldig brukarnamn «%s»\n"
 
@@ -1564,14 +1628,6 @@ msgstr "%s: klarer ikkje skriva ny passordfil\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: klarer ikkje skriva ny skuggepassordfil\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: klarer ikkje låsa passordfil\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: klarer ikkje opna passordfil\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1629,6 +1685,10 @@ msgid ""
 msgstr ""
 "%s: gruppa %s finst - viss du ønskjer å leggja brukaren til denne gruppa, "
 "bruk -g.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: kan ikkje oppretta %s\n"
 
 #, fuzzy, c-format
 msgid "%s: UID %u is not unique\n"
@@ -1837,6 +1897,24 @@ msgstr "Klarte ikkje laga reservekopi"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: klarer ikkje gjenoppretta %s: %s (endringane dine er i %s)\n"
+
+#, fuzzy
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: klarer ikkje få unikt gid\n"
+
+#, fuzzy
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " på «%.100s» frå «%.200s»"
+
+#, fuzzy
+#~ msgid " on '%.100s'"
+#~ msgstr " på «%.100s»"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: klarer ikkje låsa filer, prøv igjen seinare\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: linje %d: klarer ikkje laga UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: namn %s er ikkje unikt\n"

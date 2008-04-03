@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-11-25 20:53+0100\n"
 "Last-Translator: Tomasz Kłoczko <kloczek@pld.org.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -94,6 +94,14 @@ msgstr[1] ""
 msgstr[2] ""
 "%d nieudanych prób logowania od ostatniego logowania.\n"
 "Ostatnie logowanie: dnia %s na terminalu %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
 
 msgid "Too many logins.\n"
 msgstr "Zbyt wiele otwartych sesji.\n"
@@ -749,6 +757,7 @@ msgstr "%s: nieznany członek %s\n"
 msgid "%s: Not a tty\n"
 msgstr "%s: To nie tty\n"
 
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -760,6 +769,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "Użycie: groupadd [opcje] GRUPA\n"
@@ -777,10 +788,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: błąd podczas dodawania nowej grupy\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -821,6 +828,10 @@ msgstr "%s: grupa %s istnieje\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: GID %u nie jest niepowtarzalny\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: nie można utworzyć %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Użycie: groupdel grupa\n"
@@ -915,6 +926,28 @@ msgstr "%s: %u nie jest niepowtarzalnym GID\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s nie jest niepowtarzalną nazwą\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: nie można przepisać pliku z hasłami\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: nie można zablokować pliku z hasłami\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: nie można otworzyć pliku z hasłami\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: nie można zmienić użytkownika '%s' na kliencie NIS.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1115,14 +1148,6 @@ msgstr ""
 "Limit czasu logowania przekroczony po %d sekundach.\n"
 
 #, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " na '%.100s' z '%.200s'"
-
-#, c-format
-msgid " on '%.100s'"
-msgstr " na '%.100s'"
-
-#, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM niepowodzenie, przerwane: %s\n"
 
@@ -1192,6 +1217,10 @@ msgstr "Użycie: sg grupa [[-c] polecenie]\n"
 msgid "Invalid password.\n"
 msgstr "Stare hasło: "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: failure forking: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "nieznany UID: %u\n"
@@ -1208,8 +1237,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: grupa %s nie istnieje\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "nieprawidłowa nazwa grupy '%s'\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1221,13 +1259,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: użytkownik %s nie istnieje\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: użytkownik %s nie istnieje\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: nie można zablokować /etc/passwd.\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: nie można zablokować plików, spróbuj później\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: nie można zablokować /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: nie można zablokować /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: nie można zablokować /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1241,13 +1299,17 @@ msgstr "%s: błąd podczas aktualizowania plików\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: linia %d: nieprawidłowa linia\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: nie można zaktualizować wpisu dla użytkownika %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: linia %d: nie można utworzyć GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: linia %d: nie można utworzyć UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: linia %d: nie można utworzyć GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1376,6 +1438,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: repozytorium %s nie jest obsługiwane\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1612,12 +1678,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "Użycie: useradd [opcje] LOGIN\n"
@@ -1660,14 +1731,6 @@ msgstr "%s: zabrakło pamięci w update_group\n"
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: zabrakło pamięci w update_gshadow\n"
 
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: nie można uzyskać niepowtarzalnego UID\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: nieprawidłowy katalog bazowy '%s'\n"
@@ -1701,6 +1764,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: nieprawidłowa powłoka '%s'\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: nieprawidłowa nazwa użytkownika '%s'\n"
 
@@ -1711,14 +1778,6 @@ msgstr "%s: nie można przepisać pliku z hasłami\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: nie można przepisać pliku z ukrytymi hasłami\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: nie można zablokować pliku z hasłami\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: nie można otworzyć pliku z hasłami\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1777,6 +1836,10 @@ msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: grupa %s istnieje - aby dodać tego użytkownika do tej grupy, użyj -g.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: nie można utworzyć %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2032,6 +2095,21 @@ msgstr "Nie można wykonać kopii zapasowej"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: nie można odzyskać %s: %s (twoje zmiany są w %s)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: nie można uzyskać niepowtarzalnego GID\n"
+
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " na '%.100s' z '%.200s'"
+
+#~ msgid " on '%.100s'"
+#~ msgstr " na '%.100s'"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: nie można zablokować plików, spróbuj później\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: linia %d: nie można utworzyć UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: nazwa %s nie jest niepowtarzalny\n"

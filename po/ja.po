@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-11-25 21:03+0100\n"
 "Last-Translator: NAKANO Takeo <nakano@webmasters.gr.jp>\n"
 "Language-Team: Japanese\n"
@@ -85,6 +85,14 @@ msgid_plural ""
 msgstr[0] ""
 "最後のログインから %d 回失敗。\n"
 "最後のログインは %s (マシン %s)。\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: 他と重ならないユーザ ID を取得できません\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: 他と重ならないグループ ID を取得できません\n"
 
 msgid "Too many logins.\n"
 msgstr "ログイン試行数が制限を越えました。\n"
@@ -735,6 +743,7 @@ msgstr "%s: メンバー %s は不明です\n"
 msgid "%s: Not a tty\n"
 msgstr "%s: 端末ではありません\n"
 
+#, fuzzy
 msgid ""
 "Usage: groupadd [options] GROUP\n"
 "\n"
@@ -746,6 +755,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "使い方: groupadd [オプション] グループ名\n"
@@ -765,10 +776,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: 新規グループエントリ追加の際にエラーが起きました\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: 他と重ならないグループ ID を取得できません\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -809,6 +816,10 @@ msgstr "%s: グループ %s は既に存在します\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: グループ ID %u が重複しています\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: %s を作成できません\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "使用法: groupdel グループ\n"
@@ -903,6 +914,28 @@ msgstr "%s: グループ ID %u は重複しています\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: 名前 %s は重複しています\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: パスワードファイルの書換えができません\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: パスワードファイルがロックできません\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: パスワードファイルが開けません\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: NIS クライアントではユーザ '%s' を変更できません。\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1101,14 +1134,6 @@ msgstr ""
 "あと %d 秒でログインはタイムアウトします。\n"
 
 #, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " on `%s.100s' from `%.200s'"
-
-#, c-format
-msgid " on '%.100s'"
-msgstr " on `%.100s'"
-
-#, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: PAM が失敗しました、終了します: %s\n"
 
@@ -1179,6 +1204,10 @@ msgstr "使用法: sg グループ [[-c] コマンド]\n"
 msgid "Invalid password.\n"
 msgstr "古いパスワード: "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: fork に失敗しました: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "不明なユーザ ID: %u\n"
@@ -1195,8 +1224,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: グループ %s は存在しません\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "'%s' はグループ名として正しくありません\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1208,13 +1246,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: ユーザ %s は存在しません\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: ユーザ %s は存在しません\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: ユーザ名 '%s' は不正です\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: /etc/passwd をロックできません。\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: ファイルをロックできません。後でもう一度試してください\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: /etc/passwd をロックできません。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: /etc/passwd をロックできません。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: /etc/passwd をロックできません。\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1228,13 +1286,17 @@ msgstr "%s: ファイル更新のエラーです\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: %d 行: 不正な行です\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: ユーザ %s のエントリを更新できません\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: %d 行: グループ ID を作成できません\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: %d 行: ユーザ ID を作成できません\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: %d 行: グループ ID を作成できません\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1359,6 +1421,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: レポジトリ %s はサポートしていません\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1596,12 +1662,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "使い方: useradd [オプション] ログイン名\n"
@@ -1640,14 +1711,6 @@ msgstr "%s: update_group 中にメモリが不足しました\n"
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: update_gshadow 中にメモリが不足しました\n"
 
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: 他と重ならないユーザ ID を取得できません\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: 他と重ならないグループ ID を取得できません\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ベースディレクトリ '%s' は不正です\n"
@@ -1681,6 +1744,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: シェル '%s' は不正です\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: ユーザ名 '%s' は不正です\n"
 
@@ -1691,14 +1758,6 @@ msgstr "%s: パスワードファイルの書換えができません\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: シャドウパスワードファイルの書換えができません\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: パスワードファイルがロックできません\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: パスワードファイルが開けません\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1758,6 +1817,10 @@ msgid ""
 msgstr ""
 "%s: グループ %s は存在します。このユーザをそのグループへ追加するには -g を用"
 "いてください。\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: %s を作成できません\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2014,6 +2077,21 @@ msgstr "バックアップを作成できません"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %s を復旧できませんでした: %s (あなたの変更は %s にあります)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: 他と重ならないグループ ID を取得できません\n"
+
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " on `%s.100s' from `%.200s'"
+
+#~ msgid " on '%.100s'"
+#~ msgstr " on `%.100s'"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: ファイルをロックできません。後でもう一度試してください\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: %d 行: ユーザ ID を作成できません\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: 名前 %s は重複しています\n"

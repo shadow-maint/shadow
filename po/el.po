@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -92,6 +92,14 @@ msgstr[0] ""
 msgstr[1] ""
 "%d αποτυχίες από την τελευταία είσοδο.\n"
 " Η τελευταία ήταν στις %s στο %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: αδυναμία λήψης μοναδικού UID\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
 
 msgid "Too many logins.\n"
 msgstr "Πολλές είσοδοι στο σύστημα.\n"
@@ -766,6 +774,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "Χρήση: groupadd [options] group\n"
@@ -784,10 +794,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: Σφάλμα κατά την προσθήκη νέας καταχώρησης στο αρχείο ομάδων\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -828,6 +834,10 @@ msgstr "%s: Η ομάδα %s υπάρχει\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: Το GID %u δεν είναι μοναδικό\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: αδυναμία δημιουργίας του %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Χρήση: groupdel ομάδα\n"
@@ -929,6 +939,28 @@ msgstr "%s: Το %u δεν είναι μοναδικό GID\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: Το %s δεν είναι μοναδικό όνομα\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: αδυναμία επανεγγραφής του αρχείου συνθηματικών\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: Αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: Αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: αδυναμία αλλαγής χρήστη `%s' στον NIS εξυπηρετούμενο.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1134,14 +1166,6 @@ msgstr ""
 "\n"
 "Η διαδικασία εισόδου τερματίστηκε μετά από %d δευτερόλεπτα.\n"
 
-#, fuzzy, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " στο `%.100s' από `%.200s'"
-
-#, fuzzy, c-format
-msgid " on '%.100s'"
-msgstr " στο `%.100s'"
-
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: αποτυχία PAM, εγκατάλειψη: %s\n"
@@ -1213,6 +1237,10 @@ msgstr "Χρήση: sg ομάδα [[-c] εντολή]\n"
 msgid "Invalid password.\n"
 msgstr "Παλιό Συνθηματικό: "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: αποτυχία διχάλωσης: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "άγνωστο UID: %u\n"
@@ -1229,8 +1257,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: Η ομάδα %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "Μη έγκυρο όνομα ομάδας `%s'\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1242,13 +1279,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: Ο χρήστης %s δεν υπάρχει\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: Μη έγκυρο όνομα χρήστη `%s'\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: αδυναμία κλειδώματος του /etc/passwd.\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: αδυναμία κλειδώματος αρχείων, ξαναδοκιμάστε αργότερα\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: αδυναμία κλειδώματος του /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: αδυναμία κλειδώματος του /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: αδυναμία κλειδώματος του /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1262,13 +1319,17 @@ msgstr "%s: Σφάλμα κατά την ενημέρωση αρχείων\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: γραμμή %d: μη έγκυρη γραμμή\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: αδυναμία ανανέωσης καταχώρησης για τον χρήστη %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: γραμμή %d: αδυναμία δημιουργίας GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: γραμμή %d: αδυναμία δημιουργίας UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: γραμμή %d: αδυναμία δημιουργίας GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1402,6 +1463,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: η αποθήκη %s δεν υποστηρίζεται\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1643,12 +1708,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "Χρήση: useradd [options] LOGIN\n"
@@ -1695,14 +1765,6 @@ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s:  στο update_gshadow\n"
 
 #, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: αδυναμία λήψης μοναδικού UID\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
-
-#, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: Μη έγκυρος κατάλογος βάσης `%s'\n"
 
@@ -1735,6 +1797,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: Μη έγκυρος φλοιός `%s'\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: Μη έγκυρο όνομα χρήστη `%s'\n"
 
@@ -1745,14 +1811,6 @@ msgstr "%s: αδυναμία επανεγγραφής του αρχείου συ
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: αδυναμία επανεγγραφής του αρχείου σκιωδών συνθηματικών\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: Αδυναμία κλειδώματος του αρχείου συνθηματικών\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: Αδυναμία ανοίγματος του αρχείου συνθηματικών\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1813,6 +1871,10 @@ msgid ""
 msgstr ""
 "%s: ομάδα %s υπάρχει - αν θέλετε να προσθέσετε αυτόν το χρήστη σε αυτή την "
 "ομάδα, χρησιμοποιήστε -g.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: αδυναμία δημιουργίας του %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2072,6 +2134,23 @@ msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλ�
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: αδυναμία επαναφοράς %s: %s (οι αλλαγές είναι στο %s)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: αδυναμία λήψης μοναδικού GID\n"
+
+#, fuzzy
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " στο `%.100s' από `%.200s'"
+
+#, fuzzy
+#~ msgid " on '%.100s'"
+#~ msgstr " στο `%.100s'"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: αδυναμία κλειδώματος αρχείων, ξαναδοκιμάστε αργότερα\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: γραμμή %d: αδυναμία δημιουργίας UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: Το όνομα %s δεν είναι μοναδικό\n"

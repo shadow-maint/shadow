@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -97,6 +97,14 @@ msgstr[0] ""
 msgstr[1] ""
 "%d ចូល​ចុងក្រោយ​បានបរាជ័យ​ ។\n"
 "ចុងក្រោម​ %s  %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s ៖ មិនអាចយក​ UID ដែលមានតែមួយ​បានទេ\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s ៖ មិនអាច​យក​​ GID ​ដែលមានតែមួយ​បានឡើយ​\n"
 
 msgid "Too many logins.\n"
 msgstr "ចូល​ច្រើន​ពេក​ ។\n"
@@ -762,6 +770,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "របៀបប្រើ ៖ groupadd [ជម្រើស] ក្រុម\n"
@@ -779,10 +789,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s ៖ កំហុស​ក្នុងការ​បន្ថែម​ធាតុបញ្ចូល​​ក្រុម​ថ្មី​\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s ៖ មិនអាច​យក​​ GID ​ដែលមានតែមួយ​បានឡើយ​\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -823,6 +829,10 @@ msgstr "%s ៖ មានក្រុម​ %s រួច​ហើយ​\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s ៖ GID %u គឺមិនមែន​មាន​តែមួយទេ​\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "របៀបប្រើ​ ៖ ក្រុម​ groupdel \n"
@@ -921,6 +931,28 @@ msgstr "%s ៖ %u មិនមែន​​ GID ដែលមានតែមួ�
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s ៖ %s គឺមិនមែនជាឈ្មោះ​ដែលមានតែមួយទេ​\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ពាក្យ​សម្ងាត់​ឡើង​វិញ​បានឡើយ\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s ​៖ មិន​អាច​ចាក់​សោ​ឯកសារ​ពាក្យ​សម្ងាត់បានឡើយ​\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ពាក្យ​សម្ងាត់​បានឡើយ\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s ៖ មិនអាចផ្លាស់​​ប្តូរ​អ្នក​ប្រើបានទេ​ '%s' លើ​ម៉ាស៊ីន​ភ្ញៀវ NIS បានទេ ។\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1129,14 +1161,6 @@ msgstr ""
 "អស់​ពេល​ចូល​បន្ទាប់ពី %d វិនាទី ។\n"
 
 #, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " លើ '%.100s' ពី '%.200s'"
-
-#, c-format
-msgid " on '%.100s'"
-msgstr " លើ '%.100s'"
-
-#, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "ចូល ៖ PAM បរាជ័យ​ កំពុង​បោះបង់​ ៖ %s\n"
 
@@ -1207,6 +1231,10 @@ msgstr "របៀបប្រើ​ ៖ ក្រុម sg [[-c] command]\n"
 msgid "Invalid password.\n"
 msgstr "ពាក្យ​សម្ងាត់​ចាស់ ៖ "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s ៖ ការចែកជាពីរវិធី​​បានបរាជ័យ​ ៖ %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "មិន​ស្គាល់​ UID ៖ %u\n"
@@ -1223,8 +1251,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s ៖ មិនមានក្រុម​ %sឡើយ​\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "ឈ្មោះ​ក្រុម​ '%s' មិនត្រឹមត្រូវ\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1236,13 +1273,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s ៖ មិនទាន់មានអ្នក​ប្រើ​ %s ទេ​\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ /etc/passwd បានឡើយ ។\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s ៖ មិន​អាច​ចាក់សោ​ឯកសារ​បានឡើយ សូមព្យាយាម​ម្តង​ទៀតនៅពេលក្រោយ​\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ /etc/passwd បានឡើយ ។\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ /etc/passwd បានឡើយ ។\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s ៖ មិន​អាច​ចាក់​សោ​ /etc/passwd បានឡើយ ។\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1256,13 +1313,17 @@ msgstr "%s ៖ មានកំហុសក្នុងការ​ធ្វើ�
 msgid "%s: line %d: invalid line\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ បន្ទាត់​មិន​ត្រឹមត្រូវ​\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s ៖ មិនអាច​ធ្វើឲ្យធាតុបញ្ចូល​ទាន់សម័យ​សម្រាប់ %s បានឡើយ\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ GID បានឡើយ\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ UID បានឡើយ\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ GID បានឡើយ\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1389,6 +1450,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s ៖ ឃ្លាំង​ %s មិន​បាន​គាំទ្រឡើយ​\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1636,12 +1701,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "របៀបប្រើ ៖ useradd [ជម្រើស] LOGIN\n"
@@ -1680,14 +1750,6 @@ msgstr "%s: អស់​សតិ​ក្នុង​ក្នុងការ�
 msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s ៖ អស់​សតិ​ក្នុងការធ្វើឲ្យ gshadow ទាន់សម័៧\n"
 
-#, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s ៖ មិនអាចយក​ UID ដែលមានតែមួយ​បានទេ\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s ៖ មិនអាច​យក​​ GID ​ដែលមានតែមួយ​បានឡើយ​\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s  ៖ ថត​មូលដ្ឋាន​មិន​ត្រឹមត្រូវ​ '%s'\n"
@@ -1721,6 +1783,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s ៖ សែល​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s ៖ឈ្មោះ​អ្នក​ប្រើ​មិន​ត្រឹមត្រូវ​ '%s'\n"
 
@@ -1731,14 +1797,6 @@ msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ព�
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s ៖ មិន​អាច​សរសេរ​ឯកសារ​ពាក្យ​សម្ងាត់​ស្រមោលឡើងវិញ​​បានឡើយ​\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s ​៖ មិន​អាច​ចាក់​សោ​ឯកសារ​ពាក្យ​សម្ងាត់បានឡើយ​\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s ៖ មិន​អាច​បើក​ឯកសារ​ពាក្យ​សម្ងាត់​បានឡើយ\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1794,6 +1852,10 @@ msgstr "%s ៖ អ្នក​ប្រើ​ %s មាន​រួច​ហើ
 msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr "%s ៖ ក្រុម​ %s មាន​រួច​ហើយ​ - ប្រសិនបើ​អ្នក​ចង់​បន្ថែម​អ្នក​ប្រើទៅ​កាន់​ក្រុម​នោះ​ ប្រើ​ -g ។\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s ៖ មិន​អាច​បង្កើត​ %s បានឡើយ\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2044,6 +2106,21 @@ msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s ៖ មិន​អាច​ស្តារ %s ៖ %s (ការប្ដូរ​របស់អ្នក​គឺនៅក្នុង​ %s)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s ៖ មិនអាច​យក​​ GID ​ដែលមានតែមួយ​បានឡើយ​\n"
+
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " លើ '%.100s' ពី '%.200s'"
+
+#~ msgid " on '%.100s'"
+#~ msgstr " លើ '%.100s'"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s ៖ មិន​អាច​ចាក់សោ​ឯកសារ​បានឡើយ សូមព្យាយាម​ម្តង​ទៀតនៅពេលក្រោយ​\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s ៖ បន្ទាត់​ %d ៖ មិន​អាច​បង្កើត​ UID បានឡើយ\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s ៖ ឈ្មោះ​ %s គឺមិន​មែន​មាន​តែមួយ​ទេ\n"

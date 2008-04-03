@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.15\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-02-03 12:12+0100\n"
+"POT-Creation-Date: 2008-04-03 00:42+0200\n"
 "PO-Revision-Date: 2007-11-25 20:58+0100\n"
 "Last-Translator: Parlin Imanuel Toh <parlin_i@yahoo.com>\n"
 "Language-Team: Debian Indonesia <debid@yahoogroups.com>\n"
@@ -84,6 +84,14 @@ msgid_plural ""
 msgstr[0] ""
 "%d sejak login terakhir.\n"
 "Terakhir %s pada %s.\n"
+
+#, fuzzy
+msgid "Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: tidak bisa mendapatkan UID yang unik\n"
+
+#, fuzzy
+msgid "Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: tak mampu mendapatkan GID yang unik\n"
 
 msgid "Too many logins.\n"
 msgstr "Terlalu banyak login.\n"
@@ -746,6 +754,8 @@ msgid ""
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
 "  -o, --non-unique              allow create group with duplicate\n"
 "                                (non-unique) GID\n"
+"  -p, --password PASSWORD       use encrypted password for the new group\n"
+"  -r, --system                  create a system account\n"
 "\n"
 msgstr ""
 "Usage: groupadd [pilihan-pilihan] namagroup\n"
@@ -763,10 +773,6 @@ msgstr ""
 #, c-format
 msgid "%s: error adding new group entry\n"
 msgstr "%s: kesalahan saat menambahkan entri grup yang baru\n"
-
-#, c-format
-msgid "%s: can't get unique GID\n"
-msgstr "%s: tak mampu mendapatkan GID yang unik\n"
 
 #, c-format
 msgid "%s: %s is not a valid group name\n"
@@ -807,6 +813,10 @@ msgstr "%s: grup %s telah ada\n"
 #, c-format
 msgid "%s: GID %u is not unique\n"
 msgstr "%s: GID %u tidak unik\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: tak dapat membuat %s\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Penggunaan: groupdel grup\n"
@@ -905,6 +915,28 @@ msgstr "%s: %u bukan GID yang unik\n"
 #, c-format
 msgid "%s: %s is not a unique name\n"
 msgstr "%s: %s bukan nama yang unik\n"
+
+#, fuzzy, c-format
+msgid "%s: cannot rewrite passwd file\n"
+msgstr "%s: tak dapat menulis kembali berkas kata sandi\n"
+
+#, c-format
+msgid "%s: unable to lock password file\n"
+msgstr "%s: tak dapat mengunci berkas kata sandi\n"
+
+#, c-format
+msgid "%s: unable to open password file\n"
+msgstr "%s: tak dapat membuka berkas kata sandi\n"
+
+#, c-format
+msgid ""
+"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
+"not in the passwd file.\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
+msgstr "%s: tidak dapat mengubah pengguna '%s' pada klien NIS.\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -1103,14 +1135,6 @@ msgstr ""
 "\n"
 "Login time out setelah %d detik.\n"
 
-#, fuzzy, c-format
-msgid " on '%.100s' from '%.200s'"
-msgstr " pada `%.100s' dari `%.200s'"
-
-#, fuzzy, c-format
-msgid " on '%.100s'"
-msgstr " pada `%.100s'"
-
 #, c-format
 msgid "login: PAM Failure, aborting: %s\n"
 msgstr "login: Kegagalan PAM, berhenti: %s\n"
@@ -1181,6 +1205,10 @@ msgstr "Penggunaan: sg grup [[-c] perintah]\n"
 msgid "Invalid password.\n"
 msgstr "Kata sandi lama: "
 
+#, fuzzy, c-format
+msgid "%s: failure forking: %s\n"
+msgstr "%s: gagal membuat proses: %s"
+
 #, c-format
 msgid "unknown UID: %u\n"
 msgstr "UID tak dikenal: %u\n"
@@ -1197,8 +1225,17 @@ msgid ""
 "Usage: %s [options] [input]\n"
 "\n"
 "  -c, --crypt-method            the crypt method (one of %s)\n"
+"  -r, --system                  create system accounts\n"
 "%s\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: group ID `%s' is not valid\n"
+msgstr "%s: grup %s tidak ada\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid group name `%s'\n"
+msgstr "nama grup `%s' tidak sah\n"
 
 #, fuzzy, c-format
 msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
@@ -1210,13 +1247,33 @@ msgid ""
 "gshadow group\n"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "%s: user ID `%s' is not valid\n"
+msgstr "%s: pengguna %s tak ada\n"
+
+#, fuzzy, c-format
+msgid "%s: user `%s' does not exist\n"
+msgstr "%s: pengguna %s tak ada\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid user name `%s'\n"
+msgstr "%s: nama pengguna `%s' tak sah\n"
+
 #, c-format
 msgid "%s: can't lock /etc/passwd.\n"
 msgstr "%s: tidak dapat mengunci /etc/passwd.\n"
 
-#, c-format
-msgid "%s: can't lock files, try again later\n"
-msgstr "%s: tidak dapat mengunci berkas-berkas, coba lagi nanti\n"
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/shadow.\n"
+msgstr "%s: tidak dapat mengunci /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/group.\n"
+msgstr "%s: tidak dapat mengunci /etc/passwd.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't lock /etc/gshadow.\n"
+msgstr "%s: tidak dapat mengunci /etc/passwd.\n"
 
 #, c-format
 msgid "%s: can't open files\n"
@@ -1230,13 +1287,17 @@ msgstr "%s: kesalahan saat memperbaharui berkas-berkas\n"
 msgid "%s: line %d: invalid line\n"
 msgstr "%s: baris %d: baris tidak sah\n"
 
-#, c-format
-msgid "%s: line %d: can't create GID\n"
+#, fuzzy, c-format
+msgid "%s: cannot update the entry of user %s (not in the passwd database)\n"
+msgstr "%s: tak dapat memperbaharui entri untuk pengguna %s\n"
+
+#, fuzzy, c-format
+msgid "%s: line %d: can't create user\n"
 msgstr "%s: baris %d: tak dapat membuat GID\n"
 
-#, c-format
-msgid "%s: line %d: can't create UID\n"
-msgstr "%s: baris %d: tak dapat membuat UID\n"
+#, fuzzy, c-format
+msgid "%s: line %d: can't create group\n"
+msgstr "%s: baris %d: tak dapat membuat GID\n"
 
 #, c-format
 msgid "%s: line %d: cannot find user %s\n"
@@ -1366,6 +1427,10 @@ msgstr ""
 #, c-format
 msgid "%s: repository %s not supported\n"
 msgstr "%s: repositori %s tidak didukung\n"
+
+#, c-format
+msgid "%s: %s is not authorized to change the password of %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: You may not view or modify password information for %s.\n"
@@ -1606,12 +1671,17 @@ msgid ""
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -N, --no-user-group           do not create a group with the same name as\n"
+"                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
 "                                (non-unique) UID\n"
 "  -p, --password PASSWORD       use encrypted password for the new user\n"
 "                                account\n"
+"  -r, --system                  create a system account\n"
 "  -s, --shell SHELL             the login shell for the new user account\n"
 "  -u, --uid UID                 force use the UID for the new user account\n"
+"  -U, --user-group              create a group with the same name as the "
+"user\n"
 "\n"
 msgstr ""
 "Penggunaan: useradd [pilihan-pilihan] NAMA-LOGIN\n"
@@ -1651,14 +1721,6 @@ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
 msgstr "%s: kehabisan memori saat update_gshadow\n"
 
 #, fuzzy, c-format
-msgid "%s: can't get unique UID (no more available UIDs)\n"
-msgstr "%s: tidak bisa mendapatkan UID yang unik\n"
-
-#, fuzzy, c-format
-msgid "%s: can't get unique GID (no more available GIDs)\n"
-msgstr "%s: tak mampu mendapatkan GID yang unik\n"
-
-#, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: direktori awal `%s' tak sah\n"
 
@@ -1691,6 +1753,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: shell `%s' tak sah\n"
 
 #, c-format
+msgid "%s: options %s and %s conflict\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid user name '%s'\n"
 msgstr "%s: nama pengguna `%s' tak sah\n"
 
@@ -1701,14 +1767,6 @@ msgstr "%s: tak dapat menulis kembali berkas kata sandi\n"
 #, c-format
 msgid "%s: cannot rewrite shadow password file\n"
 msgstr "%s: tak dapat menulis kembali berkas kata sandi bayangan\n"
-
-#, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: tak dapat mengunci berkas kata sandi\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: tak dapat membuka berkas kata sandi\n"
 
 #, c-format
 msgid "%s: cannot lock shadow password file\n"
@@ -1765,6 +1823,10 @@ msgid ""
 "%s: group %s exists - if you want to add this user to that group, use -g.\n"
 msgstr ""
 "%s: grup %s telah ada - jika ingin menambah pengguna ke grup itu, pakai -g.\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create user\n"
+msgstr "%s: tak dapat membuat %s\n"
 
 #, c-format
 msgid "%s: UID %u is not unique\n"
@@ -2009,6 +2071,23 @@ msgstr "Tidak dapat membuat backup"
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: tidak dapat mengembalikan %s: %s (perubahan ada dalam %s)\n"
+
+#~ msgid "%s: can't get unique GID\n"
+#~ msgstr "%s: tak mampu mendapatkan GID yang unik\n"
+
+#, fuzzy
+#~ msgid " on '%.100s' from '%.200s'"
+#~ msgstr " pada `%.100s' dari `%.200s'"
+
+#, fuzzy
+#~ msgid " on '%.100s'"
+#~ msgstr " pada `%.100s'"
+
+#~ msgid "%s: can't lock files, try again later\n"
+#~ msgstr "%s: tidak dapat mengunci berkas-berkas, coba lagi nanti\n"
+
+#~ msgid "%s: line %d: can't create UID\n"
+#~ msgstr "%s: baris %d: tak dapat membuat UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: nama %s tidak unik\n"
