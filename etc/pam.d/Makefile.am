@@ -2,19 +2,21 @@
 # and also cooperate to make a distribution for `make dist'
 
 pamd_files = \
-	passwd \
-	su \
-	useradd \
 	chage \
+	chfn \
 	chgpasswd \
 	chpasswd \
+	chsh \
 	groupadd \
 	groupdel \
 	groupmems \
 	groupmod \
 	login \
 	newusers \
+	passwd \
+	su \
 	useradd \
+	userdel \
 	usermod
 
 if USE_PAM

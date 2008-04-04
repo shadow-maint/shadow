@@ -1,5 +1,11 @@
 $Id$
 
+shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
+
+*** general:
+- packaging
+  * Distribute the chfn, chsh, and userdel PAM configuration file.
+
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 
 *** general:

@@ -1,3 +1,13 @@
+2008-04-04  Mark Rosenstand  <mark@borkware.net>
+
+	* NEWS, etc/pam.d/Makefile.am: Add chfn, chsh, and userdel to
+	$(pamd_files). Remove the duplicate useradd. And sort
+	alphabetically.
+
+2008-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS: Prepare next release, 4.1.2.
+
 2008-04-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Prepare release 4.1.1
