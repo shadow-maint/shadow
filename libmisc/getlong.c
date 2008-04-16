@@ -29,7 +29,7 @@
 
 #include <config.h>
 
-#ident "$Id:$"
+#ident "$Id$"
 
 #include "prototypes.h"
 #include "defines.h"
