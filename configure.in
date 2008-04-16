@@ -223,7 +223,7 @@ AC_ARG_WITH(libpam,
 	[AC_HELP_STRING([--with-libpam], [use libpam for PAM support @<:@default=yes if found@:>@])],
 	[with_libpam=$withval], [with_libpam=yes])
 AC_ARG_WITH(selinux,
-	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=autodetect@:>@])],
+	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
 	[with_selinux=$withval], [with_selinux=yes])
 AC_ARG_WITH(skey,
 	[AC_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],

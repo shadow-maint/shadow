@@ -2,6 +2,8 @@
 
 	* NEWS, configure.in: Fix the detection of the audit library and
 	header file.
+	* configure.in: Document --with-selinux as "yes if found" rather
+	than "autodetected" for consistency with other options.
 
 2008-04-04  Mark Rosenstand  <mark@borkware.net>
 
