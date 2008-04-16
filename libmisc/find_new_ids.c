@@ -65,6 +65,7 @@ int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid)
 			user_id = pwd->pw_uid + 1;
 		}
 	}
+	endpwent ();
 
 	/*
 	 * If a user with UID equal to UID_MAX exists, the above algorithm
@@ -146,6 +147,7 @@ int find_new_gid (int sys_group, gid_t *gid, gid_t const *preferred_gid)
 			group_id = grp->gr_gid + 1;
 		}
 	}
+	endgrent ();
 
 	/*
 	 * If a group with GID equal to GID_MAX exists, the above algorithm

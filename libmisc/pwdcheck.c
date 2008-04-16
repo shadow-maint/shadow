@@ -46,7 +46,6 @@ void passwd_check (const char *user, const char *passwd, const char *progname)
 
 	if ((sp = getspnam (user))) /* !USE_PAM, no need for xgetspnam */
 		passwd = sp->sp_pwdp;
-	endspent ();
 	if (pw_auth (passwd, user, PW_LOGIN, (char *) 0) != 0) {
 		SYSLOG ((LOG_WARN, WRONGPWD2, user));
 		sleep (1);

@@ -695,7 +695,7 @@ int main (int argc, char **argv)
 		prog = "/bin/sh";
 
 	/*
-	 * Now i try to find the basename of the login shell. This will
+	 * Now I try to find the basename of the login shell. This will
 	 * become argv[0] of the spawned command.
 	 */
 	cp = Basename ((char *) prog);

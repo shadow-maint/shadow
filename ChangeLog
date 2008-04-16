@@ -1,5 +1,24 @@
 2008-04-16  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Ensure that getpwent() is used in setpwent(), getpwent(),
+	endpwend() sequences (ditto for getgrent(), getspent(), and
+	getsgent()). The only real (minor) issue was in login, which kept
+	the passwd file open.
+	* libmisc/entry.c: Remove unneeded setspent() and endspent() (only
+	getspnam is called in the middle).
+	* libmisc/find_new_ids.c: Make sure to close the password and
+	group files with endpwent() and endgrent().
+	* libmisc/pwdcheck.c: Remove unneeded endspent() (only getspnam()
+	is called before).
+	* src/lastlog.c, src/passwd.c, src/groupmod.c, src/faillog.c,
+	src/groups.c: Make sure to close
+	the password file with endpwent().
+	* src/login.c: Remove unneeded setpwent() (only xgetpwnam is
+	called before).
+	* src/login.c, src/newgrp.c: Fix typos in comments.
+
+2008-04-16  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, configure.in: Fix the detection of the audit, pam, and
 	selinux. Fail if the feature is requested but the library (or
 	header file) could not be found. If nothing is specified, enable

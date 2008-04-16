@@ -738,7 +738,6 @@ int main (int argc, char **argv)
 		 */
 		retcode =
 		    pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
-		setpwent ();
 		pwd = xgetpwnam (pam_user);
 		if (!pwd) {
 			SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
@@ -962,7 +961,7 @@ int main (int argc, char **argv)
 	if (pwent.pw_shell[0] == '*') {	/* subsystem root */
 		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
-		subroot++;	/* say i was here again */
+		subroot++;	/* say I was here again */
 		endpwent ();	/* close all of the file which were */
 		endgrent ();	/* open in the original rooted file */
 		endspent ();	/* system. they will be re-opened */

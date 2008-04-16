@@ -128,7 +128,7 @@ static void print (void)
 	uid_t user;
 
 	setpwent ();
-	while ((pwent = getpwent ())) {
+	while ( (pwent = getpwent ()) != NULL ) {
 		user = pwent->pw_uid;
 		if (uflg &&
 		    ((umin != -1 && user < (uid_t)umin) ||
@@ -149,6 +149,7 @@ static void print (void)
 
 		print_one (pwent);
 	}
+	endpwent ();
 }
 
 int main (int argc, char **argv)

@@ -54,14 +54,11 @@ void pw_entry (const char *name, struct passwd *pwent)
 		pwent->pw_dir = xstrdup (passwd->pw_dir);
 		pwent->pw_shell = xstrdup (passwd->pw_shell);
 #if !defined(AUTOSHADOW)
-		setspent ();
 		/* local, no need for xgetspnam */
 		if ((spwd = getspnam (name))) {
 			pwent->pw_passwd = xstrdup (spwd->sp_pwdp);
-			endspent ();
 			return;
 		}
-		endspent ();
 #endif
 		pwent->pw_passwd = xstrdup (passwd->pw_passwd);
 	}

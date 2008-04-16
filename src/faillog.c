@@ -170,6 +170,7 @@ static void reset (void)
 		while ( (pwent = getpwent ()) != NULL ) {
 			reset_one (pwent->pw_uid);
 		}
+		endpwent ();
 	}
 }
 
@@ -246,8 +247,10 @@ static void setmax (int max)
 		setmax_one (user, max);
 	} else {
 		setpwent ();
-		while ((pwent = getpwent ()))
+		while ( (pwent = getpwent ()) != NULL ) {
 			setmax_one (pwent->pw_uid, max);
+		}
+		endpwent ();
 	}
 }
 
@@ -288,8 +291,10 @@ static void set_locktime (long locktime)
 		set_locktime_one (user, locktime);
 	} else {
 		setpwent ();
-		while ((pwent = getpwent ()))
+		while ( (pwent = getpwent ()) != NULL ) {
 			set_locktime_one (pwent->pw_uid, locktime);
+		}
+		endpwent ();
 	}
 }
 

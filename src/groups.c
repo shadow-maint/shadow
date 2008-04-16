@@ -57,13 +57,12 @@ static void print_groups (const char *member)
 	struct passwd *pwd;
 	int flag = 0;
 
-	setgrent ();
-
 	/* local, no need for xgetpwnam */
 	if ((pwd = getpwnam (member)) == 0) {
 		fprintf (stderr, _("%s: unknown user %s\n"), Prog, member);
 		exit (1);
 	}
+	setgrent ();
 	while ((grp = getgrent ())) {
 		if (is_on_list (grp->gr_mem, member)) {
 			if (groups++)
@@ -74,6 +73,7 @@ static void print_groups (const char *member)
 				flag = 1;
 		}
 	}
+	endgrent ();
 	/* local, no need for xgetgrgid */
 	if (!flag && (grp = getgrgid (pwd->pw_gid))) {
 		if (groups++)

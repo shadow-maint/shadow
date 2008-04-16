@@ -848,8 +848,10 @@ int main (int argc, char **argv)
 			exit (E_NOPERM);
 		}
 		setpwent ();
-		while ((pw = getpwent ()))
+		while ( (pw = getpwent ()) != NULL ) {
 			print_status (pw);
+		}
+		endpwent ();
 		exit (E_SUCCESS);
 	}
 #if 0

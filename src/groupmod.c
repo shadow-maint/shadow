@@ -547,6 +547,7 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			}
 		}
 	}
+	endpwent ();
 }
 
 /*
