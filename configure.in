@@ -221,10 +221,10 @@ AC_ARG_WITH(audit,
 	[with_audit=$withval], [with_audit=maybe])
 AC_ARG_WITH(libpam,
 	[AC_HELP_STRING([--with-libpam], [use libpam for PAM support @<:@default=yes if found@:>@])],
-	[with_libpam=$withval], [with_libpam=yes])
+	[with_libpam=$withval], [with_libpam=maybe])
 AC_ARG_WITH(selinux,
 	[AC_HELP_STRING([--with-selinux], [use SELinux support @<:@default=yes if found@:>@])],
-	[with_selinux=$withval], [with_selinux=yes])
+	[with_selinux=$withval], [with_selinux=maybe])
 AC_ARG_WITH(skey,
 	[AC_HELP_STRING([--with-skey], [use S/Key support @<:@default=no@:>@])],
 	[with_skey=$withval], [with_skey=no])
@@ -308,38 +308,61 @@ if test "$with_libcrack" = "yes"; then
 		AC_DEFINE(HAVE_LIBCRACK_PW, 1, [Defined if it includes *Pw functions.]))
 fi
 
-if test "$with_selinux" = "yes"; then
-	AC_CHECK_LIB(selinux, is_selinux_enabled,
-		[LIBSELINUX="-lselinux"
-		AC_SUBST(LIBSELINUX)
-		AC_CHECK_HEADERS(selinux/selinux.h, [],
-			[AC_MSG_ERROR([selinux/selinux.h is missing])])
-		AC_DEFINE(WITH_SELINUX, 1, [Build shadow with SELinux support])
-		],
-		[AC_MSG_ERROR([libselinux not found])])
+AC_SUBST(LIBSELINUX)
+if test "$with_selinux" != "no"; then
+	AC_CHECK_HEADERS(selinux/selinux.h, [selinux_header="yes"], [selinux_header="no"])
+	if test "$selinux_header$with_selinux" = "noyes" ; then
+		AC_MSG_ERROR([selinux/selinux.h is missing])
+	elif test "$selinux_header" = "yes" ; then
+		AC_CHECK_LIB(selinux, is_selinux_enabled,
+		             [selinux_lib="yes"], [selinux_lib="no"])
+		if test "$selinux_lib$with_selinux" = "noyes" ; then
+			AC_MSG_ERROR([libselinux not found])
+		elif test "$selinux_lib" = "no" ; then
+			with_selinux="no"
+		else
+			AC_DEFINE(WITH_SELINUX, 1,
+			          [Build shadow with SELinux support])
+			LIBSELINUX="-lselinux"
+			with_selinux = "yes"
+		fi
+	else
+		with_selinux="no"
+	fi
 fi
 
 AC_SUBST(LIBPAM)
-if test "$with_libpam" = "yes"; then
+if test "$with_libpam" != "no"; then
 	AC_CHECK_LIB(pam, pam_start,
-		[AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
-		AM_CONDITIONAL(USE_PAM, [true])
-		LIBPAM="-lpam"
-		AC_CHECK_LIB(pam_misc, main,
-			[LIBPAM="$LIBPAM -lpam_misc"],
-			AC_MSG_ERROR(libpam_misc is missing for enable PAM support)
-		)],
-		[AC_MSG_CHECKING(use login access checking if PAM not used)
-		AM_CONDITIONAL(USE_PAM, [false])
-		AC_MSG_RESULT(yes)]
-	)
+	             [pam_lib="yes"], [pam_lib="no"])
+	if test "$pam_lib$with_libpam" = "noyes" ; then
+		AC_MSG_ERROR(libpam not found)
+	fi
+
+	AC_CHECK_LIB(pam_misc, main,
+	             [pam_misc_lib="yes"], [pam_misc_lib="no"])
+	if test "$pam_misc_lib$with_libpam" = "noyes" ; then
+		AC_MSG_ERROR(libpam_misc not found)
+	fi
+
+	if test "$pam_lib$pam_misc_lib" = "yesyes" ; then
+		with_libpam="yes"
+	else
+		with_libpam="no"
+	fi
+fi
+dnl Now with_libpam is either yes or no
+if test "$with_libpam" = "yes"; then
+	AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
+	AM_CONDITIONAL(USE_PAM, [true])
+	LIBPAM="-lpam -lpam_misc"
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_MSG_RESULT(no)
 else
-	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_DEFINE(SU_ACCESS, 1, [Define to support /etc/suauth su access control.])
-	AC_MSG_RESULT(yes)
 	AM_CONDITIONAL(USE_PAM, [false])
+	AC_MSG_CHECKING(use login and su access checking if PAM not used)
+	AC_MSG_RESULT(yes)
 fi
 
 AC_SUBST(LIBSKEY)
