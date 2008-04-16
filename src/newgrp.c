@@ -53,6 +53,10 @@ static GETGROUPS_T *grouplist;
 static char *Prog;
 static int is_newgrp;
 
+#ifdef WITH_AUDIT
+char audit_buf[80];
+#endif
+
 /* local function prototypes */
 static void usage (void);
 static void check_perms (const struct group *grp,
@@ -349,8 +353,6 @@ int main (int argc, char **argv)
 #endif
 
 #ifdef WITH_AUDIT
-	char audit_buf[80];
-
 	audit_help_open ();
 #endif
 	setlocale (LC_ALL, "");

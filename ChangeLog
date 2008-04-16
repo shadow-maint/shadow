@@ -1,3 +1,8 @@
+2008-04-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/newgrp.c: Fix compilation failure when compiled with
+	audit support. Thanks to Mike Frysinger for reporting it.
+
 2008-04-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Ensure that getpwent() is used in setpwent(), getpwent(),
