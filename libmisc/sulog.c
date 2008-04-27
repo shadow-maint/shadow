@@ -48,6 +48,7 @@ void sulog (const char *tty, int success, const char *oldname, const char *name)
 	struct tm *tm;
 	FILE *fp;
 	mode_t oldmask;
+	gid_t oldgid = 0;
 
 	if (success) {
 		SYSLOG ((LOG_INFO,
@@ -60,9 +61,26 @@ void sulog (const char *tty, int success, const char *oldname, const char *name)
 	if ((sulog_file = getdef_str ("SULOG_FILE")) == (char *) 0)
 		return;
 
+	oldgid = getgid ();
 	oldmask = umask (077);
+	/* Switch to group root to avoid creating the sulog file with
+	 * the wrong group ownership. */
+	if ((oldgid != 0) && (setgid (0) != 0)) {
+		SYSLOG ((LOG_INFO,
+		         "su session not logged to %s", sulog_file));
+		/* Continue, but do not switch back to oldgid later */
+		oldgid = 0;
+	}
 	fp = fopen (sulog_file, "a+");
 	umask (oldmask);
+	if ((oldgid != 0) && (setgid (oldgid) != 0)) {
+		perror ("setgid");
+		SYSLOG ((LOG_ERR,
+		         "can't switch back to group `%d' in sulog",
+		         oldgid));
+		/* Do not return if the group permission were raised. */
+		exit (1);
+	}
 	if (fp == (FILE *) 0)
 		return;		/* can't open or create logfile */
 

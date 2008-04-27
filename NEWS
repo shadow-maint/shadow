@@ -12,6 +12,10 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
 - chfn
   * Allow non-US-ASCII characters in the GECOS fields ("name", "room
     number", and "other info" fields).
+- su
+  * If the SULOG_FILE does not exist when an su session is logged, make
+    sure the file is created with group root, instead of using the group
+    of the caller.
 
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 

@@ -1,5 +1,11 @@
 2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, libmisc/sulog.c: If the SULOG_FILE does not exist when an
+	su session is logged, make sure the file is created with group
+	root, instead of using the group of the caller.
+
+2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, libmisc/fields.c, src/chfn.c, man/chfn.1.xml: Allow
 	non-US-ASCII characters in the GECOS fields ("name", "room
 	number", and "other info" fields).
