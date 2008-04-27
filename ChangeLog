@@ -1,5 +1,47 @@
 2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.c, lib/lockpw.c, lib/utent.c, lib/sgetgrent.c,
+	lib/getdef.h, lib/pwauth.c, lib/sgetspent.c, lib/pwauth.h,
+	lib/port.c, lib/encrypt.c, lib/groupio.c, lib/shadowmem.c,
+	lib/port.h, lib/groupio.h, lib/groupmem.c, lib/exitcodes.h,
+	lib/gshadow.c, lib/gshadow_.h, lib/sgroupio.c, lib/sgroupio.h,
+	lib/shadowio.c, lib/pwio.c, lib/sgetpwent.c, lib/commonio.c,
+	lib/faillog.h, lib/shadowio.h, lib/pwio.h, lib/pam_defs.h,
+	lib/pwmem.c, lib/commonio.h, lib/shadow.c, lib/fputsx.c,
+	lib/prototypes.h, libmisc/xmalloc.c, libmisc/limits.c,
+	libmisc/entry.c, libmisc/console.c, libmisc/ulimit.c,
+	libmisc/xgetXXbyYY.c, libmisc/chkname.c, libmisc/pwd2spwd.c,
+	libmisc/xgetpwnam.c, libmisc/basename.c, libmisc/chkname.h,
+	libmisc/chowndir.c, libmisc/audit_help.c, libmisc/chowntty.c,
+	libmisc/hushed.c, libmisc/xgetpwuid.c, libmisc/getdate.h,
+	libmisc/addgrps.c, libmisc/xgetgrgid.c, libmisc/utmp.c,
+	libmisc/myname.c, libmisc/failure.c, libmisc/find_new_ids.c,
+	libmisc/env.c, libmisc/rlogin.c, libmisc/age.c, libmisc/failure.h,
+	libmisc/xgetgrnam.c, libmisc/yesno.c, libmisc/valid.c,
+	libmisc/getlong.c, libmisc/obscure.c, libmisc/pam_pass.c,
+	libmisc/motd.c, libmisc/salt.c, libmisc/setugid.c,
+	libmisc/fields.c, libmisc/xgetspnam.c, libmisc/shell.c,
+	libmisc/copydir.c, libmisc/setupenv.c, libmisc/strtoday.c,
+	libmisc/loginprompt.c, libmisc/list.c, libmisc/pwd_init.c,
+	libmisc/log.c, libmisc/mail.c, libmisc/ttytype.c,
+	libmisc/pwdcheck.c, libmisc/sub.c, libmisc/sulog.c,
+	libmisc/isexpired.c, libmisc/tz.c, src/newgrp.c, src/userdel.c,
+	src/lastlog.c, src/grpck.c, src/gpasswd.c, src/newusers.c,
+	src/pwconv.c, src/chpasswd.c, src/logoutd.c, src/chfn.c,
+	src/groupmems.c, src/usermod.c, src/pwunconv.c, src/expiry.c,
+	src/groupdel.c, src/chgpasswd.c, src/vipw.c, src/useradd.c,
+	src/su.c, src/groupmod.c, src/passwd.c, src/pwck.c,
+	src/groupadd.c, src/nologin.c, src/chage.c, src/login.c,
+	src/suauth.c, src/faillog.c, src/grpconv.c, src/groups.c,
+	src/sulogin.c, src/grpunconv.c, src/chsh.c, src/id.c: Make sure
+	every source files are distributed with a copyright and license.
+	Files with no license use the default 3-clauses BSD license. The
+	copyright were mostly not recorded; they were updated according to
+	the Changelog. "Julianne Frances Haugh and contributors" changed
+	to "copyright holders and contributors".
+
+2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, libmisc/sulog.c: If the SULOG_FILE does not exist when an
 	su session is logged, make sure the file is created with group
 	root, instead of using the group of the caller.

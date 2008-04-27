@@ -2,7 +2,7 @@
  * salt.c - generate a random salt string for crypt()
  *
  * Written by Marek Michalkiewicz <marekm@i17linuxb.ists.pwr.wroc.pl>,
- * public domain.
+ * it is in the public domain.
  *
  * l64a was Written by J.T. Conklin <jtc@netbsd.org>. Public domain.
  */
