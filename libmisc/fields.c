@@ -38,21 +38,31 @@
 /*
  * valid_field - insure that a field contains all legal characters
  *
- * The supplied field is scanned for non-printing and other illegal
- * characters.  If any illegal characters are found, valid_field
- * returns -1.  Zero is returned for success.
+ * The supplied field is scanned for non-printable and other illegal
+ * characters.
+ *  + -1 is returned if an illegal character is present.
+ *  +  1 is returned if no illegal characters are present, but the field
+ *       contains a non-printable character.
+ *  +  0 is returned otherwise.
  */
 int valid_field (const char *field, const char *illegal)
 {
 	const char *cp;
+	int err = 0;
 
-	for (cp = field;
-	     *cp && isprint (*cp & 0x7F) && !strchr (illegal, *cp); cp++);
+	for (cp = field; *cp && !strchr (illegal, *cp); cp++);
 
-	if (*cp)
-		return -1;
-	else
-		return 0;
+	if (*cp) {
+		err = -1;
+	} else {
+		for (cp = field; *cp && isprint (*cp); cp++);
+
+		if (*cp) {
+			err = 1;
+		}
+	}
+
+	return err;
 }
 
 /*

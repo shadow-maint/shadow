@@ -536,12 +536,19 @@ static void get_old_fields (const char *gecos)
  */
 static void check_fields (void)
 {
-	if (valid_field (fullnm, ":,=")) {
+	int err;
+	err = valid_field (fullnm, ":,=");
+	if (err > 0) {
+		fprintf (stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
+	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (valid_field (roomno, ":,=")) {
+	err = valid_field (roomno, ":,=");
+	if (err > 0) {
+		fprintf (stderr, _("%s: room number with non-ASCII characters: '%s'\n"), Prog, roomno);
+	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
 		         Prog, roomno);
 		closelog ();
@@ -559,7 +566,10 @@ static void check_fields (void)
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (valid_field (slop, ":")) {
+	err = valid_field (slop, ":");
+	if (err > 0) {
+		fprintf (stderr, _("%s: '%s' contains non-ASCII characters\n"), Prog, slop);
+	} else if (err < 0) {
 		fprintf (stderr,
 		         _("%s: '%s' contains illegal characters\n"),
 		         Prog, slop);

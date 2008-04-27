@@ -9,6 +9,9 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
     file; and fail if the feature is requested but not present on the
     system.
   * Fix build failure when configured with audit support.
+- chfn
+  * Allow non-US-ASCII characters in the GECOS fields ("name", "room
+    number", and "other info" fields).
 
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 

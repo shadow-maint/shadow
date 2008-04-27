@@ -1,3 +1,9 @@
+2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, libmisc/fields.c, src/chfn.c, man/chfn.1.xml: Allow
+	non-US-ASCII characters in the GECOS fields ("name", "room
+	number", and "other info" fields).
+
 2008-04-17  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/newgrp.c: Fix compilation failure when compiled with
