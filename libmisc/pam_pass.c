@@ -70,6 +70,7 @@ void do_pam_passwd (const char *user, int silent, int change_expired)
 	ret = pam_chauthtok (pamh, flags);
 	if (ret != PAM_SUCCESS) {
 		fprintf (stderr, _("passwd: %s\n"), pam_strerror (pamh, ret));
+		fprintf (stderr, _("passwd: password unchanged\n"));
 		pam_end (pamh, ret);
 		exit (10);	/* XXX */
 	}
