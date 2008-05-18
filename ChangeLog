@@ -1,3 +1,15 @@
+2008-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/vipw.c, src/su.c, src/newgrp.c: Harmonize the children's
+	SIGSTOP handling. Raise the signal which stopped the child instead
+	of always SIGSTOP.
+
+2008-05-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Import Debian patch 406_vipw_resume_properly.
+	Thanks to Dean Gaudet.
+	* NEWS, src/vipw.c: Resume properly after ^Z.
+
 2008-04-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/getdef.c, lib/lockpw.c, lib/utent.c, lib/sgetgrent.c,

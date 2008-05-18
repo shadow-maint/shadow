@@ -238,9 +238,11 @@ static void run_shell (const char *shellstr, char *args[], int doshell,
 
 			pid = waitpid (-1, &status, WUNTRACED);
 
-			if (WIFSTOPPED (status)) {
-				kill (getpid (), SIGSTOP);
-				/* once we get here, we must have resumed */
+			if ((pid != -1) && WIFSTOPPED (status)) {
+				/* The child (shell) was suspended.
+				 * Suspend su. */
+				kill (getpid (), WSTOPSIG(status));
+				/* wake child when resumed */
 				kill (pid, SIGCONT);
 			}
 		} while (WIFSTOPPED (status));

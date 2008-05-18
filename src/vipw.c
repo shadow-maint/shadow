@@ -209,9 +209,12 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 	for (;;) {
 		pid = waitpid (pid, &status, WUNTRACED);
-		if (WIFSTOPPED (status)) {
-			kill (getpid (), SIGSTOP);
-			kill (getpid (), SIGCONT);
+		if ((pid != -1) && WIFSTOPPED (status)) {
+			/* The child (editor) was suspended.
+			 * Suspend vipw. */
+			kill (getpid (), WSTOPSIG(status));
+			/* wake child when resumed */
+			kill (pid, SIGCONT);
 		} else
 			break;
 	}
