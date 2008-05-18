@@ -251,6 +251,9 @@ static void check_flags (int argc, char *const *argv)
 	for (arg = 1; arg < argc; arg++) {
 		if (argv[arg][0] == '-' && strlen (argv[arg]) > 2)
 			usage ();
+		if (strcmp(argv[arg], "--") == 0) {
+			break; /* stop checking on a "--" */
+		}
 	}
 }
 
