@@ -294,7 +294,7 @@ static void syslog_sg (const char *name, const char *group)
 				pid = waitpid (child, &cst, WUNTRACED);
 				if (pid == child && WIFSTOPPED (cst)) {
 					/* stop when child stops */
-					kill (getpid (), WSTOPSIG(status));
+					kill (getpid (), WSTOPSIG(cst));
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
