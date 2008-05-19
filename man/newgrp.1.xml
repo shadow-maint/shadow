@@ -46,7 +46,7 @@
       is not listed as a member.
     </para>
 
-    <para>
+    <para condition="gshadow">
       If there is an entry for this group in
       <filename>/etc/gshadow</filename>, then the list of members and the
       password of this group will be taken from this file, otherwise, the
@@ -87,7 +87,7 @@
 	  <para>Group account information.</para>
 	 </listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
 	  <para>Secure group account information.</para>
@@ -117,7 +117,7 @@
       <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
-      <citerefentry>
+      <citerefentry condition="gshadow">
 	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>.
     </para>

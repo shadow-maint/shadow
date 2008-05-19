@@ -28,6 +28,8 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
 - Document the -c, --crypt-method and -s, --sha-rounds options in the
   newusers manpage.
 - Document the -k, --skel option in the useradd manpage.
+- Tag the section which require --enable-shadowgrp or --with-sha-crypt
+  accordingly.
 
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 

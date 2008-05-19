@@ -76,7 +76,7 @@
 	  <para>Group account information.</para>
 	 </listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="gshadow">
 	<term><filename>/etc/gshadow</filename></term>
 	<listitem>
 	  <para>Secure group account information.</para>
@@ -106,7 +106,7 @@
       <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
-      <citerefentry>
+      <citerefentry condition="gshadow">
 	<refentrytitle>gshadow</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>
     </para>

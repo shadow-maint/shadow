@@ -1,3 +1,10 @@
+2008-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml man/groupmems.8.xml man/groupdel.8.xml
+	man/useradd.8.xml man/groupadd.8.xml man/newgrp.1.xml man/sg.1.xml
+	man/chgpasswd.8.xml man/groupmod.8.xml: Tag the section which
+	require --enable-shadowgrp accordingly.
+
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.5.xml: SHA_CRYPT_MAX_ROUNDS and

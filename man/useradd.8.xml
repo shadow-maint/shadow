@@ -510,6 +510,12 @@
 	  <para>Group account information.</para>
 	</listitem>
       </varlistentry>
+      <varlistentry condition="gshadow">
+	<term><filename>/etc/gshadow</filename></term>
+	<listitem>
+	  <para>Secure group account information.</para>
+	</listitem>
+      </varlistentry>
       <varlistentry>
 	<term><filename>/etc/default/useradd</filename></term>
 	<listitem>
