@@ -65,19 +65,6 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-c</option>, <option>--comment</option>
-	  <replaceable>COMMENT</replaceable>
-	</term>
-	<listitem>
-	  <para>
-	    Any text string. It is generally a short description of the
-	    login, and is currently used as the field for the user's full
-	    name.
-	  </para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>
 	  <option>-b</option>, <option>--base-dir</option>
 	  <replaceable>BASE_DIR</replaceable>
 	</term>
@@ -94,11 +81,14 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-D</option>, <option>--defaults</option>
+	  <option>-c</option>, <option>--comment</option>
+	  <replaceable>COMMENT</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    See below, the subsection "Changing the default values".
+	    Any text string. It is generally a short description of the
+	    login, and is currently used as the field for the user's full
+	    name.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -116,6 +106,16 @@
 	    <replaceable>BASE_DIR</replaceable> and use that as the login
 	    directory name. The directory <replaceable>HOME_DIR</replaceable>
 	    does not have to exist but will not be created if it is missing.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-D</option>, <option>--defaults</option>
+	</term>
+	<listitem>
+	  <para>
+	    See below, the subsection "Changing the default values".
 	  </para>
 	</listitem>
       </varlistentry>

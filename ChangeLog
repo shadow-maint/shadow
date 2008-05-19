@@ -1,5 +1,9 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/useradd.8.xml: Sort options.
+
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/getdef.c: SHA_CRYPT_MAX_ROUNDS and SHA_CRYPT_MIN_ROUNDS can
 	only exist if configured with --with-sha-crypt.
 	* man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml: Likewise.
