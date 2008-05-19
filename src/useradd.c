@@ -713,11 +713,11 @@ static void new_spent (struct spwd *spent)
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = time ((time_t *) 0) / SCALE;
 	if (!rflg) {
-	spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
-	spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));
-	spent->sp_warn = scale_age (getdef_num ("PASS_WARN_AGE", -1));
-	spent->sp_inact = scale_age (def_inactive);
-	spent->sp_expire = scale_age (user_expire);
+		spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
+		spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));
+		spent->sp_warn = scale_age (getdef_num ("PASS_WARN_AGE", -1));
+		spent->sp_inact = scale_age (def_inactive);
+		spent->sp_expire = scale_age (user_expire);
 	} else {
 		spent->sp_min = scale_age (-1);
 		spent->sp_max = scale_age (-1);
@@ -1074,7 +1074,7 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if (!gflg && !Nflg && ! Uflg) {
+	if (!gflg && !Nflg && !Uflg) {
 		/* Get the settings from login.defs */
 		Uflg = getdef_bool ("USERGROUPS_ENAB");
 	}

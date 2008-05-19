@@ -1,5 +1,9 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Fix formatting.
+
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, man/useradd.8.xml: Document the -r, --system option.
 
 2008-05-18  Nicolas François  <nicolas.francois@centraliens.net>
