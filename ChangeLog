@@ -1,5 +1,10 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.c: SHA_CRYPT_MAX_ROUNDS and SHA_CRYPT_MIN_ROUNDS can
+	only exist if configured with --with-sha-crypt.
+
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: Document the section closed by #endif
 
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
