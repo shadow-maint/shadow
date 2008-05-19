@@ -183,21 +183,23 @@
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-m</option>, <option>--create-home</option>
+	  <option>-k</option>, <option>--skel</option>
+	  <replaceable>SKEL_DIR</replaceable>
 	</term>
 	<listitem>
 	  <para>
-	    The user's home directory will be created if it does not exist. 
-	    The files contained in <replaceable>SKEL_DIR</replaceable> will
-	    be copied to the home directory if the <option>-k</option>
-	    option is used, otherwise the files contained in
-	    <filename>/etc/skel</filename> will be used instead. Any
-	    directories contained in <replaceable>SKEL_DIR</replaceable> or
-	    <filename>/etc/skel</filename> will be created in the user's
-	    home directory as well. The <option>-k</option> option is only
-	    valid in conjunction with the <option>-m</option> option. The
-	    default is to not create the directory and to not copy any
-	    files.
+	    The skeleton directory, which contains files and directories
+	    to be copied in the user's home directory, when the home
+	    directory is created by <command>useradd</command>.
+	  </para>
+	  <para>
+	    This option is only valid if the <option>-m</option> (or
+	    <option>--create-home</option>) option is specified.
+	  </para>
+	  <para>
+	    If this option is not set, the skeleton directory is defined
+	    in <filename>/etc/default/useradd</filename> or, by default,
+	    <filename>/etc/skel</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -238,6 +240,22 @@
 	    By default, the user's entries in the lastlog and faillog
 	    databases are resetted to avoid reusing the entry from a previously
 	    deleted user.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-m</option>, <option>--create-home</option>
+	</term>
+	<listitem>
+	  <para>
+	    Create the user's home directory if it does not exist. 
+	    The files and directories contained in the skeleton directory
+	    (which can be defined with the <option>-k</option> option)
+	    will be copied to the home directory.
+	  </para>
+	  <para>
+	    By default, no home directories are created.
 	  </para>
 	</listitem>
       </varlistentry>

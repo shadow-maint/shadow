@@ -27,6 +27,7 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
   manpages.
 - Document the -c, --crypt-method and -s, --sha-rounds options in the
   newusers manpage.
+- Document the -k, --skel option in the useradd manpage.
 
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 

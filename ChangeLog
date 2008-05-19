@@ -1,5 +1,10 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, man/useradd.8.xml: Document the -k, --skel option, and
+	update the -m, --create-home documentation.
+
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/useradd.8.xml: Sort options.
 
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
