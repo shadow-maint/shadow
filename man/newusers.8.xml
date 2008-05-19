@@ -94,6 +94,68 @@
     </para>
   </refsect1>
 
+  <refsect1 id='options'>
+    <title>OPTIONS</title>
+    <para>The options which apply to the <command>newusers</command> command are:
+    </para>
+    <variablelist remap='IP'>
+      <varlistentry>
+	<term><option>-c</option>, <option>--crypt-method</option></term>
+	<listitem>
+	  <para>Use the specified method to encrypt the passwords.</para>
+	  <para>
+	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
+	    if your libc support these methods.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <option>-r</option>, <option>--system</option>
+	</term>
+	<listitem>
+	  <para>
+	    Create a system account.
+	  </para>
+	  <para>
+	    System users will be created with no aging information in
+	    <filename>/etc/shadow</filename>, and their numeric
+	    identifiers are choosen in the
+	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
+	    range, defined in <filename>login.defs</filename>, instead of
+	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
+	    <option>GID</option> counterparts for the creation of groups).
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry condition="sha_crypt">
+	<term><option>-s</option>, <option>--sha-rounds</option></term>
+	<listitem>
+	  <para>
+	    Use the specified number of rounds to encrypt the passwords.
+	  </para>
+	  <para>
+	    The value 0 means that the system will choose the default
+	    number of rounds for the crypt method (5000).
+	  </para>
+	  <para>
+	    A minimal value of 1000 and a maximal value of 999,999,999
+	    will be enforced.
+	  </para>
+	  <para>
+	    You can only use this option with the SHA256 or SHA512
+	    crypt method.
+	  </para>
+	  <para>
+	    By default, the number of rounds is defined by the
+	    SHA_CRYPT_MIN_ROUNDS and SHA_CRYPT_MAX_ROUNDS variables in
+	    <filename>/etc/login.defs</filename>.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>

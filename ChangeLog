@@ -5,6 +5,10 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, man/useradd.8.xml: Document the -r, --system option.
+	* NEWS, man/groupadd.8.xml: Document the -r, --system option.
+	* NEWS, man/newusers.8.xml: Document the -r, --system option.
+	* NEWS, man/newusers.8.xml: Document the -c, --crypt-method and
+	-s, --sha-rounds options.
 
 2008-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 

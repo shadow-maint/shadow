@@ -23,7 +23,10 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
   * Resume properly after ^Z.
 
 *** documentation:
-- Document the -r, --system option in the useradd manpage.
+- Document the -r, --system option in the useradd, groupadd, and newusers
+  manpages.
+- Document the -c, --crypt-method and -s, --sha-rounds options in the
+  newusers manpage.
 
 shadow-4.1.0 -> shadow-4.1.1						02-04-2008
 
