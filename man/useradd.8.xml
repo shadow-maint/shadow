@@ -283,6 +283,24 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-r</option>, <option>--system</option>
+	</term>
+	<listitem>
+	  <para>
+	    Create a system account.
+	  </para>
+	  <para>
+	    System users will be created with no aging information in
+	    <filename>/etc/shadow</filename>, and will use the
+	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
+	    range for their user's ID instead of
+	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
+	    <option>GID</option> counterparts for the creation of groups).
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-s</option>, <option>--shell</option>
 	  <replaceable>SHELL</replaceable>
 	</term>

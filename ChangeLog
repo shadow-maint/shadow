@@ -1,3 +1,7 @@
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, man/useradd.8.xml: Document the -r, --system option.
+
 2008-05-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Import Debian patch 487_passwd_chauthtok_failed_message
