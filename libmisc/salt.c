@@ -22,13 +22,13 @@
 /* local function prototypes */
 #ifndef HAVE_L64A
 char *l64a(long value);
-#endif
+#endif /* !HAVE_L64A */
 static void seedRNG (void);
 static char *gensalt (unsigned int salt_size);
 #ifdef USE_SHA_CRYPT
 static unsigned int SHA_salt_size (void);
 static const char *SHA_salt_rounds (int *prefered_rounds);
-#endif
+#endif /* USE_SHA_CRYPT */
 
 #ifndef HAVE_L64A
 static char *l64a(long value)
@@ -157,7 +157,7 @@ static const char *SHA_salt_rounds (int *prefered_rounds)
 
 	return rounds_prefix;
 }
-#endif
+#endif /* USE_SHA_CRYPT */
 
 /*
  *  Generate salt of size salt_size.
@@ -230,7 +230,7 @@ char *crypt_make_salt (const char *meth, void *arg)
 		MAGNUM(result, '6');
 		strcat(result, SHA_salt_rounds((int *)arg));
 		salt_len = SHA_salt_size();
-#endif
+#endif /* USE_SHA_CRYPT */
 	} else if (0 != strcmp (method, "DES")) {
 		fprintf (stderr,
 			 _("Invalid ENCRYPT_METHOD value: '%s'.\n"

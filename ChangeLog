@@ -1,5 +1,9 @@
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c: Document the section closed by #endif
+
+2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Fix formatting.
 
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
