@@ -1,4 +1,4 @@
-<varlistentry>
+<varlistentry condition="sha_crypt">
   <term><option>SHA_CRYPT_MIN_ROUNDS</option> (number)</term>
   <term><option>SHA_CRYPT_MAX_ROUNDS</option> (number)</term>
   <listitem>

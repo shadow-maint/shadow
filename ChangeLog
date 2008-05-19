@@ -2,6 +2,7 @@
 
 	* lib/getdef.c: SHA_CRYPT_MAX_ROUNDS and SHA_CRYPT_MIN_ROUNDS can
 	only exist if configured with --with-sha-crypt.
+	* man/login.defs.d/SHA_CRYPT_MIN_ROUNDS.xml: Likewise.
 
 2008-05-19  Nicolas François  <nicolas.francois@centraliens.net>
 
