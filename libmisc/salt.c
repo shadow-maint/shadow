@@ -90,9 +90,10 @@ static void seedRNG (void)
  */
 static unsigned int SHA_salt_size (void)
 {
-	double rand_rounds = 9 * random ();
-	rand_rounds /= RAND_MAX;
-	return 8 + rand_rounds;
+	double rand_size;
+	seedRNG ();
+	rand_size = (double) 9.0 * random () / RAND_MAX;
+	return 8 + rand_size;
 }
 
 /* ! Arguments evaluated twice ! */
@@ -131,8 +132,8 @@ static const char *SHA_salt_rounds (int *prefered_rounds)
 		if (min_rounds > max_rounds)
 			max_rounds = min_rounds;
 
-		srand (time (NULL));
-		rand_rounds = (max_rounds-min_rounds+1) * random ();
+		seedRNG ();
+		rand_rounds = (double) (max_rounds-min_rounds+1.0) * random ();
 		rand_rounds /= RAND_MAX;
 		rounds = min_rounds + rand_rounds;
 	} else if (0 == *prefered_rounds)

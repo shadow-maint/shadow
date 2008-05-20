@@ -1,5 +1,15 @@
 2008-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, libmisc/salt.c (SHA_salt_size): Seed the RNG, and fix a
+	overflow. These caused the SHA salt size to always be 8 bytes,
+	instead of being in the 8-16 range. Thanks to Peter Vrabec
+	pvrabec@redhat.com for noticing.
+	* NEWS, libmisc/salt.c (SHA_salt_rounds): Seed the RNG with
+	seedRNG instead of srand, and fix the same overflow. This caused
+	the number of rounds to always be the smallest one.
+
+2008-05-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newusers.8.xml man/groupmems.8.xml man/groupdel.8.xml
 	man/useradd.8.xml man/groupadd.8.xml man/newgrp.1.xml man/sg.1.xml
 	man/chgpasswd.8.xml man/groupmod.8.xml: Tag the section which

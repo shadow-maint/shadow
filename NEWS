@@ -2,6 +2,15 @@ $Id$
 
 shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
 
+*** security:
+- generation of SHA encrypted passwords (chpasswd, gpasswd, newusers,
+  chgpasswd; and also passwd if configured without PAM support).
+  The number of rounds and number of salt bytes was fixed to their lower
+  allowed values (resp. configurable and 8), hence voiding some of the
+  advantages of this encryption method. Dictionary attacks with
+  precomputed tables were easier than expected, but still harder than with
+  the MD5 (or DES) methods.
+
 *** general:
 - packaging
   * Distribute the chfn, chsh, and userdel PAM configuration file.
