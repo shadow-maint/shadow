@@ -75,9 +75,11 @@
       with the system. It is normally invoked automatically by responding to
       the <emphasis remap='I'>login:</emphasis> prompt on the user's
       terminal. <command>login</command> may be special to the shell and may
-      not be invoked as a sub-process. Typically, <command>login</command>
-      is treated by the shell as <emphasis remap='B'>exec login</emphasis>
-      which causes the user to exit from the current shell. Attempting to
+      not be invoked as a sub-process. When called from a shell,
+      <command>login</command> should be executed as
+      <emphasis remap='B'>exec login</emphasis> which will cause the user
+      to exit from the current shell (and thus will prevent the new logged
+      in user to return to the session of the caller). Attempting to
       execute <command>login</command> from any shell but the login shell
       will produce an error message.
     </para>

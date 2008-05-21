@@ -1,5 +1,10 @@
 2008-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.1.xml: Indicate that login should be executed with
+	"exec login" if called from a shell.
+
+2008-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/passwd.1.xml: Remove the advices for the choice of a good
 	password (they are debatable). Point to
 	http://en.wikipedia.org/wiki/Password_strength instead.
