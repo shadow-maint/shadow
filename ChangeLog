@@ -1,3 +1,9 @@
+2008-05-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/passwd.1.xml: Remove the advices for the choice of a good
+	password (they are debatable). Point to
+	http://en.wikipedia.org/wiki/Password_strength instead.
+
 2008-05-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, libmisc/salt.c (SHA_salt_size): Seed the RNG, and fix a

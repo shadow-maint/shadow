@@ -113,35 +113,8 @@
       </para>
 
       <para>
-	Your password must be easily remembered so that you will not be forced
-	to write it on a piece of paper. This can be accomplished by
-	appending two small words together and separating each with a
-	special character or digit. For example, Pass%word.
-      </para>
-
-      <para>
-	Other methods of construction involve selecting an easily remembered
-	phrase from literature and selecting the first or last letter from
-	each word. An example of this is:
-      </para>
-
-      <itemizedlist mark='bullet'>
-	<listitem>
-	  <para>Ask not for whom the bell tolls</para>
-	</listitem>
-	<listitem>
-	  <para>which produces</para>
-	</listitem>
-	<listitem>
-	  <para>An4wtbt</para>
-	</listitem>
-      </itemizedlist>
-
-      <para>
-	You may be reasonably sure few crackers will have included this in
-	their dictionaries. You should, however, select your own methods for
-	constructing passwords and not rely exclusively on the methods given
-	here.
+	You can find advices on how to choose a strong password on
+	http://en.wikipedia.org/wiki/Password_strength
       </para>
     </refsect2>
   </refsect1>
