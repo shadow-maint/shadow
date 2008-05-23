@@ -1,3 +1,12 @@
+passwd -l should lock the password, not the account.
+
+vipw: Test SHADOWGRP support before using gshadow features.
+
+PAM: add support for customization of the PAM support (i.e. support the
+Debian PAM configuration)
+
+PAM: check if a non-interactive conversation function could be used to 
+
 WITH_SELINUX
   - review all tools to check that the strategies are consistent
 
