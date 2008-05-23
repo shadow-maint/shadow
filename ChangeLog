@@ -1,3 +1,8 @@
+2008-05-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/pam_pass.c: Use fputs rather than fprintf for constant
+	strings.
+
 2008-05-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.1.xml: Indicate that login should be executed with
