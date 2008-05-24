@@ -25,3 +25,7 @@ COPYRIGHT_HOLDER = Free Software Foundation, Inc.
 EXTRA_LOCALE_CATEGORIES =
 
 MSGID_BUGS_ADDRESS = pkg-shadow-devel@lists.alioth.debian.org
+
+MSGMERGE += --previous
+MSGMERGE_UPDATE += --previous
+

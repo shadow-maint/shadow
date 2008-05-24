@@ -1,3 +1,8 @@
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* po/Makevars, man/po/Makefile.in.in: Run msgmerge with
+	--previous. (This requires gettext >= 0.16)
+
 2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/copydir.c (remove_tree): As we always use remove_tree
