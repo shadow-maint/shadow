@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -135,6 +135,10 @@ msgstr ""
 #, c-format
 msgid "passwd: %s\n"
 msgstr ""
+
+#, fuzzy
+msgid "passwd: password unchanged\n"
+msgstr "Šifra:"
 
 msgid "passwd: password updated successfully\n"
 msgstr ""
@@ -385,7 +389,15 @@ msgid "Cannot unlock the password file.\n"
 msgstr ""
 
 #, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid name: '%s'\n"
+msgstr ""
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
 msgstr ""
 
 #, c-format
@@ -398,6 +410,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
+msgstr ""
+
+#, c-format
+msgid "%s: '%s' contains non-ASCII characters\n"
 msgstr ""
 
 #, c-format

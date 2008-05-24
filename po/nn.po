@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2004-06-03 21:41+0200\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@skulelinux.no>\n"
 "Language-Team: Norwegian (Nynorsk) <i18n-nn@lister.ping.uio.no>\n"
@@ -138,6 +138,11 @@ msgstr "passwd: pam_start() feila, feil %d\n"
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
+
+#, fuzzy
+#| msgid "Password changed."
+msgid "passwd: password unchanged\n"
+msgstr "Passord er endra."
 
 msgid "passwd: password updated successfully\n"
 msgstr ""
@@ -392,9 +397,17 @@ msgstr "Klarer ikkje utføra endringar i passordfila.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "Klarer ikkje låsa opp passordfila.\n"
 
+#, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: ugyldig namn: «%s»\n"
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -407,6 +420,10 @@ msgstr "%s: ugyldig telefonnummer, arbeid: «%s»\n"
 #, fuzzy, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: ugyldig telefonnummer, heime: «%s»\n"
+
+#, fuzzy, c-format
+msgid "%s: '%s' contains non-ASCII characters\n"
+msgstr "%s: «%s» inneheld ulovlege teikn\n"
 
 #, fuzzy, c-format
 msgid "%s: '%s' contains illegal characters\n"

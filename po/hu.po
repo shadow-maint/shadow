@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2007-11-25 20:56+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <gnome@gnome.hu>\n"
@@ -137,6 +137,11 @@ msgstr "passwd: pam_start() sikertelen, hibakód: %d\n"
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
+
+#, fuzzy
+#| msgid "Password changed."
+msgid "passwd: password unchanged\n"
+msgstr "Jelszó módosítva."
 
 msgid "passwd: password updated successfully\n"
 msgstr "passwd: a jelszó sikeresen frissült\n"
@@ -410,8 +415,16 @@ msgid "Cannot unlock the password file.\n"
 msgstr "Nem tudom feloldani a jelszófájl zárolását.\n"
 
 #, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: érvénytelen név: \"%s\"\n"
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
+msgstr ""
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -424,6 +437,11 @@ msgstr "%s: érvénytelen munkahelyi telefonszám: \"%s\"\n"
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: érvénytelen otthoni telefonszám: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: '%s' contains illegal characters\n"
+msgid "%s: '%s' contains non-ASCII characters\n"
+msgstr "%s: \"%s\" illegális karaktereket tartalmaz\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -138,6 +138,10 @@ msgstr ""
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
+
+#, fuzzy
+msgid "passwd: password unchanged\n"
+msgstr "סיסמה: "
 
 msgid "passwd: password updated successfully\n"
 msgstr ""
@@ -390,9 +394,17 @@ msgstr "לא יכול לבצע שינויים בקובץ הסיסמאות.\n"
 msgid "Cannot unlock the password file.\n"
 msgstr "לא יכול לשחרר נעילה של קובץ הסיסמאות.\n"
 
+#, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -405,6 +417,10 @@ msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
 #, fuzzy, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: מספר טלפון בבית לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: '%s' contains non-ASCII characters\n"
+msgstr "%s: \"%s\" מכיל תווים לא חוקיים\n"
 
 #, fuzzy, c-format
 msgid "%s: '%s' contains illegal characters\n"

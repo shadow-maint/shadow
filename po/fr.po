@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2008-04-02 23:51+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -151,6 +151,11 @@ msgstr "passwd : échec de pam_start(), erreur %d\n"
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd : %s\n"
+
+#, fuzzy
+#| msgid "Password changed."
+msgid "passwd: password unchanged\n"
+msgstr "Mot de passe changé."
 
 msgid "passwd: password updated successfully\n"
 msgstr "passwd : le mot de passe a été mis à jour avec succès\n"
@@ -442,8 +447,16 @@ msgstr ""
 "Impossible de déverrouiller le fichier des mots de passe /etc/passwd.\n"
 
 #, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s : nom incorrect : « %s »\n"
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
+msgstr ""
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -456,6 +469,11 @@ msgstr "%s : téléphone professionnel non valable : « %s »\n"
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s : téléphone personnel non valable : « %s »\n"
+
+#, fuzzy, c-format
+#| msgid "%s: '%s' contains illegal characters\n"
+msgid "%s: '%s' contains non-ASCII characters\n"
+msgstr "%s : « %s » contient des caractères incorrects\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"

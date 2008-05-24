@@ -1,5 +1,11 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	Prepare the 4.1.2 release
+	* NEWS: set the release date.
+	* man/po/*.po, po/*.po: Updated PO files.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* po/Makevars, man/po/Makefile.in.in: Run msgmerge with
 	--previous. (This requires gettext >= 0.16)
 

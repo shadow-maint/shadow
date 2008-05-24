@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-04-03 00:42+0200\n"
+"POT-Creation-Date: 2008-05-24 21:01+0200\n"
 "PO-Revision-Date: 2006-07-18 23:27+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
@@ -142,6 +142,11 @@ msgstr "passwd: a chamada a pam_start() fallou, erro %d\n"
 #, c-format
 msgid "passwd: %s\n"
 msgstr "passwd: %s\n"
+
+#, fuzzy
+#| msgid "Password changed."
+msgid "passwd: password unchanged\n"
+msgstr "Cambiouse o contrasinal."
 
 msgid "passwd: password updated successfully\n"
 msgstr "passwd: o contrasinal actualizouse con éxito\n"
@@ -413,8 +418,16 @@ msgid "Cannot unlock the password file.\n"
 msgstr "Non se pode desbloquear o ficheiro de contrasinais.\n"
 
 #, c-format
+msgid "%s: name with non-ASCII characters: '%s'\n"
+msgstr ""
+
+#, c-format
 msgid "%s: invalid name: '%s'\n"
 msgstr "%s: nome non válido: \"%s\"\n"
+
+#, c-format
+msgid "%s: room number with non-ASCII characters: '%s'\n"
+msgstr ""
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
@@ -427,6 +440,11 @@ msgstr "%s: teléfono do traballo non válido: \"%s\"\n"
 #, c-format
 msgid "%s: invalid home phone: '%s'\n"
 msgstr "%s: teléfono da casa non válido: \"%s\"\n"
+
+#, fuzzy, c-format
+#| msgid "%s: '%s' contains illegal characters\n"
+msgid "%s: '%s' contains non-ASCII characters\n"
+msgstr "%s: \"%s\" contén caracteres non válidos\n"
 
 #, c-format
 msgid "%s: '%s' contains illegal characters\n"
