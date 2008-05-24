@@ -7,6 +7,9 @@
 	* src/passwd.c: Declare the check_selinux_access prototype and
 	avoid name clashes (change_user -> changed_user; change_uid ->
 	changed_uid; access -> requested_access)
+	* libmisc/list.c: Avoid assignments in comparisons, assignments
+	with post increments (x++), use of integers as booleans, and
+	explicitly mark blocks with brackets.
 
 2008-05-23  Nicolas François  <nicolas.francois@centraliens.net>
 

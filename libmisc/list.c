@@ -55,9 +55,11 @@ char **add_list (char **list, const char *member)
 	 * pointer if it is present.
 	 */
 
-	for (i = 0; list[i] != (char *) 0; i++)
-		if (strcmp (list[i], member) == 0)
+	for (i = 0; list[i] != (char *) 0; i++) {
+		if (strcmp (list[i], member) == 0) {
 			return list;
+		}
+	}
 
 	/*
 	 * Allocate a new list pointer large enough to hold all the
@@ -72,11 +74,12 @@ char **add_list (char **list, const char *member)
 	 * is returned to the invoker.
 	 */
 
-	for (i = 0; list[i] != (char *) 0; i++)
+	for (i = 0; list[i] != (char *) 0; i++) {
 		tmp[i] = list[i];
+	}
 
-	tmp[i++] = xstrdup (member);
-	tmp[i] = (char *) 0;
+	tmp[i] = xstrdup (member);
+	tmp[i+1] = (char *) 0;
 
 	return tmp;
 }
@@ -99,12 +102,15 @@ char **del_list (char **list, const char *member)
 	 * pointer if it is not present.
 	 */
 
-	for (i = j = 0; list[i] != (char *) 0; i++)
-		if (strcmp (list[i], member))
+	for (i = j = 0; list[i] != (char *) 0; i++) {
+		if (strcmp (list[i], member) != 0) {
 			j++;
+		}
+	}
 
-	if (j == i)
+	if (j == i) {
 		return list;
+	}
 
 	/*
 	 * Allocate a new list pointer large enough to hold all the
@@ -119,9 +125,12 @@ char **del_list (char **list, const char *member)
 	 * is returned to the invoker.
 	 */
 
-	for (i = j = 0; list[i] != (char *) 0; i++)
-		if (strcmp (list[i], member))
-			tmp[j++] = list[i];
+	for (i = j = 0; list[i] != (char *) 0; i++) {
+		if (strcmp (list[i], member) != 0) {
+			tmp[j] = list[i];
+			j++;
+		}
+	}
 
 	tmp[j] = (char *) 0;
 
@@ -138,8 +147,11 @@ char **dup_list (char *const *list)
 	tmp = (char **) xmalloc ((i + 1) * sizeof (char *));
 
 	i = 0;
-	while (*list)
-		tmp[i++] = xstrdup (*list++);
+	while (*list) {
+		tmp[i] = xstrdup (*list);
+		i++;
+		list++;
+	}
 
 	tmp[i] = (char *) 0;
 	return tmp;
@@ -148,8 +160,9 @@ char **dup_list (char *const *list)
 int is_on_list (char *const *list, const char *member)
 {
 	while (*list) {
-		if (strcmp (*list, member) == 0)
+		if (strcmp (*list, member) == 0) {
 			return 1;
+		}
 		list++;
 	}
 	return 0;
@@ -176,11 +189,14 @@ char **comma_to_list (const char *comma)
 	 * Count the number of commas in the list
 	 */
 
-	for (cp = members, i = 0;; i++)
-		if ((cp2 = strchr (cp, ',')))
+	for (cp = members, i = 0;; i++) {
+		cp2 = strchr (cp, ',');
+		if (NULL != cp2) {
 			cp = cp2 + 1;
-		else
+		} else {
 			break;
+		}
+	}
 
 	/*
 	 * Add 2 - one for the ending NULL, the other for the last item
@@ -198,7 +214,7 @@ char **comma_to_list (const char *comma)
 	 * Empty list is special - 0 members, not 1 empty member.  --marekm
 	 */
 
-	if (!*members) {
+	if ('\0' == *members) {
 		*array = (char *) 0;
 		return array;
 	}
@@ -210,8 +226,10 @@ char **comma_to_list (const char *comma)
 
 	for (cp = members, i = 0;; i++) {
 		array[i] = cp;
-		if ((cp2 = strchr (cp, ','))) {
-			*cp2++ = '\0';
+		cp2 = strchr (cp, ',');
+		if (NULL != cp2) {
+			*cp2 = '\0';
+			cp2++;
 			cp = cp2;
 		} else {
 			array[i + 1] = (char *) 0;
@@ -225,3 +243,4 @@ char **comma_to_list (const char *comma)
 
 	return array;
 }
+
