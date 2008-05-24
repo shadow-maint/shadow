@@ -142,6 +142,11 @@ static void update_noshadow (void);
 
 static void update_shadow (void);
 static long getnumber (const char *);
+#ifdef WITH_SELINUX
+static int check_selinux_access (const char *changed_user,
+                                 uid_t changed_uid,
+                                 access_vector_t requested_access);
+#endif
 
 /*
  * usage - print command usage and exit
@@ -619,8 +624,9 @@ static long getnumber (const char *numstr)
 }
 
 #ifdef WITH_SELINUX
-int
-check_selinux_access(const char *change_user, int change_uid, unsigned int access)
+static int check_selinux_access (const char *changed_user,
+                                 uid_t changed_uid,
+                                 access_vector_t requested_access)
 {
 	int status = -1;
 	security_context_t user_context;
@@ -642,15 +648,18 @@ check_selinux_access(const char *change_user, int change_uid, unsigned int acces
 
 	/* if changing a password for an account with UID==0 or for an account
 	   where the identity matches then return success */
-	if (change_uid != 0 && strcmp(change_user, user) == 0) {
+	if (changed_uid != 0 && strcmp(changed_user, user) == 0) {
 		status = 0;
 	} else {
 		struct av_decision avd;
 		int retval;
-		retval = security_compute_av(user_context, user_context,
-				SECCLASS_PASSWD, access, &avd);
+		retval = security_compute_av(user_context,
+		                             user_context,
+		                             SECCLASS_PASSWD,
+		                             requested_access,
+		                             &avd);
 		if ((retval == 0) &&
-    			((access & avd.allowed) == access)) {
+		    ((requested_access & avd.allowed) == requested_access)) {
 			status = 0;
 		}
 	}
@@ -897,23 +906,21 @@ int main (int argc, char **argv)
 	/* only do this check when getuid()==0 because it's a pre-condition for
 	   changing a password without entering the old one */
 	if ((is_selinux_enabled() > 0) && (getuid() == 0) &&
-	  (check_selinux_access(name, pw->pw_uid, PASSWD__PASSWD) != 0))
-	{
+	    (check_selinux_access (name, pw->pw_uid, PASSWD__PASSWD) != 0)) {
 		security_context_t user_context;
 		if (getprevcon(&user_context) < 0) {
 			user_context = strdup("Unknown user context");
 		}
 		syslog(LOG_ALERT,
-		"%s is not authorized to change the password of %s",
-		user_context, name);
-		fprintf(stderr, _("%s: %s is not authorized to change the "
-			"password of %s\n"),
-		Prog, user_context, name);
+		       "%s is not authorized to change the password of %s",
+		       user_context, name);
+		fprintf(stderr,
+		        _("%s: %s is not authorized to change the password of %s\n"),
+		        Prog, user_context, name);
 		freecon(user_context);
 		exit(1);
 	}
-
-#endif
+#endif /* WITH_SELINUX */
 
 	/*
 	 * If the UID of the user does not match the current real UID,

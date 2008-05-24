@@ -1,3 +1,13 @@
+2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Fix compiler warnings:
+	* libmisc/audit_help.c: Include prototypes.h to get the prototype
+	of audit_help_open.
+	* libmisc/salt.c: Use booleans instead of negating integers.
+	* src/passwd.c: Declare the check_selinux_access prototype and
+	avoid name clashes (change_user -> changed_user; change_uid ->
+	changed_uid; access -> requested_access)
+
 2008-05-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/pam_pass.c: Use fputs rather than fprintf for constant

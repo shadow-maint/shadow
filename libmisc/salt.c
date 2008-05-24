@@ -220,14 +220,14 @@ char *crypt_make_salt (const char *meth, void *arg)
 		method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
 	}
 
-	if (!strcmp (method, "MD5")) {
+	if (0 == strcmp (method, "MD5")) {
 		MAGNUM(result, '1');
 #ifdef USE_SHA_CRYPT
-	} else if (!strcmp (method, "SHA256")) {
+	} else if (0 == strcmp (method, "SHA256")) {
 		MAGNUM(result, '5');
 		strcat(result, SHA_salt_rounds((int *)arg));
 		salt_len = SHA_salt_size();
-	} else if (!strcmp (method, "SHA512")) {
+	} else if (0 == strcmp (method, "SHA512")) {
 		MAGNUM(result, '6');
 		strcat(result, SHA_salt_rounds((int *)arg));
 		salt_len = SHA_salt_size();
