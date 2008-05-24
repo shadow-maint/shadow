@@ -3,6 +3,7 @@
 	Prepare the 4.1.2 release
 	* NEWS: set the release date.
 	* man/po/*.po, po/*.po: Updated PO files.
+	* configure.in: Set the version to 4.1.2.
 
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
