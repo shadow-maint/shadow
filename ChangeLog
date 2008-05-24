@@ -1,5 +1,10 @@
 2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/pwdcheck.c: Simply passwd_check since it's never used
+	when configured with PAM support.
+
+2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Fix compiler warnings:
 	* libmisc/audit_help.c: Include prototypes.h to get the prototype
 	of audit_help_open.
