@@ -794,8 +794,7 @@ int main (int argc, char **argv)
 #endif
 
 	if (rflg) {
-		if (remove_tree (user_home)
-		    || rmdir (user_home)) {
+		if (remove_tree (user_home) != 0) {
 			fprintf (stderr,
 				 _("%s: error removing directory %s\n"),
 				 Prog, user_home);

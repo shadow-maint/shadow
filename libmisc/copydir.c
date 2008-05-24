@@ -557,10 +557,11 @@ static int copy_file (const char *src, const char *dst,
 }
 
 /*
- * remove_tree - remove files in a directory tree
+ * remove_tree - delete a directory tree
  *
  *	remove_tree() walks a directory tree and deletes all the files
  *	and directories.
+ *	At the end, it deletes the root directory itself.
  */
 
 int remove_tree (const char *root)
@@ -617,20 +618,17 @@ int remove_tree (const char *root)
 		}
 
 		if (S_ISDIR (sb.st_mode)) {
-
 			/*
 			 * Recursively delete this directory.
 			 */
-
 			if (remove_tree (new_name) != 0) {
 				err = -1;
 				break;
 			}
-			if (rmdir (new_name) != 0) {
-				err = -1;
-				break;
-			}
 		} else {
+			/*
+			 * Delete the file.
+			 */
 			if (unlink (new_name) != 0) {
 				err = -1;
 				break;
@@ -638,6 +636,12 @@ int remove_tree (const char *root)
 		}
 	}
 	(void) closedir (dir);
+
+	if (0 == err) {
+		if (rmdir (root) != 0) {
+			err = -1;
+		}
+	}
 
 	return err;
 }

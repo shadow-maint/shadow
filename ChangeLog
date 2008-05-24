@@ -1,5 +1,13 @@
 2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c (remove_tree): As we always use remove_tree
+	followed by rmdir to remove the directory itself, delete also the
+	root directory in remove_tree.
+	* src/userdel.c, src/usermod.c: Do not call rmdir after
+	remove_tree.
+
+2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c (remove_tree): Make sure unlink is successful
 	when removing files.
 

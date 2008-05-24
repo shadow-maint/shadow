@@ -1288,12 +1288,12 @@ static void move_home (void)
 				if (copy_tree (user_home, user_newhome,
 					       uflg ? (long int)user_newid : -1,
 					       gflg ? (long int)user_newgid : -1) == 0) {
-					if (remove_tree (user_home) != 0 ||
-					    rmdir (user_home) != 0)
+					if (remove_tree (user_home) != 0) {
 						fprintf (stderr,
 							 _
 							 ("%s: warning: failed to completely remove old home directory %s"),
 							 Prog, user_home);
+					}
 #ifdef WITH_AUDIT
 					audit_logger (AUDIT_USER_CHAUTHTOK,
 						      Prog,
@@ -1304,8 +1304,9 @@ static void move_home (void)
 					return;
 				}
 
+				/* TODO: do some cleanup if the copy
+				 *       was started */
 				(void) remove_tree (user_newhome);
-				(void) rmdir (user_newhome);
 			}
 			fprintf (stderr,
 				 _
