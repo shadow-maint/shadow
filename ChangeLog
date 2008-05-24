@@ -1,5 +1,10 @@
 2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c (remove_tree): Make sure unlink is successful
+	when removing files.
+
+2008-05-24  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/pwdcheck.c: Simply passwd_check since it's never used
 	when configured with PAM support.
 
@@ -15,6 +20,11 @@
 	* libmisc/list.c: Avoid assignments in comparisons, assignments
 	with post increments (x++), use of integers as booleans, and
 	explicitly mark blocks with brackets.
+	* libmisc/fields.c: Likewise.
+	* libmisc/copydir.c: Likewise.
+	* libmisc/fields.c: Add comments.
+	* libmisc/copydir.c: Mark function whose return value is not
+	checked as such.
 
 2008-05-23  Nicolas François  <nicolas.francois@centraliens.net>
 

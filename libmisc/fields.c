@@ -38,6 +38,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "prototypes.h"
+
 /*
  * valid_field - insure that a field contains all legal characters
  *
@@ -53,15 +54,22 @@ int valid_field (const char *field, const char *illegal)
 	const char *cp;
 	int err = 0;
 
-	for (cp = field; *cp && !strchr (illegal, *cp); cp++);
+	/* For each character of field, search if it appears in the list
+	 * of illegal characters. */
+	for (cp = field; '\0' != *cp; cp++) {
+		if (strchr (illegal, *cp) != NULL) {
+			err = -1;
+			break;
+		}
+	}
 
-	if (*cp) {
-		err = -1;
-	} else {
-		for (cp = field; *cp && isprint (*cp); cp++);
-
-		if (*cp) {
-			err = 1;
+	if (0 == err) {
+		/* Search if there are some non-printable characters */
+		for (cp = field; '\0' != *cp; cp++) {
+			if (!isprint (*cp)) {
+				err = 1;
+				break;
+			}
 		}
 	}
 
@@ -74,25 +82,28 @@ int valid_field (const char *field, const char *illegal)
  * prompt the user with the name of the field being changed and the
  * current value.
  */
-
 void change_field (char *buf, size_t maxsize, const char *prompt)
 {
 	char newf[200];
 	char *cp;
 
-	if (maxsize > sizeof (newf))
+	if (maxsize > sizeof (newf)) {
 		maxsize = sizeof (newf);
+	}
 
 	printf ("\t%s [%s]: ", prompt, buf);
-	fflush (stdout);
-	if (fgets (newf, maxsize, stdin) != newf)
+	(void) fflush (stdout);
+	if (fgets (newf, (int) maxsize, stdin) != newf) {
 		return;
+	}
 
-	if (!(cp = strchr (newf, '\n')))
+	cp = strchr (newf, '\n');
+	if (NULL == cp) {
 		return;
+	}
 	*cp = '\0';
 
-	if (newf[0]) {
+	if ('\0' != newf[0]) {
 		/*
 		 * Remove leading and trailing whitespace.  This also
 		 * makes it possible to change the field to empty, by
@@ -100,11 +111,13 @@ void change_field (char *buf, size_t maxsize, const char *prompt)
 		 */
 
 		while (--cp >= newf && isspace (*cp));
-		*++cp = '\0';
+		cp++;
+		*cp = '\0';
 
 		cp = newf;
-		while (*cp && isspace (*cp))
+		while (('\0' != *cp) && isspace (*cp)) {
 			cp++;
+		}
 
 		strncpy (buf, cp, maxsize - 1);
 		buf[maxsize - 1] = '\0';

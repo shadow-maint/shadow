@@ -250,7 +250,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 			}
 		}
 	}
-	closedir (dir);
+	(void) closedir (dir);
 
 	if (set_orig) {
 		src_orig = 0;
@@ -412,7 +412,7 @@ static int copy_symlink (const char *src, const char *dst,
 		return -1;
 	}
 	oldlink[len] = '\0';	/* readlink() does not NUL-terminate */
-	if (!strncmp (oldlink, src_orig, strlen (src_orig))) {
+	if (strncmp (oldlink, src_orig, strlen (src_orig)) == 0) {
 		snprintf (dummy, sizeof dummy, "%s%s",
 		          dst_orig,
 		          oldlink + strlen (src_orig));
@@ -533,7 +533,7 @@ static int copy_file (const char *src, const char *dst,
 	               (uid == -1) ? statp->st_uid : (uid_t) uid,
 	               (gid == -1) ? statp->st_gid : (gid_t) gid) != 0)
 	    || (chmod (dst, statp->st_mode & 07777) != 0)) {
-		close (ifd);
+		(void) close (ifd);
 		return -1;
 	}
 
@@ -543,7 +543,7 @@ static int copy_file (const char *src, const char *dst,
 		}
 	}
 
-	close (ifd);
+	(void) close (ifd);
 
 	if (futimes (ofd, mt) != 0) {
 		return -1;
@@ -622,19 +622,22 @@ int remove_tree (const char *root)
 			 * Recursively delete this directory.
 			 */
 
-			if (remove_tree (new_name)) {
+			if (remove_tree (new_name) != 0) {
 				err = -1;
 				break;
 			}
-			if (rmdir (new_name)) {
+			if (rmdir (new_name) != 0) {
 				err = -1;
 				break;
 			}
-			continue;
+		} else {
+			if (unlink (new_name) != 0) {
+				err = -1;
+				break;
+			}
 		}
-		unlink (new_name);
 	}
-	closedir (dir);
+	(void) closedir (dir);
 
 	return err;
 }
