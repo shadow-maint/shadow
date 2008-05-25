@@ -1,5 +1,13 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chowndir.c: Avoid assignment in comparisons, implicit
+	comparison of integers to booleans.
+	* libmisc/chowndir.c: The return value of closedir is not checked
+	on purpose.
+	* libmisc/chowndir.c: Add brackets.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chkname.h, libmisc/chkname.c: check_group_name (resp.
 	check_user_name) renamed to is_valid_user_name (resp.
 	is_valid_group_name). is_valid_user_name and is_valid_group_name

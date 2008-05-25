@@ -104,9 +104,11 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 			 * Do the entire subdirectory.
 			 */
 
-			if ((rc = chown_tree (new_name, old_uid, new_uid,
-					      old_gid, new_gid)))
+			rc = chown_tree (new_name, old_uid, new_uid,
+			                 old_gid, new_gid);
+			if (0 != rc) {
 				break;
+			}
 		}
 #ifndef HAVE_LCHOWN
 		/* don't use chown (follows symbolic links!) */
@@ -117,16 +119,18 @@ chown_tree (const char *root, uid_t old_uid, uid_t new_uid, gid_t old_gid,
 			LCHOWN (new_name, new_uid,
 				sb.st_gid == old_gid ? new_gid : sb.st_gid);
 	}
-	closedir (dir);
+	(void) closedir (dir);
 
 	/*
 	 * Now do the root of the tree
 	 */
 
-	if (!stat (root, &sb)) {
-		if (sb.st_uid == old_uid)
+	if (stat (root, &sb) == 0) {
+		if (sb.st_uid == old_uid) {
 			LCHOWN (root, new_uid,
-				sb.st_gid == old_gid ? new_gid : sb.st_gid);
+			        sb.st_gid == old_gid ? new_gid : sb.st_gid);
+		}
 	}
 	return rc;
 }
+
