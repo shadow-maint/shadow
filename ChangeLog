@@ -1,5 +1,9 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Allow --disable-man and --enable-man=no.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	Prepare the 4.1.2 release
 	* NEWS: set the release date.
 	* man/po/*.po, po/*.po: Updated PO files.
