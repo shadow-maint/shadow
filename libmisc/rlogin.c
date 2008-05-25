@@ -141,8 +141,10 @@ do_rlogin (const char *remote_host, char *name, int namelen, char *term,
 	if ((cp = strchr (term, '/'))) {
 		*cp++ = '\0';
 
-		if (!(remote_speed = atoi (cp)))
+		remote_speed = atoi (cp);
+		if (0 == remote_speed) {
 			remote_speed = 9600;
+		}
 	}
 	for (i = 0; speed_table[i].spd_baud != remote_speed &&
 	     speed_table[i].spd_name != -1; i++);
@@ -165,8 +167,10 @@ do_rlogin (const char *remote_host, char *name, int namelen, char *term,
 #endif
 	STTY (0, &termio);
 
-	if (!(pwd = getpwnam (name))) /* local, no need for xgetpwnam */
+	pwd = getpwnam (name); /* local, no need for xgetpwnam */
+	if (NULL == pwd) {
 		return 0;
+	}
 
 	/*
 	 * ruserok() returns 0 for success on modern systems, and 1 on
