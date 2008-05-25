@@ -82,7 +82,7 @@ int change_uid (const struct passwd *info)
 	/*
 	 * Set the real UID to the UID value in the password file.
 	 */
-	if (setuid (info->pw_uid)) {
+	if (setuid (info->pw_uid) != 0) {
 		perror ("setuid");
 		SYSLOG ((LOG_ERR, "bad user ID `%d' for user `%s': %m\n",
 			 (int) info->pw_uid, info->pw_name));
@@ -103,7 +103,7 @@ int change_uid (const struct passwd *info)
  *	Returns 0 on success, or -1 on failure.
  */
 
-int setup_uid_gid (const struct passwd *info, int is_console)
+int setup_uid_gid (const struct passwd *info, bool is_console)
 {
 	if (setup_groups (info) < 0)
 		return -1;
@@ -112,8 +112,9 @@ int setup_uid_gid (const struct passwd *info, int is_console)
 	if (is_console) {
 		char *cp = getdef_str ("CONSOLE_GROUPS");
 
-		if (cp && add_groups (cp))
+		if ((NULL != cp) && (add_groups (cp) != 0)) {
 			perror ("Warning: add_groups");
+		}
 	}
 #endif				/* HAVE_INITGROUPS */
 
