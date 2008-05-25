@@ -46,17 +46,19 @@
 /*
  * is_my_tty -- determine if "tty" is the same as TTY stdin is using
  */
-static int is_my_tty (const char *tty)
+static bool is_my_tty (const char *tty)
 {
 	struct stat by_name, by_fd;
 
-	if (stat (tty, &by_name) || fstat (0, &by_fd))
-		return 0;
+	if ((stat (tty, &by_name) != 0) || (fstat (0, &by_fd) != 0)) {
+		return false;
+	}
 
-	if (by_name.st_rdev != by_fd.st_rdev)
-		return 0;
-	else
-		return 1;
+	if (by_name.st_rdev != by_fd.st_rdev) {
+		return false;
+	} else {
+		return true;
+	}
 }
 
 /*
@@ -102,8 +104,8 @@ void chown_tty (const char *tty, const struct passwd *info)
 		exit (1);
 	}
 
-	if (chown (tty, info->pw_uid, gid) ||
-	    chmod (tty, getdef_num ("TTYPERM", 0600))) {
+	if ((chown (tty, info->pw_uid, gid) != 0)||
+	    (chmod (tty, getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
 		snprintf (buf, sizeof buf, _("Unable to change tty %s"), tty);
