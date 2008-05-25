@@ -229,7 +229,7 @@ void setup_env (struct passwd *info)
 	 * Create the SHELL environmental variable and export it.
 	 */
 
-	if (info->pw_shell == (char *) 0 || !*info->pw_shell) {
+	if ((NULL == info->pw_shell) || ('\0' == *info->pw_shell)) {
 		static char temp_pw_shell[] = "/bin/sh";
 
 		info->pw_shell = temp_pw_shell;
