@@ -52,7 +52,8 @@ void mailcheck (void)
 	/*
 	 * Check incoming mail in Maildir format - J.
 	 */
-	if ((mailbox = getenv ("MAILDIR"))) {
+	mailbox = getenv ("MAILDIR");
+	if (NULL != mailbox) {
 		char *newmail;
 
 		newmail = xmalloc (strlen (mailbox) + 5);
