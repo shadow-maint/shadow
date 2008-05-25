@@ -50,7 +50,7 @@
 #include "pam_defs.h"
 #include "prototypes.h"
 
-void do_pam_passwd (const char *user, int silent, int change_expired)
+void do_pam_passwd (const char *user, bool silent, bool change_expired)
 {
 	pam_handle_t *pamh = NULL;
 	int flags = 0, ret;
@@ -76,7 +76,7 @@ void do_pam_passwd (const char *user, int silent, int change_expired)
 	}
 
 	fputs (_("passwd: password updated successfully\n"), stderr);
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 }
 #else				/* !USE_PAM */
 extern int errno;		/* warning: ANSI C forbids an empty source file */
