@@ -36,21 +36,21 @@
 
 #include <sys/types.h>
 #include <stdio.h>
+#include <pwd.h>
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
-#include <pwd.h>
 /*
  * hushed - determine if a user receives login messages
  *
  * Look in the hushed-logins file (or user's home directory) to see
  * if the user is to receive the login-time messages.
  */
-int hushed (const struct passwd *pw)
+bool hushed (const struct passwd *pw)
 {
 	char *hushfile;
 	char buf[BUFSIZ];
-	int found;
+	bool found;
 	FILE *fp;
 
 	/*
@@ -58,8 +58,10 @@ int hushed (const struct passwd *pw)
 	 * defined, default to a noisy login.
 	 */
 
-	if ((hushfile = getdef_str ("HUSHLOGIN_FILE")) == NULL)
-		return 0;
+	hushfile = getdef_str ("HUSHLOGIN_FILE");
+	if (NULL == hushfile) {
+		return false;
+	}
 
 	/*
 	 * If this is not a fully rooted path then see if the
@@ -73,17 +75,19 @@ int hushed (const struct passwd *pw)
 
 	/*
 	 * If this is a fully rooted path then go through the file
-	 * and see if this user is in there.
+	 * and see if this user, or its shell is in there.
 	 */
 
-	if ((fp = fopen (hushfile, "r")) == NULL)
-		return 0;
-
-	for (found = 0; !found && fgets (buf, sizeof buf, fp);) {
+	fp = fopen (hushfile, "r");
+	if (NULL == fp) {
+		return false;
+	}
+	for (found = false; !found && (fgets (buf, sizeof buf, fp) != NULL);) {
 		buf[strlen (buf) - 1] = '\0';
-		found = !strcmp (buf,
-				 buf[0] == '/' ? pw->pw_shell : pw->pw_name);
+		found = (strcmp (buf, pw->pw_shell) == 0) ||
+		        (strcmp (buf, pw->pw_name) == 0);
 	}
 	(void) fclose (fp);
 	return found;
 }
+

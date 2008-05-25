@@ -1,10 +1,20 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/hushed.c: hushed returns a bool instead of int.
+	* libmisc/hushed.c: Avoid assignments in comparisons.
+	* libmisc/hushed.c (hushed): Change type of found to bool.
+	* libmisc/hushed.c: Add brackets.
+	* libmisc/hushed.c: Always check if the user or the shell is in
+	the file. Do not check the first character of the line first. This
+	is simpler and match better with the HUSHLOGIN_FILE documentation.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/getdef.h, lib/getdef.c: getdef_bool returns a bool instead
 	of int.
 	* lib/getdef.c: Change typo of def_loaded to bool.
 	* lib/getdef.c: Add brackets.
-	* lib/getdef.c: Avoid assignment in comparisons.
+	* lib/getdef.c: Avoid assignments in comparisons.
 
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
