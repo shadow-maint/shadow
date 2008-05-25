@@ -2,6 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2002 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2008       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
