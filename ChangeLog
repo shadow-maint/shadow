@@ -13,6 +13,7 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/failure.c (failcheck): The failed argument is a bool.
+	* libmisc/failure.h: Likewise.
 	* libmisc/failure.c (too_many_failures): too_many_failures returns
 	a bool.
 	* libmisc/failure.c: Add notes about unchecked return values.

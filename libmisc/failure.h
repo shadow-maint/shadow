@@ -57,7 +57,7 @@ extern void failure (uid_t, const char *, struct faillog *);
  *	returns FALSE to indicate that the login should be denied even though
  *	the password is valid.
  */
-extern int failcheck (uid_t, struct faillog *, int);
+extern int failcheck (uid_t uid, struct faillog *fl, bool failed);
 
 /*
  * failprint - print line of failure information
