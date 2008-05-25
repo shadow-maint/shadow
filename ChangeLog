@@ -1,5 +1,12 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/myname.c: Avoid assignments in comparisons.
+	* libmisc/myname.c: Avoid implicit conversion of pointers / chars
+	to booleans.
+	* libmisc/myname.c: Add brackets.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c (checkutmp): Change picky argument's type to
 	bool.
 	* libmisc/utmp.c: Use bool when possible (found_utmpx,
