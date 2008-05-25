@@ -88,15 +88,19 @@ void login_prompt (const char *prompt, char *name, int namesize)
 
 	if (prompt) {
 		cp = getdef_str ("ISSUE_FILE");
-		if (cp && (fp = fopen (cp, "r"))) {
-			while ((i = getc (fp)) != EOF)
-				putc (i, stdout);
+		if (NULL != cp) {
+			fp = fopen (cp, "r");
+			if (NULL != fp) {
+				while ((i = getc (fp)) != EOF) {
+					putc (i, stdout);
+				}
 
-			fclose (fp);
+				(void) fclose (fp);
+			}
 		}
 		gethostname (buf, sizeof buf);
 		printf (prompt, buf);
-		fflush (stdout);
+		(void) fflush (stdout);
 	}
 
 	/* 
@@ -105,12 +109,14 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 */
 
 	memzero (buf, sizeof buf);
-	if (fgets (buf, sizeof buf, stdin) != buf)
+	if (fgets (buf, sizeof buf, stdin) != buf) {
 		exit (1);
+	}
 
 	cp = strchr (buf, '\n');
-	if (!cp)
+	if (NULL == cp) {
 		exit (1);
+	}
 	*cp = '\0';		/* remove \n [ must be there ] */
 
 	/*
@@ -122,11 +128,13 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	for (cp = buf; *cp == ' ' || *cp == '\t'; cp++);
 
 	for (i = 0; i < namesize - 1 && isgraph (*cp); name[i++] = *cp++);
-	while (isgraph (*cp))
+	while (isgraph (*cp)) {
 		cp++;
+	}
 
-	if (*cp)
+	if ('\0' != *cp) {
 		cp++;
+	}
 
 	name[i] = '\0';
 
@@ -136,15 +144,16 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 * to do this, and I just take the easy way out.
 	 */
 
-	if (*cp != '\0') {	/* process new variables */
+	if ('\0' != *cp) {	/* process new variables */
 		char *nvar;
 		int count = 1;
 
 		for (envc = 0; envc < MAX_ENV; envc++) {
-			nvar = strtok (envc ? (char *) 0 : cp, " \t,");
-			if (!nvar)
+			nvar = strtok ((0 != envc) ? (char *) 0 : cp, " \t,");
+			if (NULL == nvar) {
 				break;
-			if (strchr (nvar, '=')) {
+			}
+			if (strchr (nvar, '=') != NULL) {
 				envp[envc] = nvar;
 			} else {
 				envp[envc] = xmalloc (strlen (nvar) + 32);
@@ -163,3 +172,4 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	signal (SIGTSTP, sigtstp);
 #endif
 }
+
