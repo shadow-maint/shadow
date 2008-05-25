@@ -220,7 +220,7 @@ static void grp_update (void)
  */
 static void check_new_name (void)
 {
-	if (check_group_name (group_name)) {
+	if (is_valid_group_name (group_name)) {
 		return;
 	}
 

@@ -917,7 +917,7 @@ static void process_flags (int argc, char **argv)
 				Gflg++;
 				break;
 			case 'l':
-				if (!check_user_name (optarg)) {
+				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
 						 _("%s: invalid field '%s'\n"),
 						 Prog, optarg);

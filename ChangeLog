@@ -1,5 +1,17 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chkname.h, libmisc/chkname.c: check_group_name (resp.
+	check_user_name) renamed to is_valid_user_name (resp.
+	is_valid_group_name). is_valid_user_name and is_valid_group_name
+	return a bool.
+	* src/grpck.c, src/newusers.c, src/usermod.c, src/useradd.c,
+	src/groupmod.c, src/pwck.c, src/groupadd.c: Use is_valid_user_name
+	and is_valid_group_name, following above change.
+	* libmisc/chkname.c: Avoid implicit conversion of chars to
+	booleans. Add brackets and parenthesis.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/xmalloc.c: Avoid implicit conversion of integers /
 	pointers to booleans.
 	* libmisc/xgetXXbyYY.c: Likewise.

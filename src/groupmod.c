@@ -328,7 +328,7 @@ static void check_new_name (void)
 		return;
 	}
 
-	if (check_group_name (group_newname)) {
+	if (is_valid_group_name (group_newname)) {
 
 		/*
 		 * If the entry is found, too bad.

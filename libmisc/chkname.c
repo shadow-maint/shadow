@@ -31,8 +31,11 @@
  */
 
 /*
- * check_user_name(), check_group_name() - check the new user/group
- * name for validity; return value: 1 - OK, 0 - bad name
+ * is_valid_user_name(), is_valid_group_name() - check the new user/group
+ * name for validity;
+ * return values:
+ *   true  - OK
+ *   false - bad name
  */
 
 #include <config.h>
@@ -47,26 +50,32 @@
 #else
 #include <utmp.h>
 #endif
-static int good_name (const char *name)
+
+static bool is_valid_name (const char *name)
 {
 	/*
 	 * User/group names must match [a-z_][a-z0-9_-]*[$]
 	 */
-	if (!*name || !((*name >= 'a' && *name <= 'z') || *name == '_'))
-		return 0;
-
-	while (*++name) {
-		if (!((*name >= 'a' && *name <= 'z') ||
-		      (*name >= '0' && *name <= '9') ||
-		      *name == '_' || *name == '-' ||
-		      (*name == '$' && *(name + 1) == '\0')))
-			return 0;
+	if (('\0' == *name) ||
+	    !((('a' <= *name) && ('z' >= *name)) || ('_' == *name))) {
+		return false;
 	}
 
-	return 1;
+	while ('\0' != *++name) {
+		if (!(( ('a' <= *name) && ('z' >= *name) ) ||
+		      ( ('0' <= *name) && ('9' >= *name) ) ||
+		      ('_' == *name) ||
+		      ('-' == *name) ||
+		      ( ('$' == *name) && ('\0' == *(name + 1)) )
+		     )) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
-int check_user_name (const char *name)
+bool is_valid_user_name (const char *name)
 {
 #if HAVE_UTMPX_H
 	struct utmpx ut;
@@ -78,21 +87,23 @@ int check_user_name (const char *name)
 	 * User names are limited by whatever utmp can
 	 * handle (usually max 8 characters).
 	 */
-	if (strlen (name) > sizeof (ut.ut_user))
-		return 0;
+	if (strlen (name) > sizeof (ut.ut_user)) {
+		return false;
+	}
 
-	return good_name (name);
+	return is_valid_name (name);
 }
 
-int check_group_name (const char *name)
+bool is_valid_group_name (const char *name)
 {
 	/*
 	 * Arbitrary limit for group names - max 16
 	 * characters (same as on HP-UX 10).
 	 */
-	if (strlen (name) > 16)
-		return 0;
+	if (strlen (name) > 16) {
+		return false;
+	}
 
-	return good_name (name);
+	return is_valid_name (name);
 }
 

@@ -497,7 +497,7 @@ static void check_grp_file (int *errors, int *changed)
 		/*
 		 * Check for invalid group names.  --marekm
 		 */
-		if (!check_group_name (grp->gr_name)) {
+		if (!is_valid_group_name (grp->gr_name)) {
 			*errors += 1;
 			printf (_("invalid group name '%s'\n"), grp->gr_name);
 		}

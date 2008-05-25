@@ -1123,7 +1123,7 @@ static void process_flags (int argc, char **argv)
 			usage ();
 
 		user_name = argv[optind];
-		if (!check_user_name (user_name)) {
+		if (!is_valid_user_name (user_name)) {
 			fprintf (stderr,
 				 _
 				 ("%s: invalid user name '%s'\n"),
