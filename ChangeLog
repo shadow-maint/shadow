@@ -1,5 +1,11 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/valid.c: Avoid implicit conversion of pointers /chars to
+	booleans.
+	* libmisc/valid.c: Add brackets.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/yesno.c: yes_or_no returns a bool instead of int.
 	* libmisc/yesno.c: Avoid implicit conversion of pointers to
 	booleans.

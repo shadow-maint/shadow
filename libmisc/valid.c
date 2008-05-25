@@ -61,11 +61,12 @@ int valid (const char *password, const struct passwd *ent)
 	 * routine is meant to waste CPU time.
 	 */
 
-	if (ent->pw_name && !ent->pw_passwd[0]) {
-		if (!password[0])
+	if ((NULL != ent->pw_name) && ('\0' == ent->pw_passwd[0])) {
+		if ('\0' == password[0]) {
 			return (1);	/* user entered nothing */
-		else
+		} else {
 			return (0);	/* user entered something! */
+		}
 	}
 
 	/*
@@ -93,9 +94,11 @@ int valid (const char *password, const struct passwd *ent)
 	 * cause non-existent users to not be validated.
 	 */
 
-	if (ent->pw_name && strcmp (encrypted, ent->pw_passwd) == 0)
+	if ((NULL != ent->pw_name) &&
+	    (strcmp (encrypted, ent->pw_passwd) == 0)) {
 		return (1);
-	else
+	} else {
 		return (0);
+	}
 }
 
