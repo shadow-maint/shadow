@@ -1,5 +1,13 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/yesno.c: yes_or_no returns a bool instead of int.
+	* libmisc/yesno.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/yesno.c: The return value of fflush is not checked
+	on purpose.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/age.c: Avoid implicit conversion of integers to
 	booleans.
 

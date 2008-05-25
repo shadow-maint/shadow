@@ -44,11 +44,12 @@
 /*
  * yes_or_no - get answer to question from the user
  *
- *	It returns 0 if no.
+ *	It returns false if no.
  *
- *	If the read_only flag is set, it will print No, and will return 0.
+ *	If the read_only flag is set, it will print No, and will return
+ *	false.
  */
-int yes_or_no (int read_only)
+bool yes_or_no (bool read_only)
 {
 	char buf[80];
 
@@ -57,20 +58,22 @@ int yes_or_no (int read_only)
 	 */
 	if (read_only) {
 		puts (_("No"));
-		return 0;
+		return false;
 	}
 
 	/*
 	 * Typically, there's a prompt on stdout, sometimes unflushed.
 	 */
-	fflush (stdout);
+	(void) fflush (stdout);
 
 	/*
 	 * Get a line and see what the first character is.
 	 */
 	/* TODO: use gettext */
-	if (fgets (buf, sizeof buf, stdin))
+	if (fgets (buf, sizeof buf, stdin) == buf) {
 		return buf[0] == 'y' || buf[0] == 'Y';
+	}
 
-	return 0;
+	return false;
 }
+
