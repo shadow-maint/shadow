@@ -1,5 +1,11 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/addgrps.c: Change type of added to bool.
+	* libmisc/addgrps.c: Avoid implicit conversion of pointers to
+	booleans.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/hushed.c: hushed returns a bool instead of int.
 	* libmisc/hushed.c: Avoid assignments in comparisons.
 	* libmisc/hushed.c (hushed): Change type of found to bool.

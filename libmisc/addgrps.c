@@ -52,7 +52,8 @@
 int add_groups (const char *list)
 {
 	GETGROUPS_T *grouplist, *tmp;
-	int i, ngroups, added;
+	int i, ngroups;
+	bool added;
 	char *token;
 	char buf[1024];
 
@@ -79,12 +80,12 @@ int add_groups (const char *list)
 		return -1;
 	}
 
-	added = 0;
-	for (token = strtok (buf, SEP); token; token = strtok (NULL, SEP)) {
+	added = false;
+	for (token = strtok (buf, SEP); NULL != token; token = strtok (NULL, SEP)) {
 		struct group *grp;
 
 		grp = getgrnam (token); /* local, no need for xgetgrnam */
-		if (!grp) {
+		if (NULL == grp) {
 			fprintf (stderr, _("Warning: unknown group %s\n"),
 				 token);
 			continue;
@@ -100,13 +101,13 @@ int add_groups (const char *list)
 			break;
 		}
 		tmp = (gid_t *) realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));
-		if (!tmp) {
+		if (NULL == tmp) {
 			free (grouplist);
 			return -1;
 		}
 		tmp[ngroups++] = grp->gr_gid;
 		grouplist = tmp;
-		added++;
+		added = true;
 	}
 
 	if (added)
