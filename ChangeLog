@@ -1,5 +1,10 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: selinux_checked, selinux_enabled, and set_orig
+	are now booleans.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/setugid.c (setup_uid_gid): The is_console argument is now
 	a bool.
 	* libmisc/setugid.c: Avoid implicit conversion of integers /

@@ -43,7 +43,6 @@
 #include "defines.h"
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
-static int selinux_enabled = -1;
 #endif
 static const char *src_orig;
 static const char *dst_orig;
@@ -87,11 +86,15 @@ static int copy_file (const char *src, const char *dst,
  */
 static int selinux_file_context (const char *dst_name)
 {
+	static bool selinux_checked = false;
+	static bool selinux_enabled;
 	security_context_t scontext = NULL;
 
-	if (selinux_enabled < 0) {
+	if (!selinux_checked) {
 		selinux_enabled = is_selinux_enabled () > 0;
+		selinux_checked = true;
 	}
+
 	if (selinux_enabled) {
 		/* Get the default security context for this file */
 		if (matchpathcon (dst_name, 0, &scontext) < 0) {
@@ -189,7 +192,7 @@ int copy_tree (const char *src_root, const char *dst_root,
 	char src_name[1024];
 	char dst_name[1024];
 	int err = 0;
-	int set_orig = 0;
+	bool set_orig = false;
 	struct DIRECT *ent;
 	DIR *dir;
 
@@ -216,10 +219,10 @@ int copy_tree (const char *src_root, const char *dst_root,
 		return -1;
 	}
 
-	if (src_orig == 0) {
+	if (src_orig == NULL) {
 		src_orig = src_root;
 		dst_orig = dst_root;
-		set_orig++;
+		set_orig = true;
 	}
 	while ((0 == err) && (ent = readdir (dir)) != NULL) {
 		/*
@@ -253,8 +256,8 @@ int copy_tree (const char *src_root, const char *dst_root,
 	(void) closedir (dir);
 
 	if (set_orig) {
-		src_orig = 0;
-		dst_orig = 0;
+		src_orig = NULL;
+		dst_orig = NULL;
 	}
 	return err;
 }
