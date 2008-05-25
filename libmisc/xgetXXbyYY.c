@@ -91,7 +91,7 @@ LOOKUP_TYPE *XFUNCTION_NAME (ARG_TYPE ARG_NAME)
 		errno = 0;
 		status = REENTRANT_NAME(ARG_NAME, result, buffer,
 		                        length, &resbuf);
-		if (!status && (resbuf == result)) {
+		if ((0 ==status) && (resbuf == result)) {
 			/* Build a result structure that can be freed by
 			 * the shadow *_free functions. */
 			LOOKUP_TYPE *ret_result = DUP_FUNCTION(result);
