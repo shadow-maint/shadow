@@ -1,5 +1,10 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/age.c: Avoid implicit conversion of integers to
+	booleans.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/rlogin.c: Avoid assignments in comparisons.
 	* libmisc/rlogin.c: Avoid implicit conversion of integers to
 	booleans.

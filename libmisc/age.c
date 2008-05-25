@@ -123,7 +123,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		 * passwd to work just like it would had they executed
 		 * it from the command line while logged in.
 		 */
-		if (setup_uid_gid (pw, 0))
+		if (setup_uid_gid (pw, 0) != 0)
 			_exit (126);
 
 		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
