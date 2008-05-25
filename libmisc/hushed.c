@@ -3,6 +3,7 @@
  * Copyright (c) 1991 - 1993, Chip Rosenthal
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2008       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
