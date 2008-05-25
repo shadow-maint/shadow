@@ -115,7 +115,7 @@ void checkutmp (int picky)
 
 #elif defined(LOGIN_PROCESS)
 
-void checkutmp (int picky)
+void checkutmp (bool picky)
 {
 	char *line;
 	struct utmp *ut;
@@ -281,7 +281,7 @@ void setutmp (const char *name, const char *line, const char *host)
 	struct utmp *utmp, utline;
 	struct utmpx *utmpx, utxline;
 	pid_t pid = getpid ();
-	int found_utmpx = 0, found_utmp = 0;
+	bool found_utmpx = false, found_utmp = false;
 
 	/*
 	 * The canonical device name doesn't include "/dev/"; skip it
@@ -301,13 +301,13 @@ void setutmp (const char *name, const char *line, const char *host)
 
 	while (utmpx = getutxent ()) {
 		if (utmpx->ut_pid == pid) {
-			found_utmpx = 1;
+			found_utmpx = true;
 			break;
 		}
 	}
 	while (utmp = getutent ()) {
 		if (utmp->ut_pid == pid) {
-			found_utmp = 1;
+			found_utmp = true;
 			break;
 		}
 	}
@@ -369,6 +369,7 @@ void setutmp (const char *name, const char *line, const char *host)
 
 	pututxline (&utxline);
 	pututline (&utline);
+	/* TODO: log failures */
 
 	updwtmpx (_WTMP_FILE "x", &utxline);
 	updwtmp (_WTMP_FILE, &utline);

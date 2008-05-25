@@ -1,5 +1,13 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c (checkutmp): Change picky argument's type to
+	bool.
+	* libmisc/utmp.c: Use bool when possible (found_utmpx,
+	found_utmp).
+	* libmisc/utmp.c: Add note about unchecked return values.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/addgrps.c: Change type of added to bool.
 	* libmisc/addgrps.c: Avoid implicit conversion of pointers to
 	booleans.
