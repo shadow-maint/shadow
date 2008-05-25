@@ -131,7 +131,7 @@ static struct itemdef def_table[] = {
 #endif
 
 static char def_fname[] = LOGINDEFS;	/* login config defs file       */
-static int def_loaded = 0;	/* are defs already loaded?     */
+static bool def_loaded = false;		/* are defs already loaded?     */
 
 /* local function prototypes */
 static struct itemdef *def_find (const char *);
@@ -149,10 +149,12 @@ char *getdef_str (const char *item)
 {
 	struct itemdef *d;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
-	return ((d = def_find (item)) == NULL ? (char *) NULL : d->value);
+	d = def_find (item);
+	return ((NULL == d)? (char *) NULL : d->value);
 }
 
 
@@ -162,15 +164,18 @@ char *getdef_str (const char *item)
  * Return TRUE if specified item is defined as "yes", else FALSE.
  */
 
-int getdef_bool (const char *item)
+bool getdef_bool (const char *item)
 {
 	struct itemdef *d;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
-	if ((d = def_find (item)) == NULL || d->value == NULL)
-		return 0;
+	d = def_find (item);
+	if ((NULL == d) || (NULL == d->value)) {
+		return false;
+	}
 
 	return (strcasecmp (d->value, "yes") == 0);
 }
@@ -188,11 +193,14 @@ int getdef_num (const char *item, int dflt)
 {
 	struct itemdef *d;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
-	if ((d = def_find (item)) == NULL || d->value == NULL)
+	d = def_find (item);
+	if ((NULL == d) || (NULL == d->value)) {
 		return dflt;
+	}
 
 	return (int) strtol (d->value, (char **) NULL, 0);
 }
@@ -210,11 +218,14 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 {
 	struct itemdef *d;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
-	if ((d = def_find (item)) == NULL || d->value == NULL)
+	d = def_find (item);
+	if ((NULL == d) || (NULL == d->value)) {
 		return dflt;
+	}
 
 	return (unsigned int) strtoul (d->value, (char **) NULL, 0);
 }
@@ -232,11 +243,14 @@ long getdef_long (const char *item, long dflt)
 {
 	struct itemdef *d;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
-	if ((d = def_find (item)) == NULL || d->value == NULL)
+	d = def_find (item);
+	if ((NULL == d) || (NULL == d->value)) {
 		return dflt;
+	}
 
 	return strtol (d->value, (char **) NULL, 0);
 }
@@ -252,28 +266,33 @@ int putdef_str (const char *name, const char *value)
 	struct itemdef *d;
 	char *cp;
 
-	if (!def_loaded)
+	if (!def_loaded) {
 		def_load ();
+	}
 
 	/*
 	 * Locate the slot to save the value.  If this parameter
 	 * is unknown then "def_find" will print an err message.
 	 */
-	if ((d = def_find (name)) == NULL)
+	d = def_find (name);
+	if (NULL == d) {
 		return -1;
+	}
 
 	/*
 	 * Save off the value.
 	 */
-	if ((cp = strdup (value)) == NULL) {
+	cp = strdup (value);
+	if (NULL == cp) {
 		fputs (_("Could not allocate space for config info.\n"),
 		       stderr);
 		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
 		return -1;
 	}
 
-	if (d->value)
+	if (NULL != d->value) {
 		free (d->value);
+	}
 
 	d->value = cp;
 	return 0;
@@ -289,7 +308,6 @@ int putdef_str (const char *name, const char *value)
 
 static struct itemdef *def_find (const char *name)
 {
-	int n;
 	struct itemdef *ptr;
 
 
@@ -297,9 +315,10 @@ static struct itemdef *def_find (const char *name)
 	 * Search into the table.
 	 */
 
-	for (ptr = def_table; ptr->name; ptr++) {
-		if (!(n = strcmp (ptr->name, name)))
+	for (ptr = def_table; NULL != ptr->name; ptr++) {
+		if (strcmp (ptr->name, name) == 0) {
 			return ptr;
+		}
 	}
 
 	/*
@@ -329,7 +348,8 @@ static void def_load (void)
 	/*
 	 * Open the configuration definitions file.
 	 */
-	if ((fp = fopen (def_fname, "r")) == NULL) {
+	fp = fopen (def_fname, "r");
+	if (NULL == fp) {
 		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%m]",
 			 def_fname));
 		exit (1);
@@ -339,7 +359,7 @@ static void def_load (void)
 	 * Set the initialized flag.
 	 * (do it early to prevent recursion in putdef_str())
 	 */
-	++def_loaded;
+	def_loaded = true;
 
 	/*
 	 * Go through all of the lines in the file.
@@ -350,8 +370,9 @@ static void def_load (void)
 		 * Trim trailing whitespace.
 		 */
 		for (i = strlen (buf) - 1; i >= 0; --i) {
-			if (!isspace (buf[i]))
+			if (!isspace (buf[i])) {
 				break;
+			}
 		}
 		buf[++i] = '\0';
 
@@ -376,7 +397,7 @@ static void def_load (void)
 		putdef_str (name, value);
 	}
 
-	if (ferror (fp)) {
+	if (ferror (fp) != 0) {
 		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%m]",
 			 def_fname));
 		exit (1);
@@ -396,17 +417,21 @@ int main (int argc, char **argv)
 	def_load ();
 
 	for (i = 0; i < NUMDEFS; ++i) {
-		if ((d = def_find (def_table[i].name)) == NULL)
+		d = def_find (def_table[i].name);
+		if (NULL == d) {
 			printf ("error - lookup '%s' failed\n",
-				def_table[i].name);
-		else
+			        def_table[i].name);
+		} else {
 			printf ("%4d %-24s %s\n", i + 1, d->name, d->value);
+		}
 	}
 	for (i = 1; i < argc; i++) {
-		if ((cp = getdef_str (argv[1])) != NULL)
+		cp = getdef_str (argv[1]);
+		if (NULL != cp) {
 			printf ("%s `%s'\n", argv[1], cp);
-		else
+		} else {
 			printf ("%s not found\n", argv[1]);
+		}
 	}
 	exit (0);
 }

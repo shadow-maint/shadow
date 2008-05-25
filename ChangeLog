@@ -1,5 +1,13 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.h, lib/getdef.c: getdef_bool returns a bool instead
+	of int.
+	* lib/getdef.c: Change typo of def_loaded to bool.
+	* lib/getdef.c: Add brackets.
+	* lib/getdef.c: Avoid assignment in comparisons.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chowntty.c: is_my_tty returns a bool.
 	* libmisc/chowntty.c: Avoid implicit conversion of integers to
 	booleans.
