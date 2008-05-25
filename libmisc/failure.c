@@ -53,7 +53,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	/*
 	 * Don't do anything if failure logging isn't set up.
 	 */
-
+	/* TODO: check if the file exists */
 	if ((fd = open (FAILLOG_FILE, O_RDWR)) < 0)
 		return;
 
@@ -88,25 +88,28 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
+	/* TODO: check failures */
 	write (fd, (char *) fl, sizeof *fl);
+	/* TODO: log failures */
 	close (fd);
+	/* TODO: log failures */
 }
 
-static int too_many_failures (const struct faillog *fl)
+static bool too_many_failures (const struct faillog *fl)
 {
 	time_t now;
 
 	if (fl->fail_max == 0 || fl->fail_cnt < fl->fail_max)
-		return 0;
+		return false;
 
 	if (fl->fail_locktime == 0)
-		return 1;	/* locked until reset manually */
+		return true;	/* locked until reset manually */
 
 	time (&now);
 	if (fl->fail_time + fl->fail_locktime < now)
-		return 0;	/* enough time since last failure */
+		return false;	/* enough time since last failure */
 
-	return 1;
+	return true;
 }
 
 /*
@@ -114,11 +117,14 @@ static int too_many_failures (const struct faillog *fl)
  *
  *	failcheck() is called AFTER the password has been validated.  If the
  *	account has been "attacked" with too many login failures, failcheck()
- *	returns FALSE to indicate that the login should be denied even though
+ *	returns 0 to indicate that the login should be denied even though
  *	the password is valid.
+ *
+ *	failed indicates if the login failed AFTER the password has been
+ *	       validated.
  */
 
-int failcheck (uid_t uid, struct faillog *fl, int failed)
+int failcheck (uid_t uid, struct faillog *fl, bool failed)
 {
 	int fd;
 	struct faillog fail;
@@ -127,8 +133,11 @@ int failcheck (uid_t uid, struct faillog *fl, int failed)
 	 * Suppress the check if the log file isn't there.
 	 */
 
-	if ((fd = open (FAILLOG_FILE, O_RDWR)) < 0)
+	/* TODO: check if the file exists */
+	fd = open (FAILLOG_FILE, O_RDWR);
+	if (fd < 0) {
 		return 1;
+	}
 
 	/*
 	 * Get the record from the file and determine if the user has
@@ -249,16 +258,20 @@ void failtmp (
 	 * in login.defs, don't do this.
 	 */
 
-	if (!(ftmp = getdef_str ("FTMP_FILE")))
+	ftmp = getdef_str ("FTMP_FILE");
+	if (NULL == ftmp) {
 		return;
+	}
 
 	/*
 	 * Open the file for append.  It must already exist for this
 	 * feature to be used.
 	 */
 
-	if ((fd = open (ftmp, O_WRONLY | O_APPEND)) == -1)
+	fd = open (ftmp, O_WRONLY | O_APPEND);
+	if (-1 == fd) {
 		return;
+	}
 
 	/*
 	 * Output the new failure record and close the log file.
@@ -266,4 +279,6 @@ void failtmp (
 
 	write (fd, (const char *) failent, sizeof *failent);
 	close (fd);
+	/* TODO: check if the file could be closed */
 }
+
