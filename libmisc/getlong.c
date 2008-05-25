@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007       , Nicolas François
+ * Copyright (c) 2007 - 2008, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,8 +40,9 @@ int getlong(const char *numstr, long int *result)
 	char *endptr;
 
 	val = strtol (numstr, &endptr, 10);
-	if (*endptr || errno == ERANGE)
+	if (('\0' != *endptr) || (ERANGE == errno)) {
 		return 0;
+	}
 
 	*result = val;
 	return 1;
