@@ -1,5 +1,10 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/xmalloc.c: Avoid implicit conversion of integers /
+	pointers to booleans.
+
+2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in, lib/defines.h: Allow usage of booleans in the
 	source.
 

@@ -52,7 +52,7 @@ char *xmalloc (size_t size)
 	char *ptr;
 
 	ptr = (char *) malloc (size);
-	if (!ptr && size) {
+	if ((NULL == ptr) && (0 != size)) {
 		fprintf (stderr, _("malloc(%d) failed\n"), (int) size);
 		exit (13);
 	}
