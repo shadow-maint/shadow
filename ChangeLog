@@ -1,13 +1,21 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/gshadow.c: nis_used and nis_bound are booleans.
+	* lib/gshadow.c: Avoid implicit conversion of pointers / integers
+	to booleans.
+	* lib/gshadow.c: Avoid assignments in comparisons.
+	* lib/gshadow.c: Add brackets.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: The changed, isopen, locked, and readonly fields
 	of the db are booleans.
 	* lib/groupio.h: Add protection against multiple inclusion.
 
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* lib/sgetgrent.c: implicit conversion of pointers / chars to
-	booleans.
+	* lib/sgetgrent.c: Avoid implicit conversion of pointers / chars
+	to booleans.
 	* lib/sgetgrent.c: Avoid assignments in comparisons.
 	* lib/sgetgrent.c: Add brackets.
 

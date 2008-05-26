@@ -51,10 +51,10 @@ static struct sgrp sgroup;
 #define	FIELDS	4
 
 #ifdef	USE_NIS
-static int nis_used;
+static bool nis_used;
 static int nis_ignore;
 static enum { native, start, middle, native2 } nis_state;
-static int nis_bound;
+static bool nis_bound;
 static char *nis_domain;
 static char *nis_key;
 static int nis_keylen;
@@ -74,8 +74,9 @@ void __setsgNIS (int flag)
 {
 	nis_ignore = !flag;
 
-	if (nis_ignore)
-		nis_used = 0;
+	if (nis_ignore) {
+		nis_used = false;
+	}
 }
 
 /*
@@ -87,7 +88,7 @@ static int bind_nis (void)
 	if (yp_get_default_domain (&nis_domain))
 		return -1;
 
-	nis_bound = 1;
+	nis_bound = true;
 	return 0;
 }
 #endif
@@ -120,16 +121,18 @@ void setsgent (void)
 #ifdef	USE_NIS
 	nis_state = native;
 #endif
-	if (shadow)
+	if (NULL != shadow) {
 		rewind (shadow);
-	else
+	} else {
 		shadow = fopen (SGROUP_FILE, "r");
+	}
 }
 
 void endsgent (void)
 {
-	if (shadow)
+	if (NULL != shadow) {
 		(void) fclose (shadow);
+	}
 
 	shadow = (FILE *) 0;
 }
@@ -143,18 +146,22 @@ struct sgrp *sgetsgent (const char *string)
 	strncpy (sgrbuf, string, (int) sizeof sgrbuf - 1);
 	sgrbuf[sizeof sgrbuf - 1] = '\0';
 
-	if ((cp = strrchr (sgrbuf, '\n')))
+	cp = strrchr (sgrbuf, '\n');
+	if (NULL != cp) {
 		*cp = '\0';
+	}
 
 	/*
 	 * There should be exactly 4 colon separated fields.  Find
 	 * all 4 of them and save the starting addresses in fields[].
 	 */
 
-	for (cp = sgrbuf, i = 0; i < FIELDS && cp; i++) {
+	for (cp = sgrbuf, i = 0; (i < FIELDS) && (NULL != cp); i++) {
 		fields[i] = cp;
-		if ((cp = strchr (cp, ':')))
+		cp = strchr (cp, ':');
+		if (NULL != cp) {
 			*cp++ = '\0';
+		}
 	}
 
 	/*
@@ -162,24 +169,25 @@ struct sgrp *sgetsgent (const char *string)
 	 * the line is invalid.
 	 */
 
-	if (cp || i != FIELDS)
+	if ((NULL != cp) || (i != FIELDS))
 #ifdef	USE_NIS
-		if (!IS_NISCHAR (fields[0][0]))
+		if (!IS_NISCHAR (fields[0][0])) {
 			return 0;
-		else
-			nis_used = 1;
+		} else {
+			nis_used = true;
+		}
 #else
 		return 0;
 #endif
 
 	sgroup.sg_name = fields[0];
 	sgroup.sg_passwd = fields[1];
-	if (nadmins) {
+	if (0 != nadmins) {
 		nadmins = 0;
 		free (admins);
 		admins = NULL;
 	}
-	if (nmembers) {
+	if (0 != nmembers) {
 		nmembers = 0;
 		free (members);
 		members = NULL;
@@ -202,8 +210,9 @@ struct sgrp *fgetsgent (FILE * fp)
 	char buf[sizeof sgrbuf];
 	char *cp;
 
-	if (!fp)
+	if (NULL == fp) {
 		return (0);
+	}
 
 #ifdef	USE_NIS
 	while (fgetsx (buf, sizeof buf, fp) != (char *) 0)
@@ -211,11 +220,14 @@ struct sgrp *fgetsgent (FILE * fp)
 	if (fgetsx (buf, sizeof buf, fp) != (char *) 0)
 #endif
 	{
-		if ((cp = strchr (buf, '\n')))
+		cp = strchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
+		}
 #ifdef	USE_NIS
-		if (nis_ignore && IS_NISCHAR (buf[0]))
+		if ((0 != nis_ignore) && IS_NISCHAR (buf[0])) {
 			continue;
+		}
 #endif
 		return (sgetsgent (buf));
 	}
@@ -233,8 +245,9 @@ struct sgrp *getsgent (void)
 	struct sgrp *val;
 	char buf[BUFSIZ];
 #endif
-	if (!shadow)
+	if (NULL == shadow) {
 		setsgent ();
+	}
 
 #ifdef	USE_NIS
       again:
@@ -249,8 +262,10 @@ struct sgrp *getsgent (void)
 		 * NULL right away if there is none.
 		 */
 
-		if (!(val = fgetsgent (shadow)))
+		val = fgetsgent (shadow);
+		if (NULL == val) {
 			return 0;
+		}
 
 		/*
 		 * If this entry began with a NIS escape character, we have
@@ -259,10 +274,11 @@ struct sgrp *getsgent (void)
 		 */
 
 		if (IS_NISCHAR (val->sg_name[0])) {
-			if (val->sg_name[1])
+			if ('\0' != val->sg_name[1]) {
 				nis_1_group = 1;
-			else
+			} else {
 				nis_state = start;
+			}
 		}
 
 		/*
@@ -287,7 +303,7 @@ struct sgrp *getsgent (void)
 
 		return 0;
 	} else {
-		if (nis_bound == 0) {
+		if (!nis_bound) {
 			if (bind_nis ()) {
 				nis_state = native2;
 				goto again;
@@ -339,8 +355,9 @@ struct sgrp *getsgnam (const char *name)
 		 * Search the gshadow.byname map for this group.
 		 */
 
-		if (!nis_bound)
+		if (!nis_bound) {
 			bind_nis ();
+		}
 
 		if (nis_bound) {
 			char *cp;
@@ -348,11 +365,14 @@ struct sgrp *getsgnam (const char *name)
 			if (yp_match (nis_domain, "gshadow.byname", name,
 				      strlen (name), &nis_val,
 				      &nis_vallen) == 0) {
-				if (cp = strchr (nis_val, '\n'))
+				cp = strchr (nis_val, '\n');
+				if (NULL != cp) {
 					*cp = '\0';
+				}
 
 				nis_state = middle;
-				if (sgrp = sgetsgent (nis_val)) {
+				sgrp = sgetsgent (nis_val);
+				if (NULL != sgrp) {
 					strcpy (save_name, sgrp->sg_name);
 					nis_key = save_name;
 					nis_keylen = strlen (save_name);
@@ -366,19 +386,18 @@ struct sgrp *getsgnam (const char *name)
 #ifdef	USE_NIS
 	if (nis_used) {
 		nis_ignore++;
-		nis_disabled++;
+		nis_disabled = true;
 	}
 #endif
 	while ((sgrp = getsgent ()) != (struct sgrp *) 0) {
-		if (strcmp (name, sgrp->sg_name) == 0)
+		if (strcmp (name, sgrp->sg_name) == 0) {
 			break;
+		}
 	}
 #ifdef	USE_NIS
 	nis_ignore--;
 #endif
-	if (sgrp)
-		return sgrp;
-	return (0);
+	return sgrp;
 }
 
 /*
@@ -395,19 +414,23 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	int i;
 	size_t size;
 
-	if (!fp || !sgrp)
+	if ((NULL == fp) || (NULL == sgrp)) {
 		return -1;
+	}
 
 	/* calculate the required buffer size */
 	size = strlen (sgrp->sg_name) + strlen (sgrp->sg_passwd) + 10;
-	for (i = 0; sgrp->sg_adm && sgrp->sg_adm[i]; i++)
+	for (i = 0; (NULL != sgrp->sg_adm) && (NULL != sgrp->sg_adm[i]); i++) {
 		size += strlen (sgrp->sg_adm[i]) + 1;
-	for (i = 0; sgrp->sg_mem && sgrp->sg_mem[i]; i++)
+	}
+	for (i = 0; (NULL != sgrp->sg_mem) && (NULL != sgrp->sg_mem[i]); i++) {
 		size += strlen (sgrp->sg_mem[i]) + 1;
+	}
 
 	buf = malloc (size);
-	if (!buf)
+	if (NULL == buf) {
 		return -1;
+	}
 	cp = buf;
 
 	/*
@@ -427,9 +450,10 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	 * with a ",".
 	 */
 
-	for (i = 0; sgrp->sg_adm[i]; i++) {
-		if (i > 0)
+	for (i = 0; NULL != sgrp->sg_adm[i]; i++) {
+		if (i > 0) {
 			*cp++ = ',';
+		}
 
 		strcpy (cp, sgrp->sg_adm[i]);
 		cp += strlen (cp);
@@ -440,9 +464,10 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 	 * Now do likewise with the group members.
 	 */
 
-	for (i = 0; sgrp->sg_mem[i]; i++) {
-		if (i > 0)
+	for (i = 0; NULL != sgrp->sg_mem[i]; i++) {
+		if (i > 0) {
 			*cp++ = ',';
+		}
 
 		strcpy (cp, sgrp->sg_mem[i]);
 		cp += strlen (cp);
