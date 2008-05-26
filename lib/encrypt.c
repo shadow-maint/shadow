@@ -58,7 +58,7 @@ char *pw_encrypt (const char *clear, const char *salt)
 
 	/* The GNU crypt does not return NULL if the algorithm is not
 	 * supported, and return a DES encrypted password. */
-	if (salt && salt[0] == '$' && strlen (cp) <= 13)
+	if ((NULL != salt) && (salt[0] == '$') && (strlen (cp) <= 13))
 	{
 		const char *method;
 		switch (salt[1])
@@ -91,3 +91,4 @@ char *pw_encrypt (const char *clear, const char *salt)
 
 	return cipher;
 }
+
