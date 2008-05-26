@@ -47,33 +47,43 @@ struct sgrp *__sgr_dup (const struct sgrp *sgent)
 	struct sgrp *sg;
 	int i;
 
-	if (!(sg = (struct sgrp *) malloc (sizeof *sg)))
+	sg = (struct sgrp *) malloc (sizeof *sg);
+	if (NULL == sg) {
 		return NULL;
+	}
 	*sg = *sgent;
-	if (!(sg->sg_name = strdup (sgent->sg_name)))
+	sg->sg_name = strdup (sgent->sg_name);
+	if (NULL == sg->sg_name) {
 		return NULL;
-	if (!(sg->sg_passwd = strdup (sgent->sg_passwd)))
+	}
+	sg->sg_passwd = strdup (sgent->sg_passwd);
+	if (NULL == sg->sg_passwd) {
 		return NULL;
+	}
 
-	for (i = 0; sgent->sg_adm[i]; i++);
+	for (i = 0; NULL != sgent->sg_adm[i]; i++);
 	sg->sg_adm = (char **) malloc ((i + 1) * sizeof (char *));
-	if (!sg->sg_adm)
+	if (NULL == sg->sg_adm) {
 		return NULL;
-	for (i = 0; sgent->sg_adm[i]; i++) {
+	}
+	for (i = 0; NULL != sgent->sg_adm[i]; i++) {
 		sg->sg_adm[i] = strdup (sgent->sg_adm[i]);
-		if (!sg->sg_adm[i])
+		if (NULL == sg->sg_adm[i]) {
 			return NULL;
+		}
 	}
 	sg->sg_adm[i] = NULL;
 
-	for (i = 0; sgent->sg_mem[i]; i++);
+	for (i = 0; NULL != sgent->sg_mem[i]; i++);
 	sg->sg_mem = (char **) malloc ((i + 1) * sizeof (char *));
-	if (!sg->sg_mem)
+	if (NULL == sg->sg_mem) {
 		return NULL;
-	for (i = 0; sgent->sg_mem[i]; i++) {
+	}
+	for (i = 0; NULL != sgent->sg_mem[i]; i++) {
 		sg->sg_mem[i] = strdup (sgent->sg_mem[i]);
-		if (!sg->sg_mem[i])
+		if (NULL == sg->sg_mem[i]) {
 			return NULL;
+		}
 	}
 	sg->sg_mem[i] = NULL;
 
@@ -93,11 +103,11 @@ static void gshadow_free (void *ent)
 
 	free (sg->sg_name);
 	free (sg->sg_passwd);
-	while (*(sg->sg_adm)) {
+	while (NULL != *(sg->sg_adm)) {
 		free (*(sg->sg_adm));
 		sg->sg_adm++;
 	}
-	while (*(sg->sg_mem)) {
+	while (NULL != *(sg->sg_mem)) {
 		free (*(sg->sg_mem));
 		sg->sg_mem++;
 	}
@@ -145,10 +155,10 @@ static struct commonio_db gshadow_db = {
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
-	0,			/* changed */
-	0,			/* isopen */
-	0,			/* locked */
-	0			/* readonly */
+	false,			/* changed */
+	false,			/* isopen */
+	false,			/* locked */
+	false			/* readonly */
 };
 
 int sgr_name (const char *filename)
@@ -156,7 +166,7 @@ int sgr_name (const char *filename)
 	return commonio_setname (&gshadow_db, filename);
 }
 
-int sgr_file_present (void)
+bool sgr_file_present (void)
 {
 	return commonio_present (&gshadow_db);
 }
@@ -208,7 +218,7 @@ int sgr_unlock (void)
 
 void __sgr_set_changed (void)
 {
-	gshadow_db.changed = 1;
+	gshadow_db.changed = true;
 }
 
 struct commonio_entry *__sgr_get_head (void)
