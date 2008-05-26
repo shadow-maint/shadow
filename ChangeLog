@@ -1,5 +1,10 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadowio.h, lib/shadowio.c: spw_file_present returns a bool.
+	* lib/shadowio.h: Add protection against multiple inclusions.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/sgroupio.c: Avoid assignments in comparisons.
 	* lib/sgroupio.c: Add brackets.
 	* lib/sgroupio.c: Avoid implicit conversion of pointers / integers

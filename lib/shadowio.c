@@ -110,7 +110,7 @@ int spw_name (const char *filename)
 	return commonio_setname (&shadow_db, filename);
 }
 
-int spw_file_present (void)
+bool spw_file_present (void)
 {
 	return commonio_present (&shadow_db);
 }
