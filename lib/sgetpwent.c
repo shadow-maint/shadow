@@ -77,15 +77,18 @@ struct passwd *sgetpwent (const char *buf)
 	 * field.  The fields are converted into NUL terminated strings.
 	 */
 
-	for (cp = pwdbuf, i = 0; i < NFIELDS && cp; i++) {
+	for (cp = pwdbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
 		fields[i] = cp;
-		while (*cp && *cp != ':')
-			++cp;
+		while (('\0' != *cp) && (':' != *cp)) {
+			cp++;
+		}
 
-		if (*cp)
-			*cp++ = '\0';
-		else
-			cp = 0;
+		if ('\0' != *cp) {
+			*cp = '\0';
+			cp++;
+		} else {
+			cp = NULL;
+		}
 	}
 
 	/*
@@ -94,7 +97,7 @@ struct passwd *sgetpwent (const char *buf)
 	 */
 
 	if (i != NFIELDS || *fields[2] == '\0' || *fields[3] == '\0')
-		return 0;
+		return NULL;
 
 	/*
 	 * Each of the fields is converted the appropriate data type
@@ -106,12 +109,12 @@ struct passwd *sgetpwent (const char *buf)
 	pwent.pw_name = fields[0];
 	pwent.pw_passwd = fields[1];
 	if (fields[2][0] == '\0' ||
-	    ((pwent.pw_uid = strtol (fields[2], &ep, 10)) == 0 && *ep)) {
-		return 0;
+	    ((pwent.pw_uid = strtol (fields[2], &ep, 10)) == 0 && ('\0' != *ep))) {
+		return NULL;
 	}
 	if (fields[3][0] == '\0' ||
-	    ((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && *ep)) {
-		return 0;
+	    ((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && ('\0' != *ep))) {
+		return NULL;
 	}
 	pwent.pw_gecos = fields[4];
 	pwent.pw_dir = fields[5];
@@ -119,3 +122,4 @@ struct passwd *sgetpwent (const char *buf)
 
 	return &pwent;
 }
+

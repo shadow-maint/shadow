@@ -1,5 +1,13 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgetpwent.c: Avoid implicit conversion of pointers / chars to
+	booleans.
+	* lib/sgetpwent.c: Add brackets and parenthesis.
+	* lib/sgetpwent.c: Return NULL instead of 0.
+
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/getdate.y: abbrev is a bool.
 	* libmisc/getdate.y: Avoid implicit conversion of pointers / chars /
 	integers to booleans.
