@@ -1,5 +1,25 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.h: commonio_entry.changed, commonio_db.changed,
+	commonio_db.isopen, commonio_db.locked, and commonio_db.readonly
+	are no booleans.
+	* lib/commonio.h: Include defines.h to get the definition of bool.
+	* lib/commonio.h: commonio_present returns a bool
+	* lib/commonio.c: Implement above changes.
+	* lib/commonio.c: add argument names in prototypes.
+	* lib/commonio.c: name_is_nis returns a bool.
+	* lib/commonio.c: nscd_need_reload is a bool.
+	* lib/commonio.c: Improve types (use size_t / pid_t when needed
+	instead of int).
+	* lib/commonio.c: Avoid assignments in comparisons.
+	* lib/commonio.c: Add brackets and parenthesis.
+	* lib/commonio.c: Avoid implicit conversion of pointers / integers
+	to booleans
+	* lib/commonio.c: The return values of utime is not checked on
+	purpose.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/isexpired.c: ARGSUSED is no more needed (shadow is
 	always supported).
 	* libmisc/isexpired.c: Avoid implicit conversion of pointers to

@@ -37,6 +37,9 @@
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
 #endif
+
+#include "defines.h"
+
 /*
  * Linked list entry.
  */
@@ -44,7 +47,7 @@ struct commonio_entry {
 	char *line;
 	void *eptr;		/* struct passwd, struct spwd, ... */
 	struct commonio_entry *prev, *next;
-	unsigned int changed:1;
+	bool changed:1;
 };
 
 /*
@@ -127,14 +130,14 @@ struct commonio_db {
 	/*
 	 * Various flags.
 	 */
-	unsigned int changed:1;
-	unsigned int isopen:1;
-	unsigned int locked:1;
-	unsigned int readonly:1;
+	bool changed:1;
+	bool isopen:1;
+	bool locked:1;
+	bool readonly:1;
 };
 
 extern int commonio_setname (struct commonio_db *, const char *);
-extern int commonio_present (const struct commonio_db *);
+extern bool commonio_present (const struct commonio_db *db);
 extern int commonio_lock (struct commonio_db *);
 extern int commonio_lock_nowait (struct commonio_db *);
 extern int commonio_open (struct commonio_db *, int);
