@@ -72,7 +72,7 @@ struct utmp utent;
 
 #if defined(__linux__)		/* XXX */
 
-void checkutmp (int picky)
+void checkutmp (bool picky)
 {
 	char *line;
 	struct utmp *ut;
