@@ -53,26 +53,33 @@ void ttytype (const char *line)
 		return;
 	if ((typefile = getdef_str ("TTYTYPE_FILE")) == NULL)
 		return;
-	if (access (typefile, F_OK))
+	if (access (typefile, F_OK) != 0)
 		return;
 
-	if (!(fp = fopen (typefile, "r"))) {
+	fp = fopen (typefile, "r");
+	if (NULL == fp) {
 		perror (typefile);
 		return;
 	}
-	while (fgets (buf, sizeof buf, fp)) {
-		if (buf[0] == '#')
+	while (fgets (buf, sizeof buf, fp) == buf) {
+		if (buf[0] == '#') {
 			continue;
+		}
 
-		if ((cp = strchr (buf, '\n')))
+		cp = strchr (buf, '\n');
+		if (NULL != cp) {
 			*cp = '\0';
+		}
 
-		if (sscanf (buf, "%s %s", type, port) == 2 &&
-		    strcmp (line, port) == 0)
+		if ((sscanf (buf, "%s %s", type, port) == 2) &&
+		    (strcmp (line, port) == 0)) {
 			break;
+		}
 	}
-	if (!feof (fp) && !ferror (fp))
+	if ((feof (fp) == 0) && (ferror (fp) == 0)) {
 		addenv ("TERM", type);
+	}
 
-	fclose (fp);
+	(void) fclose (fp);
 }
+

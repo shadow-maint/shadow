@@ -1,5 +1,14 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/ttytype.c: Avoid implicit conversion of pointers /
+	integers to booleans.
+	* libmisc/ttytype.c: Avoid assignments in comparisons.
+	* libmisc/ttytype.c: Add brackets and parenthesis.
+	* libmisc/ttytype.c: The return values of fclose is not checked on
+	purpose.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/mail.c: Avoid implicit conversion of pointers to
 	booleans.
 	* libmisc/mail.c: Avoid assignments in comparisons.
