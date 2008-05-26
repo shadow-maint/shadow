@@ -1,5 +1,12 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgetgrent.c: implicit conversion of pointers / chars to
+	booleans.
+	* lib/sgetgrent.c: Avoid assignments in comparisons.
+	* lib/sgetgrent.c: Add brackets.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/encrypt.c: Avoid implicit conversion of pointers to
 	booleans.
 	* lib/encrypt.c: Add parenthesis.

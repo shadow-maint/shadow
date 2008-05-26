@@ -87,10 +87,12 @@ static char **list (char *s)
 		if (!s || s[0] == '\0')
 			break;
 		members[i++] = s;
-		while (*s && *s != ',')
+		while (('\0' != *s) && (',' != *s)) {
 			s++;
-		if (*s)
+		}
+		if ('\0' != *s) {
 			*s++ = '\0';
+		}
 	}
 	members[i] = (char *) 0;
 	return members;
@@ -120,22 +122,30 @@ struct group *sgetgrent (const char *buf)
 	}
 	strcpy (grpbuf, buf);
 
-	if ((cp = strrchr (grpbuf, '\n')))
+	cp = strrchr (grpbuf, '\n');
+	if (NULL != cp) {
 		*cp = '\0';
+	}
 
 	for (cp = grpbuf, i = 0; i < NFIELDS && cp; i++) {
 		grpfields[i] = cp;
-		if ((cp = strchr (cp, ':')))
-			*cp++ = 0;
+		cp = strchr (cp, ':');
+		if (NULL != cp) {
+			*cp = '\0';
+			cp++;
+		}
 	}
-	if (i < (NFIELDS - 1) || *grpfields[2] == '\0')
-		return 0;
+	if (i < (NFIELDS - 1) || *grpfields[2] == '\0') {
+		return (struct group *) 0;
+	}
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
 	grent.gr_gid = atoi (grpfields[2]);
 	grent.gr_mem = list (grpfields[3]);
-	if (!grent.gr_mem)
+	if (NULL == grent.gr_mem) {
 		return (struct group *) 0;	/* out of memory */
+	}
 
 	return &grent;
 }
+
