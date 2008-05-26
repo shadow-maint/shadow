@@ -31,8 +31,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* $Id$ */
+#ifndef _SGROUPIO_H
+#define _SGROUPIO_H
+
 extern int sgr_close (void);
-extern int sgr_file_present (void);
+extern bool sgr_file_present (void);
 extern const struct sgrp *sgr_locate (const char *);
 extern int sgr_lock (void);
 extern int sgr_name (const char *);
@@ -44,3 +48,4 @@ extern int sgr_unlock (void);
 extern int sgr_update (const struct sgrp *);
 extern int sgr_sort (void);
 
+#endif
