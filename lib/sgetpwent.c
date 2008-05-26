@@ -108,11 +108,11 @@ struct passwd *sgetpwent (const char *buf)
 
 	pwent.pw_name = fields[0];
 	pwent.pw_passwd = fields[1];
-	if (fields[2][0] == '\0' ||
+	if (
 	    ((pwent.pw_uid = strtol (fields[2], &ep, 10)) == 0 && ('\0' != *ep))) {
 		return NULL;
 	}
-	if (fields[3][0] == '\0' ||
+	if (
 	    ((pwent.pw_gid = strtol (fields[3], &ep, 10)) == 0 && ('\0' != *ep))) {
 		return NULL;
 	}

@@ -4,7 +4,8 @@
 	booleans.
 	* lib/sgetpwent.c: Add brackets and parenthesis.
 	* lib/sgetpwent.c: Return NULL instead of 0.
-
+	* lib/sgetpwent.c: Do not check twice if fields[2] and fields[3]
+	are not empty.
 
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
