@@ -38,7 +38,7 @@
 #include <selinux/selinux.h>
 #endif
 
-#include "defines.h"
+#include "defines.h" /* bool */
 
 /*
  * Linked list entry.
