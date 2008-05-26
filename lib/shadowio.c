@@ -99,10 +99,10 @@ static struct commonio_db shadow_db = {
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
-	0,			/* changed */
-	0,			/* isopen */
-	0,			/* locked */
-	0			/* readonly */
+	false,			/* changed */
+	false,			/* isopen */
+	false,			/* locked */
+	false			/* readonly */
 };
 
 int spw_name (const char *filename)
