@@ -119,10 +119,10 @@ static struct commonio_db group_db = {
 	NULL,			/* head */
 	NULL,			/* tail */
 	NULL,			/* cursor */
-	0,			/* changed */
-	0,			/* isopen */
-	0,			/* locked */
-	0			/* readonly */
+	false,			/* changed */
+	false,			/* isopen */
+	false,			/* locked */
+	false			/* readonly */
 };
 
 int gr_name (const char *filename)
@@ -189,7 +189,7 @@ int gr_unlock (void)
 
 void __gr_set_changed (void)
 {
-	group_db.changed = 1;
+	group_db.changed = true;
 }
 
 struct commonio_entry *__gr_get_head (void)
@@ -387,7 +387,7 @@ static int split_groups (unsigned int max_members)
 		}
 		new_gptr = (struct group *)new->eptr;
 		new->line = NULL;
-		new->changed = 1;
+		new->changed = true;
 
 		/* Enforce the maximum number of members on gptr */
 		gptr->gr_mem[max_members] = NULL;
