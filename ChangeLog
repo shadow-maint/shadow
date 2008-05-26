@@ -1,5 +1,13 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/isexpired.c: ARGSUSED is no more needed (shadow is
+	always supported).
+	* libmisc/isexpired.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/isexpired.c: Add brackets and parenthesis.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/sulog.c (sulog): The success argument is a bool.
 	* libmisc/sulog.c: The return values of fflush is not checked on
 	purpose.

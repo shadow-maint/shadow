@@ -2,6 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1997, Marek Michałkiewicz
  * Copyright (c) 2001 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2008       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,14 +52,15 @@
  *	isexpired calculates the expiration date based on the
  *	password expiration criteria.
  */
- /*ARGSUSED*/ int isexpired (const struct passwd *pw, const struct spwd *sp)
+int isexpired (const struct passwd *pw, const struct spwd *sp)
 {
 	long now;
 
 	now = time ((time_t *) 0) / SCALE;
 
-	if (!sp)
+	if (NULL == sp) {
 		sp = pwd_to_spwd (pw);
+	}
 
 	/*
 	 * Quick and easy - there is an expired account field
@@ -77,11 +79,13 @@
 	 * if /etc/shadow doesn't exist, getspnam() still succeeds and
 	 * returns sp_lstchg==0 (must change password) instead of -1!
 	 */
-	if (sp->sp_lstchg == 0 && !strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING))
+	if ((sp->sp_lstchg == 0) &&
+	    (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
 		return 1;
+	}
 
 	if (sp->sp_lstchg > 0 && sp->sp_max >= 0 && sp->sp_inact >= 0 &&
-	    now >= sp->sp_lstchg + sp->sp_max + sp->sp_inact)
+	    now >= (sp->sp_lstchg + sp->sp_max + sp->sp_inact))
 		return 2;
 
 	/*
@@ -100,7 +104,8 @@
 	 * the password has expired.
 	 */
 
-	if (now >= sp->sp_lstchg + sp->sp_max)
+	if (now >= (sp->sp_lstchg + sp->sp_max))
 		return 1;
 	return 0;
 }
+
