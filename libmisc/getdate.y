@@ -395,7 +395,7 @@ relunit	: tUNUMBER tYEAR_UNIT {
 
 number	: tUNUMBER
           {
-	    if (yyHaveTime && yyHaveDate && !yyHaveRel)
+	    if ((yyHaveTime != 0) && (yyHaveDate != 0) && (yyHaveRel == 0))
 	      yyYear = $1;
 	    else
 	      {
@@ -647,10 +647,10 @@ static int LookupWord (char *buff)
   register char *q;
   register const TABLE *tp;
   int i;
-  int abbrev;
+  bool abbrev;
 
   /* Make it lowercase. */
-  for (p = buff; *p; p++)
+  for (p = buff; '\0' != *p; p++)
     if (ISUPPER (*p))
       *p = tolower (*p);
 
@@ -667,14 +667,14 @@ static int LookupWord (char *buff)
 
   /* See if we have an abbreviation for a month. */
   if (strlen (buff) == 3)
-    abbrev = 1;
+    abbrev = true;
   else if (strlen (buff) == 4 && buff[3] == '.')
     {
-      abbrev = 1;
+      abbrev = true;
       buff[3] = '\0';
     }
   else
-    abbrev = 0;
+    abbrev = false;
 
   for (tp = MonthDayTable; tp->name; tp++)
     {
@@ -743,14 +743,14 @@ static int LookupWord (char *buff)
     }
 
   /* Drop out any periods and try the timezone table again. */
-  for (i = 0, p = q = buff; *q; q++)
+  for (i = 0, p = q = buff; '\0' != *q; q++)
     if (*q != '.')
       *p++ = *q;
     else
       i++;
   *p = '\0';
-  if (i)
-    for (tp = TimezoneTable; tp->name; tp++)
+  if (0 != i)
+    for (tp = TimezoneTable; NULL != tp->name; tp++)
       if (strcmp (buff, tp->name) == 0)
 	{
 	  yylval.Number = tp->value;
@@ -790,7 +790,7 @@ yylex (void)
 	  yyInput--;
 	  if (sign < 0)
 	    yylval.Number = -yylval.Number;
-	  return sign ? tSNUMBER : tUNUMBER;
+	  return (0 != sign) ? tSNUMBER : tUNUMBER;
 	}
       if (ISALPHA (c))
 	{
@@ -874,7 +874,8 @@ time_t get_date (const char *p, const time_t *now)
   tm.tm_year = ToYear (yyYear) - TM_YEAR_ORIGIN + yyRelYear;
   tm.tm_mon = yyMonth - 1 + yyRelMonth;
   tm.tm_mday = yyDay + yyRelDay;
-  if (yyHaveTime || (yyHaveRel && !yyHaveDate && !yyHaveDay))
+  if ((yyHaveTime != 0) ||
+      ( (yyHaveRel != 0) && (yyHaveDate == 0) && (yyHaveDay == 0) ))
     {
       tm.tm_hour = ToHour (yyHour, yyMeridian);
       if (tm.tm_hour < 0)
