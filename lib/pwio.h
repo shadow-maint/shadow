@@ -31,6 +31,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* $Id$ */
+#ifndef _PWIO_H
+#define _PWIO_H
+
 #include <pwd.h>
 extern int pw_close (void);
 extern const struct passwd *pw_locate (const char *);
@@ -45,3 +49,4 @@ extern int pw_unlock (void);
 extern int pw_update (const struct passwd *);
 extern int pw_sort (void);
 
+#endif

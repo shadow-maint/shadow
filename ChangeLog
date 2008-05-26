@@ -1,5 +1,11 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/pwio.h: Add protection against multiple inclusions.
+	* lib/pwio.c: The changed, isopen, locked, and readonly fields
+	of the db are booleans.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadowio.h, lib/shadowio.c: spw_file_present returns a bool.
 	* lib/shadowio.h: Add protection against multiple inclusions.
 
