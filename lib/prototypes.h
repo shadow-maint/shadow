@@ -120,7 +120,7 @@ extern void __gr_set_changed (void);
 extern struct group *__gr_dup (const struct group *grent);
 
 /* hushed.c */
-extern int hushed (const struct passwd *);
+extern bool hushed (const struct passwd *pw);
 
 /* audit_help.c */
 #ifdef WITH_AUDIT
@@ -165,7 +165,7 @@ extern struct passwd *get_my_pwent (void);
 extern int obscure (const char *, const char *, const struct passwd *);
 
 /* pam_pass.c */
-extern void do_pam_passwd (const char *, int, int);
+extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 
 /* port.c */
 extern int isttytime (const char *, const char *, time_t);
@@ -194,9 +194,9 @@ extern int do_rlogin (const char *, char *, int, char *, int);
 extern char *crypt_make_salt (const char *meth, void *arg);
 
 /* setugid.c */
-extern int setup_groups (const struct passwd *);
-extern int change_uid (const struct passwd *);
-extern int setup_uid_gid (const struct passwd *, int);
+extern int setup_groups (const struct passwd *info);
+extern int change_uid (const struct passwd *info);
+extern int setup_uid_gid (const struct passwd *info, bool is_console);
 
 /* setup.c */
 extern void setup (struct passwd *);
@@ -233,7 +233,10 @@ extern long strtoday (const char *);
 extern int check_su_auth (const char *actual_id, const char *wanted_id);
 
 /* sulog.c */
-extern void sulog (const char *, int, const char *, const char *);
+extern void sulog (const char *tty,
+                   bool success,
+                   const char *oldname,
+                   const char *name);
 
 /* sub.c */
 extern void subsystem (const struct passwd *);
@@ -248,7 +251,7 @@ extern char *tz (const char *);
 extern void set_filesize_limit (int);
 
 /* utmp.c */
-extern void checkutmp (int);
+extern void checkutmp (bool picky);
 extern void setutmp (const char *, const char *, const char *);
 
 /* valid.c */
@@ -270,6 +273,6 @@ extern struct group *xgetgrgid (gid_t);
 extern struct spwd *xgetspnam(const char *);
 
 /* yesno.c */
-extern int yes_or_no (int read_only);
+extern bool yes_or_no (bool read_only);
 
 #endif				/* _PROTOTYPES_H */

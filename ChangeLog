@@ -1,5 +1,11 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Fix prototypes according to earlier changes
+	(usage of the bool type).
+	* lib/prototypes.h: Add the arguments' name to the prototypes.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.h: Add protection against multiple inclusions.
 
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
