@@ -2,6 +2,7 @@
  * Copyright (c) 1989 - 1992, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2008       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,10 +41,11 @@
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
+
 /*
  * sulog - log a SU command execution result
  */
-void sulog (const char *tty, int success, const char *oldname, const char *name)
+void sulog (const char *tty, bool success, const char *oldname, const char *name)
 {
 	char *sulog_file;
 	time_t now;
@@ -93,6 +95,8 @@ void sulog (const char *tty, int success, const char *oldname, const char *name)
 		 tm->tm_mon + 1, tm->tm_mday, tm->tm_hour, tm->tm_min,
 		 success ? '+' : '-', tty, oldname, name);
 
-	fflush (fp);
+	(void) fflush (fp);
 	fclose (fp);
+	/* TODO: log if failure */
 }
+
