@@ -31,7 +31,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/* $Id$ */
+#ifndef _GROUPIO_H
+#define _GROUPIO_H
+
 #include <grp.h>
+
 extern int gr_close (void);
 extern const struct group *gr_locate (const char *);
 extern const struct group *gr_locate_gid (gid_t gid);
@@ -45,3 +50,4 @@ extern int gr_unlock (void);
 extern int gr_update (const struct group *);
 extern int gr_sort (void);
 
+#endif

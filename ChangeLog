@@ -1,5 +1,9 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.h: Add protection against multiple inclusions.
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/pwio.h: Add protection against multiple inclusions.
 	* lib/pwio.c: The changed, isopen, locked, and readonly fields
 	of the db are booleans.
