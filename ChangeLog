@@ -1,5 +1,14 @@
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/port.c: Avoid implicit conversion of pointers / integers /
+	chars to booleans.
+	* lib/port.c: Avoid multiple statement on the same line.
+	* lib/port.c: Add brackets and parenthesis.
+	* lib/port.c: Avoid assignments in comparisons.
+	* lib/port.c: Fix typo comparision -> comparison (in comment).
+
+2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/fputsx.c: Add brackets.
 	* lib/fputsx.c: Avoid assignments in comparisons.
 	* lib/fputsx.c: Avoid implicit conversion of pointers / integers /

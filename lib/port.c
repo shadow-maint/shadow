@@ -57,15 +57,19 @@ static int portcmp (const char *pattern, const char *port)
 {
 	const char *orig = port;
 
-	while (*pattern && *pattern == *port)
-		pattern++, port++;
+	while (('\0' != *pattern) && (*pattern == *port)) {
+		pattern++;
+		port++;
+	}
 
-	if (*pattern == 0 && *port == 0)
+	if (('\0' == *pattern) && ('\0' == *port)) {
 		return 0;
-	if (orig[0] == 'S' && orig[1] == 'U' && orig[2] == '\0')
+	}
+	if ((orig[0] == 'S') && (orig[1] == 'U') && (orig[2] == '\0')) {
 		return 1;
+	}
 
-	return *pattern == '*' ? 0 : 1;
+	return (*pattern == '*') ? 0 : 1;
 }
 
 /*
@@ -77,10 +81,11 @@ static int portcmp (const char *pattern, const char *port)
 
 static void setportent (void)
 {
-	if (ports)
+	if (NULL != ports) {
 		rewind (ports);
-	else
+	} else {
 		ports = fopen (PORTS, "r");
+	}
 }
 
 /*
@@ -93,8 +98,9 @@ static void setportent (void)
 
 static void endportent (void)
 {
-	if (ports)
+	if (NULL != ports) {
 		fclose (ports);
+	}
 
 	ports = (FILE *) 0;
 }
@@ -125,10 +131,11 @@ static struct port *getportent (void)
 	 * since we want to search from the beginning each time.
 	 */
 
-	if (!ports)
+	if (NULL == ports) {
 		setportent ();
+	}
 
-	if (!ports) {
+	if (NULL == ports) {
 		errno = saveerr;
 		return 0;
 	}
@@ -154,8 +161,9 @@ static struct port *getportent (void)
 		errno = saveerr;
 		return 0;
 	}
-	if (buf[0] == '#')
+	if (buf[0] == '#') {
 		goto again;
+	}
 
 	/*
 	 * Get the name of the TTY device.  It is the first colon
@@ -169,11 +177,13 @@ static struct port *getportent (void)
 	port.pt_names = ttys;
 	for (cp = buf, j = 0; j < PORT_TTY; j++) {
 		port.pt_names[j] = cp;
-		while (*cp && *cp != ':' && *cp != ',')
+		while (('\0' != *cp) && (*cp != ':') && (*cp != ',')) {
 			cp++;
+		}
 
-		if (!*cp)
+		if ('\0' == *cp) {
 			goto again;	/* line format error */
+		}
 
 		if (*cp == ':')	/* end of tty name list */
 			break;
@@ -234,7 +244,7 @@ static struct port *getportent (void)
 	 * Get the next comma separated entry
 	 */
 
-	for (j = 0; *cp && j < PORT_TIMES; j++) {
+	for (j = 0; ('\0' != *cp) && (j < PORT_TIMES); j++) {
 
 		/*
 		 * Start off with no days of the week
@@ -248,7 +258,9 @@ static struct port *getportent (void)
 		 * week or the other two values.
 		 */
 
-		for (i = 0; cp[i] && cp[i + 1] && isalpha (cp[i]); i += 2) {
+		for (i = 0;
+		     ('\0' != cp[i]) && ('\0' != cp[i + 1]) && isalpha (cp[i]);
+		     i += 2) {
 			switch ((cp[i] << 8) | (cp[i + 1])) {
 			case ('S' << 8) | 'u':
 				port.pt_times[j].t_days |= 01;
@@ -296,19 +308,25 @@ static struct port *getportent (void)
 		 * representing the times of day.
 		 */
 
-		for (dtime = 0; cp[i] && isdigit (cp[i]); i++)
+		for (dtime = 0; ('\0' != cp[i]) && isdigit (cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
+		}
 
-		if (cp[i] != '-' || dtime > 2400 || dtime % 100 > 59)
+		if (cp[i] != '-' || dtime > 2400 || dtime % 100 > 59) {
 			goto again;
+		}
 		port.pt_times[j].t_start = dtime;
 		cp = cp + i + 1;
 
-		for (dtime = i = 0; cp[i] && isdigit (cp[i]); i++)
+		for (dtime = i = 0; ('\0' != cp[i]) && isdigit (cp[i]); i++) {
 			dtime = dtime * 10 + cp[i] - '0';
+		}
 
-		if ((cp[i] != ',' && cp[i]) || dtime > 2400 || dtime % 100 > 59)
+		if (((cp[i] != ',') && (cp[i] != '\0')) ||
+		    (dtime > 2400) ||
+		    ((dtime % 100) > 59)) {
 			goto again;
+		}
 
 		port.pt_times[j].t_end = dtime;
 		cp = cp + i + 1;
@@ -340,24 +358,29 @@ static struct port *getttyuser (const char *tty, const char *user)
 
 	setportent ();
 
-	while ((port = getportent ())) {
+	while ((port = getportent ()) != NULL) {
 		if (port->pt_names == 0 || port->pt_users == 0)
 			continue;
 
-		for (i = 0; port->pt_names[i]; i++)
-			if (portcmp (port->pt_names[i], tty) == 0)
+		for (i = 0; NULL != port->pt_names[i]; i++) {
+			if (portcmp (port->pt_names[i], tty) == 0) {
 				break;
+			}
+		}
 
 		if (port->pt_names[i] == 0)
 			continue;
 
-		for (j = 0; port->pt_users[j]; j++)
+		for (j = 0; NULL != port->pt_users[j]; j++) {
 			if (strcmp (user, port->pt_users[j]) == 0 ||
-			    strcmp (port->pt_users[j], "*") == 0)
+			    strcmp (port->pt_users[j], "*") == 0) {
 				break;
+			}
+		}
 
-		if (port->pt_users[j] != 0)
+		if (port->pt_users[j] != 0) {
 			break;
+		}
 	}
 	endportent ();
 	return port;
@@ -383,20 +406,23 @@ int isttytime (const char *id, const char *port, time_t when)
 	 * entry to match all users.
 	 */
 
-	if (!(pp = getttyuser (port, id)))
+	pp = getttyuser (port, id);
+	if (NULL == pp) {
 		return 1;
+	}
 
 	/*
 	 * The entry is there, but has no time entries - don't
 	 * ever let them login.
 	 */
 
-	if (pp->pt_times == 0)
+	if (pp->pt_times == 0) {
 		return 0;
+	}
 
 	/*
 	 * The current time is converted to HHMM format for
-	 * comparision against the time values in the TTY entry.
+	 * comparison against the time values in the TTY entry.
 	 */
 
 	tm = localtime (&when);
@@ -405,7 +431,7 @@ int isttytime (const char *id, const char *port, time_t when)
 	/*
 	 * Each time entry is compared against the current
 	 * time.  For entries with the start after the end time,
-	 * the comparision is made so that the time is between
+	 * the comparison is made so that the time is between
 	 * midnight and either the start or end time.
 	 */
 
@@ -431,3 +457,4 @@ int isttytime (const char *id, const char *port, time_t when)
 
 	return 0;
 }
+
