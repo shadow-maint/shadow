@@ -127,7 +127,7 @@ struct group *sgetgrent (const char *buf)
 		*cp = '\0';
 	}
 
-	for (cp = grpbuf, i = 0; i < NFIELDS && cp; i++) {
+	for (cp = grpbuf, i = 0; (i < NFIELDS) && (NULL != cp); i++) {
 		grpfields[i] = cp;
 		cp = strchr (cp, ':');
 		if (NULL != cp) {
