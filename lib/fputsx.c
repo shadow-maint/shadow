@@ -46,16 +46,22 @@ char *fgetsx (char *buf, int cnt, FILE * f)
 
 	while (cnt > 0) {
 		if (fgets (cp, cnt, f) == 0) {
-			if (cp == buf)
+			if (cp == buf) {
 				return 0;
-			else
+			} else {
 				break;
+			}
 		}
-		if ((ep = strrchr (cp, '\\')) && *(ep + 1) == '\n') {
-			if ((cnt -= ep - cp) > 0)
-				*(cp = ep) = '\0';
-		} else
+		ep = strrchr (cp, '\\');
+		if ((NULL != ep) && (*(ep + 1) == '\n')) {
+			cnt -= ep - cp;
+			if (cnt > 0) {
+				cp = ep;
+				*cp = '\0';
+			}
+		} else {
 			break;
+		}
 	}
 	return buf;
 }
@@ -64,9 +70,10 @@ int fputsx (const char *s, FILE * stream)
 {
 	int i;
 
-	for (i = 0; *s; i++, s++) {
-		if (putc (*s, stream) == EOF)
+	for (i = 0; '\0' != *s; i++, s++) {
+		if (putc (*s, stream) == EOF) {
 			return EOF;
+		}
 
 #if 0				/* The standard getgr*() can't handle that.  --marekm */
 		if (i > (BUFSIZ / 2)) {
@@ -80,3 +87,4 @@ int fputsx (const char *s, FILE * stream)
 	}
 	return 0;
 }
+
