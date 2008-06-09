@@ -58,7 +58,7 @@ static char *Prog;
 static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP
-static int is_shadow_grp;
+static bool is_shadow_grp;
 #endif
 
 /*
@@ -114,7 +114,7 @@ static void fail_exit (int code)
  */
 static void grp_update (void)
 {
-	if (!gr_remove (group_name)) {
+	if (gr_remove (group_name) == 0) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -123,7 +123,7 @@ static void grp_update (void)
 	 * Delete the shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
-		if (!sgr_remove (group_name)) {
+		if (sgr_remove (group_name) == 0) {
 			fprintf (stderr,
 			         _("%s: error removing shadow group entry\n"),
 			         Prog);
@@ -148,13 +148,13 @@ static void close_files (void)
 #endif
 	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
 
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_close ()) {
+	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -171,21 +171,21 @@ static void close_files (void)
  */
 static void open_files (void)
 {
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (!gr_open (O_RDWR)) {
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
+	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
 			 _("%s: unable to lock shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
+	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr,
 			 _("%s: unable to open shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -210,7 +210,7 @@ static void group_busy (gid_t gid)
 
 	setpwent ();
 
-	while ((pwd = getpwent ()) && pwd->pw_gid != gid);
+	while ( ((pwd = getpwent ()) != NULL) && (pwd->pw_gid != gid) );
 
 	endpwent ();
 
@@ -255,9 +255,9 @@ int main (int argc, char **argv)
 
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	if (argc != 2)
 		usage ();
@@ -276,27 +276,27 @@ int main (int argc, char **argv)
 			retval = PAM_USER_UNKNOWN;
 		}
 
-		if (retval == PAM_SUCCESS) {
+		if (PAM_SUCCESS == retval) {
 			retval = pam_start ("groupdel", pampw->pw_name,
 					    &conv, &pamh);
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -311,8 +311,8 @@ int main (int argc, char **argv)
 		/*
 		 * Start with a quick check to see if the group exists.
 		 */
-		/* local, no need for xgetgrnam */
-		if (!(grp = getgrnam (group_name))) {
+		grp = getgrnam (group_name); /* local, no need for xgetgrnam */
+		if (NULL == grp) {
 			fprintf (stderr, _("%s: group %s does not exist\n"),
 				 Prog, group_name);
 #ifdef WITH_AUDIT
@@ -369,8 +369,9 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	if (PAM_SUCCESS == retval) {
+		(void) pam_end (pamh, PAM_SUCCESS);
+	}
 #endif				/* USE_PAM */
 
 	return E_SUCCESS;

@@ -1,5 +1,17 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupdel.c: Use a bool when possible instead of int
+	integers.
+	* src/groupdel.c: Avoid implicit conversion of pointers / integers to
+	booleans.
+	* src/groupdel.c: Avoid assignments in comparisons.
+	* src/groupdel.c: Ignore the return value of pam_end() before
+	exiting.
+	* src/groupdel.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/expiry.c: Ignore return value of setlocale(),
 	bindtextdomain(), and textdomain().
 	* src/expiry.c: Add brackets and parenthesis.
