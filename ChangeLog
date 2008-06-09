@@ -1,5 +1,16 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login_nopam.c: Do not use the YES and NO macros. Use the
+	booleans true and false instead. Change the prototypes of
+	list_match(), user_match(), from_match(), and string_match()
+	accordingly. Also use booleans internally.
+	* src/login_nopam.c: Add brackets and parenthesis.
+	* src/login_nopam.c: Avoid implicit conversion of pointers /
+	integers / chars to booleans.
+	* src/login_nopam.c: Avoid assignments in comparisons.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Use a bool for is_newgrp, notfound, needspasswd,
 	initflag, and cflag.
 	* src/newgrp.c: Add brackets and parenthesis.
