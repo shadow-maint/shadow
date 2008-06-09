@@ -1,5 +1,11 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_ids.c: Change find_new_uid() and find_new_gid()
+	prototypes to use a bool for their first argument (sys_user /
+	sys_group).
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/console.c: Change is_listed() prototype to return a bool.
 	The default parameter should also be a bool.
 	* libmisc/console.c: Add brackets and parenthesis.

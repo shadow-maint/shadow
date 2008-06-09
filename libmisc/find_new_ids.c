@@ -48,14 +48,14 @@
  * 
  * Return 0 on success, -1 if no unused UIDs are available.
  */
-int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid)
+int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 {
 	const struct passwd *pwd;
 	uid_t uid_min, uid_max, user_id;
 
 	assert (uid != NULL);
 
-	if (sys_user == 0) {
+	if (!sys_user) {
 		uid_min = getdef_unum ("UID_MIN", 1000);
 		uid_max = getdef_unum ("UID_MAX", 60000);
 	} else {
@@ -131,14 +131,14 @@ int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid)
  * 
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_gid (int sys_group, gid_t *gid, gid_t const *preferred_gid)
+int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max, group_id;
 
 	assert (gid != NULL);
 
-	if (sys_group == 0) {
+	if (!sys_group) {
 		gid_min = getdef_unum ("GID_MIN", 1000);
 		gid_max = getdef_unum ("GID_MAX", 60000);
 	} else {
