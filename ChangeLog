@@ -1,5 +1,10 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Use a bool when possible instead of int integers.
 	* src/useradd.c: Avoid implicit conversion of pointers / integers
 	/ chars to booleans.
