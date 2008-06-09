@@ -83,18 +83,20 @@
 /*
  * Global variables
  */
-static int
- shadow_locked = 0, passwd_locked = 0;
+static bool shadow_locked = false;
+static bool passwd_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int);
 
 static void fail_exit (int status)
 {
-	if (shadow_locked)
+	if (shadow_locked) {
 		spw_unlock ();
-	if (passwd_locked)
+	}
+	if (passwd_locked) {
 		pw_unlock ();
+	}
 	exit (status);
 }
 
@@ -106,26 +108,26 @@ int main (int argc, char **argv)
 	struct spwd spent;
 	char *Prog = argv[0];
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock passwd file\n"), Prog);
 		fail_exit (E_PWDBUSY);
 	}
-	passwd_locked++;
-	if (!pw_open (O_RDWR)) {
+	passwd_locked = true;
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open passwd file\n"), Prog);
 		fail_exit (E_MISSING);
 	}
 
-	if (!spw_lock ()) {
+	if (spw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock shadow file\n"), Prog);
 		fail_exit (E_PWDBUSY);
 	}
-	shadow_locked++;
-	if (!spw_open (O_CREAT | O_RDWR)) {
+	shadow_locked = true;
+	if (spw_open (O_CREAT | O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		fail_exit (E_FAILURE);
 	}
@@ -134,11 +136,12 @@ int main (int argc, char **argv)
 	 * Remove /etc/shadow entries for users not in /etc/passwd.
 	 */
 	spw_rewind ();
-	while ((sp = spw_next ())) {
-		if (pw_locate (sp->sp_namp))
+	while ((sp = spw_next ()) != NULL) {
+		if (pw_locate (sp->sp_namp) != NULL) {
 			continue;
+		}
 
-		if (!spw_remove (sp->sp_namp)) {
+		if (spw_remove (sp->sp_namp) == 0) {
 			/*
 			 * This shouldn't happen (the entry exists) but...
 			 */
@@ -155,12 +158,13 @@ int main (int argc, char **argv)
 	 * missing shadow entries.
 	 */
 	pw_rewind ();
-	while ((pw = pw_next ())) {
+	while ((pw = pw_next ()) != NULL) {
 		sp = spw_locate (pw->pw_name);
-		if (sp) {
+		if (NULL != sp) {
 			/* do we need to update this entry? */
-			if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)
+			if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 				continue;
+			}
 			/* update existing shadow entry */
 			spent = *sp;
 		} else {
@@ -176,7 +180,7 @@ int main (int argc, char **argv)
 		}
 		spent.sp_pwdp = pw->pw_passwd;
 		spent.sp_lstchg = time ((time_t *) 0) / (24L * 3600L);
-		if (!spw_update (&spent)) {
+		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
 				 _
 				 ("%s: can't update shadow entry for %s\n"),
@@ -187,7 +191,7 @@ int main (int argc, char **argv)
 		/* remove password from /etc/passwd */
 		pwent = *pw;
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
-		if (!pw_update (&pwent)) {
+		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 				 _
 				 ("%s: can't update passwd entry for %s\n"),
@@ -196,11 +200,11 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (!spw_close ()) {
+	if (spw_close () == 0) {
 		fprintf (stderr, _("%s: can't update shadow file\n"), Prog);
 		fail_exit (E_FAILURE);
 	}
-	if (!pw_close ()) {
+	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: can't update passwd file\n"), Prog);
 		fail_exit (E_FAILURE);
 	}
@@ -212,3 +216,4 @@ int main (int argc, char **argv)
 
 	exit (E_SUCCESS);
 }
+
