@@ -66,37 +66,37 @@
  */
 static char *Prog;
 static const char *grp_file = GROUP_FILE;
-static int use_system_grp_file = 1;
+static bool use_system_grp_file = true;
 
 #ifdef	SHADOWGRP
 static const char *sgr_file = SGROUP_FILE;
-static int use_system_sgr_file = 1;
-static int is_shadow = 0;
+static bool use_system_sgr_file = true;
+static bool is_shadow = false;
 #endif
 /* Options */
-static int read_only = 0;
-static int sort_mode = 0;
+static bool read_only = false;
+static bool sort_mode = false;
 
 /* local function prototypes */
 static void usage (void);
 static void delete_member (char **, const char *);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
-static void close_files (int changed);
+static void close_files (bool changed);
 static int check_members (const char *groupname,
                           char **members,
                           const char *fmt_info,
                           const char *fmt_prompt,
                           const char *fmt_syslog,
                           int *errors);
-static void check_grp_file (int *errors, int *changed);
+static void check_grp_file (int *errors, bool *changed);
 #ifdef SHADOWGRP
 static void compare_members_lists (const char *groupname,
                                    char **members,
                                    char **other_members,
                                    const char *file,
                                    const char *other_file);
-static void check_sgr_file (int *errors, int *changed);
+static void check_sgr_file (int *errors, bool *changed);
 #endif
 
 /*
@@ -150,10 +150,10 @@ static void process_flags (int argc, char **argv)
 			/* quiet - ignored for now */
 			break;
 		case 'r':
-			read_only = 1;
+			read_only = true;
 			break;
 		case 's':
-			sort_mode = 1;
+			sort_mode = true;
 			break;
 		default:
 			usage ();
@@ -184,14 +184,14 @@ static void process_flags (int argc, char **argv)
 	if (optind != argc) {
 		grp_file = argv[optind];
 		gr_name (grp_file);
-		use_system_grp_file = 0;
+		use_system_grp_file = false;
 	}
 #ifdef	SHADOWGRP
 	if ((optind + 2) == argc) {
 		sgr_file = argv[optind + 1];
 		sgr_name (sgr_file);
-		is_shadow = 1;
-		use_system_sgr_file = 0;
+		is_shadow = true;
+		use_system_sgr_file = false;
 	} else if (optind == argc) {
 		is_shadow = sgr_file_present ();
 	}
@@ -265,7 +265,7 @@ static void open_files (void)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (int changed)
+static void close_files (bool changed)
 {
 	/*
 	 * All done. If there were no change we can just abandon any
@@ -391,7 +391,7 @@ static void compare_members_lists (const char *groupname,
 /*
  * check_grp_file - check the content of the group file
  */
-static void check_grp_file (int *errors, int *changed)
+static void check_grp_file (int *errors, bool *changed)
 {
 	struct commonio_entry *gre, *tgre;
 	struct group *grp;
@@ -442,7 +442,7 @@ static void check_grp_file (int *errors, int *changed)
 		      delete_gr:
 			SYSLOG ((LOG_INFO, "delete group line `%s'",
 			         gre->line));
-			*changed = 1;
+			*changed = true;
 
 			__gr_del_entry (gre);
 			continue;
@@ -518,8 +518,8 @@ static void check_grp_file (int *errors, int *changed)
 		                   _("delete member '%s'? "),
 		                   "delete member `%s' from group `%s'",
 		                   errors) == 1) {
-			*changed = 1;
-			gre->changed = 1;
+			*changed = true;
+			gre->changed = true;
 			__gr_set_changed ();
 		}
 
@@ -549,7 +549,7 @@ static void check_grp_file (int *errors, int *changed)
 					SYSLOG ((LOG_INFO,
 					         "add group `%s' to `%s'",
 					         grp->gr_name, sgr_file));
-					*changed = 1;
+					*changed = true;
 
 					if (sgr_update (&sg) == 0) {
 						fprintf (stderr,
@@ -588,7 +588,7 @@ static void check_grp_file (int *errors, int *changed)
 /*
  * check_sgr_file - check the content of the shadowed group file (gshadow)
  */
-static void check_sgr_file (int *errors, int *changed)
+static void check_sgr_file (int *errors, bool *changed)
 {
 	struct group *grp;
 	struct commonio_entry *sge, *tsge;
@@ -630,7 +630,7 @@ static void check_sgr_file (int *errors, int *changed)
 		      delete_sg:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 			         sge->line));
-			*changed = 1;
+			*changed = true;
 
 			__sgr_del_entry (sge);
 			continue;
@@ -712,8 +712,8 @@ static void check_sgr_file (int *errors, int *changed)
 		                   _("delete administrative member '%s'? "),
 		                   "delete admin `%s' from shadow group `%s'",
 		                   errors) == 1) {
-			*changed = 1;
-			sge->changed = 1;
+			*changed = true;
+			sge->changed = true;
 			__sgr_set_changed ();
 		}
 
@@ -725,8 +725,8 @@ static void check_sgr_file (int *errors, int *changed)
 		                   _("delete member '%s'? "),
 		                   "delete member `%s' from shadow group `%s'",
 		                   errors) == 1) {
-			*changed = 1;
-			sge->changed = 1;
+			*changed = true;
+			sge->changed = true;
 			__sgr_set_changed ();
 		}
 	}
@@ -739,16 +739,16 @@ static void check_sgr_file (int *errors, int *changed)
 int main (int argc, char **argv)
 {
 	int errors = 0;
-	int changed = 0;
+	bool changed = false;
 
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	OPENLOG ("grpck");
 
@@ -763,7 +763,7 @@ int main (int argc, char **argv)
 		if (is_shadow) {
 			sgr_sort ();
 		}
-		changed = 1;
+		changed = true;
 #endif
 	} else {
 		check_grp_file (&errors, &changed);
@@ -782,12 +782,12 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors != 0) {
+	if (0 != errors) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
 	}
 
-	exit (errors ? E_BAD_ENTRY : E_OKAY);
+	exit ((0 != errors) ? E_BAD_ENTRY : E_OKAY);
 }
 
