@@ -1,5 +1,17 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Use a bool for is_newgrp, notfound, needspasswd,
+	initflag, and cflag.
+	* src/newgrp.c: Add brackets and parenthesis.
+	* src/newgrp.c: Avoid implicit conversion of pointers / integers /
+	chars to booleans.
+	* src/newgrp.c: Avoid multi-statements lines.
+	* src/newgrp.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/newgrp.c: Avoid assignments in comparisons.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/list.c: Change is_on_list() prototype to return a bool.
 
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>

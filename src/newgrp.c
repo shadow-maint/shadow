@@ -54,7 +54,7 @@ static GETGROUPS_T *grouplist;
 #endif
 
 static char *Prog;
-static int is_newgrp;
+static bool is_newgrp;
 
 #ifdef WITH_AUDIT
 char audit_buf[80];
@@ -72,10 +72,11 @@ static void syslog_sg (const char *name, const char *group);
  */
 static void usage (void)
 {
-	if (is_newgrp)
+	if (is_newgrp) {
 		fputs (_("Usage: newgrp [-] [group]\n"), stderr);
-	else
+	} else {
 		fputs (_("Usage: sg group [[-c] command]\n"), stderr);
+	}
 }
 
 /*
@@ -86,7 +87,7 @@ static struct group *find_matching_group (const char *name, gid_t gid)
 {
 	struct group *gr;
 	char **look;
-	int notfound = 1;
+	bool notfound = true;
 
 	setgrent ();
 	while ((gr = getgrent ()) != NULL) {
@@ -99,9 +100,13 @@ static struct group *find_matching_group (const char *name, gid_t gid)
 		 * Test for membership of 'name'.
 		 */
 		look = gr->gr_mem;
-		while (*look && (notfound = strcmp (*look++, name)));
-		if (!notfound)
+		while ((NULL != *look) && notfound) {
+			notfound = (strcmp (*look, name) != 0);
+			look++;
+		}
+		if (!notfound) {
 			break;
+		}
 	}
 	endgrent ();
 	return gr;
@@ -118,7 +123,7 @@ static void check_perms (const struct group *grp,
                          struct passwd *pwd,
                          const char *groupname)
 {
-	int needspasswd = 0;
+	bool needspasswd = false;
 	struct spwd *spwd;
 	char *cp;
 	const char *cpasswd;
@@ -132,8 +137,10 @@ static void check_perms (const struct group *grp,
 	 * anyway.
 	 *
 	 */
-	if (grp->gr_gid != pwd->pw_gid && !is_on_list (grp->gr_mem, pwd->pw_name))
-		needspasswd = 1;
+	if (   (grp->gr_gid != pwd->pw_gid)
+	    && !is_on_list (grp->gr_mem, pwd->pw_name)) {
+		needspasswd = true;
+	}
 
 	/*
 	 * If she does not have either a shadowed password, or a regular
@@ -141,11 +148,13 @@ static void check_perms (const struct group *grp,
 	 * group password.
 	 */
 	spwd = xgetspnam (pwd->pw_name);
-	if (NULL != spwd)
+	if (NULL != spwd) {
 		pwd->pw_passwd = spwd->sp_pwdp;
+	}
 
-	if (pwd->pw_passwd[0] == '\0' && grp->gr_passwd[0])
-		needspasswd = 1;
+	if ((pwd->pw_passwd[0] == '\0') && (grp->gr_passwd[0] != '\0')) {
+		needspasswd = true;
+	}
 
 	/*
 	 * Now I see about letting her into the group she requested. If she
@@ -153,14 +162,15 @@ static void check_perms (const struct group *grp,
 	 * the password. Otherwise I ask for a password if she flunked one
 	 * of the tests above.
 	 */
-	if (getuid () != 0 && needspasswd) {
+	if ((getuid () != 0) && needspasswd) {
 		/*
 		 * get the password from her, and set the salt for
 		 * the decryption from the group file.
 		 */
 		cp = getpass (_("Password: "));
-		if (NULL == cp)
+		if (NULL == cp) {
 			goto failure;
+		}
 
 		/*
 		 * encrypt the key she gave us using the salt from the
@@ -226,17 +236,21 @@ static void syslog_sg (const char *name, const char *group)
 	const char *loginname = getlogin ();
 	const char *tty = ttyname (0);
 
-	if (loginname != NULL)
+	if (loginname != NULL) {
 		loginname = xstrdup (loginname);
-	if (tty != NULL)
+	}
+	if (tty != NULL) {
 		tty = xstrdup (tty);
+	}
 
-	if (loginname == NULL)
+	if (loginname == NULL) {
 		loginname = "???";
-	if (tty == NULL)
+	}
+	if (tty == NULL) {
 		tty = "???";
-	else if (strncmp (tty, "/dev/", 5) == 0)
+	} else if (strncmp (tty, "/dev/", 5) == 0) {
 		tty += 5;
+	}
 	SYSLOG ((LOG_INFO,
 		 "user `%s' (login `%s' on %s) switched to group `%s'",
 		 name, loginname, tty, group));
@@ -283,7 +297,7 @@ static void syslog_sg (const char *name, const char *group)
 			}
 #endif
 			exit (1);
-		} else if (child) {
+		} else if (child != 0) {
 			/* parent - wait for child to finish, then log session close */
 			int cst = 0;
 			gid_t gid = getgid();
@@ -292,14 +306,14 @@ static void syslog_sg (const char *name, const char *group)
 			do {
 				errno = 0;
 				pid = waitpid (child, &cst, WUNTRACED);
-				if (pid == child && WIFSTOPPED (cst)) {
+				if ((pid == child) && (WIFSTOPPED (cst) != 0)) {
 					/* stop when child stops */
 					kill (getpid (), WSTOPSIG(cst));
 					/* wake child when resumed */
 					kill (child, SIGCONT);
 				}
-			} while ((pid == child && WIFSTOPPED (cst)) ||
-				 (pid != child && errno == EINTR));
+			} while (   ((pid == child) && (WIFSTOPPED (cst) != 0))
+			         || ((pid != child) && (errno == EINTR)));
 			/* local, no need for xgetgrgid */
 			if (NULL != grp) {
 				SYSLOG ((LOG_INFO,
@@ -338,9 +352,9 @@ static void syslog_sg (const char *name, const char *group)
  */
 int main (int argc, char **argv)
 {
-	int initflag = 0;
+	bool initflag = false;
 	int i;
-	int cflag = 0;
+	bool cflag = false;
 	int err = 0;
 	gid_t gid;
 	char *cp;
@@ -358,9 +372,9 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * Save my name for error messages and save my real gid incase of
@@ -395,7 +409,7 @@ int main (int argc, char **argv)
 	initenv ();
 
 	pwd = get_my_pwent ();
-	if (!pwd) {
+	if (NULL == pwd) {
 		fprintf (stderr, _("unknown UID: %u\n"), getuid ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID, Prog, "changing", NULL,
@@ -424,17 +438,19 @@ int main (int argc, char **argv)
 	 *      sg [-]
 	 *      sg [-] groupid [[-c command]
 	 */
-	if (argc > 0 && (!strcmp (argv[0], "-") || !strcmp (argv[0], "-l"))) {
+	if (   (argc > 0)
+	    && (   (strcmp (argv[0], "-")  == 0)
+	        || (strcmp (argv[0], "-l") == 0))) {
 		argc--;
 		argv++;
-		initflag = 1;
+		initflag = true;
 	}
 	if (!is_newgrp) {
 		/* 
 		 * Do the command line for everything that is
 		 * not "newgrp".
 		 */
-		if (argc > 0 && argv[0][0] != '-') {
+		if ((argc > 0) && (argv[0][0] != '-')) {
 			group = argv[0];
 			argc--;
 			argv++;
@@ -450,18 +466,19 @@ int main (int argc, char **argv)
 			 * "sg group -c command" (as in the man page) or
 			 * "sg group command" (as in the usage message).
 			 */
-			if (argc > 1 && strcmp (argv[0], "-c") == 0)
+			if ((argc > 1) && (strcmp (argv[0], "-c") == 0)) {
 				command = argv[1];
-			else
+			} else {
 				command = argv[0];
-			cflag++;
+			}
+			cflag = true;
 		}
 	} else {
 		/*
 		 * Do the command line for "newgrp". It's just making sure
 		 * there aren't any flags and getting the new group name.
 		 */
-		if (argc > 0 && argv[0][0] == '-') {
+		if ((argc > 0) && (argv[0][0] == '-')) {
 			usage ();
 			goto failure;
 		} else if (argv[0] != (char *) 0) {
@@ -481,8 +498,9 @@ int main (int argc, char **argv)
 				SYSLOG ((LOG_CRIT, "unknown GID: %lu",
 					 (unsigned long) pwd->pw_gid));
 				goto failure;
-			} else
+			} else {
 				group = grp->gr_name;
+			}
 		}
 	}
 
@@ -498,8 +516,9 @@ int main (int argc, char **argv)
 	for (;;) {
 		grouplist = (GETGROUPS_T *) xmalloc (i * sizeof (GETGROUPS_T));
 		ngroups = getgroups (i, grouplist);
-		if (i > ngroups && !(ngroups == -1 && errno == EINVAL))
+		if (i > ngroups && !(ngroups == -1 && errno == EINVAL)) {
 			break;
+		}
 		/* not enough room, so try allocating a larger buffer */
 		free (grouplist);
 		i *= 2;
@@ -573,7 +592,7 @@ int main (int argc, char **argv)
 	 * membership of the current user.
 	 */
 	grp = find_matching_group (name, grp->gr_gid);
-	if (!grp) {
+	if (NULL == grp) {
 		/*
 		 * No matching group found. As we already know that
 		 * the group exists, this happens only in the case
@@ -616,8 +635,9 @@ int main (int argc, char **argv)
 	 * part.
 	 */
 	for (i = 0; i < ngroups; i++) {
-		if (gid == grouplist[i])
+		if (gid == grouplist[i]) {
 			break;
+		}
 	}
 	if (i == ngroups) {
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
@@ -636,7 +656,7 @@ int main (int argc, char **argv)
 	 * to the real UID. For root, this also sets the real GID to the
 	 * new group id.
 	 */
-	if (setgid (gid)) {
+	if (setgid (gid) != 0) {
 		perror ("setgid");
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
@@ -647,7 +667,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	if (setuid (getuid ())) {
+	if (setuid (getuid ()) != 0) {
 		perror ("setuid");
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
@@ -692,12 +712,14 @@ int main (int argc, char **argv)
 	 * problem, try using $SHELL as a workaround; also please notify me
 	 * at jparmele@wildbear.com -- JWP
 	 */
-	if (!initflag && (cp = getenv ("SHELL")))
+	cp = getenv ("SHELL");
+	if (!initflag && (NULL != cp)) {
 		prog = cp;
-	else if (pwd->pw_shell && pwd->pw_shell[0])
+	} else if ((NULL != pwd->pw_shell) && ('\0' != pwd->pw_shell[0])) {
 		prog = pwd->pw_shell;
-	else
+	} else {
 		prog = "/bin/sh";
+	}
 
 	/*
 	 * Now I try to find the basename of the login shell. This will
@@ -717,10 +739,11 @@ int main (int argc, char **argv)
 	 * initialization.
 	 */
 	if (initflag) {
-		if (chdir (pwd->pw_dir))
+		if (chdir (pwd->pw_dir) != 0) {
 			perror ("chdir");
+		}
 
-		while (*envp) {
+		while (NULL != *envp) {
 			if (strncmp (*envp, "PATH=", 5) == 0 ||
 			    strncmp (*envp, "HOME=", 5) == 0 ||
 			    strncmp (*envp, "SHELL=", 6) == 0 ||
@@ -730,8 +753,10 @@ int main (int argc, char **argv)
 			envp++;
 		}
 	} else {
-		while (*envp)
-			addenv (*envp++, NULL);
+		while (NULL != *envp) {
+			addenv (*envp, NULL);
+			envp++;
+		}
 	}
 
 #ifdef WITH_AUDIT
@@ -759,7 +784,7 @@ int main (int argc, char **argv)
 	 */
 	closelog ();
 #ifdef WITH_AUDIT
-	if (group) {
+	if (NULL != group) {
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", group);
 		audit_logger (AUDIT_CHGRP_ID, Prog, 
@@ -771,3 +796,4 @@ int main (int argc, char **argv)
 #endif
 	exit (1);
 }
+
