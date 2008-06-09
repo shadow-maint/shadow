@@ -66,21 +66,21 @@
  * Global variables
  */
 static char *Prog;
-static int cflg = 0;
-static int rflg = 0;	/* create a system account */
-static int sflg = 0;
+static bool cflg = false;
+static bool rflg = false;	/* create a system account */
+static bool sflg = false;
 
 static char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
-static int is_shadow;
+static bool is_shadow;
 #ifdef SHADOWGRP
-static int is_shadow_grp;
-static int gshadow_locked = 0;
+static bool is_shadow_grp;
+static bool gshadow_locked = false;
 #endif
-static int passwd_locked = 0;
-static int group_locked = 0;
-static int shadow_locked = 0;
+static bool passwd_locked = false;
+static bool group_locked = false;
+static bool shadow_locked = false;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -277,7 +277,7 @@ static int get_uid (const char *uid, uid_t *nuid) {
 	if (isdigit (uid[0])) {
 		char *endptr;
 		long int i = strtoul (uid, &endptr, 10);
-		if ((*endptr != '\0') && (errno != ERANGE)) {
+		if (('\0' != *endptr) && (ERANGE != errno)) {
 			fprintf (stderr,
 			         _("%s: user ID `%s' is not valid\n"),
 			         Prog, uid);
@@ -338,7 +338,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	pwent.pw_dir = "";	/* XXX warning: const */
 	pwent.pw_shell = "";	/* XXX warning: const */
 
-	return !pw_update (&pwent);
+	return (pw_update (&pwent) == 0);
 }
 
 static void update_passwd (struct passwd *pwd, const char *password)
@@ -390,7 +390,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	sp = spw_locate (pwd->pw_name);
 	if (NULL != sp) {
 		spent = *sp;
-		if (   (crypt_method != NULL)
+		if (   (NULL != crypt_method)
 		    && (0 == strcmp(crypt_method, "NONE"))) {
 			spent.sp_pwdp = (char *)password;
 		} else {
@@ -398,7 +398,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 			                                    crypt_arg);
 			spent.sp_pwdp = pw_encrypt (password, salt);
 		}
-		return !spw_update (&spent);
+		return (spw_update (&spent) == 0);
 	}
 
 	/*
@@ -432,7 +432,7 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	spent.sp_expire = -1;
 	spent.sp_flag = -1;
 
-	return !spw_update (&spent);
+	return (spw_update (&spent) == 0);
 }
 
 /*
@@ -450,27 +450,31 @@ static void process_flags (int argc, char **argv)
 #ifdef USE_SHA_CRYPT
 		{"sha-rounds", required_argument, NULL, 's'},
 #endif
+		{"system", no_argument, NULL, 'r'},
 		{NULL, 0, NULL, '\0'}
 	};
 
 	while ((c = getopt_long (argc, argv,
 #ifdef USE_SHA_CRYPT
-	                     "c:hs:",
+	                     "c:hrs:",
 #else
-	                     "c:h",
+	                     "c:hr",
 #endif
 	                     long_options, &option_index)) != -1) {
 		switch (c) {
 		case 'c':
-			cflg = 1;
+			cflg = true;
 			crypt_method = optarg;
 			break;
 		case 'h':
 			usage ();
 			break;
+		case 'r':
+			rflg = true;
+			break;
 #ifdef USE_SHA_CRYPT
 		case 's':
-			sflg = 1;
+			sflg = true;
 			if (!getlong(optarg, &sha_rounds)) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
@@ -489,7 +493,7 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (argv[optind] != NULL) {
-		if (!freopen (argv[optind], "r", stdin)) {
+		if (freopen (argv[optind], "r", stdin) == NULL) {
 			char buf[BUFSIZ];
 			snprintf (buf, sizeof buf, "%s: %s", Prog, argv[1]);
 			perror (buf);
@@ -560,14 +564,14 @@ static void check_perms (void)
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_acct_mgmt (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
@@ -589,34 +593,34 @@ static void open_files (void)
 	 * modified, or new entries added. The password file is the key - if
 	 * it gets locked, assume the others can be locked right away.
 	 */
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
 		fail_exit (1);
 	}
-	passwd_locked++;
-	if (is_shadow && !spw_lock ()) {
+	passwd_locked = true;
+	if (is_shadow && (spw_lock () == 0)) {
 		fprintf (stderr, _("%s: can't lock /etc/shadow.\n"), Prog);
 		fail_exit (1);
 	}
-	shadow_locked++;
-	if (!gr_lock ()) {
+	shadow_locked = true;
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock /etc/group.\n"), Prog);
 		fail_exit (1);
 	}
-	group_locked++;
+	group_locked = true;
 #ifdef SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
+	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr, _("%s: can't lock /etc/gshadow.\n"), Prog);
 		fail_exit (1);
 	}
-	gshadow_locked++;
+	gshadow_locked = true;
 #endif
 
-	if (   (!pw_open (O_RDWR))
-	    || (is_shadow && !spw_open (O_RDWR))
-	    || !gr_open (O_RDWR)
+	if (   (pw_open (O_RDWR) == 0)
+	    || (is_shadow && (spw_open (O_RDWR) == 0))
+	    || (gr_open (O_RDWR) == 0)
 #ifdef SHADOWGRP
-	    || (is_shadow_grp && !sgr_open(O_RDWR))
+	    || (is_shadow_grp && (sgr_open(O_RDWR) == 0))
 #endif
 	   ) {
 		fprintf (stderr, _("%s: can't open files\n"), Prog);
@@ -629,11 +633,11 @@ static void open_files (void)
  */
 static void close_files (void)
 {
-	if (   (!pw_close ())
-	    || (is_shadow && !spw_close ())
-	    || !gr_close ()
+	if (   (pw_close () == 0)
+	    || (is_shadow && (spw_close () == 0))
+	    || (gr_close () == 0)
 #ifdef SHADOWGRP
-	    || (is_shadow_grp && !sgr_close())
+	    || (is_shadow_grp && (sgr_close() == 0))
 #endif
 	   ) {
 		fprintf (stderr, _("%s: error updating files\n"), Prog);
@@ -641,18 +645,18 @@ static void close_files (void)
 	}
 #ifdef SHADOWGRP
 	if (is_shadow_grp) {
-		(void) sgr_unlock();
-		gshadow_locked--;
+		sgr_unlock();
+		gshadow_locked = false;
 	}
 #endif
-	(void) gr_unlock ();
-	group_locked--;
+	gr_unlock ();
+	group_locked = false;
 	if (is_shadow) {
-		(void) spw_unlock ();
-		shadow_locked--;
+		spw_unlock ();
+		shadow_locked = false;
 	}
-	(void) pw_unlock ();
-	passwd_locked--;
+	pw_unlock ();
+	passwd_locked = false;
 }
 
 int main (int argc, char **argv)
@@ -670,9 +674,9 @@ int main (int argc, char **argv)
 
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	process_flags (argc, argv);
 
@@ -716,7 +720,8 @@ int main (int argc, char **argv)
 			fields[nfields] = cp;
 			cp = strchr (cp, ':');
 			if (NULL != cp) {
-				*cp++ = '\0';
+				*cp = '\0';
+				cp++;
 			} else {
 				break;
 			}
@@ -806,27 +811,29 @@ int main (int argc, char **argv)
 			errors++;
 			continue;
 		}
-		if (fields[4][0]) {
+		if ('\0' != fields[4][0]) {
 			newpw.pw_gecos = fields[4];
 		}
 
-		if (fields[5][0]) {
+		if ('\0' != fields[5][0]) {
 			newpw.pw_dir = fields[5];
 		}
 
-		if (fields[6][0]) {
+		if ('\0' != fields[6][0]) {
 			newpw.pw_shell = fields[6];
 		}
 
-		if (newpw.pw_dir[0] && access (newpw.pw_dir, F_OK)) {
-			if (mkdir (newpw.pw_dir,
-			           0777 & ~getdef_num ("UMASK",
-			                               GETDEF_DEFAULT_UMASK))) {
+		if (   ('\0' != newpw.pw_dir[0])
+		    && (access (newpw.pw_dir, F_OK) != 0)) {
+			mode_t msk = 0777 & ~getdef_num ("UMASK",
+			                                 GETDEF_DEFAULT_UMASK);
+			if (mkdir (newpw.pw_dir, msk) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: mkdir failed\n"), Prog,
 				         line);
-			} else if (chown
-				   (newpw.pw_dir, newpw.pw_uid, newpw.pw_gid)) {
+			} else if (chown (newpw.pw_dir,
+			                  newpw.pw_uid,
+			                  newpw.pw_gid) != 0) {
 				fprintf (stderr,
 				         _("%s: line %d: chown failed\n"), Prog,
 				         line);
@@ -836,7 +843,7 @@ int main (int argc, char **argv)
 		/*
 		 * Update the password entry with the new changes made.
 		 */
-		if (!pw_update (&newpw)) {
+		if (pw_update (&newpw) == 0) {
 			fprintf (stderr,
 			         _("%s: line %d: can't update entry\n"),
 			         Prog, line);
@@ -852,14 +859,14 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	if (errors) {
+	if (0 != errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
-		(void) gr_unlock ();
+		gr_unlock ();
 		if (is_shadow) {
 			spw_unlock ();
 		}
-		(void) pw_unlock ();
+		pw_unlock ();
 		fail_exit (1);
 	}
 
@@ -869,7 +876,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return 0;

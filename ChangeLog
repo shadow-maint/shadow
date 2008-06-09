@@ -1,5 +1,19 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/newusers.c: Implement the -r, --system option.
+	* src/newusers.c: Use a bool when possible instead of int
+	integers.
+	* src/newusers.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/newusers.c: Ignore the return value of pam_end() before
+	exiting.
+	* src/newusers.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/newusers.c: Avoid multi-statements lines.
+	* src/newusers.c: Add brackets and parenthesis.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Use a bool when possible instead of int integers.
 	* src/gpasswd.c: Avoid implicit conversion of pointers / integers
 	/ chars to booleans.
