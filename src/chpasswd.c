@@ -52,15 +52,15 @@
  * Global variables
  */
 static char *Prog;
-static int cflg = 0;
-static int eflg = 0;
-static int md5flg = 0;
-static int sflg = 0;
+static bool cflg = false;
+static bool eflg = false;
+static bool md5flg = false;
+static bool sflg = false;
 
 static const char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
-static int is_shadow_pwd;
+static bool is_shadow_pwd;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -130,22 +130,22 @@ static void process_flags (int argc, char **argv)
 	                         long_options, &option_index)) != -1) {
 		switch (c) {
 		case 'c':
-			cflg = 1;
+			cflg = true;
 			crypt_method = optarg;
 			break;
 		case 'e':
-			eflg = 1;
+			eflg = true;
 			break;
 		case 'h':
 			usage ();
 			break;
 		case 'm':
-			md5flg = 1;
+			md5flg = true;
 			break;
 #ifdef USE_SHA_CRYPT
 		case 's':
-			sflg = 1;
-			if (!getlong(optarg, &sha_rounds)) {
+			sflg = true;
+			if (getlong(optarg, &sha_rounds) == 0) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
@@ -324,14 +324,14 @@ int main (int argc, char **argv)
 	struct passwd newpw;
 	int errors = 0;
 	int line = 0;
-	long now = time ((long *) 0) / (24L * 3600L);
+	long now = time ((time_t *)NULL) / (24L * 3600L);
 	int ok;
 
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	process_flags (argc, argv);
 
@@ -443,7 +443,7 @@ int main (int argc, char **argv)
 			ok = pw_update (&newpw);
 		}
 
-		if (!ok) {
+		if (0 == ok) {
 			fprintf (stderr,
 			         _
 			         ("%s: line %d: cannot update password entry\n"),
@@ -460,7 +460,7 @@ int main (int argc, char **argv)
 	 * changes to be written out all at once, and then unlocked
 	 * afterwards.
 	 */
-	if (errors) {
+	if (0 != errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
 		if (is_shadow_pwd) {
