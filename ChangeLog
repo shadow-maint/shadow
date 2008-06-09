@@ -1,5 +1,14 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/lastlog.c: Use a bool when possible instead of int integers.
+	* src/lastlog.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/lastlog.c: Add brackets and parenthesis.
+	* src/lastlog.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: Use a bool for the is_shadow_pwd, is_shadow_grp,
 	deleted_user_group, was_member, was_admin, and the
 	options' flags.

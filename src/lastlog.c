@@ -43,12 +43,14 @@
 #include <time.h>
 #include "defines.h"
 #include "prototypes.h"
+
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
  */
 #ifndef LASTLOG_FILE
 #define LASTLOG_FILE "/var/log/lastlog"
 #endif
+
 /*
  * Global variables
  */
@@ -61,9 +63,9 @@ static int inverse_days;	/* number of days to consider for print command */
 static time_t inverse_seconds;	/* that number of days in seconds */
 
 
-static int uflg = 0;		/* print only an user of range of users */
-static int tflg = 0;		/* print is restricted to most recent days */
-static int bflg = 0;		/* print excludes most recent days */
+static bool uflg = false;	/* print only an user of range of users */
+static bool tflg = false;	/* print is restricted to most recent days */
+static bool bflg = false;	/* print excludes most recent days */
 static struct lastlog lastlog;	/* scratch structure to play with ... */
 static struct passwd *pwent;
 
@@ -84,7 +86,7 @@ static void usage (void)
 
 static void print_one (const struct passwd *pw)
 {
-	static int once;
+	static bool once = false;
 	char *cp;
 	struct tm *tm;
 	time_t ll_time;
@@ -93,8 +95,9 @@ static void print_one (const struct passwd *pw)
 	char ptime[80];
 #endif
 
-	if (!pw)
+	if (NULL == pw) {
 		return;
+	}
 
 	if (!once) {
 #ifdef HAVE_LL_HOST
@@ -102,7 +105,7 @@ static void print_one (const struct passwd *pw)
 #else
 		puts (_("Username                Port     Latest"));
 #endif
-		once++;
+		once = true;
 	}
 	ll_time = lastlog.ll_time;
 	tm = localtime (&ll_time);
@@ -114,8 +117,9 @@ static void print_one (const struct passwd *pw)
 	cp[24] = '\0';
 #endif
 
-	if (lastlog.ll_time == (time_t) 0)
+	if (lastlog.ll_time == (time_t) 0) {
 		cp = _("**Never logged in**\0");
+	}
 
 #ifdef HAVE_LL_HOST
 	printf ("%-16s %-8.8s %-16.16s %s\n", pw->pw_name,
@@ -133,22 +137,26 @@ static void print (void)
 	setpwent ();
 	while ( (pwent = getpwent ()) != NULL ) {
 		user = pwent->pw_uid;
-		if (uflg &&
-		    ((umin != -1 && user < (uid_t)umin) ||
-		     (umax != -1 && user > (uid_t)umax)))
+		if (   uflg
+		    && (   (umin != -1 && user < (uid_t)umin)
+		        || (umax != -1 && user > (uid_t)umax))) {
 			continue;
+		}
 		offset = user * sizeof lastlog;
 
 		fseeko (lastlogfile, offset, SEEK_SET);
 		if (fread ((char *) &lastlog, sizeof lastlog, 1,
-			   lastlogfile) != 1)
+			   lastlogfile) != 1) {
 			continue;
+		}
 
-		if (tflg && NOW - lastlog.ll_time > seconds)
+		if (tflg && ((NOW - lastlog.ll_time) > seconds)) {
 			continue;
+		}
 
-		if (bflg && NOW - lastlog.ll_time < inverse_seconds)
+		if (bflg && ((NOW - lastlog.ll_time) < inverse_seconds)) {
 			continue;
+		}
 
 		print_one (pwent);
 	}
@@ -157,9 +165,9 @@ static void print (void)
 
 int main (int argc, char **argv)
 {
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	{
 		int c;
@@ -181,12 +189,12 @@ int main (int argc, char **argv)
 			case 't':
 				days = atoi (optarg);
 				seconds = days * DAY;
-				tflg++;
+				tflg = true;
 				break;
 			case 'b':
 				inverse_days = atoi (optarg);
 				inverse_seconds = inverse_days * DAY;
-				bflg++;
+				bflg = true;
 				break;
 			case 'u':
 				/*
@@ -196,7 +204,7 @@ int main (int argc, char **argv)
 				 *  - a numerical login ID
 				 *  - a range (-x, x-, x-y)
 				 */
-				uflg++;
+				uflg = true;
 				pwent = xgetpwnam (optarg);
 				if (NULL != pwent) {
 					umin = pwent->pw_uid;
@@ -253,3 +261,4 @@ int main (int argc, char **argv)
 	fclose (lastlogfile);
 	exit (0);
 }
+
