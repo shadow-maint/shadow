@@ -1,5 +1,9 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/list.c: Change is_on_list() prototype to return a bool.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_ids.c: Change find_new_uid() and find_new_gid()
 	prototypes to use a bool for their first argument (sys_user /
 	sys_group).

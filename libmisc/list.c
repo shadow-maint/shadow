@@ -157,15 +157,15 @@ char **dup_list (char *const *list)
 	return tmp;
 }
 
-int is_on_list (char *const *list, const char *member)
+bool is_on_list (char *const *list, const char *member)
 {
 	while (*list) {
 		if (strcmp (*list, member) == 0) {
-			return 1;
+			return true;
 		}
 		list++;
 	}
-	return 0;
+	return false;
 }
 
 /*
