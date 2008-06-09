@@ -177,10 +177,6 @@ int main (int argc, char **argv)
 	int retval;
 #endif
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
 	int option_index = 0;
 	static struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
@@ -190,6 +186,10 @@ int main (int argc, char **argv)
 		{"purge", no_argument, NULL, 'p'},
 		{NULL, 0, NULL, '\0'}
 	};
+
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	while ((arg =
 		getopt_long (argc, argv, "a:d:g:lp", long_options,
@@ -255,14 +255,14 @@ int main (int argc, char **argv)
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_acct_mgmt (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
@@ -306,7 +306,7 @@ int main (int argc, char **argv)
 
 #ifdef USE_PAM
 	if (retval == PAM_SUCCESS) {
-		pam_end (pamh, PAM_SUCCESS);
+		(void) pam_end (pamh, PAM_SUCCESS);
 	}
 #endif				/* USE_PAM */
 	exit (EXIT_SUCCESS);
