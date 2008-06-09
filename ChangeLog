@@ -1,5 +1,22 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: Use a bool for the is_shadow_pwd, is_shadow_grp,
+	deleted_user_group, was_member, was_admin, and the
+	options' flags.
+	* src/userdel.c: Change path_prefix() prototype to return a bool.
+	* src/userdel.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/userdel.c: Ignore the return value from pam_end() since we
+	are exiting anyway just afterwards.
+	* src/userdel.c: Avoid implicit conversion of pointers /
+	integers / chars to booleans.
+	* src/userdel.c: Add brackets and parenthesis.
+	* src/userdel.c: Avoid assignments in comparisons.
+	* src/userdel.c: Do not ignore the return value of the *_unlock()
+	functions.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login_nopam.c: Do not use the YES and NO macros. Use the
 	booleans true and false instead. Change the prototypes of
 	list_match(), user_match(), from_match(), and string_match()

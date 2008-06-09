@@ -73,12 +73,13 @@ static uid_t user_id;
 static char *user_home;
 
 static char *Prog;
-static int fflg = 0, rflg = 0;
+static bool fflg = false;
+static bool rflg = false;
 
-static int is_shadow_pwd;
+static bool is_shadow_pwd;
 
 #ifdef SHADOWGRP
-static int is_shadow_grp;
+static bool is_shadow_grp;
 #endif
 
 /* local function prototypes */
@@ -92,7 +93,7 @@ static void user_busy (const char *, uid_t);
 static void user_cancel (const char *);
 
 #ifdef EXTRA_CHECK_HOME_DIR
-static int path_prefix (const char *, const char *);
+static bool path_prefix (const char *, const char *);
 #endif
 static int is_owner (uid_t, const char *);
 static void remove_mailbox (void);
@@ -130,7 +131,7 @@ static void update_groups (void)
 	struct passwd *pwd;
 
 #ifdef	SHADOWGRP
-	int deleted_user_group = 0;
+	bool deleted_user_group = false;
 	const struct sgrp *sgrp;
 	struct sgrp *nsgrp;
 #endif				/* SHADOWGRP */
@@ -139,7 +140,7 @@ static void update_groups (void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-	for (gr_rewind (), grp = gr_next (); grp; grp = gr_next ()) {
+	for (gr_rewind (), grp = gr_next (); NULL != grp; grp = gr_next ()) {
 
 		/*
 		 * See if the user specified this group as one of their
@@ -153,14 +154,14 @@ static void update_groups (void)
 		 * update the group entry to reflect the change.
 		 */
 		ngrp = __gr_dup (grp);
-		if (!ngrp) {
+		if (NULL == ngrp) {
 			fprintf (stderr,
 				 _("%s: Out of memory. Cannot update the group database.\n"),
 				 Prog);
 			exit (13);	/* XXX */
 		}
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
-		if (!gr_update (ngrp)) {
+		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
 				 _("%s: error updating group entry\n"), Prog);
 			exit (E_GRP_UPDATE);
@@ -184,8 +185,9 @@ static void update_groups (void)
 	 * user name, with no members, we delete it.
 	 */
 	grp = xgetgrnam (user_name);
-	if (grp && getdef_bool ("USERGROUPS_ENAB")
-	    && (grp->gr_mem[0] == NULL)) {
+	if (   (NULL != grp)
+	    && getdef_bool ("USERGROUPS_ENAB")
+	    && (NULL == grp->gr_mem[0])) {
 
 		pwd = NULL;
 		if (!fflg) {
@@ -194,9 +196,10 @@ static void update_groups (void)
 			 * used as a primary group.
 			 */
 			setpwent ();
-			while ((pwd = getpwent ())) {
-				if (strcmp (pwd->pw_name, user_name) == 0)
+			while ((pwd = getpwent ()) != NULL) {
+				if (strcmp (pwd->pw_name, user_name) == 0) {
 					continue;
+				}
 				if (pwd->pw_gid == grp->gr_gid) {
 					fprintf (stderr,
 						 _
@@ -208,7 +211,7 @@ static void update_groups (void)
 			endpwent ();
 		}
 
-		if (pwd == NULL) {
+		if (NULL == pwd) {
 			/*
 			 * We can remove this group, it is not the primary
 			 * group of any remaining user.
@@ -216,7 +219,7 @@ static void update_groups (void)
 			gr_remove (grp->gr_name);
 
 #ifdef SHADOWGRP
-			deleted_user_group = 1;
+			deleted_user_group = true;
 #endif
 
 #ifdef WITH_AUDIT
@@ -229,16 +232,19 @@ static void update_groups (void)
 		}
 	}
 #ifdef	SHADOWGRP
-	if (!is_shadow_grp)
+	if (!is_shadow_grp) {
 		return;
+	}
 
 	/*
 	 * Scan through the entire shadow group file looking for the groups
 	 * that the user is a member of. Both the administrative list and
 	 * the ordinary membership list is checked.
 	 */
-	for (sgr_rewind (), sgrp = sgr_next (); sgrp; sgrp = sgr_next ()) {
-		int was_member, was_admin;
+	for (sgr_rewind (), sgrp = sgr_next ();
+	     NULL != sgrp;
+	     sgrp = sgr_next ()) {
+		bool was_member, was_admin;
 
 		/*
 		 * See if the user specified this group as one of their
@@ -247,24 +253,27 @@ static void update_groups (void)
 		was_member = is_on_list (sgrp->sg_mem, user_name);
 		was_admin = is_on_list (sgrp->sg_adm, user_name);
 
-		if (!was_member && !was_admin)
+		if (!was_member && !was_admin) {
 			continue;
+		}
 
 		nsgrp = __sgr_dup (sgrp);
-		if (!nsgrp) {
+		if (NULL == nsgrp) {
 			fprintf (stderr,
 				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
 				 Prog);
 			exit (13);	/* XXX */
 		}
 
-		if (was_member)
+		if (was_member) {
 			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
+		}
 
-		if (was_admin)
+		if (was_admin) {
 			nsgrp->sg_adm = del_list (nsgrp->sg_adm, user_name);
+		}
 
-		if (!sgr_update (nsgrp)) {
+		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
 				 _("%s: error updating shadow group entry\n"), Prog);
 			exit (E_GRP_UPDATE);
@@ -291,26 +300,28 @@ static void update_groups (void)
  */
 static void close_files (void)
 {
-	if (!pw_close ())
+	if (pw_close () == 0)
 		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
-	if (is_shadow_pwd && !spw_close ())
+	if (is_shadow_pwd && (spw_close () == 0))
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow password file\n"), Prog);
-	if (!gr_close ())
+	if (gr_close () == 0)
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 
-	(void) gr_unlock ();
+	gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_close ())
+	if (is_shadow_grp && (sgr_close () == 0))
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow group file\n"), Prog);
 
-	if (is_shadow_grp)
-		(void) sgr_unlock ();
+	if (is_shadow_grp) {
+		sgr_unlock ();
+	}
 #endif
-	if (is_shadow_pwd)
-		(void) spw_unlock ();
-	(void) pw_unlock ();
+	if (is_shadow_pwd) {
+		spw_unlock ();
+	}
+	pw_unlock ();
 }
 
 /*
@@ -318,13 +329,15 @@ static void close_files (void)
  */
 static void fail_exit (int code)
 {
-	(void) pw_unlock ();
-	(void) gr_unlock ();
-	if (is_shadow_pwd)
+	pw_unlock ();
+	gr_unlock ();
+	if (is_shadow_pwd) {
 		spw_unlock ();
+	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp)
+	if (is_shadow_grp) {
 		sgr_unlock ();
+	}
 #endif
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user", user_name,
@@ -341,7 +354,7 @@ static void fail_exit (int code)
 
 static void open_files (void)
 {
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -349,7 +362,7 @@ static void open_files (void)
 #endif
 		exit (E_PW_UPDATE);
 	}
-	if (!pw_open (O_RDWR)) {
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -357,7 +370,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && !spw_lock ()) {
+	if (is_shadow_pwd && (spw_lock () == 0)) {
 		fprintf (stderr,
 			 _("%s: cannot lock shadow password file\n"), Prog);
 #ifdef WITH_AUDIT
@@ -367,7 +380,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && !spw_open (O_RDWR)) {
+	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr,
 			 _("%s: cannot open shadow password file\n"), Prog);
 #ifdef WITH_AUDIT
@@ -377,7 +390,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
@@ -385,7 +398,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (!gr_open (O_RDWR)) {
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
@@ -394,7 +407,7 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
+	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
 			 _("%s: unable to lock shadow group file\n"), Prog);
 #ifdef WITH_AUDIT
@@ -404,7 +417,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
+	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open shadow group file\n"),
 			 Prog);
 #ifdef WITH_AUDIT
@@ -425,12 +438,12 @@ static void open_files (void)
  */
 static void update_user (void)
 {
-	if (!pw_remove (user_name)) {
+	if (pw_remove (user_name) == 0) {
 		fprintf (stderr,
 			 _("%s: error deleting password entry\n"), Prog);
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && !spw_remove (user_name)) {
+	if (is_shadow_pwd && (spw_remove (user_name) == 0)) {
 		fprintf (stderr,
 			 _("%s: error deleting shadow password entry\n"), Prog);
 		fail_exit (E_PW_UPDATE);
@@ -460,18 +473,19 @@ static void user_busy (const char *name, uid_t uid)
 	struct utmpx *utent;
 
 	setutxent ();
-	while ((utent = getutxent ())) {
+	while ((utent = getutxent ()) != NULL) {
 #else
 	struct utmp *utent;
 
 	setutent ();
-	while ((utent = getutent ())) {
+	while ((utent = getutent ()) != NULL) {
 #endif
 		if (utent->ut_type != USER_PROCESS)
 			continue;
 
-		if (strncmp (utent->ut_user, name, sizeof utent->ut_user))
+		if (strncmp (utent->ut_user, name, sizeof utent->ut_user) != 0) {
 			continue;
+		}
 		fprintf (stderr,
 			 _("%s: user %s is currently logged in\n"), Prog, name);
 		if (!fflg) {
@@ -527,8 +541,10 @@ static void user_cancel (const char *user)
 	int pid, wpid;
 	int status;
 
-	if (!(cmd = getdef_str ("USERDEL_CMD")))
+	cmd = getdef_str ("USERDEL_CMD");
+	if (NUll == cmd) {
 		return;
+	}
 	pid = fork ();
 	if (pid == 0) {
 		execl (cmd, cmd, user, (char *) 0);
@@ -540,14 +556,15 @@ static void user_cancel (const char *user)
 	}
 	do {
 		wpid = wait (&status);
-	} while (wpid != pid && wpid != -1);
+	} while ((wpid != pid) && (-1 != wpid));
 }
 
 #ifdef EXTRA_CHECK_HOME_DIR
-static int path_prefix (const char *s1, const char *s2)
+static bool path_prefix (const char *s1, const char *s2)
 {
-	return (strncmp (s2, s1, strlen (s1)) == 0 &&
-		(s2[strlen (s1)] == '\0' || s2[strlen (s1)] == '/'));
+	return (   (strncmp (s2, s1, strlen (s1)) == 0)
+	        && (   ('\0' == s2[strlen (s1)])
+	            || ('/'  == s2[strlen (s1)])));
 }
 #endif
 
@@ -555,8 +572,9 @@ static int is_owner (uid_t uid, const char *path)
 {
 	struct stat st;
 
-	if (stat (path, &st))
+	if (stat (path, &st) != 0) {
 		return -1;
+	}
 	return (st.st_uid == uid);
 }
 
@@ -568,11 +586,13 @@ static void remove_mailbox (void)
 
 	maildir = getdef_str ("MAIL_DIR");
 #ifdef MAIL_SPOOL_DIR
-	if (!maildir && !getdef_str ("MAIL_FILE"))
+	if ((NULL == maildir) && (getdef_str ("MAIL_FILE") == NULL)) {
 		maildir = MAIL_SPOOL_DIR;
+	}
 #endif
-	if (!maildir)
+	if (NULL == maildir) {
 		return;
+	}
 	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
 	if (fflg) {
 		unlink (mailfile);	/* always remove, ignore errors */
@@ -595,7 +615,7 @@ static void remove_mailbox (void)
 		return;
 	} else if (i == -1)
 		return;		/* mailbox doesn't exist */
-	if (unlink (mailfile)) {
+	if (unlink (mailfile) != 0) {
 		fprintf (stderr, _("%s: warning: can't remove "), Prog);
 		perror (mailfile);
 	}
@@ -627,9 +647,9 @@ int main (int argc, char **argv)
 	 * Get my name so that I can use it to report errors.
 	 */
 	Prog = Basename (argv[0]);
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	{
 		/*
@@ -642,15 +662,14 @@ int main (int argc, char **argv)
 			{"remove", no_argument, NULL, 'r'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c =
-			getopt_long (argc, argv, "fhr",
-				     long_options, NULL)) != -1) {
+		while ((c = getopt_long (argc, argv, "fhr",
+		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'f':	/* force remove even if not owned by user */
-				fflg++;
+				fflg = true;
 				break;
 			case 'r':	/* remove home dir and mailbox */
-				rflg++;
+				rflg = true;
 				break;
 			default:
 				usage ();
@@ -658,8 +677,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (optind + 1 != argc)
+	if ((optind + 1) != argc) {
 		usage ();
+	}
 
 	OPENLOG ("userdel");
 
@@ -681,14 +701,16 @@ int main (int argc, char **argv)
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS)
-			pam_end (pamh, retval);
+		if (retval != PAM_SUCCESS) {
+			(void) pam_end (pamh, retval);
+		}
 	}
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS)
-			pam_end (pamh, retval);
+		if (retval != PAM_SUCCESS) {
+			(void) pam_end (pamh, retval);
+		}
 	}
 
 	if (retval != PAM_SUCCESS) {
@@ -708,8 +730,8 @@ int main (int argc, char **argv)
 	user_name = argv[argc - 1];
 	{
 		struct passwd *pwd;
-		/* local, no need for xgetpwnam */
-		if (!(pwd = getpwnam (user_name))) {
+		pwd = getpwnam (user_name); /* local, no need for xgetpwnam */
+		if (NULL == pwd) {
 			fprintf (stderr, _("%s: user %s does not exist\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
@@ -732,7 +754,7 @@ int main (int argc, char **argv)
 
 		fprintf (stderr,
 			 _("%s: user %s is a NIS user\n"), Prog, user_name);
-		if (!yp_get_default_domain (&nis_domain)
+		if (   !yp_get_default_domain (&nis_domain)
 		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
 				 _("%s: %s is the NIS master\n"),
@@ -754,9 +776,10 @@ int main (int argc, char **argv)
 	update_user ();
 	update_groups ();
 
-	if (rflg)
+	if (rflg) {
 		remove_mailbox ();
-	if (rflg && !fflg && !is_owner (user_id, user_home)) {
+	}
+	if (rflg && !fflg && (is_owner (user_id, user_home) == 0)) {
 		fprintf (stderr,
 			 _("%s: %s not owned by %s, not removing\n"),
 			 Prog, user_home, user_name);
@@ -777,14 +800,15 @@ int main (int argc, char **argv)
 		 */
 		setpwent ();
 		while ((pwd = getpwent ())) {
-			if (strcmp (pwd->pw_name, user_name) == 0)
+			if (strcmp (pwd->pw_name, user_name) == 0) {
 				continue;
+			}
 			if (path_prefix (user_home, pwd->pw_dir)) {
 				fprintf (stderr,
 					 _
 					 ("%s: not removing directory %s (would remove home of user %s)\n"),
 					 Prog, user_home, pwd->pw_name);
-				rflg = 0;
+				rflg = false;
 				errors++;
 				break;
 			}
@@ -822,14 +846,17 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	if (retval == PAM_SUCCESS) {
+		(void) pam_end (pamh, PAM_SUCCESS);
+	}
 #endif				/* USE_PAM */
 #ifdef WITH_AUDIT
-	if (errors)
+	if (0 != errors) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			      "deleting home directory", user_name, -1, 0);
+	}
 #endif
-	exit (errors ? E_HOMEDIR : E_SUCCESS);
+	exit ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
 	/* NOT REACHED */
 }
+
