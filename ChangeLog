@@ -1,5 +1,13 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/expiry.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/expiry.c: Add brackets and parenthesis.
+	* src/expiry.c: Avoid assignments in comparisons.
+	* src/expiry.c: Avoid implicit conversion of pointers to booleans.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwunconv.c: Use a bool when possible instead of int
 	integers.
 	* src/pwunconv.c: Add brackets and parenthesis.

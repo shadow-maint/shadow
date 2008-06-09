@@ -90,17 +90,21 @@ int main (int argc, char **argv)
 	 * expiry takes one of two arguments. The default action is to give
 	 * the usage message.
 	 */
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
-	if (argc != 2 || (strcmp (argv[1], "-f") && strcmp (argv[1], "-c")))
+	if (   (argc != 2)
+	    || (   (strcmp (argv[1], "-f") != 0)
+	        && (strcmp (argv[1], "-c") != 0))) {
 		usage ();
+	}
 
 	/*
 	 * Get user entries for /etc/passwd and /etc/shadow
 	 */
-	if (!(pwd = get_my_pwent ())) {
+	pwd = get_my_pwent ();
+	if (NULL == pwd) {
 		fprintf (stderr, _("%s: unknown user\n"), Prog);
 		exit (10);
 	}
@@ -142,3 +146,4 @@ int main (int argc, char **argv)
 	usage ();
 	exit (1);
 }
+
