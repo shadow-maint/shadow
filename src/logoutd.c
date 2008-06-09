@@ -82,8 +82,9 @@ static int check_login (const struct utmp *ut)
 	/*
 	 * Check if they are allowed to be logged in right now.
 	 */
-	if (!isttytime (user, ut->ut_line, now))
+	if (!isttytime (user, ut->ut_line, now)) {
 		return 0;
+	}
 	return 1;
 }
 
@@ -92,11 +93,13 @@ static void send_mesg_to_tty (int tty_fd)
 {
 	TERMIO oldt, newt;
 	FILE *mesg_file, *tty_file;
-	int c, is_tty;
+	int c;
+	bool is_tty;
 
 	tty_file = fdopen (tty_fd, "w");
-	if (!tty_file)
+	if (NULL == tty_file) {
 		return;
+	}
 
 	is_tty = (GTTY (tty_fd, &oldt) == 0);
 	if (is_tty) {
@@ -108,10 +111,11 @@ static void send_mesg_to_tty (int tty_fd)
 	}
 
 	mesg_file = fopen (HUP_MESG_FILE, "r");
-	if (mesg_file) {
+	if (NULL != mesg_file) {
 		while ((c = getc (mesg_file)) != EOF) {
-			if (c == '\n')
+			if (c == '\n') {
 				putc ('\r', tty_file);
+			}
 			putc (c, tty_file);
 		}
 		fclose (mesg_file);
@@ -150,9 +154,9 @@ int main (int argc, char **argv)
 	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
 	int tty_fd;
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 #ifndef DEBUG
 	for (i = 0; close (i) == 0; i++);
@@ -184,7 +188,7 @@ int main (int argc, char **argv)
 	 * Scan the utmpx/utmp file once per minute looking for users that
 	 * are not supposed to still be logged in.
 	 */
-	while (1) {
+	while (true) {
 
 		/* 
 		 * Attempt to re-open the utmpx/utmp file. The file is only
@@ -202,16 +206,19 @@ int main (int argc, char **argv)
 		 * is permitted to be signed on at this time.
 		 */
 #if HAVE_UTMPX_H
-		while ((ut = getutxent ())) {
+		while ((ut = getutxent ()) != NULL) {
 #else
-		while ((ut = getutent ())) {
+		while ((ut = getutent ()) != NULL) {
 #endif
-			if (ut->ut_type != USER_PROCESS)
+			if (ut->ut_type != USER_PROCESS) {
 				continue;
-			if (ut->ut_user[0] == '\0')
+			}
+			if (ut->ut_user[0] == '\0') {
 				continue;
-			if (check_login (ut))
+			}
+			if (check_login (ut)) {
 				continue;
+			}
 
 			/*
 			 * Put the rest of this in a child process. This
@@ -228,10 +235,11 @@ int main (int argc, char **argv)
 			}
 			/* child */
 
-			if (strncmp (ut->ut_line, "/dev/", 5) != 0)
+			if (strncmp (ut->ut_line, "/dev/", 5) != 0) {
 				strcpy (tty_name, "/dev/");
-			else
+			} else {
 				tty_name[0] = '\0';
+			}
 
 			strcat (tty_name, ut->ut_line);
 #ifndef O_NOCTTY
@@ -281,3 +289,4 @@ int main (int argc, char **argv)
 	return 1;
 	/* NOT REACHED */
 }
+
