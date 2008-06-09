@@ -1,3 +1,11 @@
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/console.c: Change is_listed() prototype to return a bool.
+	The default parameter should also be a bool.
+	* libmisc/console.c: Add brackets and parenthesis.
+	* libmisc/console.c: Avoid assignments in comparisons.
+	* libmisc/console.c: Change console() prototype to return a bool.
+
 2008-05-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/sgetspent.c: Add brackets and parenthesis.
