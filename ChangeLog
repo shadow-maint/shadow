@@ -1,5 +1,17 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: Use a bool when possible instead of int integers.
+	* src/gpasswd.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/gpasswd.c: Ignore the return value of putchar() and fflush()
+	before exiting.
+	* src/gpasswd.c: check_list() renamed is_valid_user_list(), and
+	return a bool.
+	* src/gpasswd.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpck.c: Use a bool when possible instead of int integers.
 	* src/grpck.c: Ignore return value of setlocale(),
 	bindtextdomain(), and textdomain().

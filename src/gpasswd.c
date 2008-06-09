@@ -58,14 +58,18 @@ static char *Prog;
 #ifdef SHADOWGRP
 /* Indicate if shadow groups are enabled on the system
  * (/etc/gshadow present) */
-static int is_shadowgrp;
-static int gshadow_locked = 0;
+static bool is_shadowgrp;
+static bool gshadow_locked = false;
 #endif
-static int group_locked = 0;
+static bool group_locked = false;
 
 /* Flags set by options */
-static int
- aflg = 0, Aflg = 0, dflg = 0, Mflg = 0, rflg = 0, Rflg = 0;
+static bool aflg = false;
+static bool Aflg = false;
+static bool dflg = false;
+static bool Mflg = false;
+static bool rflg = false;
+static bool Rflg = false;
 /* The name of the group that is being affected */
 static char *group = NULL;
 /* The name of the user being added (-a) or removed (-d) from group */
@@ -79,7 +83,7 @@ static char *admins = NULL;
 /* The name of the caller */
 static char *myname = NULL;
 /* The UID of the caller */
-static unsigned long bywho = -1;
+static uid_t bywho;
 /* Indicate if gpasswd was called by root */
 #define amroot	(0 == bywho)
 
@@ -92,7 +96,7 @@ static unsigned long bywho = -1;
 static void usage (void);
 static RETSIGTYPE catch_signals (int killed);
 static void fail_exit (int status);
-static int check_list (const char *users);
+static bool is_valid_user_list (const char *users);
 static void process_flags (int argc, char **argv);
 static void check_flags (int argc, int opt_index);
 static void open_files (void);
@@ -138,15 +142,15 @@ static RETSIGTYPE catch_signals (int killed)
 {
 	static TERMIO sgtty;
 
-	if (killed) {
+	if (0 != killed) {
 		STTY (0, &sgtty);
 	} else {
 		GTTY (0, &sgtty);
 	}
 
-	if (killed) {
-		putchar ('\n');
-		fflush (stdout);
+	if (0 != killed) {
+		(void) putchar ('\n');
+		(void) fflush (stdout);
 		fail_exit (killed);
 	}
 }
@@ -169,18 +173,18 @@ static void fail_exit (int status)
 }
 
 /*
- * check_list - check a comma-separated list of user names for validity
+ * is_valid_user_list - check a comma-separated list of user names for validity
  *
- *	check_list scans a comma-separated list of user names and checks
- *	that each listed name exists.
+ *	is_valid_user_list scans a comma-separated list of user names and
+ *	checks that each listed name exists is the user database.
  *
- *	It returns 0 on success.
+ *	It returns true if the list of users is valid.
  */
-static int check_list (const char *users)
+static bool is_valid_user_list (const char *users)
 {
 	const char *start, *end;
 	char username[32];
-	int errors = 0;
+	bool valid = true;
 	size_t len;
 
 	for (start = users; (NULL != start) && ('\0' != *start); start = end) {
@@ -206,10 +210,10 @@ static int check_list (const char *users)
 		if (getpwnam (username) == NULL) {
 			fprintf (stderr, _("%s: unknown user %s\n"),
 			         Prog, username);
-			errors++;
+			valid = false;
 		}
 	}
-	return errors;
+	return valid;
 }
 
 static void failure (void)
@@ -240,7 +244,7 @@ static void process_flags (int argc, char **argv)
 #endif
 				fail_exit (1);
 			}
-			aflg++;
+			aflg = true;
 			break;
 #ifdef SHADOWGRP
 		case 'A':
@@ -260,14 +264,14 @@ static void process_flags (int argc, char **argv)
 				fail_exit (2);
 			}
 			admins = optarg;
-			if (check_list (admins) != 0) {
+			if (!is_valid_user_list (admins)) {
 				fail_exit (1);
 			}
-			Aflg++;
+			Aflg = true;
 			break;
 #endif
 		case 'd':	/* delete a user */
-			dflg++;
+			dflg = true;
 			user = optarg;
 			break;
 		case 'g':	/* no-op from normal password */
@@ -282,16 +286,16 @@ static void process_flags (int argc, char **argv)
 				failure ();
 			}
 			members = optarg;
-			if (check_list (members) != 0) {
+			if (!is_valid_user_list (members)) {
 				fail_exit (1);
 			}
-			Mflg++;
+			Mflg = true;
 			break;
 		case 'r':	/* remove group password */
-			rflg++;
+			rflg = true;
 			break;
 		case 'R':	/* restrict group password */
-			Rflg++;
+			Rflg = true;
 			break;
 		default:
 			usage ();
@@ -309,10 +313,26 @@ static void process_flags (int argc, char **argv)
  */
 static void check_flags (int argc, int opt_index)
 {
+	int exclusive = 0;
 	/*
 	 * Make sure exclusive flags are exclusive
 	 */
-	if (aflg + dflg + rflg + Rflg + (Aflg || Mflg) > 1) {
+	if (aflg) {
+		exclusive++;
+	}
+	if (dflg) {
+		exclusive++;
+	}
+	if (rflg) {
+		exclusive++;
+	}
+	if (Rflg) {
+		exclusive++;
+	}
+	if (Aflg || Mflg) {
+		exclusive++;
+	}
+	if (exclusive > 1) {
 		usage ();
 	}
 
@@ -340,7 +360,7 @@ static void open_files (void)
 #endif
 		fail_exit (1);
 	}
-	group_locked++;
+	group_locked = true;
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
@@ -353,7 +373,7 @@ static void open_files (void)
 #endif
 			fail_exit (1);
 		}
-		gshadow_locked++;
+		gshadow_locked = true;
 	}
 #endif
 	if (gr_open (O_RDWR) == 0) {
@@ -409,7 +429,7 @@ static void close_files (void)
 	if (is_shadowgrp) {
 		/* TODO: same logging as in open_files & for /etc/group */
 		sgr_unlock ();
-		gshadow_locked--;
+		gshadow_locked = false;
 	}
 #endif
 	if (gr_unlock () == 0) {
@@ -420,7 +440,7 @@ static void close_files (void)
 #endif
 		exit (1);
 	}
-	group_locked--;
+	group_locked = false;
 }
 
 /*
@@ -736,9 +756,9 @@ int main (int argc, char **argv)
 #endif
 
 	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * Make a note of whether or not this command was invoked by root.
@@ -857,18 +877,18 @@ int main (int argc, char **argv)
 	 * one, except the routine is different.
 	 */
 	if (dflg) {
-		int removed = 0;
+		bool removed = false;
 
 		printf (_("Removing user %s from group %s\n"), user, group);
 
 		if (is_on_list (grent.gr_mem, user)) {
-			removed = 1;
+			removed = true;
 			grent.gr_mem = del_list (grent.gr_mem, user);
 		}
 #ifdef SHADOWGRP
 		if (is_shadowgrp) {
 			if (is_on_list (sgent.sg_mem, user)) {
-				removed = 1;
+				removed = true;
 				sgent.sg_mem = del_list (sgent.sg_mem, user);
 			}
 		}
