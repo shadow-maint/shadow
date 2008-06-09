@@ -1,5 +1,17 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Use a bool when possible instead of int integers.
+	* src/usermod.c: Add brackets and parenthesis.
+	* src/usermod.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/usermod.c: Avoid assignments in comparisons.
+	* src/usermod.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/usermod.c: Ignore the return value of pam_end() before
+	exiting.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Move the declaration of option_index and
 	long_options before the blocks of code.
 	* src/groupmems.c: Ignore return value of setlocale(),
