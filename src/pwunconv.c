@@ -47,17 +47,20 @@
 /*
  * Global variables
  */
-static int shadow_locked = 0, passwd_locked = 0;
+static bool shadow_locked = false;
+static bool passwd_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int);
 
 static void fail_exit (int status)
 {
-	if (shadow_locked)
+	if (shadow_locked) {
 		spw_unlock ();
-	if (passwd_locked)
+	}
+	if (passwd_locked) {
 		pw_unlock ();
+	}
 	exit (status);
 }
 
@@ -70,46 +73,50 @@ int main (int argc, char **argv)
 
 	char *Prog = argv[0];
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
-	if (!spw_file_present ())
+	if (!spw_file_present ()) {
 		/* shadow not installed, do nothing */
 		exit (0);
+	}
 
-	if (!pw_lock ()) {
+	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock passwd file\n"), Prog);
 		fail_exit (5);
 	}
-	passwd_locked++;
-	if (!pw_open (O_RDWR)) {
+	passwd_locked = true;
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open passwd file\n"), Prog);
 		fail_exit (1);
 	}
 
-	if (!spw_lock ()) {
+	if (spw_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock shadow file\n"), Prog);
 		fail_exit (5);
 	}
-	shadow_locked++;
-	if (!spw_open (O_RDWR)) {
+	shadow_locked = true;
+	if (spw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
 		fail_exit (1);
 	}
 
 	pw_rewind ();
-	while ((pw = pw_next ())) {
-		if (!(spwd = spw_locate (pw->pw_name)))
+	while ((pw = pw_next ()) != NULL) {
+		spwd = spw_locate (pw->pw_name);
+		if (NULL == spwd) {
 			continue;
+		}
 
 		pwent = *pw;
 
 		/*
 		 * Update password if non-shadow is "x".
 		 */
-		if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)
+		if (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0) {
 			pwent.pw_passwd = spwd->sp_pwdp;
+		}
 
 		/*
 		 * Password aging works differently in the two different
@@ -121,7 +128,7 @@ int main (int argc, char **argv)
 		 * put into the new file. Otherwise, the days are converted
 		 * to weeks and so on.
 		 */
-		if (!pw_update (&pwent)) {
+		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 				 _("%s: can't update entry for user %s\n"),
 				 Prog, pwent.pw_name);
@@ -129,13 +136,13 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (!spw_close ()) {
+	if (spw_close () == 0) {
 		fprintf (stderr,
 			 _("%s: can't update shadow password file\n"), Prog);
 		fail_exit (3);
 	}
 
-	if (!pw_close ()) {
+	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: can't update password file\n"), Prog);
 		fail_exit (3);
 	}
@@ -153,3 +160,4 @@ int main (int argc, char **argv)
 
 	return 0;
 }
+

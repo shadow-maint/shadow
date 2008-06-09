@@ -1,5 +1,16 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwunconv.c: Use a bool when possible instead of int
+	integers.
+	* src/pwunconv.c: Add brackets and parenthesis.
+	* src/pwunconv.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/pwunconv.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/pwunconv.c: Avoid assignments in comparisons.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Use a bool when possible instead of int integers.
 	* src/usermod.c: Add brackets and parenthesis.
 	* src/usermod.c: Avoid implicit conversion of pointers / integers
