@@ -1,5 +1,19 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Use a bool when possible instead of int integers.
+	* src/vipw.c: Ignore the return value of umask(), when the mask is
+	set again to the old value.
+	* src/vipw.c: Avoid implicit conversion of pointers / integers to
+	booleans.
+	* src/vipw.c: Add brackets and parenthesis.
+	* src/vipw.c: Avoid assignments in comparisons.
+	* src/vipw.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/vipw.c: Add missing termination of the longopts parameter
+	for getopt_long().
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chgpasswd.c: Use a bool when possible instead of int
 	integers.
 	* src/chgpasswd.c: Ignore return value of setlocale(),

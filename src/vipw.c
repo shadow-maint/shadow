@@ -54,9 +54,10 @@
  * Global variables
  */
 static const char *progname, *filename, *fileeditname;
-static int filelocked = 0, createedit = 0;
+static bool filelocked = false;
+static bool createedit = false;
 static int (*unlock) (void);
-static int quiet = 0;
+static bool quiet = false;
 
 /* local function prototypes */
 static void usage (void);
@@ -69,6 +70,7 @@ static void vipwedit (const char *, int (*)(void), int (*)(void));
  */
 static void usage (void)
 {
+	(void) 
 	fputs (_("Usage: vipw [options]\n"
 	         "\n"
 	         "Options:\n"
@@ -93,31 +95,33 @@ static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 
 	mask = umask (077);
 	bkfp = fopen (backup, "w");
-	umask (mask);
-	if (!bkfp)
+	(void) umask (mask);
+	if (NULL == bkfp) {
 		return -1;
+	}
 
 	c = 0;
 	if (fseeko (fp, 0, SEEK_SET) == 0)
 		while ((c = getc (fp)) != EOF) {
-			if (putc (c, bkfp) == EOF)
+			if (putc (c, bkfp) == EOF) {
 				break;
+			}
 		}
-	if (c != EOF || ferror (fp) || fflush (bkfp)) {
+	if ((EOF != c) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
 		fclose (bkfp);
 		unlink (backup);
 		return -1;
 	}
-	if (fclose (bkfp)) {
+	if (fclose (bkfp) != 0) {
 		unlink (backup);
 		return -1;
 	}
 
 	ub.actime = sb->st_atime;
 	ub.modtime = sb->st_mtime;
-	if (utime (backup, &ub) ||
-	    chmod (backup, sb->st_mode) ||
-	    chown (backup, sb->st_uid, sb->st_gid)) {
+	if (   (utime (backup, &ub) != 0)
+	    || (chmod (backup, sb->st_mode) != 0)
+	    || (chown (backup, sb->st_uid, sb->st_gid) != 0)) {
 		unlink (backup);
 		return -1;
 	}
@@ -131,17 +135,22 @@ static void vipwexit (const char *msg, int syserr, int ret)
 {
 	int err = errno;
 
-	if (createedit)
+	if (createedit) {
 		unlink (fileeditname);
-	if (filelocked)
+	}
+	if (filelocked) {
 		(*unlock) ();
-	if (msg)
+	}
+	if (NULL != msg) {
 		fprintf (stderr, "%s: %s", progname, msg);
-	if (syserr)
+	}
+	if (0 != syserr) {
 		fprintf (stderr, ": %s", strerror (err));
-	if (!quiet)
+	}
+	if (!quiet) {
 		fprintf (stdout, _("\n%s: %s is unchanged\n"), progname,
 			 filename);
+	}
 	exit (ret);
 }
 
@@ -168,30 +177,39 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	filename = file;
 	fileeditname = fileedit;
 
-	if (access (file, F_OK))
+	if (access (file, F_OK) != 0) {
 		vipwexit (file, 1, 1);
-	if (!file_lock ())
+	}
+	if (file_lock () == 0) {
 		vipwexit (_("Couldn't lock file"), errno, 5);
-	filelocked = 1;
+	}
+	filelocked = true;
 
 	/* edited copy has same owners, perm */
-	if (stat (file, &st1))
+	if (stat (file, &st1) != 0) {
 		vipwexit (file, 1, 1);
-	if (!(f = fopen (file, "r")))
+	}
+	f = fopen (file, "r");
+	if (NULL == f) {
 		vipwexit (file, 1, 1);
-	if (create_backup_file (f, fileedit, &st1))
+	}
+	if (create_backup_file (f, fileedit, &st1) != 0) {
 		vipwexit (_("Couldn't make backup"), errno, 1);
-	createedit = 1;
+	}
+	createedit = true;
 
 	editor = getenv ("VISUAL");
-	if (!editor)
+	if (NULL == editor) {
 		editor = getenv ("EDITOR");
-	if (!editor)
+	}
+	if (NULL == editor) {
 		editor = DEFAULT_EDITOR;
+	}
 
-	if ((pid = fork ()) == -1)
+	pid = fork ();
+	if (-1 == pid) {
 		vipwexit ("fork", 1, 1);
-	else if (!pid) {
+	} else if (0 == pid) {
 		/* use the system() call to invoke the editor so that it accepts
 		   command line args in the EDITOR and VISUAL environment vars */
 		char *buf;
@@ -203,36 +221,43 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 			fprintf (stderr, "%s: %s: %s\n", progname, editor,
 				 strerror (errno));
 			exit (1);
-		} else
+		} else {
 			exit (0);
+		}
 	}
 
 	for (;;) {
 		pid = waitpid (pid, &status, WUNTRACED);
-		if ((pid != -1) && WIFSTOPPED (status)) {
+		if ((pid != -1) && (WIFSTOPPED (status) != 0)) {
 			/* The child (editor) was suspended.
 			 * Suspend vipw. */
 			kill (getpid (), WSTOPSIG(status));
 			/* wake child when resumed */
 			kill (pid, SIGCONT);
-		} else
+		} else {
 			break;
+		}
 	}
 
-	if (pid == -1 || !WIFEXITED (status) || WEXITSTATUS (status))
+	if (   (-1 == pid)
+	    || (WIFEXITED (status) == 0)
+	    || (WEXITSTATUS (status) != 0)) {
 		vipwexit (editor, 1, 1);
+	}
 
-	if (stat (fileedit, &st2))
+	if (stat (fileedit, &st2) != 0) {
 		vipwexit (fileedit, 1, 1);
-	if (st1.st_mtime == st2.st_mtime)
+	}
+	if (st1.st_mtime == st2.st_mtime) {
 		vipwexit (0, 0, 0);
+	}
 
 	/*
 	 * XXX - here we should check fileedit for errors; if there are any,
 	 * ask the user what to do (edit again, save changes anyway, or quit
 	 * without saving). Use pwck or grpck to do the check.  --marekm
 	 */
-	createedit = 0;
+	createedit = false;
 	unlink (filebackup);
 	link (file, filebackup);
 	if (rename (fileedit, file) == -1) {
@@ -248,13 +273,13 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 int main (int argc, char **argv)
 {
-	int editshadow = 0;
+	bool editshadow = false;
 	char *a;
-	int do_vipw;
+	bool do_vipw;
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	progname = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
 	do_vipw = (strcmp (progname, "vigr") != 0);
@@ -270,25 +295,26 @@ int main (int argc, char **argv)
 			{"passwd", no_argument, NULL, 'p'},
 			{"quiet", no_argument, NULL, 'q'},
 			{"shadow", no_argument, NULL, 's'},
+			{NULL, 0, NULL, '\0'}
 		};
 		while ((c =
 			getopt_long (argc, argv, "ghpqs",
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'g':
-				do_vipw = 0;
+				do_vipw = false;
 				break;
 			case 'h':
 				usage ();
 				break;
 			case 'p':
-				do_vipw = 1;
+				do_vipw = true;
 				break;
 			case 'q':
-				quiet = 1;
+				quiet = true;
 				break;
 			case 's':
-				editshadow = 1;
+				editshadow = true;
 				break;
 			default:
 				usage ();
@@ -339,3 +365,4 @@ int main (int argc, char **argv)
 
 	exit (E_SUCCESS);
 }
+
