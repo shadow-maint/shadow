@@ -62,13 +62,13 @@ static char roomno[BUFSIZ];
 static char workph[BUFSIZ];
 static char homeph[BUFSIZ];
 static char slop[BUFSIZ];
-static int amroot;
+static bool amroot;
 /* Flags */
-static int fflg = 0;		/* -f - set full name                */
-static int rflg = 0;		/* -r - set room number              */
-static int wflg = 0;		/* -w - set work phone number        */
-static int hflg = 0;		/* -h - set home phone number        */
-static int oflg = 0;		/* -o - set other information        */
+static bool fflg = false;		/* -f - set full name                */
+static bool rflg = false;		/* -r - set room number              */
+static bool wflg = false;		/* -w - set work phone number        */
+static bool hflg = false;		/* -h - set home phone number        */
+static bool oflg = false;		/* -o - set other information        */
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
@@ -79,7 +79,7 @@ static pam_handle_t *pamh = NULL;
 
 /* local function prototypes */
 static void usage (void);
-static int may_change_field (int);
+static bool may_change_field (int);
 static void new_fields (void);
 static char *copy_field (char *, char *, char *);
 static void process_flags (int argc, char **argv);
@@ -113,9 +113,9 @@ static void usage (void)
  *
  *	field should be one of 'f', 'r', 'w', 'h'
  *
- *	Return 1 if the user can change the field and 0 otherwise.
+ *	Return true if the user can change the field and false otherwise.
  */
-static int may_change_field (int field)
+static bool may_change_field (int field)
 {
 	const char *cp;
 
@@ -137,7 +137,7 @@ static int may_change_field (int field)
 	 * if the string is empty or not defined at all.
 	 */
 	if (amroot) {
-		return 1;
+		return true;
 	}
 
 	cp = getdef_str ("CHFN_RESTRICT");
@@ -150,10 +150,10 @@ static int may_change_field (int field)
 	}
 
 	if (strchr (cp, field) != NULL) {
-		return 1;
+		return true;
 	}
 
-	return 0;
+	return false;
 }
 
 /*
@@ -259,7 +259,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
-			fflg++;
+			fflg = true;
 			STRFCPY (fullnm, optarg);
 			break;
 		case 'h':
@@ -268,7 +268,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
-			hflg++;
+			hflg = true;
 			STRFCPY (homeph, optarg);
 			break;
 		case 'r':
@@ -277,7 +277,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
-			rflg++;
+			rflg = true;
 			STRFCPY (roomno, optarg);
 			break;
 		case 'o':
@@ -286,7 +286,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
-			oflg++;
+			oflg = true;
 			STRFCPY (slop, optarg);
 			break;
 		case 'w':
@@ -295,7 +295,7 @@ static void process_flags (int argc, char **argv)
 				         _("%s: Permission denied.\n"), Prog);
 				exit (E_NOPERM);
 			}
-			wflg++;
+			wflg = true;
 			STRFCPY (workph, optarg);
 			break;
 		default:
@@ -557,13 +557,13 @@ static void check_fields (void)
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (valid_field (workph, ":,=")) {
+	if (valid_field (workph, ":,=") != 0) {
 		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
 		         Prog, workph);
 		closelog ();
 		exit (E_NOPERM);
 	}
-	if (valid_field (homeph, ":,=")) {
+	if (valid_field (homeph, ":,=") != 0) {
 		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
 		         Prog, homeph);
 		closelog ();
@@ -604,9 +604,9 @@ int main (int argc, char **argv)
 	char *user;
 
 	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * This command behaves different for root and non-root
@@ -705,7 +705,8 @@ int main (int argc, char **argv)
 		exit (E_NOPERM);
 	}
 	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
-		  fullnm, roomno, workph, homeph, slop[0] ? "," : "", slop);
+	          fullnm, roomno, workph, homeph,
+	          ('\0' != slop[0]) ? "," : "", slop);
 
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);
