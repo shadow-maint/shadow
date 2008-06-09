@@ -1,5 +1,14 @@
 2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c: Use a bool when possible instead of int
+	integers.
+	* src/chgpasswd.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/chgpasswd.c: Avoid implicit conversion of integers to
+	booleans.
+
+2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupdel.c: Use a bool when possible instead of int
 	integers.
 	* src/groupdel.c: Avoid implicit conversion of pointers / integers to
