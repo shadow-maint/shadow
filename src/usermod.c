@@ -791,8 +791,9 @@ static void process_flags (int argc, char **argv)
 
 	bool anyflag = false;
 
-	if ((1 == argc) || ('-' == argv[argc - 1][0]))
+	if ((1 == argc) || ('-' == argv[argc - 1][0])) {
 		usage ();
+	}
 
 	{
 		const struct passwd *pwd;
