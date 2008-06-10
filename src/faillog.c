@@ -245,8 +245,8 @@ static void setmax_one (uid_t uid, int max)
 	}
 	faillog.fail_max = max;
 
-	if (fseeko (fail, offset, SEEK_SET) == 0
-	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1) {
+	if (   (fseeko (fail, offset, SEEK_SET) == 0)
+	    && (fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)) {
 		fflush (fail);
 	} else {
 		perror (FAILLOG_FILE);
