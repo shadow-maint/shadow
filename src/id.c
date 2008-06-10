@@ -53,9 +53,9 @@ static void usage (void);
 static void usage (void)
 {
 #ifdef HAVE_GETGROUPS
-	fputs (_("Usage: id [-a]\n"), stderr);
+	(void) fputs (_("Usage: id [-a]\n"), stderr);
 #else
-	fputs (_("Usage: id\n"), stderr);
+	(void) fputs (_("Usage: id\n"), stderr);
 #endif
 	exit (1);
 }
@@ -77,14 +77,14 @@ static void usage (void)
 #ifdef HAVE_GETGROUPS
 	GETGROUPS_T *groups;
 	int ngroups;
-	int aflg = 0;
+	bool aflg = 0;
 #endif
 	struct passwd *pw;
 	struct group *gr;
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * Dynamically get the maximum number of groups from system, instead
@@ -101,14 +101,16 @@ static void usage (void)
 	 */
 
 	if (argc > 1) {
-		if (argc > 2 || strcmp (argv[1], "-a"))
+		if ((argc > 2) || (strcmp (argv[1], "-a") != 0)) {
 			usage ();
-		else
-			aflg = 1;
+		} else {
+			aflg = true;
+		}
 	}
 #else
-	if (argc > 1)
+	if (argc > 1) {
 		usage ();
+	}
 #endif
 
 	ruid = getuid ();
@@ -122,16 +124,18 @@ static void usage (void)
 	 */
 
 	pw = getpwuid (ruid); /* local, no need for xgetpwuid */
-	if (pw)
-		printf ("UID=%u(%s)", ruid, pw->pw_name);
-	else
-		printf ("UID=%u", ruid);
+	if (NULL != pw) {
+		(void) printf ("UID=%u(%s)", ruid, pw->pw_name);
+	} else {
+		(void) printf ("UID=%u", ruid);
+	}
 
 	gr = getgrgid (rgid);; /* local, no need for xgetgrgid */
-	if (gr)
-		printf (" GID=%u(%s)", rgid, gr->gr_name);
-	else
-		printf (" GID=%u", rgid);
+	if (NULL != gr) {
+		(void) printf (" GID=%u(%s)", rgid, gr->gr_name);
+	} else {
+		(void) printf (" GID=%u", rgid);
+	}
 
 	/*
 	 * Print out the effective user ID and group ID if they are
@@ -140,17 +144,19 @@ static void usage (void)
 
 	if (ruid != euid) {
 		pw = getpwuid (euid); /* local, no need for xgetpwuid */
-		if (pw)
-			printf (" EUID=%u(%s)", euid, pw->pw_name);
-		else
-			printf (" EUID=%u", euid);
+		if (NULL != pw) {
+			(void) printf (" EUID=%u(%s)", euid, pw->pw_name);
+		} else {
+			(void) printf (" EUID=%u", euid);
+		}
 	}
 	if (rgid != egid) {
 		gr = getgrgid (egid); /* local, no need for xgetgrgid */
-		if (gr)
-			printf (" EGID=%u(%s)", egid, gr->gr_name);
-		else
-			printf (" EGID=%u", egid);
+		if (NULL != gr) {
+			(void) printf (" EGID=%u(%s)", egid, gr->gr_name);
+		} else {
+			(void) printf (" EGID=%u", egid);
+		}
 	}
 #ifdef HAVE_GETGROUPS
 	/*
@@ -167,17 +173,19 @@ static void usage (void)
 		 * where "###" is a numerical value and "aaa" is the
 		 * corresponding name for each respective numerical value.
 		 */
-		puts (_(" groups="));
+		(void) puts (_(" groups="));
 		for (i = 0; i < ngroups; i++) {
-			if (i)
-				putchar (',');
+			if (0 != i)
+				(void) putchar (',');
 
 			/* local, no need for xgetgrgid */
 			gr = getgrgid (groups[i]);
-			if (gr)
-				printf ("%u(%s)", groups[i], gr->gr_name);
-			else
-				printf ("%u", groups[i]);
+			if (NULL != gr) {
+				(void) printf ("%u(%s)",
+				               groups[i], gr->gr_name);
+			} else {
+				(void) printf ("%u", groups[i]);
+			}
 		}
 	}
 	free (groups);
@@ -186,7 +194,7 @@ static void usage (void)
 	/*
 	 * Finish off the line.
 	 */
-	putchar ('\n');
+	(void) putchar ('\n');
 	exit (0);
 	/* NOT REACHED */
 }
