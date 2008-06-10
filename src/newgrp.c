@@ -644,7 +644,7 @@ int main (int argc, char **argv)
 			fputs (_("too many groups\n"), stderr);
 		} else {
 			grouplist[ngroups++] = gid;
-			if (setgroups (ngroups, grouplist)) {
+			if (setgroups (ngroups, grouplist) != 0) {
 				perror ("setgroups");
 			}
 		}
