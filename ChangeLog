@@ -1,5 +1,15 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpunconv.c: Use a bool when possible instead of int
+	integers.
+	* src/grpunconv.c: Add brackets and parenthesis.
+	* src/grpunconv.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/grpunconv.c: Avoid implicit conversion of pointers / integers
+	to booleans.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/sulogin.c: Ignore return value of setlocale(),
 	bindtextdomain(), and textdomain().
 	* src/sulogin.c: Avoid implicit conversion of pointers / integers

@@ -53,18 +53,20 @@
 /*
  * Global variables
  */
-static int group_locked = 0;
-static int gshadow_locked = 0;
+static bool group_locked   = false;
+static bool gshadow_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int);
 
 static void fail_exit (int status)
 {
-	if (group_locked)
+	if (group_locked) {
 		gr_unlock ();
-	if (gshadow_locked)
+	}
+	if (gshadow_locked) {
 		sgr_unlock ();
+	}
 	exit (status);
 }
 
@@ -75,29 +77,30 @@ int main (int argc, char **argv)
 	const struct sgrp *sg;
 	char *Prog = argv[0];
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
-	if (!sgr_file_present ())
+	if (sgr_file_present () == 0) {
 		exit (0);	/* no /etc/gshadow, nothing to do */
+	}
 
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
 		fail_exit (5);
 	}
-	group_locked++;
-	if (!gr_open (O_RDWR)) {
+	group_locked = true;
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open group file\n"), Prog);
 		fail_exit (1);
 	}
 
-	if (!sgr_lock ()) {
+	if (sgr_lock () == 0) {
 		fprintf (stderr, _("%s: can't lock shadow group file\n"), Prog);
 		fail_exit (5);
 	}
-	gshadow_locked++;
-	if (!sgr_open (O_RDWR)) {
+	gshadow_locked = true;
+	if (sgr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open shadow group file\n"), Prog);
 		fail_exit (1);
 	}
@@ -106,13 +109,14 @@ int main (int argc, char **argv)
 	 * Update group passwords if non-shadow password is "x".
 	 */
 	gr_rewind ();
-	while ((gr = gr_next ())) {
+	while ((gr = gr_next ()) != NULL) {
 		sg = sgr_locate (gr->gr_name);
-		if (sg && strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) == 0) {
+		if (   (NULL != sg)
+		    && (strcmp (gr->gr_passwd, SHADOW_PASSWD_STRING) == 0)) {
 			/* add password to /etc/group */
 			grent = *gr;
 			grent.gr_passwd = sg->sg_passwd;
-			if (!gr_update (&grent)) {
+			if (gr_update (&grent) == 0) {
 				fprintf (stderr,
 					 _
 					 ("%s: can't update entry for group %s\n"),
@@ -122,13 +126,13 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (!sgr_close ()) {
+	if (sgr_close () == 0) {
 		fprintf (stderr, _("%s: can't update shadow group file\n"),
 			 Prog);
 		fail_exit (3);
 	}
 
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: can't update group file\n"), Prog);
 		fail_exit (3);
 	}
