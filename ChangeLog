@@ -1,5 +1,14 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: Use a bool when possible instead of int integers.
+	* src/faillog.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/faillog.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/faillog.c: Add brackets and parenthesis.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Avoid multi-statements lines.
 	* src/login.c: Ignore the return value of pam_end() before
 	exiting.
@@ -11,6 +20,8 @@
 	* src/login.c: Avoid assignments in comparisons.
 	* src/login.c: Ignore return value of setlocale(),
 	bindtextdomain(), and textdomain().
+	* src/login.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
 
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
