@@ -219,8 +219,9 @@ static RETSIGTYPE catch_signals (unused int sig)
 			STRFCPY (pass, cp);
 			strzero (cp);
 		}
-		if (valid (pass, &pwent))	/* check encrypted passwords ... */
+		if (valid (pass, &pwent)) {	/* check encrypted passwords ... */
 			break;	/* ... encrypted passwords matched */
+		}
 
 #ifdef	USE_SYSLOG
 		SYSLOG (LOG_WARN, "Incorrect root password\n");
