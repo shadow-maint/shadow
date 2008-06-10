@@ -67,11 +67,11 @@
  * Global variables
  */
 #ifdef	SHADOWGRP
-static int is_shadow_grp;
-static int gshadow_locked = 0;
+static bool is_shadow_grp;
+static bool gshadow_locked = false;
 #endif				/* SHADOWGRP */
-static int group_locked = 0;
-static int passwd_locked = 0;
+static bool group_locked = false;
+static bool passwd_locked = false;
 static char *group_name;
 static char *group_newname;
 static char *group_passwd;
@@ -80,11 +80,11 @@ static gid_t group_newid;
 
 static char *Prog;
 
-static int
-    oflg = 0,			/* permit non-unique group ID to be specified with -g */
-    gflg = 0,			/* new ID value for the group */
-    nflg = 0,			/* a new name has been specified for the group */
-    pflg = 0;			/* new encrypted password */
+static bool
+    oflg = false,		/* permit non-unique group ID to be specified with -g */
+    gflg = false,		/* new ID value for the group */
+    nflg = false,		/* a new name has been specified for the group */
+    pflg = false;		/* new encrypted password */
 
 /* local function prototypes */
 static void usage (void);
@@ -204,11 +204,15 @@ static void grp_update (void)
 	grp = *ogrp;
 	new_grent (&grp);
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (osgrp = sgr_locate (group_name))) {
-		sgrp = *osgrp;
-		new_sgent (&sgrp);
-		if (pflg)
-			grp.gr_passwd = SHADOW_PASSWD_STRING;
+	if (is_shadow_grp) {
+		osgrp = sgr_locate (group_name);
+		if (NULL != osgrp) {
+			sgrp = *osgrp;
+			new_sgent (&sgrp);
+			if (pflg) {
+				grp.gr_passwd = SHADOW_PASSWD_STRING;
+			}
+		}
 	}
 #endif				/* SHADOWGRP */
 
@@ -219,7 +223,7 @@ static void grp_update (void)
 	/*
 	 * Write out the new group file entry.
 	 */
-	if (!gr_update (&grp)) {
+	if (gr_update (&grp) == 0) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
@@ -227,7 +231,7 @@ static void grp_update (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (nflg && !gr_remove (group_name)) {
+	if (nflg && (gr_remove (group_name) == 0)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
@@ -242,13 +246,13 @@ static void grp_update (void)
 	 * "out" if there wasn't. Can't just return because there might be
 	 * some syslogging to do.
 	 */
-	if (!osgrp)
+	if (NULL == osgrp)
 		goto out;
 
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-	if (is_shadow_grp && !sgr_update (&sgrp)) {
+	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
@@ -256,7 +260,7 @@ static void grp_update (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp && nflg && !sgr_remove (group_name)) {
+	if (is_shadow_grp && nflg && (sgr_remove (group_name) == 0)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
@@ -271,9 +275,10 @@ static void grp_update (void)
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifing group", group_name,
 		      group_id, 1);
 #endif
-	if (nflg)
+	if (nflg) {
 		SYSLOG ((LOG_INFO, "change group `%s' to `%s'",
 			 group_name, group_newname));
+	}
 
 	if (gflg) {
 		SYSLOG ((LOG_INFO, "change GID for `%s' to %u",
@@ -298,13 +303,17 @@ static void check_new_gid (void)
 		return;
 	}
 
-	if (oflg || !getgrgid (group_newid)) /* local, no need for xgetgrgid */
+	if (oflg ||
+	    (getgrgid (group_newid) == NULL) /* local, no need for xgetgrgid */
+	   ) {
 		return;
+	}
 
 	/*
 	 * Tell the user what they did wrong.
 	 */
-	fprintf (stderr, _("%s: %u is not a unique GID\n"), Prog, group_newid);
+	fprintf (stderr, _("%s: %lu is not a unique GID\n"),
+	         Prog, (unsigned long int) group_newid);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify gid", NULL,
 		      group_newid, 0);
@@ -334,7 +343,7 @@ static void check_new_name (void)
 		 * If the entry is found, too bad.
 		 */
 		/* local, no need for xgetgrnam */
-		if (getgrnam (group_newname)) {
+		if (getgrnam (group_newname) != NULL) {
 			fprintf (stderr,
 				 _("%s: %s is not a unique name\n"), Prog,
 				 group_newname);
@@ -369,7 +378,7 @@ static gid_t get_gid (const char *gidstr)
 	char *errptr;
 
 	val = strtol (gidstr, &errptr, 10);
-	if (*errptr || errno == ERANGE || val < 0) {
+	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
 		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
 			 gidstr);
 		fail_exit (E_BAD_ARG);
@@ -403,7 +412,7 @@ static void process_flags (int argc, char **argv)
 				     long_options, &option_index)) != -1) {
 			switch (c) {
 			case 'g':
-				gflg++;
+				gflg = true;
 				group_newid = get_gid (optarg);
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK,
@@ -412,15 +421,15 @@ static void process_flags (int argc, char **argv)
 #endif
 				break;
 			case 'n':
-				nflg++;
+				nflg = true;
 				group_newname = optarg;
 				break;
 			case 'o':
-				oflg++;
+				oflg = true;
 				break;
 			case 'p':
 				group_passwd = optarg;
-				pflg++;
+				pflg = true;
 				break;
 			default:
 				usage ();
@@ -428,11 +437,13 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if (oflg && !gflg)
+	if (oflg && !gflg) {
 		usage ();
+	}
 
-	if (optind != argc - 1)
+	if (optind != (argc - 1)) {
 		usage ();
+	}
 
 	group_name = argv[argc - 1];
 }
@@ -445,31 +456,31 @@ static void process_flags (int argc, char **argv)
  */
 static void close_files (void)
 {
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
-	group_locked--;
+	group_locked = false;
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_close ()) {
+	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
 			 _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp) {
 		sgr_unlock ();
-		gshadow_locked--;
+		gshadow_locked = false;
 	}
 #endif				/* SHADOWGRP */
 	if (gflg) {
-		if (!pw_close ()) {
+		if (pw_close () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot rewrite passwd file\n"), Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
 		pw_unlock();
-		passwd_locked--;
+		passwd_locked = false;
 	}
 }
 
@@ -480,25 +491,25 @@ static void close_files (void)
  */
 static void open_files (void)
 {
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	group_locked++;
-	if (!gr_open (O_RDWR)) {
+	group_locked = true;
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (!sgr_lock ()) {
+		if (sgr_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: unable to lock shadow group file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-		gshadow_locked++;
-		if (!sgr_open (O_RDWR)) {
+		gshadow_locked = true;
+		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: unable to open shadow group file\n"),
 			         Prog);
@@ -507,14 +518,14 @@ static void open_files (void)
 	}
 #endif				/* SHADOWGRP */
 	if (gflg) {
-		if (!pw_lock ()) {
+		if (pw_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: unable to lock password file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
-		passwd_locked++;
-		if (!pw_open (O_RDWR)) {
+		passwd_locked = true;
+		if (pw_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: unable to open password file\n"),
 			         Prog);
@@ -541,7 +552,7 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			} else {
 				npwd = *lpwd;
 				npwd.pw_gid = ngid;
-				if (!pw_update (&npwd)) {
+				if (pw_update (&npwd) == 0) {
 					fprintf (stderr,
 					         _("%s: cannot change the primary group of user '%s' from %u to %u.\n"),
 					         Prog, pwd->pw_name, ogid, ngid);
@@ -581,9 +592,9 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	process_flags (argc, argv);
 
@@ -599,27 +610,27 @@ int main (int argc, char **argv)
 			retval = PAM_USER_UNKNOWN;
 		}
 
-		if (retval == PAM_SUCCESS) {
+		if (PAM_SUCCESS == retval) {
 			retval = pam_start ("groupmod", pampw->pw_name,
 					    &conv, &pamh);
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -633,8 +644,8 @@ int main (int argc, char **argv)
 		/*
 		 * Start with a quick check to see if the group exists.
 		 */
-		/* local, no need for xgetgrnam */
-		if (!(grp = getgrnam (group_name))) {
+		grp = getgrnam (group_name); /* local, no need for xgetgrnam */
+		if (NULL == grp) {
 			fprintf (stderr, _("%s: group %s does not exist\n"),
 				 Prog, group_name);
 #ifdef WITH_AUDIT
@@ -642,16 +653,19 @@ int main (int argc, char **argv)
 				      "modifying group", group_name, -1, 0);
 #endif
 			fail_exit (E_NOTFOUND);
-		} else
+		} else {
 			group_id = grp->gr_gid;
+		}
 	}
 
 #ifdef WITH_AUDIT
 	/* Set new name/id to original if not specified on command line */
-	if (nflg == 0)
+	if (!nflg) {
 		group_newname = group_name;
-	if (gflg == 0)
+	}
+	if (!gflg) {
 		group_newid = group_id;
+	}
 #endif
 
 #ifdef	USE_NIS
@@ -678,11 +692,13 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	if (gflg)
+	if (gflg) {
 		check_new_gid ();
+	}
 
-	if (nflg)
+	if (nflg) {
 		check_new_name ();
+	}
 
 	/*
 	 * Do the hard stuff - open the files, create the group entries,
@@ -697,8 +713,9 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS)
-		pam_end (pamh, PAM_SUCCESS);
+	if (PAM_SUCCESS == retval) {
+		(void) pam_end (pamh, PAM_SUCCESS);
+	}
 #endif				/* USE_PAM */
 	exit (E_SUCCESS);
 	/* NOT REACHED */
