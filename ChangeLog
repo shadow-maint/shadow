@@ -1,5 +1,17 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Use a bool when possible instead of int
+	integers.
+	* src/groupadd.c: Add brackets and parenthesis.
+	* src/groupadd.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/groupadd.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/groupadd.c: Ignore the return value of pam_end() before
+	exiting.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Use a bool when possible instead of int integers.
 	* src/pwck.c: Ignore return value of setlocale(),
 	bindtextdomain(), and textdomain().

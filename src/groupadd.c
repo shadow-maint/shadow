@@ -53,7 +53,7 @@
 #include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
-static int is_shadow_grp;
+static bool is_shadow_grp;
 #endif
 
 /*
@@ -76,11 +76,11 @@ static char *empty_list = NULL;
 
 static char *Prog;
 
-static int oflg = 0;		/* permit non-unique group ID to be specified with -g */
-static int gflg = 0;		/* ID value for the new group */
-static int fflg = 0;		/* if group already exists, do nothing and exit(0) */
-static int rflg = 0;		/* create a system account */
-static int pflg = 0;		/* new encrypted password */
+static bool oflg = false;	/* permit non-unique group ID to be specified with -g */
+static bool gflg = false;	/* ID value for the new group */
+static bool fflg = false;	/* if group already exists, do nothing and exit(0) */
+static bool rflg = false;	/* create a system account */
+static bool pflg = false;	/* new encrypted password */
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -191,7 +191,7 @@ static void grp_update (void)
 	/*
 	 * Write out the new group file entry.
 	 */
-	if (!gr_update (&grp)) {
+	if (gr_update (&grp) == 0) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -199,7 +199,7 @@ static void grp_update (void)
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
-	if (is_shadow_grp && !sgr_update (&sgrp)) {
+	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -242,13 +242,13 @@ static void check_new_name (void)
  */
 static void close_files (void)
 {
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_close ()) {
+	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
 		         _("%s: cannot rewrite shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -266,7 +266,7 @@ static void close_files (void)
  */
 static void open_files (void)
 {
-	if (!gr_lock ()) {
+	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
@@ -274,7 +274,7 @@ static void open_files (void)
 #endif
 		exit (E_GRP_UPDATE);
 	}
-	if (!gr_open (O_RDWR)) {
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
@@ -283,12 +283,12 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && !sgr_lock ()) {
+	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
 		         _("%s: unable to lock shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	if (is_shadow_grp && !sgr_open (O_RDWR)) {
+	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr,
 		         _("%s: unable to open shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
@@ -320,7 +320,7 @@ static void fail_exit (int code)
 		/* If there is a PAM error, fail_exit is not called.
 		 * We always end the pam transaction with PAM_SUCCESS here.
 		 */
-		pam_end (pamh, PAM_SUCCESS);
+		(void) pam_end (pamh, PAM_SUCCESS);
 	}
 #endif
 	exit (code);
@@ -379,10 +379,10 @@ static void process_flags (int argc, char **argv)
 			 * (unique) gid (turn off -g). Based on the RedHat's
 			 * patch from shadow-utils-970616-9.
 			 */
-			fflg++;
+			fflg = true;
 			break;
 		case 'g':
-			gflg++;
+			gflg = true;
 			group_id = get_gid (optarg);
 			break;
 		case 'h':
@@ -409,14 +409,14 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 		case 'o':
-			oflg++;
+			oflg = true;
 			break;
 		case 'p':
-			pflg++;
+			pflg = true;
 			group_passwd = optarg;
 			break;
 		case 'r':
-			rflg++;
+			rflg = true;
 			break;
 		default:
 			usage ();
@@ -473,7 +473,7 @@ static void check_flags (void)
 			/* Continue with this GID */
 		} else if (fflg) {
 			/* Turn off -g, we can use any GID */
-			gflg = 0;
+			gflg = false;
 		} else {
 			fprintf (stderr, _("%s: GID %u is not unique\n"),
 			         Prog, (unsigned int) group_id);
@@ -511,14 +511,14 @@ static void check_perms (void)
 	if (retval == PAM_SUCCESS) {
 		retval = pam_authenticate (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
 	if (retval == PAM_SUCCESS) {
 		retval = pam_acct_mgmt (pamh, 0);
 		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+			(void) pam_end (pamh, retval);
 		}
 	}
 
@@ -542,9 +542,9 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	OPENLOG ("groupadd");
 
@@ -578,7 +578,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	exit (E_SUCCESS);
