@@ -1,5 +1,13 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/nscd.c: Include defines.h.
+	* lib/nscd.c: Always warn when the nscd cache cannot be flushed.
+	* lib/nscd.c: Avoid assignments in comparisons.
+	* lib/nscd.c: Ignore the return value of fputs() when printing
+	errors.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/port.c: Add brackets and parenthesis.
 	* lib/port.c: Change isttytime() prototype to return a bool.
 	* lib/port.c: Ignore the return value of fclose () (file open

@@ -11,7 +11,10 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "defines.h"
 #include "nscd.h"
+
+#define MSG_NSCD_FLUSH_CACHE_FAILED "Failed to flush the nscd cache.\n"
 
 /*
  * nscd_flush_cache - flush specified service buffer in nscd cache
@@ -24,24 +27,28 @@ int nscd_flush_cache (const char *service)
 	char *spawnedEnv[] = {NULL};
 
 	/* spawn process */
-	if( (err=posix_spawn(&pid, spawnedArgs[0], NULL, NULL,
-			     spawnedArgs, spawnedEnv)) !=0 ) 
+	err = posix_spawn(&pid, spawnedArgs[0], NULL, NULL,
+	                  spawnedArgs, spawnedEnv);
+	if(0 != err)
 	{
-		fprintf(stderr, "posix_spawn() error=%d\n", err);
+		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
+		(void) fprintf (stderr, "posix_spawn() error=%d\n", err);
 		return -1;
 	}
 
-	/* Wait for the spawned process to exit */	
+	/* Wait for the spawned process to exit */
 	termpid = TEMP_FAILURE_RETRY (waitpid (pid, &status, 0));
-	if (termpid == -1)
+	if (-1 == termpid)
 	{
+		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
 		perror("waitpid");
 		return -1;
 	}
 	else if (termpid != pid)
 	{
-		fprintf(stderr, "waitpid returned %ld != %ld\n",
-			 (long int) termpid, (long int) pid);
+		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
+		(void) fprintf (stderr, "waitpid returned %ld != %ld\n",
+		               (long int) termpid, (long int) pid);
 		return -1;
 	}
 
