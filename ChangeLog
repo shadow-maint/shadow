@@ -1,5 +1,17 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chsh.c: Use a bool when possible instead of int integers.
+	* src/chsh.c: restricted_shell() renamed is_restricted_shell().
+	check_shell() renamed shell_is_listed().
+	* src/chsh.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/chsh.c: Avoid implicit conversion of pointers / integers
+	to booleans.
+	* src/chsh.c: Ignore the return value of pam_end() before
+	exiting.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpunconv.c: Use a bool when possible instead of int
 	integers.
 	* src/grpunconv.c: Add brackets and parenthesis.

@@ -61,10 +61,10 @@
  * Global variables
  */
 static char *Prog;		/* Program name */
-static int amroot;		/* Real UID is root */
+static bool amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */
-static int sflg = 0;		/* -s - set shell from command line  */
+static bool sflg = false;	/* -s - set shell from command line  */
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
@@ -74,8 +74,8 @@ static pam_handle_t *pamh = NULL;
 /* local function prototypes */
 static void usage (void);
 static void new_fields (void);
-static int check_shell (const char *);
-static int restricted_shell (const char *);
+static bool shell_is_listed (const char *);
+static bool is_restricted_shell (const char *);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_shell (const char *user, char *loginsh);
@@ -107,23 +107,21 @@ static void new_fields (void)
 }
 
 /*
- * restricted_shell - return true if the named shell begins with 'r' or 'R'
+ * is_restricted_shell - return true if the shell is restricted
  *
- * If the first letter of the filename is 'r' or 'R', the shell is
- * considered to be restricted.
  */
-static int restricted_shell (const char *sh)
+static bool is_restricted_shell (const char *sh)
 {
 	/*
 	 * Shells not listed in /etc/shells are considered to be restricted.
 	 * Changed this to avoid confusion with "rc" (the plan9 shell - not
 	 * restricted despite the name starting with 'r').  --marekm
 	 */
-	return !check_shell (sh);
+	return !shell_is_listed (sh);
 }
 
 /*
- * check_shell - see if the user's login shell is listed in /etc/shells
+ * shell_is_listed - see if the user's login shell is listed in /etc/shells
  *
  * The /etc/shells file is read for valid names of login shells.  If the
  * /etc/shells file does not exist the user cannot set any shell unless
@@ -132,10 +130,10 @@ static int restricted_shell (const char *sh)
  * If getusershell() is available (Linux, *BSD, possibly others), use it
  * instead of re-implementing it.
  */
-static int check_shell (const char *sh)
+static bool shell_is_listed (const char *sh)
 {
 	char *cp;
-	int found = 0;
+	bool found = false;
 
 #ifndef HAVE_GETUSERSHELL
 	char buf[BUFSIZ];
@@ -150,7 +148,7 @@ static int check_shell (const char *sh)
 		}
 
 		if (strcmp (cp, sh) == 0) {
-			found = 1;
+			found = true;
 			break;
 		}
 	}
@@ -158,7 +156,7 @@ static int check_shell (const char *sh)
 #else
 	fp = fopen (SHELLS_FILE, "r");
 	if (NULL == fp) {
-		return 0;
+		return false;
 	}
 
 	while (fgets (buf, sizeof (buf), fp)) {
@@ -172,7 +170,7 @@ static int check_shell (const char *sh)
 		}
 
 		if (strcmp (buf, sh) == 0) {
-			found = 1;
+			found = true;
 			break;
 		}
 	}
@@ -204,7 +202,7 @@ static void process_flags (int argc, char **argv)
 			usage ();
 			break;
 		case 's':
-			sflg++;
+			sflg = true;
 			STRFCPY (loginsh, optarg);
 			break;
 		default:
@@ -255,7 +253,7 @@ static void check_perms (const struct passwd *pw)
 	 * Non-privileged users are only allowed to change the shell if it
 	 * is not a restricted one.
 	 */
-	if (!amroot && restricted_shell (pw->pw_shell)) {
+	if (!amroot && is_restricted_shell (pw->pw_shell)) {
 		SYSLOG ((LOG_WARN, "can't change shell for `%s'", pw->pw_name));
 		closelog ();
 		fprintf (stderr,
@@ -433,14 +431,14 @@ int main (int argc, char **argv)
 
 	sanitize_env ();
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * This command behaves different for root and non-root users.
 	 */
-	amroot = getuid () == 0;
+	amroot = (getuid () == 0);
 
 	/*
 	 * Get the program name. The program name is used as a prefix to
@@ -460,14 +458,14 @@ int main (int argc, char **argv)
 	if (optind < argc) {
 		user = argv[optind];
 		pw = xgetpwnam (user);
-		if (!pw) {
+		if (NULL == pw) {
 			fprintf (stderr,
 			         _("%s: unknown user %s\n"), Prog, user);
 			exit (1);
 		}
 	} else {
 		pw = get_my_pwent ();
-		if (!pw) {
+		if (NULL == pw) {
 			fprintf (stderr,
 			         _
 			         ("%s: Cannot determine your user name.\n"),
@@ -525,12 +523,14 @@ int main (int argc, char **argv)
 	 * users are restricted to using the shells in /etc/shells.
 	 * The shell must be executable by the user.
 	 */
-	if (valid_field (loginsh, ":,=")) {
+	if (valid_field (loginsh, ":,=") != 0) {
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
 		closelog ();
 		exit (1);
 	}
-	if (!amroot && (!check_shell (loginsh) || access (loginsh, X_OK) != 0)) {
+	if (   !amroot
+	    && (   is_restricted_shell (loginsh)
+	        || (access (loginsh, X_OK) != 0))) {
 		fprintf (stderr, _("%s is an invalid shell.\n"), loginsh);
 		closelog ();
 		exit (1);
@@ -543,7 +543,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();
