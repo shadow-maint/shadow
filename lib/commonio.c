@@ -97,11 +97,13 @@ static int check_link_count (const char *file)
 {
 	struct stat sb;
 
-	if (stat (file, &sb) != 0)
+	if (stat (file, &sb) != 0) {
 		return 0;
+	}
 
-	if (sb.st_nlink != 2)
+	if (sb.st_nlink != 2) {
 		return 0;
+	}
 
 	return 1;
 }
@@ -177,7 +179,7 @@ static int do_lock_file (const char *file, const char *lock)
 
 
 static FILE *fopen_set_perms (const char *name, const char *mode,
-			      const struct stat *sb)
+                              const struct stat *sb)
 {
 	FILE *fp;
 	mode_t mask;
@@ -190,19 +192,23 @@ static FILE *fopen_set_perms (const char *name, const char *mode,
 	}
 
 #ifdef HAVE_FCHOWN
-	if (fchown (fileno (fp), sb->st_uid, sb->st_gid) != 0)
+	if (fchown (fileno (fp), sb->st_uid, sb->st_gid) != 0) {
 		goto fail;
+	}
 #else
-	if (chown (name, sb->st_mode) != 0)
+	if (chown (name, sb->st_mode) != 0) {
 		goto fail;
+	}
 #endif
 
 #ifdef HAVE_FCHMOD
-	if (fchmod (fileno (fp), sb->st_mode & 0664) != 0)
+	if (fchmod (fileno (fp), sb->st_mode & 0664) != 0) {
 		goto fail;
+	}
 #else
-	if (chmod (name, sb->st_mode & 0664) != 0)
+	if (chmod (name, sb->st_mode & 0664) != 0) {
 		goto fail;
+	}
 #endif
 	return fp;
 
@@ -221,8 +227,9 @@ static int create_backup (const char *backup, FILE * fp)
 	int c;
 	mode_t mask;
 
-	if (fstat (fileno (fp), &sb) != 0)
+	if (fstat (fileno (fp), &sb) != 0) {
 		return -1;
+	}
 
 	mask = umask (077);
 	bkfp = fopen (backup, "w");
@@ -235,8 +242,9 @@ static int create_backup (const char *backup, FILE * fp)
 	c = 0;
 	if (fseek (fp, 0, SEEK_SET) == 0) {
 		while ((c = getc (fp)) != EOF) {
-			if (putc (c, bkfp) == EOF)
+			if (putc (c, bkfp) == EOF) {
 				break;
+			}
 		}
 	}
 	if ((c != EOF) || (ferror (fp) != 0) || (fflush (bkfp) != 0)) {
@@ -262,11 +270,13 @@ static void free_linked_list (struct commonio_db *db)
 		p = db->head;
 		db->head = p->next;
 
-		if (NULL != p->line)
+		if (NULL != p->line) {
 			free (p->line);
+		}
 
-		if (NULL != p->eptr)
+		if (NULL != p->eptr) {
 			db->ops->free (p->eptr);
+		}
 
 		free (p);
 	}
@@ -292,8 +302,9 @@ int commonio_lock_nowait (struct commonio_db *db)
 	char file[1024];
 	char lock[1024];
 
-	if (db->locked)
+	if (db->locked) {
 		return 1;
+	}
 
 	snprintf (file, sizeof file, "%s.%lu",
 	          db->filename, (unsigned long) getpid ());
@@ -320,13 +331,15 @@ int commonio_lock (struct commonio_db *db)
 	 * If it succeeds, call *_lock() only once
 	 * (no retries, it should always succeed).
 	 */
-	if (lock_count == 0) {
-		if (lckpwdf () == -1)
+	if (0 == lock_count) {
+		if (lckpwdf () == -1) {
 			return 0;	/* failure */
+		}
 	}
 
-	if (commonio_lock_nowait (db) != 0)
+	if (commonio_lock_nowait (db) != 0) {
 		return 1;	/* success */
+	}
 
 	ulckpwdf ();
 	return 0;		/* failure */
@@ -344,8 +357,9 @@ int commonio_lock (struct commonio_db *db)
 #define LOCK_SLEEP 1
 #endif
 	for (i = 0; i < LOCK_TRIES; i++) {
-		if (i > 0)
+		if (i > 0) {
 			sleep (LOCK_SLEEP);	/* delay between retries */
+		}
 		if (commonio_lock_nowait (db) != 0) {
 			return 1;	/* success */
 		}
@@ -385,8 +399,9 @@ int commonio_unlock (struct commonio_db *db)
 	if (db->isopen) {
 		db->readonly = true;
 		if (commonio_close (db) == 0) {
-			if (db->locked)
+			if (db->locked) {
 				dec_lock_count ();
+			}
 			return 0;
 		}
 	}
@@ -409,17 +424,19 @@ static void add_one_entry (struct commonio_db *db, struct commonio_entry *p)
 {
 	p->next = NULL;
 	p->prev = db->tail;
-	if (!db->head)
+	if (NULL == db->head) {
 		db->head = p;
-	if (db->tail)
+	}
+	if (NULL != db->tail) {
 		db->tail->next = p;
+	}
 	db->tail = p;
 }
 
 
 static bool name_is_nis (const char *name)
 {
-	return (name[0] == '+' || name[0] == '-');
+	return (('+' == name[0]) || ('-' == name[0]));
 }
 
 
@@ -443,14 +460,15 @@ add_one_entry_nis (struct commonio_db *db, struct commonio_entry *newp)
 	struct commonio_entry *p;
 
 	for (p = db->head; NULL != p; p = p->next) {
-		if (name_is_nis
-		    (p->eptr ? db->ops->getname (p->eptr) : p->line)) {
+		if (name_is_nis (p->eptr ? db->ops->getname (p->eptr)
+		                         : p->line)) {
 			newp->next = p;
 			newp->prev = p->prev;
-			if (NULL != p->prev)
+			if (NULL != p->prev) {
 				p->prev->next = newp;
-			else
+			} else {
 				db->head = newp;
+			}
 			p->prev = newp;
 			return;
 		}
@@ -476,7 +494,9 @@ int commonio_open (struct commonio_db *db, int mode)
 
 	mode &= ~O_CREAT;
 
-	if (db->isopen || (mode != O_RDONLY && mode != O_RDWR)) {
+	if (   db->isopen
+	    || (   (O_RDONLY != mode)
+	        && (O_RDWR != mode))) {
 		errno = EINVAL;
 		return 0;
 	}
@@ -496,7 +516,7 @@ int commonio_open (struct commonio_db *db, int mode)
 	 * created by commonio_close().  We have no entries to read yet.  --marekm
 	 */
 	if (NULL == db->fp) {
-		if (((flags & O_CREAT) != 0) && (errno == ENOENT)) {
+		if (((flags & O_CREAT) != 0) && (ENOENT == errno)) {
 			db->isopen = true;
 			return 1;
 		}
@@ -522,8 +542,8 @@ int commonio_open (struct commonio_db *db, int mode)
 	}
 
 	while (db->ops->fgets (buf, buflen, db->fp) == buf) {
-		while (((cp = strrchr (buf, '\n')) == NULL) &&
-		       (feof (db->fp) == 0)) {
+		while (   ((cp = strrchr (buf, '\n')) == NULL)
+		       && (feof (db->fp) == 0)) {
 			int len;
 
 			buflen += BUFLEN;
@@ -533,7 +553,9 @@ int commonio_open (struct commonio_db *db, int mode)
 			}
 			buf = cp;
 			len = strlen (buf);
-			db->ops->fgets (buf + len, buflen - len, db->fp);
+			if (db->ops->fgets (buf + len, buflen - len, db->fp) == NULL) {
+				goto cleanup_buf;
+			}
 		}
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
@@ -616,15 +638,18 @@ commonio_sort (struct commonio_db *db, int (*cmp) (const void *, const void *))
 	struct commonio_entry **entries, *ptr;
 	int n = 0, i;
 
-	for (ptr = db->head; ptr; ptr = ptr->next)
+	for (ptr = db->head; NULL != ptr; ptr = ptr->next) {
 		n++;
+	}
 
-	if (n <= 1)
+	if (n <= 1) {
 		return 0;
+	}
 
 	entries = malloc (n * sizeof (struct commonio_entry *));
-	if (entries == NULL)
+	if (entries == NULL) {
 		return -1;
+	}
 
 	n = 0;
 	for (ptr = db->head; NULL != ptr; ptr = ptr->next) {
@@ -658,8 +683,9 @@ int commonio_sort_wrt (struct commonio_db *shadow, struct commonio_db *passwd)
 	struct commonio_entry *head = NULL, *pw_ptr, *spw_ptr;
 	const char *name;
 
-	if (!shadow || !shadow->head)
+	if ((NULL == shadow) || (NULL == shadow->head)) {
 		return 0;
+	}
 
 	for (pw_ptr = passwd->head; NULL != pw_ptr; pw_ptr = pw_ptr->next) {
 		if (NULL == pw_ptr->eptr) {
@@ -714,7 +740,7 @@ static int write_all (const struct commonio_db *db)
 			if (db->ops->put (eptr, db->fp) != 0) {
 				return -1;
 			}
-		} else if (p->line) {
+		} else if (NULL != p->line) {
 			if (db->ops->fputs (p->line, db->fp) == EOF) {
 				return -1;
 			}
@@ -842,7 +868,7 @@ int commonio_close (struct commonio_db *db)
 		if (setfscreatecon (old_context) < 0) {
 			errors++;
 		}
-		if (old_context != NULL) {
+		if (NULL != old_context) {
 			freecon (old_context);
 			old_context = NULL;
 		}
@@ -861,13 +887,14 @@ static struct commonio_entry *next_entry_by_name (struct commonio_db *db,
 	struct commonio_entry *p;
 	void *ep;
 
-	if (NULL == pos)
+	if (NULL == pos) {
 		return NULL;
+	}
 
 	for (p = pos; NULL != p; p = p->next) {
 		ep = p->eptr;
-		if ((NULL != ep) &&
-		    (strcmp (db->ops->getname (ep), name) == 0)) {
+		if (   (NULL != ep)
+		    && (strcmp (db->ops->getname (ep), name) == 0)) {
 			break;
 		}
 	}
