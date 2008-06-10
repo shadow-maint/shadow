@@ -80,9 +80,9 @@ static bool quiet = false;		/* don't report warnings, only errors */
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
-static void close_files (int changed);
-static void check_pw_file (int *errors, int *changed);
-static void check_spw_file (int *errors, int *changed);
+static void close_files (bool changed);
+static void check_pw_file (int *errors, bool *changed);
+static void check_spw_file (int *errors, bool *changed);
 
 /*
  * usage - print syntax message and exit
@@ -217,7 +217,7 @@ static void open_files (void)
  *	changes are committed in the databases. The databases are
  *	unlocked anyway.
  */
-static void close_files (int changed)
+static void close_files (bool changed)
 {
 	/*
 	 * All done. If there were no change we can just abandon any
@@ -252,7 +252,7 @@ static void close_files (int changed)
 /*
  * check_pw_file - check the content of the passwd file
  */
-static void check_pw_file (int *errors, int *changed)
+static void check_pw_file (int *errors, bool *changed)
 {
 	struct commonio_entry *pfe, *tpfe;
 	struct passwd *pwd;
@@ -266,7 +266,7 @@ static void check_pw_file (int *errors, int *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if ((pfe->line[0] == '+') || (pfe->line[0] == '-')) {
+		if (('+' == pfe->line[0]) || ('-' == pfe->line[0])) {
 			continue;
 		}
 
@@ -300,7 +300,7 @@ static void check_pw_file (int *errors, int *changed)
 		      delete_pw:
 			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
 			         pfe->line));
-			*changed = 1;
+			*changed = true;
 
 			__pw_del_entry (pfe);
 			continue;
@@ -407,7 +407,7 @@ static void check_pw_file (int *errors, int *changed)
 
 		if (is_shadow) {
 			spw = (struct spwd *) spw_locate (pwd->pw_name);
-			if (spw == NULL) {
+			if (NULL == spw) {
 				printf (_("no matching password file entry in %s\n"),
 				        spw_file);
 				printf (_("add user '%s' in %s? "),
@@ -430,7 +430,7 @@ static void check_pw_file (int *errors, int *changed)
 					sp.sp_flag = -1;
 					sp.sp_lstchg =
 					    time ((time_t *) 0) / (24L * 3600L);
-					*changed = 1;
+					*changed = true;
 
 					if (spw_update (&sp) == 0) {
 						fprintf (stderr,
@@ -456,7 +456,7 @@ static void check_pw_file (int *errors, int *changed)
 /*
  * check_spw_file - check the content of the shadowed password file (shadow)
  */
-static void check_spw_file (int *errors, int *changed)
+static void check_spw_file (int *errors, bool *changed)
 {
 	struct commonio_entry *spe, *tspe;
 	struct spwd *spw;
@@ -469,7 +469,7 @@ static void check_spw_file (int *errors, int *changed)
 		 * Do not treat lines which were missing in shadow
 		 * and were added earlier.
 		 */
-		if (spe->line == NULL) {
+		if (NULL == spe->line) {
 			continue;
 		}
 
@@ -477,7 +477,7 @@ static void check_spw_file (int *errors, int *changed)
 		 * If this is a NIS line, skip it. You can't "know" what NIS
 		 * is going to do without directly asking NIS ...
 		 */
-		if ((spe->line[0] == '+') || (spe->line[0] == '-')) {
+		if (('+' == spe->line[0]) || ('-' == spe->line[0])) {
 			continue;
 		}
 
@@ -511,7 +511,7 @@ static void check_spw_file (int *errors, int *changed)
 		      delete_spw:
 			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
 			         spe->line));
-			*changed = 1;
+			*changed = true;
 
 			__spw_del_entry (spe);
 			continue;
@@ -602,7 +602,7 @@ static void check_spw_file (int *errors, int *changed)
 int main (int argc, char **argv)
 {
 	int errors = 0;
-	int changed = 0;
+	bool changed = false;
 
 	/*
 	 * Get my name so that I can use it to report errors.
@@ -625,7 +625,7 @@ int main (int argc, char **argv)
 		if (is_shadow) {
 			spw_sort ();
 		}
-		changed = 1;
+		changed = true;
 	} else {
 		check_pw_file (&errors, &changed);
 
@@ -641,13 +641,13 @@ int main (int argc, char **argv)
 	/*
 	 * Tell the user what we did and exit.
 	 */
-	if (errors != 0) {
+	if (0 != errors) {
 		printf (changed ?
 		        _("%s: the files have been updated\n") :
 		        _("%s: no changes\n"), Prog);
 	}
 
 	closelog ();
-	exit (errors ? E_BADENTRY : E_OKAY);
+	exit ((0 != errors) ? E_BADENTRY : E_OKAY);
 }
 
