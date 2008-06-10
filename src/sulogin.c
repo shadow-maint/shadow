@@ -99,9 +99,9 @@ static RETSIGTYPE catch_signals (unused int sig)
 	tcsetattr (0, TCSANOW, &termio);
 #endif
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 #ifdef	USE_SYSLOG
 	OPENLOG ("sulogin");
@@ -140,7 +140,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		exit (1);
 	}
 #endif
-	if (!isatty (0) || !isatty (1) || !isatty (2)) {
+	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
 #ifdef	USE_SYSLOG
 		closelog ();
 #endif
@@ -149,18 +149,25 @@ static RETSIGTYPE catch_signals (unused int sig)
 	/* If we were init, we need to start a new session */
 	if (getppid() == 1) {
 		setsid();
-		if (ioctl(0, TIOCSCTTY, 1))
+		if (ioctl(0, TIOCSCTTY, 1) != 0) {
 			fputs (_("TIOCSCTTY failed"), stderr);
+		}
 	}
-	while (*envp)		/* add inherited environment, */
-		addenv (*envp++, NULL);	/* some variables change later */
+	while (NULL != *envp) {		/* add inherited environment, */
+		addenv (*envp, NULL);	/* some variables change later */
+		envp++;
+	}
 
 #ifndef USE_PAM
 
-	if ((cp = getdef_str ("ENV_TZ")))
-		addenv (*cp == '/' ? tz (cp) : cp, NULL);
-	if ((cp = getdef_str ("ENV_HZ")))
+	cp = getdef_str ("ENV_TZ");
+	if (NULL != cp) {
+		addenv (('/' == *cp) ? tz (cp) : cp, NULL);
+	}
+	cp = getdef_str ("ENV_HZ");
+	if (NULL != cp) {
 		addenv (cp, NULL);	/* set the default $HZ, if one */
+	}
 #endif				/* !USE_PAM */
 
 	(void) strcpy (name, "root");	/* KLUDGE!!! */
@@ -168,7 +175,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	signal (SIGALRM, catch_signals);	/* exit if the timer expires */
 	alarm (ALARM);		/* only wait so long ... */
 
-	while (1) {		/* repeatedly get login/password pairs */
+	while (true) {		/* repeatedly get login/password pairs */
 		pw_entry (name, &pwent);	/* get entry from password file */
 		if (pwent.pw_name == (char *) 0) {
 			/*
@@ -198,7 +205,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		 * it will work with standard getpass() (no NULL on EOF). 
 		 * --marekm
 		 */
-		if (!cp || !*cp) {
+		if ((NULL == cp) || ('\0' == *cp)) {
 #ifdef	USE_SYSLOG
 			SYSLOG (LOG_INFO, "Normal startup\n");
 			closelog ();
@@ -222,7 +229,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 		puts (_("Login incorrect"));
 	}
 	strzero (pass);
-	alarm (0);
+	(void) alarm (0);
 	signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
 
@@ -236,6 +243,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 #endif
 	/* exec the shell finally. */
 	err = shell (pwent.pw_shell, (char *) 0, environ);
-	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+	exit ((err == ENOENT) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	 /*NOTREACHED*/ return (0);
 }
+

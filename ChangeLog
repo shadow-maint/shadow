@@ -1,5 +1,14 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/sulogin.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/sulogin.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/sulogin.c: Avoid assignments in comparisons.
+	* src/sulogin.c: Ignore the return value of alarm().
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groups.c: Use a bool when possible instead of int integers.
 	* src/groups.c: Add brackets and parenthesis.
 	* src/groups.c: Avoid implicit conversion of pointers / integers
