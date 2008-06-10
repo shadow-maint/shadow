@@ -1,5 +1,14 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpconv.c: Use a bool when possible instead of int integers.
+	* src/grpconv.c: Add brackets and parenthesis.
+	* src/grpconv.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+	* src/grpconv.c: Avoid implicit conversion of pointers / integers
+	to booleans.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: Use a bool when possible instead of int integers.
 	* src/faillog.c: Avoid implicit conversion of pointers / integers
 	/ chars to booleans.
