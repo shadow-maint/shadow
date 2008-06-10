@@ -115,7 +115,7 @@ struct passwd *sgetpwent (const char *buf)
 	}
 	/* FIXME: (0 == pwent.pw_gid) does not look correct -- nekral */
 	pwent.pw_gid = strtol (fields[3], &ep, 10);
-	if ((0 == pwent.pw_gid) && ('\0' != *ep))) {
+	if ((0 == pwent.pw_gid) && ('\0' != *ep)) {
 		return NULL;
 	}
 	pwent.pw_gecos = fields[4];
