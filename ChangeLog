@@ -1,5 +1,16 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Use a bool when possible instead of int integers.
+	* src/su.c: Add brackets and parenthesis.
+	* src/su.c: Avoid implicit conversion of pointers / integers
+	/ chars to booleans.
+	* src/su.c: Ignore the return value of pam_end() before
+	exiting.
+	* src/su.c: Avoid assignments in comparisons.
+	* src/su.c: Avoid multi-statements lines.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, libmisc/valid.c: Change the prototype of
 	valid() to return a bool.
 	* libmisc/valid.c: Add parenthesis.
