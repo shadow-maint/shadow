@@ -1,5 +1,13 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/port.c: Add brackets and parenthesis.
+	* lib/port.c: Change isttytime() prototype to return a bool.
+	* lib/port.c: Ignore the return value of fclose () (file open
+	read-only).
+	* lib/port.c: Avoid multi-statements lines.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/id.c: Ignore the return value of fputs(), puts(), putchar(),
 	and printf().
 	* src/id.c: Ignore return value of setlocale(),
