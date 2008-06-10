@@ -58,34 +58,47 @@ static void print_groups (const char *member)
 	int groups = 0;
 	struct group *grp;
 	struct passwd *pwd;
-	int flag = 0;
+	bool flag = false;
 
-	/* local, no need for xgetpwnam */
-	if ((pwd = getpwnam (member)) == 0) {
-		fprintf (stderr, _("%s: unknown user %s\n"), Prog, member);
+	pwd = getpwnam (member); /* local, no need for xgetpwnam */
+	if (NULL == pwd) {
+		(void) fprintf (stderr, _("%s: unknown user %s\n"),
+		                Prog, member);
 		exit (1);
 	}
-	setgrent ();
-	while ((grp = getgrent ())) {
-		if (is_on_list (grp->gr_mem, member)) {
-			if (groups++)
-				putchar (' ');
 
-			printf ("%s", grp->gr_name);
-			if (grp->gr_gid == pwd->pw_gid)
-				flag = 1;
+	setgrent ();
+	while ((grp = getgrent ()) != NULL) {
+		if (is_on_list (grp->gr_mem, member)) {
+			if (0 != groups) {
+				(void) putchar (' ');
+			}
+			groups++;
+
+			(void) printf ("%s", grp->gr_name);
+			if (grp->gr_gid == pwd->pw_gid) {
+				flag = true;
+			}
 		}
 	}
 	endgrent ();
-	/* local, no need for xgetgrgid */
-	if (!flag && (grp = getgrgid (pwd->pw_gid))) {
-		if (groups++)
-			putchar (' ');
 
-		printf ("%s", grp->gr_name);
+	/* The user may not be in the list of members of its primary group */
+	if (!flag) {
+		grp = getgrgid (pwd->pw_gid); /* local, no need for xgetgrgid */
+		if (NULL != grp) {
+			if (0 != groups) {
+				(void) putchar (' ');
+			}
+			groups++;
+
+			(void) printf ("%s", grp->gr_name);
+		}
 	}
-	if (groups)
-		putchar ('\n');
+
+	if (0 != groups) {
+		(void) putchar ('\n');
+	}
 }
 
 /*
@@ -98,7 +111,7 @@ int main (int argc, char **argv)
 #ifdef HAVE_GETGROUPS
 	int ngroups;
 	GETGROUPS_T *groups;
-	int pri_grp;
+	int pri_grp; /* TODO: should be GETGROUPS_T */
 	int i;
 #else
 	char *logname;
@@ -109,9 +122,9 @@ int main (int argc, char **argv)
 #ifdef HAVE_GETGROUPS
 	groups = (GETGROUPS_T *) malloc (sys_ngroups * sizeof (GETGROUPS_T));
 #endif
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	/*
 	 * Get the program name so that error messages can use it.
@@ -141,48 +154,58 @@ int main (int argc, char **argv)
 		 * The groupset includes the primary group as well.
 		 */
 		pri_grp = getegid ();
-		for (i = 0; i < ngroups; i++)
-			if (pri_grp == (int) groups[i])
+		for (i = 0; i < ngroups; i++) {
+			if (pri_grp == (int) groups[i]) {
 				break;
+			}
+		}
 
-		if (i != ngroups)
+		if (i != ngroups) {
 			pri_grp = -1;
+		}
 
 		/*
 		 * Print out the name of every group in the current group
 		 * set. Unknown groups are printed as their decimal group ID
 		 * values.
 		 */
-		if (pri_grp != -1) {
+		if (-1 != pri_grp) {
 			struct group *gr;
 			/* local, no need for xgetgrgid */
-			if ((gr = getgrgid (pri_grp)))
-				printf ("%s", gr->gr_name);
-			else
-				printf ("%d", pri_grp);
+			gr = getgrgid (pri_grp);
+			if (NULL != gr) {
+				(void) printf ("%s", gr->gr_name);
+			} else {
+				(void) printf ("%d", pri_grp);
+			}
 		}
 
 		for (i = 0; i < ngroups; i++) {
 			struct group *gr;
-			if (i || pri_grp != -1)
-				putchar (' ');
+			if ((0 != i) || (-1 != pri_grp)) {
+				(void) putchar (' ');
+			}
 
 			/* local, no need for xgetgrgid */
-			if ((gr = getgrgid (groups[i])))
-				printf ("%s", gr->gr_name);
-			else
-				printf ("%ld", (long) groups[i]);
+			gr = getgrgid (groups[i]);
+			if (NULL != gr) {
+				(void) printf ("%s", gr->gr_name);
+			} else {
+				(void) printf ("%ld", (long) groups[i]);
+			}
 		}
-		putchar ('\n');
+		(void) putchar ('\n');
 #else
 		/*
 		 * This system does not have the getgroups() system call, so
 		 * I must check the groups file directly.
 		 */
-		if ((logname = getlogin ()))
+		logname = getlogin ();
+		if (NULL != logname) {
 			print_groups (logname);
-		else
+		} else {
 			exit (1);
+		}
 #endif
 	} else {
 
@@ -194,3 +217,4 @@ int main (int argc, char **argv)
 	}
 	exit (0);
 }
+

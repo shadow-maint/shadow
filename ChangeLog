@@ -1,5 +1,16 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groups.c: Use a bool when possible instead of int integers.
+	* src/groups.c: Add brackets and parenthesis.
+	* src/groups.c: Avoid implicit conversion of pointers / integers
+	to booleans.
+	* src/groups.c: Avoid assignments in comparisons.
+	* src/groups.c: Ignore the return value of putchar(), printf()
+	* src/groups.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpconv.c: Use a bool when possible instead of int integers.
 	* src/grpconv.c: Add brackets and parenthesis.
 	* src/grpconv.c: Ignore return value of setlocale(),
