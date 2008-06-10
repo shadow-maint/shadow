@@ -1,5 +1,11 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: Use a bool when possible instead of int integers.
+	* src/chage.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupadd.c: Use a bool when possible instead of int
 	integers.
 	* src/groupadd.c: Add brackets and parenthesis.

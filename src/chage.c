@@ -60,18 +60,18 @@
  */
 static char *Prog;
 
-static int
- dflg = 0,			/* set last password change date */
-    Eflg = 0,			/* set account expiration date */
-    Iflg = 0,			/* set password inactive after expiration */
-    lflg = 0,			/* show account aging information */
-    mflg = 0,			/* set minimum number of days before password change */
-    Mflg = 0,			/* set maximum number of days before password change */
-    Wflg = 0;			/* set expiration warning days */
-static int amroot = 0;
+static bool
+    dflg = false,		/* set last password change date */
+    Eflg = false,		/* set account expiration date */
+    Iflg = false,		/* set password inactive after expiration */
+    lflg = false,		/* show account aging information */
+    mflg = false,		/* set minimum number of days before password change */
+    Mflg = false,		/* set maximum number of days before password change */
+    Wflg = false;		/* set expiration warning days */
+static bool amroot = false;
 
-static int pw_locked = 0;	/* Indicate if the password file is locked */
-static int spw_locked = 0;	/* Indicate if the shadow file is locked */
+static bool pw_locked  = false;	/* Indicate if the password file is locked */
+static bool spw_locked = false;	/* Indicate if the shadow file is locked */
 /* The name and UID of the user being worked on */
 static char user_name[BUFSIZ] = "";
 static uid_t user_uid = -1;
@@ -90,7 +90,7 @@ static pam_handle_t *pamh = NULL;
 #define	EPOCH		"1969-12-31"
 
 /* local function prototypes */
-static int isnum (const char *s);
+static bool isnum (const char *s);
 static void usage (void);
 static void date_to_str (char *, size_t, time_t);
 static int new_fields (void);
@@ -99,7 +99,7 @@ static void list_fields (void);
 static void process_flags (int argc, char **argv);
 static void check_flags (int argc, int opt_index);
 static void check_perms (void);
-static void open_files (int readonly);
+static void open_files (bool readonly);
 static void close_files (void);
 static void fail_exit (int code);
 
@@ -139,15 +139,15 @@ static void fail_exit (int code)
 /*
  * isnum - determine whether or not a string is a number
  */
-static int isnum (const char *s)
+static bool isnum (const char *s)
 {
 	while ('\0' != *s) {
 		if (!isdigit (*s)) {
-			return 0;
+			return false;
 		}
 		s++;
 	}
-	return 1;
+	return true;
 }
 
 /*
@@ -394,7 +394,7 @@ static void process_flags (int argc, char **argv)
 			     &option_index)) != -1) {
 		switch (c) {
 		case 'd':
-			dflg++;
+			dflg = true;
 			if (!isnum (optarg)) {
 				lastday = strtoday (optarg);
 			} else {
@@ -402,7 +402,7 @@ static void process_flags (int argc, char **argv)
 			}
 			break;
 		case 'E':
-			Eflg++;
+			Eflg = true;
 			if (!isnum (optarg)) {
 				expdays = strtoday (optarg);
 			} else {
@@ -413,22 +413,22 @@ static void process_flags (int argc, char **argv)
 			usage ();
 			break;
 		case 'I':
-			Iflg++;
+			Iflg = true;
 			inactdays = strtol (optarg, 0, 10);
 			break;
 		case 'l':
-			lflg++;
+			lflg = true;
 			break;
 		case 'm':
-			mflg++;
+			mflg = true;
 			mindays = strtol (optarg, 0, 10);
 			break;
 		case 'M':
-			Mflg++;
+			Mflg = true;
 			maxdays = strtol (optarg, 0, 10);
 			break;
 		case 'W':
-			Wflg++;
+			Wflg = true;
 			warndays = strtol (optarg, 0, 10);
 			break;
 		default:
@@ -535,7 +535,7 @@ static void check_perms (void)
  *	In read-only mode, the databases are not locked and are opened
  *	only for reading.
  */
-static void open_files (int readonly)
+static void open_files (bool readonly)
 {
 	/*
 	 * Lock and open the password file. This loads all of the password
@@ -549,7 +549,7 @@ static void open_files (int readonly)
 		fail_exit (E_NOPERM);
 	}
 	if (!readonly) {
-		pw_locked = 1;
+		pw_locked = true;
 	}
 	if (pw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr, _("%s: can't open password file\n"), Prog);
@@ -570,7 +570,7 @@ static void open_files (int readonly)
 		fail_exit (E_NOPERM);
 	}
 	if (!readonly) {
-		spw_locked = 1;
+		spw_locked = true;
 	}
 	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr,
@@ -606,9 +606,9 @@ static void close_files (void)
 		fail_exit (E_NOPERM);
 	}
 	spw_unlock ();
-	spw_locked = 0;
+	spw_locked = false;
 	pw_unlock ();
-	pw_locked = 0;
+	pw_locked = false;
 }
 
 /*
@@ -753,9 +753,9 @@ int main (int argc, char **argv)
 	audit_help_open ();
 #endif
 	sanitize_env ();
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	ruid = getuid ();
 	rgid = getgid ();
