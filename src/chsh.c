@@ -159,7 +159,7 @@ static bool shell_is_listed (const char *sh)
 		return false;
 	}
 
-	while (fgets (buf, sizeof (buf), fp)) {
+	while (fgets (buf, sizeof (buf), fp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
