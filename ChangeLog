@@ -1,4 +1,16 @@
-2008-06-09  Nicolas François  <nicolas.francois@centraliens.net>
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/passwd.c: Use a bool when possible instead of int integers.
+	* src/passwd.c: Avoid assignments in comparisons.
+	* src/passwd.c: Add brackets and parenthesis.
+	* src/passwd.c: Avoid implicit conversion of pointers / integers /
+	chars to booleans.
+	* src/passwd.c: Move the "context_t c" declaration at the
+	beginning check_selinux_access.
+	* src/passwd.c: Ignore return value of setlocale(),
+	bindtextdomain(), and textdomain().
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmod.c: Use a bool when possible instead of int
 	integers.
