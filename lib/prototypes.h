@@ -76,7 +76,7 @@ extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
 extern void chown_tty (const char *, const struct passwd *);
 
 /* console.c */
-extern int console (const char *);
+extern bool console (const char *);
 
 /* copydir.c */
 extern int copy_tree (const char *src_root, const char *dst_root,
@@ -100,8 +100,8 @@ extern void change_field (char *, size_t, const char *);
 extern int valid_field (const char *, const char *);
 
 /* find_new_ids.c */
-extern int find_new_uid (int sys_user, uid_t *uid, uid_t const *preferred_uid);
-extern int find_new_gid (int sys_group, gid_t *gid, gid_t const *preferred_gid);
+extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
+extern int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid);
 
 /* getlong.c */
 extern int getlong(const char *numstr, long int *result);
@@ -137,7 +137,7 @@ extern void setup_limits (const struct passwd *);
 extern char **add_list (char **, const char *);
 extern char **del_list (char **, const char *);
 extern char **dup_list (char *const *);
-extern int is_on_list (char *const *, const char *);
+extern bool is_on_list (char *const *list, const char *member);
 extern char **comma_to_list (const char *);
 
 /* log.c */
@@ -168,7 +168,7 @@ extern int obscure (const char *, const char *, const struct passwd *);
 extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 
 /* port.c */
-extern int isttytime (const char *, const char *, time_t);
+extern bool isttytime (const char *, const char *, time_t);
 
 /* pwd2spwd.c */
 extern struct spwd *pwd_to_spwd (const struct passwd *);
