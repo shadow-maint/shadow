@@ -97,7 +97,7 @@ extern void sanitize_env (void);
 
 /* fields.c */
 extern void change_field (char *, size_t, const char *);
-extern int valid_field (const char *, const char *);
+extern bool valid_field (const char *, const char *);
 
 /* find_new_ids.c */
 extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);

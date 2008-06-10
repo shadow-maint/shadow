@@ -1,5 +1,11 @@
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h, libmisc/valid.c: Change the prototype of
+	valid() to return a bool.
+	* libmisc/valid.c: Add parenthesis.
+
+2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Add brackets and parenthesis.
 	* lib/commonio.c: Check the result of fgets().
 	* lib/commonio.c: Avoid implicit conversion of pointers to

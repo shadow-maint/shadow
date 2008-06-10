@@ -49,7 +49,7 @@
  *	is used to indicate that a dummy salt must be used to encrypt the
  *	password anyway.
  */
-int valid (const char *password, const struct passwd *ent)
+bool valid (const char *password, const struct passwd *ent)
 {
 	const char *encrypted;
 	const char *salt;
@@ -63,9 +63,9 @@ int valid (const char *password, const struct passwd *ent)
 
 	if ((NULL != ent->pw_name) && ('\0' == ent->pw_passwd[0])) {
 		if ('\0' == password[0]) {
-			return (1);	/* user entered nothing */
+			return true;	/* user entered nothing */
 		} else {
-			return (0);	/* user entered something! */
+			return false;	/* user entered something! */
 		}
 	}
 
@@ -73,7 +73,7 @@ int valid (const char *password, const struct passwd *ent)
 	 * If there is no entry then we need a salt to use.
 	 */
 
-	if (ent->pw_name == (char *) 0 || ent->pw_passwd[0] == '\0') {
+	if ((NULL == ent->pw_name) || ('\0' == ent->pw_passwd[0])) {
 		salt = "xx";
 	} else {
 		salt = ent->pw_passwd;
@@ -94,11 +94,11 @@ int valid (const char *password, const struct passwd *ent)
 	 * cause non-existent users to not be validated.
 	 */
 
-	if ((NULL != ent->pw_name) &&
-	    (strcmp (encrypted, ent->pw_passwd) == 0)) {
-		return (1);
+	if (   (NULL != ent->pw_name)
+	    && (strcmp (encrypted, ent->pw_passwd) == 0)) {
+		return true;
 	} else {
-		return (0);
+		return false;
 	}
 }
 
