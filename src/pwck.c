@@ -65,16 +65,16 @@
 
 static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
-static int use_system_pw_file = 1;
+static bool use_system_pw_file = true;
 static const char *spw_file = SHADOW_FILE;
-static int use_system_spw_file = 1;
+static bool use_system_spw_file = true;
 
-static int is_shadow = 0;
+static bool is_shadow = false;
 
 /* Options */
-static int read_only = 0;
-static int sort_mode = 0;
-static int quiet = 0;		/* don't report warnings, only errors */
+static bool read_only = false;
+static bool sort_mode = false;
+static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
 static void usage (void);
@@ -110,13 +110,13 @@ static void process_flags (int argc, char **argv)
 		switch (arg) {
 		case 'e':	/* added for Debian shadow-961025-2 compatibility */
 		case 'q':
-			quiet = 1;
+			quiet = true;
 			break;
 		case 'r':
-			read_only = 1;
+			read_only = true;
 			break;
 		case 's':
-			sort_mode = 1;
+			sort_mode = true;
 			break;
 		default:
 			usage ();
@@ -142,13 +142,13 @@ static void process_flags (int argc, char **argv)
 	if (optind != argc) {
 		pwd_file = argv[optind];
 		pw_name (pwd_file);
-		use_system_pw_file = 0;
+		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
 		spw_file = argv[optind + 1];
 		spw_name (spw_file);
-		is_shadow = 1;
-		use_system_spw_file = 0;
+		is_shadow = true;
+		use_system_spw_file = false;
 	} else if (optind == argc) {
 		is_shadow = spw_file_present ();
 	}
@@ -587,7 +587,7 @@ static void check_spw_file (int *errors, int *changed)
 		/*
 		 * Warn if last password change in the future.  --marekm
 		 */
-		if (!quiet
+		if (   !quiet
 		    && (spw->sp_lstchg > time ((time_t *) 0) / SCALE)) {
 			printf (_("user %s: last password change in the future\n"),
 			        spw->sp_namp);
@@ -609,9 +609,9 @@ int main (int argc, char **argv)
 	 */
 	Prog = Basename (argv[0]);
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	OPENLOG ("pwck");
 
