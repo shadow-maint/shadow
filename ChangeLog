@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: The ID argument of audit_logger is an unsigned
+	int.
+	* src/gpasswd.c: Ignore the return value of signal(). The signal
+	handlers are only changed for the last steps of gpasswd, and there
+	is no need to restore them.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: The ID argument of audit_logger is an unsigned
 	int.
 	* src/userdel.c: fork() and wait() return a pid_t, not an int.

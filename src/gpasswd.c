@@ -190,7 +190,7 @@ static bool is_valid_user_list (const char *users)
 	for (start = users; (NULL != start) && ('\0' != *start); start = end) {
 		end = strchr (start, ',');
 		if (NULL != end) {
-			len = end - start;
+			len = (size_t) (end - start);
 			end++;
 		} else {
 			len = strlen (start);
@@ -240,7 +240,8 @@ static void process_flags (int argc, char **argv)
 					 user);
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					      "adding to group", user, -1, 0);
+				              "adding to group",
+				              user, AUDIT_NO_ID, 0);
 #endif
 				fail_exit (1);
 			}
@@ -251,8 +252,8 @@ static void process_flags (int argc, char **argv)
 			if (!amroot) {
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					      "Listing administrators", NULL,
-					      bywho, 0);
+				              "Listing administrators",
+				              NULL, (unsigned int) bywho, 0);
 #endif
 				failure ();
 			}
@@ -280,8 +281,8 @@ static void process_flags (int argc, char **argv)
 			if (!amroot) {
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-					      "listing members", NULL, bywho,
-					      0);
+				              "listing members",
+				              NULL, (unsigned int) bywho, 0);
 #endif
 				failure ();
 			}
@@ -356,7 +357,8 @@ static void open_files (void)
 		SYSLOG ((LOG_WARN, "failed to get lock for /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "locking /etc/group", group, -1, 0);
+		              "locking /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -369,7 +371,8 @@ static void open_files (void)
 			SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "locking /etc/gshadow", group, -1, 0);
+			              "locking /etc/gshadow",
+			              group, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (1);
 		}
@@ -381,7 +384,8 @@ static void open_files (void)
 		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening /etc/group", group, -1, 0);
+		              "opening /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -391,7 +395,8 @@ static void open_files (void)
 		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening /etc/gshadow", group, -1, 0);
+		              "opening /etc/gshadow",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -412,7 +417,8 @@ static void close_files (void)
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "rewriting /etc/group", group, -1, 0);
+		              "rewriting /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -422,7 +428,8 @@ static void close_files (void)
 		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "rewriting /etc/gshadow", group, -1, 0);
+		              "rewriting /etc/gshadow",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -436,7 +443,8 @@ static void close_files (void)
 		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "unlocking group file", group, -1, 0);
+		              "unlocking group file",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		exit (1);
 	}
@@ -467,7 +475,8 @@ static void check_perms (const struct group *gr)
 		if (!amroot && !is_on_list (sg->sg_adm, myname)) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "modify group", group, -1, 0);
+			              "modify group",
+			              group, AUDIT_NO_ID, 0);
 #endif
 			failure ();
 		}
@@ -493,7 +502,8 @@ static void check_perms (const struct group *gr)
 			if (gr->gr_mem[0] == (char *) 0) {
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "modifying group", group, -1, 0);
+				              "modifying group",
+				              group, AUDIT_NO_ID, 0);
 #endif
 				failure ();
 			}
@@ -501,7 +511,8 @@ static void check_perms (const struct group *gr)
 			if (strcmp (gr->gr_mem[0], myname) != 0) {
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				              "modifying group", myname, -1, 0);
+				              "modifying group",
+				              myname, AUDIT_NO_ID, 0);
 #endif
 				failure ();
 			}
@@ -510,7 +521,8 @@ static void check_perms (const struct group *gr)
 		if (!amroot) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "modifying group", group, -1, 0);
+			              "modifying group",
+			              group, AUDIT_NO_ID, 0);
 #endif
 			failure ();
 		}
@@ -532,7 +544,8 @@ static void update_group (struct group *gr)
 		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "updating /etc/group", group, -1, 0);
+		              "updating /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -542,7 +555,8 @@ static void update_group (struct group *gr)
 		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "updating /etc/gshadow", group, -1, 0);
+		              "updating /etc/gshadow",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -571,7 +585,8 @@ static void get_group (struct group *gr)
 		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening /etc/group", group, -1, 0);
+		              "opening /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -581,7 +596,8 @@ static void get_group (struct group *gr)
 		fprintf (stderr, _("unknown group: %s\n"), group);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "group lookup", group, -1, 0);
+		              "group lookup",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		failure ();
 	}
@@ -596,7 +612,8 @@ static void get_group (struct group *gr)
 		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "closing /etc/group", group, -1, 0);
+		              "closing /etc/group",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
@@ -609,7 +626,8 @@ static void get_group (struct group *gr)
 			SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "opening /etc/gshadow", group, -1, 0);
+			              "opening /etc/gshadow",
+			              group, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (1);
 		}
@@ -646,7 +664,8 @@ static void get_group (struct group *gr)
 			SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "closing /etc/gshadow", group, -1, 0);
+			              "closing /etc/gshadow",
+			              group, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (1);
 		}
@@ -705,7 +724,8 @@ static void change_passwd (struct group *gr)
 			puts (_("They don't match; try again"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "changing password", group, -1, 0);
+			              "changing password",
+			              group, AUDIT_NO_ID, 0);
 #endif
 		}
 	}
@@ -727,7 +747,8 @@ static void change_passwd (struct group *gr)
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-	              "changing password", group, -1, 1);
+	              "changing password",
+	              group, AUDIT_NO_ID, 1);
 #endif
 	SYSLOG ((LOG_INFO, "change the password for group %s by %s", group,
 	        myname));
@@ -792,8 +813,9 @@ int main (int argc, char **argv)
 	if (NULL == pw) {
 		fputs (_("Who are you?\n"), stderr);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "user lookup", NULL,
-		              bywho, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "user lookup",
+		              NULL, (unsigned int) bywho, 0);
 #endif
 		failure ();
 	}
@@ -828,7 +850,8 @@ int main (int argc, char **argv)
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "deleting group password", group, -1, 1);
+		              "deleting group password",
+		              group, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "remove password from group %s by %s",
 		         group, myname));
@@ -844,7 +867,8 @@ int main (int argc, char **argv)
 #endif
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "restrict access to group", group, -1, 1);
+		              "restrict access to group",
+		              group, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "restrict access to group %s by %s",
 			 group, myname));
@@ -864,8 +888,9 @@ int main (int argc, char **argv)
 		}
 #endif
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group member",
-		              user, -1, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding group member",
+		              user, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add member %s to group %s by %s", user,
 		         group, myname));
@@ -898,13 +923,15 @@ int main (int argc, char **argv)
 			         Prog, user);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "deleting member", user, -1, 0);
+			              "deleting member",
+			              user, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (1);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting member",
-		              user, -1, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting member",
+		              user, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "remove member %s from group %s by %s",
 		         user, group, myname));
@@ -912,14 +939,15 @@ int main (int argc, char **argv)
 	}
 #ifdef SHADOWGRP
 	/*
-	 * Replacing the entire list of administators is simple. Check the
+	 * Replacing the entire list of administrators is simple. Check the
 	 * list to make sure everyone is a real user. Then slap the new list
 	 * in place.
 	 */
 	if (Aflg) {
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "setting group admin",
-		              group, -1, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "setting group admin",
+		              group, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "set administrators of %s to %s",
 		         group, admins));
@@ -938,7 +966,8 @@ int main (int argc, char **argv)
 	if (Mflg) {
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "setting group members", group, -1, 1);
+		              "setting group members",
+		              group, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "set members of %s to %s", group, members));
 #ifdef SHADOWGRP
@@ -956,20 +985,21 @@ int main (int argc, char **argv)
 	if ((isatty (0) == 0) || (isatty (1) == 0)) {
 		fprintf (stderr, _("%s: Not a tty\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing password",
-		              group, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "changing password",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (1);
 	}
 
 	catch_signals (0);	/* save tty modes */
 
-	signal (SIGHUP, catch_signals);
-	signal (SIGINT, catch_signals);
-	signal (SIGQUIT, catch_signals);
-	signal (SIGTERM, catch_signals);
+	(void) signal (SIGHUP, catch_signals);
+	(void) signal (SIGINT, catch_signals);
+	(void) signal (SIGQUIT, catch_signals);
+	(void) signal (SIGTERM, catch_signals);
 #ifdef SIGTSTP
-	signal (SIGTSTP, catch_signals);
+	(void) signal (SIGTSTP, catch_signals);
 #endif
 
 	/* Prompt for the new password */
@@ -990,8 +1020,9 @@ int main (int argc, char **argv)
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing id to root",
-		              group, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "changing id to root",
+		              group, AUDIT_NO_ID, 0);
 #endif
 		closelog ();
 		fail_exit (1);
@@ -1012,3 +1043,4 @@ int main (int argc, char **argv)
 
 	exit (E_SUCCESS);
 }
+
