@@ -1,5 +1,17 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Cast dates to time_t, and number of days to a
+	long integer.
+	* src/usermod.c: Cast UIDs and GIDs to uid_t and gid_t after
+	checking the ranges.
+	* src/usermod.c: The ID argument of audit_logger is an unsigned
+	int.
+	* src/usermod.c: read() returns a ssize_t.
+	* src/usermod.c: Cast the return value of malloc and make sure it
+	receives a size_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/logoutd.c: Ignore return value of time() when use with a
 	non NULL argument.
 
