@@ -94,7 +94,7 @@ static void usage (void)
 	 */
 	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups = (GETGROUPS_T *) malloc (sys_ngroups * sizeof (GETGROUPS_T));
+	groups = (GETGROUPS_T *) malloc (sizeof (GETGROUPS_T) * sys_ngroups);
 	/*
 	 * See if the -a flag has been given to print out the concurrent
 	 * group set.
@@ -125,16 +125,18 @@ static void usage (void)
 
 	pw = getpwuid (ruid); /* local, no need for xgetpwuid */
 	if (NULL != pw) {
-		(void) printf ("UID=%u(%s)", ruid, pw->pw_name);
+		(void) printf ("UID=%lu(%s)",
+		               (unsigned long) ruid, pw->pw_name);
 	} else {
-		(void) printf ("UID=%u", ruid);
+		(void) printf ("UID=%lu", (unsigned long) ruid);
 	}
 
 	gr = getgrgid (rgid);; /* local, no need for xgetgrgid */
 	if (NULL != gr) {
-		(void) printf (" GID=%u(%s)", rgid, gr->gr_name);
+		(void) printf (" GID=%lu(%s)",
+		               (unsigned long) rgid, gr->gr_name);
 	} else {
-		(void) printf (" GID=%u", rgid);
+		(void) printf (" GID=%lu", (unsigned long) rgid);
 	}
 
 	/*
@@ -145,17 +147,19 @@ static void usage (void)
 	if (ruid != euid) {
 		pw = getpwuid (euid); /* local, no need for xgetpwuid */
 		if (NULL != pw) {
-			(void) printf (" EUID=%u(%s)", euid, pw->pw_name);
+			(void) printf (" EUID=%lu(%s)",
+			               (unsigned long) euid, pw->pw_name);
 		} else {
-			(void) printf (" EUID=%u", euid);
+			(void) printf (" EUID=%lu", (unsigned long) euid);
 		}
 	}
 	if (rgid != egid) {
 		gr = getgrgid (egid); /* local, no need for xgetgrgid */
 		if (NULL != gr) {
-			(void) printf (" EGID=%u(%s)", egid, gr->gr_name);
+			(void) printf (" EGID=%lu(%s)",
+			               (unsigned long) egid, gr->gr_name);
 		} else {
-			(void) printf (" EGID=%u", egid);
+			(void) printf (" EGID=%lu", (unsigned long) egid);
 		}
 	}
 #ifdef HAVE_GETGROUPS
@@ -181,10 +185,12 @@ static void usage (void)
 			/* local, no need for xgetgrgid */
 			gr = getgrgid (groups[i]);
 			if (NULL != gr) {
-				(void) printf ("%u(%s)",
-				               groups[i], gr->gr_name);
+				(void) printf ("%lu(%s)",
+				               (unsigned long) groups[i],
+				               gr->gr_name);
 			} else {
-				(void) printf ("%u", groups[i]);
+				(void) printf ("%lu",
+				               (unsigned long) groups[i]);
 			}
 		}
 	}

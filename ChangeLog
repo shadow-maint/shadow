@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/id.c: Make sure malloc receives a size_t.
+	* src/id.c: Use a %lu format and cast group and user IDs to
+	unsigned long integers.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/sulogin.c: Ignore the return value of signal().
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
