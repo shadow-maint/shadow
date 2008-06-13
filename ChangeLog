@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/strtoday.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/strtoday.c: Add brackets and parenthesis.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/salt.c: Use a size_t for the size of strings instead of
 	unsigned int.
 	* libmisc/salt.c: Add brackets and parenthesis.

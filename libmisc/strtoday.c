@@ -69,14 +69,16 @@ long strtoday (const char *str)
 	 * which is not what we expect, unless you're a BOFH :-).
 	 * (useradd sets sp_expire = current date for new lusers)
 	 */
-	if (!str || *str == '\0')
+	if ((NULL == str) || ('\0' == *str)) {
 		return -1;
+	}
 
 	t = get_date (str, (time_t *) 0);
-	if (t == (time_t) - 1)
+	if ((time_t) - 1 == t) {
 		return -1;
+	}
 	/* convert seconds to days since 1970-01-01 */
-	return (t + DAY / 2) / DAY;
+	return (long) (t + DAY / 2) / DAY;
 }
 
 #else				/* !USE_GETDATE */
@@ -129,14 +131,16 @@ long strtoday (const char *str)
 	memzero (&tp, sizeof tp);
 	for (fmt = date_formats; *fmt; fmt++) {
 		cp = strptime ((char *) str, *fmt, &tp);
-		if (!cp || *cp != '\0')
+		if ((NULL == cp) || ('\0' != *cp)) {
 			continue;
+		}
 
 		result = mktime (&tp);
-		if (result == (time_t) - 1)
+		if ((time_t) - 1 == result) {
 			continue;
+		}
 
-		return result / DAY;	/* success */
+		return (long) (result / DAY);	/* success */
 	}
 	return -1;
 #else
@@ -151,8 +155,9 @@ long strtoday (const char *str)
 	 * is compiled in ...
 	 */
 
-	if (sscanf (str, "%d/%d/%d%c", &year, &month, &day, slop) != 3)
+	if (sscanf (str, "%d/%d/%d%c", &year, &month, &day, slop) != 3) {
 		return -1;
+	}
 
 	/*
 	 * the month, day of the month, and year are checked for
@@ -160,23 +165,28 @@ long strtoday (const char *str)
 	 * 1970 and 2069.
 	 */
 
-	if (month < 1 || month > 12)
+	if ((month < 1) || (month > 12)) {
 		return -1;
+	}
 
-	if (day < 1)
+	if (day < 1) {
 		return -1;
+	}
 
-	if ((month != 2 || (year % 4) != 0) && day > days[month])
+	if (   ((2 != month) || ((year % 4) != 0))
+	    && (day > days[month])) {
 		return -1;
-	else if ((month == 2 && (year % 4) == 0) && day > 29)
+	} else if ((month == 2) && ((year % 4) == 0) && (day > 29)) {
 		return -1;
+	}
 
-	if (year < 0)
+	if (year < 0) {
 		return -1;
-	else if (year <= 69)
+	} else if (year <= 69) {
 		year += 2000;
-	else if (year <= 99)
+	} else if (year <= 99) {
 		year += 1900;
+	}
 
 	/*
 	 * On systems with 32-bit signed time_t, time wraps around in 2038
@@ -184,8 +194,9 @@ long strtoday (const char *str)
 	 * This limit can be removed once no one is using 32-bit systems
 	 * anymore :-).  --marekm
 	 */
-	if (year < 1970 || year > 2037)
+	if ((year < 1970) || (year > 2037)) {
 		return -1;
+	}
 
 	/*
 	 * the total number of days is the total number of days in all
