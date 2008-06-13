@@ -1,5 +1,15 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/log.c: Avoid assignments in comparisons.
+	* libmisc/log.c: Add brackets and parenthesis.
+	* libmisc/log.c: read() returns a ssize_t (note size_t).
+	* libmisc/log.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/log.c: Ignore return value of time() when use with a
+	non NULL argument.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/strtoday.c: Avoid implicit conversion of pointers to
 	booleans.
 	* libmisc/strtoday.c: Add brackets and parenthesis.

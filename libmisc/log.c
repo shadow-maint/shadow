@@ -62,8 +62,10 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	 * If the file does not exist, don't create it.
 	 */
 
-	if ((fd = open (LASTLOG_FILE, O_RDWR)) == -1)
+	fd = open (LASTLOG_FILE, O_RDWR);
+	if (-1 == fd) {
 		return;
+	}
 
 	/*
 	 * The file is indexed by UID number.  Seek to the record
@@ -83,19 +85,23 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	 * the way we read the old one in.
 	 */
 
-	if (read (fd, (char *) &newlog, sizeof newlog) != sizeof newlog)
+	if (read (fd, (char *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
 		memzero (&newlog, sizeof newlog);
-	if (ll)
+	}
+	if (NULL != ll) {
 		*ll = newlog;
+	}
 
 	ll_time = newlog.ll_time;
-	time (&ll_time);
+	(void) time (&ll_time);
 	newlog.ll_time = ll_time;
 	strncpy (newlog.ll_line, line, sizeof newlog.ll_line);
 #if HAVE_LL_HOST
 	strncpy (newlog.ll_host, host, sizeof newlog.ll_host);
 #endif
-	if (lseek (fd, offset, SEEK_SET) == offset)
+	if (lseek (fd, offset, SEEK_SET) == offset) {
 		write (fd, (char *) &newlog, sizeof newlog);
+	}
 	close (fd);
 }
+
