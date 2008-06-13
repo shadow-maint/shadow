@@ -113,7 +113,7 @@ static int do_lock_file (const char *file, const char *lock)
 {
 	int fd;
 	pid_t pid;
-	size_t len;
+	ssize_t len;
 	int retval;
 	char buf[32];
 
@@ -124,8 +124,8 @@ static int do_lock_file (const char *file, const char *lock)
 
 	pid = getpid ();
 	snprintf (buf, sizeof buf, "%lu", (unsigned long) pid);
-	len = strlen (buf) + 1;
-	if (write (fd, buf, len) != (ssize_t) len) {
+	len = (ssize_t) strlen (buf) + 1;
+	if (write (fd, buf, (size_t) len) != len) {
 		(void) close (fd);
 		unlink (file);
 		return 0;

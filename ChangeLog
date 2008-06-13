@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c: len should be typed ssize_t as it is the return
+	of read(), and is compared to 0. Cast to size_t when necessary.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_ids.c: Use getdef_ulong to retrieve UIDs/GIDs
 	from login.defs. Type constants to long integers.
 
