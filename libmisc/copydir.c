@@ -59,20 +59,20 @@ static struct link_name *links;
 static int copy_entry (const char *src, const char *dst,
                        long int uid, long int gid);
 static int copy_dir (const char *src, const char *dst,
-                     const struct stat *statp, const struct timeval mt[2],
+                     const struct stat *statp, const struct timeval mt[],
                      long int uid, long int gid);
 #ifdef	S_IFLNK
 static int copy_symlink (const char *src, const char *dst,
-                         const struct stat *statp, const struct timeval mt[2],
+                         const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid);
 #endif
 static int copy_hardlink (const char *src, const char *dst,
                           struct link_name *lp);
 static int copy_special (const char *dst,
-                         const struct stat *statp, const struct timeval mt[2],
+                         const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid);
 static int copy_file (const char *src, const char *dst,
-                      const struct stat *statp, const struct timeval mt[2],
+                      const struct stat *statp, const struct timeval mt[],
                       long int uid, long int gid);
 
 #ifdef WITH_SELINUX
@@ -149,10 +149,10 @@ static void remove_link (struct link_name *ln)
 static struct link_name *check_link (const char *name, const struct stat *sb)
 {
 	struct link_name *lp;
-	int src_len;
-	int dst_len;
-	int name_len;
-	int len;
+	size_t src_len;
+	size_t dst_len;
+	size_t name_len;
+	size_t len;
 
 	for (lp = links; lp; lp = lp->ln_next) {
 		if ((lp->ln_dev == sb->st_dev) && (lp->ln_ino == sb->st_ino)) {
@@ -172,7 +172,7 @@ static struct link_name *check_link (const char *name, const struct stat *sb)
 	lp->ln_ino = sb->st_ino;
 	lp->ln_count = sb->st_nlink;
 	len = name_len - src_len + dst_len + 1;
-	lp->ln_name = xmalloc (len);
+	lp->ln_name = (char *) xmalloc (len);
 	snprintf (lp->ln_name, len, "%s%s", dst_orig, name + src_len);
 	lp->ln_next = links;
 	links = lp;
@@ -356,7 +356,7 @@ static int copy_entry (const char *src, const char *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_dir (const char *src, const char *dst,
-                     const struct stat *statp, const struct timeval mt[2],
+                     const struct stat *statp, const struct timeval mt[],
                      long int uid, long int gid)
 {
 	int err = 0;
@@ -394,7 +394,7 @@ static int copy_dir (const char *src, const char *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_symlink (const char *src, const char *dst,
-                         const struct stat *statp, const struct timeval mt[2],
+                         const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid)
 {
 	char oldlink[1024];
@@ -482,7 +482,7 @@ static int copy_hardlink (const char *src, const char *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_special (const char *dst,
-                         const struct stat *statp, const struct timeval mt[2],
+                         const struct stat *statp, const struct timeval mt[],
                          long int uid, long int gid)
 {
 	int err = 0;
@@ -514,14 +514,14 @@ static int copy_special (const char *dst,
  *	Return 0 on success, -1 on error.
  */
 static int copy_file (const char *src, const char *dst,
-                      const struct stat *statp, const struct timeval mt[2],
+                      const struct stat *statp, const struct timeval mt[],
                       long int uid, long int gid)
 {
 	int err = 0;
 	int ifd;
 	int ofd;
 	char buf[1024];
-	int cnt;
+	ssize_t cnt;
 
 	ifd = open (src, O_RDONLY);
 	if (ifd < 0) {
@@ -541,7 +541,7 @@ static int copy_file (const char *src, const char *dst,
 	}
 
 	while ((cnt = read (ifd, buf, sizeof buf)) > 0) {
-		if (write (ofd, buf, cnt) != cnt) {
+		if (write (ofd, buf, (size_t)cnt) != cnt) {
 			return -1;
 		}
 	}

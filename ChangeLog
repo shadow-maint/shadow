@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c: Do not specify a size of arrays in the
+	prototypes.
+	* libmisc/copydir.c: Use a size_t for the length of strings.
+	* libmisc/copydir.c: Cast the return value of malloc().
+	* libmisc/copydir.c: The size argument of write() is a size_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/pwd2spwd.c: Cast number of days to a long integer.
 	* libmisc/pwd2spwd.c: Use SHADOW_SP_FLAG_UNSET for the initial
 	value of sp.sp_flag.
