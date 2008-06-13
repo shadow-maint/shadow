@@ -4,25 +4,33 @@
 #ifndef _DEFINES_H_
 #define _DEFINES_H_
 
+#include <config.h>
+
 #define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
 
 /* Take care of NLS matters.  */
 
-#if HAVE_LOCALE_H
+#ifdef HAVE_LOCALE_H
 # include <locale.h>
+#else
+# undef setlocale
+# define setlocale(category, locale)	(NULL)
+# ifndef LC_ALL
+#  define LC_ALL	6
+# endif
 #endif
 
 #define gettext_noop(String) (String)
 /* #define gettext_def(String) "#define String" */
 
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
 # include <libintl.h>
 # define _(Text) gettext (Text)
 #else
 # undef bindtextdomain
-# define bindtextdomain(Domain, Directory)	/* empty */
+# define bindtextdomain(Domain, Directory)	(NULL)
 # undef textdomain
-# define textdomain(Domain)	/* empty */
+# define textdomain(Domain)	(NULL)
 # define _(Text) Text
 # define ngettext(Msgid1, Msgid2, N) \
     ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
@@ -136,7 +144,7 @@ char *strchr (), *strrchr (), *strtok ();
 
 /* cleaner than lots of #ifdefs everywhere - use this as follows:
    SYSLOG((LOG_CRIT, "user %s cracked root", user)); */
-#if ENABLE_NLS
+#ifdef ENABLE_NLS
 /* Temporarily set LC_TIME to "C" to avoid strange dates in syslog.
    This is a workaround for a more general syslog(d) design problem -
    syslogd should log the current system time for each event, and not
@@ -303,6 +311,8 @@ extern char *strerror ();
 #define SHADOW_PASSWD_STRING "x"
 #endif
 
+#define SHADOW_SP_FLAG_UNSET ((unsigned long int)-1)
+
 #ifdef WITH_AUDIT
 #ifdef __u8			/* in case we use pam < 0.80 */
 #undef __u8
@@ -332,8 +342,8 @@ typedef unsigned char _Bool;
 #  endif
 # endif
 # define bool _Bool
-# define false 0
-# define true 1
+# define false (0)
+# define true  (1)
 # define __bool_true_false_are_defined 1
 #endif
 

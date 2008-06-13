@@ -1,5 +1,19 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Include <config.h> since it uses the macro that
+	might be defined in this header file.
+	* lib/defines.h: Prefer checking if HAVE_LOCALE_H or ENABLE_NLS
+	are defined (rather than set to non 0).
+	* lib/defines.h: The dummy implementations of bindtextdomain() and
+	textdomain() should return a pointer. Return NULL instead of
+	/* empty */
+	* lib/defines.h: Define SHADOW_SP_FLAG_UNSET, to be used for the
+	initialization of sp_flag field of the shadow structures.
+	* lib/defines.h: Define LC_ALL, needed even if HAVE_LOCALE_H is
+	not defined.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/sulog.c: Ignore the return value of umask() when the
 	mask is restored.
 	* libmisc/sulog.c: Add brackets.
