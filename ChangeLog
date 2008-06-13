@@ -1,3 +1,21 @@
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/utmp.c: Avoid implicit conversion of pointers to
+	booleans
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/console.c, libmisc/hushed.c, libmisc/yesno.c,
+	libmisc/loginprompt.c, libmisc/ttytype.c, libmisc/tz.c,
+	src/login_nopam.c, src/chpasswd.c, src/chgpasswd.c, lib/port.c:
+	The size argument of fgets is an int, not a size_t.
+	* libmisc/loginprompt.c: Ignore the return value from signal()
+	when the signal handlers are restored.
+	* src/chpasswd.c: Cast the return value of time() to a long
+	integer.
+	* src/chpasswd.c: Use the SCALE macro instead of (24L * 3600L)
+	for the values to be set in /etc/shadow.
+
 2008-06-10  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwck.c: Use a bool when possible instead of int integers.

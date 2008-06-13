@@ -299,13 +299,13 @@ void setutmp (const char *name, const char *line, const char *host)
 	setutxent ();
 	setutent ();
 
-	while (utmpx = getutxent ()) {
+	while ((utmpx = getutxent ()) != NULL) {
 		if (utmpx->ut_pid == pid) {
 			found_utmpx = true;
 			break;
 		}
 	}
-	while (utmp = getutent ()) {
+	while ((utmp = getutent ()) != NULL) {
 		if (utmp->ut_pid == pid) {
 			found_utmp = true;
 			break;
