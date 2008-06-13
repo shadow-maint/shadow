@@ -56,28 +56,30 @@
 int expire (const struct passwd *pw, const struct spwd *sp)
 {
 	int status;
-	int child;
-	int pid;
+	pid_t child;
+	pid_t pid;
 
-	if (!sp)
+	if (NULL == sp) {
 		sp = pwd_to_spwd (pw);
+	}
 
 	/*
 	 * See if the user's password has expired, and if so
 	 * force them to change their password.
 	 */
 
-	switch (status = isexpired (pw, sp)) {
+	status = isexpired (pw, sp);
+	switch (status) {
 	case 0:
 		return 0;
 	case 1:
-		fputs (_("Your password has expired."), stdout);
+		(void) fputs (_("Your password has expired."), stdout);
 		break;
 	case 2:
-		fputs (_("Your password is inactive."), stdout);
+		(void) fputs (_("Your password is inactive."), stdout);
 		break;
 	case 3:
-		fputs (_("Your login has expired."), stdout);
+		(void) fputs (_("Your login has expired."), stdout);
 		break;
 	}
 
@@ -88,12 +90,12 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 	 * change that password.
 	 */
 
-	if (status > 1 || sp->sp_max < sp->sp_min) {
-		puts (_("  Contact the system administrator."));
+	if ((status > 1) || (sp->sp_max < sp->sp_min)) {
+		(void) puts (_("  Contact the system administrator."));
 		exit (1);
 	}
-	puts (_("  Choose a new password."));
-	fflush (stdout);
+	(void) puts (_("  Choose a new password."));
+	(void) fflush (stdout);
 
 	/*
 	 * Close all the files so that unauthorized access won't
@@ -115,7 +117,8 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 	 * change their password before being able to use the account.
 	 */
 
-	if ((pid = fork ()) == 0) {
+	pid = fork ();
+	if (0 == pid) {
 		int err;
 
 		/*
@@ -123,21 +126,24 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		 * passwd to work just like it would had they executed
 		 * it from the command line while logged in.
 		 */
-		if (setup_uid_gid (pw, 0) != 0)
+		if (setup_uid_gid (pw, 0) != 0) {
 			_exit (126);
+		}
 
 		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
 		err = errno;
 		perror ("Can't execute " PASSWD_PROGRAM);
-		_exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	} else if (pid == -1) {
+		_exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
+	} else if ((pid_t) -1 == pid) {
 		perror ("fork");
 		exit (1);
 	}
-	while ((child = wait (&status)) != pid && child != -1);
 
-	if (child == pid && status == 0)
+	while (((child = wait (&status)) != pid) && (child != (pid_t)-1));
+
+	if ((child == pid) && (0 == status)) {
 		return 1;
+	}
 
 	exit (1);
  /*NOTREACHED*/}
@@ -151,28 +157,34 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 
 void agecheck (const struct passwd *pw, const struct spwd *sp)
 {
-	long now = time ((long *) 0) / SCALE;
+	long now = (long) time ((time_t *) 0) / SCALE;
 	long remain;
 
-	if (!sp)
+	if (NULL == sp) {
 		sp = pwd_to_spwd (pw);
+	}
 
 	/*
 	 * The last, max, and warn fields must be supported or the
 	 * warning period cannot be calculated.
 	 */
 
-	if (sp->sp_lstchg == -1 || sp->sp_max == -1 || sp->sp_warn == -1)
+	if (   (-1 == sp->sp_lstchg)
+	    || (-1 == sp->sp_max)
+	    || (-1 == sp->sp_warn)) {
 		return;
-	if ((remain = (sp->sp_lstchg + sp->sp_max) - now) <= sp->sp_warn) {
+	}
+	remain = sp->sp_lstchg + sp->sp_max - now;
+	if (remain <= sp->sp_warn) {
 		remain /= DAY / SCALE;
-		if (remain > 1)
-			printf (_
-				("Your password will expire in %ld days.\n"),
-				remain);
-		else if (remain == 1)
-			puts (_("Your password will expire tomorrow."));
-		else if (remain == 0)
-			puts (_("Your password will expire today."));
+		if (remain > 1) {
+			(void) printf (_("Your password will expire in %ld days.\n"),
+			               remain);
+		} else if (1 == remain) {
+			(void) puts (_("Your password will expire tomorrow."));
+		} else if (remain == 0) {
+			(void) puts (_("Your password will expire today."));
+		}
 	}
 }
+

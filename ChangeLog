@@ -1,5 +1,17 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/age.c: fork() and wait return a pid_t, not an int.
+	* libmisc/age.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/age.c: Avoid assignments in comparisons.
+	* libmisc/age.c: Ignore the return value of printf(), puts(),
+	fputs() and fflush().
+	* libmisc/age.c: Add brackets and parenthesis.
+	* libmisc/age.c: Cast the return value of time() to long and
+	converted to a date.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/rlogin.c: The size argument of read() is a size_t.
 	Propagate this time to the callers (the get_remote_string() and
 	do_rlogin() functions).
