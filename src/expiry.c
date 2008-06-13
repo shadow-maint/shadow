@@ -79,11 +79,11 @@ int main (int argc, char **argv)
 	/* 
 	 * Start by disabling all of the keyboard signals.
 	 */
-	signal (SIGHUP, catch_signals);
-	signal (SIGINT, catch_signals);
-	signal (SIGQUIT, catch_signals);
+	(void) signal (SIGHUP, catch_signals);
+	(void) signal (SIGINT, catch_signals);
+	(void) signal (SIGQUIT, catch_signals);
 #ifdef	SIGTSTP
-	signal (SIGTSTP, catch_signals);
+	(void) signal (SIGTSTP, catch_signals);
 #endif
 
 	/*

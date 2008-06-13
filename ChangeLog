@@ -1,5 +1,9 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/expiry.c: Ignore the return value of signal().
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Fix the check for GID/UID validity.
 	* src/newusers.c: Comment why we use both getgrgid() and
 	gr_locate_gid().
