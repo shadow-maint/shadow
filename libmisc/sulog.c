@@ -76,7 +76,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		oldgid = 0;
 	}
 	fp = fopen (sulog_file, "a+");
-	umask (oldmask);
+	(void) umask (oldmask);
 	if ((oldgid != 0) && (setgid (oldgid) != 0)) {
 		perror ("setgid");
 		SYSLOG ((LOG_ERR,
@@ -85,10 +85,11 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		/* Do not return if the group permission were raised. */
 		exit (1);
 	}
-	if (fp == (FILE *) 0)
+	if (fp == (FILE *) 0) {
 		return;		/* can't open or create logfile */
+	}
 
-	time (&now);
+	(void) time (&now);
 	tm = localtime (&now);
 
 	fprintf (fp, "SU %.02d/%.02d %.02d:%.02d %c %s %s-%s\n",

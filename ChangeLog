@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/sulog.c: Ignore the return value of umask() when the
+	mask is restored.
+	* libmisc/sulog.c: Add brackets.
+	* libmisc/sulog.c: Ignore return value of time() when use with a
+	non NULL argument.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/log.c: Avoid assignments in comparisons.
 	* libmisc/log.c: Add brackets and parenthesis.
 	* libmisc/log.c: read() returns a ssize_t (note size_t).
