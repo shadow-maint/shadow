@@ -1,5 +1,15 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadow.c: Use SHADOW_SP_FLAG_UNSET for the initial
+	value of spwd.sp_flag.
+	* lib/shadow.c: Add brackets.
+	* lib/shadow.c: Avoid implicit conversion of pointers to
+	booleans.
+	* lib/shadow.c: The size argument of fgets is an int, not a
+	size_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: len should be typed ssize_t as it is the return
 	of read(), and is compared to 0. Cast to size_t when necessary.
 

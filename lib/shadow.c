@@ -236,7 +236,7 @@ static struct spwd *my_sgetspent (const char *string)
 
 	if (i == OFIELDS) {
 		spwd.sp_warn = spwd.sp_inact = spwd.sp_expire =
-		    spwd.sp_flag = -1;
+		    spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 		return &spwd;
 	}
@@ -291,8 +291,9 @@ static struct spwd *my_sgetspent (const char *string)
 #else
 		return 0;
 #endif
-	} else if (fields[7][0] == '\0')
+	} else if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
+	}
 
 	/*
 	 * This field is reserved for future use.  But it isn't supposed
@@ -302,15 +303,17 @@ static struct spwd *my_sgetspent (const char *string)
 	spwd.sp_flag = strtol (fields[8], &cpp, 10);
 	if ((spwd.sp_flag == 0) && *cpp) {
 #ifdef	USE_NIS
-		if (!nis_used)
+		if (!nis_used) {
 			return 0;
-		else
-			spwd.sp_flag = -1;
+		} else {
+			spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+		}
 #else
 		return 0;
 #endif
-	} else if (fields[8][0] == '\0')
-		spwd.sp_flag = -1;
+	} else if (fields[8][0] == '\0') {
+		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+	}
 
 	return (&spwd);
 }
@@ -324,21 +327,24 @@ struct spwd *fgetspent (FILE * fp)
 	char buf[BUFSIZ];
 	char *cp;
 
-	if (!fp)
+	if (NULL == fp) {
 		return (0);
+	}
 
 #ifdef	USE_NIS
-	while (fgets (buf, sizeof buf, fp) != (char *) 0)
+	while (fgets (buf, (int) sizeof buf, fp) != (char *) 0)
 #else
-	if (fgets (buf, sizeof buf, fp) != (char *) 0)
+	if (fgets (buf, (int) sizeof buf, fp) != (char *) 0)
 #endif
 	{
 		cp = strchr (buf, '\n');
-		if (NULL != cp)
+		if (NULL != cp) {
 			*cp = '\0';
+		}
 #ifdef	USE_NIS
-		if (nis_ignore && IS_NISCHAR (buf[0]))
+		if (nis_ignore && IS_NISCHAR (buf[0])) {
 			continue;
+		}
 #endif
 		return my_sgetspent (buf);
 	}
