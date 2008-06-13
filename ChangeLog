@@ -1,5 +1,12 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Define AUDIT_NO_ID to (unsigned int) -1. This
+	value should be used when the ID should not be considered.
+	* lib/prototypes.h: Fix the prototype of do_rlogin() according to
+	earlier changes.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadow.c: Use SHADOW_SP_FLAG_UNSET for the initial
 	value of spwd.sp_flag.
 	* lib/shadow.c: Add brackets.

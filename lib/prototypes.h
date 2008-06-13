@@ -126,8 +126,10 @@ extern bool hushed (const struct passwd *pw);
 #ifdef WITH_AUDIT
 extern int audit_fd;
 extern void audit_help_open (void);
+/* Use AUDIT_NO_ID when a name is provided to audit_logger instead of an ID */
+#define AUDIT_NO_ID	((unsigned int) -1)
 extern void audit_logger (int type, const char *pgname, const char *op,
-			  const char *name, unsigned int id, int result);
+                          const char *name, unsigned int id, int result);
 #endif
 
 /* limits.c */
@@ -188,7 +190,8 @@ extern struct commonio_entry *__pw_get_head (void);
 extern struct passwd *__pw_dup (const struct passwd *pwent);
 
 /* rlogin.c */
-extern int do_rlogin (const char *, char *, int, char *, int);
+extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
+                      char *term, size_t termlen);
 
 /* salt.c */
 extern char *crypt_make_salt (const char *meth, void *arg);
