@@ -1,5 +1,16 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/rlogin.c: The size argument of read() is a size_t.
+	Propagate this time to the callers (the get_remote_string() and
+	do_rlogin() functions).
+	* libmisc/rlogin.c: Add brackets and parenthesis.
+	* libmisc/rlogin.c: Avoid multi-statements lines.
+	* libmisc/rlogin.c: Avoid assignments in comparisons.
+	* libmisc/rlogin.c: Avoid implicit conversion of pointers to
+	booleans.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.c: Avoid assignments in comparisons.
 	* libmisc/failure.c: read() returns a ssize_t.
 	* libmisc/failure.c: Add brackets and parenthesis.

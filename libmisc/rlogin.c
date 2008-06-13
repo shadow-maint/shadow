@@ -110,21 +110,25 @@ static struct {
 	-1, -1}
 };
 
-static void get_remote_string (char *buf, int size)
+static void get_remote_string (char *buf, size_t size)
 {
 	for (;;) {
-		if (read (0, buf, 1) != 1)
+		if (read (0, buf, 1) != 1) {
 			exit (1);
-		if (*buf == '\0')
+		}
+		if ('\0' == *buf) {
 			return;
-		if (--size > 0)
+		}
+		--size;
+		if (size > 0) {
 			++buf;
+		}
 	}
  /*NOTREACHED*/}
 
 int
-do_rlogin (const char *remote_host, char *name, int namelen, char *term,
-	   int termlen)
+do_rlogin (const char *remote_host, char *name, size_t namelen, char *term,
+           size_t termlen)
 {
 	struct passwd *pwd;
 	char remote_name[32];
@@ -138,19 +142,24 @@ do_rlogin (const char *remote_host, char *name, int namelen, char *term,
 	get_remote_string (name, namelen);
 	get_remote_string (term, termlen);
 
-	if ((cp = strchr (term, '/'))) {
-		*cp++ = '\0';
+	cp = strchr (term, '/');
+	if (NULL != cp) {
+		*cp = '\0';
+		cp++;
 
 		remote_speed = atoi (cp);
 		if (0 == remote_speed) {
 			remote_speed = 9600;
 		}
 	}
-	for (i = 0; speed_table[i].spd_baud != remote_speed &&
-	     speed_table[i].spd_name != -1; i++);
+	for (i = 0;
+	     (   (speed_table[i].spd_baud != remote_speed)
+	      && (speed_table[i].spd_name != -1));
+	     i++);
 
-	if (speed_table[i].spd_name != -1)
+	if (-1 != speed_table[i].spd_name) {
 		speed_name = speed_table[i].spd_name;
+	}
 
 	/*
 	 * Put the terminal in cooked mode with echo turned on.
