@@ -183,7 +183,7 @@ static void catch_signals (unused int sig)
 static void run_shell (const char *shellstr, char *args[], bool doshell,
 		       char *const envp[])
 {
-	int child;
+	pid_t child;
 	sigset_t ourset;
 	int status;
 	int ret;
@@ -197,12 +197,13 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 		pam_end (pamh, PAM_SUCCESS | PAM_DATA_SILENT);
 		 */
 
-		if (doshell)
+		if (doshell) {
 			(void) shell (shellstr, (char *) args[0], envp);
-		else
+		} else {
 			(void) execve (shellstr, (char **) args, envp);
+		}
 		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	} else if (child == -1) {
+	} else if ((pid_t)-1 == child) {
 		(void) fprintf (stderr, "%s: Cannot fork user shell\n", Prog);
 		SYSLOG ((LOG_WARN, "Cannot execute %s", shellstr));
 		closelog ();
@@ -235,11 +236,11 @@ static void run_shell (const char *shellstr, char *args[], bool doshell,
 
 	if (!caught) {
 		do {
-			int pid;
+			pid_t pid;
 
 			pid = waitpid (-1, &status, WUNTRACED);
 
-			if ((-1 != pid) && (0 != WIFSTOPPED (status))) {
+			if (((pid_t)-1 != pid) && (0 != WIFSTOPPED (status))) {
 				/* The child (shell) was suspended.
 				 * Suspend su. */
 				kill (getpid (), WSTOPSIG(status));
@@ -663,8 +664,8 @@ int main (int argc, char **argv)
 		shellstr = "/bin/sh";
 	}
 
-	signal (SIGINT, SIG_IGN);
-	signal (SIGQUIT, SIG_IGN);
+	(void) signal (SIGINT, SIG_IGN);
+	(void) signal (SIGQUIT, SIG_IGN);
 #ifdef USE_PAM
 	ret = pam_authenticate (pamh, 0);
 	if (PAM_SUCCESS != ret) {
@@ -704,7 +705,7 @@ int main (int argc, char **argv)
 	 * Set up a signal handler in case the user types QUIT.
 	 */
 	die (0);
-	oldsig = signal (SIGQUIT, die);
+	(void) oldsig = signal (SIGQUIT, die);
 
 	/*
 	 * See if the system defined authentication method is being used. 
@@ -716,7 +717,7 @@ int main (int argc, char **argv)
 			 "Authentication failed for %s", name));
 		su_failure (tty);
 	}
-	signal (SIGQUIT, oldsig);
+	(void) signal (SIGQUIT, oldsig);
 
 	/*
 	 * Check to see if the account is expired. root gets to ignore any
@@ -756,8 +757,8 @@ int main (int argc, char **argv)
 	}
 #endif				/* !USE_PAM */
 
-	signal (SIGINT, SIG_DFL);
-	signal (SIGQUIT, SIG_DFL);
+	(void) signal (SIGINT, SIG_DFL);
+	(void) signal (SIGQUIT, SIG_DFL);
 
 	cp = getdef_str ((pwent.pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 	if (NULL == cp) {
