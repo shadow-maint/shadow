@@ -213,8 +213,9 @@ static void fail_exit (int code)
 #endif
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, -1,
-		      0);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "adding user",
+	              user_name, AUDIT_NO_ID, 0);
 #endif
 	SYSLOG ((LOG_INFO, "failed adding user `%s', data deleted", user_name));
 	exit (code);
@@ -226,8 +227,9 @@ static struct group *getgr_nam_gid (const char *grname)
 	char *errptr;
 
 	gid = strtol (grname, &errptr, 10);
-	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && gid >= 0)
-		return xgetgrgid (gid);
+	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && gid >= 0) {
+		return xgetgrgid ((gid_t) gid);
+	}
 	return xgetgrnam (grname);
 }
 
@@ -257,7 +259,7 @@ static uid_t get_uid (const char *uidstr)
 			 uidstr);
 		exit (E_BAD_ARG);
 	}
-	return val;
+	return (uid_t) val;
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
@@ -288,7 +290,7 @@ static void get_defaults (void)
 	 * Read the file a line at a time. Only the lines that have relevant
 	 * values are used, everything else can be ignored.
 	 */
-	while (fgets (buf, sizeof buf, fp) == buf) {
+	while (fgets (buf, (int) sizeof buf, fp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
@@ -455,7 +457,7 @@ static int set_defaults (void)
 		goto skip;
 	}
 
-	while (fgets (buf, sizeof buf, ifp) == buf) {
+	while (fgets (buf, (int) sizeof buf, ifp) == buf) {
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
 			*cp = '\0';
@@ -541,8 +543,9 @@ static int set_defaults (void)
 		return -1;
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "changing user defaults",
-		      NULL, -1, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "changing user defaults",
+	              NULL, AUDIT_NO_ID, 1);
 #endif
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
@@ -731,7 +734,7 @@ static void new_spent (struct spwd *spent)
 	memzero (spent, sizeof *spent);
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
-	spent->sp_lstchg = time ((time_t *) 0) / SCALE;
+	spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 	if (!rflg) {
 		spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
 		spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));
@@ -745,7 +748,7 @@ static void new_spent (struct spwd *spent)
 		spent->sp_inact = scale_age (-1);
 		spent->sp_expire = scale_age (-1);
 	}
-	spent->sp_flag = -1;
+	spent->sp_flag = SHADOW_SP_FLAG_UNSET;
 }
 
 /*
@@ -806,7 +809,8 @@ static void grp_update (void)
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "adding user to group", user_name, -1, 1);
+		              "adding user to group",
+		              user_name, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
 			 user_name, ngrp->gr_name));
@@ -857,7 +861,8 @@ static void grp_update (void)
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "adding user to shadow group", user_name, -1, 1);
+		              "adding user to shadow group",
+		              user_name, AUDIT_NO_ID, 1);
 #endif
 		SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
 			 user_name, nsgrp->sg_name));
@@ -1152,8 +1157,9 @@ static void process_flags (int argc, char **argv)
 				 ("%s: invalid user name '%s'\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
-				      user_name, -1, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "adding user",
+			              user_name, AUDIT_NO_ID, 0);
 #endif
 			exit (E_BAD_ARG);
 		}
@@ -1242,7 +1248,8 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking password file", user_name, user_id, 0);
+		              "locking password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		exit (E_PW_UPDATE);
 	}
@@ -1251,7 +1258,8 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening password file", user_name, user_id, 0);
+		              "opening password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -1262,8 +1270,8 @@ static void open_files (void)
 			         Prog);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "locking shadow password file", user_name,
-			              user_id, 0);
+			              "locking shadow password file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
 			fail_exit (E_PW_UPDATE);
 		}
@@ -1274,8 +1282,8 @@ static void open_files (void)
 			         Prog);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "opening shadow password file", user_name,
-			              user_id, 0);
+			              "opening shadow password file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
 			fail_exit (E_PW_UPDATE);
 		}
@@ -1477,13 +1485,15 @@ static void usr_update (void)
 			 Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "adding shadow password", user_name, user_id, 0);
+		              "adding shadow password",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name,
-		      user_id, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "adding user",
+	              user_name, (unsigned int) user_id, 1);
 #endif
 
 	/*
@@ -1512,8 +1522,8 @@ static void create_home (void)
 				 Prog, user_home);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "adding home directory", user_name,
-				      user_id, 0);
+			              "adding home directory",
+			              user_name, (unsigned int) user_id, 0);
 #endif
 			fail_exit (E_HOMEDIR);
 		}
@@ -1523,7 +1533,8 @@ static void create_home (void)
 		home_added = true;
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "adding home directory", user_name, user_id, 1);
+		              "adding home directory",
+		              user_name, (unsigned int) user_id, 1);
 #endif
 	}
 }
@@ -1673,8 +1684,9 @@ int main (int argc, char **argv)
 	if (getpwnam (user_name) != NULL) { /* local, no need for xgetpwnam */
 		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user",
-			      user_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding user",
+		              user_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_NAME_IN_USE);
 	}
@@ -1694,7 +1706,8 @@ int main (int argc, char **argv)
 				 Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "adding group", user_name, -1, 0);
+			              "adding group",
+			              user_name, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (E_NAME_IN_USE);
 		}
@@ -1722,9 +1735,13 @@ int main (int argc, char **argv)
 			}
 		} else {
 			if (getpwuid (user_id) != NULL) {
-				fprintf (stderr, _("%s: UID %u is not unique\n"), Prog, (unsigned int) user_id);
+				fprintf (stderr,
+				         _("%s: UID %lu is not unique\n"),
+				         Prog, (unsigned long) user_id);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding user", user_name, user_id, 0);
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "adding user",
+				              user_name, (unsigned int) user_id, 0);
 #endif
 				fail_exit (E_UID_IN_USE);
 			}
