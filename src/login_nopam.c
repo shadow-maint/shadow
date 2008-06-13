@@ -93,7 +93,8 @@ int login_access (const char *user, const char *from)
 	 */
 	fp = fopen (TABLE, "r");
 	if (NULL != fp) {
-		while (!match && (fgets (line, sizeof (line), fp) == line)) {
+		while (   !match
+		       && (fgets (line, (int) sizeof (line), fp) == line)) {
 			lineno++;
 			end = (int) strlen (line) - 1;
 			if (line[end] != '\n') {

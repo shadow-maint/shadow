@@ -93,7 +93,7 @@ static bool is_listed (const char *cfgin, const char *tty, bool def)
 	 * See if this tty is listed in the console file.
 	 */
 
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets (buf, (int) sizeof (buf), fp) != NULL) {
 		buf[strlen (buf) - 1] = '\0';
 		if (strcmp (buf, tty) == 0) {
 			(void) fclose (fp);

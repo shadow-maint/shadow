@@ -109,7 +109,7 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 */
 
 	memzero (buf, sizeof buf);
-	if (fgets (buf, sizeof buf, stdin) != buf) {
+	if (fgets (buf, (int) sizeof buf, stdin) != buf) {
 		exit (1);
 	}
 
@@ -167,9 +167,9 @@ void login_prompt (const char *prompt, char *name, int namesize)
 	 * Set the SIGQUIT handler back to its original value
 	 */
 
-	signal (SIGQUIT, sigquit);
+	(void) signal (SIGQUIT, sigquit);
 #ifdef	SIGTSTP
-	signal (SIGTSTP, sigtstp);
+	(void) signal (SIGTSTP, sigtstp);
 #endif
 }
 

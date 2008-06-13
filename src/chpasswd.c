@@ -324,7 +324,7 @@ int main (int argc, char **argv)
 	struct passwd newpw;
 	int errors = 0;
 	int line = 0;
-	long now = time ((time_t *)NULL) / (24L * 3600L);
+	long now = (long) time ((time_t *)NULL) / SCALE;
 	int ok;
 
 	Prog = Basename (argv[0]);
@@ -349,7 +349,7 @@ int main (int argc, char **argv)
 	 * last change date is set in the age only if aging information is
 	 * present.
 	 */
-	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
+	while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {

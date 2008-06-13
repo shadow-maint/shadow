@@ -53,7 +53,7 @@ char *tz (const char *fname)
 	const char *def_tz = "TZ=CST6CDT";
 
 	if ((fp = fopen (fname, "r")) == NULL ||
-	    fgets (tzbuf, sizeof (tzbuf), fp) == NULL) {
+	    fgets (tzbuf, (int) sizeof (tzbuf), fp) == NULL) {
 #ifndef USE_PAM
 		if (!(def_tz = getdef_str ("ENV_TZ")) || def_tz[0] == '/')
 			def_tz = "TZ=CST6CDT";

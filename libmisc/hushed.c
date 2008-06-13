@@ -83,7 +83,7 @@ bool hushed (const struct passwd *pw)
 	if (NULL == fp) {
 		return false;
 	}
-	for (found = false; !found && (fgets (buf, sizeof buf, fp) == buf);) {
+	for (found = false; !found && (fgets (buf, (int) sizeof buf, fp) == buf);) {
 		buf[strlen (buf) - 1] = '\0';
 		found = (strcmp (buf, pw->pw_shell) == 0) ||
 		        (strcmp (buf, pw->pw_name) == 0);

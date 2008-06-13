@@ -356,7 +356,7 @@ int main (int argc, char **argv)
 	 * group entry for each group will be looked up in the appropriate
 	 * file (gshadow or group) and the password changed.
 	 */
-	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
+	while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
