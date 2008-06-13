@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_ids.c: Use getdef_ulong to retrieve UIDs/GIDs
+	from login.defs. Type constants to long integers.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/gshadow.c: Use a bool when possible instead of int integers.
 	* lib/gshadow.c: Remove __setsgNIS() -never used).
 	* lib/gshadow.c: Avoid multi-statements lines.
