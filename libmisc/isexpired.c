@@ -56,7 +56,7 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 {
 	long now;
 
-	now = time ((time_t *) 0) / SCALE;
+	now = (long) time ((time_t *) 0) / SCALE;
 
 	if (NULL == sp) {
 		sp = pwd_to_spwd (pw);
@@ -68,8 +68,9 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	 * one first since it is worse.
 	 */
 
-	if (sp->sp_expire > 0 && now >= sp->sp_expire)
+	if ((sp->sp_expire > 0) && (now >= sp->sp_expire)) {
 		return 3;
+	}
 
 	/*
 	 * Last changed date 1970-01-01 (not very likely) means that
@@ -79,14 +80,17 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	 * if /etc/shadow doesn't exist, getspnam() still succeeds and
 	 * returns sp_lstchg==0 (must change password) instead of -1!
 	 */
-	if ((sp->sp_lstchg == 0) &&
-	    (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
+	if (   (0 == sp->sp_lstchg)
+	    && (strcmp (pw->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
 		return 1;
 	}
 
-	if (sp->sp_lstchg > 0 && sp->sp_max >= 0 && sp->sp_inact >= 0 &&
-	    now >= (sp->sp_lstchg + sp->sp_max + sp->sp_inact))
+	if (   (sp->sp_lstchg > 0)
+	    && (sp->sp_max >= 0)
+	    && (sp->sp_inact >= 0)
+	    && (now >= (sp->sp_lstchg + sp->sp_max + sp->sp_inact))) {
 		return 2;
+	}
 
 	/*
 	 * The last and max fields must be present for an account
@@ -94,9 +98,11 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	 * is considered to be infinite.
 	 */
 
-	if (sp->sp_lstchg == -1 ||
-	    sp->sp_max == -1 || sp->sp_max >= (10000L * DAY / SCALE))
+	if (   (-1 == sp->sp_lstchg)
+	    || (-1 == sp->sp_max)
+	    || (sp->sp_max >= (10000L * DAY / SCALE))) {
 		return 0;
+	}
 
 	/*
 	 * Calculate today's day and the day on which the password
@@ -104,8 +110,9 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	 * the password has expired.
 	 */
 
-	if (now >= (sp->sp_lstchg + sp->sp_max))
+	if (now >= (sp->sp_lstchg + sp->sp_max)) {
 		return 1;
+	}
 	return 0;
 }
 

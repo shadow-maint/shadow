@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/isexpired.c: Cast number of days to a long integer.
+	* libmisc/isexpired.c: Add brackets and parenthesis.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c: Do not specify a size of arrays in the
 	prototypes.
 	* libmisc/copydir.c: Use a size_t for the length of strings.
