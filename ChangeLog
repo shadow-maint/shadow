@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: The ID argument of audit_logger is an unsigned
+	int.
+	* src/userdel.c: fork() and wait() return a pid_t, not an int.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newgrp.c: Use a %lu format and cast group and user IDs to
 	unsigned long integers.
 	* src/newgrp.c: The ID argument of audit_logger is an unsigned
@@ -76,7 +82,7 @@
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* libmisc/age.c: fork() and wait return a pid_t, not an int.
+	* libmisc/age.c: fork() and wait() return a pid_t, not an int.
 	* libmisc/age.c: Avoid implicit conversion of pointers to
 	booleans.
 	* libmisc/age.c: Avoid assignments in comparisons.

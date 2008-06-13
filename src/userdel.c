@@ -172,8 +172,8 @@ static void update_groups (void)
 		 */
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting user from group", user_name, user_id,
-			      0);
+		              "deleting user from group",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		SYSLOG ((LOG_INFO, "delete `%s' from group `%s'\n",
 			 user_name, ngrp->gr_name));
@@ -224,7 +224,8 @@ static void update_groups (void)
 
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting group", user_name, user_id, 0);
+			              "deleting group",
+			              user_name, (unsigned int) user_id, 0);
 #endif
 			SYSLOG ((LOG_INFO,
 				 "removed group `%s' owned by `%s'\n",
@@ -280,8 +281,8 @@ static void update_groups (void)
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting user from shadow group", user_name,
-			      user_id, 0);
+		              "deleting user from shadow group",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		SYSLOG ((LOG_INFO, "delete `%s' from shadow group `%s'\n",
 			 user_name, nsgrp->sg_name));
@@ -340,8 +341,9 @@ static void fail_exit (int code)
 	}
 #endif
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user", user_name,
-		      user_id, 0);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "deleting user",
+	              user_name, (unsigned int) user_id, 0);
 #endif
 	exit (code);
 }
@@ -358,7 +360,8 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking password file", user_name, user_id, 0);
+		              "locking password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		exit (E_PW_UPDATE);
 	}
@@ -366,7 +369,8 @@ static void open_files (void)
 		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening password file", user_name, user_id, 0);
+		              "opening password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -375,8 +379,8 @@ static void open_files (void)
 			 _("%s: cannot lock shadow password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking shadow password file", user_name,
-			      user_id, 0);
+		              "locking shadow password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -385,24 +389,26 @@ static void open_files (void)
 			 _("%s: cannot open shadow password file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening shadow password file", user_name,
-			      user_id, 0);
+		              "opening shadow password file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
 	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
-			      user_name, user_id, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "locking group file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open group file\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
-			      user_name, user_id, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening group file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -412,8 +418,8 @@ static void open_files (void)
 			 _("%s: unable to lock shadow group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "locking shadow group file", user_name, user_id,
-			      0);
+		              "locking shadow group file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -422,8 +428,8 @@ static void open_files (void)
 			 Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "opening shadow group file", user_name, user_id,
-			      0);
+		              "opening shadow group file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -449,8 +455,9 @@ static void update_user (void)
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting user entries",
-		      user_name, user_id, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "deleting user entries",
+	              user_name, (unsigned int) user_id, 1);
 #endif
 	SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
 }
@@ -491,7 +498,8 @@ static void user_busy (const char *name, uid_t uid)
 		if (!fflg) {
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting user logged in", name, -1, 0);
+			              "deleting user logged in",
+			              name, AUDIT_NO_ID, 0);
 #endif
 			exit (E_USER_BUSY);
 		}
@@ -538,11 +546,11 @@ exit 0
 static void user_cancel (const char *user)
 {
 	char *cmd;
-	int pid, wpid;
+	pid_t pid, wpid;
 	int status;
 
 	cmd = getdef_str ("USERDEL_CMD");
-	if (NUll == cmd) {
+	if (NULL == cmd) {
 		return;
 	}
 	pid = fork ();
@@ -550,13 +558,13 @@ static void user_cancel (const char *user)
 		execl (cmd, cmd, user, (char *) 0);
 		perror (cmd);
 		_exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	} else if (pid == -1) {
+	} else if ((pid_t)-1 == pid) {
 		perror ("fork");
 		return;
 	}
 	do {
 		wpid = wait (&status);
-	} while ((wpid != pid) && (-1 != wpid));
+	} while ((wpid != pid) && ((pid_t)-1 != wpid));
 }
 
 #ifdef EXTRA_CHECK_HOME_DIR
@@ -597,20 +605,21 @@ static void remove_mailbox (void)
 	if (fflg) {
 		unlink (mailfile);	/* always remove, ignore errors */
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
-			      user_name, user_id, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting mail file",
+		              user_name, (unsigned int) user_id, 1);
 #endif
 		return;
 	}
 	i = is_owner (user_id, mailfile);
 	if (i == 0) {
 		fprintf (stderr,
-			 _
-			 ("%s: %s not owned by %s, not removing\n"),
-			 Prog, mailfile, user_name);
+		         _("%s: %s not owned by %s, not removing\n"),
+		         Prog, mailfile, user_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
-			      user_name, user_id, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting mail file",
+		              user_name, (unsigned int) user_id, 0);
 #endif
 		return;
 	} else if (i == -1)
@@ -621,8 +630,9 @@ static void remove_mailbox (void)
 	}
 #ifdef WITH_AUDIT
 	else {
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting mail file",
-			      user_name, user_id, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting mail file",
+		              user_name, (unsigned int) user_id, 1);
 	}
 #endif
 }
@@ -736,7 +746,8 @@ int main (int argc, char **argv)
 				 Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting user not found", user_name, -1, 0);
+			              "deleting user not found",
+			              user_name, AUDIT_NO_ID, 0);
 #endif
 			exit (E_NOTFOUND);
 		}
@@ -824,14 +835,15 @@ int main (int argc, char **argv)
 				 Prog, user_home);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting home directory", user_name,
-				      user_id, 1);
+			              "deleting home directory",
+			              user_name, (unsigned int) user_id, 1);
 #endif
 			errors++;
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting home directory", user_name, user_id, 1);
+		              "deleting home directory",
+		              user_name, (unsigned int) user_id, 1);
 #endif
 	}
 
@@ -853,7 +865,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	if (0 != errors) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			      "deleting home directory", user_name, -1, 0);
+		              "deleting home directory",
+		              user_name, AUDIT_NO_ID, 0);
 	}
 #endif
 	exit ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
