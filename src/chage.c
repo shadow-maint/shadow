@@ -92,9 +92,9 @@ static pam_handle_t *pamh = NULL;
 /* local function prototypes */
 static bool isnum (const char *s);
 static void usage (void);
-static void date_to_str (char *, size_t, time_t);
+static void date_to_str (char *buf, size_t maxsize, time_t date);
 static int new_fields (void);
-static void print_date (time_t);
+static void print_date (time_t date);
 static void list_fields (void);
 static void process_flags (int argc, char **argv);
 static void check_flags (int argc, int opt_index);
@@ -118,8 +118,9 @@ static void fail_exit (int code)
 
 #ifdef WITH_AUDIT
 	if (E_SUCCESS != code) {
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "change age",
-		              user_name, user_uid, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "change age",
+		              user_name, (unsigned int) user_uid, 0);
 	}
 #endif
 
@@ -307,7 +308,7 @@ static void list_fields (void)
 		puts (_("password must be changed"));
 	} else {
 		changed = lastday * SCALE;
-		print_date (changed);
+		print_date ((time_t) changed);
 	}
 
 	/*
@@ -320,7 +321,7 @@ static void list_fields (void)
 		puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
-		print_date (expires);
+		print_date ((time_t) expires);
 	}
 
 	/*
@@ -335,7 +336,7 @@ static void list_fields (void)
 		puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
-		print_date (expires);
+		print_date ((time_t) expires);
 	}
 
 	/*
@@ -347,7 +348,7 @@ static void list_fields (void)
 		puts (_("never"));
 	} else {
 		expires = expdays * SCALE;
-		print_date (expires);
+		print_date ((time_t) expires);
 	}
 
 	/*
@@ -631,7 +632,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 		memzero (&spwent, sizeof spwent);
 		spwent.sp_namp = xstrdup (pw->pw_name);
 		spwent.sp_pwdp = xstrdup (pw->pw_passwd);
-		spwent.sp_flag = -1;
+		spwent.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
@@ -818,8 +819,9 @@ int main (int argc, char **argv)
 			fail_exit (E_NOPERM);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "display aging info",
-		              user_name, user_uid, 1);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "display aging info",
+		              user_name, (unsigned int) user_uid, 1);
 #endif
 		list_fields ();
 		fail_exit (E_SUCCESS);
@@ -841,40 +843,40 @@ int main (int argc, char **argv)
 		else {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "change all aging information",
-			              user_name, user_uid, 1);
+			              user_name, (unsigned int) user_uid, 1);
 		}
 #endif
 	} else {
 #ifdef WITH_AUDIT
 		if (Mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change max age", user_name,
-			              user_uid, 1);
+			              "change max age",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 		if (mflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change min age", user_name,
-			              user_uid, 1);
+			              "change min age",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 		if (dflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change last change date", user_name,
-			              user_uid, 1);
+			              "change last change date",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 		if (Wflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change passwd warning", user_name,
-			              user_uid, 1);
+			              "change passwd warning",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 		if (Iflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change inactive days", user_name,
-			              user_uid, 1);
+			              "change inactive days",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 		if (Eflg) {
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "change passwd expiration", user_name,
-			              user_uid, 1);
+			              "change passwd expiration",
+			              user_name, (unsigned int) user_uid, 1);
 		}
 #endif
 	}

@@ -1,5 +1,15 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: Add the arguments' names in the functions
+	prototypes.
+	* src/chage.c: The ID argument of audit_logger is an unsigned
+	int. Use AUDIT_NO_ID instead of -1.
+	* src/chage.c: print_date() received a time_t.
+	* src/chage.c: Use SHADOW_SP_FLAG_UNSET for the initial
+	value of spwent.sp_flag.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupadd.c: The ID argument of audit_logger is an unsigned
 	int. Use AUDIT_NO_ID instead of -1.
 	* src/groupadd.c: Cast the parsed GID/UID to a gid_t/uid_t.
