@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/logoutd.c: Ignore return value of time() when use with a
+	non NULL argument.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwconv.c: Use SHADOW_SP_FLAG_UNSET for the initial
 	value of sp.sp_flag.
 	* src/pwconv.c: Cast number of days to a long integer.

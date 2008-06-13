@@ -77,7 +77,7 @@ static int check_login (const struct utmp *ut)
 	strncpy (user, ut->ut_user, sizeof (ut->ut_user));
 	user[sizeof (ut->ut_user)] = '\0';
 
-	time (&now);
+	(void) time (&now);
 
 	/*
 	 * Check if they are allowed to be logged in right now.
