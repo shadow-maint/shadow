@@ -55,8 +55,10 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * Don't do anything if failure logging isn't set up.
 	 */
 	/* TODO: check if the file exists */
-	if ((fd = open (FAILLOG_FILE, O_RDWR)) < 0)
+	fd = open (FAILLOG_FILE, O_RDWR);
+	if (fd < 0) {
 		return;
+	}
 
 	/*
 	 * The file is indexed by UID value meaning that shared UID's
@@ -65,8 +67,10 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 */
 
 	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	if (read (fd, (char *) fl, sizeof *fl) != sizeof *fl)
+	/* TODO: check failures */
+	if (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl) {
 		memzero (fl, sizeof *fl);
+	}
 
 	/*
 	 * Update the record.  We increment the failure count to log the
@@ -75,11 +79,12 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * updated as well.
 	 */
 
-	if (fl->fail_cnt + 1 > 0)
+	if (fl->fail_cnt + 1 > 0) {
 		fl->fail_cnt++;
+	}
 
 	strncpy (fl->fail_line, tty, sizeof fl->fail_line);
-	time (&fl->fail_time);
+	(void) time (&fl->fail_time);
 
 	/*
 	 * Seek back to the correct position in the file and write the
@@ -100,15 +105,18 @@ static bool too_many_failures (const struct faillog *fl)
 {
 	time_t now;
 
-	if (fl->fail_max == 0 || fl->fail_cnt < fl->fail_max)
+	if ((0 == fl->fail_max) || (fl->fail_cnt < fl->fail_max)) {
 		return false;
+	}
 
-	if (fl->fail_locktime == 0)
+	if (0 == fl->fail_locktime) {
 		return true;	/* locked until reset manually */
+	}
 
-	time (&now);
-	if (fl->fail_time + fl->fail_locktime < now)
+	(void) time (&now);
+	if ((fl->fail_time + fl->fail_locktime) < now) {
 		return false;	/* enough time since last failure */
+	}
 
 	return true;
 }
@@ -153,7 +161,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 	 */
 
 	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	if (read (fd, (char *) fl, sizeof *fl) != sizeof *fl) {
+	if (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl) {
 		close (fd);
 		return 1;
 	}
@@ -200,11 +208,12 @@ void failprint (const struct faillog *fail)
 #endif
 	time_t NOW;
 
-	if (fail->fail_cnt == 0)
+	if (0 == fail->fail_cnt) {
 		return;
+	}
 
 	tp = localtime (&(fail->fail_time));
-	time (&NOW);
+	(void) time (&NOW);
 
 #if HAVE_STRFTIME
 	/*
@@ -220,13 +229,16 @@ void failprint (const struct faillog *fail)
 	lasttime = asctime (tp);
 	lasttime[24] = '\0';
 
-	if (NOW - fail->fail_time < YEAR)
+	if ((NOW - fail->fail_time) < YEAR) {
 		lasttime[19] = '\0';
-	if (NOW - fail->fail_time < DAY)
+	}
+	if ((NOW - fail->fail_time) < DAY) {
 		lasttime = lasttime + 11;
+	}
 
-	if (*lasttime == ' ')
+	if (' ' == *lasttime) {
 		lasttime++;
+	}
 #endif
 	printf (ngettext ("%d failure since last login.\n"
 			  "Last was %s on %s.\n",

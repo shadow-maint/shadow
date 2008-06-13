@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/failure.c: Avoid assignments in comparisons.
+	* libmisc/failure.c: read() returns a ssize_t.
+	* libmisc/failure.c: Add brackets and parenthesis.
+	* libmisc/failure.c: Ignore return value of time() when use with a
+	non NULL argument.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chowntty.c: Avoid assignments in comparisons.
 	* libmisc/chowntty.c: Avoid implicit conversion of pointers to
 	booleans.
