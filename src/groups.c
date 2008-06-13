@@ -106,9 +106,8 @@ static void print_groups (const char *member)
  */
 int main (int argc, char **argv)
 {
-	long sys_ngroups;
-
 #ifdef HAVE_GETGROUPS
+	long sys_ngroups;
 	int ngroups;
 	GETGROUPS_T *groups;
 	int pri_grp; /* TODO: should be GETGROUPS_T */
@@ -118,9 +117,9 @@ int main (int argc, char **argv)
 	char *getlogin ();
 #endif
 
-	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
 #ifdef HAVE_GETGROUPS
-	groups = (GETGROUPS_T *) malloc (sys_ngroups * sizeof (GETGROUPS_T));
+	sys_ngroups = sysconf (_SC_NGROUPS_MAX);
+	groups = (GETGROUPS_T *) malloc (sizeof (GETGROUPS_T) * sys_ngroups);
 #endif
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);

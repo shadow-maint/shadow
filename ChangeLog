@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groups.c: sys_ngroups is only used when HAVE_GETGROUPS is
+	defined.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: Ignore return value of time() when use with a
 	non NULL argument.
 	* src/faillog.c: Use a %lu format and cast number of days to
