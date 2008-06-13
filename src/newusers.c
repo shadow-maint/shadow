@@ -179,21 +179,24 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		 * new group, or an existing group.
 		 */
 		char *endptr;
-		long int i = strtoul (gid, &endptr, 10);
-		if ((*endptr != '\0') && (errno != ERANGE)) {
+		unsigned long int i = strtoul (gid, &endptr, 10);
+		if ((*endptr != '\0') || (ERANGE == errno)) {
 			fprintf (stderr,
 			         _("%s: group ID `%s' is not valid\n"),
 			         Prog, gid);
 			return -1;
 		}
-		if (   (getgrgid (i) != NULL)
-		    || (gr_locate_gid (i) != NULL)) {
+		/* Look in both the system database (getgrgid) and in the
+		 * internal database (gr_locate_gid), which may contain
+		 * uncommitted changes */
+		if (   (getgrgid ((gid_t) i) != NULL)
+		    || (gr_locate_gid ((gid_t) i) != NULL)) {
 			/* The user will use this ID for her
 			 * primary group */
-			*ngid = i;
+			*ngid = (gid_t) i;
 			return 0;
 		}
-		grent.gr_gid = i;
+		grent.gr_gid = (gid_t) i;
 	} else {
 		/* The gid parameter can be "" or a name which is not
 		 * already the name of an existing group.
@@ -276,14 +279,14 @@ static int get_uid (const char *uid, uid_t *nuid) {
 	 */
 	if (isdigit (uid[0])) {
 		char *endptr;
-		long int i = strtoul (uid, &endptr, 10);
-		if (('\0' != *endptr) && (ERANGE != errno)) {
+		unsigned long int i = strtoul (uid, &endptr, 10);
+		if (('\0' != *endptr) || (ERANGE == errno)) {
 			fprintf (stderr,
 			         _("%s: user ID `%s' is not valid\n"),
 			         Prog, uid);
 			return -1;
 		}
-		*nuid = i;
+		*nuid = (uid_t) i;
 	} else {
 		if ('\0' != uid[0]) {
 			/* local, no need for xgetpwnam */
@@ -423,14 +426,14 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		const char *salt = crypt_make_salt (crypt_method, crypt_arg);
 		spent.sp_pwdp = pw_encrypt (password, salt);
 	}
-	spent.sp_lstchg = time ((time_t *) 0) / SCALE;
-	spent.sp_min = getdef_num ("PASS_MIN_DAYS", 0);
+	spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+	spent.sp_min    = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */
-	spent.sp_max = getdef_num ("PASS_MAX_DAYS", 10000);
-	spent.sp_warn = getdef_num ("PASS_WARN_AGE", -1);
-	spent.sp_inact = -1;
+	spent.sp_max    = getdef_num ("PASS_MAX_DAYS", 10000);
+	spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
+	spent.sp_inact  = -1;
 	spent.sp_expire = -1;
-	spent.sp_flag = -1;
+	spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
 
 	return (spw_update (&spent) == 0);
 }
@@ -699,7 +702,7 @@ int main (int argc, char **argv)
 	 * over 100 is allocated. The pw_gid field will be updated with that
 	 * value.
 	 */
-	while (fgets (buf, sizeof buf, stdin) != (char *) 0) {
+	while (fgets (buf, (int) sizeof buf, stdin) != (char *) 0) {
 		line++;
 		cp = strrchr (buf, '\n');
 		if (NULL != cp) {
