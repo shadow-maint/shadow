@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/faillog.c: Ignore return value of time() when use with a
+	non NULL argument.
+	* src/faillog.c: Use a %lu format and cast number of days to
+	unsigned long integers.
+	* src/faillog.c: Cast dates to time_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Ignore the return value of signal().
 	* src/login.c: Use a %lu format and cast group and user IDs to
 	unsigned long integers.

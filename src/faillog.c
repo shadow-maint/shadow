@@ -96,7 +96,7 @@ static void print_one (const struct faillog *fl, uid_t uid)
 		once = true;
 	}
 	pwent = getpwuid (uid); /* local, no need for xgetpwuid */
-	time (&now);
+	(void) time (&now);
 	tm = localtime (&fl->fail_time);
 #ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
@@ -111,12 +111,11 @@ static void print_one (const struct faillog *fl, uid_t uid)
 			if (0 != fl->fail_locktime) {
 				if (   ((fl->fail_time+fl->fail_locktime) > now)
 				    && (0 != fl->fail_cnt)) {
-					printf (_(" [%lds left]"),
-						fl->fail_time +
-						fl->fail_locktime - now);
+					printf (_(" [%lus left]"),
+					        (unsigned long) fl->fail_time + fl->fail_locktime - now);
 				} else {
 					printf (_(" [%lds lock]"),
-						fl->fail_locktime);
+					        fl->fail_locktime);
 				}
 			}
 		}
@@ -373,7 +372,7 @@ int main (int argc, char **argv)
 				break;
 			case 't':
 				days = atoi (optarg);
-				seconds = days * DAY;
+				seconds = (time_t) days * DAY;
 				tflg = true;
 				break;
 			case 'u':
