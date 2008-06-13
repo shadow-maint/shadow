@@ -1,5 +1,9 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/sulogin.c: Ignore the return value of signal().
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groups.c: sys_ngroups is only used when HAVE_GETGROUPS is
 	defined.
 

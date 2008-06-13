@@ -172,8 +172,8 @@ static RETSIGTYPE catch_signals (unused int sig)
 
 	(void) strcpy (name, "root");	/* KLUDGE!!! */
 
-	signal (SIGALRM, catch_signals);	/* exit if the timer expires */
-	alarm (ALARM);		/* only wait so long ... */
+	(void) signal (SIGALRM, catch_signals);	/* exit if the timer expires */
+	(void) alarm (ALARM);		/* only wait so long ... */
 
 	while (true) {		/* repeatedly get login/password pairs */
 		pw_entry (name, &pwent);	/* get entry from password file */
@@ -231,7 +231,7 @@ static RETSIGTYPE catch_signals (unused int sig)
 	}
 	strzero (pass);
 	(void) alarm (0);
-	signal (SIGALRM, SIG_DFL);
+	(void) signal (SIGALRM, SIG_DFL);
 	environ = newenvp;	/* make new environment active */
 
 	puts (_("Entering System Maintenance Mode"));
