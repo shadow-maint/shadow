@@ -369,8 +369,8 @@ static void check_pw_file (int *errors, bool *changed)
 			 * No primary group, just give a warning
 			 */
 
-			printf (_("user %s: no group %u\n"),
-			        pwd->pw_name, pwd->pw_gid);
+			printf (_("user %s: no group %lu\n"),
+			        pwd->pw_name, (unsigned long) pwd->pw_gid);
 			*errors += 1;
 		}
 
@@ -417,19 +417,18 @@ static void check_pw_file (int *errors, bool *changed)
 					struct spwd sp;
 					struct passwd pw;
 
-					sp.sp_namp = pwd->pw_name;
-					sp.sp_pwdp = pwd->pw_passwd;
-					sp.sp_min =
+					sp.sp_namp   = pwd->pw_name;
+					sp.sp_pwdp   = pwd->pw_passwd;
+					sp.sp_min    =
 					    getdef_num ("PASS_MIN_DAYS", -1);
-					sp.sp_max =
+					sp.sp_max    =
 					    getdef_num ("PASS_MAX_DAYS", -1);
-					sp.sp_warn =
+					sp.sp_warn   =
 					    getdef_num ("PASS_WARN_AGE", -1);
-					sp.sp_inact = -1;
+					sp.sp_inact  = -1;
 					sp.sp_expire = -1;
-					sp.sp_flag = -1;
-					sp.sp_lstchg =
-					    time ((time_t *) 0) / (24L * 3600L);
+					sp.sp_flag   = SHADOW_SP_FLAG_UNSET;
+					sp.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 					*changed = true;
 
 					if (spw_update (&sp) == 0) {
@@ -588,7 +587,7 @@ static void check_spw_file (int *errors, bool *changed)
 		 * Warn if last password change in the future.  --marekm
 		 */
 		if (   !quiet
-		    && (spw->sp_lstchg > time ((time_t *) 0) / SCALE)) {
+		    && (spw->sp_lstchg > (long) time ((time_t *) 0) / SCALE)) {
 			printf (_("user %s: last password change in the future\n"),
 			        spw->sp_namp);
 			*errors += 1;

@@ -1,5 +1,15 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Use a %lu format and cast group and user IDs to
+	unsigned long integers.
+	* src/pwck.c: Cast number of days to a long integer.
+	* src/pwck.c: Use the SCALE macro instead of (24L * 3600L)
+	for the values to be set in /etc/shadow.
+	* src/pwck.c: Use SHADOW_SP_FLAG_UNSET for the initial
+	value of spent.sp_flag.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Ignore return value of time() when use with a
 	non NULL argument.
 	* src/passwd.c: Cast number of days to a long integer.
