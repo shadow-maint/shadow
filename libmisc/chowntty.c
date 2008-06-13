@@ -78,21 +78,26 @@ void chown_tty (const char *tty, const struct passwd *info)
 	 * ID.  Otherwise, use the user's primary group ID.
 	 */
 
-	if (!(group = getdef_str ("TTYGROUP")))
+	group = getdef_str ("TTYGROUP");
+	if (NULL == group) {
 		gid = info->pw_gid;
-	else if (group[0] >= '0' && group[0] <= '9')
-		gid = atoi (group);
-	else if ((grent = getgrnam (group))) /* local, no need for xgetgrnam */
-		gid = grent->gr_gid;
-	else
-		gid = info->pw_gid;
+	} else if ((group[0] >= '0') && (group[0] <= '9')) {
+		gid = (gid_t) atol (group);
+	} else {
+		grent = getgrnam (group); /* local, no need for xgetgrnam */
+		if (NULL != grent) {
+			gid = grent->gr_gid;
+		} else {
+			gid = info->pw_gid;
+		}
+	}
 
 	/*
 	 * Change the permissions on the TTY to be owned by the user with
 	 * the group as determined above.
 	 */
 
-	if (*tty != '/') {
+	if ('/' != *tty) {
 		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
 		tty = full_tty;
 	}
@@ -104,8 +109,8 @@ void chown_tty (const char *tty, const struct passwd *info)
 		exit (1);
 	}
 
-	if ((chown (tty, info->pw_uid, gid) != 0)||
-	    (chmod (tty, getdef_num ("TTYPERM", 0600)) != 0)) {
+	if (   (chown (tty, info->pw_uid, gid) != 0)
+	    || (chmod (tty, getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
 		snprintf (buf, sizeof buf, _("Unable to change tty %s"), tty);
@@ -115,8 +120,9 @@ void chown_tty (const char *tty, const struct passwd *info)
 			 info->pw_name));
 		closelog ();
 
-		if (err != EROFS)
+		if (EROFS != err) {
 			exit (1);
+		}
 	}
 #ifdef __linux__
 	/*

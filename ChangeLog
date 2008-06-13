@@ -1,5 +1,12 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chowntty.c: Avoid assignments in comparisons.
+	* libmisc/chowntty.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/chowntty.c: Add brackets and parenthesis.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/audit_help.c: Add brackets.
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
