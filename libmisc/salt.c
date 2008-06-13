@@ -24,9 +24,9 @@
 char *l64a(long value);
 #endif /* !HAVE_L64A */
 static void seedRNG (void);
-static char *gensalt (unsigned int salt_size);
+static char *gensalt (size_t salt_size);
 #ifdef USE_SHA_CRYPT
-static unsigned int SHA_salt_size (void);
+static size_t SHA_salt_size (void);
 static const char *SHA_salt_rounds (int *prefered_rounds);
 #endif /* USE_SHA_CRYPT */
 
@@ -46,14 +46,15 @@ static char *l64a(long value)
 	for (i = 0; value != 0 && i < 6; i++) {
 		digit = value & 0x3f;
 
-		if (digit < 2)
+		if (digit < 2) {
 			*s = digit + '.';
-		else if (digit < 12)
+		} else if (digit < 12) {
 			*s = digit + '0' - 2;
-		else if (digit < 38)
+		} else if (digit < 38) {
 			*s = digit + 'A' - 12;
-		else
+		} else {
 			*s = digit + 'a' - 38;
+		}
 
 		value >>= 6;
 		s++;
@@ -88,12 +89,12 @@ static void seedRNG (void)
  * The size of the salt string is between 8 and 16 bytes for the SHA crypt
  * methods.
  */
-static unsigned int SHA_salt_size (void)
+static size_t SHA_salt_size (void)
 {
 	double rand_size;
 	seedRNG ();
 	rand_size = (double) 9.0 * random () / RAND_MAX;
-	return 8 + rand_size;
+	return (size_t) (8 + rand_size);
 }
 
 /* ! Arguments evaluated twice ! */
@@ -120,41 +121,49 @@ static const char *SHA_salt_rounds (int *prefered_rounds)
 		long max_rounds = getdef_long ("SHA_CRYPT_MAX_ROUNDS", -1);
 		double rand_rounds;
 
-		if (-1 == min_rounds && -1 == max_rounds)
+		if ((-1 == min_rounds) && (-1 == max_rounds)) {
 			return "";
+		}
 
-		if (-1 == min_rounds)
+		if (-1 == min_rounds) {
 			min_rounds = max_rounds;
+		}
 
-		if (-1 == max_rounds)
+		if (-1 == max_rounds) {
 			max_rounds = min_rounds;
+		}
 
-		if (min_rounds > max_rounds)
+		if (min_rounds > max_rounds) {
 			max_rounds = min_rounds;
+		}
 
 		seedRNG ();
 		rand_rounds = (double) (max_rounds-min_rounds+1.0) * random ();
 		rand_rounds /= RAND_MAX;
 		rounds = min_rounds + rand_rounds;
-	} else if (0 == *prefered_rounds)
+	} else if (0 == *prefered_rounds) {
 		return "";
-	else
+	} else {
 		rounds = *prefered_rounds;
+	}
 
 	/* Sanity checks. The libc should also check this, but this
 	 * protects against a rounds_prefix overflow. */
-	if (rounds < ROUNDS_MIN)
+	if (rounds < ROUNDS_MIN) {
 		rounds = ROUNDS_MIN;
+	}
 
-	if (rounds > ROUNDS_MAX)
+	if (rounds > ROUNDS_MAX) {
 		rounds = ROUNDS_MAX;
+	}
 
 	snprintf (rounds_prefix, 18, "rounds=%ld$", rounds);
 
 	/* Sanity checks. That should not be necessary. */
 	rounds_prefix[17] = '\0';
-	if ('$' != rounds_prefix[16])
+	if ('$' != rounds_prefix[16]) {
 		rounds_prefix[17] = '$';
+	}
 
 	return rounds_prefix;
 }
@@ -166,7 +175,7 @@ static const char *SHA_salt_rounds (int *prefered_rounds)
 #define MAX_SALT_SIZE 16
 #define MIN_SALT_SIZE 8
 
-static char *gensalt (unsigned int salt_size)
+static char *gensalt (size_t salt_size)
 {
 	static char salt[32];
 
@@ -179,6 +188,7 @@ static char *gensalt (unsigned int salt_size)
 	do {
 		strcat (salt, l64a (random()));
 	} while (strlen (salt) < salt_size);
+
 	salt[salt_size] = '\0';
 
 	return salt;
@@ -216,8 +226,10 @@ char *crypt_make_salt (const char *meth, void *arg)
 	if (NULL != meth)
 		method = meth;
 	else {
-	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL)
-		method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
+		method = getdef_str ("ENCRYPT_METHOD");
+		if (NULL == method) {
+			method = getdef_bool ("MD5_CRYPT_ENAB") ? "MD5" : "DES";
+		}
 	}
 
 	if (0 == strcmp (method, "MD5")) {

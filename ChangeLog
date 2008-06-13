@@ -1,5 +1,12 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/salt.c: Use a size_t for the size of strings instead of
+	unsigned int.
+	* libmisc/salt.c: Add brackets and parenthesis.
+	* libmisc/salt.c: Avoid assignments in comparisons.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/age.c: fork() and wait return a pid_t, not an int.
 	* libmisc/age.c: Avoid implicit conversion of pointers to
 	booleans.
