@@ -77,11 +77,12 @@ void audit_help_open (void)
 void audit_logger (int type, const char *pgname, const char *op,
 		   const char *name, unsigned int id, int result)
 {
-	if (audit_fd < 0)
+	if (audit_fd < 0) {
 		return;
-	else
+	} else {
 		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
 					NULL, NULL, NULL, result);
+	}
 }
 
 #else				/* WITH_AUDIT */
