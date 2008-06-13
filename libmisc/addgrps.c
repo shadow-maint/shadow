@@ -66,11 +66,13 @@ int add_groups (const char *list)
 	i = 16;
 	for (;;) {
 		grouplist = (gid_t *) malloc (i * sizeof (GETGROUPS_T));
-		if (!grouplist)
+		if (NULL == grouplist) {
 			return -1;
+		}
 		ngroups = getgroups (i, grouplist);
-		if (i > ngroups)
+		if (i > ngroups) {
 			break;
+		}
 		/* not enough room, so try allocating a larger buffer */
 		free (grouplist);
 		i *= 2;
@@ -93,8 +95,9 @@ int add_groups (const char *list)
 
 		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid; i++);
 
-		if (i < ngroups)
+		if (i < ngroups) {
 			continue;
+		}
 
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
 			fputs (_("Warning: too many groups\n"), stderr);
@@ -110,8 +113,9 @@ int add_groups (const char *list)
 		added = true;
 	}
 
-	if (added)
+	if (added) {
 		return setgroups (ngroups, grouplist);
+	}
 
 	return 0;
 }

@@ -1,7 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/addgrps.c: Avoid implicit conversion of pointers to
+	booleans.
+	* libmisc/addgrps.c: Add brackets.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c: Avoid implicit conversion of pointers to
-	booleans
+	booleans.
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
