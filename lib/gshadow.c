@@ -52,7 +52,7 @@ static struct sgrp sgroup;
 
 #ifdef	USE_NIS
 static bool nis_used;
-static int nis_ignore;
+static bool nis_ignore;
 static enum { native, start, middle, native2 } nis_state;
 static bool nis_bound;
 static char *nis_domain;
@@ -65,20 +65,6 @@ static int nis_vallen;
 #endif
 
 #ifdef	USE_NIS
-
-/*
- * __setsgNIS - turn on or off NIS searches
- */
-
-void __setsgNIS (int flag)
-{
-	nis_ignore = !flag;
-
-	if (nis_ignore) {
-		nis_used = false;
-	}
-}
-
 /*
  * bind_nis - bind to NIS server
  */
@@ -101,16 +87,21 @@ static char **build_list (char *s, char **list[], size_t * nlist)
 	while (s != NULL && *s != '\0') {
 		size = (nelem + 1) * sizeof (ptr);
 		if ((ptr = realloc (*list, size)) != NULL) {
-			ptr[nelem++] = s;
+			ptr[nelem] = s;
+			nelem++;
 			*list = ptr;
 			*nlist = nelem;
-			if ((s = strchr (s, ',')))
-				*s++ = '\0';
+			s = strchr (s, ',');
+			if (NULL != s) {
+				*s = '\0';
+				s++;
+			}
 		}
 	}
 	size = (nelem + 1) * sizeof (ptr);
-	if ((ptr = realloc (*list, size)) != NULL) {
-		ptr[nelem] = '\0';
+	ptr = realloc (*list, size);
+	if (NULL != ptr) {
+		ptr[nelem] = NULL;
 		*list = ptr;
 	}
 	return ptr;
@@ -143,7 +134,7 @@ struct sgrp *sgetsgent (const char *string)
 	char *cp;
 	int i;
 
-	strncpy (sgrbuf, string, (int) sizeof sgrbuf - 1);
+	strncpy (sgrbuf, string, sizeof sgrbuf - 1);
 	sgrbuf[sizeof sgrbuf - 1] = '\0';
 
 	cp = strrchr (sgrbuf, '\n');
@@ -215,9 +206,9 @@ struct sgrp *fgetsgent (FILE * fp)
 	}
 
 #ifdef	USE_NIS
-	while (fgetsx (buf, sizeof buf, fp) != (char *) 0)
+	while (fgetsx (buf, (int) sizeof buf, fp) != (char *) 0)
 #else
-	if (fgetsx (buf, sizeof buf, fp) != (char *) 0)
+	if (fgetsx (buf, (int) sizeof buf, fp) != (char *) 0)
 #endif
 	{
 		cp = strchr (buf, '\n');
@@ -225,7 +216,7 @@ struct sgrp *fgetsgent (FILE * fp)
 			*cp = '\0';
 		}
 #ifdef	USE_NIS
-		if ((0 != nis_ignore) && IS_NISCHAR (buf[0])) {
+		if (nis_ignore && IS_NISCHAR (buf[0])) {
 			continue;
 		}
 #endif
@@ -241,7 +232,7 @@ struct sgrp *fgetsgent (FILE * fp)
 struct sgrp *getsgent (void)
 {
 #ifdef	USE_NIS
-	int nis_1_group = 0;
+	bool nis_1_group = false;
 	struct sgrp *val;
 	char buf[BUFSIZ];
 #endif
@@ -275,7 +266,7 @@ struct sgrp *getsgent (void)
 
 		if (IS_NISCHAR (val->sg_name[0])) {
 			if ('\0' != val->sg_name[1]) {
-				nis_1_group = 1;
+				nis_1_group = true;
 			} else {
 				nis_state = start;
 			}
@@ -286,16 +277,18 @@ struct sgrp *getsgent (void)
 		 * use a NIS map, it must be a regular local group.
 		 */
 
-		if (nis_1_group == 0 && nis_state != start)
+		if (!nis_1_group && (nis_state != start)) {
 			return val;
+		}
 
 		/*
 		 * If this is an escape to use an NIS map, switch over to
 		 * that bunch of code.
 		 */
 
-		if (nis_state == start)
+		if (nis_state == start) {
 			goto again;
+		}
 
 		/*
 		 * NEEDSWORK.  Here we substitute pieces-parts of this entry.
@@ -385,7 +378,7 @@ struct sgrp *getsgnam (const char *name)
 #endif
 #ifdef	USE_NIS
 	if (nis_used) {
-		nis_ignore++;
+		nis_ignore = true;
 		nis_disabled = true;
 	}
 #endif
@@ -395,7 +388,7 @@ struct sgrp *getsgnam (const char *name)
 		}
 	}
 #ifdef	USE_NIS
-	nis_ignore--;
+	nis_ignore = false;
 #endif
 	return sgrp;
 }
@@ -466,13 +459,15 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 
 	for (i = 0; NULL != sgrp->sg_mem[i]; i++) {
 		if (i > 0) {
-			*cp++ = ',';
+			*cp = ',';
+			cp++;
 		}
 
 		strcpy (cp, sgrp->sg_mem[i]);
 		cp += strlen (cp);
 	}
-	*cp++ = '\n';
+	*cp = '\n';
+	cp++;
 	*cp = '\0';
 
 	/*

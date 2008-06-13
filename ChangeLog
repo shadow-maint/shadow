@@ -1,5 +1,17 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/gshadow.c: Use a bool when possible instead of int integers.
+	* lib/gshadow.c: Remove __setsgNIS() -never used).
+	* lib/gshadow.c: Avoid multi-statements lines.
+	* lib/gshadow.c: Avoid assignments in comparisons.
+	* lib/gshadow.c: ptr[nelem] is a string. Initialize it to NULL
+	instead of '\0'.
+	* lib/gshadow.c: Add brackets and parenthesis.
+	* lib/gshadow.c: The size argument of strncpy is a size_t and the
+	size argument of fgets is an int.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c: Add brackets.
 	* lib/groupio.c: Make sure malloc receives a size_t.
 	* lib/groupio.c: Avoid multi-statements lines.
