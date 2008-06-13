@@ -100,8 +100,9 @@ static void fail_exit (int code)
 #endif
 
 #ifdef	WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
-	              group_name, -1, 0);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "deleting group",
+	              group_name, AUDIT_NO_ID, 0);
 #endif
 
 	exit (code);
@@ -143,8 +144,9 @@ static void grp_update (void)
 static void close_files (void)
 {
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group", group_name,
-	              group_id, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "deleting group",
+	              group_name, (unsigned int) group_id, 1);
 #endif
 	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
 
@@ -317,8 +319,8 @@ int main (int argc, char **argv)
 				 Prog, group_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "deleting group",
-				      group_name, -1, 0);
+			              "deleting group",
+			              group_name, AUDIT_NO_ID, 0);
 #endif
 			exit (E_NOTFOUND);
 		}
@@ -338,8 +340,9 @@ int main (int argc, char **argv)
 			 Prog, group_name);
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {

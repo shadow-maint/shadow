@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupdel.c: The ID argument of audit_logger is an unsigned
+	int. Use AUDIT_NO_ID instead of -1.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/expiry.c: Ignore the return value of signal().
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
