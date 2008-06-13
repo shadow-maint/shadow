@@ -170,16 +170,16 @@ int main (int argc, char **argv)
 		} else {
 			/* add new shadow entry */
 			memset (&spent, 0, sizeof spent);
-			spent.sp_namp = pw->pw_name;
-			spent.sp_min = getdef_num ("PASS_MIN_DAYS", -1);
-			spent.sp_max = getdef_num ("PASS_MAX_DAYS", -1);
-			spent.sp_warn = getdef_num ("PASS_WARN_AGE", -1);
-			spent.sp_inact = -1;
+			spent.sp_namp   = pw->pw_name;
+			spent.sp_min    = getdef_num ("PASS_MIN_DAYS", -1);
+			spent.sp_max    = getdef_num ("PASS_MAX_DAYS", -1);
+			spent.sp_warn   = getdef_num ("PASS_WARN_AGE", -1);
+			spent.sp_inact  = -1;
 			spent.sp_expire = -1;
-			spent.sp_flag = -1;
+			spent.sp_flag   = SHADOW_SP_FLAG_UNSET;
 		}
 		spent.sp_pwdp = pw->pw_passwd;
-		spent.sp_lstchg = time ((time_t *) 0) / (24L * 3600L);
+		spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
 				 _
