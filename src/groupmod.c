@@ -196,8 +196,9 @@ static void grp_update (void)
 			 _("%s: %s not found in /etc/group\n"),
 			 Prog, group_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "modifying group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -226,16 +227,18 @@ static void grp_update (void)
 	if (gr_update (&grp) == 0) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (nflg && (gr_remove (group_name) == 0)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -255,16 +258,18 @@ static void grp_update (void)
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
 		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && nflg && (sgr_remove (group_name) == 0)) {
 		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "deleting group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "deleting group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -272,8 +277,9 @@ static void grp_update (void)
 #endif				/* SHADOWGRP */
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifing group", group_name,
-		      group_id, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "modifing group",
+	              group_name, (unsigned int) group_id, 1);
 #endif
 	if (nflg) {
 		SYSLOG ((LOG_INFO, "change group `%s' to `%s'",
@@ -281,8 +287,9 @@ static void grp_update (void)
 	}
 
 	if (gflg) {
-		SYSLOG ((LOG_INFO, "change GID for `%s' to %u",
-			 nflg ? group_newname : group_name, group_newid));
+		SYSLOG ((LOG_INFO, "change GID for `%s' to %lu",
+		          nflg ? group_newname : group_name,
+		         (unsigned long) group_newid));
 	}
 }
 
@@ -315,8 +322,9 @@ static void check_new_gid (void)
 	fprintf (stderr, _("%s: %lu is not a unique GID\n"),
 	         Prog, (unsigned long int) group_newid);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modify gid", NULL,
-		      group_newid, 0);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "modify gid",
+	              NULL, (unsigned int) group_newid, 0);
 #endif
 	fail_exit (E_GID_IN_USE);
 }
@@ -349,7 +357,8 @@ static void check_new_name (void)
 				 group_newname);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "modifying group", group_name, -1, 0);
+			              "modifying group",
+			              group_name, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (E_NAME_IN_USE);
 		}
@@ -363,8 +372,9 @@ static void check_new_name (void)
 	fprintf (stderr, _("%s: %s is not a valid group name\n"),
 		 Prog, group_newname);
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group", group_name,
-		      -1, 0);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "modifying group",
+	              group_name, AUDIT_NO_ID, 0);
 #endif
 	fail_exit (E_BAD_ARG);
 }
@@ -377,13 +387,13 @@ static gid_t get_gid (const char *gidstr)
 	long val;
 	char *errptr;
 
-	val = strtol (gidstr, &errptr, 10);
+	val = strtol (gidstr, &errptr, 10); /* FIXME: Should be strtoul ? */
 	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
 		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
 			 gidstr);
 		fail_exit (E_BAD_ARG);
 	}
-	return val;
+	return (gid_t) val;
 }
 
 /*
@@ -415,9 +425,9 @@ static void process_flags (int argc, char **argv)
 				gflg = true;
 				group_newid = get_gid (optarg);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK,
-					      Prog, "modifying group",
-					      NULL, group_newid, 0);
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "modifying group",
+				              NULL, (unsigned int) group_newid, 0);
 #endif
 				break;
 			case 'n':
@@ -546,16 +556,20 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			lpwd = pw_locate (pwd->pw_name);
 			if (NULL == lpwd) {
 				fprintf (stderr,
-				         _("%s: cannot change the primary group of user '%s' from %u to %u, since it is not in the passwd file.\n"),
-				         Prog, pwd->pw_name, ogid, ngid);
+				         _("%s: cannot change the primary group of user '%s' from %lu to %lu, since it is not in the passwd file.\n"),
+				         Prog, pwd->pw_name,
+				         (unsigned long) ogid,
+				         (unsigned long) ngid);
 				fail_exit (E_GRP_UPDATE);
 			} else {
 				npwd = *lpwd;
 				npwd.pw_gid = ngid;
 				if (pw_update (&npwd) == 0) {
 					fprintf (stderr,
-					         _("%s: cannot change the primary group of user '%s' from %u to %u.\n"),
-					         Prog, pwd->pw_name, ogid, ngid);
+					         _("%s: cannot change the primary group of user '%s' from %lu to %lu.\n"),
+					         Prog, pwd->pw_name,
+					         (unsigned long) ogid,
+					         (unsigned long) ngid);
 					fail_exit (E_GRP_UPDATE);
 				}
 			}
@@ -650,7 +664,8 @@ int main (int argc, char **argv)
 				 Prog, group_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-				      "modifying group", group_name, -1, 0);
+			              "modifying group",
+			              group_name, AUDIT_NO_ID, 0);
 #endif
 			fail_exit (E_NOTFOUND);
 		} else {
@@ -680,8 +695,9 @@ int main (int argc, char **argv)
 			 Prog, group_name);
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "modifying group",
-			      group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "modifying group",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {

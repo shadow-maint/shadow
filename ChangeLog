@@ -1,5 +1,13 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmod.c: The ID argument of audit_logger is an unsigned
+	int. Use AUDIT_NO_ID instead of -1.
+	* src/groupmod.c:  Use a %lu format and cast group and user IDs to
+	unsigned long integers.
+	* src/groupmod.c: Cast the parsed GID/UID to a gid_t/uid_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: The ID argument of audit_logger is an unsigned
 	int. Use AUDIT_NO_ID instead of -1.
 	* src/useradd.c: Cast the parsed GID/UID to a gid_t/uid_t.
