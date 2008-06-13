@@ -1,5 +1,17 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Use a %lu format and cast group and user IDs to
+	unsigned long integers.
+	* src/newgrp.c: The ID argument of audit_logger is an unsigned
+	int.
+	* src/newgrp.c: Ignore the return value of signal() (the signal
+	handlers are assumed to be the default one and are restored
+	later).
+	* src/newgrp.c: Do not checl if a pid_t is < 0, check if equal
+	to (pid_t)-1.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/isexpired.c: Cast number of days to a long integer.
 	* libmisc/isexpired.c: Add brackets and parenthesis.
 

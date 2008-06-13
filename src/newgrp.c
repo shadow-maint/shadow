@@ -184,9 +184,11 @@ static void check_perms (const struct group *grp,
 		    strcmp (cpasswd, grp->gr_passwd) != 0) {
 #ifdef WITH_AUDIT
 			snprintf (audit_buf, sizeof(audit_buf),
-			          "authentication new-gid=%d", grp->gr_gid);
+			          "authentication new-gid=%lu",
+			          (unsigned long) grp->gr_gid);
 			audit_logger (AUDIT_GRP_AUTH, Prog,
-			              audit_buf, NULL, getuid (), 0);
+			              audit_buf, NULL,
+			              (unsigned int) getuid (), 0);
 #endif
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group `%s' from `%s'",
@@ -197,9 +199,11 @@ static void check_perms (const struct group *grp,
 		}
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
-		          "authentication new-gid=%d", grp->gr_gid);
+		          "authentication new-gid=%lu",
+		          (unsigned long) grp->gr_gid);
 		audit_logger (AUDIT_GRP_AUTH, Prog,
-		              audit_buf, NULL, getuid (), 1);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 1);
 #endif
 	}
 
@@ -215,10 +219,12 @@ failure:
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", groupname);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 0);
 	} else {
-		audit_logger (AUDIT_CHGRP_ID, Prog, "changing",
-		              NULL, getuid (), 0);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              "changing", NULL,
+		              (unsigned int) getuid (), 0);
 	}
 #endif
 	exit (1);
@@ -274,14 +280,16 @@ static void syslog_sg (const char *name, const char *group)
 	{
 		pid_t child, pid;
 
-		signal (SIGINT, SIG_IGN);
-		signal (SIGQUIT, SIG_IGN);
-		signal (SIGHUP, SIG_IGN);
-		signal (SIGTSTP, SIG_IGN);
-		signal (SIGTTIN, SIG_IGN);
-		signal (SIGTTOU, SIG_IGN);
+		/* Ignore these signals. The signal handlers will later be
+		 * restored to the default handlers. */
+		(void) signal (SIGINT, SIG_IGN);
+		(void) signal (SIGQUIT, SIG_IGN);
+		(void) signal (SIGHUP, SIG_IGN);
+		(void) signal (SIGTSTP, SIG_IGN);
+		(void) signal (SIGTTIN, SIG_IGN);
+		(void) signal (SIGTTOU, SIG_IGN);
 		child = fork ();
-		if (child < 0) {
+		if ((pid_t)-1 == child) {
 			/* error in fork() */
 			fprintf (stderr, _("%s: failure forking: %s\n"),
 				 is_newgrp ? "newgrp" : "sg", strerror (errno));
@@ -290,10 +298,12 @@ static void syslog_sg (const char *name, const char *group)
 				snprintf (audit_buf, sizeof(audit_buf),
 				          "changing new-group=%s", group);
 				audit_logger (AUDIT_CHGRP_ID, Prog,
-				              audit_buf, NULL, getuid (), 0);
+				              audit_buf, NULL,
+				              (unsigned int) getuid (), 0);
 			} else {
-				audit_logger (AUDIT_CHGRP_ID, Prog, "changing",
-				              NULL, getuid (), 0);
+				audit_logger (AUDIT_CHGRP_ID, Prog,
+				              "changing", NULL,
+				              (unsigned int) getuid (), 0);
 			}
 #endif
 			exit (1);
@@ -321,27 +331,28 @@ static void syslog_sg (const char *name, const char *group)
 				         name, loginname, tty, grp->gr_name));
 			} else {
 				SYSLOG ((LOG_INFO,
-				         "user `%s' (login `%s' on %s) returned to group `%d'",
-				         name, loginname, tty, gid));
+				         "user `%s' (login `%s' on %s) returned to group `%lu'",
+				         name, loginname, tty,
+				         (unsigned long) gid));
 				/* Either the user's passwd entry has a
 				 * GID that does not match with any group,
 				 * or the group was deleted while the user
 				 * was in a newgrp session.*/
 				SYSLOG ((LOG_WARN,
-				         "unknown GID `%u' used by user `%s'",
-				         gid, name));
+				         "unknown GID `%lu' used by user `%s'",
+				         (unsigned long) gid, name));
 			}
 			closelog ();
 			exit (0);
 		}
 
 		/* child - restore signals to their default state */
-		signal (SIGINT, SIG_DFL);
-		signal (SIGQUIT, SIG_DFL);
-		signal (SIGHUP, SIG_DFL);
-		signal (SIGTSTP, SIG_DFL);
-		signal (SIGTTIN, SIG_DFL);
-		signal (SIGTTOU, SIG_DFL);
+		(void) signal (SIGINT, SIG_DFL);
+		(void) signal (SIGQUIT, SIG_DFL);
+		(void) signal (SIGHUP, SIG_DFL);
+		(void) signal (SIGTSTP, SIG_DFL);
+		(void) signal (SIGTTIN, SIG_DFL);
+		(void) signal (SIGTTOU, SIG_DFL);
 	}
 #endif				/* USE_PAM */
 }
@@ -410,12 +421,15 @@ int main (int argc, char **argv)
 
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
-		fprintf (stderr, _("unknown UID: %u\n"), getuid ());
+		fprintf (stderr, _("unknown UID: %lu\n"),
+		         (unsigned long) getuid ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_CHGRP_ID, Prog, "changing", NULL,
-			      getuid (), 0);
+		audit_logger (AUDIT_CHGRP_ID, Prog,
+		              "changing", NULL,
+		              (unsigned int) getuid (), 0);
 #endif
-		SYSLOG ((LOG_WARN, "unknown UID %u", getuid ()));
+		SYSLOG ((LOG_WARN, "unknown UID %lu",
+		         (unsigned long) getuid ()));
 		closelog ();
 		exit (1);
 	}
@@ -530,10 +544,12 @@ int main (int argc, char **argv)
 			snprintf (audit_buf, sizeof(audit_buf),
 			          "changing new-group=%s", group);
 			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              audit_buf, NULL, getuid (), 0);
+			              audit_buf, NULL,
+			              (unsigned int) getuid (), 0);
 		} else {
 			audit_logger (AUDIT_CHGRP_ID, Prog,
-			              "changing", NULL, getuid (), 0);
+			              "changing", NULL,
+			              (unsigned int) getuid (), 0);
 		}
 #endif
 		exit (1);
@@ -660,9 +676,10 @@ int main (int argc, char **argv)
 		perror ("setgid");
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
-		          "changing new-gid=%d", gid);
+		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 0);
 #endif
 		exit (1);
 	}
@@ -671,9 +688,10 @@ int main (int argc, char **argv)
 		perror ("setuid");
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
-		          "changing new-gid=%d", gid);
+		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 0);
 #endif
 		exit (1);
 	}
@@ -687,9 +705,10 @@ int main (int argc, char **argv)
 		execl ("/bin/sh", "sh", "-c", command, (char *) 0);
 #ifdef WITH_AUDIT
 		snprintf (audit_buf, sizeof(audit_buf),
-		          "changing new-gid=%d", gid);
+		          "changing new-gid=%lu", (unsigned long) gid);
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 0);
 #endif
 		perror ("/bin/sh");
 		exit (errno == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
@@ -760,8 +779,11 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_AUDIT
-	snprintf (audit_buf, sizeof(audit_buf), "changing new-gid=%d", gid);
-	audit_logger (AUDIT_CHGRP_ID, Prog, audit_buf, NULL, getuid (), 1);
+	snprintf (audit_buf, sizeof(audit_buf), "changing new-gid=%lu",
+	          (unsigned long) gid);
+	audit_logger (AUDIT_CHGRP_ID, Prog,
+	              audit_buf, NULL,
+	              (unsigned int) getuid (), 1);
 #endif
 	/*
 	 * Exec the login shell and go away. We are trying to get back to
@@ -788,10 +810,12 @@ int main (int argc, char **argv)
 		snprintf (audit_buf, sizeof(audit_buf),
 		          "changing new-group=%s", group);
 		audit_logger (AUDIT_CHGRP_ID, Prog, 
-		              audit_buf, NULL, getuid (), 0);
+		              audit_buf, NULL,
+		              (unsigned int) getuid (), 0);
 	} else {
 		audit_logger (AUDIT_CHGRP_ID, Prog,
-		              "changing", NULL, getuid (), 0);
+		              "changing", NULL,
+		              (unsigned int) getuid (), 0);
 	}
 #endif
 	exit (1);
