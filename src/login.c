@@ -615,7 +615,7 @@ int main (int argc, char **argv)
 
 	      top:
 		/* only allow ALARM sec. for login */
-		signal (SIGALRM, alarm_handler);
+		(void) signal (SIGALRM, alarm_handler);
 		timeout = getdef_num ("LOGIN_TIMEOUT", ALARM);
 		if (timeout > 0) {
 			alarm (timeout);
@@ -754,7 +754,8 @@ int main (int argc, char **argv)
 					pw = getpwnam (username);
 					if (NULL != pw) {
 						snprintf (buf, sizeof (buf),
-						  "uid=%d", pw->pw_uid);
+						          "uid=%lu",
+						    (unsigned long) pw->pw_uid);
 						audit_log_user_message
 						    (audit_fd, AUDIT_USER_LOGIN,
 						     buf, hostname, NULL,
@@ -1053,7 +1054,8 @@ int main (int argc, char **argv)
 		char buf[32];
 
 		audit_fd = audit_open ();
-		snprintf (buf, sizeof (buf), "uid=%d", pwd->pw_uid);
+		snprintf (buf, sizeof (buf), "uid=%lu",
+		          (unsigned long) pwd->pw_uid);
 		audit_log_user_message (audit_fd, AUDIT_USER_LOGIN,
 					buf, hostname, NULL, tty, 1);
 		close (audit_fd);
@@ -1093,7 +1095,7 @@ int main (int argc, char **argv)
 	 * We must fork before setuid() because we need to call
 	 * pam_close_session() as root.
 	 */
-	signal (SIGINT, SIG_IGN);
+	(void) signal (SIGINT, SIG_IGN);
 	child = fork ();
 	if (child < 0) {
 		/* error in fork() */
@@ -1144,9 +1146,9 @@ int main (int argc, char **argv)
 	}
 #endif
 
-	setlocale (LC_ALL, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
 
 	if (!hushed (&pwent)) {
 		addenv ("HUSHLOGIN=FALSE", NULL);
@@ -1205,11 +1207,11 @@ int main (int argc, char **argv)
 		ttytype (tty);
 	}
 
-	signal (SIGQUIT, SIG_DFL);	/* default quit signal */
-	signal (SIGTERM, SIG_DFL);	/* default terminate signal */
-	signal (SIGALRM, SIG_DFL);	/* default alarm signal */
-	signal (SIGHUP, SIG_DFL);	/* added this.  --marekm */
-	signal (SIGINT, SIG_DFL);	/* default interrupt signal */
+	(void) signal (SIGQUIT, SIG_DFL);	/* default quit signal */
+	(void) signal (SIGTERM, SIG_DFL);	/* default terminate signal */
+	(void) signal (SIGALRM, SIG_DFL);	/* default alarm signal */
+	(void) signal (SIGHUP, SIG_DFL);	/* added this.  --marekm */
+	(void) signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
 	endpwent ();		/* stop access to password file */
 	endgrent ();		/* stop access to group file */
