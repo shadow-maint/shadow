@@ -365,7 +365,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		return;
 	}
 
-	time (&now);
+	(void) time (&now);
 
 	/*
 	 * Expired accounts cannot be changed ever. Passwords which are
@@ -588,7 +588,7 @@ static void update_shadow (void)
 		nsp->sp_inact = (inact * DAY) / SCALE;
 	}
 	if (do_update_age) {
-		nsp->sp_lstchg = time ((time_t *) 0) / SCALE;
+		nsp->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 	}
 	if (lflg) {
 		/* Set the account expiry field to 1.

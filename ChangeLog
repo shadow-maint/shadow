@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Ignore return value of time() when use with a
+	non NULL argument.
+	* src/passwd.c: Cast number of days to a long integer.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmod.c: The ID argument of audit_logger is an unsigned
 	int. Use AUDIT_NO_ID instead of -1.
 	* src/groupmod.c:  Use a %lu format and cast group and user IDs to
