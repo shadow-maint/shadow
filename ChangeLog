@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/groupio.c: Add brackets.
+	* lib/groupio.c: Make sure malloc receives a size_t.
+	* lib/groupio.c: Avoid multi-statements lines.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/sgetspent.c: Use SHADOW_SP_FLAG_UNSET for the initial
 	value of spwd.sp_flag.
 

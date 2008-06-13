@@ -91,8 +91,9 @@ static int group_close_hook (void)
 {
 	unsigned int max_members = getdef_unum("MAX_MEMBERS_PER_GROUP", 0);
 
-	if (0 == max_members)
+	if (0 == max_members) {
 		return 1;
+	}
 
 	return split_groups (max_members);
 }
@@ -211,20 +212,23 @@ static int gr_cmp (const void *p1, const void *p2)
 {
 	gid_t u1, u2;
 
-	if ((*(struct commonio_entry **) p1)->eptr == NULL)
+	if ((*(struct commonio_entry **) p1)->eptr == NULL) {
 		return 1;
-	if ((*(struct commonio_entry **) p2)->eptr == NULL)
+	}
+	if ((*(struct commonio_entry **) p2)->eptr == NULL) {
 		return -1;
+	}
 
 	u1 = ((struct group *) (*(struct commonio_entry **) p1)->eptr)->gr_gid;
 	u2 = ((struct group *) (*(struct commonio_entry **) p2)->eptr)->gr_gid;
 
-	if (u1 < u2)
+	if (u1 < u2) {
 		return -1;
-	else if (u1 > u2)
+	} else if (u1 > u2) {
 		return 1;
-	else
+	} else {
 		return 0;
+	}
 }
 
 /* Sort entries by GID */
@@ -238,8 +242,9 @@ static int group_open_hook (void)
 	unsigned int max_members = getdef_unum("MAX_MEMBERS_PER_GROUP", 0);
 	struct commonio_entry *gr1, *gr2;
 
-	if (0 == max_members)
+	if (0 == max_members) {
 		return 1;
+	}
 
 	for (gr1 = group_db.head; gr1; gr1 = gr1->next) {
 		for (gr2 = gr1->next; gr2; gr2 = gr2->next) {
@@ -257,8 +262,9 @@ static int group_open_hook (void)
 				if (NULL == gr1)
 					return 0;
 				/* Unlink gr2 */
-				if (NULL != gr2->next)
+				if (NULL != gr2->next) {
 					gr2->next->prev = gr2->prev;
+				}
 				gr2->prev->next = gr2->next;
 			}
 		}
@@ -285,9 +291,9 @@ static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
 	struct group *gptr1;
 	struct group *gptr2;
 	char **new_members;
-	int members = 0;
+	size_t members = 0;
 	char *new_line;
-	int new_line_len, i;
+	size_t new_line_len, i;
 	if (NULL == gr2 || NULL == gr1) {
 		errno = EINVAL;
 		return NULL;
@@ -316,30 +322,35 @@ static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = gptr1->gr_mem;
 		while (NULL != *pmember) {
-			if (0 == strcmp(*pmember, gptr2->gr_mem[i]))
+			if (0 == strcmp(*pmember, gptr2->gr_mem[i])) {
 				break;
+			}
 			pmember++;
 		}
-		if (NULL == *pmember)
+		if (NULL == *pmember) {
 			members++;
+		}
 	}
 	new_members = (char **)malloc ( (members+1) * sizeof(char*) );
 	if (NULL == new_members) {
 		errno = ENOMEM;
 		return NULL;
 	}
-	for (i=0; NULL != gptr1->gr_mem[i]; i++)
+	for (i=0; NULL != gptr1->gr_mem[i]; i++) {
 		new_members[i] = gptr1->gr_mem[i];
+	}
 	members = i;
 	for (i=0; NULL != gptr2->gr_mem[i]; i++) {
 		char **pmember = new_members;
 		while (NULL != *pmember) {
-			if (0 == strcmp(*pmember, gptr2->gr_mem[i]))
+			if (0 == strcmp(*pmember, gptr2->gr_mem[i])) {
 				break;
+			}
 			pmember++;
 		}
 		if (NULL == *pmember) {
-			new_members[members++] = gptr2->gr_mem[i];
+			new_members[members] = gptr2->gr_mem[i];
+			members++;
 			new_members[members] = NULL;
 		}
 	}
