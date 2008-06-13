@@ -705,7 +705,7 @@ int main (int argc, char **argv)
 	 * Set up a signal handler in case the user types QUIT.
 	 */
 	die (0);
-	(void) oldsig = signal (SIGQUIT, die);
+	oldsig = signal (SIGQUIT, die);
 
 	/*
 	 * See if the system defined authentication method is being used. 
