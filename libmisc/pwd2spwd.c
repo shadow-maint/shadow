@@ -64,7 +64,7 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 		 */
 		sp.sp_min = 0;
 		sp.sp_max = (10000L * DAY) / SCALE;
-		sp.sp_lstchg = time ((time_t *) 0) / SCALE;
+		sp.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 	}
 
 	/*
@@ -74,7 +74,7 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 	sp.sp_warn = -1;
 	sp.sp_expire = -1;
 	sp.sp_inact = -1;
-	sp.sp_flag = -1;
+	sp.sp_flag = SHADOW_SP_FLAG_UNSET;
 
 	return &sp;
 }

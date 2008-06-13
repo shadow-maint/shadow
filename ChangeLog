@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/pwd2spwd.c: Cast number of days to a long integer.
+	* libmisc/pwd2spwd.c: Use SHADOW_SP_FLAG_UNSET for the initial
+	value of sp.sp_flag.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Include <config.h> since it uses the macro that
 	might be defined in this header file.
 	* lib/defines.h: Prefer checking if HAVE_LOCALE_H or ENABLE_NLS
