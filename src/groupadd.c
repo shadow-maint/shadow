@@ -205,8 +205,9 @@ static void grp_update (void)
 	}
 #endif				/* SHADOWGRP */
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group", group_name,
-	              group_id, 1);
+	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	              "adding group",
+	              group_name, (unsigned int) group_id, 1);
 #endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 	        group_name, (unsigned int) group_id));
@@ -269,16 +270,18 @@ static void open_files (void)
 	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "locking group file",
-		              group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "locking group file",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		exit (E_GRP_UPDATE);
 	}
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "opening group file",
-		              group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "opening group file",
+		              group_name, AUDIT_NO_ID, 0);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -310,8 +313,9 @@ static void fail_exit (int code)
 
 #ifdef WITH_AUDIT
 	if (code != E_SUCCESS) {
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog, "adding group",
-		              group_name, -1, 0);
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "adding group",
+		              group_name, AUDIT_NO_ID, 0);
 	}
 #endif
 
@@ -340,7 +344,7 @@ static gid_t get_gid (const char *gidstr)
 		         Prog, gidstr);
 		exit (E_BAD_ARG);
 	}
-	return val;
+	return (gid_t) val;
 }
 
 /*

@@ -1,5 +1,11 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: The ID argument of audit_logger is an unsigned
+	int. Use AUDIT_NO_ID instead of -1.
+	* src/groupadd.c: Cast the parsed GID/UID to a gid_t/uid_t.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwck.c: Use a %lu format and cast group and user IDs to
 	unsigned long integers.
 	* src/pwck.c: Cast number of days to a long integer.
