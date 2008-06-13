@@ -203,6 +203,7 @@ int getdef_num (const char *item, int dflt)
 	}
 
 	return (int) strtol (d->value, (char **) NULL, 0);
+	/* TODO: check for errors */
 }
 
 
@@ -228,6 +229,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 	}
 
 	return (unsigned int) strtoul (d->value, (char **) NULL, 0);
+	/* TODO: check for errors */
 }
 
 
@@ -253,8 +255,33 @@ long getdef_long (const char *item, long dflt)
 	}
 
 	return strtol (d->value, (char **) NULL, 0);
+	/* TODO: check for errors */
 }
 
+/*
+ * getdef_ulong - get unsigned long numerical value from table of definitions
+ *
+ * Returns numeric value of specified item, else the "dflt" value if
+ * the item is not defined.  Octal (leading "0") and hex (leading "0x")
+ * values are handled.
+ */
+
+unsigned long getdef_ulong (const char *item, unsigned int dflt)
+{
+	struct itemdef *d;
+
+	if (!def_loaded) {
+		def_load ();
+	}
+
+	d = def_find (item);
+	if ((NULL == d) || (NULL == d->value)) {
+		return dflt;
+	}
+
+	return (unsigned long) strtoul (d->value, (char **) NULL, 0);
+	/* TODO: check for errors */
+}
 
 /*
  * putdef_str - override the value read from /etc/login.defs
@@ -364,17 +391,18 @@ static void def_load (void)
 	/*
 	 * Go through all of the lines in the file.
 	 */
-	while (fgets (buf, sizeof (buf), fp) != NULL) {
+	while (fgets (buf, (int) sizeof (buf), fp) != NULL) {
 
 		/*
 		 * Trim trailing whitespace.
 		 */
-		for (i = strlen (buf) - 1; i >= 0; --i) {
+		for (i = (int) strlen (buf) - 1; i >= 0; --i) {
 			if (!isspace (buf[i])) {
 				break;
 			}
 		}
-		buf[++i] = '\0';
+		i++;
+		buf[i] = '\0';
 
 		/*
 		 * Break the line into two fields.
