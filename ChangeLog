@@ -1,5 +1,10 @@
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgetspent.c: Use SHADOW_SP_FLAG_UNSET for the initial
+	value of spwd.sp_flag.
+
+2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/getdef.h, lib/getdef.c: Add getdef_ulong().
 	* lib/getdef.c: Added TODOs because of lack of error checking.
 	* lib/getdef.c: The size argument of fgets is an int, not a

@@ -147,7 +147,7 @@ struct spwd *sgetspent (const char *string)
 		spwd.sp_warn   = -1;
 		spwd.sp_inact  = -1;
 		spwd.sp_expire = -1;
-		spwd.sp_flag   = -1;
+		spwd.sp_flag   = SHADOW_SP_FLAG_UNSET;
 
 		return &spwd;
 	}
@@ -200,7 +200,7 @@ struct spwd *sgetspent (const char *string)
 	if ((0 == spwd.sp_flag) && ('\0' != *cpp)) {
 		return 0;
 	} else if (fields[8][0] == '\0') {
-		spwd.sp_flag = -1;
+		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
 	}
 
 	return (&spwd);
