@@ -1,5 +1,10 @@
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.c: Fix the getdef_ulong() prototype.
+	* lib/getdef.h: Fix the getdef_ulong() prototype.
+
+2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: Use getrange to parse the range of users.
 	* src/lastlog.c: umin and umax do not need to be signed long. Use
 	an unsigned long which might be needed to parse a GID or UID. Add

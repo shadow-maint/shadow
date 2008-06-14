@@ -266,7 +266,7 @@ long getdef_long (const char *item, long dflt)
  * values are handled.
  */
 
-unsigned long getdef_ulong (const char *item, unsigned int dflt)
+unsigned long getdef_ulong (const char *item, unsigned long dflt)
 {
 	struct itemdef *d;
 
