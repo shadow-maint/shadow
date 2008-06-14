@@ -36,6 +36,7 @@
 
 #include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "defines.h"
 #include "faillog.h"
 #include "getdef.h"
@@ -50,13 +51,21 @@
 void failure (uid_t uid, const char *tty, struct faillog *fl)
 {
 	int fd;
+	off_t offset_uid = (off_t) (sizeof *fl) * uid;
 
 	/*
 	 * Don't do anything if failure logging isn't set up.
 	 */
-	/* TODO: check if the file exists */
+
+	if (access (FAILLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
 	fd = open (FAILLOG_FILE, O_RDWR);
 	if (fd < 0) {
+		SYSLOG ((LOG_WARN,
+		         "Can't write faillog entry for UID %lu in %s.",
+		         (unsigned long) uid, FAILLOG_FILE));
 		return;
 	}
 
@@ -66,9 +75,15 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * share just about everything else ...
 	 */
 
-	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	/* TODO: check failures */
-	if (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl) {
+	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+		/* This is not necessarily a failure. The file is
+		 * initially zero length.
+		 *
+		 * If lseek() or read() failed for any other reason, this
+		 * might reset the counter. But the new failure will be
+		 * logged.
+		 */
 		memzero (fl, sizeof *fl);
 	}
 
@@ -93,12 +108,13 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 	 * seem that great.
 	 */
 
-	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	/* TODO: check failures */
-	write (fd, (char *) fl, sizeof *fl);
-	/* TODO: log failures */
-	close (fd);
-	/* TODO: log failures */
+	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (write (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl)
+	    || (close (fd) != 0)) {
+		SYSLOG ((LOG_WARN,
+		         "Can't write faillog entry for UID %lu in %s.",
+		         (unsigned long) uid, FAILLOG_FILE));
+	}
 }
 
 static bool too_many_failures (const struct faillog *fl)
@@ -137,14 +153,22 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 {
 	int fd;
 	struct faillog fail;
+	off_t offset_uid = (off_t) (sizeof *fl) * uid;
 
 	/*
 	 * Suppress the check if the log file isn't there.
 	 */
 
-	/* TODO: check if the file exists */
-	fd = open (FAILLOG_FILE, O_RDWR);
+	if (access (FAILLOG_FILE, F_OK) != 0) {
+		return 1;
+	}
+
+	fd = open (FAILLOG_FILE, failed?O_RDONLY:O_RDWR);
 	if (fd < 0) {
+		SYSLOG ((LOG_WARN,
+		         "Can't open the faillog file (%s) to check UID %lu. "
+		         "User access authorized.",
+		         FAILLOG_FILE, (unsigned long) uid));
 		return 1;
 	}
 
@@ -160,14 +184,14 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 	 * no need to reset the count.
 	 */
 
-	lseek (fd, (off_t) (sizeof *fl) * uid, SEEK_SET);
-	if (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl) {
-		close (fd);
+	if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (read (fd, (char *) fl, sizeof *fl) != (ssize_t) sizeof *fl)) {
+		(void) close (fd);
 		return 1;
 	}
 
 	if (too_many_failures (fl)) {
-		close (fd);
+		(void) close (fd);
 		return 0;
 	}
 
@@ -182,10 +206,17 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 		fail = *fl;
 		fail.fail_cnt = 0;
 
-		lseek (fd, (off_t) sizeof fail * uid, SEEK_SET);
-		write (fd, (char *) &fail, sizeof fail);
+		if (   (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+		    || (write (fd, (const void *) &fail, sizeof fail) != (ssize_t) sizeof fail)
+		    || (close (fd) != 0)) {
+			SYSLOG ((LOG_WARN,
+			         "Can't reset faillog entry for UID %lu in %s.",
+			         (unsigned long) uid, FAILLOG_FILE));
+		}
+	} else {
+		(void) close (fd);
 	}
-	close (fd);
+
 	return 1;
 }
 
@@ -241,11 +272,11 @@ void failprint (const struct faillog *fail)
 	}
 #endif
 	printf (ngettext ("%d failure since last login.\n"
-			  "Last was %s on %s.\n",
-			  "%d failures since last login.\n"
-			  "Last was %s on %s.\n",
-			  fail->fail_cnt),
-		fail->fail_cnt, lasttime, fail->fail_line);
+	                  "Last was %s on %s.\n",
+	                  "%d failures since last login.\n"
+	                  "Last was %s on %s.\n",
+	                  (unsigned long) fail->fail_cnt),
+	        fail->fail_cnt, lasttime, fail->fail_line);
 }
 
 /*
@@ -281,17 +312,27 @@ void failtmp (
 	 * feature to be used.
 	 */
 
+	if (access (ftmp, F_OK) != 0) {
+		return;
+	}
+
 	fd = open (ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
+		SYSLOG ((LOG_WARN,
+		         "Can't append failure of UID %lu to %s.",
+		         (unsigned long) uid, ftmp));
 		return;
 	}
 
 	/*
-	 * Output the new failure record and close the log file.
+	 * Append the new failure record and close the log file.
 	 */
 
-	write (fd, (const char *) failent, sizeof *failent);
-	close (fd);
-	/* TODO: check if the file could be closed */
+	if (   (write (fd, (const void *) failent, sizeof *failent) != (ssize_t) sizeof *failent)
+	    || (close (fd) != 0)) {
+		SYSLOG ((LOG_WARN,
+		         "Can't append failure of UID %lu to %s.",
+		         (unsigned long) uid, ftmp));
+	}
 }
 

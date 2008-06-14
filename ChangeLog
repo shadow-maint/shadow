@@ -1,3 +1,13 @@
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/failure.c: Check return values. If lseek() failed, avoid
+	reading or writing at an unspecified location. Log to syslog in
+	case of failure when reading a faillog entry or writing in
+	faillog or btmp.
+	* libmisc/failure.c: Check if the file exist before opening it.
+	* libmisc/failure.c: Log failures of open() and close() when
+	necessary.
+
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/prototypes.h: Add the getrange() prototype.
