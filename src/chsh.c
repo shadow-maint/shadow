@@ -37,7 +37,6 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <pwd.h>
-#include <signal.h>
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef WITH_SELINUX
