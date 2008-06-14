@@ -154,17 +154,20 @@ char *strchr (), *strrchr (), *strtok ();
  * --Nekral */
 #define SYSLOG(x)							\
 	do {								\
-		char *saved_locale = setlocale(LC_ALL, NULL);		\
-		if (saved_locale)					\
-			saved_locale = strdup(saved_locale);		\
-		if (saved_locale)					\
-			setlocale(LC_ALL, "C");			\
-		syslog x ;						\
-		if (saved_locale) {					\
-			setlocale(LC_ALL, saved_locale);		\
-			free(saved_locale);				\
+		char *old_locale = setlocale(LC_ALL, NULL);		\
+		char *saved_locale = NULL;				\
+		if (NULL != old_locale) {				\
+			saved_locale = strdup (old_locale);		\
 		}							\
-	} while (0)
+		if (NULL != saved_locale) {				\
+			(void) setlocale (LC_ALL, "C");			\
+		}							\
+		syslog x ;						\
+		if (NULL != saved_locale) {				\
+			(void) setlocale (LC_ALL, saved_locale);	\
+			free (saved_locale);				\
+		}							\
+	} while (false)
 #else				/* !ENABLE_NLS */
 #define SYSLOG(x) syslog x
 #endif				/* !ENABLE_NLS */

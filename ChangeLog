@@ -1,5 +1,14 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Avoid implicit conversion of pointers to
+	booleans.
+	* lib/defines.h: Ignore return values of setlocale() except the
+	first call.
+	* lib/defines.h: Fix a splint observer warning by using an
+	intermediate variable (old_locale).
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.c: Check return values. If lseek() failed, avoid
 	reading or writing at an unspecified location. Log to syslog in
 	case of failure when reading a faillog entry or writing in
