@@ -55,8 +55,10 @@
  * Global variables
  */
 static FILE *lastlogfile;	/* lastlog file stream */
-static long umin;		/* if uflg, only display users with uid >= umin */
-static long umax;		/* if uflg, only display users with uid <= umax */
+static unsigned long umin;	/* if uflg, only display users with uid >= umin */
+static bool has_umin = false;
+static unsigned long umax;	/* if uflg, only display users with uid <= umax */
+static bool has_umax = false;
 static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
 static int inverse_days;	/* number of days to consider for print command */
@@ -138,8 +140,8 @@ static void print (void)
 	while ( (pwent = getpwent ()) != NULL ) {
 		user = pwent->pw_uid;
 		if (   uflg
-		    && (   (umin != -1 && user < (uid_t)umin)
-		        || (umax != -1 && user > (uid_t)umax))) {
+		    && (   (has_umin && user < (uid_t)umin)
+		        || (has_umax && user > (uid_t)umax))) {
 			continue;
 		}
 		offset = user * sizeof lastlog;
@@ -187,13 +189,13 @@ int main (int argc, char **argv)
 				usage ();
 				break;
 			case 't':
-				days = atoi (optarg);
-				seconds = days * DAY;
+				days = atoi (optarg); /* FIXME */
+				seconds = (time_t) days * DAY;
 				tflg = true;
 				break;
 			case 'b':
-				inverse_days = atoi (optarg);
-				inverse_seconds = inverse_days * DAY;
+				inverse_days = atoi (optarg); /* FIXME */
+				inverse_seconds = (time_t) inverse_days * DAY;
 				bflg = true;
 				break;
 			case 'u':
@@ -207,34 +209,17 @@ int main (int argc, char **argv)
 				uflg = true;
 				pwent = xgetpwnam (optarg);
 				if (NULL != pwent) {
-					umin = pwent->pw_uid;
+					umin = (unsigned long) pwent->pw_uid;
+					has_umin = true;
 					umax = umin;
+					has_umax = true;
 				} else {
-					char *endptr = NULL;
-					long int user;
-					user = strtol(optarg, &endptr, 10);
-					if (*optarg != '\0' && *endptr == '\0') {
-						if (user < 0) {
-							/* -<userid> */
-							umin = -1;
-							umax = -user;
-						} else {
-							/* <userid> */
-							umin = user;
-							umax = user;
-						}
-					} else if (endptr[0] == '-' && endptr[1] == '\0') {
-						/* <userid>- */
-						umin = user;
-						umax = -1;
-					} else if (*endptr == '-') {
-						/* <userid>-<userid> */
-						umin = user;
-						umax = atol(endptr+1);
-					} else {
+					if (getrange (optarg,
+					              &umin, &has_umin,
+					              &umax, &has_umax) == 0) {
 						fprintf (stderr,
-							 _("Unknown user or range: %s\n"),
-							 optarg);
+						         _("lastlog: Unknown user or range: %s\n"),
+						         optarg);
 						exit (1);
 					}
 				}

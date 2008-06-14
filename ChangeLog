@@ -1,5 +1,14 @@
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/lastlog.c: Use getrange to parse the range of users.
+	* src/lastlog.c: umin and umax do not need to be signed long. Use
+	an unsigned long which might be needed to parse a GID or UID. Add
+	the has_umin and has_umax to replace the -1 values.
+	* src/lastlog.c: Cast dates to time_t.
+	* src/lastlog.c: Prefix lastlog errors with "lastlog: ".
+
+2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/getlong.c: Reset errno before calling strtol().
 	Otherwise, errno could be already set to ERANGE.
 
