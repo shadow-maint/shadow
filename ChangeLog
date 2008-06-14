@@ -1,5 +1,10 @@
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/getlong.c: Reset errno before calling strtol().
+	Otherwise, errno could be already set to ERANGE.
+
+2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/Makefile.am, libmisc/getrange.c: Added function to parse
 	a range (useful for lastlog).
 

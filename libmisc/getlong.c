@@ -39,6 +39,7 @@ int getlong(const char *numstr, long int *result)
 	long val;
 	char *endptr;
 
+	errno = 0;
 	val = strtol (numstr, &endptr, 10);
 	if (('\0' != *endptr) || (ERANGE == errno)) {
 		return 0;
