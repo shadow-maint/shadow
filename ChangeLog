@@ -1,5 +1,10 @@
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/Makefile.am, libmisc/getrange.c: Added function to parse
+	a range (useful for lastlog).
+
+2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chsh.c: <signal.h> is not needed.
 
 2008-06-13  Nicolas François  <nicolas.francois@centraliens.net>

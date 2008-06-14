@@ -25,6 +25,7 @@ libmisc_a_SOURCES = \
 	getdate.h \
 	getdate.y \
 	getlong.c \
+	getrange.c \
 	hushed.c \
 	isexpired.c \
 	limits.c \
