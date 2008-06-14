@@ -97,7 +97,7 @@ extern void sanitize_env (void);
 
 /* fields.c */
 extern void change_field (char *, size_t, const char *);
-extern bool valid_field (const char *, const char *);
+extern int valid_field (const char *, const char *);
 
 /* find_new_ids.c */
 extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
@@ -105,6 +105,11 @@ extern int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 
 /* getlong.c */
 extern int getlong(const char *numstr, long int *result);
+
+/* getrange */
+extern getrange(char *range,
+                unsigned long *min, bool *has_min,
+                unsigned long *max, bool *has_max);
 
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);
@@ -258,7 +263,7 @@ extern void checkutmp (bool picky);
 extern void setutmp (const char *, const char *, const char *);
 
 /* valid.c */
-extern int valid (const char *, const struct passwd *);
+extern bool valid (const char *, const struct passwd *);
 
 /* xmalloc.c */
 extern char *xmalloc (size_t);

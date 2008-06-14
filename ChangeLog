@@ -1,5 +1,13 @@
 2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: Add the getrange() prototype.
+	* lib/prototypes.h: Fix the valid_field() prototype (does not
+	return an bool).
+	* lib/prototypes.h: Fix the valid() prototype (it does return a
+	bool).
+
+2008-06-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/getdef.c: Fix the getdef_ulong() prototype.
 	* lib/getdef.h: Fix the getdef_ulong() prototype.
 
