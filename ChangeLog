@@ -1,5 +1,12 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/log.c: Check return values. If lseek() failed, avoid
+	reading or writing at an unspecified location. Log to syslog in
+	case of failure.
+	* libmisc/log.c: Use the right casts.
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_ids.c, libmisc/find_new_gid.c,
 	libmisc/find_new_uid.c, libmisc/Makefile.am, lib/prototypes.h:
 	Split find_new_ids.c into find_new_gid.c and find_new_uid.c to

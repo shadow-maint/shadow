@@ -72,7 +72,7 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	 * for this UID.  Negative UID's will create problems, but ...
 	 */
 
-	offset = (unsigned long) pw->pw_uid * sizeof newlog;
+	offset = (off_t) pw->pw_uid * sizeof newlog;
 
 	if (lseek (fd, offset, SEEK_SET) != offset) {
 		close (fd);
@@ -85,7 +85,7 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 	 * the way we read the old one in.
 	 */
 
-	if (read (fd, (char *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
+	if (read (fd, (void *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog) {
 		memzero (&newlog, sizeof newlog);
 	}
 	if (NULL != ll) {
@@ -99,9 +99,13 @@ dolastlog (struct lastlog *ll, const struct passwd *pw, const char *line,
 #if HAVE_LL_HOST
 	strncpy (newlog.ll_host, host, sizeof newlog.ll_host);
 #endif
-	if (lseek (fd, offset, SEEK_SET) == offset) {
-		write (fd, (char *) &newlog, sizeof newlog);
+	if (   (lseek (fd, offset, SEEK_SET) != offset)
+	    || (write (fd, (const void *) &newlog, sizeof newlog) != (ssize_t) sizeof newlog)
+	    || (close (fd) != 0)) {
+		SYSLOG ((LOG_WARN,
+		         "Can't write lastlog entry for UID %lu in %s.",
+		         (unsigned long) pw->pw_uid, LASTLOG_FILE));
+		(void) close (fd);
 	}
-	close (fd);
 }
 
