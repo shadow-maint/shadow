@@ -1,5 +1,10 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/failure.c: Try to close the open file if a failure
+	occured during lseek(), read() or write().
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/log.c: Check return values. If lseek() failed, avoid
 	reading or writing at an unspecified location. Log to syslog in
 	case of failure.

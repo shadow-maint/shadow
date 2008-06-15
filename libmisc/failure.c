@@ -114,6 +114,7 @@ void failure (uid_t uid, const char *tty, struct faillog *fl)
 		SYSLOG ((LOG_WARN,
 		         "Can't write faillog entry for UID %lu in %s.",
 		         (unsigned long) uid, FAILLOG_FILE));
+		(void) close (fd);
 	}
 }
 
@@ -212,6 +213,7 @@ int failcheck (uid_t uid, struct faillog *fl, bool failed)
 			SYSLOG ((LOG_WARN,
 			         "Can't reset faillog entry for UID %lu in %s.",
 			         (unsigned long) uid, FAILLOG_FILE));
+			(void) close (fd);
 		}
 	} else {
 		(void) close (fd);
@@ -341,6 +343,7 @@ void failtmp (
 		SYSLOG ((LOG_WARN,
 		         "Can't append failure of user %s to %s.",
 		         ut_user, ftmp));
+		(void) close (fd);
 	}
 }
 
