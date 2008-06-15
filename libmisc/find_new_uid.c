@@ -35,7 +35,6 @@
 
 #include "prototypes.h"
 #include "pwio.h"
-#include "groupio.h"
 #include "getdef.h"
 
 /*
@@ -118,88 +117,6 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 	}
 
 	*uid = user_id;
-	return 0;
-}
-
-/*
- * find_new_gid - Find a new unused GID.
- *
- * If successful, find_new_gid provides an unused group ID in the
- * [GID_MIN:GID_MAX] range.
- * This ID should be higher than all the used GID, but if not possible,
- * the lowest unused ID in the range will be returned.
- * 
- * Return 0 on success, -1 if no unused GIDs are available.
- */
-int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
-{
-	const struct group *grp;
-	gid_t gid_min, gid_max, group_id;
-
-	assert (gid != NULL);
-
-	if (!sys_group) {
-		gid_min = getdef_ulong ("GID_MIN", 1000L);
-		gid_max = getdef_ulong ("GID_MAX", 60000L);
-	} else {
-		gid_min = getdef_ulong ("SYS_GID_MIN", 1L);
-		gid_max = getdef_ulong ("GID_MIN", 1000L) - 1;
-		gid_max = getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
-	}
-
-	if (   (NULL != preferred_gid)
-	    && (*preferred_gid >= gid_min)
-	    && (*preferred_gid <= gid_max)
-	    /* Check if the user exists according to NSS */
-	    && (getgrgid (*preferred_gid) == NULL)
-	    /* Check also the local database in case of uncommitted
-	     * changes */
-	    && (gr_locate_gid (*preferred_gid) == NULL)) {
-		*gid = *preferred_gid;
-		return 0;
-	}
-
-	group_id = gid_min;
-
-	/*
-	 * Search the entire group file,
-	 * looking for the largest unused value.
-	 *
-	 * We check the list of users according to NSS (setpwent/getpwent),
-	 * but we also check the local database (pw_rewind/pw_next) in case
-	 * some groups were created but the changes were not committed yet.
-	 */
-	setgrent ();
-	gr_rewind ();
-	while (   ((grp = getgrent ()) != NULL)
-	       || ((grp = gr_next ()) != NULL)) {
-		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
-			group_id = grp->gr_gid + 1;
-		}
-	}
-	endgrent ();
-
-	/*
-	 * If a group with GID equal to GID_MAX exists, the above algorithm
-	 * will give us GID_MAX+1 even if not unique. Search for the first
-	 * free GID starting with GID_MIN (it's O(n*n) but can be avoided
-	 * by not having users with GID equal to GID_MAX).  --marekm
-	 */
-	if (group_id == gid_max + 1) {
-		for (group_id = gid_min; group_id < gid_max; group_id++) {
-			/* local, no need for xgetgrgid */
-			if (   (getgrgid (group_id) == NULL)
-			    && (gr_locate_gid (group_id) == NULL)) {
-				break;
-			}
-		}
-		if (group_id == gid_max) {
-			fputs (_("Can't get unique GID (no more available GIDs)\n"), stderr);
-			return -1;
-		}
-	}
-
-	*gid = group_id;
 	return 0;
 }
 

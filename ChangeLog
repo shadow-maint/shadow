@@ -1,5 +1,13 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_ids.c, libmisc/find_new_gid.c,
+	libmisc/find_new_uid.c, libmisc/Makefile.am, lib/prototypes.h:
+	Split find_new_ids.c into find_new_gid.c and find_new_uid.c to
+	ease the description of login.defs variables in the different
+	tools.
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.c: Ignore the return value of strftime() and
 	printf().
 	* libmisc/failure.c: Fix syslog call. The UID is not available.
