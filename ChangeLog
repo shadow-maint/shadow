@@ -1,5 +1,12 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/failure.c: Ignore the return value of strftime() and
+	printf().
+	* libmisc/failure.c: Fix syslog call. The UID is not available.
+	User the username specified in the utmp/utmpx entry.
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Avoid implicit conversion of pointers to
 	booleans.
 	* lib/defines.h: Ignore return values of setlocale() except the
