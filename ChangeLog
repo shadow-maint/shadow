@@ -1,5 +1,28 @@
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/limits.c: Add brackets and parenthesis.
+	* libmisc/limits.c: Avoid implicit conversion of pointers /
+	integers to booleans.
+	* libmisc/limits.c: Ignore the return value of umask(). We will
+	never return to the original umask.
+	* libmisc/limits.c: Avoid multi-statements lines.
+	* libmisc/limits.c: Added default to a switch(). Report invalid
+	limit strings to syslog.
+	* libmisc/limits.c: Ignore the return value of fclose().
+	/etc/limits is open read-only.
+	* libmisc/limits.c: Ignore the return value of fputs() and
+	sleep().
+	* libmisc/limits.c: Check the return value of nice() and
+	set_filesize_limit(), and report errors to syslog.
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/ulimit.c, lib/prototypes.h: Return failures of
+	set_filesize_limit(). Change the prototype to return an int
+	instead of void.
+
+2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.c: Try to close the open file if a failure
 	occured during lseek(), read() or write().
 

@@ -74,13 +74,15 @@ setrlimit_value (unsigned int rlimit, const char *value,
 	const char *value_orig = value;
 
 	limit = strtol (value, endptr, 10);
-	if (limit == 0 && value_orig == *endptr)	/* no chars read */
+	if ((0 == limit) && (value_orig == *endptr)) {	/* no chars read */
 		return 0;
+	}
 	limit *= multiplier;
 	rlim.rlim_cur = limit;
 	rlim.rlim_max = limit;
-	if (setrlimit (rlimit, &rlim))
+	if (setrlimit (rlimit, &rlim) != 0) {
 		return LOGIN_ERROR_RLIMIT;
+	}
 	return 0;
 }
 
@@ -91,10 +93,12 @@ static int set_prio (const char *value)
 	char **endptr = (char **) &value;
 
 	prio = strtol (value, endptr, 10);
-	if ((prio == 0) && (value == *endptr))
+	if ((0 == prio) && (value == *endptr)) {
 		return 0;
-	if (setpriority (PRIO_PROCESS, 0, prio))
+	}
+	if (setpriority (PRIO_PROCESS, 0, prio) != 0) {
 		return LOGIN_ERROR_RLIMIT;
+	}
 	return 0;
 }
 
@@ -105,9 +109,10 @@ static int set_umask (const char *value)
 	char **endptr = (char **) &value;
 
 	mask = strtol (value, endptr, 8) & 0777;
-	if ((mask == 0) && (value == *endptr))
+	if ((0 == mask) && (value == *endptr)) {
 		return 0;
-	umask (mask);
+	}
+	(void) umask (mask);
 	return 0;
 }
 
@@ -125,10 +130,11 @@ static int check_logins (const char *name, const char *maxlogins)
 	const char *ml_orig = maxlogins;
 
 	limit = strtol (maxlogins, endptr, 10);
-	if (limit == 0 && ml_orig == *endptr)	/* no chars read */
+	if ((0 == limit) && (ml_orig == *endptr)) {	/* no chars read */
 		return 0;
+	}
 
-	if (limit == 0) {	/* maximum 0 logins ? */
+	if (0 == limit) {	/* maximum 0 logins ? */
 		SYSLOG ((LOG_WARN, "No logins allowed for `%s'\n", name));
 		return LOGIN_ERROR_LOGIN;
 	}
@@ -141,14 +147,19 @@ static int check_logins (const char *name, const char *maxlogins)
 	setutent ();
 	while ((ut = getutent ())) {
 #endif
-		if (ut->ut_type != USER_PROCESS)
+		if (USER_PROCESS != ut->ut_type) {
 			continue;
-		if (ut->ut_user[0] == '\0')
+		}
+		if ('\0' == ut->ut_user[0]) {
 			continue;
-		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0)
+		}
+		if (strncmp (name, ut->ut_user, sizeof (ut->ut_user)) != 0) {
 			continue;
-		if (++count > limit)
+		}
+		count++;
+		if (count > limit) {
 			break;
+		}
 	}
 #if HAVE_UTMPX_H
 	endutxent ();
@@ -203,10 +214,11 @@ static int do_user_limits (const char *buf, const char *name)
 {
 	const char *pp;
 	int retval = 0;
+	bool reported = false;
 
 	pp = buf;
 
-	while (*pp != '\0')
+	while ('\0' != *pp) {
 		switch (*pp++) {
 #ifdef RLIMIT_AS
 		case 'a':
@@ -298,14 +310,24 @@ static int do_user_limits (const char *buf, const char *name)
 			break;
 		case 'l':
 		case 'L':
-			/* LIMIT the number of concurent logins */
+			/* LIMIT the number of concurrent logins */
 			retval |= check_logins (name, pp);
 			break;
 		case 'p':
 		case 'P':
 			retval |= set_prio (pp);
 			break;
+		default:
+			/* Only report invalid strings once */
+			if (!reported) {
+				SYSLOG ((LOG_WARN,
+				         "Invalid limit string: '%s'",
+				         pp-1));
+				reported = true;
+				retval |= LOGIN_ERROR_RLIMIT;
+			}
 		}
+	}
 	return retval;
 }
 
@@ -336,8 +358,9 @@ static int setup_user_limits (const char *uname)
 	 * - username must start on first column
 	 * A better (smarter) checking should be done --cristiang */
 	while (fgets (buf, 1024, fil) != NULL) {
-		if (buf[0] == '#' || buf[0] == '\n')
+		if (('#' == buf[0]) || ('\n' == buf[0])) {
 			continue;
+		}
 		memzero (tempbuf, sizeof (tempbuf));
 		/* a valid line should have a username, then spaces,
 		 * then limits
@@ -357,11 +380,12 @@ static int setup_user_limits (const char *uname)
 			}
 		}
 	}
-	fclose (fil);
+	(void) fclose (fil);
 	if (limits[0] == '\0') {
 		/* no user specific limits */
-		if (deflimits[0] == '\0')	/* no default limits */
+		if (deflimits[0] == '\0') {	/* no default limits */
 			return 0;
+		}
 		strcpy (limits, deflimits);	/* use the default limits */
 	}
 	return do_user_limits (limits, uname);
@@ -379,12 +403,13 @@ static void setup_usergroups (const struct passwd *info)
  *	group name, set umask group bits to be the same as owner bits
  *	(examples: 022 -> 002, 077 -> 007).
  */
-	if (info->pw_uid != 0 && info->pw_uid == info->pw_gid) {
+	if ((0 != info->pw_uid) && (info->pw_uid == info->pw_gid)) {
 		/* local, no need for xgetgrgid */
 		grp = getgrgid (info->pw_gid);
-		if (grp && (strcmp (info->pw_name, grp->gr_name) == 0)) {
+		if (   (NULL != grp)
+		    && (strcmp (info->pw_name, grp->gr_name) == 0)) {
 			oldmask = umask (0777);
-			umask ((oldmask & ~070) | ((oldmask >> 3) & 070));
+			(void) umask ((oldmask & ~070) | ((oldmask >> 3) & 070));
 		}
 	}
 }
@@ -399,8 +424,9 @@ void setup_limits (const struct passwd *info)
 	int i;
 	long l;
 
-	if (getdef_bool ("USERGROUPS_ENAB"))
+	if (getdef_bool ("USERGROUPS_ENAB")) {
 		setup_usergroups (info);
+	}
 
 	/*
 	 * See if the GECOS field contains values for NICE, UMASK or ULIMIT.
@@ -410,28 +436,41 @@ void setup_limits (const struct passwd *info)
 
 	if (getdef_bool ("QUOTAS_ENAB")) {
 #ifdef LIMITS
-		if (info->pw_uid != 0)
+		if (info->pw_uid != 0) {
 			if (setup_user_limits (info->pw_name) &
 			    LOGIN_ERROR_LOGIN) {
-				fputs (_("Too many logins.\n"), stderr);
-				sleep (2);
+				(void) fputs (_("Too many logins.\n"), stderr);
+				(void) sleep (2); /* XXX: Should be FAIL_DELAY */
 				exit (1);
 			}
+		}
 #endif
 		for (cp = info->pw_gecos; cp != NULL; cp = strchr (cp, ',')) {
-			if (*cp == ',')
+			if (',' == *cp) {
 				cp++;
+			}
 
 			if (strncmp (cp, "pri=", 4) == 0) {
 				i = atoi (cp + 4);
-				if (i >= -20 && i <= 20)
-					(void) nice (i);
+				if ((i >= -20) && (i <= 20)) {
+					errno = 0;
+					if (   (nice (i) == -1)
+					    && (0 != errno)) {
+						SYSLOG ((LOG_WARN,
+						         "Can't set the nice value for user %s",
+						         info->pw_name));
+					}
+				}
 
 				continue;
 			}
 			if (strncmp (cp, "ulimit=", 7) == 0) {
 				l = strtol (cp + 7, (char **) 0, 10);
-				set_filesize_limit (l);
+				if (set_filesize_limit (l) != 0) {
+					SYSLOG ((LOG_WARN,
+					         "Can't set the ulimit for user %s",
+					         info->pw_name));
+				}
 				continue;
 			}
 			if (strncmp (cp, "umask=", 6) == 0) {

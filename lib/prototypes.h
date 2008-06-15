@@ -258,7 +258,7 @@ extern void ttytype (const char *);
 extern char *tz (const char *);
 
 /* ulimit.c */
-extern void set_filesize_limit (int);
+extern int set_filesize_limit (int blocks);
 
 /* utmp.c */
 extern void checkutmp (bool picky);

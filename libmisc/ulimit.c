@@ -50,14 +50,21 @@
 #endif
 #include "prototypes.h"
 
-void set_filesize_limit (int blocks)
+int set_filesize_limit (int blocks)
 {
+	int ret = -1;
 #if HAVE_ULIMIT_H
-	ulimit (UL_SETFSIZE, blocks);
+	if (ulimit (UL_SETFSIZE, blocks) != -1) {
+		ret = 0;
+	}
 #elif defined(RLIMIT_FSIZE)
 	struct rlimit rlimit_fsize;
 
-	rlimit_fsize.rlim_cur = rlimit_fsize.rlim_max = 512L * blocks;
-	setrlimit (RLIMIT_FSIZE, &rlimit_fsize);
+	rlimit_fsize.rlim_cur = 512L * blocks;
+	rlimit_fsize.rlim_max = rlimit_fsize.rlim_cur;
+	ret = setrlimit (RLIMIT_FSIZE, &rlimit_fsize);
 #endif
+
+	return ret;
 }
+
