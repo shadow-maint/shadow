@@ -1,3 +1,10 @@
+2008-06-16  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: If the faillog file exist, warn in case of
+	failure when open(), lssek(), write() or close() fails when the
+	new user's faillog entry is reset.
+	* src/useradd.c: Ditto for the lastlog entry.
+
 2008-06-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/limits.c: Add brackets and parenthesis.

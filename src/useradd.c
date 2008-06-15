@@ -1403,13 +1403,22 @@ static void faillog_reset (uid_t uid)
 {
 	struct faillog fl;
 	int fd;
+	off_t offset_uid = (off_t) (sizeof fl) * uid;
+
+	if (access (FAILLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
+	memzero (&fl, sizeof (fl));
 
 	fd = open (FAILLOG_FILE, O_RDWR);
-	if (fd >= 0) {
-		memzero (&fl, sizeof (fl));
-		lseek (fd, (off_t) sizeof (fl) * uid, SEEK_SET);
-		write (fd, &fl, sizeof (fl));
-		close (fd);
+	if (   (-1 == fd)
+	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (write (fd, &fl, sizeof (fl)) != (ssize_t) sizeof (fl))
+	    || (close (fd) != 0)) {
+		fprintf (stderr,
+		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror(errno));
 	}
 }
 
@@ -1417,13 +1426,22 @@ static void lastlog_reset (uid_t uid)
 {
 	struct lastlog ll;
 	int fd;
+	off_t offset_uid = (off_t) (sizeof ll) * uid;
+
+	if (access (LASTLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
+	memzero (&ll, sizeof (ll));
 
 	fd = open (LASTLOG_FILE, O_RDWR);
-	if (fd >= 0) {
-		memzero (&ll, sizeof (ll));
-		lseek (fd, (off_t) sizeof (ll) * uid, SEEK_SET);
-		write (fd, &ll, sizeof (ll));
-		close (fd);
+	if (   (-1 == fd)
+	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
+	    || (write (fd, &ll, sizeof (ll)) != (ssize_t) sizeof (ll))
+	    || (close (fd) != 0)) {
+		fprintf (stderr,
+		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
+		         Prog, (unsigned long) uid, strerror(errno));
 	}
 }
 
