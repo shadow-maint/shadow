@@ -1,5 +1,13 @@
 2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/env.c: Avoid implicit conversion of pointers / chars to
+	booleans.
+	* libmisc/env.c: Add brackets and parenthesis.
+	* libmisc/env.c: Ignore the return value of puts() and fputs().
+	* libmisc/env.c: Avoid multi-statements lines.
+
+2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c: Avoid implicit conversion of pointers / chars to
 	booleans.
 	* libmisc/utmp.c: Add brackets and parenthesis.

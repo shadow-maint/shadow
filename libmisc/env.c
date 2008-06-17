@@ -91,7 +91,7 @@ void addenv (const char *string, const char *value)
 	size_t i;
 	size_t n;
 
-	if (value) {
+	if (NULL != value) {
 		newstring = xmalloc (strlen (string) + strlen (value) + 2);
 		sprintf (newstring, "%s=%s", string, value);
 	} else {
@@ -104,7 +104,7 @@ void addenv (const char *string, const char *value)
 	 */
 
 	cp = strchr (newstring, '=');
-	if (!cp) {
+	if (NULL == cp) {
 		free (newstring);
 		return;
 	}
@@ -112,9 +112,10 @@ void addenv (const char *string, const char *value)
 	n = (size_t) (cp - newstring);
 
 	for (i = 0; i < newenvc; i++) {
-		if (strncmp (newstring, newenvp[i], n) == 0 &&
-		    (newenvp[i][n] == '=' || newenvp[i][n] == '\0'))
+		if (   (strncmp (newstring, newenvp[i], n) == 0)
+		    && (('=' == newenvp[i][n]) || ('\0' == newenvp[i][n]))) {
 			break;
+		}
 	}
 
 	if (i < newenvc) {
@@ -151,12 +152,14 @@ void addenv (const char *string, const char *value)
 			 * environ so that it doesn't point to some
 			 * free memory area (realloc() could move it).
 			 */
-			if (environ == newenvp)
+			if (environ == newenvp) {
 				environ = __newenvp;
+			}
 			newenvp = __newenvp;
 		} else {
-			fputs (_("Environment overflow\n"), stderr);
-			free (newenvp[--newenvc]);
+			(void) fputs (_("Environment overflow\n"), stderr);
+			newenvc--;
+			free (newenvp[newenvc]);
 		}
 	}
 
@@ -178,21 +181,25 @@ void set_env (int argc, char *const *argv)
 	char *cp;
 
 	for (; argc > 0; argc--, argv++) {
-		if (strlen (*argv) >= sizeof variable)
+		if (strlen (*argv) >= sizeof variable) {
 			continue;	/* ignore long entries */
+		}
 
-		if (!(cp = strchr (*argv, '='))) {
+		cp = strchr (*argv, '=');
+		if (NULL == cp) {
 			snprintf (variable, sizeof variable, "L%d", noname++);
 			addenv (variable, *argv);
 		} else {
 			const char **p;
 
-			for (p = forbid; *p; p++)
-				if (strncmp (*argv, *p, strlen (*p)) == 0)
+			for (p = forbid; NULL != *p; p++) {
+				if (strncmp (*argv, *p, strlen (*p)) == 0) {
 					break;
+				}
+			}
 
-			if (*p) {
-				strncpy (variable, *argv, cp - *argv);
+			if (NULL != *p) {
+				strncpy (variable, *argv, (size_t)(cp - *argv));
 				variable[cp - *argv] = '\0';
 				printf (_("You may not change $%s\n"),
 					variable);
@@ -220,27 +227,32 @@ void sanitize_env (void)
 	char **cur;
 	char **move;
 
-	for (cur = envp; *cur; cur++) {
-		for (bad = forbid; *bad; bad++) {
+	for (cur = envp; NULL != *cur; cur++) {
+		for (bad = forbid; NULL != *bad; bad++) {
 			if (strncmp (*cur, *bad, strlen (*bad)) == 0) {
-				for (move = cur; *move; move++)
+				for (move = cur; NULL != *move; move++) {
 					*move = *(move + 1);
+				}
 				cur--;
 				break;
 			}
 		}
 	}
 
-	for (cur = envp; *cur; cur++) {
-		for (bad = noslash; *bad; bad++) {
-			if (strncmp (*cur, *bad, strlen (*bad)) != 0)
+	for (cur = envp; NULL != *cur; cur++) {
+		for (bad = noslash; NULL != *bad; bad++) {
+			if (strncmp (*cur, *bad, strlen (*bad)) != 0) {
 				continue;
-			if (!strchr (*cur, '/'))
+			}
+			if (strchr (*cur, '/') != NULL) {
 				continue;	/* OK */
-			for (move = cur; *move; move++)
+			}
+			for (move = cur; NULL != *move; move++) {
 				*move = *(move + 1);
+			}
 			cur--;
 			break;
 		}
 	}
 }
+
