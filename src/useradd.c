@@ -1418,7 +1418,7 @@ static void faillog_reset (uid_t uid)
 	    || (close (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror(errno));
+		         Prog, (unsigned long) uid, strerror (errno));
 	}
 }
 
@@ -1441,7 +1441,7 @@ static void lastlog_reset (uid_t uid)
 	    || (close (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
-		         Prog, (unsigned long) uid, strerror(errno));
+		         Prog, (unsigned long) uid, strerror (errno));
 	}
 }
 
