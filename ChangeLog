@@ -1,3 +1,11 @@
+2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/audit_help.c: Added one string for translation.
+	* po/POTFILES.in: Added libmisc/audit_help.c,
+	libmisc/find_new_gid.c, libmisc/find_new_uid.c, libmisc/getlong.c,
+	libmisc/getrange.c, libmisc/xgetXXbyYY.c, and libmisc/yesno.c.
+	Removed libmisc/find_new_ids.c
+
 2008-06-16  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: If the faillog file exist, warn in case of

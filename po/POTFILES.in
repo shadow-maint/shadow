@@ -9,6 +9,7 @@ lib/gshadow.c
 lib/lockpw.c
 libmisc/addgrps.c
 libmisc/age.c
+libmisc/audit_help.c
 libmisc/basename.c
 libmisc/chkname.c
 libmisc/chowndir.c
@@ -19,7 +20,10 @@ libmisc/entry.c
 libmisc/env.c
 libmisc/failure.c
 libmisc/fields.c
-libmisc/find_new_ids.c
+libmisc/find_new_gid.c
+libmisc/find_new_uid.c
+libmisc/getlong.c
+libmisc/getrange.c
 libmisc/hushed.c
 libmisc/isexpired.c
 libmisc/limits.c
@@ -47,7 +51,9 @@ libmisc/tz.c
 libmisc/ulimit.c
 libmisc/utmp.c
 libmisc/valid.c
+libmisc/xgetXXbyYY.c
 libmisc/xmalloc.c
+libmisc/yesno.c
 lib/port.c
 lib/pwauth.c
 lib/pwio.c

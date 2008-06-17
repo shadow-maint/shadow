@@ -56,7 +56,8 @@ void audit_help_open (void)
 		if (errno == EINVAL || errno == EPROTONOSUPPORT ||
 		    errno == EAFNOSUPPORT)
 			return;
-		fprintf (stderr, "Cannot open audit interface - aborting.\n");
+		fprintf (stderr,
+		         _("Cannot open audit interface - aborting.\n"));
 		exit (1);
 	}
 }
