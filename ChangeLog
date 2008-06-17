@@ -1,5 +1,16 @@
 2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c: Avoid implicit conversion of pointers / chars to
+	booleans.
+	* libmisc/utmp.c: Add brackets and parenthesis.
+	* libmisc/utmp.c: Exit with the EXIT_FAILURE status code in case
+	of failure.
+	* libmisc/utmp.c: Avoid assignments in comparisons.
+	* lib/prototypes.h, libmisc/utmp.c: Change setutmp()'s prototype
+	to return an int because pututline() and pututxline() may fail.
+
+2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/audit_help.c: Added one string for translation.
 	* po/POTFILES.in: Added libmisc/audit_help.c,
 	libmisc/find_new_gid.c, libmisc/find_new_uid.c, libmisc/getlong.c,

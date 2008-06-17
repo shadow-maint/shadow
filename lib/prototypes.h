@@ -262,7 +262,7 @@ extern int set_filesize_limit (int blocks);
 
 /* utmp.c */
 extern void checkutmp (bool picky);
-extern void setutmp (const char *, const char *, const char *);
+extern int setutmp (const char *, const char *, const char *);
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);
