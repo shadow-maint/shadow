@@ -1,3 +1,12 @@
+2008-06-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/login.c: Fix an "audit log injection" vulnerability in
+	login. This is similar to CVE-2008-1926 (util-linux-ng's login).
+	This vulnerability makes it easier for attackers to hide
+	activities by modifying portions of log events, e.g. by appending
+	an addr= statement to the login name.
+	* lib/prototypes.h: Added definition of AUDIT_NO_ID.
+
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	Prepare the 4.1.2 release

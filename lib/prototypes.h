@@ -126,6 +126,8 @@ extern int hushed (const struct passwd *);
 #ifdef WITH_AUDIT
 extern int audit_fd;
 extern void audit_help_open (void);
+/* Use AUDIT_NO_ID when a name is provided to audit_logger instead of an ID */
+#define AUDIT_NO_ID	((unsigned int) -1)
 extern void audit_logger (int type, const char *pgname, const char *op,
 			  const char *name, unsigned int id, int result);
 #endif

@@ -1,5 +1,13 @@
 $Id$
 
+shadow-4.1.2 -> shadow-4.1.2.1						UNRELEASED
+
+*** security
+- Fix an "audit log injection" vulnerability in login.
+  This vulnerability makes it easier for attackers to hide activities by
+  modifying portions of log events, e.g. by appending an addr= statement
+  to the login name.
+
 shadow-4.1.1 -> shadow-4.1.2						25-05-2008
 
 *** security:
