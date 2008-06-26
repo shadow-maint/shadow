@@ -15,7 +15,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
-"POT-Creation-Date: 2008-05-24 21:02+0200\n"
+"POT-Creation-Date: 2008-06-26 20:09+0200\n"
 "PO-Revision-Date: 2008-01-05 22:43+0100\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"

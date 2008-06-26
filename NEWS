@@ -1,6 +1,6 @@
 $Id$
 
-shadow-4.1.2 -> shadow-4.1.2.1						UNRELEASED
+shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 
 *** security
 - Fix an "audit log injection" vulnerability in login.

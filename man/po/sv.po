@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: man pages for shadow 4.0.18\n"
-"POT-Creation-Date: 2008-05-24 21:02+0200\n"
+"POT-Creation-Date: 2008-06-26 20:09+0200\n"
 "PO-Revision-Date: 2006-12-15 18:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
