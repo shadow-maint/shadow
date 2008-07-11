@@ -86,7 +86,8 @@ static char **build_list (char *s, char **list[], size_t * nlist)
 
 	while (s != NULL && *s != '\0') {
 		size = (nelem + 1) * sizeof (ptr);
-		if ((ptr = realloc (*list, size)) != NULL) {
+		ptr = realloc (*list, size);
+		if (NULL != ptr) {
 			ptr[nelem] = s;
 			nelem++;
 			*list = ptr;
