@@ -5,6 +5,9 @@ shadow-4.1.1 -> shadow-4.1.2						UNRELEASED
 *** general:
 - newusers
   * Implement the -r, --system option.
+- usermod
+  * Allow adding LDAP users (or any user not present in the local passwd
+    file) to local groups
 
 shadow-4.1.1 -> shadow-4.1.2						25-05-2008
 

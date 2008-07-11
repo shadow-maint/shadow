@@ -1,5 +1,13 @@
 2008-07-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Do not call usr_update() if it will have no
+	effects. This avoid checking if the user exists in the local passwd
+	file if not necessary, and thus allow to add LDAP users to local
+	groups. (The user is already checked against the system
+	configuration with getpwnam()). Thanks to Dan Kopecek.
+
+2008-07-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Split update_files() into update_lastlog() and
 	update_faillog(). Report errors (but don't fail) if the file
 	exist, but open(), lseek(), read(), write(), or close() fails.

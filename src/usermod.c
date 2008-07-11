@@ -1649,7 +1649,10 @@ int main (int argc, char **argv)
 	 * change the home directory, then close and update the files.
 	 */
 	open_files ();
-	usr_update ();
+	if (   cflg || dflg || eflg || fflg || gflg || Lflg || lflg || pflg
+	    || sflg || uflg || Uflg) {
+		usr_update ();
+	}
 	if (Gflg || lflg) {
 		grp_update ();
 	}
