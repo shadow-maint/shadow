@@ -106,8 +106,9 @@ int change_uid (const struct passwd *info)
 
 int setup_uid_gid (const struct passwd *info, bool is_console)
 {
-	if (setup_groups (info) < 0)
+	if (setup_groups (info) < 0) {
 		return -1;
+	}
 
 #ifdef HAVE_INITGROUPS
 	if (is_console) {
@@ -119,8 +120,10 @@ int setup_uid_gid (const struct passwd *info, bool is_console)
 	}
 #endif				/* HAVE_INITGROUPS */
 
-	if (change_uid (info) < 0)
+	if (change_uid (info) < 0) {
 		return -1;
+	}
 
 	return 0;
 }
+
