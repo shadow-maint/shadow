@@ -1,3 +1,7 @@
+2008-07-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* ChangeLog, NEWS, src/login.c: Re-inject the changes from 4.1.2.1.
+
 2008-07-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Do not call usr_update() if it will have no
@@ -1235,6 +1239,22 @@
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* configure.in: Allow --disable-man and --enable-man=no.
+
+2008-06-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	Prepare the 4.1.2.1 release
+	* NEWS: set the release date.
+	* man/po/*.po, po/*.po: Updated PO files.
+	* configure.in: Set the version to 4.1.2.1.
+
+2008-06-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/login.c: Fix an "audit log injection" vulnerability in
+	login. This is similar to CVE-2008-1926 (util-linux-ng's login).
+	This vulnerability makes it easier for attackers to hide
+	activities by modifying portions of log events, e.g. by appending
+	an addr= statement to the login name.
+	* lib/prototypes.h: Added definition of AUDIT_NO_ID.
 
 2008-05-25  Nicolas François  <nicolas.francois@centraliens.net>
 

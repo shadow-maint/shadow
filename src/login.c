@@ -745,31 +745,19 @@ int main (int argc, char **argv)
 			  }
 
 #ifdef WITH_AUDIT
-				{
-					struct passwd *pw;
-					char buf[64];
-
-					audit_fd = audit_open ();
-					/* local, no need for xgetpwnam */
-					pw = getpwnam (username);
-					if (NULL != pw) {
-						snprintf (buf, sizeof (buf),
-						          "uid=%lu",
-						    (unsigned long) pw->pw_uid);
-						audit_log_user_message
-						    (audit_fd, AUDIT_USER_LOGIN,
-						     buf, hostname, NULL,
-						     tty, 0);
-					} else {
-						snprintf (buf, sizeof (buf),
-							  "acct=%s", username);
-						audit_log_user_message
-						    (audit_fd, AUDIT_USER_LOGIN,
-						     buf, hostname, NULL,
-						     tty, 0);
-					}
-					close (audit_fd);
-				}
+			  audit_fd = audit_open ();
+			  audit_log_acct_message (audit_fd,
+			                          AUDIT_USER_LOGIN,
+			                          NULL,    /* Prog. name */
+			                          "login",
+			                          (NULL!=username)?username
+			                                          :"(unknown)",
+			                          AUDIT_NO_ID,
+			                          hostname,
+			                          NULL,    /* addr */
+			                          tty,
+			                          0);      /* result */
+			  close (audit_fd);
 #endif				/* WITH_AUDIT */
 
 			  fprintf (stderr, "\nLogin incorrect\n");
@@ -1050,16 +1038,18 @@ int main (int argc, char **argv)
 	}
 
 #ifdef WITH_AUDIT
-	{
-		char buf[32];
-
-		audit_fd = audit_open ();
-		snprintf (buf, sizeof (buf), "uid=%lu",
-		          (unsigned long) pwd->pw_uid);
-		audit_log_user_message (audit_fd, AUDIT_USER_LOGIN,
-					buf, hostname, NULL, tty, 1);
-		close (audit_fd);
-	}
+	audit_fd = audit_open ();
+	audit_log_acct_message (audit_fd,
+	                        AUDIT_USER_LOGIN,
+	                        NULL,    /* Prog. name */
+	                        "login",
+	                        NULL,    /* user's name => use uid */
+	                        (unsigned int) pwd->pw_uid,
+	                        hostname,
+	                        NULL,    /* addr */
+	                        tty,
+	                        1);      /* result */
+	close (audit_fd);
 #endif				/* WITH_AUDIT */
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
