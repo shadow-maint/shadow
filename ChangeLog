@@ -1,5 +1,18 @@
 2008-07-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Split update_files() into update_lastlog() and
+	update_faillog(). Report errors (but don't fail) if the file
+	exist, but open(), lseek(), read(), write(), or close() fails.
+	* src/usermod.c: Add brackets and parenthesis.
+	* src/usermod.c: Ignore the return value of pam_end() before
+	exiting.
+	* src/usermod.c: Ignore the return value of strftime(),
+	snprintf(), and puts().
+	* src/usermod.c: Check the return value of gmtime() and asctime(),
+	and output the raw time_t on failures.
+
+2008-07-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/setugid.c: Add brackets.
 
 2008-06-17  Nicolas François  <nicolas.francois@centraliens.net>

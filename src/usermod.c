@@ -158,7 +158,8 @@ static void close_files (void);
 static void open_files (void);
 static void usr_update (void);
 static void move_home (void);
-static void update_files (void);
+static void update_lastlog (void);
+static void update_faillog (void);
 
 #ifndef NO_MOVE_MAILBOX
 static void move_mailbox (void);
@@ -611,8 +612,9 @@ static void update_group (void)
 			SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
 			         user_newname, ngrp->gr_name));
 		}
-		if (!changed)
+		if (!changed) {
 			continue;
+		}
 
 		changed = false;
 		if (gr_update (ngrp) == 0) {
@@ -1040,8 +1042,9 @@ static void process_flags (int argc, char **argv)
 		exit (E_USAGE);
 	}
 
-	if (optind != argc - 1)
+	if (optind != argc - 1) {
 		usage ();
+	}
 
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
@@ -1296,8 +1299,9 @@ static void move_home (void)
 		 * Don't try to move it if it is not a directory
 		 * (but /dev/null for example).  --marekm
 		 */
-		if (!S_ISDIR (sb.st_mode))
+		if (!S_ISDIR (sb.st_mode)) {
 			return;
+		}
 
 		if (access (user_newhome, F_OK) == 0) {
 			fprintf (stderr, _("%s: directory %s exists\n"),
@@ -1367,40 +1371,120 @@ static void move_home (void)
 }
 
 /*
- * update_files - update the lastlog and faillog files
+ * update_lastlog - update the lastlog file
+ *
+ * Relocate the "lastlog" entries for the user. The old entry is
+ * left alone in case the UID was shared. It doesn't hurt anything
+ * to just leave it be.
  */
-static void update_files (void)
+static void update_lastlog (void)
 {
 	struct lastlog ll;
-	struct faillog fl;
 	int fd;
+	off_t off_uid = (off_t) user_id * sizeof ll;
+	off_t off_newuid = (off_t) user_newid * sizeof ll;
 
-	/*
-	 * Relocate the "lastlog" entries for the user. The old entry is
-	 * left alone in case the UID was shared. It doesn't hurt anything
-	 * to just leave it be.
-	 */
-	fd = open (LASTLOG_FILE, O_RDWR);
-	if (-1 != fd) {
-		lseek (fd, (off_t) user_id * sizeof ll, SEEK_SET);
-		if (read (fd, (char *) &ll, sizeof ll) == (ssize_t) sizeof ll) {
-			lseek (fd, (off_t) user_newid * sizeof ll, SEEK_SET);
-			write (fd, (char *) &ll, sizeof ll);
-		}
-		close (fd);
+	if (access (LASTLOG_FILE, F_OK) != 0) {
+		return;
 	}
 
-	/*
-	 * Relocate the "faillog" entries in the same manner.
-	 */
-	fd = open (FAILLOG_FILE, O_RDWR);
-	if (-1 != fd) {
-		lseek (fd, (off_t) user_id * sizeof fl, SEEK_SET);
-		if (read (fd, (char *) &fl, sizeof fl) == (ssize_t) sizeof fl) {
-			lseek (fd, (off_t) user_newid * sizeof fl, SEEK_SET);
-			write (fd, (char *) &fl, sizeof fl);
+	fd = open (LASTLOG_FILE, O_RDWR);
+
+	if (-1 == fd) {
+		fprintf (stderr,
+		         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
+		         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+		return;
+	}
+
+	if (   (lseek (fd, off_uid, SEEK_SET) == off_uid)
+	    && (read (fd, &ll, sizeof ll) == (ssize_t) sizeof ll)) {
+		/* Copy the old entry to its new location */
+		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
+		    || (write (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
+		    || (close (fd) != 0)) {
+			fprintf (stderr,
+			         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
+			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
 		}
-		close (fd);
+	} else {
+		/* Assume lseek or read failed because there is
+		 * no entry for the old UID */
+
+		/* Check if the new UID already has an entry */
+		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
+		    && (read (fd, &ll, sizeof ll) == (ssize_t) sizeof ll)) {
+			/* Reset the new uid's lastlog entry */
+			memzero (&ll, sizeof (ll));
+			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
+			    || (write (fd, &ll, sizeof ll) != (ssize_t) sizeof ll)
+			    || (close (fd) != 0)) {
+				fprintf (stderr,
+				         _("%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"),
+				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+			}
+		} else {
+			(void) close (fd);
+		}
+	}
+}
+
+/*
+ * update_faillog - update the faillog file
+ *
+ * Relocate the "faillog" entries for the user. The old entry is
+ * left alone in case the UID was shared. It doesn't hurt anything
+ * to just leave it be.
+ */
+static void update_faillog (void)
+{
+	struct faillog fl;
+	int fd;
+	off_t off_uid = (off_t) user_id * sizeof fl;
+	off_t off_newuid = (off_t) user_newid * sizeof fl;
+
+	if (access (FAILLOG_FILE, F_OK) != 0) {
+		return;
+	}
+
+	fd = open (FAILLOG_FILE, O_RDWR);
+
+	if (-1 == fd) {
+		fprintf (stderr,
+		         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
+		         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+		return;
+	}
+
+	if (   (lseek (fd, off_uid, SEEK_SET) == off_uid)
+	    && (read (fd, (char *) &fl, sizeof fl) == (ssize_t) sizeof fl)) {
+		/* Copy the old entry to its new location */
+		if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
+		    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
+		    || (close (fd) != 0)) {
+			fprintf (stderr,
+			         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
+			         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+		}
+	} else {
+		/* Assume lseek or read failed because there is
+		 * no entry for the old UID */
+
+		/* Check if the new UID already has an entry */
+		if (   (lseek (fd, off_newuid, SEEK_SET) == off_newuid)
+		    && (read (fd, &fl, sizeof fl) == (ssize_t) sizeof fl)) {
+			/* Reset the new uid's lastlog entry */
+			memzero (&fl, sizeof (fl));
+			if (   (lseek (fd, off_newuid, SEEK_SET) != off_newuid)
+			    || (write (fd, &fl, sizeof fl) != (ssize_t) sizeof fl)
+			    || (close (fd) != 0)) {
+				fprintf (stderr,
+				         _("%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"),
+				         Prog, (unsigned long) user_id, (unsigned long) user_newid, strerror (errno));
+			}
+		} else {
+			(void) close (fd);
+		}
 	}
 }
 
@@ -1585,7 +1669,8 @@ int main (int argc, char **argv)
 #endif
 
 	if (uflg) {
-		update_files ();
+		update_lastlog ();
+		update_faillog ();
 
 		/*
 		 * Change the UID on all of the files owned by `user_id' to
