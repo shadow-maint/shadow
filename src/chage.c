@@ -130,7 +130,7 @@ static void fail_exit (int code)
 		 * caller.
 		 * We always end the pam transaction with PAM_SUCCESS here.
 		 */
-		pam_end (pamh, PAM_SUCCESS);
+		(void) pam_end (pamh, PAM_SUCCESS);
 	}
 #endif
 
@@ -180,10 +180,10 @@ static void date_to_str (char *buf, size_t maxsize, time_t date)
 
 	tp = gmtime (&date);
 #ifdef HAVE_STRFTIME
-	strftime (buf, maxsize, "%Y-%m-%d", tp);
+	(void) strftime (buf, maxsize, "%Y-%m-%d", tp);
 #else
-	snprintf (buf, maxsize, "%04d-%02d-%02d",
-	          tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
+	(void) snprintf (buf, maxsize, "%04d-%02d-%02d",
+	                 tp->tm_year + 1900, tp->tm_mon + 1, tp->tm_mday);
 #endif				/* HAVE_STRFTIME */
 }
 
@@ -201,13 +201,13 @@ static int new_fields (void)
 	char buf[200];
 	char *cp;
 
-	puts (_("Enter the new value, or press ENTER for the default"));
-	puts ("");
+	(void) puts (_("Enter the new value, or press ENTER for the default"));
+	(void) puts ("");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
 	mindays = strtol (buf, &cp, 10);
-	if (   ((mindays == 0) && ('\0' != *cp))
+	if (   ((0 == mindays) && ('\0' != *cp))
 	    || (mindays < -1)) {
 		return 0;
 	}
@@ -215,7 +215,7 @@ static int new_fields (void)
 	snprintf (buf, sizeof buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
 	maxdays = strtol (buf, &cp, 10);
-	if (   ((maxdays == 0) && ('\0' != *cp))
+	if (   ((0 == maxdays) && ('\0' != *cp))
 	    || (maxdays < -1)) {
 		return 0;
 	}
@@ -273,15 +273,25 @@ static void print_date (time_t date)
 	char buf[80];
 
 	tp = gmtime (&date);
-	strftime (buf, sizeof buf, "%b %d, %Y", tp);
-	puts (buf);
+	if (NULL == tp) {
+		(void) printf ("time_t: %ul\n", date);
+	} else {
+		(void) strftime (buf, sizeof buf, "%b %d, %Y", tp);
+		(void) puts (buf);
+	}
 #else
 	struct tm *tp;
-	char *cp;
+	char *cp = NULL;
 
 	tp = gmtime (&date);
-	cp = asctime (tp);
-	printf ("%6.6s, %4.4s\n", cp + 4, cp + 20);
+	if (NULL != tp) {
+		cp = asctime (tp);
+	}
+	if (NULL != cp) {
+		(void) printf ("%6.6s, %4.4s\n", cp + 4, cp + 20);
+	} else {
+		(void) printf ("time_t: %ul\n", date);
+	}
 #endif
 }
 
@@ -301,11 +311,11 @@ static void list_fields (void)
 	 * The "last change" date is either "never" or the date the password
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
-	fputs (_("Last password change\t\t\t\t\t: "), stdout);
+	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
 	if (lastday < 0) {
-		puts (_("never"));
+		(void) puts (_("never"));
 	} else if (lastday == 0) {
-		puts (_("password must be changed"));
+		(void) puts (_("password must be changed"));
 	} else {
 		changed = lastday * SCALE;
 		print_date ((time_t) changed);
@@ -315,10 +325,10 @@ static void list_fields (void)
 	 * The password expiration date is determined from the last change
 	 * date plus the number of days the password is valid for.
 	 */
-	fputs (_("Password expires\t\t\t\t\t: "), stdout);
+	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
 	if ((lastday <= 0) || (maxdays >= (10000 * (DAY / SCALE)))
 	    || (maxdays < 0)) {
-		puts (_("never"));
+		(void) puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
 		print_date ((time_t) expires);
@@ -330,10 +340,10 @@ static void list_fields (void)
 	 * number of inactive days is added. The resulting date is when the
 	 * active will be disabled.
 	 */
-	fputs (_("Password inactive\t\t\t\t\t: "), stdout);
+	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
 	if ((lastday <= 0) || (inactdays < 0) ||
 	    (maxdays >= (10000 * (DAY / SCALE))) || (maxdays < 0)) {
-		puts (_("never"));
+		(void) puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
 		print_date ((time_t) expires);
@@ -343,9 +353,9 @@ static void list_fields (void)
 	 * The account will expire on the given date regardless of the
 	 * password expiring or not.
 	 */
-	fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
+	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
 	if (expdays < 0) {
-		puts (_("never"));
+		(void) puts (_("never"));
 	} else {
 		expires = expdays * SCALE;
 		print_date ((time_t) expires);
@@ -500,29 +510,29 @@ static void check_perms (void)
 	retval = PAM_SUCCESS;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			(void) pam_end (pamh, retval);
 		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		pamh = NULL;
 		fail_exit (E_NOPERM);
@@ -789,7 +799,8 @@ int main (int argc, char **argv)
 
 	open_files (lflg);
 	/* Drop privileges */
-	if (lflg && (setregid (rgid, rgid) || setreuid (ruid, ruid))) {
+	if (lflg && (   (setregid (rgid, rgid) != 0)
+	             || (setreuid (ruid, ruid) != 0))) {
 		fprintf (stderr, _("%s: failed to drop privileges (%s)\n"),
 		         Prog, strerror (errno));
 		fail_exit (E_NOPERM);
@@ -888,7 +899,7 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();

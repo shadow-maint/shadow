@@ -1,5 +1,12 @@
 2008-07-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: Ignore the return value of pam_end() before exiting.
+	* src/chage.c: Ignore return values of strftime(), snprintf(),
+	puts(), printf(), and fputs().
+	* src/chage.c: Check the return value of asctime().
+
+2008-07-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/gshadow.c: Avoid assignments in comparison.
 
 2008-07-12  Nicolas François  <nicolas.francois@centraliens.net>
