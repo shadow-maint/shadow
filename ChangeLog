@@ -1,3 +1,8 @@
+2008-07-21  Seraphim Mellos  <mellos@ceid.upatras.gr>
+
+	* README, NEWS, configure.in, lib/pam_defs.h, src/login.c: Add
+	support for OpenPAM.
+
 2008-07-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chage.c: Ignore the return value of pam_end() before exiting.

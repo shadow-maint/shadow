@@ -28,24 +28,31 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <config.h>
 #include <security/pam_appl.h>
-#include <security/pam_misc.h>
+#ifdef HAVE_SECURITY_PAM_MISC_H
+# include <security/pam_misc.h>
+#endif
+#ifdef HAVE_SECURITY_OPENPAM_H
+# include <security/openpam.h>
+#endif
+
 
 static struct pam_conv conv = {
-	misc_conv,
+	SHADOW_PAM_CONVERSATION,
 	NULL
 };
 
 /* compatibility with different versions of Linux-PAM */
-#ifndef PAM_ESTABLISH_CRED
+#if !HAVE_DECL_PAM_ESTABLISH_CRED
 #define PAM_ESTABLISH_CRED PAM_CRED_ESTABLISH
 #endif
-#ifndef PAM_DELETE_CRED
+#if !HAVE_DECL_PAM_DELETE_CRED
 #define PAM_DELETE_CRED PAM_CRED_DELETE
 #endif
-#ifndef PAM_NEW_AUTHTOK_REQD
+#if !HAVE_DECL_PAM_NEW_AUTHTOK_REQD
 #define PAM_NEW_AUTHTOK_REQD PAM_AUTHTOKEN_REQD
 #endif
-#ifndef PAM_DATA_SILENT
+#if !HAVE_DECL_PAM_DATA_SILENT
 #define PAM_DATA_SILENT 0
 #endif

@@ -340,13 +340,29 @@ if test "$with_libpam" != "no"; then
 		AC_MSG_ERROR(libpam not found)
 	fi
 
-	AC_CHECK_LIB(pam_misc, main,
-	             [pam_misc_lib="yes"], [pam_misc_lib="no"])
-	if test "$pam_misc_lib$with_libpam" = "noyes" ; then
-		AC_MSG_ERROR(libpam_misc not found)
+	LIBPAM="-lpam"
+	pam_conv_function="no"
+
+	AC_CHECK_LIB(pam, openpam_ttyconv,
+		[pam_conv_function="openpam_ttyconv"],
+		AC_CHECK_LIB(pam_misc, misc_conv,
+			[pam_conv_function="misc_conv"; LIBPAM="$LIBPAM -lpam_misc"])
+		)
+
+	if test "$pam_conv_function$with_libpam" = "noyes" ; then
+		AC_MSG_ERROR(PAM conversation function not found)
 	fi
 
-	if test "$pam_lib$pam_misc_lib" = "yesyes" ; then
+	pam_headers_found=no
+	AC_CHECK_HEADERS( [security/openpam.h security/pam_misc.h],
+			 [ pam_headers_found=yes ; break ], [],
+			 [ #include <security/pam_appl.h> ] )
+        if test "$pam_headers_found$with_libpam" = "noyes" ; then
+	                AC_MSG_ERROR(PAM headers not found)
+        fi
+
+
+	if test "$pam_lib$pam_headers_found" = "yesyes" -a "$pam_conv_function" != "no" ; then
 		with_libpam="yes"
 	else
 		with_libpam="no"
@@ -354,9 +370,22 @@ if test "$with_libpam" != "no"; then
 fi
 dnl Now with_libpam is either yes or no
 if test "$with_libpam" = "yes"; then
+	AC_CHECK_DECLS([PAM_ESTABLISH_CRED,
+		PAM_DELETE_CRED,
+		PAM_NEW_AUTHTOK_REQD,
+		PAM_DATA_SILENT],
+		[], [], [#include <security/pam_appl.h>])
+
+
+	save_libs=$LIBS
+        LIBS="$LIBS $LIBPAM"
+	AC_CHECK_FUNCS([pam_fail_delay])
+	LIBS=$save_libs
+
 	AC_DEFINE(USE_PAM, 1, [Define to support Pluggable Authentication Modules])
+	AC_DEFINE_UNQUOTED(SHADOW_PAM_CONVERSATION, [$pam_conv_function],[PAM converstation to use])
 	AM_CONDITIONAL(USE_PAM, [true])
-	LIBPAM="-lpam -lpam_misc"
+
 	AC_MSG_CHECKING(use login and su access checking if PAM not used)
 	AC_MSG_RESULT(no)
 else

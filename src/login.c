@@ -691,9 +691,11 @@ int main (int argc, char **argv)
 			  failed = false;
 
 			  failcount++;
+#ifdef HAVE_PAM_FAIL_DELAY
 			  if (delay > 0) {
 			    retcode = pam_fail_delay(pamh, 1000000*delay);
 			  }
+#endif
 
 			  retcode = pam_authenticate (pamh, 0);
 
