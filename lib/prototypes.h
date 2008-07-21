@@ -109,9 +109,9 @@ extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
 extern int getlong(const char *numstr, long int *result);
 
 /* getrange */
-extern getrange(char *range,
-                unsigned long *min, bool *has_min,
-                unsigned long *max, bool *has_max);
+extern int getrange(char *range,
+                    unsigned long *min, bool *has_min,
+                    unsigned long *max, bool *has_max);
 
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);

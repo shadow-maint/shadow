@@ -1,3 +1,7 @@
+2008-07-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/prototypes.h: Fix getrange prototype.
+
 2008-07-21  Seraphim Mellos  <mellos@ceid.upatras.gr>
 
 	* README, NEWS, configure.in, lib/pam_defs.h, src/login.c: Add
