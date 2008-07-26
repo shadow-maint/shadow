@@ -54,6 +54,8 @@
 #define EXIT_NOT_PRIMARY	5	/* not primary owner of group  */
 #define EXIT_NOT_MEMBER		6	/* member of group does not exist */
 #define EXIT_MEMBER_EXISTS	7	/* member of group already exists */
+#define EXIT_INVALID_USER	8	/* specified user does not exist */
+#define EXIT_INVALID_GROUP	9	/* specified group does not exist */
 
 #define TRUE 1
 #define FALSE 0
@@ -67,6 +69,7 @@ static char *thisgroup = NULL;
 static int purge = FALSE;
 static int list = FALSE;
 static int exclusive = 0;
+static char *Prog;
 
 static int isroot (void)
 {
@@ -187,6 +190,11 @@ int main (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
@@ -221,6 +229,12 @@ int main (int argc, char **argv)
 
 	if (exclusive > 1 || optind < argc) {
 		usage ();
+	}
+
+	if (getpwnam(adduser) == NULL) {
+		fprintf (stderr, _("%s: user `%s' does not exist\n")
+		         Prog, adduser);
+		exit (EXIT_INVALID_USERNAME);
 	}
 
 	if (!isroot () && NULL != thisgroup) {
@@ -283,6 +297,12 @@ int main (int argc, char **argv)
 	}
 
 	grp = (struct group *) gr_locate (name);
+
+	if (grp == NULL) {
+		fprintf (stderr, _("%s: `%s' not found in /etc/group\n"),
+		         Prog, name);
+		exit (EXIT_READ_GROUP);
+	}
 
 	if (NULL != adduser) {
 		addtogroup (adduser, grp->gr_mem);

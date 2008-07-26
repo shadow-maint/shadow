@@ -10,6 +10,9 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
 - usermod
   * Allow adding LDAP users (or any user not present in the local passwd
     file) to local groups
+- groupmems
+  * Check if user exist before they are added to groups.
+  * Avoid segfault in case the specified group does not exist in /etc/group.
 
 shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 

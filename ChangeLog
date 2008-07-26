@@ -1,3 +1,15 @@
+2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupmems.c: Added Prog global variable to indicate the name
+	of the program in error messages.
+
+2008-07-22  Lukáš Kuklínek  <lkukline@redhat.com>
+
+	* NEWS, src/groupmems.c: Check if the user added to group actually
+	exist. RedHat bug #455603
+	* NEWS, src/groupmems.c: Check if the group exists in the group
+	local database (/etc/group). RedHat bug #456088
+
 2008-07-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/prototypes.h: Fix getrange prototype.
