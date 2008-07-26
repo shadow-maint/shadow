@@ -6,6 +6,22 @@
 
 #include <config.h>
 
+#if HAVE_STDBOOL_H
+# include <stdbool.h>
+#else
+# if ! HAVE__BOOL
+#  ifdef __cplusplus
+typedef bool _Bool;
+#  else
+typedef unsigned char _Bool;
+#  endif
+# endif
+# define bool _Bool
+# define false (0)
+# define true  (1)
+# define __bool_true_false_are_defined 1
+#endif
+
 #define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
 
 /* Take care of NLS matters.  */
@@ -332,22 +348,6 @@ extern char *strerror ();
 # define unused __attribute__((unused))
 #else
 # define unused
-#endif
-
-#if HAVE_STDBOOL_H
-# include <stdbool.h>
-#else
-# if ! HAVE__BOOL
-#  ifdef __cplusplus
-typedef bool _Bool;
-#  else
-typedef unsigned char _Bool;
-#  endif
-# endif
-# define bool _Bool
-# define false (0)
-# define true  (1)
-# define __bool_true_false_are_defined 1
 #endif
 
 #endif				/* _DEFINES_H_ */

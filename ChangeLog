@@ -1,5 +1,10 @@
 2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Make sure the booleans are defined before using
+	them.
+
+2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Added Prog global variable to indicate the name
 	of the program in error messages.
 
