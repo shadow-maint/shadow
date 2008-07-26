@@ -1,5 +1,11 @@
 2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Really use booleans.
+	* src/groupmems.c: Change isroot() to a macro that returns a
+	boolean.
+
+2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Make sure the booleans are defined before using
 	them.
 

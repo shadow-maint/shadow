@@ -57,24 +57,18 @@
 #define EXIT_INVALID_USER	8	/* specified user does not exist */
 #define EXIT_INVALID_GROUP	9	/* specified group does not exist */
 
-#define TRUE 1
-#define FALSE 0
-
 /*
  * Global variables
  */
 static char *adduser = NULL;
 static char *deluser = NULL;
 static char *thisgroup = NULL;
-static int purge = FALSE;
-static int list = FALSE;
+static bool purge = false;
+static bool list = false;
 static int exclusive = 0;
 static char *Prog;
 
-static int isroot (void)
-{
-	return getuid ()? FALSE : TRUE;
-}
+#define isroot ()		(getuid () == 0)
 
 static int isgroup (void)
 {
@@ -117,12 +111,12 @@ static void addtogroup (char *user, char **members)
 static void rmfromgroup (char *user, char **members)
 {
 	int i;
-	int found = FALSE;
+	bool found = false;
 
 	i = 0;
 	while (!found && NULL != members[i]) {
 		if (0 == strcmp (user, members[i])) {
-			found = TRUE;
+			found = true;
 		} else {
 			i++;
 		}
@@ -212,14 +206,14 @@ int main (int argc, char **argv)
 			++exclusive;
 			break;
 		case 'p':
-			purge = TRUE;
+			purge = true;
 			++exclusive;
 			break;
 		case 'g':
 			thisgroup = strdup (optarg);
 			break;
 		case 'l':
-			list = TRUE;
+			list = true;
 			++exclusive;
 			break;
 		default:
@@ -231,6 +225,7 @@ int main (int argc, char **argv)
 		usage ();
 	}
 
+	/* local, no need for xgetpwnam */
 	if (getpwnam(adduser) == NULL) {
 		fprintf (stderr, _("%s: user `%s' does not exist\n")
 		         Prog, adduser);
