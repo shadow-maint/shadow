@@ -1,5 +1,10 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Reduce the number of checks. Isolate the
+	parameters setting and permissions checking.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Add functions process_flags() and check_perms()
 	from code of main().
 	* src/groupmems.c: Harmonize the failure message in case of PAM

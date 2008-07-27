@@ -228,15 +228,18 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
-	if (!isroot () && NULL != thisgroup) {
-		fputs (_("Only root can add members to different groups\n"),
-		       stderr);
-		exit (EXIT_NOT_ROOT);
-	} else if (isroot () && NULL != thisgroup) {
+	if (NULL == thisgroup) {
+		name = whoami ();
+		if (NULL == name) {
+			fprintf (stderr, _("%s: your groupname does not match your username\n"), Prog);
+			exit (EXIT_NOT_PRIMARY);
+		}
+	} else {
 		name = thisgroup;
-	} else if (NULL == (name = whoami ())) {
-		fputs (_("Not primary owner of current group\n"), stderr);
-		exit (EXIT_NOT_PRIMARY);
+		if (!isroot ()) {
+			fprintf (stderr, _("%s: only root can use the -g/--group option\n"), Prog);
+			exit (EXIT_NOT_ROOT);
+		}
 	}
 
 	check_perms ();
