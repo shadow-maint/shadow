@@ -68,9 +68,11 @@ static bool purge = false;
 static bool list = false;
 static int exclusive = 0;
 static char *Prog;
+static bool group_locked = false;
 
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
+static void fail_exit (int code);
 #define isroot()		(getuid () == 0)
 
 static char *whoami (void)
@@ -105,7 +107,7 @@ static void members (char **members)
 static void usage (void)
 {
 	fputs (_("Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"), stderr);
-	exit (EXIT_USAGE);
+	fail_exit (EXIT_USAGE);
 }
 
 /*
@@ -159,7 +161,7 @@ static void process_flags (int argc, char **argv)
 	if (getpwnam (adduser) == NULL) {
 		fprintf (stderr, _("%s: user `%s' does not exist\n"),
 		         Prog, adduser);
-		exit (EXIT_INVALID_USER);
+		fail_exit (EXIT_INVALID_USER);
 	}
 
 }
@@ -203,13 +205,25 @@ static void check_perms (void)
 
 	if (retval != PAM_SUCCESS) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		exit (1);
+		fail_exit (1);
 	}
 
 	if (retval == PAM_SUCCESS) {
 		(void) pam_end (pamh, PAM_SUCCESS);
 	}
 #endif
+}
+
+static void fail_exit (int code)
+{
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr,
+			         _("%s: unable to unlock group file\n"),
+			         Prog);
+		}
+	}
+	exit (code);
 }
 
 int main (int argc, char **argv) 
@@ -232,26 +246,27 @@ int main (int argc, char **argv)
 		name = whoami ();
 		if (NULL == name) {
 			fprintf (stderr, _("%s: your groupname does not match your username\n"), Prog);
-			exit (EXIT_NOT_PRIMARY);
+			fail_exit (EXIT_NOT_PRIMARY);
 		}
 	} else {
 		name = thisgroup;
 		if (!isroot ()) {
 			fprintf (stderr, _("%s: only root can use the -g/--group option\n"), Prog);
-			exit (EXIT_NOT_ROOT);
+			fail_exit (EXIT_NOT_ROOT);
 		}
 	}
 
 	check_perms ();
 
 	if (!gr_lock ()) {
-		fputs (_("Unable to lock group file\n"), stderr);
-		exit (EXIT_GROUP_FILE);
+		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+		fail_exit (EXIT_GROUP_FILE);
 	}
+	group_locked = true;
 
 	if (!gr_open (O_RDWR)) {
-		fputs (_("Unable to open group file\n"), stderr);
-		exit (EXIT_GROUP_FILE);
+		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+		fail_exit (EXIT_GROUP_FILE);
 	}
 
 	grp = (struct group *) gr_locate (name);
@@ -259,7 +274,7 @@ int main (int argc, char **argv)
 	if (grp == NULL) {
 		fprintf (stderr, _("%s: `%s' not found in /etc/group\n"),
 		         Prog, name);
-		exit (EXIT_INVALID_GROUP);
+		fail_exit (EXIT_INVALID_GROUP);
 	}
 
 	if (NULL != adduser) {
@@ -267,7 +282,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: user `%s' is already a member of `%s'\n"),
 			         Prog, adduser, grp->gr_name);
-			exit (EXIT_MEMBER_EXISTS);
+			fail_exit (EXIT_MEMBER_EXISTS);
 		}
 		grp->gr_mem = add_list (grp->gr_mem, adduser);
 		gr_update (grp);
@@ -276,7 +291,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: user `%s' is not a member of `%s'\n"),
 			         Prog, deluser, grp->gr_name);
-			exit (EXIT_NOT_MEMBER);
+			fail_exit (EXIT_NOT_MEMBER);
 		}
 		grp->gr_mem = del_list (grp->gr_mem, deluser);
 		gr_update (grp);
@@ -289,10 +304,15 @@ int main (int argc, char **argv)
 
 	if (!gr_close ()) {
 		fputs (_("Cannot close group file\n"), stderr);
-		exit (EXIT_GROUP_FILE);
+		fail_exit (EXIT_GROUP_FILE);
 	}
 
-	gr_unlock ();
+	if (gr_unlock () == 0) {
+		fprintf (stderr,
+		         _("%s: unable to unlock group file\n"),
+		         Prog);
+	}
 
 	exit (EXIT_SUCCESS);
 }
+

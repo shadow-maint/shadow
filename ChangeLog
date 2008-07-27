@@ -1,5 +1,10 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Add fail_exit() to remove the group lock file
+	in case of failure. Replace the calls to exit() by fail_exit().
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Reduce the number of checks. Isolate the
 	parameters setting and permissions checking.
 
