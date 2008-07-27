@@ -1,5 +1,11 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Add parenthesis.
+	* src/groupmems.c: Avoid implicit conversion of pointers / chars to
+	booleans.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmems.c: Allow everybody to list the users of a group.
 	This information is publicly available in /etc/group.
 	* NEWS, src/groupmems.c: Open /etc/group read only for the -l option.

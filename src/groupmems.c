@@ -156,7 +156,7 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if (exclusive > 1 || optind < argc) {
+	if ((exclusive > 1) || (optind < argc)) {
 		usage ();
 	}
 
@@ -177,25 +177,25 @@ static void check_perms (void)
 	struct passwd *pampw;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("groupmod", pampw->pw_name,
 		                    &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
 	(void) pam_end (pamh, retval);
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -247,7 +247,7 @@ void main (int argc, char **argv)
 	if (!list) {
 		check_perms ();
 
-		if (!gr_lock ()) {
+		if (gr_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: unable to lock group file\n"), Prog);
 			fail_exit (EXIT_GROUP_FILE);
@@ -255,14 +255,14 @@ void main (int argc, char **argv)
 		group_locked = true;
 	}
 
-	if (!gr_open (list ? O_RDONLY : O_RDWR)) {
+	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
 	grp = (struct group *) gr_locate (name);
 
-	if (grp == NULL) {
+	if (NULL == grp) {
 		fprintf (stderr, _("%s: `%s' not found in /etc/group\n"),
 		         Prog, name);
 		fail_exit (EXIT_INVALID_GROUP);
@@ -293,7 +293,7 @@ void main (int argc, char **argv)
 		gr_update (grp);
 	}
 
-	if (!gr_close ()) {
+	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: unable to close group file\n"), Prog);
 		fail_exit (EXIT_GROUP_FILE);
 	}
