@@ -181,9 +181,7 @@ static void check_perms (void)
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
-	}
-
-	if (PAM_SUCCESS == retval) {
+	} else {
 		retval = pam_start ("groupmod", pampw->pw_name,
 		                    &conv, &pamh);
 	}

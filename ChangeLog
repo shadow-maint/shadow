@@ -1,5 +1,9 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Replace an if test by an else.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Ignore the return value of fputs().
 
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
