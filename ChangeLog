@@ -1,5 +1,9 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupmems.8.xml: Sort options alphabetically.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c (check_perms): Simplify. Always call pam_end()
 	at the end of the authentication.
 

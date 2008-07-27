@@ -21,8 +21,8 @@
       <group choice='plain'>
 	<arg choice='plain'>-a <replaceable>user_name</replaceable></arg>
 	<arg choice='plain'>-d <replaceable>user_name</replaceable></arg>
-	<arg choice='plain'>-l </arg><arg choice='plain'>-p </arg>
 	<arg choice='opt'>-g <replaceable>group_name</replaceable></arg>
+	<arg choice='plain'>-l </arg><arg choice='plain'>-p </arg>
       </group>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -62,12 +62,6 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-p</option></term>
-	<listitem>
-	  <para>Purge all users from the group membership list.</para>
-	</listitem>
-      </varlistentry>
-      <varlistentry>
 	<term><option>-g</option> <replaceable>group_name</replaceable></term>
 	<listitem>
 	  <para>The superuser can specify which group membership
@@ -79,6 +73,12 @@
 	<term><option>-l</option></term>
 	<listitem>
 	  <para>List the group membership list.</para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><option>-p</option></term>
+	<listitem>
+	  <para>Purge all users from the group membership list.</para>
 	</listitem>
       </varlistentry>
     </variablelist>
