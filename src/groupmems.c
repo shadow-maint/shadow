@@ -71,14 +71,6 @@ static char *Prog;
 
 #define isroot()		(getuid () == 0)
 
-static int isgroup (void)
-{
-	gid_t g = getgid ();
-	struct group *grp = getgrgid (g); /* local, no need for xgetgrgid */
-
-	return TRUE;
-}
-
 static char *whoami (void)
 {
 	/* local, no need for xgetgrgid */
@@ -189,9 +181,6 @@ int main (int argc, char **argv)
 		exit (EXIT_NOT_ROOT);
 	} else if (isroot () && NULL != thisgroup) {
 		name = thisgroup;
-	} else if (!isgroup ()) {
-		fputs (_("Group access is required\n"), stderr);
-		exit (EXIT_NOT_EROOT);
 	} else if (NULL == (name = whoami ())) {
 		fputs (_("Not primary owner of current group\n"), stderr);
 		exit (EXIT_NOT_PRIMARY);

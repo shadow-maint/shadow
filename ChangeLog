@@ -1,5 +1,9 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Remove isgroup(), which always returns TRUE.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Reuse the functions from libmisc/list.c to deal
 	with user lists. addtogroup() was broken when realloc() move the
 	memory area.
