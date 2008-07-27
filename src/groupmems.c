@@ -86,7 +86,7 @@ static char *whoami (void)
 	struct passwd *usr = getpwuid (getuid ());
 
 	if (0 == strcmp (usr->pw_name, grp->gr_name)) {
-		return strdup (usr->pw_name);
+		return xstrdup (usr->pw_name);
 	} else {
 		return NULL;
 	}
@@ -133,11 +133,11 @@ static void process_flags (int argc, char **argv)
 	                           &option_index)) != EOF) {
 		switch (arg) {
 		case 'a':
-			adduser = strdup (optarg);
+			adduser = xstrdup (optarg);
 			++exclusive;
 			break;
 		case 'd':
-			deluser = strdup (optarg);
+			deluser = xstrdup (optarg);
 			++exclusive;
 			break;
 		case 'p':
@@ -145,7 +145,7 @@ static void process_flags (int argc, char **argv)
 			++exclusive;
 			break;
 		case 'g':
-			thisgroup = strdup (optarg);
+			thisgroup = xstrdup (optarg);
 			break;
 		case 'l':
 			list = true;

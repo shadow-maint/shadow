@@ -1,5 +1,9 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Use xstrdup() rather than strdup().
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Add parenthesis.
 	* src/groupmems.c: Avoid implicit conversion of pointers / chars to
 	booleans.
