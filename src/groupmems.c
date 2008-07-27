@@ -69,6 +69,8 @@ static bool list = false;
 static int exclusive = 0;
 static char *Prog;
 
+static void process_flags (int argc, char **argv);
+static void check_perms (void);
 #define isroot()		(getuid () == 0)
 
 static char *whoami (void)
@@ -106,17 +108,12 @@ static void usage (void)
 	exit (EXIT_USAGE);
 }
 
-int main (int argc, char **argv) 
+/*
+ * process_flags - perform command line argument setting
+ */
+static void process_flags (int argc, char **argv)
 {
 	int arg;
-	char *name;
-	struct group *grp;
-
-#ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval;
-#endif
-
 	int option_index = 0;
 	static struct option long_options[] = {
 		{"add", required_argument, NULL, 'a'},
@@ -127,18 +124,8 @@ int main (int argc, char **argv)
 		{NULL, 0, NULL, '\0'}
 	};
 
-	/*
-	 * Get my name so that I can use it to report errors.
-	 */
-	Prog = Basename (argv[0]);
-
-	(void) setlocale (LC_ALL, "");
-	(void) bindtextdomain (PACKAGE, LOCALEDIR);
-	(void) textdomain (PACKAGE);
-
-	while ((arg =
-		getopt_long (argc, argv, "a:d:g:lp", long_options,
-			     &option_index)) != EOF) {
+	while ((arg = getopt_long (argc, argv, "a:d:g:lp", long_options,
+	                           &option_index)) != EOF) {
 		switch (arg) {
 		case 'a':
 			adduser = strdup (optarg);
@@ -175,16 +162,15 @@ int main (int argc, char **argv)
 		exit (EXIT_INVALID_USER);
 	}
 
-	if (!isroot () && NULL != thisgroup) {
-		fputs (_("Only root can add members to different groups\n"),
-		       stderr);
-		exit (EXIT_NOT_ROOT);
-	} else if (isroot () && NULL != thisgroup) {
-		name = thisgroup;
-	} else if (NULL == (name = whoami ())) {
-		fputs (_("Not primary owner of current group\n"), stderr);
-		exit (EXIT_NOT_PRIMARY);
-	}
+}
+
+static void check_perms (void)
+{
+#ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
+	int retval;
+#endif
+
 #ifdef USE_PAM
 	retval = PAM_SUCCESS;
 
@@ -197,7 +183,7 @@ int main (int argc, char **argv)
 
 		if (retval == PAM_SUCCESS) {
 			retval = pam_start ("groupmod", pampw->pw_name,
-					    &conv, &pamh);
+			                    &conv, &pamh);
 		}
 	}
 
@@ -216,10 +202,44 @@ int main (int argc, char **argv)
 	}
 
 	if (retval != PAM_SUCCESS) {
-		fputs (_("PAM authentication failed for\n"), stderr);
+		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
+
+	if (retval == PAM_SUCCESS) {
+		(void) pam_end (pamh, PAM_SUCCESS);
+	}
 #endif
+}
+
+int main (int argc, char **argv) 
+{
+	char *name;
+	struct group *grp;
+
+	/*
+	 * Get my name so that I can use it to report errors.
+	 */
+	Prog = Basename (argv[0]);
+
+	(void) setlocale (LC_ALL, "");
+	(void) bindtextdomain (PACKAGE, LOCALEDIR);
+	(void) textdomain (PACKAGE);
+
+	process_flags (argc, argv);
+
+	if (!isroot () && NULL != thisgroup) {
+		fputs (_("Only root can add members to different groups\n"),
+		       stderr);
+		exit (EXIT_NOT_ROOT);
+	} else if (isroot () && NULL != thisgroup) {
+		name = thisgroup;
+	} else if (NULL == (name = whoami ())) {
+		fputs (_("Not primary owner of current group\n"), stderr);
+		exit (EXIT_NOT_PRIMARY);
+	}
+
+	check_perms ();
 
 	if (!gr_lock ()) {
 		fputs (_("Unable to lock group file\n"), stderr);
@@ -271,10 +291,5 @@ int main (int argc, char **argv)
 
 	gr_unlock ();
 
-#ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
-#endif				/* USE_PAM */
 	exit (EXIT_SUCCESS);
 }

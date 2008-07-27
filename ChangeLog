@@ -1,5 +1,12 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Add functions process_flags() and check_perms()
+	from code of main().
+	* src/groupmems.c: Harmonize the failure message in case of PAM
+	failure with the other programs.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Remove isgroup(), which always returns TRUE.
 
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
