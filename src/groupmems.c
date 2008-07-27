@@ -214,7 +214,7 @@ static void fail_exit (int code)
 	exit (code);
 }
 
-int main (int argc, char **argv) 
+void main (int argc, char **argv) 
 {
 	char *name;
 	struct group *grp;
@@ -232,27 +232,30 @@ int main (int argc, char **argv)
 
 	if (NULL == thisgroup) {
 		name = whoami ();
-		if (NULL == name) {
+		if (!list && (NULL == name)) {
 			fprintf (stderr, _("%s: your groupname does not match your username\n"), Prog);
 			fail_exit (EXIT_NOT_PRIMARY);
 		}
 	} else {
 		name = thisgroup;
-		if (!isroot ()) {
+		if (!list && !isroot ()) {
 			fprintf (stderr, _("%s: only root can use the -g/--group option\n"), Prog);
 			fail_exit (EXIT_NOT_ROOT);
 		}
 	}
 
-	check_perms ();
+	if (!list) {
+		check_perms ();
 
-	if (!gr_lock ()) {
-		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
-		fail_exit (EXIT_GROUP_FILE);
+		if (!gr_lock ()) {
+			fprintf (stderr,
+			         _("%s: unable to lock group file\n"), Prog);
+			fail_exit (EXIT_GROUP_FILE);
+		}
+		group_locked = true;
 	}
-	group_locked = true;
 
-	if (!gr_open (O_RDWR)) {
+	if (!gr_open (list ? O_RDONLY : O_RDWR)) {
 		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
 		fail_exit (EXIT_GROUP_FILE);
 	}
@@ -265,7 +268,9 @@ int main (int argc, char **argv)
 		fail_exit (EXIT_INVALID_GROUP);
 	}
 
-	if (NULL != adduser) {
+	if (list) {
+		members (grp->gr_mem);
+	} else if (NULL != adduser) {
 		if (is_on_list (grp->gr_mem, adduser)) {
 			fprintf (stderr,
 			         _("%s: user `%s' is already a member of `%s'\n"),
@@ -286,8 +291,6 @@ int main (int argc, char **argv)
 	} else if (purge) {
 		grp->gr_mem[0] = NULL;
 		gr_update (grp);
-	} else if (list) {
-		members (grp->gr_mem);
 	}
 
 	if (!gr_close ()) {
@@ -295,10 +298,6 @@ int main (int argc, char **argv)
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
-	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: unable to unlock group file\n"), Prog);
-	}
-
-	exit (EXIT_SUCCESS);
+	fail_exit (EXIT_SUCCESS);
 }
 

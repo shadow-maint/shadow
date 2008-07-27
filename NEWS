@@ -13,6 +13,9 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
 - groupmems
   * Check if user exist before they are added to groups.
   * Avoid segfault in case the specified group does not exist in /etc/group.
+  * Everybody is allowed to list the users of a group.
+  * /etc/group is open readonly when one just wants to list the users of a
+    group.
 
 shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 
