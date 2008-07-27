@@ -1,5 +1,12 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Reuse the functions from libmisc/list.c to deal
+	with user lists. addtogroup() was broken when realloc() move the
+	memory area.
+	* src/groupmems.c: Report failures with the name of the program.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: EXIT_READ_GROUP changed to EXIT_INVALID_GROUP.
 	* src/groupmems.c: EXIT_INVALID_USERNAME changed to EXIT_INVALID_USER.
 

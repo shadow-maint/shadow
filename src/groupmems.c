@@ -42,6 +42,7 @@
 #endif				/* USE_PAM */
 #include <pwd.h>
 #include "defines.h"
+#include "prototypes.h"
 #include "groupio.h"
 
 /* Exit Status Values */
@@ -89,56 +90,6 @@ static char *whoami (void)
 		return strdup (usr->pw_name);
 	} else {
 		return NULL;
-	}
-}
-
-static void addtogroup (char *user, char **members)
-{
-	int i;
-
-	for (i = 0; NULL != members[i]; i++) {
-		if (0 == strcmp (user, members[i])) {
-			fputs (_("Member already exists\n"), stderr);
-			exit (EXIT_MEMBER_EXISTS);
-		}
-	}
-
-	members = (char **) realloc (members, sizeof (char *) * (i+2));
-	members[i] = user;
-	members[i + 1] = NULL;
-}
-
-static void rmfromgroup (char *user, char **members)
-{
-	int i;
-	bool found = false;
-
-	i = 0;
-	while (!found && NULL != members[i]) {
-		if (0 == strcmp (user, members[i])) {
-			found = true;
-		} else {
-			i++;
-		}
-	}
-
-	while (found && NULL != members[i]) {
-		members[i] = members[i+1];
-		i++;
-	}
-
-	if (!found) {
-		fputs (_("Member to remove could not be found\n"), stderr);
-		exit (EXIT_NOT_MEMBER);
-	}
-}
-
-static void nomembers (char **members)
-{
-	int i;
-
-	for (i = 0; NULL != members[i]; i++) {
-		members[i] = NULL;
 	}
 }
 
@@ -300,13 +251,25 @@ int main (int argc, char **argv)
 	}
 
 	if (NULL != adduser) {
-		addtogroup (adduser, grp->gr_mem);
+		if (is_on_list (grp->gr_mem, adduser)) {
+			fprintf (stderr,
+			         _("%s: user `%s' is already a member of `%s'\n"),
+			         Prog, adduser, grp->gr_name);
+			exit (EXIT_MEMBER_EXISTS);
+		}
+		grp->gr_mem = add_list (grp->gr_mem, adduser);
 		gr_update (grp);
 	} else if (NULL != deluser) {
-		rmfromgroup (deluser, grp->gr_mem);
+		if (!is_on_list (grp->gr_mem, adduser)) {
+			fprintf (stderr,
+			         _("%s: user `%s' is not a member of `%s'\n"),
+			         Prog, deluser, grp->gr_name);
+			exit (EXIT_NOT_MEMBER);
+		}
+		grp->gr_mem = del_list (grp->gr_mem, deluser);
 		gr_update (grp);
 	} else if (purge) {
-		nomembers (grp->gr_mem);
+		grp->gr_mem[0] = NULL;
 		gr_update (grp);
 	} else if (list) {
 		members (grp->gr_mem);
