@@ -1,5 +1,10 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c (check_perms): Simplify. Always call pam_end()
+	at the end of the authentication.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Add fail_exit() to remove the group lock file
 	in case of failure. Replace the calls to exit() by fail_exit().
 
