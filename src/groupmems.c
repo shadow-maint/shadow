@@ -85,7 +85,9 @@ static char *whoami (void)
 	/* local, no need for xgetpwuid */
 	struct passwd *usr = getpwuid (getuid ());
 
-	if (0 == strcmp (usr->pw_name, grp->gr_name)) {
+	if (   (NULL != usr)
+	    && (NULL != grp)
+	    && (0 == strcmp (usr->pw_name, grp->gr_name))) {
 		return xstrdup (usr->pw_name);
 	} else {
 		return NULL;

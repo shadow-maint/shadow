@@ -1,5 +1,10 @@
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c (whoami): Make sure usr and grp are not NULL
+	before dereferencing them.
+
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Use xstrdup() rather than strdup().
 
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
