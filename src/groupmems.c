@@ -70,6 +70,9 @@ static int exclusive = 0;
 static char *Prog;
 static bool group_locked = false;
 
+static char *whoami (void);
+static void members (char **members);
+static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
 static void fail_exit (int code);
@@ -288,14 +291,12 @@ int main (int argc, char **argv)
 	}
 
 	if (!gr_close ()) {
-		fputs (_("Cannot close group file\n"), stderr);
+		fprintf (stderr, _("%s: unable to close group file\n"), Prog);
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
 	if (gr_unlock () == 0) {
-		fprintf (stderr,
-		         _("%s: unable to unlock group file\n"),
-		         Prog);
+		fprintf (stderr, _("%s: unable to unlock group file\n"), Prog);
 	}
 
 	exit (EXIT_SUCCESS);
