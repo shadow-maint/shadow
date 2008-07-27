@@ -68,7 +68,7 @@ static bool list = false;
 static int exclusive = 0;
 static char *Prog;
 
-#define isroot ()		(getuid () == 0)
+#define isroot()		(getuid () == 0)
 
 static int isgroup (void)
 {
@@ -86,7 +86,7 @@ static char *whoami (void)
 	struct passwd *usr = getpwuid (getuid ());
 
 	if (0 == strcmp (usr->pw_name, grp->gr_name)) {
-		return (char *) strdup (usr->pw_name);
+		return strdup (usr->pw_name);
 	} else {
 		return NULL;
 	}
@@ -226,10 +226,10 @@ int main (int argc, char **argv)
 	}
 
 	/* local, no need for xgetpwnam */
-	if (getpwnam(adduser) == NULL) {
-		fprintf (stderr, _("%s: user `%s' does not exist\n")
+	if (getpwnam (adduser) == NULL) {
+		fprintf (stderr, _("%s: user `%s' does not exist\n"),
 		         Prog, adduser);
-		exit (EXIT_INVALID_USERNAME);
+		exit (EXIT_INVALID_USER);
 	}
 
 	if (!isroot () && NULL != thisgroup) {
@@ -296,7 +296,7 @@ int main (int argc, char **argv)
 	if (grp == NULL) {
 		fprintf (stderr, _("%s: `%s' not found in /etc/group\n"),
 		         Prog, name);
-		exit (EXIT_READ_GROUP);
+		exit (EXIT_INVALID_GROUP);
 	}
 
 	if (NULL != adduser) {

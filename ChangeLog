@@ -1,3 +1,8 @@
+2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupmems.c: EXIT_READ_GROUP changed to EXIT_INVALID_GROUP.
+	* src/groupmems.c: EXIT_INVALID_USERNAME changed to EXIT_INVALID_USER.
+
 2008-07-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Really use booleans.
