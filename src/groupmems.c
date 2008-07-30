@@ -163,7 +163,8 @@ static void process_flags (int argc, char **argv)
 	}
 
 	/* local, no need for xgetpwnam */
-	if (getpwnam (adduser) == NULL) {
+	if (   (NULL != adduser)
+	    && (getpwnam (adduser) == NULL)) {
 		fprintf (stderr, _("%s: user `%s' does not exist\n"),
 		         Prog, adduser);
 		fail_exit (EXIT_INVALID_USER);

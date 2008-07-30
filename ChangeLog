@@ -1,3 +1,8 @@
+2008-07-30  Lukáš Kuklínek  <lkukline@redhat.com>
+
+	* src/groupmems.c: Only check if the adduser user exists when an
+	user is specified with -a.
+
 2008-07-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Fix the groupmems' usage message. The -D option
