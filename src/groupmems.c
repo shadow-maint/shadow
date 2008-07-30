@@ -111,7 +111,7 @@ static void members (char **members)
 
 static void usage (void)
 {
-	(void) fputs (_("Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"), stderr);
+	(void) fputs (_("Usage: groupmems -a username | -d username | -p | -l [-g groupname]\n"), stderr);
 	fail_exit (EXIT_USAGE);
 }
 

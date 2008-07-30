@@ -1,3 +1,8 @@
+2008-07-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupmems.c: Fix the groupmems' usage message. The -D option
+	is in fact -p.
+
 2008-07-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Replace an if test by an else.
