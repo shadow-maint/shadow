@@ -116,7 +116,7 @@ static void fail_exit (int code)
 static void grp_update (void)
 {
 	if (gr_remove (group_name) == 0) {
-		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+		fprintf (stderr, _("%s: cannot remove group '%s' from the group database\n"), Prog, group_name);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -126,8 +126,8 @@ static void grp_update (void)
 	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
 		if (sgr_remove (group_name) == 0) {
 			fprintf (stderr,
-			         _("%s: error removing shadow group entry\n"),
-			         Prog);
+			         _("%s: cannot remove group '%s' from the shadow group database\n"),
+			         Prog, group_name);
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -151,14 +151,14 @@ static void close_files (void)
 	SYSLOG ((LOG_INFO, "remove group '%s'\n", group_name));
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"), Prog);
+			 _("%s: cannot rewrite the shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp)
@@ -174,22 +174,22 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"), Prog);
+			 _("%s: cannot lock the shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr,
-			 _("%s: unable to open shadow group file\n"), Prog);
+			 _("%s: cannot open the shadow group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -226,7 +226,7 @@ static void group_busy (gid_t gid)
 	/*
 	 * Can't remove the group.
 	 */
-	fprintf (stderr, _("%s: cannot remove user's primary group.\n"), Prog);
+	fprintf (stderr, _("%s: cannot remove the primary group of user '%s'\n"), Prog, pwd->pw_name);
 	fail_exit (E_GROUP_BUSY);
 }
 
@@ -336,7 +336,7 @@ int main (int argc, char **argv)
 		char *nis_domain;
 		char *nis_master;
 
-		fprintf (stderr, _("%s: group %s is a NIS group\n"),
+		fprintf (stderr, _("%s: group '%s' is a NIS group\n"),
 			 Prog, group_name);
 
 #ifdef WITH_AUDIT
