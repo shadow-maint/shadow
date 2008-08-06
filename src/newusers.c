@@ -182,7 +182,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		unsigned long int i = strtoul (gid, &endptr, 10);
 		if ((*endptr != '\0') || (ERANGE == errno)) {
 			fprintf (stderr,
-			         _("%s: group ID `%s' is not valid\n"),
+			         _("%s: group ID '%s' is not valid\n"),
 			         Prog, gid);
 			return -1;
 		}
@@ -219,7 +219,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	/* Check if this is a valid group name */
 	if (!is_valid_group_name (grent.gr_name)) {
 		fprintf (stderr,
-		         _("%s: invalid group name `%s'\n"),
+		         _("%s: invalid group name '%s'\n"),
 		         Prog, grent.gr_name);
 		free (grent.gr_name);
 		return -1;
@@ -237,7 +237,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 
 		if (NULL != sg) {
 			fprintf (stderr,
-			         _("%s: group %s is a shadow group, but does not exist in /etc/group\n"),
+			         _("%s: group '%s' is a shadow group, but does not exist in /etc/group\n"),
 			         Prog, grent.gr_name);
 			return -1;
 		}
@@ -282,7 +282,7 @@ static int get_uid (const char *uid, uid_t *nuid) {
 		unsigned long int i = strtoul (uid, &endptr, 10);
 		if (('\0' != *endptr) || (ERANGE == errno)) {
 			fprintf (stderr,
-			         _("%s: user ID `%s' is not valid\n"),
+			         _("%s: user ID '%s' is not valid\n"),
 			         Prog, uid);
 			return -1;
 		}
@@ -299,7 +299,7 @@ static int get_uid (const char *uid, uid_t *nuid) {
 				*nuid = pwd->pw_uid;
 			} else {
 				fprintf (stderr,
-				         _("%s: user `%s' does not exist\n"),
+				         _("%s: user '%s' does not exist\n"),
 				         Prog, uid);
 				return -1;
 			}
@@ -323,7 +323,7 @@ static int add_user (const char *name, uid_t uid, gid_t gid)
 	/* Check if this is a valid user name */
 	if (!is_valid_user_name (name)) {
 		fprintf (stderr,
-		         _("%s: invalid user name `%s'\n"),
+		         _("%s: invalid user name '%s'\n"),
 		         Prog, name);
 		return -1;
 	}

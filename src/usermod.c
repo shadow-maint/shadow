@@ -349,7 +349,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "updating passwd",
 		              user_newname, (unsigned int) user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "lock user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "lock user '%s' password", user_newname));
 		strcpy (buf, "!");
 		strcat (buf, pw_pass);
 		pw_pass = buf;
@@ -369,7 +369,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "updating password",
 		              user_newname, (unsigned int) user_newid, 0);
 #endif
-		SYSLOG ((LOG_INFO, "unlock user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "unlock user '%s' password", user_newname));
 		s = pw_pass;
 		while ('\0' != *s) {
 			*s = *(s + 1);
@@ -381,7 +381,7 @@ static char *new_pw_passwd (char *pw_pass)
 		              "changing password",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user `%s' password", user_newname));
+		SYSLOG ((LOG_INFO, "change user '%s' password", user_newname));
 		pw_pass = xstrdup (user_pass);
 	}
 	return pw_pass;
@@ -401,7 +401,7 @@ static void new_pwent (struct passwd *pwent)
 		              "changing name",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user name `%s' to `%s'",
+		SYSLOG ((LOG_INFO, "change user name '%s' to '%s'",
 			 pwent->pw_name, user_newname));
 		pwent->pw_name = xstrdup (user_newname);
 	}
@@ -417,7 +417,7 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' UID from `%d' to `%d'",
+			 "change user '%s' UID from '%d' to '%d'",
 			 pwent->pw_name, pwent->pw_uid, user_newid));
 		pwent->pw_uid = user_newid;
 	}
@@ -428,7 +428,7 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' GID from `%d' to `%d'",
+			 "change user '%s' GID from '%d' to '%d'",
 			 pwent->pw_name, pwent->pw_gid, user_newgid));
 		pwent->pw_gid = user_newgid;
 	}
@@ -448,7 +448,7 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' home from `%s' to `%s'",
+			 "change user '%s' home from '%s' to '%s'",
 			 pwent->pw_name, pwent->pw_dir, user_newhome));
 		pwent->pw_dir = user_newhome;
 	}
@@ -458,7 +458,7 @@ static void new_pwent (struct passwd *pwent)
 		              "changing user shell",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user `%s' shell from `%s' to `%s'",
+		SYSLOG ((LOG_INFO, "change user '%s' shell from '%s' to '%s'",
 			 pwent->pw_name, pwent->pw_shell, user_newshell));
 		pwent->pw_shell = user_newshell;
 	}
@@ -483,7 +483,7 @@ static void new_spent (struct spwd *spent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' inactive from `%ld' to `%ld'",
+			 "change user '%s' inactive from '%ld' to '%ld'",
 			 spent->sp_namp, spent->sp_inact, user_newinactive));
 		spent->sp_inact = user_newinactive;
 	}
@@ -500,7 +500,7 @@ static void new_spent (struct spwd *spent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user `%s' expiration from `%s' to `%s'",
+			 "change user '%s' expiration from '%s' to '%s'",
 			 spent->sp_namp, old_exp, new_exp));
 		spent->sp_expire = user_newexpire;
 	}
@@ -587,7 +587,7 @@ static void update_group (void)
 				              user_newname, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-					 "change `%s' to `%s' in group `%s'",
+					 "change '%s' to '%s' in group '%s'",
 					 user_name, user_newname,
 					 ngrp->gr_name));
 			}
@@ -599,7 +599,7 @@ static void update_group (void)
 			              "removing group member",
 			              user_name, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "delete `%s' from group `%s'",
+			SYSLOG ((LOG_INFO, "delete '%s' from group '%s'",
 				 user_name, ngrp->gr_name));
 		} else if (!was_member && Gflg && is_member) {
 			ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
@@ -609,7 +609,7 @@ static void update_group (void)
 			              "adding user to group",
 			              user_name, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
+			SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
 			         user_newname, ngrp->gr_name));
 		}
 		if (!changed) {
@@ -684,7 +684,7 @@ static void update_gshadow (void)
 			              user_name, AUDIT_NO_ID, 1);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "change admin `%s' to `%s' in shadow group `%s'",
+				 "change admin '%s' to '%s' in shadow group '%s'",
 				 user_name, user_newname, nsgrp->sg_name));
 		}
 		if (was_member && (!Gflg || is_member)) {
@@ -700,7 +700,7 @@ static void update_gshadow (void)
 				              user_name, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-					 "change `%s' to `%s' in shadow group `%s'",
+					 "change '%s' to '%s' in shadow group '%s'",
 					 user_name, user_newname,
 					 nsgrp->sg_name));
 			}
@@ -713,7 +713,7 @@ static void update_gshadow (void)
 			              user_name, AUDIT_NO_ID, 1);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "delete `%s' from shadow group `%s'",
+				 "delete '%s' from shadow group '%s'",
 				 user_name, nsgrp->sg_name));
 		} else if (!was_member && Gflg && is_member) {
 			nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
@@ -723,7 +723,7 @@ static void update_gshadow (void)
 			              "adding user to shadow group",
 			              user_newname, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
+			SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
 			         user_newname, nsgrp->sg_name));
 		}
 		if (!changed) {
@@ -811,7 +811,7 @@ static void process_flags (int argc, char **argv)
 		/* local, no need for xgetpwnam */
 		pwd = getpwnam (argv[argc - 1]);
 		if (NULL == pwd) {
-			fprintf (stderr, _("%s: user %s does not exist\n"),
+			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 				 Prog, argv[argc - 1]);
 			exit (E_NOTFOUND);
 		}

@@ -263,7 +263,7 @@ int main (int argc, char **argv)
 			user[sizeof (user) - 1] = '\0';
 
 			SYSLOG ((LOG_NOTICE,
-				 "logged off user `%s' on `%s'", user,
+				 "logged off user '%s' on '%s'", user,
 				 tty_name));
 
 			/*

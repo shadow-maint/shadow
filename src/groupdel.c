@@ -148,7 +148,7 @@ static void close_files (void)
 	              "deleting group",
 	              group_name, (unsigned int) group_id, 1);
 #endif
-	SYSLOG ((LOG_INFO, "remove group `%s'\n", group_name));
+	SYSLOG ((LOG_INFO, "remove group '%s'\n", group_name));
 
 	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
@@ -315,7 +315,7 @@ int main (int argc, char **argv)
 		 */
 		grp = getgrnam (group_name); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: group %s does not exist\n"),
+			fprintf (stderr, _("%s: group '%s' does not exist\n"),
 				 Prog, group_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,

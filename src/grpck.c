@@ -440,7 +440,7 @@ static void check_grp_file (int *errors, bool *changed)
 			 * to try out the next list element.
 			 */
 		      delete_gr:
-			SYSLOG ((LOG_INFO, "delete group line `%s'",
+			SYSLOG ((LOG_INFO, "delete group line '%s'",
 			         gre->line));
 			*changed = true;
 
@@ -516,7 +516,7 @@ static void check_grp_file (int *errors, bool *changed)
 		if (check_members (grp->gr_name, grp->gr_mem,
 		                   _("group %s: no user %s\n"),
 		                   _("delete member '%s'? "),
-		                   "delete member `%s' from group `%s'",
+		                   "delete member '%s' from group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			gre->changed = true;
@@ -547,7 +547,7 @@ static void check_grp_file (int *errors, bool *changed)
 					sg.sg_adm = &empty;
 					sg.sg_mem = grp->gr_mem;
 					SYSLOG ((LOG_INFO,
-					         "add group `%s' to `%s'",
+					         "add group '%s' to '%s'",
 					         grp->gr_name, sgr_file));
 					*changed = true;
 
@@ -628,7 +628,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 * of the loop to try out the next list element.
 			 */
 		      delete_sg:
-			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
+			SYSLOG ((LOG_INFO, "delete shadow line '%s'",
 			         sge->line));
 			*changed = true;
 
@@ -710,7 +710,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		if (check_members (sgr->sg_name, sgr->sg_adm,
 		                   _("shadow group %s: no administrative user %s\n"),
 		                   _("delete administrative member '%s'? "),
-		                   "delete admin `%s' from shadow group `%s'",
+		                   "delete admin '%s' from shadow group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			sge->changed = true;
@@ -723,7 +723,7 @@ static void check_sgr_file (int *errors, bool *changed)
 		if (check_members (sgr->sg_name, sgr->sg_mem,
 		                   _("shadow group %s: no user %s\n"),
 		                   _("delete member '%s'? "),
-		                   "delete member `%s' from shadow group `%s'",
+		                   "delete member '%s' from shadow group '%s'",
 		                   errors) == 1) {
 			*changed = true;
 			sge->changed = true;

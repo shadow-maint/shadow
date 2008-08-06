@@ -165,7 +165,7 @@ static void process_flags (int argc, char **argv)
 	/* local, no need for xgetpwnam */
 	if (   (NULL != adduser)
 	    && (getpwnam (adduser) == NULL)) {
-		fprintf (stderr, _("%s: user `%s' does not exist\n"),
+		fprintf (stderr, _("%s: user '%s' does not exist\n"),
 		         Prog, adduser);
 		fail_exit (EXIT_INVALID_USER);
 	}
@@ -264,7 +264,7 @@ void main (int argc, char **argv)
 	grp = (struct group *) gr_locate (name);
 
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: `%s' not found in /etc/group\n"),
+		fprintf (stderr, _("%s: '%s' not found in /etc/group\n"),
 		         Prog, name);
 		fail_exit (EXIT_INVALID_GROUP);
 	}
@@ -274,7 +274,7 @@ void main (int argc, char **argv)
 	} else if (NULL != adduser) {
 		if (is_on_list (grp->gr_mem, adduser)) {
 			fprintf (stderr,
-			         _("%s: user `%s' is already a member of `%s'\n"),
+			         _("%s: user '%s' is already a member of '%s'\n"),
 			         Prog, adduser, grp->gr_name);
 			fail_exit (EXIT_MEMBER_EXISTS);
 		}
@@ -283,7 +283,7 @@ void main (int argc, char **argv)
 	} else if (NULL != deluser) {
 		if (!is_on_list (grp->gr_mem, adduser)) {
 			fprintf (stderr,
-			         _("%s: user `%s' is not a member of `%s'\n"),
+			         _("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, deluser, grp->gr_name);
 			fail_exit (EXIT_NOT_MEMBER);
 		}

@@ -175,7 +175,7 @@ static void update_groups (void)
 		              "deleting user from group",
 		              user_name, (unsigned int) user_id, 0);
 #endif
-		SYSLOG ((LOG_INFO, "delete `%s' from group `%s'\n",
+		SYSLOG ((LOG_INFO, "delete '%s' from group '%s'\n",
 			 user_name, ngrp->gr_name));
 	}
 
@@ -228,7 +228,7 @@ static void update_groups (void)
 			              user_name, (unsigned int) user_id, 0);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "removed group `%s' owned by `%s'\n",
+				 "removed group '%s' owned by '%s'\n",
 				 grp->gr_name, user_name));
 		}
 	}
@@ -284,7 +284,7 @@ static void update_groups (void)
 		              "deleting user from shadow group",
 		              user_name, (unsigned int) user_id, 0);
 #endif
-		SYSLOG ((LOG_INFO, "delete `%s' from shadow group `%s'\n",
+		SYSLOG ((LOG_INFO, "delete '%s' from shadow group '%s'\n",
 			 user_name, nsgrp->sg_name));
 	}
 
@@ -459,7 +459,7 @@ static void update_user (void)
 	              "deleting user entries",
 	              user_name, (unsigned int) user_id, 1);
 #endif
-	SYSLOG ((LOG_INFO, "delete user `%s'\n", user_name));
+	SYSLOG ((LOG_INFO, "delete user '%s'\n", user_name));
 }
 
 /*
@@ -742,7 +742,7 @@ int main (int argc, char **argv)
 		struct passwd *pwd;
 		pwd = getpwnam (user_name); /* local, no need for xgetpwnam */
 		if (NULL == pwd) {
-			fprintf (stderr, _("%s: user %s does not exist\n"),
+			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,

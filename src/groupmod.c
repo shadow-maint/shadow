@@ -282,12 +282,12 @@ static void grp_update (void)
 	              group_name, (unsigned int) group_id, 1);
 #endif
 	if (nflg) {
-		SYSLOG ((LOG_INFO, "change group `%s' to `%s'",
+		SYSLOG ((LOG_INFO, "change group '%s' to '%s'",
 			 group_name, group_newname));
 	}
 
 	if (gflg) {
-		SYSLOG ((LOG_INFO, "change GID for `%s' to %lu",
+		SYSLOG ((LOG_INFO, "change GID for '%s' to %lu",
 		          nflg ? group_newname : group_name,
 		         (unsigned long) group_newid));
 	}
@@ -660,7 +660,7 @@ int main (int argc, char **argv)
 		 */
 		grp = getgrnam (group_name); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: group %s does not exist\n"),
+			fprintf (stderr, _("%s: group '%s' does not exist\n"),
 				 Prog, group_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,

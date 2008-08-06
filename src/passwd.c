@@ -378,7 +378,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 		fprintf (stderr,
 			 _("The password for %s cannot be changed.\n"),
 			 sp->sp_namp);
-		SYSLOG ((LOG_WARN, "password locked for `%s'", sp->sp_namp));
+		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -394,7 +394,7 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 			 _
 			 ("The password for %s cannot be changed yet.\n"),
 			 pw->pw_name);
-		SYSLOG ((LOG_WARN, "now < minimum age for `%s'", pw->pw_name));
+		SYSLOG ((LOG_WARN, "now < minimum age for '%s'", pw->pw_name));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -1036,7 +1036,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-	SYSLOG ((LOG_INFO, "password for `%s' changed by `%s'", name, myname));
+	SYSLOG ((LOG_INFO, "password for '%s' changed by '%s'", name, myname));
 	closelog ();
 	if (!qflg) {
 		if (!eflg) {

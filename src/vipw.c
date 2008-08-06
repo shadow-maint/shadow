@@ -48,7 +48,7 @@
 #define MSG_WARN_EDIT_OTHER_FILE _( \
 	"You have modified %s.\n"\
 	"You may need to modify %s for consistency.\n"\
-	"Please use the command `%s' to do so.\n")
+	"Please use the command '%s' to do so.\n")
 
 /*
  * Global variables

@@ -191,7 +191,7 @@ static void check_perms (const struct group *grp,
 			              (unsigned int) getuid (), 0);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "Invalid password for group `%s' from `%s'",
+				 "Invalid password for group '%s' from '%s'",
 				 groupname, pwd->pw_name));
 			sleep (1);
 			fputs (_("Invalid password.\n"), stderr);
@@ -258,7 +258,7 @@ static void syslog_sg (const char *name, const char *group)
 		tty += 5;
 	}
 	SYSLOG ((LOG_INFO,
-		 "user `%s' (login `%s' on %s) switched to group `%s'",
+		 "user '%s' (login '%s' on %s) switched to group '%s'",
 		 name, loginname, tty, group));
 #ifdef USE_PAM
 	/*
@@ -327,11 +327,11 @@ static void syslog_sg (const char *name, const char *group)
 			/* local, no need for xgetgrgid */
 			if (NULL != grp) {
 				SYSLOG ((LOG_INFO,
-				         "user `%s' (login `%s' on %s) returned to group `%s'",
+				         "user '%s' (login '%s' on %s) returned to group '%s'",
 				         name, loginname, tty, grp->gr_name));
 			} else {
 				SYSLOG ((LOG_INFO,
-				         "user `%s' (login `%s' on %s) returned to group `%lu'",
+				         "user '%s' (login '%s' on %s) returned to group '%lu'",
 				         name, loginname, tty,
 				         (unsigned long) gid));
 				/* Either the user's passwd entry has a
@@ -339,7 +339,7 @@ static void syslog_sg (const char *name, const char *group)
 				 * or the group was deleted while the user
 				 * was in a newgrp session.*/
 				SYSLOG ((LOG_WARN,
-				         "unknown GID `%lu' used by user `%s'",
+				         "unknown GID '%lu' used by user '%s'",
 				         (unsigned long) gid, name));
 			}
 			closelog ();

@@ -217,7 +217,7 @@ static void fail_exit (int code)
 	              "adding user",
 	              user_name, AUDIT_NO_ID, 0);
 #endif
-	SYSLOG ((LOG_INFO, "failed adding user `%s', data deleted", user_name));
+	SYSLOG ((LOG_INFO, "failed adding user '%s', data deleted", user_name));
 	exit (code);
 }
 
@@ -812,7 +812,7 @@ static void grp_update (void)
 		              "adding user to group",
 		              user_name, AUDIT_NO_ID, 1);
 #endif
-		SYSLOG ((LOG_INFO, "add `%s' to group `%s'",
+		SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
 			 user_name, ngrp->gr_name));
 	}
 
@@ -864,7 +864,7 @@ static void grp_update (void)
 		              "adding user to shadow group",
 		              user_name, AUDIT_NO_ID, 1);
 #endif
-		SYSLOG ((LOG_INFO, "add `%s' to shadow group `%s'",
+		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
 			 user_name, nsgrp->sg_name));
 	}
 #endif				/* SHADOWGRP */

@@ -722,7 +722,7 @@ int main (int argc, char **argv)
 
 			  if (retcode == PAM_MAXTRIES || failcount >= retries) {
 			    SYSLOG ((LOG_NOTICE,
-				    "TOO MANY LOGIN TRIES (%d)%s FOR `%s'",
+				    "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
 				    failcount, fromhost, failent_user));
 			    fprintf(stderr,
 				    _("Maximum number of tries exceeded (%d)\n"),
@@ -736,7 +736,7 @@ int main (int argc, char **argv)
 			    PAM_END;
 			    exit(99);
 			  } else if (retcode != PAM_SUCCESS) {
-			    SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR `%s', %s",
+			    SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR '%s', %s",
 				   failcount, fromhost, failent_user,
 				   pam_strerror (pamh, retcode)));
 			    failed = true;
@@ -855,7 +855,7 @@ int main (int argc, char **argv)
 				pwent.pw_passwd = spwd->sp_pwdp;
 			} else {
 				SYSLOG ((LOG_WARN,
-					 "no shadow password for `%s'%s",
+					 "no shadow password for '%s'%s",
 					 username, fromhost));
 			}
 		}
@@ -888,7 +888,7 @@ int main (int argc, char **argv)
 		 * username at least once. Should probably use LOG_AUTHPRIV
 		 * for those who really want to log them.  --marekm
 		 */
-		SYSLOG ((LOG_WARN, "invalid password for `%s' %s",
+		SYSLOG ((LOG_WARN, "invalid password for '%s' %s",
 			 (   (NULL != pwd)
 			  || getdef_bool ("LOG_UNKFAIL_ENAB")) ?
 			 username : "UNKNOWN", fromhost));
@@ -909,7 +909,7 @@ int main (int argc, char **argv)
 		}
 		if (   !failed
 		    && !login_access (username, *hostname ? hostname : tty)) {
-			SYSLOG ((LOG_WARN, "LOGIN `%s' REFUSED %s",
+			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
 				 username, fromhost));
 			failed = true;
 		}
@@ -917,7 +917,7 @@ int main (int argc, char **argv)
 		    && getdef_bool ("FAILLOG_ENAB")
 		    && !failcheck (pwent.pw_uid, &faillog, failed)) {
 			SYSLOG ((LOG_CRIT,
-				 "exceeded failure limit for `%s' %s",
+				 "exceeded failure limit for '%s' %s",
 				 username, fromhost));
 			failed = true;
 		}
@@ -1007,7 +1007,7 @@ int main (int argc, char **argv)
 	 */
 	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
 	    && !isttytime (pwent.pw_name, tty, time ((time_t *) 0))) {
-		SYSLOG ((LOG_WARN, "invalid login time for `%s'%s",
+		SYSLOG ((LOG_WARN, "invalid login time for '%s'%s",
 			 username, fromhost));
 		closelog ();
 		bad_time_notify ();
@@ -1159,7 +1159,7 @@ int main (int argc, char **argv)
 				puts (_
 				      ("Warning: login re-enabled after temporary lockout."));
 				SYSLOG ((LOG_WARN,
-					 "login `%s' re-enabled after temporary lockout (%d failures)",
+					 "login '%s' re-enabled after temporary lockout (%d failures)",
 					 username, (int) faillog.fail_cnt));
 			}
 		}
@@ -1215,9 +1215,9 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	} else if (getdef_bool ("LOG_OK_LOGINS")) {
 #ifdef USE_PAM
-		SYSLOG ((LOG_INFO, "`%s' logged in %s", pam_user, fromhost));
+		SYSLOG ((LOG_INFO, "'%s' logged in %s", pam_user, fromhost));
 #else
-		SYSLOG ((LOG_INFO, "`%s' logged in %s", username, fromhost));
+		SYSLOG ((LOG_INFO, "'%s' logged in %s", username, fromhost));
 #endif
 	}
 	closelog ();

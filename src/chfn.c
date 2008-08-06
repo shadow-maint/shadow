@@ -711,7 +711,7 @@ int main (int argc, char **argv)
 	/* Rewrite the user's gecos in the passwd file */
 	update_gecos (user, new_gecos);
 
-	SYSLOG ((LOG_INFO, "changed user `%s' information", user));
+	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
 
 	nscd_flush_cache ("passwd");
 

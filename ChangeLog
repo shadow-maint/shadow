@@ -1,3 +1,13 @@
+2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chfn.c, src/chsh.c, src/groupdel.c, src/groupmems.c,
+	src/groupmod.c, src/grpck.c, src/login.c, src/logoutd.c,
+	src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c,
+	src/suauth.c, src/useradd.c, src/userdel.c, src/usermod.c,
+	src/vipw.c: Complete the switch from the `' quotation style to ''.
+	Do it also in SYSLOG messages. Quote some parameters. All this
+	permits to merge some messages.
+
 2008-07-30  Lukáš Kuklínek  <lkukline@redhat.com>
 
 	* src/groupmems.c: Only check if the adduser user exists when an

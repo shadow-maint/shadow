@@ -298,7 +298,7 @@ static void check_pw_file (int *errors, bool *changed)
 			 * loop to try out the next list element.
 			 */
 		      delete_pw:
-			SYSLOG ((LOG_INFO, "delete passwd line `%s'",
+			SYSLOG ((LOG_INFO, "delete passwd line '%s'",
 			         pfe->line));
 			*changed = true;
 
@@ -381,7 +381,7 @@ static void check_pw_file (int *errors, bool *changed)
 			/*
 			 * Home directory doesn't exist, give a warning
 			 */
-			printf (_("user %s: directory %s does not exist\n"),
+			printf (_("user '%s': directory '%s' does not exist\n"),
 			        pwd->pw_name, pwd->pw_dir);
 			*errors += 1;
 		}
@@ -396,7 +396,7 @@ static void check_pw_file (int *errors, bool *changed)
 			/*
 			 * Login shell doesn't exist, give a warning
 			 */
-			printf (_("user %s: program %s does not exist\n"),
+			printf (_("user '%s': program '%s' does not exist\n"),
 			        pwd->pw_name, pwd->pw_shell);
 			*errors += 1;
 		}
@@ -508,7 +508,7 @@ static void check_spw_file (int *errors, bool *changed)
 			 * to try out the next list element.
 			 */
 		      delete_spw:
-			SYSLOG ((LOG_INFO, "delete shadow line `%s'",
+			SYSLOG ((LOG_INFO, "delete shadow line '%s'",
 			         spe->line));
 			*changed = true;
 
