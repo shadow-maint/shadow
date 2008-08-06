@@ -53,7 +53,6 @@
 #include "prototypes.h"
 #ifdef	SHADOWGRP
 #include "sgroupio.h"
-static bool is_shadow_grp;
 #endif
 
 /*
@@ -81,6 +80,13 @@ static bool gflg = false;	/* ID value for the new group */
 static bool fflg = false;	/* if group already exists, do nothing and exit(0) */
 static bool rflg = false;	/* create a system account */
 static bool pflg = false;	/* new encrypted password */
+
+#ifdef SHADOWGRP
+static bool is_shadow_grp;
+static bool gshadow_locked = false;
+#endif
+static bool group_locked = false;
+
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -250,16 +256,36 @@ static void close_files (void)
 		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
-	gr_unlock ();
-#ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_close () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot rewrite the shadow group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
-		fail_exit (E_GRP_UPDATE);
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file",
+		              group_name, AUDIT_NO_ID, 0);
+#endif
+		/* continue */
 	}
+	group_locked = false;
+#ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		sgr_unlock ();
+		if (sgr_close () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot rewrite the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+			fail_exit (E_GRP_UPDATE);
+		}
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
+		gshadow_locked = false;
 	}
 #endif				/* SHADOWGRP */
 }
@@ -279,8 +305,9 @@ static void open_files (void)
 		              "locking group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
-		exit (E_GRP_UPDATE);
+		fail_exit (E_GRP_UPDATE);
 	}
+	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
 		SYSLOG ((LOG_WARN, "cannot open the group file"));
@@ -292,17 +319,30 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock the shadow group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
-		fail_exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot open the shadow group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
-		fail_exit (E_GRP_UPDATE);
+	if (is_shadow_grp) {
+		if (sgr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "locking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			fail_exit (E_GRP_UPDATE);
+		}
+		gshadow_locked = true;
+		if (sgr_open (O_RDWR) == 0) {
+			fprintf (stderr,
+			         _("%s: cannot open the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "opening gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif				/* SHADOWGRP */
 }
@@ -312,10 +352,30 @@ static void open_files (void)
  */
 static void fail_exit (int code)
 {
-	(void) gr_unlock ();
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking group file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
+	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp) {
-		sgr_unlock ();
+	if (gshadow_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 #endif
 
@@ -470,7 +530,7 @@ static void check_flags (void)
 			/* OK, no need to do anything */
 			fail_exit (E_SUCCESS);
 		}
-		fprintf (stderr, _("%s: group %s exists\n"), Prog, group_name);
+		fprintf (stderr, _("%s: group '%s' already exists\n"), Prog, group_name);
 		fail_exit (E_NAME_IN_USE);
 	}
 
@@ -487,7 +547,7 @@ static void check_flags (void)
 			/* Turn off -g, we can use any GID */
 			gflg = false;
 		} else {
-			fprintf (stderr, _("%s: GID %u is not unique\n"),
+			fprintf (stderr, _("%s: GID '%u' already exists\n"),
 			         Prog, (unsigned int) group_id);
 			fail_exit (E_GID_IN_USE);
 		}

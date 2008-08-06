@@ -1,11 +1,23 @@
-2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
+2008-08-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupadd.c: Harmonize error & syslog messages.
-	* src/groupadd.c: Add logging to syslog in some error cases.
+	* src/groupadd.c: Add logging to syslog & audit on lock/unlock
+	failures.
+	* src/groupadd.c: Only call gr_unlock() and sgr_unlock() in the
+	group or gshadow files were previously locked.
+	* src/groupadd.c: Make sure failures are reported to syslog/audit
+	after the change is mentioned.
 	* src/groupmod.c: Harmonize error & syslog messages.
+	* src/groupmod.c: Add logging to syslog & audit on lock/unlock
+	failures.
+	* src/groupmod.c: Make sure issues are reported to syslog or audit
+	after the change is mentioned.
 	* src/groupdel.c: Harmonize error & syslog messages.
 	* src/groupdel.c: Add logging to syslog & audit on lock/unlock
 	failures.
+	* src/groupdel.c: Only call gr_unlock() and sgr_unlock() in the
+	group or gshadow files were previously locked.
+	* src/groupdel.c: Simplify the handling of PAM errors.
 
 2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -124,15 +124,42 @@ static void usage (void)
 static void fail_exit (int status)
 {
 	if (group_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking group file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 #ifdef	SHADOWGRP
 	if (gshadow_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 #endif				/* SHADOWGRP */
 	if (passwd_locked) {
-		pw_unlock();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the passwd file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the passwd file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking passwd file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 	exit (status);
 }
@@ -145,14 +172,17 @@ static void fail_exit (int status)
  */
 static void new_grent (struct group *grent)
 {
-	if (nflg)
+	if (nflg) {
 		grent->gr_name = xstrdup (group_newname);
+	}
 
-	if (gflg)
+	if (gflg) {
 		grent->gr_gid = group_newid;
+	}
 
-	if (pflg)
+	if (pflg) {
 		grent->gr_passwd = group_passwd;
+	}
 }
 
 #ifdef	SHADOWGRP
@@ -164,11 +194,13 @@ static void new_grent (struct group *grent)
  */
 static void new_sgent (struct sgrp *sgent)
 {
-	if (nflg)
+	if (nflg) {
 		sgent->sg_name = xstrdup (group_newname);
+	}
 
-	if (pflg)
+	if (pflg) {
 		sgent->sg_passwd = group_passwd;
+	}
 }
 #endif				/* SHADOWGRP */
 
@@ -468,28 +500,73 @@ static void close_files (void)
 {
 	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "rewrite group file",
+		              group_name, AUDIT_NO_ID, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	gr_unlock ();
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file",
+		              group_name, AUDIT_NO_ID, 0);
+#endif
+		/* continue */
+	}
 	group_locked = false;
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_close () == 0)) {
-		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
 	if (is_shadow_grp) {
-		sgr_unlock ();
+		if (sgr_close () == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot rewrite the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "rewrite gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			fail_exit (E_GRP_UPDATE);
+		}
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 		gshadow_locked = false;
 	}
 #endif				/* SHADOWGRP */
 	if (gflg) {
 		if (pw_close () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot rewrite passwd file\n"), Prog);
+			         _("%s: cannot rewrite the passwd file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the passwd file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "rewrite passwd file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
 			fail_exit (E_GRP_UPDATE);
 		}
-		pw_unlock();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the passwd file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the passwd file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking passwd file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 		passwd_locked = false;
 	}
 }
@@ -503,11 +580,13 @@ static void open_files (void)
 {
 	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot lock the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -516,6 +595,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock the shadow group file\n"),
 			         Prog);
+			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
 			fail_exit (E_GRP_UPDATE);
 		}
 		gshadow_locked = true;
@@ -523,6 +603,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot open the shadow group file\n"),
 			         Prog);
+			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -532,6 +613,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock the passwd file\n"),
 			         Prog);
+			SYSLOG ((LOG_WARN, "cannot lock the passwd file"));
 			fail_exit (E_GRP_UPDATE);
 		}
 		passwd_locked = true;
@@ -539,6 +621,7 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot open the passwd file\n"),
 			         Prog);
+			SYSLOG ((LOG_WARN, "cannot open the passwd file"));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -632,19 +715,14 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -729,9 +807,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (PAM_SUCCESS == retval) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 	exit (E_SUCCESS);
 	/* NOT REACHED */

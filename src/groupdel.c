@@ -94,17 +94,20 @@ static void usage (void)
  */
 static void fail_exit (int code)
 {
-	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "unlocking group file",
-		              group_name, AUDIT_NO_ID, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking group file",
+			              group_name, AUDIT_NO_ID, 0);
 #endif
+			/* continue */
+		}
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp) {
+	if (gshadow_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
 			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
@@ -113,6 +116,7 @@ static void fail_exit (int code)
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
+			/* continue */
 		}
 	}
 #endif
@@ -170,6 +174,7 @@ static void close_files (void)
 
 	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_unlock () == 0) {
@@ -180,12 +185,15 @@ static void close_files (void)
 		              "unlocking group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
+		/* continue */
 	}
+	group_locked = false;
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close () == 0)) {
 			fprintf (stderr,
 			         _("%s: cannot rewrite the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
 			fail_exit (E_GRP_UPDATE);
 		}
 		if (sgr_unlock () == 0) {
@@ -196,7 +204,9 @@ static void close_files (void)
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
+			/* continue */
 		}
+		gshadow_locked = false;
 	}
 #endif				/* SHADOWGRP */
 }
@@ -331,19 +341,14 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -416,9 +421,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (PAM_SUCCESS == retval) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return E_SUCCESS;
