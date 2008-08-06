@@ -438,17 +438,17 @@ static void close_files (void)
 		fail_exit (1);
 	}
 #ifdef SHADOWGRP
-	if (is_shadowgrp && (sgr_close () == 0)) {
-		fprintf (stderr, _("%s: cannot rewrite the shadow group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "rewriting /etc/gshadow",
-		              group, AUDIT_NO_ID, 0);
-#endif
-		fail_exit (1);
-	}
 	if (is_shadowgrp) {
+		if (sgr_close () == 0) {
+			fprintf (stderr, _("%s: cannot rewrite the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "rewriting /etc/gshadow",
+			              group, AUDIT_NO_ID, 0);
+#endif
+			fail_exit (1);
+		}
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
 			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
@@ -457,6 +457,7 @@ static void close_files (void)
 			              "unlocking gshadow file",
 			              group, AUDIT_NO_ID, 0);
 #endif
+			/* continue */
 		}
 		gshadow_locked = false;
 	}
@@ -469,6 +470,7 @@ static void close_files (void)
 		              "unlocking group file",
 		              group, AUDIT_NO_ID, 0);
 #endif
+		/* continue */
 	}
 	group_locked = false;
 }
