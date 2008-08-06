@@ -59,7 +59,9 @@ static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP
 static bool is_shadow_grp;
+static bool gshadow_locked = false;
 #endif
+static bool group_locked = false;
 
 /*
  * exit status values
@@ -92,10 +94,26 @@ static void usage (void)
  */
 static void fail_exit (int code)
 {
-	(void) gr_unlock ();
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file",
+		              group_name, AUDIT_NO_ID, 0);
+#endif
+	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+		}
 	}
 #endif
 
@@ -154,15 +172,32 @@ static void close_files (void)
 		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
-	gr_unlock ();
-#ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_close () == 0)) {
-		fprintf (stderr,
-			 _("%s: cannot rewrite the shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file",
+		              group_name, AUDIT_NO_ID, 0);
+#endif
 	}
-	if (is_shadow_grp)
-		sgr_unlock ();
+#ifdef	SHADOWGRP
+	if (is_shadow_grp) {
+		if (sgr_close () == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot rewrite the shadow group file\n"), Prog);
+			fail_exit (E_GRP_UPDATE);
+		}
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group_name, AUDIT_NO_ID, 0);
+#endif
+		}
+	}
 #endif				/* SHADOWGRP */
 }
 
@@ -175,22 +210,30 @@ static void open_files (void)
 {
 	if (gr_lock () == 0) {
 		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot lock the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
+	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr,
-			 _("%s: cannot lock the shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr,
-			 _("%s: cannot open the shadow group file\n"), Prog);
-		fail_exit (E_GRP_UPDATE);
+	if (is_shadow_grp) {
+		if (sgr_lock () == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot lock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
+			fail_exit (E_GRP_UPDATE);
+		}
+		gshadow_locked = true;
+		if (sgr_open (O_RDWR) == 0)) {
+			fprintf (stderr,
+			         _("%s: cannot open the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif				/* SHADOWGRP */
 }
@@ -220,8 +263,9 @@ static void group_busy (gid_t gid)
 	 * If pwd isn't NULL, it stopped because the gid's matched.
 	 */
 
-	if (pwd == (struct passwd *) 0)
+	if (pwd == (struct passwd *) 0) {
 		return;
+	}
 
 	/*
 	 * Can't remove the group.
@@ -261,8 +305,9 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	if (argc != 2)
+	if (argc != 2) {
 		usage ();
+	}
 
 	group_name = argv[1];
 
@@ -354,8 +399,7 @@ int main (int argc, char **argv)
 #endif
 
 	/*
-	 * Now check to insure that this isn't the primary group of
-	 * anyone.
+	 * Make sure this isn't the primary group of anyone.
 	 */
 	group_busy (group_id);
 
