@@ -27,8 +27,8 @@ int nscd_flush_cache (const char *service)
 	char *spawnedEnv[] = {NULL};
 
 	/* spawn process */
-	err = posix_spawn(&pid, spawnedArgs[0], NULL, NULL,
-	                  spawnedArgs, spawnedEnv);
+	err = posix_spawn (&pid, spawnedArgs[0], NULL, NULL,
+	                   spawnedArgs, spawnedEnv);
 	if(0 != err)
 	{
 		(void) fputs (_(MSG_NSCD_FLUSH_CACHE_FAILED), stderr);
