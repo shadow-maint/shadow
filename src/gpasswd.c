@@ -161,11 +161,27 @@ static RETSIGTYPE catch_signals (int killed)
 static void fail_exit (int status)
 {
 	if (group_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking group file",
+			              group, AUDIT_NO_ID, 0);
+#endif
+		}
 	}
 #ifdef SHADOWGRP
 	if (gshadow_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group, AUDIT_NO_ID, 0);
+#endif
+		}
 	}
 #endif
 
@@ -433,19 +449,26 @@ static void close_files (void)
 		fail_exit (1);
 	}
 	if (is_shadowgrp) {
-		/* TODO: same logging as in open_files & for /etc/group */
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              group, AUDIT_NO_ID, 0);
+#endif
+		}
 		gshadow_locked = false;
 	}
 #endif
 	if (gr_unlock () == 0) {
 		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
 		              group, AUDIT_NO_ID, 0);
 #endif
-		exit (1);
 	}
 	group_locked = false;
 }
