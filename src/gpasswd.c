@@ -208,7 +208,7 @@ static bool is_valid_user_list (const char *users)
 
 		/* local, no need for xgetpwnam */
 		if (getpwnam (username) == NULL) {
-			fprintf (stderr, _("%s: unknown user %s\n"),
+			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 			         Prog, username);
 			valid = false;
 		}
@@ -236,8 +236,8 @@ static void process_flags (int argc, char **argv)
 			/* local, no need for xgetpwnam */
 			if (getpwnam (user) == NULL) {
 				fprintf (stderr,
-					 _("%s: unknown user %s\n"), Prog,
-					 user);
+				         _("%s: user '%s' does not exist\n"), Prog,
+				         user);
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 				              "adding to group",
@@ -259,8 +259,7 @@ static void process_flags (int argc, char **argv)
 			}
 			if (!is_shadowgrp) {
 				fprintf (stderr,
-					 _
-					 ("%s: shadow group passwords required for -A\n"),
+					 _("%s: shadow group passwords required for -A\n"),
 					 Prog);
 				fail_exit (2);
 			}
@@ -353,8 +352,8 @@ static void check_flags (int argc, int opt_index)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: can't get lock\n"), Prog);
-		SYSLOG ((LOG_WARN, "failed to get lock for /etc/group"));
+		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot lock the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking /etc/group",
@@ -367,8 +366,8 @@ static void open_files (void)
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: can't get shadow lock\n"), Prog);
-			SYSLOG ((LOG_WARN, "failed to get lock for /etc/gshadow"));
+			         _("%s: cannot lock the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "locking /etc/gshadow",
@@ -380,8 +379,8 @@ static void open_files (void)
 	}
 #endif
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group",
@@ -391,8 +390,8 @@ static void open_files (void)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+		fprintf (stderr, _("%s: cannot open the shadow group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/gshadow",
@@ -413,8 +412,8 @@ static void open_files (void)
 static void close_files (void)
 {
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: can't re-write file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot re-write /etc/group"));
+		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewriting /etc/group",
@@ -424,8 +423,8 @@ static void close_files (void)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_close () == 0)) {
-		fprintf (stderr, _("%s: can't re-write shadow file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot re-write /etc/gshadow"));
+		fprintf (stderr, _("%s: cannot rewrite the shadow group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewriting /etc/gshadow",
@@ -440,7 +439,7 @@ static void close_files (void)
 	}
 #endif
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: can't unlock file\n"), Prog);
+		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -540,8 +539,8 @@ static void update_group (struct group *gr)
 #endif
 {
 	if (gr_update (gr) == 0) {
-		fprintf (stderr, _("%s: can't update entry\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot update /etc/group"));
+		fprintf (stderr, _("%s: cannot update the entry of '%s' in the group file\n"), Prog, gr->gr_name);
+		SYSLOG ((LOG_WARN, "cannot update the entry of '%s' in the group file", gr->gr_name));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/group",
@@ -551,8 +550,8 @@ static void update_group (struct group *gr)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
-		fprintf (stderr, _("%s: can't update shadow entry\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot update /etc/gshadow"));
+		fprintf (stderr, _("%s: cannot update the entry of '%s' in the shadow group file\n"), Prog, sg->sg_name);
+		SYSLOG ((LOG_WARN, "cannot update the entry of '%s' in the shadow group file", sg->sg_name));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/gshadow",
@@ -581,8 +580,8 @@ static void get_group (struct group *gr)
 	struct sgrp const*tmpsg = NULL;
 
 	if (gr_open (O_RDONLY) == 0) {
-		fprintf (stderr, _("%s: can't open file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open /etc/group"));
+		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group",
@@ -593,7 +592,7 @@ static void get_group (struct group *gr)
 
 	tmpgr = gr_locate (group);
 	if (NULL == tmpgr) {
-		fprintf (stderr, _("unknown group: %s\n"), group);
+		fprintf (stderr, _("%s: group '%s' does not exist in the group file\n"), Prog, group);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "group lookup",
@@ -608,8 +607,8 @@ static void get_group (struct group *gr)
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: can't close file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot close /etc/group"));
+		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "closing /etc/group",
@@ -622,8 +621,8 @@ static void get_group (struct group *gr)
 	if (is_shadowgrp) {
 		if (sgr_open (O_RDONLY) == 0) {
 			fprintf (stderr,
-			         _("%s: can't open shadow file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot open /etc/gshadow"));
+			         _("%s: cannot open the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "opening /etc/gshadow",
@@ -660,8 +659,8 @@ static void get_group (struct group *gr)
 		}
 		if (sgr_close () == 0) {
 			fprintf (stderr,
-			         _("%s: can't close shadow file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot close /etc/gshadow"));
+			         _("%s: cannot rewrite the shadow group file\n"), Prog);
+			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "closing /etc/gshadow",
@@ -919,8 +918,8 @@ int main (int argc, char **argv)
 		}
 #endif
 		if (!removed) {
-			fprintf (stderr, _("%s: unknown member %s\n"),
-			         Prog, user);
+			fprintf (stderr, _("%s: user '%s' is not a member of '%s'\n"),
+			         Prog, user, group);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "deleting member",

@@ -1,5 +1,9 @@
 2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: Harmonize error & syslog messages.
+
+2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chfn.c, src/chsh.c, src/groupdel.c, src/groupmems.c,
 	src/groupmod.c, src/grpck.c, src/login.c, src/logoutd.c,
 	src/newgrp.c, src/newusers.c, src/passwd.c, src/pwck.c,
