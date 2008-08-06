@@ -1,5 +1,10 @@
 2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Harmonize error & syslog messages.
+	* src/groupadd.c: Add logging to syslog in some error cases.
+
+2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Harmonize error & syslog messages.
 	* src/gpasswd.c: Warn and log to syslog and audit when group or
 	gshadow cannot be unlocked, but do not fail.

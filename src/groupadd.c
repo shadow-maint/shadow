@@ -192,7 +192,8 @@ static void grp_update (void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr, _("%s: error adding new entry '%s' in the group file\n"), Prog, grp.gr_name);
+		SYSLOG ((LOG_WARN, "error adding new entry '%s' in the group file", grp.gr_name));
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -200,7 +201,8 @@ static void grp_update (void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr, _("%s: error adding new entry '%s' in the shadow group file\n"), Prog, sgrp.sg_name);
+		SYSLOG ((LOG_WARN, "error adding new entry '%s' in the shadow group file", sgrp.sg_name));
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -229,7 +231,7 @@ static void check_new_name (void)
 	 * All invalid group names land here.
 	 */
 
-	fprintf (stderr, _("%s: %s is not a valid group name\n"),
+	fprintf (stderr, _("%s: '%s' is not a valid group name\n"),
 	         Prog, group_name);
 
 	exit (E_BAD_ARG);
@@ -244,14 +246,16 @@ static void check_new_name (void)
 static void close_files (void)
 {
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 	gr_unlock ();
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
-		         _("%s: cannot rewrite shadow group file\n"), Prog);
+		         _("%s: cannot rewrite the shadow group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp) {
@@ -268,7 +272,8 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot lock the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking group file",
@@ -277,7 +282,8 @@ static void open_files (void)
 		exit (E_GRP_UPDATE);
 	}
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the group file"));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening group file",
@@ -288,12 +294,14 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
-		         _("%s: unable to lock shadow group file\n"), Prog);
+		         _("%s: cannot lock the shadow group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr,
-		         _("%s: unable to open shadow group file\n"), Prog);
+		         _("%s: cannot open the shadow group file\n"), Prog);
+		SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
