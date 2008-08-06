@@ -141,12 +141,12 @@ static void process_flags (int argc, char **argv)
 	 */
 	if (optind != argc) {
 		pwd_file = argv[optind];
-		pw_name (pwd_file);
+		pw_setdbname (pwd_file);
 		use_system_pw_file = false;
 	}
 	if ((optind + 2) == argc) {
 		spw_file = argv[optind + 1];
-		spw_name (spw_file);
+		spw_setdbname (spw_file);
 		is_shadow = true;
 		use_system_spw_file = false;
 	} else if (optind == argc) {
@@ -167,7 +167,7 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (pw_lock () == 0) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
+			fprintf (stderr, _("%s: cannot lock %s\n"),
 			         Prog, pwd_file);
 			if (use_system_pw_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
@@ -176,7 +176,7 @@ static void open_files (void)
 			exit (E_CANTLOCK);
 		}
 		if (is_shadow && (spw_lock () == 0)) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
+			fprintf (stderr, _("%s: cannot lock %s\n"),
 			         Prog, spw_file);
 			if (use_system_spw_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
@@ -191,7 +191,7 @@ static void open_files (void)
 	 * otherwise.
 	 */
 	if (pw_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open file %s\n"),
+		fprintf (stderr, _("%s: cannot open %s\n"),
 		         Prog, pwd_file);
 		if (use_system_pw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
@@ -200,7 +200,7 @@ static void open_files (void)
 		exit (E_CANTOPEN);
 	}
 	if (is_shadow && (spw_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open file %s\n"),
+		fprintf (stderr, _("%s: cannot open %s\n"),
 		         Prog, spw_file);
 		if (use_system_spw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
@@ -225,16 +225,16 @@ static void close_files (bool changed)
 	 */
 	if (changed) {
 		if (pw_close () == 0) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, pwd_file);
-			SYSLOG ((LOG_WARN, "cannot update %s", pwd_file));
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", pwd_file));
 			closelog ();
 			exit (E_CANTUPDATE);
 		}
 		if (is_shadow && (spw_close () == 0)) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_file);
-			SYSLOG ((LOG_WARN, "cannot update %s", spw_file));
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", spw_file));
 			closelog ();
 			exit (E_CANTUPDATE);
 		}

@@ -279,9 +279,8 @@ static int get_groups (char *list)
 
 		if (ngroups == sys_ngroups) {
 			fprintf (stderr,
-				 _
-				 ("%s: too many groups specified (max %d).\n"),
-				 Prog, ngroups);
+			         _("%s: too many groups specified (max %d).\n"),
+			         Prog, ngroups);
 			break;
 		}
 
@@ -358,8 +357,8 @@ static char *new_pw_passwd (char *pw_pass)
 
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
-				 _("%s: unlocking the user would result in a passwordless account.\n"
-				   "You should set a password with usermod -p to unlock this user account.\n"),
+				 _("%s: unlocking the user's password would result in a passwordless account.\n"
+				   "You should set a password with usermod -p to unlock this user's password.\n"),
 				 Prog);
 			return pw_pass;
 		}
@@ -569,8 +568,8 @@ static void update_group (void)
 		ngrp = __gr_dup (grp);
 		if (NULL == ngrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the group database.\n"),
-				 Prog);
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 
@@ -619,8 +618,9 @@ static void update_group (void)
 		changed = false;
 		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"), Prog);
-			SYSLOG ((LOG_ERR, "error adding new group entry"));
+			         _("%s: error adding new entry '%s' in %s\n"),
+			         Prog, ngrp->gr_name, gr_dbname ());
+			SYSLOG ((LOG_ERR, "error adding new entry '%s' in %s", ngrp->gr_name, gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -669,8 +669,8 @@ static void update_gshadow (void)
 		nsgrp = __sgr_dup (sgrp);
 		if (NULL == nsgrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
-				 Prog);
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 
@@ -737,8 +737,10 @@ static void update_gshadow (void)
 		 */
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error adding new shadow group entry\n"), Prog);
-			SYSLOG ((LOG_ERR, "error adding shadow group entry"));
+			         _("%s: error adding new entry '%s' in '%s\n"),
+			         Prog, nsgrp->sg_name, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "error adding new entry '%s' in %s",
+			        nsgrp->sg_name, sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -1048,7 +1050,7 @@ static void process_flags (int argc, char **argv)
 
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
-			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 _("%s: %s flag is only allowed with the %s flag\n"),
 			 Prog, "-a", "-G");
 		usage ();
 		exit (E_USAGE);
@@ -1064,7 +1066,7 @@ static void process_flags (int argc, char **argv)
 
 	if (oflg && !uflg) {
 		fprintf (stderr,
-			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 _("%s: %s flag is only allowed with the %s flag\n"),
 			 Prog, "-o", "-u");
 		usage ();
 		exit (E_USAGE);
@@ -1072,7 +1074,7 @@ static void process_flags (int argc, char **argv)
 
 	if (mflg && !dflg) {
 		fprintf (stderr,
-			 _("%s: %s flag is ONLY allowed with the %s flag\n"),
+			 _("%s: %s flag is only allowed with the %s flag\n"),
 			 Prog, "-m", "-d");
 		usage ();
 		exit (E_USAGE);
@@ -1080,13 +1082,13 @@ static void process_flags (int argc, char **argv)
 
 	/* local, no need for xgetpwnam */
 	if (lflg && (getpwnam (user_newname) != NULL)) {
-		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_newname);
+		fprintf (stderr, _("%s: user '%s' already exists\n"), Prog, user_newname);
 		exit (E_NAME_IN_USE);
 	}
 
 	/* local, no need for xgetpwuid */
 	if (uflg && !oflg && (getpwuid (user_newid) != NULL)) {
-		fprintf (stderr, _("%s: uid %lu is not unique\n"),
+		fprintf (stderr, _("%s: UID '%lu' already exists\n"),
 			 Prog, (unsigned long) user_newid);
 		exit (E_UID_IN_USE);
 	}
@@ -1101,26 +1103,28 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_close () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"), Prog);
+		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 
 	if (Gflg || lflg) {
 		if (gr_close () == 0) {
-			fprintf (stderr, _("%s: cannot rewrite group file\n"),
-				 Prog);
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp && (sgr_close () == 0)) {
 			fprintf (stderr,
-				 _("%s: cannot rewrite shadow group file\n"),
-				 Prog);
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		if (is_shadow_grp) {
@@ -1161,23 +1165,25 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_lock () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"), Prog);
+		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	spw_locked = true;
 	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"), Prog);
+		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1187,28 +1193,26 @@ static void open_files (void)
 		 * group entries.
 		 */
 		if (gr_lock () == 0) {
-			fprintf (stderr, _("%s: error locking group file\n"),
-				 Prog);
+			fprintf (stderr,
+			         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		gr_locked = true;
 		if (gr_open (O_RDWR) == 0) {
-			fprintf (stderr, _("%s: error opening group file\n"),
-				 Prog);
+			fprintf (stderr,
+			         _("%s: cannot open %s\n"), Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp && (sgr_lock () == 0)) {
 			fprintf (stderr,
-				 _("%s: error locking shadow group file\n"),
-				 Prog);
+			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		sgr_locked = true;
 		if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 			fprintf (stderr,
-				 _("%s: error opening shadow group file\n"),
-				 Prog);
+			         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #endif
@@ -1234,8 +1238,8 @@ static void usr_update (void)
 	 */
 	pwd = pw_locate (user_name);
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: %s not found in /etc/passwd\n"),
-			 Prog, user_name);
+		fprintf (stderr, _("%s: user '%s' does not exist in %s\n"),
+		         Prog, user_name, pw_dbname ());
 		fail_exit (E_NOTFOUND);
 	}
 	pwent = *pwd;
@@ -1255,30 +1259,28 @@ static void usr_update (void)
 	    || Lflg || Uflg) {
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-				 _("%s: error changing password entry\n"),
-				 Prog);
+			         _("%s: cannot add new entry '%s' in %s\n"),
+			         Prog, pwent.pw_name, pw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 		if (lflg && (pw_remove (user_name) == 0)) {
 			fprintf (stderr,
-				 _("%s: error removing password entry\n"),
-				 Prog);
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, user_name, pw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 	}
 	if ((NULL != spwd) && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: error adding new shadow password entry\n"),
-				 Prog);
+			         _("%s: cannot add new entry '%s' in %s\n"),
+			         Prog, spent.sp_namp, spw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 		if (lflg && (spw_remove (user_name) == 0)) {
 			fprintf (stderr,
-				 _
-				 ("%s: error removing shadow password entry\n"),
-				 Prog);
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, user_name, spw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 	}
@@ -1311,9 +1313,8 @@ static void move_home (void)
 			if (errno == EXDEV) {
 				if (mkdir (user_newhome, sb.st_mode & 0777) != 0) {
 					fprintf (stderr,
-						 _
-						 ("%s: can't create %s\n"),
-						 Prog, user_newhome);
+					         _("%s: can't create %s\n"),
+					         Prog, user_newhome);
 				}
 				if (chown (user_newhome, sb.st_uid, sb.st_gid) != 0) {
 					fprintf (stderr,
@@ -1347,9 +1348,8 @@ static void move_home (void)
 				(void) remove_tree (user_newhome);
 			}
 			fprintf (stderr,
-				 _
-				 ("%s: cannot rename directory %s to %s\n"),
-				 Prog, user_home, user_newhome);
+			         _("%s: cannot rename directory %s to %s\n"),
+			         Prog, user_home, user_newhome);
 			fail_exit (E_HOMEDIR);
 		}
 #ifdef WITH_AUDIT
@@ -1523,8 +1523,9 @@ static void move_mailbox (void)
 	fd = open (mailfile, O_RDONLY | O_NONBLOCK, 0);
 	if (fd < 0) {
 		/* no need for warnings if the mailbox doesn't exist */
-		if (errno != ENOENT)
+		if (errno != ENOENT) {
 			perror (mailfile);
+		}
 		return;
 	}
 	if (fstat (fd, &st) < 0) {
@@ -1626,19 +1627,14 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -1685,9 +1681,7 @@ int main (int argc, char **argv)
 	}
 
 #ifdef USE_PAM
-	if (PAM_SUCCESS == retval) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	exit (E_SUCCESS);

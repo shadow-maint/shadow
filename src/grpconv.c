@@ -83,22 +83,22 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 		fail_exit (5);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
 	}
 
 	if (sgr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock shadow group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 		fail_exit (5);
 	}
 	gshadow_locked = true;
 	if (sgr_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open shadow group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 		fail_exit (1);
 	}
 
@@ -116,8 +116,8 @@ int main (int argc, char **argv)
 			 * This shouldn't happen (the entry exists) but...
 			 */
 			fprintf (stderr,
-				 _("%s: can't remove shadow group %s\n"),
-				 Prog, sg->sg_name);
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, sg->sg_name, sgr_dbname ());
 			fail_exit (3);
 		}
 	}
@@ -171,12 +171,15 @@ int main (int argc, char **argv)
 	}
 
 	if (sgr_close () == 0) {
-		fprintf (stderr, _("%s: can't update shadow group file\n"),
-			 Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, sgr_dbname ());
 		fail_exit (3);
 	}
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: can't update group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, gr_dbname ());
 		fail_exit (3);
 	}
 	sgr_unlock ();

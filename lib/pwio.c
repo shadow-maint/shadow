@@ -108,9 +108,14 @@ static struct commonio_db passwd_db = {
 	false			/* readonly */
 };
 
-int pw_name (const char *filename)
+int pw_setdbname (const char *filename)
 {
 	return commonio_setname (&passwd_db, filename);
+}
+
+const char *pw_dbname (void)
+{
+	return passwd_db.filename;
 }
 
 int pw_lock (void)

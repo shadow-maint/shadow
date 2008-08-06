@@ -2,6 +2,7 @@
  * Copyright (c) 1996       , Michael Meskes
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2002 - 2006, Tomasz Kłoczko
+ * Copyright (c) 2008       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -86,22 +87,26 @@ int main (int argc, char **argv)
 	}
 
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 		fail_exit (5);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
 	}
 
 	if (sgr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock shadow group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 		fail_exit (5);
 	}
 	gshadow_locked = true;
 	if (sgr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open shadow group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 		fail_exit (1);
 	}
 
@@ -127,19 +132,23 @@ int main (int argc, char **argv)
 	}
 
 	if (sgr_close () == 0) {
-		fprintf (stderr, _("%s: can't update shadow group file\n"),
-			 Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, sgr_dbname ());
 		fail_exit (3);
 	}
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: can't update group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, gr_dbname ());
 		fail_exit (3);
 	}
 
 	if (unlink (SGROUP_FILE) != 0) {
-		fprintf (stderr, _("%s: can't delete shadow group file\n"),
-			 Prog);
+		fprintf (stderr,
+		         _("%s: cannot delete %s\n"),
+		         Prog, SGROUP_FILE);
 		fail_exit (3);
 	}
 
@@ -158,3 +167,4 @@ int main (int argc, char **argv)
 	exit (1);
 }
 #endif				/* !SHADOWGRP */
+

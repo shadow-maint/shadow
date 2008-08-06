@@ -175,7 +175,7 @@ static void check_flags (void)
 {
 	if (sflg && !cflg) {
 		fprintf (stderr,
-		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
@@ -261,11 +261,13 @@ static void open_files (void)
 	 * will bring all of the entries into memory where they may be updated.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 		exit (1);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		pw_unlock ();
 		exit (1);
 	}
@@ -273,14 +275,16 @@ static void open_files (void)
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
-			fprintf (stderr, _("%s: can't lock shadow file\n"),
-			         Prog);
+			fprintf (stderr,
+			         _("%s: cannot lock %s\n"),
+			         Prog, spw_dbname ());
 			pw_unlock ();
 			exit (1);
 		}
 		if (spw_open (O_RDWR) == 0) {
-			fprintf (stderr, _("%s: can't open shadow file\n"),
-			         Prog);
+			fprintf (stderr,
+			         _("%s: cannot open %s\n"),
+			         Prog, spw_dbname ());
 			pw_unlock ();
 			spw_unlock ();
 			exit (1);
@@ -296,7 +300,8 @@ static void close_files (void)
 	if (is_shadow_pwd) {
 		if (spw_close () == 0) {
 			fprintf (stderr,
-			         _("%s: error updating shadow file\n"), Prog);
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, spw_dbname ());
 			pw_unlock ();
 			exit (1);
 		}
@@ -304,7 +309,9 @@ static void close_files (void)
 	}
 
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: error updating password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, pw_dbname ());
 		exit (1);
 	}
 	pw_unlock ();
@@ -407,7 +414,7 @@ int main (int argc, char **argv)
 		pw = pw_locate (name);
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _("%s: line %d: unknown user %s\n"), Prog,
+			         _("%s: line %d: user '%s' does not exist\n"), Prog,
 			         line, name);
 			errors++;
 			continue;
@@ -445,8 +452,7 @@ int main (int argc, char **argv)
 
 		if (0 == ok) {
 			fprintf (stderr,
-			         _
-			         ("%s: line %d: cannot update password entry\n"),
+			         _("%s: line %d: cannot update password entry\n"),
 			         Prog, line);
 			errors++;
 			continue;

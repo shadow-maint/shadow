@@ -125,8 +125,8 @@ static void fail_exit (int status)
 {
 	if (group_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking group file",
@@ -138,8 +138,8 @@ static void fail_exit (int status)
 #ifdef	SHADOWGRP
 	if (gshadow_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -151,8 +151,8 @@ static void fail_exit (int status)
 #endif				/* SHADOWGRP */
 	if (passwd_locked) {
 		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the passwd file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the passwd file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking passwd file",
@@ -225,8 +225,8 @@ static void grp_update (void)
 	ogrp = gr_locate (group_name);
 	if (!ogrp) {
 		fprintf (stderr,
-			 _("%s: group '%s' does not exist in the group file\n"),
-			 Prog, group_name);
+			 _("%s: group '%s' does not exist in %s\n"),
+			 Prog, group_name, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "modifying group",
@@ -257,7 +257,9 @@ static void grp_update (void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr, _("%s: cannot add entry '%s' to the group database\n"), Prog, grp.gr_name);
+		fprintf (stderr,
+		         _("%s: cannot add entry '%s' to %s\n"),
+		         Prog, grp.gr_name, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -266,7 +268,9 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (nflg && (gr_remove (group_name) == 0)) {
-		fprintf (stderr, _("%s: cannot remove the entry of '%s' from the group database\n"), Prog, grp.gr_name);
+		fprintf (stderr,
+		         _("%s: cannot remove entry '%s' from %s\n"),
+		         Prog, grp.gr_name, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting group",
@@ -281,14 +285,15 @@ static void grp_update (void)
 	 * "out" if there wasn't. Can't just return because there might be
 	 * some syslogging to do.
 	 */
-	if (NULL == osgrp)
+	if (NULL == osgrp) {
 		goto out;
+	}
 
 	/*
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: cannot add entry '%s' to the shadow group database\n"), Prog, sgrp.sg_name);
+		fprintf (stderr, _("%s: cannot add entry '%s' to %s\n"), Prog, sgrp.sg_name, sgr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -297,7 +302,9 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && nflg && (sgr_remove (group_name) == 0)) {
-		fprintf (stderr, _("%s: cannot remove the entry of '%s' from the shadow group database\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot remove entry '%s' from %s\n"),
+		         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting group",
@@ -499,8 +506,8 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewrite group file",
@@ -509,8 +516,8 @@ static void close_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -523,8 +530,8 @@ static void close_files (void)
 	if (is_shadow_grp) {
 		if (sgr_close () == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot rewrite the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "rewrite gshadow file",
@@ -533,8 +540,8 @@ static void close_files (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -548,8 +555,8 @@ static void close_files (void)
 	if (gflg) {
 		if (pw_close () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot rewrite the passwd file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot rewrite the passwd file"));
+			         _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "rewrite passwd file",
@@ -558,8 +565,8 @@ static void close_files (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 		if (pw_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the passwd file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the passwd file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking passwd file",
@@ -579,31 +586,31 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot lock the group file"));
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the group file"));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock the shadow group file\n"),
-			         Prog);
-			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
+			         _("%s: cannot lock %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "cannot lock %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 		gshadow_locked = true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open the shadow group file\n"),
-			         Prog);
-			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -611,17 +618,17 @@ static void open_files (void)
 	if (gflg) {
 		if (pw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock the passwd file\n"),
-			         Prog);
-			SYSLOG ((LOG_WARN, "cannot lock the passwd file"));
+			         _("%s: cannot lock %s\n"),
+			         Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 		passwd_locked = true;
 		if (pw_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open the passwd file\n"),
-			         Prog);
-			SYSLOG ((LOG_WARN, "cannot open the passwd file"));
+			         _("%s: cannot open %s\n"),
+			         Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -639,10 +646,11 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			lpwd = pw_locate (pwd->pw_name);
 			if (NULL == lpwd) {
 				fprintf (stderr,
-				         _("%s: cannot change the primary group of user '%s' from %lu to %lu, since it is not in the passwd file.\n"),
+				         _("%s: cannot change the primary group of user '%s' from %lu to %lu, since it is not in %s.\n"),
 				         Prog, pwd->pw_name,
 				         (unsigned long) ogid,
-				         (unsigned long) ngid);
+				         (unsigned long) ngid,
+				         pw_dbname ());
 				fail_exit (E_GRP_UPDATE);
 			} else {
 				npwd = *lpwd;

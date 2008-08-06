@@ -194,21 +194,58 @@ static void create_mail (void);
  */
 static void fail_exit (int code)
 {
-	if (home_added)
+	if (home_added) {
 		rmdir (user_home);
+	}
 
 	if (shadow_locked) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", spw_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking shadow file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 	if (passwd_locked) {
-		pw_unlock ();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking passwd file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 	if (group_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking group file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 #ifdef	SHADOWGRP
 	if (gshadow_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 	}
 #endif
 
@@ -318,7 +355,7 @@ static void get_defaults (void)
 					def_gname = xstrdup (grp->gr_name);
 				} else {
 					fprintf (stderr,
-						 _("%s: unknown GID %s\n"),
+						 _("%s: GID '%s' does not exist\n"),
 						 Prog, cp);
 				}
 			/* local, no need for xgetgrnam */
@@ -327,7 +364,7 @@ static void get_defaults (void)
 				def_gname = xstrdup (cp);
 			} else {
 				fprintf (stderr,
-					 _("%s: unknown group %s\n"), Prog, cp);
+					 _("%s: group '%s' does not exist\n"), Prog, cp);
 			}
 		}
 
@@ -599,7 +636,7 @@ static int get_groups (char *list)
 		 * string name.
 		 */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: unknown group %s\n"),
+			fprintf (stderr, _("%s: group '%s' does not exist\n"),
 				 Prog, list);
 			errors++;
 		}
@@ -703,10 +740,11 @@ static void new_pwent (struct passwd *pwent)
 {
 	memzero (pwent, sizeof *pwent);
 	pwent->pw_name = (char *) user_name;
-	if (is_shadow_pwd)
+	if (is_shadow_pwd) {
 		pwent->pw_passwd = (char *) SHADOW_PASSWD_STRING;
-	else
+	} else {
 		pwent->pw_passwd = (char *) user_pass;
+	}
 
 	pwent->pw_uid = user_id;
 	pwent->pw_gid = user_gid;
@@ -717,8 +755,9 @@ static void new_pwent (struct passwd *pwent)
 
 static long scale_age (long x)
 {
-	if (x <= 0)
+	if (x <= 0) {
 		return x;
+	}
 
 	return x * (DAY / SCALE);
 }
@@ -776,14 +815,15 @@ static void grp_update (void)
 	 * Scan through the entire group file looking for the groups that
 	 * the user is a member of.
 	 */
-	for (gr_rewind (), grp = gr_next (); grp; grp = gr_next ()) {
+	for (gr_rewind (), grp = gr_next (); NULL != grp; grp = gr_next ()) {
 
 		/*
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-		if (!is_on_list (user_groups, grp->gr_name))
+		if (!is_on_list (user_groups, grp->gr_name)) {
 			continue;
+		}
 
 		/*
 		 * Make a copy - gr_update() will free() everything
@@ -831,11 +871,13 @@ static void grp_update (void)
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-		if (gr_locate (sgrp->sg_name) == NULL)
+		if (gr_locate (sgrp->sg_name) == NULL) {
 			continue;
+		}
 
-		if (!is_on_list (user_groups, sgrp->sg_name))
+		if (!is_on_list (user_groups, sgrp->sg_name)) {
 			continue;
+		}
 
 		/*
 		 * Make a copy - sgr_update() will free() everything
@@ -844,8 +886,8 @@ static void grp_update (void)
 		nsgrp = __sgr_dup (sgrp);
 		if (NULL == nsgrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
-				 Prog);
+				 _("%s: Out of memory. Cannot update %s.\n"),
+				 Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -856,7 +898,7 @@ static void grp_update (void)
 		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_name);
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"), Prog);
+				 _("%s: error adding new entry to %s\n"), Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
@@ -915,12 +957,11 @@ static void process_flags (int argc, char **argv)
 				     long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
-				if (!VALID (optarg)
-				    || optarg[0] != '/') {
+				if (   ( !VALID (optarg) )
+				    || ( optarg[0] != '/' )) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid base directory '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid base directory '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				def_home = optarg;
@@ -929,29 +970,28 @@ static void process_flags (int argc, char **argv)
 			case 'c':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid comment '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid comment '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_comment = optarg;
 				cflg = true;
 				break;
 			case 'd':
-				if (!VALID (optarg)
-				    || optarg[0] != '/') {
+				if (   ( !VALID (optarg) )
+				    || ( optarg[0] != '/' )) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid home directory '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid home directory '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_home = optarg;
 				dflg = true;
 				break;
 			case 'D':
-				if (anyflag)
+				if (anyflag) {
 					usage ();
+				}
 				Dflg = true;
 				break;
 			case 'e':
@@ -959,26 +999,26 @@ static void process_flags (int argc, char **argv)
 					user_expire = strtoday (optarg);
 					if (user_expire == -1) {
 						fprintf (stderr,
-							 _
-							 ("%s: invalid date '%s'\n"),
-							 Prog, optarg);
+						         _("%s: invalid date '%s'\n"),
+						         Prog, optarg);
 						exit (E_BAD_ARG);
 					}
-				} else
+				} else {
 					user_expire = -1;
+				}
 
 				/*
 				 * -e "" is allowed - it's a no-op without /etc/shadow
 				 */
 				if (('\0' != *optarg) && !is_shadow_pwd) {
 					fprintf (stderr,
-						 _
-						 ("%s: shadow passwords required for -e\n"),
-						 Prog);
+					         _("%s: shadow passwords required for -e\n"),
+					         Prog);
 					exit (E_USAGE);
 				}
-				if (Dflg)
+				if (Dflg) {
 					def_expire = optarg;
+				}
 				eflg = true;
 				break;
 			case 'f':
@@ -1037,16 +1077,16 @@ static void process_flags (int argc, char **argv)
 				cp = strchr (optarg, '=');
 				if (NULL == cp) {
 					fprintf (stderr,
-						 _
-						 ("%s: -K requires KEY=VALUE\n"),
-						 Prog);
+					         _("%s: -K requires KEY=VALUE\n"),
+					         Prog);
 					exit (E_BAD_ARG);
 				}
 				/* terminate name, point to value */
 				*cp = '\0';
 				cp++;
-				if (putdef_str (optarg, cp) < 0)
+				if (putdef_str (optarg, cp) < 0) {
 					exit (E_BAD_ARG);
+				}
 				break;
 			case 'l':
 				lflg = true;
@@ -1063,9 +1103,8 @@ static void process_flags (int argc, char **argv)
 			case 'p':	/* set encrypted password */
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid field '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid field '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_pass = optarg;
@@ -1074,14 +1113,13 @@ static void process_flags (int argc, char **argv)
 				rflg = true;
 				break;
 			case 's':
-				if (!VALID (optarg)
+				if (   ( !VALID (optarg) )
 				    || (   ('\0' != optarg[0])
 				        && ('/'  != optarg[0])
-				        && ('*'  != optarg[0]))) {
+				        && ('*'  != optarg[0]) )) {
 					fprintf (stderr,
-						 _
-						 ("%s: invalid shell '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid shell '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_shell = optarg;
@@ -1113,13 +1151,13 @@ static void process_flags (int argc, char **argv)
 	 */
 	if (oflg && !uflg) {
 		fprintf (stderr,
-		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-o", "-u");
 		usage ();
 	}
 	if (kflg && !mflg) {
 		fprintf (stderr,
-		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-k", "-m");
 		usage ();
 	}
@@ -1141,21 +1179,23 @@ static void process_flags (int argc, char **argv)
 	 * for the -b, -e, -f, -g, -s options only.
 	 */
 	if (Dflg) {
-		if (optind != argc)
+		if (optind != argc) {
 			usage ();
+		}
 
-		if (uflg || oflg || Gflg || dflg || cflg || mflg)
+		if (uflg || oflg || Gflg || dflg || cflg || mflg) {
 			usage ();
+		}
 	} else {
-		if (optind != argc - 1)
+		if (optind != argc - 1) {
 			usage ();
+		}
 
 		user_name = argv[optind];
 		if (!is_valid_user_name (user_name)) {
 			fprintf (stderr,
-				 _
-				 ("%s: invalid user name '%s'\n"),
-				 Prog, user_name);
+			         _("%s: invalid user name '%s'\n"),
+			         Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "adding user",
@@ -1173,14 +1213,17 @@ static void process_flags (int argc, char **argv)
 		}
 	}
 
-	if (!eflg)
+	if (!eflg) {
 		user_expire = strtoday (def_expire);
+	}
 
-	if (!gflg)
+	if (!gflg) {
 		user_gid = def_group;
+	}
 
-	if (!sflg)
+	if (!sflg) {
 		user_shell = def_shell;
+	}
 
 	/* TODO: add handle change default spool mail creation by 
 	   -K CREATE_MAIL_SPOOL={yes,no}. It need rewrite internal API for handle
@@ -1197,41 +1240,80 @@ static void process_flags (int argc, char **argv)
 static void close_files (void)
 {
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_close () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"), Prog);
+		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 	if (do_grp_update) {
 		if (gr_close () == 0) {
 			fprintf (stderr,
-				 _("%s: cannot rewrite group file\n"), Prog);
+			         _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow_grp && (sgr_close () == 0)) {
 			fprintf (stderr,
-				 _
-				 ("%s: cannot rewrite shadow group file\n"),
-				 Prog);
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #endif
 	}
 	if (is_shadow_pwd) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", spw_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking shadow file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 		shadow_locked = false;
 	}
-	pw_unlock ();
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking passwd file",
+		              user_name, AUDIT_NO_ID, 0);
+#endif
+		/* continue */
+	}
 	passwd_locked = false;
-	gr_unlock ();
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		              "unlocking group file",
+		              user_name, AUDIT_NO_ID, 0);
+#endif
+		/* continue */
+	}
 	group_locked = false;
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "unlocking gshadow file",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
+			/* continue */
+		}
 		gshadow_locked = false;
 	}
 #endif
@@ -1245,46 +1327,26 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "locking password file",
-		              user_name, (unsigned int) user_id, 0);
-#endif
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 		exit (E_PW_UPDATE);
 	}
 	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening password file",
-		              user_name, (unsigned int) user_id, 0);
-#endif
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock shadow password file\n"),
-			         Prog);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "locking shadow password file",
-			              user_name, (unsigned int) user_id, 0);
-#endif
+			         _("%s: cannot lock %s\n"),
+			         Prog, spw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 		shadow_locked = true;
 		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open shadow password file\n"),
-			         Prog);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-			              "opening shadow password file",
-			              user_name, (unsigned int) user_id, 0);
-#endif
+			         _("%s: cannot open %s\n"),
+			         Prog, spw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
 	}
@@ -1293,27 +1355,27 @@ static void open_files (void)
 	 * Lock and open the group file.
 	 */
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: error locking group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: error opening group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef  SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: error locking shadow group file\n"),
-			         Prog);
+			         _("%s: cannot lock %s\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		gshadow_locked = true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: error opening shadow group file\n"),
-			         Prog);
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -1419,6 +1481,8 @@ static void faillog_reset (uid_t uid)
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to reset the faillog entry of UID %lu", (unsigned long) uid));
+		/* continue */
 	}
 }
 
@@ -1442,6 +1506,8 @@ static void lastlog_reset (uid_t uid)
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
 		         Prog, (unsigned long) uid, strerror (errno));
+		SYSLOG ((LOG_WARN, "failed to reset the lastlog entry of UID %lu", (unsigned long) uid));
+		/* continue */
 	}
 }
 
@@ -1665,19 +1731,14 @@ int main (int argc, char **argv)
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -1700,7 +1761,7 @@ int main (int argc, char **argv)
 	 * Start with a quick check to see if the user exists.
 	 */
 	if (getpwnam (user_name) != NULL) { /* local, no need for xgetpwnam */
-		fprintf (stderr, _("%s: user %s exists\n"), Prog, user_name);
+		fprintf (stderr, _("%s: user '%s' already exists\n"), Prog, user_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding user",
@@ -1719,8 +1780,7 @@ int main (int argc, char **argv)
 		/* local, no need for xgetgrnam */
 		if (getgrnam (user_name) != NULL) {
 			fprintf (stderr,
-				 _
-				 ("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
+				 _("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -1818,9 +1878,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (PAM_SUCCESS == retval) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return E_SUCCESS;

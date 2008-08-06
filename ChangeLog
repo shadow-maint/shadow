@@ -1,3 +1,37 @@
+2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/groupio.c, lib/groupio.h, lib/pwio.c, lib/pwio.h,
+	lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.c, lib/shadowio.h:
+	Added *_dbname() functions to retrieve the name of the databases.
+	* lib/groupio.c, lib/groupio.h, lib/pwio.c, lib/pwio.h,
+	lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.c, lib/shadowio.h:
+	*_name() functions renamed *setname().
+	* src/grpck.c, src/pwck.c: Likewise.
+	* lib/groupio.h, lib/pwio.h, lib/sgroupio.h, lib/shadowio.h: Added
+	the name of the arguments to the prototypes.
+	* src/chage, src/chfn.c, src/chgpasswd.c, src/chpasswd.c,
+	src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupdel.c,
+	src/groupmod.c, src/grpck.c, src/grpconv.c, src/grpunconv.c,
+	src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c,
+	src/pwunconv.c, src/useradd.c, src/userdel.c, src/usermod.c:
+	Harmonize the erro & syslog messages in case of failure of the
+	*_lock(), *_open(), *_close(), *_unlock(), *_remove() functions.
+	* src/chgpasswd.c, src/chpasswd.c, src/usermod.c: Avoid
+	capitalized messages.
+	* src/chpasswd.c, src/useradd.c, src/usermod.c: Harmonize messages
+	in case of inexistent entries.
+	* src/usermod.c:  Harmonize messages in case of already existing
+	entries.
+	* src/newusers.c, src/useradd.c: Simplify PAM error handling.
+	* src/useradd.c: Report failures to unlock files (stderr, syslog,
+	and audit). But do not fail (continue).
+	* src/useradd.c (open_files): Do not report to syslog & audit
+	failures to lock or open the databases. This might be harmless,
+	and the logs were not already informed that a change was
+	requested.
+	* src/usermod.c: It's not the account which is unlocked, but its
+	password.
+
 2008-08-02  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupadd.c: Harmonize error & syslog messages.

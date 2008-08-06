@@ -105,9 +105,14 @@ static struct commonio_db shadow_db = {
 	false			/* readonly */
 };
 
-int spw_name (const char *filename)
+int spw_setdbname (const char *filename)
 {
 	return commonio_setname (&shadow_db, filename);
+}
+
+const char *spw_dbname (void)
+{
+	return shadow_db.filename;
 }
 
 bool spw_file_present (void)

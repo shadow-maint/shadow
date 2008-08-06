@@ -555,16 +555,16 @@ static void open_files (bool readonly)
 	 */
 	if (!readonly && (pw_lock () == 0)) {
 		fprintf (stderr,
-		         _("%s: can't lock password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed locking %s", PASSWD_FILE));
+		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot lock %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 	if (!readonly) {
 		pw_locked = true;
 	}
 	if (pw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed opening %s", PASSWD_FILE));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 
@@ -576,8 +576,8 @@ static void open_files (bool readonly)
 	 */
 	if (!readonly && (spw_lock () == 0)) {
 		fprintf (stderr,
-		         _("%s: can't lock shadow password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed locking %s", SHADOW_FILE));
+		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot lock %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 	if (!readonly) {
@@ -585,8 +585,8 @@ static void open_files (bool readonly)
 	}
 	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr,
-		         _("%s: can't open shadow password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed opening %s", SHADOW_FILE));
+		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot open %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 }
@@ -602,8 +602,8 @@ static void close_files (void)
 	 */
 	if (spw_close () == 0) {
 		fprintf (stderr,
-		         _("%s: can't rewrite shadow password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed rewriting %s", SHADOW_FILE));
+		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 
@@ -612,8 +612,8 @@ static void close_files (void)
 	 * will be re-written.
 	 */
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: can't rewrite password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed rewriting %s", PASSWD_FILE));
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 	spw_unlock ();
@@ -647,8 +647,8 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-			         _("%s: can't update password file\n"), Prog);
-			SYSLOG ((LOG_ERR, "failed updating %s", PASSWD_FILE));
+			         _("%s: cannot update %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "cannot update %s", pw_dbname ()));
 			fail_exit (E_NOPERM);
 		}
 	} else {
@@ -671,8 +671,8 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 
 	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
-		         _("%s: can't update shadow password file\n"), Prog);
-		SYSLOG ((LOG_ERR, "failed updating %s", SHADOW_FILE));
+		         _("%s: cannot update %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot update %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 
@@ -808,8 +808,8 @@ int main (int argc, char **argv)
 
 	pw = pw_locate (argv[optind]);
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: unknown user %s\n"), Prog,
-		         argv[optind]);
+		fprintf (stderr, _("%s: user '%s' does not exist in %s\n"),
+		         Prog, argv[optind], pw_dbname ());
 		closelog ();
 		exit (E_NOPERM);
 	}

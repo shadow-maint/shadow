@@ -113,22 +113,26 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock passwd file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open passwd file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (E_MISSING);
 	}
 
 	if (spw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock shadow file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	shadow_locked = true;
 	if (spw_open (O_CREAT | O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
 		fail_exit (E_FAILURE);
 	}
 
@@ -146,9 +150,8 @@ int main (int argc, char **argv)
 			 * This shouldn't happen (the entry exists) but...
 			 */
 			fprintf (stderr,
-				 _
-				 ("%s: can't remove shadow entry for %s\n"),
-				 Prog, sp->sp_namp);
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, sp->sp_namp, spw_dbname ());
 			fail_exit (E_FAILURE);
 		}
 	}
@@ -201,11 +204,15 @@ int main (int argc, char **argv)
 	}
 
 	if (spw_close () == 0) {
-		fprintf (stderr, _("%s: can't update shadow file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, spw_dbname ());
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: can't update passwd file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, pw_dbname ());
 		fail_exit (E_FAILURE);
 	}
 	chmod (PASSWD_FILE "-", 0600);	/* /etc/passwd- (backup file) */

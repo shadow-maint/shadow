@@ -417,16 +417,18 @@ static void update_gecos (const char *user, char *gecos)
 	 * password file. Get a lock on the file and open it.
 	 */
 	if (pw_lock () == 0) {
-		fputs (_("Cannot lock the password file; try again later.\n"),
-		       stderr);
-		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		fputs (_("Cannot open the password file.\n"), stderr);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		pw_unlock ();
-		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
+		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -441,7 +443,8 @@ static void update_gecos (const char *user, char *gecos)
 	if (NULL == pw) {
 		pw_unlock ();
 		fprintf (stderr,
-		         _("%s: %s not found in /etc/passwd\n"), Prog, user);
+		         _("%s: user '%s' does not exist in %s\n"),
+		         Prog, user, pw_dbname ());
 		exit (E_NOPERM);
 	}
 
@@ -468,15 +471,15 @@ static void update_gecos (const char *user, char *gecos)
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
 	if (pw_close () == 0) {
-		fputs (_("Cannot commit password file changes.\n"), stderr);
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		pw_unlock ();
-		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		closelog ();
 		exit (E_NOPERM);
 	}
 	if (pw_unlock () == 0) {
-		fputs (_("Cannot unlock the password file.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		closelog ();
 		exit (E_NOPERM);
 	}
@@ -633,7 +636,7 @@ int main (int argc, char **argv)
 		user = argv[optind];
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
-			fprintf (stderr, _("%s: unknown user %s\n"), Prog,
+			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
 			         user);
 			exit (E_NOPERM);
 		}
@@ -641,8 +644,7 @@ int main (int argc, char **argv)
 		pw = get_my_pwent ();
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _
-			         ("%s: Cannot determine your user name.\n"),
+			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
 			exit (E_NOPERM);
 		}

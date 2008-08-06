@@ -83,22 +83,30 @@ int main (int argc, char **argv)
 	}
 
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock passwd file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"),
+		         Prog, pw_dbname ());
 		fail_exit (5);
 	}
 	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open passwd file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"),
+		         Prog, pw_dbname ());
 		fail_exit (1);
 	}
 
 	if (spw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock shadow file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"),
+		         Prog, spw_dbname ());
 		fail_exit (5);
 	}
 	shadow_locked = true;
 	if (spw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open shadow file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"),
+		         Prog, spw_dbname ());
 		fail_exit (1);
 	}
 
@@ -138,18 +146,21 @@ int main (int argc, char **argv)
 
 	if (spw_close () == 0) {
 		fprintf (stderr,
-			 _("%s: can't update shadow password file\n"), Prog);
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, spw_dbname ());
 		fail_exit (3);
 	}
 
 	if (pw_close () == 0) {
-		fprintf (stderr, _("%s: can't update password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, pw_dbname ());
 		fail_exit (3);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
-			 _("%s: can't delete shadow password file\n"), Prog);
+			 _("%s: cannot delete %s\n"), Prog, SHADOW);
 		fail_exit (3);
 	}
 

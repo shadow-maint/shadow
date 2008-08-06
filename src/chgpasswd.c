@@ -178,7 +178,7 @@ static void check_flags (void)
 {
 	if (sflg && !cflg) {
 		fprintf (stderr,
-		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
@@ -264,11 +264,13 @@ static void open_files (void)
 	 * bring all of the entries into memory where they may be updated.
 	 */
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 		exit (1);
 	}
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: can't open group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		gr_unlock ();
 		exit (1);
 	}
@@ -277,14 +279,14 @@ static void open_files (void)
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr, _("%s: can't lock gshadow file\n"),
-			         Prog);
+			fprintf (stderr, _("%s: cannot lock %s\n"),
+			         Prog, sgr_dbname ());
 			gr_unlock ();
 			exit (1);
 		}
 		if (sgr_open (O_RDWR) == 0) {
-			fprintf (stderr, _("%s: can't open shadow file\n"),
-			         Prog);
+			fprintf (stderr, _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
 			gr_unlock ();
 			sgr_unlock ();
 			exit (1);
@@ -302,7 +304,8 @@ static void close_files (void)
 	if (is_shadow_grp) {
 		if (sgr_close () == 0) {
 			fprintf (stderr,
-			         _("%s: error updating gshadow file\n"), Prog);
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, sgr_dbname ());
 			gr_unlock ();
 			exit (1);
 		}
@@ -311,7 +314,9 @@ static void close_files (void)
 #endif
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: error updating group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, gr_dbname ());
 		exit (1);
 	}
 	gr_unlock ();
@@ -414,7 +419,7 @@ int main (int argc, char **argv)
 		gr = gr_locate (name);
 		if (NULL == gr) {
 			fprintf (stderr,
-			         _("%s: line %d: unknown group %s\n"), Prog,
+			         _("%s: line %d: group '%s' does not exist\n"), Prog,
 			         line, name);
 			errors++;
 			continue;

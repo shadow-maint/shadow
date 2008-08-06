@@ -517,7 +517,7 @@ static void check_flags (void)
 {
 	if (sflg && !cflg) {
 		fprintf (stderr,
-		         _("%s: %s flag is ONLY allowed with the %s flag\n"),
+		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
@@ -556,29 +556,24 @@ static void check_perms (void)
 	struct passwd *pampw;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -597,23 +592,23 @@ static void open_files (void)
 	 * it gets locked, assume the others can be locked right away.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock /etc/passwd.\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 		fail_exit (1);
 	}
 	passwd_locked = true;
 	if (is_shadow && (spw_lock () == 0)) {
-		fprintf (stderr, _("%s: can't lock /etc/shadow.\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, spw_dbname ());
 		fail_exit (1);
 	}
 	shadow_locked = true;
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: can't lock /etc/group.\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
 	}
 	group_locked = true;
 #ifdef SHADOWGRP
 	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr, _("%s: can't lock /etc/gshadow.\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 		fail_exit (1);
 	}
 	gshadow_locked = true;
@@ -800,8 +795,8 @@ int main (int argc, char **argv)
 		pw = pw_locate (fields[0]);
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _("%s: line %d: cannot find user %s\n"),
-			         Prog, line, fields[0]);
+			         _("%s: line %d: user '%s' does not exist in %s\n"),
+			         Prog, line, fields[0], pw_dbname ());
 			errors++;
 			continue;
 		}

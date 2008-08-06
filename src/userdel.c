@@ -146,8 +146,9 @@ static void update_groups (void)
 		 * See if the user specified this group as one of their
 		 * concurrent groups.
 		 */
-		if (!is_on_list (grp->gr_mem, user_name))
+		if (!is_on_list (grp->gr_mem, user_name)) {
 			continue;
+		}
 
 		/* 
 		 * Delete the username from the list of group members and
@@ -156,8 +157,8 @@ static void update_groups (void)
 		ngrp = __gr_dup (grp);
 		if (NULL == ngrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the group database.\n"),
-				 Prog);
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, gr_dbname ());
 			exit (13);	/* XXX */
 		}
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
@@ -202,9 +203,8 @@ static void update_groups (void)
 				}
 				if (pwd->pw_gid == grp->gr_gid) {
 					fprintf (stderr,
-						 _
-						 ("%s: Cannot remove group %s which is a primary group for another user.\n"),
-						 Prog, grp->gr_name);
+					         _("%s: Cannot remove group %s which is a primary group for another user.\n"),
+					         Prog, grp->gr_name);
 					break;
 				}
 			}
@@ -261,8 +261,8 @@ static void update_groups (void)
 		nsgrp = __sgr_dup (sgrp);
 		if (NULL == nsgrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the shadow group database.\n"),
-				 Prog);
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, sgr_dbname ());
 			exit (13);	/* XXX */
 		}
 
@@ -288,8 +288,9 @@ static void update_groups (void)
 			 user_name, nsgrp->sg_name));
 	}
 
-	if (deleted_user_group)
+	if (deleted_user_group) {
 		sgr_remove (user_name);
+	}
 #endif				/* SHADOWGRP */
 }
 
@@ -301,19 +302,23 @@ static void update_groups (void)
  */
 static void close_files (void)
 {
-	if (pw_close () == 0)
-		fprintf (stderr, _("%s: cannot rewrite password file\n"), Prog);
-	if (is_shadow_pwd && (spw_close () == 0))
+	if (pw_close () == 0) {
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+	}
+	if (is_shadow_pwd && (spw_close () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow password file\n"), Prog);
-	if (gr_close () == 0)
-		fprintf (stderr, _("%s: cannot rewrite group file\n"), Prog);
+		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+	}
+	if (gr_close () == 0) {
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+	}
 
 	gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_close () == 0))
+	if (is_shadow_grp && (sgr_close () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot rewrite shadow group file\n"), Prog);
+		         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+	}
 
 	if (is_shadow_grp) {
 		sgr_unlock ();
@@ -357,7 +362,7 @@ static void fail_exit (int code)
 static void open_files (void)
 {
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock password file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking password file",
@@ -366,7 +371,8 @@ static void open_files (void)
 		exit (E_PW_UPDATE);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open password file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening password file",
@@ -376,7 +382,7 @@ static void open_files (void)
 	}
 	if (is_shadow_pwd && (spw_lock () == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot lock shadow password file\n"), Prog);
+		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking shadow password file",
@@ -386,7 +392,7 @@ static void open_files (void)
 	}
 	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr,
-			 _("%s: cannot open shadow password file\n"), Prog);
+		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening shadow password file",
@@ -395,7 +401,8 @@ static void open_files (void)
 		fail_exit (E_PW_UPDATE);
 	}
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking group file",
@@ -404,7 +411,7 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening group file",
@@ -415,7 +422,7 @@ static void open_files (void)
 #ifdef	SHADOWGRP
 	if (is_shadow_grp && (sgr_lock () == 0)) {
 		fprintf (stderr,
-			 _("%s: unable to lock shadow group file\n"), Prog);
+		         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking shadow group file",
@@ -424,8 +431,8 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open shadow group file\n"),
-			 Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"),
+		         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening shadow group file",
@@ -446,12 +453,14 @@ static void update_user (void)
 {
 	if (pw_remove (user_name) == 0) {
 		fprintf (stderr,
-			 _("%s: error deleting password entry\n"), Prog);
+		         _("%s: cannot remove entry '%s' from %s\n"),
+		         Prog, user_name, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_remove (user_name) == 0)) {
 		fprintf (stderr,
-			 _("%s: error deleting shadow password entry\n"), Prog);
+		         _("%s: cannot remove entry '%s' from %s\n"),
+		         Prog, user_name, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
@@ -709,21 +718,16 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
@@ -858,9 +862,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	if (retval == PAM_SUCCESS) {
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 #ifdef WITH_AUDIT
 	if (0 != errors) {

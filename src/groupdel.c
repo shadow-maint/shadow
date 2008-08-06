@@ -96,8 +96,8 @@ static void fail_exit (int code)
 {
 	if (group_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking group file",
@@ -109,8 +109,8 @@ static void fail_exit (int code)
 #ifdef	SHADOWGRP
 	if (gshadow_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -138,7 +138,9 @@ static void fail_exit (int code)
 static void grp_update (void)
 {
 	if (gr_remove (group_name) == 0) {
-		fprintf (stderr, _("%s: cannot remove group '%s' from the group database\n"), Prog, group_name);
+		fprintf (stderr,
+		         _("%s: cannot remove entry '%s' from %s\n"),
+		         Prog, group_name, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -148,8 +150,8 @@ static void grp_update (void)
 	if (is_shadow_grp && (sgr_locate (group_name) != NULL)) {
 		if (sgr_remove (group_name) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot remove group '%s' from the shadow group database\n"),
-			         Prog, group_name);
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, group_name, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -173,13 +175,13 @@ static void close_files (void)
 	SYSLOG ((LOG_INFO, "remove group '%s'\n", group_name));
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -192,13 +194,13 @@ static void close_files (void)
 	if (is_shadow_grp) {
 		if (sgr_close () == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot rewrite the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -219,29 +221,33 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot lock the group file"));
+		fprintf (stderr,
+		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s",gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the group file"));
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot lock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
+			         _("%s: cannot lock %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "cannot lock %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 		gshadow_locked = true;
 		if (sgr_open (O_RDWR) == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot open the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}

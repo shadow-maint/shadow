@@ -161,9 +161,14 @@ static struct commonio_db gshadow_db = {
 	false			/* readonly */
 };
 
-int sgr_name (const char *filename)
+int sgr_setdbname (const char *filename)
 {
 	return commonio_setname (&gshadow_db, filename);
+}
+
+const char *sgr_dbname (void)
+{
+	return gshadow_db.filename;
 }
 
 bool sgr_file_present (void)

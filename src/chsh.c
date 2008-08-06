@@ -352,16 +352,16 @@ static void update_shell (const char *user, char *newshell)
 	 * the password file. Get a lock on the file and open it.
 	 */
 	if (pw_lock () == 0) {
-		SYSLOG ((LOG_WARN, "can't lock /etc/passwd"));
+		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 		closelog ();
-		fputs (_("Cannot lock the password file; try again later.\n"),
-		       stderr);
+		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		exit (1);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		SYSLOG ((LOG_ERR, "can't open /etc/passwd"));
+		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
 		closelog ();
-		fputs (_("Cannot open the password file.\n"), stderr);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		pw_unlock ();
 		exit (1);
 	}
@@ -376,7 +376,8 @@ static void update_shell (const char *user, char *newshell)
 	if (NULL == pw) {
 		pw_unlock ();
 		fprintf (stderr,
-		         _("%s: %s not found in /etc/passwd\n"), Prog, user);
+		         _("%s: user '%s' does not exist in %s\n"),
+		         Prog, user, pw_dbname ());
 		exit (1);
 	}
 
@@ -403,16 +404,17 @@ static void update_shell (const char *user, char *newshell)
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
 	if (pw_close () == 0) {
-		SYSLOG ((LOG_ERR, "can't rewrite /etc/passwd"));
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		closelog ();
-		fputs (_("Cannot commit password file changes.\n"), stderr);
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
 		pw_unlock ();
 		exit (1);
 	}
 	if (pw_unlock () == 0) {
-		SYSLOG ((LOG_ERR, "can't unlock /etc/passwd"));
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		closelog ();
-		fputs (_("Cannot unlock the password file.\n"), stderr);
+		fprintf (stderr,
+		         _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		exit (1);
 	}
 }
@@ -459,7 +461,7 @@ int main (int argc, char **argv)
 		pw = xgetpwnam (user);
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _("%s: unknown user %s\n"), Prog, user);
+			         _("%s: user '%s' does not exist\n"), Prog, user);
 			exit (1);
 		}
 	} else {

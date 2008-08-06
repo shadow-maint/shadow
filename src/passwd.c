@@ -512,20 +512,24 @@ static void update_noshadow (void)
 	struct passwd *npw;
 
 	if (pw_lock () == 0) {
-		fputs (_("Cannot lock the password file; try again later.\n"),
-		       stderr);
-		SYSLOG ((LOG_WARN, "can't lock password file"));
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 		exit (E_PWDBUSY);
 	}
 	if (pw_open (O_RDWR) == 0) {
-		fputs (_("Cannot open the password file.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't open password file"));
+		fprintf (stderr,
+		         _("%s: cannot open %s\n"),
+		         Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
 		fail_exit (E_MISSING);
 	}
 	pw = pw_locate (name);
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: %s not found in /etc/passwd\n"),
-			 Prog, name);
+		fprintf (stderr,
+		         _("%s: user '%s' does not exist in %s\n"),
+		         Prog, name, pw_dbname ());
 		fail_exit (E_NOPERM);
 	}
 	npw = __pw_dup (pw);
@@ -539,8 +543,10 @@ static void update_noshadow (void)
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
-		fputs (_("Cannot commit password file changes.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't rewrite password file"));
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	pw_unlock ();
@@ -552,14 +558,15 @@ static void update_shadow (void)
 	struct spwd *nsp;
 
 	if (spw_lock () == 0) {
-		fputs (_("Cannot lock the password file; try again later.\n"),
-		       stderr);
-		SYSLOG ((LOG_WARN, "can't lock password file"));
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, spw_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s", spw_dbname ()));
 		exit (E_PWDBUSY);
 	}
 	if (spw_open (O_RDWR) == 0) {
-		fputs (_("Cannot open the password file.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't open password file"));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "cannot open %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	sp = spw_locate (name);
@@ -614,8 +621,10 @@ static void update_shadow (void)
 		fail_exit (E_FAILURE);
 	}
 	if (spw_close () == 0) {
-		fputs (_("Cannot commit password file changes.\n"), stderr);
-		SYSLOG ((LOG_ERR, "can't rewrite password file"));
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	spw_unlock ();
@@ -809,8 +818,7 @@ int main (int argc, char **argv)
 				/* only "files" supported for now */
 				if (strcmp (optarg, "files") != 0) {
 					fprintf (stderr,
-						 _
-						 ("%s: repository %s not supported\n"),
+					         _("%s: repository %s not supported\n"),
 						 Prog, optarg);
 					exit (E_BAD_ARG);
 				}
@@ -920,7 +928,7 @@ int main (int argc, char **argv)
 
 	pw = xgetpwnam (name);
 	if (NULL == pw) {
-		fprintf (stderr, _("%s: unknown user %s\n"), Prog, name);
+		fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog, name);
 		exit (E_NOPERM);
 	}
 #ifdef WITH_SELINUX
@@ -949,9 +957,8 @@ int main (int argc, char **argv)
 	 */
 	if (!amroot && (pw->pw_uid != getuid ())) {
 		fprintf (stderr,
-			 _
-			 ("%s: You may not view or modify password information for %s.\n"),
-			 Prog, name);
+		         _("%s: You may not view or modify password information for %s.\n"),
+		         Prog, name);
 		SYSLOG ((LOG_WARN,
 			 "%s: can't view or modify password information for %s",
 			 Prog, name));

@@ -126,9 +126,14 @@ static struct commonio_db group_db = {
 	false			/* readonly */
 };
 
-int gr_name (const char *filename)
+int gr_setdbname (const char *filename)
 {
 	return commonio_setname (&group_db, filename);
+}
+
+const char *gr_dbname (void)
+{
+	return group_db.filename;
 }
 
 int gr_lock (void)

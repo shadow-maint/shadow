@@ -183,13 +183,13 @@ static void process_flags (int argc, char **argv)
 	 */
 	if (optind != argc) {
 		grp_file = argv[optind];
-		gr_name (grp_file);
+		gr_setdbname (grp_file);
 		use_system_grp_file = false;
 	}
 #ifdef	SHADOWGRP
 	if ((optind + 2) == argc) {
 		sgr_file = argv[optind + 1];
-		sgr_name (sgr_file);
+		sgr_setdbname (sgr_file);
 		is_shadow = true;
 		use_system_sgr_file = false;
 	} else if (optind == argc) {
@@ -211,7 +211,7 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (gr_lock () == 0) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
+			fprintf (stderr, _("%s: cannot lock %s\n"),
 			         Prog, grp_file);
 			if (use_system_grp_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", grp_file));
@@ -221,7 +221,7 @@ static void open_files (void)
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_lock () == 0)) {
-			fprintf (stderr, _("%s: cannot lock file %s\n"),
+			fprintf (stderr, _("%s: cannot lock %s\n"),
 			         Prog, sgr_file);
 			if (use_system_sgr_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", sgr_file));
@@ -237,7 +237,7 @@ static void open_files (void)
 	 * O_RDWR otherwise.
 	 */
 	if (gr_open (read_only ? O_RDONLY : O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open file %s\n"), Prog,
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
 		         grp_file);
 		if (use_system_grp_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", grp_file));
@@ -247,7 +247,7 @@ static void open_files (void)
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open file %s\n"), Prog,
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog,
 		         sgr_file);
 		if (use_system_sgr_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_file));
@@ -273,13 +273,13 @@ static void close_files (bool changed)
 	 */
 	if (changed) {
 		if (gr_close () == 0) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
 			exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_close () == 0)) {
-			fprintf (stderr, _("%s: cannot update file %s\n"),
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
 			exit (E_CANT_UPDATE);
 		}

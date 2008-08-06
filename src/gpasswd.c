@@ -162,8 +162,8 @@ static void fail_exit (int status)
 {
 	if (group_locked) {
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking group file",
@@ -174,8 +174,8 @@ static void fail_exit (int status)
 #ifdef SHADOWGRP
 	if (gshadow_locked) {
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -368,8 +368,8 @@ static void check_flags (int argc, int opt_index)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot lock the group file"));
+		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot lock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking /etc/group",
@@ -382,8 +382,8 @@ static void open_files (void)
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot lock the shadow group file"));
+			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "cannot lock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "locking /etc/gshadow",
@@ -395,8 +395,8 @@ static void open_files (void)
 	}
 #endif
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the group file"));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group",
@@ -406,8 +406,8 @@ static void open_files (void)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open the shadow group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/gshadow",
@@ -428,8 +428,8 @@ static void open_files (void)
 static void close_files (void)
 {
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewriting /etc/group",
@@ -440,8 +440,8 @@ static void close_files (void)
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_close () == 0) {
-			fprintf (stderr, _("%s: cannot rewrite the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "rewriting /etc/gshadow",
@@ -450,8 +450,8 @@ static void close_files (void)
 			fail_exit (1);
 		}
 		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: cannot unlock the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot unlock the shadow group file"));
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -463,8 +463,8 @@ static void close_files (void)
 	}
 #endif
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: cannot unlock the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot unlock the group file"));
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -564,8 +564,10 @@ static void update_group (struct group *gr)
 #endif
 {
 	if (gr_update (gr) == 0) {
-		fprintf (stderr, _("%s: cannot update the entry of '%s' in the group file\n"), Prog, gr->gr_name);
-		SYSLOG ((LOG_WARN, "cannot update the entry of '%s' in the group file", gr->gr_name));
+		fprintf (stderr,
+		         _("%s: cannot update entry '%s' in %s\n"),
+		         Prog, gr->gr_name, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot update entry '%s' in %s", gr->gr_name, gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/group",
@@ -575,8 +577,8 @@ static void update_group (struct group *gr)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
-		fprintf (stderr, _("%s: cannot update the entry of '%s' in the shadow group file\n"), Prog, sg->sg_name);
-		SYSLOG ((LOG_WARN, "cannot update the entry of '%s' in the shadow group file", sg->sg_name));
+		fprintf (stderr, _("%s: cannot update entry '%s' in %s\n"), Prog, sg->sg_name, sgr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot update entry '%s' in %s", sg->sg_name, sgr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/gshadow",
@@ -605,8 +607,8 @@ static void get_group (struct group *gr)
 	struct sgrp const*tmpsg = NULL;
 
 	if (gr_open (O_RDONLY) == 0) {
-		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot open the group file"));
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "opening /etc/group",
@@ -617,7 +619,7 @@ static void get_group (struct group *gr)
 
 	tmpgr = gr_locate (group);
 	if (NULL == tmpgr) {
-		fprintf (stderr, _("%s: group '%s' does not exist in the group file\n"), Prog, group);
+		fprintf (stderr, _("%s: group '%s' does not exist in %s\n"), Prog, group, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "group lookup",
@@ -632,8 +634,8 @@ static void get_group (struct group *gr)
 	gr->gr_mem = dup_list (tmpgr->gr_mem);
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: cannot rewrite the group file\n"), Prog);
-		SYSLOG ((LOG_WARN, "cannot rewrite the group file"));
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "closing /etc/group",
@@ -646,8 +648,8 @@ static void get_group (struct group *gr)
 	if (is_shadowgrp) {
 		if (sgr_open (O_RDONLY) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot open the shadow group file"));
+			         _("%s: cannot open %s\n"), Prog, sgr_dbmane ());
+			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "opening /etc/gshadow",
@@ -684,8 +686,8 @@ static void get_group (struct group *gr)
 		}
 		if (sgr_close () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot rewrite the shadow group file\n"), Prog);
-			SYSLOG ((LOG_WARN, "cannot rewrite the shadow group file"));
+			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "closing /etc/gshadow",
