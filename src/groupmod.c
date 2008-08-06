@@ -193,7 +193,7 @@ static void grp_update (void)
 	ogrp = gr_locate (group_name);
 	if (!ogrp) {
 		fprintf (stderr,
-			 _("%s: %s not found in /etc/group\n"),
+			 _("%s: group '%s' does not exist in the group file\n"),
 			 Prog, group_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -225,7 +225,7 @@ static void grp_update (void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr, _("%s: cannot add entry '%s' to the group database\n"), Prog, grp.gr_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -234,7 +234,7 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (nflg && (gr_remove (group_name) == 0)) {
-		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+		fprintf (stderr, _("%s: cannot remove the entry of '%s' from the group database\n"), Prog, grp.gr_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting group",
@@ -256,7 +256,7 @@ static void grp_update (void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr, _("%s: cannot add entry '%s' to the shadow group database\n"), Prog, sgrp.sg_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -265,7 +265,7 @@ static void grp_update (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 	if (is_shadow_grp && nflg && (sgr_remove (group_name) == 0)) {
-		fprintf (stderr, _("%s: error removing group entry\n"), Prog);
+		fprintf (stderr, _("%s: cannot remove the entry of '%s' from the shadow group database\n"), Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting group",
@@ -319,7 +319,7 @@ static void check_new_gid (void)
 	/*
 	 * Tell the user what they did wrong.
 	 */
-	fprintf (stderr, _("%s: %lu is not a unique GID\n"),
+	fprintf (stderr, _("%s: GID '%lu' already exists\n"),
 	         Prog, (unsigned long int) group_newid);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -353,7 +353,7 @@ static void check_new_name (void)
 		/* local, no need for xgetgrnam */
 		if (getgrnam (group_newname) != NULL) {
 			fprintf (stderr,
-				 _("%s: %s is not a unique name\n"), Prog,
+				 _("%s: group '%s' already exists\n"), Prog,
 				 group_newname);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -369,7 +369,7 @@ static void check_new_name (void)
 	 * All invalid group names land here.
 	 */
 
-	fprintf (stderr, _("%s: %s is not a valid group name\n"),
+	fprintf (stderr, _("%s: invalid group name '%s'\n"),
 		 Prog, group_newname);
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -502,26 +502,26 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: unable to lock group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot lock the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open the group file\n"), Prog);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: unable to lock shadow group file\n"),
+			         _("%s: cannot lock the shadow group file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
 		gshadow_locked = true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: unable to open shadow group file\n"),
+			         _("%s: cannot open the shadow group file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -530,14 +530,14 @@ static void open_files (void)
 	if (gflg) {
 		if (pw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: unable to lock password file\n"),
+			         _("%s: cannot lock the passwd file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}
 		passwd_locked = true;
 		if (pw_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: unable to open password file\n"),
+			         _("%s: cannot open the passwd file\n"),
 			         Prog);
 			fail_exit (E_GRP_UPDATE);
 		}

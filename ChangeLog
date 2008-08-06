@@ -2,6 +2,7 @@
 
 	* src/groupadd.c: Harmonize error & syslog messages.
 	* src/groupadd.c: Add logging to syslog in some error cases.
+	* src/groupmod.c: Harmonize error & syslog messages.
 
 2008-08-01  Nicolas François  <nicolas.francois@centraliens.net>
 
