@@ -1,5 +1,11 @@
 2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwconv.c: Report failure to unlock the passwd or shadow file
+	to stderr and syslog.
+	* src/pwconv.c: Report failure to chmod the backup file.
+
+2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpunconv.c: Report failure to unlock the group or gshadow
 	files to stderr and syslog.
 

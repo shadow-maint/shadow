@@ -87,16 +87,26 @@ static bool shadow_locked = false;
 static bool passwd_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int);
+static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
-	if (shadow_locked) {
-		spw_unlock ();
-	}
 	if (passwd_locked) {
-		pw_unlock ();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
 	}
+
+	if (shadow_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+	}
+
 	exit (status);
 }
 
@@ -207,17 +217,41 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	chmod (PASSWD_FILE "-", 0600);	/* /etc/passwd- (backup file) */
-	spw_unlock ();
-	pw_unlock ();
+
+	/* /etc/passwd- (backup file) */
+	if (chmod (PASSWD_FILE "-", 0600) != 0) {
+		fprintf (stderr,
+		         _("%s: failed to change the mode of %s to 0600\n"),
+		         Prog, PASSWD_FILE "-");
+		SYSLOG ((LOG_ERR, "failed to change the mode of %s to 0600", PASSWD_FILE "-"));
+		/* continue */
+	}
+
+	if (passwd_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+
+	if (shadow_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+	}
 
 	nscd_flush_cache ("passwd");
 
