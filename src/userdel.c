@@ -80,7 +80,11 @@ static bool is_shadow_pwd;
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
+static bool gshadow_locked = false;
 #endif
+static bool passwd_locked  = false;
+static bool group_locked   = false;
+static bool shadow_locked  = false;
 
 /* local function prototypes */
 static void usage (void);
@@ -216,7 +220,12 @@ static void update_groups (void)
 			 * We can remove this group, it is not the primary
 			 * group of any remaining user.
 			 */
-			gr_remove (grp->gr_name);
+			if (gr_remove (grp->gr_name) == 0) {
+				fprintf (stderr,
+				         _("%s: cannot remove entry '%s' from %s\n"),
+				         Prog, grp->gr_name, gr_dbname ());
+				fail_exit (E_GRP_UPDATE);
+			}
 
 #ifdef SHADOWGRP
 			deleted_user_group = true;
@@ -289,7 +298,13 @@ static void update_groups (void)
 	}
 
 	if (deleted_user_group) {
-		sgr_remove (user_name);
+		/* FIXME: Test if the group is in gshadow first? */
+		if (sgr_remove (user_name) == 0) {
+			fprintf (stderr,
+			         _("%s: cannot remove entry '%s' from %s\n"),
+			         Prog, user_name, sgr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif				/* SHADOWGRP */
 }
@@ -304,30 +319,60 @@ static void close_files (void)
 {
 	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_close () == 0)) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
 	}
+	passwd_locked = false;
+
+	if (is_shadow_pwd) {
+		if (spw_close () == 0) {
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			fail_exit (E_PW_UPDATE);
+		}
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+		shadow_locked = false;
+	}
+
 	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		fail_exit (E_GRP_UPDATE);
 	}
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		/* continue */
+	}
+	group_locked = false;
 
-	gr_unlock ();
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_close () == 0)) {
-		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
-	}
-
 	if (is_shadow_grp) {
-		sgr_unlock ();
+		if (sgr_close () == 0) {
+			fprintf (stderr,
+			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+			fail_exit (E_GRP_UPDATE);
+		}
+
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+		gshadow_locked = false;
 	}
 #endif
-	if (is_shadow_pwd) {
-		spw_unlock ();
-	}
-	pw_unlock ();
 }
 
 /*
@@ -335,21 +380,43 @@ static void close_files (void)
  */
 static void fail_exit (int code)
 {
-	pw_unlock ();
-	gr_unlock ();
-	if (is_shadow_pwd) {
-		spw_unlock ();
+	if (passwd_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+	}
+	if (shadow_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp) {
-		sgr_unlock ();
+	if (gshadow_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
 	}
 #endif
+
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 	              "deleting user",
 	              user_name, (unsigned int) user_id, 0);
 #endif
+
 	exit (code);
 }
 
@@ -368,8 +435,9 @@ static void open_files (void)
 		              "locking password file",
 		              user_name, (unsigned int) user_id, 0);
 #endif
-		exit (E_PW_UPDATE);
+		fail_exit (E_PW_UPDATE);
 	}
+	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
@@ -380,25 +448,28 @@ static void open_files (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+	if (is_shadow_pwd) {
+		if (spw_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "locking shadow password file",
-		              user_name, (unsigned int) user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "locking shadow password file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
-		fail_exit (E_PW_UPDATE);
-	}
-	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+			fail_exit (E_PW_UPDATE);
+		}
+		shadow_locked = true;
+		if (spw_open (O_RDWR) == 0) {
+			fprintf (stderr,
+			         _("%s: cannot open %s\n"), Prog, spw_dbname ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening shadow password file",
-		              user_name, (unsigned int) user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "opening shadow password file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
-		fail_exit (E_PW_UPDATE);
+			fail_exit (E_PW_UPDATE);
+		}
 	}
 	if (gr_lock () == 0) {
 		fprintf (stderr,
@@ -410,6 +481,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
+	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 #ifdef WITH_AUDIT
@@ -420,25 +492,28 @@ static void open_files (void)
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
-	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+	if (is_shadow_grp) {
+		if (sgr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "locking shadow group file",
-		              user_name, (unsigned int) user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "locking shadow group file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
-		fail_exit (E_GRP_UPDATE);
-	}
-	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
-		fprintf (stderr, _("%s: cannot open %s\n"),
-		         Prog, sgr_dbname ());
+			fail_exit (E_GRP_UPDATE);
+		}
+		gshadow_locked= true;
+		if (sgr_open (O_RDWR) == 0) {
+			fprintf (stderr, _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-		              "opening shadow group file",
-		              user_name, (unsigned int) user_id, 0);
+			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			              "opening shadow group file",
+			              user_name, (unsigned int) user_id, 0);
 #endif
-		fail_exit (E_GRP_UPDATE);
+			fail_exit (E_GRP_UPDATE);
+		}
 	}
 #endif
 }
@@ -865,6 +940,7 @@ int main (int argc, char **argv)
 	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 #ifdef WITH_AUDIT
+/* FIXME: Is it really "deleting home directory"? */
 	if (0 != errors) {
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting home directory",

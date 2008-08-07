@@ -1,6 +1,16 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/pwunconv.c:  Report failure to unlock the passwd or shadow
+	* src/userdel.c: Report failure to remove entries from group or
+	gshadow to stderr.
+	* src/userdel.c: Fail in case of failure during the write of a
+	user or group database. Report errors to syslog.
+	* src/userdel.c: Do not unlock non locked files.
+	* src/userdel.c: Report failure to unlock the passwd or shadow
+	file to stderr and syslog.
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/pwunconv.c: Report failure to unlock the passwd or shadow
 	file to stderr and syslog.
 
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
