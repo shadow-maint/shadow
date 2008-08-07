@@ -1,5 +1,10 @@
 2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: Report failure to unlock the passwd or shadow file
+	to stderr and syslog.
+
+2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwconv.c: Report failure to unlock the passwd or shadow file
 	to stderr and syslog.
 	* src/pwconv.c: Report failure to chmod the backup file.

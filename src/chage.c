@@ -109,10 +109,18 @@ static void fail_exit (int code);
 static void fail_exit (int code)
 {
 	if (spw_locked) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
 	if (pw_locked) {
-		pw_unlock ();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
 	}
 	closelog ();
 
@@ -616,9 +624,17 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
-	spw_unlock ();
+	if (spw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		/* continue */
+	}
 	spw_locked = false;
-	pw_unlock ();
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
 	pw_locked = false;
 }
 
