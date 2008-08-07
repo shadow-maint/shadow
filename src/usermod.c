@@ -515,18 +515,34 @@ static void new_spent (struct spwd *spent)
 static void fail_exit (int code)
 {
 	if (gr_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
 	}
 #ifdef	SHADOWGRP
 	if (sgr_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
 	}
 #endif
 	if (spw_locked) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
 	if (pw_locked) {
-		pw_unlock ();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
 	}
 
 #ifdef WITH_AUDIT
@@ -1121,23 +1137,38 @@ static void close_files (void)
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
-		if (is_shadow_grp && (sgr_close () == 0)) {
+		if (is_shadow_grp) {
+			if (sgr_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
-		}
-		if (is_shadow_grp) {
-			sgr_unlock ();
+			if (sgr_unlock () == 0) {
+				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+				/* continue */
+			}
 		}
 #endif
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
 	}
 
 	if (is_shadow_pwd) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
-	pw_unlock ();
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
 
 	pw_locked = false;
 	spw_locked = false;
