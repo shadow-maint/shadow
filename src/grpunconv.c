@@ -58,16 +58,26 @@ static bool group_locked   = false;
 static bool gshadow_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int);
+static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
 	if (group_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
 	}
+
 	if (gshadow_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
 	}
+
 	exit (status);
 }
 
@@ -152,8 +162,21 @@ int main (int argc, char **argv)
 		fail_exit (3);
 	}
 
-	sgr_unlock ();
-	gr_unlock ();
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+	}
+
+	if (gshadow_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+	}
 
 	nscd_flush_cache ("group");
 

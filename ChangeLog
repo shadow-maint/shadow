@@ -1,5 +1,10 @@
 2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpunconv.c: Report failure to unlock the group or gshadow
+	files to stderr and syslog.
+
+2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chfn.c: Added fail_exit(). Check if the passwd file is
 	locked. Report failures to unlock to stderr and syslog.
 	* src/chfn.c: Is case of failure, use fail_exit() rather than
