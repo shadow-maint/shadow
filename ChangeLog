@@ -1,5 +1,13 @@
 2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chfn.c: Added fail_exit(). Check if the passwd file is
+	locked. Report failures to unlock to stderr and syslog.
+	* src/chfn.c: Is case of failure, use fail_exit() rather than
+	exit().
+	* src/chfn.c: Ignore the return value of pam_end().
+
+2008-08-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/groupio.c, lib/groupio.h, lib/pwio.c, lib/pwio.h,
 	lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.c, lib/shadowio.h:
 	Added *_dbname() functions to retrieve the name of the databases.

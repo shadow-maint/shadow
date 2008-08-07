@@ -72,12 +72,14 @@ static bool oflg = false;		/* -o - set other information        */
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
+static bool passwd_locked = false;
 
 /*
  * External identifiers
  */
 
 /* local function prototypes */
+static void fail_exit (int code);
 static void usage (void);
 static bool may_change_field (int);
 static void new_fields (void);
@@ -86,6 +88,25 @@ static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_gecos (const char *user, char *gecos);
 static void get_old_fields (const char *gecos);
+
+/*
+ * fail_exit - exit with an error and do some cleanup
+ */
+static void fail_exit (int code)
+{
+	if (passwd_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+	passwd_locked = false;
+
+	closelog ();
+
+	exit (code);
+}
 
 /*
  * usage - print command line syntax and exit
@@ -407,8 +428,7 @@ static void update_gecos (const char *user, char *gecos)
 	if (setuid (0) != 0) {
 		fputs (_("Cannot change ID to root.\n"), stderr);
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	pwd_init ();
 
@@ -420,17 +440,13 @@ static void update_gecos (const char *user, char *gecos)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
+	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		pw_unlock ();
-		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 
 	/*
@@ -441,11 +457,10 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	pw = pw_locate (user);
 	if (NULL == pw) {
-		pw_unlock ();
 		fprintf (stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
 		         Prog, user, pw_dbname ());
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 
 	/*
@@ -461,10 +476,7 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (pw_update (&pwent) == 0) {
 		fputs (_("Error updating the password entry.\n"), stderr);
-		pw_unlock ();
-		SYSLOG ((LOG_ERR, "error updating passwd entry"));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 
 	/*
@@ -472,16 +484,14 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
-		pw_unlock ();
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
+	passwd_locked = false; /* If we fail to unlock, do not retry */
 	if (pw_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 }
 
@@ -548,8 +558,7 @@ static void check_fields (void)
 		fprintf (stderr, _("%s: name with non-ASCII characters: '%s'\n"), Prog, fullnm);
 	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid name: '%s'\n"), Prog, fullnm);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	err = valid_field (roomno, ":,=");
 	if (err > 0) {
@@ -557,20 +566,17 @@ static void check_fields (void)
 	} else if (err < 0) {
 		fprintf (stderr, _("%s: invalid room number: '%s'\n"),
 		         Prog, roomno);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	if (valid_field (workph, ":,=") != 0) {
 		fprintf (stderr, _("%s: invalid work phone: '%s'\n"),
 		         Prog, workph);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	if (valid_field (homeph, ":,=") != 0) {
 		fprintf (stderr, _("%s: invalid home phone: '%s'\n"),
 		         Prog, homeph);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	err = valid_field (slop, ":");
 	if (err > 0) {
@@ -579,8 +585,7 @@ static void check_fields (void)
 		fprintf (stderr,
 		         _("%s: '%s' contains illegal characters\n"),
 		         Prog, slop);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 }
 
@@ -638,7 +643,7 @@ int main (int argc, char **argv)
 		if (NULL == pw) {
 			fprintf (stderr, _("%s: user '%s' does not exist\n"), Prog,
 			         user);
-			exit (E_NOPERM);
+			fail_exit (E_NOPERM);
 		}
 	} else {
 		pw = get_my_pwent ();
@@ -646,7 +651,7 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (E_NOPERM);
+			fail_exit (E_NOPERM);
 		}
 		user = xstrdup (pw->pw_name);
 	}
@@ -670,7 +675,7 @@ int main (int argc, char **argv)
 			         ("%s: '%s' is the NIS master for this client.\n"),
 			         Prog, nis_master);
 		}
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 #endif
 
@@ -703,8 +708,7 @@ int main (int argc, char **argv)
 	if ((strlen (fullnm) + strlen (roomno) + strlen (workph) +
 	     strlen (homeph) + strlen (slop)) > (unsigned int) 80) {
 		fprintf (stderr, _("%s: fields too long\n"), Prog);
-		closelog ();
-		exit (E_NOPERM);
+		fail_exit (E_NOPERM);
 	}
 	snprintf (new_gecos, sizeof new_gecos, "%s,%s,%s,%s%s%s",
 	          fullnm, roomno, workph, homeph,
@@ -718,7 +722,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	closelog ();
