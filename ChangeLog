@@ -1,12 +1,17 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/usermod.c: Report failure to unlock the passwd or shadow
+	* src/pwunconv.c:  Report failure to unlock the passwd or shadow
 	file to stderr and syslog.
 
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/newusers.c: Report failure to unlock the passwd or shadow
-	file to stderr and syslog.
+	* src/usermod.c: Report failure to unlock files to stderr and
+	syslog.
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/newusers.c: Report failure to unlock files to stderr and
+	syslog.
 	* src/newusers.c: In case of error when files are open or closed,
 	indicate the failing file.
 	* src/newusers.c: Do not try to unlock the files manually since

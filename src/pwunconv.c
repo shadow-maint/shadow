@@ -51,15 +51,23 @@ static bool shadow_locked = false;
 static bool passwd_locked = false;
 
 /* local function prototypes */
-static void fail_exit (int);
+static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
 	if (shadow_locked) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
 	if (passwd_locked) {
-		pw_unlock ();
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
 	}
 	exit (status);
 }
@@ -164,8 +172,16 @@ int main (int argc, char **argv)
 		fail_exit (3);
 	}
 
-	spw_unlock ();
-	pw_unlock ();
+	if (spw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		/* continue */
+	}
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
 
 	nscd_flush_cache ("passwd");
 
