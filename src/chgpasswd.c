@@ -63,19 +63,48 @@ static long sha_rounds = 5000;
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
+static bool gshadow_locked = false;
 #endif
+static bool group_locked = false;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
 
 /* local function prototypes */
+static void fail_exit (int code);
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
 static void open_files (void);
 static void close_files (void);
+
+/*
+ * fail_exit - exit with a failure code after unlocking the files
+ */
+static void fail_exit (int code)
+{
+	if (group_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+	}
+
+#ifdef	SHADOWGRP
+	if (gshadow_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+	}
+#endif
+
+	exit (code);
+}
 
 /*
  * usage - display usage message and exit
@@ -225,29 +254,24 @@ static void check_perms (void)
 	struct passwd *pampw;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("chgpasswd", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -266,13 +290,13 @@ static void open_files (void)
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
-		exit (1);
+		fail_exit (1);
 	}
+	group_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		gr_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 #ifdef SHADOWGRP
@@ -281,15 +305,13 @@ static void open_files (void)
 		if (sgr_lock () == 0) {
 			fprintf (stderr, _("%s: cannot lock %s\n"),
 			         Prog, sgr_dbname ());
-			gr_unlock ();
-			exit (1);
+			fail_exit (1);
 		}
+		gshadow_locked = true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
-			gr_unlock ();
-			sgr_unlock ();
-			exit (1);
+			fail_exit (1);
 		}
 	}
 #endif
@@ -306,10 +328,15 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			gr_unlock ();
-			exit (1);
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+			fail_exit (1);
 		}
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+		gshadow_locked = false;
 	}
 #endif
 
@@ -317,9 +344,15 @@ static void close_files (void)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
-		exit (1);
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		fail_exit (1);
 	}
-	gr_unlock ();
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		/* continue */
+	}
+	group_locked = false;
 }
 
 int main (int argc, char **argv)
@@ -347,6 +380,8 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_flags(argc, argv);
+
+	OPENLOG ("chgpasswd");
 
 	check_perms ();
 
@@ -481,13 +516,7 @@ int main (int argc, char **argv)
 	if (0 != errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
-#ifdef SHADOWGRP
-		if (is_shadow_grp) {
-			sgr_unlock ();
-		}
-#endif
-		gr_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 	close_files ();
@@ -495,7 +524,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return (0);
