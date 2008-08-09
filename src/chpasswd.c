@@ -52,27 +52,54 @@
  * Global variables
  */
 static char *Prog;
-static bool cflg = false;
-static bool eflg = false;
+static bool cflg   = false;
+static bool eflg   = false;
 static bool md5flg = false;
-static bool sflg = false;
+static bool sflg   = false;
 
 static const char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
 static bool is_shadow_pwd;
+static bool passwd_locked = false;
+static bool shadow_locked = false;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
 
 /* local function prototypes */
+static void fail_exit (int code);
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
 static void open_files (void);
 static void close_files (void);
+
+/*
+ * fail_exit - exit with a failure code after unlocking the files
+ */
+static void fail_exit (int code)
+{
+	if (passwd_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+
+	if (shadow_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+	}
+
+	exit (code);
+}
 
 /*
  * usage - display usage message and exit
@@ -219,32 +246,27 @@ static void check_perms (void)
 {
 #ifdef USE_PAM
 	int retval = PAM_SUCCESS;
-
 	struct passwd *pampw;
+
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("chpasswd", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -263,13 +285,13 @@ static void open_files (void)
 	if (pw_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
-		exit (1);
+		fail_exit (1);
 	}
+	passwd_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		pw_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 	/* Do the same for the shadowed database, if it exist */
@@ -278,16 +300,14 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s\n"),
 			         Prog, spw_dbname ());
-			pw_unlock ();
-			exit (1);
+			fail_exit (1);
 		}
+		shadow_locked = true;
 		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
 			         Prog, spw_dbname ());
-			pw_unlock ();
-			spw_unlock ();
-			exit (1);
+			fail_exit (1);
 		}
 	}
 }
@@ -302,19 +322,30 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_dbname ());
-			pw_unlock ();
-			exit (1);
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+			fail_exit (1);
 		}
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+		shadow_locked = false;
 	}
 
 	if (pw_close () == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
-		exit (1);
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		fail_exit (1);
 	}
-	pw_unlock ();
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
+	passwd_locked = false;
 }
 
 int main (int argc, char **argv)
@@ -341,6 +372,8 @@ int main (int argc, char **argv)
 	(void) textdomain (PACKAGE);
 
 	process_flags (argc, argv);
+
+	OPENLOG ("chpasswd");
 
 	check_perms ();
 
@@ -469,11 +502,7 @@ int main (int argc, char **argv)
 	if (0 != errors) {
 		fprintf (stderr,
 		         _("%s: error detected, changes ignored\n"), Prog);
-		if (is_shadow_pwd) {
-			spw_unlock ();
-		}
-		pw_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 	close_files ();
@@ -481,7 +510,7 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 
 #ifdef USE_PAM
-	pam_end (pamh, PAM_SUCCESS);
+	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
 
 	return (0);

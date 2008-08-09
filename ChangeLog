@@ -1,5 +1,15 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chpasswd.c: Added fail_exit().
+	* src/chpasswd.c: Added support for syslog.
+	* src/chpasswd.c: Report failure to unlock files to stderr and
+	syslog.
+	* src/chpasswd.c: Simplify the PAM error handling.
+	* src/chpasswd.c: Report failure during *_close() to syslog.
+	* src/chpasswd.c: Ignore the return value or pam_end().
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chgpasswd.c: Added fail_exit().
 	* src/chgpasswd.c: Added support for syslog.
 	* src/chgpasswd.c: Report failure to unlock files to stderr and
