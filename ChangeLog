@@ -1,5 +1,14 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/pwck.c: Added fail_exit().
+	* src/pwck.c: Report failure to unlock files to stderr and
+	syslog.
+	* src/pwck.c: Report failure to sort to stderr, and exit with
+	E_CANTSORT.
+	* man/pwck.8.xml: Document return code 6 (E_CANTSORT).
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/vipw.c: Report failures to remove files to stderr.
 	* src/vipw.c: Report failures to unlock files to stderr.
 

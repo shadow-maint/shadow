@@ -58,6 +58,7 @@
 #define	E_CANTOPEN	3
 #define	E_CANTLOCK	4
 #define	E_CANTUPDATE	5
+#define	E_CANTSORT	6
 
 /*
  * Global variables
@@ -71,12 +72,16 @@ static bool use_system_spw_file = true;
 
 static bool is_shadow = false;
 
+static bool pw_locked  = false;
+static bool spw_locked = false;
+
 /* Options */
 static bool read_only = false;
 static bool sort_mode = false;
 static bool quiet = false;		/* don't report warnings, only errors */
 
 /* local function prototypes */
+static void fail_exit (int code);
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void open_files (void);
@@ -84,6 +89,31 @@ static void close_files (bool changed);
 static void check_pw_file (int *errors, bool *changed);
 static void check_spw_file (int *errors, bool *changed);
 
+/*
+ * fail_exit - do some cleanup and exit with the given error code
+ */
+static void fail_exit (int code)
+{
+	if (spw_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+	}
+
+	if (pw_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+
+	closelog ();
+
+	exit (code);
+}
 /*
  * usage - print syntax message and exit
  */
@@ -172,17 +202,19 @@ static void open_files (void)
 			if (use_system_pw_file) {
 				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
 			}
-			closelog ();
-			exit (E_CANTLOCK);
+			fail_exit (E_CANTLOCK);
 		}
-		if (is_shadow && (spw_lock () == 0)) {
-			fprintf (stderr, _("%s: cannot lock %s\n"),
-			         Prog, spw_file);
-			if (use_system_spw_file) {
-				SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
+		pw_locked = true;
+		if (is_shadow) {
+			if (spw_lock () == 0) {
+				fprintf (stderr, _("%s: cannot lock %s\n"),
+				         Prog, spw_file);
+				if (use_system_spw_file) {
+					SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
+				}
+				fail_exit (E_CANTLOCK);
 			}
-			closelog ();
-			exit (E_CANTLOCK);
+			spw_locked = true;
 		}
 	}
 
@@ -196,8 +228,7 @@ static void open_files (void)
 		if (use_system_pw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", pwd_file));
 		}
-		closelog ();
-		exit (E_CANTOPEN);
+		fail_exit (E_CANTOPEN);
 	}
 	if (is_shadow && (spw_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"),
@@ -205,8 +236,7 @@ static void open_files (void)
 		if (use_system_spw_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", spw_file));
 		}
-		closelog ();
-		exit (E_CANTOPEN);
+		fail_exit (E_CANTOPEN);
 	}
 }
 
@@ -228,15 +258,13 @@ static void close_files (bool changed)
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, pwd_file);
 			SYSLOG ((LOG_WARN, "failure while writing changes to %s", pwd_file));
-			closelog ();
-			exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE);
 		}
 		if (is_shadow && (spw_close () == 0)) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_file);
 			SYSLOG ((LOG_WARN, "failure while writing changes to %s", spw_file));
-			closelog ();
-			exit (E_CANTUPDATE);
+			fail_exit (E_CANTUPDATE);
 		}
 	}
 
@@ -244,9 +272,19 @@ static void close_files (bool changed)
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 	if (is_shadow) {
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
 	}
-	(void) pw_unlock ();
+	spw_locked = false;
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
+	pw_locked = false;
 }
 
 /*
@@ -620,9 +658,19 @@ int main (int argc, char **argv)
 	open_files ();
 
 	if (sort_mode) {
-		pw_sort ();
+		if (pw_sort () != 0) {
+			fprintf (stderr,
+			         _("%s: cannot sort entries in %s\n"),
+			         Prog, pw_dbname ());
+			fail_exit (E_CANTSORT);
+		}
 		if (is_shadow) {
-			spw_sort ();
+			if (spw_sort () != 0) {
+				fprintf (stderr,
+				         _("%s: cannot sort entries in %s\n"),
+				         Prog, spw_dbname ());
+				fail_exit (E_CANTSORT);
+			}
 		}
 		changed = true;
 	} else {
