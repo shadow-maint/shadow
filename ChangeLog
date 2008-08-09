@@ -1,3 +1,7 @@
+2008-08-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupmems.c: Harmonize the unlock failure messages.
+
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/pwck.c: Added fail_exit().

@@ -208,7 +208,7 @@ static void fail_exit (int code)
 	if (group_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot unlock %s\n"),
+			         _("%s: failed to unlock %s\n"),
 			         Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
@@ -305,7 +305,7 @@ int main (int argc, char **argv)
 		fail_exit (EXIT_GROUP_FILE);
 	}
 	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: cannot unlock %s\n"), Prog, gr_dbname ());
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
