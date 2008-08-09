@@ -1,3 +1,5 @@
+report nscd_flush_cache failures?
+
 passwd -l should lock the password, not the account.
 
 vipw: Test SHADOWGRP support before using gshadow features.
@@ -71,7 +73,8 @@ ALL:
 
 - newgrp: check the USE_PAM section.
 
-- groupmems: check reason for isgroup
+- groupmems:
+  * Add support for gshadow
 
 - newusers: doc for pw_gid not clear. Differentiate
             pw_gid specified and exist
