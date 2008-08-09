@@ -62,7 +62,7 @@ static bool quiet = false;
 /* local function prototypes */
 static void usage (void);
 static int create_backup_file (FILE *, const char *, struct stat *);
-static void vipwexit (const char *, int, int);
+static void vipwexit (const char *msg, int syserr, int ret);
 static void vipwedit (const char *, int (*)(void), int (*)(void));
 
 /*
@@ -136,10 +136,16 @@ static void vipwexit (const char *msg, int syserr, int ret)
 	int err = errno;
 
 	if (createedit) {
-		unlink (fileeditname);
+		if (unlink (fileeditname) != 0) {
+			fprintf (stderr, _("%s: failed to remove %s\n"), progname, fileeditname);
+			/* continue */
+		}
 	}
 	if (filelocked) {
-		(*unlock) ();
+		if ((*unlock) () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+			/* continue */
+		}
 	}
 	if (NULL != msg) {
 		fprintf (stderr, "%s: %s", progname, msg);
@@ -147,8 +153,9 @@ static void vipwexit (const char *msg, int syserr, int ret)
 	if (0 != syserr) {
 		fprintf (stderr, ": %s", strerror (err));
 	}
+	(void) fputs ("\n", stderr);
 	if (!quiet) {
-		fprintf (stdout, _("\n%s: %s is unchanged\n"), progname,
+		fprintf (stdout, _("%s: %s is unchanged\n"), progname,
 			 filename);
 	}
 	exit (ret);
@@ -262,13 +269,15 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	link (file, filebackup);
 	if (rename (fileedit, file) == -1) {
 		fprintf (stderr,
-			 _
-			 ("%s: can't restore %s: %s (your changes are in %s)\n"),
-			 progname, file, strerror (errno), fileedit);
+		         _("%s: can't restore %s: %s (your changes are in %s)\n"),
+		         progname, file, strerror (errno), fileedit);
 		vipwexit (0, 0, 1);
 	}
 
-	(*file_unlock) ();
+	if ((*file_unlock) () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+		/* continue */
+	}
 }
 
 int main (int argc, char **argv)

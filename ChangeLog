@@ -1,5 +1,10 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/vipw.c: Report failures to remove files to stderr.
+	* src/vipw.c: Report failures to unlock files to stderr.
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmems.c: Added syslog support.
 	* src/groupmems.c: members() renamed display_members() to
 	avoid name clash with its members argument.
