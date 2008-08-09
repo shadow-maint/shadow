@@ -630,20 +630,20 @@ static void open_files (void)
 	gshadow_locked = true;
 #endif
 
-	if (pw_open () == 0) {
+	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
 		fail_exit (1);
 	}
-	if (is_shadow && (spw_open () == 0)) {
+	if (is_shadow && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
 		fail_exit (1);
 	}
-	if (gr_open () == 0) {
+	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (1);
 	}
 #ifdef SHADOWGRP
-	if (is_shadow_grp && (sgr_open () == 0)) {
+	if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 		fail_exit (1);
 	}
