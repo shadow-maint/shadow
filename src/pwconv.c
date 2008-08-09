@@ -83,6 +83,7 @@
 /*
  * Global variables
  */
+static char *Prog;
 static bool shadow_locked = false;
 static bool passwd_locked = false;
 
@@ -117,6 +118,8 @@ int main (int argc, char **argv)
 	const struct spwd *sp;
 	struct spwd spent;
 	char *Prog = argv[0];
+
+	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
