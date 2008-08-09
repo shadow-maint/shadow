@@ -1,5 +1,16 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmems.c: Added syslog support.
+	* src/groupmems.c: members() renamed display_members() to
+	avoid name clash with its members argument.
+	* src/groupmems.c: Report failure to unlock to syslog.
+	* src/groupmems.c: Harmonize error messages.
+	* src/groupmems.c: Report failures to write the new group file to
+	syslog (gr_close() failure).
+	* src/groupmems.c: Don't use fail_exit for non-failure exit.
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chsh.c: Added fail_exit().
 	* src/chsh.c: Use fail_exit() instead of exit(), this avoid
 	calling closelog() every times.

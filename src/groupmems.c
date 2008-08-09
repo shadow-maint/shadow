@@ -71,7 +71,7 @@ static char *Prog;
 static bool group_locked = false;
 
 static char *whoami (void);
-static void members (char **members);
+static void display_members (char **members);
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
@@ -94,7 +94,7 @@ static char *whoami (void)
 	}
 }
 
-static void members (char **members)
+static void display_members (char **members)
 {
 	int i;
 
@@ -208,14 +208,16 @@ static void fail_exit (int code)
 	if (group_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr,
-			         _("%s: unable to unlock group file\n"),
-			         Prog);
+			         _("%s: cannot unlock %s\n"),
+			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
 		}
 	}
 	exit (code);
 }
 
-void main (int argc, char **argv) 
+int main (int argc, char **argv) 
 {
 	char *name;
 	struct group *grp;
@@ -224,6 +226,8 @@ void main (int argc, char **argv)
 	 * Get my name so that I can use it to report errors.
 	 */
 	Prog = Basename (argv[0]);
+
+	OPENLOG ("groupmems");
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
@@ -250,27 +254,28 @@ void main (int argc, char **argv)
 
 		if (gr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: unable to lock group file\n"), Prog);
+			         _("%s: cannot lock %s\n"),
+			         Prog, gr_dbname ());
 			fail_exit (EXIT_GROUP_FILE);
 		}
 		group_locked = true;
 	}
 
 	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
-		fprintf (stderr, _("%s: unable to open group file\n"), Prog);
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
 	grp = (struct group *) gr_locate (name);
 
 	if (NULL == grp) {
-		fprintf (stderr, _("%s: '%s' not found in /etc/group\n"),
-		         Prog, name);
+		fprintf (stderr, _("%s: group '%s' does not exist in %s\n"),
+		         Prog, name, gr_dbname ());
 		fail_exit (EXIT_INVALID_GROUP);
 	}
 
 	if (list) {
-		members (grp->gr_mem);
+		display_members (grp->gr_mem);
 	} else if (NULL != adduser) {
 		if (is_on_list (grp->gr_mem, adduser)) {
 			fprintf (stderr,
@@ -295,10 +300,16 @@ void main (int argc, char **argv)
 	}
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: unable to close group file\n"), Prog);
+		fprintf (stderr, _("%s: failure while writing %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing %s", gr_dbname ()));
 		fail_exit (EXIT_GROUP_FILE);
 	}
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: cannot unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		/* continue */
+	}
 
-	fail_exit (EXIT_SUCCESS);
+	exit (EXIT_SUCCESS);
 }
 
