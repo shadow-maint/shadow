@@ -67,10 +67,12 @@ static bool sflg = false;	/* -s - set shell from command line  */
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
+static bool pw_locked = false;
 
 /* external identifiers */
 
 /* local function prototypes */
+static void fail_exit (int code);
 static void usage (void);
 static void new_fields (void);
 static bool shell_is_listed (const char *);
@@ -78,6 +80,24 @@ static bool is_restricted_shell (const char *);
 static void process_flags (int argc, char **argv);
 static void check_perms (const struct passwd *pw);
 static void update_shell (const char *user, char *loginsh);
+
+/*
+ * fail_exit - do some cleanup and exit with the given error code
+ */
+static void fail_exit (int code)
+{
+	if (pw_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+
+	closelog ();
+
+	exit (code);
+}
 
 /*
  * usage - print command line syntax and exit
@@ -241,11 +261,10 @@ static void check_perms (const struct passwd *pw)
 	 */
 	if (!amroot && pw->pw_uid != getuid ()) {
 		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
-		closelog ();
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		exit (1);
+		fail_exit (1);
 	}
 
 	/*
@@ -254,11 +273,10 @@ static void check_perms (const struct passwd *pw)
 	 */
 	if (!amroot && is_restricted_shell (pw->pw_shell)) {
 		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
-		closelog ();
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		exit (1);
+		fail_exit (1);
 	}
 #ifdef WITH_SELINUX
 	/*
@@ -269,11 +287,10 @@ static void check_perms (const struct passwd *pw)
 	    && (is_selinux_enabled () > 0)
 	    && (selinux_check_passwd_access (PASSWD__CHSH) != 0)) {
 		SYSLOG ((LOG_WARN, "can't change shell for '%s'", pw->pw_name));
-		closelog ();
 		fprintf (stderr,
 		         _("You may not change the shell for '%s'.\n"),
 		         pw->pw_name);
-		exit (1);
+		fail_exit (1);
 	}
 #endif
 
@@ -292,29 +309,24 @@ static void check_perms (const struct passwd *pw)
 	retval = PAM_SUCCESS;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_start ("chsh", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (PAM_SUCCESS != retval) {
+		(void) pam_end (pamh, retval);
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_NOPERM);
 	}
@@ -341,9 +353,8 @@ static void update_shell (const char *user, char *newshell)
 	 */
 	if (setuid (0) != 0) {
 		SYSLOG ((LOG_ERR, "can't setuid(0)"));
-		closelog ();
 		fputs (_("Cannot change ID to root.\n"), stderr);
-		exit (1);
+		fail_exit (1);
 	}
 	pwd_init ();
 
@@ -352,18 +363,16 @@ static void update_shell (const char *user, char *newshell)
 	 * the password file. Get a lock on the file and open it.
 	 */
 	if (pw_lock () == 0) {
-		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
-		closelog ();
 		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		exit (1);
+		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
+		fail_exit (1);
 	}
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
-		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
-		closelog ();
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		pw_unlock ();
-		exit (1);
+		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
+		fail_exit (1);
 	}
 
 	/*
@@ -374,11 +383,10 @@ static void update_shell (const char *user, char *newshell)
 	 */
 	pw = pw_locate (user);
 	if (NULL == pw) {
-		pw_unlock ();
 		fprintf (stderr,
 		         _("%s: user '%s' does not exist in %s\n"),
 		         Prog, user, pw_dbname ());
-		exit (1);
+		fail_exit (1);
 	}
 
 	/*
@@ -394,29 +402,24 @@ static void update_shell (const char *user, char *newshell)
 	 */
 	if (pw_update (&pwent) == 0) {
 		SYSLOG ((LOG_ERR, "error updating passwd entry"));
-		closelog ();
 		fputs (_("Error updating the password entry.\n"), stderr);
-		pw_unlock ();
-		exit (1);
+		fail_exit (1);
 	}
 
 	/*
 	 * Changes have all been made, so commit them and unlock the file.
 	 */
 	if (pw_close () == 0) {
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
-		closelog ();
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
-		pw_unlock ();
-		exit (1);
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
+		fail_exit (1);
 	}
 	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
-		closelog ();
-		fprintf (stderr,
-		         _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		exit (1);
+		/* continue */
 	}
+	pw_locked= false;
 }
 
 /*
@@ -462,16 +465,15 @@ int main (int argc, char **argv)
 		if (NULL == pw) {
 			fprintf (stderr,
 			         _("%s: user '%s' does not exist\n"), Prog, user);
-			exit (1);
+			fail_exit (1);
 		}
 	} else {
 		pw = get_my_pwent ();
 		if (NULL == pw) {
 			fprintf (stderr,
-			         _
-			         ("%s: Cannot determine your user name.\n"),
+			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
-			exit (1);
+			fail_exit (1);
 		}
 		user = xstrdup (pw->pw_name);
 	}
@@ -491,11 +493,10 @@ int main (int argc, char **argv)
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "passwd.byname", &nis_master)) {
 			fprintf (stderr,
-			         _
-			         ("%s: '%s' is the NIS master for this client.\n"),
+			         _("%s: '%s' is the NIS master for this client.\n"),
 			         Prog, nis_master);
 		}
-		exit (1);
+		fail_exit (1);
 	}
 #endif
 
@@ -526,15 +527,13 @@ int main (int argc, char **argv)
 	 */
 	if (valid_field (loginsh, ":,=") != 0) {
 		fprintf (stderr, _("%s: Invalid entry: %s\n"), Prog, loginsh);
-		closelog ();
-		exit (1);
+		fail_exit (1);
 	}
 	if (   !amroot
 	    && (   is_restricted_shell (loginsh)
 	        || (access (loginsh, X_OK) != 0))) {
-		fprintf (stderr, _("%s is an invalid shell.\n"), loginsh);
-		closelog ();
-		exit (1);
+		fprintf (stderr, _("%s: %s is an invalid shell.\n"), Prog, loginsh);
+		fail_exit (1);
 	}
 
 	update_shell (user, loginsh);

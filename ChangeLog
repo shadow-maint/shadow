@@ -1,5 +1,15 @@
 2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chsh.c: Added fail_exit().
+	* src/chsh.c: Use fail_exit() instead of exit(), this avoid
+	calling closelog() every times.
+	* src/chsh.c: Ignore the return value or pam_end().
+	* src/chsh.c: Simplify the PAM error handling.
+	* src/chsh.c: Report failure to unlock files to stderr and
+	syslog.
+
+2008-08-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chpasswd.c: Added fail_exit().
 	* src/chpasswd.c: Added support for syslog.
 	* src/chpasswd.c: Report failure to unlock files to stderr and
