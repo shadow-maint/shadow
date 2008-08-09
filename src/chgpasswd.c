@@ -43,6 +43,7 @@
 #include "pam_defs.h"
 #endif				/* USE_PAM */
 #include "defines.h"
+#include "exitcodes.h"
 #include "nscd.h"
 #include "prototypes.h"
 #include "groupio.h"
