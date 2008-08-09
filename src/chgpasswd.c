@@ -130,7 +130,7 @@ static void usage (void)
 	                   "                                crypt algorithms\n")
 #endif
 	                 );
-	exit (1);
+	exit (E_USAGE);
 }
 
 /*
@@ -221,12 +221,12 @@ static void check_flags (void)
 	}
 
 	if (cflg) {
-		if (   0 != strcmp (crypt_method, "DES")
-		    && 0 != strcmp (crypt_method, "MD5")
-		    && 0 != strcmp (crypt_method, "NONE")
+		if (   (0 != strcmp (crypt_method, "DES"))
+		    && (0 != strcmp (crypt_method, "MD5"))
+		    && (0 != strcmp (crypt_method, "NONE"))
 #ifdef USE_SHA_CRYPT
-		    && 0 != strcmp (crypt_method, "SHA256")
-		    && 0 != strcmp (crypt_method, "SHA512")
+		    && (0 != strcmp (crypt_method, "SHA256"))
+		    && (0 != strcmp (crypt_method, "SHA512"))
 #endif
 		    ) {
 			fprintf (stderr,
@@ -379,7 +379,7 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	process_flags(argc, argv);
+	process_flags (argc, argv);
 
 	OPENLOG ("chgpasswd");
 
@@ -498,8 +498,7 @@ int main (int argc, char **argv)
 
 		if (0 == ok) {
 			fprintf (stderr,
-			         _
-			         ("%s: line %d: cannot update group entry\n"),
+			         _("%s: line %d: cannot update group entry\n"),
 			         Prog, line);
 			errors++;
 			continue;
