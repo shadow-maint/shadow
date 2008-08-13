@@ -1,5 +1,11 @@
 2008-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/pl/Makefile.am: Do not build the Polish translation of
+	login.1 and su.1 (not enough translated). See
+	http://bugs.debian.org/491460
+
+2008-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/shadow.5.xml: Fix typo. The password must be changed before
 	the maximum number of days, not after.
 

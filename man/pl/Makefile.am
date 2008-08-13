@@ -20,7 +20,6 @@ man_MANS = \
 	grpconv.8 \
 	grpunconv.8 \
 	lastlog.8 \
-	login.1 \
 	login.defs.5 \
 	logoutd.8 \
 	newgrp.1 \
@@ -32,7 +31,6 @@ man_MANS = \
 	pwunconv.8 \
 	sg.1 \
 	shadow.5 \
-	su.1 \
 	suauth.5 \
 	useradd.8 \
 	userdel.8 \
