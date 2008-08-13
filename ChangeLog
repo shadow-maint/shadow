@@ -1,3 +1,8 @@
+2008-08-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/shadow.5.xml: Fix typo. The password must be changed before
+	the maximum number of days, not after.
+
 2008-08-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Harmonize the unlock failure messages.

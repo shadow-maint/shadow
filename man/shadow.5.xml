@@ -77,7 +77,7 @@
     <para>
       The date of the last password change is given as the number of days
       since Jan 1, 1970. The password may not be changed again until the
-      proper number of days have passed, and must be changed after the
+      proper number of days have passed, and must be changed before the
       maximum number of days. If the minimum number of days required is
       greater than the maximum number of day allowed, this password may not
       be changed by the user.
