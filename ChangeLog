@@ -1,3 +1,8 @@
+2008-08-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/po/pl.po: Fix typo inthe Polish translation (see
+	http://bugs.debian.org/491460)
+
 2008-08-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/pl/Makefile.am: Do not build the Polish translation of
