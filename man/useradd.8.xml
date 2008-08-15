@@ -463,7 +463,10 @@
     <para>
       Usernames must begin with a lower case letter or an underscore, and
       only lower case letters, underscores, dashes, and dollar signs may
-      follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]
+      follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]?
+    </para>
+    <para>
+      Usernames may only be up to 32 characters long.
     </para>
   </refsect1>
 
