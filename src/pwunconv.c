@@ -48,22 +48,22 @@
  * Global variables
  */
 static char *Prog;
-static bool shadow_locked = false;
-static bool passwd_locked = false;
+static bool spw_locked = false;
+static bool pw_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
-	if (shadow_locked) {
+	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
 	}
-	if (passwd_locked) {
+	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
@@ -97,7 +97,7 @@ int main (int argc, char **argv)
 		         Prog, pw_dbname ());
 		fail_exit (5);
 	}
-	passwd_locked = true;
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
@@ -111,7 +111,7 @@ int main (int argc, char **argv)
 		         Prog, spw_dbname ());
 		fail_exit (5);
 	}
-	shadow_locked = true;
+	spw_locked = true;
 	if (spw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),

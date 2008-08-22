@@ -72,7 +72,7 @@ static bool oflg = false;		/* -o - set other information        */
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
 #endif
-static bool passwd_locked = false;
+static bool pw_locked = false;
 
 /*
  * External identifiers
@@ -94,14 +94,14 @@ static void get_old_fields (const char *gecos);
  */
 static void fail_exit (int code)
 {
-	if (passwd_locked) {
+	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
 		}
 	}
-	passwd_locked = false;
+	pw_locked = false;
 
 	closelog ();
 
@@ -442,7 +442,7 @@ static void update_gecos (const char *user, char *gecos)
 		         Prog, pw_dbname ());
 		fail_exit (E_NOPERM);
 	}
-	passwd_locked = true;
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
@@ -487,7 +487,7 @@ static void update_gecos (const char *user, char *gecos)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
-	passwd_locked = false; /* If we fail to unlock, do not retry */
+	pw_locked = false; /* If we fail to unlock, do not retry */
 	if (pw_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));

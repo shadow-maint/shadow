@@ -68,7 +68,7 @@ static bool purge = false;
 static bool list = false;
 static int exclusive = 0;
 static char *Prog;
-static bool group_locked = false;
+static bool gr_locked = false;
 
 static char *whoami (void);
 static void display_members (char **members);
@@ -205,7 +205,7 @@ static void check_perms (void)
 
 static void fail_exit (int code)
 {
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr,
 			         _("%s: failed to unlock %s\n"),
@@ -258,7 +258,7 @@ int main (int argc, char **argv)
 			         Prog, gr_dbname ());
 			fail_exit (EXIT_GROUP_FILE);
 		}
-		group_locked = true;
+		gr_locked = true;
 	}
 
 	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {

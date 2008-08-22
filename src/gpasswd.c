@@ -59,9 +59,9 @@ static char *Prog;
 /* Indicate if shadow groups are enabled on the system
  * (/etc/gshadow present) */
 static bool is_shadowgrp;
-static bool gshadow_locked = false;
+static bool sgr_locked = false;
 #endif
-static bool group_locked = false;
+static bool gr_locked = false;
 
 /* Flags set by options */
 static bool aflg = false;
@@ -160,7 +160,7 @@ static RETSIGTYPE catch_signals (int killed)
  */
 static void fail_exit (int status)
 {
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
@@ -172,7 +172,7 @@ static void fail_exit (int status)
 		}
 	}
 #ifdef SHADOWGRP
-	if (gshadow_locked) {
+	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
@@ -378,7 +378,7 @@ static void open_files (void)
 #endif
 		fail_exit (1);
 	}
-	group_locked = true;
+	gr_locked = true;
 #ifdef SHADOWGRP
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
@@ -392,7 +392,7 @@ static void open_files (void)
 #endif
 			fail_exit (1);
 		}
-		gshadow_locked = true;
+		sgr_locked = true;
 	}
 #endif
 	if (gr_open (O_RDWR) == 0) {
@@ -460,7 +460,7 @@ static void close_files (void)
 #endif
 			/* continue */
 		}
-		gshadow_locked = false;
+		sgr_locked = false;
 	}
 #endif
 	if (gr_unlock () == 0) {
@@ -473,7 +473,7 @@ static void close_files (void)
 #endif
 		/* continue */
 	}
-	group_locked = false;
+	gr_locked = false;
 }
 
 /*

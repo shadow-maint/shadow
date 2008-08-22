@@ -80,11 +80,11 @@ static bool is_shadow_pwd;
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
-static bool gshadow_locked = false;
+static bool sgr_locked = false;
 #endif
-static bool passwd_locked  = false;
-static bool group_locked   = false;
-static bool shadow_locked  = false;
+static bool pw_locked  = false;
+static bool gr_locked   = false;
+static bool spw_locked  = false;
 
 /* local function prototypes */
 static void usage (void);
@@ -327,7 +327,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
 	}
-	passwd_locked = false;
+	pw_locked = false;
 
 	if (is_shadow_pwd) {
 		if (spw_close () == 0) {
@@ -341,7 +341,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
-		shadow_locked = false;
+		spw_locked = false;
 	}
 
 	if (gr_close () == 0) {
@@ -354,7 +354,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
-	group_locked = false;
+	gr_locked = false;
 
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
@@ -370,7 +370,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
 		}
-		gshadow_locked = false;
+		sgr_locked = false;
 	}
 #endif
 }
@@ -380,21 +380,21 @@ static void close_files (void)
  */
 static void fail_exit (int code)
 {
-	if (passwd_locked) {
+	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 			/* continue */
 		}
 	}
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 			/* continue */
 		}
 	}
-	if (shadow_locked) {
+	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
@@ -402,7 +402,7 @@ static void fail_exit (int code)
 		}
 	}
 #ifdef	SHADOWGRP
-	if (gshadow_locked) {
+	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
@@ -439,7 +439,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
-	passwd_locked = true;
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
@@ -462,7 +462,7 @@ static void open_files (void)
 #endif
 			fail_exit (E_PW_UPDATE);
 		}
-		shadow_locked = true;
+		spw_locked = true;
 		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
@@ -486,7 +486,7 @@ static void open_files (void)
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
-	group_locked = true;
+	gr_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 #ifdef WITH_AUDIT
@@ -509,7 +509,7 @@ static void open_files (void)
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
-		gshadow_locked= true;
+		sgr_locked= true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());

@@ -64,9 +64,9 @@ static long sha_rounds = 5000;
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
-static bool gshadow_locked = false;
+static bool sgr_locked = false;
 #endif
-static bool group_locked = false;
+static bool gr_locked = false;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -86,7 +86,7 @@ static void close_files (void);
  */
 static void fail_exit (int code)
 {
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
@@ -95,7 +95,7 @@ static void fail_exit (int code)
 	}
 
 #ifdef	SHADOWGRP
-	if (gshadow_locked) {
+	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
@@ -294,7 +294,7 @@ static void open_files (void)
 		         Prog, gr_dbname ());
 		fail_exit (1);
 	}
-	group_locked = true;
+	gr_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
@@ -310,7 +310,7 @@ static void open_files (void)
 			         Prog, sgr_dbname ());
 			fail_exit (1);
 		}
-		gshadow_locked = true;
+		sgr_locked = true;
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr, _("%s: cannot open %s\n"),
 			         Prog, sgr_dbname ());
@@ -339,7 +339,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 			/* continue */
 		}
-		gshadow_locked = false;
+		sgr_locked = false;
 	}
 #endif
 
@@ -355,7 +355,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 		/* continue */
 	}
-	group_locked = false;
+	gr_locked = false;
 }
 
 int main (int argc, char **argv)

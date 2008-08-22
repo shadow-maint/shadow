@@ -61,8 +61,8 @@ static const char *crypt_method = NULL;
 static long sha_rounds = 5000;
 
 static bool is_shadow_pwd;
-static bool passwd_locked = false;
-static bool shadow_locked = false;
+static bool pw_locked = false;
+static bool spw_locked = false;
 
 #ifdef USE_PAM
 static pam_handle_t *pamh = NULL;
@@ -82,7 +82,7 @@ static void close_files (void);
  */
 static void fail_exit (int code)
 {
-	if (passwd_locked) {
+	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
@@ -90,7 +90,7 @@ static void fail_exit (int code)
 		}
 	}
 
-	if (shadow_locked) {
+	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
@@ -288,7 +288,7 @@ static void open_files (void)
 		         Prog, pw_dbname ());
 		fail_exit (1);
 	}
-	passwd_locked = true;
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
@@ -303,7 +303,7 @@ static void open_files (void)
 			         Prog, spw_dbname ());
 			fail_exit (1);
 		}
-		shadow_locked = true;
+		spw_locked = true;
 		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
@@ -331,7 +331,7 @@ static void close_files (void)
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 			/* continue */
 		}
-		shadow_locked = false;
+		spw_locked = false;
 	}
 
 	if (pw_close () == 0) {
@@ -346,7 +346,7 @@ static void close_files (void)
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
 	}
-	passwd_locked = false;
+	pw_locked = false;
 }
 
 int main (int argc, char **argv)

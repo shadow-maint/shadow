@@ -54,15 +54,15 @@
 /*
  * Global variables
  */
-static bool group_locked   = false;
-static bool gshadow_locked = false;
+static bool gr_locked   = false;
+static bool sgr_locked = false;
 
 /* local function prototypes */
 static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
@@ -70,7 +70,7 @@ static void fail_exit (int status)
 		}
 	}
 
-	if (gshadow_locked) {
+	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
@@ -102,7 +102,7 @@ int main (int argc, char **argv)
 		         Prog, gr_dbname ());
 		fail_exit (5);
 	}
-	group_locked = true;
+	gr_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
@@ -115,7 +115,7 @@ int main (int argc, char **argv)
 		         Prog, sgr_dbname ());
 		fail_exit (5);
 	}
-	gshadow_locked = true;
+	sgr_locked = true;
 	if (sgr_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
@@ -164,20 +164,16 @@ int main (int argc, char **argv)
 		fail_exit (3);
 	}
 
-	if (group_locked) {
-		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
-			/* continue */
-		}
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		/* continue */
 	}
 
-	if (gshadow_locked) {
-		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
-			/* continue */
-		}
+	if (sgr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+		/* continue */
 	}
 
 	nscd_flush_cache ("group");

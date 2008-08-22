@@ -59,9 +59,9 @@ static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP
 static bool is_shadow_grp;
-static bool gshadow_locked = false;
+static bool sgr_locked = false;
 #endif
-static bool group_locked = false;
+static bool gr_locked = false;
 
 /*
  * exit status values
@@ -94,7 +94,7 @@ static void usage (void)
  */
 static void fail_exit (int code)
 {
-	if (group_locked) {
+	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
@@ -107,7 +107,7 @@ static void fail_exit (int code)
 		}
 	}
 #ifdef	SHADOWGRP
-	if (gshadow_locked) {
+	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
@@ -189,7 +189,7 @@ static void close_files (void)
 #endif
 		/* continue */
 	}
-	group_locked = false;
+	gr_locked = false;
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close () == 0)) {
@@ -208,7 +208,7 @@ static void close_files (void)
 #endif
 			/* continue */
 		}
-		gshadow_locked = false;
+		sgr_locked = false;
 	}
 #endif				/* SHADOWGRP */
 }
@@ -226,7 +226,7 @@ static void open_files (void)
 		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
-	group_locked = true;
+	gr_locked = true;
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
@@ -241,7 +241,7 @@ static void open_files (void)
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
-		gshadow_locked = true;
+		sgr_locked = true;
 		if (sgr_open (O_RDWR) == 0)) {
 			fprintf (stderr,
 			         _("%s: cannot open %s\n"),
