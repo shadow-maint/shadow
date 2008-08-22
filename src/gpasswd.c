@@ -662,7 +662,7 @@ static void get_group (struct group *gr)
 	if (is_shadowgrp) {
 		if (sgr_open (O_RDONLY) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"), Prog, sgr_dbmane ());
+			         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
