@@ -1,9 +1,5 @@
 report nscd_flush_cache failures?
 
-passwd -l should lock the password, not the account.
-
-vipw: Test SHADOWGRP support before using gshadow features.
-
 PAM: add support for customization of the PAM support (i.e. support the
 Debian PAM configuration)
 
