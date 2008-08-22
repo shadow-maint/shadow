@@ -304,7 +304,7 @@ static void grp_update (void)
 	if (is_shadow_grp && nflg && (sgr_remove (group_name) == 0)) {
 		fprintf (stderr,
 		         _("%s: cannot remove entry '%s' from %s\n"),
-		         Prog, sgr_dbname ());
+		         Prog, group_name, sgr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting group",
@@ -528,7 +528,7 @@ static void close_files (void)
 	gr_locked = false;
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
-		if (sgr_close () == 0)) {
+		if (sgr_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
@@ -545,7 +545,7 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
-			              group, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID, 0);
 #endif
 			/* continue */
 		}
