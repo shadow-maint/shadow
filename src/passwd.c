@@ -515,7 +515,6 @@ static void update_noshadow (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 		exit (E_PWDBUSY);
 	}
 	if (pw_open (O_RDWR) == 0) {
@@ -561,7 +560,6 @@ static void update_shadow (void)
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot lock %s", spw_dbname ()));
 		exit (E_PWDBUSY);
 	}
 	if (spw_open (O_RDWR) == 0) {

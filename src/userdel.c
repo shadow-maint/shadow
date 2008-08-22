@@ -429,7 +429,9 @@ static void fail_exit (int code)
 static void open_files (void)
 {
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking password file",
@@ -451,7 +453,8 @@ static void open_files (void)
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, spw_dbname ());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "locking shadow password file",
@@ -462,7 +465,8 @@ static void open_files (void)
 		shadow_locked = true;
 		if (spw_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+			         _("%s: cannot open %s\n"),
+			         Prog, spw_dbname ());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "opening shadow password file",
@@ -473,7 +477,8 @@ static void open_files (void)
 	}
 	if (gr_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking group file",
@@ -495,7 +500,8 @@ static void open_files (void)
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "locking shadow group file",

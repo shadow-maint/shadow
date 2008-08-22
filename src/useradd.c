@@ -1327,7 +1327,9 @@ static void close_files (void)
 static void open_files (void)
 {
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		exit (E_PW_UPDATE);
 	}
 	passwd_locked = true;
@@ -1338,7 +1340,7 @@ static void open_files (void)
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"),
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
 			fail_exit (E_PW_UPDATE);
 		}
@@ -1355,7 +1357,9 @@ static void open_files (void)
 	 * Lock and open the group file.
 	 */
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 	group_locked = true;
@@ -1367,7 +1371,7 @@ static void open_files (void)
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"),
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}

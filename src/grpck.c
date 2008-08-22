@@ -211,21 +211,17 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (gr_lock () == 0) {
-			fprintf (stderr, _("%s: cannot lock %s\n"),
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, grp_file);
-			if (use_system_grp_file) {
-				SYSLOG ((LOG_WARN, "cannot lock %s", grp_file));
-			}
 			closelog ();
 			exit (E_CANT_LOCK);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_lock () == 0)) {
-			fprintf (stderr, _("%s: cannot lock %s\n"),
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_file);
-			if (use_system_sgr_file) {
-				SYSLOG ((LOG_WARN, "cannot lock %s", sgr_file));
-			}
 			closelog ();
 			exit (E_CANT_LOCK);
 		}

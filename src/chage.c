@@ -561,13 +561,13 @@ static void open_files (bool readonly)
 	 * file entries into memory. Then we get a pointer to the password
 	 * file entry for the requested user.
 	 */
-	if (!readonly && (pw_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot lock %s", pw_dbname ()));
-		fail_exit (E_NOPERM);
-	}
 	if (!readonly) {
+		if (pw_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, pw_dbname ());
+			fail_exit (E_NOPERM);
+		}
 		pw_locked = true;
 	}
 	if (pw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
@@ -582,13 +582,13 @@ static void open_files (bool readonly)
 	 * does not have to exist in this case; a new entry will be created
 	 * for this user if one does not exist already.
 	 */
-	if (!readonly && (spw_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot lock %s", spw_dbname ()));
-		fail_exit (E_NOPERM);
-	}
 	if (!readonly) {
+		if (spw_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, spw_dbname ());
+			fail_exit (E_NOPERM);
+		}
 		spw_locked = true;
 	}
 	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {

@@ -368,8 +368,9 @@ static void check_flags (int argc, int opt_index)
 static void open_files (void)
 {
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot lock %s", gr_dbname ()));
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "locking /etc/group",
@@ -382,8 +383,8 @@ static void open_files (void)
 	if (is_shadowgrp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "cannot lock %s", sgr_dbname ()));
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "locking /etc/gshadow",

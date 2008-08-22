@@ -93,7 +93,7 @@ int main (int argc, char **argv)
 
 	if (pw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"),
+		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
 		fail_exit (5);
 	}
@@ -107,7 +107,7 @@ int main (int argc, char **argv)
 
 	if (spw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"),
+		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, spw_dbname ());
 		fail_exit (5);
 	}

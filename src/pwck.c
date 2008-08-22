@@ -197,21 +197,17 @@ static void open_files (void)
 	 */
 	if (!read_only) {
 		if (pw_lock () == 0) {
-			fprintf (stderr, _("%s: cannot lock %s\n"),
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, pwd_file);
-			if (use_system_pw_file) {
-				SYSLOG ((LOG_WARN, "cannot lock %s", pwd_file));
-			}
 			fail_exit (E_CANTLOCK);
 		}
 		pw_locked = true;
 		if (is_shadow) {
 			if (spw_lock () == 0) {
-				fprintf (stderr, _("%s: cannot lock %s\n"),
+				fprintf (stderr,
+				         _("%s: cannot lock %s; try again later.\n"),
 				         Prog, spw_file);
-				if (use_system_spw_file) {
-					SYSLOG ((LOG_WARN, "cannot lock %s", spw_file));
-				}
 				fail_exit (E_CANTLOCK);
 			}
 			spw_locked = true;

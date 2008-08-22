@@ -290,7 +290,8 @@ static void open_files (void)
 	 */
 	if (gr_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 		fail_exit (1);
 	}
 	group_locked = true;
@@ -304,7 +305,8 @@ static void open_files (void)
 	/* Do the same for the shadowed database, if it exist */
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
-			fprintf (stderr, _("%s: cannot lock %s\n"),
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 			fail_exit (1);
 		}

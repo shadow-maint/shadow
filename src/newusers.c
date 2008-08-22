@@ -608,23 +608,31 @@ static void open_files (void)
 	 * it gets locked, assume the others can be locked right away.
 	 */
 	if (pw_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		fail_exit (1);
 	}
 	passwd_locked = true;
 	if (is_shadow && (spw_lock () == 0)) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, spw_dbname ());
 		fail_exit (1);
 	}
 	shadow_locked = true;
 	if (gr_lock () == 0) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 		fail_exit (1);
 	}
 	group_locked = true;
 #ifdef SHADOWGRP
 	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr, _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+		fprintf (stderr,
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, sgr_dbname ());
 		fail_exit (1);
 	}
 	gshadow_locked = true;

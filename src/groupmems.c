@@ -254,7 +254,7 @@ int main (int argc, char **argv)
 
 		if (gr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"),
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, gr_dbname ());
 			fail_exit (EXIT_GROUP_FILE);
 		}

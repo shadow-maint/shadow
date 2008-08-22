@@ -365,7 +365,6 @@ static void update_shell (const char *user, char *newshell)
 	if (pw_lock () == 0) {
 		fprintf (stderr, _("%s: cannot lock %s; try again later.\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot lock %s", pw_dbname ()));
 		fail_exit (1);
 	}
 	pw_locked = true;

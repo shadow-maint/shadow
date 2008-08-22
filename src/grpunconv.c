@@ -98,7 +98,8 @@ int main (int argc, char **argv)
 
 	if (gr_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, gr_dbname ());
 		fail_exit (5);
 	}
 	group_locked = true;
@@ -110,7 +111,8 @@ int main (int argc, char **argv)
 
 	if (sgr_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, sgr_dbname ());
 		fail_exit (5);
 	}
 	gshadow_locked = true;

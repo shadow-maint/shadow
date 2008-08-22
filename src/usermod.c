@@ -1197,7 +1197,8 @@ static void open_files (void)
 {
 	if (pw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	pw_locked = true;
@@ -1208,7 +1209,8 @@ static void open_files (void)
 	}
 	if (is_shadow_pwd && (spw_lock () == 0)) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	spw_locked = true;
@@ -1225,7 +1227,8 @@ static void open_files (void)
 		 */
 		if (gr_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"), Prog, gr_dbname ());
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		gr_locked = true;
@@ -1237,7 +1240,8 @@ static void open_files (void)
 #ifdef SHADOWGRP
 		if (is_shadow_grp && (sgr_lock () == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"), Prog, sgr_dbname ());
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 		sgr_locked = true;

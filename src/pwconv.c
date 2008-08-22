@@ -127,7 +127,8 @@ int main (int argc, char **argv)
 
 	if (pw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	passwd_locked = true;
@@ -139,7 +140,8 @@ int main (int argc, char **argv)
 
 	if (spw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, spw_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, spw_dbname ());
 		fail_exit (E_PWDBUSY);
 	}
 	shadow_locked = true;

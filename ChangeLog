@@ -1,5 +1,15 @@
 2008-08-17  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c, src/chgpasswd.c, src/chpasswd.c, src/chsh.c,
+	src/gpasswd.c, src/groupadd.c, src/groupdel.c, src/groupmems.c,
+	src/groupmod.c, src/grpck.c, src/grpconv.c, src/grpunconv.c,
+	src/newusers.c, src/passwd.c, src/pwck.c, src/pwconv.c,
+	src/pwunconv.c, src/useradd.c, src/userdel.c, src/usermod.c: In
+	case of a lock failure, indicate to the user that she can try
+	again later. Do not log to syslog.
+
+2008-08-17  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/passwd.c: For compatibility with other passwd version,
 	the --lock an --unlock options do not lock or unlock the user
 	account anymore.  They only lock or unlock the user's password.

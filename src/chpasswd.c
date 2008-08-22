@@ -284,7 +284,8 @@ static void open_files (void)
 	 */
 	if (pw_lock () == 0) {
 		fprintf (stderr,
-		         _("%s: cannot lock %s\n"), Prog, pw_dbname ());
+		         _("%s: cannot lock %s; try again later.\n"),
+		         Prog, pw_dbname ());
 		fail_exit (1);
 	}
 	passwd_locked = true;
@@ -298,7 +299,7 @@ static void open_files (void)
 	if (is_shadow_pwd) {
 		if (spw_lock () == 0) {
 			fprintf (stderr,
-			         _("%s: cannot lock %s\n"),
+			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, spw_dbname ());
 			fail_exit (1);
 		}
