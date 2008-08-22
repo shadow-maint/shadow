@@ -1,3 +1,11 @@
+2008-08-17  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/passwd.c: For compatibility with other passwd version,
+	the --lock an --unlock options do not lock or unlock the user
+	account anymore.  They only lock or unlock the user's password.
+	* man/passwd.1.xml: Document above change. Document how an account
+	can be locked and what a password lock means.
+
 2008-08-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/groupadd.8.xml: Fix the regular expression for group policy.

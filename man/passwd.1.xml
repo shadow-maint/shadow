@@ -196,9 +196,21 @@
 	</term>
 	<listitem>
 	  <para>
-	    Lock the named account. This option disables an account by changing
-	    the password to a value which matches no possible encrypted value,
-	    and by setting the account expiry field to 1.
+	    Lock the password of the named account. This option disables a
+	    password by changing it to a value which matches no possible
+	    encrypted value (it adds a ´!´ at the beginning of the
+	    password).
+	  </para>
+	  <para>
+	    Note that this does not disable the account. The user may
+	    still be able to login using another authentication token
+	    (e.g. an SSH key). To disable the account, administrators
+	    should use <command>usermod --expiredate 1</command> (this set
+	    the account's expire date to Jan 2, 1970).
+	  </para>
+	  <para>
+	    Users with a locked password are not allowed to change their
+	    password.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -242,7 +254,8 @@
 	  <para>
 	    Display account status information. The status information
 	    consists of 7 fields. The first field is the user's login name. 
-	    The second field indicates if the user account is locked (L),
+	    The second field indicates if the user account has a locked
+	    password (L),
 	    has no password (NP), or has a usable password (P). The third
 	    field gives the date of the last password change. The next four
 	    fields are the minimum age, maximum age, warning period, and
@@ -257,9 +270,10 @@
 	</term>
 	<listitem>
 	  <para>
-	    Unlock the named account. This option re-enables an account by
-	    changing the password back to its previous value (to value before
-	    using <option>-l</option> option), and by resetting the account
+	    Unlock the password of the named account. This option
+	    re-enables a password by changing the password back to its
+	    previous value (to the value before using the
+	    <option>-l</option> option), and by resetting the account
 	    expiry field.
 	  </para>
 	</listitem>
@@ -401,6 +415,9 @@
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>.
+      <citerefentry>
+	<refentrytitle>usermod</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>.
     </para>
   </refsect1>

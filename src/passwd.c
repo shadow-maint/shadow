@@ -79,11 +79,11 @@ static bool
     eflg = false,			/* -e - force password change */
     iflg = false,			/* -i - set inactive days */
     kflg = false,			/* -k - change only if expired */
-    lflg = false,			/* -l - lock account */
+    lflg = false,			/* -l - lock the user's password */
     nflg = false,			/* -n - set minimum days */
     qflg = false,			/* -q - quiet mode */
     Sflg = false,			/* -S - show password status */
-    uflg = false,			/* -u - unlock account */
+    uflg = false,			/* -u - unlock the user's password */
     wflg = false,			/* -w - set warning days */
     xflg = false;			/* -x - set maximum days */
 
@@ -163,13 +163,13 @@ static void usage (int status)
 	         "  -k, --keep-tokens             change password only if expired\n"
 	         "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 	         "                                to INACTIVE\n"
-	         "  -l, --lock                    lock the named account\n"
+	         "  -l, --lock                    lock the password of the named account\n"
 	         "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 	         "                                change to MIN_DAYS\n"
 	         "  -q, --quiet                   quiet mode\n"
 	         "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 	         "  -S, --status                  report password status on the named account\n"
-	         "  -u, --unlock                  unlock the named account\n"
+	         "  -u, --unlock                  unlock the password of the named account\n"
 	         "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
 	         "  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
 	         "                                change to MAX_DAYS\n"
@@ -487,8 +487,8 @@ static char *update_crypt_pw (char *cp)
 	if (uflg && *cp == '!') {
 		if (cp[1] == '\0') {
 			fprintf (stderr,
-				 _("%s: unlocking the user would result in a passwordless account.\n"
-				   "You should set a password with usermod -p to unlock this user account.\n"),
+				 _("%s: unlocking the password would result in a passwordless account.\n"
+				   "You should set a password with usermod -p to unlock the password of this account.\n"),
 				 Prog);
 		} else {
 			cp++;
@@ -597,15 +597,6 @@ static void update_shadow (void)
 	if (do_update_age) {
 		nsp->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 	}
-	if (lflg) {
-		/* Set the account expiry field to 1.
-		 * Some PAM implementation consider zero as a non expired
-		 * account.
-		 */
-		nsp->sp_expire = 1;
-	}
-	if (uflg)
-		nsp->sp_expire = -1;
 
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris
@@ -707,12 +698,12 @@ static int check_selinux_access (const char *changed_user,
  *	-g	execute gpasswd command to interpret flags
  *	-i #	set sp_inact to # days (*)
  *	-k	change password only if expired
- *	-l	lock the named account (*)
+ *	-l	lock the password of the named account (*)
  *	-n #	set sp_min to # days (*)
  *	-r #	change password in # repository
  *	-s	execute chsh command to interpret flags
  *	-S	show password status of named account
- *	-u	unlock the named account (*)
+ *	-u	unlock the password of the named account (*)
  *	-w #	set sp_warn to # days (*)
  *	-x #	set sp_max to # days (*)
  *
