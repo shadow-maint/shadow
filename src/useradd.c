@@ -201,7 +201,7 @@ static void fail_exit (int code)
 	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", spw_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking shadow file",
@@ -213,7 +213,7 @@ static void fail_exit (int code)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking passwd file",
@@ -225,7 +225,7 @@ static void fail_exit (int code)
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking group file",
@@ -238,7 +238,7 @@ static void fail_exit (int code)
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -1241,20 +1241,20 @@ static void close_files (void)
 {
 	if (pw_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "failure while writing changes to %s", pw_dbname ()));
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_close () == 0)) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "failure while writing changes to %s", spw_dbname ()));
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 	if (do_grp_update) {
 		if (gr_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef	SHADOWGRP
@@ -1262,7 +1262,7 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #endif
@@ -1270,7 +1270,7 @@ static void close_files (void)
 	if (is_shadow_pwd) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", spw_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking shadow file",
@@ -1282,7 +1282,7 @@ static void close_files (void)
 	}
 	if (pw_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking passwd file",
@@ -1293,7 +1293,7 @@ static void close_files (void)
 	pw_locked = false;
 	if (gr_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -1306,7 +1306,7 @@ static void close_files (void)
 	if (is_shadow_grp) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",

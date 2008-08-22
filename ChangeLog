@@ -1,5 +1,18 @@
 2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chfn.c: Do not exit on pw_unlock failures.
+	* src/grpconv.c, src/grpunconv.c, src/pwconv.c, src/pwunconv.c,
+	src/vipw.c: Open syslog with the right identification name.
+	* src/vipw.c: Log unlock errors to syslog.
+	* src/vipw.c: Log edits to syslog.
+	* src/chage.c, src/chfn.c, src/chsh.c, src/gpasswd.c,
+	src/groupadd.c, src/groupdel.c, src/groupmod.c, src/grpconv.c,
+	src/grpunconv.c, src/passwd.c, src/pwck.c, src/pwunconv.c,
+	src/useradd.c, src/usermod.c: Harmonize the syslog levels. Failure
+	to close or unlock are errors. Failure to open files are warnings.
+
+2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/newusers.c: Open syslog with the right identification name.
 	* src/newusers.c: Mark the files as locked only if they are really
 	locked (i.e. if shadow is not enabled, the files are not locked).

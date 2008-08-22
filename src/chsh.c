@@ -370,7 +370,7 @@ static void update_shell (const char *user, char *newshell)
 	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		fail_exit (1);
 	}
 
@@ -400,7 +400,7 @@ static void update_shell (const char *user, char *newshell)
 	 * that entry as well.
 	 */
 	if (pw_update (&pwent) == 0) {
-		SYSLOG ((LOG_ERR, "error updating passwd entry"));
+		SYSLOG ((LOG_WARN, "error updating passwd entry"));
 		fputs (_("Error updating the password entry.\n"), stderr);
 		fail_exit (1);
 	}

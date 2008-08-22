@@ -144,6 +144,7 @@ static void vipwexit (const char *msg, int syserr, int ret)
 	if (filelocked) {
 		if ((*unlock) () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+			SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 			/* continue */
 		}
 	}
@@ -276,8 +277,10 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 
 	if ((*file_unlock) () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), progname, fileeditname);
+		SYSLOG ((LOG_ERR, "failed to unlock %s", fileeditname));
 		/* continue */
 	}
+	SYSLOG ((LOG_INFO, "file %s edited", fileeditname));
 }
 
 int main (int argc, char **argv)
@@ -292,6 +295,8 @@ int main (int argc, char **argv)
 
 	progname = ((a = strrchr (*argv, '/')) ? a + 1 : *argv);
 	do_vipw = (strcmp (progname, "vigr") != 0);
+
+	OPENLOG (do_vipw ? "vipw" : "vigr");
 
 	{
 		/*

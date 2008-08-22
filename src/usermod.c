@@ -636,7 +636,7 @@ static void update_group (void)
 			fprintf (stderr,
 			         _("%s: error adding new entry '%s' in %s\n"),
 			         Prog, ngrp->gr_name, gr_dbname ());
-			SYSLOG ((LOG_ERR, "error adding new entry '%s' in %s", ngrp->gr_name, gr_dbname ()));
+			SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s", ngrp->gr_name, gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -755,7 +755,7 @@ static void update_gshadow (void)
 			fprintf (stderr,
 			         _("%s: error adding new entry '%s' in '%s\n"),
 			         Prog, nsgrp->sg_name, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "error adding new entry '%s' in %s",
+			SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s",
 			        nsgrp->sg_name, sgr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}

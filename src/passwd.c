@@ -539,7 +539,7 @@ static void update_noshadow (void)
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
 		         Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		fail_exit (E_MISSING);
 	}
 	pw = pw_locate (name);
@@ -556,7 +556,7 @@ static void update_noshadow (void)
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
 	if (pw_update (npw) == 0) {
 		fputs (_("Error updating the password entry.\n"), stderr);
-		SYSLOG ((LOG_ERR, "error updating password entry"));
+		SYSLOG ((LOG_WARN, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
@@ -588,7 +588,7 @@ static void update_shadow (void)
 	spw_locked = true;
 	if (spw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot open %s", spw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
 	sp = spw_locate (name);
@@ -635,7 +635,7 @@ static void update_shadow (void)
 
 	if (spw_update (nsp) == 0) {
 		fputs (_("Error updating the password entry.\n"), stderr);
-		SYSLOG ((LOG_ERR, "error updating password entry"));
+		SYSLOG ((LOG_WARN, "error updating password entry"));
 		fail_exit (E_FAILURE);
 	}
 	if (spw_close () == 0) {

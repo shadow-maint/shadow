@@ -487,12 +487,12 @@ static void update_gecos (const char *user, char *gecos)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
-	pw_locked = false; /* If we fail to unlock, do not retry */
 	if (pw_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
-		fail_exit (E_NOPERM);
+		/* continue */
 	}
+	pw_locked = false;
 }
 
 /*

@@ -253,13 +253,13 @@ static void close_files (bool changed)
 		if (pw_close () == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, pwd_file);
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", pwd_file));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", pwd_file));
 			fail_exit (E_CANTUPDATE);
 		}
 		if (is_shadow && (spw_close () == 0)) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, spw_file);
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", spw_file));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_file));
 			fail_exit (E_CANTUPDATE);
 		}
 	}

@@ -92,6 +92,8 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	OPENLOG ("grpunconv");
+
 	if (sgr_file_present () == 0) {
 		exit (0);	/* no /etc/gshadow, nothing to do */
 	}
@@ -147,6 +149,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 		fail_exit (3);
 	}
 
@@ -154,6 +157,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (3);
 	}
 
@@ -161,6 +165,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: cannot delete %s\n"),
 		         Prog, SGROUP_FILE);
+		SYSLOG ((LOG_ERR, "cannot delete %s", SGROUP_FILE));
 		fail_exit (3);
 	}
 

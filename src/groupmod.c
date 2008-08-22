@@ -126,7 +126,7 @@ static void fail_exit (int status)
 	if (gr_locked) {
 		if (gr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking group file",
@@ -139,7 +139,7 @@ static void fail_exit (int status)
 	if (sgr_locked) {
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -152,7 +152,7 @@ static void fail_exit (int status)
 	if (pw_locked) {
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking passwd file",
@@ -322,7 +322,7 @@ static void grp_update (void)
 #endif
 	if (nflg) {
 		SYSLOG ((LOG_INFO, "change group '%s' to '%s'",
-			 group_name, group_newname));
+		         group_name, group_newname));
 	}
 
 	if (gflg) {
@@ -507,7 +507,7 @@ static void close_files (void)
 {
 	if (gr_close () == 0) {
 		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "failure while writing changes to %s", gr_dbname ()));
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "rewrite group file",
@@ -517,7 +517,7 @@ static void close_files (void)
 	}
 	if (gr_unlock () == 0) {
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "failed to unlock %s", gr_dbname ()));
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "unlocking group file",
@@ -531,7 +531,7 @@ static void close_files (void)
 		if (sgr_close () == 0)) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "rewrite gshadow file",
@@ -541,7 +541,7 @@ static void close_files (void)
 		}
 		if (sgr_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", sgr_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking gshadow file",
@@ -556,7 +556,7 @@ static void close_files (void)
 		if (pw_close () == 0) {
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_WARN, "failure while writing changes to %s", pw_dbname ()));
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "rewrite passwd file",
@@ -566,7 +566,7 @@ static void close_files (void)
 		}
 		if (pw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_WARN, "failed to unlock %s", pw_dbname ()));
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 			              "unlocking passwd file",

@@ -92,6 +92,8 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	OPENLOG ("grpconv");
+
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
@@ -188,12 +190,14 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, sgr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
 		fail_exit (3);
 	}
 	if (gr_close () == 0) {
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 		fail_exit (3);
 	}
 	if (sgr_unlock () == 0) {

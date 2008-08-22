@@ -86,6 +86,8 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
+	OPENLOG ("pwunconv");
+
 	if (!spw_file_present ()) {
 		/* shadow not installed, do nothing */
 		exit (0);
@@ -157,6 +159,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (3);
 	}
 
@@ -164,12 +167,14 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (3);
 	}
 
 	if (unlink (SHADOW) != 0) {
 		fprintf (stderr,
 			 _("%s: cannot delete %s\n"), Prog, SHADOW);
+		SYSLOG ((LOG_ERR, "cannot delete %s", SHADOW));
 		fail_exit (3);
 	}
 

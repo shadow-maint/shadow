@@ -572,7 +572,7 @@ static void open_files (bool readonly)
 	}
 	if (pw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot open %s", pw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot open %s", pw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 
@@ -594,7 +594,7 @@ static void open_files (bool readonly)
 	if (spw_open (readonly ? O_RDONLY: O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot open %s", spw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot open %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 }
@@ -664,7 +664,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot update %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_ERR, "cannot update %s", pw_dbname ()));
+			SYSLOG ((LOG_WARN, "cannot update %s", pw_dbname ()));
 			fail_exit (E_NOPERM);
 		}
 	} else {
@@ -688,7 +688,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot update %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "cannot update %s", spw_dbname ()));
+		SYSLOG ((LOG_WARN, "cannot update %s", spw_dbname ()));
 		fail_exit (E_NOPERM);
 	}
 
@@ -808,7 +808,7 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("%s: the shadow password file is not present\n"),
 		         Prog);
-		SYSLOG ((LOG_ERR, "can't find the shadow password file"));
+		SYSLOG ((LOG_WARN, "can't find the shadow password file"));
 		closelog ();
 		exit (E_SHADOW_NOTFOUND);
 	}
