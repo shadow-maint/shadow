@@ -1,5 +1,12 @@
 2008-08-18  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpck.c: Added function fail_exit(). Check failure to unlock
+	files. Report errors to stderr and syslog, but continue.
+	* src/grpconv.c: Check failure to unlock files. Report errors to
+	stderr and syslog, but continue.
+
+2008-08-18  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Check failure to unlock files. Report errors to
 	stderr and syslog, but continue.
 

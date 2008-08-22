@@ -62,11 +62,21 @@ static void fail_exit (int);
 static void fail_exit (int status)
 {
 	if (gr_locked) {
-		gr_unlock ();
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
 	}
+
 	if (sgr_locked) {
-		sgr_unlock ();
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
 	}
+
 	exit (status);
 }
 
@@ -186,8 +196,18 @@ int main (int argc, char **argv)
 		         Prog, gr_dbname ());
 		fail_exit (3);
 	}
-	sgr_unlock ();
-	gr_unlock ();
+	if (sgr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+		/* continue */
+	}
+	sgr_locked = false;
+	if (gr_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+		/* continue */
+	}
+	gr_locked = false;
 
 	nscd_flush_cache ("group");
 

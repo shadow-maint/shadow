@@ -72,12 +72,15 @@ static bool use_system_grp_file = true;
 static const char *sgr_file = SGROUP_FILE;
 static bool use_system_sgr_file = true;
 static bool is_shadow = false;
+static bool sgr_locked = false;
 #endif
+static bool gr_locked = false;
 /* Options */
 static bool read_only = false;
 static bool sort_mode = false;
 
 /* local function prototypes */
+static void fail_exit (int status);
 static void usage (void);
 static void delete_member (char **, const char *);
 static void process_flags (int argc, char **argv);
@@ -98,6 +101,34 @@ static void compare_members_lists (const char *groupname,
                                    const char *other_file);
 static void check_sgr_file (int *errors, bool *changed);
 #endif
+
+/*
+ * fail_exit - exit with an error code after unlocking files
+ */
+static void fail_exit (int status)
+{
+	if (gr_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+	}
+
+#ifdef	SHADOWGRP
+	if (sgr_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+	}
+#endif
+
+	closelog ();
+
+	exit (status);
+}
 
 /*
  * usage - print syntax message and exit
@@ -214,16 +245,18 @@ static void open_files (void)
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, grp_file);
-			closelog ();
-			exit (E_CANT_LOCK);
+			fail_exit (E_CANT_LOCK);
 		}
+		gr_locked = true;
 #ifdef	SHADOWGRP
-		if (is_shadow && (sgr_lock () == 0)) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, sgr_file);
-			closelog ();
-			exit (E_CANT_LOCK);
+		if (is_shadow) {
+			if (sgr_lock () == 0) {
+				fprintf (stderr,
+				         _("%s: cannot lock %s; try again later.\n"),
+				         Prog, sgr_file);
+				fail_exit (E_CANT_LOCK);
+			}
+			sgr_locked = true;
 		}
 #endif
 	}
@@ -238,8 +271,7 @@ static void open_files (void)
 		if (use_system_grp_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", grp_file));
 		}
-		closelog ();
-		exit (E_CANT_OPEN);
+		fail_exit (E_CANT_OPEN);
 	}
 #ifdef	SHADOWGRP
 	if (is_shadow && (sgr_open (read_only ? O_RDONLY : O_RDWR) == 0)) {
@@ -248,8 +280,7 @@ static void open_files (void)
 		if (use_system_sgr_file) {
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_file));
 		}
-		closelog ();
-		exit (E_CANT_OPEN);
+		fail_exit (E_CANT_OPEN);
 	}
 #endif
 }
@@ -271,13 +302,13 @@ static void close_files (bool changed)
 		if (gr_close () == 0) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, grp_file);
-			exit (E_CANT_UPDATE);
+			fail_exit (E_CANT_UPDATE);
 		}
 #ifdef	SHADOWGRP
 		if (is_shadow && (sgr_close () == 0)) {
 			fprintf (stderr, _("%s: failure while writing changes to %s\n"),
 			         Prog, sgr_file);
-			exit (E_CANT_UPDATE);
+			fail_exit (E_CANT_UPDATE);
 		}
 #endif
 	}
@@ -286,11 +317,23 @@ static void close_files (bool changed)
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
 #ifdef	SHADOWGRP
-	if (is_shadow) {
-		sgr_unlock ();
+	if (sgr_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+		sgr_locked = false;
 	}
 #endif
-	(void) gr_unlock ();
+	if (gr_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+		gr_locked = false;
+	}
 }
 
 /*
@@ -552,7 +595,7 @@ static void check_grp_file (int *errors, bool *changed)
 						         _
 						         ("%s: can't update shadow entry for %s\n"),
 						         Prog, sg.sg_name);
-						exit (E_CANT_UPDATE);
+						fail_exit (E_CANT_UPDATE);
 					}
 					/* remove password from /etc/group */
 					gr = *grp;
@@ -562,7 +605,7 @@ static void check_grp_file (int *errors, bool *changed)
 						         _
 						         ("%s: can't update entry for group %s\n"),
 						         Prog, gr.gr_name);
-						exit (E_CANT_UPDATE);
+						fail_exit (E_CANT_UPDATE);
 					}
 				}
 			} else {
