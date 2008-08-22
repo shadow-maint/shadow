@@ -36,6 +36,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
@@ -244,8 +245,18 @@ static void failure (void)
 static void process_flags (int argc, char **argv)
 {
 	int flag;
+	int option_index = 0;
+	static struct option long_options[] = {
+		{"add", required_argument, NULL, 'a'},
+		{"delete", required_argument, NULL, 'd'},
+		{"remove-password", no_argument, NULL, 'r'},
+		{"restrict", no_argument, NULL, 'R'},
+		{"administrators", required_argument, NULL, 'A'},
+		{"members", required_argument, NULL, 'M'},
+		{NULL, 0, NULL, '\0'}
+		};
 
-	while ((flag = getopt (argc, argv, "a:A:d:gM:rR")) != EOF) {
+	while ((flag = getopt_long (argc, argv, "a:A:d:gM:rR", long_options, &option_index)) != -1) {
 		switch (flag) {
 		case 'a':	/* add a user */
 			user = optarg;
@@ -605,7 +616,9 @@ static void get_group (struct group *gr)
 #endif
 {
 	struct group const*tmpgr = NULL;
+#ifdef SHADOWGRP
 	struct sgrp const*tmpsg = NULL;
+#endif
 
 	if (gr_open (O_RDONLY) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());

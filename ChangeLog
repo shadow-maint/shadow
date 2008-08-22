@@ -1,3 +1,13 @@
+2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/gpasswd.c: Use getopt_long instead of getopt. Added
+	support for long options --add (-a), --delete (-d),
+	--remove-password (-r), --restrict (-R), --administrators (-A),
+	and --members (-M) 
+	* man/gpasswd.1.xml: Document the new long options.
+	* src/gpasswd.c: The sgrp structure is only used if SHADOWGRP is
+	defined.
+
 2008-08-18  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/grpck.c: Added function fail_exit(). Check failure to unlock

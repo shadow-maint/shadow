@@ -91,7 +91,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-a</option> <replaceable>user</replaceable>
+	  <option>-a</option>, <option>--add</option> <replaceable>user</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -104,7 +104,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-d</option> <replaceable>user</replaceable>
+	  <option>-d</option>, <option>--delete</option> <replaceable>user</replaceable>
 	</term>
 	<listitem>
 	  <para>
@@ -117,7 +117,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-r</option>
+	  <option>-r</option>, <option>--remove-password</option>
 	</term>
 	<listitem>
 	  <para>
@@ -132,7 +132,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-R</option>
+	  <option>-R</option>, <option>--restrict</option>
 	</term>
 	<listitem>
 	  <para>
@@ -147,7 +147,7 @@
     <variablelist remap='IP' condition="gshadow">
       <varlistentry>
 	<term>
-	  <option>-A</option> <replaceable>user</replaceable>,...
+	  <option>-A</option>, <option>--administrators</option> <replaceable>user</replaceable>,...
 	</term>
 	<listitem>
 	  <para>
@@ -159,7 +159,7 @@
     <variablelist remap='IP'>
       <varlistentry>
 	<term>
-	  <option>-M</option> <replaceable>user</replaceable>,...
+	  <option>-M</option>, <option>--members</option> <replaceable>user</replaceable>,...
 	</term>
 	<listitem>
 	  <para>
