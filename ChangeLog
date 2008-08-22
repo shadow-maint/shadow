@@ -1,3 +1,9 @@
+2008-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/grpconv.c: Use Basename for the definition of Prog. Prog
+	needs a file visibility.
+	* src/grpunconv.c: Likewise.
+
 2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chfn.c: Do not exit on pw_unlock failures.

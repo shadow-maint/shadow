@@ -54,8 +54,9 @@
 /*
  * Global variables
  */
-static bool gr_locked   = false;
+static bool gr_locked  = false;
 static bool sgr_locked = false;
+static char *Prog;
 
 /* local function prototypes */
 static void fail_exit (int status);
@@ -86,7 +87,8 @@ int main (int argc, char **argv)
 	const struct group *gr;
 	struct group grent;
 	const struct sgrp *sg;
-	char *Prog = argv[0];
+
+	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
