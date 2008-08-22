@@ -5,11 +5,7 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
 *** general:
 - packaging
   * Added support for OpenPAM.
-- newusers
-  * Implement the -r, --system option.
-- usermod
-  * Allow adding LDAP users (or any user not present in the local passwd
-    file) to local groups
+
 - groupmems
   * Check if user exist before they are added to groups.
   * Avoid segfault in case the specified group does not exist in /etc/group.
@@ -17,10 +13,15 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
   * /etc/group is open readonly when one just wants to list the users of a
     group.
   * Added syslog support.
+- newusers
+  * Implement the -r, --system option.
 - passwd
-  * For compatiobility with other passwd version, the --lock an --unlock
+  * For compatibility with other passwd version, the --lock an --unlock
     options do not lock or unlock the user account anymore.  They only
     lock or unlock the user's password.
+- usermod
+  * Allow adding LDAP users (or any user not present in the local passwd
+    file) to local groups
 
 shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 
