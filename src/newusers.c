@@ -614,13 +614,15 @@ static void open_files (void)
 		fail_exit (1);
 	}
 	pw_locked = true;
-	if (is_shadow && (spw_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, spw_dbname ());
-		fail_exit (1);
+	if (is_shadow) {
+		if (spw_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, spw_dbname ());
+			fail_exit (1);
+		}
+		spw_locked = true;
 	}
-	spw_locked = true;
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
@@ -629,13 +631,15 @@ static void open_files (void)
 	}
 	gr_locked = true;
 #ifdef SHADOWGRP
-	if (is_shadow_grp && (sgr_lock () == 0)) {
-		fprintf (stderr,
-		         _("%s: cannot lock %s; try again later.\n"),
-		         Prog, sgr_dbname ());
-		fail_exit (1);
+	if (is_shadow_grp) {
+		if (sgr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, sgr_dbname ());
+			fail_exit (1);
+		}
+		sgr_locked = true;
 	}
-	sgr_locked = true;
 #endif
 
 	if (pw_open (O_RDWR) == 0) {
@@ -748,6 +752,8 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	OPENLOG ("newusers");
 
 	process_flags (argc, argv);
 

@@ -1,5 +1,11 @@
 2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Open syslog with the right identification name.
+	* src/newusers.c: Mark the files as locked only if they are really
+	locked (i.e. if shadow is not enabled, the files are not locked).
+
+2008-08-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/gpasswd.c: Use getopt_long instead of getopt. Added
 	support for long options --add (-a), --delete (-d),
 	--remove-password (-r), --restrict (-R), --administrators (-A),
