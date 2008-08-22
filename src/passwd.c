@@ -100,6 +100,9 @@ static long inact = 0;		/* Days without change before locked */
 
 static bool do_update_age = false;
 
+static bool pw_locked = false;
+static bool spw_locked = false;
+
 #ifndef USE_PAM
 /*
  * Size of the biggest passwd:
@@ -461,8 +464,22 @@ static void print_status (const struct passwd *pw)
 
 static void fail_exit (int status)
 {
-	pw_unlock ();
-	spw_unlock ();
+	if (pw_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
+	}
+
+	if (spw_locked) {
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+	}
+
 	exit (status);
 }
 
@@ -517,6 +534,7 @@ static void update_noshadow (void)
 		         Prog, pw_dbname ());
 		exit (E_PWDBUSY);
 	}
+	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
 		         _("%s: cannot open %s\n"),
@@ -548,7 +566,12 @@ static void update_noshadow (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	pw_unlock ();
+	if (pw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+		/* continue */
+	}
+	pw_locked = false;
 }
 
 static void update_shadow (void)
@@ -562,6 +585,7 @@ static void update_shadow (void)
 		         Prog, spw_dbname ());
 		exit (E_PWDBUSY);
 	}
+	spw_locked = true;
 	if (spw_open (O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, spw_dbname ());
 		SYSLOG ((LOG_ERR, "cannot open %s", spw_dbname ()));
@@ -570,9 +594,14 @@ static void update_shadow (void)
 	sp = spw_locate (name);
 	if (NULL == sp) {
 		/* Try to update the password in /etc/passwd instead. */
-		spw_close ();
+		(void) spw_close ();
 		update_noshadow ();
-		spw_unlock ();
+		if (spw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			/* continue */
+		}
+		spw_locked = false;
 		return;
 	}
 	nsp = __spw_dup (sp);
@@ -616,7 +645,12 @@ static void update_shadow (void)
 		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_FAILURE);
 	}
-	spw_unlock ();
+	if (spw_unlock () == 0) {
+		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+		/* continue */
+	}
+	spw_locked = false;
 }
 
 static long getnumber (const char *numstr)

@@ -1,3 +1,8 @@
+2008-08-18  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/passwd.c: Check failure to unlock files. Report errors to
+	stderr and syslog, but continue.
+
 2008-08-17  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chfn.c, src/chgpasswd.c, src/chpasswd.c, src/gpasswd.c,
