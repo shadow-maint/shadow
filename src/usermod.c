@@ -1120,12 +1120,16 @@ static void close_files (void)
 {
 	if (pw_close () == 0) {
 		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, pw_dbname ());
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, pw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", pw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_close () == 0)) {
 		fprintf (stderr,
-		         _("%s: failure while writing changes to %s\n"), Prog, spw_dbname ());
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, spw_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1134,15 +1138,18 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
 		if (is_shadow_grp) {
 			if (sgr_close () == 0) {
-			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"),
-			         Prog, sgr_dbname ());
-			fail_exit (E_GRP_UPDATE);
+				fprintf (stderr,
+				         _("%s: failure while writing changes to %s\n"),
+				         Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+				fail_exit (E_GRP_UPDATE);
+			}
 			if (sgr_unlock () == 0) {
 				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));

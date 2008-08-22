@@ -1,5 +1,9 @@
 2008-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: Log errors while *_close to syslog.
+
+2008-08-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpconv.c: Use Basename for the definition of Prog. Prog
 	needs a file visibility.
 	* src/grpunconv.c: Likewise.
