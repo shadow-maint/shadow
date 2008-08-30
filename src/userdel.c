@@ -708,17 +708,20 @@ static void remove_mailbox (void)
 		fprintf (stderr,
 		         _("%s: %s not owned by %s, not removing\n"),
 		         Prog, mailfile, user_name);
+		SYSLOG ((LOG_ERR, "%s not owned by %s, not removed", mailfile, strerror (errno)));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "deleting mail file",
 		              user_name, (unsigned int) user_id, 0);
 #endif
 		return;
-	} else if (i == -1)
+	} else if (i == -1) {
 		return;		/* mailbox doesn't exist */
+	}
 	if (unlink (mailfile) != 0) {
-		fprintf (stderr, _("%s: warning: can't remove "), Prog);
-		perror (mailfile);
+		fprintf (stderr, _("%s: warning: can't remove %s: %s"), Prog, mailfile, strerror (errno));
+		SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
+		/* continue */
 	}
 #ifdef WITH_AUDIT
 	else {

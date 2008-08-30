@@ -250,8 +250,8 @@ static int get_groups (char *list)
 		 * string name.
 		 */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: unknown group %s\n"),
-				 Prog, list);
+			fprintf (stderr, _("%s: group '%s' does not exist\n"),
+			         Prog, list);
 			errors++;
 		}
 		list = cp;
@@ -954,7 +954,7 @@ static void process_flags (int argc, char **argv)
 				grp = getgr_nam_gid (optarg);
 				if (NULL == grp) {
 					fprintf (stderr,
-						 _("%s: unknown group %s\n"),
+						 _("%s: group '%s' does not exist\n"),
 						 Prog, optarg);
 					exit (E_NOTFOUND);
 				}

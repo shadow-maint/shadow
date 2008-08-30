@@ -481,16 +481,16 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			if (spw_update (&newsp) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry\n"),
-				         Prog, line, spw_dbname ());
+				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         Prog, line, spw_dbname (), newsp.sp_namp);
 				errors++;
 				continue;
 			}
 		} else {
-			if (pw_update (&newsp) == 0) {
+			if (pw_update (&newpw) == 0) {
 				fprintf (stderr,
-				         _("%s: line %d: failed to prepare the new %s entry\n"),
-				         Prog, line, pw_dbname ());
+				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         Prog, line, pw_dbname (), newpw.pw_name);
 				errors++;
 				continue;
 			}

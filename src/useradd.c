@@ -832,8 +832,8 @@ static void grp_update (void)
 		ngrp = __gr_dup (grp);
 		if (NULL == ngrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update the group database.\n"),
-				 Prog);
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -1041,8 +1041,7 @@ static void process_flags (int argc, char **argv)
 				grp = getgr_nam_gid (optarg);
 				if (NULL == grp) {
 					fprintf (stderr,
-						 _
-						 ("%s: unknown group %s\n"),
+					         _("%s: group '%s' does not exist\n"),
 						 Prog, optarg);
 					exit (E_NOTFOUND);
 				}
