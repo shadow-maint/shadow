@@ -467,8 +467,8 @@ static void check_pw_file (int *errors, bool *changed)
 
 					if (spw_update (&sp) == 0) {
 						fprintf (stderr,
-						         _("%s: can't update shadow entry for %s\n"),
-						         Prog, sp.sp_namp);
+						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						         Prog, spw_dbname (), sp.sp_namp);
 						exit (E_CANTUPDATE);
 					}
 					/* remove password from /etc/passwd */
@@ -476,8 +476,8 @@ static void check_pw_file (int *errors, bool *changed)
 					pw.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (pw_update (&pw) == 0) {
 						fprintf (stderr,
-						         _("%s: can't update passwd entry for %s\n"),
-						         Prog, pw.pw_name);
+						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						         Prog, pw_dbname (), pw.pw_name);
 						exit (E_CANTUPDATE);
 					}
 				}

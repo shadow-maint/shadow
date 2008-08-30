@@ -1,5 +1,20 @@
 2008-08-25  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Check the return value of gr_update().
+	* src/chage.c, src/chfn.c, src/chgpasswd.c, src/chpasswd.c,
+	src/chsh.c, src/gpasswd.c, src/groupadd.c, src/groupmems.c,
+	src/groupmod.c, src/grpck.c, src/grpconv.c, src/grpunconv.c,
+	src/passwd.c, src/pwck.c, src/pwconv.c, src/pwunconv.c,
+	src/useradd.c, src/userdel.c, src/usermod.c: Harmonize the error
+	message sent to stderr in case of *_update () failure.
+	* src/chage.c, src/chsh.c, src/groupadd.c, src/passwd.c: Do not
+	log to syslog when pw_update() or spw_update() fail.
+	* src/newusers.c: Do not log specific error message to stderr when
+	sgr_update() fails.
+	* src/pwconv.c: Remove duplicated definition of Prog.
+
+2008-08-25  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chfn.c, src/chsh.c, src/expiry.c, src/gpasswd.c,
 	src/newgrp.c, src/passwd.c, src/su.c: Use the same stderr and
 	syslog warnings when the username cannot be determined.

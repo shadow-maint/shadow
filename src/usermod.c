@@ -634,9 +634,9 @@ static void update_group (void)
 		changed = false;
 		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
-			         _("%s: error adding new entry '%s' in %s\n"),
-			         Prog, ngrp->gr_name, gr_dbname ());
-			SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s", ngrp->gr_name, gr_dbname ()));
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), ngrp->gr_name);
+			SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'", gr_dbname (), ngrp->gr_name));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -753,10 +753,10 @@ static void update_gshadow (void)
 		 */
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
-			         _("%s: error adding new entry '%s' in '%s\n"),
-			         Prog, nsgrp->sg_name, sgr_dbname ());
-			SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s",
-			        nsgrp->sg_name, sgr_dbname ()));
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), nsgrp->sg_name);
+			SYSLOG ((LOG_WARN, "failed to prepare the new %s entry '%s'",
+			         sgr_dbname (), nsgrp->sg_name));
 			fail_exit (E_GRP_UPDATE);
 		}
 	}
@@ -1301,8 +1301,8 @@ static void usr_update (void)
 	    || Lflg || Uflg) {
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot add new entry '%s' in %s\n"),
-			         Prog, pwent.pw_name, pw_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (E_PW_UPDATE);
 		}
 		if (lflg && (pw_remove (user_name) == 0)) {
@@ -1315,8 +1315,8 @@ static void usr_update (void)
 	if ((NULL != spwd) && (lflg || eflg || fflg || pflg || Lflg || Uflg)) {
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot add new entry '%s' in %s\n"),
-			         Prog, spent.sp_namp, spw_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, spw_dbname (), spent.sp_namp);
 			fail_exit (E_PW_UPDATE);
 		}
 		if (lflg && (spw_remove (user_name) == 0)) {

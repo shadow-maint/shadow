@@ -555,8 +555,9 @@ static void update_noshadow (void)
 	}
 	npw->pw_passwd = update_crypt_pw (npw->pw_passwd);
 	if (pw_update (npw) == 0) {
-		fputs (_("Error updating the password entry.\n"), stderr);
-		SYSLOG ((LOG_WARN, "error updating password entry"));
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, pw_dbname (), npw->pw_name);
 		fail_exit (E_FAILURE);
 	}
 	if (pw_close () == 0) {
@@ -634,8 +635,9 @@ static void update_shadow (void)
 		nsp->sp_lstchg = 0;
 
 	if (spw_update (nsp) == 0) {
-		fputs (_("Error updating the password entry.\n"), stderr);
-		SYSLOG ((LOG_WARN, "error updating password entry"));
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, spw_dbname (), nsp->sp_namp);
 		fail_exit (E_FAILURE);
 	}
 	if (spw_close () == 0) {

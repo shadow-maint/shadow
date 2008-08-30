@@ -139,9 +139,8 @@ int main (int argc, char **argv)
 			grent.gr_passwd = sg->sg_passwd;
 			if (gr_update (&grent) == 0) {
 				fprintf (stderr,
-					 _
-					 ("%s: can't update entry for group %s\n"),
-					 Prog, grent.gr_name);
+				         _("%s: failed to prepare the new %s entry '%s'\n"),
+				         Prog, gr_dbname (), grent.gr_name);
 				fail_exit (3);
 			}
 		}

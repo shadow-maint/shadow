@@ -198,8 +198,8 @@ static void grp_update (void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr, _("%s: error adding new entry '%s' in %s\n"), Prog, grp.gr_name, gr_dbname ());
-		SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s", grp.gr_name, gr_dbname ()));
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -207,8 +207,8 @@ static void grp_update (void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: error adding new entry '%s' in %s\n"), Prog, sgrp.sg_name, sgr_dbname ());
-		SYSLOG ((LOG_WARN, "error adding new entry '%s' in %s", sgrp.sg_name, sgr_dbname ()));
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry\n"), Prog, sgr_dbname ());
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */

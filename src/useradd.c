@@ -844,7 +844,8 @@ static void grp_update (void)
 		ngrp->gr_mem = add_list (ngrp->gr_mem, user_name);
 		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error adding new group entry\n"), Prog);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), ngrp->gr_name);
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
@@ -898,7 +899,8 @@ static void grp_update (void)
 		nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_name);
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error adding new entry to %s\n"), Prog, sgr_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), nsgrp->sg_name);
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
@@ -1449,7 +1451,9 @@ static void grp_add (void)
 	 * Write out the new group file entry.
 	 */
 	if (gr_update (&grp) == 0) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp.gr_name);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef  SHADOWGRP
@@ -1457,7 +1461,9 @@ static void grp_add (void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: error adding new group entry\n"), Prog);
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, sgr_dbname (), sgrp.sg_name);
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
@@ -1559,7 +1565,8 @@ static void usr_update (void)
 	 */
 	if (pw_update (&pwent) == 0) {
 		fprintf (stderr,
-			 _("%s: error adding new password entry\n"), Prog);
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, pw_dbname (), pwent.pw_name);
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1568,9 +1575,8 @@ static void usr_update (void)
 	 */
 	if (is_shadow_pwd && (spw_update (&spent) == 0)) {
 		fprintf (stderr,
-			 _
-			 ("%s: error adding new shadow password entry\n"),
-			 Prog);
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, spw_dbname (), spent.sp_namp);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding shadow password",

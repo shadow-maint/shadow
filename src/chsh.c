@@ -400,8 +400,8 @@ static void update_shell (const char *user, char *newshell)
 	 * that entry as well.
 	 */
 	if (pw_update (&pwent) == 0) {
-		SYSLOG ((LOG_WARN, "error updating passwd entry"));
-		fputs (_("Error updating the password entry.\n"), stderr);
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry\n"), Prog, pw_dbname ());
 		fail_exit (1);
 	}
 

@@ -479,17 +479,21 @@ int main (int argc, char **argv)
 		 * other entries have been updated as well.
 		 */
 		if (NULL != sp) {
-			ok = spw_update (&newsp);
+			if (spw_update (&newsp) == 0) {
+				fprintf (stderr,
+				         _("%s: line %d: failed to prepare the new %s entry\n"),
+				         Prog, line, spw_dbname ());
+				errors++;
+				continue;
+			}
 		} else {
-			ok = pw_update (&newpw);
-		}
-
-		if (0 == ok) {
-			fprintf (stderr,
-			         _("%s: line %d: cannot update password entry\n"),
-			         Prog, line);
-			errors++;
-			continue;
+			if (pw_update (&newsp) == 0) {
+				fprintf (stderr,
+				         _("%s: line %d: failed to prepare the new %s entry\n"),
+				         Prog, line, pw_dbname ());
+				errors++;
+				continue;
+			}
 		}
 	}
 

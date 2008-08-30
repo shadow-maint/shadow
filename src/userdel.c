@@ -168,7 +168,8 @@ static void update_groups (void)
 		ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
 		if (gr_update (ngrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error updating group entry\n"), Prog);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), ngrp->gr_name);
 			exit (E_GRP_UPDATE);
 		}
 
@@ -285,7 +286,8 @@ static void update_groups (void)
 
 		if (sgr_update (nsgrp) == 0) {
 			fprintf (stderr,
-				 _("%s: error updating shadow group entry\n"), Prog);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), nsgrp->sg_name);
 			exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT

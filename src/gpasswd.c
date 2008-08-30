@@ -577,9 +577,8 @@ static void update_group (struct group *gr)
 {
 	if (gr_update (gr) == 0) {
 		fprintf (stderr,
-		         _("%s: cannot update entry '%s' in %s\n"),
-		         Prog, gr->gr_name, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot update entry '%s' in %s", gr->gr_name, gr_dbname ()));
+		         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry", gr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/group",
@@ -589,8 +588,9 @@ static void update_group (struct group *gr)
 	}
 #ifdef SHADOWGRP
 	if (is_shadowgrp && (sgr_update (sg) == 0)) {
-		fprintf (stderr, _("%s: cannot update entry '%s' in %s\n"), Prog, sg->sg_name, sgr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot update entry '%s' in %s", sg->sg_name, sgr_dbname ()));
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry\n"), Prog, sgr_dbname ());
+		SYSLOG ((LOG_WARN, "failed to prepare the new %s entry", sgr_dbname ()));
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "updating /etc/gshadow",

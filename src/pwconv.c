@@ -117,7 +117,6 @@ int main (int argc, char **argv)
 	struct passwd pwent;
 	const struct spwd *sp;
 	struct spwd spent;
-	char *Prog = argv[0];
 
 	Prog = Basename (argv[0]);
 
@@ -202,9 +201,8 @@ int main (int argc, char **argv)
 		spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 		if (spw_update (&spent) == 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: can't update shadow entry for %s\n"),
-				 Prog, spent.sp_namp);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, spw_dbname (), spent.sp_namp);
 			fail_exit (E_FAILURE);
 		}
 
@@ -213,9 +211,8 @@ int main (int argc, char **argv)
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: can't update passwd entry for %s\n"),
-				 Prog, pwent.pw_name);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (E_FAILURE);
 		}
 	}

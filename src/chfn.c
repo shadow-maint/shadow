@@ -475,7 +475,9 @@ static void update_gecos (const char *user, char *gecos)
 	 * entry as well.
 	 */
 	if (pw_update (&pwent) == 0) {
-		fputs (_("Error updating the password entry.\n"), stderr);
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry\n"),
+		         Prog, pw_dbname ());
 		fail_exit (E_NOPERM);
 	}
 

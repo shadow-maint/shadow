@@ -275,9 +275,6 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		sgrent.sg_mem = members;
 
 		if (sgr_update (&sgrent) == 0) {
-			fprintf (stderr,
-			         _("%s: group %s created, failure during the creation of the corresponding gshadow group\n"),
-			         Prog, grent.gr_name);
 			return -1;
 		}
 	}

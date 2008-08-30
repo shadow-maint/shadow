@@ -592,9 +592,8 @@ static void check_grp_file (int *errors, bool *changed)
 
 					if (sgr_update (&sg) == 0) {
 						fprintf (stderr,
-						         _
-						         ("%s: can't update shadow entry for %s\n"),
-						         Prog, sg.sg_name);
+						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						         Prog, sgr_dbname (), sg.sg_name);
 						fail_exit (E_CANT_UPDATE);
 					}
 					/* remove password from /etc/group */
@@ -602,9 +601,8 @@ static void check_grp_file (int *errors, bool *changed)
 					gr.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 					if (gr_update (&gr) == 0) {
 						fprintf (stderr,
-						         _
-						         ("%s: can't update entry for group %s\n"),
-						         Prog, gr.gr_name);
+						         _("%s: failed to prepare the new %s entry '%s'\n"),
+						         Prog, gr_dbname (), gr.gr_name);
 						fail_exit (E_CANT_UPDATE);
 					}
 				}

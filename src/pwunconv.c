@@ -149,8 +149,8 @@ int main (int argc, char **argv)
 		 */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-				 _("%s: can't update entry for user %s\n"),
-				 Prog, pwent.pw_name);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (3);
 		}
 	}

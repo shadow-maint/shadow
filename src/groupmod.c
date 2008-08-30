@@ -258,8 +258,8 @@ static void grp_update (void)
 	 */
 	if (gr_update (&grp) == 0) {
 		fprintf (stderr,
-		         _("%s: cannot add entry '%s' to %s\n"),
-		         Prog, grp.gr_name, gr_dbname ());
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp.gr_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -293,7 +293,9 @@ static void grp_update (void)
 	 * Write out the new shadow group entries as well.
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
-		fprintf (stderr, _("%s: cannot add entry '%s' to %s\n"), Prog, sgrp.sg_name, sgr_dbname ());
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, sgr_dbname (), sgrp.sg_name);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "adding group",
@@ -645,21 +647,16 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 			lpwd = pw_locate (pwd->pw_name);
 			if (NULL == lpwd) {
 				fprintf (stderr,
-				         _("%s: cannot change the primary group of user '%s' from %lu to %lu, since it is not in %s.\n"),
-				         Prog, pwd->pw_name,
-				         (unsigned long) ogid,
-				         (unsigned long) ngid,
-				         pw_dbname ());
+				         _("%s: user '%s' does not exist in %s\n"),
+				         Prog, pwd->pw_name, pw_dbname ());
 				fail_exit (E_GRP_UPDATE);
 			} else {
 				npwd = *lpwd;
 				npwd.pw_gid = ngid;
 				if (pw_update (&npwd) == 0) {
 					fprintf (stderr,
-					         _("%s: cannot change the primary group of user '%s' from %lu to %lu.\n"),
-					         Prog, pwd->pw_name,
-					         (unsigned long) ogid,
-					         (unsigned long) ngid);
+					         _("%s: failed to prepare the new %s entry '%s'\n"),
+					         Prog, pw_dbname (), npwd.pw_name);
 					fail_exit (E_GRP_UPDATE);
 				}
 			}

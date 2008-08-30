@@ -284,7 +284,11 @@ int main (int argc, char **argv)
 			fail_exit (EXIT_MEMBER_EXISTS);
 		}
 		grp->gr_mem = add_list (grp->gr_mem, adduser);
-		gr_update (grp);
+		if (gr_update (grp) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			fail_exit (13);
+		}
 	} else if (NULL != deluser) {
 		if (!is_on_list (grp->gr_mem, adduser)) {
 			fprintf (stderr,
@@ -293,10 +297,18 @@ int main (int argc, char **argv)
 			fail_exit (EXIT_NOT_MEMBER);
 		}
 		grp->gr_mem = del_list (grp->gr_mem, deluser);
-		gr_update (grp);
+		if (gr_update (grp) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			fail_exit (13);
+		}
 	} else if (purge) {
 		grp->gr_mem[0] = NULL;
-		gr_update (grp);
+		if (gr_update (grp) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			fail_exit (13);
+		}
 	}
 
 	if (gr_close () == 0) {

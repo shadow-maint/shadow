@@ -492,19 +492,23 @@ int main (int argc, char **argv)
 		 */
 #ifdef SHADOWGRP
 		if (NULL != sg) {
-			ok = sgr_update (&newsg);
+			if (sgr_update (&newsg) == 0) {
+				fprintf (stderr,
+				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         Prog, line, sgr_dbname (), newsg.sg_name);
+				errors++;
+				continue;
+			}
 		} else
 #endif
 		{
-			ok = gr_update (&newgr);
-		}
-
-		if (0 == ok) {
-			fprintf (stderr,
-			         _("%s: line %d: cannot update group entry\n"),
-			         Prog, line);
-			errors++;
-			continue;
+			if (gr_update (&newgr) == 0) {
+				fprintf (stderr,
+				         _("%s: line %d: failed to prepare the new %s entry '%s'\n"),
+				         Prog, line, gr_dbname (), newgr.gr_name);
+				errors++;
+				continue;
+			}
 		}
 	}
 

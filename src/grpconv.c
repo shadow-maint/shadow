@@ -171,9 +171,8 @@ int main (int argc, char **argv)
 
 		if (sgr_update (&sgent) == 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: can't update shadow entry for %s\n"),
-				 Prog, sgent.sg_name);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), sgent.sg_name);
 			fail_exit (3);
 		}
 		/* remove password from /etc/group */
@@ -181,9 +180,8 @@ int main (int argc, char **argv)
 		grent.gr_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (gr_update (&grent) == 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: can't update entry for group %s\n"),
-				 Prog, grent.gr_name);
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), grent.gr_name);
 			fail_exit (3);
 		}
 	}

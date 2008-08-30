@@ -663,8 +663,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 		pwent.pw_passwd = SHADOW_PASSWD_STRING;	/* XXX warning: const */
 		if (pw_update (&pwent) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot update %s\n"), Prog, pw_dbname ());
-			SYSLOG ((LOG_WARN, "cannot update %s", pw_dbname ()));
+			         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, pw_dbname (), pwent.pw_name);
 			fail_exit (E_NOPERM);
 		}
 	} else {
@@ -687,8 +686,7 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 
 	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
-		         _("%s: cannot update %s\n"), Prog, spw_dbname ());
-		SYSLOG ((LOG_WARN, "cannot update %s", spw_dbname ()));
+		         _("%s: failed to prepare the new %s entry '%s'\n"), Prog, spw_dbname (), spwent.sp_namp);
 		fail_exit (E_NOPERM);
 	}
 
