@@ -36,6 +36,7 @@
 
 #ident "$Id$"
 
+#include <assert.h>
 #include "prototypes.h"
 #include "defines.h"
 /*
