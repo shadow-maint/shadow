@@ -38,9 +38,9 @@ AC_CHECK_HEADERS(errno.h fcntl.h limits.h unistd.h sys/time.h utmp.h \
 dnl shadow now uses the libc's shadow implementation
 AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 
-AC_CHECK_FUNCS(l64a fchmod fchown fsync getgroups gethostname getspnam \
+AC_CHECK_FUNCS(l64a fchmod fchown fsync futimes getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
-	memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
+	lutimes memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
 	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r)
 AC_SYS_LARGEFILE
 
@@ -235,10 +235,18 @@ AC_ARG_WITH(libcrack,
 AC_ARG_WITH(sha-crypt,
 	[AC_HELP_STRING([--with-sha-crypt], [allow the SHA256 and SHA512 password encryption algorithms @<:@default=yes@:>@])],
 	[with_sha_crypt=$withval], [with_sha_crypt=yes])
+AC_ARG_WITH(nscd,
+	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
+	[with_nscd=$withval], [with_nscd=yes])
 
 AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
 if test "$with_sha_crypt" = "yes"; then
 		AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
+fi
+
+AM_CONDITIONAL(USE_NSCD, test "x$with_nscd" = "xyes")
+if test "$with_nscd" = "yes"; then
+	AC_DEFINE(USE_NSCD, 1, [Define to support flushing of nscd caches])
 fi
 
 dnl Check for some functions in libc first, only if not found check for
@@ -457,4 +465,5 @@ echo "	SELinux support:		$with_selinux"
 echo "	shadow group support:		$enable_shadowgrp"
 echo "	S/Key support:			$with_skey"
 echo "	SHA passwords encryption:	$with_sha_crypt"
+echo "	nscd support:			$with_nscd"
 echo

@@ -1,5 +1,8 @@
 /* Author: Peter Vrabec <pvrabec@redhat.com> */
 
+#include <config.h>
+#ifdef USE_NSCD
+
 /* because of TEMP_FAILURE_RETRY */
 #define _GNU_SOURCE
 
@@ -54,4 +57,5 @@ int nscd_flush_cache (const char *service)
 
 	return 0;
 }
+#endif
 

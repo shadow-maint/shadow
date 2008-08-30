@@ -5,6 +5,8 @@
 	standard. Check if they are implemented before using them. Do not
 	set the time of links if lutimes() does not exist, and use
 	utimes() as a replacement for futimes().
+	* configure.in, lib/nscd.h, lib/nscd.c: Added --with-nscd flag to
+	support systems without nscd.
 
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
