@@ -1,5 +1,10 @@
 2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/expiry.c: Use Basename for Prog.
+	* src/expiry.c: Added missing OPENLOG.
+
+2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/nscd.c: Make sure the file is not empty when configured
 	without nscd support.
 

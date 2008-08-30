@@ -72,7 +72,7 @@ int main (int argc, char **argv)
 	struct passwd *pwd;
 
 	struct spwd *spwd;
-	char *Prog = argv[0];
+	char *Prog = Basename (argv[0]);
 
 	sanitize_env ();
 
@@ -93,6 +93,8 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+	OPENLOG ("expiry");
 
 	if (   (argc != 2)
 	    || (   (strcmp (argv[1], "-f") != 0)
