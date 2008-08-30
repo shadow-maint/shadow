@@ -44,19 +44,32 @@ struct passwd *__pw_dup (const struct passwd *pwent)
 {
 	struct passwd *pw;
 
-	if (!(pw = (struct passwd *) malloc (sizeof *pw)))
+	pw = (struct passwd *) malloc (sizeof *pw);
+	if (NULL == pw) {
 		return NULL;
+	}
 	*pw = *pwent;
-	if (!(pw->pw_name = strdup (pwent->pw_name)))
+	pw->pw_name = strdup (pwent->pw_name);
+	if (NULL == pw->pw_name) {
 		return NULL;
-	if (!(pw->pw_passwd = strdup (pwent->pw_passwd)))
+	}
+	pw->pw_passwd = strdup (pwent->pw_passwd);
+	if (NULL == pw->pw_passwd) {
 		return NULL;
-	if (!(pw->pw_gecos = strdup (pwent->pw_gecos)))
+	}
+	pw->pw_gecos = strdup (pwent->pw_gecos);
+	if (NULL == pw->pw_gecos) {
 		return NULL;
-	if (!(pw->pw_dir = strdup (pwent->pw_dir)))
+	}
+	pw->pw_dir = strdup (pwent->pw_dir);
+	if (NULL == pw->pw_dir) {
 		return NULL;
-	if (!(pw->pw_shell = strdup (pwent->pw_shell)))
+	}
+	pw->pw_shell = strdup (pwent->pw_shell);
+	if (NULL == pw->pw_shell) {
 		return NULL;
+	}
+
 	return pw;
 }
 

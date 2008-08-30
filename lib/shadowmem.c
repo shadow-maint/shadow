@@ -45,13 +45,20 @@ struct spwd *__spw_dup (const struct spwd *spent)
 {
 	struct spwd *sp;
 
-	if (!(sp = (struct spwd *) malloc (sizeof *sp)))
+	sp = (struct spwd *) malloc (sizeof *sp);
+	if (NULL == sp) {
 		return NULL;
+	}
 	*sp = *spent;
-	if (!(sp->sp_namp = strdup (spent->sp_namp)))
+	sp->sp_namp = strdup (spent->sp_namp);
+	if (NULL == sp->sp_namp) {
 		return NULL;
-	if (!(sp->sp_pwdp = strdup (spent->sp_pwdp)))
+	}
+	sp->sp_pwdp = strdup (spent->sp_pwdp);
+	if (NULL == sp->sp_pwdp) {
 		return NULL;
+	}
+
 	return sp;
 }
 
