@@ -291,7 +291,7 @@ int main (int argc, char **argv)
 			fail_exit (13);
 		}
 	} else if (NULL != deluser) {
-		if (!is_on_list (grp->gr_mem, adduser)) {
+		if (!is_on_list (grp->gr_mem, deluser)) {
 			fprintf (stderr,
 			         _("%s: user '%s' is not a member of '%s'\n"),
 			         Prog, deluser, grp->gr_name);

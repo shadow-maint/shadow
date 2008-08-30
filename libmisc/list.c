@@ -50,6 +50,8 @@ char **add_list (char **list, const char *member)
 	int i;
 	char **tmp;
 
+	assert (NULL != member);
+
 	/*
 	 * Scan the list for the new name.  Return the original list
 	 * pointer if it is present.
@@ -97,6 +99,8 @@ char **del_list (char **list, const char *member)
 	int i, j;
 	char **tmp;
 
+	assert (NULL != member);
+
 	/*
 	 * Scan the list for the old name.  Return the original list
 	 * pointer if it is not present.
@@ -142,12 +146,12 @@ char **dup_list (char *const *list)
 	int i;
 	char **tmp;
 
-	for (i = 0; list[i]; i++);
+	for (i = 0; NULL != list[i]; i++);
 
 	tmp = (char **) xmalloc ((i + 1) * sizeof (char *));
 
 	i = 0;
-	while (*list) {
+	while (NULL != *list) {
 		tmp[i] = xstrdup (*list);
 		i++;
 		list++;
@@ -159,12 +163,15 @@ char **dup_list (char *const *list)
 
 bool is_on_list (char *const *list, const char *member)
 {
-	while (*list) {
+	assert (NULL != member);
+
+	while (NULL != *list) {
 		if (strcmp (*list, member) == 0) {
 			return true;
 		}
 		list++;
 	}
+
 	return false;
 }
 
@@ -178,6 +185,8 @@ char **comma_to_list (const char *comma)
 	char **array;
 	int i;
 	char *cp, *cp2;
+
+	assert (NULL != comma);
 
 	/*
 	 * Make a copy since we are going to be modifying the list
