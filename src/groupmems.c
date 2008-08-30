@@ -142,15 +142,15 @@ static void process_flags (int argc, char **argv)
 			deluser = xstrdup (optarg);
 			++exclusive;
 			break;
-		case 'p':
-			purge = true;
-			++exclusive;
-			break;
 		case 'g':
 			thisgroup = xstrdup (optarg);
 			break;
 		case 'l':
 			list = true;
+			++exclusive;
+			break;
+		case 'p':
+			purge = true;
 			++exclusive;
 			break;
 		default:

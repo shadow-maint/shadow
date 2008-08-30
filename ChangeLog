@@ -1,5 +1,9 @@
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Handle the options alphabetically.
+
+2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: When removing an user, check if deluser is on
 	the list, not adduser. This fixes a segmentation fault for every
 	call of groupmems -d.
