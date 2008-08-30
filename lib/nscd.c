@@ -57,5 +57,7 @@ int nscd_flush_cache (const char *service)
 
 	return 0;
 }
-#endif
+#else				/* USE_NSCD */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* USE_NSCD */
 
