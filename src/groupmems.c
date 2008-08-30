@@ -242,6 +242,10 @@ static void process_flags (int argc, char **argv)
 
 static void check_perms (void)
 {
+	if (list) {
+		return;
+	}
+
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
@@ -285,6 +289,41 @@ static void fail_exit (int code)
 	exit (code);
 }
 
+static void open_files (void)
+{
+	if (!list) {
+		if (gr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, gr_dbname ());
+			fail_exit (EXIT_GROUP_FILE);
+		}
+		gr_locked = true;
+	}
+
+	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		fail_exit (EXIT_GROUP_FILE);
+	}
+}
+
+static void close_files (void)
+{
+	if (gr_close () == 0) {
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		fail_exit (EXIT_GROUP_FILE);
+	}
+	if (gr_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+		gr_locked = false;
+	}
+}
+
 int main (int argc, char **argv) 
 {
 	char *name;
@@ -317,17 +356,9 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (!list) {
-		check_perms ();
+	check_perms ();
 
-		if (gr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, gr_dbname ());
-			fail_exit (EXIT_GROUP_FILE);
-		}
-		gr_locked = true;
-	}
+	open_files ();
 
 	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
@@ -352,16 +383,7 @@ int main (int argc, char **argv)
 		purge_members (grp);
 	}
 
-	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing %s", gr_dbname ()));
-		fail_exit (EXIT_GROUP_FILE);
-	}
-	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
-		/* continue */
-	}
+	close_files ();
 
 	exit (EXIT_SUCCESS);
 }
