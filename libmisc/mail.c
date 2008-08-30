@@ -47,8 +47,9 @@ void mailcheck (void)
 	struct stat statbuf;
 	char *mailbox;
 
-	if (!getdef_bool ("MAIL_CHECK_ENAB"))
+	if (!getdef_bool ("MAIL_CHECK_ENAB")) {
 		return;
+	}
 
 	/*
 	 * Check incoming mail in Maildir format - J.
@@ -69,13 +70,18 @@ void mailcheck (void)
 		free (newmail);
 	}
 
-	if (!(mailbox = getenv ("MAIL")))
+	mailbox = getenv ("MAIL");
+	if (NULL == mailbox) {
 		return;
+	}
 
-	if (stat (mailbox, &statbuf) == -1 || statbuf.st_size == 0)
+	if (   (stat (mailbox, &statbuf) == -1)
+	    || (statbuf.st_size == 0)) {
 		puts (_("No mail."));
-	else if (statbuf.st_atime > statbuf.st_mtime)
+	} else if (statbuf.st_atime > statbuf.st_mtime) {
 		puts (_("You have mail."));
-	else
+	} else {
 		puts (_("You have new mail."));
+	}
 }
+

@@ -1,3 +1,8 @@
+2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/mail.c: Added brackets and parenthesis.
+	* libmisc/mail.c: Avoid assignments in comparisons.
+
 2008-08-26  Tobias  <tp@fonz.de>
 
 	* NEWS: Added support for uclibc.
