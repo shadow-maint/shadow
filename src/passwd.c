@@ -879,7 +879,9 @@ int main (int argc, char **argv)
 	pw = get_my_pwent ();
 	if (NULL == pw) {
 		fprintf (stderr,
-			 _("%s: Cannot determine your user name.\n"), Prog);
+		         _("%s: Cannot determine your user name.\n"), Prog);
+		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		         (unsigned long) getuid ()));
 		exit (E_NOPERM);
 	}
 	myname = xstrdup (pw->pw_name);

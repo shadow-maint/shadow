@@ -1,3 +1,11 @@
+2008-08-25  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chfn.c, src/chsh.c, src/expiry.c, src/gpasswd.c,
+	src/newgrp.c, src/passwd.c, src/su.c: Use the same stderr and
+	syslog warnings when the username cannot be determined.
+	* src/newgrp.c: Reuse the same stderr message for groups which do
+	not exist in the system.
+
 2008-08-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/usermod.c: Log errors while *_close to syslog.

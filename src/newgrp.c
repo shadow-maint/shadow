@@ -421,14 +421,14 @@ int main (int argc, char **argv)
 
 	pwd = get_my_pwent ();
 	if (NULL == pwd) {
-		fprintf (stderr, _("unknown UID: %lu\n"),
-		         (unsigned long) getuid ());
+		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		         Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_CHGRP_ID, Prog,
 		              "changing", NULL,
 		              (unsigned int) getuid (), 0);
 #endif
-		SYSLOG ((LOG_WARN, "unknown UID %lu",
+		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
 		closelog ();
 		exit (1);
@@ -598,7 +598,7 @@ int main (int argc, char **argv)
 	 */
 	grp = getgrnam (group); /* local, no need for xgetgrnam */
 	if (NULL == grp) {
-		fprintf (stderr, _("unknown group: %s\n"), group);
+		fprintf (stderr, _("%s: group '%s' does not exist\n"), Prog, group);
 		goto failure;
 	}
 

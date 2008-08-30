@@ -468,7 +468,10 @@ int main (int argc, char **argv)
 	 */
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		SYSLOG ((LOG_CRIT, "Unknown UID: %u", my_uid));
+		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		         Prog);
+		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		         (unsigned long) my_uid));
 		su_failure (tty);
 	}
 	STRFCPY (oldname, pw->pw_name);

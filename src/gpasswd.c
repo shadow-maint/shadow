@@ -851,12 +851,15 @@ int main (int argc, char **argv)
 
 	pw = get_my_pwent ();
 	if (NULL == pw) {
-		fputs (_("Who are you?\n"), stderr);
+		fprintf (stderr, _("%s: Cannot determine your user name.\n"),
+		         Prog);
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "user lookup",
 		              NULL, (unsigned int) bywho, 0);
 #endif
+		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+		         (unsigned long) getuid ()));
 		failure ();
 	}
 	myname = xstrdup (pw->pw_name);

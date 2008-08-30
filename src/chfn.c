@@ -651,6 +651,8 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 			         _("%s: Cannot determine your user name.\n"),
 			         Prog);
+			SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
+			         (unsigned long) getuid ()));
 			fail_exit (E_NOPERM);
 		}
 		user = xstrdup (pw->pw_name);
