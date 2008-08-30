@@ -199,7 +199,8 @@ static void grp_update (void)
 	 */
 	if (gr_update (&grp) == 0) {
 		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp.gr_name);
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
@@ -208,7 +209,8 @@ static void grp_update (void)
 	 */
 	if (is_shadow_grp && (sgr_update (&sgrp) == 0)) {
 		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry\n"), Prog, sgr_dbname ());
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, sgr_dbname (), sgrp.sg_name);
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */

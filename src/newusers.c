@@ -284,7 +284,6 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 }
 
 static int get_uid (const char *uid, uid_t *nuid) {
-	const struct passwd *pwd = NULL;
 
 	/*
 	 * The first guess for the UID is either the numerical UID that the
@@ -302,6 +301,7 @@ static int get_uid (const char *uid, uid_t *nuid) {
 		*nuid = (uid_t) i;
 	} else {
 		if ('\0' != uid[0]) {
+			const struct passwd *pwd;
 			/* local, no need for xgetpwnam */
 			pwd = getpwnam (uid);
 			if (NULL == pwd) {

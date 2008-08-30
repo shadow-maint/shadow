@@ -1,4 +1,13 @@
-2008-08-25  Nicolas François  <nicolas.francois@centraliens.net>
+2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chfn.c: Merge some translated messages.
+	* src/groupmems.c, src/groupadd.c, src/gpasswd.c, src/chsh.c,
+	src/chfn.c: Harmonize *_update() failure messages.
+	* src/groupmems.c: Harmonize gr_close() failure messages.
+	* src/newgrp.c: Harmonize "unknown GID" messages.
+	* src/newusers.c: Move the pwd declaration to a inner block scope.
+
+2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Harmonize some error messages.
 	* src/userdel.c: Add log to syslog when the mail file could not be

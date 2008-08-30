@@ -190,25 +190,25 @@ static void new_fields (void)
 	if (may_change_field ('f')) {
 		change_field (fullnm, sizeof fullnm, _("Full Name"));
 	} else {
-		printf (_("\tFull Name: %s\n"), fullnm);
+		printf (_("\t%s: %s\n"), _("Full Name"), fullnm);
 	}
 
 	if (may_change_field ('r')) {
 		change_field (roomno, sizeof roomno, _("Room Number"));
 	} else {
-		printf (_("\tRoom Number: %s\n"), roomno);
+		printf (_("\t%s: %s\n"), _("Room Number"), fullnm);
 	}
 
 	if (may_change_field ('w')) {
 		change_field (workph, sizeof workph, _("Work Phone"));
 	} else {
-		printf (_("\tWork Phone: %s\n"), workph);
+		printf (_("\t%s: %s\n"), _("Work Phone"), fullnm);
 	}
 
 	if (may_change_field ('h')) {
 		change_field (homeph, sizeof homeph, _("Home Phone"));
 	} else {
-		printf (_("\tHome Phone: %s\n"), homeph);
+		printf (_("\t%s: %s\n"), _("Home Phone"), fullnm);
 	}
 
 	if (amroot) {
@@ -476,8 +476,8 @@ static void update_gecos (const char *user, char *gecos)
 	 */
 	if (pw_update (&pwent) == 0) {
 		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry\n"),
-		         Prog, pw_dbname ());
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, pw_dbname (), pwent.pw_name);
 		fail_exit (E_NOPERM);
 	}
 

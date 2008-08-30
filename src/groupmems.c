@@ -286,7 +286,8 @@ int main (int argc, char **argv)
 		grp->gr_mem = add_list (grp->gr_mem, adduser);
 		if (gr_update (grp) == 0) {
 			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), grp->gr_name);
 			fail_exit (13);
 		}
 	} else if (NULL != deluser) {
@@ -299,20 +300,22 @@ int main (int argc, char **argv)
 		grp->gr_mem = del_list (grp->gr_mem, deluser);
 		if (gr_update (grp) == 0) {
 			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), grp->gr_name);
 			fail_exit (13);
 		}
 	} else if (purge) {
 		grp->gr_mem[0] = NULL;
 		if (gr_update (grp) == 0) {
 			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry\n"), Prog, gr_dbname ());
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, gr_dbname (), grp->gr_name);
 			fail_exit (13);
 		}
 	}
 
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: failure while writing %s\n"), Prog, gr_dbname ());
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failure while writing %s", gr_dbname ()));
 		fail_exit (EXIT_GROUP_FILE);
 	}

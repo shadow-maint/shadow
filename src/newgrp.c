@@ -507,10 +507,11 @@ int main (int argc, char **argv)
 			 */
 			grp = xgetgrgid (pwd->pw_gid);
 			if (NULL == grp) {
-				fprintf (stderr, _("unknown GID: %lu\n"),
-					 (unsigned long) pwd->pw_gid);
-				SYSLOG ((LOG_CRIT, "unknown GID: %lu",
-					 (unsigned long) pwd->pw_gid));
+				fprintf (stderr,
+				         _("%s: GID '%lu' does not exist\n"),
+				         Prog, (unsigned long) pwd->pw_gid);
+				SYSLOG ((LOG_CRIT, "GID '%lu' does not exist",
+				        (unsigned long) pwd->pw_gid));
 				goto failure;
 			} else {
 				group = grp->gr_name;

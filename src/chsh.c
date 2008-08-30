@@ -401,7 +401,8 @@ static void update_shell (const char *user, char *newshell)
 	 */
 	if (pw_update (&pwent) == 0) {
 		fprintf (stderr,
-		         _("%s: failed to prepare the new %s entry\n"), Prog, pw_dbname ());
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, pw_dbname (), pwent.pw_name);
 		fail_exit (1);
 	}
 
