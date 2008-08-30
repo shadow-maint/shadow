@@ -35,6 +35,7 @@
 #ifndef _GROUPIO_H
 #define _GROUPIO_H
 
+#include <sys/types.h>
 #include <grp.h>
 
 extern int gr_close (void);

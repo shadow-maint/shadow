@@ -35,6 +35,7 @@
 #ident "$Id$"
 
 #include <stdio.h>
+#include <sys/types.h>
 #include <grp.h>
 #include "defines.h"
 #include "prototypes.h"

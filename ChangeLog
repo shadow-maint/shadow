@@ -7,6 +7,11 @@
 	utimes() as a replacement for futimes().
 	* configure.in, lib/nscd.h, lib/nscd.c: Added --with-nscd flag to
 	support systems without nscd.
+	* lib/groupio.h, lib/prototypes.h, lib/pwio.h, lib/sgetgrent.c:
+	Include <sys/types.h> before <pwd.h> and <grp.h>. It is necessary
+	for the definition of uid_t and gid_t.
+	* lib/pwmem.c: do not include <pwd.h>, "pwio.h" is sufficient
+	here.
 
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 

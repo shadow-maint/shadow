@@ -48,6 +48,7 @@
 #else
 #include <utmp.h>
 #endif
+#include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
 #include <shadow.h>

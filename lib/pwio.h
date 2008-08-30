@@ -35,7 +35,9 @@
 #ifndef _PWIO_H
 #define _PWIO_H
 
+#include <sys/types.h>
 #include <pwd.h>
+
 extern int pw_close (void);
 extern const struct passwd *pw_locate (const char *name);
 extern const struct passwd *pw_locate_uid (uid_t uid);

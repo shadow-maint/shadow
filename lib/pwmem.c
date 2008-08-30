@@ -35,10 +35,9 @@
 
 #ident "$Id$"
 
+#include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-#include <pwd.h>
-#include <stdio.h>
 #include "pwio.h"
 
 struct passwd *__pw_dup (const struct passwd *pwent)
