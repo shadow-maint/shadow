@@ -1,5 +1,10 @@
 2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: Added functions add_user(), remove_user(), and
+	purge_members() to ease the support of gshadow.
+
+2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/expiry.c: Use Basename for Prog.
 	* src/expiry.c: Added missing OPENLOG.
 

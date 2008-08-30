@@ -71,6 +71,11 @@ static char *Prog;
 static bool gr_locked = false;
 
 static char *whoami (void);
+static void add_user (const char *user,
+                      struct group *grp);
+static void remove_user (const char *user, 
+                         struct group *grp);
+static void purge_members (struct group *grp);
 static void display_members (char **members);
 static void usage (void);
 static void process_flags (int argc, char **argv);
@@ -91,6 +96,69 @@ static char *whoami (void)
 		return xstrdup (usr->pw_name);
 	} else {
 		return NULL;
+	}
+}
+
+/*
+ * add_user - Add an user to the specified group
+ */
+static void add_user (const char *user,
+                      struct group *grp)
+{
+	/* Make sure the user is not already part of the group */
+	if (is_on_list (grp->gr_mem, user)) {
+		fprintf (stderr,
+		         _("%s: user '%s' is already a member of '%s'\n"),
+		         Prog, user, grp->gr_name);
+		fail_exit (EXIT_MEMBER_EXISTS);
+	}
+
+	/* Add the user to the /etc/group group */
+	grp->gr_mem = add_list (grp->gr_mem, user);
+	if (gr_update (grp) == 0) {
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp->gr_name);
+		fail_exit (13);
+	}
+}
+
+/*
+ * remove_user - Remove an user from a given group
+ */
+static void remove_user (const char *user, 
+                         struct group *grp)
+{
+	/* Check if the user is a member of the specified group */
+	if (!is_on_list (grp->gr_mem, user)) {
+		fprintf (stderr,
+		         _("%s: user '%s' is not a member of '%s'\n"),
+		         Prog, user, grp->gr_name);
+		fail_exit (EXIT_NOT_MEMBER);
+	}
+
+	/* Remove the user from the /etc/group group */
+	grp->gr_mem = del_list (grp->gr_mem, user);
+	if (gr_update (grp) == 0) {
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp->gr_name);
+		fail_exit (13);
+	}
+}
+
+/*
+ * purge_members - Rmeove every members of the specified group
+ */
+static void purge_members (struct group *grp)
+{
+	/* Remove all the members of the /etc/group group */
+	grp->gr_mem[0] = NULL;
+	if (gr_update (grp) == 0) {
+		fprintf (stderr,
+		         _("%s: failed to prepare the new %s entry '%s'\n"),
+		         Prog, gr_dbname (), grp->gr_name);
+		fail_exit (13);
 	}
 }
 
@@ -277,41 +345,11 @@ int main (int argc, char **argv)
 	if (list) {
 		display_members (grp->gr_mem);
 	} else if (NULL != adduser) {
-		if (is_on_list (grp->gr_mem, adduser)) {
-			fprintf (stderr,
-			         _("%s: user '%s' is already a member of '%s'\n"),
-			         Prog, adduser, grp->gr_name);
-			fail_exit (EXIT_MEMBER_EXISTS);
-		}
-		grp->gr_mem = add_list (grp->gr_mem, adduser);
-		if (gr_update (grp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, gr_dbname (), grp->gr_name);
-			fail_exit (13);
-		}
+		add_user (adduser, grp);
 	} else if (NULL != deluser) {
-		if (!is_on_list (grp->gr_mem, deluser)) {
-			fprintf (stderr,
-			         _("%s: user '%s' is not a member of '%s'\n"),
-			         Prog, deluser, grp->gr_name);
-			fail_exit (EXIT_NOT_MEMBER);
-		}
-		grp->gr_mem = del_list (grp->gr_mem, deluser);
-		if (gr_update (grp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, gr_dbname (), grp->gr_name);
-			fail_exit (13);
-		}
+		remove_user (deluser, grp);
 	} else if (purge) {
-		grp->gr_mem[0] = NULL;
-		if (gr_update (grp) == 0) {
-			fprintf (stderr,
-			         _("%s: failed to prepare the new %s entry '%s'\n"),
-			         Prog, gr_dbname (), grp->gr_name);
-			fail_exit (13);
-		}
+		purge_members (grp);
 	}
 
 	if (gr_close () == 0) {
