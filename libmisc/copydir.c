@@ -288,16 +288,21 @@ static int copy_entry (const char *src, const char *dst,
 	if (LSTAT (src, &sb) == -1) {
 		/* If we cannot stat the file, do not care. */
 	} else {
-#if  defined(_BSD_SOURCE) || defined(_SVID_SOURCE)
+#ifdef	HAVE_STRUCT_STAT_ST_ATIM
 		mt[0].tv_sec  = sb.st_atim.tv_sec;
 		mt[0].tv_usec = sb.st_atim.tv_nsec / 1000;
 		mt[1].tv_sec  = sb.st_mtim.tv_sec;
 		mt[1].tv_usec = sb.st_mtim.tv_nsec / 1000;
 #else
 		mt[0].tv_sec  = sb.st_atime;
-		mt[0].tv_usec = sb.st_atimensec / 1000;
 		mt[1].tv_sec  = sb.st_mtime;
+#ifdef HAVE_STRUCT_STAT_ST_ATIMENSEC
+		mt[0].tv_usec = sb.st_atimensec / 1000;
 		mt[1].tv_usec = sb.st_mtimensec / 1000;
+#else
+		mt[0].tv_usec = 0;
+		mt[1].tv_usec = 0;
+#endif
 #endif
 
 		if (S_ISDIR (sb.st_mode)) {

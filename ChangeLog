@@ -12,6 +12,10 @@
 	for the definition of uid_t and gid_t.
 	* lib/pwmem.c: do not include <pwd.h>, "pwio.h" is sufficient
 	here.
+	* configure.in: Check if the stat structure has a st_atim or
+	st_atimensec field.
+	* libmisc/copydir.c: Conditionally use the stat's st_atim and
+	st_atimensec fields.
 
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
