@@ -168,9 +168,9 @@ static void reset (void)
 {
 	uid_t uid;
 
-	if (uflg)
+	if (uflg) {
 		reset_one (user);
-	else {
+	} else {
 		struct passwd *pwent;
 
 		setpwent ();
@@ -198,10 +198,11 @@ static void print (void)
 		}
 
 		fseeko (fail, (off_t) user * sizeof faillog, SEEK_SET);
-		if (fread ((char *) &faillog, sizeof faillog, 1, fail) == 1)
+		if (fread ((char *) &faillog, sizeof faillog, 1, fail) == 1) {
 			print_one (&faillog, user);
-		else
+		} else {
 			perror (FAILLOG_FILE);
+		}
 	} else {
 		for (uid = 0;
 		     fread ((char *) &faillog, sizeof faillog, 1, fail) == 1;
