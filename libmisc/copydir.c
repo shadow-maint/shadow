@@ -431,12 +431,14 @@ static int copy_symlink (const char *src, const char *dst,
 		return -1;
 	}
 
+#ifdef HAVE_LUTIMES
 	/* 2007-10-18: We don't care about
 	 *  exit status of lutimes because
 	 *  it returns ENOSYS on many system
 	 *  - not implemented
 	 */
 	lutimes (dst, mt);
+#endif
 
 	return err;
 }
@@ -548,9 +550,15 @@ static int copy_file (const char *src, const char *dst,
 
 	(void) close (ifd);
 
+#ifdef HAVE_FUTIMES
 	if (futimes (ofd, mt) != 0) {
 		return -1;
 	}
+#else
+	if (utimes(dst, mt) != 0) {
+		return -1;
+	}
+#endif
 
 	if (close (ofd) != 0) {
 		return -1;

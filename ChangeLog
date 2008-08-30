@@ -1,3 +1,11 @@
+2008-08-26  Tobias  <tp@fonz.de>
+
+	* NEWS: Added support for uclibc.
+	* configure.in, libmisc/copydir.c: futimes() and lutimes() are not
+	standard. Check if they are implemented before using them. Do not
+	set the time of links if lutimes() does not exist, and use
+	utimes() as a replacement for futimes().
+
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Handle the options alphabetically.
