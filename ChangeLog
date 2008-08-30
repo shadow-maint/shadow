@@ -1,5 +1,10 @@
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmems.c: Use the "groupmems" PAM service name
+	instead of "groupmod".
+
+2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chfn.c: Merge some translated messages.
 	* src/groupmems.c, src/groupadd.c, src/gpasswd.c, src/chsh.c,
 	src/chfn.c: Harmonize *_update() failure messages.

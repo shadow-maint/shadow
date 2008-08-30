@@ -183,7 +183,7 @@ static void check_perms (void)
 	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
 	} else {
-		retval = pam_start ("groupmod", pampw->pw_name,
+		retval = pam_start ("groupmems", pampw->pw_name,
 		                    &conv, &pamh);
 	}
 
