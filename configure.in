@@ -246,9 +246,10 @@ if test "$with_sha_crypt" = "yes"; then
 		AC_DEFINE(USE_SHA_CRYPT, 1, [Define to allow the SHA256 and SHA512 password encryption algorithms])
 fi
 
-AM_CONDITIONAL(USE_NSCD, test "x$with_nscd" = "xyes")
 if test "$with_nscd" = "yes"; then
-	AC_DEFINE(USE_NSCD, 1, [Define to support flushing of nscd caches])
+	AC_CHECK_FUNC(posix_spawn,
+	              [AC_DEFINE(USE_NSCD, 1, [Define to support flushing of nscd caches])],
+	              [AC_MSG_ERROR([posix_spawn is needed for nscd support])])
 fi
 
 dnl Check for some functions in libc first, only if not found check for

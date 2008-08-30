@@ -1,3 +1,10 @@
+2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in: Remove the USE_NSCD AM_CONDITIONAL (USE_NSCD is
+	not used in any Makefile.am).
+	* configure.in: Make sure posix_spawn is present when configured
+	with nscd support.
+
 2008-08-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/groupmem.c, lib/pwmem.c, lib/shadowmem.c: Added brackets and
@@ -17,8 +24,8 @@
 	standard. Check if they are implemented before using them. Do not
 	set the time of links if lutimes() does not exist, and use
 	utimes() as a replacement for futimes().
-	* configure.in, lib/nscd.h, lib/nscd.c: Added --with-nscd flag to
-	support systems without nscd.
+	* configure.in, lib/nscd.h, lib/nscd.c: Added --with-nscd and
+	--without-nscd flags to support systems without nscd.
 	* lib/groupio.h, lib/prototypes.h, lib/pwio.h, lib/sgetgrent.c:
 	Include <sys/types.h> before <pwd.h> and <grp.h>. It is necessary
 	for the definition of uid_t and gid_t.
