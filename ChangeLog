@@ -1,3 +1,10 @@
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/obscure.c: Add brackets and parenthesis.
+	* libmisc/obscure.c: Avoid implicit conversion of pointers / chars to
+	booleans.
+	* libmisc/obscure.c: Simplify the list of if.
+
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/passwd.c: Fix a typo in the Usage string.
