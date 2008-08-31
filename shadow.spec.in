@@ -7,7 +7,7 @@ Version:	@VERSION@
 Release:	1
 Copyright:	Free
 Group:		Utilities/System
-Source:		ftp://ftp.pld.org.pl/software/shadow/%{name}-%{version}.tar.gz
+Source:		ftp://pkg-shadow.alioth.debian.org/pub/pkg-shadow/%{name}-%{version}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Obsoletes:	adduser
 

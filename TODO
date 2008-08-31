@@ -1,5 +1,3 @@
-Fix ./shadow.spec.in:Source:
-
 Replace build_list (in lib/gshadow.c) and list (in lib/sgetgrent.c) by
 comma_to_list()
 

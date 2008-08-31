@@ -1,5 +1,9 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* shadow.spec.in: Fix the source (new FTP).
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: Add brackets and parenthesis.
 	* src/su.c: Avoid implicit conversion of pointers to booleans.
 
