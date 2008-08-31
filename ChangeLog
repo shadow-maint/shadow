@@ -1,5 +1,10 @@
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c: Mark the line and host arguments of setutmp() as
+	not used in the __linux__ version.
+
+2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/nscd.c: Avoid redefinition of _GNU_SOURCE.
 
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>

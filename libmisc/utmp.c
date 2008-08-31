@@ -280,7 +280,7 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 
 #if defined(__linux__)		/* XXX */
 
-int setutmp (const char *name, const char *line, const char *host)
+int setutmp (const char *name, const char unused(*line), const char unused(*host))
 {
 	int err = 0;
 	utent.ut_type = USER_PROCESS;
