@@ -467,6 +467,19 @@ static void fail_exit (int code)
 			/* continue */
 		}
 	}
+
+#ifdef SHADOWGRP
+	if (sgr_locked) {
+		if (sgr_unlock () == 0) {
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+			/* continue */
+		}
+	}
+#endif
+
 	exit (code);
 }
 
@@ -480,12 +493,33 @@ static void open_files (void)
 			fail_exit (EXIT_GROUP_FILE);
 		}
 		gr_locked = true;
+
+#ifdef SHADOWGRP
+		if (is_shadowgrp) {
+			if (sgr_lock () == 0) {
+				fprintf (stderr,
+				         _("%s: cannot lock %s; try again later.\n"),
+				         Prog, sgr_dbname ());
+				fail_exit (EXIT_GROUP_FILE);
+			}
+			sgr_locked = true;
+		}
+#endif
 	}
 
 	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		fail_exit (EXIT_GROUP_FILE);
 	}
+
+#ifdef SHADOWGRP
+	if (is_shadowgrp) {
+		if (sgr_open (list ? O_RDONLY : O_RDWR) == 0) {
+			fprintf (stderr, _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+			fail_exit (EXIT_GROUP_FILE);
+		}
+	}
+#endif
 }
 
 static void close_files (void)
@@ -503,6 +537,24 @@ static void close_files (void)
 		}
 		gr_locked = false;
 	}
+
+#ifdef SHADOWGRP
+	if (is_shadowgrp) {
+		if ((sgr_close () == 0) && !list) {
+			fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+			fail_exit (EXIT_GROUP_FILE);
+		}
+		if (sgr_locked) {
+			if (sgr_unlock () == 0) {
+				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+				/* continue */
+			}
+			sgr_locked = false;
+		}
+	}
+#endif
 }
 
 int main (int argc, char **argv) 
@@ -520,6 +572,10 @@ int main (int argc, char **argv)
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
+
+#ifdef SHADOWGRP
+	is_shadowgrp = sgr_file_present ();
+#endif
 
 	process_flags (argc, argv);
 
