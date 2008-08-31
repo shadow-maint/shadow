@@ -5,6 +5,7 @@
 	* src/groupmems.c: Do not fail and do not display warnings if a
 	close failure happens with the --list option. (Files are opened
 	read-only).
+	* src/groupmems.c: Avoid mixed declarations and code.
 
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 

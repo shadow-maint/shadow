@@ -272,6 +272,7 @@ static void process_flags (int argc, char **argv)
 
 static void check_perms (void)
 {
+	if (!list) {
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval = PAM_SUCCESS;
@@ -299,6 +300,7 @@ static void check_perms (void)
 		fail_exit (1);
 	}
 #endif
+	}
 }
 
 static void fail_exit (int code)
