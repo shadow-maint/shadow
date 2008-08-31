@@ -58,7 +58,7 @@ static bool sgr_locked = false;
 static char *Prog;
 
 /* local function prototypes */
-static void fail_exit (int);
+static void fail_exit (int status);
 
 static void fail_exit (int status)
 {
@@ -88,6 +88,9 @@ int main (int argc, char **argv)
 	const struct sgrp *sg;
 	struct sgrp sgent;
 
+	if (1 != argc) {
+		(void) fputs (_("Usage: grpconv\n"), stderr);
+	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
@@ -218,7 +221,7 @@ int main (int argc, char **argv)
 	return 0;
 }
 #else				/* !SHADOWGRP */
-int main (int argc, char **argv)
+int main (int unused(argc), char **argv)
 {
 	fprintf (stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);
