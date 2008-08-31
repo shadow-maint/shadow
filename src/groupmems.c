@@ -274,31 +274,31 @@ static void check_perms (void)
 {
 	if (!list) {
 #ifdef USE_PAM
-	pam_handle_t *pamh = NULL;
-	int retval = PAM_SUCCESS;
-	struct passwd *pampw;
+		pam_handle_t *pamh = NULL;
+		int retval = PAM_SUCCESS;
+		struct passwd *pampw;
 
-	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (NULL == pampw) {
-		retval = PAM_USER_UNKNOWN;
-	} else {
-		retval = pam_start ("groupmems", pampw->pw_name,
-		                    &conv, &pamh);
-	}
+		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
+		if (NULL == pampw) {
+			retval = PAM_USER_UNKNOWN;
+		} else {
+			retval = pam_start ("groupmems", pampw->pw_name,
+					    &conv, &pamh);
+		}
 
-	if (PAM_SUCCESS == retval) {
-		retval = pam_authenticate (pamh, 0);
-	}
+		if (PAM_SUCCESS == retval) {
+			retval = pam_authenticate (pamh, 0);
+		}
 
-	if (PAM_SUCCESS == retval) {
-		retval = pam_acct_mgmt (pamh, 0);
-	}
+		if (PAM_SUCCESS == retval) {
+			retval = pam_acct_mgmt (pamh, 0);
+		}
 
-	(void) pam_end (pamh, retval);
-	if (PAM_SUCCESS != retval) {
-		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		fail_exit (1);
-	}
+		(void) pam_end (pamh, retval);
+		if (PAM_SUCCESS != retval) {
+			fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
+			fail_exit (1);
+		}
 #endif
 	}
 }
