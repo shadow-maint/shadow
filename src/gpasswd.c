@@ -201,7 +201,7 @@ static bool is_valid_user_list (const char *users)
 {
 	const char *start, *end;
 	char username[32];
-	bool valid = true;
+	bool is_valid = true;
 	size_t len;
 
 	for (start = users; (NULL != start) && ('\0' != *start); start = end) {
@@ -227,10 +227,10 @@ static bool is_valid_user_list (const char *users)
 		if (getpwnam (username) == NULL) {
 			fprintf (stderr, _("%s: user '%s' does not exist\n"),
 			         Prog, username);
-			valid = false;
+			is_valid = false;
 		}
 	}
-	return valid;
+	return is_valid;
 }
 
 static void failure (void)

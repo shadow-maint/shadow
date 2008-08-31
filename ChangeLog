@@ -1,5 +1,10 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: Replace the 'valid' variable by is_valid to avoid
+	clashes with the valid() function.
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/obscure.c: Add brackets and parenthesis.
 	* libmisc/obscure.c: Avoid implicit conversion of pointers / chars to
 	booleans.
