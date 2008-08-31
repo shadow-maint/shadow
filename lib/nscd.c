@@ -4,7 +4,9 @@
 #ifdef USE_NSCD
 
 /* because of TEMP_FAILURE_RETRY */
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 
 #include <features.h>
 #include <stdio.h>
