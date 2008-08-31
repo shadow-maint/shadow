@@ -374,7 +374,6 @@ int main (int argc, char **argv)
 	struct group newgr;
 	int errors = 0;
 	int line = 0;
-	int ok;
 
 	Prog = Basename (argv[0]);
 

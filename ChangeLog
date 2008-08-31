@@ -1,5 +1,10 @@
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chgpasswd.c, src/chpasswd.c: Removed variable ok, which is
+	no more used.
+
+2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chage.c: Fix the format for long integers (from %ul to %lu).
 
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>

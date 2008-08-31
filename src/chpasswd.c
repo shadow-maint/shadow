@@ -364,7 +364,6 @@ int main (int argc, char **argv)
 	int errors = 0;
 	int line = 0;
 	long now = (long) time ((time_t *)NULL) / SCALE;
-	int ok;
 
 	Prog = Basename (argv[0]);
 
