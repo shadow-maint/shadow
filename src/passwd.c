@@ -195,7 +195,7 @@ static int reuse (const char *pass, const struct passwd *pw)
 
 	reason = FascistHistory (pass, pw->pw_uid);
 #endif
-	if (reason) {
+	if (NULL != reason) {
 		printf (_("Bad password: %s.  "), reason);
 		return 1;
 	}
@@ -229,8 +229,10 @@ static int new_password (const struct passwd *pw)
 	 */
 
 	if (!amroot && crypt_passwd[0]) {
-		if (!(clear = getpass (_("Old password: "))))
+		clear = getpass (_("Old password: "));
+		if (NULL == clear) {
 			return -1;
+		}
 
 		cipher = pw_encrypt (clear, crypt_passwd);
 		if (strcmp (cipher, crypt_passwd) != 0) {
@@ -256,18 +258,20 @@ static int new_password (const struct passwd *pw)
 	 * for initial login passwords.
 	 */
 	if ((method = getdef_str ("ENCRYPT_METHOD")) == NULL) {
-		if (!getdef_bool ("MD5_CRYPT_ENAB"))
+		if (!getdef_bool ("MD5_CRYPT_ENAB")) {
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
+		}
 	} else {
-		if (   !strcmp (method, "MD5")
+		if (   (strcmp (method, "MD5")    == 0)
 #ifdef USE_SHA_CRYPT
-		    || !strcmp (method, "SHA256")
-		    || !strcmp (method, "SHA512")
+		    || (strcmp (method, "SHA256") == 0)
+		    || (strcmp (method, "SHA512") == 0)
 #endif
-		    )
+		    ) {
 			pass_max_len = -1;
-		else
+		} else {
 			pass_max_len = getdef_num ("PASS_MAX_LEN", 8);
+		}
 	}
 	if (!qflg) {
 		if (pass_max_len == -1) {
@@ -285,12 +289,14 @@ static int new_password (const struct passwd *pw)
 
 	warned = 0;
 	for (i = getdef_num ("PASS_CHANGE_TRIES", 5); i > 0; i--) {
-		if (!(cp = getpass (_("New password: ")))) {
+		cp = getpass (_("New password: "));
+		if (NULL == cp) {
 			memzero (orig, sizeof orig);
 			return -1;
 		}
-		if (warned && strcmp (pass, cp) != 0)
+		if (warned && (strcmp (pass, cp) != 0)) {
 			warned = 0;
+		}
 		STRFCPY (pass, cp);
 		strzero (cp);
 
@@ -310,13 +316,14 @@ static int new_password (const struct passwd *pw)
 			warned++;
 			continue;
 		}
-		if (!(cp = getpass (_("Re-enter new password: ")))) {
+		cp = getpass (_("Re-enter new password: "));
+		if (NULL == cp) {
 			memzero (orig, sizeof orig);
 			return -1;
 		}
-		if (strcmp (cp, pass))
+		if (strcmp (cp, pass) != 0) {
 			fputs (_("They don't match; try again.\n"), stderr);
-		else {
+		} else {
 			strzero (cp);
 			break;
 		}
@@ -358,8 +365,9 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * If not expired and the "change only if expired" option (idea from
 	 * PAM) was specified, do nothing. --marekm
 	 */
-	if (kflg && exp_status == 0)
+	if (kflg && (0 == exp_status)) {
 		exit (E_SUCCESS);
+	}
 
 	/*
 	 * Root can change any password any time.

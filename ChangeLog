@@ -1,5 +1,11 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Add brackets and parenthesis.
+	* src/passwd.c: Avoid implicit conversion of pointers to booleans.
+	* src/passwd.c: Avoid assignments in comparisons.
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmems.c, man/groupmems.8.xml: Added support for
 	shadow groups.
 	* src/groupmems.c: Use fail_exit() instead of exit().
