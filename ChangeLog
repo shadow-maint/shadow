@@ -1,5 +1,9 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/list.c: Remove historical comment.
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/pwconv.c, src/pwunconv.c: Fail if unexpected parameters are
 	provided.
 
