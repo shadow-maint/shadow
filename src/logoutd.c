@@ -53,11 +53,13 @@ static char *Prog;
 #define HUP_MESG_FILE "/etc/logoutd.mesg"
 #endif
 
+/* local function prototypes */
 #if HAVE_UTMPX_H
-static int check_login (const struct utmpx *);
+static int check_login (const struct utmpx *ut);
 #else
-static int check_login (const struct utmp *);
+static int check_login (const struct utmp *ut);
 #endif
+static void send_mesg_to_tty (int tty_fd);
 
 /*
  * check_login - check if user (struct utmpx/utmp) allowed to stay logged in
@@ -153,6 +155,10 @@ int main (int argc, char **argv)
 	char user[sizeof (ut->ut_user) + 1];	/* terminating NUL */
 	char tty_name[sizeof (ut->ut_line) + 6];	/* /dev/ + NUL */
 	int tty_fd;
+
+	if (1 != argc) {
+		(void) fputs (_("Usage: logoutd\n"), stderr);
+	}
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
