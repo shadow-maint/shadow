@@ -318,6 +318,10 @@
 	</term>
 	<listitem>
 	  <para>Allow the creation of a user account with a duplicate (non-unique) UID.</para>
+	  <para>
+	    This option is only valid in combination with the
+	    <option>-o</option> option.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>

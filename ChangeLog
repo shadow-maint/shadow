@@ -3,6 +3,7 @@
 	* man/useradd.8.xml: Document the /etc/default/useradd variables.
 	* man/useradd.8.xml: Fix the documentation of the GROUP variable
 	(and -g/--gid option).
+	* man/useradd.8.xml: Document that -o is only valid with -u
 
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
