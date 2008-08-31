@@ -88,6 +88,9 @@ int main (int argc, char **argv)
 	struct group grent;
 	const struct sgrp *sg;
 
+	if (1 != argc) {
+		(void) fputs (_("Usage: grpunconv\n"), stderr);
+	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
@@ -187,7 +190,7 @@ int main (int argc, char **argv)
 	return 0;
 }
 #else				/* !SHADOWGRP */
-int main (int argc, char **argv)
+int main (int unused(argc), char **argv)
 {
 	fprintf (stderr,
 		 "%s: not configured for shadow group support.\n", argv[0]);

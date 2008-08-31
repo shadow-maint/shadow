@@ -2,9 +2,10 @@
 
 	* src/grpconv.c, src/groups.c: Name the parameters in the
 	prototypes of the static functions.
-	* src/grpconv.c: Fail if unexpected parameters are provided.
-	* src/grpconv.c: Indicate that argc is not used in the no
-	SHADOWGRP version.
+	* src/grpconv.c, src/grpunconv.c: Fail if unexpected parameters
+	are provided.
+	* src/grpconv.c, src/grpunconv.c: Indicate that argc is not used
+	in the no SHADOWGRP version.
 
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
