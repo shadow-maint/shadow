@@ -53,12 +53,27 @@
 	<term><option>-a</option> <replaceable>user_name</replaceable></term>
 	<listitem>
 	  <para>Add a new user to the group membership list.</para>
+	  <para condition="gshadow">
+	    If the <filename>/etc/gshadow</filename> file exist, and the
+	    group has no entry in the <filename>/etc/gshadow</filename>
+	    file, a new entry will be created.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term><option>-d</option> <replaceable>user_name</replaceable></term>
 	<listitem>
 	  <para>Delete a user from the group membership list.</para>
+	  <para condition="gshadow">
+	    If the <filename>/etc/gshadow</filename> file exist, the user
+	    will be removed from the list of members and administrators of
+	    the group.
+	  </para>
+	  <para condition="gshadow">
+	    If the <filename>/etc/gshadow</filename> file exist, and the
+	    group has no entry in the <filename>/etc/gshadow</filename>
+	    file, a new entry will be created.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -79,6 +94,11 @@
 	<term><option>-p</option></term>
 	<listitem>
 	  <para>Purge all users from the group membership list.</para>
+	  <para condition="gshadow">
+	    If the <filename>/etc/gshadow</filename> file exist, and the
+	    group has no entry in the <filename>/etc/gshadow</filename>
+	    file, a new entry will be created.
+	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>

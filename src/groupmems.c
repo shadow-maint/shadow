@@ -44,6 +44,9 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "groupio.h"
+#ifdef SHADOWGRP
+#include "sgroupio.h"
+#endif
 
 /* Exit Status Values */
 
@@ -69,6 +72,12 @@ static bool list = false;
 static int exclusive = 0;
 static char *Prog;
 static bool gr_locked = false;
+#ifdef SHADOWGRP
+/* Indicate if shadow groups are enabled on the system
+ * (/etc/gshadow present) */
+static bool is_shadowgrp;
+static bool sgr_locked = false;
+#endif
 
 /* local function prototypes */
 static char *whoami (void);
@@ -121,11 +130,60 @@ static void add_user (const char *user,
 		fprintf (stderr,
 		         _("%s: Out of memory. Cannot update %s.\n"),
 		         Prog, gr_dbname ());
-		exit (13);
+		fail_exit (13);
 	}
 
 	/* Add the user to the /etc/group group */
 	newgrp->gr_mem = add_list (newgrp->gr_mem, user);
+
+#ifdef SHADOWGRP
+	if (is_shadowgrp) {
+		const struct sgrp *sg = sgr_locate (newgrp->gr_name);
+		struct sgrp *newsg;
+
+		if (NULL == sg) {
+			/* Create a shadow group based on this group */
+			static struct sgrp sgrent;
+			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_mem = dup_list (newgrp->gr_mem);
+			sgrent.sg_adm = (char **) xmalloc (sizeof (char *));
+#ifdef FIRST_MEMBER_IS_ADMIN
+			if (sgrent.sg_mem[0]) {
+				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
+				sgrent.sg_adm[1] = NULL;
+			} else
+#endif
+			{
+				sgrent.sg_adm[0] = NULL;
+			}
+
+			/* Move any password to gshadow */
+			sgrent.sg_passwd = newgrp->gr_passwd;
+			newgrp->gr_passwd = SHADOW_PASSWD_STRING;
+
+			newsg = &sgrent;
+		} else {
+			newsg = __sgr_dup (sg);
+			if (NULL == newsg) {
+				fprintf (stderr,
+				         _("%s: Out of memory. Cannot update %s.\n"),
+				         Prog, sgr_dbname ());
+				fail_exit (13);
+			}
+			/* Add the user to the members */
+			newsg->sg_mem = add_list (newsg->sg_mem, user);
+			/* Do not touch the administrators */
+		}
+
+		if (sgr_update (newsg) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), newsg->sg_name);
+			fail_exit (13);
+		}
+	}
+#endif
+
 	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
@@ -155,11 +213,61 @@ static void remove_user (const char *user,
 		fprintf (stderr,
 		         _("%s: Out of memory. Cannot update %s.\n"),
 		         Prog, gr_dbname ());
-		exit (13);
+		fail_exit (13);
 	}
 
 	/* Remove the user from the /etc/group group */
 	newgrp->gr_mem = del_list (newgrp->gr_mem, user);
+
+#ifdef SHADOWGRP
+	if (is_shadowgrp) {
+		const struct sgrp *sg = sgr_locate (newgrp->gr_name);
+		struct sgrp *newsg;
+
+		if (NULL == sg) {
+			/* Create a shadow group based on this group */
+			static struct sgrp sgrent;
+			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_mem = dup_list (newgrp->gr_mem);
+			sgrent.sg_adm = (char **) xmalloc (sizeof (char *));
+#ifdef FIRST_MEMBER_IS_ADMIN
+			if (sgrent.sg_mem[0]) {
+				sgrent.sg_adm[0] = xstrdup (sgrent.sg_mem[0]);
+				sgrent.sg_adm[1] = NULL;
+			} else
+#endif
+			{
+				sgrent.sg_adm[0] = NULL;
+			}
+
+			/* Move any password to gshadow */
+			sgrent.sg_passwd = newgrp->gr_passwd;
+			newgrp->gr_passwd = SHADOW_PASSWD_STRING;
+
+			newsg = &sgrent;
+		} else {
+			newsg = __sgr_dup (sg);
+			if (NULL == newsg) {
+				fprintf (stderr,
+				         _("%s: Out of memory. Cannot update %s.\n"),
+				         Prog, sgr_dbname ());
+				fail_exit (13);
+			}
+			/* Remove the user from the members */
+			newsg->sg_mem = del_list (newsg->sg_mem, user);
+			/* Remove the user from the administrators */
+			newsg->sg_adm = del_list (newsg->sg_adm, user);
+		}
+
+		if (sgr_update (newsg) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), newsg->sg_name);
+			fail_exit (13);
+		}
+	}
+#endif
+
 	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
@@ -179,11 +287,56 @@ static void purge_members (const struct group *grp)
 		fprintf (stderr,
 		         _("%s: Out of memory. Cannot update %s.\n"),
 		         Prog, gr_dbname ());
-		exit (13);
+		fail_exit (13);
 	}
 
 	/* Remove all the members of the /etc/group group */
 	newgrp->gr_mem[0] = NULL;
+
+#ifdef SHADOWGRP
+	if (is_shadowgrp) {
+		const struct sgrp *sg = sgr_locate (newgrp->gr_name);
+		struct sgrp *newsg;
+
+		if (NULL == sg) {
+			/* Create a shadow group based on this group */
+			static struct sgrp sgrent;
+			sgrent.sg_name = xstrdup (newgrp->gr_name);
+			sgrent.sg_mem = (char **) xmalloc (sizeof (char *));
+			sgrent.sg_mem[0] = NULL;
+			sgrent.sg_adm = (char **) xmalloc (sizeof (char *));
+			sgrent.sg_adm[0] = NULL;
+
+			/* Move any password to gshadow */
+			sgrent.sg_passwd = newgrp->gr_passwd;
+			newgrp->gr_passwd = xstrdup(SHADOW_PASSWD_STRING);
+
+			newsg = &sgrent;
+		} else {
+			newsg = __sgr_dup (sg);
+			if (NULL == newsg) {
+				fprintf (stderr,
+				         _("%s: Out of memory. Cannot update %s.\n"),
+				         Prog, sgr_dbname ());
+				fail_exit (13);
+			}
+			/* Remove all the members of the /etc/gshadow
+			 * group */
+			newsg->sg_mem[0] = NULL;
+			/* Remove all the administrators of the
+			 * /etc/gshadow group */
+			newsg->sg_adm[0] = NULL;
+		}
+
+		if (sgr_update (newsg) == 0) {
+			fprintf (stderr,
+			         _("%s: failed to prepare the new %s entry '%s'\n"),
+			         Prog, sgr_dbname (), newsg->sg_name);
+			fail_exit (13);
+		}
+	}
+#endif
+
 	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),

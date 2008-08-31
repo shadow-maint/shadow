@@ -1,5 +1,11 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, src/groupmems.c, man/groupmems.8.xml: Added support for
+	shadow groups.
+	* src/groupmems.c: Use fail_exit() instead of exit().
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: The grp structure returned by gr_locate is a
 	const. Duplicate this structure before working on it.
 	* src/groupmems.c: Do not fail and do not display warnings if a
