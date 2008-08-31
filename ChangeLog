@@ -1,3 +1,9 @@
+2008-08-30  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/useradd.8.xml: Document the /etc/default/useradd variables.
+	* man/useradd.8.xml: Fix the documentation of the GROUP variable
+	(and -g/--gid option).
+
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* shadow.spec.in: Fix the source (new FTP).

@@ -77,6 +77,13 @@
 	    If the <option>-m</option> option is not used,
 	    <replaceable>BASE_DIR</replaceable> must exist.
 	  </para>
+	  <para>
+	    If this option is not specified, <command>useradd</command>
+	    will use the base directory specified by the
+	    <option>HOME</option> variable in
+	    <filename>/etc/default/useradd</filename>, or
+	    <filename>/home</filename> by default.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -129,6 +136,12 @@
 	    The date on which the user account will be disabled. The date is
 	    specified in the format <emphasis remap='I'>YYYY-MM-DD</emphasis>.
 	  </para>
+	  <para>
+	    If not specified, <command>useradd</command> will use the
+	    default expiry date specified by the <option>EXPIRE</option>
+	    variable in <filename>/etc/default/useradd</filename>, or
+	    an empty string (no expiry) by default.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -141,7 +154,13 @@
 	    The number of days after a password expires until the account is
 	    permanently disabled. A value of 0 disables the account as soon
 	    as the password has expired, and a value of -1 disables the
-	    feature. The default value is -1.
+	    feature.
+	  </para>
+	  <para>
+	    If not specified, <command>useradd</command> will use the
+	    default inactivity period specified by the
+	    <option>INACTIVE</option> variable in the
+	    <filename>/etc/default/useradd</filename>, or -1 by default.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -154,8 +173,22 @@
 	  <para>
 	    The group name or number of the user's initial login group. The
 	    group name must exist. A group number must refer to an already
-	    existing group. The default group number is 1 or whatever is
-	    specified in <filename>/etc/default/useradd</filename>.
+	    existing group.
+	  </para>
+	  <para>
+	    If not specified, the bahavior of <command>useradd</command>
+	    will depend on the <option>USERGROUPS_ENAB</option> variable
+	    in <filename>/etc/login.defs</filename>. If this variable is
+	    set to <replaceable>yes</replaceable> (or
+	    <option>-U/--user-group</option> is specified on the command
+	    line), a group will be created for the user, with the same
+	    name as her loginname. If the variable is set to
+	    <replaceable>no</replaceable> (or
+	    <option>-N/--no-user-group</option> is specified on the
+	    command line), useradd will set the primary group of the new
+	    user to the value specified by the <option>GROUP</option>
+	    variable in <filename>/etc/default/useradd</filename>, or
+	    100 by default.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -198,7 +231,8 @@
 	  </para>
 	  <para>
 	    If this option is not set, the skeleton directory is defined
-	    in <filename>/etc/default/useradd</filename> or, by default,
+	    by the <option>SKEL</option> variable in
+	    <filename>/etc/default/useradd</filename> or, by default,
 	    <filename>/etc/skel</filename>.
 	  </para>
 	</listitem>
@@ -210,7 +244,7 @@
 	</term>
 	<listitem>
 	  <para>
-	    Overrides /etc/login.defs defaults (UID_MIN, UID_MAX, UMASK,
+	    Overrides <filename>/etc/login.defs</filename> defaults (UID_MIN, UID_MAX, UMASK,
 	    PASS_MAX_DAYS and others).
 	  <para>
 	  </para>
@@ -274,7 +308,7 @@
 	    The default behavior (if the <option>-g</option>,
 	    <option>-N</option>, and <option>-U</option> options are not
 	    specified) is defined by the <option>USERGROUPS_ENAB</option>
-	    variable in <filename>login.defs</filename>.
+	    variable in <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -312,7 +346,7 @@
 	    <filename>/etc/shadow</filename>, and their numeric
 	    identifiers are choosen in the
 	    <option>SYS_UID_MIN</option>-<option>SYS_UID_MAX</option>
-	    range, defined in <filename>login.defs</filename>, instead of
+	    range, defined in <filename>/etc/login.defs</filename>, instead of
 	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
 	    <option>GID</option> counterparts for the creation of groups).
 	  </para>
@@ -327,7 +361,9 @@
 	  <para>
 	    The name of the user's login shell. The default is to leave this
 	    field blank, which causes the system to select the default login
-	    shell.
+	    shell specified by the <option>SHELL</option> variable in
+	    <filename>/etc/default/useradd</filename>, or an empty string
+	    by default.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -359,7 +395,7 @@
 	    The default behavior (if the <option>-g</option>,
 	    <option>-N</option>, and <option>-U</option> options are not
 	    specified) is defined by the <option>USERGROUPS_ENAB</option>
-	    variable in <filename>login.defs</filename>.
+	    variable in <filename>/etc/login.defs</filename>.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -388,6 +424,10 @@
 	      home directory name, if the <option>-d</option> option is not used
 	      when creating a new account.
 	    </para>
+	    <para>
+	      This option sets the <option>HOME</option> variable in
+	      <filename>/etc/default/useradd</filename>.
+	    </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -397,6 +437,10 @@
 	  </term>
 	  <listitem>
 	    <para>The date on which the user account is disabled.</para>
+	    <para>
+	      This option sets the <option>EXPIRE</option> variable in
+	      <filename>/etc/default/useradd</filename>.
+	    </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -409,6 +453,10 @@
 	      The number of days after a password has expired before the
 	      account will be disabled.
 	    </para>
+	    <para>
+	      This option sets the <option>INACTIVE</option> variable in
+	      <filename>/etc/default/useradd</filename>.
+	    </para>
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
@@ -418,9 +466,17 @@
 	  </term>
 	  <listitem>
 	    <para>
-	      The group name or ID for a new user's initial group. The named
+	      The group name or ID for a new user's initial group (when
+	      the <option>-N/--no-user-group</option> is used or when the
+	      <option>USERGROUPS_ENAB</option> variable is set to
+	      <replaceable>no</replaceable> in
+	      <filename>/etc/login.defs</filename>. The named
 	      group must exist, and a numerical group ID must have an
 	      existing entry.
+	    </para>
+	    <para>
+	      This option sets the <option>GROUP</option> variable in
+	      <filename>/etc/default/useradd</filename>.
 	    </para>
 	  </listitem>
 	</varlistentry>
@@ -433,6 +489,10 @@
 	    <para>
 	      The name of a new user's login shell.
 	    </para>
+	    <para>
+	      This option sets the <option>SHELL</option> variable in
+	      <filename>/etc/default/useradd</filename>.
+	    </para>
 	  </listitem>
 	</varlistentry>
       </variablelist>
@@ -443,7 +503,9 @@
   <refsect1 id='notes'>
     <title>NOTES</title>
     <para>The system administrator is responsible for placing the default
-      user files in the <filename>/etc/skel/</filename> directory.
+      user files in the <filename>/etc/skel/</filename> directory (or any
+      other skeleton directory specified in
+      <filename>/etc/default/useradd</filename> or on the command line).
     </para>
   </refsect1>
 

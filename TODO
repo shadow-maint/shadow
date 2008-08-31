@@ -23,10 +23,6 @@ WITH_SELINUX
 chage, chfn, chsh: same change needed as in passwd.
   - probably need moving check_selinux_access to a separate file.
 
-man useradd
-	document default behavior for GROUP
-	remove "The default group number is 1 or whatever is..."
-
 useradd manpage
   - add -k option
   - mention that -o require -u
