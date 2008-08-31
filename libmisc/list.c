@@ -49,6 +49,7 @@ char **add_list (char **list, const char *member)
 	char **tmp;
 
 	assert (NULL != member);
+	assert (NULL != list);
 
 	/*
 	 * Scan the list for the new name.  Return the original list
@@ -98,6 +99,7 @@ char **del_list (char **list, const char *member)
 	char **tmp;
 
 	assert (NULL != member);
+	assert (NULL != list);
 
 	/*
 	 * Scan the list for the old name.  Return the original list
@@ -144,6 +146,8 @@ char **dup_list (char *const *list)
 	int i;
 	char **tmp;
 
+	assert (NULL != list);
+
 	for (i = 0; NULL != list[i]; i++);
 
 	tmp = (char **) xmalloc ((i + 1) * sizeof (char *));
@@ -162,6 +166,7 @@ char **dup_list (char *const *list)
 bool is_on_list (char *const *list, const char *member)
 {
 	assert (NULL != member);
+	assert (NULL != list);
 
 	while (NULL != *list) {
 		if (strcmp (*list, member) == 0) {

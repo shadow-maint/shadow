@@ -1,6 +1,7 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/list.c: Remove historical comment.
+	* libmisc/list.c: Added assertions for non NULL parameters.
 
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
