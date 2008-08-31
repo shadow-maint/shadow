@@ -282,7 +282,7 @@ static void print_date (time_t date)
 
 	tp = gmtime (&date);
 	if (NULL == tp) {
-		(void) printf ("time_t: %ul\n", date);
+		(void) printf ("time_t: %lu\n", date);
 	} else {
 		(void) strftime (buf, sizeof buf, "%b %d, %Y", tp);
 		(void) puts (buf);
@@ -298,7 +298,7 @@ static void print_date (time_t date)
 	if (NULL != cp) {
 		(void) printf ("%6.6s, %4.4s\n", cp + 4, cp + 20);
 	} else {
-		(void) printf ("time_t: %ul\n", date);
+		(void) printf ("time_t: %lu\n", date);
 	}
 #endif
 }
