@@ -1,6 +1,8 @@
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* configure.in: Indentation fix.
+	* configure.in, src/login.c: Do not use HAVE_PAM_FAIL_DELAY, but
+	HAS_PAM_FAIL_DELAY, to avoid a redefinition with Linux PAM.
 
 2008-08-27  Nicolas François  <nicolas.francois@centraliens.net>
 
