@@ -1,5 +1,10 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: Add brackets and parenthesis.
+	* src/su.c: Avoid implicit conversion of pointers to booleans.
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/list.c: Remove historical comment.
 	* libmisc/list.c: Added assertions for non NULL parameters.
 

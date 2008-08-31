@@ -132,8 +132,10 @@ static int iswheel (const char *username)
 	struct group *grp;
 
 	grp = getgrnam ("wheel"); /* !USE_PAM, no need for xgetgrnam */
-	if (!grp || !grp->gr_mem)
+	if (   (NULL ==grp)
+	    || (NULL == grp->gr_mem)) {
 		return 0;
+	}
 	return is_on_list (grp->gr_mem, username);
 }
 #endif				/* !USE_PAM */
@@ -158,11 +160,12 @@ static void su_failure (const char *tty)
 {
 	sulog (tty, 0, oldname, name);	/* log failed attempt */
 #ifdef USE_SYSLOG
-	if (getdef_bool ("SYSLOG_SU_ENAB"))
+	if (getdef_bool ("SYSLOG_SU_ENAB")) {
 		SYSLOG (((0 != pwent.pw_uid) ? LOG_INFO : LOG_NOTICE,
 		         "- %s %s:%s", tty,
 		         ('\0' != oldname[0]) ? oldname : "???",
 		         ('\0' != name[0]) ? name : "???"));
+	}
 	closelog ();
 #endif
 	exit (1);
