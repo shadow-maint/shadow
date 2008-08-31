@@ -80,6 +80,9 @@ int main (int argc, char **argv)
 	struct passwd pwent;
 	const struct spwd *spwd;
 
+	if (1 != argc) {
+		(void) fputs (_("Usage: pwunconv\n"), stderr);
+	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");

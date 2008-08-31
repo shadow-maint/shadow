@@ -118,6 +118,9 @@ int main (int argc, char **argv)
 	const struct spwd *sp;
 	struct spwd spent;
 
+	if (1 != argc) {
+		(void) fputs (_("Usage: pwconv\n"), stderr);
+	}
 	Prog = Basename (argv[0]);
 
 	(void) setlocale (LC_ALL, "");
