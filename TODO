@@ -1,4 +1,18 @@
+Fix ./shadow.spec.in:Source:
+
+Replace build_list (in lib/gshadow.c) and list (in lib/sgetgrent.c) by
+comma_to_list()
+
+Fix Tobias name.
+
+Prog should be a global variable to be usable from libmisc.
+
+Revert the modified files if all files could not be changed.
+  * or warn and indicate which files were modified and which were not.
+  * check the order the files are modified.
+
 report nscd_flush_cache failures?
+call nscd from the programs of from lib (commonio?)
 
 PAM: add support for customization of the PAM support (i.e. support the
 Debian PAM configuration)
@@ -69,9 +83,6 @@ ALL:
 
 - newgrp: check the USE_PAM section.
 
-- groupmems:
-  * Add support for gshadow
-
 - newusers: doc for pw_gid not clear. Differentiate
             pw_gid specified and exist
             pw_gid specified but does not exist
@@ -79,7 +90,3 @@ ALL:
              * number
             pw_gid not specified.
 - newusers: document what happens when no uid is specified.
-- newusers: add option --system?
-
--Documentation:
- * document when options were added.
