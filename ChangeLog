@@ -1,5 +1,13 @@
 2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmems.c: The grp structure returned by gr_locate is a
+	const. Duplicate this structure before working on it.
+	* src/groupmems.c: Do not fail and do not display warnings if a
+	close failure happens with the --list option. (Files are opened
+	read-only).
+
+2008-08-29  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Replace the 'valid' variable by is_valid to avoid
 	clashes with the valid() function.
 

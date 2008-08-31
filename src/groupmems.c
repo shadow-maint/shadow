@@ -70,13 +70,14 @@ static int exclusive = 0;
 static char *Prog;
 static bool gr_locked = false;
 
+/* local function prototypes */
 static char *whoami (void);
 static void add_user (const char *user,
-                      struct group *grp);
+                      const struct group *grp);
 static void remove_user (const char *user, 
-                         struct group *grp);
-static void purge_members (struct group *grp);
-static void display_members (char **members);
+                         const struct group *grp);
+static void purge_members (const struct group *grp);
+static void display_members (const char *const *members);
 static void usage (void);
 static void process_flags (int argc, char **argv);
 static void check_perms (void);
@@ -103,8 +104,10 @@ static char *whoami (void)
  * add_user - Add an user to the specified group
  */
 static void add_user (const char *user,
-                      struct group *grp)
+                      const struct group *grp)
 {
+	struct group *newgrp;
+
 	/* Make sure the user is not already part of the group */
 	if (is_on_list (grp->gr_mem, user)) {
 		fprintf (stderr,
@@ -113,12 +116,20 @@ static void add_user (const char *user,
 		fail_exit (EXIT_MEMBER_EXISTS);
 	}
 
+	newgrp = __gr_dup(grp);
+	if (NULL == newgrp) {
+		fprintf (stderr,
+		         _("%s: Out of memory. Cannot update %s.\n"),
+		         Prog, gr_dbname ());
+		exit (13);
+	}
+
 	/* Add the user to the /etc/group group */
-	grp->gr_mem = add_list (grp->gr_mem, user);
-	if (gr_update (grp) == 0) {
+	newgrp->gr_mem = add_list (newgrp->gr_mem, user);
+	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), grp->gr_name);
+		         Prog, gr_dbname (), newgrp->gr_name);
 		fail_exit (13);
 	}
 }
@@ -127,8 +138,10 @@ static void add_user (const char *user,
  * remove_user - Remove an user from a given group
  */
 static void remove_user (const char *user, 
-                         struct group *grp)
+                         const struct group *grp)
 {
+	struct group *newgrp;
+
 	/* Check if the user is a member of the specified group */
 	if (!is_on_list (grp->gr_mem, user)) {
 		fprintf (stderr,
@@ -137,12 +150,20 @@ static void remove_user (const char *user,
 		fail_exit (EXIT_NOT_MEMBER);
 	}
 
+	newgrp = __gr_dup (grp);
+	if (NULL == newgrp) {
+		fprintf (stderr,
+		         _("%s: Out of memory. Cannot update %s.\n"),
+		         Prog, gr_dbname ());
+		exit (13);
+	}
+
 	/* Remove the user from the /etc/group group */
-	grp->gr_mem = del_list (grp->gr_mem, user);
-	if (gr_update (grp) == 0) {
+	newgrp->gr_mem = del_list (newgrp->gr_mem, user);
+	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), grp->gr_name);
+		         Prog, gr_dbname (), newgrp->gr_name);
 		fail_exit (13);
 	}
 }
@@ -150,19 +171,28 @@ static void remove_user (const char *user,
 /*
  * purge_members - Rmeove every members of the specified group
  */
-static void purge_members (struct group *grp)
+static void purge_members (const struct group *grp)
 {
+	struct group *newgrp = __gr_dup (grp);
+
+	if (NULL == newgrp) {
+		fprintf (stderr,
+		         _("%s: Out of memory. Cannot update %s.\n"),
+		         Prog, gr_dbname ());
+		exit (13);
+	}
+
 	/* Remove all the members of the /etc/group group */
-	grp->gr_mem[0] = NULL;
-	if (gr_update (grp) == 0) {
+	newgrp->gr_mem[0] = NULL;
+	if (gr_update (newgrp) == 0) {
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
-		         Prog, gr_dbname (), grp->gr_name);
+		         Prog, gr_dbname (), newgrp->gr_name);
 		fail_exit (13);
 	}
 }
 
-static void display_members (char **members)
+static void display_members (const char *const *members)
 {
 	int i;
 
@@ -285,10 +315,45 @@ static void fail_exit (int code)
 	exit (code);
 }
 
+static void open_files (void)
+{
+	if (!list) {
+		if (gr_lock () == 0) {
+			fprintf (stderr,
+			         _("%s: cannot lock %s; try again later.\n"),
+			         Prog, gr_dbname ());
+			fail_exit (EXIT_GROUP_FILE);
+		}
+		gr_locked = true;
+	}
+
+	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		fail_exit (EXIT_GROUP_FILE);
+	}
+}
+
+static void close_files (void)
+{
+	if ((gr_close () == 0) && !list) {
+		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+		fail_exit (EXIT_GROUP_FILE);
+	}
+	if (gr_locked) {
+		if (gr_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			/* continue */
+		}
+		gr_locked = false;
+	}
+}
+
 int main (int argc, char **argv) 
 {
 	char *name;
-	struct group *grp;
+	const struct group *grp;
 
 	/*
 	 * Get my name so that I can use it to report errors.
@@ -334,7 +399,7 @@ int main (int argc, char **argv)
 		fail_exit (EXIT_GROUP_FILE);
 	}
 
-	grp = (struct group *) gr_locate (name);
+	grp = gr_locate (name);
 
 	if (NULL == grp) {
 		fprintf (stderr, _("%s: group '%s' does not exist in %s\n"),
@@ -343,7 +408,7 @@ int main (int argc, char **argv)
 	}
 
 	if (list) {
-		display_members (grp->gr_mem);
+		display_members ((const char *const *)grp->gr_mem);
 	} else if (NULL != adduser) {
 		add_user (adduser, grp);
 	} else if (NULL != deluser) {
