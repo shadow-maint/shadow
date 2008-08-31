@@ -62,6 +62,9 @@ ALL:
 
 - useradd:
   - add handle create user mail spool in maildir format.
+  - Add support for -k in -D mode
+  - Add option to create or not the mail spool (and set the default in -D
+    mode)
 
 - add handle -n switch in groups and id command for allow query is
   group/user with specified id/gid exist - this will be very usable
