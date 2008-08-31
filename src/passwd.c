@@ -174,7 +174,7 @@ static void usage (int status)
 	         "  -S, --status                  report password status on the named account\n"
 	         "  -u, --unlock                  unlock the password of the named account\n"
 	         "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-	         "  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
+	         "  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 	         "                                change to MAX_DAYS\n"
 	         "\n"), stderr);
 	exit (status);

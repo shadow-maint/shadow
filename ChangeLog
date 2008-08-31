@@ -1,5 +1,9 @@
 2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Fix a typo in the Usage string.
+
+2008-08-28  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpconv.c, src/groups.c: Name the parameters in the
 	prototypes of the static functions.
 	* src/grpconv.c, src/grpunconv.c, src/logoutd.c: Fail if
