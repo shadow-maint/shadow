@@ -605,11 +605,6 @@ int main (int argc, char **argv)
 		gr_locked = true;
 	}
 
-	if (gr_open (list ? O_RDONLY : O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		fail_exit (EXIT_GROUP_FILE);
-	}
-
 	grp = gr_locate (name);
 
 	if (NULL == grp) {

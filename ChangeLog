@@ -1,3 +1,7 @@
+2008-08-31  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupmems.c: Remove duplicated gr_open().
+
 2008-08-30  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/useradd.8.xml: Document the /etc/default/useradd variables.
