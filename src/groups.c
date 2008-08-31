@@ -45,7 +45,7 @@
 static char *Prog;
 
 /* local function prototypes */
-static void print_groups (const char *);
+static void print_groups (const char *member);
 
 /*
  * print_groups - print the groups which the named user is a member of
