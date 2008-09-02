@@ -132,7 +132,7 @@
 	* libmisc/mail.c: Added brackets and parenthesis.
 	* libmisc/mail.c: Avoid assignments in comparisons.
 
-2008-08-26  Tobias  <tp@fonz.de>
+2008-08-26  Tobias Poschwatta  <tp@fonz.de>
 
 	* NEWS: Added support for uclibc.
 	* configure.in, libmisc/copydir.c: futimes() and lutimes() are not
