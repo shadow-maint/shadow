@@ -203,7 +203,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking shadow file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -215,7 +215,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking passwd file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -227,7 +227,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking group file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -240,7 +240,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking gshadow file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -250,7 +250,7 @@ static void fail_exit (int code)
 #endif
 
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_ADD_USER, Prog,
 	              "adding user",
 	              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -580,8 +580,8 @@ static int set_defaults (void)
 		return -1;
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
-	              "changing user defaults",
+	audit_logger (AUDIT_USYS_CONFIG, Prog,
+	              "changing useradd defaults",
 	              NULL, AUDIT_NO_ID, 1);
 #endif
 	SYSLOG ((LOG_INFO,
@@ -834,6 +834,12 @@ static void grp_update (void)
 			fprintf (stderr,
 			         _("%s: Out of memory. Cannot update %s.\n"),
 			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname (), user_name));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding user to group",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -846,10 +852,16 @@ static void grp_update (void)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, gr_dbname (), ngrp->gr_name);
+			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", gr_dbname (), user_name));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding user to group",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user to group",
 		              user_name, AUDIT_NO_ID, 1);
 #endif
@@ -889,6 +901,12 @@ static void grp_update (void)
 			fprintf (stderr,
 				 _("%s: Out of memory. Cannot update %s.\n"),
 				 Prog, sgr_dbname ());
+			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname (), user_name));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding user to shadow group",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
 
@@ -901,10 +919,16 @@ static void grp_update (void)
 			fprintf (stderr,
 			         _("%s: failed to prepare the new %s entry '%s'\n"),
 			         Prog, sgr_dbname (), nsgrp->sg_name);
+			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname (), user_name));
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding user to shadow group",
+			              user_name, AUDIT_NO_ID, 0);
+#endif
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user to shadow group",
 		              user_name, AUDIT_NO_ID, 1);
 #endif
@@ -1198,7 +1222,7 @@ static void process_flags (int argc, char **argv)
 			         _("%s: invalid user name '%s'\n"),
 			         Prog, user_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1273,7 +1297,7 @@ static void close_files (void)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking shadow file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1285,7 +1309,7 @@ static void close_files (void)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking passwd file",
 		              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1296,7 +1320,7 @@ static void close_files (void)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking group file",
 		              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1309,7 +1333,7 @@ static void close_files (void)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking gshadow file",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1453,6 +1477,11 @@ static void grp_add (void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_ADD_GROUP, Prog,
+		              "adding group",
+		              grp.gr_name, AUDIT_NO_ID, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #ifdef  SHADOWGRP
@@ -1463,10 +1492,20 @@ static void grp_add (void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_name);
+#ifdef WITH_AUDIT
+		audit_logger (AUDIT_ADD_GROUP, Prog,
+		              "adding group",
+		              grp.gr_name, AUDIT_NO_ID, 0);
+#endif
 		fail_exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u", user_name, user_gid));
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_ADD_GROUP, Prog,
+	              "adding group",
+	              grp.gr_name, AUDIT_NO_ID, 1);
+#endif
 	do_grp_update = true;
 }
 
@@ -1577,14 +1616,14 @@ static void usr_update (void)
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, spw_dbname (), spent.sp_namp);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding shadow password",
 		              user_name, (unsigned int) user_id, 0);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_ADD_USER, Prog,
 	              "adding user",
 	              user_name, (unsigned int) user_id, 1);
 #endif
@@ -1614,7 +1653,7 @@ static void create_home (void)
 				 ("%s: cannot create directory %s\n"),
 				 Prog, user_home);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding home directory",
 			              user_name, (unsigned int) user_id, 0);
 #endif
@@ -1625,7 +1664,7 @@ static void create_home (void)
 		       0777 & ~getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 		home_added = true;
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding home directory",
 		              user_name, (unsigned int) user_id, 1);
 #endif
@@ -1772,7 +1811,7 @@ int main (int argc, char **argv)
 	if (getpwnam (user_name) != NULL) { /* local, no need for xgetpwnam */
 		fprintf (stderr, _("%s: user '%s' already exists\n"), Prog, user_name);
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user",
 		              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1792,7 +1831,7 @@ int main (int argc, char **argv)
 				 _("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
 				 Prog, user_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding group",
 			              user_name, AUDIT_NO_ID, 0);
 #endif
@@ -1826,7 +1865,7 @@ int main (int argc, char **argv)
 				         _("%s: UID %lu is not unique\n"),
 				         Prog, (unsigned long) user_id);
 #ifdef WITH_AUDIT
-				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				audit_logger (AUDIT_ADD_USER, Prog,
 				              "adding user",
 				              user_name, (unsigned int) user_id, 0);
 #endif

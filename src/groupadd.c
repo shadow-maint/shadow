@@ -215,7 +215,7 @@ static void grp_update (void)
 	}
 #endif				/* SHADOWGRP */
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_ADD_GROUP, Prog,
 	              "adding group",
 	              group_name, (unsigned int) group_id, 1);
 #endif
@@ -262,7 +262,7 @@ static void close_files (void)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "unlocking group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -281,7 +281,7 @@ static void close_files (void)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -304,7 +304,7 @@ static void open_files (void)
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "locking group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -315,7 +315,7 @@ static void open_files (void)
 		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "opening group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -328,7 +328,7 @@ static void open_files (void)
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "locking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -340,7 +340,7 @@ static void open_files (void)
 			         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "opening gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -360,7 +360,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking group file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -373,7 +373,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -384,7 +384,7 @@ static void fail_exit (int code)
 
 #ifdef WITH_AUDIT
 	if (code != E_SUCCESS) {
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "adding group",
 		              group_name, AUDIT_NO_ID, 0);
 	}

@@ -99,7 +99,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking group file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -112,7 +112,7 @@ static void fail_exit (int code)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -122,7 +122,7 @@ static void fail_exit (int code)
 #endif
 
 #ifdef	WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_DEL_GROUP, Prog,
 	              "deleting group",
 	              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -168,7 +168,7 @@ static void grp_update (void)
 static void close_files (void)
 {
 #ifdef WITH_AUDIT
-	audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+	audit_logger (AUDIT_DEL_GROUP, Prog,
 	              "deleting group",
 	              group_name, (unsigned int) group_id, 1);
 #endif
@@ -183,7 +183,7 @@ static void close_files (void)
 		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "unlocking group file",
 		              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -203,7 +203,7 @@ static void close_files (void)
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking gshadow file",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -374,7 +374,7 @@ int main (int argc, char **argv)
 			fprintf (stderr, _("%s: group '%s' does not exist\n"),
 				 Prog, group_name);
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "deleting group",
 			              group_name, AUDIT_NO_ID, 0);
 #endif
@@ -396,7 +396,7 @@ int main (int argc, char **argv)
 			 Prog, group_name);
 
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "deleting group",
 		              group_name, AUDIT_NO_ID, 0);
 #endif

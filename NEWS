@@ -11,6 +11,10 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
   * Added support for long options --add (-a), --delete (-d),
     --remove-password (-r), --restrict (-R), --administrators (-A), and
     --members (-M).
+- groupadd
+  * audit logging improvements.
+- groupdel
+  * audit logging improvements.
 - groupmems
   * Check if user exist before they are added to groups.
   * Avoid segfault in case the specified group does not exist in /etc/group.
@@ -27,6 +31,10 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
   * For compatibility with other passwd version, the --lock an --unlock
     options do not lock or unlock the user account anymore.  They only
     lock or unlock the user's password.
+- useradd
+  * audit logging improvements.
+- userdel
+  * audit logging improvements.
 - usermod
   * Allow adding LDAP users (or any user not present in the local passwd
     file) to local groups

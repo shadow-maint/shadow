@@ -1,3 +1,26 @@
+2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Log errors to syslog in grp_update() since
+	changes have started to be reported to syslog.
+	* src/userdel.c: Fix some result parameters sent to
+	audit_logger().
+
+2008-09-02  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS: Following changes from a patch contributed by Steve Grubb
+	<sgrubb@redhat.com>
+	* src/groupadd.c: Log to audit with type AUDIT_ADD_GROUP instead
+	of AUDIT_USER_CHAUTHTOK.
+	* src/groupdel.c: Log to audit with type AUDIT_DEL_GROUP instead 
+	of AUDIT_USER_CHAUTHTOK.
+	* src/useradd.c: Log to audit with type AUDIT_ADD_USER /
+	AUDIT_ADD_GROUP / AUDIT_USYS_CONFIG instead of
+	AUDIT_USER_CHAUTHTOK.
+	* src/useradd.c: Add missing logs to audit.
+	* src/userdel.c: Log to audit with type AUDIT_DEL_USER /
+	AUDIT_DEL_GROUP instead of AUDIT_USER_CHAUTHTOK.
+	* src/userdel.c: Add missing logs to audit.
+
 2008-08-31  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmems.c: Remove duplicated gr_open().
