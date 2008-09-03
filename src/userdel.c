@@ -695,11 +695,23 @@ static void remove_mailbox (void)
 	}
 	snprintf (mailfile, sizeof mailfile, "%s/%s", maildir, user_name);
 	if (fflg) {
-		unlink (mailfile);	/* always remove, ignore errors */
+		if (unlink (mailfile) != 0) {
+			fprintf (stderr, _("%s: warning: can't remove %s: %s"), Prog, mailfile, strerror (errno));
+			SYSLOG ((LOG_ERR, "Cannot remove %s: %s", mailfile, strerror (errno)));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_USER, Prog,
-		              "deleting mail file",
-		              user_name, (unsigned int) user_id, 1);
+			audit_logger (AUDIT_DEL_USER, Prog,
+			              "deleting mail file",
+			              user_name, (unsigned int) user_id, 0);
+#endif
+			/* continue */
+		}
+#ifdef WITH_AUDIT
+		else
+		{
+			audit_logger (AUDIT_DEL_USER, Prog,
+			              "deleting mail file",
+			              user_name, (unsigned int) user_id, 1);
+		}
 #endif
 		return;
 	}
@@ -729,7 +741,8 @@ static void remove_mailbox (void)
 		/* continue */
 	}
 #ifdef WITH_AUDIT
-	else {
+	else
+	{
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting mail file",
 		              user_name, (unsigned int) user_id, 1);
@@ -742,7 +755,7 @@ static void remove_mailbox (void)
  */
 int main (int argc, char **argv)
 {
-	int errors = 0;
+	int errors = 0; /* Error in the removal of the home directory */
 
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
@@ -891,6 +904,7 @@ int main (int argc, char **argv)
 			 Prog, user_home, user_name);
 		rflg = 0;
 		errors++;
+		/* continue */
 	}
 
 #ifdef EXTRA_CHECK_HOME_DIR
@@ -916,6 +930,7 @@ int main (int argc, char **argv)
 					 Prog, user_home, pwd->pw_name);
 				rflg = false;
 				errors++;
+				/* continue */
 				break;
 			}
 		}
@@ -928,19 +943,25 @@ int main (int argc, char **argv)
 			fprintf (stderr,
 				 _("%s: error removing directory %s\n"),
 				 Prog, user_home);
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_DEL_USER, Prog,
-			              "deleting home directory",
-			              user_name, (unsigned int) user_id, 0);
-#endif
 			errors++;
+			/* continue */
 		}
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_DEL_USER, Prog,
-		              "deleting home directory",
-		              user_name, (unsigned int) user_id, 1);
+		else
+		{
+			audit_logger (AUDIT_DEL_USER, Prog,
+			              "deleting home directory",
+			              user_name, (unsigned int) user_id, 1);
+		}
 #endif
 	}
+#ifdef WITH_AUDIT
+	if (0 != errors) {
+		audit_logger (AUDIT_DEL_USER, Prog,
+		              "deleting home directory",
+		              user_name, AUDIT_NO_ID, 0);
+	}
+#endif
 
 	/*
 	 * Cancel any crontabs or at jobs. Have to do this before we remove
@@ -955,13 +976,6 @@ int main (int argc, char **argv)
 #ifdef USE_PAM
 	(void) pam_end (pamh, PAM_SUCCESS);
 #endif				/* USE_PAM */
-#ifdef WITH_AUDIT
-	if (0 != errors) {
-		audit_logger (AUDIT_DEL_USER, Prog,
-		              "deleting home directory",
-		              user_name, AUDIT_NO_ID, 0);
-	}
-#endif
 	exit ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
 	/* NOT REACHED */
 }

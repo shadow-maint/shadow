@@ -1,5 +1,16 @@
 2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/userdel.c: Log failures to remove the mailbox to syslog and
+	audit.
+	* src/userdel.c: Log successful removal of home directory to audit
+	only in case of success.
+	* src/userdel.c: Move the audit log of failure to remove the home
+	directory before the call to function that may exit.
+	* src/userdel.c: Document that errors is only used to count errors
+	during the removal of the home directory.
+
+2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Log errors to syslog in grp_update() since
 	changes have started to be reported to syslog.
 	* src/userdel.c: Fix some result parameters sent to
