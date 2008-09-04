@@ -205,7 +205,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking shadow file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -217,7 +218,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking passwd file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -229,7 +231,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking group file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -242,7 +245,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking gshadow file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -252,7 +256,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, Prog,
 	              "adding user",
-	              user_name, AUDIT_NO_ID, 0);
+	              user_name, AUDIT_NO_ID,
+	              SHADOW_AUDIT_FAILURE);
 #endif
 	SYSLOG ((LOG_INFO, "failed adding user '%s', data deleted", user_name));
 	exit (code);
@@ -582,7 +587,8 @@ static int set_defaults (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_USYS_CONFIG, Prog,
 	              "changing useradd defaults",
-	              NULL, AUDIT_NO_ID, 1);
+	              NULL, AUDIT_NO_ID,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO,
 		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
@@ -838,7 +844,8 @@ static void grp_update (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user to group",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
@@ -856,14 +863,16 @@ static void grp_update (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user to group",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user to group",
-		              user_name, AUDIT_NO_ID, 1);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
 			 user_name, ngrp->gr_name));
@@ -905,7 +914,8 @@ static void grp_update (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user to shadow group",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);	/* XXX */
 		}
@@ -923,14 +933,16 @@ static void grp_update (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user to shadow group",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user to shadow group",
-		              user_name, AUDIT_NO_ID, 1);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
 			 user_name, nsgrp->sg_name));
@@ -1224,7 +1236,8 @@ static void process_flags (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding user",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			exit (E_BAD_ARG);
 		}
@@ -1299,7 +1312,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking shadow file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -1311,7 +1325,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking passwd file",
-		              user_name, AUDIT_NO_ID, 0);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		/* continue */
 	}
@@ -1322,7 +1337,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "unlocking group file",
-		              user_name, AUDIT_NO_ID, 0);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		/* continue */
 	}
@@ -1335,7 +1351,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "unlocking gshadow file",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -1480,7 +1497,8 @@ static void grp_add (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "adding group",
-		              grp.gr_name, AUDIT_NO_ID, 0);
+		              grp.gr_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -1495,7 +1513,8 @@ static void grp_add (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "adding group",
-		              grp.gr_name, AUDIT_NO_ID, 0);
+		              grp.gr_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -1504,7 +1523,8 @@ static void grp_add (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP, Prog,
 	              "adding group",
-	              grp.gr_name, AUDIT_NO_ID, 1);
+	              grp.gr_name, AUDIT_NO_ID,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 	do_grp_update = true;
 }
@@ -1618,14 +1638,16 @@ static void usr_update (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding shadow password",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_USER, Prog,
 	              "adding user",
-	              user_name, (unsigned int) user_id, 1);
+	              user_name, (unsigned int) user_id,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 
 	/*
@@ -1655,7 +1677,8 @@ static void create_home (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding home directory",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_HOMEDIR);
 		}
@@ -1666,7 +1689,8 @@ static void create_home (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding home directory",
-		              user_name, (unsigned int) user_id, 1);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
 	}
 }
@@ -1813,7 +1837,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_USER, Prog,
 		              "adding user",
-		              user_name, AUDIT_NO_ID, 0);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_NAME_IN_USE);
 	}
@@ -1833,7 +1858,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding group",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_NAME_IN_USE);
 		}
@@ -1867,7 +1893,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_ADD_USER, Prog,
 				              "adding user",
-				              user_name, (unsigned int) user_id, 0);
+				              user_name, (unsigned int) user_id,
+				              SHADOW_AUDIT_FAILURE);
 #endif
 				fail_exit (E_UID_IN_USE);
 			}

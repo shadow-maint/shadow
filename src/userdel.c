@@ -179,7 +179,8 @@ static void update_groups (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting user from group",
-		              user_name, (unsigned int) user_id, 1);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO, "delete '%s' from group '%s'\n",
 			 user_name, ngrp->gr_name));
@@ -235,7 +236,8 @@ static void update_groups (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "deleting group",
-			              grp->gr_name, AUDIT_NO_ID, 1);
+			              grp->gr_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_SUCCESS);
 #endif
 			SYSLOG ((LOG_INFO,
 				 "removed group '%s' owned by '%s'\n",
@@ -293,7 +295,8 @@ static void update_groups (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting user from shadow group",
-		              user_name, (unsigned int) user_id, 1);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
 		SYSLOG ((LOG_INFO, "delete '%s' from shadow group '%s'\n",
 			 user_name, nsgrp->sg_name));
@@ -416,7 +419,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_USER, Prog,
 	              "deleting user",
-	              user_name, (unsigned int) user_id, 0);
+	              user_name, (unsigned int) user_id,
+	              SHADOW_AUDIT_FAILURE);
 #endif
 
 	exit (code);
@@ -437,7 +441,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "locking password file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -448,7 +453,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "opening password file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_PW_UPDATE);
 	}
@@ -460,7 +466,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "locking shadow password file",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_PW_UPDATE);
 		}
@@ -472,7 +479,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "opening shadow password file",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_PW_UPDATE);
 		}
@@ -484,7 +492,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "locking group file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -494,7 +503,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "opening group file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -507,7 +517,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "locking shadow group file",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -518,7 +529,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "opening shadow group file",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -549,7 +561,8 @@ static void update_user (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_USER, Prog,
 	              "deleting user entries",
-	              user_name, (unsigned int) user_id, 1);
+	              user_name, (unsigned int) user_id,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "delete user '%s'\n", user_name));
 }
@@ -591,7 +604,8 @@ static void user_busy (const char *name, uid_t uid)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting user logged in",
-			              name, AUDIT_NO_ID, 0);
+			              name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			exit (E_USER_BUSY);
 		}
@@ -701,7 +715,8 @@ static void remove_mailbox (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting mail file",
-			              user_name, (unsigned int) user_id, 0);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -710,7 +725,8 @@ static void remove_mailbox (void)
 		{
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting mail file",
-			              user_name, (unsigned int) user_id, 1);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_SUCCESS);
 		}
 #endif
 		return;
@@ -724,7 +740,8 @@ static void remove_mailbox (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting mail file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		return;
 	} else if (i == -1) {
@@ -736,7 +753,8 @@ static void remove_mailbox (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting mail file",
-		              user_name, (unsigned int) user_id, 0);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		/* continue */
 	}
@@ -745,7 +763,8 @@ static void remove_mailbox (void)
 	{
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting mail file",
-		              user_name, (unsigned int) user_id, 1);
+		              user_name, (unsigned int) user_id,
+		              SHADOW_AUDIT_SUCCESS);
 	}
 #endif
 }
@@ -855,7 +874,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting user not found",
-			              user_name, AUDIT_NO_ID, 0);
+			              user_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			exit (E_NOTFOUND);
 		}
@@ -951,7 +971,8 @@ int main (int argc, char **argv)
 		{
 			audit_logger (AUDIT_DEL_USER, Prog,
 			              "deleting home directory",
-			              user_name, (unsigned int) user_id, 1);
+			              user_name, (unsigned int) user_id,
+			              SHADOW_AUDIT_SUCCESS);
 		}
 #endif
 	}
@@ -959,7 +980,8 @@ int main (int argc, char **argv)
 	if (0 != errors) {
 		audit_logger (AUDIT_DEL_USER, Prog,
 		              "deleting home directory",
-		              user_name, AUDIT_NO_ID, 0);
+		              user_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 	}
 #endif
 

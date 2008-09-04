@@ -136,8 +136,12 @@ extern int audit_fd;
 extern void audit_help_open (void);
 /* Use AUDIT_NO_ID when a name is provided to audit_logger instead of an ID */
 #define AUDIT_NO_ID	((unsigned int) -1)
+typedef enum {
+	SHADOW_AUDIT_FAILURE = 0,
+	SHADOW_AUDIT_SUCCESS = 1} shadow_audit_result;
 extern void audit_logger (int type, const char *pgname, const char *op,
-                          const char *name, unsigned int id, int result);
+                          const char *name, unsigned int id,
+                          shadow_audit_result result);
 #endif
 
 /* limits.c */

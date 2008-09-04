@@ -76,13 +76,14 @@ void audit_help_open (void)
  * result - 1 is "success" and 0 is "failed"
  */
 void audit_logger (int type, const char *pgname, const char *op,
-		   const char *name, unsigned int id, int result)
+                   const char *name, unsigned int id,
+                   shadow_audit_result result)
 {
 	if (audit_fd < 0) {
 		return;
 	} else {
 		audit_log_acct_message (audit_fd, type, NULL, op, name, id,
-					NULL, NULL, NULL, result);
+					NULL, NULL, NULL, (int) result);
 	}
 }
 

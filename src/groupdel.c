@@ -101,7 +101,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking group file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -114,7 +115,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -124,7 +126,8 @@ static void fail_exit (int code)
 #ifdef	WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP, Prog,
 	              "deleting group",
-	              group_name, AUDIT_NO_ID, 0);
+	              group_name, AUDIT_NO_ID,
+	              SHADOW_AUDIT_FAILURE);
 #endif
 
 	exit (code);
@@ -170,7 +173,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_DEL_GROUP, Prog,
 	              "deleting group",
-	              group_name, (unsigned int) group_id, 1);
+	              group_name, (unsigned int) group_id,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "remove group '%s'\n", group_name));
 
@@ -185,7 +189,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "unlocking group file",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		/* continue */
 	}
@@ -205,7 +210,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -376,7 +382,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_DEL_GROUP, Prog,
 			              "deleting group",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			exit (E_NOTFOUND);
 		}
@@ -398,7 +405,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_DEL_GROUP, Prog,
 		              "deleting group",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {

@@ -217,7 +217,8 @@ static void grp_update (void)
 #ifdef WITH_AUDIT
 	audit_logger (AUDIT_ADD_GROUP, Prog,
 	              "adding group",
-	              group_name, (unsigned int) group_id, 1);
+	              group_name, (unsigned int) group_id,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
 	        group_name, (unsigned int) group_id));
@@ -264,7 +265,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "unlocking group file",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		/* continue */
 	}
@@ -283,7 +285,8 @@ static void close_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -306,7 +309,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "locking group file",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -317,7 +321,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "opening group file",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 #endif
 		fail_exit (E_GRP_UPDATE);
 	}
@@ -330,7 +335,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "locking gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -342,7 +348,8 @@ static void open_files (void)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "opening gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			fail_exit (E_GRP_UPDATE);
 		}
@@ -362,7 +369,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking group file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -375,7 +383,8 @@ static void fail_exit (int code)
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_GROUP, Prog,
 			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID, 0);
+			              group_name, AUDIT_NO_ID,
+			              SHADOW_AUDIT_FAILURE);
 #endif
 			/* continue */
 		}
@@ -386,7 +395,8 @@ static void fail_exit (int code)
 	if (code != E_SUCCESS) {
 		audit_logger (AUDIT_ADD_GROUP, Prog,
 		              "adding group",
-		              group_name, AUDIT_NO_ID, 0);
+		              group_name, AUDIT_NO_ID,
+		              SHADOW_AUDIT_FAILURE);
 	}
 #endif
 
