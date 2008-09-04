@@ -131,7 +131,7 @@ static bool
     gflg = false,		/* primary group ID for new account */
     Gflg = false,		/* secondary group set for new account */
     kflg = false,		/* specify a directory to fill new user directory */
-    lflg = false,		/* do not add user to lastlog database file */
+    lflg = false,		/* do not add user to lastlog/faillog databases */
     mflg = false,		/* create user's home directory if it doesn't exist */
     Nflg = false,		/* do not create a group having the same name as the user, but add the user to def_group (or the group specified with -g) */
     oflg = false,		/* permit non-unique user ID to be specified with -u */

@@ -1,5 +1,9 @@
 2008-09-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Fix comment of lflg: it is also used for faillog.
+
+2008-09-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/groupmems.c, man/groupmems.8.xml: Document the long
 	options.
 
