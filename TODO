@@ -1,7 +1,10 @@
+implement getlong, getulong.
+	avoid atoi, atol, atoul, strtol, strtoul, ...
+
+manpages: comment the RLOGIN parts
+
 Replace build_list (in lib/gshadow.c) and list (in lib/sgetgrent.c) by
 comma_to_list()
-
-Fix Tobias name.
 
 Prog should be a global variable to be usable from libmisc.
 
@@ -10,12 +13,13 @@ Revert the modified files if all files could not be changed.
   * check the order the files are modified.
 
 report nscd_flush_cache failures?
-call nscd from the programs of from lib (commonio?)
+call nscd from the programs or from lib (commonio?)
 
 PAM: add support for customization of the PAM support (i.e. support the
 Debian PAM configuration)
 
-PAM: check if a non-interactive conversation function could be used to 
+PAM: check if a non-interactive conversation function could be used to set
+the password in chpasswd and newusers
 
 WITH_SELINUX
   - review all tools to check that the strategies are consistent
@@ -26,6 +30,7 @@ chage, chfn, chsh: same change needed as in passwd.
 testsuite
  - newgrp
    - test with unknown user's GID
+ - groupmems
 
 newusers
  - add logging to SYSLOG & AUDIT
@@ -40,8 +45,6 @@ depends rules for the manpages
 
 Check all the expiry semantics
 
-Add options --crypt-method and --sha-rounds to gpasswd
-
 ALL:
 - move base passwd/shadow/group/gshadow operation to module for allow write
   different backend modules for db, NIS, LDAP and others. Default backend it
@@ -51,6 +54,9 @@ ALL:
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
   user databases by well known tools.
+
+- gpasswd
+  - Add options --crypt-method and --sha-rounds
 
 - useradd:
   - add handle create user mail spool in maildir format.
@@ -70,16 +76,24 @@ ALL:
   - add backup option for the removal of user resources,
   - add lookop and remove per user group.
   - user_busy: check that the user is not running any processes.
+  - missing "deleting group" FAILED
+  - home dir removed, but userdel may fail and may leave the user
+    => warning needed
 
 - passwd:
   - check combination of options (e.g. -u/-l)
 
 - newgrp: check the USE_PAM section.
 
-- newusers: doc for pw_gid not clear. Differentiate
+- newusers:
+  - doc for pw_gid not clear. Differentiate
             pw_gid specified and exist
             pw_gid specified but does not exist
              * name
              * number
             pw_gid not specified.
-- newusers: document what happens when no uid is specified.
+  - document what happens when no uid is specified.
+
+- vipw:
+  - Is MAX_MEMBERS_PER_GROUP used by vipw?
+
