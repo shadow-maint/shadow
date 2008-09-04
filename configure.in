@@ -292,6 +292,15 @@ if test "$with_audit" != "no"; then
 	if test "$audit_header$with_audit" = "noyes" ; then
 		AC_MSG_ERROR([libaudit.h is missing])
 	elif test "$audit_header" = "yes"; then
+		AC_CHECK_DECL(AUDIT_ADD_USER,,[audit_header="no"],[#include <libaudit.h>])
+		AC_CHECK_DECL(AUDIT_DEL_USER,,[audit_header="no"],[#include <libaudit.h>])
+		AC_CHECK_DECL(AUDIT_ADD_GROUP,,[audit_header="no"],[#include <libaudit.h>])
+		AC_CHECK_DECL(AUDIT_DEL_GROUP,,[audit_header="no"],[#include <libaudit.h>])
+		if test "$audit_header$with_audit" = "noyes" ; then
+			AC_MSG_ERROR([AUDIT_ADD_USER AUDIT_DEL_USER AUDIT_ADD_GROUP or AUDIT_DEL_GROUP missing from libaudit.h])
+		fi
+	fi
+	if test "$audit_header" = "yes"; then
 		AC_CHECK_LIB(audit, audit_log_acct_message,
 		             [audit_lib="yes"], [audit_lib="no"])
 		if test "$audit_lib$with_audit" = "noyes" ; then

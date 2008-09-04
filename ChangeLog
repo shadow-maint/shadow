@@ -1,3 +1,8 @@
+2008-09-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* configure.in: Check if AUDIT_ADD_USER, AUDIT_DEL_USER,
+	AUDIT_ADD_GROUP, and AUDIT_DEL_GROUP are defined in <libaudit.h>.
+
 2008-09-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Fix comment of lflg: it is also used for faillog.
