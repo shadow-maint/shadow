@@ -1,5 +1,15 @@
 2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h, libmisc/audit_help.c: Define new type
+	shadow_audit_result for the result argument of audit_logger().
+	This permits stronger type checking and a better readability of
+	the results (SHADOW_AUDIT_FAILURE/SHADOW_AUDIT_SUCCESS constants).
+	* src/groupadd.c, src/groupdel.c, src/useradd.c, src/userdel.c:
+	Use the SHADOW_AUDIT_FAILURE/SHADOW_AUDIT_SUCCESS results instead
+	of 0 or 1 in audit_logger().
+
+2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c: Log failures to remove the mailbox to syslog and
 	audit.
 	* src/userdel.c: Log successful removal of home directory to audit
