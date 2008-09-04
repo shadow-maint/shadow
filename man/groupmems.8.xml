@@ -50,7 +50,7 @@
     </para>
     <variablelist remap='IP'>
       <varlistentry>
-	<term><option>-a</option> <replaceable>user_name</replaceable></term>
+	<term><option>-a</option>, <option>--add</option> <replaceable>user_name</replaceable></term>
 	<listitem>
 	  <para>Add a new user to the group membership list.</para>
 	  <para condition="gshadow">
@@ -61,7 +61,7 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-d</option> <replaceable>user_name</replaceable></term>
+	<term><option>-d</option>, <option>--delete</option> <replaceable>user_name</replaceable></term>
 	<listitem>
 	  <para>Delete a user from the group membership list.</para>
 	  <para condition="gshadow">
@@ -77,7 +77,7 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-g</option> <replaceable>group_name</replaceable></term>
+	<term><option>-g</option>, <option>--group</option> <replaceable>group_name</replaceable></term>
 	<listitem>
 	  <para>The superuser can specify which group membership
 	    list to modify.
@@ -85,13 +85,13 @@
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-l</option></term>
+	<term><option>-l</option>, <option>--list</option></term>
 	<listitem>
 	  <para>List the group membership list.</para>
 	</listitem>
       </varlistentry>
       <varlistentry>
-	<term><option>-p</option></term>
+	<term><option>-p</option>, <option>--purge</option></term>
 	<listitem>
 	  <para>Purge all users from the group membership list.</para>
 	  <para condition="gshadow">

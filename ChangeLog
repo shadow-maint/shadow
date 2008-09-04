@@ -1,3 +1,8 @@
+2008-09-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/groupmems.c, man/groupmems.8.xml: Document the long
+	options.
+
 2008-09-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/prototypes.h, libmisc/audit_help.c: Define new type

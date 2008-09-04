@@ -362,7 +362,18 @@ static void display_members (const char *const *members)
 
 static void usage (void)
 {
-	(void) fputs (_("Usage: groupmems -a username | -d username | -p | -l [-g groupname]\n"), stderr);
+	(void) fputs (_("Usage: groupmems [options] [action]\n"
+	                "\n"
+	                "Options:\n"
+	                "  -g, --group groupname         change groupname instead of the user's group\n"
+	                "                                (root only)\n"
+	                "\n"
+	                "Actions:\n"
+	                "  -a, --add username            add username to the members of the group\n"
+	                "  -d, --delete username         remove username from the members of the group\n"
+	                "  -p, --purge                   purge all members from the group\n"
+	                "  -l, --list                    list the members of the group\n"
+	                "\n"), stderr);
 	fail_exit (EXIT_USAGE);
 }
 
