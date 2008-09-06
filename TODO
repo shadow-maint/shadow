@@ -6,8 +6,6 @@ manpages: comment the RLOGIN parts
 Replace build_list (in lib/gshadow.c) and list (in lib/sgetgrent.c) by
 comma_to_list()
 
-Prog should be a global variable to be usable from libmisc.
-
 Revert the modified files if all files could not be changed.
   * or warn and indicate which files were modified and which were not.
   * check the order the files are modified.
