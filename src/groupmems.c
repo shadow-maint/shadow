@@ -607,20 +607,11 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if (!list) {
-		check_perms ();
+	check_perms ();
 
-		if (gr_lock () == 0) {
-			fprintf (stderr,
-			         _("%s: cannot lock %s; try again later.\n"),
-			         Prog, gr_dbname ());
-			fail_exit (EXIT_GROUP_FILE);
-		}
-		gr_locked = true;
-	}
+	open_files ();
 
 	grp = gr_locate (name);
-
 	if (NULL == grp) {
 		fprintf (stderr, _("%s: group '%s' does not exist in %s\n"),
 		         Prog, name, gr_dbname ());
@@ -637,16 +628,7 @@ int main (int argc, char **argv)
 		purge_members (grp);
 	}
 
-	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing %s", gr_dbname ()));
-		fail_exit (EXIT_GROUP_FILE);
-	}
-	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
-		/* continue */
-	}
+	close_files ();
 
 	exit (EXIT_SUCCESS);
 }
