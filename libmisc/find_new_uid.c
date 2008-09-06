@@ -111,7 +111,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 			}
 		}
 		if (user_id == uid_max) {
-			fprintf (stderr, _("Prog: Can't get unique UID (no more available UIDs)\n"), Prog);
+			fprintf (stderr, _("%s: Can't get unique UID (no more available UIDs)\n"), Prog);
 			SYSLOG ((LOG_WARN, "no more available UID on the system"));
 			return -1;
 		}
