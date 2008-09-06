@@ -1,5 +1,11 @@
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/tz.c: tz() is only used when USE_PAM is not defined.
+	* lib/prototypes.h: Indicate functions whose presence depends on
+	the USE_PAM flag.
+
+2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmems.c: Call open_files() and close_files().
 	* src/groupmems.c: Always call check_perms(), which takes care of
 	checking if --list is used.
