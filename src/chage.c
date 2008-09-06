@@ -83,10 +83,6 @@ static long warndays;
 static long inactdays;
 static long expdays;
 
-#ifdef USE_PAM
-static pam_handle_t *pamh = NULL;
-#endif
-
 #define	EPOCH		"1969-12-31"
 
 /* local function prototypes */
@@ -129,16 +125,6 @@ static void fail_exit (int code)
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "change age",
 		              user_name, (unsigned int) user_uid, 0);
-	}
-#endif
-
-#ifdef USE_PAM
-	if (NULL != pamh) {
-		/* If there is a PAM error, pam_end will be called by the
-		 * caller.
-		 * We always end the pam transaction with PAM_SUCCESS here.
-		 */
-		(void) pam_end (pamh, PAM_SUCCESS);
 	}
 #endif
 
@@ -499,6 +485,7 @@ static void check_flags (int argc, int opt_index)
 static void check_perms (void)
 {
 #ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
 	struct passwd *pampw;
 	int retval;
 #endif
@@ -515,34 +502,26 @@ static void check_perms (void)
 	}
 
 #ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
-	}
-
-	if (PAM_SUCCESS == retval) {
+	} else {
 		retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (PAM_SUCCESS != retval) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
+	if (NULL != pamh) {
+		(void) pam_end (pamh, retval);
+	}
 	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
-		pamh = NULL;
 		fail_exit (E_NOPERM);
 	}
 #endif				/* USE_PAM */
@@ -911,10 +890,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 	SYSLOG ((LOG_INFO, "changed password expiry for %s", user_name));
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);

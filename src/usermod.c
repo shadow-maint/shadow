@@ -1659,9 +1659,7 @@ int main (int argc, char **argv)
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 		if (pampw == NULL) {
 			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (PAM_SUCCESS == retval) {
+		} else {
 			retval = pam_start ("usermod", pampw->pw_name,
 					    &conv, &pamh);
 		}
@@ -1675,8 +1673,10 @@ int main (int argc, char **argv)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (PAM_SUCCESS != retval) {
+	if (NULL != pamh) {
 		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -1721,10 +1721,6 @@ int main (int argc, char **argv)
 			    user_id, user_newid,
 			    user_gid, gflg ? user_newgid : user_gid);
 	}
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	exit (E_SUCCESS);
 	/* NOT REACHED */

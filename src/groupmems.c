@@ -440,7 +440,7 @@ static void check_perms (void)
 	if (!list) {
 #ifdef USE_PAM
 		pam_handle_t *pamh = NULL;
-		int retval = PAM_SUCCESS;
+		int retval;
 		struct passwd *pampw;
 
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
@@ -459,7 +459,9 @@ static void check_perms (void)
 			retval = pam_acct_mgmt (pamh, 0);
 		}
 
-		(void) pam_end (pamh, retval);
+		if (NULL != pamh) {
+			(void) pam_end (pamh, retval);
+		}
 		if (PAM_SUCCESS != retval) {
 			fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 			fail_exit (1);

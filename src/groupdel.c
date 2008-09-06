@@ -337,16 +337,12 @@ int main (int argc, char **argv)
 	OPENLOG ("groupdel");
 
 #ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
 	{
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 		if (pampw == NULL) {
 			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (PAM_SUCCESS == retval) {
+		} else {
 			retval = pam_start ("groupdel", pampw->pw_name,
 					    &conv, &pamh);
 		}
@@ -360,8 +356,10 @@ int main (int argc, char **argv)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (PAM_SUCCESS != retval) {
+	if (NULL != pamh) {
 		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -434,10 +432,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 	nscd_flush_cache ("group");
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	return E_SUCCESS;
 }

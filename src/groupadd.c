@@ -87,11 +87,6 @@ static bool sgr_locked = false;
 #endif
 static bool gr_locked = false;
 
-
-#ifdef USE_PAM
-static pam_handle_t *pamh = NULL;
-#endif
-
 /* local function prototypes */
 static void usage (void);
 static void new_grent (struct group *grent);
@@ -400,14 +395,6 @@ static void fail_exit (int code)
 	}
 #endif
 
-#ifdef USE_PAM
-	if (NULL != pamh) {
-		/* If there is a PAM error, fail_exit is not called.
-		 * We always end the pam transaction with PAM_SUCCESS here.
-		 */
-		(void) pam_end (pamh, PAM_SUCCESS);
-	}
-#endif
 	exit (code);
 }
 
@@ -579,34 +566,29 @@ static void check_flags (void)
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	int retval = PAM_SUCCESS;
+	pam_handle_t *pamh = NULL;
+	int retval;
 	struct passwd *pampw;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
+	} else {
+		retval = pam_start ("groupadd", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
-		retval = pam_start ("groupadd", pampw->pw_name,
-		                    &conv, &pamh);
-	}
-
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			(void) pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (NULL != pamh) {
+		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (1);
 	}
@@ -660,10 +642,6 @@ int main (int argc, char **argv)
 	close_files ();
 
 	nscd_flush_cache ("group");
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	exit (E_SUCCESS);
 	/* NOT REACHED */

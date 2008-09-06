@@ -83,10 +83,6 @@ static bool pw_locked = false;
 static bool gr_locked = false;
 static bool spw_locked = false;
 
-#ifdef USE_PAM
-static pam_handle_t *pamh = NULL;
-#endif
-
 /* local function prototypes */
 static void usage (void);
 static void fail_exit (int);
@@ -566,15 +562,14 @@ static void check_flags (void)
 static void check_perms (void)
 {
 #ifdef USE_PAM
-	int retval = PAM_SUCCESS;
+	pam_handle_t *pamh = NULL;
+	int retval;
 	struct passwd *pampw;
 
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
-	}
-
-	if (PAM_SUCCESS == retval) {
+	} else {
 		retval = pam_start ("newusers", pampw->pw_name, &conv, &pamh);
 	}
 
@@ -586,8 +581,10 @@ static void check_perms (void)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (PAM_SUCCESS != retval) {
+	if (NULL != pamh) {
 		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		fail_exit (1);
 	}
@@ -944,10 +941,6 @@ int main (int argc, char **argv)
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	return 0;
 }

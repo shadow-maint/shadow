@@ -64,9 +64,6 @@ static bool amroot;		/* Real UID is root */
 static char loginsh[BUFSIZ];	/* Name of new login shell */
 /* command line options */
 static bool sflg = false;	/* -s - set shell from command line  */
-#ifdef USE_PAM
-static pam_handle_t *pamh = NULL;
-#endif
 static bool pw_locked = false;
 
 /* external identifiers */
@@ -251,6 +248,7 @@ static void process_flags (int argc, char **argv)
 static void check_perms (const struct passwd *pw)
 {
 #ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
 	int retval;
 	struct passwd *pampw;
 #endif
@@ -306,14 +304,10 @@ static void check_perms (const struct passwd *pw)
         }
 
 #else				/* !USE_PAM */
-	retval = PAM_SUCCESS;
-
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
-	}
-
-	if (PAM_SUCCESS == retval) {
+	} else {
 		retval = pam_start ("chsh", pampw->pw_name, &conv, &pamh);
 	}
 
@@ -325,8 +319,10 @@ static void check_perms (const struct passwd *pw)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (PAM_SUCCESS != retval) {
+	if (NULL != pamh) {
 		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_NOPERM);
 	}
@@ -543,10 +539,6 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed user '%s' shell to '%s'", user, loginsh));
 
 	nscd_flush_cache ("passwd");
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);

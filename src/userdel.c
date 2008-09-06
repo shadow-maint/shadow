@@ -838,9 +838,7 @@ int main (int argc, char **argv)
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 		if (pampw == NULL) {
 			retval = PAM_USER_UNKNOWN;
-		}
-
-		if (retval == PAM_SUCCESS) {
+		} else {
 			retval = pam_start ("userdel", pampw->pw_name,
 					    &conv, &pamh);
 		}
@@ -854,8 +852,10 @@ int main (int argc, char **argv)
 		retval = pam_acct_mgmt (pamh, 0);
 	}
 
-	if (PAM_SUCCESS != retval) {
+	if (NULL != pamh) {
 		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_PW_UPDATE);
 	}
@@ -1000,9 +1000,6 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 	exit ((0 != errors) ? E_HOMEDIR : E_SUCCESS);
 	/* NOT REACHED */
 }

@@ -69,9 +69,6 @@ static bool rflg = false;		/* -r - set room number              */
 static bool wflg = false;		/* -w - set work phone number        */
 static bool hflg = false;		/* -h - set home phone number        */
 static bool oflg = false;		/* -o - set other information        */
-#ifdef USE_PAM
-static pam_handle_t *pamh = NULL;
-#endif
 static bool pw_locked = false;
 
 /*
@@ -338,6 +335,7 @@ static void process_flags (int argc, char **argv)
 static void check_perms (const struct passwd *pw)
 {
 #ifdef USE_PAM
+	pam_handle_t *pamh = NULL;
 	int retval;
 	struct passwd *pampw;
 #endif
@@ -377,32 +375,25 @@ static void check_perms (const struct passwd *pw)
 	}
 
 #else				/* !USE_PAM */
-	retval = PAM_SUCCESS;
-
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
-	if (pampw == NULL) {
+	if (NULL == pampw) {
 		retval = PAM_USER_UNKNOWN;
-	}
-
-	if (retval == PAM_SUCCESS) {
+	} else {
 		retval = pam_start ("chfn", pampw->pw_name, &conv, &pamh);
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval == PAM_SUCCESS) {
+	if (PAM_SUCCESS == retval) {
 		retval = pam_acct_mgmt (pamh, 0);
-		if (retval != PAM_SUCCESS) {
-			pam_end (pamh, retval);
-		}
 	}
 
-	if (retval != PAM_SUCCESS) {
+	if (NULL != pamh) {
+		(void) pam_end (pamh, retval);
+	}
+	if (PAM_SUCCESS != retval) {
 		fprintf (stderr, _("%s: PAM authentication failed\n"), Prog);
 		exit (E_NOPERM);
 	}
@@ -724,10 +715,6 @@ int main (int argc, char **argv)
 	SYSLOG ((LOG_INFO, "changed user '%s' information", user));
 
 	nscd_flush_cache ("passwd");
-
-#ifdef USE_PAM
-	(void) pam_end (pamh, PAM_SUCCESS);
-#endif				/* USE_PAM */
 
 	closelog ();
 	exit (E_SUCCESS);
