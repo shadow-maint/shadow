@@ -1,5 +1,11 @@
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS: Added configure --enable-account-tools-setuid (default) /
+	--disable-account-tools-setuid options. This permits to disable
+	the PAM authentication of the caller for chage, chgpasswd,
+	chpasswd, groupadd, groupdel, groupmod, newusers, useradd,
+	userdel, and usermod.  This authentication is not necessary when
+	these tools are not installed setuid root.
 	* configure.in: Added option --enable-account-tools-setuid to
 	enable/disable the usage of PAM to authenticate the callers of
 	account management tools: chage, chgpasswd, chpasswd, groupadd,

@@ -6,6 +6,12 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
 - packaging
   * Added support for OpenPAM.
   * Added support for uclibc.
+  * Added configure --enable-account-tools-setuid (default) /
+    --disable-account-tools-setuid options. This permits to disable the
+    PAM authentication of the caller for chage, chgpasswd, chpasswd,
+    groupadd, groupdel, groupmod, newusers, useradd, userdel, and usermod.
+    This authentication is not necessary when these tools are not
+    installed setuid root.
 
 - gpasswd
   * Added support for long options --add (-a), --delete (-d),
