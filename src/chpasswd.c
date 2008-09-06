@@ -39,9 +39,11 @@
 #include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include "defines.h"
 #include "exitcodes.h"
 #include "nscd.h"
@@ -240,6 +242,7 @@ static void check_flags (void)
  */
 static void check_perms (void)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
@@ -268,6 +271,7 @@ static void check_perms (void)
 		exit (1);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 }
 
 /*

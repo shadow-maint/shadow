@@ -42,9 +42,11 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <time.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include <pwd.h>
 #ifdef WITH_SELINUX
 #include <selinux/selinux.h>
@@ -484,11 +486,13 @@ static void check_flags (int argc, int opt_index)
  */
 static void check_perms (void)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	struct passwd *pampw;
 	int retval;
-#endif
+#endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 	/*
 	 * An unprivileged user can ask for their own aging information, but
@@ -501,6 +505,7 @@ static void check_perms (void)
 		fail_exit (E_NOPERM);
 	}
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
@@ -525,6 +530,7 @@ static void check_perms (void)
 		fail_exit (E_NOPERM);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 }
 
 /*

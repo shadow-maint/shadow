@@ -40,10 +40,12 @@
 #include <grp.h>
 #include <stdio.h>
 #include <sys/types.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #include <pwd.h>
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include "chkname.h"
 #include "defines.h"
 #include "groupio.h"
@@ -679,10 +681,12 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
  */
 int main (int argc, char **argv)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
-#endif
+#endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
@@ -701,6 +705,7 @@ int main (int argc, char **argv)
 
 	OPENLOG ("groupmod");
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	{
 		struct passwd *pampw;
@@ -729,6 +734,7 @@ int main (int argc, char **argv)
 		fail_exit (1);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();

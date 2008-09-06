@@ -49,22 +49,31 @@ noinst_PROGRAMS = id sulogin
 
 suidbins       = su
 suidubins      = chage chfn chsh expiry gpasswd newgrp passwd
+if ACCT_TOOLS_SETUID
+	suidubins += chage chgpasswd chpasswd groupadd groupdel groupmod newusers useradd userdel usermod
+endif
 
 LDADD          = $(INTLLIBS) \
 		 $(top_builddir)/libmisc/libmisc.a \
 		 $(top_builddir)/lib/libshadow.la
 AM_CPPFLAGS    = -DLOCALEDIR=\"$(datadir)/locale\"
 
-chage_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+if ACCT_TOOLS_SETUID
+LIBPAM_SUID  = $(LIBPAM)
+else
+LIBPAM_SUID  =
+endif
+
+chage_LDADD    = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 chfn_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
-chgpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
+chgpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBSELINUX) $(LIBCRYPT)
 chsh_LDADD     = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
-chpasswd_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
+chpasswd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBSELINUX) $(LIBCRYPT)
 gpasswd_LDADD  = $(LDADD) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT)
-groupadd_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
-groupdel_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupadd_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
+groupdel_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 groupmems_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX)
-groupmod_LDADD = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+groupmod_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 grpck_LDADD    = $(LDADD) $(LIBSELINUX)
 grpconv_LDADD  = $(LDADD) $(LIBSELINUX)
 grpunconv_LDADD = $(LDADD) $(LIBSELINUX)
@@ -73,7 +82,7 @@ login_SOURCES  = \
 	login_nopam.c
 login_LDADD    = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
 newgrp_LDADD   = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBCRYPT)
-newusers_LDADD = $(LDADD) $(LIBPAM) $(LIBSELINUX) $(LIBCRYPT)
+newusers_LDADD = $(LDADD) $(LIBPAM_SUID) $(LIBSELINUX) $(LIBCRYPT)
 nologin_LDADD  =
 passwd_LDADD   = $(LDADD) $(LIBPAM) $(LIBCRACK) $(LIBAUDIT) $(LIBSELINUX) $(LIBCRYPT)
 pwck_LDADD     = $(LDADD) $(LIBSELINUX)
@@ -84,9 +93,9 @@ su_SOURCES     = \
 	suauth.c
 su_LDADD       = $(LDADD) $(LIBPAM) $(LIBCRYPT) $(LIBSKEY) $(LIBMD)
 sulogin_LDADD  = $(LDADD) $(LIBCRYPT)
-useradd_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
-userdel_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
-usermod_LDADD  = $(LDADD) $(LIBPAM) $(LIBAUDIT) $(LIBSELINUX)
+useradd_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
+userdel_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
+usermod_LDADD  = $(LDADD) $(LIBPAM_SUID) $(LIBAUDIT) $(LIBSELINUX)
 vipw_LDADD     = $(LDADD) $(LIBSELINUX)
 
 install-am: all-am

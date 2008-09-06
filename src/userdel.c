@@ -43,9 +43,11 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/stat.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include "defines.h"
 #include "getdef.h"
 #include "groupio.h"
@@ -781,10 +783,12 @@ int main (int argc, char **argv)
 {
 	int errors = 0; /* Error in the removal of the home directory */
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
-#endif
+#endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
@@ -830,9 +834,8 @@ int main (int argc, char **argv)
 
 	OPENLOG ("userdel");
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
 	{
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
@@ -860,6 +863,7 @@ int main (int argc, char **argv)
 		exit (E_PW_UPDATE);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 	is_shadow_pwd = spw_file_present ();
 #ifdef SHADOWGRP

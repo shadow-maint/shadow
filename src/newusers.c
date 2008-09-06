@@ -50,9 +50,11 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <ctype.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include "prototypes.h"
 #include "defines.h"
 #include "getdef.h"
@@ -561,6 +563,7 @@ static void check_flags (void)
  */
 static void check_perms (void)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
@@ -589,6 +592,7 @@ static void check_perms (void)
 		fail_exit (1);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 }
 
 /*

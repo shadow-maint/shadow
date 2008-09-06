@@ -1,5 +1,20 @@
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Added option --enable-account-tools-setuid to
+	enable/disable the usage of PAM to authenticate the callers of
+	account management tools: chage, chgpasswd, chpasswd, groupadd,
+	groupdel, groupmod, useradd, userdel, usermod.
+	* src/Makefile.am: Do not link the above tools with libpam if
+	account-tools-setuid is disabled.
+	* src/userdel.c, src/newusers.c, src/chpasswd.c, src/usermod.c,
+	src/groupdel.c, src/chgpasswd.c, src/useradd.c, src/groupmod.c,
+	src/groupadd.c, src/chage.c: Implement ACCT_TOOLS_SETUID
+	(--enable-account-tools-setuid).
+	* etc/pam.d/Makefile.am: Install the pam service file for the
+	above tools only when needed.
+
+2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/tz.c: tz() is only used when USE_PAM is not defined.
 	* lib/prototypes.h: Indicate functions whose presence depends on
 	the USE_PAM flag.
@@ -32,6 +47,8 @@
 	src/chsh.c: Simplify the PAM error handling. Do not keep the pamh
 	handle, but terminate the PAM transaction as soon as possible if
 	there are no PAM session opened.
+	* src/useradd.c, src/userdel.c, src/usermod.c: It is no more
+	needed to initialize retval to PAM_SUCCESS.
 
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 

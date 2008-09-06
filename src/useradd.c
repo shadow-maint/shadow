@@ -42,9 +42,11 @@
 #include <grp.h>
 #include <lastlog.h>
 #include <pwd.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -1748,10 +1750,12 @@ static void create_mail (void)
  */
 int main (int argc, char **argv)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
-#endif
+#endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
@@ -1785,9 +1789,8 @@ int main (int argc, char **argv)
 
 	process_flags (argc, argv);
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
-	retval = PAM_SUCCESS;
-
 	{
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
@@ -1815,6 +1818,7 @@ int main (int argc, char **argv)
 		fail_exit (1);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 	/*
 	 * See if we are messing with the defaults file, or creating

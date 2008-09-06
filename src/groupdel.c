@@ -38,9 +38,11 @@
 #include <fcntl.h>
 #include <grp.h>
 #include <pwd.h>
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 #include <stdio.h>
 #include <sys/types.h>
 #include "defines.h"
@@ -309,10 +311,12 @@ static void group_busy (gid_t gid)
 
 int main (int argc, char **argv)
 {
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	pam_handle_t *pamh = NULL;
 	int retval;
-#endif
+#endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef WITH_AUDIT
 	audit_help_open ();
@@ -336,6 +340,7 @@ int main (int argc, char **argv)
 
 	OPENLOG ("groupdel");
 
+#ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 	{
 		struct passwd *pampw;
@@ -364,6 +369,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 #endif				/* USE_PAM */
+#endif				/* ACCT_TOOLS_SETUID */
 
 #ifdef SHADOWGRP
 	is_shadow_grp = sgr_file_present ();
