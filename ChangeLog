@@ -1,5 +1,9 @@
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/obscure.c: Compare characters to '\0', not NULL.
+
+2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Do not include <config.h>. This complicate
 	undefining some configuration macros when the file is included
 	multiple times.

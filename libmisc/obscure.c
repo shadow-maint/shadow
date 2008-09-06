@@ -109,7 +109,7 @@ static int simple (unused const char *old, const char *new)
 	int size;
 	int i;
 
-	for (i = 0; NULL != new[i]; i++) {
+	for (i = 0; '\0' != new[i]; i++) {
 		if (isdigit (new[i])) {
 			digits = true;
 		} else if (isupper (new[i])) {
@@ -151,7 +151,7 @@ static char *str_lower (char *string)
 {
 	char *cp;
 
-	for (cp = string; NULL != *cp; cp++) {
+	for (cp = string; '\0' != *cp; cp++) {
 		*cp = tolower (*cp);
 	}
 	return string;
