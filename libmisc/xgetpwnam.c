@@ -49,6 +49,8 @@
  * This file provide wrapper to the getpwnam or getpwnam_r functions.
  */
 
+#include <config.h>
+
 #include "pwio.h"
 
 #define LOOKUP_TYPE	struct passwd

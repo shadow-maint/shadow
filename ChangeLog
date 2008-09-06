@@ -1,5 +1,15 @@
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Do not include <config.h>. This complicate
+	undefining some configuration macros when the file is included
+	multiple times.
+	* libmisc/xgetXXbyYY.c, libmisc/xgetpwnam.c, libmisc/xgetpwuid.c,
+	libmisc/xgetgrgid.c, libmisc/xgetgrnam.c, libmisc/xgetspnam.c:
+	Include <config.h> from teh compiled C file, not the included
+	getXXbyYY.c.
+
+2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/userdel.c, src/newusers.c, src/chpasswd.c, src/chfn.c,
 	src/groupmems.c, src/usermod.c, src/groupdel.c, src/chgpasswd.c,
 	src/useradd.c, src/groupmod.c, src/groupadd.c, src/chage.c,

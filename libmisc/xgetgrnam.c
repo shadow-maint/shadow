@@ -49,6 +49,8 @@
  * This file provide wrapper to the getpwnam or getpwnam_r functions.
  */
 
+#include <config.h>
+
 #include "groupio.h"
 
 #define LOOKUP_TYPE	struct group

@@ -52,7 +52,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <config.h>
+#include <errno.h>
 #include "prototypes.h"
 
 #define XFUNCTION_NAME XPREFIX (FUNCTION_NAME)
