@@ -509,10 +509,13 @@ static void check_perms (void)
 #ifdef USE_PAM
 	pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 	if (NULL == pampw) {
-		retval = PAM_USER_UNKNOWN;
-	} else {
-		retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
+		fprintf (stderr,
+		         _("%s: Cannot determine your user name.\n"),
+		         Prog);
+		exit (E_NOPERM);
 	}
+
+	retval = pam_start ("chage", pampw->pw_name, &conv, &pamh);
 
 	if (PAM_SUCCESS == retval) {
 		retval = pam_authenticate (pamh, 0);

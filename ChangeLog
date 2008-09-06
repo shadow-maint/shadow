@@ -56,7 +56,8 @@
 	src/useradd.c, src/groupmod.c, src/groupadd.c, src/chage.c,
 	src/chsh.c: Simplify the PAM error handling. Do not keep the pamh
 	handle, but terminate the PAM transaction as soon as possible if
-	there are no PAM session opened.
+	there are no PAM session opened. If the username cannot be
+	determined, report it as such (not a PAM authentication failure).
 	* src/useradd.c, src/userdel.c, src/usermod.c: It is no more
 	needed to initialize retval to PAM_SUCCESS.
 

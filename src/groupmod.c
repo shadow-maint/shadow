@@ -711,11 +711,13 @@ int main (int argc, char **argv)
 		struct passwd *pampw;
 		pampw = getpwuid (getuid ()); /* local, no need for xgetpwuid */
 		if (NULL == pamh) {
-			retval = PAM_USER_UNKNOWN;
-		} else {
-			retval = pam_start ("groupmod", pampw->pw_name,
-					    &conv, &pamh);
+			fprintf (stderr,
+			         _("%s: Cannot determine your user name.\n"),
+			         Prog);
+			fail_exit (1);
 		}
+
+		retval = pam_start ("groupmod", pampw->pw_name, &conv, &pamh);
 	}
 
 	if (PAM_SUCCESS == retval) {
