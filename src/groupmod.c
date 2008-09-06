@@ -66,6 +66,8 @@
 /*
  * Global variables
  */
+char *Prog;
+
 #ifdef	SHADOWGRP
 static bool is_shadow_grp;
 static bool sgr_locked = false;
@@ -77,8 +79,6 @@ static char *group_newname;
 static char *group_passwd;
 static gid_t group_id;
 static gid_t group_newid;
-
-static char *Prog;
 
 static bool
     oflg = false,		/* permit non-unique group ID to be specified with -g */

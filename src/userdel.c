@@ -68,11 +68,16 @@
 #define E_USER_BUSY	8	/* user currently logged in */
 #define E_GRP_UPDATE	10	/* can't update group file */
 #define E_HOMEDIR	12	/* can't remove home directory */
+
+/*
+ * Global variables
+ */
+char *Prog;
+
 static char *user_name;
 static uid_t user_id;
 static char *user_home;
 
-static char *Prog;
 static bool fflg = false;
 static bool rflg = false;
 

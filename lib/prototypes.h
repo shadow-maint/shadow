@@ -57,6 +57,8 @@
 #include "defines.h"
 #include "commonio.h"
 
+extern char *Prog;
+
 /* addgrps.c */
 extern int add_groups (const char *);
 extern void add_cons_grps (void);

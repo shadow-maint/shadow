@@ -53,8 +53,9 @@
 /*
  * Global variables
  */
+char *Prog;
+
 static char *group_name;
-static char *Prog;
 static gid_t group_id = -1;
 
 #ifdef	SHADOWGRP

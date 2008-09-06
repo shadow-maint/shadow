@@ -65,7 +65,8 @@
 /*
  * Global variables
  */
-static char *Prog;
+char *Prog;
+
 static bool cflg = false;
 static bool rflg = false;	/* create a system account */
 static bool sflg = false;

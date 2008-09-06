@@ -82,6 +82,8 @@
 /*
  * Global variables
  */
+char *Prog;
+
 static char *user_name;
 static char *user_newname;
 static char *user_pass;
@@ -101,8 +103,6 @@ static long user_inactive;
 static long user_newinactive;
 static long sys_ngroups;
 static char **user_groups;	/* NULL-terminated list */
-
-static char *Prog;
 
 static bool
     aflg = false,		/* append to existing secondary group set */

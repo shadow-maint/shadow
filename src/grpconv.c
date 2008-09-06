@@ -53,9 +53,10 @@
 /*
  * Global variables
  */
+char *Prog;
+
 static bool gr_locked  = false;
 static bool sgr_locked = false;
-static char *Prog;
 
 /* local function prototypes */
 static void fail_exit (int status);

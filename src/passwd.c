@@ -68,9 +68,10 @@
 /*
  * Global variables
  */
+char *Prog;			/* Program name */
+
 static char *name;		/* The name of user whose password is being changed */
 static char *myname;		/* The current user's name */
-static char *Prog;		/* Program name */
 static bool amroot;		/* The caller's real UID was 0 */
 
 static bool

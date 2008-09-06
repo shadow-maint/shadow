@@ -42,7 +42,7 @@
 /*
  * Global variables
  */
-static char *Prog;
+char *Prog;
 
 /* local function prototypes */
 static void print_groups (const char *member);

@@ -45,6 +45,8 @@
 /*
  * Global variables
  */
+char *Prog;
+
 extern char **newenvp;
 extern char **environ;
 
@@ -53,7 +55,6 @@ static int ngroups;
 static GETGROUPS_T *grouplist;
 #endif
 
-static char *Prog;
 static bool is_newgrp;
 
 #ifdef WITH_AUDIT

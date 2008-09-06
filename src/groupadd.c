@@ -68,12 +68,12 @@
 /*
  * Global variables
  */
+char *Prog;
+
 static char *group_name;
 static gid_t group_id;
 static char *group_passwd;
 static char *empty_list = NULL;
-
-static char *Prog;
 
 static bool oflg = false;	/* permit non-unique group ID to be specified with -g */
 static bool gflg = false;	/* ID value for the new group */

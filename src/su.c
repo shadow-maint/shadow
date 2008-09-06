@@ -75,6 +75,8 @@
 /*
  * Global variables
  */
+char *Prog;
+
 /* not needed by sulog.c anymore */
 static char name[BUFSIZ];
 static char oldname[BUFSIZ];
@@ -87,7 +89,6 @@ static pam_handle_t *pamh = NULL;
 static bool caught = false;
 #endif
 
-static char *Prog;
 extern struct passwd pwent;
 
 /*

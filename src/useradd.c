@@ -79,6 +79,8 @@
 /*
  * Global variables
  */
+char *Prog;
+
 /*
  * These defaults are used if there is no defaults file.
  */
@@ -118,8 +120,6 @@ static bool spw_locked = false;
 static char **user_groups;	/* NULL-terminated list */
 static long sys_ngroups;
 static bool do_grp_update = false;	/* group files need to be updated */
-
-static char *Prog;
 
 static bool
     bflg = false,		/* new default root of home directory */

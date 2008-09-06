@@ -105,8 +105,8 @@ static bool preauth_flag = false;
 /*
  * Global variables.
  */
+char *Prog;
 
-static char *Prog;
 static bool amroot;
 static int timeout;
 

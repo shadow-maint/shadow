@@ -63,8 +63,8 @@
 /*
  * Global variables
  */
+char *Prog;
 
-static char *Prog;
 static const char *pwd_file = PASSWD_FILE;
 static bool use_system_pw_file = true;
 static const char *spw_file = SHADOW_FILE;

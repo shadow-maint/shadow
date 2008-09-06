@@ -110,7 +110,8 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 			}
 		}
 		if (group_id == gid_max) {
-			fputs (_("Can't get unique GID (no more available GIDs)\n"), stderr);
+			fprintf (stderr, _("%s: Can't get unique GID (no more available GIDs)\n"), Prog);
+			SYSLOG ((LOG_WARN, "no more available GID on the system"));
 			return -1;
 		}
 	}

@@ -51,7 +51,7 @@
 /*
  * Global variables
  */
-static char *Prog;
+char *Prog;
 static bool cflg   = false;
 static bool eflg   = false;
 static bool md5flg = false;

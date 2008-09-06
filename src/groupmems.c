@@ -64,13 +64,14 @@
 /*
  * Global variables
  */
+char *Prog;
+
 static char *adduser = NULL;
 static char *deluser = NULL;
 static char *thisgroup = NULL;
 static bool purge = false;
 static bool list = false;
 static int exclusive = 0;
-static char *Prog;
 static bool gr_locked = false;
 #ifdef SHADOWGRP
 /* Indicate if shadow groups are enabled on the system
