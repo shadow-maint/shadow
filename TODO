@@ -13,9 +13,6 @@ Revert the modified files if all files could not be changed.
 report nscd_flush_cache failures?
 call nscd from the programs or from lib (commonio?)
 
-PAM: add support for customization of the PAM support (i.e. support the
-Debian PAM configuration)
-
 PAM: check if a non-interactive conversation function could be used to set
 the password in chpasswd and newusers
 
