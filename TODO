@@ -64,12 +64,8 @@ ALL:
   on automation in packages for query/check is group/user exist in system
   or not,
 
-- groupmems: 
-  - need some work on add PAM and i18n support.
-
 - userdel:
   - add backup option for the removal of user resources,
-  - add lookop and remove per user group.
   - user_busy: check that the user is not running any processes.
   - missing "deleting group" FAILED
   - home dir removed, but userdel may fail and may leave the user
