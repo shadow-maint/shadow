@@ -1,3 +1,7 @@
+2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/gpasswd.c: Document the long options in the usage.
+
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS: Added configure --enable-account-tools-setuid (default) /

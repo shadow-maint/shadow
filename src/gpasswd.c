@@ -119,15 +119,27 @@ static void change_passwd (struct group *gr);
  */
 static void usage (void)
 {
-	fprintf (stderr, _("Usage: %s [-r|-R] group\n"), Prog);
-	fprintf (stderr, _("       %s [-a user] group\n"), Prog);
-	fprintf (stderr, _("       %s [-d user] group\n"), Prog);
-#ifdef SHADOWGRP
 	fprintf (stderr,
-		 _("       %s [-A user,...] [-M user,...] group\n"), Prog);
+	         _("Usage: %s [option] GROUP\n"
+	           "\n"
+	           "Options:\n"
+	           "  -a, --add USER                add USER to GROUP\n"
+	           "  -d, --delete USER             remove USER from GROUP\n"
+	           "  -r, --remove-password         remove the GROUP's password\n"
+	           "  -R, --restrict                restrict access to GROUP to its members\n"
+	           "  -M, --members USER,...        set the list of members of GROUP\n"
+	           "%s\n"
+	           "\n"),
+	         Prog,
+#ifdef SHADOWGRP
+	         _("  -A, --administrators ADMIN,...\n"
+	           "                                set the list of administrators for GROUP\n"
+	           "Except for the -A and -M options, the options cannot be combined.\n")
+	         
 #else
-	fprintf (stderr, _("       %s [-M user,...] group\n"), Prog);
+	         _("The options cannot be combined.\n")
 #endif
+	        );
 	exit (E_USAGE);
 }
 
