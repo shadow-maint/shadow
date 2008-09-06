@@ -1,3 +1,6 @@
+libxcrypt support
+ * http://wiki.linuxfromscratch.org/patches/browser/trunk/shadow/shadow-4.0.18.1-owl_blowfish-1.patch
+
 implement getlong, getulong.
 	avoid atoi, atol, atoul, strtol, strtoul, ...
 
