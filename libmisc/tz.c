@@ -33,6 +33,8 @@
 
 #include <config.h>
 
+#ifndef USE_PAM
+
 #ident "$Id$"
 
 #include <stdio.h>
@@ -40,6 +42,7 @@
 #include "defines.h"
 #include "prototypes.h"
 #include "getdef.h"
+
 /*
  * tz - return local timezone name
  *
@@ -54,10 +57,8 @@ char *tz (const char *fname)
 
 	if ((fp = fopen (fname, "r")) == NULL ||
 	    fgets (tzbuf, (int) sizeof (tzbuf), fp) == NULL) {
-#ifndef USE_PAM
 		if (!(def_tz = getdef_str ("ENV_TZ")) || def_tz[0] == '/')
 			def_tz = "TZ=CST6CDT";
-#endif				/* !USE_PAM */
 
 		strcpy (tzbuf, def_tz);
 	} else
@@ -68,3 +69,7 @@ char *tz (const char *fname)
 
 	return tzbuf;
 }
+#else				/* !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* !USE_PAM */
+

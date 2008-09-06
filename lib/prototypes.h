@@ -147,7 +147,9 @@ extern void audit_logger (int type, const char *pgname, const char *op,
 #endif
 
 /* limits.c */
+#ifndef USE_PAM
 extern void setup_limits (const struct passwd *);
+#endif
 
 /* list.c */
 extern char **add_list (char **, const char *);
@@ -178,10 +180,14 @@ extern void motd (void);
 extern struct passwd *get_my_pwent (void);
 
 /* obscure.c */
+#ifndef USE_PAM
 extern int obscure (const char *, const char *, const struct passwd *);
+#endif
 
 /* pam_pass.c */
+#ifdef USE_PAM
 extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
+#endif
 
 /* port.c */
 extern bool isttytime (const char *, const char *, time_t);
@@ -190,7 +196,9 @@ extern bool isttytime (const char *, const char *, time_t);
 extern struct spwd *pwd_to_spwd (const struct passwd *);
 
 /* pwdcheck.c */
+#ifndef USE_PAM
 extern void passwd_check (const char *, const char *, const char *);
+#endif
 
 /* pwd_init.c */
 extern void pwd_init (void);
@@ -262,7 +270,9 @@ extern void subsystem (const struct passwd *);
 extern void ttytype (const char *);
 
 /* tz.c */
+#ifndef USE_PAM
 extern char *tz (const char *);
+#endif
 
 /* ulimit.c */
 extern int set_filesize_limit (int blocks);
