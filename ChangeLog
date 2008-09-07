@@ -1,5 +1,10 @@
 2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/copydir.c, configure.in: Check for the presence of
+	st_mtim and st_mtimensec, as for st_atim and st_atimensec.
+
+2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Document the long options in the usage.
 
 2008-09-06  Nicolas François  <nicolas.francois@centraliens.net>
