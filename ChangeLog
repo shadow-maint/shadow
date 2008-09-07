@@ -1,5 +1,10 @@
 2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Fix the dependency of ACCT_TOOLS_SETUID on
+	USE_PAM. Build failed with --without-libpam.
+
+2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/copydir.c, configure.in: Check for the presence of
 	st_mtim and st_mtimensec, as for st_atim and st_atimensec.
 	* libmisc/copydir.c: Call utimes() after closing the file.
