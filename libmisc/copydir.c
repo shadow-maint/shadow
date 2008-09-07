@@ -566,15 +566,17 @@ static int copy_file (const char *src, const char *dst,
 	if (futimes (ofd, mt) != 0) {
 		return -1;
 	}
-#else
-	if (utimes(dst, mt) != 0) {
-		return -1;
-	}
 #endif
 
 	if (close (ofd) != 0) {
 		return -1;
 	}
+
+#ifndef HAVE_FUTIMES
+	if (utimes(dst, mt) != 0) {
+		return -1;
+	}
+#endif
 
 	return err;
 }
