@@ -186,7 +186,7 @@ static FILE *fopen_set_perms (const char *name, const char *mode,
 
 	mask = umask (0777);
 	fp = fopen (name, mode);
-	umask (mask);
+	(void) umask (mask);
 	if (NULL == fp) {
 		return NULL;
 	}
@@ -233,7 +233,7 @@ static int create_backup (const char *backup, FILE * fp)
 
 	mask = umask (077);
 	bkfp = fopen (backup, "w");
-	umask (mask);
+	(void) umask (mask);
 	if (NULL == bkfp) {
 		return -1;
 	}

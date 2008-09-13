@@ -1,3 +1,8 @@
+2008-09-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/commonio.c: Ignore the return value of umask() when the mask
+	is set to the old value.
+
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, etc/login.defs: New CREATE_HOME variable to tell useradd
