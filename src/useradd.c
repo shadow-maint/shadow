@@ -724,6 +724,8 @@ static void usage (void)
 	         "                                faillog databases\n"
 	         "  -m, --create-home             create home directory for the new user\n"
 	         "                                account\n"
+	         "  -M, --no-create-home          do not create user's home directory\n"
+	         "                                (overrides /etc/login.defs)\n"
 	         "  -N, --no-user-group           do not create a group with the same name as\n"
 	         "                                the user\n"
 	         "  -o, --non-unique              allow create user with duplicate\n"
@@ -983,6 +985,7 @@ static void process_flags (int argc, char **argv)
 			{"skel", required_argument, NULL, 'k'},
 			{"key", required_argument, NULL, 'K'},
 			{"create-home", no_argument, NULL, 'm'},
+			{"no-create-home", no_argument, NULL, 'M'},
 			{"no-user-group", no_argument, NULL, 'N'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
@@ -1133,6 +1136,9 @@ static void process_flags (int argc, char **argv)
 			case 'm':
 				mflg = true;
 				break;
+			case 'M':
+				Mflg = true;
+				break;
 			case 'N':
 				Nflg = true;
 				break;
@@ -1212,6 +1218,12 @@ static void process_flags (int argc, char **argv)
 		         Prog, "-U", "-N");
 		usage ();
 	}
+	if (mflg && Mflg) {
+		fprintf (stderr,
+		         _("%s: options %s and %s conflict\n"),
+		         Prog, "-m", "-M");
+		usage ();
+	}
 
 	/*
 	 * Either -D or username is required. Defaults can be set with -D
@@ -1265,10 +1277,20 @@ static void process_flags (int argc, char **argv)
 		user_shell = def_shell;
 	}
 
-	/* TODO: add handle change default spool mail creation by 
-	   -K CREATE_MAIL_SPOOL={yes,no}. It need rewrite internal API for handle
-	   shadow tools configuration */
 	create_mail_spool = def_create_mail_spool;
+
+	if (!rflg) {
+		 /* for system accounts defaults are ignored and we
+		  * do not create a home dir */
+		if (getdef_bool("CREATE_HOME")) {
+			mflg = true;
+		}
+	}
+
+	if (Mflg) {
+		/* absolutely sure that we do not create home dirs */
+		mflg = false;
+	}
 }
 
 /*
@@ -1932,26 +1954,12 @@ int main (int argc, char **argv)
 				  "Not copying any file from skel directory into it.\n"),
 				 Prog);
 
-	} else if (getdef_str ("CREATE_HOME") != NULL) {
-		/*
-		 * RedHat added the CREATE_HOME option in login.defs in their
-		 * version of shadow-utils (which makes -m the default, with
-		 * new -M option to turn it off). Unfortunately, this
-		 * changes the way useradd works (it can be run by scripts
-		 * expecting some standard behaviour), compared to other
-		 * Unices and other Linux distributions, and also adds a lot
-		 * of confusion :-(.
-		 * So we now recognize CREATE_HOME and give a warning here
-		 * (better than "configuration error ... notify administrator"
-		 * errors in every program that reads /etc/login.defs). -MM
-		 */
-		fprintf (stderr,
-			 _
-			 ("%s: warning: CREATE_HOME not supported, please use -m instead.\n"),
-			 Prog);
 	}
 
-	create_mail ();
+	/* Do not create mail directory for system accounts */
+	if( !rflg ) {
+		create_mail ();
+	}
 
 	close_files ();
 

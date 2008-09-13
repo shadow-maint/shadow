@@ -1,3 +1,14 @@
+2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, etc/login.defs: New CREATE_HOME variable to tell useradd
+	to create a home directory for new users.
+	* src/useradd.c, man/useradd.8.xml: New -M/--no-create-home option
+	and CREATE_HOME usage. System accounts are not impacted by
+	CREATE_HOME.
+	* man/useradd.8.xml: Indicate that a new group is created by
+	default.
+	* src/useradd.c: Removed TODO item (moved to the TODO file).
+
 2008-09-11  Miroslav Kuře  <kurem@debian.cz>
 
 	* po/cs.po: Updated Czech translation.

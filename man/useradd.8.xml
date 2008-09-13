@@ -56,6 +56,11 @@
 	will update system files and may also create the new user's home
 	directory and copy initial files.
       </para>
+      <para>
+	By default, a group will also be created for the new user (see
+	<option>-g</option>, <option>-N</option>, <option>-U</option>, and
+	<option>USERGROUPS_ENAB</option>).
+      </para>
   </refsect1>
 
   <refsect1 id='options'>
@@ -295,6 +300,19 @@
       </varlistentry>
       <varlistentry>
 	<term>
+	  <option>-M</option>
+	</term>
+	<listitem>
+	  <para>
+	    Do no create the user's home directory, even if the system
+	    wide setting from <filename>/etc/login.defs</filename>
+	    (<option>CREATE_HOME</option>) is set to
+	    <replaceable>yes</replaceable>.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
 	  <option>-N</option>, <option>--no-user-group</option>
 	</term>
 	<listitem>
@@ -353,6 +371,14 @@
 	    range, defined in <filename>/etc/login.defs</filename>, instead of
 	    <option>UID_MIN</option>-<option>UID_MAX</option> (and their
 	    <option>GID</option> counterparts for the creation of groups).
+	  </para>
+	  <para>
+	    Note that <command>useradd</command> will not create a home
+	    directory for such an user, regardless of the default setting
+	    in <filename>/etc/login.defs</filename>
+	    (<option>CREATE_HOME</option>). You have to specify the
+	    <option>-m</option> options if you want a home directory for a
+	    system account to be created.
 	  </para>
 	</listitem>
       </varlistentry>

@@ -367,3 +367,12 @@ USERGROUPS_ENAB yes
 # 0 is the default value and disables this feature.
 #
 #MAX_MEMBERS_PER_GROUP	0
+
+#
+# If useradd should create home directories for users by default (non
+# system users only)
+# This option is overridden with the -M or -m flags on the useradd command
+# line.
+#
+#CREATE_HOME     yes
+
