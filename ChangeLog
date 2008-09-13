@@ -1,3 +1,7 @@
+2008-09-11  Miroslav Kuře  <kurem@debian.cz>
+
+	* po/cs.po: Updated Czech translation.
+
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/USERGROUPS_ENAB.xml: Fix typo: new <para> tag
