@@ -51,6 +51,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max, group_id;
+	char *used_gids;
 
 	assert (gid != NULL);
 
@@ -62,6 +63,8 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		gid_max = getdef_ulong ("GID_MIN", 1000L) - 1;
 		gid_max = getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
 	}
+	used_gids = alloca (sizeof (char) * gid_max +1);
+	memset (used_gids, 0, sizeof (char) * gid_max + 1);
 
 	if (   (NULL != preferred_gid)
 	    && (*preferred_gid >= gid_min)
@@ -81,8 +84,8 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 	 * Search the entire group file,
 	 * looking for the largest unused value.
 	 *
-	 * We check the list of users according to NSS (setpwent/getpwent),
-	 * but we also check the local database (pw_rewind/pw_next) in case
+	 * We check the list of groups according to NSS (setgrent/getgrent),
+	 * but we also check the local database (gr_rewind/gr_next) in case
 	 * some groups were created but the changes were not committed yet.
 	 */
 	setgrent ();
@@ -92,20 +95,21 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
 			group_id = grp->gr_gid + 1;
 		}
+		/* create index of used GIDs */
+		if (grp->gr_gid <= gid_max) {
+			used_gids[grp->gr_gid] = 1;
+		}
 	}
 	endgrent ();
 
 	/*
 	 * If a group with GID equal to GID_MAX exists, the above algorithm
 	 * will give us GID_MAX+1 even if not unique. Search for the first
-	 * free GID starting with GID_MIN (it's O(n*n) but can be avoided
-	 * by not having users with GID equal to GID_MAX).  --marekm
+	 * free GID starting with GID_MIN.
 	 */
 	if (group_id == gid_max + 1) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
-			/* local, no need for xgetgrgid */
-			if (   (getgrgid (group_id) == NULL)
-			    && (gr_locate_gid (group_id) == NULL)) {
+			if (0 == used_gids[grp->gr_gid]) {
 				break;
 			}
 		}

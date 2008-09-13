@@ -1,5 +1,17 @@
 2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	From RedHat's patch shadow-4.1.2-sysAccountDownhill.patch
+	Thanks to Peter Vrabec.
+	* NEWS, libmisc/find_new_gid.c, libmisc/find_new_uid.c: Build an
+	index of used IDs to avoid a database request for each id in the
+	allowed range (when the highest allowed ID is already used).
+	This speedups the addition of users or groups when the highest
+	allowed ID is already used. The additional memory usage of the
+	tools should be acceptable when UID_MAX/SYS_UID_MAX are set to a
+	reasonable number.
+
+2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* configure.in: Fix the dependency of ACCT_TOOLS_SETUID on
 	USE_PAM. Build failed with --without-libpam.
 

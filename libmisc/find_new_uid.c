@@ -51,6 +51,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 {
 	const struct passwd *pwd;
 	uid_t uid_min, uid_max, user_id;
+	char *used_uids;
 
 	assert (uid != NULL);
 
@@ -62,6 +63,8 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		uid_max = getdef_ulong ("UID_MIN", 1000L) - 1;
 		uid_max = getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
 	}
+	used_uids = alloca (sizeof (char) * uid_max +1);
+	memset (used_uids, 0, sizeof (char) * uid_max + 1);
 
 	if (   (NULL != preferred_uid)
 	    && (*preferred_uid >= uid_min)
@@ -93,20 +96,21 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
 			user_id = pwd->pw_uid + 1;
 		}
+		/* create index of used UIDs */
+		if (pwd->pw_uid <= uid_max) {
+			used_uids[pwd->pw_uid] = 1;
+		}
 	}
 	endpwent ();
 
 	/*
 	 * If a user with UID equal to UID_MAX exists, the above algorithm
 	 * will give us UID_MAX+1 even if not unique. Search for the first
-	 * free UID starting with UID_MIN (it's O(n*n) but can be avoided
-	 * by not having users with UID equal to UID_MAX).  --marekm
+	 * free UID starting with UID_MIN.
 	 */
 	if (user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
-			/* local, no need for xgetpwuid */
-			if (   (getpwuid (user_id) == NULL)
-			    && (pw_locate_uid (user_id) == NULL)) {
+			if (0 == used_uids[pwd->pw_uid]) {
 				break;
 			}
 		}
