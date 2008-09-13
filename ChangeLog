@@ -1,3 +1,9 @@
+2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/groupadd.8.xml: Remove the list of (short) options from the
+	SYNOPSIS. Replaced with [options] for consistency with other tools
+	and maintainability.
+
 2008-09-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	From RedHat's patch shadow-4.1.2-sysAccountDownhill.patch

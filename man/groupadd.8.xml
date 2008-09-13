@@ -21,12 +21,7 @@
     <cmdsynopsis>
       <command>groupadd</command>
       <arg choice='opt'>
-	<arg choice='plain'>-g <replaceable>GID</replaceable></arg>
-	<arg choice='opt'>-o</arg>
-      </arg>
-      <arg choice='opt'>-f </arg>
-      <arg choice='opt'>-K <replaceable>KEY</replaceable>=<replaceable>VALUE</replaceable></arg>
-      <arg choice='plain'>
+	<replaceable>options</replaceable>
 	<replaceable>group</replaceable>
       </arg>
     </cmdsynopsis>
