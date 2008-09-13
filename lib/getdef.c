@@ -39,6 +39,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <errno.h>
 #include "getdef.h"
 /*
  * A configuration item definition.
@@ -377,8 +378,9 @@ static void def_load (void)
 	 */
 	fp = fopen (def_fname, "r");
 	if (NULL == fp) {
-		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%m]",
-			 def_fname));
+		int err = errno;
+		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
+		         def_fname, strerror (err)));
 		exit (1);
 	}
 
@@ -426,8 +428,9 @@ static void def_load (void)
 	}
 
 	if (ferror (fp) != 0) {
-		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%m]",
-			 def_fname));
+		int err = errno;
+		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%s]",
+		         def_fname, strerror (err)));
 		exit (1);
 	}
 

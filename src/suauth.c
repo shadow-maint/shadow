@@ -76,17 +76,19 @@ int check_su_auth (const char *actual_id, const char *wanted_id)
 	char *action;
 
 	if (!(authfile_fd = fopen (SUAUTHFILE, "r"))) {
+		int err = errno;
 		/*
 		 * If the file doesn't exist - default to the standard su
 		 * behaviour (no access control).  If open fails for some
 		 * other reason - maybe someone is trying to fool us with
 		 * file descriptors limit etc., so deny access.  --marekm
 		 */
-		if (errno == ENOENT)
+		if (ENOENT == err) {
 			return NOACTION;
+		}
 		SYSLOG ((LOG_ERR,
-			 "could not open/read config file '%s': %m\n",
-			 SUAUTHFILE));
+		         "could not open/read config file '%s': %s\n",
+		         SUAUTHFILE, strerror (err)));
 		return DENY;
 	}
 

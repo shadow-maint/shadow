@@ -133,7 +133,8 @@ int login_access (const char *user, const char *from)
 		}
 		(void) fclose (fp);
 	} else if (errno != ENOENT) {
-		SYSLOG ((LOG_ERR, "cannot open %s: %m", TABLE));
+		int err = errno;
+		SYSLOG ((LOG_ERR, "cannot open %s: %s", TABLE, strerror (err)));
 	}
 	return (!match || (line[0] == '+'))?1:0;
 }

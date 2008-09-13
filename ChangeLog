@@ -1,5 +1,12 @@
 2008-09-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/setugid.c, src/login_nopam.c, src/suauth.c,
+	lib/getdef.c: Replace the %m format string by strerror(). This
+	avoids errno to be reset between the system call error and the
+	report function.
+
+2008-09-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Ignore the return value of umask() when the mask
 	is set to the old value.
 
