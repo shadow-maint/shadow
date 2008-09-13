@@ -1,5 +1,11 @@
 2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/USERGROUPS_ENAB.xml: Fix typo: new <para> tag
+	before the previous one is closed. This caused a missng
+	explanation for USERGROUPS_ENAB.
+
+2008-09-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupadd.8.xml: Remove the list of (short) options from the
 	SYNOPSIS. Replaced with [options] for consistency with other tools
 	and maintainability.
