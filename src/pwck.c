@@ -267,7 +267,7 @@ static void close_files (bool changed)
 	/*
 	 * Don't be anti-social - unlock the files when you're done.
 	 */
-	if (is_shadow) {
+	if (spw_locked) {
 		if (spw_unlock () == 0) {
 			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
 			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
@@ -275,10 +275,12 @@ static void close_files (bool changed)
 		}
 	}
 	spw_locked = false;
-	if (pw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
-		/* continue */
+	if (pw_locked) {
+		if (pw_unlock () == 0) {
+			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+			SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
+			/* continue */
+		}
 	}
 	pw_locked = false;
 }
@@ -403,7 +405,7 @@ static void check_pw_file (int *errors, bool *changed)
 			 * No primary group, just give a warning
 			 */
 
-			printf (_("user %s: no group %lu\n"),
+			printf (_("user '%s': no group %lu\n"),
 			        pwd->pw_name, (unsigned long) pwd->pw_gid);
 			*errors += 1;
 		}

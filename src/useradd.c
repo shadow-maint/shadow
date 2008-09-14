@@ -135,6 +135,7 @@ static bool
     kflg = false,		/* specify a directory to fill new user directory */
     lflg = false,		/* do not add user to lastlog/faillog databases */
     mflg = false,		/* create user's home directory if it doesn't exist */
+    Mflg = false,		/* do not create user's home directory even if CREATE_HOME is set */
     Nflg = false,		/* do not create a group having the same name as the user, but add the user to def_group (or the group specified with -g) */
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     rflg = false,		/* create a system account */

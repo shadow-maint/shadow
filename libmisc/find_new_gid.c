@@ -109,7 +109,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 	 */
 	if (group_id == gid_max + 1) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
-			if (0 == used_gids[grp->gr_gid]) {
+			if (0 == used_gids[group_id]) {
 				break;
 			}
 		}

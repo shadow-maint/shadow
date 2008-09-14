@@ -110,7 +110,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 	 */
 	if (user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
-			if (0 == used_uids[pwd->pw_uid]) {
+			if (0 == used_uids[user_id]) {
 				break;
 			}
 		}

@@ -1,3 +1,13 @@
+2008-09-14  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/useradd.c: Added missing declaration of Mflg.
+	* src/pwck.c: Only unlock files if they were locked before (e.g.
+	not in read-only mode).
+	* src/pwck.c: Quote the username in error messages (harmonization
+	with other messages).
+	* libmisc/find_new_gid.c: Fixed typo (s/grp->gr_gid/group_id/).
+	* libmisc/find_new_gid.c: Likewise.
+
 2008-09-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/setugid.c, src/login_nopam.c, src/suauth.c,
