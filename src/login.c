@@ -81,7 +81,7 @@ static pam_handle_t *pamh = NULL;
 char *Prog;
 
 static const char *hostname = "";
-static char username[32];
+static char *username = NULL;
 static int reason = PW_LOGIN;
 
 static struct passwd pwent;
@@ -248,8 +248,6 @@ static void process_flags (int argc, char *const *argv)
 	int arg;
 	int flag;
 
-	username[0] = '\0';
-
 	/*
 	 * Check the flags for proper form. Every argument starting with
 	 * "-" must be exactly two characters long. This closes all the
@@ -286,7 +284,7 @@ static void process_flags (int argc, char *const *argv)
 			}
 			fflg = true;
 			if (optarg) {
-				STRFCPY (username, optarg);
+				username = xstrdup (optarg);
 			}
 			break;
 		case 'h':
@@ -332,11 +330,11 @@ static void process_flags (int argc, char *const *argv)
 	 *  Get the user name.
 	 */
 	if (optind < argc) {
-		if (rflg || (fflg && ('\0' != username[0]))) {
+		if (rflg || (fflg && (NULL != username))) {
 			usage ();
 		}
 
-		STRFCPY (username, argv[optind]);
+		username = xstrdup (argv[optind]);
 		strzero (argv[optind]);
 		++optind;
 	}
@@ -529,10 +527,14 @@ int main (int argc, char **argv)
 		reason = PW_RLOGIN;
 	}
 #ifdef RLOGIN
-	if (   rflg
-	    && do_rlogin (hostname, username, sizeof username,
-	                  term, sizeof term)) {
-		preauth_flag = true;
+	if (rflg) {
+		username = malloc (32 * sizeof char);
+		if (do_rlogin (hostname, username, 32, term, sizeof term)) {
+			preauth_flag = true;
+		} else {
+			free (username);
+			username = NULL;
+		}
 	}
 #endif
 
@@ -813,15 +815,21 @@ int main (int argc, char **argv)
 #else				/* ! USE_PAM */
 	while (true) {	/* repeatedly get login/password pairs */
 		failed = false;	/* haven't failed authentication yet */
-		if ('\0' == username[0]) {	/* need to get a login id */
+		if (NULL == username) {	/* need to get a login id */
 			if (subroot) {
 				closelog ();
 				exit (1);
 			}
 			preauth_flag = false;
-			login_prompt (_("\n%s login: "), username,
-			              sizeof username);
-			continue;
+			username = malloc (32);
+			login_prompt (_("\n%s login: "), username, 32);
+
+			if ('\0' == username) {
+				/* Prompt for a new login */
+				free (username);
+				username = NULL;
+				continue;
+			}
 		}
 
 		pwd = xgetpwnam (username);
@@ -953,7 +961,8 @@ int main (int argc, char **argv)
 			failent.ut_type = USER_PROCESS;
 			failtmp (&failent);
 		}
-		memzero (username, sizeof username);
+		free (username);
+		username = NULL;
 
 		retries--;
 		if (retries <= 0) {
