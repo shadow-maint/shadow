@@ -8,6 +8,8 @@
 	* src/login.c: Make sure a username is specified with -f.
 	* src/login.c: Explicitly tag the end of the #ifdef RLOGIN
 	sections.
+	* src/login.c: Erase the username later since it it used for the
+	fake password check (in case of empty password).
 
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 

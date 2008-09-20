@@ -975,14 +975,13 @@ int main (int argc, char **argv)
 			failent.ut_type = USER_PROCESS;
 			failtmp (&failent);
 		}
-		free (username);
-		username = NULL;
 
 		retries--;
 		if (retries <= 0) {
 			SYSLOG ((LOG_CRIT, "REPEATED login failures%s",
 			         fromhost));
 		}
+
 		/*
 		 * If this was a passwordless account and we get here, login
 		 * was denied (securetty, faillog, etc.). There was no
@@ -993,6 +992,13 @@ int main (int argc, char **argv)
 		if (pwent.pw_passwd[0] == '\0') {
 			pw_auth ("!", username, reason, (char *) 0);
 		}
+
+		/*
+		 * Authentication of this user failed.
+		 * The username must be confirmed in the next try.
+		 */
+		free (username);
+		username = NULL;
 
 		/*
 		 * Wait a while (a la SVR4 /usr/bin/login) before attempting
