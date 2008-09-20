@@ -752,8 +752,7 @@ int main (int argc, char **argv)
 			                          AUDIT_USER_LOGIN,
 			                          NULL,    /* Prog. name */
 			                          "login",
-			                          (NULL!=username)?username
-			                                          :"(unknown)",
+			                          failent_user,
 			                          AUDIT_NO_ID,
 			                          hostname,
 			                          NULL,    /* addr */
@@ -1045,8 +1044,8 @@ int main (int argc, char **argv)
 	                        AUDIT_USER_LOGIN,
 	                        NULL,    /* Prog. name */
 	                        "login",
-	                        NULL,    /* user's name => use uid */
-	                        (unsigned int) pwd->pw_uid,
+	                        pwd->pw_name,
+	                        AUDIT_NO_ID,
 	                        hostname,
 	                        NULL,    /* addr */
 	                        tty,
