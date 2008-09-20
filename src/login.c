@@ -668,9 +668,11 @@ int main (int argc, char **argv)
 
 		/* if we didn't get a user on the command line,
 		   set it to NULL */
-		pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
+		retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
+		PAM_FAIL_CHECK;
 		if (pam_user[0] == '\0') {
-			pam_set_item (pamh, PAM_USER, NULL);
+			retcode = pam_set_item (pamh, PAM_USER, NULL);
+			PAM_FAIL_CHECK;
 		}
 
 		/*
@@ -690,13 +692,19 @@ int main (int argc, char **argv)
 #ifdef HAS_PAM_FAIL_DELAY
 			if (delay > 0) {
 				retcode = pam_fail_delay(pamh, 1000000*delay);
+				PAM_FAIL_CHECK;
 			}
 #endif
 
 			retcode = pam_authenticate (pamh, 0);
 
-			pam_get_item (pamh, PAM_USER,
-			              (const void **) ptr_pam_user);
+			{
+				int saved_retcode = retcode;
+				retcode = pam_get_item (pamh, PAM_USER,
+				                        (const void **) ptr_pam_user);
+				PAM_FAIL_CHECK;
+				retcode = saved_retcode;
+			}
 
 			if ((NULL != pam_user) && ('\0' != pam_user[0])) {
 				pwd = xgetpwnam(pam_user);
@@ -759,8 +767,13 @@ int main (int argc, char **argv)
 
 			fprintf (stderr, "\nLogin incorrect\n");
 
-			/* Let's give it another go around */
-			pam_set_item (pamh, PAM_USER, NULL);
+			/*
+			 * Let's give it another go around.
+			 * Even if a username was given on the command
+			 * line, prompt again for the username.
+			 */
+			retcode = pam_set_item (pamh, PAM_USER, NULL);
+			PAM_FAIL_CHECK;
 		}
 
 		/* We don't get here unless they were authenticated above */
@@ -778,6 +791,7 @@ int main (int argc, char **argv)
 	   First get the username that we are actually using, though.
 	 */
 	retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
+	PAM_FAIL_CHECK;
 	if (NULL != username) {
 		free (username);
 	}

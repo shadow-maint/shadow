@@ -1,5 +1,9 @@
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Always check the return value of the pam_* APIs.
+
+2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Use a dynamic buffer for usernames.
 	* src/login.c: Copy the name of the user authenticated by PAM to
 	username. This simplify later logging (avoid USE_PAM
