@@ -484,6 +484,7 @@ int main (int argc, char **argv)
 		he = gethostbyname (hostname);
 		if (NULL != he) {
 			utent.ut_addr = *((int32_t *) (he->h_addr_list[0]));
+		}
 #endif
 #ifdef UT_HOST
 			strncpy (utent.ut_host, hostname,

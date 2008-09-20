@@ -1,5 +1,10 @@
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Add missing closing }. This was probably never
+	noticed because UT_ADDR is never defined.
+
+2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Do not mix USE_PAM and !USE_PAM code.
 
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
