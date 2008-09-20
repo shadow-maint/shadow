@@ -100,9 +100,9 @@ static bool fflg = false;
 
 #ifdef RLOGIN
 static bool rflg = false;
-#else
+#else				/* RLOGIN */
 #define rflg false
-#endif
+#endif				/* !RLOGIN */
 static bool hflg = false;
 static bool preauth_flag = false;
 
@@ -157,7 +157,7 @@ static void usage (void)
 	fprintf (stderr, _("       %s [-p] [-h host] [-f name]\n"), Prog);
 #ifdef RLOGIN
 	fprintf (stderr, _("       %s [-p] -r host\n"), Prog);
-#endif
+#endif				/* RLOGIN */
 	exit (1);
 }
 
@@ -298,7 +298,7 @@ static void process_flags (int argc, char *const *argv)
 			hostname = optarg;
 			reason = PW_RLOGIN;
 			break;
-#endif
+#endif				/* RLOGIN */
 		case 'p':
 			pflg = true;
 			break;
@@ -315,7 +315,7 @@ static void process_flags (int argc, char *const *argv)
 	if (rflg && (hflg || fflg)) {
 		usage ();
 	}
-#endif
+#endif				/* RLOGIN */
 
 	/*
 	 * Allow authentication bypass only if real UID is zero.
@@ -428,7 +428,7 @@ int main (int argc, char **argv)
 
 #ifdef RLOGIN
 	char term[128] = "";
-#endif
+#endif				/* RLOGIN */
 #if defined(HAVE_STRFTIME) && !defined(USE_PAM)
 	char ptime[80];
 #endif
@@ -545,7 +545,7 @@ int main (int argc, char **argv)
 			username = NULL;
 		}
 	}
-#endif
+#endif				/* RLOGIN */
 
 	OPENLOG ("login");
 
@@ -584,7 +584,7 @@ int main (int argc, char **argv)
 	if (term[0] != '\0') {
 		addenv ("TERM", term);
 	} else
-#endif
+#endif				/* RLOGIN */
 	{
 		/* preserve TERM from getty */
 		if (!pflg) {

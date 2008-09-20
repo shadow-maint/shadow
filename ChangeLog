@@ -6,6 +6,8 @@
 	conditional).
 	* src/login.c: Check that no username is specified with -r.
 	* src/login.c: Make sure a username is specified with -f.
+	* src/login.c: Explicitly tag the end of the #ifdef RLOGIN
+	sections.
 
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 
