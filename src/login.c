@@ -78,7 +78,11 @@ static pam_handle_t *pamh = NULL;
 /*
  * Global variables
  */
-const char *hostname = "";
+char *Prog;
+
+static const char *hostname = "";
+static char username[32];
+static int reason = PW_LOGIN;
 
 static struct passwd pwent;
 
@@ -102,11 +106,6 @@ static bool rflg = false;
 static bool hflg = false;
 static bool preauth_flag = false;
 
-/*
- * Global variables.
- */
-char *Prog;
-
 static bool amroot;
 static int timeout;
 
@@ -129,7 +128,7 @@ extern char **environ;
 /* local function prototypes */
 static void usage (void);
 static void setup_tty (void);
-static void check_flags (int, char *const *);
+static void process_flags (int, char *const *);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -244,9 +243,12 @@ static void check_nologin (void)
 }
 #endif				/* !USE_PAM */
 
-static void check_flags (int argc, char *const *argv)
+static void process_flags (int argc, char *const *argv)
 {
 	int arg;
+	int flag;
+
+	username[0] = '\0';
 
 	/*
 	 * Check the flags for proper form. Every argument starting with
@@ -261,6 +263,84 @@ static void check_flags (int argc, char *const *argv)
 			break; /* stop checking on a "--" */
 		}
 	}
+
+	/*
+	 * Process options.
+	 */
+	while ((flag = getopt (argc, argv, "d:f::h:pr:")) != EOF) {
+		switch (flag) {
+		case 'd':
+			/* "-d device" ignored for compatibility */
+			break;
+		case 'f':
+			/*
+			 * username must be a separate token
+			 * (-f root, *not* -froot).  --marekm
+			 *
+			 * if -f has an arg, use that, else use the
+			 * normal user name passed after all options
+			 * --benc
+			 */
+			if (optarg != NULL && optarg != argv[optind - 1]) {
+				usage ();
+			}
+			fflg = true;
+			if (optarg) {
+				STRFCPY (username, optarg);
+			}
+			break;
+		case 'h':
+			hflg = true;
+			hostname = optarg;
+			reason = PW_TELNET;
+			break;
+#ifdef	RLOGIN
+		case 'r':
+			rflg = true;
+			hostname = optarg;
+			reason = PW_RLOGIN;
+			break;
+#endif
+		case 'p':
+			pflg = true;
+			break;
+		default:
+			usage ();
+		}
+	}
+
+#ifdef RLOGIN
+	/*
+	 * Neither -h nor -f should be combined with -r.
+	 */
+
+	if (rflg && (hflg || fflg)) {
+		usage ();
+	}
+#endif
+
+	/*
+	 * Allow authentication bypass only if real UID is zero.
+	 */
+
+	if ((rflg || fflg || hflg) && !amroot) {
+		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
+		exit (1);
+	}
+
+	/*
+	 *  Get the user name.
+	 */
+	if (optind < argc) {
+		if (rflg || (fflg && ('\0' != username[0]))) {
+			usage ();
+		}
+
+		STRFCPY (username, argv[optind]);
+		strzero (argv[optind]);
+		++optind;
+	}
+
 }
 
 
@@ -337,7 +417,6 @@ static RETSIGTYPE alarm_handler (unused int sig)
  */
 int main (int argc, char **argv)
 {
-	char username[32];
 	char tty[BUFSIZ];
 
 #ifdef RLOGIN
@@ -346,11 +425,9 @@ int main (int argc, char **argv)
 #if defined(HAVE_STRFTIME) && !defined(USE_PAM)
 	char ptime[80];
 #endif
-	int reason = PW_LOGIN;
 	int delay;
 	int retries;
 	bool failed;
-	int flag;
 	bool subroot = false;
 #ifndef USE_PAM
 	bool is_console;
@@ -384,72 +461,10 @@ int main (int argc, char **argv)
 
 	initenv ();
 
-	username[0] = '\0';
 	amroot = (getuid () == 0);
 	Prog = Basename (argv[0]);
 
-	check_flags (argc, argv);
-
-	while ((flag = getopt (argc, argv, "d:f::h:pr:")) != EOF) {
-		switch (flag) {
-		case 'd':
-			/* "-d device" ignored for compatibility */
-			break;
-		case 'f':
-			/*
-			 * username must be a separate token
-			 * (-f root, *not* -froot).  --marekm
-			 *
-			 * if -f has an arg, use that, else use the
-			 * normal user name passed after all options
-			 * --benc
-			 */
-			if (optarg != NULL && optarg != argv[optind - 1]) {
-				usage ();
-			}
-			fflg = true;
-			if (optarg) {
-				STRFCPY (username, optarg);
-			}
-			break;
-		case 'h':
-			hflg = true;
-			hostname = optarg;
-			reason = PW_TELNET;
-			break;
-#ifdef	RLOGIN
-		case 'r':
-			rflg = true;
-			hostname = optarg;
-			reason = PW_RLOGIN;
-			break;
-#endif
-		case 'p':
-			pflg = true;
-			break;
-		default:
-			usage ();
-		}
-	}
-
-#ifdef RLOGIN
-	/*
-	 * Neither -h nor -f should be combined with -r.
-	 */
-
-	if (rflg && (hflg || fflg)) {
-		usage ();
-	}
-#endif
-
-	/*
-	 * Allow authentication bypass only if real UID is zero.
-	 */
-
-	if ((rflg || fflg || hflg) && !amroot) {
-		fprintf (stderr, _("%s: Permission denied.\n"), Prog);
-		exit (1);
-	}
+	process_flags (argc, argv);
 
 	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {
 		exit (1);	/* must be a terminal */
@@ -571,15 +586,6 @@ int main (int argc, char **argv)
 
 	init_env ();
 
-	if (optind < argc) {	/* get the user name */
-		if (rflg || (fflg && ('\0' != username[0]))) {
-			usage ();
-		}
-
-		STRFCPY (username, argv[optind]);
-		strzero (argv[optind]);
-		++optind;
-	}
 	if (optind < argc) {	/* now set command line variables */
 		set_env (argc - optind, &argv[optind]);
 	}
