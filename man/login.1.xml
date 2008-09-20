@@ -50,20 +50,22 @@
   <refsynopsisdiv id='synopsis'>
     <cmdsynopsis>
       <command>login</command>
-      <arg choice='opt'>-p </arg>
+      <arg choice='opt'>-p</arg>
+      <arg choice='opt'>-h <replaceable>host</replaceable></arg>
       <arg choice='opt'>
       <replaceable>username</replaceable></arg>
       <arg choice='opt' rep='repeat'> <replaceable>ENV=VAR</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>login</command>
-      <arg choice='opt'>-p </arg>
+      <arg choice='opt'>-p</arg>
       <arg choice='opt'>-h <replaceable>host</replaceable></arg>
-      <arg choice='opt'>-f <replaceable>username</replaceable></arg>
+      <arg choice='plain'>-f</arg>
+      <arg choice='plain'><replaceable>username</replaceable></arg>
     </cmdsynopsis>
     <cmdsynopsis>
       <command>login</command>
-      <arg choice='opt'>-p </arg>
+      <arg choice='opt'>-p</arg>
       <arg choice='plain'>-r <replaceable>host</replaceable></arg>
     </cmdsynopsis>
   </refsynopsisdiv>
@@ -161,7 +163,12 @@
 	  <option>-f</option>
 	</term>
 	<listitem>
-	  <para>Do not perform authentication, user is preauthenticated.
+	  <para>
+	    Do not perform authentication, user is preauthenticated.
+	  </para>
+	  <para>
+	    Note: In that case, <replaceable>username</replaceable> is
+	    mandatory.
 	  </para>
 	</listitem>
       </varlistentry>

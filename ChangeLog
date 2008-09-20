@@ -10,6 +10,11 @@
 	sections.
 	* src/login.c: Erase the username later since it it used for the
 	fake password check (in case of empty password).
+	* src/login.c, man/login.1.xml: the username is not an optional
+	parameter of -f. Fix the getopt optstring, remove the parsing of
+	username in the -f processing block, and remove unnecessary checks
+	(username cannot be parsed twice anymore), better documentation of
+	the synopsis.
 
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 

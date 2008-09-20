@@ -265,27 +265,13 @@ static void process_flags (int argc, char *const *argv)
 	/*
 	 * Process options.
 	 */
-	while ((flag = getopt (argc, argv, "d:f::h:pr:")) != EOF) {
+	while ((flag = getopt (argc, argv, "d:fh:pr:")) != EOF) {
 		switch (flag) {
 		case 'd':
 			/* "-d device" ignored for compatibility */
 			break;
 		case 'f':
-			/*
-			 * username must be a separate token
-			 * (-f root, *not* -froot).  --marekm
-			 *
-			 * if -f has an arg, use that, else use the
-			 * normal user name passed after all options
-			 * --benc
-			 */
-			if (optarg != NULL && optarg != argv[optind - 1]) {
-				usage ();
-			}
 			fflg = true;
-			if (optarg) {
-				username = xstrdup (optarg);
-			}
 			break;
 		case 'h':
 			hflg = true;
@@ -330,10 +316,6 @@ static void process_flags (int argc, char *const *argv)
 	 *  Get the user name.
 	 */
 	if (optind < argc) {
-		if (rflg || (fflg && (NULL != username))) {
-			usage ();
-		}
-
 		username = xstrdup (argv[optind]);
 		strzero (argv[optind]);
 		++optind;
