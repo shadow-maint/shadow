@@ -1,3 +1,9 @@
+2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/passwd.1.xml: passwd cannot change the full name of the
+	user, the user's login shell; but it can change the account or
+	password validity period. Thanks to Reuben Thomas.
+
 2008-09-14  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/useradd.c: Added missing declaration of Mflg.

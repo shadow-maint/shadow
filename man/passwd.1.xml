@@ -39,9 +39,8 @@
       The <command>passwd</command> command changes passwords for user accounts.
       A normal user may only change the password for his/her own account, while
       the superuser may change the password for any account.
-      <command>passwd</command> also changes account information, such as
-      the full name of the user, the user's login shell, or his/her password
-      expiry date and interval.
+      <command>passwd</command> also changes the account or associated
+      password validity period.
     </para>
 
     <refsect2 id='password_changes'>
