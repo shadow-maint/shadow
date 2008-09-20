@@ -487,357 +487,349 @@ int main (int argc, char **argv)
 		}
 #endif
 #ifdef UT_HOST
-			strncpy (utent.ut_host, hostname,
-				 sizeof (utent.ut_host));
+		strncpy (utent.ut_host, hostname, sizeof (utent.ut_host));
 #endif
 #if HAVE_UTMPX_H
-			strncpy (utxent.ut_host, hostname,
-				 sizeof (utxent.ut_host));
+		strncpy (utxent.ut_host, hostname, sizeof (utxent.ut_host));
 #endif
-			/*
-			 * Add remote hostname to the environment. I think
-			 * (not sure) I saw it once on Irix.  --marekm
-			 */
-			addenv ("REMOTEHOST", hostname);
-		}
-#ifdef __linux__
 		/*
-		 * workaround for init/getty leaving junk in ut_host at least in
-		 * some version of RedHat.  --marekm
+		 * Add remote hostname to the environment. I think
+		 * (not sure) I saw it once on Irix.  --marekm
 		 */
-		else if (amroot) {
-			memzero (utent.ut_host, sizeof utent.ut_host);
-		}
+		addenv ("REMOTEHOST", hostname);
+	}
+#ifdef __linux__
+	/*
+	 * workaround for init/getty leaving junk in ut_host at least in
+	 * some version of RedHat.  --marekm
+	 */
+	else if (amroot) {
+		memzero (utent.ut_host, sizeof utent.ut_host);
+	}
 #endif
-		if (fflg) {
-			preauth_flag = true;
-		}
-		if (hflg) {
-			reason = PW_RLOGIN;
-		}
+	if (fflg) {
+		preauth_flag = true;
+	}
+	if (hflg) {
+		reason = PW_RLOGIN;
+	}
 #ifdef RLOGIN
-		if (   rflg
-		    && do_rlogin (hostname, username, sizeof username,
-				  term, sizeof term)) {
-			preauth_flag = true;
-		}
+	if (   rflg
+	    && do_rlogin (hostname, username, sizeof username,
+	                  term, sizeof term)) {
+		preauth_flag = true;
+	}
 #endif
 
-		OPENLOG ("login");
+	OPENLOG ("login");
 
-		setup_tty ();
+	setup_tty ();
 
 #ifndef USE_PAM
-		umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
+	umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 
-		{
-			/* 
-			 * Use the ULIMIT in the login.defs file, and if
-			 * there isn't one, use the default value. The
-			 * user may have one for themselves, but otherwise,
-			 * just take what you get.
-			 */
-			long limit = getdef_long ("ULIMIT", -1L);
+	{
+		/* 
+		 * Use the ULIMIT in the login.defs file, and if
+		 * there isn't one, use the default value. The
+		 * user may have one for themselves, but otherwise,
+		 * just take what you get.
+		 */
+		long limit = getdef_long ("ULIMIT", -1L);
 
-			if (limit != -1) {
-				set_filesize_limit (limit);
-			}
+		if (limit != -1) {
+			set_filesize_limit (limit);
 		}
+	}
 
 #endif
-		/*
-		 * The entire environment will be preserved if the -p flag
-		 * is used.
-		 */
-		if (pflg) {
-			while (NULL != *envp) {	/* add inherited environment, */
-				addenv (*envp, NULL);	/* some variables change later */
-				envp++;
-			}
+	/*
+	 * The entire environment will be preserved if the -p flag
+	 * is used.
+	 */
+	if (pflg) {
+		while (NULL != *envp) {	/* add inherited environment, */
+			addenv (*envp, NULL); /* some variables change later */
+			envp++;
 		}
+	}
 
 #ifdef RLOGIN
-		if (term[0] != '\0') {
-			addenv ("TERM", term);
+	if (term[0] != '\0') {
+		addenv ("TERM", term);
+	} else
+#endif
+	{
+		/* preserve TERM from getty */
+		if (!pflg) {
+			tmp = getenv ("TERM");
+			if (NULL != tmp) {
+				addenv ("TERM", tmp);
+			}
+		}
+	}
+
+	init_env ();
+
+	if (optind < argc) {	/* get the user name */
+		if (rflg || (fflg && ('\0' != username[0]))) {
+			usage ();
+		}
+
+		STRFCPY (username, argv[optind]);
+		strzero (argv[optind]);
+		++optind;
+	}
+	if (optind < argc) {	/* now set command line variables */
+		set_env (argc - optind, &argv[optind]);
+	}
+
+	if (rflg || hflg) {
+		cp = hostname;
+	} else {
+		/* FIXME: What is the priority:
+		 *        UT_HOST or HAVE_UTMPX_H? */
+#ifdef	UT_HOST
+		if ('\0' != utent.ut_host[0]) {
+			cp = utent.ut_host;
+		} else
+#endif
+#if HAVE_UTMPX_H
+		if ('\0' != utxent.ut_host[0]) {
+			cp = utxent.ut_host;
 		} else
 #endif
 		{
-			/* preserve TERM from getty */
-			if (!pflg) {
-				tmp = getenv ("TERM");
-				if (NULL != tmp) {
-					addenv ("TERM", tmp);
-				}
-			}
+			cp = "";
 		}
+	}
 
-		init_env ();
+	if ('\0' != *cp) {
+		snprintf (fromhost, sizeof fromhost,
+		          " on '%.100s' from '%.200s'", tty, cp);
+	} else {
+		snprintf (fromhost, sizeof fromhost,
+		          " on '%.100s'", tty);
+	}
 
-		if (optind < argc) {	/* get the user name */
-			if (rflg || (fflg && ('\0' != username[0]))) {
-				usage ();
-			}
+      top:
+	/* only allow ALARM sec. for login */
+	(void) signal (SIGALRM, alarm_handler);
+	timeout = getdef_num ("LOGIN_TIMEOUT", ALARM);
+	if (timeout > 0) {
+		alarm (timeout);
+	}
 
-			STRFCPY (username, argv[optind]);
-			strzero (argv[optind]);
-			++optind;
-		}
-		if (optind < argc) {	/* now set command line variables */
-			set_env (argc - optind, &argv[optind]);
-		}
-
-		if (rflg || hflg) {
-			cp = hostname;
-		} else {
-			/* FIXME: What is the priority:
-			 *        UT_HOST or HAVE_UTMPX_H? */
-#ifdef	UT_HOST
-			if ('\0' != utent.ut_host[0]) {
-				cp = utent.ut_host;
-			} else
-#endif
-#if HAVE_UTMPX_H
-			if ('\0' != utxent.ut_host[0]) {
-				cp = utxent.ut_host;
-			} else
-#endif
-			{
-				cp = "";
-			}
-		}
-
-		if ('\0' != *cp) {
-			snprintf (fromhost, sizeof fromhost,
-			          " on '%.100s' from '%.200s'", tty, cp);
-		} else {
-			snprintf (fromhost, sizeof fromhost,
-			          " on '%.100s'", tty);
-		}
-
-	      top:
-		/* only allow ALARM sec. for login */
-		(void) signal (SIGALRM, alarm_handler);
-		timeout = getdef_num ("LOGIN_TIMEOUT", ALARM);
-		if (timeout > 0) {
-			alarm (timeout);
-		}
-
-		environ = newenvp;	/* make new environment active */
-		delay = getdef_num ("FAIL_DELAY", 1);
-		retries = getdef_num ("LOGIN_RETRIES", RETRIES);
+	environ = newenvp;	/* make new environment active */
+	delay = getdef_num ("FAIL_DELAY", 1);
+	retries = getdef_num ("LOGIN_RETRIES", RETRIES);
 
 #ifdef USE_PAM
-		retcode = pam_start ("login", username, &conv, &pamh);
-		if (retcode != PAM_SUCCESS) {
-			fprintf (stderr,
-				 _("login: PAM Failure, aborting: %s\n"),
-				 pam_strerror (pamh, retcode));
-			SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
-				 pam_strerror (pamh, retcode)));
-			exit (99);
+	retcode = pam_start ("login", username, &conv, &pamh);
+	if (retcode != PAM_SUCCESS) {
+		fprintf (stderr,
+		         _("login: PAM Failure, aborting: %s\n"),
+		         pam_strerror (pamh, retcode));
+		SYSLOG ((LOG_ERR, "Couldn't initialize PAM: %s",
+		         pam_strerror (pamh, retcode)));
+		exit (99);
+	}
+
+	/*
+	 * hostname & tty are either set to NULL or their correct values,
+	 * depending on how much we know. We also set PAM's fail delay to
+	 * ours.
+	 */
+	retcode = pam_set_item (pamh, PAM_RHOST, hostname);
+	PAM_FAIL_CHECK;
+	retcode = pam_set_item (pamh, PAM_TTY, tty);
+	PAM_FAIL_CHECK;
+#ifdef HAS_PAM_FAIL_DELAY
+	retcode = pam_fail_delay (pamh, 1000000 * delay);
+	PAM_FAIL_CHECK;
+#endif
+	/* if fflg, then the user has already been authenticated */
+	if (!fflg || (getuid () != 0)) {
+		int failcount = 0;
+		char hostn[256];
+		char loginprompt[256];	/* That's one hell of a prompt :) */
+
+		/* Make the login prompt look like we want it */
+		if (gethostname (hostn, sizeof (hostn)) == 0) {
+			snprintf (loginprompt,
+			          sizeof (loginprompt),
+			          _("%s login: "), hostn);
+		} else {
+			snprintf (loginprompt,
+			          sizeof (loginprompt), _("login: "));
+		}
+
+		retcode = pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
+		PAM_FAIL_CHECK;
+
+		/* if we didn't get a user on the command line,
+		   set it to NULL */
+		pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
+		if (pam_user[0] == '\0') {
+			pam_set_item (pamh, PAM_USER, NULL);
 		}
 
 		/*
-		 * hostname & tty are either set to NULL or their correct values,
-		 * depending on how much we know. We also set PAM's fail delay to
-		 * ours.
+		 * There may be better ways to deal with some of
+		 * these conditions, but at least this way I don't
+		 * think we'll be giving away information. Perhaps
+		 * someday we can trust that all PAM modules will
+		 * pay attention to failure count and get rid of
+		 * MAX_LOGIN_TRIES?
 		 */
-		retcode = pam_set_item (pamh, PAM_RHOST, hostname);
-		PAM_FAIL_CHECK;
-		retcode = pam_set_item (pamh, PAM_TTY, tty);
-		PAM_FAIL_CHECK;
+		failcount = 0;
+		while (true) {
+			const char *failent_user;
+			failed = false;
+
+			failcount++;
 #ifdef HAS_PAM_FAIL_DELAY
-		retcode = pam_fail_delay (pamh, 1000000 * delay);
-		PAM_FAIL_CHECK;
-#endif
-		/* if fflg, then the user has already been authenticated */
-		if (!fflg || (getuid () != 0)) {
-			int failcount = 0;
-			char hostn[256];
-			char loginprompt[256];	/* That's one hell of a prompt :) */
-
-			/* Make the login prompt look like we want it */
-			if (gethostname (hostn, sizeof (hostn)) == 0) {
-				snprintf (loginprompt,
-					  sizeof (loginprompt),
-					  _("%s login: "), hostn);
-			} else {
-				snprintf (loginprompt,
-					  sizeof (loginprompt), _("login: "));
+			if (delay > 0) {
+				retcode = pam_fail_delay(pamh, 1000000*delay);
 			}
+#endif
 
-			retcode =
-			    pam_set_item (pamh, PAM_USER_PROMPT, loginprompt);
-			PAM_FAIL_CHECK;
+			retcode = pam_authenticate (pamh, 0);
 
-			/* if we didn't get a user on the command line,
-			   set it to NULL */
 			pam_get_item (pamh, PAM_USER,
-				      (const void **)ptr_pam_user);
-			if (pam_user[0] == '\0') {
-				pam_set_item (pamh, PAM_USER, NULL);
+			              (const void **) ptr_pam_user);
+
+			if ((NULL != pam_user) && ('\0' != pam_user[0])) {
+				pwd = xgetpwnam(pam_user);
+				if (NULL != pwd) {
+					pwent = *pwd;
+					failent_user = pwent.pw_name;
+				} else {
+					if (   getdef_bool("LOG_UNKFAIL_ENAB")
+					    && (NULL != pam_user)) {
+						failent_user = pam_user;
+					} else {
+						failent_user = "UNKNOWN";
+					}
+				}
+			} else {
+				pwd = NULL;
+				failent_user = "UNKNOWN";
 			}
 
-			/*
-			 * There may be better ways to deal with some of
-			 * these conditions, but at least this way I don't
-			 * think we'll be giving away information. Perhaps
-			 * someday we can trust that all PAM modules will
-			 * pay attention to failure count and get rid of
-			 * MAX_LOGIN_TRIES?
-			 */
-			failcount = 0;
-			while (true) {
-			  const char *failent_user;
-			  failed = false;
+			if (retcode == PAM_MAXTRIES || failcount >= retries) {
+				SYSLOG ((LOG_NOTICE,
+				         "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
+				         failcount, fromhost, failent_user));
+				fprintf(stderr,
+				        _("Maximum number of tries exceeded (%d)\n"),
+				        failcount);
+				PAM_END;
+				exit(0);
+			} else if (retcode == PAM_ABORT) {
+				/* Serious problems, quit now */
+				fputs (_("login: abort requested by PAM\n"),stderr);
+				SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
+				PAM_END;
+				exit(99);
+			} else if (retcode != PAM_SUCCESS) {
+				SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR '%s', %s",
+				         failcount, fromhost, failent_user,
+				         pam_strerror (pamh, retcode)));
+				failed = true;
+			}
 
-			  failcount++;
-#ifdef HAS_PAM_FAIL_DELAY
-			  if (delay > 0) {
-			    retcode = pam_fail_delay(pamh, 1000000*delay);
-			  }
-#endif
-
-			  retcode = pam_authenticate (pamh, 0);
-
-			  pam_get_item (pamh, PAM_USER,
-					(const void **) ptr_pam_user);
-
-			  if ((NULL != pam_user) && ('\0' != pam_user[0])) {
-			    pwd = xgetpwnam(pam_user);
-			    if (NULL != pwd) {
-			      pwent = *pwd;
-			      failent_user = pwent.pw_name;
-			    } else {
-			      if (   getdef_bool("LOG_UNKFAIL_ENAB")
-			          && (NULL != pam_user)) {
-				failent_user = pam_user;
-			      } else {
-				failent_user = "UNKNOWN";
-			      }
-			    }
-			  } else {
-			    pwd = NULL;
-			    failent_user = "UNKNOWN";
-			  }
-
-			  if (retcode == PAM_MAXTRIES || failcount >= retries) {
-			    SYSLOG ((LOG_NOTICE,
-				    "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
-				    failcount, fromhost, failent_user));
-			    fprintf(stderr,
-				    _("Maximum number of tries exceeded (%d)\n"),
-				    failcount);
-			    PAM_END;
-			    exit(0);
-			  } else if (retcode == PAM_ABORT) {
-			    /* Serious problems, quit now */
-			    fputs (_("login: abort requested by PAM\n"),stderr);
-			    SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
-			    PAM_END;
-			    exit(99);
-			  } else if (retcode != PAM_SUCCESS) {
-			    SYSLOG ((LOG_NOTICE,"FAILED LOGIN (%d)%s FOR '%s', %s",
-				   failcount, fromhost, failent_user,
-				   pam_strerror (pamh, retcode)));
-			    failed = true;
-			  }
-
-			  if (!failed) {
-			    break;
-			  }
+			if (!failed) {
+				break;
+			}
 
 #ifdef WITH_AUDIT
-			  audit_fd = audit_open ();
-			  audit_log_acct_message (audit_fd,
-			                          AUDIT_USER_LOGIN,
-			                          NULL,    /* Prog. name */
-			                          "login",
-			                          failent_user,
-			                          AUDIT_NO_ID,
-			                          hostname,
-			                          NULL,    /* addr */
-			                          tty,
-			                          0);      /* result */
-			  close (audit_fd);
+			audit_fd = audit_open ();
+			audit_log_acct_message (audit_fd,
+			                        AUDIT_USER_LOGIN,
+			                        NULL,    /* Prog. name */
+			                        "login",
+			                        failent_user,
+			                        AUDIT_NO_ID,
+			                        hostname,
+			                        NULL,    /* addr */
+			                        tty,
+			                        0);      /* result */
+			close (audit_fd);
 #endif				/* WITH_AUDIT */
 
-			  fprintf (stderr, "\nLogin incorrect\n");
+			fprintf (stderr, "\nLogin incorrect\n");
 
-			  /* Let's give it another go around */
-			  pam_set_item (pamh, PAM_USER, NULL);
-			}
-
-			/* We don't get here unless they were authenticated above */
-			alarm (0);
-			retcode = pam_acct_mgmt (pamh, 0);
-
-			if (retcode == PAM_NEW_AUTHTOK_REQD) {
-				retcode =
-				    pam_chauthtok (pamh,
-						   PAM_CHANGE_EXPIRED_AUTHTOK);
-			}
-
-			PAM_FAIL_CHECK;
+			/* Let's give it another go around */
+			pam_set_item (pamh, PAM_USER, NULL);
 		}
 
-		/* Grab the user information out of the password file for future usage
-		   First get the username that we are actually using, though.
-		 */
-		retcode =
-		    pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
-		pwd = xgetpwnam (pam_user);
-		if (NULL == pwd) {
-			SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
-				 getdef_bool ("LOG_UNKFAIL_ENAB") ?
-				 pam_user : "UNKNOWN"));
-			exit (1);
+		/* We don't get here unless they were authenticated above */
+		alarm (0);
+		retcode = pam_acct_mgmt (pamh, 0);
+
+		if (retcode == PAM_NEW_AUTHTOK_REQD) {
+			retcode = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
 		}
 
-		if (fflg) {
-			retcode = pam_acct_mgmt (pamh, 0);
-			PAM_FAIL_CHECK;
-		}
+		PAM_FAIL_CHECK;
+	}
 
-		if (setup_groups (pwd) != 0) {
-			exit (1);
-		}
+	/* Grab the user information out of the password file for future usage
+	   First get the username that we are actually using, though.
+	 */
+	retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
+	pwd = xgetpwnam (pam_user);
+	if (NULL == pwd) {
+		SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
+		         getdef_bool ("LOG_UNKFAIL_ENAB") ?
+		         pam_user : "UNKNOWN"));
+		exit (1);
+	}
 
+	if (fflg) {
+		retcode = pam_acct_mgmt (pamh, 0);
+		PAM_FAIL_CHECK;
+	}
+
+	if (setup_groups (pwd) != 0) {
+		exit (1);
+	}
+
+	pwent = *pwd;
+
+	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
+	PAM_FAIL_CHECK;
+
+	retcode = pam_open_session (pamh, hushed (&pwent) ? PAM_SILENT : 0);
+	PAM_FAIL_CHECK;
+
+	pwd = xgetpwnam (pam_user);
+	if (NULL == pwd) {
+		pwent.pw_name = pam_user;
+		strcpy (temp_pw, "!");
+		pwent.pw_passwd = temp_pw;
+		pwent.pw_shell = temp_shell;
+
+		preauth_flag = false;
+		failed = true;
+	} else {
 		pwent = *pwd;
-
-		retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
-		PAM_FAIL_CHECK;
-
-		retcode = pam_open_session (pamh,
-					    hushed (&pwent) ? PAM_SILENT : 0);
-		PAM_FAIL_CHECK;
-
-		pwd = xgetpwnam (pam_user);
-		if (NULL == pwd) {
-			pwent.pw_name = pam_user;
-			strcpy (temp_pw, "!");
-			pwent.pw_passwd = temp_pw;
-			pwent.pw_shell = temp_shell;
-
-			preauth_flag = false;
-			failed = true;
-		} else {
-			pwent = *pwd;
-		}
+	}
 
 #else				/* ! USE_PAM */
-		while (true) {	/* repeatedly get login/password pairs */
-			failed = false;	/* haven't failed authentication yet */
-			if ('\0' == username[0]) {	/* need to get a login id */
-				if (subroot) {
-					closelog ();
-					exit (1);
-				}
-				preauth_flag = false;
-				login_prompt (_("\n%s login: "), username,
-					      sizeof username);
-				continue;
+	while (true) {	/* repeatedly get login/password pairs */
+		failed = false;	/* haven't failed authentication yet */
+		if ('\0' == username[0]) {	/* need to get a login id */
+			if (subroot) {
+				closelog ();
+				exit (1);
 			}
+			preauth_flag = false;
+			login_prompt (_("\n%s login: "), username,
+			              sizeof username);
+			continue;
+		}
 
 		pwd = xgetpwnam (username);
 		if (NULL == pwd) {
@@ -861,8 +853,8 @@ int main (int argc, char **argv)
 				pwent.pw_passwd = spwd->sp_pwdp;
 			} else {
 				SYSLOG ((LOG_WARN,
-					 "no shadow password for '%s'%s",
-					 username, fromhost));
+				         "no shadow password for '%s'%s",
+				         username, fromhost));
 			}
 		}
 
@@ -895,9 +887,9 @@ int main (int argc, char **argv)
 		 * for those who really want to log them.  --marekm
 		 */
 		SYSLOG ((LOG_WARN, "invalid password for '%s' %s",
-			 (   (NULL != pwd)
-			  || getdef_bool ("LOG_UNKFAIL_ENAB")) ?
-			 username : "UNKNOWN", fromhost));
+		         (   (NULL != pwd)
+		          || getdef_bool ("LOG_UNKFAIL_ENAB")) ?
+		         username : "UNKNOWN", fromhost));
 		failed = true;
 
 	      auth_ok:
@@ -916,15 +908,15 @@ int main (int argc, char **argv)
 		if (   !failed
 		    && !login_access (username, *hostname ? hostname : tty)) {
 			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
-				 username, fromhost));
+			         username, fromhost));
 			failed = true;
 		}
 		if (   (NULL != pwd)
 		    && getdef_bool ("FAILLOG_ENAB")
 		    && !failcheck (pwent.pw_uid, &faillog, failed)) {
 			SYSLOG ((LOG_CRIT,
-				 "exceeded failure limit for '%s' %s",
-				 username, fromhost));
+			         "exceeded failure limit for '%s' %s",
+			         username, fromhost));
 			failed = true;
 		}
 		if (!failed) {
@@ -964,7 +956,7 @@ int main (int argc, char **argv)
 				}
 			}
 			strncpy (failent.ut_user, failent_user,
-				 sizeof (failent.ut_user));
+			         sizeof (failent.ut_user));
 			failent.ut_type = USER_PROCESS;
 			failtmp (&failent);
 		}
@@ -973,7 +965,7 @@ int main (int argc, char **argv)
 		retries--;
 		if (retries <= 0) {
 			SYSLOG ((LOG_CRIT, "REPEATED login failures%s",
-				 fromhost));
+			         fromhost));
 		}
 		/*
 		 * If this was a passwordless account and we get here, login
@@ -1016,7 +1008,7 @@ int main (int argc, char **argv)
 	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
 	    && !isttytime (pwent.pw_name, tty, time ((time_t *) 0))) {
 		SYSLOG ((LOG_WARN, "invalid login time for '%s'%s",
-			 username, fromhost));
+		         username, fromhost));
 		closelog ();
 		bad_time_notify ();
 		exit (1);
@@ -1100,7 +1092,7 @@ int main (int argc, char **argv)
 	if (child < 0) {
 		/* error in fork() */
 		fprintf (stderr, _("%s: failure forking: %s"),
-			 Prog, strerror (errno));
+		         Prog, strerror (errno));
 		PAM_END;
 		exit (0);
 	} else if (child != 0) {
@@ -1167,8 +1159,8 @@ int main (int argc, char **argv)
 				puts (_
 				      ("Warning: login re-enabled after temporary lockout."));
 				SYSLOG ((LOG_WARN,
-					 "login '%s' re-enabled after temporary lockout (%d failures)",
-					 username, (int) faillog.fail_cnt));
+				         "login '%s' re-enabled after temporary lockout (%d failures)",
+				         username, (int) faillog.fail_cnt));
 			}
 		}
 		if (   getdef_bool ("LASTLOG_ENAB")
@@ -1177,19 +1169,19 @@ int main (int argc, char **argv)
 
 #ifdef HAVE_STRFTIME
 			strftime (ptime, sizeof (ptime),
-				  "%a %b %e %H:%M:%S %z %Y",
-				  localtime (&ll_time));
+			          "%a %b %e %H:%M:%S %z %Y",
+			          localtime (&ll_time));
 			printf (_("Last login: %s on %s"),
-				ptime, lastlog.ll_line);
+			        ptime, lastlog.ll_line);
 #else
 			printf (_("Last login: %.19s on %s"),
-				ctime (&ll_time), lastlog.ll_line);
+			        ctime (&ll_time), lastlog.ll_line);
 #endif
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
 			if ('\0' != lastlog.ll_host[0]) {
 				printf (_(" from %.*s"),
-					(int) sizeof lastlog.
-					ll_host, lastlog.ll_host);
+				        (int) sizeof lastlog.
+				        ll_host, lastlog.ll_host);
 			}
 #endif
 			printf (".\n");
