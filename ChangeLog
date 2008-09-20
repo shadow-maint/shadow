@@ -4,6 +4,8 @@
 	* src/login.c: Copy the name of the user authenticated by PAM to
 	username. This simplify later logging (avoid USE_PAM
 	conditional).
+	* src/login.c: Check that no username is specified with -r.
+	* src/login.c: Make sure a username is specified with -f.
 
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 

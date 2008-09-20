@@ -339,6 +339,15 @@ static void process_flags (int argc, char *const *argv)
 		++optind;
 	}
 
+#ifdef	RLOGIN
+	if (rflg && (NULL != username)) {
+		usage ();
+	}
+#endif				/* RLOGIN */
+	if (fflg && (NULL == username)) {
+		usage ();
+	}
+
 }
 
 
