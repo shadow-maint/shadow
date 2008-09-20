@@ -811,6 +811,19 @@ int main (int argc, char **argv)
 					    hushed (&pwent) ? PAM_SILENT : 0);
 		PAM_FAIL_CHECK;
 
+		pwd = xgetpwnam (pam_user);
+		if (NULL == pwd) {
+			pwent.pw_name = pam_user;
+			strcpy (temp_pw, "!");
+			pwent.pw_passwd = temp_pw;
+			pwent.pw_shell = temp_shell;
+
+			preauth_flag = false;
+			failed = true;
+		} else {
+			pwent = *pwd;
+		}
+
 #else				/* ! USE_PAM */
 		while (true) {	/* repeatedly get login/password pairs */
 			failed = false;	/* haven't failed authentication yet */
@@ -824,17 +837,10 @@ int main (int argc, char **argv)
 					      sizeof username);
 				continue;
 			}
-#endif				/* ! USE_PAM */
 
-#ifdef USE_PAM
-		pwd = xgetpwnam (pam_user);
-		if (NULL == pwd) {
-			pwent.pw_name = pam_user;
-#else
 		pwd = xgetpwnam (username);
 		if (NULL == pwd) {
 			pwent.pw_name = username;
-#endif
 			strcpy (temp_pw, "!");
 			pwent.pw_passwd = temp_pw;
 			pwent.pw_shell = temp_shell;
@@ -844,7 +850,7 @@ int main (int argc, char **argv)
 		} else {
 			pwent = *pwd;
 		}
-#ifndef USE_PAM
+
 		spwd = NULL;
 		if (   (NULL != pwd)
 		    && (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
@@ -995,9 +1001,11 @@ int main (int argc, char **argv)
 			closelog ();
 			exit (1);
 		}
-	}			/* while (1) */
+	}			/* while (true) */
 #endif				/* ! USE_PAM */
+
 	alarm (0);		/* turn off alarm clock */
+
 #ifndef USE_PAM			/* PAM does this */
 	/*
 	 * porttime checks moved here, after the user has been

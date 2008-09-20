@@ -1,5 +1,9 @@
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Do not mix USE_PAM and !USE_PAM code.
+
+2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Use failent_user to log to audit. username is the
 	caller, not the user login tries to authenticate.
 	* src/login.c: Use pwd->pw_name instead of pwd->pw_uid. This might
