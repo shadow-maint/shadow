@@ -787,11 +787,16 @@ int main (int argc, char **argv)
 	   First get the username that we are actually using, though.
 	 */
 	retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
-	pwd = xgetpwnam (pam_user);
+	if (NULL != username) {
+		free (username);
+	}
+	username = xstrdup (pam_user);
+
+	pwd = xgetpwnam (username);
 	if (NULL == pwd) {
 		SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
 		         getdef_bool ("LOG_UNKFAIL_ENAB") ?
-		         pam_user : "UNKNOWN"));
+		         username : "UNKNOWN"));
 		exit (1);
 	}
 
@@ -1023,11 +1028,7 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-#ifdef USE_PAM
-	setutmp (pam_user, tty, hostname);	/* make entry in utmp & wtmp files */
-#else
 	setutmp (username, tty, hostname);	/* make entry in utmp & wtmp files */
-#endif
 	if (pwent.pw_shell[0] == '*') {	/* subsystem root */
 		pwent.pw_shell++;	/* skip the '*' */
 		subsystem (&pwent);	/* figure out what to execute */
@@ -1216,11 +1217,7 @@ int main (int argc, char **argv)
 	if (0 == pwent.pw_uid) {
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	} else if (getdef_bool ("LOG_OK_LOGINS")) {
-#ifdef USE_PAM
-		SYSLOG ((LOG_INFO, "'%s' logged in %s", pam_user, fromhost));
-#else
 		SYSLOG ((LOG_INFO, "'%s' logged in %s", username, fromhost));
-#endif
 	}
 	closelog ();
 	tmp = getdef_str ("FAKE_SHELL");
