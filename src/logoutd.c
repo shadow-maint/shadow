@@ -212,10 +212,11 @@ int main (int argc, char **argv)
 		 * is permitted to be signed on at this time.
 		 */
 #if HAVE_UTMPX_H
-		while ((ut = getutxent ()) != NULL) {
+		while ((ut = getutxent ()) != NULL)
 #else
-		while ((ut = getutent ()) != NULL) {
+		while ((ut = getutent ()) != NULL)
 #endif
+		{
 			if (ut->ut_type != USER_PROCESS) {
 				continue;
 			}

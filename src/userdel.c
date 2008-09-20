@@ -592,13 +592,14 @@ static void user_busy (const char *name, uid_t uid)
 	struct utmpx *utent;
 
 	setutxent ();
-	while ((utent = getutxent ()) != NULL) {
+	while ((utent = getutxent ()) != NULL)
 #else
 	struct utmp *utent;
 
 	setutent ();
-	while ((utent = getutent ()) != NULL) {
+	while ((utent = getutent ()) != NULL)
 #endif
+	{
 		if (utent->ut_type != USER_PROCESS)
 			continue;
 
