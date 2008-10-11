@@ -107,10 +107,16 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
+	<refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>gpasswd</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>grpconv</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>newgrp</refentrytitle><manvolnum>1</manvolnum>

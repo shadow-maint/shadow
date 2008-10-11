@@ -1,5 +1,15 @@
 2008-10-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/gshadow.5.xml, man/shadow.5.xml, man/passwd.5.xml,
+	man/grpck.8.xml: Sorted SEE ALSO references.
+	* man/gshadow.5.xml: Added reference to grpck(8) and grpconv(8).
+	* man/pwck.8.xml: Added reference to grpck(8).
+	* man/shadow.5.xml: Added reference to pwck(8).
+	* man/passwd.5.xml: Added reference to pwck(8).
+	* man/grpck.8.xml: Added reference to pwck(8).
+
+2008-10-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/*.xml, man/login.defs.d/*.xml: Added copyright and licence
 	header.
 

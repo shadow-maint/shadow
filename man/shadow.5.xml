@@ -150,14 +150,12 @@
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
+    <para>
+      <citerefentry>
 	<refentrytitle>chage</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
@@ -166,10 +164,16 @@
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
       </citerefentry>,
       <citerefentry>
+	<refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>pwconv</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>pwunconv</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>sulogin</refentrytitle><manvolnum>8</manvolnum>

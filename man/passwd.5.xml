@@ -134,7 +134,13 @@
     <title>SEE ALSO</title>
     <para>
       <citerefentry>
+	<refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
+      </citerefentry>,
+      <citerefentry>
 	<refentrytitle>getent</refentrytitle><manvolnum>1</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>getpwnam</refentrytitle><manvolnum>3</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>login</refentrytitle><manvolnum>1</manvolnum>
@@ -143,22 +149,19 @@
 	<refentrytitle>passwd</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
-	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>getpwnam</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry>,
-      <citerefentry>
-	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+	<refentrytitle>pwck</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>pwconv</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>pwunconv</refentrytitle><manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>shadow</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>su</refentrytitle><manvolnum>1</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>sulogin</refentrytitle><manvolnum>8</manvolnum>

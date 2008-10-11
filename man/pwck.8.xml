@@ -218,8 +218,12 @@
 
   <refsect1 id='see_also'>
     <title>SEE ALSO</title>
-    <para><citerefentry>
+    <para>
+      <citerefentry>
 	<refentrytitle>group</refentrytitle><manvolnum>5</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>grpck</refentrytitle><manvolnum>8</manvolnum>
       </citerefentry>,
       <citerefentry>
 	<refentrytitle>passwd</refentrytitle><manvolnum>5</manvolnum>
