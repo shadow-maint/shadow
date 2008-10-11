@@ -89,6 +89,12 @@ ALL:
             pw_gid not specified.
   - document what happens when no uid is specified.
 
+- pwck
+  - Add check to move passwd passwords to shadow if there is a shadow
+    entry (with a password).
+  - Add check to move passwd passwords to shadow if there is a shadow
+    file.
+
 - vipw:
   - Is MAX_MEMBERS_PER_GROUP used by vipw?
 
