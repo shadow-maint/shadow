@@ -1,3 +1,8 @@
+2008-10-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/*.xml, man/login.defs.d/*.xml: Added copyright and licence
+	header.
+
 2008-09-20  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/login.c: Always check the return value of the pam_* APIs.
