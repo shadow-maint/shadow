@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2001, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2007       , Nicolas François
+ * Copyright (c) 2007 - 2008, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -102,14 +102,14 @@ void chown_tty (const char *tty, const struct passwd *info)
 		exit (1);
 	}
 
-	if (chown (tty, info->pw_uid, gid) ||
-	    chmod (tty, getdef_num ("TTYPERM", 0600))) {
+	if (fchown (STDIN_FILENO, info->pw_uid, gid) ||
+	    fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600))) {
 		int err = errno;
 
-		snprintf (buf, sizeof buf, _("Unable to change tty %s"), tty);
+		snprintf (buf, sizeof buf, _("Unable to change tty stdin"));
 		perror (buf);
 		SYSLOG ((LOG_WARN,
-			 "unable to change tty `%s' for user `%s'\n", tty,
+			 "unable to change tty stdin for user `%s'\n",
 			 info->pw_name));
 		closelog ();
 
