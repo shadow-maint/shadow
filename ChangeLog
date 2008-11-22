@@ -1,3 +1,8 @@
+2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, libmisc/chowntty.c: Fix a race condition that could lead to
+	gaining ownership or changing mode of arbitrary files.
+
 2008-10-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/gshadow.5.xml, man/shadow.5.xml, man/passwd.5.xml,

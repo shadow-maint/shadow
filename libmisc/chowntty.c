@@ -109,14 +109,14 @@ void chown_tty (const char *tty, const struct passwd *info)
 		exit (1);
 	}
 
-	if (   (chown (tty, info->pw_uid, gid) != 0)
-	    || (chmod (tty, getdef_num ("TTYPERM", 0600)) != 0)) {
+	if (   (fchown (STDIN_FILENO, info->pw_uid, gid) != 0)
+	    || (fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600)) != 0)) {
 		int err = errno;
 
-		snprintf (buf, sizeof buf, _("Unable to change tty %s"), tty);
+		snprintf (buf, sizeof buf, _("Unable to change tty stdin"));
 		perror (buf);
 		SYSLOG ((LOG_WARN,
-			 "unable to change tty `%s' for user `%s'\n", tty,
+			 "unable to change tty stdin for user `%s'\n",
 			 info->pw_name));
 		closelog ();
 

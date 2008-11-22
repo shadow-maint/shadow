@@ -1,6 +1,6 @@
 $Id$
 
-shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
+shadow-4.1.2.2 -> shadow-4.1.3						UNRELEASED
 
 *** general:
 - packaging
@@ -58,6 +58,12 @@ shadow-4.1.2.1 -> shadow-4.1.3						UNRELEASED
 - usermod
   * Allow adding LDAP users (or any user not present in the local passwd
     file) to local groups
+
+shadow-4.1.2.1 -> shadow-4.1.2.2					23-11-2008
+
+*** security
+- Fix a race condition in login that could lead to gaining ownership or
+  changing mode of arbitrary files.
 
 shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 
