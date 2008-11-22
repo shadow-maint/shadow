@@ -57,6 +57,31 @@ struct utmp utent;
 	_("Unable to determine your tty name.")
 
 /*
+ * is_my_tty -- determine if "tty" is the same TTY stdin is using
+ */
+static bool is_my_tty (const char *tty)
+{
+	char full_tty[200];
+	struct stat by_name, by_fd;
+
+	if ('/' != *tty) {
+		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
+		tty = full_tty;
+	}
+
+	if (   (stat (tty, &by_name) != 0)
+	    || (fstat (STDIN_FILENO, &by_fd) != 0)) {
+		return false;
+	}
+
+	if (by_name.st_rdev != by_fd.st_rdev) {
+		return false;
+	} else {
+		return true;
+	}
+}
+
+/*
  * checkutmp - see if utmp file is correct for this process
  *
  *	System V is very picky about the contents of the utmp file
@@ -81,16 +106,20 @@ void checkutmp (bool picky)
 	setutent ();
 
 	/* First, try to find a valid utmp entry for this process.  */
-	while ((ut = getutent ()) != NULL)
+	while ((ut = getutent ()) != NULL) {
 		if (   (ut->ut_pid == pid)
 		    && ('\0' != ut->ut_line[0])
 		    && ('\0' != ut->ut_id[0])
 		    && (   (LOGIN_PROCESS == ut->ut_type)
-		        || (USER_PROCESS  == ut->ut_type))) {
+		        || (USER_PROCESS  == ut->ut_type))
+		    /* A process may have failed to close an entry
+		     * Check if this entry refers to this tty */
+		    && is_my_tty (ut->ut_line)) {
 			break;
 		}
+	}
 
-	/* If there is one, just use it, otherwise create a new one.  */
+	/* If there is one, just use it, otherwise create a new one. */
 	if (NULL != ut) {
 		utent = *ut;
 	} else {
@@ -110,7 +139,7 @@ void checkutmp (bool picky)
 		utent.ut_type = LOGIN_PROCESS;
 		utent.ut_pid = pid;
 		strncpy (utent.ut_line, line, sizeof utent.ut_line);
-		/* XXX - assumes /dev/tty?? */
+		/* XXX - assumes /dev/tty?? or /dev/pts/?? */
 		strncpy (utent.ut_id, utent.ut_line + 3, sizeof utent.ut_id);
 		strcpy (utent.ut_user, "LOGIN");
 		utent.ut_time = time (NULL);
@@ -173,6 +202,10 @@ void checkutmp (bool picky)
 		 * the structure.  The UNIX/PC is broken in this regard
 		 * and needs help ...
 		 */
+		/* XXX: The ut_line may not match with the current tty.
+		 *      ut_line will be set by setutmp anyway, but ut_id
+		 *      will not be set, and the wrong utmp entry may be
+		 *      updated. -- nekral */
 
 		if (utent.ut_line[0] == '\0')
 #endif				/* !UNIXPC */

@@ -1094,7 +1094,7 @@ int main (int argc, char **argv)
 	}
 	setup_limits (&pwent);	/* nice, ulimit etc. */
 #endif				/* ! USE_PAM */
-	chown_tty (tty, &pwent);
+	chown_tty (&pwent);
 
 #ifdef USE_PAM
 	/*
