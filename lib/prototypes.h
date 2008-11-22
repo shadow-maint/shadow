@@ -73,7 +73,7 @@ extern char *Basename (char *str);
 extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
 
 /* chowntty.c */
-extern void chown_tty (const char *, const struct passwd *);
+extern void chown_tty (const struct passwd *);
 
 /* console.c */
 extern int console (const char *);

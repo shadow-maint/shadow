@@ -5,6 +5,8 @@ shadow-4.1.2.1 -> shadow-4.1.2.2					23-11-2008
 *** security
 - Fix a race condition in login that could lead to gaining ownership or
   changing mode of arbitrary files.
+- Fix a possible login DOS, which could be caused by injecting forged 
+  entries in utmp.
 
 shadow-4.1.2 -> shadow-4.1.2.1						26-06-2008
 

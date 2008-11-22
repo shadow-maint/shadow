@@ -44,29 +44,12 @@
 #include <pwd.h>
 #include "getdef.h"
 /*
- * is_my_tty -- determine if "tty" is the same as TTY stdin is using
- */
-static int is_my_tty (const char *tty)
-{
-	struct stat by_name, by_fd;
-
-	if (stat (tty, &by_name) || fstat (0, &by_fd))
-		return 0;
-
-	if (by_name.st_rdev != by_fd.st_rdev)
-		return 0;
-	else
-		return 1;
-}
-
-/*
  *	chown_tty() sets the login tty to be owned by the new user ID
  *	with TTYPERM modes
  */
 
-void chown_tty (const char *tty, const struct passwd *info)
+void chown_tty (const struct passwd *info)
 {
-	char buf[200], full_tty[200];
 	char *group;		/* TTY group name or number */
 	struct group *grent;
 	gid_t gid;
@@ -89,18 +72,6 @@ void chown_tty (const char *tty, const struct passwd *info)
 	 * Change the permissions on the TTY to be owned by the user with
 	 * the group as determined above.
 	 */
-
-	if (*tty != '/') {
-		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
-		tty = full_tty;
-	}
-
-	if (!is_my_tty (tty)) {
-		SYSLOG ((LOG_WARN,
-			 "unable to determine TTY name, got %s\n", tty));
-		closelog ();
-		exit (1);
-	}
 
 	if (fchown (STDIN_FILENO, info->pw_uid, gid) ||
 	    fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600))) {

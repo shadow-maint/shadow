@@ -57,6 +57,30 @@ struct utmp utent;
 	_("Unable to determine your tty name.")
 
 /*
+ * is_my_tty -- determine if "tty" is the same TTY stdin is using
+ */
+static int is_my_tty (const char *tty)
+{
+	char full_tty[200];
+	struct stat by_name, by_fd;
+
+	if ('/' != *tty) {
+		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
+		tty = full_tty;
+	}
+
+	if ((stat (tty, &by_name) != 0) || (fstat (STDIN_FILENO, &by_fd) != 0)) {
+		return 0;
+	}
+
+	if (by_name.st_rdev != by_fd.st_rdev) {
+		return 0;
+	} else {
+		return 1;
+	}
+}
+
+/*
  * checkutmp - see if utmp file is correct for this process
  *
  *	System V is very picky about the contents of the utmp file
@@ -84,7 +108,8 @@ void checkutmp (int picky)
 	while ((ut = getutent ()))
 		if (ut->ut_pid == pid && ut->ut_line[0] && ut->ut_id[0] &&
 		    (ut->ut_type == LOGIN_PROCESS
-		     || ut->ut_type == USER_PROCESS))
+		     || ut->ut_type == USER_PROCESS) &&
+		    is_my_tty (ut->ut_line))
 			break;
 
 	/* If there is one, just use it, otherwise create a new one.  */

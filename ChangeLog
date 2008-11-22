@@ -2,6 +2,14 @@
 
 	* NEWS, libmisc/chowntty.c: Fix a race condition that could lead
 	to gaining ownership or changing mode of arbitrary files.
+	* NEWS, libmisc/chowntty.c, libmisc/utmp.c: is_my_tty() moved from
+	utmp.c to chowntty.c. checkutmp() now only uses an existing utmp
+	entry if the pid matches and ut_line matches with the current tty.
+	This fixes a possible DOS when entries can be forged in the utmp
+	file.
+	* libmisc/chowntty.c, src/login.c, lib/prototypes.h: Remove the 
+	tty argument from chown_tty. chown_tty always changes stdin and
+	does not need this argument anymore.
 
 2008-06-26  Nicolas François  <nicolas.francois@centraliens.net>
 
