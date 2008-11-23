@@ -77,8 +77,7 @@ void chown_tty (const struct passwd *info)
 	    fchmod (STDIN_FILENO, getdef_num ("TTYPERM", 0600))) {
 		int err = errno;
 
-		snprintf (buf, sizeof buf, _("Unable to change tty stdin"));
-		perror (buf);
+		perror (_("Unable to change tty stdin"));
 		SYSLOG ((LOG_WARN,
 			 "unable to change tty stdin for user `%s'\n",
 			 info->pw_name));
