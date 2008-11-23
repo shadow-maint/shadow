@@ -1,5 +1,10 @@
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/su.1.xml: Fix the su synopsis. username is referenced in the
+	manpage, not LOGIN.
+
+2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/chowntty.c: Improve the logs for fchown and fchmod
 	failures.
 	* libmisc/chowntty.c: Only closelog() when failure cause an exit.

@@ -67,7 +67,7 @@
       </arg>
       <arg choice='opt'>
 	<arg choice='plain'>
-	  <replaceable>LOGIN</replaceable>
+	  <replaceable>username</replaceable>
 	</arg>
       </arg>
     </cmdsynopsis>
