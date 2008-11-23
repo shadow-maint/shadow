@@ -1,5 +1,10 @@
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chowntty.c: Improve the logs for fchown and fchmod
+	failures.
+
+2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, libmisc/chowntty.c: Fix a race condition that could lead to
 	gaining ownership or changing mode of arbitrary files.
 	* NEWS, libmisc/chowntty.c, libmisc/utmp.c: is_my_tty() moved from
