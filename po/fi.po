@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18.1\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2007-11-24 22:54+0100\n"
 "Last-Translator: Tommi Vainikainen <thv+debian@iki.fi>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
@@ -63,8 +63,9 @@ msgstr "Salasanasi vanhenee huomenna."
 msgid "Your password will expire today."
 msgstr "Salasanasi vanhenee tänään."
 
-#, c-format
-msgid "Unable to change tty %s"
+#, fuzzy
+#| msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr "Päätettä %s ei voi vaihtaa"
 
 msgid "Environment overflow\n"

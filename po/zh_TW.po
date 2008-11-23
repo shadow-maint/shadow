@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -67,8 +67,9 @@ msgstr "您的密碼將在明天過期。"
 msgid "Your password will expire today."
 msgstr "您的密碼今天過期。"
 
-#, c-format
-msgid "Unable to change tty %s"
+#, fuzzy
+#| msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr "無法改變 tty %s"
 
 msgid "Environment overflow\n"

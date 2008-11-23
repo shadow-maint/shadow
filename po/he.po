@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -65,8 +65,9 @@ msgstr "תוקף הסיסמה שלך יפוג מחר."
 msgid "Your password will expire today."
 msgstr "תוקף הסיסמה שלך פג היום."
 
-#, c-format
-msgid "Unable to change tty %s"
+#, fuzzy
+#| msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr "לא יכול לשנות tty %s"
 
 msgid "Environment overflow\n"

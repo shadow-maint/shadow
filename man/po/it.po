@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.3\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:12+0100\n"
 "PO-Revision-Date: 2007-05-27 16:42+0200\n"
 "Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"

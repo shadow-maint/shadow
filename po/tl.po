@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2007-11-26 21:34+0100\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
@@ -69,8 +69,9 @@ msgstr "Hanggang bukas ang taning ng inyong kontrasenyas."
 msgid "Your password will expire today."
 msgstr "Mapapaso ang inyong kontrasenyas ngayong araw na ito."
 
-#, c-format
-msgid "Unable to change tty %s"
+#, fuzzy
+#| msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr "Hindi mabago ang tty %s"
 
 msgid "Environment overflow\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2007-11-25 21:23+0100\n"
 "Last-Translator: Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -65,8 +65,9 @@ msgstr "Su contraseña caducará mañana."
 msgid "Your password will expire today."
 msgstr "Su contraseña caducará hoy."
 
-#, c-format
-msgid "Unable to change tty %s"
+#, fuzzy
+#| msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr "Incapaz de cambiar tty %s"
 
 msgid "Environment overflow\n"

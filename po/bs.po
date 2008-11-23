@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-06-26 20:09+0200\n"
+"POT-Creation-Date: 2008-11-23 01:30+0100\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -64,8 +64,7 @@ msgstr "Vaša šifra ističe sutra."
 msgid "Your password will expire today."
 msgstr "Vaša šifra ističe danas."
 
-#, c-format
-msgid "Unable to change tty %s"
+msgid "Unable to change tty stdin"
 msgstr ""
 
 msgid "Environment overflow\n"
