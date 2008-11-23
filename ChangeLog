@@ -1,5 +1,10 @@
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: (!USE_PAM) Provide visible information indicating that
+	su was denied.
+
+2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/su.1.xml: Fix the su synopsis. username is referenced in the
 	manpage, not LOGIN.
 	* man/ja/login.1: Fix the path of the utmp and wtmp files.

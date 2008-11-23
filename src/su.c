@@ -721,7 +721,8 @@ int main (int argc, char **argv)
 	 */
 	if (!amroot && pw_auth (pwent.pw_passwd, name, PW_SU, (char *) 0)) {
 		SYSLOG ((pwent.pw_uid ? LOG_NOTICE : LOG_WARN,
-			 "Authentication failed for %s", name));
+		         "Authentication failed for %s", name));
+		fprintf(stderr, _("%s: Authentication failure\n"), Prog);
 		su_failure (tty);
 	}
 	(void) signal (SIGQUIT, oldsig);
@@ -757,8 +758,10 @@ int main (int argc, char **argv)
 	if (!amroot) {
 		if (!isttytime (pwent.pw_name, "SU", time ((time_t *) 0))) {
 			SYSLOG (((0 != pwent.pw_uid) ? LOG_WARN : LOG_CRIT,
-				 "SU by %s to restricted account %s",
-				 oldname, name));
+			         "SU by %s to restricted account %s",
+			         oldname, name));
+			fprintf(stderr,
+			        _("%s: You are not authorized to su at that time\n"), Prog);
 			su_failure (tty);
 		}
 	}
