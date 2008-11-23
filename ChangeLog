@@ -2,6 +2,7 @@
 
 	* man/su.1.xml: Fix the su synopsis. username is referenced in the
 	manpage, not LOGIN.
+	* man/ja/login.1: Fix the path of the utmp and wtmp files.
 
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
