@@ -90,6 +90,7 @@ void chown_tty (const struct passwd *info)
 		         "unable to change owner or mode of tty stdin for user `%s': %s\n",
 		         info->pw_name, strerror (err)));
 		if (EROFS != err) {
+			closelog ();
 			exit (1);
 		}
 	}

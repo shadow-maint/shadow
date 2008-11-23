@@ -2,6 +2,7 @@
 
 	* libmisc/chowntty.c: Improve the logs for fchown and fchmod
 	failures.
+	* libmisc/chowntty.c: Only closelog() when failure cause an exit.
 
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
