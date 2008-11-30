@@ -12,6 +12,14 @@ shadow-4.1.2.2 -> shadow-4.1.3						UNRELEASED
     groupadd, groupdel, groupmod, newusers, useradd, userdel, and usermod.
     This authentication is not necessary when these tools are not
     installed setuid root.
+  * Added configure --with-group-name-max-length (default) /
+    --without-group-name-max-length options. This permits to configure the maximum length allowed for group names:
+      <no option> -> default of 16 (like today)
+      --with-group-name-max-length -> default of 16
+      --without-group-name-max-length -> no max length
+      --with-group-name-max-length=n > max is set to n
+    No sanity checking is performed on n so people could do
+    something neat like --with-group-name-max-length=MAX_INT
 - addition of users or groups
   * Speed improvement in case UID_MAX/SYS_UID_MAX/GID_MAX/SYS_GID_MAX is
     used for an user/group. This should be noticeable in case of LDAP

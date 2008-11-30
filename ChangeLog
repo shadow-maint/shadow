@@ -1,3 +1,12 @@
+2008-11-27  Mike Frysinger  <vapier@gentoo.org>
+
+	* NEWS, configure.in, libmisc/chkname.c: make group max length a
+	configure option.  The configure behavior encoded is:
+	<no option> -> default of 16 (like today);
+	--with-group-name-max-length -> default of 16;
+	--without-group-name-max-length -> no max length;
+	--with-group-name-max-length=n > max is set to n.
+
 2008-11-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/su.c: (!USE_PAM) Provide visible information indicating that

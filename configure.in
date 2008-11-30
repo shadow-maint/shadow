@@ -254,6 +254,16 @@ AC_ARG_WITH(sha-crypt,
 AC_ARG_WITH(nscd,
 	[AC_HELP_STRING([--with-nscd], [enable support for nscd @<:@default=yes@:>@])],
 	[with_nscd=$withval], [with_nscd=yes])
+AC_ARG_WITH(group-name-max-length,
+	[AC_HELP_STRING([--with-group-name-max-length], [set max group name length @<:@default=16@:>@])],
+	[with_group_name_max_length=$withval], [with_group_name_max_length=yes])
+
+if test "$with_group_name_max_length" = "no" ; then
+	with_group_name_max_length=0
+elif test "$with_group_name_max_length" = "yes" ; then
+	with_group_name_max_length=16
+fi
+AC_DEFINE_UNQUOTED(GROUP_NAME_MAX_LENGTH, $with_group_name_max_length, [max group name length])
 
 AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
 if test "$with_sha_crypt" = "yes"; then

@@ -100,9 +100,8 @@ bool is_valid_group_name (const char *name)
 	 * Arbitrary limit for group names - max 16
 	 * characters (same as on HP-UX 10).
 	 */
-	if (strlen (name) > 16) {
+	if (GROUP_NAME_MAX_LENGTH && strlen (name) > GROUP_NAME_MAX_LENGTH)
 		return false;
-	}
 
 	return is_valid_name (name);
 }
