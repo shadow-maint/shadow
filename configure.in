@@ -449,7 +449,7 @@ if test "$enable_acct_tools_setuid" != "no"; then
 			enable_acct_tools_setuid="no"
 		fi
 	fi
-	if "$enable_acct_tools_setuid" = "yes"; then
+	if test "$enable_acct_tools_setuid" = "yes"; then
 		AC_DEFINE(ACCT_TOOLS_SETUID,
 		          1,
 		          [Define if account management tools should be installed setuid and authenticate the callers])

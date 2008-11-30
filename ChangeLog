@@ -1,5 +1,9 @@
 2008-11-27  Mike Frysinger  <vapier@gentoo.org>
 
+	* configure.in: Fix the "$enable_acct_tools_setuid" = "yes" test.
+
+2008-11-27  Mike Frysinger  <vapier@gentoo.org>
+
 	* NEWS, configure.in, libmisc/chkname.c: make group max length a
 	configure option.  The configure behavior encoded is:
 	<no option> -> default of 16 (like today);
