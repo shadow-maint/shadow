@@ -1,3 +1,8 @@
+2008-12-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/gpasswd.c: Added support usernames with arbitrary
+	length.
+
 2008-11-27  Mike Frysinger  <vapier@gentoo.org>
 
 	* configure.in: Fix the "$enable_acct_tools_setuid" = "yes" test.

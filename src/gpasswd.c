@@ -211,25 +211,16 @@ static void fail_exit (int status)
  */
 static bool is_valid_user_list (const char *users)
 {
-	const char *start, *end;
-	char username[32];
+	const char *username, *end;
 	bool is_valid = true;
-	size_t len;
 
-	for (start = users; (NULL != start) && ('\0' != *start); start = end) {
-		end = strchr (start, ',');
+	for (username = users;
+	     (NULL != username) && ('\0' != *username);
+	     username = end) {
+		end = strchr (username, ',');
 		if (NULL != end) {
-			len = (size_t) (end - start);
 			end++;
-		} else {
-			len = strlen (start);
 		}
-
-		if (len > sizeof (username) - 1) {
-			len = sizeof (username) - 1;
-		}
-		strncpy (username, start, len);
-		username[len] = '\0';
 
 		/*
 		 * This user must exist.
