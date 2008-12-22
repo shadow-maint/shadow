@@ -238,7 +238,8 @@ static void open_files (void)
 	/* An now open the databases */
 	if (gr_open (O_RDWR) == 0) {
 		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		         _("%s: cannot open %s\n"),
+		         Prog, gr_dbname ());
 		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
 		exit (E_GRP_UPDATE);
 	}
@@ -396,13 +397,15 @@ int main (int argc, char **argv)
 		char *nis_domain;
 		char *nis_master;
 
-		fprintf (stderr, _("%s: group '%s' is a NIS group\n"),
-			 Prog, group_name);
+		fprintf (stderr,
+		         _("%s: group '%s' is a NIS group\n"),
+		         Prog, group_name);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {
-			fprintf (stderr, _("%s: %s is the NIS master\n"),
-				 Prog, nis_master);
+			fprintf (stderr,
+			         _("%s: %s is the NIS master\n"),
+			         Prog, nis_master);
 		}
 		exit (E_NOTFOUND);
 	}
