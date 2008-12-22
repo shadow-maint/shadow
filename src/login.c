@@ -519,7 +519,7 @@ int main (int argc, char **argv)
 	}
 #ifdef RLOGIN
 	if (rflg) {
-		username = malloc (32 * sizeof char);
+		username = malloc (32 * sizeof (char));
 		if (do_rlogin (hostname, username, 32, term, sizeof term)) {
 			preauth_flag = true;
 		} else {
