@@ -1,3 +1,7 @@
+2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/groupdel.c: Remove the fail_exit () declaration.
+
 2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/gpasswd.c: Fix the support for usernames with arbitrary

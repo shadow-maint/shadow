@@ -75,7 +75,6 @@ static bool is_shadow_grp;
 
 /* local function prototypes */
 static void usage (void);
-static void fail_exit (int);
 static void grp_update (void);
 static void close_files (void);
 static void open_files (void);
