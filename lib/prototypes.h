@@ -78,6 +78,37 @@ extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
 /* chowntty.c */
 extern void chown_tty (const struct passwd *);
 
+/* cleanup.c */
+typedef void (*cleanup_function) (void *arg);
+void add_cleanup (cleanup_function pcf, void *arg);
+void del_cleanup (cleanup_function pcf);
+void do_cleanups (void);
+
+/* cleanup_group.c */
+struct cleanup_info_mod {
+	char *audit_msg;
+	char *action;
+	char *name;
+};
+void cleanup_report_add_group (void *group_name);
+void cleanup_report_add_group_group (void *group_name);
+#ifdef SHADOWGRP
+void cleanup_report_add_group_gshadow (void *group_name);
+#endif
+void cleanup_report_del_group (void *group_name);
+void cleanup_report_del_group_group (void *group_name);
+#ifdef SHADOWGRP
+void cleanup_report_del_group_gshadow (void *group_name);
+#endif
+void cleanup_report_mod_passwd (void *cleanup_info);
+void cleanup_report_mod_group (void *cleanup_info);
+void cleanup_report_mod_gshadow (void *cleanup_info);
+void cleanup_unlock_group (void *unused);
+#ifdef SHADOWGRP
+void cleanup_unlock_gshadow (void *unused);
+#endif
+void cleanup_unlock_passwd (void *unused);
+
 /* console.c */
 extern bool console (const char *);
 
@@ -144,6 +175,7 @@ typedef enum {
 extern void audit_logger (int type, const char *pgname, const char *op,
                           const char *name, unsigned int id,
                           shadow_audit_result result);
+void audit_logger_message (const char *message, shadow_audit_result result);
 #endif
 
 /* limits.c */

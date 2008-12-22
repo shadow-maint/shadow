@@ -85,9 +85,7 @@ static bool pflg = false;	/* new encrypted password */
 
 #ifdef SHADOWGRP
 static bool is_shadow_grp;
-static bool sgr_locked = false;
 #endif
-static bool gr_locked = false;
 
 /* local function prototypes */
 static void usage (void);
@@ -100,7 +98,6 @@ static void grp_update (void);
 static void check_new_name (void);
 static void close_files (void);
 static void open_files (void);
-static void fail_exit (int code);
 static gid_t get_gid (const char *gidstr);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
@@ -181,6 +178,18 @@ static void grp_update (void)
 #endif				/* SHADOWGRP */
 
 	/*
+	 * To add the group, we need to update /etc/group.
+	 * Make sure failures will be reported.
+	 */
+	add_cleanup (cleanup_report_add_group_group, group_name);
+#ifdef	SHADOWGRP
+	if (is_shadow_grp) {
+		/* We also need to update /etc/gshadow */
+		add_cleanup (cleanup_report_add_group_gshadow, group_name);
+	}
+#endif
+
+	/*
 	 * Create the initial entries for this new group.
 	 */
 	new_grent (&grp);
@@ -198,7 +207,7 @@ static void grp_update (void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, gr_dbname (), grp.gr_name);
-		fail_exit (E_GRP_UPDATE);
+		exit (E_GRP_UPDATE);
 	}
 #ifdef	SHADOWGRP
 	/*
@@ -208,17 +217,9 @@ static void grp_update (void)
 		fprintf (stderr,
 		         _("%s: failed to prepare the new %s entry '%s'\n"),
 		         Prog, sgr_dbname (), sgrp.sg_name);
-		fail_exit (E_GRP_UPDATE);
+		exit (E_GRP_UPDATE);
 	}
 #endif				/* SHADOWGRP */
-#ifdef WITH_AUDIT
-	audit_logger (AUDIT_ADD_GROUP, Prog,
-	              "adding group",
-	              group_name, (unsigned int) group_id,
-	              SHADOW_AUDIT_SUCCESS);
-#endif
-	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
-	        group_name, (unsigned int) group_id));
 }
 
 /*
@@ -251,45 +252,60 @@ static void check_new_name (void)
  */
 static void close_files (void)
 {
+	/* First, write the changes in the regular group database */
 	if (gr_close () == 0) {
-		fprintf (stderr, _("%s: failure while writing changes to %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
-		fail_exit (E_GRP_UPDATE);
+		fprintf (stderr,
+		         _("%s: failure while writing changes to %s\n"),
+		         Prog, gr_dbname ());
+		exit (E_GRP_UPDATE);
 	}
-	if (gr_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
 #ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
-		              "unlocking group file",
-		              group_name, AUDIT_NO_ID,
-		              SHADOW_AUDIT_FAILURE);
+	audit_logger (AUDIT_ADD_GROUP, Prog,
+	              "adding group to /etc/group",
+	              group_name, (unsigned int) group_id,
+	              SHADOW_AUDIT_SUCCESS);
 #endif
-		/* continue */
-	}
-	gr_locked = false;
+	SYSLOG ((LOG_INFO, "group added to %s: name=%s, GID=%u",
+	         gr_dbname (), group_name, (unsigned int) group_id));
+	del_cleanup (cleanup_report_add_group_group);
+
+	cleanup_unlock_group (NULL);
+	del_cleanup (cleanup_unlock_group);
+
+	/* Now, write the changes in the shadow database */
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_close () == 0) {
 			fprintf (stderr,
-			         _("%s: failure while writing changes to %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
-			fail_exit (E_GRP_UPDATE);
+			         _("%s: failure while writing changes to %s\n"),
+			         Prog, sgr_dbname ());
+			exit (E_GRP_UPDATE);
 		}
-		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
 #ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_GROUP, Prog,
-			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
+		audit_logger (AUDIT_ADD_GROUP, Prog,
+		              "adding group to /etc/gshadow",
+		              group_name, (unsigned int) group_id,
+		              SHADOW_AUDIT_SUCCESS);
 #endif
-			/* continue */
-		}
-		sgr_locked = false;
+		SYSLOG ((LOG_INFO, "group added to %s: name=%s",
+		         sgr_dbname (), group_name));
+		del_cleanup (cleanup_report_add_group_gshadow);
+
+		cleanup_unlock_gshadow (NULL);
+		del_cleanup (cleanup_unlock_gshadow);
 	}
 #endif				/* SHADOWGRP */
+
+	/* Report success at the system level */
+#ifdef WITH_AUDIT
+	audit_logger (AUDIT_ADD_GROUP, Prog,
+	              "",
+	              group_name, (unsigned int) group_id,
+	              SHADOW_AUDIT_SUCCESS);
+#endif
+	SYSLOG ((LOG_INFO, "new group: name=%s, GID=%u",
+	         group_name, (unsigned int) group_id));
+	del_cleanup (cleanup_report_add_group);
 }
 
 /*
@@ -299,105 +315,51 @@ static void close_files (void)
  */
 static void open_files (void)
 {
+	/* First, lock the databases */
 	if (gr_lock () == 0) {
 		fprintf (stderr,
 		         _("%s: cannot lock %s; try again later.\n"),
 		         Prog, gr_dbname ());
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
-		              "locking group file",
-		              group_name, AUDIT_NO_ID,
-		              SHADOW_AUDIT_FAILURE);
-#endif
-		fail_exit (E_GRP_UPDATE);
+		exit (E_GRP_UPDATE);
 	}
-	gr_locked = true;
-	if (gr_open (O_RDWR) == 0) {
-		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
-		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
-#ifdef WITH_AUDIT
-		audit_logger (AUDIT_ADD_GROUP, Prog,
-		              "opening group file",
-		              group_name, AUDIT_NO_ID,
-		              SHADOW_AUDIT_FAILURE);
-#endif
-		fail_exit (E_GRP_UPDATE);
-	}
+	add_cleanup (cleanup_unlock_group, NULL);
+
 #ifdef	SHADOWGRP
 	if (is_shadow_grp) {
 		if (sgr_lock () == 0) {
 			fprintf (stderr,
 			         _("%s: cannot lock %s; try again later.\n"),
 			         Prog, sgr_dbname ());
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_GROUP, Prog,
-			              "locking gshadow file",
-			              group_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			fail_exit (E_GRP_UPDATE);
+			exit (E_GRP_UPDATE);
 		}
-		sgr_locked = true;
+		add_cleanup (cleanup_unlock_gshadow, NULL);
+	}
+#endif				/* SHADOWGRP */
+
+	/*
+	 * Now if the group is not added, it's our fault.
+	 * Make sure failures will be reported.
+	 */
+	add_cleanup (cleanup_report_add_group, group_name);
+
+	/* An now open the databases */
+	if (gr_open (O_RDWR) == 0) {
+		fprintf (stderr, _("%s: cannot open %s\n"), Prog, gr_dbname ());
+		SYSLOG ((LOG_WARN, "cannot open %s", gr_dbname ()));
+		exit (E_GRP_UPDATE);
+	}
+
+#ifdef	SHADOWGRP
+	if (is_shadow_grp) {
 		if (sgr_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_WARN, "cannot open %s", sgr_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_GROUP, Prog,
-			              "opening gshadow file",
-			              group_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			fail_exit (E_GRP_UPDATE);
+			exit (E_GRP_UPDATE);
 		}
 	}
 #endif				/* SHADOWGRP */
-}
-
-/*
- * fail_exit - exit with an error code after unlocking files
- */
-static void fail_exit (int code)
-{
-	if (gr_locked) {
-		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_GROUP, Prog,
-			              "unlocking group file",
-			              group_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			/* continue */
-		}
-	}
-#ifdef	SHADOWGRP
-	if (sgr_locked) {
-		if (sgr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
-#ifdef WITH_AUDIT
-			audit_logger (AUDIT_ADD_GROUP, Prog,
-			              "unlocking gshadow file",
-			              group_name, AUDIT_NO_ID,
-			              SHADOW_AUDIT_FAILURE);
-#endif
-			/* continue */
-		}
-	}
-#endif
-
-#ifdef WITH_AUDIT
-	if (code != E_SUCCESS) {
-		audit_logger (AUDIT_ADD_GROUP, Prog,
-		              "adding group",
-		              group_name, AUDIT_NO_ID,
-		              SHADOW_AUDIT_FAILURE);
-	}
-#endif
-
-	exit (code);
 }
 
 /*
@@ -529,10 +491,10 @@ static void check_flags (void)
 		/* The group already exist */
 		if (fflg) {
 			/* OK, no need to do anything */
-			fail_exit (E_SUCCESS);
+			exit (E_SUCCESS);
 		}
 		fprintf (stderr, _("%s: group '%s' already exists\n"), Prog, group_name);
-		fail_exit (E_NAME_IN_USE);
+		exit (E_NAME_IN_USE);
 	}
 
 	if (gflg && (getgrgid (group_id) != NULL)) {
@@ -550,7 +512,7 @@ static void check_flags (void)
 		} else {
 			fprintf (stderr, _("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long int) group_id);
-			fail_exit (E_GID_IN_USE);
+			exit (E_GID_IN_USE);
 		}
 	}
 }
@@ -610,6 +572,8 @@ int main (int argc, char **argv)
 #ifdef WITH_AUDIT
 	audit_help_open ();
 #endif
+	atexit (do_cleanups);
+
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -640,8 +604,7 @@ int main (int argc, char **argv)
 
 	if (!gflg) {
 		if (find_new_gid (rflg, &group_id, NULL) < 0) {
-			fprintf (stderr, _("%s: can't create group\n"), Prog);
-			fail_exit (E_GID_IN_USE);
+			exit (E_GID_IN_USE);
 		}
 	}
 

@@ -14,6 +14,9 @@ libmisc_a_SOURCES = \
 	chkname.h \
 	chowndir.c \
 	chowntty.c \
+	cleanup.c \
+	cleanup_group.c \
+	cleanup_user.c \
 	console.c \
 	copydir.c \
 	entry.c \

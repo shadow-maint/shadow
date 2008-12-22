@@ -87,6 +87,21 @@ void audit_logger (int type, const char *pgname, const char *op,
 	}
 }
 
+void audit_logger_message (const char *message, shadow_audit_result result)
+{
+	if (audit_fd < 0) {
+		return;
+	} else {
+		audit_log_user_message (audit_fd,
+		                        AUDIT_USYS_CONFIG,
+		                        message,
+		                        NULL, /* hostname */
+		                        NULL, /* addr */
+		                        NULL, /* tty */
+		                        (int) result);
+	}
+}
+
 #else				/* WITH_AUDIT */
 extern int errno;	/* warning: ANSI C forbids an empty source file */
 #endif				/* WITH_AUDIT */
