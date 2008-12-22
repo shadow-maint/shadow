@@ -211,14 +211,16 @@ static void fail_exit (int status)
  */
 static bool is_valid_user_list (const char *users)
 {
-	const char *username, *end;
+	char *username, *end;
 	bool is_valid = true;
+	char *tmpusers = xstrdup (users);
 
-	for (username = users;
+	for (username = tmpusers;
 	     (NULL != username) && ('\0' != *username);
 	     username = end) {
 		end = strchr (username, ',');
 		if (NULL != end) {
+			*end = '\0';
 			end++;
 		}
 
@@ -233,6 +235,9 @@ static bool is_valid_user_list (const char *users)
 			is_valid = false;
 		}
 	}
+
+	free (tmpusers);
+
 	return is_valid;
 }
 
