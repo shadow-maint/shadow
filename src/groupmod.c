@@ -186,8 +186,8 @@ static void grp_update (void)
 	ogrp = gr_locate (group_name);
 	if (!ogrp) {
 		fprintf (stderr,
-			 _("%s: group '%s' does not exist in %s\n"),
-			 Prog, group_name, gr_dbname ());
+		         _("%s: group '%s' does not exist in %s\n"),
+		         Prog, group_name, gr_dbname ());
 		exit (E_GRP_UPDATE);
 	}
 	grp = *ogrp;
@@ -277,7 +277,8 @@ static void check_new_gid (void)
 	/*
 	 * Tell the user what they did wrong.
 	 */
-	fprintf (stderr, _("%s: GID '%lu' already exists\n"),
+	fprintf (stderr,
+	         _("%s: GID '%lu' already exists\n"),
 	         Prog, (unsigned long int) group_newid);
 	exit (E_GID_IN_USE);
 }
@@ -306,8 +307,8 @@ static void check_new_name (void)
 		/* local, no need for xgetgrnam */
 		if (getgrnam (group_newname) != NULL) {
 			fprintf (stderr,
-				 _("%s: group '%s' already exists\n"), Prog,
-				 group_newname);
+			         _("%s: group '%s' already exists\n"),
+			         Prog, group_newname);
 			exit (E_NAME_IN_USE);
 		}
 		return;
@@ -317,8 +318,9 @@ static void check_new_name (void)
 	 * All invalid group names land here.
 	 */
 
-	fprintf (stderr, _("%s: invalid group name '%s'\n"),
-		 Prog, group_newname);
+	fprintf (stderr,
+	         _("%s: invalid group name '%s'\n"),
+	         Prog, group_newname);
 	exit (E_BAD_ARG);
 }
 
@@ -332,8 +334,9 @@ static gid_t get_gid (const char *gidstr)
 
 	val = strtol (gidstr, &errptr, 10); /* FIXME: Should be strtoul ? */
 	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 gidstr);
+		fprintf (stderr,
+		         _("%s: invalid numeric argument '%s'\n"),
+		         Prog, gidstr);
 		exit (E_BAD_ARG);
 	}
 	return (gid_t) val;
@@ -348,40 +351,37 @@ static gid_t get_gid (const char *gidstr)
  */
 static void process_flags (int argc, char **argv)
 {
-
-	{
-		int option_index = 0;
-		int c;
-		static struct option long_options[] = {
-			{"gid", required_argument, NULL, 'g'},
-			{"help", no_argument, NULL, 'h'},
-			{"new-name", required_argument, NULL, 'n'},
-			{"non-unique", no_argument, NULL, 'o'},
-			{"password", required_argument, NULL, 'p'},
-			{NULL, 0, NULL, '\0'}
-		};
-		while ((c =
-			getopt_long (argc, argv, "g:hn:op:",
-				     long_options, &option_index)) != -1) {
-			switch (c) {
-			case 'g':
-				gflg = true;
-				group_newid = get_gid (optarg);
-				break;
-			case 'n':
-				nflg = true;
-				group_newname = optarg;
-				break;
-			case 'o':
-				oflg = true;
-				break;
-			case 'p':
-				group_passwd = optarg;
-				pflg = true;
-				break;
-			default:
-				usage ();
-			}
+	int option_index = 0;
+	int c;
+	static struct option long_options[] = {
+		{"gid", required_argument, NULL, 'g'},
+		{"help", no_argument, NULL, 'h'},
+		{"new-name", required_argument, NULL, 'n'},
+		{"non-unique", no_argument, NULL, 'o'},
+		{"password", required_argument, NULL, 'p'},
+		{NULL, 0, NULL, '\0'}
+	};
+	while ((c =
+		getopt_long (argc, argv, "g:hn:op:",
+		             long_options, &option_index)) != -1) {
+		switch (c) {
+		case 'g':
+			gflg = true;
+			group_newid = get_gid (optarg);
+			break;
+		case 'n':
+			nflg = true;
+			group_newname = optarg;
+			break;
+		case 'o':
+			oflg = true;
+			break;
+		case 'p':
+			group_passwd = optarg;
+			pflg = true;
+			break;
+		default:
+			usage ();
 		}
 	}
 
@@ -676,14 +676,6 @@ void update_primary_groups (gid_t ogid, gid_t ngid)
 /*
  * main - groupmod command
  *
- *	The syntax of the groupmod command is
- *	
- *	groupmod [ -g gid [ -o ]] [ -n name ] group
- *
- *	The flags are
- *		-g - specify a new group ID value
- *		-o - permit the group ID value to be non-unique
- *		-n - specify a new group name
  */
 int main (int argc, char **argv)
 {
@@ -755,8 +747,9 @@ int main (int argc, char **argv)
 		 */
 		grp = getgrnam (group_name); /* local, no need for xgetgrnam */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: group '%s' does not exist\n"),
-				 Prog, group_name);
+			fprintf (stderr,
+			         _("%s: group '%s' does not exist\n"),
+			         Prog, group_name);
 			exit (E_NOTFOUND);
 		} else {
 			group_id = grp->gr_gid;
@@ -771,13 +764,15 @@ int main (int argc, char **argv)
 		char *nis_domain;
 		char *nis_master;
 
-		fprintf (stderr, _("%s: group %s is a NIS group\n"),
-			 Prog, group_name);
+		fprintf (stderr,
+		         _("%s: group %s is a NIS group\n"),
+		         Prog, group_name);
 
 		if (!yp_get_default_domain (&nis_domain) &&
 		    !yp_master (nis_domain, "group.byname", &nis_master)) {
-			fprintf (stderr, _("%s: %s is the NIS master\n"),
-				 Prog, nis_master);
+			fprintf (stderr,
+			         _("%s: %s is the NIS master\n"),
+			         Prog, nis_master);
 		}
 		exit (E_NOTFOUND);
 	}

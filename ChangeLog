@@ -1,6 +1,8 @@
 2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/groupadd.c: Re-indent.
+	* src/groupadd.c, src/groupmod.c: Re-indent.
+	* src/groupmod.c: Do not add the command synopsis to the main ()
+	documentation. This avoids outdated information.
 
 2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>
 
