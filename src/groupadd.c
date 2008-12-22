@@ -493,7 +493,9 @@ static void check_flags (void)
 			/* OK, no need to do anything */
 			exit (E_SUCCESS);
 		}
-		fprintf (stderr, _("%s: group '%s' already exists\n"), Prog, group_name);
+		fprintf (stderr,
+		         _("%s: group '%s' already exists\n"),
+		         Prog, group_name);
 		exit (E_NAME_IN_USE);
 	}
 
@@ -510,7 +512,8 @@ static void check_flags (void)
 			/* Turn off -g, we can use any GID */
 			gflg = false;
 		} else {
-			fprintf (stderr, _("%s: GID '%lu' already exists\n"),
+			fprintf (stderr,
+			         _("%s: GID '%lu' already exists\n"),
 			         Prog, (unsigned long int) group_id);
 			exit (E_GID_IN_USE);
 		}

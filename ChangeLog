@@ -1,5 +1,9 @@
 2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupadd.c: Re-indent.
+
+2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/audit_help.c: Added audit_logger_message() to log
 	messages not related to an account.
 	* lib/prototypes.h, libmisc/cleanup.c, libmisc/cleanup_group.c,
