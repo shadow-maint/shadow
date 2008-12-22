@@ -85,7 +85,7 @@ bool is_valid_user_name (const char *name)
 
 	/*
 	 * User names are limited by whatever utmp can
-	 * handle (usually max 8 characters).
+	 * handle.
 	 */
 	if (strlen (name) > sizeof (ut.ut_user)) {
 		return false;
@@ -97,8 +97,8 @@ bool is_valid_user_name (const char *name)
 bool is_valid_group_name (const char *name)
 {
 	/*
-	 * Arbitrary limit for group names - max 16
-	 * characters (same as on HP-UX 10).
+	 * Arbitrary limit for group names.
+	 * HP-UX 10 limits to 16 characters
 	 */
 	if (GROUP_NAME_MAX_LENGTH && strlen (name) > GROUP_NAME_MAX_LENGTH)
 		return false;
