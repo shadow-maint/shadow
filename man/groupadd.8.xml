@@ -33,6 +33,8 @@
 <!ENTITY GID_MAX               SYSTEM "login.defs.d/GID_MAX.xml">
 <!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 <!ENTITY SYS_GID_MAX           SYSTEM "login.defs.d/SYS_GID_MAX.xml">
+<!ENTITY % config SYSTEM "config.xml">
+%config;
 ]>
 <refentry id='groupadd.8'>
   <!-- $Id$ -->
@@ -215,7 +217,7 @@
        may follow. In regular expression terms: [a-z_][a-z0-9_-]*[$]?
      </para>
      <para>
-       Groupnames may only be up to 16 characters long.
+       Groupnames may only be up to &GROUP_NAME_MAX_LENGTH; characters long.
      </para>
      <para>
        You may not add a NIS or LDAP group. This must be performed on the

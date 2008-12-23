@@ -1,5 +1,10 @@
 2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/groupadd.8.xml, configure.in, man/config.xml.in: Use the
+	real group name length limit in the documentation.
+
+2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/Makefile.am: Only link with the needed library. When
 	compiled with PAM support, chfn, chsh, login, newgrp, passwd, and
 	su do not need the libcrypt library.

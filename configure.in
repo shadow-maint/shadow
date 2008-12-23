@@ -264,6 +264,8 @@ elif test "$with_group_name_max_length" = "yes" ; then
 	with_group_name_max_length=16
 fi
 AC_DEFINE_UNQUOTED(GROUP_NAME_MAX_LENGTH, $with_group_name_max_length, [max group name length])
+AC_SUBST(GROUP_NAME_MAX_LENGTH)
+GROUP_NAME_MAX_LENGTH="$with_group_name_max_length"
 
 AM_CONDITIONAL(USE_SHA_CRYPT, test "x$with_sha_crypt" = "xyes")
 if test "$with_sha_crypt" = "yes"; then
@@ -481,6 +483,7 @@ AC_CONFIG_FILES([
 	po/Makefile.in
 	doc/Makefile
 	man/Makefile
+	man/config.xml
 	man/po/Makefile.in
 	man/cs/Makefile
 	man/de/Makefile
