@@ -1,5 +1,10 @@
 2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/cleanup_group.c: Fix compilation when compiled without
+	shadow group support.
+
+2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupdel.c: Remove the fail_exit () declaration.
 
 2008-12-22  Nicolas François  <nicolas.francois@centraliens.net>

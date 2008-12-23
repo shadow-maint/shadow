@@ -90,6 +90,7 @@ void cleanup_report_mod_group (void *cleanup_info)
 #endif
 }
 
+#ifdef SHADOWGRP
 void cleanup_report_mod_gshadow (void *cleanup_info)
 {
 	const struct cleanup_info_mod *info;
@@ -106,6 +107,7 @@ void cleanup_report_mod_gshadow (void *cleanup_info)
 	              SHADOW_AUDIT_FAILURE);
 #endif
 }
+#endif
 
 /*
  * cleanup_report_add_group_group - Report failure to add a group to group
