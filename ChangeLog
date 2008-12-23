@@ -1,5 +1,10 @@
 2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/chkname.c: Use a bool when possible instead of integers.
+	* libmisc/chkname.c: Add brackets and parenthesis.
+
+2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupadd.8.xml, configure.in, man/config.xml.in: Use the
 	real group name length limit in the documentation.
 
