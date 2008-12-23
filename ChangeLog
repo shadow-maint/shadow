@@ -1,5 +1,11 @@
 2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/Makefile.am: Only link with the needed library. When
+	compiled with PAM support, chfn, chsh, login, newgrp, passwd, and
+	su do not need the libcrypt library.
+
+2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/cleanup_group.c: Fix compilation when compiled without
 	shadow group support.
 
