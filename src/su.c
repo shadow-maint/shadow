@@ -561,6 +561,20 @@ int main (int argc, char **argv)
 		if (NULL != cp) {
 			addenv ("TERM", cp);
 		}
+
+		/*
+		 * For some terminals COLORTERM seems to be the only way
+		 * for checking for that specific terminal. For instance,
+		 * gnome-terminal sets its TERM as "xterm" but its
+		 * COLORTERM as "gnome-terminal". The COLORTERM variable
+		 * is also of use when running GNU screen since it sets
+		 * TERM to "screen" but doesn't touch COLORTERM.
+		 */
+		cp = getenv ("COLORTERM");
+		if (NULL != cp) {
+			addenv ("COLORTERM", cp);
+		}
+
 #ifndef USE_PAM
 		cp = getdef_str ("ENV_TZ");
 		if (NULL != cp) {

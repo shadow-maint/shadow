@@ -1,14 +1,19 @@
 Shadow SITES
 ============
 
+Homepage
+	http://pkg-shadow.alioth.debian.org/
+
 FTP site
 	ftp://pkg-shadow.alioth.debian.org/pub/pkg-shadow
 
 SVN repository
-	anonymous read only access: svn://svn.debian.org/pkg-shadow/
+	anonymous read only access: svn://svn.debian.org/pkg-shadow/upstream
 
 SVN web interface
-	http://svn.debian.org/wsvn/pkg-shadow
+	http://svn.debian.org/wsvn/pkg-shadow/upstream
+	or
+	http://svn.debian.org/viewsvn/pkg-shadow/upstream
 
 Mailing lists
 	for general discuss: pkg-shadow-devel@lists.alioth.debian.org
@@ -84,6 +89,7 @@ Martin Bene <mb@sime.com>
 Martin Mares <mj@gts.cz>
 Michael Meskes <meskes@topsystem.de>
 Michael Talbot-Wilson <mike@calypso.bns.com.au>
+Mike Frysinger <vapier@gentoo.org>
 Mike Pakovic <mpakovic@users.southeast.net>
 Nicolas François <nicolas.francois@centraliens.net>
 Nikos Mavroyanopoulos <nmav@i-net.paiko.gr>
@@ -92,7 +98,8 @@ Phillip Street
 Rafał Maszkowski <rzm@icm.edu.pl>
 Rani Chouha <ranibey@smartec.com>
 Sami Kerola <kerolasa@rocketmail.com>
-Seraphim Mellos  <mellos@ceid.upatras.gr>
+Sebastian Rick Rijkers <srrijkers@gmail.com>
+Seraphim Mellos <mellos@ceid.upatras.gr>
 Shane Watts <shane@nexus.mlckew.edu.au>
 Steve M. Robbins <steve@nyongwa.montreal.qc.ca>
 Thorsten Kukuk <kukuk@suse.de>
@@ -104,5 +111,6 @@ Werner Fink <werner@suse.de>
 Maintainers
 ===========
 
-Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2006)
+Tomasz Kłoczko <kloczek@pld.org.pl> (2000-2007)
+Nicolas François <nicolas.francois@centraliens.net> (2007-now)
 

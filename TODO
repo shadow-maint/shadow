@@ -1,3 +1,8 @@
+groupadd.8.xml
+ * Groupnames may only be up to 16 characters long.
+   => remove the note if no limits.
+   => should depend on the --with-group-name-max-length option
+
 libxcrypt support
  * http://wiki.linuxfromscratch.org/patches/browser/trunk/shadow/shadow-4.0.18.1-owl_blowfish-1.patch
 
@@ -94,6 +99,10 @@ ALL:
     entry (with a password).
   - Add check to move passwd passwords to shadow if there is a shadow
     file.
+
+- su
+  - add a login.defs configuration parameter to add variables to keep in
+    the environment with "su -l" (TERM/TERMCOLOR/...
 
 - vipw:
   - Is MAX_MEMBERS_PER_GROUP used by vipw?

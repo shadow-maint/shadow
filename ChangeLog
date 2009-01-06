@@ -1,3 +1,8 @@
+2009-01-06  Sebastian Rick Rijkers  <srrijkers@gmail.com>
+
+	* NEWS, src/su.c: Preserve COLORTERM in addition to TERM when su
+	is called with the -l option.
+
 2008-12-23  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/chkname.c: Use a bool when possible instead of integers.
