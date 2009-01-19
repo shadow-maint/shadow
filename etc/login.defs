@@ -169,7 +169,6 @@ TTYPERM		0600
 #
 #	ERASECHAR	Terminal ERASE character ('\010' = backspace).
 #	KILLCHAR	Terminal KILL character ('\025' = CTRL/U).
-#	UMASK		Default "umask" value.
 #	ULIMIT		Default "ulimit" value.
 #
 # The ERASECHAR and KILLCHAR are used only on System V machines.
@@ -180,8 +179,15 @@ TTYPERM		0600
 #
 ERASECHAR	0177
 KILLCHAR	025
-UMASK		022
 #ULIMIT		2097152
+
+# Default initial "umask" value for non-PAM enabled systems.
+# UMASK is also used by useradd and newusers to set the mode of new home
+# directories.
+# 022 is the default value, but 027, or even 077, could be considered
+# better for privacy. There is no One True Answer here: each sysadmin
+# must make up her mind.
+UMASK		022
 
 #
 # Password aging controls:

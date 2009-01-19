@@ -5,6 +5,7 @@
 	* man/limits.5.xml: Remove space before an end of tag.
 	* man/useradd.8.xml, man/login.defs.d/CREATE_HOME.xml,
 	man/login.defs.5.xml: Document the CREATE_HOME variable.
+	* etc/login.defs: Improve the documentation of UMASK.
 
 2009-01-06  Sebastian Rick Rijkers  <srrijkers@gmail.com>
 
