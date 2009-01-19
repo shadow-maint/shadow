@@ -36,6 +36,7 @@
 <!ENTITY CHSH_AUTH             SYSTEM "login.defs.d/CHSH_AUTH.xml">
 <!ENTITY CONSOLE               SYSTEM "login.defs.d/CONSOLE.xml">
 <!ENTITY CONSOLE_GROUPS        SYSTEM "login.defs.d/CONSOLE_GROUPS.xml">
+<!ENTITY CREATE_HOME           SYSTEM "login.defs.d/CREATE_HOME.xml">
 <!ENTITY DEFAULT_HOME          SYSTEM "login.defs.d/DEFAULT_HOME.xml">
 <!ENTITY ENCRYPT_METHOD        SYSTEM "login.defs.d/ENCRYPT_METHOD.xml">
 <!ENTITY ENV_HZ                SYSTEM "login.defs.d/ENV_HZ.xml">
@@ -142,6 +143,7 @@
       &CHSH_AUTH;
       &CONSOLE;
       &CONSOLE_GROUPS;
+      &CREATE_HOME;
       &DEFAULT_HOME;
       &ENCRYPT_METHOD;
       &ENV_HZ;
@@ -419,7 +421,7 @@
 	<term>useradd</term>
 	<listitem>
 	  <para>
-	    <!-- RedHat: CREATE_HOME-->
+	    CREATE_HOME
 	    GID_MAX GID_MIN
 	    MAIL_DIR MAX_MEMBERS_PER_GROUP
 	    PASS_MAX_DAYS PASS_MIN_DAYS PASS_WARN_AGE
