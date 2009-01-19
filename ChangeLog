@@ -2,6 +2,7 @@
 
 	* man/login.defs.d/UMASK.xml: Indicate how UMASK is used and
 	limitations.
+	* man/limits.5.xml: Remove space before an end of tag.
 
 2009-01-06  Sebastian Rick Rijkers  <srrijkers@gmail.com>
 

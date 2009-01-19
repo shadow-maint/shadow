@@ -101,7 +101,7 @@
 
     <para>
       For example, <emphasis remap='I'>L2D2048N5</emphasis> is a valid
-      <emphasis>LIMITS_STRING </emphasis>. For reading convenience, the
+      <emphasis>LIMITS_STRING</emphasis>. For reading convenience, the
       following entries are equivalent:
     </para>
 
