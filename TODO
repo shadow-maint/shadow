@@ -37,6 +37,7 @@ testsuite
 
 newusers
  - add logging to SYSLOG & AUDIT
+ - use CREATE_HOME
 
 faillog
  - accept numerical user and range of users
@@ -80,6 +81,9 @@ ALL:
   - home dir removed, but userdel may fail and may leave the user
     => warning needed
 
+- usermod
+  - the mode of new home directories should be set according to the
+    original mode. Does copy_tree does this?
 - passwd:
   - check combination of options (e.g. -u/-l)
 
