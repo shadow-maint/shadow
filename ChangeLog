@@ -1,3 +1,14 @@
+2009-01-26  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/gpasswd.c: Only report success to audit and syslog
+	when the changes are committed to the system. Do not log failure
+	for on-memory changes to audit or syslog. Make sure failures and
+	inconsistencies will be reported in case of unexpected failures
+	(e.g. malloc failures). Only specify an audit message if it is not
+	implicitly implied by the type argument. Removed fail_exit
+	(replaced by atexit(do_cleanups)). Log failures in case of
+	permission denied.
+
 2009-01-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/UMASK.xml: Indicate how UMASK is used and
