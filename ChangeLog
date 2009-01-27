@@ -1,3 +1,7 @@
+2009-01-27  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/nologin.8.xml: Fix typo (HYSTORY -> HISTORY).
+
 2009-01-26  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/gpasswd.c: Only report success to audit and syslog
