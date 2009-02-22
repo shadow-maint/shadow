@@ -1,3 +1,9 @@
+2009-02-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Avoid calling
+	getgrent()/getpwent() after they return NULL. This caused LDAP to
+	return at the beginning of the group/user entries.
+
 2009-01-27  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/nologin.8.xml: Fix typo (HYSTORY -> HISTORY).

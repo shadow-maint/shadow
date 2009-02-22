@@ -90,9 +90,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 	 * some users were created but the changes were not committed yet.
 	 */
 	setpwent ();
-	pw_rewind ();
-	while (   ((pwd = getpwent ()) != NULL)
-	       || ((pwd = pw_next ()) != NULL)) {
+	while ((pwd = getpwent ()) != NULL) {
 		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
 			user_id = pwd->pw_uid + 1;
 		}
@@ -102,6 +100,16 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		}
 	}
 	endpwent ();
+	pw_rewind ();
+	while ((pwd = pw_next ()) != NULL) {
+		if ((pwd->pw_uid >= user_id) && (pwd->pw_uid <= uid_max)) {
+			user_id = pwd->pw_uid + 1;
+		}
+		/* create index of used UIDs */
+		if (pwd->pw_uid <= uid_max) {
+			used_uids[pwd->pw_uid] = 1;
+		}
+	}
 
 	/*
 	 * If a user with UID equal to UID_MAX exists, the above algorithm

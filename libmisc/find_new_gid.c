@@ -89,9 +89,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 	 * some groups were created but the changes were not committed yet.
 	 */
 	setgrent ();
-	gr_rewind ();
-	while (   ((grp = getgrent ()) != NULL)
-	       || ((grp = gr_next ()) != NULL)) {
+	while ((grp = getgrent ()) != NULL) {
 		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
 			group_id = grp->gr_gid + 1;
 		}
@@ -101,6 +99,16 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		}
 	}
 	endgrent ();
+	gr_rewind ();
+	while ((grp = getgrent ()) != NULL) {
+		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
+			group_id = grp->gr_gid + 1;
+		}
+		/* create index of used GIDs */
+		if (grp->gr_gid <= gid_max) {
+			used_gids[grp->gr_gid] = 1;
+		}
+	}
 
 	/*
 	 * If a group with GID equal to GID_MAX exists, the above algorithm
