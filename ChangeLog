@@ -1,3 +1,8 @@
+2009-03-03  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, po/LINGUAS, po/kk.po: Added Kazakh translation. Thanks to
+	Timur Birsh <taem@linukz.org>.
+
 2009-02-22  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: Avoid calling
