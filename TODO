@@ -58,6 +58,7 @@ ALL:
   passwd have old piece of code with handling -r option and it will be good
   finish this and propagate on other shadow tools for allow operate on other
   user databases by well known tools.
+- Protect against signals. Register do_cleanups in a signal handler.
 
 - gpasswd
   - Add options --crypt-method and --sha-rounds
@@ -68,6 +69,7 @@ ALL:
   - Add support for -K in -D mode
   - Add option to create or not the mail spool (and set the default in -D
     mode)
+  - set the mask in mkdir?
 
 - add handle -n switch in groups and id command for allow query is
   group/user with specified id/gid exist - this will be very usable
