@@ -296,7 +296,7 @@ main (void)
 	      sprintf (dir, "%s/%s", DEFAULT_HOME, usrname);
 	    }
 	  else if (dir[strlen (dir) - 1] == '/')
-	    sprintf (dir, "%s%s", dir, usrname);
+	    sprintf (dir+strlen(dir), "%s", usrname);
 	}
       else
 	{

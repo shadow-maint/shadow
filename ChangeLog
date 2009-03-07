@@ -1,5 +1,10 @@
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* contrib/adduser-old.c, contrib/adduser.c: Do not use the target
+	of snprintf in one of the format's parameters.
+
+2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/groupmems.8.xml: groupmems does not create new user.
 
 2009-03-03  Nicolas François  <nicolas.francois@centraliens.net>

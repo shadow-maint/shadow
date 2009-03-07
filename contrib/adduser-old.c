@@ -230,7 +230,7 @@ void main()
 			fflush(stdin);
 		} else
 			if (dir[strlen(dir)-1]=='/')
-				sprintf(dir,"%s%s",dir,uname);
+				sprintf(dir+strlen(dir),"%s",uname);
 
 		printf("\nShell [%s]: ",DEFAULT_SHELL);
 		fflush(stdout);
