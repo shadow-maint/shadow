@@ -1,3 +1,7 @@
+2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/groupmems.8.xml: groupmems does not create new user.
+
 2009-03-03  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, po/LINGUAS, po/kk.po: Added Kazakh translation. Thanks to

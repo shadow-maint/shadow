@@ -81,7 +81,7 @@
       <varlistentry>
 	<term><option>-a</option>, <option>--add</option> <replaceable>user_name</replaceable></term>
 	<listitem>
-	  <para>Add a new user to the group membership list.</para>
+	  <para>Add an user to the group membership list.</para>
 	  <para condition="gshadow">
 	    If the <filename>/etc/gshadow</filename> file exist, and the
 	    group has no entry in the <filename>/etc/gshadow</filename>
