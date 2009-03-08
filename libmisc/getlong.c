@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,14 +34,14 @@
 #include "prototypes.h"
 #include "defines.h"
 
-int getlong(const char *numstr, long int *result)
+int getlong (const char *numstr, long int *result)
 {
 	long val;
 	char *endptr;
 
 	errno = 0;
 	val = strtol (numstr, &endptr, 10);
-	if (('\0' != *endptr) || (ERANGE == errno)) {
+	if (('\0' == numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
 		return 0;
 	}
 

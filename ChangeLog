@@ -1,5 +1,9 @@
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/getlong.c: Make sure the getlong argument is not empty.
+
+2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* contrib/adduser-old.c, contrib/adduser.c: Do not use the target
 	of snprintf in one of the format's parameters.
 
