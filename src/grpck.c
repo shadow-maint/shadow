@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -540,6 +540,14 @@ static void check_grp_file (int *errors, bool *changed)
 		if (!is_valid_group_name (grp->gr_name)) {
 			*errors += 1;
 			printf (_("invalid group name '%s'\n"), grp->gr_name);
+		}
+
+		/*
+		 * Check for invalid user ID.
+		 */
+		if (grp->gr_gid == (gid_t)-1) {
+			printf (_("invalid user ID '%lu'\n"), grp->gr_gid);
+			*errors += 1;
 		}
 
 		/*

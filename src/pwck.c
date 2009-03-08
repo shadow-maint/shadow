@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -392,6 +392,14 @@ static void check_pw_file (int *errors, bool *changed)
 		 */
 		if (!is_valid_user_name (pwd->pw_name)) {
 			printf (_("invalid user name '%s'\n"), pwd->pw_name);
+			*errors += 1;
+		}
+
+		/*
+		 * Check for invalid user ID.
+		 */
+		if (pwd->pw_uid == (uid_t)-1) {
+			printf (_("invalid user ID '%lu'\n"), pwd->pw_uid);
 			*errors += 1;
 		}
 

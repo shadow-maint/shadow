@@ -49,6 +49,7 @@ shadow-4.1.2.2 -> shadow-4.1.3						UNRELEASED
   * audit logging improvements.
   * error handling improvement (see above).
   * Speedup (see "addition of users or groups" above).
+  * do not create groups with GID set to (gid_t)-1.
 - groupdel
   * audit logging improvements.
   * error handling improvement (see above).
@@ -67,13 +68,20 @@ shadow-4.1.2.2 -> shadow-4.1.3						UNRELEASED
 - groupmod
   * audit logging improvements.
   * error handling improvement (see above).
+  * do not create groups with GID set to (gid_t)-1.
+- grpck
+  * warn for groups with GID set to (gid_t)-1.
 - newusers
   * Implement the -r, --system option.
   * Speedup (see "addition of users or groups" above).
+  * do not create users with UID set to (gid_t)-1.
+  * do not create groups with GID set to (gid_t)-1.
 - passwd
   * For compatibility with other passwd version, the --lock an --unlock
     options do not lock or unlock the user account anymore.  They only
     lock or unlock the user's password.
+- pwck
+  * warn for users with UID set to (uid_t)-1.
 - su
   * 
 - useradd
@@ -81,11 +89,13 @@ shadow-4.1.2.2 -> shadow-4.1.3						UNRELEASED
   * Speedup (see "addition of users or groups" above).
   * See CREATE_HOME above.
   * New -M/--no-create-home option to disable CREATE_HOME.
+  * do not create users with UID set to (gid_t)-1.
 - userdel
   * audit logging improvements.
 - usermod
   * Allow adding LDAP users (or any user not present in the local passwd
     file) to local groups
+  * do not create users with UID set to (gid_t)-1.
 
 shadow-4.1.2.1 -> shadow-4.1.2.2					23-11-2008
 
