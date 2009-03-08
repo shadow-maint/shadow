@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -139,13 +139,19 @@ extern int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 /* find_new_uid.c */
 extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
 
+/* get_gid.c */
+extern int get_gid (const char *gidstr, gid_t *gid);
+
 /* getlong.c */
-extern int getlong(const char *numstr, long int *result);
+extern int getlong (const char *numstr, long int *result);
 
 /* getrange */
-extern int getrange(char *range,
-                    unsigned long *min, bool *has_min,
-                    unsigned long *max, bool *has_max);
+extern int getrange (char *range,
+                     unsigned long *min, bool *has_min,
+                     unsigned long *max, bool *has_max);
+
+/* get_uid.c */
+extern int get_uid (const char *uidstr, uid_t *uid);
 
 /* fputsx.c */
 extern char *fgetsx (char *, int, FILE *);

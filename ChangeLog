@@ -1,6 +1,9 @@
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/getlong.c: Make sure the getlong argument is not empty.
+	* libmisc/get_gid.c, libmisc/get_uid.c, libmisc/Makefile.am,
+	lib/prototypes.h: Added get_uid() and get_gid() to parse user and
+	group IDs.
 
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
