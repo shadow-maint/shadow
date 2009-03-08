@@ -4,6 +4,8 @@
 	* libmisc/get_gid.c, libmisc/get_uid.c, libmisc/Makefile.am,
 	lib/prototypes.h: Added get_uid() and get_gid() to parse user and
 	group IDs.
+	* NEWS, src/grpck.c, src/pwck.c: Issue a warning if an ID is set
+	to -1.
 
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
