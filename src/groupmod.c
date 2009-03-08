@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -104,7 +104,6 @@ static void lock_files (void);
 static void prepare_failure_reports (void);
 static void open_files (void);
 static void close_files (void);
-static gid_t get_gid (const char *gidstr);
 static void update_primary_groups (gid_t ogid, gid_t ngid);
 
 /*
@@ -325,24 +324,6 @@ static void check_new_name (void)
 }
 
 /*
- * get_id - validate and get group ID
- */
-static gid_t get_gid (const char *gidstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (gidstr, &errptr, 10); /* FIXME: Should be strtoul ? */
-	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
-		fprintf (stderr,
-		         _("%s: invalid numeric argument '%s'\n"),
-		         Prog, gidstr);
-		exit (E_BAD_ARG);
-	}
-	return (gid_t) val;
-}
-
-/*
  * process_flags - perform command line argument setting
  *
  *	process_flags() interprets the command line arguments and sets the
@@ -367,7 +348,13 @@ static void process_flags (int argc, char **argv)
 		switch (c) {
 		case 'g':
 			gflg = true;
-			group_newid = get_gid (optarg);
+			if (   (get_gid (optarg, &group_newid) == 0)
+			    || (group_newid == (gid_t)-1)) {
+				fprintf (stderr,
+				         _("%s: invalid group ID '%s'\n"),
+				         Prog, optarg);
+				exit (E_BAD_ARG);
+			}
 			break;
 		case 'n':
 			nflg = true;

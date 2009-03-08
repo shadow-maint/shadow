@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -154,7 +154,6 @@ static void update_gshadow (void);
 static void grp_update (void);
 
 static long get_number (const char *);
-static uid_t get_id (const char *);
 static void process_flags (int, char **);
 static void close_files (void);
 static void open_files (void);
@@ -193,11 +192,15 @@ static void date_to_str (char *buf, size_t maxsize,
  */
 static struct group *getgr_nam_gid (const char *grname)
 {
-	long val;
-	char *errptr;
+	long long int val;
+	char *endptr;
 
-	val = strtol (grname, &errptr, 10);
-	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && val >= 0) {
+	errno = 0;
+	val = strtoll (grname, &errptr, 10);
+	if (   ('\0' != *grname)
+	    && ('\0' == *endptr)
+	    && (ERANGE != errno)
+	    && (val == (gid_t)val)) {
 		return xgetgrgid ((gid_t) val);
 	}
 	return xgetgrnam (grname);
@@ -795,20 +798,6 @@ static long get_number (const char *numstr)
 	return val;
 }
 
-static uid_t get_id (const char *uidstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (uidstr, &errptr, 10);
-	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 uidstr);
-		exit (E_BAD_ARG);
-	}
-	return (uid_t) val;
-}
-
 /*
  * process_flags - perform command line argument setting
  *
@@ -1003,7 +992,13 @@ static void process_flags (int argc, char **argv)
 				sflg = true;
 				break;
 			case 'u':
-				user_newid = get_id (optarg);
+				if (   (get_uid (optarg, &user_newid) ==0)
+				    || (user_newid == (uid_t)-1)) {
+					fprintf (stderr,
+					         _("%s: invalid user ID '%s'\n"),
+					         Prog, optarg);
+					exit (E_BAD_ARG);
+				}
 				uflg = true;
 				break;
 			case 'U':

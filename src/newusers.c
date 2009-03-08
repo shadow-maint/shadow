@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -89,7 +89,7 @@ static bool spw_locked = false;
 static void usage (void);
 static void fail_exit (int);
 static int add_group (const char *, const char *, gid_t *, gid_t);
-static int get_uid (const char *, uid_t *);
+static int get_user_id (const char *, uid_t *);
 static int add_user (const char *, uid_t, gid_t);
 static void update_passwd (struct passwd *, const char *);
 static int add_passwd (struct passwd *, const char *);
@@ -193,25 +193,32 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		 * The GID is a number, which means either this is a brand
 		 * new group, or an existing group.
 		 */
-		char *endptr;
-		unsigned long int i = strtoul (gid, &endptr, 10);
-		if ((*endptr != '\0') || (ERANGE == errno)) {
+
+		if (get_gid (gid, &grent.gr_gid) == 0) {
 			fprintf (stderr,
-			         _("%s: group ID '%s' is not valid\n"),
+			         _("%s: invalid group ID '%s'\n"),
 			         Prog, gid);
 			return -1;
 		}
+
 		/* Look in both the system database (getgrgid) and in the
 		 * internal database (gr_locate_gid), which may contain
 		 * uncommitted changes */
-		if (   (getgrgid ((gid_t) i) != NULL)
-		    || (gr_locate_gid ((gid_t) i) != NULL)) {
+		if (   (getgrgid ((gid_t) grent.gr_gid) != NULL)
+		    || (gr_locate_gid ((gid_t) grent.gr_gid) != NULL)) {
 			/* The user will use this ID for her
 			 * primary group */
-			*ngid = (gid_t) i;
+			*ngid = (gid_t) grent.gr_gid;
 			return 0;
 		}
-		grent.gr_gid = (gid_t) i;
+
+		/* Do not create groups with GID == (gid_t)-1 */
+		if (grent.gr_gid == (gid_t)-1) {
+			fprintf (stderr,
+			         _("%s: invalid group ID '%s'\n"),
+			         Prog, gid);
+			return -1;
+		}
 	} else {
 		/* The gid parameter can be "" or a name which is not
 		 * already the name of an existing group.
@@ -282,22 +289,19 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 	return 0;
 }
 
-static int get_uid (const char *uid, uid_t *nuid) {
+static int get_user_id (const char *uid, uid_t *nuid) {
 
 	/*
 	 * The first guess for the UID is either the numerical UID that the
 	 * caller provided, or the next available UID.
 	 */
 	if (isdigit (uid[0])) {
-		char *endptr;
-		unsigned long int i = strtoul (uid, &endptr, 10);
-		if (('\0' != *endptr) || (ERANGE == errno)) {
+		if ((get_uid (uid, nuid) == 0) || (*nuid == (uid_t)-1)) {
 			fprintf (stderr,
-			         _("%s: user ID '%s' is not valid\n"),
+			         _("%s: invalid user ID '%s'\n"),
 			         Prog, uid);
 			return -1;
 		}
-		*nuid = (uid_t) i;
 	} else {
 		if ('\0' != uid[0]) {
 			const struct passwd *pwd;
@@ -824,7 +828,7 @@ int main (int argc, char **argv)
 		}
 
 		if (   (NULL == pw)
-		    && (get_uid (fields[2], &uid) != 0)) {
+		    && (get_user_id (fields[2], &uid) != 0)) {
 			fprintf (stderr,
 			         _("%s: line %d: can't create user\n"),
 			         Prog, line);

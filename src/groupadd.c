@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -98,7 +98,6 @@ static void grp_update (void);
 static void check_new_name (void);
 static void close_files (void);
 static void open_files (void);
-static gid_t get_gid (const char *gidstr);
 static void process_flags (int argc, char **argv);
 static void check_flags (void);
 static void check_perms (void);
@@ -363,23 +362,6 @@ static void open_files (void)
 }
 
 /*
- * get_id - validate and get group ID
- */
-static gid_t get_gid (const char *gidstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (gidstr, &errptr, 10);
-	if (('\0' != *errptr) || (errno == ERANGE) || (val < 0)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"),
-		         Prog, gidstr);
-		exit (E_BAD_ARG);
-	}
-	return (gid_t) val;
-}
-
-/*
  * process_flags - parse the command line options
  *
  *	It will not return if an error is encountered.
@@ -419,7 +401,13 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'g':
 			gflg = true;
-			group_id = get_gid (optarg);
+			if (   (get_gid (optarg, &group_id) == 0)
+			    || (group_id == (gid_t)-1)) {
+				fprintf (stderr,
+				         _("%s: invalid group ID '%s'\n"),
+				         Prog, optarg);
+				exit (E_BAD_ARG);
+			}
 			break;
 		case 'h':
 			usage ();

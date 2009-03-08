@@ -2,7 +2,7 @@
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -171,7 +171,6 @@ static bool home_added = false;
 static void fail_exit (int);
 static struct group *getgr_nam_gid (const char *);
 static long get_number (const char *);
-static uid_t get_uid (const char *);
 static void get_defaults (void);
 static void show_defaults (void);
 static int set_defaults (void);
@@ -268,11 +267,15 @@ static void fail_exit (int code)
 
 static struct group *getgr_nam_gid (const char *grname)
 {
-	long gid;
-	char *errptr;
+	long long int gid;
+	char *endptr;
 
-	gid = strtol (grname, &errptr, 10);
-	if (*grname != '\0' && *errptr == '\0' && errno != ERANGE && gid >= 0) {
+	errno = 0;
+	gid = strtoll (grname, &errptr, 10);
+	if (   ('\0' != *grname)
+	    && ('\0' == *endptr)
+	    && (ERANGE != errno)
+	    && (gid == (gid_t)gid)) {
 		return xgetgrgid ((gid_t) gid);
 	}
 	return xgetgrnam (grname);
@@ -284,27 +287,13 @@ static long get_number (const char *numstr)
 	char *errptr;
 
 	val = strtol (numstr, &errptr, 10);
-	if (('\0' != *errptr) || (ERANGE == errno)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 numstr);
+	if (('\0' == *numstr) || ('\0' != *errptr) || (ERANGE == errno)) {
+		fprintf (stderr,
+		         _("%s: invalid numeric argument '%s'\n"),
+		         Prog, numstr);
 		exit (E_BAD_ARG);
 	}
 	return val;
-}
-
-static uid_t get_uid (const char *uidstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (uidstr, &errptr, 10);
-	if (('\0' != *errptr) || (ERANGE == errno) || (val < 0)) {
-		fprintf (stderr,
-			 _("%s: invalid numeric argument '%s'\n"), Prog,
-			 uidstr);
-		exit (E_BAD_ARG);
-	}
-	return (uid_t) val;
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
@@ -352,27 +341,14 @@ static void get_defaults (void)
 		 * Primary GROUP identifier
 		 */
 		if (MATCH (buf, DGROUP)) {
-			unsigned int val = (unsigned int) strtoul (cp, &ep, 10);
-			const struct group *grp;
-
-			if (*cp != '\0' && *ep == '\0') { /* valid number */
-				def_group = val;
-				/* local, no need for xgetgrgid */
-				grp = getgrgid (def_group);
-				if (NULL != grp) {
-					def_gname = xstrdup (grp->gr_name);
-				} else {
-					fprintf (stderr,
-						 _("%s: GID '%s' does not exist\n"),
-						 Prog, cp);
-				}
-			/* local, no need for xgetgrnam */
-			} else if ((grp = getgrnam (cp)) != NULL) {
-				def_group = grp->gr_gid;
-				def_gname = xstrdup (cp);
-			} else {
+			const struct group *grp = getgr_nam_gid (cp);
+			if (NULL == grp) {
 				fprintf (stderr,
-					 _("%s: group '%s' does not exist\n"), Prog, cp);
+				         _("%s: group '%s' does not exist\n"),
+				         Prog, cp);
+			} else {
+				def_group = grp->gr_gid;
+				def_gname = xstrdup (grp->gr_name);
 			}
 		}
 
@@ -396,7 +372,10 @@ static void get_defaults (void)
 		else if (MATCH (buf, INACT)) {
 			long val = strtol (cp, &ep, 10);
 
-			if (('\0' != *cp) || (ERANGE == errno)) {
+			if (   ('\0' != *cp)
+			    && ('\0' == *ep)
+			    && (ERANGE != errno)
+			    && (val >= 0)) {
 				def_inactive = val;
 			} else {
 				def_inactive = -1;
@@ -1173,7 +1152,13 @@ static void process_flags (int argc, char **argv)
 				sflg = true;
 				break;
 			case 'u':
-				user_id = get_uid (optarg);
+				if (   (get_uid (optarg, &user_id) == 0)
+				    || (user_id == (gid_t)-1)) {
+					fprintf (stderr,
+					         _("%s: invalid user ID '%s'\n"),
+					         Prog, optarg);
+					exit (E_BAD_ARG);
+				}
 				uflg = true;
 				break;
 			case 'U':

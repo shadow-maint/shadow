@@ -6,6 +6,9 @@
 	group IDs.
 	* NEWS, src/grpck.c, src/pwck.c: Issue a warning if an ID is set
 	to -1.
+	* NEWS, src/newusers.c, src/usermod.c, src/useradd.c,
+	src/groupmod.c, src/groupadd.c: Make sure no user or group are
+	created with an ID set to -1.
 
 2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
 
