@@ -399,7 +399,7 @@ static void check_pw_file (int *errors, bool *changed)
 		 * Check for invalid user ID.
 		 */
 		if (pwd->pw_uid == (uid_t)-1) {
-			printf (_("invalid user ID '%lu'\n"), pwd->pw_uid);
+			printf (_("invalid user ID '%lu'\n"), (long unsigned int)pwd->pw_uid);
 			*errors += 1;
 		}
 

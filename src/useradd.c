@@ -271,7 +271,7 @@ static struct group *getgr_nam_gid (const char *grname)
 	char *endptr;
 
 	errno = 0;
-	gid = strtoll (grname, &errptr, 10);
+	gid = strtoll (grname, &endptr, 10);
 	if (   ('\0' != *grname)
 	    && ('\0' == *endptr)
 	    && (ERANGE != errno)
@@ -284,10 +284,10 @@ static struct group *getgr_nam_gid (const char *grname)
 static long get_number (const char *numstr)
 {
 	long val;
-	char *errptr;
+	char *endptr;
 
-	val = strtol (numstr, &errptr, 10);
-	if (('\0' == *numstr) || ('\0' != *errptr) || (ERANGE == errno)) {
+	val = strtol (numstr, &endptr, 10);
+	if (('\0' == *numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
 		fprintf (stderr,
 		         _("%s: invalid numeric argument '%s'\n"),
 		         Prog, numstr);

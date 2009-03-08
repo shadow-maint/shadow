@@ -546,7 +546,7 @@ static void check_grp_file (int *errors, bool *changed)
 		 * Check for invalid user ID.
 		 */
 		if (grp->gr_gid == (gid_t)-1) {
-			printf (_("invalid user ID '%lu'\n"), grp->gr_gid);
+			printf (_("invalid user ID '%lu'\n"), (long unsigned int)grp->gr_gid);
 			*errors += 1;
 		}
 

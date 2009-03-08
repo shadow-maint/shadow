@@ -196,7 +196,7 @@ static struct group *getgr_nam_gid (const char *grname)
 	char *endptr;
 
 	errno = 0;
-	val = strtoll (grname, &errptr, 10);
+	val = strtoll (grname, &endptr, 10);
 	if (   ('\0' != *grname)
 	    && ('\0' == *endptr)
 	    && (ERANGE != errno)
@@ -787,10 +787,10 @@ static void grp_update (void)
 static long get_number (const char *numstr)
 {
 	long val;
-	char *errptr;
+	char *endptr;
 
-	val = strtol (numstr, &errptr, 10);
-	if (('\0' != *errptr) || (ERANGE == errno)) {
+	val = strtol (numstr, &endptr, 10);
+	if (('\0' != *endptr) || (ERANGE == errno)) {
 		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
 			 numstr);
 		exit (E_BAD_ARG);
