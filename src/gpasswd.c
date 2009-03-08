@@ -695,7 +695,9 @@ static void close_files (void)
 
 	log_gpasswd_success_system (NULL);
 	del_cleanup (log_gpasswd_success_group);
+#ifdef SHADOWGRP
 	del_cleanup (log_gpasswd_success_gshadow);
+#endif
 }
 
 /*

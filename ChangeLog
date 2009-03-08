@@ -1,4 +1,9 @@
-2009-03-07  Nicolas François  <nicolas.francois@centraliens.net>
+2009-03-09  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/gpasswd.c: log_gpasswd_success_gshadow only exists ifdef
+	SHADOWGRP.
+
+2009-03-08  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/getlong.c: Make sure the getlong argument is not empty.
 	* libmisc/get_gid.c, libmisc/get_uid.c, libmisc/Makefile.am,
