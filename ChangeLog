@@ -1,5 +1,10 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/usermod.8.xml: use a <replaceable> instead of a
+	<emphasis remap='I'>.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/newusers.8.xml: Document the behavior of newusers for each
 	field.
 	* man/newusers.8.xml: Do not add the note on PAM on non-PAM

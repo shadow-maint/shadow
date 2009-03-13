@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1991 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -173,9 +173,9 @@
 	</term>
 	<listitem>
 	  <para>
-	    The name of the user will be changed from <emphasis
-	    remap='I'>LOGIN</emphasis> to <emphasis
-	    remap='I'>NEW_LOGIN</emphasis>. Nothing else is changed. In
+	    The name of the user will be changed from
+	    <replaceable>LOGIN</replaceable> to
+	    <replaceable>NEW_LOGIN</replaceable>. Nothing else is changed. In
 	    particular, the user's home directory name should probably be
 	    changed manually to reflect the new login name.
 	  </para>
