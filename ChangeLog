@@ -1,5 +1,13 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.5.xml: Indicate that sg uses the same variables
+	as newgrp.
+	* man/login.defs.5.xml: vipw does not use any variable.
+	* man/login.defs.5.xml: In PAM enabled configurations, login still
+	uses some login.defs variables.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/usermod.8.xml: use a <replaceable> instead of a
 	<emphasis remap='I'>.
 
