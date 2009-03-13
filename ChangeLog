@@ -1,3 +1,10 @@
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/newusers.8.xml: Document the behavior of newusers for each
+	field.
+	* man/newusers.8.xml: Do not add the note on PAM on non-PAM
+	enabled configurations.
+
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/newusers.c: Make sure the SHA related variables are not
