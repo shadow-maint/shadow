@@ -8,6 +8,8 @@
 	* src/chgpasswd.c: Make sure the SHA related variables is not
 	compiled when disabled at configuration time.
 	* src/chgpasswd.c: Fix the test for getlong() failure.
+	* src/useradd.c, man/useradd.8.xml: Added long name for the -l
+	option: --no-log-init.
 
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 

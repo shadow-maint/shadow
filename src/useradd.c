@@ -700,7 +700,7 @@ static void usage (void)
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 	         "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-	         "  -l,                           do not add the user to the lastlog and\n"
+	         "  -l, --no-log-init             do not add the user to the lastlog and\n"
 	         "                                faillog databases\n"
 	         "  -m, --create-home             create home directory for the new user\n"
 	         "                                account\n"
@@ -966,6 +966,7 @@ static void process_flags (int argc, char **argv)
 			{"key", required_argument, NULL, 'K'},
 			{"create-home", no_argument, NULL, 'm'},
 			{"no-create-home", no_argument, NULL, 'M'},
+			{"no-log-init", no_argument, NULL, 'l'},
 			{"no-user-group", no_argument, NULL, 'N'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
