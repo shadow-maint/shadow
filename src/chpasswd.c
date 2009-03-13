@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,10 +57,14 @@ char *Prog;
 static bool cflg   = false;
 static bool eflg   = false;
 static bool md5flg = false;
+#ifdef USE_SHA_CRYPT
 static bool sflg   = false;
+#endif
 
 static const char *crypt_method = NULL;
+#ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
+#endif
 
 static bool is_shadow_pwd;
 static bool pw_locked = false;
@@ -198,12 +202,14 @@ static void process_flags (int argc, char **argv)
  */
 static void check_flags (void)
 {
+#ifdef USE_SHA_CRYPT
 	if (sflg && !cflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
+#endif
 
 	if ((eflg && (md5flg || cflg)) ||
 	    (md5flg && cflg)) {
@@ -434,9 +440,11 @@ int main (int argc, char **argv)
 			if (md5flg) {
 				crypt_method = "MD5";
 			} else if (crypt_method != NULL) {
+#ifdef USE_SHA_CRYPT
 				if (sflg) {
 					arg = &sha_rounds;
 				}
+#endif
 			} else {
 				crypt_method = NULL;
 			}

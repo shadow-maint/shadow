@@ -3,6 +3,11 @@
 	* src/newusers.c: Make sure the SHA related variables are not
 	compiled when disabled at configuration time.
 	* src/newusers.c: Added FIXME
+	* src/chpasswd.c: Make sure the SHA related variables is not
+	compiled when disabled at configuration time.
+	* src/chgpasswd.c: Make sure the SHA related variables is not
+	compiled when disabled at configuration time.
+	* src/chgpasswd.c: Fix the test for getlong() failure.
 
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 
