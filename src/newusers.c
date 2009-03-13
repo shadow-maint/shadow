@@ -71,10 +71,14 @@ char *Prog;
 
 static bool cflg = false;
 static bool rflg = false;	/* create a system account */
+#ifdef USE_SHA_CRYPT
 static bool sflg = false;
+#endif
 
 static char *crypt_method = NULL;
+#ifdef USE_SHA_CRYPT
 static long sha_rounds = 5000;
+#endif
 
 static bool is_shadow;
 #ifdef SHADOWGRP
@@ -236,6 +240,7 @@ static int add_group (const char *name, const char *gid, gid_t *ngid, uid_t uid)
 		grent.gr_name = xstrdup (gid);
 	} else {
 		grent.gr_name = xstrdup (name);
+/* FIXME: check if the group exist */
 	}
 
 	/* Check if this is a valid group name */
@@ -364,9 +369,11 @@ static void update_passwd (struct passwd *pwd, const char *password)
 {
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
+#ifdef USE_SHA_CRYPT
 		if (sflg) {
 			crypt_arg = &sha_rounds;
 		}
+#endif
 	}
 
 	if ((crypt_method != NULL) && (0 == strcmp(crypt_method, "NONE"))) {
@@ -387,9 +394,11 @@ static int add_passwd (struct passwd *pwd, const char *password)
 	struct spwd spent;
 	void *crypt_arg = NULL;
 	if (crypt_method != NULL) {
+#ifdef USE_SHA_CRYPT
 		if (sflg) {
 			crypt_arg = &sha_rounds;
 		}
+#endif
 	}
 
 	/*
@@ -494,7 +503,7 @@ static void process_flags (int argc, char **argv)
 #ifdef USE_SHA_CRYPT
 		case 's':
 			sflg = true;
-			if (!getlong(optarg, &sha_rounds)) {
+			if (getlong(optarg, &sha_rounds) == 0) {
 				fprintf (stderr,
 				         _("%s: invalid numeric argument '%s'\n"),
 				         Prog, optarg);
@@ -531,12 +540,14 @@ static void process_flags (int argc, char **argv)
  */
 static void check_flags (void)
 {
+#ifdef USE_SHA_CRYPT
 	if (sflg && !cflg) {
 		fprintf (stderr,
 		         _("%s: %s flag is only allowed with the %s flag\n"),
 		         Prog, "-s", "-c");
 		usage ();
 	}
+#endif
 
 	if (cflg) {
 		if (   (0 != strcmp (crypt_method, "DES"))
@@ -908,6 +919,7 @@ int main (int argc, char **argv)
 
 		if (   ('\0' != newpw.pw_dir[0])
 		    && (access (newpw.pw_dir, F_OK) != 0)) {
+/* FIXME: should check for directory */
 			mode_t msk = 0777 & ~getdef_num ("UMASK",
 			                                 GETDEF_DEFAULT_UMASK);
 			if (mkdir (newpw.pw_dir, msk) != 0) {

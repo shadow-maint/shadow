@@ -1,5 +1,11 @@
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Make sure the SHA related variables are not
+	compiled when disabled at configuration time.
+	* src/newusers.c: Added FIXME
+
+2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: Remove the documentation of options from the
 	main() documentation. It will always be outdated here.
 
