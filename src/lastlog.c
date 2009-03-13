@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2000 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,6 +41,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
+#include <assert.h>
 #include "defines.h"
 #include "prototypes.h"
 
@@ -55,20 +56,20 @@
  * Global variables
  */
 static FILE *lastlogfile;	/* lastlog file stream */
-static unsigned long umin;	/* if uflg, only display users with uid >= umin */
+static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
 static bool has_umin = false;
-static unsigned long umax;	/* if uflg, only display users with uid <= umax */
+static unsigned long umax;	/* if uflg and has_umax, only display users with uid <= umax */
 static bool has_umax = false;
 static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
 static int inverse_days;	/* number of days to consider for print command */
 static time_t inverse_seconds;	/* that number of days in seconds */
+static struct stat statbuf;	/* fstat buffer for file size */
 
 
 static bool uflg = false;	/* print only an user of range of users */
 static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
-static struct lastlog lastlog;	/* scratch structure to play with ... */
 static struct passwd *pwent;
 
 #define	NOW	(time ((time_t *) 0))
@@ -92,6 +93,8 @@ static void print_one (const struct passwd *pw)
 	char *cp;
 	struct tm *tm;
 	time_t ll_time;
+	off_t offset;
+	struct lastlog ll;
 
 #ifdef HAVE_STRFTIME
 	char ptime[80];
@@ -101,6 +104,41 @@ static void print_one (const struct passwd *pw)
 		return;
 	}
 
+
+	offset = pw->pw_uid * sizeof (ll);
+
+	if (offset <= (statbuf.st_size - sizeof (ll))) {
+		/* fseeko errors are not really relevant for us. */
+		assert ( fseeko (lastlogfile, offset, SEEK_SET) == 0 );
+		/* lastlog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread ((char *) &ll, sizeof (ll), 1, lastlogfile) != 1) {
+			fprintf (stderr,
+			         _("lastlog: Failed to get the entry for UID %d\n"),
+			         pw->pw_uid);
+			exit (1);
+		}
+	} else {
+		/* Outsize of the lastlog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse lastlog file).
+		 */
+		memzero (&ll, sizeof (ll));
+	}
+
+	/* Filter out entries that do not match with the -t or -b options */
+	if (tflg && ((NOW - ll.ll_time) > seconds)) {
+		return;
+	}
+
+	if (bflg && ((NOW - ll.ll_time) < inverse_seconds)) {
+		return;
+	}
+
+	/* Print the header only once */
 	if (!once) {
 #ifdef HAVE_LL_HOST
 		puts (_("Username         Port     From             Latest"));
@@ -109,7 +147,8 @@ static void print_one (const struct passwd *pw)
 #endif
 		once = true;
 	}
-	ll_time = lastlog.ll_time;
+
+	ll_time = ll.ll_time;
 	tm = localtime (&ll_time);
 #ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%a %b %e %H:%M:%S %z %Y", tm);
@@ -119,50 +158,35 @@ static void print_one (const struct passwd *pw)
 	cp[24] = '\0';
 #endif
 
-	if (lastlog.ll_time == (time_t) 0) {
+	if (ll.ll_time == (time_t) 0) {
 		cp = _("**Never logged in**\0");
 	}
 
 #ifdef HAVE_LL_HOST
-	printf ("%-16s %-8.8s %-16.16s %s\n", pw->pw_name,
-		lastlog.ll_line, lastlog.ll_host, cp);
+	printf ("%-16s %-8.8s %-16.16s %s\n",
+	        pw->pw_name, ll.ll_line, ll.ll_host, cp);
 #else
-	printf ("%-16s\t%-8.8s %s\n", pw->pw_name, lastlog.ll_line, cp);
+	printf ("%-16s\t%-8.8s %s\n",
+	        pw->pw_name, ll.ll_line, cp);
 #endif
 }
 
 static void print (void)
 {
-	off_t offset;
-	uid_t user;
-
-	setpwent ();
-	while ( (pwent = getpwent ()) != NULL ) {
-		user = pwent->pw_uid;
-		if (   uflg
-		    && (   (has_umin && user < (uid_t)umin)
-		        || (has_umax && user > (uid_t)umax))) {
-			continue;
+	if (uflg && has_umin && has_umax && (umin == umax)) {
+		print_one (getpwuid ((uid_t)umin));
+	} else {
+		setpwent ();
+		while ( (pwent = getpwent ()) != NULL ) {
+			if (   uflg
+			    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
+			        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
+				continue;
+			}
+			print_one (pwent);
 		}
-		offset = user * sizeof lastlog;
-
-		fseeko (lastlogfile, offset, SEEK_SET);
-		if (fread ((char *) &lastlog, sizeof lastlog, 1,
-			   lastlogfile) != 1) {
-			continue;
-		}
-
-		if (tflg && ((NOW - lastlog.ll_time) > seconds)) {
-			continue;
-		}
-
-		if (bflg && ((NOW - lastlog.ll_time) < inverse_seconds)) {
-			continue;
-		}
-
-		print_one (pwent);
+		endpwent ();
 	}
-	endpwent ();
 }
 
 int main (int argc, char **argv)
@@ -181,9 +205,8 @@ int main (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 
-		while ((c =
-			getopt_long (argc, argv, "ht:b:u:", longopts,
-				     NULL)) != -1) {
+		while ((c = getopt_long (argc, argv, "ht:b:u:", longopts,
+		                         NULL)) != -1) {
 			switch (c) {
 			case 'h':
 				usage ();
@@ -207,7 +230,8 @@ int main (int argc, char **argv)
 				 *  - a range (-x, x-, x-y)
 				 */
 				uflg = true;
-				pwent = xgetpwnam (optarg);
+				/* local, no need for xgetpwnam */
+				pwent = getpwnam (optarg);
 				if (NULL != pwent) {
 					umin = (unsigned long) pwent->pw_uid;
 					has_umin = true;
@@ -243,6 +267,14 @@ int main (int argc, char **argv)
 	}
 
 	print ();
+	/* Get the laslog size */
+	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
+		fprintf (stderr,
+		         _("lastlog: Cannot get the size of %s: %s\n"),
+		         LASTLOG_FILE, strerror (errno));
+		exit (1);
+	}
+
 	fclose (lastlogfile);
 	exit (0);
 }

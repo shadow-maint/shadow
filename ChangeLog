@@ -1,3 +1,14 @@
+2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/lastlog.c: lastlog variable renamed to ll to avoid name
+	clash with the structure.
+	* src/lastlog.c: check the offset in print_one() so that it is
+	used for the display of one entry or a set of entries.
+	* src/lastlog.c: Do not loop over the whole user database when -u
+	is used with a single user.
+	* src/lastlog.c: Check the size of the lastlog file so that we
+	can identify failures to read.
+
 2009-03-13  Mike Frysinger  <vapier@gentoo.org>
 
 	* libmisc/salt.c: Removed l64a prototype. The libc declaration is
