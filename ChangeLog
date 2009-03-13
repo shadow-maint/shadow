@@ -10,6 +10,26 @@
 	* src/chgpasswd.c: Fix the test for getlong() failure.
 	* src/useradd.c, man/useradd.8.xml: Added long name for the -l
 	option: --no-log-init.
+	* src/faillog.c: Added support for the specification of a range of
+	users with -u.
+	* src/faillog.c: Do not call print_one() for users which do not
+	exist.
+	* src/faillog.c: Make sure the user's entry is not outside the
+	faillog file and initialize the faillog structure in that case.
+	* src/faillog.c: Move print_one() closer to print().
+	* src/faillog.c: reset(), setmax(), set_locktime() can also change
+	entries of user which do not exist.
+	* src/faillog.c: reset(), setmax() and set_locktime() shall not
+	create entries for users which have no entries if the value has to
+	be set to 0.
+	* src/faillog.c: reset(), setmax() and set_locktime(): better
+	handling of users whose entry is outside the faillog file.
+	* src/faillog.c: Improved option handling. Options can now be
+	specified in any order.
+	* src/faillog.c: Improved warnings when options are not
+	compatible or when the faillog cannot be open with the right mode.
+	* src/faillog.c: Only fstat the faillog file once.
+	* man/faillog.8.xml: Improved documentation.
 
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 

@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2002 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,6 +40,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <time.h>
+#include <assert.h>
 #include "defines.h"
 #include "exitcodes.h"
 #include "faillog.h"
@@ -48,14 +49,19 @@
  * Global variables
  */
 static FILE *fail;		/* failure file stream */
-static uid_t user;		/* one single user, specified on command line */
-static int days;		/* number of days to consider for print command */
 static time_t seconds;		/* that number of days in seconds */
+static unsigned long umin;	/* if uflg and has_umin, only display users with uid >= umin */
+static bool has_umin = false;
+static unsigned long umax;	/* if uflg and has_umax, only display users with uid <= umax */
+static bool has_umax = false;
+static bool errors = false;
 
-static bool
-    aflg = false,		/* set if all users are to be printed always */
-    uflg = false,		/* set if user is a valid user id */
-    tflg = false;		/* print is restricted to most recent days */
+static bool aflg = false;	/* set if all users are to be printed always */
+static bool uflg = false;	/* set if user is a valid user id */
+static bool tflg = false;	/* print is restricted to most recent days */
+static bool lflg = false;	/* set the locktime */
+static bool mflg = false;	/* set maximum failed login counters */
+static bool rflg = false;	/* reset the counters of login failures */
 
 static struct stat statbuf;	/* fstat buffer for file size */
 
@@ -68,7 +74,7 @@ static void usage (void)
 	         "Options:\n"
 	         "  -a, --all                     display faillog records for all users\n"
 	         "  -h, --help                    display this help message and exit\n"
-	         "  -l, --lock-time SEC           after failed login lock accout to SEC seconds\n"
+	         "  -l, --lock-time SEC           after failed login lock account to SEC seconds\n"
 	         "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 	         "  -r, --reset                   reset the counters of login failures\n"
 	         "  -t, --time DAYS               display faillog records more recent than DAYS\n"
@@ -79,258 +85,387 @@ static void usage (void)
 	exit (E_USAGE);
 }
 
-static void print_one (const struct faillog *fl, uid_t uid)
+static void print_one (const struct passwd *pw, bool force)
 {
 	static bool once = false;
-	char *cp;
 	struct tm *tm;
+	off_t offset;
+	struct faillog fl;
 	time_t now;
-	struct passwd *pwent;
 
 #ifdef HAVE_STRFTIME
+	char *cp;
 	char ptime[80];
 #endif
 
+	if (NULL == pw) {
+		return;
+	}
+
+	offset = pw->pw_uid * sizeof (fl);
+	if (offset <= (statbuf.st_size - sizeof (fl))) {
+		/* fseeko errors are not really relevant for us. */
+		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		/* faillog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
+			fprintf (stderr,
+			         _("faillog: Failed to get the entry for UID %d\n"),
+			         pw->pw_uid);
+			return;
+		}
+	} else {
+		/* Outsize of the faillog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse faillog file).
+		 */
+		memzero (&fl, sizeof (fl));
+	}
+
+	/* Nothing to report */
+	if (!force && (0 == fl.fail_time)) {
+		return;
+	}
+
+	(void) time(&now);
+
+	/* Filter out entries that do not match with the -t option */
+	if (tflg && ((now - fl.fail_time) > seconds)) {
+		return;
+	}
+
+	/* Print the header only once */
 	if (!once) {
 		puts (_("Login       Failures Maximum Latest                   On\n"));
 		once = true;
 	}
-	pwent = getpwuid (uid); /* local, no need for xgetpwuid */
-	(void) time (&now);
-	tm = localtime (&fl->fail_time);
+
+	tm = localtime (&fl.fail_time);
 #ifdef HAVE_STRFTIME
 	strftime (ptime, sizeof (ptime), "%D %H:%M:%S %z", tm);
 	cp = ptime;
 #endif
-	if (NULL != pwent) {
-		printf ("%-9s   %5d    %5d   ",
-			pwent->pw_name, fl->fail_cnt, fl->fail_max);
-		if ((time_t) 0 != fl->fail_time) {
-			/* FIXME: cp is not defined ifndef HAVE_STRFTIME */
-			printf ("%s  %s", cp, fl->fail_line);
-			if (0 != fl->fail_locktime) {
-				if (   ((fl->fail_time+fl->fail_locktime) > now)
-				    && (0 != fl->fail_cnt)) {
-					printf (_(" [%lus left]"),
-					        (unsigned long) fl->fail_time + fl->fail_locktime - now);
-				} else {
-					printf (_(" [%lds lock]"),
-					        fl->fail_locktime);
-				}
-			}
+	printf ("%-9s   %5d    %5d   ",
+	        pw->pw_name, fl.fail_cnt, fl.fail_max);
+	/* FIXME: cp is not defined ifndef HAVE_STRFTIME */
+	printf ("%s  %s", cp, fl.fail_line);
+	if (0 != fl.fail_locktime) {
+		if (   ((fl.fail_time + fl.fail_locktime) > now)
+		    && (0 != fl.fail_cnt)) {
+			printf (_(" [%lus left]"),
+			        (unsigned long) fl.fail_time + fl.fail_locktime - now);
+		} else {
+			printf (_(" [%lds lock]"),
+			        fl.fail_locktime);
 		}
-		putchar ('\n');
 	}
-}
-
-static int reset_one (uid_t uid)
-{
-	off_t offset;
-	struct faillog faillog;
-
-	offset = uid * sizeof faillog;
-	if (fstat (fileno (fail), &statbuf) != 0) {
-		perror (FAILLOG_FILE);
-		return 0;
-	}
-	if (offset >= statbuf.st_size) {
-		return 0;
-	}
-
-	if (fseeko (fail, offset, SEEK_SET) != 0) {
-		perror (FAILLOG_FILE);
-		return 0;
-	}
-	if (fread ((char *) &faillog, sizeof faillog, 1, fail) != 1) {
-		if (feof (fail) == 0) {
-			perror (FAILLOG_FILE);
-		}
-
-		return 0;
-	}
-	if (0 == faillog.fail_cnt) {
-		return 1;	/* don't fill in no holes ... */
-	}
-
-	faillog.fail_cnt = 0;
-
-	if (   (fseeko (fail, offset, SEEK_SET) == 0)
-	    && (fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)) {
-		fflush (fail);
-		return 1;
-	} else {
-		perror (FAILLOG_FILE);
-	}
-	return 0;
-}
-
-static void reset (void)
-{
-	uid_t uid;
-
-	if (uflg) {
-		reset_one (user);
-	} else {
-		struct passwd *pwent;
-
-		setpwent ();
-		while ( (pwent = getpwent ()) != NULL ) {
-			reset_one (pwent->pw_uid);
-		}
-		endpwent ();
-	}
+	putchar ('\n');
 }
 
 static void print (void)
 {
-	uid_t uid;
-	off_t offset;
-	struct faillog faillog;
-
-	if (uflg) {
-		offset = user * sizeof faillog;
-		if (fstat (fileno (fail), &statbuf) != 0) {
-			perror (FAILLOG_FILE);
-			return;
-		}
-		if (offset >= statbuf.st_size) {
-			return;
-		}
-
-		fseeko (fail, (off_t) user * sizeof faillog, SEEK_SET);
-		if (fread ((char *) &faillog, sizeof faillog, 1, fail) == 1) {
-			print_one (&faillog, user);
-		} else {
-			perror (FAILLOG_FILE);
-		}
+	if (uflg && has_umin && has_umax && (umin==umax)) {
+		print_one (getpwuid ((uid_t)umin), true);
 	} else {
-		for (uid = 0;
-		     fread ((char *) &faillog, sizeof faillog, 1, fail) == 1;
-		     uid++) {
+		/* We only print records for existing users.
+		 * Loop based on the user database instead of reading the
+		 * whole file. We will have to query the database anyway
+		 * so except for very small ranges and large user
+		 * database, this should not be a performance issue.
+		 */
+		struct passwd *pwent;
 
-			if (!aflg && (0 == faillog.fail_cnt)) {
-				continue;
-			}
-
-			if (!aflg && tflg &&
-			    ((NOW - faillog.fail_time) > seconds)) {
-				continue;
-			}
-
-			if (aflg && (0 == faillog.fail_time)) {
-				continue;
-			}
-
-			print_one (&faillog, uid);
-		}
-	}
-}
-
-static void setmax_one (uid_t uid, int max)
-{
-	off_t offset;
-	struct faillog faillog;
-
-	offset = uid * sizeof faillog;
-
-	if (fseeko (fail, offset, SEEK_SET) != 0) {
-		perror (FAILLOG_FILE);
-		return;
-	}
-	if (fread ((char *) &faillog, sizeof faillog, 1, fail) != 1) {
-		if (feof (fail) == 0) {
-			perror (FAILLOG_FILE);
-		}
-		memzero (&faillog, sizeof faillog);
-	}
-	faillog.fail_max = max;
-
-	if (   (fseeko (fail, offset, SEEK_SET) == 0)
-	    && (fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1)) {
-		fflush (fail);
-	} else {
-		perror (FAILLOG_FILE);
-	}
-}
-
-static void setmax (int max)
-{
-	struct passwd *pwent;
-
-	if (uflg) {
-		setmax_one (user, max);
-	} else {
 		setpwent ();
 		while ( (pwent = getpwent ()) != NULL ) {
-			setmax_one (pwent->pw_uid, max);
+			if (   uflg
+			    && (   (has_umin && (pwent->pw_uid < (uid_t)umin))
+			        || (has_umax && (pwent->pw_uid > (uid_t)umax)))) {
+				continue;
+			}
+			print_one (pwent, aflg);
 		}
 		endpwent ();
-	}
-}
-
-static void set_locktime_one (uid_t uid, long locktime)
-{
-	off_t offset;
-	struct faillog faillog;
-
-	offset = uid * sizeof faillog;
-
-	if (fseeko (fail, offset, SEEK_SET) != 0) {
-		perror (FAILLOG_FILE);
-		return;
-	}
-	if (fread ((char *) &faillog, sizeof faillog, 1, fail) != 1) {
-		if (feof (fail) == 0) {
-			perror (FAILLOG_FILE);
-		}
-		memzero (&faillog, sizeof faillog);
-	}
-	faillog.fail_locktime = locktime;
-
-	if (fseeko (fail, offset, SEEK_SET) == 0
-	    && fwrite ((char *) &faillog, sizeof faillog, 1, fail) == 1) {
-		fflush (fail);
-	} else {
-		perror (FAILLOG_FILE);
 	}
 }
 
 /*
- * XXX - this needs to be written properly some day, right now it is
- * a quick cut-and-paste hack from the above two functions.  --marekm
+ * reset_one - Reset the fail count for one user
+ *
+ * This returns a boolean indicating if an error occurred.
  */
+static bool reset_one (uid_t uid)
+{
+	off_t offset;
+	struct faillog fl;
+
+	offset = uid * sizeof (fl);
+	if (offset <= (statbuf.st_size - sizeof (fl))) {
+		/* fseeko errors are not really relevant for us. */
+		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		/* faillog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
+			fprintf (stderr,
+			         _("faillog: Failed to get the entry for UID %d\n"),
+			         uid);
+			return true;
+		}
+	} else {
+		/* Outsize of the faillog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse faillog file).
+		 */
+		memzero (&fl, sizeof (fl));
+	}
+
+	if (0 == fl.fail_cnt) {
+		/* If the count is already null, do not write in the file.
+		 * This avoids writing 0 when no entries were present for
+		 * the user.
+		 */
+		return false;
+	}
+
+	fl.fail_cnt = 0;
+
+	if (   (fseeko (fail, offset, SEEK_SET) == 0)
+	    && (fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1)) {
+		(void) fflush (fail);
+		return false;
+	}
+
+	fprintf (stderr,
+	         _("faillog: Failed to reset fail count for UID %d\n"),
+	         uid);
+	return true;
+}
+
+static void reset (void)
+{
+	if (uflg && has_umin && has_umax && (umin==umax)) {
+		if (reset_one ((uid_t)umin)) {
+			errors = true;
+		}
+	} else {
+		/* Reset all entries in the specified range.
+		 * Non existing entries will not be touched.
+		 * Entries for non existing users are also reset.
+		 */
+		uid_t uid = 0;
+		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+
+		/* Make sure we stay in the umin-umax range if specified */
+		if (has_umin) {
+			uid = (uid_t)umin;
+		}
+		if (has_umax && (uid_t)umax < uidmax) {
+			uidmax = (uid_t)umax;
+		}
+
+		while (uid < uidmax) {
+			if (reset_one (uid)) {
+				errors = true;
+			}
+			uid++;
+		}
+	}
+}
+
+/*
+ * setmax_one - Set the maximum failed login counter for one user
+ *
+ * This returns a boolean indicating if an error occurred.
+ */
+static bool setmax_one (uid_t uid, int max)
+{
+	off_t offset;
+	struct faillog fl;
+
+	offset = (off_t) uid * sizeof (fl);
+	if (offset <= (statbuf.st_size - sizeof (fl))) {
+		/* fseeko errors are not really relevant for us. */
+		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		/* faillog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
+			fprintf (stderr,
+			         _("faillog: Failed to get the entry for UID %d\n"),
+			         uid);
+			return true;
+		}
+	} else {
+		/* Outsize of the faillog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse faillog file).
+		 */
+		memzero (&fl, sizeof (fl));
+	}
+
+	if (max == fl.fail_max) {
+		/* If the max is already set to the right value, do not
+		 * write in the file.
+		 * This avoids writing 0 when no entries were present for
+		 * the user and the max argument is 0.
+		 */
+		return false;
+	}
+
+	fl.fail_max = max;
+
+	if (   (fseeko (fail, offset, SEEK_SET) == 0)
+	    && (fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1)) {
+		fflush (fail);
+		return false;
+	}
+
+	fprintf (stderr,
+	         _("faillog: Failed to set max for UID %d\n"),
+	         uid);
+	return true;
+}
+
+static void setmax (int max)
+{
+	if (uflg && has_umin && has_umax && (umin==umax)) {
+		if (setmax_one ((uid_t)umin, max)) {
+			errors = true;
+		}
+	} else {
+		/* Set max for all entries in the specified range.
+		 * If max is unchanged for an entry, the entry is not touched.
+		 * If max is null, and no entries exist for this user, no
+		 * entries will be created.
+		 * Entries for non existing user are also taken into
+		 * account (in order to define policy for future users).
+		 */
+		uid_t uid = 0;
+		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+
+		/* Make sure we stay in the umin-umax range if specified */
+		if (has_umin) {
+			uid = (uid_t)umin;
+		}
+		if (has_umax && (uid_t)umax < uidmax) {
+			uidmax = (uid_t)umax;
+		}
+
+		while (uid < uidmax) {
+			if (setmax_one (uid, max)) {
+				errors = true;
+			}
+			uid++;
+		}
+	}
+}
+
+/*
+ * set_locktime_one - Set the locktime for one user
+ *
+ * This returns a boolean indicating if an error occurred.
+ */
+static bool set_locktime_one (uid_t uid, long locktime)
+{
+	off_t offset;
+	struct faillog fl;
+
+	offset = (off_t) uid * sizeof (fl);
+	if (offset <= (statbuf.st_size - sizeof (fl))) {
+		/* fseeko errors are not really relevant for us. */
+		assert ( fseeko (fail, offset, SEEK_SET) == 0 );
+		/* faillog is a sparse file. Even if no entries were
+		 * entered for this user, which should be able to get the
+		 * empty entry in this case.
+		 */
+		if (fread ((char *) &fl, sizeof (fl), 1, fail) != 1) {
+			fprintf (stderr,
+			         _("faillog: Failed to get the entry for UID %d\n"),
+			         uid);
+			return true;
+		}
+	} else {
+		/* Outsize of the faillog file.
+		 * Behave as if there were a missing entry (same behavior
+		 * as if we were reading an non existing entry in the
+		 * sparse faillog file).
+		 */
+		memzero (&fl, sizeof (fl));
+	}
+
+	if (locktime == fl.fail_locktime) {
+		/* If the max is already set to the right value, do not
+		 * write in the file.
+		 * This avoids writing 0 when no entries were present for
+		 * the user and the max argument is 0.
+		 */
+		return false;
+	}
+
+	fl.fail_locktime = locktime;
+
+	if (fseeko (fail, offset, SEEK_SET) == 0
+	    && fwrite ((char *) &fl, sizeof (fl), 1, fail) == 1) {
+		fflush (fail);
+		return false;
+	}
+
+	fprintf (stderr,
+	         _("faillog: Failed to set locktime for UID %d\n"),
+	         uid);
+	return true;
+}
+
 static void set_locktime (long locktime)
 {
-	struct passwd *pwent;
-
-	if (uflg) {
-		set_locktime_one (user, locktime);
-	} else {
-		setpwent ();
-		while ( (pwent = getpwent ()) != NULL ) {
-			set_locktime_one (pwent->pw_uid, locktime);
+	if (uflg && has_umin && has_umax && (umin==umax)) {
+		if (set_locktime_one ((uid_t)umin, locktime)) {
+			errors = true;
 		}
-		endpwent ();
+	} else {
+		/* Set locktime for all entries in the specified range.
+		 * If locktime is unchanged for an entry, the entry is not touched.
+		 * If locktime is null, and no entries exist for this user, no
+		 * entries will be created.
+		 * Entries for non existing user are also taken into
+		 * account (in order to define policy for future users).
+		 */
+		uid_t uid = 0;
+		uid_t uidmax = statbuf.st_size / sizeof (struct faillog);
+
+		/* Make sure we stay in the umin-umax range if specified */
+		if (has_umin) {
+			uid = (uid_t)umin;
+		}
+		if (has_umax && (uid_t)umax < uidmax) {
+			uidmax = (uid_t)umax;
+		}
+
+		while (uid < uidmax) {
+			if (set_locktime_one (uid, locktime)) {
+				errors = true;
+			}
+			uid++;
+		}
 	}
 }
 
 int main (int argc, char **argv)
 {
-	bool anyflag = false;
+	long fail_locktime;
+	long fail_max;
+	long days;
 
 	(void) setlocale (LC_ALL, "");
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
-
-	/* try to open for read/write, if that fails - read only */
-	fail = fopen (FAILLOG_FILE, "r+");
-	if (NULL == fail) {
-		fail = fopen (FAILLOG_FILE, "r");
-	}
-	if (NULL == fail) {
-		perror (FAILLOG_FILE);
-		exit (1);
-	}
 
 	{
 		int option_index = 0;
@@ -345,54 +480,76 @@ int main (int argc, char **argv)
 			{"user", required_argument, NULL, 'u'},
 			{NULL, 0, NULL, '\0'}
 		};
-
-		while ((c =
-			getopt_long (argc, argv, "ahl:m:rt:u:",
-				     long_options, &option_index)) != -1) {
+		while ((c = getopt_long (argc, argv, "ahl:m:rt:u:",
+		                         long_options, &option_index)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;
-				if (uflg) {
-					usage ();
-				}
 				break;
 			case 'h':
 				usage ();
 				break;
 			case 'l':
-				set_locktime ((long) atoi (optarg));
-				anyflag = true;
+				if (getlong (optarg, &fail_locktime) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         "faillog", optarg);
+					usage ();
+				}
+				lflg = true;
 				break;
 			case 'm':
-				setmax (atoi (optarg));
-				anyflag = true;
+				if (getlong (optarg, &fail_max) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         "faillog", optarg);
+					usage ();
+				}
+				mflg = true;
 				break;
 			case 'r':
-				reset ();
-				anyflag = true;
+				rflg = true;
 				break;
 			case 't':
-				days = atoi (optarg);
+				if (getlong (optarg, &days) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         "faillog", optarg);
+					usage ();
+				}
 				seconds = (time_t) days * DAY;
 				tflg = true;
 				break;
 			case 'u':
 			{
+				/*
+				 * The user can be:
+				 *  - a login name
+				 *  - numerical
+				 *  - a numerical login ID
+				 *  - a range (-x, x-, x-y)
+				 */
 				struct passwd *pwent;
-				if (aflg) {
-					usage ();
-				}
 
+				uflg = true;
 				/* local, no need for xgetpwnam */
 				pwent = getpwnam (optarg);
-				if (NULL == pwent) {
-					fprintf (stderr,
-						 _("Unknown User: %s\n"),
-						 optarg);
-					exit (1);
+				if (NULL != pwent) {
+					umin = (unsigned long) pwent->pw_uid;
+					has_umin = true;
+					umax = umin;
+					has_umax = true;
+				} else {
+					if (getrange (optarg,
+					              &umin, &has_umin,
+					              &umax, &has_umax) == 0) {
+						fprintf (stderr,
+						         _("lastlog: Unknown user or range: %s\n"),
+						         optarg);
+						exit (EXIT_FAILURE);
+					}
 				}
-				uflg = true;
-				user = pwent->pw_uid;
+
 				break;
 			}
 			default:
@@ -401,17 +558,52 @@ int main (int argc, char **argv)
 		}
 	}
 
-	/* no flags implies -a -p (= print information for all users)  */
-	if (!(anyflag || aflg || tflg || uflg)) {
-		aflg = true;
+	if (aflg && uflg) {
+		usage ();
 	}
-	/* (-a or -t days or -u user) and no other flags implies -p
-	   (= print information for selected users) */
-	if (!anyflag && (aflg || tflg || uflg)) {
+	if (tflg && (lflg || mflg || rflg)) {
+		usage ();
+	}
+
+	/* Open the faillog database */
+	if (lflg || mflg || rflg) {
+		fail = fopen (FAILLOG_FILE, "r+");
+	} else {
+		fail = fopen (FAILLOG_FILE, "r");
+	}
+	if (NULL == fail) {
+		fprintf (stderr,
+		         _("faillog: Cannot open %s: %s\n"),
+		         FAILLOG_FILE, strerror (errno));
+		exit (EXIT_FAILURE);
+	}
+
+	/* Get the size of the faillog */
+	if (fstat (fileno (fail), &statbuf) != 0) {
+		fprintf (stderr,
+		         _("faillog: Cannot get the size of %s: %s\n"),
+		         FAILLOG_FILE, strerror (errno));
+		exit (EXIT_FAILURE);
+	}
+
+	if (lflg) {
+		set_locktime (fail_locktime);
+	}
+
+	if (mflg) {
+		setmax (fail_max);
+	}
+
+	if (rflg) {
+		reset ();
+	}
+
+	if (!(lflg || mflg || rflg)) {
 		print ();
 	}
+
 	fclose (fail);
 
-	exit (E_SUCCESS);
+	exit (errors ? EXIT_FAILURE : EXIT_SUCCESS);
 }
 

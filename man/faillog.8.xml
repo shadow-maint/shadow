@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1989 - 1994, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -70,7 +70,10 @@
       <varlistentry>
 	<term><option>-a</option>, <option>--all</option></term>
 	<listitem>
-	  <para>Display faillog records for all users.</para>
+	  <para>
+	    Display (or act on) faillog records for all users having an
+	    entry in the <filename>faillog</filename> database.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -89,6 +92,10 @@
 	    Lock account to <replaceable>SEC</replaceable>
 	    seconds after failed login.
 	  </para>
+	  <para>
+	    Write access to <filename>/var/log/faillog</filename>
+	    is required for this option.
+	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -99,11 +106,21 @@
 	<listitem>
 	  <para>
 	    Set maximum number of login failures after the account is
-	    disabled to <replaceable>MAX</replaceable>. Selecting
+	    disabled to <replaceable>MAX</replaceable>.
+	  </para>
+	  <para>
+	    Selecting a
 	    <replaceable>MAX</replaceable> value of 0 has the effect of not
-	    placing a limit on the number of failed logins. The maximum
+	    placing a limit on the number of failed logins.
+	  </para>
+	  <para>
+	    The maximum
 	    failure count should always be 0 for <emphasis>root</emphasis>
 	    to prevent a denial of services attack against the system.
+	  </para>
+	  <para>
+	    Write access to <filename>/var/log/faillog</filename>
+	    is required for this option.
 	  </para>
 	</listitem>
       </varlistentry>
@@ -113,7 +130,10 @@
 	  <para>
 	    Reset the counters of login failures or one record if used with
 	    the <option>-u</option> <replaceable>LOGIN</replaceable>
-	    option. Write access to <filename>/var/log/faillog</filename>
+	    option.
+	  </para>
+	  <para>
+	    Write access to <filename>/var/log/faillog</filename>
 	    is required for this option.
 	  </para>
 	</listitem>
@@ -125,25 +145,48 @@
 	<listitem>
 	  <para>
 	    Display faillog records more recent than
-	    <replaceable>DAYS</replaceable>. The <option>-t</option>
-	    flag overrides the use of <option>-u</option>.
+	    <replaceable>DAYS</replaceable>.
 	  </para>
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>
-	  <option>-u</option>, <option>--user</option> <replaceable>LOGIN</replaceable>
+	  <option>-u</option>, <option>--user</option>
+	  <replaceable>LOGIN</replaceable>|<replaceable>RANGE</replaceable>
 	</term>
 	<listitem>
 	  <para>
 	    Display faillog record or maintains failure counters and limits
 	    (if used with <option>-l</option>, <option>-m</option> or
-	    <option>-r</option> options) only for user with
-	    <replaceable>LOGIN</replaceable>.
+	    <option>-r</option> options) only for the specified user(s).
+	  </para>
+	  <para>
+	    The users can be specified by a login name, a numerical user
+	    ID, or a <replaceable>RANGE</replaceable> of users.  This
+	    <replaceable>RANGE</replaceable> of users can be specified
+	    with a min and max values
+	    (<replaceable>UID_MIN-UID_MAX</replaceable>), a max value
+	    (<replaceable>-UID_MAX</replaceable>), or a min value
+	    (<replaceable>UID_MIN-</replaceable>).
 	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
+
+    <para>
+      When none of the <option>-l</option>, <option>-m</option>, or
+      <option>-r</option> options are used, <command>faillog</command>
+      displays the faillog record of the specified user(s).
+    </para>
+    <para>
+      NOTE: in display mode, only the records of users which currently
+      exist in the system are displayed.  In the other modes (when the
+      <option>-l</option>, <option>-m</option>, or <option>-r</option>
+      options are used), the records of the user, or the range of users,
+      or all the users that may have an entry in the faillog database will
+      be changed.  This is useful to reset records of users that have been
+      deleted or set a policy in advance for a range of users.
+    </para>
   </refsect1>
 
   <refsect1 id='caveats'>
