@@ -20,9 +20,6 @@
 #include "getdef.h"
 
 /* local function prototypes */
-#ifndef HAVE_L64A
-char *l64a(long value);
-#endif /* !HAVE_L64A */
 static void seedRNG (void);
 static char *gensalt (size_t salt_size);
 #ifdef USE_SHA_CRYPT

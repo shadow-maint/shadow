@@ -1,3 +1,8 @@
+2009-03-13  Mike Frysinger  <vapier@gentoo.org>
+
+	* libmisc/salt.c: Removed l64a prototype. The libc declaration is
+	non static, but the internal definition is static.
+
 2009-03-09  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/gpasswd.c: log_gpasswd_success_gshadow only exists ifdef
