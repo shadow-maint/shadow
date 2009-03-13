@@ -959,13 +959,6 @@ static void change_passwd (struct group *gr)
 
 /*
  * gpasswd - administer the /etc/group file
- *
- *	-a user		add user to the named group
- *	-d user		remove user from the named group
- *	-r		remove password from the named group
- *	-R		restrict access to the named group
- *	-A user,...	make list of users the administrative users
- *	-M user,...	make list of users the group members
  */
 int main (int argc, char **argv)
 {

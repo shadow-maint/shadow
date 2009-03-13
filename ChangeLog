@@ -1,5 +1,10 @@
 2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: Remove the documentation of options from the
+	main() documentation. It will always be outdated here.
+
+2009-03-13  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: lastlog variable renamed to ll to avoid name
 	clash with the structure.
 	* src/lastlog.c: check the offset in print_one() so that it is
