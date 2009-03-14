@@ -1,5 +1,9 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* etc/login.defs: Added note for PAM enabled configurations.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/Makefile.am: Compute the dependencies for building the
 	manpages.
 

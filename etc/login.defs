@@ -6,6 +6,8 @@
 
 #
 # Delay in seconds before being allowed another attempt after a login failure
+# Note: When PAM is used, some modules may enfore a minimal delay (e.g.
+#       pam_unix enforces a 2s delay)
 #
 FAIL_DELAY		3
 
