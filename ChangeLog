@@ -1,5 +1,9 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/addgrps.c: Fix warnings.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Added missing space.
 
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>

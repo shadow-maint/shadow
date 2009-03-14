@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,8 @@
 int add_groups (const char *list)
 {
 	GETGROUPS_T *grouplist, *tmp;
-	int i, ngroups;
+	unsigned int i;
+	int ngroups;
 	bool added;
 	char *token;
 	char buf[1024];
@@ -114,7 +115,7 @@ int add_groups (const char *list)
 	}
 
 	if (added) {
-		return setgroups (ngroups, grouplist);
+		return setgroups ((size_t)ngroups, grouplist);
 	}
 
 	return 0;
