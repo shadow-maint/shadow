@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 1992       , Julianne Frances Haugh
    Copyright (c) 1992       , Phillip Street
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -122,6 +122,12 @@
     <para>
       If the user has never logged in the message <emphasis>** Never logged
       in**</emphasis> will be displayed instead of the port and time.
+    </para>
+
+    <para>
+      Only the entries for the current users of the system will be
+      displayed.  Other entries may exist for users that were deleted
+      previously.
     </para>
   </refsect1>
 

@@ -1,5 +1,10 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/lastlog.8.xml: Document that there might be entries, for
+	deleted users, that are not displayed.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/chgpasswd.8.xml, man/chpasswd.8.xml: Fix the man page in
 	case SHA crypt is not supported.
 
