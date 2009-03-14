@@ -170,7 +170,12 @@ EXTRA_DIST = \
 	generate_mans.mak \
 	generate_translations.mak
 
+generate_mans.deps: *.xml
+	awk 'BEGIN{FS="\"";} /^<!ENTITY .* * SYSTEM ".*">$$/{ f=FILENAME; sub(/.xml/,"",f); print f ": " $$2 }' $(man_XMANS) > $@
+
 if ENABLE_REGENERATE_MAN
+
+include generate_mans.deps
 
 include generate_mans.mak
 
