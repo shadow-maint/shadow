@@ -1,5 +1,10 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/chgpasswd.8.xml, man/chpasswd.8.xml: Fix the man page in
+	case SHA crypt is not supported.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/vipw.8.xml: MAX_MEMBERS_PER_GROUP is not used by vipw and
 	vigr.
 

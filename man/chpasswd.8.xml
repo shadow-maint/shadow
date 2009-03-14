@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1991       , Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -95,7 +95,10 @@
 	<term><option>-c</option>, <option>--crypt-method</option></term>
 	<listitem>
 	  <para>Use the specified method to encrypt the passwords.</para>
-	  <para>
+	  <para condition="no_sha_crypt">
+	    The available methods are DES, MD5, and NONE.
+	  </para>
+	  <para condition="sha_crypt">
 	    The available methods are DES, MD5, NONE, and SHA256 or SHA512
 	    if your libc support these methods.
 	  </para>
@@ -122,7 +125,7 @@
 	  </para>
 	</listitem>
       </varlistentry>
-      <varlistentry>
+      <varlistentry condition="sha_crypt">
 	<term><option>-s</option>, <option>--sha-rounds</option></term>
 	<listitem>
 	  <para>
