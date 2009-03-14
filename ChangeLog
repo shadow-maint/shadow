@@ -6,6 +6,7 @@
 
 	* man/Makefile.am: Compute the dependencies for building the
 	manpages.
+	* man/generate_mans.deps: Added Makefile dependency rules.
 
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
