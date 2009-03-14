@@ -2,7 +2,8 @@
 # French translation of the shadow's man pages
 # Traduction des pages de manuel livrées avec shadow
 #
-# Nicolas FRANÇOIS <nicolas.francois@centaliens.net>, 2004
+# Nicolas FRANÇOIS <nicolas.francois@centaliens.net>, 2004-2009
+# Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>, 2008
 #     Certaines pages étaient déjà traduites:
 #       chage: Olivier Marin, 2001
 #       chpasswd: Amand Tihon <amand@alrj.org>
@@ -16,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2008-05-24 21:02+0200\n"
-"PO-Revision-Date: 2008-01-05 22:43+0100\n"
+"PO-Revision-Date: 2009-03-14 14:06+0100\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -563,7 +564,7 @@ msgid ""
 "<option>-l</option>, <option>--login</option><replaceable>NEW_LOGIN</"
 "replaceable>"
 msgstr ""
-"<option>-l</option>, <option>--login</option><replaceable>NOUVEAU_LOGIN</"
+"<option>-l</option>, <option>--login</option> <replaceable>NOUVEAU_LOGIN</"
 "replaceable>"
 
 # NOTE: relaceable
