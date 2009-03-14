@@ -105,6 +105,7 @@ login_defs_v = \
 	CHSH_AUTH.xml \
 	CONSOLE.xml \
 	CONSOLE_GROUPS.xml \
+	CREATE_HOME.xml \
 	DEFAULT_HOME.xml \
 	ENCRYPT_METHOD.xml \
 	ENV_HZ.xml \

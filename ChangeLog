@@ -1,5 +1,19 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/po/Makefile.in.in: xml2po cannot exclude one entity for
+	expansion. Make sure config.xml does not exist when the POT file
+	is created in order to keep the configurations in the POT file
+	* man/generate_translations.mak: make sure config.xml does not
+	exist neither when the translated XML is generated. Add the
+	missing %config; (strip out by xml2po). and make sure config.xml
+	is present when the translated manpage is generated.
+	* man/generate_mans.mak: config.xml is needed for the generation
+	of manpages (already in the .deps for the English manpages, but
+	needed for the translations).
+	* man/Makefile.am: Added missing CREATE_HOME.xml.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* etc/login.defs: Added note for PAM enabled configurations.
 
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>

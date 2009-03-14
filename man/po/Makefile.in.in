@@ -91,11 +91,15 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 # Note that $(DOMAIN).pot is not touched if it doesn't need to be changed.
 # TODO: set MSGID_BUGS_ADDRESS, COPYRIGHT_HOLDER
 $(DOMAIN).pot-update: $(POTFILES) $(srcdir)/POTFILES.in remove-potcdate.sed
-	@tmpdir=`pwd`; \
-	echo -n "cd $(top_srcdir)/man && "; \
-	echo "xml2po --expand-all-entities -o $(tmpdir)/$(DOMAIN).po $(notdir $(POTFILES))"; \
+	@set -e; tmpdir=`pwd`; \
+	echo "cd $(top_srcdir)/man"; \
 	cd $(top_srcdir)/man; \
+	echo "[ ! -f config.xml ] || mv config.xml config.xml.bak"; \
+	[ ! -f config.xml ] || mv config.xml config.xml.bak; \
+	echo "xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES))"; \
 	xml2po --expand-all-entities -o $$tmpdir/$(DOMAIN).po $(notdir $(POTFILES)); \
+	echo "[ ! -f config.xml.bak ] || mv config.xml.bak config.xml"; \
+	[ ! -f config.xml.bak ] || mv config.xml.bak config.xml; \
 	cd $$tmpdir
 	test ! -f $(DOMAIN).po || { \
 	  if test -f $(srcdir)/$(DOMAIN).pot; then \
