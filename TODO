@@ -1,8 +1,3 @@
-groupadd.8.xml
- * Groupnames may only be up to 16 characters long.
-   => remove the note if no limits.
-   => should depend on the --with-group-name-max-length option
-
 libxcrypt support
  * http://wiki.linuxfromscratch.org/patches/browser/trunk/shadow/shadow-4.0.18.1-owl_blowfish-1.patch
 
@@ -41,13 +36,8 @@ newusers
  - add logging to SYSLOG & AUDIT
  - use CREATE_HOME
 
-faillog
- - accept numerical user and range of users
-
 Document when/where option appeared, document whether an option is standard
 or not.
-
-depends rules for the manpages
 
 Check all the expiry semantics
 
@@ -62,8 +52,8 @@ ALL:
   user databases by well known tools.
 - Protect against signals. Register do_cleanups in a signal handler.
 
-- gpasswd
-  - Add options --crypt-method and --sha-rounds
+- login.defs
+  - generate depending on configuration
 
 - useradd:
   - add handle create user mail spool in maildir format.
@@ -71,6 +61,7 @@ ALL:
   - Add support for -K in -D mode
   - Add option to create or not the mail spool (and set the default in -D
     mode)
+  - Change -l to reset the entry if an entry was already there
   - set the mask in mkdir?
 
 - add handle -n switch in groups and id command for allow query is
@@ -86,21 +77,13 @@ ALL:
     => warning needed
 
 - usermod
+  - add an option equivalent to useradd's -l (only when uid is changed)
   - the mode of new home directories should be set according to the
     original mode. Does copy_tree does this?
 - passwd:
   - check combination of options (e.g. -u/-l)
 
 - newgrp: check the USE_PAM section.
-
-- newusers:
-  - doc for pw_gid not clear. Differentiate
-            pw_gid specified and exist
-            pw_gid specified but does not exist
-             * name
-             * number
-            pw_gid not specified.
-  - document what happens when no uid is specified.
 
 - pwck
   - Add check to move passwd passwords to shadow if there is a shadow
@@ -111,7 +94,3 @@ ALL:
 - su
   - add a login.defs configuration parameter to add variables to keep in
     the environment with "su -l" (TERM/TERMCOLOR/...
-
-- vipw:
-  - Is MAX_MEMBERS_PER_GROUP used by vipw?
-
