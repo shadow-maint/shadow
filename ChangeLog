@@ -1,5 +1,10 @@
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/vipw.8.xml: MAX_MEMBERS_PER_GROUP is not used by vipw and
+	vigr.
+
+2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/login.defs.5.xml: Indicate that sg uses the same variables
 	as newgrp.
 	* man/login.defs.5.xml: vipw does not use any variable.

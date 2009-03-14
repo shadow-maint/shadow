@@ -2,7 +2,7 @@
 <!--
    Copyright (c) 1997       , Marek Michałkiewicz
    Copyright (c) 2001 - 2006, Tomasz Kłoczko
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,6 @@
 -->
 <!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.5//EN"
   "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-<!ENTITY MAX_MEMBERS_PER_GROUP SYSTEM "login.defs.d/MAX_MEMBERS_PER_GROUP.xml">
 ]>
 <refentry id='vipw.8'>
   <!--  $Id$  -->
@@ -118,18 +117,6 @@
 	  <para>Edit shadow or gshadow database.</para>
 	</listitem>
       </varlistentry>
-    </variablelist>
-  </refsect1>
-
-  <refsect1 id='configuration'>
-    <title>CONFIGURATION</title>
-    <para>
-      The following configuration variables in
-      <filename>/etc/login.defs</filename> change the behavior of this
-      tool:
-    </para>
-    <variablelist>
-      &MAX_MEMBERS_PER_GROUP;
     </variablelist>
   </refsect1>
 
