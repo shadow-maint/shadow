@@ -216,7 +216,7 @@ static void update_groups (void)
 				}
 				if (pwd->pw_gid == grp->gr_gid) {
 					fprintf (stderr,
-					         _("%s: Cannot remove group %s which is a primary group for another user.\n"),
+					         _("%s: group %s is the primary group of another user and is not removed.\n"),
 					         Prog, grp->gr_name);
 					break;
 				}
@@ -309,8 +309,8 @@ static void update_groups (void)
 			 user_name, nsgrp->sg_name));
 	}
 
-	if (deleted_user_group) {
-		/* FIXME: Test if the group is in gshadow first? */
+	if (   deleted_user_group
+	    && (sgr_locate (user_name) != NULL)) {
 		if (sgr_remove (user_name) == 0) {
 			fprintf (stderr,
 			         _("%s: cannot remove entry '%s' from %s\n"),
@@ -559,7 +559,9 @@ static void update_user (void)
 		         Prog, user_name, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
-	if (is_shadow_pwd && (spw_remove (user_name) == 0)) {
+	if (   is_shadow_pwd
+	    && (spw_locate (user_name) != NULL)
+	    && (spw_remove (user_name) == 0)) {
 		fprintf (stderr,
 		         _("%s: cannot remove entry '%s' from %s\n"),
 		         Prog, user_name, spw_dbname ());
