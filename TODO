@@ -38,7 +38,7 @@ testsuite
  - newgrp
    - test with unknown user's GID
  - groupmems
- - useradd, usermod, groupadd, groupmod, newusers
+ - usermod, groupadd, groupmod, newusers
    - test with UID / GID set to -1
 
 newusers
