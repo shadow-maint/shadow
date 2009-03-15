@@ -1,5 +1,12 @@
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/cleanup.c: Fix del_cleanup. The arguments were not
+	desynchronized with the cleanup functions.
+	* libmisc/cleanup.c: cleanup_function_args is an array of void
+	pointer, not strings.
+
+2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_gid.c: Fix find_new_gid() the current group
 	database was not taken into account.
 

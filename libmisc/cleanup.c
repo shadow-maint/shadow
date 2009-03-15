@@ -39,7 +39,7 @@
  */
 #define CLEANUP_FUNCTIONS 10
 static cleanup_function cleanup_functions[CLEANUP_FUNCTIONS];
-static const char * cleanup_function_args[CLEANUP_FUNCTIONS];
+static void * cleanup_function_args[CLEANUP_FUNCTIONS];
 
 /*
  * - Cleanup functions shall not fail.
@@ -113,8 +113,10 @@ void del_cleanup (cleanup_function pcf)
 
 		if (i == (CLEANUP_FUNCTIONS -1)) {
 			cleanup_functions[i] = NULL;
+			cleanup_function_args[i] = NULL;
 		} else {
 			cleanup_functions[i] = cleanup_functions[i+1];
+			cleanup_function_args[i] = cleanup_function_args[i+1];
 		}
 
 		/* A NULL indicates the end of the stack */
