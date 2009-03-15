@@ -1,5 +1,10 @@
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/groupmod.c: Embed gshadow related cleanup in #ifdef
+	SHADOWGRP.
+
+2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: get_number() replaced by getlong().
 	* src/usermod.c: When the user is renamed, make sure we do not
 	override an user with the same name (in passwd or shadow).

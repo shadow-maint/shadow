@@ -81,7 +81,9 @@ static gid_t group_newid;
 
 struct cleanup_info_mod info_passwd;
 struct cleanup_info_mod info_group;
+#ifdef	SHADOWGRP
 struct cleanup_info_mod info_gshadow;
+#endif
 
 static bool
     oflg = false,		/* permit non-unique group ID to be specified with -g */
@@ -473,31 +475,41 @@ static void close_files (void)
 static void prepare_failure_reports (void)
 {
 	info_group.name   = group_name;
+#ifdef	SHADOWGRP
 	info_gshadow.name = group_name;
+#endif
 	info_passwd.name  = group_name;
 
 	info_group.audit_msg   = xmalloc (512);
+#ifdef	SHADOWGRP
 	info_gshadow.audit_msg = xmalloc (512);
+#endif
 	info_passwd.audit_msg  = xmalloc (512);
 
 	snprintf (info_group.audit_msg, 511,
 	          "changing %s; ", gr_dbname ());
+#ifdef	SHADOWGRP
 	snprintf (info_gshadow.audit_msg, 511,
 	          "changing %s; ", sgr_dbname ());
+#endif
 	snprintf (info_passwd.audit_msg, 511,
 	          "changing %s; ", pw_dbname ());
 
 	info_group.action   =   info_group.audit_msg
 	                      + strlen (info_group.audit_msg);
+#ifdef	SHADOWGRP
 	info_gshadow.action =   info_gshadow.audit_msg
 	                      + strlen (info_gshadow.audit_msg);
+#endif
 	info_passwd.action  =   info_passwd.audit_msg
 	                      + strlen (info_passwd.audit_msg);
 
 	snprintf (info_group.action,   511 - strlen (info_group.audit_msg),
 	          "group %s/%d", group_name, group_id);
+#ifdef	SHADOWGRP
 	snprintf (info_gshadow.action, 511 - strlen (info_group.audit_msg),
 	          "group %s", group_name);
+#endif
 	snprintf (info_passwd.action,  511 - strlen (info_group.audit_msg),
 	          "group %s/%d", group_name, group_id);
 
@@ -507,10 +519,12 @@ static void prepare_failure_reports (void)
 		strncat (info_group.action, group_newname,
 		         511 - strlen (info_group.audit_msg));
 
+#ifdef	SHADOWGRP
 		strncat (info_gshadow.action, ", new name: ",
 		         511 - strlen (info_gshadow.audit_msg));
 		strncat (info_gshadow.action, group_newname,
 		         511 - strlen (info_gshadow.audit_msg));
+#endif
 
 		strncat (info_passwd.action, ", new name: ",
 		         511 - strlen (info_passwd.audit_msg));
@@ -521,8 +535,10 @@ static void prepare_failure_reports (void)
 		strncat (info_group.action, ", new password",
 		         511 - strlen (info_group.audit_msg));
 
+#ifdef	SHADOWGRP
 		strncat (info_gshadow.action, ", new password",
 		         511 - strlen (info_gshadow.audit_msg));
+#endif
 	}
 	if (gflg) {
 		strncat (info_group.action, ", new gid: ",
@@ -538,15 +554,19 @@ static void prepare_failure_reports (void)
 		          "%d", group_newid);
 	}
 	info_group.audit_msg[511]   = '\0';
+#ifdef	SHADOWGRP
 	info_gshadow.audit_msg[511] = '\0';
+#endif
 	info_passwd.audit_msg[511]  = '\0';
 
 // FIXME: add a system cleanup
 	add_cleanup (cleanup_report_mod_group, &info_group);
+#ifdef	SHADOWGRP
 	if (   is_shadow_grp
 	    && (pflg || nflg)) {
 		add_cleanup (cleanup_report_mod_gshadow, &info_gshadow);
 	}
+#endif
 	if (gflg) {
 		add_cleanup (cleanup_report_mod_passwd, &info_passwd);
 	}
