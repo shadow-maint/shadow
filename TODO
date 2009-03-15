@@ -1,3 +1,12 @@
+usermod
+	user renamed, order is not kept in /etc/group (see
+	47_usermod-l_no_shadow_file). This is a problem when the first
+	user is considered as the admin.
+
+libmisc/cleanup_user.c
+	cleanup needed (cleanup_report_add_user* not used)
+
+
 libxcrypt support
  * http://wiki.linuxfromscratch.org/patches/browser/trunk/shadow/shadow-4.0.18.1-owl_blowfish-1.patch
 
