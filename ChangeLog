@@ -1,5 +1,11 @@
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/usermod.c: get_number() replaced by getlong().
+	* src/usermod.c: When the user is renamed, make sure we do not
+	override an user with the same name (in passwd or shadow).
+
+2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/gpasswd.c: log_gpasswd_success_gshadow is in the cleanup
 	stack only when the shadow group file is present.
 

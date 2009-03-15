@@ -153,7 +153,6 @@ static void update_gshadow (void);
 #endif
 static void grp_update (void);
 
-static long get_number (const char *);
 static void process_flags (int, char **);
 static void close_files (void);
 static void open_files (void);
@@ -400,6 +399,12 @@ static char *new_pw_passwd (char *pw_pass)
 static void new_pwent (struct passwd *pwent)
 {
 	if (lflg) {
+		if (pw_locate (user_newname) != NULL) {
+			fprintf (stderr,
+			         _("%s: user '%s' already exists in %s\n"),
+			         Prog, user_newname, pw_dbname ());
+			fail_exit (E_NAME_IN_USE);
+		}
 #ifdef WITH_AUDIT
 		audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
 		              "changing name",
@@ -410,8 +415,7 @@ static void new_pwent (struct passwd *pwent)
 		pwent->pw_name = xstrdup (user_newname);
 	}
 	if (!is_shadow_pwd) {
-		pwent->pw_passwd =
-		    new_pw_passwd (pwent->pw_passwd);
+		pwent->pw_passwd = new_pw_passwd (pwent->pw_passwd);
 	}
 
 	if (uflg) {
@@ -477,6 +481,12 @@ static void new_pwent (struct passwd *pwent)
 static void new_spent (struct spwd *spent)
 {
 	if (lflg) {
+		if (spw_locate (user_newname) != NULL) {
+			fprintf (stderr,
+			         _("%s: user '%s' already exists in %s\n"),
+			         Prog, user_newname, spw_dbname ());
+			fail_exit (E_NAME_IN_USE);
+		}
 		spent->sp_namp = xstrdup (user_newname);
 	}
 
@@ -784,20 +794,6 @@ static void grp_update (void)
 #endif
 }
 
-static long get_number (const char *numstr)
-{
-	long val;
-	char *endptr;
-
-	val = strtol (numstr, &endptr, 10);
-	if (('\0' != *endptr) || (ERANGE == errno)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 numstr);
-		exit (E_BAD_ARG);
-	}
-	return val;
-}
-
 /*
  * process_flags - perform command line argument setting
  *
@@ -938,7 +934,12 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				user_newinactive = get_number (optarg);
+				if (getlong (optarg, &user_newinactive) == 0) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage ();
+				}
 				fflg = true;
 				break;
 			case 'g':
