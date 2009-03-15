@@ -1,5 +1,10 @@
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_gid.c: Fix find_new_gid() the current group
+	database was not taken into account.
+
+2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/addgrps.c: Fix compilation warnings.
 
 2009-03-14  Nicolas François  <nicolas.francois@centraliens.net>

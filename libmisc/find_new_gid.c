@@ -100,7 +100,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 	}
 	endgrent ();
 	gr_rewind ();
-	while ((grp = getgrent ()) != NULL) {
+	while ((grp = gr_next ()) != NULL) {
 		if ((grp->gr_gid >= group_id) && (grp->gr_gid <= gid_max)) {
 			group_id = grp->gr_gid + 1;
 		}
