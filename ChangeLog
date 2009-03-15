@@ -1,5 +1,10 @@
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: log_gpasswd_success_gshadow is in the cleanup
+	stack only when the shadow group file is present.
+
+2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEWS, src/userdel.c: Make sure the user exists in the shadow
 	database before calling spw_remove().
 	* NEWS, src/userdel.c: When the user's group is removed, make sure
