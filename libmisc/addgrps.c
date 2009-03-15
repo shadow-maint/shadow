@@ -52,7 +52,7 @@
 int add_groups (const char *list)
 {
 	GETGROUPS_T *grouplist, *tmp;
-	unsigned int i;
+	size_t i;
 	int ngroups;
 	bool added;
 	char *token;
@@ -71,7 +71,7 @@ int add_groups (const char *list)
 			return -1;
 		}
 		ngroups = getgroups (i, grouplist);
-		if (i > ngroups) {
+		if ((-1 == ngroups) || (i > (size_t)ngroups)) {
 			break;
 		}
 		/* not enough room, so try allocating a larger buffer */
@@ -94,9 +94,9 @@ int add_groups (const char *list)
 			continue;
 		}
 
-		for (i = 0; i < ngroups && grouplist[i] != grp->gr_gid; i++);
+		for (i = 0; i < (size_t)ngroups && grouplist[i] != grp->gr_gid; i++);
 
-		if (i < ngroups) {
+		if (i < (size_t)ngroups) {
 			continue;
 		}
 
@@ -104,12 +104,13 @@ int add_groups (const char *list)
 			fputs (_("Warning: too many groups\n"), stderr);
 			break;
 		}
-		tmp = (gid_t *) realloc (grouplist, (ngroups + 1) * sizeof (GETGROUPS_T));
+		tmp = (gid_t *) realloc (grouplist, (size_t)(ngroups + 1) * sizeof (GETGROUPS_T));
 		if (NULL == tmp) {
 			free (grouplist);
 			return -1;
 		}
-		tmp[ngroups++] = grp->gr_gid;
+		tmp[ngroups] = grp->gr_gid;
+		ngroups++;
 		grouplist = tmp;
 		added = true;
 	}
