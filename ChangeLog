@@ -4,6 +4,7 @@
 	ensures that the backup file is flushed to the storage medium.
 	* src/useradd.c: Likewise for the default file, faillog, lastlog,
 	and mail spool.
+	* src/usermod.c: Likewise for the faillog and lastlog file.
 
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
