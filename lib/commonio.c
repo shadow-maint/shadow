@@ -251,7 +251,8 @@ static int create_backup (const char *backup, FILE * fp)
 		fclose (bkfp);
 		return -1;
 	}
-	if (fclose (bkfp) != 0) {
+	if (   (fsync (fileno (bkfp)) != 0)
+	    || (fclose (bkfp) != 0)) {
 		return -1;
 	}
 

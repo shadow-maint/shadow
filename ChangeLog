@@ -1,3 +1,8 @@
+2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/commonio.c: Call fsync before closing the backup file. This
+	ensures that the backup file is flushed to the storage medium.
+
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/groupmod.c: Embed gshadow related cleanup in #ifdef
