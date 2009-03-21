@@ -1,5 +1,11 @@
 2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpck.c (check_members): When a member is removed, do not
+	increase the index.
+	* src/grpck.c: Fix typo in messages and comments.
+
+2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/commonio.c: Call fsync before closing the backup file. This
 	ensures that the backup file is flushed to the storage medium.
 	* src/useradd.c: Likewise for the default file, faillog, lastlog,

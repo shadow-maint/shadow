@@ -146,6 +146,8 @@ static void usage (void)
 
 /*
  * delete_member - delete an entry in a list of members
+ *
+ * It only deletes the first entry with the given name.
  */
 static void delete_member (char **list, const char *member)
 {
@@ -389,6 +391,9 @@ static int check_members (const char *groupname,
 		SYSLOG ((LOG_INFO, fmt_syslog, members[i], groupname));
 		members_changed = 1;
 		delete_member (members, members[i]);
+
+		/* Rewind in case of removal */
+		i--;
 	}
 
 	return members_changed;
@@ -543,10 +548,10 @@ static void check_grp_file (int *errors, bool *changed)
 		}
 
 		/*
-		 * Check for invalid user ID.
+		 * Check for invalid group ID.
 		 */
 		if (grp->gr_gid == (gid_t)-1) {
-			printf (_("invalid user ID '%lu'\n"), (long unsigned int)grp->gr_gid);
+			printf (_("invalid group ID '%lu'\n"), (long unsigned int)grp->gr_gid);
 			*errors += 1;
 		}
 
@@ -582,7 +587,7 @@ static void check_grp_file (int *errors, bool *changed)
 				printf (_
 				        ("no matching group file entry in %s\n"),
 				        sgr_file);
-				printf (_("add group '%s' in %s ?"),
+				printf (_("add group '%s' in %s?"),
 				        grp->gr_name, sgr_file);
 				*errors += 1;
 				if (yes_or_no (read_only)) {
