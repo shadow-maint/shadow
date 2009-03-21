@@ -542,7 +542,9 @@ static int set_defaults (void)
 	 * the new file is intact.
 	 */
 	(void) fflush (ofp);
-	if ((ferror (ofp) != 0) || (fclose (ofp) != 0)) {
+	if (   (ferror (ofp) != 0)
+	    || (fsync (fileno (ofp)) != 0)
+	    || (fclose (ofp) != 0)) {
 		unlink (new_file);
 		return -1;
 	}
@@ -1556,6 +1558,7 @@ static void faillog_reset (uid_t uid)
 	if (   (-1 == fd)
 	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
 	    || (write (fd, &fl, sizeof (fl)) != (ssize_t) sizeof (fl))
+	    || (fsync (fd) != 0)
 	    || (close (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the faillog entry of UID %lu: %s\n"),
@@ -1581,6 +1584,7 @@ static void lastlog_reset (uid_t uid)
 	if (   (-1 == fd)
 	    || (lseek (fd, offset_uid, SEEK_SET) != offset_uid)
 	    || (write (fd, &ll, sizeof (ll)) != (ssize_t) sizeof (ll))
+	    || (fsync (fd) != 0)
 	    || (close (fd) != 0)) {
 		fprintf (stderr,
 		         _("%s: failed to reset the lastlog entry of UID %lu: %s\n"),
@@ -1750,6 +1754,7 @@ static void create_mail (void)
 			perror (_("Setting mailbox file permissions"));
 		}
 
+		fsync (fd);
 		close (fd);
 	}
 }
