@@ -28,10 +28,8 @@ libmisc_a_SOURCES = \
 	find_new_uid.c \
 	getdate.h \
 	getdate.y \
-	get_gid.c \
 	getlong.c \
 	getrange.c \
-	get_uid.c \
 	hushed.c \
 	isexpired.c \
 	limits.c \

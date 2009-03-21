@@ -1,5 +1,11 @@
 2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/get_gid.c, libmisc/get_uid.c, libmisc/Makefile.am,
+	lib/get_gid.c, lib/get_uid.c, lib/Makefile.am: get_uid.c and
+	get_gid.c moved from libmisc/ to lib/.
+
+2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/grpck.c (check_members): When a member is removed, do not
 	increase the index.
 	* src/grpck.c: Fix typo in messages and comments.
