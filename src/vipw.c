@@ -112,7 +112,8 @@ static int create_backup_file (FILE * fp, const char *backup, struct stat *sb)
 		unlink (backup);
 		return -1;
 	}
-	if (fclose (bkfp) != 0) {
+	if (   (fsync (fileno (bkfp)) != 0)
+	    || (fclose (bkfp) != 0)) {
 		unlink (backup);
 		return -1;
 	}
