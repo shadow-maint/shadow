@@ -141,7 +141,9 @@ struct group *sgetgrent (const char *buf)
 	}
 	grent.gr_name = grpfields[0];
 	grent.gr_passwd = grpfields[1];
-	grent.gr_gid = atoi (grpfields[2]);
+	if (get_gid (grpfields[2], &grent.gr_gid) == 0) {
+		return (struct group *) 0;
+	}
 	grent.gr_mem = list (grpfields[3]);
 	if (NULL == grent.gr_mem) {
 		return (struct group *) 0;	/* out of memory */

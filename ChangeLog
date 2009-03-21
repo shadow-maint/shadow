@@ -1,5 +1,10 @@
 2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgetpwent.c, lib/sgetgrent.c: Use get_uid and get_gid to
+	validate the UIDs or GIDs instead of atoi/strtol.
+
+2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/get_gid.c, libmisc/get_uid.c, libmisc/Makefile.am,
 	lib/get_gid.c, lib/get_uid.c, lib/Makefile.am: get_uid.c and
 	get_gid.c moved from libmisc/ to lib/.

@@ -108,14 +108,10 @@ struct passwd *sgetpwent (const char *buf)
 
 	pwent.pw_name = fields[0];
 	pwent.pw_passwd = fields[1];
-	pwent.pw_uid = strtol (fields[2], &ep, 10);
-	/* FIXME: (0 == pwent.pw_uid) does not look correct -- nekral */
-	if ((0 == pwent.pw_uid) && ('\0' != *ep)) {
+	if (get_uid (fields[2], &pwent.pw_uid) == 0) {
 		return NULL;
 	}
-	/* FIXME: (0 == pwent.pw_gid) does not look correct -- nekral */
-	pwent.pw_gid = strtol (fields[3], &ep, 10);
-	if ((0 == pwent.pw_gid) && ('\0' != *ep)) {
+	if (get_gid (fields[3], &pwent.pw_gid) == 0) {
 		return NULL;
 	}
 	pwent.pw_gecos = fields[4];
