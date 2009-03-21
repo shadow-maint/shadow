@@ -60,7 +60,6 @@ struct passwd *sgetpwent (const char *buf)
 	static char pwdbuf[1024];
 	register int i;
 	register char *cp;
-	char *ep;
 	char *fields[NFIELDS];
 
 	/*
