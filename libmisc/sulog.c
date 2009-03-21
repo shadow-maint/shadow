@@ -97,6 +97,7 @@ void sulog (const char *tty, bool success, const char *oldname, const char *name
 		 success ? '+' : '-', tty, oldname, name);
 
 	(void) fflush (fp);
+	fsync (fileno (fp));
 	fclose (fp);
 	/* TODO: log if failure */
 }

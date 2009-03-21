@@ -6,6 +6,7 @@
 	and mail spool.
 	* src/usermod.c: Likewise for the faillog and lastlog file.
 	* src/vipw.c: Likewise for the backup file.
+	* libmisc/sulog.c: Likewise for the su log.
 
 2009-03-15  Nicolas François  <nicolas.francois@centraliens.net>
 
