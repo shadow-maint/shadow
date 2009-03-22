@@ -584,10 +584,9 @@ static void check_grp_file (int *errors, bool *changed)
 		if (is_shadow) {
 			sgr = (struct sgrp *) sgr_locate (grp->gr_name);
 			if (sgr == NULL) {
-				printf (_
-				        ("no matching group file entry in %s\n"),
+				printf (_("no matching group file entry in %s\n"),
 				        sgr_file);
-				printf (_("add group '%s' in %s?"),
+				printf (_("add group '%s' in %s? "),
 				        grp->gr_name, sgr_file);
 				*errors += 1;
 				if (yes_or_no (read_only)) {
