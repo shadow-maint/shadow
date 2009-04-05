@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.18\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-05-24 21:01+0200\n"
+"POT-Creation-Date: 2009-04-06 00:47+0200\n"
 "PO-Revision-Date: 2007-11-24 18:50+0100\n"
 "Last-Translator: Claus Hindsgaul <claus.hindsgaul@gmail.com>\n"
 "Language-Team: Danish\n"
@@ -56,6 +56,9 @@ msgstr "  Kontakt systemadministratoren."
 msgid "  Choose a new password."
 msgstr "  Vælg en ny adgangskode."
 
+msgid "You must change your password."
+msgstr ""
+
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "Din adgangskode udløber om %ld dage.\n"
@@ -67,7 +70,12 @@ msgid "Your password will expire today."
 msgstr "Din adgangskode udløber i dag."
 
 #, c-format
-msgid "Unable to change tty %s"
+msgid "Cannot open audit interface - aborting.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Unable to change tty %s"
+msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "Kunne ikke ændre tty %s"
 
 msgid "Environment overflow\n"
@@ -91,13 +99,13 @@ msgstr[1] ""
 "%d fejl siden sidste logind.\n"
 "Sidst var %s, %s.\n"
 
-#, fuzzy
-msgid "Can't get unique UID (no more available UIDs)\n"
-msgstr "%s: kan ikke få unik UID\n"
-
-#, fuzzy
-msgid "Can't get unique GID (no more available GIDs)\n"
+#, fuzzy, c-format
+msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: kan ikke få unik GID\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: kan ikke få unik UID\n"
 
 msgid "Too many logins.\n"
 msgstr "Logget på for mange gange.\n"
@@ -188,8 +196,17 @@ msgid "Unable to determine your tty name."
 msgstr "Kan ikke afgøre dit tty-navn."
 
 #, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: hukommelse opbrugt\n"
+
+#, c-format
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) mislykkedes\n"
+
+#, fuzzy
+#| msgid "No\n"
+msgid "No"
+msgstr "Nej\n"
 
 msgid "Password: "
 msgstr "Adgangskode: "
@@ -197,6 +214,11 @@ msgstr "Adgangskode: "
 #, c-format
 msgid "%s's Password: "
 msgstr "%s's adgangskode: "
+
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s: felter for lange\n"
 
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
@@ -295,40 +317,31 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: Adgang nægtet.\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
+
+#, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: PAM-autentifikation mislykkedes\n"
 
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: kan ikke låse adgangskodefil\n"
+#, fuzzy, c-format
+#| msgid "%s: can't lock files, try again later\n"
+msgid "%s: cannot lock %s; try again later.\n"
+msgstr "%s: kan ikke låse filer. Prøv igen senere\n"
 
-#, c-format
-msgid "%s: can't open password file\n"
-msgstr "%s: kan ikke åbne adgangskodefil\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot open %s\n"
+msgstr "%s: kan ikke åbne filen %s\n"
 
-#, c-format
-msgid "%s: can't lock shadow password file\n"
-msgstr "%s: kan ikke låse skyggeadgangskodefil\n"
+#, fuzzy, c-format
+msgid "%s: failure while writing changes to %s\n"
+msgstr "%s: fejl under spaltning: %s"
 
-#, c-format
-msgid "%s: can't open shadow password file\n"
-msgstr "%s: kan ikke åbne skyggeadgangskodefil\n"
-
-#, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
-
-#, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: kan ikke genskrive adgangskodefilen\n"
-
-#, c-format
-msgid "%s: can't update password file\n"
-msgstr "%s: kan ikke opdatere adgangskodefil\n"
-
-#, c-format
-msgid "%s: can't update shadow password file\n"
-msgstr "%s: kan ikke opdatere skyggeadgangskodefil\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgstr "%s: kunne ikke afgive rettigheder (%s)\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
@@ -338,9 +351,9 @@ msgstr "%s: skyggeadgangskodefilen findes ikke\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: kunne ikke afgive rettigheder (%s)\n"
 
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: ukendt bruger %s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist in %s\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -366,55 +379,25 @@ msgstr ""
 msgid "Full Name"
 msgstr "Fulde navn"
 
-#, c-format
-msgid "\tFull Name: %s\n"
-msgstr "\tFulde navn: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "\t%s: %s\n"
+msgstr "%s: %s\n"
 
 msgid "Room Number"
 msgstr "Rum-nummer"
 
-#, c-format
-msgid "\tRoom Number: %s\n"
-msgstr "\tRum-nummer: %s\n"
-
 msgid "Work Phone"
 msgstr "Arbejdstelefon"
 
-#, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "\tArbejdstelefon: %s\n"
-
 msgid "Home Phone"
 msgstr "Hjemmetelefon"
-
-#, c-format
-msgid "\tHome Phone: %s\n"
-msgstr "\tHjemmetelefon: %s\n"
 
 msgid "Other"
 msgstr "Andet"
 
 msgid "Cannot change ID to root.\n"
 msgstr "Kan ikke ændre ID til root.\n"
-
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "Kan ikke låse adgangskodefilen; forsøg igen senere.\n"
-
-msgid "Cannot open the password file.\n"
-msgstr "Kan ikke åbne adgangskodefilen.\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s: %s ikke fundet i /etc/passwd\n"
-
-msgid "Error updating the password entry.\n"
-msgstr "Fejl under opdatering af adgangskodelinje.\n"
-
-msgid "Cannot commit password file changes.\n"
-msgstr "Kan ikke skrive ændringerne til adgangskodefilen.\n"
-
-msgid "Cannot unlock the password file.\n"
-msgstr "Kan ikke låse adgangskodefilen op.\n"
 
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
@@ -449,9 +432,9 @@ msgstr "%s: '%s' indeholder ugyldige tegn\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s: '%s' indeholder ugyldige tegn\n"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: Kan ikke afgøre dit brugernavn.\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 #, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
@@ -500,7 +483,7 @@ msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: ugyldigt numerisk parameter '%s'\n"
 
 #, fuzzy, c-format
-msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: flaget -a er KUN tilladt sammen med -G\n"
 
 #, c-format
@@ -512,30 +495,6 @@ msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: kan ikke låse gruppefilen\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: kan ikke åbne gruppefilen\n"
-
-#, c-format
-msgid "%s: can't lock gshadow file\n"
-msgstr "%s: Kan ikke låse gshadow-filen\n"
-
-#, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: Kan ikke åbne skyggefilen\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating gshadow file\n"
-msgstr "%s: fejl under opdatering af skyggefil\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating group file\n"
-msgstr "%s: fejl under opdatering af gruppelinje\n"
-
-#, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: linje %d: linjen er for lang\n"
 
@@ -543,37 +502,23 @@ msgstr "%s: linje %d: linjen er for lang\n"
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: linje %d: mangler ny adgangskode\n"
 
-#, c-format
-msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: linje %d: ukendt gruppe %s\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: line %d: group '%s' does not exist\n"
+msgstr "%s: gruppen %s eksisterer ikke\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: cannot update group entry\n"
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: linje %d: kan ikke opdatere posten\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: fejl opdaget, ændringerne blev ignoreret\n"
 
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: Kan ikke låse skyggefilen\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: fejl under opdatering af skyggefil\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: fejl under opdatering af adgangskodefil\n"
-
-#, c-format
-msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: linje %d: ukendt bruger %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: linje %d: kan ikke opdatere adgangskodelinje\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
@@ -595,8 +540,9 @@ msgstr ""
 msgid "Login Shell"
 msgstr "Login-skal"
 
-#, c-format
-msgid "You may not change the shell for %s.\n"
+#, fuzzy, c-format
+#| msgid "You may not change the shell for %s.\n"
+msgid "You may not change the shell for '%s'.\n"
 msgstr "Du kan ikke ændre skal for %s.\n"
 
 #, c-format
@@ -607,24 +553,40 @@ msgstr "Ændrer login-skallen for %s\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: Ugyldig linje: %s\n"
 
-#, c-format
-msgid "%s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell.\n"
 msgstr "%s er en ugyldig skal.\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "Brug: expiry {-f|-c}\n"
 
-#, c-format
-msgid "%s: unknown user\n"
-msgstr "%s: ukendt bruger\n"
-
+#, fuzzy
+#| msgid ""
+#| "Usage: faillog [options]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -a, --all                     display faillog records for all users\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -l, --lock-time SEC           after failed login lock accout to SEC "
+#| "seconds\n"
+#| "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
+#| "  -r, --reset                   reset the counters of login failures\n"
+#| "  -t, --time DAYS               display faillog records more recent than "
+#| "DAYS\n"
+#| "  -u, --user LOGIN              display faillog record or maintains "
+#| "failure\n"
+#| "                                counters and limits (if used with -r, -m "
+#| "or -l\n"
+#| "                                options) only for user with LOGIN\n"
+#| "\n"
 msgid ""
 "Usage: faillog [options]\n"
 "\n"
 "Options:\n"
 "  -a, --all                     display faillog records for all users\n"
 "  -h, --help                    display this help message and exit\n"
-"  -l, --lock-time SEC           after failed login lock accout to SEC "
+"  -l, --lock-time SEC           after failed login lock account to SEC "
 "seconds\n"
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 "  -r, --reset                   reset the counters of login failures\n"
@@ -654,11 +616,16 @@ msgstr ""
 "                                brugeren med LOGIND\n"
 "\n"
 
+#, c-format
+msgid "faillog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "Logind      Fejl     Maksimum Seneste                 Tid\n"
 
-#, c-format
-msgid " [%lds left]"
+#, fuzzy, c-format
+#| msgid " [%lds left]"
+msgid " [%lus left]"
 msgstr " [%lds tilbage]"
 
 #, c-format
@@ -666,76 +633,67 @@ msgid " [%lds lock]"
 msgstr " [%lds lås]"
 
 #, c-format
-msgid "Unknown User: %s\n"
+msgid "faillog: Failed to reset fail count for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set max for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set locktime for UID %d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "lastlog: Unknown user or range: %s\n"
 msgstr "Ukendt bruger: %s\n"
 
-#, c-format
-msgid "Usage: %s [-r|-R] group\n"
-msgstr "Brug: %s [-r|-R] gruppe\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "faillog: Cannot open %s: %s\n"
+msgstr "%s: kan ikke åbne filen %s\n"
 
 #, c-format
-msgid "       %s [-a user] group\n"
-msgstr "      %s [-a bruger] gruppe\n"
+msgid "faillog: Cannot get the size of %s: %s\n"
+msgstr ""
 
 #, c-format
-msgid "       %s [-d user] group\n"
-msgstr "      %s [-d bruger] gruppe\n"
+msgid ""
+"Usage: %s [option] GROUP\n"
+"\n"
+"Options:\n"
+"  -a, --add USER                add USER to GROUP\n"
+"  -d, --delete USER             remove USER from GROUP\n"
+"  -r, --remove-password         remove the GROUP's password\n"
+"  -R, --restrict                restrict access to GROUP to its members\n"
+"  -M, --members USER,...        set the list of members of GROUP\n"
+"%s\n"
+"\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "      %s [-A bruger,...] [-M bruger,...] gruppe\n"
+msgid ""
+"  -A, --administrators ADMIN,...\n"
+"                                set the list of administrators for GROUP\n"
+"Except for the -A and -M options, the options cannot be combined.\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-M user,...] group\n"
-msgstr "      %s [-M bruger,...] gruppe\n"
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "The options cannot be combined.\n"
+msgstr "Adgangskoden for %s kan ikke ændres.\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: der kræves skyggeadgangskoder for -A\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: Kan ikke opnå lås\n"
-
-#, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: Kan ikke opnå skyggelås\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: kan ikke åbne fil\n"
-
-#, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: kan ikke genskrive fil\n"
-
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: kan ikke genskrive skyggefil\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: kan ikke låse fil op\n"
-
-#, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: kan ikke opdatere linje\n"
-
-#, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: kan ikke opdatere skyggelinje\n"
-
-#, c-format
-msgid "unknown group: %s\n"
-msgstr "ukendt gruppe: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist in %s\n"
+msgstr "%s: gruppen %s eksisterer ikke\n"
 
 #, fuzzy, c-format
-msgid "%s: can't close file\n"
-msgstr "%s: kan ikke åbne fil\n"
-
-#, fuzzy, c-format
-msgid "%s: can't close shadow file\n"
-msgstr "%s: Kan ikke åbne skyggefilen\n"
+msgid "%s: failure while closing read-only %s\n"
+msgstr "%s: fejl under spaltning: %s"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -754,9 +712,6 @@ msgstr "De er ikke ens. Prøv igen"
 msgid "%s: Try again later\n"
 msgstr "%s: Prøv igen senere\n"
 
-msgid "Who are you?\n"
-msgstr "Hvem er du?\n"
-
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "Tilføjer brugeren %s til gruppen %s\n"
@@ -765,9 +720,9 @@ msgstr "Tilføjer brugeren %s til gruppen %s\n"
 msgid "Removing user %s from group %s\n"
 msgstr "Fjerner brugeren %s fra gruppen %s\n"
 
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: ukendt medlem %s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' is not a member of '%s'\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -802,111 +757,88 @@ msgstr ""
 "                                (ikke-unikt) GID\n"
 "\n"
 
-#, c-format
-msgid "%s: error adding new group entry\n"
-msgstr "%s: fejl under tilføjelse af gruppelinje\n"
-
-#, c-format
-msgid "%s: %s is not a valid group name\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is not a valid group name\n"
+msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: %s er ikke et gyldigt gruppenavn\n"
 
-#, c-format
-msgid "%s: cannot rewrite group file\n"
-msgstr "%s: kan ikke genskrive gruppefil\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: kan ikke genskrive skyggegruppefil\n"
-
-#, c-format
-msgid "%s: unable to lock group file\n"
-msgstr "%s: kan ikke låse gruppefil\n"
-
-#, c-format
-msgid "%s: unable to open group file\n"
-msgstr "%s: kan ikke åbne gruppefil\n"
-
-#, c-format
-msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: kan ikke låse skyggegruppefil\n"
-
-#, c-format
-msgid "%s: unable to open shadow group file\n"
-msgstr "%s: kan ikke åbne skyggegruppefil\n"
+#, fuzzy, c-format
+msgid "%s: invalid group ID '%s'\n"
+msgstr "ugyldigt gruppenavn '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: -K kræver NAVN=VÆRDI\n"
 
-#, c-format
-msgid "%s: group %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s exists\n"
+msgid "%s: group '%s' already exists\n"
 msgstr "%s: gruppen %s eksisterer\n"
 
-#, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: GID %u er ikke unikt\n"
-
 #, fuzzy, c-format
-msgid "%s: can't create group\n"
-msgstr "%s: kan ikke oprette %s\n"
+#| msgid "Member already exists\n"
+msgid "%s: GID '%lu' already exists\n"
+msgstr "Medlemmet eksisterer allerede\n"
 
 msgid "Usage: groupdel group\n"
 msgstr "Brug: groupdel gruppe\n"
 
-#, c-format
-msgid "%s: error removing group entry\n"
-msgstr "%s: fejl under fjernelse af gruppelinje\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry '%s' from %s\n"
+msgstr "%s: kan ikke omdøbe mappen %s til %s\n"
 
-#, c-format
-msgid "%s: error removing shadow group entry\n"
-msgstr "%s: fejl under fjernelse af skyggegruppelinje\n"
+#, fuzzy, c-format
+msgid "%s: cannot remove the primary group of user '%s'\n"
+msgstr "%s: kan ikke ændre brugeren'%s' på NIS-klienten.\n"
 
-#, c-format
-msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: kan ikke fjerne brugerens primære gruppe.\n"
-
-#, c-format
-msgid "%s: group %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist\n"
 msgstr "%s: gruppen %s eksisterer ikke\n"
 
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: gruppen %s er en NIS-gruppe\n"
+#, fuzzy, c-format
+#| msgid "%s: group '%s' is a NIS group.\n"
+msgid "%s: group '%s' is a NIS group\n"
+msgstr "%s: gruppen '%s' er en NIS-gruppe.\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %s er NIS-masteren\n"
 
-msgid "Member already exists\n"
-msgstr "Medlemmet eksisterer allerede\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s is a NIS user\n"
+msgid "%s: user '%s' is already a member of '%s'\n"
+msgstr "%s: brugeren %s er en NIS-bruger\n"
 
-msgid "Member to remove could not be found\n"
-msgstr "Medlemmet, der skulle slettes, blev ikke fundet\n"
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: løbet tør for hukommelse i update_group\n"
 
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+msgid ""
+"Usage: groupmems [options] [action]\n"
+"\n"
+"Options:\n"
+"  -g, --group groupname         change groupname instead of the user's "
+"group\n"
+"                                (root only)\n"
+"\n"
+"Actions:\n"
+"  -a, --add username            add username to the members of the group\n"
+"  -d, --delete username         remove username from the members of the "
+"group\n"
+"  -p, --purge                   purge all members from the group\n"
+"  -l, --list                    list the members of the group\n"
+"\n"
 msgstr ""
-"Brug: groupmems -a brugernavn| -d brugernavn | -D | -l [-g gruppenavn]\n"
 
-msgid "Only root can add members to different groups\n"
-msgstr "Kun root kan tilføje medlemmer til andre grupper\n"
+#, c-format
+msgid "%s: your groupname does not match your username\n"
+msgstr ""
 
-msgid "Group access is required\n"
-msgstr "Gruppeadgang kræves\n"
-
-msgid "Not primary owner of current group\n"
-msgstr "Ikke primær ejer af den aktuelle gruppe\n"
-
-msgid "PAM authentication failed for\n"
-msgstr "PAM-autentifikation mislykkedes for\n"
-
-msgid "Unable to lock group file\n"
-msgstr "Kan ikke låse gruppefil\n"
-
-msgid "Unable to open group file\n"
-msgstr "Kan ikke åbne gruppefil\n"
-
-msgid "Cannot close group file\n"
-msgstr "Kan ikke lukke gruppefil\n"
+#, c-format
+msgid "%s: only root can use the -g/--group option\n"
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -931,39 +863,17 @@ msgstr ""
 "                                efter GRUPPE\n"
 "\n"
 
-#, c-format
-msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: %s blev ikke fundet i /etc/group\n"
-
-#, c-format
-msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u er ikke en unik GID\n"
-
-#, c-format
-msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s er ikke et unikt navn\n"
-
 #, fuzzy, c-format
-msgid "%s: cannot rewrite passwd file\n"
-msgstr "%s: kan ikke genskrive adgangskodefilen\n"
+msgid "%s: invalid group name '%s'\n"
+msgstr "ugyldigt gruppenavn '%s'\n"
 
 #, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: kunne ikke låse adgangskodefilen\n"
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s: gruppen %s er en NIS-gruppe\n"
 
 #, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: kunne ikke åbne adgangskodefilen\n"
-
-#, c-format
-msgid ""
-"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
-"not in the passwd file.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
-msgstr "%s: kan ikke ændre brugeren'%s' på NIS-klienten.\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s: ukendt bruger %s\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -976,18 +886,6 @@ msgstr "Brug %s [-r] [-s] [gruppe]\n"
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s og -r er ikke kompatible\n"
-
-#, c-format
-msgid "%s: cannot lock file %s\n"
-msgstr "%s: kan ikke låse filen %s\n"
-
-#, c-format
-msgid "%s: cannot open file %s\n"
-msgstr "%s: kan ikke åbne filen %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: kan ikke opdatere filen %s\n"
 
 msgid "invalid group file entry"
 msgstr "ugyldig gruppefils-linje"
@@ -1003,6 +901,11 @@ msgstr "gruppelinjen er en dublet"
 msgid "invalid group name '%s'\n"
 msgstr "ugyldigt gruppenavn '%s'\n"
 
+#, fuzzy, c-format
+#| msgid "invalid group name '%s'\n"
+msgid "invalid group ID '%lu'\n"
+msgstr "ugyldigt gruppenavn '%s'\n"
+
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "gruppe %s: ingen bruger %s\n"
@@ -1015,17 +918,10 @@ msgstr "slet medlemmet '%s'? "
 msgid "no matching group file entry in %s\n"
 msgstr "ingen tilsvarende gruppefilslinje i %s\n"
 
-#, c-format
-msgid "add group '%s' in %s ?"
+#, fuzzy, c-format
+#| msgid "add group '%s' in %s ?"
+msgid "add group '%s' in %s? "
 msgstr "tilføj gruppen %s i %s?"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: kan ikke opdatere skygge-linjen for %s\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: kan ikke opdatere linjen for gruppen %s\n"
 
 msgid "invalid shadow group file entry"
 msgstr "ugyldig skyggegruppefils-linje"
@@ -1053,29 +949,20 @@ msgstr "%s: filerne er blevet opdateret\n"
 msgid "%s: no changes\n"
 msgstr "%s: ingen ændringer\n"
 
-#, c-format
-msgid "%s: can't lock shadow group file\n"
-msgstr "%s: kan ikke låse skyggegruppefilen\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpconv\n"
+msgstr "Brug: groupdel gruppe\n"
 
-#, c-format
-msgid "%s: can't open shadow group file\n"
-msgstr "%s: kan ikke åbne skyggegruppefilen\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpunconv\n"
+msgstr "Brug: groupdel gruppe\n"
 
-#, c-format
-msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: kan ikke fjerne skyggegruppen %s\n"
-
-#, c-format
-msgid "%s: can't update shadow group file\n"
-msgstr "%s: kan ikke opdatere skyggegruppefilen\n"
-
-#, c-format
-msgid "%s: can't update group file\n"
-msgstr "%s: kan ikke opdatere gruppefilen\n"
-
-#, c-format
-msgid "%s: can't delete shadow group file\n"
-msgstr "%s: kan ikke slette skyggegruppefilen\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: cannot delete %s\n"
+msgstr "%s: kan ikke opdatere filen %s\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "Brug: id [-a]\n"
@@ -1109,6 +996,10 @@ msgstr ""
 "                                det angivne LOGIND\n"
 "\n"
 
+#, c-format
+msgid "lastlog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Username         Port     From             Latest"
 msgstr "Brugernavn       Port     Fra              Seneste"
 
@@ -1118,13 +1009,13 @@ msgstr "Brugernavn              Port     Seneste"
 msgid "**Never logged in**"
 msgstr "**Har aldrig logget på**"
 
-#, fuzzy, c-format
-msgid "Unknown user or range: %s\n"
-msgstr "Ukendt bruger: %s\n"
-
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
 msgstr "lastlog: uventet argument: %s\n"
+
+#, c-format
+msgid "lastlog: Cannot get the size of %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1223,6 +1114,11 @@ msgstr ""
 "logind-tid overskredet\n"
 "\n"
 
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: logoutd\n"
+msgstr "Brug: id\n"
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "Brug: newgrp [-] [gruppe]\n"
 
@@ -1237,13 +1133,9 @@ msgstr "Gammel adgangskode: "
 msgid "%s: failure forking: %s\n"
 msgstr "%s: fejl under spaltning: %s"
 
-#, c-format
-msgid "unknown UID: %u\n"
-msgstr "ukendt UID: %u\n"
-
-#, c-format
-msgid "unknown GID: %lu\n"
-msgstr "ukendt GID: %lu\n"
+#, fuzzy, c-format
+msgid "%s: GID '%lu' does not exist\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 msgid "too many groups\n"
 msgstr "for mange grupper\n"
@@ -1258,58 +1150,17 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: group ID `%s' is not valid\n"
+msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: gruppen %s eksisterer ikke\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid group name `%s'\n"
-msgstr "ugyldigt gruppenavn '%s'\n"
-
-#, fuzzy, c-format
-msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: gruppen %s eksisterer ikke\n"
-
-#, c-format
-msgid ""
-"%s: group %s created, failure during the creation of the corresponding "
-"gshadow group\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: user ID `%s' is not valid\n"
-msgstr "%s: brugeren %s eksisterer ikke\n"
-
-#, fuzzy, c-format
-msgid "%s: user `%s' does not exist\n"
-msgstr "%s: brugeren %s eksisterer ikke\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid user name `%s'\n"
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: ugyldigt brugernavn '%s'\n"
 
 #, c-format
-msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: kan ikke låse /etc/passwd.\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/shadow.\n"
-msgstr "%s: kan ikke låse /etc/passwd.\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/group.\n"
-msgstr "%s: kan ikke låse /etc/passwd.\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/gshadow.\n"
-msgstr "%s: kan ikke låse /etc/passwd.\n"
-
-#, c-format
-msgid "%s: can't open files\n"
-msgstr "%s: kan ikke åbne filer\n"
-
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: fejl under opdatering af filerne\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: ugyldigt brugernavn '%s'\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1327,9 +1178,9 @@ msgstr "%s: linje %d: kan ikke oprette GID\n"
 msgid "%s: line %d: can't create group\n"
 msgstr "%s: linje %d: kan ikke oprette GID\n"
 
-#, c-format
-msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: linje %d: kan ikke finde brugeren %s\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgstr "%s: brugeren %s eksisterer ikke\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1347,6 +1198,34 @@ msgstr "%s: linje %d: chown fejlede\n"
 msgid "%s: line %d: can't update entry\n"
 msgstr "%s: linje %d: kan ikke opdatere posten\n"
 
+#, fuzzy
+#| msgid ""
+#| "Usage: passwd [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -a, --all                     report password status on all accounts\n"
+#| "  -d, --delete                  delete the password for the named "
+#| "account\n"
+#| "  -e, --expire                  force expire the password for the named "
+#| "account\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -k, --keep-tokens             change password only if expired\n"
+#| "  -i, --inactive INACTIVE       set password inactive after expiration\n"
+#| "                                to INACTIVE\n"
+#| "  -l, --lock                    lock the named account\n"
+#| "  -n, --mindays MIN_DAYS        set minimum number of days before "
+#| "password\n"
+#| "                                change to MIN_DAYS\n"
+#| "  -q, --quiet                   quiet mode\n"
+#| "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
+#| "  -S, --status                  report password status on the named "
+#| "account\n"
+#| "  -u, --unlock                  unlock the named account\n"
+#| "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#| "  -x, --maxdays MAX_DAYS        set maximim number of days before "
+#| "password\n"
+#| "                                change to MAX_DAYS\n"
+#| "\n"
 msgid ""
 "Usage: passwd [options] [LOGIN]\n"
 "\n"
@@ -1359,15 +1238,15 @@ msgid ""
 "  -k, --keep-tokens             change password only if expired\n"
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --lock                    lock the named account\n"
+"  -l, --lock                    lock the password of the named account\n"
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 "  -q, --quiet                   quiet mode\n"
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 "  -S, --status                  report password status on the named account\n"
-"  -u, --unlock                  unlock the named account\n"
+"  -u, --unlock                  unlock the password of the named account\n"
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 "\n"
 msgstr ""
@@ -1438,13 +1317,10 @@ msgid "The password for %s cannot be changed yet.\n"
 msgstr "Adgangskoden for %s kan ikke ændres.\n"
 
 #, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: hukommelse opbrugt\n"
-
-#, c-format
 msgid ""
-"%s: unlocking the user would result in a passwordless account.\n"
-"You should set a password with usermod -p to unlock this user account.\n"
+"%s: unlocking the password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock the password of this "
+"account.\n"
 msgstr ""
 
 #, c-format
@@ -1487,16 +1363,24 @@ msgstr "adgangskodelinjen er en dublet"
 msgid "invalid user name '%s'\n"
 msgstr "ugyldigt brugernavn'%s'\n"
 
-#, c-format
-msgid "user %s: no group %u\n"
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "invalid user ID '%lu'\n"
+msgstr "ugyldigt brugernavn'%s'\n"
+
+#, fuzzy, c-format
+#| msgid "user %s: no group %u\n"
+msgid "user '%s': no group %lu\n"
 msgstr "bruger %s: ingen gruppe %u\n"
 
-#, c-format
-msgid "user %s: directory %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: directory %s does not exist\n"
+msgid "user '%s': directory '%s' does not exist\n"
 msgstr "bruger %s: mappen %s eksisterer ikke\n"
 
-#, c-format
-msgid "user %s: program %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: program %s does not exist\n"
+msgid "user '%s': program '%s' does not exist\n"
 msgstr "bruger %s: programmet %s eksisterer ikke\n"
 
 #, c-format
@@ -1506,10 +1390,6 @@ msgstr "ingen tilsvarende adgangskoder i %s\n"
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "tilføj brugeren '%s' i %s? "
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: kan ikke opdatere adgangskodelinjen for  %s\n"
 
 msgid "invalid shadow password file entry"
 msgstr "ugyldig linje i skyggeadgangskodefil"
@@ -1521,33 +1401,24 @@ msgstr "skyggeadgangskodelinjen er en dublet"
 msgid "user %s: last password change in the future\n"
 msgstr "bruger %s: seneste ændring af adgangskoden skete i fremtiden\n"
 
-#, c-format
-msgid "%s: can't lock passwd file\n"
-msgstr "%s: kan ikke låse adgangskodefil\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot sort entries in %s\n"
+msgstr "%s: kan ikke åbne filen %s\n"
+
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwconv\n"
+msgstr "Brug: id\n"
 
 #, c-format
-msgid "%s: can't open passwd file\n"
-msgstr "%s: kan ikke åbne adgangskodefil\n"
+msgid "%s: failed to change the mode of %s to 0600\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: kan ikke fjerne skyggelinjen for %s\n"
-
-#, c-format
-msgid "%s: can't update shadow file\n"
-msgstr "%s: kan ikke opdatere skyggefilen\n"
-
-#, c-format
-msgid "%s: can't update passwd file\n"
-msgstr "%s: kan ikke opdatere adgangskodefilen\n"
-
-#, c-format
-msgid "%s: can't update entry for user %s\n"
-msgstr "%s: kan ikke opdatere linje for brugeren %s\n"
-
-#, c-format
-msgid "%s: can't delete shadow password file\n"
-msgstr "%s: kan ikke slette skyggeadgangskodefilen\n"
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwunconv\n"
+msgstr "Brug: id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "Adgang til at udføre su til den konto er NÆGTET.\n"
@@ -1615,6 +1486,16 @@ msgstr ""
 "%s: %s\n"
 "(Ignoreret)\n"
 
+#, fuzzy, c-format
+#| msgid "%s: PAM authentication failed\n"
+msgid "%s: Authentication failure\n"
+msgstr "%s: PAM-autentifikation mislykkedes\n"
+
+#, fuzzy, c-format
+#| msgid "You are not authorized to su %s\n"
+msgid "%s: You are not authorized to su at that time\n"
+msgstr "Du er ikke autoriseret til at 'su %s'\n"
+
 msgid "No shell\n"
 msgstr "Ingen skal\n"
 
@@ -1638,14 +1519,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode"
 msgstr "Går i systemvedligeholdelses-tilstand"
-
-#, c-format
-msgid "%s: unknown GID %s\n"
-msgstr "%s: ukendt GID %s\n"
-
-#, c-format
-msgid "%s: unknown group %s\n"
-msgstr "%s: ukendt gruppe %s\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -1688,10 +1561,12 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-"  -l,                           do not add the user to the lastlog and\n"
+"  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -M, --no-create-home          do not create user's home directory\n"
+"                                (overrides /etc/login.defs)\n"
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1734,14 +1609,6 @@ msgstr ""
 "                                den nye brugerkonto\n"
 "\n"
 
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the group database.\n"
-msgstr "%s: løbet tør for hukommelse i update_group\n"
-
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-msgstr "%s: løbet tør for hukommelse i update_gshadow\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ugyldig grundmappe '%s'\n"
@@ -1779,48 +1646,12 @@ msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid user name '%s'\n"
-msgstr "%s: ugyldigt brugernavn '%s'\n"
+msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
-msgid "%s: cannot rewrite password file\n"
-msgstr "%s: kan ikke genskrive adgangskodefilen\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
-
-#, c-format
-msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: kunne ikke låse skyggeadgangskodefilen\n"
-
-#, c-format
-msgid "%s: cannot open shadow password file\n"
-msgstr "%s: kunne ikke åbne skyggeadgangskodefilen\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: fejl under låsning af gruppefil\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: fejl under åbning af gruppefil\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: fejl under låsning af skyggegruppefil\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: fejl under åbning af skyggegruppefil\n"
-
-#, c-format
-msgid "%s: error adding new password entry\n"
-msgstr "%s: fejl under tilføjelse af ny adgangskodelinje\n"
-
-#, c-format
-msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: fejl under tilføjelse af ny skyggeadgangskode-linje\n"
+msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
@@ -1838,8 +1669,9 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr "Indstiller postboks-filens rettigheder"
 
-#, c-format
-msgid "%s: user %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists\n"
 msgstr "%s: brugeren %s eksisterer\n"
 
 #, c-format
@@ -1853,9 +1685,14 @@ msgstr ""
 msgid "%s: can't create user\n"
 msgstr "%s: kan ikke oprette %s\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
+#, fuzzy, c-format
+#| msgid "%s: UID %u is not unique\n"
+msgid "%s: UID %lu is not unique\n"
 msgstr "%s: UID %u er ikke unikt\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: kan ikke oprette %s\n"
 
 #, c-format
 msgid ""
@@ -1864,10 +1701,6 @@ msgid ""
 msgstr ""
 "%s: advarsel: hjemmemappen eksisterer allerede.\n"
 "Kopierer ikke nogen filer til den fra skelet-mappen.\n"
-
-#, c-format
-msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-msgstr "%s: advarsel: CREATE_HOME understøttes ikke, brug i stedet -m.\n"
 
 msgid ""
 "Usage: userdel [options] LOGIN\n"
@@ -1888,50 +1721,25 @@ msgstr ""
 "  -r, --remove                  fjern home-mappen og postkøen\n"
 "\n"
 
-#, c-format
-msgid "%s: error updating group entry\n"
-msgstr "%s: fejl under opdatering af gruppelinje\n"
-
-#, c-format
-msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: Kan ikke fjerne gruppen %s, som er primærgruppe for en anden bruger.\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating shadow group entry\n"
-msgstr "%s: fejl under opdatering af gruppelinje\n"
-
-#, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: kan ikke åbne gruppefilen\n"
-
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: kan ikke åbne skyggegruppefilen\n"
-
-#, c-format
-msgid "%s: error deleting password entry\n"
-msgstr "%s: fejl under sletning af adgangskodelinje\n"
-
-#, c-format
-msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: fejl under sletning af skyggeadgangskodelinje\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: brugeren %s er logget på\n"
 
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %s ejes ikke af %s, fjerner ikke\n"
-
-#, c-format
-msgid "%s: warning: can't remove "
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: warning: can't remove %s: %s"
 msgstr "%s: advarsel: kan ikke fjerne "
 
 #, c-format
-msgid "%s: user %s does not exist\n"
-msgstr "%s: brugeren %s eksisterer ikke\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %s ejes ikke af %s, fjerner ikke\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1998,9 +1806,16 @@ msgstr ""
 "  -U, --unlock                  fjern lås fra brugerkontoen\n"
 "\n"
 
+#, c-format
+msgid ""
+"%s: unlocking the user's password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user's password.\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: error adding new shadow group entry\n"
-msgstr "%s: fejl under tilføjelse af gruppelinje\n"
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists in %s\n"
+msgstr "%s: brugeren %s eksisterer\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -2014,21 +1829,10 @@ msgstr "%s: skyggeadgangskoder kræves for e og -f\n"
 msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
-#, c-format
-msgid "%s: uid %lu is not unique\n"
-msgstr "%s: uid %lu er ikke unik\n"
-
-#, c-format
-msgid "%s: error changing password entry\n"
-msgstr "%s: fejl under ændring af adgangskodelinje\n"
-
-#, c-format
-msgid "%s: error removing password entry\n"
-msgstr "%s: fejl under fjernelse af adgangskodelinje\n"
-
-#, c-format
-msgid "%s: error removing shadow password entry\n"
-msgstr "%s: fejl under fjernelse af skyggeadgangskodelinje\n"
+#, fuzzy, c-format
+#| msgid "Member already exists\n"
+msgid "%s: UID '%lu' already exists\n"
+msgstr "Medlemmet eksisterer allerede\n"
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2051,6 +1855,14 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: kan ikke omdøbe mappen %s til %s\n"
 
 #, c-format
+msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: advarsel: %s ejes ikke af %s\n"
 
@@ -2064,7 +1876,7 @@ msgstr "kunne ikke omdøbe postkasse"
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
-"Please use the command `%s' to do so.\n"
+"Please use the command '%s' to do so.\n"
 msgstr ""
 
 msgid ""
@@ -2088,10 +1900,16 @@ msgstr ""
 "  -s, --shadow                  ret shadow- eller gshadow-databasen\n"
 "\n"
 
-#, c-format
-msgid ""
-"\n"
-"%s: %s is unchanged\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove %s\n"
+msgstr "%s: kunne ikke afgive rettigheder (%s)\n"
+
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "%s: %s is unchanged\n"
+msgid "%s: %s is unchanged\n"
 msgstr ""
 "\n"
 "%s: %s er uændret\n"
@@ -2106,6 +1924,419 @@ msgstr "kunne ikke lave sikkerhedskopi"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: kunne ikke genskabe %s: %s (dine ændringer er i %s)\n"
 
+#~ msgid "%s: can't lock password file\n"
+#~ msgstr "%s: kan ikke låse adgangskodefil\n"
+
+#~ msgid "%s: can't open password file\n"
+#~ msgstr "%s: kan ikke åbne adgangskodefil\n"
+
+#~ msgid "%s: can't lock shadow password file\n"
+#~ msgstr "%s: kan ikke låse skyggeadgangskodefil\n"
+
+#~ msgid "%s: can't open shadow password file\n"
+#~ msgstr "%s: kan ikke åbne skyggeadgangskodefil\n"
+
+#~ msgid "%s: can't rewrite shadow password file\n"
+#~ msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
+
+#~ msgid "%s: can't rewrite password file\n"
+#~ msgstr "%s: kan ikke genskrive adgangskodefilen\n"
+
+#~ msgid "%s: can't update password file\n"
+#~ msgstr "%s: kan ikke opdatere adgangskodefil\n"
+
+#~ msgid "%s: can't update shadow password file\n"
+#~ msgstr "%s: kan ikke opdatere skyggeadgangskodefil\n"
+
+#~ msgid "\tFull Name: %s\n"
+#~ msgstr "\tFulde navn: %s\n"
+
+#~ msgid "\tRoom Number: %s\n"
+#~ msgstr "\tRum-nummer: %s\n"
+
+#~ msgid "\tWork Phone: %s\n"
+#~ msgstr "\tArbejdstelefon: %s\n"
+
+#~ msgid "\tHome Phone: %s\n"
+#~ msgstr "\tHjemmetelefon: %s\n"
+
+#~ msgid "Cannot lock the password file; try again later.\n"
+#~ msgstr "Kan ikke låse adgangskodefilen; forsøg igen senere.\n"
+
+#~ msgid "Cannot open the password file.\n"
+#~ msgstr "Kan ikke åbne adgangskodefilen.\n"
+
+#~ msgid "%s: %s not found in /etc/passwd\n"
+#~ msgstr "%s: %s ikke fundet i /etc/passwd\n"
+
+#~ msgid "Error updating the password entry.\n"
+#~ msgstr "Fejl under opdatering af adgangskodelinje.\n"
+
+#~ msgid "Cannot commit password file changes.\n"
+#~ msgstr "Kan ikke skrive ændringerne til adgangskodefilen.\n"
+
+#~ msgid "Cannot unlock the password file.\n"
+#~ msgstr "Kan ikke låse adgangskodefilen op.\n"
+
+#~ msgid "%s: can't lock group file\n"
+#~ msgstr "%s: kan ikke låse gruppefilen\n"
+
+#~ msgid "%s: can't open group file\n"
+#~ msgstr "%s: kan ikke åbne gruppefilen\n"
+
+#~ msgid "%s: can't lock gshadow file\n"
+#~ msgstr "%s: Kan ikke låse gshadow-filen\n"
+
+#~ msgid "%s: can't open shadow file\n"
+#~ msgstr "%s: Kan ikke åbne skyggefilen\n"
+
+#, fuzzy
+#~ msgid "%s: error updating gshadow file\n"
+#~ msgstr "%s: fejl under opdatering af skyggefil\n"
+
+#, fuzzy
+#~ msgid "%s: error updating group file\n"
+#~ msgstr "%s: fejl under opdatering af gruppelinje\n"
+
+#~ msgid "%s: line %d: unknown group %s\n"
+#~ msgstr "%s: linje %d: ukendt gruppe %s\n"
+
+#, fuzzy
+#~ msgid "%s: line %d: cannot update group entry\n"
+#~ msgstr "%s: linje %d: kan ikke opdatere posten\n"
+
+#~ msgid "%s: can't lock shadow file\n"
+#~ msgstr "%s: Kan ikke låse skyggefilen\n"
+
+#~ msgid "%s: error updating shadow file\n"
+#~ msgstr "%s: fejl under opdatering af skyggefil\n"
+
+#~ msgid "%s: error updating password file\n"
+#~ msgstr "%s: fejl under opdatering af adgangskodefil\n"
+
+#~ msgid "%s: line %d: unknown user %s\n"
+#~ msgstr "%s: linje %d: ukendt bruger %s\n"
+
+#~ msgid "%s: line %d: cannot update password entry\n"
+#~ msgstr "%s: linje %d: kan ikke opdatere adgangskodelinje\n"
+
+#~ msgid "%s: unknown user\n"
+#~ msgstr "%s: ukendt bruger\n"
+
+#~ msgid "Unknown User: %s\n"
+#~ msgstr "Ukendt bruger: %s\n"
+
+#~ msgid "Usage: %s [-r|-R] group\n"
+#~ msgstr "Brug: %s [-r|-R] gruppe\n"
+
+#~ msgid "       %s [-a user] group\n"
+#~ msgstr "      %s [-a bruger] gruppe\n"
+
+#~ msgid "       %s [-d user] group\n"
+#~ msgstr "      %s [-d bruger] gruppe\n"
+
+#~ msgid "       %s [-A user,...] [-M user,...] group\n"
+#~ msgstr "      %s [-A bruger,...] [-M bruger,...] gruppe\n"
+
+#~ msgid "       %s [-M user,...] group\n"
+#~ msgstr "      %s [-M bruger,...] gruppe\n"
+
+#~ msgid "%s: can't get lock\n"
+#~ msgstr "%s: Kan ikke opnå lås\n"
+
+#~ msgid "%s: can't get shadow lock\n"
+#~ msgstr "%s: Kan ikke opnå skyggelås\n"
+
+#~ msgid "%s: can't open file\n"
+#~ msgstr "%s: kan ikke åbne fil\n"
+
+#~ msgid "%s: can't re-write file\n"
+#~ msgstr "%s: kan ikke genskrive fil\n"
+
+#~ msgid "%s: can't re-write shadow file\n"
+#~ msgstr "%s: kan ikke genskrive skyggefil\n"
+
+#~ msgid "%s: can't unlock file\n"
+#~ msgstr "%s: kan ikke låse fil op\n"
+
+#~ msgid "%s: can't update entry\n"
+#~ msgstr "%s: kan ikke opdatere linje\n"
+
+#~ msgid "%s: can't update shadow entry\n"
+#~ msgstr "%s: kan ikke opdatere skyggelinje\n"
+
+#~ msgid "unknown group: %s\n"
+#~ msgstr "ukendt gruppe: %s\n"
+
+#, fuzzy
+#~ msgid "%s: can't close file\n"
+#~ msgstr "%s: kan ikke åbne fil\n"
+
+#, fuzzy
+#~ msgid "%s: can't close shadow file\n"
+#~ msgstr "%s: Kan ikke åbne skyggefilen\n"
+
+#~ msgid "Who are you?\n"
+#~ msgstr "Hvem er du?\n"
+
+#~ msgid "%s: unknown member %s\n"
+#~ msgstr "%s: ukendt medlem %s\n"
+
+#~ msgid "%s: error adding new group entry\n"
+#~ msgstr "%s: fejl under tilføjelse af gruppelinje\n"
+
+#~ msgid "%s: cannot rewrite group file\n"
+#~ msgstr "%s: kan ikke genskrive gruppefil\n"
+
+#~ msgid "%s: cannot rewrite shadow group file\n"
+#~ msgstr "%s: kan ikke genskrive skyggegruppefil\n"
+
+#~ msgid "%s: unable to lock group file\n"
+#~ msgstr "%s: kan ikke låse gruppefil\n"
+
+#~ msgid "%s: unable to open group file\n"
+#~ msgstr "%s: kan ikke åbne gruppefil\n"
+
+#~ msgid "%s: unable to lock shadow group file\n"
+#~ msgstr "%s: kan ikke låse skyggegruppefil\n"
+
+#~ msgid "%s: unable to open shadow group file\n"
+#~ msgstr "%s: kan ikke åbne skyggegruppefil\n"
+
+#~ msgid "%s: GID %u is not unique\n"
+#~ msgstr "%s: GID %u er ikke unikt\n"
+
+#~ msgid "%s: error removing group entry\n"
+#~ msgstr "%s: fejl under fjernelse af gruppelinje\n"
+
+#~ msgid "%s: error removing shadow group entry\n"
+#~ msgstr "%s: fejl under fjernelse af skyggegruppelinje\n"
+
+#~ msgid "%s: cannot remove user's primary group.\n"
+#~ msgstr "%s: kan ikke fjerne brugerens primære gruppe.\n"
+
+#~ msgid "Member to remove could not be found\n"
+#~ msgstr "Medlemmet, der skulle slettes, blev ikke fundet\n"
+
+#~ msgid ""
+#~ "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+#~ msgstr ""
+#~ "Brug: groupmems -a brugernavn| -d brugernavn | -D | -l [-g gruppenavn]\n"
+
+#~ msgid "Only root can add members to different groups\n"
+#~ msgstr "Kun root kan tilføje medlemmer til andre grupper\n"
+
+#~ msgid "Group access is required\n"
+#~ msgstr "Gruppeadgang kræves\n"
+
+#~ msgid "Not primary owner of current group\n"
+#~ msgstr "Ikke primær ejer af den aktuelle gruppe\n"
+
+#~ msgid "PAM authentication failed for\n"
+#~ msgstr "PAM-autentifikation mislykkedes for\n"
+
+#~ msgid "Unable to lock group file\n"
+#~ msgstr "Kan ikke låse gruppefil\n"
+
+#~ msgid "Unable to open group file\n"
+#~ msgstr "Kan ikke åbne gruppefil\n"
+
+#~ msgid "Cannot close group file\n"
+#~ msgstr "Kan ikke lukke gruppefil\n"
+
+#~ msgid "%s: %s not found in /etc/group\n"
+#~ msgstr "%s: %s blev ikke fundet i /etc/group\n"
+
+#~ msgid "%s: %u is not a unique GID\n"
+#~ msgstr "%s: %u er ikke en unik GID\n"
+
+#~ msgid "%s: %s is not a unique name\n"
+#~ msgstr "%s: %s er ikke et unikt navn\n"
+
+#, fuzzy
+#~ msgid "%s: cannot rewrite passwd file\n"
+#~ msgstr "%s: kan ikke genskrive adgangskodefilen\n"
+
+#~ msgid "%s: unable to lock password file\n"
+#~ msgstr "%s: kunne ikke låse adgangskodefilen\n"
+
+#~ msgid "%s: unable to open password file\n"
+#~ msgstr "%s: kunne ikke åbne adgangskodefilen\n"
+
+#~ msgid "%s: cannot lock file %s\n"
+#~ msgstr "%s: kan ikke låse filen %s\n"
+
+#~ msgid "%s: can't update shadow entry for %s\n"
+#~ msgstr "%s: kan ikke opdatere skygge-linjen for %s\n"
+
+#~ msgid "%s: can't update entry for group %s\n"
+#~ msgstr "%s: kan ikke opdatere linjen for gruppen %s\n"
+
+#~ msgid "%s: can't lock shadow group file\n"
+#~ msgstr "%s: kan ikke låse skyggegruppefilen\n"
+
+#~ msgid "%s: can't open shadow group file\n"
+#~ msgstr "%s: kan ikke åbne skyggegruppefilen\n"
+
+#~ msgid "%s: can't remove shadow group %s\n"
+#~ msgstr "%s: kan ikke fjerne skyggegruppen %s\n"
+
+#~ msgid "%s: can't update shadow group file\n"
+#~ msgstr "%s: kan ikke opdatere skyggegruppefilen\n"
+
+#~ msgid "%s: can't update group file\n"
+#~ msgstr "%s: kan ikke opdatere gruppefilen\n"
+
+#~ msgid "%s: can't delete shadow group file\n"
+#~ msgstr "%s: kan ikke slette skyggegruppefilen\n"
+
+#~ msgid "unknown UID: %u\n"
+#~ msgstr "ukendt UID: %u\n"
+
+#~ msgid "unknown GID: %lu\n"
+#~ msgstr "ukendt GID: %lu\n"
+
+#, fuzzy
+#~ msgid "%s: group ID `%s' is not valid\n"
+#~ msgstr "%s: gruppen %s eksisterer ikke\n"
+
+#, fuzzy
+#~ msgid "%s: user ID `%s' is not valid\n"
+#~ msgstr "%s: brugeren %s eksisterer ikke\n"
+
+#, fuzzy
+#~ msgid "%s: invalid user name `%s'\n"
+#~ msgstr "%s: ugyldigt brugernavn '%s'\n"
+
+#~ msgid "%s: can't lock /etc/passwd.\n"
+#~ msgstr "%s: kan ikke låse /etc/passwd.\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/shadow.\n"
+#~ msgstr "%s: kan ikke låse /etc/passwd.\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/group.\n"
+#~ msgstr "%s: kan ikke låse /etc/passwd.\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/gshadow.\n"
+#~ msgstr "%s: kan ikke låse /etc/passwd.\n"
+
+#~ msgid "%s: can't open files\n"
+#~ msgstr "%s: kan ikke åbne filer\n"
+
+#~ msgid "%s: error updating files\n"
+#~ msgstr "%s: fejl under opdatering af filerne\n"
+
+#~ msgid "%s: line %d: cannot find user %s\n"
+#~ msgstr "%s: linje %d: kan ikke finde brugeren %s\n"
+
+#~ msgid "%s: can't update passwd entry for %s\n"
+#~ msgstr "%s: kan ikke opdatere adgangskodelinjen for  %s\n"
+
+#~ msgid "%s: can't lock passwd file\n"
+#~ msgstr "%s: kan ikke låse adgangskodefil\n"
+
+#~ msgid "%s: can't open passwd file\n"
+#~ msgstr "%s: kan ikke åbne adgangskodefil\n"
+
+#~ msgid "%s: can't remove shadow entry for %s\n"
+#~ msgstr "%s: kan ikke fjerne skyggelinjen for %s\n"
+
+#~ msgid "%s: can't update shadow file\n"
+#~ msgstr "%s: kan ikke opdatere skyggefilen\n"
+
+#~ msgid "%s: can't update passwd file\n"
+#~ msgstr "%s: kan ikke opdatere adgangskodefilen\n"
+
+#~ msgid "%s: can't update entry for user %s\n"
+#~ msgstr "%s: kan ikke opdatere linje for brugeren %s\n"
+
+#~ msgid "%s: can't delete shadow password file\n"
+#~ msgstr "%s: kan ikke slette skyggeadgangskodefilen\n"
+
+#~ msgid "%s: unknown GID %s\n"
+#~ msgstr "%s: ukendt GID %s\n"
+
+#~ msgid "%s: unknown group %s\n"
+#~ msgstr "%s: ukendt gruppe %s\n"
+
+#, fuzzy
+#~ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+#~ msgstr "%s: løbet tør for hukommelse i update_gshadow\n"
+
+#~ msgid "%s: cannot rewrite password file\n"
+#~ msgstr "%s: kan ikke genskrive adgangskodefilen\n"
+
+#~ msgid "%s: cannot rewrite shadow password file\n"
+#~ msgstr "%s: kan ikke genskrive skyggeadgangskodefilen\n"
+
+#~ msgid "%s: cannot lock shadow password file\n"
+#~ msgstr "%s: kunne ikke låse skyggeadgangskodefilen\n"
+
+#~ msgid "%s: cannot open shadow password file\n"
+#~ msgstr "%s: kunne ikke åbne skyggeadgangskodefilen\n"
+
+#~ msgid "%s: error locking group file\n"
+#~ msgstr "%s: fejl under låsning af gruppefil\n"
+
+#~ msgid "%s: error opening group file\n"
+#~ msgstr "%s: fejl under åbning af gruppefil\n"
+
+#~ msgid "%s: error locking shadow group file\n"
+#~ msgstr "%s: fejl under låsning af skyggegruppefil\n"
+
+#~ msgid "%s: error opening shadow group file\n"
+#~ msgstr "%s: fejl under åbning af skyggegruppefil\n"
+
+#~ msgid "%s: error adding new password entry\n"
+#~ msgstr "%s: fejl under tilføjelse af ny adgangskodelinje\n"
+
+#~ msgid "%s: error adding new shadow password entry\n"
+#~ msgstr "%s: fejl under tilføjelse af ny skyggeadgangskode-linje\n"
+
+#~ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+#~ msgstr "%s: advarsel: CREATE_HOME understøttes ikke, brug i stedet -m.\n"
+
+#~ msgid "%s: error updating group entry\n"
+#~ msgstr "%s: fejl under opdatering af gruppelinje\n"
+
+#, fuzzy
+#~ msgid "%s: error updating shadow group entry\n"
+#~ msgstr "%s: fejl under opdatering af gruppelinje\n"
+
+#~ msgid "%s: cannot open group file\n"
+#~ msgstr "%s: kan ikke åbne gruppefilen\n"
+
+#~ msgid "%s: cannot open shadow group file\n"
+#~ msgstr "%s: kan ikke åbne skyggegruppefilen\n"
+
+#~ msgid "%s: error deleting password entry\n"
+#~ msgstr "%s: fejl under sletning af adgangskodelinje\n"
+
+#~ msgid "%s: error deleting shadow password entry\n"
+#~ msgstr "%s: fejl under sletning af skyggeadgangskodelinje\n"
+
+#~ msgid "%s: user %s does not exist\n"
+#~ msgstr "%s: brugeren %s eksisterer ikke\n"
+
+#, fuzzy
+#~ msgid "%s: error adding new shadow group entry\n"
+#~ msgstr "%s: fejl under tilføjelse af gruppelinje\n"
+
+#~ msgid "%s: uid %lu is not unique\n"
+#~ msgstr "%s: uid %lu er ikke unik\n"
+
+#~ msgid "%s: error changing password entry\n"
+#~ msgstr "%s: fejl under ændring af adgangskodelinje\n"
+
+#~ msgid "%s: error removing password entry\n"
+#~ msgstr "%s: fejl under fjernelse af adgangskodelinje\n"
+
+#~ msgid "%s: error removing shadow password entry\n"
+#~ msgstr "%s: fejl under fjernelse af skyggeadgangskodelinje\n"
+
 #~ msgid "%s: can't get unique GID\n"
 #~ msgstr "%s: kan ikke få unik GID\n"
 
@@ -2115,17 +2346,11 @@ msgstr "%s: kunne ikke genskabe %s: %s (dine ændringer er i %s)\n"
 #~ msgid " on '%.100s'"
 #~ msgstr " på '%.100s'"
 
-#~ msgid "%s: can't lock files, try again later\n"
-#~ msgstr "%s: kan ikke låse filer. Prøv igen senere\n"
-
 #~ msgid "%s: line %d: can't create UID\n"
 #~ msgstr "%s: linje %d: kan ikke oprette UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: navnet %s er ikke unikt\n"
-
-#~ msgid "No\n"
-#~ msgstr "Nej\n"
 
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-05-24 21:01+0200\n"
+"POT-Creation-Date: 2009-04-06 00:47+0200\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -57,6 +57,9 @@ msgstr "  請聯繫系統管理員。"
 msgid "  Choose a new password."
 msgstr "  請選擇一個新密碼。"
 
+msgid "You must change your password."
+msgstr ""
+
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "您的密碼將在 %ld 天內過期。\n"
@@ -68,7 +71,12 @@ msgid "Your password will expire today."
 msgstr "您的密碼今天過期。"
 
 #, c-format
-msgid "Unable to change tty %s"
+msgid "Cannot open audit interface - aborting.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Unable to change tty %s"
+msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "無法改變 tty %s"
 
 msgid "Environment overflow\n"
@@ -89,12 +97,12 @@ msgstr[0] ""
 "距離上一次登錄已有 %d 次登錄失敗。\n"
 "最後一次是 %s 在 %s 上。\n"
 
-#, fuzzy
-msgid "Can't get unique UID (no more available UIDs)\n"
+#, fuzzy, c-format
+msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
-#, fuzzy
-msgid "Can't get unique GID (no more available GIDs)\n"
+#, fuzzy, c-format
+msgid "%s: Can't get unique UID (no more available UIDs)\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
 msgid "Too many logins.\n"
@@ -188,8 +196,16 @@ msgid "Unable to determine your tty name."
 msgstr "%s：無法確定您的使用者名稱。\n"
 
 #, c-format
+msgid "%s: out of memory\n"
+msgstr "%s：記憶體不足\n"
+
+#, c-format
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) 失敗\n"
+
+#, fuzzy
+msgid "No"
+msgstr "取消"
 
 msgid "Password: "
 msgstr "密碼："
@@ -197,6 +213,11 @@ msgstr "密碼："
 #, c-format
 msgid "%s's Password: "
 msgstr "%s 的密碼："
+
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s：字段太長\n"
 
 #, fuzzy
 msgid ""
@@ -289,40 +310,30 @@ msgid "%s: Permission denied.\n"
 msgstr "%s：權限被拒。\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s：無法確定您的使用者名稱。\n"
+
+#, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s：PAM 驗証失敗\n"
 
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s：無法鎖定密碼檔\n"
+#, fuzzy, c-format
+#| msgid "%s: can't lock files, try again later\n"
+msgid "%s: cannot lock %s; try again later.\n"
+msgstr "%s：無法鎖定檔案，請稍後再試。\n"
+
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot open %s\n"
+msgstr "%s：無法打開檔案 %s\n"
+
+#, fuzzy, c-format
+msgid "%s: failure while writing changes to %s\n"
+msgstr "%s：無效的工作電話：“%s”\n"
 
 #, c-format
-msgid "%s: can't open password file\n"
-msgstr "%s：無法打開密碼文件\n"
-
-#, c-format
-msgid "%s: can't lock shadow password file\n"
-msgstr "%s：無法鎖定shadow密碼文件\n"
-
-#, c-format
-msgid "%s: can't open shadow password file\n"
-msgstr "%s：無法打開影子密碼文件\n"
-
-#, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s：無法重寫shadow密碼檔案\n"
-
-#, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s：無法重寫密碼檔案\n"
-
-#, c-format
-msgid "%s: can't update password file\n"
-msgstr "%s：無法更新密碼檔案\n"
-
-#, c-format
-msgid "%s: can't update shadow password file\n"
-msgstr "%s：無法更新shadow密碼檔案\n"
+msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: the shadow password file is not present\n"
@@ -332,9 +343,9 @@ msgstr "%s：無法打開影子密碼文件\n"
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr ""
 
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s：未知使用者：%s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist in %s\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -359,29 +370,17 @@ msgstr "用法：%s [-f 全名] [-r 房間號] [-w 工作電話] [-h 住家電�
 msgid "Full Name"
 msgstr "全名"
 
-#, c-format
-msgid "\tFull Name: %s\n"
-msgstr "\t全名：%s\n"
+#, fuzzy, c-format
+msgid "\t%s: %s\n"
+msgstr "passwd：%s\n"
 
 msgid "Room Number"
-msgstr "房間號碼"
-
-#, fuzzy, c-format
-msgid "\tRoom Number: %s\n"
 msgstr "房間號碼"
 
 msgid "Work Phone"
 msgstr "工作電話"
 
-#, fuzzy, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "工作電話"
-
 msgid "Home Phone"
-msgstr "住家電話"
-
-#, fuzzy, c-format
-msgid "\tHome Phone: %s\n"
 msgstr "住家電話"
 
 msgid "Other"
@@ -389,25 +388,6 @@ msgstr "其它"
 
 msgid "Cannot change ID to root.\n"
 msgstr "無法改變 ID 成 root。\n"
-
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "無法鎖定密碼檔案﹔稍後再試。\n"
-
-msgid "Cannot open the password file.\n"
-msgstr "無法打開密碼檔案。\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s：未在 /etc/passwd 中找到 %s\n"
-
-msgid "Error updating the password entry.\n"
-msgstr "更改密碼項目時出錯。\n"
-
-msgid "Cannot commit password file changes.\n"
-msgstr "無法提交密碼檔案變動。\n"
-
-msgid "Cannot unlock the password file.\n"
-msgstr "無法解鎖密碼檔案。\n"
 
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
@@ -441,9 +421,9 @@ msgstr "%s：“%s”包含無效字元\n"
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s：“%s”包含無效字元\n"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s：無法確定您的使用者名稱。\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 #, fuzzy, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
@@ -490,9 +470,10 @@ msgstr ""
 msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s：無效的數字參數“%s”\n"
 
-#, c-format
-msgid "%s: %s flag is ONLY allowed with the %s flag\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: do not include \"l\" with other flags\n"
+msgid "%s: %s flag is only allowed with the %s flag\n"
+msgstr "%s：請不要與其它標誌一同使用“l”\n"
 
 #, c-format
 msgid "%s: the -c, -e, and -m flags are exclusive\n"
@@ -503,30 +484,6 @@ msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s：無法鎖定群組檔案\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s：無法打開群組檔案\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock gshadow file\n"
-msgstr "%s：無法鎖定 shadow 檔\n"
-
-#, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s：無法打開 shadow 檔\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating gshadow file\n"
-msgstr "%s：更新shadow檔案時出錯。\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating group file\n"
-msgstr "%s：更新群組項目時出錯\n"
-
-#, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s：第 %d 行：此行太長\n"
 
@@ -535,36 +492,22 @@ msgid "%s: line %d: missing new password\n"
 msgstr "%s：第 %d 行：缺少新密碼\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: unknown group %s\n"
-msgstr "%s：第 %d 行：未知使用者 %s\n"
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: line %d: group '%s' does not exist\n"
+msgstr "%s：%s 群組不存在\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: cannot update group entry\n"
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgstr "%s：第 %d 行：無法更新項目\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s：發現錯誤，忽略更動\n"
 
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s：無法鎖定 shadow 檔\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s：更新shadow檔案時出錯。\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s：更新密碼檔案時出錯。\n"
-
-#, c-format
-msgid "%s: line %d: unknown user %s\n"
-msgstr "%s：第 %d 行：未知使用者 %s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s：第 %d 行：無法更新密碼項目\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 msgid ""
 "Usage: chsh [options] [LOGIN]\n"
@@ -578,8 +521,9 @@ msgstr ""
 msgid "Login Shell"
 msgstr "登入 Shell"
 
-#, c-format
-msgid "You may not change the shell for %s.\n"
+#, fuzzy, c-format
+#| msgid "You may not change the shell for %s.\n"
+msgid "You may not change the shell for '%s'.\n"
 msgstr "您不能為 %s 更改 shell。\n"
 
 #, c-format
@@ -590,16 +534,13 @@ msgstr "正在更改 %s 的 shell\n"
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s：無效的項目：%s\n"
 
-#, c-format
-msgid "%s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell.\n"
 msgstr "%s 是無效的 shell。\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "用法：expiry {-f|-c}\n"
-
-#, c-format
-msgid "%s: unknown user\n"
-msgstr "%s：未知使用者\n"
 
 #, fuzzy
 msgid ""
@@ -608,7 +549,7 @@ msgid ""
 "Options:\n"
 "  -a, --all                     display faillog records for all users\n"
 "  -h, --help                    display this help message and exit\n"
-"  -l, --lock-time SEC           after failed login lock accout to SEC "
+"  -l, --lock-time SEC           after failed login lock account to SEC "
 "seconds\n"
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 "  -r, --reset                   reset the counters of login failures\n"
@@ -633,11 +574,16 @@ msgstr ""
 "\t\t\t\t及限制（當和 -r、-m 或 -l 選項搭配使用時）\n"
 "\n"
 
+#, c-format
+msgid "faillog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "登入        失敗     最多    最後                     在\n"
 
-#, c-format
-msgid " [%lds left]"
+#, fuzzy, c-format
+#| msgid " [%lds left]"
+msgid " [%lus left]"
 msgstr " [還剩 %lds]"
 
 #, c-format
@@ -645,76 +591,67 @@ msgid " [%lds lock]"
 msgstr " [鎖定 %lds]"
 
 #, c-format
-msgid "Unknown User: %s\n"
+msgid "faillog: Failed to reset fail count for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set max for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set locktime for UID %d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "lastlog: Unknown user or range: %s\n"
 msgstr "未知使用者：%s\n"
 
-#, c-format
-msgid "Usage: %s [-r|-R] group\n"
-msgstr "用法：%s [-r|-R] 群組\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "faillog: Cannot open %s: %s\n"
+msgstr "%s：無法打開檔案 %s\n"
 
 #, c-format
-msgid "       %s [-a user] group\n"
-msgstr "       %s [-a 使用者] 群組\n"
+msgid "faillog: Cannot get the size of %s: %s\n"
+msgstr ""
 
 #, c-format
-msgid "       %s [-d user] group\n"
-msgstr "       %s [-d 使用者] 群組\n"
+msgid ""
+"Usage: %s [option] GROUP\n"
+"\n"
+"Options:\n"
+"  -a, --add USER                add USER to GROUP\n"
+"  -d, --delete USER             remove USER from GROUP\n"
+"  -r, --remove-password         remove the GROUP's password\n"
+"  -R, --restrict                restrict access to GROUP to its members\n"
+"  -M, --members USER,...        set the list of members of GROUP\n"
+"%s\n"
+"\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A 使用者,...] [-M 使用者,...] 群組\n"
+msgid ""
+"  -A, --administrators ADMIN,...\n"
+"                                set the list of administrators for GROUP\n"
+"Except for the -A and -M options, the options cannot be combined.\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M 使用者,...] 群組\n"
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "The options cannot be combined.\n"
+msgstr "無法更改 %s 的密碼。\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s：-A 需要shadow群組密碼\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s：無法獲得鎖定\n"
-
-#, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s：無法獲得shadow鎖定\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s：無法打開檔案\n"
-
-#, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s：無法重寫檔案\n"
-
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s：無法重寫shadow檔案\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s 無法解鎖檔案。\n"
-
-#, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s：無法更新項目\n"
-
-#, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s：無法更新shadow項目\n"
-
-#, c-format
-msgid "unknown group: %s\n"
-msgstr "未知群組：%s\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist in %s\n"
+msgstr "%s：%s 群組不存在\n"
 
 #, fuzzy, c-format
-msgid "%s: can't close file\n"
-msgstr "%s：無法打開檔案\n"
-
-#, fuzzy, c-format
-msgid "%s: can't close shadow file\n"
-msgstr "%s：無法打開 shadow 檔\n"
+msgid "%s: failure while closing read-only %s\n"
+msgstr "%s：無效的工作電話：“%s”\n"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -733,9 +670,6 @@ msgstr "他們並不匹配﹔請重試"
 msgid "%s: Try again later\n"
 msgstr "%s：請稍後重試\n"
 
-msgid "Who are you?\n"
-msgstr "你是誰？\n"
-
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "正在將使用者“%s”加入到“%s”群組中\n"
@@ -744,9 +678,9 @@ msgstr "正在將使用者“%s”加入到“%s”群組中\n"
 msgid "Removing user %s from group %s\n"
 msgstr "正在將使用者“%s”從“%s”群組中刪除\n"
 
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s：未知成員 %s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' is not a member of '%s'\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -768,114 +702,86 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid "%s: error adding new group entry\n"
-msgstr "%s：增加新群組項目時出錯\n"
-
-#, c-format
-msgid "%s: %s is not a valid group name\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is not a valid group name\n"
+msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s：%s 不是有效的群組名\n"
 
-#, c-format
-msgid "%s: cannot rewrite group file\n"
-msgstr "%s：無法重寫群組檔案\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s：無法重寫shadow群組檔案\n"
-
-#, c-format
-msgid "%s: unable to lock group file\n"
-msgstr "%s：無法鎖定群組檔案\n"
-
-#, c-format
-msgid "%s: unable to open group file\n"
-msgstr "%s：無法打開群組檔案\n"
-
-#, c-format
-msgid "%s: unable to lock shadow group file\n"
-msgstr "%s：無法鎖定shadow群組檔案\n"
-
-#, c-format
-msgid "%s: unable to open shadow group file\n"
-msgstr "%s：無法打開shadow群組檔案\n"
+#, fuzzy, c-format
+msgid "%s: invalid group ID '%s'\n"
+msgstr "無效的群組名“%s”\n"
 
 #, fuzzy, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s：-O 需要 NAME=VALUE\n"
 
-#, c-format
-msgid "%s: group %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s exists\n"
+msgid "%s: group '%s' already exists\n"
 msgstr "%s：%s 群組已存在\n"
 
-#, fuzzy, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s：gid %u 並不唯一\n"
-
-#, fuzzy, c-format
-msgid "%s: can't create group\n"
-msgstr "%s：無法建立 %s\n"
+#, c-format
+msgid "%s: GID '%lu' already exists\n"
+msgstr ""
 
 msgid "Usage: groupdel group\n"
 msgstr "用法：groupdel 群組\n"
 
-#, c-format
-msgid "%s: error removing group entry\n"
-msgstr "%s：刪除群組項目時出錯\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry '%s' from %s\n"
+msgstr "%s：無法將目錄 %s 改名為 %s\n"
 
-#, c-format
-msgid "%s: error removing shadow group entry\n"
-msgstr "%s：刪除shadow群組項目時出錯\n"
+#, fuzzy, c-format
+msgid "%s: cannot remove the primary group of user '%s'\n"
+msgstr "%s：不能在 NIS 用戶端上修改使用者“%s”。\n"
 
-#, c-format
-msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s：不能刪除使用者的主群組。\n"
-
-#, c-format
-msgid "%s: group %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist\n"
 msgstr "%s：%s 群組不存在\n"
 
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s：%s 群組是一個 NIS 群組\n"
+#, fuzzy, c-format
+msgid "%s: group '%s' is a NIS group\n"
+msgstr "%s：“%s”群組是一個 NIS 群組。\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s：%s 是 NIS 管理員\n"
 
-msgid "Member already exists\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s is a NIS user\n"
+msgid "%s: user '%s' is already a member of '%s'\n"
+msgstr "%s：使用者 %s 是 NIS 使用者\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s：update_group 時記憶體不足\n"
+
+msgid ""
+"Usage: groupmems [options] [action]\n"
+"\n"
+"Options:\n"
+"  -g, --group groupname         change groupname instead of the user's "
+"group\n"
+"                                (root only)\n"
+"\n"
+"Actions:\n"
+"  -a, --add username            add username to the members of the group\n"
+"  -d, --delete username         remove username from the members of the "
+"group\n"
+"  -p, --purge                   purge all members from the group\n"
+"  -l, --list                    list the members of the group\n"
+"\n"
 msgstr ""
 
-msgid "Member to remove could not be found\n"
+#, c-format
+msgid "%s: your groupname does not match your username\n"
 msgstr ""
 
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+#, c-format
+msgid "%s: only root can use the -g/--group option\n"
 msgstr ""
-
-msgid "Only root can add members to different groups\n"
-msgstr ""
-
-msgid "Group access is required\n"
-msgstr ""
-
-msgid "Not primary owner of current group\n"
-msgstr ""
-
-#, fuzzy
-msgid "PAM authentication failed for\n"
-msgstr "%s：PAM 驗証失敗\n"
-
-#, fuzzy
-msgid "Unable to lock group file\n"
-msgstr "%s：無法鎖定群組檔案\n"
-
-#, fuzzy
-msgid "Unable to open group file\n"
-msgstr "%s：無法打開群組檔案\n"
-
-#, fuzzy
-msgid "Cannot close group file\n"
-msgstr "%s：無法打開群組檔案\n"
 
 msgid ""
 "Usage: groupmod [options] GROUP\n"
@@ -890,39 +796,17 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid "%s: %s not found in /etc/group\n"
-msgstr "%s：未在 /etc/group 中找到 %s\n"
-
 #, fuzzy, c-format
-msgid "%s: %u is not a unique GID\n"
-msgstr "%s：%u 不是一個唯一的 gid\n"
+msgid "%s: invalid group name '%s'\n"
+msgstr "無效的群組名“%s”\n"
 
 #, c-format
-msgid "%s: %s is not a unique name\n"
-msgstr "%s：%s 不是一個唯一的名稱\n"
-
-#, fuzzy, c-format
-msgid "%s: cannot rewrite passwd file\n"
-msgstr "%s：無法重寫密碼檔案\n"
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s：%s 群組是一個 NIS 群組\n"
 
 #, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s：無法鎖定密碼檔案\n"
-
-#, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s：無法打開密碼檔案\n"
-
-#, c-format
-msgid ""
-"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
-"not in the passwd file.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
-msgstr "%s：不能在 NIS 用戶端上修改使用者“%s”。\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s：未知使用者：%s\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -935,18 +819,6 @@ msgstr "用法：%s [-r] [-s] [群組]\n"
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s：-s 和 -r 是互不相容的\n"
-
-#, c-format
-msgid "%s: cannot lock file %s\n"
-msgstr "%s：無法鎖定檔案 %s\n"
-
-#, c-format
-msgid "%s: cannot open file %s\n"
-msgstr "%s：無法打開檔案 %s\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s：無法更新檔案 %s\n"
 
 msgid "invalid group file entry"
 msgstr "無效的群組檔案項目"
@@ -962,6 +834,10 @@ msgstr "複製群組項目"
 msgid "invalid group name '%s'\n"
 msgstr "無效的群組名“%s”\n"
 
+#, fuzzy, c-format
+msgid "invalid group ID '%lu'\n"
+msgstr "無效的群組名“%s”\n"
+
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "%s 群組：無使用者 %s\n"
@@ -975,16 +851,8 @@ msgid "no matching group file entry in %s\n"
 msgstr "沒有找到匹配的群組檔案項目\n"
 
 #, fuzzy, c-format
-msgid "add group '%s' in %s ?"
+msgid "add group '%s' in %s? "
 msgstr "%s shadow群組：無使用者 %s\n"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s：無法為 %s 更新shadow項目\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s：無法更新 %s 群組的項目\n"
 
 msgid "invalid shadow group file entry"
 msgstr "無效的shadow群組檔案項目"
@@ -1012,29 +880,20 @@ msgstr "%s：檔案已被更新\n"
 msgid "%s: no changes\n"
 msgstr "%s：無改變\n"
 
-#, c-format
-msgid "%s: can't lock shadow group file\n"
-msgstr "%s：無法鎖定shadow群組檔案\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpconv\n"
+msgstr "用法：groupdel 群組\n"
 
-#, c-format
-msgid "%s: can't open shadow group file\n"
-msgstr "%s：無法打開shadow群組檔案\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpunconv\n"
+msgstr "用法：groupdel 群組\n"
 
-#, c-format
-msgid "%s: can't remove shadow group %s\n"
-msgstr "%s：無法移除shadow群組 %s\n"
-
-#, c-format
-msgid "%s: can't update shadow group file\n"
-msgstr "%s：無法更新shadow群組檔案\n"
-
-#, c-format
-msgid "%s: can't update group file\n"
-msgstr "%s 無法更新群組檔案\n"
-
-#, c-format
-msgid "%s: can't delete shadow group file\n"
-msgstr "%s：無法刪除shadow群組檔案\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: cannot delete %s\n"
+msgstr "%s：無法更新檔案 %s\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "用法：id [-a]\n"
@@ -1065,6 +924,10 @@ msgstr ""
 "  -u, --user LOGIN\t根據指定的 LOGIN 列出該使用者最後的歷史記錄\n"
 "\n"
 
+#, c-format
+msgid "lastlog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Username         Port     From             Latest"
 msgstr "使用者名         埠號     來自             最後登入時間"
 
@@ -1074,12 +937,12 @@ msgstr "使用者名                  埠號     最後登入時間"
 msgid "**Never logged in**"
 msgstr "**從未登入過**"
 
-#, fuzzy, c-format
-msgid "Unknown user or range: %s\n"
-msgstr "未知使用者：%s\n"
-
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
+msgstr ""
+
+#, c-format
+msgid "lastlog: Cannot get the size of %s: %s\n"
 msgstr ""
 
 #, c-format
@@ -1181,6 +1044,11 @@ msgid ""
 "\n"
 msgstr ""
 
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: logoutd\n"
+msgstr "用法：id\n"
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "用法：newgrp [-] [群組]\n"
 
@@ -1196,12 +1064,8 @@ msgid "%s: failure forking: %s\n"
 msgstr "%s：無效的工作電話：“%s”\n"
 
 #, fuzzy, c-format
-msgid "unknown UID: %u\n"
-msgstr "未知的 GID：%lu\n"
-
-#, c-format
-msgid "unknown GID: %lu\n"
-msgstr "未知的 GID：%lu\n"
+msgid "%s: GID '%lu' does not exist\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 msgid "too many groups\n"
 msgstr "使用者群組過多\n"
@@ -1216,58 +1080,17 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: group ID `%s' is not valid\n"
+msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s：%s 群組不存在\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid group name `%s'\n"
-msgstr "無效的群組名“%s”\n"
-
-#, fuzzy, c-format
-msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s：%s 群組不存在\n"
-
-#, c-format
-msgid ""
-"%s: group %s created, failure during the creation of the corresponding "
-"gshadow group\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: user ID `%s' is not valid\n"
-msgstr "%s：使用者 %s 不存在\n"
-
-#, fuzzy, c-format
-msgid "%s: user `%s' does not exist\n"
-msgstr "%s：使用者 %s 不存在\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid user name `%s'\n"
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user ID '%s'\n"
 msgstr "%s：無效使用者名稱“%s”\n"
 
 #, c-format
-msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s：無法鎖定 /etc/passwd。\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/shadow.\n"
-msgstr "%s：無法鎖定 /etc/passwd。\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/group.\n"
-msgstr "%s：無法鎖定 /etc/passwd。\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/gshadow.\n"
-msgstr "%s：無法鎖定 /etc/passwd。\n"
-
-#, c-format
-msgid "%s: can't open files\n"
-msgstr "%s：無法打開檔案\n"
-
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s：更新檔案出錯\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s：無效使用者名稱“%s”\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1285,9 +1108,9 @@ msgstr "%s：第 %d 行：無法建立 GID\n"
 msgid "%s: line %d: can't create group\n"
 msgstr "%s：第 %d 行：無法建立 GID\n"
 
-#, c-format
-msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s：第 %d 行：無法找到使用者 %s\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgstr "%s：使用者 %s 不存在\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1318,15 +1141,15 @@ msgid ""
 "  -k, --keep-tokens             change password only if expired\n"
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --lock                    lock the named account\n"
+"  -l, --lock                    lock the password of the named account\n"
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 "  -q, --quiet                   quiet mode\n"
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 "  -S, --status                  report password status on the named account\n"
-"  -u, --unlock                  unlock the named account\n"
+"  -u, --unlock                  unlock the password of the named account\n"
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 "\n"
 msgstr ""
@@ -1387,13 +1210,10 @@ msgid "The password for %s cannot be changed yet.\n"
 msgstr "無法更改 %s 的密碼。\n"
 
 #, c-format
-msgid "%s: out of memory\n"
-msgstr "%s：記憶體不足\n"
-
-#, c-format
 msgid ""
-"%s: unlocking the user would result in a passwordless account.\n"
-"You should set a password with usermod -p to unlock this user account.\n"
+"%s: unlocking the password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock the password of this "
+"account.\n"
 msgstr ""
 
 #, c-format
@@ -1437,16 +1257,24 @@ msgstr "重復的密碼項目"
 msgid "invalid user name '%s'\n"
 msgstr "無效的使用者名稱“%s”\n"
 
-#, c-format
-msgid "user %s: no group %u\n"
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "invalid user ID '%lu'\n"
+msgstr "無效的使用者名稱“%s”\n"
+
+#, fuzzy, c-format
+#| msgid "user %s: no group %u\n"
+msgid "user '%s': no group %lu\n"
 msgstr "使用者 %s：無 %u 群組\n"
 
-#, c-format
-msgid "user %s: directory %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: directory %s does not exist\n"
+msgid "user '%s': directory '%s' does not exist\n"
 msgstr "使用者 %s：目錄 %s 不存在\n"
 
-#, c-format
-msgid "user %s: program %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: program %s does not exist\n"
+msgid "user '%s': program '%s' does not exist\n"
 msgstr "使用者 %s：程式 %s 不存在\n"
 
 #, fuzzy, c-format
@@ -1456,10 +1284,6 @@ msgstr "無匹配的密碼檔案項目\n"
 #, fuzzy, c-format
 msgid "add user '%s' in %s? "
 msgstr "%s shadow群組：無使用者 %s\n"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s：無法為 %s 更新密碼項目\n"
 
 msgid "invalid shadow password file entry"
 msgstr "無效的shadow密碼檔案項目"
@@ -1471,33 +1295,24 @@ msgstr "重復的shadow密碼項目"
 msgid "user %s: last password change in the future\n"
 msgstr "使用者 %s：最近一次密碼更動\n"
 
-#, c-format
-msgid "%s: can't lock passwd file\n"
-msgstr "%s：無法鎖定密碼檔案\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot sort entries in %s\n"
+msgstr "%s：無法打開檔案 %s\n"
+
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwconv\n"
+msgstr "用法：id\n"
 
 #, c-format
-msgid "%s: can't open passwd file\n"
-msgstr "%s：無法打開密碼檔案\n"
+msgid "%s: failed to change the mode of %s to 0600\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s：無法為 %s 刪除shadow項目\n"
-
-#, c-format
-msgid "%s: can't update shadow file\n"
-msgstr "%s：無法更新shadow檔案\n"
-
-#, c-format
-msgid "%s: can't update passwd file\n"
-msgstr "%s：無法更新密碼檔案\n"
-
-#, c-format
-msgid "%s: can't update entry for user %s\n"
-msgstr "%s：不能更新使用者 %s 的項目\n"
-
-#, c-format
-msgid "%s: can't delete shadow password file\n"
-msgstr "%s：無法刪除shadow密碼檔案\n"
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwunconv\n"
+msgstr "用法：id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "su 到該帳戶被拒。\n"
@@ -1553,6 +1368,16 @@ msgstr ""
 "%s：%s\n"
 "(忽略)\n"
 
+#, fuzzy, c-format
+#| msgid "%s: PAM authentication failed\n"
+msgid "%s: Authentication failure\n"
+msgstr "%s：PAM 驗証失敗\n"
+
+#, fuzzy, c-format
+#| msgid "You are not authorized to su %s\n"
+msgid "%s: You are not authorized to su at that time\n"
+msgstr "您沒有被授權 su %s\n"
+
 msgid "No shell\n"
 msgstr "沒有 shell\n"
 
@@ -1576,14 +1401,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode"
 msgstr "正在進入系統維護模式"
-
-#, c-format
-msgid "%s: unknown GID %s\n"
-msgstr "%s：未知的 GID %s\n"
-
-#, c-format
-msgid "%s: unknown group %s\n"
-msgstr "%s：未知的群組 %s\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -1625,10 +1442,12 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-"  -l,                           do not add the user to the lastlog and\n"
+"  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -M, --no-create-home          do not create user's home directory\n"
+"                                (overrides /etc/login.defs)\n"
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1642,14 +1461,6 @@ msgid ""
 "user\n"
 "\n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the group database.\n"
-msgstr "%s：update_group 時記憶體不足\n"
-
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-msgstr "%s：update_gshadow 時記憶體不足\n"
 
 #, fuzzy, c-format
 msgid "%s: invalid base directory '%s'\n"
@@ -1688,48 +1499,12 @@ msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid user name '%s'\n"
-msgstr "%s：無效使用者名稱“%s”\n"
+msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
-msgid "%s: cannot rewrite password file\n"
-msgstr "%s：無法重寫密碼檔案\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s：無法重寫shadow密碼檔案\n"
-
-#, c-format
-msgid "%s: cannot lock shadow password file\n"
-msgstr "%s：無法鎖定shadow密碼檔案\n"
-
-#, c-format
-msgid "%s: cannot open shadow password file\n"
-msgstr "%s：無法打開shadow密碼檔案\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s：鎖定群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s：打開群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s：鎖定shadow群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s：打開shadow群組檔案時出錯\n"
-
-#, c-format
-msgid "%s: error adding new password entry\n"
-msgstr "%s：加入新密碼項目時出錯\n"
-
-#, c-format
-msgid "%s: error adding new shadow password entry\n"
-msgstr "%s：加入新shadow密碼項時出錯\n"
+msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
@@ -1745,8 +1520,9 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr ""
 
-#, c-format
-msgid "%s: user %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists\n"
 msgstr "%s：使用者 %s 已存在\n"
 
 #, c-format
@@ -1760,18 +1536,18 @@ msgid "%s: can't create user\n"
 msgstr "%s：無法建立 %s\n"
 
 #, fuzzy, c-format
-msgid "%s: UID %u is not unique\n"
+msgid "%s: UID %lu is not unique\n"
 msgstr "%s：gid %u 並不唯一\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s：無法建立 %s\n"
 
 #, c-format
 msgid ""
 "%s: warning: the home directory already exists.\n"
 "Not copying any file from skel directory into it.\n"
 msgstr ""
-
-#, c-format
-msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-msgstr "%s：警告：CREATE_HOME 不支援，請使用 -m 參數。\n"
 
 msgid ""
 "Usage: userdel [options] LOGIN\n"
@@ -1784,49 +1560,22 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid "%s: error updating group entry\n"
-msgstr "%s：更新群組項目時出錯\n"
-
 #, fuzzy, c-format
-msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr "%s：不能刪除使用者的主群組。\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating shadow group entry\n"
-msgstr "%s：更新群組項目時出錯\n"
-
-#, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s：無法打開群組檔案\n"
-
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s：無法打開shadow群組檔案\n"
-
-#, c-format
-msgid "%s: error deleting password entry\n"
-msgstr "%s：刪除密碼項目時出錯\n"
-
-#, c-format
-msgid "%s: error deleting shadow password entry\n"
-msgstr "%s：刪除shadow密碼項目時出錯\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s：使用者 %s 目前已登入\n"
 
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s：%s 並不屬於 %s，所以不會刪除\n"
-
-#, c-format
-msgid "%s: warning: can't remove "
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: warning: can't remove %s: %s"
 msgstr "%s：警告：無法刪除"
 
 #, c-format
-msgid "%s: user %s does not exist\n"
-msgstr "%s：使用者 %s 不存在\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s：%s 並不屬於 %s，所以不會刪除\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -1867,9 +1616,16 @@ msgid ""
 "\n"
 msgstr ""
 
+#, c-format
+msgid ""
+"%s: unlocking the user's password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user's password.\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: error adding new shadow group entry\n"
-msgstr "%s：增加新群組項目時出錯\n"
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists in %s\n"
+msgstr "%s：使用者 %s 已存在\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -1884,20 +1640,8 @@ msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
 #, c-format
-msgid "%s: uid %lu is not unique\n"
-msgstr "%s：uid %lu 不唯一\n"
-
-#, c-format
-msgid "%s: error changing password entry\n"
-msgstr "%s：改變密碼項目時出錯\n"
-
-#, c-format
-msgid "%s: error removing password entry\n"
-msgstr "%s：移除密碼項時出錯\n"
-
-#, c-format
-msgid "%s: error removing shadow password entry\n"
-msgstr "%s：刪除shadow密碼項目時出錯\n"
+msgid "%s: UID '%lu' already exists\n"
+msgstr ""
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -1920,6 +1664,14 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s：無法將目錄 %s 改名為 %s\n"
 
 #, c-format
+msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s：警告：%s 不屬於 %s\n"
 
@@ -1933,7 +1685,7 @@ msgstr "無法為信箱改名"
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
-"Please use the command `%s' to do so.\n"
+"Please use the command '%s' to do so.\n"
 msgstr ""
 
 msgid ""
@@ -1948,10 +1700,15 @@ msgid ""
 "\n"
 msgstr ""
 
-#, c-format
-msgid ""
-"\n"
-"%s: %s is unchanged\n"
+#, fuzzy, c-format
+msgid "%s: failed to remove %s\n"
+msgstr "%s：無效的工作電話：“%s”\n"
+
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "%s: %s is unchanged\n"
+msgid "%s: %s is unchanged\n"
 msgstr ""
 "\n"
 "%s：%s 沒有更改\n"
@@ -1966,6 +1723,414 @@ msgstr "無法備份"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 
+#~ msgid "%s: can't lock password file\n"
+#~ msgstr "%s：無法鎖定密碼檔\n"
+
+#~ msgid "%s: can't open password file\n"
+#~ msgstr "%s：無法打開密碼文件\n"
+
+#~ msgid "%s: can't lock shadow password file\n"
+#~ msgstr "%s：無法鎖定shadow密碼文件\n"
+
+#~ msgid "%s: can't open shadow password file\n"
+#~ msgstr "%s：無法打開影子密碼文件\n"
+
+#~ msgid "%s: can't rewrite shadow password file\n"
+#~ msgstr "%s：無法重寫shadow密碼檔案\n"
+
+#~ msgid "%s: can't rewrite password file\n"
+#~ msgstr "%s：無法重寫密碼檔案\n"
+
+#~ msgid "%s: can't update password file\n"
+#~ msgstr "%s：無法更新密碼檔案\n"
+
+#~ msgid "%s: can't update shadow password file\n"
+#~ msgstr "%s：無法更新shadow密碼檔案\n"
+
+#~ msgid "\tFull Name: %s\n"
+#~ msgstr "\t全名：%s\n"
+
+#, fuzzy
+#~ msgid "\tRoom Number: %s\n"
+#~ msgstr "房間號碼"
+
+#, fuzzy
+#~ msgid "\tWork Phone: %s\n"
+#~ msgstr "工作電話"
+
+#, fuzzy
+#~ msgid "\tHome Phone: %s\n"
+#~ msgstr "住家電話"
+
+#~ msgid "Cannot lock the password file; try again later.\n"
+#~ msgstr "無法鎖定密碼檔案﹔稍後再試。\n"
+
+#~ msgid "Cannot open the password file.\n"
+#~ msgstr "無法打開密碼檔案。\n"
+
+#~ msgid "%s: %s not found in /etc/passwd\n"
+#~ msgstr "%s：未在 /etc/passwd 中找到 %s\n"
+
+#~ msgid "Error updating the password entry.\n"
+#~ msgstr "更改密碼項目時出錯。\n"
+
+#~ msgid "Cannot commit password file changes.\n"
+#~ msgstr "無法提交密碼檔案變動。\n"
+
+#~ msgid "Cannot unlock the password file.\n"
+#~ msgstr "無法解鎖密碼檔案。\n"
+
+#~ msgid "%s: can't lock group file\n"
+#~ msgstr "%s：無法鎖定群組檔案\n"
+
+#~ msgid "%s: can't open group file\n"
+#~ msgstr "%s：無法打開群組檔案\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock gshadow file\n"
+#~ msgstr "%s：無法鎖定 shadow 檔\n"
+
+#~ msgid "%s: can't open shadow file\n"
+#~ msgstr "%s：無法打開 shadow 檔\n"
+
+#, fuzzy
+#~ msgid "%s: error updating gshadow file\n"
+#~ msgstr "%s：更新shadow檔案時出錯。\n"
+
+#, fuzzy
+#~ msgid "%s: error updating group file\n"
+#~ msgstr "%s：更新群組項目時出錯\n"
+
+#, fuzzy
+#~ msgid "%s: line %d: unknown group %s\n"
+#~ msgstr "%s：第 %d 行：未知使用者 %s\n"
+
+#, fuzzy
+#~ msgid "%s: line %d: cannot update group entry\n"
+#~ msgstr "%s：第 %d 行：無法更新項目\n"
+
+#~ msgid "%s: can't lock shadow file\n"
+#~ msgstr "%s：無法鎖定 shadow 檔\n"
+
+#~ msgid "%s: error updating shadow file\n"
+#~ msgstr "%s：更新shadow檔案時出錯。\n"
+
+#~ msgid "%s: error updating password file\n"
+#~ msgstr "%s：更新密碼檔案時出錯。\n"
+
+#~ msgid "%s: line %d: unknown user %s\n"
+#~ msgstr "%s：第 %d 行：未知使用者 %s\n"
+
+#~ msgid "%s: line %d: cannot update password entry\n"
+#~ msgstr "%s：第 %d 行：無法更新密碼項目\n"
+
+#~ msgid "%s: unknown user\n"
+#~ msgstr "%s：未知使用者\n"
+
+#~ msgid "Unknown User: %s\n"
+#~ msgstr "未知使用者：%s\n"
+
+#~ msgid "Usage: %s [-r|-R] group\n"
+#~ msgstr "用法：%s [-r|-R] 群組\n"
+
+#~ msgid "       %s [-a user] group\n"
+#~ msgstr "       %s [-a 使用者] 群組\n"
+
+#~ msgid "       %s [-d user] group\n"
+#~ msgstr "       %s [-d 使用者] 群組\n"
+
+#~ msgid "       %s [-A user,...] [-M user,...] group\n"
+#~ msgstr "       %s [-A 使用者,...] [-M 使用者,...] 群組\n"
+
+#~ msgid "       %s [-M user,...] group\n"
+#~ msgstr "       %s [-M 使用者,...] 群組\n"
+
+#~ msgid "%s: can't get lock\n"
+#~ msgstr "%s：無法獲得鎖定\n"
+
+#~ msgid "%s: can't get shadow lock\n"
+#~ msgstr "%s：無法獲得shadow鎖定\n"
+
+#~ msgid "%s: can't open file\n"
+#~ msgstr "%s：無法打開檔案\n"
+
+#~ msgid "%s: can't re-write file\n"
+#~ msgstr "%s：無法重寫檔案\n"
+
+#~ msgid "%s: can't re-write shadow file\n"
+#~ msgstr "%s：無法重寫shadow檔案\n"
+
+#~ msgid "%s: can't unlock file\n"
+#~ msgstr "%s 無法解鎖檔案。\n"
+
+#~ msgid "%s: can't update entry\n"
+#~ msgstr "%s：無法更新項目\n"
+
+#~ msgid "%s: can't update shadow entry\n"
+#~ msgstr "%s：無法更新shadow項目\n"
+
+#~ msgid "unknown group: %s\n"
+#~ msgstr "未知群組：%s\n"
+
+#, fuzzy
+#~ msgid "%s: can't close file\n"
+#~ msgstr "%s：無法打開檔案\n"
+
+#, fuzzy
+#~ msgid "%s: can't close shadow file\n"
+#~ msgstr "%s：無法打開 shadow 檔\n"
+
+#~ msgid "Who are you?\n"
+#~ msgstr "你是誰？\n"
+
+#~ msgid "%s: unknown member %s\n"
+#~ msgstr "%s：未知成員 %s\n"
+
+#~ msgid "%s: error adding new group entry\n"
+#~ msgstr "%s：增加新群組項目時出錯\n"
+
+#~ msgid "%s: cannot rewrite group file\n"
+#~ msgstr "%s：無法重寫群組檔案\n"
+
+#~ msgid "%s: cannot rewrite shadow group file\n"
+#~ msgstr "%s：無法重寫shadow群組檔案\n"
+
+#~ msgid "%s: unable to lock group file\n"
+#~ msgstr "%s：無法鎖定群組檔案\n"
+
+#~ msgid "%s: unable to open group file\n"
+#~ msgstr "%s：無法打開群組檔案\n"
+
+#~ msgid "%s: unable to lock shadow group file\n"
+#~ msgstr "%s：無法鎖定shadow群組檔案\n"
+
+#~ msgid "%s: unable to open shadow group file\n"
+#~ msgstr "%s：無法打開shadow群組檔案\n"
+
+#, fuzzy
+#~ msgid "%s: GID %u is not unique\n"
+#~ msgstr "%s：gid %u 並不唯一\n"
+
+#~ msgid "%s: error removing group entry\n"
+#~ msgstr "%s：刪除群組項目時出錯\n"
+
+#~ msgid "%s: error removing shadow group entry\n"
+#~ msgstr "%s：刪除shadow群組項目時出錯\n"
+
+#~ msgid "%s: cannot remove user's primary group.\n"
+#~ msgstr "%s：不能刪除使用者的主群組。\n"
+
+#, fuzzy
+#~ msgid "PAM authentication failed for\n"
+#~ msgstr "%s：PAM 驗証失敗\n"
+
+#, fuzzy
+#~ msgid "Unable to lock group file\n"
+#~ msgstr "%s：無法鎖定群組檔案\n"
+
+#, fuzzy
+#~ msgid "Unable to open group file\n"
+#~ msgstr "%s：無法打開群組檔案\n"
+
+#, fuzzy
+#~ msgid "Cannot close group file\n"
+#~ msgstr "%s：無法打開群組檔案\n"
+
+#~ msgid "%s: %s not found in /etc/group\n"
+#~ msgstr "%s：未在 /etc/group 中找到 %s\n"
+
+#, fuzzy
+#~ msgid "%s: %u is not a unique GID\n"
+#~ msgstr "%s：%u 不是一個唯一的 gid\n"
+
+#~ msgid "%s: %s is not a unique name\n"
+#~ msgstr "%s：%s 不是一個唯一的名稱\n"
+
+#, fuzzy
+#~ msgid "%s: cannot rewrite passwd file\n"
+#~ msgstr "%s：無法重寫密碼檔案\n"
+
+#~ msgid "%s: unable to lock password file\n"
+#~ msgstr "%s：無法鎖定密碼檔案\n"
+
+#~ msgid "%s: unable to open password file\n"
+#~ msgstr "%s：無法打開密碼檔案\n"
+
+#~ msgid "%s: cannot lock file %s\n"
+#~ msgstr "%s：無法鎖定檔案 %s\n"
+
+#~ msgid "%s: can't update shadow entry for %s\n"
+#~ msgstr "%s：無法為 %s 更新shadow項目\n"
+
+#~ msgid "%s: can't update entry for group %s\n"
+#~ msgstr "%s：無法更新 %s 群組的項目\n"
+
+#~ msgid "%s: can't lock shadow group file\n"
+#~ msgstr "%s：無法鎖定shadow群組檔案\n"
+
+#~ msgid "%s: can't open shadow group file\n"
+#~ msgstr "%s：無法打開shadow群組檔案\n"
+
+#~ msgid "%s: can't remove shadow group %s\n"
+#~ msgstr "%s：無法移除shadow群組 %s\n"
+
+#~ msgid "%s: can't update shadow group file\n"
+#~ msgstr "%s：無法更新shadow群組檔案\n"
+
+#~ msgid "%s: can't update group file\n"
+#~ msgstr "%s 無法更新群組檔案\n"
+
+#~ msgid "%s: can't delete shadow group file\n"
+#~ msgstr "%s：無法刪除shadow群組檔案\n"
+
+#, fuzzy
+#~ msgid "unknown UID: %u\n"
+#~ msgstr "未知的 GID：%lu\n"
+
+#~ msgid "unknown GID: %lu\n"
+#~ msgstr "未知的 GID：%lu\n"
+
+#, fuzzy
+#~ msgid "%s: group ID `%s' is not valid\n"
+#~ msgstr "%s：%s 群組不存在\n"
+
+#, fuzzy
+#~ msgid "%s: user ID `%s' is not valid\n"
+#~ msgstr "%s：使用者 %s 不存在\n"
+
+#, fuzzy
+#~ msgid "%s: invalid user name `%s'\n"
+#~ msgstr "%s：無效使用者名稱“%s”\n"
+
+#~ msgid "%s: can't lock /etc/passwd.\n"
+#~ msgstr "%s：無法鎖定 /etc/passwd。\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/shadow.\n"
+#~ msgstr "%s：無法鎖定 /etc/passwd。\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/group.\n"
+#~ msgstr "%s：無法鎖定 /etc/passwd。\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/gshadow.\n"
+#~ msgstr "%s：無法鎖定 /etc/passwd。\n"
+
+#~ msgid "%s: can't open files\n"
+#~ msgstr "%s：無法打開檔案\n"
+
+#~ msgid "%s: error updating files\n"
+#~ msgstr "%s：更新檔案出錯\n"
+
+#~ msgid "%s: line %d: cannot find user %s\n"
+#~ msgstr "%s：第 %d 行：無法找到使用者 %s\n"
+
+#~ msgid "%s: can't update passwd entry for %s\n"
+#~ msgstr "%s：無法為 %s 更新密碼項目\n"
+
+#~ msgid "%s: can't lock passwd file\n"
+#~ msgstr "%s：無法鎖定密碼檔案\n"
+
+#~ msgid "%s: can't open passwd file\n"
+#~ msgstr "%s：無法打開密碼檔案\n"
+
+#~ msgid "%s: can't remove shadow entry for %s\n"
+#~ msgstr "%s：無法為 %s 刪除shadow項目\n"
+
+#~ msgid "%s: can't update shadow file\n"
+#~ msgstr "%s：無法更新shadow檔案\n"
+
+#~ msgid "%s: can't update passwd file\n"
+#~ msgstr "%s：無法更新密碼檔案\n"
+
+#~ msgid "%s: can't update entry for user %s\n"
+#~ msgstr "%s：不能更新使用者 %s 的項目\n"
+
+#~ msgid "%s: can't delete shadow password file\n"
+#~ msgstr "%s：無法刪除shadow密碼檔案\n"
+
+#~ msgid "%s: unknown GID %s\n"
+#~ msgstr "%s：未知的 GID %s\n"
+
+#~ msgid "%s: unknown group %s\n"
+#~ msgstr "%s：未知的群組 %s\n"
+
+#, fuzzy
+#~ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+#~ msgstr "%s：update_gshadow 時記憶體不足\n"
+
+#~ msgid "%s: cannot rewrite password file\n"
+#~ msgstr "%s：無法重寫密碼檔案\n"
+
+#~ msgid "%s: cannot rewrite shadow password file\n"
+#~ msgstr "%s：無法重寫shadow密碼檔案\n"
+
+#~ msgid "%s: cannot lock shadow password file\n"
+#~ msgstr "%s：無法鎖定shadow密碼檔案\n"
+
+#~ msgid "%s: cannot open shadow password file\n"
+#~ msgstr "%s：無法打開shadow密碼檔案\n"
+
+#~ msgid "%s: error locking group file\n"
+#~ msgstr "%s：鎖定群組檔案時出錯\n"
+
+#~ msgid "%s: error opening group file\n"
+#~ msgstr "%s：打開群組檔案時出錯\n"
+
+#~ msgid "%s: error locking shadow group file\n"
+#~ msgstr "%s：鎖定shadow群組檔案時出錯\n"
+
+#~ msgid "%s: error opening shadow group file\n"
+#~ msgstr "%s：打開shadow群組檔案時出錯\n"
+
+#~ msgid "%s: error adding new password entry\n"
+#~ msgstr "%s：加入新密碼項目時出錯\n"
+
+#~ msgid "%s: error adding new shadow password entry\n"
+#~ msgstr "%s：加入新shadow密碼項時出錯\n"
+
+#~ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+#~ msgstr "%s：警告：CREATE_HOME 不支援，請使用 -m 參數。\n"
+
+#~ msgid "%s: error updating group entry\n"
+#~ msgstr "%s：更新群組項目時出錯\n"
+
+#, fuzzy
+#~ msgid "%s: error updating shadow group entry\n"
+#~ msgstr "%s：更新群組項目時出錯\n"
+
+#~ msgid "%s: cannot open group file\n"
+#~ msgstr "%s：無法打開群組檔案\n"
+
+#~ msgid "%s: cannot open shadow group file\n"
+#~ msgstr "%s：無法打開shadow群組檔案\n"
+
+#~ msgid "%s: error deleting password entry\n"
+#~ msgstr "%s：刪除密碼項目時出錯\n"
+
+#~ msgid "%s: error deleting shadow password entry\n"
+#~ msgstr "%s：刪除shadow密碼項目時出錯\n"
+
+#~ msgid "%s: user %s does not exist\n"
+#~ msgstr "%s：使用者 %s 不存在\n"
+
+#, fuzzy
+#~ msgid "%s: error adding new shadow group entry\n"
+#~ msgstr "%s：增加新群組項目時出錯\n"
+
+#~ msgid "%s: uid %lu is not unique\n"
+#~ msgstr "%s：uid %lu 不唯一\n"
+
+#~ msgid "%s: error changing password entry\n"
+#~ msgstr "%s：改變密碼項目時出錯\n"
+
+#~ msgid "%s: error removing password entry\n"
+#~ msgstr "%s：移除密碼項時出錯\n"
+
+#~ msgid "%s: error removing shadow password entry\n"
+#~ msgstr "%s：刪除shadow密碼項目時出錯\n"
+
 #, fuzzy
 #~ msgid "%s: can't get unique GID\n"
 #~ msgstr "%s：無法獲取獨有的 gid\n"
@@ -1978,18 +2143,11 @@ msgstr "%s：無法復原 %s：%s (您的修改在 %s 中)\n"
 #~ msgid " on '%.100s'"
 #~ msgstr "在“%.100s”上"
 
-#~ msgid "%s: can't lock files, try again later\n"
-#~ msgstr "%s：無法鎖定檔案，請稍後再試。\n"
-
 #~ msgid "%s: line %d: can't create UID\n"
 #~ msgstr "%s：第 %d 行：無法建立 UID\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s：名稱 %s 並不唯一\n"
-
-#, fuzzy
-#~ msgid "No\n"
-#~ msgstr "取消"
 
 #, fuzzy
 #~ msgid ""

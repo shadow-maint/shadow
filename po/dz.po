@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2008-05-24 21:01+0200\n"
+"POT-Creation-Date: 2009-04-06 00:47+0200\n"
 "PO-Revision-Date: 2006-06-01 15:28+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -57,6 +57,9 @@ msgstr "རིམ་ལུགས་བདག་སྐྱོང་པ་ལུ་
 msgid "  Choose a new password."
 msgstr "ཆོག་ཡིག་གསརཔ་ཅིག་གདམས།"
 
+msgid "You must change your password."
+msgstr ""
+
 #, c-format
 msgid "Your password will expire in %ld days.\n"
 msgstr "ཁྱོད་ཀྱི་ཆོག་ཡིག་འདི་ ཉིནམ་%ldནང་ དུས་ཡོལ་ནི་མས།\n"
@@ -68,7 +71,12 @@ msgid "Your password will expire today."
 msgstr "ཁྱོད་ཀྱི་ཆོག་ཡིག་འདི་ ད་རིས་དུས་ཡོལ་ནི་མས།"
 
 #, c-format
-msgid "Unable to change tty %s"
+msgid "Cannot open audit interface - aborting.\n"
+msgstr ""
+
+#, fuzzy, c-format
+#| msgid "Unable to change tty %s"
+msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "ཊི་ཊི་ཝའི་ %s བསྒྱུར་བཅོས་འབད་མ་ཚུགས།"
 
 msgid "Environment overflow\n"
@@ -94,13 +102,13 @@ msgstr[1] ""
 "མཇུག་མམ་གྱི་ནང་བསྐྱོད་འབད་ཞིནམ་ལས་ཚུར་ %dའཐུས་ཤོར་ཚུ།\n"
 "མཇུག་མམ་ %s འདི་ %s གུ་ཨིན་པས།\n"
 
-#, fuzzy
-msgid "Can't get unique UID (no more available UIDs)\n"
-msgstr "%s: ཐུན་མོང་ ཡུ་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
-
-#, fuzzy
-msgid "Can't get unique GID (no more available GIDs)\n"
+#, fuzzy, c-format
+msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: ཐུན་མོང་མ་ཡིན་པའི་ ཇི་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique UID (no more available UIDs)\n"
+msgstr "%s: ཐུན་མོང་ ཡུ་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
 
 msgid "Too many logins.\n"
 msgstr "ནང་བསྐྱོད་མང་དྲགས་པ།\n"
@@ -192,8 +200,17 @@ msgid "Unable to determine your tty name."
 msgstr "ཁྱོད་ཀྱི་ཊི་ཊི་ཝའི་མིང་ གཏན་འབེབས་བཟོ་མ་ཚུགས།"
 
 #, c-format
+msgid "%s: out of memory\n"
+msgstr "%s: དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
+#, c-format
 msgid "malloc(%d) failed\n"
 msgstr "malloc(%d) འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy
+#| msgid "No\n"
+msgid "No"
+msgstr "མེན།\n"
 
 msgid "Password: "
 msgstr "ཆོག་ཡིག་:"
@@ -201,6 +218,11 @@ msgstr "ཆོག་ཡིག་:"
 #, c-format
 msgid "%s's Password: "
 msgstr "%s's ཆོག་ཡིག་:"
+
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s: ས་སྒོ་ཚུ་རིང་དྲགས་པས།\n"
 
 #, fuzzy
 msgid ""
@@ -298,40 +320,31 @@ msgid "%s: Permission denied.\n"
 msgstr "%s: སྣང་བ་ཉན་མ་བཏུབ།\n"
 
 #, c-format
+msgid "%s: Cannot determine your user name.\n"
+msgstr "%s: ཁྱོད་ཀྱི་ལག་ལེན་པའི་མིང་ གཏན་འབེབས་བཟོ་མི་ཚུགས།\n"
+
+#, c-format
 msgid "%s: PAM authentication failed\n"
 msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
-#, c-format
-msgid "%s: can't lock password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+#| msgid "%s: can't lock files, try again later\n"
+msgid "%s: cannot lock %s; try again later.\n"
+msgstr "%s:ཡིག་སྣོད་ཚུ་ལྡེ་མིག་བརྐྱབ་མི་ཚུགས་ དོ་རུང་ཤུལ་ལས་འབད་རྩོལ་བསྐྱེད།\n"
 
-#, c-format
-msgid "%s: can't open password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot open %s\n"
+msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: can't lock shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+#, fuzzy, c-format
+msgid "%s: failure while writing changes to %s\n"
+msgstr "%s: ཁ་སྤེལ་བ་འཐུས་ཤོར་:%s"
 
-#, c-format
-msgid "%s: can't open shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't rewrite shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལོག་འབྲི་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't rewrite password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལོག་འབྲི་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to prepare the new %s entry '%s'\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
 #, c-format
 msgid "%s: the shadow password file is not present\n"
@@ -341,9 +354,9 @@ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་ས�
 msgid "%s: failed to drop privileges (%s)\n"
 msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
-#, c-format
-msgid "%s: unknown user %s\n"
-msgstr "%s: མ་ཤེས་པའི་ལག་ལེན་པ་%s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist in %s\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 #, c-format
 msgid "Changing the aging information for %s\n"
@@ -368,55 +381,25 @@ msgstr "ལག་ལེན་:%s [-f full_name] [-r room_no] [-w work_ph] [-h ho
 msgid "Full Name"
 msgstr "མིང་ཆ་ཚང་།"
 
-#, c-format
-msgid "\tFull Name: %s\n"
-msgstr "\tམིང་ཆ་ཚང་: %s\n"
+#, fuzzy, c-format
+#| msgid "%s: %s\n"
+msgid "\t%s: %s\n"
+msgstr "%s: %s\n"
 
 msgid "Room Number"
 msgstr "ཁང་མིག་ཨང་།"
 
-#, c-format
-msgid "\tRoom Number: %s\n"
-msgstr "\tཁང་མིག་ཨང་: %s\n"
-
 msgid "Work Phone"
 msgstr "ལཱ་གི་བརྒྱུད་འཕྲིན།"
 
-#, c-format
-msgid "\tWork Phone: %s\n"
-msgstr "\tལཱ་གི་བརྒྱུད་འཕྲིན་: %s\n"
-
 msgid "Home Phone"
 msgstr "ཁྱིམ་གྱི་བརྒྱུད་འཕྲིན།"
-
-#, c-format
-msgid "\tHome Phone: %s\n"
-msgstr "\tཁྱིམ་གྱི་བརྒྱུད་འཕྲིན་: %s\n"
 
 msgid "Other"
 msgstr "གཞན།"
 
 msgid "Cannot change ID to root.\n"
 msgstr "རྩ་བ་ལུ་ ཨའི་ཌི་ བསྒྱུར་བཅོས་འབད་མི་ཚུགས།\n"
-
-msgid "Cannot lock the password file; try again later.\n"
-msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས་ ཤུལ་ལས་ལོག་སྟེ་འབད་རྩོལ་སྐྱེད།\n"
-
-msgid "Cannot open the password file.\n"
-msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: %s not found in /etc/passwd\n"
-msgstr "%s:  /etc/passwd ནང་ལུ་ %s མ་ཐོབ།\n"
-
-msgid "Error updating the password entry.\n"
-msgstr "ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་འབདཝ་ད་ལུ་ འཛོལ་བ།\n"
-
-msgid "Cannot commit password file changes.\n"
-msgstr "ཆོག་ཡིག་ཡིག་སྣོད་བསྒྱུར་བཅོས་ཚུ་ དང་ལེན་འབད་མི་ཚུགས།\n"
-
-msgid "Cannot unlock the password file.\n"
-msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, c-format
 msgid "%s: name with non-ASCII characters: '%s'\n"
@@ -451,9 +434,9 @@ msgstr "%s:  '%s' ནང་ལུ་ ཁྲིམས་འགལ་ཡིག་�
 msgid "%s: '%s' contains illegal characters\n"
 msgstr "%s:  '%s' ནང་ལུ་ ཁྲིམས་འགལ་ཡིག་ཆ་ཚུ་ཡོད།\n"
 
-#, c-format
-msgid "%s: Cannot determine your user name.\n"
-msgstr "%s: ཁྱོད་ཀྱི་ལག་ལེན་པའི་མིང་ གཏན་འབེབས་བཟོ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' does not exist\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 #, c-format
 msgid "%s: cannot change user '%s' on NIS client.\n"
@@ -502,7 +485,7 @@ msgid "%s: invalid numeric argument '%s'\n"
 msgstr "%s: ནུས་མེད་ཨང་གྲངས་སྒྲུབ་རྟགས་ '%s'\n"
 
 #, fuzzy, c-format
-msgid "%s: %s flag is ONLY allowed with the %s flag\n"
+msgid "%s: %s flag is only allowed with the %s flag\n"
 msgstr "%s: -a ཟུར་རྟགས་འདི་ -Gཟུར་རྟགས་དང་གཅིག་ཁར་རྐྱངམ་ཅིག་ཆོག\n"
 
 #, c-format
@@ -514,30 +497,6 @@ msgid "%s: unsupported crypt method: %s\n"
 msgstr ""
 
 #, c-format
-msgid "%s: can't lock group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't open group file\n"
-msgstr "%s: སྡེ་ཚན་ལྡེ་མིག་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't lock gshadow file\n"
-msgstr "%s: gshadowཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't open shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating gshadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating group file\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
 msgid "%s: line %d: line too long\n"
 msgstr "%s: གྲལ་ཐིག་ %d: གྲལ་ཐིག་རིང་དྲགས་པས།\n"
 
@@ -545,37 +504,23 @@ msgstr "%s: གྲལ་ཐིག་ %d: གྲལ་ཐིག་རིང་ད
 msgid "%s: line %d: missing new password\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཆོག་ཡིག་གསརཔ་ བརླག་སྟོར་ཞུགས་པ།\n"
 
-#, c-format
-msgid "%s: line %d: unknown group %s\n"
-msgstr "%s: གྲལ་ཐིག་ %d: མ་ཤེས་པའི་སྡེ་ཚན་  %s\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: line %d: group '%s' does not exist\n"
+msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
 
 #, fuzzy, c-format
-msgid "%s: line %d: cannot update group entry\n"
+#| msgid "%s: line %d: can't update entry\n"
+msgid "%s: line %d: failed to prepare the new %s entry '%s'\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 #, c-format
 msgid "%s: error detected, changes ignored\n"
 msgstr "%s: འཛོལ་བ་སྐྱོན་འཛིན་འབད་ཡི་ བསྒྱུར་བཅོས་ཚུ་སྣང་མེད་བཞག་ཡི།\n"
 
-#, c-format
-msgid "%s: can't lock shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: error updating shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error updating password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: line %d: unknown user %s\n"
-msgstr "%s: གྲལ་ཐིག་ %d: མ་ཤེས་པའི་ལག་ལེན་པ་%s\n"
-
-#, c-format
-msgid "%s: line %d: cannot update password entry\n"
-msgstr "%s: གྲལ་ཐིག་ %d: ཆོག་ཡིག་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 #, fuzzy
 msgid ""
@@ -598,8 +543,9 @@ msgstr ""
 msgid "Login Shell"
 msgstr "ནང་བསྐྱོད་ཀྱི་ཤལ།"
 
-#, c-format
-msgid "You may not change the shell for %s.\n"
+#, fuzzy, c-format
+#| msgid "You may not change the shell for %s.\n"
+msgid "You may not change the shell for '%s'.\n"
 msgstr "ཁྱོད་ཀྱིས་ %sགི་དོན་ལུ་ ཤལ་བསྒྱུར་བཅོས་མི་འབདཝ་འོང་།\n"
 
 #, c-format
@@ -610,16 +556,13 @@ msgstr "%sགི་དོན་ལུ་ ནང་བསྐྱོད་ཤལ་
 msgid "%s: Invalid entry: %s\n"
 msgstr "%s: ནུས་མེད་ཀྱི་ཐོ་བཀོད་:%s\n"
 
-#, c-format
-msgid "%s is an invalid shell.\n"
+#, fuzzy, c-format
+#| msgid "%s is an invalid shell.\n"
+msgid "%s: %s is an invalid shell.\n"
 msgstr "%s འདི་ནུས་མེད་ཀྱི་ཤལ་ཨིན།\n"
 
 msgid "Usage: expiry {-f|-c}\n"
 msgstr "ལག་ལེན་: དུས་ཡོལ་{-f|-c}\n"
-
-#, c-format
-msgid "%s: unknown user\n"
-msgstr "%s: མ་ཤེས་པའི་ལག་ལེན་པ།\n"
 
 #, fuzzy
 msgid ""
@@ -628,7 +571,7 @@ msgid ""
 "Options:\n"
 "  -a, --all                     display faillog records for all users\n"
 "  -h, --help                    display this help message and exit\n"
-"  -l, --lock-time SEC           after failed login lock accout to SEC "
+"  -l, --lock-time SEC           after failed login lock account to SEC "
 "seconds\n"
 "  -m, --maximum MAX             set maximum failed login counters to MAX\n"
 "  -r, --reset                   reset the counters of login failures\n"
@@ -656,11 +599,16 @@ msgstr ""
 "བཟོཝ་ཨིན།\n"
 "\n"
 
+#, c-format
+msgid "faillog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Login       Failures Maximum Latest                   On\n"
 msgstr "ནང་བསྐྱོད་       མང་མཐའི་མཇུག་མཐའ་འཐུས་ཤོར་                   ཨཱོན། \n"
 
-#, c-format
-msgid " [%lds left]"
+#, fuzzy, c-format
+#| msgid " [%lds left]"
+msgid " [%lus left]"
 msgstr " [%lds གཡོན་]"
 
 #, c-format
@@ -668,76 +616,67 @@ msgid " [%lds lock]"
 msgstr " [%lds ལྡེ་མིག་]"
 
 #, c-format
-msgid "Unknown User: %s\n"
+msgid "faillog: Failed to reset fail count for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set max for UID %d\n"
+msgstr ""
+
+#, c-format
+msgid "faillog: Failed to set locktime for UID %d\n"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "lastlog: Unknown user or range: %s\n"
 msgstr "མ་ཤེས་པའི་ལག་ལེན་པ་:%s\n"
 
-#, c-format
-msgid "Usage: %s [-r|-R] group\n"
-msgstr "ལག་ལེན་པ་: %s [-r|-R] སྡེ་ཚན།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "faillog: Cannot open %s: %s\n"
+msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, c-format
-msgid "       %s [-a user] group\n"
-msgstr "       %s [-a user] སྡེ་ཚན།\n"
+msgid "faillog: Cannot get the size of %s: %s\n"
+msgstr ""
 
 #, c-format
-msgid "       %s [-d user] group\n"
-msgstr "       %s [-d user] སྡེ་ཚན།\n"
+msgid ""
+"Usage: %s [option] GROUP\n"
+"\n"
+"Options:\n"
+"  -a, --add USER                add USER to GROUP\n"
+"  -d, --delete USER             remove USER from GROUP\n"
+"  -r, --remove-password         remove the GROUP's password\n"
+"  -R, --restrict                restrict access to GROUP to its members\n"
+"  -M, --members USER,...        set the list of members of GROUP\n"
+"%s\n"
+"\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-A user,...] [-M user,...] group\n"
-msgstr "       %s [-A user,...] [-M user,...] སྡེ་ཚན།\n"
+msgid ""
+"  -A, --administrators ADMIN,...\n"
+"                                set the list of administrators for GROUP\n"
+"Except for the -A and -M options, the options cannot be combined.\n"
+msgstr ""
 
-#, c-format
-msgid "       %s [-M user,...] group\n"
-msgstr "       %s [-M user,...] སྡེ་ཚན།\n"
+#, fuzzy
+#| msgid "The password for %s cannot be changed.\n"
+msgid "The options cannot be combined.\n"
+msgstr "%sགི་དོན་ལུ་ ཆོག་ཡིག་སོར་མི་ཚུགས།\n"
 
 #, c-format
 msgid "%s: shadow group passwords required for -A\n"
 msgstr "%s: -Aགི་དོན་ལུ་ གྱིབ་མའི་སྡེ་ཚན་ཆོག་ཡིག་ཚུ་དགོ\n"
 
-#, c-format
-msgid "%s: can't get lock\n"
-msgstr "%s: ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't get shadow lock\n"
-msgstr "%s: གྱིབ་མ་ལྡེ་མིག་ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't open file\n"
-msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't re-write file\n"
-msgstr "%s: ཡིག་སྣོད་ལོག་འབྲི་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't re-write shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ལོག་འབྲི་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't unlock file\n"
-msgstr "%s: ཡིག་སྣོད་ལྡེ་མིག་ཕྱེ་མིཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update entry\n"
-msgstr "%s: ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update shadow entry\n"
-msgstr "%s: གྱིབ་མའི་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "unknown group: %s\n"
-msgstr "མ་ཤེས་པའི་སྡེ་ཚན་:%s\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist in %s\n"
+msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
 
 #, fuzzy, c-format
-msgid "%s: can't close file\n"
-msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: can't close shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+msgid "%s: failure while closing read-only %s\n"
+msgstr "%s: ཁ་སྤེལ་བ་འཐུས་ཤོར་:%s"
 
 #, c-format
 msgid "Changing the password for group %s\n"
@@ -756,9 +695,6 @@ msgstr "དེ་ཚུ་མཐུན་སྒྲིག་མིན་འདུ
 msgid "%s: Try again later\n"
 msgstr "%s: དོ་རུང་ཤུལ་ལས་འབད་རྩོལ་བསྐྱེད།\n"
 
-msgid "Who are you?\n"
-msgstr "ཁྱོད་ག་སྨོ?\n"
-
 #, c-format
 msgid "Adding user %s to group %s\n"
 msgstr "སྡེ་ཚན་ %sལུ་ ལག་ལེན་པ་ %sཁ་སྐོང་འབད་དོ།\n"
@@ -767,9 +703,9 @@ msgstr "སྡེ་ཚན་ %sལུ་ ལག་ལེན་པ་ %sཁ་�
 msgid "Removing user %s from group %s\n"
 msgstr "སྡེ་ཚན་ %sནང་ལས་ ལག་ལེན་པ་ %sརྩ་བསྐྲད་གཏང་དོ།\n"
 
-#, c-format
-msgid "%s: unknown member %s\n"
-msgstr "%s: མ་ཤེས་པའི་འཐུས་མི་ %s\n"
+#, fuzzy, c-format
+msgid "%s: user '%s' is not a member of '%s'\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 #, c-format
 msgid "%s: Not a tty\n"
@@ -804,114 +740,87 @@ msgstr ""
 " \t\t\t\t(ཐུན་མོང་པ་)ཇི་ཨའི་ཌི་དང་བཅས་ སྡེ་ཚན་གསར་བསྐྲུན་འབད་བཅུག\n"
 "\n"
 
-#, c-format
-msgid "%s: error adding new group entry\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: %s is not a valid group name\n"
+#, fuzzy, c-format
+#| msgid "%s: %s is not a valid group name\n"
+msgid "%s: '%s' is not a valid group name\n"
 msgstr "%s: %s འདི་ ནུས་ཅན་གྱི་སྡེ་ཚན་མིང་མེན་པས།\n"
 
-#, c-format
-msgid "%s: cannot rewrite group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལོག་འབྲི་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལོག་འབྲི་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: unable to lock group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: unable to open group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: unable to lock shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
-
-#, c-format
-msgid "%s: unable to open shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+#, fuzzy, c-format
+msgid "%s: invalid group ID '%s'\n"
+msgstr "ནུས་མེད་སྡེཚན་གྱི་མིང་ '%s'\n"
 
 #, c-format
 msgid "%s: -K requires KEY=VALUE\n"
 msgstr "%s: -K གིས་ ལྡེ་མིག་=བེ་ལུ་ དགོཔ་ཨིན།\n"
 
-#, c-format
-msgid "%s: group %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s exists\n"
+msgid "%s: group '%s' already exists\n"
 msgstr "%s: སྡེ་ཚན་ %sཡོདཔ་ཨིན།\n"
 
 #, c-format
-msgid "%s: GID %u is not unique\n"
-msgstr "%s: ཇི་ཨའི་ཌི་ %uའདི་ ཐུན་མོང་པ་ཨིན།\n"
-
-#, fuzzy, c-format
-msgid "%s: can't create group\n"
-msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
+msgid "%s: GID '%lu' already exists\n"
+msgstr ""
 
 msgid "Usage: groupdel group\n"
 msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
 
-#, c-format
-msgid "%s: error removing group entry\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot rename directory %s to %s\n"
+msgid "%s: cannot remove entry '%s' from %s\n"
+msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱར་མིང་བཏགས་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: error removing shadow group entry\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+#, fuzzy, c-format
+msgid "%s: cannot remove the primary group of user '%s'\n"
+msgstr "%s: ཨེན་ཨའི་ཨེསི་ ཞབས་ཏོག་སྤྱོད་མི་གུ་ ལག་ལེན་པ་ '%s' བསྒྱུར་བཅོས་འབད་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: cannot remove user's primary group.\n"
-msgstr "%s: ལག་ལེན་པའི་གཞི་རིམ་སྡེ་ཚན་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: group %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "%s: group %s does not exist\n"
+msgid "%s: group '%s' does not exist\n"
 msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
 
-#, c-format
-msgid "%s: group %s is a NIS group\n"
-msgstr "%s: སྡེ་ཚན་ %s འདི་ ཨེན་ཇི་ཨེསི་ སྡེ་ཚན་ཨིན།\n"
+#, fuzzy, c-format
+#| msgid "%s: group '%s' is a NIS group.\n"
+msgid "%s: group '%s' is a NIS group\n"
+msgstr "%s: སྡེ་ཚན་ '%s' འདི་ ཨེན་ཨའི་ཨེསི་སྡེ་ཚན་ཨིན།\n"
 
 #, c-format
 msgid "%s: %s is the NIS master\n"
 msgstr "%s: %sའདི་ ཨེན་ཇི་ཨེསི་ ཨམ་ཨིན།\n"
 
-msgid "Member already exists\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s is a NIS user\n"
+msgid "%s: user '%s' is already a member of '%s'\n"
+msgstr "%s: ལག་ལེན་པ་ %sའདི་ ཨེན་ཨའི་ཨེསི་ ལག་ལེན་པ་ཅིག་ཨིན།\n"
+
+#, fuzzy, c-format
+msgid "%s: Out of memory. Cannot update %s.\n"
+msgstr "%s: དུས་མཐུན་སྡེ་ཚན་ནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
+msgid ""
+"Usage: groupmems [options] [action]\n"
+"\n"
+"Options:\n"
+"  -g, --group groupname         change groupname instead of the user's "
+"group\n"
+"                                (root only)\n"
+"\n"
+"Actions:\n"
+"  -a, --add username            add username to the members of the group\n"
+"  -d, --delete username         remove username from the members of the "
+"group\n"
+"  -p, --purge                   purge all members from the group\n"
+"  -l, --list                    list the members of the group\n"
+"\n"
 msgstr ""
 
-msgid "Member to remove could not be found\n"
+#, c-format
+msgid "%s: your groupname does not match your username\n"
 msgstr ""
 
-msgid "Usage: groupmems -a username | -d username | -D | -l [-g groupname]\n"
+#, c-format
+msgid "%s: only root can use the -g/--group option\n"
 msgstr ""
-
-msgid "Only root can add members to different groups\n"
-msgstr ""
-
-msgid "Group access is required\n"
-msgstr ""
-
-msgid "Not primary owner of current group\n"
-msgstr ""
-
-#, fuzzy
-msgid "PAM authentication failed for\n"
-msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
-
-#, fuzzy
-msgid "Unable to lock group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
-
-#, fuzzy
-msgid "Unable to open group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
-
-#, fuzzy
-msgid "Cannot close group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
 
 #, fuzzy
 msgid ""
@@ -939,39 +848,17 @@ msgstr ""
 " \t\t\t\t(ཐུན་མོང་པ་)ཇི་ཨའི་ཌི་དང་བཅས་ སྡེ་ཚན་གསར་བསྐྲུན་འབད་བཅུག\n"
 "\n"
 
-#, c-format
-msgid "%s: %s not found in /etc/group\n"
-msgstr "%s: %s འདི་ /etc/groupནང་མི་འཐོབ།\n"
-
-#, c-format
-msgid "%s: %u is not a unique GID\n"
-msgstr "%s: %u འདི་ ཐུན་མོང་གི་ཇི་ཨའི་ཌི་མེན།\n"
-
-#, c-format
-msgid "%s: %s is not a unique name\n"
-msgstr "%s: %s འདི་ ཐུན་མོང་གི་མིང་མེན།\n"
-
 #, fuzzy, c-format
-msgid "%s: cannot rewrite passwd file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
+msgid "%s: invalid group name '%s'\n"
+msgstr "ནུས་མེད་སྡེཚན་གྱི་མིང་ '%s'\n"
 
 #, c-format
-msgid "%s: unable to lock password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+msgid "%s: group %s is a NIS group\n"
+msgstr "%s: སྡེ་ཚན་ %s འདི་ ཨེན་ཇི་ཨེསི་ སྡེ་ཚན་ཨིན།\n"
 
 #, c-format
-msgid "%s: unable to open password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
-
-#, c-format
-msgid ""
-"%s: cannot change the primary group of user '%s' from %u to %u, since it is "
-"not in the passwd file.\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: cannot change the primary group of user '%s' from %u to %u.\n"
-msgstr "%s: ཨེན་ཨའི་ཨེསི་ ཞབས་ཏོག་སྤྱོད་མི་གུ་ ལག་ལེན་པ་ '%s' བསྒྱུར་བཅོས་འབད་མི་ཚུགས།\n"
+msgid "%s: unknown user %s\n"
+msgstr "%s: མ་ཤེས་པའི་ལག་ལེན་པ་%s\n"
 
 #, c-format
 msgid "Usage: %s [-r] [-s] [group [gshadow]]\n"
@@ -984,18 +871,6 @@ msgstr "ལག་ལེན་: %s [-r] [-s] [སྡེ་ཚན་]\n"
 #, c-format
 msgid "%s: -s and -r are incompatibile\n"
 msgstr "%s: -s དང་ -r གཉིས་མཐུན་འགྱུར་ཅན་མེན།\n"
-
-#, c-format
-msgid "%s: cannot lock file %s\n"
-msgstr "%s: ཡིག་སྣོད་ %sའདི་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: cannot open file %s\n"
-msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: cannot update file %s\n"
-msgstr "%s: ཡིག་སྣོད་ %sའདི་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 msgid "invalid group file entry"
 msgstr "ནུས་མེད་སྡེ་ཚན་ཐོ་བཀོད།"
@@ -1011,6 +886,11 @@ msgstr "སྡེ་ཚན་ཐོ་བཀོད་ བརྫུན་མ་�
 msgid "invalid group name '%s'\n"
 msgstr "ནུས་མེད་སྡེཚན་གྱི་མིང་ '%s'\n"
 
+#, fuzzy, c-format
+#| msgid "invalid group name '%s'\n"
+msgid "invalid group ID '%lu'\n"
+msgstr "ནུས་མེད་སྡེཚན་གྱི་མིང་ '%s'\n"
+
 #, c-format
 msgid "group %s: no user %s\n"
 msgstr "སྡེ་ཚན་ %s: ལག་ལེན་པ་ %sམེད།\n"
@@ -1023,17 +903,10 @@ msgstr "ཨང་གྲངས་ '%s' བཏོན་གཏང་ནི་ཨི
 msgid "no matching group file entry in %s\n"
 msgstr "%sནང་ མཐུན་སྒྲིག་སྡེ་ཚན་གྱི་ཡིག་སྣོད་ཐོ་བཀོད་མེད།\n"
 
-#, c-format
-msgid "add group '%s' in %s ?"
+#, fuzzy, c-format
+#| msgid "add group '%s' in %s ?"
+msgid "add group '%s' in %s? "
 msgstr "%sནང་ སྡེ་ཚན་ '%s' ཁ་སྐོང་འབད་ནི་ཨིན་ན?"
-
-#, c-format
-msgid "%s: can't update shadow entry for %s\n"
-msgstr "%s: %sགི་དོན་ལུ་ གྱིབ་མའི་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update entry for group %s\n"
-msgstr "%s: སྡེ་ཚན་ %sགི་དོན་ལུ་ ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 msgid "invalid shadow group file entry"
 msgstr "ནུས་མེད་གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ཐོ་བཀོད།"
@@ -1061,29 +934,20 @@ msgstr "%s: ཡིག་སྣོད་ཚུ་དུས་མཐུན་བ�
 msgid "%s: no changes\n"
 msgstr "%s: སོར་ནི་མེད།\n"
 
-#, c-format
-msgid "%s: can't lock shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpconv\n"
+msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
 
-#, c-format
-msgid "%s: can't open shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+#, fuzzy
+#| msgid "Usage: groupdel group\n"
+msgid "Usage: grpunconv\n"
+msgstr "ལག་ལེན་:groupdel སྡེ་ཚན།\n"
 
-#, c-format
-msgid "%s: can't remove shadow group %s\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ %sབསྐྲད་གཏང་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't delete shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ བཏོན་གཏང་མི་ཚུགས།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot update file %s\n"
+msgid "%s: cannot delete %s\n"
+msgstr "%s: ཡིག་སྣོད་ %sའདི་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 msgid "Usage: id [-a]\n"
 msgstr "ལག་ལེནཔ་:id [-a]\n"
@@ -1117,6 +981,10 @@ msgstr ""
 "lastlog དྲན་ཐོ་ དཔར་བསྐྲུན་འབད།\n"
 "\n"
 
+#, c-format
+msgid "lastlog: Failed to get the entry for UID %d\n"
+msgstr ""
+
 msgid "Username         Port     From             Latest"
 msgstr "ལག་ལེན་པའི་མིང་         འདྲེན་ལམ་     ལས་             མཇུག་མཐའ།"
 
@@ -1126,13 +994,13 @@ msgstr "ལག་ལེན་པའི་མིང་                འདྲ�
 msgid "**Never logged in**"
 msgstr "**ནམ་ཡང་ནང་བསྐྱོད་མ་འབད་**"
 
-#, fuzzy, c-format
-msgid "Unknown user or range: %s\n"
-msgstr "མ་ཤེས་པའི་ལག་ལེན་པ་:%s\n"
-
 #, c-format
 msgid "lastlog: unexpected argument: %s\n"
 msgstr "lastlog: རེ་བ་མ་བསྐྱེད་པའི་སྒྲུབ་རྟགས་:%s\n"
+
+#, c-format
+msgid "lastlog: Cannot get the size of %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid "Usage: %s [-p] [name]\n"
@@ -1231,6 +1099,11 @@ msgstr ""
 "ནང་བསྐྱོད་དུས་ཚོད་ལྷག་ཡོདཔ།\n"
 "\n"
 
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: logoutd\n"
+msgstr "ལག་ལེན་པ་: id\n"
+
 msgid "Usage: newgrp [-] [group]\n"
 msgstr "ལག་ལེན་: newgrp [-][ སྡེ་ཚན་]\n"
 
@@ -1245,13 +1118,9 @@ msgstr "ཆོག་ཡིག་རྙིངམ་:"
 msgid "%s: failure forking: %s\n"
 msgstr "%s: ཁ་སྤེལ་བ་འཐུས་ཤོར་:%s"
 
-#, c-format
-msgid "unknown UID: %u\n"
-msgstr "མ་ཤེས་པའི་ ཇི་ཨའི་ཌི་:%u\n"
-
-#, c-format
-msgid "unknown GID: %lu\n"
-msgstr "མ་ཤེས་པའི་ ཇི་ཨའི་ཌི་:%lu\n"
+#, fuzzy, c-format
+msgid "%s: GID '%lu' does not exist\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 msgid "too many groups\n"
 msgstr "སྡེ་ཚན་མང་དྲགས་པ།\n"
@@ -1266,58 +1135,17 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: group ID `%s' is not valid\n"
+msgid "%s: group '%s' is a shadow group, but does not exist in /etc/group\n"
 msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
 
 #, fuzzy, c-format
-msgid "%s: invalid group name `%s'\n"
-msgstr "ནུས་མེད་སྡེཚན་གྱི་མིང་ '%s'\n"
-
-#, fuzzy, c-format
-msgid "%s: group %s is a shadow group, but does not exist in /etc/group\n"
-msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
-
-#, c-format
-msgid ""
-"%s: group %s created, failure during the creation of the corresponding "
-"gshadow group\n"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: user ID `%s' is not valid\n"
-msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
-
-#, fuzzy, c-format
-msgid "%s: user `%s' does not exist\n"
-msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid user name `%s'\n"
+#| msgid "%s: invalid user name '%s'\n"
+msgid "%s: invalid user ID '%s'\n"
 msgstr "%s: ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'།\n"
 
 #, c-format
-msgid "%s: can't lock /etc/passwd.\n"
-msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/shadow.\n"
-msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/group.\n"
-msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: can't lock /etc/gshadow.\n"
-msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't open files\n"
-msgstr "%s: ཡིག་སྣོད་ཚུ་ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: error updating files\n"
-msgstr "%s: ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་སྐབས་ལུ་ འཛོལ་བ།\n"
+msgid "%s: invalid user name '%s'\n"
+msgstr "%s: ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'།\n"
 
 #, c-format
 msgid "%s: line %d: invalid line\n"
@@ -1335,9 +1163,9 @@ msgstr "%s: གྲལ་ཐིག་ %d: ཇི་ཨའི་ཌི་ གས�
 msgid "%s: line %d: can't create group\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཇི་ཨའི་ཌི་ གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: line %d: cannot find user %s\n"
-msgstr "%s: གྲལ་ཐིག་ %d:ལག་ལེན་པ་ %sའཚོལ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+msgid "%s: line %d: user '%s' does not exist in %s\n"
+msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 
 #, c-format
 msgid "%s: line %d: can't update password\n"
@@ -1368,15 +1196,15 @@ msgid ""
 "  -k, --keep-tokens             change password only if expired\n"
 "  -i, --inactive INACTIVE       set password inactive after expiration\n"
 "                                to INACTIVE\n"
-"  -l, --lock                    lock the named account\n"
+"  -l, --lock                    lock the password of the named account\n"
 "  -n, --mindays MIN_DAYS        set minimum number of days before password\n"
 "                                change to MIN_DAYS\n"
 "  -q, --quiet                   quiet mode\n"
 "  -r, --repository REPOSITORY   change password in REPOSITORY repository\n"
 "  -S, --status                  report password status on the named account\n"
-"  -u, --unlock                  unlock the named account\n"
+"  -u, --unlock                  unlock the password of the named account\n"
 "  -w, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
-"  -x, --maxdays MAX_DAYS        set maximim number of days before password\n"
+"  -x, --maxdays MAX_DAYS        set maximum number of days before password\n"
 "                                change to MAX_DAYS\n"
 "\n"
 msgstr ""
@@ -1443,13 +1271,10 @@ msgid "The password for %s cannot be changed yet.\n"
 msgstr "%sགི་དོན་ལུ་ ཆོག་ཡིག་སོར་མི་ཚུགས།\n"
 
 #, c-format
-msgid "%s: out of memory\n"
-msgstr "%s: དྲན་ཚད་ལས་བརྒལ་བ།\n"
-
-#, c-format
 msgid ""
-"%s: unlocking the user would result in a passwordless account.\n"
-"You should set a password with usermod -p to unlock this user account.\n"
+"%s: unlocking the password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock the password of this "
+"account.\n"
 msgstr ""
 
 #, c-format
@@ -1492,16 +1317,24 @@ msgstr "ཆོག་ཡིག་ཐོ་བཀོད་རྫུན་མ།"
 msgid "invalid user name '%s'\n"
 msgstr "ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'\n"
 
-#, c-format
-msgid "user %s: no group %u\n"
+#, fuzzy, c-format
+#| msgid "invalid user name '%s'\n"
+msgid "invalid user ID '%lu'\n"
+msgstr "ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'\n"
+
+#, fuzzy, c-format
+#| msgid "user %s: no group %u\n"
+msgid "user '%s': no group %lu\n"
 msgstr "ལག་ལེན་པ་ %s: སྡེ་ཚན་ %uམེད།\n"
 
-#, c-format
-msgid "user %s: directory %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: directory %s does not exist\n"
+msgid "user '%s': directory '%s' does not exist\n"
 msgstr "ལག་ལེན་པ་ %s: སྣོད་ཐོ་ %s མེད།\n"
 
-#, c-format
-msgid "user %s: program %s does not exist\n"
+#, fuzzy, c-format
+#| msgid "user %s: program %s does not exist\n"
+msgid "user '%s': program '%s' does not exist\n"
 msgstr "ལག་ལེན་པ་ %s: ལས་རིམ་%s མེད།\n"
 
 #, c-format
@@ -1511,10 +1344,6 @@ msgstr "%sནང་ མཐུན་སྒྲིག་ཡོད་པའི་ཆ
 #, c-format
 msgid "add user '%s' in %s? "
 msgstr "%sནང་ ལག་ལེན་པ་ '%s' ཁ་སྐོང་འབད་ནི་ཨིན་ན?"
-
-#, c-format
-msgid "%s: can't update passwd entry for %s\n"
-msgstr "%s: %sགི་དོན་ལུ་ ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
 msgid "invalid shadow password file entry"
 msgstr "ནུས་མེད་གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ཐོ་བཀོད།"
@@ -1526,33 +1355,24 @@ msgstr "གྱིབ་མའི་ཆོག་ཡིག་ཐོ་བཀོད
 msgid "user %s: last password change in the future\n"
 msgstr "ལག་ལེན་པ་ %s: མ་འོངས་པ་ནང་ མཇུག་གི་ཆོག་ཡིག་སོར་ནི།\n"
 
-#, c-format
-msgid "%s: can't lock passwd file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+#, fuzzy, c-format
+#| msgid "%s: cannot open file %s\n"
+msgid "%s: cannot sort entries in %s\n"
+msgstr "%s: ཡིག་སྣོད་%s ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwconv\n"
+msgstr "ལག་ལེན་པ་: id\n"
 
 #, c-format
-msgid "%s: can't open passwd file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+msgid "%s: failed to change the mode of %s to 0600\n"
+msgstr ""
 
-#, c-format
-msgid "%s: can't remove shadow entry for %s\n"
-msgstr "%s: %sགི་དོན་ལུ་ གྱིབ་མའི་ཐོ་བཀོད་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update shadow file\n"
-msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update passwd file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't update entry for user %s\n"
-msgstr "%s: ལག་ལེན་པ་%sགི་དོན་ལུ་ ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: can't delete shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ བཏོན་གཏང་མི་ཚུགས།\n"
+#, fuzzy
+#| msgid "Usage: id\n"
+msgid "Usage: pwunconv\n"
+msgstr "ལག་ལེན་པ་: id\n"
 
 msgid "Access to su to that account DENIED.\n"
 msgstr "རྩིས་ཐོ་དེ་ལུ་ ཟླ་ལུ་འཛུལ་སྤྱོད་འབད་ནི་ ཉན་མ་བཏུབ་པས།\n"
@@ -1620,6 +1440,16 @@ msgstr ""
 "%s: %s\n"
 "(སྣང་མེད་བཞག་ཡོདཔ་)\n"
 
+#, fuzzy, c-format
+#| msgid "%s: PAM authentication failed\n"
+msgid "%s: Authentication failure\n"
+msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid "You are not authorized to su %s\n"
+msgid "%s: You are not authorized to su at that time\n"
+msgstr "ཁྱོད་ ཟླ་%sལུ་ དབང་སྤྲོད་མ་འབད།\n"
+
 msgid "No shell\n"
 msgstr "ཤལ་མེད།\n"
 
@@ -1643,14 +1473,6 @@ msgstr ""
 
 msgid "Entering System Maintenance Mode"
 msgstr "རིམ་ལུགས་རྒྱུན་སྐྱོང་ཐབས་ལམ་བཙུགས་དོ།"
-
-#, c-format
-msgid "%s: unknown GID %s\n"
-msgstr "%s: མ་ཤེས་པའི་ཇི་ཨའི་ཌི་ %s\n"
-
-#, c-format
-msgid "%s: unknown group %s\n"
-msgstr "%s: མ་ཤེས་པའི་སྡེ་ཚན་ %s\n"
 
 #, c-format
 msgid "%s: cannot create new defaults file\n"
@@ -1693,10 +1515,12 @@ msgid ""
 "  -h, --help                    display this help message and exit\n"
 "  -k, --skel SKEL_DIR           specify an alternative skel directory\n"
 "  -K, --key KEY=VALUE           overrides /etc/login.defs defaults\n"
-"  -l,                           do not add the user to the lastlog and\n"
+"  -l, --no-log-init             do not add the user to the lastlog and\n"
 "                                faillog databases\n"
 "  -m, --create-home             create home directory for the new user\n"
 "                                account\n"
+"  -M, --no-create-home          do not create user's home directory\n"
+"                                (overrides /etc/login.defs)\n"
 "  -N, --no-user-group           do not create a group with the same name as\n"
 "                                the user\n"
 "  -o, --non-unique              allow create user with duplicate\n"
@@ -1742,14 +1566,6 @@ msgstr ""
 "འཐབ།\n"
 "\n"
 
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the group database.\n"
-msgstr "%s: དུས་མཐུན་སྡེ་ཚན་ནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
-
-#, fuzzy, c-format
-msgid "%s: Out of memory. Cannot update the shadow group database.\n"
-msgstr "%s: དུས་མཐུན་gshadowནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
-
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་ཐོ་'%s'།\n"
@@ -1787,48 +1603,12 @@ msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
 #, c-format
-msgid "%s: invalid user name '%s'\n"
-msgstr "%s: ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'།\n"
+msgid "%s: failed to reset the faillog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
-msgid "%s: cannot rewrite password file\n"
-msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
-
-#, c-format
-msgid "%s: cannot rewrite shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
-
-#, c-format
-msgid "%s: cannot lock shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: cannot open shadow password file\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: error locking group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་འདི་ ལྡེ་མིག་བརྐྱབ་པའི་བསྒང་ལུ་འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error opening group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ཁ་ཕྱེ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error locking shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ལྡེ་མིག་བརྐྱབ་པའི་བསྒང་ལུ་ འཛོལབ།\n"
-
-#, c-format
-msgid "%s: error opening shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ཁ་ཕྱེ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error adding new password entry\n"
-msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་སྐབས་ལུ་འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error adding new shadow password entry\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཐོ་བཀོད་གསརཔ་ ཁ་སྐོང་འབད་བའི་སྐབས་ལུ་འཛོལ་བ།\n"
+msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
 
 #, c-format
 msgid "%s: cannot create directory %s\n"
@@ -1845,8 +1625,9 @@ msgstr ""
 msgid "Setting mailbox file permissions"
 msgstr "ཡིག་སྒྲོམ་ཡིག་སྣོད་གྱི་གནང་བ་ གཞི་སྒྲིག་འབད་དོ།"
 
-#, c-format
-msgid "%s: user %s exists\n"
+#, fuzzy, c-format
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists\n"
 msgstr "%s: ལག་ལེན་པ་ %sཡོདཔ་ཨིན།\n"
 
 #, c-format
@@ -1860,9 +1641,14 @@ msgstr ""
 msgid "%s: can't create user\n"
 msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: UID %u is not unique\n"
+#, fuzzy, c-format
+#| msgid "%s: UID %u is not unique\n"
+msgid "%s: UID %lu is not unique\n"
 msgstr "%s: ཡུ་ཨའི་ཌི་ %uའདི་ ཐུན་མོང་མེན།\n"
+
+#, fuzzy, c-format
+msgid "%s: can't create group\n"
+msgstr "%s: %sགསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
 #, c-format
 msgid ""
@@ -1871,10 +1657,6 @@ msgid ""
 msgstr ""
 "%s: ཉེན་བརྡ་:ཁྱིམ་གྱི་སྣོད་ཐོ་འདི་ཧེ་མ་ལས་རང་ཡོདཔ་ཨིན།\n"
 "འདི་ནང་ལུ་ སི་ཀེལ་སྣོད་ཐོ་ནང་ལས་ ཡིག་སྣོད་ག་ཅི་ཡང་འདྲ་བཤུས་མ་བརྐྱབ་ནི།\n"
-
-#, c-format
-msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
-msgstr "%s: ཉེན་བརྡ་: CREATE_HOME རྒྱབ་སྐྱོར་མ་འབད་ དེའི་ཚབ་ལུ་ -mལག་ལེན་འཐབ་གནང་།\n"
 
 #, fuzzy
 msgid ""
@@ -1896,50 +1678,25 @@ msgstr ""
 "  -r, --remove\t\t\t  ཁྱིམ་གྱི་སྣོད་ཐོ་དང་ཡིག་འཕྲིན་འཕྲལ་གསོག་རྩ་བསྐྲད་གཏང་།\n"
 "\n"
 
-#, c-format
-msgid "%s: error updating group entry\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: Cannot remove group %s which is a primary group for another user.\n"
+#, fuzzy, c-format
+#| msgid ""
+#| "%s: Cannot remove group %s which is a primary group for another user.\n"
+msgid "%s: group %s is the primary group of another user and is not removed.\n"
 msgstr ""
 "%s: ལག་ལེན་པ་གཞན་གྱི་དོན་ལུ་ གཞི་རིམ་སྡེ་ཚན་ཅིག་ཨིན་མི་སྡེ་ཚན་ %sའདི་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
-
-#, fuzzy, c-format
-msgid "%s: error updating shadow group entry\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: cannot open group file\n"
-msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: cannot open shadow group file\n"
-msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
-
-#, c-format
-msgid "%s: error deleting password entry\n"
-msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་བཏོན་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error deleting shadow password entry\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་ཐོ་བཀོད་བོཏན་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
 
 #, c-format
 msgid "%s: user %s is currently logged in\n"
 msgstr "%s: ལག་ལེན་པ་  %sའདི་ ད་ལྟོ་རང་ནང་བསྐྱོད་འབད་ཡི།\n"
 
-#, c-format
-msgid "%s: %s not owned by %s, not removing\n"
-msgstr "%s: %sགིས་བདག་དབང་མ་བཟུང་མི་ %sའདི་ རྩ་བསྐྲད་གཏང་ནི་མེད།\n"
-
-#, c-format
-msgid "%s: warning: can't remove "
+#, fuzzy, c-format
+#| msgid "%s: warning: can't remove "
+msgid "%s: warning: can't remove %s: %s"
 msgstr "%s: ཉེན་བརྡ་:རྩ་བསྐྲད་གཏང་མི་ཚུགས།"
 
 #, c-format
-msgid "%s: user %s does not exist\n"
-msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
+msgid "%s: %s not owned by %s, not removing\n"
+msgstr "%s: %sགིས་བདག་དབང་མ་བཟུང་མི་ %sའདི་ རྩ་བསྐྲད་གཏང་ནི་མེད།\n"
 
 #, c-format
 msgid "%s: user %s is a NIS user\n"
@@ -2005,9 +1762,16 @@ msgstr ""
 "  -U, --unlock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་ཕྱེ།\n"
 "\n"
 
+#, c-format
+msgid ""
+"%s: unlocking the user's password would result in a passwordless account.\n"
+"You should set a password with usermod -p to unlock this user's password.\n"
+msgstr ""
+
 #, fuzzy, c-format
-msgid "%s: error adding new shadow group entry\n"
-msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+#| msgid "%s: user %s exists\n"
+msgid "%s: user '%s' already exists in %s\n"
+msgstr "%s: ལག་ལེན་པ་ %sཡོདཔ་ཨིན།\n"
 
 #, c-format
 msgid "%s: no flags given\n"
@@ -2022,20 +1786,8 @@ msgid "%s: the -L, -p, and -U flags are exclusive\n"
 msgstr ""
 
 #, c-format
-msgid "%s: uid %lu is not unique\n"
-msgstr "%s:  uid %luའདི་ ཐུན་མོང་ཨིན།\n"
-
-#, c-format
-msgid "%s: error changing password entry\n"
-msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་སོར་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error removing password entry\n"
-msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
-
-#, c-format
-msgid "%s: error removing shadow password entry\n"
-msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+msgid "%s: UID '%lu' already exists\n"
+msgstr ""
 
 #, c-format
 msgid "%s: directory %s exists\n"
@@ -2059,6 +1811,14 @@ msgid "%s: cannot rename directory %s to %s\n"
 msgstr "%s: སྣོད་ཐོ་ %s འདི་ %s ལུ་ བསྐྱར་མིང་བཏགས་མི་ཚུགས།\n"
 
 #, c-format
+msgid "%s: failed to copy the lastlog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: failed to copy the faillog entry of user %lu to user %lu: %s\n"
+msgstr ""
+
+#, c-format
 msgid "%s: warning: %s not owned by %s\n"
 msgstr "%s: ཉེན་བརྡ་: %s འདི་ %s གིས་ བདག་དབང་བཟུངམ་མེན།\n"
 
@@ -2072,7 +1832,7 @@ msgstr "ཡིག་སྒྲོམ་གྱི་བསྐྱར་མིང་
 msgid ""
 "You have modified %s.\n"
 "You may need to modify %s for consistency.\n"
-"Please use the command `%s' to do so.\n"
+"Please use the command '%s' to do so.\n"
 msgstr ""
 
 #, fuzzy
@@ -2097,10 +1857,16 @@ msgstr ""
 "  -s, --shadow\t\t\t གྱིབ་མ་ ཡང་ན་  gshadowགནད་སྡུད་གཞི་རྟེན་ ཞུན་དག་འབད།\n"
 "\n"
 
-#, c-format
-msgid ""
-"\n"
-"%s: %s is unchanged\n"
+#, fuzzy, c-format
+#| msgid "%s: failed to drop privileges (%s)\n"
+msgid "%s: failed to remove %s\n"
+msgstr "%s: ཁེ་དབང་(%s)ཚུ་བཀོག་ནིའི་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy, c-format
+#| msgid ""
+#| "\n"
+#| "%s: %s is unchanged\n"
+msgid "%s: %s is unchanged\n"
 msgstr ""
 "\n"
 "%s: %sའདི་ བསྒྱུར་བཅོས་མ་འབད་བས།\n"
@@ -2115,6 +1881,406 @@ msgstr "རྒྱབ་ཐག་བཟོ་མ་ཚུགས།"
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"
 msgstr "%s: %sསོར་ཆུད་འབད་མ་ཚུགས་: %s (ཁྱོད་ཀྱི་བསྒྱུར་བཅོས་ཚུ་ %sནང་ཨིན་)།\n"
 
+#~ msgid "%s: can't lock password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+
+#~ msgid "%s: can't open shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+
+#~ msgid "%s: can't rewrite shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལོག་འབྲི་མ་ཚུགས།\n"
+
+#~ msgid "%s: can't rewrite password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལོག་འབྲི་མ་ཚུགས།\n"
+
+#~ msgid "%s: can't update password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
+
+#~ msgid "%s: can't update shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མ་ཚུགས།\n"
+
+#~ msgid "\tFull Name: %s\n"
+#~ msgstr "\tམིང་ཆ་ཚང་: %s\n"
+
+#~ msgid "\tRoom Number: %s\n"
+#~ msgstr "\tཁང་མིག་ཨང་: %s\n"
+
+#~ msgid "\tWork Phone: %s\n"
+#~ msgstr "\tལཱ་གི་བརྒྱུད་འཕྲིན་: %s\n"
+
+#~ msgid "\tHome Phone: %s\n"
+#~ msgstr "\tཁྱིམ་གྱི་བརྒྱུད་འཕྲིན་: %s\n"
+
+#~ msgid "Cannot lock the password file; try again later.\n"
+#~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས་ ཤུལ་ལས་ལོག་སྟེ་འབད་རྩོལ་སྐྱེད།\n"
+
+#~ msgid "Cannot open the password file.\n"
+#~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: %s not found in /etc/passwd\n"
+#~ msgstr "%s:  /etc/passwd ནང་ལུ་ %s མ་ཐོབ།\n"
+
+#~ msgid "Error updating the password entry.\n"
+#~ msgstr "ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་འབདཝ་ད་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "Cannot commit password file changes.\n"
+#~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་བསྒྱུར་བཅོས་ཚུ་ དང་ལེན་འབད་མི་ཚུགས།\n"
+
+#~ msgid "Cannot unlock the password file.\n"
+#~ msgstr "ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ལྡེ་མིག་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock gshadow file\n"
+#~ msgstr "%s: gshadowཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "%s: error updating gshadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#, fuzzy
+#~ msgid "%s: error updating group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: line %d: unknown group %s\n"
+#~ msgstr "%s: གྲལ་ཐིག་ %d: མ་ཤེས་པའི་སྡེ་ཚན་  %s\n"
+
+#, fuzzy
+#~ msgid "%s: line %d: cannot update group entry\n"
+#~ msgstr "%s: གྲལ་ཐིག་ %d: ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: error updating shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error updating password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: line %d: unknown user %s\n"
+#~ msgstr "%s: གྲལ་ཐིག་ %d: མ་ཤེས་པའི་ལག་ལེན་པ་%s\n"
+
+#~ msgid "%s: line %d: cannot update password entry\n"
+#~ msgstr "%s: གྲལ་ཐིག་ %d: ཆོག་ཡིག་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: unknown user\n"
+#~ msgstr "%s: མ་ཤེས་པའི་ལག་ལེན་པ།\n"
+
+#~ msgid "Unknown User: %s\n"
+#~ msgstr "མ་ཤེས་པའི་ལག་ལེན་པ་:%s\n"
+
+#~ msgid "Usage: %s [-r|-R] group\n"
+#~ msgstr "ལག་ལེན་པ་: %s [-r|-R] སྡེ་ཚན།\n"
+
+#~ msgid "       %s [-a user] group\n"
+#~ msgstr "       %s [-a user] སྡེ་ཚན།\n"
+
+#~ msgid "       %s [-d user] group\n"
+#~ msgstr "       %s [-d user] སྡེ་ཚན།\n"
+
+#~ msgid "       %s [-A user,...] [-M user,...] group\n"
+#~ msgstr "       %s [-A user,...] [-M user,...] སྡེ་ཚན།\n"
+
+#~ msgid "       %s [-M user,...] group\n"
+#~ msgstr "       %s [-M user,...] སྡེ་ཚན།\n"
+
+#~ msgid "%s: can't get lock\n"
+#~ msgstr "%s: ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't get shadow lock\n"
+#~ msgstr "%s: གྱིབ་མ་ལྡེ་མིག་ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open file\n"
+#~ msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't re-write file\n"
+#~ msgstr "%s: ཡིག་སྣོད་ལོག་འབྲི་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't re-write shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ལོག་འབྲི་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't unlock file\n"
+#~ msgstr "%s: ཡིག་སྣོད་ལྡེ་མིག་ཕྱེ་མིཚུགས།\n"
+
+#~ msgid "%s: can't update entry\n"
+#~ msgstr "%s: ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update shadow entry\n"
+#~ msgstr "%s: གྱིབ་མའི་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "unknown group: %s\n"
+#~ msgstr "མ་ཤེས་པའི་སྡེ་ཚན་:%s\n"
+
+#, fuzzy
+#~ msgid "%s: can't close file\n"
+#~ msgstr "%s: ཡིག་སྣོད་ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "%s: can't close shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "Who are you?\n"
+#~ msgstr "ཁྱོད་ག་སྨོ?\n"
+
+#~ msgid "%s: unknown member %s\n"
+#~ msgstr "%s: མ་ཤེས་པའི་འཐུས་མི་ %s\n"
+
+#~ msgid "%s: error adding new group entry\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: cannot rewrite group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལོག་འབྲི་མི་ཚུགས།\n"
+
+#~ msgid "%s: cannot rewrite shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལོག་འབྲི་མི་ཚུགས།\n"
+
+#~ msgid "%s: unable to lock group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+
+#~ msgid "%s: unable to open group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+
+#~ msgid "%s: unable to lock shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+
+#~ msgid "%s: unable to open shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+
+#~ msgid "%s: GID %u is not unique\n"
+#~ msgstr "%s: ཇི་ཨའི་ཌི་ %uའདི་ ཐུན་མོང་པ་ཨིན།\n"
+
+#~ msgid "%s: error removing group entry\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error removing shadow group entry\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: cannot remove user's primary group.\n"
+#~ msgstr "%s: ལག་ལེན་པའི་གཞི་རིམ་སྡེ་ཚན་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "PAM authentication failed for\n"
+#~ msgstr "%s: པི་ཨེ་ཨེམ་ བདེན་བཤད་འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
+
+#, fuzzy
+#~ msgid "Unable to lock group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "Unable to open group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "Cannot close group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: %s not found in /etc/group\n"
+#~ msgstr "%s: %s འདི་ /etc/groupནང་མི་འཐོབ།\n"
+
+#~ msgid "%s: %u is not a unique GID\n"
+#~ msgstr "%s: %u འདི་ ཐུན་མོང་གི་ཇི་ཨའི་ཌི་མེན།\n"
+
+#~ msgid "%s: %s is not a unique name\n"
+#~ msgstr "%s: %s འདི་ ཐུན་མོང་གི་མིང་མེན།\n"
+
+#, fuzzy
+#~ msgid "%s: cannot rewrite passwd file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
+
+#~ msgid "%s: unable to lock password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལྡེ་མིག་བརྐྱབ་མ་ཚུགས།\n"
+
+#~ msgid "%s: unable to open password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མ་ཚུགས།\n"
+
+#~ msgid "%s: cannot lock file %s\n"
+#~ msgstr "%s: ཡིག་སྣོད་ %sའདི་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update shadow entry for %s\n"
+#~ msgstr "%s: %sགི་དོན་ལུ་ གྱིབ་མའི་ཐོ་བཀོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update entry for group %s\n"
+#~ msgstr "%s: སྡེ་ཚན་ %sགི་དོན་ལུ་ ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't remove shadow group %s\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ %sབསྐྲད་གཏང་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't delete shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ བཏོན་གཏང་མི་ཚུགས།\n"
+
+#~ msgid "unknown UID: %u\n"
+#~ msgstr "མ་ཤེས་པའི་ ཇི་ཨའི་ཌི་:%u\n"
+
+#~ msgid "unknown GID: %lu\n"
+#~ msgstr "མ་ཤེས་པའི་ ཇི་ཨའི་ཌི་:%lu\n"
+
+#, fuzzy
+#~ msgid "%s: group ID `%s' is not valid\n"
+#~ msgstr "%s: སྡེ་ཚན་ %sམེད།\n"
+
+#, fuzzy
+#~ msgid "%s: user ID `%s' is not valid\n"
+#~ msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
+
+#, fuzzy
+#~ msgid "%s: invalid user name `%s'\n"
+#~ msgstr "%s: ནུས་མེད་ལག་ལེན་པའི་མིང་ '%s'།\n"
+
+#~ msgid "%s: can't lock /etc/passwd.\n"
+#~ msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/shadow.\n"
+#~ msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/group.\n"
+#~ msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#, fuzzy
+#~ msgid "%s: can't lock /etc/gshadow.\n"
+#~ msgstr "%s: /etc/passwd ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open files\n"
+#~ msgstr "%s: ཡིག་སྣོད་ཚུ་ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: error updating files\n"
+#~ msgstr "%s: ཡིག་སྣོད་དུས་མཐུན་བཟོ་བའི་སྐབས་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: line %d: cannot find user %s\n"
+#~ msgstr "%s: གྲལ་ཐིག་ %d:ལག་ལེན་པ་ %sའཚོལ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update passwd entry for %s\n"
+#~ msgstr "%s: %sགི་དོན་ལུ་ ཆོག་ཡིག་ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't lock passwd file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't open passwd file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't remove shadow entry for %s\n"
+#~ msgstr "%s: %sགི་དོན་ལུ་ གྱིབ་མའི་ཐོ་བཀོད་ རྩ་བསྐྲད་གཏང་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update shadow file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update passwd file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་ དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't update entry for user %s\n"
+#~ msgstr "%s: ལག་ལེན་པ་%sགི་དོན་ལུ་ ཐོ་བཀོད་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
+
+#~ msgid "%s: can't delete shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ བཏོན་གཏང་མི་ཚུགས།\n"
+
+#~ msgid "%s: unknown GID %s\n"
+#~ msgstr "%s: མ་ཤེས་པའི་ཇི་ཨའི་ཌི་ %s\n"
+
+#~ msgid "%s: unknown group %s\n"
+#~ msgstr "%s: མ་ཤེས་པའི་སྡེ་ཚན་ %s\n"
+
+#, fuzzy
+#~ msgid "%s: Out of memory. Cannot update the shadow group database.\n"
+#~ msgstr "%s: དུས་མཐུན་gshadowནང་ལུ་ དྲན་ཚད་ལས་བརྒལ་བ།\n"
+
+#~ msgid "%s: cannot rewrite password file\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
+
+#~ msgid "%s: cannot rewrite shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་འདི་ ལོག་འབྲི་མི་བཏུབ།\n"
+
+#~ msgid "%s: cannot lock shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ལྡེ་མིག་བརྐྱབ་མི་ཚུགས།\n"
+
+#~ msgid "%s: cannot open shadow password file\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: error locking group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་འདི་ ལྡེ་མིག་བརྐྱབ་པའི་བསྒང་ལུ་འཛོལ་བ།\n"
+
+#~ msgid "%s: error opening group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ཁ་ཕྱེ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error locking shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ལྡེ་མིག་བརྐྱབ་པའི་བསྒང་ལུ་ འཛོལབ།\n"
+
+#~ msgid "%s: error opening shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ཁ་ཕྱེ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error adding new password entry\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་སྐབས་ལུ་འཛོལ་བ།\n"
+
+#~ msgid "%s: error adding new shadow password entry\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཐོ་བཀོད་གསརཔ་ ཁ་སྐོང་འབད་བའི་སྐབས་ལུ་འཛོལ་བ།\n"
+
+#~ msgid "%s: warning: CREATE_HOME not supported, please use -m instead.\n"
+#~ msgstr "%s: ཉེན་བརྡ་: CREATE_HOME རྒྱབ་སྐྱོར་མ་འབད་ དེའི་ཚབ་ལུ་ -mལག་ལེན་འཐབ་གནང་།\n"
+
+#~ msgid "%s: error updating group entry\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#, fuzzy
+#~ msgid "%s: error updating shadow group entry\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་དུས་མཐུན་བཟོ་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: cannot open group file\n"
+#~ msgstr "%s: སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: cannot open shadow group file\n"
+#~ msgstr "%s: གྱིབ་མའི་སྡེ་ཚན་ཡིག་སྣོད་ ཁ་ཕྱེ་མི་ཚུགས།\n"
+
+#~ msgid "%s: error deleting password entry\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་བཏོན་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error deleting shadow password entry\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཡིག་ཐོ་བཀོད་བོཏན་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: user %s does not exist\n"
+#~ msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
+
+#, fuzzy
+#~ msgid "%s: error adding new shadow group entry\n"
+#~ msgstr "%s: སྡེ་ཚན་ཐོ་བཀོད་གསརཔ་ཁ་སྐོང་འབད་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: uid %lu is not unique\n"
+#~ msgstr "%s:  uid %luའདི་ ཐུན་མོང་ཨིན།\n"
+
+#~ msgid "%s: error changing password entry\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་སོར་བའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error removing password entry\n"
+#~ msgstr "%s: ཆོག་ཡིག་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
+#~ msgid "%s: error removing shadow password entry\n"
+#~ msgstr "%s: གྱིབ་མའི་ཆོག་ཡིག་ཐོ་བཀོད་རྩ་བསྐྲད་གཏང་པའི་བསྒང་ལུ་ འཛོལ་བ།\n"
+
 #~ msgid "%s: can't get unique GID\n"
 #~ msgstr "%s: ཐུན་མོང་མ་ཡིན་པའི་ ཇི་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
 
@@ -2124,17 +2290,11 @@ msgstr "%s: %sསོར་ཆུད་འབད་མ་ཚུགས་: %s (ཁ
 #~ msgid " on '%.100s'"
 #~ msgstr "'%.100s'གུ"
 
-#~ msgid "%s: can't lock files, try again later\n"
-#~ msgstr "%s:ཡིག་སྣོད་ཚུ་ལྡེ་མིག་བརྐྱབ་མི་ཚུགས་ དོ་རུང་ཤུལ་ལས་འབད་རྩོལ་བསྐྱེད།\n"
-
 #~ msgid "%s: line %d: can't create UID\n"
 #~ msgstr "%s: གྲལ་ཐིག་ %d: ཡུ་ཨའི་ཌི་ གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
 #~ msgid "%s: name %s is not unique\n"
 #~ msgstr "%s: མིང་ %s འདི་ ཐུན་མོང་པ་ཨིན།\n"
-
-#~ msgid "No\n"
-#~ msgstr "མེན།\n"
 
 #~ msgid ""
 #~ "Usage: chgpasswd [options]\n"
