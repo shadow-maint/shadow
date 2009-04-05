@@ -1,3 +1,5 @@
+review all call to strto
+
 usermod
 	user renamed, order is not kept in /etc/group (see
 	47_usermod-l_no_shadow_file). This is a problem when the first
@@ -61,6 +63,9 @@ ALL:
   user databases by well known tools.
 - Protect against signals. Register do_cleanups in a signal handler.
 
+- gpasswd
+  - add a test with long group name (508785)
+
 - login.defs
   - generate depending on configuration
 
@@ -91,6 +96,9 @@ ALL:
     original mode. Does copy_tree does this?
 - passwd:
   - check combination of options (e.g. -u/-l)
+  - when -u refuse to unlock because it would create an empty password, it
+    should not display "Password changed."
+    exit instead?
 
 - newgrp: check the USE_PAM section.
 
