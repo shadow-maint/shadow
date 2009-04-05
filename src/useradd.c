@@ -766,6 +766,10 @@ static void new_spent (struct spwd *spent)
 	spent->sp_namp = (char *) user_name;
 	spent->sp_pwdp = (char *) user_pass;
 	spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+	if (0 == spent->sp_lstchg) {
+		/* Better disable aging than requiring a password change */
+		spent->sp_lstchg = -1;
+	}
 	if (!rflg) {
 		spent->sp_min = scale_age (getdef_num ("PASS_MIN_DAYS", -1));
 		spent->sp_max = scale_age (getdef_num ("PASS_MAX_DAYS", -1));

@@ -1,6 +1,15 @@
 2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* src/chage.c: When no shadow entry exist, thedefault sp_lstchg
+	* libmisc/pwd2spwd.c, src/chpasswd.c, src/newusers.c,
+	src/passwd.c, src/pwck.c, src/pwconv.c, src/useradd.c,
+	src/usermod.c: On Jan 01, 1970, do not set the sp_lstchg field to
+	0 (which means that the password shall be changed during the next
+	login), but use -1 (password aging disabled).
+	* src/passwd.c: Do not check sp_min if sp_lstchg is null or -1.
+
+2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/chage.c: When no shadow entry exist, the default sp_lstchg
 	value should be -1 (no aging) rather than 0 (password must be
 	changed).
 	* src/chage.c: For password expiration and inactivity, indicate

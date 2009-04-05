@@ -373,7 +373,6 @@ int main (int argc, char **argv)
 	struct passwd newpw;
 	int errors = 0;
 	int line = 0;
-	long now = (long) time ((time_t *)NULL) / SCALE;
 
 	Prog = Basename (argv[0]);
 
@@ -478,7 +477,12 @@ int main (int argc, char **argv)
 		if (NULL != sp) {
 			newsp = *sp;
 			newsp.sp_pwdp = cp;
-			newsp.sp_lstchg = now;
+			newsp.sp_lstchg = (long) time ((time_t *)NULL) / SCALE;
+			if (0 == newsp.sp_lstchg) {
+				/* Better disable aging than requiring a
+				 * password change */
+				newssp.sp_lstchg = -1;
+			}
 		} else {
 			newpw = *pw;
 			newpw.pw_passwd = cp;

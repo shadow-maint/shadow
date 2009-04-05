@@ -521,6 +521,11 @@ static void new_spent (struct spwd *spent)
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
 	if (pflg) {
 		spent->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		if (0 == spent->sp_lstchg) {
+			/* Better disable aging than requiring a password
+			 * change */
+			spent->sp_lstchg = -1;
+		}
 	}
 }
 

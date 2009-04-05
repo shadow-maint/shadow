@@ -65,6 +65,11 @@ struct spwd *pwd_to_spwd (const struct passwd *pw)
 		sp.sp_min = 0;
 		sp.sp_max = (10000L * DAY) / SCALE;
 		sp.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		if (0 == sp.sp_lstchg) {
+			/* Better disable aging than requiring a password
+			 * change */
+			sp.sp_lstchg = -1;
+		}
 	}
 
 	/*

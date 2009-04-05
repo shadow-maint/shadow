@@ -385,11 +385,13 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	 * changed. Passwords which have been inactive too long cannot be
 	 * changed.
 	 */
-	if (sp->sp_pwdp[0] == '!' || exp_status > 1 ||
-	    (sp->sp_max >= 0 && sp->sp_min > sp->sp_max)) {
+	if (   (sp->sp_pwdp[0] == '!')
+	    || (exp_status > 1)
+	    || (   (sp->sp_max >= 0)
+	        && (sp->sp_min > sp->sp_max))) {
 		fprintf (stderr,
-			 _("The password for %s cannot be changed.\n"),
-			 sp->sp_namp);
+		         _("The password for %s cannot be changed.\n"),
+		         sp->sp_namp);
 		SYSLOG ((LOG_WARN, "password locked for '%s'", sp->sp_namp));
 		closelog ();
 		exit (E_NOPERM);
@@ -398,17 +400,18 @@ static void check_password (const struct passwd *pw, const struct spwd *sp)
 	/*
 	 * Passwords may only be changed after sp_min time is up.
 	 */
-	last = sp->sp_lstchg * SCALE;
-	ok = last + (sp->sp_min > 0 ? sp->sp_min * SCALE : 0);
+	if (sp->sp_lstchg > 0) {
+		last = sp->sp_lstchg * SCALE;
+		ok = last + (sp->sp_min > 0 ? sp->sp_min * SCALE : 0);
 
-	if (now < ok) {
-		fprintf (stderr,
-			 _
-			 ("The password for %s cannot be changed yet.\n"),
-			 pw->pw_name);
-		SYSLOG ((LOG_WARN, "now < minimum age for '%s'", pw->pw_name));
-		closelog ();
-		exit (E_NOPERM);
+		if (now < ok) {
+			fprintf (stderr,
+			         _("The password for %s cannot be changed yet.\n"),
+			         pw->pw_name);
+			SYSLOG ((LOG_WARN, "now < minimum age for '%s'", pw->pw_name));
+			closelog ();
+			exit (E_NOPERM);
+		}
 	}
 }
 
@@ -633,6 +636,11 @@ static void update_shadow (void)
 	}
 	if (do_update_age) {
 		nsp->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+		if (0 == nsp->sp_lstchg) {
+			/* Better disable aging than requiring a password
+			 * change */
+			nsp->sp_lstchg = -1;
+		}
 	}
 
 	/*
@@ -640,8 +648,9 @@ static void update_shadow (void)
 	 * 2.x passwd -f. Solaris 2.x seems to do the same thing (set
 	 * sp_lstchg to 0).
 	 */
-	if (eflg)
+	if (eflg) {
 		nsp->sp_lstchg = 0;
+	}
 
 	if (spw_update (nsp) == 0) {
 		fprintf (stderr,

@@ -452,6 +452,10 @@ static int add_passwd (struct passwd *pwd, const char *password)
 		spent.sp_pwdp = pw_encrypt (password, salt);
 	}
 	spent.sp_lstchg = (long) time ((time_t *) 0) / SCALE;
+	if (0 == spent.sp_lstchg) {
+		/* Better disable aging than requiring a password change */
+		spent.sp_lstchg = -1;
+	}
 	spent.sp_min    = getdef_num ("PASS_MIN_DAYS", 0);
 	/* 10000 is infinity this week */
 	spent.sp_max    = getdef_num ("PASS_MAX_DAYS", 10000);
