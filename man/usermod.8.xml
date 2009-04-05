@@ -69,7 +69,7 @@
       The options which apply to the <command>usermod</command> command
       are:
     </para>
-    <variablelist remap='IP'>
+    <variablelist>
       <varlistentry>
 	<term>
 	  <option>-a</option>, <option>--append</option>
@@ -102,7 +102,10 @@
 	</term>
 	<listitem>
 	  <para>
-	    The user's new login directory. If the <option>-m</option>
+	    The user's new login directory.
+	  </para>
+	  <para>
+	    If the <option>-m</option>
 	    option is given the contents of the current home directory will
 	    be moved to the new home directory, which is created if it does
 	    not already exist.
@@ -129,7 +132,10 @@
 	<listitem>
 	  <para>
 	    The number of days after a password expires until the account is
-	    permanently disabled. A value of 0 disables the account as soon
+	    permanently disabled.
+	  </para>
+	  <para>
+	    A value of 0 disables the account as soon
 	    as the password has expired, and a value of -1 disables the
 	    feature. The default value is -1.
 	  </para>
@@ -159,7 +165,10 @@
 	    of. Each group is separated from the next by a comma, with no
 	    intervening whitespace. The groups are subject to the same
 	    restrictions as the group given with the <option>-g</option>
-	    option. If the user is currently a member of a group which is
+	    option.
+	  </para>
+	  <para>
+	    If the user is currently a member of a group which is
 	    not listed, the user will be removed from the group. This
 	    behaviour can be changed via the <option>-a</option> option, which
 	    appends the user to the current supplementary group list.
@@ -243,10 +252,16 @@
 	</term>
 	<listitem>
 	  <para>
-	    The numerical value of the user's ID. This value must be unique,
+	    The new numerical value of the user's ID.
+	  </para>
+	  <para>
+	    This value must be unique,
 	    unless the <option>-o</option> option is used. The value must be
 	    non-negative. Values between 0 and 999 are typically reserved
-	    for system accounts. Any files which the user owns and which are
+	    for system accounts.
+	  </para>
+	  <para>
+	    Any files which the user owns and which are
 	    located in the directory tree rooted at the user's home
 	    directory will have the file user ID changed automatically. 
 	    Files outside of the user's home directory must be altered
@@ -280,7 +295,7 @@
   <refsect1 id='caveats'>
     <title>CAVEATS</title>
     <para>
-      <command>usermod</command> will not allow you to change the name of a
+      <command>usermod</command> will not allow you to change the name of an
       user who is logged in. You must make certain that the named user is
       not executing any processes when this command is being executed if the
       user's numerical user ID is being changed. You must change the owner

@@ -1,5 +1,9 @@
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/usermod.8.xml: Split some paragraphs into smaller units.
+
+2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/shadow.5.xml: Rewrote to mention the meaning of special
 	values.
 
