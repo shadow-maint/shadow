@@ -1,3 +1,7 @@
+2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/age.c: Return a specific message when sp_lstchg is null.
+
 2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/sgetpwent.c, lib/sgetgrent.c: Use get_uid and get_gid to

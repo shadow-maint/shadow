@@ -174,6 +174,12 @@ void agecheck (const struct passwd *pw, const struct spwd *sp)
 	    || (-1 == sp->sp_warn)) {
 		return;
 	}
+
+	if (0 == sp->sp_lstchg) {
+		(void) puts (_("You must change your password."));
+		return;
+	}
+
 	remain = sp->sp_lstchg + sp->sp_max - now;
 	if (remain <= sp->sp_warn) {
 		remain /= DAY / SCALE;
