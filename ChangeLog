@@ -1,5 +1,11 @@
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/isexpired.c: If there are no shadow entry, there is no
+	need to convert the password entry to a shadow entry. The password
+	is valid.
+
+2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/usermod.8.xml: Split some paragraphs into smaller units.
 
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>

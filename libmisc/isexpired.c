@@ -66,7 +66,7 @@ int isexpired (const struct passwd *pw, const struct spwd *sp)
 	now = (long) time ((time_t *) 0) / SCALE;
 
 	if (NULL == sp) {
-		sp = pwd_to_spwd (pw);
+		return 0;
 	}
 
 	/*
