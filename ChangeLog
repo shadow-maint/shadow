@@ -1,5 +1,9 @@
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Set errno to 0 before calling strtol.
+
+2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/isexpired.c: If there are no shadow entry, there is no
 	need to convert the password entry to a shadow entry. The password
 	is valid.

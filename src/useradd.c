@@ -286,6 +286,7 @@ static long get_number (const char *numstr)
 	long val;
 	char *endptr;
 
+	errno = 0;
 	val = strtol (numstr, &endptr, 10);
 	if (('\0' == *numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
 		fprintf (stderr,
