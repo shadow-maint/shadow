@@ -99,7 +99,9 @@ static long age_max = 0;	/* Maximum days until change     */
 static long warn = 0;		/* Warning days before change   */
 static long inact = 0;		/* Days without change before locked */
 
+#ifndef USE_PAM
 static bool do_update_age = false;
+#endif
 
 static bool pw_locked = false;
 static bool spw_locked = false;
@@ -634,6 +636,7 @@ static void update_shadow (void)
 	if (iflg) {
 		nsp->sp_inact = (inact * DAY) / SCALE;
 	}
+#ifndef USE_PAM
 	if (do_update_age) {
 		nsp->sp_lstchg = (long) time ((time_t *) 0) / SCALE;
 		if (0 == nsp->sp_lstchg) {
@@ -642,6 +645,7 @@ static void update_shadow (void)
 			nsp->sp_lstchg = -1;
 		}
 	}
+#endif
 
 	/*
 	 * Force change on next login, like SunOS 4.x passwd -e or Solaris

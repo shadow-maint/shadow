@@ -1,5 +1,10 @@
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: do_update_age is only used ifndef USE_PAM. Make it
+	more explicit.
+
+2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Set errno to 0 before calling strtol.
 
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
