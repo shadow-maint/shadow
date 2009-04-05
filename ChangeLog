@@ -1,5 +1,14 @@
 2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/chage.c: When no shadow entry exist, thedefault sp_lstchg
+	value should be -1 (no aging) rather than 0 (password must be
+	changed).
+	* src/chage.c: For password expiration and inactivity, indicate
+	that the password must be changed when sp_lstchg is null rather
+	than indicating that expiration and inactivity are not enabled.
+
+2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/isexpired.c: Document the isexpired return value.
 
 2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>

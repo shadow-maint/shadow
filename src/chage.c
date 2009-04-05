@@ -322,8 +322,11 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
-	if ((lastday <= 0) || (maxdays >= (10000 * (DAY / SCALE)))
-	    || (maxdays < 0)) {
+	if (lastday == 0) {
+		(void) puts (_("password must be changed"));
+	} else if (   (lastday < 0)
+	           || (maxdays >= (10000 * (DAY / SCALE)))
+	           || (maxdays < 0)) {
 		(void) puts (_("never"));
 	} else {
 		expires = changed + maxdays * SCALE;
@@ -337,8 +340,12 @@ static void list_fields (void)
 	 * active will be disabled.
 	 */
 	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
-	if ((lastday <= 0) || (inactdays < 0) ||
-	    (maxdays >= (10000 * (DAY / SCALE))) || (maxdays < 0)) {
+	if (lastday == 0) {
+		(void) puts (_("password must be changed"));
+	} else if (   (lastday < 0)
+	           || (inactdays < 0)
+	           || (maxdays >= (10000 * (DAY / SCALE)))
+	           || (maxdays < 0)) {
 		(void) puts (_("never"));
 	} else {
 		expires = changed + (maxdays + inactdays) * SCALE;
@@ -720,7 +727,7 @@ static void get_defaults (const struct spwd *sp)
 			mindays = -1;
 		}
 		if (!dflg) {
-			lastday = 0;
+			lastday = -1;
 		}
 		if (!Wflg) {
 			warndays = -1;
