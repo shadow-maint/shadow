@@ -1,5 +1,9 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* configure.in: Prepare the next 4.1.3 release.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, libmisc/addgrps.c: restrict add_groups() to
 	ifndef USE_PAM.
 	* lib/prototypes.h: Remove the declaration of add_cons_grps(). The
@@ -11,7 +15,6 @@
 	HAVE_INITGROUPS.
 	* libmisc/pwd2spwd.c (pwd_to_spwd): pwd_to_spwd() is not used in
 	PAM builds.
-
 
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
