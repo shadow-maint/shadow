@@ -1,5 +1,9 @@
 2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/isexpired.c: Document the isexpired return value.
+
+2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/age.c: Return a specific message when sp_lstchg is null.
 
 2009-03-21  Nicolas François  <nicolas.francois@centraliens.net>

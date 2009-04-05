@@ -51,6 +51,13 @@
  *
  *	isexpired calculates the expiration date based on the
  *	password expiration criteria.
+ *
+ * Return value:
+ *	0: The password is still valid
+ *	1: The password has expired, it must be changed
+ *	2: The password has expired since a long time and the account is
+ *	   now disabled. (password cannot be changed)
+ *	3: The account has expired
  */
 int isexpired (const struct passwd *pw, const struct spwd *sp)
 {
