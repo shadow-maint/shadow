@@ -1,3 +1,8 @@
+2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/shadow.5.xml: Rewrote to mention the meaning of special
+	values.
+
 2009-04-04  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* libmisc/pwd2spwd.c, src/chpasswd.c, src/newusers.c,

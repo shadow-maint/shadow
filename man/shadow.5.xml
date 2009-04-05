@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Copyright (c) 1989 - 1990, Julianne Frances Haugh
-   Copyright (c) 2007 - 2008, Nicolas François
+   Copyright (c) 2007 - 2009, Nicolas François
    All rights reserved.
   
    Redistribution and use in source and binary forms, with or without
@@ -43,91 +43,187 @@
   <refsect1 id='description'>
     <title>DESCRIPTION</title>
     <para>
-      <emphasis remap='I'>shadow</emphasis> contains the encrypted password
-      information for user's accounts and optional the password aging
-      information. Included is:
-    </para>
-    <itemizedlist mark='bullet'>
-      <listitem>
-	<para>login name</para>
-      </listitem>
-      <listitem>
-	<para>encrypted password</para>
-      </listitem>
-      <listitem>
-	<para>days since Jan 1, 1970 that password was last changed</para>
-      </listitem>
-      <listitem>
-	<para>days before password may be changed</para>
-      </listitem>
-      <listitem>
-	<para>days after which password must be changed</para>
-      </listitem>
-      <listitem>
-	<para>days before password is to expire that user is warned</para>
-      </listitem>
-      <listitem>
-	<para>days after password expires that account is disabled</para>
-      </listitem>
-      <listitem>
-	<para>days since Jan 1, 1970 that account is disabled</para>
-      </listitem>
-      <listitem>
-	<para>a reserved field</para>
-      </listitem>
-    </itemizedlist>
-
-    <para>
-      The password field must be filled. The encrypted password consists of
-      13 to 24 characters from the 64 character alphabet a thru z, A thru
-      Z, 0 thru 9, \. and /. Optionally it can start with a "$" character.
-      This means the encrypted password was generated using another (not
-      DES) algorithm. For example if it starts with "$1$" it means the
-      MD5-based algorithm was used.
-    </para>
-
-    <para>
-      Refer to
-      <citerefentry>
-	<refentrytitle>crypt</refentrytitle><manvolnum>3</manvolnum>
-      </citerefentry>
-      for details on how this string is interpreted.
-    </para>
-
-     <para>
-       If the password field contains some string that is not valid result
-       of <citerefentry><refentrytitle>crypt</refentrytitle>
-       <manvolnum>3</manvolnum> </citerefentry>, for instance ! or *, the
-       user will not be able to use a unix password to log in, subject to
-       <citerefentry><refentrytitle>pam</refentrytitle>
-       <manvolnum>7</manvolnum></citerefentry>.
-     </para>
-
-    <para>
-      The date of the last password change is given as the number of days
-      since Jan 1, 1970. The password may not be changed again until the
-      proper number of days have passed, and must be changed before the
-      maximum number of days. If the minimum number of days required is
-      greater than the maximum number of day allowed, this password may not
-      be changed by the user.
-    </para>
-
-    <para>
-      An account is considered to be inactive and is disabled if the
-      password is not changed within the specified number of days after the
-      password expires. An account will also be disabled on the specified
-      day regardless of other password expiration information.
-    </para>
-
-    <para>
-      This information supersedes any password or password age information
-      present in <filename>/etc/passwd</filename>.
+      <filename>shadow</filename> is a file which contains the password
+      information for the system's accounts and optional aging
+      information.
     </para>
 
     <para>
       This file must not be readable by regular users if password security
       is to be maintained.
     </para>
+
+    <para>
+      Each line of this file contains 9 fields, separated by colons
+      (<quote>:</quote>), in the following order:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term><emphasis role="bold">login name</emphasis></term>
+	<listitem>
+	  <para>
+	    It must be a valid account name, which exist on the system.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">encrypted password</emphasis></term>
+	<listitem>
+	  <para>
+	    Refer to <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry> for details on how
+	    this string is interpreted.
+	  </para>
+	  <para>
+	    If the password field contains some string that is not a valid
+	    result of <citerefentry><refentrytitle>crypt</refentrytitle>
+	    <manvolnum>3</manvolnum></citerefentry>, for instance ! or *,
+	    the user will not be able to use a unix password to log in
+	    (but the user may log in the system by other means).
+	  </para>
+	  <para>
+	    This field may be empty, in which case no passwords are
+	    required to authenticate as the specified login name.
+	    However, some applications which read the
+	    <filename>/etc/shadow</filename> file may decide not to permit
+	    any access at all if the password field is empty.
+	  </para>
+	  <para>
+	    A password field which starts with a exclamation mark means
+	    that the password is locked.  The remaining characters on the
+	    line represent the password field before the password was
+	    locked.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <emphasis role="bold">date of last password change</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    The date of the last password change, expressed as the number
+	    of days since Jan 1, 1970.
+	  </para>
+	  <para>
+	    The value 0 has a special meaning, which is that the user
+	    should change her pasword the next time she will log in the
+	    system.
+	  </para>
+	  <para>
+	    An empty field means that password aging features are
+	    disabled.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">minimum password age</emphasis></term>
+	<listitem>
+	  <para>
+	    The minimum password age is the number of days the user will
+	    have to wait before she will be allowed to change her password
+	    again.
+	  </para>
+	  <para>
+	    An empty field and value 0 mean that there are no minimum
+	    password age.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">maximum password age</emphasis></term>
+	<listitem>
+	  <para>
+	    The maximum password age is the number of days after which the
+	    user will have to change her password.
+	  </para>
+	  <para>
+	    After this number of days is elapsed, the password may still
+	    be valid.  The user should be asked to change her password the
+	    next time she will log in.
+	  </para>
+	  <para>
+	    An empty field means that there are no maximum password age,
+	    no password warning period, and no password inactivity period
+	    (see below).
+	  </para>
+	  <para>
+	    If the maximum password age is lower than the minimum password
+	    age, the user cannot change her password.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <emphasis role="bold">password warning period</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    The number of days before a password is going to expire (see
+	    the maximum password age above) during which the user should
+	    be warned.
+	  </para>
+	  <para>
+	    An empty field and value 0 mean that there are no password
+	    warning period.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <emphasis role="bold">password inactivity period</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    The number of days after a password has expired (see the
+	    maximum password age above) during which the password should
+	    still be accepted (and the user should update her password
+	    during the next login).
+	  </para>
+	  <para>
+	    After expiration of the password and this expiration period is
+	    elapsed, no login is possible using the current user's
+	    password.  The user should contact her administrator.
+	  </para>
+	  <para>
+	    An empty field means that there are no enforcement of an
+	    inactivity period.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>
+	  <emphasis role="bold">account expiration date</emphasis>
+	</term>
+	<listitem>
+	  <para>
+	    The date of expiration of the account, expressed as the number
+	    of days since Jan 1, 1970.
+	  </para>
+	  <para>
+	    Note that an account expiration differs from a password
+	    expiration.  In case of an acount expiration, the user shall
+	    not be allowed to login.  In case of a password expiration,
+	    the user is not allowed to login using her password.
+	  </para>
+	  <para>
+	    An empty field means that the account will never expire.
+	  </para>
+	  <para>
+	    The value 0 should not be used as it is interpreted as either
+	    an account with no expiration, or as an expiration on Jan 1,
+	    1970.
+	  </para>
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term><emphasis role="bold">reserved field</emphasis></term>
+	<listitem>
+	  <para>This field is reserved for future use.</para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
   </refsect1>
 
   <refsect1 id='files'>
