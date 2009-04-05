@@ -108,13 +108,17 @@ int change_uid (const struct passwd *info)
  *	Returns 0 on success, or -1 on failure.
  */
 
+#if defined (HAVE_INITGROUPS) && ! (defined USE_PAM)
 int setup_uid_gid (const struct passwd *info, bool is_console)
+#else
+int setup_uid_gid (const struct passwd *info)
+#endif
 {
 	if (setup_groups (info) < 0) {
 		return -1;
 	}
 
-#ifdef HAVE_INITGROUPS
+#if defined (HAVE_INITGROUPS) && ! defined (USE_PAM)
 	if (is_console) {
 		char *cp = getdef_str ("CONSOLE_GROUPS");
 
@@ -122,7 +126,7 @@ int setup_uid_gid (const struct passwd *info, bool is_console)
 			perror ("Warning: add_groups");
 		}
 	}
-#endif				/* HAVE_INITGROUPS */
+#endif				/* HAVE_INITGROUPS && !USE_PAM*/
 
 	if (change_uid (info) < 0) {
 		return -1;

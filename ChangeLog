@@ -4,12 +4,14 @@
 	ifndef USE_PAM.
 	* lib/prototypes.h: Remove the declaration of add_cons_grps(). The
 	function does not exist.
-	* libmisc/age.c (setup_uid_gid): is_console is never set ifndef
-	USE_PAM. Change the prototype of setup_uid_gid() when USE_PAM is
-	not defined. This permits to remove add_groups from PAM builds.
-	setup_uid_gid is already subject to HAVE_INITGROUPS.
+	* libmisc/setugid.c libmisc/age.c (setup_uid_gid): is_console is
+	never set ifndef USE_PAM. Change the prototype of setup_uid_gid()
+	when USE_PAM is not defined. This permits to remove add_groups
+	from PAM builds.  setup_uid_gid is already subject to
+	HAVE_INITGROUPS.
 	* libmisc/pwd2spwd.c (pwd_to_spwd): pwd_to_spwd() is not used in
 	PAM builds.
+
 
 2009-04-05  Nicolas François  <nicolas.francois@centraliens.net>
 
