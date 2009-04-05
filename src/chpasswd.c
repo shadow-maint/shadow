@@ -481,7 +481,7 @@ int main (int argc, char **argv)
 			if (0 == newsp.sp_lstchg) {
 				/* Better disable aging than requiring a
 				 * password change */
-				newssp.sp_lstchg = -1;
+				newsp.sp_lstchg = -1;
 			}
 		} else {
 			newpw = *pw;
