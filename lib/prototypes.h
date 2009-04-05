@@ -60,8 +60,9 @@
 extern char *Prog;
 
 /* addgrps.c */
+#if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)
 extern int add_groups (const char *);
-extern void add_cons_grps (void);
+#endif
 
 /* age.c */
 extern void agecheck (const struct passwd *, const struct spwd *);
@@ -231,7 +232,9 @@ extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 extern bool isttytime (const char *, const char *, time_t);
 
 /* pwd2spwd.c */
+#ifdef USE_PAM
 extern struct spwd *pwd_to_spwd (const struct passwd *);
+#endif
 
 /* pwdcheck.c */
 #ifndef USE_PAM
@@ -259,7 +262,11 @@ extern char *crypt_make_salt (const char *meth, void *arg);
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);
 extern int change_uid (const struct passwd *info);
+#if (defined HAVE_INITGROUPS) && (! defined USE_PAM)
 extern int setup_uid_gid (const struct passwd *info, bool is_console);
+#else
+extern int setup_uid_gid (const struct passwd *info);
+#endif
 
 /* setup.c */
 extern void setup (struct passwd *);

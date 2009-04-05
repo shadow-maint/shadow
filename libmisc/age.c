@@ -60,7 +60,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 	pid_t pid;
 
 	if (NULL == sp) {
-		sp = pwd_to_spwd (pw);
+		return 0;
 	}
 
 	/*
@@ -126,7 +126,12 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		 * passwd to work just like it would had they executed
 		 * it from the command line while logged in.
 		 */
-		if (setup_uid_gid (pw, 0) != 0) {
+#if defined(HAVE_INITGROUPS) && ! defined(USE_PAM)
+		if (setup_uid_gid (pw, false) != 0)
+#else
+		if (setup_uid_gid (pw) != 0)
+#endif
+		{
 			_exit (126);
 		}
 
@@ -161,7 +166,7 @@ void agecheck (const struct passwd *pw, const struct spwd *sp)
 	long remain;
 
 	if (NULL == sp) {
-		sp = pwd_to_spwd (pw);
+		return;
 	}
 
 	/*

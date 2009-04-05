@@ -32,7 +32,7 @@
 
 #include <config.h>
 
-#ifdef HAVE_SETGROUPS
+#if defined (HAVE_SETGROUPS) && ! defined (USE_PAM)
 
 #include "prototypes.h"
 #include "defines.h"
@@ -121,5 +121,7 @@ int add_groups (const char *list)
 
 	return 0;
 }
-#endif
+#else				/* HAVE_SETGROUPS && !USE_PAM */
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif				/* HAVE_SETGROUPS && !USE_PAM */
 
