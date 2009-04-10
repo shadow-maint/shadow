@@ -1,5 +1,11 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c, src/usermod.c, libmisc/getgr_nam_gid.c,
+	libmisc/Makefile.am, lib/prototypes.h: Moved getgr_nam_gid() from
+	src/useradd.c and src/usermod.c to libmisc/getgr_nam_gid.c.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c: Re-indent.
 	* src/useradd.c: Use getlong instead of get_number.
 	* src/useradd.c: Get rid of strtol.

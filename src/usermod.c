@@ -184,26 +184,6 @@ static void date_to_str (char *buf, size_t maxsize,
 	}
 	buf[maxsize - 1] = '\0';
 }
-/*
- * Had to move this over from useradd.c since we have groups named
- * "56k-family"... ergh.
- * --Pac.
- */
-static struct group *getgr_nam_gid (const char *grname)
-{
-	long long int val;
-	char *endptr;
-
-	errno = 0;
-	val = strtoll (grname, &endptr, 10);
-	if (   ('\0' != *grname)
-	    && ('\0' == *endptr)
-	    && (ERANGE != errno)
-	    && (val == (gid_t)val)) {
-		return xgetgrgid ((gid_t) val);
-	}
-	return xgetgrnam (grname);
-}
 
 /*
  * get_groups - convert a list of group names to an array of group IDs

@@ -169,7 +169,6 @@ static bool home_added = false;
 
 /* local function prototypes */
 static void fail_exit (int);
-static struct group *getgr_nam_gid (const char *);
 static void get_defaults (void);
 static void show_defaults (void);
 static int set_defaults (void);
@@ -262,22 +261,6 @@ static void fail_exit (int code)
 #endif
 	SYSLOG ((LOG_INFO, "failed adding user '%s', data deleted", user_name));
 	exit (code);
-}
-
-static struct group *getgr_nam_gid (const char *grname)
-{
-	long long int gid;
-	char *endptr;
-
-	errno = 0;
-	gid = strtoll (grname, &endptr, 10);
-	if (   ('\0' != *grname)
-	    && ('\0' == *endptr)
-	    && (ERANGE != errno)
-	    && (gid == (gid_t)gid)) {
-		return xgetgrgid ((gid_t) gid);
-	}
-	return xgetgrnam (grname);
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
