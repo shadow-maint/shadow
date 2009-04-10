@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2009       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -56,8 +56,6 @@ static int nis_vallen;
 #endif
 
 static FILE *shadow;
-static char spwbuf[BUFSIZ];
-static struct spwd spwd;
 
 #define	FIELDS	9
 #define	OFIELDS	5
@@ -72,8 +70,9 @@ void __setspNIS (int flag)
 {
 	nis_ignore = !flag;
 
-	if (nis_ignore)
+	if (nis_ignore) {
 		nis_used = 0;
+	}
 }
 
 /*
@@ -124,6 +123,8 @@ void endspent (void)
 
 static struct spwd *my_sgetspent (const char *string)
 {
+	static char spwbuf[BUFSIZ];
+	static struct spwd spwd;
 	char *fields[FIELDS];
 	char *cp;
 	char *cpp;
@@ -182,52 +183,58 @@ static struct spwd *my_sgetspent (const char *string)
 	 * incorrectly formatted number, unless we are using NIS.
 	 */
 
-	spwd.sp_lstchg = strtol (fields[2], &cpp, 10);
-	if ((spwd.sp_lstchg == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_lstchg = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[2][0] == '\0')
+	if (fields[2][0] == '\0') {
 		spwd.sp_lstchg = -1;
+	} else {
+		if (getlong (fields[2], &spwd.sp_lstchg) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_lstchg = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_lstchg < 0) {
+			return 0;
+		}
+	}
 
 	/*
 	 * Get the minimum period between password changes.
 	 */
 
-	spwd.sp_min = strtol (fields[3], &cpp, 10);
-	if ((spwd.sp_min == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_min = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[3][0] == '\0')
+	if (fields[3][0] == '\0') {
 		spwd.sp_min = -1;
+	} else {
+		if (getlong (fields[3], &spwd.sp_min) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_min = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_min < 0) {
+			return 0;
+		}
+	}
 
 	/*
 	 * Get the maximum number of days a password is valid.
 	 */
 
-	spwd.sp_max = strtol (fields[4], &cpp, 10);
-	if ((spwd.sp_max == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_max = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[4][0] == '\0')
+	if (fields[4][0] == '\0') {
 		spwd.sp_max = -1;
+	} else {
+		if (getlong (fields[4], &spwd.sp_max) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_max = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_max < 0) {
+			return 0;
+		}
+	}
 
 	/*
 	 * If there are only OFIELDS fields (this is a SVR3.2 /etc/shadow
@@ -235,8 +242,10 @@ static struct spwd *my_sgetspent (const char *string)
 	 */
 
 	if (i == OFIELDS) {
-		spwd.sp_warn = spwd.sp_inact = spwd.sp_expire =
-		    spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+		spwd.sp_warn   = -1;
+		spwd.sp_inact  = -1;
+		spwd.sp_expire = -1;
+		spwd.sp_flag   = SHADOW_SP_FLAG_UNSET;
 
 		return &spwd;
 	}
@@ -245,54 +254,59 @@ static struct spwd *my_sgetspent (const char *string)
 	 * Get the number of days of password expiry warning.
 	 */
 
-	spwd.sp_warn = strtol (fields[5], &cpp, 10);
-	if ((spwd.sp_warn == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_warn = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[5][0] == '\0')
+	if (fields[5][0] == '\0') {
 		spwd.sp_warn = -1;
+	} else {
+		if (getlong (fields[5], &spwd.sp_warn) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_warn = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_warn < 0) {
+			return 0;
+		}
+	}
 
 	/*
 	 * Get the number of days of inactivity before an account is
 	 * disabled.
 	 */
 
-	spwd.sp_inact = strtol (fields[6], &cpp, 10);
-	if ((spwd.sp_inact == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_inact = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[6][0] == '\0')
+	if (fields[6][0] == '\0') {
 		spwd.sp_inact = -1;
+	} else {
+		if (getlong (fields[6], &spwd.sp_inact) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_inact = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_inact < 0) {
+			return 0;
+		}
+	}
 
 	/*
 	 * Get the number of days after the epoch before the account is
 	 * set to expire.
 	 */
 
-	spwd.sp_expire = strtol (fields[7], &cpp, 10);
-	if ((spwd.sp_expire == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used)
-			return 0;
-		else
-			spwd.sp_expire = -1;
-#else
-		return 0;
-#endif
-	} else if (fields[7][0] == '\0') {
+	if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
+	} else {
+		if (getlong (fields[7], &spwd.sp_expire) == 0) {
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_expire = -1;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_expire < 0) {
+			return 0;
+		}
 	}
 
 	/*
@@ -300,19 +314,20 @@ static struct spwd *my_sgetspent (const char *string)
 	 * to have anything other than a valid integer in it.
 	 */
 
-	spwd.sp_flag = strtol (fields[8], &cpp, 10);
-	if ((spwd.sp_flag == 0) && *cpp) {
-#ifdef	USE_NIS
-		if (!nis_used) {
-			return 0;
-		} else {
-			spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
-		}
-#else
-		return 0;
-#endif
-	} else if (fields[8][0] == '\0') {
+	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+	} else {
+		if (getlong (fields[8], &spwd.sp_flag) == 0) {
+			/* FIXME: add a getulong function */
+#ifdef	USE_NIS
+			if (nis_used) {
+				spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+			} else
+#endif
+				return 0;
+		} else if (spwd.sp_flag < 0) {
+			return 0;
+		}
 	}
 
 	return (&spwd);
@@ -519,3 +534,4 @@ struct spwd *getspnam (const char *name)
 #else
 extern int errno;		/* warning: ANSI C forbids an empty source file */
 #endif
+

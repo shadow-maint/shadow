@@ -1,5 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadow.c: Replace strtol() by getlong(). Also detect more
+	issues in a numerical shadow entry field.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/sgetspent.c: Only compile ifndef HAVE_SGETSPENT
 
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
