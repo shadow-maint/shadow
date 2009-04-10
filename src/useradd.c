@@ -443,14 +443,16 @@ static int set_defaults (void)
 	ofd = mkstemp (new_file);
 	if (-1 == ofd) {
 		fprintf (stderr,
-			 _("%s: cannot create new defaults file\n"), Prog);
+		         _("%s: cannot create new defaults file\n"),
+		         Prog);
 		return -1;
 	}
 
 	ofp = fdopen (ofd, "w");
 	if (NULL == ofp) {
-		fprintf (stderr, _("%s: cannot open new defaults file\n"),
-			 Prog);
+		fprintf (stderr,
+		         _("%s: cannot open new defaults file\n"),
+		         Prog);
 		return -1;
 	}
 
@@ -491,8 +493,9 @@ static int set_defaults (void)
 			out_skel = true;
 		} else if (!out_create_mail_spool
 			   && MATCH (buf, CREATE_MAIL_SPOOL)) {
-			fprintf (ofp, CREATE_MAIL_SPOOL "%s\n",
-				 def_create_mail_spool);
+			fprintf (ofp,
+			         CREATE_MAIL_SPOOL "%s\n",
+			         def_create_mail_spool);
 			out_create_mail_spool = true;
 		} else
 			fprintf (ofp, "%s\n", buf);
@@ -559,11 +562,11 @@ static int set_defaults (void)
 	              SHADOW_AUDIT_SUCCESS);
 #endif
 	SYSLOG ((LOG_INFO,
-		 "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
-		 "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
-		 (unsigned int) def_group, def_home, def_shell,
-		 def_inactive, def_expire, def_template,
-		 def_create_mail_spool));
+	         "useradd defaults: GROUP=%u, HOME=%s, SHELL=%s, INACTIVE=%ld, "
+	         "EXPIRE=%s, SKEL=%s, CREATE_MAIL_SPOOL=%s",
+	         (unsigned int) def_group, def_home, def_shell,
+	         def_inactive, def_expire, def_template,
+	         def_create_mail_spool));
 	return 0;
 }
 
@@ -610,8 +613,9 @@ static int get_groups (char *list)
 		 * string name.
 		 */
 		if (NULL == grp) {
-			fprintf (stderr, _("%s: group '%s' does not exist\n"),
-				 Prog, list);
+			fprintf (stderr,
+			         _("%s: group '%s' does not exist\n"),
+			         Prog, list);
 			errors++;
 		}
 		list = cp;
@@ -631,17 +635,16 @@ static int get_groups (char *list)
 		 */
 		if (__isgrNIS ()) {
 			fprintf (stderr,
-				 _("%s: group '%s' is a NIS group.\n"),
-				 Prog, grp->gr_name);
+			         _("%s: group '%s' is a NIS group.\n"),
+			         Prog, grp->gr_name);
 			continue;
 		}
 #endif
 
 		if (ngroups == sys_ngroups) {
 			fprintf (stderr,
-				 _
-				 ("%s: too many groups specified (max %d).\n"),
-				 Prog, ngroups);
+			         _("%s: too many groups specified (max %d).\n"),
+			         Prog, ngroups);
 			break;
 		}
 
@@ -848,8 +851,9 @@ static void grp_update (void)
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO, "add '%s' to group '%s'",
-			 user_name, ngrp->gr_name));
+		SYSLOG ((LOG_INFO,
+		         "add '%s' to group '%s'",
+		         user_name, ngrp->gr_name));
 	}
 
 #ifdef	SHADOWGRP
@@ -882,8 +886,8 @@ static void grp_update (void)
 		nsgrp = __sgr_dup (sgrp);
 		if (NULL == nsgrp) {
 			fprintf (stderr,
-				 _("%s: Out of memory. Cannot update %s.\n"),
-				 Prog, sgr_dbname ());
+			         _("%s: Out of memory. Cannot update %s.\n"),
+			         Prog, sgr_dbname ());
 			SYSLOG ((LOG_ERR, "failed to prepare the new %s entry '%s'", sgr_dbname (), user_name));
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
@@ -918,8 +922,9 @@ static void grp_update (void)
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_SUCCESS);
 #endif
-		SYSLOG ((LOG_INFO, "add '%s' to shadow group '%s'",
-			 user_name, nsgrp->sg_name));
+		SYSLOG ((LOG_INFO,
+		         "add '%s' to shadow group '%s'",
+		         user_name, nsgrp->sg_name));
 	}
 #endif				/* SHADOWGRP */
 }
@@ -1060,7 +1065,7 @@ static void process_flags (int argc, char **argv)
 				if (NULL == grp) {
 					fprintf (stderr,
 					         _("%s: group '%s' does not exist\n"),
-						 Prog, optarg);
+					         Prog, optarg);
 					exit (E_NOTFOUND);
 				}
 				if (Dflg) {
@@ -1263,8 +1268,8 @@ static void process_flags (int argc, char **argv)
 	create_mail_spool = def_create_mail_spool;
 
 	if (!rflg) {
-		 /* for system accounts defaults are ignored and we
-		  * do not create a home dir */
+		/* for system accounts defaults are ignored and we
+		 * do not create a home dir */
 		if (getdef_bool("CREATE_HOME")) {
 			mflg = true;
 		}
@@ -1611,9 +1616,9 @@ static void usr_update (void)
 	 * happens so we know what we were trying to accomplish.
 	 */
 	SYSLOG ((LOG_INFO,
-		 "new user: name=%s, UID=%u, GID=%u, home=%s, shell=%s",
-		 user_name, (unsigned int) user_id,
-		 (unsigned int) user_gid, user_home, user_shell));
+	         "new user: name=%s, UID=%u, GID=%u, home=%s, shell=%s",
+	         user_name, (unsigned int) user_id,
+	         (unsigned int) user_gid, user_home, user_shell));
 
 	/*
 	 * Initialize faillog and lastlog entries for this UID in case
@@ -1680,9 +1685,8 @@ static void create_home (void)
 		/* XXX - create missing parent directories.  --marekm */
 		if (mkdir (user_home, 0) != 0) {
 			fprintf (stderr,
-				 _
-				 ("%s: cannot create directory %s\n"),
-				 Prog, user_home);
+			         _("%s: cannot create directory %s\n"),
+			         Prog, user_home);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding home directory",
@@ -1867,8 +1871,8 @@ int main (int argc, char **argv)
 		/* local, no need for xgetgrnam */
 		if (getgrnam (user_name) != NULL) {
 			fprintf (stderr,
-				 _("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
-				 Prog, user_name);
+			         _("%s: group %s exists - if you want to add this user to that group, use -g.\n"),
+			         Prog, user_name);
 #ifdef WITH_AUDIT
 			audit_logger (AUDIT_ADD_USER, Prog,
 			              "adding group",
@@ -1920,8 +1924,8 @@ int main (int argc, char **argv)
 	if (Uflg) {
 		if (find_new_gid (rflg, &user_gid, &user_id) < 0) {
 			fprintf (stderr,
-				 _("%s: can't create group\n"),
-				 Prog);
+			         _("%s: can't create group\n"),
+			         Prog);
 			fail_exit (4);
 		}
 		grp_add ();
@@ -1931,14 +1935,14 @@ int main (int argc, char **argv)
 
 	if (mflg) {
 		create_home ();
-		if (home_added)
+		if (home_added) {
 			copy_tree (def_template, user_home, user_id, user_gid);
-		else
+		} else {
 			fprintf (stderr,
-				 _
-				 ("%s: warning: the home directory already exists.\n"
-				  "Not copying any file from skel directory into it.\n"),
-				 Prog);
+			         _("%s: warning: the home directory already exists.\n"
+			           "Not copying any file from skel directory into it.\n"),
+			         Prog);
+		}
 
 	}
 

@@ -1,5 +1,6 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Re-indent.
 	* src/useradd.c: Use getlong instead of get_number.
 
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
