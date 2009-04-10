@@ -1,5 +1,9 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c: Use getlong instead of get_number.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/usermod.c: Re-indent.
 	* src/usermod.c: Specifying a inactivity value < -1 is not valid.
 

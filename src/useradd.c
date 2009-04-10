@@ -170,7 +170,6 @@ static bool home_added = false;
 /* local function prototypes */
 static void fail_exit (int);
 static struct group *getgr_nam_gid (const char *);
-static long get_number (const char *);
 static void get_defaults (void);
 static void show_defaults (void);
 static int set_defaults (void);
@@ -279,22 +278,6 @@ static struct group *getgr_nam_gid (const char *grname)
 		return xgetgrgid ((gid_t) gid);
 	}
 	return xgetgrnam (grname);
-}
-
-static long get_number (const char *numstr)
-{
-	long val;
-	char *endptr;
-
-	errno = 0;
-	val = strtol (numstr, &endptr, 10);
-	if (('\0' == *numstr) || ('\0' != *endptr) || (ERANGE == errno)) {
-		fprintf (stderr,
-		         _("%s: invalid numeric argument '%s'\n"),
-		         Prog, numstr);
-		exit (E_BAD_ARG);
-	}
-	return val;
 }
 
 #define MATCH(x,y) (strncmp((x),(y),strlen(y)) == 0)
@@ -1053,15 +1036,21 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				def_inactive = get_number (optarg);
+				if (   (getlong (optarg, &def_inactive) == 0)
+				    || (def_inactive < -1)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage ();
+				}
 				/*
-				 * -f -1 is allowed - it's a no-op without /etc/shadow
+				 * -f -1 is allowed
+				 * it's a no-op without /etc/shadow
 				 */
 				if ((-1 != def_inactive) && !is_shadow_pwd) {
 					fprintf (stderr,
-						 _
-						 ("%s: shadow passwords required for -f\n"),
-						 Prog);
+					         _("%s: shadow passwords required for -f\n"),
+					         Prog);
 					exit (E_USAGE);
 				}
 				fflg = true;
