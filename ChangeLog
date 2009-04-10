@@ -1,5 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/sgetspent.c: Replace strtol() by getlong(). Also detect more
+	issues in a numerical shadow entry field.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/chage.c: More strtol() replaced by getlong().
 	* src/chage.c: expdays renamed to expdate. It is a date, even if
 	expressed in a number of days since Jan 1, 1970.

@@ -106,36 +106,33 @@ struct spwd *sgetspent (const char *string)
 	 * incorrectly formatted number.
 	 */
 
-	spwd.sp_lstchg = strtol (fields[2], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_lstchg) does not look correct */
-	if ((0 == spwd.sp_lstchg) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[2][0] == '\0') {
+	if (fields[2][0] == '\0') {
 		spwd.sp_lstchg = -1;
+	} else if (   (getlong (fields[2], &spwd.sp_lstchg) == 0)
+	           || (spwd.sp_lstchg < 0)) {
+		return 0;
 	}
 
 	/*
 	 * Get the minimum period between password changes.
 	 */
 
-	spwd.sp_min = strtol (fields[3], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_min) does not look correct */
-	if ((0 == spwd.sp_min) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[3][0] == '\0') {
+	if (fields[3][0] == '\0') {
 		spwd.sp_min = -1;
+	} else if (   (getlong (fields[3], &spwd.sp_min) == 0)
+	           || (spwd.sp_min < 0)) {
+		return 0;
 	}
 
 	/*
 	 * Get the maximum number of days a password is valid.
 	 */
 
-	spwd.sp_max = strtol (fields[4], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_max) does not look correct */
-	if ((0 == spwd.sp_max) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[4][0] == '\0') {
+	if (fields[4][0] == '\0') {
 		spwd.sp_max = -1;
+	} else if (   (getlong (fields[4], &spwd.sp_max) == 0)
+	           || (spwd.sp_max < 0)) {
+		return 0;
 	}
 
 	/*
@@ -156,12 +153,11 @@ struct spwd *sgetspent (const char *string)
 	 * Get the number of days of password expiry warning.
 	 */
 
-	spwd.sp_warn = strtol (fields[5], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_warn) does not look correct */
-	if ((0 == spwd.sp_warn) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[5][0] == '\0') {
+	if (fields[5][0] == '\0') {
 		spwd.sp_warn = -1;
+	} else if (   (getlong (fields[5], &spwd.sp_warn) == 0)
+	           || (spwd.sp_warn < 0)) {
+		return 0;
 	}
 
 	/*
@@ -169,12 +165,11 @@ struct spwd *sgetspent (const char *string)
 	 * disabled.
 	 */
 
-	spwd.sp_inact = strtol (fields[6], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_inact) does not look correct */
-	if ((0 == spwd.sp_inact) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[6][0] == '\0') {
+	if (fields[6][0] == '\0') {
 		spwd.sp_inact = -1;
+	} else if (   (getlong (fields[6], &spwd.sp_inact) == 0)
+	           || (spwd.sp_inact < 0)) {
+		return 0;
 	}
 
 	/*
@@ -182,12 +177,11 @@ struct spwd *sgetspent (const char *string)
 	 * set to expire.
 	 */
 
-	spwd.sp_expire = strtol (fields[7], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_expire) does not look correct */
-	if ((0 == spwd.sp_expire) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[7][0] == '\0') {
+	if (fields[7][0] == '\0') {
 		spwd.sp_expire = -1;
+	} else if (   (getlong (fields[7], &spwd.sp_expire) == 0)
+	           || (spwd.sp_expire < 0)) {
+		return 0;
 	}
 
 	/*
@@ -195,12 +189,11 @@ struct spwd *sgetspent (const char *string)
 	 * to have anything other than a valid integer in it.
 	 */
 
-	spwd.sp_flag = strtol (fields[8], &cpp, 10);
-	/* FIXME: (0 == spwd.sp_flag) does not look correct */
-	if ((0 == spwd.sp_flag) && ('\0' != *cpp)) {
-		return 0;
-	} else if (fields[8][0] == '\0') {
+	if (fields[8][0] == '\0') {
 		spwd.sp_flag = SHADOW_SP_FLAG_UNSET;
+	} else if (getlong (fields[8], &spwd.sp_flag) == 0) {
+		/* FIXME: add a getulong function */
+		return 0;
 	}
 
 	return (&spwd);
