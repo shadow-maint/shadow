@@ -330,6 +330,9 @@ static void get_defaults (void)
 				fprintf (stderr,
 				         _("%s: group '%s' does not exist\n"),
 				         Prog, cp);
+				fprintf (stderr,
+				         _("%s: the %s configuration in %s will be ignored\n"),
+				         Prog, DGROUP, def_file);
 			} else {
 				def_group = grp->gr_gid;
 				def_gname = xstrdup (grp->gr_name);
@@ -354,14 +357,14 @@ static void get_defaults (void)
 		 * Default Password Inactive value
 		 */
 		else if (MATCH (buf, INACT)) {
-			long val = strtol (cp, &ep, 10);
-
-			if (   ('\0' != *cp)
-			    && ('\0' == *ep)
-			    && (ERANGE != errno)
-			    && (val >= 0)) {
-				def_inactive = val;
-			} else {
+			if (   (getlong (cp, &def_inactive) == 0)
+			    || (def_inactive < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				fprintf (stderr,
+				         _("%s: the %s configuration in %s will be ignored\n"),
+				         Prog, INACT, def_file);
 				def_inactive = -1;
 			}
 		}
@@ -971,9 +974,9 @@ static void process_flags (int argc, char **argv)
 			{"user-group", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c =
-			getopt_long (argc, argv, "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
-				     long_options, NULL)) != -1) {
+		while ((c = getopt_long (argc, argv,
+			                 "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
+			                 long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
 				if (   ( !VALID (optarg) )
@@ -1247,7 +1250,7 @@ static void process_flags (int argc, char **argv)
 			char *uh;
 
 			uh = xmalloc (strlen (def_home) +
-				      strlen (user_name) + 2);
+			              strlen (user_name) + 2);
 			sprintf (uh, "%s/%s", def_home, user_name);
 			user_home = uh;
 		}

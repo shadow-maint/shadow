@@ -2,6 +2,9 @@
 
 	* src/useradd.c: Re-indent.
 	* src/useradd.c: Use getlong instead of get_number.
+	* src/useradd.c: Get rid of strtol.
+	* src/useradd.c: Provide better warning in case a default GROUP or
+	INACTIVE value is not valid in /etc/default/useradd.
 
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
