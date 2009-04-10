@@ -80,10 +80,10 @@ static uid_t user_uid = -1;
 
 static long mindays;
 static long maxdays;
-static long lastday;
+static long lstchgdate;
 static long warndays;
 static long inactdays;
-static long expdays;
+static long expdate;
 
 #define	EPOCH		"1969-12-31"
 
@@ -155,7 +155,7 @@ static void usage (void)
 	fputs (_("Usage: chage [options] [LOGIN]\n"
 	         "\n"
 	         "Options:\n"
-	         "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+	         "  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY\n"
 	         "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 	         "  -h, --help                    display this help message and exit\n"
 	         "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -213,15 +213,15 @@ static int new_fields (void)
 		return 0;
 	}
 
-	date_to_str (buf, sizeof buf, lastday * SCALE);
+	date_to_str (buf, sizeof buf, lstchgdate * SCALE);
 
 	change_field (buf, sizeof buf, _("Last Password Change (YYYY-MM-DD)"));
 
 	if (strcmp (buf, EPOCH) == 0) {
-		lastday = -1;
+		lstchgdate = -1;
 	} else {
-		lastday = strtoday (buf);
-		if (lastday == -1) {
+		lstchgdate = strtoday (buf);
+		if (lstchgdate == -1) {
 			return 0;
 		}
 	}
@@ -240,16 +240,16 @@ static int new_fields (void)
 		return 0;
 	}
 
-	date_to_str (buf, sizeof buf, expdays * SCALE);
+	date_to_str (buf, sizeof buf, expdate * SCALE);
 
 	change_field (buf, sizeof buf,
 	              _("Account Expiration Date (YYYY-MM-DD)"));
 
 	if (strcmp (buf, EPOCH) == 0) {
-		expdays = -1;
+		expdate = -1;
 	} else {
-		expdays = strtoday (buf);
-		if (expdays == -1) {
+		expdate = strtoday (buf);
+		if (expdate == -1) {
 			return 0;
 		}
 	}
@@ -303,12 +303,12 @@ static void list_fields (void)
 	 * was last modified. The date is the number of days since 1/1/1970.
 	 */
 	(void) fputs (_("Last password change\t\t\t\t\t: "), stdout);
-	if (lastday < 0) {
+	if (lstchgdate < 0) {
 		(void) puts (_("never"));
-	} else if (lastday == 0) {
+	} else if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
 	} else {
-		changed = lastday * SCALE;
+		changed = lstchgdate * SCALE;
 		print_date ((time_t) changed);
 	}
 
@@ -317,9 +317,9 @@ static void list_fields (void)
 	 * date plus the number of days the password is valid for.
 	 */
 	(void) fputs (_("Password expires\t\t\t\t\t: "), stdout);
-	if (lastday == 0) {
+	if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
-	} else if (   (lastday < 0)
+	} else if (   (lstchgdate < 0)
 	           || (maxdays >= (10000 * (DAY / SCALE)))
 	           || (maxdays < 0)) {
 		(void) puts (_("never"));
@@ -335,9 +335,9 @@ static void list_fields (void)
 	 * active will be disabled.
 	 */
 	(void) fputs (_("Password inactive\t\t\t\t\t: "), stdout);
-	if (lastday == 0) {
+	if (lstchgdate == 0) {
 		(void) puts (_("password must be changed"));
-	} else if (   (lastday < 0)
+	} else if (   (lstchgdate < 0)
 	           || (inactdays < 0)
 	           || (maxdays >= (10000 * (DAY / SCALE)))
 	           || (maxdays < 0)) {
@@ -352,10 +352,10 @@ static void list_fields (void)
 	 * password expiring or not.
 	 */
 	(void) fputs (_("Account expires\t\t\t\t\t\t: "), stdout);
-	if (expdays < 0) {
+	if (expdate < 0) {
 		(void) puts (_("never"));
 	} else {
-		expires = expdays * SCALE;
+		expires = expdate * SCALE;
 		print_date ((time_t) expires);
 	}
 
@@ -405,9 +405,9 @@ static void process_flags (int argc, char **argv)
 		case 'd':
 			dflg = true;
 			if (!isnum (optarg)) {
-				lastday = strtoday (optarg);
-			} else if (   (getlong (optarg, &lastday) == 0)
-			           || (lastday < -1)) {
+				lstchgdate = strtoday (optarg);
+			} else if (   (getlong (optarg, &lstchgdate) == 0)
+			           || (lstchgdate < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
@@ -417,9 +417,9 @@ static void process_flags (int argc, char **argv)
 		case 'E':
 			Eflg = true;
 			if (!isnum (optarg)) {
-				expdays = strtoday (optarg);
-			} else if (   (getlong (optarg, &expdays) == 0)
-			           || (expdays < -1)) {
+				expdate = strtoday (optarg);
+			} else if (   (getlong (optarg, &expdate) == 0)
+			           || (expdate < -1)) {
 				fprintf (stderr,
 				         _("%s: invalid date '%s'\n"),
 				         Prog, optarg);
@@ -701,10 +701,10 @@ static void update_age (const struct spwd *sp, const struct passwd *pw)
 	 */
 	spwent.sp_max = maxdays;
 	spwent.sp_min = mindays;
-	spwent.sp_lstchg = lastday;
+	spwent.sp_lstchg = lstchgdate;
 	spwent.sp_warn = warndays;
 	spwent.sp_inact = inactdays;
-	spwent.sp_expire = expdays;
+	spwent.sp_expire = expdate;
 
 	if (spw_update (&spwent) == 0) {
 		fprintf (stderr,
@@ -731,7 +731,7 @@ static void get_defaults (const struct spwd *sp)
 			mindays = sp->sp_min;
 		}
 		if (!dflg) {
-			lastday = sp->sp_lstchg;
+			lstchgdate = sp->sp_lstchg;
 		}
 		if (!Wflg) {
 			warndays = sp->sp_warn;
@@ -740,7 +740,7 @@ static void get_defaults (const struct spwd *sp)
 			inactdays = sp->sp_inact;
 		}
 		if (!Eflg) {
-			expdays = sp->sp_expire;
+			expdate = sp->sp_expire;
 		}
 	} else {
 		/*
@@ -754,7 +754,7 @@ static void get_defaults (const struct spwd *sp)
 			mindays = -1;
 		}
 		if (!dflg) {
-			lastday = -1;
+			lstchgdate = -1;
 		}
 		if (!Wflg) {
 			warndays = -1;
@@ -763,7 +763,7 @@ static void get_defaults (const struct spwd *sp)
 			inactdays = -1;
 		}
 		if (!Eflg) {
-			expdays = -1;
+			expdate = -1;
 		}
 	}
 }

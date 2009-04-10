@@ -1,6 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/chage.c: More strtol() replaced by getlong().
+	* src/chage.c: expdays renamed to expdate. It is a date, even if
+	expressed in a number of days since Jan 1, 1970.
+	* src/chage.c: Likewise: lastday renamed to lstchgdate. Also fix
+	the --lastday documentation.
 
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
