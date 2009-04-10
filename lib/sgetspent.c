@@ -2,6 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2009       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,6 +31,9 @@
  */
 
 #include <config.h>
+
+/* Newer versions of Linux libc already have shadow support.  */
+#ifndef HAVE_SGETSPENT
 
 #ident "$Id$"
 
@@ -198,4 +202,7 @@ struct spwd *sgetspent (const char *string)
 
 	return (&spwd);
 }
+#else
+extern int errno;		/* warning: ANSI C forbids an empty source file */
+#endif
 
