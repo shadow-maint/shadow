@@ -195,23 +195,20 @@ static void date_to_str (char *buf, size_t maxsize, time_t date)
 static int new_fields (void)
 {
 	char buf[200];
-	char *cp;
 
 	(void) puts (_("Enter the new value, or press ENTER for the default"));
 	(void) puts ("");
 
 	snprintf (buf, sizeof buf, "%ld", mindays);
 	change_field (buf, sizeof buf, _("Minimum Password Age"));
-	mindays = strtol (buf, &cp, 10);
-	if (   ((0 == mindays) && ('\0' != *cp))
+	if (   (getlong (buf, &mindays) == 0)
 	    || (mindays < -1)) {
 		return 0;
 	}
 
 	snprintf (buf, sizeof buf, "%ld", maxdays);
 	change_field (buf, sizeof buf, _("Maximum Password Age"));
-	maxdays = strtol (buf, &cp, 10);
-	if (   ((0 == maxdays) && ('\0' != *cp))
+	if (   (getlong (buf, &maxdays) == 0)
 	    || (maxdays < -1)) {
 		return 0;
 	}
@@ -231,16 +228,14 @@ static int new_fields (void)
 
 	snprintf (buf, sizeof buf, "%ld", warndays);
 	change_field (buf, sizeof buf, _("Password Expiration Warning"));
-	warndays = strtol (buf, &cp, 10);
-	if (   ((warndays == 0) && ('\0' != *cp))
+	if (   (getlong (buf, &warndays) == 0)
 	    || (warndays < -1)) {
 		return 0;
 	}
 
 	snprintf (buf, sizeof buf, "%ld", inactdays);
 	change_field (buf, sizeof buf, _("Password Inactive"));
-	inactdays = strtol (buf, &cp, 10);
-	if (   ((inactdays == 0) && ('\0' != *cp))
+	if (   (getlong (buf, &inactdays) == 0)
 	    || (inactdays < -1)) {
 		return 0;
 	}
@@ -411,16 +406,24 @@ static void process_flags (int argc, char **argv)
 			dflg = true;
 			if (!isnum (optarg)) {
 				lastday = strtoday (optarg);
-			} else {
-				lastday = strtol (optarg, 0, 10);
+			} else if (   (getlong (optarg, &lastday) == 0)
+			           || (lastday < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid date '%s'\n"),
+				         Prog, optarg);
+				usage ();
 			}
 			break;
 		case 'E':
 			Eflg = true;
 			if (!isnum (optarg)) {
 				expdays = strtoday (optarg);
-			} else {
-				expdays = strtol (optarg, 0, 10);
+			} else if (   (getlong (optarg, &expdays) == 0)
+			           || (expdays < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid date '%s'\n"),
+				         Prog, optarg);
+				usage ();
 			}
 			break;
 		case 'h':
@@ -428,22 +431,46 @@ static void process_flags (int argc, char **argv)
 			break;
 		case 'I':
 			Iflg = true;
-			inactdays = strtol (optarg, 0, 10);
+			if (   (getlong (optarg, &inactdays) == 0)
+			    || (inactdays < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage ();
+			}
 			break;
 		case 'l':
 			lflg = true;
 			break;
 		case 'm':
 			mflg = true;
-			mindays = strtol (optarg, 0, 10);
+			if (   (getlong (optarg, &mindays) == 0)
+			    || (mindays < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage ();
+			}
 			break;
 		case 'M':
 			Mflg = true;
-			maxdays = strtol (optarg, 0, 10);
+			if (   (getlong (optarg, &maxdays) == 0)
+			    || (maxdays < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage ();
+			}
 			break;
 		case 'W':
 			Wflg = true;
-			warndays = strtol (optarg, 0, 10);
+			if (   (getlong (optarg, &warndays) == 0)
+			    || (warndays < -1)) {
+				fprintf (stderr,
+				         _("%s: invalid numeric argument '%s'\n"),
+				         Prog, optarg);
+				usage ();
+			}
 			break;
 		default:
 			usage ();
