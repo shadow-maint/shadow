@@ -276,7 +276,7 @@ static void get_defaults (void)
 {
 	FILE *fp;
 	char buf[1024];
-	char *cp, *ep;
+	char *cp;
 
 	/*
 	 * Open the defaults file for reading.
@@ -958,8 +958,8 @@ static void process_flags (int argc, char **argv)
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
-			                 "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
-			                 long_options, NULL)) != -1) {
+		                         "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
+		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
 				if (   ( !VALID (optarg) )
