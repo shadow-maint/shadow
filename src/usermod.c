@@ -275,8 +275,8 @@ static int get_groups (char *list)
 		 */
 		if (__isgrNIS ()) {
 			fprintf (stderr,
-				 _("%s: group '%s' is a NIS group.\n"),
-				 Prog, grp->gr_name);
+			         _("%s: group '%s' is a NIS group.\n"),
+			         Prog, grp->gr_name);
 			continue;
 		}
 #endif
@@ -361,9 +361,9 @@ static char *new_pw_passwd (char *pw_pass)
 
 		if (pw_pass[1] == '\0') {
 			fprintf (stderr,
-				 _("%s: unlocking the user's password would result in a passwordless account.\n"
-				   "You should set a password with usermod -p to unlock this user's password.\n"),
-				 Prog);
+			         _("%s: unlocking the user's password would result in a passwordless account.\n"
+			           "You should set a password with usermod -p to unlock this user's password.\n"),
+			         Prog);
 			return pw_pass;
 		}
 
@@ -410,8 +410,9 @@ static void new_pwent (struct passwd *pwent)
 		              "changing name",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user name '%s' to '%s'",
-			 pwent->pw_name, user_newname));
+		SYSLOG ((LOG_INFO,
+		         "change user name '%s' to '%s'",
+		         pwent->pw_name, user_newname));
 		pwent->pw_name = xstrdup (user_newname);
 	}
 	if (!is_shadow_pwd) {
@@ -425,8 +426,8 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user '%s' UID from '%d' to '%d'",
-			 pwent->pw_name, pwent->pw_uid, user_newid));
+		         "change user '%s' UID from '%d' to '%d'",
+		         pwent->pw_name, pwent->pw_uid, user_newid));
 		pwent->pw_uid = user_newid;
 	}
 	if (gflg) {
@@ -436,8 +437,8 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user '%s' GID from '%d' to '%d'",
-			 pwent->pw_name, pwent->pw_gid, user_newgid));
+		         "change user '%s' GID from '%d' to '%d'",
+		         pwent->pw_name, pwent->pw_gid, user_newgid));
 		pwent->pw_gid = user_newgid;
 	}
 	if (cflg) {
@@ -456,8 +457,8 @@ static void new_pwent (struct passwd *pwent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user '%s' home from '%s' to '%s'",
-			 pwent->pw_name, pwent->pw_dir, user_newhome));
+		         "change user '%s' home from '%s' to '%s'",
+		         pwent->pw_name, pwent->pw_dir, user_newhome));
 		pwent->pw_dir = user_newhome;
 	}
 	if (sflg) {
@@ -466,8 +467,9 @@ static void new_pwent (struct passwd *pwent)
 		              "changing user shell",
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
-		SYSLOG ((LOG_INFO, "change user '%s' shell from '%s' to '%s'",
-			 pwent->pw_name, pwent->pw_shell, user_newshell));
+		SYSLOG ((LOG_INFO,
+		         "change user '%s' shell from '%s' to '%s'",
+		         pwent->pw_name, pwent->pw_shell, user_newshell));
 		pwent->pw_shell = user_newshell;
 	}
 }
@@ -497,8 +499,8 @@ static void new_spent (struct spwd *spent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user '%s' inactive from '%ld' to '%ld'",
-			 spent->sp_namp, spent->sp_inact, user_newinactive));
+		         "change user '%s' inactive from '%ld' to '%ld'",
+		         spent->sp_namp, spent->sp_inact, user_newinactive));
 		spent->sp_inact = user_newinactive;
 	}
 	if (eflg) {
@@ -514,8 +516,8 @@ static void new_spent (struct spwd *spent)
 		              user_newname, (unsigned int) user_newid, 1);
 #endif
 		SYSLOG ((LOG_INFO,
-			 "change user '%s' expiration from '%s' to '%s'",
-			 spent->sp_namp, old_exp, new_exp));
+		         "change user '%s' expiration from '%s' to '%s'",
+		         spent->sp_namp, old_exp, new_exp));
 		spent->sp_expire = user_newexpire;
 	}
 	spent->sp_pwdp = new_pw_passwd (spent->sp_pwdp);
@@ -612,9 +614,9 @@ static void update_group (void)
 		if (was_member && (!Gflg || is_member)) {
 			if (lflg) {
 				ngrp->gr_mem = del_list (ngrp->gr_mem,
-							 user_name);
+				                         user_name);
 				ngrp->gr_mem = add_list (ngrp->gr_mem,
-							 user_newname);
+				                         user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -622,9 +624,9 @@ static void update_group (void)
 				              user_newname, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-					 "change '%s' to '%s' in group '%s'",
-					 user_name, user_newname,
-					 ngrp->gr_name));
+				         "change '%s' to '%s' in group '%s'",
+				         user_name, user_newname,
+				         ngrp->gr_name));
 			}
 		} else if (was_member && !aflg && Gflg && !is_member) {
 			ngrp->gr_mem = del_list (ngrp->gr_mem, user_name);
@@ -634,8 +636,9 @@ static void update_group (void)
 			              "removing group member",
 			              user_name, AUDIT_NO_ID, 1);
 #endif
-			SYSLOG ((LOG_INFO, "delete '%s' from group '%s'",
-				 user_name, ngrp->gr_name));
+			SYSLOG ((LOG_INFO,
+			         "delete '%s' from group '%s'",
+			         user_name, ngrp->gr_name));
 		} else if (!was_member && Gflg && is_member) {
 			ngrp->gr_mem = add_list (ngrp->gr_mem, user_newname);
 			changed = true;
@@ -720,15 +723,15 @@ static void update_gshadow (void)
 			              user_name, AUDIT_NO_ID, 1);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "change admin '%s' to '%s' in shadow group '%s'",
-				 user_name, user_newname, nsgrp->sg_name));
+			         "change admin '%s' to '%s' in shadow group '%s'",
+			         user_name, user_newname, nsgrp->sg_name));
 		}
 		if (was_member && (!Gflg || is_member)) {
 			if (lflg) {
 				nsgrp->sg_mem = del_list (nsgrp->sg_mem,
-							  user_name);
+				                          user_name);
 				nsgrp->sg_mem = add_list (nsgrp->sg_mem,
-							  user_newname);
+				                          user_newname);
 				changed = true;
 #ifdef WITH_AUDIT
 				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
@@ -736,9 +739,9 @@ static void update_gshadow (void)
 				              user_name, AUDIT_NO_ID, 1);
 #endif
 				SYSLOG ((LOG_INFO,
-					 "change '%s' to '%s' in shadow group '%s'",
-					 user_name, user_newname,
-					 nsgrp->sg_name));
+				         "change '%s' to '%s' in shadow group '%s'",
+				         user_name, user_newname,
+				         nsgrp->sg_name));
 			}
 		} else if (was_member && !aflg && Gflg && !is_member) {
 			nsgrp->sg_mem = del_list (nsgrp->sg_mem, user_name);
@@ -749,8 +752,8 @@ static void update_gshadow (void)
 			              user_name, AUDIT_NO_ID, 1);
 #endif
 			SYSLOG ((LOG_INFO,
-				 "delete '%s' from shadow group '%s'",
-				 user_name, nsgrp->sg_name));
+			         "delete '%s' from shadow group '%s'",
+			         user_name, nsgrp->sg_name));
 		} else if (!was_member && Gflg && is_member) {
 			nsgrp->sg_mem = add_list (nsgrp->sg_mem, user_newname);
 			changed = true;
@@ -821,8 +824,9 @@ static void process_flags (int argc, char **argv)
 		/* local, no need for xgetpwnam */
 		pwd = getpwnam (argv[argc - 1]);
 		if (NULL == pwd) {
-			fprintf (stderr, _("%s: user '%s' does not exist\n"),
-				 Prog, argv[argc - 1]);
+			fprintf (stderr,
+			         _("%s: user '%s' does not exist\n"),
+			         Prog, argv[argc - 1]);
 			exit (E_NOTFOUND);
 		}
 
@@ -848,13 +852,15 @@ static void process_flags (int argc, char **argv)
 		char *nis_domain;
 		char *nis_master;
 
-		fprintf (stderr, _("%s: user %s is a NIS user\n"),
-			 Prog, user_name);
+		fprintf (stderr,
+		         _("%s: user %s is a NIS user\n"),
+		         Prog, user_name);
 
 		if (   !yp_get_default_domain (&nis_domain)
 		    && !yp_master (nis_domain, "passwd.byname", &nis_master)) {
-			fprintf (stderr, _("%s: %s is the NIS master\n"),
-				 Prog, nis_master);
+			fprintf (stderr,
+			         _("%s: %s is the NIS master\n"),
+			         Prog, nis_master);
 		}
 		exit (E_NOTFOUND);
 	}
@@ -895,9 +901,9 @@ static void process_flags (int argc, char **argv)
 			{"unlock", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
-		while ((c =
-			getopt_long (argc, argv, "ac:d:e:f:g:G:hl:Lmop:s:u:U",
-				     long_options, NULL)) != -1) {
+		while ((c = getopt_long (argc, argv,
+			                 "ac:d:e:f:g:G:hl:Lmop:s:u:U",
+			                 long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
 				aflg = true;
@@ -905,8 +911,8 @@ static void process_flags (int argc, char **argv)
 			case 'c':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid field '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_newcomment = optarg;
@@ -915,8 +921,8 @@ static void process_flags (int argc, char **argv)
 			case 'd':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid field '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				dflg = true;
@@ -927,9 +933,8 @@ static void process_flags (int argc, char **argv)
 					user_newexpire = strtoday (optarg);
 					if (user_newexpire == -1) {
 						fprintf (stderr,
-							 _
-							 ("%s: invalid date '%s'\n"),
-							 Prog, optarg);
+						         _("%s: invalid date '%s'\n"),
+						         Prog, optarg);
 						exit (E_BAD_ARG);
 					}
 					user_newexpire *= DAY / SCALE;
@@ -939,7 +944,8 @@ static void process_flags (int argc, char **argv)
 				eflg = true;
 				break;
 			case 'f':
-				if (getlong (optarg, &user_newinactive) == 0) {
+				if (   (getlong (optarg, &user_newinactive) == 0)
+				    || (user_newinactive < -1)) {
 					fprintf (stderr,
 					         _("%s: invalid numeric argument '%s'\n"),
 					         Prog, optarg);
@@ -951,8 +957,8 @@ static void process_flags (int argc, char **argv)
 				grp = getgr_nam_gid (optarg);
 				if (NULL == grp) {
 					fprintf (stderr,
-						 _("%s: group '%s' does not exist\n"),
-						 Prog, optarg);
+					         _("%s: group '%s' does not exist\n"),
+					         Prog, optarg);
 					exit (E_NOTFOUND);
 				}
 				user_newgid = grp->gr_gid;
@@ -967,8 +973,8 @@ static void process_flags (int argc, char **argv)
 			case 'l':
 				if (!is_valid_user_name (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid field '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				lflg = true;
@@ -990,8 +996,8 @@ static void process_flags (int argc, char **argv)
 			case 's':
 				if (!VALID (optarg)) {
 					fprintf (stderr,
-						 _("%s: invalid field '%s'\n"),
-						 Prog, optarg);
+					         _("%s: invalid field '%s'\n"),
+					         Prog, optarg);
 					exit (E_BAD_ARG);
 				}
 				user_newshell = optarg;
@@ -1057,9 +1063,8 @@ static void process_flags (int argc, char **argv)
 
 	if (!is_shadow_pwd && (eflg || fflg)) {
 		fprintf (stderr,
-			 _
-			 ("%s: shadow passwords required for -e and -f\n"),
-			 Prog);
+		         _("%s: shadow passwords required for -e and -f\n"),
+		         Prog);
 		exit (E_USAGE);
 	}
 
@@ -1069,46 +1074,49 @@ static void process_flags (int argc, char **argv)
 
 	if (aflg && (!Gflg)) {
 		fprintf (stderr,
-			 _("%s: %s flag is only allowed with the %s flag\n"),
-			 Prog, "-a", "-G");
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-a", "-G");
 		usage ();
 		exit (E_USAGE);
 	}
 
 	if ((Lflg && (pflg || Uflg)) || (pflg && Uflg)) {
 		fprintf (stderr,
-			 _("%s: the -L, -p, and -U flags are exclusive\n"),
-			 Prog);
+		         _("%s: the -L, -p, and -U flags are exclusive\n"),
+		         Prog);
 		usage ();
 		exit (E_USAGE);
 	}
 
 	if (oflg && !uflg) {
 		fprintf (stderr,
-			 _("%s: %s flag is only allowed with the %s flag\n"),
-			 Prog, "-o", "-u");
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-o", "-u");
 		usage ();
 		exit (E_USAGE);
 	}
 
 	if (mflg && !dflg) {
 		fprintf (stderr,
-			 _("%s: %s flag is only allowed with the %s flag\n"),
-			 Prog, "-m", "-d");
+		         _("%s: %s flag is only allowed with the %s flag\n"),
+		         Prog, "-m", "-d");
 		usage ();
 		exit (E_USAGE);
 	}
 
 	/* local, no need for xgetpwnam */
 	if (lflg && (getpwnam (user_newname) != NULL)) {
-		fprintf (stderr, _("%s: user '%s' already exists\n"), Prog, user_newname);
+		fprintf (stderr,
+		         _("%s: user '%s' already exists\n"),
+		         Prog, user_newname);
 		exit (E_NAME_IN_USE);
 	}
 
 	/* local, no need for xgetpwuid */
 	if (uflg && !oflg && (getpwuid (user_newid) != NULL)) {
-		fprintf (stderr, _("%s: UID '%lu' already exists\n"),
-			 Prog, (unsigned long) user_newid);
+		fprintf (stderr,
+		         _("%s: UID '%lu' already exists\n"),
+		         Prog, (unsigned long) user_newid);
 		exit (E_UID_IN_USE);
 	}
 }
@@ -1132,7 +1140,9 @@ static void close_files (void)
 		fprintf (stderr,
 		         _("%s: failure while writing changes to %s\n"),
 		         Prog, spw_dbname ());
-		SYSLOG ((LOG_ERR, "failure while writing changes to %s", spw_dbname ()));
+		SYSLOG ((LOG_ERR,
+		         "failure while writing changes to %s",
+		         spw_dbname ()));
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1141,7 +1151,9 @@ static void close_files (void)
 			fprintf (stderr,
 			         _("%s: failure while writing changes to %s\n"),
 			         Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failure while writing changes to %s", gr_dbname ()));
+			SYSLOG ((LOG_ERR,
+			         "failure while writing changes to %s",
+			         gr_dbname ()));
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
@@ -1150,32 +1162,48 @@ static void close_files (void)
 				fprintf (stderr,
 				         _("%s: failure while writing changes to %s\n"),
 				         Prog, sgr_dbname ());
-				SYSLOG ((LOG_ERR, "failure while writing changes to %s", sgr_dbname ()));
+				SYSLOG ((LOG_ERR,
+				         "failure while writing changes to %s",
+				         sgr_dbname ()));
 				fail_exit (E_GRP_UPDATE);
 			}
 			if (sgr_unlock () == 0) {
-				fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, sgr_dbname ());
-				SYSLOG ((LOG_ERR, "failed to unlock %s", sgr_dbname ()));
+				fprintf (stderr,
+				         _("%s: failed to unlock %s\n"),
+				         Prog, sgr_dbname ());
+				SYSLOG ((LOG_ERR,
+				         "failed to unlock %s",
+				         sgr_dbname ()));
 				/* continue */
 			}
 		}
 #endif
 		if (gr_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, gr_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", gr_dbname ()));
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, gr_dbname ());
+			SYSLOG ((LOG_ERR,
+			         "failed to unlock %s",
+			         gr_dbname ()));
 			/* continue */
 		}
 	}
 
 	if (is_shadow_pwd) {
 		if (spw_unlock () == 0) {
-			fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, spw_dbname ());
-			SYSLOG ((LOG_ERR, "failed to unlock %s", spw_dbname ()));
+			fprintf (stderr,
+			         _("%s: failed to unlock %s\n"),
+			         Prog, spw_dbname ());
+			SYSLOG ((LOG_ERR,
+			         "failed to unlock %s",
+			         spw_dbname ()));
 			/* continue */
 		}
 	}
 	if (pw_unlock () == 0) {
-		fprintf (stderr, _("%s: failed to unlock %s\n"), Prog, pw_dbname ());
+		fprintf (stderr,
+		         _("%s: failed to unlock %s\n"),
+		         Prog, pw_dbname ());
 		SYSLOG ((LOG_ERR, "failed to unlock %s", pw_dbname ()));
 		/* continue */
 	}
@@ -1214,7 +1242,8 @@ static void open_files (void)
 	pw_locked = true;
 	if (pw_open (O_RDWR) == 0) {
 		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, pw_dbname ());
+		         _("%s: cannot open %s\n"),
+		         Prog, pw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 	if (is_shadow_pwd && (spw_lock () == 0)) {
@@ -1226,7 +1255,8 @@ static void open_files (void)
 	spw_locked = true;
 	if (is_shadow_pwd && (spw_open (O_RDWR) == 0)) {
 		fprintf (stderr,
-		         _("%s: cannot open %s\n"), Prog, spw_dbname ());
+		         _("%s: cannot open %s\n"),
+		         Prog, spw_dbname ());
 		fail_exit (E_PW_UPDATE);
 	}
 
@@ -1244,7 +1274,8 @@ static void open_files (void)
 		gr_locked = true;
 		if (gr_open (O_RDWR) == 0) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"), Prog, gr_dbname ());
+			         _("%s: cannot open %s\n"),
+			         Prog, gr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #ifdef SHADOWGRP
@@ -1257,7 +1288,8 @@ static void open_files (void)
 		sgr_locked = true;
 		if (is_shadow_grp && (sgr_open (O_RDWR) == 0)) {
 			fprintf (stderr,
-			         _("%s: cannot open %s\n"), Prog, sgr_dbname ());
+			         _("%s: cannot open %s\n"),
+			         Prog, sgr_dbname ());
 			fail_exit (E_GRP_UPDATE);
 		}
 #endif
@@ -1283,7 +1315,8 @@ static void usr_update (void)
 	 */
 	pwd = pw_locate (user_name);
 	if (NULL == pwd) {
-		fprintf (stderr, _("%s: user '%s' does not exist in %s\n"),
+		fprintf (stderr,
+		         _("%s: user '%s' does not exist in %s\n"),
 		         Prog, user_name, pw_dbname ());
 		fail_exit (E_NOTFOUND);
 	}
@@ -1351,8 +1384,9 @@ static void move_home (void)
 		}
 
 		if (access (user_newhome, F_OK) == 0) {
-			fprintf (stderr, _("%s: directory %s exists\n"),
-				 Prog, user_newhome);
+			fprintf (stderr,
+			         _("%s: directory %s exists\n"),
+			         Prog, user_newhome);
 			fail_exit (E_HOMEDIR);
 		} else if (rename (user_home, user_newhome) != 0) {
 			if (errno == EXDEV) {
@@ -1363,19 +1397,18 @@ static void move_home (void)
 				}
 				if (chown (user_newhome, sb.st_uid, sb.st_gid) != 0) {
 					fprintf (stderr,
-						 _("%s: can't chown %s\n"),
-						 Prog, user_newhome);
+					         _("%s: can't chown %s\n"),
+					         Prog, user_newhome);
 					rmdir (user_newhome);
 					fail_exit (E_HOMEDIR);
 				}
 				if (copy_tree (user_home, user_newhome,
-					       uflg ? (long int)user_newid : -1,
-					       gflg ? (long int)user_newgid : -1) == 0) {
+				               uflg ? (long int)user_newid : -1,
+				               gflg ? (long int)user_newgid : -1) == 0) {
 					if (remove_tree (user_home) != 0) {
 						fprintf (stderr,
-							 _
-							 ("%s: warning: failed to completely remove old home directory %s"),
-							 Prog, user_home);
+						         _("%s: warning: failed to completely remove old home directory %s"),
+						         Prog, user_home);
 					}
 #ifdef WITH_AUDIT
 					audit_logger (AUDIT_USER_CHAUTHTOK,
@@ -1584,7 +1617,7 @@ static void move_mailbox (void)
 	if (st.st_uid != user_id) {
 		/* better leave it alone */
 		fprintf (stderr, _("%s: warning: %s not owned by %s\n"),
-			 Prog, mailfile, user_name);
+		         Prog, mailfile, user_name);
 		close (fd);
 		return;
 	}
@@ -1605,7 +1638,7 @@ static void move_mailbox (void)
 
 	if (lflg) {
 		snprintf (newmailfile, sizeof newmailfile, "%s/%s",
-			  maildir, user_newname);
+		          maildir, user_newname);
 		if (   (link (mailfile, newmailfile) != 0)
 		    || (unlink (mailfile) != 0)) {
 			perror (_("failed to rename mailbox"));
