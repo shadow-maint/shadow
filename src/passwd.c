@@ -147,7 +147,6 @@ static char *update_crypt_pw (char *);
 static void update_noshadow (void);
 
 static void update_shadow (void);
-static long getnumber (const char *);
 #ifdef WITH_SELINUX
 static int check_selinux_access (const char *changed_user,
                                  uid_t changed_uid,
@@ -677,20 +676,6 @@ static void update_shadow (void)
 	spw_locked = false;
 }
 
-static long getnumber (const char *numstr)
-{
-	long val;
-	char *errptr;
-
-	val = strtol (numstr, &errptr, 10);
-	if (('\0' != *errptr) || (ERANGE == errno)) {
-		fprintf (stderr, _("%s: invalid numeric argument '%s'\n"), Prog,
-			 numstr);
-		exit (E_BAD_ARG);
-	}
-	return val;
-}
-
 #ifdef WITH_SELINUX
 static int check_selinux_access (const char *changed_user,
                                  uid_t changed_uid,
@@ -839,9 +824,14 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'i':
-				inact = getnumber (optarg);
-				if (inact >= -1)
-					iflg = true;
+				if (   (getlong (optarg, &inact) == 0)
+				    || (inact < -1)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage (E_BAD_ARG);
+				}
+				iflg = true;
 				anyflag = true;
 				break;
 			case 'k':
@@ -853,7 +843,13 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'n':
-				age_min = getnumber (optarg);
+				if (   (getlong (optarg, &age_min) == 0)
+				    || (age_min < -1)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage (E_BAD_ARG);
+				}
 				nflg = true;
 				anyflag = true;
 				break;
@@ -878,14 +874,24 @@ int main (int argc, char **argv)
 				anyflag = true;
 				break;
 			case 'w':
-				warn = getnumber (optarg);
-				if (warn >= -1) {
-					wflg = true;
+				if (   (getlong (optarg, &warn) == 0)
+				    || (warn < -1)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage (E_BAD_ARG);
 				}
+				wflg = true;
 				anyflag = true;
 				break;
 			case 'x':
-				age_max = getnumber (optarg);
+				if (   (getlong (optarg, &age_max) == 0)
+				    || (age_max < -1)) {
+					fprintf (stderr,
+					         _("%s: invalid numeric argument '%s'\n"),
+					         Prog, optarg);
+					usage (E_BAD_ARG);
+				}
 				xflg = true;
 				anyflag = true;
 				break;

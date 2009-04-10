@@ -1,5 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/passwd.c: Replace getnumber() by getlong(). This permits to
+	get rid of another strtol().
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/getlong.c: Include both <stdlib.h> and <errno.h> needed
 	for strtol and errno, and do not include "defines.h" (not needed).
 
