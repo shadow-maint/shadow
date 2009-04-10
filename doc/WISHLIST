@@ -31,8 +31,6 @@ New ideas to add to this list are welcome, too.  --marekm
 - new option for /etc/suauth: don't load user's environment (force "su -")
   suggested by Ulisses Alonso Camaro
 - find out why recent releases won't compile on Solaris
-- newusers UID/GID selection algorithm should be the same as useradd
-  (and use UID_MIN, UID_MAX from login.defs)
 - newusers should be able to copy /etc/skel to the new home directory
   (like useradd)
 - add directories where other packages can add hooks for package-specific
