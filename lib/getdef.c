@@ -193,6 +193,7 @@ bool getdef_bool (const char *item)
 int getdef_num (const char *item, int dflt)
 {
 	struct itemdef *d;
+	long val;
 
 	if (!def_loaded) {
 		def_load ();
@@ -203,8 +204,16 @@ int getdef_num (const char *item, int dflt)
 		return dflt;
 	}
 
-	return (int) strtol (d->value, (char **) NULL, 0);
-	/* TODO: check for errors */
+	if (   (getlong (d->value, &val) == 0)
+	    || (val > INT_MAX)
+	    || (val < INT_MIN)) {
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%s'"),
+		         item, d->value);
+		return dflt;
+	}
+
+	return (int) val;
 }
 
 
@@ -219,6 +228,7 @@ int getdef_num (const char *item, int dflt)
 unsigned int getdef_unum (const char *item, unsigned int dflt)
 {
 	struct itemdef *d;
+	long val;
 
 	if (!def_loaded) {
 		def_load ();
@@ -229,8 +239,16 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 		return dflt;
 	}
 
-	return (unsigned int) strtoul (d->value, (char **) NULL, 0);
-	/* TODO: check for errors */
+	if (   (getlong (d->value, &val) == 0)
+	    || (val < 0)
+	    || (val > INT_MAX)) {
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%s'"),
+		         item, d->value);
+		return dflt;
+	}
+
+	return (unsigned int) val;
 }
 
 
@@ -245,6 +263,7 @@ unsigned int getdef_unum (const char *item, unsigned int dflt)
 long getdef_long (const char *item, long dflt)
 {
 	struct itemdef *d;
+	long val;
 
 	if (!def_loaded) {
 		def_load ();
@@ -255,8 +274,14 @@ long getdef_long (const char *item, long dflt)
 		return dflt;
 	}
 
-	return strtol (d->value, (char **) NULL, 0);
-	/* TODO: check for errors */
+	if (getlong (d->value, &val) == 0) {
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%s'"),
+		         item, d->value);
+		return dflt;
+	}
+
+	return val;
 }
 
 /*
@@ -270,6 +295,7 @@ long getdef_long (const char *item, long dflt)
 unsigned long getdef_ulong (const char *item, unsigned long dflt)
 {
 	struct itemdef *d;
+	long val;
 
 	if (!def_loaded) {
 		def_load ();
@@ -280,8 +306,15 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 		return dflt;
 	}
 
-	return (unsigned long) strtoul (d->value, (char **) NULL, 0);
-	/* TODO: check for errors */
+	if (getlong (d->value, &val) == 0) {
+		/* FIXME: we should have a getulong */
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%s'"),
+		         item, d->value);
+		return dflt;
+	}
+
+	return val;
 }
 
 /*
@@ -354,9 +387,8 @@ static struct itemdef *def_find (const char *name)
 	 */
 
 	fprintf (stderr,
-		 _
-		 ("configuration error - unknown item '%s' (notify administrator)\n"),
-		 name);
+	         _("configuration error - unknown item '%s' (notify administrator)\n"),
+	         name);
 	SYSLOG ((LOG_CRIT, "unknown configuration item `%s'", name));
 	return (struct itemdef *) NULL;
 }

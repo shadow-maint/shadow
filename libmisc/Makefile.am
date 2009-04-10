@@ -29,7 +29,6 @@ libmisc_a_SOURCES = \
 	getdate.h \
 	getdate.y \
 	getgr_nam_gid.c \
-	getlong.c \
 	getrange.c \
 	hushed.c \
 	isexpired.c \

@@ -1,5 +1,11 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/getdef.c: Use getlong instead of strtol/strtoul.
+	* libmisc/getlong, lib/getlong.c, libmisc/Makefile.am,
+	lib/Makefile.am: getlong.c moved from libmisc/ to lib/.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadow.c: Replace strtol() by getlong(). Also detect more
 	issues in a numerical shadow entry field.
 
