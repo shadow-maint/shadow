@@ -235,7 +235,7 @@ extern void do_pam_passwd (const char *user, bool silent, bool change_expired);
 extern bool isttytime (const char *, const char *, time_t);
 
 /* pwd2spwd.c */
-#ifdef USE_PAM
+#ifndef USE_PAM
 extern struct spwd *pwd_to_spwd (const struct passwd *);
 #endif
 

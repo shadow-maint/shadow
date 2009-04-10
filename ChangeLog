@@ -1,5 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h: pwd_to_spwd() should be declared if USE_PAM is
+	NOT defined.
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/passwd.c: Replace getnumber() by getlong(). This permits to
 	get rid of another strtol().
 
