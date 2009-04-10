@@ -283,6 +283,11 @@ extern struct group *sgetgrent (const char *buf);
 /* sgetpwent.c */
 extern struct passwd *sgetpwent (const char *buf);
 
+/* sgetspent.c */
+#ifndef HAVE_SGETSPENT
+extern struct spwd *sgetspent (const char *string)
+#endif
+
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern struct sgrp *__sgr_dup (const struct sgrp *sgent);

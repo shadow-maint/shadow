@@ -38,6 +38,7 @@ libshadow_la_SOURCES = \
 	pwmem.c \
 	sgetgrent.c \
 	sgetpwent.c \
+	sgetspent.c \
 	sgroupio.c \
 	sgroupio.h\
 	shadow.c \
