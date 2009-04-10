@@ -1,9 +1,5 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* lib/sgetspent.c: Removed (is not used / compiled) anymore.
-
-2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
-
 	* lib/sgetspent.c: Replace strtol() by getlong(). Also detect more
 	issues in a numerical shadow entry field.
 
