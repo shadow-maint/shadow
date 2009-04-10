@@ -31,8 +31,9 @@
 
 #ident "$Id$"
 
+#include <stdlib.h>
+#include <errno.h>
 #include "prototypes.h"
-#include "defines.h"
 
 int getlong (const char *numstr, long int *result)
 {

@@ -1,5 +1,10 @@
 2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/getlong.c: Include both <stdlib.h> and <errno.h> needed
+	for strtol and errno, and do not include "defines.h" (not needed).
+
+2009-04-06  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c, src/usermod.c, libmisc/getgr_nam_gid.c,
 	libmisc/Makefile.am, lib/prototypes.h: Moved getgr_nam_gid() from
 	src/useradd.c and src/usermod.c to libmisc/getgr_nam_gid.c.
