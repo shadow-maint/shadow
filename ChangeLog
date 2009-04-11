@@ -1,5 +1,9 @@
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/gpasswd.c: Fix the usage of the unused macro.
+
+2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/prototypes.h, libmisc/age.c, src/expiry.c, src/login.c: A
 	shadow entry is now sufficient for agecheck. Remove the first
 	passwd entry parameter.

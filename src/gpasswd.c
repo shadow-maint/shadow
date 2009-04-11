@@ -111,16 +111,16 @@ static void update_group (struct group *gr);
 static void change_passwd (struct group *gr);
 #endif
 static void log_gpasswd_failure (const char *suffix);
-static void log_gpasswd_failure_system (void *unused(arg));
-static void log_gpasswd_failure_group (void *unused(arg));
+static void log_gpasswd_failure_system (unused void *arg);
+static void log_gpasswd_failure_group (unused void *arg);
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (void *unused(arg));
+static void log_gpasswd_failure_gshadow (unused void *arg);
 #endif
 static void log_gpasswd_success (const char *suffix);
-static void log_gpasswd_success_system (void *unused(arg));
-static void log_gpasswd_success_group (void *unused(arg));
+static void log_gpasswd_success_system (unused void *arg);
+static void log_gpasswd_success_group (unused void *arg);
 #ifdef SHADOWGRP
-static void log_gpasswd_success_gshadow (void *unused(arg));
+static void log_gpasswd_success_gshadow (unused void *arg);
 #endif
 
 /*
@@ -499,12 +499,12 @@ static void log_gpasswd_failure (const char *suffix)
 	}
 }
 
-static void log_gpasswd_failure_system (void *unused(arg))
+static void log_gpasswd_failure_system (unused void *arg)
 {
 	log_gpasswd_failure ("");
 }
 
-static void log_gpasswd_failure_group (void *unused(arg))
+static void log_gpasswd_failure_group (unused void *arg)
 {
 	char buf[1024];
 	snprintf (buf, 1023, " in %s", gr_dbname ());
@@ -513,7 +513,7 @@ static void log_gpasswd_failure_group (void *unused(arg))
 }
 
 #ifdef SHADOWGRP
-static void log_gpasswd_failure_gshadow (void *unused(arg))
+static void log_gpasswd_failure_gshadow (unused void *arg)
 {
 	char buf[1024];
 	snprintf (buf, 1023, " in %s", sgr_dbname ());
@@ -633,12 +633,12 @@ static void log_gpasswd_success (const char *suffix)
 	}
 }
 
-static void log_gpasswd_success_system (void *unused(arg))
+static void log_gpasswd_success_system (unused void *arg)
 {
 	log_gpasswd_success ("");
 }
 
-static void log_gpasswd_success_group (void *unused(arg))
+static void log_gpasswd_success_group (unused void *arg)
 {
 	char buf[1024];
 	snprintf (buf, 1023, " in %s", gr_dbname ());
@@ -647,7 +647,7 @@ static void log_gpasswd_success_group (void *unused(arg))
 }
 
 #ifdef SHADOWGRP
-static void log_gpasswd_success_gshadow (void *unused(arg))
+static void log_gpasswd_success_gshadow (unused void *arg)
 {
 	char buf[1024];
 	snprintf (buf, 1023, " in %s", sgr_dbname ());
