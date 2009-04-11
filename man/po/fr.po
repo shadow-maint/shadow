@@ -4,6 +4,7 @@
 #
 # Nicolas FRANÇOIS <nicolas.francois@centaliens.net>, 2004-2009
 # Jean-Luc Coulon <jean-luc.coulon@wanadoo.fr>, 2008
+# ABBAS.B <abelkcem@hotmail.com>, 2009
 #     Certaines pages étaient déjà traduites:
 #       chage: Olivier Marin, 2001
 #       chpasswd: Amand Tihon <amand@alrj.org>
@@ -17,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow-man-pages 4.0.18\n"
 "POT-Creation-Date: 2009-04-06 00:48+0200\n"
-"PO-Revision-Date: 2009-03-14 14:06+0100\n"
+"PO-Revision-Date: 2009-04-12 00:38+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: Debian French Team <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,6 +27,407 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If defined, either full pathname of a file containing device names or a \":"
+"\" delimited list of device names. Root logins will be allowed only upon "
+"these devices."
+msgstr ""
+"S'il est défini, soit un chemin complet du fichier contenant les noms de "
+"périphériques ou d'une liste de noms du périphérique délimitée par \":\". "
+"Les connexions d'un administrateur ne seront autorisées que depuis ces "
+"périphériques."
+
+#: login.defs.5.xml:39(para)
+msgid "If not defined, root will be allowed on any device."
+msgstr ""
+"S'il n'est pas défini, root pourra se connecter depuis n'importe quel "
+"périphérique."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"List of groups to add to the user's supplementary group set when logging in "
+"on the console (as determined by the CONSOLE setting). Default is none. "
+"<placeholder-1/> Use with caution - it is possible for users to gain "
+"permanent access to these groups, even when not logged in on the console."
+msgstr ""
+"Une liste de groupes à rajouter aux groupes supplémentaires de l'utilisateur "
+"lors d'une connexion sur une console (déterminé par le paramètre CONSOLE). "
+"Par défaut, aucun groupe n'est ajouté. <placeholder-1/> A utiliser avec "
+"précaution : il est possible que les utilisateurs aient un accès permanent "
+"à ces groupes, et cela même s'ils ne sont pas connectés sur la console."
+
+#: login.defs.5.xml:32(para)
+msgid ""
+"Indicate if a home directory should be created by default for new users."
+msgstr ""
+"Indiquer si un répertoire personnel doit être créé par défaut pour les "
+"nouveaux utilisateurs."
+
+#: login.defs.5.xml:36(para)
+msgid ""
+"This setting does not apply to system users, and can be overriden on the "
+"command line."
+msgstr ""
+"Ce réglage ne s'applique pas pour les utilisateurs système, et peut être "
+"annulé sur la ligne de commande."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"Indicate if login is allowed if we can't cd to the home directory. Default "
+"in no."
+msgstr ""
+"Indiquer si la connexion est permise si on ne peut pas accéder au répertoire "
+"personnel. Le réglage par défaut est « no »."
+
+#: login.defs.5.xml:38(para)
+msgid ""
+"If set to <replaceable>yes</replaceable>, the user will login in the root "
+"(<filename>/</filename>) directory if it is not possible to cd to her home "
+"directory."
+msgstr ""
+"S'il est réglé sur <replaceable>yes</replaceable>, l'utilisateur va se "
+"connecter dans le répertoire racine (<filename>/</filename>) s'il n'est pas "
+"possible d'accéder à son répertoire personnel."
+
+#: login.defs.5.xml:30(term)
+msgid "<option>ENCRYPT_METHOD</option> (string)"
+msgstr "<option>ENCRYPT_METHOD</option> (chaîne ce caractères)"
+
+#: login.defs.5.xml:32(para)
+msgid ""
+"This defines the system default encryption algorithm for encrypting "
+"passwords (if no algorithm are specified on the command line)."
+msgstr ""
+"Celle-ci détermine les algorithmes de chiffrement par défaut du système pour "
+"coder les mots de passes (si aucun algorithme n'a été indiqué sur la ligne "
+"des commandes)."
+
+#: login.defs.5.xml:40(para)
+msgid "<replaceable>DES</replaceable> (default)"
+msgstr "<replaceable>DES</replaceable> (par défaut)"
+
+#: login.defs.5.xml:43(replaceable)
+msgid "MD5"
+msgstr "MD5"
+
+#: login.defs.5.xml:46(replaceable)
+msgid "SHA256"
+msgstr "SHA256"
+
+#: login.defs.5.xml:49(replaceable)
+msgid "SHA512"
+msgstr "SHA512"
+
+#: login.defs.5.xml:36(para)
+msgid "It can take one of these values: <placeholder-1/>"
+msgstr "Il peut prendre une de ces valeurs : <placeholder-1/>"
+
+#: login.defs.5.xml:53(para)
+msgid ""
+"Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option> variable."
+msgstr ""
+"Remarque : ce paramètre remplace la variable <option>MD5_CRYPT_ENAB</option>"
+
+#: login.defs.5.xml:57(para) login.defs.5.xml:53(para)
+msgid ""
+"Note: if you use PAM, it is recommended to set this variable consistently "
+"with the PAM modules configuration."
+msgstr ""
+"Remarque : si vous utilisez PAM, il est recommandé d'ajuster cette variable "
+"de façon cohérente avec la configuration des modules PAM."
+
+#: login.defs.5.xml:35(para)
+msgid ""
+"If set, it will be used to define the HZ environment variable when a user "
+"login. The value must be preceded by <replaceable>HZ=</replaceable>. A "
+"common value on Linux is <replaceable>HZ=100</replaceable>."
+msgstr ""
+"S'il est défini, il sera utilisé pour définir la variable d'environnement HZ "
+"lorsqu'un utilisateur se connecte. La valeur doit être précédée par "
+"<replaceable>HZ=</replaceable>. Une valeur commune sur Linux est "
+"<replaceable>HZ=100</replaceable>."
+
+#: login.defs.5.xml:41(para)
+msgid ""
+"The <envar>HZ</envar> environment variable is only set when the user (the "
+"superuser) logs in with <command>sulogin</command>."
+msgstr ""
+"La variable d'environnement <envar>HZ</envar> est uniquement définie quand "
+"l'utilisateur (le super-utilisateur) se connecte avec <command>sulogin</"
+"command>."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If set, it will be used to define the PATH environment variable when a "
+"regular user login. The value can be preceded by <replaceable>PATH=</"
+"replaceable>, or a colon separated list of paths (for example <replaceable>/"
+"bin:/usr/bin</replaceable>). The default value is <replaceable>PATH=/bin:/"
+"usr/bin</replaceable>."
+msgstr ""
+"S'il est défini, il sera utilisée pour définir la variable d'environnement "
+"PATH quand un utilisateur ordinaire se connecte. La valeur peut être "
+"précédée par <replaceable>PATH=</replaceable>, ou une liste de chemins "
+"séparés par des deux points (par exemple <replaceable>/bin:/usr/bin</"
+"replaceable>). La valeur par défaut est <replaceable>PATH=/bin:/usr/bin</"
+"replaceable>."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If set, it will be used to define the PATH environment variable when the "
+"superuser login. The value can be preceded by <replaceable>PATH=</"
+"replaceable>, or a colon separated list of paths (for example <replaceable>/"
+"sbin:/bin:/usr/sbin:/usr/bin</replaceable>). The default value is "
+"<replaceable>PATH=/bin:/usr/bin</replaceable>."
+msgstr ""
+"S'il est défini, il sera utilisée pour définir la variable d'environnement "
+"PATH quand le super-utilisateur se connecte. La valeur peut être précédée "
+"par <replaceable>PATH=</replaceable>, ou une liste de chemins séparés par "
+"deux points ( par exemple <replaceable>/sbin:/bin:/usr/sbin:/usr/bin</"
+"replaceable>). La valeur par défaut est <replaceable>PATH=/bin:/usr/bin</"
+"replaceable>."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If set, it will be used to define the TZ environment variable when a user "
+"login. The value can be the name of a timezone preceded by <replaceable>TZ=</"
+"replaceable> (for example <replaceable>TZ=CST6CDT</replaceable>), or the "
+"full path to the file containing the timezone specification (for example "
+"<filename>/etc/tzname</filename>)."
+msgstr ""
+"S'il est défini, il sera utilisée pour définir la variable d'environnement "
+"TZ quand un utilisateur se connecte. La valeur peut être le nom d'une zone "
+"horaire précédée par <replaceable>TZ=</replaceable> (par exemple "
+"<replaceable>TZ=CST6CDT</replaceable>), ou le chemin complet vers le fichier "
+"contenant la spécification de la zone horaire (par exemple <filename>/etc/"
+"tzname</filename>)."
+
+#. TODO: it can in fact be used to set any other variable
+#: login.defs.5.xml:43(para)
+msgid ""
+"If a full path is specified but the file does not exist or cannot be read, "
+"the default is to use <replaceable>TZ=CST6CDT</replaceable>."
+msgstr ""
+"Si un chemin complet est spécifié mais que le fichier n'existe pas ou ne "
+"peut pas être lu, la valeur par défaut utilisée est <replaceable>TZ=CST6CDT</"
+"replaceable>."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If this file exists and is readable, login environment will be read from it. "
+"Every line should be in the form name=value."
+msgstr ""
+"Si ce fichier existe et est lisible, l'environnement de connexion sera lu à  "
+"partir de lui. Chaque ligne doit être sous la forme nom=valeur"
+
+#: login.defs.5.xml:38(para) login.defs.5.xml:37(para)
+msgid ""
+"The value can be prefixed \"0\" for an octal value, or \"0x\" for an "
+"hexadecimal value."
+msgstr ""
+"La valeur peut être préfixée par \"0\" pour une valeur octale, ou \"0x\" "
+"pour une valeur hexadécimale."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"Delay in seconds before being allowed another attempt after a login failure."
+msgstr ""
+"Le délai en secondes avant qu'un nouvel essai soit permit après un échec de "
+"connexion."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"Enable logging and display of <filename>/var/log/faillog</filename> login "
+"failure info."
+msgstr ""
+"Activer l'enregistrement et l'affichage des informations d'échec de "
+"connexion de <filename>/var/log/faillog</filename>"
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If set, <command>login</command> will execute this shell instead of the "
+"users' shell specified in <filename>/etc/passwd</filename>."
+msgstr ""
+"S'il est défini, <command>login</command> exécutera cet interpréteur de "
+"commandes au lieu de l'interpréteur de l'utilisateur spécifié dans "
+"<filename>/etc/passwd</filename>."
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If defined, login failures will be logged in this file in a utmp format."
+msgstr ""
+"S'il est défini, les échecs de connexion seront enregistrés dans ce fichier "
+"sous le format utmp"
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"If defined, this file can inhibit all the usual chatter during the login "
+"sequence. If a full pathname is specified, then hushed mode will be enabled "
+"if the user's name or shell are found in the file. If not a full pathname, "
+"then hushed mode will be enabled if the file exists in the user's home "
+"directory."
+msgstr ""
+"S'il est défini, ce fichier peut désactiver tous les affichages habituels "
+"durant la séquence de connexion. Si un nom de chemin complet est spécifié, "
+"alors le mode taiseux sera activé si le nom ou l'interpréteur de commandes "
+"de l'utilisateur sont trouvés dans le fichier. Si ce n'est pas un nom de "
+"chemin complet, alors le mode taiseux sera activé si le fichier existe dans "
+"le répertoire personnel de l'utilisateur."
+
+#: login.defs.5.xml:34(para)
+msgid "If defined, this file will be displayed before each login prompt."
+msgstr ""
+"S'il est défini, ce fichier sera affiché avant chaque invite de connexion."
+
+#: login.defs.5.xml:34(para)
+msgid "Terminal KILL character (<replaceable>025</replaceable> = CTRL/U)."
+msgstr "Le caractère KILL final (<replaceable>025</replaceable> = CTRL/U)."
+
+#: login.defs.5.xml:34(para)
+msgid "Enable logging and display of /var/log/lastlog login time info."
+msgstr ""
+"Activer la journalisation et l'affichage des informations de dernière "
+"connexion de /var/log/lastlog."
+
+#: login.defs.5.xml:34(para)
+msgid "Enable logging of successful logins."
+msgstr "Activer la journalisation des connexions réussies."
+
+#: login.defs.5.xml:34(para)
+msgid "Enable display of unknown usernames when login failures are recorded."
+msgstr ""
+"Activer l'affichage des noms d'utilisateurs inconnus quand les échecs de "
+"connexions sont enregistrés."
+
+#: login.defs.5.xml:38(para)
+msgid ""
+"Note: logging unknown usernames may be a security issue if an user enter her "
+"password instead of her login name."
+msgstr ""
+"Remarque : la journalisation des noms d'utilisateurs inconnus peut être un "
+"problème de sécurité si un utilisateur entre son mot de passe au lieu de son "
+"nom d'utilisateur."
+
+#: login.defs.5.xml:34(para)
+msgid "Maximum number of login retries in case of bad password."
+msgstr ""
+"Le nombre maximum de tentatives de connexion en cas de mauvais mot de passe."
+
+#: login.defs.5.xml:37(para)
+msgid ""
+"This will most likely be overriden by PAM, since the default pam_unix module "
+"has it's own built in of 3 retries. However, this is a safe fallback in case "
+"you are using an authentication module that does not enforce PAM_MAXTRIES."
+msgstr ""
+"Ce sera probablement écrasé par PAM, puisque le module pam_unix est réglé en "
+"dur pour n'effectuer que 3 tentatives. Toutefois, il s'agit d'une solution "
+"de repli au cas où vous utilisez un module d'authentification qui ne fait "
+"pas appliquer PAM_MAXTRIES"
+
+#: login.defs.5.xml:34(para)
+msgid ""
+"The string used for prompting a password. The default is to use \"Password: "
+"\", or a translation of that string. If you set this variable, the prompt "
+"will no be translated."
+msgstr ""
+"La chaîne de caractères utilisée pour l'invite de mot de passe. La valeur "
+"par défaut est d'utiliser \"Password: \" (« mot de passe : »), ou une "
+"traduction de cette chaîne. Si vous définissez cette variable, l'invite ne "
+"sera pas traduit."
+
+#: login.defs.5.xml:39(para)
+msgid ""
+"If the string contains <replaceable>%s</replaceable>, this will be replaced "
+"by the user's name."
+msgstr ""
+"Si la chaîne contient <replaceable>%s</replaceable>, ces caractères seront "
+"remplacés par le nom de l'utilisateur."
+
+#: login.defs.5.xml:34(para)
+msgid "Max time in seconds for login."
+msgstr "Le temps maximum en secondes pour la connexion."
+
+#: login.defs.5.xml:34(para)
+msgid "Enable checking and display of mailbox status upon login."
+msgstr ""
+"Activer le contrôle et l'affichage du statut de la boite aux lettres durant "
+"la connexion."
+
+#: login.defs.5.xml:37(para)
+msgid ""
+"You should disable it if the shell startup files already check for mail "
+"(\"mailx -e\" or equivalent)."
+msgstr ""
+"Vous devriez le désactiver si les fichiers de démarrage de l'interpréteur de "
+"commandes vérifie déjà la présence de courriers (\"mail -e\" ou équivalent)."
+
+#: login.defs.5.xml:43(para)
+msgid ""
+"Defines the location of the users mail spool files relatively to their home "
+"directory."
+msgstr ""
+"Définit l'emplacement des boîtes aux lettres des utilisateurs relativement à "
+"leur répertoire personnel."
+
+#. FIXME: MAIL_FILE not used in useradd
+#: login.defs.5.xml:50(para)
+msgid ""
+"The <option>MAIL_DIR</option> and <option>MAIL_FILE</option> variables are "
+"used by <command>useradd</command>, <command>usermod</command>, and "
+"<command>userdel</command> to create, move, or delete the user's mail spool."
+msgstr ""
+"Les paramètres <option>MAIL_DIR</option> et <option>MAIL_FILE</option> sont "
+"utilisées par <command>useradd</command>, <command>usermod</command>, et "
+"<command>userdel</command> pour créer, déplacer, ou supprimer les boîtes aux "
+"lettres des utilisateurs."
+
+#: login.defs.5.xml:30(term)
+msgid "<option>MAX_MEMBERS_PER_GROUP</option> (number)"
+msgstr "<option>MAX_MEMBERS_PER_GROUP</option> (nombre)"
+
+#: login.defs.5.xml:32(para)
+msgid ""
+"Maximum members per group entry. When the maximum is reached, a new group "
+"entry (line) is started in <filename>/etc/group</filename> (with the same "
+"name, same password, and same GID)."
+msgstr ""
+"Nombre maximum de membres par entrée de groupe. Lorsque le maximum est "
+"atteint, une nouvelle entrée de groupe (ligne) est démarrée dans <filename>/"
+"etc/group</filename> (avec le même nom, même mot de passe, et même GID)."
+
+#: login.defs.5.xml:37(para)
+msgid ""
+"The default value is 0, meaning that there are no limits in the number of "
+"members in a group."
+msgstr ""
+"La valeur par défaut est 0, ce qui signifie qu'il n'y a pas de limites pour "
+"le nombre de membres dans un groupe."
+
+#. Note: on HP, split groups have the same ID, but different
+#.                names.
+#: login.defs.5.xml:43(para)
+msgid ""
+"This feature (split group) permits to limit the length of lines in the group "
+"file. This is useful to make sure that lines for NIS groups are not larger "
+"than 1024 characters."
+msgstr ""
+"Cette fonctionnalité (groupe découpé) permet de limiter la longueur des "
+"lignes dans le fichier de groupes. Ceci est utile pour s'assurer que les "
+"lignes pour les groupes NIS ne sont pas plus grandes que 1024 caractères."
+
+#: login.defs.5.xml:48(para)
+msgid "If you need to enforce such limit, you can use 25."
+msgstr "Si vous avez besoin de fixer cette limite, vous pouvez utiliser 25."
+
+#: login.defs.5.xml:51(para)
+msgid ""
+"Note: split groups may not be supported by all tools (even in the Shadow "
+"toolsuite. You should not use this variable unless you really need it."
+msgstr ""
+"Remarque : les groupes découpés ne sont peut-être pas pris en charge par "
+"tous les outils (même dans la suite d'outils Shadow). Vous ne devriez pas "
+"utiliser cette variable, sauf si vous en avez vraiment besoin."
 
 #: vipw.8.xml:38(refentrytitle) vipw.8.xml:43(refname) vipw.8.xml:52(command)
 msgid "vipw"
@@ -772,22 +1174,6 @@ msgstr ""
 msgid "<option>MAIL_FILE</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
 
-#: usermod.8.xml:43(para) userdel.8.xml:43(para) useradd.8.xml:43(para)
-#: su.1.xml:43(para) login.defs.5.xml:43(para) login.1.xml:43(para)
-msgid ""
-"Defines the location of the users mail spool files relatively to their home "
-"directory."
-msgstr ""
-
-#. FIXME: MAIL_FILE not used in useradd
-#: usermod.8.xml:50(para) userdel.8.xml:50(para) useradd.8.xml:50(para)
-#: su.1.xml:50(para) login.defs.5.xml:50(para) login.1.xml:50(para)
-msgid ""
-"The <option>MAIL_DIR</option> and <option>MAIL_FILE</option> variables are "
-"used by <command>useradd</command>, <command>usermod</command>, and "
-"<command>userdel</command> to create, move, or delete the user's mail spool."
-msgstr ""
-
 #: usermod.8.xml:56(para) userdel.8.xml:56(para) useradd.8.xml:56(para)
 #: su.1.xml:56(para) login.defs.5.xml:56(para) login.1.xml:56(para)
 #, fuzzy
@@ -799,66 +1185,6 @@ msgstr ""
 "Si <option>--preserve-environment</option> est utilisé, l'interpréteur de "
 "commandes indiqué par la variable d'environnement <envar>$SHELL</envar> sera "
 "utilisé."
-
-#: usermod.8.xml:30(term) userdel.8.xml:30(term) useradd.8.xml:30(term)
-#: pwconv.8.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
-#: grpck.8.xml:30(term) groupmod.8.xml:30(term) groupmems.8.xml:30(term)
-#: groupdel.8.xml:30(term) groupadd.8.xml:30(term) gpasswd.1.xml:30(term)
-#: chgpasswd.8.xml:30(term)
-msgid "<option>MAX_MEMBERS_PER_GROUP</option> (number)"
-msgstr ""
-
-#: usermod.8.xml:32(para) userdel.8.xml:32(para) useradd.8.xml:32(para)
-#: pwconv.8.xml:32(para) newusers.8.xml:32(para) login.defs.5.xml:32(para)
-#: grpck.8.xml:32(para) groupmod.8.xml:32(para) groupmems.8.xml:32(para)
-#: groupdel.8.xml:32(para) groupadd.8.xml:32(para) gpasswd.1.xml:32(para)
-#: chgpasswd.8.xml:32(para)
-msgid ""
-"Maximum members per group entry. When the maximum is reached, a new group "
-"entry (line) is started in <filename>/etc/group</filename> (with the same "
-"name, same password, and same GID)."
-msgstr ""
-
-#: usermod.8.xml:37(para) userdel.8.xml:37(para) useradd.8.xml:37(para)
-#: pwconv.8.xml:37(para) newusers.8.xml:37(para) login.defs.5.xml:37(para)
-#: grpck.8.xml:37(para) groupmod.8.xml:37(para) groupmems.8.xml:37(para)
-#: groupdel.8.xml:37(para) groupadd.8.xml:37(para) gpasswd.1.xml:37(para)
-#: chgpasswd.8.xml:37(para)
-msgid ""
-"The default value is 0, meaning that there are no limits in the number of "
-"members in a group."
-msgstr ""
-
-#. Note: on HP, split groups have the same ID, but different
-#.                names.
-#: usermod.8.xml:43(para) userdel.8.xml:43(para) useradd.8.xml:43(para)
-#: pwconv.8.xml:43(para) newusers.8.xml:43(para) login.defs.5.xml:43(para)
-#: grpck.8.xml:43(para) groupmod.8.xml:43(para) groupmems.8.xml:43(para)
-#: groupdel.8.xml:43(para) groupadd.8.xml:43(para) gpasswd.1.xml:43(para)
-#: chgpasswd.8.xml:43(para)
-msgid ""
-"This feature (split group) permits to limit the length of lines in the group "
-"file. This is useful to make sure that lines for NIS groups are not larger "
-"than 1024 characters."
-msgstr ""
-
-#: usermod.8.xml:48(para) userdel.8.xml:48(para) useradd.8.xml:48(para)
-#: pwconv.8.xml:48(para) newusers.8.xml:48(para) login.defs.5.xml:48(para)
-#: grpck.8.xml:48(para) groupmod.8.xml:48(para) groupmems.8.xml:48(para)
-#: groupdel.8.xml:48(para) groupadd.8.xml:48(para) gpasswd.1.xml:48(para)
-#: chgpasswd.8.xml:48(para)
-msgid "If you need to enforce such limit, you can use 25."
-msgstr ""
-
-#: usermod.8.xml:51(para) userdel.8.xml:51(para) useradd.8.xml:51(para)
-#: pwconv.8.xml:51(para) newusers.8.xml:51(para) login.defs.5.xml:51(para)
-#: grpck.8.xml:51(para) groupmod.8.xml:51(para) groupmems.8.xml:51(para)
-#: groupdel.8.xml:51(para) groupadd.8.xml:51(para) gpasswd.1.xml:51(para)
-#: chgpasswd.8.xml:51(para)
-msgid ""
-"Note: split groups may not be supported by all tools (even in the Shadow "
-"toolsuite. You should not use this variable unless you really need it."
-msgstr ""
 
 #: usermod.8.xml:347(para)
 msgid ""
@@ -1778,17 +2104,6 @@ msgstr "Les noms de groupe sont limités à 16 caractères."
 msgid "<option>CREATE_HOME</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
 
-#: useradd.8.xml:32(para) login.defs.5.xml:32(para)
-msgid ""
-"Indicate if a home directory should be created by default for new users."
-msgstr ""
-
-#: useradd.8.xml:36(para) login.defs.5.xml:36(para)
-msgid ""
-"This setting does not apply to system users, and can be overriden on the "
-"command line."
-msgstr ""
-
 #: useradd.8.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: groupadd.8.xml:32(term)
 #, fuzzy
@@ -2566,47 +2881,15 @@ msgstr ""
 msgid "<option>CONSOLE</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
 
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If defined, either full pathname of a file containing device names or a \":"
-"\" delimited list of device names. Root logins will be allowed only upon "
-"these devices."
-msgstr ""
-
-#: su.1.xml:39(para) login.defs.5.xml:39(para) login.1.xml:39(para)
-msgid "If not defined, root will be allowed on any device."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>CONSOLE_GROUPS</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
 
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"List of groups to add to the user's supplementary group set when logging in "
-"on the console (as determined by the CONSOLE setting). Default is none. "
-"<placeholder-1/> Use with caution - it is possible for users to gain "
-"permanent access to these groups, even when not logged in on the console."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>DEFAULT_HOME</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
-
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"Indicate if login is allowed if we can't cd to the home directory. Default "
-"in no."
-msgstr ""
-
-#: su.1.xml:38(para) login.defs.5.xml:38(para) login.1.xml:38(para)
-msgid ""
-"If set to <replaceable>yes</replaceable>, the user will login in the root "
-"(<filename>/</filename>) directory if it is not possible to cd to her home "
-"directory."
-msgstr ""
 
 #. XXX: When compiled with PAM support, only sulogin uses ENV_HZ
 #: su.1.xml:33(term) login.defs.5.xml:33(term) login.1.xml:33(term)
@@ -2614,78 +2897,25 @@ msgstr ""
 msgid "<option>ENV_HZ</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
 
-#: su.1.xml:35(para) login.defs.5.xml:35(para) login.1.xml:35(para)
-msgid ""
-"If set, it will be used to define the HZ environment variable when a user "
-"login. The value must be preceded by <replaceable>HZ=</replaceable>. A "
-"common value on Linux is <replaceable>HZ=100</replaceable>."
-msgstr ""
-
-#: su.1.xml:41(para) login.defs.5.xml:41(para) login.1.xml:41(para)
-msgid ""
-"The <envar>HZ</envar> environment variable is only set when the user (the "
-"superuser) logs in with <command>sulogin</command>."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>ENVIRON_FILE</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
-
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If this file exists and is readable, login environment will be read from it. "
-"Every line should be in the form name=value."
-msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>ENV_PATH</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
 
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If set, it will be used to define the PATH environment variable when a "
-"regular user login. The value can be preceded by <replaceable>PATH=</"
-"replaceable>, or a colon separated list of paths (for example <replaceable>/"
-"bin:/usr/bin</replaceable>). The default value is <replaceable>PATH=/bin:/"
-"usr/bin</replaceable>."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>ENV_SUPATH</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
 
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If set, it will be used to define the PATH environment variable when the "
-"superuser login. The value can be preceded by <replaceable>PATH=</"
-"replaceable>, or a colon separated list of paths (for example <replaceable>/"
-"sbin:/bin:/usr/sbin:/usr/bin</replaceable>). The default value is "
-"<replaceable>PATH=/bin:/usr/bin</replaceable>."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>ENV_TZ</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
-
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If set, it will be used to define the TZ environment variable when a user "
-"login. The value can be the name of a timezone preceded by <replaceable>TZ=</"
-"replaceable> (for example <replaceable>TZ=CST6CDT</replaceable>), or the "
-"full path to the file containing the timezone specification (for example "
-"<filename>/etc/tzname</filename>)."
-msgstr ""
-
-#. TODO: it can in fact be used to set any other variable
-#: su.1.xml:43(para) login.defs.5.xml:43(para) login.1.xml:43(para)
-msgid ""
-"If a full path is specified but the file does not exist or cannot be read, "
-"the default is to use <replaceable>TZ=CST6CDT</replaceable>."
-msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #: chsh.1.xml:32(term) chfn.1.xml:32(term)
@@ -2693,35 +2923,10 @@ msgstr ""
 msgid "<option>LOGIN_STRING</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
 
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-#: chsh.1.xml:34(para) chfn.1.xml:34(para)
-msgid ""
-"The string used for prompting a password. The default is to use \"Password: "
-"\", or a translation of that string. If you set this variable, the prompt "
-"will no be translated."
-msgstr ""
-
-#: su.1.xml:39(para) login.defs.5.xml:39(para) login.1.xml:39(para)
-#: chsh.1.xml:39(para) chfn.1.xml:39(para)
-msgid ""
-"If the string contains <replaceable>%s</replaceable>, this will be replaced "
-"by the user's name."
-msgstr ""
-
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>MAIL_CHECK_ENAB</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
-
-#: su.1.xml:34(para) login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Enable checking and display of mailbox status upon login."
-msgstr ""
-
-#: su.1.xml:37(para) login.defs.5.xml:37(para) login.1.xml:37(para)
-msgid ""
-"You should disable it if the shell startup files already check for mail "
-"(\"mailx -e\" or equivalent)."
-msgstr ""
 
 #: su.1.xml:32(term) login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
@@ -4497,61 +4702,6 @@ msgstr ""
 "Il se peut que les utilisateurs ne puisse pas changer leur mot de passe sur "
 "un système si NIS est activé et qu'ils ne sont pas connectés au serveur NIS."
 
-#: passwd.1.xml:30(term) newusers.8.xml:30(term) login.defs.5.xml:30(term)
-#: gpasswd.1.xml:30(term) chpasswd.8.xml:30(term) chgpasswd.8.xml:30(term)
-msgid "<option>ENCRYPT_METHOD</option> (string)"
-msgstr ""
-
-#: passwd.1.xml:32(para) newusers.8.xml:32(para) login.defs.5.xml:32(para)
-#: gpasswd.1.xml:32(para) chpasswd.8.xml:32(para) chgpasswd.8.xml:32(para)
-msgid ""
-"This defines the system default encryption algorithm for encrypting "
-"passwords (if no algorithm are specified on the command line)."
-msgstr ""
-
-#: passwd.1.xml:40(para) newusers.8.xml:40(para) login.defs.5.xml:40(para)
-#: gpasswd.1.xml:40(para) chpasswd.8.xml:40(para) chgpasswd.8.xml:40(para)
-msgid "<replaceable>DES</replaceable> (default)"
-msgstr ""
-
-#: passwd.1.xml:43(replaceable) newusers.8.xml:43(replaceable)
-#: login.defs.5.xml:43(replaceable) gpasswd.1.xml:43(replaceable)
-#: chpasswd.8.xml:43(replaceable) chgpasswd.8.xml:43(replaceable)
-msgid "MD5"
-msgstr ""
-
-#: passwd.1.xml:46(replaceable) newusers.8.xml:46(replaceable)
-#: login.defs.5.xml:46(replaceable) gpasswd.1.xml:46(replaceable)
-#: chpasswd.8.xml:46(replaceable) chgpasswd.8.xml:46(replaceable)
-msgid "SHA256"
-msgstr ""
-
-#: passwd.1.xml:49(replaceable) newusers.8.xml:49(replaceable)
-#: login.defs.5.xml:49(replaceable) gpasswd.1.xml:49(replaceable)
-#: chpasswd.8.xml:49(replaceable) chgpasswd.8.xml:49(replaceable)
-msgid "SHA512"
-msgstr ""
-
-#: passwd.1.xml:36(para) newusers.8.xml:36(para) login.defs.5.xml:36(para)
-#: gpasswd.1.xml:36(para) chpasswd.8.xml:36(para) chgpasswd.8.xml:36(para)
-msgid "It can take one of these values: <placeholder-1/>"
-msgstr ""
-
-#: passwd.1.xml:53(para) newusers.8.xml:53(para) login.defs.5.xml:53(para)
-#: gpasswd.1.xml:53(para) chpasswd.8.xml:53(para) chgpasswd.8.xml:53(para)
-msgid ""
-"Note: this parameter overrides the <option>MD5_CRYPT_ENAB</option> variable."
-msgstr ""
-
-#: passwd.1.xml:57(para) passwd.1.xml:53(para) newusers.8.xml:57(para)
-#: newusers.8.xml:53(para) login.defs.5.xml:57(para) login.defs.5.xml:53(para)
-#: gpasswd.1.xml:57(para) gpasswd.1.xml:53(para) chpasswd.8.xml:57(para)
-#: chpasswd.8.xml:53(para) chgpasswd.8.xml:57(para) chgpasswd.8.xml:53(para)
-msgid ""
-"Note: if you use PAM, it is recommended to set this variable consistently "
-"with the PAM modules configuration."
-msgstr ""
-
 #: passwd.1.xml:32(term) newusers.8.xml:32(term) login.defs.5.xml:32(term)
 #: gpasswd.1.xml:32(term) chpasswd.8.xml:32(term) chgpasswd.8.xml:32(term)
 msgid "<option>MD5_CRYPT_ENAB</option> (boolean)"
@@ -5326,144 +5476,65 @@ msgstr ""
 "Le nom du groupe sera modifié de <emphasis remap=\"I\">GROUPE</emphasis> "
 "vers <emphasis remap=\"I\">NOUVEAU_NOM_GROUPE</emphasis>."
 
-#: login.defs.5.xml:38(para) login.defs.5.xml:37(para) login.1.xml:38(para)
-#: login.1.xml:37(para)
-msgid ""
-"The value can be prefixed \"0\" for an octal value, or \"0x\" for an "
-"hexadecimal value."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>FAIL_DELAY</option> (number)"
 msgstr "PASS_MIN_DAYS (nombre)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"Delay in seconds before being allowed another attempt after a login failure."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>FAILLOG_ENAB</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"Enable logging and display of <filename>/var/log/faillog</filename> login "
-"failure info."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>FAKE_SHELL</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If set, <command>login</command> will execute this shell instead of the "
-"users' shell specified in <filename>/etc/passwd</filename>."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>FTMP_FILE</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If defined, login failures will be logged in this file in a utmp format."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>HUSHLOGIN_FILE</option> (string)"
 msgstr "CHFN_RESTRICT (chaîne)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid ""
-"If defined, this file can inhibit all the usual chatter during the login "
-"sequence. If a full pathname is specified, then hushed mode will be enabled "
-"if the user's name or shell are found in the file. If not a full pathname, "
-"then hushed mode will be enabled if the file exists in the user's home "
-"directory."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>ISSUE_FILE</option> (string)"
 msgstr "MAIL_DIR (chaîne)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "If defined, this file will be displayed before each login prompt."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>KILLCHAR</option> (number)"
 msgstr "GID_MAX (nombre)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Terminal KILL character (<replaceable>025</replaceable> = CTRL/U)."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>LASTLOG_ENAB</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Enable logging and display of /var/log/lastlog login time info."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>LOG_OK_LOGINS</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Enable logging of successful logins."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>LOG_UNKFAIL_ENAB</option> (boolean)"
 msgstr "CHFN_AUTH (booléen)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Enable display of unknown usernames when login failures are recorded."
-msgstr ""
-
-#: login.defs.5.xml:38(para) login.1.xml:38(para)
-msgid ""
-"Note: logging unknown usernames may be a security issue if an user enter her "
-"password instead of her login name."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>LOGIN_RETRIES</option> (number)"
 msgstr "GID_MIN (nombre)"
 
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Maximum number of login retries in case of bad password."
-msgstr ""
-
-#: login.defs.5.xml:37(para) login.1.xml:37(para)
-msgid ""
-"This will most likely be overriden by PAM, since the default pam_unix module "
-"has it's own built in of 3 retries. However, this is a safe fallback in case "
-"you are using an authentication module that does not enforce PAM_MAXTRIES."
-msgstr ""
-
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy
 msgid "<option>LOGIN_TIMEOUT</option> (number)"
 msgstr "GID_MAX (nombre)"
-
-#: login.defs.5.xml:34(para) login.1.xml:34(para)
-msgid "Max time in seconds for login."
-msgstr ""
 
 #: login.defs.5.xml:32(term) login.1.xml:32(term)
 #, fuzzy

@@ -1,3 +1,8 @@
+2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/po/fr.po: Updated some login.defs entries. Thanks to
+	Belkacem Abbas.
+
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* man/login.defs.d/MAX_MEMBERS_PER_GROUP.xml,
