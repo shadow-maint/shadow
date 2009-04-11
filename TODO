@@ -1,3 +1,5 @@
+Move selinux_file_context out of libmisc/copydir.c
+
 review all call to strto
 
 usermod
