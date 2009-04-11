@@ -799,13 +799,13 @@ int main (int argc, char **argv)
 
 #ifdef WITH_SELINUX
 	if (is_selinux_enabled () > 0) {
-		const char *argv[5];
-		argv[0] = "/usr/sbin/semanage";
-		argv[1] = "login";
-		argv[2] = "-d";
-		argv[3] = user_name;
-		argv[4] = NULL;
-		safe_system (argv[0], argv, NULL, 1);
+		const char *args[5];
+		args[0] = "/usr/sbin/semanage";
+		args[1] = "login";
+		args[2] = "-d";
+		args[3] = user_name;
+		args[4] = NULL;
+		safe_system (args[0], args, NULL, 1);
 	}
 #endif
 	/*

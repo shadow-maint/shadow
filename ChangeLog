@@ -2,6 +2,8 @@
 
 	* src/useradd.c, src/usermod.c: Only call selinux_update_mapping()
 	if Zflg is set.
+	* src/userdel.c: Rename argv to args to avoid nameclash with the
+	main() parameters.
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
