@@ -488,9 +488,9 @@ static void process_flags (int argc, char **argv)
 
 	while ((c = getopt_long (argc, argv,
 #ifdef USE_SHA_CRYPT
-	                     "c:hrs:",
+	                         "c:hrs:",
 #else
-	                     "c:hr",
+	                         "c:hr",
 #endif
 	                     long_options, &option_index)) != -1) {
 		switch (c) {
