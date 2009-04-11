@@ -1,3 +1,7 @@
+2009-04-11  Christian Perrier  <bubulle@debian.org>
+
+	* Slovak translation updated. Thanks to Ivan Masár
+
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/Makefile.am, lib/prototypes.h: Added sgetspent.c.
