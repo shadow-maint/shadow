@@ -300,7 +300,8 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fputs (_("Usage: usermod [options] LOGIN\n"
+	fprintf (stderr,
+	         _("Usage: usermod [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
 	         "  -c, --comment COMMENT         new value of the GECOS field\n"
@@ -323,10 +324,14 @@ static void usage (void)
 	         "  -s, --shell SHELL             new login shell for the user account\n"
 	         "  -u, --uid UID                 new UID for the user account\n"
 	         "  -U, --unlock                  unlock the user account\n"
+	         "%s"
+	         "\n"),
 #ifdef WITH_SELINUX
-	         "  -Z, --selinux-user            new SELinux user mapping for the user account\n"
+	         _("  -Z, --selinux-user            new SELinux user mapping for the user account\n")
+#else
+	         ""
 #endif
-	         "\n"), stderr);
+	         );
 	exit (E_USAGE);
 }
 

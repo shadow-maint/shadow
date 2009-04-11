@@ -144,7 +144,8 @@ static bool
     rflg = false,		/* create a system account */
     sflg = false,		/* shell program for new account */
     uflg = false,		/* specify user ID for new account */
-    Uflg = false;		/* create a group having the same name as the user */
+    Uflg = false,		/* create a group having the same name as the user */
+    Zflg = false;		/* new selinux user */
 
 static bool home_added = false;
 
@@ -664,7 +665,8 @@ static int get_groups (char *list)
  */
 static void usage (void)
 {
-	fputs (_("Usage: useradd [options] LOGIN\n"
+	fprintf (stderr,
+	         _("Usage: useradd [options] LOGIN\n"
 	         "\n"
 	         "Options:\n"
 	         "  -b, --base-dir BASE_DIR       base directory for the new user account\n"
@@ -698,10 +700,14 @@ static void usage (void)
 	         "  -s, --shell SHELL             the login shell for the new user account\n"
 	         "  -u, --uid UID                 force use the UID for the new user account\n"
 	         "  -U, --user-group              create a group with the same name as the user\n"
+	         "%s"
+	         "\n"),
 #ifdef WITH_SELINUX
-	         "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"
+	         _("  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n")
+#else
+	         ""
 #endif
-	         "\n"), stderr);
+	         );
 	exit (E_USAGE);
 }
 
@@ -1173,6 +1179,7 @@ static void process_flags (int argc, char **argv)
 			case 'Z':
 				if (is_selinux_enabled () > 0) {
 					user_selinux = optarg;
+					Zflg = true;
 				} else {
 					fprintf (stderr,
 					         _("%s: -Z requires SELinux enabled kernel\n"),
