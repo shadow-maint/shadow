@@ -1,6 +1,11 @@
+2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
+
+	* src/useradd.c (get_defaults): Close the default file after the
+	default values were read.
+
 2009-04-11  Christian Perrier  <bubulle@debian.org>
 
-	* Slovak translation updated. Thanks to Ivan Masár
+	* po/sk.po: Slovak translation updated. Thanks to Ivan Masár
 
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 

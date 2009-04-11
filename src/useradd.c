@@ -381,6 +381,7 @@ static void get_defaults (void)
 			def_create_mail_spool = xstrdup (cp);
 		}
 	}
+	(void) fclose (fp);
 }
 
 /*
