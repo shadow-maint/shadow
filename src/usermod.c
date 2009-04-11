@@ -98,6 +98,9 @@ static char *user_newcomment;
 static char *user_home;
 static char *user_newhome;
 static char *user_shell;
+#ifdef WITH_SELINUX
+static const char *user_selinux = "";
+#endif
 static char *user_newshell;
 static long user_expire;
 static long user_newexpire;
@@ -120,6 +123,9 @@ static bool
     oflg = false,		/* permit non-unique user ID to be specified with -u */
     pflg = false,		/* new encrypted password */
     sflg = false,		/* new shell program */
+#ifdef WITH_SELINUX
+    Zflg = false,		/* new selinux user */
+#endif
     uflg = false,		/* specify new user ID */
     Uflg = false;		/* unlock the password */
 
@@ -143,6 +149,9 @@ static void date_to_str (char *buf, size_t maxsize,
 static int get_groups (char *);
 static void usage (void);
 static void new_pwent (struct passwd *);
+#ifdef WITH_SELINUX
+static void selinux_update_mapping (void);
+#endif
 
 static void new_spent (struct spwd *);
 static void fail_exit (int);
@@ -314,6 +323,9 @@ static void usage (void)
 	         "  -s, --shell SHELL             new login shell for the user account\n"
 	         "  -u, --uid UID                 new UID for the user account\n"
 	         "  -U, --unlock                  unlock the user account\n"
+#ifdef WITH_SELINUX
+	         "  -Z, --selinux-user            new SELinux user mapping for the user account\n"
+#endif
 	         "\n"), stderr);
 	exit (E_USAGE);
 }
@@ -876,13 +888,20 @@ static void process_flags (int argc, char **argv)
 			{"move-home", no_argument, NULL, 'm'},
 			{"non-unique", no_argument, NULL, 'o'},
 			{"password", required_argument, NULL, 'p'},
+#ifdef WITH_SELINUX
+			{"selinux-user", required_argument, NULL, 'Z'},
+#endif
 			{"shell", required_argument, NULL, 's'},
 			{"uid", required_argument, NULL, 'u'},
 			{"unlock", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
+#ifdef WITH_SELINUX
+			                 "ac:d:e:f:g:G:hl:Lmop:s:u:UZ:",
+#else
 			                 "ac:d:e:f:g:G:hl:Lmop:s:u:U",
+#endif
 			                 long_options, NULL)) != -1) {
 			switch (c) {
 			case 'a':
@@ -996,6 +1015,19 @@ static void process_flags (int argc, char **argv)
 			case 'U':
 				Uflg = true;
 				break;
+#ifdef WITH_SELINUX
+			case 'Z':
+				if (is_selinux_enabled () > 0) {
+					user_selinux = optarg;
+					Zflg = true;
+				} else {
+					fprintf (stderr,
+					         _("%s: -Z requires SELinux enabled kernel\n"),
+					         Prog);
+					exit (E_BAD_ARG);
+				}
+				break;
+#endif
 			default:
 				usage ();
 			}
@@ -1036,7 +1068,11 @@ static void process_flags (int argc, char **argv)
 	}
 
 	if (!(Uflg || uflg || sflg || pflg || oflg || mflg || Lflg ||
-	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg)) {
+	      lflg || Gflg || gflg || fflg || eflg || dflg || cflg
+#ifdef WITH_SELINUX
+	      || Zflg
+#endif
+	)) {
 		fprintf (stderr, _("%s: no changes\n"), Prog);
 		exit (E_SUCCESS);
 	}
@@ -1722,6 +1758,10 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");
 
+#ifdef WITH_SELINUX
+	selinux_update_mapping ();
+#endif
+
 	if (mflg) {
 		move_home ();
 	}
@@ -1748,4 +1788,35 @@ int main (int argc, char **argv)
 	exit (E_SUCCESS);
 	/* NOT REACHED */
 }
+
+#ifdef WITH_SELINUX
+static void selinux_update_mapping (void) {
+	const char *argv[7];
+
+	if (is_selinux_enabled () <= 0) return;
+
+	if (*user_selinux) {
+		argv[0] = "/usr/sbin/semanage";
+		argv[1] = "login";
+		argv[2] = "-m";
+		argv[3] = "-s";
+		argv[4] = user_selinux;
+		argv[5] = user_name;
+		argv[6] = NULL;
+		if (safe_system (argv[0], argv, NULL, 1)) {
+			argv[2] = "-a";
+			if (safe_system (argv[0], argv, NULL, 0)) {
+				fprintf (stderr,
+				         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
+				         Prog, user_name, user_selinux);
+#ifdef WITH_AUDIT
+				audit_logger (AUDIT_USER_CHAUTHTOK, Prog,
+				              "modifying User mapping ",
+				              user_name, (unsigned int) user_id, 0);
+#endif
+			}
+		}
+	}
+}
+#endif
 

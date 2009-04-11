@@ -108,6 +108,9 @@ static const char *user_comment = "";
 static const char *user_home = "";
 static const char *user_shell = "";
 static const char *create_mail_spool = "";
+#ifdef WITH_SELINUX
+static const char *user_selinux = "";
+#endif
 
 static long user_expire = -1;
 static bool is_shadow_pwd;
@@ -175,6 +178,9 @@ static int set_defaults (void);
 static int get_groups (char *);
 static void usage (void);
 static void new_pwent (struct passwd *);
+#ifdef WITH_SELINUX
+static void selinux_update_mapping (void);
+#endif
 
 static long scale_age (long);
 static void new_spent (struct spwd *);
@@ -692,6 +698,9 @@ static void usage (void)
 	         "  -s, --shell SHELL             the login shell for the new user account\n"
 	         "  -u, --uid UID                 force use the UID for the new user account\n"
 	         "  -U, --user-group              create a group with the same name as the user\n"
+#ifdef WITH_SELINUX
+	         "  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user mapping\n"
+#endif
 	         "\n"), stderr);
 	exit (E_USAGE);
 }
@@ -954,12 +963,19 @@ static void process_flags (int argc, char **argv)
 			{"password", required_argument, NULL, 'p'},
 			{"system", no_argument, NULL, 'r'},
 			{"shell", required_argument, NULL, 's'},
+#ifdef WITH_SELINUX
+			{"selinux-user", required_argument, NULL, 'Z'},
+#endif
 			{"uid", required_argument, NULL, 'u'},
 			{"user-group", no_argument, NULL, 'U'},
 			{NULL, 0, NULL, '\0'}
 		};
 		while ((c = getopt_long (argc, argv,
+#ifdef WITH_SELINUX
+		                         "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:UZ:",
+#else
 		                         "b:c:d:De:f:g:G:k:K:lmMNop:rs:u:U",
+#endif
 		                         long_options, NULL)) != -1) {
 			switch (c) {
 			case 'b':
@@ -1153,6 +1169,19 @@ static void process_flags (int argc, char **argv)
 			case 'U':
 				Uflg = true;
 				break;
+#ifdef WITH_SELINUX
+			case 'Z':
+				if (is_selinux_enabled () > 0) {
+					user_selinux = optarg;
+				} else {
+					fprintf (stderr,
+					         _("%s: -Z requires SELinux enabled kernel\n"),
+					         Prog);
+
+					exit (E_BAD_ARG);
+				}
+				break;
+#endif
 			default:
 				usage ();
 			}
@@ -1659,6 +1688,32 @@ static void usr_update (void)
 	}
 }
 
+#ifdef WITH_SELINUX
+static void selinux_update_mapping (void) {
+	if (is_selinux_enabled () <= 0) return;
+
+	if (*user_selinux) { /* must be done after passwd write() */
+		const char *argv[7];
+		argv[0] = "/usr/sbin/semanage";
+		argv[1] = "login";
+		argv[2] = "-a";
+		argv[3] = "-s";
+		argv[4] = user_selinux;
+		argv[5] = user_name;
+		argv[6] = NULL;
+		if (safe_system (argv[0], argv, NULL, 0)) {
+			fprintf (stderr,
+			         _("%s: warning: the user name %s to %s SELinux user mapping failed.\n"),
+			         Prog, user_name, user_selinux);
+#ifdef WITH_AUDIT
+			audit_logger (AUDIT_ADD_USER, Prog,
+			              "adding SELinux user mapping",
+			              user_name, (unsigned int) user_id, 0);
+#endif
+		}
+	}
+}
+#endif
 /*
  * create_home - create the user's home directory
  *
@@ -1669,6 +1724,9 @@ static void usr_update (void)
 static void create_home (void)
 {
 	if (access (user_home, F_OK) != 0) {
+#ifdef WITH_SELINUX
+		selinux_file_context (user_home);
+#endif
 		/* XXX - create missing parent directories.  --marekm */
 		if (mkdir (user_home, 0) != 0) {
 			fprintf (stderr,
@@ -1691,6 +1749,10 @@ static void create_home (void)
 		              "adding home directory",
 		              user_name, (unsigned int) user_id,
 		              SHADOW_AUDIT_SUCCESS);
+#endif
+#ifdef WITH_SELINUX
+		/* Reset SELinux to create files with default contexts */
+		setfscreatecon (NULL);
 #endif
 	}
 }
@@ -1939,6 +2001,10 @@ int main (int argc, char **argv)
 	}
 
 	close_files ();
+
+#ifdef WITH_SELINUX
+	selinux_update_mapping ();
+#endif
 
 	nscd_flush_cache ("passwd");
 	nscd_flush_cache ("group");

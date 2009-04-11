@@ -1,5 +1,19 @@
 2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
 
+	* NEWS, src/useradd.c, man/useradd.8.xml: add -Z option to map
+	SELinux user for user's login.
+	* NEWS, src/usermod.c, man/usermod.8.xml: Likewise.
+	* libmisc/system.c, libmisc/Makefile.am, lib/prototypes.h: Added
+	safe_system(). Used to run semanage.
+	* lib/prototypes.h, libmisc/copydir.c: Make a
+	selinux_file_context() an extern function.
+	* libmisc/copydir.c: Reset SELinux to create files with default
+	contexts at the end of copy_tree().
+	* NEWS, src/userdel.c: Delete the SELinux user mapping for user's
+	login.
+
+2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
+
 	* src/useradd.c (get_defaults): Close the default file after the
 	default values were read.
 

@@ -797,6 +797,17 @@ int main (int argc, char **argv)
 	audit_help_open ();
 #endif
 
+#ifdef WITH_SELINUX
+	if (is_selinux_enabled () > 0) {
+		const char *argv[5];
+		argv[0] = "/usr/sbin/semanage";
+		argv[1] = "login";
+		argv[2] = "-d";
+		argv[3] = user_name;
+		argv[4] = NULL;
+		safe_system (argv[0], argv, NULL, 1);
+	}
+#endif
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */

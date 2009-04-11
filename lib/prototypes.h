@@ -118,6 +118,10 @@ extern int copy_tree (const char *src_root, const char *dst_root,
                       long int uid, long int gid);
 extern int remove_tree (const char *root);
 
+#ifdef WITH_SELINUX
+extern int selinux_file_context (const char *dst_name);
+#endif
+
 /* encrypt.c */
 extern char *pw_encrypt (const char *, const char *);
 
@@ -303,6 +307,12 @@ extern struct spwd *__spw_dup (const struct spwd *spent);
 
 /* shell.c */
 extern int shell (const char *, const char *, char *const *);
+
+/* system.c */
+extern int safe_system (const char *command,
+                        const char *argv[],
+                        const char *env[],
+                        int ignore_stderr);
 
 /* strtoday.c */
 extern long strtoday (const char *);

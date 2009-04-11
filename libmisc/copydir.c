@@ -83,8 +83,11 @@ static int copy_file (const char *src, const char *dst,
  *	selinux_file_context () should be called before any creation of file,
  *	symlink, directory, ...
  *
+ *	Callers may have to Reset SELinux to create files with default
+ *	contexts:
+ *		setfscreatecon (NULL);
  */
-static int selinux_file_context (const char *dst_name)
+int selinux_file_context (const char *dst_name)
 {
 	static bool selinux_checked = false;
 	static bool selinux_enabled;
@@ -259,6 +262,12 @@ int copy_tree (const char *src_root, const char *dst_root,
 		src_orig = NULL;
 		dst_orig = NULL;
 	}
+
+#ifdef WITH_SELINUX
+	/* Reset SELinux to create files with default contexts */
+	setfscreatecon (NULL);
+#endif
+
 	return err;
 }
 
