@@ -1759,7 +1759,9 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 #ifdef WITH_SELINUX
-	selinux_update_mapping ();
+	if (Zflg) {
+		selinux_update_mapping ();
+	}
 #endif
 
 	if (mflg) {

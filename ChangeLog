@@ -1,5 +1,10 @@
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/useradd.c, src/usermod.c: Only call selinux_update_mapping()
+	if Zflg is set.
+
+2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/getgr_nam_gid.c: Added support for NULL argument.
 	* libmisc/chowntty.c: Reuse getgr_nam_gid(), and get rid of atol().
 

@@ -2003,7 +2003,9 @@ int main (int argc, char **argv)
 	close_files ();
 
 #ifdef WITH_SELINUX
-	selinux_update_mapping ();
+	if (Zflg) {
+		selinux_update_mapping ();
+	}
 #endif
 
 	nscd_flush_cache ("passwd");
