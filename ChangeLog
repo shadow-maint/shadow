@@ -1,5 +1,11 @@
 2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
 
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: For system
+	accounts, return the first unused ID, starting from the max value.
+	This could be useful later to increase the static IDs range.
+
+2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
+
 	* NEWS, src/useradd.c, man/useradd.8.xml: add -Z option to map
 	SELinux user for user's login.
 	* NEWS, src/usermod.c, man/usermod.8.xml: Likewise.

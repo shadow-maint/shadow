@@ -110,6 +110,23 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		}
 	}
 
+	/* find free system account in reverse order */
+	if (sys_group) {
+		for (group_id = gid_max; group_id >= gid_min; group_id--) {
+			if (0 == used_gids[group_id]) {
+				break;
+			}
+		}
+		if ( group_id < gid_min ) {
+			fprintf (stderr,
+			         _("%s: Can't get unique GID (no more available GIDs)\n"),
+			         Prog);
+			SYSLOG ((LOG_WARN,
+			         "no more available GID on the system"));
+			return -1;
+		}
+	}
+
 	/*
 	 * If a group with GID equal to GID_MAX exists, the above algorithm
 	 * will give us GID_MAX+1 even if not unique. Search for the first

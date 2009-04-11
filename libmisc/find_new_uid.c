@@ -111,6 +111,23 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		}
 	}
 
+	/* find free system account in reverse order */
+	if (sys_user) {
+		for (user_id = uid_max; user_id >= uid_min; user_id--) {
+			if (0 == used_uids[user_id]) {
+				break;
+			}
+		}
+		if (user_id < uid_min ) {
+			fprintf (stderr,
+			         _("%s: Can't get unique system UID (no more available UIDs)\n"),
+			         Prog);
+			SYSLOG ((LOG_WARN,
+			         "no more available UID on the system"));
+			return -1;
+		}
+	}
+
 	/*
 	 * If a user with UID equal to UID_MAX exists, the above algorithm
 	 * will give us UID_MAX+1 even if not unique. Search for the first
