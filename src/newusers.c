@@ -50,6 +50,8 @@
 #include <fcntl.h>
 #include <getopt.h>
 #include <ctype.h>
+#include <errno.h>
+#include <string.h>
 #ifdef ACCT_TOOLS_SETUID
 #ifdef USE_PAM
 #include "pam_defs.h"
@@ -64,6 +66,7 @@
 #include "sgroupio.h"
 #include "shadowio.h"
 #include "chkname.h"
+
 /*
  * Global variables
  */
@@ -928,14 +931,16 @@ int main (int argc, char **argv)
 			                                 GETDEF_DEFAULT_UMASK);
 			if (mkdir (newpw.pw_dir, msk) != 0) {
 				fprintf (stderr,
-				         _("%s: line %d: mkdir failed\n"), Prog,
-				         line);
+				         _("%s: line %d: mkdir %s failed: %s\n"),
+				         Prog, line, newpw.pw_dir,
+				         strerror (errno));
 			} else if (chown (newpw.pw_dir,
 			                  newpw.pw_uid,
 			                  newpw.pw_gid) != 0) {
 				fprintf (stderr,
-				         _("%s: line %d: chown failed\n"), Prog,
-				         line);
+				         _("%s: line %d: chown %s failed: %s\n"),
+				         Prog, line, newpw.pw_dir,
+				         strerror (errno));
 			}
 		}
 

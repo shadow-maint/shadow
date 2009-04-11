@@ -1,5 +1,10 @@
 2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newusers.c: Add more information to the mkdir and chown
+	failure messages.
+
+2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/po/fr.po: Updated some login.defs entries. Thanks to
 	Belkacem Abbas.
 
