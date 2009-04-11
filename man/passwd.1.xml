@@ -343,6 +343,10 @@
       change their password on a system if NIS is enabled and they are not 
       logged into the NIS server.
     </para>
+    <para condition="pam">
+      <command>passwd</command> uses PAM to authenticate users and to
+      change their passwords.
+    </para>
   </refsect1>
 
   <refsect1 id='configuration' condition="no_pam">
