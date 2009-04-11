@@ -65,7 +65,7 @@ extern int add_groups (const char *);
 #endif
 
 /* age.c */
-extern void agecheck (const struct passwd *, const struct spwd *);
+extern void agecheck (const struct spwd *);
 extern int expire (const struct passwd *, const struct spwd *);
 extern int isexpired (const struct passwd *, const struct spwd *);
 

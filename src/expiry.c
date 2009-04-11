@@ -127,7 +127,7 @@ int main (int argc, char **argv)
 		/*
 		 * Print out number of days until expiration.
 		 */
-		agecheck (pwd, spwd);
+		agecheck (spwd);
 
 		/*
 		 * Exit with status indicating state of account.

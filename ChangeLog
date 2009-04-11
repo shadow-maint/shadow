@@ -1,5 +1,11 @@
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/prototypes.h, libmisc/age.c, src/expiry.c, src/login.c: A
+	shadow entry is now sufficient for agecheck. Remove the first
+	passwd entry parameter.
+
+2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/useradd.c, src/usermod.c: Only call selinux_update_mapping()
 	if Zflg is set.
 	* src/userdel.c: Rename argv to args to avoid nameclash with the

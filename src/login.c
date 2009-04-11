@@ -427,8 +427,10 @@ int main (int argc, char **argv)
 	char fromhost[512];
 	struct passwd *pwd;
 	char **envp = environ;
+#ifndef
 	static char temp_pw[2];
 	static char temp_shell[] = "/bin/sh";
+#endif
 
 #ifdef USE_PAM
 	int retcode;
@@ -1200,7 +1202,7 @@ int main (int argc, char **argv)
 #endif
 			printf (".\n");
 		}
-		agecheck (&pwent, spwd);
+		agecheck (spwd);
 
 		mailcheck ();	/* report on the status of mail */
 #endif				/* !USE_PAM */
