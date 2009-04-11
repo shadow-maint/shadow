@@ -427,7 +427,7 @@ int main (int argc, char **argv)
 	char fromhost[512];
 	struct passwd *pwd;
 	char **envp = environ;
-#ifndef
+#ifndef USE_PAM
 	static char temp_pw[2];
 	static char temp_shell[] = "/bin/sh";
 #endif
