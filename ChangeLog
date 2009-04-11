@@ -1,3 +1,8 @@
+2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/getgr_nam_gid.c: Added support for NULL argument.
+	* libmisc/chowntty.c: Reuse getgr_nam_gid(), and get rid of atol().
+
 2009-04-11  Peter Vrabec  <pvrabec@redhat.com>
 
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c: For system

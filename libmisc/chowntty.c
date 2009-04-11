@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2001, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,6 @@
 
 void chown_tty (const struct passwd *info)
 {
-	char *group;		/* TTY group name or number */
 	struct group *grent;
 	gid_t gid;
 
@@ -60,18 +59,11 @@ void chown_tty (const struct passwd *info)
 	 * ID.  Otherwise, use the user's primary group ID.
 	 */
 
-	group = getdef_str ("TTYGROUP");
-	if (NULL == group) {
-		gid = info->pw_gid;
-	} else if ((group[0] >= '0') && (group[0] <= '9')) {
-		gid = (gid_t) atol (group);
+	grent = getgr_nam_gid (getdef_str ("TTYGROUP"));
+	if (NULL != grent) {
+		gid = grent->gr_gid;
 	} else {
-		grent = getgrnam (group); /* local, no need for xgetgrnam */
-		if (NULL != grent) {
-			gid = grent->gr_gid;
-		} else {
-			gid = info->pw_gid;
-		}
+		gid = info->pw_gid;
 	}
 
 	/*

@@ -49,6 +49,10 @@ extern struct group *getgr_nam_gid (const char *grname)
 	long long int gid;
 	char *endptr;
 
+	if (NULL == grname) {
+		return NULL;
+	}
+
 	errno = 0;
 	gid = strtoll (grname, &endptr, 10);
 	if (   ('\0' != *grname)
