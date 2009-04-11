@@ -50,7 +50,7 @@
     </para>
     <para>
       Note: split groups may not be supported by all tools (even in the
-      Shadow toolsuite. You should not use this variable unless you really
+      Shadow toolsuite). You should not use this variable unless you really
       need it.
     </para>
   </listitem>

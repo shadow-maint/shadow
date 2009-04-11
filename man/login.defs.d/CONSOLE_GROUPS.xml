@@ -32,7 +32,7 @@
   <term><option>CONSOLE_GROUPS</option> (string)</term>
   <listitem>
     <para>
-      List of groups to add to the user's supplementary group set when
+      List of groups to add to the user's supplementary groups set when
       logging in on the console (as determined by the CONSOLE setting).
       Default is none.
     <para>

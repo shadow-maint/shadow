@@ -1,5 +1,10 @@
 2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* man/login.defs.d/MAX_MEMBERS_PER_GROUP.xml,
+	man/login.defs.d/CONSOLE_GROUPS.xml: Fix typos.
+
+2009-04-11  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/es/Makefile.am: Disable the distribution of Spanish
 	manpages. They are outdated. Please contact
 	pkg-shadow-devel@lists.alioth.debian.org if you wish to provide
