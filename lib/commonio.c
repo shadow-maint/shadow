@@ -152,6 +152,7 @@ static int do_lock_file (const char *file, const char *lock)
 		return 0;
 	}
 	buf[len] = '\0';
+	/* FIXME: use a get_pid */
 	pid = strtol (buf, (char **) 0, 10);
 	if (0 == pid) {
 		unlink (file);
