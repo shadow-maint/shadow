@@ -173,6 +173,16 @@ static void setup_tty (void)
 	termio.c_lflag |= ISIG | ICANON | ECHO | ECHOE;
 	termio.c_iflag |= ICRNL;
 
+#if defined(ECHOKE) && defined(ECHOCTL)
+	termio.c_lflag |= ECHOKE | ECHOCTL;
+#endif
+#if defined(ECHOPRT) && defined(NOFLSH) && defined(TOSTOP)
+	termio.c_lflag &= ~(ECHOPRT | NOFLSH | TOSTOP);
+#endif
+#ifdef ONLCR
+	termio.c_oflag |= ONLCR;
+#endif
+
 	/* leave these values unchanged if not specified in login.defs */
 	termio.c_cc[VERASE] = getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
 	termio.c_cc[VKILL] = getdef_num ("KILLCHAR", termio.c_cc[VKILL]);
