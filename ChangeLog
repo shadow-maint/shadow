@@ -1,5 +1,10 @@
 2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Fix the count of failures before login exits in
+	case of PAM enabled configurations.
+
+2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* man/passwd.1.xml: Document that passwd uses PAM to authenticate
 	and change passwords on PAM-enabled builds.
 

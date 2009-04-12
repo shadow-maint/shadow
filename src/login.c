@@ -726,7 +726,7 @@ int main (int argc, char **argv)
 				failent_user = "UNKNOWN";
 			}
 
-			if (retcode == PAM_MAXTRIES || failcount >= retries) {
+			if (retcode == PAM_MAXTRIES) {
 				SYSLOG ((LOG_NOTICE,
 				         "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
 				         failcount, fromhost, failent_user));
@@ -768,6 +768,17 @@ int main (int argc, char **argv)
 #endif				/* WITH_AUDIT */
 
 			fprintf (stderr, "\nLogin incorrect\n");
+
+			if (failcount >= retries) {
+				SYSLOG ((LOG_NOTICE,
+				         "TOO MANY LOGIN TRIES (%d)%s FOR '%s'",
+				         failcount, fromhost, failent_user));
+				fprintf(stderr,
+				        _("Maximum number of tries exceeded (%d)\n"),
+				        failcount);
+				PAM_END;
+				exit(0);
+			}
 
 			/*
 			 * Let's give it another go around.
