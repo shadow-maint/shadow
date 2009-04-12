@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-06 00:47+0200\n"
+"POT-Creation-Date: 2009-04-12 01:51+0200\n"
 "PO-Revision-Date: 2004-05-09 12:03+0100\n"
 "Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@lugbih.org>\n"
@@ -25,12 +25,23 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
 msgid "Could not allocate space for config info.\n"
 msgstr ""
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
+
+msgid "Password: "
+msgstr "Šifra:"
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s's Šifra: "
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -75,6 +86,10 @@ msgstr ""
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr ""
 
+#, c-format
+msgid "%s: failed to unlock %s\n"
+msgstr ""
+
 msgid "Environment overflow\n"
 msgstr ""
 
@@ -94,6 +109,10 @@ msgstr[1] ""
 
 #, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgstr ""
+
+#, c-format
+msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgstr ""
 
 #, c-format
@@ -198,22 +217,12 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-msgid "Password: "
-msgstr "Šifra:"
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s's Šifra: "
-
-#, c-format
-msgid "%s: failed to unlock %s\n"
-msgstr ""
-
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 "  -h, --help                    display this help message and exit\n"
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -279,6 +288,14 @@ msgstr ""
 
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr ""
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
 msgstr ""
 
 #, c-format
@@ -435,10 +452,6 @@ msgstr ""
 msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
-msgstr ""
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1034,13 +1047,13 @@ msgstr "%s: grupa %s postoji\n"
 msgid "%s: line %d: can't update password\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: mkdir failed\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: line %d: mkdir %s failed: %s\n"
+msgstr "%s: grupa %s postoji\n"
 
-#, c-format
-msgid "%s: line %d: chown failed\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: line %d: chown %s failed: %s\n"
+msgstr "nepoznata grupa: %s\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
@@ -1293,6 +1306,10 @@ msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, c-format
+msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr ""
 
@@ -1312,6 +1329,7 @@ msgstr "%s: grupa %s postoji\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr ""
 
+#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1349,7 +1367,12 @@ msgid ""
 "  -u, --uid UID                 force use the UID for the new user account\n"
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
 msgstr ""
 
 #, c-format
@@ -1362,10 +1385,6 @@ msgstr ""
 
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
-msgstr ""
-
-#, c-format
-msgid "%s: invalid date '%s'\n"
 msgstr ""
 
 #, c-format
@@ -1385,6 +1404,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr ""
 
 #, c-format
+msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
@@ -1394,6 +1417,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
@@ -1476,6 +1503,7 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr ""
 
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1500,7 +1528,12 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "  -u, --uid UID                 new UID for the user account\n"
 "  -U, --unlock                  unlock the user account\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user            new SELinux user mapping for the user "
+"account\n"
 msgstr ""
 
 #, c-format

@@ -1,5 +1,10 @@
 2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
+	* po/*.po, man/po/*.po: Updated PO files.
+
+2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/su.c: If there are no root account, or if the root account
 	has an UID != 0, default to the first UID 0 account.
 

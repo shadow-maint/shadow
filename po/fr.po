@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-06 00:47+0200\n"
+"POT-Creation-Date: 2009-04-12 01:51+0200\n"
 "PO-Revision-Date: 2008-04-02 23:51+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -30,6 +30,10 @@ msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 "la méthode de chiffrement n'est pas prise en compte par libcrypt ? (%s)\n"
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
 msgid "Could not allocate space for config info.\n"
 msgstr ""
 "Impossible d'allouer l'espace pour l'information sur la configuration.\n"
@@ -39,6 +43,13 @@ msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr ""
 "erreur de configuration - élément « %s » inconnu (avertissez "
 "l'administrateur)\n"
+
+msgid "Password: "
+msgstr "Mot de passe : "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "Mot de passe de %s : "
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -84,6 +95,11 @@ msgstr ""
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "Impossible de modifier le tty %s"
 
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s : champs trop longs\n"
+
 msgid "Environment overflow\n"
 msgstr "Débordement de l'environnement\n"
 
@@ -111,6 +127,13 @@ msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr ""
 "Impossible d'obtenir un identifiant de groupe (GID) unique\n"
 "(plus de GID disponible)\n"
+
+#, fuzzy, c-format
+#| msgid "Can't get unique UID (no more available UIDs)\n"
+msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgstr ""
+"Impossible d'obtenir un identifiant d'utilisateur (UID) unique\n"
+"(plus d'UID disponible)\n"
 
 #, fuzzy, c-format
 #| msgid "Can't get unique UID (no more available UIDs)\n"
@@ -222,23 +245,32 @@ msgstr "échec de malloc(%d)\n"
 msgid "No"
 msgstr ""
 
-msgid "Password: "
-msgstr "Mot de passe : "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "Mot de passe de %s : "
-
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
-msgid "%s: failed to unlock %s\n"
-msgstr "%s : champs trop longs\n"
-
+#, fuzzy
+#| msgid ""
+#| "Usage: chage [options] [LOGIN]\n"
+#| "\n"
+#| "Options:\n"
+#| "  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+#| "  -E, --expiredate EXPIRE_DATE  set account expiration date to "
+#| "EXPIRE_DATE\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -I, --inactive INACTIVE       set password inactive after expiration\n"
+#| "                                to INACTIVE\n"
+#| "  -l, --list                    show account aging information\n"
+#| "  -m, --mindays MIN_DAYS        set minimum number of days before "
+#| "password\n"
+#| "                                change to MIN_DAYS\n"
+#| "  -M, --maxdays MAX_DAYS        set maximim number of days before "
+#| "password\n"
+#| "                                change to MAX_DAYS\n"
+#| "  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS\n"
+#| "\n"
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 "  -h, --help                    display this help message and exit\n"
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -326,6 +358,14 @@ msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr ""
 "Nombre de jours d'avertissement avant la fin de validité du mot de passe\t: %"
 "ld\n"
+
+#, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr "%s : date « %s » non valable\n"
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s : argument numérique « %s » incorrect\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -504,10 +544,6 @@ msgid ""
 msgstr ""
 "  -s, --sha-rounds              nombre de passes SHA pour les algorithmes \n"
 "                                de chiffrement SHA*\n"
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s : argument numérique « %s » incorrect\n"
 
 #, fuzzy, c-format
 #| msgid "%s: %s flag is ONLY allowed with the %s flag\n"
@@ -1248,12 +1284,14 @@ msgstr "%s : l'utilisateur « %s » n'existe pas\n"
 msgid "%s: line %d: can't update password\n"
 msgstr "%s : ligne %d : impossible de mettre le mot de passe à jour\n"
 
-#, c-format
-msgid "%s: line %d: mkdir failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir failed\n"
+msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s : ligne %d : échec de mkdir\n"
 
-#, c-format
-msgid "%s: line %d: chown failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s : ligne %d : échec de chown\n"
 
 #, c-format
@@ -1603,6 +1641,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "Entrée dans le mode de maintenance du système"
 
 #, c-format
+msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s : impossible de créer le nouveau fichier des valeurs par défaut\n"
 
@@ -1622,7 +1664,7 @@ msgstr "%s : le groupe « %s » est un groupe NIS.\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s : trop de groupes spécifiés (max %d).\n"
 
-#, fuzzy
+#, fuzzy, c-format
 #| msgid ""
 #| "Usage: useradd [options] LOGIN\n"
 #| "\n"
@@ -1699,7 +1741,7 @@ msgid ""
 "  -u, --uid UID                 force use the UID for the new user account\n"
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
-"\n"
+"%s\n"
 msgstr ""
 "Syntaxe : useradd [options] IDENTIFIANT\n"
 "\n"
@@ -1744,6 +1786,11 @@ msgstr ""
 "                                l'utilisateur\n"
 "\n"
 
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
+msgstr ""
+
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s : répertoire de base non valable « %s »\n"
@@ -1755,10 +1802,6 @@ msgstr "%s : commentaire « %s » non valable\n"
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "%s : répertoire personnel « %s » non valable\n"
-
-#, c-format
-msgid "%s: invalid date '%s'\n"
-msgstr "%s : date « %s » non valable\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1777,6 +1820,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s : interpréteur de commandes « %s » non valable\n"
 
 #, c-format
+msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr "%s : les options %s et %s sont en conflit\n"
 
@@ -1786,6 +1833,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
@@ -1892,6 +1943,37 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr "%s : erreur lors de l'effacement du répertoire %s\n"
 
+#, fuzzy, c-format
+#| msgid ""
+#| "Usage: usermod [options] LOGIN\n"
+#| "\n"
+#| "Options:\n"
+#| "  -c, --comment COMMENT         new value of the GECOS field\n"
+#| "  -d, --home HOME_DIR           new home directory for the user account\n"
+#| "  -e, --expiredate EXPIRE_DATE  set account expiration date to "
+#| "EXPIRE_DATE\n"
+#| "  -f, --inactive INACTIVE       set password inactive after expiration\n"
+#| "                                to INACTIVE\n"
+#| "  -g, --gid GROUP               force use GROUP as new primary group\n"
+#| "  -G, --groups GROUPS           new list of supplementary GROUPS\n"
+#| "  -a, --append                  append the user to the supplemental "
+#| "GROUPS\n"
+#| "                                mentioned by the -G option without "
+#| "removing\n"
+#| "                                him/her from other groups\n"
+#| "  -h, --help                    display this help message and exit\n"
+#| "  -l, --login NEW_LOGIN         new value of the login name\n"
+#| "  -L, --lock                    lock the user account\n"
+#| "  -m, --move-home               move contents of the home directory to "
+#| "the\n"
+#| "                                new location (use only with -d)\n"
+#| "  -o, --non-unique              allow using duplicate (non-unique) UID\n"
+#| "  -p, --password PASSWORD       use encrypted password for the new "
+#| "password\n"
+#| "  -s, --shell SHELL             new login shell for the user account\n"
+#| "  -u, --uid UID                 new UID for the user account\n"
+#| "  -U, --unlock                  unlock the user account\n"
+#| "\n"
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1916,7 +1998,7 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "  -u, --uid UID                 new UID for the user account\n"
 "  -U, --unlock                  unlock the user account\n"
-"\n"
+"%s\n"
 msgstr ""
 "Syntaxe : usermod [options] IDENTIFIANT\n"
 "\n"
@@ -1952,6 +2034,11 @@ msgstr ""
 "                                compte de l'utilisateur\n"
 "  -U, --unlock                  déverrouiller le compte de l'utilisateur\n"
 "\n"
+
+msgid ""
+"  -Z, --selinux-user            new SELinux user mapping for the user "
+"account\n"
+msgstr ""
 
 #, fuzzy, c-format
 #| msgid ""

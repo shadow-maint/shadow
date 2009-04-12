@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.9\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-06 00:47+0200\n"
+"POT-Creation-Date: 2009-04-12 01:51+0200\n"
 "PO-Revision-Date: 2005-06-02 22:20+0800\n"
 "Last-Translator: Asho Yeh <asho@debian.org.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -28,12 +28,23 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
 msgid "Could not allocate space for config info.\n"
 msgstr "無法為設定訊息配置空間。\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "配置錯誤 - 未知項目“%s”(請通知管理員)\n"
+
+msgid "Password: "
+msgstr "密碼："
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s 的密碼："
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -79,6 +90,11 @@ msgstr ""
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "無法改變 tty %s"
 
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s：字段太長\n"
+
 msgid "Environment overflow\n"
 msgstr "環境溢位\n"
 
@@ -99,6 +115,10 @@ msgstr[0] ""
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgstr "%s：無法獲取獨有的 gid\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgstr "%s：無法獲取獨有的 gid\n"
 
 #, fuzzy, c-format
@@ -207,24 +227,13 @@ msgstr "malloc(%d) 失敗\n"
 msgid "No"
 msgstr "取消"
 
-msgid "Password: "
-msgstr "密碼："
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s 的密碼："
-
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
-msgid "%s: failed to unlock %s\n"
-msgstr "%s：字段太長\n"
-
 #, fuzzy
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 "  -h, --help                    display this help message and exit\n"
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -300,6 +309,14 @@ msgstr "最多必須相隔幾天才能改變密碼\t\t\t\t：%ld\n"
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "在密碼將要過期之前多少天會發出警告\t\t\t\t：%ld\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr "%s：無效日期“%s”\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s：無效的數字參數“%s”\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -465,10 +482,6 @@ msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s：無效的數字參數“%s”\n"
 
 #, fuzzy, c-format
 #| msgid "%s: do not include \"l\" with other flags\n"
@@ -1116,12 +1129,14 @@ msgstr "%s：使用者 %s 不存在\n"
 msgid "%s: line %d: can't update password\n"
 msgstr "%s：第 %d 行：無法更新密碼\n"
 
-#, c-format
-msgid "%s: line %d: mkdir failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir failed\n"
+msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s：第 %d 行：建立目錄失敗\n"
 
-#, c-format
-msgid "%s: line %d: chown failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s：第 %d 行：改變擁有者或群組失敗\n"
 
 #, c-format
@@ -1403,6 +1418,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "正在進入系統維護模式"
 
 #, c-format
+msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s：無法建立新的預設檔案\n"
 
@@ -1422,6 +1441,7 @@ msgstr "%s：“%s”群組是一個 NIS 群組。\n"
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s：指定了過多群組(最多 %d)。\n"
 
+#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1459,7 +1479,12 @@ msgid ""
 "  -u, --uid UID                 force use the UID for the new user account\n"
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1473,10 +1498,6 @@ msgstr "%s：無效注釋“%s”\n"
 #, fuzzy, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "%s：無效的主目錄“%s”\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid date '%s'\n"
-msgstr "%s：無效日期“%s”\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1495,6 +1516,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s：無效 shell“%s”\n"
 
 #, c-format
+msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
@@ -1504,6 +1529,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
@@ -1589,6 +1618,7 @@ msgstr "%s：不能刪除目錄 %s (因為這將刪除使用者 %s 的主目錄)
 msgid "%s: error removing directory %s\n"
 msgstr "%s：刪除目錄 %s 時出錯\n"
 
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1613,7 +1643,12 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "  -u, --uid UID                 new UID for the user account\n"
 "  -U, --unlock                  unlock the user account\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user            new SELinux user mapping for the user "
+"account\n"
 msgstr ""
 
 #, c-format

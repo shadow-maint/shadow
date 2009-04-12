@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-06 00:47+0200\n"
+"POT-Creation-Date: 2009-04-12 01:51+0200\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -26,12 +26,23 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
 msgid "Could not allocate space for config info.\n"
 msgstr "לא יכול להקצות מקום בשביל מידע על הקונפיגורציה.\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "שגיאת הגדרות - רכיב לא ידוע '%s' (הודע למנהל)\n"
+
+msgid "Password: "
+msgstr "סיסמה: "
+
+#, c-format
+msgid "%s's Password: "
+msgstr "הסיסמה של %s: "
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -77,6 +88,11 @@ msgstr ""
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "לא יכול לשנות tty %s"
 
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s: שדות ארוכים מידי\n"
+
 msgid "Environment overflow\n"
 msgstr "הצפת סביבה\n"
 
@@ -96,6 +112,10 @@ msgstr[1] "%d שגיאה מאז כניסה אחרונה למערכת. האחרו
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique system UID (no more available UIDs)\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, fuzzy, c-format
@@ -201,23 +221,12 @@ msgstr "malloc(%d) נכשל\n"
 msgid "No"
 msgstr ""
 
-msgid "Password: "
-msgstr "סיסמה: "
-
-#, c-format
-msgid "%s's Password: "
-msgstr "הסיסמה של %s: "
-
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
-msgid "%s: failed to unlock %s\n"
-msgstr "%s: שדות ארוכים מידי\n"
-
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 "  -h, --help                    display this help message and exit\n"
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -286,6 +295,14 @@ msgstr ""
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
+
+#, fuzzy, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -442,10 +459,6 @@ msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
 msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
@@ -1050,13 +1063,14 @@ msgstr "%s: שורה %d: משתמש לא מוכר %s\n"
 msgid "%s: line %d: can't update password\n"
 msgstr ""
 
-#, c-format
-msgid "%s: line %d: mkdir failed\n"
-msgstr ""
+#, fuzzy, c-format
+#| msgid "%s: line %d: missing new password\n"
+msgid "%s: line %d: mkdir %s failed: %s\n"
+msgstr "%s: שורה %d: חסרה סיסמה חדשה\n"
 
-#, c-format
-msgid "%s: line %d: chown failed\n"
-msgstr ""
+#, fuzzy, c-format
+msgid "%s: line %d: chown %s failed: %s\n"
+msgstr "%s: שורה %d: לא יכול לעדכן רשומת סיסמה\n"
 
 #, c-format
 msgid "%s: line %d: can't update entry\n"
@@ -1313,6 +1327,10 @@ msgid "Entering System Maintenance Mode"
 msgstr ""
 
 #, c-format
+msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr ""
 
@@ -1332,6 +1350,7 @@ msgstr ""
 msgid "%s: too many groups specified (max %d).\n"
 msgstr ""
 
+#, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1369,7 +1388,12 @@ msgid ""
 "  -u, --uid UID                 force use the UID for the new user account\n"
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
 msgstr ""
 
 #, fuzzy, c-format
@@ -1383,10 +1407,6 @@ msgstr "%s: שם לא חוקי: \"%s\"\n"
 #, fuzzy, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "ספרית שורש לא חוקית \"%s\"\n"
-
-#, fuzzy, c-format
-msgid "%s: invalid date '%s'\n"
-msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1405,6 +1425,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: שם לא חוקי: \"%s\"\n"
 
 #, c-format
+msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
@@ -1414,6 +1438,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
@@ -1496,6 +1524,7 @@ msgstr ""
 msgid "%s: error removing directory %s\n"
 msgstr ""
 
+#, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1520,7 +1549,12 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "  -u, --uid UID                 new UID for the user account\n"
 "  -U, --unlock                  unlock the user account\n"
-"\n"
+"%s\n"
+msgstr ""
+
+msgid ""
+"  -Z, --selinux-user            new SELinux user mapping for the user "
+"account\n"
 msgstr ""
 
 #, c-format

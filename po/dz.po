@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.17\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-06 00:47+0200\n"
+"POT-Creation-Date: 2009-04-12 01:51+0200\n"
 "PO-Revision-Date: 2006-06-01 15:28+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: dzongkha <pgeyleg@dit.gov.bt>\n"
@@ -28,12 +28,23 @@ msgstr ""
 msgid "crypt method not supported by libcrypt? (%s)\n"
 msgstr ""
 
+#, c-format
+msgid "configuration error - cannot parse %s value: '%s'"
+msgstr ""
+
 msgid "Could not allocate space for config info.\n"
 msgstr "རིམ་སྒྲིག་བརྡ་དོན་གྱི་དོན་ལུ་ བར་སྟོང་སྤྲོད་མ་ཚུགས།\n"
 
 #, c-format
 msgid "configuration error - unknown item '%s' (notify administrator)\n"
 msgstr "རིམ་སྒྲིག་འཚོལ་བ་-མ་ཤེས་པའི་རྣམ་གྲངས་ '%s'(བདག་སྐྱོང་པ་བརྡ་བསྐུལ་འབད་)།\n"
+
+msgid "Password: "
+msgstr "ཆོག་ཡིག་:"
+
+#, c-format
+msgid "%s's Password: "
+msgstr "%s's ཆོག་ཡིག་:"
 
 #, c-format
 msgid "Warning: unknown group %s\n"
@@ -79,6 +90,11 @@ msgstr ""
 msgid "Unable to change owner or mode of tty stdin: %s"
 msgstr "ཊི་ཊི་ཝའི་ %s བསྒྱུར་བཅོས་འབད་མ་ཚུགས།"
 
+#, fuzzy, c-format
+#| msgid "%s: fields too long\n"
+msgid "%s: failed to unlock %s\n"
+msgstr "%s: ས་སྒོ་ཚུ་རིང་དྲགས་པས།\n"
+
 msgid "Environment overflow\n"
 msgstr "མཐའ་འཁོར་ལུད་སོང་བ།\n"
 
@@ -105,6 +121,10 @@ msgstr[1] ""
 #, fuzzy, c-format
 msgid "%s: Can't get unique GID (no more available GIDs)\n"
 msgstr "%s: ཐུན་མོང་མ་ཡིན་པའི་ ཇི་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
+
+#, fuzzy, c-format
+msgid "%s: Can't get unique system UID (no more available UIDs)\n"
+msgstr "%s: ཐུན་མོང་ ཡུ་ཨའི་ཌི་འཐོབ་མི་ཚུགས།\n"
 
 #, fuzzy, c-format
 msgid "%s: Can't get unique UID (no more available UIDs)\n"
@@ -212,24 +232,13 @@ msgstr "malloc(%d) འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 msgid "No"
 msgstr "མེན།\n"
 
-msgid "Password: "
-msgstr "ཆོག་ཡིག་:"
-
-#, c-format
-msgid "%s's Password: "
-msgstr "%s's ཆོག་ཡིག་:"
-
-#, fuzzy, c-format
-#| msgid "%s: fields too long\n"
-msgid "%s: failed to unlock %s\n"
-msgstr "%s: ས་སྒོ་ཚུ་རིང་དྲགས་པས།\n"
-
 #, fuzzy
 msgid ""
 "Usage: chage [options] [LOGIN]\n"
 "\n"
 "Options:\n"
-"  -d, --lastday LAST_DAY        set last password change to LAST_DAY\n"
+"  -d, --lastday LAST_DAY        set date of last password change to "
+"LAST_DAY\n"
 "  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE\n"
 "  -h, --help                    display this help message and exit\n"
 "  -I, --inactive INACTIVE       set password inactive after expiration\n"
@@ -310,6 +319,14 @@ msgstr "ཆོག་ཡིག་བསྒྱུར་བཅོས་\t\tབར�
 #, c-format
 msgid "Number of days of warning before password expires\t: %ld\n"
 msgstr "ཆོག་ཡིག་དུས་མ་ཡོལ་བའི་ཧེ་མ་ ཉེན་བརྡའི་ཉིན་གྲངས་\t:%ld\n"
+
+#, c-format
+msgid "%s: invalid date '%s'\n"
+msgstr "%s: ནུས་མེད་ཚེས་གྲངས་  '%s'།\n"
+
+#, c-format
+msgid "%s: invalid numeric argument '%s'\n"
+msgstr "%s: ནུས་མེད་ཨང་གྲངས་སྒྲུབ་རྟགས་ '%s'\n"
 
 #, c-format
 msgid "%s: do not include \"l\" with other flags\n"
@@ -479,10 +496,6 @@ msgid ""
 "  -s, --sha-rounds              number of SHA rounds for the SHA*\n"
 "                                crypt algorithms\n"
 msgstr ""
-
-#, c-format
-msgid "%s: invalid numeric argument '%s'\n"
-msgstr "%s: ནུས་མེད་ཨང་གྲངས་སྒྲུབ་རྟགས་ '%s'\n"
 
 #, fuzzy, c-format
 msgid "%s: %s flag is only allowed with the %s flag\n"
@@ -1171,12 +1184,14 @@ msgstr "%s: ལག་ལེན་པ་  %sའདི་ མེད།\n"
 msgid "%s: line %d: can't update password\n"
 msgstr "%s: གྲལ་ཐིག་ %d: ཆོག་ཡིག་དུས་མཐུན་བཟོ་མི་ཚུགས།\n"
 
-#, c-format
-msgid "%s: line %d: mkdir failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: mkdir failed\n"
+msgid "%s: line %d: mkdir %s failed: %s\n"
 msgstr "%s: གྲལ་ཐིག་ %d: mkdir འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
-#, c-format
-msgid "%s: line %d: chown failed\n"
+#, fuzzy, c-format
+#| msgid "%s: line %d: chown failed\n"
+msgid "%s: line %d: chown %s failed: %s\n"
 msgstr "%s: གྲལ་ཐིག་ %d: chown འཐུས་ཤོར་བྱུང་ཡོདཔ།\n"
 
 #, c-format
@@ -1475,6 +1490,10 @@ msgid "Entering System Maintenance Mode"
 msgstr "རིམ་ལུགས་རྒྱུན་སྐྱོང་ཐབས་ལམ་བཙུགས་དོ།"
 
 #, c-format
+msgid "%s: the %s configuration in %s will be ignored\n"
+msgstr ""
+
+#, c-format
 msgid "%s: cannot create new defaults file\n"
 msgstr "%s: སྔོན་སྒྲིག་ཡིག་སྣོད་གསརཔ་ གསར་བསྐྲུན་འབད་མི་ཚུགས།\n"
 
@@ -1494,7 +1513,7 @@ msgstr "%s: སྡེ་ཚན་ '%s' འདི་ ཨེན་ཨའི་ཨ�
 msgid "%s: too many groups specified (max %d).\n"
 msgstr "%s: སྡེ་ཚན་མང་རབས་ཅིག་གསལ་བཀོད་འབད་ཡོདཔ་(མང་མཐའ་ %d)།\n"
 
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "Usage: useradd [options] LOGIN\n"
 "\n"
@@ -1532,7 +1551,7 @@ msgid ""
 "  -u, --uid UID                 force use the UID for the new user account\n"
 "  -U, --user-group              create a group with the same name as the "
 "user\n"
-"\n"
+"%s\n"
 msgstr ""
 "ལག་ལེན་: useradd [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
 "\n"
@@ -1566,6 +1585,11 @@ msgstr ""
 "འཐབ།\n"
 "\n"
 
+msgid ""
+"  -Z, --selinux-user SEUSER     use a specific SEUSER for the SELinux user "
+"mapping\n"
+msgstr ""
+
 #, c-format
 msgid "%s: invalid base directory '%s'\n"
 msgstr "%s: ནུས་མེད་གཞི་རྟེན་སྣོད་ཐོ་'%s'།\n"
@@ -1577,10 +1601,6 @@ msgstr "%s: ནུས་མེད་བསམ་བཀོད་ '%s'།\n"
 #, c-format
 msgid "%s: invalid home directory '%s'\n"
 msgstr "%s: ནུས་མེད་ཁྱིམ་གྱི་སྣོད་ཐོ་  '%s'།\n"
-
-#, c-format
-msgid "%s: invalid date '%s'\n"
-msgstr "%s: ནུས་མེད་ཚེས་གྲངས་  '%s'།\n"
 
 #, c-format
 msgid "%s: shadow passwords required for -e\n"
@@ -1599,6 +1619,10 @@ msgid "%s: invalid shell '%s'\n"
 msgstr "%s: ནུས་མེད་ཤལ་ '%s'།\n"
 
 #, c-format
+msgid "%s: -Z requires SELinux enabled kernel\n"
+msgstr ""
+
+#, c-format
 msgid "%s: options %s and %s conflict\n"
 msgstr ""
 
@@ -1608,6 +1632,10 @@ msgstr ""
 
 #, c-format
 msgid "%s: failed to reset the lastlog entry of UID %lu: %s\n"
+msgstr ""
+
+#, c-format
+msgid "%s: warning: the user name %s to %s SELinux user mapping failed.\n"
 msgstr ""
 
 #, c-format
@@ -1710,7 +1738,7 @@ msgstr "%s: སྣོད་ཐོ་ %sའདི་ རྩ་བསྐྲད་�
 msgid "%s: error removing directory %s\n"
 msgstr "%s: སྣོད་ཐོ་%s རྩ་བསྐྲད་གཏང་པའི་སྐབས་ལུ་ འཛོལ་བ།\n"
 
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "Usage: usermod [options] LOGIN\n"
 "\n"
@@ -1735,7 +1763,7 @@ msgid ""
 "  -s, --shell SHELL             new login shell for the user account\n"
 "  -u, --uid UID                 new UID for the user account\n"
 "  -U, --unlock                  unlock the user account\n"
-"\n"
+"%s\n"
 msgstr ""
 "ལག་ལེན་: usermod [གདམ་ཁ་ཚུ་] ནང་བསྐྱོད་\n"
 "\n"
@@ -1761,6 +1789,11 @@ msgstr ""
 "  -u, --uid UID\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོའི་དོན་ལུ་ ཡུ་ཨི་ཌི་གསརཔ།\n"
 "  -U, --unlock\t\t\t  ལག་ལེན་པའི་རྩིས་ཐོ་ ལྡེ་མིག་ཕྱེ།\n"
 "\n"
+
+msgid ""
+"  -Z, --selinux-user            new SELinux user mapping for the user "
+"account\n"
+msgstr ""
 
 #, c-format
 msgid ""
