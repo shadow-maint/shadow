@@ -305,7 +305,7 @@ static void usage (void)
  * su - switch user id
  *
  *	su changes the user's ids to the values for the specified user.  if
- *	no new user name is specified, "root" is used by default.
+ *	no new user name is specified, "root" or UID 0 is used by default.
  *
  *	Any additional arguments are passed to the user's shell. In
  *	particular, the argument "-c" will cause the next argument to be
@@ -457,8 +457,18 @@ int main (int argc, char **argv)
 			optind++;
 		}
 	}
-	if ('\0' == name[0]) {		/* use default user ID */
-		(void) strcpy (name, "root");
+	if ('\0' == name[0]) {		/* use default user */
+		struct passwd *root_pw = getpwnam("root");
+		if ((NULL != root_pw) && (0 == root_pw->pw_uid)) {
+			(void) strcpy (name, "root");
+		} else {
+			struct passwd *root_pw = getpwuid(0);
+			if (NULL == root_pw) {
+				SYSLOG((LOG_CRIT, "There is no UID 0 user."));
+				su_failure(tty);
+			}
+			(void) strcpy(name, root_pw->pw_name);
+		}
 	}
 
 	doshell = (argc == optind);	/* any arguments remaining? */

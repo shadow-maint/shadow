@@ -1,5 +1,10 @@
 2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/su.c: If there are no root account, or if the root account
+	has an UID != 0, default to the first UID 0 account.
+
+2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Restore the echoctl, echoke, onclr flags to the
 	terminal termio flags. Reset echoprt, noflsh, tostop. This
 	behavior seems to have change by mistake in earlier releases
