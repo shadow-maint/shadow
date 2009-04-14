@@ -1,3 +1,9 @@
+2009-04-14  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* man/usermod.8.xml: There are no default values for --inactive
+	and --gid. If the options are no provided, the original values are
+	not changed.
+
 2009-04-12  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
