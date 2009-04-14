@@ -43,9 +43,6 @@ chage, chfn, chsh: same change needed as in passwd.
 testsuite
  - newgrp
    - test with unknown user's GID
- - groupmems
- - usermod, groupadd, groupmod, newusers
-   - test with UID / GID set to -1
 
 newusers
  - add logging to SYSLOG & AUDIT
@@ -68,9 +65,6 @@ ALL:
   user databases by well known tools.
 - Protect against signals. Register do_cleanups in a signal handler.
 
-- gpasswd
-  - add a test with long group name (508785)
-
 - login.defs
   - generate depending on configuration
 
@@ -82,11 +76,6 @@ ALL:
     mode)
   - Change -l to reset the entry if an entry was already there
   - set the mask in mkdir?
-
-- add handle -n switch in groups and id command for allow query is
-  group/user with specified id/gid exist - this will be very usable
-  on automation in packages for query/check is group/user exist in system
-  or not,
 
 - userdel:
   - add backup option for the removal of user resources,
