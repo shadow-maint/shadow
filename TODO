@@ -4,11 +4,6 @@ Review hardcoded root account?
 
 review all call to strto
 
-usermod
-	user renamed, order is not kept in /etc/group (see
-	47_usermod-l_no_shadow_file). This is a problem when the first
-	user is considered as the admin.
-
 libmisc/cleanup_user.c
 	cleanup needed (cleanup_report_add_user* not used)
 
@@ -88,6 +83,13 @@ ALL:
   - add an option equivalent to useradd's -l (only when uid is changed)
   - the mode of new home directories should be set according to the
     original mode. Does copy_tree does this?
+  - user renamed, order is not kept in /etc/group (see
+    47_usermod-l_no_shadow_file). This is a problem when the first user is
+    considered as the admin.
+  - see mail "user ID change" on  April, 15
+    + fix call to chown (combination of -m and -u/-g)
+    + add tests
+
 - passwd:
   - check combination of options (e.g. -u/-l)
   - when -u refuse to unlock because it would create an empty password, it
