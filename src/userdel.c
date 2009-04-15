@@ -797,17 +797,6 @@ int main (int argc, char **argv)
 	audit_help_open ();
 #endif
 
-#ifdef WITH_SELINUX
-	if (is_selinux_enabled () > 0) {
-		const char *args[5];
-		args[0] = "/usr/sbin/semanage";
-		args[1] = "login";
-		args[2] = "-d";
-		args[3] = user_name;
-		args[4] = NULL;
-		safe_system (args[0], args, NULL, 1);
-	}
-#endif
 	/*
 	 * Get my name so that I can use it to report errors.
 	 */
@@ -1007,6 +996,18 @@ int main (int argc, char **argv)
 		              "deleting home directory",
 		              user_name, AUDIT_NO_ID,
 		              SHADOW_AUDIT_FAILURE);
+	}
+#endif
+
+#ifdef WITH_SELINUX
+	if (is_selinux_enabled () > 0) {
+		const char *args[5];
+		args[0] = "/usr/sbin/semanage";
+		args[1] = "login";
+		args[2] = "-d";
+		args[3] = user_name;
+		args[4] = NULL;
+		safe_system (args[0], args, NULL, 1);
 	}
 #endif
 

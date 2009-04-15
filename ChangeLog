@@ -1,5 +1,12 @@
 2009-04-15  Peter Vrabec <pvrabec@redhat.com>
 
+	* NEWS, src/userdel.c: Fixed SE Linux support. semanage should be
+	called at the end.
+	* src/useradd.c: Always call selinux_update_mapping() (i.e.
+	semanage), not only when -Z is used.
+
+2009-04-15  Peter Vrabec <pvrabec@redhat.com>
+
 	* NEWS, srclib/getlong.c: Fix parsing of octal numbers.
 
 2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
