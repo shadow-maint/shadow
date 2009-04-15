@@ -2,6 +2,7 @@
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.
+	* configure.in: Updated version number.
 
 2009-04-15  Peter Vrabec <pvrabec@redhat.com>
 
