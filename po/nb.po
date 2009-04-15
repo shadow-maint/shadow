@@ -454,7 +454,7 @@ msgstr "%s: ugyldig navn: «%s»\n"
 
 #, c-format
 msgid "%s: room number with non-ASCII characters: '%s'\n"
-msgstr "%s: romnummer med ikke-ASCII tegn: «%s»"
+msgstr "%s: romnummer med ikke-ASCII tegn: «%s»\n"
 
 #, c-format
 msgid "%s: invalid room number: '%s'\n"
