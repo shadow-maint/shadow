@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadowutils\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2009-03-02 13:55+0600\n"
 "Last-Translator: Baurzhan M. <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
@@ -2112,11 +2112,22 @@ msgstr ""
 "\n"
 "%s: %s өзгертілмеді\n"
 
+#, fuzzy
+#| msgid "Couldn't lock file"
+msgid "Couldn't get file context"
+msgstr "Файлды оқшаулау мүмкін емес"
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr "Файлды оқшаулау мүмкін емес"
 
 msgid "Couldn't make backup"
 msgstr "Қор көшірмені жасау мүмкін емес"
+
+msgid "setfscreatecon() failed"
+msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"

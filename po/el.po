@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_el\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2007-11-24 21:44+0100\n"
 "Last-Translator: Konstantinos Margaritis <markos@debian.org>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
@@ -1959,11 +1959,22 @@ msgstr ""
 "\n"
 "%s: Το %s δεν άλλαξε\n"
 
+#, fuzzy
+#| msgid "Couldn't lock file"
+msgid "Couldn't get file context"
+msgstr "Αδυναμία ξεκλειδώματος αρχείου"
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr "Αδυναμία ξεκλειδώματος αρχείου"
 
 msgid "Couldn't make backup"
 msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας "
+
+msgid "setfscreatecon() failed"
+msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"

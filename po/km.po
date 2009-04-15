@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow_po_km\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2006-06-28 10:08+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1913,11 +1913,22 @@ msgstr ""
 "\n"
 "%s ៖ %s មិនត្រូវបានប្ដូរឡើយ​\n"
 
+#, fuzzy
+#| msgid "Couldn't lock file"
+msgid "Couldn't get file context"
+msgstr "មិនអាច​ចាក់សោ​ឯកសារបានឡើយ"
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr "មិនអាច​ចាក់សោ​ឯកសារបានឡើយ"
 
 msgid "Couldn't make backup"
 msgstr "មិនអាច​បង្កើត​ព័ត៌មាន​បម្រុងទុក​បានឡើយ"
+
+msgid "setfscreatecon() failed"
+msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"

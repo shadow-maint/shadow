@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2008-03-31 12:50+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: Euskara <debian-l10n-basque@lists.debian.org>\n"
@@ -2107,11 +2107,22 @@ msgstr ""
 "\n"
 "%s: %s ez da aldatu\n"
 
+#, fuzzy
+#| msgid "Couldn't lock file"
+msgid "Couldn't get file context"
+msgstr "Ezin da fitxategia blokeatu"
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr "Ezin da fitxategia blokeatu"
 
 msgid "Couldn't make backup"
 msgstr "Ezin izan da babeskopiarik egin"
+
+msgid "setfscreatecon() failed"
+msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"

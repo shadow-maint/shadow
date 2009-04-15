@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow 4.0.16\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2007-11-25 21:23+0100\n"
 "Last-Translator: Rubén Porras Campo <nahoo@inicia.es>\n"
 "Language-Team: Spanish <debian-l10n-spanish@lists.debian.org>\n"
@@ -1962,11 +1962,22 @@ msgstr ""
 "\n"
 "%s: %s no se cambia\n"
 
+#, fuzzy
+#| msgid "Couldn't lock file"
+msgid "Couldn't get file context"
+msgstr "No se puede bloquear el fichero"
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr "No se puede bloquear el fichero"
 
 msgid "Couldn't make backup"
 msgstr "No se puede realizar una copia de seguridad"
+
+msgid "setfscreatecon() failed"
+msgstr ""
 
 #, c-format
 msgid "%s: can't restore %s: %s (your changes are in %s)\n"

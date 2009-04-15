@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: shadow\n"
 "Report-Msgid-Bugs-To: pkg-shadow-devel@lists.alioth.debian.org\n"
-"POT-Creation-Date: 2009-04-12 01:51+0200\n"
+"POT-Creation-Date: 2009-04-15 23:29+0200\n"
 "PO-Revision-Date: 2004-07-21 23:59+0300\n"
 "Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
 "Language-Team: Hebrew <en@li.org>\n"
@@ -1648,10 +1648,19 @@ msgstr "%s: מספר טלפון בעבודה לא חוקי: \"%s\"\n"
 msgid "%s: %s is unchanged\n"
 msgstr "סיסמה: "
 
+msgid "Couldn't get file context"
+msgstr ""
+
+msgid "setfscreatecon () failed"
+msgstr ""
+
 msgid "Couldn't lock file"
 msgstr ""
 
 msgid "Couldn't make backup"
+msgstr ""
+
+msgid "setfscreatecon() failed"
 msgstr ""
 
 #, c-format
