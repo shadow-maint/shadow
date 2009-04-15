@@ -682,7 +682,7 @@ int main (int argc, char **argv)
 		   set it to NULL */
 		retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
 		PAM_FAIL_CHECK;
-		if (pam_user[0] == '\0') {
+		if ((NULL != pam_user) && ('\0' == pam_user[0])) {
 			retcode = pam_set_item (pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
 		}

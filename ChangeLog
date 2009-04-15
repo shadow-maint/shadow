@@ -1,3 +1,12 @@
+2009-04-15  Peter Vrabec <pvrabec@redhat.com>
+
+	* NEWS, srclib/getlong.c: Fix parsing of octal numbers.
+
+2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* NEWS, src/login.c: Fix segfault when no user is provided on the
+	command line.
+
 2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* README, libmisc/system.c: Was contributed by Dan Walsh.
