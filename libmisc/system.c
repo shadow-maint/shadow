@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009       , Peter Vrabec
+ * Copyright (c) 2009       , Dan Walsh <dwalsh@redhat.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without

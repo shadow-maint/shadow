@@ -1,5 +1,9 @@
 2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* README, libmisc/system.c: Was contributed by Dan Walsh.
+
+2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* NEW, src/vipw.c: SE Linux: Set the default context to the
 	context of the file being edited. This ensures that the backup
 	file inherit from the file's context.
