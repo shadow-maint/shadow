@@ -45,6 +45,10 @@
 #include "sgroupio.h"
 #include "shadowio.h"
 
+#ifdef WITH_SELINUX                                                            
+#include <selinux/selinux.h>                                                   
+#endif
+
 #define MSG_WARN_EDIT_OTHER_FILE _( \
 	"You have modified %s.\n"\
 	"You may need to modify %s for consistency.\n"\
@@ -189,6 +193,22 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (access (file, F_OK) != 0) {
 		vipwexit (file, 1, 1);
 	}
+#ifdef WITH_SELINUX
+	/* if SE Linux is enabled then set the context of all new files
+	   to be the context of the file we are editing */
+	if (is_selinux_enabled ()) {
+		security_context_t passwd_context=NULL;
+		int ret = 0;
+		if (getfilecon (file, &passwd_context) < 0) {
+			vipwexit (_("Couldn't get file context"), errno, 1);
+		}
+		ret = setfscreatecon (passwd_context);
+		freecon (passwd_context);
+		if (0 != ret) {
+			vipwexit (_("setfscreatecon () failed"), errno, 1);
+		}
+	}
+#endif
 	if (file_lock () == 0) {
 		vipwexit (_("Couldn't lock file"), errno, 5);
 	}
@@ -260,6 +280,14 @@ vipwedit (const char *file, int (*file_lock) (void), int (*file_unlock) (void))
 	if (st1.st_mtime == st2.st_mtime) {
 		vipwexit (0, 0, 0);
 	}
+#ifdef WITH_SELINUX                                                            
+	/* unset the fscreatecon */                                             
+	if (is_selinux_enabled ()) {
+		if (setfscreatecon (NULL)) {
+			vipwexit (_("setfscreatecon() failed"), errno, 1);
+		}
+	}
+#endif
 
 	/*
 	 * XXX - here we should check fileedit for errors; if there are any,
