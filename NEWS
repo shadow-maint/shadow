@@ -4,8 +4,8 @@ shadow-4.1.3 -> shadow-4.1.3.1						2009-04-15
 
 *** security:
 - Due to bad parsing of octal permissions, the permissions on tty (login)
-  but also home directories, mailboxes, or UMASK were set wrongly (and
-  weirdly). Only shadow-4.1.3 was affected.
+  but also UMASK were set wrongly (and weirdly). Only shadow-4.1.3 was
+  affected.
 
 *** general
 - login
