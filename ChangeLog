@@ -1,17 +1,22 @@
+2009-04-17  Paul Szabo  <psz@maths.usyd.edu.au>
+
+	* NEWS, src/login.c: Do not trust the current utmp entry's ut_line
+	to set PAM_TTY.
+
 2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* po/shadow.pot, man/po/shadow-man-pages.pot: Regenerated.
 	* po/*.po, man/po/*.po: Updated PO files.
 	* configure.in: Updated version number.
 
-2009-04-15  Peter Vrabec <pvrabec@redhat.com>
+2009-04-15  Peter Vrabec  <pvrabec@redhat.com>
 
 	* NEWS, src/userdel.c: Fixed SE Linux support. semanage should be
 	called at the end.
 	* src/useradd.c: Always call selinux_update_mapping() (i.e.
 	semanage), not only when -Z is used.
 
-2009-04-15  Peter Vrabec <pvrabec@redhat.com>
+2009-04-15  Peter Vrabec  <pvrabec@redhat.com>
 
 	* NEWS, srclib/getlong.c: Fix parsing of octal numbers.
 

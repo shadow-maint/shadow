@@ -416,6 +416,7 @@ static RETSIGTYPE alarm_handler (unused int sig)
  */
 int main (int argc, char **argv)
 {
+	const char *tmptty;
 	char tty[BUFSIZ];
 
 #ifdef RLOGIN
@@ -479,7 +480,13 @@ int main (int argc, char **argv)
 	 * entry (will not overwrite remote hostname).  --marekm
 	 */
 	checkutmp (!amroot);
-	STRFCPY (tty, utent.ut_line);
+
+	tmptty = ttyname (0);
+	if (NULL == tmptty) {
+		tmptty = "UNKNOWN";
+	}
+	STRFCPY (tty, tmptty);
+
 #ifndef USE_PAM
 	is_console = console (tty);
 #endif
@@ -1093,7 +1100,7 @@ int main (int argc, char **argv)
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
 	if (getdef_bool ("LASTLOG_ENAB")) {	/* give last login and log this one */
-		dolastlog (&lastlog, &pwent, utent.ut_line, hostname);
+		dolastlog (&lastlog, &pwent, tty, hostname);
 	}
 #endif
 
@@ -1147,7 +1154,7 @@ int main (int argc, char **argv)
 	if (getppid() == 1) {
 		setsid();
 		if (ioctl(0, TIOCSCTTY, 1) != 0) {
-			fprintf (stderr,_("TIOCSCTTY failed on %s"),tty);
+			fprintf (stderr, _("TIOCSCTTY failed on %s"), tty);
 		}
 	}
 
