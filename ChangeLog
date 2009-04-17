@@ -2,6 +2,8 @@
 
 	* NEWS, src/login.c: Do not trust the current utmp entry's ut_line
 	to set PAM_TTY.
+	* libmisc/utmp.c: Do not trust the current utmp entry's ut_line.
+	Always set ut_line based on ttyname(0).
 
 2009-04-15  Nicolas François  <nicolas.francois@centraliens.net>
 

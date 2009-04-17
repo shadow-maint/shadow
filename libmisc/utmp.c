@@ -113,10 +113,20 @@ void checkutmp (bool picky)
 		    && (   (LOGIN_PROCESS == ut->ut_type)
 		        || (USER_PROCESS  == ut->ut_type))
 		    /* A process may have failed to close an entry
-		     * Check if this entry refers to this tty */
+		     * Check if this entry refers to the current tty */
 		    && is_my_tty (ut->ut_line)) {
 			break;
 		}
+	}
+
+	/* We cannot trust the ut_line field. Prepare the new value. */
+	line = ttyname (0);
+	if (NULL == line) {
+		(void) puts (NO_TTY);
+		exit (EXIT_FAILURE);
+	}
+	if (strncmp (line, "/dev/", 5) == 0) {
+		line += 5;
 	}
 
 	/* If there is one, just use it, otherwise create a new one. */
@@ -127,23 +137,17 @@ void checkutmp (bool picky)
 			(void) puts (NO_UTENT);
 			exit (EXIT_FAILURE);
 		}
-		line = ttyname (0);
-		if (NULL == line) {
-			(void) puts (NO_TTY);
-			exit (EXIT_FAILURE);
-		}
-		if (strncmp (line, "/dev/", 5) == 0) {
-			line += 5;
-		}
 		memset ((void *) &utent, 0, sizeof utent);
 		utent.ut_type = LOGIN_PROCESS;
 		utent.ut_pid = pid;
-		strncpy (utent.ut_line, line, sizeof utent.ut_line);
 		/* XXX - assumes /dev/tty?? or /dev/pts/?? */
-		strncpy (utent.ut_id, utent.ut_line + 3, sizeof utent.ut_id);
+		strncpy (utent.ut_id, line + 3, sizeof utent.ut_id);
 		strcpy (utent.ut_user, "LOGIN");
 		utent.ut_time = time (NULL);
 	}
+
+	/* Sanitize / set the ut_line field */
+	strncpy (utent.ut_line, line, sizeof utent.ut_line);
 }
 
 #elif defined(LOGIN_PROCESS)
