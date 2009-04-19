@@ -670,7 +670,7 @@ int main (int argc, char **argv)
 	PAM_FAIL_CHECK;
 #endif
 	/* if fflg, then the user has already been authenticated */
-	if (!fflg || (getuid () != 0)) {
+	if (!fflg) {
 		int failcount = 0;
 		char hostn[256];
 		char loginprompt[256];	/* That's one hell of a prompt :) */
@@ -818,6 +818,9 @@ int main (int argc, char **argv)
 		}
 
 		PAM_FAIL_CHECK;
+	} else (fflg) {
+		retcode = pam_acct_mgmt (pamh, 0);
+		PAM_FAIL_CHECK;
 	}
 
 	/* Grab the user information out of the password file for future usage
@@ -836,11 +839,6 @@ int main (int argc, char **argv)
 		         getdef_bool ("LOG_UNKFAIL_ENAB") ?
 		         username : "UNKNOWN"));
 		exit (1);
-	}
-
-	if (fflg) {
-		retcode = pam_acct_mgmt (pamh, 0);
-		PAM_FAIL_CHECK;
 	}
 
 	if (setup_groups (pwd) != 0) {

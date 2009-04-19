@@ -1,3 +1,9 @@
+2009-04-19  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/login.c: fflg is already restricted to root. Move
+	pam_acct_mgmt(), in case of fflg, earlier. This is equivalent and
+	simplifies the code.
+
 2009-04-19  Paul Szabo  <psz@maths.usyd.edu.au>
 
 	* libmisc/utmp.c: Always call endutent or endutxent when setutent
