@@ -811,17 +811,14 @@ int main (int argc, char **argv)
 
 		/* We don't get here unless they were authenticated above */
 		alarm (0);
-		retcode = pam_acct_mgmt (pamh, 0);
-
-		if (retcode == PAM_NEW_AUTHTOK_REQD) {
-			retcode = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
-		}
-
-		PAM_FAIL_CHECK;
-	} else (fflg) {
-		retcode = pam_acct_mgmt (pamh, 0);
-		PAM_FAIL_CHECK;
 	}
+
+	/* Check the account validity */
+	retcode = pam_acct_mgmt (pamh, 0);
+	if (retcode == PAM_NEW_AUTHTOK_REQD) {
+		retcode = pam_chauthtok (pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
+	}
+	PAM_FAIL_CHECK;
 
 	/* Grab the user information out of the password file for future usage
 	   First get the username that we are actually using, though.
