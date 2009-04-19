@@ -1,3 +1,7 @@
+2009-04-19  Changwoo Ryu  <cwryu@debian.org>
+
+	* po/ko.po: Updated Korean translation.
+
 2009-04-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, src/login.c: Also check if the authentication token of the

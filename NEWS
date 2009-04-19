@@ -8,6 +8,9 @@ shadow-4.1.3.1 -> shadow-4.1.3.2					UNRELEASED
   * (PAM) Even if the user was already authenticated (-f flag), ask the
     user to update his authentication token if needed.
 
+*** translation
+ - Updated Korean translation
+
 shadow-4.1.3 -> shadow-4.1.3.1						2009-04-15
 
 *** security:
