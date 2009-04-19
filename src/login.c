@@ -657,6 +657,9 @@ int main (int argc, char **argv)
 	 * hostname & tty are either set to NULL or their correct values,
 	 * depending on how much we know. We also set PAM's fail delay to
 	 * ours.
+	 *
+	 * PAM_RHOST and PAM_TTY are used for authentication, only use
+	 * information coming from login or from the caller (e.g. no utmp)
 	 */
 	retcode = pam_set_item (pamh, PAM_RHOST, hostname);
 	PAM_FAIL_CHECK;
