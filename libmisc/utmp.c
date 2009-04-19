@@ -148,6 +148,8 @@ void checkutmp (bool picky)
 
 	/* Sanitize / set the ut_line field */
 	strncpy (utent.ut_line, line, sizeof utent.ut_line);
+
+	endutent ();
 }
 
 #elif defined(LOGIN_PROCESS)
@@ -269,6 +271,11 @@ void checkutmp (bool picky)
 		utent.ut_time = utxent.ut_tv.tv_sec;
 #endif
 	}
+
+#if HAVE_UTMPX_H
+	endutxent ();
+#endif
+	endutent ();
 }
 
 #endif
@@ -441,6 +448,9 @@ int setutmp (const char *name, const char *line, const char *host)
 
 	utxent = utxline;
 	utent = utline;
+
+	endutxent ();
+	endutent ();
 
 	return err;
 }

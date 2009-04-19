@@ -1,3 +1,8 @@
+2009-04-19  Paul Szabo  <psz@maths.usyd.edu.au>
+
+	* libmisc/utmp.c: Always call endutent or endutxent when setutent
+	or setutxent were used.
+
 2009-04-19  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* src/login.c: Added comment to make sure PAM_RHOST or PAM_TTY do
