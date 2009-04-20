@@ -553,7 +553,7 @@ int main (int argc, char **argv)
 	setup_tty ();
 
 #ifndef USE_PAM
-	umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
+	(void) umask (getdef_num ("UMASK", GETDEF_DEFAULT_UMASK));
 
 	{
 		/* 
