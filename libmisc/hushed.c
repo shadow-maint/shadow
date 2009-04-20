@@ -3,7 +3,7 @@
  * Copyright (c) 1991 - 1993, Chip Rosenthal
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,8 +47,9 @@
  * Look in the hushed-logins file (or user's home directory) to see
  * if the user is to receive the login-time messages.
  */
-bool hushed (const struct passwd *pw)
+bool hushed (const char *username)
 {
+	const struct passwd *pw;
 	char *hushfile;
 	char buf[BUFSIZ];
 	bool found;
@@ -61,6 +62,11 @@ bool hushed (const struct passwd *pw)
 
 	hushfile = getdef_str ("HUSHLOGIN_FILE");
 	if (NULL == hushfile) {
+		return false;
+	}
+
+	pw = getspnam (username);
+	if (NULL == pw) {
 		return false;
 	}
 

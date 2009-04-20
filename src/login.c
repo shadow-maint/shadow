@@ -847,7 +847,7 @@ int main (int argc, char **argv)
 	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
 
-	retcode = pam_open_session (pamh, hushed (&pwent) ? PAM_SILENT : 0);
+	retcode = pam_open_session (pamh, hushed (username) ? PAM_SILENT : 0);
 	PAM_FAIL_CHECK;
 
 #else				/* ! USE_PAM */
@@ -1184,7 +1184,7 @@ int main (int argc, char **argv)
 	(void) bindtextdomain (PACKAGE, LOCALEDIR);
 	(void) textdomain (PACKAGE);
 
-	if (!hushed (&pwent)) {
+	if (!hushed (username)) {
 		addenv ("HUSHLOGIN=FALSE", NULL);
 		/*
 		 * pam_unix, pam_mail and pam_lastlog should take care of

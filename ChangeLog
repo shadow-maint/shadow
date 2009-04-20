@@ -1,5 +1,12 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/hushed.c, lib/prototypes.h, src/login.c: Change the
+	hushed() prototype to take a username instead of a passwd
+	structure in argument. The passwd entry is retrieved withing
+	hushed().
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/setugid.c: Updated comments.
 
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>

@@ -175,7 +175,7 @@ extern void __gr_set_changed (void);
 extern struct group *__gr_dup (const struct group *grent);
 
 /* hushed.c */
-extern bool hushed (const struct passwd *pw);
+extern bool hushed (const char *username);
 
 /* audit_help.c */
 #ifdef WITH_AUDIT
