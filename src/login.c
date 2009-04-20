@@ -134,7 +134,7 @@ static void process_flags (int, char *const *);
 static struct faillog faillog;
 
 static void bad_time_notify (void);
-static void check_nologin (void);
+static void check_nologin (bool login_to_root);
 #endif
 
 static void init_env (void);
@@ -205,7 +205,7 @@ static void bad_time_notify (void)
 	(void) fflush (stdout);
 }
 
-static void check_nologin (void)
+static void check_nologin (bool login_to_root)
 {
 	char *fname;
 
@@ -244,7 +244,7 @@ static void check_nologin (void)
 		 * gets to login.
 		 */
 
-		if (pwent.pw_uid != 0) {
+		if (!login_to_root) {
 			closelog ();
 			exit (0);
 		}
@@ -1064,7 +1064,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	check_nologin ();
+	check_nologin (pwent.pw_uid == 0);
 #endif
 
 	if (getenv ("IFS")) {	/* don't export user IFS ... */
