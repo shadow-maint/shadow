@@ -266,14 +266,15 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	print ();
-	/* Get the laslog size */
+	/* Get the lastlog size */
 	if (fstat (fileno (lastlogfile), &statbuf) != 0) {
 		fprintf (stderr,
 		         _("lastlog: Cannot get the size of %s: %s\n"),
 		         LASTLOG_FILE, strerror (errno));
 		exit (1);
 	}
+
+	print ();
 
 	fclose (lastlogfile);
 	exit (0);
