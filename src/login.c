@@ -1235,8 +1235,7 @@ int main (int argc, char **argv)
 			/* Reset the lockout times if logged in */
 			if (   (0 != faillog.fail_max)
 			    && (faillog.fail_cnt >= faillog.fail_max)) {
-				puts (_
-				      ("Warning: login re-enabled after temporary lockout."));
+				puts (_("Warning: login re-enabled after temporary lockout."));
 				SYSLOG ((LOG_WARN,
 				         "login '%s' re-enabled after temporary lockout (%d failures)",
 				         username, (int) faillog.fail_cnt));
