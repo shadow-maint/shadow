@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2001, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -838,6 +838,10 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
+	/* This set up the process credential (group) and initialize the
+	 * supplementary group access list.
+	 * This has to be done before pam_setcred
+	 */
 	if (setup_groups (pwd) != 0) {
 		exit (1);
 	}
@@ -1156,10 +1160,24 @@ int main (int argc, char **argv)
 		}
 	}
 
-	/* We call set_groups() above because this clobbers pam_groups.so */
+
+	/*
+	 * Close all the files so that unauthorized access won't occur.
+	 */
+	endpwent ();		/* stop access to password file */
+	endgrent ();		/* stop access to group file */
+	endspent ();		/* stop access to shadow passwd file */
+#ifdef	SHADOWGRP
+	endsgent ();		/* stop access to shadow group file */
+#endif
+
+	/* Drop root privileges */
 #ifndef USE_PAM
 	if (setup_uid_gid (&pwent, is_console))
 #else
+	/* The group privileges were already dropped.
+	 * See setup_groups() above.
+	 */
 	if (change_uid (&pwent))
 #endif
 	{
@@ -1247,12 +1265,6 @@ int main (int argc, char **argv)
 	(void) signal (SIGHUP, SIG_DFL);	/* added this.  --marekm */
 	(void) signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
-	endpwent ();		/* stop access to password file */
-	endgrent ();		/* stop access to group file */
-	endspent ();		/* stop access to shadow passwd file */
-#ifdef	SHADOWGRP
-	endsgent ();		/* stop access to shadow group file */
-#endif
 	if (0 == pwent.pw_uid) {
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	} else if (getdef_bool ("LOG_OK_LOGINS")) {
