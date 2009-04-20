@@ -997,7 +997,7 @@ int main (int argc, char **argv)
 			strncpy (failent.ut_user, failent_user,
 			         sizeof (failent.ut_user));
 			failent.ut_type = USER_PROCESS;
-			failtmp (&failent);
+			failtmp (failent_user, &failent);
 		}
 
 		retries--;

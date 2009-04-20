@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1997 - 2000, Marek Michałkiewicz
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,9 +75,9 @@ extern void failprint (const struct faillog *);
  *	maintains a record of all login failures.
  */
 #ifdef HAVE_UTMPX_H
-extern void failtmp (const struct utmpx *);
+extern void failtmp (const char *username, const struct utmpx *);
 #else
-extern void failtmp (const struct utmp *);
+extern void failtmp (const char *username, const struct utmp *);
 #endif
 
 #endif

@@ -288,7 +288,7 @@ void failprint (const struct faillog *fail)
  *	maintains a record of all login failures.
  */
 
-void failtmp (
+void failtmp (const char *username,
 #ifdef HAVE_UTMPX_H
 		     const struct utmpx *failent
 #else
@@ -320,13 +320,9 @@ void failtmp (
 
 	fd = open (ftmp, O_WRONLY | O_APPEND);
 	if (-1 == fd) {
-		char ut_user[sizeof failent->ut_user];
-		(void) strncpy (&ut_user[0], failent->ut_user, sizeof ut_user);
-		ut_user[sizeof ut_user - 1] = '\0';
-
 		SYSLOG ((LOG_WARN,
 		         "Can't append failure of user %s to %s.",
-		         ut_user, ftmp));
+		         username, ftmp));
 		return;
 	}
 
@@ -336,13 +332,9 @@ void failtmp (
 
 	if (   (write (fd, (const void *) failent, sizeof *failent) != (ssize_t) sizeof *failent)
 	    || (close (fd) != 0)) {
-		char ut_user[sizeof failent->ut_user];
-		(void) strncpy (&ut_user[0], failent->ut_user, sizeof ut_user);
-		ut_user[sizeof ut_user - 1] = '\0';
-
 		SYSLOG ((LOG_WARN,
 		         "Can't append failure of user %s to %s.",
-		         ut_user, ftmp));
+		         username, ftmp));
 		(void) close (fd);
 	}
 }
