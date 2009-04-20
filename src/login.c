@@ -1272,10 +1272,7 @@ int main (int argc, char **argv)
 		addenv ("HUSHLOGIN=TRUE", NULL);
 	}
 
-	if (   (NULL != getdef_str ("TTYTYPE_FILE"))
-	    && (NULL == getenv ("TERM"))) {
-		ttytype (tty);
-	}
+	ttytype (tty);
 
 	(void) signal (SIGQUIT, SIG_DFL);	/* default quit signal */
 	(void) signal (SIGTERM, SIG_DFL);	/* default terminate signal */

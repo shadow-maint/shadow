@@ -1,5 +1,10 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: ttytype already checks for TTYTYPE_FILE and TERM.
+	Just call ttytype.
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Open the PAM session before pam_setcred and before
 	initgroups. This is more consistent with rfc86.0.
 
