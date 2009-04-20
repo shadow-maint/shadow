@@ -1,5 +1,9 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/setugid.c: Updated comments.
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/failure.h, libmisc/failure.c, src/login.c: Added
 	username as first parameter of failtmp to avoid issues with
 	non-null terminated ut_user, unavailability of ut_user, incomplete

@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,10 +45,16 @@
 #include "defines.h"
 #include <pwd.h>
 #include "getdef.h"
+
 /*
- * setup_uid_gid() split in two functions for PAM support -
- * pam_setcred() needs to be called after initgroups(), but
- * before setuid().
+ * setup_groups - set the group credentials
+ *	set the group ID to the value from the password file entry
+ *	set the supplementary group IDs
+ *
+ * In case of PAM enabled configurations, this shall be called before
+ * pam_setcred.
+ *
+ * Returns 0 on success, or -1 on failure.
  */
 int setup_groups (const struct passwd *info)
 {
@@ -81,6 +87,11 @@ int setup_groups (const struct passwd *info)
 	return 0;
 }
 
+/*
+ * change_uid - Set the real UID
+ *
+ * Returns 0 on success, or -1 on failure.
+ */
 int change_uid (const struct passwd *info)
 {
 	/*
