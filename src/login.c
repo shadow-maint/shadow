@@ -45,6 +45,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <assert.h>
 #include "defines.h"
 #include "faillog.h"
 #include "failure.h"
@@ -129,12 +130,15 @@ extern char **environ;
 static void usage (void);
 static void setup_tty (void);
 static void process_flags (int, char *const *);
+static const char *get_failent_user (const char *user)
 
 #ifndef USE_PAM
 static struct faillog faillog;
 
 static void bad_time_notify (void);
 static void check_nologin (bool login_to_root);
+#else
+static void get_pam_user (char **ptr_pam_user);
 #endif
 
 static void init_env (void);
@@ -396,6 +400,56 @@ static RETSIGTYPE alarm_handler (unused int sig)
 	exit (0);
 }
 
+#ifdef USE_PAM
+/*
+ * get_pam_user - Get the username according to PAM
+ *
+ * ptr_pam_user shall point to a malloc'ed string (or NULL).
+ */
+static void get_pam_user (char **ptr_pam_user)
+{
+	int retcode;
+	void *ptr_user;
+
+	assert (NULL != ptr_pam_user);
+
+	retcode = pam_get_item (pamh, PAM_USER, (const void **)&ptr_user);
+	PAM_FAIL_CHECK;
+
+	if (NULL != *ptr_pam_user) {
+		free (*ptr_pam_user);
+	}
+	if (NULL != ptr_user) {
+		*ptr_pam_user = xstrdup ((const char *)ptr_user);
+	} else {
+		*ptr_pam_user = NULL;
+	}
+}
+#endif
+
+/*
+ * get_failent_user - Return a string that can be used to log failure
+ *                    from an user.
+ *
+ * This will be either the user argument, or "UNKNOWN".
+ *
+ * It is quite common to mistyped the password for username, and passwords
+ * should not be logged.
+ */
+static const char *get_failent_user (const char *user)
+{
+	const char *failent_user = "UNKNOWN";
+	bool log_unkfail_enab = getdef_bool("LOG_UNKFAIL_ENAB");
+
+	if ((NULL != user) && ('\0' != user[0])) {
+		if (   log_unkfail_enab
+		    || (getpwnam (user) != NULL)) {
+			failent_user = user;
+		}
+	}
+
+	return failent_user;
+}
 
 /*
  * login - create a new login session for a user
@@ -442,12 +496,12 @@ int main (int argc, char **argv)
 	static char temp_pw[2];
 	static char temp_shell[] = "/bin/sh";
 #endif
+	const char *failent_user;
 
 #ifdef USE_PAM
 	int retcode;
 	pid_t child;
-	char *pam_user;
-	char **ptr_pam_user = &pam_user;
+	char *pam_user = NULL;
 #else
 	struct spwd *spwd = NULL;
 #endif
@@ -690,8 +744,7 @@ int main (int argc, char **argv)
 
 		/* if we didn't get a user on the command line,
 		   set it to NULL */
-		retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
-		PAM_FAIL_CHECK;
+		get_pam_user (&pam_user);
 		if ((NULL != pam_user) && ('\0' == pam_user[0])) {
 			retcode = pam_set_item (pamh, PAM_USER, NULL);
 			PAM_FAIL_CHECK;
@@ -707,7 +760,6 @@ int main (int argc, char **argv)
 		 */
 		failcount = 0;
 		while (true) {
-			const char *failent_user;
 			failed = false;
 
 			failcount++;
@@ -720,31 +772,8 @@ int main (int argc, char **argv)
 
 			retcode = pam_authenticate (pamh, 0);
 
-			{
-				int saved_retcode = retcode;
-				retcode = pam_get_item (pamh, PAM_USER,
-				                        (const void **) ptr_pam_user);
-				PAM_FAIL_CHECK;
-				retcode = saved_retcode;
-			}
-
-			if ((NULL != pam_user) && ('\0' != pam_user[0])) {
-				pwd = xgetpwnam(pam_user);
-				if (NULL != pwd) {
-					pwent = *pwd;
-					failent_user = pwent.pw_name;
-				} else {
-					if (   getdef_bool("LOG_UNKFAIL_ENAB")
-					    && (NULL != pam_user)) {
-						failent_user = pam_user;
-					} else {
-						failent_user = "UNKNOWN";
-					}
-				}
-			} else {
-				pwd = NULL;
-				failent_user = "UNKNOWN";
-			}
+			get_pam_user (&pam_user);
+			failent_user = get_failent_user (pam_user);
 
 			if (retcode == PAM_MAXTRIES) {
 				SYSLOG ((LOG_NOTICE,
@@ -821,20 +850,21 @@ int main (int argc, char **argv)
 	PAM_FAIL_CHECK;
 
 	/* Grab the user information out of the password file for future usage
-	   First get the username that we are actually using, though.
+	 * First get the username that we are actually using, though.
+	 *
+	 * From now on, we will discard changes of the user (PAM_USER) by
+	 * PAM APIs.
 	 */
-	retcode = pam_get_item (pamh, PAM_USER, (const void **)ptr_pam_user);
-	PAM_FAIL_CHECK;
+	get_pam_user (&pam_user);
 	if (NULL != username) {
 		free (username);
 	}
-	username = xstrdup (pam_user);
+	username = pam_user;
+	failent_user = get_failent_user (username);
 
 	pwd = xgetpwnam (username);
 	if (NULL == pwd) {
-		SYSLOG ((LOG_ERR, "xgetpwnam(%s) failed",
-		         getdef_bool ("LOG_UNKFAIL_ENAB") ?
-		         username : "UNKNOWN"));
+		SYSLOG ((LOG_ERR, "cannot find user %s", failent_user));
 		exit (1);
 	}
 
@@ -873,6 +903,8 @@ int main (int argc, char **argv)
 				continue;
 			}
 		}
+		/* Get the username to be used to log failures */
+		failent_user = get_failent_user (username);
 
 		pwd = xgetpwnam (username);
 		if (NULL == pwd) {
@@ -924,15 +956,8 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		/*
-		 * Don't log unknown usernames - I mistyped the password for
-		 * username at least once. Should probably use LOG_AUTHPRIV
-		 * for those who really want to log them.  --marekm
-		 */
 		SYSLOG ((LOG_WARN, "invalid password for '%s' %s",
-		         (   (NULL != pwd)
-		          || getdef_bool ("LOG_UNKFAIL_ENAB")) ?
-		         username : "UNKNOWN", fromhost));
+		         failent_user, fromhost));
 		failed = true;
 
 	      auth_ok:
@@ -971,8 +996,6 @@ int main (int argc, char **argv)
 			failure (pwent.pw_uid, tty, &faillog);
 		}
 		if (getdef_str ("FTMP_FILE") != NULL) {
-			const char *failent_user;
-
 #if HAVE_UTMPX_H
 			failent = utxent;
 			if (sizeof (failent.ut_tv) == sizeof (struct timeval)) {
@@ -989,15 +1012,6 @@ int main (int argc, char **argv)
 			failent = utent;
 			failent.ut_time = time (NULL);
 #endif
-			if (NULL != pwd) {
-				failent_user = pwent.pw_name;
-			} else {
-				if (getdef_bool ("LOG_UNKFAIL_ENAB")) {
-					failent_user = username;
-				} else {
-					failent_user = "UNKNOWN";
-				}
-			}
 			strncpy (failent.ut_user, failent_user,
 			         sizeof (failent.ut_user));
 			failent.ut_type = USER_PROCESS;
