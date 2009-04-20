@@ -102,6 +102,7 @@ static void gshadow_free (void *ent)
 	struct sgrp *sg = ent;
 
 	free (sg->sg_name);
+	memzero (sg->sg_passwd, strlen (sg->sg_passwd));
 	free (sg->sg_passwd);
 	while (NULL != *(sg->sg_adm)) {
 		free (*(sg->sg_adm));

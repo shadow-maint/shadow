@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,6 +54,7 @@ static void shadow_free (void *ent)
 	struct spwd *sp = ent;
 
 	free (sp->sp_namp);
+	memzero (sp->sp_pwdp, strlen (sp->sp_pwdp));
 	free (sp->sp_pwdp);
 	free (sp);
 }

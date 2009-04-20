@@ -1,3 +1,8 @@
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/pwio.c, lib/shadowio.c, lib/groupio.c, lib/sgroupio.c: Fill
+	the password fields with zeros before they are freed.
+
 2009-04-19  Changwoo Ryu  <cwryu@debian.org>
 
 	* po/ko.po: Updated Korean translation.

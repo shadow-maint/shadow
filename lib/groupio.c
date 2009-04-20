@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,6 +60,7 @@ static void group_free (void *ent)
 	struct group *gr = ent;
 
 	free (gr->gr_name);
+	memzero (gr->gr_passwd, strlen (gr->gr_passwd));
 	free (gr->gr_passwd);
 	while (*(gr->gr_mem)) {
 		free (*(gr->gr_mem));
