@@ -85,8 +85,6 @@ static const char *hostname = "";
 static char *username = NULL;
 static int reason = PW_LOGIN;
 
-static struct passwd pwent;
-
 #if HAVE_UTMPX_H
 extern struct utmpx utxent;
 struct utmpx failent;
@@ -490,10 +488,9 @@ int main (int argc, char **argv)
 	const char *cp;
 	char *tmp;
 	char fromhost[512];
-	struct passwd *pwd;
+	struct passwd *pwd = NULL;
 	char **envp = environ;
 #ifndef USE_PAM
-	static char temp_pw[2];
 	static char temp_shell[] = "/bin/sh";
 #endif
 	const char *failent_user;
@@ -881,8 +878,6 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	pwent = *pwd;
-
 	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
 	/* NOTE: If pam_setcred changes PAM_USER, this will not be taken
@@ -891,6 +886,22 @@ int main (int argc, char **argv)
 
 #else				/* ! USE_PAM */
 	while (true) {	/* repeatedly get login/password pairs */
+		/* user_passwd is always a pointer to this constant string
+		 * or a passwd or shadow password that will be memzero by
+		 * passwd_free / shadow_free.
+		 * Do not free() user_passwd. */
+		const char *user_passwd = "!";
+
+		/* Do some cleanup to avoid keeping entries we do not need
+		 * anymore. */
+		if (NULL != pwd) {
+			passwd_free (pwd);
+		}
+		if (NULL != spwd) {
+			shadow_free (spwd);
+			spwd = NULL;
+		}
+
 		failed = false;	/* haven't failed authentication yet */
 		if (NULL == username) {	/* need to get a login id */
 			if (subroot) {
@@ -913,39 +924,35 @@ int main (int argc, char **argv)
 
 		pwd = xgetpwnam (username);
 		if (NULL == pwd) {
-			pwent.pw_name = username;
-			strcpy (temp_pw, "!");
-			pwent.pw_passwd = temp_pw;
-			pwent.pw_shell = temp_shell;
-
 			preauth_flag = false;
 			failed = true;
 		} else {
-			pwent = *pwd;
+			user_passwd = pwd->pw_passwd;
+			/*
+			 * If the encrypted password begins with a "!",
+			 * the account is locked and the user cannot
+			 * login, even if they have been
+			 * "pre-authenticated."
+			 */
+			if (   ('!' == user_passwd[0])
+			    || ('*' == user_passwd[0])) {
+				failed = true;
+			}
 		}
 
-		spwd = NULL;
-		if (   (NULL != pwd)
-		    && (strcmp (pwd->pw_passwd, SHADOW_PASSWD_STRING) == 0)) {
-			/* !USE_PAM, no need for xgetspnam */
-			spwd = getspnam (username);
+		if (strcmp (user_passwd, SHADOW_PASSWD_STRING) == 0) {
+			spwd = xgetspnam (username);
 			if (NULL != spwd) {
-				pwent.pw_passwd = spwd->sp_pwdp;
+				user_passwd = spwd->sp_pwdp;
 			} else {
+				/* The user exists in passwd, but not in
+				 * shadow. SHADOW_PASSWD_STRING indicates
+				 * that the password shall be in shadow.
+				 */
 				SYSLOG ((LOG_WARN,
 				         "no shadow password for '%s'%s",
 				         username, fromhost));
 			}
-		}
-
-		/*
-		 * If the encrypted password begins with a "!", the account
-		 * is locked and the user cannot login, even if they have
-		 * been "pre-authenticated."
-		 */
-		if (   ('!' == pwent.pw_passwd[0])
-		    || ('*' == pwent.pw_passwd[0])) {
-			failed = true;
 		}
 
 		/*
@@ -956,8 +963,7 @@ int main (int argc, char **argv)
 			goto auth_ok;
 		}
 
-		if (pw_auth (pwent.pw_passwd, username,
-		             reason, (char *) 0) == 0) {
+		if (pw_auth (user_passwd, username, reason, (char *) 0) == 0) {
 			goto auth_ok;
 		}
 
@@ -972,8 +978,8 @@ int main (int argc, char **argv)
 		 * authenticated and so on.
 		 */
 		if (   !failed
-		    && (NULL != pwent.pw_name)
-		    && (0 == pwent.pw_uid)
+		    && (NULL != pwd)
+		    && (0 == pwd->pw_uid)
 		    && !is_console) {
 			SYSLOG ((LOG_CRIT, "ILLEGAL ROOT LOGIN %s", fromhost));
 			failed = true;
@@ -986,7 +992,7 @@ int main (int argc, char **argv)
 		}
 		if (   (NULL != pwd)
 		    && getdef_bool ("FAILLOG_ENAB")
-		    && !failcheck (pwent.pw_uid, &faillog, failed)) {
+		    && !failcheck (pwd->pw_uid, &faillog, failed)) {
 			SYSLOG ((LOG_CRIT,
 			         "exceeded failure limit for '%s' %s",
 			         username, fromhost));
@@ -998,7 +1004,7 @@ int main (int argc, char **argv)
 
 		/* don't log non-existent users */
 		if ((NULL != pwd) && getdef_bool ("FAILLOG_ENAB")) {
-			failure (pwent.pw_uid, tty, &faillog);
+			failure (pwd->pw_uid, tty, &faillog);
 		}
 		if (getdef_str ("FTMP_FILE") != NULL) {
 #if HAVE_UTMPX_H
@@ -1036,7 +1042,7 @@ int main (int argc, char **argv)
 		 * guys won't see that the passwordless account exists at
 		 * all).  --marekm
 		 */
-		if (pwent.pw_passwd[0] == '\0') {
+		if (user_passwd[0] == '\0') {
 			pw_auth ("!", username, reason, (char *) 0);
 		}
 
@@ -1075,7 +1081,7 @@ int main (int argc, char **argv)
 	 * by Ivan Nejgebauer <ian@unsux.ns.ac.yu>.  --marekm
 	 */
 	if (   getdef_bool ("PORTTIME_CHECKS_ENAB")
-	    && !isttytime (pwent.pw_name, tty, time ((time_t *) 0))) {
+	    && !isttytime (username, tty, time ((time_t *) 0))) {
 		SYSLOG ((LOG_WARN, "invalid login time for '%s'%s",
 		         username, fromhost));
 		closelog ();
@@ -1083,7 +1089,7 @@ int main (int argc, char **argv)
 		exit (1);
 	}
 
-	check_nologin (pwent.pw_uid == 0);
+	check_nologin (pwd->pw_uid == 0);
 #endif
 
 	if (getenv ("IFS")) {	/* don't export user IFS ... */
@@ -1091,9 +1097,9 @@ int main (int argc, char **argv)
 	}
 
 	setutmp (username, tty, hostname);	/* make entry in utmp & wtmp files */
-	if (pwent.pw_shell[0] == '*') {	/* subsystem root */
-		pwent.pw_shell++;	/* skip the '*' */
-		subsystem (&pwent);	/* figure out what to execute */
+	if (pwd->pw_shell[0] == '*') {	/* subsystem root */
+		pwd->pw_shell++;	/* skip the '*' */
+		subsystem (pwd);	/* figure out what to execute */
 		subroot = true;	/* say I was here again */
 		endpwent ();	/* close all of the file which were */
 		endgrent ();	/* open in the original rooted file */
@@ -1110,7 +1116,7 @@ int main (int argc, char **argv)
 	                        AUDIT_USER_LOGIN,
 	                        NULL,    /* Prog. name */
 	                        "login",
-	                        pwd->pw_name,
+	                        username,
 	                        AUDIT_NO_ID,
 	                        hostname,
 	                        NULL,    /* addr */
@@ -1121,31 +1127,38 @@ int main (int argc, char **argv)
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
 	if (getdef_bool ("LASTLOG_ENAB")) {	/* give last login and log this one */
-		dolastlog (&lastlog, &pwent, tty, hostname);
+		dolastlog (&lastlog, pwd, tty, hostname);
 	}
 #endif
 
 #ifndef USE_PAM			/* PAM handles this as well */
 	/*
 	 * Have to do this while we still have root privileges, otherwise we
-	 * don't have access to /etc/shadow. expire() closes password files,
-	 * and changes to the user in the child before executing the passwd
-	 * program.  --marekm
+	 * don't have access to /etc/shadow.
 	 */
-	if (spwd) {		/* check for age of password */
-		if (expire (&pwent, spwd)) {
-			/* !USE_PAM, no need for xgetpwnam */
-			pwd = getpwnam (username);
-			/* !USE_PAM, no need for xgetspnam */
-			spwd = getspnam (username);
-			if (pwd) {
-				pwent = *pwd;
+	if (NULL != spwd) {		/* check for age of password */
+		if (expire (pwd, spwd)) {
+			/* The user updated her password, get the new
+			 * entries.
+			 * Use the x variants because we need to keep the
+			 * entry for a long time, and there might be other
+			 * getxxyy in between.
+			 */
+			passwd_free (pwd);
+			pwd = xgetpwnam (username);
+			if (NULL == pwd) {
+				SYSLOG ((LOG_ERR,
+				         "cannot find user %s after update of expired password",
+				         username));
+				exit (1);
 			}
+			shadow_free (spwd);
+			spwd = xgetspnam (username);
 		}
 	}
-	setup_limits (&pwent);	/* nice, ulimit etc. */
+	setup_limits (pwd);	/* nice, ulimit etc. */
 #endif				/* ! USE_PAM */
-	chown_tty (&pwent);
+	chown_tty (pwd);
 
 #ifdef USE_PAM
 	/*
@@ -1180,7 +1193,8 @@ int main (int argc, char **argv)
 	}
 
 
-	/*
+	/* The pwd and spwd entries for the user have been copied.
+	 *
 	 * Close all the files so that unauthorized access won't occur.
 	 */
 	endpwent ();		/* stop access to password file */
@@ -1192,18 +1206,18 @@ int main (int argc, char **argv)
 
 	/* Drop root privileges */
 #ifndef USE_PAM
-	if (setup_uid_gid (&pwent, is_console))
+	if (setup_uid_gid (pwd, is_console))
 #else
 	/* The group privileges were already dropped.
 	 * See setup_groups() above.
 	 */
-	if (change_uid (&pwent))
+	if (change_uid (pwd))
 #endif
 	{
 		exit (1);
 	}
 
-	setup_env (&pwent);	/* set env vars, cd to the home dir */
+	setup_env (pwd);	/* set env vars, cd to the home dir */
 
 #ifdef USE_PAM
 	{
@@ -1280,7 +1294,7 @@ int main (int argc, char **argv)
 	(void) signal (SIGHUP, SIG_DFL);	/* added this.  --marekm */
 	(void) signal (SIGINT, SIG_DFL);	/* default interrupt signal */
 
-	if (0 == pwent.pw_uid) {
+	if (0 == pwd->pw_uid) {
 		SYSLOG ((LOG_NOTICE, "ROOT LOGIN %s", fromhost));
 	} else if (getdef_bool ("LOG_OK_LOGINS")) {
 		SYSLOG ((LOG_INFO, "'%s' logged in %s", username, fromhost));
@@ -1288,10 +1302,10 @@ int main (int argc, char **argv)
 	closelog ();
 	tmp = getdef_str ("FAKE_SHELL");
 	if (NULL != tmp) {
-		err = shell (tmp, pwent.pw_shell, newenvp); /* fake shell */
+		err = shell (tmp, pwd->pw_shell, newenvp); /* fake shell */
 	} else {
 		/* exec the shell finally */
-		err = shell (pwent.pw_shell, (char *) 0, newenvp);
+		err = shell (pwd->pw_shell, (char *) 0, newenvp);
 	}
 	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	/* NOT REACHED */

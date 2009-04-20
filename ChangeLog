@@ -1,5 +1,22 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Get rid of pwent. pwd is sufficient as long as it
+	is always coming from xgetpwnam. There is no need to copy pwd to
+	pwent, this was not a good idea anyway as the strings from pwd
+	were not duplicated.
+	* src/login.c: Always free the pwd and spwd structure when we
+	retrieve a new one. This will clear the password of the previous
+	user from the memory.
+	* src/login.c: user_passwd is used to keep point to the password
+	of the user being authenticated.
+	* src/login.c: (non PAM) Fail if the user's entry cannot be found
+	after the user updated her password (if expire() requested an
+	update).
+	* src/login.c: If the user does not exist on the system, there is
+	no need to build a pwd structure (with shell).
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: ttytype already checks for TTYTYPE_FILE and TERM.
 	Just call ttytype.
 
