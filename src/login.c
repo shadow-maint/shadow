@@ -849,6 +849,11 @@ int main (int argc, char **argv)
 	}
 	PAM_FAIL_CHECK;
 
+	/* Open the PAM session */
+	get_pam_user (&pam_user);
+	retcode = pam_open_session (pamh, hushed (pam_user) ? PAM_SILENT : 0);
+	PAM_FAIL_CHECK;
+
 	/* Grab the user information out of the password file for future usage
 	 * First get the username that we are actually using, though.
 	 *
@@ -880,9 +885,9 @@ int main (int argc, char **argv)
 
 	retcode = pam_setcred (pamh, PAM_ESTABLISH_CRED);
 	PAM_FAIL_CHECK;
-
-	retcode = pam_open_session (pamh, hushed (username) ? PAM_SILENT : 0);
-	PAM_FAIL_CHECK;
+	/* NOTE: If pam_setcred changes PAM_USER, this will not be taken
+	 * into account.
+	 */
 
 #else				/* ! USE_PAM */
 	while (true) {	/* repeatedly get login/password pairs */

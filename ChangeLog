@@ -1,5 +1,10 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Open the PAM session before pam_setcred and before
+	initgroups. This is more consistent with rfc86.0.
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Added helper functions get_pam_user() and
 	get_failent_user().
 
