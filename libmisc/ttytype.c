@@ -50,12 +50,16 @@ void ttytype (const char *line)
 	char type[BUFSIZ];
 	char port[BUFSIZ];
 
-	if (getenv ("TERM"))
+	if (getenv ("TERM") != NULL) {
 		return;
-	if ((typefile = getdef_str ("TTYTYPE_FILE")) == NULL)
+	}
+	typefile = getdef_str ("TTYTYPE_FILE");
+	if (NULL == typefile) {
 		return;
-	if (access (typefile, F_OK) != 0)
+	}
+	if (access (typefile, F_OK) != 0) {
 		return;
+	}
 
 	fp = fopen (typefile, "r");
 	if (NULL == fp) {

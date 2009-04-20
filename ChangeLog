@@ -1,5 +1,10 @@
 2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/ttytype.c: Add brackets and parenthesis.
+	* libmisc/ttytype.c: Avoid assignments in comparisons.
+
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/pwio.c, lib/shadowio.c, lib/groupio.c, lib/sgroupio.c: Fill
 	the password fields with zeros before they are freed.
 
