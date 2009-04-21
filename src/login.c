@@ -510,6 +510,11 @@ int main (int argc, char **argv)
 	amroot = (getuid () == 0);
 	Prog = Basename (argv[0]);
 
+	if (geteuid() != 0) {
+		fprintf (stderr, _("%s: Cannot possibly work without effective root\n"), Prog);
+		exit (1);
+	}
+
 	process_flags (argc, argv);
 
 	if ((isatty (0) == 0) || (isatty (1) == 0) || (isatty (2) == 0)) {

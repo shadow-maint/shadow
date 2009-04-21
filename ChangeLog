@@ -1,5 +1,11 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Check if login is run with effective root
+	privileges. This should be more helpful to users than a failure to
+	find an utmp entry or failure to access a file.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c: Reworked. Get rid of Linux specific stuff. Get rid
 	of global utent/utxent variables. Only reuse the ut_id and maybe
 	the ut_host fields from utmp.
