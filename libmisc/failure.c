@@ -282,7 +282,7 @@ void failprint (const struct faillog *fail)
 }
 
 /*
- * failtmp - update the cummulative failure log
+ * failtmp - update the cumulative failure log
  *
  *	failtmp updates the (struct utmp) formatted failure log which
  *	maintains a record of all login failures.
