@@ -41,7 +41,7 @@ AC_CHECK_HEADER([shadow.h],,[AC_MSG_ERROR([You need a libc with shadow.h])])
 AC_CHECK_FUNCS(l64a fchmod fchown fsync futimes getgroups gethostname getspnam \
 	gettimeofday getusershell getutent initgroups lchown lckpwdf lstat \
 	lutimes memcpy memset setgroups sigaction strchr updwtmp updwtmpx innetgr \
-	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r)
+	getpwnam_r getpwuid_r getgrnam_r getgrgid_r getspnam_r getaddrinfo)
 AC_SYS_LARGEFILE
 
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -59,37 +59,31 @@ AC_CHECK_MEMBERS([struct stat.st_mtimensec])
 AC_HEADER_TIME
 AC_STRUCT_TM
 
-if test "$ac_cv_header_utmp_h" = "yes"; then
-	AC_CACHE_CHECK(for ut_host in struct utmp,
-		ac_cv_struct_utmp_ut_host,
-		AC_COMPILE_IFELSE(
-			[AC_LANG_PROGRAM([#include <utmp.h>],
-				[struct utmp ut; char *cp = ut.ut_host;]
-			)],
-			[ac_cv_struct_utmp_ut_host=yes],
-			[ac_cv_struct_utmp_ut_host=no]
-		)
-	)
-
-	if test "$ac_cv_struct_utmp_ut_host" = "yes"; then
-		AC_DEFINE(UT_HOST, 1, [Define if you have ut_host in struct utmp.])
-	fi
-
-	AC_CACHE_CHECK(for ut_user in struct utmp,
-		ac_cv_struct_utmp_ut_user,
-		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([#include <utmp.h>],
-				[struct utmp ut; char *cp = ut.ut_user;]
-			)],
-			[ac_cv_struct_utmp_ut_user=yes],
-			[ac_cv_struct_utmp_ut_user=no]
-		)
-	)
-
-	if test "$ac_cv_struct_utmp_ut_user" = "no"; then
-		AC_DEFINE(ut_user, ut_name,
-			[Define to ut_name if struct utmp has ut_name (not ut_user).])
-	fi
+AC_CHECK_MEMBERS([struct utmp.ut_type,
+                  struct utmp.ut_id,
+                  struct utmp.ut_name,
+                  struct utmp.ut_user,
+                  struct utmp.ut_host,
+                  struct utmp.ut_syslen,
+                  struct utmp.ut_addr,
+                  struct utmp.ut_addr_v6,
+                  struct utmp.ut_time,
+                  struct utmp.ut_xtime,
+                  struct utmp.ut_tv],,,[[#include <utmp.h>]])
+dnl There are dependencies:
+dnl If UTMPX has to be used, the utmp structure shall have a ut_id field.
+if test "$ac_cv_header_utmpx_h" = "yes" &&
+   test "$ac_cv_member_struct_utmp_ut_id" != "yes"; then
+	AC_MSG_ERROR(Systems with UTMPX and no ut_id field in the utmp structure are not supported)
 fi
+
+AC_CHECK_MEMBERS([struct utmpx.ut_name,
+                  struct utmpx.ut_host,
+                  struct utmpx.ut_syslen,
+                  struct utmpx.ut_addr,
+                  struct utmpx.ut_addr_v6,
+                  struct utmpx.ut_time,
+                  struct utmpx.ut_xtime],,,[[#include <utmpx.h>]])
 
 if test "$ac_cv_header_lastlog_h" = "yes"; then
 	AC_CACHE_CHECK(for ll_host in struct lastlog,

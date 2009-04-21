@@ -345,8 +345,19 @@ extern char *tz (const char *);
 extern int set_filesize_limit (int blocks);
 
 /* utmp.c */
-extern void checkutmp (bool picky);
-extern int setutmp (const char *, const char *, const char *);
+extern struct utmp *get_current_utmp (void);
+extern struct utmp *prepare_utmp (const char *name,
+                                  const char *line,
+                                  const char *host,
+                                  struct utmp *ut);
+extern int setutmp (struct utmp *ut);
+#ifdef HAVE_UTMPX_H
+extern struct utmpx *prepare_utmpx (const char *name,
+                                    const char *line,
+                                    const char *host,
+                                    struct utmp *ut);
+extern int setutmpx (struct utmpx *utx);
+#endif
 
 /* valid.c */
 extern bool valid (const char *, const struct passwd *);

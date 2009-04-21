@@ -85,14 +85,6 @@ static const char *hostname = "";
 static char *username = NULL;
 static int reason = PW_LOGIN;
 
-#if HAVE_UTMPX_H
-extern struct utmpx utxent;
-struct utmpx failent;
-#else
-struct utmp failent;
-#endif
-extern struct utmp utent;
-
 struct lastlog lastlog;
 static bool pflg = false;
 static bool fflg = false;
@@ -128,7 +120,7 @@ extern char **environ;
 static void usage (void);
 static void setup_tty (void);
 static void process_flags (int, char *const *);
-static const char *get_failent_user (const char *user)
+static const char *get_failent_user (const char *user);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -494,6 +486,7 @@ int main (int argc, char **argv)
 	static char temp_shell[] = "/bin/sh";
 #endif
 	const char *failent_user;
+	struct utmp *utent;
 
 #ifdef USE_PAM
 	int retcode;
@@ -523,6 +516,7 @@ int main (int argc, char **argv)
 		exit (1);	/* must be a terminal */
 	}
 
+	utent = get_current_utmp ();
 	/*
 	 * Be picky if run by normal users (possible if installed setuid
 	 * root), but not if run by root. This way it still allows logins
@@ -530,7 +524,10 @@ int main (int argc, char **argv)
 	 * but users must "exec login" which will use the existing utmp
 	 * entry (will not overwrite remote hostname).  --marekm
 	 */
-	checkutmp (!amroot);
+	if (!amroot && (NULL == utent)) {
+		(void) puts (_("No utmp entry.  You must exec \"login\" from the lowest level \"sh\""));
+		exit (1);
+	}
 
 	tmptty = ttyname (0);
 	if (NULL == tmptty) {
@@ -543,44 +540,12 @@ int main (int argc, char **argv)
 #endif
 
 	if (rflg || hflg) {
-#ifdef UT_ADDR
-		struct hostent *he;
-
-		/*
-		 * Fill in the ut_addr field (remote login IP address). XXX
-		 * - login from util-linux does it, but this is not the
-		 * right place to do it. The program that starts login
-		 * (telnetd, rlogind) knows the IP address, so it should
-		 * create the utmp entry and fill in ut_addr. 
-		 * gethostbyname() is not 100% reliable (the remote host may
-		 * be unknown, etc.).  --marekm
-		 */
-		he = gethostbyname (hostname);
-		if (NULL != he) {
-			utent.ut_addr = *((int32_t *) (he->h_addr_list[0]));
-		}
-#endif
-#ifdef UT_HOST
-		strncpy (utent.ut_host, hostname, sizeof (utent.ut_host));
-#endif
-#if HAVE_UTMPX_H
-		strncpy (utxent.ut_host, hostname, sizeof (utxent.ut_host));
-#endif
 		/*
 		 * Add remote hostname to the environment. I think
 		 * (not sure) I saw it once on Irix.  --marekm
 		 */
 		addenv ("REMOTEHOST", hostname);
 	}
-#ifdef __linux__
-	/*
-	 * workaround for init/getty leaving junk in ut_host at least in
-	 * some version of RedHat.  --marekm
-	 */
-	else if (amroot) {
-		memzero (utent.ut_host, sizeof utent.ut_host);
-	}
-#endif
 	if (fflg) {
 		preauth_flag = true;
 	}
@@ -656,18 +621,11 @@ int main (int argc, char **argv)
 	if (rflg || hflg) {
 		cp = hostname;
 	} else {
-		/* FIXME: What is the priority:
-		 *        UT_HOST or HAVE_UTMPX_H? */
-#ifdef	UT_HOST
-		if ('\0' != utent.ut_host[0]) {
-			cp = utent.ut_host;
+#ifdef	HAVE_STRUCT_UTMP_UT_HOST
+		if ('\0' != utent->ut_host[0]) {
+			cp = utent->ut_host;
 		} else
-#endif
-#if HAVE_UTMPX_H
-		if ('\0' != utxent.ut_host[0]) {
-			cp = utxent.ut_host;
-		} else
-#endif
+#endif				/* HAVE_STRUCT_UTMP_UT_HOST */
 		{
 			cp = "";
 		}
@@ -888,17 +846,17 @@ int main (int argc, char **argv)
 	while (true) {	/* repeatedly get login/password pairs */
 		/* user_passwd is always a pointer to this constant string
 		 * or a passwd or shadow password that will be memzero by
-		 * passwd_free / shadow_free.
+		 * pw_free / spw_free.
 		 * Do not free() user_passwd. */
 		const char *user_passwd = "!";
 
 		/* Do some cleanup to avoid keeping entries we do not need
 		 * anymore. */
 		if (NULL != pwd) {
-			passwd_free (pwd);
+			pw_free (pwd);
 		}
 		if (NULL != spwd) {
-			shadow_free (spwd);
+			spw_free (spwd);
 			spwd = NULL;
 		}
 
@@ -1007,26 +965,21 @@ int main (int argc, char **argv)
 			failure (pwd->pw_uid, tty, &faillog);
 		}
 		if (getdef_str ("FTMP_FILE") != NULL) {
-#if HAVE_UTMPX_H
-			failent = utxent;
-			if (sizeof (failent.ut_tv) == sizeof (struct timeval)) {
-				gettimeofday ((struct timeval *) &failent.ut_tv,
-				              NULL);
-			} else {
-				struct timeval tv;
-
-				gettimeofday (&tv, NULL);
-				failent.ut_tv.tv_sec = tv.tv_sec;
-				failent.ut_tv.tv_usec = tv.tv_usec;
-			}
+#ifdef HAVE_UTMPX_H
+			struct utmpx *failent =
+				prepare_utmpx (failent_user,
+				               tty,
+			/* FIXME: or fromhost? */hostname,
+				               utent);
 #else
-			failent = utent;
-			failent.ut_time = time (NULL);
+			struct utmp *failent =
+				prepare_utmp (failent_user,
+				              tty,
+				              hostname,
+				              utent);
 #endif
-			strncpy (failent.ut_user, failent_user,
-			         sizeof (failent.ut_user));
-			failent.ut_type = USER_PROCESS;
-			failtmp (failent_user, &failent);
+			failtmp (failent_user, failent);
+			free (failent);
 		}
 
 		retries--;
@@ -1096,7 +1049,15 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	setutmp (username, tty, hostname);	/* make entry in utmp & wtmp files */
+	struct utmp *ut = prepare_utmp (username, tty, hostname, utent);
+	(void) setutmp (ut);	/* make entry in the utmp & wtmp files */
+	free (ut);
+#ifdef HAVE_UTMPX_H
+	struct utmpx *utx = prepare_utmpx (username, tty, hostname, utent);
+	(void) setutmpx (utx);	/* make entry in the utmpx & wtmpx files */
+	free (utx);
+#endif				/* HAVE_UTMPX_H */
+
 	if (pwd->pw_shell[0] == '*') {	/* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */
 		subsystem (pwd);	/* figure out what to execute */
@@ -1144,7 +1105,7 @@ int main (int argc, char **argv)
 			 * entry for a long time, and there might be other
 			 * getxxyy in between.
 			 */
-			passwd_free (pwd);
+			pw_free (pwd);
 			pwd = xgetpwnam (username);
 			if (NULL == pwd) {
 				SYSLOG ((LOG_ERR,
@@ -1152,7 +1113,7 @@ int main (int argc, char **argv)
 				         username));
 				exit (1);
 			}
-			shadow_free (spwd);
+			spw_free (spwd);
 			spwd = xgetspnam (username);
 		}
 	}
