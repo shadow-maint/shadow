@@ -1,5 +1,10 @@
 2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* etc/pam.d/Makefile.am: Distribute all pam.d files, even if
+	ACCT_TOOLS_SETUID is not enabled.
+
+2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/shadowmem.c: Added spw_free().
 	* lib/shadowio.c: Use spw_free() for shadow_free().
 	* lib/groupmem.c: Added gr_free().

@@ -9,8 +9,7 @@ pamd_files = \
 	passwd \
 	su
 
-if ACCT_TOOLS_SETUID
-pamd_files += \
+pamd_acct_tools_files = \
 	chage \
 	chgpasswd \
 	chpasswd \
@@ -21,11 +20,13 @@ pamd_files += \
 	useradd \
 	userdel \
 	usermod
-endif
 
 if USE_PAM
 pamddir = $(sysconfdir)/pam.d
 pamd_DATA = $(pamd_files)
+if ACCT_TOOLS_SETUID
+pamd_DATA += $(pamd_acct_tools_files)
+endif
 endif
 
-EXTRA_DIST = $(pamd_files)
+EXTRA_DIST = $(pamd_files) $(pamd_acct_tools_files)
