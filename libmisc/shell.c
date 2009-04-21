@@ -94,14 +94,15 @@ int shell (const char *file, const char *arg, char *const envp[])
 	if (err == ENOEXEC) {
 		FILE *fp;
 
-		if ((fp = fopen (file, "r"))) {
+		fp = fopen (file, "r");
+		if (NULL != fp) {
 			if (getc (fp) == '#' && getc (fp) == '!') {
-				fclose (fp);
+				(void) fclose (fp);
 				execle ("/bin/sh", "sh",
-					file, (char *) 0, envp);
+				        file, (char *) 0, envp);
 				err = errno;
 			} else {
-				fclose (fp);
+				(void) fclose (fp);
 			}
 		}
 	}

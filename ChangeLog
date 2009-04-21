@@ -1,4 +1,10 @@
-2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/shell.c: Add brackets and parenthesis.
+	* libmisc/shell.c: Avoid assignments in comparisons.
+	* libmisc/shell.c: Re-indent.
+
+2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* lib/defines.h: Added MIN and MAX macros.
 	* libmisc/salt.c: Removed MIN and MAX macros.
