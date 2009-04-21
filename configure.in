@@ -450,6 +450,8 @@ if test "$enable_acct_tools_setuid" != "no"; then
 		else
 			enable_acct_tools_setuid="no"
 		fi
+	else
+		enable_acct_tools_setuid="yes"
 	fi
 	if test "$enable_acct_tools_setuid" = "yes"; then
 		AC_DEFINE(ACCT_TOOLS_SETUID,

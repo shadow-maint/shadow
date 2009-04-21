@@ -1,5 +1,11 @@
 2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* NEWS, configure.in: Enable --enable-account-tools-setuid by
+	default for PAM builds, as it used to be before the introduction
+	of this option.
+
+2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* etc/pam.d/Makefile.am: Distribute all pam.d files, even if
 	ACCT_TOOLS_SETUID is not enabled.
 
