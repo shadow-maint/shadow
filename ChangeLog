@@ -1,3 +1,27 @@
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/utmp.c: Reworked. Get rid of Linux specific stuff. Get rid
+	of global utent/utxent variables. Only reuse the ut_id and maybe
+	the ut_host fields from utmp.
+	* lib/prototypes.h, libmisc/utmp.c: Removed checkutmp(),
+	setutmp(), setutmpx().
+	* lib/prototypes.h, libmisc/utmp.c: Added get_current_utmp(),
+	prepare_utmp(), prepare_utmpx(), setutmp(), setutmpx().
+	* libmisc/utmp.c (is_my_tty): Only compare the name of the utmp
+	line with ttyname(). (No stat of the two terminals to compare the
+	devices).
+	* libmisc/utmp.c: Use getaddrinfo() to get the address of the
+	host.
+	* configure.in: Check for getaddrinfo().
+	* configure.in: Use AC_CHECK_MEMBERS to check for the existence of
+	fields in the utmp/utmpx structures.
+	* configure.in: Reject systems with utmpx support but no ut_id
+	field in utmp. This could be fixed later if needed.
+	* src/login.c: Use the new utmp functions. This also simplifies
+	the failtmp() handling.
+	* src/login.c: passwd_free() renamed to pw_free() and
+	shadow_free() renamed to spw_free()
+
 2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
 
 	* NEWS, configure.in: Enable --enable-account-tools-setuid by
