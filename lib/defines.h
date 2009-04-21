@@ -348,4 +348,12 @@ extern char *strerror ();
 # define unused
 #endif
 
+/* ! Arguments evaluated twice ! */
+#ifndef MIN
+#define MIN(a,b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(x,y) (((x) > (y)) ? (x) : (y))
+#endif
+
 #endif				/* _DEFINES_H_ */

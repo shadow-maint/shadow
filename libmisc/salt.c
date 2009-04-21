@@ -94,10 +94,6 @@ static size_t SHA_salt_size (void)
 	return (size_t) (8 + rand_size);
 }
 
-/* ! Arguments evaluated twice ! */
-#define MAX(x,y) ((x) > (y) ? (x) : (y))
-#define MIN(x,y) ((x) < (y) ? (x) : (y))
-
 /* Default number of rounds if not explicitly specified.  */
 #define ROUNDS_DEFAULT 5000
 /* Minimum number of rounds.  */

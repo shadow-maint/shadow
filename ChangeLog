@@ -1,3 +1,8 @@
+2009-04-20  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/defines.h: Added MIN and MAX macros.
+	* libmisc/salt.c: Removed MIN and MAX macros.
+
 2009-04-20  Sven Joachim  <svenjoac@gmx.de>
 
 	* NEWS, src/lastlog.c: Fix regression causing empty reports.
