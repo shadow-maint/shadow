@@ -36,8 +36,8 @@
 #ident "$Id$"
 
 #include <stdio.h>
-#include "prototypes.h"
 #include "defines.h"
+#include "prototypes.h"
 #include "pwio.h"
 
 struct passwd *__pw_dup (const struct passwd *pwent)
@@ -71,5 +71,16 @@ struct passwd *__pw_dup (const struct passwd *pwent)
 	}
 
 	return pw;
+}
+
+void pw_free (struct passwd *pwent)
+{
+	free (pwent->pw_name);
+	memzero (pwent->pw_passwd, strlen (pwent->pw_passwd));
+	free (pwent->pw_passwd);
+	free (pwent->pw_gecos);
+	free (pwent->pw_dir);
+	free (pwent->pw_shell);
+	free (pwent);
 }
 

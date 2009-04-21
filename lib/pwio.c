@@ -53,13 +53,7 @@ static void passwd_free (void *ent)
 {
 	struct passwd *pw = ent;
 
-	free (pw->pw_name);
-	memzero (pw->pw_passwd, strlen (pw->pw_passwd));
-	free (pw->pw_passwd);
-	free (pw->pw_gecos);
-	free (pw->pw_dir);
-	free (pw->pw_shell);
-	free (pw);
+	pw_free (pw);
 }
 
 static const char *passwd_getname (const void *ent)

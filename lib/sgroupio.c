@@ -101,18 +101,23 @@ static void gshadow_free (void *ent)
 {
 	struct sgrp *sg = ent;
 
-	free (sg->sg_name);
-	memzero (sg->sg_passwd, strlen (sg->sg_passwd));
-	free (sg->sg_passwd);
-	while (NULL != *(sg->sg_adm)) {
-		free (*(sg->sg_adm));
-		sg->sg_adm++;
+	sgr_free (sg);
+}
+
+void sgr_free (struct sgrp *sgent)
+{
+	free (sgent->sg_name);
+	memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
+	free (sgent->sg_passwd);
+	while (NULL != *(sgent->sg_adm)) {
+		free (*(sgent->sg_adm));
+		sgent->sg_adm++;
 	}
-	while (NULL != *(sg->sg_mem)) {
-		free (*(sg->sg_mem));
-		sg->sg_mem++;
+	while (NULL != *(sgent->sg_mem)) {
+		free (*(sgent->sg_mem));
+		sgent->sg_mem++;
 	}
-	free (sg);
+	free (sgent);
 }
 
 static const char *gshadow_getname (const void *ent)

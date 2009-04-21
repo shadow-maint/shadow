@@ -173,6 +173,7 @@ extern void __gr_set_changed (void);
 
 /* groupmem.c */
 extern struct group *__gr_dup (const struct group *grent);
+extern void gr_free (struct group *grent);
 
 /* hushed.c */
 extern bool hushed (const char *username);
@@ -258,6 +259,7 @@ extern struct commonio_entry *__pw_get_head (void);
 
 /* pwmem.c */
 extern struct passwd *__pw_dup (const struct passwd *pwent);
+extern void pw_free (struct passwd *pwent);
 
 /* rlogin.c */
 extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
@@ -295,6 +297,7 @@ extern struct spwd *sgetspent (const char *string)
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
 extern struct sgrp *__sgr_dup (const struct sgrp *sgent);
+extern void sgr_free (struct sgrp *sgent);
 extern struct commonio_entry *__sgr_get_head (void);
 extern void __sgr_set_changed (void);
 
@@ -304,6 +307,7 @@ extern void __spw_del_entry (const struct commonio_entry *ent);
 
 /* shadowmem.c */
 extern struct spwd *__spw_dup (const struct spwd *spent);
+extern void spw_free (struct spwd *spent);
 
 /* shell.c */
 extern int shell (const char *, const char *, char *const *);

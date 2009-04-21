@@ -1,5 +1,19 @@
 2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/shadowmem.c: Added spw_free().
+	* lib/shadowio.c: Use spw_free() for shadow_free().
+	* lib/groupmem.c: Added gr_free().
+	* lib/groupio.c: Use gr_free() for group_free().
+	* lib/pwmem.c: Include define.h before prototypes.h
+	* lib/pwmem.c: Added pw_free().
+	* lib/pwio.c: Use pw_free() for passwd_free().
+	* lib/sgroupio.c: Added sgr_free().
+	* lib/sgroupio.c: Use sgr_free() for gshadow_free().
+	* lib/prototypes.h: Added gr_free(), pw_free(), sgr_free(),
+	spw_free().
+
+2009-04-21  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/shell.c: Add brackets and parenthesis.
 	* libmisc/shell.c: Avoid assignments in comparisons.
 	* libmisc/shell.c: Re-indent.

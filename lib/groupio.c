@@ -59,14 +59,7 @@ static void group_free (void *ent)
 {
 	struct group *gr = ent;
 
-	free (gr->gr_name);
-	memzero (gr->gr_passwd, strlen (gr->gr_passwd));
-	free (gr->gr_passwd);
-	while (*(gr->gr_mem)) {
-		free (*(gr->gr_mem));
-		gr->gr_mem++;
-	}
-	free (gr);
+	gr_free (gr);
 }
 
 static const char *group_getname (const void *ent)

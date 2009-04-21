@@ -62,3 +62,11 @@ struct spwd *__spw_dup (const struct spwd *spent)
 	return sp;
 }
 
+void spw_free (struct spwd *spent)
+{
+	free (spent->sp_namp);
+	memzero (spent->sp_pwdp, strlen (spent->sp_pwdp));
+	free (spent->sp_pwdp);
+	free (spent);
+}
+

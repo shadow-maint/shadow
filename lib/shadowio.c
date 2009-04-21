@@ -53,10 +53,7 @@ static void shadow_free (void *ent)
 {
 	struct spwd *sp = ent;
 
-	free (sp->sp_namp);
-	memzero (sp->sp_pwdp, strlen (sp->sp_pwdp));
-	free (sp->sp_pwdp);
-	free (sp);
+	spw_free (sp);
 }
 
 static const char *shadow_getname (const void *ent)

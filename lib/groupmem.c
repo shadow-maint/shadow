@@ -75,3 +75,15 @@ struct group *__gr_dup (const struct group *grent)
 	return gr;
 }
 
+void gr_free (struct group *grent)
+{
+	free (grent->gr_name);
+	memzero (grent->gr_passwd, strlen (grent->gr_passwd));
+	free (grent->gr_passwd);
+	while (*(grent->gr_mem)) {
+		free (*(grent->gr_mem));
+		grent->gr_mem++;
+	}
+	free (grent);
+}
+
