@@ -49,7 +49,7 @@
  */
 bool hushed (const char *username)
 {
-	const struct passwd *pw;
+	struct passwd *pw;
 	char *hushfile;
 	char buf[BUFSIZ];
 	bool found;
@@ -65,7 +65,7 @@ bool hushed (const char *username)
 		return false;
 	}
 
-	pw = getspnam (username);
+	pw = getpwnam (username);
 	if (NULL == pw) {
 		return false;
 	}
