@@ -170,48 +170,48 @@ static void setup_tty (void)
 
 	if (GTTY (0, &termio) == 0) {	/* get terminal characteristics */
 
-	/*
-	 * Add your favorite terminal modes here ...
-	 */
-	termio.c_lflag |= ISIG | ICANON | ECHO | ECHOE;
-	termio.c_iflag |= ICRNL;
+		/*
+		 * Add your favorite terminal modes here ...
+		 */
+		termio.c_lflag |= ISIG | ICANON | ECHO | ECHOE;
+		termio.c_iflag |= ICRNL;
 
 #if defined(ECHOKE) && defined(ECHOCTL)
-	termio.c_lflag |= ECHOKE | ECHOCTL;
+		termio.c_lflag |= ECHOKE | ECHOCTL;
 #endif
 #if defined(ECHOPRT) && defined(NOFLSH) && defined(TOSTOP)
-	termio.c_lflag &= ~(ECHOPRT | NOFLSH | TOSTOP);
+		termio.c_lflag &= ~(ECHOPRT | NOFLSH | TOSTOP);
 #endif
 #ifdef ONLCR
-	termio.c_oflag |= ONLCR;
+		termio.c_oflag |= ONLCR;
 #endif
 
-	/* leave these values unchanged if not specified in login.defs */
-	erasechar = getdef_num ("ERASECHAR", (int) termio.c_cc[VERASE]);
-	killchar = getdef_num ("KILLCHAR", (int) termio.c_cc[VKILL]);
-	termio.c_cc[VERASE] = (cc_t) erasechar;
-	termio.c_cc[VKILL] = (cc_t) killchar;
-	/* Make sure the values were valid.
-	 * getdef_num cannot validate this.
-	 */
-	if (erasechar != termio.c_cc[VERASE]) {
-		fprintf (stderr,
-		         _("configuration error - cannot parse %s value: '%d'"),
-		         "ERASECHAR", erasechar);
-		exit (1);
-	}
-	if (killchar != termio.c_cc[VKILL]) {
-		fprintf (stderr,
-		         _("configuration error - cannot parse %s value: '%d'"),
-		         "KILLCHAR", killchar);
-		exit (1);
-	}
+		/* leave these values unchanged if not specified in login.defs */
+		erasechar = getdef_num ("ERASECHAR", (int) termio.c_cc[VERASE]);
+		killchar = getdef_num ("KILLCHAR", (int) termio.c_cc[VKILL]);
+		termio.c_cc[VERASE] = (cc_t) erasechar;
+		termio.c_cc[VKILL] = (cc_t) killchar;
+		/* Make sure the values were valid.
+		 * getdef_num cannot validate this.
+		 */
+		if (erasechar != termio.c_cc[VERASE]) {
+			fprintf (stderr,
+			         _("configuration error - cannot parse %s value: '%d'"),
+			         "ERASECHAR", erasechar);
+			exit (1);
+		}
+		if (killchar != termio.c_cc[VKILL]) {
+			fprintf (stderr,
+			         _("configuration error - cannot parse %s value: '%d'"),
+			         "KILLCHAR", killchar);
+			exit (1);
+		}
 
-	/*
-	 * ttymon invocation prefers this, but these settings won't come into
-	 * effect after the first username login 
-	 */
-	(void) STTY (0, &termio);
+		/*
+		 * ttymon invocation prefers this, but these settings
+		 * won't come into effect after the first username login 
+		 */
+		(void) STTY (0, &termio);
 	}
 }
 
