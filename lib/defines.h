@@ -23,7 +23,15 @@ typedef unsigned char _Bool;
 #define ISDIGIT_LOCALE(c) (IN_CTYPE_DOMAIN (c) && isdigit (c))
 
 /* Take care of NLS matters.  */
-
+#ifdef S_SPLINT_S
+extern char *setlocale(int categorie, const char *locale);
+# define LC_ALL		(6)
+extern char * bindtextdomain (const char * domainname, const char * dirname);
+extern char * textdomain (const char * domainname);
+# define _(Text) Text
+# define ngettext(Msgid1, Msgid2, N) \
+    ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
+#else
 #ifdef HAVE_LOCALE_H
 # include <locale.h>
 #else
@@ -48,6 +56,7 @@ typedef unsigned char _Bool;
 # define _(Text) Text
 # define ngettext(Msgid1, Msgid2, N) \
     ((N) == 1 ? (const char *) (Msgid1) : (const char *) (Msgid2))
+#endif
 #endif
 
 #if STDC_HEADERS
