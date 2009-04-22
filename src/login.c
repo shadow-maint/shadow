@@ -118,6 +118,10 @@ static void usage (void);
 static void setup_tty (void);
 static void process_flags (int, char *const *);
 static const char *get_failent_user (const char *user);
+static void update_utmp (const char *username,
+                         const char *tty,
+                         const char *hostname,
+                         const struct utmp *utent);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -436,6 +440,32 @@ static const char *get_failent_user (const char *user)
 	}
 
 	return failent_user;
+}
+
+/*
+ * update_utmp - Update or create an utmp entry in utmp, wtmp, utmpw, and
+ *               wtmpx
+ *
+ *	utent should be the utmp entry returned by get_current_utmp (or
+ *	NULL).
+ */
+static void update_utmp (const char *username,
+                         const char *tty,
+                         const char *hostname,
+                         /*@null@*/const struct utmp *utent)
+{
+	struct utmp  *ut  = prepare_utmp  (username, tty, hostname, utent);
+#ifdef HAVE_UTMPX_H
+	struct utmpx *utx = prepare_utmpx (username, tty, hostname, utent);
+#endif				/* HAVE_UTMPX_H */
+
+	(void) setutmp  (ut);	/* make entry in the utmp & wtmp files */
+	free (ut);
+
+#ifdef HAVE_UTMPX_H
+	(void) setutmpx (utx);	/* make entry in the utmpx & wtmpx files */
+	free (utx);
+#endif				/* HAVE_UTMPX_H */
 }
 
 /*
@@ -1051,14 +1081,7 @@ int main (int argc, char **argv)
 		addenv ("IFS= \t\n", NULL);	/* ... instead, set a safe IFS */
 	}
 
-	struct utmp *ut = prepare_utmp (username, tty, hostname, utent);
-	(void) setutmp (ut);	/* make entry in the utmp & wtmp files */
-	free (ut);
-#ifdef HAVE_UTMPX_H
-	struct utmpx *utx = prepare_utmpx (username, tty, hostname, utent);
-	(void) setutmpx (utx);	/* make entry in the utmpx & wtmpx files */
-	free (utx);
-#endif				/* HAVE_UTMPX_H */
+	update_utmp (username, tty, hostname, utent);
 
 	if (pwd->pw_shell[0] == '*') {	/* subsystem root */
 		pwd->pw_shell++;	/* skip the '*' */

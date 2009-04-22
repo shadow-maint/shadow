@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Added update_utmp() to group the prepare_utmp and
+	setutmp (and the utmpx versions).
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Do not include netdb.h. gethostbyname() is no more
 	called from within login.c. Also UT_ADDR does not exist anymore.
 
