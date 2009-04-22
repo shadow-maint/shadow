@@ -49,7 +49,7 @@ static void *passwd_dup (const void *ent)
 	return __pw_dup (pw);
 }
 
-static void passwd_free (void *ent)
+static void passwd_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct passwd *pw = ent;
 
@@ -108,7 +108,7 @@ int pw_setdbname (const char *filename)
 	return commonio_setname (&passwd_db, filename);
 }
 
-const char *pw_dbname (void)
+/*@observer@*/const char *pw_dbname (void)
 {
 	return passwd_db.filename;
 }
@@ -170,7 +170,7 @@ int pw_unlock (void)
 	return commonio_unlock (&passwd_db);
 }
 
-struct commonio_entry *__pw_get_head (void)
+/*@null@*/struct commonio_entry *__pw_get_head (void)
 {
 	return passwd_db.head;
 }

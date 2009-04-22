@@ -53,7 +53,7 @@ extern size_t newenvc;
  *	the file.  If all that fails, give up in disgust ...
  */
 
-int shell (const char *file, const char *arg, char *const envp[])
+int shell (const char *file, /*@null@*/const char *arg, char *const envp[])
 {
 	char arg0[1024];
 	int err;

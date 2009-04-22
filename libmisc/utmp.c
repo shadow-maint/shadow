@@ -98,7 +98,7 @@ static bool is_my_tty (const char *tty)
  *
  *	Return NULL if no entries exist in utmp for the current process.
  */
-/*@null@*//*@only@*/struct utmp *get_current_utmp (void)
+/*@null@*/ /*@only@*/struct utmp *get_current_utmp (void)
 {
 	struct utmp *ut;
 	struct utmp *ret = NULL;

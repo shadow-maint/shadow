@@ -97,14 +97,14 @@ static void *gshadow_dup (const void *ent)
 	return __sgr_dup (sg);
 }
 
-static void gshadow_free (void *ent)
+static void gshadow_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct sgrp *sg = ent;
 
 	sgr_free (sg);
 }
 
-void sgr_free (struct sgrp *sgent)
+void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent)
 {
 	free (sgent->sg_name);
 	memzero (sgent->sg_passwd, strlen (sgent->sg_passwd));
@@ -172,7 +172,7 @@ int sgr_setdbname (const char *filename)
 	return commonio_setname (&gshadow_db, filename);
 }
 
-const char *sgr_dbname (void)
+/*@observer@*/const char *sgr_dbname (void)
 {
 	return gshadow_db.filename;
 }
@@ -212,7 +212,7 @@ int sgr_rewind (void)
 	return commonio_rewind (&gshadow_db);
 }
 
-const struct sgrp *sgr_next (void)
+/*@null@*/const struct sgrp *sgr_next (void)
 {
 	return commonio_next (&gshadow_db);
 }
@@ -232,7 +232,7 @@ void __sgr_set_changed (void)
 	gshadow_db.changed = true;
 }
 
-struct commonio_entry *__sgr_get_head (void)
+/*@null@*/struct commonio_entry *__sgr_get_head (void)
 {
 	return gshadow_db.head;
 }

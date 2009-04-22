@@ -55,7 +55,7 @@ static void *group_dup (const void *ent)
 	return __gr_dup (gr);
 }
 
-static void group_free (void *ent)
+static void group_free (/*@out@*/ /*@only@*/void *ent)
 {
 	struct group *gr = ent;
 
@@ -125,7 +125,7 @@ int gr_setdbname (const char *filename)
 	return commonio_setname (&group_db, filename);
 }
 
-const char *gr_dbname (void)
+/*@observer@*/const char *gr_dbname (void)
 {
 	return group_db.filename;
 }
@@ -140,12 +140,12 @@ int gr_open (int mode)
 	return commonio_open (&group_db, mode);
 }
 
-const struct group *gr_locate (const char *name)
+/*@null@*/const struct group *gr_locate (const char *name)
 {
 	return commonio_locate (&group_db, name);
 }
 
-const struct group *gr_locate_gid (gid_t gid)
+/*@null@*/const struct group *gr_locate_gid (gid_t gid)
 {
 	const struct group *grp;
 
@@ -172,7 +172,7 @@ int gr_rewind (void)
 	return commonio_rewind (&group_db);
 }
 
-const struct group *gr_next (void)
+/*@null@*/const struct group *gr_next (void)
 {
 	return commonio_next (&group_db);
 }
@@ -192,7 +192,7 @@ void __gr_set_changed (void)
 	group_db.changed = true;
 }
 
-struct commonio_entry *__gr_get_head (void)
+/*@null@*/struct commonio_entry *__gr_get_head (void)
 {
 	return group_db.head;
 }

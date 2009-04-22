@@ -160,7 +160,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
  *	to expire and warns the user of the pending password expiration.
  */
 
-void agecheck (const struct spwd *sp)
+void agecheck (/*@null@*/const struct spwd *sp)
 {
 	long now = (long) time ((time_t *) 0) / SCALE;
 	long remain;

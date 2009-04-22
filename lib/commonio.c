@@ -1025,7 +1025,7 @@ int commonio_remove (struct commonio_db *db, const char *name)
  *
  *	Otherwise, it returns NULL.
  */
-const void *commonio_locate (struct commonio_db *db, const char *name)
+/*@null@*/const void *commonio_locate (struct commonio_db *db, const char *name)
 {
 	struct commonio_entry *p;
 
@@ -1062,7 +1062,7 @@ int commonio_rewind (struct commonio_db *db)
  *
  * It returns the next entry, or NULL if no other entries could be found.
  */
-const void *commonio_next (struct commonio_db *db)
+/*@null@*/const void *commonio_next (struct commonio_db *db)
 {
 	void *eptr;
 

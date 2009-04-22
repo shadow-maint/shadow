@@ -44,9 +44,9 @@
  * Linked list entry.
  */
 struct commonio_entry {
-	char *line;
-	void *eptr;		/* struct passwd, struct spwd, ... */
-	struct commonio_entry *prev, *next;
+	/*@null@*/char *line;
+	/*@null@*/void *eptr;		/* struct passwd, struct spwd, ... */
+	/*@null@*/struct commonio_entry *prev, *next;
 	bool changed:1;
 };
 
@@ -63,7 +63,7 @@ struct commonio_ops {
 	/*
 	 * free() the object including any strings pointed by it.
 	 */
-	void (*free) (void *);
+	void (*free) (/*@out@*/ /*@only@*/void *);
 
 	/*
 	 * Return the name of the object (for example, pw_name
@@ -96,8 +96,8 @@ struct commonio_ops {
 	 * is open or before it is closed.
 	 * They return 0 on failure and 1 on success.
 	 */
-	int (*open_hook) (void);
-	int (*close_hook) (void);
+	/*@null@*/int (*open_hook) (void);
+	/*@null@*/int (*close_hook) (void);
 };
 
 /*
@@ -117,7 +117,7 @@ struct commonio_db {
 	/*
 	 * Currently open file stream.
 	 */
-	FILE *fp;
+	/*@null@*/FILE *fp;
 
 #ifdef WITH_SELINUX
 	security_context_t scontext;
@@ -125,7 +125,7 @@ struct commonio_db {
 	/*
 	 * Head, tail, current position in linked list.
 	 */
-	struct commonio_entry *head, *tail, *cursor;
+	/*@null@*/struct commonio_entry *head, *tail, *cursor;
 
 	/*
 	 * Various flags.
@@ -141,11 +141,11 @@ extern bool commonio_present (const struct commonio_db *db);
 extern int commonio_lock (struct commonio_db *);
 extern int commonio_lock_nowait (struct commonio_db *);
 extern int commonio_open (struct commonio_db *, int);
-extern const void *commonio_locate (struct commonio_db *, const char *);
+extern /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
-extern const void *commonio_next (struct commonio_db *);
+extern /*@null@*/const void *commonio_next (struct commonio_db *);
 extern int commonio_close (struct commonio_db *);
 extern int commonio_unlock (struct commonio_db *);
 extern void commonio_del_entry (struct commonio_db *,

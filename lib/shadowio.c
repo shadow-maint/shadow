@@ -49,7 +49,7 @@ static void *shadow_dup (const void *ent)
 	return __spw_dup (sp);
 }
 
-static void shadow_free (void *ent)
+static void shadow_free (/*@out*//*@only@*/void *ent)
 {
 	struct spwd *sp = ent;
 
@@ -108,7 +108,7 @@ int spw_setdbname (const char *filename)
 	return commonio_setname (&shadow_db, filename);
 }
 
-const char *spw_dbname (void)
+/*@observer@*/const char *spw_dbname (void)
 {
 	return shadow_db.filename;
 }
@@ -128,7 +128,7 @@ int spw_open (int mode)
 	return commonio_open (&shadow_db, mode);
 }
 
-const struct spwd *spw_locate (const char *name)
+/*@null@*/const struct spwd *spw_locate (const char *name)
 {
 	return commonio_locate (&shadow_db, name);
 }
@@ -148,7 +148,7 @@ int spw_rewind (void)
 	return commonio_rewind (&shadow_db);
 }
 
-const struct spwd *spw_next (void)
+/*@null@*/const struct spwd *spw_next (void)
 {
 	return commonio_next (&shadow_db);
 }

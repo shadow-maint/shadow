@@ -37,11 +37,11 @@
 
 extern int sgr_close (void);
 extern bool sgr_file_present (void);
-extern const struct sgrp *sgr_locate (const char *name);
+extern /*@null@*/const struct sgrp *sgr_locate (const char *name);
 extern int sgr_lock (void);
 extern int sgr_setdbname (const char *filename);
-extern const char *sgr_dbname (void);
-extern const struct sgrp *sgr_next (void);
+extern /*@observer@*/const char *sgr_dbname (void);
+extern /*@null@*/const struct sgrp *sgr_next (void);
 extern int sgr_open (int mode);
 extern int sgr_remove (const char *name);
 extern int sgr_rewind (void);

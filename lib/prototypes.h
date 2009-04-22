@@ -65,7 +65,7 @@ extern int add_groups (const char *);
 #endif
 
 /* age.c */
-extern void agecheck (const struct spwd *);
+extern void agecheck (/*@null@*/const struct spwd *);
 extern int expire (const struct passwd *, const struct spwd *);
 extern int isexpired (const struct passwd *, const struct spwd *);
 
@@ -168,12 +168,12 @@ extern int fputsx (const char *, FILE *);
 /* groupio.c */
 extern void __gr_del_entry (const struct commonio_entry *ent);
 extern struct commonio_db *__gr_get_db (void);
-extern struct commonio_entry *__gr_get_head (void);
+extern /*@null@*/struct commonio_entry *__gr_get_head (void);
 extern void __gr_set_changed (void);
 
 /* groupmem.c */
-extern struct group *__gr_dup (const struct group *grent);
-extern void gr_free (struct group *grent);
+extern /*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent);
+extern void gr_free (/*@out@*/ /*@only@*/struct group *grent);
 
 /* hushed.c */
 extern bool hushed (const char *username);
@@ -255,11 +255,11 @@ extern void pwd_init (void);
 /* pwio.c */
 extern void __pw_del_entry (const struct commonio_entry *ent);
 extern struct commonio_db *__pw_get_db (void);
-extern struct commonio_entry *__pw_get_head (void);
+extern /*@null@*/struct commonio_entry *__pw_get_head (void);
 
 /* pwmem.c */
-extern struct passwd *__pw_dup (const struct passwd *pwent);
-extern void pw_free (struct passwd *pwent);
+extern /*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent);
+extern void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent);
 
 /* rlogin.c */
 extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
@@ -291,26 +291,26 @@ extern struct passwd *sgetpwent (const char *buf);
 
 /* sgetspent.c */
 #ifndef HAVE_SGETSPENT
-extern struct spwd *sgetspent (const char *string)
+extern struct spwd *sgetspent (const char *string);
 #endif
 
 /* sgroupio.c */
 extern void __sgr_del_entry (const struct commonio_entry *ent);
-extern struct sgrp *__sgr_dup (const struct sgrp *sgent);
-extern void sgr_free (struct sgrp *sgent);
-extern struct commonio_entry *__sgr_get_head (void);
+extern /*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent);
+extern void sgr_free (/*@out@*/ /*@only@*/struct sgrp *sgent);
+extern /*@null@*/struct commonio_entry *__sgr_get_head (void);
 extern void __sgr_set_changed (void);
 
 /* shadowio.c */
-extern struct commonio_entry *__spw_get_head (void);
+extern /*@null@*/struct commonio_entry *__spw_get_head (void);
 extern void __spw_del_entry (const struct commonio_entry *ent);
 
 /* shadowmem.c */
-extern struct spwd *__spw_dup (const struct spwd *spent);
-extern void spw_free (struct spwd *spent);
+extern /*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent);
+extern void spw_free (/*@out@*/ /*@only@*/struct spwd *spent);
 
 /* shell.c */
-extern int shell (const char *, const char *, char *const *);
+extern int shell (const char *file, /*@null@*/const char *arg, char *const envp[]);
 
 /* system.c */
 extern int safe_system (const char *command,
@@ -345,17 +345,17 @@ extern char *tz (const char *);
 extern int set_filesize_limit (int blocks);
 
 /* utmp.c */
-extern struct utmp *get_current_utmp (void);
+extern /*@null@*/struct utmp *get_current_utmp (void);
 extern struct utmp *prepare_utmp (const char *name,
                                   const char *line,
                                   const char *host,
-                                  struct utmp *ut);
+                                  /*@null@*/const struct utmp *ut);
 extern int setutmp (struct utmp *ut);
 #ifdef HAVE_UTMPX_H
 extern struct utmpx *prepare_utmpx (const char *name,
                                     const char *line,
                                     const char *host,
-                                    struct utmp *ut);
+                                    /*@null@*/const struct utmp *ut);
 extern int setutmpx (struct utmpx *utx);
 #endif
 
@@ -363,8 +363,8 @@ extern int setutmpx (struct utmpx *utx);
 extern bool valid (const char *, const struct passwd *);
 
 /* xmalloc.c */
-extern char *xmalloc (size_t);
-extern char *xstrdup (const char *);
+extern /*@maynotreturn@*/ /*@only@*/char *xmalloc (size_t);
+extern /*@maynotreturn@*/ /*@only@*/char *xstrdup (const char *);
 
 /* xgetpwnam.c */
 extern struct passwd *xgetpwnam (const char *);

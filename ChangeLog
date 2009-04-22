@@ -1,6 +1,9 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* libmisc/utmp.c: Added splint annotations.
+	* libmisc/utmp.c, libmisc/age.c, libmisc/shell.c, lib/groupio.c,
+	lib/groupio.h, lib/sgroupio.c, lib/sgroupio.h, lib/shadowio.c,
+	lib/pwio.c, lib/commonio.c, lib/shadowio.h, lib/pwio.h,
+	lib/commonio.h, lib/prototypes.h: Added splint annotations.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
