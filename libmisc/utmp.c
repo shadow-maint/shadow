@@ -198,7 +198,7 @@ struct utmp *prepare_utmp (const char *name,
 
 
 	if (   (NULL != host)
-	    && ('\0' != host)) {
+	    && ('\0' != host[0])) {
 		hostname = (char *) xmalloc (strlen (host) + 1);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
@@ -340,7 +340,7 @@ struct utmpx *prepare_utmpx (const char *name,
 
 
 	if (   (NULL != host)
-	    && ('\0' != host)) {
+	    && ('\0' != host[0])) {
 		hostname = (char *) xmalloc (strlen (host) + 1);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST

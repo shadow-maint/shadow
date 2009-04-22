@@ -1,7 +1,13 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* libmisc/utmp.c: The ut argument of prepare_utmp() might be NULL.
-	ut_id needs to be forged in that case.
+	* libmisc/utmp.c: Fix the check for empty host in prepare_utmp()
+	and prepare_utmpx().
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* libmisc/utmp.c: The ut argument of prepare_utmp() and
+	prepare_utmpx () might be NULL. ut_id needs to be forged in that
+	case.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
