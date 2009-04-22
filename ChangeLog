@@ -1,5 +1,9 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c: Use xmalloc() rather than malloc().
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c: The name returned by ttyame() needs to be copied
 	locally.
 

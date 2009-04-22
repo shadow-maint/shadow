@@ -123,7 +123,7 @@ struct utmp *get_current_utmp (void)
 	}
 
 	if (NULL != ut) {
-		ret = malloc (sizeof (*ret));
+		ret = (struct utmp *) xmalloc (sizeof (*ret));
 		memcpy (ret, ut, sizeof (*ret));
 	}
 
