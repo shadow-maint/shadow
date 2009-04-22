@@ -1,3 +1,13 @@
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* src/login.c: If we cannot get the terminal configuration, do not
+	change the terminal configuration. setup_tty() is just a best
+	effort configuration of the terminal.
+	* src/login.c: Ignore failures when setting the terminal
+	configuration.
+	* src/login.c: Fail if the ERASECHAR or KILLCHAR configurations
+	are not compatible with a cc_t type.
+
 2009-04-22  Paul Szabo  <psz@maths.usyd.edu.au>
 
 	* src/login.c: utent might be NULL after get_current_utmp().

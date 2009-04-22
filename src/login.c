@@ -165,8 +165,10 @@ static void usage (void)
 static void setup_tty (void)
 {
 	TERMIO termio;
+	int erasechar;
+	int killchar;
 
-	GTTY (0, &termio);	/* get terminal characteristics */
+	if (GTTY (0, &termio) == 0) {	/* get terminal characteristics */
 
 	/*
 	 * Add your favorite terminal modes here ...
@@ -185,14 +187,32 @@ static void setup_tty (void)
 #endif
 
 	/* leave these values unchanged if not specified in login.defs */
-	termio.c_cc[VERASE] = getdef_num ("ERASECHAR", termio.c_cc[VERASE]);
-	termio.c_cc[VKILL] = getdef_num ("KILLCHAR", termio.c_cc[VKILL]);
+	erasechar = getdef_num ("ERASECHAR", (int) termio.c_cc[VERASE]);
+	killchar = getdef_num ("KILLCHAR", (int) termio.c_cc[VKILL]);
+	termio.c_cc[VERASE] = (cc_t) erasechar;
+	termio.c_cc[VKILL] = (cc_t) killchar;
+	/* Make sure the values were valid.
+	 * getdef_num cannot validate this.
+	 */
+	if (erasechar != termio.c_cc[VERASE]) {
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%d'"),
+		         "ERASECHAR", erasechar);
+		exit (1);
+	}
+	if (killchar != termio.c_cc[VKILL]) {
+		fprintf (stderr,
+		         _("configuration error - cannot parse %s value: '%d'"),
+		         "KILLCHAR", killchar);
+		exit (1);
+	}
 
 	/*
 	 * ttymon invocation prefers this, but these settings won't come into
 	 * effect after the first username login 
 	 */
-	STTY (0, &termio);
+	(void) STTY (0, &termio);
+	}
 }
 
 
