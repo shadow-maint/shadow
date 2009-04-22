@@ -169,12 +169,14 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
  * prepare_utmp - prepare an utmp entry so that it can be logged in a
  *                utmp/wtmp file.
  *
- *	It requires an utmp entry in input (ut) to return an entry with
+ *	It accepts an utmp entry in input (ut) to return an entry with
  *	the right ut_id. This is typically an entry returned by
  *	get_current_utmp
+ *	If ut is NULL, ut_id will be forged based on the line argument.
  *
- *	The ut_host field of the input structure may also be kept, and to
- *	define the ut_addr/ut_addr_v6 fields. (if these fields exist)
+ *	The ut_host field of the input structure may also be kept, and is
+ *	used to define the ut_addr/ut_addr_v6 fields. (if these fields
+ *	exist)
  *
  *	Other fields are discarded and filed with new values (if they
  *	exist).
@@ -192,7 +194,6 @@ struct utmp *prepare_utmp (const char *name,
 
 	assert (NULL != name);
 	assert (NULL != line);
-	assert (NULL != ut);
 
 
 
@@ -201,7 +202,8 @@ struct utmp *prepare_utmp (const char *name,
 		hostname = (char *) xmalloc (strlen (host) + 1);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
-	} else if (   (NULL != ut->ut_host)
+	} else if (   (NULL != ut)
+	           && (NULL != ut->ut_host)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
 		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
@@ -225,7 +227,12 @@ struct utmp *prepare_utmp (const char *name,
 	utent->ut_pid = getpid ();
 	strncpy (utent->ut_line, line,      sizeof (utent->ut_line));
 #ifdef HAVE_STRUCT_UTMP_UT_ID
-	strncpy (utent->ut_id,   ut->ut_id, sizeof (utent->ut_id));
+	if (NULL != ut) {
+		strncpy (utent->ut_id, ut->ut_id, sizeof (utent->ut_id));
+	} else {
+		/* XXX - assumes /dev/tty?? */
+		strncpy (utent->ut_id, line + 3, sizeof (utent->ut_id));
+	}
 #endif				/* HAVE_STRUCT_UTMP_UT_ID */
 #ifdef HAVE_STRUCT_UTMP_UT_NAME
 	strncpy (utent->ut_name, name,      sizeof (utent->ut_name));
@@ -329,7 +336,6 @@ struct utmpx *prepare_utmpx (const char *name,
 
 	assert (NULL != name);
 	assert (NULL != line);
-	assert (NULL != ut);
 
 
 
@@ -338,7 +344,8 @@ struct utmpx *prepare_utmpx (const char *name,
 		hostname = (char *) xmalloc (strlen (host) + 1);
 		strcpy (hostname, host);
 #ifdef HAVE_STRUCT_UTMP_UT_HOST
-	} else if (   (NULL != ut->ut_host)
+	} else if (   (NULL != ut)
+	           && (NULL != ut->ut_host)
 	           && ('\0' != ut->ut_host[0])) {
 		hostname = (char *) xmalloc (sizeof (ut->ut_host) + 1);
 		strncpy (hostname, ut->ut_host, sizeof (ut->ut_host));
@@ -362,7 +369,12 @@ struct utmpx *prepare_utmpx (const char *name,
 // FIXME: move to configure.in
 # error "No support for systems with utmpx and no ut_id field in utmp"
 #endif				/* !HAVE_STRUCT_UTMP_UT_ID */
-	strncpy (utxent->ut_id,   ut->ut_id, sizeof (utxent->ut_id));
+	if (NULL != ut) {
+		strncpy (utxent->ut_id, ut->ut_id, sizeof (utxent->ut_id));
+	} else {
+		/* XXX - assumes /dev/tty?? */
+		strncpy (utxent->ut_id, line + 3, sizeof (utxent->ut_id));
+	}
 #ifdef HAVE_STRUCT_UTMPX_UT_NAME
 	strncpy (utxent->ut_name, name,      sizeof (utxent->ut_name));
 #endif				/* HAVE_STRUCT_UTMPX_UT_NAME */
