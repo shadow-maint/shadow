@@ -77,17 +77,11 @@ static bool is_valid_name (const char *name)
 
 bool is_valid_user_name (const char *name)
 {
-#if HAVE_UTMPX_H
-	struct utmpx ut;
-#else
-	struct utmp ut;
-#endif
-
 	/*
 	 * User names are limited by whatever utmp can
 	 * handle.
 	 */
-	if (strlen (name) > sizeof (ut.ut_user)) {
+	if (strlen (name) > USER_NAME_MAX_LENGTH) {
 		return false;
 	}
 

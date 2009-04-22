@@ -356,4 +356,19 @@ extern char *strerror ();
 #define MAX(x,y) (((x) > (y)) ? (x) : (y))
 #endif
 
+/* Maximum length of usernames */
+#ifdef HAVE_UTMPX_H
+# define USER_NAME_MAX_LENGTH (sizeof (((struct utmpx *)NULL)->ut_user))
+#else
+# ifdef HAVE_STRUCT_UTMP_UT_USER
+#  define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_user))
+# else
+#  ifdef HAVE_STRUCT_UTMP_UT_NAME
+#   define USER_NAME_MAX_LENGTH (sizeof (((struct utmp *)NULL)->ut_name))
+#  else
+#   define USER_NAME_MAX_LENGTH 32
+#  endif
+# endif
+#endif
+
 #endif				/* _DEFINES_H_ */

@@ -1,5 +1,14 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/defines.h: Define USER_NAME_MAX_LENGTH, based on utmp and
+	default to 32.
+	* libmisc/chkname.c: Use USER_NAME_MAX_LENGTH.
+	* src/login.c: Use USER_NAME_MAX_LENGTH instead of the default 32.
+	username also needs to be bigger than USER_NAME_MAX_LENGTH because
+	it has to be nul-terminated.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Use xmalloc() instead of malloc().
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
