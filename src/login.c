@@ -101,7 +101,7 @@ static bool hflg = false;
 static bool preauth_flag = false;
 
 static bool amroot;
-static int timeout;
+static unsigned int timeout;
 
 /*
  * External identifiers.
@@ -413,7 +413,7 @@ static void init_env (void)
 
 static RETSIGTYPE alarm_handler (unused int sig)
 {
-	fprintf (stderr, _("\nLogin timed out after %d seconds.\n"), timeout);
+	fprintf (stderr, _("\nLogin timed out after %u seconds.\n"), timeout);
 	exit (0);
 }
 
@@ -522,8 +522,8 @@ int main (int argc, char **argv)
 #if defined(HAVE_STRFTIME) && !defined(USE_PAM)
 	char ptime[80];
 #endif
-	int delay;
-	int retries;
+	unsigned int delay;
+	unsigned int retries;
 	bool failed;
 	bool subroot = false;
 #ifndef USE_PAM
@@ -695,14 +695,14 @@ int main (int argc, char **argv)
       top:
 	/* only allow ALARM sec. for login */
 	(void) signal (SIGALRM, alarm_handler);
-	timeout = getdef_num ("LOGIN_TIMEOUT", ALARM);
+	timeout = getdef_unum ("LOGIN_TIMEOUT", ALARM);
 	if (timeout > 0) {
-		alarm (timeout);
+		(void) alarm (timeout);
 	}
 
 	environ = newenvp;	/* make new environment active */
-	delay = getdef_num ("FAIL_DELAY", 1);
-	retries = getdef_num ("LOGIN_RETRIES", RETRIES);
+	delay   = getdef_unum ("FAIL_DELAY", 1);
+	retries = getdef_unum ("LOGIN_RETRIES", RETRIES);
 
 #ifdef USE_PAM
 	retcode = pam_start ("login", username, &conv, &pamh);
@@ -847,7 +847,7 @@ int main (int argc, char **argv)
 		}
 
 		/* We don't get here unless they were authenticated above */
-		alarm (0);
+		(void) alarm (0);
 	}
 
 	/* Check the account validity */
@@ -1065,7 +1065,7 @@ int main (int argc, char **argv)
 		 * before the sleep() below completes, login will exit.
 		 */
 		if (delay > 0) {
-			sleep (delay);
+			(void) sleep (delay);
 		}
 
 		puts (_("Login incorrect"));
@@ -1078,7 +1078,7 @@ int main (int argc, char **argv)
 	}			/* while (true) */
 #endif				/* ! USE_PAM */
 
-	alarm (0);		/* turn off alarm clock */
+	(void) alarm (0);		/* turn off alarm clock */
 
 #ifndef USE_PAM			/* PAM does this */
 	/*
