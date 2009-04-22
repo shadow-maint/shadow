@@ -1,5 +1,12 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Removed temp_shell. No more used.
+	* src/login.c: lastlog is only used #ifndef USE_PAM
+	* src/login.c: Rename lastlog to ll to avoid name clash with the
+	lastlog type.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Added update_utmp() to group the prepare_utmp and
 	setutmp (and the utmpx versions).
 

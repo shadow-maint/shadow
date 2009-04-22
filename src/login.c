@@ -36,7 +36,9 @@
 
 #include <errno.h>
 #include <grp.h>
+#ifndef USE_PAM
 #include <lastlog.h>
+#endif				/* !USE_PAM */
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>
@@ -66,12 +68,14 @@ static pam_handle_t *pamh = NULL;
 
 #endif				/* USE_PAM */
 
+#ifndef USE_PAM
 /*
  * Needed for MkLinux DR1/2/2.1 - J.
  */
 #ifndef LASTLOG_FILE
 #define LASTLOG_FILE "/var/log/lastlog"
 #endif
+#endif				/* !USE_PAM */
 
 /*
  * Global variables
@@ -82,7 +86,9 @@ static const char *hostname = "";
 static char *username = NULL;
 static int reason = PW_LOGIN;
 
-struct lastlog lastlog;
+#ifndef USE_PAM
+static struct lastlog ll;
+#endif				/* !USE_PAM */
 static bool pflg = false;
 static bool fflg = false;
 
@@ -509,9 +515,6 @@ int main (int argc, char **argv)
 	char fromhost[512];
 	struct passwd *pwd = NULL;
 	char **envp = environ;
-#ifndef USE_PAM
-	static char temp_shell[] = "/bin/sh";
-#endif
 	const char *failent_user;
 	struct utmp *utent;
 
@@ -1113,7 +1116,7 @@ int main (int argc, char **argv)
 
 #ifndef USE_PAM			/* pam_lastlog handles this */
 	if (getdef_bool ("LASTLOG_ENAB")) {	/* give last login and log this one */
-		dolastlog (&lastlog, pwd, tty, hostname);
+		dolastlog (&ll, pwd, tty, hostname);
 	}
 #endif
 
@@ -1242,24 +1245,23 @@ int main (int argc, char **argv)
 			}
 		}
 		if (   getdef_bool ("LASTLOG_ENAB")
-		    && (lastlog.ll_time != 0)) {
-			time_t ll_time = lastlog.ll_time;
+		    && (ll.ll_time != 0)) {
+			time_t ll_time = ll.ll_time;
 
 #ifdef HAVE_STRFTIME
 			strftime (ptime, sizeof (ptime),
 			          "%a %b %e %H:%M:%S %z %Y",
 			          localtime (&ll_time));
 			printf (_("Last login: %s on %s"),
-			        ptime, lastlog.ll_line);
+			        ptime, ll.ll_line);
 #else
 			printf (_("Last login: %.19s on %s"),
-			        ctime (&ll_time), lastlog.ll_line);
+			        ctime (&ll_time), ll.ll_line);
 #endif
 #ifdef HAVE_LL_HOST		/* __linux__ || SUN4 */
-			if ('\0' != lastlog.ll_host[0]) {
+			if ('\0' != ll.ll_host[0]) {
 				printf (_(" from %.*s"),
-				        (int) sizeof lastlog.
-				        ll_host, lastlog.ll_host);
+				        (int) sizeof ll.ll_host, ll.ll_host);
 			}
 #endif
 			printf (".\n");
