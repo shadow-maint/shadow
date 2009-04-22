@@ -37,9 +37,6 @@
 #include <errno.h>
 #include <grp.h>
 #include <lastlog.h>
-#ifdef UT_ADDR
-#include <netdb.h>
-#endif
 #include <pwd.h>
 #include <signal.h>
 #include <stdio.h>

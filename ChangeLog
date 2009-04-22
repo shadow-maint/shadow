@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Do not include netdb.h. gethostbyname() is no more
+	called from within login.c. Also UT_ADDR does not exist anymore.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: Check if login is run with effective root
 	privileges. This should be more helpful to users than a failure to
 	find an utmp entry or failure to access a file.
