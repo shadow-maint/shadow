@@ -269,7 +269,7 @@ static void check_nologin (bool login_to_root)
 			closelog ();
 			exit (0);
 		}
-		puts (_("\n[Disconnect bypassed -- root login allowed.]"));
+		(void) puts (_("\n[Disconnect bypassed -- root login allowed.]"));
 	}
 }
 #endif				/* !USE_PAM */
@@ -794,7 +794,7 @@ int main (int argc, char **argv)
 				exit(0);
 			} else if (retcode == PAM_ABORT) {
 				/* Serious problems, quit now */
-				fputs (_("login: abort requested by PAM\n"),stderr);
+				(void) fputs (_("login: abort requested by PAM\n"), stderr);
 				SYSLOG ((LOG_ERR,"PAM_ABORT returned from pam_authenticate()"));
 				PAM_END;
 				exit(99);
@@ -1068,7 +1068,7 @@ int main (int argc, char **argv)
 			(void) sleep (delay);
 		}
 
-		puts (_("Login incorrect"));
+		(void) puts (_("Login incorrect"));
 
 		/* allow only one attempt with -r or -f */
 		if (rflg || fflg || (retries <= 0)) {
@@ -1256,7 +1256,7 @@ int main (int argc, char **argv)
 			/* Reset the lockout times if logged in */
 			if (   (0 != faillog.fail_max)
 			    && (faillog.fail_cnt >= faillog.fail_max)) {
-				puts (_("Warning: login re-enabled after temporary lockout."));
+				(void) puts (_("Warning: login re-enabled after temporary lockout."));
 				SYSLOG ((LOG_WARN,
 				         "login '%s' re-enabled after temporary lockout (%d failures)",
 				         username, (int) faillog.fail_cnt));
@@ -1267,9 +1267,9 @@ int main (int argc, char **argv)
 			time_t ll_time = ll.ll_time;
 
 #ifdef HAVE_STRFTIME
-			strftime (ptime, sizeof (ptime),
-			          "%a %b %e %H:%M:%S %z %Y",
-			          localtime (&ll_time));
+			(void) strftime (ptime, sizeof (ptime),
+			                 "%a %b %e %H:%M:%S %z %Y",
+			                 localtime (&ll_time));
 			printf (_("Last login: %s on %s"),
 			        ptime, ll.ll_line);
 #else

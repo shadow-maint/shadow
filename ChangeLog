@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Ignore the return value of puts(), fputs(),
+	strftime().
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: timeout, delay, and retries should be unsigned.
 	* src/login.c: Ignore the return value of alarm() and sleep().
 
