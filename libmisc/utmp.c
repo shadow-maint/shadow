@@ -166,20 +166,6 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
 
 
 /*
- * setutmp - put a USER_PROCESS entry in the utmp file
- *
- *	setutmp changes the type of the current utmp entry to
- *	USER_PROCESS.
- *	The wtmp file will be updated as well.
- *
- *	ut, as returned by get_current_utmp
- *
- *	We reuse the ut_id and ut_host fields
- *
- *	The returned structure shall be freed by the caller.
- */
-
-/*
  * prepare_utmp - prepare an utmp entry so that it can be logged in a
  *                utmp/wtmp file.
  *
