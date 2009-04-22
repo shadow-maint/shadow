@@ -284,17 +284,18 @@ struct utmp *prepare_utmp (const char *name,
 	}
 	/* ut_exit is only for DEAD_PROCESS */
 	utent->ut_session = getsid (0);
-	gettimeofday (&tv, NULL);
+	if (gettimeofday (&tv, NULL) == 0) {
 #ifdef HAVE_STRUCT_UTMP_UT_TIME
-	utent->ut_time = tv.tv_sec;
+		utent->ut_time = tv.tv_sec;
 #endif				/* HAVE_STRUCT_UTMP_UT_TIME */
 #ifdef HAVE_STRUCT_UTMP_UT_XTIME
-	utent->ut_xtime = tv.tv_usec;
+		utent->ut_xtime = tv.tv_usec;
 #endif				/* HAVE_STRUCT_UTMP_UT_XTIME */
 #ifdef HAVE_STRUCT_UTMP_UT_TV
-	utent->ut_tv.tv_sec  = tv.tv_sec;
-	utent->ut_tv.tv_usec = tv.tv_usec;
+		utent->ut_tv.tv_sec  = tv.tv_sec;
+		utent->ut_tv.tv_usec = tv.tv_usec;
 #endif				/* HAVE_STRUCT_UTMP_UT_TV */
+	}
 
 	return utent;
 }
@@ -423,15 +424,16 @@ struct utmpx *prepare_utmpx (const char *name,
 	}
 	/* ut_exit is only for DEAD_PROCESS */
 	utxent->ut_session = getsid (0);
-	gettimeofday (&tv, NULL);
+	if (gettimeofday (&tv, NULL) == 0) {
 #ifdef HAVE_STRUCT_UTMPX_UT_TIME
-	utxent->ut_time = tv.tv_sec;
+		utxent->ut_time = tv.tv_sec;
 #endif				/* HAVE_STRUCT_UTMPX_UT_TIME */
 #ifdef HAVE_STRUCT_UTMPX_UT_XTIME
-	utxent->ut_xtime = tv.tv_usec;
+		utxent->ut_xtime = tv.tv_usec;
 #endif				/* HAVE_STRUCT_UTMPX_UT_XTIME */
-	utxent->ut_tv.tv_sec  = tv.tv_sec;
-	utxent->ut_tv.tv_usec = tv.tv_usec;
+		utxent->ut_tv.tv_sec  = tv.tv_sec;
+		utxent->ut_tv.tv_usec = tv.tv_usec;
+	}
 
 	return utxent;
 }

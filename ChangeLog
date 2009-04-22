@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/utmp.c: Only set ut_time and ut_tv if gettimeofday()
+	succeeds.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/utmp.c: Fix the check for empty host in prepare_utmp()
 	and prepare_utmpx().
 
