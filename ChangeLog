@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: After login_prompt(), do not check for unset
+	username, but for empty username.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Define USER_NAME_MAX_LENGTH, based on utmp and
 	default to 32.
 	* libmisc/chkname.c: Use USER_NAME_MAX_LENGTH.

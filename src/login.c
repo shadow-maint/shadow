@@ -925,7 +925,7 @@ int main (int argc, char **argv)
 			username[USER_NAME_MAX_LENGTH] = '\0';
 			login_prompt (_("\n%s login: "), username, USER_NAME_MAX_LENGTH);
 
-			if ('\0' == username) {
+			if ('\0' == username[0]) {
 				/* Prompt for a new login */
 				free (username);
 				username = NULL;
