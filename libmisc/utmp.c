@@ -98,7 +98,7 @@ static bool is_my_tty (const char *tty)
  *
  *	Return NULL if no entries exist in utmp for the current process.
  */
-struct utmp *get_current_utmp (void)
+/*@null@*//*@only@*/struct utmp *get_current_utmp (void)
 {
 	struct utmp *ut;
 	struct utmp *ret = NULL;
@@ -183,10 +183,10 @@ static void updwtmpx (const char *filename, const struct utmpx *utx)
  *
  *	The returned structure shall be freed by the caller.
  */
-struct utmp *prepare_utmp (const char *name,
+/*@only@*/struct utmp *prepare_utmp (const char *name,
                            const char *line,
                            const char *host,
-                           struct utmp *ut)
+                           /*@null@*/const struct utmp *ut)
 {
 	struct timeval tv;
 	char *hostname = NULL;
@@ -326,10 +326,10 @@ int setutmp (struct utmp *ut)
 /*
  * prepare_utmpx - the UTMPX version for prepare_utmp
  */
-struct utmpx *prepare_utmpx (const char *name,
+/*@only@*/struct utmpx *prepare_utmpx (const char *name,
                              const char *line,
                              const char *host,
-                             struct utmp *ut)
+                             /*@null@*/const struct utmp *ut)
 {
 	struct timeval tv;
 	char *hostname = NULL;
