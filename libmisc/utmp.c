@@ -56,22 +56,28 @@
  */
 static bool is_my_tty (const char *tty)
 {
+	/* full_tty shall be at least sizeof utmp.ut_line + 5 */
 	char full_tty[200];
-	static const char *tmptty = NULL;
+	/* tmptty shall be bigger than full_tty */
+	static char tmptty[sizeof (full_tty)+1];
 
 	if ('/' != *tty) {
-		snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
-		tty = full_tty;
+		(void) snprintf (full_tty, sizeof full_tty, "/dev/%s", tty);
+		tty = &full_tty[0];
 	}
 
-	if (NULL == tmptty) {
-		tmptty = ttyname (STDIN_FILENO);
+	if ('\0' == tmptty[0]) {
+		const char *tname = ttyname (STDIN_FILENO);
+		if (NULL != tname) {
+			(void) strncpy (tmptty, tname, sizeof tmptty);
+			tmptty[sizeof (tmptty) - 1] = '\0';
+		}
 	}
 
 	if (NULL == tmptty) {
 		(void) puts (_("Unable to determine your tty name."));
 		exit (EXIT_FAILURE);
-	} else if (strcmp (tty, tmptty) != 0) {
+	} else if (strncmp (tty, tmptty, sizeof (tmptty)) != 0) {
 		return false;
 	} else {
 		return true;
