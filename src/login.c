@@ -563,6 +563,7 @@ int main (int argc, char **argv)
 		(void) puts (_("No utmp entry.  You must exec \"login\" from the lowest level \"sh\""));
 		exit (1);
 	}
+	/* NOTE: utent might be NULL afterwards */
 
 	tmptty = ttyname (0);
 	if (NULL == tmptty) {
@@ -655,15 +656,12 @@ int main (int argc, char **argv)
 
 	if (rflg || hflg) {
 		cp = hostname;
-	} else {
 #ifdef	HAVE_STRUCT_UTMP_UT_HOST
-		if ('\0' != utent->ut_host[0]) {
-			cp = utent->ut_host;
-		} else
+	} else if ((NULL != utent) && ('\0' != utent->ut_host[0])) {
+		cp = utent->ut_host;
 #endif				/* HAVE_STRUCT_UTMP_UT_HOST */
-		{
-			cp = "";
-		}
+	} else {
+		cp = "";
 	}
 
 	if ('\0' != *cp) {
