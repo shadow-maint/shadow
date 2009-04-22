@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/login.c: Added assert()s for NULL (or ! NULL) username, and
+	pwd. This helps splint.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/login.c: After login_prompt(), do not check for unset
 	username, but for empty username.
 

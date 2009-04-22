@@ -347,6 +347,7 @@ static void process_flags (int argc, char *const *argv)
 	 *  Get the user name.
 	 */
 	if (optind < argc) {
+		assert (NULL == username);
 		username = xstrdup (argv[optind]);
 		strzero (argv[optind]);
 		++optind;
@@ -610,6 +611,7 @@ int main (int argc, char **argv)
 	}
 #ifdef RLOGIN
 	if (rflg) {
+		assert (NULL == username);
 		username = xmalloc (USER_NAME_MAX_LENGTH + 1);
 		username[USER_NAME_MAX_LENGTH] = '\0';
 		if (do_rlogin (hostname, username, USER_NAME_MAX_LENGTH, term, sizeof term)) {
@@ -1079,6 +1081,8 @@ int main (int argc, char **argv)
 		}
 	}			/* while (true) */
 #endif				/* ! USE_PAM */
+	assert (NULL != username);
+	assert (NULL != pwd);
 
 	(void) alarm (0);		/* turn off alarm clock */
 
