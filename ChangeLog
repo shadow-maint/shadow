@@ -2,6 +2,7 @@
 
 	* src/login.c: Added assert()s for NULL (or ! NULL) username, and
 	pwd. This helps splint.
+	* src/login.c: Added splint annotations.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 

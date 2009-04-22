@@ -83,7 +83,7 @@ static pam_handle_t *pamh = NULL;
 char *Prog;
 
 static const char *hostname = "";
-static char *username = NULL;
+static /*@null@*/ /*@only@*/char *username = NULL;
 static int reason = PW_LOGIN;
 
 #ifndef USE_PAM
@@ -122,8 +122,8 @@ extern char **environ;
 /* local function prototypes */
 static void usage (void);
 static void setup_tty (void);
-static void process_flags (int, char *const *);
-static const char *get_failent_user (const char *user);
+static void process_flags (int argc, char *const *argv);
+static const char *get_failent_user (/*@returned@*/const char *user);
 static void update_utmp (const char *username,
                          const char *tty,
                          const char *hostname,
@@ -454,7 +454,7 @@ static void get_pam_user (char **ptr_pam_user)
  * It is quite common to mistyped the password for username, and passwords
  * should not be logged.
  */
-static const char *get_failent_user (const char *user)
+static const char *get_failent_user (/*@returned@*/const char *user)
 {
 	const char *failent_user = "UNKNOWN";
 	bool log_unkfail_enab = getdef_bool("LOG_UNKFAIL_ENAB");
@@ -537,7 +537,7 @@ int main (int argc, char **argv)
 	struct passwd *pwd = NULL;
 	char **envp = environ;
 	const char *failent_user;
-	struct utmp *utent;
+	/*@null@*/struct utmp *utent;
 
 #ifdef USE_PAM
 	int retcode;
