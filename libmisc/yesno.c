@@ -57,7 +57,7 @@ bool yes_or_no (bool read_only)
 	 * In read-only mode all questions are answered "no".
 	 */
 	if (read_only) {
-		puts (_("No"));
+		(void) puts (_("No"));
 		return false;
 	}
 
