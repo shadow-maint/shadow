@@ -70,7 +70,6 @@ static struct stat statbuf;	/* fstat buffer for file size */
 static bool uflg = false;	/* print only an user of range of users */
 static bool tflg = false;	/* print is restricted to most recent days */
 static bool bflg = false;	/* print excludes most recent days */
-static struct passwd *pwent;
 
 #define	NOW	(time ((time_t *) 0))
 
@@ -84,10 +83,10 @@ static void usage (void)
 	         "  -t, --time DAYS               print only lastlog records more recent than DAYS\n"
 	         "  -u, --user LOGIN              print lastlog record of the specified LOGIN\n"
 	         "\n"), stderr);
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
-static void print_one (const struct passwd *pw)
+static void print_one (/*@null@*/const struct passwd *pw)
 {
 	static bool once = false;
 	char *cp;
@@ -116,9 +115,9 @@ static void print_one (const struct passwd *pw)
 		 */
 		if (fread ((char *) &ll, sizeof (ll), 1, lastlogfile) != 1) {
 			fprintf (stderr,
-			         _("lastlog: Failed to get the entry for UID %d\n"),
-			         pw->pw_uid);
-			exit (1);
+			         _("lastlog: Failed to get the entry for UID %lu\n"),
+			         (unsigned long int)pw->pw_uid);
+			exit (EXIT_FAILURE);
 		}
 	} else {
 		/* Outsize of the lastlog file.
@@ -173,6 +172,7 @@ static void print_one (const struct passwd *pw)
 
 static void print (void)
 {
+	const struct passwd *pwent;
 	if (uflg && has_umin && has_umax && (umin == umax)) {
 		print_one (getpwuid ((uid_t)umin));
 	} else {
@@ -222,6 +222,8 @@ int main (int argc, char **argv)
 				bflg = true;
 				break;
 			case 'u':
+			{
+				const struct passwd *pwent;
 				/*
 				 * The user can be:
 				 *  - a login name
@@ -244,10 +246,11 @@ int main (int argc, char **argv)
 						fprintf (stderr,
 						         _("lastlog: Unknown user or range: %s\n"),
 						         optarg);
-						exit (1);
+						exit (EXIT_FAILURE);
 					}
 				}
 				break;
+			}
 			default:
 				usage ();
 				break;
@@ -261,9 +264,10 @@ int main (int argc, char **argv)
 		}
 	}
 
-	if ((lastlogfile = fopen (LASTLOG_FILE, "r")) == (FILE *) 0) {
+	lastlogfile = fopen (LASTLOG_FILE, "r");
+	if (NULL == lastlogfile) {
 		perror (LASTLOG_FILE);
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	/* Get the lastlog size */
@@ -271,12 +275,12 @@ int main (int argc, char **argv)
 		fprintf (stderr,
 		         _("lastlog: Cannot get the size of %s: %s\n"),
 		         LASTLOG_FILE, strerror (errno));
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	print ();
 
-	fclose (lastlogfile);
-	exit (0);
+	(void) fclose (lastlogfile);
+	exit (EXIT_SUCCESS);
 }
 
