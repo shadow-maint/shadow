@@ -40,7 +40,7 @@
 #include "defines.h"
 #include "pwauth.h"
 
-void passwd_check (const char *user, const char *passwd, const char *progname)
+void passwd_check (const char *user, const char *passwd, unused const char *progname)
 {
 	struct spwd *sp;
 
@@ -50,9 +50,9 @@ void passwd_check (const char *user, const char *passwd, const char *progname)
 	}
 	if (pw_auth (passwd, user, PW_LOGIN, (char *) 0) != 0) {
 		SYSLOG ((LOG_WARN, "incorrect password for `%s'", user));
-		sleep (1);
+		(void) sleep (1);
 		fprintf (stderr, _("Incorrect password for %s.\n"), user);
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 }
 #else			/* USE_PAM */

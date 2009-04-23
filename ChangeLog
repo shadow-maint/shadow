@@ -1,11 +1,17 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/pwdcheck.c (passwd_check): The progname is not used.
+	* libmisc/pwdcheck.c: Ignore the return value of sleep().
+	* libmisc/pwdcheck.c: Use exit(EXIT_FAILURE) instead of exit(1).
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/setupenv.c: Avoid assignments in comparisons.
 	* libmisc/setupenv.c: Added brackets and parenthesis.
 	* libmisc/setupenv.c: Ignore the return value of fclose (file
 	opened read-only)
 	* libmisc/setupenv.c: Ignore the return value of puts().
-	* libmisc/setupenv.c:Avoid implicit conversion of pointers to
+	* libmisc/setupenv.c: Avoid implicit conversion of pointers to
 	booleans.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
