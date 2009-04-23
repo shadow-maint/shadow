@@ -45,8 +45,8 @@
  * A configuration item definition.
  */
 struct itemdef {
-	const char *name;	/* name of the item                     */
-	char *value;		/* value given, or NULL if no value     */
+	/*@null@*/const char *name;	/* name of the item                     */
+	/*@null@*/char *value;		/* value given, or NULL if no value     */
 };
 
 #define NUMDEFS	(sizeof(def_table)/sizeof(def_table[0]))
@@ -135,7 +135,7 @@ static char def_fname[] = LOGINDEFS;	/* login config defs file       */
 static bool def_loaded = false;		/* are defs already loaded?     */
 
 /* local function prototypes */
-static struct itemdef *def_find (const char *);
+static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *);
 static void def_load (void);
 
 
@@ -146,7 +146,7 @@ static void def_load (void);
  * defined.  First time invoked, will load definitions from the file.
  */
 
-char *getdef_str (const char *item)
+/*@observer@*/ /*@null@*/const char *getdef_str (const char *item)
 {
 	struct itemdef *d;
 
@@ -155,7 +155,7 @@ char *getdef_str (const char *item)
 	}
 
 	d = def_find (item);
-	return ((NULL == d)? (char *) NULL : d->value);
+	return ((NULL == d)? (const char *) NULL : d->value);
 }
 
 
@@ -295,7 +295,7 @@ long getdef_long (const char *item, long dflt)
 unsigned long getdef_ulong (const char *item, unsigned long dflt)
 {
 	struct itemdef *d;
-	long val;
+	unsigned long val;
 
 	if (!def_loaded) {
 		def_load ();
@@ -306,7 +306,7 @@ unsigned long getdef_ulong (const char *item, unsigned long dflt)
 		return dflt;
 	}
 
-	if (getlong (d->value, &val) == 0) {
+	if (getulong (d->value, &val) == 0) {
 		/* FIXME: we should have a getulong */
 		fprintf (stderr,
 		         _("configuration error - cannot parse %s value: '%s'"),
@@ -345,8 +345,8 @@ int putdef_str (const char *name, const char *value)
 	 */
 	cp = strdup (value);
 	if (NULL == cp) {
-		fputs (_("Could not allocate space for config info.\n"),
-		       stderr);
+		(void) fputs (_("Could not allocate space for config info.\n"),
+		              stderr);
 		SYSLOG ((LOG_ERR, "could not allocate space for config info"));
 		return -1;
 	}
@@ -367,7 +367,7 @@ int putdef_str (const char *name, const char *value)
  * specified configuration option.
  */
 
-static struct itemdef *def_find (const char *name)
+static /*@observer@*/ /*@null@*/struct itemdef *def_find (const char *name)
 {
 	struct itemdef *ptr;
 
@@ -413,7 +413,7 @@ static void def_load (void)
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot open login definitions %s [%s]",
 		         def_fname, strerror (err)));
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	/*
@@ -455,15 +455,19 @@ static void def_load (void)
 
 		/*
 		 * Store the value in def_table.
+		 *
+		 * Ignore failures to load the login.defs file.
+		 * The error was already reported to the user and to
+		 * syslog. The tools will just use their default values.
 		 */
-		putdef_str (name, value);
+		(void)putdef_str (name, value);
 	}
 
 	if (ferror (fp) != 0) {
 		int err = errno;
 		SYSLOG ((LOG_CRIT, "cannot read login definitions %s [%s]",
 		         def_fname, strerror (err)));
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	(void) fclose (fp);
@@ -496,6 +500,6 @@ int main (int argc, char **argv)
 			printf ("%s not found\n", argv[1]);
 		}
 	}
-	exit (0);
+	exit (EXIT_SUCCESS);
 }
 #endif
