@@ -66,8 +66,9 @@ extern int add_groups (const char *);
 
 /* age.c */
 extern void agecheck (/*@null@*/const struct spwd *);
-extern int expire (const struct passwd *, const struct spwd *);
-extern int isexpired (const struct passwd *, const struct spwd *);
+extern int expire (const struct passwd *, /*@null@*/const struct spwd *);
+/* isexpired.c */
+extern int isexpired (const struct passwd *, /*@null@*/const struct spwd *);
 
 /* basename() renamed to Basename() to avoid libc name space confusion */
 /* basename.c */
@@ -129,7 +130,7 @@ extern char *pw_encrypt (const char *, const char *);
 extern void pw_entry (const char *, struct passwd *);
 
 /* env.c */
-extern void addenv (const char *, const char *);
+extern void addenv (const char *, /*@null@*/const char *);
 extern void initenv (void);
 extern void set_env (int, char *const *);
 extern void sanitize_env (void);
@@ -139,10 +140,14 @@ extern void change_field (char *, size_t, const char *);
 extern int valid_field (const char *, const char *);
 
 /* find_new_gid.c */
-extern int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid);
+extern int find_new_gid (bool sys_group,
+                         gid_t *gid,
+                         /*@null@*/gid_t const *preferred_gid);
 
 /* find_new_uid.c */
-extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
+extern int find_new_uid (bool sys_user,
+                         uid_t *uid,
+                         /*@null@*/uid_t const *preferred_uid);
 
 /* get_gid.c */
 extern int get_gid (const char *gidstr, gid_t *gid);

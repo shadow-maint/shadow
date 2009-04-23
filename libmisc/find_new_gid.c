@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1991 - 1994, Julianne Frances Haugh
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -47,7 +47,9 @@
  * 
  * Return 0 on success, -1 if no unused GIDs are available.
  */
-int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
+int find_new_gid (bool sys_group,
+                  gid_t *gid,
+                  /*@null@*/gid_t const *preferred_gid)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max, group_id;

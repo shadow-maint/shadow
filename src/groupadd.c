@@ -72,10 +72,10 @@
  */
 char *Prog;
 
-static char *group_name;
+static /*@null@*/char *group_name;
 static gid_t group_id;
-static char *group_passwd;
-static char *empty_list = NULL;
+static /*@null@*/char *group_passwd;
+static /*@null@*/char *empty_list = NULL;
 
 static bool oflg = false;	/* permit non-unique group ID to be specified with -g */
 static bool gflg = false;	/* ID value for the new group */
@@ -605,6 +605,6 @@ int main (int argc, char **argv)
 	nscd_flush_cache ("group");
 
 	exit (E_SUCCESS);
-	/* NOT REACHED */
+	/*@notreached@*/
 }
 

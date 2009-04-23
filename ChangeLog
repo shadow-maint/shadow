@@ -1,5 +1,12 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_gid.c, libmisc/find_new_uid.c,
+	libmisc/isexpired.c, src/groupadd.c, lib/pwauth.h, lib/groupmem.c,
+	lib/shadowmem.c, lib/pwmem.c, lib/prototypes.h: Added splint
+	annotations.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/loginprompt.c: Use exit(EXIT_FAILURE) instead of
 	exit(1).
 	* libmisc/loginprompt.c: Avoid implicit conversion of pointers to

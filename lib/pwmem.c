@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2007       , Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 #include "prototypes.h"
 #include "pwio.h"
 
-struct passwd *__pw_dup (const struct passwd *pwent)
+/*@null@*/ /*@only@*/struct passwd *__pw_dup (const struct passwd *pwent)
 {
 	struct passwd *pw;
 
@@ -73,7 +73,7 @@ struct passwd *__pw_dup (const struct passwd *pwent)
 	return pw;
 }
 
-void pw_free (struct passwd *pwent)
+void pw_free (/*@out@*/ /*@only@*/struct passwd *pwent)
 {
 	free (pwent->pw_name);
 	memzero (pwent->pw_passwd, strlen (pwent->pw_passwd));

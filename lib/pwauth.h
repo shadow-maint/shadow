@@ -2,6 +2,7 @@
  * Copyright (c) 1992 - 1993, Julianne Frances Haugh
  * Copyright (c) 1996 - 1997, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
+ * Copyright (c) 2009       , Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +35,10 @@
  */
 
 #ifndef USE_PAM
-int pw_auth (const char *cipher, const char *user, int flag, const char *input);
+int pw_auth (const char *cipher,
+             const char *user,
+             int flag,
+             /*@null@*/const char *input);
 #endif				/* !USE_PAM */
 
 /*

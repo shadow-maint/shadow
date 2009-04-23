@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007       , Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,7 @@
 #include "defines.h"
 #include "groupio.h"
 
-struct group *__gr_dup (const struct group *grent)
+/*@null@*/ /*@only@*/struct group *__gr_dup (const struct group *grent)
 {
 	struct group *gr;
 	int i;
@@ -75,7 +75,7 @@ struct group *__gr_dup (const struct group *grent)
 	return gr;
 }
 
-void gr_free (struct group *grent)
+void gr_free (/*@out@*/ /*@only@*/struct group *grent)
 {
 	free (grent->gr_name);
 	memzero (grent->gr_passwd, strlen (grent->gr_passwd));

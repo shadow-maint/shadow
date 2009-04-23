@@ -3,7 +3,7 @@
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001       , Michał Moskal
  * Copyright (c) 2005       , Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@
 #include <stdio.h>
 #include "shadowio.h"
 
-struct spwd *__spw_dup (const struct spwd *spent)
+/*@null@*/ /*@only@*/struct spwd *__spw_dup (const struct spwd *spent)
 {
 	struct spwd *sp;
 
@@ -62,7 +62,7 @@ struct spwd *__spw_dup (const struct spwd *spent)
 	return sp;
 }
 
-void spw_free (struct spwd *spent)
+void spw_free (/*@out@*/ /*@only@*/struct spwd *spent)
 {
 	free (spent->sp_namp);
 	memzero (spent->sp_pwdp, strlen (spent->sp_pwdp));
