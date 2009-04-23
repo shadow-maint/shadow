@@ -92,7 +92,7 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 
 	if ((status > 1) || (sp->sp_max < sp->sp_min)) {
 		(void) puts (_("  Contact the system administrator."));
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	(void) puts (_("  Choose a new password."));
 	(void) fflush (stdout);
@@ -135,13 +135,13 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 			_exit (126);
 		}
 
-		execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
+		(void) execl (PASSWD_PROGRAM, PASSWD_PROGRAM, pw->pw_name, (char *) 0);
 		err = errno;
 		perror ("Can't execute " PASSWD_PROGRAM);
 		_exit ((ENOENT == err) ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
 	} else if ((pid_t) -1 == pid) {
 		perror ("fork");
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	while (((child = wait (&status)) != pid) && (child != (pid_t)-1));
@@ -150,8 +150,8 @@ int expire (const struct passwd *pw, const struct spwd *sp)
 		return 1;
 	}
 
-	exit (1);
- /*NOTREACHED*/}
+	exit (EXIT_FAILURE);
+ /*@notreached@*/}
 
 /*
  * agecheck - see if warning is needed for password expiration

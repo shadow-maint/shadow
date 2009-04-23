@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/age.c: Use exit(EXIT_FAILURE) instead of exit(1).
+	* libmisc/age.c: The return value of execl() is not used.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/xgetXXbyYY.c, libmisc/myname.c, libmisc/getgr_nam_gid.c,
 	libmisc/salt.c, libmisc/list.c, libmisc/cleanup.c, src/login.c,
 	lib/getdef.h, lib/groupio.c, lib/getlong.c, lib/gshadow_.h,
