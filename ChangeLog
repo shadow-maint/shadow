@@ -1,5 +1,14 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/find_new_gid.c: Use booleans instead of char fo
+	used_gids.
+	* libmisc/find_new_gid.c: Use getdef_ulong and cast to git_t to
+	get GID values.
+	* libmisc/find_new_gid.c: Use UL as a prefix for ulong values.
+	* libmisc/find_new_uid.c: Likewise.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/yesno.c: Ignore the return value of puts.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>

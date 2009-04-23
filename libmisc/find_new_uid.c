@@ -51,20 +51,20 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 {
 	const struct passwd *pwd;
 	uid_t uid_min, uid_max, user_id;
-	char *used_uids;
+	bool *used_uids;
 
 	assert (uid != NULL);
 
 	if (!sys_user) {
-		uid_min = getdef_ulong ("UID_MIN", 1000L);
-		uid_max = getdef_ulong ("UID_MAX", 60000L);
+		uid_min = (uid_t) getdef_ulong ("UID_MIN", 1000UL);
+		uid_max = (uid_t) getdef_ulong ("UID_MAX", 60000UL);
 	} else {
-		uid_min = getdef_ulong ("SYS_UID_MIN", 1L);
-		uid_max = getdef_ulong ("UID_MIN", 1000L) - 1;
-		uid_max = getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
+		uid_min = (uid_t) getdef_ulong ("SYS_UID_MIN", 1UL);
+		uid_max = (uid_t) getdef_ulong ("UID_MIN", 1000UL) - 1;
+		uid_max = (uid_t) getdef_ulong ("SYS_UID_MAX", (unsigned long) uid_max);
 	}
-	used_uids = alloca (sizeof (char) * uid_max +1);
-	memset (used_uids, 0, sizeof (char) * uid_max + 1);
+	used_uids = alloca (sizeof (bool) * (uid_max +1));
+	memset (used_uids, false, sizeof (bool) * (uid_max + 1));
 
 	if (   (NULL != preferred_uid)
 	    && (*preferred_uid >= uid_min)
@@ -96,7 +96,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		}
 		/* create index of used UIDs */
 		if (pwd->pw_uid <= uid_max) {
-			used_uids[pwd->pw_uid] = 1;
+			used_uids[pwd->pw_uid] = true;
 		}
 	}
 	endpwent ();
@@ -107,14 +107,14 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 		}
 		/* create index of used UIDs */
 		if (pwd->pw_uid <= uid_max) {
-			used_uids[pwd->pw_uid] = 1;
+			used_uids[pwd->pw_uid] = true;
 		}
 	}
 
 	/* find free system account in reverse order */
 	if (sys_user) {
 		for (user_id = uid_max; user_id >= uid_min; user_id--) {
-			if (0 == used_uids[user_id]) {
+			if (false == used_uids[user_id]) {
 				break;
 			}
 		}
@@ -135,7 +135,7 @@ int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid)
 	 */
 	if (user_id == uid_max + 1) {
 		for (user_id = uid_min; user_id < uid_max; user_id++) {
-			if (0 == used_uids[user_id]) {
+			if (false == used_uids[user_id]) {
 				break;
 			}
 		}

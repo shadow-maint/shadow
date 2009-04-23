@@ -51,20 +51,20 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 {
 	const struct group *grp;
 	gid_t gid_min, gid_max, group_id;
-	char *used_gids;
+	bool *used_gids;
 
 	assert (gid != NULL);
 
 	if (!sys_group) {
-		gid_min = getdef_ulong ("GID_MIN", 1000L);
-		gid_max = getdef_ulong ("GID_MAX", 60000L);
+		gid_min = (gid_t) getdef_ulong ("GID_MIN", 1000UL);
+		gid_max = (gid_t) getdef_ulong ("GID_MAX", 60000UL);
 	} else {
-		gid_min = getdef_ulong ("SYS_GID_MIN", 1L);
-		gid_max = getdef_ulong ("GID_MIN", 1000L) - 1;
-		gid_max = getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
+		gid_min = (gid_t) getdef_ulong ("SYS_GID_MIN", 1UL);
+		gid_max = (gid_t) getdef_ulong ("GID_MIN", 1000UL) - 1;
+		gid_max = (gid_t) getdef_ulong ("SYS_GID_MAX", (unsigned long) gid_max);
 	}
-	used_gids = alloca (sizeof (char) * gid_max +1);
-	memset (used_gids, 0, sizeof (char) * gid_max + 1);
+	used_gids = alloca (sizeof (bool) * (gid_max +1));
+	memset (used_gids, false, sizeof (bool) * (gid_max + 1));
 
 	if (   (NULL != preferred_gid)
 	    && (*preferred_gid >= gid_min)
@@ -95,7 +95,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		}
 		/* create index of used GIDs */
 		if (grp->gr_gid <= gid_max) {
-			used_gids[grp->gr_gid] = 1;
+			used_gids[grp->gr_gid] = true;
 		}
 	}
 	endgrent ();
@@ -106,14 +106,14 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 		}
 		/* create index of used GIDs */
 		if (grp->gr_gid <= gid_max) {
-			used_gids[grp->gr_gid] = 1;
+			used_gids[grp->gr_gid] = true;
 		}
 	}
 
 	/* find free system account in reverse order */
 	if (sys_group) {
 		for (group_id = gid_max; group_id >= gid_min; group_id--) {
-			if (0 == used_gids[group_id]) {
+			if (false == used_gids[group_id]) {
 				break;
 			}
 		}
@@ -134,7 +134,7 @@ int find_new_gid (bool sys_group, gid_t *gid, gid_t const *preferred_gid)
 	 */
 	if (group_id == gid_max + 1) {
 		for (group_id = gid_min; group_id < gid_max; group_id++) {
-			if (0 == used_gids[group_id]) {
+			if (false == used_gids[group_id]) {
 				break;
 			}
 		}
