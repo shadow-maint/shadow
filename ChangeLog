@@ -1,5 +1,10 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/grpck.c: Ignore puts return value.
+	* src/grpck.c: Avoid variable format string.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/lastlog.c: Use EXIT_FAILURE / EXIT_SUCCESS for exit()
 	* src/lastlog.c: Added splint annotations.
 	* src/lastlog.c: Avoid global pwent.

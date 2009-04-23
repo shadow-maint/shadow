@@ -467,7 +467,7 @@ static void check_grp_file (int *errors, bool *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid group file entry"));
+			(void) puts (_("invalid group file entry"));
 			printf (_("delete line '%s'? "), gre->line);
 			*errors += 1;
 
@@ -527,7 +527,7 @@ static void check_grp_file (int *errors, bool *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate group entry"));
+			(void) puts (_("duplicate group entry"));
 			printf (_("delete line '%s'? "), gre->line);
 			*errors += 1;
 
@@ -660,7 +660,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 * Tell the user this entire line is bogus and ask
 			 * them to delete it.
 			 */
-			puts (_("invalid shadow group file entry"));
+			(void) puts (_("invalid shadow group file entry"));
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
 
@@ -720,7 +720,7 @@ static void check_sgr_file (int *errors, bool *changed)
 			 * Tell the user this entry is a duplicate of
 			 * another and ask them to delete it.
 			 */
-			puts (_("duplicate shadow group entry"));
+			(void) puts (_("duplicate shadow group entry"));
 			printf (_("delete line '%s'? "), sge->line);
 			*errors += 1;
 
@@ -833,9 +833,11 @@ int main (int argc, char **argv)
 	 * Tell the user what we did and exit.
 	 */
 	if (0 != errors) {
-		printf (changed ?
-		        _("%s: the files have been updated\n") :
-		        _("%s: no changes\n"), Prog);
+		if (changed) {
+			printf (_("%s: the files have been updated\n"), Prog);
+		} else {
+			printf (_("%s: no changes\n"), Prog);
+		}
 	}
 
 	exit ((0 != errors) ? E_BAD_ENTRY : E_OKAY);
