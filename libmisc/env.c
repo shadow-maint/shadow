@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1992, Julianne Frances Haugh
  * Copyright (c) 1996 - 1999, Marek Michałkiewicz
  * Copyright (c) 2003 - 2005, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@
  */
 #define NEWENVP_STEP 16
 size_t newenvc = 0;
-char **newenvp = NULL;
+/*@null@*/char **newenvp = NULL;
 extern char **environ;
 
 static const char *forbid[] = {
@@ -85,7 +85,7 @@ void initenv (void)
 }
 
 
-void addenv (const char *string, const char *value)
+void addenv (const char *string, /*@null@*/const char *value)
 {
 	char *cp, *newstring;
 	size_t i;

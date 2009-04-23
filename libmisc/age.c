@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 1998, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,7 +53,7 @@
  *	expire() calls /bin/passwd to change the user's password
  *	if it has expired.
  */
-int expire (const struct passwd *pw, const struct spwd *sp)
+int expire (const struct passwd *pw, /*@null@*/const struct spwd *sp)
 {
 	int status;
 	pid_t child;
