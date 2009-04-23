@@ -1,5 +1,12 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* src/newgrp.c: Added splint annotations.
+	* src/newgrp.c: audit_buf is only used in newgrp. Make it static.
+	* src/newgrp.c: Ignore the return value of fputs().
+	* src/newgrp.c: Use exit(EXIT_FAILURE) instead of exit(1).
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/pwdcheck.c (passwd_check): The progname is not used.
 	* libmisc/pwdcheck.c: Ignore the return value of sleep().
 	* libmisc/pwdcheck.c: Use exit(EXIT_FAILURE) instead of exit(1).

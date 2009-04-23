@@ -53,13 +53,13 @@ extern char **environ;
 
 #ifdef HAVE_SETGROUPS
 static int ngroups;
-static GETGROUPS_T *grouplist;
+static /*@null@*/ /*@only@*/GETGROUPS_T *grouplist;
 #endif
 
 static bool is_newgrp;
 
 #ifdef WITH_AUDIT
-char audit_buf[80];
+static char audit_buf[80];
 #endif
 
 /* local function prototypes */
@@ -75,9 +75,9 @@ static void syslog_sg (const char *name, const char *group);
 static void usage (void)
 {
 	if (is_newgrp) {
-		fputs (_("Usage: newgrp [-] [group]\n"), stderr);
+		(void) fputs (_("Usage: newgrp [-] [group]\n"), stderr);
 	} else {
-		fputs (_("Usage: sg group [[-c] command]\n"), stderr);
+		(void) fputs (_("Usage: sg group [[-c] command]\n"), stderr);
 	}
 }
 
@@ -85,7 +85,7 @@ static void usage (void)
  * find_matching_group - search all groups of a given group id for
  *                       membership of a given username
  */
-static struct group *find_matching_group (const char *name, gid_t gid)
+static /*@null@*/struct group *find_matching_group (const char *name, gid_t gid)
 {
 	struct group *gr;
 	char **look;
@@ -195,8 +195,8 @@ static void check_perms (const struct group *grp,
 			SYSLOG ((LOG_INFO,
 				 "Invalid password for group '%s' from '%s'",
 				 groupname, pwd->pw_name));
-			sleep (1);
-			fputs (_("Invalid password.\n"), stderr);
+			(void) sleep (1);
+			(void) fputs (_("Invalid password.\n"), stderr);
 			goto failure;
 		}
 #ifdef WITH_AUDIT
@@ -229,7 +229,7 @@ failure:
 		              (unsigned int) getuid (), 0);
 	}
 #endif
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
 #ifdef USE_SYSLOG
@@ -308,7 +308,7 @@ static void syslog_sg (const char *name, const char *group)
 				              (unsigned int) getuid (), 0);
 			}
 #endif
-			exit (1);
+			exit (EXIT_FAILURE);
 		} else if (child != 0) {
 			/* parent - wait for child to finish, then log session close */
 			int cst = 0;
@@ -345,7 +345,7 @@ static void syslog_sg (const char *name, const char *group)
 				         (unsigned long) gid, name));
 			}
 			closelog ();
-			exit (0);
+			exit (EXIT_SUCCESS);
 		}
 
 		/* child - restore signals to their default state */
@@ -376,7 +376,7 @@ int main (int argc, char **argv)
 	char *command = NULL;
 	char **envp = environ;
 	struct passwd *pwd;
-	struct group *grp;
+	/*@null@*/struct group *grp;
 
 #ifdef SHADOWGRP
 	struct sgrp *sgrp;
@@ -433,7 +433,7 @@ int main (int argc, char **argv)
 		SYSLOG ((LOG_WARN, "Cannot determine the user name of the caller (UID %lu)",
 		         (unsigned long) getuid ()));
 		closelog ();
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 	name = pwd->pw_name;
 
@@ -473,7 +473,7 @@ int main (int argc, char **argv)
 		} else {
 			usage ();
 			closelog ();
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
 		if (argc > 0) {
 
@@ -555,7 +555,7 @@ int main (int argc, char **argv)
 			              (unsigned int) getuid (), 0);
 		}
 #endif
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 #endif				/* HAVE_SETGROUPS */
 
@@ -661,7 +661,7 @@ int main (int argc, char **argv)
 	}
 	if (i == ngroups) {
 		if (ngroups >= sysconf (_SC_NGROUPS_MAX)) {
-			fputs (_("too many groups\n"), stderr);
+			(void) fputs (_("too many groups\n"), stderr);
 		} else {
 			grouplist[ngroups++] = gid;
 			if (setgroups (ngroups, grouplist) != 0) {
@@ -685,7 +685,7 @@ int main (int argc, char **argv)
 		              audit_buf, NULL,
 		              (unsigned int) getuid (), 0);
 #endif
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	if (setuid (getuid ()) != 0) {
@@ -697,7 +697,7 @@ int main (int argc, char **argv)
 		              audit_buf, NULL,
 		              (unsigned int) getuid (), 0);
 #endif
-		exit (1);
+		exit (EXIT_FAILURE);
 	}
 
 	/*
@@ -795,7 +795,7 @@ int main (int argc, char **argv)
 	 */
 	err = shell (prog, initflag ? (char *) 0 : cp, newenvp);
 	exit (err == ENOENT ? E_CMD_NOTFOUND : E_CMD_NOEXEC);
-	/* NOTREACHED */
+	/* @notreached@ */
       failure:
 
 	/*
@@ -822,6 +822,6 @@ int main (int argc, char **argv)
 		              (unsigned int) getuid (), 0);
 	}
 #endif
-	exit (1);
+	exit (EXIT_FAILURE);
 }
 
