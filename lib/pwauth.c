@@ -2,7 +2,7 @@
  * Copyright (c) 1992 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2003 - 2006, Tomasz Kłoczko
- * Copyright (c) 2008       , Nicolas François
+ * Copyright (c) 2008 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -54,8 +54,8 @@ static const char *PROMPT = gettext_noop ("Password: ");
 static const char *PROMPT = gettext_noop ("%s's Password: ");
 #endif
 
-int wipe_clear_pass = 1;
-char *clear_pass = NULL;
+bool wipe_clear_pass = true;
+/*@null@*/char *clear_pass = NULL;
 
 /*
  * pw_auth - perform getpass/crypt authentication
@@ -65,8 +65,10 @@ char *clear_pass = NULL;
  *	compared.
  */
 
-int
-pw_auth (const char *cipher, const char *user, int reason, const char *input)
+int pw_auth (const char *cipher,
+             const char *user,
+             int reason,
+             /*@null@*/const char *input)
 {
 	char prompt[1024];
 	char *clear = NULL;
@@ -74,7 +76,7 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	int retval;
 
 #ifdef	SKEY
-	int use_skey = 0;
+	bool use_skey = false;
 	char challenge_info[40];
 	struct skey skey;
 #endif
@@ -83,15 +85,17 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * There are programs for adding and deleting authentication data.
 	 */
 
-	if (reason == PW_ADD || reason == PW_DELETE)
+	if ((PW_ADD == reason) || (PW_DELETE == reason)) {
 		return 0;
+	}
 
 	/*
 	 * There are even programs for changing the user name ...
 	 */
 
-	if (reason == PW_CHANGE && input != (char *) 0)
+	if ((PW_CHANGE == reason) && (NULL != input)) {
 		return 0;
+	}
 
 	/*
 	 * WARNING:
@@ -102,8 +106,9 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * revisited.
 	 */
 
-	if (reason == PW_CHANGE && getuid () == 0)
+	if ((PW_CHANGE == reason) && (getuid () == 0)) {
 		return 0;
+	}
 
 	/*
 	 * WARNING:
@@ -114,8 +119,9 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * matter.
 	 */
 
-	if (cipher == (char *) 0 || *cipher == '\0')
+	if ((NULL == cipher) || ('\0' == *cipher)) {
 		return 0;
+	}
 
 #ifdef	SKEY
 	/*
@@ -132,8 +138,9 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 #  define skeychallenge(s,u,c) skeychallenge(s,u,c,sizeof(c))
 # endif
 
-	if (skeychallenge (&skey, user, challenge_info) == 0)
-		use_skey = 1;
+	if (skeychallenge (&skey, user, challenge_info) == 0) {
+		use_skey = true;
+	}
 #endif
 
 	/*
@@ -141,17 +148,20 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * get the cleartext password for us.
 	 */
 
-	if (reason != PW_FTP && reason != PW_REXEC && !input) {
-		if (!(cp = getdef_str ("LOGIN_STRING")))
+	if ((PW_FTP != reason) && (PW_REXEC != reason) && (NULL == input)) {
+		cp = getdef_str ("LOGIN_STRING");
+		if (NULL == cp) {
 			cp = _(PROMPT);
+		}
 #ifdef	SKEY
-		if (use_skey)
+		if (use_skey) {
 			printf ("[%s]\n", challenge_info);
+		}
 #endif
 
 		snprintf (prompt, sizeof prompt, cp, user);
 		clear = getpass (prompt);
-		if (!clear) {
+		if (NULL == clear) {
 			static char c[1];
 
 			c[0] = '\0';
@@ -177,9 +187,9 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 * ...Re-prompt, with echo on.
 	 * -- AR 8/22/1999
 	 */
-	if (retval && !input[0] && (use_skey)) {
+	if ((0 != retval) && ('\0' == input[0]) && use_skey) {
 		clear = getpass (prompt);
-		if (!clear) {
+		if (NULL == clear) {
 			static char c[1];
 
 			c[0] = '\0';
@@ -188,13 +198,15 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 		input = clear;
 	}
 
-	if (retval && use_skey) {
+	if ((0 != retval) && use_skey) {
 		int passcheck = -1;
 
-		if (skeyverify (&skey, input) == 0)
+		if (skeyverify (&skey, input) == 0) {
 			passcheck = skey.n;
-		if (passcheck > 0)
+		}
+		if (passcheck > 0) {
 			retval = 0;
+		}
 	}
 #endif
 
@@ -206,8 +218,9 @@ pw_auth (const char *cipher, const char *user, int reason, const char *input)
 	 */
 
 	clear_pass = clear;
-	if (wipe_clear_pass && clear && *clear)
+	if (wipe_clear_pass && (NULL != clear) && ('\0' != *clear)) {
 		strzero (clear);
+	}
 	return retval;
 }
 #else				/* !USE_PAM */

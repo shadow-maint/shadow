@@ -1,5 +1,14 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/pwauth.c: Use a boolean for wipe_clear_pass and use_skey.
+	* lib/pwauth.c: Added splint annotations.
+	* lib/pwauth.c: Added brackets and parenthesis.
+	* lib/pwauth.c: Avoid assignments in comparisons.
+	* lib/pwauth.c: Avoid implicit conversion of pointers or
+	characters to booleans.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/groupmod.c: Cast ID to ulongs and use ulong formats for IDs.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
