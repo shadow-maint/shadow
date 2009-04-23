@@ -2,7 +2,7 @@
  * Copyright (c) 1989 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2000, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -76,21 +76,26 @@ static void read_env_file (const char *filename)
 
 		cp = buf;
 		/* ignore whitespace and comments */
-		while (*cp && isspace (*cp))
+		while (('\0' != *cp) && isspace (*cp)) {
 			cp++;
-		if (*cp == '\0' || *cp == '#')
+		}
+		if (('\0' == *cp) || ('#' == *cp)) {
 			continue;
+		}
 		/*
 		 * ignore lines which don't follow the name=value format
 		 * (for example, the "export NAME" shell commands)
 		 */
 		name = cp;
-		while (*cp && !isspace (*cp) && *cp != '=')
+		while (('\0' != *cp) && !isspace (*cp) && ('=' != *cp)) {
 			cp++;
-		if (*cp != '=')
+		}
+		if ('=' != *cp) {
 			continue;
+		}
 		/* NUL-terminate the name */
-		*cp++ = '\0';
+		*cp = '\0';
+		cp++;
 		val = cp;
 #if 0				/* XXX untested, and needs rewrite with fewer goto's :-) */
 /*
@@ -174,7 +179,7 @@ static void read_env_file (const char *filename)
 		 */
 		addenv (name, val);
 	}
-	fclose (fp);
+	(void) fclose (fp);
 }
 #endif				/* USE_PAM */
 
@@ -213,9 +218,9 @@ void setup_env (struct passwd *info)
 				 "unable to cd to `%s' for user `%s'\n",
 				 info->pw_dir, info->pw_name));
 			closelog ();
-			exit (1);
+			exit (EXIT_FAILURE);
 		}
-		puts (_("No directory, logging in with HOME=/"));
+		(void) puts (_("No directory, logging in with HOME=/"));
 		info->pw_dir = temp_pw_dir;
 	}
 
@@ -251,7 +256,7 @@ void setup_env (struct passwd *info)
 
 	cp = getdef_str ((info->pw_uid == 0) ? "ENV_SUPATH" : "ENV_PATH");
 
-	if (!cp) {
+	if (NULL == cp) {
 		/* not specified, use a minimal default */
 		addenv ("PATH=/bin:/usr/bin", NULL);
 	} else if (strchr (cp, '=')) {
@@ -269,23 +274,30 @@ void setup_env (struct passwd *info)
 	 */
 
 	if (getdef_bool ("MAIL_CHECK_ENAB")) {
-		if ((cp = getdef_str ("MAIL_DIR")))
+		cp = getdef_str ("MAIL_DIR");
+		if (NULL != cp) {
 			addenv_path ("MAIL", cp, info->pw_name);
-		else if ((cp = getdef_str ("MAIL_FILE")))
-			addenv_path ("MAIL", info->pw_dir, cp);
-		else {
+		} else {
+			cp = getdef_str ("MAIL_FILE");
+			if (NULL != cp) {
+				addenv_path ("MAIL", info->pw_dir, cp);
+			} else {
 #if defined(MAIL_SPOOL_FILE)
-			addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
+				addenv_path ("MAIL", info->pw_dir, MAIL_SPOOL_FILE);
 #elif defined(MAIL_SPOOL_DIR)
-			addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
+				addenv_path ("MAIL", MAIL_SPOOL_DIR, info->pw_name);
 #endif
+			}
 		}
 	}
 
 	/*
 	 * Read environment from optional config file.  --marekm
 	 */
-	if ((envf = getdef_str ("ENVIRON_FILE")))
+	envf = getdef_str ("ENVIRON_FILE");
+	if (NULL != envf) {
 		read_env_file (envf);
+	}
 #endif				/* !USE_PAM */
 }
+

@@ -1,5 +1,15 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/setupenv.c: Avoid assignments in comparisons.
+	* libmisc/setupenv.c: Added brackets and parenthesis.
+	* libmisc/setupenv.c: Ignore the return value of fclose (file
+	opened read-only)
+	* libmisc/setupenv.c: Ignore the return value of puts().
+	* libmisc/setupenv.c:Avoid implicit conversion of pointers to
+	booleans.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* libmisc/find_new_gid.c, libmisc/find_new_uid.c,
 	libmisc/isexpired.c, src/groupadd.c, lib/pwauth.h, lib/groupmem.c,
 	lib/shadowmem.c, lib/pwmem.c, lib/prototypes.h: Added splint
