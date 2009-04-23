@@ -1,6 +1,7 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
-	* lib/gshadow.c, lib/commonio.h: Added splint annotations.
+	* lib/fputsx.c, lib/gshadow.c, lib/commonio.h: Added splint
+	annotations.
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
