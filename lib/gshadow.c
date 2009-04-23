@@ -40,11 +40,11 @@
 #include <stdio.h>
 #include "prototypes.h"
 #include "defines.h"
-static FILE *shadow;
+static /*@null@*/FILE *shadow;
 static char sgrbuf[BUFSIZ * 4];
-static char **members = NULL;
+static /*@null@*//*@only@*/char **members = NULL;
 static size_t nmembers = 0;
-static char **admins = NULL;
+static /*@null@*//*@only@*/char **admins = NULL;
 static size_t nadmins = 0;
 static struct sgrp sgroup;
 
@@ -79,7 +79,7 @@ static int bind_nis (void)
 }
 #endif
 
-static char **build_list (char *s, char **list[], size_t * nlist)
+static /*@null@*/char **build_list (char *s, char **list[], size_t * nlist)
 {
 	char **ptr = *list;
 	size_t nelem = *nlist, size;
@@ -129,7 +129,7 @@ void endsgent (void)
 	shadow = (FILE *) 0;
 }
 
-struct sgrp *sgetsgent (const char *string)
+/*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *string)
 {
 	char *fields[FIELDS];
 	char *cp;
@@ -197,7 +197,7 @@ struct sgrp *sgetsgent (const char *string)
  * converts it to a (struct sgrp).  NULL is returned on EOF.
  */
 
-struct sgrp *fgetsgent (FILE * fp)
+/*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE * fp)
 {
 	char buf[sizeof sgrbuf];
 	char *cp;
@@ -230,7 +230,7 @@ struct sgrp *fgetsgent (FILE * fp)
  * getsgent - get a single shadow group entry
  */
 
-struct sgrp *getsgent (void)
+/*@observer@*//*@null@*/struct sgrp *getsgent (void)
 {
 #ifdef	USE_NIS
 	bool nis_1_group = false;
@@ -329,7 +329,7 @@ struct sgrp *getsgent (void)
  * getsgnam - get a shadow group entry by name
  */
 
-struct sgrp *getsgnam (const char *name)
+/*@observer@*//*@null@*/struct sgrp *getsgnam (const char *name)
 {
 	struct sgrp *sgrp;
 
@@ -452,7 +452,8 @@ int putsgent (const struct sgrp *sgrp, FILE * fp)
 		strcpy (cp, sgrp->sg_adm[i]);
 		cp += strlen (cp);
 	}
-	*cp++ = ':';
+	*cp = ':';
+	cp++;
 
 	/*
 	 * Now do likewise with the group members.

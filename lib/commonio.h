@@ -58,7 +58,7 @@ struct commonio_ops {
 	 * Make a copy of the object (for example, struct passwd)
 	 * and all strings pointed by it, in malloced memory.
 	 */
-	void *(*dup) (const void *);
+	/*@null@*/ /*@only@*/void *(*dup) (const void *);
 
 	/*
 	 * free() the object including any strings pointed by it.
@@ -87,7 +87,7 @@ struct commonio_ops {
 	 * fgets and fputs (can be replaced by versions that
 	 * understand line continuation conventions).
 	 */
-	char *(*fgets) (char *, int, FILE *);
+	/*@null@*/char *(*fgets) (/*@returned@*/ /*@out@*/char *s, int n, FILE *stream);
 	int (*fputs) (const char *, FILE *);
 
 	/*

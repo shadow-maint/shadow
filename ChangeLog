@@ -1,5 +1,9 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/gshadow.c, lib/commonio.h: Added splint annotations.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/get_gid.c: gidstr should not be NULL, but the check was
 	meant to make sure it is not empty.
 	* lib/get_uid.c: Likewise.
