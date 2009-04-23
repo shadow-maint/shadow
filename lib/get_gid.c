@@ -41,7 +41,7 @@ int get_gid (const char *gidstr, gid_t *gid)
 
 	errno = 0;
 	val = strtoll (gidstr, &endptr, 10);
-	if (   ('\0' == gidstr)
+	if (   ('\0' == *gidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
 	    || (val != (gid_t)val)) {

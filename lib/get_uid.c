@@ -41,7 +41,7 @@ int get_uid (const char *uidstr, uid_t *uid)
 
 	errno = 0;
 	val = strtoll (uidstr, &endptr, 10);
-	if (   ('\0' == uidstr)
+	if (   ('\0' == *uidstr)
 	    || ('\0' != *endptr)
 	    || (ERANGE == errno)
 	    || (val != (uid_t)val)) {

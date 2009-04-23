@@ -1,5 +1,17 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/get_gid.c: gidstr should not be NULL, but the check was
+	meant to make sure it is not empty.
+	* lib/get_uid.c: Likewise.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
+	* lib/getdef.c: Added splint annotations.
+	* lib/getdef.c: Ignore fputs() return value.
+	* lib/getdef.c: Use EXIT_FAILURE / EXIT_SUCCESS for exit()
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* src/faillog.c: Added splint annotations.
 	* src/faillog.c: Cast ID to ulongs and use ulong formats for IDs.
 	* src/faillog.c: Ignore fflush() return value.
