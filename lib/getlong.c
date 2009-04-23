@@ -42,7 +42,7 @@
  *
  * Returns 0 on failure, 1 on success.
  */
-int getlong (const char *numstr, long int *result)
+int getlong (const char *numstr, /*@out@*/long int *result)
 {
 	long val;
 	char *endptr;

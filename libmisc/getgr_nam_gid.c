@@ -44,7 +44,7 @@
  * The string may be a valid GID or a valid groupname.
  * If the group does not exist on the system, NULL is returned.
  */
-extern struct group *getgr_nam_gid (const char *grname)
+extern /*@null@*/struct group *getgr_nam_gid (const char *grname)
 {
 	long long int gid;
 	char *endptr;

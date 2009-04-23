@@ -1,5 +1,16 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* libmisc/xgetXXbyYY.c, libmisc/myname.c, libmisc/getgr_nam_gid.c,
+	libmisc/salt.c, libmisc/list.c, libmisc/cleanup.c, src/login.c,
+	lib/getdef.h, lib/groupio.c, lib/getlong.c, lib/gshadow_.h,
+	lib/sgroupio.c, lib/shadowio.c, lib/pwio.c, lib/commonio.h,
+	lib/fputsx.c, lib/prototypes.h: Added splint annotations.
+	* lib/groupio.c: Avoid implicit conversion of pointers to
+	booleans.
+	* lib/groupio.c: Free allocated buffers in case of failure.
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/defines.h: Added splint definitions to replace <locale.h>
 
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,7 +64,7 @@
 #define STRINGIZE(name) STRINGIZE1 (name)
 #define STRINGIZE1(name) #name
 
-LOOKUP_TYPE *XFUNCTION_NAME (ARG_TYPE ARG_NAME)
+/*@null@*/ /*@only@*/LOOKUP_TYPE *XFUNCTION_NAME (ARG_TYPE ARG_NAME)
 {
 #if HAVE_FUNCTION_R
 	LOOKUP_TYPE *result=NULL;

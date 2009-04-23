@@ -21,14 +21,14 @@
 
 /* local function prototypes */
 static void seedRNG (void);
-static char *gensalt (size_t salt_size);
+static /*@observer@*/const char *gensalt (size_t salt_size);
 #ifdef USE_SHA_CRYPT
 static size_t SHA_salt_size (void);
-static const char *SHA_salt_rounds (int *prefered_rounds);
+static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds);
 #endif /* USE_SHA_CRYPT */
 
 #ifndef HAVE_L64A
-static char *l64a(long value)
+static /*@observer@*/char *l64a(long value)
 {
 	static char buf[8];
 	char *s = buf;
@@ -104,7 +104,7 @@ static size_t SHA_salt_size (void)
 /*
  * Return a salt prefix specifying the rounds number for the SHA crypt methods.
  */
-static const char *SHA_salt_rounds (int *prefered_rounds)
+static /*@observer@*/const char *SHA_salt_rounds (/*@null@*/int *prefered_rounds)
 {
 	static char rounds_prefix[18];
 	long rounds;
@@ -168,7 +168,7 @@ static const char *SHA_salt_rounds (int *prefered_rounds)
 #define MAX_SALT_SIZE 16
 #define MIN_SALT_SIZE 8
 
-static char *gensalt (size_t salt_size)
+static /*@observer@*/const char *gensalt (size_t salt_size)
 {
 	static char salt[32];
 
@@ -202,7 +202,7 @@ static char *gensalt (size_t salt_size)
  *  * For the SHA256 and SHA512 method, this specifies the number of rounds
  *    (if not NULL).
  */
-char *crypt_make_salt (const char *meth, void *arg)
+/*@observer@*/const char *crypt_make_salt (/*@null@*/const char *meth, /*@null@*/void *arg)
 {
 	/* Max result size for the SHA methods:
 	 *  +3		$5$

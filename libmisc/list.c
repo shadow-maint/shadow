@@ -43,7 +43,7 @@
  *	name, and if not present it is added to a freshly allocated
  *	list of users.
  */
-char **add_list (char **list, const char *member)
+/*@only@*/ /*@out@*/char **add_list (/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i;
 	char **tmp;
@@ -93,7 +93,7 @@ char **add_list (char **list, const char *member)
  *	list of users.
  */
 
-char **del_list (char **list, const char *member)
+/*@only@*/ /*@out@*/char **del_list (/*@returned@*/ /*@only@*/char **list, const char *member)
 {
 	int i, j;
 	char **tmp;
@@ -141,7 +141,7 @@ char **del_list (char **list, const char *member)
 	return tmp;
 }
 
-char **dup_list (char *const *list)
+/*@only@*/ /*@out@*/char **dup_list (char *const *list)
 {
 	int i;
 	char **tmp;
@@ -182,12 +182,13 @@ bool is_on_list (char *const *list, const char *member)
  * comma_to_list - convert comma-separated list to (char *) array
  */
 
-char **comma_to_list (const char *comma)
+/*@only@*/char **comma_to_list (const char *comma)
 {
 	char *members;
 	char **array;
 	int i;
-	char *cp, *cp2;
+	const char *cp;
+	char *cp2;
 
 	assert (NULL != comma);
 

@@ -80,8 +80,8 @@ extern int chown_tree (const char *, uid_t, uid_t, gid_t, gid_t);
 extern void chown_tty (const struct passwd *);
 
 /* cleanup.c */
-typedef void (*cleanup_function) (void *arg);
-void add_cleanup (cleanup_function pcf, void *arg);
+typedef void (*cleanup_function) (/*@null@*/void *arg);
+void add_cleanup (cleanup_function pcf, /*@null@*/void *arg);
 void del_cleanup (cleanup_function pcf);
 void do_cleanups (void);
 
@@ -104,11 +104,11 @@ void cleanup_report_del_group_gshadow (void *group_name);
 void cleanup_report_mod_passwd (void *cleanup_info);
 void cleanup_report_mod_group (void *cleanup_info);
 void cleanup_report_mod_gshadow (void *cleanup_info);
-void cleanup_unlock_group (void *unused);
+void cleanup_unlock_group (/*@null@*/void *unused);
 #ifdef SHADOWGRP
-void cleanup_unlock_gshadow (void *unused);
+void cleanup_unlock_gshadow (/*@null@*/void *unused);
 #endif
-void cleanup_unlock_passwd (void *unused);
+void cleanup_unlock_passwd (/*@null@*/void *unused);
 
 /* console.c */
 extern bool console (const char *);
@@ -148,10 +148,10 @@ extern int find_new_uid (bool sys_user, uid_t *uid, uid_t const *preferred_uid);
 extern int get_gid (const char *gidstr, gid_t *gid);
 
 /* getgr_nam_gid.c */
-extern struct group *getgr_nam_gid (const char *grname);
+extern /*@null@*/struct group *getgr_nam_gid (const char *grname);
 
 /* getlong.c */
-extern int getlong (const char *numstr, long int *result);
+extern int getlong (const char *numstr, /*@out@*/long int *result);
 
 /* getrange */
 extern int getrange (char *range,
@@ -162,7 +162,7 @@ extern int getrange (char *range,
 extern int get_uid (const char *uidstr, uid_t *uid);
 
 /* fputsx.c */
-extern char *fgetsx (char *, int, FILE *);
+extern /*@null@*/char *fgetsx (/*@returned@*/ /*@out@*/char *, int, FILE *);
 extern int fputsx (const char *, FILE *);
 
 /* groupio.c */
@@ -199,11 +199,11 @@ extern void setup_limits (const struct passwd *);
 #endif
 
 /* list.c */
-extern char **add_list (char **, const char *);
-extern char **del_list (char **, const char *);
-extern char **dup_list (char *const *);
+extern /*@only@*/ /*@out@*/char **add_list (/*@returned@*/ /*@only@*/char **, const char *);
+extern /*@only@*/ /*@out@*/char **del_list (/*@returned@*/ /*@only@*/char **, const char *);
+extern /*@only@*/ /*@out@*/char **dup_list (char *const *);
 extern bool is_on_list (char *const *list, const char *member);
-extern char **comma_to_list (const char *);
+extern /*@only@*/char **comma_to_list (const char *);
 
 /* log.c */
 extern void dolastlog (struct lastlog *ll,
@@ -224,7 +224,7 @@ extern void mailcheck (void);
 extern void motd (void);
 
 /* myname.c */
-extern struct passwd *get_my_pwent (void);
+extern /*@null@*/struct passwd *get_my_pwent (void);
 
 /* obscure.c */
 #ifndef USE_PAM
@@ -266,7 +266,7 @@ extern int do_rlogin (const char *remote_host, char *name, size_t namelen,
                       char *term, size_t termlen);
 
 /* salt.c */
-extern char *crypt_make_salt (const char *meth, void *arg);
+extern /*@observer@*/const char *crypt_make_salt (/*@null@*/const char *meth, /*@null@*/void *arg);
 
 /* setugid.c */
 extern int setup_groups (const struct passwd *info);
@@ -367,15 +367,15 @@ extern /*@maynotreturn@*/ /*@only@*/char *xmalloc (size_t);
 extern /*@maynotreturn@*/ /*@only@*/char *xstrdup (const char *);
 
 /* xgetpwnam.c */
-extern struct passwd *xgetpwnam (const char *);
+extern /*@null@*/ /*@only@*/struct passwd *xgetpwnam (const char *);
 /* xgetpwuid.c */
-extern struct passwd *xgetpwuid (uid_t);
+extern /*@null@*/ /*@only@*/struct passwd *xgetpwuid (uid_t);
 /* xgetgrnam.c */
-extern struct group *xgetgrnam (const char *);
+extern /*@null@*/ /*@only@*/struct group *xgetgrnam (const char *);
 /* xgetgrgid.c */
-extern struct group *xgetgrgid (gid_t);
+extern /*@null@*/ /*@only@*/struct group *xgetgrgid (gid_t);
 /* xgetspnam.c */
-extern struct spwd *xgetspnam(const char *);
+extern /*@null@*/ /*@only@*/struct spwd *xgetspnam(const char *);
 
 /* yesno.c */
 extern bool yes_or_no (bool read_only);

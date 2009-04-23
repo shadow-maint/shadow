@@ -43,12 +43,13 @@
 #include "getdef.h"
 #include "groupio.h"
 
-static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
-                                                   struct commonio_entry *gr2);
+static /*@null@*/struct commonio_entry *merge_group_entries (
+	/*@null@*/struct commonio_entry *gr1,
+	/*@null@*/struct commonio_entry *gr2);
 static int split_groups (unsigned int max_members);
 static int group_open_hook (void);
 
-static void *group_dup (const void *ent)
+static /*@null@*/ /*@only@*/void *group_dup (const void *ent)
 {
 	const struct group *gr = ent;
 
@@ -245,8 +246,8 @@ static int group_open_hook (void)
 		return 1;
 	}
 
-	for (gr1 = group_db.head; gr1; gr1 = gr1->next) {
-		for (gr2 = gr1->next; gr2; gr2 = gr2->next) {
+	for (gr1 = group_db.head; NULL != gr1; gr1 = gr1->next) {
+		for (gr2 = gr1->next; NULL != gr2; gr2 = gr2->next) {
 			struct group *g1 = (struct group *)gr1->eptr;
 			struct group *g2 = (struct group *)gr2->eptr;
 			if (NULL != g1 &&
@@ -284,8 +285,9 @@ static int group_open_hook (void)
  * the modified first entry on success, or NULL on failure (with errno
  * set).
  */
-static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
-                                                   struct commonio_entry *gr2)
+static /*@null@*/struct commonio_entry *merge_group_entries (
+	/*@null@*/struct commonio_entry *gr1,
+	/*@null@*/struct commonio_entry *gr2)
 {
 	struct group *gptr1;
 	struct group *gptr2;
@@ -332,6 +334,7 @@ static struct commonio_entry *merge_group_entries (struct commonio_entry *gr1,
 	}
 	new_members = (char **)malloc ( (members+1) * sizeof(char*) );
 	if (NULL == new_members) {
+		free (new_line);
 		errno = ENOMEM;
 		return NULL;
 	}
@@ -370,7 +373,7 @@ static int split_groups (unsigned int max_members)
 {
 	struct commonio_entry *gr;
 
-	for (gr = group_db.head; gr; gr = gr->next) {
+	for (gr = group_db.head; NULL != gr; gr = gr->next) {
 		struct group *gptr = (struct group *)gr->eptr;
 		struct commonio_entry *new;
 		struct group *new_gptr;
@@ -392,6 +395,7 @@ static int split_groups (unsigned int max_members)
 		}
 		new->eptr = group_dup(gr->eptr);
 		if (NULL == new->eptr) {
+			free (new);
 			errno = ENOMEM;
 			return 0;
 		}

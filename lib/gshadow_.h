@@ -54,18 +54,18 @@ struct sgrp {
 #include <stdio.h>		/* for FILE */
 
 #if __STDC__
-struct sgrp *getsgent (void);
-struct sgrp *getsgnam (const char *);
-struct sgrp *sgetsgent (const char *);
-struct sgrp *fgetsgent (FILE *);
+/*@observer@*//*@null@*/struct sgrp *getsgent (void);
+/*@observer@*//*@null@*/struct sgrp *getsgnam (const char *);
+/*@observer@*//*@null@*/struct sgrp *sgetsgent (const char *);
+/*@observer@*//*@null@*/struct sgrp *fgetsgent (/*@null@*/FILE *);
 void setsgent (void);
 void endsgent (void);
 int putsgent (const struct sgrp *, FILE *);
 #else
-struct sgrp *getsgent ();
-struct sgrp *getsgnam ();
-struct sgrp *sgetsgent ();
-struct sgrp *fgetsgent ();
+/*@observer@*//*@null@*/struct sgrp *getsgent ();
+/*@observer@*//*@null@*/struct sgrp *getsgnam ();
+/*@observer@*//*@null@*/struct sgrp *sgetsgent ();
+/*@observer@*//*@null@*/struct sgrp *fgetsgent ();
 void setsgent ();
 void endsgent ();
 int putsgent ();

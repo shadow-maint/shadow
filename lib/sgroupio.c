@@ -42,7 +42,7 @@
 #include "commonio.h"
 #include "sgroupio.h"
 
-struct sgrp *__sgr_dup (const struct sgrp *sgent)
+/*@null@*/ /*@only@*/struct sgrp *__sgr_dup (const struct sgrp *sgent)
 {
 	struct sgrp *sg;
 	int i;
@@ -90,7 +90,7 @@ struct sgrp *__sgr_dup (const struct sgrp *sgent)
 	return sg;
 }
 
-static void *gshadow_dup (const void *ent)
+static /*@null@*/ /*@only@*/void *gshadow_dup (const void *ent)
 {
 	const struct sgrp *sg = ent;
 

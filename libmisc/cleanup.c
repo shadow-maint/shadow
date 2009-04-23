@@ -75,7 +75,7 @@ void do_cleanups (void)
 /*
  * add_cleanup - Add a cleanup_function to the cleanup_functions stack.
  */
-void add_cleanup (cleanup_function pcf, void *arg)
+void add_cleanup (cleanup_function pcf, /*@null@*/void *arg)
 {
 	unsigned int i;
 	assert (NULL != pcf);

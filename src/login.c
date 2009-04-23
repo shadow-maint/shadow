@@ -123,11 +123,11 @@ extern char **environ;
 static void usage (void);
 static void setup_tty (void);
 static void process_flags (int argc, char *const *argv);
-static const char *get_failent_user (/*@returned@*/const char *user);
+static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *user);
 static void update_utmp (const char *username,
                          const char *tty,
                          const char *hostname,
-                         const struct utmp *utent);
+                         /*@null@*/const struct utmp *utent);
 
 #ifndef USE_PAM
 static struct faillog faillog;
@@ -194,13 +194,13 @@ static void setup_tty (void)
 		/* Make sure the values were valid.
 		 * getdef_num cannot validate this.
 		 */
-		if (erasechar != termio.c_cc[VERASE]) {
+		if (erasechar != (int) termio.c_cc[VERASE]) {
 			fprintf (stderr,
 			         _("configuration error - cannot parse %s value: '%d'"),
 			         "ERASECHAR", erasechar);
 			exit (1);
 		}
-		if (killchar != termio.c_cc[VKILL]) {
+		if (killchar != (int) termio.c_cc[VKILL]) {
 			fprintf (stderr,
 			         _("configuration error - cannot parse %s value: '%d'"),
 			         "KILLCHAR", killchar);
@@ -454,7 +454,7 @@ static void get_pam_user (char **ptr_pam_user)
  * It is quite common to mistyped the password for username, and passwords
  * should not be logged.
  */
-static const char *get_failent_user (/*@returned@*/const char *user)
+static /*@observer@*/const char *get_failent_user (/*@returned@*/const char *user)
 {
 	const char *failent_user = "UNKNOWN";
 	bool log_unkfail_enab = getdef_bool("LOG_UNKFAIL_ENAB");
@@ -1000,7 +1000,7 @@ int main (int argc, char **argv)
 			failed = true;
 		}
 		if (   !failed
-		    && !login_access (username, *hostname ? hostname : tty)) {
+		    && !login_access (username, ('\0' != *hostname) ? hostname : tty)) {
 			SYSLOG ((LOG_WARN, "LOGIN '%s' REFUSED %s",
 			         username, fromhost));
 			failed = true;

@@ -38,7 +38,7 @@ extern long getdef_long (const char *, long);
 extern int getdef_num (const char *, int);
 extern unsigned long getdef_ulong (const char *, unsigned long);
 extern unsigned int getdef_unum (const char *, unsigned int);
-extern char *getdef_str (const char *);
+extern /*@observer@*/ /*@null@*/const char *getdef_str (const char *);
 extern int putdef_str (const char *, const char *);
 
 /* default UMASK value if not specified in /etc/login.defs */

@@ -42,7 +42,7 @@
 #include "commonio.h"
 #include "shadowio.h"
 
-static void *shadow_dup (const void *ent)
+static /*@null@*/ /*@only@*/void *shadow_dup (const void *ent)
 {
 	const struct spwd *sp = ent;
 

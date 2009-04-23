@@ -42,7 +42,7 @@
 #include "commonio.h"
 #include "pwio.h"
 
-static void *passwd_dup (const void *ent)
+static /*@null@*/ /*@only@*/void *passwd_dup (const void *ent)
 {
 	const struct passwd *pw = ent;
 
