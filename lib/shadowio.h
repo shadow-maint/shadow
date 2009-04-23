@@ -38,11 +38,11 @@
 
 extern int spw_close (void);
 extern bool spw_file_present (void);
-extern /*@null@*/const struct spwd *spw_locate (const char *name);
+extern /*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name);
 extern int spw_lock (void);
 extern int spw_setdbname (const char *filename);
 extern /*@observer@*/const char *spw_dbname (void);
-extern /*@null@*/const struct spwd *spw_next (void);
+extern /*@observer@*/ /*@null@*/const struct spwd *spw_next (void);
 extern int spw_open (int mode);
 extern int spw_remove (const char *name);
 extern int spw_rewind (void);

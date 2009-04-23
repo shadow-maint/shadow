@@ -141,11 +141,11 @@ extern bool commonio_present (const struct commonio_db *db);
 extern int commonio_lock (struct commonio_db *);
 extern int commonio_lock_nowait (struct commonio_db *);
 extern int commonio_open (struct commonio_db *, int);
-extern /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
+extern /*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *, const char *);
 extern int commonio_update (struct commonio_db *, const void *);
 extern int commonio_remove (struct commonio_db *, const char *);
 extern int commonio_rewind (struct commonio_db *);
-extern /*@null@*/const void *commonio_next (struct commonio_db *);
+extern /*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *);
 extern int commonio_close (struct commonio_db *);
 extern int commonio_unlock (struct commonio_db *);
 extern void commonio_del_entry (struct commonio_db *,

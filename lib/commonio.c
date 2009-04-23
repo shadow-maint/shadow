@@ -2,7 +2,7 @@
  * Copyright (c) 1990 - 1994, Julianne Frances Haugh
  * Copyright (c) 1996 - 2001, Marek Michałkiewicz
  * Copyright (c) 2001 - 2006, Tomasz Kłoczko
- * Copyright (c) 2007 - 2008, Nicolas François
+ * Copyright (c) 2007 - 2009, Nicolas François
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -1025,7 +1025,7 @@ int commonio_remove (struct commonio_db *db, const char *name)
  *
  *	Otherwise, it returns NULL.
  */
-/*@null@*/const void *commonio_locate (struct commonio_db *db, const char *name)
+/*@observer@*/ /*@null@*/const void *commonio_locate (struct commonio_db *db, const char *name)
 {
 	struct commonio_entry *p;
 
@@ -1062,7 +1062,7 @@ int commonio_rewind (struct commonio_db *db)
  *
  * It returns the next entry, or NULL if no other entries could be found.
  */
-/*@null@*/const void *commonio_next (struct commonio_db *db)
+/*@observer@*/ /*@null@*/const void *commonio_next (struct commonio_db *db)
 {
 	void *eptr;
 

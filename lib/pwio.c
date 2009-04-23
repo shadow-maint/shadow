@@ -123,12 +123,12 @@ int pw_open (int mode)
 	return commonio_open (&passwd_db, mode);
 }
 
-const struct passwd *pw_locate (const char *name)
+/*@observer@*/ /*@null@*/const struct passwd *pw_locate (const char *name)
 {
 	return commonio_locate (&passwd_db, name);
 }
 
-const struct passwd *pw_locate_uid (uid_t uid)
+/*@observer@*/ /*@null@*/const struct passwd *pw_locate_uid (uid_t uid)
 {
 	const struct passwd *pwd;
 
@@ -155,7 +155,7 @@ int pw_rewind (void)
 	return commonio_rewind (&passwd_db);
 }
 
-const struct passwd *pw_next (void)
+/*@observer@*/ /*@null@*/const struct passwd *pw_next (void)
 {
 	return commonio_next (&passwd_db);
 }

@@ -141,12 +141,12 @@ int gr_open (int mode)
 	return commonio_open (&group_db, mode);
 }
 
-/*@null@*/const struct group *gr_locate (const char *name)
+/*@observer@*/ /*@null@*/const struct group *gr_locate (const char *name)
 {
 	return commonio_locate (&group_db, name);
 }
 
-/*@null@*/const struct group *gr_locate_gid (gid_t gid)
+/*@observer@*/ /*@null@*/const struct group *gr_locate_gid (gid_t gid)
 {
 	const struct group *grp;
 
@@ -173,7 +173,7 @@ int gr_rewind (void)
 	return commonio_rewind (&group_db);
 }
 
-/*@null@*/const struct group *gr_next (void)
+/*@observer@*/ /*@null@*/const struct group *gr_next (void)
 {
 	return commonio_next (&group_db);
 }

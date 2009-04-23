@@ -1,5 +1,14 @@
 2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
 
+	* lib/commonio.c, lib/commonio.h, lib/groupio.c, lib/groupio.h,
+	lib/pwio.c, lib/pwio.h, lib/shadowio.c, lib/shadowio.h: Added
+	splint annotations. The *_locate() and *_next() functions
+	currently return an observer. As the structure are often modified
+	by the caller, it could maybe be changed to exposed later. (and
+	non-const)
+
+2009-04-22  Nicolas François  <nicolas.francois@centraliens.net>
+
 	* lib/pwauth.c: Use a boolean for wipe_clear_pass and use_skey.
 	* lib/pwauth.c: Added splint annotations.
 	* lib/pwauth.c: Added brackets and parenthesis.

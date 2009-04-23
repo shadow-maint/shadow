@@ -39,12 +39,12 @@
 #include <grp.h>
 
 extern int gr_close (void);
-extern /*@null@*/const struct group *gr_locate (const char *name);
-extern /*@null@*/const struct group *gr_locate_gid (gid_t gid);
+extern /*@observer@*/ /*@null@*/const struct group *gr_locate (const char *name);
+extern /*@observer@*/ /*@null@*/const struct group *gr_locate_gid (gid_t gid);
 extern int gr_lock (void);
 extern int gr_setdbname (const char *filename);
 extern /*@observer@*/const char *gr_dbname (void);
-extern /*@null@*/const struct group *gr_next (void);
+extern /*@observer@*/ /*@null@*/const struct group *gr_next (void);
 extern int gr_open (int mode);
 extern int gr_remove (const char *name);
 extern int gr_rewind (void);

@@ -128,7 +128,7 @@ int spw_open (int mode)
 	return commonio_open (&shadow_db, mode);
 }
 
-/*@null@*/const struct spwd *spw_locate (const char *name)
+/*@observer@*/ /*@null@*/const struct spwd *spw_locate (const char *name)
 {
 	return commonio_locate (&shadow_db, name);
 }
@@ -148,7 +148,7 @@ int spw_rewind (void)
 	return commonio_rewind (&shadow_db);
 }
 
-/*@null@*/const struct spwd *spw_next (void)
+/*@observer@*/ /*@null@*/const struct spwd *spw_next (void)
 {
 	return commonio_next (&shadow_db);
 }
